@@ -159,6 +159,7 @@ KIllustratorView::~KIllustratorView()
    delete mToolDockManager;
    delete hRuler;
    delete vRuler;
+   //delete tcontroller;
 }
 
 
@@ -1423,6 +1424,7 @@ QButton* KIllustratorView::newIconButton( const char* file, bool kbutton, QWidge
   if (pixmap)
     pb->setPixmap(*pixmap);
   pb->setFixedSize(16,16);
+  delete pixmap;
   return pb;
 }
 
