@@ -1,0 +1,24 @@
+kwordrcdir = $(kde_datadir)/kword/kpartplugins
+kwordrc_DATA = scan-kword.rc
+
+killustratorrcdir = $(kde_datadir)/kontour/kpartplugins
+killustratorrc_DATA = scan-kontour.rc
+
+kpresenterrcdir = $(kde_datadir)/kpresenter/kpartplugins
+kpresenterrc_DATA = scan-kpresenter.rc
+
+EXTRA_DIST = $(kwordrc_DATA) $(killustratorrc_DATA) $(kpresenterrc_DATA)
+
+INCLUDES = $(KOFFICE_INCLUDES) $(all_includes)
+kde_module_LTLIBRARIES = libkofficescan.la
+
+libkofficescan_la_SOURCES = scan_factory.cpp scan.cpp
+noinst_HEADERS = scan_factory.h scan.h
+
+libkofficescan_la_LDFLAGS = $(all_libraries) -module -avoid-version -no-undefined
+libkofficescan_la_LIBADD = $(LIB_KPARTS) $(LIB_KIO) $(LIB_KOFFICECORE)
+
+libkofficescan_la_METASOURCES = AUTO
+
+messages: rc.cpp
+	$(XGETTEXT) *.cpp -o $(podir)/kscan_plugin.pot
