@@ -148,7 +148,6 @@ double KoUnitDoubleBase::toDouble( const QString& str, bool* ok )
     const QString sep( KGlobal::locale()->thousandsSeparator() );
     if ( !sep.isEmpty() )
         str2.remove( sep );
-    str2.remove( KoUnit::unitName( m_unit ) );
     const double dbl = KGlobal::locale()->readNumber( str2, ok );
     if ( ok )
         kdDebug(30004) << "toDouble:" << str << ": => :" << str2 << ": => " << QString::number( dbl, 'f', 12 ) << endl;
