@@ -73,7 +73,7 @@ EpsImport::convert( const QCString& from, const QCString& to )
 	QString input = m_chain->inputFile();
 
  	QString command(
- 		"gs -q -dNOPAUSE -dSAFER -dNODISPLAY ps2ai.ps ");
+ 		"gs -q -dBATCH -dNOPAUSE -dSAFER -dNODISPLAY ps2ai.ps ");
  	command += KShellProcess::quote(input);
  	command += " > ";
  	command += KShellProcess::quote(m_chain->outputFile());
