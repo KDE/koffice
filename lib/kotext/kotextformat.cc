@@ -21,6 +21,7 @@
 #include "qrichtext_p.h" // for KoTextFormat
 #include "kozoomhandler.h"
 #include <kdebug.h>
+#include <kglobal.h>
 #include <klocale.h>
 #include <assert.h>
 
