@@ -52,6 +52,22 @@
 #include <klocale.h>
 #include <kstatusbar.h>
 
+
+
+// The file dialog bug #66142 happens with KDE 3.1.x on QT 3.2.x
+#include <kdeversion.h>
+#if KDE_VERSION >= 0x030100 && KDE_VERSION < 0x030190
+# if QT_VERSION >= 0x030200
+#  ifdef __GNUC__
+#   warning "Including File Dialog Hack!"
+#  endif
+#  define FILE_DIALOG_BUG
+#  include <kpushbutton.h>
+# endif
+#endif
+
+
+
 class KoPartManager : public KParts::PartManager
 {
 public:
@@ -553,7 +569,12 @@ bool KoMainWindow::saveDocument( bool saveas )
         KoFileDialog *dialog=new KoFileDialog(QString::null, QString::null, 0L, "file dialog", true);
         dialog->setCaption( i18n("Save Document As") );
         dialog->setKeepLocation( true );
+#ifdef FILE_DIALOG_BUG
+        dialog->setOperationMode( KFileDialog::Other );
+        dialog->okButton()->setGuiItem( KStdGuiItem::save() );
+#else
         dialog->setOperationMode( KFileDialog::Saving );
+#endif
         QStringList mimeFilter = KoFilterManager::mimeFilter( _native_format, KoFilterManager::Export );
         dialog->setSpecialMimeFilter( mimeFilter, _native_format );
         KURL newURL;
