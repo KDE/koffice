@@ -40,6 +40,7 @@
 #include <koView.h>
 #include <koPartSelectDia.h>
 #include <koFilterManager.h>
+#include <kiconloader.h>
 
 KoShellWindow::KoShellWindow()
  : KoMainWindow( KGlobal::instance() )
