@@ -46,6 +46,8 @@
 #ifndef PROCESSORS_H
 #define PROCESSORS_H
 
+#include <qvaluelist.h>
+
 class TagProcessing
 {
     public:

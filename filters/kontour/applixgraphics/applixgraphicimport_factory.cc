@@ -48,7 +48,7 @@ APPLIXGRAPHICImportFactory::~APPLIXGRAPHICImportFactory()
     s_global = 0L;
 }
 
-QObject* APPLIXGRAPHICImportFactory::create( QObject* parent, const char* name, const char*, const QStringList & )
+QObject* APPLIXGRAPHICImportFactory::createObject( QObject* parent, const char* name, const char*, const QStringList & )
 {
     if ( parent && !parent->inherits("KoFilter") )
     {
@@ -56,7 +56,6 @@ QObject* APPLIXGRAPHICImportFactory::create( QObject* parent, const char* name, 
 	    return 0L;
     }
     APPLIXGRAPHICImport *f = new APPLIXGRAPHICImport( (KoFilter*)parent, name );
-    emit objectCreated(f);
     return f;
 }
 

@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 2001 David Faure <david@mandrakesoft.com>
+   Copyright (C) 2000 David Faure <faure@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -17,49 +17,51 @@
    Boston, MA 02111-1307, USA.
 */
 
-#include "kprkword_factory.h"
-#include "kprkword_factory.moc"
-#include "kprkword.h"
+#include <csvexport_factory.h>
+#include <csvexport.h>
 
 #include <kinstance.h>
+#include <kglobal.h>
 #include <klocale.h>
 #include <kdebug.h>
 
 extern "C"
 {
-    void* init_libkprkword()
+    void* init_libcsvexport()
     {
-        KGlobal::locale()->insertCatalogue("kpresenterkwordfilter");
-        return new KprKwordFactory;
+	KGlobal::locale()->insertCatalogue("csvfilter");
+        return new CSVExportFactory;
     }
 };
 
-KInstance* KprKwordFactory::s_global = 0;
+KInstance* CSVExportFactory::s_global = 0;
 
-KprKwordFactory::KprKwordFactory( QObject* parent, const char* name )
+CSVExportFactory::CSVExportFactory( QObject* parent, const char* name )
     : KLibFactory( parent, name )
 {
-    s_global = new KInstance( "kprkword" );
+    s_global = new KInstance( "csvexport_test" );
 }
 
-KprKwordFactory::~KprKwordFactory()
+CSVExportFactory::~CSVExportFactory()
 {
     delete s_global;
     s_global = 0L;
 }
 
-QObject* KprKwordFactory::createObject( QObject* parent, const char* name, const char*, const QStringList & )
+QObject* CSVExportFactory::createObject( QObject* parent, const char* name, const char*, const QStringList & )
 {
     if ( parent && !parent->inherits("KoFilter") )
     {
-	    kdDebug(30502) << "KprKwordFactory: parent does not inherit KoFilter" << endl;
+	    kdDebug(31000) << "CSVExportFactory: parent does not inherit KoFilter" << endl;
 	    return 0L;
     }
-    KprKword *f = new KprKword( (KoFilter*)parent, name );
+    CSVExport *f = new CSVExport( (KoFilter*)parent, name );
     return f;
 }
 
-KInstance* KprKwordFactory::global()
+KInstance* CSVExportFactory::global()
 {
     return s_global;
 }
+
+#include <csvexport_factory.moc>

@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 2001 David Faure <david@mandrakesoft.com>
+   Copyright (C) 2001 Enno Bartels <ebartels@nwn.de>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -17,49 +17,48 @@
    Boston, MA 02111-1307, USA.
 */
 
-#include "kprkword_factory.h"
-#include "kprkword_factory.moc"
-#include "kprkword.h"
+#include "applixspreadimport_factory.h"
+#include "applixspreadimport_factory.moc"
+#include "applixspreadimport.h"
 
 #include <kinstance.h>
-#include <klocale.h>
 #include <kdebug.h>
 
 extern "C"
 {
-    void* init_libkprkword()
+    void* init_libapplixspreadimport()
     {
-        KGlobal::locale()->insertCatalogue("kpresenterkwordfilter");
-        return new KprKwordFactory;
+        return new APPLIXSPREADImportFactory;
     }
 };
 
-KInstance* KprKwordFactory::s_global = 0;
+KInstance* APPLIXSPREADImportFactory::s_global = 0;
 
-KprKwordFactory::KprKwordFactory( QObject* parent, const char* name )
+APPLIXSPREADImportFactory::APPLIXSPREADImportFactory( QObject* parent, const char* name )
     : KLibFactory( parent, name )
 {
-    s_global = new KInstance( "kprkword" );
+    s_global = new KInstance ("applixspreadimport" );
 }
 
-KprKwordFactory::~KprKwordFactory()
+APPLIXSPREADImportFactory::~APPLIXSPREADImportFactory()
 {
     delete s_global;
     s_global = 0L;
 }
 
-QObject* KprKwordFactory::createObject( QObject* parent, const char* name, const char*, const QStringList & )
+QObject* APPLIXSPREADImportFactory::createObject(QObject* parent, const char* name, const char*, const QStringList & )
 {
     if ( parent && !parent->inherits("KoFilter") )
     {
-	    kdDebug(30502) << "KprKwordFactory: parent does not inherit KoFilter" << endl;
+	    kdDebug(30502) << "APPLIXSPREADImportFactory: parent does not inherit KoFilter" << endl;
 	    return 0L;
     }
-    KprKword *f = new KprKword( (KoFilter*)parent, name );
+    APPLIXSPREADImport *f = new APPLIXSPREADImport( (KoFilter*)parent, name );
     return f;
 }
 
-KInstance* KprKwordFactory::global()
+KInstance* APPLIXSPREADImportFactory::global()
 {
     return s_global;
 }
+

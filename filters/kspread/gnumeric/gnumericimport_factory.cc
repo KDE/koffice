@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 2001 David Faure <david@mandrakesoft.com>
+   Copyright (C) 1999 David Faure <faure@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -17,49 +17,47 @@
    Boston, MA 02111-1307, USA.
 */
 
-#include "kprkword_factory.h"
-#include "kprkword_factory.moc"
-#include "kprkword.h"
+#include <gnumericimport_factory.h>
+#include <gnumericimport.h>
 
 #include <kinstance.h>
-#include <klocale.h>
 #include <kdebug.h>
 
 extern "C"
 {
-    void* init_libkprkword()
+    void* init_libgnumericimport()
     {
-        KGlobal::locale()->insertCatalogue("kpresenterkwordfilter");
-        return new KprKwordFactory;
+        return new GNUMERICFilterFactory;
     }
 };
 
-KInstance* KprKwordFactory::s_global = 0;
+KInstance* GNUMERICFilterFactory::s_global = 0;
 
-KprKwordFactory::KprKwordFactory( QObject* parent, const char* name )
+GNUMERICFilterFactory::GNUMERICFilterFactory( QObject* parent, const char* name )
     : KLibFactory( parent, name )
 {
-    s_global = new KInstance( "kprkword" );
+    s_global = new KInstance( "gnumericimport" );
 }
 
-KprKwordFactory::~KprKwordFactory()
+GNUMERICFilterFactory::~GNUMERICFilterFactory()
 {
     delete s_global;
-    s_global = 0L;
 }
 
-QObject* KprKwordFactory::createObject( QObject* parent, const char* name, const char*, const QStringList & )
+QObject* GNUMERICFilterFactory::createObject( QObject* parent, const char* name, const char*, const QStringList & )
 {
     if ( parent && !parent->inherits("KoFilter") )
     {
-	    kdDebug(30502) << "KprKwordFactory: parent does not inherit KoFilter" << endl;
+	    kdDebug(30501) << "GNUMERICFilterFactory: parent does not inherit KoFilter" << endl;
 	    return 0L;
     }
-    KprKword *f = new KprKword( (KoFilter*)parent, name );
+    GNUMERICFilter *f = new GNUMERICFilter( (KoFilter*)parent, name );
     return f;
 }
 
-KInstance* KprKwordFactory::global()
+KInstance* GNUMERICFilterFactory::global()
 {
     return s_global;
 }
+
+#include <gnumericimport_factory.moc>

@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 2001 David Faure <david@mandrakesoft.com>
+   Copyright (C) 1999 David Faure <faure@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -17,49 +17,51 @@
    Boston, MA 02111-1307, USA.
 */
 
-#include "kprkword_factory.h"
-#include "kprkword_factory.moc"
-#include "kprkword.h"
+#include <csvimport_factory.h>
+#include <csvimport.h>
 
 #include <kinstance.h>
+#include <kglobal.h>
 #include <klocale.h>
 #include <kdebug.h>
 
 extern "C"
 {
-    void* init_libkprkword()
+    void* init_libcsvimport()
     {
-        KGlobal::locale()->insertCatalogue("kpresenterkwordfilter");
-        return new KprKwordFactory;
+	KGlobal::locale()->insertCatalogue("csvfilter");
+        return new CSVFilterFactory;
     }
 };
 
-KInstance* KprKwordFactory::s_global = 0;
+KInstance* CSVFilterFactory::s_global = 0;
 
-KprKwordFactory::KprKwordFactory( QObject* parent, const char* name )
+CSVFilterFactory::CSVFilterFactory( QObject* parent, const char* name )
     : KLibFactory( parent, name )
 {
-    s_global = new KInstance( "kprkword" );
+    s_global = new KInstance( "csvimport" );
 }
 
-KprKwordFactory::~KprKwordFactory()
+CSVFilterFactory::~CSVFilterFactory()
 {
     delete s_global;
     s_global = 0L;
 }
 
-QObject* KprKwordFactory::createObject( QObject* parent, const char* name, const char*, const QStringList & )
+QObject* CSVFilterFactory::createObject( QObject* parent, const char* name, const char*, const QStringList & )
 {
     if ( parent && !parent->inherits("KoFilter") )
     {
-	    kdDebug(30502) << "KprKwordFactory: parent does not inherit KoFilter" << endl;
+	    kdDebug(30501) << "CSVFilterFactory: parent does not inherit KoFilter" << endl;
 	    return 0L;
     }
-    KprKword *f = new KprKword( (KoFilter*)parent, name );
+    CSVFilter *f = new CSVFilter( (KoFilter*)parent, name );
     return f;
 }
 
-KInstance* KprKwordFactory::global()
+KInstance* CSVFilterFactory::global()
 {
     return s_global;
 }
+
+#include <csvimport_factory.moc>

@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
-   Copyright (C) 2001 David Faure <david@mandrakesoft.com>
+   Copyright (C) 2001 Eva Brucherseifer <eva@kde.org>
+   based on kspread csv export filter by David Faure
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -17,49 +18,48 @@
    Boston, MA 02111-1307, USA.
 */
 
-#include "kprkword_factory.h"
-#include "kprkword_factory.moc"
-#include "kprkword.h"
+#include <htmlexport_factory.h>
+#include <htmlexport.h>
 
 #include <kinstance.h>
-#include <klocale.h>
 #include <kdebug.h>
 
 extern "C"
 {
-    void* init_libkprkword()
+    void* init_libkspreadhtmlexport()
     {
-        KGlobal::locale()->insertCatalogue("kpresenterkwordfilter");
-        return new KprKwordFactory;
+        return new HTMLExportFactory;
     }
 };
 
-KInstance* KprKwordFactory::s_global = 0;
+KInstance* HTMLExportFactory::s_global = 0;
 
-KprKwordFactory::KprKwordFactory( QObject* parent, const char* name )
+HTMLExportFactory::HTMLExportFactory( QObject* parent, const char* name )
     : KLibFactory( parent, name )
 {
-    s_global = new KInstance( "kprkword" );
+    s_global = new KInstance( "htmlexport_test" );
 }
 
-KprKwordFactory::~KprKwordFactory()
+HTMLExportFactory::~HTMLExportFactory()
 {
     delete s_global;
     s_global = 0L;
 }
 
-QObject* KprKwordFactory::createObject( QObject* parent, const char* name, const char*, const QStringList & )
+QObject* HTMLExportFactory::createObject( QObject* parent, const char* name, const char*, const QStringList & )
 {
     if ( parent && !parent->inherits("KoFilter") )
     {
-	    kdDebug(30502) << "KprKwordFactory: parent does not inherit KoFilter" << endl;
+	    kdDebug(31000) << "HTMLExportFactory: parent does not inherit KoFilter" << endl;
 	    return 0L;
     }
-    KprKword *f = new KprKword( (KoFilter*)parent, name );
+    HTMLExport *f = new HTMLExport( (KoFilter*)parent, name );
     return f;
 }
 
-KInstance* KprKwordFactory::global()
+KInstance* HTMLExportFactory::global()
 {
     return s_global;
 }
+
+#include <htmlexport_factory.moc>

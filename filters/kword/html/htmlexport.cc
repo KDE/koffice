@@ -47,6 +47,7 @@
 #include <kdebug.h>
 #include <qdom.h>
 #include <qtextstream.h>
+#include <qregexp.h>
 
 #include <ExportDialog.h>
 

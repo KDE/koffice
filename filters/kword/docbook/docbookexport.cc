@@ -24,7 +24,7 @@
 #include <docbookexport.moc>
 #include <kdebug.h>
 #include <qdom.h>
-
+#include <qregexp.h>
 
 DocBookExport::DocBookExport ( KoFilter    *parent,
                                const char  *name    ) : KoFilter (parent, name)
