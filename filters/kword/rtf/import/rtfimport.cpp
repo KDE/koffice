@@ -2171,7 +2171,7 @@ void RTFImport::finishTable()
  * @param name the internal name of the part
  * @param array the data to write
  */
-void RTFImport::writeOutPart( const char *name, QByteArray &array )
+void RTFImport::writeOutPart( const char *name, const QByteArray &array )
 {
     KoStoreDevice* dev = m_chain->storageFile( name, KoStore::Write );
     if ( dev )

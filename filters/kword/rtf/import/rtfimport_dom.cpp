@@ -70,14 +70,15 @@ void DomNode::addNode( const char *name )
  * Adds a text node.
  * @param text the text to write into the document node
  */
-void DomNode::addTextNode( const char *text )
+void DomNode::addTextNode( char *_text )
 {
+    char* text=_text; // Avoid side effects
+
     closeTag( false );
 
     if (text == 0)
-    {
-	text = "";
-    }
+        return;
+
     char *amp = strchr( text, '&' );
     char *lt = strchr( text, '<' );
 
@@ -105,7 +106,7 @@ void DomNode::addTextNode( const char *text )
 /**
  * Add border to existing frameset (see KWord DTD).
  */
-void DomNode::addBorder( int id, QColor &color, int style, double width )
+void DomNode::addBorder( int id, const QColor &color, int style, double width )
 {
     char attr[16];
     sprintf( attr, "%cRed", id );
@@ -124,7 +125,7 @@ void DomNode::addBorder( int id, QColor &color, int style, double width )
  * Add color attributes to document node.
  * @param color the color
  */
-void DomNode::addColor( QColor &color )
+void DomNode::addColor( const QColor &color )
 {
     setAttribute( "red", color.red() );
     setAttribute( "green", color.green() );
@@ -293,9 +294,9 @@ void DomNode::closeTag( bool nl )
  * Appends a child node.
  * @param child the node to append to this document node
  */
-void DomNode::appendNode( DomNode &child )
+void DomNode::appendNode( const DomNode &child )
 {
-    QByteArray &arr = child.data();
+    const QByteArray arr ( child.data() );
     closeTag( (arr.size() >= 2 && (arr[0] == '<' || arr[1] == '<')) );
     writeBlock( arr );
 }
@@ -303,7 +304,7 @@ void DomNode::appendNode( DomNode &child )
 /**
  * Returns true if node is empty.
  */
-bool DomNode::isEmpty(  )
+bool DomNode::isEmpty(  ) const
 {
     return array.isEmpty();
 }
@@ -311,7 +312,7 @@ bool DomNode::isEmpty(  )
 /**
  * Returns the data of the document node.
  */
-QByteArray &DomNode::data()
+QByteArray DomNode::data() const
 {
-    return array;
+    return array.copy(); // Qt 3.2.x needs a QByteArray::copy here or what is returned could be modified later.
 }
