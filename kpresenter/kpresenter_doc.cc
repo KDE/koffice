@@ -2481,13 +2481,13 @@ void KPresenterDoc::movePage( int from, int to )
 void KPresenterDoc::copyPage( int from, int to )
 {
     _clean = false;
-    _duplicatePage=true;
+    _duplicatePage=true; // ### now also set via savePage() parameter below
 
     kdDebug(33001) << "KPresenterDoc::copyPage from=" << from << " to=" << to << endl;
     bool wasSelected = isSlideSelected( from );
     KTempFile tempFile( QString::null, ".kpr" );
     tempFile.setAutoDelete( true );
-    savePage( tempFile.name(), from );
+    savePage( tempFile.name(), from, true );
 
     //insert page.
     KPrPage *newpage=new KPrPage(this);
