@@ -1,9 +1,9 @@
 ####### General stuff
 
 INCLUDES= -I$(srcdir) $(KOFFICE_INCLUDES) -I$(top_srcdir)/lib/kformula $(all_includes)
-#liblateximport_la_LDFLAGS	= -module -avoid-version -no-undefined
+#liblateximport_la_LDFLAGS	= $(all_libraries) -module -avoid-version -no-undefined
 #liblateximport_la_LIBADD = $(KOFFICE_LIBS)
-liblatexexport_la_LDFLAGS	= -module -avoid-version -no-undefined
+liblatexexport_la_LDFLAGS	= $(all_libraries) -module -avoid-version -no-undefined
 liblatexexport_la_LIBADD    = $(KOFFICE_LIBS) $(top_builddir)/lib/kformula/libkformula.la
 
 ####### Files

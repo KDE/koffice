@@ -1,0 +1,29 @@
+####### General stuff
+
+INCLUDES= -I$(srcdir) -I$(top_srcdir)/kspread $(KOFFICE_INCLUDES) \
+-I$(top_srcdir)/lib/kscript -I$(top_srcdir)/lib/koscript $(all_includes)
+
+####### Files
+
+kde_module_LTLIBRARIES = libcsvimport.la libcsvexport.la
+
+libcsvimport_la_SOURCES = csvimport.cc xmltree.cc csvimport_factory.cc \
+                          csvdialog.cpp dialogui.ui 
+libcsvimport_la_LDFLAGS	= $(all_libraries) -module -avoid-version -no-undefined
+libcsvimport_la_LIBADD  = $(KOFFICE_LIBS) ../../../kspread/libkspreadpart.la
+
+libcsvexport_la_SOURCES = csvexport.cc csvexport_factory.cc
+libcsvexport_la_LDFLAGS = $(all_libraries) -module -avoid-version -no-undefined
+libcsvexport_la_LIBADD  = $(KOFFICE_LIBS) ../../../kspread/libkspreadpart.la
+
+METASOURCES = AUTO
+
+service_DATA = kspread_csv_import.desktop kspread_csv_export.desktop
+
+servicedir = $(kde_servicesdir)
+
+data_DATA = x-csv.desktop
+datadir = $(kde_mimedir)/text
+
+messages: rc.cpp
+	$(XGETTEXT) *.cc *.cpp -o $(podir)/csvfilter.pot
