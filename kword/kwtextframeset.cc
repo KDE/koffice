@@ -4310,10 +4310,11 @@ void KWTextFrameSetEdit::mouseReleaseEvent( QMouseEvent *, const QPoint &, const
             textDocument()->removeSelection( QTextDocument::Standard );
 
         textFrameSet()->selectionChangedNotify();
-        // No auto-copy, will readd with Qt 3 using setSelectionMode(true/false)
-        // But auto-copy in readonly mode, since there is no action available in that case.
-        if ( !frameSet()->kWordDocument()->isReadWrite() )
-            copy();
+
+	// Copy the selection.
+        QApplication::clipboard()->setSelectionMode( true );
+        emit copy();
+        QApplication::clipboard()->setSelectionMode( false );
     }
 
     inDoubleClick = FALSE;
@@ -4325,10 +4326,10 @@ void KWTextFrameSetEdit::mouseDoubleClickEvent( QMouseEvent *, const QPoint &, c
     inDoubleClick = TRUE;
     *cursor = selectWordUnderCursor();
     textFrameSet()->selectionChangedNotify();
-    // No auto-copy, will readd with Qt 3 using setSelectionMode(true/false)
-    // But auto-copy in readonly mode, since there is no action available in that case.
-    if ( !frameSet()->kWordDocument()->isReadWrite() )
-        copy();
+    // Copy the selection.
+    QApplication::clipboard()->setSelectionMode( true );
+    emit copy();
+    QApplication::clipboard()->setSelectionMode( false );
 }
 
 QTextCursor KWTextFrameSetEdit::selectWordUnderCursor()
