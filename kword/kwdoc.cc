@@ -222,6 +222,7 @@ KWDocument::~KWDocument()
     delete m_autoFormat;
     delete m_formulaDocument;
     delete m_commandHistory;
+    delete slDataBase;
 }
 
 void KWDocument::initConfig()
