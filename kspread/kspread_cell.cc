@@ -326,8 +326,6 @@ void KSpreadCell::forceExtraCells( int _col, int _row, int _x, int _y )
       m_dExtraHeight  = 0.0;
       m_iMergedXCells = 0;
       m_iMergedYCells = 0;
-      //refresh the layout
-      setFlag( Flag_LayoutDirty );
       return;
   }
 

@@ -1008,16 +1008,7 @@ GraphicStyle::GraphicStyle( StyleFactory * styleFactory, QDomElement & e, const 
     QDomNode lineend = e.namedItem( "LINEEND" );
     QDomNode gradient = e.namedItem( "GRADIENT" );
     QDomNode shadow = e.namedItem( "SHADOW" );
-    QDomNode textObject = e.namedItem( "TEXTOBJ" );
-    if ( !textObject.isNull() )
-    {
-        m_textAlignment = textObject.toElement().attribute("verticalAlign");
-        if ( m_textAlignment == "center" )
-            m_textAlignment = "middle";
-    }
-    kdDebug()<<" alignment :"<<m_textAlignment<<endl;
 
-	
     m_name = QString( "gr%1" ).arg( index );
     if ( !pen.isNull() )
     {
@@ -1261,8 +1252,6 @@ void GraphicStyle::toXML( QDomDocument & doc, QDomElement & e ) const
     if ( m_transparency != QString::null )
         properties.setAttribute( "draw:transparency", m_transparency );
 
-	if ( m_textAlignment != QString::null )
-        properties.setAttribute( "draw:textarea-vertical-align", m_textAlignment );
     style.appendChild( properties );
     e.appendChild( style );
 }
@@ -1301,8 +1290,7 @@ bool GraphicStyle::operator==( const GraphicStyle & graphicStyle ) const
              m_marker_end == graphicStyle.m_marker_end &&
              m_marker_end_width == graphicStyle.m_marker_end_width &&
              m_fill_gradient_name == graphicStyle.m_fill_gradient_name &&
-             m_transparency == graphicStyle.m_transparency &&
-			 m_textAlignment == graphicStyle.m_textAlignment );
+             m_transparency == graphicStyle.m_transparency);
 }
 
 ParagraphStyle::ParagraphStyle( QDomElement & e, const uint index )
