@@ -2,6 +2,7 @@ Changes since 1.2.1
 ===================
 Bugfixes:
 - Fix display of unhided rows/columns for loaded files
+- Fix enabled status for buttons insert column/row when row/column is selected
 
 Changes since 1.2
 =================
