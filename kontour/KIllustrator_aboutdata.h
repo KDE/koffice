@@ -29,7 +29,7 @@
 #include <klocale.h>
 
 static const char* description=I18N_NOOP("KOffice Illustration Tool");
-static const char* version="1.1.1";
+static const char* version="1.1.2";
 
 KAboutData * newKIllustratorAboutData()
 {
