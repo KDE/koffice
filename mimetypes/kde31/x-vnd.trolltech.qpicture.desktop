@@ -6,6 +6,7 @@ MimeType=image/x-vnd.trolltech.qpicture
 Patterns=*.qpic;
 Comment=QPicture Metafile
 Comment[bg]=Мета-файл на QPicture
+Comment[br]=Meta-restr QPicture
 Comment[ca]=Metafitxer de QPicture
 Comment[cs]=Meta-objektový soubor Qt
 Comment[cy]=Metaffeil QPicture
