@@ -26,8 +26,6 @@
 #include <assert.h>
 #include <unistd.h>
 
-#include <qbuffer.h>
-
 #include <koDocument.h>
 #include <koDocument_p.h>
 #include <KoDocumentIface.h>
@@ -788,18 +786,11 @@ void KoDocument::savePreview( KoStore* store )
 {
     QPixmap pix = generatePreview(QSize(256, 256));
     // Reducing to 8bpp reduces file sizes quite a lot.
-    QImageIO imageIO;
-    imageIO.setImage( pix.convertToImage().convertDepth(8, Qt::AvoidDither | Qt::DiffuseDither) );
+    QImage image = pix.convertToImage().convertDepth(8, Qt::AvoidDither | Qt::DiffuseDither);
 
-    // NOTE: we cannot use QDataStream, as it is not 1:1
     QByteArray imageData;
-    QBuffer buffer(imageData);
-    buffer.open(IO_WriteOnly);
-    imageIO.setIODevice(&buffer);
-    imageIO.setFormat("PNG");
-    imageIO.write();
-    buffer.close();
-    
+    QDataStream imageStream(imageData, IO_WriteOnly);
+    imageStream << image;
     store->write( imageData );
 }
 

@@ -117,8 +117,6 @@ public:
 
     void enableUndo( bool _b );
     void enableRedo( bool _b );
-    void enableInsertColumn( bool _b );
-    void enableInsertRow( bool _b );
 
     /**
      * Called by @ref KSpreadInsertHandler
