@@ -16,6 +16,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <ctype.h>
+#include <limits.h>
 #include "gmem.h"
 #include "Object.h"
 #include "Stream.h"
@@ -76,7 +77,7 @@ XRef::XRef(BaseStream *strA, GString *ownerPassword, GString *userPassword) {
 
   // trailer is ok - read the xref table
   } else {
-    if (size*sizeof(XRefEntry)/sizeof(XRefEntry) != size) {
+    if (size >= INT_MAX / sizeof(XRefEntry)) {
       error(-1, "Invalid 'size' inside xref table.");
       ok = gFalse;
       errCode = errDamaged;
@@ -273,7 +274,7 @@ GBool XRef::readXRef(Guint *pos) {
     // table size
     if (first + n > size) {
       newSize = size + 256;
-      if (newSize*sizeof(XRefEntry)/sizeof(XRefEntry) != newSize) {
+      if (newSize >= INT_MAX / sizeof(XRefEntry)) {
         error(-1, "Invalid 'newSize'");
         goto err2;
       }
@@ -420,7 +421,7 @@ GBool XRef::constructXRef() {
 	    if (!strncmp(p, "obj", 3)) {
 	      if (num >= size) {
 		newSize = (num + 1 + 255) & ~255;
-	        if (newSize*sizeof(XRefEntry)/sizeof(XRefEntry) != newSize) {
+	        if (newSize >= INT_MAX / sizeof(XRefEntry)) {
 	          error(-1, "Invalid 'obj' parameters.");
 	          return gFalse;
 	        }
@@ -445,7 +446,7 @@ GBool XRef::constructXRef() {
     } else if (!strncmp(p, "endstream", 9)) {
       if (streamEndsLen == streamEndsSize) {
 	streamEndsSize += 64;
-        if (streamEndsSize*sizeof(int)/sizeof(int) != streamEndsSize) {
+        if (streamEndsSize >= INT_MAX / sizeof(int)) {
           error(-1, "Invalid 'endstream' parameter.");
           return gFalse;
         }
