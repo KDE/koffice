@@ -961,7 +961,7 @@ bool KWFrameDia::applyChanges()
                 kdDebug() << "KWFrameDia::applyChanges " << fs->getName() << " has only one frame" << endl;
                 ASSERT( fs->type() == FT_TEXT );
                 KWTextFrameSet * textfs = static_cast<KWTextFrameSet*>( fs );
-                QTextParag * parag = textfs->textDocument()->firstParag();
+                Qt3::QTextParag * parag = textfs->textDocument()->firstParag();
                 bool isEmpty = parag->next() == 0L && parag->length() == 1;
                 if ( !isEmpty )
                 {

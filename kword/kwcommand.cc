@@ -56,7 +56,7 @@ KWTextDeleteCommand::KWTextDeleteCommand(
 
 QTextCursor * KWTextDeleteCommand::execute( QTextCursor *c )
 {
-    QTextParag *s = doc ? doc->paragAt( id ) : parag;
+    Qt3::QTextParag *s = doc ? doc->paragAt( id ) : parag;
     if ( !s ) {
         qWarning( "can't locate parag at %d, last parag: %d", id, doc->lastParag()->paragId() );
         return 0;
@@ -85,7 +85,7 @@ QTextCursor * KWTextDeleteCommand::unexecute( QTextCursor *c )
     // Let QRichText re-create the text and formatting
     QTextCursor * cr = QTextDeleteCommand::unexecute(c);
 
-    QTextParag *s = doc ? doc->paragAt( id ) : parag;
+    Qt3::QTextParag *s = doc ? doc->paragAt( id ) : parag;
     if ( !s ) {
         qWarning( "can't locate parag at %d, last parag: %d", id, doc->lastParag()->paragId() );
         return 0;
@@ -99,7 +99,7 @@ QTextCursor * KWTextDeleteCommand::unexecute( QTextCursor *c )
     QValueList<KWParagLayout>::Iterator lit = m_oldParagLayouts.begin();
     kdDebug() << "KWTextDeleteCommand::unexecute " << m_oldParagLayouts.count() << " parag layouts. First parag=" << s->paragId() << endl;
     ASSERT( id == s->paragId() );
-    QTextParag *p = s;
+    Qt3::QTextParag *p = s;
     while ( p ) {
         if ( lit != m_oldParagLayouts.end() )
         {
@@ -225,7 +225,7 @@ QTextCursor * KWParagFormatCommand::execute( QTextCursor *c )
 
 QTextCursor * KWParagFormatCommand::unexecute( QTextCursor *c )
 {
-    QTextParag *p = doc->paragAt( firstParag );
+    Qt3::QTextParag *p = doc->paragAt( firstParag );
     if ( !p )
     {
         kdDebug() << "KWParagFormatCommand::unexecute paragraph " << firstParag << "not found" << endl;
@@ -255,7 +255,7 @@ KWPasteTextCommand::KWPasteTextCommand( QTextDocument *d, int parag, int idx,
 
 QTextCursor * KWPasteTextCommand::execute( QTextCursor *c )
 {
-    QTextParag *firstParag = doc->paragAt( m_parag );
+    Qt3::QTextParag *firstParag = doc->paragAt( m_parag );
     if ( !firstParag ) {
         qWarning( "can't locate parag at %d, last parag: %d", m_parag, doc->lastParag()->paragId() );
         return 0;
@@ -374,7 +374,7 @@ class KWDeleteCustomItemVisitor : public KWParagVisitor // see kwtextdocument.h
 {
 public:
     KWDeleteCustomItemVisitor() : KWParagVisitor() { }
-    virtual bool visit( QTextParag *parag, int start, int end )
+    virtual bool visit( Qt3::QTextParag *parag, int start, int end )
     {
         kdDebug() << "KWPasteTextCommand::execute " << parag->paragId() << " " << start << " " << end << endl;
         for ( int i = start ; i < end ; ++i )
@@ -384,7 +384,7 @@ public:
 	    {
 	       KWTextCustomItem* item = static_cast<KWTextCustomItem *>( ch->customItem() );
 	       item->setDeleted( true );
-	       KCommand* itemCmd = item->deleteCommand();
+	       KNamedCommand* itemCmd = item->deleteCommand();
 	       if ( itemCmd ) itemCmd->execute();
 	    }
         }
@@ -394,7 +394,7 @@ public:
 
 QTextCursor * KWPasteTextCommand::unexecute( QTextCursor *c )
 {
-    QTextParag *firstParag = doc->paragAt( m_parag );
+    Qt3::QTextParag *firstParag = doc->paragAt( m_parag );
     if ( !firstParag ) {
         qWarning( "can't locate parag at %d, last parag: %d", m_parag, doc->lastParag()->paragId() );
         return 0;
@@ -403,7 +403,7 @@ QTextCursor * KWPasteTextCommand::unexecute( QTextCursor *c )
     cursor.setIndex( m_idx );
     doc->setSelectionStart( QTextDocument::Temp, &cursor );
 
-    QTextParag *lastParag = doc->paragAt( m_lastParag );
+    Qt3::QTextParag *lastParag = doc->paragAt( m_lastParag );
     if ( !lastParag ) {
         qWarning( "can't locate parag at %d, last parag: %d", m_lastParag, doc->lastParag()->paragId() );
         return 0;
@@ -434,8 +434,8 @@ KWTextFormatCommand::~KWTextFormatCommand()
 
 void KWTextFormatCommand::resizeCustomItem()
 {
-    QTextParag *sp = doc->paragAt( startId );
-    QTextParag *ep = doc->paragAt( endId );
+    Qt3::QTextParag *sp = doc->paragAt( startId );
+    Qt3::QTextParag *ep = doc->paragAt( endId );
     if ( !sp || !ep )
         return;
 
@@ -471,7 +471,7 @@ void KWTextFormatCommand::resizeCustomItem()
                 static_cast<KWTextCustomItem *>( start.parag()->at(i)->customItem() )->resize();
             }
 
-        QTextParag *p = start.parag()->next();
+        Qt3::QTextParag *p = start.parag()->next();
         while ( p && p != end.parag() )
         {
             text = p->string()->toString().left( p->length() - 1 );
@@ -498,8 +498,8 @@ void KWTextFormatCommand::resizeCustomItem()
 QTextCursor *KWTextFormatCommand::execute( QTextCursor *c )
 {
     QTextCursor *tmp=QTextFormatCommand::execute( c );
-    QTextParag *sp = doc->paragAt( startId );
-    QTextParag *ep = doc->paragAt( endId );
+    Qt3::QTextParag *sp = doc->paragAt( startId );
+    Qt3::QTextParag *ep = doc->paragAt( endId );
     if ( !sp || !ep )
         return c;
 
@@ -512,8 +512,8 @@ QTextCursor *KWTextFormatCommand::unexecute( QTextCursor *c )
 {
     QTextCursor*tmp= QTextFormatCommand::unexecute( c );
 
-    QTextParag *sp = doc->paragAt( startId );
-    QTextParag *ep = doc->paragAt( endId );
+    Qt3::QTextParag *sp = doc->paragAt( startId );
+    Qt3::QTextParag *ep = doc->paragAt( endId );
     if ( !sp || !ep )
         return c;
 
@@ -532,7 +532,7 @@ FrameIndex::FrameIndex( KWFrame *frame )
 }
 
 KWFrameBorderCommand::KWFrameBorderCommand( const QString &name, QList<FrameIndex> &_listFrameIndex, QList<FrameBorderTypeStruct> &_frameTypeBorder,const Border & _newBorder):
-    KCommand(name),
+    KNamedCommand(name),
     m_indexFrame(_listFrameIndex),
     m_oldBorderFrameType(_frameTypeBorder),
     m_newBorder( _newBorder)
@@ -611,7 +611,7 @@ void KWFrameBorderCommand::unexecute()
 }
 
 KWFrameBackGroundColorCommand::KWFrameBackGroundColorCommand( const QString &name, QList<FrameIndex> &_listFrameIndex, QList<QBrush> &_oldBrush,const QBrush & _newColor ):
-    KCommand(name),
+    KNamedCommand(name),
     m_indexFrame(_listFrameIndex),
     m_oldBackGroundColor(_oldBrush),
     m_newColor( _newColor)
@@ -654,7 +654,7 @@ void KWFrameBackGroundColorCommand::unexecute()
 
 
 KWFrameResizeCommand::KWFrameResizeCommand( const QString &name, FrameIndex _frameIndex, FrameResizeStruct _frameResize ) :
-    KCommand(name),
+    KNamedCommand(name),
     m_indexFrame(_frameIndex),
     m_FrameResize(_frameResize)
 {
@@ -728,7 +728,7 @@ void KWFrameResizeCommand::unexecute()
 
 
 KWFramePartMoveCommand::KWFramePartMoveCommand( const QString &name, FrameIndex _frameIndex, FrameResizeStruct _frameMove ) :
-    KCommand(name),
+    KNamedCommand(name),
     m_indexFrame(_frameIndex),
     m_frameMove(_frameMove)
 {
@@ -769,7 +769,7 @@ bool KWFramePartMoveCommand::frameMoved()
 }
 
 KWFrameMoveCommand::KWFrameMoveCommand( const QString &name, QList<FrameIndex> &_frameIndex, QList<FrameResizeStruct>&_frameMove  ) :
-    KCommand(name),
+    KNamedCommand(name),
     m_indexFrame(_frameIndex),
     m_frameMove(_frameMove)
 {
@@ -842,7 +842,7 @@ void KWFrameMoveCommand::unexecute()
 }
 
 KWFramePropertiesCommand::KWFramePropertiesCommand( const QString &name, KWFrame *_frameBefore,  KWFrame *_frameAfter ) :
-    KCommand(name),
+    KNamedCommand(name),
     m_frameIndex( _frameAfter ),
     m_frameBefore(_frameBefore),
     m_frameAfter(_frameAfter->getCopy())
@@ -901,7 +901,7 @@ void KWFramePropertiesCommand::unexecute()
 
 
 KWFrameSetFloatingCommand::KWFrameSetFloatingCommand( const QString &name, KWFrameSet *frameset, bool floating ) :
-    KCommand(name),
+    KNamedCommand(name),
     m_pFrameSet( frameset ),
     m_bFloating( floating )
 {
@@ -948,7 +948,7 @@ void KWFrameSetFloatingCommand::unexecute()
 }
 
 KWPageLayoutCommand::KWPageLayoutCommand( const QString &name,KWDocument *_doc,pageLayout &_oldLayout, pageLayout &_newLayout  ) :
-    KCommand(name),
+    KNamedCommand(name),
     m_pDoc(_doc),
     m_OldLayout(_oldLayout),
     m_NewLayout(_newLayout)
@@ -975,7 +975,7 @@ void KWPageLayoutCommand::unexecute()
 
 
 KWDeleteFrameCommand::KWDeleteFrameCommand( const QString &name, KWFrame * frame ):
-    KCommand(name),
+    KNamedCommand(name),
     m_frameIndex( frame ),
     m_copyFrame( frame->getCopy() )
 {
@@ -1023,7 +1023,7 @@ KWCreateFrameCommand::KWCreateFrameCommand( const QString &name, KWFrame * frame
 
 
 KWUngroupTableCommand::KWUngroupTableCommand( const QString &name, KWTableFrameSet * _table ):
-    KCommand(name),
+    KNamedCommand(name),
     m_pTable(_table)
 {
     m_ListFrame.clear();
@@ -1083,7 +1083,7 @@ void KWUngroupTableCommand::unexecute()
 
 
 KWDeleteTableCommand::KWDeleteTableCommand( const QString &name, KWTableFrameSet * _table ):
-    KCommand(name),
+    KNamedCommand(name),
     m_pTable(_table)
 {
     ASSERT(m_pTable);
@@ -1113,7 +1113,7 @@ void KWDeleteTableCommand::unexecute()
 
 
 KWInsertColumnCommand::KWInsertColumnCommand( const QString &name, KWTableFrameSet * _table, int _col ):
-    KCommand(name),
+    KNamedCommand(name),
     m_pTable(_table),
     m_colPos(_col)
 {
@@ -1156,7 +1156,7 @@ void KWInsertColumnCommand::unexecute()
 
 
 KWInsertRowCommand::KWInsertRowCommand( const QString &name, KWTableFrameSet * _table, int _row ):
-    KCommand(name),
+    KNamedCommand(name),
     m_pTable(_table),
     m_rowPos(_row)
 {
@@ -1200,7 +1200,7 @@ void KWInsertRowCommand::unexecute()
 
 
 KWRemoveRowCommand::KWRemoveRowCommand( const QString &name, KWTableFrameSet * _table, int _row ):
-    KCommand(name),
+    KNamedCommand(name),
     m_pTable(_table),
     m_rowPos(_row)
 {
@@ -1246,7 +1246,7 @@ void KWRemoveRowCommand::unexecute()
 
 
 KWRemoveColumnCommand::KWRemoveColumnCommand( const QString &name, KWTableFrameSet * _table, int _col ):
-    KCommand(name),
+    KNamedCommand(name),
     m_pTable(_table),
     m_colPos(_col)
 {
@@ -1293,7 +1293,7 @@ void KWRemoveColumnCommand::unexecute()
 
 
 KWSplitCellCommand::KWSplitCellCommand( const QString &name, KWTableFrameSet * _table,unsigned int colBegin,unsigned int rowBegin, unsigned int colEnd,unsigned int rowEnd ):
-    KCommand(name),
+    KNamedCommand(name),
     m_pTable(_table),
     m_colBegin(colBegin),
     m_rowBegin(rowBegin),
@@ -1357,7 +1357,7 @@ void KWSplitCellCommand::unexecute()
 
 
 KWJoinCellCommand::KWJoinCellCommand( const QString &name, KWTableFrameSet * _table,unsigned int colBegin,unsigned int rowBegin, unsigned int colEnd,unsigned int rowEnd, QList<KWFrameSet> listFrameSet,QList<KWFrame> listCopyFrame):
-    KCommand(name),
+    KNamedCommand(name),
     m_pTable(_table),
     m_colBegin(colBegin),
     m_rowBegin(rowBegin),

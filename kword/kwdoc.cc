@@ -202,8 +202,7 @@ KWDocument::KWDocument(QWidget *parentWidget, const char *widgetName, QObject* p
 
     // Get default font from KDE
     m_defaultFont = KGlobalSettings::generalFont();
-    KGlobal::charsets()->setQFont(m_defaultFont, KGlobal::locale()->charset());
-
+    
     m_syntaxVersion = CURRENT_SYNTAX_VERSION;
     m_pKSpellConfig=0;
     m_hasTOC=false;
@@ -2601,7 +2600,7 @@ void KWDocument::recalcVariables( int type )
         {
             update = true;
             it.current()->recalc();
-            QTextParag * parag = it.current()->paragraph();
+            Qt3::QTextParag * parag = it.current()->paragraph();
             if ( parag )
             {
                 kdDebug() << "KWDoc::recalcVariables -> invalidating parag " << parag->paragId() << endl;

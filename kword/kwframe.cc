@@ -564,7 +564,7 @@ void KWFrameSet::setFloating()
         if ( !frameSet || frameSet->frameSetInfo() != FI_BODY )
             continue;
 
-        QTextParag* parag = 0L;
+        Qt3::QTextParag* parag = 0L;
         int index = 0;
         QPoint cPoint( m_doc->zoomPoint( frames.first()->topLeft() ) );
         kdDebug() << "KWFrameSet::setFloating looking for pos at " << cPoint.x() << " " << cPoint.y() << endl;
@@ -718,14 +718,14 @@ QSize KWFrameSet::floatingFrameSize( int frameNum )
     return frame->outerRect().size();
 }
 
-KCommand * KWFrameSet::anchoredObjectCreateCommand( int frameNum )
+KNamedCommand * KWFrameSet::anchoredObjectCreateCommand( int frameNum )
 {
     KWFrame * frame = frames.at( frameNum );
     ASSERT( frame );
     return new KWCreateFrameCommand( QString::null, frame );
 }
 
-KCommand * KWFrameSet::anchoredObjectDeleteCommand( int frameNum )
+KNamedCommand * KWFrameSet::anchoredObjectDeleteCommand( int frameNum )
 {
     KWFrame * frame = frames.at( frameNum );
     ASSERT( frame );

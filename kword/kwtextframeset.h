@@ -153,9 +153,9 @@ public:
                  CustomItemsMap customItemsMap = CustomItemsMap() );
     void removeSelectedText( QTextCursor * cursor, int selectionId = QTextDocument::Standard,
                              const QString & cmdName = QString::null );
-    KCommand * replaceSelectionCommand( QTextCursor * cursor, const QString & replacement,
+    KNamedCommand * replaceSelectionCommand( QTextCursor * cursor, const QString & replacement,
                                         int selectionId, const QString & cmdName );
-    KCommand * removeSelectedTextCommand( QTextCursor * cursor, int selectionId );
+    KNamedCommand * removeSelectedTextCommand( QTextCursor * cursor, int selectionId );
 
     void changeCaseOfText(QTextCursor *cursor,TypeOfCase _type);
 
@@ -165,20 +165,20 @@ public:
     void redo();
     void clearUndoRedoInfo();
     void pasteText( QTextCursor * cursor, const QString & text, KWTextFormat * currentFormat, bool removeSelected );
-    KCommand* pasteKWord( QTextCursor * cursor, const QCString & data, bool removeSelected );
+    KNamedCommand* pasteKWord( QTextCursor * cursor, const QCString & data, bool removeSelected );
     void insertTOC( QTextCursor * cursor );
-    KCommand* insertParagraphCommand( QTextCursor * cursor );
+    KNamedCommand* insertParagraphCommand( QTextCursor * cursor );
     void insertFrameBreak( QTextCursor * cursor );
     void selectAll( bool select );
     void selectionChangedNotify( bool enableActions = true );
-    QRect paragRect( QTextParag * parag ) const;
+    QRect paragRect( Qt3::QTextParag * parag ) const;
 
-    void findPosition( const QPoint &nPoint, QTextParag * & parag, int & index );
+    void findPosition( const QPoint &nPoint, Qt3::QTextParag * & parag, int & index );
 
-    KCommand *deleteAnchoredFrame( KWAnchor * anchor );
+    KNamedCommand *deleteAnchoredFrame( KWAnchor * anchor );
 
     // Highlighting support (for search/replace, spellchecking etc.)
-    void highlightPortion( QTextParag * parag, int index, int length, KWCanvas * canvas );
+    void highlightPortion( Qt3::QTextParag * parag, int index, int length, KWCanvas * canvas );
     void removeHighlight();
 
     /** Set format changes on selection or current cursor */
@@ -200,12 +200,12 @@ public:
     void doKeyboardAction( QTextCursor * cursor, KWTextFormat * & currentFormat, KeyboardAction action );
 
     // -- Paragraph settings --
-    KCommand * setCounterCommand( QTextCursor * cursor, const KoParagCounter & counter );
-    KCommand * setAlignCommand( QTextCursor * cursor, int align );
-    KCommand * setLineSpacingCommand( QTextCursor * cursor, double spacing );
-    KCommand * setPageBreakingCommand( QTextCursor * cursor, int pageBreaking );
-    KCommand * setBordersCommand( QTextCursor * cursor, Border leftBorder, Border rightBorder, Border topBorder, Border bottomBorder );
-    KCommand * setMarginCommand( QTextCursor * cursor, QStyleSheetItem::Margin m, double margin );
+    KNamedCommand * setCounterCommand( QTextCursor * cursor, const KoParagCounter & counter );
+    KNamedCommand * setAlignCommand( QTextCursor * cursor, int align );
+    KNamedCommand * setLineSpacingCommand( QTextCursor * cursor, double spacing );
+    KNamedCommand * setPageBreakingCommand( QTextCursor * cursor, int pageBreaking );
+    KNamedCommand * setBordersCommand( QTextCursor * cursor, Border leftBorder, Border rightBorder, Border topBorder, Border bottomBorder );
+    KNamedCommand * setMarginCommand( QTextCursor * cursor, QStyleSheetItem::Margin m, double margin );
     void applyStyle( QTextCursor * cursor, const KWStyle * style,
                      int selectionId = QTextDocument::Standard,
                      int paragLayoutFlags = KoParagLayout::All, int formatFlags = QTextFormat::Format,
@@ -215,7 +215,7 @@ public:
 
     virtual void addTextFramesets( QList<KWTextFrameSet> & /*lst*/ );
 
-    KCommand* setTabListCommand( QTextCursor * cursor,const KoTabulatorList & tabList );
+    KNamedCommand* setTabListCommand( QTextCursor * cursor,const KoTabulatorList & tabList );
 
 #ifndef NDEBUG
     void printRTDebug( int );
@@ -234,11 +234,11 @@ public:
     // reimplemented from QTextFlow
     virtual int adjustLMargin( int yp, int h, int margin, int space );
     virtual int adjustRMargin( int yp, int h, int margin, int space );
-    virtual void adjustFlow( int &yp, int w, int h, QTextParag *parag, bool pages = TRUE );
-    virtual void eraseAfter( QTextParag *parag, QPainter *p, const QColorGroup & cg );
+    virtual void adjustFlow( int &yp, int w, int h, Qt3::QTextParag *parag, bool pages = TRUE );
+    virtual void eraseAfter( Qt3::QTextParag *parag, QPainter *p, const QColorGroup & cg );
 
     // Make sure this paragraph is formatted
-    void ensureFormatted( QTextParag * parag );
+    void ensureFormatted( Qt3::QTextParag * parag );
 
     // The viewmode that was passed to drawContents. Special hook for KWAnchor. Don't use.
     KWViewMode * currentViewMode() const { return m_currentViewMode; }
@@ -279,11 +279,11 @@ private slots:
 
 protected:
     void storeParagUndoRedoInfo( QTextCursor * cursor, int selectionId = QTextDocument::Standard );
-    void copyCharFormatting( QTextParag *parag, int position, int index /*in text*/, bool moveCustomItems );
+    void copyCharFormatting( Qt3::QTextParag *parag, int position, int index /*in text*/, bool moveCustomItems );
     void readFormats( QTextCursor &c1, QTextCursor &c2, bool copyParagLayouts = false, bool moveCustomItems = false );
-    void setLastFormattedParag( QTextParag *parag );
+    void setLastFormattedParag( Qt3::QTextParag *parag );
     void getMargins( int yp, int h, int* marginLeft, int* marginRight, int* breakBegin, int* breakEnd, int paragLeftMargin = 0 );
-    bool checkVerticalBreak( int & yp, int & h, QTextParag * parag, bool linesTogether, int breakBegin, int breakEnd );
+    bool checkVerticalBreak( int & yp, int & h, Qt3::QTextParag * parag, bool linesTogether, int breakBegin, int breakEnd );
     const QList<KWFrame> & framesInPage( int pageNum ) const;
     void frameResized( KWFrame *theFrame );
     double footerHeaderSizeMax( KWFrame *theFrame );
@@ -328,7 +328,7 @@ private:
 
     KWTextDocument *textdoc;
     UndoRedoInfo undoRedoInfo;                 // Currently built undo/redo info
-    QTextParag *m_lastFormatted;               // Idle-time-formatting stuff
+    Qt3::QTextParag *m_lastFormatted;               // Idle-time-formatting stuff
     QTimer *formatTimer, *changeIntervalTimer; // Same
     int interval;                              // Same
     int m_availableHeight;                     // Sum of the height of all our frames
@@ -425,15 +425,15 @@ public:
     QString textFontFamily()const;
 
     // -- Paragraph settings --
-    KCommand * setCounterCommand( const KoParagCounter & counter ) { return textFrameSet()->setCounterCommand( cursor, counter ); }
-    KCommand * setAlignCommand( int align ) { return textFrameSet()->setAlignCommand( cursor, align ); }
-    KCommand * setPageBreakingCommand( int pageBreaking ) { return textFrameSet()->setPageBreakingCommand( cursor, pageBreaking ); }
-    KCommand * setLineSpacingCommand( double spacing ) { return textFrameSet()->setLineSpacingCommand( cursor, spacing ); }
-    KCommand * setBordersCommand( Border leftBorder, Border rightBorder, Border bottomBorder, Border topBorder )
+    KNamedCommand * setCounterCommand( const KoParagCounter & counter ) { return textFrameSet()->setCounterCommand( cursor, counter ); }
+    KNamedCommand * setAlignCommand( int align ) { return textFrameSet()->setAlignCommand( cursor, align ); }
+    KNamedCommand * setPageBreakingCommand( int pageBreaking ) { return textFrameSet()->setPageBreakingCommand( cursor, pageBreaking ); }
+    KNamedCommand * setLineSpacingCommand( double spacing ) { return textFrameSet()->setLineSpacingCommand( cursor, spacing ); }
+    KNamedCommand * setBordersCommand( Border leftBorder, Border rightBorder, Border bottomBorder, Border topBorder )
           { return textFrameSet()->setBordersCommand( cursor, leftBorder, rightBorder, bottomBorder, topBorder ); }
-    KCommand * setMarginCommand( QStyleSheetItem::Margin m, double margin )
+    KNamedCommand * setMarginCommand( QStyleSheetItem::Margin m, double margin )
           { return textFrameSet()->setMarginCommand( cursor, m, margin ); }
-    KCommand * setTabListCommand( const KoTabulatorList & tabList ){ return textFrameSet()->setTabListCommand( cursor, tabList ); }
+    KNamedCommand * setTabListCommand( const KoTabulatorList & tabList ){ return textFrameSet()->setTabListCommand( cursor, tabList ); }
 
     void applyStyle( const KWStyle * style );
 

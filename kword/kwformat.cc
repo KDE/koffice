@@ -22,7 +22,6 @@
 #include <kwdoc.h>
 #if 0
 #include <kglobal.h>
-#include <kcharsets.h>
 #endif
 
 KWTextFormatCollection::KWTextFormatCollection( const QFont & defaultFont )
@@ -49,10 +48,9 @@ QTextFormat * KWTextFormatCollection::format( const QFont &fn, const QColor &c )
     ASSERT( !key.contains( '+' ) );
     key += '+';
     key += QString::number( (int)fn.strikeOut() );
+    //key += '/';
+    //key += QString::number( (int)(fn.pointSizeFloat() * 10) );
     key += '/';
-    key += QString::number( (int)(fn.pointSizeFloat() * 10) );
-    key += '/';
-    key += QString::number( (int)fn.charSet() );
     m_cachedFormat = static_cast<KWTextFormat *>( dict().find( key ) );
     m_cfont = fn;
     m_ccol = c;
@@ -97,8 +95,6 @@ void KWTextFormat::copyFormat( const QTextFormat & nf, int flags )
         fn.setPointSizeFloat( nf.font().pointSizeFloat() );
     if ( flags & KWTextFormat::StrikeOut )
         fn.setStrikeOut( nf.font().strikeOut() );
-    if ( flags & KWTextFormat::CharSet )
-        fn.setCharSet( nf.font().charSet() );
     update();
     //kdDebug() << "KWTextFormat " << (void*)this << " copyFormat nf=" << (void*)&nf
     //          << " " << nf.key() " flags=" << flags
@@ -121,14 +117,6 @@ void KWTextFormat::setStrikeOut(bool b)
     update();
 }
 
-void KWTextFormat::setCharset( QFont::CharSet charset )
-{
-    if ( fn.charSet() == charset )
-        return;
-    fn.setCharSet( charset );
-    update();
-}
-
 void KWTextFormat::generateKey()
 {
     QTextFormat::generateKey();
@@ -137,10 +125,9 @@ void KWTextFormat::generateKey()
     // SYNC any changes to the key format with ::format above
     k += '+';
     k += QString::number( (int)fn.strikeOut() );
+    //k += '/';
+    //k += QString::number( (int)(fn.pointSizeFloat() * 10) );
     k += '/';
-    k += QString::number( (int)(fn.pointSizeFloat() * 10) );
-    k += '/';
-    k += QString::number( (int)fn.charSet() );
     setKey( k );
     //kdDebug() << "generateKey textformat=" << this << " k=" << k << " pointsizefloat=" << fn.pointSizeFloat() << endl;
 }
@@ -166,8 +153,6 @@ int KWTextFormat::compare( const KWTextFormat & format ) const
 
     if ( fn.strikeOut() != format.fn.strikeOut() )
         flags |= KWTextFormat::StrikeOut;
-    if ( fn.charSet() != format.fn.charSet() )
-        flags |= KWTextFormat::CharSet;
-
+    
     return flags;
 }

@@ -35,7 +35,7 @@
 #include <qclipboard.h>
 #include <qprogressdialog.h>
 #include <qobjectlist.h>
-
+#include <qcursor.h>
 #include <ktempfile.h>
 #include <kaction.h>
 #include <kdebug.h>

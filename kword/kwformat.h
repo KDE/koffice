@@ -50,7 +50,7 @@ public:
     void setPointSizeFloat( float );
     float pointSizeFloat() const { return fn.pointSizeFloat(); }
     void setStrikeOut(bool);
-    void setCharset( QFont::CharSet charset );
+    
 protected:
     virtual void generateKey();
 

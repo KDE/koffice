@@ -24,6 +24,7 @@
 #include <qlayout.h>
 #include <qfile.h>
 #include <qvbox.h>
+#include <qpushbutton.h>
 #include <kdebug.h>
 #include <kstddirs.h>
 

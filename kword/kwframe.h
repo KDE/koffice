@@ -34,7 +34,7 @@ namespace KFormula {
     class KFormulaView;
 }
 
-class KCommand;
+class KNamedCommand;
 class KWAnchor;
 class KWCanvas;
 class KWChild;
@@ -501,9 +501,9 @@ public:
         -1 means same as the height (usual case) */
     virtual int floatingFrameBaseline( int /*frameNum*/ ) { return -1; }
     /** Store command for creating an anchored object */
-    virtual KCommand * anchoredObjectCreateCommand( int frameNum );
+    virtual KNamedCommand * anchoredObjectCreateCommand( int frameNum );
     /** Store command for deleting an anchored object */
-    virtual KCommand * anchoredObjectDeleteCommand( int frameNum );
+    virtual KNamedCommand * anchoredObjectDeleteCommand( int frameNum );
 
     /** make this frameset part of a groupmanager
      * @see KWTableFrameSet

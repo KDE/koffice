@@ -26,6 +26,7 @@
 #include <qpixmap.h>
 #include <qevent.h>
 #include <kmessagebox.h>
+#include <kstatusbar.h>
 #include <qclipboard.h>
 #include <qsplitter.h>
 #include <kaction.h>
@@ -85,6 +86,7 @@
 #include <qrect.h>
 #undef Bool
 #include <kspell.h>
+#include <kspelldlg.h>
 #include <kcolordlg.h>
 #include <kiconloader.h>
 #include <kglobal.h>
@@ -1505,7 +1507,7 @@ void KWView::deleteFrame( bool _warning )
                 return;
 
             QTextDocument * textdoc = textfs->textDocument();
-            QTextParag * parag = textdoc->firstParag();
+            Qt3::QTextParag * parag = textdoc->firstParag();
             if ( parag && parag->string()->length() > 0 )
             {
                 int result = KMessageBox::warningContinueCancel(
@@ -2029,7 +2031,7 @@ void KWView::formatFont()
         KWFontDia *fontDia = new KWFontDia( this, "", edit->textFont(),
                                             actionFormatSub->isChecked(), actionFormatSuper->isChecked(),
                                             edit->textColor() );
-        fontDia->show();
+        fontDia->exec();
         int flags = fontDia->changedFlags();
         kdDebug() << "KWView::formatFont changedFlags = " << flags << endl;
         if ( flags )
@@ -2267,7 +2269,7 @@ void KWView::extraAutoFormat()
 {
     m_doc->getAutoFormat()->readConfig();
     KWAutoFormatDia dia( this, 0, m_doc->getAutoFormat() );
-    dia.show();
+    dia.exec();
 }
 
 void KWView::extraStylist()
@@ -2276,7 +2278,7 @@ void KWView::extraStylist()
     if ( edit )
         edit->hideCursor();
     KWStyleManager * styleManager = new KWStyleManager( this, m_doc );
-    styleManager->show();
+    styleManager->exec();
     delete styleManager;
     if ( edit )
         edit->showCursor();
@@ -3142,7 +3144,7 @@ void KWView::spellCheckerReady()
         m_spell.spellCurrFrameSetNum = i; // store as number, not as pointer, to implement "go to next frameset" when done
         //kdDebug() << "KWView::spellCheckerReady spell-checking frameset " << m_spellCurrFrameSetNum << endl;
 
-        QTextParag * p = textfs->textDocument()->firstParag();
+        Qt3::QTextParag * p = textfs->textDocument()->firstParag();
         QString text;
         bool textIsEmpty=true;
         while ( p ) {
@@ -3178,7 +3180,7 @@ void KWView::spellCheckerMisspelling( QString old, QStringList* , unsigned pos )
     KWTextFrameSet * fs = m_spell.textFramesets.at( m_spell.spellCurrFrameSetNum ) ;
     ASSERT( fs );
     if ( !fs ) return;
-    QTextParag * p = fs->textDocument()->firstParag();
+    Qt3::QTextParag * p = fs->textDocument()->firstParag();
     while ( p && (int)pos >= p->length() )
     {
         pos -= p->length();
@@ -3197,7 +3199,7 @@ void KWView::spellCheckerCorrected( QString old, QString corr, unsigned pos )
     KWTextFrameSet * fs = m_spell.textFramesets.at( m_spell.spellCurrFrameSetNum ) ;
     ASSERT( fs );
     if ( !fs ) return;
-    QTextParag * p = fs->textDocument()->firstParag();
+    Qt3::QTextParag * p = fs->textDocument()->firstParag();
     while ( p && (int)pos >= p->length() )
     {
         pos -= p->length();
@@ -3279,7 +3281,7 @@ void KWView::spellCheckerFinished()
 void KWView::configure()
 {
     KWConfig configDia( this );
-    configDia.show();
+    configDia.exec();
 }
 
 KWTextFrameSetEdit *KWView::currentTextEdit()

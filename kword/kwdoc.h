@@ -20,6 +20,8 @@
 #ifndef kwdoc_h
 #define kwdoc_h
 
+#include <qfont.h>
+
 class KWDocument;
 class KPrinter;
 class KWTextImage;
@@ -43,7 +45,6 @@ class KCommandHistory;
 class KWVariable;
 class KWVariableFormat;
 
-class QFont;
 class QStringList;
 class QRect;
 
