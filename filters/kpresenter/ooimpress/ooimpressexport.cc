@@ -258,8 +258,7 @@ void OoImpressExport::createDocumentMeta( QDomDocument & docmeta )
         n = i.namedItem( "about" ).namedItem( "abstract" );
         if ( !n.isNull() )
         {
-            QDomElement user = docmeta.createElement( "meta:user-defined" );
-            user.setAttribute( "meta:name", "Info 2" );
+            QDomElement user = docmeta.createElement( "dc:description" );
             user.appendChild( n.firstChild() );
             meta.appendChild( user );
         }
