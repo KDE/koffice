@@ -1030,13 +1030,21 @@ void OoImpressExport::setLineGeometry( QDomElement & source, QDomElement & targe
     y2 += y1;
 
     target.setAttribute( "draw:id",  QString::number( m_objectIndex ) );
-    target.setAttribute( "svg:x1", StyleFactory::toCM( orig.attribute( "x" ) ) );
-    target.setAttribute( "svg:x2", QString( "%1cm" ).arg( KoUnit::toCM( x2 ) ) );
+    QString xpos1 = StyleFactory::toCM( orig.attribute( "x" ) );
+    QString xpos2 = QString( "%1cm" ).arg( KoUnit::toCM( x2 ) );
+	
 	if ( type == 0 )
 	{
         target.setAttribute( "svg:y1", QString( "%1cm" ).arg( KoUnit::toCM( y2/2.0 ) ) );
         target.setAttribute( "svg:y2", QString( "%1cm" ).arg( KoUnit::toCM( y2/2.0 ) ) );
 	}
+    else if ( type == 1 )
+    {
+        target.setAttribute( "svg:y1", QString( "%1cm" ).arg( KoUnit::toCM( y1) ) );
+        target.setAttribute( "svg:y2", QString( "%1cm" ).arg( KoUnit::toCM( y2) ) );
+        xpos1 = QString( "%1cm" ).arg( KoUnit::toCM( x1/2.0 ) );
+        xpos2 = xpos1;
+    }
 	else if ( type == 3 ) // from left bottom to right top
     {
         target.setAttribute( "svg:y1", QString( "%1cm" ).arg( KoUnit::toCM( y2 ) ) );
@@ -1047,6 +1055,10 @@ void OoImpressExport::setLineGeometry( QDomElement & source, QDomElement & targe
         target.setAttribute( "svg:y1", QString( "%1cm" ).arg( KoUnit::toCM( y1 ) ) );
         target.setAttribute( "svg:y2", QString( "%1cm" ).arg( KoUnit::toCM( y2 ) ) );
     }
+
+    target.setAttribute( "svg:x1", xpos1 );
+    target.setAttribute( "svg:x2", xpos2 );
+
 
     QString nameStr = name.attribute("objectName");
     if( !nameStr.isEmpty() )
