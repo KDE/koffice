@@ -2882,7 +2882,7 @@ void KSpreadCell::paintText( QPainter& painter,
       x = indent + cellRect.x() + m_dTextX;
     else
       x = indent + cellRect.x() + m_dTextX
-        - ( fm.descent() + fm.ascent() ) * sin( angle * M_PI / 180 );
+        - doc->unzoomItX(( fm.descent() + fm.ascent() ) * sin( angle * M_PI / 180 ));
     double y;
     if ( angle > 0 )
       y = cellRect.y() + m_dTextY;
