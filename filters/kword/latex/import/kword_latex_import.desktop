@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+X-KDE-Export=application/x-kword
+ExportDescription=KWord
+X-KDE-Import=text/x-tex
+X-KDE-Weight=1
+ImportDescription=LATEX
+Name=KWord Latex Import Filter
+ServiceTypes=KOfficeFilter
+Type=Service
+X-KDE-Library=liblateximport
