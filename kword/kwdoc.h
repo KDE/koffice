@@ -442,8 +442,10 @@ public:
 
     /**
      * Check if we can remove empty page(s) from the end
+     * If so, do it and return true.
+     * Note that this doesn't call afterRemovePages, this is up to the caller.
      */
-    void tryRemovingPages();
+    bool tryRemovingPages();
 
     ProcessingType processingType()const { return m_processingType;  }
 
@@ -477,7 +479,7 @@ public:
     int maxZOrder( int pageNum ) const;
     // No minZOrder() method, because of the main frameset, see kwview::lowerFrame
 
-    void updateAllFrames();
+    void updateAllFrames( int flags = 0xff /* see KWFrameSet::UpdateFramesFlags */ );
     void updateFramesOnTopOrBelow( int pageNum = -1 /* all */ );
 
     // The grid is in _pt_ now
