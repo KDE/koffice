@@ -96,9 +96,8 @@ private slots:
     void slotChangeSubType( int type );
 
 private:
-    QRadioButton *depth;
-    QRadioButton *beside;
-    QRadioButton *layer;
+    QRadioButton *normal;
+    QRadioButton *stacked;
     QRadioButton *percent;
     QLabel* exampleLA;
 };

@@ -1,3 +1,10 @@
+2005-02-23  Inge Wallin  <inge@lysator.liu.se>
+ 
+	Fix bug 99715
+	* kchartSubTypeChartPage.h (KChartBarSubTypeChartPage): Rename
+	layer -> stacked and beside -> normal, and change the strings
+	accordingly. 
+ 
 2004-10-06  Inge Wallin  <inge@lysator.liu.se>
 
 	Fix bug 55603: Pressing Enter in Data Editor doesn't update any
