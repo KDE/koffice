@@ -690,6 +690,8 @@ QtCalculator :: QtCalculator( Calculator *_corba, QWidget *parent, const char *n
 
 QtCalculator::~QtCalculator()
 {
+  delete selection_timer;
+  delete status_timer;
 }
 
 void QtCalculator::exit()
