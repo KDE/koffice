@@ -258,6 +258,7 @@ void KPrCanvas::paintEvent( QPaintEvent* paintEvent )
 {
     if ( isUpdatesEnabled() )
     {
+        buffer.fill(Qt::black);
         QPainter bufPainter;
         bufPainter.begin( &buffer, this ); // double-buffering - (the buffer is as big as the widget)
         bufPainter.translate( -diffx(), -diffy() );
@@ -3213,6 +3214,7 @@ bool KPrCanvas::pNext( bool )
         }
 
         QPixmap _pix1( QApplication::desktop()->width(), QApplication::desktop()->height() );
+	_pix1.fill(Qt::black);
         drawCurrentPageInPix( _pix1 );
 
         currPresPage = *( ++slideListIterator );
@@ -3231,6 +3233,7 @@ bool KPrCanvas::pNext( bool )
         currPresStep = *presStepList.begin();
 
         QPixmap _pix2( QApplication::desktop()->width(), QApplication::desktop()->height() );
+	_pix2.fill(Qt::black);
         int pageHeight = m_view->kPresenterDoc()->pageList().at(currPresPage-1)->getZoomPageRect().height();
         int yOffset = ( presPage() - 1 ) * pageHeight;
         if ( height() > pageHeight )
