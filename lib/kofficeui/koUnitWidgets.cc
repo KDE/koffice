@@ -1,7 +1,7 @@
 /* This file is part of the KDE project
    Copyright (C) 2002, Rob Buis(buis@kde.org)
    Copyright (C) 2004, Nicolas GOUTTE <goutte@kde.org>
-   
+
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
    License as published by the Free Software Foundation; either
@@ -148,6 +148,7 @@ double KoUnitDoubleBase::toDouble( const QString& str, bool* ok )
     const QString sep( KGlobal::locale()->thousandsSeparator() );
     if ( !sep.isEmpty() )
         str2.remove( sep );
+    str2.remove( KoUnit::unitName( m_unit ) );
     const double dbl = KGlobal::locale()->readNumber( str2, ok );
     if ( ok )
         kdDebug(30004) << "toDouble:" << str << ": => :" << str2 << ": => " << QString::number( dbl, 'f', 12 ) << endl;
