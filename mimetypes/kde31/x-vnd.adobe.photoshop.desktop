@@ -6,6 +6,7 @@ MimeType=image/x-vnd.adobe.photoshop
 Patterns=*.psd;*.PSD;
 Comment=Adobe Photoshop Image
 Comment[bg]=Изображение на Adobe Photoshop
+Comment[br]=Skeudenn Adobe Photoshop
 Comment[ca]=Imatge d'Adobe Photoshop
 Comment[cs]=Obrázek ve formátu Adobe Photoshop
 Comment[cy]=Delwedd Adobe Photoshop

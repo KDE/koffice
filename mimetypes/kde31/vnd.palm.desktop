@@ -5,6 +5,7 @@ MimeType=application/vnd.palm
 Patterns=*.pdb;*.PDB;*.prc;*.PRC;
 Comment=Palm Document
 Comment[bg]=Документ на Palm
+Comment[br]=Teul Palm
 Comment[ca]=Document Palm
 Comment[cs]=Palm dokument
 Comment[cy]=Dogfen Palm
