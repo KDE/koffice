@@ -1581,8 +1581,8 @@ void KPTextView::paste()
         QByteArray arr = data->encodedData( KPrTextDrag::selectionMimeType() );
         if ( arr.size() )
         {
-            kdDebug(33001)<<"QCString( arr ) :"<<QCString( arr )<<endl;
-            kpTextObject()->kPresenterDocument()->addCommand(kpTextObject()->pasteKPresenter( cursor(), QCString( arr ), true ));
+            kdDebug(33001)<<"QCString( arr.data(), arr.size() + 1 ) :"<<QCString( arr.data(), arr.size() + 1 )<<endl;
+            kpTextObject()->kPresenterDocument()->addCommand(kpTextObject()->pasteKPresenter( cursor(), QCString( arr.data(), arr.size() + 1 ), true ));
         }
     }
     else
@@ -2077,7 +2077,7 @@ void KPTextView::dropEvent( QDropEvent * e )
         {
             QByteArray arr = e->encodedData( KPrTextDrag::selectionMimeType() );
             if ( arr.size() )
-                macroCmd->addCommand(kpTextObject()->pasteKPresenter( cursor(), QCString(arr), false ));
+                macroCmd->addCommand(kpTextObject()->pasteKPresenter( cursor(), QCString(arr.data(), arr.size()+1), false ));
         }
         else
         {
