@@ -857,7 +857,7 @@ void KWView::fileStatistics()
               "</table></qt>",
         dlg.plainPage() ) );
     dlg.setInitialSize( QSize( 400, 200 ) ); // not too good for long translations... -> use a real layout and 5 labels
-    dlg.show();
+    dlg.exec();
 }
 
 /*======================== create GUI ==========================*/
@@ -2003,7 +2003,7 @@ void KWView::insertFootNoteEndNote()
     } else {
         KWFootNoteDia dia( 0L, "", m_doc, m_gui->canvasWidget(), start,
                  m_doc->getNoteType() == KWFootNoteManager::FootNotes );
-        dia.show();
+        dia.exec();
     }
 #endif
 }
@@ -2395,7 +2395,7 @@ void KWView::tableInsertRow()
     ASSERT(table);
     KWInsertDia dia( this, "", table, m_doc, KWInsertDia::ROW, m_gui->canvasWidget() );
     dia.setCaption( i18n( "Insert Row" ) );
-    dia.show();
+    dia.exec();
 }
 
 void KWView::tableInsertCol()
@@ -2415,7 +2415,7 @@ void KWView::tableInsertCol()
     {
         KWInsertDia dia( this, "", table, m_doc, KWInsertDia::COL, m_gui->canvasWidget() );
         dia.setCaption( i18n( "Insert Column" ) );
-        dia.show();
+        dia.exec();
     }
 }
 
@@ -2444,7 +2444,7 @@ void KWView::tableDeleteRow()
     {
         KWDeleteDia dia( this, "", table, m_doc, KWDeleteDia::ROW, m_gui->canvasWidget() );
         dia.setCaption( i18n( "Delete Row" ) );
-        dia.show();
+        dia.exec();
     }
 
 }
@@ -2474,7 +2474,7 @@ void KWView::tableDeleteCol()
     {
         KWDeleteDia dia( this, "", table, m_doc, KWDeleteDia::COL, m_gui->canvasWidget() );
         dia.setCaption( i18n( "Delete Column" ) );
-        dia.show();
+        dia.exec();
     }
 }
 

@@ -1082,7 +1082,7 @@ void KWCanvas::mrCreateText()
         KWFrame *frame = new KWFrame(0L, m_insRect.x(), m_insRect.y(), m_insRect.width(), m_insRect.height() );
         KWFrameDia frameDia( this, frame, m_doc, FT_TEXT );
         frameDia.setCaption(i18n("Connect frame"));
-        frameDia.show();
+        frameDia.exec();
     }
     setMouseMode( MM_EDIT );
     m_doc->repaintAllViews();
@@ -1595,7 +1595,7 @@ void KWCanvas::editFrameProperties()
         return;
     KWFrameDia *frameDia = new KWFrameDia( this, frame );
     frameDia->setCaption(i18n("Frame Properties"));
-    frameDia->show();
+    frameDia->exec();
     delete frameDia;
 }
 
