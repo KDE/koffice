@@ -1,0 +1,44 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=KoDataTool
+Comment=KOffice Tool
+Comment[af]=Koffice Program
+Comment[bs]=KOffice alat
+Comment[cs]=Nástroj KOffice
+Comment[da]=KOffice-værktøj
+Comment[de]=KOffice-Dienstprogramm
+Comment[el]=Εργαλείο του KOffice
+Comment[eo]=KOficejo-ilo
+Comment[es]=Herramienta de KOffice
+Comment[fr]=Outil KOffice
+Comment[he]=כלי של KOffice
+Comment[hu]=KOffice eszköz
+Comment[is]=KOffice tól
+Comment[it]=Strumento di KOffice
+Comment[ja]=KOfficeツール
+Comment[lt]=KOffice įrankis
+Comment[lv]=KOffice Rīks
+Comment[nl]=KOffice Hulpprogramma
+Comment[pl]=Narzędzie KOffice
+Comment[pt]=Ferramenta do KOffice
+Comment[pt_BR]=Ferramenta do KOffice
+Comment[sk]=Nástroj Koffice
+Comment[sl]=Orodje KOffice
+Comment[sv]=Koffice-verktyg
+Comment[uk]=Засіб KOffice
+Comment[ven]=Tshishumiswa tsha ofisi ya K
+Comment[vi]=Công cụ KOffice
+Comment[xh]=Isixhobo se KOffice
+Comment[zu]=Ithuluzi le KOffice
+
+[PropertyDef::Commands]
+Type=QStringList
+
+[PropertyDef::DataType]
+Type=QString
+
+[PropertyDef::DataMimeTypes]
+Type=QStringList
+
+[PropertyDef::ExcludeFrom]
+Type=QStringList

@@ -1,0 +1,65 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=KOfficePlugin
+Comment=KOffice Plugin
+Comment[af]=Koffice Inplak
+Comment[ar]=ملحق لKOffice
+Comment[az]=KOffice Əlavəsi
+Comment[be]=Дапаўненьне KOffice
+Comment[bg]=Plugin за KOffice
+Comment[br]=Lugant KOffice
+Comment[bs]=KOffice dodatak
+Comment[ca]=Endollat de KOffice
+Comment[cs]=KOffice plugin
+Comment[da]=KOffice-indstik
+Comment[de]=KOffice-Plugin
+Comment[el]=Πρόσθετο του KOffice
+Comment[eo]=instalebla komponento por KOficejo
+Comment[es]=Plugin de KOffice
+Comment[et]=KOffice plugin
+Comment[eu]=KOffice Plugina
+Comment[fi]=KOffice-sovelma
+Comment[fr]=Module externe de KOffice
+Comment[gl]=Plugin de KOffice
+Comment[he]=תוסף של KOffice
+Comment[hr]=KOffice dodatak
+Comment[hu]=KOffice bővítőmodul
+Comment[id]=Plugin KOffice
+Comment[is]=Viðbót f. KDE-vöndulinn
+Comment[it]=Plugin di KOffice
+Comment[ja]=KOfficeプラグイン
+Comment[ko]=K사무용 플러그인
+Comment[lt]=KOffice Priedas
+Comment[lv]=KOffice Iespraudnis
+Comment[mk]=KOffice плагин
+Comment[mt]=Plugin KOffice
+Comment[nb]=KOffice-modul
+Comment[nn]=KOffice-modul
+Comment[oc]=Branquament de KOffice
+Comment[pl]=Wtyczka KOffice
+Comment[pt]=Módulo para o KOffice
+Comment[pt_BR]=Plug-in do KOffice
+Comment[ro]=Modul KOffice
+Comment[ru]=Плагин KOffice
+Comment[sk]=Zásuvný modul Koffice
+Comment[sl]=Vstavek za KOffice
+Comment[sr]=Dodatak za KOffice
+Comment[sv]=Insticksprogram till Koffice
+Comment[ta]=KOffice ¦ºÕ¸ø
+Comment[th]=ปลั๊กอินของ KOffice
+Comment[tr]=KOffice Ek Yazılımı
+Comment[uk]=Додаток KOffice
+Comment[ven]=Plugin ya ofisi ya K
+Comment[vi]=Plugin cho KOffice
+Comment[xh]=Iplagi efakiweyo ye KOffice
+Comment[xx]=xx
+Comment[zh_CN]=KOffice 插件
+Comment[zh_TW]=KOffice 外掛程式
+Comment[zu]=Iplagi efakiweyo ye KOffice
+
+[PropertyDef::MenuEntries]
+Type=QStringList
+
+[PropertyDef::ToolBarEntries]
+Type=QStringList
+

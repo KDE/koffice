@@ -1,0 +1,68 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=KOfficeFilter
+Comment=KOffice Filter
+Comment[af]=Koffice Filter
+Comment[ar]=فلتر KOffice
+Comment[az]=KOffice Süzgəci
+Comment[be]=Фільтар KOffice
+Comment[bg]=Филтър на KOffice
+Comment[br]=Sil KOffice
+Comment[bs]=KOffice filter
+Comment[ca]=Filtre KOffice
+Comment[cs]=Filtr KOffice
+Comment[da]=KOffice-filter
+Comment[de]=KOffice-Filter
+Comment[el]=Φίλτρο του KOffice
+Comment[eo]=KOficejo-filtrilo
+Comment[es]=Filtro de KOffice
+Comment[et]=KOffice filter
+Comment[eu]=KOffice Iragazkia
+Comment[fi]=KOffice-suodin
+Comment[fr]=Filtre KOffice
+Comment[gl]=Filtro de KOffice
+Comment[he]=מסנן של KOffice
+Comment[hr]=KOffice filter
+Comment[hu]=KOffice szűrő
+Comment[id]=Filter KOffice
+Comment[is]=Sía f. KDE-vöndulinn
+Comment[it]=Filtro di KOffice
+Comment[ja]=KOfficeフィルター
+Comment[ko]=K사무용 거르개
+Comment[lt]=KOffice Filtras
+Comment[lv]=KOffice Filtrs
+Comment[mk]=KOffice филтер
+Comment[mt]=Filtru KOffice
+Comment[nb]=KOffice-filter
+Comment[nn]=KOffice-filter
+Comment[oc]=Filtre KOffice
+Comment[pl]=Filtr KOffice
+Comment[pt]=Filtro do KOffice
+Comment[pt_BR]=Filtro do KOffice
+Comment[ro]=Filtru KOffice
+Comment[ru]=Фильтр KOffice
+Comment[sk]=Filter Koffice
+Comment[sl]=Filter za KOffice
+Comment[sr]=Filter za KOffice
+Comment[sv]=Koffice-filter
+Comment[ta]=KOffice ÅÊ¸ðÊ
+Comment[th]=ตัวกรองของ KOffice
+Comment[tr]=KOffice Süzgeci
+Comment[uk]=Фільтр KOffice
+Comment[ven]=Filithara ya ofisi ya K
+Comment[vi]=Trình lọc KOffice
+Comment[xh]=Icebo lokucoca ulwelo le KOffice
+Comment[xx]=xx
+Comment[zh_CN]=KOffice 过滤程序
+Comment[zh_TW]=KOffice 過濾程式
+Comment[zu]=Icebo lokuhlaziya ifayela yenimininigwane i KOffice
+
+[PropertyDef::Import]
+Type=QStringList
+
+[PropertyDef::Export]
+Type=QStringList
+
+[PropertyDef::Implemented]
+Type=QString
+
