@@ -1,6 +1,11 @@
 Changes since 1.2
 =================
 Bugfixes:
+- Fix display of unhided rows/columns for loaded files
+
+Changes since 1.2
+=================
+Bugfixes:
 - Fix for crashes when working with long text which overlaps several cells
   or when working with merged cells.
 - Fix popup menue, when row is selected and right click on column header.

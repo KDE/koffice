@@ -2017,6 +2017,7 @@ void RowLayout::setHide( bool _hide )
 	    // Rise maximum size by height of row
 	    m_bHide=_hide; //unhide must be set before we request the height
 	    m_pTable->adjustSizeMaxY ( height() );
+            m_pTable->emit_updateRow( this, m_iRow );
 	}
     }
 }
@@ -2254,9 +2255,12 @@ void ColumnLayout::setHide( bool _hide )
 	    m_bHide=_hide; //hide must be set after we requested the width
 	}
 	else
+        {
 	    // Rise maximum size by width of column
 	    m_bHide=_hide; //unhide must be set before we request the width
 	    m_pTable->adjustSizeMaxX ( width() );
+            m_pTable->emit_updateColumn( this, m_iColumn );
+        }
     }
 }
 
