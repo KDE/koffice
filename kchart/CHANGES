@@ -3,6 +3,7 @@ Changes since KChart 1.2.1
 
 Added 2 missing chart icons to the wizard
 Disabled non functional axis labels in wizard
+Fixed scaling of y axis
 
 Changes since KChart 1.2
 ------------------------
