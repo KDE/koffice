@@ -7723,7 +7723,7 @@ void KSpreadTable::updatePrintRepeatColumnsWidth()
 
 void KSpreadTable::updatePrintRepeatRowsHeight()
 {
-    m_dPrintRepeatRowsHeight += 0.0;
+    m_dPrintRepeatRowsHeight = 0.0;
     if ( m_printRepeatRows.first != 0 )
     {
         for ( int i = m_printRepeatRows.first; i <= m_printRepeatRows.second; i++)
