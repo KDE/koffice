@@ -21,28 +21,16 @@
 #include <ctype.h>
 #include <math.h>
 
-#include <qpainter.h>
 #include <qapplication.h>
-#include <qpointarray.h>
 #include <qsimplerichtext.h>
 #include <qpopupmenu.h>
-#include <qdom.h>
-#include <qstyle.h>
 
-#include "kspread_table.h"
 #include "kspread_canvas.h"
 #include "kspread_map.h"
-#include "kspread_cell.h"
-#include "kspread_interpreter.h"
 #include "kspread_doc.h"
 #include "kspread_util.h"
-#include "kspread_factory.h"
 
-#include <kinstance.h>
-#include <klocale.h>
-#include <kglobal.h>
 #include <kmessagebox.h>
-#include <koscript_parsenode.h>
 
 #include <kdebug.h>
 
@@ -2287,20 +2275,29 @@ void KSpreadCell::paintCell( const QRect& _rect, QPainter &_painter,
      */
     if ( m_style == KSpreadCell::ST_Button )
     {
+#ifdef __GNUC__
+#warning "Disabled for now :} (Werner)"
+#endif
+#if 0
         QBrush fill( Qt::lightGray );
-        QApplication::style().drawButton( &_painter, _tx + 1, _ty + 1,
-                                          w2 - 1, h2 - 1,
-                                          defaultColorGroup, selected, &fill );
+        QApplication::style().drawControl( QStyle::CE_PushButton, &_painter,this,
+				           QRect( _tx + 1, _ty + 1, w2 - 1, h2 - 1 ),
+                                           defaultColorGroup ); //, selected, &fill );
+#endif
     }
     /**
      * Modification for drawing the combo box
      */
     else if ( m_style == KSpreadCell::ST_Select )
     {
+#ifdef __GNUC__
+#warning "Disabled for now :} (Werner)"
+#endif
+#if 0
       QApplication::style().drawComboButton(  &_painter, _tx + 1, _ty + 1,
                                                 w2 - 1, h2 - 1,
 						defaultColorGroup, selected );
-
+#endif
     }
 
     if(_painter.device()->isExtDev()&&!textColorPrint.isValid())

@@ -1,18 +1,13 @@
 // -*- mode: c++; c-basic-offset: 4 -*-
 #include "kspread_canvas.h"
-#include "kspread_table.h"
-#include "kspread_cell.h"
 #include "kspread_util.h"
 #include "kspread_editors.h"
 #include "kspread_map.h"
 #include "kspread_undo.h"
 
-#include "kspread_view.h"
 #include "kspread_doc.h"
 
-#include "kspread_tabbar.h"
 #include <qapplication.h>
-#include <klocale.h>
 #include <kmessagebox.h>
 #include <kcursor.h>
 #include <kdebug.h>
@@ -21,7 +16,9 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <qlabel.h>
-#include <qpainter.h>
+#include <qdrawutil.h>
+#include <qbutton.h>
+#include <qapplication.h>
 
 KSpreadLocationEditWidget::KSpreadLocationEditWidget( QWidget * _parent, KSpreadView * _view )
   : QLineEdit( _parent, "KSpreadLocationEditWidget" )
@@ -1432,23 +1429,23 @@ void KSpreadCanvas::keyPressEvent ( QKeyEvent * _ev )
 
     if( !((( _ev->state() & ShiftButton ) == ShiftButton)&&( _ev->state() & ControlButton ) == ControlButton) && (_ev->state() != Qt::ControlButton) )
 	{
-	    MoveTo tmpMoveTo=m_pView->doc()->getMoveToValue();
+	    KSpread::MoveTo tmpMoveTo=(KSpread::MoveTo)m_pView->doc()->getMoveToValue();
 	    //if shift Button clicked inverse move direction
 	    if(_ev->state()==Qt::ShiftButton)
 		{
 		    switch( tmpMoveTo)
 			{
-			case Bottom:
-			    tmpMoveTo=Top;
+			case KSpread::Bottom:
+			    tmpMoveTo=KSpread::Top;
 			    break;
-			case Top:
-			    tmpMoveTo=Bottom;
+			case KSpread::Top:
+			    tmpMoveTo=KSpread::Bottom;
 			    break;
-			case Left:
-			    tmpMoveTo=Right;
+			case KSpread::Left:
+			    tmpMoveTo=KSpread::Right;
 			    break;
-			case Right:
-			    tmpMoveTo=Left;
+			case KSpread::Right:
+			    tmpMoveTo=KSpread::Left;
 			}
 		}
 //if( _ev->state() != Qt::ControlButton ){
@@ -1458,7 +1455,7 @@ void KSpreadCanvas::keyPressEvent ( QKeyEvent * _ev )
       case Key_Enter:
 	  switch( tmpMoveTo)
 	      {
-	      case Bottom :
+	      case KSpread::Bottom :
 		  {
 		      if ( !m_bChoose && markerRow() == 0xFFFF )
 			  return;
@@ -1486,7 +1483,7 @@ void KSpreadCanvas::keyPressEvent ( QKeyEvent * _ev )
 			  }
 		      return;
 		  }
-	      case Top :
+	      case KSpread::Top :
 		  {
 		      /*if ( !m_bChoose && markerRow() == 1 )
 			return;*/
@@ -1514,7 +1511,7 @@ void KSpreadCanvas::keyPressEvent ( QKeyEvent * _ev )
 			  }
 		      return;
 		  }
-	      case Left :
+	      case KSpread::Left :
 		  {
 		      /*if ( !m_bChoose && markerColumn() == 1 )
 			return;*/
@@ -1545,7 +1542,7 @@ void KSpreadCanvas::keyPressEvent ( QKeyEvent * _ev )
 			  }
 		      return;
 		  }
-	      case Right :
+	      case KSpread::Right :
 		  {
 		      /*if ( !m_bChoose && markerColumn() == 26*26)
 			return;*/

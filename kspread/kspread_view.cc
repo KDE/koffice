@@ -35,6 +35,7 @@
 #include <qbutton.h>
 #include <qpopupmenu.h>
 #include <qdir.h>
+#include <qcursor.h>
 
 #include <kapp.h>
 #include <klocale.h>
@@ -496,7 +497,7 @@ void KSpreadView::initConfig()
         m_pDoc->setShowColHeader(config->readBoolEntry("Column Header",true));
         m_pDoc->setShowRowHeader(config->readBoolEntry("Row Header",true));
         m_pDoc->setCompletionMode((KGlobalSettings::Completion)config->readNumEntry("Completion Mode",(int)(KGlobalSettings::CompletionAuto)));
-        m_pDoc->setMoveToValue((MoveTo)config->readNumEntry("Move",(int)(Bottom)));
+        m_pDoc->setMoveToValue((KSpread::MoveTo)config->readNumEntry("Move",(int)(Bottom)));
         m_pDoc->setIndentValue(config->readNumEntry( "Indent",10 ) );
         m_pDoc->setTypeOfCalc((MethodOfCalc)config->readNumEntry("Method of Calc",(int)(SumOfNumber)));
 	m_pDoc->setShowTabBar(config->readBoolEntry("Tabbar",true));
