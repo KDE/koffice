@@ -2,10 +2,10 @@ INCLUDES  = $(KOFFICE_INCLUDES) -I$(srcdir)/kdchart -I$(top_srcdir)/interfaces -
 
 ## The part
 kde_module_LTLIBRARIES = libkchartpart.la
-libkchartpart_la_SOURCES = kchart_part.cc \
+libkchartpart_la_SOURCES = qttableview.cpp kchart_part.cc \
 	kchart_view.cc kchart_factory.cc \
 	kchartBarConfigDialog.cc \
-	kchartBarConfigPage.cc \
+       	kchartBarConfigPage.cc \
 	kchartColorConfigPage.cc \
 	kchartParameterConfigPage.cc \
 	kchartParameter3dConfigPage.cc \
@@ -31,7 +31,7 @@ libkchartpart_la_SOURCES = kchart_part.cc \
 	parser.cc \
 	sheet.cc \
 	sheetdlg.cc \
-	table.cc  kchartLineSubTypeChartPage.cc 
+	table.cc  kchartLineSubTypeChartPage.cc
 
 libkchartpart_la_LDFLAGS = $(KDE_PLUGIN)
 libkchartpart_la_LIBADD = $(top_builddir)/interfaces/libkochart.la \
