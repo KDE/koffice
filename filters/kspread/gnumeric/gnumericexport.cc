@@ -391,6 +391,12 @@ KoFilter::ConversionStatus GNUMERICExport::convert( const QCString& from, const 
 	 sheet = gnumeric_doc.createElement("gmr:Sheet");
 	 sheets.appendChild(sheet);
 
+        sheet.setAttribute("DisplayFormulas", table->getShowFormula() ? "true" : "false" );
+        sheet.setAttribute("HideZero", table->getHideZero()? "true" : "false");
+        sheet.setAttribute("HideGrid", !table->getShowGrid()? "true" : "false");
+        sheet.setAttribute("HideColHeader", ( !ksdoc->showColumnHeader() ? "true" : "false" ));
+        sheet.setAttribute("HideRowHeader", ( !ksdoc->showRowHeader()? "true" : "false" ));
+	 
 	 tmp = gnumeric_doc.createElement("gmr:Name");
 	 tmp.appendChild(gnumeric_doc.createTextNode(table->tableName()));
 
