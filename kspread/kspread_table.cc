@@ -5296,6 +5296,10 @@ KSpreadTable::~KSpreadTable()
     delete m_pWidget;
 
     delete m_defaultLayout;
+    delete m_pDefaultCell;
+    delete m_pDefaultRowLayout;
+    delete m_pDefaultColumnLayout;
+
 }
 
 void KSpreadTable::enableScrollBarUpdates( bool _enable )
