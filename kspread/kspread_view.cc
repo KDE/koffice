@@ -780,7 +780,7 @@ void KSpreadView::autoSum()
 void KSpreadView::oszilloscope()
 {
     QDialog* dlg = new KSpreadOsziDlg( this );
-    dlg->show();
+    dlg->exec();
 }
 */
 
@@ -914,7 +914,7 @@ void KSpreadView::showColumn()
     if ( !m_pTable )
         return;
     KSpreadShowColRow dlg( this,"showCol",KSpreadShowColRow::Column);
-    dlg.show();
+    dlg.exec();
 
 }
 
@@ -947,7 +947,7 @@ void KSpreadView::showRow()
     if ( !m_pTable )
         return;
     KSpreadShowColRow dlg( this,"showRow",KSpreadShowColRow::Row);
-    dlg.show();
+    dlg.exec();
 
 }
 
@@ -1022,7 +1022,7 @@ void KSpreadView::insertMathExpr()
     if ( m_pTable == 0L )
         return;
     KSpreadDlgFormula *dlg=new KSpreadDlgFormula( this, "Formula Editor" );
-    dlg->show();
+    dlg->exec();
     // #### Is the dialog deleted when it's closed ? (David)
     // Torben thinks that not.
 }
@@ -1039,7 +1039,7 @@ void KSpreadView::formulaSelection( const QString &_math )
     }
 
     KSpreadDlgFormula *dlg=new KSpreadDlgFormula( this, "Formula Editor",_math );
-    dlg->show();
+    dlg->exec();
 }
 
 void KSpreadView::fontSizeSelected( int _size )
@@ -1145,7 +1145,7 @@ void KSpreadView::editGlobalScripts()
 {
   if ( KSpreadView::m_pGlobalScriptsDialog == 0L )
     KSpreadView::m_pGlobalScriptsDialog = new KSpreadScripts();
-  KSpreadView::m_pGlobalScriptsDialog->show();
+  KSpreadView::m_pGlobalScriptsDialog->exec();
   KSpreadView::m_pGlobalScriptsDialog->raise();
 }
 
@@ -1403,7 +1403,7 @@ void KSpreadView::showTable()
     if ( !m_pTable )
         return;
     KSpreadshow dlg( this, "Table show");
-    dlg.show();
+    dlg.exec();
 }
 
 void KSpreadView::copySelection()
@@ -1533,7 +1533,7 @@ void KSpreadView::consolidate()
         m_pCanvas->deleteEditor( true ); // save changes
     }
     KSpreadConsolidate *dlg=new KSpreadConsolidate( this, "Consolidate" );
-    dlg->show();
+    dlg->exec();
 }
 
 void KSpreadView::sortList()
@@ -1604,7 +1604,7 @@ void KSpreadView::conditional()
                 rect.setCoords(  m_pCanvas->markerColumn(), m_pCanvas->markerRow(),m_pCanvas->markerColumn(), m_pCanvas->markerRow());
            }
          KSpreadconditional dlg(this,"conditional",rect);
-         dlg.show();
+         dlg.exec();
          }
 
 }
@@ -1625,7 +1625,7 @@ void KSpreadView::validity()
                 rect.setCoords(  m_pCanvas->markerColumn(), m_pCanvas->markerRow(),m_pCanvas->markerColumn(), m_pCanvas->markerRow());
            }
          KSpreadDlgValidity dlg( this,"validity",rect);
-         dlg.show();
+         dlg.exec();
          }
 }
 
@@ -2484,13 +2484,13 @@ void KSpreadView::slotInsertCellCopy()
 void KSpreadView::setAreaName()
 {
     KSpreadarea dlg( this, "Area Name",QPoint(m_pCanvas->markerColumn(), m_pCanvas->markerRow()) );
-    dlg.show();
+    dlg.exec();
 }
 
 void KSpreadView::showAreaName()
 {
     KSpreadreference dlg( this, "Show area" );
-    dlg.show();
+    dlg.exec();
 }
 
 void KSpreadView::resizeRow()
@@ -2501,7 +2501,7 @@ void KSpreadView::resizeRow()
     else
         {
         KSpreadresize2 dlg( this, "Resize row", KSpreadresize2::resize_row );
-        dlg.show();
+        dlg.exec();
         }
 }
 
@@ -2513,7 +2513,7 @@ void KSpreadView::resizeColumn()
     else
         {
         KSpreadresize2 dlg( this, "Resize column", KSpreadresize2::resize_column );
-        dlg.show();
+        dlg.exec();
         }
 }
 
