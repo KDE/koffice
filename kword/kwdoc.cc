@@ -99,6 +99,7 @@ KWChild::~KWChild()
 
 KoDocument *KWChild::hitTest( const QPoint &, const QWMatrix & )
 {
+  // Disable part-manager magic for part activation, KWord does it itself.
   return 0L;
 }
 
@@ -282,6 +283,12 @@ void KWDocument::setZoomAndResolution( int zoom, int dpiX, int dpiY, bool update
 {
     KoZoomHandler::setZoomAndResolution( zoom, dpiX, dpiY, updateViews, forPrint );
     newZoomAndResolution( updateViews, forPrint );
+}
+
+KoDocument *KWDocument::hitTest( const QPoint &pos, const QWMatrix &matrix )
+{
+    // Disable part-manager magic for part activation, KWord does it itself.
+    return 0L;
 }
 
 void KWDocument::newZoomAndResolution( bool updateViews, bool forPrint )
