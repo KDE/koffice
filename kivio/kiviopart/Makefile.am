@@ -68,7 +68,6 @@ EXTRA_DIST = \
 		kivio_page.cpp\
 		kivio_page.h\
 		kivio.desktop\
-		x-kivio.desktop\
 		kivio.rc\
 		kivio_dlg_pageshow.cpp\
 		kivio_dlg_pageshow.h\
@@ -142,9 +141,6 @@ dummy.cpp:
 
 kdelnk_DATA = kivio.desktop
 kdelnkdir = $(kde_appsdir)/Office
-
-kdemime_DATA = x-kivio.desktop
-kdemimedir = $(kde_mimedir)/application
 
 rc_DATA = kivio.rc
 rcdir = $(kde_datadir)/kivio

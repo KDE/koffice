@@ -9,9 +9,6 @@ messages: rc.cpp
 kdelnk_DATA = killustrator.desktop kontour.desktop
 kdelnkdir = $(kde_appsdir)/Office
 
-kdemime_DATA = x-killustrator.desktop x-kontour.desktop
-kdemimedir = $(kde_mimedir)/application
-
 rcdir = $(kde_datadir)/kontour
 rc_DATA = KIllustrator.rc
 
