@@ -1030,6 +1030,8 @@ void QTextCursor::gotoWordLeft()
     tmpIndex = -1;
     QTextString *s = string->string();
     bool allowSame = FALSE;
+    if ( idx == ( (int)s->length()-1 ) )
+        return;
     for ( int i = idx; i >= 0; --i ) {
 	if ( s->at( i ).c.isSpace() || s->at( i ).c == '\t' || s->at( i ).c == '.' ||
 	     s->at( i ).c == ',' || s->at( i ).c == ':' || s->at( i ).c == ';' ) {
@@ -1052,19 +1054,21 @@ void QTextCursor::gotoWordRight()
     QTextString *s = string->string();
     bool allowSame = FALSE;
     for ( int i = idx; i < (int)s->length(); ++i ) {
-	if ( s->at( i ).c.isSpace() || s->at( i ).c == '\t' || s->at( i ).c == '.' ||
-	     s->at( i ).c == ',' || s->at( i ).c == ':' || s->at( i ).c == ';' ) {
+       if ( ! ( s->at( i ).c.isSpace() || s->at( i ).c == '\t' || s->at( i ).c == '.' ||
+            s->at( i ).c == ',' || s->at( i ).c == ':' || s->at( i ).c == ';' ) ) {
 	    if ( !allowSame )
 		continue;
 	    idx = i;
 	    return;
 	}
-	if ( !allowSame && !( s->at( i ).c.isSpace() || s->at( i ).c == '\t' || s->at( i ).c == '.' ||
+       if ( !allowSame && ( s->at( i ).c.isSpace() || s->at( i ).c == '\t' || s->at( i ).c == '.' ||
 			      s->at( i ).c == ',' || s->at( i ).c == ':' || s->at( i ).c == ';'  ) )
 	    allowSame = TRUE;
     }
 
-    if ( string->next() ) {
+    if ( idx < ((int)s->length()-1) ) {
+        gotoLineEnd();
+    } else if ( string->next() ) {
 	string = string->next();
 	while ( !string->isVisible() )
 	    string = string->next();
