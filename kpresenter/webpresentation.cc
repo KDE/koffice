@@ -281,7 +281,7 @@ void KPWebPresentation::initCreation( KProgress *progressBar )
         desturl = path;
         desturl.addPath( "/pics/" + filename );
 #if KDE_IS_VERSION(3,1,90 )
-       KIO::NetAccess::file_move( srcurl, desturl, -1, true /*overwrite*/);
+       KIO::NetAccess::file_copy( srcurl, desturl, -1, true /*overwrite*/);
 #else
        KIO::NetAccess::del( desturl ); // Copy does not remove existing destination file
        KIO::NetAccess::copy( srcurl, desturl );
