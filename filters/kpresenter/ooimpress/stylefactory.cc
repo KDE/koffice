@@ -1011,9 +1011,29 @@ GraphicStyle::GraphicStyle( StyleFactory * styleFactory, QDomElement & e, const 
     QDomNode textObject = e.namedItem( "TEXTOBJ" );
     if ( !textObject.isNull() )
     {
-        m_textAlignment = textObject.toElement().attribute("verticalAlign");
-        if ( m_textAlignment == "center" )
-            m_textAlignment = "middle";
+        QDomElement textObjectElement = textObject.toElement();
+        if ( textObjectElement.hasAttribute( "verticalAlign" ) )
+        {
+            m_textAlignment = textObjectElement.attribute("verticalAlign");
+            if ( m_textAlignment == "center" )
+                m_textAlignment = "middle";
+        }
+        if ( textObjectElement.hasAttribute( "bleftpt" ) )
+        {
+            m_textMarginLeft = QString( "%1pt" ).arg( textObjectElement.attribute( "bleftpt" ) );
+        }
+        if ( textObjectElement.hasAttribute( "bbottompt" ) )
+        {
+            m_textMarginBottom = QString( "%1pt" ).arg( textObjectElement.attribute( "bbottompt" ) );
+        }
+        if ( textObjectElement.hasAttribute( "btoppt" ) )
+        {
+            m_textMarginTop = QString( "%1pt" ).arg( textObjectElement.attribute( "btoppt" ) );
+        }
+        if ( textObjectElement.hasAttribute( "brightpt" ) )
+        {
+            m_textMarginRight = QString( "%1pt" ).arg( textObjectElement.attribute( "brightpt" ) );
+        }
     }
     kdDebug()<<" alignment :"<<m_textAlignment<<endl;
 
@@ -1261,7 +1281,16 @@ void GraphicStyle::toXML( QDomDocument & doc, QDomElement & e ) const
     if ( m_transparency != QString::null )
         properties.setAttribute( "draw:transparency", m_transparency );
 
-	if ( m_textAlignment != QString::null )
+    if ( m_textMarginLeft != QString::null )
+        properties.setAttribute( "fo:padding-left", m_textMarginLeft );
+    if ( m_textMarginBottom != QString::null )
+        properties.setAttribute( "fo:padding-bottom", m_textMarginBottom );
+    if ( m_textMarginTop != QString::null )
+        properties.setAttribute( "fo:padding-top", m_textMarginTop );
+    if ( m_textMarginRight != QString::null )
+        properties.setAttribute( "fo:padding-right", m_textMarginRight );
+
+    if ( m_textAlignment != QString::null )
         properties.setAttribute( "draw:textarea-vertical-align", m_textAlignment );
     style.appendChild( properties );
     e.appendChild( style );
@@ -1302,7 +1331,11 @@ bool GraphicStyle::operator==( const GraphicStyle & graphicStyle ) const
              m_marker_end_width == graphicStyle.m_marker_end_width &&
              m_fill_gradient_name == graphicStyle.m_fill_gradient_name &&
              m_transparency == graphicStyle.m_transparency &&
-			 m_textAlignment == graphicStyle.m_textAlignment );
+             m_textMarginBottom == graphicStyle.m_textMarginBottom &&
+             m_textMarginTop == graphicStyle.m_textMarginTop &&
+             m_textMarginLeft == graphicStyle.m_textMarginLeft &&
+             m_textMarginRight == graphicStyle.m_textMarginRight &&
+	     m_textAlignment == graphicStyle.m_textAlignment );
 }
 
 ParagraphStyle::ParagraphStyle( QDomElement & e, const uint index )
