@@ -60,6 +60,7 @@
 #include <kglobal.h>
 #include <kstddirs.h>
 #include <kmessagebox.h>
+#include <kdebug.h>
 
 #include <koTemplateChooseDia.h>
 #include <koRuler.h>
