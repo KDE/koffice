@@ -427,7 +427,7 @@ void KPresenterView::editFind()
 		 this, SLOT( search() ) );
     }
     searchDialog->lineEdit->setFocus();
-    searchDialog->show();
+    searchDialog->exec();
     searchDialog->raise();
 }
 
@@ -696,7 +696,7 @@ void KPresenterView::extraPenBrush()
     styleDia->setCaption( i18n( "KPresenter - Pen and Brush" ) );
     QObject::connect( styleDia, SIGNAL( styleOk() ), this, SLOT( styleOk() ) );
     page->setToolEditMode( TEM_MOUSE );
-    styleDia->show();
+    styleDia->exec();
 }
 
 /*===============================================================*/
@@ -719,7 +719,7 @@ void KPresenterView::extraConfigPie()
     confPieDia->setCaption( i18n( "KPresenter - Configure Pie/Arc/Chord" ) );
     QObject::connect( confPieDia, SIGNAL( confPieDiaOk() ), this, SLOT( confPieOk() ) );
     page->setToolEditMode( TEM_MOUSE );
-    confPieDia->show();
+    confPieDia->exec();
 }
 
 /*===============================================================*/
@@ -739,7 +739,7 @@ void KPresenterView::extraConfigRect()
     confRectDia->setCaption( i18n( "KPresenter - Configure Rectangle" ) );
     QObject::connect( confRectDia, SIGNAL( confRectDiaOk() ), this, SLOT( confRectOk() ) );
     page->setToolEditMode( TEM_MOUSE );
-    confRectDia->show();
+    confRectDia->exec();
 }
 
 /*===============================================================*/
@@ -774,7 +774,7 @@ void KPresenterView::extraRotate()
 	QObject::connect( rotateDia, SIGNAL( rotateDiaOk() ), this, SLOT( rotateOk() ) );
 	rotateDia->setAngle( m_pKPresenterDoc->getSelectedObj()->getAngle() );
 	page->setToolEditMode( TEM_MOUSE );
-	rotateDia->show();
+	rotateDia->exec();
     }
 }
 
@@ -798,7 +798,7 @@ void KPresenterView::extraShadow()
 	shadowDia->setShadowDistance( m_pKPresenterDoc->getSelectedObj()->getShadowDistance() );
 	shadowDia->setShadowColor( m_pKPresenterDoc->getSelectedObj()->getShadowColor() );
 	page->setToolEditMode( TEM_MOUSE );
-	shadowDia->show();
+	shadowDia->exec();
     }
 }
 
@@ -834,7 +834,7 @@ void KPresenterView::extraBackground()
 			   m_pKPresenterDoc );
     backDia->setCaption( i18n( "KPresenter - Page Background" ) );
     QObject::connect( backDia, SIGNAL( backOk( bool ) ), this, SLOT( backOk( bool ) ) );
-    backDia->show();
+    backDia->exec();
 }
 
 /*===============================================================*/
@@ -856,7 +856,7 @@ void KPresenterView::extraLayout()
 void KPresenterView::extraConfigure()
 {
     KPConfig configDia( this );
-    configDia.show();
+    configDia.exec();
 }
 /*===============================================================*/
 void KPresenterView::extraCreateTemplate()
@@ -983,7 +983,7 @@ void KPresenterView::screenConfigPages()
 			       kPresenterDoc()->getPresSpeed() );
     pgConfDia->setCaption( i18n( "KPresenter - Page Configuration for Screen Presentations" ) );
     QObject::connect( pgConfDia, SIGNAL( pgConfDiaOk() ), this, SLOT( pgConfOk() ) );
-    pgConfDia->show();
+    pgConfDia->exec();
 }
 
 /*========================== screen presStructView  =============*/
