@@ -1437,7 +1437,7 @@ KoFilter::ConversionStatus GNUMERICFilter::convert( const QCString & from, const
           selTable = table;
 
         QDomElement name = sheet.namedItem( "gmr:Name" ).toElement();
-
+		QDomElement sheetElement = sheet.toElement();
         if ( !name.isNull() )
           table->setTableName( name.text(), false, false );
         else
@@ -1450,7 +1450,7 @@ KoFilter::ConversionStatus GNUMERICFilter::convert( const QCString & from, const
         if ( sheetElement.hasAttribute( "HideGrid" ) )
             table->setShowGrid( sheetElement.attribute( "HideGrid" )=="false" );
         if ( sheetElement.hasAttribute( "HideColHeader" ) )
-            ksdoc->setShowColumnHeader( sheetElement.attribute( "HideColHeader" )=="false" );
+            ksdoc->setShowColHeader( sheetElement.attribute( "HideColHeader" )=="false" );
         if ( sheetElement.hasAttribute( "HideRowHeader" ) )
             ksdoc->setShowRowHeader( sheetElement.attribute( "HideRowHeader" )=="false" );
 
