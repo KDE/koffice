@@ -95,7 +95,7 @@ void QTextDocument::setSelectionStart( int id, QTextCursor *cursor )
     selections[ id ] = sel;
 }
 
-QTextParag *QTextDocument::paragAt( int i ) const
+Qt3::QTextParag *QTextDocument::paragAt( int i ) const
 {
     QTextParag *s = fParag;
     while ( s ) {
@@ -421,7 +421,7 @@ QString QTextString::toReverseString() const
     return s;
 }
 
-void QTextParag::setSelection( int id, int start, int end )
+void Qt3::QTextParag::setSelection( int id, int start, int end )
 {
     QMap<int, QTextParagSelection>::ConstIterator it = selections.find( id );
     if ( it != selections.end() ) {
@@ -436,7 +436,7 @@ void QTextParag::setSelection( int id, int start, int end )
     setChanged( TRUE, TRUE );
 }
 
-void QTextParag::removeSelection( int id )
+void Qt3::QTextParag::removeSelection( int id )
 {
     if ( !hasSelection( id ) )
 	return;
@@ -444,7 +444,7 @@ void QTextParag::removeSelection( int id )
     setChanged( TRUE, TRUE );
 }
 
-int QTextParag::selectionStart( int id ) const
+int Qt3::QTextParag::selectionStart( int id ) const
 {
     QMap<int, QTextParagSelection>::ConstIterator it = selections.find( id );
     if ( it == selections.end() )
@@ -452,7 +452,7 @@ int QTextParag::selectionStart( int id ) const
     return ( *it ).start;
 }
 
-int QTextParag::selectionEnd( int id ) const
+int Qt3::QTextParag::selectionEnd( int id ) const
 {
     QMap<int, QTextParagSelection>::ConstIterator it = selections.find( id );
     if ( it == selections.end() )
@@ -461,7 +461,7 @@ int QTextParag::selectionEnd( int id ) const
 }
 
 
-bool QTextParag::hasSelection( int id ) const
+bool Qt3::QTextParag::hasSelection( int id ) const
 {
     QMap<int, QTextParagSelection>::ConstIterator it = selections.find( id );
     if ( it == selections.end() )
@@ -469,7 +469,7 @@ bool QTextParag::hasSelection( int id ) const
     return ( *it ).start != ( *it ).end || length() == 1;
 }
 
-bool QTextParag::fullSelected( int id ) const
+bool Qt3::QTextParag::fullSelected( int id ) const
 {
     QMap<int, QTextParagSelection>::ConstIterator it = selections.find( id );
     if ( it == selections.end() )
@@ -478,7 +478,7 @@ bool QTextParag::fullSelected( int id ) const
 }
 
 
-int QTextParag::lineY( int l ) const
+int Qt3::QTextParag::lineY( int l ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
 	qWarning( "QTextParag::lineY: line %d out of range!", l );
@@ -494,7 +494,7 @@ int QTextParag::lineY( int l ) const
     return ( *it )->y;
 }
 
-int QTextParag::lineBaseLine( int l ) const
+int Qt3::QTextParag::lineBaseLine( int l ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
 	qWarning( "QTextParag::lineBaseLine: line %d out of range!", l );
@@ -510,7 +510,7 @@ int QTextParag::lineBaseLine( int l ) const
     return ( *it )->baseLine;
 }
 
-int QTextParag::lineHeight( int l ) const
+int Qt3::QTextParag::lineHeight( int l ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
 	qWarning( "QTextParag::lineHeight: line %d out of range!", l );
@@ -526,7 +526,7 @@ int QTextParag::lineHeight( int l ) const
     return ( *it )->h;
 }
 
-void QTextParag::lineInfo( int l, int &y, int &h, int &bl ) const
+void Qt3::QTextParag::lineInfo( int l, int &y, int &h, int &bl ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
         qWarning( "QTextParag::lineInfo: line %d out of range!", l );
@@ -548,7 +548,7 @@ void QTextParag::lineInfo( int l, int &y, int &h, int &bl ) const
     bl = ( *it )->baseLine;
 }
 
-int QTextParag::alignment() const
+int Qt3::QTextParag::alignment() const
 {
     if ( align != -1 )
 	return align;
@@ -563,7 +563,7 @@ int QTextParag::alignment() const
     return Qt3::AlignAuto;
 }
 
-QPtrVector<QStyleSheetItem> QTextParag::styleSheetItems() const
+QPtrVector<QStyleSheetItem> Qt3::QTextParag::styleSheetItems() const
 {
     QPtrVector<QStyleSheetItem> vec;
     vec.resize( styleSheetItemsVec.size() );
@@ -572,14 +572,14 @@ QPtrVector<QStyleSheetItem> QTextParag::styleSheetItems() const
     return vec;
 }
 
-QStyleSheetItem *QTextParag::style() const
+QStyleSheetItem *Qt3::QTextParag::style() const
 {
     if ( styleSheetItemsVec.size() == 0 )
 	return 0;
     return styleSheetItemsVec[ styleSheetItemsVec.size() - 1 ];
 }
 
-int QTextParag::numberOfSubParagraph() const
+int Qt3::QTextParag::numberOfSubParagraph() const
 {
     if ( list_val != -1 )
         return list_val;
@@ -601,7 +601,7 @@ int QTextParag::numberOfSubParagraph() const
     return n;
 }
 
-void QTextParag::setFormat( QTextFormat *fm )
+void Qt3::QTextParag::setFormat( QTextFormat *fm )
 {
     bool doUpdate = FALSE;
     if (defFormat && (defFormat != formatCollection()->defaultFormat()))
@@ -615,7 +615,7 @@ void QTextParag::setFormat( QTextFormat *fm )
     }
 }
 
-QTextFormatter *QTextParag::formatter() const
+QTextFormatter *Qt3::QTextParag::formatter() const
 {
     if ( doc )
 	return doc->formatter();
@@ -624,25 +624,25 @@ QTextFormatter *QTextParag::formatter() const
     return ( ( (QTextParag*)this )->pFormatter = new QTextFormatterBreakWords );
 }
 
-void QTextParag::setFormatter( QTextFormatter *f )
+void Qt3::QTextParag::setFormatter( QTextFormatter *f )
 {
     if ( doc ) return;
     if ( pFormatter ) delete pFormatter;
     pFormatter = f;
 }
 
-int QTextParag::minimumWidth() const
+int Qt3::QTextParag::minimumWidth() const
 {
     return doc ? doc->minimumWidth() : 0;
 }
 
-void QTextParag::setTabArray( int *a )
+void Qt3::QTextParag::setTabArray( int *a )
 {
     delete [] tArray;
     tArray = a;
 }
 
-void QTextParag::setTabStops( int tw )
+void Qt3::QTextParag::setTabStops( int tw )
 {
     if ( doc )
         doc->setTabStops( tw );

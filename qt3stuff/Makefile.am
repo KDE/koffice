@@ -1,0 +1,9 @@
+INCLUDES=-I$(top_srcdir) $(all_includes)
+noinst_LTLIBRARIES = libqt3stuff.la
+libqt3stuff_la_SOURCES = qcomplextext.cpp qrichtext.cpp qrichtext_p.cpp \
+	qstylesheet.cpp mocstuff.cpp
+libqt3stuff_la_LDFLAGS = $(all_libraries) -no-undefined
+libqt3stuff_la_LIBADD = $(LIB_QT)
+libqt3stuff_la_METASOURCES = qrichtext_p.moc qstylesheet.moc
+
+KDE_OPTIONS = qtonly

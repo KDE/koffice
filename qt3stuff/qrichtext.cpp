@@ -1364,7 +1364,7 @@ int QTextDocument::widthUsed() const
     return w;
 }
 
-QTextParag *QTextDocument::createParag( QTextDocument *d, QTextParag *pr, QTextParag *nx, bool updateIds )
+Qt3::QTextParag *QTextDocument::createParag( QTextDocument *d, QTextParag *pr, QTextParag *nx, bool updateIds )
 {
     return new QTextParag( d, pr, nx, updateIds );
 }
@@ -1903,23 +1903,23 @@ void QTextDocument::selectionEnd( int id, int &paragId, int &index )
     index = sel.swapped ? sel.startCursor.index() : sel.endCursor.index();
 }
 
-QTextParag *QTextDocument::selectionStart( int id )
+Qt3::QTextParag *QTextDocument::selectionStart( int id )
 {
     QMap<int, QTextDocumentSelection>::Iterator it = selections.find( id );
     if ( it == selections.end() )
 	return 0;
-    QTextDocumentSelection &sel = *it;
+    Qt3::QTextDocumentSelection &sel = *it;
     if ( sel.startCursor.parag()->paragId() <  sel.endCursor.parag()->paragId() )
 	return sel.startCursor.parag();
     return sel.endCursor.parag();
 }
 
-QTextParag *QTextDocument::selectionEnd( int id )
+Qt3::QTextParag *QTextDocument::selectionEnd( int id )
 {
     QMap<int, QTextDocumentSelection>::Iterator it = selections.find( id );
     if ( it == selections.end() )
 	return 0;
-    QTextDocumentSelection &sel = *it;
+    Qt3::QTextDocumentSelection &sel = *it;
     if ( sel.startCursor.parag()->paragId() >  sel.endCursor.parag()->paragId() )
 	return sel.startCursor.parag();
     return sel.endCursor.parag();
@@ -2618,7 +2618,7 @@ void QTextDocument::drawParag( QPainter *p, QTextParag *parag, int cx, int cy, i
     parag->document()->nextDoubleBuffered = FALSE;
 }
 
-QTextParag *QTextDocument::draw( QPainter *p, int cx, int cy, int cw, int ch, const QColorGroup &cg,
+Qt3::QTextParag *QTextDocument::draw( QPainter *p, int cx, int cy, int cw, int ch, const QColorGroup &cg,
 				 bool onlyChanged, bool drawCursor, QTextCursor *cursor, bool resetChanged )
 {
     if ( withoutDoubleBuffer || par && par->withoutDoubleBuffer ) {
@@ -3219,7 +3219,7 @@ QTextStringChar *QTextStringChar::clone() const
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-QTextParag::QTextParag( QTextDocument *d, QTextParag *pr, QTextParag *nx, bool updateIds )
+Qt3::QTextParag::QTextParag( QTextDocument *d, QTextParag *pr, QTextParag *nx, bool updateIds )
     : invalid( 0 ), p( pr ), n( nx ), doc( d ), align( -1 ), numSubParag( -1 ),
       tm( -1 ), bm( -1 ), lm( -1 ), rm( -1 ), flm( -1 ), tc( 0 ),
       numCustomItems( 0 ), pFormatter( 0 ),
@@ -3285,7 +3285,7 @@ QTextParag::QTextParag( QTextDocument *d, QTextParag *pr, QTextParag *nx, bool u
     str->insert( 0, " ", formatCollection()->defaultFormat() );
 }
 
-QTextParag::~QTextParag()
+Qt3::QTextParag::~QTextParag()
 {
     //qDebug("QTextParag::~QTextParag %p id=%d",this,paragId());
     delete str;
@@ -3304,21 +3304,21 @@ QTextParag::~QTextParag()
 	delete *it;
 }
 
-void QTextParag::setNext( QTextParag *s )
+void Qt3::QTextParag::setNext( QTextParag *s )
 {
     n = s;
     if ( !n && doc )
 	doc->setLastParag( this );
 }
 
-void QTextParag::setPrev( QTextParag *s )
+void Qt3::QTextParag::setPrev( QTextParag *s )
 {
     p = s;
     if ( !p && doc )
 	doc->setFirstParag( this );
 }
 
-void QTextParag::invalidate( int chr )
+void Qt3::QTextParag::invalidate( int chr )
 {
     if ( invalid < 0 )
 	invalid = chr;
@@ -3330,7 +3330,7 @@ void QTextParag::invalidate( int chr )
     lm = rm = bm = tm = flm = -1;
 }
 
-void QTextParag::insert( int index, const QString &s )
+void Qt3::QTextParag::insert( int index, const QString &s )
 {
     if ( doc && !doc->useFormatCollection() && doc->preProcessor() )
 	str->insert( index, s,
@@ -3341,14 +3341,14 @@ void QTextParag::insert( int index, const QString &s )
     needPreProcess = TRUE;
 }
 
-void QTextParag::truncate( int index )
+void Qt3::QTextParag::truncate( int index )
 {
     str->truncate( index );
     insert( length(), " " );
     needPreProcess = TRUE;
 }
 
-void QTextParag::remove( int index, int len )
+void Qt3::QTextParag::remove( int index, int len )
 {
     if ( index + len - str->length() > 0 )
 	return;
@@ -3365,7 +3365,7 @@ void QTextParag::remove( int index, int len )
     needPreProcess = TRUE;
 }
 
-void QTextParag::join( QTextParag *s )
+void Qt3::QTextParag::join( QTextParag *s )
 {
     //qDebug("QTextParag::join this=%d (length %d) with %d (length %d)",paragId(),length(),s->paragId(),s->length());
     int oh = r.height() + s->r.height();
@@ -3421,7 +3421,7 @@ void QTextParag::join( QTextParag *s )
     state = -1;
 }
 
-void QTextParag::move( int &dy )
+void Qt3::QTextParag::move( int &dy )
 {
     //qDebug("QTextParag::move paragId=%d dy=%d",paragId(),dy);
     if ( dy == 0 )
@@ -3452,7 +3452,7 @@ void QTextParag::move( int &dy )
     }
 }
 
-void QTextParag::format( int start, bool doMove )
+void Qt3::QTextParag::format( int start, bool doMove )
 {
     if ( str->length() == 0 || !formatter() )
 	return;
@@ -3565,7 +3565,7 @@ void QTextParag::format( int start, bool doMove )
     string()->setTextChanged( FALSE );
 }
 
-int QTextParag::lineHeightOfChar( int i, int *bl, int *y ) const
+int Qt3::QTextParag::lineHeightOfChar( int i, int *bl, int *y ) const
 {
     if ( !isValid() )
 	( (QTextParag*)this )->format();
@@ -3589,7 +3589,7 @@ int QTextParag::lineHeightOfChar( int i, int *bl, int *y ) const
     return 15;
 }
 
-QTextStringChar *QTextParag::lineStartOfChar( int i, int *index, int *line ) const
+QTextStringChar *Qt3::QTextParag::lineStartOfChar( int i, int *index, int *line ) const
 {
     if ( !isValid() )
 	( (QTextParag*)this )->format();
@@ -3615,7 +3615,7 @@ QTextStringChar *QTextParag::lineStartOfChar( int i, int *index, int *line ) con
     return 0;
 }
 
-int QTextParag::lines() const
+int Qt3::QTextParag::lines() const
 {
     if ( !isValid() )
 	( (QTextParag*)this )->format();
@@ -3623,7 +3623,7 @@ int QTextParag::lines() const
     return lineStarts.count();
 }
 
-QTextStringChar *QTextParag::lineStartOfLine( int line, int *index ) const
+QTextStringChar *Qt3::QTextParag::lineStartOfLine( int line, int *index ) const
 {
     if ( !isValid() )
 	( (QTextParag*)this )->format();
@@ -3642,7 +3642,7 @@ QTextStringChar *QTextParag::lineStartOfLine( int line, int *index ) const
     return 0;
 }
 
-void QTextParag::setFormat( int index, int len, QTextFormat *f, bool useCollection, int flags )
+void Qt3::QTextParag::setFormat( int index, int len, QTextFormat *f, bool useCollection, int flags )
 {
     if ( index < 0 )
 	index = 0;
@@ -3687,7 +3687,7 @@ void QTextParag::setFormat( int index, int len, QTextFormat *f, bool useCollecti
     }
 }
 
-void QTextParag::indent( int *oldIndent, int *newIndent )
+void Qt3::QTextParag::indent( int *oldIndent, int *newIndent )
 {
     if ( !doc || !doc->indent() || style() && style()->displayMode() != QStyleSheetItem::DisplayBlock ) {
 	if ( oldIndent )
@@ -3701,7 +3701,7 @@ void QTextParag::indent( int *oldIndent, int *newIndent )
     doc->indent()->indent( doc, this, oldIndent, newIndent );
 }
 
-void QTextParag::paint( QPainter &painter, const QColorGroup &cg, QTextCursor *cursor, bool drawSelections,
+void Qt3::QTextParag::paint( QPainter &painter, const QColorGroup &cg, QTextCursor *cursor, bool drawSelections,
 			int clipx, int clipy, int clipw, int cliph )
 {
     if ( !visible )
@@ -3946,7 +3946,7 @@ void QTextParag::paint( QPainter &painter, const QColorGroup &cg, QTextCursor *c
     }
 }
 
-void QTextParag::drawParagString( QPainter &painter, const QString &s, int start, int len, int startX,
+void Qt3::QTextParag::drawParagString( QPainter &painter, const QString &s, int start, int len, int startX,
 				      int lastY, int baseLine, int bw, int h, bool drawSelections,
 				      QTextFormat *lastFormat, int i, const QMemArray<int> &selectionStarts,
 				      const QMemArray<int> &selectionEnds, const QColorGroup &cg, bool /*rightToLeft*/ )
@@ -4024,7 +4024,7 @@ void QTextParag::drawParagString( QPainter &painter, const QString &s, int start
 
 }
 
-void QTextParag::drawLabel( QPainter* p, int x, int y, int w, int h, int base, const QColorGroup& cg )
+void Qt3::QTextParag::drawLabel( QPainter* p, int x, int y, int w, int h, int base, const QColorGroup& cg )
 {
     if ( !style() )
 	return;
@@ -4089,7 +4089,7 @@ void QTextParag::drawLabel( QPainter* p, int x, int y, int w, int h, int base, c
     p->setFont( font );
 }
 
-void QTextParag::setStyleSheetItems( const QPtrVector<QStyleSheetItem> &vec )
+void Qt3::QTextParag::setStyleSheetItems( const QPtrVector<QStyleSheetItem> &vec )
 {
     styleSheetItemsVec = vec;
     invalidate( 0 );
@@ -4097,7 +4097,7 @@ void QTextParag::setStyleSheetItems( const QPtrVector<QStyleSheetItem> &vec )
     numSubParag = -1;
 }
 
-void QTextParag::setList( bool b, int listStyle )
+void Qt3::QTextParag::setList( bool b, int listStyle )
 {
     if ( !doc )
 	return;
@@ -4151,7 +4151,7 @@ void QTextParag::setList( bool b, int listStyle )
     }
 }
 
-void QTextParag::incDepth()
+void Qt3::QTextParag::incDepth()
 {
     if ( !style() || !doc )
 	return;
@@ -4168,7 +4168,7 @@ void QTextParag::incDepth()
     flm = -1;
 }
 
-void QTextParag::decDepth()
+void Qt3::QTextParag::decDepth()
 {
     if ( !style() || !doc )
 	return;
@@ -4200,7 +4200,7 @@ void QTextParag::decDepth()
     flm = -1;
 }
 
-int QTextParag::listDepth() const
+int Qt3::QTextParag::listDepth() const
 {
     int numLists = 0;
     int i;
@@ -4212,7 +4212,7 @@ int QTextParag::listDepth() const
     return numLists - 1;
 }
 
-int *QTextParag::tabArray() const
+int *Qt3::QTextParag::tabArray() const
 {
     int *ta = tArray;
     if ( !ta && doc )
@@ -4220,7 +4220,7 @@ int *QTextParag::tabArray() const
     return ta;
 }
 
-int QTextParag::nextTab( int, int x )
+int Qt3::QTextParag::nextTab( int, int x )
 {
     int *ta = tArray;
     if ( doc ) {
@@ -4246,7 +4246,7 @@ int QTextParag::nextTab( int, int x )
     }
 }
 
-void QTextParag::setPainter( QPainter *p )
+void Qt3::QTextParag::setPainter( QPainter *p )
 {
     pntr = p;
     for ( int i = 0; i < length(); ++i ) {
@@ -4255,7 +4255,7 @@ void QTextParag::setPainter( QPainter *p )
     }
 }
 
-QTextFormatCollection *QTextParag::formatCollection() const
+QTextFormatCollection *Qt3::QTextParag::formatCollection() const
 {
     if ( doc )
 	return doc->formatCollection();
@@ -4264,7 +4264,7 @@ QTextFormatCollection *QTextParag::formatCollection() const
     return qFormatCollection;
 }
 
-QString QTextParag::richText() const
+QString Qt3::QTextParag::richText() const
 {
     QString s;
     QTextFormat *lastFormat = 0;
@@ -4287,7 +4287,7 @@ QString QTextParag::richText() const
     return s;
 }
 
-void QTextParag::addCommand( QTextCommand *cmd )
+void Qt3::QTextParag::addCommand( QTextCommand *cmd )
 {
     if ( !doc )
 	commandHistory->addCommand( cmd );
@@ -4295,21 +4295,21 @@ void QTextParag::addCommand( QTextCommand *cmd )
 	doc->commands()->addCommand( cmd );
 }
 
-QTextCursor *QTextParag::undo( QTextCursor *c )
+QTextCursor *Qt3::QTextParag::undo( QTextCursor *c )
 {
     if ( !doc )
 	return commandHistory->undo( c );
     return doc->commands()->undo( c );
 }
 
-QTextCursor *QTextParag::redo( QTextCursor *c )
+QTextCursor *Qt3::QTextParag::redo( QTextCursor *c )
 {
     if ( !doc )
 	return commandHistory->redo( c );
     return doc->commands()->redo( c );
 }
 
-int QTextParag::topMargin() const
+int Qt3::QTextParag::topMargin() const
 {
     if ( !p && ( !doc || !doc->addMargins() ) )
 	return 0;
@@ -4346,7 +4346,7 @@ int QTextParag::topMargin() const
     return tm;
 }
 
-int QTextParag::bottomMargin() const
+int Qt3::QTextParag::bottomMargin() const
 {
     if ( bm != -1 )
 	return bm;
@@ -4381,7 +4381,7 @@ int QTextParag::bottomMargin() const
     return bm;
 }
 
-int QTextParag::leftMargin() const
+int Qt3::QTextParag::leftMargin() const
 {
     if ( lm != -1 )
 	return lm;
@@ -4413,7 +4413,7 @@ int QTextParag::leftMargin() const
     return lm;
 }
 
-int QTextParag::firstLineMargin() const
+int Qt3::QTextParag::firstLineMargin() const
 {
     if ( flm != -1 )
 	return lm;
@@ -4439,7 +4439,7 @@ int QTextParag::firstLineMargin() const
     return flm;
 }
 
-int QTextParag::rightMargin() const
+int Qt3::QTextParag::rightMargin() const
 {
     if ( rm != -1 )
 	return rm;
@@ -4465,7 +4465,7 @@ int QTextParag::rightMargin() const
     return rm;
 }
 
-int QTextParag::lineSpacing( int /*line*/ ) const
+int Qt3::QTextParag::lineSpacing( int /*line*/ ) const
 {
     QStyleSheetItem *item = style();
     if ( !item )
@@ -4483,21 +4483,21 @@ int QTextParag::lineSpacing( int /*line*/ ) const
     return ls;
 }
 
-void QTextParag::copyParagData( QTextParag *parag )
+void Qt3::QTextParag::copyParagData( QTextParag *parag )
 {
     setStyleSheetItems( parag->styleSheetItems() );
     setListStyle( parag->listStyle() );
     setAlignment( parag->alignment() );
 }
 
-void QTextParag::show()
+void Qt3::QTextParag::show()
 {
     if ( visible || !doc )
 	return;
     visible = TRUE;
 }
 
-void QTextParag::hide()
+void Qt3::QTextParag::hide()
 {
     if ( !visible || !doc )
 	return;
