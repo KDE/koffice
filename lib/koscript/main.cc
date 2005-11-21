@@ -52,7 +52,7 @@ int main( int argc, char** argv )
 
   if (args->count() < 1)
   {
-     fprintf(stderr, i18n("You must specify a script.\n").local8Bit());
+     fprintf(stderr, "%s", i18n("You must specify a script.\n").local8Bit().data());
      ::exit(1);
   }
 
