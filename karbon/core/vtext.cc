@@ -51,6 +51,7 @@
 
 // Trace routines for ttf / ps font -> VSubpath
 
+static
 int traceMoveto( FT_Vector *to, VPath *composite )
 {
 	double tox = ( to->x / 64.0 );
@@ -63,6 +64,7 @@ int traceMoveto( FT_Vector *to, VPath *composite )
 	return 0;
 }
 
+static
 int traceLineto( FT_Vector *to, VPath *composite )
 {
 	double tox = ( to->x / 64.0 );
@@ -74,8 +76,9 @@ int traceLineto( FT_Vector *to, VPath *composite )
 	composite->lineTo( KoPoint( tox, toy ) );
 
 	return 0;
-};
+}
 
+static
 int traceQuadraticBezier( FT_Vector *control, FT_Vector *to, VPath *composite )
 {
 	double x1 = ( control->x / 64.0 );
@@ -89,8 +92,9 @@ int traceQuadraticBezier( FT_Vector *control, FT_Vector *to, VPath *composite )
 	//composite->curve2To( KoPoint( x1, y1 ), KoPoint( x2, y2 ) );
 
 	return 0;
-};
+}
 
+static
 int traceCubicBezier( FT_Vector *p, FT_Vector *q, FT_Vector *to, VPath *composite )
 {
 	double x1 = ( p->x / 64.0 );
@@ -106,7 +110,7 @@ int traceCubicBezier( FT_Vector *p, FT_Vector *q, FT_Vector *to, VPath *composit
 	composite->curveTo( KoPoint( x1, y1 ), KoPoint( x2, y2 ), KoPoint( x3, y3 ) );
 
 	return 0;
-};
+}
 
 FT_Outline_Funcs OutlineMethods =
 {
