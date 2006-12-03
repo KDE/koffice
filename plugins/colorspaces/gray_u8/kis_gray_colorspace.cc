@@ -33,14 +33,14 @@
 #include "compositeops/KoCompositeOpErase.h"
 
 
-KisGrayColorSpace ::KisGrayColorSpace(KoColorSpaceRegistry * parent, KoColorProfile *p) :
-            KoLcmsColorSpace<GrayU8Traits>("GRAYA", i18n("Grayscale 8-bit integer/channel)"), parent, TYPE_GRAYA_8, icSigGrayData, p)
+KisGrayAU8ColorSpace ::KisGrayAU8ColorSpace(KoColorSpaceRegistry * parent, KoColorProfile *p) :
+            KoLcmsColorSpace<GrayAU8Traits>("GRAYA", i18n("Grayscale 8-bit integer/channel)"), parent, TYPE_GRAYA_8, icSigGrayData, p)
 {
     m_channels.push_back(new KoChannelInfo(i18n("Gray"), 0, KoChannelInfo::COLOR, KoChannelInfo::UINT8));
     m_channels.push_back(new KoChannelInfo(i18n("Alpha"), 1, KoChannelInfo::ALPHA, KoChannelInfo::UINT8));
 
     init();
 
-    m_compositeOps.insert( COMPOSITE_OVER, new KoCompositeOpOver<GrayU8Traits>( this ) );
-    m_compositeOps.insert( COMPOSITE_ERASE, new KoCompositeOpErase<GrayU8Traits>( this ) );
+    m_compositeOps.insert( COMPOSITE_OVER, new KoCompositeOpOver<GrayAU8Traits>( this ) );
+    m_compositeOps.insert( COMPOSITE_ERASE, new KoCompositeOpErase<GrayAU8Traits>( this ) );
 }

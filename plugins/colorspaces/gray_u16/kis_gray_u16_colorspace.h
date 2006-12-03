@@ -23,20 +23,20 @@
 #include <koffice_export.h>
 #include "KoLcmsColorSpace.h"
 
-struct GrayU16Traits {
+struct GrayAU16Traits {
     typedef quint16 channels_type;
     static const quint32 channels_nb = 2;
     static const qint32 alpha_pos = 1;
 };
 
-class KRITA_GRAY_U16_EXPORT KisGrayU16ColorSpace : public KoLcmsColorSpace<GrayU16Traits>
+class KRITA_GRAY_U16_EXPORT KisGrayAU16ColorSpace : public KoLcmsColorSpace<GrayAU16Traits>
 {
     public:
-        KisGrayU16ColorSpace(KoColorSpaceRegistry * parent, KoColorProfile *p);
+        KisGrayAU16ColorSpace(KoColorSpaceRegistry * parent, KoColorProfile *p);
         virtual bool willDegrade(ColorSpaceIndependence ) const { return false; }
 };
 
-class KisGrayU16ColorSpaceFactory : public KoColorSpaceFactory
+class KisGrayAU16ColorSpaceFactory : public KoColorSpaceFactory
 {
 public:
     /**
@@ -52,7 +52,7 @@ public:
 
     virtual icColorSpaceSignature colorSpaceSignature() { return icSigGrayData; };
 
-    virtual KoColorSpace *createColorSpace(KoColorSpaceRegistry * parent, KoColorProfile *p) { return new KisGrayU16ColorSpace(parent, p); };
+    virtual KoColorSpace *createColorSpace(KoColorSpaceRegistry * parent, KoColorProfile *p) { return new KisGrayAU16ColorSpace(parent, p); };
 
     virtual QString defaultProfile() { return "gray built-in - (lcms internal)"; };
 };
