@@ -1,4 +1,5 @@
 /* This file is part of the KDE project
+   Copyright (C) 2008 Timothée Lacroix <dakeyras.khan@gmail.com>
    Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
 
    This library is free software; you can redistribute it and/or
@@ -17,38 +18,39 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSlideWipeToTopStrategy.h"
-#include "KPrSlideWipeEffectFactory.h"
+#include "KPrBarWipeFromRightStrategy.h"
+#include "KPrBarWipeEffectFactory.h"
 
 #include <QWidget>
 #include <QPainter>
 
-KPrSlideWipeToTopStrategy::KPrSlideWipeToTopStrategy()
-: KPrPageEffectStrategy( KPrSlideWipeEffectFactory::ToTop, "slideWipe", "fromBottom", true )
+KPrBarWipeFromRightStrategy::KPrBarWipeFromRightStrategy()
+: KPrPageEffectStrategy( KPrBarWipeEffectFactory::FromRight, "barWipe", "leftToRight", true )
 {
 }
 
-KPrSlideWipeToTopStrategy::~KPrSlideWipeToTopStrategy()
+KPrBarWipeFromRightStrategy::~KPrBarWipeFromRightStrategy()
 {
 }
 
-void KPrSlideWipeToTopStrategy::setup( const KPrPageEffect::Data &data, QTimeLine &timeLine )
+void KPrBarWipeFromRightStrategy::setup( const KPrPageEffect::Data &data, QTimeLine &timeLine )
 {
-    timeLine.setFrameRange( 0, data.m_widget->height() );
+    timeLine.setFrameRange( 0, data.m_widget->width() );
 }
 
-void KPrSlideWipeToTopStrategy::paintStep( QPainter &p, int currPos, const KPrPageEffect::Data &data )
+void KPrBarWipeFromRightStrategy::paintStep( QPainter &p, int currPos, const KPrPageEffect::Data &data )
 {
     int height = data.m_widget->height();
     int width = data.m_widget->width();
-    QRect rect1( 0, currPos, width, height - currPos );
-    QRect rect2( 0, height - currPos, width, currPos );
+    QRect rect1( 0, 0, width - currPos, height );
+    QRect rect2( width - currPos, 0, currPos, height );
     p.drawPixmap( QPoint( 0, 0 ), data.m_oldPage, rect1 );
-    p.drawPixmap( QPoint( 0, height - currPos ), data.m_newPage, rect2 );
+    p.drawPixmap( QPoint( width - currPos, 0 ), data.m_newPage, rect2 );
 }
 
-void KPrSlideWipeToTopStrategy::next( const KPrPageEffect::Data &data )
+void KPrBarWipeFromRightStrategy::next( const KPrPageEffect::Data &data )
 {
     int lastPos = data.m_timeLine.frameForTime( data.m_lastTime );
-    data.m_widget->update( 0, 0, data.m_widget->width(), data.m_widget->height() - lastPos );
+    int currPos = data.m_timeLine.frameForTime( data.m_currentTime );
+    data.m_widget->update( data.m_widget->width() - currPos, 0, currPos - lastPos, data.m_widget->height() );
 }
