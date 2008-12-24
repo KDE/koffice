@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2001 Joseph Wenninger <jowenn@kde.org>
+ * Copyright (C) 2008 Jan Hambrecht <jaham@gmx.net>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -16,32 +16,30 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef MAILMERGE_QtSqlPLUGIN_EASYFILTER
-#define MAILMERGE_QtSqlPLUGIN_EASYFILTER
 
-#include <kdialogbase.h>
+#ifndef SELECTION_TRANSFORM_COMMAND_H
+#define SELECTION_TRANSFORM_COMMAND_H
 
-class Q3Table;
-class Q3ScrollView;
-class QStringList;
+#include <QtGui/QUndoCommand>
+#include <QtGui/QMatrix>
 
-class KWQtSqlEasyFilter: public KDialogBase
+class KoSelection;
+class KoShape;
+
+class SelectionTransformCommand : public QUndoCommand
 {
-    Q_OBJECT
 public:
-    KWQtSqlEasyFilter(QWidget *parent);
-    virtual ~KWQtSqlEasyFilter();
-protected:
-    void createColumn(int i);
+    SelectionTransformCommand( KoSelection * selection, const QMatrix &oldTransformation, const QMatrix &newTransformation, QUndoCommand * parent = 0 );
 
-protected slots:
-    void slotValueChanged(int, int);
+    /// reimplemented from QUndoCommand
+    virtual void redo();
+    /// reimplemented from QUndoCommand
+    virtual void undo();
 private:
-    Q3Table *m_table;
-    Q3ScrollView *m_view;
-    QStringList m_fieldList, m_sortingList, m_operationList;
-
-
+    KoSelection * m_selection;
+    QList<KoShape*> m_selectedShapes;
+    QMatrix m_oldTransformation;
+    QMatrix m_newTransformation;
 };
 
-#endif
+#endif // SELECTION_TRANSFORM_COMMAND_H

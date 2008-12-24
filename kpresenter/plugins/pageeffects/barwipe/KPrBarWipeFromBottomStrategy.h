@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
-   Copyright (C) 1999 Kalle Dalheimer <kalle@kde.org>
+   Copyright (C) 2008 Timothée Lacroix <dakeyras.khan@gmail.com>
+   Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -17,35 +18,22 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <KoApplication.h>
-#include <kcmdlineargs.h>
-#include <klocale.h>
-#include "kchart_aboutdata.h"
+#ifndef KPRBARWIPEFROMBOTTOMSTRATEGY_H
+#define KPRBARWIPEFROMBOTTOMSTRATEGY_H
 
-using namespace KChart;
+#include "pageeffects/KPrPageEffectStrategy.h"
 
-namespace KChart
+class KPrBarWipeFromBottomStrategy : public KPrPageEffectStrategy
 {
+public:
+    KPrBarWipeFromBottomStrategy();
+    virtual ~KPrBarWipeFromBottomStrategy();
 
-}  //namespace KChart
+    virtual void setup( const KPrPageEffect::Data &data, QTimeLine &timeLine );
 
+    virtual void paintStep( QPainter &p, int currPos, const KPrPageEffect::Data &data );
 
-extern "C" KDE_EXPORT int kdemain( int argc, char **argv )
-{
-    KAboutData * aboutData=newKChartAboutData();
+    virtual void next( const KPrPageEffect::Data &data );
+};
 
-    KCmdLineArgs::init( argc, argv, aboutData);
-
-    KCmdLineOptions options;
-    options.add("+[file]", ki18n("File to open"));
-    KCmdLineArgs::addCmdLineOptions( options );
-
-    KoApplication app;
-    if (!app.start())
-	return 1;
-    app.exec();
-
-    delete (aboutData);
-
-    return 0;
-}
+#endif // KPRBARWIPEFROMBOTTOMSTRATEGY_H
