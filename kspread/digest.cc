@@ -50,7 +50,7 @@ typedef unsigned short sal_uInt16;
 
 #if  SIZEOF_INT == 4
 typedef unsigned int sal_uInt32;
-#elif
+#else
 typedef unsigned long sal_uInt32;
 #endif
 
