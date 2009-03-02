@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 2001 Graham Short <grahshrt@netscape.net>
+   Copyright (C) 2002, The Karbon Developers
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -16,24 +16,24 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#ifndef QPROFORMULA_H
-#define QPROFORMULA_H
 
-#include <qpro/formula.h>
+#ifndef __OOPPTIMPORT_H__
+#define __OOPPTIMPORT_H__
 
-namespace KSpread
-{
-namespace QuattroPro
-{
+#include <QObject>
 
-class Formula : public QpFormula
+#include <KoFilter.h>
+
+class OOPPTImport : public KoFilter
 {
+	Q_OBJECT
+
 public:
-   Formula(QpRecFormulaCell& pCell, QpTableNames& pTable);
-   ~Formula();
+	OOPPTImport( QObject* parent, const QStringList& );
+	virtual ~OOPPTImport();
+
+	virtual KoFilter::ConversionStatus convert( const QByteArray& from, const QByteArray& to );
 };
 
-}
-}
+#endif
 
-#endif // QPROFORMULA_H
