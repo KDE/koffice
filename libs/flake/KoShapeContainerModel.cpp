@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) Boudewijn Rempt <boud@valdyas.org>, (C) 2008
+ * Copyright (C) 2009 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,21 +17,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef TEST_TABLE_CELL_H
-#define TEST_TABLE_CELL_H
+#include "KoShapeContainerModel.h"
 
-#include <QObject>
-#include <qtest_kde.h>
+KoShapeContainerModel::KoShapeContainerModel()
+{
+}
 
-#include "../TableCell.h"
-#include "../TableShape.h"
-#include <KoShape.h>
+KoShapeContainerModel::~KoShapeContainerModel()
+{
+}
 
-class TestTableCell : public QObject {
-    Q_OBJECT
-
-private slots:
-    void testCreate();
-};
-
-#endif
