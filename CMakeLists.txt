@@ -38,7 +38,6 @@ IF (TINY)
     set(SHOULD_BUILD_KPRESENTER TRUE)
     set(SHOULD_BUILD_KSPREAD TRUE)
     set(SHOULD_BUILD_KARBON FALSE)
-    set(SHOULD_BUILD_KRITA FALSE)
     set(SHOULD_BUILD_KEXI FALSE)
     set(SHOULD_BUILD_KIVIO FALSE)
     set(SHOULD_BUILD_KPLATO FALSE)
@@ -54,7 +53,6 @@ ELSE(TINY)
     set(SHOULD_BUILD_KPRESENTER TRUE)
     set(SHOULD_BUILD_KSPREAD TRUE)
     set(SHOULD_BUILD_KARBON TRUE)
-    set(SHOULD_BUILD_KRITA TRUE)
     set(SHOULD_BUILD_KEXI TRUE)
     set(SHOULD_BUILD_KIVIO TRUE)
     set(SHOULD_BUILD_KPLATO TRUE)
@@ -142,7 +140,7 @@ else(OPENGL_FOUND)
     message(STATUS "Did NOT find OpenGL libraries")
 endif(OPENGL_FOUND)
 
-macro_log_feature(HAVE_OPENGL "OpenGL" "OpenGL support" "" FALSE "" "Required by parts of Krita and optionally by flake")
+macro_log_feature(HAVE_OPENGL "OpenGL" "OpenGL support" "" FALSE "" "Optionally required by flake")
 
 ##
 ## Test for create ressources
@@ -166,20 +164,13 @@ macro_log_feature(Boost_FOUND "Boost" "Boost C++ Libraries" "http://www.boost.or
 ## Test for eigen2
 ##
 macro_optional_find_package(Eigen2)
-macro_log_feature(EIGEN2_FOUND "Eigen" "C++ template library for linear algebra" "http://eigen.tuxfamily.org" FALSE "2.0" "Required by KSpread and Krita")
+macro_log_feature(EIGEN2_FOUND "Eigen" "C++ template library for linear algebra" "http://eigen.tuxfamily.org" FALSE "2.0" "Required by KSpread")
 
 ##
 ## Test for QCA2
 ##
 macro_optional_find_package(QCA2)
 macro_log_feature(QCA2_FOUND "QCA" "Qt Cryptographic Architecture" "http://delta.affinix.com/qca" FALSE "2.0" "Required for encrypted OpenDocument files and encrypted xls files support (available as a module in kdesupport)")
-
-##
-## Test for exiv2
-##
-set(EXIV2_MIN_VERSION "0.16")
-macro_optional_find_package(Exiv2)
-macro_log_feature(EXIV2_FOUND "Exiv2" "Image metadata library and tools" "http://www.exiv2.org" FALSE "0.16" "Required by Krita")
 
 ##
 ## Test for soprano
@@ -211,7 +202,7 @@ else(LCMS_FOUND AND NOT LCMS_VERSION LESS ${REQUIRED_LCMS_VERSION})
 endif(LCMS_FOUND AND NOT LCMS_VERSION LESS ${REQUIRED_LCMS_VERSION})
 
 macro_optional_find_package(LCMS2)
-macro_log_feature(LCMS2_FOUND "LittleCMS" "Color management engine" "http://www.littlecms.com" FALSE "2.0" "Optional replacement for LittleCMS 1.18. Can be used for color management and Krita")
+macro_log_feature(LCMS2_FOUND "LittleCMS" "Color management engine" "http://www.littlecms.com" FALSE "2.0" "Optional replacement for LittleCMS 1.18. Can be used for color management")
 if(LCMS2_FOUND)
     set(HAVE_REQUIRED_LCMS_VERSION TRUE)
     set(HAVE_LCMS TRUE)
@@ -219,7 +210,7 @@ endif(LCMS2_FOUND)
 
     
 
-macro_log_feature(HAVE_REQUIRED_LCMS_VERSION "LittleCMS" "Color management engine" "http://www.littlecms.com" FALSE "1.18" "Required for color management and Krita")
+macro_log_feature(HAVE_REQUIRED_LCMS_VERSION "LittleCMS" "Color management engine" "http://www.littlecms.com" FALSE "1.18" "Required for color management")
 
 #Set the build of TextShape changetraker
 
@@ -357,11 +348,6 @@ if(NOT Boost_FOUND)
     set(SHOULD_BUILD_KPRESENTER FALSE)
 endif(NOT Boost_FOUND)
 
-### Krita: pigment, eigen2, exiv2
-if(NOT EIGEN2_FOUND OR NOT EXIV2_FOUND OR NOT HAVE_REQUIRED_LCMS_VERSION)
-   set(SHOULD_BUILD_KRITA FALSE)
-endif(NOT EIGEN2_FOUND OR NOT EXIV2_FOUND OR NOT HAVE_REQUIRED_LCMS_VERSION)
-
 ### KPlato: kdepimlibs
 if(NOT KdepimLibs_FOUND)
     set(SHOULD_BUILD_KPLATO FALSE)
@@ -435,10 +421,6 @@ if(SHOULD_BUILD_KSPREAD)
     macro_optional_add_subdirectory(kspread)
 endif(SHOULD_BUILD_KSPREAD)
 
-if(SHOULD_BUILD_KRITA)
-  macro_optional_add_subdirectory(krita)
-endif(SHOULD_BUILD_KRITA)
-
 if(SHOULD_BUILD_KARBON)
   macro_optional_add_subdirectory(karbon)
 endif(SHOULD_BUILD_KARBON)
@@ -472,7 +454,6 @@ macro_display_application_enabled(kpresenter ${SHOULD_BUILD_KPRESENTER})
 macro_display_application_enabled(kivio ${SHOULD_BUILD_KIVIO})
 macro_display_application_enabled(kexi ${SHOULD_BUILD_KEXI})
 macro_display_application_enabled(kplato ${SHOULD_BUILD_KPLATO})
-macro_display_application_enabled(krita ${SHOULD_BUILD_KRITA})
 macro_display_application_enabled(karbon ${SHOULD_BUILD_KARBON})
 macro_display_application_enabled(kformula ${SHOULD_BUILD_KFORMULA})
 macro_display_application_enabled(kchart ${SHOULD_BUILD_KCHART})
