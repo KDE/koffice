@@ -1,6 +1,7 @@
 [Desktop Entry]
 Icon=curious_penguin
 Name=Curious Penguin
+Name[ca]=Pingüí curiós
 Name[da]=Curious Penguin
 Name[en_GB]=Curious Penguin
 Name[et]=Uudishimulik pingviin
@@ -16,6 +17,7 @@ Name[wa]=Drole di mantchot
 Name[x-test]=xxCurious Penguinxx
 Name[zh_TW]=好奇的企鵝
 Comment=Curious Penguin
+Comment[ca]=Pingüí curiós
 Comment[da]=Nysgerrig pingvin
 Comment[en_GB]=Curious Penguin
 Comment[et]=Uudishimulik pingviin
