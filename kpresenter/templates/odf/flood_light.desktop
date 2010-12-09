@@ -1,6 +1,7 @@
 [Desktop Entry]
 Icon=flood_light
 Name=Flood Light
+Name[ca]=Inundació lleugera
 Name[da]=Flood Light
 Name[en_GB]=Flood Light
 Name[et]=Õrn valing
@@ -16,6 +17,7 @@ Name[wa]=Loumire d' enaiwaedje
 Name[x-test]=xxFlood Lightxx
 Name[zh_TW]=Flood Light
 Comment=Flood Light
+Comment[ca]=Inundació lleugera
 Comment[da]=Flood Light
 Comment[en_GB]=Flood Light
 Comment[et]=Õrn valing
