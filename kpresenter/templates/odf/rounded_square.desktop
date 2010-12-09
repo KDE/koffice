@@ -1,6 +1,7 @@
 [Desktop Entry]
 Icon=rounded_square
 Name=Rounded Square
+Name[ca]=Quadrat arrodonit
 Name[da]=Rounded Square
 Name[en_GB]=Rounded Square
 Name[et]=Ümarnurk
@@ -16,6 +17,7 @@ Name[wa]=Cwåré arondi
 Name[x-test]=xxRounded Squarexx
 Name[zh_TW]=圓角方形
 Comment=Rounded Square
+Comment[ca]=Quadrat arrodonit
 Comment[da]=Afrundet firkant
 Comment[en_GB]=Rounded Square
 Comment[et]=Ümarnurk
