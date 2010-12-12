@@ -138,18 +138,15 @@ QImage KoImageData::image() const
         // load image
         if (d->temporaryFile) {
             d->temporaryFile->open();
-            if (d->errorCode == Success && !d->image.load(d->temporaryFile, d->suffix.toLatin1())) {
+            if (d->errorCode == Success && !d->image.load(d->temporaryFile, 0))
                 d->errorCode = OpenFailed;
-            }
             d->temporaryFile->close();
         } else {
-            if (d->errorCode == Success && !d->image.load(d->imageLocation.toLocalFile())) {
+            if (d->errorCode == Success && !d->image.load(d->imageLocation.toLocalFile()))
                 d->errorCode = OpenFailed;
-            }
         }
-        if (d->errorCode == Success) {
+        if (d->errorCode == Success)
             d->dataStoreState = KoImageDataPrivate::StateImageLoaded;
-        }
     }
     return d->image;
 }
