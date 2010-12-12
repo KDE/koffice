@@ -60,7 +60,7 @@ void StylesModel::recalculate()
     QSet<int> characterStyles;
     treeRoot << m_styleManager->defaultParagraphStyle()->styleId();
     paragraphStyles << treeRoot[0];
-    foreach(KoParagraphStyle *style, m_styleManager->paragraphStyles()) {
+    foreach (KoParagraphStyle *style, m_styleManager->paragraphStyles()) {
         KoParagraphStyle *root = style;
         while (root->parentStyle()) {
             const int key = root->parentStyle()->styleId();
@@ -90,14 +90,14 @@ void StylesModel::recalculate()
         paragraphStyles << root->styleId();
     }
 
-    foreach(KoCharacterStyle *style, m_styleManager->characterStyles()) {
-        if (! characterStyles.contains(style->styleId()))
+    foreach (KoCharacterStyle *style, m_styleManager->characterStyles()) {
+        if (!characterStyles.contains(style->styleId()))
             treeRoot << style->styleId();
     }
 
     int firstChangedRow = -1;
     int index = 0;
-    foreach(int rootId, treeRoot) {
+    foreach (int rootId, treeRoot) {
         if (index >= m_styleList.count()) {
             if (firstChangedRow == -1)
                 firstChangedRow = index;
