@@ -590,13 +590,15 @@ qreal KoShape::transparency(bool recursive) const
     }
 }
 
-KoInsets KoShape::borderInsets() const
+void KoShape::fetchInsets(KoInsets &insets) const
 {
     Q_D(const KoShape);
-    KoInsets answer;
     if (d->border)
-        d->border->borderInsets(this, answer);
-    return answer;
+        d->border->borderInsets(this, insets);
+    else
+        insets.clear();
+    // notice that the shadow has 'insets' that go outwards from the shape edge, so
+    // they are not relevant for this method.
 }
 
 qreal KoShape::rotation() const

@@ -868,7 +868,7 @@ void Layout::nextShape()
         cursor.removeSelectedText();
         Q_ASSERT(!m_textShape->hasFootnoteDocument());
     }
-    m_shapeBorder = shape->borderInsets();
+    shape->fetchInsets(m_shapeBorder);
     m_y += m_shapeBorder.top;
 }
 
@@ -1002,7 +1002,7 @@ void Layout::resetPrivate()
         cursor.removeSelectedText();
     }
     m_demoText = m_textShape->demoText();
-    m_shapeBorder = shape->borderInsets();
+    shape->fetchInsets(m_shapeBorder);
     if (m_y == 0)
         m_y = m_shapeBorder.top;
 
@@ -1866,7 +1866,7 @@ bool Layout::setFollowupShape(KoShape *followupShape)
     shape = followupShape;
     m_textShape = 0;
     m_data->setDocumentOffset(m_y);
-    m_shapeBorder = shape->borderInsets();
+    shape->fetchInsets(m_shapeBorder);
     return true;
 }
 
@@ -1928,7 +1928,7 @@ bool Layout::previousParag()
         if (m_data == 0)
             return false;
 
-        m_shapeBorder = shape->borderInsets();
+        shape->fetchInsets(m_shapeBorder);
     }
     m_newShape = m_block.position() == m_data->position();
     updateBorders(); // fill the border inset member vars.

@@ -525,10 +525,14 @@ public:
     void setBorder(KoShapeBorderModel *border);
 
     /**
-     * Return the insets of the border.
-     * Convenience method for KoShapeBorderModel::borderInsets()
+     * Fills the \a insets with the padding of the shape.
+     * A shape has a size which can be made smaller (the content
+     * area can be deminished) by a border. This method
+     * fills the argument insets with the padding between the (square) borders
+     * of the shape and the inside area where the border is sure to not overlap.
+     * \see KoShapeBorderModel::borderInsets()
      */
-    KoInsets borderInsets() const;
+    void fetchInsets(KoInsets &insets) const;
 
     /// Sets the new shadow, removing the old one
     void setShadow(KoShapeShadow *shadow);
