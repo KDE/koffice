@@ -21,11 +21,9 @@
 #ifndef KOCANVASCONTROLLERWIDGET_P_H
 #define KOCANVASCONTROLLERWIDGET_P_H
 
-#include "KoCanvasControllerWidget.h"
-
 #include <QWidget>
 
-class Viewport;
+class KoCanvasControllerWidget;
 
 class Viewport : public QWidget
 {

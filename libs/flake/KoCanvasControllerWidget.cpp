@@ -33,21 +33,16 @@
 #include "KoCanvasSupervisor.h"
 #include "KoToolManager_p.h"
 
-#include <ksharedconfig.h>
 #include <KDebug>
-#include <kconfiggroup.h>
-#include <QtGui/QApplication>
+
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPainter>
 #include <QtGui/QScrollBar>
 #include <QtCore/QEvent>
-#include <QtGui/QDockWidget>
 #include <QtCore/QTimer>
 
-#include <KoConfig.h>
-
 #ifdef HAVE_OPENGL
-#include <QtOpenGL/QGLWidget>
+# include <QtOpenGL/QGLWidget>
 #endif
 
 

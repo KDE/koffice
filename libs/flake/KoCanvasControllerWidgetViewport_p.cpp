@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#include "KoCanvasControllerWidget.h"
 #include "KoCanvasControllerWidgetViewport_p.h"
-#include "KoShape.h"
 #include "KoShape_p.h"
 #include "KoShapeFactoryBase.h" // for the SHAPE mimetypes
 #include "KoShapeRegistry.h"
@@ -35,15 +35,9 @@
 #include <KoProperties.h>
 
 #include <kdebug.h>
-#include <ksharedconfig.h>
-#include <kglobal.h>
-#include <kconfiggroup.h>
 
 #include <QPainter>
 #include <QDragEnterEvent>
-
-#include <limits.h>
-#include <stdlib.h>
 
 // ********** Viewport **********
 Viewport::Viewport(KoCanvasControllerWidget *parent)
