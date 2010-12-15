@@ -25,13 +25,11 @@ Comment[lv]=KPresenter lapu efektu spraudnis
 Comment[nb]=KPresenter-programtillegg for sideeffekter
 Comment[nds]=Bildeffektmoduul för KPresenter
 Comment[nl]=Pagina-effectplugin voor KPresenter
-Comment[pt]='Plugin' de efeitos das páginas do KPresenter
 Comment[pt_BR]=Plug-in de efeitos das páginas do KPresenter
 Comment[sv]=Insticksprogram med sideffekter för KPresenter
 Comment[tr]=KPresenter için Sayfa efekti eklentisi
 Comment[uk]=Додаток ефектів сторінки для KPresenter
 Comment[wa]=Tchôke-divins d' efets po les pådjes po KPresenter
-Comment[x-test]=xxPage effect plugin for KPresenterxx
 Comment[zh_CN]=KPresenter 页面效果插件
 Comment[zh_TW]=KPresenter 頁面效果外掛程式
 [PropertyDef::X-KPresenter-Version]

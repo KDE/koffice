@@ -24,14 +24,12 @@ Comment[lv]=KSpread spraudnis
 Comment[nb]=Programtillegg for KSpread
 Comment[nds]=Moduul för KSpred
 Comment[nl]=Plugin voor KSpread
-Comment[pt]='Plugin' para o KSpread
 Comment[pt_BR]=Plug-in para o KSpread
 Comment[sl]=Vstavek za KSpread
 Comment[sv]=Insticksprogram för Kspread
 Comment[tr]=KSpread için Eklenti
 Comment[uk]=Додаток для KSpread
 Comment[wa]=Tchôke-divins po KSpread
-Comment[x-test]=xxPlugin for KSpreadxx
 Comment[zh_CN]=KSpread 插件
 Comment[zh_TW]=KSpread 外掛程式
 [PropertyDef::X-KSpread-InterfaceVersion]
