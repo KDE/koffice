@@ -77,10 +77,8 @@ public:
     inline qreal zoomFactorY() const { return m_zoomedResolutionY / m_resolutionY; }
 
     /**
-     * Set a resolution for X and Y of the output device.
+     * Set a resolution (aka DPI) for X and Y of the output device.
      * The zoom factor is not changed.
-     *
-     * XXX: Is this also in dots per inch?
      */
     void setResolution(qreal resolutionX, qreal resolutionY);
 

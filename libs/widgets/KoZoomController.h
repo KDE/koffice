@@ -57,8 +57,9 @@ class QSize;
  * except emit the aspectModeChanged signal.
  *
  */
-class KOWIDGETS_EXPORT KoZoomController : public QObject {
-Q_OBJECT
+class KOWIDGETS_EXPORT KoZoomController : public QObject
+{
+    Q_OBJECT
 public:
     /**
     * Constructor. Create one per canvasController.  The zoomAction is created in the constructor and will

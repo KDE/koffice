@@ -136,25 +136,20 @@ void KoZoomController::setDocumentSize(const QSizeF &documentSize, bool recalcul
 
 void KoZoomController::setZoom(KoZoomMode::Mode mode, qreal zoom)
 {
-    // Seems to be unused
-//    if (d->zoomHandler->zoomMode() == mode && d->zoomHandler->zoom() == zoom)
-//        return; // no change
+    if (d->zoomHandler->zoomMode() == mode && qFuzzyCompare(d->zoomHandler->zoom(), zoom)) {
+        return; // no change
+    }
     d->zoomHandler->setZoomMode(mode);
 
-    if(mode == KoZoomMode::ZOOM_CONSTANT)
-    {
+    if (mode == KoZoomMode::ZOOM_CONSTANT) {
         if(zoom == 0.0) return;
         d->action->setZoom(zoom);
-    }
-    else if(mode == KoZoomMode::ZOOM_WIDTH)
-    {
+    } else if (mode == KoZoomMode::ZOOM_WIDTH) {
         zoom = (d->canvasController->viewportSize().width() - 2*d->fitMargin)
                          / (d->zoomHandler->resolutionX() * d->pageSize.width());
         d->action->setSelectedZoomMode(mode);
         d->action->setEffectiveZoom(zoom);
-    }
-    else if(mode == KoZoomMode::ZOOM_PAGE)
-    {
+    } else if (mode == KoZoomMode::ZOOM_PAGE) {
         zoom = (d->canvasController->viewportSize().width() - 2*d->fitMargin)
                          / (d->zoomHandler->resolutionX() * d->pageSize.width());
         zoom = qMin(zoom, (d->canvasController->viewportSize().height() - 2*d->fitMargin)
