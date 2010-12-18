@@ -1080,14 +1080,17 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     if (!lineHeight.isEmpty()) {
         if (lineHeight != "normal") {
             if (lineHeight.indexOf('%') > -1) { // percent value
-                setLineHeightPercent(lineHeight.remove('%').toInt());
+                const int lh = lineHeight.remove('%').toInt();
+                if (lh > 0) // invalid conversions are 0, negative heights are invalid too.
+                    setLineHeightPercent(lh);
+            } else  { // fixed value
+                const qreal lh = KoUnit::parseValue(lineHeight);
+                if (lh > 0) // invalid conversions are 0, negative heights are invalid too.
+                    setLineHeightAbsolute(lh);
             }
-            else  { // fixed value
-                setLineHeightAbsolute(KoUnit::parseValue(lineHeight));
-            }
-        }
-        else
+        } else {
             normalLineHeight = true;
+        }
     }
     else {
         const QString lineSpacing(styleStack.property(KoXmlNS::style, "line-spacing"));
