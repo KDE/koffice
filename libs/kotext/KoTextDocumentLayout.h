@@ -79,7 +79,7 @@ public:
     KoInlineTextObjectManager *inlineTextObjectManager();
 
     /// Returns the bounding rectangle of block.
-    virtual QRectF blockBoundingRect(const QTextBlock & block) const;
+    virtual QRectF blockBoundingRect(const QTextBlock &block) const;
     /**
      * Returns the total size of the document. This is useful to display
      * widgets since they can use to information to update their scroll bars
@@ -88,13 +88,13 @@ public:
     virtual QSizeF documentSize() const;
 
     /// Draws the layout on the given painter with the given context.
-    virtual void draw(QPainter * painter, const QAbstractTextDocumentLayout::PaintContext & context);
+    virtual void draw(QPainter *painter, const QAbstractTextDocumentLayout::PaintContext &context);
 
     /// Draws the layout on the given painter with the given context, and pass the zoom.
-    void draw(QPainter * painter, const KoTextDocumentLayout::PaintContext & context);
+    void draw(QPainter *painter, const KoTextDocumentLayout::PaintContext &context);
 
     /// Returns the bounding rectacle of frame. Returns the bounding rectangle of frame.
-    virtual QRectF frameBoundingRect(QTextFrame * frame) const;
+    virtual QRectF frameBoundingRect(QTextFrame *frame) const;
 
     /**
      * Returns the cursor postion for the given point with the accuracy
@@ -103,7 +103,7 @@ public:
      * @param point the point in the document
      * @param accuracy if Qt::ExactHit this method will return -1 when not actaully hitting any text
      */
-    virtual int hitTest(const QPointF & point, Qt::HitTestAccuracy accuracy) const;
+    virtual int hitTest(const QPointF &point, Qt::HitTestAccuracy accuracy) const;
 
     /// reimplemented to always return 1
     virtual int pageCount() const;
@@ -172,7 +172,7 @@ public:
          * @param painter the painter to draw to.
          * @param context a set of variables able to alter the way things are painted.
          */
-        virtual void draw(QPainter *painter, const KoTextDocumentLayout::PaintContext & context) = 0;
+        virtual void draw(QPainter *painter, const KoTextDocumentLayout::PaintContext &context) = 0;
         /**
          * After all shapes have been used and there is still text left, use the param shape to continue
          * layout.
@@ -247,7 +247,7 @@ protected:
     void scheduleLayoutWithoutInterrupt();
 
     /// same as hitTest but for a range specified by an iterator
-    int hitTestIterated(QTextFrame::iterator begin, QTextFrame::iterator end, const QPointF & point, Qt::HitTestAccuracy accuracy) const;
+    int hitTestIterated(QTextFrame::iterator begin, QTextFrame::iterator end, const QPointF &point, Qt::HitTestAccuracy accuracy) const;
 
 
 private:
