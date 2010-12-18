@@ -36,10 +36,8 @@ macro_optional_add_subdirectory( pictureshape )
 macro_optional_add_subdirectory( videoshape )
 macro_optional_add_subdirectory( textshape )
 macro_optional_add_subdirectory( pluginshape )
-macro_optional_add_subdirectory( treeshape )
 
 # as the vector shape depends on filters subdir (not really intuitive) lets allow disabling
-macro_optional_add_subdirectory( vectorshape )
 
 # only build the reporting plugins if building koreport
 if(SHOULD_BUILD_KOREPORT)
