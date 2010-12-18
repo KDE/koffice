@@ -49,6 +49,9 @@ KWCopyShape::~KWCopyShape()
 
 void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
 {
+    if (!m_original)
+        return;
+
     painter.setClipRect(QRectF(QPointF(0, 0), converter.documentToView(size()))
                         .adjusted(-2, -2, 2, 2), // adjust for anti aliassing.
                         Qt::IntersectClip);
@@ -102,16 +105,23 @@ void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
 
 void KWCopyShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KoCanvasBase *canvas)
 {
-    m_original->paintDecorations(painter, converter, canvas);
+    if (m_original)
+        m_original->paintDecorations(painter, converter, canvas);
 }
 
 QPainterPath KWCopyShape::outline() const
 {
+    if (!m_original)
+        return QPainterPath();
+
     return m_original->outline();
 }
 
 void KWCopyShape::saveOdf(KoShapeSavingContext &context) const
 {
+    if (!m_original)
+        return;
+
     KWCopyShape *me = const_cast<KWCopyShape*>(this);
     me->setAdditionalAttribute("draw:copy-of", m_original->name());
     saveOdfAttributes(context, OdfAllAttributes);
