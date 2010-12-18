@@ -1543,8 +1543,9 @@ void TestXmlReader::testWhitespace()
     xmlstream << "<office:document-content ";
     xmlstream << " xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\"";
     xmlstream << " xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">";
-    xmlstream << "   <text:p> </text:p>";
-    xmlstream << "   <text:p> <text:span/> </text:p>";
+    xmlstream << "   <text:p> a</text:p>";
+    xmlstream << "   <text:p> b<text:span/>c </text:p>";
+    xmlstream << "   <text:p>a <text:span text:style-name=\"T6\">b</text:span> <text:span text:style-name=\"T7\">c </text:span></text:p>";
     xmlstream << "</office:document-content>";
     xmldevice.close();
 
@@ -1558,14 +1559,22 @@ void TestXmlReader::testWhitespace()
     p1 = doc.documentElement().firstChild().toElement();
     QCOMPARE(p1.isNull(), false);
     QCOMPARE(p1.isElement(), true);
+    QCOMPARE(p1.text(), QString(" a"));
     QCOMPARE(KoXml::childNodesCount(p1), 1);
 
     KoXmlElement p2;
     p2 = p1.nextSibling().toElement();
     QCOMPARE(p2.isNull(), false);
     QCOMPARE(p2.isElement(), true);
-    QEXPECT_FAIL("", "Whitespace handling should be fixed.", Continue);
+    QCOMPARE(p2.text(), QString(" bc "));
     QCOMPARE(KoXml::childNodesCount(p2), 3);
+
+    KoXmlElement p3;
+    p3 = p2.nextSibling().toElement();
+    QCOMPARE(p3.isNull(), false);
+    QCOMPARE(p3.isElement(), true);
+    QCOMPARE(p3.text(), QString("a b c "));
+    QCOMPARE(KoXml::childNodesCount(p3), 4);
 }
 
 void TestXmlReader::testSimpleOpenDocumentSpreadsheet()

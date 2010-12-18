@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2005-2006 Ariya Hidayat <ariya@kde.org>
+   Copyright (C) 2010 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -1030,6 +1031,7 @@ public:
 
 };
 
+
 namespace {
 
     class ParseError {
@@ -1042,7 +1044,8 @@ namespace {
         ParseError() :errorLine(-1), errorColumn(-1), error(false) {}
     };
 
-    void parseElement(QXmlStreamReader &xml, KoXmlPackedDocument &doc);
+    /// @param inText if true this is a subtree under a text:p or text:h
+    void parseElement(QXmlStreamReader &xml, KoXmlPackedDocument &doc, bool inText);
 
     // parse one element as if this were a standalone xml document
     ParseError parseDocument(QXmlStreamReader &xml, KoXmlPackedDocument &doc) {
@@ -1052,7 +1055,7 @@ namespace {
         while (!xml.atEnd() && xml.tokenType() != QXmlStreamReader::EndDocument) {
             switch (xml.tokenType()) {
             case QXmlStreamReader::StartElement:
-                parseElement(xml, doc);
+                parseElement(xml, doc, false);
                 break;
             case QXmlStreamReader::DTD:
                 doc.addDTD(xml.dtdName().toString());
@@ -1081,30 +1084,41 @@ namespace {
         return error;
     }
 
-    void parseElementContents(QXmlStreamReader &xml, KoXmlPackedDocument &doc)
+    void parseElementContents(QXmlStreamReader &xml, KoXmlPackedDocument &doc, bool inText)
     {
         xml.readNext();
-        QString ws;
-        bool sawElement = false;
+        bool appendWhitespace = false;
         while (!xml.atEnd()) {
             switch (xml.tokenType()) {
             case QXmlStreamReader::EndElement:
                 // if an element contains only whitespace, put it in the dom
-                if (!ws.isEmpty() && !sawElement) {
-                    doc.addText(ws);
-                }
+                if (appendWhitespace)
+                    doc.addText(QLatin1String(" "));
                 return;
-            case QXmlStreamReader::StartElement:
-                sawElement = true;
-                parseElement(xml, doc);
+            case QXmlStreamReader::StartElement: {
+                bool textNode = false;
+                if (!inText) {
+                    const QStringRef name = xml.name();
+                    if (xml.name().size() == 1
+                            && (name.at(0).unicode() == 'p' || name.at(0).unicode() == 'h')
+                            && KoXmlNS::text == xml.namespaceUri().toString()) {
+                        // we just stumbled upon a 'text:h' or 'text:p'
+                        textNode = true;
+                    }
+                }
+                if (appendWhitespace)
+                    doc.addText(QLatin1String(" "));
+                appendWhitespace = false;
+                parseElement(xml, doc, inText || textNode);
                 break;
+            }
             case QXmlStreamReader::Characters:
                 if (xml.isCDATA()) {
                     doc.addCData(xml.text().toString());
                 } else if (!xml.isWhitespace()) {
                     doc.addText(xml.text().toString());
-                } else if (!sawElement) {
-                    ws += xml.text();
+                } else if (inText) {
+                    appendWhitespace = true;
                 }
                 break;
             case QXmlStreamReader::ProcessingInstruction:
@@ -1117,7 +1131,7 @@ namespace {
         }
     }
 
-    void parseElement(QXmlStreamReader &xml, KoXmlPackedDocument &doc) {
+    void parseElement(QXmlStreamReader &xml, KoXmlPackedDocument &doc, bool inText) {
         // reader.tokenType() is now QXmlStreamReader::StartElement
         doc.addElement(xml.qualifiedName().toString(),
                        fixNamespace(xml.namespaceUri().toString()));
@@ -1129,7 +1143,7 @@ namespace {
                              a->value().toString());
             ++a;
         }
-        parseElementContents(xml, doc);
+        parseElementContents(xml, doc, inText);
         // reader.tokenType() is now QXmlStreamReader::EndElement
         doc.closeElement();
     }

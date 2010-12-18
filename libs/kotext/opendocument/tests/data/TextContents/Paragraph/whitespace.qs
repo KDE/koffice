@@ -25,4 +25,7 @@ cursor.insertText("Foo ");
 cursor.insertBlock();
 cursor.insertText(" Foo");
 
+cursor.insertBlock();
+cursor.insertText("some words in spans");
+
 document;
