@@ -123,7 +123,13 @@ qreal Layout::width()
     Q_ASSERT(shape);
     if (m_dropCapsNChars>0)
         return m_dropCapsAffectedLineWidthAdjust+10;
-    qreal ptWidth = m_inTable ? m_tableLayout.cellContentRect(m_tableCell).width() : shape->size().width();
+    qreal ptWidth = shape->size().width();
+    if (m_inTable) {
+        QTextCursor tableFinder(m_block);
+        QTextTable *table = tableFinder.currentTable();
+        m_tableLayout.setTable(table);
+        ptWidth = m_tableLayout.cellContentRect(m_tableCell).width();
+    }
     if (m_newParag)
         ptWidth -= resolveTextIndent();
     if (m_blockData)
