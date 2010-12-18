@@ -40,7 +40,7 @@ DeleteCommand::DeleteCommand(DeleteMode mode, TextTool *tool, QUndoCommand *pare
     m_undone(false),
     m_mode(mode)
 {
-    setText(i18n("Delete"));
+    setText(i18n("Deletion"));
 }
 
 void DeleteCommand::undo()

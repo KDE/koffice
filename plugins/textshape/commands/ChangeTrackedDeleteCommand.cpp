@@ -73,7 +73,7 @@ ChangeTrackedDeleteCommand::ChangeTrackedDeleteCommand(DeleteMode mode, TextTool
     m_mode(mode),
     m_removedElements()
 {
-      setText(i18n("Delete"));
+      setText(i18n("Deletion"));
 }
 
 void ChangeTrackedDeleteCommand::undo()
@@ -285,7 +285,7 @@ void ChangeTrackedDeleteCommand::deleteSelection(QTextCursor &selection)
     selection.setPosition(selectionBegin);
     selection.setPosition(selectionEnd, QTextCursor::KeepAnchor);
     QTextDocumentFragment deletedFragment;
-    changeId = KoTextDocument(document).changeTracker()->getDeleteChangeId(i18n("Delete"), deletedFragment, selection.charFormat().property( KoCharacterStyle::ChangeTrackerId ).toInt());
+    changeId = KoTextDocument(document).changeTracker()->getDeleteChangeId(i18n("Deletion"), deletedFragment, selection.charFormat().property( KoCharacterStyle::ChangeTrackerId ).toInt());
     KoChangeTrackerElement *element = KoTextDocument(document).changeTracker()->elementById(changeId);
     deleteChangemarker = new KoDeleteChangeMarker(KoTextDocument(document).changeTracker());
     deleteChangemarker->setChangeId(changeId);
