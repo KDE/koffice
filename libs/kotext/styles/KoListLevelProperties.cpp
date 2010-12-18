@@ -2,6 +2,7 @@
  * Copyright (C) 2006-2007 Thomas Zander <zander@kde.org>
  * Copyright (C) 2007 Sebastian Sauer <mail@dipe.org>
  * Copyright (C) 2008 Girish Ramakrishnan <girish@forwardbias.in>
+ * Copyright (C) 2010 Nandita Suri <suri.nandita@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -124,6 +125,14 @@ QString KoListLevelProperties::propertyString(int key) const
     return qvariant_cast<QString>(variant);
 }
 
+QColor KoListLevelProperties::propertyColor(int key) const
+{
+    QVariant variant = d->stylesPrivate.value(key);
+    if (variant.isNull())
+        return QColor(Qt::black);
+    return qvariant_cast<QColor>(variant);
+}
+
 void KoListLevelProperties::applyStyle(QTextListFormat &format) const
 {
     QList<int> keys = d->stylesPrivate.keys();
@@ -221,6 +230,16 @@ void KoListLevelProperties::setBulletCharacter(QChar character)
 QChar KoListLevelProperties::bulletCharacter() const
 {
     return propertyInt(KoListStyle::BulletCharacter);
+}
+
+void KoListLevelProperties::setBulletColor(QColor color)
+{
+    setProperty(KoListStyle::BulletColor, color);
+}
+
+QColor KoListLevelProperties::bulletColor() const
+{
+    return propertyColor(KoListStyle::BulletColor);
 }
 
 void KoListLevelProperties::setRelativeBulletSize(int percent)
@@ -520,7 +539,11 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
                 setHeight(KoUnit::parseValue(height));
         } else if (localName == "text-properties") {
             // TODO
-        }
+            QString color(property.attributeNS(KoXmlNS::fo, "color"));
+            if (!color.isEmpty())
+                setBulletColor(QColor(color));
+	
+	}
     }
 }
 
@@ -607,6 +630,13 @@ void KoListLevelProperties::saveOdf(KoXmlWriter *writer) const
         writer->addAttribute("text:min-label-distance", toPoint(minimumDistance()));
 
     writer->endElement(); // list-level-properties
+    
+    writer->startElement("style:text-properties", false);
+
+    if (d->stylesPrivate.contains(KoListStyle::BulletColor))
+        writer->addAttribute("fo:color",bulletColor().name());
+    
+    writer->endElement(); // text-properties
 
 //   kDebug(32500) << "Key KoListStyle::ListItemPrefix :" << d->stylesPrivate.value(KoListStyle::ListItemPrefix);
 //   kDebug(32500) << "Key KoListStyle::ListItemSuffix :" << d->stylesPrivate.value(KoListStyle::ListItemSuffix);
