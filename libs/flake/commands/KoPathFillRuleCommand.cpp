@@ -41,7 +41,7 @@ KoPathFillRuleCommand::KoPathFillRuleCommand(const QList<KoPathShape*> &shapes, 
     foreach(KoPathShape *shape, d->shapes)
         d->oldFillRules.append(shape->fillRule());
 
-    setText(i18n("Set fill rule"));
+    setText(i18n("Set Fill Rule"));
 }
 
 KoPathFillRuleCommand::~KoPathFillRuleCommand()

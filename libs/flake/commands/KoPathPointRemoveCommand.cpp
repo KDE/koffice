@@ -101,7 +101,7 @@ QUndoCommand *KoPathPointRemoveCommand::createCommand(
         pointsOfSubpath.append(*it);
     }
 
-    QUndoCommand *cmd = new QUndoCommand(i18n("Remove points"), parent);
+    QUndoCommand *cmd = new QUndoCommand(i18n("Remove Points"), parent);
 
     if (pointsToDelete.size() > 0) {
         new KoPathPointRemoveCommand(pointsToDelete, cmd);
@@ -130,7 +130,7 @@ KoPathPointRemoveCommand::KoPathPointRemoveCommand(const QList<KoPathPointData> 
         }
     }
     qSort(d->pointDataList);
-    setText(i18n("Remove points"));
+    setText(i18n("Remove Points"));
 }
 
 KoPathPointRemoveCommand::~KoPathPointRemoveCommand()

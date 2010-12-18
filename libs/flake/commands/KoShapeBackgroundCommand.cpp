@@ -70,7 +70,7 @@ KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KoShape*> &shapes
         d->addNewFill(fill);
     }
 
-    setText(i18n("Set background"));
+    setText(i18n("Set Background"));
 }
 
 KoShapeBackgroundCommand::KoShapeBackgroundCommand(KoShape * shape, KoShapeBackground * fill, QUndoCommand *parent)
@@ -81,7 +81,7 @@ KoShapeBackgroundCommand::KoShapeBackgroundCommand(KoShape * shape, KoShapeBackg
     d->addOldFill(shape->background());
     d->addNewFill(fill);
 
-    setText(i18n("Set background"));
+    setText(i18n("Set Background"));
 }
 
 KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KoShape*> &shapes, const QList<KoShapeBackground*> &fills, QUndoCommand *parent)
@@ -96,7 +96,7 @@ KoShapeBackgroundCommand::KoShapeBackgroundCommand(const QList<KoShape*> &shapes
         d->addNewFill(fill);
     }
 
-    setText(i18n("Set background"));
+    setText(i18n("Set Background"));
 }
 
 void KoShapeBackgroundCommand::redo()

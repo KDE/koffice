@@ -53,7 +53,7 @@ KoPathSeparateCommand::KoPathSeparateCommand(KoShapeControllerBase *controller, 
         : QUndoCommand(parent),
         d(new Private(controller, paths))
 {
-    setText(i18n("Separate paths"));
+    setText(i18n("Separate Paths"));
 }
 
 KoPathSeparateCommand::~KoPathSeparateCommand()

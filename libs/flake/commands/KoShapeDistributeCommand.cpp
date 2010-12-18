@@ -125,7 +125,7 @@ KoShapeDistributeCommand::KoShapeDistributeCommand(const QList<KoShape*> &shapes
     }
     d->command = new KoShapeMoveCommand(sortedPos.values(), previousPositions, newPositions);
 
-    setText(i18n("Distribute shapes"));
+    setText(i18n("Distribute Shapes"));
 }
 
 KoShapeDistributeCommand::~KoShapeDistributeCommand()

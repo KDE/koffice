@@ -43,7 +43,7 @@ KoPathPointTypeCommand::KoPathPointTypeCommand(
             m_shapes.insert(it->pathShape);
         }
     }
-    setText(i18n("Set point type"));
+    setText(i18n("Set Point Type"));
 }
 
 KoPathPointTypeCommand::~KoPathPointTypeCommand()

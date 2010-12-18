@@ -90,9 +90,9 @@ void KoShapeGroupCommandPrivate::init(QUndoCommand *q)
     }
 
     if (container->shapes().isEmpty()) {
-        q->setText(i18n("Group shapes"));
+        q->setText(i18n("Group Shapes"));
     } else {
-        q->setText(i18n("Add shapes to group"));
+        q->setText(i18n("Add Shapes to Group"));
     }
 }
 

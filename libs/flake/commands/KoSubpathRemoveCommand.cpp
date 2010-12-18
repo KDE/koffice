@@ -27,7 +27,7 @@ KoSubpathRemoveCommand::KoSubpathRemoveCommand(KoPathShape *pathShape, int subpa
         , m_subpathIndex(subpathIndex)
         , m_subpath(0)
 {
-    setText(i18n("Remove subpath"));
+    setText(i18n("Remove Subpath"));
 }
 
 KoSubpathRemoveCommand::~KoSubpathRemoveCommand()

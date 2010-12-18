@@ -129,8 +129,8 @@ void KoPathSegmentTypeCommand::initialize(const QList<KoPathPointData> & pointDa
     }
 
     if (m_segmentType == Curve) {
-        setText(i18n("Change segments to curves"));
+        setText(i18n("Change Segments to Curves"));
     } else {
-        setText(i18n("Change segments to lines"));
+        setText(i18n("Change Segments to Lines"));
     }
 }

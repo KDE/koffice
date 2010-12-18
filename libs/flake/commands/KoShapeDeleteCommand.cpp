@@ -53,7 +53,7 @@ KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, Ko
     d->shapes.append(shape);
     d->oldParents.append(shape->parent());
 
-    setText(i18n("Delete shape"));
+    setText(i18n("Delete Shape"));
 }
 
 KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, const QList<KoShape*> &shapes,
@@ -66,7 +66,7 @@ KoShapeDeleteCommand::KoShapeDeleteCommand(KoShapeControllerBase *controller, co
         d->oldParents.append(shape->parent());
     }
 
-    setText(i18n("Delete shapes"));
+    setText(i18n("Delete Shapes"));
 }
 
 KoShapeDeleteCommand::~KoShapeDeleteCommand()
