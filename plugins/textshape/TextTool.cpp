@@ -378,7 +378,7 @@ TextTool::TextTool(KoCanvasBase *canvas)
     addAction("edit_record_changes", m_actionRecordChanges);
     connect(m_actionRecordChanges, SIGNAL(triggered(bool)), this, SLOT(toggleRecordChanges(bool)));
 
-    m_configureChangeTracking = new KAction(i18n("Configure Change Tracking"), this);
+    m_configureChangeTracking = new KAction(i18n("Configure Change Tracking..."), this);
     addAction("configure_change_tracking", m_configureChangeTracking);
     connect(m_configureChangeTracking, SIGNAL(triggered()), this, SLOT(configureChangeTracking()));
 
