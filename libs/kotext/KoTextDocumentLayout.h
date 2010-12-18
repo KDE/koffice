@@ -231,6 +231,7 @@ protected:
     /// the currently set LayoutState
     LayoutState *m_state;
 
+    friend class KoTextShapeData;
     /// make sure we start a layout run
     virtual void relayout();
 

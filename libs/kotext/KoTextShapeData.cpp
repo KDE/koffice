@@ -54,6 +54,7 @@ public:
     KoTextShapeDataPrivate()
             : ownsDocument(true),
             dirty(true),
+            inRelayoutForPage(false),
             offset(0.0),
             position(-1),
             endPosition(-1),
@@ -72,6 +73,7 @@ public:
 
     bool ownsDocument;
     bool dirty;
+    bool inRelayoutForPage;
     qreal offset;
     int position, endPosition;
     KoText::Direction direction;
@@ -195,6 +197,8 @@ KoText::Direction KoTextShapeData::pageDirection() const
 void KoTextShapeData::setPage(KoTextPage *textpage)
 {
     Q_D(KoTextShapeData);
+    if (d->inRelayoutForPage)
+        return;
     delete d->textpage;
     d->textpage = textpage;
 }
@@ -234,10 +238,13 @@ void KoTextShapeData::relayoutFor(KoTextPage &textPage)
         return;
     KoTextPage *oldPage = d->textpage;
     d->dirty = true;
+    d->inRelayoutForPage = true;
     d->textpage = &textPage;
     layout->interruptLayout();
-    layout->layout();
+    layout->relayout();
     d->textpage = oldPage;
+    d->dirty = true;
+    d->inRelayoutForPage = false;
 }
 
 #include <KoTextShapeData.moc>
