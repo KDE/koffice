@@ -50,7 +50,7 @@ KoSubpathJoinCommand::KoSubpathJoinCommand(const KoPathPointData &pointData1, co
             m_reverse |= ReverseSecond;
         setText(i18n("Close Subpath"));
     } else {
-        setText(i18n("Join Jubpaths"));
+        setText(i18n("Join Subpaths"));
     }
 
     KoPathPoint * point1 = pathShape->pointByIndex(m_pointData1.pointIndex);
