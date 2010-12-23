@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
  * Copyright (C) 2007,2008 Sebastian Sauer <mail@dipe.org>
  * Copyright (C) 2007,2010 Pierre Ducroquet <pinaraf@gmail.com>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
@@ -119,6 +119,10 @@ KoParagraphStyle::~KoParagraphStyle()
 
 void KoParagraphStyle::setParentStyle(KoParagraphStyle *parent)
 {
+    if (parent == this) {
+        kWarning() << "FAIL: Can not set parent to myself";
+        return;
+    }
     d->parentStyle = parent;
 }
 
