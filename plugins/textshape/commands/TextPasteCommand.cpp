@@ -1,6 +1,7 @@
 /*
  This file is part of the KDE project
  * Copyright (C) 2009 Pierre Stirnweiss <pstirnweiss@googlemail.com>
+ * Copyright (C) 2010 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -61,7 +62,6 @@ void TextPasteCommand::redo()
     if (!m_first) {
         QUndoCommand::redo();
     } else {
-        //kDebug() << "begin paste command";
         editor->cursor()->beginEditBlock();
         m_first = false;
         if (editor->hasSelection()) { //TODO
@@ -74,8 +74,10 @@ void TextPasteCommand::redo()
         // check for mime type
         const QMimeData *data = QApplication::clipboard()->mimeData(m_mode);
 
-        if (data->hasFormat("application/vnd.oasis.opendocument.text")) {
-
+        KoOdf::DocumentType odfBasedType = KoOdf::Text;
+        if (!data->hasFormat(KoOdf::mimeType(odfBasedType)))
+            odfBasedType = KoOdf::OpenOfficeClipboard;
+        if (data->hasFormat(KoOdf::mimeType(odfBasedType))) {
             bool weOwnRdfModel = true;
             Soprano::Model *rdfModel = 0;
 #ifdef SHOULD_BUILD_RDF
@@ -92,7 +94,7 @@ void TextPasteCommand::redo()
             //kDebug() << "pasting odf text";
             KoTextPaste paste(m_tool->m_textShapeData, *editor->cursor(),
                               m_tool->canvas(), rdfModel);
-            paste.paste(KoOdf::Text, data);
+            paste.paste(odfBasedType, data);
             //kDebug() << "done with pasting odf";
 
 #ifdef SHOULD_BUILD_RDF
@@ -105,13 +107,9 @@ void TextPasteCommand::redo()
             }
 #endif
         } else if (data->hasHtml()) {
-            //kDebug() << "pasting html";
             editor->cursor()->insertHtml(data->html());
-            //kDebug() << "done with pasting";
         } else if (data->hasText()) {
-            //kDebug() << "pasting text";
             editor->cursor()->insertText(data->text());
-            //kDebug() << "done with pasting";
         }
         editor->cursor()->endEditBlock();
     }
