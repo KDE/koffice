@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2008 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2008-2010 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -269,26 +269,32 @@ void StylesModel::setCurrentParagraphStyle(int styleId, bool unchanged)
 {
     if (m_currentParagraphStyle == styleId && unchanged == m_pureParagraphStyle)
         return;
-    QModelIndex prev = parent(styleId, m_styleList);
-    m_currentParagraphStyle = styleId;
-    m_pureParagraphStyle = unchanged;
 
-    if (prev.isValid())
-        emit dataChanged(prev, prev);
-    QModelIndex newCurrent = parent(styleId, m_styleList);
-    emit dataChanged(newCurrent, newCurrent);
+    for (int i = 0; i < 2; ++i) {
+        foreach (int parent, m_relations.keys()) {
+            int index = m_relations.values(parent).indexOf(m_currentParagraphStyle);
+            if (index >= 0) {
+                QModelIndex mi = createIndex(index + 1, 1, m_currentParagraphStyle);
+                emit dataChanged(mi, mi);
+                break;
+            }
+        }
+
+        m_currentParagraphStyle = styleId;
+        m_pureParagraphStyle = unchanged;
+    }
 }
 
 void StylesModel::setCurrentCharacterStyle(int styleId, bool unchanged)
 {
     if (m_currentCharacterStyle == styleId && unchanged == m_pureCharacterStyle)
         return;
-    QModelIndex prev = parent(styleId, m_styleList);
+    QModelIndex prev = createIndex(0, 1, m_currentCharacterStyle);
     m_currentCharacterStyle = styleId;
     m_pureCharacterStyle = unchanged;
     if (prev.isValid())
         emit dataChanged(prev, prev);
-    QModelIndex newCurrent = parent(styleId, m_styleList);
+    QModelIndex newCurrent = createIndex(0, 1, styleId);
     emit dataChanged(newCurrent, newCurrent);
 }
 
