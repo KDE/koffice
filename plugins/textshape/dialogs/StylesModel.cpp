@@ -61,18 +61,19 @@ void StylesModel::recalculate()
     treeRoot << m_styleManager->defaultParagraphStyle()->styleId();
     paragraphStyles << treeRoot[0];
     foreach (KoParagraphStyle *style, m_styleManager->paragraphStyles()) {
-        KoParagraphStyle *root = style;
-        while (root->parentStyle()) {
+        KoParagraphStyle *root;
+        for (root = style; root->parentStyle(); root = root->parentStyle()) {
             const int key = root->parentStyle()->styleId();
             // the multiHash has the nasty habit or returning an inverted list, so lets 'sort in' by inserting them again
             QList<int> prevValues = m_relations.values(key);
+            if (prevValues.contains(root->styleId()))
+                continue;
             m_relations.remove(key);
             m_relations.insert(key, root->styleId());
             while (!prevValues.isEmpty())
                 m_relations.insert(key, prevValues.takeLast());
 
             characterStyles << root->characterStyle()->styleId();
-            root = root->parentStyle();
         }
         Q_ASSERT(root);
         Q_ASSERT(root->characterStyle());

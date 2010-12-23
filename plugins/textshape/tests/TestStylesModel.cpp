@@ -18,6 +18,7 @@ public slots:
 private slots:
     void testPrecalcCache();
     void testSetManager();
+    void testNestedStyles();
 
 private:
     void fillManager();
@@ -94,14 +95,49 @@ void TestStylesModel::testSetManager()
     QCOMPARE(model.rootStyleIds().count(), 5);
 }
 
+void TestStylesModel::testNestedStyles()
+{
+    // have a 3 level deep style hierarchy and make sure it shows correctly.
+    fillManager();
+    KoParagraphStyle *headers = manager->paragraphStyle("headers");
+    QVERIFY(headers);
+
+    // the fillManager adds headers root and H1, H2, H3.  Add new root above to get
+    // to 3 levels.
+    KoParagraphStyle *root = new KoParagraphStyle();
+    root->setName("Root Style");
+    manager->add(root);
+    headers->setParentStyle(root);
+
+    MockModel model(manager);
+    QCOMPARE(model.rootStyleIds().count(), 5); // default, root, code, altered and red.
+
+    KoParagraphStyle *s = manager->paragraphStyle(model.rootStyleIds().at(0));
+    QVERIFY(s);
+    QCOMPARE(s->name(), QString("Default"));
+
+    s = manager->paragraphStyle(model.rootStyleIds().at(1));
+    QCOMPARE(s, root);
+    QList<int> headerId = model.relations().values(root->styleId());
+    QCOMPARE(headerId.count(), 1);
+    s = manager->paragraphStyle(headerId.at(0));
+    QVERIFY(s);
+    QCOMPARE(s->name(), QString("headers"));
+
+    QList<int> children = model.relations().values(headerId.at(0));
+    QCOMPARE(children.count(), 3); // Head 1, 2, 3
+}
+
 void TestStylesModel::fillManager()
 {
     KoParagraphStyle *ps = new KoParagraphStyle();
     ps->setName("code");
     manager->add(ps);
+    // qDebug() << "code:" << ps->styleId();
     ps = new KoParagraphStyle();
     ps->setName("altered");
     manager->add(ps);
+    // qDebug() << "altered:" << ps->styleId();
 
     ps = new KoParagraphStyle();
     ps->setName("headers");
@@ -109,19 +145,24 @@ void TestStylesModel::fillManager()
     head->setParentStyle(ps);
     head->setName("Head 1");
     manager->add(head);
+    // qDebug() << "head1:" << head->styleId();
     head = new KoParagraphStyle();
     head->setParentStyle(ps);
     head->setName("Head 2");
     manager->add(head);
+    // qDebug() << "head2:" << head->styleId();
     manager->add(ps);
+    // qDebug() << "headers:" << ps->styleId();
     head = new KoParagraphStyle();
     head->setParentStyle(ps);
     head->setName("Head 3");
     manager->add(head);
+    // qDebug() << "head3:" << head->styleId();
 
     KoCharacterStyle *style = new KoCharacterStyle();
     style->setName("red");
     manager->add(style);
+    // qDebug() << "red:" << style->styleId();
 }
 
 QTEST_MAIN(TestStylesModel)
