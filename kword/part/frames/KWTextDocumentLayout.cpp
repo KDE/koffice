@@ -278,6 +278,11 @@ void KWTextDocumentLayout::layout()
                     line.setPosition(QPointF(rect.x(), rect.y()));
                     return;
                 }
+                qreal rightIndent = 0;
+                if (m_state->layout->textOption().textDirection() == Qt::RightToLeft) {
+                    rightIndent = qMax(m_state->shape->size().width() - width - leftIndent, 0.);
+                }
+
                 rect = limit(rect);
 
                 qreal movedDown = 0;
@@ -293,6 +298,9 @@ void KWTextDocumentLayout::layout()
                             x += leftIndent;
                             effectiveLineWidth -= leftIndent;
                         }
+                        if (rect.right() < leftIndent + width) { // limit moved the edge, keep the indent.
+                            effectiveLineWidth -= rightIndent;
+                        }
                         line.setLineWidth(effectiveLineWidth);
                         line.setPosition(QPointF(x, rect.y()));
                     }
@@ -300,7 +308,7 @@ void KWTextDocumentLayout::layout()
 
                     QRectF newLine = limit(rect);
                     if (newLine.width() <= 0 || line.textLength() == 0
-                            || line.cursorToX(line.textStart(), QTextLine::Trailing) > newLine.right()) {
+                            || line.naturalTextRect().left() > newLine.right()) {
                         const int Move = 10;
                         movedDown += Move;
                         if (movedDown > m_state->shape->size().height() * 1.3) {
