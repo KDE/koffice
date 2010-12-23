@@ -343,8 +343,8 @@ void KWView::setupActions()
     actionCollection()->addAction("insert_picture", action);
     connect(action, SIGNAL(triggered()), this, SLOT(insertImage()));
 
-    action = new KAction(i18n("Frame Borders"), this);
-    action->setToolTip(i18n("Turns the border display on and off"));
+    action = new KAction(i18n("Text Areas Borders"), this);
+    action->setToolTip(i18n("Turns the border display of the text areas on and off"));
     action->setCheckable(true);
     actionCollection()->addAction("view_frameborders", action);
     connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleViewFrameBorders(bool)));
