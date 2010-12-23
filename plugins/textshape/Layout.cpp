@@ -2006,13 +2006,15 @@ qreal Layout::findFootnote(const QTextLine &line, int *oldLength)
             bf.setProperty(13471293, variant);
             cursor.mergeBlockFormat(bf);
 
+            const int before = cursor.position();
+            cursor.insertFragment(note->text());
+            cursor.setPosition(before);
             QTextCharFormat cf;
             cf.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
             cursor.mergeCharFormat(cf);
             cursor.insertText(note->label() + ' ');
             cf.setVerticalAlignment(QTextCharFormat::AlignNormal);
             cursor.mergeCharFormat(cf);
-            cursor.insertFragment(note->text());
         }
     }
     if (m_textShape->hasFootnoteDocument())
