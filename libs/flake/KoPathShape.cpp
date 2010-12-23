@@ -1,7 +1,7 @@
 /* This file is part of the KDE project
    Copyright (C) 2006-2008 Thorsten Zachmann <zachmann@kde.org>
    Copyright (C) 2006-2008 Jan Hambrecht <jaham@gmx.net>
-   Copyright (C) 2007-2009 Thomas Zander <zander@kde.org>
+   Copyright (C) 2007-2010 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -375,23 +375,15 @@ QPainterPath KoPathShape::outline() const
 
 QRectF KoPathShape::boundingRect() const
 {
-    QTransform transform = absoluteTransformation(0);
-    // calculate the bounding rect of the transformed outline
-    QRectF bb(transform.map(outline()).boundingRect());
+    QRectF bb(outline().boundingRect());
     if (border()) {
         KoInsets inset;
         border()->borderInsets(this, inset);
-
-        // calculate transformed border insets
-        QPointF center = transform.map(QPointF());
-        QPointF tl = transform.map(QPointF(-inset.left,-inset.top)) - center;
-        QPointF br = transform.map(QPointF(inset.right,inset.bottom)) -center;
-        qreal left = qMin(tl.x(),br.x());
-        qreal right = qMax(tl.x(),br.x());
-        qreal top = qMin(tl.y(),br.y());
-        qreal bottom = qMax(tl.y(),br.y());
-        bb.adjust(left, top, right, bottom);
+        bb.adjust(-inset.left, -inset.top, inset.right, inset.bottom);
     }
+
+    QTransform transform = absoluteTransformation(0);
+    bb = transform.mapRect(bb);
     if (shadow()) {
         KoInsets insets;
         shadow()->insets(insets);
