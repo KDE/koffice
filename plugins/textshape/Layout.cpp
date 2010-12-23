@@ -1159,8 +1159,24 @@ void Layout::drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumen
 
             painter->save();
             QBrush bg = paintStrategy->background(block.blockFormat().background());
-            if (bg != Qt::NoBrush)
-                painter->fillRect(layout->boundingRect(), bg);
+            if (bg != Qt::NoBrush) {
+                QRectF background(layout->boundingRect());
+                QTextBlock prev = block.previous();
+                if (prev.isValid() && prev.blockFormat().background() == bg) {
+                    qreal bottom = prev.layout()->boundingRect().bottom();
+                    if (bottom < background.top())
+                        background.setTop(bottom);
+                }
+                QTextBlock next = block.next();
+                if (next.isValid() && next.layout()->lineCount() > 0
+                        && next.blockFormat().background() == bg) {
+                    qreal top = next.layout()->lineAt(0).y();
+                    if (top > background.bottom())
+                        background.setBottom(top);
+                }
+
+                painter->fillRect(background, bg);
+            }
             paintStrategy->applyStrategy(painter);
             painter->save();
             drawListItem(painter, block, context.imageCollection);
