@@ -1345,8 +1345,7 @@ void TextTool::deactivate()
 {
     m_caretTimer.stop();
     m_caretTimerState = false;
-    if (m_textShapeData) // then we got disabled without ever having done anything.
-        repaintCaret();
+    repaintCaret();
     m_textShape = 0;
     if (m_textShapeData && m_textShapeData) {
         TextSelection selection;
@@ -1375,7 +1374,7 @@ void TextTool::repaintDecorations()
 void TextTool::repaintCaret()
 {
     KoTextEditor *textEditor = m_textEditor.data();
-    if (textEditor == 0)
+    if (textEditor == 0 || m_textShapeData == 0)
         return;
     QTextBlock block = textEditor->block();
     if (block.isValid()) {
