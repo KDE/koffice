@@ -449,8 +449,7 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
         const QString format = style.attributeNS(KoXmlNS::style, "num-format", QString());
         kDebug(32500) << "style.localName()=" << style.localName() << "level=" << level << "displayLevel=" << displayLevel << "format=" << format;
         if (format.isEmpty()) {
-            setStyle(KoListStyle::CustomCharItem);
-            setBulletCharacter(QChar());
+            setStyle(KoListStyle::None);
         } else {
             if (format[0] == '1')
                 setStyle(KoListStyle::DecimalItem);

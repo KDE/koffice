@@ -398,7 +398,7 @@ void ListItemsHelper::recalculate()
             break;
         case KoListStyle::None:
             calcWidth = false;
-            width =  10.0; // simple indenting
+            width =  0.0;
             break;
         case KoListStyle::Bengali:
         case KoListStyle::Gujarati:
@@ -455,10 +455,12 @@ void ListItemsHelper::recalculate()
         lih.recalculate();
     }
 
-    qreal counterSpacing = m_fm.width(' ');
-    counterSpacing = qMax(format.doubleProperty(KoListStyle::MinimumDistance), counterSpacing);
+    qreal counterSpacing = 0;
+    if (listStyle != KoListStyle::None)
+        counterSpacing = qMax(format.doubleProperty(KoListStyle::MinimumDistance), m_fm.width(' '));
     width += m_fm.width(prefix + suffix); // same for all
-    width = qMax(format.doubleProperty(KoListStyle::MinimumWidth), width);
+    if (listStyle != KoListStyle::None)
+        width = qMax(format.doubleProperty(KoListStyle::MinimumWidth), width);
     for (int i = 0; i < m_textList->count(); i++) {
         QTextBlock tb = m_textList->item(i);
         KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(tb.userData());
