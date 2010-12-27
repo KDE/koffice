@@ -123,8 +123,9 @@ bool KoInlineTextObjectManager::removeInlineObject(QTextCursor &cursor)
 
 void KoInlineTextObjectManager::removeInlineObject(KoInlineObject *object)
 {
-    Q_ASSERT(object);
-    m_objects.remove(object->id());
+    //Q_ASSERT(object);
+    if (object)
+        m_objects.remove(object->id());
     // TODO dirty the document somehow
 }
 
