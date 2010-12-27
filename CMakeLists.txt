@@ -75,20 +75,15 @@ endif(KDE4_BUILD_TESTS)
 ## Look for KDE and Qt ##
 #########################
 ########################
-set(KDE_MIN_VERSION "4.3.0")
-find_package(KDE4 4.3.0 REQUIRED)
+set(KDE_MIN_VERSION "4.5.0")
+find_package(KDE4 4.5.0 REQUIRED)
 
-find_package(Qt4 4.6.0 REQUIRED)
+find_package(Qt4 4.7.0 REQUIRED)
 
 include(KDE4Defaults)
 include(MacroLibrary)
 include (MacroAdditionalCleanFiles)
 include (MacroAddFileDependencies)
-
-option(GHNS "support Get Hot New Stuff" ON)
-if(KDE_VERSION LESS "4.4.0")
-    set(GHNS FALSE)
-endif(KDE_VERSION LESS "4.4.0")
 
  ###########################
 ############################
@@ -110,10 +105,8 @@ endif (APPLE)
 #################################
 ################################
 
-
 macro_optional_find_package(OpenEXR)
 macro_bool_to_01(OPENEXR_FOUND HAVE_OPENEXR)
-
 
  ###########################
 ############################
@@ -207,8 +200,6 @@ if(LCMS2_FOUND)
     set(HAVE_REQUIRED_LCMS_VERSION TRUE)
     set(HAVE_LCMS TRUE)
 endif(LCMS2_FOUND)
-
-    
 
 macro_log_feature(HAVE_REQUIRED_LCMS_VERSION "LittleCMS" "Color management engine" "http://www.littlecms.com" FALSE "1.18" "Required for color management")
 

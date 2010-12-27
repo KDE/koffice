@@ -58,7 +58,8 @@ kde4_add_ui_files( kowidgets_LIB_SRCS
 
 kde4_add_library(kowidgets SHARED ${kowidgets_LIB_SRCS})
 
-if(GHNS) 
+option(GHNS "support Get Hot New Stuff" ON)
+if(GHNS)
     target_link_libraries(kowidgets kotext pigmentcms ${KDE4_KNEWSTUFF3_LIBS})
 else(GHNS)
     target_link_libraries(kowidgets kotext pigmentcms )
