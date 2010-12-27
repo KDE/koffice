@@ -1086,10 +1086,14 @@ void KWView::toggleHeader()
     if (!m_currentPage.isValid())
         return;
     Q_ASSERT(m_currentPage.pageStyle().isValid());
+    const bool on = m_actionViewHeader->isChecked();
     KWPageStyle after = m_currentPage.pageStyle();
     after.detach(after.name());
-    after.setHeaderPolicy(m_actionViewHeader->isChecked()
-            ? KWord::HFTypeUniform : KWord::HFTypeNone);
+    after.setHeaderPolicy(on ? KWord::HFTypeUniform : KWord::HFTypeNone);
+    if (on) {
+        after.setHeaderDistance(17);
+        after.setHeaderMinimumHeight(10);
+    }
     KWPageStylePropertiesCommand *cmd = new KWPageStylePropertiesCommand(m_document,
             m_currentPage.pageStyle(), after);
     m_document->addCommand(cmd);
@@ -1100,10 +1104,14 @@ void KWView::toggleFooter()
     if (!m_currentPage.isValid())
         return;
     Q_ASSERT(m_currentPage.pageStyle().isValid());
+    const bool on = m_actionViewFooter->isChecked();
     KWPageStyle after = m_currentPage.pageStyle();
     after.detach(after.name());
-    after.setFooterPolicy(m_actionViewFooter->isChecked()
-            ? KWord::HFTypeUniform : KWord::HFTypeNone);
+    after.setFooterPolicy(on ? KWord::HFTypeUniform : KWord::HFTypeNone);
+    if (on) {
+        after.setFooterDistance(17);
+        after.setFooterMinimumHeight(10);
+    }
     KWPageStylePropertiesCommand *cmd = new KWPageStylePropertiesCommand(m_document,
             m_currentPage.pageStyle(), after);
     m_document->addCommand(cmd);
