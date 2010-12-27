@@ -327,37 +327,6 @@ void KWDocument::removeFrameSet(KWFrameSet *fs)
     }
 }
 
-void KWDocument::relayout()
-{
-    foreach (KWFrameSet *fs, m_frameSets) {
-        KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(fs);
-        if (tfs == 0) continue;
-        if (tfs->textFrameSetType() != KWord::MainTextFrameSet) continue;
-        // we switch to the interaction tool to avoid crashes if the tool was editing a frame.
-        KoToolManager::instance()->switchToolRequested(KoInteractionTool_ID);
-        QSet<KWPage> coveredPages;
-        foreach (KWFrame *frame, tfs->frames()) {
-            KWPage page = pageManager()->page(frame->shape());
-            if (page.isValid()) {
-                if (! coveredPages.contains(page)) {
-                    coveredPages += page;
-                    continue; // keep one frame per page.
-                }
-            }
-
-            foreach (KoView *view, views()) {
-                KoCanvasBase *canvas = static_cast<KWView*>(view)->canvasBase();
-                canvas->shapeManager()->remove(frame->shape());
-            }
-            tfs->removeFrame(frame);
-            delete frame->shape();
-        }
-    }
-    PageProcessingQueue *ppq = new PageProcessingQueue(this);
-    foreach (const KWPage &page, pageManager()->pages())
-        ppq->addPage(page);
-}
-
 void KWDocument::addFrameSet(KWFrameSet *fs)
 {
     if (m_frameSets.contains(fs)) return;

@@ -51,6 +51,7 @@
 #include "commands/KWCreateOutlineCommand.h"
 #include "commands/KWClipFrameCommand.h"
 #include "commands/KWRemoveFrameClipCommand.h"
+#include "commands/KWPageStylePropertiesCommand.h"
 
 // koffice libs includes
 #include <kofficeversion.h>
@@ -1085,8 +1086,13 @@ void KWView::toggleHeader()
     if (!m_currentPage.isValid())
         return;
     Q_ASSERT(m_currentPage.pageStyle().isValid());
-    m_currentPage.pageStyle().setHeaderPolicy(m_actionViewHeader->isChecked() ? KWord::HFTypeEvenOdd : KWord::HFTypeNone);
-    m_document->relayout();
+    KWPageStyle after = m_currentPage.pageStyle();
+    after.detach(after.name());
+    after.setHeaderPolicy(m_actionViewHeader->isChecked()
+            ? KWord::HFTypeUniform : KWord::HFTypeNone);
+    KWPageStylePropertiesCommand *cmd = new KWPageStylePropertiesCommand(m_document,
+            m_currentPage.pageStyle(), after);
+    m_document->addCommand(cmd);
 }
 
 void KWView::toggleFooter()
@@ -1094,8 +1100,13 @@ void KWView::toggleFooter()
     if (!m_currentPage.isValid())
         return;
     Q_ASSERT(m_currentPage.pageStyle().isValid());
-    m_currentPage.pageStyle().setFooterPolicy(m_actionViewFooter->isChecked() ? KWord::HFTypeEvenOdd : KWord::HFTypeNone);
-    m_document->relayout();
+    KWPageStyle after = m_currentPage.pageStyle();
+    after.detach(after.name());
+    after.setFooterPolicy(m_actionViewFooter->isChecked()
+            ? KWord::HFTypeUniform : KWord::HFTypeNone);
+    KWPageStylePropertiesCommand *cmd = new KWPageStylePropertiesCommand(m_document,
+            m_currentPage.pageStyle(), after);
+    m_document->addCommand(cmd);
 }
 
 void KWView::toggleSnapToGrid()

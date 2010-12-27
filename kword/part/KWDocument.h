@@ -167,8 +167,6 @@ public:
     bool layoutFinishedAtleastOnce() const { return m_mainFramesetEverFinished; }
 
 public slots:
-    /// Relayout the pages
-    void relayout();
     /// Register new frameset
     void addFrameSet(KWFrameSet *f);
     /**
