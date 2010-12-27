@@ -1112,7 +1112,7 @@ void TextTool::keyPressEvent(QKeyEvent *event)
             textEditor->setPosition(destinationPosition,
                 shiftPressed ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor);
         if (moveOperation == QTextCursor::Down && prevPosition == textEditor->position()) {
-            // change behavior a little big from Qt; at the bottom of the doc we go to the end of the doc
+            // change behavior a little bit from Qt; at the bottom of the doc we go to the end of the doc
             textEditor->movePosition(QTextCursor::End,
                 shiftPressed ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor);
         }
