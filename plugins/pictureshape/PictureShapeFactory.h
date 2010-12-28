@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2010 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -35,6 +35,10 @@ public:
     virtual void newDocumentResourceManager(KoResourceManager *manager);
     /// reimplemented
     virtual QList<KoShapeConfigWidgetBase*> createShapeOptionPanels();
+
+public slots:
+    void createImageCollection(KoResourceManager *manager);
+
 };
 
 #endif

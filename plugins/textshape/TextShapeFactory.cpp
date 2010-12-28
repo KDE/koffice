@@ -113,19 +113,39 @@ bool TextShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &c
 
 void TextShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
 {
+    manager->setLazyResourceSlot(KoDocumentResource::ImageCollection,
+            this, "createImageCollection");
+    manager->setLazyResourceSlot(KoText::InlineTextObjectManager,
+            this, "createTextObjectManager");
+    manager->setLazyResourceSlot(KoText::StyleManager,
+            this, "createStylemanager");
+    manager->setLazyResourceSlot(KoDocumentResource::UndoStack,
+            this, "createUndoStack");
+}
+
+void TextShapeFactory::createStylemanager(KoResourceManager *manager)
+{
+    QVariant variant;
+    variant.setValue(new KoStyleManager(manager));
+    manager->setResource(KoText::StyleManager, variant);
+}
+
+void TextShapeFactory::createTextObjectManager(KoResourceManager *manager)
+{
     QVariant variant;
     variant.setValue<KoInlineTextObjectManager*>(new KoInlineTextObjectManager(manager));
     manager->setResource(KoText::InlineTextObjectManager, variant);
+}
 
-    if (!manager->hasResource(KoDocumentResource::UndoStack)) {
-        kWarning(32500) << "No KUndoStack found in the document resource manager, creating a new one";
-        manager->setUndoStack(new KUndoStack(manager));
-    }
-    variant.setValue(new KoStyleManager(manager));
-    manager->setResource(KoText::StyleManager, variant);
+void TextShapeFactory::createImageCollection(KoResourceManager *manager)
+{
+    manager->setImageCollection(new KoImageCollection(manager));
+}
 
-    if (!manager->imageCollection())
-        manager->setImageCollection(new KoImageCollection(manager));
+void TextShapeFactory::createUndoStack(KoResourceManager *manager)
+{
+    kWarning(32500) << "No KUndoStack found in the document resource manager, creating a new one";
+    manager->setUndoStack(new KUndoStack(manager));
 }
 
 #include <TextShapeFactory.moc>

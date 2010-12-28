@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2010 Thomas Zander <zander@kde.org>
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
  *
  * This library is free software; you can redistribute it and/or
@@ -66,6 +66,12 @@ QList<KoShapeConfigWidgetBase*> PictureShapeFactory::createShapeOptionPanels()
 
 void PictureShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
 {
-    if (!manager->imageCollection())
-        manager->setImageCollection(new KoImageCollection(manager));
+    manager->setLazyResourceSlot(KoDocumentResource::ImageCollection,
+            this, "createImageCollection");
 }
+
+void PictureShapeFactory::createImageCollection(KoResourceManager *manager)
+{
+    manager->setImageCollection(new KoImageCollection(manager));
+}
+

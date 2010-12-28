@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright 2006 Stefan Nikolaus <stefan.nikolaus@kdemail.net>
+   Copyright 2010 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -23,11 +24,9 @@
 #include <QVariantList>
 
 #include <KoShapeFactoryBase.h>
+#include <KoXmlReaderForward.h>
 
 class KoShape;
-#include "KoXmlReaderForward.h"
-
-#define MapResourceId 65227211
 
 class TableShapePlugin : public QObject
 {
@@ -49,6 +48,9 @@ public:
     virtual bool supports(const KoXmlElement &element, KoShapeLoadingContext &context) const;
 
     virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
+
+public slots:
+    void createMap(KoResourceManager *manager);
 };
 
 #endif // KSPREAD_TABLE_SHAPE_FACTORY

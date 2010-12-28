@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006, 2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -40,6 +40,12 @@ public:
     virtual bool supports(const KoXmlElement & e, KoShapeLoadingContext &context) const;
 
     virtual void newDocumentResourceManager(KoResourceManager *manager);
+
+public slots:
+    void createStylemanager(KoResourceManager *manager);
+    void createTextObjectManager(KoResourceManager *manager);
+    void createImageCollection(KoResourceManager *manager);
+    void createUndoStack(KoResourceManager *manager);
 };
 
 #endif

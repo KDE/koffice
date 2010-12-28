@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright 2006 Stefan Nikolaus <stefan.nikolaus@kdemail.net>
+   Copyright 2010 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -37,6 +38,9 @@
 #include "TableShape.h"
 #include "TableToolFactory.h"
 
+#define MapResourceId 65227211
+
+
 using namespace KSpread;
 
 K_PLUGIN_FACTORY(TableShapePluginFactory, registerPlugin<TableShapePlugin>();)
@@ -72,7 +76,6 @@ KoShape *TableShapeFactory::createDefaultShape(KoResourceManager *documentResour
     TableShape *shape = new TableShape();
     shape->setShapeId(TableShapeId);
     if (documentResources) {
-        Q_ASSERT(documentResources->hasResource(MapResourceId));
         Map *map = static_cast<Map*>(documentResources->resource(MapResourceId).value<void*>());
         shape->setMap(map);
     }
@@ -81,13 +84,16 @@ KoShape *TableShapeFactory::createDefaultShape(KoResourceManager *documentResour
 
 void TableShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
 {
-    if (manager->hasResource(MapResourceId)) return;
+    manager->setLazyResourceSlot(MapResourceId, this, "createMap");
+}
+
+void TableShapeFactory::createMap(KoResourceManager *manager)
+{
     // One spreadsheet map for all inserted tables to allow referencing cells among them.
     QVariant variant;
-    Map* map = new Map();
+    Map *map = new Map();
     // Make the KoResourceManager manage this Map, since we cannot delete it ourselves
     map->setParent(manager);
-    connect(manager, SIGNAL(destroyed()), map, SLOT(deleteLater()));
     variant.setValue<void*>(map);
     manager->setResource(MapResourceId, variant);
 }
