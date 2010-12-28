@@ -286,6 +286,34 @@ public:
      */
     void clearResource(int key);
 
+    /**
+     * Register a key with a slot to fetch on demand.
+     * For usecases where the creation of a resource is expensive the actual
+     * value of a resource can be lazily calculated by using a callback-slot.
+     * How this works is that instead of setting the value using setValue(),
+     * the caller calls setLazyResourceSlot() instead. The @param key is unchanged
+     * but the object/slot arguments are used to call a method on the target object
+     * the first time the resource is requested.
+     * A typicall implementation would be like;
+     * @code
+     *    manager->setLazyResourceSlot(KoDocumentResource::ImageCollection,
+     *        this, "createImageCollection");
+     * @endcode
+     * And the object would create a slot using the normal Qt concepts;
+     * @code
+     * public slots:
+     *      void createImageCollection(KoResourceManager *manager) {
+     *          manager->setImageCollection(new KoImageCollection(manager));
+     *      }
+     * @endcode
+     * Notice that the method is required to take an argumennt of KoResourceManager* and
+     * the name of the method is passed without arguments (which is notably different
+     * from usage of the SLOT macro)
+     *
+     * @param key the key that will be used to trigger the slot.
+     * @param object the target object that will be used for the callback.
+     * @param slot the name of the method, without arguments, to call.
+     */
     void setLazyResourceSlot(int key, QObject *object, const char *slot);
 
     KUndoStack *undoStack() const;
