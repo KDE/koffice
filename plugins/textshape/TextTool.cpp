@@ -2101,7 +2101,9 @@ void TextTool::debugTextDocument()
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0)
         return;
-    const int CHARSPERLINE = 80; // TODO Make configurable using ENV var?
+    int CHARSPERLINE = QString::fromLatin1(getenv("KOFFICE_DEBUG_COLUMNS")).toInt();
+    if (CHARSPERLINE < 5)
+        CHARSPERLINE = 80;
     const int CHARPOSITION = 278301935;
     KoTextDocument document(textEditor->document());
     KoStyleManager *styleManager = document.styleManager();
