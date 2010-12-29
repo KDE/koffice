@@ -77,7 +77,7 @@ KoStyleManager::KoStyleManager(QObject *parent)
         : QObject(parent), d(new Private())
 {
     d->defaultParagraphStyle = new KoParagraphStyle(this);
-    d->defaultParagraphStyle->setName(i18n("Default"));
+    d->defaultParagraphStyle->setName(i18n("[No Paragraph Style]"));
     add(d->defaultParagraphStyle);
 
     //TODO: also use the defaultstyles.xml mechanism. see KoOdfLoadingContext and KoTextSharedLoadingData
