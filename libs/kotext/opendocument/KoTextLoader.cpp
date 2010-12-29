@@ -427,12 +427,9 @@ void KoTextLoader::loadParagraph(const KoXmlElement &element, QTextCursor &curso
         if (!styleName.isEmpty())
             kWarning(32500) << "paragraph style " << styleName << "not found - using default style";
         paragraphStyle = d->styleManager->defaultParagraphStyle();
-        if (paragraphStyle == 0)
-            kWarning(32500) << "defaultParagraphStyle not found - using default style";
     }
 
     QTextCharFormat cf = cursor.charFormat(); // store the current cursor char format
-
     if (paragraphStyle && (cursor.position() == cursor.block().position())) {
         QTextBlock block = cursor.block();
         // Apply list style when loading a list but we don't have a list style
@@ -440,8 +437,6 @@ void KoTextLoader::loadParagraph(const KoXmlElement &element, QTextCursor &curso
         // Clear the outline level property. If a default-outline-level was set, it should not
         // be applied when loading a document, only on user action.
         block.blockFormat().clearProperty(KoParagraphStyle::OutlineLevel);
-    } else {
-        kWarning(32500) << "paragraph style " << styleName << " not found";
     }
 
     // Some paragraph have id's defined which we need to store so that we can eg
@@ -487,13 +482,12 @@ void KoTextLoader::loadHeading(const KoXmlElement &element, QTextCursor &cursor)
     // Set the paragraph-style on the block
     KoParagraphStyle *paragraphStyle = d->textSharedData->paragraphStyle(styleName, d->stylesDotXml);
     if (!paragraphStyle) {
+        kWarning(32500) << "paragraph style " << styleName << " not found";
         paragraphStyle = d->styleManager->defaultParagraphStyle();
     }
     if (paragraphStyle) {
         // Apply list style when loading a list but we don't have a list style
         paragraphStyle->applyStyle(block, d->currentList && !d->currentListStyle);
-    } else {
-        kWarning(32500) << "paragraph style " << styleName << " not found";
     }
 
     if ((block.blockFormat().hasProperty(KoParagraphStyle::OutlineLevel)) && (level == -1)) {
