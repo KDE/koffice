@@ -29,6 +29,11 @@ K_PLUGIN_FACTORY(WPImportFactory, registerPlugin<WPImport>();)
 K_EXPORT_PLUGIN(WPImportFactory("kofficefilters"))
 
 #include <libwpd/libwpd.h>
+
+#ifndef LIBWPD_VERSION_MINOR
+#define LIBWPD_VERSION_MINOR 8
+#endif
+
 #if LIBWPD_VERSION_MINOR>8
 #include <libwpd-stream/libwpd-stream.h>
 #else
