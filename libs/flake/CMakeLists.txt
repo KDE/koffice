@@ -273,6 +273,19 @@ install(
     KoFilterEffectConfigWidgetBase.h
     KoFilterEffectRenderContext.h
     KoFilterEffectLoadingContext.h
+    KoPostscriptPaintDevice.h
+    KoPathShape.h
+    KoShapeBackground.h
+    KoPathShapeLoader.h
+    KoColorBackground.h
+    KoLineBorder.h
+    KoInputDevice.h
+    KoInputDeviceHandler.h
+    KoInputDeviceHandlerEvent.h
+    KoInputDeviceHandlerRegistry.h
+    KoEventAction.h
+    KoEventActionFactoryBase.h
+    KoEventActionRegistry.h
     commands/KoEventActionAddCommand.h
     commands/KoEventActionRemoveCommand.h
     commands/KoParameterToPathCommand.h

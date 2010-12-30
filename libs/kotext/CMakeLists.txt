@@ -130,13 +130,7 @@ install(
     KoTextRdfCore.h
     KoTextInlineRdf.h
     KoTextMeta.h
-
-    DESTINATION
-    ${INCLUDE_INSTALL_DIR} COMPONENT Devel
-)
-
-install(
-    FILES
+    KoTextDocumentLayout.h
     styles/KoCharacterStyle.h
     styles/KoListLevelProperties.h
     styles/KoListStyle.h
@@ -147,15 +141,10 @@ install(
     styles/KoTableFormat.h
     styles/KoSectionStyle.h
     styles/KoStyleManager.h
-    DESTINATION
-    ${INCLUDE_INSTALL_DIR}/styles COMPONENT Devel
-)
-
-install(
-    FILES
     changetracker/KoChangeTracker.h
     changetracker/KoChangeTrackerElement.h
     changetracker/KoDeleteChangeMarker.h
+
     DESTINATION
-    ${INCLUDE_INSTALL_DIR}/changetracker COMPONENT Devel
+    ${INCLUDE_INSTALL_DIR} COMPONENT Devel
 )
