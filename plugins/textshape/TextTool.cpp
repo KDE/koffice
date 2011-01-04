@@ -688,7 +688,6 @@ void TextTool::setShapeData(KoTextShapeData *data)
             disconnect(lay, SIGNAL(shapeAdded(KoShape*)), this, SLOT(shapeAddedToDoc(KoShape*)));
     }
     m_textShapeData = data;
-    Q_ASSERT(m_textShapeData);
     if (m_textShapeData == 0)
         return;
     connect(m_textShapeData, SIGNAL(destroyed (QObject*)), this, SLOT(shapeDataRemoved()));
