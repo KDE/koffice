@@ -291,6 +291,8 @@ public:
      * The default is suppost to stay invisible to the user and its called
      * i18n("[No Paragraph Style]") for that reason. Applications should not
      * show this style in their document-level configure dialogs.
+     *
+     * All paragraph styles will have this style as a parent, making this the ultimate fall-back.
      */
     KoParagraphStyle *defaultParagraphStyle() const;
 
