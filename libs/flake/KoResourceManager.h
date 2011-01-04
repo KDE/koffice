@@ -286,6 +286,8 @@ public:
      */
     void clearResource(int key);
 
+    void setLazyResourceSlot(int key, QObject *object, const char *slot);
+
     KUndoStack *undoStack() const;
     void setUndoStack(KUndoStack *undoStack);
 

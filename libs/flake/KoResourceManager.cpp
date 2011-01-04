@@ -19,18 +19,34 @@
    Boston, MA 02110-1301, USA.
  */
 #include "KoResourceManager.h"
-
-#include <QVariant>
-#include <KUndoStack>
-#include <KDebug>
-
 #include "KoShape.h"
 #include "KoLineBorder.h"
+
+#include <QVariant>
+#include <QMetaObject>
+#include <KUndoStack>
+#include <KDebug>
 
 class KoResourceManager::Private
 {
 public:
+    void fetchLazy(int key, const KoResourceManager *parent) {
+        Q_ASSERT(lazyResources.contains(key));
+        Slot slot = lazyResources.value(key);
+        lazyResources.remove(key);
+
+        KoResourceManager *rm = const_cast<KoResourceManager*>(parent);
+        slot.object->metaObject()->invokeMethod(slot.object, slot.slot,
+            Qt::DirectConnection, Q_ARG(KoResourceManager *, rm));
+    }
+
+
     QHash<int, QVariant> resources;
+    struct Slot {
+        QObject *object;
+        const char *slot;
+    };
+    QHash<int, Slot> lazyResources;
 };
 
 KoResourceManager::KoResourceManager(QObject *parent)
@@ -53,12 +69,15 @@ void KoResourceManager::setResource(int key, const QVariant &value)
         d->resources[key] = value;
     } else {
         d->resources.insert(key, value);
+        d->lazyResources.remove(key);
     }
     emit resourceChanged(key, value);
 }
 
 QVariant KoResourceManager::resource(int key) const
 {
+    if (d->lazyResources.contains(key))
+        d->fetchLazy(key, this);
     if (!d->resources.contains(key)) {
         QVariant empty;
         return empty;
@@ -89,6 +108,8 @@ void KoResourceManager::setResource(int key, const KoUnit &unit)
 
 KoColor KoResourceManager::koColorResource(int key) const
 {
+    if (d->lazyResources.contains(key))
+        d->fetchLazy(key, this);
     if (! d->resources.contains(key)) {
         KoColor empty;
         return empty;
@@ -118,6 +139,8 @@ KoColor KoResourceManager::backgroundColor() const
 
 KoShape *KoResourceManager::koShapeResource(int key) const
 {
+    if (d->lazyResources.contains(key))
+        d->fetchLazy(key, this);
     if (! d->resources.contains(key))
         return 0;
 
@@ -141,6 +164,8 @@ int KoResourceManager::handleRadius() const
 
 KoUnit KoResourceManager::unitResource(int key) const
 {
+    if (d->lazyResources.contains(key))
+        d->fetchLazy(key, this);
     return resource(key).value<KoUnit>();
 }
 
@@ -175,6 +200,8 @@ KoLineBorder KoResourceManager::activeBorder() const
 
 bool KoResourceManager::boolResource(int key) const
 {
+    if (d->lazyResources.contains(key))
+        d->fetchLazy(key, this);
     if (! d->resources.contains(key))
         return false;
     return d->resources[key].toBool();
@@ -182,6 +209,8 @@ bool KoResourceManager::boolResource(int key) const
 
 int KoResourceManager::intResource(int key) const
 {
+    if (d->lazyResources.contains(key))
+        d->fetchLazy(key, this);
     if (! d->resources.contains(key))
         return 0;
     return d->resources[key].toInt();
@@ -189,6 +218,8 @@ int KoResourceManager::intResource(int key) const
 
 QString KoResourceManager::stringResource(int key) const
 {
+    if (d->lazyResources.contains(key))
+        d->fetchLazy(key, this);
     if (! d->resources.contains(key)) {
         QString empty;
         return empty;
@@ -198,6 +229,8 @@ QString KoResourceManager::stringResource(int key) const
 
 QSizeF KoResourceManager::sizeResource(int key) const
 {
+    if (d->lazyResources.contains(key))
+        d->fetchLazy(key, this);
     if (! d->resources.contains(key)) {
         QSizeF empty;
         return empty;
@@ -207,7 +240,7 @@ QSizeF KoResourceManager::sizeResource(int key) const
 
 bool KoResourceManager::hasResource(int key) const
 {
-    return d->resources.contains(key);
+    return d->resources.contains(key) && d->lazyResources.contains(key);
 }
 
 void KoResourceManager::clearResource(int key)
@@ -217,6 +250,16 @@ void KoResourceManager::clearResource(int key)
     d->resources.remove(key);
     QVariant empty;
     emit resourceChanged(key, empty);
+}
+
+void KoResourceManager::setLazyResourceSlot(int key, QObject *object, const char *slot)
+{
+    if (d->resources.contains(key) || d->lazyResources.contains(key))
+        return;
+    KoResourceManager::Private::Slot target;
+    target.object = object;
+    target.slot = slot;
+    d->lazyResources.insert(key, target);
 }
 
 KUndoStack *KoResourceManager::undoStack() const
