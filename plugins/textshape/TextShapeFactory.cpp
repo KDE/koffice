@@ -69,18 +69,15 @@ KoShape *TextShapeFactory::createDefaultShape(KoResourceManager *documentResourc
         KoTextDocument document(text->textShapeData()->document());
         document.setUndoStack(documentResources->undoStack());
 
-        if (documentResources->hasResource(KoText::StyleManager)) {
-            KoStyleManager *styleManager = documentResources->resource(KoText::StyleManager).value<KoStyleManager*>();
+        KoStyleManager *styleManager = documentResources->resource(KoText::StyleManager).value<KoStyleManager*>();
+        if (styleManager)
             document.setStyleManager(styleManager);
-        }
-        if (documentResources->hasResource(KoText::PageProvider)) {
-            KoPageProvider *pp = static_cast<KoPageProvider *>(documentResources->resource(KoText::PageProvider).value<void*>());
+        KoPageProvider *pp = static_cast<KoPageProvider *>(documentResources->resource(KoText::PageProvider).value<void*>());
+        if (pp)
             text->setPageProvider(pp);
-        }
-        if (documentResources->hasResource(KoText::ChangeTracker)) {
             KoChangeTracker *changeTracker = documentResources->resource(KoText::ChangeTracker).value<KoChangeTracker*>();
+        if (changeTracker)
             document.setChangeTracker(changeTracker);
-        }
 
         text->setImageCollection(documentResources->imageCollection());
     }

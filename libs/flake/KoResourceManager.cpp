@@ -240,7 +240,7 @@ QSizeF KoResourceManager::sizeResource(int key) const
 
 bool KoResourceManager::hasResource(int key) const
 {
-    return d->resources.contains(key) && d->lazyResources.contains(key);
+    return d->resources.contains(key) || d->lazyResources.contains(key);
 }
 
 void KoResourceManager::clearResource(int key)
