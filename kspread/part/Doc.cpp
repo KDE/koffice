@@ -103,10 +103,10 @@
 // D-Bus
 #include "interfaces/MapAdaptor.h"
 #include "interfaces/SheetAdaptor.h"
+#include <koChart.h>
 #include <QtDBus/QtDBus>
 
 // chart shape
-#include "plugins/chartshape/ChartShape.h"
 #include "chart/ChartDialog.h"
 
 // ui
