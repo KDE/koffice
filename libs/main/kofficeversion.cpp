@@ -19,22 +19,22 @@
 
 #include "kofficeversion.h"
 
-unsigned int KOffice::version()
+int KOffice::version()
 {
     return KOFFICE_VERSION;
 }
 
-unsigned int KOffice::versionMajor()
+int KOffice::versionMajor()
 {
     return KOFFICE_VERSION_MAJOR;
 }
 
-unsigned int KOffice::versionMinor()
+int KOffice::versionMinor()
 {
     return KOFFICE_VERSION_MINOR;
 }
 
-unsigned int KOffice::versionRelease()
+int KOffice::versionRelease()
 {
     return KOFFICE_VERSION_RELEASE;
 }

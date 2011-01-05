@@ -132,28 +132,28 @@ namespace KOffice
  * installed when the program was compiled.
  * @return the version number, encoded in a single uint
  */
-KOMAIN_EXPORT unsigned int version();
+KOMAIN_EXPORT int version();
 
 /**
  * Returns the major number of KOffice's version, e.g.
  * 1 for KOffice 1.2.3.
  * @return the major version number
  */
-KOMAIN_EXPORT unsigned int versionMajor();
+KOMAIN_EXPORT int versionMajor();
 
 /**
  * Returns the minor number of KOffice's version, e.g.
  * 2 for KOffice 1.2.3.
  * @return the minor version number
  */
-KOMAIN_EXPORT unsigned int versionMinor();
+KOMAIN_EXPORT int versionMinor();
 
 /**
  * Returns the release of KOffice's version, e.g.
  * 3 for KOffice 1.2.3.
  * @return the release number
  */
-KOMAIN_EXPORT unsigned int versionRelease();
+KOMAIN_EXPORT int versionRelease();
 
 /**
  * Returns the KOffice version as string, e.g. "1.2.3".
