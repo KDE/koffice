@@ -1139,6 +1139,7 @@ void CellView::paintText(QPainter& painter,
         // Case 5: Rich text.
         QSharedPointer<QTextDocument> doc = d->richText;
         doc->setDefaultTextOption(d->textOptions());
+        doc->setUseDesignMetrics(true);
         const QPointF position(coordinate.x() + indent,
                                coordinate.y() + d->textY - d->textHeight);
         painter.translate(position);
@@ -2174,5 +2175,6 @@ QTextOption CellView::Private::textOptions() const
     if (style.verticalText())
         options.setAlignment(Qt::AlignHCenter);
     options.setWrapMode(style.wrapText() ? QTextOption::WrapAtWordBoundaryOrAnywhere : QTextOption::NoWrap);
+    options.setUseDesignMetrics(true);
     return options;
 }
