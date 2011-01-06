@@ -43,12 +43,12 @@ MergeStrategy::~MergeStrategy()
     delete d;
 }
 
-QUndoCommand* MergeStrategy::createCommand()
+QUndoCommand *MergeStrategy::createCommand(QUndoCommand *parent)
 {
     if (d->initialSelection == selection()->lastRange()) {
         return 0;
     }
-    MergeCommand* command = new MergeCommand();
+    MergeCommand *command = new MergeCommand(parent);
     command->setSheet(selection()->activeSheet());
     command->setSelection(selection());
     command->add(*selection());

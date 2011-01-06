@@ -45,7 +45,7 @@ public:
      */
     virtual ~AutoFillStrategy();
 
-    virtual QUndoCommand* createCommand();
+    virtual QUndoCommand* createCommand(QUndoCommand *parent = 0);
 
 private:
     class Private;

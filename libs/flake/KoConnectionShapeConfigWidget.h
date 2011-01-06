@@ -39,7 +39,7 @@ public:
         return false;
     }
     /// reimplemented
-    virtual QUndoCommand *createCommand();
+    virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
 private:
     Ui::KoConnectionShapeConfigWidget widget;
     KoConnectionShape *m_connection;

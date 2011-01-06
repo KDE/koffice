@@ -113,7 +113,7 @@ void KoShapeRubberSelectStrategy::finishInteraction(Qt::KeyboardModifiers modifi
     d->tool->canvas()->updateCanvas(d->selectedRect());
 }
 
-QUndoCommand *KoShapeRubberSelectStrategy::createCommand()
+QUndoCommand *KoShapeRubberSelectStrategy::createCommand(QUndoCommand *)
 {
     return 0;
 }

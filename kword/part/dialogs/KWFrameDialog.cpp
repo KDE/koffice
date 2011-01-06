@@ -23,14 +23,17 @@
 #include "KWFrameConnectSelector.h"
 #include "KWFrameRunaroundProperties.h"
 #include "KWGeneralFrameProperties.h"
+#include "KWFrameGeometry.h"
+#include "KWDocument.h"
 #include "frames/KWFrame.h"
 
-#include "KWFrameGeometry.h"
+#include <QUndoCommand>
 
 KWFrameDialog::KWFrameDialog(const QList<KWFrame*> &frames, KWDocument *document, QWidget *parent)
         : KPageDialog(parent),
         m_frameConnectSelector(0),
-        m_frameGeometry(0)
+        m_frameGeometry(0),
+        m_document(document)
 {
     m_state = new FrameConfigSharedState(document);
     setFaceType(Tabbed);
@@ -67,12 +70,20 @@ KWFrameDialog::~KWFrameDialog()
 
 void KWFrameDialog::okClicked()
 {
-    if (m_frameConnectSelector)
+    QUndoCommand *cmd = new QUndoCommand(i18n("Frame changes"));
+    if (m_frameConnectSelector) {
         m_frameConnectSelector->save();
+        m_frameConnectSelector->createCommand(cmd);
+    }
     m_generalFrameProperties->save();
+    m_generalFrameProperties->createCommand(cmd);
     m_frameRunaroundProperties->save();
-    if (m_frameGeometry)
+    m_frameRunaroundProperties->createCommand(cmd);
+    if (m_frameGeometry) {
         m_frameGeometry->save();
+        m_frameGeometry->createCommand(cmd);
+    }
+    m_document->addCommand(cmd);
 }
 
 void KWFrameDialog::cancelClicked()

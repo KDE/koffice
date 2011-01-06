@@ -45,12 +45,12 @@ void KoParameterChangeStrategy::handleMouseMove(const QPointF &mouseLocation, Qt
     m_releasePoint = mouseLocation;
 }
 
-QUndoCommand* KoParameterChangeStrategy::createCommand()
+QUndoCommand* KoParameterChangeStrategy::createCommand(QUndoCommand *parent)
 {
     KoParameterHandleMoveCommand *cmd = 0;
     // check if handle position changed
     if (m_startPoint != QPointF(0, 0) && m_startPoint != m_releasePoint) {
-        cmd = new KoParameterHandleMoveCommand(m_parameterShape, m_handleId, m_startPoint, m_releasePoint, m_lastModifierUsed);
+        cmd = new KoParameterHandleMoveCommand(m_parameterShape, m_handleId, m_startPoint, m_releasePoint, m_lastModifierUsed, parent);
     }
     return cmd;
 }

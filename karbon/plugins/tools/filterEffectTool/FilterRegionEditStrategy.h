@@ -34,7 +34,7 @@ public:
     // reimplemented from KoInteractionStrategy
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     // reimplemented from KoInteractionStrategy
-    virtual QUndoCommand *createCommand();
+    virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
     // reimplemented from KoInteractionStrategy
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
     // reimplemented from KoInteractionStrategy

@@ -65,6 +65,7 @@ private:
     KWFrameRunaroundProperties *m_frameRunaroundProperties;
     KWGeneralFrameProperties *m_generalFrameProperties;
     FrameConfigSharedState *m_state;
+    KWDocument *m_document;
 };
 
 /// A simple class useful for finding out if a series of data object will cause a

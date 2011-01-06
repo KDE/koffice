@@ -55,13 +55,13 @@ void KoConnectionShapeConfigWidget::save()
     m_connection->setType(static_cast<KoConnectionShape::Type>(widget.connectionType->currentIndex()));
 }
 
-QUndoCommand * KoConnectionShapeConfigWidget::createCommand()
+QUndoCommand * KoConnectionShapeConfigWidget::createCommand(QUndoCommand *parent)
 {
     if (!m_connection) {
         return 0;
     } else {
         KoConnectionShape::Type type = static_cast<KoConnectionShape::Type>(widget.connectionType->currentIndex());
-        return new KoConnectionShapeTypeCommand(m_connection, type);
+        return new KoConnectionShapeTypeCommand(m_connection, type, parent);
     }
 }
 

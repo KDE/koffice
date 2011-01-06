@@ -53,7 +53,7 @@ KoCreateShapeStrategy::KoCreateShapeStrategy(KoCreateShapesTool *tool, const QPo
     }
 }
 
-QUndoCommand* KoCreateShapeStrategy::createCommand()
+QUndoCommand* KoCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
 {
     Q_D(KoShapeRubberSelectStrategy);
     KoCreateShapesTool *parent = static_cast<KoCreateShapesTool*>(d_ptr->tool);
@@ -79,7 +79,7 @@ QUndoCommand* KoCreateShapeStrategy::createCommand()
     if (newSize.width() > 1.0 && newSize.height() > 1.0)
         shape->setSize(newSize);
 
-    QUndoCommand * cmd = parent->canvas()->shapeController()->addShape(shape);
+    QUndoCommand * cmd = parent->canvas()->shapeController()->addShape(shape, parentCommand);
     if (cmd) {
         KoSelection *selection = parent->canvas()->shapeManager()->selection();
         selection->deselectAll();

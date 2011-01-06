@@ -169,6 +169,8 @@ public:
     /// request a relayout of auto-generated frames on all pages of this argument style.
     void updatePagesForStyle(const KWPageStyle &style);
 
+    void clipToDocument(const KoShape *shape, QPointF &move) const;
+
 public slots:
     /// Register new frameset
     void addFrameSet(KWFrameSet *f);

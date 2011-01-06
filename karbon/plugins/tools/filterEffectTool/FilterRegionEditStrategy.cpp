@@ -70,13 +70,13 @@ void FilterRegionEditStrategy::handleMouseMove(const QPointF &mouseLocation, Qt:
     m_lastPosition = shapePoint;
 }
 
-QUndoCommand *FilterRegionEditStrategy::createCommand()
+QUndoCommand *FilterRegionEditStrategy::createCommand(QUndoCommand *parent)
 {
     qreal x = m_filterRect.left() / m_sizeRect.width();
     qreal y = m_filterRect.top() / m_sizeRect.height();
     qreal w = m_filterRect.width() / m_sizeRect.width();
     qreal h = m_filterRect.height() / m_sizeRect.height();
-    return new FilterRegionChangeCommand(m_effect, QRectF(x,y,w,h), m_shape);
+    return new FilterRegionChangeCommand(m_effect, QRectF(x,y,w,h), m_shape, parent);
 }
 
 void FilterRegionEditStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)

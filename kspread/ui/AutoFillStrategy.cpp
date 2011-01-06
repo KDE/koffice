@@ -46,7 +46,7 @@ AutoFillStrategy::~AutoFillStrategy()
     delete d;
 }
 
-QUndoCommand* AutoFillStrategy::createCommand()
+QUndoCommand* AutoFillStrategy::createCommand(QUndoCommand *)
 {
     if (d->autoFillSource == selection()->lastRange()) {
         return 0;

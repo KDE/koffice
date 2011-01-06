@@ -140,7 +140,7 @@ void KoPathConnectionPointStrategy::finishInteraction(Qt::KeyboardModifiers modi
     KoParameterChangeStrategy::finishInteraction(modifiers);
 }
 
-QUndoCommand* KoPathConnectionPointStrategy::createCommand()
+QUndoCommand* KoPathConnectionPointStrategy::createCommand(QUndoCommand *parent)
 {
     // check if we connect to a shape and if the connection point is already present
     if (m_newConnectionShape && m_newConnectionIndex == -1) {
@@ -158,6 +158,6 @@ QUndoCommand* KoPathConnectionPointStrategy::createCommand()
         m_connectionShape->connectSecond(m_newConnectionShape, m_newConnectionIndex);
 
     // TODO create a connection command
-    return KoParameterChangeStrategy::createCommand();
+    return KoParameterChangeStrategy::createCommand(parent);
 }
 

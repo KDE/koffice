@@ -67,7 +67,7 @@ void KoPathPointMoveStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
     Q_UNUSED(modifiers);
 }
 
-QUndoCommand* KoPathPointMoveStrategy::createCommand()
+QUndoCommand* KoPathPointMoveStrategy::createCommand(QUndoCommand *parent)
 {
     m_tool->canvas()->updateCanvas(m_tool->canvas()->snapGuide()->boundingRect());
 
@@ -80,7 +80,7 @@ QUndoCommand* KoPathPointMoveStrategy::createCommand()
         // as the point is already at the new position we need to undo the change
         KoPathPointMoveCommand revert(selection->selectedPointsData(), -m_move);
         revert.redo();
-        cmd = new KoPathPointMoveCommand(selection->selectedPointsData(), m_move);
+        cmd = new KoPathPointMoveCommand(selection->selectedPointsData(), m_move, parent);
     }
     return cmd;
 }

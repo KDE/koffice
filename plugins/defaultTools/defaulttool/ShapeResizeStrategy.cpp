@@ -227,7 +227,7 @@ void ShapeResizeStrategy::resizeBy( const QPointF &center, qreal zoomX, qreal zo
     m_scaleMatrix = matrix;
 }
 
-QUndoCommand* ShapeResizeStrategy::createCommand()
+QUndoCommand* ShapeResizeStrategy::createCommand(QUndoCommand *parent)
 {
     QList<QSizeF> newSizes;
     QList<QTransform> transformations;
@@ -237,7 +237,7 @@ QUndoCommand* ShapeResizeStrategy::createCommand()
         newSizes << m_selectedShapes[i]->size();
         transformations << m_selectedShapes[i]->transformation();
     }
-    QUndoCommand * cmd = new QUndoCommand(i18n("Resize"));
+    QUndoCommand *cmd = new QUndoCommand(i18n("Resize"), parent);
     new KoShapeSizeCommand(m_selectedShapes, m_startSizes, newSizes, cmd );
     new KoShapeTransformCommand( m_selectedShapes, m_oldTransforms, transformations, cmd );
     return cmd;

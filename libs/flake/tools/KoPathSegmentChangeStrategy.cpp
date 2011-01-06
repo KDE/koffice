@@ -135,14 +135,14 @@ void KoPathSegmentChangeStrategy::finishInteraction(Qt::KeyboardModifiers modifi
     Q_UNUSED(modifiers);
 }
 
-QUndoCommand* KoPathSegmentChangeStrategy::createCommand()
+QUndoCommand* KoPathSegmentChangeStrategy::createCommand(QUndoCommand *parent)
 {
     m_tool->canvas()->updateCanvas(m_tool->canvas()->snapGuide()->boundingRect());
 
     bool hasControlPoint1 = m_segment.second()->activeControlPoint1();
     bool hasControlPoint2 = m_segment.first()->activeControlPoint2();
 
-    QUndoCommand * cmd = new QUndoCommand(i18n("Change Segment"));
+    QUndoCommand * cmd = new QUndoCommand(i18n("Change Segment"), parent);
     if (m_originalSegmentDegree == 1) {
         m_segment.first()->removeControlPoint2();
         m_segment.second()->removeControlPoint1();

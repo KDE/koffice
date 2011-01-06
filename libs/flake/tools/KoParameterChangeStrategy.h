@@ -42,7 +42,7 @@ public:
     virtual void finishInteraction(Qt::KeyboardModifiers modifiers) {
         Q_UNUSED(modifiers);
     }
-    virtual QUndoCommand* createCommand();
+    virtual QUndoCommand* createCommand(QUndoCommand *parent = 0);
 
 private:
     KoParameterShape * const m_parameterShape; ///< the parametric shape we are working on

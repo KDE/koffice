@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -52,6 +52,9 @@ public:
         return true;
     }
 
+    /// reimplemented
+    virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
+
 private slots:
     void updateShape();
     void protectSizeChanged(int protectSizeState);
@@ -71,8 +74,10 @@ private:
     FrameConfigSharedState *m_state;
     KWFrame *m_frame;
     QPointF m_originalPosition;
+    qreal m_topOfPage;
     QSizeF m_originalSize;
     bool m_blockSignals;
+    bool m_originalGeometryLock;
 };
 
 #endif

@@ -79,7 +79,7 @@ public:
      * a command.  Implementations should return 0 otherwise.
      * @return a command, or 0.
      */
-    virtual QUndoCommand *createCommand() = 0;
+    virtual QUndoCommand *createCommand(QUndoCommand *parent = 0) = 0;
     /**
      * This method will undo frames based interactions by calling createCommand()
      * and unexecuting that.

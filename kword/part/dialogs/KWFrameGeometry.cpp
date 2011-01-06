@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,23 +18,28 @@
  */
 #include "KWFrameGeometry.h"
 #include "KWDocument.h"
+#include "KWPage.h"
 #include "frames/KWTextFrame.h"
 #include "frames/KWTextFrameSet.h"
 
 #include <KoShape.h>
+#include <KoShapeKeepAspectRatioCommand.h>
+#include <KoShapeMoveCommand.h>
+#include <KoShapeSizeCommand.h>
+#include <KoShapeLockCommand.h>
 
 #include <kdebug.h>
 
 KWFrameGeometry::KWFrameGeometry(FrameConfigSharedState *state)
         : m_state(state),
         m_frame(0),
-        m_blockSignals(false)
+        m_topOfPage(0),
+        m_blockSignals(false),
+        m_originalGeometryLock(false)
 {
     m_state->addUser();
     widget.setupUi(this);
     setUnit(m_state->document()->unit());
-    widget.xPos->setMinimum(0.0);
-    widget.yPos->setMinimum(0.0);
     widget.width->setMinimum(0.0);
     widget.height->setMinimum(0.0);
     widget.leftMargin->setMinimum(0.0);
@@ -74,18 +79,22 @@ void KWFrameGeometry::open(KWFrame *frame)
 
 void KWFrameGeometry::open(KoShape *shape)
 {
+    KWPage page = m_state->document()->pageManager()->page(shape);
+    m_topOfPage = page.offsetInDocument();
     m_originalPosition = shape->absolutePosition();
     m_originalSize = shape->size();
     QPointF position = shape->absolutePosition(widget.positionSelector->position());
+
     widget.xPos->changeValue(position.x());
-    widget.yPos->changeValue(position.y());
+    widget.yPos->changeValue(position.y() - m_topOfPage);
     widget.width->changeValue(m_originalSize.width());
     widget.height->changeValue(m_originalSize.height());
 
     connect(widget.protectSize, SIGNAL(stateChanged(int)),
             this, SLOT(protectSizeChanged(int)));
 
-    if (shape->isGeometryProtected()) {
+    m_originalGeometryLock = shape->isGeometryProtected();
+    if (m_originalGeometryLock) {
         widget.protectSize->setCheckState(Qt::Checked);
         KWTextFrame *tf = dynamic_cast<KWTextFrame*>(shape->applicationData());
         if (tf && static_cast<KWTextFrameSet*>(tf->frameSet())->textFrameSetType() != KWord::OtherTextFrameSet)
@@ -108,7 +117,13 @@ void KWFrameGeometry::updateShape()
     }
     Q_ASSERT(frame);
     frame->shape()->update();
-    QPointF pos(widget.xPos->value(), widget.yPos->value());
+    KoShape *shape = frame->shape();
+    QPointF currentPos(shape->absolutePosition(widget.positionSelector->position()));
+    QPointF pos(widget.xPos->value(), widget.yPos->value() + m_topOfPage);
+    QPointF moved = pos - frame->shape()->position();
+    m_state->document()->clipToDocument(frame->shape(), moved);
+    pos = currentPos + moved;
+
     frame->shape()->setAbsolutePosition(pos, widget.positionSelector->position());
     QSizeF size(widget.width->value(), widget.height->value());
     frame->shape()->setSize(size);
@@ -200,7 +215,7 @@ void KWFrameGeometry::setGeometryAlignment(KoFlake::Position position)
     QPointF pos = frame->shape()->absolutePosition(position);
     m_blockSignals = true;
     widget.xPos->changeValue(pos.x());
-    widget.yPos->changeValue(pos.y());
+    widget.yPos->changeValue(pos.y() - m_topOfPage);
     m_blockSignals = false;
 }
 
@@ -211,3 +226,24 @@ void KWFrameGeometry::updateAspectRatio(bool keep)
         widget.height->changeValue(m_originalSize.height() / m_originalSize.width() * widget.width->value());
 }
 
+QUndoCommand *KWFrameGeometry::createCommand(QUndoCommand *parent)
+{
+    if (m_frame == 0)
+        return 0;
+    KoShape *shape = m_frame->shape();
+    if (!qFuzzyCompare(m_originalSize.width(), shape->size().width())
+            || !qFuzzyCompare(m_originalSize.height(), shape->size().height())) {
+        new KoShapeSizeCommand(QList<KoShape*>() << shape, QList<QSizeF>() << m_originalSize,
+            QList<QSizeF>() << shape->size(), parent);
+    }
+    if (!qFuzzyCompare(m_originalPosition.x(), shape->position().x())
+            || !qFuzzyCompare(m_originalPosition.y(), shape->position().y())) {
+        new KoShapeMoveCommand(QList<KoShape*>() << shape, QList<QPointF>() << m_originalPosition,
+            QList<QPointF>() << shape->position(), parent);
+    }
+    if (m_originalGeometryLock != shape->isGeometryProtected()) {
+        new KoShapeLockCommand(QList<KoShape*>() << shape, QList<bool>() << m_originalGeometryLock,
+            QList<bool>() << !m_originalGeometryLock, parent);
+    }
+    return parent;
+}

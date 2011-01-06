@@ -86,7 +86,7 @@ public:
     virtual bool showOnShapeSelect();
 
     /// Creates a command which applies all changes to the opened shape
-    virtual QUndoCommand * createCommand();
+    virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
 
 signals:
     /// is emitted after one of the config options has changed

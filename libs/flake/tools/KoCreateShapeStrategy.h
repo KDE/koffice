@@ -44,7 +44,7 @@ public:
     virtual ~KoCreateShapeStrategy() {}
 
     void finishInteraction(Qt::KeyboardModifiers modifiers);
-    QUndoCommand* createCommand();
+    QUndoCommand* createCommand(QUndoCommand *parent = 0);
     void paint(QPainter &painter, const KoViewConverter &converter);
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
 
