@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Peter Simonsson <peter.simonsson@gmail.com>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -23,12 +24,15 @@
 #include <QUndoCommand>
 #include <QList>
 
+#include "flake_export.h"
+
 class KoShape;
+class KoShapeKeepAspectRatioCommandPrivate;
 
 /**
- * Command that changes the keepAspectRatio property of KoShape
+ * Command that changes the keepAspectRatio property of a set of KoShape instances
  */
-class KoShapeKeepAspectRatioCommand : public QUndoCommand
+class FLAKE_EXPORT KoShapeKeepAspectRatioCommand : public QUndoCommand
 {
 public:
     /**
@@ -47,9 +51,7 @@ public:
     virtual void undo();
 
 private:
-    QList<KoShape*> m_shapes;
-    QList<bool> m_oldKeepAspectRatio;
-    QList<bool> m_newKeepAspectRatio;
+    KoShapeKeepAspectRatioCommandPrivate *d;
 };
 
 #endif

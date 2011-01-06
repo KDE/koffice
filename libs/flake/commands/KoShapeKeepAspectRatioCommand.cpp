@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Peter Simonsson <peter.simonsson@gmail.com>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -23,15 +24,25 @@
 
 #include <KoShape.h>
 
+class KoShapeKeepAspectRatioCommandPrivate
+{
+public:
+    QList<KoShape*> shapes;
+    QList<bool> oldKeepAspectRatio;
+    QList<bool> newKeepAspectRatio;
+};
+
+
 KoShapeKeepAspectRatioCommand::KoShapeKeepAspectRatioCommand(const QList<KoShape*>& shapes,
         const QList<bool>& oldKeepAspectRatio,
         const QList<bool>& newKeepAspectRatio,
         QUndoCommand* parent)
-        : QUndoCommand(i18n("Keep Aspect Ratio"), parent)
+        : QUndoCommand(i18n("Keep Aspect Ratio"), parent),
+        d(new KoShapeKeepAspectRatioCommandPrivate())
 {
-    m_shapes = shapes;
-    m_oldKeepAspectRatio = oldKeepAspectRatio;
-    m_newKeepAspectRatio = newKeepAspectRatio;
+    d->shapes = shapes;
+    d->oldKeepAspectRatio = oldKeepAspectRatio;
+    d->newKeepAspectRatio = newKeepAspectRatio;
 }
 
 KoShapeKeepAspectRatioCommand::~KoShapeKeepAspectRatioCommand()
@@ -41,15 +52,15 @@ KoShapeKeepAspectRatioCommand::~KoShapeKeepAspectRatioCommand()
 void KoShapeKeepAspectRatioCommand::redo()
 {
     QUndoCommand::redo();
-    for (int i = 0; i < m_shapes.count(); ++i) {
-        m_shapes[i]->setKeepAspectRatio(m_newKeepAspectRatio[i]);
+    for (int i = 0; i < d->shapes.count(); ++i) {
+        d->shapes[i]->setKeepAspectRatio(d->newKeepAspectRatio[i]);
     }
 }
 
 void KoShapeKeepAspectRatioCommand::undo()
 {
     QUndoCommand::undo();
-    for (int i = 0; i < m_shapes.count(); ++i) {
-        m_shapes[i]->setKeepAspectRatio(m_oldKeepAspectRatio[i]);
+    for (int i = 0; i < d->shapes.count(); ++i) {
+        d->shapes[i]->setKeepAspectRatio(d->oldKeepAspectRatio[i]);
     }
 }
