@@ -23,15 +23,24 @@
 
 #include <klocale.h>
 
-KoShapeLockCommand::KoShapeLockCommand(const QList<KoShape*> &shapes, const QList<bool> &oldLock, const QList<bool> &newLock, QUndoCommand *parent)
-        : QUndoCommand(parent)
+class KoShapeLockCommandPrivate
 {
-    m_shapes = shapes;
-    m_oldLock = oldLock;
-    m_newLock = newLock;
+public:
+    QList<KoShape*> shapes;    /// the shapes to lock
+    QList<bool> oldLock;       /// old lock states
+    QList<bool> newLock;       /// new lock states
+};
 
-    Q_ASSERT(m_shapes.count() == m_oldLock.count());
-    Q_ASSERT(m_shapes.count() == m_newLock.count());
+KoShapeLockCommand::KoShapeLockCommand(const QList<KoShape*> &shapes, const QList<bool> &oldLock, const QList<bool> &newLock, QUndoCommand *parent)
+        : QUndoCommand(parent),
+        d(new KoShapeLockCommandPrivate())
+{
+    d->shapes = shapes;
+    d->oldLock = oldLock;
+    d->newLock = newLock;
+
+    Q_ASSERT(d->shapes.count() == d->oldLock.count());
+    Q_ASSERT(d->shapes.count() == d->newLock.count());
 
     setText(i18n("Lock Shapes"));
 }
@@ -43,15 +52,15 @@ KoShapeLockCommand::~KoShapeLockCommand()
 void KoShapeLockCommand::redo()
 {
     QUndoCommand::redo();
-    for (int i = 0; i < m_shapes.count(); ++i) {
-        m_shapes[i]->setGeometryProtected(m_newLock[i]);
+    for (int i = 0; i < d->shapes.count(); ++i) {
+        d->shapes[i]->setGeometryProtected(d->newLock[i]);
     }
 }
 
 void KoShapeLockCommand::undo()
 {
     QUndoCommand::undo();
-    for (int i = 0; i < m_shapes.count(); ++i) {
-        m_shapes[i]->setGeometryProtected(m_oldLock[i]);
+    for (int i = 0; i < d->shapes.count(); ++i) {
+        d->shapes[i]->setGeometryProtected(d->oldLock[i]);
     }
 }

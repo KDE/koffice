@@ -24,10 +24,13 @@
 #include <QUndoCommand>
 #include <QList>
 
+#include "flake_export.h"
+
 class KoShape;
+class KoShapeLockCommandPrivate;
 
 /// The undo / redo command to lock a set of shapes position and size
-class KoShapeLockCommand : public QUndoCommand
+class FLAKE_EXPORT KoShapeLockCommand : public QUndoCommand
 {
 public:
     /**
@@ -37,8 +40,8 @@ public:
      * @param newLock list of new lock states the same length as @p shapes
      * @param parent the parent command used for macro commands
      */
-    KoShapeLockCommand(const QList<KoShape*> &shapes, const QList<bool> &oldLock, const QList<bool> &newLock,
-                       QUndoCommand *parent = 0);
+    KoShapeLockCommand(const QList<KoShape*> &shapes, const QList<bool> &oldLock,
+            const QList<bool> &newLock, QUndoCommand *parent = 0);
     ~KoShapeLockCommand();
 
     /// redo the command
@@ -47,9 +50,7 @@ public:
     virtual void undo();
 
 private:
-    QList<KoShape*> m_shapes;    /// the shapes to set background for
-    QList<bool> m_oldLock;       /// old lock states
-    QList<bool> m_newLock;       /// new lock states
+    KoShapeLockCommandPrivate *d;
 };
 
 #endif
