@@ -316,6 +316,8 @@ install(
     commands/KoShapeTransformCommand.h
     commands/KoShapeUngroupCommand.h
     commands/KoSubpathRemoveCommand.h
+    commands/KoShapeKeepAspectRatioCommand.h
+    commands/KoShapeLockCommand.h
     tools/KoInteractionTool.h
     KoViewConverter.h
     DESTINATION
