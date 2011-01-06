@@ -31,6 +31,8 @@
 #include <QFormLayout>
 #include <QRadioButton>
 
+#define DEBUG_CHANGED
+
 StylesWidget::StylesWidget(QWidget *parent)
         : QWidget(parent),
         m_styleManager(0),
@@ -92,6 +94,22 @@ void StylesWidget::setCurrentFormat(const QTextBlockFormat &format)
                 property = KoParagraphStyle::DefaultOutlineLevel;
             }
             if (m_currentBlockFormat.property(property) != usedStyle->value(property)) {
+#ifdef DEBUG_CHANGED
+                QString type;
+                if (m_currentBlockFormat.hasProperty(property)) {
+                    if (usedStyle->hasProperty(property))
+                        type = "Changed";
+                    else
+                        type = "New";
+                } else {
+                    type = "Removed";
+                }
+                type += " 0x%1";
+                type = type.arg(property, 4, 16);
+                if (property >= QTextFormat::UserProperty)
+                    type += QString(" User+%2").arg(property - QTextFormat::UserProperty, 3, 16);
+                kDebug() << type;
+#endif
                 unchanged = false;
                 break;
             }
@@ -122,6 +140,22 @@ void StylesWidget::setCurrentFormat(const QTextCharFormat &format)
                 continue;
             if (m_currentCharFormat.property(property) != usedStyle->value(property)
                     && m_currentCharFormat.property(property) != defaultFormat.property(property)) {
+#ifdef DEBUG_CHANGED
+                QString type;
+                if (m_currentBlockFormat.hasProperty(property)) {
+                    if (usedStyle->hasProperty(property))
+                        type = "Changed";
+                    else
+                        type = "New";
+                } else {
+                    type = "Removed";
+                }
+                type += " 0x%1";
+                type = type.arg(property, 4, 16);
+                if (property >= QTextFormat::UserProperty)
+                    type += QString(" User+%2").arg(property - QTextFormat::UserProperty, 3, 16);
+                kDebug() << type;
+#endif
                 unchanged = false;
                 break;
             }
