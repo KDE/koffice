@@ -449,6 +449,11 @@ void KWPageManager::clearPageStyles()
     d->defaultPageStyle = addPageStyle("Standard");
 }
 
+int KWPageManager::pageStyleCount() const
+{
+    return d->pageStyles.count();
+}
+
 const KWPage KWPageManager::begin() const
 {
     if (d->pages.isEmpty())

@@ -196,6 +196,9 @@ public:
      */
     QHash<QString, KWPageStyle> pageStyles() const;
 
+    /// return the number of registered page styles
+    int pageStyleCount() const;
+
     /**
      * Returns the \a KWPageStyle known under the name \p name or NULL if the
      * document has no such page style.
