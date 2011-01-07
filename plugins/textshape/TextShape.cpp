@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008-2010 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2008 Pierre Stirnweiss \pierre.stirnweiss_koffice@gadz.org>
  *
@@ -248,42 +248,44 @@ void TextShape::paintDecorations(QPainter &painter, const KoViewConverter &conve
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
     if (showTextFrames && lay) {
         QList<KoShape *> shapes = lay->shapes();
+        if (shapes.count() == 0 || shapes.last() != this)
+            return;
+
         // Get the bottom of the text.
         bool moreText = false;
         qreal max = m_textShapeData->documentOffset() + size().height();
         qreal bottom = 0.0;
-        //TODO optimize this; don't iterate over the whole doc, use findBlock instead.
-        QTextBlock block = m_textShapeData->document()->begin();
-        while (block.isValid()) {
-            QTextLayout *tl = block.layout();
-            if (tl == 0) {
+        QTextBlock block = m_textShapeData->document()->findBlock(m_textShapeData->endPosition()-1);
+
+        QTextLayout *tl = block.layout();
+        if (tl == 0) {
+            moreText = true;
+        } else if (tl->lineCount() == 0) {
+            moreText = true;
+        } else {
+            QTextLine line = tl->lineAt(tl->lineCount() - 1);
+            bottom = qMax(bottom, line.position().y() + line.height());
+            if (bottom > max) {
                 moreText = true;
-                break;
-            } else if (tl->lineCount() == 0) {
-                moreText = true;
-                break;
-            } else {
-                QTextLine line = tl->lineAt(tl->lineCount() - 1);
-                bottom = qMax(bottom, line.position().y() + line.height());
-                if (bottom > max) {
-                    moreText = true;
-                    break;
-                }
             }
-            block = block.next();
         }
 
-        if (! moreText) { // draw bottom of text.  Makes it easier to see where the text ends
+        if (!moreText && block.length() == 1) { // draw bottom of text.  Makes it easier to see where the text ends
             QPalette palette = canvas->canvasWidget()->palette();
             QPen pen(palette.color(QPalette::Button));
             painter.setPen(pen);
 
             QPointF endPoint = converter.documentToView(QPointF(size().width(),
                                bottom - m_textShapeData->documentOffset()));
-            endPoint.setX(endPoint.x() - 1);
-            if (endPoint.y() > 0)
-                painter.drawLine(QPointF(0, endPoint.y()), endPoint);
-        } else if (shapes.count() <= 1 || shapes.last() == this) { // there is invisible text left.
+            QPointF left(endPoint);
+            if (endPoint.y() > 0) {
+                const qreal width = qMin(100., endPoint.x());
+                left.setX((left.x() - width) / 2);
+                endPoint.setX(endPoint.x() - left.x());
+                painter.drawLine(left, endPoint);
+            }
+        }
+        if (moreText && shapes.count() == 1) { // there is invisible text left.
             QPoint bottomRight = converter.documentToView(QPointF(size().width(), size().height())).toPoint();
             QPalette palette = canvas->canvasWidget()->palette();
             QPen pen(palette.color(QPalette::Link));
