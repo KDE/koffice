@@ -107,7 +107,7 @@ void StylesWidget::setCurrentFormat(const QTextBlockFormat &format)
                 type += " 0x%1";
                 type = type.arg(property, 4, 16);
                 if (property >= QTextFormat::UserProperty)
-                    type += QString(" User+%2").arg(property - QTextFormat::UserProperty, 3, 16);
+                    type += QString(" User+%2").arg(property - QTextFormat::UserProperty);
                 kDebug() << type;
 #endif
                 unchanged = false;
@@ -153,7 +153,7 @@ void StylesWidget::setCurrentFormat(const QTextCharFormat &format)
                 type += " 0x%1";
                 type = type.arg(property, 4, 16);
                 if (property >= QTextFormat::UserProperty)
-                    type += QString(" User+%2").arg(property - QTextFormat::UserProperty, 3, 16);
+                    type += QString(" User+%2").arg(property - QTextFormat::UserProperty);
                 kDebug() << type;
 #endif
                 unchanged = false;
