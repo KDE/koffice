@@ -81,7 +81,7 @@ void KWFrameGeometry::open(KoShape *shape)
 {
     KWPage page = m_state->document()->pageManager()->page(shape);
     m_topOfPage = page.offsetInDocument();
-    m_originalPosition = shape->absolutePosition();
+    m_originalPosition = shape->position();
     m_originalSize = shape->size();
     QPointF position = shape->absolutePosition(widget.positionSelector->position());
 
@@ -120,7 +120,8 @@ void KWFrameGeometry::updateShape()
     KoShape *shape = frame->shape();
     QPointF currentPos(shape->absolutePosition(widget.positionSelector->position()));
     QPointF pos(widget.xPos->value(), widget.yPos->value() + m_topOfPage);
-    QPointF moved = pos - frame->shape()->position();
+    QPointF moved = pos - currentPos;
+    QPointF prev(moved);
     m_state->document()->clipToDocument(frame->shape(), moved);
     pos = currentPos + moved;
 
@@ -171,7 +172,7 @@ void KWFrameGeometry::cancel()
         m_state->markFrameUsed();
     }
     Q_ASSERT(frame);
-    frame->shape()->setAbsolutePosition(m_originalPosition);
+    frame->shape()->setPosition(m_originalPosition);
     frame->shape()->setSize(m_originalSize);
 }
 
