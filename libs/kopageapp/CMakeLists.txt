@@ -57,7 +57,7 @@ set( kopageapp_LIB_SRCS
     tools/backgroundTool/KoPAMasterPageDocker.cpp
 )
 
-kde4_add_ui_files(kopabackgroundtool_PART_SRCS
+kde4_add_ui_files(kopageapp_LIB_SRCS
     tools/backgroundTool/BackgroundToolWidget.ui
 )
 

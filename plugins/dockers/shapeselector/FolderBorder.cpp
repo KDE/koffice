@@ -24,23 +24,19 @@
 #include <KGlobalSettings>
 
 #include <QFontMetrics>
+#include <QPainter>
 
 FolderBorder::FolderBorder()
 {
 }
 
-void FolderBorder::borderInsets(const KoShape *shape, KoInsets &insets) const
+void FolderBorder::borderInsets(KoInsets &insets) const
 {
-    Q_ASSERT(shape);
     insets.left = 1;
     insets.right = 1;
     insets.bottom = 1;
-    if (shape->name().isEmpty()) {
-        insets.top = 1;
-    } else {
-        QFontMetricsF fm(KGlobalSettings::windowTitleFont());
-        insets.top = fm.height();
-    }
+    QFontMetricsF fm(KGlobalSettings::windowTitleFont());
+    insets.top = fm.height();
 }
 
 bool FolderBorder::hasTransparency() const

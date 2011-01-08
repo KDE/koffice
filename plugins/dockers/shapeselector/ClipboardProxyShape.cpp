@@ -20,7 +20,7 @@
 #include "ZoomHandler.h"
 
 #include <KoShapeContainer.h>
-#include <KoShapeBorderModel.h>
+#include <KoShapeBorderBase.h>
 
 #include <QPainter>
 #include <QSizeF>

@@ -22,7 +22,10 @@
 #include <KoShape.h>
 #include <KoLineBorder.h>
 
-class OutlineStroke : public KoLineBorder {
+#include <QPainter>
+
+class OutlineStroke : public KoLineBorder
+{
 public:
     OutlineStroke()
             : m_pen(Qt::black) {

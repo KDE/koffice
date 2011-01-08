@@ -210,7 +210,7 @@ void StyleDocker::updateStyle()
     m_opacity->blockSignals(false);
 }
 
-void StyleDocker::updateStyle(KoShapeBorderModel * stroke, KoShapeBackground * fill)
+void StyleDocker::updateStyle(KoShapeBorderBase * stroke, KoShapeBackground * fill)
 {
     if (! m_canvas)
         return;
@@ -355,7 +355,7 @@ void StyleDocker::updateColor(const QColor &c, const QList<KoShape*> & selectedS
             m_lastStrokeCommand = 0;
         }
         if (m_lastColorStrokes.count() && m_lastStrokeCommand) {
-            foreach(KoShapeBorderModel * border, m_lastColorStrokes) {
+            foreach(KoShapeBorderBase * border, m_lastColorStrokes) {
                 KoLineBorder * lineBorder = dynamic_cast<KoLineBorder*>(border);
                 if (lineBorder)
                     lineBorder->setColor(c);
@@ -453,7 +453,7 @@ void StyleDocker::updateGradient(KoResource * item)
         m_canvas->addCommand(firstCommand);
     }
     else {
-        QList<KoShapeBorderModel*> newBorders;
+        QList<KoShapeBorderBase*> newBorders;
         foreach (KoShape * shape, selectedShapes) {
             QBrush brush = applyStrokeGradientStops(shape, newStops);
             if (brush.style() == Qt::NoBrush)

@@ -27,7 +27,7 @@
 
 class StylePreview;
 class StyleButtonBox;
-class KoShapeBorderModel;
+class KoShapeBorderBase;
 class KoShapeBorderCommand;
 class KoShapeBackground;
 class KoShapeBackgroundCommand;
@@ -73,7 +73,7 @@ private:
     void updateColor(const QColor &c, const QList<KoShape*> & selectedShapes);
     /// Sets the shape border and fill to display
     void updateStyle();
-    void updateStyle(KoShapeBorderModel * stroke, KoShapeBackground * fill);
+    void updateStyle(KoShapeBorderBase * stroke, KoShapeBackground * fill);
 
     /// Resets color related commands which are used to combine multiple color changes
     void resetColorCommands();
@@ -100,7 +100,7 @@ private:
     KoShapeBackgroundCommand * m_lastFillCommand;
     KoShapeBorderCommand * m_lastStrokeCommand;
     KoColorBackground * m_lastColorFill;
-    QList<KoShapeBorderModel*> m_lastColorStrokes;
+    QList<KoShapeBorderBase*> m_lastColorStrokes;
 };
 
 #endif // STYLEDOCKER_H

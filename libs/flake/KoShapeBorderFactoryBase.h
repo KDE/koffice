@@ -23,7 +23,8 @@
 #include "flake_export.h"
 #include <QObject>
 
-class KoShapeBorderModel;
+class KoShapeBorderBase;
+class KoShape;
 
 class FLAKE_EXPORT KoShapeBorderFactoryBase : public QObject
 {
@@ -34,14 +35,10 @@ public:
     virtual ~KoShapeBorderFactoryBase();
 
     /**
-     * This method should be implemented by factories to create a shape that the user
-     * gets when doing a base insert. For example from a script.  The created shape
-     * should have its values set to good defaults that the user can then adjust further if
-     * needed.  Including the KoShape:setShapeId(), with the Id from this factory
-     * The default shape position is not relevant, it will be moved by the caller.
+     * @param targetShape the shape the border is for
      * @return a new shape
      */
-    virtual KoShapeBorderModel *createBorder() const = 0;
+    virtual KoShapeBorderBase *createBorder(KoShape *targetShape) const = 0;
 
     /**
      * return the id for the shape this factory creates.

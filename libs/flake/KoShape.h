@@ -43,7 +43,7 @@ class QRectF;
 class QPainterPath;
 
 class KoShapeContainer;
-class KoShapeBorderModel;
+class KoShapeBorderBase;
 class KoShapeBackground;
 class KoShapeManager;
 class KoShapeUserData;
@@ -516,13 +516,13 @@ public:
      * Returns the currently set border, or 0 if there is no border.
      * @return the currently set border, or 0 if there is no border.
      */
-    KoShapeBorderModel *border() const;
+    KoShapeBorderBase *border() const;
 
     /**
      * Set a new border, removing the old one.
      * @param border the new border, or 0 if there should be no border.
      */
-    void setBorder(KoShapeBorderModel *border);
+    void setBorder(KoShapeBorderBase *border);
 
     /**
      * Fills the \a insets with the padding of the shape.
@@ -530,7 +530,7 @@ public:
      * area can be deminished) by a border. This method
      * fills the argument insets with the padding between the (square) borders
      * of the shape and the inside area where the border is sure to not overlap.
-     * \see KoShapeBorderModel::borderInsets()
+     * \see KoShapeBorderBase::borderInsets()
      */
     void fetchInsets(KoInsets &insets) const;
 
@@ -934,7 +934,7 @@ protected:
     virtual void loadStyle(const KoXmlElement &element, KoShapeLoadingContext &context);
 
     /// Loads the stroke style
-    KoShapeBorderModel *loadOdfStroke(const KoXmlElement &element, KoShapeLoadingContext &context) const;
+    KoShapeBorderBase *loadOdfStroke(const KoXmlElement &element, KoShapeLoadingContext &context) const;
 
     /// Loads the shadow style
     KoShapeBackground *loadOdfFill(KoShapeLoadingContext &context) const;

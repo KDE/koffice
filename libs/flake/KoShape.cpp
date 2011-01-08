@@ -28,7 +28,7 @@
 #include "KoSelection.h"
 #include "KoPointerEvent.h"
 #include "KoInsets.h"
-#include "KoShapeBorderModel.h"
+#include "KoShapeBorderBase.h"
 #include "KoShapeBackground.h"
 #include "KoColorBackground.h"
 #include "KoGradientBackground.h"
@@ -133,7 +133,7 @@ void KoShapePrivate::updateBorder()
     if (border == 0)
         return;
     KoInsets insets;
-    border->borderInsets(q, insets);
+    border->borderInsets(insets);
     QSizeF inner = q->size();
     // update left
     q->update(QRectF(-insets.left, -insets.top, insets.left,
@@ -293,7 +293,7 @@ bool KoShape::hitTest(const QPointF &position) const
     QRectF bb(QPointF(), size());
     if (d->border) {
         KoInsets insets;
-        d->border->borderInsets(this, insets);
+        d->border->borderInsets(insets);
         bb.adjust(-insets.left, -insets.top, insets.right, insets.bottom);
     }
     if (bb.contains(point))
@@ -318,7 +318,7 @@ QRectF KoShape::boundingRect() const
     QRectF bb(QPointF(0, 0), mySize);
     if (d->border) {
         KoInsets insets;
-        d->border->borderInsets(this, insets);
+        d->border->borderInsets(insets);
         bb.adjust(-insets.left, -insets.top, insets.right, insets.bottom);
     }
     bb = transform.mapRect(bb);
@@ -594,7 +594,7 @@ void KoShape::fetchInsets(KoInsets &insets) const
 {
     Q_D(const KoShape);
     if (d->border)
-        d->border->borderInsets(this, insets);
+        d->border->borderInsets(insets);
     else
         insets.clear();
     // notice that the shadow has 'insets' that go outwards from the shape edge, so
@@ -813,13 +813,13 @@ bool KoShape::collisionDetection()
     return d->detectCollision;
 }
 
-KoShapeBorderModel *KoShape::border() const
+KoShapeBorderBase *KoShape::border() const
 {
     Q_D(const KoShape);
     return d->border;
 }
 
-void KoShape::setBorder(KoShapeBorderModel *border)
+void KoShape::setBorder(KoShapeBorderBase *border)
 {
     Q_D(KoShape);
     if (border)
@@ -910,9 +910,9 @@ QString KoShape::saveStyle(KoGenStyle &style, KoShapeSavingContext &context) con
 {
     Q_D(const KoShape);
     // and fill the style
-    KoShapeBorderModel *b = border();
+    KoShapeBorderBase *b = border();
     if (b) {
-        b->fillStyle(style, context);
+        b->saveOdf(style, context);
     }
     else {
         style.addProperty("draw:stroke", "none");
@@ -1122,7 +1122,7 @@ KoShapeBackground *KoShape::loadOdfFill(KoShapeLoadingContext &context) const
     return bg;
 }
 
-KoShapeBorderModel *KoShape::loadOdfStroke(const KoXmlElement &element, KoShapeLoadingContext &context) const
+KoShapeBorderBase *KoShape::loadOdfStroke(const KoXmlElement &element, KoShapeLoadingContext &context) const
 {
     KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
     KoOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();

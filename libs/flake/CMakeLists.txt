@@ -65,7 +65,7 @@ set(flake_SRCS
     KoLoadingShapeUpdater.cpp
     KoPathShapeLoader.cpp
     ShapeDeleter_p.cpp
-    KoShapeBorderModel.cpp
+    KoShapeBorderBase.cpp
     KoShapeBorderFactoryBase.cpp
     KoShapeBorderRegistry.cpp
     KoLineBorder.cpp
@@ -238,7 +238,7 @@ install(
     KoPointerEvent.h
     KoSelection.h
     KoShape.h
-    KoShapeBorderModel.h
+    KoShapeBorderBase.h
     KoToolSelection.h
     KoShapeContainer.h
     KoShapeContainerModel.h

@@ -19,16 +19,16 @@
 #include "TestShapeBorderCommand.h"
 
 #include <MockShapes.h>
-#include "KoShapeBorderModel.h"
+#include "KoShapeBorderBase.h"
 #include "KoLineBorder.h"
 #include "KoShapeBorderCommand.h"
 
 void TestShapeBorderCommand::refCounting()
 {
     MockShape * shape1 = new MockShape();
-    KoShapeBorderModel * whiteBorder = new KoLineBorder(1.0, QColor(Qt::white));
-    KoShapeBorderModel * blackBorder = new KoLineBorder(1.0, QColor(Qt::black));
-    KoShapeBorderModel * redBorder = new KoLineBorder(1.0, QColor(Qt::red));
+    KoShapeBorderBase * whiteBorder = new KoLineBorder(1.0, QColor(Qt::white));
+    KoShapeBorderBase * blackBorder = new KoLineBorder(1.0, QColor(Qt::black));
+    KoShapeBorderBase * redBorder = new KoLineBorder(1.0, QColor(Qt::red));
 
     shape1->setBorder(whiteBorder);
     QVERIFY(shape1->border() == whiteBorder);
@@ -57,7 +57,7 @@ void TestShapeBorderCommand::refCounting()
 
     // if white is deleted when deleting cmd1 this will crash
     KoInsets insets;
-    whiteBorder->borderInsets(shape1, insets);
+    whiteBorder->borderInsets(insets);
 
     delete cmd2;
     delete shape1;

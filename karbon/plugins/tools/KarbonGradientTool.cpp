@@ -565,7 +565,7 @@ void KarbonGradientTool::gradientChanged()
         }
         canvas()->addCommand(new KoShapeBackgroundCommand(selectedShapes, newFills));
     } else {
-        QList<KoShapeBorderModel*> newBorders;
+        QList<KoShapeBorderBase*> newBorders;
         foreach(KoShape * shape, selectedShapes) {
             KoLineBorder * border = dynamic_cast<KoLineBorder*>(shape->border());
             KoLineBorder * newBorder = 0;

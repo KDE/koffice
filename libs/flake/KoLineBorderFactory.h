@@ -27,7 +27,7 @@ public:
     KoLineBorderFactory(QObject *parent);
 
     /// reimplemented
-    virtual KoShapeBorderModel *createBorder() const;
+    virtual KoShapeBorderBase *createBorder() const;
 };
 
 #endif

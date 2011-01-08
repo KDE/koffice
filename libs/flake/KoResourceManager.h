@@ -216,12 +216,6 @@ public:
     /// Returns the actual grab sensitivity
     int grabSensitivity() const;
 
-    /// Sets the border resource
-    void setActiveBorder(const KoLineBorder &border);
-
-    /// Returns the border resource
-    KoLineBorder activeBorder() const;
-
     /**
      * Return the resource determined by param key as a boolean.
      * @param key the indentifying key for the resource

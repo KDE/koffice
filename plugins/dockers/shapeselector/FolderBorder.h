@@ -19,7 +19,7 @@
 #ifndef FOLDERBORDER_H
 #define FOLDERBORDER_H
 
-#include <KoShapeBorderModel.h>
+#include <KoShapeBorderBase.h>
 
 /**
  * The shapeselector allows multiple 'folders' and this is the border to show the edges.
@@ -27,14 +27,14 @@
  * more folders the FolderShape gets a FolderBorder assigned to it which draws the outline
  * and the title of the folder shape.
  */
-class FolderBorder : public KoShapeBorderModel
+class FolderBorder : public KoShapeBorderBase
 {
 public:
     FolderBorder();
     /// reimplemented from KoShapeBorderModel
-    virtual void fillStyle(KoGenStyle &, KoShapeSavingContext &) const {}
+    virtual void saveOdf(KoGenStyle &, KoShapeSavingContext &) const {}
     /// reimplemented from KoShapeBorderModel
-    virtual void borderInsets(const KoShape *shape, KoInsets &insets) const;
+    virtual void borderInsets(KoInsets &insets) const;
     /// reimplemented from KoShapeBorderModel
     virtual bool hasTransparency() const;
     /// reimplemented from KoShapeBorderModel

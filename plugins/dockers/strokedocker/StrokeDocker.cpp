@@ -38,7 +38,7 @@
 #include <KoUnitDoubleSpinBox.h>
 #include <KoShapeManager.h>
 #include <KoShapeBorderCommand.h>
-#include <KoShapeBorderModel.h>
+#include <KoShapeBorderBase.h>
 #include <KoSelection.h>
 #include <KoLineBorder.h>
 
@@ -186,8 +186,6 @@ void StrokeDocker::applyChanges()
     KoCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
     KoSelection *selection = canvasController->canvas()->shapeManager()->selection();
 
-    canvasController->canvas()->resourceManager()->setActiveBorder( d->border );
-
     if( ! selection || ! selection->count() )
         return;
 
@@ -246,7 +244,7 @@ void StrokeDocker::styleChanged()
     applyChanges();
 }
 
-void StrokeDocker::setStroke( const KoShapeBorderModel *border )
+void StrokeDocker::setStroke( const KoShapeBorderBase *border )
 {
     const KoLineBorder *lineBorder = dynamic_cast<const KoLineBorder*>( border );
     if( lineBorder )

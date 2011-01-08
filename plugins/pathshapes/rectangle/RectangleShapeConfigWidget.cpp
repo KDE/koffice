@@ -66,7 +66,7 @@ void RectangleShapeConfigWidget::save()
     m_rectangle->setCornerRadiusY(100.0 * widget.cornerRadiusY->value() / (0.5 * size.height()));
 }
 
-QUndoCommand * RectangleShapeConfigWidget::createCommand()
+QUndoCommand * RectangleShapeConfigWidget::createCommand(QUndoCommand *)
 {
     if (! m_rectangle)
         return 0;

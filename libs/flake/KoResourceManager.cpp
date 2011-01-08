@@ -182,22 +182,6 @@ int KoResourceManager::grabSensitivity() const
     return resource(KoCanvasResource::GrabSensitivity).toInt();
 }
 
-void KoResourceManager::setActiveBorder(const KoLineBorder &border)
-{
-    QVariant v;
-    v.setValue(border);
-    setResource(KoCanvasResource::ActiveBorder, v);
-}
-
-KoLineBorder KoResourceManager::activeBorder() const
-{
-    if (! d->resources.contains(KoCanvasResource::ActiveBorder)) {
-        KoLineBorder empty;
-        return empty;
-    }
-    return resource(KoCanvasResource::ActiveBorder).value<KoLineBorder>();
-}
-
 bool KoResourceManager::boolResource(int key) const
 {
     if (d->lazyResources.contains(key))

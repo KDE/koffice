@@ -37,7 +37,7 @@ public:
     /// reimplemented
     virtual bool showOnShapeCreate() { return false; }
     /// reimplemented
-    virtual QUndoCommand * createCommand();
+    virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
 private:
     Ui::SpiralShapeConfigWidget widget;
     SpiralShape *m_spiral;

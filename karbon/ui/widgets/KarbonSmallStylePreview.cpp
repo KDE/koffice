@@ -126,7 +126,7 @@ public:
             delete m_stroke;
     }
 
-    void setStroke(KoShapeBorderModel * stroke) {
+    void setStroke(KoShapeBorderBase * stroke) {
         if (stroke != m_stroke) {
             if (m_stroke && !m_stroke->deref())
                 delete m_stroke;
@@ -178,7 +178,7 @@ protected:
     }
 
 private:
-    KoShapeBorderModel * m_stroke; ///< the stroke to preview
+    KoShapeBorderBase * m_stroke; ///< the stroke to preview
     KoCheckerBoardPainter m_checkerPainter;
 };
 

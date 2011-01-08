@@ -72,7 +72,7 @@ void StarShapeConfigWidget::save()
     m_star->setConvex(widget.convex->checkState() == Qt::Checked);
 }
 
-QUndoCommand * StarShapeConfigWidget::createCommand()
+QUndoCommand * StarShapeConfigWidget::createCommand(QUndoCommand *)
 {
     if (! m_star)
         return 0;

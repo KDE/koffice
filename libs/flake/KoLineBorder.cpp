@@ -24,6 +24,7 @@
 #include "KoShape.h"
 #include "KoShapeSavingContext.h"
 
+#include <QPainter>
 #include <QPainterPath>
 
 #include <KoGenStyle.h>
@@ -47,14 +48,6 @@ KoLineBorder::KoLineBorder()
     // we are not rendering stroke with zero width anymore
     // so lets use a default width of 1.0
     d->pen.setWidthF(1.0);
-}
-
-KoLineBorder::KoLineBorder(const KoLineBorder &other)
-        : KoShapeBorderModel(), d(new Private())
-{
-    d->color = other.d->color;
-    d->pen = other.d->pen;
-    d->brush = other.d->brush;
 }
 
 KoLineBorder::KoLineBorder(qreal lineWidth, const QColor &color)
@@ -82,7 +75,7 @@ KoLineBorder &KoLineBorder::operator = (const KoLineBorder &rhs)
     return *this;
 }
 
-void KoLineBorder::fillStyle(KoGenStyle &style, KoShapeSavingContext &context) const
+void KoLineBorder::saveOdf(KoGenStyle &style, KoShapeSavingContext &context) const
 {
     QPen pen = d->pen;
     if (d->brush.gradient())
@@ -92,9 +85,8 @@ void KoLineBorder::fillStyle(KoGenStyle &style, KoShapeSavingContext &context) c
     KoOdfGraphicStyles::saveOdfStrokeStyle(style, context.mainStyles(), pen);
 }
 
-void KoLineBorder::borderInsets(const KoShape *shape, KoInsets &insets) const
+void KoLineBorder::borderInsets(KoInsets &insets) const
 {
-    Q_UNUSED(shape);
     qreal lineWidth = d->pen.widthF();
     if (lineWidth < 0)
         lineWidth = 1;

@@ -26,13 +26,14 @@
 #include "KoShapeManagerPaintingStrategy.h"
 #include "KoShape.h"
 #include "KoViewConverter.h"
-#include "KoShapeBorderModel.h"
+#include "KoShapeBorderBase.h"
 #include "KoShapeGroup.h"
 #include "KoShapeContainer.h"
 
 #include <KoUnit.h>
 
 #include <QtGui/QImage>
+#include <QtGui/QPainter>
 
 class SimpleCanvas : public KoCanvasBase
 {

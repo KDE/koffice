@@ -23,6 +23,8 @@
 
 #include <KoLineBorder.h>
 
+#include <QFont>
+
 class SvgGraphicsContext
 {
 public:

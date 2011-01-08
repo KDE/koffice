@@ -162,7 +162,7 @@ void KoCreatePathTool::mousePressEvent(KoPointerEvent *event)
         d->shape=pathShape;
         pathShape->setShapeId(KoPathShapeId);
 
-        KoLineBorder *border = new KoLineBorder(canvas()->resourceManager()->activeBorder());
+        KoLineBorder *border = new KoLineBorder(); // TODO properties fill from KoResourceManager ?
         border->setColor(canvas()->resourceManager()->foregroundColor().toQColor());
 
         pathShape->setBorder(border);

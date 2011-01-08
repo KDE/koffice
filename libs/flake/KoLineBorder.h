@@ -23,7 +23,9 @@
 #define KOLINEBORDER_H
 
 #include "KoInsets.h"
-#include "KoShapeBorderModel.h"
+#include "KoShapeBorderBase.h"
+
+#include <QtGui/QBrush>
 
 #include "flake_export.h"
 
@@ -35,14 +37,11 @@ class KoViewConverter;
 /**
  * A border for shapes that draws a single line around the object.
  */
-class FLAKE_EXPORT KoLineBorder : public KoShapeBorderModel
+class FLAKE_EXPORT KoLineBorder : public KoShapeBorderBase
 {
 public:
     /// Constructor for a thin line in black
     KoLineBorder();
-
-    /// Copy constructor
-    KoLineBorder(const KoLineBorder &other);
 
     /**
      * Constructor for a lineBorder
@@ -92,8 +91,8 @@ public:
     /// Returns the strokes brush
     QBrush lineBrush() const;
 
-    virtual void fillStyle(KoGenStyle &style, KoShapeSavingContext &context) const;
-    virtual void borderInsets(const KoShape *shape, KoInsets &insets) const;
+    virtual void saveOdf(KoGenStyle &style, KoShapeSavingContext &context) const;
+    virtual void borderInsets(KoInsets &insets) const;
     virtual bool hasTransparency() const;
 
     virtual void paint(KoShape *shape, QPainter &painter, const KoViewConverter &converter);
@@ -103,7 +102,5 @@ private:
     class Private;
     Private * const d;
 };
-
-Q_DECLARE_METATYPE( KoLineBorder )
 
 #endif

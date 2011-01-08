@@ -23,7 +23,7 @@
 #include <KoShapePainter.h>
 
 #include <KoShapeManager.h>
-#include <KoShapeBorderModel.h>
+#include <KoShapeBorderBase.h>
 #include <KoShapeContainer.h>
 #include <KoToolManager.h>
 #include <KoCanvasBase.h>
@@ -43,6 +43,7 @@
 
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QMimeData>
+#include <QtGui/QPainter>
 
 KarbonLayerModel::KarbonLayerModel(QObject * parent)
         : KoDocumentSectionModel(parent), m_document(0)

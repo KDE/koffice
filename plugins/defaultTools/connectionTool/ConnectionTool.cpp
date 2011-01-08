@@ -36,6 +36,7 @@
 #include <QUndoCommand>
 #include <QPointF>
 #include <QKeyEvent>
+#include <QPainter>
 
 ConnectionTool::ConnectionTool(KoCanvasBase * canvas)
     : KoPathTool(canvas)

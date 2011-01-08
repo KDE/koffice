@@ -23,7 +23,7 @@
 #include "KoPathShape_p.h"
 #include "KoPathPoint.h"
 #include "KoPointGroup.h"
-#include "KoShapeBorderModel.h"
+#include "KoShapeBorderBase.h"
 #include "KoViewConverter.h"
 #include "KoPathShapeLoader.h"
 #include "KoShapeSavingContext.h"
@@ -378,7 +378,7 @@ QRectF KoPathShape::boundingRect() const
     QRectF bb(outline().boundingRect());
     if (border()) {
         KoInsets inset;
-        border()->borderInsets(this, inset);
+        border()->borderInsets(inset);
         bb.adjust(-inset.left, -inset.top, inset.right, inset.bottom);
     }
 
@@ -1323,7 +1323,7 @@ bool KoPathShape::hitTest(const QPointF &position) const
     const QPainterPath outlinePath = outline();
     if (border()) {
         KoInsets insets;
-        border()->borderInsets(this, insets);
+        border()->borderInsets(insets);
         QRectF roi(QPointF(-insets.left, -insets.top), QPointF(insets.right, insets.bottom));
         roi.moveCenter(point);
         if (outlinePath.intersects(roi) || outlinePath.contains(roi))

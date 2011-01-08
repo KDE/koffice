@@ -28,7 +28,7 @@
 #include "KoShape_p.h"
 #include "KoCanvasBase.h"
 #include "KoShapeContainer.h"
-#include "KoShapeBorderModel.h"
+#include "KoShapeBorderBase.h"
 #include "KoShapeGroup.h"
 #include "KoToolProxy.h"
 #include "KoShapeManagerPaintingStrategy.h"

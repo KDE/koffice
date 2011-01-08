@@ -60,7 +60,7 @@ public:
     KoShapeUserData *userData;
     KoShapeApplicationData *appData;
     KoShapeBackground * fill; ///< Stands for the background color / fill etc.
-    KoShapeBorderModel *border; ///< points to a border, or 0 if there is no border
+    KoShapeBorderBase *border; ///< points to a border, or 0 if there is no border
     KoShape *q_ptr;
     QList<KoShape*> dependees; ///< list of shape dependent on this shape
     KoShapeShadow * shadow; ///< the current shape shadow
