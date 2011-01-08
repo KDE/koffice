@@ -136,15 +136,9 @@ void KWTextFrameSet::setupFrame(KWFrame *frame)
         Q_ASSERT(frameCount() > 1);
         return;
     }
-    bool replaceDocument = false;
-    if (frameCount() == 1 && m_document->isEmpty()) {
-        // double check if its really empty.
-        KoTextDocument doc(m_document);
-        if (doc.textEditor() == 0)
-            replaceDocument = true;
-    }
 
-    if (replaceDocument) { // just added first frame...
+    if (frameCount() == 1 && m_document->isEmpty() && m_document->allFormats().count() == 2) {
+        // just added first frame...
         delete m_document;
         m_document = data->document();
         m_document->setDocumentLayout(new KWTextDocumentLayout(this));
