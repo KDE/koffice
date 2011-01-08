@@ -244,7 +244,7 @@ void TextShape::paintDecorations(QPainter &painter, const KoViewConverter &conve
     }
 
     if (m_demoText) return;
-    if (m_textShapeData->endPosition() < 0) return;
+    if (m_textShapeData->endPosition() <= 1) return;
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
     if (showTextFrames && lay) {
         QList<KoShape *> shapes = lay->shapes();
