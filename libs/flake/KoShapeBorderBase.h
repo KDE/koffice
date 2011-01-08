@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2007,2009 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -18,12 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOSHAPEBORDERMODEL_H
-#define KOSHAPEBORDERMODEL_H
-
-#include "KoInsets.h"
-
-#include <QPainter>
+#ifndef KOSHAPEBORDERBASE_H
+#define KOSHAPEBORDERBASE_H
 
 #include "flake_export.h"
 
@@ -31,6 +27,9 @@ class KoShape;
 class KoGenStyle;
 class KoShapeSavingContext;
 class KoViewConverter;
+class KoInsets;
+class QColor;
+class QPainter;
 
 /**
  * A model for borders around KoShapes.
@@ -40,31 +39,35 @@ class KoViewConverter;
  * and preferred behavior, to have one instance of a border that is reused on several
  * objects.
  */
-class FLAKE_EXPORT KoShapeBorderModel
+class FLAKE_EXPORT KoShapeBorderBase
 {
 public:
-    KoShapeBorderModel();
-    virtual ~KoShapeBorderModel();
+    KoShapeBorderBase();
+    virtual ~KoShapeBorderBase();
 
     /**
-     * @brief Fill the style object (aka save)
+     * @brief store the border settings as a style.
+     * In ODF a border is a set of properties on the frame style, this method should
+     * save all properties of the style.
      *
      * @param style object
      * @param context used for saving
      */
-    virtual void fillStyle(KoGenStyle &style, KoShapeSavingContext &context) const = 0;
+    virtual void saveOdf(KoGenStyle &style, KoShapeSavingContext &context) const = 0;
 
     /**
      * Return a borderInsets object filled with the size inside the shape that this border takes.
      * @param shape the shape the insets will be calculated for
      * @param insets the insets object that will be filled and returned.
      */
-    virtual void borderInsets(const KoShape *shape, KoInsets &insets) const = 0;
+    virtual void borderInsets(KoInsets &insets) const = 0;
+
     /**
      * Returns true if there is some transparency, false if the border is fully opaque.
      * @return if the border is transparent.
      */
     virtual bool hasTransparency() const = 0;
+
     /**
      * Paint the border.
      * This method should paint the border around shape.

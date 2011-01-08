@@ -21,20 +21,11 @@
 
 #include <KoShapeManager.h>
 #include <KoToolProxy.h>
-#include <KoUnit.h>
 #include <KoText.h>
 
 #include "KoPADocument.h"
 #include "KoPAView.h"
-#include "KoPAViewMode.h"
-#include "KoPAPage.h"
 #include "KoPAPageProvider.h"
-
-#include <kxmlguifactory.h>
-
-#include <KAction>
-#include <QMenu>
-#include <QMouseEvent>
 
 class KoPACanvasBase::Private
 {

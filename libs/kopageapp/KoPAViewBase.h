@@ -38,8 +38,8 @@ class KoPAViewProxyObject;
 /**
  * Base class defining the View interface the KoPAViewMode class needs.
  */
-class KOPAGEAPP_EXPORT KoPAViewBase {
-
+class KOPAGEAPP_EXPORT KoPAViewBase
+{
 public:
 
     // proxy QObject

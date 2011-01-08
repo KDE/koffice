@@ -21,46 +21,35 @@
 #include "KoPADocument.h"
 
 #include <KoStore.h>
-#include <KoResourceManager.h>
 #include <KoXmlWriter.h>
-#include <KoXmlReader.h>
-#include <KoOdfStylesReader.h>
 #include <KoOdfReadStore.h>
 #include <KoOdfWriteStore.h>
 #include <KoOdfLoadingContext.h>
 #include <KoOasisSettings.h>
 #include <KoStoreDevice.h>
-#include <KoShapeManager.h>
-#include <KoShapeLayer.h>
-#include <KoShapeRegistry.h>
 #include <KoTextShapeData.h>
 #include <KoTextSharedLoadingData.h>
 #include <KoTextDocumentLayout.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoStyleManager.h>
-#include <KoPathShape.h>
-#include <KoLineBorder.h>
 #include <KoXmlNS.h>
 #include <KoProgressUpdater.h>
 #include <KoUpdater.h>
 #include <KoToolRegistry.h>
 #include "tools/backgroundTool/KoPABackgroundToolFactory.h"
 
-#include "KoPACanvas.h"
 #include "KoPAView.h"
 #include "KoPAPage.h"
 #include "KoPAMasterPage.h"
 #include "KoPASavingContext.h"
 #include "KoPALoadingContext.h"
-#include "KoPAViewMode.h"
 #include "KoPAPageProvider.h"
 #include "commands/KoPAPageDeleteCommand.h"
 
 #include <kdebug.h>
-#include <kconfig.h>
 #include <kconfiggroup.h>
 
-#include <typeinfo>
+#include <QPainter>
 
 class KoPADocument::Private
 {

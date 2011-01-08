@@ -18,6 +18,7 @@
 */
 
 #include "KoPAPrintJob.h"
+#include <KoZoomHandler.h>
 
 #include <KoText.h>
 #include "KoPAView.h"

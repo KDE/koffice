@@ -19,22 +19,19 @@
 
 #include "KoPACanvas.h"
 
-#include <KoShapeManager.h>
 #include <KoToolProxy.h>
-#include <KoUnit.h>
-#include <KoText.h>
+#include <KoZoomHandler.h>
 
-#include "KoPADocument.h"
+#include "KoPageLayout.h"
 #include "KoPAView.h"
 #include "KoPAViewMode.h"
-#include "KoPAPage.h"
-#include "KoPAPageProvider.h"
+#include "KoPAPageBase.h"
 
 #include <kxmlguifactory.h>
 
-#include <KAction>
 #include <QMenu>
 #include <QMouseEvent>
+#include <QPainter>
 
 KoPACanvas::KoPACanvas( KoPAViewBase * view, KoPADocument * doc, QWidget *parent ,  Qt::WindowFlags f)
     : QWidget( parent, f )

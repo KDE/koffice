@@ -20,8 +20,7 @@
 #ifndef KOPAMASTERPAGE_H
 #define KOPAMASTERPAGE_H
 
-
-#include "KoPAPage.h"
+#include "KoPAPageBase.h"
 
 #include <KoPageLayout.h>
 

@@ -22,29 +22,21 @@
 
 #include "KoPADocument.h"
 #include "KoPAPageBase.h"
-#include "KoPAPageProvider.h"
 #include <KoShapePainter.h>
 #include <KoShapeManager.h>
-#include <KoShapeBorderModel.h>
-#include <KoShapeContainer.h>
 #include <KoToolManager.h>
 #include <KoCanvasBase.h>
 #include <KoCanvasController.h>
-#include <KoShapeControllerBase.h>
 #include <KoSelection.h>
 #include <KoShapeLayer.h>
 #include <KoShapeGroup.h>
-#include <KoShapeGroupCommand.h>
 #include <KoShapeUngroupCommand.h>
 #include <KoShapeRenameCommand.h>
 #include <KoZoomHandler.h>
 
-#include <klocale.h>
-#include <kicon.h>
 #include <kiconloader.h>
 #include <kdebug.h>
 
-#include <QtCore/QAbstractItemModel>
 #include <QtCore/QMimeData>
 
 #include "commands/KoPAPageMoveCommand.h"

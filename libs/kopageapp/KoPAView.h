@@ -22,12 +22,10 @@
 #ifndef KOPAVIEW_H
 #define KOPAVIEW_H
 
-#include <QObject>
-
 #include <KoView.h>
 #include <KoPAViewBase.h>
-#include <KoZoomHandler.h>
 #include "KoPageApp.h"
+#include "KoZoomMode.h"
 #include "kopageapp_export.h"
 
 class KoCanvasController;

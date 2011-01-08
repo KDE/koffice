@@ -20,7 +20,6 @@
 #ifndef KOPACANVASBASE_H
 #define KOPACANVASBASE_H
 
-#include <QWidget>
 #include <QList>
 #include <KoCanvasBase.h>
 

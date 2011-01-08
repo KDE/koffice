@@ -25,18 +25,11 @@
 #include "KoPAPageBase.h"
 #include "KoPACanvas.h"
 #include "KoPAView.h"
-#include "KoPAMasterPage.h"
-#include "KoPAPage.h"
-#include "commands/KoPAPageInsertCommand.h"
 #include "commands/KoPAPageDeleteCommand.h"
 
 #include <KoShapeManager.h>
-#include <KoShapeBorderModel.h>
-#include <KoShapeContainer.h>
 #include <KoToolManager.h>
-#include <KoCanvasBase.h>
 #include <KoCanvasController.h>
-#include <KoShapeControllerBase.h>
 #include <KoSelection.h>
 #include <KoShapeOdfSaveHelper.h>
 #include <KoPAOdfPageSaveHelper.h>
@@ -49,17 +42,14 @@
 
 #include <KMenu>
 #include <klocale.h>
-#include <kicon.h>
 #include <kiconloader.h>
 #include <kinputdialog.h>
 #include <kmessagebox.h>
 #include <KConfigGroup>
-#include <KDebug>
 
 #include <QtGui/QGridLayout>
 #include <QtGui/QToolButton>
 #include <QtGui/QButtonGroup>
-#include <QItemSelection>
 #include <QApplication>
 #include <QClipboard>
 
