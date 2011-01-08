@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2006-2008 Thorsten Zachmann <zachmann@kde.org>
-   Copyright (C) 2007 Thomas Zander <zander@kde.org>
+   Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -43,6 +43,8 @@
 #include <KoXmlNS.h>
 #include <KoProgressUpdater.h>
 #include <KoUpdater.h>
+#include <KoToolRegistry.h>
+#include "tools/backgroundTool/KoPABackgroundToolFactory.h"
 
 #include "KoPACanvas.h"
 #include "KoPAView.h"
@@ -84,6 +86,11 @@ KoPADocument::KoPADocument( QWidget* parentWidget, QObject* parent, bool singleV
     variant.setValue<void*>(d->pageProvider);
     resourceManager()->setResource(KoText::PageProvider, variant);
     loadConfig();
+
+    if (!KoToolRegistry::instance()->contains("KoPABackgroundTool")) {
+        KoPABackgroundToolFactory *f = new KoPABackgroundToolFactory(KoToolRegistry::instance());
+        KoToolRegistry::instance()->add(f);
+    }
 }
 
 KoPADocument::~KoPADocument()

@@ -22,7 +22,7 @@
 
 #include <QWidget>
 
-#include "ui_BackgroundToolWidget.h"
+#include <tools/backgroundTool/ui_BackgroundToolWidget.h>
 
 class KoPABackgroundTool;
 

@@ -50,6 +50,15 @@ set( kopageapp_LIB_SRCS
      dialogs/KoPAMasterPageDialog.cpp
      dialogs/KoPAPageLayoutDialog.cpp
      dialogs/KoPAConfigureDialog.cpp
+
+    tools/backgroundTool/KoPABackgroundTool.cpp
+    tools/backgroundTool/KoPABackgroundToolFactory.cpp
+    tools/backgroundTool/KoPABackgroundToolWidget.cpp
+    tools/backgroundTool/KoPAMasterPageDocker.cpp
+)
+
+kde4_add_ui_files(kopabackgroundtool_PART_SRCS
+    tools/backgroundTool/BackgroundToolWidget.ui
 )
 
 kde4_add_library(kopageapp SHARED ${kopageapp_LIB_SRCS})
