@@ -1026,43 +1026,42 @@ void TextTool::keyPressEvent(QKeyEvent *event)
     } else {
         // check for shortcuts.
         QKeySequence item(event->key() | ((Qt::ControlModifier | Qt::AltModifier) & event->modifiers()));
-        if (hit(item, KStandardShortcut::Begin))
+        if (hit(item, KStandardShortcut::Begin)) {
             // Goto beginning of the document. Default: Ctrl-Home
             destinationPosition = 0;
-        else if (hit(item, KStandardShortcut::End)) {
+        } else if (hit(item, KStandardShortcut::End)) {
             // Goto end of the document. Default: Ctrl-End
             QTextBlock last = textEditor->document()->end().previous();
             destinationPosition = last.position() + last.length() - 1;
-        } else if (hit(item, KStandardShortcut::Prior)) // page up
+        } else if (hit(item, KStandardShortcut::Prior)) { // page up
             // Scroll up one page. Default: Prior
             moveOperation = QTextCursor::StartOfLine; // TODO
-        else if (hit(item, KStandardShortcut::Next))
+        } else if (hit(item, KStandardShortcut::Next)) {
             // Scroll down one page. Default: Next
             moveOperation = QTextCursor::StartOfLine; // TODO
-        else if (hit(item, KStandardShortcut::BeginningOfLine))
+        } else if (hit(item, KStandardShortcut::BeginningOfLine)) {
             // Goto beginning of current line. Default: Home
             moveOperation = QTextCursor::StartOfLine;
-        else if (hit(item, KStandardShortcut::EndOfLine))
+        } else if (hit(item, KStandardShortcut::EndOfLine)) {
             // Goto end of current line. Default: End
             moveOperation = QTextCursor::EndOfLine;
-        else if (hit(item, KStandardShortcut::BackwardWord))
+        } else if (hit(item, KStandardShortcut::BackwardWord)) {
             moveOperation = QTextCursor::WordLeft;
-        else if (hit(item, KStandardShortcut::ForwardWord))
+        } else if (hit(item, KStandardShortcut::ForwardWord)) {
             moveOperation = QTextCursor::WordRight;
 #ifndef NDEBUG
-        else if (event->key() == Qt::Key_F12) {
+        } else if (event->key() == Qt::Key_F12) {
             textEditor->insertTable(3, 2);
             QTextTable *table = textEditor->cursor()->currentTable();
             QTextCursor c = table->cellAt(1,1).firstCursorPosition();
             c.insertText("foo bar baz");
             textEditor->setPosition(c.position());
-        }
 #endif
 #ifdef Q_WS_MAC
         // Don't reject "alt" key, it may be used for typing text on Mac OS
-        else if ((event->modifiers() & Qt::ControlModifier) || event->text().length() == 0) {
+        } else if ((event->modifiers() & Qt::ControlModifier) || event->text().length() == 0) {
 #else
-        else if ((event->modifiers() & (Qt::ControlModifier | Qt::AltModifier)) || event->text().length() == 0) {
+        } else if ((event->modifiers() & (Qt::ControlModifier | Qt::AltModifier)) || event->text().length() == 0) {
 #endif
             event->ignore();
             return;
@@ -1277,8 +1276,9 @@ void TextTool::updateActions()
             m_actionAlignLeft->setChecked(true);
         else
             m_actionAlignRight->setChecked(true);
-    } else if (bf.alignment() == Qt::AlignHCenter)
+    } else if (bf.alignment() == Qt::AlignHCenter) {
         m_actionAlignCenter->setChecked(true);
+    }
     if (bf.alignment() == Qt::AlignJustify)
         m_actionAlignBlock->setChecked(true);
     else if (bf.alignment() == (Qt::AlignLeft | Qt::AlignAbsolute))
