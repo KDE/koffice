@@ -68,6 +68,12 @@ KSPREAD_EXPORT int decodeRowLabelText(const QString &labelText);
  */
 KSPREAD_EXPORT QString encodeColumnLabelText(int column);
 
+/**
+ * Generate and return the ODF formula for this cell (\p thisRow, \p thisColumn) based on the formula in the
+ * defined cell (\p referencedRow, \p referencedColumn ).
+ */
+KSPREAD_EXPORT QString adjustFormulaReference(const QString& formula, int referencedRow, int referencedColumn, int thisRow, int thisColumn);
+
 //Return true when it's a reference to cell from sheet.
 KSPREAD_EXPORT bool localReferenceAnchor(const QString &_ref);
 
