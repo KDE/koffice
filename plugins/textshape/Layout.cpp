@@ -2096,6 +2096,7 @@ void Layout::updateFrameStack()
                     found = true;
                     break;
                 }
+                iter++;
             }
             if (!found) {
                 ToCGenerator *tg = new ToCGenerator(frame);
