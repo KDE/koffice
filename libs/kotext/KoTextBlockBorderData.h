@@ -19,7 +19,7 @@
 #ifndef KOTEXTBLOCKBORDERDATA_H
 #define KOTEXTBLOCKBORDERDATA_H
 
-#include "styles/KoParagraphStyle.h"
+#include "KoParagraphStyle.h"
 #include <KoInsets.h>
 
 #include <QPen>

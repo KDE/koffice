@@ -20,7 +20,7 @@
 #ifndef KOLIST_H
 #define KOLIST_H
 
-#include "styles/KoListStyle.h"
+#include "KoListStyle.h"
 
 #include <QMetaType>
 

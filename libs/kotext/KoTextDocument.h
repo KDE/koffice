@@ -27,12 +27,11 @@
 
 #include "KoList.h"
 
-#include "changetracker/KoChangeTracker.h"
-
 class KoStyleManager;
 class KoInlineTextObjectManager;
 class KUndoStack;
 class KoTextEditor;
+class KoChangeTracker;
 
 /**
  * KoTextDocument provides an easy mechanism to set and access the

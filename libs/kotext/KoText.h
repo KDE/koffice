@@ -29,7 +29,7 @@
 #include <QtGui/QTextCharFormat>
 #include <QtCore/QMetaType>
 #include <QtGui/QTextOption>
-#include <styles/KoCharacterStyle.h>
+#include <KoCharacterStyle.h>
 
 
 /**

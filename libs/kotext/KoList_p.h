@@ -23,7 +23,7 @@
 
 
 #include "KoList.h"
-#include "styles/KoListStyle.h"
+#include "KoListStyle.h"
 #include "KoTextBlockData.h"
 
 #include <QTextDocument>
