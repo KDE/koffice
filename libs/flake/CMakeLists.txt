@@ -285,6 +285,13 @@ install(
     KoInputDeviceHandlerRegistry.h
     KoEventAction.h
     KoEventActionFactoryBase.h
+    KoParameterShape.h
+    KoConnectionShape.h
+    KoShapeShadow.h
+    KoSnapGuide.h
+    KoShapePaste.h
+    KoShapePaste.h
+    KoGradientBackground.h
     KoEventActionRegistry.h
     commands/KoEventActionAddCommand.h
     commands/KoEventActionRemoveCommand.h
@@ -318,7 +325,9 @@ install(
     commands/KoSubpathRemoveCommand.h
     commands/KoShapeKeepAspectRatioCommand.h
     commands/KoShapeLockCommand.h
+    tools/KoInteractionStrategy.h
     tools/KoInteractionTool.h
+    tools/KoShapeRubberSelectStrategy.h
     KoViewConverter.h
     DESTINATION
     ${INCLUDE_INSTALL_DIR} COMPONENT Devel

@@ -22,7 +22,7 @@
 
 #include "flake_export.h"
 
-#include <KoPathSegment.h>
+#include "KoPathSegment.h"
 #include <QtCore/QPointF>
 #include <QtCore/QList>
 #include <QtCore/QRectF>
