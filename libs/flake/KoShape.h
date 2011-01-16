@@ -621,7 +621,7 @@ public:
     void setShapeId(const QString &id);
 
     /**
-     * Create a matrix that describes all the transformations done on this shape.
+     * Create a QTransform that describes all the transformations done on this shape.
      *
      * The absolute transformation is the combined transformation of this shape
      * and all its parents and grandparents.
