@@ -292,6 +292,7 @@ install(
     KoShapePaste.h
     KoShapePaste.h
     KoGradientBackground.h
+    KoRTree.h
     KoEventActionRegistry.h
     commands/KoEventActionAddCommand.h
     commands/KoEventActionRemoveCommand.h
