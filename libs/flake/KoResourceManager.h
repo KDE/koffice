@@ -1,6 +1,6 @@
 /*
    Copyright (c) 2006 Boudewijn Rempt (boud@valdyas.org)
-   Copyright (C) 2007, 2009, 2010 Thomas Zander <zander@kde.org>
+   Copyright (C) 2007, 2009-2011 Thomas Zander <zander@kde.org>
    Copyright (c) 2008 Carlos Licea <carlos.licea@kdemail.net>
 
    This library is free software; you can redistribute it and/or
@@ -25,10 +25,10 @@
 #include <QList>
 #include <QVariant>
 #include <QSizeF>
+#include <QColor>
 
 #include "flake_export.h"
 
-#include <KoColor.h>
 #include <KoUnit.h>
 
 class KoShape;
@@ -146,14 +146,6 @@ public:
     void setResource(int key, const QVariant &value);
 
     /**
-     * Set a resource of type KoColor.
-     * @param key the integer key
-     * @param color the new value for the key.
-     * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
-     */
-    void setResource(int key, const KoColor &color);
-
-    /**
      * Set a resource of type KoShape*.
      * @param key the integer key
      * @param id the new value for the key.
@@ -181,22 +173,22 @@ public:
      * Set the foregroundColor resource.
      * @param color the new foreground color
      */
-    void setForegroundColor(const KoColor &color);
+    void setForegroundColor(const QColor &color);
 
     /**
      * Return the foregroundColor
      */
-    KoColor foregroundColor() const;
+    QColor foregroundColor() const;
 
     /**
      * Set the backgroundColor resource.
      * @param color the new background color
      */
-    void setBackgroundColor(const KoColor &color);
+    void setBackgroundColor(const QColor &color);
     /**
      * Return the backgroundColor
      */
-    KoColor backgroundColor() const;
+    QColor backgroundColor() const;
 
     /**
      * Tools that provide a handle for controlling the content that the tool can edit can
@@ -231,11 +223,11 @@ public:
     int intResource(int key) const;
 
     /**
-     * Return the resource determined by param key as a KoColor.
+     * Return the resource determined by param key as a QColor.
      * @param key the indentifying key for the resource
      * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
-    KoColor koColorResource(int key) const;
+    QColor colorResource(int key) const;
 
     /**
      * Return the resource determined by param key as a pointer to a KoShape.

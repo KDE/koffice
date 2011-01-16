@@ -79,7 +79,6 @@ For libraries that are going to have usage outside of KOffice they have some ext
 rules to make sure they are backwards compatible between releases.
 The list of libraries that this applies to is;
  * koodf
- * koplugin
  * pigment
  * flake
  * kotext

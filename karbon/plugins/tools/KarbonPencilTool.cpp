@@ -395,7 +395,7 @@ void KarbonPencilTool::setDelta(double delta)
 KoLineBorder * KarbonPencilTool::currentBorder()
 {
     KoLineBorder *border = new KoLineBorder();
-    border->setColor(canvas()->resourceManager()->foregroundColor().toQColor());
+    border->setColor(canvas()->resourceManager()->foregroundColor());
     return border;
 }
 

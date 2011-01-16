@@ -111,6 +111,7 @@ set(flake_SRCS
     KoFilterEffectLoadingContext.cpp
     KoTextOnShapeContainer.cpp
     KoTextShapeDataBase.cpp
+    KoPluginLoader.cpp
     commands/KoShapeGroupCommand.cpp
     commands/KoShapeAlignCommand.cpp
     commands/KoShapeBackgroundCommand.cpp
@@ -186,9 +187,9 @@ kde4_add_ui_files(flake_SRCS
 
 kde4_add_library(flake SHARED ${flake_SRCS})
 
-target_link_libraries(flake ${KDE4_KDEUI_LIBS} pigmentcms koodf)
+target_link_libraries(flake ${KDE4_KDEUI_LIBS} koodf)
 
-target_link_libraries(flake LINK_INTERFACE_LIBRARIES pigmentcms koodf)
+target_link_libraries(flake LINK_INTERFACE_LIBRARIES koodf)
 
 if(HAVE_OPENGL)
     target_link_libraries(flake ${OPENGL_LIBRARIES} ${QT_QTOPENGL_LIBRARY})
@@ -294,6 +295,7 @@ install(
     KoGradientBackground.h
     KoRTree.h
     KoEventActionRegistry.h
+    KoPluginLoader.h
     commands/KoEventActionAddCommand.h
     commands/KoEventActionRemoveCommand.h
     commands/KoParameterToPathCommand.h

@@ -2001,7 +2001,7 @@ void View::removeSheet(Sheet *sheet)
 
 QColor View::borderColor() const
 {
-    return d->canvas->resourceManager()->foregroundColor().toQColor();
+    return d->canvas->resourceManager()->foregroundColor();
 }
 
 void View::updateShowSheetMenu()

@@ -14,6 +14,7 @@ add_subdirectory(tests)
 add_subdirectory(benchmarks)
 
 set(pigmentcms_SRCS
+    PluginLoader.cpp
     KoBasicHistogramProducers.cpp
     KoColor.cpp
     KoColorConversionAlphaTransformation.cpp
@@ -95,14 +96,14 @@ kde4_add_library(pigmentcms SHARED ${pigmentcms_SRCS})
 
 target_link_libraries(
     pigmentcms
-    koplugin
     ${EXTRA_LIBRARIES}
+    ${KDE4_KDECORE_LIBS}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTXML_LIBRARY}
-    )
+)
 
 target_link_libraries(
-    pigmentcms LINK_INTERFACE_LIBRARIES koplugin ${QT_QTXML_LIBRARY} ${QT_QTGUI_LIBRARY} ${EXTRA_LIBRARIES}
+    pigmentcms LINK_INTERFACE_LIBRARIES ${QT_QTXML_LIBRARY} ${QT_QTGUI_LIBRARY} ${EXTRA_LIBRARIES}
 )
 
 set_target_properties(pigmentcms PROPERTIES

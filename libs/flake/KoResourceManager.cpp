@@ -1,6 +1,6 @@
 /*
    Copyright (c) 2006 Boudewijn Rempt (boud@valdyas.org)
-   Copyright (C) 2007, 2010 Thomas Zander <zander@kde.org>
+   Copyright (C) 2007, 2010-2011 Thomas Zander <zander@kde.org>
    Copyright (c) 2008 Carlos Licea <carlos.licea@kdemail.net>
 
    This library is free software; you can redistribute it and/or
@@ -85,13 +85,6 @@ QVariant KoResourceManager::resource(int key) const
         return d->resources.value(key);
 }
 
-void KoResourceManager::setResource(int key, const KoColor &color)
-{
-    QVariant v;
-    v.setValue(color);
-    setResource(key, v);
-}
-
 void KoResourceManager::setResource(int key, KoShape *shape)
 {
     QVariant v;
@@ -106,35 +99,33 @@ void KoResourceManager::setResource(int key, const KoUnit &unit)
     setResource(key, v);
 }
 
-KoColor KoResourceManager::koColorResource(int key) const
+QColor KoResourceManager::colorResource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
-    if (! d->resources.contains(key)) {
-        KoColor empty;
-        return empty;
-    }
-    return resource(key).value<KoColor>();
+    if (! d->resources.contains(key))
+        return QColor();
+    return resource(key).value<QColor>();
 }
 
-void KoResourceManager::setForegroundColor(const KoColor &color)
+void KoResourceManager::setForegroundColor(const QColor &color)
 {
     setResource(KoCanvasResource::ForegroundColor, color);
 }
 
-KoColor KoResourceManager::foregroundColor() const
+QColor KoResourceManager::foregroundColor() const
 {
-    return koColorResource(KoCanvasResource::ForegroundColor);
+    return colorResource(KoCanvasResource::ForegroundColor);
 }
 
-void KoResourceManager::setBackgroundColor(const KoColor &color)
+void KoResourceManager::setBackgroundColor(const QColor &color)
 {
     setResource(KoCanvasResource::BackgroundColor, color);
 }
 
-KoColor KoResourceManager::backgroundColor() const
+QColor KoResourceManager::backgroundColor() const
 {
-    return koColorResource(KoCanvasResource::BackgroundColor);
+    return colorResource(KoCanvasResource::BackgroundColor);
 }
 
 KoShape *KoResourceManager::koShapeResource(int key) const

@@ -19,6 +19,7 @@
 */
 
 #include "KoColorSpaceRegistry.h"
+#include "PluginLoader_p.h"
 
 #include <QHash>
 
@@ -32,8 +33,6 @@
 #include <kservice.h>
 #include <kservicetypetrader.h>
 #include <kglobal.h>
-
-#include "KoPluginLoader.h"
 
 #include "DebugPigment.h"
 #include "KoBasicHistogramProducers.h"
@@ -93,17 +92,17 @@ void KoColorSpaceRegistry::init()
     d->alphaCs = new KoAlphaColorSpace;
     d->alphaCs->d->deletability = OwnedByRegistryDoNotDelete;
 
-    KoPluginLoader::PluginsConfig config;
+    PluginLoader::PluginsConfig config;
     config.whiteList = "ColorSpacePlugins";
     config.blacklist = "ColorSpacePluginsDisabled";
     config.group = "koffice";
-    KoPluginLoader::instance()->load("KOffice/ColorSpace", "[X-Pigment-MinVersion] <= 0", config);
+    PluginLoader::instance()->load("KOffice/ColorSpace", "[X-Pigment-MinVersion] <= 0", config);
 
-    KoPluginLoader::PluginsConfig configExtensions;
+    PluginLoader::PluginsConfig configExtensions;
     configExtensions.whiteList = "ColorSpaceExtensionsPlugins";
     configExtensions.blacklist = "ColorSpaceExtensionsPluginsDisabled";
     configExtensions.group = "koffice";
-    KoPluginLoader::instance()->load("KOffice/ColorSpaceExtension", "[X-Pigment-MinVersion] <= 0", configExtensions);
+    PluginLoader::instance()->load("KOffice/ColorSpaceExtension", "[X-Pigment-MinVersion] <= 0", configExtensions);
 
 
     dbgPigment << "Loaded the following colorspaces:";

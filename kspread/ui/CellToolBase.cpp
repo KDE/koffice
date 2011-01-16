@@ -106,6 +106,7 @@
 #include <KoCanvasBase.h>
 #include <KoCanvasController.h>
 #include <KoResourceManager.h>
+#include <KoColor.h>
 #include <KoColorPopupAction.h>
 #include <KoOdfLoadingContext.h>
 #include <KoOdfReadStore.h>

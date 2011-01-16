@@ -41,6 +41,7 @@
 #include "commands/DeleteCommand.h"
 
 #include <KoCanvasBase.h>
+#include <KoColor.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>

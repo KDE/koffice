@@ -18,50 +18,35 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPluginLoader.h"
-
-#include <QString>
-#include <QStringList>
+#include "PluginLoader_p.h"
 
 #include <kdebug.h>
 #include <kservice.h>
 #include <kservicetypetrader.h>
-#include <KGlobal>
-#include <KConfig>
 #include <KConfigGroup>
 
-class KoPluginLoader::Private
-{
-public:
-    QStringList loadedServiceTypes;
-
-    static KoPluginLoader *singleton;
-};
-
-KoPluginLoader::KoPluginLoader()
-        : d(new Private())
+PluginLoader::PluginLoader()
 {
 }
 
-KoPluginLoader::~KoPluginLoader()
+PluginLoader::~PluginLoader()
 {
-    delete d;
 }
 
-KoPluginLoader* KoPluginLoader::instance()
+PluginLoader* PluginLoader::instance()
 {
-    K_GLOBAL_STATIC(KoPluginLoader, s_instance)
+    K_GLOBAL_STATIC(PluginLoader, s_instance)
     return s_instance;
 }
 
-void KoPluginLoader::load(const QString & serviceType, const QString & versionString, const PluginsConfig &config)
+void PluginLoader::load(const QString & serviceType, const QString & versionString, const PluginsConfig &config)
 {
     // Don't load the same plugins again
-    if (d->loadedServiceTypes.contains(serviceType)) {
+    if (m_loadedServiceTypes.contains(serviceType)) {
         return;
     }
-    // kDebug( 30003 ) <<"KoPluginLoader::load" << serviceType << kBacktrace();
-    d->loadedServiceTypes << serviceType;
+    // kDebug( 30003 ) <<"PluginLoader::load" << serviceType << kBacktrace();
+    m_loadedServiceTypes << serviceType;
     QString query = QString::fromLatin1("(Type == 'Service')");
     if (!versionString.isEmpty()) {
         query += QString::fromLatin1(" and (%1)").arg(versionString);
@@ -133,5 +118,3 @@ void KoPluginLoader::load(const QString & serviceType, const QString & versionSt
         configGroup.writeEntry(config.blacklist, blacklist);
     }
 }
-
-#include <KoPluginLoader.moc>

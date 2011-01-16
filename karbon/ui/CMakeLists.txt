@@ -1,7 +1,7 @@
-include_directories( 
-        ${KDE4_INCLUDE_DIR} 
-        ${QT_INCLUDES} 
-        ${KOMAIN_INCLUDES}         
+include_directories(
+        ${KDE4_INCLUDE_DIR}
+        ${QT_INCLUDES}
+        ${KOMAIN_INCLUDES}
         ${CMAKE_SOURCE_DIR}/karbon/
         ${CMAKE_SOURCE_DIR}/karbon/ui
         ${CMAKE_SOURCE_DIR}/karbon/ui/dialogs
@@ -11,12 +11,12 @@ include_directories(
 
 set(karbonui_SRCS
     KarbonFactory.cpp
-    KarbonPart.cpp 
-    KarbonView.cpp 
+    KarbonPart.cpp
+    KarbonView.cpp
     KarbonPrintJob.cpp
     KarbonZoomController.cpp
     KarbonDocumentMergeCommand.cpp
-    
+
     dialogs/KarbonConfigureDialog.cpp
 
     dockers/KarbonLayerDocker.cpp

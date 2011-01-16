@@ -4,11 +4,9 @@ add_subdirectory( pics )
 add_subdirectory( tests )
 
 include_directories(
-    ${KOTEXT_INCLUDES}
-    ${FLAKE_INCLUDES}
     ${KOMAIN_INCLUDES}
     ${CMAKE_SOURCE_DIR}/libs/widgets/colorwidgets/
-    ${KDE4_INCLUDE_DIR}/threadweaver/)
+)
 
 ########### Flake Plugin library ###############
 
@@ -97,7 +95,7 @@ kde4_add_ui_files(textshape_SRCS
 
 kde4_add_plugin(textshape ${textshape_SRCS})
 
-target_link_libraries(textshape kotext komain ${EXTRA_LIBS})
+target_link_libraries(textshape komain ${EXTRA_LIBS})
 if( Soprano_FOUND )
     target_link_libraries(textshape ${SOPRANO_LIBRARIES})
 endif( Soprano_FOUND )

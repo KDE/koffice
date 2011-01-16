@@ -1,6 +1,7 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007-2009 Jan Hambrecht <jaham@gmx.net>
  * Copyright (C) 2008-2010 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -224,14 +225,14 @@ void StyleDocker::updateStyle(KoShapeBorderBase * stroke, KoShapeBackground * fi
         if (border)
             qColor = border->color();
         else
-            qColor = m_canvas->resourceManager()->foregroundColor().toQColor();
+            qColor = m_canvas->resourceManager()->resource(KoCanvasResource::ForegroundColor).value<QColor>();
     }
     else {
         KoColorBackground * background = dynamic_cast<KoColorBackground*>(fill);
         if (background)
             qColor = background->color();
         else
-            qColor = m_canvas->resourceManager()->backgroundColor().toQColor();
+            qColor = m_canvas->resourceManager()->resource(KoCanvasResource::BackgroundColor).value<QColor>();
     }
     m_actionColor->setCurrentColor(qColor);
     updateStyleButtons(activeStyle);
@@ -324,10 +325,13 @@ void StyleDocker::updateColor(const KoColor &c)
             KoResourceManager * provider = m_canvas->resourceManager();
             int activeStyle = provider->resource(KoCanvasResource::ActiveStyleType).toInt();
 
-            if (activeStyle == KoFlake::Foreground)
-                m_canvas->resourceManager()->setForegroundColor(c);
-            else
-                m_canvas->resourceManager()->setBackgroundColor(c);
+            if (activeStyle == KoFlake::Foreground) {
+                m_canvas->resourceManager()->setResource(KoCanvasResource::ForegroundColor,
+                    QVariant(c.toQColor()));
+            } else {
+                m_canvas->resourceManager()->setResource(KoCanvasResource::BackgroundColor,
+                    QVariant(c.toQColor()));
+            }
         }
     }
     else {
@@ -385,7 +389,8 @@ void StyleDocker::updateColor(const QColor &c, const QList<KoShape*> & selectedS
             m_canvas->addCommand(m_lastStrokeCommand);
         }
         m_lastColorChange = QTime::currentTime();
-        m_canvas->resourceManager()->setForegroundColor(kocolor);
+        m_canvas->resourceManager()->setResource(KoCanvasResource::ForegroundColor,
+            QVariant(kocolor.toQColor()));
     }
     else {
         if (m_lastColorChange.msecsTo(QTime::currentTime()) > MsecsThresholdForMergingCommands) {
@@ -402,7 +407,8 @@ void StyleDocker::updateColor(const QColor &c, const QList<KoShape*> & selectedS
             m_canvas->addCommand(m_lastFillCommand);
         }
         m_lastColorChange = QTime::currentTime();
-        m_canvas->resourceManager()->setBackgroundColor(kocolor);
+        m_canvas->resourceManager()->setResource(KoCanvasResource::BackgroundColor,
+            QVariant(kocolor.toQColor()));
     }
 }
 

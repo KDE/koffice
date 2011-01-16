@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (c) 2006 Boudewijn Rempt (boud@valdyas.org)
+ * Copyright (c) 2006-2010 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,54 +18,15 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KO_PLUGIN_LOADER_H
-#define KO_PLUGIN_LOADER_H
+#ifndef PLUGIN_LOADER_P_H
+#define PLUGIN_LOADER_P_H
 
 #include <QObject>
 #include <QStringList>
 
-#include "koplugin_export.h"
-
-/**
- * The pluginloader singleton is responsible for loading the plugins
- * that it's asked to load. It keeps track of which servicetypes it
- * has seen and doesn't reload them. The plugins need to inherit
- * a QObject with a default constructor. Inside the default
- * constructor you can create whatever object you want and add it to
- * whatever registry you prefer. After having been constructed, your plugin
- * will be deleted, so do all you need in the constructor.  Things like
- * adding a factory to a registry make sense there.
- * Example header file;
-@code
-#include <QObject>
-
-class MyPlugin : public QObject {
-    Q_OBJECT
-public:
-    MyPlugin(QObject *parent, const QVariantList & );
-    ~MyPlugin() {}
-};
-@endcode
- * Example cpp file;
-@code
-#include "MyPlugin.h"
-#include <kpluginfactory.h>
-
-K_PLUGIN_FACTORY(MyPluginFactory, registerPlugin<MyPlugin>();)
-K_EXPORT_PLUGIN(MyPluginFactory("DaPlugin"))
-
-MyPlugin::MyPlugin( QObject *parent, const QVariantList& ) : QObject(parent) {
-    // do stuff like creating a factory and adding it to the
-    // registry instance.
-}
-#include <MyPlugin.moc>
-@endcode
- */
-class KOPLUGIN_EXPORT KoPluginLoader : public QObject
+class PluginLoader : public QObject
 {
-
     Q_OBJECT
-
 public:
     /**
      * Config object for load()
@@ -90,18 +52,18 @@ public:
         QStringList defaults;
     };
 
-    ~KoPluginLoader();
+    ~PluginLoader();
 
     /**
-     * Return an instance of the KoPluginLoader
+     * Return an instance of the PluginLoader
      * Creates an instance if that has never happened before and returns the singleton instance.
      */
-    static KoPluginLoader * instance();
+    static PluginLoader * instance();
 
     /**
      * Load all plugins that conform to the versiontype and versionstring,
      * for instance:
-     * KoPluginLoader::instance()->load("KOffice/Flake", "([X-Flake-Version] == 3)");
+     * PluginLoader::instance()->load("KOffice/Flake", "([X-Flake-Version] == 3)");
      * This method allows you to optionally limit the plugins that are loaded by version, but also
      * using a user configurable set of config options.
      * If you pass a PluginsConfig struct only those plugins are loaded that are specified in the
@@ -111,16 +73,15 @@ public:
      * @param config when passing a valid config only the wanted plugins are actually loaded
      * @return a list of services (by library name) that were not know in the config
      */
-    void load(const QString & serviceType, const QString & versionString = QString(), const PluginsConfig &config = PluginsConfig());
+    void load(const QString &serviceType, const QString &versionString = QString(), const PluginsConfig &config = PluginsConfig());
 
 private:
-    KoPluginLoader();
-    KoPluginLoader(const KoPluginLoader&);
-    KoPluginLoader operator=(const KoPluginLoader&);
+    PluginLoader();
+    PluginLoader(const PluginLoader&);
+    PluginLoader operator=(const PluginLoader&);
 
 private:
-    class Private;
-    Private * const d;
+    QStringList m_loadedServiceTypes;
 };
 
-#endif // KO_PLUGIN_LOADER_H
+#endif

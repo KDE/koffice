@@ -15,10 +15,8 @@ ENDIF(CMAKE_SIZEOF_VOID_P EQUAL 4)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-karbon.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-karbon.h )
 
 include_directories(
-    ${QT_INCLUDES} 
-    ${KDE4_INCLUDE_DIR} 
-    ${FLAKE_INCLUDES}
-    ${KOTEXT_INCLUDES}
+    ${QT_INCLUDES}
+    ${KDE4_INCLUDE_DIR}
     ${KOMAIN_INCLUDES}
     ${CMAKE_SOURCE_DIR}/libs/widgets/resources
     ${CMAKE_SOURCE_DIR}/libs/widgets/colorwidgets
