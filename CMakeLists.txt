@@ -27,7 +27,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
 # option(BUILD_app "Build directory app" OFF)
 #
 #eg:
-#option(BUILD_kexi "Build directory kexi" OFF) # kexi isn't buildable at the moment
 
 option(GHNS "support Get Hot New Stuff" ON)
 
@@ -38,33 +37,17 @@ IF (TINY)
     set(SHOULD_BUILD_KPRESENTER TRUE)
     set(SHOULD_BUILD_KSPREAD TRUE)
     set(SHOULD_BUILD_KARBON FALSE)
-    set(SHOULD_BUILD_KRITA FALSE)
-    set(SHOULD_BUILD_KEXI FALSE)
     set(SHOULD_BUILD_KIVIO FALSE)
-    set(SHOULD_BUILD_KPLATO FALSE)
-    set(SHOULD_BUILD_KFORMULA FALSE)
-    set(SHOULD_BUILD_KCHART FALSE)
-    set(SHOULD_BUILD_KDGANTT FALSE)
     set(SHOULD_BUILD_KOUNAVAIL FALSE)
     set(SHOULD_BUILD_SCRIPTING FALSE)
-    set(SHOULD_BUILD_F_OFFICE TRUE)
-    set(SHOULD_BUILD_KOREPORT FALSE)
 ELSE(TINY)
     set(SHOULD_BUILD_KWORD TRUE)
     set(SHOULD_BUILD_KPRESENTER TRUE)
     set(SHOULD_BUILD_KSPREAD TRUE)
     set(SHOULD_BUILD_KARBON TRUE)
-    set(SHOULD_BUILD_KRITA TRUE)
-    set(SHOULD_BUILD_KEXI TRUE)
     set(SHOULD_BUILD_KIVIO TRUE)
-    set(SHOULD_BUILD_KPLATO TRUE)
-    set(SHOULD_BUILD_KFORMULA TRUE)
-    set(SHOULD_BUILD_KCHART FALSE)
-    set(SHOULD_BUILD_KDGANTT TRUE)
     set(SHOULD_BUILD_KOUNAVAIL TRUE)
     set(SHOULD_BUILD_SCRIPTING TRUE)
-    set(SHOULD_BUILD_F_OFFICE TRUE)
-    set(SHOULD_BUILD_KOREPORT TRUE)
 ENDIF(TINY)
 
 if(KDE4_BUILD_TESTS)
@@ -154,7 +137,7 @@ macro_log_feature(CREATERESOURCES_FOUND "Create Resources" "Create Resources (br
 ## Test for kdepimlibs
 ##
 macro_optional_find_package(KdepimLibs)
-macro_log_feature(KDEPIMLIBS_FOUND "KDE PIMLibs" "KDE Personal Information Management Libraries" "http://www.kde.org/" FALSE "" "Required by KPlato and the KDE address book integration (available as a module in KDE)")
+macro_log_feature(KDEPIMLIBS_FOUND "KDE PIMLibs" "KDE Personal Information Management Libraries" "http://www.kde.org/" FALSE "" "Required by the KDE address book integration (available as a module in KDE)")
 
 ##
 ## Test for boost
@@ -357,37 +340,6 @@ if(NOT Boost_FOUND)
     set(SHOULD_BUILD_KPRESENTER FALSE)
 endif(NOT Boost_FOUND)
 
-### Krita: pigment, eigen2, exiv2
-if(NOT EIGEN2_FOUND OR NOT EXIV2_FOUND OR NOT HAVE_REQUIRED_LCMS_VERSION)
-   set(SHOULD_BUILD_KRITA FALSE)
-endif(NOT EIGEN2_FOUND OR NOT EXIV2_FOUND OR NOT HAVE_REQUIRED_LCMS_VERSION)
-
-### KPlato: kdepimlibs
-if(NOT KdepimLibs_FOUND)
-    set(SHOULD_BUILD_KPLATO FALSE)
-endif(NOT KdepimLibs_FOUND)
-
-### HACK ###
-# Those BUILD_ are illegally used below before they are defined, which cause problem on a first build
-option(BUILD_kexi   "Build directory kexi" ON)
-option(BUILD_koreport "Build directory libs/koreport" ON)
-### HACK ###
-
-if(BUILD_kexi AND SHOULD_BUILD_KEXI)
-    ##
-    ## Test for sqlite
-    ##
-    set(SQLITE_RECOMMENDED_VERSION "3.7.3")
-    find_package(KofficeSqlite 3.6.16)
-    macro_log_feature(SQLITE_FOUND "SQLite" "Embedded SQL database engine" "http://www.sqlite.org"
-                      FALSE ${SQLITE_MIN_VERSION} "Required by Kexi (for its default database driver).")
-
-    if(NOT SQLITE_FOUND)
-        set(SHOULD_BUILD_KEXI FALSE)
-        message(STATUS "WARNING: Kexi will not be built.")
-    endif(NOT SQLITE_FOUND)
-endif(BUILD_kexi AND SHOULD_BUILD_KEXI)
-
  ###################
 ####################
 ## Subdirectories ##
@@ -398,10 +350,6 @@ if(SHOULD_BUILD_KWORD)
     macro_optional_add_subdirectory(kword)
 endif(SHOULD_BUILD_KWORD)
 
-if (SHOULD_BUILD_KFORMULA)
-    macro_optional_add_subdirectory(kformula)
-endif (SHOULD_BUILD_KFORMULA)
-
 if (SHOULD_BUILD_KIVIO)
     macro_optional_add_subdirectory(kivio)
 endif (SHOULD_BUILD_KIVIO)
@@ -410,26 +358,9 @@ if (SHOULD_BUILD_KOUNAVAIL)
     macro_optional_add_subdirectory(kounavail)
 endif (SHOULD_BUILD_KOUNAVAIL)
 
-if (SHOULD_BUILD_KPLATO)
-    macro_optional_add_subdirectory(kdgantt)
-endif (SHOULD_BUILD_KPLATO)
-
-if (SHOULD_BUILD_KCHART)
-    add_definitions(-DHAVE_KCHART)
-    macro_optional_add_subdirectory(kchart)
-endif (SHOULD_BUILD_KCHART)
-
 if(SHOULD_BUILD_KPRESENTER)
   macro_optional_add_subdirectory(kpresenter)
 endif(SHOULD_BUILD_KPRESENTER)
-
-if(SHOULD_BUILD_KEXI)
-    macro_optional_add_subdirectory(kexi)
-endif(SHOULD_BUILD_KEXI)
-
-if(SHOULD_BUILD_KPLATO)
-    macro_optional_add_subdirectory(kplato)
-endif(SHOULD_BUILD_KPLATO)
 
 if(SHOULD_BUILD_KSPREAD)
     macro_optional_add_subdirectory(kspread)
@@ -470,13 +401,7 @@ macro_display_application_enabled(kword ${SHOULD_BUILD_KWORD})
 macro_display_application_enabled(kspread ${SHOULD_BUILD_KSPREAD})
 macro_display_application_enabled(kpresenter ${SHOULD_BUILD_KPRESENTER})
 macro_display_application_enabled(kivio ${SHOULD_BUILD_KIVIO})
-macro_display_application_enabled(kexi ${SHOULD_BUILD_KEXI})
-macro_display_application_enabled(kplato ${SHOULD_BUILD_KPLATO})
-macro_display_application_enabled(krita ${SHOULD_BUILD_KRITA})
 macro_display_application_enabled(karbon ${SHOULD_BUILD_KARBON})
-macro_display_application_enabled(kformula ${SHOULD_BUILD_KFORMULA})
-macro_display_application_enabled(kchart ${SHOULD_BUILD_KCHART})
-macro_display_application_enabled(f-office ${SHOULD_BUILD_F_OFFICE})
 
 message(STATUS "--------------------------------------------------------------------------" )
 

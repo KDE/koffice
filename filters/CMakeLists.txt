@@ -43,10 +43,6 @@ macro_optional_add_subdirectory( generic_wrapper )
 macro_optional_add_subdirectory( libkowmf )
 macro_optional_add_subdirectory( libmsooxml )
 
-if(SHOULD_BUILD_KCHART)
-    macro_optional_add_subdirectory(kchart)
-endif(SHOULD_BUILD_KCHART)
-
 if (SHOULD_BUILD_KWORD)
     macro_optional_add_subdirectory(kword)
 endif (SHOULD_BUILD_KWORD)
@@ -54,10 +50,6 @@ endif (SHOULD_BUILD_KWORD)
 if(SHOULD_BUILD_KPRESENTER)
     macro_optional_add_subdirectory(kpresenter)
 endif(SHOULD_BUILD_KPRESENTER)
-
-if(SHOULD_BUILD_KFORMULA)
-    macro_optional_add_subdirectory(kformula)
-endif(SHOULD_BUILD_KFORMULA)
 
 if(SHOULD_BUILD_KSPREAD)
     macro_optional_add_subdirectory(kspread)
@@ -70,10 +62,6 @@ endif(SHOULD_BUILD_KARBON)
 if(SHOULD_BUILD_KIVIO)
     #macro_optional_add_subdirectory(kivio)
 endif(SHOULD_BUILD_KIVIO)
-
-if(SHOULD_BUILD_KPLATO)
-    macro_optional_add_subdirectory(kplato)
-endif(SHOULD_BUILD_KPLATO)
 
 if(NOT TINY AND LIBXML2_FOUND AND LIBXSLT_FOUND AND NOT WIN32 AND NOT QT_MAC_USE_COCOA)
 	add_subdirectory(xsltfilter)

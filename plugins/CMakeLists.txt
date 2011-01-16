@@ -31,19 +31,5 @@ ENDIF (NOT TINY)
 macro_optional_add_subdirectory( variables )
 macro_optional_add_subdirectory( defaultTools )
 macro_optional_add_subdirectory( pathshapes )
-macro_optional_add_subdirectory( chartshape )
 macro_optional_add_subdirectory( pictureshape )
-macro_optional_add_subdirectory( videoshape )
 macro_optional_add_subdirectory( textshape )
-macro_optional_add_subdirectory( pluginshape )
-macro_optional_add_subdirectory( treeshape )
-
-# as the vector shape depends on filters subdir (not really intuitive) lets allow disabling
-macro_optional_add_subdirectory( vectorshape )
-
-# only build the reporting plugins if building koreport
-if(SHOULD_BUILD_KOREPORT)
-    macro_optional_add_subdirectory( reporting )
-endif(SHOULD_BUILD_KOREPORT)
-
-macro_optional_add_subdirectory( staging )
