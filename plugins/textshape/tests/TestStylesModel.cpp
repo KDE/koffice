@@ -56,22 +56,19 @@ void TestStylesModel::testPrecalcCache()
 {
     fillManager();
     MockModel model(manager);
-    QCOMPARE(model.rootStyleIds().count(), 5);
+    QCOMPARE(model.rootStyleIds().count(), 4);
 
-    KoParagraphStyle *s = manager->paragraphStyle(model.rootStyleIds().at(0));
-    QVERIFY(s);
-    QCOMPARE(s->name(), QString("Default"));
-    KoParagraphStyle *code = manager->paragraphStyle(model.rootStyleIds().at(2));
+    KoParagraphStyle *code = manager->paragraphStyle(model.rootStyleIds().at(1));
     QVERIFY(code);
     QCOMPARE(code->name(), QString("code"));
-    KoParagraphStyle *altered = manager->paragraphStyle(model.rootStyleIds().at(1));
+    KoParagraphStyle *altered = manager->paragraphStyle(model.rootStyleIds().at(0));
     QVERIFY(altered);
     QCOMPARE(altered->name(), QString("altered"));
-    KoParagraphStyle *headers = manager->paragraphStyle(model.rootStyleIds().at(3));
+    KoParagraphStyle *headers = manager->paragraphStyle(model.rootStyleIds().at(2));
     QVERIFY(headers);
     QCOMPARE(headers->name(), QString("headers"));
 
-    KoCharacterStyle *red = manager->characterStyle(model.rootStyleIds().at(4));
+    KoCharacterStyle *red = manager->characterStyle(model.rootStyleIds().at(3));
     QVERIFY(red);
     QCOMPARE(red->name(), QString("red"));
 
@@ -92,7 +89,7 @@ void TestStylesModel::testSetManager()
     QCOMPARE(model.rootStyleIds().count(), 0);
     fillManager();
     model.setStyleManager(manager);
-    QCOMPARE(model.rootStyleIds().count(), 5);
+    QCOMPARE(model.rootStyleIds().count(), 4);
 }
 
 void TestStylesModel::testNestedStyles()
@@ -110,13 +107,9 @@ void TestStylesModel::testNestedStyles()
     headers->setParentStyle(root);
 
     MockModel model(manager);
-    QCOMPARE(model.rootStyleIds().count(), 5); // default, root, code, altered and red.
+    QCOMPARE(model.rootStyleIds().count(), 4); // root, code, altered and red.
 
-    KoParagraphStyle *s = manager->paragraphStyle(model.rootStyleIds().at(0));
-    QVERIFY(s);
-    QCOMPARE(s->name(), QString("Default"));
-
-    s = manager->paragraphStyle(model.rootStyleIds().at(1));
+    KoParagraphStyle *s = manager->paragraphStyle(model.rootStyleIds().at(2));
     QCOMPARE(s, root);
     QList<int> headerId = model.relations().values(root->styleId());
     QCOMPARE(headerId.count(), 1);
