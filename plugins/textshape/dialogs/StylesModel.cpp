@@ -179,7 +179,7 @@ QModelIndex StylesModel::index(int row, int column, const QModelIndex &parent) c
 
     if (m_relations.contains(id)) {
         QList<int> children = m_relations.values(id);
-        if (row > children.count())
+        if (row >= children.count())
             return QModelIndex();
         return createIndex(row, column, children[row]);
     }
@@ -306,7 +306,7 @@ void StylesModel::setCurrentParagraphStyle(int styleId, bool unchanged)
         foreach (int parent, m_relations.keys()) {
             int index = m_relations.values(parent).indexOf(m_currentParagraphStyle);
             if (index >= 0) {
-                QModelIndex mi = createIndex(index + 1, 1, m_currentParagraphStyle);
+                QModelIndex mi = createIndex(index, 1, m_currentParagraphStyle);
                 emit dataChanged(mi, mi);
                 break;
             }
