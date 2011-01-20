@@ -1,0 +1,5 @@
+/**
+ * \mainpage koffice-odf
+ *
+ * This library provides functionality for parsing and writing the OpenDocument format.
+ */
