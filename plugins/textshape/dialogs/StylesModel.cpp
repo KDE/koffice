@@ -55,6 +55,11 @@ void StylesModel::recalculate()
         reset();
         return;
     }
+    const int DefaultParagStyleId = m_styleManager->defaultParagraphStyle() ?
+        m_styleManager->defaultParagraphStyle()->styleId() : -1;
+    const int DefaultCharStyleId = DefaultParagStyleId == -1 ? -1 :
+        (m_styleManager->defaultParagraphStyle()->characterStyle() ?
+         m_styleManager->defaultParagraphStyle()->characterStyle()->styleId(): -1);
 
     /*
         In the model we need two-way iteration. In the styles we already have
@@ -66,6 +71,7 @@ void StylesModel::recalculate()
     QSet<int> paragraphStyles; // found paragraphStyles
     QSet<int> characterStyles; // found characterStyles
     QSet<int> treeRoot;
+    QHash<int, QList<int> > tree;
 
     foreach (KoParagraphStyle *style, m_styleManager->paragraphStyles()) {
         if (style->parentStyle() == 0) {
@@ -81,23 +87,42 @@ void StylesModel::recalculate()
             if (paragraphStyles.contains(value)) // relationship already present
                 break;
             characterStyles << style->characterStyle()->styleId();
-
-            // the multiHash has the nasty habit or returning an inverted list, so lets 'sort in' by inserting them again
-            QList<int> prevValues = m_relations.values(key);
-            if (!prevValues.contains(value)) {
-                m_relations.remove(key);
-                m_relations.insert(key, value);
-                while (!prevValues.isEmpty())
-                    m_relations.insert(key, prevValues.takeLast());
+            const QString styleName = style->name();
+            QList<int> prevValues = tree.value(key);
+            // insert value in prevValues according to i18n sorting.
+            bool inserted = false;
+            for (QList<int>::Iterator iter = prevValues.begin(); iter != prevValues.end(); ++iter) {
+                if ((*iter) == value) {
+                    inserted = true; // already present.
+                    break;
+                }
+                KoParagraphStyle *i = m_styleManager->paragraphStyle(*iter);
+                Q_ASSERT(i);
+                if (styleName.compare(i->name(), Qt::CaseInsensitive) > 0) {
+                    prevValues.insert(iter, value);
+                    inserted = true;
+                    break;
+                }
             }
+            if (!inserted)
+                prevValues.append(value);
+            tree.insert(key, prevValues);
 
             style = style->parentStyle();
         }
     }
 
+    // now copy our 'tree' to m_relations. Probably should refactor to use this datastructure..
+    foreach (int key, tree.keys()) {
+        foreach (int x, tree.value(key)) {
+            m_relations.insert(key, x);
+        }
+    }
+
+
     QList<int> newStyleList;
-    if (treeRoot.count() == 1 && (*treeRoot.constBegin()) == 100) { // the default style
-        newStyleList = m_relations.values(100);
+    if (treeRoot.count() == 1 && (*treeRoot.constBegin()) == DefaultParagStyleId) {
+        newStyleList = m_relations.values(DefaultParagStyleId);
     } else { // a real list
         newStyleList = treeRoot.toList(); // TODO sort alphabetically on style name?
     }
@@ -107,7 +132,7 @@ void StylesModel::recalculate()
 
     foreach (KoCharacterStyle *style, m_styleManager->characterStyles()) {
         const int key = style->styleId();
-        if (key != 101 && !characterStyles.contains(key)) // 101 is default style.
+        if (key != DefaultCharStyleId && !characterStyles.contains(key))
             newStyleList << style->styleId();
     }
 
