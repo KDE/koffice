@@ -26,6 +26,7 @@
 #include <KoCharacterStyle.h>
 
 #include <KIcon>
+#include <KDebug>
 
 StylesModel::StylesModel(KoStyleManager *manager, QObject *parent)
         : QAbstractItemModel(parent),
@@ -73,14 +74,13 @@ void StylesModel::recalculate()
         }
         Q_ASSERT(style->parentStyle());
         while (style->parentStyle()) {
-            characterStyles << style->characterStyle()->styleId();
-
             // store the relation style->parentStyle() <-> style
             const int key = style->parentStyle()->styleId();
             const int value = style->styleId();
 
             if (paragraphStyles.contains(value)) // relationship already present
                 break;
+            characterStyles << style->characterStyle()->styleId();
 
             // the multiHash has the nasty habit or returning an inverted list, so lets 'sort in' by inserting them again
             QList<int> prevValues = m_relations.values(key);
@@ -101,6 +101,9 @@ void StylesModel::recalculate()
     } else { // a real list
         newStyleList = treeRoot.toList(); // TODO sort alphabetically on style name?
     }
+
+    //kDebug() << "tree has hierarchy;" << (m_relations.count() != newStyleList.count());
+    //kDebug() << "   " << m_relations.count() << newStyleList.count();
 
     foreach (KoCharacterStyle *style, m_styleManager->characterStyles()) {
         const int key = style->styleId();
@@ -123,13 +126,14 @@ void StylesModel::recalculate()
     }
 
     if (m_styleList.count() == newStyleList.count()) {
-        int maxRow = qMax(m_styleList.count(), newStyleList.count()) - 1;
+        int maxRow = qMax(m_styleList.count(), newStyleList.count());
         m_styleList = newStyleList;
         emit dataChanged(createIndex(firstChangedRow, 0, 0), createIndex(maxRow, 1, 0));
     } else {
         m_styleList = newStyleList;
         layoutChanged();
     }
+
 }
 
 QModelIndex StylesModel::index(int row, int column, const QModelIndex &parent) const
@@ -150,13 +154,11 @@ QModelIndex StylesModel::index(int row, int column, const QModelIndex &parent) c
         return createIndex(row, column, m_styleList[row]);
     }
 
-    if (row == 0) // return child char style
-        return createIndex(row, column, pstyle->characterStyle()->styleId());
     if (m_relations.contains(id)) {
         QList<int> children = m_relations.values(id);
         if (row > children.count())
             return QModelIndex();
-        return createIndex(row, column, children[row-1]);
+        return createIndex(row, column, children[row]);
     }
     return QModelIndex();
 }
@@ -185,8 +187,6 @@ QModelIndex StylesModel::parent(int needle, const QList<int> &haystack) const
         KoParagraphStyle *style = m_styleManager->paragraphStyle(id);
         if (style == 0)
             continue;
-        if (style->characterStyle()->styleId() == needle) // found it!
-            return createIndex(row, 0, style->styleId());
         QList<int> children = m_relations.values(id);
         if (children.isEmpty())
             continue;
@@ -211,7 +211,7 @@ int StylesModel::rowCount(const QModelIndex &parent) const
     int id = (int) parent.internalId();
     const bool isParagStyle = m_styleManager->paragraphStyle(id) != 0;
     if (isParagStyle)
-        return m_relations.values(id).count() + 1;
+        return m_relations.values(id).count();
     return 0;
 }
 
