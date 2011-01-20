@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,6 +21,7 @@
 #include "KoReplaceStrategy.h"
 
 #include <QTextCursor>
+#include <QTextDocument>
 #include <KFind>
 #include <KReplaceDialog>
 #include <KMessageBox>
@@ -78,6 +80,10 @@ bool KoReplaceStrategy::foundMatch(QTextCursor &cursor, FindDirection *findDirec
     if (replace) {
         cursor.insertText(m_dialog->replacement());
         ++m_replaced;
+        int pos = cursor.position() + m_dialog->replacement().length();;
+        if (cursor.document()->characterCount() <= pos)
+            return false;
+        cursor.setPosition(pos);
     }
 
     return true;
