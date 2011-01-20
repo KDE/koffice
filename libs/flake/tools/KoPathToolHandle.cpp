@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathToolHandle.h"
+#include "KoPathToolHandle_p.h"
 #include "KoPathTool.h"
 #include "KoPathPointMoveStrategy.h"
 #include "KoPathControlPointMoveStrategy.h"

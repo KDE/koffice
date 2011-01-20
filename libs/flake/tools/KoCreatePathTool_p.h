@@ -31,7 +31,7 @@
 #include "KoViewConverter.h"
 #include "KoShapeManager.h"
 #include "KoResourceManager.h"
-#include "KoSnapStrategy.h"
+#include "KoSnapStrategy_p.h"
 #include "KoToolBase_p.h"
 
 /// Small helper to keep track of a path point and its parent path shape

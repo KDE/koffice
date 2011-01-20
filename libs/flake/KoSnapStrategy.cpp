@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoSnapStrategy.h"
+#include "KoSnapStrategy_p.h"
 #include "KoSnapProxy.h"
 #include "KoSnapGuide.h"
 #include <KoPathShape.h>
