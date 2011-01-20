@@ -297,16 +297,17 @@ Qt::ItemFlags StylesModel::flags(const QModelIndex &index) const
     return (Qt::ItemIsDragEnabled | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 }
 
-void StylesModel::setCurrentParagraphStyle(int styleId, bool unchanged)
+QModelIndex StylesModel::setCurrentParagraphStyle(int styleId, bool unchanged)
 {
     if (m_currentParagraphStyle == styleId && unchanged == m_pureParagraphStyle)
-        return;
+        return QModelIndex();
 
+    QModelIndex mi;
     for (int i = 0; i < 2; ++i) {
         foreach (int parent, m_relations.keys()) {
             int index = m_relations.values(parent).indexOf(m_currentParagraphStyle);
             if (index >= 0) {
-                QModelIndex mi = createIndex(index, 1, m_currentParagraphStyle);
+                mi = createIndex(index, 1, m_currentParagraphStyle);
                 emit dataChanged(mi, mi);
                 break;
             }
@@ -315,6 +316,7 @@ void StylesModel::setCurrentParagraphStyle(int styleId, bool unchanged)
         m_currentParagraphStyle = styleId;
         m_pureParagraphStyle = unchanged;
     }
+    return mi;
 }
 
 void StylesModel::setCurrentCharacterStyle(int styleId, bool unchanged)

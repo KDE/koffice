@@ -119,7 +119,8 @@ void StylesWidget::setCurrentFormat(const QTextBlockFormat &format)
     }
 
     m_blockSignals = true;
-    m_stylesModel->setCurrentParagraphStyle(id, unchanged);
+    QModelIndex mi = m_stylesModel->setCurrentParagraphStyle(id, unchanged);
+    widget.stylesView->scrollTo(mi);
     m_blockSignals = false;
 }
 

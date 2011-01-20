@@ -62,8 +62,9 @@ public slots:
         Sets the paragraph style that is to be marked as the 'active' one.
         @param styleId the id from KoParagraphStyle::styleId()
         @param unchanged if true the icon will display the paragraph style in the text has no local modifications.
+        @return the QModelIndex of the new paragraph style
     */
-    void setCurrentParagraphStyle(int styleId, bool unchanged);
+    QModelIndex setCurrentParagraphStyle(int styleId, bool unchanged);
     /**
         Sets the character style that is to be marked as the 'active' one.
         @param styleId the id from KoCharacterStyle::styleId()
