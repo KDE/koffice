@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2008-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2008-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -55,50 +55,62 @@ void StylesModel::recalculate()
         return;
     }
 
-    QList<int> treeRoot;
-    QSet<int> paragraphStyles;
-    QSet<int> characterStyles;
-    treeRoot << m_styleManager->defaultParagraphStyle()->styleId();
-    paragraphStyles << treeRoot[0];
+    /*
+        In the model we need two-way iteration. In the styles we already have
+        a way to traverse up the tree using the paragraphStyle::parentStyle()
+        This method creates a tree of styles and stores the info to traverse
+        down the tree in m_relations.
+    */
+
+    QSet<int> paragraphStyles; // found paragraphStyles
+    QSet<int> characterStyles; // found characterStyles
+    QSet<int> treeRoot;
+
     foreach (KoParagraphStyle *style, m_styleManager->paragraphStyles()) {
-        KoParagraphStyle *root;
-        for (root = style; root->parentStyle(); root = root->parentStyle()) {
-            const int key = root->parentStyle()->styleId();
+        if (style->parentStyle() == 0) {
+            treeRoot.insert(style->styleId());
+            continue;
+        }
+        Q_ASSERT(style->parentStyle());
+        while (style->parentStyle()) {
+            characterStyles << style->characterStyle()->styleId();
+
+            // store the relation style->parentStyle() <-> style
+            const int key = style->parentStyle()->styleId();
+            const int value = style->styleId();
+
+            if (paragraphStyles.contains(value)) // relationship already present
+                break;
+
             // the multiHash has the nasty habit or returning an inverted list, so lets 'sort in' by inserting them again
             QList<int> prevValues = m_relations.values(key);
-            if (prevValues.contains(root->styleId()))
-                continue;
-            m_relations.remove(key);
-            m_relations.insert(key, root->styleId());
-            while (!prevValues.isEmpty())
-                m_relations.insert(key, prevValues.takeLast());
-
-            characterStyles << root->characterStyle()->styleId();
-        }
-        Q_ASSERT(root);
-        Q_ASSERT(root->characterStyle());
-        characterStyles << root->characterStyle()->styleId();
-        if (!paragraphStyles.contains(root->styleId())) {
-            int index = 0;
-            foreach (int styleId, treeRoot) { // sort in sorting
-                // default style is 100 and should be sorted at the top.
-                if (styleId != 100 && m_styleManager->paragraphStyle(styleId)->name() > root->name())
-                    break;
-                index++;
+            if (!prevValues.contains(value)) {
+                m_relations.remove(key);
+                m_relations.insert(key, value);
+                while (!prevValues.isEmpty())
+                    m_relations.insert(key, prevValues.takeLast());
             }
-            treeRoot.insert(index, root->styleId());
+
+            style = style->parentStyle();
         }
-        paragraphStyles << root->styleId();
+    }
+
+    QList<int> newStyleList;
+    if (treeRoot.count() == 1 && (*treeRoot.constBegin()) == 100) { // the default style
+        newStyleList = m_relations.values(100);
+    } else { // a real list
+        newStyleList = treeRoot.toList(); // TODO sort alphabetically on style name?
     }
 
     foreach (KoCharacterStyle *style, m_styleManager->characterStyles()) {
-        if (!characterStyles.contains(style->styleId()))
-            treeRoot << style->styleId();
+        const int key = style->styleId();
+        if (key != 101 && !characterStyles.contains(key)) // 101 is default style.
+            newStyleList << style->styleId();
     }
 
     int firstChangedRow = -1;
     int index = 0;
-    foreach (int rootId, treeRoot) {
+    foreach (int rootId, newStyleList) {
         if (index >= m_styleList.count()) {
             if (firstChangedRow == -1)
                 firstChangedRow = index;
@@ -110,12 +122,12 @@ void StylesModel::recalculate()
         }
     }
 
-    if (m_styleList.count() == treeRoot.count()) {
-        int maxRow = qMax(m_styleList.count(), treeRoot.count()) - 1;
-        m_styleList = treeRoot;
+    if (m_styleList.count() == newStyleList.count()) {
+        int maxRow = qMax(m_styleList.count(), newStyleList.count()) - 1;
+        m_styleList = newStyleList;
         emit dataChanged(createIndex(firstChangedRow, 0, 0), createIndex(maxRow, 1, 0));
     } else {
-        m_styleList = treeRoot;
+        m_styleList = newStyleList;
         layoutChanged();
     }
 }
@@ -159,9 +171,6 @@ QModelIndex StylesModel::parent(const QModelIndex &child) const
         if (childStyle && childStyle->parentStyle())
             createIndex(0, 0, childStyle->parentStyle()->styleId());
 
-        // this is stupid; forcing me to return a parent implies I can't have one node multiple times in a tree!
-        // and most real-life data models actually don't allow traversal in two ways :(
-        // *sigh* lets just return the first one...
         return parent(id, m_styleList);
     }
     return QModelIndex();
@@ -171,7 +180,7 @@ QModelIndex StylesModel::parent(int needle, const QList<int> &haystack) const
 {
     Q_ASSERT(haystack.count());
     int row = -1;
-    foreach(int id, haystack) {
+    foreach (int id, haystack) {
         row++;
         KoParagraphStyle *style = m_styleManager->paragraphStyle(id);
         if (style == 0)
