@@ -60,11 +60,8 @@ enum CanvasResource {
     CurrentPage,        ///< The current page number
     ActiveStyleType,    ///< the actual active style type see KoFlake::StyleType for valid values
     KarbonStart = 1000,      ///< Base number for karbon specific values.
-    KexiStart = 2000,        ///< Base number for kexi specific values.
     KivioStart = 3000,       ///< Base number for kivio specific values.
-    KPlatoStart = 4000,      ///< Base number for kplato specific values.
     KPresenterStart = 5000,  ///< Base number for kpresenter specific values.
-    KritaStart = 6000,       ///< Base number for krita specific values.
     KSpreadStart = 7000,     ///< Base number for kspread specific values.
     KWordStart = 8000,        ///< Base number for kword specific values.
     KoPageAppStart = 9000    ///< Base number for KoPageApp specific values.
@@ -88,11 +85,8 @@ enum DocumentResource {
     OdfDocument,            ///< The document this canvas shows (KoOdfDocument)
 
     KarbonStart = 1000,      ///< Base number for karbon specific values.
-    KexiStart = 2000,        ///< Base number for kexi specific values.
     KivioStart = 3000,       ///< Base number for kivio specific values.
-    KPlatoStart = 4000,      ///< Base number for kplato specific values.
     KPresenterStart = 5000,  ///< Base number for kpresenter specific values.
-    KritaStart = 6000,       ///< Base number for krita specific values.
     KSpreadStart = 7000,     ///< Base number for kspread specific values.
     KWordStart = 8000,       ///< Base number for kword specific values.
     KoPageAppStart = 9000,   ///< Base number for KoPageApp specific values.
