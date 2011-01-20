@@ -2214,6 +2214,8 @@ void TextTool::debugTextStyles()
 
     foreach (KoParagraphStyle *style, styleManager->paragraphStyles()) {
         kDebug(32500) << style->styleId() << style->name() << (styleManager->defaultParagraphStyle() == style ? "[Default]" : "");
+        if (style->parentStyle())
+            kDebug(32500) << "  +- With parent style; " << style->parentStyle()->styleId();
         KoCharacterStyle *cs = style->characterStyle();
         seenStyles << style->styleId();
         if (cs) {
