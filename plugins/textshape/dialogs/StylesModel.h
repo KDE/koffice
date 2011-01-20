@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2008 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2008-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -51,6 +51,11 @@ public:
     KoCharacterStyle *characterStyleForIndex(const QModelIndex &index) const;
 
     void setStyleManager(KoStyleManager *manager);
+
+signals:
+    /// emitted on recalculate
+    /// @param multiLevel if true then the root nodes have children.
+    void isMultiLevel(bool multiLevel);
 
 public slots:
     /**

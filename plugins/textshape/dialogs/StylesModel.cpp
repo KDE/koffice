@@ -126,9 +126,7 @@ void StylesModel::recalculate()
     } else { // a real list
         newStyleList = treeRoot.toList(); // TODO sort alphabetically on style name?
     }
-
-    //kDebug() << "tree has hierarchy;" << (m_relations.count() != newStyleList.count());
-    //kDebug() << "   " << m_relations.count() << newStyleList.count();
+    emit isMultiLevel(m_relations.count() != newStyleList.count());
 
     foreach (KoCharacterStyle *style, m_styleManager->characterStyles()) {
         const int key = style->styleId();

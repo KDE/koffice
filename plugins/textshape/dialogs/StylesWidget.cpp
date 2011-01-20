@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -40,6 +40,7 @@ StylesWidget::StylesWidget(QWidget *parent)
         m_blockSignals(false)
 {
     widget.setupUi(this);
+    widget.stylesView->setRootIsDecorated(false);
     widget.stylesView->setModel(m_stylesModel);
     widget.stylesView->header()->swapSections(0, 1);
     widget.stylesView->header()->resizeSection(1, 16);
@@ -57,6 +58,7 @@ StylesWidget::StylesWidget(QWidget *parent)
     connect(widget.modifyStyle, SIGNAL(clicked()), this, SLOT(editStyle()));
     connect(widget.applyStyle, SIGNAL(clicked()), this, SLOT(applyStyle()));
     connect(widget.stylesView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(setCurrent(const QModelIndex&)));
+    connect(m_stylesModel, SIGNAL(isMultiLevel(bool)), this, SLOT(setStylesAreNested(bool)));
 }
 
 void StylesWidget::setEmbedded(bool embed)
@@ -307,6 +309,11 @@ void StylesWidget::setCurrent(const QModelIndex &index)
             return;
         }
     }
+}
+
+void StylesWidget::setStylesAreNested(bool on)
+{
+    widget.stylesView->setRootIsDecorated(on);
 }
 
 #include <StylesWidget.moc>
