@@ -300,7 +300,7 @@ sub createConf() {
     #print FILE "RECURSIVE=NO\n";
     #print FILE "EXCLUDE=\n";
     #print FILE "EXCLUDE_SYMLINKS=NO\n";
-    print FILE "EXCLUDE_PATTERNS=*_p.*\n";
+    print FILE "EXCLUDE_PATTERNS=*_p.h *.cpp\n";
     #print FILE "EXAMPLE_PATH=$rootdir\n";
     #print FILE "EXAMPLE_PATTERNS=\n";
     #print FILE "EXAMPLE_RECURSIVE=YES\n";
@@ -436,8 +436,13 @@ sub parseErrorLog() {
         }
         chomp($line);
         if($inParameters == 1) {
-            print UNDOC "<li>$line</li>\n";
-            next;
+            if ($line=~/^$rootdir/) {
+                print UNDOC "</ul></li>\n";
+                $inParameters = 0;
+            } else {
+                print UNDOC "<li>$line</li>\n";
+                next;
+            }
         }
         if($line=~m/^(.*):(\d+): (.*)$/) {
             my $file=$1;
