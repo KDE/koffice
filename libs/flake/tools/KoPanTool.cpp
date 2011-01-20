@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPanTool.h"
+#include "KoPanTool_p.h"
 #include "KoToolBase_p.h"
 #include "KoPointerEvent.h"
 #include "KoCanvasBase.h"

@@ -23,7 +23,7 @@
 #include "KoToolBase_p.h"
 #include "KoPointerEvent.h"
 #include "KoCanvasBase.h"
-#include "KoPanTool.h"
+#include "KoPanTool_p.h"
 
 KoInteractionTool::KoInteractionTool(KoCanvasBase *canvas)
     : KoToolBase(*(new KoInteractionToolPrivate(this, canvas)))

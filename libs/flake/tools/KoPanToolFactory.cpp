@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPanToolFactory.h"
-#include "KoPanTool.h"
+#include "KoPanToolFactory_p.h"
+#include "KoPanTool_p.h"
 
 #include <klocale.h>
 

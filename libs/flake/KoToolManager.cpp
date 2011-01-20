@@ -39,7 +39,7 @@
 #include "KoPointerEvent.h"
 #include "tools/KoCreateShapesTool.h"
 #include "tools/KoZoomTool.h"
-#include "tools/KoPanTool.h"
+#include "tools/KoPanTool_p.h"
 
 // Qt + kde
 #include <QWidget>
