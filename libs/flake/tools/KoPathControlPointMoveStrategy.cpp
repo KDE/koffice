@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathControlPointMoveStrategy.h"
+#include "KoPathControlPointMoveStrategy_p.h"
 #include "KoCanvasBase.h"
 #include "KoSnapGuide.h"
 
