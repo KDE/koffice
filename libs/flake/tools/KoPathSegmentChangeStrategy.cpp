@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathSegmentChangeStrategy.h"
+#include "KoPathSegmentChangeStrategy_p.h"
 #include "KoPathShape.h"
 #include "KoPathPoint.h"
 #include "KoPathTool.h"
