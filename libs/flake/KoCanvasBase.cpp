@@ -24,7 +24,7 @@
 #include "KoCanvasController.h"
 #include "KoViewConverter.h"
 #include "KoSnapGuide.h"
-#include "SnapGuideConfigWidget.h"
+#include "SnapGuideConfigWidget_p.h"
 
 #include <KGlobal>
 #include <KConfigGroup>

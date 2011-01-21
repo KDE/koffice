@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "SnapGuideConfigWidget.h"
+#include "SnapGuideConfigWidget_p.h"
 #include "KoSnapGuide.h"
 
 SnapGuideConfigWidget::SnapGuideConfigWidget(KoSnapGuide * snapGuide, QWidget * parent)
