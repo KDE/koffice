@@ -311,6 +311,13 @@ public:
      */
     virtual void deactivate();
 
+    /**
+     * This method just relays the given text via the tools statusTextChanged signal.
+     * @param statusText the new status text
+     */
+    void setStatusText(const QString &statusText);
+
+
 public slots:
     /**
      * This method is called whenever a property in the resource
@@ -319,14 +326,7 @@ public slots:
      */
     virtual void resourceChanged(int key, const QVariant &res);
 
-    /**
-     * This method just relays the given text via the tools statusTextChanged signal.
-     * @param statusText the new status text
-     */
-    void setStatusText(const QString &statusText);
-
 signals:
-
     /**
      * Emitted when this tool wants itself to be replaced by another tool.
      *
