@@ -41,7 +41,7 @@ void KoOdfWorkaround::fixPenWidth(QPen & pen, KoShapeLoadingContext &context)
 {
     if (context.odfLoadingContext().generatorType() == KoOdfLoadingContext::OpenOffice && pen.widthF() == 0.0) {
         pen.setWidthF(0.5);
-        kDebug(30003) << "Work around OO bug with pen width 0";
+        kDebug(30006) << "Work around OO bug with pen width 0";
     }
 }
 

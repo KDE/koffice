@@ -45,7 +45,7 @@ public:
     virtual ~KoTextEditingFactory();
 
     /**
-     * Create a new instance of an inline object.
+     * Create a new instance of an text editor plugin.
      */
     virtual KoTextEditingPlugin *create() const = 0;
 

@@ -41,6 +41,7 @@
 #include "commands/DeleteCommand.h"
 
 #include <KoCanvasBase.h>
+#include <KoShapeController.h>
 #include <KoColor.h>
 #include <KoSelection.h>
 #include <KoShapeManager.h>
@@ -317,16 +318,11 @@ TextTool::TextTool(KoCanvasBase *canvas)
     action->setToolTip(i18n("Change text attributes to their default values"));
     connect(action, SIGNAL(triggered()), this, SLOT(setDefaultFormat()));
 
-    m_textEditingPlugins = canvas->resourceManager()->
+    m_textEditingPlugins = canvas->shapeController()->resourceManager()->
         resource(TextEditingPluginContainer::ResourceId).value<TextEditingPluginContainer*>();
-    if (m_textEditingPlugins == 0) {
-        m_textEditingPlugins = new TextEditingPluginContainer(canvas->resourceManager());
-        QVariant variant;
-        variant.setValue(m_textEditingPlugins);
-        canvas->resourceManager()->setResource(TextEditingPluginContainer::ResourceId, variant);
-    }
+    Q_ASSERT(m_textEditingPlugins);
 
-    foreach (KoTextEditingPlugin* plugin, m_textEditingPlugins->values()) {
+    foreach (KoTextEditingPlugin *plugin, m_textEditingPlugins->values()) {
         connect(plugin, SIGNAL(startMacro(const QString &)),
                 this, SLOT(startMacro(const QString &)));
         connect(plugin, SIGNAL(stopMacro()), this, SLOT(stopMacro()));

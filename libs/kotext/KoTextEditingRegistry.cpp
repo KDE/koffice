@@ -23,23 +23,33 @@
 
 #include <KGlobal>
 
-void KoTextEditingRegistry::init()
+class KoTextEditingRegistry::Private
 {
-    KoPluginLoader::PluginsConfig config;
-    config.whiteList = "TextEditingPlugins";
-    config.blacklist = "TextEditingPluginsDisabled";
-    config.group = "koffice";
-    KoPluginLoader::instance()->load(QString::fromLatin1("KOffice/Text-EditingPlugin"),
-                                     QString::fromLatin1("[X-KoText-MinVersion] <= 0"), config);
-}
+public:
+};
 
 KoTextEditingRegistry* KoTextEditingRegistry::instance()
 {
     K_GLOBAL_STATIC(KoTextEditingRegistry, s_instance)
     if (!s_instance.exists()) {
-        s_instance->init();
+        KoPluginLoader::PluginsConfig config;
+        config.whiteList = "TextEditingPlugins";
+        config.blacklist = "TextEditingPluginsDisabled";
+        config.group = "koffice";
+        KoPluginLoader::instance()->load(QString::fromLatin1("KOffice/Text-EditingPlugin"),
+                                         QString::fromLatin1("[X-KoText-MinVersion] <= 0"), config);
     }
     return s_instance;
+}
+
+KoTextEditingRegistry::KoTextEditingRegistry()
+    : d(0)
+{
+}
+
+KoTextEditingRegistry::~KoTextEditingRegistry()
+{
+    delete d;
 }
 
 #include <KoTextEditingRegistry.moc>

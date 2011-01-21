@@ -57,7 +57,7 @@ void KoPluginLoader::load(const QString & serviceType, const QString & versionSt
     if (d->loadedServiceTypes.contains(serviceType)) {
         return;
     }
-    // kDebug( 30003 ) <<"KoPluginLoader::load" << serviceType << kBacktrace();
+    // kDebug( 30006 ) <<"KoPluginLoader::load" << serviceType << kBacktrace();
     d->loadedServiceTypes << serviceType;
     QString query = QString::fromLatin1("(Type == 'Service')");
     if (!versionString.isEmpty()) {
@@ -69,7 +69,7 @@ void KoPluginLoader::load(const QString & serviceType, const QString & versionSt
     bool configChanged = false;
     QList<QString> blacklist; // what we will save out afterwards
     if (config.whiteList && config.blacklist && config.group) {
-        kDebug(30003) << "Loading" << serviceType << "with checking the config";
+        kDebug(30006) << "Loading" << serviceType << "with checking the config";
         KConfigGroup configGroup = KGlobal::config()->group(config.group);
         QList<QString> whiteList = configGroup.readEntry(config.whiteList, config.defaults);
         QList<QString> knownList;
@@ -117,10 +117,10 @@ void KoPluginLoader::load(const QString & serviceType, const QString & versionSt
         QObject * plugin = service->createInstance<QObject>(this, QVariantList(), &error);
         if (plugin) {
             whiteList << service->library();
-            kDebug(30003) << "Loaded plugin" << service->name();
+            kDebug(30006) << "Loaded plugin" << service->name();
             delete plugin;
         } else {
-            kWarning(30003) << "Loading plugin" << service->name() << "failed, " << error;
+            kWarning(30006) << "Loading plugin" << service->name() << "failed, " << error;
         }
     }
 

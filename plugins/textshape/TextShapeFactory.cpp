@@ -20,6 +20,7 @@
  */
 #include "TextShapeFactory.h"
 #include "TextShape.h"
+#include "TextEditingPluginContainer.h"
 
 #include <KoProperties.h>
 #include <KoShape.h>
@@ -121,6 +122,8 @@ void TextShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
             this, "createStylemanager");
     manager->setLazyResourceSlot(KoDocumentResource::UndoStack,
             this, "createUndoStack");
+    manager->setLazyResourceSlot(TextEditingPluginContainer::ResourceId,
+            this, "createEditingPluginContainer");
 }
 
 void TextShapeFactory::createStylemanager(KoResourceManager *manager)
@@ -146,6 +149,14 @@ void TextShapeFactory::createUndoStack(KoResourceManager *manager)
 {
     kWarning(32500) << "No KUndoStack found in the document resource manager, creating a new one";
     manager->setUndoStack(new KUndoStack(manager));
+}
+
+void TextShapeFactory::createEditingPluginContainer(KoResourceManager *manager)
+{
+    TextEditingPluginContainer *container = new TextEditingPluginContainer(manager);
+    QVariant variant;
+    variant.setValue<TextEditingPluginContainer*>(container);
+    manager->setResource(TextEditingPluginContainer::ResourceId, variant);
 }
 
 #include <TextShapeFactory.moc>

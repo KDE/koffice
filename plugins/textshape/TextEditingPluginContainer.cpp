@@ -29,6 +29,7 @@ TextEditingPluginContainer::TextEditingPluginContainer(QObject *parent)
     m_spellcheckPlugin(0)
 {
     foreach (const QString &key, KoTextEditingRegistry::instance()->keys()) {
+        kDebug(32500) << "Loading plugin" << key;
         KoTextEditingFactory *factory =  KoTextEditingRegistry::instance()->value(key);
         Q_ASSERT(factory);
         if (m_textEditingPlugins.contains(factory->id())) {

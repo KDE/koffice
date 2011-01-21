@@ -46,6 +46,7 @@ public slots:
     void createTextObjectManager(KoResourceManager *manager);
     void createImageCollection(KoResourceManager *manager);
     void createUndoStack(KoResourceManager *manager);
+    void createEditingPluginContainer(KoResourceManager *manager);
 };
 
 #endif

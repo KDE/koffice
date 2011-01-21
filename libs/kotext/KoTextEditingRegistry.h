@@ -38,6 +38,7 @@ class KOTEXT_EXPORT KoTextEditingRegistry : public QObject,  public KoGenericReg
 {
     Q_OBJECT
 public:
+    ~KoTextEditingRegistry();
     /**
      * Return an instance of the KoTextEditingRegistry
      * Creates an instance if that has never happened before and returns the singleton instance.
@@ -45,8 +46,12 @@ public:
     static KoTextEditingRegistry *instance();
 
 private:
-    KoTextEditingRegistry() {}
-    void init();
+    KoTextEditingRegistry();
+    KoTextEditingRegistry(const KoTextEditingRegistry&);
+    KoTextEditingRegistry operator=(const KoTextEditingRegistry&);
+
+    class Private;
+    Private *d;
 };
 
 #endif
