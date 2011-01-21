@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoZoomToolWidget.h"
+#include "KoZoomToolWidget_p.h"
 #include <QPainter>
 #include <QMouseEvent>
 #include <kicon.h>

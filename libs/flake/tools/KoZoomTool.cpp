@@ -21,7 +21,7 @@
 
 #include "KoZoomTool_p.h"
 #include "KoZoomStrategy_p.h"
-#include "KoZoomToolWidget.h"
+#include "KoZoomToolWidget_p.h"
 #include "KoPointerEvent.h"
 #include "KoCanvasBase.h"
 #include "KoCanvasController.h"
