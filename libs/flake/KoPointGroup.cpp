@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoPointGroup.h"
+#include "KoPointGroup_p.h"
 #include "KoPathPoint.h"
 
 void KoPointGroup::add(KoPathPoint * point)

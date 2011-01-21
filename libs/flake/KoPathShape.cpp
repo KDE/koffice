@@ -22,7 +22,7 @@
 #include "KoPathShape.h"
 #include "KoPathShape_p.h"
 #include "KoPathPoint.h"
-#include "KoPointGroup.h"
+#include "KoPointGroup_p.h"
 #include "KoShapeBorderBase.h"
 #include "KoViewConverter.h"
 #include "KoPathShapeLoader.h"
