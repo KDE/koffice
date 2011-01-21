@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoConnectionShapeConfigWidget.h"
+#include "KoConnectionShapeConfigWidget_p.h"
 #include "commands/KoConnectionShapeTypeCommand.h"
 #include <klocale.h>
 
@@ -65,4 +65,4 @@ QUndoCommand * KoConnectionShapeConfigWidget::createCommand(QUndoCommand *parent
     }
 }
 
-#include <KoConnectionShapeConfigWidget.moc>
+#include <KoConnectionShapeConfigWidget_p.moc>

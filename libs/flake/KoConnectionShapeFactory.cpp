@@ -23,7 +23,7 @@
 #include "KoConnectionShapeFactory.h"
 
 #include "KoConnectionShape.h"
-#include "KoConnectionShapeConfigWidget.h"
+#include "KoConnectionShapeConfigWidget_p.h"
 
 #include <KoXmlNS.h>
 #include <klocale.h>
