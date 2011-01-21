@@ -26,7 +26,7 @@
 #include "tools/KoCreateShapesTool.h"
 #include "tools/KoPathToolFactory_p.h"
 #include "tools/KoZoomTool.h"
-#include "tools/KoZoomToolFactory.h"
+#include "tools/KoZoomToolFactory_p.h"
 #include "tools/KoPanTool_p.h"
 #include "tools/KoPanToolFactory_p.h"
 

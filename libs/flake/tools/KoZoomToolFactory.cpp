@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoZoomToolFactory.h"
+#include "KoZoomToolFactory_p.h"
 #include "KoZoomTool.h"
 
 #include <klocale.h>
