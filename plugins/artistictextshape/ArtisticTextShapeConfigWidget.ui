@@ -142,12 +142,8 @@
   <zorder>fontFamily</zorder>
   <zorder>label_2</zorder>
   <zorder>fontSize</zorder>
-  <zorder>label_3</zorder>
-  <zorder>label_4</zorder>
-  <zorder>text</zorder>
   <zorder>labelStartOffset</zorder>
   <zorder>startOffset</zorder>
-  <zorder>verticalSpacer</zorder>
   <zorder>widget</zorder>
  </widget>
  <customwidgets>
