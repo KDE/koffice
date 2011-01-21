@@ -19,7 +19,7 @@
  */
 
 #include "KoZoomToolFactory_p.h"
-#include "KoZoomTool.h"
+#include "KoZoomTool_p.h"
 
 #include <klocale.h>
 

@@ -38,7 +38,7 @@
 #include "KoInputDeviceHandlerEvent.h"
 #include "KoPointerEvent.h"
 #include "tools/KoCreateShapesTool.h"
-#include "tools/KoZoomTool.h"
+#include "tools/KoZoomTool_p.h"
 #include "tools/KoPanTool_p.h"
 
 // Qt + kde

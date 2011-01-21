@@ -20,7 +20,7 @@
 
 #include "KoZoomStrategy_p.h"
 #include "KoShapeRubberSelectStrategy_p.h"
-#include "KoZoomTool.h"
+#include "KoZoomTool_p.h"
 #include "KoCanvasBase.h"
 #include "KoCanvasController.h"
 #include "KoViewConverter.h"

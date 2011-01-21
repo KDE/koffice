@@ -21,7 +21,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <kicon.h>
-#include "KoZoomTool.h"
+#include "KoZoomTool_p.h"
 
 KoZoomToolWidget::KoZoomToolWidget(KoZoomTool* tool, QWidget* parent)
         : QWidget(parent), m_tool(tool)
