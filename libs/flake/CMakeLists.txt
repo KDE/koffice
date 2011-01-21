@@ -26,6 +26,7 @@ set(flake_SRCS
     KoGuidesData.cpp
     KoPathShape.cpp
     KoPathPoint.cpp
+    KoPathPointData.cpp
     KoPathSegment.cpp
     KoSelection.cpp
     KoShape.cpp
