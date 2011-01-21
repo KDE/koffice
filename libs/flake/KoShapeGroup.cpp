@@ -21,7 +21,7 @@
 #include "KoShapeGroup.h"
 #include "KoShapeContainerModel.h"
 #include "KoShapeLayer.h"
-#include "SimpleShapeContainerModel.h"
+#include "SimpleShapeContainerModel_p.h"
 #include "KoShapeSavingContext.h"
 #include "KoShapeLoadingContext.h"
 #include "KoXmlWriter.h"

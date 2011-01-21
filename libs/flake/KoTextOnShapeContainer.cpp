@@ -19,7 +19,7 @@
 
 #include "KoTextOnShapeContainer.h"
 #include "KoShapeContainer_p.h"
-#include "SimpleShapeContainerModel.h"
+#include "SimpleShapeContainerModel_p.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeFactoryBase.h"
 #include "KoTextShapeDataBase.h"
