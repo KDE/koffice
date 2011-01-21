@@ -23,7 +23,7 @@
 #include "KoShapeManager.h"
 #include "KoPathShape.h"
 #include "KoPathPoint.h"
-#include <KoSnapData.h>
+#include <KoSnapData_p.h>
 
 KoSnapProxy::KoSnapProxy(KoSnapGuide * snapGuide)
         : m_snapGuide(snapGuide)

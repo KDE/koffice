@@ -34,7 +34,6 @@
 #include <QMetaType>
 
 #include <KoXmlReaderForward.h>
-//#include <KoSnapData.h>
 
 #include "flake_export.h"
 
