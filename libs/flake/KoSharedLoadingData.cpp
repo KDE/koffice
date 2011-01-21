@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -17,21 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#ifndef KOSHAREDLOADINGDATA_H
-#define KOSHAREDLOADINGDATA_H
+#include "KoSharedLoadingData.h"
 
-#include "flake_export.h"
-
-/**
- * The KoSharedLoadingData class is used to share data between shapes during loading.
- * These data can be added to the KoShapeLoadingContext using KoShapeLoadingContext::addSharedData().
- * A different shape can then get the data from the context using KoShapeLoadingContext::sharedData().
- */
-class FLAKE_EXPORT KoSharedLoadingData
+KoSharedLoadingData::KoSharedLoadingData()
 {
-public:
-    KoSharedLoadingData();
-    virtual ~KoSharedLoadingData();
-};
+}
 
-#endif /* KOSHAREDLOADINGDATA_H */
+KoSharedLoadingData::~KoSharedLoadingData()
+{
+}
