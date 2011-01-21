@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathPointRubberSelectStrategy.h"
+#include "KoPathPointRubberSelectStrategy_p.h"
 #include "KoShapeRubberSelectStrategy_p.h"
 
 #include "KoCanvasBase.h"

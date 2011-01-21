@@ -41,7 +41,7 @@
 #include "commands/KoPathPointMergeCommand.h"
 #include "KoParameterShape.h"
 #include "KoPathPoint.h"
-#include "KoPathPointRubberSelectStrategy.h"
+#include "KoPathPointRubberSelectStrategy_p.h"
 #include "KoPathSegmentChangeStrategy.h"
 #include "PathToolOptionWidget.h"
 #include "KoConnectionShape.h"
