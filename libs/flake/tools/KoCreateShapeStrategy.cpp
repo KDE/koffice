@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCreateShapeStrategy.h"
+#include "KoCreateShapeStrategy_p.h"
 #include "KoShapeRubberSelectStrategy_p.h"
 #include "KoCreateShapesTool.h"
 #include "KoShape.h"

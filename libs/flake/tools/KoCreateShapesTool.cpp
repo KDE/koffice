@@ -23,7 +23,7 @@
 #include "KoInteractionTool_p.h"
 #include "KoPointerEvent.h"
 #include "KoInteractionStrategy.h"
-#include "KoCreateShapeStrategy.h"
+#include "KoCreateShapeStrategy_p.h"
 
 #include <QMouseEvent>
 #include <QPainter>
