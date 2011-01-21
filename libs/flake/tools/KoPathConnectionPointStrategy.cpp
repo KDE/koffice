@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathConnectionPointStrategy.h"
+#include "KoPathConnectionPointStrategy_p.h"
 
 #include "KoPathTool.h"
 #include "KoCanvasBase.h"

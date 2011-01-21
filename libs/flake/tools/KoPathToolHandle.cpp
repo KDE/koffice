@@ -24,7 +24,7 @@
 #include "KoPathTool.h"
 #include "KoPathPointMoveStrategy.h"
 #include "KoPathControlPointMoveStrategy.h"
-#include "KoPathConnectionPointStrategy.h"
+#include "KoPathConnectionPointStrategy_p.h"
 #include "KoSelection.h"
 #include "commands/KoPathPointTypeCommand.h"
 #include "KoParameterChangeStrategy_p.h"
