@@ -26,7 +26,7 @@
 #include "KoShapeContainer.h"
 #include "KoShapeLoadingContext.h"
 #include "KoShapeSavingContext.h"
-#include "KoConnectionShapeLoadingUpdater.h"
+#include "KoConnectionShapeLoadingUpdater_p.h"
 #include "KoTextOnShapeContainer.h"
 #include "KoPathShapeLoader.h"
 #include "KoPathPoint.h"

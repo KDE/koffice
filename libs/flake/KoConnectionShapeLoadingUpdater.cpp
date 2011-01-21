@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoConnectionShapeLoadingUpdater.h"
+#include "KoConnectionShapeLoadingUpdater_p.h"
 
 #include "KoConnectionShape.h"
 
