@@ -18,7 +18,7 @@
  */
 
 #include "KoSnapGuide.h"
-#include "KoSnapProxy.h"
+#include "KoSnapProxy_p.h"
 #include "KoSnapStrategy_p.h"
 
 #include <KoPathShape.h>
