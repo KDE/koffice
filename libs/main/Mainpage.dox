@@ -66,14 +66,6 @@ A: Yes.
 
 
 
-Q: What's a KoDocumentEntry? I couldn't find it in lib/kofficecore.
-
-A: KoDocumentEntry describes a KOffice component (i.e. it's a
-representation in memory of the data contained in the .desktop
-file). It's in kofficecore/koQueryTrader.h.
-
-
-
 Q: Is the show() method of KoMainWindow where the application actually
 appears to the user?
 
