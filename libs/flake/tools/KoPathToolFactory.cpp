@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathToolFactory.h"
+#include "KoPathToolFactory_p.h"
 #include "KoPathTool.h"
 #include "KoPathShape.h"
 
@@ -42,4 +42,4 @@ KoToolBase * KoPathToolFactory::createTool(KoCanvasBase *canvas)
     return new KoPathTool(canvas);
 }
 
-#include <KoPathToolFactory.moc>
+#include <KoPathToolFactory_p.moc>
