@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006, 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -33,11 +33,11 @@ KoToolBase::KoToolBase(KoCanvasBase *canvas)
 {
     Q_D(KoToolBase);
     if (d->canvas) { // in the case of KoToolManagers dummytool it can be zero :(
-        KoResourceManager * crp = d->canvas->resourceManager();
-        Q_ASSERT_X(crp, "KoToolBase::KoToolBase", "No KoResourceManager");
-        if (crp)
-            connect(d->canvas->resourceManager(), SIGNAL(resourceChanged(int, const QVariant &)),
-                    this, SLOT(resourceChanged(int, const QVariant &)));
+        KoResourceManager *resources = d->canvas->resourceManager();
+        Q_ASSERT_X(resources, "KoToolBase::KoToolBase", "No KoResourceManager");
+        if (resources)
+            connect(resources, SIGNAL(resourceChanged(int, const QVariant&)),
+                    this, SLOT(resourceChanged(int, const QVariant&)));
     }
 }
 

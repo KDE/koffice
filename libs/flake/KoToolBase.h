@@ -281,7 +281,6 @@ public:
       */
     bool isInTextMode() const;
 
-public slots:
 
     /**
      * This method is called when this tool instance is activated.
@@ -312,6 +311,7 @@ public slots:
      */
     virtual void deactivate();
 
+public slots:
     /**
      * This method is called whenever a property in the resource
      * provider associated with the canvas this tool belongs to
