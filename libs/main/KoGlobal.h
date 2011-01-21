@@ -41,7 +41,7 @@ public:
      * Return the default font for KOffice programs.
      * This is (currently) the same as the KDE-global default font,
      * except that it is guaranteed to have a point size set,
-     * never a pixel size (see @ref QFont).
+     * never a pixel size.
      */
     static QFont defaultFont()  {
         return self()->_defaultFont();
