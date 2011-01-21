@@ -24,7 +24,7 @@
 
 #include "commands/KoPathPointMoveCommand.h"
 #include "KoPathTool_p.h"
-#include "KoPathToolSelection.h"
+#include "KoPathToolSelection_p.h"
 #include "KoSnapGuide.h"
 #include "KoCanvasBase.h"
 
