@@ -88,7 +88,6 @@ set(flake_SRCS
     KoSnapGuide.cpp
     KoSnapProxy.cpp
     KoSnapStrategy.cpp
-    KoSnapData.cpp
     SnapGuideConfigWidget.cpp
     KoShapeShadow.cpp
     KoSharedSavingData.cpp

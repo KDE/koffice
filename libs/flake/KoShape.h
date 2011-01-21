@@ -777,9 +777,6 @@ public:
     /// Returns if the given shape is dependent on this shape
     bool hasDependee(KoShape *shape) const;
 
-    /// Returns additional snap data the shape wants to have snapping to
-    virtual KoSnapData snapData() const;
-
     /**
      * Set additional attribute
      *

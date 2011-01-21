@@ -46,7 +46,6 @@
 #include "KoEventActionRegistry.h"
 #include "KoOdfWorkaround.h"
 #include "KoFilterEffectStack.h"
-#include <KoSnapData_p.h>
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
@@ -1450,11 +1449,6 @@ void KoShape::shapeChanged(ChangeType type, KoShape *shape)
 {
     Q_UNUSED(type);
     Q_UNUSED(shape);
-}
-
-KoSnapData KoShape::snapData() const
-{
-    return KoSnapData();
 }
 
 void KoShape::setAdditionalAttribute(const QString &name, const QString &value)
