@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoShapeRegistry.h"
-#include "KoPathShapeFactory.h"
+#include "KoPathShapeFactory_p.h"
 #include "KoConnectionShapeFactory_p.h"
 #include "KoShapeLoadingContext.h"
 #include "KoShapeSavingContext.h"

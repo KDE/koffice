@@ -22,7 +22,7 @@
 #include <KoOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 #include <KoShapeLoadingContext.h>
-#include <KoPathShapeFactory.h>
+#include <KoPathShapeFactory_p.h>
 #include <KoShape.h>
 #include <KoShapeFactoryBase.h>
 #include <KoXmlNS.h>
