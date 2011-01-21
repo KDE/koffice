@@ -23,7 +23,7 @@
 #define KO_PATH_CONNECTION_POINT_STRATEGY
 
 #include <QPointF>
-#include "KoParameterChangeStrategy.h"
+#include "KoParameterChangeStrategy_p.h"
 #include "KoConnectionShape.h"
 
 class KoCanvasBase;
