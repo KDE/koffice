@@ -22,7 +22,7 @@
 #include <KGlobal>
 
 #include "tools/KoCreatePathToolFactory_p.h"
-#include "tools/KoCreateShapesToolFactory.h"
+#include "tools/KoCreateShapesToolFactory_p.h"
 #include "tools/KoCreateShapesTool.h"
 #include "tools/KoPathToolFactory.h"
 #include "tools/KoZoomTool.h"
