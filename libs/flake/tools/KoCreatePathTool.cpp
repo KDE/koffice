@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCreatePathTool.h"
+#include "KoCreatePathTool_p.h"
 
 #include "KoShapeController.h"
 #include "KoPointerEvent.h"
@@ -34,7 +34,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QLabel>
 
-#include "KoCreatePathTool_p.h"
+#include "KoCreatePathTool_p_p.h"
 
 
 KoCreatePathTool::KoCreatePathTool(KoCanvasBase *canvas)
@@ -383,4 +383,4 @@ QMap<QString, QWidget *> KoCreatePathTool::createOptionWidgets()
     return map;
 }
 
-#include <KoCreatePathTool.moc>
+#include <KoCreatePathTool_p.moc>

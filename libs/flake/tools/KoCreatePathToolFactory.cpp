@@ -19,7 +19,7 @@
  */
 
 #include "KoCreatePathToolFactory_p.h"
-#include "KoCreatePathTool.h"
+#include "KoCreatePathTool_p.h"
 
 #include <klocale.h>
 
