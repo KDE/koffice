@@ -448,19 +448,6 @@ void TextShape::markLayoutDone()
     }
 }
 
-void TextShape::update() const
-{
-    KoShapeContainer::update();
-}
-
-void TextShape::update(const QRectF &shape) const
-{
-    // this is done to avoid updates which are called during the paint event and not needed.
-    if (!m_paintRegion.contains(shape.toRect())) {
-        KoShape::update(shape);
-    }
-}
-
 void TextShape::waitUntilReady(const KoViewConverter &, bool asynchronous) const
 {
     KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());

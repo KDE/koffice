@@ -456,7 +456,7 @@ void KoShape::update() const
     Q_D(const KoShape);
     if (!d->shapeManagers.empty()) {
         QRectF rect(boundingRect());
-        foreach(KoShapeManager * manager, d->shapeManagers)
+        foreach(KoShapeManager *manager, d->shapeManagers)
             manager->update(rect, this, true);
     }
 }
@@ -466,7 +466,7 @@ void KoShape::update(const QRectF &shape) const
     Q_D(const KoShape);
     if (!d->shapeManagers.empty() && isVisible()) {
         QRectF rect(absoluteTransformation(0).mapRect(shape));
-        foreach(KoShapeManager * manager, d->shapeManagers) {
+        foreach(KoShapeManager *manager, d->shapeManagers) {
             manager->update(rect);
         }
     }
