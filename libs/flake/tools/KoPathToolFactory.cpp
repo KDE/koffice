@@ -18,7 +18,7 @@
  */
 
 #include "KoPathToolFactory_p.h"
-#include "KoPathTool.h"
+#include "KoPathTool_p.h"
 #include "KoPathShape.h"
 
 #include <klocale.h>

@@ -20,7 +20,7 @@
 
 #include <QPainterPath>
 #include "../KoPathShape.h"
-#include "../tools/KoPathTool.h"
+#include "../tools/KoPathTool_p.h"
 #include "../tools/KoPathToolSelection.h"
 #include "../KoPathPointData.h"
 #include <MockShapes.h>

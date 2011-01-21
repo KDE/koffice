@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathTool.h"
+#include "KoPathTool_p.h"
 #include "KoToolBase_p.h"
 #include "KoPathShape_p.h"
 #include "KoPathToolHandle_p.h"
@@ -976,4 +976,4 @@ KoToolSelection * KoPathTool::selection()
     return &m_pointSelection;
 }
 
-#include <KoPathTool.moc>
+#include <KoPathTool_p.moc>

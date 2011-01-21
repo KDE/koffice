@@ -22,7 +22,7 @@
 #include "KoShapeRubberSelectStrategy_p.h"
 
 #include "KoCanvasBase.h"
-#include "KoPathTool.h"
+#include "KoPathTool_p.h"
 #include "KoPathToolSelection.h"
 
 KoPathPointRubberSelectStrategy::KoPathPointRubberSelectStrategy(KoPathTool *tool, const QPointF &clicked)

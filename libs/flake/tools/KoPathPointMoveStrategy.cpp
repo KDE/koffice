@@ -23,7 +23,7 @@
 #include "KoInteractionStrategy_p.h"
 
 #include "commands/KoPathPointMoveCommand.h"
-#include "KoPathTool.h"
+#include "KoPathTool_p.h"
 #include "KoPathToolSelection.h"
 #include "KoSnapGuide.h"
 #include "KoCanvasBase.h"

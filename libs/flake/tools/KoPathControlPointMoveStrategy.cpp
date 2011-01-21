@@ -22,7 +22,7 @@
 #include "KoCanvasBase.h"
 #include "KoSnapGuide.h"
 
-#include "KoPathTool.h"
+#include "KoPathTool_p.h"
 #include "commands/KoPathControlPointMoveCommand.h"
 
 KoPathControlPointMoveStrategy::KoPathControlPointMoveStrategy(KoPathTool *tool, const KoPathPointData &pointData, KoPathPoint::PointType type, const QPointF &pos)

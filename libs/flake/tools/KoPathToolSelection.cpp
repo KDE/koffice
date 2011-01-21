@@ -21,7 +21,7 @@
  */
 
 #include "KoPathToolSelection.h"
-#include "KoPathTool.h"
+#include "KoPathTool_p.h"
 #include <KoParameterShape.h>
 #include <KoPathPoint.h>
 #include <KoPathPointData.h>

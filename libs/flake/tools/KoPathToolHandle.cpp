@@ -21,7 +21,7 @@
  */
 
 #include "KoPathToolHandle_p.h"
-#include "KoPathTool.h"
+#include "KoPathTool_p.h"
 #include "KoPathPointMoveStrategy_p.h"
 #include "KoPathControlPointMoveStrategy_p.h"
 #include "KoPathConnectionPointStrategy_p.h"

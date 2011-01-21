@@ -22,7 +22,7 @@
 
 #include "KoPathConnectionPointStrategy_p.h"
 
-#include "KoPathTool.h"
+#include "KoPathTool_p.h"
 #include "KoCanvasBase.h"
 #include "KoShapeManager.h"
 #include "KoFlake.h"

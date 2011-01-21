@@ -20,7 +20,7 @@
 #include "KoPathSegmentChangeStrategy_p.h"
 #include "KoPathShape.h"
 #include "KoPathPoint.h"
-#include "KoPathTool.h"
+#include "KoPathTool_p.h"
 #include "KoSnapGuide.h"
 #include "commands/KoPathControlPointMoveCommand.h"
 #include "commands/KoPathSegmentTypeCommand.h"
