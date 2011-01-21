@@ -21,7 +21,7 @@
  */
 #include "KoShapeRegistry.h"
 #include "KoPathShapeFactory.h"
-#include "KoConnectionShapeFactory.h"
+#include "KoConnectionShapeFactory_p.h"
 #include "KoShapeLoadingContext.h"
 #include "KoShapeSavingContext.h"
 #include "KoShapeGroup.h"

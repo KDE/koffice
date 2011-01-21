@@ -20,7 +20,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoConnectionShapeFactory.h"
+#include "KoConnectionShapeFactory_p.h"
 
 #include "KoConnectionShape.h"
 #include "KoConnectionShapeConfigWidget_p.h"
