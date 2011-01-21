@@ -39,7 +39,7 @@
 #include <QPainter>
 
 ConnectionTool::ConnectionTool(KoCanvasBase * canvas)
-    : KoPathTool(canvas)
+    : KoToolBase(canvas)
     , m_shape1(0)
     , m_shapeOn(0)
     , m_lastShapeOn(0)
@@ -324,11 +324,9 @@ void ConnectionTool::deactivate()
     m_lastConnectionShapeOn = 0;
     m_lastShapeOn = 0;
     m_modifyConnection = false;
-    if(m_connectionShape != 0) {
-        QRectF rec(m_connectionShape->boundingRect());
+    if (m_connectionShape != 0) {
+        m_connectionShape->update();
         canvas()->shapeManager()->remove(m_connectionShape);
-        repaint(rec);
-        canvas()->updateCanvas(rec);
         m_connectionShape = 0;
     }
 }

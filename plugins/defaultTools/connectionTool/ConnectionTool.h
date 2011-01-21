@@ -23,11 +23,11 @@
 
 #define ConnectionTool_ID "ConnectionTool"
 
-#include "KoPathTool.h"
+#include <KoToolBase.h>
 
 #include <KoConnectionShape.h>
 #include <KoCanvasBase.h>
-class ConnectionTool : public KoPathTool
+class ConnectionTool : public KoToolBase
 {
     Q_OBJECT
 public:
