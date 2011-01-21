@@ -40,6 +40,8 @@ KAboutData * newKWordAboutData()
                                             "http://www.koffice.org/kword/");
     aboutData->addAuthor(ki18n("Thomas Zander"), KLocalizedString(), "zander@kde.org");
     aboutData->addAuthor(ki18n("Girish Ramakrishnan"), ki18n("ODF Support"), "girish@forwardbias.in");
+    aboutData->addAuthor(ki18n("Pierre Stirnweiss"), ki18n("Change Tracking"), "pstirnweiss@googlemail.com");
+    aboutData->addAuthor(ki18n("Ganesh Paramasivam"), ki18n("Change Tracking"), "ganesh@crystalfab.com");
     aboutData->addAuthor(ki18n("David Faure"), KLocalizedString(), "faure@kde.org");
     aboutData->addAuthor(ki18n("Laurent Montel"), KLocalizedString(), "montel@kde.org");
     aboutData->addAuthor(ki18n("Sven Lüppken"), KLocalizedString(), "sven@kde.org");
