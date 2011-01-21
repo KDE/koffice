@@ -57,7 +57,6 @@ public:
 
     /**
      * Return a borderInsets object filled with the size inside the shape that this border takes.
-     * @param shape the shape the insets will be calculated for
      * @param insets the insets object that will be filled and returned.
      */
     virtual void borderInsets(KoInsets &insets) const = 0;

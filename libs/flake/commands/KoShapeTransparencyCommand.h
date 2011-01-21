@@ -52,7 +52,7 @@ public:
     /**
      * Command to set new shape transparencies.
      * @param shapes a set of all the shapes that should get a new transparency.
-     * @param fills the new transparencies, one for each shape
+     * @param transparencies the new transparencies, one for each shape
      * @param parent the parent command used for macro commands
      */
     KoShapeTransparencyCommand(const QList<KoShape*> &shapes, const QList<qreal> &transparencies, QUndoCommand *parent = 0);

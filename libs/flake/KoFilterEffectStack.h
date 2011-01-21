@@ -113,7 +113,7 @@ public:
     /**
     * Saves filter stack using given xml writer.
     * @param writer the xml writer to write data to
-    * @param id the filter id to write, used for referencing the filter
+    * @param filterId the filter id to write, used for referencing the filter
     */
     void save(KoXmlWriter &writer, const QString &filterId);
 

@@ -51,7 +51,7 @@ public:
      *
      * Make sure all parameters point to const char * that stay around. e.g. The a KoXmlNS or
      * a "tag" defined string e.g.
-     * AdditionalAttributeData( KoXmlNS::presentation, "placeholder", presentation:placeholder" )
+     * AdditionalAttributeData(KoXmlNS::presentation, "placeholder", "presentation:placeholder")
      */
     struct AdditionalAttributeData {
         AdditionalAttributeData(const QString &ns, const QString &tag, const QString &name)

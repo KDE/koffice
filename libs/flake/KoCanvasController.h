@@ -270,7 +270,7 @@ public:
      * @param recalculateCenter if true the offset in the document we center on after calling
      *      recenterPreferred() will be recalculated for the new document size so the visual offset stays the same.
      */
-    virtual void updateDocumentSize(const QSize &sz, bool recalculateCenter) = 0;
+    virtual void updateDocumentSize(const QSize &newSize, bool recalculateCenter) = 0;
 
     /**
      * Set mouse wheel to zoom behaviour

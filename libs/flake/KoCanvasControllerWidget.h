@@ -126,7 +126,7 @@ public:
 
     virtual void setScrollBarValue(const QPoint &value);
 
-    virtual void updateDocumentSize(const QSize &sz, bool recalculateCenter = true);
+    virtual void updateDocumentSize(const QSize &newSize, bool recalculateCenter = true);
 
     /**
      * Set mouse wheel to zoom behaviour

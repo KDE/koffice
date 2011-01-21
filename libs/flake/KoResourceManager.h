@@ -142,7 +142,7 @@ public:
     /**
      * Set a resource of type KoShape*.
      * @param key the integer key
-     * @param id the new value for the key.
+     * @param shape the new value for the key.
      * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     void setResource(int key, KoShape *shape);
@@ -150,7 +150,7 @@ public:
     /**
      * Set a resource of type KoUnit
      * @param key the integer key
-     * @param id the new value for the key.
+     * @param unit the new value for the key.
      * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
     void setResource(int key, const KoUnit &unit);
