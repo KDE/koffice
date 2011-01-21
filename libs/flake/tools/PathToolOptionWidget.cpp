@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "PathToolOptionWidget.h"
+#include "PathToolOptionWidget_p.h"
 #include "KoPathTool_p.h"
 #include <KAction>
 
