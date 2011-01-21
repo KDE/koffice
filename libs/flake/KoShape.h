@@ -341,7 +341,7 @@ public:
      * you should override it and always return true if your shape is not square.
      * @return if the shape is (partly) transparent.
      */
-    virtual bool hasTransparency() const;
+    bool hasTransparency() const;
 
     /**
      * Sets shape level transparency.
@@ -385,6 +385,7 @@ public:
      * @see setGeometryProtected(), setContentProtected(), setSelectable()
      */
     void setVisible(bool on);
+
     /**
      * Returns current visibility state of this shape.
      * Being visible means being painted, as well as being used for
