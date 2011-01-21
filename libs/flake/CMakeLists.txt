@@ -94,9 +94,6 @@ set(flake_SRCS
     KoSharedSavingData.cpp
     KoSharedLoadingData.cpp
     KoViewConverter.cpp
-    KoInputDeviceHandler.cpp
-    KoInputDeviceHandlerEvent.cpp
-    KoInputDeviceHandlerRegistry.cpp
     KoEventAction.cpp
     KoEventActionFactoryBase.cpp
     KoEventActionRegistry.cpp
@@ -204,13 +201,12 @@ set_target_properties(flake PROPERTIES
 ########### install files ###############
 
 install(TARGETS flake  ${INSTALL_TARGETS_DEFAULT_ARGS})
-install( FILES 
-    flake.desktop 
-    flaketool.desktop 
-    flakeshape.desktop 
-    flakedevice.desktop 
-    presentationeventaction.desktop 
-    scripteventaction.desktop 
+install( FILES
+    flake.desktop
+    flaketool.desktop
+    flakeshape.desktop
+    presentationeventaction.desktop
+    scripteventaction.desktop
     filtereffect.desktop
     DESTINATION ${SERVICETYPES_INSTALL_DIR})
 
@@ -283,9 +279,6 @@ install(
     KoColorBackground.h
     KoLineBorder.h
     KoInputDevice.h
-    KoInputDeviceHandler.h
-    KoInputDeviceHandlerEvent.h
-    KoInputDeviceHandlerRegistry.h
     KoEventAction.h
     KoEventActionFactoryBase.h
     KoParameterShape.h
