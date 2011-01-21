@@ -71,7 +71,7 @@ void EllipseShapeConfigWidget::save()
     m_ellipse->setEndAngle(widget.endAngle->value());
 }
 
-QUndoCommand *EllipseShapeConfigWidget::createCommand()
+QUndoCommand *EllipseShapeConfigWidget::createCommand(QUndoCommand *)
 {
     if (!m_ellipse) {
         return 0;

@@ -37,7 +37,7 @@ public:
     /// reimplemented
     virtual bool showOnShapeCreate() { return false; }
     /// reimplemented
-    virtual QUndoCommand * createCommand();
+    virtual QUndoCommand * createCommand(QUndoCommand *parent);
 private slots:
     void closeEllipse();
 private:
