@@ -102,13 +102,15 @@ QList<Soprano::Statement> KOTEXT_EXPORT loadList(Soprano::Model *model, Soprano:
  * model again.
  *
  * The result will be like:
- * ListHeadSubject 22-rdf-syntax-ns#first dataBNodeList[0]
- * ListHeadSubject 22-rdf-syntax-ns#rest  bnodeA
- * bnodeA          22-rdf-syntax-ns#first dataBNodeList[1]
- * bnodeA          22-rdf-syntax-ns#rest  bnodeB
- * ...
- * bnodeZ          22-rdf-syntax-ns#first dataBNodeList[N]
- * bnodeZ          22-rdf-syntax-ns#rest  nil
+@verbatim
+ListHeadSubject 22-rdf-syntax-ns#first dataBNodeList[0]
+ListHeadSubject 22-rdf-syntax-ns#rest  bnodeA
+bnodeA          22-rdf-syntax-ns#first dataBNodeList[1]
+bnodeA          22-rdf-syntax-ns#rest  bnodeB
+...
+bnodeZ          22-rdf-syntax-ns#first dataBNodeList[N]
+bnodeZ          22-rdf-syntax-ns#rest  nil
+@endverbatim
  *
  */
 void KOTEXT_EXPORT saveList(Soprano::Model *model, Soprano::Node ListHeadSubject,

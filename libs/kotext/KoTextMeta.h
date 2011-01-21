@@ -43,7 +43,6 @@ public:
 
     /**
      * Constructor
-     * @param name the name for this bookmark
      * @param document the text document where this bookmark is located
      */
     KoTextMeta(const QTextDocument *document);

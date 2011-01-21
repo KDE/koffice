@@ -124,7 +124,7 @@ public:
     /// Set the name of the master-page.
     void setMasterPageName(const QString &name);
 
-    /// Remove the property \key from this style.
+    /// Remove the property key from this style.
     void remove(int key);
 
     /// Remove properties in this style that are already in other.

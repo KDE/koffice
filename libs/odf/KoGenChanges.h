@@ -72,7 +72,6 @@ public:
      * changes.
      *
      * @param xmlWriter
-     * @param stylesDotXml
      */
     void saveOdfChanges(KoXmlWriter *xmlWriter) const;
 

@@ -191,7 +191,7 @@ public:
      * belong there. This creates the file and creates an entry in the manifest.
      *
      * @param store
-     * @param mainfestWriter
+     * @param manifestWriter
      * @return true on success
      */
     bool saveOdfStylesDotXml(KoStore *store, KoXmlWriter *manifestWriter) const;
