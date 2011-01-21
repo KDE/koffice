@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCreatePathToolFactory.h"
+#include "KoCreatePathToolFactory_p.h"
 #include "KoCreatePathTool.h"
 
 #include <klocale.h>

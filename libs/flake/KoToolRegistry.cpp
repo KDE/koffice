@@ -21,7 +21,7 @@
 #include "KoToolRegistry.h"
 #include <KGlobal>
 
-#include "tools/KoCreatePathToolFactory.h"
+#include "tools/KoCreatePathToolFactory_p.h"
 #include "tools/KoCreateShapesToolFactory.h"
 #include "tools/KoCreateShapesTool.h"
 #include "tools/KoPathToolFactory.h"
