@@ -39,14 +39,6 @@ class KWPage;
 class KWORD_TEST_EXPORT KWPageStylePropertiesCommand : public QUndoCommand
 {
 public:
-    /**
-     * The command to alter the properties of a page.
-     * @param document the document the page belongs to.
-     * @param page the unchanged page.
-     * @param newLayout the new layout properties.
-     * @param direction the new page layout direction
-     * @param parent the parent for macro command functionality
-     */
     explicit KWPageStylePropertiesCommand(KWDocument *document, const KWPageStyle &styleBefore, const KWPageStyle &styleAfter, QUndoCommand *parent = 0);
 
     /// redo the command

@@ -32,13 +32,6 @@ class KWDocument;
 class KWORD_TEST_EXPORT KWNewPageStyleCommand : public QUndoCommand
 {
 public:
-    /**
-     * The constructor for a command to insert a new page.
-     * @param document the document that gets a new page.
-     * @param afterPageNum we will insert a new page after the page indicated with pagenumber afterPageNum
-     * @param parent the parent for command macros
-     * @param masterPageName the master page name for the new page
-     */
     explicit KWNewPageStyleCommand(KWDocument *document, const KWPageStyle &newStyle, QUndoCommand *parent = 0);
 
     /// redo the command
