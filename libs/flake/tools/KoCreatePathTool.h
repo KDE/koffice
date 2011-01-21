@@ -37,7 +37,7 @@ class KoCreatePathToolPrivate;
 /**
  * Tool for creating path shapes.
  */
-class FLAKE_EXPORT KoCreatePathTool : public KoToolBase
+class KoCreatePathTool : public KoToolBase
 {
     Q_OBJECT
 public:
@@ -45,7 +45,7 @@ public:
      * Constructor for the tool that allows you to create new paths by hand.
      * @param canvas the canvas this tool will be working for.
      */
-    explicit KoCreatePathTool(KoCanvasBase * canvas);
+    explicit KoCreatePathTool(KoCanvasBase *canvas);
     virtual ~KoCreatePathTool();
 
     /// reimplemented
@@ -68,7 +68,7 @@ public slots:
     /// reimplemented
     virtual void deactivate();
     /// reimplemented
-    virtual void resourceChanged(int key, const QVariant & res);
+    virtual void resourceChanged(int key, const QVariant &res);
 
 protected:
     /**
