@@ -188,11 +188,11 @@ public:
 
     /// PixelVisibility for indexInList()
     enum PixelVisibility {
-        ShowAll,
-        HidePixel
+        ShowAll,    ///< Use all values, including Pixel
+        HidePixel   ///< count as if the Pixel unit hadn't been shown in the list
     };
     /// Get the index of this unit in the list of names
-    /// @param hidePixel count as if the Pixel unit hadn't been shown in the list
+    /// @param visibility choose to use pixel unit or not
     int indexInList(PixelVisibility visibility = HidePixel) const;
 
     /// parse common %KOffice and Odf values, like "10cm", "5mm" to pt

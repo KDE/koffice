@@ -165,7 +165,7 @@ public:
      *
      * The text:id is unique for all sub-item.
      *
-     * @param subitem for which the sub-item id should be returned
+     * @param subItem for which the sub-item id should be returned
      * @param insert if true a new sub-item id will be generated if there is non yet
      *
      * @return the sub-item id for the sub-item or and empty string if it was not found
