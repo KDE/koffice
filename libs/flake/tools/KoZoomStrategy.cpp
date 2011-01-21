@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoZoomStrategy.h"
+#include "KoZoomStrategy_p.h"
 #include "KoShapeRubberSelectStrategy_p.h"
 #include "KoZoomTool.h"
 #include "KoCanvasBase.h"

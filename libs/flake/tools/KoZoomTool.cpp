@@ -20,7 +20,7 @@
  */
 
 #include "KoZoomTool.h"
-#include "KoZoomStrategy.h"
+#include "KoZoomStrategy_p.h"
 #include "KoZoomToolWidget.h"
 #include "KoPointerEvent.h"
 #include "KoCanvasBase.h"
