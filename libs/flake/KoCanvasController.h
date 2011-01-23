@@ -290,7 +290,7 @@ public:
     virtual void setVastScrolling(qreal factor) = 0;
 
 protected:
-    void setDocumentSize(const QSize &sz);
+    void setDocumentSize(const QSize &size);
     QSize documentSize() const;
 
     void setPreferredCenterFractionX(qreal);
@@ -299,7 +299,7 @@ protected:
     void setPreferredCenterFractionY(qreal);
     qreal preferredCenterFractionY() const;
 
-    void setDocumentOffset( QPoint &offset);
+    void setDocumentOffset(QPoint &offset);
     QPoint documentOffset() const;
 
 private:
