@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoSubpathJoinCommand.h"
+#include "KoSubpathJoinCommand_p.h"
 #include <klocale.h>
 
 KoSubpathJoinCommand::KoSubpathJoinCommand(const KoPathPointData &pointData1, const KoPathPointData &pointData2, QUndoCommand *parent)
