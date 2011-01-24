@@ -35,7 +35,7 @@
 #include "commands/KoPathPointRemoveCommand.h"
 #include "commands/KoPathSegmentTypeCommand.h"
 #include "commands/KoPathBreakAtPointCommand_p.h"
-#include "commands/KoPathSegmentBreakCommand.h"
+#include "commands/KoPathSegmentBreakCommand_p.h"
 #include "commands/KoParameterToPathCommand.h"
 #include "commands/KoSubpathJoinCommand.h"
 #include "commands/KoPathPointMergeCommand.h"
