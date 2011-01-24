@@ -20,7 +20,7 @@
 
 #include <QPainterPath>
 #include "KoPathShape.h"
-#include "KoPathPointTypeCommand.h"
+#include "KoPathPointTypeCommand_p.h"
 
 void TestPointTypeCommand::redoUndoSymmetric()
 {
