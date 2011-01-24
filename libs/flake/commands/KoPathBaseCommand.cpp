@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathBaseCommand.h"
+#include "KoPathBaseCommand_p.h"
 #include "KoPathShape.h"
 
 KoPathBaseCommand::KoPathBaseCommand(QUndoCommand *parent)

@@ -20,7 +20,7 @@
 #include "KoParameterChangeStrategy_p.h"
 
 #include "KoParameterShape.h"
-#include "commands/KoParameterHandleMoveCommand.h"
+#include "commands/KoParameterHandleMoveCommand_p.h"
 
 KoParameterChangeStrategy::KoParameterChangeStrategy(KoToolBase *tool, KoParameterShape *parameterShape, int handleId)
         : KoInteractionStrategy(tool)

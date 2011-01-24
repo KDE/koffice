@@ -30,7 +30,7 @@
 #include "KoViewConverter.h"
 #include "KoSelection.h"
 #include "KoPointerEvent.h"
-#include "commands/KoPathPointTypeCommand.h"
+#include "commands/KoPathPointTypeCommand_p.h"
 #include "commands/KoPathPointInsertCommand.h"
 #include "commands/KoPathPointRemoveCommand.h"
 #include "commands/KoPathSegmentTypeCommand.h"

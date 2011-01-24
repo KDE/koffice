@@ -23,7 +23,7 @@
 
 #include <QUndoCommand>
 #include <QList>
-#include "KoPathBaseCommand.h"
+#include "KoPathBaseCommand_p.h"
 //#include "KoPathShape.h"
 #include "KoPathPoint.h"
 #include "KoPathPointData.h"

@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoConnectionShapeTypeCommand.h"
+#include "KoConnectionShapeTypeCommand_p.h"
 #include <klocale.h>
 
 KoConnectionShapeTypeCommand::KoConnectionShapeTypeCommand(

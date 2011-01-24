@@ -211,85 +211,6 @@ install( FILES
 
 install(
     FILES
-    flake_export.h
-    KoCanvasBase.h
-    KoCanvasController.h
-    KoCanvasControllerWidget.h
-    KoCanvasObserverBase.h
-    KoCanvasSupervisor.h
-    KoResourceManager.h
-    KoCopyController.h
-    KoCutController.h
-    KoDataCenterBase.h
-    KoDockFactoryBase.h
-    KoDockRegistry.h
-    KoDrag.h
-    KoDragOdfSaveHelper.h
-    KoFlake.h
-    KoFrameShape.h
-    KoGuidesData.h
-    KoImageCollection.h
-    KoImageData.h
-    KoInputDevice.h
-    KoInsets.h
-    KoPathSegment.h
-    KoPointerEvent.h
-    KoSelection.h
-    KoShape.h
-    KoShapeBorderBase.h
-    KoToolSelection.h
-    KoShapeContainer.h
-    KoShapeContainerModel.h
-    KoShapeContainerDefaultModel.h
-    KoShapeController.h
-    KoShapeControllerBase.h
-    KoShapeFactoryBase.h
-    KoShapeGroup.h
-    KoShapeLayer.h
-    KoShapePainter.h
-    KoShapeLoadingContext.h
-    KoShapeOdfSaveHelper.h
-    KoLoadingShapeUpdater.h
-    KoShapeConfigWidgetBase.h
-    KoShapeManager.h
-    KoShapeRegistry.h
-    KoShapeSavingContext.h
-    KoShapeUserData.h
-    KoShapeApplicationData.h
-    KoSharedSavingData.h
-    KoTextOnShapeContainer.h
-    KoTextShapeDataBase.h
-    KoToolBase.h
-    KoToolManager.h
-    KoToolFactoryBase.h
-    KoToolProxy.h
-    KoToolRegistry.h
-    KoFilterEffect.h
-    KoFilterEffectStack.h
-    KoFilterEffectFactoryBase.h
-    KoFilterEffectRegistry.h
-    KoFilterEffectConfigWidgetBase.h
-    KoFilterEffectRenderContext.h
-    KoFilterEffectLoadingContext.h
-    KoPostscriptPaintDevice.h
-    KoPathShape.h
-    KoShapeBackground.h
-    KoPathShapeLoader.h
-    KoColorBackground.h
-    KoLineBorder.h
-    KoInputDevice.h
-    KoEventAction.h
-    KoEventActionFactoryBase.h
-    KoParameterShape.h
-    KoConnectionShape.h
-    KoShapeShadow.h
-    KoSnapGuide.h
-    KoShapePaste.h
-    KoShapePaste.h
-    KoGradientBackground.h
-    KoRTree.h
-    KoEventActionRegistry.h
-    KoPluginLoader.h
     commands/KoEventActionAddCommand.h
     commands/KoEventActionRemoveCommand.h
     commands/KoParameterToPathCommand.h
@@ -300,7 +221,6 @@ install(
     commands/KoPathPointMergeCommand.h
     commands/KoPathPointMoveCommand.h
     commands/KoPathPointRemoveCommand.h
-    commands/KoPathPointTypeCommand.h
     commands/KoPathReverseCommand.h
     commands/KoPathSegmentTypeCommand.h
     commands/KoPathSeparateCommand.h
@@ -311,6 +231,8 @@ install(
     commands/KoShapeDeleteCommand.h
     commands/KoShapeDistributeCommand.h
     commands/KoShapeGroupCommand.h
+    commands/KoShapeKeepAspectRatioCommand.h
+    commands/KoShapeLockCommand.h
     commands/KoShapeMoveCommand.h
     commands/KoShapeRenameCommand.h
     commands/KoShapeReorderCommand.h
@@ -318,14 +240,101 @@ install(
     commands/KoShapeShearCommand.h
     commands/KoShapeSizeCommand.h
     commands/KoShapeTransformCommand.h
+    commands/KoShapeTransparencyCommand.h
     commands/KoShapeUngroupCommand.h
     commands/KoSubpathRemoveCommand.h
-    commands/KoShapeKeepAspectRatioCommand.h
-    commands/KoShapeLockCommand.h
+    flake_export.h
+    KoCanvasBase.h
+    KoCanvasController.h
+    KoCanvasControllerWidget.h
+    KoCanvasObserverBase.h
+    KoCanvasSupervisor.h
+    KoColorBackground.h
+    KoConnectionShape.h
+    KoCopyController.h
+    KoCutController.h
+    KoDataCenterBase.h
+    KoDockFactoryBase.h
+    KoDockRegistry.h
+    KoDrag.h
+    KoDragOdfSaveHelper.h
+    KoEventActionFactoryBase.h
+    KoEventAction.h
+    KoEventActionRegistry.h
+    KoFilterEffectConfigWidgetBase.h
+    KoFilterEffectFactoryBase.h
+    KoFilterEffect.h
+    KoFilterEffectLoadingContext.h
+    KoFilterEffectRegistry.h
+    KoFilterEffectRenderContext.h
+    KoFilterEffectStack.h
+    KoFlake.h
+    KoFrameShape.h
+    KoGradientBackground.h
+    KoGuidesData.h
+    KoImageCollection.h
+    KoImageData.h
+    KoInputDevice.h
+    KoInsets.h
+    KoLineBorder.h
+    KoLoadingShapeUpdater.h
+    KoOdfWorkaround.h
+    KoParameterShape.h
+    KoPasteController.h
+    KoPathPointData.h
+    KoPathPoint.h
+    KoPathSegment.h
+    KoPathShape.h
+    KoPathShapeLoader.h
+    KoPatternBackground.h
+    KoPluginLoader.h
+    KoPointerEvent.h
+    KoPostscriptPaintDevice.h
+    KoResourceManager.h
+    KoRTree.h
+    KoSelection.h
+    KoShapeApplicationData.h
+    KoShapeBackground.h
+    KoShapeBorderBase.h
+    KoShapeBorderFactoryBase.h
+    KoShapeBorderRegistry.h
+    KoShapeConfigFactoryBase.h
+    KoShapeConfigWidgetBase.h
+    KoShapeContainerDefaultModel.h
+    KoShapeContainer.h
+    KoShapeContainerModel.h
+    KoShapeControllerBase.h
+    KoShapeController.h
+    KoShapeFactoryBase.h
+    KoShapeGroup.h
+    KoShape.h
+    KoShapeLayer.h
+    KoShapeLoadingContext.h
+    KoShapeManager.h
+    KoShapeManagerPaintingStrategy.h
+    KoShapeOdfSaveHelper.h
+    KoShapePainter.h
+    KoShapePaste.h
+    KoShapeRegistry.h
+    KoShapeSavingContext.h
+    KoShapeShadow.h
+    KoShapeUserData.h
+    KoSharedLoadingData.h
+    KoSharedSavingData.h
+    KoSnapGuide.h
+    KoTextOnShapeContainer.h
+    KoTextShapeDataBase.h
+    KoToolBase.h
+    KoToolFactoryBase.h
+    KoToolManager.h
+    KoToolProxy.h
+    KoToolRegistry.h
+    KoToolSelection.h
+    KoViewConverter.h
+    tools/KoCreateShapesTool.h
     tools/KoInteractionStrategy.h
     tools/KoInteractionTool.h
     tools/KoShapeRubberSelectStrategy.h
-    KoViewConverter.h
     DESTINATION
     ${INCLUDE_INSTALL_DIR} COMPONENT Devel
 )

@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoPathBreakAtPointCommand.h"
+#include "KoPathBreakAtPointCommand_p.h"
 #include <klocale.h>
 
 /*

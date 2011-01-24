@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoParameterHandleMoveCommand.h"
+#include "KoParameterHandleMoveCommand_p.h"
 #include "KoParameterShape.h"
 #include <klocale.h>
 

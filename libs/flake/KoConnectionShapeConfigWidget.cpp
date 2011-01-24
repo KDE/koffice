@@ -18,7 +18,7 @@
  */
 
 #include "KoConnectionShapeConfigWidget_p.h"
-#include "commands/KoConnectionShapeTypeCommand.h"
+#include "commands/KoConnectionShapeTypeCommand_p.h"
 #include <klocale.h>
 
 KoConnectionShapeConfigWidget::KoConnectionShapeConfigWidget()
