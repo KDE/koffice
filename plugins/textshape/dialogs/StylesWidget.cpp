@@ -45,6 +45,7 @@ StylesWidget::StylesWidget(QWidget *parent)
     widget.stylesView->header()->swapSections(0, 1);
     widget.stylesView->header()->resizeSection(1, 16);
     widget.stylesView->header()->hide();
+    widget.stylesView->setExpandsOnDoubleClick(false);
 
     widget.newStyle->setIcon(KIcon("list-add"));
     widget.deleteStyle->setIcon(KIcon("list-remove"));
@@ -58,6 +59,8 @@ StylesWidget::StylesWidget(QWidget *parent)
     connect(widget.modifyStyle, SIGNAL(clicked()), this, SLOT(editStyle()));
     connect(widget.applyStyle, SIGNAL(clicked()), this, SLOT(applyStyle()));
     connect(widget.stylesView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(setCurrent(const QModelIndex&)));
+    connect(widget.stylesView, SIGNAL(doubleClicked(const QModelIndex&)),
+                this, SLOT(applyStyle(const QModelIndex&)));
     connect(m_stylesModel, SIGNAL(isMultiLevel(bool)), this, SLOT(setStylesAreNested(bool)));
 }
 
@@ -265,6 +268,11 @@ void StylesWidget::applyStyle()
 {
     QModelIndex index = widget.stylesView->currentIndex();
     Q_ASSERT(index.isValid());
+    applyStyle(index);
+}
+
+void StylesWidget::applyStyle(const QModelIndex &index)
+{
     KoParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
     if (paragraphStyle) {
         emit paragraphStyleSelected(paragraphStyle);

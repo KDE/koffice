@@ -54,6 +54,7 @@ private slots:
     void newStyleClicked();
     void editStyle();
     void applyStyle();
+    void applyStyle(const QModelIndex &);
     /// updates button state
     void setCurrent(const QModelIndex &index);
     /// if the display needs to have expand buttons at root
