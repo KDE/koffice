@@ -1324,11 +1324,25 @@ KoPrintJob* KoMainWindow::exportToPdf(const QString &pdfFileName)
 {
     if (!rootView())
         return 0;
-    if (pdfFileName.isEmpty()) {
-        KFileDialog dialog(KUrl("kfiledialog:///SaveDialog/"), QString::fromLatin1("*.pdf *.ps"), this);
+    QString outputFileName(pdfFileName);
+    if (outputFileName.isEmpty()) {
+        KUrl startUrl = KUrl("kfiledialog:///SaveDialog/");
+        KoDocument *pDoc = rootDocument();
+        /** if document has a file name, take file name and replace extension with .pdf */
+        if (pDoc && pDoc->url().isValid()) {
+            startUrl = pDoc->url();
+            QString fileName = startUrl.fileName();
+            fileName = fileName.replace(QRegExp("\\.\\w{2,5}$", Qt::CaseInsensitive), ".pdf");
+            startUrl.setFileName(fileName);
+        }
+
+        QStringList mimeTypes;
+        mimeTypes << "application/pdf" << "application/postscript";
+        KFileDialog dialog(startUrl, QString(), this);
+        dialog.setMimeFilter(mimeTypes);
         dialog.setObjectName("print file");
         dialog.setMode(KFile::File);
-        dialog.setCaption(i18n("Write PDF"));
+        dialog.setCaption(i18n("Export to PDF"));
         if (dialog.exec() != QDialog::Accepted)
             return 0;
         KUrl url(dialog.selectedUrl());
@@ -1341,7 +1355,7 @@ KoPrintJob* KoMainWindow::exportToPdf(const QString &pdfFileName)
                 return 0;
             }
         }
-        pdfFileName = url.toLocalFile();
+        outputFileName = url.toLocalFile();
     }
     KoPrintJob *printJob = rootView()->createPdfPrintJob();
     if (printJob == 0)
@@ -1349,7 +1363,7 @@ KoPrintJob* KoMainWindow::exportToPdf(const QString &pdfFileName)
     d->applyDefaultSettings(printJob->printer());
 
     // TODO for remote files we have to first save locally and then upload.
-    printJob->printer().setOutputFileName(pdfFileName);
+    printJob->printer().setOutputFileName(outputFileName);
     printJob->startPrinting(KoPrintJob::DeleteWhenDone);
     return printJob;
 }
