@@ -1320,7 +1320,7 @@ void KoMainWindow::slotFilePrintPreview()
     delete preview;
 }
 
-KoPrintJob* KoMainWindow::exportToPdf(QString pdfFileName)
+KoPrintJob* KoMainWindow::exportToPdf(const QString &pdfFileName)
 {
     if (!rootView())
         return 0;

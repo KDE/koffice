@@ -238,7 +238,7 @@ public slots:
     virtual void slotFilePrint();
     virtual void slotFilePrintPreview();
 
-    KoPrintJob* exportToPdf(QString fileName = QString());
+    KoPrintJob* exportToPdf(const QString &fileName = QString());
 
     /**
      * Show a dialog with author and document information.
