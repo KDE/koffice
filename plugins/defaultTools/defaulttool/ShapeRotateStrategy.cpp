@@ -68,7 +68,7 @@ void ShapeRotateStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModi
     if (modifiers & (Qt::AltModifier | Qt::ControlModifier)) {
         // limit to 45 degree angles
         qreal modula = qAbs(angle);
-        while(modula > 45.0)
+        while (modula > 45.0)
             modula -= 45.0;
         if (modula > 22.5)
             modula -= 45.0;

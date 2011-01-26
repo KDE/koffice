@@ -93,7 +93,7 @@ void KPrCustomSlideShowsDialog::addCustomSlideShow()
 {
     //We create a different default name for every SlideShow:
     static int newSlideShowsCount = 1;
-    while(m_slideShows->names().contains(i18n("New Slide Show %1", newSlideShowsCount)))
+    while (m_slideShows->names().contains(i18n("New Slide Show %1", newSlideShowsCount)))
     {
         ++newSlideShowsCount;
     }

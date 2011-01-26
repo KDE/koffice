@@ -222,9 +222,9 @@ void SheetView::paintCells(QPainter& painter, const QRectF& paintRect, const QPo
             const int lastColPosition = d->sheet->columnPosition(lastCol);
             const int lastRowPosition = d->sheet->rowPosition(lastRow);
 
-            while( xBackground < lastColPosition ) {
+            while ( xBackground < lastColPosition ) {
                 int y = yBackground;
-                while( y < lastRowPosition ) {
+                while ( y < lastRowPosition ) {
                     painter.drawImage(QRect(xBackground, y, imageWidth, imageHeight), sheet()->backgroundImage());
                     y += imageHeight;
                 }

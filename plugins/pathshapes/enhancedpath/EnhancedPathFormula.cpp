@@ -75,7 +75,7 @@ public:
 private:
     void ensureSpace()
     {
-        while((int) topIndex >= size())
+        while ((int) topIndex >= size())
             resize(size() + 10);
     }
     unsigned topIndex;
@@ -307,7 +307,7 @@ TokenList EnhancedPathFormula::scan(const QString &formula) const
     QString expr = formula + QChar();
 
     // main loop
-    while((state != Bad) && (state != Finish) && (i < expr.length())) {
+    while ((state != Bad) && (state != Finish) && (i < expr.length())) {
         QChar ch = expr[i];
 
         switch(state) {

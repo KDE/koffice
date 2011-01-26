@@ -89,7 +89,7 @@ void ShapePropertiesDocker::addWidgetForShape( KoShape * shape )
     // remove the config widget if a null shape is set, or the shape has changed
     if ( ! shape || shape != d->currentShape )
     {
-        while( d->widgetStack->count() )
+        while ( d->widgetStack->count() )
             d->widgetStack->removeWidget( d->widgetStack->widget( 0 ) );
     }
 

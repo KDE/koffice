@@ -89,7 +89,7 @@ void KPrCustomSlideShows::addSlideToAll(KoPAPageBase* page, unsigned int positio
     QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.begin();
     //FIXME: should we allow negative index?
     //if (position < 0) return;
-    while(it != m_customSlideShows.end()) {
+    while (it != m_customSlideShows.end()) {
         uint size = it.value().size();
         it.value().insert((position<=size)? position : size, page);
         ++it;
@@ -108,7 +108,7 @@ void KPrCustomSlideShows::addSlidesToAll(const QList<KoPAPageBase*> &slideShow, 
 void KPrCustomSlideShows::removeSlideFromAll(KoPAPageBase* page)
 {
     QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.begin();
-    while(it != m_customSlideShows.end()) {
+    while (it != m_customSlideShows.end()) {
         it.value().removeAll(page);
         ++it;
     }

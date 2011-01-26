@@ -30,7 +30,7 @@ namespace KOfficeFilter {
 
     void ChainLinkList::deleteAll()
     {
-        while(!m_chainLinks.isEmpty()) {
+        while (!m_chainLinks.isEmpty()) {
             delete m_chainLinks.takeFirst();
         }
     }

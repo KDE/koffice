@@ -116,7 +116,7 @@ void FolderShapeModel::add(KoShape *shape)
                 break;
             }
         }
-    } while(! ok);
+    } while (! ok);
     shape->setPosition(QPointF(x, y));
     m_icons.append(shape);
 }

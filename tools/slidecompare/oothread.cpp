@@ -142,7 +142,7 @@ OoThread::toOdp(const QString& path) {
     c.from = path;
     do {
         c.to = dir.absoluteFilePath(tmpname()+".odp");
-    } while(dir.exists(c.to));
+    } while (dir.exists(c.to));
     mutex.lock();
     nextToOdp = c;
     moreWork.wakeAll();
@@ -158,7 +158,7 @@ OoThread::toPng(const QString& path, int pngwidth) {
     c.width = pngwidth;
     do {
         c.to = dir.absoluteFilePath(tmpname()+"/");
-    } while(dir.exists(c.to));
+    } while (dir.exists(c.to));
     dir.mkdir(c.to);
     mutex.lock();
     nextToPng = c;

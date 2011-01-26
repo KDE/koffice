@@ -305,7 +305,7 @@ void Canvas::paintEvent(QPaintEvent *e)
         painter.save();
         QPointF pos = shape->position();
         KoShape *parent = shape->parent ();
-        while(parent) {
+        while (parent) {
             pos += parent->position();
             parent = parent->parent();
         }
