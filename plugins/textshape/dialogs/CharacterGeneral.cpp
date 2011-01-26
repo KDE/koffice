@@ -34,6 +34,7 @@
 CharacterGeneral::CharacterGeneral(QWidget *parent, bool uniqueFormat)
         : QWidget(parent),
         m_blockSignals(false),
+        m_nameVisible(true),
         m_style(0)
 {
     widget.setupUi(this);
@@ -65,13 +66,20 @@ CharacterGeneral::CharacterGeneral(QWidget *parent, bool uniqueFormat)
     connect(widget.name, SIGNAL(textChanged(const QString &)), this, SLOT(setName(const QString&)));
 }
 
-void CharacterGeneral::hideStyleName(bool hide)
+void CharacterGeneral::setStyleNameVisible(bool visible)
 {
-    if (hide) {
-        disconnect(widget.name, SIGNAL(textChanged(const QString &)), this, SIGNAL(nameChanged(const QString&)));
-        disconnect(widget.name, SIGNAL(textChanged(const QString &)), this, SLOT(setName(const QString&)));
+    if (m_nameVisible == visible)
+        return;
+    m_nameVisible = visible;
+    if (visible) {
+        connect(widget.name, SIGNAL(textChanged(const QString&)), this, SIGNAL(nameChanged(const QString&)));
+        connect(widget.name, SIGNAL(textChanged(const QString&)), this, SLOT(setName(const QString&)));
+        widget.tabs->insertTab(0, widget.generalTab, QString());
+        widget.retranslateUi(this);
+    } else {
+        disconnect(widget.name, SIGNAL(textChanged(const QString&)), this, SIGNAL(nameChanged(const QString&)));
+        disconnect(widget.name, SIGNAL(textChanged(const QString&)), this, SLOT(setName(const QString&)));
         widget.tabs->removeTab(0);
-        m_nameHidden = true;
     }
 }
 
@@ -82,8 +90,7 @@ void CharacterGeneral::setStyle(KoCharacterStyle *style)
         return;
     m_blockSignals = true;
 
-    if (!m_nameHidden)
-        widget.name->setText(style->name());
+    widget.name->setText(style->name());
     m_fontTab->setDisplay(style);
     m_layoutTab->setDisplay(style);
     m_characterDecorations->setDisplay(style);

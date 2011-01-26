@@ -90,7 +90,7 @@ void StyleManager::setStyleManager(KoStyleManager *sm)
 void StyleManager::setParagraphStyle(KoParagraphStyle *style, bool canDelete)
 {
     if (widget.charButton->isChecked()) { // show char style instead
-        setCharacterStyle(style->characterStyle(), false);
+        setCharacterStyle(style->characterStyle(), false, true);
         widget.styleTypeContainer->setVisible(true);
         m_selectedParagStyle = style;
         return;
@@ -115,6 +115,11 @@ void StyleManager::setParagraphStyle(KoParagraphStyle *style, bool canDelete)
 
 void StyleManager::setCharacterStyle(KoCharacterStyle *style, bool canDelete)
 {
+    setCharacterStyle(style, canDelete, false);
+}
+
+void StyleManager::setCharacterStyle(KoCharacterStyle *style, bool canDelete, bool partOfParag)
+{
     m_selectedParagStyle = 0;
     m_selectedCharStyle = style;
     widget.paragraphStylePage->save();
@@ -132,6 +137,7 @@ void StyleManager::setCharacterStyle(KoCharacterStyle *style, bool canDelete)
     widget.stackedWidget->setCurrentWidget(widget.characterStylePage);
     widget.styleTypeContainer->setVisible(false);
     widget.bDelete->setEnabled(canDelete);
+    widget.characterStylePage->setStyleNameVisible(!partOfParag);
 }
 
 void StyleManager::setUnit(const KoUnit &unit)

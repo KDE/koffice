@@ -54,6 +54,8 @@ private slots:
     void switchStyle(bool on);
 
 private:
+    void setCharacterStyle(KoCharacterStyle *style, bool canDelete, bool partOfParag);
+
     Ui::StyleManager widget;
     KoStyleManager *m_styleManager;
 

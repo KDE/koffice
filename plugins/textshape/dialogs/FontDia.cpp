@@ -83,7 +83,7 @@ FontDia::FontDia(QTextCursor* cursor, QWidget* parent)
     setDefaultButton(Ok);
 
     m_characterGeneral = new CharacterGeneral(this, m_uniqueFormat);
-    m_characterGeneral->hideStyleName(true);
+    m_characterGeneral->setStyleNameVisible(false);
     setMainWidget(m_characterGeneral);
 
     connect(this, SIGNAL(applyClicked()), this, SLOT(slotApply()));

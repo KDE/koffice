@@ -38,7 +38,7 @@ public:
     explicit CharacterGeneral(QWidget *parent = 0, bool uniqueFormat = true);
 
     void setStyle(KoCharacterStyle *style);
-    void hideStyleName(bool hide);
+    void setStyleNameVisible(bool visible);
 
 public slots:
     void save(KoCharacterStyle *style = 0);
@@ -61,7 +61,7 @@ private slots:
 private:
     Ui::CharacterGeneral widget;
     bool m_blockSignals;
-    bool m_nameHidden;
+    bool m_nameVisible;
 
     FontLayoutTab *m_layoutTab;
     FontDecorations *m_characterDecorations;
