@@ -18,6 +18,21 @@
  * Boston, MA 02110-1301, USA.
 */
 
+#ifndef KOPARAMETERSHAPEPRIVATE_P_H
+#define KOPARAMETERSHAPEPRIVATE_P_H
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Flake API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
+
+
 #include "KoPathShape_p.h"
 
 #include <QList>
@@ -38,4 +53,4 @@ public:
     QList<QPointF> handles;
 };
 
-
+#endif
