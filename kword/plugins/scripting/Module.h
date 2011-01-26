@@ -92,7 +92,7 @@ public slots:
     * Python example that iterates over all pages;
     * \code
     * import KWord
-    * for i in range( KWord.pageCount() ):
+    * for i in range(KWord.pageCount()):
     *     page = KWord.page(i)
     *     print "width=%s height=%s" % (page.width(),page.height())
     * \endcode
@@ -105,7 +105,7 @@ public slots:
     * \p afterPageNum . If \p afterPageNum is 0, the new page is
     * inserted before page 1.  In all cases, the new page will have
     * the number afterPageNum+1. To append a new page use
-    * insertPage( pageCount() ).
+    * insertPage(pageCount()).
     */
     QObject* insertPage(int afterPageNum);
     /** Remove the page with the pagenumber \p pageNumber . */

@@ -50,7 +50,7 @@ public:
      * @param resourceAdapter the resource adapter providing the resources to display
      * @param parent the parent widget
      */
-    explicit KoResourceSelector( KoAbstractResourceServerAdapter * resourceAdapter, QWidget * parent = 0 );
+    explicit KoResourceSelector(KoAbstractResourceServerAdapter * resourceAdapter, QWidget * parent = 0);
 
     /// Destroys the resource selector
     virtual ~KoResourceSelector();
@@ -62,28 +62,28 @@ public:
     void setDisplayMode(DisplayMode mode);
 
     /// Sets number of columns to display in the popup view
-    void setColumnCount( int columnCount );
+    void setColumnCount(int columnCount);
 
     /// Sets the height of the popup view rows
-    void setRowHeight( int rowHeight );
+    void setRowHeight(int rowHeight);
 
 signals:
     /// Emitted when a resource was selected
-    void resourceSelected( KoResource * resource );
+    void resourceSelected(KoResource * resource);
 
     /// Is emitted when the user has clicked on the current resource
-    void resourceApplied( KoResource * resource );
+    void resourceApplied(KoResource * resource);
 
 protected:
     /// reimplemented
-    virtual void paintEvent( QPaintEvent * );
+    virtual void paintEvent(QPaintEvent *);
     /// reimplemented
-    virtual void mousePressEvent( QMouseEvent * );
+    virtual void mousePressEvent(QMouseEvent *);
     /// reimplemented
-    virtual void mouseMoveEvent( QMouseEvent * event );
+    virtual void mouseMoveEvent(QMouseEvent * event);
 
 private slots:
-    void indexChanged( int index );
+    void indexChanged(int index);
     void resourceAdded(KoResource*);
     void resourceRemoved(KoResource*);
 private:

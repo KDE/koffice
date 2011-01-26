@@ -98,8 +98,8 @@ class KoDocumentRdfPrivate;
  * For example, to find the foaf entries related to the current cursor:
  *
  * QTextCursor cursor = ...;
- * Soprano::Model* model = rdf->findStatements( cursor );
- * KoRdfFoaFList foaflist = rdf->foaf( model );
+ * Soprano::Model* model = rdf->findStatements(cursor);
+ * KoRdfFoaFList foaflist = rdf->foaf(model);
  *
  * Using the Soprano::Model directly is covered in a latter section of
  * this comment.

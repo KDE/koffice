@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright ( C ) 2010 Boudewijn Rempt <boud@valdyas.org>
+ * Copyright (C) 2010 Boudewijn Rempt <boud@valdyas.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -55,7 +55,7 @@ public:
     virtual KoPADocument * kopaDocument() const = 0;
 
     /// XXX
-    virtual KoViewConverter * viewConverter( KoPACanvasBase * canvas );
+    virtual KoViewConverter * viewConverter(KoPACanvasBase * canvas);
     virtual KoViewConverter * viewConverter() const;
     virtual KoZoomController * zoomController() const = 0;
 
@@ -63,16 +63,16 @@ public:
     virtual KoZoomHandler *zoomHandler() const;
 
     /// Set the active page and updates the UI
-    virtual void doUpdateActivePage( KoPAPageBase * page ) = 0;
+    virtual void doUpdateActivePage(KoPAPageBase * page) = 0;
 
     /// Set page shown in the canvas to @p page
-    virtual void setActivePage( KoPAPageBase * page ) = 0;
+    virtual void setActivePage(KoPAPageBase * page) = 0;
 
     /// @return Page that is shown in the canvas
     virtual KoPAPageBase* activePage() const = 0;
 
     /// XXX
-    virtual void navigatePage( KoPageApp::PageNavigation pageNavigation ) = 0;
+    virtual void navigatePage(KoPageApp::PageNavigation pageNavigation) = 0;
 
     /**
      * @brief Enables/Disables the given actions
@@ -82,7 +82,7 @@ public:
      * @param actions which should be enabled/disabled
      * @param enable new state of the actions
      */
-    virtual void setActionEnabled( int actions, bool enable ) = 0;
+    virtual void setActionEnabled(int actions, bool enable) = 0;
 
     /// XXX
     virtual void updatePageNavigationActions() = 0;
@@ -92,7 +92,7 @@ public:
      *
      * @param mode the new view mode
      */
-    virtual void setViewMode( KoPAViewMode* mode );
+    virtual void setViewMode(KoPAViewMode* mode);
 
     /// @return the active viewMode
     virtual KoPAViewMode* viewMode() const;
@@ -131,7 +131,7 @@ public:
 public slots:
 
     /// Set the active page and updates the UI
-    void updateActivePage( KoPAPageBase * page ) { m_view->viewMode()->updateActivePage(page); }
+    void updateActivePage(KoPAPageBase * page) { m_view->viewMode()->updateActivePage(page); }
 
     /// Shows/hides the rulers
     void setShowRulers(bool show) { m_view->setShowRulers(show); }

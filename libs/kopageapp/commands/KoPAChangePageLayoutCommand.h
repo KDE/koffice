@@ -33,7 +33,7 @@ class KoPAPageBase;
 class KoPAChangePageLayoutCommand : public QUndoCommand
 {
 public:
-    KoPAChangePageLayoutCommand( KoPADocument *document, KoPAMasterPage *page, const KoPageLayout &newPageLayout, bool applyToDocument, QUndoCommand *parent = 0 );
+    KoPAChangePageLayoutCommand(KoPADocument *document, KoPAMasterPage *page, const KoPageLayout &newPageLayout, bool applyToDocument, QUndoCommand *parent = 0);
     virtual ~KoPAChangePageLayoutCommand();
 
     /// redo the command

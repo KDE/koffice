@@ -63,7 +63,7 @@
  * This function can be used for preprocessing when KOFFICE_IS_VERSION is not
  * appropriate.
  */
-#define KOFFICE_MAKE_VERSION( a,b,c ) (((a) << 16) | ((b) << 8) | (c))
+#define KOFFICE_MAKE_VERSION(a,b,c) (((a) << 16) | ((b) << 8) | (c))
 
 /**
  * @def KOFFICE_ALPHA
@@ -118,7 +118,7 @@
  * e.g. for KOffice 4.3 with KOFFICE_IS_VERSION(4,3,0)
  * but with the actual version number at a time a needed feature was introduced, e.g. 4.3.2.
  */
-#define KOFFICE_IS_VERSION(a,b,c) ( KOFFICE_VERSION >= KOFFICE_MAKE_VERSION(a,b,c) )
+#define KOFFICE_IS_VERSION(a,b,c) (KOFFICE_VERSION >= KOFFICE_MAKE_VERSION(a,b,c))
 
 /**
  * Namespace for general KOffice functions.

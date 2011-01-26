@@ -43,17 +43,17 @@ ShapeRotateStrategy::ShapeRotateStrategy(KoToolBase *tool, const QPointF &clicke
 
     QList<KoShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KoFlake::StrippedSelection);
     foreach(KoShape *shape, selectedShapes) {
-        if( ! shape->isEditable() )
+        if ( ! shape->isEditable() )
             continue;
         m_selectedShapes << shape;
-        if( m_selectedShapes.count() == 1 )
+        if ( m_selectedShapes.count() == 1 )
             m_initialBoundingRect = shape->boundingRect();
         else
             m_initialBoundingRect = m_initialBoundingRect.united( shape->boundingRect() );
         m_oldTransforms << shape->transformation();
     }
 
-    if( buttons & Qt::RightButton )
+    if ( buttons & Qt::RightButton )
         m_rotationCenter = tool->canvas()->shapeManager()->selection()->absolutePosition( SelectionDecorator::hotPosition() );
     else
         m_rotationCenter = m_initialBoundingRect.center();
@@ -65,12 +65,12 @@ void ShapeRotateStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModi
     qreal angle = atan2( point.y() - m_rotationCenter.y(), point.x() - m_rotationCenter.x() ) -
         atan2( m_start.y() - m_rotationCenter.y(), m_start.x() - m_rotationCenter.x() );
     angle = angle / M_PI * 180;  // convert to degrees.
-    if(modifiers & (Qt::AltModifier | Qt::ControlModifier)) {
+    if (modifiers & (Qt::AltModifier | Qt::ControlModifier)) {
         // limit to 45 degree angles
         qreal modula = qAbs(angle);
         while(modula > 45.0)
             modula -= 45.0;
-        if(modula > 22.5)
+        if (modula > 22.5)
             modula -= 45.0;
         angle += (angle>0?-1:1)*modula;
     }

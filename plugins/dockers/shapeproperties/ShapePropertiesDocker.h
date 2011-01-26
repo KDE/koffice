@@ -36,13 +36,13 @@ public:
     ~ShapePropertiesDocker();
 
     /// reimplemented
-    virtual void setCanvas( KoCanvasBase *canvas );
+    virtual void setCanvas(KoCanvasBase *canvas);
 
 private slots:
     void selectionChanged();
-    void addWidgetForShape( KoShape * shape );
+    void addWidgetForShape(KoShape * shape);
     void shapePropertyChanged();
-    virtual void resourceChanged( int key, const QVariant & res );
+    virtual void resourceChanged(int key, const QVariant & res);
 private:
     class Private;
     Private * const d;

@@ -151,7 +151,7 @@ public:
 template<class T> class KoBasicHistogramProducerFactory : public KoHistogramProducerFactory
 {
 public:
-    KoBasicHistogramProducerFactory(const KoID& id, const QString& modelId, const QString& depthId )
+    KoBasicHistogramProducerFactory(const KoID& id, const QString& modelId, const QString& depthId)
             : KoHistogramProducerFactory(id), m_modelId(modelId), m_depthId(depthId) {
     }
     virtual ~KoBasicHistogramProducerFactory() {}
@@ -162,7 +162,7 @@ public:
         return colorSpace->colorModelId().id() == m_modelId || colorSpace->colorDepthId().id() == m_depthId;
     }
     virtual float preferrednessLevelWith(const KoColorSpace* colorSpace) const {
-        return 0.5 * ( (colorSpace->colorModelId().id() == m_modelId) + (colorSpace->colorDepthId().id() == m_depthId) );
+        return 0.5 * ((colorSpace->colorModelId().id() == m_modelId) + (colorSpace->colorDepthId().id() == m_depthId));
     }
 protected:
     QString m_modelId, m_depthId;

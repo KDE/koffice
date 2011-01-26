@@ -31,14 +31,14 @@ class KOWIDGETS_EXPORT KoColorPatch : public QFrame
 {
   Q_OBJECT
 public:
-    explicit KoColorPatch( QWidget *parent );
+    explicit KoColorPatch(QWidget *parent);
     virtual ~KoColorPatch();
 
     /**
      * Set the color of this color patch
      * @param c the new color
      */
-    void setColor( const KoColor &c );
+    void setColor(const KoColor &c);
 
     /**
      * @return current color shown by this patch
@@ -46,7 +46,7 @@ public:
     KoColor color() const;
 
 protected:
-    virtual void mousePressEvent(QMouseEvent *e ); ///< reimplemented from QFrame
+    virtual void mousePressEvent(QMouseEvent *e); ///< reimplemented from QFrame
     virtual void paintEvent(QPaintEvent *e); ///< reimplemented from QFrame
     virtual QSize sizeHint() const; ///< reimplemented from QFrame
 

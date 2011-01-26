@@ -62,7 +62,7 @@ public:
      *            If false only the pixmaps which were added via this object
      *            will be removed
      */
-    void clear( bool all = true );
+    void clear(bool all = true);
 
     /**
      * Looks for a cached pixmap associated with the key in the cache. 
@@ -74,31 +74,31 @@ public:
      * @param size the size you want to have the pixmap
      * @param pm the pixmap
      */
-    bool find( const QString & key, const QSize & size, QPixmap & pm );
+    bool find(const QString & key, const QSize & size, QPixmap & pm);
 
     /**
      * Insert a copy of the pixmap into the cache.
      *
      * The size is taken from the pixmap.
      */
-    bool insert( const QString & key, const QPixmap & pm );
+    bool insert(const QString & key, const QPixmap & pm);
 
     /**
      * Remove all pixmaps associated with key from the cache
      */
-    void remove( const QString & key );
+    void remove(const QString & key);
 
     /**
      * Sets the cache limit to n kilobytes
      */
-    void setCacheLimit( int n );
+    void setCacheLimit(int n);
 
 private:
     KoPAPixmapCache();
-    KoPAPixmapCache( const KoPAPixmapCache & );
-    KoPAPixmapCache operator=( const KoPAPixmapCache & );
+    KoPAPixmapCache(const KoPAPixmapCache &);
+    KoPAPixmapCache operator=(const KoPAPixmapCache &);
 
-    QString generateKey( const QString &key, const QSize & size );
+    QString generateKey(const QString &key, const QSize & size);
     QMap<QString, QList<QSize> > m_keySize;
 };
 

@@ -46,7 +46,7 @@ public:
     explicit KoUniColorChooser(QWidget *parent = 0, bool opacitySlider = false);
     virtual ~KoUniColorChooser() {}
 
-    void changeLayout( LayoutType type );
+    void changeLayout(LayoutType type);
 
       /**
       * @return the current color

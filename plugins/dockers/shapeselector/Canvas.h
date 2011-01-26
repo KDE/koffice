@@ -114,7 +114,7 @@ protected: // event handlers
     virtual void dropEvent(QDropEvent *e);
     virtual bool event(QEvent *e);
     virtual void resizeEvent(QResizeEvent *e);
-    virtual void keyPressEvent( QKeyEvent *e );
+    virtual void keyPressEvent(QKeyEvent *e);
     virtual void keyReleaseEvent(QKeyEvent *e);
 
 private:

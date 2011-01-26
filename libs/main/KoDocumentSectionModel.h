@@ -72,7 +72,7 @@ class KoDocumentSectionModel: public QAbstractItemModel
 {
     public:
 
-    KoDocumentSectionModel( QObject *parent = 0 ): QAbstractItemModel( parent ) { }
+    KoDocumentSectionModel(QObject *parent = 0): QAbstractItemModel(parent) { }
 
     /// Extensions to Qt::ItemDataRole.
     enum ItemDataRole
@@ -126,21 +126,21 @@ class KoDocumentSectionModel: public QAbstractItemModel
         QVariant state;
 
         /// Default constructor. Use if you want to assign the members manually.
-        Property(): isMutable( false ) { }
+        Property(): isMutable(false) { }
 
         /// Constructor for a mutable property.
-        Property( const QString &n, const QIcon &on, const QIcon &off, bool isOn )
-            : name( n ), isMutable( true ), onIcon( on ), offIcon( off ), state( isOn ) { }
+        Property(const QString &n, const QIcon &on, const QIcon &off, bool isOn)
+            : name(n), isMutable(true), onIcon(on), offIcon(off), state(isOn) { }
 
         /// Constructor for a nonmutable property.
-        Property( const QString &n, const QString &s )
-            : name( n ), isMutable( false ), state( s ) { }
+        Property(const QString &n, const QString &s)
+            : name(n), isMutable(false), state(s) { }
     };
 
     /** Return this type for PropertiesRole. */
     typedef QList<Property> PropertyList;
 };
 
-Q_DECLARE_METATYPE( KoDocumentSectionModel::PropertyList )
+Q_DECLARE_METATYPE(KoDocumentSectionModel::PropertyList)
 
 #endif

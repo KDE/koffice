@@ -52,9 +52,9 @@ public:
     virtual QString toolTip() = 0;
     virtual void save(QDomElement &root) = 0;
     /// reimplemented
-    virtual void saveOdf( KoShapeSavingContext & ) const {}
+    virtual void saveOdf(KoShapeSavingContext &) const {}
     /// reimplemented
-    virtual bool loadOdf( const KoXmlElement &, KoShapeLoadingContext &) { return true; }
+    virtual bool loadOdf(const KoXmlElement &, KoShapeLoadingContext &) { return true; }
     /// reimplemented
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 

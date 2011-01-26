@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright ( C ) 2007 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -40,7 +40,7 @@ public:
      * @param page the page to delete
      * @param parent the parent command used for macro commands
      */
-    KoPAPageDeleteCommand( KoPADocument *document, KoPAPageBase *page, QUndoCommand *parent = 0 );
+    KoPAPageDeleteCommand(KoPADocument *document, KoPAPageBase *page, QUndoCommand *parent = 0);
 
     /**
      * Command to delete multiple pages.

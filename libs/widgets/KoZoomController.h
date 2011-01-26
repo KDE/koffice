@@ -141,7 +141,7 @@ private:
     Q_PRIVATE_SLOT(d, void setAvailableSize())
     Q_PRIVATE_SLOT(d, void requestZoomBy(const qreal))
     Q_PRIVATE_SLOT(d, void setZoom(KoZoomMode::Mode, qreal))
-    Q_DISABLE_COPY( KoZoomController )
+    Q_DISABLE_COPY(KoZoomController)
 
     class Private;
     Private * const d;

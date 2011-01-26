@@ -34,23 +34,23 @@ public:
     /**
      * @brief Constructor
      */
-    explicit ConnectionTool( KoCanvasBase * canvas );
+    explicit ConnectionTool(KoCanvasBase * canvas);
     /**
      * @brief Destructor
      */
     ~ConnectionTool();
     
     /// reimplemented from superclass
-    virtual void paint( QPainter &painter, const KoViewConverter &converter );
+    virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
     /// reimplemented from superclass
-    virtual void mousePressEvent( KoPointerEvent *event ) ;
+    virtual void mousePressEvent(KoPointerEvent *event) ;
     /// reimplemented from superclass
-    virtual void mouseMoveEvent( KoPointerEvent *event );
+    virtual void mouseMoveEvent(KoPointerEvent *event);
     /// reimplemented from superclass
-    virtual void mouseReleaseEvent( KoPointerEvent *event );
+    virtual void mouseReleaseEvent(KoPointerEvent *event);
     /// reimplemented from superclass
-    virtual void keyPressEvent( QKeyEvent *event );
+    virtual void keyPressEvent(QKeyEvent *event);
     /// reimplemented from superclass
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
     /// reimplemented from superclass
@@ -68,7 +68,7 @@ public:
      * @param point The point to connect
      * @return The index of the nearest point
      */
-    int getConnectionIndex( KoShape * shape, QPointF point );
+    int getConnectionIndex(KoShape * shape, QPointF point);
     /**
      * @brief Return the square of the absolute distance between p1 and p2 
      *
@@ -76,7 +76,7 @@ public:
      * @param p2 The second point
      * @return The float which is the square of the distance
      */
-    float distanceSquare( QPointF p1, QPointF p2 );
+    float distanceSquare(QPointF p1, QPointF p2);
     /**
      * @brief Return true if the mouse is near to a connection point
      */

@@ -76,7 +76,7 @@ void ArtisticTextShapeConfigWidget::initializeFromShape(ArtisticTextShape *shape
     m_shape = shape;
     m_canvas = canvas;
 
-    if( ! m_shape || ! m_canvas )
+    if ( ! m_shape || ! m_canvas )
         return;
 
     blockChildSignals( true );
@@ -89,9 +89,9 @@ void ArtisticTextShapeConfigWidget::initializeFromShape(ArtisticTextShape *shape
     widget.fontFamily->setCurrentFont( font );
     widget.bold->setChecked( font.bold() );
     widget.italic->setChecked( font.italic() );
-    if( m_shape->textAnchor() == ArtisticTextShape::AnchorStart )
+    if ( m_shape->textAnchor() == ArtisticTextShape::AnchorStart )
         widget.anchorStart->setChecked( true );
-    else if( m_shape->textAnchor() == ArtisticTextShape::AnchorMiddle )
+    else if ( m_shape->textAnchor() == ArtisticTextShape::AnchorMiddle )
         widget.anchorMiddle->setChecked( true );
     else
         widget.anchorEnd->setChecked( true );
@@ -103,7 +103,7 @@ void ArtisticTextShapeConfigWidget::initializeFromShape(ArtisticTextShape *shape
 
 void ArtisticTextShapeConfigWidget::propertyChanged()
 {
-    if( ! m_shape || ! m_canvas )
+    if ( ! m_shape || ! m_canvas )
         return;
 
     QFont font = m_shape->font();
@@ -126,14 +126,14 @@ void ArtisticTextShapeConfigWidget::propertyChanged()
     if ( newAnchor != m_shape->textAnchor() ) {
         cmd = new ChangeTextAnchorCommand( m_shape, newAnchor );
     }
-    else if( newOffset != m_shape->startOffset() ) {
+    else if ( newOffset != m_shape->startOffset() ) {
         cmd = new ChangeTextOffsetCommand(m_shape, m_shape->startOffset(), newOffset);
     }
-    else if( font.key() != m_shape->font().key() ) {
+    else if ( font.key() != m_shape->font().key() ) {
         cmd = new ChangeTextFontCommand(m_shape, font);
     }
 
-    if( cmd )
+    if ( cmd )
         m_canvas->addCommand(cmd);
 }
 

@@ -47,7 +47,7 @@ class KoUpdaterPrivate : public QObject
 public:
 
     KoUpdaterPrivate(KoProgressUpdater *parent, int weight, const QString& name)
-        : QObject( parent )
+        : QObject(parent)
         , m_progress(0)
         , m_weight(weight)
         , m_interrupted(false)
@@ -98,7 +98,7 @@ public slots:
     void interrupt();
 
     /// progress comes from KoUpdater
-    void setProgress( int percent );
+    void setProgress(int percent);
 
 signals:
 

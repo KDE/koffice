@@ -37,14 +37,14 @@ public:
     ~ArtisticTextTool();
 
     /// reimplemented
-    virtual void paint( QPainter &painter, const KoViewConverter &converter );
+    virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
     /// reimplemented
-    virtual void mousePressEvent( KoPointerEvent *event ) ;
+    virtual void mousePressEvent(KoPointerEvent *event) ;
     /// reimplemented
-    virtual void mouseMoveEvent( KoPointerEvent *event );
+    virtual void mouseMoveEvent(KoPointerEvent *event);
     /// reimplemented
-    virtual void mouseReleaseEvent( KoPointerEvent *event );
+    virtual void mouseReleaseEvent(KoPointerEvent *event);
     /// reimplemented
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
     /// reimplemented
@@ -55,11 +55,11 @@ public:
     virtual void keyPressEvent(QKeyEvent *event);
 
 protected:
-    void enableTextCursor( bool enable );
+    void enableTextCursor(bool enable);
     int textCursor() const { return m_textCursor; }
-    void setTextCursor( int textCursor );
-    void removeFromTextCursor( int from, unsigned int count );
-    void addToTextCursor( const QString &str );
+    void setTextCursor(int textCursor);
+    void removeFromTextCursor(int from, unsigned int count);
+    void addToTextCursor(const QString &str);
 
 private slots:
     void attachPath();
@@ -77,7 +77,7 @@ private:
     
 private:
     void updateActions();
-    void setTextCursorInternal( int textCursor );
+    void setTextCursorInternal(int textCursor);
     void createTextCursorShape();
     void updateTextCursorArea() const;
 

@@ -44,10 +44,10 @@ class KoShapeLoadingContext;
  * the object supports. The loading of the frame element is done in the loadOdfFrameElement.
  *
  * @code
- * bool PictureShape::loadOdf( const KoXmlElement & element, KoShapeLoadingContext &context )
+ * bool PictureShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
  * {
- *     loadOdfAttributes( element, context, OdfAllAttributes );
- *     return loadOdfFrame( element, context );
+ *     loadOdfAttributes(element, context, OdfAllAttributes);
+ *     return loadOdfFrame(element, context);
  * }
  * @endcode
  */

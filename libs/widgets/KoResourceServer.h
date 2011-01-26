@@ -134,8 +134,8 @@ public:
                     {
                         m_resourcesByFilename[resource->shortFilename()] = resource;
 
-                        if ( resource->name().isNull() ) {
-                            resource->setName( fname );
+                        if (resource->name().isNull()) {
+                            resource->setName(fname);
                         }
                         m_resourcesByName[resource->name()] = resource;
                         m_resources.append(resource);
@@ -159,17 +159,17 @@ public:
             kWarning(30009) << "Tried to add an invalid resource!";
             return false;
         }
-        if( save && ! resource->save()) {
+        if(save && ! resource->save()) {
             kWarning(30009) << "Could not save resource!";
             return false;
         }
 
-        Q_ASSERT( !resource->filename().isEmpty() || !resource->name().isEmpty() );
-        if ( resource->filename().isEmpty() ) {
-            resource->setFilename( resource->name() );
+        Q_ASSERT(!resource->filename().isEmpty() || !resource->name().isEmpty());
+        if (resource->filename().isEmpty()) {
+            resource->setFilename(resource->name());
         }
-        else if ( resource->name().isEmpty() ) {
-            resource->setName( resource->filename() );
+        else if (resource->name().isEmpty()) {
+            resource->setName(resource->filename());
         }
 
         m_resourcesByFilename[resource->shortFilename()] = resource;
@@ -184,7 +184,7 @@ public:
     /// Remove a resource from Resource Server but not from a file
     /// if deleteResource is true. the resource will be deleted by resource server
     bool removeResourceFromServer(T* resource, bool deleteResource = true){
-        if ( !m_resourcesByFilename.contains( resource->shortFilename() ) ) {
+        if (!m_resourcesByFilename.contains(resource->shortFilename())) {
             return false;
         }
         
@@ -202,14 +202,14 @@ public:
 
     /// Remove a resource from resourceserver and hard disk
     bool removeResource(T* resource) {
-        if ( !m_resourcesByFilename.contains( resource->shortFilename() ) ) {
+        if (!m_resourcesByFilename.contains(resource->shortFilename())) {
             return false;
         }
 
         bool removedFromDisk = true;
 
-        QFile file( resource->filename() );
-        if( ! file.remove() ) {
+        QFile file(resource->filename());
+        if(! file.remove()) {
 
             // Don't do anything, it's probably write protected. In
             // //future, we should store in config which read-only
@@ -255,12 +255,12 @@ public:
      * The base implementation does only load one resource per file, override to implement collections
      * @param filename file name of the resource file to be imported
      */
-    virtual void importResourceFile( const QString & filename ) {
-        QFileInfo fi( filename );
-        if( fi.exists() == false )
+    virtual void importResourceFile(const QString & filename) {
+        QFileInfo fi(filename);
+        if(fi.exists() == false)
             return;
 
-        T* resource = createResource( filename );
+        T* resource = createResource(filename);
         resource->load();
         if(!resource->valid()){
             kWarning(30009) << "Import failed! Resource is not valid";
@@ -311,16 +311,16 @@ public:
      */
     void removeObserver(KoResourceServerObserver<T>* observer)
     {
-        int index = m_observers.indexOf( observer );
-        if( index < 0 )
+        int index = m_observers.indexOf(observer);
+        if(index < 0)
             return;
 
-        m_observers.removeAt( index );
+        m_observers.removeAt(index);
     }
 
-    T* getResourceByFilename( const QString& filename )
+    T* getResourceByFilename(const QString& filename)
     {
-        if ( !m_resourcesByFilename.contains( filename ) ) {
+        if (!m_resourcesByFilename.contains(filename)) {
             return 0;
         }
 
@@ -328,9 +328,9 @@ public:
     }
 
 
-    T* getResourceByName( const QString& name )
+    T* getResourceByName(const QString& name)
     {
-        if ( !m_resourcesByName.contains( name ) ) {
+        if (!m_resourcesByName.contains(name)) {
             return 0;
         }
 
@@ -341,7 +341,7 @@ public:
      * Call after changing the content of a resource;
      * Notifies the connected views.
      */
-    void updateResource( T* resource )
+    void updateResource(T* resource)
     {
         notifyResourceChanged(resource);
     }
@@ -353,14 +353,14 @@ protected:
      * Overide to create more resources from the file.
      * @param filename the filename of the resource or resource collection
      */
-    virtual QList<T*> createResources( const QString & filename )
+    virtual QList<T*> createResources(const QString & filename)
     {
         QList<T*> createdResources;
         createdResources.append(createResource(filename));
         return createdResources;
     }
     
-    virtual T* createResource( const QString & filename ) { return new T(filename); }
+    virtual T* createResource(const QString & filename) { return new T(filename); }
 
     void notifyResourceAdded(T* resource)
     {

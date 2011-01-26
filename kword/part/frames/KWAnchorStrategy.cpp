@@ -209,14 +209,14 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
     }
     case KoTextAnchor::TopOfPage: {
         KWPageTextInfo *pageInfo = dynamic_cast<KWPageTextInfo *>(data->page());
-        if(pageInfo) {
+        if (pageInfo) {
             newPosition.setY(pageInfo->page().offsetInDocument() - containerBoundingRect.y());
         }
         break;
     }
     case KoTextAnchor::BottomOfPage: {
         KWPageTextInfo *pageInfo = dynamic_cast<KWPageTextInfo *>(data->page());
-        if(pageInfo) {
+        if (pageInfo) {
             newPosition.setY(pageInfo->page().offsetInDocument() + pageInfo->page().height()
                             - containerBoundingRect.y() - boundingRect.height());
         }
@@ -231,7 +231,7 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
         if (tfs) {
             foreach (KWFrame *frame, tfs->frames()) { //find main frame for current page
                 KoTextShapeData *tmpData = qobject_cast<KoTextShapeData*>(frame->shape()->userData());
-                if(data != 0) {
+                if (data != 0) {
                     KWPageTextInfo *tmpPageInfo = dynamic_cast<KWPageTextInfo *>(tmpData->page());
                     if (tmpPageInfo != 0) {
                         if (tmpPageInfo->pageNumber() == pageInfo->pageNumber()) {//found main frame for current page
@@ -254,7 +254,7 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
         if (tfs) {
             foreach (KWFrame *frame, tfs->frames()) { //find main frame for current page
                 KoTextShapeData *tmpData = qobject_cast<KoTextShapeData*>(frame->shape()->userData());
-                if(data != 0) {
+                if (data != 0) {
                     KWPageTextInfo *tmpPageInfo = dynamic_cast<KWPageTextInfo *>(tmpData->page());
                     if (tmpPageInfo != 0) {
                         if (tmpPageInfo->pageNumber() == pageInfo->pageNumber()) {//found main frame for current page

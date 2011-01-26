@@ -32,7 +32,7 @@ class KoPAPage;
 class KOPAGEAPP_EXPORT KoPADisplayMasterShapesCommand : public QUndoCommand
 {
 public:
-    KoPADisplayMasterShapesCommand( KoPAPage * page, bool display );
+    KoPADisplayMasterShapesCommand(KoPAPage * page, bool display);
     virtual ~KoPADisplayMasterShapesCommand();
 
     /// redo the command

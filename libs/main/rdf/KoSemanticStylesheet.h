@@ -36,8 +36,8 @@ class KoSemanticStylesheetPrivate;
  * If you are looking to apply a stylesheet you should use the KoRdfSemanticItemViewSite
  * class. For example:
  *
- * KoRdfSemanticItemViewSite vs( SemanticItemPtr, xmlid );
- * vs.applyStylesheet( canvas, StylesheetPtr );
+ * KoRdfSemanticItemViewSite vs(SemanticItemPtr, xmlid);
+ * vs.applyStylesheet(canvas, StylesheetPtr);
  *
  * @author Ben Martin <ben.martin@kogmbh.com>
  * @see KoRdfSemanticItem

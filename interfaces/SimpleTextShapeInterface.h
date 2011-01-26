@@ -36,7 +36,7 @@ class SimpleTextShapeInterface : public KoShape
 public:
 
     /// Sets the text to display
-    virtual void setText( const QString & text ) = 0;
+    virtual void setText(const QString & text) = 0;
 
     /// Returns the text content
     virtual QString text() const = 0;
@@ -48,7 +48,7 @@ public:
      * Note that it is expected that the font has its point size set
      * in postscript points.
      */
-    virtual void setFont( const QFont & font ) = 0;
+    virtual void setFont(const QFont & font) = 0;
 
     /// Returns the font
     virtual QFont font() const = 0;

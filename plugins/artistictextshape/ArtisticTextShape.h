@@ -52,16 +52,16 @@ public:
     /// reimplemented
     virtual void saveOdf(KoShapeSavingContext & context) const;
     /// reimplemented
-    virtual bool loadOdf( const KoXmlElement & element, KoShapeLoadingContext &context );
+    virtual bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context);
     /// reimplemented
     virtual QSizeF size() const;
     /// reimplemented
-    virtual void setSize( const QSizeF &size );
+    virtual void setSize(const QSizeF &size);
     /// reimplemented
     virtual QPainterPath outline() const;
 
     /// Sets the text to display
-    void setText( const QString & text );
+    void setText(const QString & text);
 
     /// Returns the text content
     QString text() const;
@@ -71,16 +71,16 @@ public:
      * Note that it is expected that the font has its point size set
      * in postscript points.
      */
-    void setFont( const QFont & font );
+    void setFont(const QFont & font);
 
     /// Returns the font
     QFont font() const;
 
     /// Attaches this text shape to the given path shape
-    bool putOnPath( KoPathShape * path );
+    bool putOnPath(KoPathShape * path);
 
     /// Puts the text on the given path, the path is expected to be in document coordinates
-    bool putOnPath( const QPainterPath &path );
+    bool putOnPath(const QPainterPath &path);
 
     /// Detaches this text shape from an already attached path shape
     void removeFromPath();
@@ -89,7 +89,7 @@ public:
     bool isOnPath() const;
 
     /// Sets the offset for for text on path
-    void setStartOffset( qreal offset );
+    void setStartOffset(qreal offset);
 
     /// Returns the start offset for text on path
     qreal startOffset() const;
@@ -102,7 +102,7 @@ public:
     qreal baselineOffset() const;
 
     /// Sets the text anchor
-    void setTextAnchor( TextAnchor anchor );
+    void setTextAnchor(TextAnchor anchor);
 
     /// Returns the actual text anchor
     TextAnchor textAnchor() const;
@@ -117,25 +117,25 @@ public:
     KoPathShape * baselineShape() const;
 
     /// Removes a range of text from the given index
-    QString removeRange( unsigned int index, unsigned int nr );
+    QString removeRange(unsigned int index, unsigned int nr);
     
     /// Adds a range of text at the given index
-    void addRange( unsigned int index, const QString &text );
+    void addRange(unsigned int index, const QString &text);
 
     /// Gets the angle of the char with the given index
-    void getCharAngleAt( unsigned int charNum, qreal &angle ) const;
+    void getCharAngleAt(unsigned int charNum, qreal &angle) const;
 
     /// Gets the position of the char with the given index
-    void getCharPositionAt( unsigned int charNum, QPointF &pos ) const;
+    void getCharPositionAt(unsigned int charNum, QPointF &pos) const;
 
     /// Gets the extents of the char with the given index
-    void getCharExtentsAt( unsigned int charNum, QRectF &extents ) const;
+    void getCharExtentsAt(unsigned int charNum, QRectF &extents) const;
 
     /// reimplemented from KoShape
     virtual void shapeChanged(ChangeType type, KoShape * shape);
 
 private:
-    void updateSizeAndPosition( bool global = false );
+    void updateSizeAndPosition(bool global = false);
     void cacheGlyphOutlines();
     bool pathHasChanged() const;
     void createOutline();

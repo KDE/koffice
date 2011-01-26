@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -32,18 +32,18 @@ class KPrPageLayoutDocker : public QDockWidget
 {
     Q_OBJECT
 public:
-    explicit KPrPageLayoutDocker( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+    explicit KPrPageLayoutDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-    void setView( KPrView* view );
+    void setView(KPrView* view);
 
 public slots:
     void slotActivePageChanged();
-    void slotItemPressed( QListWidgetItem * item );
-    void slotCurrentItemChanged( QListWidgetItem * item, QListWidgetItem * previous );
+    void slotItemPressed(QListWidgetItem * item);
+    void slotCurrentItemChanged(QListWidgetItem * item, QListWidgetItem * previous);
 
 private:
-    QListWidgetItem * addLayout( KPrPageLayout * layout );
-    void applyLayout( QListWidgetItem * item );
+    QListWidgetItem * addLayout(KPrPageLayout * layout);
+    void applyLayout(QListWidgetItem * item);
     KPrView* m_view;
     QListWidget * m_layoutsView;
     QMap<KPrPageLayout *, QListWidgetItem *> m_layout2item;

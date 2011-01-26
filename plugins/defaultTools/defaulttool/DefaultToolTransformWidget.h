@@ -30,13 +30,13 @@ class KoInteractionTool;
 class DefaultToolTransformWidget : public QMenu, Ui::DefaultToolTransformWidget {
     Q_OBJECT
 public:
-    explicit DefaultToolTransformWidget( KoInteractionTool* tool, QWidget *parent = 0 );
+    explicit DefaultToolTransformWidget(KoInteractionTool* tool, QWidget *parent = 0);
 
     /// Sets the unit used by the unit aware child widgets
-    void setUnit( const KoUnit &unit );
+    void setUnit(const KoUnit &unit);
 
 private slots:
-    void resourceChanged( int key, const QVariant & res );
+    void resourceChanged(int key, const QVariant & res);
     void rotationChanged();
     void shearXChanged();
     void shearYChanged();

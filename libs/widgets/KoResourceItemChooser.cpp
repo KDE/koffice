@@ -118,21 +118,21 @@ KoResourceItemChooser::~KoResourceItemChooser()
 
 void KoResourceItemChooser::slotButtonClicked( int button )
 {
-    if( button == Button_Import ) {
+    if ( button == Button_Import ) {
         QString extensions = d->model->resourceServerAdapter()->extensions();
         QString filter = extensions.replace(QString(":"), QString(" "));
         QString filename = KFileDialog::getOpenFileName( KUrl(), filter, 0, i18n( "Choose File to Add" ) );
 
         d->model->resourceServerAdapter()->importResourceFile(filename);
     }
-    else if( button == Button_Remove ) {
+    else if ( button == Button_Remove ) {
         QModelIndex index = d->view->currentIndex();
         int row = index.row();
         int column = index.column();
-        if( index.isValid() ) {
+        if ( index.isValid() ) {
 
             KoResource * resource = resourceFromModelIndex(index);
-            if( resource ) {
+            if ( resource ) {
                 d->model->resourceServerAdapter()->removeResource(resource);
             }
         }
@@ -157,11 +157,11 @@ void KoResourceItemChooser::slotButtonClicked( int button )
     else if (button == Button_GhnsUpload) {
 
         QModelIndex index = d->view->currentIndex();
-        if( index.isValid() ) {
+        if ( index.isValid() ) {
 
 
             KoResource * resource = resourceFromModelIndex(index);
-            if( resource ) {
+            if ( resource ) {
                 KNS3::UploadDialog dialog(this);
                 dialog.setUploadFile(KUrl::fromLocalFile(resource->filename()));
                 dialog.setUploadName(resource->name());
@@ -207,7 +207,7 @@ void KoResourceItemChooser::setItemDelegate( QAbstractItemDelegate * delegate )
 KoResource *  KoResourceItemChooser::currentResource()
 {
     QModelIndex index = d->view->currentIndex();
-    if( index.isValid() )
+    if ( index.isValid() )
         return resourceFromModelIndex(index);
 
     return 0;
@@ -216,7 +216,7 @@ KoResource *  KoResourceItemChooser::currentResource()
 void KoResourceItemChooser::setCurrentResource(KoResource* resource)
 {
     QModelIndex index = d->model->indexFromResource(resource);
-    if( !index.isValid() )
+    if ( !index.isValid() )
         return;
 
     d->view->setCurrentIndex(index);
@@ -225,7 +225,7 @@ void KoResourceItemChooser::setCurrentResource(KoResource* resource)
 void KoResourceItemChooser::setCurrentItem(int row, int column)
 {
     QModelIndex index = d->model->index(row, column);
-    if( !index.isValid() )
+    if ( !index.isValid() )
         return;
 
     d->view->setCurrentIndex(index);
@@ -239,12 +239,12 @@ void KoResourceItemChooser::setProxyModel( QAbstractProxyModel* proxyModel )
 
 void KoResourceItemChooser::activated( const QModelIndex & index )
 {
-    if( ! index.isValid() )
+    if ( ! index.isValid() )
         return;
 
     KoResource * resource = resourceFromModelIndex(index);
 
-    if( resource ) {
+    if ( resource ) {
         emit resourceSelected( resource );
     }
     updateRemoveButtonState();
@@ -253,11 +253,11 @@ void KoResourceItemChooser::activated( const QModelIndex & index )
 void KoResourceItemChooser::updateRemoveButtonState()
 {
     QAbstractButton * removeButton = d->buttonGroup->button( Button_Remove );
-    if( ! removeButton )
+    if ( ! removeButton )
         return;
 
     KoResource * resource = currentResource();
-    if( resource ) {
+    if ( resource ) {
         removeButton->setEnabled( resource->removable() );
         return;
     }
@@ -267,11 +267,11 @@ void KoResourceItemChooser::updateRemoveButtonState()
 
 KoResource* KoResourceItemChooser::resourceFromModelIndex(const QModelIndex& index)
 {
-    if(!index.isValid())
+    if (!index.isValid())
         return 0;
 
     const QAbstractProxyModel* proxyModel = dynamic_cast<const QAbstractProxyModel*>(index.model());
-    if(proxyModel) {
+    if (proxyModel) {
         //Get original model index, because proxy models destroy the internalPointer
         QModelIndex originalIndex = proxyModel->mapToSource(index);
         return static_cast<KoResource*>( originalIndex.internalPointer() );

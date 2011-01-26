@@ -27,13 +27,13 @@ class KoPABackgroundToolFactory : public KoToolFactoryBase
 {
     Q_OBJECT
 public:
-    KoPABackgroundToolFactory( QObject *parent );
+    KoPABackgroundToolFactory(QObject *parent);
     ///reimplemented from KoToolFactoryBase
     virtual ~KoPABackgroundToolFactory();
     ///reimplemented from KoToolFactoryBase
-    virtual KoToolBase * createTool( KoCanvasBase *canvas );
+    virtual KoToolBase * createTool(KoCanvasBase *canvas);
     ///reimplemented from KoToolFactoryBase
-    virtual bool canCreateTool( KoCanvasBase *canvas ) const;
+    virtual bool canCreateTool(KoCanvasBase *canvas) const;
 };
 
 #endif //KOPABACKGROUNDTOOLFACTORY_H

@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -27,8 +27,8 @@ public:
     ~KPrAnimations();
 
     int steps();
-    KPrShapeAnimation * take( int pos );
-    int pos( KPrShapeAnimation * animation );
+    KPrShapeAnimation * take(int pos);
+    int pos(KPrShapeAnimation * animation);
 
     bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
     void saveOdf(KoShapeSavingContext &context) const;
@@ -40,7 +40,7 @@ public:
      * the new animation needs to be a with previous
      * should also write out a warning
      */
-    void add( KPrAnimationBase * animation );
+    void add(KPrAnimationBase * animation);
 
     QMap<QPair<KoShape *, KoTextBlockData *>, KPrShapeAnimation *> m_current;
 #endif

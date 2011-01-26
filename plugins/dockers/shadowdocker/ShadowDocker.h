@@ -39,7 +39,7 @@ private slots:
     void selectionChanged();
 
     /// reimplemented
-    virtual void setCanvas( KoCanvasBase *canvas );
+    virtual void setCanvas(KoCanvasBase *canvas);
 
     void shadowChanged();
     void locationChanged(Qt::DockWidgetArea area);

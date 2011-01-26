@@ -83,7 +83,7 @@ public slots: // METHODS
     /**
      * DCOP-action proxy
      */
-//     DCOPRef action( const DCOPCString &name );
+//     DCOPRef action(const DCOPCString &name);
     /**
      * @return list of actions
      */
@@ -142,8 +142,8 @@ public slots: // METHODS
 
 public:
 //     virtual DCOPCStringList functionsDynamic();
-//     virtual bool processDynamic( const DCOPCString &fun, const QByteArray &data,
-//                                  DCOPCString& replyType, QByteArray &replyData );
+//     virtual bool processDynamic(const DCOPCString &fun, const QByteArray &data,
+//                                  DCOPCString& replyType, QByteArray &replyData);
 
 protected:
     KoDocument * m_pDoc;

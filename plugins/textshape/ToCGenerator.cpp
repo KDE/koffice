@@ -78,7 +78,7 @@ void ToCGenerator::generate()
     // Add the title
     cursor.insertText("Table of Contents"); // TODO i18n
     KoParagraphStyle *titleStyle = styleManager->paragraphStyle("Contents Heading"); // TODO don't hardcode this!
-    if(titleStyle) {
+    if (titleStyle) {
         QTextBlock block = cursor.block();
         titleStyle->applyStyle(block);
     }

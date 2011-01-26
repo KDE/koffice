@@ -64,12 +64,12 @@ public:
      * @param document the document of this view
      * @param parent the parent widget
      */
-    explicit KoPAView( KoPADocument * document, QWidget * parent = 0 );
+    explicit KoPAView(KoPADocument * document, QWidget * parent = 0);
     virtual ~KoPAView();
 
     KoZoomController* zoomController() const;
 
-    void updateReadWrite( bool readwrite );
+    void updateReadWrite(bool readwrite);
 
     KoRuler *horizontalRuler();
     KoRuler *verticalRuler();
@@ -82,9 +82,9 @@ public:
     KoPAPageBase* activePage() const;
 
     /// Set page shown in the canvas to @p page
-    void setActivePage( KoPAPageBase * page );
+    void setActivePage(KoPAPageBase * page);
 
-    void navigatePage( KoPageApp::PageNavigation pageNavigation );
+    void navigatePage(KoPageApp::PageNavigation pageNavigation);
 
     /// @return the shape manager used for this view
     KoShapeManager* shapeManager() const;
@@ -100,12 +100,12 @@ public:
      * @param actions which should be enabled/disabled
      * @param enable new state of the actions
      */
-    void setActionEnabled( int actions, bool enable );
+    void setActionEnabled(int actions, bool enable);
 
     /**
      * Set the active page and updates the UI
      */
-    void doUpdateActivePage( KoPAPageBase * page );
+    void doUpdateActivePage(KoPAPageBase * page);
 
     /**
      * Paste the page if everything is ok
@@ -136,8 +136,8 @@ public:
      *
      * @returns whether the image was successfully saved
      */
-    bool exportPageThumbnail( KoPAPageBase * page, const KUrl& url, const QSize& size = QSize( 512, 512 ),
-                              const char * format = 0, int quality = -1 );
+    bool exportPageThumbnail(KoPAPageBase * page, const KUrl& url, const QSize& size = QSize(512, 512),
+                              const char * format = 0, int quality = -1);
 
     /// Update page navigation actions
     void updatePageNavigationActions();
@@ -161,14 +161,14 @@ protected:
     /// Called when receiving a PartActivateEvent
     virtual void partActivateEvent(KParts::PartActivateEvent* event);
 
-    bool isMasterUsed( KoPAPageBase * page );
+    bool isMasterUsed(KoPAPageBase * page);
     void editPaste();
 
 protected slots:
 
     void viewSnapToGrid(bool snap);
     void viewGuides(bool show);
-    void slotZoomChanged( KoZoomMode::Mode mode, qreal zoom );
+    void slotZoomChanged(KoZoomMode::Mode mode, qreal zoom);
 
     void editDeleteSelection();
     void editSelectAll();
@@ -179,7 +179,7 @@ protected slots:
     void formatPageLayout();
 
     /// Change the current view mode to work on master pages
-    void setMasterMode( bool master );
+    void setMasterMode(bool master);
 
     // update the rulers
     void pageOffsetChanged();
@@ -213,14 +213,14 @@ protected slots:
      *
      * @param document The current document
      */
-    void findDocumentSetNext( QTextDocument * document );
+    void findDocumentSetNext(QTextDocument * document);
 
     /**
      * Set the previous document that should be used in find
      *
      * @param document The current document
      */
-    void findDocumentSetPrevious( QTextDocument * document );
+    void findDocumentSetPrevious(QTextDocument * document);
 
     /**
      * Re-initialize the document structure docker after active document in this

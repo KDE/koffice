@@ -49,7 +49,7 @@ namespace Scripting
 * if fs:
 *     print fs.name()
 * # Iterate over all framesets.
-* for i in range( KWord.frameSetCount() ):
+* for i in range(KWord.frameSetCount()):
 *     fs = KWord.frameSet(i)
 *     # iterate over all frames of the frameset.
 *     for k in fs.frameCount():

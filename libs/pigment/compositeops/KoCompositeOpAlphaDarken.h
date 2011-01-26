@@ -86,7 +86,7 @@ public:
                 }
 
                 // not transparent
-                if (srcAlpha != NATIVE_OPACITY_TRANSPARENT )
+                if (srcAlpha != NATIVE_OPACITY_TRANSPARENT)
                 {
                     if (srcAlpha >= dstAlpha) {
                       if (allChannelFlags) {

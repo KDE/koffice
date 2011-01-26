@@ -155,8 +155,8 @@ public slots:
     /** Insert and return a new \a TextTable object at the current cursor position. */
     QObject* insertTable(int rows, int columns);
 
-    //void insertFragment ( const QTextDocumentFragment & fragment )
-    //void insertImage ( const QTextImageFormat & format, QTextFrameFormat::Position alignment )
+    //void insertFragment (const QTextDocumentFragment & fragment)
+    //void insertImage (const QTextImageFormat & format, QTextFrameFormat::Position alignment)
 
 private:
     QTextCursor m_cursor;

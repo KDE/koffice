@@ -216,7 +216,7 @@ KoUniColorChooser::KoUniColorChooser(QWidget *parent, bool opacitySlider)
     m_bIn->setFocusPolicy( Qt::ClickFocus );
     m_bIn->setToolTip( i18n( "Blue to yellow" ) );
 
-    if(m_showOpacitySlider)
+    if (m_showOpacitySlider)
     {
         m_opacityLabel = new QLabel(i18n( "Opacity:" ), this);
 
@@ -330,7 +330,7 @@ void KoUniColorChooser::doComplexLayout()
     mGrid->addWidget(m_aIn, 6, 8, Qt::AlignTop);
     mGrid->addWidget(m_bIn, 7, 8, Qt::AlignTop);
 
-    if(m_showOpacitySlider)
+    if (m_showOpacitySlider)
     {
         mGrid->addItem( new QSpacerItem( 4, 4, QSizePolicy::Fixed, QSizePolicy::Fixed), 8, 5 );
 
@@ -402,7 +402,7 @@ void KoUniColorChooser::doSimpleLayout()
     m_aIn->setVisible( false );
     m_bIn->setVisible( false );
 
-    if(m_showOpacitySlider)
+    if (m_showOpacitySlider)
     {
         m_opacityLabel->setVisible( false );
         m_opacityIn->setVisible( false );
@@ -412,7 +412,7 @@ void KoUniColorChooser::doSimpleLayout()
 
     layout->setSpacing( 5 );
 
-    if( m_showOpacitySlider )
+    if ( m_showOpacitySlider )
     {
         m_opacitySlider->setFixedSize( 137, 25 );
         m_opacitySlider->setToolTip( i18n( "Opacity" ) );
@@ -602,7 +602,7 @@ void KoUniColorChooser::slotOpacityChanged(int o)
 
 void KoUniColorChooser::slotHSelected(bool s)
 {
-    if(s)
+    if (s)
     {
         m_activeChannel = CHANNEL_H;
         updateSelectorsR();
@@ -611,7 +611,7 @@ void KoUniColorChooser::slotHSelected(bool s)
 
 void KoUniColorChooser::slotSSelected(bool s)
 {
-    if(s)
+    if (s)
     {
         m_activeChannel = CHANNEL_S;
         updateSelectorsG();
@@ -620,7 +620,7 @@ void KoUniColorChooser::slotSSelected(bool s)
 
 void KoUniColorChooser::slotVSelected(bool s)
 {
-    if(s)
+    if (s)
     {
         m_activeChannel = CHANNEL_V;
         updateSelectorsB();
@@ -629,7 +629,7 @@ void KoUniColorChooser::slotVSelected(bool s)
 
 void KoUniColorChooser::slotRSelected(bool s)
 {
-    if(s)
+    if (s)
     {
         m_activeChannel = CHANNEL_R;
         updateSelectorsR();
@@ -638,7 +638,7 @@ void KoUniColorChooser::slotRSelected(bool s)
 
 void KoUniColorChooser::slotGSelected(bool s)
 {
-    if(s)
+    if (s)
     {
         m_activeChannel = CHANNEL_G;
         updateSelectorsG();
@@ -647,7 +647,7 @@ void KoUniColorChooser::slotGSelected(bool s)
 
 void KoUniColorChooser::slotBSelected(bool s)
 {
-    if(s)
+    if (s)
     {
         m_activeChannel = CHANNEL_B;
         updateSelectorsB();
@@ -850,7 +850,7 @@ void KoUniColorChooser::updateValues()
     m_GIn->setValue(tmpColor.data()[1]);
     m_BIn->setValue(tmpColor.data()[0]);
 
-    if(m_showOpacitySlider)
+    if (m_showOpacitySlider)
     {
         m_opacitySlider->blockSignals(true);
         m_opacityIn->blockSignals(true);
@@ -924,20 +924,20 @@ void KoUniColorChooser::RGBtoHSV(int R, int G, int B, int *H, int *S, int *V)
   unsigned char maxValue = 0; // r = 0, g = 1, b = 2
 
   // find maximum and minimum RGB values
-  if(static_cast<unsigned int>(G) > max)
+  if (static_cast<unsigned int>(G) > max)
   {
     max = G;
     maxValue = 1;
   }
-  if(static_cast<unsigned int>(B) > max)
+  if (static_cast<unsigned int>(B) > max)
   {
     max = B;
     maxValue = 2;
   }
 
-  if(static_cast<unsigned int>(G) < min)
+  if (static_cast<unsigned int>(G) < min)
     min = G;
-  if(static_cast<unsigned int>(B) < min )
+  if (static_cast<unsigned int>(B) < min )
     min = B;
 
   int delta = max - min;
@@ -945,26 +945,26 @@ void KoUniColorChooser::RGBtoHSV(int R, int G, int B, int *H, int *S, int *V)
   *S = max ? (510 * delta + max) / ( 2 * max) : 0; // saturation
 
   // calc hue
-  if(*S == 0)
+  if (*S == 0)
     *H = -1; // undefined hue
   else
   {
     switch(maxValue)
     {
     case 0:  // red
-      if(G >= B)
+      if (G >= B)
         *H = (120 * (G - B) + delta) / (2 * delta);
       else
         *H = (120 * (G - B + delta) + delta) / (2 * delta) + 300;
       break;
     case 1:  // green
-      if(B > R)
+      if (B > R)
         *H = 120 + (120 * (B - R) + delta) / (2 * delta);
       else
         *H = 60 + (120 * (B - R + delta) + delta) / (2 * delta);
       break;
     case 2:  // blue
-      if(R > G)
+      if (R > G)
         *H = 240 + (120 * (R - G) + delta) / (2 * delta);
       else
         *H = 180 + (120 * (R - G + delta) + delta) / (2 * delta);
@@ -977,9 +977,9 @@ void KoUniColorChooser::HSVtoRGB(int H, int S, int V, quint8 *R, quint8 *G, quin
 {
   *R = *G = *B = V;
 
-  if(S != 0 && H != -1) // chromatic
+  if (S != 0 && H != -1) // chromatic
   {
-    if(H >= 360) // angle > 360
+    if (H >= 360) // angle > 360
       H %= 360;
 
     unsigned int f = H % 60;
@@ -987,7 +987,7 @@ void KoUniColorChooser::HSVtoRGB(int H, int S, int V, quint8 *R, quint8 *G, quin
     unsigned int p = static_cast<unsigned int>(2*V*(255-S)+255)/510;
     unsigned int q, t;
 
-    if(H & 1)
+    if (H & 1)
     {
       q = static_cast<unsigned int>(2 * V * (15300 - S * f) + 15300) / 30600;
       switch(H)

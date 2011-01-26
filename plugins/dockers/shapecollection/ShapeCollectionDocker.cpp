@@ -194,7 +194,7 @@ ShapeCollectionDocker::ShapeCollectionDocker(QWidget* parent)
     connect(m_closeCollectionButton, SIGNAL(clicked()),
             this, SLOT(removeCurrentCollection()));
 
-    if(! KGlobal::activeComponent().dirs()->resourceDirs("app_shape_collections").isEmpty())
+    if (! KGlobal::activeComponent().dirs()->resourceDirs("app_shape_collections").isEmpty())
     {
         buildAddCollectionMenu();
     }
@@ -246,11 +246,11 @@ void ShapeCollectionDocker::loadDefaultShapes()
             temp.toolTip = shapeTemplate.toolTip;
             temp.icon = KIcon(shapeTemplate.icon);
             temp.properties = shapeTemplate.properties;
-            if(shapeTemplate.family == "funny")
+            if (shapeTemplate.family == "funny")
                 funnyList.append(temp);
-            else if(shapeTemplate.family == "arrow")
+            else if (shapeTemplate.family == "arrow")
                 arrowList.append(temp);
-            else if(shapeTemplate.family == "geometric")
+            else if (shapeTemplate.family == "geometric")
                 geometricList.append(temp);
             else
                 defaultList.append(temp);
@@ -266,23 +266,23 @@ void ShapeCollectionDocker::loadDefaultShapes()
             }
         }
 
-        if(!oneAdded) {
+        if (!oneAdded) {
             KoCollectionItem temp;
             temp.id = factory->id();
             temp.name = factory->name();
             temp.toolTip = factory->toolTip();
             temp.icon = KIcon(factory->icon());
             temp.properties = 0;
-            if(factory->family() == "funny")
+            if (factory->family() == "funny")
                 funnyList.append(temp);
-            else if(factory->family() == "arrow")
+            else if (factory->family() == "arrow")
                 arrowList.append(temp);
-            else if(factory->family() == "geometric")
+            else if (factory->family() == "geometric")
                 geometricList.append(temp);
             else
                 defaultList.append(temp);
 
-            if(quickShapes.contains(temp.id)) {
+            if (quickShapes.contains(temp.id)) {
                 quicklist.append(temp);
                 quickCount++;
             }
@@ -323,12 +323,12 @@ void ShapeCollectionDocker::loadDefaultShapes()
 void ShapeCollectionDocker::activateShapeCreationToolFromQuick(const QModelIndex& index)
 {
     m_collectionView->setFont(m_quickView->font());
-    if(!index.isValid())
+    if (!index.isValid())
         return;
 
     KoCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
 
-    if(canvasController) {
+    if (canvasController) {
         KoCreateShapesTool* tool = KoToolManager::instance()->shapeCreatorTool(canvasController->canvas());
         QString id = m_quickView->model()->data(index, Qt::UserRole).toString();
         KoProperties* properties = static_cast<CollectionItemModel*>(m_quickView->model())->properties(index);
@@ -342,12 +342,12 @@ void ShapeCollectionDocker::activateShapeCreationToolFromQuick(const QModelIndex
 
 void ShapeCollectionDocker::activateShapeCreationTool(const QModelIndex& index)
 {
-    if(!index.isValid())
+    if (!index.isValid())
         return;
 
     KoCanvasController* canvasController = KoToolManager::instance()->activeCanvasController();
 
-    if(canvasController) {
+    if (canvasController) {
         KoCreateShapesTool* tool = KoToolManager::instance()->shapeCreatorTool(canvasController->canvas());
         QString id = m_collectionView->model()->data(index, Qt::UserRole).toString();
         KoProperties* properties = static_cast<CollectionItemModel*>(m_collectionView->model())->properties(index);
@@ -363,7 +363,7 @@ void ShapeCollectionDocker::activateShapeCollection(QListWidgetItem *item)
 {
     QString id = item->data(Qt::UserRole).toString();
 
-    if(m_modelMap.contains(id)) {
+    if (m_modelMap.contains(id)) {
         m_collectionView->setModel(m_modelMap[id]);
     }
     else
@@ -375,7 +375,7 @@ void ShapeCollectionDocker::activateShapeCollection(QListWidgetItem *item)
 bool ShapeCollectionDocker::addCollection(const QString& id, const QString& title,
                                                CollectionItemModel* model)
 {
-    if(m_modelMap.contains(id))
+    if (m_modelMap.contains(id))
         return false;
 
     m_modelMap.insert(id, model);
@@ -394,7 +394,7 @@ void ShapeCollectionDocker::buildAddCollectionMenu()
     foreach(const QString & dirName, dirs) {
         QDir dir(dirName);
 
-        if(!dir.exists())
+        if (!dir.exists())
             continue;
 
         QStringList collectionDirs = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
@@ -409,7 +409,7 @@ void ShapeCollectionDocker::scanCollectionDir(const QString& path, QMenu* menu)
 {
     QDir dir(path);
 
-    if(!dir.exists(".directory"))
+    if (!dir.exists(".directory"))
         return;
 
     KDesktopFile directory(dir.absoluteFilePath(".directory"));
@@ -419,7 +419,7 @@ void ShapeCollectionDocker::scanCollectionDir(const QString& path, QMenu* menu)
     QString type = dg.readEntry("X-KDE-DirType");
     //kDebug() << name << type;
 
-    if(type == "subdir") {
+    if (type == "subdir") {
         QMenu* submenu = menu->addMenu(QIcon(dir.absoluteFilePath(icon)), name);
         QStringList collectionDirs = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 
@@ -446,14 +446,14 @@ void ShapeCollectionDocker::loadCollection()
     QString type = path.left(index);
     path = path.mid(index + 1);
 
-    if(m_modelMap.contains(path))
+    if (m_modelMap.contains(path))
         return;
 
     CollectionItemModel* model = new CollectionItemModel(this);
     addCollection(path, action->iconText(), model);
     action->setEnabled(false);
 
-    if(type == "odg-collection")
+    if (type == "odg-collection")
     {
         OdfCollectionLoader* loader = new OdfCollectionLoader(path, this);
         connect(loader, SIGNAL(loadingFailed(const QString&)),
@@ -469,7 +469,7 @@ void ShapeCollectionDocker::onLoadingFailed(const QString& reason)
 {
     OdfCollectionLoader* loader = qobject_cast<OdfCollectionLoader*>(sender());
 
-    if(loader)
+    if (loader)
     {
         removeCollection(loader->collectionPath());
         QList<KoShape*> shapeList = loader->shapeList();
@@ -484,7 +484,7 @@ void ShapeCollectionDocker::onLoadingFinished()
 {
     OdfCollectionLoader* loader = qobject_cast<OdfCollectionLoader*>(sender());
 
-    if(!loader)
+    if (!loader)
     {
         kWarning(31000) << "Not called by a OdfCollectionLoader!";
         return;
@@ -536,7 +536,7 @@ void ShapeCollectionDocker::removeCollection(const QString& id)
 {
 //TODO    m_collectionsCombo->removeItem(m_collectionsCombo->findData(id));
 
-    if(m_modelMap.contains(id))
+    if (m_modelMap.contains(id))
     {
         CollectionItemModel* model = m_modelMap[id];
         QList<KoCollectionItem> list = model->shapeTemplateList();

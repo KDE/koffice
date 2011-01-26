@@ -40,7 +40,7 @@
  * quint8 pixelsSrc[ nbpixels * cs->pixelSize() ];
  * quint8 pixelsDst[ nbpixels * cs->pixelSize() ];
  * KoColorTransformation* transfo = cs->createInvertTransformation();
- * transfo->transform( pixelsSrc, pixelsDst, nbpixels );
+ * transfo->transform(pixelsSrc, pixelsDst, nbpixels);
  * @endcode
  */
 class PIGMENTCMS_EXPORT KoColorTransformation

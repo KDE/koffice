@@ -65,7 +65,7 @@ public:
     void currentLayerChanged(const KoShapeLayer *layer);
     void switchToolTemporaryRequested(const QString &id);
     CanvasData *createCanvasData(KoCanvasController *controller, KoInputDevice device);
-    bool toolCanBeUsed( const QString &activationShapeId);
+    bool toolCanBeUsed(const QString &activationShapeId);
 
     /**
      * Request a switch from to the param input device.

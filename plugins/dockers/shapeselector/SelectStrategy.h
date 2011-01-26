@@ -44,7 +44,7 @@ public:
     SelectStrategy(Canvas *canvas, KoShape *clickedShape, KoPointerEvent &event);
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
-    virtual void finishInteraction( Qt::KeyboardModifiers modifiers );
+    virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
 
 signals:
     void itemSelected();

@@ -112,11 +112,11 @@ void KoPathSegmentChangeStrategy::handleMouseMove(const QPointF &mouseLocation, 
     }
 
     m_path->update();
-    if(m_segment.first()->activeControlPoint2()) {
+    if (m_segment.first()->activeControlPoint2()) {
         KoPathControlPointMoveCommand cmd(m_pointData1, move2, KoPathPoint::ControlPoint2);
         cmd.redo();
     }
-    if(m_segment.second()->activeControlPoint1()) {
+    if (m_segment.second()->activeControlPoint1()) {
         KoPathControlPointMoveCommand cmd(m_pointData2, move1, KoPathPoint::ControlPoint1);
         cmd.redo();
     }

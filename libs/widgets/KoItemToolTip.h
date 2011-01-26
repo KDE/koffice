@@ -44,7 +44,7 @@ class KoItemToolTip: public QFrame
     public:
         KoItemToolTip();
         virtual ~KoItemToolTip();
-        void showTip( QWidget *widget, const QPoint &pos, const QStyleOptionViewItem &option, const QModelIndex &index );
+        void showTip(QWidget *widget, const QPoint &pos, const QStyleOptionViewItem &option, const QModelIndex &index);
 
     protected:
 
@@ -52,39 +52,39 @@ class KoItemToolTip: public QFrame
          * Re-implement this to provide the actual tooltip contents.
          * For instance:
          * @code
-         *    QTextDocument *doc = new QTextDocument( this );
+         *    QTextDocument *doc = new QTextDocument(this);
          *
-         *     QImage thumb = index.data( KoResourceModel::LargeThumbnailRole ).value<QImage>();
-         *     doc->addResource( QTextDocument::ImageResource, QUrl( "data:thumbnail" ), thumb );
+         *     QImage thumb = index.data(KoResourceModel::LargeThumbnailRole).value<QImage>();
+         *     doc->addResource(QTextDocument::ImageResource, QUrl("data:thumbnail"), thumb);
          *
-         *     QString name = index.data( Qt::DisplayRole ).toString();
+         *     QString name = index.data(Qt::DisplayRole).toString();
          *
-         *     const QString image = QString( "<image src=\"data:thumbnail\">" );
-         *     const QString body = QString( "<h3 align=\"center\">%1</h3>" ).arg( name ) + image;
-         *     const QString html = QString( "<html><body>%1</body></html>" ).arg( body );
+         *     const QString image = QString("<image src=\"data:thumbnail\">");
+         *     const QString body = QString("<h3 align=\"center\">%1</h3>").arg(name) + image;
+         *     const QString html = QString("<html><body>%1</body></html>").arg(body);
          *
-         *     doc->setHtml( html );
-         *     doc->setTextWidth( qMin( doc->size().width(), 500.0 ) );
+         *     doc->setHtml(html);
+         *     doc->setTextWidth(qMin(doc->size().width(), 500.0));
          *
          *     return doc;
          * @endcode
          */
-        virtual QTextDocument *createDocument( const QModelIndex &index ) = 0;
+        virtual QTextDocument *createDocument(const QModelIndex &index) = 0;
 
     private:
         typedef QFrame super;
         class Private;
         Private* const d;
 
-        void updatePosition( QWidget *widget, const QPoint &pos, const QStyleOptionViewItem &option );
+        void updatePosition(QWidget *widget, const QPoint &pos, const QStyleOptionViewItem &option);
 
     public:
         virtual QSize sizeHint() const;
 
     protected:
-        virtual void paintEvent( QPaintEvent *e );
-        virtual void timerEvent( QTimerEvent *e );
-        virtual bool eventFilter( QObject *object, QEvent *event );
+        virtual void paintEvent(QPaintEvent *e);
+        virtual void timerEvent(QTimerEvent *e);
+        virtual bool eventFilter(QObject *object, QEvent *event);
 };
 
 #endif

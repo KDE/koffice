@@ -30,12 +30,12 @@ class KoResourceModel;
 class KoResourceItemView : public QTableView
 {
 public:
-    KoResourceItemView( QWidget * parent = 0 );
+    KoResourceItemView(QWidget * parent = 0);
     virtual ~KoResourceItemView() {}
     /// reimplemented
-    virtual void resizeEvent ( QResizeEvent * event );
+    virtual void resizeEvent (QResizeEvent * event);
     /// reimplemented
-    virtual bool viewportEvent( QEvent * event );
+    virtual bool viewportEvent(QEvent * event);
 private:
     KoIconToolTip m_tip;
 };

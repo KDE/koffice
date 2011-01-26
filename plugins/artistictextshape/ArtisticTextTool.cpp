@@ -153,7 +153,7 @@ class ArtisticTextTool::RemoveTextRangeCommand : public QUndoCommand
                     m_tool->m_currentShape = m_shape;
                     m_tool->enableTextCursor( true );
                 }
-                if( m_cursor > m_from )
+                if ( m_cursor > m_from )
                     m_tool->setTextCursorInternal( m_from );
             }
             m_text = m_shape->removeRange( m_from, m_count );
@@ -236,7 +236,7 @@ void ArtisticTextTool::mousePressEvent( KoPointerEvent *event )
     foreach( KoShape *shape, shapes ) 
     {
         hit = dynamic_cast<ArtisticTextShape*>( shape );
-        if( hit ) {
+        if ( hit ) {
             if ( hit != m_currentShape ) {
                 selection->deselectAll();
                 enableTextCursor( false );
@@ -291,7 +291,7 @@ void ArtisticTextTool::mouseMoveEvent( KoPointerEvent *event )
             break;
         }
     }
-    if( m_tmpPath )
+    if ( m_tmpPath )
         useCursor( QCursor( Qt::PointingHandCursor ) );
     else if ( textShape )
         useCursor( QCursor( Qt::IBeamCursor ) );
@@ -313,7 +313,7 @@ void ArtisticTextTool::keyPressEvent(QKeyEvent *event)
         switch(event->key())
         {
         case Qt::Key_Delete:
-            if( textCursor() >= 0 && textCursor() < m_currentShape->text().length())
+            if ( textCursor() >= 0 && textCursor() < m_currentShape->text().length())
                 removeFromTextCursor( textCursor(), 1 );
             break;    
         case Qt::Key_Backspace:
@@ -348,10 +348,10 @@ void ArtisticTextTool::activate(ToolActivation toolActivation, const QSet<KoShap
     Q_UNUSED(toolActivation);
     foreach (KoShape *shape, shapes) {
         m_currentShape = dynamic_cast<ArtisticTextShape*>( shape );
-        if(m_currentShape)
+        if (m_currentShape)
             break;
     }
-    if( m_currentShape == 0 ) 
+    if ( m_currentShape == 0 )
     {
         // none found
         emit done();
@@ -380,7 +380,7 @@ void ArtisticTextTool::blinkCursor()
 void ArtisticTextTool::deactivate()
 {
     if ( m_currentShape ) {
-        if( m_currentShape->text().isEmpty() ) {
+        if ( m_currentShape->text().isEmpty() ) {
             canvas()->addCommand( canvas()->shapeController()->removeShape( m_currentShape ) );
         }
         enableTextCursor( false );
@@ -392,7 +392,7 @@ void ArtisticTextTool::deactivate()
 void ArtisticTextTool::updateActions()
 {
     m_attachPath->setEnabled( m_path != 0 );
-    if( m_currentShape )
+    if ( m_currentShape )
     {
         m_detachPath->setEnabled( m_currentShape->isOnPath() );
         m_convertText->setEnabled( true );
@@ -404,7 +404,7 @@ void ArtisticTextTool::updateActions()
 
 void ArtisticTextTool::attachPath()
 {
-    if( m_path && m_currentShape ) {
+    if ( m_path && m_currentShape ) {
         m_blinkingCursor.stop();
         m_showCursor = false;
         updateTextCursorArea();
@@ -416,7 +416,7 @@ void ArtisticTextTool::attachPath()
 
 void ArtisticTextTool::detachPath()
 {
-    if( m_currentShape && m_currentShape->isOnPath() )
+    if ( m_currentShape && m_currentShape->isOnPath() )
     {
         canvas()->addCommand( new DetachTextFromPathCommand( m_currentShape ) );
         updateActions();
@@ -425,7 +425,7 @@ void ArtisticTextTool::detachPath()
 
 void ArtisticTextTool::convertText()
 {
-    if( ! m_currentShape )
+    if ( ! m_currentShape )
         return;
 
     KoPathShape * path = KoPathShape::createShapeFromPainterPath( m_currentShape->outline() );
@@ -490,7 +490,7 @@ QMap<QString, QWidget *> ArtisticTextTool::createOptionWidgets()
 void ArtisticTextTool::enableTextCursor( bool enable )
 {
     if ( enable ) {
-        if( m_currentShape )
+        if ( m_currentShape )
             setTextCursorInternal( m_currentShape->text().length() );
         connect( &m_blinkingCursor, SIGNAL(timeout()), this, SLOT(blinkCursor()) );
         m_blinkingCursor.start( 500 );
@@ -512,7 +512,7 @@ void ArtisticTextTool::setTextCursor( int textCursor )
 
 void ArtisticTextTool::updateTextCursorArea() const
 {
-    if( ! m_currentShape || m_textCursor < 0 )
+    if ( ! m_currentShape || m_textCursor < 0 )
         return;
 
     QRectF bbox = cursorTransform().mapRect( m_textCursorShape.boundingRect() );

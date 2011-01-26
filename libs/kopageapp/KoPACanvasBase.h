@@ -33,7 +33,7 @@ class KOPAGEAPP_EXPORT KoPACanvasBase : public KoCanvasBase
 {
 
 public:
-    explicit KoPACanvasBase( KoPADocument * doc );
+    explicit KoPACanvasBase(KoPADocument * doc);
     virtual ~KoPACanvasBase();
 
     /// set the viewbase on the canvas; this needs to be called before the canvas can be used.
@@ -46,11 +46,11 @@ public:
     KoPADocument* document() const;
 
     /// reimplemented method
-    virtual void gridSize( qreal *horizontal, qreal *vertical ) const;
+    virtual void gridSize(qreal *horizontal, qreal *vertical) const;
     /// reimplemented method
     virtual bool snapToGrid() const;
     /// reimplemented method
-    virtual void addCommand( QUndoCommand *command );
+    virtual void addCommand(QUndoCommand *command);
     /// reimplemented method
     virtual KoShapeManager * shapeManager() const;
     KoShapeManager * masterShapeManager() const;

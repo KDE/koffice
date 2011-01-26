@@ -46,7 +46,7 @@ private slots:
     void propertyChanged();
 
 private:
-    void blockChildSignals( bool block );
+    void blockChildSignals(bool block);
     Ui::ArtisticTextShapeConfigWidget widget;
     ArtisticTextShape * m_shape;
     KoCanvasBase * m_canvas;

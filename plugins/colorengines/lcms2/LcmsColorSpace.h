@@ -145,8 +145,8 @@ protected:
 
     virtual ~LcmsColorSpace() {
         /*            cmsCloseProfile(d->lastFromRGB);
-                      cmsDeleteTransform( d->defaultFromRGB );
-                      cmsDeleteTransform( d->defaultToRGB );*/
+                      cmsDeleteTransform(d->defaultFromRGB);
+                      cmsDeleteTransform(d->defaultToRGB);*/
         delete d->colorProfile;
         delete[] d->qcolordata;
         delete d;
@@ -255,7 +255,7 @@ public:
         if (!d->profile) return 0;
 
         cmsToneCurve* transferFunctions[3];
-        transferFunctions[0] = cmsBuildTabulatedToneCurve16( 0, 256, transferValues);
+        transferFunctions[0] = cmsBuildTabulatedToneCurve16(0, 256, transferValues);
         transferFunctions[1] = cmsBuildGamma(0, 1.0);
         transferFunctions[2] = cmsBuildGamma(0, 1.0);
 
@@ -334,7 +334,7 @@ public:
         cmsToneCurve ** transferFunctions = new cmsToneCurve*[ this->colorChannelCount()];
 
         for (uint ch = 0; ch < this->colorChannelCount(); ch++) {
-            transferFunctions[ch] = cmsBuildTabulatedToneCurve16( 0, 256, transferValues[ch]);
+            transferFunctions[ch] = cmsBuildTabulatedToneCurve16(0, 256, transferValues[ch]);
         }
 
         KoLcmsColorTransformation *adj = new KoLcmsColorTransformation(this);

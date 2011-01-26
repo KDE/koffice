@@ -42,8 +42,8 @@ public:
      *         with the same \p id the function will always return the same value.
      *
      * @code
-     *  KoUniqueNumberForIdServer::instance()->numberForId( "rgb" ) == KoUniqueNumberForIdServer::instance()->numberForId( "rgb" );
-     * KoUniqueNumberForIdServer::instance()->numberForId( "rgb" ) != KoUniqueNumberForIdServer::instance()->numberForId( "cmyk" );
+     *  KoUniqueNumberForIdServer::instance()->numberForId("rgb") == KoUniqueNumberForIdServer::instance()->numberForId("rgb");
+     * KoUniqueNumberForIdServer::instance()->numberForId("rgb") != KoUniqueNumberForIdServer::instance()->numberForId("cmyk");
      * @endcode
      */
     quint32 numberForId(const QString&);

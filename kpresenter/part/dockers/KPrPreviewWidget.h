@@ -37,7 +37,7 @@ class KPRESENTER_EXPORT KPrPreviewWidget : public QWidget
 {
     Q_OBJECT
 public:
-    KPrPreviewWidget( QWidget* parent = 0 );
+    KPrPreviewWidget(QWidget* parent = 0);
     ~KPrPreviewWidget();
 
     /**
@@ -47,7 +47,7 @@ public:
      * @param page The current page used in the preview. If 0 the preview will be x
      * @param prevpage The page coming before @p page
      */
-    void setPageEffect( KPrPageEffect* pageEffect, KPrPage* page, KPrPage* prevpage );
+    void setPageEffect(KPrPageEffect* pageEffect, KPrPage* page, KPrPage* prevpage);
 
     /**
      * Run the current page effect. Does nothing if no page effect was set.
@@ -55,9 +55,9 @@ public:
     void runPreview();
 
 protected:
-    void paintEvent( QPaintEvent* event );
-    void resizeEvent( QResizeEvent* event );
-    void mousePressEvent( QMouseEvent* event );
+    void paintEvent(QPaintEvent* event);
+    void resizeEvent(QResizeEvent* event);
+    void mousePressEvent(QMouseEvent* event);
 
 protected slots:
     void animate();

@@ -216,7 +216,7 @@ private:
 * reader = KWord.store().open("META-INF/manifest.xml")
 * if not reader:
 *     raise "Failed to read the mainfest"
-* for i in range( reader.count() ):
+* for i in range(reader.count()):
 *     print "%s %s" % (reader.type(i),reader.path(i))
 * \endcode
 */

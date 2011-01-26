@@ -62,7 +62,7 @@ OdfCollectionLoader::~OdfCollectionLoader()
     m_shapeLoadingContext = 0;
     m_loadingContext = 0;
 
-    if(m_odfStore)
+    if (m_odfStore)
     {
         delete m_odfStore->store();
         delete m_odfStore;
@@ -75,7 +75,7 @@ void OdfCollectionLoader::load()
     QDir dir(m_path);
     m_fileList = dir.entryList(QStringList() << "*.odg" << "*.svg", QDir::Files);
 
-    if(m_fileList.isEmpty())
+    if (m_fileList.isEmpty())
     {
         kError() << "Found no shapes in the collection!" << m_path;
         emit loadingFailed(i18n("Found no shapes in the collection! %1", m_path));
@@ -91,22 +91,22 @@ void OdfCollectionLoader::loadShape()
     KoShape * shape = KoShapeRegistry::instance()->createShapeFromOdf(m_shape, *m_shapeLoadingContext);
 
     if (shape) {
-        if(!shape->parent()) {
+        if (!shape->parent()) {
             m_shapeList.append(shape);
         }
     }
 
     m_shape = m_shape.nextSibling().toElement();
 
-    if(m_shape.isNull())
+    if (m_shape.isNull())
     {
         m_page = m_page.nextSibling().toElement();
 
-        if(m_page.isNull())
+        if (m_page.isNull())
         {
             m_loadingTimer->stop();
 
-            if(m_fileList.isEmpty())
+            if (m_fileList.isEmpty())
             {
                 emit loadingFinished();
             }
@@ -132,15 +132,15 @@ void OdfCollectionLoader::nextFile()
 
     QString importedFile = filepath;
 
-    if(mimetype != KoOdf::mimeType(KoOdf::Graphics))
+    if (mimetype != KoOdf::mimeType(KoOdf::Graphics))
     {
-        if(!m_filterManager)
+        if (!m_filterManager)
             m_filterManager = new KoFilterManager(QByteArray(KoOdf::mimeType(KoOdf::Graphics)));
         KoFilter::ConversionStatus status;
         importedFile = m_filterManager->importDocument(filepath, status);
         //kDebug() << "File:" << filepath << "Import:" << importedFile;
 
-        if(status != KoFilter::OK)
+        if (status != KoFilter::OK)
         {
             QString msg;
 
@@ -193,7 +193,7 @@ void OdfCollectionLoader::nextFile()
                     default: msg = i18n( "Unknown error" ); break;
             }
 
-            if(!msg.isEmpty())
+            if (!msg.isEmpty())
             {
                 QString errorMsg(i18n("Could not open\n%2.\nReason: %1", msg, filepath));
                 emit loadingFailed(errorMsg);
@@ -203,7 +203,7 @@ void OdfCollectionLoader::nextFile()
         }
     }
 
-    if(!importedFile.isEmpty()) // Something to load (tmp or native file) ?
+    if (!importedFile.isEmpty()) // Something to load (tmp or native file) ?
     {
         loadNativeFile(importedFile);
         if (importedFile != filepath)
@@ -222,7 +222,7 @@ void OdfCollectionLoader::loadNativeFile(const QString& path)
     m_shapeLoadingContext = 0;
     m_loadingContext = 0;
 
-    if(m_odfStore)
+    if (m_odfStore)
     {
         delete m_odfStore->store();
         delete m_odfStore;
@@ -231,7 +231,7 @@ void OdfCollectionLoader::loadNativeFile(const QString& path)
 
     KoStore* store = KoStore::createStore(path, KoStore::Read);
 
-    if(store->bad())
+    if (store->bad())
     {
         emit loadingFailed(i18n("Not a valid KOffice file: %1", m_path));
         delete store;
@@ -242,7 +242,7 @@ void OdfCollectionLoader::loadNativeFile(const QString& path)
     m_odfStore = new KoOdfReadStore(store);
     QString errorMessage;
 
-    if(!m_odfStore->loadAndParse(errorMessage))
+    if (!m_odfStore->loadAndParse(errorMessage))
     {
         emit loadingFailed(errorMessage);
         return;

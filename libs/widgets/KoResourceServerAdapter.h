@@ -37,7 +37,7 @@ public:
     virtual QList<KoResource*> resources() = 0;
     virtual bool addResource(KoResource* resource) = 0;
     virtual bool removeResource(KoResource* resource) = 0;
-    virtual void importResourceFile( const QString & filename ) = 0;
+    virtual void importResourceFile(const QString & filename) = 0;
     virtual QString extensions() = 0;
 
 signals:
@@ -66,33 +66,33 @@ public:
 
     virtual ~KoResourceServerAdapter()
     {
-        if( m_resourceServer )
+        if(m_resourceServer)
             m_resourceServer->removeObserver(this);
     }
 
     void connectToResourceServer()
     {
-        if( m_resourceServer )
+        if(m_resourceServer)
             m_resourceServer->addObserver(this);
     }
 
     virtual QList<KoResource*> resources() 
     {
-        if( ! m_resourceServer )
+        if(! m_resourceServer)
             return QList<KoResource*>();
 
         QList<T*> serverResources = m_resourceServer->resources();
 
         QList<KoResource*> resources;
-        foreach( T* resource, serverResources ) {
-            resources.append( resource );
+        foreach(T* resource, serverResources) {
+            resources.append(resource);
         }
         return resources;
     }
 
     bool addResource(KoResource* resource)
     {
-        if( ! m_resourceServer )
+        if(! m_resourceServer)
             return false;
 
         T* res = dynamic_cast<T*>(resource);
@@ -104,7 +104,7 @@ public:
 
     bool removeResource(KoResource* resource)
     {
-        if( ! m_resourceServer )
+        if(! m_resourceServer)
             return false;
 
         T* res = dynamic_cast<T*>(resource);
@@ -114,9 +114,9 @@ public:
         return false;
     }
 
-    void importResourceFile( const QString & filename )
+    void importResourceFile(const QString & filename)
     {
-        if( ! m_resourceServer )
+        if(! m_resourceServer)
             return;
         m_resourceServer->importResourceFile(filename);
     }
@@ -138,7 +138,7 @@ public:
 
     QString extensions()
     {
-        if( ! m_resourceServer )
+        if(! m_resourceServer)
             return QString();
 
         return m_resourceServer->extensions();

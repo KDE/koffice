@@ -60,7 +60,7 @@ void KPrWindShieldWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
     double rotationRange1 = -0.5*M_PI;
     double rotationRange2 = -0.5*M_PI;
 
-    if(subType() == KPrWindShieldWipeEffectFactory::Right || subType() == KPrWindShieldWipeEffectFactory::Up ||
+    if (subType() == KPrWindShieldWipeEffectFactory::Right || subType() == KPrWindShieldWipeEffectFactory::Up ||
        subType() == KPrWindShieldWipeEffectFactory::RightReverse || subType() == KPrWindShieldWipeEffectFactory::UpReverse) {
 
         switch(subType())
@@ -91,7 +91,7 @@ void KPrWindShieldWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
                 return;
         }
 
-        if(reverse()) {
+        if (reverse()) {
             startAngle1 = startAngle1 + rotationRange1;
             rotationRange1 *= -1;
             startAngle2 = startAngle2 + rotationRange2;
@@ -132,7 +132,7 @@ void KPrWindShieldWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
                 return;
         }
 
-        if(reverse()) {
+        if (reverse()) {
             startAngle1 += M_PI;
             startAngle2 += M_PI;
         }

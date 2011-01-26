@@ -103,11 +103,11 @@ class Lut : public BaseLut<_FunctionT_, _OutputT_, _InputT_, LutKey<_InputT_> > 
      * Create the lut between @p _min and @p _max .
      */
     inline Lut(_InputT_ _min, _InputT_ _max, _FunctionT_ function = _FunctionT_()) :
-        BaseLut<_FunctionT_, _OutputT_, _InputT_, LutKey<_InputT_> >( LutKey<_InputT_>(_min, _max), function)
+        BaseLut<_FunctionT_, _OutputT_, _InputT_, LutKey<_InputT_> >(LutKey<_InputT_>(_min, _max), function)
     {
     }
     inline Lut(LutKey<_InputT_> key, _FunctionT_ function = _FunctionT_()) :
-        BaseLut<_FunctionT_, _OutputT_, _InputT_, LutKey<_InputT_> >( key, function)
+        BaseLut<_FunctionT_, _OutputT_, _InputT_, LutKey<_InputT_> >(key, function)
     {
     }
 };
@@ -118,8 +118,8 @@ class Lut : public BaseLut<_FunctionT_, _OutputT_, _InputT_, LutKey<_InputT_> > 
 template<typename _FunctionT_, typename _OutputT_, typename _InputT_>
 class FullLut : public BaseLut<_FunctionT_, _OutputT_, _InputT_, FullLutKey<_InputT_> > {
   public:
-    inline FullLut( _FunctionT_ function = _FunctionT_()) :
-        BaseLut<_FunctionT_, _OutputT_, _InputT_, FullLutKey<_InputT_> >( FullLutKey<_InputT_>(), function)
+    inline FullLut(_FunctionT_ function = _FunctionT_()) :
+        BaseLut<_FunctionT_, _OutputT_, _InputT_, FullLutKey<_InputT_> >(FullLutKey<_InputT_>(), function)
     {
     }
 };
@@ -193,7 +193,7 @@ PARTIAL_LUT_INT_SPECIALIZATION(lut_uint32)
       {                                                                           \
         return k + _MIN_;                                                         \
       }                                                                           \
-      inline bool inrange(_INT_TYPE_ ) const                                      \
+      inline bool inrange(_INT_TYPE_) const                                      \
       {                                                                           \
         return true;                                                              \
       }                                                                           \
@@ -249,9 +249,9 @@ class LutKey<float> {
       else if (precision <= 0.00303725f) m_shift = 15;
       else m_shift = 16;
 
-      if ( 0.0 <= m_min && m_min <= precision)
+      if (0.0 <= m_min && m_min <= precision)
         m_min = precision;
-      if ( -precision <= m_max && m_max <= 0.0)
+      if (-precision <= m_max && m_max <= 0.0)
         m_max = -precision;
       
       IFNumber uf;
@@ -264,7 +264,7 @@ class LutKey<float> {
         m_tMax_p = uf.i >> m_shift;
         m_tMin_n = m_tMax_p;
         m_tMax_n = m_tMax_p;
-     } else if( m_max < 0)
+     } else if(m_max < 0)
       {
         uf.f = m_min;
         m_tMax_n = uf.i >> m_shift;
@@ -300,10 +300,10 @@ class LutKey<float> {
     inline float keyToInput(int k) const
     {
       IFNumber uf;
-      if( k <= m_diff_p ) {
+      if(k <= m_diff_p) {
         uf.i = ((k + m_tMin_p) << m_shift);
       } else {
-        uf.i = ((k + m_tMin_n - m_diff_p ) << m_shift);
+        uf.i = ((k + m_tMin_n - m_diff_p) << m_shift);
       }
       return uf.f;
     }

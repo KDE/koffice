@@ -51,7 +51,7 @@ public:
      * and handled by interaction strategies of type KoInteractionStrategy.
      * @param canvas the canvas this tool will be working for.
      */
-    explicit DefaultTool( KoCanvasBase *canvas );
+    explicit DefaultTool(KoCanvasBase *canvas);
     virtual ~DefaultTool();
 
     enum CanvasResource {
@@ -61,7 +61,7 @@ public:
 public:
 
     virtual bool wantsAutoScroll() const;
-    virtual void paint( QPainter &painter, const KoViewConverter &converter );
+    virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
     virtual void repaintDecorations();
 
@@ -112,14 +112,14 @@ private slots:
 
 public: // Events
 
-    virtual void mousePressEvent( KoPointerEvent *event );
-    virtual void mouseMoveEvent( KoPointerEvent *event );
-    virtual void mouseReleaseEvent( KoPointerEvent *event );
-    virtual void mouseDoubleClickEvent( KoPointerEvent *event );
+    virtual void mousePressEvent(KoPointerEvent *event);
+    virtual void mouseMoveEvent(KoPointerEvent *event);
+    virtual void mouseReleaseEvent(KoPointerEvent *event);
+    virtual void mouseDoubleClickEvent(KoPointerEvent *event);
 
     virtual void keyPressEvent(QKeyEvent *event);
 
-    virtual void customMoveEvent( KoPointerEvent * event );
+    virtual void customMoveEvent(KoPointerEvent * event);
 
 protected:
     QMap<QString, QWidget *> createOptionWidgets();
@@ -131,11 +131,11 @@ private:
     void recalcSelectionBox();
     void updateCursor();
     /// Returns rotation angle of given handle of the current selection
-    qreal rotationOfHandle( KoFlake::SelectionHandle handle, bool useEdgeRotation );
+    qreal rotationOfHandle(KoFlake::SelectionHandle handle, bool useEdgeRotation);
 
     void selectionAlign(KoShapeAlignCommand::Align align);
-    void selectionReorder(KoShapeReorderCommand::MoveShapeType order );
-    bool moveSelection( int direction, Qt::KeyboardModifiers modifiers );
+    void selectionReorder(KoShapeReorderCommand::MoveShapeType order);
+    bool moveSelection(int direction, Qt::KeyboardModifiers modifiers);
 
     /// Returns selection rectangle adjusted by handle proximity threshold
     QRectF handlesSize();
@@ -143,16 +143,16 @@ private:
     // convenience method;
     KoSelection * koSelection();
 
-    void resourceChanged( int key, const QVariant & res );
+    void resourceChanged(int key, const QVariant & res);
 
     /// selects guide line at given position
-    void selectGuideAtPosition( const QPointF &position );
+    void selectGuideAtPosition(const QPointF &position);
 
     /// Returns list of editable shapes from the given list of shapes
-    QList<KoShape*> filterEditableShapes( const QList<KoShape*> &shapes );
+    QList<KoShape*> filterEditableShapes(const QList<KoShape*> &shapes);
 
     /// Returns the number of editable shapes from the given list of shapes
-    uint editableShapesCount( const QList<KoShape*> &shapes );
+    uint editableShapesCount(const QList<KoShape*> &shapes);
 
     KoFlake::SelectionHandle m_lastHandle;
     KoFlake::Position m_hotPosition;

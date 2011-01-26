@@ -78,7 +78,7 @@ QList<KoPAPageBase*> KPrCustomSlideShows::getByName(const QString &name) const
 {
     QMap< QString, QList<KoPAPageBase*> >::const_iterator it = m_customSlideShows.constFind(name);
     Q_ASSERT(it !=  m_customSlideShows.constEnd());
-//     if(it == m_customSlideShows.constEnd()) {
+//     if (it == m_customSlideShows.constEnd()) {
 //         return QList<KoPAPageBase*>();
 //     }
     return it.value();
@@ -88,7 +88,7 @@ void KPrCustomSlideShows::addSlideToAll(KoPAPageBase* page, unsigned int positio
 {
     QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.begin();
     //FIXME: should we allow negative index?
-    //if(position < 0) return;
+    //if (position < 0) return;
     while(it != m_customSlideShows.end()) {
         uint size = it.value().size();
         it.value().insert((position<=size)? position : size, page);
@@ -99,7 +99,7 @@ void KPrCustomSlideShows::addSlideToAll(KoPAPageBase* page, unsigned int positio
 void KPrCustomSlideShows::addSlidesToAll(const QList<KoPAPageBase*> &slideShow, unsigned int position)
 {
     //FIXME: should we allow negative index?
-    //if(position < 0) return;;
+    //if (position < 0) return;;
     for(int i=0; i < slideShow.size(); ++i) {
         addSlideToAll(slideShow[i], position + i);
     }
@@ -134,7 +134,7 @@ void KPrCustomSlideShows::saveOdf(KoPASavingContext & context)
                 pages += context.pageName(p) + ',';
             }
         }
-        if(!slideList.isEmpty()) {
+        if (!slideList.isEmpty()) {
             pages.truncate(pages.size() - 1);//remove the last comma
         }
         context.xmlWriter().addAttribute("presentation:pages", pages);

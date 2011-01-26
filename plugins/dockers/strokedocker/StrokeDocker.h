@@ -46,15 +46,15 @@ public:
 
 public slots:
     /// Sets the border to edit the properties of
-    virtual void setStroke( const KoShapeBorderBase * );
+    virtual void setStroke(const KoShapeBorderBase *);
     /// Sets the unit to be used for the line width editing
-    virtual void setUnit( KoUnit unit );
+    virtual void setUnit(KoUnit unit);
 
 private slots:
     /// line cap has changed
-    void slotCapChanged( int ID );
+    void slotCapChanged(int ID);
     /// line join has changed
-    void slotJoinChanged( int ID );
+    void slotJoinChanged(int ID);
     /// apply line changes to the selected shape
     void applyChanges();
     /// update the controls setting the values from the border
@@ -66,12 +66,12 @@ private slots:
     /// line style has changed
     void styleChanged();
     /// blocks/unblocks child control signals
-    void blockChildSignals( bool block );
+    void blockChildSignals(bool block);
     /// selection has changed
     void selectionChanged();
 
     /// reimplemented
-    virtual void setCanvas( KoCanvasBase *canvas );
+    virtual void setCanvas(KoCanvasBase *canvas);
 
     void resourceChanged(int key, const QVariant & value);
     void locationChanged(Qt::DockWidgetArea area);

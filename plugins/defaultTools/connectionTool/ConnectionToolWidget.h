@@ -29,7 +29,7 @@ class ConnectionToolWidget : public QWidget
 {
     Q_OBJECT
 public:
-    ConnectionToolWidget( QWidget * parent );
+    ConnectionToolWidget(QWidget * parent);
     
    private:
 

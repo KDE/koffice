@@ -76,7 +76,7 @@ public:
 class KOMAIN_EXPORT KoDocument : public KParts::ReadWritePart, public KoOdfDocument
 {
     Q_OBJECT
-//     Q_PROPERTY( QByteArray dcopObjectId READ dcopObjectId)
+//     Q_PROPERTY(QByteArray dcopObjectId READ dcopObjectId)
     Q_PROPERTY(bool backupFile READ backupFile WRITE setBackupFile)
 
 public:
@@ -415,7 +415,7 @@ public:
 
     /**
      *  Tells the document that its title has been modified, either because
-     *  the modified status changes (this is done by setModified() ) or
+     *  the modified status changes (this is done by setModified()) or
      *  because the URL or the document-info's title changed.
      */
     virtual void setTitleModified();
@@ -956,7 +956,7 @@ protected:
      *  url (using url().url()) before the filename, so that everything is kept relative
      *  to this document. For instance it will produce urls such as
      *  tar:/1/pictures/picture0.png, if the doc url is tar:/1
-     *  But do this ONLY if the document is not stored extern (see isStoredExtern() ).
+     *  But do this ONLY if the document is not stored extern (see isStoredExtern()).
      *  If it is, then the pictures should be saved to tar:/pictures.
      */
     virtual bool completeSaving(KoStore *store);
@@ -999,8 +999,8 @@ protected:
         return url();
     }
 
-    virtual void setOdfUrl( const KUrl& url ) {
-        setUrl( url );
+    virtual void setOdfUrl(const KUrl& url) {
+        setUrl(url);
     }
 
 private slots:

@@ -76,20 +76,20 @@ ShadowDocker::~ShadowDocker()
 
 void ShadowDocker::selectionChanged()
 {
-    if( ! d->canvas )
+    if ( ! d->canvas )
         return;
 
     KoSelection *selection = d->canvas->shapeManager()->selection();
     KoShape * shape = selection->firstSelectedShape();
     d->widget->setEnabled( shape != 0 );
 
-    if( ! shape )
+    if ( ! shape )
     {
         d->widget->setShadowVisible( false );
         return;
     }
     KoShapeShadow * shadow = shape->shadow();
-    if( ! shadow )
+    if ( ! shadow )
     {
         d->widget->setShadowVisible( false );
         return;
@@ -103,7 +103,7 @@ void ShadowDocker::selectionChanged()
 void ShadowDocker::setCanvas( KoCanvasBase *canvas )
 {
     d->canvas = canvas;
-    if( canvas )
+    if ( canvas )
     {
         connect( canvas->shapeManager(), SIGNAL( selectionChanged() ),
             this, SLOT( selectionChanged() ) );
@@ -117,7 +117,7 @@ void ShadowDocker::shadowChanged()
 {
     KoSelection *selection = d->canvas->shapeManager()->selection();
     KoShape * shape = selection->firstSelectedShape();
-    if( ! shape )
+    if ( ! shape )
         return;
 
     KoShapeShadow * newShadow = new KoShapeShadow();

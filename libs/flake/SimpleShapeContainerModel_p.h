@@ -50,7 +50,7 @@ public:
         Q_ASSERT(child->parent());
         return child->isGeometryProtected() || child->parent()->isGeometryProtected();
     }
-    void setInheritsTransform(const KoShape *, bool ) { }
+    void setInheritsTransform(const KoShape *, bool) { }
     bool inheritsTransform(const KoShape *) const {
         return false;
     }

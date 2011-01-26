@@ -367,10 +367,10 @@ void KoRTree<T>::insertHelper(const QRectF& bb, const T& data, int id)
     else {
         // This has to be done as QRectF::intersects() return false if the rect does not have any area overlapping.
         // If there is no width or height there is no area and therefore no overlapping.
-        if ( nbb.width() == 0 ) {
+        if (nbb.width() == 0) {
             nbb.setWidth(0.0001);
         }
-        if ( nbb.height() == 0 ) {
+        if (nbb.height() == 0) {
             nbb.setHeight(0.0001);
         }
     }
@@ -424,7 +424,7 @@ void KoRTree<T>::remove(const T&data)
     //qDebug() << "KoRTree remove";
     LeafNode * leaf = m_leafMap[data];
     if (leaf == 0) {
-        kWarning(30003) << "KoRTree<T>::remove( const T&data) data not found";
+        kWarning(30003) << "KoRTree<T>::remove(const T&data) data not found";
         return;
     }
     m_leafMap.remove(data);
@@ -651,7 +651,7 @@ void KoRTree<T>::adjustTree(Node *node1, Node *node2)
             qFatal("KoRTree::adjustTree: no parent node found!");
             return;
         }
-        //QRectF pbbold( parent->boundingBox() );
+        //QRectF pbbold(parent->boundingBox());
         parent->setChildBoundingBox(node1->place(), node1->boundingBox());
         parent->updateBoundingBox();
         //qDebug() << "  bb1 =" << node1->boundingBox() << node1->place() << pbbold << "->" << parent->boundingBox() << parent->nodeId();
@@ -989,7 +989,7 @@ void KoRTree<T>::LeafNode::remove(const T& data)
         }
     }
     if (old_counter == this->m_counter) {
-        kWarning(30003) << "LeafNode::remove( const T&data) data not found";
+        kWarning(30003) << "LeafNode::remove(const T&data) data not found";
     }
 }
 
@@ -999,7 +999,7 @@ void KoRTree<T>::LeafNode::move(Node * node, int index)
     LeafNode * n = dynamic_cast<LeafNode*>(node);
     if (n) {
         //qDebug() << "LeafNode::move" << this << node << index
-        //         << node->nodeId() << "->" << this->nodeId() << n->childBoundingBox( index );
+        //         << node->nodeId() << "->" << this->nodeId() << n->childBoundingBox(index);
         QRectF bb = n->childBoundingBox(index);
         insert(bb, n->getData(index), n->getDataId(index));
     }

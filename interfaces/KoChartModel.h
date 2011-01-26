@@ -38,7 +38,7 @@ namespace KoChart {
 *
 * Example:
 * The area string of the 3rd row would be retrieved with this line of code:
-* QString area = model->headerData( 2, Qt::Vertical, SECTION_AREA_ROLE );
+* QString area = model->headerData(2, Qt::Vertical, SECTION_AREA_ROLE);
 * ("$Table2.$D9:$D13", for instance)
 */
 const int SECTION_AREA_ROLE = 32;
@@ -50,7 +50,7 @@ const int SECTION_AREA_ROLE = 32;
 * Example:
 * The area string of the name of the data series that has its y-values
 * in the 5th column could be retrieved with this line of code:
-* QString cell = model->headerData( 4, Qt::Horizontal, HEADER_AREA_ROLE );
+* QString cell = model->headerData(4, Qt::Horizontal, HEADER_AREA_ROLE);
 * ("$Table1.$C8", for instance)
 */
 const int HEADER_AREA_ROLE  = 33;

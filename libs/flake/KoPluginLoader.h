@@ -42,7 +42,7 @@
 class MyPlugin : public QObject {
     Q_OBJECT
 public:
-    MyPlugin(QObject *parent, const QVariantList & );
+    MyPlugin(QObject *parent, const QVariantList &);
     ~MyPlugin() {}
 };
 @endcode
@@ -54,7 +54,7 @@ public:
 K_PLUGIN_FACTORY(MyPluginFactory, registerPlugin<MyPlugin>();)
 K_EXPORT_PLUGIN(MyPluginFactory("DaPlugin"))
 
-MyPlugin::MyPlugin( QObject *parent, const QVariantList& ) : QObject(parent) {
+MyPlugin::MyPlugin(QObject *parent, const QVariantList&) : QObject(parent) {
     // do stuff like creating a factory and adding it to the
     // registry instance.
 }

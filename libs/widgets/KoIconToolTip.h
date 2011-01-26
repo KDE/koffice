@@ -31,7 +31,7 @@ class KoIconToolTip: public KoItemToolTip
         virtual ~KoIconToolTip() {}
 
     protected:
-        virtual QTextDocument *createDocument( const QModelIndex &index );
+        virtual QTextDocument *createDocument(const QModelIndex &index);
 
     private:
         typedef KoItemToolTip super;

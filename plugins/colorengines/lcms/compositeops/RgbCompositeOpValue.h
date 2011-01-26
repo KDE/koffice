@@ -23,8 +23,8 @@
 #include "KoColorConversions.h"
 #include <KoCompositeOp.h>
 
-#define SCALE_TO_FLOAT( v ) KoColorSpaceMaths< channels_type, float>::scaleToA( v )
-#define SCALE_FROM_FLOAT( v ) KoColorSpaceMaths< float, channels_type>::scaleToA( v )
+#define SCALE_TO_FLOAT(v) KoColorSpaceMaths< channels_type, float>::scaleToA(v)
+#define SCALE_FROM_FLOAT(v) KoColorSpaceMaths< float, channels_type>::scaleToA(v)
 
 template<class _CSTraits>
 class RgbCompositeOpValue: public KoCompositeOp

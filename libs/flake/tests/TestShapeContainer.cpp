@@ -229,7 +229,7 @@ void TestShapeContainer::testScaling2()
     QSizeF selecSize = selection->size();
 
     bool works=false;
-    if(qFuzzyCompare(selecSize.width(), shapeSize.width()) && qFuzzyCompare(selecSize.height(), shapeSize.height()))
+    if (qFuzzyCompare(selecSize.width(), shapeSize.width()) && qFuzzyCompare(selecSize.height(), shapeSize.height()))
         works=true;
     QCOMPARE(works, true);
 

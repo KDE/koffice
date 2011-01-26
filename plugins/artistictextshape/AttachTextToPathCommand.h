@@ -29,7 +29,7 @@ class KoPathShape;
 class AttachTextToPathCommand : public QUndoCommand
 {
 public:
-    AttachTextToPathCommand( ArtisticTextShape * textShape, KoPathShape * pathShape, QUndoCommand * parent = 0 );
+    AttachTextToPathCommand(ArtisticTextShape * textShape, KoPathShape * pathShape, QUndoCommand * parent = 0);
     /// reimplemented from QUndoCommand
     virtual void redo();
     /// reimplemented from QUndoCommand

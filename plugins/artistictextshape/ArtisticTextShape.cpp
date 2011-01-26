@@ -52,7 +52,7 @@ ArtisticTextShape::ArtisticTextShape()
 
 ArtisticTextShape::~ArtisticTextShape()
 {
-    if( m_path )
+    if ( m_path )
         m_path->removeDependee( this );
 }
 
@@ -60,7 +60,7 @@ void ArtisticTextShape::paint(QPainter &painter, const KoViewConverter &converte
 {
     applyConversion( painter, converter );
     painter.setFont( m_font );
-    if( background() )
+    if ( background() )
         background()->paint( painter, outline() );
 }
 
@@ -80,31 +80,31 @@ void ArtisticTextShape::saveOdf(KoShapeSavingContext &context) const
     QString drawData = "text:" + m_text +';';
     drawData += "font-family:" + m_font.family() + ';';
     drawData += QString("font-size:%1pt;").arg(m_font.pointSizeF());
-    if( m_font.bold() )
+    if ( m_font.bold() )
         drawData += "font-weight:bold;";
-    if( m_font.italic() )
+    if ( m_font.italic() )
         drawData += "font-style:italic;";
 
     qreal anchorOffset = 0.0;
-    if( m_textAnchor == ArtisticTextShape::AnchorMiddle )
+    if ( m_textAnchor == ArtisticTextShape::AnchorMiddle )
     {
         anchorOffset += 0.5 * size().width();
         drawData += "text-anchor:middle;";
     }
-    else if( m_textAnchor == ArtisticTextShape::AnchorEnd )
+    else if ( m_textAnchor == ArtisticTextShape::AnchorEnd )
     {
         anchorOffset += size().width();
         drawData += "text-anchor:end;";
     }
 
     // check if we are set on a path
-    if( layout() == ArtisticTextShape::OnPathShape )
+    if ( layout() == ArtisticTextShape::OnPathShape )
     {
         /// TODO: we have to make sure that the path shape is saved before
         drawData += "textPath:" + context.drawId( m_path ) +';';
         drawData += QString( "startOffset:%1%;").arg( m_startOffset * 100.0 );
     }
-    else if( layout() == ArtisticTextShape::OnPath )
+    else if ( layout() == ArtisticTextShape::OnPath )
     {
         KoPathShape * baseline = KoPathShape::createShapeFromPainterPath( m_baseline );
         QTransform offsetMatrix;
@@ -133,50 +133,50 @@ void ArtisticTextShape::saveOdf(KoShapeSavingContext &context) const
 bool ArtisticTextShape::loadOdf( const KoXmlElement & element, KoShapeLoadingContext & context )
 {
     QString drawEngine = element.attributeNS( KoXmlNS::draw, "engine", "" );
-    if( drawEngine.isEmpty() || drawEngine != "svg:text" )
+    if ( drawEngine.isEmpty() || drawEngine != "svg:text" )
         return false;
 
     QString drawData = element.attributeNS( KoXmlNS::draw, "data" );
-    if( drawData.isEmpty() )
+    if ( drawData.isEmpty() )
         return false;
 
     QStringList properties = drawData.split( ';' );
-    if( properties.count() == 0 )
+    if ( properties.count() == 0 )
         return false;
 
     foreach( const QString &property, properties )
     {
         QStringList pair = property.split( ':' );
-        if( pair.count() != 2 )
+        if ( pair.count() != 2 )
             continue;
-        if( pair[0] == "text" )
+        if ( pair[0] == "text" )
         {
             setText( pair[1] );
         }
-        else if( pair[0] == "font-family" )
+        else if ( pair[0] == "font-family" )
         {
             m_font.setFamily( pair[1] );
         }
-        else if( pair[0] == "font-size" )
+        else if ( pair[0] == "font-size" )
         {
             m_font.setPointSizeF(KoUnit::parseValue(pair[1], 12));
         }
-        else if( pair[0] == "font-weight" && pair[1] == "bold" )
+        else if ( pair[0] == "font-weight" && pair[1] == "bold" )
         {
             m_font.setBold( true );
         }
-        else if( pair[0] == "font-style" && pair[1] == "italic" )
+        else if ( pair[0] == "font-style" && pair[1] == "italic" )
         {
             m_font.setItalic( true );
         }
-        else if( pair[0] == "textPathData" )
+        else if ( pair[0] == "textPathData" )
         {
             KoPathShape path;
             KoPathShapeLoader loader( &path );
             loader.parseSvg( pair[1], true );
             putOnPath( path.outline() );
         }
-        else if( pair[0] == "textPath" )
+        else if ( pair[0] == "textPath" )
         {
             KoPathShape * path = dynamic_cast<KoPathShape*>( context.shapeById( pair[1] ) ); 
             if ( path ) {
@@ -186,15 +186,15 @@ bool ArtisticTextShape::loadOdf( const KoXmlElement & element, KoShapeLoadingCon
                 context.updateShape( pair[1], new ArtisticTextShapeLoadingUpdater(this) );
             }
         }
-        else if( pair[0] == "startOffset" )
+        else if ( pair[0] == "startOffset" )
         {
             m_startOffset = 0.01 * pair[1].remove('%').toDouble();
         }
-        else if( pair[0] == "text-anchor" )
+        else if ( pair[0] == "text-anchor" )
         {
-            if( pair[1] == "middle" )
+            if ( pair[1] == "middle" )
                 m_textAnchor = AnchorMiddle;
-            else if( pair[1] == "end" )
+            else if ( pair[1] == "end" )
                 m_textAnchor = AnchorEnd;
         }
     }
@@ -214,7 +214,7 @@ bool ArtisticTextShape::loadOdf( const KoXmlElement & element, KoShapeLoadingCon
 
 QSizeF ArtisticTextShape::size() const
 {
-    if( m_text.isEmpty() )
+    if ( m_text.isEmpty() )
         return nullBoundBox().size();
     else
         return outline().boundingRect().size();
@@ -249,7 +249,7 @@ void ArtisticTextShape::createOutline()
 {
     m_outline = QPainterPath();
 
-    if( isOnPath() )
+    if ( isOnPath() )
     {
         m_charOffsets.clear();
         QFontMetricsF metrics( m_font );
@@ -257,9 +257,9 @@ void ArtisticTextShape::createOutline()
         qreal charPos = m_startOffset * m_baseline.length();
 
         qreal anchorPoint = 0.0;
-        if( m_textAnchor == AnchorMiddle )
+        if ( m_textAnchor == AnchorMiddle )
             anchorPoint = 0.5 * metrics.width( m_text );
-        else if( m_textAnchor == AnchorEnd )
+        else if ( m_textAnchor == AnchorEnd )
             anchorPoint = metrics.width( m_text );
 
         charPos -= anchorPoint;
@@ -274,10 +274,10 @@ void ArtisticTextShape::createOutline()
             // get the percent value of the actual char position
             qreal t = m_baseline.percentAtLength( charPos );
             m_charOffsets[ charIdx ] = -1;
-            if( t >= 1.0 )
+            if ( t >= 1.0 )
                 break;
 
-            if( t >= 0.0 )
+            if ( t >= 0.0 )
             {
                 // get the path point of the given path position
                 pathPoint = m_baseline.pointAtPercent( t );
@@ -287,11 +287,11 @@ void ArtisticTextShape::createOutline()
 
             m_charOffsets[ charIdx ] = m_baseline.percentAtLength( charPos );
             charPos += metrics.width( actChar );
-            if( t < 0.0 )
+            if ( t < 0.0 )
                 continue;
 
             // get the angle at the given path position
-            if( t >= 1.0 )
+            if ( t >= 1.0 )
                 break;
             qreal angle = m_baseline.angleAtPercent( t );
 
@@ -310,7 +310,7 @@ void ArtisticTextShape::createOutline()
 
 void ArtisticTextShape::setText( const QString & text )
 {
-    if( m_text == text )
+    if ( m_text == text )
         return;
 
     update();
@@ -327,7 +327,7 @@ QString ArtisticTextShape::text() const
 
 void ArtisticTextShape::setFont( const QFont & font )
 {
-    if( m_font == font )
+    if ( m_font == font )
         return;
 
     update();
@@ -345,7 +345,7 @@ QFont ArtisticTextShape::font() const
 
 void ArtisticTextShape::setStartOffset( qreal offset )
 {
-    if( m_startOffset == offset )
+    if ( m_startOffset == offset )
         return;
 
     update();
@@ -369,29 +369,29 @@ qreal ArtisticTextShape::baselineOffset() const
 
 void ArtisticTextShape::setTextAnchor( TextAnchor anchor )
 {
-    if( anchor == m_textAnchor )
+    if ( anchor == m_textAnchor )
         return;
 
     QFontMetricsF metrics( m_font );
     int length = metrics.width( m_text );
     qreal oldOffset = 0.0;
-    if( m_textAnchor == AnchorMiddle )
+    if ( m_textAnchor == AnchorMiddle )
         oldOffset = -0.5 * length;
-    else if( m_textAnchor == AnchorEnd )
+    else if ( m_textAnchor == AnchorEnd )
         oldOffset = -length;
 
     m_textAnchor = anchor;
 
     qreal newOffset = 0.0;
-    if( m_textAnchor == AnchorMiddle )
+    if ( m_textAnchor == AnchorMiddle )
         newOffset = -0.5 * length;
-    else if( m_textAnchor == AnchorEnd )
+    else if ( m_textAnchor == AnchorEnd )
         newOffset = -length;
 
 
     update();
     updateSizeAndPosition();
-    if( ! isOnPath() )
+    if ( ! isOnPath() )
     {
         QTransform m;
         m.translate( newOffset-oldOffset, 0.0 );
@@ -408,13 +408,13 @@ ArtisticTextShape::TextAnchor ArtisticTextShape::textAnchor() const
 
 bool ArtisticTextShape::putOnPath( KoPathShape * path )
 {
-    if( ! path )
+    if ( ! path )
         return false;
 
-    if( path->outline().isEmpty() )
+    if ( path->outline().isEmpty() )
         return false;
 
-    if( ! path->addDependee( this ) )
+    if ( ! path->addDependee( this ) )
         return false;
 
     update();
@@ -436,11 +436,11 @@ bool ArtisticTextShape::putOnPath( KoPathShape * path )
 
 bool ArtisticTextShape::putOnPath( const QPainterPath &path )
 {
-    if( path.isEmpty() )
+    if ( path.isEmpty() )
         return false;
 
     update();
-    if( m_path )
+    if ( m_path )
         m_path->removeDependee( this );
     m_path = 0;
     m_baseline = path;
@@ -458,7 +458,7 @@ bool ArtisticTextShape::putOnPath( const QPainterPath &path )
 void ArtisticTextShape::removeFromPath()
 {
     update();
-    if( m_path )
+    if ( m_path )
         m_path->removeDependee( this );
     m_path = 0;
     m_baseline = QPainterPath();
@@ -473,9 +473,9 @@ bool ArtisticTextShape::isOnPath() const
 
 ArtisticTextShape::LayoutMode ArtisticTextShape::layout() const
 {
-    if( m_path )
+    if ( m_path )
         return OnPathShape;
-    else if( ! m_baseline.isEmpty() )
+    else if ( ! m_baseline.isEmpty() )
         return OnPath;
     else
         return Straight;
@@ -516,7 +516,7 @@ void ArtisticTextShape::addRange( unsigned int index, const QString &str )
 
 void ArtisticTextShape::getCharAngleAt( unsigned int charNum, qreal &angle ) const
 {
-    if( isOnPath() ) {
+    if ( isOnPath() ) {
         qreal t = m_charOffsets[ qMin( int( charNum ), m_charOffsets.size() ) ];
         angle = m_baseline.angleAtPercent( t );
     } else {
@@ -526,7 +526,7 @@ void ArtisticTextShape::getCharAngleAt( unsigned int charNum, qreal &angle ) con
 
 void ArtisticTextShape::getCharPositionAt( unsigned int charNum, QPointF &pos ) const
 {
-    if( isOnPath() ) {
+    if ( isOnPath() ) {
         qreal t = m_charOffsets[ qMin( int( charNum ), m_charOffsets.size() ) ];
         pos = m_baseline.pointAtPercent( t ) - m_outlineOrigin;
     } else {
@@ -555,7 +555,7 @@ void ArtisticTextShape::updateSizeAndPosition( bool global )
     createOutline();
 
     QRectF bbox = m_outline.boundingRect();
-    if( bbox.isEmpty() )
+    if ( bbox.isEmpty() )
         bbox = nullBoundBox();
 
     // calculate the offset we have to apply to keep our position
@@ -564,7 +564,7 @@ void ArtisticTextShape::updateSizeAndPosition( bool global )
     // cache topleft corner of baseline path
     m_outlineOrigin = bbox.topLeft();
 
-    if( isOnPath() )
+    if ( isOnPath() )
     {
         // the outline position is in document coordinates
         // so we adjust our position
@@ -602,9 +602,9 @@ void ArtisticTextShape::cacheGlyphOutlines()
 
 void ArtisticTextShape::shapeChanged(ChangeType type, KoShape * shape)
 {
-    if( m_path && shape == m_path )
+    if ( m_path && shape == m_path )
     {
-        if( type == KoShape::Deleted )
+        if ( type == KoShape::Deleted )
         {
             m_path = 0;
         }

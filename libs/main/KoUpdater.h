@@ -81,9 +81,9 @@ public:
 public: // KoProgressProxy implementation
 
     int maximum() const;
-    void setValue( int value );
-    void setRange( int minimum, int maximum );
-    void setFormat( const QString & format );
+    void setValue(int value);
+    void setRange(int minimum, int maximum);
+    void setFormat(const QString & format);
 
 signals:
 
@@ -91,7 +91,7 @@ signals:
     void sigCancel();
 
     /// emitted whenever the subtask has called setProgress on us
-    void sigProgress( int percent );
+    void sigProgress(int percent);
 
 protected:
 

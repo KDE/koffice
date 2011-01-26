@@ -33,12 +33,12 @@ class KOWIDGETS_EXPORT KoXYColorSelector : public KXYSelector
   Q_OBJECT
 
 public:
-    explicit KoXYColorSelector( const KoColorSpace* colorSpace,  QWidget *parent=0 );
+    explicit KoXYColorSelector(const KoColorSpace* colorSpace,  QWidget *parent=0);
 
-    void setColors( const KoColor& topLeftColor, const KoColor& topRightColor,  const KoColor& bottomLeftColor, const KoColor& bottomRightColor);
+    void setColors(const KoColor& topLeftColor, const KoColor& topRightColor,  const KoColor& bottomLeftColor, const KoColor& bottomRightColor);
 
 protected:
-    virtual void drawContents( QPainter *painter );
+    virtual void drawContents(QPainter *painter);
 
 private:
     KoColor m_colors[4];

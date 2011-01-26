@@ -34,7 +34,7 @@ class KoPAPage;
 class KOPAGEAPP_EXPORT KoPADisplayMasterBackgroundCommand : public QUndoCommand
 {
 public:
-    KoPADisplayMasterBackgroundCommand( KoPAPage * page, bool display );
+    KoPADisplayMasterBackgroundCommand(KoPAPage * page, bool display);
     virtual ~KoPADisplayMasterBackgroundCommand();
 
     /// redo the command

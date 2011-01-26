@@ -59,7 +59,7 @@ void KoPathToolSelection::paint(QPainter &painter, const KoViewConverter &conver
 
 void KoPathToolSelection::add(KoPathPoint * point, bool clear)
 {
-    if(! point)
+    if (! point)
         return;
 
     bool allreadyIn = false;

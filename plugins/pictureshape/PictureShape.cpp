@@ -254,7 +254,7 @@ KoImageCollection *PictureShape::imageCollection() const
 
 QString PictureShape::saveStyle(KoGenStyle& style, KoShapeSavingContext& context) const
 {
-    if(transparency() > 0.0) {
+    if (transparency() > 0.0) {
         style.addProperty("draw:image-opacity", QString("%1%").arg((1.0 - transparency()) * 100.0));
     }
     return KoShape::saveStyle(style, context);
@@ -292,7 +292,7 @@ PictureShape::PictureMode PictureShape::mode() const
 
 void PictureShape::setMode(PictureShape::PictureMode mode)
 {
-    if( mode != m_mode ) {
+    if ( mode != m_mode ) {
         m_mode = mode;
         KoFilterEffect* filterMode = filterEffectStack()->takeFilterEffect(0);
         delete filterMode;
@@ -307,7 +307,7 @@ void PictureShape::setMode(PictureShape::PictureMode mode)
                 filterMode = new WatermarkFilterEffect();
                 break;
         }
-        if( filterMode )
+        if ( filterMode )
             filterEffectStack()->appendFilterEffect(filterMode);
         update();
     }

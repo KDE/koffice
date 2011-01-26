@@ -44,17 +44,17 @@ public:
      * @param tool the parent tool which controls this strategy
      * @param clicked the initial point that the user depressed (in pt).
      */
-    ShapeRotateStrategy( KoToolBase *tool, const QPointF &clicked, Qt::MouseButtons buttons );
+    ShapeRotateStrategy(KoToolBase *tool, const QPointF &clicked, Qt::MouseButtons buttons);
     virtual ~ShapeRotateStrategy() {}
 
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     QUndoCommand* createCommand(QUndoCommand *parent = 0);
-    void finishInteraction( Qt::KeyboardModifiers modifiers ) { Q_UNUSED( modifiers ); }
-    virtual void paint( QPainter &painter, const KoViewConverter &converter);
-    virtual void handleCustomEvent( KoPointerEvent * event );
+    void finishInteraction(Qt::KeyboardModifiers modifiers) { Q_UNUSED(modifiers); }
+    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void handleCustomEvent(KoPointerEvent * event);
 
 private:
-    void rotateBy( qreal angle );
+    void rotateBy(qreal angle);
     QRectF m_initialBoundingRect;
     QPointF m_start;
     QTransform m_rotationMatrix;

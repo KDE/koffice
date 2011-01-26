@@ -35,12 +35,12 @@ public:
     /**
      * Set the zoom so the page fully fits into size
      */
-    static void setZoom( const KoPageLayout & pageLayout, const QSize & size, KoZoomHandler & zoomHandler );
+    static void setZoom(const KoPageLayout & pageLayout, const QSize & size, KoZoomHandler & zoomHandler);
 
     /**
      * Get the page rect used
      */
-    static QRect pageRect( const KoPageLayout & pageLayout, const QSize & size, const KoZoomHandler & zoomHandler );
+    static QRect pageRect(const KoPageLayout & pageLayout, const QSize & size, const KoZoomHandler & zoomHandler);
 };
 
 #endif /* KOPAUTIL_H */

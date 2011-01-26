@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or ( at your option) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -68,7 +68,7 @@ public:
      * @param layout the layout that should be used from now. 
      *        If 0 no layout will be used.
      */
-    void setLayout(KPrPageLayout * layout, KoPADocument * document );
+    void setLayout(KPrPageLayout * layout, KoPADocument * document);
 
     /**
      * Get the layout used on the page

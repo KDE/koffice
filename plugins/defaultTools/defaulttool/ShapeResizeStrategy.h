@@ -46,11 +46,11 @@ public:
 
     void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
     QUndoCommand* createCommand(QUndoCommand *parent = 0);
-    void finishInteraction( Qt::KeyboardModifiers modifiers ) { Q_UNUSED(modifiers); }
-    virtual void paint( QPainter &painter, const KoViewConverter &converter);
-    virtual void handleCustomEvent( KoPointerEvent * event );
+    void finishInteraction(Qt::KeyboardModifiers modifiers) { Q_UNUSED(modifiers); }
+    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void handleCustomEvent(KoPointerEvent * event);
 private:
-    void resizeBy( const QPointF &center, qreal zoomX, qreal zoomY );
+    void resizeBy(const QPointF &center, qreal zoomX, qreal zoomY);
 
     QPointF m_start;
     QList<QPointF> m_startPositions;

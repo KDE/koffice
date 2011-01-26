@@ -32,7 +32,7 @@ class KoPAMasterPage;
 class KoPAChangeMasterPageCommand : public QUndoCommand
 {
 public:
-    KoPAChangeMasterPageCommand( KoPADocument *document, KoPAPage * page, KoPAMasterPage * masterPage );
+    KoPAChangeMasterPageCommand(KoPADocument *document, KoPAPage * page, KoPAMasterPage * masterPage);
     virtual ~KoPAChangeMasterPageCommand();
 
     /// redo the command

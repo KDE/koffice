@@ -58,7 +58,7 @@ public:
 
     void setImageCollection(KoImageCollection *collection) { m_imageCollection = collection; }
 
-    void setMode( PictureMode mode );
+    void setMode(PictureMode mode);
     PictureMode mode() const;
 
 protected:

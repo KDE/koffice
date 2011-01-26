@@ -61,7 +61,7 @@ ShapePropertiesDocker::~ShapePropertiesDocker()
 void ShapePropertiesDocker::setCanvas( KoCanvasBase *canvas )
 {
     d->canvas = canvas;
-    if( d->canvas )
+    if ( d->canvas )
     {
         connect( d->canvas->shapeManager(), SIGNAL( selectionChanged() ),
             this, SLOT( selectionChanged() ) );
@@ -74,11 +74,11 @@ void ShapePropertiesDocker::setCanvas( KoCanvasBase *canvas )
 
 void ShapePropertiesDocker::selectionChanged()
 {
-    if( ! d->canvas )
+    if ( ! d->canvas )
         return;
 
     KoSelection *selection = d->canvas->shapeManager()->selection();
-    if( selection->count() == 1 )
+    if ( selection->count() == 1 )
         addWidgetForShape( selection->firstSelectedShape() );
     else
         addWidgetForShape( 0 );
@@ -87,55 +87,55 @@ void ShapePropertiesDocker::selectionChanged()
 void ShapePropertiesDocker::addWidgetForShape( KoShape * shape )
 {
     // remove the config widget if a null shape is set, or the shape has changed
-    if( ! shape || shape != d->currentShape )
+    if ( ! shape || shape != d->currentShape )
     {
         while( d->widgetStack->count() )
             d->widgetStack->removeWidget( d->widgetStack->widget( 0 ) );
     }
 
-    if( ! shape )
+    if ( ! shape )
     {
         d->currentShape = 0;
         d->currentPanel = 0;
         return;
     }
-    else if( shape != d->currentShape )
+    else if ( shape != d->currentShape )
     {
         // when a shape is set and is differs from the previous one
         // get the config widget and insert it into the option widget
         d->currentShape = shape;
-        if( ! d->currentShape )
+        if ( ! d->currentShape )
             return;
         QString shapeId = shape->shapeId();
         KoPathShape * path = dynamic_cast<KoPathShape*>( shape );
-        if( path )
+        if ( path )
         {
             // use the path specific shape id if shape is a path, otherwise use the shape id
             shapeId = path->pathShapeId();
             // check if we have an edited parametric shape, then we use the path shape id
             KoParameterShape * paramShape = dynamic_cast<KoParameterShape*>( shape );
-            if( paramShape && ! paramShape->isParametricShape() )
+            if ( paramShape && ! paramShape->isParametricShape() )
                 shapeId = shape->shapeId();
         }
         KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value( shapeId );
-        if( ! factory )
+        if ( ! factory )
             return;
         QList<KoShapeConfigWidgetBase*> panels = factory->createShapeOptionPanels();
-        if( ! panels.count() )
+        if ( ! panels.count() )
             return;
 
         d->currentPanel = 0;
         uint panelCount = panels.count();
         for( uint i = 0; i < panelCount; ++i )
         {
-            if( panels[i]->showOnShapeSelect() ) {
+            if ( panels[i]->showOnShapeSelect() ) {
                 d->currentPanel = panels[i];
                 break;
             }
         }
-        if( d->currentPanel )
+        if ( d->currentPanel )
         {
-            if( d->canvas )
+            if ( d->canvas )
                 d->currentPanel->setUnit( d->canvas->unit() );
             d->widgetStack->insertWidget( 0, d->currentPanel );
             connect( d->currentPanel, SIGNAL(propertyChanged()),
@@ -143,16 +143,16 @@ void ShapePropertiesDocker::addWidgetForShape( KoShape * shape )
         }
     }
 
-    if( d->currentPanel )
+    if ( d->currentPanel )
         d->currentPanel->open( shape );
 }
 
 void ShapePropertiesDocker::shapePropertyChanged()
 {
-    if( d->canvas && d->currentPanel )
+    if ( d->canvas && d->currentPanel )
     {
         QUndoCommand * cmd = d->currentPanel->createCommand();
-        if( ! cmd )
+        if ( ! cmd )
             return;
         d->canvas->addCommand( cmd );
     }

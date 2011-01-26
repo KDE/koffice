@@ -235,7 +235,7 @@ public:
     }
 
     /**
-     * Division : (a * MAX ) / b
+     * Division : (a * MAX) / b
      * @param a
      * @param b
      */

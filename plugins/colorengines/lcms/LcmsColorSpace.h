@@ -145,8 +145,8 @@ protected:
 
     virtual ~LcmsColorSpace() {
         /*            cmsCloseProfile(d->lastFromRGB);
-                      cmsDeleteTransform( d->defaultFromRGB );
-                      cmsDeleteTransform( d->defaultToRGB );*/
+                      cmsDeleteTransform(d->defaultFromRGB);
+                      cmsDeleteTransform(d->defaultToRGB);*/
         delete d->colorProfile;
         delete[] d->qcolordata;
         delete d;

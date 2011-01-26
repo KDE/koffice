@@ -44,17 +44,17 @@ class KOWIDGETS_EXPORT KoResourceItemChooser : public QWidget
 {
   Q_OBJECT
 public:
-    explicit KoResourceItemChooser( KoAbstractResourceServerAdapter * resourceAdapter, QWidget *parent = 0 );
+    explicit KoResourceItemChooser(KoAbstractResourceServerAdapter * resourceAdapter, QWidget *parent = 0);
     ~KoResourceItemChooser();
 
     /// Sets number of columns in the view
-    void setColumnCount( int columnCount );
+    void setColumnCount(int columnCount);
 
     /// Sets the height of the view rows
-    void setRowHeight( int rowHeight );
+    void setRowHeight(int rowHeight);
 
     /// Sets a custom delegate for the view
-    void setItemDelegate( QAbstractItemDelegate * delegate );
+    void setItemDelegate(QAbstractItemDelegate * delegate);
 
     /// Gets the currently selected resource
     /// @returns the selected resource, 0 is no resource is selected
@@ -70,19 +70,19 @@ public:
      */
     void setCurrentItem(int row, int column);
 
-    void showButtons( bool show );
+    void showButtons(bool show);
 
-    void showGetHotNewStuff( bool showDownload, bool showUpload);
+    void showGetHotNewStuff(bool showDownload, bool showUpload);
 
     ///Set a proxy model with will be used to filter the resources
-    void setProxyModel( QAbstractProxyModel* proxyModel );
+    void setProxyModel(QAbstractProxyModel* proxyModel);
 signals:
     /// Emitted when a resource was selected
-    void resourceSelected( KoResource * resource );
+    void resourceSelected(KoResource * resource);
 
 private slots:
-    void slotButtonClicked( int button );
-    void activated ( const QModelIndex & index );
+    void slotButtonClicked(int button);
+    void activated (const QModelIndex & index);
 
 private:
     enum Buttons { Button_Import, Button_Remove, Button_GhnsDownload, Button_GhnsUpload };
@@ -91,7 +91,7 @@ private:
 
     /// Resource for a given model index
     /// @returns the resource pointer, 0 is index not valid
-    KoResource* resourceFromModelIndex(const QModelIndex & index );
+    KoResource* resourceFromModelIndex(const QModelIndex & index);
 
     class Private;
     Private * const d;

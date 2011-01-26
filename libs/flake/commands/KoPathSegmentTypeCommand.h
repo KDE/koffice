@@ -39,7 +39,7 @@ public:
     };
 
     /**
-    * Command for changing the segment type ( curve/line )
+    * Command for changing the segment type (curve/line)
     * @param pointData point data identifying the segement that should be changed.
     * @param segmentType to which the segment should be changed to
     * @param parent the parent command used for macro commands
@@ -47,7 +47,7 @@ public:
     KoPathSegmentTypeCommand(const KoPathPointData &pointData, SegmentType segmentType, QUndoCommand *parent = 0);
 
     /**
-     * Command for changing the segment type ( curve/line )
+     * Command for changing the segment type (curve/line)
      * @param pointDataList List of point data identifying the segements that should be changed.
      * @param segmentType to which the segments should be changed to
      * @param parent the parent command used for macro commands

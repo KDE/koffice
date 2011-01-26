@@ -186,7 +186,7 @@ struct KoColorSpaceTrait {
  * Example:
  * quint8* p = KoLabU16Traits::allocate(1);
  * oneKoColorSpace->toLabA16(somepointertodata, p, 1);
- * KoLabU16Traits::setL( p, KoLabU16Traits::L(p) / 10 );
+ * KoLabU16Traits::setL(p, KoLabU16Traits::L(p) / 10);
  * oneKoColorSpace->fromLabA16(p, somepointertodata, 1);
  */
 template<typename _channels_type_>

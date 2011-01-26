@@ -121,7 +121,7 @@ void KPrCustomSlideShowsDialog::renameCustomSlideShow(QListWidgetItem *item)
         item->setText(item->data(SlideShowNameData).toString());
     }
     //If the name is not already in use, use it
-    else if(!m_slideShows->names().contains(item->data(Qt::DisplayRole).toString()))
+    else if (!m_slideShows->names().contains(item->data(Qt::DisplayRole).toString()))
     {
         m_slideShows->rename(item->data(SlideShowNameData).toString(), item->data(Qt::DisplayRole).toString());
         item->setData(SlideShowNameData, item->data(Qt::DisplayRole));
@@ -147,7 +147,7 @@ void KPrCustomSlideShowsDialog::deleteCustomSlideShow()
     KMessageBox Message;
     int clickedButton = Message.warningContinueCancel(this, i18n("Are you sure you want to delete the selected slide show?"), i18n("Confirm action"));
 
-    if(clickedButton == KMessageBox::Cancel)
+    if (clickedButton == KMessageBox::Cancel)
     {
         return;
     }
@@ -156,12 +156,12 @@ void KPrCustomSlideShowsDialog::deleteCustomSlideShow()
     //Use item, which points to current item, to calculate the row to
     //take it from the widget:
     m_uiWidget.customSlideShowsList->takeItem(m_uiWidget.customSlideShowsList->row(item));
-    if(item)
+    if (item)
     {
         m_slideShows->remove(item->data(SlideShowNameData).toString());
         delete item;
     }
-    if(m_uiWidget.customSlideShowsList->count() == 0)
+    if (m_uiWidget.customSlideShowsList->count() == 0)
     {
         m_selectedSlideShowName.clear();
         m_uiWidget.currentSlidesList->clear();
@@ -177,7 +177,7 @@ void KPrCustomSlideShowsDialog::loadCustomSlideShowsData()
                 this, SLOT(renameCustomSlideShow(QListWidgetItem*)));
 
     //check if is our first load so to use the work already done
-    if(!m_firstTime)
+    if (!m_firstTime)
     {
         delete m_slideShows;
         m_slideShows = new KPrCustomSlideShows(*m_oldSlideShows);
@@ -186,7 +186,7 @@ void KPrCustomSlideShowsDialog::loadCustomSlideShowsData()
     m_firstTime = false;
 
     bool deleteEnabled = true;
-    if(m_oldSlideShows->names().size() == 0)
+    if (m_oldSlideShows->names().size() == 0)
     {
         deleteEnabled = false;
     }
@@ -202,7 +202,7 @@ void KPrCustomSlideShowsDialog::loadCustomSlideShowsData()
     }
 
     //clear the slides if no slideShow is left a selected
-    if(m_uiWidget.customSlideShowsList->count() == 0)
+    if (m_uiWidget.customSlideShowsList->count() == 0)
     {
         m_uiWidget.currentSlidesList->clear();
     }
@@ -216,7 +216,7 @@ void KPrCustomSlideShowsDialog::changedSelectedSlideshow(QListWidgetItem* curren
     Q_UNUSED(previous);
 
     //If we aren't selecting anything don't do anything
-    if(!current)
+    if (!current)
     {
         return;
     }
@@ -265,7 +265,7 @@ void KPrCustomSlideShowsDialog::addSlidesToCurrentSlideShow()
 void KPrCustomSlideShowsDialog::addSlidesToCurrentSlideShow(QListWidgetItem* currentItem)
 {
     Q_UNUSED(currentItem);
-    if(!m_selectedSlideShowName.isNull())
+    if (!m_selectedSlideShowName.isNull())
     {
         addSlidesToCurrentSlideShow();
     }
@@ -275,7 +275,7 @@ void KPrCustomSlideShowsDialog::removeSlidesFromCurrentSlideShow()
 {
     //get the selected items and slideshow
     QList<QListWidgetItem*> selectedPages = m_uiWidget.currentSlidesList->selectedItems();
-    if(m_selectedSlideShowName.isEmpty())
+    if (m_selectedSlideShowName.isEmpty())
         return;
 
     QList<KoPAPageBase*> selectedSlideShow = m_slideShows->getByName(m_selectedSlideShowName);

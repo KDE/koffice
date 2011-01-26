@@ -36,7 +36,7 @@ public:
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers) = 0;
     virtual void cancelInteraction() { }
-    virtual void finishInteraction( Qt::KeyboardModifiers modifiers ) { Q_UNUSED(modifiers); }
+    virtual void finishInteraction(Qt::KeyboardModifiers modifiers) { Q_UNUSED(modifiers); }
 };
 
 #endif

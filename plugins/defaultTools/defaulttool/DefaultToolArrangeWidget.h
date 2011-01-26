@@ -30,7 +30,7 @@ class KoInteractionTool;
 class DefaultToolArrangeWidget : public QWidget, Ui::DefaultToolArrangeWidget {
     Q_OBJECT
 public:
-    explicit DefaultToolArrangeWidget( KoInteractionTool* tool, QWidget *parent = 0 );
+    explicit DefaultToolArrangeWidget(KoInteractionTool* tool, QWidget *parent = 0);
 
 private:
     KoInteractionTool* m_tool;

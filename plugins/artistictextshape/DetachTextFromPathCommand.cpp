@@ -28,7 +28,7 @@ DetachTextFromPathCommand::DetachTextFromPathCommand( ArtisticTextShape * textSh
     
     Q_ASSERT( m_textShape->layout() != ArtisticTextShape::Straight );
 
-    if( m_textShape->layout() == ArtisticTextShape::OnPath )
+    if ( m_textShape->layout() == ArtisticTextShape::OnPath )
         m_path = m_textShape->baseline();
     else
         m_pathShape = m_textShape->baselineShape();
@@ -47,7 +47,7 @@ void DetachTextFromPathCommand::undo()
 {
     m_textShape->update();
 
-    if( m_pathShape )
+    if ( m_pathShape )
         m_textShape->putOnPath( m_pathShape );
     else
         m_textShape->putOnPath( m_path );

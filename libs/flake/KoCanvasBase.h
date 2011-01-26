@@ -100,8 +100,8 @@ public:
      * Adds a command to the history. Call this for each @p command you create.
      * This will also execute the command.
      * This means, most of the application's code will look like
-     *    MyCommand * cmd = new MyCommand( parameters );
-     *    canvas.addCommand( cmd );
+     *    MyCommand * cmd = new MyCommand(parameters);
+     *    canvas.addCommand(cmd);
      *
      * Note that the command history takes ownership of the command, it will delete
      * it when the undo limit is reached, or when deleting the command history itself.

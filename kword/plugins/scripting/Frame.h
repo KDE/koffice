@@ -51,7 +51,7 @@ namespace Scripting
 * each frameset has and prints the shape-id;
 * \code
 * import KWord
-* for i in range( KWord.frameSetCount() ):
+* for i in range(KWord.frameSetCount()):
 *     fs = KWord.frameSet(i)
 *     for k in fs.frameCount():
 *         print fs.frame(k).shapeId()
@@ -97,15 +97,15 @@ public slots:
 
     /*testcases
     QObject* cursor() {
-        KoTextShapeData *frame = qobject_cast<KoTextShapeData*>( m_frame->shape()->userData() );
+        KoTextShapeData *frame = qobject_cast<KoTextShapeData*>(m_frame->shape()->userData());
         return frame ? new TextCursor(this, QTextCursor(frame->document())) : 0;
     }
     int position() {
-        KoTextShapeData *frame = qobject_cast<KoTextShapeData*>( m_frame->shape()->userData() );
+        KoTextShapeData *frame = qobject_cast<KoTextShapeData*>(m_frame->shape()->userData());
         return frame ? frame->position() : 0;
     }
     int endPosition() {
-        KoTextShapeData *frame = qobject_cast<KoTextShapeData*>( m_frame->shape()->userData() );
+        KoTextShapeData *frame = qobject_cast<KoTextShapeData*>(m_frame->shape()->userData());
         return frame ? frame->endPosition() : 0;
     }
     */

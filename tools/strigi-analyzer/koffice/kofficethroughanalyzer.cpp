@@ -82,7 +82,7 @@ void KOfficeThroughAnalyzerFactory::registerFields( FieldRegister& reg ) {
 }
 
 InputStream* KOfficeThroughAnalyzer::connectInputStream( InputStream* in ) {
-    if( !in )
+    if ( !in )
         return in;
 
     return in;
@@ -94,16 +94,16 @@ InputStream* KOfficeThroughAnalyzer::connectInputStream( InputStream* in ) {
     const char *c;
     int nread = in->read( c, in->size(), in->size() );
     in->reset( 0 );
-    if( nread == -2 )
+    if ( nread == -2 )
         return in;
 
     QDomDocument doc;
-    if( !doc.setContent( QByteArray( c, in->size() ) ) )
+    if ( !doc.setContent( QByteArray( c, in->size() ) ) )
         return in;
 
     // check if this is a koffice document
     QDomNode rootNode = doc.documentElement();
-    if( rootNode.nodeName() != "document-info" )
+    if ( rootNode.nodeName() != "document-info" )
         return in;
 
     QDomNode aboutNode = doc.namedItem("document-info").namedItem("about");

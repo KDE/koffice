@@ -1,10 +1,10 @@
 /* This file is part of the KDE project
- * Copyright ( C ) 2007 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or ( at your option ) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -30,10 +30,10 @@ class MockDocument : public KoPADocument
 {
 public:
     MockDocument()
-    : KoPADocument( 0, 0 )
+    : KoPADocument(0, 0)
     {}
-    KoView *createViewInstance( QWidget * /* parent */ ) { return 0; }
-    const char *odfTagName( bool b ) { return KoOdf::bodyContentElement( KoOdf::Presentation, b ); }
+    KoView *createViewInstance(QWidget * /* parent */) { return 0; }
+    const char *odfTagName(bool b) { return KoOdf::bodyContentElement(KoOdf::Presentation, b); }
     virtual KoOdf::DocumentType documentType() const { return KoOdf::Presentation; }
 protected:
     virtual QGraphicsItem *createCanvasItem() { return 0; }

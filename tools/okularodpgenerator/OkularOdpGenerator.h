@@ -27,13 +27,13 @@ class KoPADocument;
 class OkularOdpGenerator : public Okular::Generator
 {
 public:
-    OkularOdpGenerator( QObject *parent, const QVariantList &args );
+    OkularOdpGenerator(QObject *parent, const QVariantList &args);
     ~OkularOdpGenerator();
 
-    bool loadDocument( const QString &fileName, QVector<Okular::Page*> &pages );
+    bool loadDocument(const QString &fileName, QVector<Okular::Page*> &pages);
 
     bool canGeneratePixmap() const;
-    void generatePixmap( Okular::PixmapRequest *request );
+    void generatePixmap(Okular::PixmapRequest *request);
 
 protected:
     bool doCloseDocument();

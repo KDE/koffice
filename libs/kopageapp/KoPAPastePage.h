@@ -44,10 +44,10 @@ public:
      * @param activePage The page after which the pages are pasted. If 0 at the 
      *        pages are inserted at the beginning.
      */
-    KoPAPastePage( KoPADocument * doc, KoPAPageBase * activePage );
+    KoPAPastePage(KoPADocument * doc, KoPAPageBase * activePage);
 
 protected:
-    bool process( const KoXmlElement & body, KoOdfReadStore & odfStore );
+    bool process(const KoXmlElement & body, KoOdfReadStore & odfStore);
 
     KoPADocument * m_doc;
     KoPAPageBase * m_activePage;

@@ -94,7 +94,7 @@ bool EllipseShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
         qreal rx = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "rx"));
         qreal ry = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "ry"));
         size = QSizeF( 2*rx, 2*ry );
-    } else if(element.hasAttributeNS(KoXmlNS::svg, "r")) {
+    } else if (element.hasAttributeNS(KoXmlNS::svg, "r")) {
         qreal r = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "r"));
         size = QSizeF(2*r, 2*r);
     } else {

@@ -29,7 +29,7 @@ class KoShape;
 class SelectionTransformCommand : public QUndoCommand
 {
 public:
-    SelectionTransformCommand( KoSelection * selection, const QTransform &oldTransformation, const QTransform &newTransformation, QUndoCommand * parent = 0 );
+    SelectionTransformCommand(KoSelection * selection, const QTransform &oldTransformation, const QTransform &newTransformation, QUndoCommand * parent = 0);
 
     /// reimplemented from QUndoCommand
     virtual void redo();

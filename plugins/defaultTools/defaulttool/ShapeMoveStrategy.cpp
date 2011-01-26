@@ -57,13 +57,13 @@ ShapeMoveStrategy::ShapeMoveStrategy(KoToolBase *tool, const QPointF &clicked)
 
 void ShapeMoveStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers)
 {
-    if(m_selectedShapes.isEmpty())
+    if (m_selectedShapes.isEmpty())
         return;
     QPointF diff = point - m_start;
 
     if (modifiers & (Qt::AltModifier | Qt::ControlModifier)) {
         // keep x or y position unchanged
-        if(qAbs(diff.x()) < qAbs(diff.y()))
+        if (qAbs(diff.x()) < qAbs(diff.y()))
             diff.setX(0);
         else
             diff.setY(0);
@@ -86,7 +86,7 @@ void ShapeMoveStrategy::handleCustomEvent(KoPointerEvent *event)
 
     if (event->modifiers() & (Qt::AltModifier | Qt::ControlModifier)) {
         // keep x or y position unchanged
-        if(qAbs(diff.x()) < qAbs(diff.y()))
+        if (qAbs(diff.x()) < qAbs(diff.y()))
             diff.setX(0);
         else
             diff.setY(0);
@@ -104,7 +104,7 @@ void ShapeMoveStrategy::moveSelection()
     int i=0;
     foreach(KoShape *shape, m_selectedShapes) {
         QPointF delta = m_previousPositions.at(i) + m_diff - shape->position();
-        if(shape->parent())
+        if (shape->parent())
             shape->parent()->model()->proposeMove(shape, delta);
         tool()->canvas()->clipToDocument(shape, delta);
         QPointF newPos (shape->position() + delta);
@@ -120,7 +120,7 @@ void ShapeMoveStrategy::moveSelection()
 QUndoCommand* ShapeMoveStrategy::createCommand(QUndoCommand *parent)
 {
     tool()->canvas()->snapGuide()->reset();
-    if(m_diff.x() == 0 && m_diff.y() == 0)
+    if (m_diff.x() == 0 && m_diff.y() == 0)
         return 0;
     return new KoShapeMoveCommand(m_selectedShapes, m_previousPositions, m_newPositions, parent);
 }

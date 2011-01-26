@@ -76,7 +76,7 @@ void KoShadowConfigWidget::setShadowOffset( const QPointF &offset )
 {
     qreal length = sqrt( offset.x()*offset.x() + offset.y()*offset.y() );
     qreal angle = atan2( -offset.y(), offset.x() );
-    if( angle < 0.0 )
+    if ( angle < 0.0 )
         angle += 2*M_PI;
 
     d->widget.shadowAngle->blockSignals(true);

@@ -56,7 +56,7 @@ public:
      * important because static objects are constructed before translations
      * are initialized.
      */
-    explicit KoID(const QString & id, const KLocalizedString& name )
+    explicit KoID(const QString & id, const KLocalizedString& name)
             : m_id(id),
             m_localizedString(name) {}
 
@@ -107,7 +107,7 @@ inline bool operator>(const KoID &v1, const KoID &v2)
 
 inline QDebug operator<<(QDebug dbg, const KoID &id)
 {
-    dbg.nospace() << id.name() << " (" << id.id() << " )";
+    dbg.nospace() << id.name() << " (" << id.id() << ")";
 
     return dbg.space();
 }

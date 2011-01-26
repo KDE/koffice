@@ -38,7 +38,7 @@ protected:
                            const QString &name,
                            const KoColorSpace* fallBack)
             : KoColorSpaceAbstract<_CSTraits>(id, name),
-            m_fallBackColorSpace( KoColorSpaceRegistry::instance()->grabColorSpace( fallBack) ) {
+            m_fallBackColorSpace(KoColorSpaceRegistry::instance()->grabColorSpace(fallBack)) {
         m_qcolordata = new quint16[4];
         m_convertionCache.resize(m_fallBackColorSpace->pixelSize());
     }

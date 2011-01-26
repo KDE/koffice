@@ -30,19 +30,19 @@ class KoResourceModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    explicit KoResourceModel( KoAbstractResourceServerAdapter * resourceAdapter, QObject * parent = 0 );
+    explicit KoResourceModel(KoAbstractResourceServerAdapter * resourceAdapter, QObject * parent = 0);
     virtual ~KoResourceModel() {}
 
     /// reimplemented
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     /// reimplemented
-    virtual int columnCount ( const QModelIndex & parent = QModelIndex() ) const;
+    virtual int columnCount (const QModelIndex & parent = QModelIndex()) const;
     /// reimplemented
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     /// reimplemented
-    virtual QModelIndex index ( int row, int column = 0, const QModelIndex & parent = QModelIndex() ) const;
+    virtual QModelIndex index (int row, int column = 0, const QModelIndex & parent = QModelIndex()) const;
     /// Sets the number of columns to display
-    void setColumnCount( int columnCount );
+    void setColumnCount(int columnCount);
     /// @returns the resource server adapter the model is connnected to
     KoAbstractResourceServerAdapter * resourceServerAdapter();
 

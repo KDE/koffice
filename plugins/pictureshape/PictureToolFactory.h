@@ -26,7 +26,7 @@ class PictureToolFactory : public KoToolFactoryBase
 {
     Q_OBJECT
 public:
-    PictureToolFactory( QObject* parent);
+    PictureToolFactory(QObject* parent);
     ~PictureToolFactory();
 
     KoToolBase *createTool(KoCanvasBase *canvas);

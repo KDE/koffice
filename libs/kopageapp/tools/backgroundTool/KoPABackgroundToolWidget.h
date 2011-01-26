@@ -30,7 +30,7 @@ class KoPABackgroundToolWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit KoPABackgroundToolWidget( KoPABackgroundTool *tool, QWidget *parent = 0 );
+    explicit KoPABackgroundToolWidget(KoPABackgroundTool *tool, QWidget *parent = 0);
     virtual ~KoPABackgroundToolWidget();
 
 public slots:
@@ -38,8 +38,8 @@ public slots:
 
 private slots:
     void setBackgroundImage();
-    void useMasterBackground( int state );
-    void displayMasterShapes( int state );
+    void useMasterBackground(int state);
+    void displayMasterShapes(int state);
 
 private:
     Ui::BackgroundToolWidget widget;

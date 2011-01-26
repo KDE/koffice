@@ -102,7 +102,7 @@ struct PathConnectionPoint {
     KoPathPoint * point;
 };
 
-inline qreal squareDistance( const QPointF &p1, const QPointF &p2)
+inline qreal squareDistance(const QPointF &p1, const QPointF &p2)
 {
     qreal dx = p1.x()-p2.x();
     qreal dy = p1.y()-p2.y();
@@ -112,7 +112,7 @@ inline qreal squareDistance( const QPointF &p1, const QPointF &p2)
 class AngleSnapStrategy : public KoSnapStrategy
 {
 public:
-    AngleSnapStrategy( qreal angleStep )
+    AngleSnapStrategy(qreal angleStep)
     : KoSnapStrategy(KoSnapGuide::CustomSnapping), m_angleStep(angleStep), m_active(false)
     {
     }
@@ -241,7 +241,7 @@ public:
     }
 
     /// returns the nearest existing path point
-    KoPathPoint* endPointAtPosition( const QPointF &position ) const
+    KoPathPoint* endPointAtPosition(const QPointF &position) const
     {
         QRectF roi = q->handleGrabRect(position);
         QList<KoShape *> shapes = q->canvas()->shapeManager()->shapesAt(roi);
@@ -285,7 +285,7 @@ public:
     }
 
     /// Connects given path with the ones we hit when starting/finishing
-    bool connectPaths( KoPathShape *pathShape, const PathConnectionPoint &pointAtStart, const PathConnectionPoint &pointAtEnd ) const
+    bool connectPaths(KoPathShape *pathShape, const PathConnectionPoint &pointAtStart, const PathConnectionPoint &pointAtEnd) const
     {
         KoPathShape * startShape = 0;
         KoPathShape * endShape = 0;

@@ -86,7 +86,7 @@ public:
      * Set the resolution for X and Y to the display values reported by KGlobal.
      * The zoom factor is not changed.
      */
-    void setResolutionToStandard( );
+    void setResolutionToStandard();
 
     /**
      * Set the zoomed resolution for X and Y.

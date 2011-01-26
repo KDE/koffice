@@ -495,7 +495,7 @@ void EnhancedPathShape::parsePathData(const QString &data)
 
 void EnhancedPathShape::setMirrorHorizontally(bool mirrorHorizontally)
 {
-    if( m_mirrorHorizontally != mirrorHorizontally) {
+    if ( m_mirrorHorizontally != mirrorHorizontally) {
         m_mirrorHorizontally = mirrorHorizontally;
         updatePath(size());
     }
@@ -504,7 +504,7 @@ void EnhancedPathShape::setMirrorHorizontally(bool mirrorHorizontally)
 
 void EnhancedPathShape::setMirrorVertically(bool mirrorVertically)
 {
-    if( m_mirrorVertically != mirrorVertically) {
+    if ( m_mirrorVertically != mirrorVertically) {
         m_mirrorVertically = mirrorVertically;
         updatePath(size());
     }

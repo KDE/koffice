@@ -220,7 +220,7 @@ public:
      *
      * @param point the point for which you want to get the index
      * @return path point index of the point if it exists
-     *         otherwise KoPathPointIndex( -1, -1 )
+     *         otherwise KoPathPointIndex(-1, -1)
      */
     KoPathPointIndex pathPointIndex(const KoPathPoint *point) const;
 
@@ -243,7 +243,7 @@ public:
      *
      * @param pointIndex index of the first point of the segment
      *
-     * @return Segment containing both points of the segment or KoPathSegment( 0, 0 ) on error e.g. out of bounds
+     * @return Segment containing both points of the segment or KoPathSegment(0, 0) on error e.g. out of bounds
      */
     KoPathSegment segmentByIndex(const KoPathPointIndex &pointIndex) const;
 
@@ -353,7 +353,7 @@ public:
      *
      * @param pointIndex the index of the point at which to open the closed subpath
      * @return the new position of the old first point in the subpath
-     *         otherwise KoPathPointIndex( -1, -1 )
+     *         otherwise KoPathPointIndex(-1, -1)
      */
     KoPathPointIndex openSubpath(const KoPathPointIndex &pointIndex);
 
@@ -364,7 +364,7 @@ public:
      * the given point the new start point of the subpath.
      *
      * @return the new position of the old first point in the subpath
-     *         otherwise KoPathPointIndex( -1, -1 )
+     *         otherwise KoPathPointIndex(-1, -1)
      */
     KoPathPointIndex closeSubpath(const KoPathPointIndex &pointIndex);
 
@@ -467,7 +467,7 @@ protected:
      * This makes sure that also if the newSize isNull that there will be a
      * very small size of 0.000001 pixels
      */
-    QTransform resizeMatrix( const QSizeF &newSize ) const;
+    QTransform resizeMatrix(const QSizeF &newSize) const;
 
     KoSubpathList m_subpaths;
 

@@ -29,21 +29,21 @@ class KoPABackgroundTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    KoPABackgroundTool( KoCanvasBase* base );
+    KoPABackgroundTool(KoCanvasBase* base);
     virtual ~KoPABackgroundTool();
 
     ///Reimplemented from KoToolBase
-    virtual void paint( QPainter &painter, const KoViewConverter &converter );
+    virtual void paint(QPainter &painter, const KoViewConverter &converter);
     ///Reimplemented from KoToolBase
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
     ///Reimplemented from KoToolBase
     virtual void deactivate();
     ///Reimplemented from KoToolBase
-    virtual void mousePressEvent( KoPointerEvent *event );
+    virtual void mousePressEvent(KoPointerEvent *event);
     ///Reimplemented from KoToolBase
-    virtual void mouseMoveEvent( KoPointerEvent *event );
+    virtual void mouseMoveEvent(KoPointerEvent *event);
     ///Reimplemented from KoToolBase
-    virtual void mouseReleaseEvent( KoPointerEvent *event );
+    virtual void mouseReleaseEvent(KoPointerEvent *event);
 
     KoPAViewBase * view() const;
 

@@ -31,39 +31,39 @@ class KOWIDGETS_EXPORT KoShadowConfigWidget : public QWidget
 {
     Q_OBJECT
 public:
-    KoShadowConfigWidget( QWidget * parent );
+    KoShadowConfigWidget(QWidget * parent);
     ~KoShadowConfigWidget();
 
     /// Sets the shadow color
-    void setShadowColor( const QColor &color );
+    void setShadowColor(const QColor &color);
 
     /// Returns the shadow color
     QColor shadowColor() const;
 
     /// Sets the shadow offset
-    void setShadowOffset( const QPointF &offset );
+    void setShadowOffset(const QPointF &offset);
 
     /// Returns the shadow offset
     QPointF shadowOffset() const;
 
     /// Sets if the shadow is visible
-    void setShadowVisible( bool visible );
+    void setShadowVisible(bool visible);
 
     /// Returns if shadow is visible
     bool shadowVisible() const;
 
 public slots:
-    void setUnit( const KoUnit &unit );
+    void setUnit(const KoUnit &unit);
 
 signals:
     /// Is emitted whenever the shadow color has changed
-    void shadowColorChanged( const KoColor &color );
+    void shadowColorChanged(const KoColor &color);
 
     /// Is emitted whenever the shadow offset has changed
-    void shadowOffsetChanged( const QPointF &offset );
+    void shadowOffsetChanged(const QPointF &offset);
 
     /// Is emitted whenever the shadow visibility has changed
-    void shadowVisibilityChanged( bool visible );
+    void shadowVisibilityChanged(bool visible);
 
 private slots:
     void visibilityChanged();

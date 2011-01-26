@@ -122,8 +122,8 @@ public slots:
         return 0;
     }
 
-    //QTextObject * object ( int objectIndex ) const
-    //QTextObject * objectForFormat ( const QTextFormat & f ) const
+    //QTextObject * object (int objectIndex) const
+    //QTextObject * objectForFormat (const QTextFormat & f) const
 
     /** Return the content of the document as plain-text. */
     QString toText() const {

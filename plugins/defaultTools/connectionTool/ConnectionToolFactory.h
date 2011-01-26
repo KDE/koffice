@@ -28,11 +28,11 @@ class ConnectionToolFactory : public KoToolFactoryBase
 {
 public:
     /// Constructor
-    explicit ConnectionToolFactory( QObject *parent );
+    explicit ConnectionToolFactory(QObject *parent);
     /// Destructor
     ~ConnectionToolFactory();
     /// reimplemented
-    KoToolBase* createTool( KoCanvasBase *canvas );
+    KoToolBase* createTool(KoCanvasBase *canvas);
 };
 
 #endif

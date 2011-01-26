@@ -35,7 +35,7 @@ KPrClockWipeSubpathHelper::~KPrClockWipeSubpathHelper()
 
 void KPrClockWipeSubpathHelper::addSubpathForCircularArc(QPainterPath* clipPath, QRect& boundingRect, double startAngle, double endAngle)
 {
-    if(fabs(startAngle - endAngle) < DBL_EPSILON)
+    if (fabs(startAngle - endAngle) < DBL_EPSILON)
         return;
 
     int width = boundingRect.width();
@@ -44,7 +44,7 @@ void KPrClockWipeSubpathHelper::addSubpathForCircularArc(QPainterPath* clipPath,
     while(startAngle < 0)
         startAngle += 2*M_PI;
 
-    if(endAngle < startAngle)
+    if (endAngle < startAngle)
         endAngle += 2*M_PI;
 
     QPoint center = boundingRect.center();
@@ -57,13 +57,13 @@ void KPrClockWipeSubpathHelper::addSubpathForCircularArc(QPainterPath* clipPath,
     int cornerY = sin(quadrantAngle + 0.5*M_PI) < 0 ? -height/2 : height/2;
 
     double cornerAngleInQuadrant;
-    if(cos(quadrantAngle + 0.5*M_PI)*sin(quadrantAngle + 0.5*M_PI) > 0)
+    if (cos(quadrantAngle + 0.5*M_PI)*sin(quadrantAngle + 0.5*M_PI) > 0)
         cornerAngleInQuadrant = fabs(atan(static_cast<double>(cornerY)/cornerX));
     else 
         cornerAngleInQuadrant = fabs(atan(static_cast<double>(cornerX)/cornerY));
 
     double cornerAngle;
-    if(startAngleInQuadrant < cornerAngleInQuadrant)
+    if (startAngleInQuadrant < cornerAngleInQuadrant)
         cornerAngle = quadrantAngle + cornerAngleInQuadrant;
     else
         cornerAngle = quadrantAngle + M_PI - cornerAngleInQuadrant;

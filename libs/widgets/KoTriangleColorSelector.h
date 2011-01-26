@@ -29,11 +29,11 @@ class KOWIDGETS_EXPORT KoTriangleColorSelector : public QWidget {
         KoTriangleColorSelector(QWidget* parent);
         ~KoTriangleColorSelector();
     protected: // events
-        void paintEvent( QPaintEvent * event );
-        void resizeEvent( QResizeEvent * event );
-        void mouseReleaseEvent( QMouseEvent * event );
-        void mousePressEvent( QMouseEvent * event );
-        void mouseMoveEvent( QMouseEvent * event );
+        void paintEvent(QPaintEvent * event);
+        void resizeEvent(QResizeEvent * event);
+        void mouseReleaseEvent(QMouseEvent * event);
+        void mousePressEvent(QMouseEvent * event);
+        void mouseMoveEvent(QMouseEvent * event);
     public:
         int hue() const;
         int value() const;
@@ -44,9 +44,9 @@ class KOWIDGETS_EXPORT KoTriangleColorSelector : public QWidget {
         void setValue(int v);
         void setSaturation(int s);
         void setHSV(int h, int s, int v);
-        void setQColor(const QColor& );
+        void setQColor(const QColor&);
     signals:
-        void colorChanged(const QColor& );
+        void colorChanged(const QColor&);
     private:
         void tellColorChanged();
         void generateTriangle();

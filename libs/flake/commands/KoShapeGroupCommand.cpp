@@ -129,7 +129,7 @@ void KoShapeGroupCommand::redo()
         KoShape * shape = d->shapes[i];
         shape->setZIndex(zIndex++);
 
-        if(d->container->inheritsTransform(shape)) {
+        if (d->container->inheritsTransform(shape)) {
             shape->applyAbsoluteTransformation(groupTransform);
         }
         else {
@@ -160,7 +160,7 @@ void KoShapeGroupCommand::undo()
             d->oldParents.at(i)->setClipped(shape, d->oldClipped.at(i));
             d->oldParents.at(i)->setInheritsTransform(shape, d->oldInheritTransform.at(i));
         }
-        if(d->container->inheritsTransform(shape)) {
+        if (d->container->inheritsTransform(shape)) {
             shape->applyAbsoluteTransformation(ungroupTransform);
         }
         else {
