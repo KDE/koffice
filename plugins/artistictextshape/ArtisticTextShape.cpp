@@ -268,7 +268,7 @@ void ArtisticTextShape::createOutline()
 
         m_charOffsets.resize( textLength + 1 );
         int charIdx = 0;
-        for( ;charIdx < textLength; ++charIdx )
+        for ( ;charIdx < textLength; ++charIdx )
         {
             QString actChar( m_text[charIdx] );
             // get the percent value of the actual char position
@@ -591,7 +591,7 @@ void ArtisticTextShape::cacheGlyphOutlines()
     m_charOutlines.clear();
 
     int textLength = m_text.length();
-    for( int charIdx = 0; charIdx < textLength; ++charIdx )
+    for ( int charIdx = 0; charIdx < textLength; ++charIdx )
     {
         QString actChar( m_text[charIdx] );
         QPainterPath charOutline;

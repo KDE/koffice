@@ -126,7 +126,7 @@ void ShapePropertiesDocker::addWidgetForShape( KoShape * shape )
 
         d->currentPanel = 0;
         uint panelCount = panels.count();
-        for( uint i = 0; i < panelCount; ++i )
+        for ( uint i = 0; i < panelCount; ++i )
         {
             if ( panels[i]->showOnShapeSelect() ) {
                 d->currentPanel = panels[i];

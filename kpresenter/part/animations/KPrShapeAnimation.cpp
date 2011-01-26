@@ -62,7 +62,7 @@ bool KPrShapeAnimation::saveOdf(KoPASavingContext &paContext, bool startStep, bo
     }
 
     writer.addAttribute("presentation:node-type", nodeType);
-    for(int i=0;i < this->animationCount(); i++) {
+    for (int i=0;i < this->animationCount(); i++) {
         QAbstractAnimation * animation = this->animationAt(i);
         if (KPrAnimationBase * a = dynamic_cast<KPrAnimationBase *>(animation)) {
             a->saveOdf(paContext);

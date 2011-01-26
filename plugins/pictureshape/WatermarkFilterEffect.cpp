@@ -47,8 +47,8 @@ QImage WatermarkFilterEffect::processImage(const QImage& image, const KoFilterEf
     const int right = context.filterRegion().right();
     const int bottom = context.filterRegion().bottom();
     const int width = result.width();
-    for( int row = context.filterRegion().top(); row < bottom; ++row ) {
-        for( int col = context.filterRegion().left(); col < right; ++col ){
+    for ( int row = context.filterRegion().top(); row < bottom; ++row ) {
+        for ( int col = context.filterRegion().left(); col < right; ++col ){
             const QColor currentPixel = pixel[row * width + col];
             const QColor currentPixelLighter = KColorUtils::lighten(currentPixel, 0.75);
             pixel[row * width + col] = currentPixelLighter.rgb();

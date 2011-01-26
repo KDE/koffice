@@ -22,7 +22,7 @@
 #include <KoTextSharedLoadingData.h>
 
 #define synchronized(T) QMutex T; \
-    for(Finalizer finalizer(T); finalizer.loop(); finalizer.inc())
+    for (Finalizer finalizer(T); finalizer.loop(); finalizer.inc())
 
 struct Finalizer {
     Finalizer(QMutex &lock) : l(&lock), b(1) {

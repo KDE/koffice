@@ -140,7 +140,7 @@ void TestShapeContainer::testScaling()
 
 
     QList<QPointF> oldPositions;
-    for(int i=0; i< transformShapes.size(); i++) {
+    for (int i=0; i< transformShapes.size(); i++) {
 //        kDebug() << "abs transform=" << transformShapes.at(i)->absoluteTransformation(0);
 //        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner);
         oldPositions.append(transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner));
@@ -150,7 +150,7 @@ void TestShapeContainer::testScaling()
     transformCommand = new KoShapeTransformCommand(transformShapes, oldTransformations, newTransformations);
     transformCommand->redo();
 
-    for(int i=0; i< transformShapes.size(); i++) {
+    for (int i=0; i< transformShapes.size(); i++) {
 //        kDebug() << "abs transform=" << transformShapes.at(i)->absoluteTransformation(0);
 //        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner);
         QCOMPARE(transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner), oldPositions.at(i)*0.5);
@@ -160,7 +160,7 @@ void TestShapeContainer::testScaling()
     KoShapeUngroupCommand* ungroupCmd = new KoShapeUngroupCommand(group, transformShapes);
     ungroupCmd->redo();
 
-    for(int i=0; i< transformShapes.size(); i++) {
+    for (int i=0; i< transformShapes.size(); i++) {
 //        kDebug() << "abs transform=" << transformShapes.at(i)->absoluteTransformation(0);
 //        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner);
         QCOMPARE(transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner), oldPositions.at(i)*0.5);
@@ -207,7 +207,7 @@ void TestShapeContainer::testScaling2()
 
 
     QList<QPointF> oldPositions;
-    for(int i=0; i< transformShapes.size(); i++) {
+    for (int i=0; i< transformShapes.size(); i++) {
 //        kDebug() << "abs transform=" << transformShapes.at(i)->absoluteTransformation(0);
 //        kDebug() << "absPos" << transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner);
         oldPositions.append(transformShapes.at(i)->absolutePosition(KoFlake::TopLeftCorner));

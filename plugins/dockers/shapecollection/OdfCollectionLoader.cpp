@@ -304,7 +304,7 @@ QString OdfCollectionLoader::findMimeTypeByUrl(const KUrl& url)
         QStringList patterns = mime ? mime->patterns() : QStringList();
 
         // Find the extension that makes it a backup file, and remove it
-        for(QStringList::Iterator it = patterns.begin(); it != patterns.end(); ++it) {
+        for (QStringList::Iterator it = patterns.begin(); it != patterns.end(); ++it) {
             QString ext = *it;
             if (!ext.isEmpty() && ext[0] == '*')
             {

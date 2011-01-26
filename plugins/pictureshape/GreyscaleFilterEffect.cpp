@@ -45,8 +45,8 @@ QImage GreyscaleFilterEffect::processImage(const QImage& image, const KoFilterEf
     const int right = context.filterRegion().right();
     const int bottom = context.filterRegion().bottom();
     const int width = result.width();
-    for( int row = context.filterRegion().top(); row < bottom; ++row ) {
-        for( int col = context.filterRegion().left(); col < right; ++col ){
+    for ( int row = context.filterRegion().top(); row < bottom; ++row ) {
+        for ( int col = context.filterRegion().left(); col < right; ++col ){
             const QRgb currentPixel = pixel[row * width + col];
             const int red = qRed(currentPixel);
             const int green = qGreen(currentPixel);

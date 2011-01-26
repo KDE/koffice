@@ -100,7 +100,7 @@ void KPrCustomSlideShows::addSlidesToAll(const QList<KoPAPageBase*> &slideShow, 
 {
     //FIXME: should we allow negative index?
     //if (position < 0) return;;
-    for(int i=0; i < slideShow.size(); ++i) {
+    for (int i=0; i < slideShow.size(); ++i) {
         addSlideToAll(slideShow[i], position + i);
     }
 }
@@ -116,7 +116,7 @@ void KPrCustomSlideShows::removeSlideFromAll(KoPAPageBase* page)
 
 void KPrCustomSlideShows::removeSlidesFromAll(const QList<KoPAPageBase*> &slideShow)
 {
-    for(int i=0; i < slideShow.size(); ++i) {
+    for (int i=0; i < slideShow.size(); ++i) {
         removeSlideFromAll(slideShow[i]);
     }
 }

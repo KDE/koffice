@@ -113,7 +113,7 @@ void KPrAnimationCache::init(int step, KoShape *shape, KoTextBlockData * textBlo
 
         // Check visibility
         if (id == "visibility") {
-            for(int i = step - 1; i >= 0; i--)
+            for (int i = step - 1; i >= 0; i--)
             {
                 if (!this->hasValue(i, textBlockData, id)){
                     this->setValue(i, textBlockData, id, value.toBool());
@@ -141,7 +141,7 @@ void KPrAnimationCache::init(int step, KoShape *shape, KoTextBlockData * textBlo
 
         // Check visibility
         if (id == "visibility") {
-            for(int i = step - 1; i >= 0; i--)
+            for (int i = step - 1; i >= 0; i--)
             {
                 if (!this->hasValue(i, shape, id)) {
                     this->setValue(i, shape, id, value.toBool());
