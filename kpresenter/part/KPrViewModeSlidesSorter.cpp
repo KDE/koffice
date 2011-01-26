@@ -46,17 +46,17 @@
 #include <KDebug>
 
 KPrViewModeSlidesSorter::KPrViewModeSlidesSorter(KoPAView *view, KoPACanvas *canvas)
-    : KoPAViewMode( view, canvas )
-    , m_slidesSorter( new KPrSlidesSorter(this, view->parentWidget()) )
-    , m_iconSize( QSize(200, 200) )
-    , m_itemSize( QRect(0, 0, 0, 0) )
+    : KoPAViewMode(view, canvas)
+    , m_slidesSorter(new KPrSlidesSorter(this, view->parentWidget()))
+    , m_iconSize(QSize(200, 200))
+    , m_itemSize(QRect(0, 0, 0, 0))
     , m_sortNeeded(false)
     , m_pageCount(m_view->kopaDocument()->pages().count())
     , m_dragingFlag(false)
     , m_lastItemNumber(-1)
 {
     m_slidesSorter->hide();
-    m_slidesSorter->setIconSize( m_iconSize );
+    m_slidesSorter->setIconSize(m_iconSize);
 }
 
 KPrViewModeSlidesSorter::~KPrViewModeSlidesSorter()
@@ -67,7 +67,7 @@ void KPrViewModeSlidesSorter::paint(KoPACanvasBase* /*canvas*/, QPainter& /*pain
 {
 }
 
-void KPrViewModeSlidesSorter::KPrSlidesSorter::paintEvent( QPaintEvent* event )
+void KPrViewModeSlidesSorter::KPrSlidesSorter::paintEvent(QPaintEvent* event)
 {
     event->accept();
     QListWidget::paintEvent(event);
@@ -90,8 +90,8 @@ void KPrViewModeSlidesSorter::KPrSlidesSorter::paintEvent( QPaintEvent* event )
             numberMod = currentItemNumber%4 > 0 ? currentItemNumber%4 : 4;
         }
         int verticalValue = (currentItemNumber - numberMod) / 4 * size.height() - verticalScrollBar()->value();
-        QPoint point1(numberMod * size.width(), verticalValue );
-        QPoint point2(numberMod * size.width(), verticalValue + size.height() );
+        QPoint point1(numberMod * size.width(), verticalValue);
+        QPoint point2(numberMod * size.width(), verticalValue + size.height());
         QLineF line(point1, point2);
 
         QPainter painter(this->viewport());
@@ -100,11 +100,11 @@ void KPrViewModeSlidesSorter::KPrSlidesSorter::paintEvent( QPaintEvent* event )
 
 }
 
-void KPrViewModeSlidesSorter::paintEvent( KoPACanvas * canvas, QPaintEvent* event )
+void KPrViewModeSlidesSorter::paintEvent(KoPACanvas * canvas, QPaintEvent* event)
 {
     Q_UNUSED(canvas);
     Q_UNUSED(event);
-    Q_ASSERT( m_canvas == canvas );
+    Q_ASSERT(m_canvas == canvas);
 }
 
 void KPrViewModeSlidesSorter::tabletEvent(QTabletEvent *event, const QPointF &point)
@@ -155,7 +155,7 @@ void KPrViewModeSlidesSorter::wheelEvent(QWheelEvent *event, const QPointF &poin
 
 void KPrViewModeSlidesSorter::activate(KoPAViewMode *previousViewMode)
 {
-    Q_UNUSED( previousViewMode );
+    Q_UNUSED(previousViewMode);
     populate();
     KoPAView *view = dynamic_cast<KoPAView *>(m_view);
     if (view) {
@@ -171,7 +171,7 @@ void KPrViewModeSlidesSorter::deactivate()
     // Give the ressources back to the canvas
     m_canvas->resourceManager()->setResource(KoText::ShowTextFrames, 0);
     // Active the view as a basic but active one
-    m_view->setActionEnabled( KoPAView::AllActions, true );
+    m_view->setActionEnabled(KoPAView::AllActions, true);
     m_view->doUpdateActivePage(m_view->activePage());
     KoPAView *view = dynamic_cast<KoPAView *>(m_view);
     if (view) {
@@ -179,25 +179,25 @@ void KPrViewModeSlidesSorter::deactivate()
     }
 }
 
-void KPrViewModeSlidesSorter::updateActivePage( KoPAPageBase *page )
+void KPrViewModeSlidesSorter::updateActivePage(KoPAPageBase *page)
 {
     Q_UNUSED(page);
 }
 
-void KPrViewModeSlidesSorter::addShape( KoShape *shape )
+void KPrViewModeSlidesSorter::addShape(KoShape *shape)
 {
     Q_UNUSED(shape);
 }
 
-void KPrViewModeSlidesSorter::removeShape( KoShape *shape )
+void KPrViewModeSlidesSorter::removeShape(KoShape *shape)
 {
     Q_UNUSED(shape);
 }
 
-void KPrViewModeSlidesSorter::KPrSlidesSorter::startDrag ( Qt::DropActions supportedActions )
+void KPrViewModeSlidesSorter::KPrSlidesSorter::startDrag (Qt::DropActions supportedActions)
 {
     Q_UNUSED(supportedActions);
-    QAbstractItemView::startDrag( Qt::MoveAction );
+    QAbstractItemView::startDrag(Qt::MoveAction);
 }
 
 
@@ -287,12 +287,12 @@ void KPrViewModeSlidesSorter::populate()
     QListWidgetItem * item = 0;
 
     //Load the available slides
-    foreach( KoPAPageBase* page, m_view->kopaDocument()->pages() )
+    foreach(KoPAPageBase* page, m_view->kopaDocument()->pages())
     {
         currentPage++;
         QString slideName = page->name().isEmpty() ? i18n("Slide %1", currentPage) : page->name();
-        item = new QListWidgetItem( QIcon( page->thumbnail( m_iconSize ) ), slideName, m_slidesSorter );
-        item->setFlags((item->flags() | Qt::ItemIsDragEnabled ) & ~Qt::ItemIsDropEnabled);
+        item = new QListWidgetItem(QIcon(page->thumbnail(m_iconSize)), slideName, m_slidesSorter);
+        item->setFlags((item->flags() | Qt::ItemIsDragEnabled) & ~Qt::ItemIsDropEnabled);
     }
     if (item) {
         setItemSize(m_slidesSorter->visualItemRect(item));
@@ -312,8 +312,8 @@ void KPrViewModeSlidesSorter::movePage(int pageNumber, int pageAfterNumber)
     }
 
     if (page) {
-        KoPAPageMoveCommand *command = new KoPAPageMoveCommand( m_view->kopaDocument(), page, pageAfter );
-        m_view->kopaDocument()->addCommand( command );
+        KoPAPageMoveCommand *command = new KoPAPageMoveCommand(m_view->kopaDocument(), page, pageAfter);
+        m_view->kopaDocument()->addCommand(command);
     }
 }
 

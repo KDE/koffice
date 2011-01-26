@@ -1,10 +1,10 @@
 /* This file is part of the KDE project
- * Copyright ( C ) 2007 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -52,19 +52,19 @@ bool KPrMasterPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &
     return retval;
 }
 
-void KPrMasterPage::loadOdfPageExtra( const KoXmlElement &element, KoPALoadingContext & loadingContext )
+void KPrMasterPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & loadingContext)
 {
     // the layout needs to be loaded after the shapes are already loaded so the initialization of the data works
     KPrPageLayout * layout = 0;
-    if ( element.hasAttributeNS( KoXmlNS::presentation, "presentation-page-layout-name" ) ) {
+    if (element.hasAttributeNS(KoXmlNS::presentation, "presentation-page-layout-name")) {
         KPrPageLayouts *layouts = loadingContext.documentResourceManager()->resource(KPresenter::PageLayouts).value<KPrPageLayouts*>();
-        Q_ASSERT( layouts );
-        if ( layouts ) {
-            QString layoutName = element.attributeNS( KoXmlNS::presentation, "presentation-page-layout-name" );
-            QRectF pageRect( 0, 0, pageLayout().width, pageLayout().height );
-            layout = layouts->pageLayout( layoutName, loadingContext, pageRect );
+        Q_ASSERT(layouts);
+        if (layouts) {
+            QString layoutName = element.attributeNS(KoXmlNS::presentation, "presentation-page-layout-name");
+            QRectF pageRect(0, 0, pageLayout().width, pageLayout().height);
+            layout = layouts->pageLayout(layoutName, loadingContext, pageRect);
             kDebug(33001) << "page layout" << layoutName << layout;
         }
     }
-    placeholders().init( layout, shapes() );
+    placeholders().init(layout, shapes());
 }

@@ -31,11 +31,11 @@ class KPrPresentationBlackWidget : public KPrPresentationToolEventForwarder
 {
     Q_OBJECT
 public:
-    KPrPresentationBlackWidget( KoPACanvasBase * canvas );
+    KPrPresentationBlackWidget(KoPACanvasBase * canvas);
     virtual ~KPrPresentationBlackWidget();
 
 protected:
-    void paintEvent( QPaintEvent * event );
+    void paintEvent(QPaintEvent * event);
 
 private:
     QSize m_size;

@@ -30,7 +30,7 @@ class KPrSoundCollection;
 class KPRESENTER_EXPORT KPrEventActionData
 {
 public:
-    KPrEventActionData( KoShape * shape, KoEventAction * eventAction , KPrSoundCollection * soundCollection );
+    KPrEventActionData(KoShape * shape, KoEventAction * eventAction , KPrSoundCollection * soundCollection);
     ~KPrEventActionData();
 
     KPrSoundCollection * soundCollection() const;

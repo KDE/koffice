@@ -40,20 +40,20 @@ class KPrPresentationTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    explicit KPrPresentationTool( KPrViewModePresentation &viewMode );
+    explicit KPrPresentationTool(KPrViewModePresentation &viewMode);
     ~KPrPresentationTool();
 
     bool wantsAutoScroll() const;
 
-    void paint( QPainter &painter, const KoViewConverter &converter );
+    void paint(QPainter &painter, const KoViewConverter &converter);
 
-    void mousePressEvent( KoPointerEvent *event );
-    void mouseDoubleClickEvent( KoPointerEvent *event );
-    void mouseMoveEvent( KoPointerEvent *event );
-    void mouseReleaseEvent( KoPointerEvent *event );
-    void keyPressEvent( QKeyEvent *event );
-    void keyReleaseEvent( QKeyEvent *event );
-    void wheelEvent( KoPointerEvent * event );
+    void mousePressEvent(KoPointerEvent *event);
+    void mouseDoubleClickEvent(KoPointerEvent *event);
+    void mouseMoveEvent(KoPointerEvent *event);
+    void mouseReleaseEvent(KoPointerEvent *event);
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
+    void wheelEvent(KoPointerEvent * event);
 
     KPrPresentationStrategyBase *strategy();
     KPrViewModePresentation & viewModePresentation();
@@ -68,8 +68,8 @@ public slots:
 
 private:
     void finishEventActions();
-    void switchStrategy( KPrPresentationStrategyBase * strategy );
-    bool eventFilter( QObject * obj, QEvent * event );
+    void switchStrategy(KPrPresentationStrategyBase * strategy);
+    bool eventFilter(QObject * obj, QEvent * event);
 
     /**
      * Returns true if shape is a TextShape and event->point is over hyperlink

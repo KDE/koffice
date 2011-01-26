@@ -1,10 +1,10 @@
 /* This file is part of the KDE project
- * Copyright ( C ) 2007 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -26,8 +26,8 @@
 
 #include "KPrAnimationData.h"
 
-KPrTranslateAnimation::KPrTranslateAnimation( KoShape * shape, int step, Type type )
-: KPrShapeAnimationOld( shape, step, type )
+KPrTranslateAnimation::KPrTranslateAnimation(KoShape * shape, int step, Type type)
+: KPrShapeAnimationOld(shape, step, type)
 {
 }
 
@@ -35,36 +35,36 @@ KPrTranslateAnimation::~KPrTranslateAnimation()
 {
 }
 
-bool KPrTranslateAnimation::animate( QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData )
+bool KPrTranslateAnimation::animate(QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData)
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>( animationData );
-    Q_ASSERT( data );
-    painter.translate( converter.documentToView( data->m_translate ) );
+    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    Q_ASSERT(data);
+    painter.translate(converter.documentToView(data->m_translate));
     return data->m_finished;
 }
 
-void KPrTranslateAnimation::animateRect( QRectF & rect, KPrAnimationData * animationData )
+void KPrTranslateAnimation::animateRect(QRectF & rect, KPrAnimationData * animationData)
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>( animationData );
-    Q_ASSERT( data );
-    rect.translate( data->m_translate );
+    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    Q_ASSERT(data);
+    rect.translate(data->m_translate);
 }
 
-void KPrTranslateAnimation::next( int currentTime, KPrAnimationData * animationData )
+void KPrTranslateAnimation::next(int currentTime, KPrAnimationData * animationData)
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>( animationData );
-    Q_ASSERT( data );
-    data->m_canvas->updateCanvas( data->m_boundingRect.translated( data->m_translate ) );
-    data->m_translate.setX( data->m_timeLine.frameForTime( currentTime ) / TIMEFACTOR );
-    data->m_canvas->updateCanvas( data->m_boundingRect.translated( data->m_translate ) );
-    data->m_finished = data->m_timeLine.frameForTime( currentTime ) == data->m_timeLine.endFrame();
+    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    Q_ASSERT(data);
+    data->m_canvas->updateCanvas(data->m_boundingRect.translated(data->m_translate));
+    data->m_translate.setX(data->m_timeLine.frameForTime(currentTime) / TIMEFACTOR);
+    data->m_canvas->updateCanvas(data->m_boundingRect.translated(data->m_translate));
+    data->m_finished = data->m_timeLine.frameForTime(currentTime) == data->m_timeLine.endFrame();
 }
 
-void KPrTranslateAnimation::finish( KPrAnimationData * animationData )
+void KPrTranslateAnimation::finish(KPrAnimationData * animationData)
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>( animationData );
-    Q_ASSERT( data );
-    data->m_canvas->updateCanvas( data->m_boundingRect.translated( data->m_translate ) );
-    data->m_translate.setX( data->m_timeLine.endFrame() / TIMEFACTOR );
-    data->m_canvas->updateCanvas( data->m_boundingRect );
+    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    Q_ASSERT(data);
+    data->m_canvas->updateCanvas(data->m_boundingRect.translated(data->m_translate));
+    data->m_translate.setX(data->m_timeLine.endFrame() / TIMEFACTOR);
+    data->m_canvas->updateCanvas(data->m_boundingRect);
 }

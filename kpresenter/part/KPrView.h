@@ -40,11 +40,11 @@ class KPRESENTER_EXPORT KPrView : public KoPAView
 {
     Q_OBJECT
 public:
-    explicit KPrView( KPrDocument * document, QWidget * parent = 0 );
+    explicit KPrView(KPrDocument * document, QWidget * parent = 0);
     ~KPrView();
 
     using KoPAViewBase::viewConverter;
-    virtual KoViewConverter * viewConverter( KoPACanvasBase * canvas);
+    virtual KoViewConverter * viewConverter(KoPACanvasBase * canvas);
 
     /**
      * Get the document object the view was initialised with

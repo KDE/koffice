@@ -30,12 +30,12 @@ class KPrPresentationHighlightWidget : public KPrPresentationToolEventForwarder
 {
     Q_OBJECT
 public:
-    KPrPresentationHighlightWidget( KoPACanvasBase * canvas );
+    KPrPresentationHighlightWidget(KoPACanvasBase * canvas);
     ~KPrPresentationHighlightWidget();
 
 protected:
-    void mouseMoveEvent( QMouseEvent * event );
-    void paintEvent( QPaintEvent * event );
+    void mouseMoveEvent(QMouseEvent * event);
+    void paintEvent(QPaintEvent * event);
 
 private:
     QSize m_size;

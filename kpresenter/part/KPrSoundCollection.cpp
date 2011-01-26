@@ -89,7 +89,7 @@ bool KPrSoundCollection::completeLoading(KoStore *store)
 }
 
 // use a KoSharedSavingData in the context to save which sounds need to be saved
-bool KPrSoundCollection::completeSaving(KoStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context )
+bool KPrSoundCollection::completeSaving(KoStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context)
 {
     Q_UNUSED(context);
     foreach(KPrSoundData *sound, d->sounds) {
@@ -101,8 +101,8 @@ bool KPrSoundCollection::completeSaving(KoStore *store, KoXmlWriter * manifestWr
             store->close();
             if(! ok)
                 return false;
-            const QString mimetype( KMimeType::findByPath( sound->storeHref(), 0 ,true )->name() );
-            manifestWriter->addManifestEntry( sound->storeHref(), mimetype );
+            const QString mimetype(KMimeType::findByPath(sound->storeHref(), 0 ,true)->name());
+            manifestWriter->addManifestEntry(sound->storeHref(), mimetype);
         }
     }
     return true;

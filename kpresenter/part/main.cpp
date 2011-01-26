@@ -25,16 +25,16 @@
 #include <klocale.h>
 
 
-extern "C" KDE_EXPORT int kdemain( int argc, char **argv )
+extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 {
     int state;
     KAboutData * aboutData=newKPresenterAboutData();
 
-    KCmdLineArgs::init( argc, argv, aboutData );
+    KCmdLineArgs::init(argc, argv, aboutData);
 
     KCmdLineOptions options;
     options.add("+[file]", ki18n("File to open"));
-    KCmdLineArgs::addCmdLineOptions( options );
+    KCmdLineArgs::addCmdLineOptions(options);
 
     KoApplication app;
 

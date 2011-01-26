@@ -36,14 +36,14 @@ class KPrPresenterViewSlidesInterface : public KPrPresenterViewBaseInterface
 {
     Q_OBJECT
 public:
-    explicit KPrPresenterViewSlidesInterface( const QList<KoPAPageBase *> &pages, QWidget *parent = 0 );
+    explicit KPrPresenterViewSlidesInterface(const QList<KoPAPageBase *> &pages, QWidget *parent = 0);
 
 signals:
-    void selectedPageChanged( int index, bool doubleClicked );
+    void selectedPageChanged(int index, bool doubleClicked);
 
 private slots:
-    void itemClicked( const QModelIndex &index );
-    void itemDoubleClicked( const QModelIndex &index );
+    void itemClicked(const QModelIndex &index);
+    void itemDoubleClicked(const QModelIndex &index);
 
 private:
     KoPAPageThumbnailModel *m_thumbnailModel;

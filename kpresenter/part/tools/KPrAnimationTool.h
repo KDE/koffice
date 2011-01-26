@@ -35,22 +35,22 @@ public:
      * Constructor for animation tool
      * @param canvas the canvas this tool will be working for.
      */
-    explicit KPrAnimationTool( KoCanvasBase *canvas );
+    explicit KPrAnimationTool(KoCanvasBase *canvas);
     virtual ~KPrAnimationTool();
 
 public:
 
-    virtual void paint( QPainter &painter, const KoViewConverter &converter );
+    virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
 public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
 
 public: // Events
 
-    virtual void mousePressEvent( KoPointerEvent *event );
-    virtual void mouseMoveEvent( KoPointerEvent *event );
-    virtual void mouseReleaseEvent( KoPointerEvent *event );
-//    virtual void mouseDoubleClickEvent( KoPointerEvent *event );
+    virtual void mousePressEvent(KoPointerEvent *event);
+    virtual void mouseMoveEvent(KoPointerEvent *event);
+    virtual void mouseReleaseEvent(KoPointerEvent *event);
+//    virtual void mouseDoubleClickEvent(KoPointerEvent *event);
 
 //    virtual void keyPressEvent(QKeyEvent *event);
 

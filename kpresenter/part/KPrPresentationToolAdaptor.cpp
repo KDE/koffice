@@ -84,7 +84,7 @@ void KPrPresentationToolAdaptor::startDrawPresentation(int pointx, int pointy, i
 
 void KPrPresentationToolAdaptor::drawOnPresentation(int pointx,int pointy)
 {
-    if (m_viewModePresentation.isActivated() && dynamic_cast<KPrPresentationDrawStrategy*>(m_tool->strategy()) ) {
+    if (m_viewModePresentation.isActivated() && dynamic_cast<KPrPresentationDrawStrategy*>(m_tool->strategy())) {
         QPoint point(pointx,pointy);
         QMouseEvent event(QEvent::MouseMove, point, Qt::NoButton, Qt::LeftButton, Qt::NoModifier);
 

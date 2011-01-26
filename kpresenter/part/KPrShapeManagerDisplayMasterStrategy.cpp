@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,9 +23,9 @@
 #include <KoPAPageBase.h>
 #include "KPrPageSelectStrategyBase.h"
 
-KPrShapeManagerDisplayMasterStrategy::KPrShapeManagerDisplayMasterStrategy( KoShapeManager * shapeManager, KPrPageSelectStrategyBase * strategy )
-: KoShapeManagerPaintingStrategy( shapeManager )
-, m_strategy( strategy )
+KPrShapeManagerDisplayMasterStrategy::KPrShapeManagerDisplayMasterStrategy(KoShapeManager * shapeManager, KPrPageSelectStrategyBase * strategy)
+: KoShapeManagerPaintingStrategy(shapeManager)
+, m_strategy(strategy)
 {
 }
 

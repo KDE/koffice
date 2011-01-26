@@ -28,10 +28,10 @@
 #include "KPrPresentationTool.h"
 #include "KPrPresentationBlackWidget.h"
 
-KPrPresentationBlackStrategy::KPrPresentationBlackStrategy( KPrPresentationTool * tool )
-: KPrPresentationStrategyBase( tool )
+KPrPresentationBlackStrategy::KPrPresentationBlackStrategy(KPrPresentationTool * tool)
+: KPrPresentationStrategyBase(tool)
 {
-    m_widget = new KPrPresentationBlackWidget( canvas() );
+    m_widget = new KPrPresentationBlackWidget(canvas());
     // TODO
     QString str("kpresenter");
     KIconLoader kicon(str);
@@ -44,21 +44,21 @@ KPrPresentationBlackStrategy::KPrPresentationBlackStrategy( KPrPresentationTool 
     QCursor cur = QCursor(pix);
     QApplication::setOverrideCursor(cur);
 
-    setToolWidgetParent( m_widget );
+    setToolWidgetParent(m_widget);
     m_widget->show();
-    m_widget->installEventFilter( m_tool );
+    m_widget->installEventFilter(m_tool);
 }
 
 KPrPresentationBlackStrategy::~KPrPresentationBlackStrategy()
 {
-    setToolWidgetParent( canvas()->canvasWidget() );
+    setToolWidgetParent(canvas()->canvasWidget());
     QApplication::restoreOverrideCursor();
 }
 
-bool KPrPresentationBlackStrategy::keyPressEvent( QKeyEvent * event )
+bool KPrPresentationBlackStrategy::keyPressEvent(QKeyEvent * event)
 {
     bool handled = true;
-    switch ( event->key() )
+    switch (event->key())
     {
         case Qt::Key_Escape:
             activateDefaultStrategy();

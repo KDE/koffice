@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -40,8 +40,8 @@ public:
      * we need to pass the page size in case the placeholder is saved in absolute values so it 
      * can be converted to relative ones.
      */
-    bool loadOdf( const KoXmlElement &element, const QRectF & pageSize );
-    void saveOdf( KoXmlWriter & xmlWriter );
+    bool loadOdf(const KoXmlElement &element, const QRectF & pageSize);
+    void saveOdf(KoXmlWriter & xmlWriter);
 
     QString presentationObject();
 
@@ -50,7 +50,7 @@ public:
      *
      * @param pageSize The size of the page
      */
-    QRectF rect( const QSizeF & pageSize );
+    QRectF rect(const QSizeF & pageSize);
 
     /**
      * Fix wrongly saved data from OO
@@ -65,22 +65,22 @@ public:
      * </style:presentation-page-layout>
      * 
      */
-    void fix( const QRectF & rect );
+    void fix(const QRectF & rect);
 
     /**
      * Check the placeholders are identical 
      */
-    bool operator==( const KPrPlaceholder & other ) const;
+    bool operator==(const KPrPlaceholder & other) const;
 
-    bool operator<( const KPrPlaceholder & other ) const;
+    bool operator<(const KPrPlaceholder & other) const;
 
     /**
      * Compare the position of the placeholder
      */
-    static bool comparePosition( const KPrPlaceholder & p1, const KPrPlaceholder & p2 );
+    static bool comparePosition(const KPrPlaceholder & p1, const KPrPlaceholder & p2);
 
 private:
-    qreal percent( const KoXmlElement & element, const char * type, qreal absolute );
+    qreal percent(const KoXmlElement & element, const char * type, qreal absolute);
 
     QString m_presentationObject;
     /**

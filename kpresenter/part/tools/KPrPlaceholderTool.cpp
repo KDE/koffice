@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -31,8 +31,8 @@
 
 #include "KPrPlaceholderShape.h"
 
-KPrPlaceholderTool::KPrPlaceholderTool( KoCanvasBase *canvas )
-: KoToolBase( canvas )
+KPrPlaceholderTool::KPrPlaceholderTool(KoCanvasBase *canvas)
+: KoToolBase(canvas)
 {
 }
 
@@ -40,25 +40,25 @@ KPrPlaceholderTool::~KPrPlaceholderTool()
 {
 }
 
-void KPrPlaceholderTool::paint( QPainter &painter, const KoViewConverter &converter )
+void KPrPlaceholderTool::paint(QPainter &painter, const KoViewConverter &converter)
 {
-    Q_UNUSED( painter );
-    Q_UNUSED( converter );
+    Q_UNUSED(painter);
+    Q_UNUSED(converter);
 }
 
-void KPrPlaceholderTool::mousePressEvent( KoPointerEvent *event )
+void KPrPlaceholderTool::mousePressEvent(KoPointerEvent *event)
 {
-    Q_UNUSED( event );
+    Q_UNUSED(event);
 }
 
-void KPrPlaceholderTool::mouseMoveEvent( KoPointerEvent *event )
+void KPrPlaceholderTool::mouseMoveEvent(KoPointerEvent *event)
 {
-    Q_UNUSED( event );
+    Q_UNUSED(event);
 }
 
-void KPrPlaceholderTool::mouseReleaseEvent( KoPointerEvent *event )
+void KPrPlaceholderTool::mouseReleaseEvent(KoPointerEvent *event)
 {
-    Q_UNUSED( event );
+    Q_UNUSED(event);
 }
 
 void KPrPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
@@ -67,40 +67,40 @@ void KPrPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KoSh
     QList<KPrPlaceholderShape *> selectedShapes;
 
     foreach (KoShape *shape, shapes) {
-        if ( KPrPlaceholderShape * ps = dynamic_cast<KPrPlaceholderShape*>( shape ) ) {
-            selectedShapes.append( ps );
+        if (KPrPlaceholderShape * ps = dynamic_cast<KPrPlaceholderShape*>(shape)) {
+            selectedShapes.append(ps);
         }
     }
 
-    if ( selectedShapes.isEmpty() ) {
+    if (selectedShapes.isEmpty()) {
         emit done();
         return;
     }
 
-    KPrPlaceholderShape * shape = selectedShapes.at( 0 );
+    KPrPlaceholderShape * shape = selectedShapes.at(0);
 
     KoShape * newShape = shape->createShape(canvas()->shapeController()->resourceManager());
     // only do anything when we got a shape back
-    if ( newShape ) {
+    if (newShape) {
         // copy settings from placeholder shape
-        newShape->setParent( shape->parent() );
-        newShape->setZIndex( shape->zIndex() );
-        newShape->setSize( shape->size() );
-        newShape->setPosition( shape->position() );
-        newShape->setAdditionalAttribute( "presentation:class", shape->additionalAttribute( "presentation:class" ) );
+        newShape->setParent(shape->parent());
+        newShape->setZIndex(shape->zIndex());
+        newShape->setSize(shape->size());
+        newShape->setPosition(shape->position());
+        newShape->setAdditionalAttribute("presentation:class", shape->additionalAttribute("presentation:class"));
 
-        QUndoCommand *cmd = new QUndoCommand( i18n( "Edit Shape" ) );
+        QUndoCommand *cmd = new QUndoCommand(i18n("Edit Shape"));
 
         // replace placeholder by shape
-        canvas()->shapeController()->removeShape( shape, cmd );
-        canvas()->shapeController()->addShapeDirect( newShape, cmd );
-        canvas()->addCommand( cmd );
+        canvas()->shapeController()->removeShape(shape, cmd);
+        canvas()->shapeController()->addShapeDirect(newShape, cmd);
+        canvas()->addCommand(cmd);
 
         // activate the correct tool for the shape
         QList<KoShape *> shapes;
-        shapes.append( newShape );
-        canvas()->shapeManager()->selection()->select( newShape );
-        activateTool( KoToolManager::instance()->preferredToolForSelection( shapes ) );
+        shapes.append(newShape);
+        canvas()->shapeManager()->selection()->select(newShape);
+        activateTool(KoToolManager::instance()->preferredToolForSelection(shapes));
     }
     else {
         emit done();

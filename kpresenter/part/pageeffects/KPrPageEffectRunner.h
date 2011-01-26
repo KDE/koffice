@@ -37,7 +37,7 @@ public:
      * @param w Widget on which the effect will be displayed
      * @param effect The effect which will be used for displaying the effect
      */
-    KPrPageEffectRunner( const QPixmap &oldPage, const QPixmap &newPage, QWidget *w, KPrPageEffect *effect );
+    KPrPageEffectRunner(const QPixmap &oldPage, const QPixmap &newPage, QWidget *w, KPrPageEffect *effect);
 
     /**
      * Destructor
@@ -51,14 +51,14 @@ public:
      * @param currentTime The time for which the effect should be painted.
      * @return true if the effect is finished, false otherwise
      */
-    bool paint( QPainter &painter );
+    bool paint(QPainter &painter);
 
     /**
      * Trigger the next paint paint event.
      *
      * @param currentTime The current time.
      */
-    void next( int currentTime );
+    void next(int currentTime);
 
     /**
      * Finish the the page effect.
@@ -87,7 +87,7 @@ public:
     /**
      * Set the pixmap of the old page
      */
-    void setOldPage( const QPixmap & oldPage);
+    void setOldPage(const QPixmap & oldPage);
 
     /**
      * Set the pixmap of the new page

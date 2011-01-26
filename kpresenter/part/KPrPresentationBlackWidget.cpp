@@ -25,12 +25,12 @@
 #include <QPainter>
 #include <QRect>
 
-KPrPresentationBlackWidget::KPrPresentationBlackWidget( KoPACanvasBase * canvas )
+KPrPresentationBlackWidget::KPrPresentationBlackWidget(KoPACanvasBase * canvas)
 : KPrPresentationToolEventForwarder(canvas)
-, m_size( canvas->canvasWidget()->size() )
+, m_size(canvas->canvasWidget()->size())
 {
     // Size of the canvas is saved because it's used in the paintEvent
-    resize( m_size );
+    resize(m_size);
     update();
 }
 
@@ -38,9 +38,9 @@ KPrPresentationBlackWidget::~KPrPresentationBlackWidget()
 {
 }
 
-void KPrPresentationBlackWidget::paintEvent( QPaintEvent * event )
+void KPrPresentationBlackWidget::paintEvent(QPaintEvent * event)
 {
     Q_UNUSED(event);
-    QPainter painter( this );
-    painter.fillRect(0,0,m_size.width(), m_size.height(), Qt::black );
+    QPainter painter(this);
+    painter.fillRect(0,0,m_size.width(), m_size.height(), Qt::black);
 }

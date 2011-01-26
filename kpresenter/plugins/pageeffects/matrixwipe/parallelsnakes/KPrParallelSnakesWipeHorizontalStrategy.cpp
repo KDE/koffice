@@ -41,7 +41,7 @@ static const char* getSmilSubType(bool reverseTop, bool reverseBottom) {
 }
 
 KPrParallelSnakesWipeHorizontalStrategy::KPrParallelSnakesWipeHorizontalStrategy(bool reverseTop, bool reverseBottom, bool reverse)
-    : KPrMatrixWipeStrategy( getSubType(reverseTop, reverseBottom, reverse), "parallelSnakesWipe", getSmilSubType(reverseTop, reverseBottom), reverse, true ),
+    : KPrMatrixWipeStrategy(getSubType(reverseTop, reverseBottom, reverse), "parallelSnakesWipe", getSmilSubType(reverseTop, reverseBottom), reverse, true),
     m_reverseTop(reverseTop), m_reverseBottom(reverseBottom)
 {
     setNeedEvenSquares();

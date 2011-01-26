@@ -31,8 +31,8 @@ KComponentData* KPrFactory::s_instance = 0;
 KAboutData* KPrFactory::s_aboutData = 0;
 KIconLoader* KPrFactory::s_iconLoader = 0;
 
-KPrFactory::KPrFactory( QObject* parent, const char* /*name*/ )
-    : KPluginFactory( *aboutData(), parent )
+KPrFactory::KPrFactory(QObject* parent, const char* /*name*/)
+    : KPluginFactory(*aboutData(), parent)
 {
     (void)componentData();
 }
@@ -45,24 +45,24 @@ KPrFactory::~KPrFactory()
     s_instance = 0;
 }
 
-QObject* KPrFactory::create( const char* iface, QWidget* parentWidget, QObject *parent,
-                             const QVariantList& args, const QString& keyword )
+QObject* KPrFactory::create(const char* iface, QWidget* parentWidget, QObject *parent,
+                             const QVariantList& args, const QString& keyword)
 {
-    Q_UNUSED( args );
-    Q_UNUSED( keyword );
-    bool bWantKoDocument = ( strcmp( iface, "KoDocument" ) == 0 );
+    Q_UNUSED(args);
+    Q_UNUSED(keyword);
+    bool bWantKoDocument = (strcmp(iface, "KoDocument") == 0);
 
-    KPrDocument *doc = new KPrDocument( parentWidget, parent, !bWantKoDocument );
+    KPrDocument *doc = new KPrDocument(parentWidget, parent, !bWantKoDocument);
 
-    if ( !bWantKoDocument )
-        doc->setReadWrite( false );
+    if (!bWantKoDocument)
+        doc->setReadWrite(false);
 
     return doc;
 }
 
 KAboutData* KPrFactory::aboutData()
 {
-    if( !s_aboutData )
+    if(!s_aboutData)
         s_aboutData = newKPresenterAboutData();
 
     return s_aboutData;
@@ -70,9 +70,9 @@ KAboutData* KPrFactory::aboutData()
 
 KIconLoader* KPrFactory::iconLoader()
 {
-    if( !s_iconLoader )
+    if(!s_iconLoader)
     {
-        s_iconLoader = new KIconLoader( componentData().componentName() );
+        s_iconLoader = new KIconLoader(componentData().componentName());
         // Tell the iconloader about share/apps/koffice/icons
         s_iconLoader->addAppDir("koffice");
     }
@@ -82,7 +82,7 @@ KIconLoader* KPrFactory::iconLoader()
 
 const KComponentData &KPrFactory::componentData()
 {
-    if ( !s_instance )
+    if (!s_instance)
     {
         s_instance = new KComponentData(aboutData());
 

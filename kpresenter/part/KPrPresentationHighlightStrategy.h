@@ -26,10 +26,10 @@
 class KPrPresentationHighlightStrategy : public KPrPresentationStrategyBase
 {
 public :
-    KPrPresentationHighlightStrategy( KPrPresentationTool * tool );
+    KPrPresentationHighlightStrategy(KPrPresentationTool * tool);
     ~KPrPresentationHighlightStrategy();
 
-    bool keyPressEvent( QKeyEvent * event );
+    bool keyPressEvent(QKeyEvent * event);
 };
 
 #endif /* KPRPRESENTATIONHIGHLIGHTSTRATEGY_H */

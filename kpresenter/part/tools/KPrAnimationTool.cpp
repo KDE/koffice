@@ -32,8 +32,8 @@
 #include "KPrPageEffectDocker.h"
 #include "KPrClickActionDocker.h"
 
-KPrAnimationTool::KPrAnimationTool( KoCanvasBase *canvas )
-    : KoToolBase( canvas )
+KPrAnimationTool::KPrAnimationTool(KoCanvasBase *canvas)
+    : KoToolBase(canvas)
 {
 }
 
@@ -42,10 +42,10 @@ KPrAnimationTool::~KPrAnimationTool()
 }
 
 
-void KPrAnimationTool::paint( QPainter &painter, const KoViewConverter &converter)
+void KPrAnimationTool::paint(QPainter &painter, const KoViewConverter &converter)
 {
-    Q_UNUSED( painter );
-    Q_UNUSED( converter );
+    Q_UNUSED(painter);
+    Q_UNUSED(converter);
 }
 
 
@@ -57,25 +57,25 @@ void KPrAnimationTool::activate(ToolActivation toolActivation, const QSet<KoShap
     Q_UNUSED(shapes);
 }
 
-void KPrAnimationTool::mousePressEvent( KoPointerEvent *event )
+void KPrAnimationTool::mousePressEvent(KoPointerEvent *event)
 {
     event->ignore();
 }
 
-void KPrAnimationTool::mouseMoveEvent( KoPointerEvent *event )
+void KPrAnimationTool::mouseMoveEvent(KoPointerEvent *event)
 {
-    Q_UNUSED( event );
+    Q_UNUSED(event);
 }
 
-void KPrAnimationTool::mouseReleaseEvent( KoPointerEvent *event )
+void KPrAnimationTool::mouseReleaseEvent(KoPointerEvent *event)
 {
-    Q_UNUSED( event );
+    Q_UNUSED(event);
 }
 
 
 QMap<QString, QWidget *> KPrAnimationTool::createOptionWidgets()
 {
-    KPrPageEffectDocker *effectWidget = new KPrPageEffectDocker( );
+    KPrPageEffectDocker *effectWidget = new KPrPageEffectDocker();
     effectWidget->setView((dynamic_cast<KoPACanvas *>(canvas()))->koPAView());
 
     KPrClickActionDocker *clickActionWidget = new KPrClickActionDocker();
@@ -86,7 +86,7 @@ QMap<QString, QWidget *> KPrAnimationTool::createOptionWidgets()
     widgets.insert(i18n("Click Actions"), clickActionWidget);
     QLabel *label =new QLabel(i18n("Not implemented in 2.0"));
     label->setMinimumWidth(180); //try to make it visible
-    label->setObjectName( "ShapeAnimationLabel" );
+    label->setObjectName("ShapeAnimationLabel");
     widgets.insert(i18n("Shape Animation"), label);
     return widgets;
 }

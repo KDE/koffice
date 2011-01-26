@@ -41,19 +41,19 @@ class KPrClickActionDocker : public QWidget, public KoCanvasObserverBase
 {
     Q_OBJECT
 public:
-    explicit KPrClickActionDocker( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+    explicit KPrClickActionDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-    void setView( KoPAViewBase* view );
+    void setView(KoPAViewBase* view);
 
 public slots:
-    void addCommand( QUndoCommand * command );
+    void addCommand(QUndoCommand * command);
 
 private slots:
     /// selection has changed
     void selectionChanged();
 
     /// reimplemented
-    virtual void setCanvas( KoCanvasBase *canvas );
+    virtual void setCanvas(KoCanvasBase *canvas);
 
 private:
     KoPAViewBase *m_view;

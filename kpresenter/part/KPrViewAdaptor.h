@@ -27,10 +27,10 @@ class KPrView;
 class KPrViewAdaptor : public KoViewAdaptor
 {
     Q_OBJECT
-    Q_CLASSINFO( "D-Bus Interface", "org.kde.koffice.presentation.view" )
+    Q_CLASSINFO("D-Bus Interface", "org.kde.koffice.presentation.view")
 
 public:
-    explicit KPrViewAdaptor( KPrView* view );
+    explicit KPrViewAdaptor(KPrView* view);
     virtual ~KPrViewAdaptor();
 
 public slots:
@@ -59,7 +59,7 @@ public slots:
      *             for all slides
      * @return true if the custom slideshow was changed
      */
-    bool setActiveCustomSlideShow( const QString &name );
+    bool setActiveCustomSlideShow(const QString &name);
 
     // slides in the custom slideshow
 
@@ -72,12 +72,12 @@ public slots:
      * Get the name of a page.
      *
      * If the page does not have a name an empty string is returned.
-     * It is common in this case to use the string i18n( "Page %1", @p page + 1 ).
+     * It is common in this case to use the string i18n("Page %1", @p page + 1).
      *
      * @param page The page index within the current slideshow.
      * @returns The name of page with index @p page in the current slideshow.
      */
-    QString pageName( int page ) const;
+    QString pageName(int page) const;
 
     /**
      * Get the notes associated with a page of the slideshow.
@@ -89,7 +89,7 @@ public slots:
      * @returns The notes associated with page @p page in the format specified by @p format.
      *          An empty string is returned when @p format is not recognised or @p page is invalid.
      */
-    QString pageNotes( int page, const QString &format ) const;
+    QString pageNotes(int page, const QString &format) const;
 
     /**
      * Save page to an image file.
@@ -107,8 +107,8 @@ public slots:
      *
      * @returns whether the image was successfully saved
      */
-    bool exportPageThumbnail( int page, int width, int height,
-                              const QString &filename, const QString &format, int quality );
+    bool exportPageThumbnail(int page, int width, int height,
+                              const QString &filename, const QString &format, int quality);
 
     // Presentation control
     void presentationStart();
@@ -120,7 +120,7 @@ public slots:
     void presentationNextSlide();
     void presentationFirst();
     void presentationLast();
-    void gotoPresentationPage( int pg );
+    void gotoPresentationPage(int pg);
 
     // Presentation accessors
     bool isPresentationRunning() const;
@@ -135,7 +135,7 @@ signals:
      *
      * @param customSlideShow the new active custom slide show
      */
-    void activeCustomSlideShowChanged( const QString &customSlideShow );
+    void activeCustomSlideShowChanged(const QString &customSlideShow);
 
     /**
      * Emitted when the custom slide shows have been modified.
@@ -147,7 +147,7 @@ signals:
      *
      * @param numSlides Number of slides in the slideshow
      */
-    void presentationStarted( int numSlides );
+    void presentationStarted(int numSlides);
 
     /**
      * Emitted when the slideshow is finished.
@@ -160,14 +160,14 @@ signals:
      * @param page new page index within the current slideshow
      * @param stepsInPage the number of steps in the new page
      */
-    void presentationPageChanged( int page, int stepsInPage );
+    void presentationPageChanged(int page, int stepsInPage);
 
     /**
      * Emitted when the presentation step is changed.
      *
      * @param step new step index within the page
      */
-    void presentationStepChanged( int step );
+    void presentationStepChanged(int step);
 
 private slots:
     /**

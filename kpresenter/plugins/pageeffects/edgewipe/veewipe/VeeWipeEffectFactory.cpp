@@ -25,12 +25,12 @@
 #define VeeWipeEffectId "VeeWipeEffect"
 
 VeeWipeEffectFactory::VeeWipeEffectFactory()
-: KPrPageEffectFactory( VeeWipeEffectId, i18n( "Vee" ) )
+: KPrPageEffectFactory(VeeWipeEffectId, i18n("Vee"))
 {
-    addStrategy( new VeeWipeStrategy( FromTop, "down", false ) );
-    addStrategy( new VeeWipeStrategy( FromRight, "left", false ) );
-    addStrategy( new VeeWipeStrategy( FromBottom, "top", false ) );
-    addStrategy( new VeeWipeStrategy( FromLeft, "right", false ) );
+    addStrategy(new VeeWipeStrategy(FromTop, "down", false));
+    addStrategy(new VeeWipeStrategy(FromRight, "left", false));
+    addStrategy(new VeeWipeStrategy(FromBottom, "top", false));
+    addStrategy(new VeeWipeStrategy(FromLeft, "right", false));
 }
 
 VeeWipeEffectFactory::~VeeWipeEffectFactory()
@@ -38,17 +38,17 @@ VeeWipeEffectFactory::~VeeWipeEffectFactory()
 }
 
 static const char* s_subTypes[] = {
-    I18N_NOOP( "From Top" ),
-    I18N_NOOP( "From Right" ),
-    I18N_NOOP( "From Bottom" ),
-    I18N_NOOP( "From Left" )
+    I18N_NOOP("From Top"),
+    I18N_NOOP("From Right"),
+    I18N_NOOP("From Bottom"),
+    I18N_NOOP("From Left")
 };
 
 QString VeeWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
-        return i18n( s_subTypes[subType] );
+        return i18n(s_subTypes[subType]);
     } else {
-        return i18n( "Unknown subtype" );
+        return i18n("Unknown subtype");
     }
 }

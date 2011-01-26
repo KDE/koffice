@@ -63,13 +63,13 @@
 
 #include "KPrPdfPrintJob.h"
 
-KPrView::KPrView( KPrDocument *document, QWidget *parent )
-  : KoPAView( document, parent )
-  , m_presentationMode( new KPrViewModePresentation( this, kopaCanvas() ))
-  , m_normalMode( viewMode() )
-  , m_notesMode( new KPrViewModeNotes( this, kopaCanvas() ))
-//   , m_slidesSorterMode( new KPrViewModeSlidesSorter( this, kopaCanvas() ))
-  , m_dbus( new KPrViewAdaptor( this ) )
+KPrView::KPrView(KPrDocument *document, QWidget *parent)
+  : KoPAView(document, parent)
+  , m_presentationMode(new KPrViewModePresentation(this, kopaCanvas()))
+  , m_normalMode(viewMode())
+  , m_notesMode(new KPrViewModeNotes(this, kopaCanvas()))
+//   , m_slidesSorterMode(new KPrViewModeSlidesSorter(this, kopaCanvas()))
+  , m_dbus(new KPrViewAdaptor(this))
 {
     initGUI();
     initActions();
@@ -77,7 +77,7 @@ KPrView::KPrView( KPrDocument *document, QWidget *parent )
     // Change strings because in KPresenter it's called slides and not pages
     actionCollection()->action("view_masterpages")->setText(i18n("Show Master Slides"));
     actionCollection()->action("import_document")->setText(i18n("Import Slideshow..."));
-    actionCollection()->action("page_insertpage")->setText(i18n( "Insert Slide"));
+    actionCollection()->action("page_insertpage")->setText(i18n("Insert Slide"));
     actionCollection()->action("page_insertpage")->setToolTip(i18n("Insert a new slide after the current one"));
     actionCollection()->action("page_insertpage")->setWhatsThis(i18n("Insert a new slide after the current one"));
     actionCollection()->action("page_copypage")->setText(i18n("Copy Slide"));
@@ -93,8 +93,8 @@ KPrView::KPrView( KPrDocument *document, QWidget *parent )
     actionCollection()->action("page_last")->setText(i18n("Last Slide"));
     actionCollection()->action("configure")->setText(i18n("Configure KPresenter..."));
 
-    masterShapeManager()->setPaintingStrategy( new KPrShapeManagerDisplayMasterStrategy( masterShapeManager(),
-                                                   new KPrPageSelectStrategyActive( kopaCanvas() ) ) );
+    masterShapeManager()->setPaintingStrategy(new KPrShapeManagerDisplayMasterStrategy(masterShapeManager(),
+                                                   new KPrPageSelectStrategyActive(kopaCanvas())));
 
     KoPACanvas * canvas = dynamic_cast<KoPACanvas*>(kopaCanvas());
     if (canvas) {
@@ -109,15 +109,15 @@ KPrView::~KPrView()
     delete m_slidesSorterMode;
 }
 
-KoViewConverter * KPrView::viewConverter( KoPACanvasBase * canvas )
+KoViewConverter * KPrView::viewConverter(KoPACanvasBase * canvas)
 {
     Q_ASSERT(viewMode());
-    return viewMode()->viewConverter( canvas );
+    return viewMode()->viewConverter(canvas);
 }
 
 KPrDocument * KPrView::kprDocument() const
 {
-    return static_cast<KPrDocument *>( kopaDocument() );
+    return static_cast<KPrDocument *>(kopaDocument());
 }
 
 KPrViewAdaptor * KPrView::dbusObject() const
@@ -132,7 +132,7 @@ KPrViewModePresentation * KPrView::presentationMode() const
 
 bool KPrView::isPresentationRunning() const
 {
-    return ( viewMode() == m_presentationMode );
+    return (viewMode() == m_presentationMode);
 }
 
 void KPrView::drawOnPresentation()
@@ -164,24 +164,24 @@ void KPrView::initGUI()
     // add page effect docker to the main window
     if (shell()) {
         KPrPageLayoutDockerFactory pageLayoutFactory;
-        KPrPageLayoutDocker *pageLayoutDocker = qobject_cast<KPrPageLayoutDocker*>( shell()->createDockWidget( &pageLayoutFactory ) );
-        pageLayoutDocker->setView( this );
+        KPrPageLayoutDocker *pageLayoutDocker = qobject_cast<KPrPageLayoutDocker*>(shell()->createDockWidget(&pageLayoutFactory));
+        pageLayoutDocker->setView(this);
     }
 
-    QString state( "AAAA/wAAAAD9AAAAAgAAAAAAAAEHAAADWfwCAAAAA/sAAAAOAFQAbwBvAGwAQgBvAHgBAAAAUgAAAEgAAABIAP////sAAAAuAEsAbwBTAGgAYQBwAGUAQwBvAGwAbABlAGMAdABpAG8AbgBEAG8AYwBrAGUAcgEAAACdAAAAbAAAAE0A////+wAAACoAZABvAGMAdQBtAGUAbgB0ACAAcwBlAGMAdABpAG8AbgAgAHYAaQBlAHcBAAABDAAAAp8AAABvAP///wAAAAEAAAFjAAADWfwCAAAAEPsAAAAiAFMAdAByAG8AawBlACAAUAByAG8AcABlAHIAdABpAGUAcwAAAAAA/////wAAALcA////+wAAACAAUwBoAGEAcABlACAAUAByAG8AcABlAHIAdABpAGUAcwAAAAAA/////wAAABgA////+wAAACIAUwBoAGEAZABvAHcAIABQAHIAbwBwAGUAcgB0AGkAZQBzAAAAAAD/////AAAAnwD////7AAAAJABTAGkAbQBwAGwAZQAgAFQAZQB4AHQAIABFAGQAaQB0AG8AcgAAAAAA/////wAAAU4A////+wAAADAARABlAGYAYQB1AGwAdABUAG8AbwBsAEEAcgByAGEAbgBnAGUAVwBpAGQAZwBlAHQBAAAAUgAAAE4AAABOAP////sAAAAiAEQAZQBmAGEAdQBsAHQAVABvAG8AbABXAGkAZABnAGUAdAEAAACjAAAAYwAAAGMA////+wAAACoAUwBuAGEAcABHAHUAaQBkAGUAQwBvAG4AZgBpAGcAVwBpAGQAZwBlAHQBAAABCQAAAFIAAABQAP////sAAAAWAFMAdAB5AGwAZQBEAG8AYwBrAGUAcgEAAAFeAAABhAAAAFgA////+wAAABgAUwBsAGkAZABlACAAbABhAHkAbwB1AHQBAAAC5QAAAMYAAABWAP////sAAAAoAFAAaQBjAHQAdQByAGUAVABvAG8AbABGAGEAYwB0AG8AcgB5AEkAZAEAAAN6AAAAMQAAAAAAAAAA+wAAACQAVABlAHgAdABUAG8AbwBsAEYAYQBjAHQAbwByAHkAXwBJAEQBAAADJwAAAIQAAAAAAAAAAPsAAAAoAEMAZQBsAGwAVABvAG8AbABPAHAAdABpAG8AbgBXAGkAZABnAGUAdAEAAALBAAAA6gAAAAAAAAAA+wAAADAASwBvAFAAQQBCAGEAYwBrAGcAcgBvAHUAbgBkAFQAbwBvAGwAVwBpAGQAZwBlAHQBAAADnQAAAFgAAAAAAAAAAPsAAAAeAEQAdQBtAG0AeQBUAG8AbwBsAFcAaQBkAGcAZQB0AQAAAqgAAAAaAAAAAAAAAAD7AAAAKABQAGEAdAB0AGUAcgBuAE8AcAB0AGkAbwBuAHMAVwBpAGQAZwBlAHQBAAACxQAAAIYAAAAAAAAAAPsAAAAoAEsAYQByAGIAbwBuAFAAYQB0AHQAZQByAG4AQwBoAG8AbwBzAGUAcgEAAANOAAAAXQAAAAAAAAAAAAADAAAAA1kAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAAAAAVwAAAAAAAAAAA=" );
+    QString state("AAAA/wAAAAD9AAAAAgAAAAAAAAEHAAADWfwCAAAAA/sAAAAOAFQAbwBvAGwAQgBvAHgBAAAAUgAAAEgAAABIAP////sAAAAuAEsAbwBTAGgAYQBwAGUAQwBvAGwAbABlAGMAdABpAG8AbgBEAG8AYwBrAGUAcgEAAACdAAAAbAAAAE0A////+wAAACoAZABvAGMAdQBtAGUAbgB0ACAAcwBlAGMAdABpAG8AbgAgAHYAaQBlAHcBAAABDAAAAp8AAABvAP///wAAAAEAAAFjAAADWfwCAAAAEPsAAAAiAFMAdAByAG8AawBlACAAUAByAG8AcABlAHIAdABpAGUAcwAAAAAA/////wAAALcA////+wAAACAAUwBoAGEAcABlACAAUAByAG8AcABlAHIAdABpAGUAcwAAAAAA/////wAAABgA////+wAAACIAUwBoAGEAZABvAHcAIABQAHIAbwBwAGUAcgB0AGkAZQBzAAAAAAD/////AAAAnwD////7AAAAJABTAGkAbQBwAGwAZQAgAFQAZQB4AHQAIABFAGQAaQB0AG8AcgAAAAAA/////wAAAU4A////+wAAADAARABlAGYAYQB1AGwAdABUAG8AbwBsAEEAcgByAGEAbgBnAGUAVwBpAGQAZwBlAHQBAAAAUgAAAE4AAABOAP////sAAAAiAEQAZQBmAGEAdQBsAHQAVABvAG8AbABXAGkAZABnAGUAdAEAAACjAAAAYwAAAGMA////+wAAACoAUwBuAGEAcABHAHUAaQBkAGUAQwBvAG4AZgBpAGcAVwBpAGQAZwBlAHQBAAABCQAAAFIAAABQAP////sAAAAWAFMAdAB5AGwAZQBEAG8AYwBrAGUAcgEAAAFeAAABhAAAAFgA////+wAAABgAUwBsAGkAZABlACAAbABhAHkAbwB1AHQBAAAC5QAAAMYAAABWAP////sAAAAoAFAAaQBjAHQAdQByAGUAVABvAG8AbABGAGEAYwB0AG8AcgB5AEkAZAEAAAN6AAAAMQAAAAAAAAAA+wAAACQAVABlAHgAdABUAG8AbwBsAEYAYQBjAHQAbwByAHkAXwBJAEQBAAADJwAAAIQAAAAAAAAAAPsAAAAoAEMAZQBsAGwAVABvAG8AbABPAHAAdABpAG8AbgBXAGkAZABnAGUAdAEAAALBAAAA6gAAAAAAAAAA+wAAADAASwBvAFAAQQBCAGEAYwBrAGcAcgBvAHUAbgBkAFQAbwBvAGwAVwBpAGQAZwBlAHQBAAADnQAAAFgAAAAAAAAAAPsAAAAeAEQAdQBtAG0AeQBUAG8AbwBsAFcAaQBkAGcAZQB0AQAAAqgAAAAaAAAAAAAAAAD7AAAAKABQAGEAdAB0AGUAcgBuAE8AcAB0AGkAbwBuAHMAVwBpAGQAZwBlAHQBAAACxQAAAIYAAAAAAAAAAPsAAAAoAEsAYQByAGIAbwBuAFAAYQB0AHQAZQByAG4AQwBoAG8AbwBzAGUAcgEAAANOAAAAXQAAAAAAAAAAAAADAAAAA1kAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAAAAAVwAAAAAAAAAAA=");
     state = "AAAA/wAAAAD9AAAAAgAAAAAAAAEHAAACdfwCAAAAA/sAAAAOAFQAbwBvAGwAQgBvAHgBAAAAUgAAAF8AAABIAP////sAAAAuAEsAbwBTAGgAYQBwAGUAQwBvAGwAbABlAGMAdABpAG8AbgBEAG8AYwBrAGUAcgEAAAC0AAAAZQAAAE0A////+wAAACoAZABvAGMAdQBtAGUAbgB0ACAAcwBlAGMAdABpAG8AbgAgAHYAaQBlAHcBAAABHAAAAasAAABvAP///wAAAAEAAADlAAACdfwCAAAAEPsAAAAgAFMAaABhAHAAZQAgAFAAcgBvAHAAZQByAHQAaQBlAHMAAAAAAP////8AAAAYAP////sAAAAiAFMAaABhAGQAbwB3ACAAUAByAG8AcABlAHIAdABpAGUAcwAAAAAA/////wAAAJ8A////+wAAACQAUwBpAG0AcABsAGUAIABUAGUAeAB0ACAARQBkAGkAdABvAHIAAAAAAP////8AAAFOAP////sAAAAwAEQAZQBmAGEAdQBsAHQAVABvAG8AbABBAHIAcgBhAG4AZwBlAFcAaQBkAGcAZQB0AQAAAFIAAABOAAAATgD////7AAAAIgBEAGUAZgBhAHUAbAB0AFQAbwBvAGwAVwBpAGQAZwBlAHQBAAAAowAAAGMAAABjAP////sAAAAqAFMAbgBhAHAARwB1AGkAZABlAEMAbwBuAGYAaQBnAFcAaQBkAGcAZQB0AQAAAQkAAABQAAAAUAD////7AAAAIgBTAHQAcgBvAGsAZQAgAFAAcgBvAHAAZQByAHQAaQBlAHMBAAABXAAAALcAAAC3AP////sAAAAWAFMAdAB5AGwAZQBEAG8AYwBrAGUAcgEAAAIWAAAAWAAAAFgA////+wAAABgAUwBsAGkAZABlACAAbABhAHkAbwB1AHQBAAACcQAAAFYAAABWAP////sAAAAoAFAAaQBjAHQAdQByAGUAVABvAG8AbABGAGEAYwB0AG8AcgB5AEkAZAEAAAN6AAAAMQAAAAAAAAAA+wAAACQAVABlAHgAdABUAG8AbwBsAEYAYQBjAHQAbwByAHkAXwBJAEQBAAADJwAAAIQAAAAAAAAAAPsAAAAoAEMAZQBsAGwAVABvAG8AbABPAHAAdABpAG8AbgBXAGkAZABnAGUAdAEAAALBAAAA6gAAAAAAAAAA+wAAADAASwBvAFAAQQBCAGEAYwBrAGcAcgBvAHUAbgBkAFQAbwBvAGwAVwBpAGQAZwBlAHQBAAADnQAAAFgAAAAAAAAAAPsAAAAeAEQAdQBtAG0AeQBUAG8AbwBsAFcAaQBkAGcAZQB0AQAAAqgAAAAaAAAAAAAAAAD7AAAAKABQAGEAdAB0AGUAcgBuAE8AcAB0AGkAbwBuAHMAVwBpAGQAZwBlAHQBAAACxQAAAIYAAAAAAAAAAPsAAAAoAEsAYQByAGIAbwBuAFAAYQB0AHQAZQByAG4AQwBoAG8AbwBzAGUAcgEAAANOAAAAXQAAAAAAAAAAAAADfgAAAnUAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAAAAAVwAAAAAAAAAAA=";
-    KConfigGroup group( KGlobal::config(), "kpresenter" );
-    if ( !group.hasKey( "State" ) ) {
-        group.writeEntry( "State", state );
+    KConfigGroup group(KGlobal::config(), "kpresenter");
+    if (!group.hasKey("State")) {
+        group.writeEntry("State", state);
     }
 }
 
 void KPrView::initActions()
 {
-    if ( !kopaDocument()->isReadWrite() )
-       setXMLFile( "kpresenter_readonly.rc" );
+    if (!kopaDocument()->isReadWrite())
+       setXMLFile("kpresenter_readonly.rc");
     else
-       setXMLFile( "kpresenter.rc" );
+       setXMLFile("kpresenter.rc");
 
     // do special kpresenter stuff here
     m_actionExportHtml = new KAction(i18n("Export as HTML..."), this);
@@ -213,54 +213,54 @@ void KPrView::initActions()
     viewModesGroup->addAction(m_actionViewModeNotes);
     viewModesGroup->addAction(m_actionViewModeSlidesSorter);
 
-    m_actionCreateAnimation = new KAction( i18n( "Create Appear Animation" ), this );
-    actionCollection()->addAction( "edit_createanimation", m_actionCreateAnimation );
-    connect( m_actionCreateAnimation, SIGNAL( activated() ), this, SLOT( createAnimation() ) );
+    m_actionCreateAnimation = new KAction(i18n("Create Appear Animation"), this);
+    actionCollection()->addAction("edit_createanimation", m_actionCreateAnimation);
+    connect(m_actionCreateAnimation, SIGNAL(activated()), this, SLOT(createAnimation()));
 
-    m_actionCreateCustomSlideShowsDialog = new KAction( i18n( "Edit Custom Slide Shows..." ), this );
-    actionCollection()->addAction( "edit_customslideshows", m_actionCreateCustomSlideShowsDialog );
-    connect( m_actionCreateCustomSlideShowsDialog, SIGNAL( activated() ), this, SLOT( dialogCustomSlideShows() ) );
+    m_actionCreateCustomSlideShowsDialog = new KAction(i18n("Edit Custom Slide Shows..."), this);
+    actionCollection()->addAction("edit_customslideshows", m_actionCreateCustomSlideShowsDialog);
+    connect(m_actionCreateCustomSlideShowsDialog, SIGNAL(activated()), this, SLOT(dialogCustomSlideShows()));
 
-    m_actionStartPresentation = new KActionMenu( KIcon("view-presentation"), i18n( "Start Presentation" ), this );
-    actionCollection()->addAction( "slideshow_start", m_actionStartPresentation );
-    connect( m_actionStartPresentation, SIGNAL( activated() ), this, SLOT( startPresentation() ) );
-    KAction* action = new KAction( i18n( "From Current Slide" ),
-this );
+    m_actionStartPresentation = new KActionMenu(KIcon("view-presentation"), i18n("Start Presentation"), this);
+    actionCollection()->addAction("slideshow_start", m_actionStartPresentation);
+    connect(m_actionStartPresentation, SIGNAL(activated()), this, SLOT(startPresentation()));
+    KAction* action = new KAction(i18n("From Current Slide"),
+this);
     action->setShortcut(QKeySequence("Shift+F5"));
-    m_actionStartPresentation->addAction( action );
-    connect( action, SIGNAL( activated() ), this, SLOT( startPresentation() ) );
-    action = new KAction( i18n( "From First Slide" ), this );
+    m_actionStartPresentation->addAction(action);
+    connect(action, SIGNAL(activated()), this, SLOT(startPresentation()));
+    action = new KAction(i18n("From First Slide"), this);
     action->setShortcut(QKeySequence("F5"));
-    m_actionStartPresentation->addAction( action );
-    connect( action, SIGNAL( activated() ), this, SLOT( startPresentationFromBeginning() ) );
+    m_actionStartPresentation->addAction(action);
+    connect(action, SIGNAL(activated()), this, SLOT(startPresentationFromBeginning()));
 
-    action = new KAction( i18n( "Configure Slide Show..." ), this );
-    actionCollection()->addAction( "slideshow_configure", action );
-    connect( action, SIGNAL( activated() ), this, SLOT( configureSlideShow() ) );
+    action = new KAction(i18n("Configure Slide Show..."), this);
+    actionCollection()->addAction("slideshow_configure", action);
+    connect(action, SIGNAL(activated()), this, SLOT(configureSlideShow()));
 
-    action = new KAction( i18n( "Configure Presenter View..." ), this );
-    actionCollection()->addAction( "slideshow_presenterview", action );
-    connect( action, SIGNAL( activated() ), this, SLOT( configurePresenterView() ) );
+    action = new KAction(i18n("Configure Presenter View..."), this);
+    actionCollection()->addAction("slideshow_presenterview", action);
+    connect(action, SIGNAL(activated()), this, SLOT(configurePresenterView()));
 
-    m_actionDrawOnPresentation = new KAction( i18n( "Draw on the presentation..." ), this );
+    m_actionDrawOnPresentation = new KAction(i18n("Draw on the presentation..."), this);
     m_actionDrawOnPresentation->setShortcut(Qt::Key_P);
     m_actionDrawOnPresentation->setShortcutContext(Qt::ApplicationShortcut);
-    actionCollection()->addAction( "draw_on_presentation", m_actionDrawOnPresentation );
-    connect( m_actionDrawOnPresentation, SIGNAL( activated() ), this, SLOT( drawOnPresentation() ) );
+    actionCollection()->addAction("draw_on_presentation", m_actionDrawOnPresentation);
+    connect(m_actionDrawOnPresentation, SIGNAL(activated()), this, SLOT(drawOnPresentation()));
     m_actionDrawOnPresentation->setEnabled(false);
 
-    m_actionHighlightPresentation = new KAction( i18n( "Highlight the presentation..." ), this );
+    m_actionHighlightPresentation = new KAction(i18n("Highlight the presentation..."), this);
     m_actionHighlightPresentation->setShortcut(Qt::Key_H);
     m_actionHighlightPresentation->setShortcutContext(Qt::ApplicationShortcut);
-    actionCollection()->addAction( "highlight_presentation", m_actionHighlightPresentation );
-    connect( m_actionHighlightPresentation, SIGNAL( activated() ), this, SLOT( highlightPresentation() ) );
+    actionCollection()->addAction("highlight_presentation", m_actionHighlightPresentation);
+    connect(m_actionHighlightPresentation, SIGNAL(activated()), this, SLOT(highlightPresentation()));
     m_actionHighlightPresentation->setEnabled(false);
 
-    m_actionBlackPresentation = new KAction( i18n( "Blackscreen on the presentation..." ), this );
+    m_actionBlackPresentation = new KAction(i18n("Blackscreen on the presentation..."), this);
     m_actionBlackPresentation->setShortcut(Qt::Key_B);
     m_actionBlackPresentation->setShortcutContext(Qt::ApplicationShortcut);
-    actionCollection()->addAction( "black_presentation", m_actionBlackPresentation );
-    connect( m_actionBlackPresentation, SIGNAL( activated() ), this, SLOT( blackPresentation() ) );
+    actionCollection()->addAction("black_presentation", m_actionBlackPresentation);
+    connect(m_actionBlackPresentation, SIGNAL(activated()), this, SLOT(blackPresentation()));
     m_actionBlackPresentation->setEnabled(false);
 }
 
@@ -269,15 +269,15 @@ void KPrView::startPresentation()
     m_actionDrawOnPresentation->setEnabled(true);
     m_actionHighlightPresentation->setEnabled(true);
     m_actionBlackPresentation->setEnabled(true);
-    setViewMode( m_presentationMode );
+    setViewMode(m_presentationMode);
 }
 
 void KPrView::startPresentationFromBeginning()
 {
-    KPrDocument * doc = dynamic_cast<KPrDocument *>( kopaDocument() );
+    KPrDocument * doc = dynamic_cast<KPrDocument *>(kopaDocument());
     QList<KoPAPageBase*> slideshow = doc->slideShow();
-    if ( !slideshow.isEmpty() ) {
-        setActivePage( slideshow.first() );
+    if (!slideshow.isEmpty()) {
+        setActivePage(slideshow.first());
     }
     startPresentation();
 }
@@ -288,7 +288,7 @@ void KPrView::stopPresentation()
     m_actionHighlightPresentation->setEnabled(false);
     m_actionBlackPresentation->setEnabled(false);
 
-    if ( isPresentationRunning() ) {
+    if (isPresentationRunning()) {
         m_presentationMode->activateSavedViewMode();
     }
 }
@@ -298,15 +298,15 @@ void KPrView::createAnimation()
     static int animationcount = 0;
     KoSelection * selection = kopaCanvas()->shapeManager()->selection();
     QList<KoShape*> selectedShapes = selection->selectedShapes();
-    foreach( KoShape * shape, selectedShapes )
+    foreach(KoShape * shape, selectedShapes)
     {
         Q_UNUSED(shape);
-        /*KPrShapeAnimationOld * animation = new KPrAnimationMoveAppear( shape, animationcount );
-        KPrDocument * doc = static_cast<KPrDocument *>( kopaDocument() );
-        KPrAnimationCreateCommand * command = new KPrAnimationCreateCommand( doc, animation );
-        kopaCanvas()->addCommand( command );*/
+        /*KPrShapeAnimationOld * animation = new KPrAnimationMoveAppear(shape, animationcount);
+        KPrDocument * doc = static_cast<KPrDocument *>(kopaDocument());
+        KPrAnimationCreateCommand * command = new KPrAnimationCreateCommand(doc, animation);
+        kopaCanvas()->addCommand(command);*/
     }
-    animationcount = ( animationcount + 1 ) % 3;
+    animationcount = (animationcount + 1) % 3;
 }
 
 void KPrView::showNormal()
@@ -318,9 +318,9 @@ void KPrView::showNotes()
 {
     // Make sure that we are not in master mode
     // since notes master is not supported yet
-    if ( viewMode()->masterMode() ) {
-        actionCollection()->action( "view_masterpages" )->setChecked( false );
-        setMasterMode( false );
+    if (viewMode()->masterMode()) {
+        actionCollection()->action("view_masterpages")->setChecked(false);
+        setMasterMode(false);
     }
     setViewMode(m_notesMode);
 }
@@ -329,21 +329,21 @@ void KPrView::showSlidesSorter()
 {
     // Make sure that we are not in master mode
     // Sort master does not make sense
-    if ( viewMode()->masterMode() ) {
-        actionCollection()->action( "view_masterpages" )->setChecked( false );
-        setMasterMode( false );
+    if (viewMode()->masterMode()) {
+        actionCollection()->action("view_masterpages")->setChecked(false);
+        setMasterMode(false);
     }
     setViewMode(m_slidesSorterMode);
 }
 
 void KPrView::dialogCustomSlideShows()
 {
-    KPrDocument *doc = static_cast<KPrDocument *>( kopaDocument() );
+    KPrDocument *doc = static_cast<KPrDocument *>(kopaDocument());
     KPrCustomSlideShows *finalSlideShows;
-    KPrCustomSlideShowsDialog dialog( this, doc->customSlideShows(), doc, finalSlideShows );
-    dialog.setModal( true );
-    if ( dialog.exec() == QDialog::Accepted ) {
-        kopaCanvas()->addCommand( new KPrSetCustomSlideShowsCommand( doc, finalSlideShows ) );
+    KPrCustomSlideShowsDialog dialog(this, doc->customSlideShows(), doc, finalSlideShows);
+    dialog.setModal(true);
+    if (dialog.exec() == QDialog::Accepted) {
+        kopaCanvas()->addCommand(new KPrSetCustomSlideShowsCommand(doc, finalSlideShows));
     }
     else {
         delete finalSlideShows;
@@ -352,23 +352,23 @@ void KPrView::dialogCustomSlideShows()
 
 void KPrView::configureSlideShow()
 {
-    KPrDocument *doc = static_cast<KPrDocument *>( kopaDocument() );
-    KPrConfigureSlideShowDialog *dialog = new KPrConfigureSlideShowDialog( doc, this );
+    KPrDocument *doc = static_cast<KPrDocument *>(kopaDocument());
+    KPrConfigureSlideShowDialog *dialog = new KPrConfigureSlideShowDialog(doc, this);
 
-    if ( dialog->exec() == QDialog::Accepted ) {
-        doc->setActiveCustomSlideShow( dialog->activeCustomSlideShow() );
+    if (dialog->exec() == QDialog::Accepted) {
+        doc->setActiveCustomSlideShow(dialog->activeCustomSlideShow());
     }
     delete dialog;
 }
 
 void KPrView::configurePresenterView()
 {
-    KPrDocument *doc = static_cast<KPrDocument *>( kopaDocument() );
-    KPrConfigurePresenterViewDialog *dialog = new KPrConfigurePresenterViewDialog( doc, this );
+    KPrDocument *doc = static_cast<KPrDocument *>(kopaDocument());
+    KPrConfigurePresenterViewDialog *dialog = new KPrConfigurePresenterViewDialog(doc, this);
 
-    if ( dialog->exec() == QDialog::Accepted ) {
-        doc->setPresentationMonitor( dialog->presentationMonitor() );
-        doc->setPresenterViewEnabled( dialog->presenterViewEnabled() );
+    if (dialog->exec() == QDialog::Accepted) {
+        doc->setPresentationMonitor(dialog->presentationMonitor());
+        doc->setPresenterViewEnabled(dialog->presenterViewEnabled());
     }
     delete dialog;
 }

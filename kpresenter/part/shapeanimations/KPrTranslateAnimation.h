@@ -1,10 +1,10 @@
 /* This file is part of the KDE project
- * Copyright ( C ) 2007 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,19 +29,19 @@
 class KPrTranslateAnimation : public KPrShapeAnimationOld
 {
 public:
-    KPrTranslateAnimation( KoShape * shape, int step, Type type );
+    KPrTranslateAnimation(KoShape * shape, int step, Type type);
     virtual ~KPrTranslateAnimation();
 
     /// reimplemented
-    virtual KPrAnimationData * animationData( KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect ) = 0;
+    virtual KPrAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect) = 0;
     /// reimplemented
-    virtual bool animate( QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData );
+    virtual bool animate(QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData);
     /// reimplemented
-    virtual void animateRect( QRectF & rect, KPrAnimationData * animationData );
+    virtual void animateRect(QRectF & rect, KPrAnimationData * animationData);
     /// reimplemented
-    virtual void next( int currentTime, KPrAnimationData * animationData );
+    virtual void next(int currentTime, KPrAnimationData * animationData);
     /// reimplemented
-    virtual void finish( KPrAnimationData * animationData );
+    virtual void finish(KPrAnimationData * animationData);
 };
 
 #endif /* KPRTRANSLATEANIMATION_H */

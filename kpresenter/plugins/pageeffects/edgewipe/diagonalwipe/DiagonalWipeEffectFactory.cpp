@@ -25,12 +25,12 @@
 #define DiagonalWipeEffectId "DiagonalWipeEffect"
 
 DiagonalWipeEffectFactory::DiagonalWipeEffectFactory()
-: KPrPageEffectFactory( DiagonalWipeEffectId, i18n( "Diagonal" ) )
+: KPrPageEffectFactory(DiagonalWipeEffectId, i18n("Diagonal"))
 {
-    addStrategy( new DiagonalWipeStrategy( FromTopLeft, "topLeft", false ) );
-    addStrategy( new DiagonalWipeStrategy( FromBottomRight, "topLeft", true ) );
-    addStrategy( new DiagonalWipeStrategy( FromTopRight, "topRight", false ) );
-    addStrategy( new DiagonalWipeStrategy( FromBottomLeft, "topRight", true ) );
+    addStrategy(new DiagonalWipeStrategy(FromTopLeft, "topLeft", false));
+    addStrategy(new DiagonalWipeStrategy(FromBottomRight, "topLeft", true));
+    addStrategy(new DiagonalWipeStrategy(FromTopRight, "topRight", false));
+    addStrategy(new DiagonalWipeStrategy(FromBottomLeft, "topRight", true));
 }
 
 DiagonalWipeEffectFactory::~DiagonalWipeEffectFactory()
@@ -38,17 +38,17 @@ DiagonalWipeEffectFactory::~DiagonalWipeEffectFactory()
 }
 
 static const char* s_subTypes[] = {
-    I18N_NOOP( "From Top Left" ),
-    I18N_NOOP( "From Bottom Right" ),
-    I18N_NOOP( "From Top Right" ),
-    I18N_NOOP( "From Bottom Left" )
+    I18N_NOOP("From Top Left"),
+    I18N_NOOP("From Bottom Right"),
+    I18N_NOOP("From Top Right"),
+    I18N_NOOP("From Bottom Left")
 };
 
 QString DiagonalWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
-        return i18n( s_subTypes[subType] );
+        return i18n(s_subTypes[subType]);
     } else {
-        return i18n( "Unknown subtype" );
+        return i18n("Unknown subtype");
     }
 }

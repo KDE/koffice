@@ -42,7 +42,7 @@ public:
         
         // XXX: Use minversion here?
         // The plugins are responsible for adding a factory to the registry
-        KoPluginLoader::instance()->load( QString::fromLatin1("KPresenter/ShapeAnimation"),
+        KoPluginLoader::instance()->load(QString::fromLatin1("KPresenter/ShapeAnimation"),
                                           QString::fromLatin1("[X-KPresenter-Version] <= 0"),
                                           config);
     }
@@ -50,14 +50,14 @@ public:
     KPrShapeAnimationRegistry q;
 };
 
-K_GLOBAL_STATIC( KPrShapeAnimationRegistry::Singleton, singleton )
+K_GLOBAL_STATIC(KPrShapeAnimationRegistry::Singleton, singleton)
 
 KPrShapeAnimationRegistry * KPrShapeAnimationRegistry::instance()
 {
-    return &( singleton->q );
+    return &(singleton->q);
 }
 
-KPrShapeAnimationOld * KPrShapeAnimationRegistry::createShapeAnimation( const KoXmlElement & element )
+KPrShapeAnimationOld * KPrShapeAnimationRegistry::createShapeAnimation(const KoXmlElement & element)
 {
     Q_UNUSED(element);
     //TODO
@@ -70,7 +70,7 @@ KPrShapeAnimationRegistry::KPrShapeAnimationRegistry()
 
 KPrShapeAnimationRegistry::~KPrShapeAnimationRegistry()
 {
-    foreach ( KPrShapeAnimationFactory* factory, values() )
+    foreach (KPrShapeAnimationFactory* factory, values())
     {
         delete factory;
     }

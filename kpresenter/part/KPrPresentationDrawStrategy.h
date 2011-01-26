@@ -27,10 +27,10 @@
 class KPrPresentationDrawStrategy : public KPrPresentationStrategyBase
 {
 public:
-    KPrPresentationDrawStrategy( KPrPresentationTool * tool );
+    KPrPresentationDrawStrategy(KPrPresentationTool * tool);
     virtual ~KPrPresentationDrawStrategy();
 
-    virtual bool keyPressEvent( QKeyEvent * event );
+    virtual bool keyPressEvent(QKeyEvent * event);
 };
 
 

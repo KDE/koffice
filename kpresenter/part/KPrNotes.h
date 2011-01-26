@@ -32,7 +32,7 @@ class KPrPage;
 class KPrNotes : public KoPAPageBase
 {
 public:
-    KPrNotes( KPrPage * page, KPrDocument * document );
+    KPrNotes(KPrPage * page, KPrDocument * document);
     ~KPrNotes();
 
     /// Get the main text note shape for this presentation notes
@@ -58,17 +58,17 @@ public:
     /// reimplemented
     virtual bool displayMasterShapes();
     /// reimplemented
-    virtual void setDisplayMasterShapes( bool );
+    virtual void setDisplayMasterShapes(bool);
     /// reimplemented
     virtual bool displayMasterBackground();
     /// reimplemented
-    virtual void setDisplayMasterBackground( bool );
+    virtual void setDisplayMasterBackground(bool);
     /// reimplemented
     virtual bool displayShape(KoShape *shape) const;
     /// reimplemented
-    virtual QPixmap generateThumbnail( const QSize& );
+    virtual QPixmap generateThumbnail(const QSize&);
     /// reimplemented
-    virtual void paintPage( QPainter & painter, KoZoomHandler & zoomHandler );
+    virtual void paintPage(QPainter & painter, KoZoomHandler & zoomHandler);
 
 private:
     QImage createPageThumbnail() const;

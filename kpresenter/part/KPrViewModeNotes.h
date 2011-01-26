@@ -46,10 +46,10 @@ public:
     void activate(KoPAViewMode *previousViewMode);
     void deactivate();
 
-    void updateActivePage( KoPAPageBase *page );
+    void updateActivePage(KoPAPageBase *page);
 
-    void addShape( KoShape *shape );
-    void removeShape( KoShape *shape );
+    void addShape(KoShape *shape);
+    void removeShape(KoShape *shape);
 };
 
 #endif // KPRVIEWMODENOTES_H

@@ -30,7 +30,7 @@
 #include <kdebug.h>
 
 KPrPlaceholderPictureStrategy::KPrPlaceholderPictureStrategy()
-: KPrPlaceholderStrategy( "graphic" )
+: KPrPlaceholderStrategy("graphic")
 {
 }
 
@@ -43,7 +43,7 @@ KoShape *KPrPlaceholderPictureStrategy::createShape(KoResourceManager *rm)
     KoShape * shape = 0;
 
     KUrl url = KFileDialog::getOpenUrl();
-    if ( !url.isEmpty() ) {
+    if (!url.isEmpty()) {
         shape = KPrPlaceholderStrategy::createShape(rm);
 
         KoImageCollection *collection = rm->imageCollection();
@@ -55,9 +55,9 @@ KoShape *KPrPlaceholderPictureStrategy::createShape(KoResourceManager *rm)
             //setSuffix(url.prettyUrl());
             KoImageData *data = collection->createImageData(image);
             if (data->isValid()) {
-                shape->setUserData( data );
+                shape->setUserData(data);
                 // TODO the pic should be fit into the space provided
-                shape->setSize( data->imageSize() );
+                shape->setSize(data->imageSize());
             }
         } else {
             kWarning() << "open image " << url.prettyUrl() << "failed";

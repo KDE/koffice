@@ -35,18 +35,18 @@ class KPrCustomSlideShowsDialog : public QDialog
     Q_OBJECT
 
 public:
-    KPrCustomSlideShowsDialog( QWidget *parent, KPrCustomSlideShows *slideShows, KPrDocument *doc, KPrCustomSlideShows *&newSlideShows );
+    KPrCustomSlideShowsDialog(QWidget *parent, KPrCustomSlideShows *slideShows, KPrDocument *doc, KPrCustomSlideShows *&newSlideShows);
     ~KPrCustomSlideShowsDialog();
 private Q_SLOTS:
     void addCustomSlideShow();
     void addSlidesToCurrentSlideShow();
-    void addSlidesToCurrentSlideShow( QListWidgetItem* currentItem );
+    void addSlidesToCurrentSlideShow(QListWidgetItem* currentItem);
     void deleteCustomSlideShow();
-    void renameCustomSlideShow( QListWidgetItem *item );
+    void renameCustomSlideShow(QListWidgetItem *item);
     void loadCustomSlideShowsData();
-    void changedSelectedSlideshow( QListWidgetItem *current, QListWidgetItem *previous );
+    void changedSelectedSlideshow(QListWidgetItem *current, QListWidgetItem *previous);
     void removeSlidesFromCurrentSlideShow();
-    void removeSlidesFromCurrentSlideShow( QListWidgetItem* currentItem );
+    void removeSlidesFromCurrentSlideShow(QListWidgetItem* currentItem);
 
 //     Q_SIGNALS:
 private:

@@ -21,7 +21,7 @@
 #include "KPrParallelSnakesWipeEffectFactory.h"
 
 KPrParallelSnakesWipeDiagonalStrategy::KPrParallelSnakesWipeDiagonalStrategy(bool reverseAngle, bool reverse)
-    : KPrMatrixWipeStrategy( reverse ? (reverseAngle ? KPrParallelSnakesWipeEffectFactory::DiagonalBottomLeftOppositeIn : KPrParallelSnakesWipeEffectFactory::DiagonalTopLeftOppositeIn) : (reverseAngle ? KPrParallelSnakesWipeEffectFactory::DiagonalBottomLeftOppositeOut : KPrParallelSnakesWipeEffectFactory::DiagonalTopLeftOppositeOut), "parallelSnakesWipe", reverseAngle ? "diagonalTopLeftOpposite" : "diagonalBottomLeftOpposite", reverse ),
+    : KPrMatrixWipeStrategy(reverse ? (reverseAngle ? KPrParallelSnakesWipeEffectFactory::DiagonalBottomLeftOppositeIn : KPrParallelSnakesWipeEffectFactory::DiagonalTopLeftOppositeIn) : (reverseAngle ? KPrParallelSnakesWipeEffectFactory::DiagonalBottomLeftOppositeOut : KPrParallelSnakesWipeEffectFactory::DiagonalTopLeftOppositeOut), "parallelSnakesWipe", reverseAngle ? "diagonalTopLeftOpposite" : "diagonalBottomLeftOpposite", reverse),
     m_reverseAngle(reverseAngle)
 {
     setNeedEvenSquares(true, false);

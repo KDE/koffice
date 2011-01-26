@@ -39,7 +39,7 @@ public:
     ~KPrViewModeSlidesSorter();
 
     void paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect);
-    void paintEvent( KoPACanvas * canvas, QPaintEvent* event );
+    void paintEvent(KoPACanvas * canvas, QPaintEvent* event);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
     void mousePressEvent(QMouseEvent *event, const QPointF &point);
     void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point);
@@ -52,10 +52,10 @@ public:
     void activate(KoPAViewMode *previousViewMode);
     void deactivate();
 
-    void updateActivePage( KoPAPageBase *page );
+    void updateActivePage(KoPAPageBase *page);
 
-    void addShape( KoShape *shape );
-    void removeShape( KoShape *shape );
+    void addShape(KoShape *shape);
+    void removeShape(KoShape *shape);
 
 protected:
 
@@ -70,7 +70,7 @@ protected:
      * @param pageNumber the number of the page to move
      * @param pageAfterNumber the number of the place the page should move to
      */
-    void movePage( int pageNumber, int pageAfterNumber );
+    void movePage(int pageNumber, int pageAfterNumber);
 
     /**
      * The count of the page
@@ -135,7 +135,7 @@ protected:
      */
     class KPrSlidesSorter : public QListWidget {
         public:
-            KPrSlidesSorter ( KPrViewModeSlidesSorter * viewModeSlidesSorter, QWidget * parent = 0 )
+            KPrSlidesSorter (KPrViewModeSlidesSorter * viewModeSlidesSorter, QWidget * parent = 0)
                 : QListWidget(parent)
                 , m_viewModeSlidesSorter(viewModeSlidesSorter)
                 , m_movingPageNumber(-1)
@@ -151,9 +151,9 @@ protected:
                 return Qt::MoveAction;
             }
 
-            virtual void paintEvent ( QPaintEvent * ev);
+            virtual void paintEvent (QPaintEvent * ev);
 
-            virtual void startDrag ( Qt::DropActions supportedActions );
+            virtual void startDrag (Qt::DropActions supportedActions);
 
             virtual void dropEvent(QDropEvent* ev);
 

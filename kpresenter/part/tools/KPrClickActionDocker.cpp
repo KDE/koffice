@@ -48,41 +48,41 @@
 
 #include <kdebug.h>
 
-KPrClickActionDocker::KPrClickActionDocker( QWidget* parent, Qt::WindowFlags flags )
-: QWidget( parent, flags )
-, m_view( 0 )
-, m_soundCollection( 0 )
+KPrClickActionDocker::KPrClickActionDocker(QWidget* parent, Qt::WindowFlags flags)
+: QWidget(parent, flags)
+, m_view(0)
+, m_soundCollection(0)
 {
-    setObjectName( "KPrClickActionDocker" );
+    setObjectName("KPrClickActionDocker");
     // setup widget layout
     QVBoxLayout* layout = new QVBoxLayout;
     m_cbPlaySound = new QComboBox();
     //layout->addWidget(m_cbPlaySound);
 
     QList<KoEventActionFactoryBase *> factories = KoEventActionRegistry::instance()->presentationEventActions();
-    foreach ( KoEventActionFactoryBase * factory, factories ) {
+    foreach (KoEventActionFactoryBase * factory, factories) {
         QWidget * optionWidget = factory->createOptionWidget();
-        layout->addWidget( optionWidget );
-        m_eventActionWidgets.insert( factory->id(), optionWidget );
-        connect( optionWidget, SIGNAL( addCommand( QUndoCommand * ) ),
-                 this, SLOT( addCommand( QUndoCommand * ) ) );
+        layout->addWidget(optionWidget);
+        m_eventActionWidgets.insert(factory->id(), optionWidget);
+        connect(optionWidget, SIGNAL(addCommand(QUndoCommand *)),
+                 this, SLOT(addCommand(QUndoCommand *)));
     }
 
-    setLayout( layout );
+    setLayout(layout);
 }
 
 void KPrClickActionDocker::selectionChanged()
 {
-    if( ! m_canvas )
+    if(! m_canvas)
         return;
     KoSelection *selection = m_canvas->shapeManager()->selection();
     KoShape *shape = selection->firstSelectedShape();
 
-    if ( shape ) {
+    if (shape) {
         QSet<KoEventAction *> eventActions = shape->eventActions();
         QMap<QString, KoEventAction*> eventActionMap;
-        foreach ( KoEventAction * eventAction, eventActions ) {
-            eventActionMap.insert( eventAction->id(), eventAction );
+        foreach (KoEventAction * eventAction, eventActions) {
+            eventActionMap.insert(eventAction->id(), eventAction);
         }
 
         QMap<QString, QWidget *>::const_iterator it(m_eventActionWidgets.constBegin());
@@ -101,25 +101,25 @@ void KPrClickActionDocker::selectionChanged()
             KPrEventActionWidget *actionWidget = dynamic_cast<KPrEventActionWidget*>(widget);
             if (actionWidget) {
                 KPrEventActionData data(0, 0, m_soundCollection);
-                actionWidget->setData( &data );
+                actionWidget->setData(&data);
             }
         }
     }
 }
 
-void KPrClickActionDocker::setCanvas( KoCanvasBase *canvas )
+void KPrClickActionDocker::setCanvas(KoCanvasBase *canvas)
 {
     m_canvas = canvas;
 
-    if ( m_canvas ) {
-        connect( m_canvas->shapeManager(), SIGNAL( selectionChanged() ),
-                this, SLOT( selectionChanged() ) );
+    if (m_canvas) {
+        connect(m_canvas->shapeManager(), SIGNAL(selectionChanged()),
+                this, SLOT(selectionChanged()));
    }
 
     selectionChanged();
 }
 
-void KPrClickActionDocker::setView(KoPAViewBase  *view )
+void KPrClickActionDocker::setView(KoPAViewBase  *view)
 {
     m_view = view;
     if (m_view->kopaDocument()->resourceManager()->hasResource(KPresenter::SoundCollection)) {
@@ -130,10 +130,10 @@ void KPrClickActionDocker::setView(KoPAViewBase  *view )
     setCanvas(view->kopaCanvas());
 }
 
-void KPrClickActionDocker::addCommand( QUndoCommand * command )
+void KPrClickActionDocker::addCommand(QUndoCommand * command)
 {
-    if ( m_view ) {
-        m_view->kopaCanvas()->addCommand( command );
+    if (m_view) {
+        m_view->kopaCanvas()->addCommand(command);
     }
 }
 

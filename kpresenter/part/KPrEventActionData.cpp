@@ -34,7 +34,7 @@ public:
     KPrSoundCollection *soundCollection;
 };
 
-KPrEventActionData::KPrEventActionData( KoShape * shape, KoEventAction * eventAction , KPrSoundCollection * soundCollection )
+KPrEventActionData::KPrEventActionData(KoShape * shape, KoEventAction * eventAction , KPrSoundCollection * soundCollection)
     : d(new Private(shape, eventAction, soundCollection))
 {
 }

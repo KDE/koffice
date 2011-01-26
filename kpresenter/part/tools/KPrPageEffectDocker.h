@@ -41,24 +41,24 @@ class KPrPageEffectDocker : public QWidget
 
     Q_OBJECT
 public:
-    explicit KPrPageEffectDocker( QWidget* parent = 0, Qt::WindowFlags flags = 0 );
+    explicit KPrPageEffectDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-    void setView( KoPAViewBase* view );
+    void setView(KoPAViewBase* view);
 
 public slots:
     void slotActivePageChanged();
 
-    void slotEffectChanged( int index );
+    void slotEffectChanged(int index);
 
 protected:
-    void updateSubTypes( const KPrPageEffectFactory * factory );
-    KPrPageEffect * createPageEffect( const KPrPageEffectFactory * factory, int subType, double time );
+    void updateSubTypes(const KPrPageEffectFactory * factory);
+    KPrPageEffect * createPageEffect(const KPrPageEffectFactory * factory, int subType, double time);
 
 protected slots:
-    void slotSubTypeChanged( int index );
-    void slotDurationChanged( double duration );
+    void slotSubTypeChanged(int index);
+    void slotDurationChanged(double duration);
 
-    void cleanup( QObject* object );
+    void cleanup(QObject* object);
 
     void setEffectPreview();
 

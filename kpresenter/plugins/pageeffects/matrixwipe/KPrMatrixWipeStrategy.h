@@ -28,11 +28,11 @@ public:
     KPrMatrixWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool smooth = false);
     virtual ~KPrMatrixWipeStrategy();
 
-    virtual void setup( const KPrPageEffect::Data &data, QTimeLine &timeLine );
+    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
 
-    virtual void paintStep( QPainter &p, int currPos, const KPrPageEffect::Data &data );
+    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
 
-    virtual void next( const KPrPageEffect::Data &data );
+    virtual void next(const KPrPageEffect::Data &data);
     enum Direction {
         NotSmooth,
         TopToBottom,

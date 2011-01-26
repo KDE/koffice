@@ -21,7 +21,7 @@
 #include "pageeffects/KPrPageEffect.h"
 
 KPrPageApplicationData::KPrPageApplicationData()
-: m_pageEffect( 0 )
+: m_pageEffect(0)
 {
 }
 
@@ -35,7 +35,7 @@ KPrPageEffect * KPrPageApplicationData::pageEffect()
     return m_pageEffect;
 }
 
-void KPrPageApplicationData::setPageEffect( KPrPageEffect * effect )
+void KPrPageApplicationData::setPageEffect(KPrPageEffect * effect)
 {
     m_pageEffect = effect;
 }

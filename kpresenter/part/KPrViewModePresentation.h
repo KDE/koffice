@@ -1,10 +1,10 @@
 /* This file is part of the KDE project
- * Copyright (  C ) 2007 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright ( C) 2007 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -38,27 +38,27 @@ class KPrViewModePresentation : public KoPAViewMode
     Q_OBJECT
 
 public:
-    KPrViewModePresentation( KoPAViewBase * view, KoPACanvasBase * m_canvas );
+    KPrViewModePresentation(KoPAViewBase * view, KoPACanvasBase * m_canvas);
     ~KPrViewModePresentation();
 
-    KoViewConverter * viewConverter( KoPACanvasBase * canvas );
+    KoViewConverter * viewConverter(KoPACanvasBase * canvas);
 
     void paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect);
-    void tabletEvent( QTabletEvent *event, const QPointF &point );
-    void mousePressEvent( QMouseEvent *event, const QPointF &point );
-    void mouseDoubleClickEvent( QMouseEvent *event, const QPointF &point );
-    void mouseMoveEvent( QMouseEvent *event, const QPointF &point );
-    void mouseReleaseEvent( QMouseEvent *event, const QPointF &point );
-    void keyPressEvent( QKeyEvent *event );
-    void keyReleaseEvent( QKeyEvent *event );
-    void wheelEvent( QWheelEvent * event, const QPointF &point );
-    void closeEvent( QCloseEvent * event );
+    void tabletEvent(QTabletEvent *event, const QPointF &point);
+    void mousePressEvent(QMouseEvent *event, const QPointF &point);
+    void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point);
+    void mouseMoveEvent(QMouseEvent *event, const QPointF &point);
+    void mouseReleaseEvent(QMouseEvent *event, const QPointF &point);
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
+    void wheelEvent(QWheelEvent * event, const QPointF &point);
+    void closeEvent(QCloseEvent * event);
 
-    void activate( KoPAViewMode * previousViewMode );
+    void activate(KoPAViewMode * previousViewMode);
     void deactivate();
 
     /// reimplemented
-    virtual void updateActivePage( KoPAPageBase *page );
+    virtual void updateActivePage(KoPAPageBase *page);
 
     /**
      * @brief Activate the saved view mode
@@ -115,9 +115,9 @@ public:
     /**
      * Navigate in the presentation.
      */
-    void navigate( KPrAnimationDirector::Navigation navigation );
+    void navigate(KPrAnimationDirector::Navigation navigation);
 
-    void navigateToPage( int index );
+    void navigateToPage(int index);
     void blackPresentation();
 
     /**
@@ -143,14 +143,14 @@ signals:
      * @param page new page index within the current slideshow
      * @param stepsInPage the number of steps in the new page
      */
-    void pageChanged( int page, int stepsInPage );
+    void pageChanged(int page, int stepsInPage);
 
     /**
      * Emitted when the step changes.
      *
      * @param step new step index within the page
      */
-    void stepChanged( int step );
+    void stepChanged(int step);
 
 protected:
     KoPAViewMode * m_savedViewMode;

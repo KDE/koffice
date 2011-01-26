@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -37,24 +37,24 @@ class KPRESENTER_EXPORT KPrViewModePreviewPageEffect : public KoPAViewMode
 
     Q_OBJECT
 public:
-    KPrViewModePreviewPageEffect( KoPAViewBase * view, KoPACanvasBase * m_canvas );
+    KPrViewModePreviewPageEffect(KoPAViewBase * view, KoPACanvasBase * m_canvas);
     ~KPrViewModePreviewPageEffect();
 
     void paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect);
-    void tabletEvent( QTabletEvent *event, const QPointF &point );
-    void mousePressEvent( QMouseEvent *event, const QPointF &point );
-    void mouseDoubleClickEvent( QMouseEvent *event, const QPointF &point );
-    void mouseMoveEvent( QMouseEvent *event, const QPointF &point );
-    void mouseReleaseEvent( QMouseEvent *event, const QPointF &point );
-    void keyPressEvent( QKeyEvent *event );
-    void keyReleaseEvent( QKeyEvent *event );
-    void wheelEvent( QWheelEvent * event, const QPointF &point );
+    void tabletEvent(QTabletEvent *event, const QPointF &point);
+    void mousePressEvent(QMouseEvent *event, const QPointF &point);
+    void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point);
+    void mouseMoveEvent(QMouseEvent *event, const QPointF &point);
+    void mouseReleaseEvent(QMouseEvent *event, const QPointF &point);
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
+    void wheelEvent(QWheelEvent * event, const QPointF &point);
 
-    void activate( KoPAViewMode * previousViewMode );
+    void activate(KoPAViewMode * previousViewMode);
     void deactivate();
 
     /// reimplemented
-    virtual void updateActivePage( KoPAPageBase *page );
+    virtual void updateActivePage(KoPAPageBase *page);
 
 
     /**
@@ -64,7 +64,7 @@ public:
      * @param page The current page used in the preview. If 0 the preview will be x
      * @param prevpage The page coming before @p page
      */
-    void setPageEffect( KPrPageEffect* pageEffect, KPrPage* page, KPrPage* prevpage );
+    void setPageEffect(KPrPageEffect* pageEffect, KPrPage* page, KPrPage* prevpage);
 
 public slots:
     /**

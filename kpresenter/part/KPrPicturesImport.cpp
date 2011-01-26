@@ -101,7 +101,7 @@ void KPrPicturesImport::pictureImported(KJob *job)
             shape->setSize(imageSize);
 
             // center the picture on the page
-            QPointF pos( pageSize.width() / 2- imageSize.width() / 2, pageSize.height() / 2 - imageSize.height() / 2 );
+            QPointF pos(pageSize.width() / 2- imageSize.width() / 2, pageSize.height() / 2 - imageSize.height() / 2);
             shape->setPosition(pos);
 
             KoPAPageBase *page = m_doc->newPage(m_masterPage);

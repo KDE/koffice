@@ -44,24 +44,24 @@ public:
      *
      * @param presentationClass The presentation:class attribute of the placeholder
      */
-    static KPrPlaceholderStrategy * create( const QString & presentationClass );
+    static KPrPlaceholderStrategy * create(const QString & presentationClass);
 
     /**
      * Check if the presentation class is supported
      *
      * @param presentationClass The presentation:class attribute of the placeholder
      */
-    static bool supported( const QString & presentationClass );
+    static bool supported(const QString & presentationClass);
 
     virtual ~KPrPlaceholderStrategy();
 
     virtual KoShape *createShape(KoResourceManager *documentResources);
 
-    virtual void paint( QPainter & painter, const KoViewConverter &converter, const QRectF & rect );
+    virtual void paint(QPainter & painter, const KoViewConverter &converter, const QRectF & rect);
 
-    virtual void saveOdf( KoShapeSavingContext & context );
+    virtual void saveOdf(KoShapeSavingContext & context);
 
-    virtual bool loadOdf( const KoXmlElement & element, KoShapeLoadingContext & context );
+    virtual bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context);
 
     virtual void init(KoResourceManager *documentResources);
 
@@ -71,7 +71,7 @@ protected:
     /**
      * @param presentationClass The presentation:class of the shape used for creating a shape of that type
      */
-    KPrPlaceholderStrategy( const QString & presentationClass );
+    KPrPlaceholderStrategy(const QString & presentationClass);
 
     /**
      * Get the text that is displayed

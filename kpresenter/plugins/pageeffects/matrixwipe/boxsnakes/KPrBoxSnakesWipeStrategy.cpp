@@ -41,7 +41,7 @@ static const char * getSmilSubType(int horRepeat, int verRepeat, bool clockwise)
 }
 
 KPrBoxSnakesWipeStrategy::KPrBoxSnakesWipeStrategy(int horRepeat, int verRepeat, bool clockwise, bool reverse)
-    : KPrMatrixWipeStrategy( getSubType(horRepeat, verRepeat, clockwise, reverse), "spiralWipe", getSmilSubType(horRepeat, verRepeat, clockwise), reverse ),
+    : KPrMatrixWipeStrategy(getSubType(horRepeat, verRepeat, clockwise, reverse), "spiralWipe", getSmilSubType(horRepeat, verRepeat, clockwise), reverse),
     m_horRepeat(horRepeat), m_verRepeat(verRepeat), m_clockwise(clockwise)
 {
     setNeedEvenSquares();

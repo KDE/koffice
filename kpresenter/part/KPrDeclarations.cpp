@@ -46,7 +46,7 @@ bool KPrDeclarations::loadOdf(const KoXmlElement &body, KoPALoadingContext &cont
     Q_UNUSED(context);
 
     KoXmlElement element;
-    forEachElement( element, body ) {
+    forEachElement(element, body) {
         if (element.namespaceURI() == KoXmlNS::presentation) {
             if (element.tagName() == "header-decl") {
                 const QString name = element.attributeNS(KoXmlNS::presentation, "name", QString());

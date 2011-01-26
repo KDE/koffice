@@ -55,15 +55,15 @@ typedef boost::multi_index_container<
 
 struct KPrPageEffectFactory::Private
 {
-    Private( const QString & id, const QString & name )
-    : id( id )
-    , name( name )
+    Private(const QString & id, const QString & name)
+    : id(id)
+    , name(name)
     {}
 
     ~Private()
     {
         EffectStrategies::const_iterator it = strategies.begin();
-        for ( ; it != strategies.end(); ++it ) {
+        for (; it != strategies.end(); ++it) {
             delete *it;
         }
     }
@@ -78,8 +78,8 @@ struct KPrPageEffectFactory::Private
     QList<QPair<QString, bool> > tags;
 };
 
-KPrPageEffectFactory::KPrPageEffectFactory( const QString & id, const QString & name )
-: d( new Private( id, name ) )
+KPrPageEffectFactory::KPrPageEffectFactory(const QString & id, const QString & name)
+: d(new Private(id, name))
 {
 }
 
@@ -88,29 +88,29 @@ KPrPageEffectFactory::~KPrPageEffectFactory()
     delete d;
 }
 
-KPrPageEffect * KPrPageEffectFactory::createPageEffect( const Properties & properties ) const
+KPrPageEffect * KPrPageEffectFactory::createPageEffect(const Properties & properties) const
 {
     KPrPageEffectStrategy * strategy = 0;
 
-    EffectStrategies::iterator it( d->strategies.find( properties.subType ) );
+    EffectStrategies::iterator it(d->strategies.find(properties.subType));
 
-    if ( it != d->strategies.end() ) {
+    if (it != d->strategies.end()) {
         strategy = *it;
     }
-    Q_ASSERT( strategy );
+    Q_ASSERT(strategy);
 
-    return new KPrPageEffect( properties.duration, d->id, strategy );
+    return new KPrPageEffect(properties.duration, d->id, strategy);
 }
 
-KPrPageEffect * KPrPageEffectFactory::createPageEffect( const KoXmlElement & element ) const
+KPrPageEffect * KPrPageEffectFactory::createPageEffect(const KoXmlElement & element) const
 {
     KPrPageEffectStrategy * strategy = 0;
     KPrPageEffect * pageEffect = 0;
 
-    if ( element.hasAttributeNS( KoXmlNS::smil, "subtype" ) ) {
-        QString smilSubType( element.attributeNS( KoXmlNS::smil, "subtype" ) );
+    if (element.hasAttributeNS(KoXmlNS::smil, "subtype")) {
+        QString smilSubType(element.attributeNS(KoXmlNS::smil, "subtype"));
         bool reverse = false;
-        if ( element.attributeNS( KoXmlNS::smil, "direction" ) == "reverse" ) {
+        if (element.attributeNS(KoXmlNS::smil, "direction") == "reverse") {
             reverse = true;
         }
 
@@ -130,12 +130,12 @@ KPrPageEffect * KPrPageEffectFactory::createPageEffect( const KoXmlElement & ele
             // wrong values and medium ar treated as default which is 5s
         }
 
-        EffectStrategies::nth_index<1>::type::iterator it( d->strategies.get<1>().find( boost::make_tuple( smilSubType, reverse ) ) );
+        EffectStrategies::nth_index<1>::type::iterator it(d->strategies.get<1>().find(boost::make_tuple(smilSubType, reverse)));
 
-        if ( it != d->strategies.get<1>().end() ) {
+        if (it != d->strategies.get<1>().end()) {
             strategy = *it;
-            strategy->loadOdfSmilAttributes( element );
-            pageEffect = new KPrPageEffect( duration, d->id, strategy );
+            strategy->loadOdfSmilAttributes(element);
+            pageEffect = new KPrPageEffect(duration, d->id, strategy);
         }
         else {
             kWarning(33002) << "effect for " << d->id << smilSubType << reverse << "not supported";
@@ -168,22 +168,22 @@ QList<QPair<QString, bool> > KPrPageEffectFactory::tags() const
 QMap<QString, int> KPrPageEffectFactory::subTypesByName() const
 {
     QMap<QString, int> nameToType;
-    foreach( const int subType, d->subTypes ) {
-        nameToType.insertMulti( subTypeName( subType ), subType );
+    foreach(const int subType, d->subTypes) {
+        nameToType.insertMulti(subTypeName(subType), subType);
     }
     return nameToType;
 }
 
-void KPrPageEffectFactory::addStrategy( KPrPageEffectStrategy * strategy )
+void KPrPageEffectFactory::addStrategy(KPrPageEffectStrategy * strategy)
 {
-    bool inserted = d->strategies.insert( strategy ).second;
-    Q_ASSERT( inserted == true );
+    bool inserted = d->strategies.insert(strategy).second;
+    Q_ASSERT(inserted == true);
 #ifdef NDEBUG
     Q_UNUSED(inserted);
 #endif
-    d->subTypes.append( strategy->subType() );
-    QPair<QString, bool> tag( strategy->smilType(), strategy->reverse() );
-    if ( !d->tags.contains( tag ) ) {
-        d->tags.append( tag );
+    d->subTypes.append(strategy->subType());
+    QPair<QString, bool> tag(strategy->smilType(), strategy->reverse());
+    if (!d->tags.contains(tag)) {
+        d->tags.append(tag);
     }
 }

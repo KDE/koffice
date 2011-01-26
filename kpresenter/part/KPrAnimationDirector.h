@@ -1,11 +1,11 @@
 /* This file is part of the KDE project
- * Copyright ( C ) 2007 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2010 Benjamin Port <port.benjamin@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -58,11 +58,11 @@ public:
         LastPage
     };
 
-    KPrAnimationDirector( KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> & pages, KoPAPageBase* currentPage );
+    KPrAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> & pages, KoPAPageBase* currentPage);
     virtual ~KPrAnimationDirector();
 
     void paint(QPainter& painter, const QRectF &paintRect);
-    void paintEvent( QPaintEvent* event );
+    void paintEvent(QPaintEvent* event);
 
     KoViewConverter * viewConverter();
 
@@ -91,12 +91,12 @@ public:
      *
      * @return true if slideshow is finished and should be exited, false otherwise
      */
-    bool navigate( Navigation navigation );
+    bool navigate(Navigation navigation);
 
     /**
      * do the navigation to the page specified
      */
-    void navigateToPage( int index );
+    void navigateToPage(int index);
 
     /**
      * Get the animation for the shape
@@ -104,19 +104,19 @@ public:
      * @param shape which should be animated
      * @return pair of the animation and the animation data for the shape or a 0, 0 if there is no animation
      */
-    KPrShapeAnimation shapeAnimation( KoShape * shape );
+    KPrShapeAnimation shapeAnimation(KoShape * shape);
 
     void deactivate();
 protected:
     // set the page to be shon and update the UI
-    void updateActivePage( KoPAPageBase * page );
+    void updateActivePage(KoPAPageBase * page);
 
     /**
      * change the page
      *
      * @return true if slideshow is finished and should be exited, false otherwise
      */
-    bool changePage( Navigation navigation );
+    bool changePage(Navigation navigation);
 
     /**
      * Update to the next step
@@ -131,7 +131,7 @@ protected:
     void previousStep();
 
     // paint the given step to the painter
-    void paintStep( QPainter & painter );
+    void paintStep(QPainter & painter);
 
     /**
      * Finish the running shape animations
@@ -141,7 +141,7 @@ protected:
     /**
      * Start the timeline
      */
-    void startTimeLine( int duration );
+    void startTimeLine(int duration);
 
     // helper method for freeing the resources of the animations
     void clearAnimations();
@@ -154,7 +154,7 @@ protected:
 
 protected slots:
     // update the zoom value
-    void updateZoom( const QSize & size );
+    void updateZoom(const QSize & size);
     // acts on the time line event
     void animate();
 

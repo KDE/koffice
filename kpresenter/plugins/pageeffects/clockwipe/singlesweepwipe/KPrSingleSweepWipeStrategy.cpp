@@ -28,8 +28,8 @@
 
 #include <kdebug.h>
 
-KPrSingleSweepWipeStrategy::KPrSingleSweepWipeStrategy( double rotationX, double rotationY, int startAngle, int rotationAngle, int subType, const char * smilType, const char *smilSubType, bool reverse )
-    : KPrPageEffectStrategy( subType, smilType, smilSubType, reverse )
+KPrSingleSweepWipeStrategy::KPrSingleSweepWipeStrategy(double rotationX, double rotationY, int startAngle, int rotationAngle, int subType, const char * smilType, const char *smilSubType, bool reverse)
+    : KPrPageEffectStrategy(subType, smilType, smilSubType, reverse)
     , m_rotationX(rotationX)
     , m_rotationY(rotationY)
 {
@@ -41,18 +41,18 @@ KPrSingleSweepWipeStrategy::~KPrSingleSweepWipeStrategy()
 {
 }
 
-void KPrSingleSweepWipeStrategy::setup( const KPrPageEffect::Data &data, QTimeLine &timeLine )
+void KPrSingleSweepWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
-    timeLine.setFrameRange( 0, 180 );
+    timeLine.setFrameRange(0, 180);
 }
 
-void KPrSingleSweepWipeStrategy::paintStep( QPainter &p, int currPos, const KPrPageEffect::Data &data )
+void KPrSingleSweepWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
 {
     int width = data.m_widget->width();
     int height = data.m_widget->height();
-    QRect rect( 0, 0, width, height );
-    p.drawPixmap( QPoint( 0, 0 ), data.m_oldPage, rect );
+    QRect rect(0, 0, width, height);
+    p.drawPixmap(QPoint(0, 0), data.m_oldPage, rect);
 
     QPoint center(width/2, height/2);
     QPoint rotationCenter(width*m_rotationX, height*m_rotationY);
@@ -69,17 +69,17 @@ void KPrSingleSweepWipeStrategy::paintStep( QPainter &p, int currPos, const KPrP
         startAngle = endAngle + m_rotationAngle*currPos/180;
     }
 
-    QRect boundingRect( 0, 0, width + 2*abs(rotationCenter.x() - center.x()), height + 2*abs(rotationCenter.y() - center.y() ));
+    QRect boundingRect(0, 0, width + 2*abs(rotationCenter.x() - center.x()), height + 2*abs(rotationCenter.y() - center.y()));
     boundingRect.moveCenter(rotationCenter);
 
     QPainterPath clipPath;
     KPrClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, startAngle, endAngle);
     p.setClipPath(clipPath);
 
-    p.drawPixmap( QPoint( 0, 0 ), data.m_newPage, rect );
+    p.drawPixmap(QPoint(0, 0), data.m_newPage, rect);
 }
 
-void KPrSingleSweepWipeStrategy::next( const KPrPageEffect::Data &data )
+void KPrSingleSweepWipeStrategy::next(const KPrPageEffect::Data &data)
 {
     data.m_widget->update();
 }

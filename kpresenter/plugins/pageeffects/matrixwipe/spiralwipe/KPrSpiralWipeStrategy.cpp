@@ -53,7 +53,7 @@ static const char * getSmilSubType(int firstLeg, bool clockwise)
 }
 
 KPrSpiralWipeStrategy::KPrSpiralWipeStrategy(int firstLeg, bool clockwise, bool reverse)
-    : KPrMatrixWipeStrategy( getSubType(firstLeg, clockwise, reverse), "spiralWipe", getSmilSubType(firstLeg, clockwise), reverse ),
+    : KPrMatrixWipeStrategy(getSubType(firstLeg, clockwise, reverse), "spiralWipe", getSmilSubType(firstLeg, clockwise), reverse),
     m_firstLeg(firstLeg), m_clockwise(clockwise)
 {
 }

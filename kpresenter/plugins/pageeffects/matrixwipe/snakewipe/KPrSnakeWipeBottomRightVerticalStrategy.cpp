@@ -21,7 +21,7 @@
 #include "KPrSnakeWipeEffectFactory.h"
 
 KPrSnakeWipeBottomRightVerticalStrategy::KPrSnakeWipeBottomRightVerticalStrategy()
-    : KPrMatrixWipeStrategy( KPrSnakeWipeEffectFactory::FromRight, "snakeWipe", "topLeftVertical", true, true )
+    : KPrMatrixWipeStrategy(KPrSnakeWipeEffectFactory::FromRight, "snakeWipe", "topLeftVertical", true, true)
 {
 }
 

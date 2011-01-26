@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -27,14 +27,14 @@
 
 #include <kdebug.h>
 
-KPrPlaceholderShapeFactory::KPrPlaceholderShapeFactory( QObject *parent )
-: KoShapeFactoryBase( parent, KPrPlaceholderShapeId, i18n( "Placeholder shape" ) )
+KPrPlaceholderShapeFactory::KPrPlaceholderShapeFactory(QObject *parent)
+: KoShapeFactoryBase(parent, KPrPlaceholderShapeId, i18n("Placeholder shape"))
 {
     QStringList elementNames;
     elementNames << "text-box" << "object" << "image";
-    setOdfElementNames( KoXmlNS::draw, elementNames );
+    setOdfElementNames(KoXmlNS::draw, elementNames);
     // use a really high number as we want to be used before the normal shapes try to load it
-    setLoadingPriority( 1000 );
+    setLoadingPriority(1000);
     setHidden(true);
 }
 
@@ -52,10 +52,10 @@ bool KPrPlaceholderShapeFactory::supports(const KoXmlElement & e, KoShapeLoading
     Q_UNUSED(context);
     // check parent if placeholder is set to true
     KoXmlNode parent = e.parentNode();
-    if ( !parent.isNull() ) {
+    if (!parent.isNull()) {
         KoXmlElement element = parent.toElement();
-        if ( !element.isNull() ) {
-            bool supported =  element.attributeNS( KoXmlNS::presentation, "placeholder", "false" ) == "true";
+        if (!element.isNull()) {
+            bool supported =  element.attributeNS(KoXmlNS::presentation, "placeholder", "false") == "true";
             kDebug(33001) << "placeholder:" << supported;
 #ifndef NWORKAROUND_ODF_BUGS
             if (!supported && KoOdfWorkaround::fixPresentationPlaceholder() && element.hasAttributeNS(KoXmlNS::presentation, "class")) {

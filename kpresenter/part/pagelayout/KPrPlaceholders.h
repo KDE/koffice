@@ -39,10 +39,10 @@ class KoTextShapeData;
 
 struct Placeholder
 {
-    Placeholder( const QString & presentationClass, KoShape * shape, bool isPlaceholder )
-    : presentationClass( presentationClass )
-    , shape( shape )
-    , isPlaceholder( isPlaceholder )
+    Placeholder(const QString & presentationClass, KoShape * shape, bool isPlaceholder)
+    : presentationClass(presentationClass)
+    , shape(shape)
+    , isPlaceholder(isPlaceholder)
     {}
 
     QString presentationClass;
@@ -82,8 +82,8 @@ public:
      * @param pageSize
      * @param styles
      */
-    void setLayout( KPrPageLayout * layout, KoPADocument * document, const QList<KoShape *> & shapes, const QSizeF & pageSize,
-                    const QMap<QString, KoTextShapeData*> & styles );
+    void setLayout(KPrPageLayout * layout, KoPADocument * document, const QList<KoShape *> & shapes, const QSizeF & pageSize,
+                    const QMap<QString, KoTextShapeData*> & styles);
 
     /**
      * This function should only be used during loading
@@ -91,27 +91,27 @@ public:
      *        If 0 no layout will be used.
      * TODO tz: maybe make privat and the classes that need to call it a friend
      */
-    void init( KPrPageLayout * layout, const QList<KoShape *> & shapes );
+    void init(KPrPageLayout * layout, const QList<KoShape *> & shapes);
 
     KPrPageLayout * layout() const;
 
-    void shapeAdded( KoShape * shape );
+    void shapeAdded(KoShape * shape);
 
-    void shapeRemoved( KoShape * shape );
+    void shapeRemoved(KoShape * shape);
 
     void debug() const;
 
     QMap<QString, KoTextShapeData *> styles() const;
 
 private:
-    void add( const QList<KoShape *> & shapes );
+    void add(const QList<KoShape *> & shapes);
 
     // set the new layout 
     // this gets called by the KPrPageLayoutCommand
-    void setLayout( KPrPageLayout * layout );
+    void setLayout(KPrPageLayout * layout);
 
     // apply style to shape
-    void applyStyle( KPrPlaceholderShape * shape, const QString & presentationClass, const QMap<QString, KoTextShapeData*> & styles );
+    void applyStyle(KPrPlaceholderShape * shape, const QString & presentationClass, const QMap<QString, KoTextShapeData*> & styles);
 
     KPrPageLayout * m_layout;
     // that is set to true when the m_placeholders is initialized

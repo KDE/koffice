@@ -1,10 +1,10 @@
 /* This file is part of the KDE project
- * Copyright ( C ) 2007 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -67,7 +67,7 @@ public:
      * @return animationData the caller has to delete the animationData when
      *                       it is no longer used.
      */
-    virtual KPrAnimationData * animationData( KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect ) = 0;
+    virtual KPrAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect) = 0;
 
     /**
      * @brief Animate the shape
@@ -80,7 +80,7 @@ public:
      *
      * @return true when the animations is finished
      */
-    virtual bool animate( QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData ) = 0;
+    virtual bool animate(QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData) = 0;
 
     /**
      * @brief Update the bounding rect of the shape in the animation
@@ -88,7 +88,7 @@ public:
      * @param rect The bounding rect of the shape to update
      * @param animationData The data needed for running the animation
      */
-    virtual void animateRect( QRectF & rect, KPrAnimationData * animationData ) = 0;
+    virtual void animateRect(QRectF & rect, KPrAnimationData * animationData) = 0;
 
     /**
      * @brief Trigger an update of the canvas needed for the given time
@@ -96,14 +96,14 @@ public:
      * @param currentTime
      * @param animationData The data needed for running the animation
      */
-    virtual void next( int currentTime, KPrAnimationData * animationData ) = 0;
+    virtual void next(int currentTime, KPrAnimationData * animationData) = 0;
 
     /**
      * @brief Finish the shape animation
      *
      * @param animationData The data needed for running the animation
      */
-    virtual void finish( KPrAnimationData * animationData ) = 0;
+    virtual void finish(KPrAnimationData * animationData) = 0;
 
     /**
      * Get the duration of the shape animation
@@ -120,7 +120,7 @@ public:
     /**
      * @brief Set the step on which the animation is shown.
      */
-    void setStep( int step );
+    void setStep(int step);
 
     /**
      * @brief Get the shape the animation is for
@@ -138,13 +138,13 @@ protected:
      *
      * Only to be called form derived classes
      */
-    KPrShapeAnimationOld( KoShape * shape, int step, Type type );
+    KPrShapeAnimationOld(KoShape * shape, int step, Type type);
 
     // the shape for which is aminated
     KoShape * m_shape;
     // the timeline used for calculating the animation position
     QTimeLine m_timeLine;
-    // the step ( click ) on which the animation is done
+    // the step (click) on which the animation is done
     int m_step;
     // The type of animation
     Type m_type;

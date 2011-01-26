@@ -32,7 +32,7 @@ class KPrPageEffectRegistry::Singleton
 {
 public:
     Singleton()
-    : initDone( false )
+    : initDone(false)
     {
     }
 
@@ -45,35 +45,35 @@ struct KPrPageEffectRegistry::Private
     QHash<QPair<QString, bool>, KPrPageEffectFactory *> tagToFactory;
 };
 
-K_GLOBAL_STATIC( KPrPageEffectRegistry::Singleton, singleton )
+K_GLOBAL_STATIC(KPrPageEffectRegistry::Singleton, singleton)
 
 KPrPageEffectRegistry * KPrPageEffectRegistry::instance()
 {
-    KPrPageEffectRegistry * registry = &( singleton->q );
-    if ( ! singleton->initDone ) {
+    KPrPageEffectRegistry * registry = &(singleton->q);
+    if (! singleton->initDone) {
         singleton->initDone = true;
         registry->init();
     }
     return registry;
 }
 
-KPrPageEffect * KPrPageEffectRegistry::createPageEffect( const KoXmlElement & element )
+KPrPageEffect * KPrPageEffectRegistry::createPageEffect(const KoXmlElement & element)
 {
     Q_UNUSED(element);
 
     KPrPageEffect * pageEffect = 0;
-    if ( element.hasAttributeNS( KoXmlNS::smil, "type" ) ) {
-        QString smilType( element.attributeNS( KoXmlNS::smil, "type" ) );
+    if (element.hasAttributeNS(KoXmlNS::smil, "type")) {
+        QString smilType(element.attributeNS(KoXmlNS::smil, "type"));
         bool reverse = false;
-        if ( element.hasAttributeNS( KoXmlNS::smil, "direction" ) && element.attributeNS( KoXmlNS::smil, "direction" ) == "reverse" ) {
+        if (element.hasAttributeNS(KoXmlNS::smil, "direction") && element.attributeNS(KoXmlNS::smil, "direction") == "reverse") {
             reverse = true;
         }
 
-        QHash<QPair<QString, bool>, KPrPageEffectFactory *>::iterator it( d->tagToFactory.find( QPair<QString, bool>( smilType, reverse ) ) );
+        QHash<QPair<QString, bool>, KPrPageEffectFactory *>::iterator it(d->tagToFactory.find(QPair<QString, bool>(smilType, reverse)));
 
         // call the factory to create the page effect 
-        if ( it != d->tagToFactory.end() ) {
-            pageEffect = it.value()->createPageEffect( element );
+        if (it != d->tagToFactory.end()) {
+            pageEffect = it.value()->createPageEffect(element);
         }
         else {
             kWarning(33002) << "page effect of smil:type" << smilType << "not supported";
@@ -84,13 +84,13 @@ KPrPageEffect * KPrPageEffectRegistry::createPageEffect( const KoXmlElement & el
 }
 
 KPrPageEffectRegistry::KPrPageEffectRegistry()
-: d( new Private() )
+: d(new Private())
 {
 }
 
 KPrPageEffectRegistry::~KPrPageEffectRegistry()
 {
-    foreach ( KPrPageEffectFactory* factory, values() )
+    foreach (KPrPageEffectFactory* factory, values())
     {
         delete factory;
     }
@@ -106,17 +106,17 @@ void KPrPageEffectRegistry::init()
 
     // XXX: Use minversion here?
     // The plugins are responsible for adding a factory to the registry
-    KoPluginLoader::instance()->load( QString::fromLatin1("KPresenter/PageEffect"),
+    KoPluginLoader::instance()->load(QString::fromLatin1("KPresenter/PageEffect"),
             QString::fromLatin1("[X-KPresenter-Version] <= 0"),
             config);
 
     QList<KPrPageEffectFactory*> factories = values();
 
-    foreach ( KPrPageEffectFactory * factory, factories ) {
-        QList<QPair<QString, bool> > tags( factory->tags() );
-        QList<QPair<QString, bool> >::iterator it( tags.begin() );
-        for ( ; it != tags.end(); ++it ) {
-            d->tagToFactory.insert( *it, factory );
+    foreach (KPrPageEffectFactory * factory, factories) {
+        QList<QPair<QString, bool> > tags(factory->tags());
+        QList<QPair<QString, bool> >::iterator it(tags.begin());
+        for (; it != tags.end(); ++it) {
+            d->tagToFactory.insert(*it, factory);
         }
     }
 }

@@ -33,7 +33,7 @@ public:
     class Singleton;
     static KPrPageEffectRegistry * instance();
 
-    KPrPageEffect * createPageEffect( const KoXmlElement & element );
+    KPrPageEffect * createPageEffect(const KoXmlElement & element);
 
 private:
     void init();

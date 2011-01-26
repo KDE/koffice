@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -37,17 +37,17 @@ public:
     KPrPageLayouts(QObject *parent = 0);
     ~KPrPageLayouts();
 
-    bool saveOdf( KoPASavingContext & context );
+    bool saveOdf(KoPASavingContext & context);
 
     /**
      * load all not yet loaded styles and add application styles
      */
-    bool loadOdf( KoPALoadingContext & context );
+    bool loadOdf(KoPALoadingContext & context);
 
     /**
      *
      */
-    KPrPageLayout * pageLayout( const QString & name, KoPALoadingContext & loadingContext, const QRectF & pageRect );
+    KPrPageLayout * pageLayout(const QString & name, KoPALoadingContext & loadingContext, const QRectF & pageRect);
 
 
     const QList<KPrPageLayout *> layouts() const;

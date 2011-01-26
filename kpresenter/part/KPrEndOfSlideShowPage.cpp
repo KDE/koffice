@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or ( at your option ) any later version.
+ * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -33,8 +33,8 @@
 
 #include <kdebug.h>
 
-KPrEndOfSlideShowPage::KPrEndOfSlideShowPage( const QRectF & screenRect, KPrDocument * document )
-: KPrPage( new KPrMasterPage(), document )
+KPrEndOfSlideShowPage::KPrEndOfSlideShowPage(const QRectF & screenRect, KPrDocument * document)
+: KPrPage(new KPrMasterPage(), document)
 {
     qreal ratio = screenRect.width() / screenRect.height();
     KoPageLayout pageLayout;
@@ -50,25 +50,25 @@ KPrEndOfSlideShowPage::KPrEndOfSlideShowPage( const QRectF & screenRect, KPrDocu
     pageLayout.pageEdge = 0;
     pageLayout.format = KoPageFormat::IsoA3Size; 
 
-    masterPage()->setPageLayout( pageLayout );
-    masterPage()->setBackground( new KoColorBackground( Qt::black ) );
+    masterPage()->setPageLayout(pageLayout);
+    masterPage()->setBackground(new KoColorBackground(Qt::black));
 
     KoShapeLayer* layer = new KoShapeLayer;
-    addShape( layer );
+    addShape(layer);
 
-    KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value( "TextShapeID" );
-    Q_ASSERT( factory );
-    if ( factory ) {
+    KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
+    Q_ASSERT(factory);
+    if (factory) {
         KoShape * textShape = factory->createDefaultShape();
-        QTextDocument * document = qobject_cast<KoTextShapeData*>( textShape->userData() )->document();
-        QTextCursor cursor( document );
+        QTextDocument * document = qobject_cast<KoTextShapeData*>(textShape->userData())->document();
+        QTextCursor cursor(document);
         QTextCharFormat format;
-        format.setForeground( QBrush( Qt::white ) );
-        cursor.mergeCharFormat( format );
-        cursor.insertText( i18n("End of presentation. Click to exit." ) );
-        textShape->setPosition( QPointF( 10.0, 10.0 ) );
-        textShape->setSize( QSizeF( pageLayout.width - 20.0, pageLayout.height - 20.0 ) );
-        layer->addShape( textShape );
+        format.setForeground(QBrush(Qt::white));
+        cursor.mergeCharFormat(format);
+        cursor.insertText(i18n("End of presentation. Click to exit."));
+        textShape->setPosition(QPointF(10.0, 10.0));
+        textShape->setSize(QSizeF(pageLayout.width - 20.0, pageLayout.height - 20.0));
+        layer->addShape(textShape);
     }
 }
 

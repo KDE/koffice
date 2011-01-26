@@ -25,9 +25,9 @@
 #include "ui/KPrPresentationToolWidget.h"
 #include "KPrPresentationToolEventForwarder.h"
 
-KPrPresentationStrategyBase::KPrPresentationStrategyBase( KPrPresentationTool * tool )
-: m_tool( tool )
-, m_widget( 0 )
+KPrPresentationStrategyBase::KPrPresentationStrategyBase(KPrPresentationTool * tool)
+: m_tool(tool)
+, m_widget(0)
 {
 }
 
@@ -36,9 +36,9 @@ KPrPresentationStrategyBase::~KPrPresentationStrategyBase()
     delete m_widget;
 }
 
-void KPrPresentationStrategyBase::setToolWidgetParent( QWidget * widget )
+void KPrPresentationStrategyBase::setToolWidgetParent(QWidget * widget)
 {
-    return m_tool->m_presentationToolWidget->setParent( widget );
+    return m_tool->m_presentationToolWidget->setParent(widget);
 }
 
 KoPACanvasBase * KPrPresentationStrategyBase::canvas()
@@ -48,7 +48,7 @@ KoPACanvasBase * KPrPresentationStrategyBase::canvas()
 
 void KPrPresentationStrategyBase::activateDefaultStrategy()
 {
-    m_tool->switchStrategy( new KPrPresentationStrategy( m_tool ) );
+    m_tool->switchStrategy(new KPrPresentationStrategy(m_tool));
 }
 
 KPrPresentationToolEventForwarder* KPrPresentationStrategyBase::widget()

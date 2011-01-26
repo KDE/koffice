@@ -28,8 +28,8 @@
 
 #include "KPrClockWipeSubpathHelper.h"
 
-KPrClockWipeStrategy::KPrClockWipeStrategy(int startAngle, int bladeCount, int subType, const char * smilType, const char *smilSubType, bool reverse )
-    : KPrPageEffectStrategy( subType, smilType, smilSubType, reverse ), m_bladeCount(bladeCount)
+KPrClockWipeStrategy::KPrClockWipeStrategy(int startAngle, int bladeCount, int subType, const char * smilType, const char *smilSubType, bool reverse)
+    : KPrPageEffectStrategy(subType, smilType, smilSubType, reverse), m_bladeCount(bladeCount)
 {
     m_startAngle = static_cast<double>(startAngle)/180 * M_PI;
 }
@@ -38,16 +38,16 @@ KPrClockWipeStrategy::~KPrClockWipeStrategy()
 {
 }
 
-void KPrClockWipeStrategy::setup( const KPrPageEffect::Data &data, QTimeLine &timeLine )
+void KPrClockWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
-    timeLine.setFrameRange( 0, 360 );
+    timeLine.setFrameRange(0, 360);
 }
 
-void KPrClockWipeStrategy::paintStep( QPainter &p, int currPos, const KPrPageEffect::Data &data )
+void KPrClockWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
 {
-    QRect rect( 0, 0, data.m_widget->width(), data.m_widget->height() );
-    p.drawPixmap( QPoint( 0, 0 ), data.m_oldPage, rect );
+    QRect rect(0, 0, data.m_widget->width(), data.m_widget->height());
+    p.drawPixmap(QPoint(0, 0), data.m_oldPage, rect);
 
     QPainterPath clipPath;
     for(int i = 0; i < m_bladeCount; i++) {
@@ -69,10 +69,10 @@ void KPrClockWipeStrategy::paintStep( QPainter &p, int currPos, const KPrPageEff
     }
     p.setClipPath(clipPath);
 
-    p.drawPixmap( QPoint( 0, 0 ), data.m_newPage, rect );
+    p.drawPixmap(QPoint(0, 0), data.m_newPage, rect);
 }
 
-void KPrClockWipeStrategy::next( const KPrPageEffect::Data &data )
+void KPrClockWipeStrategy::next(const KPrPageEffect::Data &data)
 {
     data.m_widget->update();
 }

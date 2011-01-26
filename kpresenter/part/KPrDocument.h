@@ -33,7 +33,7 @@ class KPrDocument : public KoPADocument
 {
     Q_OBJECT
 public:
-    explicit KPrDocument( QWidget* parentWidget, QObject* parent, bool singleViewMode = false );
+    explicit KPrDocument(QWidget* parentWidget, QObject* parent, bool singleViewMode = false);
     ~KPrDocument();
 
     /// reimplemented
@@ -49,7 +49,7 @@ public:
      *
      * @param animation animation to add to shape
      */
-    void addAnimation( KPrShapeAnimation * animation );
+    void addAnimation(KPrShapeAnimation * animation);
 
     /**
      * @brief Remove animation from shape
@@ -58,13 +58,13 @@ public:
      * @param removeFromApplicationData if true the animation will also be removed from the
      *        application data
      */
-    void removeAnimation( KPrShapeAnimation * animation, bool removeFromApplicationData = true );
+    void removeAnimation(KPrShapeAnimation * animation, bool removeFromApplicationData = true);
 
     /**
      * @brief get the slideShows defined for this document
      */
     KPrCustomSlideShows* customSlideShows();
-    void setCustomSlideShows( KPrCustomSlideShows* replacement );
+    void setCustomSlideShows(KPrCustomSlideShows* replacement);
 
     /**
      * Get the presentation monitor (screen) used for presentation
@@ -78,7 +78,7 @@ public:
      *
      * @param monitor the new screen number used for presentation
      */
-    void setPresentationMonitor( int monitor );
+    void setPresentationMonitor(int monitor);
 
     /**
      * Check whether the presenter view feature is enabled for presentation
@@ -92,7 +92,7 @@ public:
      *
      * @param enabled whether the presenter view should be enabled or disabled
      */
-    void setPresenterViewEnabled( bool enabled );
+    void setPresenterViewEnabled(bool enabled);
 
     /**
      * Get the list of pages for slide show. It is possible that the pages for
@@ -116,16 +116,16 @@ public:
      *
      * @param customSlideShow the new active custom slide show
      */
-    void setActiveCustomSlideShow( const QString &customSlideShow );
+    void setActiveCustomSlideShow(const QString &customSlideShow);
 
     /// reimplemented
-    virtual void saveOdfDocumentStyles( KoPASavingContext & context );
+    virtual void saveOdfDocumentStyles(KoPASavingContext & context);
 
     /// reimplemented
-    virtual bool loadOdfDocumentStyles( KoPALoadingContext & context );
+    virtual bool loadOdfDocumentStyles(KoPALoadingContext & context);
 
     /// reimplemented
-    virtual bool loadOdfProlog( const KoXmlElement & body, KoPALoadingContext & context );
+    virtual bool loadOdfProlog(const KoXmlElement & body, KoPALoadingContext & context);
 
     /**
      * Get the page type used in the document
@@ -145,7 +145,7 @@ public:
      * @param parent the KoMainWindow used as parent for the widget.
      * @param alwaysShow always show the widget even if the user has configured it to not show.
      */
-    void showStartUpWidget( KoMainWindow * parent, bool alwaysShow );
+    void showStartUpWidget(KoMainWindow * parent, bool alwaysShow);
 
 public slots:
     virtual void initEmpty();
@@ -157,7 +157,7 @@ signals:
      *
      * @param customSlideShow the new active custom slide show
      */
-    void activeCustomSlideShowChanged( const QString &customSlideShow );
+    void activeCustomSlideShowChanged(const QString &customSlideShow);
 
     /**
      * Emitted when the custom slide shows have been modified.
@@ -167,28 +167,28 @@ signals:
 
 protected:
     /// reimplemented
-    virtual KoView * createViewInstance( QWidget *parent );
+    virtual KoView * createViewInstance(QWidget *parent);
     /// reimplemented
     virtual QGraphicsItem *createCanvasItem();
     /// reimplemented
-    virtual const char *odfTagName( bool withNamespace );
+    virtual const char *odfTagName(bool withNamespace);
 
     /// reimplemented
-    virtual bool loadOdfEpilogue( const KoXmlElement & body, KoPALoadingContext & context );
+    virtual bool loadOdfEpilogue(const KoXmlElement & body, KoPALoadingContext & context);
 
     /// reimplemented
-    virtual bool saveOdfProlog( KoPASavingContext & paContext );
+    virtual bool saveOdfProlog(KoPASavingContext & paContext);
 
     /// reimplemented
-    virtual bool saveOdfEpilogue( KoPASavingContext & context );
+    virtual bool saveOdfEpilogue(KoPASavingContext & context);
 
     /// reimplemented
-    virtual void postAddShape( KoPAPageBase * page, KoShape * shape );
+    virtual void postAddShape(KoPAPageBase * page, KoShape * shape);
     /// reimplemented
-    virtual void postRemoveShape( KoPAPageBase * page, KoShape * shape );
+    virtual void postRemoveShape(KoPAPageBase * page, KoShape * shape);
 
     /// reimplemented
-    virtual void pageRemoved( KoPAPageBase * page, QUndoCommand * parent );
+    virtual void pageRemoved(KoPAPageBase * page, QUndoCommand * parent);
 
     /// load configuration specific to KPresenter
     void loadKPrConfig();
@@ -199,7 +199,7 @@ protected:
     /**
      * @brief get the animations of the page
      */
-    KPrShapeAnimations & animationsByPage( KoPAPageBase * page );
+    KPrShapeAnimations & animationsByPage(KoPAPageBase * page);
 
     KPrCustomSlideShows *m_customSlideShows;
 

@@ -42,17 +42,17 @@ void KPrPdfPrintJob::startPrinting(RemovePolicy removePolicy)
     int fromPage = m_printer.fromPage() > 0 ? m_printer.fromPage() - 1: 0;
     int toPage = m_printer.toPage() > 0 ? m_printer.toPage() - 1: m_pages.size() - 1;
 
-    Q_ASSERT( fromPage >= 0 && fromPage < m_pages.size() );
-    Q_ASSERT( toPage >= 0 && toPage < m_pages.size() );
+    Q_ASSERT(fromPage >= 0 && fromPage < m_pages.size());
+    Q_ASSERT(toPage >= 0 && toPage < m_pages.size());
 
     KoZoomHandler zoomHandler;
-    zoomHandler.setResolution( m_printer.resolution(), m_printer.resolution() );
+    zoomHandler.setResolution(m_printer.resolution(), m_printer.resolution());
     m_printer.setFullPage(true);
     const KoPageLayout & firstLayout = m_pages.at(fromPage)->pageLayout();
     m_printer.setPaperSize(QSizeF(firstLayout.width,firstLayout.height),QPrinter::Millimeter);
-    QPainter painter( &m_printer );
+    QPainter painter(&m_printer);
 
-    for ( int i = fromPage; i <= toPage; ++i ) {
+    for (int i = fromPage; i <= toPage; ++i) {
 
         KoPAPageBase *page = m_pages.at(i);
         const KoPageLayout & layout = page->pageLayout();
@@ -63,16 +63,16 @@ void KPrPdfPrintJob::startPrinting(RemovePolicy removePolicy)
             m_printer.newPage();
         }
         KoPAUtil::setZoom(layout, size, zoomHandler);
-        QRect pageRect(KoPAUtil::pageRect( layout, size, zoomHandler));
-        painter.setClipRect( pageRect );
-        painter.setRenderHint( QPainter::Antialiasing );
-        painter.translate( pageRect.topLeft() );
+        QRect pageRect(KoPAUtil::pageRect(layout, size, zoomHandler));
+        painter.setClipRect(pageRect);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.translate(pageRect.topLeft());
         m_pageProvider->setPageData(i + 1, page);
-        page->paintPage( painter, zoomHandler );
+        page->paintPage(painter, zoomHandler);
         painter.restore();
     }
 
-    if ( removePolicy == DeleteWhenDone ) {
+    if (removePolicy == DeleteWhenDone) {
         deleteLater();
     }
 }

@@ -44,34 +44,34 @@ class ShapeLoaderHelper : public KoShape
 public:
     ShapeLoaderHelper() { }
 
-    virtual void paint( QPainter &, const KoViewConverter & ) { }
+    virtual void paint(QPainter &, const KoViewConverter &) { }
 
-    virtual void paintDecorations( QPainter &, const KoViewConverter &, const KoCanvasBase * ) { }
+    virtual void paintDecorations(QPainter &, const KoViewConverter &, const KoCanvasBase *) { }
 
-    virtual bool loadOdf( const KoXmlElement & element, KoShapeLoadingContext &context )
+    virtual bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
     {
-        return loadOdfAttributes( element, context, OdfAllAttributes );
+        return loadOdfAttributes(element, context, OdfAllAttributes);
     }
 
-    virtual void saveOdf( KoShapeSavingContext & ) const { }
+    virtual void saveOdf(KoShapeSavingContext &) const { }
 };
 
-KPrNotes::KPrNotes( KPrPage *page, KPrDocument * document )
+KPrNotes::KPrNotes(KPrPage *page, KPrDocument * document)
 : KoPAPageBase()
-, m_page( page )
-, m_doc( document )
-, m_imageCollection( new KoImageCollection() )
+, m_page(page)
+, m_doc(document)
+, m_imageCollection(new KoImageCollection())
 {
     // add default layer
     KoShapeLayer* layer = new KoShapeLayer;
-    addShape( layer );
+    addShape(layer);
 
     // All sizes and positions are hardcoded for now
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
     Q_ASSERT(factory);
     m_textShape = factory->createDefaultShape(m_doc->resourceManager());
     m_textShape->setGeometryProtected(true);
-    m_textShape->setAdditionalAttribute( "presentation:class", "notes" );
+    m_textShape->setAdditionalAttribute("presentation:class", "notes");
     m_textShape->setPosition(QPointF(62.22, 374.46));
     m_textShape->setSize(QSizeF(489.57, 356.37));
 
@@ -79,12 +79,12 @@ KPrNotes::KPrNotes( KPrPage *page, KPrDocument * document )
     Q_ASSERT(factory);
     m_thumbnailShape = factory->createDefaultShape(m_doc->resourceManager());
     m_thumbnailShape->setGeometryProtected(true);
-    m_thumbnailShape->setAdditionalAttribute( "presentation:class", "page" );
+    m_thumbnailShape->setAdditionalAttribute("presentation:class", "page");
     m_thumbnailShape->setPosition(QPointF(108.00, 60.18));
     m_thumbnailShape->setSize(QSizeF(396.28, 296.96));
 
-    layer->addShape( m_textShape );
-    layer->addShape( m_thumbnailShape );
+    layer->addShape(m_textShape);
+    layer->addShape(m_thumbnailShape);
 }
 
 KPrNotes::~KPrNotes()
@@ -102,18 +102,18 @@ void KPrNotes::saveOdf(KoShapeSavingContext &context) const
     KoXmlWriter & writer = context.xmlWriter();
     writer.startElement("presentation:notes");
 
-    context.addOption( KoShapeSavingContext::PresentationShape );
+    context.addOption(KoShapeSavingContext::PresentationShape);
     m_textShape->saveOdf(context);
-    context.removeOption( KoShapeSavingContext::PresentationShape );
+    context.removeOption(KoShapeSavingContext::PresentationShape);
     writer.startElement("draw:page-thumbnail");
-    m_thumbnailShape->saveOdfAttributes( context, OdfAllAttributes );
+    m_thumbnailShape->saveOdfAttributes(context, OdfAllAttributes);
     writer.addAttribute("draw:page-number", static_cast<KoPASavingContext &>(context).page());
     writer.endElement(); // draw:page-thumbnail
 
-    KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>( shapes().last() );
-    foreach ( KoShape *shape, layer->shapes() ) {
-        if ( shape != m_textShape && shape != m_thumbnailShape ) {
-            shape->saveOdf( context );
+    KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes().last());
+    foreach (KoShape *shape, layer->shapes()) {
+        if (shape != m_textShape && shape != m_thumbnailShape) {
+            shape->saveOdf(context);
         }
     }
 
@@ -123,34 +123,34 @@ void KPrNotes::saveOdf(KoShapeSavingContext &context) const
 bool KPrNotes::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     KoXmlElement child;
-    KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>( shapes().last() );
+    KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes().last());
 
-    forEachElement( child, element ) {
-        if ( child.namespaceURI() != KoXmlNS::draw )
+    forEachElement(child, element) {
+        if (child.namespaceURI() != KoXmlNS::draw)
             continue;
 
-        if ( child.tagName() == "page-thumbnail") {
+        if (child.tagName() == "page-thumbnail") {
             ShapeLoaderHelper *helper = new ShapeLoaderHelper();
-            helper->loadOdf( child, context );
-            m_thumbnailShape->setSize( helper->size() );
-            m_thumbnailShape->setTransformation( helper->transformation() );
-            m_thumbnailShape->setPosition( helper->position() );
-            m_thumbnailShape->setShapeId( helper->shapeId() );
+            helper->loadOdf(child, context);
+            m_thumbnailShape->setSize(helper->size());
+            m_thumbnailShape->setTransformation(helper->transformation());
+            m_thumbnailShape->setPosition(helper->position());
+            m_thumbnailShape->setShapeId(helper->shapeId());
             delete helper;
         }
-        else /* if ( child.tagName() == "frame") */ {
-            KoShape *shape = KoShapeRegistry::instance()->createShapeFromOdf( child, context );
-            if ( shape ) {
-                if ( shape->shapeId() == "TextShapeID" &&
-                        child.hasAttributeNS( KoXmlNS::presentation, "class" ) ) {
-                    layer->removeShape( m_textShape );
+        else /* if (child.tagName() == "frame") */ {
+            KoShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
+            if (shape) {
+                if (shape->shapeId() == "TextShapeID" &&
+                        child.hasAttributeNS(KoXmlNS::presentation, "class")) {
+                    layer->removeShape(m_textShape);
                     delete m_textShape;
                     m_textShape = shape;
-                    m_textShape->setAdditionalAttribute( "presentation:class", "notes" );
-                    layer->addShape( m_textShape );
+                    m_textShape->setAdditionalAttribute("presentation:class", "notes");
+                    layer->addShape(m_textShape);
                 }
                 else {
-                    layer->addShape( shape );
+                    layer->addShape(shape);
                 }
             }
         }
@@ -180,7 +180,7 @@ bool KPrNotes::displayMasterShapes()
     return false;
 }
 
-void KPrNotes::setDisplayMasterShapes( bool )
+void KPrNotes::setDisplayMasterShapes(bool)
 {
 }
 
@@ -194,13 +194,13 @@ bool KPrNotes::displayMasterBackground()
     return false;
 }
 
-void KPrNotes::setDisplayMasterBackground( bool )
+void KPrNotes::setDisplayMasterBackground(bool)
 {
 }
 
-QPixmap KPrNotes::generateThumbnail( const QSize& )
+QPixmap KPrNotes::generateThumbnail(const QSize&)
 {
-    Q_ASSERT( 0 );
+    Q_ASSERT(0);
     return QPixmap();
 }
 
@@ -208,12 +208,12 @@ void KPrNotes::updatePageThumbnail()
 {
     // set image at least to 150 dpi we might need more when printing
     KoImageData *imageData = m_imageCollection->createImageData(m_doc->pageThumbnail(m_page, (m_thumbnailShape->size() * 150 / 72.).toSize()).toImage());
-    m_thumbnailShape->setUserData( imageData );
+    m_thumbnailShape->setUserData(imageData);
 }
 
-void KPrNotes::paintPage( QPainter & painter, KoZoomHandler & /*zoomHandler*/ )
+void KPrNotes::paintPage(QPainter & painter, KoZoomHandler & /*zoomHandler*/)
 {
     Q_UNUSED(painter);
     // TODO implement when printing page with notes
-    Q_ASSERT( 0 );
+    Q_ASSERT(0);
 }

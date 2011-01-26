@@ -32,18 +32,18 @@ public:
 
     virtual KoShape *createShape(KoResourceManager *documentResources);
 
-    virtual void paint( QPainter & painter, const KoViewConverter &converter, const QRectF & rect );
+    virtual void paint(QPainter & painter, const KoViewConverter &converter, const QRectF & rect);
 
-    virtual void saveOdf( KoShapeSavingContext & context );
+    virtual void saveOdf(KoShapeSavingContext & context);
 
-    virtual bool loadOdf( const KoXmlElement & element, KoShapeLoadingContext & context );
+    virtual bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context);
 
     virtual void init(KoResourceManager *documentResources);
 
     virtual KoShapeUserData * userData() const;
 
 protected:
-    KPrPlaceholderTextStrategy( const QString & presentationClass );
+    KPrPlaceholderTextStrategy(const QString & presentationClass);
 
     friend class KPrPlaceholderStrategy;
 

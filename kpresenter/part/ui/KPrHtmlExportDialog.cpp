@@ -41,7 +41,7 @@ KPrHtmlExportDialog::KPrHtmlExportDialog(const QList<KoPAPageBase*> &slides, con
     QWidget *widget = new QWidget(this);
     ui.setupUi(widget);
     setMainWidget(widget);
-    setCaption( i18n("Html Export"));
+    setCaption(i18n("Html Export"));
     setButtonText(Ok, i18n("Export"));
     ui.klineedit_title->setText(m_title);
     ui.klineedit_author->setText(author);
@@ -82,7 +82,7 @@ QList<KoPAPageBase*> KPrHtmlExportDialog::checkedSlides()
 void KPrHtmlExportDialog::checkAllItems()
 {
     int countItems = ui.kListBox_slides->count();
-    for (int i = 0; i < countItems; ++i ){
+    for (int i = 0; i < countItems; ++i){
         ui.kListBox_slides->item(i)->setCheckState(Qt::Checked);
     }
 }
@@ -166,7 +166,7 @@ void KPrHtmlExportDialog::addSelectedTemplateToFavorite()
         ui.kcombobox->insertItem(0, name, savePath);
         ui.kcombobox->setCurrentIndex(0);
         //reactivate preview
-        connect( ui.kcombobox, SIGNAL(currentIndexChanged(int)), this, SLOT(generatePreview()));
+        connect(ui.kcombobox, SIGNAL(currentIndexChanged(int)), this, SLOT(generatePreview()));
     }
 }
 

@@ -34,7 +34,7 @@ public:
      * @param id The id of the page effect the factory is creating
      * @param name The name of the effect. This name is used in the UI
      */
-    KPrShapeAnimationFactory( const QString & id, const QString & name );
+    KPrShapeAnimationFactory(const QString & id, const QString & name);
 
     virtual ~KPrShapeAnimationFactory();
 

@@ -4,7 +4,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (  at your option ) any later version.
+ * version 2 of the License, or ( at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -53,9 +53,9 @@
 class KPrPage::Private
 {
 public:
-    Private( KPrPage * page, KPrDocument * document )
-    : pageNotes( new KPrNotes( page, document ) )
-    , declarations( document->declarations() )
+    Private(KPrPage * page, KPrDocument * document)
+    : pageNotes(new KPrNotes(page, document))
+    , declarations(document->declarations())
     {}
 
     ~Private()
@@ -68,12 +68,12 @@ public:
 
 };
 
-KPrPage::KPrPage( KoPAMasterPage * masterPage, KPrDocument * document )
-: KoPAPage( masterPage )
-, d( new Private( this, document ) )
+KPrPage::KPrPage(KoPAMasterPage * masterPage, KPrDocument * document)
+: KoPAPage(masterPage)
+, d(new Private(this, document))
 {
-    setApplicationData( new KPrPageApplicationData() );
-    placeholders().init( 0, shapes() );
+    setApplicationData(new KPrPageApplicationData());
+    placeholders().init(0, shapes());
 }
 
 KPrPage::~KPrPage()
@@ -81,10 +81,10 @@ KPrPage::~KPrPage()
     delete d;
 }
 
-KPrPageApplicationData * KPrPage::pageData( KoPAPageBase * page )
+KPrPageApplicationData * KPrPage::pageData(KoPAPageBase * page)
 {
-    KPrPageApplicationData * data = dynamic_cast<KPrPageApplicationData *>( page->applicationData() );
-    Q_ASSERT( data );
+    KPrPageApplicationData * data = dynamic_cast<KPrPageApplicationData *>(page->applicationData());
+    Q_ASSERT(data);
     return data;
 }
 
@@ -93,24 +93,24 @@ KPrNotes *KPrPage::pageNotes()
     return d->pageNotes;
 }
 
-void KPrPage::shapeAdded( KoShape * shape )
+void KPrPage::shapeAdded(KoShape * shape)
 {
-    Q_ASSERT( shape );
-    placeholders().shapeAdded( shape );
+    Q_ASSERT(shape);
+    placeholders().shapeAdded(shape);
 }
 
-void KPrPage::shapeRemoved( KoShape * shape )
+void KPrPage::shapeRemoved(KoShape * shape)
 {
-    Q_ASSERT( shape );
-    placeholders().shapeRemoved( shape );
+    Q_ASSERT(shape);
+    placeholders().shapeRemoved(shape);
 }
 
-void KPrPage::setLayout( KPrPageLayout * layout, KoPADocument * document )
+void KPrPage::setLayout(KPrPageLayout * layout, KoPADocument * document)
 {
-    QSizeF pageSize( pageLayout().width, pageLayout().height );
-    KPrMasterPage * master = dynamic_cast<KPrMasterPage *>( masterPage() );
-    Q_ASSERT( master );
-    placeholders().setLayout( layout, document, shapes(), pageSize, master ? master->placeholders().styles() : QMap<QString, KoTextShapeData*>() );
+    QSizeF pageSize(pageLayout().width, pageLayout().height);
+    KPrMasterPage * master = dynamic_cast<KPrMasterPage *>(masterPage());
+    Q_ASSERT(master);
+    placeholders().setLayout(layout, document, shapes(), pageSize, master ? master->placeholders().styles() : QMap<QString, KoTextShapeData*>());
     kDebug(33001) << "master placeholders";
     master->placeholders().debug();
 }
@@ -125,8 +125,8 @@ bool KPrPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &contex
     if (!KoPAPageBase::loadOdf(element, context)) {
         return false;
     }
-    KPrPageApplicationData * data = dynamic_cast<KPrPageApplicationData *>( applicationData() );
-    Q_ASSERT( data );
+    KPrPageApplicationData * data = dynamic_cast<KPrPageApplicationData *>(applicationData());
+    Q_ASSERT(data);
 
     KoXmlElement animation = KoXml::namedItemNS(element, KoXmlNS::anim, "par");
 
@@ -138,8 +138,8 @@ bool KPrPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &contex
                 if (animationElement.tagName() == "par") {
                     QString begin(animationElement.attributeNS(KoXmlNS::smil, "begin"));
                     if (begin.endsWith("begin")) {
-                        KoXmlElement transitionElement(KoXml::namedItemNS(animationElement, KoXmlNS::anim, "transitionFilter" ));
-                        data->setPageEffect( KPrPageEffectRegistry::instance()->createPageEffect( transitionElement ) );
+                        KoXmlElement transitionElement(KoXml::namedItemNS(animationElement, KoXmlNS::anim, "transitionFilter"));
+                        data->setPageEffect(KPrPageEffectRegistry::instance()->createPageEffect(transitionElement));
                         kDebug() << "XXXXXXX found page transition";
                         loadOldTransition = false;
                     }
@@ -163,32 +163,32 @@ bool KPrPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &contex
 
     if (loadOldTransition) {
         KoOdfStylesReader& stylesReader = context.odfLoadingContext().stylesReader();
-        const KoXmlElement * styleElement = stylesReader.findContentAutoStyle( element.attributeNS( KoXmlNS::draw, "style-name" ), "drawing-page" );
-        if ( styleElement ) {
+        const KoXmlElement * styleElement = stylesReader.findContentAutoStyle(element.attributeNS(KoXmlNS::draw, "style-name"), "drawing-page");
+        if (styleElement) {
 #ifndef KOXML_USE_QDOM
-            KoXmlNode node = styleElement->namedItemNS( KoXmlNS::style, "drawing-page-properties" );
+            KoXmlNode node = styleElement->namedItemNS(KoXmlNS::style, "drawing-page-properties");
 #else
         KoXmlNode node; // XXX!!!
 #endif
-            if ( node.isElement() ) {
+            if (node.isElement()) {
 
-                data->setPageEffect( KPrPageEffectRegistry::instance()->createPageEffect( node.toElement() ) );
+                data->setPageEffect(KPrPageEffectRegistry::instance()->createPageEffect(node.toElement()));
             }
         }
     }
     return true;
 }
 
-void KPrPage::saveOdfPageContent( KoPASavingContext & paContext ) const
+void KPrPage::saveOdfPageContent(KoPASavingContext & paContext) const
 {
     KoXmlWriter &writer(paContext.xmlWriter());
-    if ( layout() ) {
-        KPrPageLayoutSharedSavingData * layouts = dynamic_cast<KPrPageLayoutSharedSavingData *>( paContext.sharedData( KPR_PAGE_LAYOUT_SHARED_SAVING_ID ) );
-        Q_ASSERT( layouts );
-        if ( layouts ) {
-            QString layoutStyle = layouts->pageLayoutStyle( layout() );
-            if ( ! layoutStyle.isEmpty() ) {
-                writer.addAttribute( "presentation:presentation-page-layout-name", layoutStyle );
+    if (layout()) {
+        KPrPageLayoutSharedSavingData * layouts = dynamic_cast<KPrPageLayoutSharedSavingData *>(paContext.sharedData(KPR_PAGE_LAYOUT_SHARED_SAVING_ID));
+        Q_ASSERT(layouts);
+        if (layouts) {
+            QString layoutStyle = layouts->pageLayoutStyle(layout());
+            if (! layoutStyle.isEmpty()) {
+                writer.addAttribute("presentation:presentation-page-layout-name", layoutStyle);
             }
         }
     }
@@ -206,51 +206,51 @@ void KPrPage::saveOdfPageContent( KoPASavingContext & paContext ) const
             break;
         }
     }
-    KoPAPageBase::saveOdfPageContent( paContext );
+    KoPAPageBase::saveOdfPageContent(paContext);
 }
 
-void KPrPage::saveOdfPageStyleData( KoGenStyle &style, KoPASavingContext &paContext ) const
+void KPrPage::saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const
 {
-    KoPAPage::saveOdfPageStyleData( style, paContext );
-    style.addProperty( "presentation:background-visible", ( m_pageProperties & DisplayMasterBackground ) == DisplayMasterBackground );
-    style.addProperty( "presentation:background-objects-visible", ( m_pageProperties & DisplayMasterShapes ) == DisplayMasterShapes );
-    style.addProperty( "presentation:display-date-time", ( m_pageProperties & DisplayDateTime ) == DisplayDateTime );
-    style.addProperty( "presentation:display-footer", ( m_pageProperties & DisplayFooter ) == DisplayFooter );
-    style.addProperty( "presentation:display-header", ( m_pageProperties & DisplayHeader ) == DisplayHeader );
-    style.addProperty( "presentation:display-page-number", ( m_pageProperties & DisplayPageNumber ) == DisplayPageNumber );
+    KoPAPage::saveOdfPageStyleData(style, paContext);
+    style.addProperty("presentation:background-visible", (m_pageProperties & DisplayMasterBackground) == DisplayMasterBackground);
+    style.addProperty("presentation:background-objects-visible", (m_pageProperties & DisplayMasterShapes) == DisplayMasterShapes);
+    style.addProperty("presentation:display-date-time", (m_pageProperties & DisplayDateTime) == DisplayDateTime);
+    style.addProperty("presentation:display-footer", (m_pageProperties & DisplayFooter) == DisplayFooter);
+    style.addProperty("presentation:display-header", (m_pageProperties & DisplayHeader) == DisplayHeader);
+    style.addProperty("presentation:display-page-number", (m_pageProperties & DisplayPageNumber) == DisplayPageNumber);
 
-    KPrPageApplicationData * data = dynamic_cast<KPrPageApplicationData *>( applicationData() );
-    Q_ASSERT( data );
+    KPrPageApplicationData * data = dynamic_cast<KPrPageApplicationData *>(applicationData());
+    Q_ASSERT(data);
     KPrPageEffect * pageEffect = data->pageEffect();
 
-    if ( pageEffect ) {
-        pageEffect->saveOdfSmilAttributes( style );
+    if (pageEffect) {
+        pageEffect->saveOdfSmilAttributes(style);
     }
 }
 
-void KPrPage::loadOdfPageTag( const KoXmlElement &element, KoPALoadingContext &loadingContext )
+void KPrPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext)
 {
-    KoPAPage::loadOdfPageTag( element, loadingContext );
+    KoPAPage::loadOdfPageTag(element, loadingContext);
 
     KoStyleStack& styleStack = loadingContext.odfLoadingContext().styleStack();
 
     int pageProperties = m_pageProperties & UseMasterBackground;
-    if ( styleStack.property( KoXmlNS::presentation, "background-objects-visible" ) == "true" ) {
+    if (styleStack.property(KoXmlNS::presentation, "background-objects-visible") == "true") {
         pageProperties |= DisplayMasterShapes;
     }
-    if ( styleStack.property( KoXmlNS::presentation, "background-visible" ) == "true" ) {
+    if (styleStack.property(KoXmlNS::presentation, "background-visible") == "true") {
         pageProperties |= DisplayMasterBackground;
     }
-    if ( styleStack.property( KoXmlNS::presentation, "display-header" ) == "true" ) {
+    if (styleStack.property(KoXmlNS::presentation, "display-header") == "true") {
         pageProperties |= DisplayHeader;
     }
-    if ( styleStack.property( KoXmlNS::presentation, "display-footer" ) == "true" ) {
+    if (styleStack.property(KoXmlNS::presentation, "display-footer") == "true") {
         pageProperties |= DisplayFooter;
     }
-    if ( styleStack.property( KoXmlNS::presentation, "display-page-number" ) == "true" ) {
+    if (styleStack.property(KoXmlNS::presentation, "display-page-number") == "true") {
         pageProperties |= DisplayPageNumber;
     }
-    if ( styleStack.property( KoXmlNS::presentation, "display-date-time" ) == "true" ) {
+    if (styleStack.property(KoXmlNS::presentation, "display-date-time") == "true") {
         pageProperties |= DisplayDateTime;
     }
     m_pageProperties = pageProperties;
@@ -260,37 +260,37 @@ void KPrPage::loadOdfPageTag( const KoXmlElement &element, KoPALoadingContext &l
 #else
     KoXmlNode node; //XXX!!!
 #endif
-    if ( node.isElement() ) {
+    if (node.isElement()) {
         d->pageNotes->loadOdf(node.toElement(), loadingContext);
     }
 }
 
-void KPrPage::loadOdfPageExtra( const KoXmlElement &element, KoPALoadingContext & loadingContext )
+void KPrPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & loadingContext)
 {
     // the layout needs to be loaded after the shapes are already loaded so the initialization of the data works
     KPrPageLayout * layout = 0;
-    if ( element.hasAttributeNS( KoXmlNS::presentation, "presentation-page-layout-name" ) ) {
+    if (element.hasAttributeNS(KoXmlNS::presentation, "presentation-page-layout-name")) {
         KPrPageLayouts *layouts = loadingContext.documentResourceManager()->resource(KPresenter::PageLayouts).value<KPrPageLayouts*>();
 
-        Q_ASSERT( layouts );
-        if ( layouts ) {
-            QString layoutName = element.attributeNS( KoXmlNS::presentation, "presentation-page-layout-name" );
-            QRectF pageRect( 0, 0, pageLayout().width, pageLayout().height );
-            layout = layouts->pageLayout( layoutName, loadingContext, pageRect );
+        Q_ASSERT(layouts);
+        if (layouts) {
+            QString layoutName = element.attributeNS(KoXmlNS::presentation, "presentation-page-layout-name");
+            QRectF pageRect(0, 0, pageLayout().width, pageLayout().height);
+            layout = layouts->pageLayout(layoutName, loadingContext, pageRect);
             kDebug(33001) << "page layout" << layoutName << layout;
         }
     }
-    placeholders().init( layout, shapes() );
+    placeholders().init(layout, shapes());
 
     if (element.hasAttributeNS(KoXmlNS::presentation, "use-footer-name")) {
         QString name = element.attributeNS (KoXmlNS::presentation, "use-footer-name");
         d->usedDeclaration.insert(KPrDeclarations::Footer, name);
     }
-    if (element.hasAttributeNS( KoXmlNS::presentation, "use-header-name")) {
+    if (element.hasAttributeNS(KoXmlNS::presentation, "use-header-name")) {
         QString name = element.attributeNS (KoXmlNS::presentation, "use-header-name");
         d->usedDeclaration.insert(KPrDeclarations::Header, name);
     }
-    if (element.hasAttributeNS( KoXmlNS::presentation, "use-date-time-name")) {
+    if (element.hasAttributeNS(KoXmlNS::presentation, "use-date-time-name")) {
         QString name = element.attributeNS (KoXmlNS::presentation, "use-date-time-name");
         d->usedDeclaration.insert(KPrDeclarations::DateTime, name);
     }
@@ -369,5 +369,5 @@ bool KPrPage::displayShape(KoShape *shape) const
 
 KoShapeManagerPaintingStrategy * KPrPage::getPaintingStrategy() const
 {
-    return new KPrShapeManagerDisplayMasterStrategy(0, new KPrPageSelectStrategyFixed(this) );
+    return new KPrShapeManagerDisplayMasterStrategy(0, new KPrPageSelectStrategyFixed(this));
 }
