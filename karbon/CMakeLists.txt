@@ -34,7 +34,7 @@ add_subdirectory( templates )
 
 ########### next target ###############
 
-set(karbonpart_PART_SRCS karbon_factory_init.cc )
+set(karbonpart_PART_SRCS karbon_factory_init.cpp)
 
 kde4_add_plugin(karbonpart ${karbonpart_PART_SRCS})
 
@@ -44,7 +44,7 @@ install(TARGETS karbonpart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ########### next target ###############
 
-set(karbon_KDEINIT_SRCS main.cc )
+set(karbon_KDEINIT_SRCS main.cpp)
 
 kde4_add_app_icon( karbon_KDEINIT_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/pics/hi*-app-karbon.png" )
 kde4_add_kdeinit_executable( karbon ${karbon_KDEINIT_SRCS})

@@ -97,12 +97,12 @@ inline int sign(qreal a)
 }
 
 /**
-* Calculates the binomial coefficient n! / ( k! * ( n - k)! ).
+* Calculates the binomial coefficient n! / (k! * (n - k)!).
 */
 int binomialCoeff(unsigned n, unsigned k);
 
 /**
-* Calculates the value ln( n! ).
+* Calculates the value ln(n!).
 */
 qreal factorialLn(unsigned n);
 

@@ -26,27 +26,25 @@
  * Boston, MA 02110-1301, USA.
 */
 
-
-#include <kaboutdata.h>
+//#include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <KoApplication.h>
 
 #include <KarbonFactory.h>
 
-
 extern "C" KDE_EXPORT int kdemain( int argc, char* argv[] )
 {
-	KCmdLineArgs::init( argc, argv, KarbonFactory::aboutData() );
+    KCmdLineArgs::init( argc, argv, KarbonFactory::aboutData() );
 
-	KCmdLineOptions options;
-	options.add("+[file]", ki18n( "File to open" ));
-	KCmdLineArgs::addCmdLineOptions( options );
-	KoApplication app;
+    KCmdLineOptions options;
+    options.add("+[file]", ki18n( "File to open" ));
+    KCmdLineArgs::addCmdLineOptions( options );
+    KoApplication app;
 
-	if( !app.start() )  // parses command line args, create initial docs and shells
-		return 1;
+    if( !app.start() )  // parses command line args, create initial docs and shells
+        return 1;
 
-	return app.exec();
+    return app.exec();
 }
 
