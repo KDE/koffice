@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -28,6 +28,8 @@
 #include <KoParagraphStyle.h>
 #include <KoCharacterStyle.h>
 
+#include <KDebug>
+
 StyleManager::StyleManager(QWidget *parent)
         : QWidget(parent),
         m_styleManager(0),
@@ -37,15 +39,24 @@ StyleManager::StyleManager(QWidget *parent)
 {
     widget.setupUi(this);
     layout()->setMargin(0);
+    widget.styleTypeContainer->setVisible(false);
 
-    connect(widget.styles, SIGNAL(paragraphStyleSelected(KoParagraphStyle *, bool)), this, SLOT(setParagraphStyle(KoParagraphStyle*,bool)));
-    connect(widget.styles, SIGNAL(characterStyleSelected(KoCharacterStyle *, bool)), this, SLOT(setCharacterStyle(KoCharacterStyle*,bool)));
+    connect(widget.styles, SIGNAL(paragraphStyleSelected(KoParagraphStyle *, bool)),
+        this, SLOT(setParagraphStyle(KoParagraphStyle*,bool)));
+    connect(widget.styles, SIGNAL(characterStyleSelected(KoCharacterStyle *, bool)),
+        this, SLOT(setCharacterStyle(KoCharacterStyle*,bool)));
 
     connect(widget.bNew, SIGNAL(pressed()), this, SLOT(buttonNewPressed()));
     connect(widget.bDelete, SIGNAL(pressed()), this, SLOT(buttonDeletePressed()));
 
-    connect(widget.createPage, SIGNAL(newParagraphStyle(KoParagraphStyle*)), this, SLOT(addParagraphStyle(KoParagraphStyle*)));
-    connect(widget.createPage, SIGNAL(newCharacterStyle(KoCharacterStyle*)), this, SLOT(addCharacterStyle(KoCharacterStyle*)));
+    connect(widget.createPage, SIGNAL(newParagraphStyle(KoParagraphStyle*)),
+        this, SLOT(addParagraphStyle(KoParagraphStyle*)));
+    connect(widget.createPage, SIGNAL(newCharacterStyle(KoCharacterStyle*)),
+        this, SLOT(addCharacterStyle(KoCharacterStyle*)));
+    connect(widget.paragButton, SIGNAL(clicked(bool)),
+        this, SLOT(switchStyle(bool)));
+    connect(widget.charButton, SIGNAL(clicked(bool)),
+        this, SLOT(switchStyle(bool)));
 }
 
 StyleManager::~StyleManager()
@@ -78,13 +89,19 @@ void StyleManager::setStyleManager(KoStyleManager *sm)
 
 void StyleManager::setParagraphStyle(KoParagraphStyle *style, bool canDelete)
 {
+    if (widget.charButton->isChecked()) { // show char style instead
+        setCharacterStyle(style->characterStyle(), false);
+        widget.styleTypeContainer->setVisible(true);
+        m_selectedParagStyle = style;
+        return;
+    }
+
     m_selectedCharStyle = 0;
     m_selectedParagStyle = style;
     widget.characterStylePage->save();
     widget.characterStylePage->setStyle(0);
     widget.paragraphStylePage->save();
-    KoParagraphStyle * localStyle = style->clone();
-
+    KoParagraphStyle *localStyle = style->clone();
     if (!m_alteredParagraphStyles.contains(style->styleId()))
         m_alteredParagraphStyles.insert(style->styleId(), localStyle);
     else
@@ -92,6 +109,7 @@ void StyleManager::setParagraphStyle(KoParagraphStyle *style, bool canDelete)
 
     widget.paragraphStylePage->setStyle(localStyle);
     widget.stackedWidget->setCurrentWidget(widget.paragraphStylePage);
+    widget.styleTypeContainer->setVisible(true);
     widget.bDelete->setEnabled(canDelete);
 }
 
@@ -112,6 +130,7 @@ void StyleManager::setCharacterStyle(KoCharacterStyle *style, bool canDelete)
 
     widget.characterStylePage->setStyle(localStyle);
     widget.stackedWidget->setCurrentWidget(widget.characterStylePage);
+    widget.styleTypeContainer->setVisible(false);
     widget.bDelete->setEnabled(canDelete);
 }
 
@@ -176,6 +195,7 @@ void StyleManager::buttonNewPressed()
 {
     widget.stackedWidget->setCurrentWidget(widget.createPage);
     // that widget will emit a new style which we will add using addParagraphStyle or addCharacterStyle
+    widget.styleTypeContainer->setVisible(false);
 }
 
 void StyleManager::addParagraphStyle(KoParagraphStyle *style)
@@ -195,6 +215,7 @@ void StyleManager::addParagraphStyle(KoParagraphStyle *style)
     m_styleManager->add(style);
     widget.paragraphStylePage->setParagraphStyles(m_styleManager->paragraphStyles());
     widget.stackedWidget->setCurrentWidget(widget.welcomePage);
+    widget.styleTypeContainer->setVisible(false);
 }
 
 void StyleManager::addCharacterStyle(KoCharacterStyle *style)
@@ -221,6 +242,14 @@ void StyleManager::removeCharacterStyle(KoCharacterStyle* style)
 {
     if (m_alteredCharacterStyles.contains(style->styleId()))
         m_alteredCharacterStyles.remove(style->styleId());
+}
+
+void StyleManager::switchStyle(bool on)
+{
+    if (!on) return;
+    if (m_selectedParagStyle) {
+        setParagraphStyle(m_selectedParagStyle, widget.bDelete->isEnabled());
+    }
 }
 
 /* TODO

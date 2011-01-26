@@ -72,6 +72,8 @@ void StylesWidget::setEmbedded(bool embed)
     widget.deleteStyle->setVisible(!embed);
     widget.modifyStyle->setVisible(!embed);
     widget.applyStyle->setVisible(!embed);
+    widget.stylesView->header()->resizeSection(1, 0); // don't show the bubbles
+    widget.stylesView->expandAll();
 }
 
 void StylesWidget::setStyleManager(KoStyleManager *sm)

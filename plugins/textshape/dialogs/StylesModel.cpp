@@ -38,7 +38,6 @@ StylesModel::StylesModel(KoStyleManager *manager, QObject *parent)
         m_styleMapper(new QSignalMapper(this))
 {
     setStyleManager(manager);
-    m_paragIcon = KIcon("kotext-paragraph");
     m_charIcon = KIcon("kotext-character");
     connect(m_styleMapper, SIGNAL(mapped(int)), this, SLOT(updateName(int)));
 }
@@ -275,9 +274,8 @@ QVariant StylesModel::data(const QModelIndex &index, int role) const
     }
     case Qt::DecorationRole:
         if (index.column() == 0) {
-            if (m_styleManager->paragraphStyle(id))
-                return m_paragIcon;
-            return m_charIcon;
+            if (m_styleManager->characterStyle(id))
+                return m_charIcon;
         }
         break;
     default: break;

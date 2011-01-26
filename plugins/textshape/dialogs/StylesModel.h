@@ -95,7 +95,7 @@ private:
     bool m_pureParagraphStyle;
     bool m_pureCharacterStyle;
 
-    QIcon m_paragIcon, m_charIcon;
+    QIcon m_charIcon;
 
     QSignalMapper *m_styleMapper;
 };

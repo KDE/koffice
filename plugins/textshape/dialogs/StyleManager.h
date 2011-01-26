@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -51,6 +51,7 @@ private slots:
     void removeCharacterStyle(KoCharacterStyle*);
     void setParagraphStyle(KoParagraphStyle *style, bool canDelete);
     void setCharacterStyle(KoCharacterStyle *style, bool canDelete);
+    void switchStyle(bool on);
 
 private:
     Ui::StyleManager widget;
