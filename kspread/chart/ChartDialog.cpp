@@ -20,8 +20,6 @@
 
 #include "ChartDialog.h"
 
-#include <koChart.h>
-
 #include "ChartDatabaseSelectorFactory.h"
 
 using namespace KSpread;

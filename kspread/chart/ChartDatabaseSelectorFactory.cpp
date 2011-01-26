@@ -22,8 +22,6 @@
 
 #include <klocale.h>
 
-#include <koChart.h>
-
 #include "ChartDatabaseSelector.h"
 
 using namespace KSpread;

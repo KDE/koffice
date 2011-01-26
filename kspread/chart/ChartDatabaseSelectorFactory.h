@@ -21,6 +21,8 @@
 #ifndef CHART_DATABASE_SELECTOR_FACTORY
 #define CHART_DATABASE_SELECTOR_FACTORY
 
+#define ChartShapeId "ChartShape"
+
 #include <QObject>
 #include <KoShapeConfigFactoryBase.h>
 #include "../Map.h"
