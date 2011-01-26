@@ -29,7 +29,7 @@
 #include <KoPointerEvent.h>
 #include <KoPACanvas.h>
 #include <KoViewConverter.h>
-#include <KPrPageEffectDocker.h>
+#include "KPrPageEffectDocker.h"
 #include "KPrClickActionDocker.h"
 
 KPrAnimationTool::KPrAnimationTool( KoCanvasBase *canvas )

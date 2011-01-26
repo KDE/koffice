@@ -35,6 +35,7 @@
 #include "KPrPageSelectStrategyActive.h"
 #include "pagelayout/KPrPageLayouts.h"
 #include "tools/KPrPlaceholderToolFactory.h"
+#include "tools/KPrAnimationToolFactory.h"
 #include "commands/KPrSetCustomSlideShowsCommand.h"
 #include <KoPACanvas.h>
 #include <KoPACanvasItem.h>
@@ -57,18 +58,6 @@
 #include <QTimer>
 #include <QCoreApplication>
 
-class InitOnce
-{
-public:
-    InitOnce()
-    {
-        KoToolRegistry * toolRegistry = KoToolRegistry::instance();
-        toolRegistry->add( new KPrPlaceholderToolFactory( toolRegistry ) );
-        KoShapeRegistry * registry = KoShapeRegistry::instance();
-        registry->addFactory( new KPrPlaceholderShapeFactory( registry ) );
-    }
-};
-
 KPrDocument::KPrDocument( QWidget* parentWidget, QObject* parent, bool singleViewMode )
 : KoPADocument( parentWidget, parent, singleViewMode )
 , m_customSlideShows(new KPrCustomSlideShows())
@@ -76,11 +65,12 @@ KPrDocument::KPrDocument( QWidget* parentWidget, QObject* parent, bool singleVie
 , m_presenterViewEnabled( false )
 , m_declarations( new KPrDeclarations() )
 {
-    K_GLOBAL_STATIC( InitOnce, s_initOnce );
-    InitOnce * initOnce = s_initOnce;
-    // have this is as otherwise we get a warning from the compiler
-    // the variable is used and the way it is done is to only call it once
-    Q_UNUSED( initOnce );
+    if (!KoToolRegistry::instance()->contains("KPrPlaceholderToolID")) {
+        KoToolFactoryBase *f = new KPrAnimationToolFactory(KoToolRegistry::instance());
+        KoToolRegistry::instance()->add(f);
+        f = new KPrPlaceholderToolFactory(KoToolRegistry::instance());
+        KoToolRegistry::instance()->add(f);
+    }
 
     setComponentData(KPrFactory::componentData(), false);
     setTemplateType( "kpresenter_template" );

@@ -9,7 +9,6 @@ endif(KDE4_BUILD_TESTS)
 
 
 add_subdirectory(tests)
-add_subdirectory(tools)
 
 ### kpresenterprivate ###
 set( kpresenterprivate_LIB_SRCS
@@ -123,6 +122,10 @@ set( kpresenterprivate_LIB_SRCS
 
      tools/KPrPlaceholderTool.cpp
      tools/KPrPlaceholderToolFactory.cpp
+     tools/KPrAnimationTool.cpp
+     tools/KPrAnimationToolFactory.cpp
+     tools/KPrClickActionDocker.cpp
+     tools/KPrPageEffectDocker.cpp
    )
 
 kde4_add_ui_files(kpresenterprivate_LIB_SRCS
