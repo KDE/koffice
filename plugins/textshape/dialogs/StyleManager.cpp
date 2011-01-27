@@ -184,6 +184,7 @@ void StyleManager::setCharacterStyle(KoCharacterStyle *style, bool canDelete, bo
 void StyleManager::setUnit(const KoUnit &unit)
 {
     widget.paragraphStylePage->setUnit(unit);
+    widget.characterStylePage->setUnit(unit);
 }
 
 void StyleManager::save()

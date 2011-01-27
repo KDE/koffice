@@ -24,12 +24,15 @@
 #include <QTextBlockFormat>
 #include <QTextCharFormat>
 
+#include <KoUnit.h>
+
 #include <ui_StylesWidget.h>
 
 class KoStyleManager;
 class KoParagraphStyle;
 class KoCharacterStyle;
 class StylesModel;
+class KoCanvasBase;
 
 class StylesWidget : public QWidget
 {
@@ -38,6 +41,7 @@ public:
     explicit StylesWidget(QWidget *parent = 0);
 
     void setEmbedded(bool embed);
+    void setCanvas(KoCanvasBase *canvas) { m_canvasBase = canvas; }
 
 public slots:
     void setStyleManager(KoStyleManager *sm);
@@ -73,6 +77,7 @@ private:
     StylesModel *m_stylesModel;
     bool m_blockSignals;
     bool m_isEmbedded;
+    KoCanvasBase *m_canvasBase;
 };
 
 #endif

@@ -161,4 +161,10 @@ void CharacterGeneral::slotStrikethroughChanged(KoCharacterStyle::LineType lineT
     widget.preview->setStrikethrough(lineType, lineStyle, lineColor);
 }
 
+void CharacterGeneral::setUnit(const KoUnit &unit)
+{
+    m_layoutTab->setUnit(unit);
+    m_characterDecorations->setUnit(unit);
+}
+
 #include <CharacterGeneral.moc>

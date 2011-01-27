@@ -125,4 +125,9 @@ void FontDecorations::clearBackgroundColor()
     emit backgroundColorChanged(QColor(Qt::transparent));
 }
 
+void FontDecorations::setUnit(const KoUnit &unit)
+{
+    widget.shadowDistance->setUnit(unit);
+}
+
 #include <FontDecorations.moc>

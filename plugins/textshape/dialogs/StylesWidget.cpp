@@ -24,6 +24,7 @@
 #include <KoStyleManager.h>
 #include <KoCharacterStyle.h>
 #include <KoParagraphStyle.h>
+#include <KoCanvasBase.h>
 
 #include <KDebug>
 #include <KInputDialog>
@@ -37,7 +38,8 @@ StylesWidget::StylesWidget(QWidget *parent)
         : QWidget(parent),
         m_styleManager(0),
         m_stylesModel(new StylesModel(0, this)),
-        m_blockSignals(false)
+        m_blockSignals(false),
+        m_canvasBase(0)
 {
     widget.setupUi(this);
     widget.stylesView->setRootIsDecorated(false);
@@ -241,15 +243,18 @@ void StylesWidget::editStyle()
         ParagraphGeneral *p = new ParagraphGeneral;
         p->setParagraphStyles(m_styleManager->paragraphStyles());
         p->setStyle(paragraphStyle);
+        if (m_canvasBase)
+            p->setUnit(m_canvasBase->unit());
         connect(p, SIGNAL(styleAltered(const KoParagraphStyle*)),
                 m_styleManager, SLOT(alteredStyle(const KoParagraphStyle*)));
-        // TODO get KoUnit from somewhere and set that on p
         widget = p;
     } else {
         KoCharacterStyle *characterStyle = m_stylesModel->characterStyleForIndex(index);
         if (characterStyle) {
             CharacterGeneral *c = new CharacterGeneral;
             c->setStyle(characterStyle);
+            if (m_canvasBase)
+                c->setUnit(m_canvasBase->unit());
             connect(c, SIGNAL(styleAltered(const KoCharacterStyle*)),
                     m_styleManager, SLOT(alteredStyle(const KoCharacterStyle*)));
             widget = c;

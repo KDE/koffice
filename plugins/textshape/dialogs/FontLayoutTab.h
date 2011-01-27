@@ -37,10 +37,12 @@ public:
     void setDisplay(KoCharacterStyle *style);
     void save(KoCharacterStyle *style);
 
+    void setUnit(const KoUnit &unit);
+
 private:
     Ui::FontLayoutTab widget;
     QButtonGroup *m_buttonGroup;
-    
+
     bool m_uniqueFormat;
 };
 

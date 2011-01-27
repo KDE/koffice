@@ -40,6 +40,8 @@ public:
     void setStyle(KoCharacterStyle *style);
     void setStyleNameVisible(bool visible);
 
+    void setUnit(const KoUnit &unit);
+
 public slots:
     void save(KoCharacterStyle *style = 0);
 

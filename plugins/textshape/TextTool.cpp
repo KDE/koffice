@@ -1483,6 +1483,7 @@ QWidget *TextTool::createOptionWidget()
     SimpleStyleWidget *ssw = new SimpleStyleWidget(this, widget);
     widget->addTab(ssw, i18n("Abc"));
     StylesWidget *styles = new StylesWidget(widget);
+    styles->setCanvas(canvas());
     widget->addTab(styles, i18n("Styles"));
 
     connect(this, SIGNAL(styleManagerChanged(KoStyleManager *)), ssw, SLOT(setStyleManager(KoStyleManager *)));

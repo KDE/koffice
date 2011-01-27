@@ -96,4 +96,9 @@ void FontLayoutTab::save(KoCharacterStyle *style)
         style->setHasHyphenation(false);
 }
 
+void FontLayoutTab::setUnit(const KoUnit &unit)
+{
+    widget.offset->setUnit(unit);
+}
+
 #include <FontLayoutTab.moc>
