@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 1998, 1999 Torben Weis <weis@kde.org>
-   Copyright (C) 2007 Thomas Zander <zander@kde.org>
+   Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
    Copyright (C) 2010 Benjamin Port <port.benjamin@gmail.com>
 
    This library is free software; you can redistribute it and/or
@@ -496,7 +496,18 @@ QList<QAction*> KoView::createChangeUnitActions()
     answer.append(new UnitChangeAction(KoUnit::Cicero, unitGroup, d->document));
     answer.append(new UnitChangeAction(KoUnit::Point, unitGroup, d->document));
 
-    const int currentUnit = d->document.data()->unit().indexInList();
+    int currentUnit;
+    switch (static_cast<KoUnit::Unit>(d->document.data()->unit().indexInList())) {
+    case KoUnit::Millimeter: currentUnit = 0; break;
+    case KoUnit::Point: currentUnit = 6; break;
+    case KoUnit::Inch: currentUnit = 3; break;
+    case KoUnit::Centimeter: currentUnit = 1; break;
+    case KoUnit::Decimeter: currentUnit = 2; break;
+    case KoUnit::Pica: currentUnit = 4; break;
+    case KoUnit::Cicero: currentUnit = 5; break;
+    default:
+        currentUnit = -1; break;
+    }
     Q_ASSERT(currentUnit < answer.count());
     if (currentUnit >= 0)
         answer.value(currentUnit)->setChecked(true);
