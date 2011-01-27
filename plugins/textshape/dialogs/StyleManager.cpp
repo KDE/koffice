@@ -218,7 +218,7 @@ void StyleManager::save()
                 Q_ASSERT(clone);
                 origc->copyProperties(clone);
                 m_styleManager->alteredStyle(origc);
-                orig->setStyleId(styleId);
+                origc->setStyleId(styleId);
             }
         }
     }
