@@ -963,9 +963,10 @@ void KWDLoader::fill(KoCharacterStyle *style, const KoXmlElement &formatElem)
     if (!element.isNull()) {
         QBrush fg = style->foreground();
         QColor c = colorFrom(element);
-        if (c.isValid())
+        if (c.isValid()) {
             fg.setColor(c);
-        style->setForeground(fg);
+            style->setForeground(fg);
+        }
     }
     element = formatElem.namedItem("FONT").toElement();
     if (!element.isNull())
