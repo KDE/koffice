@@ -88,7 +88,8 @@ KWPageSettingsDialog::KWPageSettingsDialog(QWidget *parent, KWDocument *document
         */
     }
 
-    distributeUnit(document->unit());
+    setUnit(m_document->unit());
+    m_columns->setUnit(m_document->unit());
     connect (this, SIGNAL(unitChanged(const KoUnit&)), this, SLOT(distributeUnit(const KoUnit&)));
 }
 
