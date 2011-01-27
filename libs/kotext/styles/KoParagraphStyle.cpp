@@ -965,7 +965,7 @@ void KoParagraphStyle::loadOdf(const KoXmlElement *element, KoShapeLoadingContex
     if (!name.isEmpty()) {
         d->name = name;
     } else {
-        d->name = element->attributeNS(KoXmlNS::style, "name", QString());
+        d->name = element->attributeNS(KoXmlNS::style, "name", d->name);
     }
 
     context.styleStack().save();
