@@ -51,6 +51,7 @@ private slots:
     void removeCharacterStyle(KoCharacterStyle*);
     void setParagraphStyle(KoParagraphStyle *style, bool canDelete);
     void setCharacterStyle(KoCharacterStyle *style, bool canDelete);
+    // switches between paragraph and character styles
     void switchStyle(bool on);
 
 private:
@@ -58,9 +59,11 @@ private:
 
     Ui::StyleManager widget;
     KoStyleManager *m_styleManager;
+    KoStyleManager *m_shadowStyleManager;
 
-    QMap<int, KoParagraphStyle*> m_alteredParagraphStyles;
-    QMap<int, KoCharacterStyle*> m_alteredCharacterStyles;
+    QHash<KoParagraphStyle*, int> m_shadowParagraphStyles; // shadow to orig Id
+    QHash<KoCharacterStyle*, int> m_shadowCharacterStyles; // shadow to orig Id
+    QSet<int> m_alteredStyles;
 
     KoParagraphStyle *m_selectedParagStyle;
     KoCharacterStyle *m_selectedCharStyle;

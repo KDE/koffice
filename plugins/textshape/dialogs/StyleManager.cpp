@@ -17,9 +17,6 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#define PARAGRAPH_STYLE 1000
-#define CHARACTER_STYLE 1001
-
 #include "StyleManager.h"
 
 #include "StylesWidget.h"
@@ -33,6 +30,7 @@
 StyleManager::StyleManager(QWidget *parent)
         : QWidget(parent),
         m_styleManager(0),
+        m_shadowStyleManager(0),
         m_selectedParagStyle(0),
         m_selectedCharStyle(0),
         m_blockSignals(false)
@@ -61,30 +59,83 @@ StyleManager::StyleManager(QWidget *parent)
 
 StyleManager::~StyleManager()
 {
-    foreach(int styleId, m_alteredParagraphStyles.keys()) {
-        KoParagraphStyle *s = m_alteredParagraphStyles[styleId];
-        delete s;
-    }
-    m_alteredParagraphStyles.clear();
-    foreach(int styleId, m_alteredCharacterStyles.keys()) {
-        KoCharacterStyle *s = m_alteredCharacterStyles[styleId];
-        delete s;
-    }
-    m_alteredCharacterStyles.clear();
 }
 
 void StyleManager::setStyleManager(KoStyleManager *sm)
 {
     Q_ASSERT(sm);
+    if (m_styleManager == sm)
+        return;
+    if (m_shadowStyleManager) {
+        m_alteredStyles.clear();
+        delete m_shadowStyleManager;
+    }
     m_styleManager = sm;
-    widget.styles->setStyleManager(sm);
-    widget.styles->setEmbedded(true);
     widget.stackedWidget->setCurrentWidget(widget.welcomePage);
-    widget.paragraphStylePage->setParagraphStyles(sm->paragraphStyles());
     connect(sm, SIGNAL(styleAdded(KoParagraphStyle*)), this, SLOT(addParagraphStyle(KoParagraphStyle*)));
     connect(sm, SIGNAL(styleAdded(KoCharacterStyle*)), this, SLOT(addCharacterStyle(KoCharacterStyle*)));
     connect(sm, SIGNAL(styleRemoved(KoParagraphStyle*)), this, SLOT(removeParagraphStyle(KoParagraphStyle*)));
     connect(sm, SIGNAL(styleRemoved(KoCharacterStyle*)), this, SLOT(removeCharacterStyle(KoCharacterStyle*)));
+
+    // don't operate on the origs since user might cancel later.
+    m_shadowStyleManager = new KoStyleManager(this);
+    QHash<KoParagraphStyle*, KoParagraphStyle*> cloneMapper; // orig -> clone
+    QSet<int> seenCharStyles;
+
+    // the default style is a bit tricky since we can't set it on the manager;
+    KoParagraphStyle *defParag = m_styleManager->defaultParagraphStyle();
+    KoParagraphStyle *defShadowParag = m_shadowStyleManager->defaultParagraphStyle();
+    const int defId = defShadowParag->styleId();
+    const int defCharId = defShadowParag->characterStyle()->styleId();
+    defShadowParag->copyProperties(defParag);
+    defShadowParag->setStyleId(defId); // restore id that styleManager knows it as
+    defShadowParag->characterStyle()->setStyleId(defCharId); // restore
+    cloneMapper.insert(defParag, defShadowParag);
+    seenCharStyles << defParag->characterStyle()->styleId();
+
+    foreach (KoParagraphStyle *ps, m_styleManager->paragraphStyles()) {
+        if (ps == defParag)
+            continue;
+        KoParagraphStyle *cloned = ps->clone();
+        m_shadowParagraphStyles.insert(cloned, ps->styleId());
+        cloneMapper.insert(ps, cloned);
+        m_shadowCharacterStyles.insert(cloned->characterStyle(), ps->characterStyle()->styleId());
+        seenCharStyles << ps->characterStyle()->styleId();
+    }
+
+    // now; need to redirect the parents
+    foreach (KoParagraphStyle *ps, m_shadowParagraphStyles.keys()) {
+        Q_ASSERT(ps->parentStyle());
+        Q_ASSERT(cloneMapper.value(ps->parentStyle()));
+        ps->setParentStyle(cloneMapper.value(ps->parentStyle()));
+    }
+    foreach (KoParagraphStyle *ps, m_shadowParagraphStyles.keys())
+        m_shadowStyleManager->add(ps);
+    // last; after ids are set by the stylemanager need to redirect the 'next' (which is an int)
+    foreach (KoParagraphStyle *ps, m_shadowParagraphStyles.keys()) {
+        KoParagraphStyle *orig = m_styleManager->paragraphStyle(ps->nextStyle());
+        if (orig) {
+            KoParagraphStyle *clone = cloneMapper.value(orig);
+            if (clone)
+                ps->setNextStyle(clone->styleId());
+        }
+    }
+
+    // character styles too!
+    foreach (KoCharacterStyle *cs, m_styleManager->characterStyles()) {
+        const int id = cs->styleId();
+        if (seenCharStyles.contains(id))
+            continue;
+        KoCharacterStyle *clone = cs->clone();
+        m_shadowStyleManager->add(clone);
+        m_shadowCharacterStyles.insert(clone, id);
+    }
+
+    widget.styles->setStyleManager(m_shadowStyleManager);
+    widget.paragraphStylePage->setParagraphStyles(m_shadowStyleManager->paragraphStyles());
+
+    // do this at the end so the tree list can be expanded
+    widget.styles->setEmbedded(true);
 }
 
 void StyleManager::setParagraphStyle(KoParagraphStyle *style, bool canDelete)
@@ -101,13 +152,9 @@ void StyleManager::setParagraphStyle(KoParagraphStyle *style, bool canDelete)
     widget.characterStylePage->save();
     widget.characterStylePage->setStyle(0);
     widget.paragraphStylePage->save();
-    KoParagraphStyle *localStyle = style->clone();
-    if (!m_alteredParagraphStyles.contains(style->styleId()))
-        m_alteredParagraphStyles.insert(style->styleId(), localStyle);
-    else
-        localStyle = m_alteredParagraphStyles.value(style->styleId());
 
-    widget.paragraphStylePage->setStyle(localStyle);
+    m_alteredStyles << m_shadowParagraphStyles.value(style);
+    widget.paragraphStylePage->setStyle(style);
     widget.stackedWidget->setCurrentWidget(widget.paragraphStylePage);
     widget.styleTypeContainer->setVisible(true);
     widget.bDelete->setEnabled(canDelete);
@@ -126,14 +173,8 @@ void StyleManager::setCharacterStyle(KoCharacterStyle *style, bool canDelete, bo
     widget.paragraphStylePage->setStyle(0);
     widget.characterStylePage->save();
 
-    KoCharacterStyle *localStyle = style->clone();
-
-    if (!m_alteredCharacterStyles.contains(style->styleId()))
-        m_alteredCharacterStyles.insert(style->styleId(), localStyle);
-    else
-        localStyle = m_alteredCharacterStyles.value(style->styleId());
-
-    widget.characterStylePage->setStyle(localStyle);
+    m_alteredStyles << m_shadowCharacterStyles.value(style);
+    widget.characterStylePage->setStyle(style);
     widget.stackedWidget->setCurrentWidget(widget.characterStylePage);
     widget.styleTypeContainer->setVisible(false);
     widget.bDelete->setEnabled(canDelete);
@@ -151,49 +192,37 @@ void StyleManager::save()
     widget.paragraphStylePage->save();
     widget.characterStylePage->save();
 
-    foreach(int styleId, m_alteredCharacterStyles.keys()) {
-        KoCharacterStyle *orig = m_styleManager->characterStyle(styleId);
-        KoCharacterStyle *altered = m_alteredCharacterStyles[styleId];
-        orig->copyProperties(altered);
-        m_styleManager->alteredStyle(orig);
-        delete altered;
-    }
-    m_alteredCharacterStyles.clear();
+    QMap<int, int> cloneMapper; // orig to clone
+    foreach (KoParagraphStyle *clone, m_shadowParagraphStyles.keys())
+        cloneMapper.insert(m_shadowParagraphStyles.value(clone), clone->styleId());
+    foreach (KoCharacterStyle *clone, m_shadowCharacterStyles.keys())
+        cloneMapper.insert(m_shadowCharacterStyles.value(clone), clone->styleId());
 
-    foreach(int styleId, m_alteredParagraphStyles.keys()) {
+    foreach (int styleId, m_alteredStyles) {
         KoParagraphStyle *orig = m_styleManager->paragraphStyle(styleId);
-        KoParagraphStyle *altered = m_alteredParagraphStyles[styleId];
-        orig->copyProperties(altered);
-        m_styleManager->alteredStyle(orig);
-        delete altered;
+        if (orig) {
+            KoParagraphStyle *clone = m_shadowStyleManager->paragraphStyle(cloneMapper.value(styleId));
+            Q_ASSERT(clone);
+            orig->copyProperties(clone);
+            orig->setStyleId(styleId);
+            // correct 'next' and 'parent'
+            orig->setNextStyle(cloneMapper.value(orig->nextStyle()));
+            int parentId = m_shadowParagraphStyles.value(orig->parentStyle());
+            orig->setParentStyle(m_styleManager->paragraphStyle(parentId));
+            m_styleManager->alteredStyle(orig);
+        } else {
+            KoCharacterStyle *origc = m_styleManager->characterStyle(styleId);
+            if (origc) {
+                KoCharacterStyle *clone = m_shadowStyleManager->characterStyle(cloneMapper.value(styleId));
+                Q_ASSERT(clone);
+                origc->copyProperties(clone);
+                m_styleManager->alteredStyle(origc);
+                orig->setStyleId(styleId);
+            }
+        }
     }
-    m_alteredParagraphStyles.clear();
-//Reset the active style
-    if (m_selectedCharStyle) {
-        KoCharacterStyle *localStyle = m_selectedCharStyle->clone();
+    m_alteredStyles.clear();
 
-        if (!m_alteredCharacterStyles.contains(m_selectedCharStyle->styleId()))
-            m_alteredCharacterStyles.insert(m_selectedCharStyle->styleId(), localStyle);
-        else
-            localStyle = m_alteredCharacterStyles.value(m_selectedCharStyle->styleId());
-
-        widget.characterStylePage->setStyle(localStyle);
-    }
-    else
-        widget.characterStylePage->setStyle(0);
-
-    if (m_selectedParagStyle) {
-        KoParagraphStyle * localStyle = m_selectedParagStyle->clone();
-
-        if (!m_alteredParagraphStyles.contains(m_selectedParagStyle->styleId()))
-            m_alteredParagraphStyles.insert(m_selectedParagStyle->styleId(), localStyle);
-        else
-            localStyle = m_alteredParagraphStyles.value(m_selectedParagStyle->styleId());
-
-        widget.paragraphStylePage->setStyle(localStyle);
-    }
-    else
-        widget.paragraphStylePage->setStyle(0);
     m_blockSignals = false;
 }
 
@@ -219,7 +248,7 @@ void StyleManager::addParagraphStyle(KoParagraphStyle *style)
     addCharacterStyle(cs);
 
     m_styleManager->add(style);
-    widget.paragraphStylePage->setParagraphStyles(m_styleManager->paragraphStyles());
+    widget.paragraphStylePage->setParagraphStyles(m_shadowStyleManager->paragraphStyles());
     widget.stackedWidget->setCurrentWidget(widget.welcomePage);
     widget.styleTypeContainer->setVisible(false);
 }
@@ -239,15 +268,39 @@ void StyleManager::buttonDeletePressed()
 
 void StyleManager::removeParagraphStyle(KoParagraphStyle* style)
 {
-    if (m_alteredParagraphStyles.contains(style->styleId()))
-        m_alteredParagraphStyles.remove(style->styleId());
-    widget.paragraphStylePage->setParagraphStyles(m_styleManager->paragraphStyles());
+    const int id = style->styleId();
+    m_alteredStyles.remove(id);
+
+    QHash<KoParagraphStyle*, int>::ConstIterator iter = m_shadowParagraphStyles.constBegin();
+    while (iter != m_shadowParagraphStyles.constEnd()) {
+        if (iter.value() == id) {
+            KoParagraphStyle *deletedStyle = iter.key();
+            m_shadowParagraphStyles.remove(deletedStyle);
+            m_shadowStyleManager->remove(deletedStyle);
+            delete deletedStyle;
+            break;
+        }
+        ++iter;
+    }
+    widget.paragraphStylePage->setParagraphStyles(m_shadowStyleManager->paragraphStyles());
 }
 
 void StyleManager::removeCharacterStyle(KoCharacterStyle* style)
 {
-    if (m_alteredCharacterStyles.contains(style->styleId()))
-        m_alteredCharacterStyles.remove(style->styleId());
+    const int id = style->styleId();
+    m_alteredStyles.remove(id);
+
+    QHash<KoCharacterStyle*, int>::ConstIterator iter = m_shadowCharacterStyles.constBegin();
+    while (iter != m_shadowCharacterStyles.constEnd()) {
+        if (iter.value() == id) {
+            KoCharacterStyle *deletedStyle = iter.key();
+            m_shadowCharacterStyles.remove(deletedStyle);
+            m_shadowStyleManager->remove(deletedStyle);
+            delete deletedStyle;
+            break;
+        }
+        ++iter;
+    }
 }
 
 void StyleManager::switchStyle(bool on)

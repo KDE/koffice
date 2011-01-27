@@ -35,9 +35,6 @@ ParagraphGeneral::ParagraphGeneral(QWidget *parent)
     widget.setupUi(this);
 
 //Disable for now
-    //inherit style
-    widget.label_3->setVisible(false);
-    widget.inheritStyle->setVisible(false);
     //use named charStyle
     widget.useCharacterStyle->setVisible(false);
     widget.label_4->setVisible(false);
@@ -114,23 +111,22 @@ void ParagraphGeneral::setStyle(KoParagraphStyle *style, int level)
 
     m_blockSignals = true;
 
-/*    widget.inheritStyle->clear();
+    widget.inheritStyle->clear();
     widget.inheritStyle->addItem(i18nc("Inherit style", "None"));
     widget.inheritStyle->setCurrentIndex(0);
-    foreach(KoParagraphStyle *s, m_paragraphStyles) {
+    foreach (KoParagraphStyle *s, m_paragraphStyles) {
         KoParagraphStyle *parent = s;
         bool ok = true;
         while (ok && parent) {
             ok = parent->styleId() != style->styleId();
             parent = parent->parentStyle();
         }
-        if (! ok) continue; // can't inherit from myself, even indirectly.
+        if (! ok) continue; // can't inherit from child of mine, even indirectly.
 
         widget.inheritStyle->addItem(s->name(), s->styleId());
-        if (s == style->parent())
+        if (s == style->parentStyle())
             widget.inheritStyle->setCurrentIndex(widget.inheritStyle->count() - 1);
     }
-*/
     if (!m_nameHidden)
         widget.name->setText(style->name());
 
@@ -181,10 +177,10 @@ void ParagraphGeneral::save(KoParagraphStyle *style)
 
     savingStyle->setNextStyle(widget.nextStyle->itemData(widget.nextStyle->currentIndex()).toInt());
     emit styleAltered(savingStyle);
-/*    int parentStyleId = widget.inheritStyle->itemData(widget.inheritStyle->currentIndex()).toInt();
-    if (parentStyleId == 0)
+    int parentStyleId = widget.inheritStyle->itemData(widget.inheritStyle->currentIndex()).toInt();
+    if (parentStyleId == 0) {
         m_style->setParentStyle(0);
-    else {
+    } else {
         foreach(KoParagraphStyle *style, m_paragraphStyles) {
             if (style->styleId() == parentStyleId) {
                 m_style->setParentStyle(style);
@@ -192,7 +188,6 @@ void ParagraphGeneral::save(KoParagraphStyle *style)
             }
         }
     }
-*/
 }
 
 void ParagraphGeneral::switchToGeneralTab()
