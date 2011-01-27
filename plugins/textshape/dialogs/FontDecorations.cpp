@@ -102,11 +102,11 @@ void FontDecorations::save(KoCharacterStyle *style) const
         return;
 
     if (widget.enableBackground->isChecked() && m_backgroundColorReset)
-        style->setBackground(QBrush(Qt::NoBrush));
+        style->clearBackground();
     else if (widget.enableBackground->isChecked() && m_backgroundColorChanged)
         style->setBackground(QBrush(widget.backgroundColor->color()));
     if (widget.enableText->isChecked() && m_textColorReset)
-        style->setForeground(QBrush(Qt::NoBrush));
+        style->clearForeground();
     else if (widget.enableText->isChecked() && m_textColorChanged)
         style->setForeground(QBrush(widget.textColor->color()));
 }
