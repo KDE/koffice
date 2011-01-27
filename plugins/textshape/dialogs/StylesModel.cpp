@@ -302,19 +302,23 @@ QModelIndex StylesModel::setCurrentParagraphStyle(int styleId, bool unchanged)
 
     QModelIndex mi;
     for (int i = 0; i < 2; ++i) {
-        foreach (int parent, m_relations.keys()) {
-            int index = m_relations.values(parent).indexOf(m_currentParagraphStyle);
-            if (index >= 0) {
-                mi = createIndex(index, 1, m_currentParagraphStyle);
-                emit dataChanged(mi, mi);
-                break;
-            }
-        }
+        mi = indexForStyle(m_currentParagraphStyle);
+        emit dataChanged(mi, mi);
 
         m_currentParagraphStyle = styleId;
         m_pureParagraphStyle = unchanged;
     }
     return mi;
+}
+
+QModelIndex StylesModel::indexForStyle(int styleId)
+{
+    foreach (int parent, m_relations.keys()) {
+        int index = m_relations.values(parent).indexOf(styleId);
+        if (index >= 0)
+            return createIndex(index, 0, styleId);
+    }
+    return QModelIndex();
 }
 
 void StylesModel::setCurrentCharacterStyle(int styleId, bool unchanged)
@@ -409,10 +413,6 @@ void StylesModel::removeCharacterStyle(KoCharacterStyle *style, bool recalc)
 
 void StylesModel::updateName(int styleId)
 {
-    // TODO, no idea how to do this more correct for children...
-    int row = m_styleList.indexOf(styleId);
-    if (row >= 0) {
-        QModelIndex index = createIndex(row, 0, styleId);
-        emit dataChanged(index, index);
-    }
+    QModelIndex mi = indexForStyle(styleId);
+    emit dataChanged(mi, mi);
 }

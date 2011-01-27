@@ -86,6 +86,7 @@ protected:
     QMultiHash<int, int> m_relations; // parent-child relations.
 
 private:
+    QModelIndex indexForStyle(int styleId);
     QModelIndex parent(int needle, const QList<int> &haystack) const;
 
     KoStyleManager *m_styleManager;
