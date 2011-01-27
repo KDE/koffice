@@ -242,8 +242,11 @@ void KWOdfLoader::loadSettings(const KoXmlDocument &settingsDoc)
     kDebug(32001) << "KWOdfLoader::loadSettings";
     KoOasisSettings settings(settingsDoc);
     KoOasisSettings::Items viewSettings = settings.itemSet("view-settings");
-    if (!viewSettings.isNull())
-        m_document->setUnit(KoUnit::unit(viewSettings.parseConfigItemString("unit")));
+    if (!viewSettings.isNull()) {
+        QString docUnit(viewSettings.parseConfigItemString("unit"));
+        if (!docUnit.isEmpty())
+            m_document->setUnit(KoUnit::unit(docUnit));
+    }
 
     //1.6: KWOasisLoader::loadOasisIgnoreList
     KoOasisSettings::Items configurationSettings = settings.itemSet("configuration-settings");
