@@ -170,7 +170,6 @@ KWDocument::KWDocument(QWidget *parentWidget, QObject *parent, bool singleViewMo
     connect(documentInfo(), SIGNAL(infoUpdated(const QString &, const QString &)),
             inlineTextObjectManager(), SLOT(documentInformationUpdated(const QString &, const QString &)));
 
-    m_config.load(this);
     clear();
 }
 
