@@ -204,12 +204,17 @@ void StyleManager::save()
         if (orig) {
             KoParagraphStyle *clone = m_shadowStyleManager->paragraphStyle(cloneMapper.value(styleId));
             Q_ASSERT(clone);
+            KoCharacterStyle *oldCharStyle = orig->characterStyle();
             orig->copyProperties(clone);
             orig->setStyleId(styleId);
             // correct 'next' and 'parent'
             orig->setNextStyle(cloneMapper.value(orig->nextStyle()));
-            int parentId = m_shadowParagraphStyles.value(orig->parentStyle());
-            orig->setParentStyle(m_styleManager->paragraphStyle(parentId));
+            int parentId = m_shadowParagraphStyles.value(clone->parentStyle());
+            if (parentId == 0) // defaultStyle
+                orig->setParentStyle(m_styleManager->defaultParagraphStyle());
+            else
+                orig->setParentStyle(m_styleManager->paragraphStyle(parentId));
+            orig->setCharacterStyle(oldCharStyle);
             m_styleManager->alteredStyle(orig);
         } else {
             KoCharacterStyle *origc = m_styleManager->characterStyle(styleId);
