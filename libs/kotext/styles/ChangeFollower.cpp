@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006, 2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006, 2009-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -27,6 +27,8 @@
 #include <QTextBlock>
 #include <kdebug.h>
 
+// #define DEBUG_CHANGES
+
 ChangeFollower::ChangeFollower(QTextDocument *parent, KoStyleManager *manager)
         : QObject(parent),
         m_document(parent),
@@ -41,7 +43,7 @@ ChangeFollower::~ChangeFollower()
         sm->remove(this);
 }
 
-void ChangeFollower::processUpdates(const QList<int> &changedStyles)
+void ChangeFollower::processUpdates(const QMap<int, QList<int> > &changedStyles)
 {
     KoStyleManager *sm = m_styleManager.data();
     if (!sm) {
@@ -51,30 +53,37 @@ void ChangeFollower::processUpdates(const QList<int> &changedStyles)
         return;
     }
 
-    // optimization strategy;  store the formatid of the formats we checked into
-    // a qset for 'hits' and 'ignores' and avoid the copying of the format
-    // (fragment.charFormat() / block.blockFormat()) when the formatId is
-    // already checked previosly
-
     QTextCursor cursor(m_document);
+    cursor.beginEditBlock();
     QTextBlock block = cursor.block();
     while (block.isValid()) {
         QTextBlockFormat bf = block.blockFormat();
         int id = bf.intProperty(KoParagraphStyle::StyleId);
+        KoParagraphStyle *paragStyle = sm->paragraphStyle(id);
         if (id > 0 && changedStyles.contains(id)) {
+            Q_ASSERT(paragStyle);
             cursor.setPosition(block.position());
-            KoParagraphStyle *style = sm->paragraphStyle(id);
-            Q_ASSERT(style);
 
-            style->applyStyle(bf);
-            cursor.setBlockFormat(bf);
+            foreach (int key, changedStyles.value(id))
+                bf.clearProperty(key);
+            cursor.setBlockFormat(bf); // first we remove all traces, below we'll reapply.
+        } else {
+            paragStyle = 0;
         }
         QTextCharFormat cf = block.charFormat();
         id = cf.intProperty(KoCharacterStyle::StyleId);
-        if (id > 0 && changedStyles.contains(id)) {
+        if (paragStyle && id > 0 && changedStyles.contains(id)) {
             KoCharacterStyle *style = sm->characterStyle(id);
             Q_ASSERT(style);
-            style->applyStyle(block);
+            foreach (int key, changedStyles.value(id)) {
+#ifdef DEBUG_CHANGES
+                QString out("Char-style[%1]; removing property 0x%2");
+                out = out.arg(style->name()).arg(key, 3, 16);
+                kDebug(32500) << out;
+#endif
+                cf.clearProperty(key);
+            }
+            cursor.setBlockCharFormat(cf); // first we remove all traces, below we'll reapply.
         }
 
         QTextBlock::iterator iter = block.begin();
@@ -83,19 +92,38 @@ void ChangeFollower::processUpdates(const QList<int> &changedStyles)
             cf = fragment.charFormat();
             id = cf.intProperty(KoCharacterStyle::StyleId);
             if (id > 0 && changedStyles.contains(id)) {
-                // create selection
-                cursor.setPosition(fragment.position());
-                cursor.setPosition(fragment.position() + fragment.length(), QTextCursor::KeepAnchor);
+#ifdef DEBUG_CHANGES
+                kDebug(32500) << "Updating segment" << fragment.position() << fragment.text();
+#endif
                 KoCharacterStyle *style = sm->characterStyle(id);
                 Q_ASSERT(style);
 
-                style->applyStyle(cf);
-                cursor.mergeCharFormat(cf);
+                foreach (int key, changedStyles.value(id)) {
+#ifdef DEBUG_CHANGES
+                    QString out("Char-segment[%1]; removing property 0x%2");
+                    out = out.arg(style->name()).arg(key, 3, 16);
+                    kDebug(32500) << out;
+#endif
+                    cf.clearProperty(key);
+                }
+                // create selection
+                cursor.setPosition(fragment.position());
+                cursor.setPosition(fragment.position() + fragment.length(), QTextCursor::KeepAnchor);
+                if (paragStyle && style != paragStyle->characterStyle())
+                    style->applyStyle(cf);
+                cursor.setCharFormat(cf);
             }
             iter++;
         }
+
+        if (paragStyle) {
+             // this properly applies both the block and the char style, with inheritence in mind.
+            paragStyle->applyStyle(block, false);
+        }
+
         block = block.next();
     }
+    cursor.endEditBlock();
 }
 
 #include <ChangeFollower.moc>

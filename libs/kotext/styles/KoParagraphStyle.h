@@ -472,7 +472,7 @@ public:
      * Change this block outline level
      */
     void setOutlineLevel(int outline);
-    
+
     /**
      * Return the default outline level of this style, or 0 if there is none.
      */

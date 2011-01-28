@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2007,2008 Sebastian Sauer <mail@dipe.org>
  * Copyright (C) 2007,2010 Pierre Ducroquet <pinaraf@gmail.com>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
@@ -209,13 +209,34 @@ void KoParagraphStyle::applyStyle(QTextBlockFormat &format) const
 void KoParagraphStyle::applyStyle(QTextBlock &block, bool applyListStyle) const
 {
     QTextCursor cursor(block);
+    cursor.beginEditBlock();
     QTextBlockFormat format = cursor.blockFormat();
     applyStyle(format);
     cursor.setBlockFormat(format);
-    if (d->parentStyle && d->parentStyle->characterStyle())
-        d->parentStyle->characterStyle()->applyStyle(block);
-    if (d->charStyle) {
-        d->charStyle->applyStyle(block);
+
+    // We apply the character style of all parent paragraph styles too.
+    const KoParagraphStyle *parent = this;
+    QTextCharFormat blockCharFormat;
+    while (parent) {
+        QTextCharFormat cf;
+        parent->characterStyle()->applyStyle(cf);
+        cf.merge(blockCharFormat); // blockCharFormat props win on conflicts
+        blockCharFormat = cf;
+        parent = parent->parentStyle();
+    }
+
+    cursor.setBlockCharFormat(blockCharFormat);
+
+    // we should set the style on all existing fragments too
+    QTextBlock::iterator iter = block.begin();
+    while (!iter.atEnd()) {
+        QTextFragment fragment = iter.fragment();
+        QTextCharFormat cf(blockCharFormat);
+        cf.merge(fragment.charFormat());
+        cursor.setPosition(fragment.position());
+        cursor.setPosition(fragment.position() + fragment.length(), QTextCursor::KeepAnchor);
+        cursor.setCharFormat(cf);
+        ++iter;
     }
 
     if (applyListStyle) {
@@ -231,25 +252,57 @@ void KoParagraphStyle::applyStyle(QTextBlock &block, bool applyListStyle) const
                 data->setCounterWidth(-1);
         }
     }
+    cursor.endEditBlock();
 }
 
 void KoParagraphStyle::unapplyStyle(QTextBlock &block) const
 {
-    if (d->parentStyle)
-        d->parentStyle->unapplyStyle(block);
-
     QTextCursor cursor(block);
+    cursor.beginEditBlock();
     QTextBlockFormat format = cursor.blockFormat();
 
-    QList<int> keys = d->stylesPrivate.keys();
-    for (int i = 0; i < keys.count(); i++) {
-        QVariant variant = d->stylesPrivate.value(keys[i]);
-        if (variant == format.property(keys[i]))
-            format.clearProperty(keys[i]);
+    // remove all the properties that are the same as us
+    const KoParagraphStyle *parent = this;
+    QTextCharFormat charFormat;
+    while (parent) {
+        QList<int> keys = parent->d->stylesPrivate.keys();
+        for (int i = 0; i < keys.count(); i++) {
+            QVariant variant = value(keys[i]);
+            if (variant == format.property(keys[i]))
+                format.clearProperty(keys[i]);
+        }
+        QTextCharFormat cf;
+        parent->characterStyle()->applyStyle(cf);
+        cf.merge(charFormat); // charFormat props win on conflicts
+        charFormat = cf;
+        parent = parent->parentStyle();
     }
     cursor.setBlockFormat(format);
-    if (d->charStyle)
-        d->charStyle->unapplyStyle(block);
+
+    const QMap<int, QVariant> charProperties = charFormat.properties();
+    const QList<int> keys = charProperties.keys();
+    QTextCharFormat blockCharFormat = block.charFormat();
+    foreach (int key, keys) {
+        if (blockCharFormat.property(key) == charProperties[key])
+            blockCharFormat.clearProperty(key);
+    }
+
+    cursor.setBlockCharFormat(blockCharFormat);
+
+    // we should set the style on all existing fragments too
+    QTextBlock::iterator iter = block.begin();
+    while (!iter.atEnd()) {
+        QTextFragment fragment = iter.fragment();
+        QTextCharFormat cf = fragment.charFormat();
+        foreach (int key, keys) {
+            if (cf.property(key) == charProperties[key])
+                cf.clearProperty(key);
+        }
+        cursor.setPosition(fragment.position());
+        cursor.setPosition(fragment.position() + fragment.length(), QTextCursor::KeepAnchor);
+        cursor.setCharFormat(cf);
+        ++iter;
+    }
     if (d->listStyle && block.textList()) // TODO check its the same one?
         block.textList()->remove(block);
 }

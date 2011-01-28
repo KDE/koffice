@@ -302,7 +302,6 @@ public:
     /// each style has a unique ID (non persistent) given out by the styleManager
     void setStyleId(int id);
 
-    void unapplyStyle(QTextBlock &block) const;
     void unapplyStyle(QTextCharFormat &format) const;
 
     /**
@@ -310,11 +309,6 @@ public:
      * style to the target char format.
      */
     void applyStyle(QTextCharFormat &format) const;
-    /**
-     * Apply this style to the textBlock by copying all properties from this
-     * style to the target block formats.
-     */
-    void applyStyle(QTextBlock &block) const;
     /**
      * Reset any styles and apply this style on the whole selection.
      */

@@ -33,9 +33,7 @@
  */
 class ChangeFollower : public QObject
 {
-
     Q_OBJECT
-
 public:
     /**
      * Create a new ChangeFollower that can update the document with
@@ -59,9 +57,10 @@ public:
      * text that has one of the changed styles and on those portions of the text
      * the style will be (re)applied.
      * @param changedStyles a list of styleIds. from KoParagraphStyle::styleId
-     *      and KoCharacterStyle::styleId
+     *      and KoCharacterStyle::styleId followed with a set of keys set on
+     *      format due to applying of style (and parents)
      */
-    void processUpdates(const QList<int> &changedStyles);
+    void processUpdates(const QMap<int, QList<int> > &changedStyles);
     /// return the document this follower is following.
     const QTextDocument *document() const {
         return m_document;

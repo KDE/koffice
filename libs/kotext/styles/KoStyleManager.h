@@ -42,6 +42,7 @@ class KoXmlWriter;
 class ChangeFollower;
 class KoGenStyles;
 class KoTextShapeData;
+class KoStyleManagerPrivate;
 
 /**
  * Manages all character, paragraph, table and table cell styles for any number
@@ -336,6 +337,9 @@ public:
     /// return all the sectionStyles registered.
     QList<KoSectionStyle*> sectionStyles() const;
 
+    /// \internal
+    KoStyleManagerPrivate *priv();
+
 signals:
     void styleAdded(KoParagraphStyle*);
     void styleAdded(KoCharacterStyle*);
@@ -410,12 +414,8 @@ public slots:
      */
     void alteredStyle(const KoSectionStyle *style);
 
-private slots:
-    void updateAlteredStyles(); // for the QTimer::singleshot
-
 private:
     friend class ChangeFollower;
-    void requestFireUpdate();
     void remove(ChangeFollower *cf);
 
     friend class KoTextSharedLoadingData;
@@ -425,8 +425,9 @@ private:
     KoListStyle *listStyle(int id, bool *automatic) const;
 
 private:
-    class Private;
-    Private* const d;
+    KoStyleManagerPrivate *d;
+
+    Q_PRIVATE_SLOT(d, void updateAlteredStyles())
 };
 
 Q_DECLARE_METATYPE(KoStyleManager*)

@@ -1,5 +1,5 @@
 /* This file is part of the KOffice project
- * Copyright (C) 2006 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Girish Ramakrishnan <girish@forwardbias.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -35,6 +35,7 @@ private slots: // tests
     void testApplyParagraphStyleWithParent();
     void testCopyParagraphStyle();
     void testUnapplyStyle();
+    void testChangeManagedStyle();
 };
 
 #endif

@@ -1,5 +1,5 @@
 /* This file is part of the KOffice project
- * Copyright (C) 2006-2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Girish Ramakrishnan <girish@forwardbias.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,6 +20,9 @@
 #include "TestStyles.h"
 
 #include <styles/KoParagraphStyle.h>
+#include <styles/KoStyleManager.h>
+#include <styles/KoStyleManager_p.h>
+#include <styles/KoCharacterStyle.h>
 #include <KDebug>
 #include <QTextDocument>
 #include <QTextBlock>
@@ -279,6 +282,46 @@ void TestStyles::testUnapplyStyle()
     QCOMPARE(cf.hasProperty(QTextFormat::FontOverline), false);
     QCOMPARE(cf.hasProperty(QTextFormat::FontWeight), false);
     QCOMPARE(cf.hasProperty(QTextFormat::FontItalic), false);
+}
+
+void TestStyles::testChangeManagedStyle()
+{
+    KoStyleManager manager;
+    KoParagraphStyle *p1 = new KoParagraphStyle(&manager);
+    p1->setName("Headers");
+
+    KoParagraphStyle *p2 = new KoParagraphStyle(&manager);
+    p2->setName("Head1");
+    p2->setParentStyle(p1);
+    KoCharacterStyle *charStyle = p1->characterStyle();
+    charStyle->setForeground(QBrush(Qt::red));
+
+    manager.add(p2);
+
+    QVERIFY(manager.paragraphStyles().contains(p1));
+    QVERIFY(manager.paragraphStyles().contains(p2));
+
+    // register a qtextdocument and insert a parag following the second style.
+    QTextDocument myDoc;
+    manager.add(&myDoc);
+    QTextCursor cursor(&myDoc);
+    cursor.insertText("some text\n");
+    QTextBlock block = myDoc.begin();
+    p2->applyStyle(block);
+
+    cursor.setPosition(6);
+    QTextCharFormat fmt = cursor.charFormat();
+    QVERIFY(fmt.hasProperty(QTextFormat::ForegroundBrush));
+
+    // remove a property (like font color) on the parent style and call alteredStyle()
+    // on the manager. Then check if the property has been removed on the doc.
+    charStyle->clearForeground();
+    manager.alteredStyle(charStyle);
+    manager.priv()->updateAlteredStyles();
+
+    fmt = cursor.charFormat();
+
+    QVERIFY(! fmt.hasProperty(QTextFormat::ForegroundBrush));
 }
 
 QTEST_KDEMAIN(TestStyles, GUI)

@@ -220,21 +220,11 @@ void KoCharacterStyle::applyStyle(QTextCharFormat &format) const
     QMap<int, QVariant>::const_iterator it = props.begin();
     while (it != props.end()) {
         if (!it.value().isNull()) {
+            // kDebug() << "[" + name() + "]" << it.key() << it.value();
             format.setProperty(it.key(), it.value());
         }
         ++it;
     }
-}
-
-void KoCharacterStyle::applyStyle(QTextBlock &block) const
-{
-    QTextCursor cursor(block);
-    QTextCharFormat cf;
-    cursor.setPosition(block.position() + block.length() - 1, QTextCursor::KeepAnchor);
-    applyStyle(cf);
-    cursor.mergeCharFormat(cf);
-    cursor.mergeBlockCharFormat(cf);
-    d->ensureMinimalProperties(cursor, true);
 }
 
 void KoCharacterStyle::applyStyle(QTextCursor *selection) const
@@ -255,7 +245,6 @@ void KoCharacterStyle::unapplyStyle(QTextCharFormat &format) const
         }
         ++it;
     }
-
     props = d->hardCodedDefaultStyle.properties();
     it = props.constBegin();
     while (it != props.constEnd()) {
@@ -264,28 +253,6 @@ void KoCharacterStyle::unapplyStyle(QTextCharFormat &format) const
         }
         ++it;
     }
-}
-
-void KoCharacterStyle::unapplyStyle(QTextBlock &block) const
-{
-    QTextCursor cursor(block);
-    QTextCharFormat cf = cursor.blockCharFormat();
-    unapplyStyle(cf);
-    cursor.setBlockCharFormat(cf);
-
-    if (block.length() == 1) // only the linefeed
-        return;
-    QTextBlock::iterator iter = block.end();
-    do {
-        iter--;
-        QTextFragment fragment = iter.fragment();
-        cursor.setPosition(fragment.position() + 1);
-        cf = cursor.charFormat();
-        unapplyStyle(cf);
-        cursor.setPosition(fragment.position());
-        cursor.setPosition(fragment.position() + fragment.length(), QTextCursor::KeepAnchor);
-        cursor.setCharFormat(cf);
-    } while (iter != block.begin());
 }
 
 // OASIS 14.2.29

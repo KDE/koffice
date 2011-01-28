@@ -634,12 +634,7 @@ void KWDLoader::fill(KWTextFrameSet *fs, const KoXmlElement &framesetElem)
 
             // re-apply char format after we added the text
             KoCharacterStyle *style = styleManager->characterStyle(
-                                          cursor.blockCharFormat().intProperty(KoCharacterStyle::StyleId));
-            if (style) {
-                QTextBlock block = cursor.block();
-                style->applyStyle(block);
-            }
-
+                    cursor.blockCharFormat().intProperty(KoCharacterStyle::StyleId));
             KoXmlElement formats = paragraph.namedItem("FORMATS").toElement();
             if (!formats.isNull()) {
                 KoCharacterStyle defaultStyle;
