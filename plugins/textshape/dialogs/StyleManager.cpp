@@ -222,8 +222,8 @@ void StyleManager::save()
                 KoCharacterStyle *clone = m_shadowStyleManager->characterStyle(cloneMapper.value(styleId));
                 Q_ASSERT(clone);
                 origc->copyProperties(clone);
-                m_styleManager->alteredStyle(origc);
                 origc->setStyleId(styleId);
+                m_styleManager->alteredStyle(origc);
             }
         }
     }

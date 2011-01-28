@@ -117,7 +117,7 @@ void StylesWidget::setCurrentFormat(const QTextBlockFormat &format)
                 type = type.arg(property, 4, 16);
                 if (property >= QTextFormat::UserProperty)
                     type += QString(" User+%2").arg(property - QTextFormat::UserProperty);
-                kDebug() << type;
+                kDebug() << "parag--" << type;
 #endif
                 unchanged = false;
                 break;
@@ -164,7 +164,7 @@ void StylesWidget::setCurrentFormat(const QTextCharFormat &format)
                 type = type.arg(property, 4, 16);
                 if (property >= QTextFormat::UserProperty)
                     type += QString(" User+%2").arg(property - QTextFormat::UserProperty);
-                kDebug() << type;
+                kDebug() << "char--" << type;
 #endif
                 unchanged = false;
                 break;
