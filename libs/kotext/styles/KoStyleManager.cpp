@@ -144,17 +144,13 @@ KoStyleManager::~KoStyleManager()
     delete d;
 }
 
-void KoStyleManager::saveOdfDefaultStyles(KoGenStyles &mainStyles)
-{
-    KoGenStyle style(KoGenStyle::ParagraphStyle, "paragraph");
-    style.setDefaultStyle(true);
-    d->defaultParagraphStyle->saveOdf(style, mainStyles);
-    mainStyles.insert(style);
-}
-
 void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
 {
-    saveOdfDefaultStyles(mainStyles);
+    // saveOdfDefaultStyles
+    KoGenStyle defStyle(KoGenStyle::ParagraphStyle, "paragraph");
+    defStyle.setDefaultStyle(true);
+    d->defaultParagraphStyle->saveOdf(defStyle, mainStyles);
+    mainStyles.insert(defStyle);
 
     // don't save character styles that are already saved as part of a paragraph style
     QSet<KoCharacterStyle*> characterParagraphStyles;

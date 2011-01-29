@@ -68,12 +68,7 @@ public:
     /**
      * Save document styles
      */
-    void saveOdf(KoGenStyles& mainStyles);
-
-    /**
-     * Save the default-style styles
-     */
-    void saveOdfDefaultStyles(KoGenStyles &mainStyles);
+    void saveOdf(KoGenStyles &mainStyles);
 
     /**
      * Add a new style, automatically giving it a new styleId.
