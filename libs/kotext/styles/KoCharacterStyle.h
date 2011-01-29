@@ -33,7 +33,6 @@
 
 
 class StylePrivate;
-class QTextBlock;
 class KoStyleStack;
 class KoShapeLoadingContext;
 class KoGenStyle;

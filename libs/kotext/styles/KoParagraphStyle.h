@@ -487,7 +487,7 @@ public:
     /// copy all the properties from the other style to this style, effectively duplicating it.
     void copyProperties(const KoParagraphStyle *style);
 
-    void unapplyStyle(QTextBlock &block) const;
+    void unapplyStyle(const QTextBlock &block) const;
 
     /**
      * Apply this style to a blockFormat by copying all properties from this, and parent
@@ -500,7 +500,7 @@ public:
      * Apply this style to the textBlock by copying all properties from this, parent and
      * the character style (where relevant) to the target block formats.
      */
-    void applyStyle(QTextBlock &block, bool applyListStyle = true) const;
+    void applyStyle(const QTextBlock &block, bool applyListStyle = true) const;
 
     /// return the character style for this paragraph style
     KoCharacterStyle *characterStyle();

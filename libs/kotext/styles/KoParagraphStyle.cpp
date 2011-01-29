@@ -206,7 +206,7 @@ void KoParagraphStyle::applyStyle(QTextBlockFormat &format) const
     }
 }
 
-void KoParagraphStyle::applyStyle(QTextBlock &block, bool applyListStyle) const
+void KoParagraphStyle::applyStyle(const QTextBlock &block, bool applyListStyle) const
 {
     QTextCursor cursor(block);
     cursor.beginEditBlock();
@@ -255,7 +255,7 @@ void KoParagraphStyle::applyStyle(QTextBlock &block, bool applyListStyle) const
     cursor.endEditBlock();
 }
 
-void KoParagraphStyle::unapplyStyle(QTextBlock &block) const
+void KoParagraphStyle::unapplyStyle(const QTextBlock &block) const
 {
     QTextCursor cursor(block);
     cursor.beginEditBlock();
