@@ -800,15 +800,17 @@ void KoCharacterStyle::loadOdf(KoShapeLoadingContext &scontext)
             fontName = fontFace->attributeNS(KoXmlNS::svg, "font-family", "");
     }
     if (! fontName.isEmpty()) {
-    // Hmm, the remove "'" could break it's in the middle of the fontname...
+        // Hmm, the remove "'" could break it's in the middle of the fontname...
         fontName = fontName.remove('\'');
 
-    // 'Thorndale' is not known outside OpenOffice so we substitute it
-    // with 'Times New Roman' that looks nearly the same.
-        if (fontName == "Thorndale")
+        // 'Thorndale' is not known outside OpenOffice so we substitute it
+        // with 'Times New Roman' that looks nearly the same.
+        if (fontName == "Thorndale") {
             fontName = "Times New Roman";
-
-        fontName.remove(QRegExp("\\sCE$")); // Arial CE -> Arial
+        } else if (fontName.length() > 3 && fontName.endsWith("CE")
+                && fontName[fontName.length() - 3].isSpace()) {
+            fontName.chop(3);
+        }
         setFontFamily(fontName);
     }
 }
