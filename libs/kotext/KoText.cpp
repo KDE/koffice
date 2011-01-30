@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C)  2006 Thomas Zander <zander@kde.org>
+ * Copyright (C)  2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C)  2008 Girish Ramakrishnan <girish@forwardbias.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -18,8 +18,26 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoText.h"
+#include "styles/KoStyleManager.h"
+#include "styles/KoStyleManager.h"
+#include "changetracker/KoChangeTracker.h"
+#include "KoTextShapeData.h"
+#include "KoTextDocumentLayout.h"
+#include "KoInlineTextObjectManager.h"
+
+#include <KoStore.h>
+#include <KoOdfReadStore.h>
+#include <KoOdfReadStore.h>
+#include <KoXmlReader.h>
+#include <KoXmlNS.h>
+#include <KoShapeLoadingContext.h>
+#include <KoTextSharedLoadingData.h>
+#include <KoOdfLoadingContext.h>
+
+#include <QTextDocument>
 
 #include <klocale.h>
+#include <kdebug.h>
 
 using namespace KoText;
 
@@ -138,4 +156,46 @@ KoText::Direction KoText::directionFromString(const QString &writingMode)
     if (writingMode == "page")
         return KoText::InheritDirection;
     return KoText::AutoDirection;
+}
+
+QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *document)
+{
+    KoStore *readStore = KoStore::createStore(filename, KoStore::Read, "", KoStore::Zip);
+    KoOdfReadStore odfReadStore(readStore);
+    QString error;
+    if (!odfReadStore.loadAndParse(error)) {
+        kWarning(32500) << "Parsing error : " << error;
+        return 0;
+    }
+
+    KoXmlElement content = odfReadStore.contentDoc().documentElement();
+    KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
+    KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, "text");
+
+    KoStyleManager *styleManager = new KoStyleManager;
+    KoChangeTracker *changeTracker = new KoChangeTracker;
+
+    KoOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store());
+    KoShapeLoadingContext shapeLoadingContext(odfLoadingContext, 0);
+    KoTextSharedLoadingData *textSharedLoadingData = new KoTextSharedLoadingData;
+    textSharedLoadingData->loadOdfStyles(shapeLoadingContext, styleManager);
+    shapeLoadingContext.addSharedData(KOTEXT_SHARED_LOADING_ID, textSharedLoadingData);
+
+    KoTextShapeData *textShapeData = new KoTextShapeData;
+    if (document == 0)
+        document = new QTextDocument;
+    textShapeData->setDocument(document, false /* ownership */);
+    KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
+    layout->setInlineTextObjectManager(new KoInlineTextObjectManager(layout)); // required while saving
+    KoTextDocument(document).setStyleManager(styleManager);
+    textShapeData->document()->setDocumentLayout(layout);
+    KoTextDocument(document).setChangeTracker(changeTracker);
+
+    if (!textShapeData->loadOdf(body, shapeLoadingContext)) {
+        qDebug() << "KoTextShapeData failed to load ODT";
+    }
+
+    delete readStore;
+    delete textShapeData;
+    return document;
 }

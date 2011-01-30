@@ -1019,43 +1019,7 @@ QTextDocument *TestLoading::documentFromOdt(const QString &odt)
         qFatal("%s does not exist", qPrintable(odt));
         return 0;
     }
-
-    KoStore *readStore = KoStore::createStore(odt, KoStore::Read, "", KoStore::Zip);
-    KoOdfReadStore odfReadStore(readStore);
-    QString error;
-    if (!odfReadStore.loadAndParse(error)) {
-        qDebug() << "Parsing error : " << error;
-    }
-
-    KoXmlElement content = odfReadStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
-    KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, "text");
-
-    KoStyleManager *styleManager = new KoStyleManager;
-    KoChangeTracker *changeTracker = new KoChangeTracker;
-
-    KoOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store(), *componentData);
-    KoShapeLoadingContext shapeLoadingContext(odfLoadingContext, 0);
-    KoTextSharedLoadingData *textSharedLoadingData = new KoTextSharedLoadingData;
-    textSharedLoadingData->loadOdfStyles(shapeLoadingContext, styleManager);
-    shapeLoadingContext.addSharedData(KOTEXT_SHARED_LOADING_ID, textSharedLoadingData);
-
-    KoTextShapeData *textShapeData = new KoTextShapeData;
-    QTextDocument *document = new QTextDocument;
-    textShapeData->setDocument(document, false /* ownership */);
-    KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
-    layout->setInlineTextObjectManager(new KoInlineTextObjectManager(layout)); // required while saving
-    KoTextDocument(document).setStyleManager(styleManager);
-    textShapeData->document()->setDocumentLayout(layout);
-    KoTextDocument(document).setChangeTracker(changeTracker);
-
-    if (!textShapeData->loadOdf(body, shapeLoadingContext)) {
-        qDebug() << "KoTextShapeData failed to load ODT";
-    }
-
-    delete readStore;
-    delete textShapeData;
-    return document;
+    return KoText::loadOpenDocument(odt);
 }
 
 QString TestLoading::documentToOdt(QTextDocument *document)
