@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2004-2006 David Faure <faure@kde.org>
- * Copyright (C) 2007, 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007, 2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2007 Sebastian Sauer <mail@dipe.org>
  * Copyright (C) 2007 Pierre Ducroquet <pinaraf@gmail.com>
  * Copyright (C) 2007-2008 Thorsten Zachmann <zachmann@kde.org>
@@ -110,12 +110,23 @@ KoTextSharedLoadingData::~KoTextSharedLoadingData()
 
 void KoTextSharedLoadingData::addDefaultParagraphStyle(KoShapeLoadingContext &context, const KoXmlElement *styleElem, const KoXmlElement *appDefault, KoStyleManager *styleManager)
 {
+    // first fill with defaultstyles.xml
+    const KoXmlElement *appDef = context.odfLoadingContext().defaultStylesReader().defaultStyle("paragraph");
+    if (appDef) {
+        KoCharacterStyle *style = styleManager->defaultParagraphStyle()->characterStyle();
+        KoStyleStack defaultStyleStack;
+        defaultStyleStack.push(*appDef);
+        defaultStyleStack.setTypeProperties("text");
+        style->loadOdfProperties(defaultStyleStack);
+    }
+
     if (styleManager && styleElem) {
         styleManager->defaultParagraphStyle()->loadOdf(styleElem, context);
     }
     else if (styleManager && appDefault) {
         styleManager->defaultParagraphStyle()->loadOdf(appDefault, context);
     }
+
 }
 
 void KoTextSharedLoadingData::loadOdfStyles(KoShapeLoadingContext &shapeContext, KoStyleManager *styleManager)
@@ -132,6 +143,7 @@ void KoTextSharedLoadingData::loadOdfStyles(KoShapeLoadingContext &shapeContext,
     addListStyles(shapeContext, context.stylesReader().customStyles("list").values(), ContentDotXml | StylesDotXml, styleManager);
 
     addDefaultParagraphStyle(shapeContext, context.stylesReader().defaultStyle("paragraph"), context.defaultStylesReader().defaultStyle("paragraph"), styleManager);
+
     // adding all the styles in order of dependency; automatic styles can have a parent in the named styles, so load the named styles first.
 
     // add office:styles from styles.xml to paragraphContentDotXmlStyles, paragraphStylesDotXmlStyles and styleManager

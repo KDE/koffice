@@ -128,8 +128,11 @@ KoStyleManager::KoStyleManager(QObject *parent)
     d->defaultParagraphStyle = new KoParagraphStyle(this);
     d->defaultParagraphStyle->setName("[No Paragraph Style]");
     add(d->defaultParagraphStyle);
+    KoCharacterStyle *charStyle = d->defaultParagraphStyle->characterStyle();
+    charStyle->setFontPointSize(12); // hardcoded defaults. use defaultstyles.xml to overide
+    charStyle->setFontFamily(QLatin1String("Sans Serif"));
+    charStyle->setForeground(QBrush(Qt::black));
 
-    //TODO: also use the defaultstyles.xml mechanism. see KoOdfLoadingContext and KoTextSharedLoadingData
     d->defaultListStyle = new KoListStyle(this);
     KoListLevelProperties llp;
     llp.setLevel(1);

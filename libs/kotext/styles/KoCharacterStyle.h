@@ -319,6 +319,12 @@ public:
      */
     void loadOdf(KoShapeLoadingContext &context);
 
+    /**
+    * Load the style from the \a KoStyleStack style stack using the
+    * OpenDocument format.
+    */
+    void loadOdfProperties(KoStyleStack &styleStack);
+
     /// return true if this style has a non-default value set for the Property
     bool hasProperty(int key) const;
 
@@ -356,16 +362,11 @@ public:
      * no font etc. set are not something you should want.
      */
     void removeHardCodedDefaults();
+
 signals:
     void nameChanged(const QString &newName);
 
 private:
-    /**
-    * Load the style from the \a KoStyleStack style stack using the
-    * OpenDocument format.
-    */
-    void loadOdfProperties(KoStyleStack &styleStack);
-
     class Private;
     Private * const d;
 };
