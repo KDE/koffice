@@ -1024,7 +1024,7 @@ void KoParagraphStyle::loadOdf(const KoXmlElement *element, KoShapeLoadingContex
     context.styleStack().save();
     // Load all parents - only because we don't support inheritance.
     QString family = element->attributeNS(KoXmlNS::style, "family", "paragraph");
-    context.addStyles(element, family.toLocal8Bit().constData());   // Load all parents - only because we don't support inheritance.
+    context.styleStack().push(*element);
 
     QString masterPage = element->attributeNS(KoXmlNS::style, "master-page-name", QString());
     if (! masterPage.isEmpty()) {

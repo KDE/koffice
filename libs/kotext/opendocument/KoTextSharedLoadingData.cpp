@@ -299,12 +299,10 @@ QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharac
         if (displayName.isEmpty()) {
             displayName = name;
         }
-        QString parent = styleElem->attributeNS(KoXmlNS::style, "parent-style-name");
-
         kDebug(32500) << "styleName =" << name << "styleDisplayName =" << displayName;
 
         context.styleStack().save();
-        context.addStyles(styleElem, "text");   // Load all parents - only because we don't support inheritance.
+        context.styleStack().push(*styleElem);
 
         context.styleStack().setTypeProperties("text");
 
@@ -315,7 +313,7 @@ QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharac
 
         OdfCharStyle answer;
         answer.odfName = name;
-        answer.parentStyle = parent;
+        answer.parentStyle = styleElem->attributeNS(KoXmlNS::style, "parent-style-name");
         answer.style = characterStyle;
         characterStyles.append(answer);
     }

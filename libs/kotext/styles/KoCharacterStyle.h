@@ -355,14 +355,6 @@ public:
      */
     QVariant value(int key) const;
 
-    /**
-     * Remove the hardcoded defaults from this style (SansSerif, 12 points, black).
-     * @internal - this method is a bit of an ugly workaround to make it easier to
-     * use KoTextLoader for loading richtext in kspread, normally styles with
-     * no font etc. set are not something you should want.
-     */
-    void removeHardCodedDefaults();
-
 signals:
     void nameChanged(const QString &newName);
 

@@ -481,8 +481,6 @@ QDomElement Map::save(QDomDocument& doc)
 
 static void fixupStyle(KoCharacterStyle* style)
 {
-    style->removeHardCodedDefaults();
-
     QTextCharFormat format;
     style->applyStyle(format);
     switch (style->underlineStyle()) {

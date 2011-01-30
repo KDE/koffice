@@ -78,37 +78,12 @@ public:
         return variant.value<QColor>();
     }
 
-    //This should be called after all charFormat properties are merged to the cursor.
-    void ensureMinimalProperties(QTextCursor &cursor, bool blockCharFormatAlso);
-
-    StylePrivate hardCodedDefaultStyle;
-
     QString name;
     StylePrivate stylesPrivate;
 };
 
 KoCharacterStyle::Private::Private()
 {
-    //set the minimal default properties
-    hardCodedDefaultStyle.add(QTextFormat::FontFamily, QString("Sans Serif"));
-    hardCodedDefaultStyle.add(QTextFormat::FontPointSize, 12.0);
-    hardCodedDefaultStyle.add(QTextFormat::ForegroundBrush, QBrush(Qt::black));
-}
-
-void KoCharacterStyle::Private::ensureMinimalProperties(QTextCursor &cursor, bool blockCharFormatAlso)
-{
-    QTextCharFormat format = cursor.charFormat();
-    QMap<int, QVariant> props = hardCodedDefaultStyle.properties();
-    QMap<int, QVariant>::const_iterator it = props.constBegin();
-    while (it != props.constEnd()) {
-        if (!it.value().isNull() && !format.hasProperty(it.key())) {
-            format.setProperty(it.key(), it.value());
-        }
-        ++it;
-    }
-    cursor.mergeCharFormat(format);
-    if (blockCharFormatAlso)
-        cursor.mergeBlockCharFormat(format);
 }
 
 KoCharacterStyle::KoCharacterStyle(QObject *parent)
@@ -201,7 +176,6 @@ void KoCharacterStyle::applyStyle(QTextCursor *selection) const
     QTextCharFormat cf;
     applyStyle(cf);
     selection->mergeCharFormat(cf);
-    d->ensureMinimalProperties(*selection, false);
 }
 
 void KoCharacterStyle::unapplyStyle(QTextCharFormat &format) const
@@ -211,14 +185,6 @@ void KoCharacterStyle::unapplyStyle(QTextCharFormat &format) const
     while (it != props.constEnd()) {
         if (!it.value().isNull() && it.value() == format.property(it.key())) {
            format.clearProperty(it.key());
-        }
-        ++it;
-    }
-    props = d->hardCodedDefaultStyle.properties();
-    it = props.constBegin();
-    while (it != props.constEnd()) {
-        if (!it.value().isNull() && !format.hasProperty(it.key())) {
-            format.setProperty(it.key(), it.value());
         }
         ++it;
     }
@@ -840,10 +806,12 @@ void KoCharacterStyle::loadOdfProperties(KoStyleStack &styleStack)
 
         // 'Thorndale' is not known outside OpenOffice so we substitute it
         // with 'Times New Roman' that looks nearly the same.
-        if (fontName == "Thorndale")
+        if (fontName == "Thorndale") {
             fontName = "Times New Roman";
-
-        fontName.remove(QRegExp("\\sCE$")); // Arial CE -> Arial
+        } else if (fontName.length() > 3 && fontName.endsWith("CE")
+                && fontName[fontName.length() - 3].isSpace()) {
+            fontName.chop(3);
+        }
         setFontFamily(fontName);
     }
 
@@ -1304,11 +1272,6 @@ void KoCharacterStyle::saveOdf(KoGenStyle &style)
 QVariant KoCharacterStyle::value(int key) const
 {
     return d->stylesPrivate.value(key);
-}
-
-void KoCharacterStyle::removeHardCodedDefaults()
-{
-    d->hardCodedDefaultStyle.clearAll();
 }
 
 #include <KoCharacterStyle.moc>
