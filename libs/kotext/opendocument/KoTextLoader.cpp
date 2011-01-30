@@ -412,29 +412,32 @@ void KoTextLoader::loadDeleteChangeOutsidePorH(QString id, QTextCursor &cursor)
 
 void KoTextLoader::loadParagraph(const KoXmlElement &element, QTextCursor &cursor)
 {
-    // TODO use the default style name a default value?
     const QString styleName = element.attributeNS(KoXmlNS::text, "style-name",
                                                   QString());
 
     KoParagraphStyle *paragraphStyle = d->textSharedData->paragraphStyle(styleName, d->stylesDotXml);
 
     Q_ASSERT(d->styleManager);
-    if (!paragraphStyle) {
-        // Either the paragraph has no style or the style-name could not be found.
-        // Fix up the paragraphStyle to be our default paragraph style in either case.
-        if (!styleName.isEmpty())
-            kWarning(32500) << "paragraph style " << styleName << "not found - using default style";
-        paragraphStyle = d->styleManager->defaultParagraphStyle();
-    }
-
     QTextCharFormat cf = cursor.charFormat(); // store the current cursor char format
-    if (paragraphStyle && (cursor.position() == cursor.block().position())) {
+    if (cursor.position() == cursor.block().position()) {
         QTextBlock block = cursor.block();
-        // Apply list style when loading a list but we don't have a list style
-        paragraphStyle->applyStyle(block, d->currentList && !d->currentListStyle);
+        if (!paragraphStyle) {
+            // Either the paragraph has no style or the style-name could not be found.
+            if (!styleName.isEmpty())
+                kWarning(32500) << "paragraph style " << styleName << "not found - using default style";
+            // all parags should always have the default applied.
+            d->styleManager->defaultParagraphStyle()->applyStyle(block);
+        } else {
+            Q_ASSERT(paragraphStyle->parentStyle()); // should be the default parag style.
+            // Apply list style when loading a list but we don't have a list style
+            paragraphStyle->applyStyle(block, d->currentList && !d->currentListStyle);
+        }
+/*
         // Clear the outline level property. If a default-outline-level was set, it should not
         // be applied when loading a document, only on user action.
+could be true; but the following code has no effect... (TZander)
         block.blockFormat().clearProperty(KoParagraphStyle::OutlineLevel);
+*/
     }
 
     // Some paragraph have id's defined which we need to store so that we can eg

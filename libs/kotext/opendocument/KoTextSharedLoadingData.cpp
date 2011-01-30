@@ -61,7 +61,6 @@ public:
         qDeleteAll(tableColumnStylesToDelete);
         qDeleteAll(tableRowStylesToDelete);
         qDeleteAll(sectionStylesToDelete);
-        delete applicationDefaultStyle;
     }
 
     // It is possible that automatic-styles in content.xml and styles.xml have the same name
@@ -95,7 +94,7 @@ public:
     QList<KoSectionStyle *> sectionStylesToDelete;
     QHash<QString, KoParagraphStyle*> namedParagraphStyles;
 
-    KoCharacterStyle *applicationDefaultStyle;
+    KoParagraphStyle *applicationDefaultStyle;
 };
 
 KoTextSharedLoadingData::KoTextSharedLoadingData()
@@ -126,7 +125,8 @@ void KoTextSharedLoadingData::addDefaultParagraphStyle(KoShapeLoadingContext &co
     else if (styleManager && appDefault) {
         styleManager->defaultParagraphStyle()->loadOdf(appDefault, context);
     }
-
+    if (styleManager)
+        d->applicationDefaultStyle = styleManager->defaultParagraphStyle();
 }
 
 void KoTextSharedLoadingData::loadOdfStyles(KoShapeLoadingContext &shapeContext, KoStyleManager *styleManager)
@@ -187,11 +187,17 @@ void KoTextSharedLoadingData::addParagraphStyles(KoShapeLoadingContext &context,
 
     QList<QPair<QString, KoParagraphStyle *> >::iterator it(paragraphStyles.begin());
     for (; it != paragraphStyles.end(); ++it) {
+        KoParagraphStyle *style = it->second;
+        Q_ASSERT(style);
+        if (d->applicationDefaultStyle && style->parentStyle() == 0) {
+            Q_ASSERT(d->applicationDefaultStyle != style);
+            style->setParentStyle(d->applicationDefaultStyle);
+        }
         if (styleTypes & ContentDotXml) {
-            d->paragraphContentDotXmlStyles.insert(it->first, it->second);
+            d->paragraphContentDotXmlStyles.insert(it->first, style);
         }
         if (styleTypes & StylesDotXml) {
-            d->paragraphStylesDotXmlStyles.insert(it->first, it->second);
+            d->paragraphStylesDotXmlStyles.insert(it->first, style);
         }
     }
 }
@@ -609,16 +615,6 @@ KoTableCellStyle *KoTextSharedLoadingData::tableCellStyle(const QString &name, b
 KoSectionStyle *KoTextSharedLoadingData::sectionStyle(const QString &name, bool stylesDotXml) const
 {
     return stylesDotXml ? d->sectionStylesDotXmlStyles.value(name) : d->sectionContentDotXmlStyles.value(name);
-}
-
-void KoTextSharedLoadingData::setApplicationDefaultStyle(KoCharacterStyle *applicationDefaultStyle)
-{
-    d->applicationDefaultStyle = applicationDefaultStyle;
-}
-
-KoCharacterStyle *KoTextSharedLoadingData::applicationDefaultStyle() const
-{
-    return d->applicationDefaultStyle;
 }
 
 void KoTextSharedLoadingData::shapeInserted(KoShape *shape, const KoXmlElement &element, KoShapeLoadingContext &/*context*/)
