@@ -2217,6 +2217,9 @@ void TextTool::debugTextStyles()
         seenStyles << style->styleId();
         if (cs) {
             kDebug(32500) << "  +- CharStyle: " << cs->styleId() << cs->name();
+        if (cs->hasProperty(QTextFormat::ForegroundBrush))
+            kDebug(32500) << "  |  " << cs->foreground();
+        if (cs->hasProperty(QTextFormat::FontPointSize))
             kDebug(32500) << "  |  " << cs->font();
             seenStyles << cs->styleId();
         } else {
