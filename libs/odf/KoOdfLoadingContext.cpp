@@ -111,8 +111,8 @@ void KoOdfLoadingContext::addStyles(const KoXmlElement* style, const QString &fa
     if (!style) return;
 
     // this recursive function is necessary as parent styles can have parents themselves
-    if (style->hasAttributeNS(KoXmlNS::style, "parent-style-name")) {
-        const QString parentStyleName = style->attributeNS(KoXmlNS::style, "parent-style-name", QString());
+    const QString parentStyleName = style->attributeNS(KoXmlNS::style, "parent-style-name", QString());
+    if (!parentStyleName.isEmpty()) {
         const KoXmlElement* parentStyle = d->stylesReader.findStyle(parentStyleName, family, usingStylesAutoStyles);
 
         if (parentStyle)
