@@ -161,6 +161,8 @@ void StyleManager::setParagraphStyle(KoParagraphStyle *style, bool canDelete)
     widget.paragraphStylePage->setStyle(style);
     widget.stackedWidget->setCurrentWidget(widget.paragraphStylePage);
     widget.styleTypeContainer->setVisible(true);
+    if (m_shadowParagraphStyles.value(style) == m_styleManager->defaultParagraphStyle()->styleId())
+        canDelete = false;
     widget.bDelete->setEnabled(canDelete);
 }
 
