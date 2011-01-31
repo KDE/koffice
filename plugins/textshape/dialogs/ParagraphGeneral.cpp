@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -30,7 +30,9 @@ ParagraphGeneral::ParagraphGeneral(QWidget *parent)
         : QWidget(parent),
         m_blockSignals(false),
         m_nameHidden(false),
-        m_style(0)
+        m_style(0),
+        m_defaultParagraphStyle(0),
+        m_defaultParagraphStyle2(0)
 {
     widget.setupUi(this);
 
@@ -115,6 +117,8 @@ void ParagraphGeneral::setStyle(KoParagraphStyle *style, int level)
     widget.inheritStyle->addItem(i18nc("Inherit style", "None"));
     widget.inheritStyle->setCurrentIndex(0);
     foreach (KoParagraphStyle *s, m_paragraphStyles) {
+        if (s == m_defaultParagraphStyle || s == m_defaultParagraphStyle2)
+            continue;
         KoParagraphStyle *parent = s;
         bool ok = true;
         while (ok && parent) {
@@ -136,6 +140,12 @@ void ParagraphGeneral::setStyle(KoParagraphStyle *style, int level)
             break;
         }
     }
+    // disabled for default parag styles
+    const bool isADefaultStyle = style == m_defaultParagraphStyle
+            || style == m_defaultParagraphStyle2;
+    widget.nextStyle->setEnabled(!isADefaultStyle);
+    widget.inheritStyle->setEnabled(!isADefaultStyle);
+    widget.name->setEnabled(!isADefaultStyle);
 
     m_paragraphIndentSpacing->setDisplay(style);
     m_paragraphLayout->setDisplay(style);
@@ -149,8 +159,19 @@ void ParagraphGeneral::setParagraphStyles(const QList<KoParagraphStyle*> styles)
 {
     widget.nextStyle->clear();
     m_paragraphStyles = styles;
-    foreach(KoParagraphStyle *style, m_paragraphStyles)
+    if (styles.isEmpty()) {
+        m_defaultParagraphStyle = 0;
+    } else {
+        m_defaultParagraphStyle = styles.first();
+        while (m_defaultParagraphStyle->parentStyle())
+            m_defaultParagraphStyle = m_defaultParagraphStyle->parentStyle();
+    }
+
+    foreach (KoParagraphStyle *style, m_paragraphStyles) {
+        if (style == m_defaultParagraphStyle || style == m_defaultParagraphStyle2)
+            continue;
         widget.nextStyle->addItem(style->name(), style->styleId());
+    }
 }
 
 void ParagraphGeneral::setUnit(const KoUnit &unit)
@@ -193,6 +214,12 @@ void ParagraphGeneral::save(KoParagraphStyle *style)
 void ParagraphGeneral::switchToGeneralTab()
 {
     widget.tabs->setCurrentIndex(0);
+}
+
+void ParagraphGeneral::setDefaultParagraphStyle(KoParagraphStyle *style)
+{
+    m_defaultParagraphStyle2 = style;
+    setParagraphStyles(m_paragraphStyles);
 }
 
 #include <ParagraphGeneral.moc>

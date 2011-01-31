@@ -94,18 +94,22 @@ void StyleManager::setStyleManager(KoStyleManager *sm)
     seenCharStyles << defParag->characterStyle()->styleId();
 
     foreach (KoParagraphStyle *ps, m_styleManager->paragraphStyles()) {
-        if (ps == defParag)
-            continue;
         KoParagraphStyle *cloned = ps->clone();
         m_shadowParagraphStyles.insert(cloned, ps->styleId());
-        cloneMapper.insert(ps, cloned);
         m_shadowCharacterStyles.insert(cloned->characterStyle(), ps->characterStyle()->styleId());
         seenCharStyles << ps->characterStyle()->styleId();
+        if (ps == defParag) {
+            cloned->setName(i18n("Document defaults"));
+            widget.paragraphStylePage->setDefaultParagraphStyle(cloned);
+            continue;
+        }
+        cloneMapper.insert(ps, cloned);
     }
 
     // now; need to redirect the parents
     foreach (KoParagraphStyle *ps, m_shadowParagraphStyles.keys()) {
-        Q_ASSERT(ps->parentStyle());
+        if (ps->parentStyle() == 0)
+            continue; // the default style shows up twice in our copy so the user can edit it;
         Q_ASSERT(cloneMapper.value(ps->parentStyle()));
         ps->setParentStyle(cloneMapper.value(ps->parentStyle()));
     }
@@ -204,16 +208,22 @@ void StyleManager::save()
         if (orig) {
             KoParagraphStyle *clone = m_shadowStyleManager->paragraphStyle(cloneMapper.value(styleId));
             Q_ASSERT(clone);
-            KoCharacterStyle *oldCharStyle = orig->characterStyle();
+            KoCharacterStyle * const oldCharStyle = orig->characterStyle();
             orig->copyProperties(clone);
             orig->setStyleId(styleId);
             // correct 'next' and 'parent'
-            orig->setNextStyle(cloneMapper.value(orig->nextStyle()));
-            int parentId = m_shadowParagraphStyles.value(clone->parentStyle());
-            if (parentId == 0) // defaultStyle
-                orig->setParentStyle(m_styleManager->defaultParagraphStyle());
-            else
-                orig->setParentStyle(m_styleManager->paragraphStyle(parentId));
+            KoParagraphStyle *next = m_shadowStyleManager->paragraphStyle(clone->nextStyle());
+            Q_ASSERT(next);
+            orig->setNextStyle(m_shadowParagraphStyles.value(next));
+            if (orig == m_styleManager->defaultParagraphStyle()) {
+                orig->setParentStyle(0);
+            } else {
+                int parentId = m_shadowParagraphStyles.value(clone->parentStyle());
+                if (parentId == 0) // defaultStyle
+                    orig->setParentStyle(m_styleManager->defaultParagraphStyle());
+                else
+                    orig->setParentStyle(m_styleManager->paragraphStyle(parentId));
+            }
             orig->setCharacterStyle(oldCharStyle);
             m_styleManager->alteredStyle(orig);
         } else {

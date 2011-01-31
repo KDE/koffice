@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -40,6 +40,7 @@ public:
 
     void setStyle(KoParagraphStyle *style, int level = 0);
     void setParagraphStyles(const QList<KoParagraphStyle*> styles);
+    void setDefaultParagraphStyle(KoParagraphStyle *style);
     void setUnit(const KoUnit &unit);
 
     void switchToGeneralTab();
@@ -70,6 +71,8 @@ private:
 
     KoParagraphStyle *m_style;
     QList<KoParagraphStyle*> m_paragraphStyles;
+    KoParagraphStyle *m_defaultParagraphStyle;
+    KoParagraphStyle *m_defaultParagraphStyle2;
 };
 
 #endif
