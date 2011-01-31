@@ -39,6 +39,12 @@ public:
 
     void setUnit(const KoUnit &unit);
 
+    // use the widget without the style selector (and new/delete buttons)
+    void hideSelector();
+
+    /// handle opening a style from the passed in styleManager
+    void setParagraphStyle(KoParagraphStyle *style);
+
 public slots:
     void save();
 
@@ -49,7 +55,9 @@ private slots:
     void addCharacterStyle(KoCharacterStyle*);
     void removeParagraphStyle(KoParagraphStyle*);
     void removeCharacterStyle(KoCharacterStyle*);
+    /// handle opening a 'cloned' style
     void setParagraphStyle(KoParagraphStyle *style, bool canDelete);
+    /// handle opening a 'cloned' style
     void setCharacterStyle(KoCharacterStyle *style, bool canDelete);
     // switches between paragraph and character styles
     void switchStyle(bool on);

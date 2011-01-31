@@ -142,6 +142,23 @@ void StyleManager::setStyleManager(KoStyleManager *sm)
     widget.styles->setEmbedded(true);
 }
 
+// this method deals with a style in m_styleManager
+void StyleManager::setParagraphStyle(KoParagraphStyle *style)
+{
+    Q_ASSERT(style);
+    Q_ASSERT(style->styleId());
+    const int styleId = style->styleId();
+    QHash<KoParagraphStyle*, int>::ConstIterator iter;
+    iter = m_shadowParagraphStyles.constBegin();
+    while (iter != m_shadowParagraphStyles.constEnd()) {
+        if (styleId == iter.value()) {
+            setParagraphStyle(iter.key(), false);
+            break;
+        }
+        ++iter;
+    }
+}
+
 void StyleManager::setParagraphStyle(KoParagraphStyle *style, bool canDelete)
 {
     if (widget.charButton->isChecked()) { // show char style instead
@@ -327,6 +344,11 @@ void StyleManager::switchStyle(bool on)
     if (m_selectedParagStyle) {
         setParagraphStyle(m_selectedParagStyle, widget.bDelete->isEnabled());
     }
+}
+
+void StyleManager::hideSelector()
+{
+    widget.selectorPane->setVisible(false);
 }
 
 /* TODO

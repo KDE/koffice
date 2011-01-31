@@ -20,6 +20,7 @@
 #include "StylesModel.h"
 #include "ParagraphGeneral.h"
 #include "CharacterGeneral.h"
+#include "StyleManager.h"
 
 #include <KoStyleManager.h>
 #include <KoCharacterStyle.h>
@@ -236,29 +237,29 @@ void StylesWidget::editStyle()
 {
     QModelIndex index = widget.stylesView->currentIndex();
     Q_ASSERT(index.isValid());
+
+    QWidget *widget;
     KoParagraphStyle *paragraphStyle = m_stylesModel->paragraphStyleForIndex(index);
 
-    QWidget *widget = 0;
     if (paragraphStyle) {
-        ParagraphGeneral *p = new ParagraphGeneral;
-        p->setParagraphStyles(m_styleManager->paragraphStyles());
-        p->setStyle(paragraphStyle);
+        StyleManager *styleManager = new StyleManager();
+        styleManager->hideSelector();
+        styleManager->setStyleManager(m_styleManager);
         if (m_canvasBase)
-            p->setUnit(m_canvasBase->unit());
-        connect(p, SIGNAL(styleAltered(const KoParagraphStyle*)),
-                m_styleManager, SLOT(alteredStyle(const KoParagraphStyle*)));
-        widget = p;
+            styleManager->setUnit(m_canvasBase->unit());
+        styleManager->setParagraphStyle(paragraphStyle);
+        styleManager->layout()->setMargin(0);
+        widget = styleManager;
     } else {
         KoCharacterStyle *characterStyle = m_stylesModel->characterStyleForIndex(index);
-        if (characterStyle) {
-            CharacterGeneral *c = new CharacterGeneral;
-            c->setStyle(characterStyle);
-            if (m_canvasBase)
-                c->setUnit(m_canvasBase->unit());
-            connect(c, SIGNAL(styleAltered(const KoCharacterStyle*)),
-                    m_styleManager, SLOT(alteredStyle(const KoCharacterStyle*)));
-            widget = c;
-        }
+        Q_ASSERT(characterStyle);
+        CharacterGeneral *c = new CharacterGeneral;
+        c->setStyle(characterStyle);
+        if (m_canvasBase)
+            c->setUnit(m_canvasBase->unit());
+        connect(c, SIGNAL(styleAltered(const KoCharacterStyle*)),
+                m_styleManager, SLOT(alteredStyle(const KoCharacterStyle*)));
+        widget = c;
     }
 
     if (widget) {
