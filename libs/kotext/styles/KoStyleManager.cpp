@@ -278,8 +278,24 @@ void KoStyleManager::add(KoParagraphStyle *style)
         return;
     style->setParent(this);
     style->setStyleId(d->s_stylesNumber);
-    d->paragStyles.insert(d->s_stylesNumber, style);
-    d->refreshUnsetStoreFor(d->s_stylesNumber++);
+    d->paragStyles.insert(d->s_stylesNumber++, style);
+
+    // Make sure the style inherits from the defaultParagraphStyle
+    KoParagraphStyle *root = style;
+    while (root->parentStyle()) root = root->parentStyle();
+    if (root != d->defaultParagraphStyle && root->parentStyle() == 0)
+        root->setParentStyle(d->defaultParagraphStyle);
+
+    // add all parent styles too if not already present.
+    root = style;
+    while (root->parentStyle()) {
+        root = root->parentStyle();
+        if (root->styleId() == 0)
+            add(root);
+    }
+
+    d->refreshUnsetStoreFor(style->styleId());
+
     if (style->characterStyle()) {
         add(style->characterStyle());
         if (style->characterStyle()->name().isEmpty())
@@ -287,14 +303,6 @@ void KoStyleManager::add(KoParagraphStyle *style)
     }
     if (style->listStyle() && style->listStyle()->styleId() == 0)
         add(style->listStyle());
-    KoParagraphStyle *root = style;
-    while (root->parentStyle()) {
-        root = root->parentStyle();
-        if (root->styleId() == 0)
-            add(root);
-    }
-    if (root != d->defaultParagraphStyle && root->parentStyle() == 0)
-        root->setParentStyle(d->defaultParagraphStyle);
 
     emit styleAdded(style);
 }

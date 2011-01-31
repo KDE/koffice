@@ -164,7 +164,7 @@ void KoCharacterStyle::applyStyle(QTextCharFormat &format) const
     QMap<int, QVariant>::const_iterator it = props.begin();
     while (it != props.end()) {
         if (!it.value().isNull()) {
-            // kDebug() << "[" + name() + "]" << it.key() << it.value();
+            // kDebug() << "[" + name() + "]" << QString::number(it.key(), 3, 16) << it.value();
             format.setProperty(it.key(), it.value());
         }
         ++it;

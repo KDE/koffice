@@ -45,6 +45,9 @@ ChangeFollower::~ChangeFollower()
 
 void ChangeFollower::processUpdates(const QMap<int, QList<int> > &changedStyles)
 {
+#ifdef DEBUG_CHANGES
+    kDebug(32500) << "styles changed;" << changedStyles.keys();
+#endif
     KoStyleManager *sm = m_styleManager.data();
     if (!sm) {
         // since the stylemanager would be the one calling this method, I doubt this
