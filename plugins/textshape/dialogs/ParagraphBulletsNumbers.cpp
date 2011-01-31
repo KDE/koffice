@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2009-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007, 2009-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Girish Ramakrishnan <girish@forwardbias.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -31,6 +31,9 @@ ParagraphBulletsNumbers::ParagraphBulletsNumbers(QWidget *parent)
         : QWidget(parent)
 {
     widget.setupUi(this);
+    // make sure we don't take a lot of space for nothing.
+    widget.countersGroupbox->setVisible(false);
+    widget.customCharPane->setVisible(false);
 
     foreach(const Lists::ListStyleItem & item, Lists::genericListStyleItems())
         addStyle(item);
@@ -158,23 +161,21 @@ void ParagraphBulletsNumbers::styleChanged(int index)
     case KoListStyle::BoxItem:
     case KoListStyle::CustomCharItem:
     case KoListStyle::None:
-        widget.startValue->setCounterType(KoListStyle::DecimalItem);
-        widget.startValue->setValue(1);
-        widget.startValue->setEnabled(false);
+        widget.countersGroupbox->setVisible(false);
         break;
     case KoListStyle::AlphaLowerItem:
     case KoListStyle::UpperAlphaItem:
         showLetterSynchronization = true;
+        widget.countersGroupbox->setVisible(true);
         // fall through
     default:
-        widget.startValue->setEnabled(true);
         widget.startValue->setCounterType(style);
         int value = widget.startValue->value();
         widget.startValue->setValue(value + 1);
         widget.startValue->setValue(value); // surely to trigger a change event.
     }
 
-    widget.customCharacter->setEnabled(style == KoListStyle::CustomCharItem && index != m_blankCharIndex);
+    widget.customCharPane->setVisible(style == KoListStyle::CustomCharItem && index != m_blankCharIndex);
     widget.letterSynchronization->setVisible(showLetterSynchronization);
     widget.listPropertiesPane->setEnabled(style != KoListStyle::None);
     recalcPreview();
