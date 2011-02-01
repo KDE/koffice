@@ -172,8 +172,20 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
     KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
     KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, "text");
 
-    KoStyleManager *styleManager = new KoStyleManager;
-    KoChangeTracker *changeTracker = new KoChangeTracker;
+    if (document == 0)
+        document = new QTextDocument;
+
+    KoTextDocument doc(document);
+    KoStyleManager *styleManager = doc.styleManager();
+    if (styleManager == 0) {
+        styleManager = new KoStyleManager;
+        doc.setStyleManager(styleManager);
+    }
+    KoChangeTracker *changeTracker = doc.changeTracker();
+    if (changeTracker == 0) {
+        changeTracker = new KoChangeTracker;
+        doc.setChangeTracker(changeTracker);
+    }
 
     KoOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store());
     KoShapeLoadingContext shapeLoadingContext(odfLoadingContext, 0);
@@ -182,14 +194,13 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
     shapeLoadingContext.addSharedData(KOTEXT_SHARED_LOADING_ID, textSharedLoadingData);
 
     KoTextShapeData *textShapeData = new KoTextShapeData;
-    if (document == 0)
-        document = new QTextDocument;
     textShapeData->setDocument(document, false /* ownership */);
-    KoTextDocumentLayout *layout = new KoTextDocumentLayout(textShapeData->document());
-    layout->setInlineTextObjectManager(new KoInlineTextObjectManager(layout)); // required while saving
-    KoTextDocument(document).setStyleManager(styleManager);
+    KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
+    if (layout == 0)
+        layout = new KoTextDocumentLayout(document);
+    if (layout->inlineTextObjectManager() == 0)
+        layout->setInlineTextObjectManager(new KoInlineTextObjectManager(layout)); // required while saving
     textShapeData->document()->setDocumentLayout(layout);
-    KoTextDocument(document).setChangeTracker(changeTracker);
 
     if (!textShapeData->loadOdf(body, shapeLoadingContext)) {
         qDebug() << "KoTextShapeData failed to load ODT";
