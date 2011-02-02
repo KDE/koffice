@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2001 David Faure <faure@kde.org>
- * Copyright (C) 2005-2007, 2009, 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2005-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -54,36 +54,38 @@
 #include "commands/KWPageStylePropertiesCommand.h"
 
 // koffice libs includes
-#include <kofficeversion.h>
-#include <KoCopyController.h>
-#include <KoTextDocument.h>
-#include <KoTextShapeData.h>
-#include <KoShapeCreateCommand.h>
-#include <KoImageSelectionWidget.h>
-#include <KoResourceManager.h>
-#include <KoCutController.h>
-#include <KoStandardAction.h>
-#include <KoPasteController.h>
-#include <KoShape.h>
-#include <KoTextOnShapeContainer.h>
-#include <KoText.h>
-#include <KoFind.h>
-#include <KoShapeContainer.h>
-#include <KoShapeManager.h>
-#include <KoSelection.h>
-#include <KoShapeController.h>
-#include <KoZoomAction.h>
-#include <KoToolManager.h>
-#include <KoMainWindow.h>
-#include <KoTextEditor.h>
-#include <KoToolProxy.h>
-#include <KoTextAnchor.h>
-#include <KoShapeGroupCommand.h>
-#include <KoZoomController.h>
-#include <KoInlineTextObjectManager.h>
 #include <KoBookmark.h>
-#include <KoPathShape.h> // for KoPathShapeId
 #include <KoCanvasController.h>
+#include <KoCopyController.h>
+#include <KoCutController.h>
+#include <kofficeversion.h>
+#include <KoFind.h>
+#include <KoImageSelectionWidget.h>
+#include <KoInlineTextObjectManager.h>
+#include <KoMainWindow.h>
+#include <KoPasteController.h>
+#include <KoPathShape.h> // for KoPathShapeId
+#include <KoResourceManager.h>
+#include <KoSelection.h>
+#include <KoShapeContainer.h>
+#include <KoShapeController.h>
+#include <KoShapeCreateCommand.h>
+#include <KoShapeFactoryBase.h>
+#include <KoShapeGroupCommand.h>
+#include <KoShape.h>
+#include <KoShapeManager.h>
+#include <KoShapeRegistry.h>
+#include <KoStandardAction.h>
+#include <KoTextAnchor.h>
+#include <KoTextDocument.h>
+#include <KoTextEditor.h>
+#include <KoText.h>
+#include <KoTextOnShapeContainer.h>
+#include <KoTextShapeData.h>
+#include <KoToolManager.h>
+#include <KoToolProxy.h>
+#include <KoZoomAction.h>
+#include <KoZoomController.h>
 
 // KDE + Qt includes
 #include <QHBoxLayout>
@@ -222,6 +224,8 @@ void KWView::updateReadWrite(bool readWrite)
     if (action) action->setEnabled(readWrite);
     action = actionCollection()->action("insert_picture");
     if (action) action->setEnabled(readWrite);
+    action = actionCollection()->action("insert_textshape");
+    if (action) action->setEnabled(readWrite);
     action = actionCollection()->action("format_page");
     if (action) action->setEnabled(readWrite);
     action = actionCollection()->action("inline_frame");
@@ -339,10 +343,15 @@ void KWView::setupActions()
     actionCollection()->addAction("select_bookmark", action);
     connect(action, SIGNAL(triggered()), this, SLOT(selectBookmark()));
 
-    action = new KAction(i18n("Insert Picture..."), this);
+    action = new KAction(i18n("Picture..."), this);
     action->setToolTip(i18n("Insert a picture into document"));
     actionCollection()->addAction("insert_picture", action);
     connect(action, SIGNAL(triggered()), this, SLOT(insertImage()));
+
+    action = new KAction(i18n("Text Shape..."), this);
+    action->setToolTip(i18n("Insert a new text shape into document"));
+    actionCollection()->addAction("insert_textshape", action);
+    connect(action, SIGNAL(triggered()), this, SLOT(insertTextShape()));
 
     action = new KAction(i18n("Text Area Borders"), this);
     action->setToolTip(i18n("Turns the border display of the text areas on and off"));
@@ -1430,6 +1439,19 @@ void KWView::createTextOnShape()
         selection->select(decorator);
     }
 #endif
+}
+
+void KWView::insertTextShape()
+{
+    KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(TextShape_SHAPEID);
+    Q_ASSERT(factory);
+    KoShape *shape = factory->createDefaultShape(m_document->resourceManager());
+    if (m_currentPage.isValid())
+        shape->setPosition(QPointF(0, m_currentPage.offsetInDocument()));
+
+    QUndoCommand *cmd = canvasBase()->shapeController()->addShape(shape);
+    if (cmd)
+        m_document->addCommand(cmd);
 }
 
 // end of actions

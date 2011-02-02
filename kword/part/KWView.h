@@ -202,6 +202,7 @@ private slots:
     /// A semantic item was updated and should have it's text refreshed.
     void semanticObjectViewSiteUpdated(KoRdfSemanticItem *item, const QString &xmlid);
     void createTextOnShape();
+    void insertTextShape();
 
 private:
     /// helper method for the raiseFrame/lowerFrame/bringToFront/sendToBack methods
