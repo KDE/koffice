@@ -24,6 +24,7 @@
 
 class PictureShapeFactory : public KoShapeFactoryBase
 {
+    Q_OBJECT
 public:
     PictureShapeFactory(QObject *parent);
     ~PictureShapeFactory() {}
