@@ -153,7 +153,12 @@ void KWTextFrameSet::setupFrame(KWFrame *frame)
         }
         data->setDocument(m_document, false);
     } else {
-        m_frameOrderDirty = true;
+        if (frameCount() > 1) {
+            KoShape *lastShape = frames().value(frameCount() - 2)->shape();
+            KoShape *shape = frame->shape();
+            if (lastShape->position().y() + lastShape->size().height() > shape->position().y())
+                m_frameOrderDirty = true;
+        }
         data->setDocument(m_document, false);
         data->setEndPosition(-1);
         data->foul();
