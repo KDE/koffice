@@ -726,6 +726,11 @@ void TextTool::setShapeData(KoTextShapeData *data)
                 }
             }
         }
+
+        foreach (KoTextEditingPlugin *plugin, m_textEditingPlugins->values()) {
+            plugin->setCurrentCursorPosition(m_textEditor.data()->document(),
+                    m_textEditor.data()->position());
+        }
     }
     m_textEditor.data()->updateDefaultTextDirection(m_textShapeData->pageDirection());
 }
