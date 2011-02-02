@@ -96,7 +96,7 @@ public:
     /**
      * Return the pageManager used in this document.
      */
-    Q_SCRIPTABLE KWPageManager *pageManager() {
+    KWPageManager *pageManager() {
         return &m_pageManager;
     }
 
