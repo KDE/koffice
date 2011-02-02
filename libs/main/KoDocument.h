@@ -739,17 +739,10 @@ public:
     void saveUnitOdf(KoXmlWriter *settingsWriter) const;
 
     /**
-     * Returns the name of the unit used to display all measures/distances.
-     * Use this method for displaying it in the user interface, but use
-     * unit() for everything else (conversions etc.)
-     */
-    QString unitName() const;
-
-    /**
      * Set the template type used. This is used by the start up widget to show
      * the correct templates.
      */
-    void setTemplateType(const QString& _templateType);
+    void setTemplateType(const QString &templateType);
     /**
      * Template type used. This is used by the start up widget to show
      * the correct templates.
