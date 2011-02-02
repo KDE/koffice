@@ -188,6 +188,10 @@ signals:
     /// signal emitted when a page has been added
     void pageSetupChanged();
 
+protected slots:
+    /// reimplemented
+    virtual void openTemplate(const KUrl &url);
+
 private slots:
     /// Frame maintenance on already registered framesets
     void addFrame(KWFrame *frame);
@@ -231,6 +235,7 @@ private:
 
     MagicCurtain *m_magicCurtain; ///< all things we don't want to show are behind this one
     bool m_mainFramesetEverFinished;
+    bool m_loadingTemplate;
 };
 
 #endif

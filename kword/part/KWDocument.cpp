@@ -140,7 +140,8 @@ KWDocument::KWDocument(QWidget *parentWidget, QObject *parent, bool singleViewMo
         : KoDocument(parentWidget, parent, singleViewMode),
         m_frameLayout(&m_pageManager, m_frameSets),
         m_magicCurtain(0),
-        m_mainFramesetEverFinished(false)
+        m_mainFramesetEverFinished(false),
+        m_loadingTemplate(false)
 {
     m_frameLayout.setDocument(this);
     resourceManager()->setOdfDocument(this);
@@ -516,6 +517,12 @@ void KWDocument::initEmpty()
     Q_ASSERT(resourceManager()->hasResource(KoText::StyleManager));
     KoStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
     Q_ASSERT(styleManager);
+
+    QTextDocument document;
+    KoTextDocument doc(&document);
+    doc.setStyleManager(styleManager);
+    KoText::loadOpenDocument("/home/zander/work/kde/build-trunk/installed/share/apps/kword/templates/Normal/.source/A4.odt", &document);
+
     KoParagraphStyle *parag = new KoParagraphStyle();
     parag->setName(i18n("Head 1"));
     KoCharacterStyle *character = parag->characterStyle();
@@ -575,13 +582,37 @@ void KWDocument::clear()
         inlineTextObjectManager()->setProperty(KoInlineObject::PageCount, pageCount());
 }
 
+void KWDocument::openTemplate(const KUrl &url)
+{
+    m_loadingTemplate = true;
+    KoDocument::openTemplate(url);
+    m_loadingTemplate = false;
+}
+
 bool KWDocument::loadOdf(KoOdfReadStore &odfStore)
 {
     clear();
     KWOdfLoader loader(this);
     bool rc = loader.load(odfStore);
-    if (rc)
+    if (rc) {
+        if (m_loadingTemplate) {
+            Q_ASSERT(resourceManager()->hasResource(KoText::StyleManager));
+            KoStyleManager *styleManager = resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();
+            Q_ASSERT(styleManager);
+            foreach (KoParagraphStyle *style, styleManager->paragraphStyles()) {
+                QString name = style->name();
+                QByteArray bytes(name.toAscii());
+
+                // qstring is utf16, don't loose data by going via 8 bits;
+                if (QString::fromAscii(bytes.constData()) == name) { // check data consistency
+                    QString newName(i18n(bytes.constData()));
+                    style->setName(newName);
+                }
+            }
+        }
+
         endOfLoading();
+    }
     return rc;
 }
 

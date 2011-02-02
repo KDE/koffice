@@ -43,6 +43,7 @@
 #include <KoOdfLoadingContext.h>
 #include <KoUpdater.h>
 #include <KoProgressUpdater.h>
+#include <KoParagraphStyle.h>
 
 // KDE + Qt includes
 #include <QTextCursor>
@@ -82,7 +83,7 @@ bool KWOdfLoader::load(KoOdfReadStore &odfStore)
     KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
     if (realBody.isNull()) {
         kError(32001) << "No office:body found!" << endl;
-        m_document->setErrorMessage(i18n("Invalid OASIS OpenDocument file. No office:body tag found."));
+        m_document->setErrorMessage(i18n("Invalid OpenDocument file. No office:body tag found."));
         return false;
     }
 
@@ -94,7 +95,7 @@ bool KWOdfLoader::load(KoOdfReadStore &odfStore)
         forEachElement(childElem, realBody)
             localName = childElem.localName();
         if (localName.isEmpty())
-            m_document->setErrorMessage(i18n("Invalid OASIS OpenDocument file. No tag found inside office:body."));
+            m_document->setErrorMessage(i18n("Invalid OpenDocument file. No tag found inside office:body."));
         else
             m_document->setErrorMessage(i18n("This is not a word processing document, but %1. Please try opening it with the appropriate application.", KoDocument::tagNameToDocumentType(localName)));
         return false;
