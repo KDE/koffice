@@ -4,7 +4,7 @@
     begin            : 2001-12-22
     copyright        : (C) 2001 by Daniel Naber
     email            : daniel.naber@t-online.de
-	$Id$
+    $Id$
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,31 +28,33 @@
 #include <kdemacros.h>
 #include <kcomponentdata.h>
 
+#include <KoResourceManager.h>
 #include <KoTextEditingPlugin.h>
 #include <KoTextEditingRegistry.h>
 #include <KoTextEditingFactory.h>
 
 extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 {
-	KAboutData aboutData("kthesaurus", 0, ki18n("KThesaurus"), "1.0",
-		ki18n( "KThesaurus - List synonyms" ), KAboutData::License_GPL,
-		ki18n( "(c) 2001 Daniel Naber" ) );
+    KAboutData aboutData("kthesaurus", 0, ki18n("KThesaurus"), "1.0",
+        ki18n( "KThesaurus - List synonyms" ), KAboutData::License_GPL,
+        ki18n( "(c) 2001 Daniel Naber" ) );
 
-	KCmdLineArgs::init(argc, argv, &aboutData);
+    KCmdLineArgs::init(argc, argv, &aboutData);
 
-	KCmdLineOptions options;
-	options.add("+[term]", ki18n("Term to search for when starting up"));
-	KCmdLineArgs::addCmdLineOptions(options);
-	KApplication a;
+    KCmdLineOptions options;
+    options.add("+[term]", ki18n("Term to search for when starting up"));
+    KCmdLineArgs::addCmdLineOptions(options);
+    KApplication a;
 
     KoTextEditingPlugin *thesaurus = 0;
+    KoResourceManager *rm = new KoResourceManager(&a);
 
-    foreach(const QString &key, KoTextEditingRegistry::instance()->keys()) {
+    foreach (const QString &key, KoTextEditingRegistry::instance()->keys()) {
         KoTextEditingFactory *factory =  KoTextEditingRegistry::instance()->value(key);
         Q_ASSERT(factory);
         if (factory->id() == "thesaurustool") {
             kDebug() <<"Thesaurus plugin found, creating...";
-            thesaurus = factory->create();
+            thesaurus = factory->create(rm);
         }
     }
 
@@ -60,24 +62,24 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
         return 1;
 
 /* TODO: get selection(), not only clipboard!
-	QClipboard *cb = QApplication::clipboard();
-	QString text = cb->text();
-	if( text.isNull() || text.length() > 50 ) {
-		// long texts are probably not supposed to be searched for
-		text = "";
-	}
+    QClipboard *cb = QApplication::clipboard();
+    QString text = cb->text();
+    if( text.isNull() || text.length() > 50 ) {
+        // long texts are probably not supposed to be searched for
+        text = "";
+    }
 */
-	QString text = "";
-	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-	if ( args->count() > 0 ) {
-		text = args->arg(0);
-	}
+    QString text;
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    if (args->count() > 0) {
+        text = args->arg(0);
+    }
 
     // pas -1 to startPosition and endPosition to set as standalone and will give us different buttons
-    thesaurus->checkSection(new QTextDocument(text), -1, -1);
+    thesaurus->checkSection(new QTextDocument(text, &a), -1, -1);
 
-	//kDebug() <<"KThesaurus command=" << command
-	//		<< " dataType=" << info->dataType() << endl;
+    //kDebug() <<"KThesaurus command=" << command
+    //      << " dataType=" << info->dataType() << endl;
 
-	return a.exec();
+    return a.exec();
 }

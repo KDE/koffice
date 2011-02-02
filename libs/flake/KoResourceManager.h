@@ -36,6 +36,7 @@ class KoLineBorder;
 class KUndoStack;
 class KoImageCollection;
 class KoOdfDocument;
+class QTextDocument;
 
 /**
  * The KoCanvasResource contains a set of per-canvas
@@ -83,6 +84,7 @@ enum DocumentResource {
     UndoStack,              ///< The document-wide undo stack (KUndoStack)
     ImageCollection,        ///< The KoImageCollection for the document
     OdfDocument,            ///< The document this canvas shows (KoOdfDocument)
+    TextDocuments,          ///< A list of all the QTextDocument instances of a document.
 
     KarbonStart = 1000,      ///< Base number for karbon specific values.
     KivioStart = 3000,       ///< Base number for kivio specific values.
@@ -304,6 +306,9 @@ public:
 
     KoOdfDocument *odfDocument() const;
     void setOdfDocument(KoOdfDocument *currentDocument);
+
+    void setTextDocumentList(const QList<QTextDocument *> &allDocuments);
+    QList<QTextDocument *> textDocumentList() const;
 
 signals:
     /**

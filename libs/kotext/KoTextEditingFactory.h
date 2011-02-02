@@ -26,6 +26,7 @@
 #include "kotext_export.h"
 
 class KoTextEditingPlugin;
+class KoResourceManager;
 
 /**
  * A factory for text editing plugins. There should be one for each plugin type to
@@ -45,9 +46,15 @@ public:
     virtual ~KoTextEditingFactory();
 
     /**
+     * Factory method for the KoTextEditingPlugin.
+     * The framework will create at most one KoTextEditingPlugin for one KoDocument.
+     * The implications of that is that multiple vies will reuse the one instance and
+     * the lifetime of the plugin is limited to the lifetime of the koffice document.
+     *
      * Create a new instance of an text editor plugin.
+     * @param documentResourceManager the resources manager that holds all document-wide data.
      */
-    virtual KoTextEditingPlugin *create() const = 0;
+    virtual KoTextEditingPlugin *create(KoResourceManager *documentResourceManager) const = 0;
 
     /**
      * return the id for the plugin this factory creates.

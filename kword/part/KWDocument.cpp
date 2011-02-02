@@ -326,6 +326,12 @@ void KWDocument::removeFrameSet(KWFrameSet *fs)
         KoCanvasBase *canvas = static_cast<KWView*>(view)->canvasBase();
         canvas->resourceManager()->setResource(KWord::CurrentFrameSetCount, m_frameSets.count());
     }
+    KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(fs);
+    if (tfs) {
+        QList<QTextDocument*> docs = resourceManager()->textDocumentList();
+        if (docs.removeAll(tfs->document()))
+            resourceManager()->setTextDocumentList(docs);
+    }
 }
 
 void KWDocument::addFrameSet(KWFrameSet *fs)
@@ -349,6 +355,10 @@ void KWDocument::addFrameSet(KWFrameSet *fs)
             connect(tfs, SIGNAL(decorationFrameResize(KWTextFrameSet*)),
                     this, SLOT(updateHeaderFooter(KWTextFrameSet*)));
         }
+
+        QList<QTextDocument*> docs = resourceManager()->textDocumentList();
+        docs.append(tfs->document());
+        resourceManager()->setTextDocumentList(docs);
     }
 
     connect(fs, SIGNAL(frameAdded(KWFrame*)), this, SLOT(addFrame(KWFrame*)));

@@ -279,4 +279,28 @@ void KoResourceManager::setOdfDocument(KoOdfDocument *currentDocument)
     setResource(KoDocumentResource::OdfDocument, variant);
 }
 
+void KoResourceManager::setTextDocumentList(const QList<QTextDocument *> &allDocuments)
+{
+    QList<QVariant> list;
+    foreach (QTextDocument *doc, allDocuments) {
+        QVariant v;
+        v.setValue<void*>(doc);
+        list << v;
+    }
+    setResource(KoDocumentResource::TextDocuments, list);
+}
+
+QList<QTextDocument *> KoResourceManager::textDocumentList() const
+{
+    QList<QTextDocument*> answer;
+    QVariant variant = resource(KoDocumentResource::TextDocuments);
+    if (variant.isNull())
+        return answer;
+    QList<QVariant> list = qvariant_cast<QList<QVariant> >(variant);
+    foreach (const QVariant &variant, list) {
+        answer << static_cast<QTextDocument*>(variant.value<void*>());
+    }
+    return answer;
+}
+
 #include <KoResourceManager.moc>

@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2010-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -25,6 +25,7 @@
 #include <QVariant>
 
 class KoTextEditingPlugin;
+class KoResourceManager;
 class TextTool;
 
 /// This class holds on to the text editing plugins.
@@ -37,7 +38,7 @@ public:
     enum ResourceManagerId {
         ResourceId = 345681743
     };
-    TextEditingPluginContainer(QObject *parent = 0);
+    TextEditingPluginContainer(KoResourceManager *documentResourceManager);
     ~TextEditingPluginContainer();
 
     KoTextEditingPlugin *spellcheck() const {

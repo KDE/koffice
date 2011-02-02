@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2010-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,8 +24,8 @@
 
 #include <KDebug>
 
-TextEditingPluginContainer::TextEditingPluginContainer(QObject *parent)
-    : QObject(parent),
+TextEditingPluginContainer::TextEditingPluginContainer(KoResourceManager *documentResourceManager)
+    : QObject(documentResourceManager),
     m_spellcheckPlugin(0)
 {
     foreach (const QString &key, KoTextEditingRegistry::instance()->keys()) {
@@ -37,7 +37,7 @@ TextEditingPluginContainer::TextEditingPluginContainer(QObject *parent)
             continue;
         }
         QString factoryId = factory->id();
-        KoTextEditingPlugin *plugin = factory->create();
+        KoTextEditingPlugin *plugin = factory->create(documentResourceManager);
         if (factoryId == "spellcheck") {
             kDebug(32500) << "KOffice SpellCheck plugin found";
             m_spellcheckPlugin = plugin;
