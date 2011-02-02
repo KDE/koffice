@@ -1578,7 +1578,8 @@ void KWView::semanticObjectViewSiteUpdated(KoRdfSemanticItem* item, const QStrin
 #endif
 }
 
-void KWView::variableChanged(){
+void KWView::variableChanged()
+{
     m_actionMenu->menu()->clear();
     foreach (QAction *action, m_document->inlineTextObjectManager()->createInsertVariableActions(canvasBase()))
         m_actionMenu->addAction(action);
