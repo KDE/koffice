@@ -185,7 +185,7 @@ public:
     void clear();
 
     /// return the pageLayout applied for these pages
-    KoPageLayout pageLayout() const;
+    const KoPageLayout &pageLayout() const;
 
     /// return true if pages of this style can turn into page-spreads
     bool isPageSpread() const;

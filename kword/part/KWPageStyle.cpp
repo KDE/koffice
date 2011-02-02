@@ -111,7 +111,7 @@ void KWPageStyle::setHeaderPolicy(KWord::HeaderFooterType p)
     d->headers = p;
 }
 
-KoPageLayout KWPageStyle::pageLayout() const
+const KoPageLayout &KWPageStyle::pageLayout() const
 {
     return d->pageLayout;
 }
