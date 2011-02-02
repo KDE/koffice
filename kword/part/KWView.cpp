@@ -366,7 +366,7 @@ void KWView::setupActions()
     connect(action, SIGNAL(triggered()), this, SLOT(editSemanticStylesheets()));
 #endif
 
-    action = new KAction(i18n("Make inline"), this);
+    action = new KAction(i18n("Anchor to Text"), this);
     action->setToolTip(i18n("Convert current shape to an inline shape"));
     action->setWhatsThis(i18n("Convert the current shape to an inline shape.<br><br>Place the inline shape within the text at the point nearest to the shapes current position."));
     actionCollection()->addAction("inline_shape", action);
