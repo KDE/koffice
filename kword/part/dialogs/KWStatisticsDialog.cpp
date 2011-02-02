@@ -29,7 +29,7 @@ KWStatisticsDialog::KWStatisticsDialog(KWView *parent)
     setCaption(i18n("Statistics"));
     setButtons(KDialog::Close);
     setDefaultButton(KDialog::Close);
-    setMainWidget(new KWStatistics(parent->canvasBase()->resourceManager(), parent->kwdocument(), 0, this));
+    setMainWidget(new KWStatistics(parent->kwdocument(), 0, this));
 }
 
 KWStatisticsDialog::~KWStatisticsDialog()

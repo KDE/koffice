@@ -66,7 +66,6 @@ void KWCanvas::pageSetupChanged()
 
 void KWCanvas::updateSize()
 {
-    resourceManager()->setResource(KWord::CurrentPageCount, m_document->pageCount());
     emit documentSize(m_viewMode->contentsSize());
 }
 

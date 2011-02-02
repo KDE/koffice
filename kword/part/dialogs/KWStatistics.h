@@ -36,8 +36,7 @@ class KWStatistics : public QWidget
 {
     Q_OBJECT
 public:
-    KWStatistics(KoResourceManager *provider, KWDocument *m_document,
-                 KoSelection *selection = 0, QWidget *parent = 0);
+    KWStatistics(KWDocument *m_document, KoSelection *selection = 0, QWidget *parent = 0);
 
 private slots:
     void updateResource(int which);

@@ -35,9 +35,9 @@
 #include <QTextBlock>
 #include <QTimer>
 
-KWStatistics::KWStatistics(KoResourceManager *provider, KWDocument *document, KoSelection *selection, QWidget *parent)
+KWStatistics::KWStatistics(KWDocument *document, KoSelection *selection, QWidget *parent)
         : QWidget(parent),
-        m_resourceManager(provider),
+        m_resourceManager(document->resourceManager()),
         m_action(new KoAction(this)),
         m_selection(selection),
         m_document(document),

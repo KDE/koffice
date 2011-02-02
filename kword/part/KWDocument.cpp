@@ -313,6 +313,7 @@ void KWDocument::firePageSetupChanged()
 {
     if (inlineTextObjectManager())
         inlineTextObjectManager()->setProperty(KoInlineObject::PageCount, pageCount());
+    resourceManager()->setResource(KWord::CurrentPageCount, pageCount());
     emit pageSetupChanged();
 }
 
@@ -322,10 +323,7 @@ void KWDocument::removeFrameSet(KWFrameSet *fs)
     setModified(true);
     foreach (KWFrame *frame, fs->frames())
         removeFrame(frame);
-    foreach (KoView *view, views()) {
-        KoCanvasBase *canvas = static_cast<KWView*>(view)->canvasBase();
-        canvas->resourceManager()->setResource(KWord::CurrentFrameSetCount, m_frameSets.count());
-    }
+    resourceManager()->setResource(KWord::CurrentFrameSetCount, m_frameSets.count());
     KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(fs);
     if (tfs) {
         QList<QTextDocument*> docs = resourceManager()->textDocumentList();
@@ -373,7 +371,7 @@ void KWDocument::addFrame(KWFrame *frame)
             canvas->shapeManager()->addShape(frame->outlineShape()->parent());
         else
             canvas->shapeManager()->addShape(frame->shape());
-        canvas->resourceManager()->setResource(KWord::CurrentFrameSetCount, m_frameSets.count());
+        resourceManager()->setResource(KWord::CurrentFrameSetCount, m_frameSets.count());
     }
     if (frame->loadingPageNumber() > 0) {
         if (m_magicCurtain == 0) {
