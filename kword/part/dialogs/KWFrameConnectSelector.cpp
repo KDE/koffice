@@ -45,7 +45,7 @@ bool KWFrameConnectSelector::open(KWFrame *frame)
     widget.framesList->clear();
 
     if (widget.frameSetName->text().isEmpty())
-        widget.frameSetName->setText(m_state->document()->uniqueFrameSetName(i18n("frameset")));
+        widget.frameSetName->setText(m_state->document()->uniqueFrameSetName(i18n("Text")));
 
     foreach (KWFrameSet *fs, m_state->document()->frameSets()) {
         KWTextFrameSet *textFs = dynamic_cast<KWTextFrameSet*>(fs);
@@ -72,7 +72,7 @@ bool KWFrameConnectSelector::open(KWFrame *frame)
         widget.existingRadio->setChecked(true);
     } else if (m_frameSets.count() == 0) { // no framesets on document
         QTreeWidgetItem *helpText = new QTreeWidgetItem(widget.framesList);
-        helpText->setText(0, i18n("No framesets in document"));
+        helpText->setText(0, i18n("No shape lists in document"));
         widget.framesList->setEnabled(false);
         widget.existingRadio->setEnabled(false);
         widget.newRadio->setChecked(true);

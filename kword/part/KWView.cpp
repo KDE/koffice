@@ -246,14 +246,14 @@ void KWView::updateReadWrite(bool readWrite)
 
 void KWView::setupActions()
 {
-    m_actionFormatFrameSet  = new KAction(i18n("Frame/Frameset Properties"), this);
-    actionCollection()->addAction("format_frameset", m_actionFormatFrameSet);
-    m_actionFormatFrameSet->setToolTip(i18n("Alter frameset properties"));
+    m_actionFormatFrameSet  = new KAction(i18n("Shape Properties"), this);
+    actionCollection()->addAction("format_shape_properties", m_actionFormatFrameSet);
+    m_actionFormatFrameSet->setToolTip(i18n("Alter shape properties"));
     m_actionFormatFrameSet->setEnabled(false);
     connect(m_actionFormatFrameSet, SIGNAL(triggered()), this, SLOT(editFrameProperties()));
 
     m_actionInsertFrameBreak  = new KAction(QString(), this);
-    actionCollection()->addAction("insert_framebreak", m_actionInsertFrameBreak);
+    actionCollection()->addAction("insert_pagebreak", m_actionInsertFrameBreak);
     m_actionInsertFrameBreak->setShortcut(KShortcut(Qt::CTRL + Qt::Key_Return));
     connect(m_actionInsertFrameBreak, SIGNAL(triggered()), this, SLOT(insertFrameBreak()));
     m_actionInsertFrameBreak->setText(i18n("Page Break"));
@@ -264,7 +264,7 @@ void KWView::setupActions()
     actionCollection()->addAction("format_header", m_actionViewHeader);
     m_actionViewHeader->setCheckedState(KGuiItem(i18n("Disable Document Headers")));
     m_actionViewHeader->setToolTip(i18n("Shows and hides header display"));
-    m_actionViewHeader->setWhatsThis(i18n("Selecting this option toggles the display of headers in KWord.<br/><br/>Headers are special frames at the top of each page which can contain page numbers or other information."));
+    m_actionViewHeader->setWhatsThis(i18n("Selecting this option toggles the display of headers in KWord.<br/><br/>Headers are special shapes at the top of each page which can contain page numbers or other information."));
     if (m_currentPage.isValid())
         m_actionViewHeader->setChecked(m_currentPage.pageStyle().headerPolicy() != KWord::HFTypeNone);
     connect(m_actionViewHeader, SIGNAL(triggered()), this, SLOT(toggleHeader()));
@@ -273,7 +273,7 @@ void KWView::setupActions()
     actionCollection()->addAction("format_footer", m_actionViewFooter);
     m_actionViewFooter->setCheckedState(KGuiItem(i18n("Disable Document Footers")));
     m_actionViewFooter->setToolTip(i18n("Shows and hides footer display"));
-    m_actionViewFooter->setWhatsThis(i18n("Selecting this option toggles the display of footers in KWord. <br/><br/>Footers are special frames at the bottom of each page which can contain page numbers or other information."));
+    m_actionViewFooter->setWhatsThis(i18n("Selecting this option toggles the display of footers in KWord. <br/><br/>Footers are special shapes at the bottom of each page which can contain page numbers or other information."));
     if (m_currentPage.isValid())
         m_actionViewFooter->setChecked(m_currentPage.pageStyle().footerPolicy() != KWord::HFTypeNone);
     connect(m_actionViewFooter, SIGNAL(triggered()), this, SLOT(toggleFooter()));
@@ -283,31 +283,31 @@ void KWView::setupActions()
     m_actionViewSnapToGrid->setChecked(m_snapToGrid);
     connect(m_actionViewSnapToGrid, SIGNAL(triggered()), this, SLOT(toggleSnapToGrid()));
 
-    m_actionRaiseFrame  = new KAction(KIcon("raise"), i18n("Raise Frame"), this);
-    actionCollection()->addAction("raiseframe", m_actionRaiseFrame);
+    m_actionRaiseFrame  = new KAction(KIcon("raise"), i18n("Raise Shape"), this);
+    actionCollection()->addAction("raiseshape", m_actionRaiseFrame);
     m_actionRaiseFrame->setShortcut(KShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_R));
-    m_actionRaiseFrame->setToolTip(i18n("Raise the currently selected frame so that it appears above "
-                                        "all the other frames"));
-    m_actionRaiseFrame->setWhatsThis(i18n("Raise the currently selected frame so that it appears "
-                                          "above all the other frames. This is only useful if frames overlap each other. If multiple "
-                                          "frames are selected they are all raised in turn."));
+    m_actionRaiseFrame->setToolTip(i18n("Raise the currently selected shape so that it appears above "
+                                        "all the other shapes"));
+    m_actionRaiseFrame->setWhatsThis(i18n("Raise the currently selected shape so that it appears "
+                                          "above all the other shapes. This is only useful if shapes overlap each other. If multiple "
+                                          "shapes are selected they are all raised in turn."));
     connect(m_actionRaiseFrame, SIGNAL(triggered()), this, SLOT(raiseFrame()));
 
-    m_actionLowerFrame  = new KAction(KIcon("lower"), i18n("Lower Frame"), this);
-    actionCollection()->addAction("lowerframe", m_actionLowerFrame);
+    m_actionLowerFrame  = new KAction(KIcon("lower"), i18n("Lower Shape"), this);
+    actionCollection()->addAction("lowershape", m_actionLowerFrame);
     m_actionLowerFrame->setShortcut(KShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_L));
-    m_actionLowerFrame->setToolTip(i18n("Lower the currently selected frame so that it disappears under "
-                                        "any frame that overlaps it"));
-    m_actionLowerFrame->setWhatsThis(i18n("Lower the currently selected frame so that it disappears under "
-                                          "any frame that overlaps it. If multiple frames are selected they are all lowered in turn."));
+    m_actionLowerFrame->setToolTip(i18n("Lower the currently selected shape so that it disappears under "
+                                        "any shape that overlaps it"));
+    m_actionLowerFrame->setWhatsThis(i18n("Lower the currently selected shape so that it disappears under "
+                                          "any shape that overlaps it. If multiple shapes are selected they are all lowered in turn."));
     connect(m_actionLowerFrame, SIGNAL(triggered()), this, SLOT(lowerFrame()));
 
     m_actionBringToFront = new KAction(KIcon("bring_forward"), i18n("Bring to Front"), this);
-    actionCollection()->addAction("bring_tofront_frame", m_actionBringToFront);
+    actionCollection()->addAction("bring_tofront_shape", m_actionBringToFront);
     connect(m_actionBringToFront, SIGNAL(triggered()), this, SLOT(bringToFront()));
 
     m_actionSendBackward = new KAction(KIcon("send_backward"), i18n("Send to Back"), this);
-    actionCollection()->addAction("send_toback_frame", m_actionSendBackward);
+    actionCollection()->addAction("send_toback_shape", m_actionSendBackward);
     connect(m_actionSendBackward, SIGNAL(triggered()), this, SLOT(sendToBack()));
 
     m_actionMenu = new KActionMenu(i18n("Variable"), this);
@@ -347,7 +347,7 @@ void KWView::setupActions()
     action = new KAction(i18n("Text Area Borders"), this);
     action->setToolTip(i18n("Turns the border display of the text areas on and off"));
     action->setCheckable(true);
-    actionCollection()->addAction("view_frameborders", action);
+    actionCollection()->addAction("view_textborders", action);
     connect(action, SIGNAL(toggled(bool)), this, SLOT(toggleViewFrameBorders(bool)));
     action->setChecked(m_document->config().viewFrameBorders());
     action->setWhatsThis(i18n("Turns the border display on and off.<br/><br/>The borders are never printed. This option is useful to see how the document will appear on the printed page."));
@@ -367,9 +367,9 @@ void KWView::setupActions()
 #endif
 
     action = new KAction(i18n("Make inline"), this);
-    action->setToolTip(i18n("Convert current frame to an inline frame"));
-    action->setWhatsThis(i18n("Convert the current frame to an inline frame.<br><br>Place the inline frame within the text at the point nearest to the frames current position."));
-    actionCollection()->addAction("inline_frame", action);
+    action->setToolTip(i18n("Convert current shape to an inline shape"));
+    action->setWhatsThis(i18n("Convert the current shape to an inline shape.<br><br>Place the inline shape within the text at the point nearest to the shapes current position."));
+    actionCollection()->addAction("inline_shape", action);
     connect(action, SIGNAL(triggered()), this, SLOT(inlineFrame()));
 
     action = new KAction(i18n("Previous Page"), this);
@@ -398,7 +398,7 @@ void KWView::setupActions()
     action->setCheckable(true);
     action->setToolTip(i18n("Shows or hides rulers"));
     action->setWhatsThis(i18n("The rulers are the white measuring spaces top and left of the "
-                              "document. The rulers show the position and width of pages and of frames and can "
+                              "document. The rulers show the position and width of pages and of shape and can "
                               "be used to position tabulators among others.<p>Uncheck this to disable "
                               "the rulers from being displayed.</p>"));
     action->setChecked(m_document->config().viewRulers());
@@ -424,9 +424,9 @@ if (false) { // TODO move this to the text tool as soon as  a) the string freeze
     action->setWhatsThis(i18n("Toggle the display of non-printing characters.<br/><br/>When this is enabled, KWord shows you tabs, spaces, carriage returns and other non-printing characters."));
 }
 
-    action = new KAction(i18n("Select All Frames"), this);
+    action = new KAction(i18n("Select All Shapes"), this);
 
-    actionCollection()->addAction("edit_selectallframes", action);
+    actionCollection()->addAction("edit_selectallshapes", action);
     connect(action, SIGNAL(triggered()), this, SLOT(editSelectAllFrames()));
 
     action = new KAction(KIcon("edit-delete"), i18n("Delete"), this);
@@ -441,11 +441,11 @@ if (false) { // TODO move this to the text tool as soon as  a) the string freeze
     KToggleAction *guides = KoStandardAction::showGuides(this, SLOT(setGuideVisibility(bool)), actionCollection());
     guides->setChecked(m_document->guidesData().showGuideLines());
 
-    // -------------- Frame menu
+    // -------------- Shape menu
     action  = new KAction(i18n("Create Linked Copy"), this);
-    actionCollection()->addAction("create_linked_frame", action);
-    action->setToolTip(i18n("Create a copy of the current frame, always showing the same contents"));
-    action->setWhatsThis(i18n("Create a copy of the current frame, that remains linked to it. This means they always show the same contents: modifying the contents in such a frame will update all its linked copies."));
+    actionCollection()->addAction("create_linked_shape", action);
+    action->setToolTip(i18n("Create a copy of the current shape, always showing the same contents"));
+    action->setWhatsThis(i18n("Create a copy of the current shape, that remains linked to it. This means they always show the same contents: modifying the contents in such a shape will update all its linked copies."));
     connect(action, SIGNAL(triggered()), this, SLOT(createLinkedFrame()));
 
     action = new KAction(i18n("Create Custom Outline"), this);
@@ -454,12 +454,12 @@ if (false) { // TODO move this to the text tool as soon as  a) the string freeze
     action->setWhatsThis(i18n("Text normally runs around the content of a shape, when you want a custom outline that is independent of the content you can create one and alter it with the vector tools"));
     connect(action, SIGNAL(triggered()), this, SLOT(createCustomOutline()));
 
-    action = new KAction(i18n("Create Frame-clip"), this);
-    actionCollection()->addAction("create_clipped_frame", action);
+    action = new KAction(i18n("Create Shape-clip"), this);
+    actionCollection()->addAction("create_clipped_shape", action);
     connect(action, SIGNAL(triggered()), this, SLOT(createFrameClipping()));
 
-    action = new KAction(i18n("Remove Frame-clip"), this);
-    actionCollection()->addAction("remove_clipped_frame", action);
+    action = new KAction(i18n("Remove Shape-clip"), this);
+    actionCollection()->addAction("remove_clipped_shape", action);
     connect(action, SIGNAL(triggered()), this, SLOT(removeFrameClipping()));
 
     action = new KAction(i18n("Add Text on Shape"), this);
@@ -1436,11 +1436,11 @@ void KWView::createTextOnShape()
 
 void KWView::popupContextMenu(const QPoint &globalPosition, const QList<QAction*> &actions)
 {
-    unplugActionList("frameset_type_action");
-    plugActionList("frameset_type_action", actions);
+    unplugActionList("shape_type_action");
+    plugActionList("shape_type_action", actions);
     if (factory() == 0) // we are a kpart, the factory is only set on the active component.
         return;
-    QMenu *menu = dynamic_cast<QMenu*>(factory()->container("frame_popup", this));
+    QMenu *menu = dynamic_cast<QMenu*>(factory()->container("shape_popup", this));
     if (menu)
         menu->exec(globalPosition);
 }
