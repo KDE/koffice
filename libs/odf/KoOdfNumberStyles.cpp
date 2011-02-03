@@ -278,7 +278,6 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
 
     const QString styleName = parent.attributeNS(KoXmlNS::style, "name", QString());
 
-kDebug()<<"99 *****************************************************************************";
 //Q_ASSERT(false);
     kDebug(30003) << "data style:" << styleName << " qt format=" << format;
     if (!prefix.isEmpty()) {
