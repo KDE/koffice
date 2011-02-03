@@ -398,6 +398,8 @@ bool Layout::nextParag()
     m_blockData = 0;
     if (m_data == 0) // no shape to layout, so stop here.
         return true;
+    if (m_block.userState() == KoText::BlockTextLayoutState)
+        return false;
     if (! m_block.isValid()) {
         QTextBlock block = m_block.previous(); // last correct one.
         m_data->setEndPosition(block.position() + block.length());
@@ -935,6 +937,9 @@ void Layout::resetPrivate()
     m_currentMasterPage.clear();
     m_dropCapsPositionAdjust = 0;
     m_dropCapsAffectedLineWidthAdjust = 0;
+
+    if (m_block.userState() == KoText::BlockTextLayoutState)
+        return;
 
     shapeNumber = 0;
     int lastPos = -1;

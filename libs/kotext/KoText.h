@@ -105,6 +105,11 @@ enum KoTextFrameProperty {
     TableOfContents = QTextFormat::UserProperty + 1,
 };
 
+enum TextBlockUserState {
+    NoState = -1,
+    BlockTextLayoutState = 27232791
+};
+
 /// convert the string version of directions (as specified in XSL and ODF) to the Direction enum
 KOTEXT_EXPORT Direction directionFromString(const QString &direction);
 }

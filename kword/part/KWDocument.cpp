@@ -353,10 +353,6 @@ void KWDocument::addFrameSet(KWFrameSet *fs)
             connect(tfs, SIGNAL(decorationFrameResize(KWTextFrameSet*)),
                     this, SLOT(updateHeaderFooter(KWTextFrameSet*)));
         }
-
-        QList<QTextDocument*> docs = resourceManager()->textDocumentList();
-        docs.append(tfs->document());
-        resourceManager()->setTextDocumentList(docs);
     }
 
     connect(fs, SIGNAL(frameAdded(KWFrame*)), this, SLOT(addFrame(KWFrame*)));
@@ -371,7 +367,6 @@ void KWDocument::addFrame(KWFrame *frame)
             canvas->shapeManager()->addShape(frame->outlineShape()->parent());
         else
             canvas->shapeManager()->addShape(frame->shape());
-        resourceManager()->setResource(KWord::CurrentFrameSetCount, m_frameSets.count());
     }
     if (frame->loadingPageNumber() > 0) {
         if (m_magicCurtain == 0) {
@@ -381,9 +376,20 @@ void KWDocument::addFrame(KWFrame *frame)
                 static_cast<KWView*>(view)->canvasBase()->shapeManager()->addShape(m_magicCurtain);
         }
         m_magicCurtain->addFrame(frame);
-    }
-    else
+    } else {
         frame->shape()->update();
+    }
+    resourceManager()->setResource(KWord::CurrentFrameSetCount, m_frameSets.count());
+
+    KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(frame->frameSet());
+    if (tfs) { // we add the textdoc here instead of in the addFrameSet because
+                // only after the first frame is added are we sure the doc won't change.
+        QList<QTextDocument*> docs = resourceManager()->textDocumentList();
+        if (!docs.contains(tfs->document())) {
+            docs.append(tfs->document());
+            resourceManager()->setTextDocumentList(docs);
+        }
+    }
 }
 
 void KWDocument::removeFrame(KWFrame *frame)

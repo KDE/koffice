@@ -357,7 +357,7 @@ void KoTextDocumentLayout::documentChanged(int position, int charsRemoved, int c
         from = block.position() + block.length();
     }
 
-    foreach(KoShape *shape, shapes()) {
+    foreach (KoShape *shape, shapes()) {
         KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
         Q_ASSERT(data);
         if (data && data->position() <= position && data->endPosition() >= position) {
