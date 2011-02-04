@@ -33,6 +33,7 @@
 #include <KoXmlReader.h>
 #include <KoUnit.h>
 #include <KoGenStyle.h>
+#include <KoPostscriptPaintDevice.h>
 #include <KoShapeLoadingContext.h>
 #include "KoTextSharedLoadingData.h"
 
@@ -1033,9 +1034,10 @@ void KoCharacterStyle::loadOdfProperties(KoStyleStack &styleStack)
     }
 
     const QString letterSpacing(styleStack.property(KoXmlNS::fo, "letter-spacing"));
-    if (!letterSpacing.isEmpty()) {
+    if (!letterSpacing.isEmpty() && letterSpacing != "100") { // 100% doesn't do anything.
         qreal space = KoUnit::parseValue(letterSpacing);
-        QFontMetrics fm(font());
+        KoPostscriptPaintDevice ps;
+        QFontMetrics fm(font(), &ps);
         setFontLetterSpacing(100+100*space/fm.averageCharWidth());
     }
 
@@ -1079,7 +1081,6 @@ void KoCharacterStyle::loadOdfProperties(KoStyleStack &styleStack)
     /*
       Missing properties:
       style:font-style-name, 3.10.11 - can be ignored, says DV, the other ways to specify a font are more precise
-      fo:letter-spacing, 3.10.16 - not implemented in kotext
       style:text-relief, 3.10.20 - not implemented in kotext
       style:text-blinking, 3.10.27 - not implemented in kotext IIRC
       style:text-combine, 3.10.29/30 - not implemented, see http://www.w3.org/TR/WD-i18n-format/
@@ -1249,7 +1250,12 @@ void KoCharacterStyle::saveOdf(KoGenStyle &style)
         } else if (key == KoCharacterStyle::Language) {
             style.addProperty("fo:language", d->stylesPrivate.value(KoCharacterStyle::Language).toString(), KoGenStyle::TextType);
         } else if (key == QTextCharFormat::FontLetterSpacing) {
-            style.addProperty("fo:letter-spacing", (int) fontLetterSpacing(), KoGenStyle::TextType);
+            // in Qt letter-spacing is in percent, in ODF its a static value.
+            // We are just approximating the conversion here...
+            KoPostscriptPaintDevice ps;
+            QFontMetrics fm(font(), &ps);
+            const qreal spacing = ((fontLetterSpacing() - 100) * fm.averageCharWidth()) / 100.;
+            style.addPropertyPt("fo:letter-spacing", spacing, KoGenStyle::TextType);
         } else if (key == QTextFormat::TextOutline) {
             QPen outline = textOutline();
             style.addProperty("style:text-outline", outline.style() == Qt::NoPen ? "false" : "true", KoGenStyle::TextType);
