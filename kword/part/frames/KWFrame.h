@@ -192,6 +192,8 @@ public:
      */
     void saveOdf(KoShapeSavingContext &context, const KWPage &page, int pageZIndexOffset = 0) const;
 
+    bool loadODf(const KoXmlElement &element, KoShapeLoadingContext &context);
+
     KWOutlineShape *outlineShape() const {
         return m_outline;
     }
