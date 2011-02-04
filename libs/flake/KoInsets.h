@@ -58,6 +58,17 @@ public:
         right = 0;
     }
 
+    void operator+=(const KoInsets &other) {
+        top += other.top;
+        bottom += other.bottom;
+        left += other.left;
+        right += other.right;
+    }
+    KoInsets operator+(const KoInsets &other) const {
+        return KoInsets(top + other.top, left + other.left, bottom + other.bottom,
+            right + other.right);
+    }
+
     qreal top;     ///< Top inset
     qreal bottom;  ///< Bottom inset
     qreal left;    ///< Left inset
