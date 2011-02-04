@@ -121,7 +121,7 @@ void KWPageStyle::setPageLayout(const KoPageLayout &pageLayout)
     d->pageLayout = pageLayout;
 }
 
-KoColumns KWPageStyle::columns() const
+const KoColumns &KWPageStyle::columns() const
 {
     return d->columns;
 }

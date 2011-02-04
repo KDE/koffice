@@ -31,9 +31,9 @@ class PageProcessingQueue : public QObject
     Q_OBJECT
 public:
     explicit PageProcessingQueue(KWDocument *parent);
-    void addPage(KWPage page);
+    void addPage(const KWPage &page);
 
-private slots:
+public slots:
     void process();
 
 private:

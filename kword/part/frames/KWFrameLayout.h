@@ -66,12 +66,14 @@ public:
     void createNewFramesForPage(int pageNumber);
 
     /**
+     * This method is called by createNewFramesForPage, you don't need to.
+     *
      * Whenever the page layout is changed, call this method to move and resize the frames.
      * Note that a page-spread counts as one page, even though it takes two page numbers.
      * @param pageNumber the number of the page to re-layout.
      */
     void layoutFramesOnPage(int pageNumber);
-    //void relayoutFrames(old layout, new layout); // per page ? Or per doc?
+
     /**
      *  delete any unneeded header/footer frames (but not their contents) based on
      * the document settings

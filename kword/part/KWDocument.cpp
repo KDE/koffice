@@ -863,10 +863,10 @@ void KWDocument::updateHeaderFooter(KWTextFrameSet *tfs)
 {
     // find all pages that have the page style set and re-layout them.
     Q_ASSERT(tfs->pageStyle().isValid());
-    updatePagesForStyle(tfs->pageStyle());
+    updatePagesForStyle(tfs->pageStyle(), true);
 }
 
-void KWDocument::updatePagesForStyle(const KWPageStyle &style)
+void KWDocument::updatePagesForStyle(const KWPageStyle &style, bool delayed)
 {
     PageProcessingQueue *ppq = 0;
     foreach (KWPage page, pageManager()->pages()) {
@@ -876,6 +876,8 @@ void KWDocument::updatePagesForStyle(const KWPageStyle &style)
             ppq->addPage(page);
         }
     }
+    if (!delayed && ppq)
+        ppq->process();
 }
 
 void KWDocument::showStartUpWidget(KoMainWindow *parent, bool alwaysShow)
@@ -999,7 +1001,7 @@ PageProcessingQueue::PageProcessingQueue(KWDocument *parent)
     m_triggered = false;
 }
 
-void PageProcessingQueue::addPage(KWPage page)
+void PageProcessingQueue::addPage(const KWPage &page)
 {
     m_pages.append(page);
     if (! m_triggered)

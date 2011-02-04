@@ -26,11 +26,13 @@
 
 #include <QUndoCommand>
 
+class KWDocument;
+
 /// The undo / redo command for setting a page style on a page
 class KWORD_TEST_EXPORT KWChangePageStyleCommand : public QUndoCommand
 {
 public:
-    explicit KWChangePageStyleCommand(KWPage &page, const KWPageStyle &newStyle, QUndoCommand *parent = 0);
+    explicit KWChangePageStyleCommand(KWDocument *document, KWPage &page, const KWPageStyle &newStyle, QUndoCommand *parent = 0);
 
     /// redo the command
     virtual void redo();
@@ -41,6 +43,7 @@ private:
     const KWPageStyle m_newStyle;
     const KWPageStyle m_oldStyle;
     KWPage m_page;
+    KWDocument *m_document;
 };
 
 #endif

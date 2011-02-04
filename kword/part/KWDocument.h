@@ -167,7 +167,7 @@ public:
     bool layoutFinishedAtleastOnce() const { return m_mainFramesetEverFinished; }
 
     /// request a relayout of auto-generated frames on all pages of this argument style.
-    void updatePagesForStyle(const KWPageStyle &style);
+    void updatePagesForStyle(const KWPageStyle &style, bool delayed);
 
     void clipToDocument(const KoShape *shape, QPointF &move) const;
 

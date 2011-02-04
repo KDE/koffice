@@ -1,7 +1,7 @@
 /*
  * This file is part of KOffice tests
  *
- * Copyright (C) 2005-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2005-2011 Thomas Zander <zander@kde.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@
 #include <commands/KWNewPageStyleCommand.h>
 #include <frames/KWTextFrame.h>
 #include <frames/KWTextFrameSet.h>
+#include <frames/KWFrameSet.h>
 #include <KoTextShapeData.h>
 
 #include <tests/MockShapes.h> // from flake
@@ -489,6 +490,7 @@ void TestPageCommands::testPageStylePropertiesCommand() // basic properties chan
     QCOMPARE(page1.leftMargin(), 13.); // its a right-sided page
     QCOMPARE(page1.pageEdgeMargin(), 7.);
     QCOMPARE(page1.directionHint(), KoText::LeftRightTopBottom);
+    QCOMPARE(document.frameSets().count(), 0);
 
     // redo
     command1.redo();
@@ -505,6 +507,8 @@ void TestPageCommands::testPageStylePropertiesCommand() // basic properties chan
     QCOMPARE(page1.pageStyle().columns().columns, 2);
     QCOMPARE(page1.pageNumber(), 1);
     QCOMPARE(page1.pageSide(), KWPage::Right);
+    QCOMPARE(document.frameSets().count(), 1); // the main text fs
+    QCOMPARE(document.frameSets().first()->frameCount(), 2); // 2 columns.
 
     QCOMPARE(manager->pageCount(), 1);
     QVERIFY(manager->page(1).isValid());

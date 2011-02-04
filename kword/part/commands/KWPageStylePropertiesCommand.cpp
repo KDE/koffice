@@ -137,22 +137,14 @@ void KWPageStylePropertiesCommand::redo()
 {
     QUndoCommand::redo();
     m_style.priv()->copyProperties(m_styleAfter.priv());
-    m_document->updatePagesForStyle(m_style);
-#if 0
-    m_document->m_frameLayout.createNewFramesForPage(m_page.pageNumber());
-    m_document->firePageSetupChanged();
-#endif
+    m_document->updatePagesForStyle(m_style, false);
 }
 
 void KWPageStylePropertiesCommand::undo()
 {
     QUndoCommand::undo();
     m_style.priv()->copyProperties(m_styleBefore.priv());
-    m_document->updatePagesForStyle(m_style);
-#if 0
-    m_document->m_frameLayout.createNewFramesForPage(m_page.pageNumber());
-    m_document->firePageSetupChanged();
-#endif
+    m_document->updatePagesForStyle(m_style, false);
 }
 
 #if 0

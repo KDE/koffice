@@ -18,14 +18,17 @@
  */
 
 #include "KWChangePageStyleCommand.h"
+#include <KWDocument_p.h>
 
 #include <KLocale>
 
-KWChangePageStyleCommand::KWChangePageStyleCommand(KWPage &page, const KWPageStyle &newStyle, QUndoCommand *parent)
+
+KWChangePageStyleCommand::KWChangePageStyleCommand(KWDocument *document, KWPage &page, const KWPageStyle &newStyle, QUndoCommand *parent)
     : QUndoCommand(i18n("Set Page Style"), parent),
     m_newStyle(newStyle),
     m_oldStyle(page.pageStyle()),
-    m_page(page)
+    m_page(page),
+    m_document(document)
 {
 }
 
@@ -33,10 +36,16 @@ void KWChangePageStyleCommand::redo()
 {
     QUndoCommand::redo();
     m_page.setPageStyle(m_newStyle);
+    PageProcessingQueue ppq(m_document);
+    ppq.addPage(m_page);
+    ppq.process();
 }
 
 void KWChangePageStyleCommand::undo()
 {
     QUndoCommand::undo();
     m_page.setPageStyle(m_oldStyle);
+    PageProcessingQueue ppq(m_document);
+    ppq.addPage(m_page);
+    ppq.process();
 }

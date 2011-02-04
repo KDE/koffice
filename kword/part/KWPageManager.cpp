@@ -410,9 +410,7 @@ QHash<QString, KWPageStyle> KWPageManager::pageStyles() const
 
 KWPageStyle KWPageManager::pageStyle(const QString &name) const
 {
-    if (d->pageStyles.contains(name))
-        return d->pageStyles[name];
-    return KWPageStyle();
+    return d->pageStyles[name];
 }
 
 void KWPageManager::addPageStyle(const KWPageStyle &pageStyle)
