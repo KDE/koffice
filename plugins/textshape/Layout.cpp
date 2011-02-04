@@ -877,6 +877,7 @@ void Layout::nextShape()
         Q_ASSERT(!m_textShape->hasFootnoteDocument());
     }
     shape->fetchInsets(m_shapeBorder);
+    m_shapeBorder += m_data->insets();
     m_y += m_shapeBorder.top;
 }
 
@@ -1014,6 +1015,7 @@ void Layout::resetPrivate()
     }
     m_demoText = m_textShape->demoText();
     shape->fetchInsets(m_shapeBorder);
+    m_shapeBorder += m_data->insets();
     if (m_y == 0)
         m_y = m_shapeBorder.top;
 
@@ -1906,6 +1908,7 @@ bool Layout::setFollowupShape(KoShape *followupShape)
     m_textShape = 0;
     m_data->setDocumentOffset(m_y);
     shape->fetchInsets(m_shapeBorder);
+    m_shapeBorder += m_data->insets();
     return true;
 }
 
@@ -1968,6 +1971,7 @@ bool Layout::previousParag()
             return false;
 
         shape->fetchInsets(m_shapeBorder);
+        m_shapeBorder += m_data->insets();
     }
     m_newShape = m_block.position() == m_data->position();
     updateBorders(); // fill the border inset member vars.
