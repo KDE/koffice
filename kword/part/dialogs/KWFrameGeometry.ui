@@ -139,7 +139,7 @@
    <item>
     <widget class="QGroupBox" name="marginsGB">
      <property name="title">
-      <string>Margins</string>
+      <string>Text Margins</string>
      </property>
      <layout class="QGridLayout">
       <item row="1" column="4" rowspan="2">
