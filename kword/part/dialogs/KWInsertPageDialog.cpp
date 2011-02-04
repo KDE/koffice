@@ -40,9 +40,8 @@ KWInsertPageDialog::KWInsertPageDialog(KWDocument *document, KWView *parent)
     } else if (parent->currentPage() == m_document->pageManager()->begin()) {
         m_widget.beforeCurrent->setEnabled(false);
     }
-    QHash<QString, KWPageStyle> styles = m_document->pageManager()->pageStyles();
-    foreach (const QString &style, styles.keys()) {
-        m_widget.pageStyle->addItem(style);
+    foreach (const KWPageStyle &pageStyle, m_document->pageManager()->pageStyles()) {
+        m_widget.pageStyle->addItem(pageStyle.name());
     }
     // TODO can we select the page style a bit smarter?
 

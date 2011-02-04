@@ -403,9 +403,9 @@ QList<KWPage> KWPageManager::pages(const QString &pageStyle) const
 
 // **** PageList ****
 
-QHash<QString, KWPageStyle> KWPageManager::pageStyles() const
+QList<KWPageStyle> KWPageManager::pageStyles() const
 {
-    return d->pageStyles;
+    return d->pageStyles.values();
 }
 
 KWPageStyle KWPageManager::pageStyle(const QString &name) const

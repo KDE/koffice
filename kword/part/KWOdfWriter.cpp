@@ -103,7 +103,7 @@ void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGen
     }
 
     // save page styles that don't have a header or footer which will be handled later
-    foreach (KWPageStyle pageStyle, m_document->pageManager()->pageStyles()) {
+    foreach (const KWPageStyle &pageStyle, m_document->pageManager()->pageStyles()) {
         if (data.contains(pageStyle))
             continue;
 

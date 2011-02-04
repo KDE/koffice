@@ -192,9 +192,8 @@ public:
 
     /**
      * Returns all pagestyles.
-     * // TODO only return a qlist of styles, they have a their name in them alraedy
      */
-    QHash<QString, KWPageStyle> pageStyles() const;
+    QList<KWPageStyle> pageStyles() const;
 
     /// return the number of registered page styles
     int pageStyleCount() const;
