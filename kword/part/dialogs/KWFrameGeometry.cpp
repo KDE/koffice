@@ -74,7 +74,17 @@ void KWFrameGeometry::open(KWFrame *frame)
 {
     m_frame = frame;
     open(frame->shape());
-    // TODO rest
+    KoInsets insets(frame->insets());
+
+    if (frame->frameSet() && frame->frameSet()->type() == KWord::TextFrameSet) {
+        widget.marginsGB->setVisible(true);
+        widget.leftMargin->changeValue(insets.left);
+        widget.rightMargin->changeValue(insets.right);
+        widget.topMargin->changeValue(insets.top);
+        widget.bottomMargin->changeValue(insets.bottom);
+    } else {
+        widget.marginsGB->setVisible(false);
+    }
 }
 
 void KWFrameGeometry::open(KoShape *shape)

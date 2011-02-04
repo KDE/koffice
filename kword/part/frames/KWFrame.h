@@ -203,6 +203,17 @@ public:
     }
     void setOutlineShape(KWOutlineShape *outline);
 
+    /**
+     * Return the spacing between the frame border and the content.
+     * Only supported by the text frame currenty.
+     */
+    KoInsets insets() const {
+        return m_padding;
+    }
+    void setInsets(const KoInsets &insets) {
+        m_padding = insets;
+    }
+
 private:
     KoShape *m_shape;
     KWord::FrameBehavior m_frameBehavior;
