@@ -76,6 +76,13 @@ public:
     void setMinimumFrameHeight(qreal minimumFrameHeight) { m_minimumFrameHeight = minimumFrameHeight; }
     qreal minimumFrameHeight() const { return m_minimumFrameHeight; }
 
+    /**
+     * Return the spacing between the frame border and the content.
+     * Only supported by the text frame currenty.
+     */
+    KoInsets insets() const;
+    void setInsets(const KoInsets &insets);
+
 private:
     /* TODO
     bool m_drawFootNoteLine; */

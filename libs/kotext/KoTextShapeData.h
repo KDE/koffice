@@ -168,6 +168,14 @@ public:
      */
     KoText::Direction pageDirection() const;
 
+    /**
+     * Return the spacing between the frame border and the content.
+     * Only supported by the text frame currenty.
+     */
+    KoInsets insets() const;
+
+    void setInsets(const KoInsets &insets);
+
 signals:
     /**
      * emitted when the shape thinks it should be relayouted, for example after

@@ -41,7 +41,6 @@ KWFrame::KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber)
         m_anchoredPageNumber(pageNumber),
         m_frameSet(parent),
         m_outline(0),
-        m_padding(7, 7, 7, 7),
         m_margin(7, 7, 7, 7)
 {
     Q_ASSERT(shape);
@@ -173,6 +172,10 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext &context)
     if (properties.isNull())
         return false;
 
+    KWTextFrameSet *tfs = 0;
+    if (frameSet() && frameSet()->type() == KWord::TextFrameSet)
+        tfs = static_cast<KWTextFrameSet*>(frameSet());
+
     QString copy = properties.attributeNS(KoXmlNS::draw, "copy-of");
     if (! copy.isEmpty()) {
         // untested... No app saves this currently..
@@ -209,15 +212,19 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext &context)
     QString marginR = properties.attributeNS(KoXmlNS::fo, "margin-right");
     m_margin.right = KoUnit::parseValue(marginR, margin);
 
-    const qreal padding(KoUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "padding")));
-    QString paddingL = properties.attributeNS(KoXmlNS::fo, "padding-left");
-    m_padding.left = KoUnit::parseValue(paddingL, padding);
-    QString paddingT = properties.attributeNS(KoXmlNS::fo, "padding-top");
-    m_padding.top = KoUnit::parseValue(paddingT, padding);
-    QString paddingB = properties.attributeNS(KoXmlNS::fo, "padding-bottom");
-    m_padding.bottom = KoUnit::parseValue(paddingB, padding);
-    QString paddingR = properties.attributeNS(KoXmlNS::fo, "padding-right");
-    m_padding.right = KoUnit::parseValue(paddingR, padding);
+    if (tfs) {
+        KoInsets p;
+        const qreal padding(KoUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "padding")));
+        QString paddingL = properties.attributeNS(KoXmlNS::fo, "padding-left");
+        p.left = KoUnit::parseValue(paddingL, padding);
+        QString paddingT = properties.attributeNS(KoXmlNS::fo, "padding-top");
+        p.top = KoUnit::parseValue(paddingT, padding);
+        QString paddingB = properties.attributeNS(KoXmlNS::fo, "padding-bottom");
+        p.bottom = KoUnit::parseValue(paddingB, padding);
+        QString paddingR = properties.attributeNS(KoXmlNS::fo, "padding-right");
+        p.right = KoUnit::parseValue(paddingR, padding);
+        static_cast<KWTextFrame*>(this)->setInsets(p);
+    }
 
     QString wrap;
     if (properties.hasAttributeNS(KoXmlNS::style, "wrap")) {
@@ -225,7 +232,6 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext &context)
     } else {
         // no value given in the file, and for compatibility reasons we do some suggestion on
         // what to use.
-        KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(frameSet());
         if (tfs == 0)
             wrap = "none";
         else

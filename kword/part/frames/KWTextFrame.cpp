@@ -68,3 +68,18 @@ void KWTextFrame::autoShrink(qreal requestedHeight)
     shape()->setSize(QSizeF(size.width(), qMax(requestedHeight, m_minimumFrameHeight)));
     m_lastHeight = size.height();
 }
+
+KoInsets KWTextFrame::insets() const
+{
+    KoTextShapeData *tsd = dynamic_cast<KoTextShapeData*>(shape()->userData());
+    Q_ASSERT(tsd);
+    return tsd->insets();
+}
+
+void KWTextFrame::setInsets(const KoInsets &insets)
+{
+    KoTextShapeData *tsd = dynamic_cast<KoTextShapeData*>(shape()->userData());
+    Q_ASSERT(tsd);
+    tsd->setInsets(insets);
+}
+

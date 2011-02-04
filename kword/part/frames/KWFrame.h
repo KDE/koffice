@@ -203,17 +203,6 @@ public:
     }
     void setOutlineShape(KWOutlineShape *outline);
 
-    /**
-     * Return the spacing between the frame border and the content.
-     * Only supported by the text frame currenty.
-     */
-    KoInsets insets() const {
-        return m_padding;
-    }
-    void setInsets(const KoInsets &insets) {
-        m_padding = insets;
-    }
-
 private:
     KoShape *m_shape;
     KWord::FrameBehavior m_frameBehavior;
@@ -228,8 +217,6 @@ private:
 
     KWFrameSet *m_frameSet;
     KWOutlineShape *m_outline;
-    KoInsets m_padding; // TextFrame only; distance between shape border and text
-
     // we store 4 directions because ODF does, but we don't really use anything but the left one
     KoInsets m_margin; // distance between me and text from another shape
 };
