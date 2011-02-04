@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -42,9 +42,13 @@ bool KWTextFrame::canAutoGrow()
 {
     if (!m_canGrow)
         return false;
-    if (shape()->size().height() - m_lastHeight < -0.2) { // shape shrunk!
+    KoInsets textInsets;
+    shape()->fetchInsets(textInsets);
+    textInsets += insets();
+    const qreal effectiveHeight = shape()->size().height() - textInsets.top - textInsets.bottom;
+    if (effectiveHeight - m_lastHeight < -0.2) { // shape shrunk!
         m_canGrow = false;
-        m_minimumFrameHeight = shape()->size().height();
+        m_minimumFrameHeight = effectiveHeight;
     }
     return m_canGrow;
 }
@@ -57,7 +61,7 @@ void KWTextFrame::allowToGrow()
 
 void KWTextFrame::autoShrink(qreal requestedHeight)
 {
-//kDebug() <<"autoShrink requested:" << requestedHeight <<", min:" << m_minimumFrameHeight <<", last:" << m_lastHeight;
+kDebug() <<"autoShrink requested:" << requestedHeight <<", min:" << m_minimumFrameHeight <<", last:" << m_lastHeight;
     QSizeF size = shape()->size();
     if (qAbs(m_lastHeight - size.height()) > 1E-6) {  // if not equal
         m_minimumFrameHeight = size.height();
