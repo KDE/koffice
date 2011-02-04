@@ -138,6 +138,13 @@ void KWFrameGeometry::updateShape()
     frame->shape()->setAbsolutePosition(pos, widget.positionSelector->position());
     QSizeF size(widget.width->value(), widget.height->value());
     frame->shape()->setSize(size);
+
+    if (frame->frameSet() && frame->frameSet()->type() == KWord::TextFrameSet) {
+        KoInsets insets(widget.topMargin->value(), widget.leftMargin->value(),
+                widget.bottomMargin->value(), widget.rightMargin->value());
+        static_cast<KWTextFrame*>(frame)->setInsets(insets);
+    }
+
     frame->shape()->update();
 }
 
@@ -160,13 +167,13 @@ void KWFrameGeometry::protectSizeChanged(int protectSizeState)
 
 void KWFrameGeometry::syncMargins(qreal value)
 {
-    if (! widget.synchronize->isChecked())
-        return;
-
-    widget.leftMargin->changeValue(value);
-    widget.topMargin->changeValue(value);
-    widget.rightMargin->changeValue(value);
-    widget.bottomMargin->changeValue(value);
+    if (widget.synchronize->isChecked()) {
+        widget.leftMargin->changeValue(value);
+        widget.topMargin->changeValue(value);
+        widget.rightMargin->changeValue(value);
+        widget.bottomMargin->changeValue(value);
+    }
+    updateShape();
 }
 
 void KWFrameGeometry::save()
