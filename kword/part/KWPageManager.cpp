@@ -410,7 +410,7 @@ QList<KWPageStyle> KWPageManager::pageStyles() const
 
 KWPageStyle KWPageManager::pageStyle(const QString &name) const
 {
-    return d->pageStyles[name];
+    return d->pageStyles.value(name);
 }
 
 void KWPageManager::addPageStyle(const KWPageStyle &pageStyle)
