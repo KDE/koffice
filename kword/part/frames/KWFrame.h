@@ -132,14 +132,18 @@ public:
      * @return the space around this frame to keep free from text
      */
     qreal runAroundDistance() const {
-        return m_runAroundDistance;
+        return m_margin.left;
     }
+
     /**
      * Set the space between this frames edge and the text when that text runs around this frame.
      * @param distance the space around this frame to keep free from text
      */
     void setRunAroundDistance(qreal distance) {
-        m_runAroundDistance = distance;
+        m_margin.left = distance;
+        m_margin.top = distance;
+        m_margin.bottom = distance;
+        m_margin.right = distance;
     }
 
     /**
@@ -206,7 +210,6 @@ private:
     KWord::NewFrameBehavior m_newFrameBehavior;
     KWord::RunAroundSide m_runAroundSide;
     KWord::TextRunAround m_runAround;
-    qreal m_runAroundDistance;
     // The page number is only used during loading.
     // It is set to the page number if the frame contains a page anchored frame.
     // In all other cases it is set to -1.
@@ -214,6 +217,10 @@ private:
 
     KWFrameSet *m_frameSet;
     KWOutlineShape *m_outline;
+    KoInsets m_padding; // TextFrame only; distance between shape border and text
+
+    // we store 4 directions because ODF does, but we don't really use anything but the left one
+    KoInsets m_margin; // distance between me and text from another shape
 };
 
 #endif

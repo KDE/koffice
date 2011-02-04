@@ -38,10 +38,11 @@ KWFrame::KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber)
         m_newFrameBehavior(KWord::NoFollowupFrame),
         m_runAroundSide(KWord::BiggestRunAroundSide),
         m_runAround(KWord::RunAround),
-        m_runAroundDistance(1.0),
         m_anchoredPageNumber(pageNumber),
         m_frameSet(parent),
-        m_outline(0)
+        m_outline(0),
+        m_padding(7, 7, 7, 7),
+        m_margin(7, 7, 7, 7)
 {
     Q_ASSERT(shape);
     shape->setApplicationData(this);
@@ -198,16 +199,25 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext &context)
     else
         setNewFrameBehavior(KWord::NoFollowupFrame);
 
-    QString margin = properties.attributeNS(KoXmlNS::fo, "margin");
-    if (margin.isEmpty())
-        margin = properties.attributeNS(KoXmlNS::fo, "margin-left");
-    if (margin.isEmpty())
-        margin = properties.attributeNS(KoXmlNS::fo, "margin-top");
-    if (margin.isEmpty())
-        margin = properties.attributeNS(KoXmlNS::fo, "margin-bottom");
-    if (margin.isEmpty())
-        margin = properties.attributeNS(KoXmlNS::fo, "margin-right");
-    setRunAroundDistance(KoUnit::parseValue(margin));
+    const qreal margin(KoUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "margin")));
+    QString marginL = properties.attributeNS(KoXmlNS::fo, "margin-left");
+    m_margin.left = KoUnit::parseValue(marginL, margin);
+    QString marginT = properties.attributeNS(KoXmlNS::fo, "margin-top");
+    m_margin.top = KoUnit::parseValue(marginT, margin);
+    QString marginB = properties.attributeNS(KoXmlNS::fo, "margin-bottom");
+    m_margin.bottom = KoUnit::parseValue(marginB, margin);
+    QString marginR = properties.attributeNS(KoXmlNS::fo, "margin-right");
+    m_margin.right = KoUnit::parseValue(marginR, margin);
+
+    const qreal padding(KoUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "padding")));
+    QString paddingL = properties.attributeNS(KoXmlNS::fo, "padding-left");
+    m_padding.left = KoUnit::parseValue(paddingL, padding);
+    QString paddingT = properties.attributeNS(KoXmlNS::fo, "padding-top");
+    m_padding.top = KoUnit::parseValue(paddingT, padding);
+    QString paddingB = properties.attributeNS(KoXmlNS::fo, "padding-bottom");
+    m_padding.bottom = KoUnit::parseValue(paddingB, padding);
+    QString paddingR = properties.attributeNS(KoXmlNS::fo, "padding-right");
+    m_padding.right = KoUnit::parseValue(paddingR, padding);
 
     QString wrap;
     if (properties.hasAttributeNS(KoXmlNS::style, "wrap")) {
