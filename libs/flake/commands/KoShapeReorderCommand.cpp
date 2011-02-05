@@ -177,5 +177,5 @@ KoShapeReorderCommand *KoShapeReorderCommand::createCommand(const QList<KoShape*
         }
     }
     Q_ASSERT(changedShapes.count() == newIndexes.count());
-    return changedShapes.isEmpty() ? 0: new KoShapeReorderCommand(changedShapes, newIndexes, parent);
+    return new KoShapeReorderCommand(changedShapes, newIndexes, parent);
 }
