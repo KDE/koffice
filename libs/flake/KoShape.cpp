@@ -34,6 +34,7 @@
 #include "KoGradientBackground.h"
 #include "KoPatternBackground.h"
 #include "KoShapeManager.h"
+#include "KoShapeManager_p.h"
 #include "KoShapeUserData.h"
 #include "KoShapeApplicationData.h"
 #include "KoShapeSavingContext.h"
@@ -174,7 +175,7 @@ void KoShapePrivate::addConnection(KoShapeConnection *connection)
 {
     connections.append(connection);
     foreach (KoShapeManager *sm, shapeManagers)
-        sm->addShapeConnection(connection);
+        sm->priv()->addShapeConnection(connection);
 }
 
 void KoShapePrivate::removeConnection(KoShapeConnection *connection)

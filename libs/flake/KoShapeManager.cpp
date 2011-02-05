@@ -113,6 +113,12 @@ void KoShapeManagerPrivate::paintGroup(KoShapeGroup *group, QPainter &painter, c
     }
 }
 
+void KoShapeManagerPrivate::addShapeConnection(KoShapeConnection *connection)
+{
+    connectionTree.insert(connection->boundingRect(), connection);
+}
+
+
 KoShapeManager::KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &shapes)
         : d(new KoShapeManagerPrivate(this, canvas))
 {
@@ -607,9 +613,9 @@ void KoShapeManager::setPaintingStrategy(KoShapeManagerPaintingStrategy *strateg
     d->strategy = strategy;
 }
 
-void KoShapeManager::addShapeConnection(KoShapeConnection *connection)
+KoShapeManagerPrivate *KoShapeManager::priv()
 {
-    d->connectionTree.insert(connection->boundingRect(), connection);
+    return d;
 }
 
 #include <KoShapeManager.moc>

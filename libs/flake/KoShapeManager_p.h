@@ -40,6 +40,12 @@ public:
      */
     void paintGroup(KoShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint);
 
+    /**
+     * Add a shape connection to the manager so it can be taken into account for drawing purposes.
+     * Note that this is typically called by the shape instance only.
+     */
+    void addShapeConnection(KoShapeConnection *connection);
+
     class DetectCollision
     {
     public:
