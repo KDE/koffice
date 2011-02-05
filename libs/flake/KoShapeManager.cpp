@@ -21,15 +21,13 @@
 */
 
 #include "KoShapeManager.h"
+#include "KoShapeManager_p.h"
 #include "KoSelection.h"
 #include "KoToolManager.h"
 #include "KoPointerEvent.h"
-#include "KoShape.h"
-#include "KoShape_p.h"
 #include "KoCanvasBase.h"
 #include "KoShapeContainer.h"
 #include "KoShapeBorderBase.h"
-#include "KoShapeGroup.h"
 #include "KoToolProxy.h"
 #include "KoShapeManagerPaintingStrategy.h"
 #include "KoShapeShadow.h"
@@ -45,83 +43,22 @@
 #include <QTimer>
 #include <kdebug.h>
 
-class KoShapeManager::Private
+KoShapeManagerPrivate::KoShapeManagerPrivate(KoShapeManager *shapeManager, KoCanvasBase *c)
+    : selection(new KoSelection()),
+    canvas(c),
+    tree(4, 2),
+    connectionTree(4, 2),
+    strategy(new KoShapeManagerPaintingStrategy(shapeManager)),
+    q(shapeManager)
 {
-public:
-    Private(KoShapeManager *shapeManager, KoCanvasBase *c)
-        : selection(new KoSelection()),
-          canvas(c),
-          tree(4, 2),
-          connectionTree(4, 2),
-          strategy(new KoShapeManagerPaintingStrategy(shapeManager)),
-          q(shapeManager)
-    {
-    }
+}
 
-    ~Private() {
-        delete selection;
-        delete strategy;
-    }
+KoShapeManagerPrivate::~KoShapeManagerPrivate() {
+    delete selection;
+    delete strategy;
+}
 
-    /**
-     * Update the tree when there are shapes in m_aggregate4update. This is done so not all
-     * updates to the tree are done when they are asked for but when they are needed.
-     */
-    void updateTree();
-
-    /**
-     * Recursively paints the given group shape to the specified painter
-     * This is needed for filter effects on group shapes where the filter effect
-     * applies to all the children of the group shape at once
-     */
-    void paintGroup(KoShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint);
-
-    class DetectCollision
-    {
-    public:
-        DetectCollision() {}
-        void detect(KoRTree<KoShape *> &tree, KoShape *s, int prevZIndex) {
-            foreach(KoShape *shape, tree.intersects(s->boundingRect())) {
-                bool isChild = false;
-                KoShapeContainer *parent = s->parent();
-                while (parent && !isChild) {
-                    if (parent == shape)
-                        isChild = true;
-                    parent = parent->parent();
-                }
-                if (isChild)
-                    continue;
-                if (s->zIndex() <= shape->zIndex() && prevZIndex <= shape->zIndex())
-                    // Moving a shape will only make it collide with shapes below it.
-                    continue;
-                if (shape->collisionDetection() && !shapesWithCollisionDetection.contains(shape))
-                    shapesWithCollisionDetection.append(shape);
-            }
-        }
-
-        void fireSignals() {
-            foreach(KoShape *shape, shapesWithCollisionDetection)
-                shape->priv()->shapeChanged(KoShape::CollisionDetected);
-        }
-
-    private:
-        QList<KoShape*> shapesWithCollisionDetection;
-    };
-
-    QList<KoShape *> shapes;
-    QList<KoShape *> additionalShapes; // these are shapes that are only handled for updates
-    KoSelection *selection;
-    KoCanvasBase *canvas;
-    KoRTree<KoShape *> tree;
-    KoRTree<KoShapeConnection *> connectionTree;
-
-    QSet<KoShape *> aggregate4update;
-    QHash<KoShape*, int> shapeIndexesBeforeUpdate;
-    KoShapeManagerPaintingStrategy *strategy;
-    KoShapeManager *q;
-};
-
-void KoShapeManager::Private::updateTree()
+void KoShapeManagerPrivate::updateTree()
 {
     // for detecting collisions between shapes.
     DetectCollision detector;
@@ -157,7 +94,7 @@ void KoShapeManager::Private::updateTree()
     }
 }
 
-void KoShapeManager::Private::paintGroup(KoShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void KoShapeManagerPrivate::paintGroup(KoShapeGroup *group, QPainter &painter, const KoViewConverter &converter, bool forPrint)
 {
     QList<KoShape*> shapes = group->shapes();
     qSort(shapes.begin(), shapes.end(), KoShape::compareShapeZIndex);
@@ -177,7 +114,7 @@ void KoShapeManager::Private::paintGroup(KoShapeGroup *group, QPainter &painter,
 }
 
 KoShapeManager::KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &shapes)
-        : d(new Private(this, canvas))
+        : d(new KoShapeManagerPrivate(this, canvas))
 {
     Q_ASSERT(d->canvas); // not optional.
     connect(d->selection, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
@@ -185,7 +122,7 @@ KoShapeManager::KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &sha
 }
 
 KoShapeManager::KoShapeManager(KoCanvasBase *canvas)
-        : d(new Private(this, canvas))
+        : d(new KoShapeManagerPrivate(this, canvas))
 {
     Q_ASSERT(d->canvas); // not optional.
     connect(d->selection, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
@@ -244,7 +181,7 @@ void KoShapeManager::addShape(KoShape *shape, Repaint repaint)
         }
     }
 
-    Private::DetectCollision detector;
+    KoShapeManagerPrivate::DetectCollision detector;
     detector.detect(d->tree, shape, shape->zIndex());
     detector.fireSignals();
 }
@@ -262,7 +199,7 @@ void KoShapeManager::addAdditional(KoShape *shape)
 
 void KoShapeManager::remove(KoShape *shape)
 {
-    Private::DetectCollision detector;
+    KoShapeManagerPrivate::DetectCollision detector;
     detector.detect(d->tree, shape, shape->zIndex());
     detector.fireSignals();
 

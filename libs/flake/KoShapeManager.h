@@ -36,6 +36,7 @@ class KoCanvasBase;
 class KoPointerEvent;
 class KoShapeManagerPaintingStrategy;
 class KoShapeConnection;
+class KoShapeManagerPrivate;
 
 class QPainter;
 class QPointF;
@@ -201,14 +202,14 @@ public:
 // TODO move to private
 
 signals:
+    friend class KoShapeManagerPrivate;
     /// emitted when the selection is changed
     void selectionChanged();
     /// emitted when an object in the selection is changed (moved/rotated etc)
     void selectionContentChanged();
 
 private:
-    class Private;
-    Private * const d;
+    KoShapeManagerPrivate * const d;
     Q_PRIVATE_SLOT(d, void updateTree())
 };
 
