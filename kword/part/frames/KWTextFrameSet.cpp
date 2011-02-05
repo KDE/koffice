@@ -129,14 +129,15 @@ KWTextFrameSet::~KWTextFrameSet()
 
 void KWTextFrameSet::setupFrame(KWFrame *frame)
 {
-    if (m_textFrameSetType != KWord::OtherTextFrameSet)
-        frame->shape()->setGeometryProtected(true);
     KoTextShapeData *data = qobject_cast<KoTextShapeData*>(frame->shape()->userData());
     if (data == 0) {// probably a copy frame.
         Q_ASSERT(frameCount() > 1);
         return;
     }
-
+    if (m_textFrameSetType != KWord::OtherTextFrameSet) {
+        frame->shape()->setGeometryProtected(true);
+        data->setInsets(KoInsets());
+    }
     if (frameCount() == 1 && m_document->isEmpty() && m_document->allFormats().count() == 2) {
         // just added first frame...
         delete m_document;

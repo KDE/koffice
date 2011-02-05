@@ -30,8 +30,6 @@
 #include <KoXmlNS.h>
 
 KWFrame::KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber)
-// Initialize member vars here. This ensures they are all initialized, since it's
-// easier to compare this list with the member vars list (compiler ensures order).
         : m_shape(shape),
         m_frameBehavior(KWord::AutoExtendFrameBehavior),
         m_copyToEverySheet(true),
@@ -93,6 +91,22 @@ void KWFrame::copySettings(const KWFrame *frame)
 void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pageZIndexOffset) const
 {
     // frame properties first
+    if (m_margin.left == m_margin.right && m_margin.top == m_margin.bottom
+            && m_margin.left == m_margin.top) {
+        if (qAbs(m_margin.top) > 1E-4) {
+            m_shape->setAdditionalStyleAttribute("fo:margin", QString::number(m_margin.top) + "pt");
+        }
+    } else {
+        if (qAbs(m_margin.left) > 1E-4)
+            m_shape->setAdditionalStyleAttribute("fo:margin-left", QString::number(m_margin.left) + "pt");
+        if (qAbs(m_margin.top) > 1E-4)
+            m_shape->setAdditionalStyleAttribute("fo:margin-top", QString::number(m_margin.top) + "pt");
+        if (qAbs(m_margin.bottom) > 1E-4)
+            m_shape->setAdditionalStyleAttribute("fo:margin-bottom", QString::number(m_margin.bottom) + "pt");
+        if (qAbs(m_margin.right) > 1E-4)
+            m_shape->setAdditionalStyleAttribute("fo:margin-right", QString::number(m_margin.right) + "pt");
+    }
+
     m_shape->setAdditionalStyleAttribute("fo:margin", QString::number(runAroundDistance()) + "pt");
     m_shape->setAdditionalStyleAttribute("style:horizontal-pos", "from-left");
     m_shape->setAdditionalStyleAttribute("style:horizontal-rel", "page");
@@ -147,6 +161,7 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
             m_shape->setAdditionalAttribute("koffice:frame-copy-to-facing-pages", "true");
     }
 
+
     // shape properties
     const qreal pagePos = page.offsetInDocument();
 
@@ -165,7 +180,7 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
     m_shape->removeAdditionalAttribute("text:anchor-type");
 }
 
-bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext &context)
+bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*context */)
 {
     setFrameBehavior(KWord::IgnoreContentFrameBehavior);
     KoXmlElement properties(KoXml::namedItemNS(style, KoXmlNS::style, "graphic-properties"));
