@@ -142,9 +142,6 @@ KoShape * KoShapeRegistry::createShapeFromOdf(const KoXmlElement & e, KoShapeLoa
     // If the element is in a frame, the frame is already added by the
     // application and we only want to create a shape from the
     // embedded element. The very first shape we create is accepted.
-    //
-    // FIXME: we might want to have some code to determine which is
-    //        the "best" of the creatable shapes.
     if (e.tagName() == "frame" && e.namespaceURI() == KoXmlNS::draw) {
         KoXmlElement element;
         forEachElement(element, e) {
