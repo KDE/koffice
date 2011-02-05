@@ -26,13 +26,14 @@
 #include <QList>
 #include <QPainterPath>
 
-class KoShapeConnection::Private {
+class KoShapeConnection::Private
+{
 public:
     Private(KoShape *from, int gp1, KoShape *to, int gp2)
-    : shape1(from),
-    shape2(to),
-    gluePointIndex1(gp1),
-    gluePointIndex2(gp2)
+        : shape1(from),
+        shape2(to),
+        gluePointIndex1(gp1),
+        gluePointIndex2(gp2)
     {
         Q_ASSERT(shape1 == 0 || shape1->connectionPoints().count() > gp1);
         Q_ASSERT(shape2 == 0 || shape2->connectionPoints().count() > gp2);
@@ -43,19 +44,19 @@ public:
     }
 
     Private(KoShape *from, int gp1, const QPointF& ep)
-    : shape1(from),
-    shape2(0),
-    gluePointIndex1(gp1),
-    gluePointIndex2(0),
-    endPoint (ep)
+        : shape1(from),
+        shape2(0),
+        gluePointIndex1(gp1),
+        gluePointIndex2(0),
+        endPoint (ep)
     {
         Q_ASSERT(shape1 == 0 || shape1->connectionPoints().count() > gp1);
 
         zIndex = shape1->zIndex() + 1;
     }
 
-    KoShape * const shape1;
-    KoShape * shape2;
+    KoShape *const shape1;
+    KoShape *shape2;
     int gluePointIndex1;
     int gluePointIndex2;
     QPointF endPoint;
@@ -76,14 +77,16 @@ KoShapeConnection::KoShapeConnection(KoShape* from, int gluePointIndex, const QP
     d->shape1->addConnection(this);
 }
 
-KoShapeConnection::~KoShapeConnection() {
+KoShapeConnection::~KoShapeConnection()
+{
     d->shape1->removeConnection(this);
     d->shape2->removeConnection(this);
     delete d;
 }
 
-void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converter) {
-    double x, y;
+void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converter)
+{
+    qreal x, y;
     converter.zoom(&x, &y);
     QTransform matrix = d->shape1->absoluteTransformation(&converter);
     matrix.scale(x, y);
@@ -100,8 +103,7 @@ void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converte
     QPainterPath path;
     path.moveTo(a);
 
-    foreach(QPointF point, d->controlPoints)
-    {
+    foreach (QPointF point, d->controlPoints) {
         path.lineTo(converter.documentToView(point));
     }
 
@@ -112,48 +114,56 @@ void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converte
     painter.drawPath(path);
 }
 
-KoShape *KoShapeConnection::shape1() const {
+KoShape *KoShapeConnection::shape1() const
+{
     return d->shape1;
 }
 
-KoShape *KoShapeConnection::shape2() const {
+KoShape *KoShapeConnection::shape2() const
+{
     return d->shape2;
 }
 
-int KoShapeConnection::zIndex() const {
+int KoShapeConnection::zIndex() const
+{
     return d->zIndex;
 }
 
-void KoShapeConnection::setZIndex(int index) {
+void KoShapeConnection::setZIndex(int index)
+{
     d->zIndex = index;
 }
 
-int KoShapeConnection::gluePointIndex1() const {
+int KoShapeConnection::gluePointIndex1() const
+{
     return d->gluePointIndex1;
 }
 
-int KoShapeConnection::gluePointIndex2() const {
+int KoShapeConnection::gluePointIndex2() const
+{
     return d->gluePointIndex2;
 }
 
-QPointF KoShapeConnection::startPoint() const {
+QPointF KoShapeConnection::startPoint() const
+{
     return d->shape1->absoluteTransformation(0).map(d->shape1->connectionPoints()[d->gluePointIndex1]);
 }
 
-QPointF KoShapeConnection::endPoint() const {
-    if(d->shape2)
+QPointF KoShapeConnection::endPoint() const
+{
+    if (d->shape2)
         return d->shape2->absoluteTransformation(0).map(d->shape2->connectionPoints()[d->gluePointIndex2]);
     return d->endPoint;
 }
 
-QRectF KoShapeConnection::boundingRect() const {
+QRectF KoShapeConnection::boundingRect() const
+{
     QPointF start = startPoint();
     QPointF end = endPoint();
     QPointF topLeft(qMin(start.x(), end.x()), qMin(start.y(), end.y()));
     QPointF bottomRight(qMax(start.x(), end.x()), qMax(start.y(), end.y()));
 
-    foreach(QPointF point, d->controlPoints)
-    {
+    foreach (QPointF point, d->controlPoints) {
         topLeft.setX(qMin(topLeft.x(), point.x()));
         topLeft.setY(qMin(topLeft.y(), point.y()));
         bottomRight.setX(qMax(bottomRight.x(), point.x()));
@@ -164,18 +174,17 @@ QRectF KoShapeConnection::boundingRect() const {
     return br.normalized();
 }
 
-void KoShapeConnection::setEndPoint(const QPointF& point)
+void KoShapeConnection::setEndPoint(const QPointF &point)
 {
     d->endPoint = point;
 }
 
-void KoShapeConnection::setEndPoint(KoShape* shape, int gluePointIndex)
+void KoShapeConnection::setEndPoint(KoShape *shape, int gluePointIndex)
 {
-    if(!shape)
+    if (!shape)
         return;
 
-    if(d->shape2)
-    {
+    if (d->shape2) {
         d->shape2->removeConnection(this);
     }
 
@@ -185,12 +194,13 @@ void KoShapeConnection::setEndPoint(KoShape* shape, int gluePointIndex)
     d->shape2->addConnection(this);
 }
 
-void KoShapeConnection::appendControlPoint(const QPointF& point)
+void KoShapeConnection::appendControlPoint(const QPointF &point)
 {
     d->controlPoints.append(point);
 }
 
 //static
-bool KoShapeConnection::compareConnectionZIndex(KoShapeConnection *c1, KoShapeConnection *c2) {
+bool KoShapeConnection::compareConnectionZIndex(KoShapeConnection *c1, KoShapeConnection *c2)
+{
     return c1->zIndex() < c2->zIndex();
 }
