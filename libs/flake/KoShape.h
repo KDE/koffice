@@ -59,6 +59,7 @@ class KoEventAction;
 class KoShapePrivate;
 class KoFilterEffectStack;
 class KoSnapData;
+class KoShapeConnection;
 
 /**
  *
@@ -952,6 +953,20 @@ protected:
 
     /// return the current matrix that contains the rotation/scale/position of this shape
     QTransform transform() const;
+
+
+// TODO move to the private?
+    friend class KoShapeConnection;
+    /**
+     * Add a connection to the list of connections of this shape.
+     * This is typically called only from the constructor of the KoShapeConnection class.
+     */
+    void addConnection(KoShapeConnection *connection);
+    /**
+     * Remove a connection to the list of connections of this shape.
+     * This is typically called only from the destructor of the KoShapeConnection class.
+     */
+    void removeConnection(KoShapeConnection *connection);
 
     KoShapePrivate *d_ptr;
 
