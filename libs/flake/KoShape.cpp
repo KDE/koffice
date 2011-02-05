@@ -202,11 +202,9 @@ KoShape::~KoShape()
 void KoShape::paint(QPainter &painter, const KoViewConverter &converter)
 {
     Q_D(KoShape);
-    applyConversion(painter, converter);
     if (d->fill) {
-        QPainterPath p;
-        p.addRect(QRectF(QPointF(), size()));
-        d->fill->paint(painter, p);
+        applyConversion(painter, converter);
+        d->fill->paint(painter, outline());
     }
 }
 

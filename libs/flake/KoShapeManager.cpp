@@ -340,9 +340,6 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
     d->tree.paint(painter);
     painter.restore();
 #endif
-
-    if (! forPrint)
-        d->selection->paint(painter, converter);
 }
 
 void KoShapeManager::paintShape(KoShape *shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)

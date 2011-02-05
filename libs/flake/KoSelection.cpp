@@ -27,7 +27,6 @@
 #include "KoShapeGroup.h"
 #include "KoPointerEvent.h"
 
-#include <QPainter>
 #include <QTimer>
 
 QRectF KoSelectionPrivate::sizeRect()
