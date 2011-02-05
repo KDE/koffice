@@ -301,6 +301,7 @@ install(
     KoShapeBorderRegistry.h
     KoShapeConfigFactoryBase.h
     KoShapeConfigWidgetBase.h
+    KoShapeConnection.h
     KoShapeContainerDefaultModel.h
     KoShapeContainer.h
     KoShapeContainerModel.h
