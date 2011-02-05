@@ -33,6 +33,7 @@
 #include "KoToolProxy.h"
 #include "KoShapeManagerPaintingStrategy.h"
 #include "KoShapeShadow.h"
+#include "KoShapeConnection.h"
 #include "KoShapeLayer.h"
 #include "KoFilterEffect.h"
 #include "KoFilterEffectStack.h"
@@ -51,6 +52,7 @@ public:
         : selection(new KoSelection()),
           canvas(c),
           tree(4, 2),
+          connectionTree(4, 2),
           strategy(new KoShapeManagerPaintingStrategy(shapeManager)),
           q(shapeManager)
     {
@@ -111,6 +113,8 @@ public:
     KoSelection *selection;
     KoCanvasBase *canvas;
     KoRTree<KoShape *> tree;
+    KoRTree<KoShapeConnection *> connectionTree;
+
     QSet<KoShape *> aggregate4update;
     QHash<KoShape*, int> shapeIndexesBeforeUpdate;
     KoShapeManagerPaintingStrategy *strategy;
@@ -122,7 +126,7 @@ void KoShapeManager::Private::updateTree()
     // for detecting collisions between shapes.
     DetectCollision detector;
     bool selectionModified = false;
-    foreach(KoShape *shape, aggregate4update) {
+    foreach (KoShape *shape, aggregate4update) {
         if (shapeIndexesBeforeUpdate.contains(shape))
             detector.detect(tree, shape, shapeIndexesBeforeUpdate[shape]);
         selectionModified = selectionModified || selection->isSelected(shape);
@@ -133,6 +137,11 @@ void KoShapeManager::Private::updateTree()
         QRectF br(shape->boundingRect());
         strategy->adapt(shape, br);
         tree.insert(br, shape);
+
+        foreach (KoShapeConnection *connection, shape->connections()) {
+            connectionTree.remove(connection);
+            connectionTree.insert(connection->boundingRect(), connection);
+        }
     }
 
     // do it again to see which shapes we intersect with _after_ moving.
@@ -284,10 +293,12 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
     painter.setPen(Qt::NoPen);  // painters by default have a black stroke, lets turn that off.
     painter.setBrush(Qt::NoBrush);
 
+    QList<KoShapeConnection*> sortedConnections;
     QList<KoShape*> unsortedShapes;
     if (painter.hasClipping()) {
         QRectF rect = converter.viewToDocument(painter.clipRegion().boundingRect());
         unsortedShapes = d->tree.intersects(rect);
+        sortedConnections = d->connectionTree.intersects(rect);
     } else {
         unsortedShapes = shapes();
         kWarning() << "KoShapeManager::paint  Painting with a painter that has no clipping will lead to too much being painted!";
@@ -320,15 +331,35 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
     }
 
     qSort(sortedShapes.begin(), sortedShapes.end(), KoShape::compareShapeZIndex);
+    qSort(sortedConnections.begin(), sortedConnections.end(), KoShapeConnection::compareConnectionZIndex);
+    QList<KoShapeConnection*>::iterator connectionIterator = sortedConnections.begin();
+
 
     foreach (KoShape *shape, sortedShapes) {
         if (shape->parent() != 0 && shape->parent()->isClipped(shape))
             continue;
 
+        while (connectionIterator != sortedConnections.end()
+                && (*connectionIterator)->zIndex() < shape->zIndex()) {
+            painter.save();
+            (*connectionIterator)->paint( painter, converter );
+            painter.restore();
+            connectionIterator++;
+        }
+
         painter.save();
         d->strategy->paint(shape, painter, converter, forPrint);
         painter.restore();
     }
+
+
+    while (connectionIterator != sortedConnections.end()) { // paint connections that are above the rest.
+        painter.save();
+        (*connectionIterator)->paint( painter, converter );
+        painter.restore();
+        connectionIterator++;
+    }
+
 
 #ifdef KOFFICE_RTREE_DEBUG
     // paint tree
@@ -554,6 +585,11 @@ void KoShapeManager::update(QRectF &rect, const KoShape *shape, bool selectionHa
         if (d->canvas->toolProxy())
             d->canvas->toolProxy()->repaintDecorations();
     }
+
+    if (selectionHandles) {
+        foreach (KoShapeConnection *connection, shape->connections())
+            d->canvas->updateCanvas(connection->boundingRect());
+    }
 }
 
 void KoShapeManager::notifyShapeChanged(KoShape *shape)
@@ -629,6 +665,11 @@ void KoShapeManager::setPaintingStrategy(KoShapeManagerPaintingStrategy *strateg
 {
     delete d->strategy;
     d->strategy = strategy;
+}
+
+void KoShapeManager::addShapeConnection(KoShapeConnection *connection)
+{
+    d->connectionTree.insert(connection->boundingRect(), connection);
 }
 
 #include <KoShapeManager.moc>

@@ -1545,6 +1545,26 @@ void KoShape::setToolDelegates(const QSet<KoShape*> &delegates)
     d->toolDelegates = delegates;
 }
 
+void KoShape::addConnection(KoShapeConnection *connection)
+{
+    Q_D(KoShape);
+    d->connections.append(connection);
+    foreach (KoShapeManager *sm, d->shapeManagers)
+        sm->addShapeConnection( connection );
+}
+
+void KoShape::removeConnection(KoShapeConnection *connection)
+{
+    Q_D(KoShape);
+    d->connections.removeAll(connection);
+}
+
+QList<KoShapeConnection*> KoShape::connections() const
+{
+    Q_D(const KoShape);
+    return d->connections;
+}
+
 KoShapePrivate *KoShape::priv()
 {
     Q_D(KoShape);

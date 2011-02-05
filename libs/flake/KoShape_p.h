@@ -82,6 +82,8 @@ public:
     KoFilterEffectStack *filterEffectStack; ///< stack of filter effects applied to the shape
     qreal transparency; ///< the shapes transparency
 
+    QList<KoShapeConnection*> connections;
+
     static const int MaxZIndex = 32767;
     int zIndex : 16; // keep maxZIndex in sync!
     int visible : 1;

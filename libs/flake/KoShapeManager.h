@@ -35,7 +35,7 @@ class KoViewConverter;
 class KoCanvasBase;
 class KoPointerEvent;
 class KoShapeManagerPaintingStrategy;
-
+class KoShapeConnection;
 
 class QPainter;
 class QPointF;
@@ -191,6 +191,12 @@ public:
      *    strategy will be taken by the shape manager.
      */
     void setPaintingStrategy(KoShapeManagerPaintingStrategy *strategy);
+
+    /**
+     * Add a shape connection to the manager so it can be taken into account for drawing purposes.
+     * Note that this is typically called by the shape instance only.
+     */
+    void addShapeConnection(KoShapeConnection *connection);
 
 signals:
     /// emitted when the selection is changed

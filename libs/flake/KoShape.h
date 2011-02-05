@@ -957,6 +957,7 @@ protected:
 
 // TODO move to the private?
     friend class KoShapeConnection;
+    friend class KoShapeManager;
     /**
      * Add a connection to the list of connections of this shape.
      * This is typically called only from the constructor of the KoShapeConnection class.
@@ -967,6 +968,8 @@ protected:
      * This is typically called only from the destructor of the KoShapeConnection class.
      */
     void removeConnection(KoShapeConnection *connection);
+
+    QList<KoShapeConnection*> connections() const;
 
     KoShapePrivate *d_ptr;
 
