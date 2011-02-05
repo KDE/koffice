@@ -58,8 +58,6 @@ public:
     KoSelection();
     virtual ~KoSelection();
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
-
     /**
      * Adds a shape to the selection.
      *
@@ -144,9 +142,6 @@ signals:
     void currentLayerChanged(const KoShapeLayer *layer);
 
 private:
-    virtual void saveOdf(KoShapeSavingContext &) const;
-    virtual bool loadOdf(const KoXmlElement &, KoShapeLoadingContext &);
-
     Q_PRIVATE_SLOT(d_func(), void selectionChangedEvent())
     Q_DECLARE_PRIVATE_D(KoShape::d_ptr, KoSelection)
 };

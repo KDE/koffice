@@ -191,6 +191,17 @@ KoShape::~KoShape()
     delete d_ptr;
 }
 
+void KoShape::paint(QPainter &painter, const KoViewConverter &converter)
+{
+    Q_D(KoShape);
+    applyConversion(painter, converter);
+    if (d->fill) {
+        QPainterPath p;
+        p.addRect(QRectF(QPointF(), size()));
+        d->fill->paint(painter, p);
+    }
+}
+
 void KoShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KoCanvasBase *canvas)
 {
     Q_UNUSED(painter);
@@ -905,6 +916,17 @@ bool KoShape::isEditable() const
 }
 
 // loading & saving methods
+bool KoShape::loadOdf(const KoXmlElement &, KoShapeLoadingContext &)
+{
+    kWarning(30006) << "Warning; empty KoShape::loadOdf called, reimplement for load to work";
+    return true;
+}
+
+void KoShape::saveOdf(KoShapeSavingContext &) const
+{
+    kWarning(30006) << "Warning; empty KoShape::saveOdf called, reimplement for saving to work";
+}
+
 QString KoShape::saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const
 {
     Q_D(const KoShape);

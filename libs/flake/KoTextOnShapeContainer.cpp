@@ -179,10 +179,6 @@ KoTextOnShapeContainer::~KoTextOnShapeContainer()
     if (d->content && d->content->parent() == this) delete d->content;
 }
 
-void KoTextOnShapeContainer::paintComponent(QPainter &, const KoViewConverter &)
-{
-}
-
 bool KoTextOnShapeContainer::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_D(KoTextOnShapeContainer);

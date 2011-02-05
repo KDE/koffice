@@ -150,7 +150,7 @@ public:
      * @param converter to convert between internal and view coordinates.
      * @see applyConversion()
      */
-    virtual void paint(QPainter &painter, const KoViewConverter &converter) = 0;
+    virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
     /**
      * Paint non-print decorations specific for this type of shape.
@@ -171,7 +171,7 @@ public:
      *
      * @return false if loading failed
      */
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context) = 0;
+    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
     /**
      * @brief store the shape data as ODF XML.
@@ -179,7 +179,7 @@ public:
      * OpenDocument 9.2 Drawing Shapes.
      * @see saveOdfAttributes
      */
-    virtual void saveOdf(KoShapeSavingContext &context) const = 0;
+    virtual void saveOdf(KoShapeSavingContext &context) const;
 
     /**
      * This method can be used while saving the shape as ODF to add the data

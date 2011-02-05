@@ -194,6 +194,11 @@ void KoShapeContainer::paint(QPainter &painter, const KoViewConverter &converter
     }
 }
 
+void KoShapeContainer::paintComponent(QPainter &, const KoViewConverter &)
+{
+    // empty
+}
+
 void KoShapeContainer::shapeChanged(ChangeType type, KoShape *shape)
 {
     Q_D(KoShapeContainer);

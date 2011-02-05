@@ -119,12 +119,6 @@ KoSelection::~KoSelection()
 {
 }
 
-void KoSelection::paint(QPainter &painter, const KoViewConverter &converter)
-{
-    Q_UNUSED(painter);
-    Q_UNUSED(converter);
-}
-
 void KoSelection::select(KoShape *shape, bool recursive)
 {
     Q_D(KoSelection);
@@ -327,15 +321,6 @@ KoShapeLayer* KoSelection::activeLayer() const
 {
     Q_D(const KoSelection);
     return d->activeLayer;
-}
-
-void KoSelection::saveOdf(KoShapeSavingContext &) const
-{
-}
-
-bool KoSelection::loadOdf(const KoXmlElement &, KoShapeLoadingContext &)
-{
-    return true;
 }
 
 #include <KoSelection.moc>

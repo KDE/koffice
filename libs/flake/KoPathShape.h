@@ -82,14 +82,10 @@ public:
      */
     virtual ~KoPathShape();
 
-    /// reimplemented
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
     virtual void paintPoints(QPainter &painter, const KoViewConverter &converter, int handleRadius);
-    /// reimplemented
     virtual QPainterPath outline() const;
-    /// reimplemented
     virtual QRectF boundingRect() const;
-    /// reimplemented
     virtual QSizeF size() const;
     /**
      * Resize the shape
@@ -103,12 +99,9 @@ public:
      * @see resizeMatrix()
      */
     virtual void setSize(const QSizeF &size);
-    /// reimplemented
     virtual bool hitTest(const QPointF &position) const;
 
-    // reimplemented
     virtual void saveOdf(KoShapeSavingContext &context) const;
-    // reimplemented
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
     /// Removes all subpaths and their points from the path

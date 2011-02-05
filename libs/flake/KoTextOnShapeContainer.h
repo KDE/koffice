@@ -45,11 +45,7 @@ public:
     explicit KoTextOnShapeContainer(KoShape *childShape, KoResourceManager *documentResources = 0);
     virtual ~KoTextOnShapeContainer();
 
-    // reimplemented
-    virtual void paintComponent(QPainter &painter, const KoViewConverter &converter);
-    // reimplemented
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
-    // reimplemented
     virtual void saveOdf(KoShapeSavingContext &context) const;
 
     /// different kinds of resizing behavior to determine how to treat text overflow

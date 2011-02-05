@@ -185,7 +185,7 @@ public:
      * @param converter to convert between internal and view coordinates.
      * @see applyConversion()
      */
-    virtual void paintComponent(QPainter &painter, const KoViewConverter &converter) = 0;
+    virtual void paintComponent(QPainter &painter, const KoViewConverter &converter);
 
     using KoShape::update;
     /// reimplemented
