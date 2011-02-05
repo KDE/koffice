@@ -30,6 +30,7 @@ class KoViewConverter;
 class KoXmlElement;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
+class KoShapeConnectionPrivate;
 
 /**
  * The shapeConnection class represents a connection between two shapes.
@@ -49,10 +50,19 @@ public:
 
     /// the visual type of connection
     enum ConnectionType {
-        Standard, ///< escapes connected shapes with straight lines, connects with perpendicular lines
-        Lines,    ///< escapes connected shapes with straight lines, connects with straight line
-        Straight, ///< one straight line between connected shapes
-        Curve     ///< a single curved line between connected shapes
+        /** a standard connector escapes two connecting objects with straight lines and
+          * connects them with one or more straight perpendicular lines that do not intersect
+          * the connected shapes' bounding boxes */
+        EdgedLinesOutside,
+        /** a lines connector leaves two connecting objects with straight lines and connects
+          * them with a straight (not necessarily perpendicular) line */
+        EdgedLines,
+        /** a line connector draws one straight line between the two glue points of
+          * connected objects */
+        Straight,
+        /** a curve connector draws a single curved line between the two glue points
+          * of connected objects */
+        Curve
     };
 
     /// default constructor for a connector between two points only
@@ -154,9 +164,6 @@ public:
     /// Sets shape2 to @p shape and gluePointIndex2 to @p gluePointIndex
     void setEndPoint(KoShape *shape, int gluePointIndex);
 
-    /// Append @p point to the list of control points
-    void appendControlPoint(const QPointF &point);
-
     bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
     /**
@@ -168,8 +175,7 @@ public:
     void saveOdf(KoShapeSavingContext &context) const;
 
 private:
-    class Private;
-    Private * const d;
+    KoShapeConnectionPrivate * const d;
 };
 
 /*

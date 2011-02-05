@@ -24,6 +24,8 @@
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
+#include <KoPathShape.h>
+#include <KoUnit.h>
 
 #include <QPainter>
 #include <QPen>
@@ -31,15 +33,65 @@
 #include <QList>
 #include <QPainterPath>
 
-class KoShapeConnection::Private
+class KoShapeConnectionPrivate;
+
+namespace {
+    class ConnectStrategy {
+      public:
+        ConnectStrategy(KoShapeConnection::ConnectionType type)
+            : m_type(type)
+        {
+        }
+        virtual ~ConnectStrategy() { }
+        KoShapeConnection::ConnectionType type() const { return m_type; }
+
+        virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d) = 0;
+        virtual void setSkew(const QStringList &values) {
+            Q_UNUSED(values);
+        }
+
+      private:
+        KoShapeConnection::ConnectionType m_type;
+    };
+
+    class ConnectLines : public ConnectStrategy {
+      public:
+        ConnectLines(KoShapeConnection::ConnectionType type)
+            : ConnectStrategy(type) { }
+        virtual ~ConnectLines() { }
+
+        virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d);
+        virtual void setSkew(const QStringList &values);
+
+      private:
+        // store stop points
+    };
+
+    class ConnectCurve : public ConnectStrategy {
+      public:
+        ConnectCurve()
+            : ConnectStrategy(KoShapeConnection::Curve),
+            m_shape(new KoPathShape) { }
+        ~ConnectCurve() {
+            delete m_shape;
+        }
+
+        virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d);
+
+      private:
+        KoPathShape *m_shape;
+    };
+};
+
+class KoShapeConnectionPrivate
 {
 public:
-    Private(KoShape *from, int gp1, KoShape *to, int gp2)
+    KoShapeConnectionPrivate(KoShape *from, int gp1, KoShape *to, int gp2)
         : shape1(from),
         shape2(to),
         gluePointIndex1(gp1),
         gluePointIndex2(gp2),
-        connectionType(KoShapeConnection::Standard)
+        connectionStrategy(0)
     {
         Q_ASSERT(shape1 == 0 || shape1->connectionPoints().count() > gp1);
         Q_ASSERT(shape2 == 0 || shape2->connectionPoints().count() > gp2);
@@ -49,13 +101,13 @@ public:
             zIndex = qMax(zIndex, shape2->zIndex() + 1);
     }
 
-    Private(KoShape *from, int gp1, const QPointF& ep)
+    KoShapeConnectionPrivate(KoShape *from, int gp1, const QPointF& ep)
         : shape1(from),
         shape2(0),
         gluePointIndex1(gp1),
         gluePointIndex2(0),
         endPoint(ep),
-        connectionType(KoShapeConnection::Standard)
+        connectionStrategy(0)
     {
         Q_ASSERT(shape1 == 0 || shape1->connectionPoints().count() > gp1);
 
@@ -68,19 +120,56 @@ public:
     KoShape *shape2;
     int gluePointIndex1;
     int gluePointIndex2;
-    QPointF endPoint;
+    QPointF startPoint; // used if there is no shape1
+    QPointF endPoint; // used if there is no shape2
     int zIndex;
-    QList<QPointF> controlPoints;
-    KoShapeConnection::ConnectionType connectionType;
+
+    ConnectStrategy *connectionStrategy;
 };
 
+void ConnectLines::paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d)
+{
+    qreal x, y;
+    converter.zoom(&x, &y);
+
+    QPointF a(d->startPoint);
+    QPointF b(d->endPoint);
+    if (d->shape1) {
+        QList<QPointF> points(d->shape1->connectionPoints());
+        int index = qMin(d->gluePointIndex1, points.count()-1);
+        a = d->shape1->absoluteTransformation(&converter).map(points[index]);
+    }
+    if (d->shape2) {
+        QList<QPointF> points(d->shape2->connectionPoints());
+        int index = qMin(d->gluePointIndex2, points.count()-1);
+        b = d->shape2->absoluteTransformation(&converter).map(points[index]);
+    }
+
+    QPainterPath path;
+    path.moveTo(a);
+    path.lineTo(b);
+
+    QPen pen(Qt::black);
+    painter.setPen(pen);
+    painter.drawPath(path);
+}
+void ConnectLines::setSkew(const QStringList &values) {
+    qDebug() << "skew.." << values;
+}
+
+void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d)
+{
+    // TODO
+    m_shape->paint(painter, converter);
+}
+
 KoShapeConnection::KoShapeConnection()
-    : d(new Private(0, 0, QPointF(100, 100)))
+    : d(new KoShapeConnectionPrivate(0, 0, QPointF(100, 100)))
 {
 }
 
 KoShapeConnection::KoShapeConnection(KoShape *from, int gp1, KoShape *to, int gp2)
-    : d(new Private(from, gp1, to, gp2))
+    : d(new KoShapeConnectionPrivate(from, gp1, to, gp2))
 {
     Q_ASSERT(from);
     Q_ASSERT(to);
@@ -89,14 +178,14 @@ KoShapeConnection::KoShapeConnection(KoShape *from, int gp1, KoShape *to, int gp
 }
 
 KoShapeConnection::KoShapeConnection(KoShape* from, int gluePointIndex, const QPointF& endPoint)
-: d(new Private(from, gluePointIndex, endPoint))
+: d(new KoShapeConnectionPrivate(from, gluePointIndex, endPoint))
 {
     Q_ASSERT(from);
     d->shape1->priv()->addConnection(this);
 }
 
 KoShapeConnection::KoShapeConnection(KoShape *from, KoShape *to, int gp2)
-    : d(new Private(from, 0, to, gp2))
+    : d(new KoShapeConnectionPrivate(from, 0, to, gp2))
 {
     Q_ASSERT(from);
     Q_ASSERT(to);
@@ -115,32 +204,8 @@ KoShapeConnection::~KoShapeConnection()
 
 void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converter)
 {
-    qreal x, y;
-    converter.zoom(&x, &y);
-    QTransform matrix = d->shape1->absoluteTransformation(&converter);
-    matrix.scale(x, y);
-    QPointF a = matrix.map(d->shape1->connectionPoints()[d->gluePointIndex1]);
-    QPointF b;
-    if (d->shape2) {
-        matrix = d->shape2->absoluteTransformation(&converter);
-        matrix.scale(x, y);
-        b = matrix.map(d->shape2->connectionPoints()[d->gluePointIndex2]);
-    } else {
-        b = converter.documentToView(d->endPoint);
-    }
-
-    QPainterPath path;
-    path.moveTo(a);
-
-    foreach (QPointF point, d->controlPoints) {
-        path.lineTo(converter.documentToView(point));
-    }
-
-    path.lineTo(b);
-
-    QPen pen(Qt::black);
-    painter.setPen(pen);
-    painter.drawPath(path);
+    if (d->connectionStrategy)
+        d->connectionStrategy->paint(painter, converter, d);
 }
 
 KoShape *KoShapeConnection::shape1() const
@@ -175,13 +240,21 @@ int KoShapeConnection::gluePointIndex2() const
 
 QPointF KoShapeConnection::startPoint() const
 {
-    return d->shape1->absoluteTransformation(0).map(d->shape1->connectionPoints()[d->gluePointIndex1]);
+    if (d->shape1) {
+        QList<QPointF> points(d->shape1->connectionPoints());
+        int index = qMin(d->gluePointIndex1, points.count()-1);
+        return d->shape1->absoluteTransformation(0).map(points[index]);
+    }
+    return d->startPoint;
 }
 
 QPointF KoShapeConnection::endPoint() const
 {
-    if (d->shape2)
-        return d->shape2->absoluteTransformation(0).map(d->shape2->connectionPoints()[d->gluePointIndex2]);
+    if (d->shape2) {
+        QList<QPointF> points(d->shape2->connectionPoints());
+        int index = qMin(d->gluePointIndex2, points.count()-1);
+        return d->shape2->absoluteTransformation(0).map(points[index]);
+    }
     return d->endPoint;
 }
 
@@ -191,13 +264,6 @@ QRectF KoShapeConnection::boundingRect() const
     QPointF end = endPoint();
     QPointF topLeft(qMin(start.x(), end.x()), qMin(start.y(), end.y()));
     QPointF bottomRight(qMax(start.x(), end.x()), qMax(start.y(), end.y()));
-
-    foreach (QPointF point, d->controlPoints) {
-        topLeft.setX(qMin(topLeft.x(), point.x()));
-        topLeft.setY(qMin(topLeft.y(), point.y()));
-        bottomRight.setX(qMax(bottomRight.x(), point.x()));
-        bottomRight.setY(qMax(bottomRight.y(), point.y()));
-    }
 
     QRectF br(topLeft.x(), topLeft.y(), bottomRight.x() - topLeft.x(), bottomRight.y() - topLeft.y());
     return br.normalized();
@@ -223,11 +289,6 @@ void KoShapeConnection::setEndPoint(KoShape *shape, int gluePointIndex)
     d->shape2->priv()->addConnection(this);
 }
 
-void KoShapeConnection::appendControlPoint(const QPointF &point)
-{
-    d->controlPoints.append(point);
-}
-
 //static
 bool KoShapeConnection::compareConnectionZIndex(KoShapeConnection *c1, KoShapeConnection *c2)
 {
@@ -239,14 +300,16 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
     //loadOdfAttributes(element, context, OdfMandatories | OdfCommonChildElements | OdfAdditionalAttributes);
 
     QString type = element.attributeNS(KoXmlNS::draw, "type", "standard");
-    if (type == "lines")
-        d->connectionType = Lines;
-    else if (type == "line")
-        d->connectionType = Straight;
-    else if (type == "curve")
-        d->connectionType = Curve;
-    else
-        d->connectionType = Standard;
+    delete d->connectionStrategy;
+    if (type == "lines") {
+        d->connectionStrategy = new ConnectLines(EdgedLines);
+    } else if (type == "line") {
+        d->connectionStrategy = new ConnectLines(Straight);
+    } else if (type == "curve") {
+        d->connectionStrategy = new ConnectCurve();
+    } else {
+        d->connectionStrategy = new ConnectLines(EdgedLinesOutside);
+    }
 
     // reset connection point indices
     d->gluePointIndex1 = -1;
@@ -261,16 +324,13 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         d->shape1 = context.shapeById(shapeId1);
         if (d->shape1) {
             d->shape1->priv()->addConnection(this);
-            QList<QPointF> connectionPoints = d->shape1->connectionPoints();
-//           if (d->gluePointIndex1 < connectionPoints.count()) {
-//               d->handles[StartHandle] = d->shape1->absoluteTransformation(0).map(connectionPoints[d->gluePointIndex1]);
-//           }
         } else {
 //            context.updateShape(shapeId1, new KoConnectionShapeLoadingUpdater(this, KoConnectionShapeLoadingUpdater::First));
         }
     } else {
-//       d->handles[StartHandle].setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x1", QString())));
-//       d->handles[StartHandle].setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y1", QString())));
+        qreal x = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x1"));
+        qreal y = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y1"));
+        d->startPoint = QPointF(x, y);
     }
 
     if (element.hasAttributeNS(KoXmlNS::draw, "end-shape")) {
@@ -279,21 +339,18 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         d->shape2 = context.shapeById(shapeId2);
         if (d->shape2) {
             d->shape2->priv()->addConnection(this);
-            QList<QPointF> connectionPoints = d->shape2->connectionPoints();
-//           if (d->gluePointIndex2 < connectionPoints.count()) {
-//               d->handles[EndHandle] = d->shape2->absoluteTransformation(0).map(connectionPoints[d->gluePointIndex2]);
-//           }
         } else {
 //            context.updateShape(shapeId2, new KoConnectionShapeLoadingUpdater(this, KoConnectionShapeLoadingUpdater::Second));
         }
     } else {
-//       d->handles[EndHandle].setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x2", QString())));
-//       d->handles[EndHandle].setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y2", QString())));
+        qreal x = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x2"));
+        qreal y = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y2"));
+        d->endPoint = QPointF(x, y);
     }
 
     QString skew = element.attributeNS(KoXmlNS::draw, "line-skew", QString());
     QStringList skewValues = skew.simplified().split(' ', QString::SkipEmptyParts);
-    // TODO apply skew values once we support them
+    d->connectionStrategy->setSkew(skewValues);
 
 #if 0
     // load the path data if there is any
