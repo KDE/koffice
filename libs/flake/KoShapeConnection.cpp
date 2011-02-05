@@ -92,13 +92,13 @@ void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converte
     matrix.scale(x, y);
     QPointF a = matrix.map(d->shape1->connectionPoints()[d->gluePointIndex1]);
     QPointF b;
-    if(d->shape2) {
+    if (d->shape2) {
         matrix = d->shape2->absoluteTransformation(&converter);
         matrix.scale(x, y);
         b = matrix.map(d->shape2->connectionPoints()[d->gluePointIndex2]);
-    }
-    else
+    } else {
         b = converter.documentToView(d->endPoint);
+    }
 
     QPainterPath path;
     path.moveTo(a);

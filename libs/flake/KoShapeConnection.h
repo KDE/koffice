@@ -27,7 +27,6 @@
 class KoShape;
 class QPainter;
 class KoViewConverter;
-class QPen;
 
 /**
  * The shapeConnection class represents a connection between two shapes.
@@ -41,7 +40,8 @@ class QPen;
    new KoShapeConnection(man, 0, dog, 0);
    @endcode
  */
-class FLAKE_EXPORT KoShapeConnection {
+class FLAKE_EXPORT KoShapeConnection
+{
 public:
 
     /// the visual type of connection
@@ -110,6 +110,7 @@ public:
      * This is done because resizing the shape may alter the actual point, but not the index.
      */
     int gluePointIndex1() const;
+
     /**
      * Return the gluePointIndex for the end shape.
      * Note that we refer to the gluePoints by index instead of directly accessing the point.
@@ -121,6 +122,7 @@ public:
      * Calculate and return the absolute point where this connection starts.
      */
     QPointF startPoint() const;
+
     /**
      * Calculate and return the absolute point where this connection ends.
      */
@@ -141,7 +143,7 @@ public:
     /// Set endPoint to @p point
     void setEndPoint(const QPointF &point);
     /// Sets shape2 to @p shape and gluePointIndex2 to @p gluePointIndex
-    void setEndPoint(KoShape* shape, int gluePointIndex);
+    void setEndPoint(KoShape *shape, int gluePointIndex);
 
     /// Append @p point to the list of control points
     void appendControlPoint(const QPointF &point);
