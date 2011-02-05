@@ -73,6 +73,8 @@ public:
      * @param endPoint Fixed point on the canvas where the connection is anchored.
      */
     explicit KoShapeConnection(KoShape* from, int gluePointIndex, const QPointF &endPoint);
+
+    explicit KoShapeConnection(KoShape *from, KoShape *to, int gluePointIndex2 = 0);
     ~KoShapeConnection();
 
     /**

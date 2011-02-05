@@ -77,6 +77,13 @@ KoShapeConnection::KoShapeConnection(KoShape* from, int gluePointIndex, const QP
     d->shape1->addConnection(this);
 }
 
+KoShapeConnection::KoShapeConnection(KoShape *from, KoShape *to, int gp2)
+    : d(new Private(from, 0, to, gp2))
+{
+    d->shape1->addConnection(this);
+    d->shape2->addConnection(this);
+}
+
 KoShapeConnection::~KoShapeConnection()
 {
     d->shape1->removeConnection(this);
