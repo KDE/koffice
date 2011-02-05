@@ -32,12 +32,6 @@ FolderShape::FolderShape()
 {
 }
 
-void FolderShape::paintComponent(QPainter &painter, const KoViewConverter &converter)
-{
-    Q_UNUSED(painter);
-    Q_UNUSED(converter);
-}
-
 void FolderShape::setSize(const QSizeF &size)
 {
     KoShapeContainer::setSize(size);

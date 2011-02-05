@@ -52,10 +52,6 @@ public:
     virtual QString toolTip() = 0;
     virtual void save(QDomElement &root) = 0;
     /// reimplemented
-    virtual void saveOdf(KoShapeSavingContext &) const {}
-    /// reimplemented
-    virtual bool loadOdf(const KoXmlElement &, KoShapeLoadingContext &) { return true; }
-    /// reimplemented
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
     QPixmap pixmap() const { return m_icon; }

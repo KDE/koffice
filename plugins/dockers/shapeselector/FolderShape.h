@@ -39,13 +39,6 @@ public:
     FolderShape();
 
     /// reimplemented from KoShapeContainer
-    virtual void paintComponent(QPainter &painter, const KoViewConverter &converter);
-
-    /// reimplemented from KoShapeContainer
-    virtual bool loadOdf(const KoXmlElement&, KoShapeLoadingContext&) { return true; }
-    /// reimplemented from KoShapeContainer
-    virtual void saveOdf(KoShapeSavingContext&) const {}
-    /// reimplemented from KoShapeContainer
     virtual void setSize(const QSizeF &size);
 
     /// save the contents of the folder to an XML based QDomDocument

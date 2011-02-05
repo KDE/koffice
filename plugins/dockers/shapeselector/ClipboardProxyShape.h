@@ -54,10 +54,6 @@ public:
 
     /// reimplemented from KoShape
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
-    /// reimplemented from KoShape
-    virtual bool loadOdf(const KoXmlElement &, KoShapeLoadingContext &) { return false; }
-    /// reimplemented from KoShape
-    virtual void saveOdf(KoShapeSavingContext &) const { }
 
     /// return the clipboard data that this shape displays
     QByteArray clipboardData() const { return m_clipboardData; }
