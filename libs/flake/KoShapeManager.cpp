@@ -138,7 +138,7 @@ void KoShapeManager::Private::updateTree()
         strategy->adapt(shape, br);
         tree.insert(br, shape);
 
-        foreach (KoShapeConnection *connection, shape->connections()) {
+        foreach (KoShapeConnection *connection, shape->priv()->connections) {
             connectionTree.remove(connection);
             connectionTree.insert(connection->boundingRect(), connection);
         }
@@ -223,6 +223,9 @@ void KoShapeManager::addShape(KoShape *shape, Repaint repaint)
     if (d->shapes.contains(shape))
         return;
     shape->priv()->addShapeManager(this);
+    foreach (KoShapeConnection *connection, shape->priv()->connections) {
+        d->connectionTree.insert(connection->boundingRect(), connection);
+    }
     d->shapes.append(shape);
     if (! dynamic_cast<KoShapeGroup*>(shape) && ! dynamic_cast<KoShapeLayer*>(shape)) {
         QRectF br(shape->boundingRect());
@@ -578,7 +581,7 @@ QList<KoShape *> KoShapeManager::shapesAt(const QRectF &rect, bool omitHiddenSha
     return intersectedShapes;
 }
 
-void KoShapeManager::update(QRectF &rect, const KoShape *shape, bool selectionHandles)
+void KoShapeManager::update(const QRectF &rect, const KoShape *shape, bool selectionHandles)
 {
     d->canvas->updateCanvas(rect);
     if (selectionHandles && d->selection->isSelected(shape)) {
@@ -587,7 +590,7 @@ void KoShapeManager::update(QRectF &rect, const KoShape *shape, bool selectionHa
     }
 
     if (selectionHandles) {
-        foreach (KoShapeConnection *connection, shape->connections())
+        foreach (KoShapeConnection *connection, shape->priv()->connections)
             d->canvas->updateCanvas(connection->boundingRect());
     }
 }

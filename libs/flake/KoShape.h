@@ -872,6 +872,12 @@ public:
      */
     KoShapePrivate *priv();
 
+    /**
+     * \internal
+     * Returns the private object for use within the flake lib
+     */
+    const KoShapePrivate *priv() const;
+
 protected:
     /// constructor
     KoShape(KoShapePrivate &);
@@ -953,23 +959,6 @@ protected:
 
     /// return the current matrix that contains the rotation/scale/position of this shape
     QTransform transform() const;
-
-
-// TODO move to the private?
-    friend class KoShapeConnection;
-    friend class KoShapeManager;
-    /**
-     * Add a connection to the list of connections of this shape.
-     * This is typically called only from the constructor of the KoShapeConnection class.
-     */
-    void addConnection(KoShapeConnection *connection);
-    /**
-     * Remove a connection to the list of connections of this shape.
-     * This is typically called only from the destructor of the KoShapeConnection class.
-     */
-    void removeConnection(KoShapeConnection *connection);
-
-    QList<KoShapeConnection*> connections() const;
 
     KoShapePrivate *d_ptr;
 

@@ -154,7 +154,8 @@ public:
      * @param selectionHandles if true; find out if the shape is selected and repaint its
      *   selection handles at the same time.
      */
-    void update(QRectF &rect, const KoShape *shape = 0, bool selectionHandles = false);
+    void update(const QRectF &rect, const KoShape *shape = 0, bool selectionHandles = false);
+// TODO move to private
 
     /**
      * Update the tree for finding the shapes.
@@ -197,6 +198,7 @@ public:
      * Note that this is typically called by the shape instance only.
      */
     void addShapeConnection(KoShapeConnection *connection);
+// TODO move to private
 
 signals:
     /// emitted when the selection is changed

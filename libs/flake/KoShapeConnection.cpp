@@ -18,6 +18,7 @@
  */
 #include "KoShapeConnection.h"
 #include "KoShape.h"
+#include "KoShape_p.h"
 #include "KoViewConverter.h"
 
 #include <QPainter>
@@ -67,27 +68,27 @@ public:
 KoShapeConnection::KoShapeConnection(KoShape *from, int gp1, KoShape *to, int gp2)
     : d(new Private(from, gp1, to, gp2))
 {
-    d->shape1->addConnection(this);
-    d->shape2->addConnection(this);
+    d->shape1->priv()->addConnection(this);
+    d->shape2->priv()->addConnection(this);
 }
 
 KoShapeConnection::KoShapeConnection(KoShape* from, int gluePointIndex, const QPointF& endPoint)
 : d(new Private(from, gluePointIndex, endPoint))
 {
-    d->shape1->addConnection(this);
+    d->shape1->priv()->addConnection(this);
 }
 
 KoShapeConnection::KoShapeConnection(KoShape *from, KoShape *to, int gp2)
     : d(new Private(from, 0, to, gp2))
 {
-    d->shape1->addConnection(this);
-    d->shape2->addConnection(this);
+    d->shape1->priv()->addConnection(this);
+    d->shape2->priv()->addConnection(this);
 }
 
 KoShapeConnection::~KoShapeConnection()
 {
-    d->shape1->removeConnection(this);
-    d->shape2->removeConnection(this);
+    d->shape1->priv()->removeConnection(this);
+    d->shape2->priv()->removeConnection(this);
     delete d;
 }
 
@@ -192,13 +193,13 @@ void KoShapeConnection::setEndPoint(KoShape *shape, int gluePointIndex)
         return;
 
     if (d->shape2) {
-        d->shape2->removeConnection(this);
+        d->shape2->priv()->removeConnection(this);
     }
 
     d->shape2 = shape;
     d->gluePointIndex2 = gluePointIndex;
     d->zIndex = qMax(d->zIndex, shape->zIndex() + 1);
-    d->shape2->addConnection(this);
+    d->shape2->priv()->addConnection(this);
 }
 
 void KoShapeConnection::appendControlPoint(const QPointF &point)

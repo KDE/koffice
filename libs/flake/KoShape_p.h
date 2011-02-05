@@ -48,6 +48,17 @@ public:
     void removeShapeManager(KoShapeManager *manager);
 
     /**
+     * Add a connection to the list of connections of this shape.
+     * This is typically called only from the constructor of the KoShapeConnection class.
+     */
+    void addConnection(KoShapeConnection *connection);
+    /**
+     * Remove a connection to the list of connections of this shape.
+     * This is typically called only from the destructor of the KoShapeConnection class.
+     */
+    void removeConnection(KoShapeConnection *connection);
+
+    /**
      * Fills the style stack and returns the value of the given style property (e.g fill, stroke).
      */
     static QString getStyleProperty(const char *property, KoShapeLoadingContext &context);

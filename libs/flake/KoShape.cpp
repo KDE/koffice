@@ -170,6 +170,18 @@ QString KoShapePrivate::getStyleProperty(const char *property, KoShapeLoadingCon
     return value;
 }
 
+void KoShapePrivate::addConnection(KoShapeConnection *connection)
+{
+    connections.append(connection);
+    foreach (KoShapeManager *sm, shapeManagers)
+        sm->addShapeConnection(connection);
+}
+
+void KoShapePrivate::removeConnection(KoShapeConnection *connection)
+{
+    connections.removeAll(connection);
+    // TODO remove from shapeManager ?
+}
 
 
 // ======== KoShape
@@ -1545,28 +1557,14 @@ void KoShape::setToolDelegates(const QSet<KoShape*> &delegates)
     d->toolDelegates = delegates;
 }
 
-void KoShape::addConnection(KoShapeConnection *connection)
-{
-    Q_D(KoShape);
-    d->connections.append(connection);
-    foreach (KoShapeManager *sm, d->shapeManagers)
-        sm->addShapeConnection( connection );
-}
-
-void KoShape::removeConnection(KoShapeConnection *connection)
-{
-    Q_D(KoShape);
-    d->connections.removeAll(connection);
-}
-
-QList<KoShapeConnection*> KoShape::connections() const
-{
-    Q_D(const KoShape);
-    return d->connections;
-}
-
 KoShapePrivate *KoShape::priv()
 {
     Q_D(KoShape);
+    return d;
+}
+
+const KoShapePrivate *KoShape::priv() const
+{
+    Q_D(const KoShape);
     return d;
 }
