@@ -27,6 +27,9 @@
 class KoShape;
 class QPainter;
 class KoViewConverter;
+class KoXmlElement;
+class KoShapeLoadingContext;
+class KoShapeSavingContext;
 
 /**
  * The shapeConnection class represents a connection between two shapes.
@@ -46,10 +49,14 @@ public:
 
     /// the visual type of connection
     enum ConnectionType {
-        StraightConnection,     ///< The connection is one straight (taut) line.
-        MultiLineConnection,    ///< The connection is build up of multiple straight lines.
-        CurvedConnection        ///< The connection is build using bezier curves.
+        Standard, ///< escapes connected shapes with straight lines, connects with perpendicular lines
+        Lines,    ///< escapes connected shapes with straight lines, connects with straight line
+        Straight, ///< one straight line between connected shapes
+        Curve     ///< a single curved line between connected shapes
     };
+
+    /// default constructor for a connector between two points only
+    KoShapeConnection();
 
     /**
      * Constructor for the connection between two shapes.
@@ -149,6 +156,16 @@ public:
 
     /// Append @p point to the list of control points
     void appendControlPoint(const QPointF &point);
+
+    bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+
+    /**
+     * @brief store the shape data as ODF XML.
+     * This is the method that will be called when saving a shape as a described in
+     * OpenDocument 9.2 Drawing Shapes.
+     * @see saveOdfAttributes
+     */
+    void saveOdf(KoShapeSavingContext &context) const;
 
 private:
     class Private;
