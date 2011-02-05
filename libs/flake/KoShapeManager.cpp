@@ -118,6 +118,20 @@ void KoShapeManagerPrivate::addShapeConnection(KoShapeConnection *connection)
     connectionTree.insert(connection->boundingRect(), connection);
 }
 
+void KoShapeManagerPrivate::update(const QRectF &rect, const KoShape *shape, bool selectionHandles)
+{
+    canvas->updateCanvas(rect);
+    if (selectionHandles && selection->isSelected(shape)) {
+        if (canvas->toolProxy())
+            canvas->toolProxy()->repaintDecorations();
+    }
+
+    if (selectionHandles) {
+        foreach (KoShapeConnection *connection, shape->priv()->connections)
+            canvas->updateCanvas(connection->boundingRect());
+    }
+}
+
 
 KoShapeManager::KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &shapes)
         : d(new KoShapeManagerPrivate(this, canvas))
@@ -522,20 +536,6 @@ QList<KoShape *> KoShapeManager::shapesAt(const QRectF &rect, bool omitHiddenSha
         }
     }
     return intersectedShapes;
-}
-
-void KoShapeManager::update(const QRectF &rect, const KoShape *shape, bool selectionHandles)
-{
-    d->canvas->updateCanvas(rect);
-    if (selectionHandles && d->selection->isSelected(shape)) {
-        if (d->canvas->toolProxy())
-            d->canvas->toolProxy()->repaintDecorations();
-    }
-
-    if (selectionHandles) {
-        foreach (KoShapeConnection *connection, shape->priv()->connections)
-            d->canvas->updateCanvas(connection->boundingRect());
-    }
 }
 
 void KoShapeManager::notifyShapeChanged(KoShape *shape)

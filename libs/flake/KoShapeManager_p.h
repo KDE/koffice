@@ -46,6 +46,20 @@ public:
      */
     void addShapeConnection(KoShapeConnection *connection);
 
+    /**
+     * Request a repaint to be queued.
+     * The repaint will be restricted to the parameters rectangle, which is expected to be
+     * in points (the document coordinates system of KoShape) and it is expected to be
+     * normalized and based in the global coordinates, not any local coordinates.
+     * <p>This method will return immediately and only request a repaint. Successive calls
+     * will be merged into an appropriate repaint action.
+     * @param rect the rectangle (in pt) to queue for repaint.
+     * @param shape the shape that is going to be redrawn; only needed when selectionHandles=true
+     * @param selectionHandles if true; find out if the shape is selected and repaint its
+     *   selection handles at the same time.
+     */
+    void update(const QRectF &rect, const KoShape *shape = 0, bool selectionHandles = false);
+
     class DetectCollision
     {
     public:
