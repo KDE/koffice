@@ -179,6 +179,14 @@ KoShape::KoShape()
     notifyChanged();
 }
 
+KoShape::KoShape(const QColor &color)
+        : d_ptr(new KoShapePrivate(this))
+{
+    d_ptr->fill = new KoColorBackground(color);
+    notifyChanged();
+}
+
+
 KoShape::KoShape(KoShapePrivate &dd)
     : d_ptr(&dd)
 {

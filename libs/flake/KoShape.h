@@ -131,6 +131,11 @@ public:
     KoShape();
 
     /**
+     * @brief Constructor with a color background
+     */
+    KoShape(const QColor &color);
+
+    /**
      * @brief Destructor
      */
     virtual ~KoShape();
