@@ -20,11 +20,11 @@
 #include "KoShape.h"
 #include "KoShape_p.h"
 #include "KoViewConverter.h"
+#include "KoPathShape.h"
 
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
-#include <KoPathShape.h>
 #include <KoUnit.h>
 
 #include <QPainter>
@@ -51,7 +51,7 @@ namespace {
         }
 
       private:
-        KoShapeConnection::ConnectionType m_type;
+        const KoShapeConnection::ConnectionType m_type;
     };
 
     class ConnectLines : public ConnectStrategy {
@@ -71,15 +71,14 @@ namespace {
       public:
         ConnectCurve()
             : ConnectStrategy(KoShapeConnection::Curve),
-            m_shape(new KoPathShape) { }
+            shape(new KoPathShape) { }
         ~ConnectCurve() {
-            delete m_shape;
+            delete shape;
         }
 
         virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d);
 
-      private:
-        KoPathShape *m_shape;
+        KoPathShape *shape; // TODO make it a value on the stack?
     };
 };
 
@@ -129,38 +128,72 @@ public:
 
 void ConnectLines::paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d)
 {
-    qreal x, y;
-    converter.zoom(&x, &y);
-
     QPointF a(d->startPoint);
     QPointF b(d->endPoint);
     if (d->shape1) {
         QList<QPointF> points(d->shape1->connectionPoints());
-        int index = qMin(d->gluePointIndex1, points.count()-1);
-        a = d->shape1->absoluteTransformation(&converter).map(points[index]);
+        int index = qMin(d->gluePointIndex1, points.count()-1); // KoShape doesn't load glue-point yet
+        a = d->shape1->absoluteTransformation(0).map(points[index]);
     }
     if (d->shape2) {
         QList<QPointF> points(d->shape2->connectionPoints());
         int index = qMin(d->gluePointIndex2, points.count()-1);
-        b = d->shape2->absoluteTransformation(&converter).map(points[index]);
+        b = d->shape2->absoluteTransformation(0).map(points[index]);
     }
 
     QPainterPath path;
-    path.moveTo(a);
-    path.lineTo(b);
+    switch (type()) {
+    case KoShapeConnection::Straight:
+        path.moveTo(a);
+        path.lineTo(b);
+        break;
+    case KoShapeConnection::EdgedLinesOutside:
+        break;
+    case KoShapeConnection::EdgedLines:
+        break;
+    default:
+        Q_ASSERT(0); // parent should have created another strategy
+    };
 
     QPen pen(Qt::black);
     painter.setPen(pen);
+    qreal zoomX, zoomY;
+    converter.zoom(&zoomX, &zoomY);
+    painter.scale(zoomX, zoomY);
     painter.drawPath(path);
 }
-void ConnectLines::setSkew(const QStringList &values) {
+
+void ConnectLines::setSkew(const QStringList &values)
+{
     qDebug() << "skew.." << values;
 }
 
 void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d)
 {
-    // TODO
-    m_shape->paint(painter, converter);
+    QPointF a(d->startPoint);
+    QPointF b(d->endPoint);
+    if (d->shape1) {
+        QList<QPointF> points(d->shape1->connectionPoints());
+        int index = qMin(d->gluePointIndex1, points.count()-1); // KoShape doesn't load glue-point yet
+        a = d->shape1->absoluteTransformation(0).map(points[index]);
+    }
+    if (d->shape2) {
+        QList<QPointF> points(d->shape2->connectionPoints());
+        int index = qMin(d->gluePointIndex2, points.count()-1);
+        b = d->shape2->absoluteTransformation(0).map(points[index]);
+    }
+
+    qreal zoomX, zoomY;
+    converter.zoom(&zoomX, &zoomY);
+    painter.scale(zoomX, zoomY);
+    painter.translate(a - shape->outline().boundingRect().topLeft());
+    const qreal scale = (b.x() - a.x()) / 100;
+    painter.scale(scale, scale);
+
+    shape->paint(painter, converter);
+
+    // debug
+    // painter.fillRect(QRectF(shape->position(), shape->size()), QBrush(QColor(255, 0, 0, 100)));
 }
 
 KoShapeConnection::KoShapeConnection()
@@ -297,8 +330,6 @@ bool KoShapeConnection::compareConnectionZIndex(KoShapeConnection *c1, KoShapeCo
 
 bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
-    //loadOdfAttributes(element, context, OdfMandatories | OdfCommonChildElements | OdfAdditionalAttributes);
-
     QString type = element.attributeNS(KoXmlNS::draw, "type", "standard");
     delete d->connectionStrategy;
     if (type == "lines") {
@@ -306,7 +337,19 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
     } else if (type == "line") {
         d->connectionStrategy = new ConnectLines(Straight);
     } else if (type == "curve") {
-        d->connectionStrategy = new ConnectCurve();
+        ConnectCurve *curve = new ConnectCurve();
+        curve->shape->loadOdf(element, context);
+
+        // make it fit in a 100x100 box
+        const QSizeF oldSize = curve->shape->size();
+        qreal ratioX = oldSize.width() / 100;
+        qreal ratioY = oldSize.height() / 100;
+        if (ratioX > ratioY)
+            curve->shape->setSize(QSizeF(100, oldSize.height() / ratioX));
+        else
+            curve->shape->setSize(QSizeF(oldSize.width() / ratioY, 100));
+        curve->shape->setPosition(QPointF());
+        d->connectionStrategy = curve;
     } else {
         d->connectionStrategy = new ConnectLines(EdgedLinesOutside);
     }
@@ -351,37 +394,6 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
     QString skew = element.attributeNS(KoXmlNS::draw, "line-skew", QString());
     QStringList skewValues = skew.simplified().split(' ', QString::SkipEmptyParts);
     d->connectionStrategy->setSkew(skewValues);
-
-#if 0
-    // load the path data if there is any
-    d->hasCustomPath = element.hasAttributeNS(KoXmlNS::svg, "d");
-    if (d->hasCustomPath) {
-        KoPathShapeLoader loader(this);
-        loader.parseSvg(element.attributeNS(KoXmlNS::svg, "d"), true);
-        QRectF viewBox = loadOdfViewbox(element);
-        if (viewBox.isEmpty()) {
-            // there should be a viewBox to transform the path data
-            // if there is none, use the bounding rectangle of the parsed path
-            viewBox = outline().boundingRect();
-        }
-        // convert path to viewbox coordinates to have a bounding rect of (0,0 1x1)
-        // which can later be fitted back into the target rect once we have all
-        // the required information
-        QTransform viewMatrix;
-        viewMatrix.scale(viewBox.width() ? static_cast<qreal>(1.0) / viewBox.width() : 1.0,
-                         viewBox.height() ? static_cast<qreal>(1.0) / viewBox.height() : 1.0);
-        viewMatrix.translate(-viewBox.left(), -viewBox.top());
-        d->map(viewMatrix);
-
-        // trigger finishing the connections in case we have all data
-        // otherwise it gets called again once the shapes we are
-        // connected to are loaded
-        finishLoadingConnection();
-    } else {
-        d->forceUpdate = true;
-        updateConnections();
-    }
-#endif
 
     //KoTextOnShapeContainer::tryWrapShape(this, element, context);
 
