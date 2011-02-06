@@ -436,6 +436,19 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
             // if there is no view box defined make it is big as the path.
             m_viewBox = m_viewBound;
         }
+
+        QString gluePoints(enhancedGeometry.attributeNS(KoXmlNS::draw, "glue-points"));
+        if (!gluePoints.isEmpty()) {
+            qreal x = -1;
+            foreach (const QString &token, gluePoints.split(' ')) {
+                if (x == -1) { // processing 'x'
+                    x = token.toInt();
+                } else {
+                    addConnectionPoint(QPointF(x, token.toInt()));
+                    x = -1;
+                }
+            }
+        }
     }
 
     QSizeF size;
