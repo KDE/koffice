@@ -1036,7 +1036,7 @@ bool KoPathShape::addSubpath(KoSubpath * subpath, int subpathIndex)
     return true;
 }
 
-bool KoPathShape::combine(KoPathShape *path)
+bool KoPathShape::combine(const KoPathShape *path)
 {
     if (! path)
         return false;

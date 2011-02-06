@@ -390,7 +390,7 @@ public:
      * @param path the path to combine with
      * @return true if combining was successful, else false
      */
-    bool combine(KoPathShape *path);
+    bool combine(const KoPathShape *path);
 
     /**
      * @brief Creates separate path shapes, one for each existing subpath.
