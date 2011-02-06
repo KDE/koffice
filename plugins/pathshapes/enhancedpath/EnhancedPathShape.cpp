@@ -390,10 +390,10 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
     reset();
 
     const KoXmlElement enhancedGeometry(KoXml::namedItemNS(element, KoXmlNS::draw, "enhanced-geometry" ) );
-    if (!enhancedGeometry.isNull() ) {
+    if (!enhancedGeometry.isNull()) {
         // load the modifiers
-        QString modifiers = enhancedGeometry.attributeNS(KoXmlNS::draw, "modifiers", "");
-        if (! modifiers.isEmpty()) {
+        QString modifiers = enhancedGeometry.attributeNS(KoXmlNS::draw, "modifiers");
+        if (!modifiers.isEmpty()) {
             addModifiers(modifiers);
         }
 
@@ -414,14 +414,13 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
                     delete handle;
                 }
             }
-
         }
 
         setMirrorHorizontally(enhancedGeometry.attributeNS(KoXmlNS::draw, "mirror-horizontal") == "true");
         setMirrorVertically(enhancedGeometry.attributeNS(KoXmlNS::draw, "mirror-vertical") == "true");
 
         // load the enhanced path data
-        QString path = enhancedGeometry.attributeNS(KoXmlNS::draw, "enhanced-path", "");
+        QString path = enhancedGeometry.attributeNS(KoXmlNS::draw, "enhanced-path");
 #ifndef NWORKAROUND_ODF_BUGS
         KoOdfWorkaround::fixEnhancedPath(path, enhancedGeometry, context);
 #endif
@@ -433,17 +432,15 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
         QRectF viewBox = loadOdfViewbox(enhancedGeometry);
         if (! viewBox.isEmpty()) {
             m_viewBox = viewBox;
-        }
-        else {
+        } else {
             // if there is no view box defined make it is big as the path.
             m_viewBox = m_viewBound;
         }
-
     }
 
     QSizeF size;
-    size.setWidth(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width", QString())));
-    size.setHeight(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height", QString())));
+    size.setWidth(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width")));
+    size.setHeight(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height")));
     // the viewbox is to be fitted into the size of the shape, so before setting
     // the size we just loaded // we set the viewbox to be the basis to calculate
     // the viewbox matrix from
@@ -451,8 +448,8 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
     setSize(size);
 
     QPointF pos;
-    pos.setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
-    pos.setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
+    pos.setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x")));
+    pos.setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y")));
     setPosition(pos - m_viewMatrix.map(QPointF(0, 0)) - m_viewBoxOffset);
 
     loadOdfAttributes(element, context, OdfMandatories | OdfTransformation | OdfAdditionalAttributes | OdfCommonChildElements);

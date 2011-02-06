@@ -1041,9 +1041,9 @@ bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingConte
     if (attributes & OdfSize) {
         QSizeF s(size());
         if (element.hasAttributeNS(KoXmlNS::svg, "width"))
-            s.setWidth(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width", QString())));
+            s.setWidth(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width")));
         if (element.hasAttributeNS(KoXmlNS::svg, "height"))
-            s.setHeight(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height", QString())));
+            s.setHeight(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height")));
         setSize(s);
     }
 
@@ -1093,7 +1093,7 @@ bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingConte
     }
 
     if (attributes & OdfTransformation) {
-        QString transform = element.attributeNS(KoXmlNS::draw, "transform", QString());
+        QString transform = element.attributeNS(KoXmlNS::draw, "transform");
         if (! transform.isEmpty())
             applyAbsoluteTransformation(parseOdfTransform(transform));
     }
