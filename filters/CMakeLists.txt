@@ -47,9 +47,9 @@ if (SHOULD_BUILD_KWORD)
     macro_optional_add_subdirectory(kword)
 endif (SHOULD_BUILD_KWORD)
 
-if(SHOULD_BUILD_KPRESENTER)
-    macro_optional_add_subdirectory(kpresenter)
-endif(SHOULD_BUILD_KPRESENTER)
+if(SHOULD_BUILD_SHOWCASE)
+    macro_optional_add_subdirectory(showcase)
+endif(SHOULD_BUILD_SHOWCASE)
 
 if(SHOULD_BUILD_KSPREAD)
     macro_optional_add_subdirectory(kspread)

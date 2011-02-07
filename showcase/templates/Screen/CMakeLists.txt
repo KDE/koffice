@@ -1,0 +1,4 @@
+
+#install( FILES  OneColumnLandscape.kpt   TitleLandscape.kpt   TwoColumnLandscape.kpt   emptyLandscape.kpt   DESTINATION ${DATA_INSTALL_DIR}/showcase/templates/Screen/.source)
+install( FILES emptyLandscape.otp emptyLandscapeWide.otp DESTINATION ${DATA_INSTALL_DIR}/showcase/templates/Screen/.source)
+install( FILES .directory DESTINATION ${DATA_INSTALL_DIR}/showcase/templates/Screen/)

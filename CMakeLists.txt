@@ -34,7 +34,7 @@ option(TINY "compile a tiny KOffice" OFF)
 
 IF (TINY)
     set(SHOULD_BUILD_KWORD TRUE)
-    set(SHOULD_BUILD_KPRESENTER TRUE)
+    set(SHOULD_BUILD_SHOWCASE TRUE)
     set(SHOULD_BUILD_KSPREAD TRUE)
     set(SHOULD_BUILD_KARBON FALSE)
     set(SHOULD_BUILD_KIVIO FALSE)
@@ -42,7 +42,7 @@ IF (TINY)
     set(SHOULD_BUILD_SCRIPTING FALSE)
 ELSE(TINY)
     set(SHOULD_BUILD_KWORD TRUE)
-    set(SHOULD_BUILD_KPRESENTER TRUE)
+    set(SHOULD_BUILD_SHOWCASE TRUE)
     set(SHOULD_BUILD_KSPREAD TRUE)
     set(SHOULD_BUILD_KARBON TRUE)
     set(SHOULD_BUILD_KIVIO TRUE)
@@ -136,7 +136,7 @@ macro_log_feature(KDEPIMLIBS_FOUND "KDE PIMLibs" "KDE Personal Information Manag
 ## Test for boost
 ##
 macro_optional_find_package(Boost)
-macro_log_feature(Boost_FOUND "Boost" "Boost C++ Libraries" "http://www.boost.org" FALSE "" "Required by KPresenter")
+macro_log_feature(Boost_FOUND "Boost" "Boost C++ Libraries" "http://www.boost.org" FALSE "" "Required by showcase")
 
 ##
 ## Test for eigen2
@@ -314,9 +314,9 @@ if(NOT EIGEN2_FOUND)
     set(SHOULD_BUILD_KSPREAD FALSE)
 endif(NOT EIGEN2_FOUND)
 
-### KPresenter: boost
+### showcase: boost
 if(NOT Boost_FOUND)
-    set(SHOULD_BUILD_KPRESENTER FALSE)
+    set(SHOULD_BUILD_SHOWCASE FALSE)
 endif(NOT Boost_FOUND)
 
  ###################
@@ -337,9 +337,9 @@ if (SHOULD_BUILD_KOUNAVAIL)
     macro_optional_add_subdirectory(kounavail)
 endif (SHOULD_BUILD_KOUNAVAIL)
 
-if(SHOULD_BUILD_KPRESENTER)
-  macro_optional_add_subdirectory(kpresenter)
-endif(SHOULD_BUILD_KPRESENTER)
+if(SHOULD_BUILD_SHOWCASE)
+  macro_optional_add_subdirectory(showcase)
+endif(SHOULD_BUILD_SHOWCASE)
 
 if(SHOULD_BUILD_KSPREAD)
     macro_optional_add_subdirectory(kspread)
@@ -373,7 +373,7 @@ message(STATUS "---------------- The following applications will be built ------
 
 macro_display_application_enabled(kword ${SHOULD_BUILD_KWORD})
 macro_display_application_enabled(kspread ${SHOULD_BUILD_KSPREAD})
-macro_display_application_enabled(kpresenter ${SHOULD_BUILD_KPRESENTER})
+macro_display_application_enabled(showcase ${SHOULD_BUILD_SHOWCASE})
 macro_display_application_enabled(kivio ${SHOULD_BUILD_KIVIO})
 macro_display_application_enabled(karbon ${SHOULD_BUILD_KARBON})
 
