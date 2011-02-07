@@ -78,7 +78,6 @@
 #include <KoShapeGroup.h>
 #include <KoShapeCreateCommand.h>
 #include <KoShapeDeleteCommand.h>
-#include <KoShapeReorderCommand.h>
 #include <KoShapeBorderCommand.h>
 #include <KoShapeBackgroundCommand.h>
 #include <KoParameterToPathCommand.h>
