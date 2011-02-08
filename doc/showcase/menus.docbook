@@ -34,9 +34,9 @@ Be sure to comment it out again when you are done -->
 </chapterinfo>
 <title>The Menu and Toolbar Items</title>
 
-<para>&kpresenter; presents different types of interfaces for you to interact
+<para>&showcase; presents different types of interfaces for you to interact
 with the program. Perhaps the most familiar type of interface is the
-menu which appears on the top of the &kpresenter; window.</para>
+menu which appears on the top of the &showcase; window.</para>
 
 <para>Clicking on the menu items gives you a list of commands from which you
 can choose the one you want. Many of the commands can also be accessed
@@ -50,7 +50,7 @@ described in brief.</para>
 <sect2 id="manipulating-toolbars">
 <title>Manipulating the Toolbars</title>
 
-<para>In addition to the menus, &kpresenter; also has a set of toolbars. Each
+<para>In addition to the menus, &showcase; also has a set of toolbars. Each
 toolbar consists of a collection of icons. A toolbar icon often presents
 a convenient shortcut to a command that is found in one of the menus.</para>
 
@@ -67,9 +67,9 @@ a convenient shortcut to a command that is found in one of the menus.</para>
 </screenshot>
 
 <para>You can move the toolbar around by dragging the handle, shown here in red. Toolbars can
-be <quote>docked</quote> or attached to any side of the &kpresenter;
+be <quote>docked</quote> or attached to any side of the &showcase;
 window. If you like, you can also have the toolbar <quote>float</quote> in
-its own window, separated from the main &kpresenter; window as shown in the
+its own window, separated from the main &showcase; window as shown in the
 screenshot below:</para>
 
 <screenshot>
@@ -102,7 +102,7 @@ in the screenshot below: </para>
 
 <para>
 The first few items in the popup menu have to do with the placement of
-the toolbar. You can choose any of the four sides of the &kpresenter;
+the toolbar. You can choose any of the four sides of the &showcase;
 window, or have the toolbar <quote>float</quote> in a separate
 window. Choosing <guimenuitem>Flat</guimenuitem> hides the toolbar.
 To unflat a hidden toolbar, &LMB; click on its handle.
@@ -169,7 +169,7 @@ shown in the screenshot below:
 </screenshot>
 
 <para>
-The &kpresenter; menus are discussed in the following sections.
+The &showcase; menus are discussed in the following sections.
 </para>
 
 </sect2>
@@ -298,7 +298,7 @@ one of several common formats.</para>
 <listitem>
 <para>Export the currently open presentation to one of several common
 formats for use in another application, or for exchange with someone
-who does not have access to &kpresenter;.</para>
+who does not have access to &showcase;.</para>
 </listitem>
 </varlistentry>
 
@@ -310,7 +310,7 @@ who does not have access to &kpresenter;.</para>
 </menuchoice>
 </term>
 <listitem>
-<para><action>Open</action> a new email message in your selected email client with the current &kpresenter; document attached.
+<para><action>Open</action> a new email message in your selected email client with the current &showcase; document attached.
 </para>
 </listitem>
 </varlistentry>
@@ -441,7 +441,7 @@ opportunity to save any changes first.</para>
 </menuchoice>
 </term>
 <listitem>
-<para><action>Close</action> &kpresenter;. You will be given an opportunity
+<para><action>Close</action> &showcase;. You will be given an opportunity
 to save all changes in all open presentations first.</para>
 </listitem>
 </varlistentry>
@@ -826,7 +826,7 @@ visible; if disabled, they are not.</para>
 </menuchoice>
 </term>
 <listitem>
-<para>When working in &kpresenter; you can drag a <quote>guide
+<para>When working in &showcase; you can drag a <quote>guide
 line</quote> from either the horizontal or vertical ruler onto your
 document. This guide-line will not print or display in the finished
 presentation, it is simply to help you align objects on screen. If
@@ -866,7 +866,7 @@ and choose a <guilabel>Position:</guilabel>
 </menuchoice>
 </term>
 <listitem>
-<para>If enabled, &kpresenter; will display a grid of dots
+<para>If enabled, &showcase; will display a grid of dots
 representing the intersections of imaginary horizontal and vertical
 lines. You can use these dots to precisely position objects on the
 slide.</para>
@@ -1000,7 +1000,7 @@ before or after the currently selected page.
 </term>
 <listitem>
 <para><action>Insert an already existing presentation.</action> A standard &kde; file
-open dialog will appear, allowing you to choose a <guilabel>&kpresenter; Document</guilabel> (.kpr) or a 
+open dialog will appear, allowing you to choose a <guilabel>&showcase; Document</guilabel> (.kpr) or a 
 <guilabel>OASIS OpenDocument Presentation</guilabel> (.odp), which will be inserted after the last slide in your current presentation.</para>
 </listitem>
 </varlistentry>
@@ -1086,7 +1086,7 @@ vector format.</para>
 </term>
 <listitem>
 <para><action>Insert a raster image.</action> These are not as easily
-scaleable as vector images or <quote>clipart</quote>. &kpresenter;
+scaleable as vector images or <quote>clipart</quote>. &showcase;
 currently understands many formats, including <literal
 role="extension">.tiff</literal>, <literal
 role="extension">.jpg</literal>, <literal
@@ -1131,7 +1131,7 @@ section.</para>
 </term>
 <listitem>
 <para><action>Scan an image with a scanner.</action> This requires you have a
-scanner installed. It opens the <guilabel>Acquire Image</guilabel> dialog to allow the use of the scanner.<!--FIXME: Document how to set up a scanner that &kpresenter; can
+scanner installed. It opens the <guilabel>Acquire Image</guilabel> dialog to allow the use of the scanner.<!--FIXME: Document how to set up a scanner that &showcase; can
 use.--></para>
 </listitem>
 </varlistentry>
@@ -1539,7 +1539,7 @@ attributes that will be applied to selected text all at once. See Working With S
 </menuchoice>
 </term>
 <listitem>
-<para>Here you can import styles that you have defined in another &kpresenter;
+<para>Here you can import styles that you have defined in another &showcase;
 document.</para>
 </listitem>
 </varlistentry>
@@ -1700,7 +1700,7 @@ versa.</para>
 </term>
 <listitem>
 <para>Use this submenu to utilize the spellcheck options. If you enable
-<guimenuitem>Autospellcheck</guimenuitem>, &kpresenter; will automatically check
+<guimenuitem>Autospellcheck</guimenuitem>, &showcase; will automatically check
 text that you enter for spelling errors.</para>
 
 <para>If you prefer to check spelling explicitly, rather than automatically, you
@@ -1886,7 +1886,7 @@ transition <emphasis>from</emphasis> this slide
 <title><guimenu>Settings</guimenu> Menu</title>
 
 <para>The <guimenu>Settings</guimenu> menu allows you to customize
-&kpresenter;.</para>
+&showcase;.</para>
 
 <variablelist>
 
@@ -1911,7 +1911,7 @@ disable the display of specific toolbars here.</para>
 </menuchoice>
 </term>
 <listitem>
-<para>Autocorrection is &kpresenter;'s ability to correct
+<para>Autocorrection is &showcase;'s ability to correct
 common typing errors or expand abbreviations independently of the spell
 checking function. There are several common typing errors entered for
 you by default such as replacing <userinput>teh</userinput> with
@@ -1945,7 +1945,7 @@ linkend="configure-autocorrection">Configure Autocorrection</link> section for a
 </menuchoice>
 </term>
 <listitem>
-<para>Autocompletion allows you to type the first few letters of a commonly used word (often technical or job specific), and tells &kpresenter; to finish typing the word for you.</para>
+<para>Autocompletion allows you to type the first few letters of a commonly used word (often technical or job specific), and tells &showcase; to finish typing the word for you.</para>
 
 <para>Please see the <link
 linkend="configure-completion">Configure Completion</link> section for a complete explanation.</para>
@@ -1963,7 +1963,7 @@ linkend="configure-completion">Configure Completion</link> section for a complet
 <listitem>
 
 <para><guimenuitem>Configure Shortcuts</guimenuitem> allows you to
-assign a keyboard shortcut to actions that &kpresenter; menus or icons
+assign a keyboard shortcut to actions that &showcase; menus or icons
 contain.</para>
 
 <screenshot>
@@ -2009,13 +2009,13 @@ the dialog.</para>
 the toolbars.</para>
 
 <screenshot>
-<screeninfo>Configuring &kpresenter; toolbars</screeninfo>
+<screeninfo>Configuring &showcase; toolbars</screeninfo>
 <mediaobject>
 <imageobject>
 <imagedata fileref="settings04.png" format="PNG"/>
 </imageobject>
 <textobject>
-<phrase>Configuring &kpresenter; toolbars</phrase>
+<phrase>Configuring &showcase; toolbars</phrase>
 </textobject>
 </mediaobject>
 </screenshot>
@@ -2035,7 +2035,7 @@ the right side window up and down with the keyboard arrow keys. By
 clicking on the arrows with the mouse you can change the order of the entries 
 in the menu. 
 <!--The <guimenuitem>Configure 
-&kpresenter;...</guimenuitem> menu entry gives two menu boxes. -->
+&showcase;...</guimenuitem> menu entry gives two menu boxes. -->
 </para>
 </listitem>
 </varlistentry>
@@ -2044,12 +2044,12 @@ in the menu.
 <term>
 <menuchoice>
 <guimenu>Settings</guimenu>
-<guimenuitem>Configure &kpresenter;...</guimenuitem>
+<guimenuitem>Configure &showcase;...</guimenuitem>
 </menuchoice>
 </term>
 <listitem>
 <para>See the <link
-linkend="configure-dialog">configure &kpresenter;</link> section for a complete explanation of all &kpresenter; settings.</para>
+linkend="configure-dialog">configure &showcase;</link> section for a complete explanation of all &showcase; settings.</para>
 </listitem>
 </varlistentry>
 </variablelist>

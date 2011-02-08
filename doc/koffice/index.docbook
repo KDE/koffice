@@ -53,13 +53,9 @@
 <itemizedlist>
 <listitem><para>&kword; (a frames-based wordprocessor)</para></listitem>
 <listitem><para>&kspread; (a spreadsheet application)</para></listitem> 
-<listitem><para>&kpresenter; (screen and slide presentations)</para></listitem>
+<listitem><para>&showcase; (screen and slide presentations)</para></listitem>
 <listitem><para>&kivio; (a flowchart application)</para></listitem>
 <listitem><para>&karbon14; (a vector drawing application)</para></listitem>
-<listitem><para>&krita; (a pixel based drawing application)</para></listitem>
-<listitem><para>&kexi; (an integrated environment for managing data)</para></listitem>
-<listitem><para>&kchart; (a charts/graphs generation application)</para></listitem>
-<listitem><para>&kformula; (an editor for mathematical formulae)</para></listitem>
 </itemizedlist>
 
 <para>

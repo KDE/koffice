@@ -18,11 +18,11 @@
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 </chapterinfo>
-<title>The &kpresenter; Screen</title>
+<title>The &showcase; Screen</title>
 
-<para>Here is the default &kpresenter; Screen Layout.</para>
+<para>Here is the default &showcase; Screen Layout.</para>
 
-<para>At the top there is the menubar.  All &kpresenter; functions are
+<para>At the top there is the menubar.  All &showcase; functions are
 available from the menus, which are described in detail in <xref
 linkend="menu-items" />.</para>
 

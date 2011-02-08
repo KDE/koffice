@@ -34,7 +34,7 @@ Be sure to comment it out again when you are done -->
 <title>A Step-By-Step Tutorial</title>
 
 <para>
-In this chapter, &kpresenter; is introduced using a simple tutorial. We
+In this chapter, &showcase; is introduced using a simple tutorial. We
 shall walk through the most basic steps that are involved in creating a
 presentation, and adding some basic effects.
 </para>
@@ -43,7 +43,7 @@ presentation, and adding some basic effects.
 <title>Start a new document</title>
 
 <para>
-When you start &kpresenter;, the usual &koffice; startup dialog appears.
+When you start &showcase;, the usual &koffice; startup dialog appears.
 </para>
 
 <screenshot>
@@ -300,7 +300,7 @@ That's it. Now you have a picture on the title page!
 a chart.</para>
 
 <para>
-Every &koffice; supported document can be embedded in a &kpresenter; slide.
+Every &koffice; supported document can be embedded in a &showcase; slide.
 Let's choose a chart from &kchart;. To do so, the first step is to click on the
 <guimenu>Insert</guimenu> menu item, and then
 on <guisubmenu>Object</guisubmenu>.
@@ -317,7 +317,7 @@ on <guisubmenu>Object</guisubmenu>.
 <para>
 A list of the &koffice; available components appears as submenu.
 Select <guilabel>Chart</guilabel> and then outline with your mouse the area you
-want to put your chart in on the &kpresenter; slide.
+want to put your chart in on the &showcase; slide.
 </para>
 
 <screenshot>
@@ -333,7 +333,7 @@ created and not a blank chart-->
 
 <para>
 Once you release the mouse button, a blank chart is added on the slide. Whenever
-you work in the chart, the toolbars and menubar in &kpresenter; main window are
+you work in the chart, the toolbars and menubar in &showcase; main window are
 replaced by those from &kchart;.
 </para>
 
@@ -351,11 +351,11 @@ Please see the &kchart; user manual to get more information on how to use
 &kchart;.</para>
 
 <para>Click anywhere with the &LMB; outside the chart to go back to
-&kpresenter; slide.</para>
+&showcase; slide.</para>
 
 <para>A single click on the chart  will allow you to drag it to change its
 location and also to drag the borders to make it bigger as with any other
-&kpresenter; object. Double click on the chart to get into &kchart; mode and
+&showcase; object. Double click on the chart to get into &kchart; mode and
 modify any of the chart property.</para>
 
 </sect1>

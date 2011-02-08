@@ -43,7 +43,7 @@
 <title>Detailed Guides</title>
 
 <para>This chapter describes how to perform some common tasks in
-&kpresenter;.</para>
+&showcase;.</para>
 
 <sect1 id="html-wizard">
 <title>Create a <acronym>HTML</acronym> Slideshow</title>
@@ -107,11 +107,11 @@ slideshow</phrase></textobject>
 </screenshot>
 
 <para>Fill in each field (the dialog takes the informations from &kcontrolcenter; if they exist) and ensure that the path details are correct, as this
-is where &kpresenter; will save your new <acronym>HTML</acronym> files
+is where &showcase; will save your new <acronym>HTML</acronym> files
 and pictures. Click on the <guibutton>Next</guibutton> when you are
 done.</para>
 
-<para>If the path you select at this stage does not exist, &kpresenter; will
+<para>If the path you select at this stage does not exist, &showcase; will
 ask if you would like to create it.</para></step>
 
 <step>
@@ -155,7 +155,7 @@ slideshow</phrase></textobject>
 </mediaobject>
 </screenshot>
 
-<para>When &kpresenter; creates the web pages for you, the text colors
+<para>When &showcase; creates the web pages for you, the text colors
 for the navigation aids will follow whatever you set here. To change any of
 these colors, click the colored bar next to the corresponding text label. The
 colors used in your actual slides will be unchanged.</para>
@@ -248,7 +248,7 @@ your web slideshow.</para>
 <para>You can see how it works by using your file manager or web
 browser to open the <filename>index.html</filename> file. Click where prompted,
 and the first slide of your presentation is displayed. It will now behave as a
-&kpresenter; slideshow.</para>
+&showcase; slideshow.</para>
 
 <para>Each click on the arrow icons take you to the next or previous slide. 
 To get back to the start of the slideshow click on the slide icon.</para>
@@ -259,12 +259,12 @@ remembering to keep the folder structure intact.</para></tip>
 </sect1>
 
 <sect1 id="ms-export">
-<title>Exporting &kpresenter; presentations to a <trademark>Memory
+<title>Exporting &showcase; presentations to a <trademark>Memory
 Stick</trademark></title>
 <para>
 Some Sony projectors have the ability to run a presentation directly
 from a <trademark>Memory Stick</trademark>, without needing to connect a
-computer up to the projector. &kpresenter; can export presentations to the
+computer up to the projector. &showcase; can export presentations to the
 format required by these projectors, and this tutorial will show you how to
 export your presentation.
 </para>
@@ -304,13 +304,13 @@ Memory Stick Slideshow...</guimenuitem>.
 </para>
 
 <screenshot>
-<screeninfo>The &kpresenter; <guimenuitem>Create Memory Stick
+<screeninfo>The &showcase; <guimenuitem>Create Memory Stick
 Slideshow...</guimenuitem> menu selection.</screeninfo>
 <mediaobject>
 <imageobject>
 <imagedata format="PNG" fileref="msexport1.png"/>
 </imageobject>
-<textobject><phrase>The &kpresenter; <guimenuitem>Create Memory Stick
+<textobject><phrase>The &showcase; <guimenuitem>Create Memory Stick
 Slideshow...</guimenuitem> menu selection.</phrase></textobject>
 </mediaobject>
 </screenshot>
@@ -322,13 +322,13 @@ This will bring up the <guilabel>Create Memory Stick
 Slideshow</guilabel> dialog.</para>
 
 <screenshot>
-<screeninfo>The &kpresenter; <guilabel>Create Memory Stick
+<screeninfo>The &showcase; <guilabel>Create Memory Stick
 Slideshow</guilabel> dialog.</screeninfo>
 <mediaobject>
 <imageobject>
 <imagedata format="PNG" fileref="msexport2.png"/>
 </imageobject>
-<textobject><phrase>The &kpresenter; <guilabel>Create Memory Stick
+<textobject><phrase>The &showcase; <guilabel>Create Memory Stick
 Slideshow</guilabel> dialog.</phrase></textobject>
 </mediaobject>
 </screenshot>
@@ -356,13 +356,13 @@ starting the actual presentation display.
 dialog:</para>
 
 <screenshot>
-<screeninfo>The &kpresenter; <guilabel>Create Memory Stick
+<screeninfo>The &showcase; <guilabel>Create Memory Stick
 Slideshow</guilabel> dialog (extended).</screeninfo>
 <mediaobject>
 <imageobject>
 <imagedata format="PNG" fileref="msexport2b.png"/>
 </imageobject>
-<textobject><phrase>The &kpresenter; <guilabel>Create Memory Stick
+<textobject><phrase>The &showcase; <guilabel>Create Memory Stick
 Slideshow</guilabel> dialog (extended).</phrase></textobject>
 </mediaobject>
 </screenshot>
@@ -388,13 +388,13 @@ following dialog informing you of the progress of this process:
 </para>
 
 <screenshot>
-<screeninfo>The &kpresenter; <guilabel>Create Memory Stick
+<screeninfo>The &showcase; <guilabel>Create Memory Stick
 Slideshow</guilabel> progress dialog.</screeninfo>
 <mediaobject>
 <imageobject>
 <imagedata format="PNG" fileref="msexport3.png"/>
 </imageobject>
-<textobject><phrase>The &kpresenter; <guilabel>Create Memory Stick
+<textobject><phrase>The &showcase; <guilabel>Create Memory Stick
 Slideshow</guilabel> progress dialog.</phrase></textobject>
 </mediaobject>
 </screenshot>
@@ -433,9 +433,9 @@ as these are encoded into the index file.
 </sect1>
 
 <sect1 id="creating-templates">
-<title>Creating &kpresenter; Templates</title>
+<title>Creating &showcase; Templates</title>
 
-<para>It is very easy to add new templates to &kpresenter;'s library.</para>
+<para>It is very easy to add new templates to &showcase;'s library.</para>
 
 <para>If you have made a presentation in a style that you would like to use
 again, you can save it as a template.</para>
@@ -445,7 +445,7 @@ it.</para>
 
 <procedure>
 <step>
-<para>Open &kpresenter; and create a new document.</para>
+<para>Open &showcase; and create a new document.</para>
 </step>
 
 <step>
@@ -455,13 +455,13 @@ background - do this by either going to <guimenu>Format</guimenu> >
 from the &RMB; menu:</para>
 
 <screenshot>
-<screeninfo>The &kpresenter; <guilabel>Slide Background</guilabel>
+<screeninfo>The &showcase; <guilabel>Slide Background</guilabel>
 dialog.</screeninfo>
 <mediaobject>
 <imageobject>
 <imagedata format="PNG" fileref="template02.png"/>
 </imageobject>
-<textobject><phrase>The &kpresenter; <guilabel>Slide Background</guilabel>
+<textobject><phrase>The &showcase; <guilabel>Slide Background</guilabel>
 dialog.</phrase></textobject>
 </mediaobject>
 </screenshot>
@@ -538,13 +538,13 @@ to save it). The next time you are presented with the startup
 dialog, your very own template will be available to select!</para>
 
 <screenshot>
-<screeninfo>Your new template in the &kpresenter; startup
+<screeninfo>Your new template in the &showcase; startup
 dialog.</screeninfo>
 <mediaobject>
 <imageobject>
 <imagedata fileref="template07.png" format="PNG"/>
 </imageobject>
-<textobject><phrase>Your new template in the &kpresenter;
+<textobject><phrase>Your new template in the &showcase;
 startup dialog.</phrase></textobject>
 </mediaobject>
 </screenshot>

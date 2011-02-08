@@ -25,7 +25,7 @@
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 </chapterinfo>
-<title>Configuring &kpresenter;</title>
+<title>Configuring &showcase;</title>
 
 <sect1  id="configure-autocorrection">
 <title>The <guilabel>Configure Autocorrection...</guilabel> Dialog</title>
@@ -62,48 +62,48 @@
 <variablelist>
 <varlistentry>
 <term><guilabel>Convert first letter of a sentence automatically to uppercase</guilabel></term>
-<listitem><para>When selected, &kpresenter; will automatically capitalize the first letter after a period. You can tell &kpresenter; when not to alter capitalization in certain instances (&ie; “Sr.” or “Jr.”). For more details, see the section entitled  <link linkend="exceptions">Autocorrection Exceptions</link>.</para></listitem>
+<listitem><para>When selected, &showcase; will automatically capitalize the first letter after a period. You can tell &showcase; when not to alter capitalization in certain instances (&ie; “Sr.” or “Jr.”). For more details, see the section entitled  <link linkend="exceptions">Autocorrection Exceptions</link>.</para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Convert two uppercase characters to one uppercase and one lowercase character</guilabel></term>
-<listitem><para>When selected, &kpresenter; will automatically convert a double capital letter (a common typographical error), into a single capital letter. You can tell &kpresenter; when not to alter capitalization in certain instances. For more details, see the section entitled <link linkend="exceptions">Autocorrection Exceptions</link>.</para></listitem>
+<listitem><para>When selected, &showcase; will automatically convert a double capital letter (a common typographical error), into a single capital letter. You can tell &showcase; when not to alter capitalization in certain instances. For more details, see the section entitled <link linkend="exceptions">Autocorrection Exceptions</link>.</para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Autoformat URLs</guilabel></term>
-<listitem><para>When selected, &kpresenter; will scan text for patterns which suggest a certain section of text is a &URL; and automatically creates a link.</para></listitem>
+<listitem><para>When selected, &showcase; will scan text for patterns which suggest a certain section of text is a &URL; and automatically creates a link.</para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Suppress double spaces</guilabel></term>
-<listitem><para>When checked, &kpresenter; will ignore the second space typed. This prevents users from adding double spaces between words or sentences</para></listitem>
+<listitem><para>When checked, &showcase; will ignore the second space typed. This prevents users from adding double spaces between words or sentences</para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Remove spaces at the beginning and end of paragraphs</guilabel></term>
-<listitem><para>When selected, &kpresenter; will automatically remove spaces at the beginning and/or the end of a line of text.</para></listitem>
+<listitem><para>When selected, &showcase; will automatically remove spaces at the beginning and/or the end of a line of text.</para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Automatically do bold and underline formatting</guilabel></term>
-<listitem><para>When selected, &kpresenter; will look for words surrounded by asterisks ( * ). It will remove the asterisks and change the font of all words in between the two asterisks to bold face.</para>
-<para>&kpresenter; will also look for words surrounded by underscores ( _ ). It will remove the underscores and underline all words in between the two underscores.</para></listitem>
+<listitem><para>When selected, &showcase; will look for words surrounded by asterisks ( * ). It will remove the asterisks and change the font of all words in between the two asterisks to bold face.</para>
+<para>&showcase; will also look for words surrounded by underscores ( _ ). It will remove the underscores and underline all words in between the two underscores.</para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Replace 1/2... with ½...</guilabel></term>
-<listitem><para>When selected, &kpresenter; will automatically change 1/2, 1/3 and 3/4 to their single character equivalents.</para></listitem>
+<listitem><para>When selected, &showcase; will automatically change 1/2, 1/3 and 3/4 to their single character equivalents.</para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Use autonumbering for numbered paragraphs</guilabel></term>
-<listitem><para>If you start a paragraph with a number and a symbol ( <emphasis>1)</emphasis>  for example), &kpresenter; will automatically convert that paragraph to a numbered paragraph. All future paragraphs will be consecutively numbered.</para></listitem>
+<listitem><para>If you start a paragraph with a number and a symbol ( <emphasis>1)</emphasis>  for example), &showcase; will automatically convert that paragraph to a numbered paragraph. All future paragraphs will be consecutively numbered.</para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Replace 1st with 1^st...</guilabel></term>
-<listitem><para>When selected, &kpresenter; will automatically change 1st to 1<superscript>st</superscript>.</para></listitem>
+<listitem><para>When selected, &showcase; will automatically change 1st to 1<superscript>st</superscript>.</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -113,7 +113,7 @@
 
 <varlistentry>
 <term><guilabel>Use list-formatting for bulleted paragraphs</guilabel></term>
-<listitem><para>When selected, &kpresenter; will look for lines that begin with <emphasis>- </emphasis>, and automatically convert the paragraph style to a bulleted list.  The bullet is selected with the left button below this option.</para></listitem>
+<listitem><para>When selected, &showcase; will look for lines that begin with <emphasis>- </emphasis>, and automatically convert the paragraph style to a bulleted list.  The bullet is selected with the left button below this option.</para></listitem>
 </varlistentry>
 
 </variablelist>
@@ -173,31 +173,31 @@ quotation character, click on one of the buttons. Clicking on
 </mediaobject>
 </screenshot>
 
-<para>This allows you to automatically have &kpresenter; replace one string
+<para>This allows you to automatically have &showcase; replace one string
 of text with another.  This can be useful for special symbols, commonly
 used abbreviations that you want spelled out, or common typing errors.</para>
 
-<para>&kpresenter; uses different autocorrection strings depending on the language.  
+<para>&showcase; uses different autocorrection strings depending on the language.  
 Set the correct language using the combo box labeled 
 <guilabel>Replacement and exceptions for language:</guilabel>.</para>
 
 <para>The check box labeled <guilabel>Enable word replacement</guilabel> is used to 
-toggle on and off the autoreplacement features of &kpresenter;.  If there is no mark in the check box, 
-then &kpresenter; will not perform any autoreplacements from the list in this dialog.</para>
+toggle on and off the autoreplacement features of &showcase;.  If there is no mark in the check box, 
+then &showcase; will not perform any autoreplacements from the list in this dialog.</para>
 
 <para>If there is a mark in the check box labeled <guilabel>Replace text with format</guilabel> 
-&kpresenter; will not only change the text when it finds a match, but it will change the formatting of the new text. 
+&showcase; will not only change the text when it finds a match, but it will change the formatting of the new text. 
 If there is no mark in this check box, then
-&kpresenter; uses the same formatting options for the replaced text as it found in the search text.  For more information 
+&showcase; uses the same formatting options for the replaced text as it found in the search text.  For more information 
 on setting the format options for replacement text, see the section on 
 <link linkend="autocorrection-format-options">Changing the format of the autocorrection string</link>.</para>
 
 <sect3>
 <title>Adding an autocorrection string</title>
 
-<para>To add an autocorrection string, simply type the text you want &kpresenter; to
+<para>To add an autocorrection string, simply type the text you want &showcase; to
 check for in the text box labeled
-<guilabel>Find:</guilabel>, then enter the text you want &kpresenter;
+<guilabel>Find:</guilabel>, then enter the text you want &showcase;
 to substitute in the text box labeled <guilabel>Replace:</guilabel>.</para>
 
 
@@ -212,7 +212,7 @@ strings are now added to the table.</para>
 <sect3>
 <title>Editing an autocorrection string</title>
 <para><emphasis>Changing the text you want to find.</emphasis></para>
-<para>&kpresenter; does not allow you to change the text to search for.
+<para>&showcase; does not allow you to change the text to search for.
 This is to prevent disastrous mistakes.</para>
 <para>Instead, you must delete the current autocorrection rule and
 add a new text string with the corrected text to find.</para>
@@ -232,7 +232,7 @@ are done, simply click on the <guibutton>Modify</guibutton> button.</para>
 <guibutton>Remove</guibutton> button.  The string is removed.</para>
 
 <warning>
-<para>Be aware that &kpresenter; does not give you a chance to back out once
+<para>Be aware that &showcase; does not give you a chance to back out once
 you have deleted a string.  Be sure you have selected the correct string
 <emphasis>before</emphasis> you click the <guibutton>Remove</guibutton>
 button.</para>
@@ -252,9 +252,9 @@ button.</para>
 </mediaobject>
 </screenshot>
 <para>You can use this dialog to select the format of the replaced text.</para>
-<para>The left column consists of 13 check boxes.  If there is a mark in the check box, then &kpresenter; will change
+<para>The left column consists of 13 check boxes.  If there is a mark in the check box, then &showcase; will change
 any replaced text to match the property selected.
-If no mark is in the check box, &kpresenter; does not consider that property when replacing text.</para>
+If no mark is in the check box, &showcase; does not consider that property when replacing text.</para>
 
 <variablelist>
 
@@ -268,7 +268,7 @@ If no mark is in the check box, &kpresenter; does not consider that property whe
 <varlistentry>
 <term><guilabel>Size:</guilabel></term>
 <listitem>
-<para>Use this spin box to set the font size you want &kpresenter; to use for your replaced text.</para>
+<para>Use this spin box to set the font size you want &showcase; to use for your replaced text.</para>
 </listitem>
 </varlistentry>
 
@@ -276,7 +276,7 @@ If no mark is in the check box, &kpresenter; does not consider that property whe
 <term><guilabel>Color:</guilabel> and <guilabel>Background color:</guilabel></term>
 <listitem>
 <para>Clicking on either of these two buttons allows you to select the font color and/or background color respectively,
-you want &kpresenter; to use.  <!--For more information on selecting a color, see the
+you want &showcase; to use.  <!--For more information on selecting a color, see the
 section on <link linkend="select-colors">Selecting Colors from the Color Dialog</link>.--></para>
 </listitem>
 </varlistentry>
@@ -284,7 +284,7 @@ section on <link linkend="select-colors">Selecting Colors from the Color Dialog<
 <varlistentry>
 <term><guilabel>Bold:</guilabel> and <guilabel>Italic:</guilabel></term>
 <listitem>
-<para>Use these <guilabel>Yes</guilabel>/<guilabel>No</guilabel> radio buttons to determine whether you want &kpresenter;
+<para>Use these <guilabel>Yes</guilabel>/<guilabel>No</guilabel> radio buttons to determine whether you want &showcase;
 to change the fonts to boldface or italicized fonts.</para>
 </listitem>
 </varlistentry>
@@ -309,13 +309,13 @@ or <guilabel>Simple Bold</guilabel> to use for the replacement text.</para>
 <term><guilabel>Vertical alignment:</guilabel></term>
 <listitem>
 <para>You can select <guilabel>Normal</guilabel>, <guilabel>Superscript</guilabel> or
-<guilabel>Subscript</guilabel> to determine what font alignment you want &kpresenter; to use.</para>
+<guilabel>Subscript</guilabel> to determine what font alignment you want &showcase; to use.</para>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term><guilabel>Shadow:</guilabel> and <guilabel>Word by word:</guilabel></term>
 <listitem>
-<para>Use these <guilabel>Yes</guilabel>/<guilabel>No</guilabel> radio buttons to determine whether you want &kpresenter;
+<para>Use these <guilabel>Yes</guilabel>/<guilabel>No</guilabel> radio buttons to determine whether you want &showcase;
 to use shadow text and/or word by word underlining and strikethrough in the replacement text.</para>
 </listitem>
 </varlistentry>
@@ -346,7 +346,7 @@ to use shadow text and/or word by word underlining and strikethrough in the repl
 <sect2 id="exceptions">
 <title><guilabel>Exceptions</guilabel></title>
 
-<para>There are instances where &kpresenter; will make autocorrection changes
+<para>There are instances where &showcase; will make autocorrection changes
 that are inappropriate.  You can use the fourth tab of this dialog to define
 <emphasis>exceptions</emphasis> to the rules previously discussed.</para>
 <para>The dialog for exceptions is shown below:</para>
@@ -361,7 +361,7 @@ that are inappropriate.  You can use the fourth tab of this dialog to define
 </mediaobject>
 </screenshot>
 
-<para>To prevent &kpresenter; from deciding an abbreviation or other text is
+<para>To prevent &showcase; from deciding an abbreviation or other text is
 the end of a sentence, simply enter the text fragment in the text box below
 <guilabel>Do not treat as the end of a sentence:</guilabel>.  Then click
 <guibutton>Add</guibutton>.</para>
@@ -393,8 +393,8 @@ and click on the <guibutton>Remove</guibutton> button.</para>
 <para>Then select <menuchoice>
 <guimenu>Text</guimenu><guisubmenu>Autocorrection</guisubmenu><guimenuitem>Apply Autocorrection</guimenuitem></menuchoice>
 from the menubar.</para>
-<para>&kpresenter; will start at the beginning of the document and apply all selected autocorrection options to the entire document.</para>
-<para>When &kpresenter; is finished, it will return you to your document for further editing.</para>
+<para>&showcase; will start at the beginning of the document and apply all selected autocorrection options to the entire document.</para>
+<para>When &showcase; is finished, it will return you to your document for further editing.</para>
 <para>For more information on enabling and disabling autocorrection,
 see <link linkend="enabling-autocorrection">Enabling/Disabling Autocorrection</link>.</para>
 
@@ -405,22 +405,22 @@ see <link linkend="enabling-autocorrection">Enabling/Disabling Autocorrection</l
 <title>The <guilabel>Configure Completion</guilabel> Dialog</title>
 
 <para>Autocompletion allows you to type the first few letters of a commonly
-used word (often technical or job specific), and tells &kpresenter; to
+used word (often technical or job specific), and tells &showcase; to
 finish typing the word for you.  This is often very useful when you have lengthy technical words.</para>
 
 <sect2 id="autocomplete-using">
 <title>Using autocompletion</title>
 <para>Using autocompletion could not be easier.  Simply type the first few
-letters of the word you want &kpresenter; to finish, and press
-<keycombo>&Ctrl;<keycap>E</keycap></keycombo>. &kpresenter; will look 
+letters of the word you want &showcase; to finish, and press
+<keycombo>&Ctrl;<keycap>E</keycap></keycombo>. &showcase; will look 
 through the list of autocompletion words and if it finds a word which begins 
 with those letters, it will finish entering the remainder of the word.</para>
 <sect3 id="autocomplete-using-add">
 <title>Adding words to autocompletion</title>
-<para>&kpresenter; maintains a list of words for each user that will be used for autocompletion.</para>
+<para>&showcase; maintains a list of words for each user that will be used for autocompletion.</para>
 <para>You can add words to this list one of two ways:</para>
 <itemizedlist>
-<listitem><para>&kpresenter; can automatically add new words to the completion list for later approval.
+<listitem><para>&showcase; can automatically add new words to the completion list for later approval.
 This is selected using <link linkend="autocomplete-dialog">the dialog</link>.</para></listitem>
 <listitem><para>Individual words can be added to the list by using 
 <link linkend="autocomplete-dialog">the dialog</link>.</para></listitem>
@@ -493,7 +493,7 @@ suggestion:</guilabel> drop-down list.</para>
 <varlistentry>
 <term><guilabel>Characters needed:</guilabel></term>
 <listitem>
-<para>Use this spinbox/slider combination to prevent &kpresenter; 
+<para>Use this spinbox/slider combination to prevent &showcase; 
 from automatically adding short words to the completion list.   You can select
 any value from 5-100 and the words will need to be at least the number of
 characters set here to be added in the list.</para>
@@ -534,11 +534,11 @@ and you want to accept it. You can choose
 <term><guilabel>Make Default</guilabel></term>
 <listitem>
 <para>A word is not part of autocompletion until the list is
-<emphasis>saved</emphasis> to disk.  At that moment, &kpresenter; 
+<emphasis>saved</emphasis> to disk.  At that moment, &showcase; 
 will use that saved list for all autocompletion, until the list is replaced with
 another saved list.</para>
 <para>Some of the words in the autocompletion list may not have been saved
-yet.</para><para>To save the current list to disk and have &kpresenter; begin
+yet.</para><para>To save the current list to disk and have &showcase; begin
 using this new list for autocompletion, click this button.</para>
 </listitem>
 </varlistentry>
@@ -554,7 +554,7 @@ using this new list for autocompletion, click this button.</para>
 </sect1>
 
 <sect1 id="configure-dialog">
-<title>The <guilabel>Configure &kpresenter;</guilabel> Dialog</title>
+<title>The <guilabel>Configure &showcase;</guilabel> Dialog</title>
 
 <sect2 id="configure-interface">
 <title><guilabel>Interface</guilabel></title>
@@ -573,7 +573,7 @@ using this new list for autocompletion, click this button.</para>
 <varlistentry>
 <term><guilabel>Show rulers</guilabel></term>
 <listitem><para>This is checked by default and both a vertical and horizontal
-ruler are shown on &kpresenter; slides. When unchecked, the rulers are not shown
+ruler are shown on &showcase; slides. When unchecked, the rulers are not shown
 anymore on any slide.</para></listitem>
 </varlistentry>
 
@@ -661,7 +661,7 @@ settings.</para></listitem>
 <varlistentry>
 <term><guilabel>Skip all uppercase words</guilabel></term>
 <listitem><para>If this option is checked, the all uppercase words will not be checked for spelling. This option is also used when you choose the <menuchoice><guimenu>Text</guimenu><guisubmenu>Spellcheck</guisubmenu><guimenuitem>Spelling...</guimenuitem></menuchoice> menu option.</para>
-<tip><para>This is useful if the document you are working on uses a large number of acronyms. If this box is left unchecked, most of those acronyms will be incorrectly marked. By placing a mark in this checkbox, &kpresenter; will not mark the acronyms as misspelled.</para></tip>
+<tip><para>This is useful if the document you are working on uses a large number of acronyms. If this box is left unchecked, most of those acronyms will be incorrectly marked. By placing a mark in this checkbox, &showcase; will not mark the acronyms as misspelled.</para></tip>
 </listitem></varlistentry>
 
 <varlistentry>
@@ -670,7 +670,7 @@ settings.</para></listitem>
 <para>Examples of such words are <emphasis>shutout</emphasis>,
 <emphasis>cannot</emphasis> and <emphasis>blackout</emphasis>.</para>
 <tip>
-<para>Checking this box will help prevent &kpresenter; from
+<para>Checking this box will help prevent &showcase; from
 flagging website and email addresses for spelling errors.  These
 addresses often contain words run together.</para>
 </tip>
@@ -712,7 +712,7 @@ addresses often contain words run together.</para>
 <title><guilabel>Misc</guilabel></title>
 <varlistentry>
 <term><guilabel>Undo/Redo limit:</guilabel></term>
-<listitem><para>Set the number of actions you can undo and redo (how many actions &kpresenter; keeps in its Undo buffer). Default is 30. Maximum is 60 and minimum is 10. Any action that exceeds the number set will be forgotten.</para></listitem>
+<listitem><para>Set the number of actions you can undo and redo (how many actions &showcase; keeps in its Undo buffer). Default is 30. Maximum is 60 and minimum is 10. Any action that exceeds the number set will be forgotten.</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -778,7 +778,7 @@ addresses often contain words run together.</para>
 <title><guilabel>Document Defaults</guilabel></title>
 <varlistentry>
 <term><guilabel>Default font:</guilabel></term>
-<listitem><para>Click on the <guibutton>Choose...</guibutton> button, and a new dialog will appear. Use this dialog to choose the default font. This setting determines the default font used by &kpresenter; until further formatting is done. You can revert any text to this default by selecting <menuchoice><guimenu>Text</guimenu><guimenuitem>Default Format</guimenuitem></menuchoice> from the menubar.</para></listitem>
+<listitem><para>Click on the <guibutton>Choose...</guibutton> button, and a new dialog will appear. Use this dialog to choose the default font. This setting determines the default font used by &showcase; until further formatting is done. You can revert any text to this default by selecting <menuchoice><guimenu>Text</guimenu><guimenuitem>Default Format</guimenuitem></menuchoice> from the menubar.</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -788,7 +788,7 @@ addresses often contain words run together.</para>
 
 <varlistentry>
 <term><guilabel>Automatic hyphenation</guilabel></term>
-<listitem><para>Check this box if you want &kpresenter; to automatically hyphenate long words when it determines the word wrap in text frames. This is not set as default.</para></listitem>
+<listitem><para>Check this box if you want &showcase; to automatically hyphenate long words when it determines the word wrap in text frames. This is not set as default.</para></listitem>
 </varlistentry>
 
 </variablelist>
@@ -802,7 +802,7 @@ addresses often contain words run together.</para>
 
 <varlistentry>
 <term><guilabel>Autosave (min):</guilabel></term>
-<listitem><para>You can use this to adjust how often &kpresenter; saves a temporary file. If you set this value to  <guilabel>No autosave</guilabel>, &kpresenter; will not autosave. You can adjust the autosave from 1 minute to 60 minutes.</para></listitem>
+<listitem><para>You can use this to adjust how often &showcase; saves a temporary file. If you set this value to  <guilabel>No autosave</guilabel>, &showcase; will not autosave. You can adjust the autosave from 1 minute to 60 minutes.</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -813,7 +813,7 @@ addresses often contain words run together.</para>
 
 <varlistentry>
 <term><guilabel>Tab stop:</guilabel></term>
-<listitem><para>Each &kpresenter; document has a default set of tab stops. If you add tab stops to your document, the newly added tab stops override the default tabstops. You can use this text box to define the spacing between default tab stops.
+<listitem><para>Each &showcase; document has a default set of tab stops. If you add tab stops to your document, the newly added tab stops override the default tabstops. You can use this text box to define the spacing between default tab stops.
 As an example, if you enter 1.5 in this text box, and the unit of measure is in centimeters, then the first default tab stop will be located 1.5 cm to the right of the left margin of the frame. The second default tab stop will be located at 3 cm from the left margin, etc.</para></listitem>
 </varlistentry>
 </variablelist>
