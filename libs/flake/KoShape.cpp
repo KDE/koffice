@@ -684,6 +684,21 @@ QList<QPointF> KoShape::connectionPoints() const
     return points;
 }
 
+void KoShape::setConnectionPolicy(int connectionIndex, const KoShapeConnectionPolicy &policy)
+{
+    Q_D(KoShape);
+    d->connectorPolicies.reserve(connectionIndex);
+    d->connectorPolicies.insert(connectionIndex, policy);
+}
+
+KoShapeConnectionPolicy KoShape::connectionPolicy(int connectionIndex) const
+{
+    Q_D(const KoShape);
+    if (d->connectorPolicies.count() - 1 < connectionIndex)
+        return KoShapeConnectionPolicy();
+    return d->connectorPolicies.value(connectionIndex);
+}
+
 void KoShape::addEventAction(KoEventAction *action)
 {
     Q_D(KoShape);

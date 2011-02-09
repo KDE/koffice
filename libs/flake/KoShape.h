@@ -60,6 +60,7 @@ class KoShapePrivate;
 class KoFilterEffectStack;
 class KoSnapData;
 class KoShapeConnection;
+class KoShapeConnectionPolicy;
 
 /**
  *
@@ -299,6 +300,8 @@ public:
      *   just like the rest of the KoShape class uses.
      */
     void addConnectionPoint(const QPointF &point);
+    void setConnectionPolicy(int connectionIndex, const KoShapeConnectionPolicy &policy);
+    KoShapeConnectionPolicy connectionPolicy(int connectionIndex) const;
 
     /**
      * Return a list of the connection points that have been added to this shape.
