@@ -46,7 +46,7 @@ class ConnectStrategy {
     virtual ~ConnectStrategy() { }
     KoShapeConnection::ConnectionType type() const { return m_type; }
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d) = 0;
+    virtual void paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2) = 0;
     virtual void setSkew(const QStringList &values) {
         Q_UNUSED(values);
     }
@@ -61,7 +61,7 @@ class ConnectLines : public ConnectStrategy {
         : ConnectStrategy(type) { }
     virtual ~ConnectLines() { }
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d);
+    virtual void paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2);
     virtual void setSkew(const QStringList &values);
 
   private:
@@ -77,7 +77,7 @@ class ConnectCurve : public ConnectStrategy {
         delete shape;
     }
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d);
+    virtual void paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2);
 
     KoPathShape *shape; // TODO make it a value on the stack?
 };
@@ -114,30 +114,17 @@ KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, const
         zIndex = shape1->zIndex() + 1;
 }
 
-void ConnectLines::paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d)
+void ConnectLines::paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2)
 {
-    QPointF a(d->startPoint);
-    QPointF b(d->endPoint);
-    if (d->shape1) {
-        QList<QPointF> points(d->shape1->connectionPoints());
-        int index = qMin(d->gluePointIndex1, points.count()-1);
-        a = d->shape1->absoluteTransformation(0).map(points[index]);
-    }
-    if (d->shape2) {
-        QList<QPointF> points(d->shape2->connectionPoints());
-        int index = qMin(d->gluePointIndex2, points.count()-1);
-        b = d->shape2->absoluteTransformation(0).map(points[index]);
-    }
-
     QPainterPath path;
     switch (type()) {
-    case KoShapeConnection::Straight:
-        path.moveTo(a);
-        path.lineTo(b);
-        break;
     case KoShapeConnection::EdgedLinesOutside:
-        break;
+        // TODO avoid bounding rects and find a connection.
     case KoShapeConnection::EdgedLines:
+        // TODO shoot out a bit and then a direct line.
+    case KoShapeConnection::Straight:
+        path.moveTo(point1);
+        path.lineTo(point2);
         break;
     default:
         Q_ASSERT(0); // parent should have created another strategy
@@ -156,25 +143,12 @@ void ConnectLines::setSkew(const QStringList &values)
     qDebug() << "skew.." << values;
 }
 
-void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d)
+void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2)
 {
-    QPointF a(d->startPoint);
-    QPointF b(d->endPoint);
-    if (!d->hasDummyShape && d->shape1) {
-        QList<QPointF> points(d->shape1->connectionPoints());
-        int index = qMin(d->gluePointIndex1, points.count()-1);
-        a = d->shape1->absoluteTransformation(0).map(points[index]);
-    }
-    if (d->shape2) {
-        QList<QPointF> points(d->shape2->connectionPoints());
-        int index = qMin(d->gluePointIndex2, points.count()-1);
-        b = d->shape2->absoluteTransformation(0).map(points[index]);
-    }
-
     qreal zoomX, zoomY;
     converter.zoom(&zoomX, &zoomY);
     painter.scale(zoomX, zoomY);
-    painter.translate(QPointF(qMin(a.x(), b.x()), qMin(a.y(), b.y()))
+    painter.translate(QPointF(qMin(point1.x(), point2.x()), qMin(point1.y(), point2.y()))
             - shape->outline().boundingRect().topLeft());
 
     KoPathPoint *first = shape->pointByIndex(KoPathPointIndex(0, 0));
@@ -184,8 +158,8 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, Ko
         // TODO calculate a curve and fill the shape with it.
         return;
     }
-    const qreal scaleX = (a.x() - b.x()) / (first->point().x() - last->point().x());
-    const qreal scaleY = (a.y() - b.y()) / (first->point().y() - last->point().y());
+    const qreal scaleX = (point1.x() - point2.x()) / (first->point().x() - last->point().x());
+    const qreal scaleY = (point1.y() - point2.y()) / (first->point().y() - last->point().y());
     painter.scale(qMax(scaleX, 1E-4), qMax(scaleY, 1E-4));
 
     painter.save();
@@ -235,8 +209,24 @@ KoShapeConnection::~KoShapeConnection()
 
 void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converter)
 {
-    if (d->connectionStrategy)
-        d->connectionStrategy->paint(painter, converter, d);
+    if (d->connectionStrategy == 0)
+        return;
+
+
+    QPointF a(d->startPoint);
+    QPointF b(d->endPoint);
+    if (!d->hasDummyShape && d->shape1) {
+        QList<QPointF> points(d->shape1->connectionPoints());
+        int index = qMin(d->gluePointIndex1, points.count()-1);
+        a = d->shape1->absoluteTransformation(0).map(points[index]);
+    }
+    if (d->shape2) {
+        QList<QPointF> points(d->shape2->connectionPoints());
+        int index = qMin(d->gluePointIndex2, points.count()-1);
+        b = d->shape2->absoluteTransformation(0).map(points[index]);
+    }
+
+    d->connectionStrategy->paint(painter, converter, a, b);
 }
 
 KoShape *KoShapeConnection::shape1() const
