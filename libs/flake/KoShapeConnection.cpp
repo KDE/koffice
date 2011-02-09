@@ -160,7 +160,7 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, Ko
 {
     QPointF a(d->startPoint);
     QPointF b(d->endPoint);
-    if (d->shape1) {
+    if (!d->hasDummyShape && d->shape1) {
         QList<QPointF> points(d->shape1->connectionPoints());
         int index = qMin(d->gluePointIndex1, points.count()-1);
         a = d->shape1->absoluteTransformation(0).map(points[index]);
@@ -174,8 +174,8 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, Ko
     qreal zoomX, zoomY;
     converter.zoom(&zoomX, &zoomY);
     painter.scale(zoomX, zoomY);
-    painter.translate(a - shape->outline().boundingRect().topLeft());
-    painter.scale(1/zoomX, 1/zoomY);
+    painter.translate(QPointF(qMin(a.x(), b.x()), qMin(a.y(), b.y()))
+            - shape->outline().boundingRect().topLeft());
 
     KoPathPoint *first = shape->pointByIndex(KoPathPointIndex(0, 0));
     KoPathPoint *last = shape->pointByIndex(KoPathPointIndex(0, shape->pointCount() - 1));
@@ -184,10 +184,14 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, Ko
         // TODO calculate a curve and fill the shape with it.
         return;
     }
-    const qreal scaleX = (b.x() - a.x()) / (last->point().x() - first->point().x());
-    const qreal scaleY = (b.y() - a.y()) / (last->point().y() - first->point().y());
+    const qreal scaleX = (a.x() - b.x()) / (first->point().x() - last->point().x());
+    const qreal scaleY = (a.y() - b.y()) / (first->point().y() - last->point().y());
     painter.scale(qMax(scaleX, 1E-4), qMax(scaleY, 1E-4));
+
+    painter.save();
+    painter.scale(1/zoomX, 1/zoomY); // reverse pixels->pt scale because shape will do that again
     shape->paint(painter, converter);
+    painter.restore();
 }
 
 KoShapeConnection::KoShapeConnection()
