@@ -59,6 +59,8 @@ public:
      */
     void removeConnection(KoShapeConnection *connection);
 
+    void loadOdfGluePoints(const KoXmlElement &gluePoints);
+
     /**
      * Fills the style stack and returns the value of the given style property (e.g fill, stroke).
      */

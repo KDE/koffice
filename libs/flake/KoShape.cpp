@@ -184,6 +184,71 @@ void KoShapePrivate::removeConnection(KoShapeConnection *connection)
     // TODO remove from shapeManager ?
 }
 
+void KoShapePrivate::loadOdfGluePoints(const KoXmlElement &gluePoints)
+{
+    // defaults expect 4 to be there. The subclass should provide those, but if it
+    // didn't make sure we don't have issues with our numbering.
+    connectors.resize(4);
+    connectorPolicies.resize(4);
+
+    KoXmlElement element;
+    forEachElement (element, gluePoints) {
+        if (element.namespaceURI() != KoXmlNS::draw || element.localName() != "glue-point")
+            continue;
+
+        const int index = element.attributeNS(KoXmlNS::draw, "id").toInt();
+        if (index < 4) // defaults, also skip malformed 'id's
+            continue;
+
+        KoShapeConnectionPolicy policy;
+        const QString escape = element.attributeNS(KoXmlNS::draw, "escape-direction");
+        if (!escape.isEmpty()) {
+            if (escape == "horizontal") {
+                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeHorizontal);
+            } else if (escape == "vertical") {
+                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeVertical);
+            } else if (escape == "left") {
+                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeLeft);
+            } else if (escape == "right") {
+                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeRight);
+            } else if (escape == "up") {
+                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeUp);
+            } else if (escape == "down") {
+                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeDown);
+            }
+        }
+        const QString align = element.attributeNS(KoXmlNS::draw, "align");
+        if (!align.isEmpty()) {
+            // absolute distances to the edge specified by align
+            if (align == "top-left") {
+                policy.setAlignment(Qt::AlignLeft | Qt::AlignTop);
+            } else if (align == "center") {
+                policy.setAlignment(Qt::AlignCenter);
+            } else if (align == "top") {
+                policy.setAlignment(Qt::AlignTop);
+            } else if (align == "top-right") {
+                policy.setAlignment(Qt::AlignRight | Qt::AlignTop);
+            } else if (align == "left") {
+                policy.setAlignment(Qt::AlignLeft);
+            } else if (align == "right") {
+                policy.setAlignment(Qt::AlignRight);
+            } else if (align == "bottom-left") {
+                policy.setAlignment(Qt::AlignLeft | Qt::AlignBottom);
+            } else if (align == "bottom") {
+                policy.setAlignment(Qt::AlignBottom);
+            } else if (align == "bottom-right") {
+                policy.setAlignment(Qt::AlignRight | Qt::AlignBottom);
+            }
+        }
+        connectorPolicies[index] = policy;
+
+        qreal x = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x"));
+        qreal y = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y"));
+
+        connectors[index] = QPointF(x, y);
+    }
+}
+
 
 // ======== KoShape
 KoShape::KoShape()
@@ -1143,6 +1208,7 @@ bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingConte
             d->eventActions = KoEventActionRegistry::instance()->createEventActionsFromOdf(eventActionsElement, context);
         }
         // load glue points (connection points)
+        d->loadOdfGluePoints(element);
     }
 
     return true;
