@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,6 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "KoShapeConnection.h"
+#include "KoShapeConnection_p.h"
 #include "KoShape.h"
 #include "KoShape_p.h"
 #include "KoViewConverter.h"
@@ -36,98 +37,80 @@
 #include <QList>
 #include <QPainterPath>
 
-class KoShapeConnectionPrivate;
+class ConnectStrategy {
+  public:
+    ConnectStrategy(KoShapeConnection::ConnectionType type)
+        : m_type(type)
+    {
+    }
+    virtual ~ConnectStrategy() { }
+    KoShapeConnection::ConnectionType type() const { return m_type; }
 
-namespace {
-    class ConnectStrategy {
-      public:
-        ConnectStrategy(KoShapeConnection::ConnectionType type)
-            : m_type(type)
-        {
-        }
-        virtual ~ConnectStrategy() { }
-        KoShapeConnection::ConnectionType type() const { return m_type; }
+    virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d) = 0;
+    virtual void setSkew(const QStringList &values) {
+        Q_UNUSED(values);
+    }
 
-        virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d) = 0;
-        virtual void setSkew(const QStringList &values) {
-            Q_UNUSED(values);
-        }
-
-      private:
-        const KoShapeConnection::ConnectionType m_type;
-    };
-
-    class ConnectLines : public ConnectStrategy {
-      public:
-        ConnectLines(KoShapeConnection::ConnectionType type)
-            : ConnectStrategy(type) { }
-        virtual ~ConnectLines() { }
-
-        virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d);
-        virtual void setSkew(const QStringList &values);
-
-      private:
-        // store stop points
-    };
-
-    class ConnectCurve : public ConnectStrategy {
-      public:
-        ConnectCurve()
-            : ConnectStrategy(KoShapeConnection::Curve),
-            shape(new KoPathShape) { }
-        ~ConnectCurve() {
-            delete shape;
-        }
-
-        virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d);
-
-        KoPathShape *shape; // TODO make it a value on the stack?
-    };
+  private:
+    const KoShapeConnection::ConnectionType m_type;
 };
 
-class KoShapeConnectionPrivate
+class ConnectLines : public ConnectStrategy {
+  public:
+    ConnectLines(KoShapeConnection::ConnectionType type)
+        : ConnectStrategy(type) { }
+    virtual ~ConnectLines() { }
+
+    virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d);
+    virtual void setSkew(const QStringList &values);
+
+  private:
+    // store stop points
+};
+
+class ConnectCurve : public ConnectStrategy {
+  public:
+    ConnectCurve()
+        : ConnectStrategy(KoShapeConnection::Curve),
+        shape(new KoPathShape) { }
+    ~ConnectCurve() {
+        delete shape;
+    }
+
+    virtual void paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d);
+
+    KoPathShape *shape; // TODO make it a value on the stack?
+};
+
+KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, KoShape *to, int gp2)
+    : shape1(from),
+    shape2(to),
+    gluePointIndex1(gp1),
+    gluePointIndex2(gp2),
+    connectionStrategy(0)
 {
-public:
-    KoShapeConnectionPrivate(KoShape *from, int gp1, KoShape *to, int gp2)
-        : shape1(from),
-        shape2(to),
-        gluePointIndex1(gp1),
-        gluePointIndex2(gp2),
-        connectionStrategy(0)
-    {
-        Q_ASSERT(shape1 == 0 || shape1->connectionPoints().count() > gp1);
-        Q_ASSERT(shape2 == 0 || shape2->connectionPoints().count() > gp2);
+    Q_ASSERT(shape1 == 0 || shape1->connectionPoints().count() > gp1);
+    Q_ASSERT(shape2 == 0 || shape2->connectionPoints().count() > gp2);
 
+    zIndex = shape1->zIndex() + 1;
+    if (shape2)
+        zIndex = qMax(zIndex, shape2->zIndex() + 1);
+}
+
+KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, const QPointF& ep)
+    : shape1(from),
+    shape2(0),
+    gluePointIndex1(gp1),
+    gluePointIndex2(0),
+    endPoint(ep),
+    connectionStrategy(0)
+{
+    Q_ASSERT(shape1 == 0 || shape1->connectionPoints().count() > gp1);
+
+    zIndex = 0;
+    if (shape1)
         zIndex = shape1->zIndex() + 1;
-        if (shape2)
-            zIndex = qMax(zIndex, shape2->zIndex() + 1);
-    }
-
-    KoShapeConnectionPrivate(KoShape *from, int gp1, const QPointF& ep)
-        : shape1(from),
-        shape2(0),
-        gluePointIndex1(gp1),
-        gluePointIndex2(0),
-        endPoint(ep),
-        connectionStrategy(0)
-    {
-        Q_ASSERT(shape1 == 0 || shape1->connectionPoints().count() > gp1);
-
-        zIndex = 0;
-        if (shape1)
-            zIndex = shape1->zIndex() + 1;
-    }
-
-    KoShape *shape1;
-    KoShape *shape2;
-    int gluePointIndex1;
-    int gluePointIndex2;
-    QPointF startPoint; // used if there is no shape1
-    QPointF endPoint; // used if there is no shape2
-    int zIndex;
-
-    ConnectStrategy *connectionStrategy;
-};
+}
 
 void ConnectLines::paint(QPainter &painter, const KoViewConverter &converter, KoShapeConnectionPrivate *d)
 {
