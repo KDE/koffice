@@ -21,11 +21,14 @@
 #include "KoShape_p.h"
 #include "KoViewConverter.h"
 #include "KoPathShape.h"
+#include "KoPathPoint.h"
 
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoUnit.h>
+
+#include <KDebug>
 
 #include <QPainter>
 #include <QPen>
@@ -132,7 +135,7 @@ void ConnectLines::paint(QPainter &painter, const KoViewConverter &converter, Ko
     QPointF b(d->endPoint);
     if (d->shape1) {
         QList<QPointF> points(d->shape1->connectionPoints());
-        int index = qMin(d->gluePointIndex1, points.count()-1); // KoShape doesn't load glue-point yet
+        int index = qMin(d->gluePointIndex1, points.count()-1);
         a = d->shape1->absoluteTransformation(0).map(points[index]);
     }
     if (d->shape2) {
@@ -174,7 +177,7 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, Ko
     QPointF b(d->endPoint);
     if (d->shape1) {
         QList<QPointF> points(d->shape1->connectionPoints());
-        int index = qMin(d->gluePointIndex1, points.count()-1); // KoShape doesn't load glue-point yet
+        int index = qMin(d->gluePointIndex1, points.count()-1);
         a = d->shape1->absoluteTransformation(0).map(points[index]);
     }
     if (d->shape2) {
@@ -187,13 +190,19 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, Ko
     converter.zoom(&zoomX, &zoomY);
     painter.scale(zoomX, zoomY);
     painter.translate(a - shape->outline().boundingRect().topLeft());
-    const qreal scale = (b.x() - a.x()) / 100;
-    painter.scale(scale, scale);
+    painter.scale(1/zoomX, 1/zoomY);
 
+    KoPathPoint *first = shape->pointByIndex(KoPathPointIndex(0, 0));
+    KoPathPoint *last = shape->pointByIndex(KoPathPointIndex(0, shape->pointCount() - 1));
+
+    if (!first || !last || first == last) {
+        // TODO calculate a curve and fill the shape with it.
+        return;
+    }
+    const qreal scaleX = (b.x() - a.x()) / (last->point().x() - first->point().x());
+    const qreal scaleY = (b.y() - a.y()) / (last->point().y() - first->point().y());
+    painter.scale(qMax(scaleX, 1E-4), qMax(scaleY, 1E-4));
     shape->paint(painter, converter);
-
-    // debug
-    // painter.fillRect(QRectF(shape->position(), shape->size()), QBrush(QColor(255, 0, 0, 100)));
 }
 
 KoShapeConnection::KoShapeConnection()
@@ -339,16 +348,6 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
     } else if (type == "curve") {
         ConnectCurve *curve = new ConnectCurve();
         curve->shape->loadOdf(element, context);
-
-        // make it fit in a 100x100 box
-        const QSizeF oldSize = curve->shape->size();
-        qreal ratioX = oldSize.width() / 100;
-        qreal ratioY = oldSize.height() / 100;
-        if (ratioX > ratioY)
-            curve->shape->setSize(QSizeF(100, oldSize.height() / ratioX));
-        else
-            curve->shape->setSize(QSizeF(oldSize.width() / ratioY, 100));
-        curve->shape->setPosition(QPointF());
         d->connectionStrategy = curve;
     } else {
         d->connectionStrategy = new ConnectLines(EdgedLinesOutside);

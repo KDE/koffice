@@ -302,7 +302,7 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
         while (connectionIterator != sortedConnections.end()
                 && (*connectionIterator)->zIndex() < shape->zIndex()) {
             painter.save();
-            (*connectionIterator)->paint( painter, converter );
+            (*connectionIterator)->paint(painter, converter);
             painter.restore();
             connectionIterator++;
         }
