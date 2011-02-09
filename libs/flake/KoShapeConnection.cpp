@@ -70,16 +70,11 @@ class ConnectLines : public ConnectStrategy {
 
 class ConnectCurve : public ConnectStrategy {
   public:
-    ConnectCurve()
-        : ConnectStrategy(KoShapeConnection::Curve),
-        shape(new KoPathShape) { }
-    ~ConnectCurve() {
-        delete shape;
-    }
+    ConnectCurve() : ConnectStrategy(KoShapeConnection::Curve) { }
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2);
 
-    KoPathShape *shape; // TODO make it a value on the stack?
+    KoPathShape shape;
 };
 
 KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, KoShape *to, int gp2)
@@ -149,10 +144,10 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, co
     converter.zoom(&zoomX, &zoomY);
     painter.scale(zoomX, zoomY);
     painter.translate(QPointF(qMin(point1.x(), point2.x()), qMin(point1.y(), point2.y()))
-            - shape->outline().boundingRect().topLeft());
+            - shape.outline().boundingRect().topLeft());
 
-    KoPathPoint *first = shape->pointByIndex(KoPathPointIndex(0, 0));
-    KoPathPoint *last = shape->pointByIndex(KoPathPointIndex(0, shape->pointCount() - 1));
+    KoPathPoint *first = shape.pointByIndex(KoPathPointIndex(0, 0));
+    KoPathPoint *last = shape.pointByIndex(KoPathPointIndex(0, shape.pointCount() - 1));
 
     if (!first || !last || first == last) {
         // TODO calculate a curve and fill the shape with it.
@@ -164,7 +159,7 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, co
 
     painter.save();
     painter.scale(1/zoomX, 1/zoomY); // reverse pixels->pt scale because shape will do that again
-    shape->paint(painter, converter);
+    shape.paint(painter, converter);
     painter.restore();
 }
 
@@ -342,7 +337,7 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         d->connectionStrategy = new ConnectLines(Straight);
     } else if (type == "curve") {
         ConnectCurve *curve = new ConnectCurve();
-        curve->shape->loadOdf(element, context);
+        curve->shape.loadOdf(element, context);
         d->connectionStrategy = curve;
     } else {
         d->connectionStrategy = new ConnectLines(EdgedLinesOutside);
