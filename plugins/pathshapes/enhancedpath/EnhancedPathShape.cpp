@@ -388,6 +388,7 @@ void EnhancedPathShape::saveOdf(KoShapeSavingContext &context) const
 bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
 {
     reset();
+    loadOdfAttributes(element, context, OdfAdditionalAttributes | OdfCommonChildElements);
 
     const KoXmlElement enhancedGeometry(KoXml::namedItemNS(element, KoXmlNS::draw, "enhanced-geometry" ) );
     if (!enhancedGeometry.isNull()) {
@@ -465,7 +466,7 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
     pos.setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y")));
     setPosition(pos - m_viewMatrix.map(QPointF(0, 0)) - m_viewBoxOffset);
 
-    loadOdfAttributes(element, context, OdfMandatories | OdfTransformation | OdfAdditionalAttributes | OdfCommonChildElements);
+    loadOdfAttributes(element, context, OdfMandatories | OdfTransformation);
 
     KoTextOnShapeContainer::tryWrapShape(this, element, context);
 
