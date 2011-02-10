@@ -41,6 +41,14 @@ public:
 
     void selectionChanged(bool hasSelection);
 
+    /**
+     * Notify whether the application has a selection.
+     * The copy-action will only be enabled when either the current tool or the application has a selection.
+     * @param selection if true the application is marked to allow copying.
+     * @see copyRequested()
+     */
+    void hasSelection(bool selection);
+
     KoCopyController *parent;
     KoCanvasBase *canvas;
     QAction *action;
@@ -74,6 +82,13 @@ void KoCopyControllerPrivate::selectionChanged(bool hasSelection)
     action->setEnabled(appHasSelection || hasSelection);
 }
 
+void KoCopyControllerPrivate::hasSelection(bool selection)
+{
+    appHasSelection = selection;
+    action->setEnabled(appHasSelection ||
+            (canvas->toolProxy()->selection() && canvas->toolProxy()->selection()->hasSelection()));
+}
+
 
 // KoCopyController
 KoCopyController::KoCopyController(KoCanvasBase *canvas, QAction *copyAction)
@@ -82,19 +97,12 @@ KoCopyController::KoCopyController(KoCanvasBase *canvas, QAction *copyAction)
 {
     connect(canvas->toolProxy(), SIGNAL(selectionChanged(bool)), this, SLOT(selectionChanged(bool)));
     connect(copyAction, SIGNAL(triggered()), this, SLOT(copy()));
-    hasSelection(false);
+    d->hasSelection(false);
 }
 
 KoCopyController::~KoCopyController()
 {
     delete d;
-}
-
-void KoCopyController::hasSelection(bool selection)
-{
-    d->appHasSelection = selection;
-    d->action->setEnabled(d->appHasSelection ||
-            (d->canvas->toolProxy()->selection() && d->canvas->toolProxy()->selection()->hasSelection()));
 }
 
 #include <KoCopyController.moc>

@@ -51,19 +51,11 @@ signals:
     /// emitted when the user pressed copy and the current tool had no selection.
     void copyRequested();
 
-public slots:
-    /**
-     * Notify whether the application has a selection.
-     * The copy-action will only be enabled when either the current tool or the application has a selection.
-     * @param selection if true the application is marked to allow copying.
-     * @see copyRequested()
-     */
-    void hasSelection(bool selection);
-
 private:
     Q_PRIVATE_SLOT(d, void copy())
     Q_PRIVATE_SLOT(d, void cut())
     Q_PRIVATE_SLOT(d, void selectionChanged(bool))
+    Q_PRIVATE_SLOT(d, void hasSelection(bool selection))
 
 protected:
     friend class KoCopyControllerPrivate;
