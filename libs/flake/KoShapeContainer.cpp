@@ -221,15 +221,6 @@ bool KoShapeContainer::isClipped(const KoShape *child) const
     return d->model->isClipped(child);
 }
 
-void KoShapeContainer::update() const
-{
-    Q_D(const KoShapeContainer);
-    KoShape::update();
-    if (d->model)
-        foreach(KoShape *shape, d->model->shapes())
-            shape->update();
-}
-
 QList<KoShape*> KoShapeContainer::shapes() const
 {
     Q_D(const KoShapeContainer);

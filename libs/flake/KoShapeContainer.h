@@ -187,10 +187,6 @@ public:
      */
     virtual void paintComponent(QPainter &painter, const KoViewConverter &converter);
 
-    using KoShape::update;
-    /// reimplemented
-    virtual void update() const;
-
     /**
      * Create and return an iterator over all child shapes.
      * @return an interator over all child shapes.
