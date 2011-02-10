@@ -194,6 +194,7 @@ void KarbonDocument::saveOasis(KoShapeSavingContext &context) const
 
     foreach(KoShapeLayer *layer, d->layers) {
         layer->saveOdf(context);
+        context.writeConnectors();
     }
 
     context.xmlWriter().endElement(); // draw:page

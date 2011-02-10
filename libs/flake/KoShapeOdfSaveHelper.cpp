@@ -51,6 +51,7 @@ bool KoShapeOdfSaveHelper::writeBody()
     foreach (KoShape *shape, d->shapes) {
         shape->saveOdf(*d->context);
     }
+    d->context->writeConnectors();
 
     bodyWriter.endElement(); // office:element
     bodyWriter.endElement(); // office:body

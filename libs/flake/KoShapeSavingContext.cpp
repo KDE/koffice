@@ -22,7 +22,7 @@
 
 #include "KoShapeSavingContext.h"
 #include "KoDataCenterBase.h"
-
+#include "KoShapeConnection.h"
 #include "KoShapeLayer.h"
 #include "KoImageData.h"
 
@@ -51,6 +51,7 @@ public:
     int imageId;
     QMap<QString, QImage> images;
     QHash<const KoShape *, QTransform> shapeOffsets;
+    QSet<KoShapeConnection*> unsavedConnections;
 
     KoGenStyles& mainStyles;
     KoEmbeddedDocumentSaver& embeddedSaver;
@@ -283,4 +284,17 @@ void KoShapeSavingContext::removeShapeOffset(const KoShape *shape)
 QTransform KoShapeSavingContext::shapeOffset(const KoShape *shape) const
 {
     return d->shapeOffsets.value(shape, QTransform());
+}
+
+void KoShapeSavingContext::addForWriting(const QList<KoShapeConnection*> &connections)
+{
+    foreach (KoShapeConnection *c, connections)
+        d->unsavedConnections.insert(c);
+}
+
+void KoShapeSavingContext::writeConnectors()
+{
+    foreach (KoShapeConnection *con, d->unsavedConnections)
+        con->saveOdf(*this);
+    d->unsavedConnections.clear();
 }

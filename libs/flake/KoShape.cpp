@@ -1517,6 +1517,9 @@ void KoShape::saveOdfCommonChildElements(KoShapeSavingContext &context) const
         context.xmlWriter().endElement();
     }
 
+    // those go on the same level, so delay writing them till the end.
+    context.addForWriting(d->connections);
+
     // TODO: save glue points see ODF 9.2.19 Glue Points
 }
 

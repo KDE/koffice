@@ -276,6 +276,7 @@ bool KWOdfWriter::save(KoOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embed
             frame->saveOdf(context, page, m_zIndexOffsets.value(page));
         }
     }
+    context.writeConnectors();
 
     if (mainTextFrame) {
         if (! mainTextFrame->frames().isEmpty() && mainTextFrame->frames().first()) {

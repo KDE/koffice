@@ -198,6 +198,8 @@ bool KoPADocument::saveOdf( SavingContext & documentContext )
         return false;
     }
 
+    paContext.writeConnectors();
+
     bodyWriter->endElement(); // office:odfTagName()
     bodyWriter->endElement(); // office:body
 
