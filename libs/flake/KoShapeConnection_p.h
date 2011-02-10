@@ -28,6 +28,11 @@ public:
     KoShapeConnectionPrivate(KoShape *from, int gp1, KoShape *to, int gp2);
     KoShapeConnectionPrivate(KoShape *from, int gp1, const QPointF& ep);
 
+    /// return the start point or the point from the shape connector if that exists
+    QPointF resolveStartPoint() const;
+    /// return the end point or the point from the shape connector if that exists
+    QPointF resolveEndPoint() const;
+
     KoShape *shape1;
     KoShape *shape2;
     int gluePointIndex1;

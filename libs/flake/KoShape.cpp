@@ -1035,8 +1035,11 @@ bool KoShape::loadOdf(const KoXmlElement &, KoShapeLoadingContext &)
     return true;
 }
 
-void KoShape::saveOdf(KoShapeSavingContext &) const
+void KoShape::saveOdf(KoShapeSavingContext &context) const
 {
+    Q_D(const KoShape);
+    // if nothing else; write out my connectors.
+    context.addForWriting(d->connections);
 }
 
 QString KoShape::saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const

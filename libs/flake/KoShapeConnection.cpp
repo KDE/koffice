@@ -52,6 +52,7 @@ class ConnectStrategy {
     virtual void setSkew(const QStringList &values) {
         Q_UNUSED(values);
     }
+    virtual void saveOdf(KoShapeSavingContext &context) const = 0;
 
   private:
     const KoShapeConnection::ConnectionType m_type;
@@ -65,6 +66,7 @@ class ConnectLines : public ConnectStrategy {
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2);
     virtual void setSkew(const QStringList &values);
+    virtual void saveOdf(KoShapeSavingContext &context) const;
 
   private:
     // store stop points
@@ -75,6 +77,7 @@ class ConnectCurve : public ConnectStrategy {
     ConnectCurve() : ConnectStrategy(KoShapeConnection::Curve) { }
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2);
+    virtual void saveOdf(KoShapeSavingContext &context) const;
 
     KoPathShape shape;
 };
@@ -111,6 +114,29 @@ KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, const
         zIndex = shape1->zIndex() + 1;
 }
 
+QPointF KoShapeConnectionPrivate::resolveStartPoint() const
+{
+    QPointF a(startPoint);
+    if (!hasDummyShape && shape1) {
+        QList<QPointF> points(shape1->connectionPoints());
+        int index = qMin(gluePointIndex1, points.count()-1);
+        a = shape1->absoluteTransformation(0).map(points[index]);
+    }
+    return a;
+}
+
+QPointF KoShapeConnectionPrivate::resolveEndPoint() const
+{
+
+    QPointF b(endPoint);
+    if (shape2) {
+        QList<QPointF> points(shape2->connectionPoints());
+        int index = qMin(gluePointIndex2, points.count()-1);
+        b = shape2->absoluteTransformation(0).map(points[index]);
+    }
+    return b;
+}
+
 void ConnectLines::paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2)
 {
     QPainterPath path;
@@ -140,6 +166,11 @@ void ConnectLines::setSkew(const QStringList &values)
     qDebug() << "skew.." << values;
 }
 
+void ConnectLines::saveOdf(KoShapeSavingContext &context) const
+{
+    // We should try to save the svg:d
+}
+
 void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2)
 {
     qreal zoomX, zoomY;
@@ -164,6 +195,17 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, co
     shape.paint(painter, converter);
     painter.restore();
 }
+
+void ConnectCurve::saveOdf(KoShapeSavingContext &context) const
+{
+    // write the path data
+    context.xmlWriter().addAttribute("svg:d", shape.toString());
+    //shape.saveOdfAttributes(context, KoPathShape::OdfViewbox);
+    shape.saveOdfCommonChildElements(context);
+}
+
+
+////////
 
 KoShapeConnection::KoShapeConnection()
     : d(new KoShapeConnectionPrivate(0, 0, QPointF(100, 100)))
@@ -209,21 +251,7 @@ void KoShapeConnection::paint(QPainter &painter, const KoViewConverter &converte
     if (d->connectionStrategy == 0)
         return;
 
-
-    QPointF a(d->startPoint);
-    QPointF b(d->endPoint);
-    if (!d->hasDummyShape && d->shape1) {
-        QList<QPointF> points(d->shape1->connectionPoints());
-        int index = qMin(d->gluePointIndex1, points.count()-1);
-        a = d->shape1->absoluteTransformation(0).map(points[index]);
-    }
-    if (d->shape2) {
-        QList<QPointF> points(d->shape2->connectionPoints());
-        int index = qMin(d->gluePointIndex2, points.count()-1);
-        b = d->shape2->absoluteTransformation(0).map(points[index]);
-    }
-
-    d->connectionStrategy->paint(painter, converter, a, b);
+    d->connectionStrategy->paint(painter, converter, d->resolveStartPoint(), d->resolveEndPoint());
 }
 
 KoShape *KoShapeConnection::shape1() const
@@ -415,31 +443,22 @@ void KoShapeConnection::saveOdf(KoShapeSavingContext &context) const
         break;
     }
 
-    if (d->shape1) {
+    if (!d->hasDummyShape && d->shape1) {
         context.xmlWriter().addAttribute("draw:start-shape", context.drawId(d->shape1));
         context.xmlWriter().addAttribute("draw:start-glue-point", d->gluePointIndex1);
-    } else {
-        context.xmlWriter().addAttributePt("svg:x1", d->startPoint.x());
-        context.xmlWriter().addAttributePt("svg:y1", d->startPoint.y());
     }
     if (d->shape2) {
         context.xmlWriter().addAttribute("draw:end-shape", context.drawId(d->shape2));
         context.xmlWriter().addAttribute("draw:end-glue-point", d->gluePointIndex2);
-    } else {
-        context.xmlWriter().addAttributePt("svg:x2", d->endPoint.x());
-        context.xmlWriter().addAttributePt("svg:y2", d->endPoint.y());
     }
+    QPointF p(d->resolveStartPoint());
+    context.xmlWriter().addAttributePt("svg:x1", p.x());
+    context.xmlWriter().addAttributePt("svg:y1", p.y());
+    p = d->resolveEndPoint();
+    context.xmlWriter().addAttributePt("svg:x2", p.x());
+    context.xmlWriter().addAttributePt("svg:y2", p.y());
 
-/* forward to strategy
-    // write the path data
-    context.xmlWriter().addAttribute("svg:d", toString());
-    saveOdfAttributes(context, OdfViewbox);
-
-    saveOdfCommonChildElements(context);
-
-    if (parent())
-        parent()->saveOdfChildElements(context);
-*/
+    d->connectionStrategy->saveOdf(context);
     context.xmlWriter().endElement();
 }
 
