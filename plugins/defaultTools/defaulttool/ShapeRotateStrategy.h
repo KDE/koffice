@@ -51,7 +51,6 @@ public:
     QUndoCommand* createCommand(QUndoCommand *parent = 0);
     void finishInteraction(Qt::KeyboardModifiers modifiers) { Q_UNUSED(modifiers); }
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
-    virtual void handleCustomEvent(KoPointerEvent * event);
 
 private:
     void rotateBy(qreal angle);

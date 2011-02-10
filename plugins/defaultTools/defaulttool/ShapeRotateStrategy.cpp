@@ -90,22 +90,6 @@ void ShapeRotateStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModi
     tool()->canvas()->shapeManager()->selection()->applyAbsoluteTransformation( applyMatrix );
 }
 
-void ShapeRotateStrategy::handleCustomEvent( KoPointerEvent * event )
-{
-    QTransform matrix;
-    matrix.translate(m_rotationCenter.x(), m_rotationCenter.y());
-    matrix.rotate( 0.1 * event->rotationZ() );
-    matrix.translate(-m_rotationCenter.x(), -m_rotationCenter.y());
-
-    m_rotationMatrix *= matrix;
-    foreach( KoShape * shape, m_selectedShapes ) {
-        shape->update();
-        shape->applyAbsoluteTransformation( matrix );
-        shape->update();
-    }
-    tool()->canvas()->shapeManager()->selection()->applyAbsoluteTransformation( matrix );
-}
-
 void ShapeRotateStrategy::rotateBy( qreal angle )
 {
     QTransform matrix;

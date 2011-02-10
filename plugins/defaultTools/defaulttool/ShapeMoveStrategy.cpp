@@ -80,23 +80,6 @@ void ShapeMoveStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifi
     moveSelection();
 }
 
-void ShapeMoveStrategy::handleCustomEvent(KoPointerEvent *event)
-{
-    QPointF diff = tool()->canvas()->viewConverter()->viewToDocument(event->pos());
-
-    if (event->modifiers() & (Qt::AltModifier | Qt::ControlModifier)) {
-        // keep x or y position unchanged
-        if (qAbs(diff.x()) < qAbs(diff.y()))
-            diff.setX(0);
-        else
-            diff.setY(0);
-    }
-
-    m_diff += 0.1 * diff ;
-
-    moveSelection();
-}
-
 void ShapeMoveStrategy::moveSelection()
 {
     Q_ASSERT(m_newPositions.count());

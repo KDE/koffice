@@ -145,14 +145,6 @@ void ShapeResizeStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModi
     resizeBy( move, zoomX, zoomY );
 }
 
-void ShapeResizeStrategy::handleCustomEvent( KoPointerEvent * event )
-{
-    QPointF center = 0.5 * QPointF( m_initialSize.width(), m_initialSize.height() );
-    qreal zoom = pow(1.01, -0.1 * event->z() );
-    m_lastScale *= zoom;
-    resizeBy( center, m_lastScale.x(), m_lastScale.y() );
-}
-
 void ShapeResizeStrategy::resizeBy( const QPointF &center, qreal zoomX, qreal zoomY )
 {
     QTransform matrix;
