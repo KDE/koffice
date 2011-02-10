@@ -20,6 +20,7 @@ SET ( defaulttools_SRCS
     defaulttool/ShapeShearStrategy.cpp
     defaulttool/SelectionDecorator.cpp
     defaulttool/SelectionTransformCommand.cpp
+    defaulttool/ConnectionChangeStrategy.cpp
 
     guidestool/GuidesTool.cpp
     guidestool/GuidesToolFactory.cpp

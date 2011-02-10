@@ -24,6 +24,7 @@
 #include "DefaultTool.h"
 #include "DefaultToolWidget.h"
 #include "DefaultToolArrangeWidget.h"
+#include "ConnectionChangeStrategy.h"
 #include "SelectionDecorator.h"
 #include "ShapeMoveStrategy.h"
 #include "ShapeRotateStrategy.h"
@@ -1152,20 +1153,36 @@ KoInteractionStrategy *DefaultTool::createStrategy(KoPointerEvent *event)
 
     if ((event->buttons() & Qt::LeftButton) == 0)
         return 0;  // Nothing to do for middle/right mouse button
+    KoShapeConnection *connection = shapeManager->connectionAt(event->point);
+    if (connection && m_selectedConnections.contains(connection)) {
+        // edit already selected connection
+
+        QPointF distance(HANDLE_DISTANCE/2, HANDLE_DISTANCE/2); // radius
+        const KoViewConverter *viewConverter = canvas()->viewConverter();
+        if (viewConverter)
+            distance = viewConverter->viewToDocument(distance);
+        QPointF start = connection->startPoint();
+        QPointF end = connection->endPoint();
+        if (qAbs(start.x() - event->point.x()) < distance.x()
+                && qAbs(start.y() - event->point.y()) < distance.y()) {
+            return new ConnectionChangeStrategy(this, connection, event->point,
+                    ConnectionChangeStrategy::StartPointDrag);
+        } else if (qAbs(end.x() - event->point.x()) < distance.x()
+                && qAbs(end.y() - event->point.y()) < distance.y()) {
+            return new ConnectionChangeStrategy(this, connection, event->point,
+                    ConnectionChangeStrategy::EndPointDrag);
+        }
+        if (selectMultiple) {
+            repaintDecorations();
+            m_selectedConnections.removeAll(connection);
+            return 0;
+        }
+    }
 
     KoShape *shape = shapeManager->shapeAt(event->point, selectNextInStack ? KoFlake::NextUnselected : KoFlake::ShapeOnTop);
 
     if (!shape && handle == KoFlake::NoHandle) {
-        KoShapeConnection *connection = shapeManager->connectionAt(event->point);
         if (connection) { // clicked on a shape-to-shape connector
-            if (m_selectedConnections.contains(connection)) {
-                if (selectMultiple) {
-                    repaintDecorations();
-                    m_selectedConnections.removeAll(connection);
-                    return 0;
-                }
-                // return new ConnectionChangeStrategy()
-            }
             if (!selectMultiple && (select->count() > 0 || !m_selectedConnections.isEmpty())) {
                 repaintDecorations();
                 select->deselectAll();

@@ -69,9 +69,9 @@ void ShapeMoveStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifi
             diff.setY(0);
     } else {
         QPointF positionToSnap = point + m_initialOffset;
-        tool()->canvas()->updateCanvas( tool()->canvas()->snapGuide()->boundingRect() );
-        QPointF snappedPosition = tool()->canvas()->snapGuide()->snap( positionToSnap, modifiers );
-        tool()->canvas()->updateCanvas( tool()->canvas()->snapGuide()->boundingRect() );
+        tool()->canvas()->updateCanvas(tool()->canvas()->snapGuide()->boundingRect());
+        QPointF snappedPosition = tool()->canvas()->snapGuide()->snap(positionToSnap, modifiers);
+        tool()->canvas()->updateCanvas(tool()->canvas()->snapGuide()->boundingRect());
         diff = snappedPosition - m_initialOffset - m_start;
     }
 
