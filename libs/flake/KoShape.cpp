@@ -1037,7 +1037,6 @@ bool KoShape::loadOdf(const KoXmlElement &, KoShapeLoadingContext &)
 
 void KoShape::saveOdf(KoShapeSavingContext &) const
 {
-    kWarning(30006) << "Warning; empty KoShape::saveOdf called, reimplement for saving to work";
 }
 
 QString KoShape::saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const
