@@ -103,6 +103,17 @@ namespace KoFlake
      * @return absolute position
      */
     FLAKE_EXPORT QPointF toAbsolute(const QPointF &relative, const QSizeF &size);
+
+    /// Escape directions to explain which direction KoShapeConnection leaves the shape
+    enum EscapeDirection {
+        EscapeAny = 0, ///< Escape in all directions
+        EscapeLeft = 1, ///< Escape left
+        EscapeRight = 2, ///< Escape right
+        EscapeUp = 4, ///< Escape up
+        EscapeDown = 8, ///< Escape down
+        EscapeHorizontal = EscapeLeft | EscapeRight,  ///< Escape left or right
+        EscapeVertical = EscapeUp | EscapeDown, ///< Escape top or down
+    };
 }
 
 #endif

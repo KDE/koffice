@@ -90,9 +90,13 @@ KoShapePrivate::KoShapePrivate(KoShape *shape)
     protectContent(false)
 {
     connectors.append(QPointF(0.5, 0.0));
+    connectorPolicies.append(KoShapeConnectionPolicy(KoFlake::EscapeUp, Qt::AlignTop));
     connectors.append(QPointF(1.0, 0.5));
+    connectorPolicies.append(KoShapeConnectionPolicy(KoFlake::EscapeRight, Qt::AlignRight));
     connectors.append(QPointF(0.5, 1.0));
+    connectorPolicies.append(KoShapeConnectionPolicy(KoFlake::EscapeDown, Qt::AlignBottom));
     connectors.append(QPointF(0.0, 0.5));
+    connectorPolicies.append(KoShapeConnectionPolicy(KoFlake::EscapeLeft, Qt::AlignLeft));
 }
 
 KoShapePrivate::~KoShapePrivate()
@@ -204,17 +208,17 @@ void KoShapePrivate::loadOdfGluePoints(const KoXmlElement &gluePoints)
         const QString escape = element.attributeNS(KoXmlNS::draw, "escape-direction");
         if (!escape.isEmpty()) {
             if (escape == "horizontal") {
-                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeHorizontal);
+                policy.setEscapeDirection(KoFlake::EscapeHorizontal);
             } else if (escape == "vertical") {
-                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeVertical);
+                policy.setEscapeDirection(KoFlake::EscapeVertical);
             } else if (escape == "left") {
-                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeLeft);
+                policy.setEscapeDirection(KoFlake::EscapeLeft);
             } else if (escape == "right") {
-                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeRight);
+                policy.setEscapeDirection(KoFlake::EscapeRight);
             } else if (escape == "up") {
-                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeUp);
+                policy.setEscapeDirection(KoFlake::EscapeUp);
             } else if (escape == "down") {
-                policy.setEscapeDirection(KoShapeConnectionPolicy::EscapeDown);
+                policy.setEscapeDirection(KoFlake::EscapeDown);
             }
         }
         const QString align = element.attributeNS(KoXmlNS::draw, "align");

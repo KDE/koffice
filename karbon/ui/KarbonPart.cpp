@@ -159,13 +159,13 @@ KarbonPart::~KarbonPart()
     delete d;
 }
 
-void KarbonPart::setPageLayout(const KoPageLayout& layout)
+void KarbonPart::setPageLayout(const KoPageLayout &layout)
 {
     KoDocument::setPageLayout(layout);
     setPageSize(QSizeF(layout.width, layout.height));
 }
 
-KoView* KarbonPart::createViewInstance(QWidget* parent)
+KoView* KarbonPart::createViewInstance(QWidget *parent)
 {
     KarbonView *result = new KarbonView(this, parent);
 
@@ -183,7 +183,7 @@ void KarbonPart::removeView(KoView *view)
     KoDocument::removeView(view);
 }
 
-void KarbonPart::openTemplate(const KUrl& url)
+void KarbonPart::openTemplate(const KUrl &url)
 {
     KoDocument::openTemplate(url);
 
@@ -198,7 +198,7 @@ bool KarbonPart::loadXML(const KoXmlDocument&, KoStore*)
     return false;
 }
 
-bool KarbonPart::loadOdf(KoOdfReadStore & odfStore)
+bool KarbonPart::loadOdf(KoOdfReadStore &odfStore)
 {
     kDebug(38000) << "Start loading OASIS document..." /*<< doc.toString()*/;
 
@@ -264,7 +264,7 @@ bool KarbonPart::loadOdf(KoOdfReadStore & odfStore)
     return true;
 }
 
-bool KarbonPart::completeLoading(KoStore* store)
+bool KarbonPart::completeLoading(KoStore *store)
 {
     bool ok = true;
     foreach(KoDataCenterBase *dataCenter, dataCenterMap()) {
@@ -273,7 +273,7 @@ bool KarbonPart::completeLoading(KoStore* store)
     return ok;
 }
 
-void KarbonPart::loadOasisSettings(const KoXmlDocument & settingsDoc)
+void KarbonPart::loadOasisSettings(const KoXmlDocument &settingsDoc)
 {
     if (settingsDoc.isNull())
         return ; // not an error if some file doesn't have settings.xml
@@ -287,7 +287,7 @@ void KarbonPart::loadOasisSettings(const KoXmlDocument & settingsDoc)
     gridData().loadOdfSettings(settingsDoc);
 }
 
-void KarbonPart::saveOasisSettings(KoStore * store)
+void KarbonPart::saveOasisSettings(KoStore *store)
 {
     KoStoreDevice settingsDev(store);
     KoXmlWriter * settingsWriter = KoOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
@@ -329,7 +329,7 @@ bool KarbonPart::saveOdf(SavingContext &documentContext)
     if (! d->document.saveOdf(documentContext, pageLayout()))
         return false;
 
-    KoStore * store = documentContext.odfStore.store();
+    KoStore *store = documentContext.odfStore.store();
     if (! store->open("settings.xml"))
         return false;
 

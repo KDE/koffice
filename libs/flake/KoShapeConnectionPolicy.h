@@ -21,6 +21,7 @@
 
 #include "flake_export.h"
 
+#include "KoFlake.h"
 #include <Qt>
 
 /**
@@ -29,23 +30,12 @@
 class FLAKE_EXPORT KoShapeConnectionPolicy
 {
 public:
-    /// Escape directions to explain which direction the connection leaves the shape
-    enum EscapeDirection {
-        EscapeAny = 0, ///< Escape in all directions
-        EscapeLeft = 1, ///< Escape left
-        EscapeRight = 2, ///< Escape right
-        EscapeUp = 4, ///< Escape up
-        EscapeDown = 8, ///< Escape down
-        EscapeHorizontal = EscapeLeft | EscapeRight,  ///< Escape left or right
-        EscapeVertical = EscapeUp | EscapeDown, ///< Escape top or down
-    };
-
     KoShapeConnectionPolicy() : data(0) { }
 
-    KoShapeConnectionPolicy(EscapeDirection escapeDir, Qt::Alignment alignmentHint = Qt::AlignCenter);
+    KoShapeConnectionPolicy(KoFlake::EscapeDirection escapeDir, Qt::Alignment alignmentHint = Qt::AlignCenter);
 
-    EscapeDirection escapeDirection() const;
-    void setEscapeDirection(EscapeDirection escapeDirection);
+    KoFlake::EscapeDirection escapeDirection() const;
+    void setEscapeDirection(KoFlake::EscapeDirection escapeDirection);
     Qt::Alignment alignment() const;
     void setAlignment(Qt::Alignment align);
 

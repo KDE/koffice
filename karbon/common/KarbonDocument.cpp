@@ -180,19 +180,19 @@ void KarbonDocument::remove(KoShape* shape)
     d->objects.removeAt(d->objects.indexOf(shape));
 }
 
-void KarbonDocument::saveOasis(KoShapeSavingContext & context) const
+void KarbonDocument::saveOasis(KoShapeSavingContext &context) const
 {
     context.xmlWriter().startElement("draw:page");
     context.xmlWriter().addAttribute("draw:name", "");
     context.xmlWriter().addAttribute("draw:id", "page1");
     context.xmlWriter().addAttribute("draw:master-page-name", "Default");
 
-    foreach(KoShapeLayer * layer, d->layers) {
+    foreach(KoShapeLayer *layer, d->layers) {
         context.addLayerForSaving(layer);
     }
     context.saveLayerSet(context.xmlWriter());
 
-    foreach(KoShapeLayer * layer, d->layers) {
+    foreach(KoShapeLayer *layer, d->layers) {
         layer->saveOdf(context);
     }
 

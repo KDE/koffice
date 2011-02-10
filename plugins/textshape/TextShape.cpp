@@ -302,7 +302,7 @@ void TextShape::paintDecorations(QPainter &painter, const KoViewConverter &conve
 
 void TextShape::saveOdf(KoShapeSavingContext &context) const
 {
-    KoXmlWriter & writer = context.xmlWriter();
+    KoXmlWriter &writer = context.xmlWriter();
 
     QString textHeight = additionalAttribute("fo:min-height");
     const_cast<TextShape*>(this)->removeAdditionalAttribute("fo:min-height");

@@ -23,19 +23,19 @@
      data is 32 bits, we reserve 8 for the EscapeDirection, the rest goes to align.
 */
 
-KoShapeConnectionPolicy::KoShapeConnectionPolicy(EscapeDirection dir, Qt::Alignment align)
+KoShapeConnectionPolicy::KoShapeConnectionPolicy(KoFlake::EscapeDirection dir, Qt::Alignment align)
     : data (dir + (align << 8))
 {
     Q_ASSERT(dir == escapeDirection());
     Q_ASSERT(align == alignment());
 }
 
-KoShapeConnectionPolicy::EscapeDirection KoShapeConnectionPolicy::escapeDirection() const
+KoFlake::EscapeDirection KoShapeConnectionPolicy::escapeDirection() const
 {
-    return static_cast<KoShapeConnectionPolicy::EscapeDirection>(data & 0xff);
+    return static_cast<KoFlake::EscapeDirection>(data & 0xff);
 }
 
-void KoShapeConnectionPolicy::setEscapeDirection(KoShapeConnectionPolicy::EscapeDirection escapeDirection)
+void KoShapeConnectionPolicy::setEscapeDirection(KoFlake::EscapeDirection escapeDirection)
 {
     data = (data & 0xffffff00) | escapeDirection;
 }
