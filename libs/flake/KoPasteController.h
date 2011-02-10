@@ -52,7 +52,7 @@ signals:
 
 private:
     Q_PRIVATE_SLOT(d, void paste())
-    Q_PRIVATE_SLOT(d, void selectionChanged())
+    Q_PRIVATE_SLOT(d, void dataChanged())
 
     class Private;
     Private * const d;

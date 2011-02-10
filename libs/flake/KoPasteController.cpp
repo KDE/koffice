@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -23,6 +23,8 @@
 #include <KoToolProxy.h>
 
 #include <KDebug>
+#include <QApplication>
+#include <QClipboard>
 #include <QAction>
 
 class KoPasteController::Private {
@@ -38,8 +40,21 @@ public:
         }
     }
 
-    void selectionChanged() {
+    void dataChanged() {
+        const QMimeData* data = QApplication::clipboard()->mimeData();
+        QStringList mimeTypes = canvas->toolProxy()->supportedPasteMimeTypes();
+        // TODO add default tool too?
+
         // TODO connect here and enable the clipboard if we can handle the paste.
+
+        bool canPaste = false;
+        foreach (const QString &mimeType, mimeTypes) {
+            if (data->hasFormat(mimeType)) {
+                canPaste = true;
+                break;
+            }
+        }
+        action->setEnabled(canPaste);
     }
 
     KoPasteController *parent;
@@ -51,7 +66,11 @@ KoPasteController::KoPasteController(KoCanvasBase *canvas, QAction *pasteAction)
     : QObject(pasteAction),
     d(new Private(this, canvas, pasteAction))
 {
-    //connect(canvas->toolProxy(), SIGNAL(selectionChanged(bool)), this, SLOT(selectionChanged(bool)));
+    connect(QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(dataChanged()));
+    connect(d->canvas->toolProxy(), SIGNAL(toolChanged(const QString&)),
+            this, SLOT(dataChanged()));
+    d->dataChanged();
+
     connect(pasteAction, SIGNAL(triggered()), this, SLOT(paste()));
 }
 
