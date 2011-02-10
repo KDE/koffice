@@ -33,6 +33,7 @@
 #include "guidestool/GuidesToolFactory.h" // for the ID
 
 #include <KoPointerEvent.h>
+#include <KoShapeConnection.h>
 #include <KoToolSelection.h>
 #include <KoToolManager.h>
 #include <KoSelection.h>
@@ -53,6 +54,8 @@
 #include <commands/KoShapeGroupCommand.h>
 #include <commands/KoShapeUngroupCommand.h>
 #include <KoSnapGuide.h>
+
+#include <KDebug>
 
 #include <KAction>
 #include <QKeyEvent>
@@ -490,9 +493,22 @@ void DefaultTool::paint(QPainter &painter, const KoViewConverter &converter)
         decorator.setHotPosition(m_hotPosition);
         decorator.paint(painter, converter);
     }
+
     painter.save();
     KoShape::applyConversion(painter, converter);
     canvas()->snapGuide()->paint(painter, converter);
+    painter.restore();
+
+    painter.save();
+    painter.setPen(QPen(Qt::black)); // TODO make configurable
+    painter.setBrush(QBrush(Qt::red));
+    foreach (KoShapeConnection *connection, m_selectedConnections) {
+        QPointF center = converter.documentToView(connection->startPoint());
+        for (int i = 0 ; i < 2; ++i) {
+            painter.drawEllipse(center, 3, 3); // TODO is that 3 correct?
+            center = converter.documentToView(connection->endPoint());
+        }
+    }
     painter.restore();
 }
 
@@ -589,6 +605,12 @@ void DefaultTool::selectGuideAtPosition(const QPointF &position)
 QRectF DefaultTool::handlesSize()
 {
     QRectF bound = koSelection()->boundingRect();
+
+    // repaint connections too
+    foreach (KoShapeConnection *connection, m_selectedConnections) {
+        bound = bound.unite(connection->boundingRect());
+    }
+
     // expansion Border
     if (!canvas() || !canvas()->viewConverter()) return bound;
 
@@ -723,7 +745,7 @@ void DefaultTool::keyPressEvent(QKeyEvent *event)
 void DefaultTool::repaintDecorations()
 {
     Q_ASSERT(koSelection());
-    if (koSelection()->count() > 0)
+    if (koSelection()->count() > 0 || !m_selectedConnections.isEmpty())
         canvas()->updateCanvas(handlesSize());
 }
 
@@ -1134,6 +1156,26 @@ KoInteractionStrategy *DefaultTool::createStrategy(KoPointerEvent *event)
     KoShape *shape = shapeManager->shapeAt(event->point, selectNextInStack ? KoFlake::NextUnselected : KoFlake::ShapeOnTop);
 
     if (!shape && handle == KoFlake::NoHandle) {
+        KoShapeConnection *connection = shapeManager->connectionAt(event->point);
+        if (connection) { // clicked on a shape-to-shape connector
+            if (m_selectedConnections.contains(connection)) {
+                if (selectMultiple) {
+                    repaintDecorations();
+                    m_selectedConnections.removeAll(connection);
+                    return 0;
+                }
+                // return new ConnectionChangeStrategy()
+            }
+            if (!selectMultiple && (select->count() > 0 || !m_selectedConnections.isEmpty())) {
+                repaintDecorations();
+                select->deselectAll();
+                m_selectedConnections.clear();
+            }
+            m_selectedConnections << connection;
+            repaintDecorations();
+            return 0;
+        }
+
         // check if we have hit a guide
         if (m_guideLine->isValid()) {
             m_guideLine->select();
@@ -1142,6 +1184,7 @@ KoInteractionStrategy *DefaultTool::createStrategy(KoPointerEvent *event)
         if (! selectMultiple) {
             repaintDecorations();
             select->deselectAll();
+            m_selectedConnections.clear();
         }
         return new KoShapeRubberSelectStrategy(this, event->point);
     }

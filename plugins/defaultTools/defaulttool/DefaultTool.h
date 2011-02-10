@@ -33,6 +33,7 @@
 class KoInteractionStrategy;
 class KoShapeMoveCommand;
 class KoSelection;
+class KoShapeConnection;
 
 /**
  * The default tool (associated with the arrow icon) implements the default
@@ -59,10 +60,12 @@ public:
     };
 
 public:
-
+    ///reimplemented
     virtual bool wantsAutoScroll() const;
+    ///reimplemented
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
+    ///reimplemented
     virtual void repaintDecorations();
 
     ///reimplemented
@@ -171,6 +174,7 @@ private:
 
     class GuideLine;
     GuideLine * m_guideLine;
+    QList<KoShapeConnection*> m_selectedConnections;
 };
 
 #endif

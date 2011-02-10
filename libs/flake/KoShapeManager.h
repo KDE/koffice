@@ -136,6 +136,8 @@ public:
      */
     KoShape *shapeAt(const QPointF &position, KoFlake::ShapeSelection selection = KoFlake::ShapeOnTop, bool omitHiddenShapes = true);
 
+    KoShapeConnection *connectionAt(const QPointF &position);
+
     /**
      * Returns the shapes which intersects the specific rect in the document.
      * @param rect the rectangle in the document coordinate system.

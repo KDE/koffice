@@ -294,7 +294,6 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
     qSort(sortedConnections.begin(), sortedConnections.end(), KoShapeConnection::compareConnectionZIndex);
     QList<KoShapeConnection*>::iterator connectionIterator = sortedConnections.begin();
 
-
     foreach (KoShape *shape, sortedShapes) {
         if (shape->parent() != 0 && shape->parent()->isClipped(shape))
             continue;
@@ -311,7 +310,6 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
         d->strategy->paint(shape, painter, converter, forPrint);
         painter.restore();
     }
-
 
     while (connectionIterator != sortedConnections.end()) { // paint connections that are above the rest.
         painter.save();
@@ -468,6 +466,16 @@ void KoShapeManager::paintShape(KoShape *shape, QPainter &painter, const KoViewC
         painter.setRenderHint(QPainter::Antialiasing, false);
         shape->paintDecorations(painter, converter, d->canvas);
     }
+}
+
+KoShapeConnection *KoShapeManager::connectionAt(const QPointF &position)
+{
+    d->updateTree();
+    QList<KoShapeConnection*> sortedConnections(d->connectionTree.contains(position));
+    if (sortedConnections.isEmpty())
+        return 0;
+    qSort(sortedConnections.begin(), sortedConnections.end(), KoShapeConnection::compareConnectionZIndex);
+    return sortedConnections.first();
 }
 
 KoShape *KoShapeManager::shapeAt(const QPointF &position, KoFlake::ShapeSelection selection, bool omitHiddenShapes)
