@@ -47,11 +47,6 @@ KoInteractionStrategy::~KoInteractionStrategy()
     delete d;
 }
 
-void KoInteractionStrategy::handleCustomEvent(KoPointerEvent *event)
-{
-    Q_UNUSED(event);
-}
-
 void KoInteractionStrategy::paint(QPainter &, const KoViewConverter &)
 {
 }
