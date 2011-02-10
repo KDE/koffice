@@ -25,8 +25,10 @@
 #include "KoPathPoint.h"
 
 #include <KoXmlReader.h>
+#include <KoXmlWriter.h>
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
+#include <KoShapeSavingContext.h>
 #include <KoUnit.h>
 
 #include <KDebug>
@@ -390,6 +392,55 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
     //KoTextOnShapeContainer::tryWrapShape(this, element, context);
 
     return true;
+}
+
+void KoShapeConnection::saveOdf(KoShapeSavingContext &context) const
+{
+    if (d->connectionStrategy == 0)
+        return;
+
+    context.xmlWriter().startElement("draw:connector");
+    switch (d->connectionStrategy->type()) {
+    case EdgedLines:
+        context.xmlWriter().addAttribute("draw:type", "lines");
+        break;
+    case Straight:
+        context.xmlWriter().addAttribute("draw:type", "line");
+        break;
+    case Curve:
+        context.xmlWriter().addAttribute("draw:type", "curve");
+        break;
+    default:
+        context.xmlWriter().addAttribute("draw:type", "standard");
+        break;
+    }
+
+    if (d->shape1) {
+        context.xmlWriter().addAttribute("draw:start-shape", context.drawId(d->shape1));
+        context.xmlWriter().addAttribute("draw:start-glue-point", d->gluePointIndex1);
+    } else {
+        context.xmlWriter().addAttributePt("svg:x1", d->startPoint.x());
+        context.xmlWriter().addAttributePt("svg:y1", d->startPoint.y());
+    }
+    if (d->shape2) {
+        context.xmlWriter().addAttribute("draw:end-shape", context.drawId(d->shape2));
+        context.xmlWriter().addAttribute("draw:end-glue-point", d->gluePointIndex2);
+    } else {
+        context.xmlWriter().addAttributePt("svg:x2", d->endPoint.x());
+        context.xmlWriter().addAttributePt("svg:y2", d->endPoint.y());
+    }
+
+/* forward to strategy
+    // write the path data
+    context.xmlWriter().addAttribute("svg:d", toString());
+    saveOdfAttributes(context, OdfViewbox);
+
+    saveOdfCommonChildElements(context);
+
+    if (parent())
+        parent()->saveOdfChildElements(context);
+*/
+    context.xmlWriter().endElement();
 }
 
 KoShapeConnectionPrivate *KoShapeConnection::priv()
