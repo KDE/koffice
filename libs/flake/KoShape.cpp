@@ -553,14 +553,24 @@ void KoShape::update() const
         QRectF rect(boundingRect());
         foreach(KoShapeManager *manager, d->shapeManagers)
             manager->priv()->update(rect, this, true);
+
+        // also ask update for children which inherit transform
+        const KoShapeContainer *me = dynamic_cast<const KoShapeContainer*>(this);
+        if (me && me->model()) {
+            KoShapeContainerModel *model = me->model();
+            foreach (KoShape *shape, model->shapes()) {
+                if (model->inheritsTransform(shape))
+                    shape->update();
+            }
+        }
     }
 }
 
-void KoShape::update(const QRectF &shape) const
+void KoShape::update(const QRectF &section) const
 {
     Q_D(const KoShape);
     if (!d->shapeManagers.empty() && isVisible()) {
-        QRectF rect(absoluteTransformation(0).mapRect(shape));
+        QRectF rect(absoluteTransformation(0).mapRect(section));
         foreach(KoShapeManager *manager, d->shapeManagers) {
             manager->priv()->update(rect);
         }
