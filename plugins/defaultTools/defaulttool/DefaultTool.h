@@ -119,8 +119,6 @@ public: // Events
 
     virtual void keyPressEvent(QKeyEvent *event);
 
-    virtual void customMoveEvent(KoPointerEvent * event);
-
 protected:
     QMap<QString, QWidget *> createOptionWidgets();
 
@@ -170,7 +168,6 @@ private:
     qreal m_angle;
     KoToolSelection *m_selectionHandler;
     friend class SelectionHandler;
-    KoInteractionStrategy * m_customEventStrategy;
 
     class GuideLine;
     GuideLine * m_guideLine;
