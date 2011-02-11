@@ -1116,16 +1116,16 @@ void KoShape::loadStyle(const KoXmlElement &element, KoShapeLoadingContext &cont
 
     if (d->fill && !d->fill->deref()) {
         delete d->fill;
-        d->fill = 0;
     }
+    d->fill = 0;
     if (d->border && !d->border->deref()) {
         delete d->border;
-        d->border = 0;
     }
+    d->border = 0;
     if (d->shadow && !d->shadow->deref()) {
         delete d->shadow;
-        d->shadow = 0;
     }
+    d->shadow = 0;
     setBackground(loadOdfFill(context));
     setBorder(loadOdfStroke(element, context));
     setShadow(d->loadOdfShadow(context));
