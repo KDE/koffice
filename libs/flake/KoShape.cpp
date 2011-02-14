@@ -191,7 +191,7 @@ void KoShapePrivate::removeConnection(KoShapeConnection *connection)
 void KoShapePrivate::loadOdfGluePoints(const KoXmlElement &gluePoints)
 {
     // defaults expect 4 to be there. The subclass should provide those, but if it
-    // didn't make sure we don't have issues with our numbering.
+    // didn't, make sure we don't have issues with our numbering.
     connectors.resize(4);
     connectorPolicies.resize(4);
 
