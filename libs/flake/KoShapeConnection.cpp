@@ -20,8 +20,10 @@
 #include "KoShapeConnection_p.h"
 #include "KoShape.h"
 #include "KoShape_p.h"
+#include "KoShapeBorderBase.h"
 #include "KoViewConverter.h"
 #include "KoPathShape.h"
+#include "KoPathShape_p.h"
 #include "KoPathPoint.h"
 
 #include <KoXmlReader.h>
@@ -74,12 +76,13 @@ class ConnectLines : public ConnectStrategy {
 
 class ConnectCurve : public ConnectStrategy {
   public:
-    ConnectCurve() : ConnectStrategy(KoShapeConnection::Curve) { }
+    ConnectCurve() : ConnectStrategy(KoShapeConnection::Curve), dirty(true) { }
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2);
     virtual void saveOdf(KoShapeSavingContext &context) const;
 
     KoPathShape shape;
+    bool dirty; // shape needs to be resized
 };
 
 KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, KoShape *to, int gp2)
@@ -179,21 +182,37 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter, co
     painter.translate(QPointF(qMin(point1.x(), point2.x()), qMin(point1.y(), point2.y()))
             - shape.outline().boundingRect().topLeft());
 
-    KoPathPoint *first = shape.pointByIndex(KoPathPointIndex(0, 0));
-    KoPathPoint *last = shape.pointByIndex(KoPathPointIndex(0, shape.pointCount() - 1));
+    if (dirty) {
+        KoPathPoint *first = shape.pointByIndex(KoPathPointIndex(0, 0));
+        KoPathPoint *last = shape.pointByIndex(KoPathPointIndex(0, shape.pointCount() - 1));
 
-    if (!first || !last || first == last) {
-        // TODO calculate a curve and fill the shape with it.
-        return;
+        if (!first || !last || first == last) {
+            // TODO calculate a curve and fill the shape with it.
+            return;
+        }
+        const qreal scaleX = (point1.x() - point2.x()) / (first->point().x() - last->point().x());
+        const qreal scaleY = (point1.y() - point2.y()) / (first->point().y() - last->point().y());
+
+        QTransform mapper;
+        mapper.scale(qMax(scaleX, 1E-4), qMax(scaleY, 1E-4));
+        static_cast<KoPathShapePrivate*>(shape.priv())->map(mapper);
+        dirty = false;
     }
-    const qreal scaleX = (point1.x() - point2.x()) / (first->point().x() - last->point().x());
-    const qreal scaleY = (point1.y() - point2.y()) / (first->point().y() - last->point().y());
-    painter.scale(qMax(scaleX, 1E-4), qMax(scaleY, 1E-4));
 
-    painter.save();
+    qreal transparency = shape.transparency(true);
+    if (transparency > 0.0) {
+        painter.setOpacity(1.0-transparency);
+    }
+
     painter.scale(1/zoomX, 1/zoomY); // reverse pixels->pt scale because shape will do that again
+    painter.save();
     shape.paint(painter, converter);
     painter.restore();
+    if (shape.border()) {
+        painter.save();
+        shape.border()->paint(&shape, painter, converter);
+        painter.restore();
+    }
 }
 
 void ConnectCurve::saveOdf(KoShapeSavingContext &context) const

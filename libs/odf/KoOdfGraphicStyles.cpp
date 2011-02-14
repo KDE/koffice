@@ -295,7 +295,7 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KoOdfStylesReader &s
         // whereas it is not mentioned in the spec how it should be rendered
         // note that svg defines that exactly as the opposite as oo does
         // so what should we do?
-        QString type = e->attributeNS(KoXmlNS::draw, "style", QString());
+        QString type = e->attributeNS(KoXmlNS::draw, "style");
         if (type == "radial") {
             // Zagge: at the moment the only objectBoundingBox is supported:
             // 18.539 svg:gradientUnits
@@ -303,8 +303,8 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KoOdfStylesReader &s
             // The default value for this attribute is objectBoundingBox.
             // The only value of the svg:gradientUnits attribute is objectBoundingBox.
 
-            qreal cx = KoUnit::parseValue(e->attributeNS(KoXmlNS::draw, "cx", QString()).remove('%'));
-            qreal cy = KoUnit::parseValue(e->attributeNS(KoXmlNS::draw, "cy", QString()).remove('%'));
+            qreal cx = KoUnit::parseValue(e->attributeNS(KoXmlNS::draw, "cx").remove('%'));
+            qreal cy = KoUnit::parseValue(e->attributeNS(KoXmlNS::draw, "cy").remove('%'));
             gradient = new QRadialGradient(QPointF(cx * 0.01, cy * 0.01), sqrt(0.5));
             gradient->setCoordinateMode(QGradient::ObjectBoundingMode);
         } else if (type == "linear" || type == "axial") {
@@ -319,8 +319,9 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KoOdfStylesReader &s
             lg->setStart(QPointF(0.5 + sx, 0.5 - sy));
             lg->setFinalStop(QPointF(0.5 - sx, 0.5 + sy));
             gradient = lg;
-        } else
+        } else {
             return QBrush();
+        }
 
         qreal border = 0.01 * e->attributeNS(KoXmlNS::draw, "border", "0").remove('%').toDouble();
         QGradientStops stops;
@@ -329,29 +330,29 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KoOdfStylesReader &s
             // see bug 137639
             QGradientStop start;
             start.first = (type != "radial") ? border : 1.0 - border;
-            start.second = QColor(e->attributeNS(KoXmlNS::draw, "start-color", QString()));
+            start.second = QColor(e->attributeNS(KoXmlNS::draw, "start-color"));
             start.second.setAlphaF(0.01 * e->attributeNS(KoXmlNS::draw, "start-intensity", "100").remove('%').toDouble());
 
             QGradientStop end;
             end.first = (type != "radial") ? 1.0 : 0.0;
-            end.second = QColor(e->attributeNS(KoXmlNS::draw, "end-color", QString()));
+            end.second = QColor(e->attributeNS(KoXmlNS::draw, "end-color"));
             end.second.setAlphaF(0.01 * e->attributeNS(KoXmlNS::draw, "end-intensity", "100").remove('%').toDouble());
 
             stops << start << end;
         } else {
             QGradientStop start;
             start.first = 0.5 * border;
-            start.second = QColor(e->attributeNS(KoXmlNS::draw, "end-color", QString()));
+            start.second = QColor(e->attributeNS(KoXmlNS::draw, "end-color"));
             start.second.setAlphaF(0.01 * e->attributeNS(KoXmlNS::draw, "end-intensity", "100").remove('%').toDouble());
 
             QGradientStop middle;
             middle.first = 0.5;
-            middle.second = QColor(e->attributeNS(KoXmlNS::draw, "start-color", QString()));
+            middle.second = QColor(e->attributeNS(KoXmlNS::draw, "start-color"));
             middle.second.setAlphaF(0.01 * e->attributeNS(KoXmlNS::draw, "start-intensity", "100").remove('%').toDouble());
 
             QGradientStop end;
             end.first = 1.0 - 0.5 * border;
-            end.second = QColor(e->attributeNS(KoXmlNS::draw, "end-color", QString()));
+            end.second = QColor(e->attributeNS(KoXmlNS::draw, "end-color"));
             end.second.setAlphaF(0.01 * e->attributeNS(KoXmlNS::draw, "end-intensity", "100").remove('%').toDouble());
 
             stops << start << middle << end;

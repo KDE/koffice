@@ -95,7 +95,7 @@ void KoOdfLoadingContext::fillStyleStack(const KoXmlElement& object, const QStri
 {
     // find all styles associated with an object and push them on the stack
     if (object.hasAttributeNS(nsURI, attrName)) {
-        const QString styleName = object.attributeNS(nsURI, attrName, QString());
+        const QString styleName = object.attributeNS(nsURI, attrName);
         const KoXmlElement * style = d->stylesReader.findStyle(styleName, family, d->useStylesAutoStyles);
 
         if (style)
@@ -111,7 +111,7 @@ void KoOdfLoadingContext::addStyles(const KoXmlElement* style, const QString &fa
     if (!style) return;
 
     // this recursive function is necessary as parent styles can have parents themselves
-    const QString parentStyleName = style->attributeNS(KoXmlNS::style, "parent-style-name", QString());
+    const QString parentStyleName = style->attributeNS(KoXmlNS::style, "parent-style-name");
     if (!parentStyleName.isEmpty()) {
         const KoXmlElement* parentStyle = d->stylesReader.findStyle(parentStyleName, family, usingStylesAutoStyles);
 
