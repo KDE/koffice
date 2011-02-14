@@ -290,26 +290,8 @@ void KoShape::paint(QPainter &painter, const KoViewConverter &converter)
     }
 }
 
-void KoShape::paintDecorations(QPainter &painter, const KoViewConverter &converter, const KoCanvasBase *canvas)
+void KoShape::paintDecorations(QPainter &, const KoViewConverter &, const KoCanvasBase *)
 {
-    Q_UNUSED(painter);
-    Q_UNUSED(converter);
-    Q_UNUSED(canvas);
-    /* Since this code is not actually used (kivio is going to be the main user) lets disable instead of fix.
-        if (selected)
-        {
-            // draw connectors
-            QPen pen(Qt::blue);
-            pen.setWidth(0);
-            painter.setPen(pen);
-            painter.setBrush(Qt::NoBrush);
-            for (int i = 0; i < d->connectors.size(); ++i)
-            {
-                QPointF p = converter.documentToView(d->connectors[ i ]);
-                painter.drawLine(QPointF(p.x() - 2, p.y() + 2), QPointF(p.x() + 2, p.y() - 2));
-                painter.drawLine(QPointF(p.x() + 2, p.y() + 2), QPointF(p.x() - 2, p.y() - 2));
-            }
-        }*/
 }
 
 void KoShape::scale(qreal sx, qreal sy)
