@@ -25,15 +25,16 @@
 class ConnectStrategy
 {
 public:
-    ConnectStrategy(KoShapeConnection::ConnectionType type)
-        : m_dirty(true),
+    ConnectStrategy(KoShapeConnectionPrivate *qq, KoShapeConnection::ConnectionType type)
+        : q(qq),
+        m_dirty(true),
         m_type(type)
     {
     }
     virtual ~ConnectStrategy() { }
     KoShapeConnection::ConnectionType type() const { return m_type; }
 
-    virtual void paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2) = 0;
+    virtual void paint(QPainter &painter, const KoViewConverter &converter) = 0;
     virtual void setSkew(const QStringList &values) {
         Q_UNUSED(values);
     }
@@ -43,6 +44,7 @@ public:
     void wipe() { m_dirty = false; }
 
 protected:
+    KoShapeConnectionPrivate *q;
     bool m_dirty;
 
 private:
