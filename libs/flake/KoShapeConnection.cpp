@@ -492,3 +492,20 @@ bool KoShapeConnection::compareConnectionZIndex(KoShapeConnection *c1, KoShapeCo
     return c1->zIndex() < c2->zIndex();
 }
 
+KoShapeConnection::ConnectionType KoShapeConnection::type() const
+{
+    if (d->connectionStrategy)
+        return d->connectionStrategy->type();
+    return EdgedLinesOutside;
+}
+
+void KoShapeConnection::setType(ConnectionType newType)
+{
+    if (type() == newType)
+        return;
+    delete d->connectionStrategy;
+    if (newType == Curve)
+        d->connectionStrategy = new ConnectCurve;
+    else
+        d->connectionStrategy = new ConnectLines(newType);
+}

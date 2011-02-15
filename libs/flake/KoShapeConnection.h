@@ -178,6 +178,9 @@ public:
      */
     void saveOdf(KoShapeSavingContext &context) const;
 
+    ConnectionType type() const;
+    void setType(ConnectionType type);
+
     /// \internal
     KoShapeConnectionPrivate * priv();
 
