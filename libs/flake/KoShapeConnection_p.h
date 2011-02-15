@@ -20,7 +20,27 @@
 #define KOSHAPECONNECTION_P_H
 #include "KoShapeConnection.h"
 
-class ConnectStrategy;
+#include <QStringList>
+
+class ConnectStrategy
+{
+public:
+    ConnectStrategy(KoShapeConnection::ConnectionType type)
+        : m_type(type)
+    {
+    }
+    virtual ~ConnectStrategy() { }
+    KoShapeConnection::ConnectionType type() const { return m_type; }
+
+    virtual void paint(QPainter &painter, const KoViewConverter &converter, const QPointF &point1, const QPointF &point2) = 0;
+    virtual void setSkew(const QStringList &values) {
+        Q_UNUSED(values);
+    }
+    virtual void saveOdf(KoShapeSavingContext &context) const = 0;
+
+private:
+    const KoShapeConnection::ConnectionType m_type;
+};
 
 class KoShapeConnectionPrivate
 {
