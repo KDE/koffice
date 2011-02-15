@@ -26,7 +26,8 @@ class ConnectStrategy
 {
 public:
     ConnectStrategy(KoShapeConnection::ConnectionType type)
-        : m_type(type)
+        : m_dirty(true),
+        m_type(type)
     {
     }
     virtual ~ConnectStrategy() { }
@@ -38,6 +39,12 @@ public:
     }
     virtual void saveOdf(KoShapeSavingContext &context) const = 0;
 
+    void foul() { m_dirty = true; }
+    void wipe() { m_dirty = false; }
+
+protected:
+    bool m_dirty;
+
 private:
     const KoShapeConnection::ConnectionType m_type;
 };
@@ -46,12 +53,17 @@ class KoShapeConnectionPrivate
 {
 public:
     KoShapeConnectionPrivate(KoShape *from, int gp1, KoShape *to, int gp2);
-    KoShapeConnectionPrivate(KoShape *from, int gp1, const QPointF& ep);
+    KoShapeConnectionPrivate(KoShape *from, int gp1, const QPointF &ep);
 
     /// return the start point or the point from the shape connector if that exists
     QPointF resolveStartPoint() const;
     /// return the end point or the point from the shape connector if that exists
     QPointF resolveEndPoint() const;
+
+    void foul() {
+        if (connectionStrategy)
+            connectionStrategy->foul();
+    }
 
     KoShape *shape1;
     KoShape *shape2;

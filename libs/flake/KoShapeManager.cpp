@@ -32,6 +32,7 @@
 #include "KoShapeManagerPaintingStrategy.h"
 #include "KoShapeShadow.h"
 #include "KoShapeConnection.h"
+#include "KoShapeConnection_p.h"
 #include "KoShapeLayer.h"
 #include "KoFilterEffect.h"
 #include "KoFilterEffectStack.h"
@@ -127,8 +128,10 @@ void KoShapeManagerPrivate::update(const QRectF &rect, const KoShape *shape, boo
     }
 
     if (selectionHandles) {
-        foreach (KoShapeConnection *connection, shape->priv()->connections)
+        foreach (KoShapeConnection *connection, shape->priv()->connections) {
+            connection->priv()->foul();
             canvas->updateCanvas(connection->boundingRect());
+        }
     }
 }
 
