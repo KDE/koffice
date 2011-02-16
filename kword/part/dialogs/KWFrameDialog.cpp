@@ -35,6 +35,7 @@ KWFrameDialog::KWFrameDialog(const QList<KWFrame*> &frames, KWDocument *document
         m_frameGeometry(0),
         m_document(document)
 {
+    setWindowTitle(i18n("Shape Properties"));
     m_state = new FrameConfigSharedState(document);
     setFaceType(Tabbed);
     m_generalFrameProperties = new KWGeneralFrameProperties(m_state);
