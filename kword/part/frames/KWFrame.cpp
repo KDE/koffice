@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2000-2006 David Faure <faure@kde.org>
- * Copyright (C) 2005-2006 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2005-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -28,6 +28,7 @@
 
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
+#include <KoTextShapeData.h>
 
 KWFrame::KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber)
         : m_shape(shape),
@@ -107,7 +108,26 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
             m_shape->setAdditionalStyleAttribute("fo:margin-right", QString::number(m_margin.right) + "pt");
     }
 
-    m_shape->setAdditionalStyleAttribute("fo:margin", QString::number(runAroundDistance()) + "pt");
+    KoTextShapeData *tsd = qobject_cast<KoTextShapeData*>(shape()->userData());
+    if (tsd) {
+        KoInsets padding = tsd->insets();
+        if (padding.left == padding.right && padding.top == padding.bottom
+                && padding.left == padding.top) {
+            if (qAbs(padding.top) > 1E-4) {
+                m_shape->setAdditionalStyleAttribute("fo:padding", QString::number(padding.top) + "pt");
+            }
+        } else {
+            if (qAbs(padding.left) > 1E-4)
+                m_shape->setAdditionalStyleAttribute("fo:padding-left", QString::number(padding.left) + "pt");
+            if (qAbs(padding.top) > 1E-4)
+                m_shape->setAdditionalStyleAttribute("fo:padding-top", QString::number(padding.top) + "pt");
+            if (qAbs(padding.bottom) > 1E-4)
+                m_shape->setAdditionalStyleAttribute("fo:padding-bottom", QString::number(padding.bottom) + "pt");
+            if (qAbs(padding.right) > 1E-4)
+                m_shape->setAdditionalStyleAttribute("fo:padding-right", QString::number(padding.right) + "pt");
+        }
+    }
+
     m_shape->setAdditionalStyleAttribute("style:horizontal-pos", "from-left");
     m_shape->setAdditionalStyleAttribute("style:horizontal-rel", "page");
     m_shape->setAdditionalStyleAttribute("style:vertical-pos", "from-top");
@@ -178,6 +198,16 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
     m_shape->removeAdditionalAttribute("text:anchor-page-number");
     m_shape->removeAdditionalAttribute("text:anchor-page-number");
     m_shape->removeAdditionalAttribute("text:anchor-type");
+    m_shape->removeAdditionalStyleAttribute("fo:margin");
+    m_shape->removeAdditionalStyleAttribute("fo:margin-left");
+    m_shape->removeAdditionalStyleAttribute("fo:margin-top");
+    m_shape->removeAdditionalStyleAttribute("fo:margin-bottom");
+    m_shape->removeAdditionalStyleAttribute("fo:margin-right");
+    m_shape->removeAdditionalStyleAttribute("fo:padding");
+    m_shape->removeAdditionalStyleAttribute("fo:padding-left");
+    m_shape->removeAdditionalStyleAttribute("fo:padding-top");
+    m_shape->removeAdditionalStyleAttribute("fo:padding-bottom");
+    m_shape->removeAdditionalStyleAttribute("fo:padding-right");
 }
 
 bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*context */)
