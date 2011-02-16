@@ -910,7 +910,8 @@ void KWDocument::removeFrameFromViews(KWFrame *frame)
 #ifndef NDEBUG
 void KWDocument::printDebug()
 {
-    static const char * headerFooterType[] = { "None", "EvenOdd", "Uniform", "ERROR" };
+    static const char *headerFooterType[] = { "None", "EvenOdd", "Uniform", "ERROR" };
+    static const char *fstype[] = { "BackgroundFrameSet", "TextFrameSet", "OtherFrameSet", "ERROR" };
 
     kDebug(32001) << "----------------------------------------";
     kDebug(32001) << "                 Debug info";
@@ -920,7 +921,7 @@ void KWDocument::printDebug()
     kDebug(32001) << "# Framesets:" << frameSetCount();
     int i = 0;
     foreach (KWFrameSet *fs, m_frameSets) {
-        kDebug(32001) << "Frameset" << i++ << ":" <<
+        kDebug(32001) << "Frameset" << i++ << fstype[fs->type()] << ":" <<
         fs->name() << '(' << fs << ')';
         fs->printDebug();
     }

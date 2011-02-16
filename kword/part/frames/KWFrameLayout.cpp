@@ -93,6 +93,7 @@ void KWFrameLayout::createNewFramesForPage(int pageNumber)
             shape->setPosition(QPointF(0, page.offsetInDocument()));
             background = new KWFrame(shape, m_backgroundFrameSet);
             background->setTextRunAround(KWord::RunThrough);
+            shape->setZIndex(-1);
             // TODO pagespread
         }
         background->shape()->setBackground(page.pageStyle().background());
