@@ -25,6 +25,8 @@
 #include "KoShapeSavingContext.h"
 #include "KoShapeGroup.h"
 #include "KoShapeLayer.h"
+#include "KoShapeConnection.h"
+#include "KoShapeConnection_p.h"
 
 #include <KoPluginLoader.h>
 #include <KoXmlReader.h>
@@ -181,6 +183,17 @@ KoShape * KoShapeRegistry::createShapeFromOdf(const KoXmlElement & e, KoShapeLoa
         }
         else {
             delete group;
+        }
+    } else if (e.localName() == "connector" && e.namespaceURI() == KoXmlNS::draw) {
+        KoShapeConnection *connection = new KoShapeConnection();
+        if (!connection->loadOdf(e, context)) {
+            delete connection;
+        } else if (connection->priv()->hasDummyShape) {
+            // if there is no shape for a connection it will fall between the cracks
+            shape = new KoShape();
+            shape->setName("ConnectionPlaceholder");
+            shape->setPosition(connection->startPoint());
+            connection->setStartPoint(shape, 0);
         }
     } else {
         shape = d->createShapeInternal(e, context, e);
