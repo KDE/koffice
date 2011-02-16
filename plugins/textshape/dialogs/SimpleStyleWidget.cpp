@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2008, 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2009 Casper Boemann <cbo@boemann.dk>
  *
  * This library is free software; you can redistribute it and/or
@@ -90,13 +90,16 @@ void SimpleStyleWidget::fillListsCombobox()
 
     widget.listType->clear();
     KoZoomHandler zoomHandler;
-    zoomHandler.setZoomAndResolution(160, 72, 72);
+    zoomHandler.setZoomAndResolution(100, 72, 72);
 
     KoInlineTextObjectManager itom;
     TextShape textShape(&itom);
     textShape.setSize(QSizeF(300, 100));
     KoTextDocumentLayout *layouter = qobject_cast<KoTextDocumentLayout*> (textShape.textShapeData()->document()->documentLayout());
     Q_ASSERT(layouter);
+    KoParagraphStyle ps;
+    ps.characterStyle()->setFontPointSize(12);
+    ps.applyStyle(textShape.textShapeData()->document()->begin());
     foreach(const Lists::ListStyleItem &item, Lists::genericListStyleItems()) {
         if (item.style == KoListStyle::None) {
             widget.listType->addItem(item.name, static_cast<int>(item.style));
@@ -105,17 +108,17 @@ void SimpleStyleWidget::fillListsCombobox()
         QPixmap pixmap(16, 16); // can we get the actual size from the style?
         pixmap.fill(Qt::transparent);
         QPainter p(&pixmap);
+        p.translate(-4, -6);
         KoListStyle listStyle;
         KoListLevelProperties llp = listStyle.levelProperties(1);
         llp.setStyle(item.style);
         if (KoListStyle::isNumberingStyle(item.style)) {
             llp.setStartValue(1);
-            llp.setListItemSuffix(".");
         } else {
             p.setRenderHint(QPainter::Antialiasing);
         }
         listStyle.setLevelProperties(llp);
-        listStyle.applyStyle(textShape.textShapeData()->document()->begin(),1);
+        listStyle.applyStyle(textShape.textShapeData()->document()->begin(), 1);
         layouter->layout();
         textShape.paintComponent(p, zoomHandler);
         p.end();
