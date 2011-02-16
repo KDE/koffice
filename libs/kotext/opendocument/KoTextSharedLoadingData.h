@@ -60,7 +60,7 @@ public:
     /**
      * Load the styles
      *
-     * If your application uses a style manager call this function from you application with insertOfficeStyles = true
+     * If your application uses a style manager call this function from your application
      * to load the custom styles into the style manager before the rest of the loading is started.
      *
      * @param scontext The shape loading context.
