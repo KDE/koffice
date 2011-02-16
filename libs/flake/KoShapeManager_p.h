@@ -60,6 +60,8 @@ public:
      */
     void update(const QRectF &rect, const KoShape *shape = 0, bool selectionHandles = false);
 
+    QPainterPath routeConnection(KoShapeConnection *connection, const QPointF &from, const QPointF &to);
+
     class DetectCollision
     {
     public:

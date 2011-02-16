@@ -21,6 +21,7 @@
 #include "KoShapeConnection.h"
 
 #include <QStringList>
+#include <QPainterPath>
 
 class ConnectStrategy
 {
@@ -54,8 +55,8 @@ private:
 class KoShapeConnectionPrivate
 {
 public:
-    KoShapeConnectionPrivate(KoShape *from, int gp1, KoShape *to, int gp2);
-    KoShapeConnectionPrivate(KoShape *from, int gp1, const QPointF &ep);
+    KoShapeConnectionPrivate(KoShapeConnection *qq, KoShape *from, int gp1, KoShape *to, int gp2);
+    KoShapeConnectionPrivate(KoShapeConnection *qq, KoShape *from, int gp1, const QPointF &ep);
 
     /// return the start point or the point from the shape connector if that exists
     QPointF resolveStartPoint() const;
@@ -67,6 +68,11 @@ public:
             connectionStrategy->foul();
     }
 
+    QPainterPath createConnectionPath(const QPointF &from, const QPointF &to) const;
+
+    QLineF calculateShapeFalloutPrivate(const QPointF &begin, bool start) const;
+
+    KoShapeConnection *q;
     KoShape *shape1;
     KoShape *shape2;
     int gluePointIndex1;

@@ -109,34 +109,40 @@ set(TestCanvasResourceProvider_test_SRCS TestResourceManager.cpp )
 kde4_add_unit_test(TestResourceManager TESTNAME libs-flake-TestResourceManager ${TestCanvasResourceProvider_test_SRCS})
 target_link_libraries(TestResourceManager  ${KDE4_KDECORE_LIBS} flake ${QT_QTTEST_LIBRARY})
 
-########### end ###############
+########### next target ###############
 
 set(TestShapeBackgroundCommand_test_SRCS TestShapeBackgroundCommand.cpp )
 kde4_add_unit_test(TestShapeBackgroundCommand TESTNAME libs-flake-TestShapeBackgroundCommand  ${TestShapeBackgroundCommand_test_SRCS})
 target_link_libraries(TestShapeBackgroundCommand  ${KDE4_KDECORE_LIBS} flake ${QT_QTTEST_LIBRARY})
 
-########### end ###############
+########### next target ###############
 
 set(TestShapeBorderCommand_test_SRCS TestShapeBorderCommand.cpp )
 kde4_add_unit_test(TestShapeBorderCommand TESTNAME libs-flake-TestShapeBorderCommand  ${TestShapeBorderCommand_test_SRCS})
 target_link_libraries(TestShapeBorderCommand ${KDE4_KDECORE_LIBS} flake ${QT_QTTEST_LIBRARY})
 
-########### end ###############
+########### next target ###############
 
 set(TestShapeShadowCommand_test_SRCS TestShapeShadowCommand.cpp )
 kde4_add_unit_test(TestShapeShadowCommand TESTNAME libs-flake-TestShapeShadowCommand  ${TestShapeShadowCommand_test_SRCS})
 target_link_libraries(TestShapeShadowCommand ${KDE4_KDECORE_LIBS} flake ${QT_QTTEST_LIBRARY})
 
-########### end ###############
+########### next target ###############
 
 set(TestSegmentTypeCommand_test_SRCS TestSegmentTypeCommand.cpp )
 kde4_add_unit_test(TestSegmentTypeCommand TESTNAME libs-flake-TestSegmentTypeCommand  ${TestSegmentTypeCommand_test_SRCS})
 target_link_libraries(TestSegmentTypeCommand ${KDE4_KDECORE_LIBS} flake ${QT_QTTEST_LIBRARY})
 
-########### end ###############
+########### next target ###############
 
 set(TestPointMergeCommand_test_SRCS TestPointMergeCommand.cpp )
 kde4_add_unit_test(TestPointMergeCommand TESTNAME libs-flake-TestPointMergeCommand  ${TestPointMergeCommand_test_SRCS})
 target_link_libraries(TestPointMergeCommand ${KDE4_KDECORE_LIBS} flake ${QT_QTTEST_LIBRARY})
+
+########### next target ###############
+
+set(TestConnection_SRCS TestConnection.cpp )
+kde4_add_unit_test(TestConnection TESTNAME libs-flake-TestConnection  ${TestConnection_SRCS})
+target_link_libraries(TestConnection flake ${QT_QTTEST_LIBRARY})
 
 ########### end ###############
