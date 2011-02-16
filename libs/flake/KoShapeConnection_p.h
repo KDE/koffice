@@ -16,6 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
+#ifndef KOSHAPECONNECTION_P_H
+#define KOSHAPECONNECTION_P_H
 #include "KoShapeConnection.h"
 
 class ConnectStrategy;
@@ -33,6 +35,14 @@ public:
     QPointF startPoint; // used if there is no shape1
     QPointF endPoint; // used if there is no shape2
     int zIndex;
+    /**
+     * if true then the user has not set any shapes to connect to.
+     * In flake a connection will only show up when its a shape and as such the
+     * shapeRegistry will add a dummyShape for 'shape1' if this is the case.
+     */
+    bool hasDummyShape;
 
     ConnectStrategy *connectionStrategy;
 };
+
+#endif

@@ -87,6 +87,7 @@ KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, KoSha
     shape2(to),
     gluePointIndex1(gp1),
     gluePointIndex2(gp2),
+    hasDummyShape(false),
     connectionStrategy(0)
 {
     Q_ASSERT(shape1 == 0 || shape1->connectionPoints().count() > gp1);
@@ -103,6 +104,7 @@ KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, const
     gluePointIndex1(gp1),
     gluePointIndex2(0),
     endPoint(ep),
+    hasDummyShape(false),
     connectionStrategy(0)
 {
     Q_ASSERT(shape1 == 0 || shape1->connectionPoints().count() > gp1);
@@ -294,30 +296,46 @@ QRectF KoShapeConnection::boundingRect() const
     return br.normalized();
 }
 
+void KoShapeConnection::setStartPoint(const QPointF &point)
+{
+    d->startPoint = point;
+}
+
 void KoShapeConnection::setEndPoint(const QPointF &point)
 {
     d->endPoint = point;
 }
 
+void KoShapeConnection::setStartPoint(KoShape *shape, int gluePointIndex)
+{
+    if (d->shape1) {
+        d->shape1->priv()->removeConnection(this);
+    }
+
+    d->shape1 = shape;
+    if (shape) {
+        d->gluePointIndex1 = gluePointIndex;
+        d->zIndex = qMax(d->zIndex, shape->zIndex() + 1);
+        d->shape1->priv()->addConnection(this);
+    } else {
+        d->gluePointIndex1 = -1;
+    }
+}
+
 void KoShapeConnection::setEndPoint(KoShape *shape, int gluePointIndex)
 {
-    if (!shape)
-        return;
-
     if (d->shape2) {
         d->shape2->priv()->removeConnection(this);
     }
 
     d->shape2 = shape;
-    d->gluePointIndex2 = gluePointIndex;
-    d->zIndex = qMax(d->zIndex, shape->zIndex() + 1);
-    d->shape2->priv()->addConnection(this);
-}
-
-//static
-bool KoShapeConnection::compareConnectionZIndex(KoShapeConnection *c1, KoShapeConnection *c2)
-{
-    return c1->zIndex() < c2->zIndex();
+    if (shape) {
+        d->gluePointIndex2 = gluePointIndex;
+        d->zIndex = qMax(d->zIndex, shape->zIndex() + 1);
+        d->shape2->priv()->addConnection(this);
+    } else {
+        d->gluePointIndex2 = -1;
+    }
 }
 
 bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
@@ -343,6 +361,7 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
     d->shape1 = 0;
     d->shape2 = 0;
 
+    d->hasDummyShape = true;
     if (element.hasAttributeNS(KoXmlNS::draw, "start-shape")) {
         d->gluePointIndex1 = element.attributeNS(KoXmlNS::draw, "start-glue-point", QString()).toInt();
         QString shapeId1 = element.attributeNS(KoXmlNS::draw, "start-shape", QString());
@@ -352,6 +371,7 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         } else {
 //            context.updateShape(shapeId1, new KoConnectionShapeLoadingUpdater(this, KoConnectionShapeLoadingUpdater::First));
         }
+        d->hasDummyShape = false;
     } else {
         qreal x = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x1"));
         qreal y = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y1"));
@@ -367,13 +387,14 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         } else {
 //            context.updateShape(shapeId2, new KoConnectionShapeLoadingUpdater(this, KoConnectionShapeLoadingUpdater::Second));
         }
+        d->hasDummyShape = false;
     } else {
         qreal x = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x2"));
         qreal y = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y2"));
         d->endPoint = QPointF(x, y);
     }
 
-    QString skew = element.attributeNS(KoXmlNS::draw, "line-skew", QString());
+    QString skew = element.attributeNS(KoXmlNS::draw, "line-skew");
     QStringList skewValues = skew.simplified().split(' ', QString::SkipEmptyParts);
     d->connectionStrategy->setSkew(skewValues);
 
@@ -381,3 +402,15 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
 
     return true;
 }
+
+KoShapeConnectionPrivate *KoShapeConnection::priv()
+{
+    return d;
+}
+
+//static
+bool KoShapeConnection::compareConnectionZIndex(KoShapeConnection *c1, KoShapeConnection *c2)
+{
+    return c1->zIndex() < c2->zIndex();
+}
+

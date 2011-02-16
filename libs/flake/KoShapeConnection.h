@@ -159,9 +159,12 @@ public:
      */
     QRectF boundingRect() const;
 
-// TODO rename methods to be more flexible
+    /// Set startPoint to @p point
+    void setStartPoint(const QPointF &point);
     /// Set endPoint to @p point
     void setEndPoint(const QPointF &point);
+    /// Sets shape1 to @p shape and gluePointIndex1 to @p gluePointIndex
+    void setStartPoint(KoShape *shape, int gluePointIndex);
     /// Sets shape2 to @p shape and gluePointIndex2 to @p gluePointIndex
     void setEndPoint(KoShape *shape, int gluePointIndex);
 
@@ -174,6 +177,9 @@ public:
      * @see saveOdfAttributes
      */
     void saveOdf(KoShapeSavingContext &context) const;
+
+    /// \internal
+    KoShapeConnectionPrivate * priv();
 
 private:
     KoShapeConnectionPrivate * const d;
