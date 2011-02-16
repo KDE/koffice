@@ -82,7 +82,7 @@ private:
 
 private:
     /// The KWord document.
-    QPointer<KWDocument> m_document;
+    KWDocument *m_document;
 };
 
 #endif
