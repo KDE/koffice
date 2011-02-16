@@ -72,6 +72,7 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
     GuiHelper::State newFrame = GuiHelper::Unset, frameBehavior = GuiHelper::Unset;
     KWord::NewFrameBehavior nfb = KWord::ReconnectNewFrame;
     KWord::FrameBehavior fb = KWord::AutoExtendFrameBehavior;
+    bool hasTextFrame = false;
     foreach (KWFrame *frame, frames) {
         if (frameBehavior == GuiHelper::Unset) {
             fb = frame->frameBehavior();
@@ -97,10 +98,20 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
         KWTextFrameSet *textFs = dynamic_cast<KWTextFrameSet *>(frame->frameSet());
         if (textFs == 0)
             keepAspect.addState(frame->shape()->keepAspectRatio() ? GuiHelper::On : GuiHelper::Off);
+        else
+            hasTextFrame = true;
         protectContent.addState(frame->shape()->isContentProtected() ? GuiHelper::On : GuiHelper::Off);
     }
 
+
     // update the GUI
+    if (hasTextFrame) {
+        widget.keepAspectRatio->setVisible(false);
+    } else {
+        widget.reconnect->setVisible(false);
+        widget.textGroupBox->setVisible(false);
+    }
+
     copyFrame.updateCheckBox(widget.isCopyOfPrevious, false);
     widget.isCopyOfPrevious->setEnabled(false);
     allFrames.updateCheckBox(widget.allFrames, true);
@@ -116,12 +127,6 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
         m_textGroup->button(fb)->setChecked(true);
     else if (frameBehavior == GuiHelper::Unset)
         widget.textGroupBox->setVisible(false);
-
-    if (protectContent.m_state == GuiHelper::Unset) {
-        // if there is no text frame in the whole list of frames.
-        widget.reconnect->setVisible(false);
-        widget.textGroupBox->setVisible(false);
-    }
 }
 
 void KWGeneralFrameProperties::save()
