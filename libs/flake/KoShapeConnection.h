@@ -159,6 +159,7 @@ public:
      */
     QRectF boundingRect() const;
 
+// TODO rename methods to be more flexible
     /// Set endPoint to @p point
     void setEndPoint(const QPointF &point);
     /// Sets shape2 to @p shape and gluePointIndex2 to @p gluePointIndex
