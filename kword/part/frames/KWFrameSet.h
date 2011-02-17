@@ -94,6 +94,30 @@ public:
         return m_frames.count();
     }
 
+
+    /**
+     * For shapes that have as newFrameBehavior that they can be auto-copied to next pages.
+     */
+    enum ShapeSeriesPlacement {
+        // Auto-copy placement of last page and allow user to move it different on every page
+        FlexiblePlacement,
+        // All shapes are at the exact same position from the top/left of the page.
+        SynchronizedPlacement,
+        // X pos is from page binding edge.
+        EvenOddPlacement
+    };
+
+/*
+    When the page-anchored shape is saved to ODF we use one of the style:horizontal-pos
+    options to store this info but we will still save all shapes in the series.
+
+This means that when a shape is moved we should somehow get a notification and respond
+by moving all the copy shapes according to the policy.
+
+
+*/
+
+
 #ifndef NDEBUG
     /// use kDebug calls to print internal info on this frameset
     virtual void printDebug();

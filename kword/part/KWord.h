@@ -38,7 +38,11 @@ namespace KWord
     };
     /// What happens on new page
     enum NewFrameBehavior {
-        ReconnectNewFrame,  ///< On new page reconnect a copied from to the flow
+        /**
+         * On new page reconnect a copied from to the flow. Only makes sense for text
+         * framesets, behavior is undefined for other types.
+         */
+        ReconnectNewFrame,
         NoFollowupFrame,    ///< On new page don't create a new page
         CopyNewFrame        ///< On new page create a copy-frame and show that.
     };

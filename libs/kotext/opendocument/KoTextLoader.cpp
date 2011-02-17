@@ -373,7 +373,7 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor, b
         }
         endBody();
     }
-    if (document->isEmpty() && d->styleManager) {
+    if (document->isEmpty() && d->styleManager && document->allFormats().count() == 2) {
         QTextBlock block = document->begin();
         d->styleManager->defaultParagraphStyle()->applyStyle(block);
     }

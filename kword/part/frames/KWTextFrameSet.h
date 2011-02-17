@@ -90,7 +90,23 @@ public:
         return m_kwordDocument;
     }
 
+    /**
+     * Set a frameset to belong to a certain pagestyle.
+     * The various auto-generated text framesets can exist more than once in a document
+     * if there are multiple page styles that have them. For example the even-pages-header
+     * can be different for each page style.
+     * KWords frame-layout mechanisms use this setter to keep track of the relation.
+     * @see pageStyle()
+     */
     void setPageStyle(const KWPageStyle &style);
+    /**
+     * Get which pagestyle this frameset belongs to
+     * The various auto-generated text framesets can exist more than once in a document
+     * if there are multiple page styles that have them. For example the even-pages-header
+     * can be different for each page style.
+     * KWords frame-layout mechanisms use this setter to keep track of the relation.
+     * @see setPageStyle()
+     */
     KWPageStyle pageStyle() const;
 
 #ifndef NDEBUG
