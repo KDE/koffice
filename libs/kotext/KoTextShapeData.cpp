@@ -241,8 +241,10 @@ void KoTextShapeData::relayoutFor(KoTextPage &textPage)
     d->dirty = true;
     d->inRelayoutForPage = true;
     d->textpage = &textPage;
+    layout->setProperty("KoTextRelayoutForPage", LayoutCopyShape);
     layout->interruptLayout();
     layout->relayout();
+    layout->setProperty("KoTextRelayoutForPage", LayoutOrig); // relayout (if triggered by usage of variables)
     d->textpage = oldPage;
     d->dirty = true;
     d->inRelayoutForPage = false;

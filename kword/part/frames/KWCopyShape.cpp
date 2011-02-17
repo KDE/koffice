@@ -73,7 +73,7 @@ void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
     }
 
     //paint all child shapes
-    KoShapeContainer* container = dynamic_cast<KoShapeContainer*>(m_original);
+    KoShapeContainer *container = dynamic_cast<KoShapeContainer*>(m_original);
     if (container) {
         if (!container->shapeCount()) {
             return;
@@ -88,7 +88,7 @@ void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
         // been applied once before this function is called.
         QTransform baseMatrix = container->absoluteTransformation(&converter).inverted() * painter.transform();
 
-        foreach(KoShape *shape, sortedObjects) {
+        foreach (KoShape *shape, sortedObjects) {
             painter.save();
             painter.setTransform(shape->absoluteTransformation(&converter) * baseMatrix);
             shape->paint(painter, converter);

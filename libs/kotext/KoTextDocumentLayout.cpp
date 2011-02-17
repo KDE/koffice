@@ -342,6 +342,10 @@ void KoTextDocumentLayout::documentChanged(int position, int charsRemoved, int c
     if (shapes().count() == 0) // nothing to do.
         return;
 
+    if (document()->documentLayout()->property("KoTextRelayoutForPage").toInt() == KoTextShapeData::LayoutOrig)
+        // don't refresh if we relayout after a relayout-for-page
+        return;
+
     int from = position;
     const int to = from + charsAdded;
     while (from < to) { // find blocks that have been added

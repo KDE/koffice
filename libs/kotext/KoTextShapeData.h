@@ -108,6 +108,12 @@ public:
     /// emits a relayout
     void fireResizeEvent();
 
+    enum RelayoutForPageState {
+        NormalState = 5, ///< totally outside the relayout-for-page
+        LayoutCopyShape, ///< doing a relayout for page
+        LayoutOrig  ///< The relayout for page triggered a relayout of the original due to a change in variables
+    };
+
     /**
      * Calling this method will do a layout run of the text for this shape using the
      * provided textPage. The currently set page() will not be touched.

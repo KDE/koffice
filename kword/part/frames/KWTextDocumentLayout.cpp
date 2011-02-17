@@ -497,15 +497,23 @@ void KWTextDocumentLayout::layout()
                 if (framesInUse < frameCount && framesInUse != m_lastKnownFrameCount)
                     m_frameSet->framesEmpty(frameCount - framesInUse);
                 m_lastKnownFrameCount = frameCount;
-                if (requestFrameResize) // text ran out while placing it in the dummy shape.
+                if (requestFrameResize) {// text ran out while placing it in the dummy shape.
+                    TDEBUG << "requestMoreFrames, this session is done";
                     m_frameSet->requestMoreFrames(m_state->y() - m_dummyShape->textShapeData->documentOffset());
-                else {
+                } else {
+                    TDEBUG << "Layout done!";
                     // if there is more space in the shape then there is text. Reset the no-grow bool.
+                    const KoTextShapeData::RelayoutForPageState relayoutState =
+                        (KoTextShapeData::RelayoutForPageState) property("KoTextRelayoutForPage").toInt();
                     QList<KWFrame*>::const_iterator iter = m_frameSet->frames().end();
                     KWTextFrame *lastFrame;
                     do {
                         iter--;
                         lastFrame = dynamic_cast<KWTextFrame*>(*iter);
+                        if (relayoutState == KoTextShapeData::NormalState) {
+                            // its a copy shape then.
+                            (*iter)->shape()->update();
+                        }
                     } while (lastFrame == 0);
                     KoTextShapeData *data = qobject_cast<KoTextShapeData*>(lastFrame->shape()->userData());
                     Q_ASSERT(data);
@@ -514,6 +522,10 @@ void KWTextDocumentLayout::layout()
                     if (spaceLeft > 3) {
                         // note that this may delete the data and lastFrame !!  Do not access them after this point.
                         m_frameSet->spaceLeft(spaceLeft - 3);
+                    }
+                    if (relayoutState == KoTextShapeData::LayoutOrig) {
+                        // after having done a layout of the orig we go back to our daily lives.
+                        setProperty("KoTextRelayoutForPage", KoTextShapeData::NormalState);
                     }
                 }
 
@@ -581,7 +593,7 @@ void KWTextDocumentLayout::layout()
                     return; // done!
                 }
                 if (KWord::isHeaderFooter(m_frameSet)) { // more text, lets resize the header/footer.
-                    TDEBUG << "  header/footer is too small resize:" << line.line.height();
+                    TDEBUG << "  header/footer is too small, resize:" << line.line.height();
                     m_frameSet->requestMoreFrames(line.line.height());
                     scheduleLayoutWithoutInterrupt();
                     return; // done!
@@ -593,6 +605,7 @@ void KWTextDocumentLayout::layout()
                     m_state->clearTillEnd();
                     m_frameSet->layoutDone();
                     emit finishedLayout();
+                    TDEBUG << "  Text didn't fit, but we can't make more shapes. Done!";
                     return; // done!
                 }
 
