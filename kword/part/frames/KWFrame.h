@@ -54,20 +54,6 @@ public:
     virtual ~KWFrame();
 
     /**
-     * This property what should happen when the frame is full
-     */
-    KWord::FrameBehavior frameBehavior() const {
-        return m_frameBehavior;
-    }
-    /**
-     * Set what should happen when the frame is full
-     * @param fb the new FrameBehavior
-     */
-    void setFrameBehavior(KWord::FrameBehavior fb) {
-        m_frameBehavior = fb;
-    }
-
-    /**
      * For frame duplication policy on new page creation.
      * Determines if this frame will be copied on even or odd pages only.
      */
@@ -190,7 +176,6 @@ public:
 
 private:
     KoShape *m_shape;
-    KWord::FrameBehavior m_frameBehavior;
     bool m_copyToEverySheet;
     KWord::RunAroundSide m_runAroundSide;
     KWord::TextRunAround m_runAround;

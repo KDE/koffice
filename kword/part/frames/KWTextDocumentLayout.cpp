@@ -603,7 +603,7 @@ void KWTextDocumentLayout::layout()
                 }
 
                 KWFrame *lastFrame = m_frameSet->frames().last();
-                if (lastFrame->frameBehavior() == KWord::IgnoreContentFrameBehavior
+                if (m_frameSet->frameBehavior() == KWord::IgnoreContentFrameBehavior
                         || dynamic_cast<KWCopyShape*>(lastFrame)) {
                     m_state->clearTillEnd();
                     m_frameSet->layoutDone();

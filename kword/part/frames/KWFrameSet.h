@@ -109,7 +109,19 @@ public:
         m_newFrameBehavior = nf;
     }
 
-
+    /**
+     * This property what should happen when the frame is full
+     */
+    KWord::FrameBehavior frameBehavior() const {
+        return m_frameBehavior;
+    }
+    /**
+     * Set what should happen when the frame is full
+     * @param fb the new FrameBehavior
+     */
+    void setFrameBehavior(KWord::FrameBehavior fb) {
+        m_frameBehavior = fb;
+    }
 
     /**
      * For shapes that have as newFrameBehavior that they can be auto-copied to next pages.
@@ -175,6 +187,7 @@ protected:
 private:
     QString m_name;
     KWord::NewFrameBehavior m_newFrameBehavior;
+    KWord::FrameBehavior m_frameBehavior;
 };
 
 #endif

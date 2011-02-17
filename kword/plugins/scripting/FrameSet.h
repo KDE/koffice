@@ -1,6 +1,6 @@
 /* This file is part of the KOffice project
  * Copyright (C) 2006 Sebastian Sauer <mail@dipe.org>
- * Copyright (C) 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2010-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -80,6 +80,34 @@ public slots:
         if (fs)
             fs->setName(name);
     }
+
+    /** This property defines what should happen when the frame is full.*/
+    int frameBehavior() const {
+        KWFrameSet *fs = m_frameset.data();
+        if (fs)
+            return fs->frameBehavior();
+        return 0;
+    }
+    /**
+    * Set what should happen when the frame is full.
+    *
+    * Valid values for the parameter \p framebehavior are;
+    * \li AutoExtendFrameBehavior = Make the frame bigger to fit the contents.
+    * \li AutoCreateNewFrameBehavior = Create a new frame on the next page.
+    * \li IgnoreContentFrameBehavior = Ignore the content and clip it.
+    *
+    * Python sample that does set the frame-behavior of the frame
+    * myframe to AutoExtendFrameBehavior;
+    * \code
+    * myframe.setFrameBehavior(myframe.AutoExtendFrameBehavior)
+    * \endcode
+    */
+    void setFrameBehavior(int framebehavior) {
+        KWFrameSet *fs = m_frameset.data();
+        if (fs)
+            fs->setFrameBehavior((KWord::FrameBehavior) framebehavior);
+    }
+
 
     /** Return the number of frames this frameset has. */
     int frameCount() {

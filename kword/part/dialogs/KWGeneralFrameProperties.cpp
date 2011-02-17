@@ -76,9 +76,9 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
     foreach (KWFrame *frame, frames) {
         KWFrameSet *fs = frame->frameSet();
         if (frameBehavior == GuiHelper::Unset) {
-            fb = frame->frameBehavior();
+            fb = fs->frameBehavior();
             frameBehavior = GuiHelper::On;
-        } else if (fb != frame->frameBehavior())
+        } else if (fb != fs->frameBehavior())
             frameBehavior = GuiHelper::TriState;
 
         if (newFrame == GuiHelper::Unset) {
@@ -145,7 +145,7 @@ void KWGeneralFrameProperties::save()
             frame->shape()->setKeepAspectRatio(widget.keepAspectRatio->checkState() == Qt::Checked);
         if (m_textGroup->checkedId() != -1) {
             KWord::FrameBehavior fb = static_cast<KWord::FrameBehavior>(m_textGroup->checkedId());
-            frame->setFrameBehavior(fb);
+            frame->frameSet()->setFrameBehavior(fb);
         }
         if (m_newPageGroup->checkedId() != -1) {
             KWord::NewFrameBehavior nfb = static_cast<KWord::NewFrameBehavior>(m_newPageGroup->checkedId());

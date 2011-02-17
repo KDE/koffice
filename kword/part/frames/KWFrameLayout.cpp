@@ -420,7 +420,6 @@ void KWFrameLayout::layoutFramesOnPage(int pageNumber)
 
         bool first = true;
         for (int i = columns - 1; i >= 0; i--) {
-            main[i]->setFrameBehavior(KWord::AutoCreateNewFrameBehavior);
             KoShape *shape = main[i]->shape();
             shape->update();
             shape->setPosition(points[i]);

@@ -110,28 +110,6 @@ public slots:
     }
     */
 
-    /** This property defines what should happen when the frame is full.*/
-    int frameBehavior() const {
-        return m_frame->frameBehavior();
-    }
-    /**
-    * Set what should happen when the frame is full.
-    *
-    * Valid values for the parameter \p framebehavior are;
-    * \li AutoExtendFrameBehavior = Make the frame bigger to fit the contents.
-    * \li AutoCreateNewFrameBehavior = Create a new frame on the next page.
-    * \li IgnoreContentFrameBehavior = Ignore the content and clip it.
-    *
-    * Python sample that does set the frame-behavior of the frame
-    * myframe to AutoExtendFrameBehavior;
-    * \code
-    * myframe.setFrameBehavior(myframe.AutoExtendFrameBehavior)
-    * \endcode
-    */
-    void setFrameBehavior(int framebehavior) {
-        m_frame->setFrameBehavior((KWord::FrameBehavior) framebehavior);
-    }
-
     /** Return the text runaround property for this frame. This property specifies
     how text from another textframe will behave when this frame intersects with it. */
     int textRunAround() const {

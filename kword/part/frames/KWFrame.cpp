@@ -32,7 +32,6 @@
 
 KWFrame::KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber)
         : m_shape(shape),
-        m_frameBehavior(KWord::AutoExtendFrameBehavior),
         m_copyToEverySheet(true),
         m_runAroundSide(KWord::BiggestRunAroundSide),
         m_runAround(KWord::RunAround),
@@ -79,7 +78,6 @@ void KWFrame::setFrameSet(KWFrameSet *fs)
 
 void KWFrame::copySettings(const KWFrame *frame)
 {
-    setFrameBehavior(frame->frameBehavior());
     setFrameOnBothSheets(frame->frameOnBothSheets());
     setRunAroundDistance(frame->runAroundDistance());
     setRunAroundSide(frame->runAroundSide());
@@ -89,6 +87,7 @@ void KWFrame::copySettings(const KWFrame *frame)
 
 void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pageZIndexOffset) const
 {
+    Q_ASSERT(frameSet());
     // frame properties first
     if (m_margin.left == m_margin.right && m_margin.top == m_margin.bottom
             && m_margin.left == m_margin.top) {
@@ -150,7 +149,7 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
     }
     m_shape->setAdditionalStyleAttribute("style:wrap", value);
 
-    switch (frameBehavior()) {
+    switch (frameSet()->frameBehavior()) {
     case KWord::AutoCreateNewFrameBehavior:
         value = "auto-create-new-frame";
         break;
@@ -168,17 +167,15 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
     if (!value.isEmpty())
         m_shape->setAdditionalStyleAttribute("style:overflow-behavior", value);
 
-    if (frameSet()) {
-        switch (frameSet()->newFrameBehavior()) {
-        case KWord::ReconnectNewFrame: value = "followup"; break;
-        case KWord::NoFollowupFrame: value.clear(); break; // "none" is the default
-        case KWord::CopyNewFrame: value = "copy"; break;
-        }
-        if (!value.isEmpty()) {
-            m_shape->setAdditionalStyleAttribute("koffice:frame-behavior-on-new-page", value);
-            if (!frameOnBothSheets())
-                m_shape->setAdditionalAttribute("koffice:frame-copy-to-facing-pages", "true");
-        }
+    switch (frameSet()->newFrameBehavior()) {
+    case KWord::ReconnectNewFrame: value = "followup"; break;
+    case KWord::NoFollowupFrame: value.clear(); break; // "none" is the default
+    case KWord::CopyNewFrame: value = "copy"; break;
+    }
+    if (!value.isEmpty()) {
+        m_shape->setAdditionalStyleAttribute("koffice:frame-behavior-on-new-page", value);
+        if (!frameOnBothSheets())
+            m_shape->setAdditionalAttribute("koffice:frame-copy-to-facing-pages", "true");
     }
 
 
@@ -212,7 +209,7 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
 
 bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*context */)
 {
-    setFrameBehavior(KWord::IgnoreContentFrameBehavior);
+    frameSet()->setFrameBehavior(KWord::IgnoreContentFrameBehavior);
     KoXmlElement properties(KoXml::namedItemNS(style, KoXmlNS::style, "graphic-properties"));
     if (properties.isNull())
         return false;
@@ -234,11 +231,11 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
 
     QString overflow = properties.attributeNS(KoXmlNS::style, "overflow-behavior", QString());
     if (overflow == "clip")
-        setFrameBehavior(KWord::IgnoreContentFrameBehavior);
+        frameSet()->setFrameBehavior(KWord::IgnoreContentFrameBehavior);
     else if (overflow == "auto-create-new-frame")
-        setFrameBehavior(KWord::AutoCreateNewFrameBehavior);
+        frameSet()->setFrameBehavior(KWord::AutoCreateNewFrameBehavior);
     else
-        setFrameBehavior(KWord::AutoExtendFrameBehavior);
+        frameSet()->setFrameBehavior(KWord::AutoExtendFrameBehavior);
     QString newFrameBehavior = properties.attributeNS(KoXmlNS::koffice, "frame-behavior-on-new-page", QString());
     if (frameSet() == 0);
     else if (newFrameBehavior == "followup")

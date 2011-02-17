@@ -27,7 +27,8 @@
 KWFrameSet::KWFrameSet(KWord::FrameSetType type)
     : QObject(),
     m_type(type),
-    m_newFrameBehavior(KWord::NoFollowupFrame)
+    m_newFrameBehavior(KWord::NoFollowupFrame),
+    m_frameBehavior(KWord::AutoExtendFrameBehavior)
 {
 }
 
@@ -73,11 +74,13 @@ void KWFrameSet::removeFrame(KWFrame *frame, KoShape *shape)
 void KWFrameSet::printDebug()
 {
     static const char * newFrameBh[] = { "Reconnect", "NoFollowup", "Copy" };
+    static const char * frameBh[] = { "AutoExtendFrame", "AutoCreateNewFrame", "Ignore", "ERROR" };
     int i = 1;
     foreach (KWFrame *frame, frames()) {
         kDebug(32001) << " +-- Frame" << i++ << "of" << frameCount() << "    (" << frame << frame->shape() << ")"
             << (frame->isCopy() ? "[copy]" : "");
         kDebug(32001) << "     NewFrameBehavior:" << newFrameBh[newFrameBehavior()];
+        kDebug(32001) << "     FrameBehavior:" << frameBh[frameBehavior()];
         printDebug(frame);
     }
 }
@@ -86,10 +89,8 @@ void KWFrameSet::printDebug(KWFrame *frame)
 {
     static const char * runaround[] = { "No Runaround", "Bounding Rect", "Skip", "ERROR" };
     static const char * runaroundSide[] = { "Biggest", "Left", "Right", "Auto", "Both", "ERROR" };
-    static const char * frameBh[] = { "AutoExtendFrame", "AutoCreateNewFrame", "Ignore", "ERROR" };
     kDebug(32001) << "     Rectangle :" << frame->shape()->position().x() << "," << frame->shape()->position().y() << frame->shape()->size().width() << "x" << frame->shape()->size().height();
     kDebug(32001) << "     RunAround:" << runaround[frame->textRunAround()] << ", side:" << runaroundSide[frame->runAroundSide()];
-    kDebug(32001) << "     FrameBehavior:" << frameBh[frame->frameBehavior()];
     if (!frame->shape()->background())
         kDebug(32001) << "     BackgroundColor: Transparent";
     else {

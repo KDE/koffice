@@ -86,6 +86,7 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc, KWord::TextFrameSetType ty
     }
     m_document->setUseDesignMetrics(true);
     setNewFrameBehavior(KWord::ReconnectNewFrame);
+    setFrameBehavior(KWord::AutoCreateNewFrameBehavior);
     switch (m_textFrameSetType) {
     case KWord::OddPagesHeaderTextFrameSet:
         setName(i18n("Odd Pages Header"));
@@ -102,7 +103,8 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc, KWord::TextFrameSetType ty
     case KWord::MainTextFrameSet:
         setName(i18n("Main text"));
         break;
-    default:;
+    default:
+        setFrameBehavior(KWord::AutoExtendFrameBehavior);
     }
 }
 
@@ -195,10 +197,10 @@ void KWTextFrameSet::requestMoreFrames(qreal textHeight)
         KWTextFrame *frame = static_cast<KWTextFrame*>(frames().first());
         frame->setMinimumFrameHeight(frame->minimumFrameHeight() + textHeight + 1E-6);
         emit decorationFrameResize(this);
-    } else if (textHeight == 0.0 || lastFrame->frameBehavior() == KWord::AutoCreateNewFrameBehavior) {
+    } else if (textHeight == 0.0 || frameBehavior() == KWord::AutoCreateNewFrameBehavior) {
         if (newFrameBehavior() == KWord::ReconnectNewFrame)
             emit moreFramesNeeded(this);
-    } else if (lastFrame->frameBehavior() == KWord::AutoExtendFrameBehavior
+    } else if (frameBehavior() == KWord::AutoExtendFrameBehavior
             && lastFrame->canAutoGrow() && qAbs(textHeight) > 2) {
         // enlarge last shape
         KoShape *shape = lastFrame->shape();
@@ -231,7 +233,7 @@ void KWTextFrameSet::spaceLeft(qreal excessHeight)
     do {
         KWTextFrame *tf = dynamic_cast<KWTextFrame*>(*(iter));
         if (tf) {
-            if (tf && tf->frameBehavior() == KWord::AutoExtendFrameBehavior) {
+            if (frameBehavior() == KWord::AutoExtendFrameBehavior) {
                 tf->autoShrink(tf->shape()->size().height() - excessHeight);
                 tf->allowToGrow();
             }
