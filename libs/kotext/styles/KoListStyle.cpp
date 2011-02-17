@@ -170,14 +170,8 @@ void KoListStyle::applyStyle(const QTextBlock &block, int level)
     KoList::applyStyle(block, this, level);
 }
 
-void KoListStyle::loadOdf(KoShapeLoadingContext& scontext, const KoXmlElement& style)
+void KoListStyle::loadOdf(KoShapeLoadingContext &scontext, const KoXmlElement &style)
 {
-    d->name = style.attributeNS(KoXmlNS::style, "display-name", QString());
-    // if no style:display-name is given us the style:name
-    if (d->name.isEmpty()) {
-        d->name = style.attributeNS(KoXmlNS::style, "name", QString());
-    }
-
     KoXmlElement styleElem;
     forEachElement(styleElem, style) {
         KoListLevelProperties properties;
