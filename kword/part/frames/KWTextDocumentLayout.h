@@ -37,13 +37,13 @@ class KWORD_TEST_EXPORT KWTextDocumentLayout : public KoTextDocumentLayout
 public:
     /// constructor
     explicit KWTextDocumentLayout(KWTextFrameSet *frameSet);
-    ~KWTextDocumentLayout();
+    virtual ~KWTextDocumentLayout();
 
-    /// reimplemented from KoTextDocumentLayout::layout()
+    ///  Actually do the layout of the text.
     void layout();
 
     /// reimplemented from KoTextDocumentLayout::shapes()
-    QList<KoShape*> shapes() const;
+    virtual QList<KoShape*> shapes() const;
 
 protected:
     friend class KWTextFrameSet;

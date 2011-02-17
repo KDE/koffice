@@ -532,12 +532,14 @@ void KWTextDocumentLayout::layout()
             newParagraph = true;
             continue;
         }
+
         if (m_state->isInterrupted() || (newParagraph && m_state->y() > endPos)) {
             // enough for now. Try again later.
             TDEBUG << "schedule a next layout due to having done a layout of quite some space";
             scheduleLayoutWithoutInterrupt();
             return;
         }
+
         newParagraph = false;
         line.setOutlines(outlines);
         const int anchorCount = m_newAnchors.count();
@@ -581,6 +583,7 @@ void KWTextDocumentLayout::layout()
                 if (KWord::isHeaderFooter(m_frameSet)) { // more text, lets resize the header/footer.
                     TDEBUG << "  header/footer is too small resize:" << line.line.height();
                     m_frameSet->requestMoreFrames(line.line.height());
+                    scheduleLayoutWithoutInterrupt();
                     return; // done!
                 }
 
