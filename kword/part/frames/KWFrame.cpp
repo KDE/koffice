@@ -34,7 +34,6 @@ KWFrame::KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber)
         : m_shape(shape),
         m_frameBehavior(KWord::AutoExtendFrameBehavior),
         m_copyToEverySheet(true),
-        m_newFrameBehavior(KWord::NoFollowupFrame),
         m_runAroundSide(KWord::BiggestRunAroundSide),
         m_runAround(KWord::RunAround),
         m_anchoredPageNumber(pageNumber),
@@ -81,7 +80,6 @@ void KWFrame::setFrameSet(KWFrameSet *fs)
 void KWFrame::copySettings(const KWFrame *frame)
 {
     setFrameBehavior(frame->frameBehavior());
-    setNewFrameBehavior(frame->newFrameBehavior());
     setFrameOnBothSheets(frame->frameOnBothSheets());
     setRunAroundDistance(frame->runAroundDistance());
     setRunAroundSide(frame->runAroundSide());
@@ -170,15 +168,17 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
     if (!value.isEmpty())
         m_shape->setAdditionalStyleAttribute("style:overflow-behavior", value);
 
-    switch (newFrameBehavior()) {
-    case KWord::ReconnectNewFrame: value = "followup"; break;
-    case KWord::NoFollowupFrame: value.clear(); break; // "none" is the default
-    case KWord::CopyNewFrame: value = "copy"; break;
-    }
-    if (!value.isEmpty()) {
-        m_shape->setAdditionalStyleAttribute("koffice:frame-behavior-on-new-page", value);
-        if (!frameOnBothSheets())
-            m_shape->setAdditionalAttribute("koffice:frame-copy-to-facing-pages", "true");
+    if (frameSet()) {
+        switch (frameSet()->newFrameBehavior()) {
+        case KWord::ReconnectNewFrame: value = "followup"; break;
+        case KWord::NoFollowupFrame: value.clear(); break; // "none" is the default
+        case KWord::CopyNewFrame: value = "copy"; break;
+        }
+        if (!value.isEmpty()) {
+            m_shape->setAdditionalStyleAttribute("koffice:frame-behavior-on-new-page", value);
+            if (!frameOnBothSheets())
+                m_shape->setAdditionalAttribute("koffice:frame-copy-to-facing-pages", "true");
+        }
     }
 
 
@@ -240,12 +240,13 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
     else
         setFrameBehavior(KWord::AutoExtendFrameBehavior);
     QString newFrameBehavior = properties.attributeNS(KoXmlNS::koffice, "frame-behavior-on-new-page", QString());
-    if (newFrameBehavior == "followup")
-        setNewFrameBehavior(KWord::ReconnectNewFrame);
+    if (frameSet() == 0);
+    else if (newFrameBehavior == "followup")
+        frameSet()->setNewFrameBehavior(KWord::ReconnectNewFrame);
     else if (newFrameBehavior == "copy")
-        setNewFrameBehavior(KWord::CopyNewFrame);
+        frameSet()->setNewFrameBehavior(KWord::CopyNewFrame);
     else
-        setNewFrameBehavior(KWord::NoFollowupFrame);
+        frameSet()->setNewFrameBehavior(KWord::NoFollowupFrame);
 
     const qreal margin(KoUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "margin")));
     QString marginL = properties.attributeNS(KoXmlNS::fo, "margin-left");

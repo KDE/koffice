@@ -85,6 +85,7 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc, KWord::TextFrameSetType ty
         doc.setUndoStack(m_kwordDocument->resourceManager()->undoStack());
     }
     m_document->setUseDesignMetrics(true);
+    setNewFrameBehavior(KWord::ReconnectNewFrame);
     switch (m_textFrameSetType) {
     case KWord::OddPagesHeaderTextFrameSet:
         setName(i18n("Odd Pages Header"));
@@ -101,7 +102,7 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc, KWord::TextFrameSetType ty
     case KWord::MainTextFrameSet:
         setName(i18n("Main text"));
         break;
-    default: ;
+    default:;
     }
 }
 
@@ -195,7 +196,7 @@ void KWTextFrameSet::requestMoreFrames(qreal textHeight)
         frame->setMinimumFrameHeight(frame->minimumFrameHeight() + textHeight + 1E-6);
         emit decorationFrameResize(this);
     } else if (textHeight == 0.0 || lastFrame->frameBehavior() == KWord::AutoCreateNewFrameBehavior) {
-        if (lastFrame->newFrameBehavior() == KWord::ReconnectNewFrame)
+        if (newFrameBehavior() == KWord::ReconnectNewFrame)
             emit moreFramesNeeded(this);
     } else if (lastFrame->frameBehavior() == KWord::AutoExtendFrameBehavior
             && lastFrame->canAutoGrow() && qAbs(textHeight) > 2) {

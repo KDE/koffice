@@ -84,21 +84,6 @@ public:
     }
 
     /**
-     * For frame duplication policy on new page creation.
-     */
-    KWord::NewFrameBehavior newFrameBehavior() const {
-        return m_newFrameBehavior;
-    }
-    /**
-     * For frame duplication policy on new page creation.
-     * Altering this does not change the frames placed until a new page is created.
-     * @param nf the NewFrameBehavior.
-     */
-    void setNewFrameBehavior(KWord::NewFrameBehavior nf) {
-        m_newFrameBehavior = nf;
-    }
-
-    /**
      * Return the side around text from another (text)frame should flow.
      */
     KWord::RunAroundSide runAroundSide() const {
@@ -207,7 +192,6 @@ private:
     KoShape *m_shape;
     KWord::FrameBehavior m_frameBehavior;
     bool m_copyToEverySheet;
-    KWord::NewFrameBehavior m_newFrameBehavior;
     KWord::RunAroundSide m_runAroundSide;
     KWord::TextRunAround m_runAround;
     // The page number is only used during loading.

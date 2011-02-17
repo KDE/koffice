@@ -74,6 +74,7 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
     KWord::FrameBehavior fb = KWord::AutoExtendFrameBehavior;
     bool hasTextFrame = false;
     foreach (KWFrame *frame, frames) {
+        KWFrameSet *fs = frame->frameSet();
         if (frameBehavior == GuiHelper::Unset) {
             fb = frame->frameBehavior();
             frameBehavior = GuiHelper::On;
@@ -81,13 +82,13 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
             frameBehavior = GuiHelper::TriState;
 
         if (newFrame == GuiHelper::Unset) {
-            nfb = frame->newFrameBehavior();
+            nfb = fs->newFrameBehavior();
             newFrame = GuiHelper::On;
-        } else if (nfb != frame->newFrameBehavior())
+        } else if (nfb != fs->newFrameBehavior()) {
             newFrame = GuiHelper::TriState;
+        }
 
-
-        if (frame->frameSet()->frameCount() > 1) {
+        if (fs->frameCount() > 1) {
             allFrames.addState(GuiHelper::On);
             if (frame->frameSet()->frames().indexOf(frame) > 0)
                 copyFrame.addState(frame->isCopy() ? GuiHelper::On : GuiHelper::Off);
@@ -148,7 +149,7 @@ void KWGeneralFrameProperties::save()
         }
         if (m_newPageGroup->checkedId() != -1) {
             KWord::NewFrameBehavior nfb = static_cast<KWord::NewFrameBehavior>(m_newPageGroup->checkedId());
-            frame->setNewFrameBehavior(nfb);
+            frame->frameSet()->setNewFrameBehavior(nfb);
         }
         if (widget.evenOdd->checkState() != Qt::PartiallyChecked)
             frame->setFrameOnBothSheets(widget.evenOdd->checkState() != Qt::Checked);

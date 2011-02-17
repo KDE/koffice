@@ -399,16 +399,16 @@ void TestFrameLayout::testCopyFramesForPage()
     MockShape *copyShape = new MockShape();
     copyShape->setPosition(QPointF(9, 13));
     KWFrameSet *copyShapeFrameSet = new KWFrameSet();
+    copyShapeFrameSet->setNewFrameBehavior(KWord::CopyNewFrame);
     KWFrame *frame = new KWFrame(copyShape, copyShapeFrameSet);
-    frame->setNewFrameBehavior(KWord::CopyNewFrame);
     m_frames << copyShapeFrameSet;
 
     // copyShapeOdd
     MockShape *copyShapeOdd = new MockShape();
     copyShapeOdd->setPosition(QPointF(7, 12));
     KWFrameSet *copyShapeOddFrameSet = new KWFrameSet();
+    copyShapeOddFrameSet->setNewFrameBehavior(KWord::CopyNewFrame);
     frame = new KWFrame(copyShapeOdd, copyShapeOddFrameSet);
-    frame->setNewFrameBehavior(KWord::CopyNewFrame);
     frame->setFrameOnBothSheets(false);
     m_frames << copyShapeOddFrameSet;
 
@@ -417,7 +417,7 @@ void TestFrameLayout::testCopyFramesForPage()
     textshapePlain->setPosition(QPointF(11, 15));
     KWTextFrameSet *textshapePlainFS = new KWTextFrameSet(0, KWord::OtherTextFrameSet);
     KWTextFrame *tFrame = new KWTextFrame(textshapePlain, textshapePlainFS);
-    tFrame->setNewFrameBehavior(KWord::ReconnectNewFrame);
+    textshapePlainFS->setNewFrameBehavior(KWord::ReconnectNewFrame);
     m_frames << textshapePlainFS;
 
     // textShapeRotated
@@ -425,7 +425,7 @@ void TestFrameLayout::testCopyFramesForPage()
     textShapeRotated->setPosition(QPointF(13, 107));
     KWTextFrameSet *textshapeRotFS = new KWTextFrameSet(0, KWord::OtherTextFrameSet);
     tFrame = new KWTextFrame(textShapeRotated, textshapeRotFS);
-    tFrame->setNewFrameBehavior(KWord::ReconnectNewFrame);
+    textshapeRotFS->setNewFrameBehavior(KWord::ReconnectNewFrame);
     tFrame->shape()->rotate(90);
     m_frames << textshapeRotFS;
 
@@ -434,7 +434,7 @@ void TestFrameLayout::testCopyFramesForPage()
     textShapeGeometryProtected->setPosition(QPointF(3, 14));
     KWTextFrameSet *textshapeGeometryProtectedFS = new KWTextFrameSet(0, KWord::OtherTextFrameSet);
     tFrame = new KWTextFrame(textShapeGeometryProtected, textshapeGeometryProtectedFS);
-    tFrame->setNewFrameBehavior(KWord::ReconnectNewFrame);
+    textshapeGeometryProtectedFS->setNewFrameBehavior(KWord::ReconnectNewFrame);
     tFrame->shape()->setGeometryProtected(true);
     m_frames << textshapeGeometryProtectedFS;
 
@@ -443,7 +443,7 @@ void TestFrameLayout::testCopyFramesForPage()
     textShapeContentProtected->setPosition(QPointF(19, 23));
     KWTextFrameSet *textshapeContentProtectedFS = new KWTextFrameSet(0, KWord::OtherTextFrameSet);
     tFrame = new KWTextFrame(textShapeContentProtected, textshapeContentProtectedFS);
-    tFrame->setNewFrameBehavior(KWord::ReconnectNewFrame);
+    textshapeContentProtectedFS->setNewFrameBehavior(KWord::ReconnectNewFrame);
     tFrame->shape()->setContentProtected(true);
     m_frames << textshapeContentProtectedFS;
 
@@ -452,7 +452,7 @@ void TestFrameLayout::testCopyFramesForPage()
     textShapeUnselectable->setPosition(QPointF(7, 24));
     KWTextFrameSet *textshapeUnselectableFS = new KWTextFrameSet(0, KWord::OtherTextFrameSet);
     tFrame = new KWTextFrame(textShapeUnselectable, textshapeUnselectableFS);
-    tFrame->setNewFrameBehavior(KWord::ReconnectNewFrame);
+    textshapeUnselectableFS->setNewFrameBehavior(KWord::ReconnectNewFrame);
     tFrame->shape()->setSelectable(false);
     m_frames << textshapeUnselectableFS;
 

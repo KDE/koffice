@@ -94,6 +94,22 @@ public:
         return m_frames.count();
     }
 
+    /**
+     * For frame duplication policy on new page creation.
+     */
+    KWord::NewFrameBehavior newFrameBehavior() const {
+        return m_newFrameBehavior;
+    }
+    /**
+     * For frame duplication policy on new page creation.
+     * Altering this does not change the frames placed until a new page is created.
+     * @param nf the NewFrameBehavior.
+     */
+    void setNewFrameBehavior(KWord::NewFrameBehavior nf) {
+        m_newFrameBehavior = nf;
+    }
+
+
 
     /**
      * For shapes that have as newFrameBehavior that they can be auto-copied to next pages.
@@ -158,6 +174,7 @@ protected:
 
 private:
     QString m_name;
+    KWord::NewFrameBehavior m_newFrameBehavior;
 };
 
 #endif
