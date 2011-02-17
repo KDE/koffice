@@ -358,7 +358,6 @@ add_subdirectory(cmake)
 add_subdirectory(pics)
 add_subdirectory(plugins)
 add_subdirectory(servicetypes)
-add_subdirectory(templates)
 add_subdirectory(tools)
 add_subdirectory(filters)
 
