@@ -215,7 +215,7 @@ void KoTextDocumentLayout::addShape(KoShape *shape)
     KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
     if (data) {
         data->foul();
-        m_state->reset();
+        m_state->interrupted = true;
     }
     emit shapeAdded(shape);
 }
@@ -367,7 +367,7 @@ void KoTextDocumentLayout::documentChanged(int position, int charsRemoved, int c
         if (data && data->position() <= position && data->endPosition() >= position) {
             // found our (first) shape to re-layout
             data->foul();
-            m_state->reset();
+            m_state->interrupted = true;
             scheduleLayout();
             return;
         }
@@ -377,7 +377,7 @@ void KoTextDocumentLayout::documentChanged(int position, int charsRemoved, int c
     KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
     Q_ASSERT(data);
     data->foul();
-    m_state->reset();
+    m_state->interrupted = true;
     scheduleLayout();
 }
 
@@ -439,12 +439,12 @@ void KoTextDocumentLayout::relayout()
 
 void KoTextDocumentLayout::interruptLayout()
 {
-    m_state->reset();
+    m_state->interrupted = true;
 }
 
 bool KoTextDocumentLayout::isInterrupted() const
 {
-    return m_state->isInterrupted();
+    return m_state->interrupted;
 }
 
 void KoTextDocumentLayout::layout()

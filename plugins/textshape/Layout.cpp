@@ -68,7 +68,6 @@ Layout::Layout(KoTextDocumentLayout *parent)
         m_changeTracker(0),
         m_blockData(0),
         m_data(0),
-        m_reset(true),
         m_isRtl(false),
         m_inTable(false),
         m_parent(parent),
@@ -93,11 +92,11 @@ bool Layout::start()
 {
     m_styleManager = KoTextDocument(m_parent->document()).styleManager();
     m_changeTracker = KoTextDocument(m_parent->document()).changeTracker();
-    if (m_reset)
+    if (interrupted)
         resetPrivate();
     else if (shape)
         nextParag();
-    m_reset = false;
+    interrupted = false;
     return !(layout == 0 || m_parent->shapes().count() <= shapeNumber);
 }
 
@@ -106,16 +105,6 @@ void Layout::end()
     if (layout)
         layout->endLayout();
     layout = 0;
-}
-
-void Layout::reset()
-{
-    m_reset = true;
-}
-
-bool Layout::isInterrupted() const
-{
-    return m_reset;
 }
 
 qreal Layout::width()

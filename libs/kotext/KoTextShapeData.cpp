@@ -245,6 +245,7 @@ void KoTextShapeData::relayoutFor(KoTextPage &textPage)
     layout->interruptLayout();
     layout->relayout();
     layout->setProperty("KoTextRelayoutForPage", LayoutOrig); // relayout (if triggered by usage of variables)
+    layout->interruptLayout(); // make sure it will relayout the orig shape cleanly
     d->textpage = oldPage;
     d->dirty = true;
     d->inRelayoutForPage = false;

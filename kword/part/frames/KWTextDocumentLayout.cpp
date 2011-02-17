@@ -511,7 +511,7 @@ void KWTextDocumentLayout::layout()
                         iter--;
                         lastFrame = dynamic_cast<KWTextFrame*>(*iter);
                         if (relayoutState == KoTextShapeData::NormalState) {
-                            // its a copy shape then.
+                            // its a copy shape then, repaint it.
                             (*iter)->shape()->update();
                         }
                     } while (lastFrame == 0);
@@ -545,7 +545,7 @@ void KWTextDocumentLayout::layout()
             continue;
         }
 
-        if (m_state->isInterrupted() || (newParagraph && m_state->y() > endPos)) {
+        if (m_state->interrupted || (newParagraph && m_state->y() > endPos)) {
             // enough for now. Try again later.
             TDEBUG << "schedule a next layout due to having done a layout of quite some space";
             scheduleLayoutWithoutInterrupt();
@@ -555,11 +555,14 @@ void KWTextDocumentLayout::layout()
         newParagraph = false;
         line.setOutlines(outlines);
         const int anchorCount = m_newAnchors.count();
+        bool oldInterrupted = m_state->interrupted;
         line.tryFit();
-        if (m_state->layout->lineCount() == 1 && anchorCount != m_newAnchors.count()) {
+        if ((!oldInterrupted && m_state->interrupted) // variable moved in this line.
+                || (m_state->layout->lineCount() == 1 && anchorCount != m_newAnchors.count())) {
             // start parag over so we can correctly take the just found anchors into account.
             m_state->layout->endLayout();
             m_state->layout->beginLayout();
+            m_state->interrupted = oldInterrupted;
             continue;
         }
 #ifdef DEBUG_TEXT

@@ -51,9 +51,6 @@ public:
     virtual bool start();
     /// end layouting
     virtual void end();
-    virtual void reset();
-    /// returns true if reset has been called.
-    virtual bool isInterrupted() const;
     virtual qreal width();
     virtual qreal x();
     virtual qreal y();
@@ -151,7 +148,7 @@ private:
     QTextBlockFormat m_format;
     QTextBlock::Iterator m_fragmentIterator;
     KoTextShapeData *m_data;
-    bool m_newShape, m_newParag, m_reset, m_isRtl, m_inTable;
+    bool m_newShape, m_newParag, m_isRtl, m_inTable;
     KoInsets m_borderInsets;
     KoInsets m_shapeBorder;
     KoTextDocumentLayout *m_parent;

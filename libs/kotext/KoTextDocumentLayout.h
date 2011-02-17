@@ -134,16 +134,13 @@ public:
     class KOTEXT_EXPORT LayoutState
     {
     public:
-        LayoutState() : shapeNumber(-1), shape(0), layout(0) {}
+        LayoutState() : shapeNumber(-1), shape(0), layout(0), interrupted(true) {}
         virtual ~LayoutState() {}
+
         /// start layouting, return false when there is nothing to do
         virtual bool start() = 0;
         /// end layouting
         virtual void end() = 0;
-        /// Asks the layout to stop and restart from the beginning.
-        virtual void reset() = 0;
-        /// returns true if reset has been called.
-        virtual bool isInterrupted() const = 0;
         /// return the number of columns of the line to be layouted
         virtual int numColumns() {
             return 0;
@@ -193,6 +190,8 @@ public:
         KoShape *shape;
         /// The current paragraph layout.
         QTextLayout *layout;
+        /// signify if the layout should be restarted from the start
+        bool interrupted;
     };
 
     /**
