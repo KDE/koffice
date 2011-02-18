@@ -35,35 +35,36 @@
 #include <klocale.h>
 
 ShapeRotateStrategy::ShapeRotateStrategy(KoToolBase *tool, const QPointF &clicked, Qt::MouseButtons buttons)
-: KoInteractionStrategy(tool)
-, m_initialBoundingRect()
-, m_start(clicked)
+    : KoInteractionStrategy(tool),
+    m_initialBoundingRect(),
+    m_start(clicked)
 {
     m_initialSelectionMatrix = tool->canvas()->shapeManager()->selection()->transformation();
 
     QList<KoShape*> selectedShapes = tool->canvas()->shapeManager()->selection()->selectedShapes(KoFlake::StrippedSelection);
     foreach(KoShape *shape, selectedShapes) {
-        if ( ! shape->isEditable() )
+        if (! shape->isEditable())
             continue;
         m_selectedShapes << shape;
-        if ( m_selectedShapes.count() == 1 )
+        if (m_selectedShapes.count() == 1)
             m_initialBoundingRect = shape->boundingRect();
         else
-            m_initialBoundingRect = m_initialBoundingRect.united( shape->boundingRect() );
+            m_initialBoundingRect = m_initialBoundingRect.united(shape->boundingRect());
         m_oldTransforms << shape->transformation();
     }
 
-    if ( buttons & Qt::RightButton )
-        m_rotationCenter = tool->canvas()->shapeManager()->selection()->absolutePosition( SelectionDecorator::hotPosition() );
+    if (buttons & Qt::RightButton)
+        m_rotationCenter = tool->canvas()->shapeManager()->selection()->absolutePosition(SelectionDecorator::hotPosition());
     else
         m_rotationCenter = m_initialBoundingRect.center();
 
-    tool->setStatusText( i18n( "Press ALT to rotate in 45 degree steps." ) );
+    tool->setStatusText(i18n("Press ALT to rotate in 45 degree steps."));
 }
 
-void ShapeRotateStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers) {
-    qreal angle = atan2( point.y() - m_rotationCenter.y(), point.x() - m_rotationCenter.x() ) -
-        atan2( m_start.y() - m_rotationCenter.y(), m_start.x() - m_rotationCenter.x() );
+void ShapeRotateStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers)
+{
+    qreal angle = atan2(point.y() - m_rotationCenter.y(), point.x() - m_rotationCenter.x()) -
+        atan2(m_start.y() - m_rotationCenter.y(), m_start.x() - m_rotationCenter.x());
     angle = angle / M_PI * 180;  // convert to degrees.
     if (modifiers & (Qt::AltModifier | Qt::ControlModifier)) {
         // limit to 45 degree angles
@@ -82,15 +83,15 @@ void ShapeRotateStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModi
 
     QTransform applyMatrix = matrix * m_rotationMatrix.inverted();
     m_rotationMatrix = matrix;
-    foreach( KoShape * shape, m_selectedShapes ) {
+    foreach (KoShape * shape, m_selectedShapes) {
         shape->update();
-        shape->applyAbsoluteTransformation( applyMatrix );
+        shape->applyAbsoluteTransformation(applyMatrix);
         shape->update();
     }
-    tool()->canvas()->shapeManager()->selection()->applyAbsoluteTransformation( applyMatrix );
+    tool()->canvas()->shapeManager()->selection()->applyAbsoluteTransformation(applyMatrix);
 }
 
-void ShapeRotateStrategy::rotateBy( qreal angle )
+void ShapeRotateStrategy::rotateBy(qreal angle)
 {
     QTransform matrix;
     matrix.translate(m_rotationCenter.x(), m_rotationCenter.y());
@@ -99,37 +100,38 @@ void ShapeRotateStrategy::rotateBy( qreal angle )
 
     QTransform applyMatrix = matrix * m_rotationMatrix.inverted();
     m_rotationMatrix = matrix;
-    foreach( KoShape * shape, m_selectedShapes ) {
+    foreach (KoShape * shape, m_selectedShapes) {
         shape->update();
-        shape->applyAbsoluteTransformation( applyMatrix );
+        shape->applyAbsoluteTransformation(applyMatrix);
         shape->update();
     }
-    tool()->canvas()->shapeManager()->selection()->applyAbsoluteTransformation( applyMatrix );
+    tool()->canvas()->shapeManager()->selection()->applyAbsoluteTransformation(applyMatrix);
 }
 
-void ShapeRotateStrategy::paint( QPainter &painter, const KoViewConverter &converter) {
+void ShapeRotateStrategy::paint(QPainter &painter, const KoViewConverter &converter)
+{
     SelectionDecorator decorator(KoFlake::NoHandle, true, false);
     decorator.setSelection(tool()->canvas()->shapeManager()->selection());
-    decorator.setHandleRadius( tool()->canvas()->resourceManager()->handleRadius() );
+    decorator.setHandleRadius(tool()->canvas()->resourceManager()->handleRadius());
     decorator.paint(painter, converter);
 
     // paint the rotation center
-    painter.setPen( QPen(Qt::red));
-    painter.setBrush( QBrush(Qt::red));
-    painter.setRenderHint( QPainter::Antialiasing, true );
-    QRectF circle( 0, 0, 5, 5 );
-    circle.moveCenter( converter.documentToView( m_rotationCenter ) );
-    painter.drawEllipse( circle );
+    painter.setPen(QPen(Qt::red));
+    painter.setBrush(QBrush(Qt::red));
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    QRectF circle(0, 0, 5, 5);
+    circle.moveCenter(converter.documentToView(m_rotationCenter));
+    painter.drawEllipse(circle);
 }
 
 QUndoCommand* ShapeRotateStrategy::createCommand(QUndoCommand *parent)
 {
     QList<QTransform> newTransforms;
-    foreach( KoShape* shape, m_selectedShapes )
+    foreach (KoShape* shape, m_selectedShapes)
         newTransforms << shape->transformation();
 
     KoShapeTransformCommand *cmd = new KoShapeTransformCommand(m_selectedShapes, m_oldTransforms, newTransforms, parent);
-    cmd->setText( i18n("Rotate") );
+    cmd->setText(i18n("Rotate"));
     KoSelection * sel = tool()->canvas()->shapeManager()->selection();
     new SelectionTransformCommand(sel, m_initialSelectionMatrix, sel->transformation(), cmd);
     return cmd;
