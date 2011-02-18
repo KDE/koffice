@@ -727,7 +727,8 @@ public:
     void setName(const QString &name);
 
     /**
-     * Update the position of the shape in the tree of the KoShapeManager.
+     * Notify the shape its geometry and/or position have changed which will cause the shapeManager
+     * to update its internal index used for painting and user interaction.
      */
     void notifyChanged();
 
