@@ -124,10 +124,18 @@ KoShapePrivate::~KoShapePrivate()
 void KoShapePrivate::shapeChanged(KoShape::ChangeType type)
 {
     Q_Q(KoShape);
+    if (editBlockDepth > 0 && ( type == KoShape::PositionChanged
+                || type == KoShape::RotationChanged || type == KoShape::ScaleChanged
+                || type == KoShape::ShearChanged || type == KoShape::SizeChanged
+                || type == KoShape::GenericMatrixChange)) {
+        editBlockEndShouldEmit = true;
+        return;
+    }
+
     if (parent)
         parent->model()->childChanged(q, type);
     q->shapeChanged(type);
-    foreach(KoShape * shape, dependees)
+    foreach (KoShape * shape, dependees)
         shape->shapeChanged(type, q);
 }
 
@@ -721,7 +729,8 @@ QSizeF KoShape::size() const
 QPointF KoShape::position() const
 {
     Q_D(const KoShape);
-    QPointF center(0.5*size().width(), 0.5*size().height());
+    QSizeF s(size());
+    QPointF center(0.5 * qMax(1E-3, s.width()), 0.5 * qMax(1E-3, s.height()));
     return d->localMatrix.map(center) - center;
 }
 
@@ -1632,6 +1641,25 @@ QSet<KoShape*> KoShape::toolDelegates() const
 {
     Q_D(const KoShape);
     return d->toolDelegates;
+}
+
+void KoShape::beginEditBlock()
+{
+    Q_D(KoShape);
+    d->editBlockDepth++;
+}
+
+void KoShape::endEditBlock()
+{
+    Q_D(KoShape);
+    if (d->editBlockDepth == 0) {
+        kWarning(30006) << "out of sync endEditBlock called, already ended block";
+        return;
+    }
+    if (--d->editBlockDepth == 0 && d->editBlockEndShouldEmit) {
+        d->shapeChanged(GenericMatrixChange);
+        d->editBlockEndShouldEmit = false;
+    }
 }
 
 void KoShape::setToolDelegates(const QSet<KoShape*> &delegates)

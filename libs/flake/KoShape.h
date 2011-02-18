@@ -871,6 +871,29 @@ public:
     void setToolDelegates(const QSet<KoShape*> &delegates);
 
     /**
+     * Mark the beginning of an edit block where the user can call various times to
+     * the geometry change methods without the shape telling this to listeners like
+     * the container or the dependee.
+     * This method is useful to avoid external listeners to act on every change to
+     * position / scale and general transformations while the state of the shape
+     * may not be completely sane at every step.  Consider calling this method
+     * whenever you call applyTransformation or a similar method more than once in
+     * sequence.
+     * Note that calls to beginEditBlock can be nested up to 16 levels.
+     * @see endEditBlock, shapeChanged
+     */
+    void beginEditBlock();
+
+    /**
+     * End an edit block started with beginEditBlock.
+     * When the total amount of endEditBlock calls is equal to the amount of beginEditBlock
+     * the shape will call shapeChanged with a single GenericMatrixChange
+     * (providing there were changes made).
+     * @see beginEditBlock, shapeChanged
+     */
+    void endEditBlock();
+
+    /**
      * \internal
      * Returns the private object for use within the flake lib
      */

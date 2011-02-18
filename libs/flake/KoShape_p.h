@@ -108,6 +108,9 @@ public:
     int selectable : 1;
     int detectCollision : 1;
     int protectContent : 1;
+    int editBlockDepth : 4;
+    int editBlockEndShouldEmit : 1;
+    int dummy : 4; // filler till 32 bits, adjust whenever altering the set!
 
     Q_DECLARE_PUBLIC(KoShape)
 };
