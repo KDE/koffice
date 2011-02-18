@@ -53,7 +53,10 @@ public:
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
     KoShape *original() {return m_original;}
-    void resetOriginal() {m_original=0;}
+    void resetOriginal();
+
+protected:
+    virtual void shapeChanged(ChangeType type, KoShape *shape = 0);
 
 private:
     KoShape *m_original;

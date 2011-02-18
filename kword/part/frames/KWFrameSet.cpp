@@ -28,7 +28,8 @@ KWFrameSet::KWFrameSet(KWord::FrameSetType type)
     : QObject(),
     m_type(type),
     m_newFrameBehavior(KWord::NoFollowupFrame),
-    m_frameBehavior(KWord::AutoExtendFrameBehavior)
+    m_frameBehavior(KWord::AutoExtendFrameBehavior),
+    m_placement(SynchronizedPlacement)
 {
 }
 

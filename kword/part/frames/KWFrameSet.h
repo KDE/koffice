@@ -131,9 +131,17 @@ public:
         FlexiblePlacement,
         // All shapes are at the exact same position from the top/left of the page.
         SynchronizedPlacement,
-        // X pos is from page binding edge.
+        // X pos is from page binding edge.  (style:horizontal-pos="from-inside")
         EvenOddPlacement
     };
+
+    void setShapeSeriesPlacement(ShapeSeriesPlacement placement) {
+        m_placement = placement;
+    }
+
+    ShapeSeriesPlacement shapeSeriesPlacement() const {
+        return m_placement;
+    }
 
 /*
     When the page-anchored shape is saved to ODF we use one of the style:horizontal-pos
@@ -188,6 +196,7 @@ private:
     QString m_name;
     KWord::NewFrameBehavior m_newFrameBehavior;
     KWord::FrameBehavior m_frameBehavior;
+    ShapeSeriesPlacement m_placement;
 };
 
 #endif

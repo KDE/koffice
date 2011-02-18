@@ -169,6 +169,7 @@ void ShapeResizeStrategy::resizeBy(const QPointF &center, qreal zoomX, qreal zoo
     int i = 0;
     foreach (KoShape *shape, m_selectedShapes) {
         shape->update();
+        shape->beginEditBlock();
 
         // this uses resize for the zooming part
         shape->applyAbsoluteTransformation(m_unwindMatrix);
@@ -210,6 +211,7 @@ void ShapeResizeStrategy::resizeBy(const QPointF &center, qreal zoomX, qreal zoo
 
         shape->applyAbsoluteTransformation(m_windMatrix);
 
+        shape->endEditBlock();
         shape->update();
         i++;
     }

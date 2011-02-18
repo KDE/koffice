@@ -41,10 +41,13 @@ KWCopyShape::KWCopyShape(KoShape *original, const KWPageManager *pageManager)
     QSet<KoShape*> delegates;
     delegates << m_original;
     setToolDelegates(delegates);
+    m_original->addDependee(this);
 }
 
 KWCopyShape::~KWCopyShape()
 {
+    if (m_original)
+        m_original->removeDependee(this);
 }
 
 void KWCopyShape::paint(QPainter &painter, const KoViewConverter &converter)
@@ -137,4 +140,43 @@ bool KWCopyShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &co
 #endif
 
     return false; // TODO
+}
+
+void KWCopyShape::resetOriginal()
+{
+    if (m_original)
+        m_original->removeDependee(this);
+    m_original = 0;
+}
+
+void KWCopyShape::shapeChanged(ChangeType type, KoShape *shape)
+{
+    if (shape == 0)
+        return;
+    switch (type) {
+    case PositionChanged:
+    case RotationChanged:
+    case ScaleChanged:
+    case SizeChanged:
+    case GenericMatrixChange:
+    case ShearChanged:
+        if (m_pageManager) {
+            KWPage currentPage = m_pageManager->page(this);
+            KWPage otherPage = m_pageManager->page(shape);
+            if (currentPage.isValid() && otherPage.isValid() && currentPage != otherPage) {
+                // TODO add different strategies
+                update();
+                setTransformation(shape->transformation());
+                setPosition(shape->position() + QPointF(0, currentPage.offsetInDocument() - otherPage.offsetInDocument()));
+                update();
+            }
+        }
+        break;
+    case Deleted: resetOriginal(); break;
+    case BorderChanged: // TODO
+    case BackgroundChanged: // TODO
+    case ShadowChanged: // TODO
+    default:
+        ;
+    }
 }
