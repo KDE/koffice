@@ -49,6 +49,7 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc)
         m_pageManager(0),
         m_kwordDocument(doc)
 {
+    setShapeSeriesPlacement(KWord::NoAutoPlacement);
     m_document->setDocumentLayout(new KWTextDocumentLayout(this));
     if (m_kwordDocument) {
         KoTextDocument doc(m_document);
@@ -74,6 +75,7 @@ KWTextFrameSet::KWTextFrameSet(const KWDocument *doc, KWord::TextFrameSetType ty
         m_pageManager(0),
         m_kwordDocument(doc)
 {
+    setShapeSeriesPlacement(KWord::NoAutoPlacement);
     m_document->setDocumentLayout(new KWTextDocumentLayout(this));
     if (m_kwordDocument) {
         KoTextDocument doc(m_document);

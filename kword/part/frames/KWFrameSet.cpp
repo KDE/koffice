@@ -29,7 +29,7 @@ KWFrameSet::KWFrameSet(KWord::FrameSetType type)
     m_type(type),
     m_newFrameBehavior(KWord::NoFollowupFrame),
     m_frameBehavior(KWord::AutoExtendFrameBehavior),
-    m_placement(SynchronizedPlacement)
+    m_placement(KWord::SynchronizedPlacement)
 {
 }
 

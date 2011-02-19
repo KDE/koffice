@@ -20,6 +20,7 @@
 #define KWCOPYSHAPE_H
 
 #include "kword_export.h"
+#include "../KWord.h"
 
 #include <KoShape.h>
 
@@ -52,6 +53,14 @@ public:
     /// reimplemented
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
+    /// policy to determine what to do when the original shape moves
+    void setShapeSeriesPlacement(KWord::ShapeSeriesPlacement placement);
+
+    /// policy to determine what to do when the original shape moves
+    KWord::ShapeSeriesPlacement shapeSeriesPlacement() const {
+        return m_placementPolicy;
+    }
+
     KoShape *original() {return m_original;}
     void resetOriginal();
 
@@ -61,6 +70,7 @@ protected:
 private:
     KoShape *m_original;
     const KWPageManager *m_pageManager;
+    KWord::ShapeSeriesPlacement m_placementPolicy;
 };
 
 #endif

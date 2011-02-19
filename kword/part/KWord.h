@@ -118,6 +118,19 @@ namespace KWord
         CurrentPageCount,
         FrameOutlineColor
     };
+
+    /**
+     * For shapes that have as newFrameBehavior that they can be auto-copied to next pages.
+     */
+    enum ShapeSeriesPlacement {
+        NoAutoPlacement, ///< No placement at all.
+        /// Auto-copy placement of last page and allow user to move it different on every page
+        FlexiblePlacement,
+        /// All shapes are at the exact same position from the top/left of the page.
+        SynchronizedPlacement,
+        /// X pos is from page binding edge.  (style:horizontal-pos="from-inside")
+        EvenOddPlacement
+    };
 }
 
 #endif

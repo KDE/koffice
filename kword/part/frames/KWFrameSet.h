@@ -123,23 +123,11 @@ public:
         m_frameBehavior = fb;
     }
 
-    /**
-     * For shapes that have as newFrameBehavior that they can be auto-copied to next pages.
-     */
-    enum ShapeSeriesPlacement {
-        // Auto-copy placement of last page and allow user to move it different on every page
-        FlexiblePlacement,
-        // All shapes are at the exact same position from the top/left of the page.
-        SynchronizedPlacement,
-        // X pos is from page binding edge.  (style:horizontal-pos="from-inside")
-        EvenOddPlacement
-    };
-
-    void setShapeSeriesPlacement(ShapeSeriesPlacement placement) {
+    void setShapeSeriesPlacement(KWord::ShapeSeriesPlacement placement) {
         m_placement = placement;
     }
 
-    ShapeSeriesPlacement shapeSeriesPlacement() const {
+    KWord::ShapeSeriesPlacement shapeSeriesPlacement() const {
         return m_placement;
     }
 
@@ -196,7 +184,7 @@ private:
     QString m_name;
     KWord::NewFrameBehavior m_newFrameBehavior;
     KWord::FrameBehavior m_frameBehavior;
-    ShapeSeriesPlacement m_placement;
+    KWord::ShapeSeriesPlacement m_placement;
 };
 
 #endif

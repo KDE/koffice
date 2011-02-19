@@ -33,7 +33,8 @@
 
 KWCopyShape::KWCopyShape(KoShape *original, const KWPageManager *pageManager)
         : m_original(original),
-        m_pageManager(pageManager)
+        m_pageManager(pageManager),
+        m_placementPolicy(KWord::FlexiblePlacement)
 {
     setSize(m_original->size());
     setSelectable(original->isSelectable());
@@ -149,27 +150,47 @@ void KWCopyShape::resetOriginal()
     m_original = 0;
 }
 
+void KWCopyShape::setShapeSeriesPlacement(KWord::ShapeSeriesPlacement placement)
+{
+    m_placementPolicy = placement;
+    shapeChanged(GenericMatrixChange, m_original);
+}
+
 void KWCopyShape::shapeChanged(ChangeType type, KoShape *shape)
 {
     if (shape == 0)
         return;
+    if (m_placementPolicy == KWord::NoAutoPlacement)
+        return;
     switch (type) {
     case PositionChanged:
     case RotationChanged:
+    case ShearChanged:
+        if (m_placementPolicy == KWord::FlexiblePlacement)
+            return;
+        // fall through
     case ScaleChanged:
     case SizeChanged:
     case GenericMatrixChange:
-    case ShearChanged:
+        setSize(m_original->size());
         if (m_pageManager) {
             KWPage currentPage = m_pageManager->page(this);
             KWPage otherPage = m_pageManager->page(shape);
-            if (currentPage.isValid() && otherPage.isValid() && currentPage != otherPage) {
-                // TODO add different strategies
-                update();
-                setTransformation(shape->transformation());
-                setPosition(shape->position() + QPointF(0, currentPage.offsetInDocument() - otherPage.offsetInDocument()));
-                update();
+            if (!(currentPage.isValid() && otherPage.isValid() && currentPage != otherPage))
+                return; // nothing to do
+            update();
+            beginEditBlock();
+            setTransformation(shape->transformation());
+            if (m_placementPolicy == KWord::SynchronizedPlacement) {
+                setPosition(shape->position() + QPointF(0, currentPage.offsetInDocument()
+                            - otherPage.offsetInDocument()));
+            } else if (m_placementPolicy == KWord::EvenOddPlacement) {
+                // TODO
+                setPosition(shape->position() + QPointF(0, currentPage.offsetInDocument()
+                            - otherPage.offsetInDocument()));
             }
+            endEditBlock();
+            update();
         }
         break;
     case Deleted: resetOriginal(); break;
