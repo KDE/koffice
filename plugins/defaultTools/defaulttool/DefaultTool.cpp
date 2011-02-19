@@ -37,21 +37,17 @@
 #include <KoShapeConnection.h>
 #include <KoToolSelection.h>
 #include <KoToolManager.h>
-#include <KoSelection.h>
+#include <KoGuidesData.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
 #include <KoShapeGroup.h>
-#include <KoShapeLayer.h>
 #include <KoShapePaste.h>
 #include <KoShapeOdfSaveHelper.h>
 #include <KoDrag.h>
-#include <KoDocument.h>
 #include <KoCanvasBase.h>
 #include <KoResourceManager.h>
 #include <KoShapeRubberSelectStrategy.h>
 #include <commands/KoShapeMoveCommand.h>
-#include <commands/KoShapeDeleteCommand.h>
-#include <commands/KoShapeCreateCommand.h>
 #include <commands/KoShapeGroupCommand.h>
 #include <commands/KoShapeUngroupCommand.h>
 #include <KoSnapGuide.h>
@@ -59,7 +55,6 @@
 #include <KDebug>
 
 #include <KAction>
-#include <QKeyEvent>
 #include <QClipboard>
 #include <kstandarddirs.h>
 
