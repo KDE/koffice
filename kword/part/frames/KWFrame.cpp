@@ -193,7 +193,6 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
     m_shape->removeAdditionalAttribute("fo:min-height");
     m_shape->removeAdditionalAttribute("koffice:frame-copy-to-facing-pages");
     m_shape->removeAdditionalAttribute("text:anchor-page-number");
-    m_shape->removeAdditionalAttribute("text:anchor-page-number");
     m_shape->removeAdditionalAttribute("text:anchor-type");
     m_shape->removeAdditionalStyleAttribute("fo:margin");
     m_shape->removeAdditionalStyleAttribute("fo:margin-left");
