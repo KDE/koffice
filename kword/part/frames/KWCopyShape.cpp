@@ -185,9 +185,12 @@ void KWCopyShape::shapeChanged(ChangeType type, KoShape *shape)
                 setPosition(shape->position() + QPointF(0, currentPage.offsetInDocument()
                             - otherPage.offsetInDocument()));
             } else if (m_placementPolicy == KWord::EvenOddPlacement) {
-                // TODO
-                setPosition(shape->position() + QPointF(0, currentPage.offsetInDocument()
-                            - otherPage.offsetInDocument()));
+                QPointF pos(shape->position());
+                // move down;
+                pos.setY(pos.y() + currentPage.offsetInDocument() - otherPage.offsetInDocument());
+                // mirror positioning
+                pos.setX(currentPage.width() - size().width() - pos.x());
+                setPosition(pos);
             }
             endEditBlock();
             update();

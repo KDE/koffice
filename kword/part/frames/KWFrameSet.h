@@ -123,23 +123,11 @@ public:
         m_frameBehavior = fb;
     }
 
-    void setShapeSeriesPlacement(KWord::ShapeSeriesPlacement placement) {
-        m_placement = placement;
-    }
+    void setShapeSeriesPlacement(KWord::ShapeSeriesPlacement placement);
 
     KWord::ShapeSeriesPlacement shapeSeriesPlacement() const {
         return m_placement;
     }
-
-/*
-    When the page-anchored shape is saved to ODF we use one of the style:horizontal-pos
-    options to store this info but we will still save all shapes in the series.
-
-This means that when a shape is moved we should somehow get a notification and respond
-by moving all the copy shapes according to the policy.
-
-
-*/
 
 
 #ifndef NDEBUG

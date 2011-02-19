@@ -66,7 +66,7 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
     m_state->addUser();
     m_frames = frames;
     // checkboxes
-    GuiHelper copyFrame, protectContent, evenOdd, keepAspect;
+    GuiHelper copyFrame, protectContent, evenOdd, keepAspect, placement, oddPlacement;
     // radioGroups
     GuiHelper::State newFrame = GuiHelper::Unset, frameBehavior = GuiHelper::Unset;
     KWord::NewFrameBehavior nfb = KWord::ReconnectNewFrame;
@@ -96,6 +96,21 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
         else
             hasTextFrame = true;
         protectContent.addState(frame->shape()->isContentProtected() ? GuiHelper::On : GuiHelper::Off);
+        switch (fs->shapeSeriesPlacement()) {
+        case KWord::NoAutoPlacement:
+        case KWord::FlexiblePlacement:
+            placement.addState(GuiHelper::Off);
+            oddPlacement.addState(GuiHelper::Off);
+            break;
+        case KWord::SynchronizedPlacement:
+            placement.addState(GuiHelper::On);
+            oddPlacement.addState(GuiHelper::Off);
+            break;
+        case KWord::EvenOddPlacement:
+            placement.addState(GuiHelper::On);
+            oddPlacement.addState(GuiHelper::On);
+            break;
+        }
     }
 
 
@@ -121,6 +136,9 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
         m_textGroup->button(fb)->setChecked(true);
     else if (frameBehavior == GuiHelper::Unset)
         widget.textGroupBox->setVisible(false);
+
+    placement.updateCheckBox(widget.syncPos, false);
+    oddPlacement.updateCheckBox(widget.mirrorPos, false);
 }
 
 void KWGeneralFrameProperties::save()
@@ -146,9 +164,17 @@ void KWGeneralFrameProperties::save()
         }
         if (widget.evenOdd->checkState() != Qt::PartiallyChecked)
             frame->setFrameOnBothSheets(widget.evenOdd->checkState() != Qt::Checked);
-        if (frame->frameSet()) {
-            if (widget.protectContent->checkState() != Qt::PartiallyChecked)
-                frame->shape()->setContentProtected(widget.protectContent->checkState() == Qt::Checked);
+        if (widget.protectContent->checkState() != Qt::PartiallyChecked)
+            frame->shape()->setContentProtected(widget.protectContent->checkState() == Qt::Checked);
+        if (m_newPageGroup->checkedId() != KWord::NoFollowupFrame) {
+            if (widget.syncPos->checkState() == Qt::Checked) {
+                if (widget.mirrorPos->isChecked())
+                    frame->frameSet()->setShapeSeriesPlacement(KWord::EvenOddPlacement);
+                else
+                    frame->frameSet()->setShapeSeriesPlacement(KWord::SynchronizedPlacement);
+            } else if (widget.syncPos->checkState() == Qt::Unchecked) {
+                frame->frameSet()->setShapeSeriesPlacement(KWord::FlexiblePlacement);
+            }
         }
     }
     m_state->removeUser();
@@ -157,6 +183,8 @@ void KWGeneralFrameProperties::save()
 void KWGeneralFrameProperties::newPageGroupUpdated(int which)
 {
     widget.createNewPage->setEnabled(which == KWord::ReconnectNewFrame);
+    widget.mirrorPos->setEnabled(which == KWord::NoFollowupFrame
+            && widget.syncPos->isChecked());
 }
 
 void KWGeneralFrameProperties::keepAspectChanged()

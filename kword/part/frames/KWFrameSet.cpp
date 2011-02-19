@@ -71,6 +71,25 @@ void KWFrameSet::removeFrame(KWFrame *frame, KoShape *shape)
     }
 }
 
+void KWFrameSet::setShapeSeriesPlacement(KWord::ShapeSeriesPlacement placement)
+{
+    if (placement == m_placement)
+        return;
+    m_placement = placement;
+    if (m_frames.count() <= 1)
+        return;
+
+    QList<KWFrame*>::Iterator iter = m_frames.end();
+    --iter;
+    do {
+        KWCopyShape *cs = dynamic_cast<KWCopyShape*>((*iter)->shape());
+        if (cs == 0)
+            break;
+        cs->setShapeSeriesPlacement(placement);
+        --iter;
+    } while (iter != m_frames.begin());
+}
+
 #ifndef NDEBUG
 void KWFrameSet::printDebug()
 {

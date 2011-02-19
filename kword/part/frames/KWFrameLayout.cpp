@@ -209,6 +209,7 @@ void KWFrameLayout::createNewFramesForPage(int pageNumber)
             KWFrame *f;
             KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(frame->frameSet());
             if (tfs && frame->frameSet()->newFrameBehavior() != KWord::CopyNewFrame) {
+                // TODO check if frame was full, if not, don't copy.
                 f = new KWTextFrame(createTextShape(page), tfs);
             } else {
                 KWFrameSet *fs = frame->frameSet();
@@ -224,8 +225,7 @@ void KWFrameLayout::createNewFramesForPage(int pageNumber)
             f->copySettings(frame);
             qreal x = frame->shape()->position().x();
             if (odd && frame->frameSet()->shapeSeriesPlacement() == KWord::EvenOddPlacement) {
-                x = page.width() - x;
-                x = qMin(x, page.width() - f->shape()->size().width());
+                x = page.width() - f->shape()->size().width() - x;
             }
             f->shape()->setPosition(x, page.offsetInDocument() + offsetFromPage);
         }
