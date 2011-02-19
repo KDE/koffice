@@ -403,6 +403,8 @@ void KWDocument::removeFrame(KWFrame *frame)
         return; // can only delete last page.
     foreach (KWFrameSet *fs, m_frameSets) {
         foreach (KWFrame *f, fs->frames()) {
+            if (f->isCopy())
+                continue;
             if (page == pageManager()->page(f->shape()))
                 return;
         }
