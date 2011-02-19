@@ -30,6 +30,8 @@
 #include <KoXmlNS.h>
 #include <KoTextShapeData.h>
 
+#include <KDebug>
+
 KWFrame::KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber)
         : m_shape(shape),
         m_copyToEverySheet(true),
@@ -125,10 +127,6 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
         }
     }
 
-    m_shape->setAdditionalStyleAttribute("style:horizontal-pos", "from-left");
-    m_shape->setAdditionalStyleAttribute("style:horizontal-rel", "page");
-    m_shape->setAdditionalStyleAttribute("style:vertical-pos", "from-top");
-    m_shape->setAdditionalStyleAttribute("style:vertical-rel", "page");
     QString value;
     switch (textRunAround()) {
     case KWord::RunAround:
@@ -175,7 +173,7 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
     if (!value.isEmpty()) {
         m_shape->setAdditionalStyleAttribute("koffice:frame-behavior-on-new-page", value);
         if (!frameOnBothSheets())
-            m_shape->setAdditionalAttribute("koffice:frame-copy-to-facing-pages", "true");
+            m_shape->setAdditionalStyleAttribute("koffice:frame-copy-to-facing-pages", "true");
     }
 
 
@@ -184,14 +182,36 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
 
     const int effectiveZIndex = m_shape->zIndex() + pageZIndexOffset;
     m_shape->setAdditionalAttribute("draw:z-index", QString::number(effectiveZIndex));
+
     m_shape->setAdditionalAttribute("text:anchor-type", "page");
     m_shape->setAdditionalAttribute("text:anchor-page-number", QString::number(page.pageNumber()));
-    context.addShapeOffset(m_shape, QTransform(1, 0, 0 , 1, 0, -pagePos));
+    m_shape->setAdditionalStyleAttribute("style:horizontal-rel", "page");
+    m_shape->setAdditionalStyleAttribute("style:vertical-pos", "from-top");
+    m_shape->setAdditionalStyleAttribute("style:vertical-rel", "page");
+    switch (frameSet()->shapeSeriesPlacement()) {
+    case KWord::NoAutoPlacement:
+    case KWord::FlexiblePlacement:
+    case KWord::SynchronizedPlacement:
+        context.addShapeOffset(m_shape, QTransform(1, 0, 0 , 1, 0, -pagePos));
+        m_shape->setAdditionalStyleAttribute("style:horizontal-pos", "from-left");
+        break;
+    case KWord::EvenOddPlacement:
+        m_shape->setAdditionalStyleAttribute("style:horizontal-pos", "from-inside");
+        qreal x = 0;
+        if (page.pageSide() == KWPage::Left) // mirror pos since its from the other edge
+            x = page.width();
+        context.addShapeOffset(m_shape, QTransform(1, 0, 0 , 1, x, -pagePos));
+        break;
+    }
+    if (frameSet()->shapeSeriesPlacement() == KWord::SynchronizedPlacement
+            || frameSet()->shapeSeriesPlacement() == KWord::EvenOddPlacement) {
+        m_shape->setAdditionalStyleAttribute("koffice:frame-copy-position", "true");
+    }
+
     m_shape->saveOdf(context);
     context.removeShapeOffset(m_shape);
     m_shape->removeAdditionalAttribute("draw:z-index");
     m_shape->removeAdditionalAttribute("fo:min-height");
-    m_shape->removeAdditionalAttribute("koffice:frame-copy-to-facing-pages");
     m_shape->removeAdditionalAttribute("text:anchor-page-number");
     m_shape->removeAdditionalAttribute("text:anchor-type");
     m_shape->removeAdditionalStyleAttribute("fo:margin");
@@ -204,6 +224,9 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
     m_shape->removeAdditionalStyleAttribute("fo:padding-top");
     m_shape->removeAdditionalStyleAttribute("fo:padding-bottom");
     m_shape->removeAdditionalStyleAttribute("fo:padding-right");
+    m_shape->removeAdditionalStyleAttribute("style:horizontal-pos");
+    m_shape->removeAdditionalStyleAttribute("koffice:frame-copy-to-facing-pages");
+    m_shape->removeAdditionalStyleAttribute("koffice:frame-copy-position");
 }
 
 bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*context */)
@@ -228,14 +251,14 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
         }
     }
 
-    QString overflow = properties.attributeNS(KoXmlNS::style, "overflow-behavior", QString());
+    QString overflow = properties.attributeNS(KoXmlNS::style, "overflow-behavior");
     if (overflow == "clip")
         frameSet()->setFrameBehavior(KWord::IgnoreContentFrameBehavior);
     else if (overflow == "auto-create-new-frame")
         frameSet()->setFrameBehavior(KWord::AutoCreateNewFrameBehavior);
     else
         frameSet()->setFrameBehavior(KWord::AutoExtendFrameBehavior);
-    QString newFrameBehavior = properties.attributeNS(KoXmlNS::koffice, "frame-behavior-on-new-page", QString());
+    QString newFrameBehavior = properties.attributeNS(KoXmlNS::koffice, "frame-behavior-on-new-page");
     if (frameSet() == 0);
     else if (newFrameBehavior == "followup")
         frameSet()->setNewFrameBehavior(KWord::ReconnectNewFrame);
@@ -302,7 +325,22 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
             setRunAroundSide(KWord::BothRunAroundSide);
     }
     setFrameOnBothSheets(properties.attributeNS(KoXmlNS::koffice,
-                "frame-copy-to-facing-pages default").compare("true", Qt::CaseInsensitive));
+                "frame-copy-to-facing-pages").compare("true", Qt::CaseInsensitive) != 0);
+
+    const bool copyPos = properties.attributeNS(KoXmlNS::koffice,
+                "frame-copy-position").compare("true", Qt::CaseInsensitive) == 0;
+    const bool mirror = properties.attributeNS(KoXmlNS::style,
+                "horizontal-pos").compare("from-inside") == 0;
+
+    if (!copyPos) {
+        frameSet()->setShapeSeriesPlacement(KWord::FlexiblePlacement);
+    } else {
+        if (mirror)
+            frameSet()->setShapeSeriesPlacement(KWord::EvenOddPlacement);
+        else
+            frameSet()->setShapeSeriesPlacement(KWord::SynchronizedPlacement);
+    }
+
     return true;
 }
 
