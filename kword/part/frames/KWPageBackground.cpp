@@ -25,11 +25,6 @@ KWPageBackground::KWPageBackground()
     setSelectable(false);
 }
 
-KWPageBackground::~KWPageBackground()
-{
-
-}
-
 void KWPageBackground::paint(QPainter &painter, const KoViewConverter &converter)
 {
     if (background()) {
@@ -38,14 +33,4 @@ void KWPageBackground::paint(QPainter &painter, const KoViewConverter &converter
         p.addRect(QRectF(QPointF(), size()));
         background()->paint(painter, p);
     }
-}
-
-bool KWPageBackground::loadOdf(const KoXmlElement &, KoShapeLoadingContext &)
-{
-    return true;
-}
-
-void KWPageBackground::saveOdf(KoShapeSavingContext &) const
-{
-
 }
