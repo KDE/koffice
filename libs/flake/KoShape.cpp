@@ -1557,8 +1557,7 @@ bool KoShape::addDependee(KoShape *shape)
     if (shape->hasDependee(this))
         return false;
 
-    if (! d->dependees.contains(shape))
-        d->dependees.append(shape);
+    d->dependees.insert(shape);
 
     return true;
 }
@@ -1566,9 +1565,7 @@ bool KoShape::addDependee(KoShape *shape)
 void KoShape::removeDependee(KoShape *shape)
 {
     Q_D(KoShape);
-    int index = d->dependees.indexOf(shape);
-    if (index >= 0)
-        d->dependees.removeAt(index);
+    d->dependees.remove(shape);
 }
 
 bool KoShape::hasDependee(KoShape *shape) const

@@ -89,7 +89,7 @@ public:
     KoShapeBackground * fill; ///< Stands for the background color / fill etc.
     KoShapeBorderBase *border; ///< points to a border, or 0 if there is no border
     KoShape *q_ptr;
-    QList<KoShape*> dependees; ///< list of shape dependent on this shape
+    QSet<KoShape*> dependees; ///< set of shapes dependent on this shape
     KoShapeShadow * shadow; ///< the current shape shadow
     QMap<QString, QString> additionalAttributes;
     QMap<QByteArray, QString> additionalStyleAttributes;
