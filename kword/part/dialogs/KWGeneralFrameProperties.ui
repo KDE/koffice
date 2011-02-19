@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>491</width>
-    <height>255</height>
+    <height>281</height>
    </rect>
   </property>
   <layout class="QGridLayout">
@@ -82,7 +82,7 @@
        <property name="title">
         <string>When Creating a Page</string>
        </property>
-       <layout class="QVBoxLayout">
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QRadioButton" name="reconnect">
           <property name="text">
@@ -105,18 +105,38 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="evenOdd">
-          <property name="text">
-           <string>Only on even/odd pages</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>10</width>
+              <height>10</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="evenOdd">
+            <property name="text">
+             <string>Only on even/odd pages</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
      </item>
     </layout>
    </item>
-   <item row="4" column="0">
+   <item row="3" column="0">
     <widget class="QCheckBox" name="protectContent">
      <property name="text">
       <string>Protect content</string>
@@ -130,14 +150,7 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QCheckBox" name="allFrames">
-     <property name="text">
-      <string>Changes will be applied to all shapes in the linked list</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0">
+   <item row="4" column="0">
     <spacer>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -169,7 +182,6 @@
   <tabstop>noFollowup</tabstop>
   <tabstop>placeCopy</tabstop>
   <tabstop>evenOdd</tabstop>
-  <tabstop>allFrames</tabstop>
   <tabstop>protectContent</tabstop>
  </tabstops>
  <resources/>

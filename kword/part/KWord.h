@@ -123,8 +123,9 @@ namespace KWord
      * For shapes that have as newFrameBehavior that they can be auto-copied to next pages.
      */
     enum ShapeSeriesPlacement {
-        NoAutoPlacement, ///< No placement at all.
         /// Auto-copy placement of last page and allow user to move it different on every page
+        NoAutoPlacement,
+        /// Same as above, position will be left untouched but size etc are copied.
         FlexiblePlacement,
         /// All shapes are at the exact same position from the top/left of the page.
         SynchronizedPlacement,

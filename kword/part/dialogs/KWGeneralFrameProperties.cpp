@@ -48,7 +48,6 @@ void KWGeneralFrameProperties::open(KoShape *shape)
     // set default values
     widget.isCopyOfPrevious->setEnabled(false);
     widget.protectContent->setVisible(false);
-    widget.allFrames->setVisible(false);
     widget.resizeLastFrame->setChecked(true);
     widget.isCopyOfPrevious->setVisible(false);
     widget.keepAspectRatio->setChecked(shape->keepAspectRatio());
@@ -67,7 +66,7 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
     m_state->addUser();
     m_frames = frames;
     // checkboxes
-    GuiHelper copyFrame, allFrames, protectContent, evenOdd, keepAspect;
+    GuiHelper copyFrame, protectContent, evenOdd, keepAspect;
     // radioGroups
     GuiHelper::State newFrame = GuiHelper::Unset, frameBehavior = GuiHelper::Unset;
     KWord::NewFrameBehavior nfb = KWord::ReconnectNewFrame;
@@ -88,12 +87,7 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
             newFrame = GuiHelper::TriState;
         }
 
-        if (fs->frameCount() > 1) {
-            allFrames.addState(GuiHelper::On);
-            if (frame->frameSet()->frames().indexOf(frame) > 0)
-                copyFrame.addState(frame->isCopy() ? GuiHelper::On : GuiHelper::Off);
-        }
-
+        copyFrame.addState(frame->isCopy() ? GuiHelper::On : GuiHelper::Off);
         evenOdd.addState(frame->frameOnBothSheets() ? GuiHelper::On : GuiHelper::Off);
 
         KWTextFrameSet *textFs = dynamic_cast<KWTextFrameSet *>(frame->frameSet());
@@ -115,7 +109,6 @@ void KWGeneralFrameProperties::open(const QList<KWFrame*> &frames)
 
     copyFrame.updateCheckBox(widget.isCopyOfPrevious, false);
     widget.isCopyOfPrevious->setEnabled(false);
-    allFrames.updateCheckBox(widget.allFrames, true);
     protectContent.updateCheckBox(widget.protectContent, true);
     keepAspect.updateCheckBox(widget.keepAspectRatio, true);
     evenOdd.updateCheckBox(widget.evenOdd, false);
@@ -156,13 +149,6 @@ void KWGeneralFrameProperties::save()
         if (frame->frameSet()) {
             if (widget.protectContent->checkState() != Qt::PartiallyChecked)
                 frame->shape()->setContentProtected(widget.protectContent->checkState() == Qt::Checked);
-            if (widget.allFrames->isEnabled() && widget.allFrames->checkState() == Qt::Checked) {
-                foreach (KWFrame *otherFrame, frame->frameSet()->frames()) {
-                    if (m_frames.contains(otherFrame))
-                        continue;
-                    // TODO add on KWFrame: virtual void copySettings(const KWFrame *frame)
-                }
-            }
         }
     }
     m_state->removeUser();
