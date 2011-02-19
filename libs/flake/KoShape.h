@@ -250,6 +250,11 @@ public:
      */
     virtual void setSize(const QSizeF &size);
 
+    /// This function overloads setSize() and is provided for convenience
+    inline void setSize(qreal width, qreal height) {
+        setSize(QSizeF(width, height));
+    }
+
     /**
      * @brief Get the size of the shape in pt.
      *
@@ -264,7 +269,12 @@ public:
      *
      * @param position the new position of the shape
      */
-    virtual void setPosition(const QPointF &position);
+    void setPosition(const QPointF &position);
+
+    /// This function overloads setPosition() and is provided for convenience
+    inline void setPosition(qreal x, qreal y) {
+        setPosition(QPointF(x, y));
+    }
 
     /**
      * @brief Get the position of the shape in pt
