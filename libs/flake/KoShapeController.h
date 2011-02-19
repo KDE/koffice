@@ -87,7 +87,7 @@ public:
     QUndoCommand* removeShape(KoShape *shape, QUndoCommand *parent = 0);
 
     /**
-     * Remove a shape from the document.
+     * Remove a series of shapes from the document.
      *
      * @param shapes the set of shapes to remove from the document
      * @param parent the parent command if the resulting command is a compound undo command.
