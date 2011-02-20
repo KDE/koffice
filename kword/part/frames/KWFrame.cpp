@@ -39,8 +39,7 @@ KWFrame::KWFrame(KoShape *shape, KWFrameSet *parent, int pageNumber)
         m_runAround(KWord::RunAround),
         m_anchoredPageNumber(pageNumber),
         m_frameSet(parent),
-        m_outline(0),
-        m_margin(7, 7, 7, 7)
+        m_outline(0)
 {
     Q_ASSERT(shape);
     shape->setApplicationData(this);

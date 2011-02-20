@@ -101,6 +101,12 @@ void KWFrameGeometry::open(KoShape *shape)
     widget.width->changeValue(m_originalSize.width());
     widget.height->changeValue(m_originalSize.height());
 
+    // default values for new frames
+    widget.leftMargin->changeValue(MM_TO_POINT(3));
+    widget.rightMargin->changeValue(MM_TO_POINT(3));
+    widget.topMargin->changeValue(MM_TO_POINT(3));
+    widget.bottomMargin->changeValue(MM_TO_POINT(3));
+
     connect(widget.protectSize, SIGNAL(stateChanged(int)),
             this, SLOT(protectSizeChanged(int)));
 
@@ -140,10 +146,11 @@ void KWFrameGeometry::updateShape()
     QSizeF size(widget.width->value(), widget.height->value());
     frame->shape()->setSize(size);
 
-    if (frame->frameSet() && frame->frameSet()->type() == KWord::TextFrameSet) {
+    KWTextFrame *tfs = dynamic_cast <KWTextFrame*>(frame);
+    if (tfs) {
         KoInsets insets(widget.topMargin->value(), widget.leftMargin->value(),
                 widget.bottomMargin->value(), widget.rightMargin->value());
-        static_cast<KWTextFrame*>(frame)->setInsets(insets);
+        tfs->setInsets(insets);
     }
 
     frame->shape()->update();
