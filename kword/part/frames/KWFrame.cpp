@@ -331,14 +331,12 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
     const bool mirror = properties.attributeNS(KoXmlNS::style,
                 "horizontal-pos").compare("from-inside") == 0;
 
-    if (!copyPos) {
+    if (mirror)
+        frameSet()->setShapeSeriesPlacement(KWord::EvenOddPlacement);
+    else if (!copyPos)
         frameSet()->setShapeSeriesPlacement(KWord::FlexiblePlacement);
-    } else {
-        if (mirror)
-            frameSet()->setShapeSeriesPlacement(KWord::EvenOddPlacement);
-        else
-            frameSet()->setShapeSeriesPlacement(KWord::SynchronizedPlacement);
-    }
+    else if (!mirror)
+        frameSet()->setShapeSeriesPlacement(KWord::SynchronizedPlacement);
 
     return true;
 }
