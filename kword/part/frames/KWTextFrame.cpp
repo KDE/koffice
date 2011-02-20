@@ -61,7 +61,7 @@ void KWTextFrame::allowToGrow()
 
 void KWTextFrame::autoShrink(qreal requestedHeight)
 {
-kDebug() <<"autoShrink requested:" << requestedHeight <<", min:" << m_minimumFrameHeight <<", last:" << m_lastHeight;
+// kDebug() <<"autoShrink requested:" << requestedHeight <<", min:" << m_minimumFrameHeight <<", last:" << m_lastHeight;
     QSizeF size = shape()->size();
     if (qAbs(m_lastHeight - size.height()) > 1E-6) {  // if not equal
         m_minimumFrameHeight = size.height();
