@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2006 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -130,7 +130,18 @@ void KoCreateShapeStrategy::paint(QPainter &painter, const KoViewConverter &conv
 void KoCreateShapeStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers)
 {
     Q_D(KoShapeRubberSelectStrategy);
-    KoShapeRubberSelectStrategy::handleMouseMove(point, modifiers);
+    QPointF p(point);
+    if (modifiers & Qt::ControlModifier) { // keep aspect ratio
+        QRectF newRect(d->selectRect);
+        newRect.setBottomRight(point);
+        if (newRect.width() > newRect.height())
+            newRect.setWidth(newRect.height());
+        else
+            newRect.setHeight(newRect.width());
+        p = newRect.bottomRight();
+    }
+
+    KoShapeRubberSelectStrategy::handleMouseMove(p, modifiers);
     if (! m_outline.isEmpty())
         d->tool->canvas()->updateCanvas(d->selectedRect());
 }
