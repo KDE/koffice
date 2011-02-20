@@ -128,23 +128,24 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
         // So, lets remove this again when Zagge adds his new class that does this kind of thing. (KoLoadSave)
         KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(id);
         if (! factory) {
-            kWarning(30006) << "Application requested a shape that is not registered '" <<
-            id << "', Ignoring";
+            kWarning(30006) << "Application requested a shape that is not registered '"
+                << id << "', Ignoring";
             event->ignore();
             return;
         }
-        event->setDropAction(Qt::CopyAction);
-        event->accept();
+        event->acceptProposedAction();
 
         if (isTemplate) {
             KoProperties props;
             props.load(properties);
             m_draggedShape = factory->createShape(&props, m_parent->canvas()->shapeController()->resourceManager());
-        } else
+        } else {
             m_draggedShape = factory->createDefaultShape(m_parent->canvas()->shapeController()->resourceManager());
+        }
 
         Q_ASSERT(m_draggedShape);
-        if (!m_draggedShape) return;
+        if (!m_draggedShape)
+            return;
 
         if (m_draggedShape->shapeId().isEmpty())
             m_draggedShape->setShapeId(factory->id());
@@ -159,21 +160,18 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
         if (paste.paste(KoOdf::Text, data)) {
             QList<KoShape *> shapes = paste.pastedShapes();
             Q_ASSERT(!shapes.isEmpty());
-            if (shapes.count() > 1) {
-                Q_ASSERT(0); // hmm hmm, when does this happen?
-            }
+            Q_ASSERT(shapes.count() == 1); // would cause mem leak
             m_draggedShape = shapes.first();
             m_draggedShape->setZIndex(KoShapePrivate::MaxZIndex);
-            event->setDropAction(Qt::CopyAction);
-            event->accept();
+            event->acceptProposedAction();
         }
     }
 }
 
 void Viewport::handleDropEvent(QDropEvent *event)
 {
-
-    if (!m_draggedShape) return;
+    if (!m_draggedShape)
+        return;
     repaint(m_draggedShape);
     m_parent->canvas()->shapeManager()->remove(m_draggedShape); // remove it to not interfere with z-index calc.
 
@@ -192,8 +190,9 @@ void Viewport::handleDropEvent(QDropEvent *event)
 
         selection->deselectAll();
         selection->select(m_draggedShape);
-    } else
+    } else {
         delete m_draggedShape;
+    }
 
     m_draggedShape = 0;
 }
