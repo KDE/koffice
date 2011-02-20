@@ -101,11 +101,13 @@ void KWFrameGeometry::open(KoShape *shape)
     widget.width->changeValue(m_originalSize.width());
     widget.height->changeValue(m_originalSize.height());
 
-    // default values for new frames
-    widget.leftMargin->changeValue(MM_TO_POINT(3));
-    widget.rightMargin->changeValue(MM_TO_POINT(3));
-    widget.topMargin->changeValue(MM_TO_POINT(3));
-    widget.bottomMargin->changeValue(MM_TO_POINT(3));
+    if (m_frame == 0) {
+        // default values for new frames
+        widget.leftMargin->changeValue(MM_TO_POINT(3));
+        widget.rightMargin->changeValue(MM_TO_POINT(3));
+        widget.topMargin->changeValue(MM_TO_POINT(3));
+        widget.bottomMargin->changeValue(MM_TO_POINT(3));
+    }
 
     connect(widget.protectSize, SIGNAL(stateChanged(int)),
             this, SLOT(protectSizeChanged(int)));
