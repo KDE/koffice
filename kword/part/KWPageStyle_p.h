@@ -76,6 +76,8 @@ public:
         direction = other->direction;
         fullPageBackground = other->fullPageBackground;
         nextStyleName = other->nextStyleName;
+        fixedHeaderSize = other->fixedHeaderSize;
+        fixedFooterSize = other->fixedFooterSize;
     }
 };
 

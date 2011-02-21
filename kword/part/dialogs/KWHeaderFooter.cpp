@@ -69,8 +69,6 @@ void KWHeaderFooter::saveTo(KWPageStyle &style)
 
         style.setHeaderMinimumHeight(widget.headerFrameHeight->value());
         style.setFixedHeaderSize(widget.headerFixed->isChecked());
-        if (!widget.headerFixed->isChecked())
-            style.setHeaderDistance(widget.headerSecondSize->value());
 
         if (widget.headerFixed->isChecked()) {
             style.setHeaderMinimumHeight(widget.headerSecondSize->value());
@@ -112,7 +110,6 @@ void KWHeaderFooter::setUnit(const KoUnit &unit)
 
 void KWHeaderFooter::setHeaderLabel(bool fixed)
 {
-kDebug() << fixed;
     if (fixed) {
         widget.headerGapLabel->setText(i18n("Total Size:"));
         widget.headerSecondSize->changeValue(m_headerHeight);

@@ -332,15 +332,15 @@ KoGenStyle KWPageStyle::saveOdf() const
     if (headerPolicy() != KWord::HFTypeNone) {
         pageLayout.addProperty("style:dynamic-spacing", d->fixedHeaderSize, KoGenStyle::PageHeaderType);
         pageLayout.addPropertyPt("fo:min-height", d->headerMinimumHeight, KoGenStyle::PageHeaderType);
-        saveInsets(d->headerMargin, pageLayout, "margin", KoGenStyle::PageHeaderType);
-        saveInsets(d->headerInsets, pageLayout, "padding", KoGenStyle::PageHeaderType);
+        saveInsets(d->headerMargin, pageLayout, "fo:margin", KoGenStyle::PageHeaderType);
+        saveInsets(d->headerInsets, pageLayout, "fo:padding", KoGenStyle::PageHeaderType);
     }
 
     if (footerPolicy() != KWord::HFTypeNone) {
         pageLayout.addProperty("style:dynamic-spacing", d->fixedFooterSize, KoGenStyle::PageFooterType);
         pageLayout.addPropertyPt("fo:min-height", d->footerMinimumHeight, KoGenStyle::PageFooterType);
-        saveInsets(d->footerMargin, pageLayout, "margin", KoGenStyle::PageFooterType);
-        saveInsets(d->footerInsets, pageLayout, "padding", KoGenStyle::PageFooterType);
+        saveInsets(d->footerMargin, pageLayout, "fo:margin", KoGenStyle::PageFooterType);
+        saveInsets(d->footerInsets, pageLayout, "fo:padding", KoGenStyle::PageFooterType);
     }
 
     // TODO see how we should save margins if we use the 'closest to binding' stuff.
@@ -371,6 +371,7 @@ void KWPageStyle::loadOdf(KoOdfLoadingContext &context, const KoXmlElement &mast
     d->headerMargin = KoInsets();
     d->headerInsets = KoInsets();
     d->headerMinimumHeight = 0;
+    d->fixedHeaderSize = true;
     KoXmlElement header = KoXml::namedItemNS(style, KoXmlNS::style, "header-style");
     if (! header.isNull()) {
         KoXmlElement hfprops = KoXml::namedItemNS(header, KoXmlNS::style, "header-footer-properties");
@@ -378,6 +379,8 @@ void KWPageStyle::loadOdf(KoOdfLoadingContext &context, const KoXmlElement &mast
             d->headerMargin.fillFrom(hfprops, KoXmlNS::fo, "margin");
             d->headerInsets.fillFrom(hfprops, KoXmlNS::fo, "padding");
             d->headerMinimumHeight = KoUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "min-height"));
+            d->fixedHeaderSize = hfprops.attributeNS(KoXmlNS::style,
+                    "dynamic-spacing").compare("true", Qt::CaseInsensitive) == 0;
         // TODO there are quite some more properties we want to at least preserve between load and save
           //fo:background-color
            // and a possible style::background-image element
@@ -392,7 +395,6 @@ void KWPageStyle::loadOdf(KoOdfLoadingContext &context, const KoXmlElement &mast
           //style:border-line-width-left
           //style:border-line-width-right
           //style:border-line-width-top
-          //style:dynamic-spacing
           //style:shadow
         }
     }
@@ -400,6 +402,7 @@ void KWPageStyle::loadOdf(KoOdfLoadingContext &context, const KoXmlElement &mast
     d->footerMargin = KoInsets();
     d->footerInsets = KoInsets();
     d->footerMinimumHeight = 0;
+    d->fixedFooterSize = true;
     KoXmlElement footer = KoXml::namedItemNS(style, KoXmlNS::style, "footer-style");
     if (! footer.isNull()) {
         KoXmlElement hfprops = KoXml::namedItemNS(footer, KoXmlNS::style, "header-footer-properties");
@@ -407,6 +410,8 @@ void KWPageStyle::loadOdf(KoOdfLoadingContext &context, const KoXmlElement &mast
             d->footerMargin.fillFrom(hfprops, KoXmlNS::fo, "margin");
             d->footerInsets.fillFrom(hfprops, KoXmlNS::fo, "padding");
             d->footerMinimumHeight = KoUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "min-height"));
+            d->fixedFooterSize = hfprops.attributeNS(KoXmlNS::style,
+                    "dynamic-spacing").compare("true", Qt::CaseInsensitive) == 0;
         }
     }
 
