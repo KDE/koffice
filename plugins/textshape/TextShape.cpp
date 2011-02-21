@@ -138,8 +138,7 @@ void TextShape::paintComponent(QPainter &painter, const KoViewConverter &convert
         if (lay == 0) {
             kWarning(32500) << "Painting shape that doesn't have a kotext doc-layout, which can't work";
             return;
-        }
-        else if (! lay->hasLayouter()) {
+        } else if (!lay->hasLayouter()) {
             lay->setLayout(new Layout(lay));
         }
         if (!m_pageProvider) {
@@ -153,7 +152,6 @@ void TextShape::paintComponent(QPainter &painter, const KoViewConverter &convert
         if (page) {
             // this is used to not trigger repaints if layout during the painting is done
             // this enables to use the same shapes on different pages showing different page numbers
-            m_paintRegion = painter.clipRegion();
             if (!m_textShapeData->page() || page->pageNumber() != m_textShapeData->page()->pageNumber()) {
                 m_textShapeData->setPage(page);
                 m_textShapeData->foul();
@@ -188,7 +186,6 @@ void TextShape::paintComponent(QPainter &painter, const KoViewConverter &convert
         painter.translate(0, size().height() - m_footnotes->size().height());
         m_footnotes->documentLayout()->draw(&painter, pc);
     }
-    m_paintRegion = QRegion();
 }
 
 QPointF TextShape::convertScreenPos(const QPointF &point)
