@@ -101,6 +101,12 @@ public:
     /// Set the type of footers the pages will get.
     void setFooterPolicy(KWord::HeaderFooterType p);
 
+    void setFixedHeaderSize(bool on);
+    bool hasFixedHeaderSize() const;
+
+    void setFixedFooterSize(bool on);
+    bool hasFixedFooterSize() const;
+
     /**
      * This is the main toggle for all automatically generated frames.
      * The generation and placing of the main text frame, as well as headers, footers,
@@ -122,19 +128,38 @@ public:
      */
     void setHeaderDistance(qreal distance);
 
-    /// return the minimum header height.
+    /**
+     * return the minimum header height.
+     *
+     * If the header has a fixed size (see hasFixedHeaderSize()) this is the total height
+     * from the top of the header to the top of the main text frame.
+     * Otherwise this is the height for the text frame only.
+     * The 'minimum' means that if the header gets larger only then does it start to eat
+     * into the size of the main page.
+     * @see setHeaderMinimumHeight(), footerMinimumHeight() setFooterMinimumHeight()
+     */
     qreal headerMinimumHeight() const;
     /**
      * Set the minimum header height.
      * @param height the height
+     * @see headerMinimumHeight(), footerMinimumHeight() setFooterMinimumHeight()
      */
     void setHeaderMinimumHeight(qreal height);
 
-    /// return the minimum footer height.
+    /**
+     * return the minimum footer height.
+     *
+     * If the footer has a fixed size (see hasFixedHeaderSize()) this is the total height
+     * from the bottom of the footer to the bottom of the next frame.
+     * Otherwise this is the height for the text frame only.
+     * The 'minimum' means that if the footer gets larger only then does it start to eat
+     * into the size of the main page.
+     * @see setHeaderMinimumHeight(), headerMinimumHeight(),  setFooterMinimumHeight()
+     */
     qreal footerMinimumHeight() const;
     /**
      * Set the minimum footer height.
-     * @param height the height
+     * @see setHeaderMinimumHeight(), headerMinimumHeight(),  footerMinimumHeight()
      */
     void setFooterMinimumHeight(qreal height);
 

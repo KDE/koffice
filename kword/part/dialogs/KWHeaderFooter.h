@@ -35,8 +35,13 @@ public:
     void saveTo(KWPageStyle &style);
     void setUnit(const KoUnit &unit);
 
+private slots:
+    void setHeaderLabel(bool fixed);
+    void setFooterLabel(bool fixed);
+
 private:
     Ui::KWHeaderFooter widget;
+    qreal m_footerHeight, m_headerHeight; // the total; gap + frame
 };
 
 #endif

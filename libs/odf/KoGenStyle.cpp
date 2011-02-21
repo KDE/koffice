@@ -26,6 +26,8 @@
 
 #include <float.h>
 
+#include <QStringList>
+
 #include <kdebug.h>
 
 // Returns -1, 0 (equal) or 1
@@ -141,8 +143,8 @@ static const char* s_propertyNames[] = {
     "style:graphic-properties",
     "style:paragraph-properties",
     "style:text-properties",
-    "style:header-style",
-    "style:footer-style"
+    "style:header-style/style:header-footer-properties",
+    "style:footer-style/style:header-footer-properties"
 };
 
 static const int s_propertyNamesCount = sizeof(s_propertyNames) / sizeof(*s_propertyNames);
@@ -169,14 +171,23 @@ void KoGenStyle::writeStyleProperties(KoXmlWriter* writer, PropertyType type,
     Q_ASSERT(elementName);
     const StyleMap& map = m_properties[type];
     if (!map.isEmpty()) {
-        writer->startElement(elementName);
+        int nestedCount = 1;
+        if (strchr(elementName, '/')) { // if nested.
+            QStringList elements = QString::fromLatin1(elementName).split('/', QString::SkipEmptyParts);
+            foreach (const QString &name,  elements)
+                writer->startElement(name.toLatin1().constData());
+            nestedCount = elements.count();
+        } else {
+            writer->startElement(elementName);
+        }
         QMap<QString, QString>::const_iterator it = map.constBegin();
         const QMap<QString, QString>::const_iterator end = map.constEnd();
         for (; it != end; ++it) {
             if (!parentStyle || parentStyle->property(it.key(), type) != it.value())
                 writer->addAttribute(it.key().toUtf8(), it.value().toUtf8());
         }
-        writer->endElement();
+        for (int i = 0; i < nestedCount; ++i)
+            writer->endElement();
     }
 }
 

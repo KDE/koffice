@@ -35,6 +35,8 @@ public:
     KoPageLayout pageLayout;
     QString name;
     bool mainFrame;
+    bool fixedHeaderSize;
+    bool fixedFooterSize;
     qreal footNoteDistance, endNoteDistance;
     qreal headerMinimumHeight,footerMinimumHeight;
     KWord::HeaderFooterType headers, footers;

@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006, 2008, 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Pierre Ducroquet <pinaraf@pinaraf.info>
  * Copyright (C) 2008 Sebastian Sauer <mail@dipe.org>
  *
@@ -66,7 +66,27 @@ void KWPageStylePrivate::clear()
     }
     fullPageBackground = 0;
     nextStyleName.clear();
+    fixedHeaderSize = false;
+    fixedFooterSize = false;
 }
+
+static void saveInsets(const KoInsets insets, KoGenStyle &style, const QString &prefix, KoGenStyle::PropertyType type)
+{
+    if (insets.left == insets.right && insets.top == insets.bottom && insets.left == insets.top) {
+        if (qAbs(insets.top) > 1E-4)
+            style.addPropertyPt(prefix, insets.top, type);
+    } else {
+        if (qAbs(insets.left) > 1E-4)
+            style.addPropertyPt(prefix + "-left", insets.left, type);
+        if (qAbs(insets.top) > 1E-4)
+            style.addPropertyPt(prefix + "-top", insets.top, type);
+        if (qAbs(insets.bottom) > 1E-4)
+            style.addPropertyPt(prefix + "-bottom", insets.bottom, type);
+        if (qAbs(insets.right) > 1E-4)
+            style.addPropertyPt(prefix + "-right", insets.right, type);
+    }
+}
+
 
 ///////////
 
@@ -308,29 +328,20 @@ KoGenStyle KWPageStyle::saveOdf() const
     QString contentElement = QString::fromUtf8(buffer.buffer(), buffer.buffer().size());
     pageLayout.addChildElement("columnsEnzo", contentElement);
 
-// the header/footer-style should be saved as a child of the style:page-layout; but using the
-// addChildElement its instead saved as a child of style:page-layout-properties  I can't follow why...
-// so lets disable this until I figure out how to save this in the right position in the tree.
-#if 0
+
     if (headerPolicy() != KWord::HFTypeNone) {
-        writer.startElement("style:header-style");
-        writer.startElement("style:header-footer-properties");
-        writer.addAttribute("fo:min-height", "0.01pt");
-        writer.addAttributePt("fo:margin-bottom", headerDistance());
-        // TODO there are quite some more properties we want to at least preserve between load and save
-        writer.endElement();
-        writer.endElement();
+        pageLayout.addProperty("style:dynamic-spacing", d->fixedHeaderSize, KoGenStyle::PageHeaderType);
+        pageLayout.addPropertyPt("fo:min-height", d->headerMinimumHeight, KoGenStyle::PageHeaderType);
+        saveInsets(d->headerMargin, pageLayout, "margin", KoGenStyle::PageHeaderType);
+        saveInsets(d->headerInsets, pageLayout, "padding", KoGenStyle::PageHeaderType);
     }
+
     if (footerPolicy() != KWord::HFTypeNone) {
-        writer.startElement("style:footer-style");
-        writer.startElement("style:header-footer-properties");
-        writer.addAttribute("fo:min-height", "0.01pt");
-        writer.addAttributePt("fo:margin-top", footerDistance());
-        // TODO there are quite some more properties we want to at least preserve between load and save
-        writer.endElement();
-        writer.endElement();
+        pageLayout.addProperty("style:dynamic-spacing", d->fixedFooterSize, KoGenStyle::PageFooterType);
+        pageLayout.addPropertyPt("fo:min-height", d->footerMinimumHeight, KoGenStyle::PageFooterType);
+        saveInsets(d->footerMargin, pageLayout, "margin", KoGenStyle::PageFooterType);
+        saveInsets(d->footerInsets, pageLayout, "padding", KoGenStyle::PageFooterType);
     }
-#endif
 
     // TODO see how we should save margins if we use the 'closest to binding' stuff.
 
@@ -357,9 +368,9 @@ void KWPageStyle::loadOdf(KoOdfLoadingContext &context, const KoXmlElement &mast
         d->columns.columnSpacing = 17; // ~ 6mm
     }
 
-            d->headerMargin = KoInsets();
-            d->headerInsets = KoInsets();
-            d->headerMinimumHeight = 0;
+    d->headerMargin = KoInsets();
+    d->headerInsets = KoInsets();
+    d->headerMinimumHeight = 0;
     KoXmlElement header = KoXml::namedItemNS(style, KoXmlNS::style, "header-style");
     if (! header.isNull()) {
         KoXmlElement hfprops = KoXml::namedItemNS(header, KoXmlNS::style, "header-footer-properties");
@@ -453,6 +464,27 @@ void KWPageStyle::setDirection(KoText::Direction direction)
 {
     d->direction = direction;
 }
+
+void KWPageStyle::setFixedHeaderSize(bool on)
+{
+    d->fixedHeaderSize = on;
+}
+
+bool KWPageStyle::hasFixedHeaderSize() const
+{
+    return d->fixedHeaderSize;
+}
+
+void KWPageStyle::setFixedFooterSize(bool on)
+{
+    d->fixedFooterSize = on;
+}
+
+bool KWPageStyle::hasFixedFooterSize() const
+{
+    return d->fixedFooterSize;
+}
+
 
 bool KWPageStyle::operator==(const KWPageStyle &other) const
 {

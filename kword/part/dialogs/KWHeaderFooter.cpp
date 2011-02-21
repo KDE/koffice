@@ -20,6 +20,8 @@
 #include "KWHeaderFooter.h"
 #include <KWPageStyle.h>
 
+#include <KDebug>
+
 KWHeaderFooter::KWHeaderFooter(QWidget *parent, const KWPageStyle &style)
     :QWidget(parent)
 {
@@ -40,10 +42,21 @@ KWHeaderFooter::KWHeaderFooter(QWidget *parent, const KWPageStyle &style)
     case KWord::HFTypeUniform:
         widget.footerGB->setChecked(true);
     }
-    widget.headerHeight->changeValue(style.headerMinimumHeight());
-    widget.headerGapSize->changeValue(style.headerDistance());
-    widget.footerHeight->changeValue(style.footerMinimumHeight());
-    widget.footerGapSize->changeValue(style.footerDistance());
+    m_headerHeight = style.headerMinimumHeight();
+    if (!style.hasFixedHeaderSize())
+        m_headerHeight += style.headerDistance();
+    m_footerHeight = style.footerMinimumHeight();
+    if (!style.hasFixedFooterSize())
+        m_footerHeight += style.footerDistance();
+
+    widget.headerFrameHeight->changeValue(m_headerHeight - style.headerDistance());
+    widget.footerFrameHeight->changeValue(m_footerHeight - style.footerDistance());
+
+    setHeaderLabel(style.hasFixedHeaderSize());
+    setFooterLabel(style.hasFixedFooterSize());
+
+    connect (widget.headerFixed, SIGNAL(toggled(bool)), this, SLOT(setHeaderLabel(bool)));
+    connect (widget.footerFixed, SIGNAL(toggled(bool)), this, SLOT(setFooterLabel(bool)));
 }
 
 void KWHeaderFooter::saveTo(KWPageStyle &style)
@@ -54,8 +67,18 @@ void KWHeaderFooter::saveTo(KWPageStyle &style)
         else
             style.setHeaderPolicy(KWord::HFTypeUniform);
 
-        style.setHeaderMinimumHeight(widget.headerHeight->value());
-        style.setHeaderDistance(widget.headerGapSize->value());
+        style.setHeaderMinimumHeight(widget.headerFrameHeight->value());
+        style.setFixedHeaderSize(widget.headerFixed->isChecked());
+        if (!widget.headerFixed->isChecked())
+            style.setHeaderDistance(widget.headerSecondSize->value());
+
+        if (widget.headerFixed->isChecked()) {
+            style.setHeaderMinimumHeight(widget.headerSecondSize->value());
+            style.setHeaderDistance(widget.headerSecondSize->value() - widget.headerFrameHeight->value());
+        } else {
+            style.setHeaderMinimumHeight(widget.headerFrameHeight->value());
+            style.setHeaderDistance(widget.headerSecondSize->value());
+        }
     } else {
         style.setHeaderPolicy(KWord::HFTypeNone);
     }
@@ -66,8 +89,14 @@ void KWHeaderFooter::saveTo(KWPageStyle &style)
         else
             style.setFooterPolicy(KWord::HFTypeUniform);
 
-        style.setFooterMinimumHeight(widget.footerHeight->value());
-        style.setFooterDistance(widget.footerGapSize->value());
+        style.setFixedFooterSize(widget.footerFixed->isChecked());
+        if (widget.footerFixed->isChecked()) {
+            style.setFooterMinimumHeight(widget.footerSecondSize->value());
+            style.setFooterDistance(widget.footerSecondSize->value() - widget.footerFrameHeight->value());
+        } else {
+            style.setFooterMinimumHeight(widget.footerFrameHeight->value());
+            style.setFooterDistance(widget.footerSecondSize->value());
+        }
     } else {
         style.setFooterPolicy(KWord::HFTypeNone);
     }
@@ -75,8 +104,33 @@ void KWHeaderFooter::saveTo(KWPageStyle &style)
 
 void KWHeaderFooter::setUnit(const KoUnit &unit)
 {
-    widget.headerHeight->setUnit(unit);
-    widget.headerGapSize->setUnit(unit);
-    widget.footerHeight->setUnit(unit);
-    widget.footerGapSize->setUnit(unit);
+    widget.headerFrameHeight->setUnit(unit);
+    widget.headerSecondSize->setUnit(unit);
+    widget.footerFrameHeight->setUnit(unit);
+    widget.footerSecondSize->setUnit(unit);
+}
+
+void KWHeaderFooter::setHeaderLabel(bool fixed)
+{
+kDebug() << fixed;
+    if (fixed) {
+        widget.headerGapLabel->setText(i18n("Total Size:"));
+        widget.headerSecondSize->changeValue(m_headerHeight);
+    } else {
+        widget.headerGapLabel->setText(i18n("Gap:"));
+        widget.headerSecondSize->changeValue(m_headerHeight - widget.headerFrameHeight->value());
+    }
+    widget.headerFixed->setChecked(fixed);
+}
+
+void KWHeaderFooter::setFooterLabel(bool fixed)
+{
+    if (fixed) {
+        widget.footerGapLabel->setText(i18n("Total Size:"));
+        widget.footerSecondSize->changeValue(m_footerHeight);
+    } else {
+        widget.footerGapLabel->setText(i18n("Gap:"));
+        widget.footerSecondSize->changeValue(m_footerHeight - widget.footerFrameHeight->value());
+    }
+    widget.footerFixed->setChecked(fixed);
 }

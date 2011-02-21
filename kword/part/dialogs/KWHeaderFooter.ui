@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>285</height>
+    <width>342</width>
+    <height>335</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,27 +33,24 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label">
+      <item row="1" column="0" colspan="3">
+       <widget class="QCheckBox" name="headerFixed">
         <property name="text">
-         <string>Minimum Height:</string>
+         <string>Header area takes specific size</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="KoUnitDoubleSpinBox" name="headerHeight"/>
-      </item>
       <item row="2" column="0">
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="label">
         <property name="text">
-         <string>Gap:</string>
+         <string>Minimum Frame Size:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="KoUnitDoubleSpinBox" name="headerGapSize"/>
+       <widget class="KoUnitDoubleSpinBox" name="headerFrameHeight"/>
       </item>
-      <item row="1" column="2" rowspan="2">
+      <item row="2" column="2">
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -65,6 +62,12 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="headerGapLabel"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="KoUnitDoubleSpinBox" name="headerSecondSize"/>
       </item>
      </layout>
     </widget>
@@ -88,27 +91,24 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_3">
+      <item row="1" column="0" colspan="3">
+       <widget class="QCheckBox" name="footerFixed">
         <property name="text">
-         <string>Minimum Height:</string>
+         <string>Fixed footer size</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="KoUnitDoubleSpinBox" name="footerHeight"/>
-      </item>
       <item row="2" column="0">
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Gap:</string>
+         <string>Minimum Frame Size:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="KoUnitDoubleSpinBox" name="footerGapSize"/>
+       <widget class="KoUnitDoubleSpinBox" name="footerFrameHeight"/>
       </item>
-      <item row="1" column="2">
+      <item row="2" column="2">
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -120,6 +120,12 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="footerGapLabel"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="KoUnitDoubleSpinBox" name="footerSecondSize"/>
       </item>
      </layout>
     </widget>
