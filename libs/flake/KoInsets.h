@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006, 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -23,6 +23,9 @@
 #include "flake_export.h"
 
 #include <QtCore/QDebug>
+
+class KoXmlElement;
+class KoShape;
 
 /**
  * An Insets object is a representation of the borders of a shape.
@@ -68,6 +71,10 @@ public:
         return KoInsets(top + other.top, left + other.left, bottom + other.bottom,
             right + other.right);
     }
+
+    //void saveTo(KoXmlElement &element, const QString &prefix);
+    void saveTo(KoShape *shape, const QString &prefix) const;
+    void fillFrom(const KoXmlElement &element, const QString &NS, const QString &attributePrefix);
 
     qreal top;     ///< Top inset
     qreal bottom;  ///< Bottom inset

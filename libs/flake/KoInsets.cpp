@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2009-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,6 +18,10 @@
  */
 
 #include "KoInsets.h"
+#include "KoShape.h"
+
+#include <KoXmlReader.h>
+#include <KoUnit.h>
 
 #ifndef QT_NO_DEBUG_STREAM
 QDebug operator<<(QDebug debug, const KoInsets &insets)
@@ -33,3 +37,35 @@ QDebug operator<<(QDebug debug, const KoInsets &insets)
     return debug.space();
 }
 #endif
+
+void KoInsets::saveTo(KoShape *shape, const QString &prefix) const
+{
+    if (left == right && top == bottom && left == top) {
+        if (qAbs(top) > 1E-4)
+            shape->setAdditionalStyleAttribute(prefix, QString::number(top) + "pt");
+    } else {
+        if (qAbs(left) > 1E-4)
+            shape->setAdditionalStyleAttribute(prefix + "-left", QString::number(left) + "pt");
+        if (qAbs(top) > 1E-4)
+            shape->setAdditionalStyleAttribute(prefix + "-top", QString::number(top) + "pt");
+        if (qAbs(bottom) > 1E-4)
+            shape->setAdditionalStyleAttribute(prefix + "-bottom", QString::number(bottom) + "pt");
+        if (qAbs(right) > 1E-4)
+            shape->setAdditionalStyleAttribute(prefix + "-right", QString::number(right) + "pt");
+    }
+}
+
+//void KoInsets::saveTo(KoXmlElement &element, const QString &prefix)
+
+void KoInsets::fillFrom(const KoXmlElement &element, const QString &ns, const QString &prefix)
+{
+    const qreal margin(KoUnit::parseValue(element.attributeNS(ns, prefix)));
+    QString marginL = element.attributeNS(ns, prefix + "-left");
+    left = KoUnit::parseValue(marginL, margin);
+    QString marginT = element.attributeNS(ns, prefix + "-top");
+    top = KoUnit::parseValue(marginT, margin);
+    QString marginB = element.attributeNS(ns, prefix + "-bottom");
+    bottom = KoUnit::parseValue(marginB, margin);
+    QString marginR = element.attributeNS(ns, prefix + "-right");
+    right = KoUnit::parseValue(marginR, margin);
+}
