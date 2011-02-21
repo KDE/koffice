@@ -166,8 +166,7 @@ public:
     QString tagName() const;
     QString text() const;
 
-    QString attribute(const QString& name) const;
-    QString attribute(const QString& name, const QString& defaultValue) const;
+    QString attribute(const QString& name, const QString& defaultValue = QString()) const;
     QString attributeNS(const QString& namespaceURI, const QString& localName,
                         const QString& defaultValue = QString()) const;
     bool hasAttribute(const QString& name) const;

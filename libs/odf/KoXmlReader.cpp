@@ -2221,17 +2221,6 @@ QString KoXmlElement::text() const
     return d->text();
 }
 
-QString KoXmlElement::attribute(const QString& name) const
-{
-    if (!isElement())
-        return QString();
-
-    if (!d->loaded)
-        d->loadChildren();
-
-    return d->attribute(name, QString());
-}
-
 QString KoXmlElement::attribute(const QString& name,
                                 const QString& defaultValue) const
 {
