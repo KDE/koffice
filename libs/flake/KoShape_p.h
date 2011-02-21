@@ -92,7 +92,7 @@ public:
     QSet<KoShape*> dependees; ///< set of shapes dependent on this shape
     KoShapeShadow * shadow; ///< the current shape shadow
     QMap<QString, QString> additionalAttributes;
-    QMap<QByteArray, QString> additionalStyleAttributes;
+    QMap<QString, QString> additionalStyleAttributes;
     QSet<KoEventAction *> eventActions; ///< list of event actions the shape has
     KoFilterEffectStack *filterEffectStack; ///< stack of filter effects applied to the shape
     qreal transparency; ///< the shapes transparency

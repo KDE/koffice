@@ -834,9 +834,9 @@ public:
      */
     QString additionalAttribute(const QString &name) const;
 
-    void setAdditionalStyleAttribute(const char *name, const QString &value);
+    void setAdditionalStyleAttribute(const QString &name, const QString &value);
 
-    void removeAdditionalStyleAttribute(const char *name);
+    void removeAdditionalStyleAttribute(const QString &name);
 
     /**
      * Returns the filter effect stack of the shape

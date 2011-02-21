@@ -1073,7 +1073,7 @@ QString KoShape::saveStyle(KoGenStyle &style, KoShapeSavingContext &context) con
         style.addProperty("style:protect", value);
     }
 
-    QMap<QByteArray, QString>::const_iterator it(d->additionalStyleAttributes.constBegin());
+    QMap<QString, QString>::const_iterator it(d->additionalStyleAttributes.constBegin());
     for (; it != d->additionalStyleAttributes.constEnd(); ++it) {
         style.addProperty(it.key(), it.value());
     }
@@ -1604,13 +1604,13 @@ QString KoShape::additionalAttribute(const QString &name) const
     return d->additionalAttributes.value(name);
 }
 
-void KoShape::setAdditionalStyleAttribute(const char *name, const QString &value)
+void KoShape::setAdditionalStyleAttribute(const QString &name, const QString &value)
 {
     Q_D(KoShape);
     d->additionalStyleAttributes.insert(name, value);
 }
 
-void KoShape::removeAdditionalStyleAttribute(const char *name)
+void KoShape::removeAdditionalStyleAttribute(const QString &name)
 {
     Q_D(KoShape);
     d->additionalStyleAttributes.remove(name);
