@@ -131,3 +131,33 @@ void KWHeaderFooter::setFooterLabel(bool fixed)
     }
     widget.footerFixed->setChecked(fixed);
 }
+
+/*
+in OOo the minimum size and the margin either
+  in case of dynamic-spacing  = true are qMax
+  in case of dynamic-spacing  = false are added
+
+in KWord I want to support the two modes too, but have an actually usable UI.
+
+    a:  +-------
+        |
+        |  header
+        |
+    b:  +------
+        |  blank
+    c:  +------
+        |
+        | main text
+
+    Let the user type 3 variables, but only show two at a time;
+      1) header height  (a - c)
+      2) blank size (b-c)
+      3) minimum header-frame-size (a-b)
+
+we show only two at a time using a checkbox for 'fixed header size';
+    3: [Minimum Frame size]
+    1: [Total size] (frame + gap)
+or for not fixed header sizes we show;
+    3: [Minimum Frame size]
+    2: [Gap size]
+*/
