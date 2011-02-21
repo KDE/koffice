@@ -41,21 +41,22 @@ set(kwordprivate_LIB_SRCS
     frames/Outline.cpp
     frames/KWPageBackground.cpp
 
+    dialogs/KWCreateBookmarkDialog.cpp
+    dialogs/KWDocumentColumns.cpp
     dialogs/KWFrameConnectSelector.cpp
+    dialogs/KWFrameDialog.cpp
     dialogs/KWFrameGeometry.cpp
     dialogs/KWFrameRunaroundProperties.cpp
     dialogs/KWGeneralFrameProperties.cpp
-    dialogs/KWFrameDialog.cpp
-    dialogs/KWShapeConfigFactory.cpp
-    dialogs/KWDocumentColumns.cpp
-    dialogs/KWStartupWidget.cpp
+    dialogs/KWHeaderFooter.cpp
+    dialogs/KWInsertPageDialog.cpp
     dialogs/KWPageSettingsDialog.cpp
+    dialogs/KWPrintingDialog.cpp
+    dialogs/KWSelectBookmarkDialog.cpp
+    dialogs/KWShapeConfigFactory.cpp
+    dialogs/KWStartupWidget.cpp
     dialogs/KWStatistics.cpp
     dialogs/KWStatisticsDialog.cpp
-    dialogs/KWPrintingDialog.cpp
-    dialogs/KWCreateBookmarkDialog.cpp
-    dialogs/KWSelectBookmarkDialog.cpp
-    dialogs/KWInsertPageDialog.cpp
     dockers/KWStatisticsDocker.cpp
 
     commands/KWPageStylePropertiesCommand.cpp
@@ -78,16 +79,17 @@ if( Soprano_FOUND )
 endif( Soprano_FOUND )
 
 kde4_add_ui_files(kwordprivate_LIB_SRCS
+    dialogs/KWCreateBookmark.ui
+    dialogs/KWDocumentColumns.ui
     dialogs/KWFrameConnectSelector.ui
     dialogs/KWFrameGeometry.ui
     dialogs/KWFrameRunaroundProperties.ui
     dialogs/KWGeneralFrameProperties.ui
-    dialogs/KWDocumentColumns.ui
+    dialogs/KWHeaderFooter.ui
+    dialogs/KWInsertPageDialog.ui
+    dialogs/KWSelectBookmark.ui
     dialogs/KWStartupWidget.ui
     dialogs/KWStatistics.ui
-    dialogs/KWCreateBookmark.ui
-    dialogs/KWSelectBookmark.ui
-    dialogs/KWInsertPageDialog.ui
     dockers/KWStatisticsDocker.ui
 )
 if( Soprano_FOUND )

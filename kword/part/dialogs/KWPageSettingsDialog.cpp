@@ -21,6 +21,7 @@
 #include "KWPageStyle.h"
 #include "KWPageStyle_p.h"
 #include "KWDocumentColumns.h"
+#include "KWHeaderFooter.h"
 
 #include <KWDocument.h>
 #include <commands/KWPageStylePropertiesCommand.h>
@@ -39,6 +40,8 @@ KWPageSettingsDialog::KWPageSettingsDialog(QWidget *parent, KWDocument *document
     Q_ASSERT(page.isValid());
     m_columns = new KWDocumentColumns(this, m_page.pageStyle().columns());
     addPage(m_columns, i18n("Columns"));
+    m_headerFooter = new KWHeaderFooter(this, m_page.pageStyle());
+    addPage(m_headerFooter, i18n("Header/Footer"));
 
     showPageSpread(true);
     showTextDirection(true); // TODO can we hide this in selected usecases? Use the resource manager bidi-check maybe?
@@ -90,6 +93,7 @@ KWPageSettingsDialog::KWPageSettingsDialog(QWidget *parent, KWDocument *document
 
     setUnit(m_document->unit());
     m_columns->setUnit(m_document->unit());
+    m_headerFooter->setUnit(m_document->unit());
     connect (this, SIGNAL(unitChanged(const KoUnit&)), this, SLOT(distributeUnit(const KoUnit&)));
 }
 
@@ -149,6 +153,7 @@ void KWPageSettingsDialog::accept()
     }
     styleToUpdate.setPageLayout(lay);
     styleToUpdate.setColumns(m_columns->columns());
+    m_headerFooter->saveTo(styleToUpdate);
 
     if (onlyThisPage)
         new KWChangePageStyleCommand(m_document, m_page, styleToUpdate, cmd);
@@ -169,4 +174,5 @@ void KWPageSettingsDialog::distributeUnit(const KoUnit &unit)
     setUnit(unit);
     m_columns->setUnit(unit);
     m_document->setUnit(unit);
+    m_headerFooter->setUnit(unit);
 }

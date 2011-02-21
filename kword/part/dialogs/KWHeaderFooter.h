@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -16,37 +16,27 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef KWPAGESETTINGSDIALOG_H
-#define KWPAGESETTINGSDIALOG_H
 
-#include <KWPage.h>
-#include <KoPageLayoutDialog.h>
+#ifndef KWHEADERFOOTER_H
+#define KWHEADERFOOTER_H
 
-#include <KDialog>
+#include <ui_KWHeaderFooter.h>
 
-class KWDocument;
-class KWDocumentColumns;
-class KWHeaderFooter;
+class KoUnit;
+class KWPageStyle;
 
-/// A dialog to show the settings for one page and apply them afterwards.
-class KWPageSettingsDialog : public KoPageLayoutDialog
+class KWHeaderFooter : public QWidget
 {
     Q_OBJECT
 public:
-    explicit KWPageSettingsDialog(QWidget *parent, KWDocument *document, const KWPage &page);
+    /// constructor
+    KWHeaderFooter(QWidget *parent, const KWPageStyle &style);
 
-protected:
-    void accept();
-    void reject();
-
-private slots:
-    void distributeUnit(const KoUnit &unit);
+    void saveTo(KWPageStyle &style);
+    void setUnit(const KoUnit &unit);
 
 private:
-    KWDocument *m_document;
-    KWPage m_page;
-    KWDocumentColumns *m_columns;
-    KWHeaderFooter *m_headerFooter;
+    Ui::KWHeaderFooter widget;
 };
 
 #endif
