@@ -29,6 +29,7 @@
 class KWDocument;
 class KoPageLayoutWidget;
 class KWDocumentColumns;
+class KWHeaderFooter;
 
 /**
  * The 'Custom Document' widget in the KWord startup widget.
@@ -60,6 +61,7 @@ signals:
 private:
     KoPageLayoutWidget *m_sizeWidget;
     KWDocumentColumns *m_columnsWidget;
+    KWHeaderFooter *m_headerFooter;
 
     KoPageLayout m_layout;
     KoColumns m_columns;

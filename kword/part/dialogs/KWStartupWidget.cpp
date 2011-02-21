@@ -20,8 +20,9 @@
 #include "KWStartupWidget.h"
 
 #include "KWDocumentColumns.h"
-#include "../KWPage.h"
-#include "../KWDocument.h"
+#include "KWHeaderFooter.h"
+#include <KWPage.h>
+#include <KWDocument.h>
 
 #include <KoPageLayoutWidget.h>
 #include <KoPagePreviewWidget.h>
@@ -54,6 +55,12 @@ KWStartupWidget::KWStartupWidget(QWidget *parent, KWDocument *doc, const KoColum
     lay->addWidget(m_columnsWidget);
     lay->setMargin(0);
 
+    lay = new QVBoxLayout(widget.headerFooter);
+    m_headerFooter = new KWHeaderFooter(widget.headerFooter, m_doc->pageManager()->defaultPageStyle());
+    m_headerFooter->setUnit(m_unit);
+    lay->addWidget(m_headerFooter);
+    lay->setMargin(0);
+
     lay = new QVBoxLayout(widget.previewPane);
     widget.previewPane->setLayout(lay);
     lay->setMargin(0);
@@ -76,6 +83,7 @@ void KWStartupWidget::unitChanged(const KoUnit &unit)
 {
     m_unit = unit;
     m_columnsWidget->setUnit(unit);
+    m_headerFooter->setUnit(unit);
 }
 
 void KWStartupWidget::sizeUpdated(const KoPageLayout &layout)
@@ -101,6 +109,7 @@ void KWStartupWidget::buttonClicked()
     style.setColumns(m_columns);
     style.setHasMainTextFrame(widget.mainText->isChecked());
     style.setPageLayout(m_layout);
+    m_headerFooter->saveTo(style);
     m_doc->setUnit(m_unit);
 
     emit documentSelected();
