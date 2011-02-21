@@ -319,23 +319,39 @@ void KWFrameLayout::layoutFramesOnPage(int pageNumber)
         Q_ASSERT(textFrameSet);
         switch (textFrameSet->textFrameSetType()) {
         case KWord::OddPagesHeaderTextFrameSet:
-        case KWord::EvenPagesHeaderTextFrameSet: {
+        case KWord::EvenPagesHeaderTextFrameSet:
             header = static_cast<KWTextFrame *>(frame);
-            minimumHeight[1] = qMax((qreal)10, pageStyle.headerMinimumHeight());
-            requestedHeight[1] = static_cast<KWTextFrame *>(textFrameSet->frames().first())->minimumFrameHeight();
-            if (minimumHeight[1] < pageStyle.headerDistance())
-                minimumHeight[2] = pageStyle.headerDistance() - minimumHeight[1];
+            if (pageStyle.hasFixedHeaderSize()) {
+                requestedHeight[1] = static_cast<KWTextFrame *>(textFrameSet->frames().first())->minimumFrameHeight();
+                minimumHeight[1] = qMax((qreal)10, pageStyle.headerMinimumHeight()
+                        - pageStyle.headerDistance());
+                // a bit of pre-layout as our headerMinimumHeight should be 1 and 2 added
+                minimumHeight[2] = qMax((qreal)0, pageStyle.headerMinimumHeight()
+                        - requestedHeight[1]);
+            } else {
+                minimumHeight[1] = qMax((qreal)10, pageStyle.headerMinimumHeight());
+                minimumHeight[2] = pageStyle.headerDistance();
+                requestedHeight[1] = qMax(pageStyle.headerMinimumHeight(),
+                        static_cast<KWTextFrame *>(textFrameSet->frames().first())->minimumFrameHeight());
+            }
             break;
-        }
         case KWord::OddPagesFooterTextFrameSet:
-        case KWord::EvenPagesFooterTextFrameSet: {
+        case KWord::EvenPagesFooterTextFrameSet:
             footer = static_cast<KWTextFrame *>(frame);
-            minimumHeight[7] = qMax((qreal)10, pageStyle.footerMinimumHeight());
-            requestedHeight[7] = static_cast<KWTextFrame *>(textFrameSet->frames().first())->minimumFrameHeight();
-            if(minimumHeight[7] < pageStyle.footerDistance())
-                minimumHeight[6] = pageStyle.footerDistance() - minimumHeight[7];
+            if (pageStyle.hasFixedFooterSize()) {
+                requestedHeight[7] = static_cast<KWTextFrame *>(textFrameSet->frames().first())->minimumFrameHeight();
+                minimumHeight[7] = qMax((qreal)10, pageStyle.footerMinimumHeight()
+                        - pageStyle.footerDistance());
+                // a bit of pre-layout as our footerMinimumHeight should be 1 and 2 added
+                minimumHeight[6] = qMax((qreal)0, pageStyle.footerMinimumHeight()
+                        - requestedHeight[1]);
+            } else {
+                minimumHeight[7] = qMax((qreal)10, pageStyle.footerMinimumHeight());
+                minimumHeight[6] = pageStyle.footerDistance();
+                requestedHeight[7] = qMax(pageStyle.footerMinimumHeight(),
+                        static_cast<KWTextFrame *>(textFrameSet->frames().first())->minimumFrameHeight());
+            }
             break;
-        }
         case KWord::MainTextFrameSet: {
             if (columnsCount < 1) {
                 kWarning(32001) << "Too many columns present on page, ignoring 1";
