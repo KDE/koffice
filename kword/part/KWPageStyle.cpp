@@ -49,16 +49,16 @@ void KWPageStylePrivate::clear()
     footNoteSeparatorLineType = Qt::SolidLine;
 
     mainFrame = true;
-    headerDistance = 10; // ~3mm
-    footerDistance = 10;
-    headerMinimumHeight = 0;
-    footerMinimumHeight = 0;
+    headerMargin.bottom = MM_TO_POINT(5);
+    footerMargin.top = MM_TO_POINT(5);
+    headerMinimumHeight = MM_TO_POINT(10);
+    footerMinimumHeight = MM_TO_POINT(10);
     footNoteDistance = 10;
     endNoteDistance = 10;
     headers = KWord::HFTypeNone;
     footers = KWord::HFTypeNone;
     columns.columns = 1;
-    columns.columnSpacing = 17; // ~ 6mm
+    columns.columnSpacing = MM_TO_POINT(6);
     direction = KoText::AutoDirection;
 
     if (fullPageBackground && !fullPageBackground->deref()) {
@@ -153,12 +153,12 @@ bool KWPageStyle::hasMainTextFrame() const
 
 qreal KWPageStyle::headerDistance() const
 {
-    return d->headerDistance;
+    return d->headerMargin.bottom;
 }
 
 void KWPageStyle::setHeaderDistance(qreal distance)
 {
-    d->headerDistance = distance;
+    d->headerMargin.bottom = distance;
 }
 
 qreal KWPageStyle::headerMinimumHeight() const
@@ -183,12 +183,12 @@ void KWPageStyle::setFooterMinimumHeight(qreal height)
 
 qreal KWPageStyle::footerDistance() const
 {
-    return d->footerDistance;
+    return d->footerMargin.top;
 }
 
 void KWPageStyle::setFooterDistance(qreal distance)
 {
-    d->footerDistance = distance;
+    d->footerMargin.top = distance;
 }
 
 qreal KWPageStyle::footnoteDistance() const
@@ -357,22 +357,46 @@ void KWPageStyle::loadOdf(KoOdfLoadingContext &context, const KoXmlElement &mast
         d->columns.columnSpacing = 17; // ~ 6mm
     }
 
+            d->headerMargin = KoInsets();
+            d->headerInsets = KoInsets();
+            d->headerMinimumHeight = 0;
     KoXmlElement header = KoXml::namedItemNS(style, KoXmlNS::style, "header-style");
     if (! header.isNull()) {
         KoXmlElement hfprops = KoXml::namedItemNS(header, KoXmlNS::style, "header-footer-properties");
-        if (! hfprops.isNull())
-            d->headerDistance = KoUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "margin-bottom"));
+        if (!hfprops.isNull()) {
+            d->headerMargin.fillFrom(hfprops, KoXmlNS::fo, "margin");
+            d->headerInsets.fillFrom(hfprops, KoXmlNS::fo, "padding");
             d->headerMinimumHeight = KoUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "min-height"));
         // TODO there are quite some more properties we want to at least preserve between load and save
+          //fo:background-color
+           // and a possible style::background-image element
+          //fo:border
+          //fo:border-bottom
+          //fo:border-left
+          //fo:border-right
+          //fo:border-top
+          //svg:height
+          //style:border-line-width
+          //style:border-line-width-bottom
+          //style:border-line-width-left
+          //style:border-line-width-right
+          //style:border-line-width-top
+          //style:dynamic-spacing
+          //style:shadow
+        }
     }
 
+    d->footerMargin = KoInsets();
+    d->footerInsets = KoInsets();
+    d->footerMinimumHeight = 0;
     KoXmlElement footer = KoXml::namedItemNS(style, KoXmlNS::style, "footer-style");
     if (! footer.isNull()) {
         KoXmlElement hfprops = KoXml::namedItemNS(footer, KoXmlNS::style, "header-footer-properties");
-        if (! hfprops.isNull())
-            d->footerDistance = KoUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "margin-top"));
+        if (!hfprops.isNull()) {
+            d->footerMargin.fillFrom(hfprops, KoXmlNS::fo, "margin");
+            d->footerInsets.fillFrom(hfprops, KoXmlNS::fo, "padding");
             d->footerMinimumHeight = KoUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "min-height"));
-        // TODO there are quite some more properties we want to at least preserve between load and save
+        }
     }
 
     // Load background picture

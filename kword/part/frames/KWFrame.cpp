@@ -90,40 +90,12 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
 {
     Q_ASSERT(frameSet());
     // frame properties first
-    if (m_margin.left == m_margin.right && m_margin.top == m_margin.bottom
-            && m_margin.left == m_margin.top) {
-        if (qAbs(m_margin.top) > 1E-4) {
-            m_shape->setAdditionalStyleAttribute("fo:margin", QString::number(m_margin.top) + "pt");
-        }
-    } else {
-        if (qAbs(m_margin.left) > 1E-4)
-            m_shape->setAdditionalStyleAttribute("fo:margin-left", QString::number(m_margin.left) + "pt");
-        if (qAbs(m_margin.top) > 1E-4)
-            m_shape->setAdditionalStyleAttribute("fo:margin-top", QString::number(m_margin.top) + "pt");
-        if (qAbs(m_margin.bottom) > 1E-4)
-            m_shape->setAdditionalStyleAttribute("fo:margin-bottom", QString::number(m_margin.bottom) + "pt");
-        if (qAbs(m_margin.right) > 1E-4)
-            m_shape->setAdditionalStyleAttribute("fo:margin-right", QString::number(m_margin.right) + "pt");
-    }
+    m_margin.saveTo(m_shape, "fo:margin");
 
     KoTextShapeData *tsd = qobject_cast<KoTextShapeData*>(shape()->userData());
     if (tsd) {
         KoInsets padding = tsd->insets();
-        if (padding.left == padding.right && padding.top == padding.bottom
-                && padding.left == padding.top) {
-            if (qAbs(padding.top) > 1E-4) {
-                m_shape->setAdditionalStyleAttribute("fo:padding", QString::number(padding.top) + "pt");
-            }
-        } else {
-            if (qAbs(padding.left) > 1E-4)
-                m_shape->setAdditionalStyleAttribute("fo:padding-left", QString::number(padding.left) + "pt");
-            if (qAbs(padding.top) > 1E-4)
-                m_shape->setAdditionalStyleAttribute("fo:padding-top", QString::number(padding.top) + "pt");
-            if (qAbs(padding.bottom) > 1E-4)
-                m_shape->setAdditionalStyleAttribute("fo:padding-bottom", QString::number(padding.bottom) + "pt");
-            if (qAbs(padding.right) > 1E-4)
-                m_shape->setAdditionalStyleAttribute("fo:padding-right", QString::number(padding.right) + "pt");
-        }
+        padding.saveTo(m_shape, "fo:padding");
     }
 
     QString value;
@@ -266,27 +238,11 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
     else
         frameSet()->setNewFrameBehavior(KWord::NoFollowupFrame);
 
-    const qreal margin(KoUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "margin")));
-    QString marginL = properties.attributeNS(KoXmlNS::fo, "margin-left");
-    m_margin.left = KoUnit::parseValue(marginL, margin);
-    QString marginT = properties.attributeNS(KoXmlNS::fo, "margin-top");
-    m_margin.top = KoUnit::parseValue(marginT, margin);
-    QString marginB = properties.attributeNS(KoXmlNS::fo, "margin-bottom");
-    m_margin.bottom = KoUnit::parseValue(marginB, margin);
-    QString marginR = properties.attributeNS(KoXmlNS::fo, "margin-right");
-    m_margin.right = KoUnit::parseValue(marginR, margin);
+    m_margin.fillFrom(properties, KoXmlNS::fo, "margin");
 
     if (tfs) {
         KoInsets p;
-        const qreal padding(KoUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "padding")));
-        QString paddingL = properties.attributeNS(KoXmlNS::fo, "padding-left");
-        p.left = KoUnit::parseValue(paddingL, padding);
-        QString paddingT = properties.attributeNS(KoXmlNS::fo, "padding-top");
-        p.top = KoUnit::parseValue(paddingT, padding);
-        QString paddingB = properties.attributeNS(KoXmlNS::fo, "padding-bottom");
-        p.bottom = KoUnit::parseValue(paddingB, padding);
-        QString paddingR = properties.attributeNS(KoXmlNS::fo, "padding-right");
-        p.right = KoUnit::parseValue(paddingR, padding);
+        p.fillFrom(properties, KoXmlNS::fo, "padding");
         static_cast<KWTextFrame*>(this)->setInsets(p);
     }
 

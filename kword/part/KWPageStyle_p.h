@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,6 +20,7 @@
 #define KWPAGESTYLE_P_H
 
 #include <QSharedData>
+#include <KoInsets.h>
 #include <KoText.h>
 #include <KoShapeBackground.h>
 
@@ -34,9 +35,11 @@ public:
     KoPageLayout pageLayout;
     QString name;
     bool mainFrame;
-    qreal headerDistance, footerDistance, footNoteDistance, endNoteDistance;
+    qreal footNoteDistance, endNoteDistance;
     qreal headerMinimumHeight,footerMinimumHeight;
     KWord::HeaderFooterType headers, footers;
+    KoInsets footerMargin, headerMargin; // distance between header/footer and another shape
+    KoInsets footerInsets, headerInsets; // distance between text and shape border
 
     qreal footNoteSeparatorLineWidth; ///< width of line; so more like 'thickness'
     int footNoteSeparatorLineLength; ///< It's a percentage of page.
@@ -54,14 +57,16 @@ public:
         pageLayout = other->pageLayout;
         //name = other->name;
         mainFrame = other->mainFrame;
-        headerDistance = other->headerDistance;
-        footerDistance = other->footerDistance;
         footNoteDistance = other->footNoteDistance;
         endNoteDistance = other->endNoteDistance;
         headerMinimumHeight = other->headerMinimumHeight;
         footerMinimumHeight = other->footerMinimumHeight;
         headers = other->headers;
         footers = other->footers;
+        footerMargin = other->footerMargin;
+        headerMargin = other->headerMargin;
+        footerInsets = other->footerInsets;
+        headerInsets = other->headerInsets;
         footNoteSeparatorLineWidth = other->footNoteSeparatorLineWidth;
         footNoteSeparatorLineLength = other->footNoteSeparatorLineLength;
         footNoteSeparatorLineType = other->footNoteSeparatorLineType;
