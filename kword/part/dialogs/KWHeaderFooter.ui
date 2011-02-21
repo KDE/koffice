@@ -36,7 +36,7 @@
       <item row="1" column="0" colspan="3">
        <widget class="QCheckBox" name="headerFixed">
         <property name="text">
-         <string>Header area takes specific size</string>
+         <string>Fixed header size</string>
         </property>
        </widget>
       </item>
