@@ -261,8 +261,8 @@ void KWOdfLoader::loadSettings(const KoXmlDocument &settingsDoc)
 
 void KWOdfLoader::loadMasterPageStyles(KoOdfLoadingContext &context, bool hasMainText)
 {
-    kDebug(32001) << " !!!!!!!!!!!!!! loadMasterPageStyles called !!!!!!!!!!!!!!";
-    kDebug(32001) << "Number of items :" << context.stylesReader().masterPages().size();
+    //kDebug(32001) << " !!!!!!!!!!!!!! loadMasterPageStyles called !!!!!!!!!!!!!!";
+    //kDebug(32001) << "Number of items :" << context.stylesReader().masterPages().size();
 
     //TODO probably we should introduce more logic to handle the "standard" even
     //in faulty documents. See also bugreport #129585 as example.
