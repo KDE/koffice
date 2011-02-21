@@ -4,6 +4,7 @@
    Copyright (C) 2009 Inge Wallin <inge@lysator.liu.se>
    Copyright (C) 2010 KO GmbH <jos.van.den.oever@kogmbh.com>
    Copyright (C) 2010 Jarosław Staniek <staniek@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -245,9 +246,10 @@ public:
         DrawingPageType,
         /// ChartType is always for presentation-properties.
         ChartType,
-        Reserved1, ///< @internal for binary compatible extensions
         /// For elements that are children of the style itself, not any of the properties
         StyleChildElement,
+        PageHeaderType, ///< for footer styles
+        PageFooterType, ///< for header styles
         ChildElement, ///< @internal
         /// @internal @note always update when adding values to this enum
         LastPropertyType = ChildElement

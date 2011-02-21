@@ -2,6 +2,7 @@
    Copyright (C) 2004-2006 David Faure <faure@kde.org>
    Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
    Copyright (C) 2010 Jarosław Staniek <staniek@kde.org>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -123,6 +124,8 @@ static KoGenStyle::PropertyType s_propertyTypes[] = {
     KoGenStyle::GraphicType,
     KoGenStyle::ParagraphType,
     KoGenStyle::TextType,
+    KoGenStyle::PageHeaderType,
+    KoGenStyle::PageFooterType,
 };
 
 static const char* s_propertyNames[] = {
@@ -137,7 +140,9 @@ static const char* s_propertyNames[] = {
     "style:chart-properties",
     "style:graphic-properties",
     "style:paragraph-properties",
-    "style:text-properties"
+    "style:text-properties",
+    "style:header-style",
+    "style:footer-style"
 };
 
 static const int s_propertyNamesCount = sizeof(s_propertyNames) / sizeof(*s_propertyNames);
