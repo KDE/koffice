@@ -820,15 +820,32 @@ QStringList TextTool::supportedPasteMimeTypes() const
 
 int TextTool::pointToPosition(const QPointF &point) const
 {
-    if (!m_textShapeData) // TODO use all shapes
+    KoTextShapeData *textShapeData = m_textShapeData;
+    if (textShapeData == 0)
         return -1;
+    if (textShapeData->endPosition() == -1) {
+        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(textShapeData->document()->documentLayout());
+        if (lay) {
+            foreach (KoShape *shape, lay->shapes()) {
+                KoTextShapeData *sd = dynamic_cast<KoTextShapeData*>(shape->userData());
+                if (sd && sd->endPosition() >= 0)
+                    textShapeData = sd;
+                if (shape->boundingRect().contains(point))
+                    break;
+                if (shape == m_textShape)
+                    break;
+            }
+        }
+        if (textShapeData == 0) // we have no textShapeData and probably no KoTextDocumentLayout
+            return -1;
+        if (textShapeData->endPosition() == -1) // never been layed-out before   
+            return 0;
+    }
     Q_ASSERT(m_textShapeData);
     QPointF p = m_textShape->convertScreenPos(point);
     int caretPos = m_textEditor.data()->document()->documentLayout()->hitTest(p, Qt::FuzzyHit);
     caretPos = qMax(caretPos, m_textShapeData->position());
-    if (m_textShapeData->endPosition() == -1) {
-        //kWarning(32500) << "Clicking in not fully laid-out textframe";
-        //m_textShapeData->fireResizeEvent(); // requests a layout run ;)
+    if (m_textShapeData->endPosition() == -1) { // not fully laid-out textframe
         return -1;
     }
     caretPos = qMin(caretPos, m_textShapeData->endPosition());

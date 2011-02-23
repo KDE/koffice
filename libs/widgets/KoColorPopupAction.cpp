@@ -132,11 +132,6 @@ void KoColorPopupAction::setCurrentColor( const KoColor &color )
 
 void KoColorPopupAction::setCurrentColor( const QColor &_color )
 {
-#ifndef NDEBUG
-    if (!_color.isValid()) {
-        kWarning(30004) << "Invalid color given, defaulting to black";
-    }
-#endif
     const QColor color(_color.isValid() ? _color : QColor(0,0,0,255));
     setCurrentColor(KoColor(color, KoColorSpaceRegistry::instance()->rgb8() ));
 }
