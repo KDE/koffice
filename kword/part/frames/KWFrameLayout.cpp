@@ -327,7 +327,7 @@ void KWFrameLayout::layoutFramesOnPage(int pageNumber)
                         - pageStyle.headerDistance());
                 // a bit of pre-layout as our headerMinimumHeight should be 1 and 2 added
                 minimumHeight[2] = qMax((qreal)0, pageStyle.headerMinimumHeight()
-                        - requestedHeight[1]);
+                        - qMax(minimumHeight[1], requestedHeight[1]));
             } else {
                 minimumHeight[1] = qMax((qreal)10, pageStyle.headerMinimumHeight());
                 minimumHeight[2] = pageStyle.headerDistance();
@@ -339,12 +339,12 @@ void KWFrameLayout::layoutFramesOnPage(int pageNumber)
         case KWord::EvenPagesFooterTextFrameSet:
             footer = static_cast<KWTextFrame *>(frame);
             if (pageStyle.hasFixedFooterSize()) {
-                requestedHeight[7] = static_cast<KWTextFrame *>(textFrameSet->frames().first())->minimumFrameHeight();
+                requestedHeight[7] = -static_cast<KWTextFrame *>(textFrameSet->frames().first())->minimumFrameHeight();
                 minimumHeight[7] = qMax((qreal)10, pageStyle.footerMinimumHeight()
                         - pageStyle.footerDistance());
-                // a bit of pre-layout as our footerMinimumHeight should be 1 and 2 added
+                // a bit of pre-layout as our footerMinimumHeight should be 6 and 7 added
                 minimumHeight[6] = qMax((qreal)0, pageStyle.footerMinimumHeight()
-                        - requestedHeight[1]);
+                        - qMax(requestedHeight[7], minimumHeight[7]));
             } else {
                 minimumHeight[7] = qMax((qreal)10, pageStyle.footerMinimumHeight());
                 minimumHeight[6] = pageStyle.footerDistance();
