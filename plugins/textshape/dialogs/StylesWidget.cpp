@@ -40,6 +40,7 @@ StylesWidget::StylesWidget(QWidget *parent)
         m_styleManager(0),
         m_stylesModel(new StylesModel(0, this)),
         m_blockSignals(false),
+        m_isEmbedded(false),
         m_canvasBase(0)
 {
     widget.setupUi(this);

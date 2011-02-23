@@ -44,6 +44,11 @@ KWFrameRunaroundProperties::KWFrameRunaroundProperties(FrameConfigSharedState *s
     m_runAround->setId(widget.noRunaround, KWord::NoRunAround);
 
     widget.distance->setUnit(state->document()->unit());
+
+    connect(widget.runAround, SIGNAL(toggled(bool)),
+        widget.groupBox_4, SLOT(setEnabled(bool)));
+    connect(widget.runAround, SIGNAL(toggled(bool)),
+        widget.distance, SLOT(setEnabled(bool)));
 }
 
 void KWFrameRunaroundProperties::open(const QList<KWFrame*> &frames)
@@ -79,6 +84,12 @@ void KWFrameRunaroundProperties::open(const QList<KWFrame*> &frames)
     if (runaround != GuiHelper::TriState)
         m_runAround->button(ra)->setChecked(true);
     widget.distance->changeValue(distance);
+
+    bool hasRunAroundCurve = m_runAround->checkedId() == -1 // nothing selected
+        || m_runAroundSide->checkedId() == KWord::RunAround;
+
+    widget.distance->setEnabled(hasRunAroundCurve);
+    widget.groupBox_4->setEnabled(hasRunAroundCurve);
 }
 
 void KWFrameRunaroundProperties::open(KoShape *shape)

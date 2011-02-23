@@ -51,10 +51,17 @@ StyleManager::StyleManager(QWidget *parent)
         this, SLOT(addParagraphStyle(KoParagraphStyle*)));
     connect(widget.createPage, SIGNAL(newCharacterStyle(KoCharacterStyle*)),
         this, SLOT(addCharacterStyle(KoCharacterStyle*)));
+    connect(widget.createPage, SIGNAL(cancelled()),
+        this, SLOT(toStartupScreen()));
     connect(widget.paragButton, SIGNAL(clicked(bool)),
         this, SLOT(switchStyle(bool)));
     connect(widget.charButton, SIGNAL(clicked(bool)),
         this, SLOT(switchStyle(bool)));
+}
+
+void StyleManager::toStartupScreen()
+{
+    widget.stackedWidget->setCurrentWidget(widget.welcomePage);
 }
 
 StyleManager::~StyleManager()
@@ -224,6 +231,38 @@ void StyleManager::save()
 
     foreach (int styleId, m_alteredStyles) {
         KoParagraphStyle *orig = m_styleManager->paragraphStyle(styleId);
+        KoCharacterStyle *origc = m_styleManager->characterStyle(styleId);
+        if (orig == 0 && origc == 0) {
+            KoParagraphStyle *newParagStyle = m_shadowStyleManager->paragraphStyle(styleId);
+            KoCharacterStyle *newCharStyle = m_shadowStyleManager->characterStyle(styleId);
+            if (newParagStyle) {
+                orig = new KoParagraphStyle();
+                orig->copyProperties(newParagStyle);
+                m_styleManager->add(orig);
+                cloneMapper.insert(orig->styleId(), styleId);
+                styleId = orig->styleId();
+                m_shadowParagraphStyles.insert(newParagStyle, styleId);
+                m_shadowCharacterStyles.insert(newParagStyle->characterStyle(),
+                        orig->characterStyle()->styleId());
+            } else if (newCharStyle) {
+                // check if the char style is not part of a parag style.
+                foreach (KoParagraphStyle *p, m_shadowStyleManager->paragraphStyles()) {
+                    if (p->characterStyle() == newCharStyle) {
+                        newCharStyle = 0;
+                        break;
+                    }
+                }
+                if (newCharStyle) { // still here? Then its a stand-alone char style.
+                    origc = new KoCharacterStyle();
+                    origc->copyProperties(newCharStyle);
+                    m_styleManager->add(origc);
+                    cloneMapper.insert(origc->styleId(), styleId);
+                    styleId = origc->styleId();
+                    m_shadowCharacterStyles.insert(newCharStyle,
+                            origc->styleId());
+                }
+            }
+        }
         if (orig) {
             KoParagraphStyle *clone = m_shadowStyleManager->paragraphStyle(cloneMapper.value(styleId));
             Q_ASSERT(clone);
@@ -245,15 +284,12 @@ void StyleManager::save()
             }
             orig->setCharacterStyle(oldCharStyle);
             m_styleManager->alteredStyle(orig);
-        } else {
-            KoCharacterStyle *origc = m_styleManager->characterStyle(styleId);
-            if (origc) {
-                KoCharacterStyle *clone = m_shadowStyleManager->characterStyle(cloneMapper.value(styleId));
-                Q_ASSERT(clone);
-                origc->copyProperties(clone);
-                origc->setStyleId(styleId);
-                m_styleManager->alteredStyle(origc);
-            }
+        } else if (origc) {
+            KoCharacterStyle *clone = m_shadowStyleManager->characterStyle(cloneMapper.value(styleId));
+            Q_ASSERT(clone);
+            origc->copyProperties(clone);
+            origc->setStyleId(styleId);
+            m_styleManager->alteredStyle(origc);
         }
     }
     m_alteredStyles.clear();
@@ -264,6 +300,7 @@ void StyleManager::save()
 void StyleManager::buttonNewPressed()
 {
     widget.stackedWidget->setCurrentWidget(widget.createPage);
+    widget.createPage->setFocus();
     // that widget will emit a new style which we will add using addParagraphStyle or addCharacterStyle
     widget.styleTypeContainer->setVisible(false);
 }
@@ -282,18 +319,23 @@ void StyleManager::addParagraphStyle(KoParagraphStyle *style)
         cs->setName(style->name());
     addCharacterStyle(cs);
 
-    m_styleManager->add(style);
+    m_shadowStyleManager->add(style);
+    m_alteredStyles << style->styleId();
     widget.paragraphStylePage->setParagraphStyles(m_shadowStyleManager->paragraphStyles());
     widget.stackedWidget->setCurrentWidget(widget.welcomePage);
     widget.styleTypeContainer->setVisible(false);
+    setParagraphStyle(style, true);
 }
 
 void StyleManager::addCharacterStyle(KoCharacterStyle *style)
 {
     if (m_blockSignals) return;
 
-    m_styleManager->add(style);
+    m_shadowStyleManager->add(style);
+    m_alteredStyles << style->styleId();
+    widget.paragraphStylePage->setParagraphStyles(m_shadowStyleManager->paragraphStyles());
     widget.stackedWidget->setCurrentWidget(widget.welcomePage);
+    setCharacterStyle(style, true, false);
 }
 
 void StyleManager::buttonDeletePressed()
@@ -352,7 +394,6 @@ void StyleManager::hideSelector()
 }
 
 /* TODO
-    On new move focus to name text field.
     Add a connection to the same 'name' text field when I press enter it should press the create button.
     on 'new' use the currently selected style as a template
 */

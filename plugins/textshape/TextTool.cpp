@@ -683,7 +683,9 @@ void TextTool::mousePressEvent(KoPointerEvent *event)
             repaintCaret();
         int prevPosition = m_textEditor.data()->position();
         int position = pointToPosition(event->point);
-        m_textEditor.data()->setPosition(position, shiftPressed ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor);
+        if (position >= 0)
+            m_textEditor.data()->setPosition(position,
+                    shiftPressed ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor);
         if (shiftPressed) // altered selection.
             repaintSelection(prevPosition, m_textEditor.data()->position());
         else
@@ -862,8 +864,9 @@ int TextTool::pointToPosition(const QPointF &point) const
     int caretPos = m_textEditor.data()->document()->documentLayout()->hitTest(p, Qt::ExactHit);
     caretPos = qMax(caretPos, m_textShapeData->position());
     if (m_textShapeData->endPosition() == -1) {
-        kWarning(32500) << "Clicking in not fully laid-out textframe";
-        m_textShapeData->fireResizeEvent(); // requests a layout run ;)
+        //kWarning(32500) << "Clicking in not fully laid-out textframe";
+        //m_textShapeData->fireResizeEvent(); // requests a layout run ;)
+        return -1;
     }
     caretPos = qMin(caretPos, m_textShapeData->endPosition());
     return caretPos;

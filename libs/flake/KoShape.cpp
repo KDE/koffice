@@ -87,7 +87,9 @@ KoShapePrivate::KoShapePrivate(KoShape *shape)
     keepAspect(false),
     selectable(true),
     detectCollision(false),
-    protectContent(false)
+    protectContent(false),
+    editBlockDepth(0),
+    editBlockEndShouldEmit(false)
 {
     connectors.append(QPointF(0.5, 0.0));
     connectorPolicies.append(KoShapeConnectionPolicy(KoFlake::EscapeUp, Qt::AlignTop));
