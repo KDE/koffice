@@ -264,6 +264,7 @@ void StyleManager::save()
 void StyleManager::buttonNewPressed()
 {
     widget.stackedWidget->setCurrentWidget(widget.createPage);
+    widget.createPage->setFocus();
     // that widget will emit a new style which we will add using addParagraphStyle or addCharacterStyle
     widget.styleTypeContainer->setVisible(false);
 }
@@ -352,7 +353,6 @@ void StyleManager::hideSelector()
 }
 
 /* TODO
-    On new move focus to name text field.
     Add a connection to the same 'name' text field when I press enter it should press the create button.
     on 'new' use the currently selected style as a template
 */

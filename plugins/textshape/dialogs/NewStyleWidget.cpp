@@ -32,6 +32,7 @@ NewStyleWidget::NewStyleWidget(QWidget *parent)
     bg->addButton(widget.character);
 
     connect(widget.create, SIGNAL(pressed()), this, SLOT(createButtonPressed()));
+    setFocusProxy(widget.name);
 }
 
 void NewStyleWidget::createButtonPressed()
