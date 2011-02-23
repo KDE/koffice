@@ -1858,15 +1858,8 @@ void TextTool::formatParagraph()
 
 void TextTool::toggleShowChanges(bool on)//TODO transfer this in KoTextEditor
 {
-<<<<<<< HEAD
-    KoTextEditor *textEditor = m_textEditor.data();
-    if (textEditor == 0)
-        return;
-    ShowChangesCommand *command = new ShowChangesCommand(on, textEditor->document(), this->canvas());
-=======
     m_actionShowChanges->setChecked(on);
     ShowChangesCommand *command = new ShowChangesCommand(on, m_textShapeData->document(), this->canvas());
->>>>>>> koffice/change-tracking
     connect(command, SIGNAL(toggledShowChange(bool)), m_actionShowChanges, SLOT(setChecked(bool)));
     m_textEditor.data()->addCommand(command);
 }
