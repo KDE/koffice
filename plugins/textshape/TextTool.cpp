@@ -887,29 +887,26 @@ void TextTool::mouseMoveEvent(KoPointerEvent *event)
 
     int position = pointToPosition(event->point);
 
-    if (position > 0  && event->buttons() == Qt::NoButton) {
-        QTextCursor cursor(*(m_textEditor.data()->cursor()));
-        cursor.setPosition(position);
-
+    if (position > 0 && event->buttons() == Qt::NoButton) {
         QTextCursor mouseOver(m_textEditor.data()->document());
         mouseOver.setPosition(position);
-
         QTextCharFormat fmt = mouseOver.charFormat();
 
-        if (m_changeTracker && m_changeTracker->containsInlineChanges(mouseOver.charFormat())) {
-                m_changeTipTimer.start();
-                m_changeTipCursorPos = position;
-        }
-
-        if (cursor.charFormat().isAnchor())
+        if (fmt.isAnchor())
             useCursor(Qt::PointingHandCursor);
         else
             useCursor(Qt::IBeamCursor);
 
+        if (m_changeTracker && m_changeTracker->containsInlineChanges(fmt)) {
+            m_changeTipTimer.start();
+            m_changeTipCursorPos = position;
+        }
         return;
     }
-
-    if (position == m_textEditor.data()->position()) return;
+    if (event->buttons() == Qt::NoButton)
+        return;
+    if (position == m_textEditor.data()->position())
+        return;
     if (position >= 0) {
         repaintCaret();
         int prevPos = m_textEditor.data()->position();
