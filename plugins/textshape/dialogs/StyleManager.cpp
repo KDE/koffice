@@ -283,18 +283,21 @@ void StyleManager::addParagraphStyle(KoParagraphStyle *style)
         cs->setName(style->name());
     addCharacterStyle(cs);
 
-    m_styleManager->add(style);
+    m_shadowStyleManager->add(style);
     widget.paragraphStylePage->setParagraphStyles(m_shadowStyleManager->paragraphStyles());
     widget.stackedWidget->setCurrentWidget(widget.welcomePage);
     widget.styleTypeContainer->setVisible(false);
+    setParagraphStyle(style, true);
 }
 
 void StyleManager::addCharacterStyle(KoCharacterStyle *style)
 {
     if (m_blockSignals) return;
 
-    m_styleManager->add(style);
+    m_shadowStyleManager->add(style);
+    widget.paragraphStylePage->setParagraphStyles(m_shadowStyleManager->paragraphStyles());
     widget.stackedWidget->setCurrentWidget(widget.welcomePage);
+    setCharacterStyle(style, true, false);
 }
 
 void StyleManager::buttonDeletePressed()
