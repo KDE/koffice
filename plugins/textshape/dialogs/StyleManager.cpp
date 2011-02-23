@@ -241,6 +241,9 @@ void StyleManager::save()
                 m_styleManager->add(orig);
                 cloneMapper.insert(orig->styleId(), styleId);
                 styleId = orig->styleId();
+                m_shadowParagraphStyles.insert(newParagStyle, styleId);
+                m_shadowCharacterStyles.insert(newParagStyle->characterStyle(),
+                        orig->characterStyle()->styleId());
             } else if (newCharStyle) {
                 // check if the char style is not part of a parag style.
                 foreach (KoParagraphStyle *p, m_shadowStyleManager->paragraphStyles()) {
@@ -255,6 +258,8 @@ void StyleManager::save()
                     m_styleManager->add(origc);
                     cloneMapper.insert(origc->styleId(), styleId);
                     styleId = origc->styleId();
+                    m_shadowCharacterStyles.insert(newCharStyle,
+                            origc->styleId());
                 }
             }
         }
