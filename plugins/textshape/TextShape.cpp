@@ -196,7 +196,8 @@ QPointF TextShape::convertScreenPos(const QPointF &point)
 
 void TextShape::shapeChanged(ChangeType type, KoShape *shape)
 {
-    Q_UNUSED(shape);
+    if (shape != this)
+        return;
     if (type == PositionChanged || type == SizeChanged || type == CollisionDetected) {
         m_textShapeData->foul();
         KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
