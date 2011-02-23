@@ -61,6 +61,7 @@ set(kotext_LIB_SRCS
     styles/KoListStyle.cpp
     styles/KoListLevelProperties.cpp
     styles/ChangeFollower.cpp
+    styles/KoTableBorderStyle.cpp
     styles/KoTableStyle.cpp
     styles/KoTableColumnStyle.cpp
     styles/KoTableRowStyle.cpp
@@ -76,6 +77,11 @@ set(kotext_LIB_SRCS
     changetracker/KoChangeTracker.cpp
     changetracker/KoChangeTrackerElement.cpp
     changetracker/KoDeleteChangeMarker.cpp
+    changetracker/KoFormatChangeInformation.cpp
+    changetracker/KoDeletedRowColumnDataStore.cpp
+    changetracker/KoDeletedRowData.cpp
+    changetracker/KoDeletedColumnData.cpp
+    changetracker/KoDeletedCellData.cpp
     KoTextDrag.cpp
 )
 
@@ -144,7 +150,10 @@ install(
     changetracker/KoChangeTracker.h
     changetracker/KoChangeTrackerElement.h
     changetracker/KoDeleteChangeMarker.h
-
+    changetracker/KoDeletedRowColumnDataStore.h
+    changetracker/KoDeletedRowData.cpp
+    changetracker/KoDeletedColumnData.cpp
+    changetracker/KoDeletedCellData.cpp
     DESTINATION
     ${INCLUDE_INSTALL_DIR} COMPONENT Devel
 )

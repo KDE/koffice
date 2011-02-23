@@ -31,6 +31,8 @@
 #include "dialogs/FontDia.h"
 #include "dialogs/TableDialog.h"
 #include "dialogs/ChangeConfigureDialog.h"
+#include "dialogs/ChangeTrackingOptionsWidget.h"
+#include "dialogs/SimpleTableWidget.h"
 #include "commands/TextCutCommand.h"
 #include "commands/TextPasteCommand.h"
 #include "commands/ChangeListCommand.h"
@@ -76,6 +78,7 @@
 #include <KStandardAction>
 #include <KMimeType>
 #include <KMessageBox>
+#include <KUser>
 #include <QTabWidget>
 #include <QTextDocumentFragment>
 #include <QToolTip>
@@ -352,11 +355,46 @@ TextTool::TextTool(KoCanvasBase *canvas)
     }
     setPopupActionList(list);
 
-
     action = new KAction(i18n("Table..."), this);
     addAction("insert_table", action);
     action->setToolTip(i18n("Insert a table into the document."));
     connect(action, SIGNAL(triggered()), this, SLOT(insertTable()));
+    action  = new KAction(KIcon("edit-table-insert-row-above"), i18n("Row Above"), this);
+    action->setToolTip(i18n("Insert Row Above"));
+    addAction("insert_tablerow_above", action);
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(insertTableRowAbove()));
+
+    action  = new KAction(KIcon("edit-table-insert-row-below"), i18n("Row Below"), this);
+    action->setToolTip(i18n("Insert Row Below"));
+    addAction("insert_tablerow_below", action);
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(insertTableRowBelow()));
+
+    action  = new KAction(KIcon("edit-table-insert-column-left"), i18n("Column Left"), this);
+    action->setToolTip(i18n("Insert Column Left"));
+    addAction("insert_tablecolumn_left", action);
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(insertTableColumnLeft()));
+
+    action  = new KAction(KIcon("edit-table-insert-column-right"), i18n("Column Right"), this);
+    action->setToolTip(i18n("Insert Column Right"));
+    addAction("insert_tablecolumn_right", action);
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(insertTableColumnRight()));
+    action  = new KAction(KIcon("edit-table-delete-column"), i18n("Column"), this);
+    action->setToolTip(i18n("Delete Column"));
+    addAction("delete_tablecolumn", action);
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(deleteTableColumn()));
+
+    action  = new KAction(KIcon("edit-table-delete-row"), i18n("Row"), this);
+    action->setToolTip(i18n("Delete Row"));
+    addAction("delete_tablerow", action);
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(deleteTableRow()));
+
+    action  = new KAction(KIcon("merge"), i18n("Merge Cells"), this);
+    addAction("merge_tablecells", action);
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(mergeTableCells()));
+
+    action  = new KAction(KIcon("split"), i18n("Split Cells"), this);
+    addAction("split_tablecells", action);
+    connect(action, SIGNAL(triggered(bool)), this, SLOT(splitTableCells()));
 
     action = new KAction(i18n("Paragraph..."), this);
     addAction("format_paragraph", action);
@@ -413,7 +451,7 @@ TextTool::TextTool(KoCanvasBase *canvas)
     m_caretTimer.setInterval(500);
     connect(&m_caretTimer, SIGNAL(timeout()), this, SLOT(blinkCaret()));
 
-    m_changeTipTimer.setInterval(1000);
+    m_changeTipTimer.setInterval(500);
     m_changeTipTimer.setSingleShot(true);
     connect(&m_changeTipTimer, SIGNAL(timeout()), this, SLOT(showChangeTip()));
 }
@@ -462,10 +500,9 @@ TextTool::~TextTool()
 
 void TextTool::showChangeTip()
 {
-    KoTextEditor *textEditor = m_textEditor.data();
-    if (textEditor == 0)
+    if (!m_textShapeData || !m_changeTipCursorPos || !m_changeTracker->displayChanges())
         return;
-    QTextCursor c(textEditor->document());
+    QTextCursor c(m_textShapeData->document());
     c.setPosition(m_changeTipCursorPos);
     if (m_changeTracker && m_changeTracker->containsInlineChanges(c.charFormat())) {
         KoChangeTrackerElement *element = m_changeTracker->elementById(c.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt());
@@ -822,7 +859,7 @@ int TextTool::pointToPosition(const QPointF &point) const
         return -1;
     Q_ASSERT(m_textShapeData);
     QPointF p = m_textShape->convertScreenPos(point);
-    int caretPos = m_textEditor.data()->document()->documentLayout()->hitTest(p, Qt::FuzzyHit);
+    int caretPos = m_textEditor.data()->document()->documentLayout()->hitTest(p, Qt::ExactHit);
     caretPos = qMax(caretPos, m_textShapeData->position());
     if (m_textShapeData->endPosition() == -1) {
         kWarning(32500) << "Clicking in not fully laid-out textframe";
@@ -1490,6 +1527,10 @@ QWidget *TextTool::createOptionWidget()
     StylesWidget *styles = new StylesWidget(widget);
     styles->setCanvas(canvas());
     widget->addTab(styles, i18n("Styles"));
+    ChangeTrackingOptionsWidget *changeTrackingOptions = new ChangeTrackingOptionsWidget(this, widget);
+    widget->addTab(changeTrackingOptions, i18n("Change Tracking"));
+    SimpleTableWidget *stw = new SimpleTableWidget(this, 0);
+    widget->addTab(stw, i18n("Table"));
 
     connect(this, SIGNAL(styleManagerChanged(KoStyleManager *)), ssw, SLOT(setStyleManager(KoStyleManager *)));
     connect(this, SIGNAL(blockChanged(const QTextBlock&)), ssw, SLOT(setCurrentBlock(const QTextBlock&)));
@@ -1508,6 +1549,9 @@ QWidget *TextTool::createOptionWidget()
     connect(styles, SIGNAL(characterStyleSelected(KoCharacterStyle *)),
             this, SLOT(setStyle(KoCharacterStyle*)));
     connect(styles, SIGNAL(doneWithFocus()), this, SLOT(returnFocusToCanvas()));
+    connect(changeTrackingOptions, SIGNAL(doneWithFocus()), this, SLOT(returnFocusToCanvas()));
+    connect(m_actionShowChanges, SIGNAL(triggered(bool)), changeTrackingOptions, SLOT(toggleShowChanges(bool)));
+    connect(m_actionRecordChanges, SIGNAL(triggered(bool)), changeTrackingOptions, SLOT(toggleRecordChanges(bool)));
 
     updateStyleManager();
     if (m_textShape)
@@ -1758,10 +1802,48 @@ void TextTool::insertTable()
     TableDialog *dia = new TableDialog(0);
     if (dia->exec() == TableDialog::Accepted)
         m_textEditor.data()->insertTable(dia->rows(), dia->columns());
-
     delete dia;
 }
 
+void TextTool::insertTableRowAbove()
+{
+    m_textEditor.data()->insertTableRowAbove();
+}
+
+void TextTool::insertTableRowBelow()
+{
+    m_textEditor.data()->insertTableRowBelow();
+}
+
+void TextTool::insertTableColumnLeft()
+{
+    m_textEditor.data()->insertTableColumnLeft();
+}
+
+void TextTool::insertTableColumnRight()
+{
+    m_textEditor.data()->insertTableColumnRight();
+}
+
+void TextTool::deleteTableColumn()
+{
+    m_textEditor.data()->deleteTableColumn();
+}
+
+void TextTool::deleteTableRow()
+{
+    m_textEditor.data()->deleteTableRow();
+}
+
+void TextTool::mergeTableCells()
+{
+    m_textEditor.data()->mergeTableCells();
+}
+
+void TextTool::splitTableCells()
+{
+    m_textEditor.data()->splitTableCells();
+}
 
 void TextTool::formatParagraph()
 {
@@ -1776,16 +1858,22 @@ void TextTool::formatParagraph()
 
 void TextTool::toggleShowChanges(bool on)//TODO transfer this in KoTextEditor
 {
+<<<<<<< HEAD
     KoTextEditor *textEditor = m_textEditor.data();
     if (textEditor == 0)
         return;
     ShowChangesCommand *command = new ShowChangesCommand(on, textEditor->document(), this->canvas());
+=======
+    m_actionShowChanges->setChecked(on);
+    ShowChangesCommand *command = new ShowChangesCommand(on, m_textShapeData->document(), this->canvas());
+>>>>>>> koffice/change-tracking
     connect(command, SIGNAL(toggledShowChange(bool)), m_actionShowChanges, SLOT(setChecked(bool)));
     m_textEditor.data()->addCommand(command);
 }
 
 void TextTool::toggleRecordChanges(bool on)
 {
+    m_actionRecordChanges->setChecked(on);
     if (m_changeTracker)
         m_changeTracker->setRecordChanges(on);
 }
@@ -1797,13 +1885,17 @@ void TextTool::configureChangeTracking()
         insertionBgColor = m_changeTracker->getInsertionBgColor();
         deletionBgColor = m_changeTracker->getDeletionBgColor();
         formatChangeBgColor = m_changeTracker->getFormatChangeBgColor();
+        QString authorName = m_changeTracker->authorName();
+        KoChangeTracker::ChangeSaveFormat changeSaveFormat = m_changeTracker->saveFormat();
 
-        ChangeConfigureDialog changeDialog(insertionBgColor, deletionBgColor, formatChangeBgColor, canvas()->canvasWidget());
+        ChangeConfigureDialog changeDialog(insertionBgColor, deletionBgColor, formatChangeBgColor, authorName, changeSaveFormat, canvas()->canvasWidget());
 
         if (changeDialog.exec()) {
             m_changeTracker->setInsertionBgColor(changeDialog.getInsertionBgColor());
             m_changeTracker->setDeletionBgColor(changeDialog.getDeletionBgColor());
             m_changeTracker->setFormatChangeBgColor(changeDialog.getFormatChangeBgColor());
+            m_changeTracker->setAuthorName(changeDialog.authorName());
+            m_changeTracker->setSaveFormat(changeDialog.saveFormat());
             writeConfig();
         }
     }
@@ -2075,6 +2167,8 @@ void TextTool::readConfig()
 {
     if (m_changeTracker) {
         QColor bgColor, defaultColor;
+        QString changeAuthor;
+        int changeSaveFormat = KoChangeTracker::DELTAXML;
         KConfigGroup interface = KoGlobal::kofficeConfig()->group("Change-Tracking");
         if (interface.exists()) {
             bgColor = interface.readEntry("insertionBgColor", defaultColor);
@@ -2083,6 +2177,15 @@ void TextTool::readConfig()
             m_changeTracker->setDeletionBgColor(bgColor);
             bgColor = interface.readEntry("formatChangeBgColor", defaultColor);
             m_changeTracker->setFormatChangeBgColor(bgColor);
+            changeAuthor = interface.readEntry("changeAuthor", changeAuthor);
+            if (changeAuthor == "") {
+                KUser user(KUser::UseRealUserID);
+                m_changeTracker->setAuthorName(user.property(KUser::FullName).toString());
+            } else {
+                m_changeTracker->setAuthorName(changeAuthor);
+            }
+            changeSaveFormat = interface.readEntry("changeSaveFormat", changeSaveFormat);
+            m_changeTracker->setSaveFormat((KoChangeTracker::ChangeSaveFormat)(changeSaveFormat));
         }
     }
 }
@@ -2094,6 +2197,12 @@ void TextTool::writeConfig()
         interface.writeEntry("insertionBgColor", m_changeTracker->getInsertionBgColor());
         interface.writeEntry("deletionBgColor", m_changeTracker->getDeletionBgColor());
         interface.writeEntry("formatChangeBgColor", m_changeTracker->getFormatChangeBgColor());
+        KUser user(KUser::UseRealUserID);
+        QString changeAuthor = m_changeTracker->authorName();
+        if (changeAuthor != user.property(KUser::FullName).toString()) {
+            interface.writeEntry("changeAuthor", changeAuthor);
+        }
+        interface.writeEntry("changeSaveFormat", (int)(m_changeTracker->saveFormat()));
     }
 }
 
