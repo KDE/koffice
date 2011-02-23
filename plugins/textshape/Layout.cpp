@@ -126,7 +126,7 @@ qreal Layout::width()
     if (m_blockData && m_isRtl)
         ptWidth -= m_blockData->counterWidth() + m_blockData->counterSpacing();
     ptWidth -= m_format.leftMargin() + m_format.rightMargin();
-    ptWidth -= m_borderInsets.left + m_borderInsets.right + m_shapeBorder.right;
+    ptWidth -= m_borderInsets.left + m_borderInsets.right + m_shapeBorder.left + m_shapeBorder.right;
     if (m_block.layout()->lineCount() > 1)
         ptWidth -= m_dropCapsAffectedLineWidthAdjust;
     return ptWidth;
