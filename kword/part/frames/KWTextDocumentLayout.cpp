@@ -578,8 +578,12 @@ void KWTextDocumentLayout::layout()
 
         bottomOfText = line.line.y() + line.line.height();
         if (bottomOfText > m_state->shape->size().height() && document()->blockCount() == 1 && KWord::isHeaderFooter(m_frameSet)) {
-            TDEBUG << "requestMoreFrames" << (bottomOfText - m_state->shape->size().height());
-            m_frameSet->requestMoreFrames(bottomOfText - m_state->shape->size().height());
+            const KoTextShapeData::RelayoutForPageState relayoutState =
+                (KoTextShapeData::RelayoutForPageState) property("KoTextRelayoutForPage").toInt();
+            if (relayoutState == KoTextShapeData::NormalState) {
+                TDEBUG << "requestMoreFrames" << (bottomOfText - m_state->shape->size().height());
+                m_frameSet->requestMoreFrames(bottomOfText - m_state->shape->size().height());
+            }
             cleanupAnchors();
             return;
         }
