@@ -337,14 +337,24 @@ int KoTextDocumentLayout::pageCount() const
 
 void KoTextDocumentLayout::documentChanged(int position, int charsRemoved, int charsAdded)
 {
-    Q_UNUSED(charsAdded);
     Q_UNUSED(charsRemoved);
     if (shapes().count() == 0) // nothing to do.
         return;
 
-    if (document()->documentLayout()->property("KoTextRelayoutForPage").toInt() == KoTextShapeData::LayoutOrig)
+/*
+    switch (document()->documentLayout()->property("KoTextRelayoutForPage").toInt()) {
+    case KoTextShapeData::NormalState:
+        kDebug() << "KoTextRelayoutForPage in NormalState"; break;
+    case KoTextShapeData::LayoutCopyShape:
+        kDebug() << "KoTextRelayoutForPage in LayoutCopyShape"; break;
+    case KoTextShapeData::LayoutOrig:
+        kDebug() << "KoTextRelayoutForPage in LayoutOrig, skipping relayout"; break;
+    }
+*/
+    if (document()->documentLayout()->property("KoTextRelayoutForPage").toInt() == KoTextShapeData::LayoutOrig) {
         // don't refresh if we relayout after a relayout-for-page
         return;
+    }
 
     int from = position;
     const int to = from + charsAdded;

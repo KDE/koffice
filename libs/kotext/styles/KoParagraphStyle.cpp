@@ -305,6 +305,7 @@ void KoParagraphStyle::unapplyStyle(const QTextBlock &block) const
     }
     if (d->listStyle && block.textList()) // TODO check its the same one?
         block.textList()->remove(block);
+    cursor.endEditBlock();
 }
 
 void KoParagraphStyle::setLineHeightPercent(int lineHeight)

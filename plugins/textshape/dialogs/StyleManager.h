@@ -61,6 +61,7 @@ private slots:
     void setCharacterStyle(KoCharacterStyle *style, bool canDelete);
     // switches between paragraph and character styles
     void switchStyle(bool on);
+    void toStartupScreen();
 
 private:
     void setCharacterStyle(KoCharacterStyle *style, bool canDelete, bool partOfParag);
