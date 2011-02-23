@@ -51,10 +51,17 @@ StyleManager::StyleManager(QWidget *parent)
         this, SLOT(addParagraphStyle(KoParagraphStyle*)));
     connect(widget.createPage, SIGNAL(newCharacterStyle(KoCharacterStyle*)),
         this, SLOT(addCharacterStyle(KoCharacterStyle*)));
+    connect(widget.createPage, SIGNAL(cancelled()),
+        this, SLOT(toStartupScreen()));
     connect(widget.paragButton, SIGNAL(clicked(bool)),
         this, SLOT(switchStyle(bool)));
     connect(widget.charButton, SIGNAL(clicked(bool)),
         this, SLOT(switchStyle(bool)));
+}
+
+void StyleManager::toStartupScreen()
+{
+    widget.stackedWidget->setCurrentWidget(widget.welcomePage);
 }
 
 StyleManager::~StyleManager()

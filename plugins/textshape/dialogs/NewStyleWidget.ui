@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>271</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -54,14 +54,33 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
+   <item row="3" column="2">
     <widget class="QPushButton" name="create">
      <property name="text">
       <string>Create</string>
      </property>
+     <property name="autoDefault">
+      <bool>true</bool>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
-   <item row="3" column="2">
+   <item row="4" column="0" colspan="3">
+    <spacer name="spacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>311</width>
+       <height>151</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="3" column="1">
     <spacer name="spacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -74,21 +93,32 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="0" colspan="3">
-    <spacer name="spacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+   <item row="3" column="3">
+    <widget class="QPushButton" name="bCancel">
+     <property name="text">
+      <string>Cancel</string>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>221</width>
-       <height>180</height>
-      </size>
-     </property>
-    </spacer>
+    </widget>
    </item>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>name</sender>
+   <signal>returnPressed()</signal>
+   <receiver>create</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>190</x>
+     <y>12</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>101</x>
+     <y>105</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
