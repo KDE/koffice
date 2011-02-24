@@ -167,7 +167,6 @@ void KWCanvas::inputMethodEvent(QInputMethodEvent *event)
 void KWCanvas::paintEvent(QPaintEvent *ev)
 {
     QPainter painter(this);
-    painter.eraseRect(ev->rect());
     paint(painter, ev->rect());
     painter.end();
 }
