@@ -83,7 +83,7 @@ public:
     /**
      * List all frames this frameset has.  In the order that any content will flow through them.
      */
-    const QList<KWFrame*> frames() const {
+    QList<KWFrame*> frames() const {
         return m_frames;
     }
 
