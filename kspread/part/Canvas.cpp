@@ -391,9 +391,4 @@ void Canvas::disableAutoScroll()
     view()->disableAutoScroll();
 }
 
-void Canvas::setCursor(const QCursor &cursor)
-{
-    QWidget::setCursor(cursor);
-}
-
 #include "Canvas.moc"

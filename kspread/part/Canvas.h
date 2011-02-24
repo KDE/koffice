@@ -96,7 +96,6 @@ public:
 
     virtual Sheet* activeSheet() const;
     virtual KSpread::Selection* selection() const;
-    virtual void setCursor(const QCursor &cursor);
 
 public Q_SLOTS:
     void setDocumentOffset(const QPoint& offset) {

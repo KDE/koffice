@@ -172,11 +172,6 @@ void KWCanvas::paintEvent(QPaintEvent *ev)
     painter.end();
 }
 
-void KWCanvas::setCursor(const QCursor &cursor)
-{
-    QWidget::setCursor(cursor);
-}
-
 void KWCanvas::updateInputMethodInfo()
 {
     updateMicroFocus();

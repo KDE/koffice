@@ -193,9 +193,4 @@ void KoPACanvas::showContextMenu( const QPoint& globalPos, const QList<QAction*>
         menu->exec( globalPos );
 }
 
-void KoPACanvas::setCursor(const QCursor &cursor) 
-{
-    QWidget::setCursor(cursor);
-}
-
 #include <KoPACanvas.moc>

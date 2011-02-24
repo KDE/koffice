@@ -174,7 +174,6 @@ public:
 
     virtual ColumnHeader* columnHeader() const;
     virtual RowHeader* rowHeader() const;
-    virtual void setCursor(const QCursor &cursor);
 
     virtual void showContextMenu(const QPoint& globalPos) { Q_UNUSED(globalPos); }
 private:

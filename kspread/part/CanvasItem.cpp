@@ -393,9 +393,4 @@ RowHeader* CanvasItem::rowHeader() const
     return d->rowHeader;
 }
 
-void CanvasItem::setCursor(const QCursor &cursor)
-{
-    QGraphicsWidget::setCursor(cursor);
-}
-
 #include "CanvasItem.moc"
