@@ -10,7 +10,6 @@ set(kwordprivate_LIB_SRCS
     KWFactory.cpp
     KWord.cpp
     KWApplicationConfig.cpp
-    KWCanvasBase.cpp
     KWCanvas.cpp
     KWDocument.cpp
     KWGui.cpp

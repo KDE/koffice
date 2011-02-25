@@ -25,7 +25,7 @@
 class KWPageManager;
 class KoViewConverter;
 class KWDocument;
-class KoCanvasBase;
+class KWCanvas;
 
 #include "KWPage.h"
 #include "kword_export.h"
@@ -110,10 +110,9 @@ public:
      *    KWViewMode *vm = KWViewMode::create(type, myCanvas);
      *  @endcode
      * @param viewModeType the type of viewMode
-     * @param document
      * @param canvas passed to the new ViewMode as a parent for which this viewMode is made
      */
-    static KWViewMode *create(const QString& viewModeType, KWDocument *document, KoCanvasBase* canvas);
+    static KWViewMode *create(const QString &viewModeType, KWCanvas *canvas);
 
     /**
      * This method converts a clip-rect of the view to a set of cliprects as they are
