@@ -2096,10 +2096,6 @@ void KoTextLoader::loadTableCell(KoXmlElement &rowTag, QTextTable *tbl, QList<QR
         if (cellStyle)
             cellStyle->applyStyle(cellFormat);
 
-        if (d->changeTracker && d->changeStack.count()) {
-            cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, d->changeStack.top());
-        }
-
         cell.setFormat(cellFormat);
 
         // handle inline Rdf
@@ -2114,10 +2110,17 @@ void KoTextLoader::loadTableCell(KoXmlElement &rowTag, QTextTable *tbl, QList<QR
 
         cursor = cell.firstCursorPosition();
         loadBody(rowTag, cursor);
+
+        if (d->changeTracker && d->changeStack.count()) {
+            QTextTableCellFormat cellFormat = cell.format().toTableCellFormat();
+            cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, d->changeStack.top());
+            cell.setFormat(cellFormat);
+        }
     }
 
     if (rowTag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
         d->closeChangeRegion(rowTag);
+    
 }
 
 void KoTextLoader::loadShape(const KoXmlElement &element, QTextCursor &cursor)
