@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
  *
- * Copyright (C) 2006-2007, 2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2006-2008 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -32,6 +32,7 @@
 #include "KoShapeConfigFactoryBase.h"
 #include "KoShapeFactoryBase.h"
 #include "KoShape.h"
+#include "KoShapeRegistry.h"
 
 #include <kpagedialog.h>
 #include <klocale.h>
@@ -41,12 +42,19 @@ class KoShapeController::Private
 public:
     Private()
         : canvas(0),
-        shapeController(0)
+        shapeController(0),
+        dummyRm(0)
     {
+    }
+
+    ~Private()
+    {
+        delete dummyRm;
     }
 
     KoCanvasBase *canvas;
     KoShapeControllerBase *shapeController;
+    KoResourceManager *dummyRm; // only used when there is no shapeController
 
     QUndoCommand* addShape(KoShape *shape, bool showDialog, QUndoCommand *parent) {
         Q_ASSERT(canvas->shapeManager());
@@ -156,7 +164,16 @@ void KoShapeController::setShapeControllerBase(KoShapeControllerBase* shapeContr
 
 KoResourceManager *KoShapeController::resourceManager() const
 {
-    if (!d->shapeController)
-        return 0;
+    if (!d->shapeController) {
+        if (!d->dummyRm) {
+            d->dummyRm = new KoResourceManager();
+            KoShapeRegistry *registry = KoShapeRegistry::instance();
+            foreach (const QString &id, registry->keys()) {
+                KoShapeFactoryBase *shapeFactory = registry->value(id);
+                shapeFactory->newDocumentResourceManager(d->dummyRm);
+            }
+        }
+        return d->dummyRm;
+    }
     return d->shapeController->resourceManager();
 }
