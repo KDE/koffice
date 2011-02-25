@@ -20,7 +20,6 @@ set( kopageapp_LIB_SRCS
      KoPAView.cpp
      KoPAViewBase.cpp
      KoPACanvas.cpp
-     KoPACanvasItem.cpp
      KoPACanvasBase.cpp
      KoPASavingContext.cpp
      KoPAPixmapCache.cpp
@@ -74,7 +73,6 @@ install(TARGETS kopageapp  ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
     kopageapp_export.h
     KoPACanvas.h
-    KoPACanvasItem.h
     KoPACanvasBase.h
     KoPADocument.h
     KoPageApp.h

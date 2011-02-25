@@ -38,7 +38,6 @@
 #include "tools/SCAnimationToolFactory.h"
 #include "commands/SCSetCustomSlideShowsCommand.h"
 #include <KoPACanvas.h>
-#include <KoPACanvasItem.h>
 #include <KoPAViewModeNormal.h>
 #include <KoPASavingContext.h>
 #include <KoPALoadingContext.h>
@@ -102,14 +101,6 @@ SCDocument::~SCDocument()
 KoView * SCDocument::createViewInstance(QWidget *parent)
 {
     return new SCView(this, parent);
-}
-
-QGraphicsItem *SCDocument::createCanvasItem()
-{
-    KoPACanvasItem *canvasItem = new KoPACanvasItem(this);
-    canvasItem->masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(canvasItem->masterShapeManager(),
-						  new SCPageSelectStrategyActive(canvasItem)));
-    return canvasItem;
 }
 
 const char * SCDocument::odfTagName(bool withNamespace)

@@ -171,8 +171,6 @@ protected:
 
     KoView* createViewInstance(QWidget* parent);
 
-    QGraphicsItem *createCanvasItem();
-
     /**
      * @reimp Overloaded function of KoDocument.
      */

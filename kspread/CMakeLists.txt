@@ -125,7 +125,6 @@ SET (interfaces_DIR_SRCS
 SET (part_DIR_SRCS
     part/CanvasBase.cpp
     part/Canvas.cpp
-    part/CanvasItem.cpp
     part/CellTool.cpp
     part/CellToolFactory.cpp
     #part/Digest.cpp
@@ -133,7 +132,6 @@ SET (part_DIR_SRCS
     part/Factory.cpp
     part/Headers.cpp
     part/HeaderWidgets.cpp
-    part/HeaderItems.cpp
     part/PrintJob.cpp
     part/ToolRegistry.cpp
     part/TabBar.cpp

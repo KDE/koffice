@@ -81,8 +81,6 @@ public:
     /// reimplemented from KoDocument
     virtual KoView* createViewInstance(QWidget*);
     /// reimplemented from KoDocument
-    virtual QGraphicsItem *createCanvasItem();
-    /// reimplemented from KoDocument
     virtual int pageCount() const {
         return pageManager()->pageCount();
     }

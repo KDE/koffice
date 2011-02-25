@@ -128,8 +128,7 @@ public:
             storeInternal(false),
             bLoading(false),
             startUpWidget(0),
-            undoStack(0),
-            canvasItem(0)
+            undoStack(0)
 
     {
         confirmNonNativeSave[0] = true;
@@ -206,8 +205,6 @@ public:
     bool bEmpty;
 
     KoPageLayout pageLayout;
-
-    QGraphicsItem *canvasItem;
 };
 
 // Used in singleViewMode
@@ -2581,23 +2578,6 @@ bool KoDocument::isEmpty() const
 void KoDocument::setEmpty()
 {
     d->bEmpty = true;
-}
-
-QGraphicsItem *KoDocument::canvasItem()
-{
-    if (!d->canvasItem) {
-        d->canvasItem = createCanvasItem();
-    }
-    return d->canvasItem;
-}
-
-QGraphicsItem *KoDocument::createCanvasItem()
-{
-    KoView *view = createView();
-    QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget();
-    QWidget *canvasController = view->findChild<KoCanvasControllerWidget*>();
-    proxy->setWidget(canvasController);
-    return proxy;
 }
 
 // static

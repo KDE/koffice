@@ -136,16 +136,6 @@ public:
     virtual const QWidget *canvasWidget() const = 0;
 
     /**
-     * Return the widget that will be added to the scrollArea.
-     */
-    virtual QGraphicsWidget *canvasItem() { return 0; }
-
-    /**
-     * Return the widget that will be added to the scrollArea.
-     */
-    virtual const QGraphicsWidget *canvasItem() const{ return 0; }
-
-    /**
      * Return the unit of the current document for initialization of the widgets created
      * by the flake framework.
      * @see KoDocument::unit()

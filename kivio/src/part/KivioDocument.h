@@ -41,7 +41,6 @@ class KivioDocument : public KoPADocument
     protected:
         /// Creates a KivioView instance and returns it
         virtual KoView* createViewInstance(QWidget* parent);
-        virtual QGraphicsItem *createCanvasItem();
         const char *odfTagName(bool withNamespace);
 };
 

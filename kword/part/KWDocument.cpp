@@ -28,7 +28,6 @@
 #include "KWFactory.h"
 #include "KWView.h"
 #include "KWCanvas.h"
-#include "KWCanvasItem.h"
 #include "KWPageManager.h"
 #include "KWPage.h"
 #include "KWPageStyle.h"
@@ -280,25 +279,6 @@ KoView *KWDocument::createViewInstance(QWidget *parent)
         KoToolManager::instance()->switchToolRequested(KoInteractionTool_ID);
 
     return view;
-}
-
-QGraphicsItem *KWDocument::createCanvasItem()
-{
-    // caller owns the canvas item
-    KWCanvasItem *item = new KWCanvasItem(m_viewMode, this);
-
-    if (m_magicCurtain) {
-        item->shapeManager()->addShape(m_magicCurtain, KoShapeManager::AddWithoutRepaint);
-    }
-    foreach (KWFrameSet *fs, m_frameSets) {
-        if (fs->frameCount() == 0) {
-            continue;
-        }
-        foreach (KWFrame *frame, fs->frames()) {
-            item->shapeManager()->addShape(frame->shape(), KoShapeManager::AddWithoutRepaint);
-        }
-    }
-    return item;
 }
 
 KWPage KWDocument::insertPage(int afterPageNum, const QString &masterPageName)
