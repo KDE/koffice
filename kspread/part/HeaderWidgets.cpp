@@ -418,11 +418,11 @@ void ColumnHeaderWidget::toolChanged(const QString& toolId)
  *
  ****************************************************************/
 
-SelectAllButtonWidget::SelectAllButtonWidget(CanvasBase* canvasBase)
-        : QWidget(canvasBase->canvasWidget())
-        , SelectAllButton(canvasBase)
+SelectAllButtonWidget::SelectAllButtonWidget(Canvas *canvas)
+        : QWidget(canvas->canvasWidget())
+        , SelectAllButton(canvas)
 {
-    connect(canvasBase->toolProxy(), SIGNAL(toolChanged(const QString&)),
+    connect(canvas->toolProxy(), SIGNAL(toolChanged(const QString&)),
             this, SLOT(toolChanged(const QString&)));
 }
 
@@ -450,7 +450,7 @@ void SelectAllButtonWidget::mouseReleaseEvent(QMouseEvent* _ev)
 
 void SelectAllButtonWidget::wheelEvent(QWheelEvent* _ev)
 {
-    QApplication::sendEvent(static_cast<Canvas*>(m_canvasBase), _ev);
+    QApplication::sendEvent(static_cast<Canvas*>(m_canvas), _ev);
 }
 
 void SelectAllButtonWidget::toolChanged(const QString& toolId)

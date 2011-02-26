@@ -118,7 +118,7 @@ class SelectAllButtonWidget : public QWidget, public SelectAllButton
 {
     Q_OBJECT
 public:
-    explicit SelectAllButtonWidget(CanvasBase* canvasBase);
+    explicit SelectAllButtonWidget(Canvas* canvas);
     virtual ~SelectAllButtonWidget();
 
     virtual QPalette palette() const { return QWidget::palette(); }

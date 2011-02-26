@@ -27,7 +27,7 @@ class KoPointerEvent;
 
 namespace KSpread
 {
-class CanvasBase;
+class Canvas;
 class Selection;
 class View;
 
@@ -37,7 +37,7 @@ class View;
 class ColumnHeader
 {
 public:
-    ColumnHeader(CanvasBase *_canvas);
+    ColumnHeader(Canvas *_canvas);
     virtual ~ColumnHeader();
 
     int markerColumn() const {
@@ -70,7 +70,7 @@ protected:
     void doToolChanged(const QString& toolId);
 
 protected:
-    CanvasBase *m_pCanvas;
+    Canvas *m_pCanvas;
 
     /**
      * Flag that indicates whether the user wants to mark columns.
@@ -128,7 +128,7 @@ protected:
 class RowHeader
 {
 public:
-    RowHeader(CanvasBase *_canvas);
+    RowHeader(Canvas *_canvas);
     virtual ~RowHeader();
 
     int markerRow() const {
@@ -158,7 +158,7 @@ protected:
 
     void doToolChanged(const QString& toolId);
 protected:
-    CanvasBase *m_pCanvas;
+    Canvas *m_pCanvas;
 
     bool m_bSelection;
     int m_iSelectionAnchor;
@@ -187,7 +187,7 @@ protected:
 class SelectAllButton
 {
 public:
-    explicit SelectAllButton(CanvasBase* canvasBase);
+    explicit SelectAllButton(Canvas *canvas);
     virtual ~SelectAllButton();
 
     virtual QPalette palette() const = 0;
@@ -199,7 +199,7 @@ protected:
     void doToolChanged(const QString& toolId);
 
 protected:
-    CanvasBase* m_canvasBase;
+    Canvas* m_canvas;
     bool m_mousePressed;
     bool m_cellToolIsActive;
 };

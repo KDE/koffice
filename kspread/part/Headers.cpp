@@ -64,7 +64,7 @@
 #include <KoGlobal.h>
 
 // KSpread
-#include "CanvasBase.h"
+#include "Canvas.h"
 #include "Cell.h"
 #include "Doc.h"
 #include "kspread_limits.h"
@@ -85,8 +85,8 @@ using namespace KSpread;
  *
  ****************************************************************/
 
-RowHeader::RowHeader(CanvasBase *_canvas)
-        : m_pCanvas(_canvas), m_bSelection(false),
+RowHeader::RowHeader(Canvas *canvas)
+        : m_pCanvas(canvas), m_bSelection(false),
         m_iSelectionAnchor(1), m_bResize(false), m_lSize(0), m_bMousePressed(false),
         m_cellToolIsActive(true)
 {
@@ -545,8 +545,8 @@ void RowHeader::doToolChanged(const QString& toolId)
  *
  ****************************************************************/
 
-ColumnHeader::ColumnHeader(CanvasBase *_canvas)
-    : m_pCanvas(_canvas), m_bSelection(false),
+ColumnHeader::ColumnHeader(Canvas*canvas)
+    : m_pCanvas(canvas), m_bSelection(false),
     m_iSelectionAnchor(1), m_bResize(false), m_lSize(0), m_bMousePressed(false),
     m_cellToolIsActive(true)
 {
@@ -1181,8 +1181,8 @@ void ColumnHeader::doToolChanged(const QString& toolId)
  *
  ****************************************************************/
 
-SelectAllButton::SelectAllButton(CanvasBase* canvasBase)
-        : m_canvasBase(canvasBase)
+SelectAllButton::SelectAllButton(Canvas* canvas)
+        : m_canvas(canvas)
         , m_mousePressed(false)
         , m_cellToolIsActive(true)
 {
@@ -1198,8 +1198,8 @@ void SelectAllButton::paint(QPainter* painter, const QRectF& painterRect)
     painter->setClipRect(painterRect);
 
     // if all cells are selected
-    if (m_canvasBase->selection()->isAllSelected() &&
-            !m_canvasBase->selection()->referenceSelectionMode() && m_cellToolIsActive) {
+    if (m_canvas->selection()->isAllSelected() &&
+            !m_canvas->selection()->referenceSelectionMode() && m_cellToolIsActive) {
         // selection brush/color
         QColor selectionColor(palette().highlight().color());
         selectionColor.setAlpha(127);
@@ -1234,7 +1234,7 @@ void SelectAllButton::mouseRelease(KoPointerEvent* event)
     if (!m_mousePressed)
         return;
     m_mousePressed = false;
-    m_canvasBase->selection()->selectAll();
+    m_canvas->selection()->selectAll();
 }
 
 void SelectAllButton::doToolChanged(const QString& toolId)
