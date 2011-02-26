@@ -136,16 +136,18 @@ void KoShapeManagerPrivate::update(const QRectF &rect, const KoShape *shape, boo
 }
 
 
-KoShapeManager::KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &shapes)
-        : d(new KoShapeManagerPrivate(this, canvas))
+KoShapeManager::KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &shapes, QObject *parent)
+        : QObject(parent),
+        d(new KoShapeManagerPrivate(this, canvas))
 {
     Q_ASSERT(d->canvas); // not optional.
     connect(d->selection, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
     setShapes(shapes);
 }
 
-KoShapeManager::KoShapeManager(KoCanvasBase *canvas)
-        : d(new KoShapeManagerPrivate(this, canvas))
+KoShapeManager::KoShapeManager(KoCanvasBase *canvas, QObject *parent)
+        : QObject(parent),
+        d(new KoShapeManagerPrivate(this, canvas))
 {
     Q_ASSERT(d->canvas); // not optional.
     connect(d->selection, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
