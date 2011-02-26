@@ -181,7 +181,6 @@ protected:
     virtual void tabletEvent(QTabletEvent *e);
 
 private:
-    void mousePressed(KoPointerEvent *event);
     void setVertScrollBarPos(qreal pos);
     void setHorizScrollBarPos(qreal pos);
 

@@ -120,7 +120,7 @@
 #include "Canvas.h"
 #include "Global.h"
 #include "Headers.h"
-#include "HeaderWidgets.h"
+#include "Headers.h"
 #include "Localization.h"
 #include "Map.h"
 #include "NamedAreaManager.h"
@@ -184,9 +184,9 @@ public:
     KoCanvasController* canvasController;
     KoZoomController* zoomController;
     KoZoomHandler* zoomHandler;
-    RowHeaderWidget *rowHeader;
-    ColumnHeaderWidget *columnHeader;
-    SelectAllButtonWidget* selectAllButton;
+    RowHeader *rowHeader;
+    ColumnHeader *columnHeader;
+    SelectAllButton *selectAllButton;
     QScrollBar *horzScrollBar;
     QScrollBar *vertScrollBar;
     TabBar *tabBar;
@@ -733,11 +733,11 @@ void View::initView()
     connect(d->zoomController, SIGNAL(zoomChanged(KoZoomMode::Mode, qreal)),
             this, SLOT(viewZoom(KoZoomMode::Mode, qreal)));
 
-    d->columnHeader = new ColumnHeaderWidget(this, d->canvas, this);
-    d->rowHeader = new RowHeaderWidget(this, d->canvas , this);
+    d->columnHeader = new ColumnHeader(this, d->canvas, this);
+    d->rowHeader = new RowHeader(this, d->canvas , this);
     d->columnHeader->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     d->rowHeader->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
-    d->selectAllButton = new SelectAllButtonWidget(d->canvas);
+    d->selectAllButton = new SelectAllButton(d->canvas, selection());
     d->selectAllButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
     d->canvas->setFocusPolicy(Qt::StrongFocus);
@@ -826,12 +826,12 @@ KoCanvasController* View::canvasController() const
     return d->canvasController;
 }
 
-ColumnHeaderWidget* View::columnHeader()const
+ColumnHeader* View::columnHeader()const
 {
     return d->columnHeader;
 }
 
-RowHeaderWidget* View::rowHeader()const
+RowHeader* View::rowHeader()const
 {
     return d->rowHeader;
 }

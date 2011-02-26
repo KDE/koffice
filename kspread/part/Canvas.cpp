@@ -58,7 +58,7 @@
 
 // KSpread
 #include "Doc.h"
-#include "HeaderWidgets.h"
+#include "Headers.h"
 #include "Map.h"
 #include "RowColumnFormat.h"
 #include "Sheet.h"
@@ -116,9 +116,6 @@ View* Canvas::view() const
 
 void Canvas::mousePressEvent(QMouseEvent* event)
 {
-    //KoPointerEvent pev(event, QPointF());
-    //mousePressed(&pev);
-
     QMouseEvent *const origEvent = event;
     QPointF documentPosition;
     if (layoutDirection() == Qt::LeftToRight) {
@@ -148,43 +145,6 @@ void Canvas::mousePressEvent(QMouseEvent* event)
         delete event;
     }
 }
-
-void Canvas::mousePressed(KoPointerEvent *event)
-{
-    KoPointerEvent *const origEvent = event;
-    QPointF documentPosition;
-    if (layoutDirection() == Qt::LeftToRight) {
-        documentPosition = viewConverter()->viewToDocument(event->pos()) + offset();
-    } else {
-        const QPoint position(width() - event->x(), event->y());
-        const QPointF offset(this->offset().x(), this->offset().y());
-        documentPosition = viewConverter()->viewToDocument(position) + offset;
-        /*XXX TODO
-        kDebug() << "----------------------------";
-        kDebug() << "event->pos():" << event->pos();
-        kDebug() << "event->globalPos():" << event->globalPos();
-        kDebug() << "position:" << position;
-        kDebug() << "offset:" << offset;
-        kDebug() << "documentPosition:" << documentPosition;
-        event = new QMouseEvent(QEvent::MouseButtonPress, position, mapToGlobal(position), event->button(), event->buttons(), event->modifiers());
-        kDebug() << "newEvent->pos():" << event->pos();
-        kDebug() << "newEvent->globalPos():" << event->globalPos();*/
-    }
-
-    event = new KoPointerEvent(event, documentPosition);
-
-    // flake
-    m_toolProxy->mousePressEvent(event);
-    if (!event->isAccepted() && event->button() == Qt::RightButton) {
-        showContextMenu(origEvent->globalPos());
-        origEvent->accept();
-    }
-    if (layoutDirection() == Qt::RightToLeft) {
-        //delete event;
-    }
-    delete event;
-}
-
 
 void Canvas::showContextMenu(const QPoint& globalPos)
 {

@@ -130,7 +130,6 @@ SET (part_DIR_SRCS
     part/Doc.cpp
     part/Factory.cpp
     part/Headers.cpp
-    part/HeaderWidgets.cpp
     part/PrintJob.cpp
     part/ToolRegistry.cpp
     part/TabBar.cpp
