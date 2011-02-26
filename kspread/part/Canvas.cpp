@@ -43,75 +43,29 @@
 
 // Local
 #include "Canvas.h"
-//#include "CanvasBase_p.h"
 
-// std
-#include <assert.h>
-#include <float.h>
-#include <stdlib.h>
-
-// Qt
-#include <QApplication>
-#include <QBuffer>
-#include <QByteArray>
-#include <QClipboard>
-#include <QDragLeaveEvent>
-#include <QDragMoveEvent>
-#include <QDropEvent>
-#include <QEvent>
-#include <QFocusEvent>
-#include <QKeyEvent>
-#include <QLabel>
-#include <QList>
 #include <QMenu>
 #include <QMouseEvent>
-#include <QPainter>
-#include <QPaintEvent>
-#include <QPixmap>
-#include <QPoint>
 #include <QScrollBar>
-#include <QTextStream>
 #include <QToolTip>
-#include <QWidget>
-
-// KDE
-#include <kcursor.h>
-#include <kdebug.h>
-#include <kmessagebox.h>
-#include <krun.h>
-#include <kmimetype.h>
-#include <ksharedptr.h>
-#include <kwordwrap.h>
 #include <kxmlguifactory.h>
 
 // KOffice
-#include <KoCanvasController.h>
 #include <KoShapeManager.h>
-#include <KoStore.h>
-#include <KoToolManager.h>
 #include <KoToolProxy.h>
-#include <KoXmlWriter.h>
 #include <KoZoomHandler.h>
 #include <KoPointerEvent.h>
 
 // KSpread
-#include "CellStorage.h"
 #include "Doc.h"
-#include "Global.h"
 #include "HeaderWidgets.h"
-#include "Localization.h"
 #include "Map.h"
 #include "RowColumnFormat.h"
 #include "Sheet.h"
-#include "Util.h"
-#include "Validity.h"
 #include "View.h"
 
 // commands
-#include "commands/CopyCommand.h"
-#include "commands/DeleteCommand.h"
 #include "commands/PasteCommand.h"
-#include "commands/StyleCommand.h"
 
 // ui
 #include "ui/CellView.h"

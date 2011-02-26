@@ -37,7 +37,6 @@
 #include "Global.h"
 
 #include <KoCanvasBase.h>
-#include <KoZoomHandler.h>
 
 #include <QList>
 #include <QWidget>
@@ -49,32 +48,16 @@
 #define XBORDER_HEIGHT 20
 
 class KoPointerEvent;
-class QDragLeaveEvent;
-class QDragMoveEvent;
-class QDropEvent;
-class QEvent;
-class QFocusEvent;
-class QKeyEvent;
-class QMouseEvent;
-class QPainter;
-class QPaintEvent;
-class QPen;
-class QResizeEvent;
-class QScrollBar;
-class QLabel;
+class KoZoomHandler;
 
 namespace KSpread
 {
-class Cell;
-class CellEditor;
-class Canvas;
 class ColumnHeader;
 class Doc;
 class Sheet;
 class RowHeader;
 class Selection;
 class View;
-class SheetView;
 
 
 /**
