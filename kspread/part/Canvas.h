@@ -39,7 +39,6 @@
 #include <KoCanvasBase.h>
 #include <KoZoomHandler.h>
 
-#include <QPointer>
 #include <QList>
 #include <QWidget>
 
@@ -249,11 +248,9 @@ private:
     // the height of the invisible rows '1' to '4'.
     QPointF m_offset;
 
-    QLabel *m_validationInfo;
-
     // flake
     KoShapeManager *m_shapeManager;
-    QPointer<KoToolProxy> m_toolProxy;
+    KoToolProxy *m_toolProxy;
 };
 
 } // namespace KSpread

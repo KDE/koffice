@@ -134,6 +134,9 @@ Canvas::Canvas(View *view)
         m_view(view),
         m_doc(view ? view->doc() : 0)
 {
+    m_shapeManager = new KoShapeManager(this, this);
+    m_toolProxy = new KoToolProxy(this, this);
+
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_StaticContents);
     setBackgroundRole(QPalette::Base);
@@ -181,13 +184,11 @@ void Canvas::mousePressEvent(QMouseEvent* event)
     }
 
     // flake
-    if(m_toolProxy) {
-        m_toolProxy->mousePressEvent(event, documentPosition);
+    m_toolProxy->mousePressEvent(event, documentPosition);
 
-        if (!event->isAccepted() && event->button() == Qt::RightButton) {
-            showContextMenu(origEvent->globalPos());
-            origEvent->setAccepted(true);
-        }
+    if (!event->isAccepted() && event->button() == Qt::RightButton) {
+        showContextMenu(origEvent->globalPos());
+        origEvent->setAccepted(true);
     }
     if (layoutDirection() == Qt::RightToLeft) {
         delete event;
@@ -219,12 +220,10 @@ void Canvas::mousePressed(KoPointerEvent *event)
     event = new KoPointerEvent(event, documentPosition);
 
     // flake
-    if (m_toolProxy) {
-        m_toolProxy->mousePressEvent(event);
-        if (!event->isAccepted() && event->button() == Qt::RightButton) {
-            showContextMenu(origEvent->globalPos());
-            origEvent->accept();
-        }
+    m_toolProxy->mousePressEvent(event);
+    if (!event->isAccepted() && event->button() == Qt::RightButton) {
+        showContextMenu(origEvent->globalPos());
+        origEvent->accept();
     }
     if (layoutDirection() == Qt::RightToLeft) {
         //delete event;
@@ -261,8 +260,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* event)
     }
 
     // flake
-    if (m_toolProxy)
-        m_toolProxy->mouseReleaseEvent(event, documentPosition);
+    m_toolProxy->mouseReleaseEvent(event, documentPosition);
 
     if (layoutDirection() == Qt::RightToLeft) {
        delete event;
@@ -284,8 +282,7 @@ void Canvas::mouseMoveEvent(QMouseEvent* event)
     }
 
     // flake
-    if (m_toolProxy)
-        m_toolProxy->mouseMoveEvent(event, documentPosition);
+    m_toolProxy->mouseMoveEvent(event, documentPosition);
 
     if (layoutDirection() == Qt::RightToLeft) {
        delete event;
@@ -307,8 +304,7 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* event)
     }
 
     // flake
-    if (m_toolProxy)
-        m_toolProxy->mouseDoubleClickEvent(event, documentPosition);
+    m_toolProxy->mouseDoubleClickEvent(event, documentPosition);
 
     if (layoutDirection() == Qt::RightToLeft) {
        // delete event;
@@ -370,9 +366,7 @@ void Canvas::paintEvent(QPaintEvent *event)
 //     const QPointF p = -viewConverter()->documentToView(this->offset());
 //     painter.translate(p.x() /*+ width()*/, p.y());
     painter.setRenderHint(QPainter::Antialiasing, false);
-    if(m_toolProxy)
-        m_toolProxy->paint(painter, *viewConverter());
-
+    m_toolProxy->paint(painter, *viewConverter());
 
     event->accept();
 }
@@ -737,8 +731,7 @@ QRectF Canvas::cellCoordinatesToView(const QRect &cellRange) const
 void Canvas::keyPressed(QKeyEvent* event)
 {
     // flake
-    if (m_toolProxy)
-        m_toolProxy->keyPressEvent(event);
+    m_toolProxy->keyPressEvent(event);
 }
 
 void Canvas::showToolTip(const QPoint &p)
@@ -873,21 +866,19 @@ void Canvas::setDocumentOffset(const QPoint &offset)
 void Canvas::tabletEvent(QTabletEvent *e)
 {
     // flake
-    if (m_toolProxy)
-        m_toolProxy->tabletEvent(e, viewConverter()->viewToDocument(e->pos() + m_offset));
+    m_toolProxy->tabletEvent(e, viewConverter()->viewToDocument(e->pos() + m_offset));
 }
 
 void Canvas::inputMethodEvent(QInputMethodEvent *event)
 {
     // flake
-    if (m_toolProxy)
-        m_toolProxy->inputMethodEvent(event);
+    m_toolProxy->inputMethodEvent(event);
 }
 
 QVariant Canvas::inputMethodQuery(Qt::InputMethodQuery query) const
 {
     // flake
-    return m_toolProxy ? m_toolProxy->inputMethodQuery(query, *(viewConverter())) : 0;
+    return m_toolProxy->inputMethodQuery(query, *(viewConverter()));
 }
 
 void Canvas::setDocumentSize(const QSizeF &size)
