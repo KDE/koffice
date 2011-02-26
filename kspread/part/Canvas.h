@@ -163,26 +163,29 @@ public:
      */
     QRectF cellCoordinatesToView(const QRect &cellRange) const;
 
+    KoZoomHandler* zoomHandler() const;
+    bool isViewLoading() const;
+    void enableAutoScroll();
+    void disableAutoScroll();
+    void showContextMenu(const QPoint& globalPos);
+    ColumnHeader* columnHeader() const;
+    RowHeader* rowHeader() const;
+
 public slots:
     void setDocumentOffset(const QPoint &offset);
     void setDocumentSize(const QSizeF &size);
 
 signals:
-    /* virtual */ void documentSizeChanged(const QSize&);
+    void documentSizeChanged(const QSize&);
 
 protected:
     virtual bool event(QEvent *e);
-    //virtual void keyPressEvent(QKeyEvent *ev);
     virtual void paintEvent(QPaintEvent *ev);
-    void mousePressed(KoPointerEvent *event);
     virtual void mousePressEvent(QMouseEvent *ev);
     virtual void mouseReleaseEvent(QMouseEvent *ev);
     virtual void mouseMoveEvent(QMouseEvent *ev);
     virtual void mouseDoubleClickEvent(QMouseEvent*);
-//   virtual void focusInEvent(QFocusEvent *ev) {
-//       CanvasBase::focusIn(ev);
-//       QWidget::focusInEvent(ev);
-//   }
+    virtual void focusInEvent(QFocusEvent *ev);
     virtual void dragEnterEvent(QDragEnterEvent*);
     virtual void dragMoveEvent(QDragMoveEvent*);
     virtual void dragLeaveEvent(QDragLeaveEvent*);
@@ -194,33 +197,12 @@ protected:
     /// reimplemented method from superclass
     virtual void tabletEvent(QTabletEvent *e);
 
-public:
-//   virtual void update(const QRectF& rect) {
-//       QWidget::update(rect.toRect());
-//   }
-//   virtual QRectF rect() const {
-//       return QWidget::rect();
-//   }
-//   virtual QSizeF size() const {
-//       return QWidget::size();
-//   }
-//   virtual QPoint mapToGlobal(const QPointF& point) const {
-//       return QWidget::mapToGlobal(point.toPoint());
-//   }
-
-    virtual KoZoomHandler* zoomHandler() const;
-    virtual bool isViewLoading() const;
-    //SheetView* sheetView(const Sheet* sheet) const;
-    virtual void enableAutoScroll();
-    virtual void disableAutoScroll();
-    virtual void showContextMenu(const QPoint& globalPos);
-    virtual ColumnHeader* columnHeader() const;
-    virtual RowHeader* rowHeader() const;
 private:
-    virtual void setVertScrollBarPos(qreal pos);
-    virtual void setHorizScrollBarPos(qreal pos);
+    void mousePressed(KoPointerEvent *event);
+    void setVertScrollBarPos(qreal pos);
+    void setHorizScrollBarPos(qreal pos);
 
-    virtual bool eventFilter(QObject *o, QEvent *e);
+    bool eventFilter(QObject *o, QEvent *e);
     void keyPressed(QKeyEvent *ev);
     /**
      * Determines the cell at @p point and shows its tooltip.
