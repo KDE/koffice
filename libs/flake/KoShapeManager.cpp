@@ -45,7 +45,7 @@
 #include <kdebug.h>
 
 KoShapeManagerPrivate::KoShapeManagerPrivate(KoShapeManager *shapeManager, KoCanvasBase *c)
-    : selection(new KoSelection()),
+    : selection(new KoSelection(shapeManager)),
     canvas(c),
     tree(4, 2),
     connectionTree(4, 2),
@@ -55,7 +55,6 @@ KoShapeManagerPrivate::KoShapeManagerPrivate(KoShapeManager *shapeManager, KoCan
 }
 
 KoShapeManagerPrivate::~KoShapeManagerPrivate() {
-    delete selection;
     delete strategy;
 }
 
