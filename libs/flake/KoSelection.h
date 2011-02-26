@@ -55,7 +55,7 @@ class FLAKE_EXPORT KoSelection : public QObject, public KoShape
 
 public:
 
-    KoSelection();
+    KoSelection(QObject *parent = 0);
     virtual ~KoSelection();
 
     /**
