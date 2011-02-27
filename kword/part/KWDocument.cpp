@@ -1019,8 +1019,6 @@ void KWDocument::saveConfig()
 
 void KWDocument::addCommand(QUndoCommand *command)
 {
-    // TODO investigate if we can move this up the stack and detect recursively added commands.
-    // then the virtual can be removed in the super too... ;)
     m_commandBeingAdded = command;
     KoDocument::addCommand(command);
     m_commandBeingAdded = 0;
