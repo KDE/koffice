@@ -960,7 +960,8 @@ void TextTool::mouseReleaseEvent(KoPointerEvent *event)
                                         "Are you sure that you want to run this program?", anchor);
                 // this will also start local programs, so adding a "don't warn again"
                 // checkbox will probably be too dangerous
-                int choice = KMessageBox::warningYesNo(0, question, i18n("Open Link?"));
+                const int choice = KMessageBox::warningYesNo(canvas()->canvasWidget(), question,
+                        i18n("Open Link?"));
                 if (choice != KMessageBox::Yes)
                     return;
             }
