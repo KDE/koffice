@@ -120,7 +120,7 @@ void TestShapeContainer::testScaling()
     groupedShapes.append(shape2);
 
     KoShapeGroup *group = new KoShapeGroup();
-    KoShapeGroupCommand* groupCommand = KoShapeGroupCommand::createCommand(group, groupedShapes);
+    QUndoCommand* groupCommand = KoShapeGroupCommand::createCommand(group, groupedShapes);
     groupCommand->redo();
 
     QList<KoShape*> transformShapes;
@@ -185,7 +185,7 @@ void TestShapeContainer::testScaling2()
     groupedShapes.append(shape2);
 
     KoShapeGroup *group = new KoShapeGroup();
-    KoShapeGroupCommand* groupCommand = KoShapeGroupCommand::createCommand(group, groupedShapes);
+    QUndoCommand* groupCommand = KoShapeGroupCommand::createCommand(group, groupedShapes);
     groupCommand->redo();
 
     KoSelection* selection = new KoSelection();
