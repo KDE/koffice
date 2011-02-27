@@ -30,33 +30,34 @@ SET ( textshape_SRCS
     TableLayout.cpp
     TableLayoutData.cpp
 
-    dialogs/StylesWidget.cpp
-    dialogs/SimpleStyleWidget.cpp
-    dialogs/ParagraphLayout.cpp
-    dialogs/ParagraphIndentSpacing.cpp
-    dialogs/ParagraphDecorations.cpp
-    dialogs/ParagraphBulletsNumbers.cpp
-    dialogs/ParagraphSettingsDialog.cpp
-    dialogs/ListsSpinBox.cpp
-    dialogs/StylesModel.cpp
-    dialogs/StyleManager.cpp
-    dialogs/StyleManagerDialog.cpp
-    dialogs/ParagraphGeneral.cpp
-    dialogs/NewStyleWidget.cpp
+    dialogs/ChangeConfigureDialog.cpp
     dialogs/CharacterGeneral.cpp
     dialogs/CharacterHighlighting.cpp
-    dialogs/InsertCharacter.cpp
+    dialogs/CreateBookmark.cpp
+    dialogs/FontDecorations.cpp
     dialogs/FontDia.cpp
     dialogs/FontLayoutTab.cpp
-    dialogs/FontDecorations.cpp
     dialogs/FontTab.cpp
-    dialogs/LanguageTab.cpp
     dialogs/FormattingPreview.cpp
+    dialogs/InsertCharacter.cpp
+    dialogs/LanguageTab.cpp
+    dialogs/ListsSpinBox.cpp
+    dialogs/NewStyleWidget.cpp
+    dialogs/ParagraphBulletsNumbers.cpp
+    dialogs/ParagraphDecorations.cpp
+    dialogs/ParagraphGeneral.cpp
+    dialogs/ParagraphIndentSpacing.cpp
+    dialogs/ParagraphLayout.cpp
+    dialogs/ParagraphSettingsDialog.cpp
+    dialogs/SimpleStyleWidget.cpp
+    dialogs/StyleManager.cpp
+    dialogs/StyleManagerDialog.cpp
     dialogs/StyleManagerWelcome.cpp
+    dialogs/StylesModel.cpp
+    dialogs/StylesWidget.cpp
     dialogs/TableDialog.cpp
-    dialogs/ChangeConfigureDialog.cpp
-    dialogs/TrackedChangeModel.cpp
     dialogs/TrackedChangeManager.cpp
+    dialogs/TrackedChangeModel.cpp
 
     commands/ChangeListCommand.cpp
     commands/ChangeListLevelCommand.cpp
@@ -72,18 +73,19 @@ SET ( textshape_SRCS
 )
 
 kde4_add_ui_files(textshape_SRCS
-    dialogs/SimpleStyleWidget.ui
-    dialogs/StylesWidget.ui
-    dialogs/ParagraphLayout.ui
-    dialogs/ParagraphIndentSpacing.ui
-    dialogs/ParagraphDecorations.ui
-    dialogs/ParagraphBulletsNumbers.ui
-    dialogs/StyleManager.ui
-    dialogs/ParagraphGeneral.ui
-    dialogs/NewStyleWidget.ui
     dialogs/CharacterGeneral.ui
     dialogs/CharacterHighlighting.ui
+    dialogs/CreateBookmark.ui
+    dialogs/NewStyleWidget.ui
+    dialogs/ParagraphBulletsNumbers.ui
+    dialogs/ParagraphDecorations.ui
+    dialogs/ParagraphGeneral.ui
+    dialogs/ParagraphIndentSpacing.ui
+    dialogs/ParagraphLayout.ui
+    dialogs/SimpleStyleWidget.ui
+    dialogs/StyleManager.ui
     dialogs/StyleManagerWelcome.ui
+    dialogs/StylesWidget.ui
     dialogs/TableDialog.ui
 
     dialogs/FontDecorations.ui

@@ -205,6 +205,8 @@ private slots:
     void selectAll();
     /// show the style manager
     void showStyleManager();
+    /// show the insert bookmark dialog
+    void insertBookmark();
     /// change color of a selected text
     void setTextColor(const KoColor &color);
     /// change background color of a selected text

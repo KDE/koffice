@@ -1,4 +1,4 @@
-<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd" ><kpartgui name="KWord" version="128">
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd" ><kpartgui name="KWord" version="129">
 <MenuBar>
  <Menu name="file"><text>&amp;File</text>
   <Action name="extra_template"/>
@@ -69,7 +69,8 @@
   <Action name="insert_link"/>
   <Action name="insert_comment"/>
   <Action name="insert_file"/>
-  <Action name="add_bookmark"/>
+  <Action name="insert_bookmark"/>
+  <Action name="insert_index"/>
   <Separator/>
   <!-- Shapes - the order matches the order of the keybindings -->
   <Action name="insert_table"/>

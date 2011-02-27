@@ -23,6 +23,7 @@
 
 #include "TextTool.h"
 #include "TextEditingPluginContainer.h"
+#include "dialogs/CreateBookmark.h"
 #include "dialogs/SimpleStyleWidget.h"
 #include "dialogs/StylesWidget.h"
 #include "dialogs/ParagraphSettingsDialog.h"
@@ -278,6 +279,10 @@ TextTool::TextTool(KoCanvasBase *canvas)
     action->setShortcut(Qt::CTRL + Qt::Key_T);
     addAction("insert_index", action);
     connect(action, SIGNAL(triggered()), this, SLOT(insertIndexMarker()));
+
+    action  = new KAction(i18n("Insert Bookmark..."), this);
+    addAction("insert_bookmark", action);
+    connect(action, SIGNAL(triggered()), this, SLOT(insertBookmark()));
 
     action  = new KAction(i18n("Insert Soft Hyphen"), this);
     addAction("soft_hyphen", action);
@@ -1780,7 +1785,6 @@ void TextTool::insertTable()
     delete dia;
 }
 
-
 void TextTool::formatParagraph()
 {
     ParagraphSettingsDialog *dia = new ParagraphSettingsDialog(this, m_textEditor.data()->cursor());//TODO  check this with KoTextEditor
@@ -1825,6 +1829,16 @@ void TextTool::configureChangeTracking()
             writeConfig();
         }
     }
+}
+
+void TextTool::insertBookmark()
+{
+    KoTextEditor *textEditor = m_textEditor.data();
+    if (textEditor == 0)
+        return;
+    CreateBookmark *dia = new CreateBookmark(textEditor, canvas()->canvasWidget());
+    dia->exec();
+    delete dia;
 }
 
 void TextTool::selectAll()
