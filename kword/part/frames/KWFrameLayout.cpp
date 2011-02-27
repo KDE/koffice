@@ -230,8 +230,8 @@ void KWFrameLayout::createNewFramesForPage(int pageNumber)
             if (lastFs == frame->frameSet())
                 continue;
             lastFs = frame->frameSet();
-            if (pageRect.top() < lastFs->frames().last()->shape()->position().y())
-                continue; // already has a frame on this or a later page
+           if (pageRect.bottom() < lastFs->frames().last()->shape()->position().y())
+               continue; // already has a frame on this or a later page
             KWFrame *f;
             KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(lastFs);
             if (tfs && lastFs->newFrameBehavior() != KWord::CopyNewFrame) {
