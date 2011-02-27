@@ -621,7 +621,8 @@ void TextTool::updateSelectedShape(const QPointF &point)
                     break; // stop looking.
             }
         }
-        setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
+        if (m_textShape)
+            setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
     }
 }
 
