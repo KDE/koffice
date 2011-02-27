@@ -23,7 +23,6 @@
 
 #include "kotext_export.h"
 
-#include <QObject>
 #include <QList>
 
 class KoBookmark;
@@ -37,9 +36,8 @@ class KoBookmarkManagerPrivate;
  * This class also maintains a list of bookmark names so that it can be easily used to
  * show all available bookmark.
  */
-class KOTEXT_EXPORT KoBookmarkManager : public QObject
+class KOTEXT_EXPORT KoBookmarkManager
 {
-    Q_OBJECT
 public:
     /// constructor
     KoBookmarkManager();
@@ -51,7 +49,6 @@ public:
     /// @return a list of QString containing all bookmark names
     QList<QString> bookmarkNames();
 
-public slots:
     /**
      * Insert a new bookmark to this manager
      * @param name the name of the bookmark

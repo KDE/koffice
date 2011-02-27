@@ -81,6 +81,3 @@ QList<QString> KoBookmarkManager::bookmarkNames()
         answer << b->name();
     return answer;
 }
-
-#include <KoBookmarkManager.moc>
-
