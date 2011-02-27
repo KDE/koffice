@@ -43,7 +43,6 @@
 #include "dialogs/KWPageSettingsDialog.h"
 #include "dialogs/KWStatisticsDialog.h"
 #include "dialogs/KWPrintingDialog.h"
-#include "dialogs/KWCreateBookmarkDialog.h"
 #include "dialogs/KWSelectBookmarkDialog.h"
 #include "dialogs/KWInsertPageDialog.h"
 #include "dockers/KWStatisticsDocker.h"
@@ -217,7 +216,6 @@ void KWView::updateReadWrite(bool readWrite)
     m_actionLowerFrame->setEnabled(readWrite);
     m_actionBringToFront->setEnabled(readWrite);
     m_actionSendBackward->setEnabled(readWrite);
-    m_actionAddBookmark->setEnabled(readWrite);
     QAction *action = actionCollection()->action("insert_variable");
     if (action) action->setEnabled(readWrite);
     action = actionCollection()->action("select_bookmark"); // TODO fix the dialog to honor read-only instead
@@ -331,11 +329,6 @@ void KWView::setupActions()
         }
     }
 #endif
-
-    m_actionAddBookmark = new KAction(KIcon("bookmark-new"), i18n("Bookmark..."), this);
-    m_actionAddBookmark->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_G);
-    actionCollection()->addAction("add_bookmark", m_actionAddBookmark);
-    connect(m_actionAddBookmark, SIGNAL(triggered()), this, SLOT(addBookmark()));
 
     KAction *action = new KAction(i18n("Select Bookmark..."), this);
     action->setIcon(KIcon("bookmarks"));
@@ -906,13 +899,6 @@ if (false) { // TODO move this to the text tool as soon as  a) the string freeze
                 0, this, SLOT(goToFootEndNote()),
                 actionCollection(), "goto_footendnote");
 
-        m_actionAddBookmark= new KAction(i18n("Bookmark..."), 0,
-                this, SLOT(addBookmark()),
-                actionCollection(), "add_bookmark");
-        m_actionSelectBookmark= new KAction(i18n("Select Bookmark..."), 0,
-                this, SLOT(selectBookmark()),
-                actionCollection(), "select_bookmark");
-
         m_actionImportStyle= new KAction(i18n("Import Styles..."), 0,
                 this, SLOT(importStyle()),
                 actionCollection(), "import_style");
@@ -981,41 +967,6 @@ void KWView::insertFrameBreak()
         KoTextDocument doc(m_document->mainFrameSet()->document());
         doc.textEditor()->insertFrameBreak();
     }
-}
-
-void KWView::addBookmark()
-{
-    QString name, suggestedName;
-
-    KoSelection *selection = canvasBase()->shapeManager()->selection();
-    KoShape *shape = 0;
-    shape = selection->firstSelectedShape();
-    if (shape == 0) return; // no shape selected
-
-    KWFrame *frame = frameForShape(shape);
-    Q_ASSERT(frame);
-    KWTextFrameSet *fs = dynamic_cast<KWTextFrameSet*>(frame->frameSet());
-    if (fs == 0) return;
-
-    QString tool = KoToolManager::instance()->preferredToolForSelection(selection->selectedShapes());
-    KoToolManager::instance()->switchToolRequested(tool);
-    KoTextEditor *handler = qobject_cast<KoTextEditor*> (canvasBase()->toolProxy()->selection());
-    Q_ASSERT(handler);
-
-    KoBookmarkManager *manager = m_document->inlineTextObjectManager()->bookmarkManager();
-    if (handler->hasSelection())
-        suggestedName = handler->selectedText();
-
-    KWCreateBookmarkDialog *dia = new KWCreateBookmarkDialog(manager->bookmarkNameList(), suggestedName, m_canvas->canvasWidget());
-    if (dia->exec() == QDialog::Accepted)
-        name = dia->newBookmarkName();
-    else {
-        delete dia;
-        return;
-    }
-    delete dia;
-
-    handler->addBookmark(name);
 }
 
 void KWView::selectBookmark()
@@ -1475,15 +1426,8 @@ void KWView::zoomChanged(KoZoomMode::Mode mode, qreal zoom)
 void KWView::selectionChanged()
 {
     KoShape *shape = canvasBase()->shapeManager()->selection()-> firstSelectedShape();
-    m_actionAddBookmark->setEnabled(shape != 0);
     if (shape) {
         setCurrentPage(m_document->pageManager()->page(shape));
-        KWFrame *frame = frameForShape(shape);
-        KWTextFrameSet *fs = frame == 0 ? 0 : dynamic_cast<KWTextFrameSet*>(frame->frameSet());
-        if (fs)
-            m_actionAddBookmark->setEnabled(true);
-        else
-            m_actionAddBookmark->setEnabled(false);
     }
     // actions that need at least one shape selected
     QAction *action = actionCollection()->action("create_linked_frame");

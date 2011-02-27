@@ -41,7 +41,6 @@ set(kwordprivate_LIB_SRCS
     frames/Outline.cpp
     frames/KWPageBackground.cpp
 
-    dialogs/KWCreateBookmarkDialog.cpp
     dialogs/KWDocumentColumns.cpp
     dialogs/KWFrameConnectSelector.cpp
     dialogs/KWFrameDialog.cpp
@@ -80,7 +79,6 @@ if( Soprano_FOUND )
 endif( Soprano_FOUND )
 
 kde4_add_ui_files(kwordprivate_LIB_SRCS
-    dialogs/KWCreateBookmark.ui
     dialogs/KWDocumentColumns.ui
     dialogs/KWFrameConnectSelector.ui
     dialogs/KWFrameGeometry.ui
