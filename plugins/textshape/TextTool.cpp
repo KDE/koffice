@@ -1760,8 +1760,9 @@ void TextTool::setDefaultFormat()
 
 void TextTool::insertIndexMarker()
 {
-    // TODO handle result when we figure out how to report errors from a tool.
-    m_textEditor.data()->insertIndexMarker();
+    if (!m_textEditor.data()->insertIndexMarker()) {
+        KMessageBox::sorry(canvas()->canvasWidget(), i18n("Failed to mark word for inclusion in index.\nPlease reposition cursor and try again"));
+    }
 }
 
 void TextTool::setStyle(KoCharacterStyle *style)
