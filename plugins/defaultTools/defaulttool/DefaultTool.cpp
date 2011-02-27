@@ -1,7 +1,7 @@
 /* This file is part of the KDE project
 
    Copyright (C) 2006-2008 Thorsten Zachmann <zachmann@kde.org>
-   Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
+   Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
    Copyright (C) 2008-2009 Jan Hambrecht <jaham@gmx.net>
    Copyright (C) 2008 Casper Boemann <cbr@boemann.dk>
 
@@ -945,12 +945,9 @@ void DefaultTool::selectionGroup()
             groupedShapes << shape;
         }
     }
-    KoShapeGroup *group = new KoShapeGroup();
-    // TODO what if only one shape is left?
-    QUndoCommand *cmd = new QUndoCommand(i18n("Group shapes"));
-    canvas()->shapeController()->addShapeDirect(group, cmd);
-    KoShapeGroupCommand::createCommand(group, groupedShapes, cmd);
-    canvas()->addCommand(cmd);
+    if (groupedShapes.count() < 2)
+        return;
+    canvas()->addCommand(KoShapeGroupCommand::createCommand(groupedShapes, canvas()->shapeController()));
 }
 
 void DefaultTool::selectionUngroup()
@@ -972,14 +969,19 @@ void DefaultTool::selectionUngroup()
     QUndoCommand *cmd = 0;
 
     // add a ungroup command for each found shape container to the macro command
-    foreach(KoShape* shape, containerSet) {
+    foreach(KoShape *shape, containerSet) {
         KoShapeGroup *group = dynamic_cast<KoShapeGroup*>(shape);
         if (group) {
             cmd = cmd ? cmd : new QUndoCommand(i18n("Ungroup shapes"));
+            canvas()->shapeController()->removeShape(group, cmd); // removes parent and children.
+            QList<KoShape*> children = group->shapes();
+            foreach (KoShape *shape, children) {
+                // re-add children to document correctly, so the doc can notice them as toplevels
+                canvas()->shapeController()->addShapeDirect(shape, cmd);
+            }
             new KoShapeUngroupCommand(group, group->shapes(),
-                                      group->parent()? QList<KoShape*>(): canvas()->shapeManager()->topLevelShapes(),
-                                      cmd);
-            canvas()->shapeController()->removeShape(group, cmd);
+                    group->parent()? QList<KoShape*>(): canvas()->shapeManager()->topLevelShapes(),
+                    cmd);
         }
     }
     if (cmd) {
