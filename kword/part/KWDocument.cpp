@@ -42,6 +42,7 @@
 #include "frames/KWOutlineShape.h"
 #include "dialogs/KWFrameDialog.h"
 #include "dialogs/KWStartupWidget.h"
+#include "commands/KWFrameRemoveSilentCommand.h"
 #include "commands/KWPageInsertCommand.h"
 #include "commands/KWPageRemoveCommand.h"
 
@@ -141,7 +142,8 @@ KWDocument::KWDocument(QWidget *parentWidget, QObject *parent, bool singleViewMo
         m_frameLayout(&m_pageManager, m_frameSets),
         m_magicCurtain(0),
         m_mainFramesetEverFinished(false),
-        m_loadingTemplate(false)
+        m_loadingTemplate(false),
+        m_commandBeingAdded(0)
 {
     m_frameLayout.setDocument(this);
     resourceManager()->setOdfDocument(this);
@@ -193,6 +195,9 @@ void KWDocument::addShape(KoShape *shape)
         KWFrameSet *fs = new KWFrameSet();
         fs->setName(shape->shapeId());
         frame = new KWFrame(shape, fs);
+        // since we auto-decorate we can expect someone to add a shape that has
+        // as a child an already existing shape we previous decorated with a frame.
+        recurseFrameRemovalOn(dynamic_cast<KoShapeContainer*>(shape), m_commandBeingAdded);
     }
     Q_ASSERT(frame->frameSet());
     addFrameSet(frame->frameSet());
@@ -200,6 +205,23 @@ void KWDocument::addShape(KoShape *shape)
     foreach (KoView *view, views()) {
         KoCanvasBase *canvas = static_cast<KWView*>(view)->canvasBase();
         canvas->shapeManager()->addShape(shape);
+    }
+}
+
+void KWDocument::recurseFrameRemovalOn(KoShapeContainer *container, QUndoCommand *parent)
+{
+    if (container == 0)
+        return;
+    foreach (KoShape *shape, container->shapes()) {
+        KWFrame *frame = dynamic_cast<KWFrame*>(shape->applicationData());
+        if (frame) {
+            QUndoCommand *cmd = new KWFrameRemoveSilentCommand(this, frame, m_commandBeingAdded);
+            if (m_commandBeingAdded)
+                cmd->redo();
+            else
+                addCommand(cmd);
+        }
+        recurseFrameRemovalOn(dynamic_cast<KoShapeContainer*>(shape), parent);
     }
 }
 
@@ -995,6 +1017,14 @@ void KWDocument::saveConfig()
     interface.writeEntry("ResolutionY", gridData().gridY());
 }
 
+void KWDocument::addCommand(QUndoCommand *command)
+{
+    // TODO investigate if we can move this up the stack and detect recursively added commands.
+    // then the virtual can be removed in the super too... ;)
+    m_commandBeingAdded = command;
+    KoDocument::addCommand(command);
+    m_commandBeingAdded = 0;
+}
 
 // ************* PageProcessingQueue ************
 PageProcessingQueue::PageProcessingQueue(KWDocument *parent)

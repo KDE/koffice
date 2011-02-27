@@ -59,16 +59,17 @@ set(kwordprivate_LIB_SRCS
     dialogs/KWStatisticsDialog.cpp
     dockers/KWStatisticsDocker.cpp
 
-    commands/KWPageStylePropertiesCommand.cpp
+    commands/KWChangePageStyleCommand.cpp
+    commands/KWClipFrameCommand.cpp
+    commands/KWCreateOutlineCommand.cpp
+    commands/KWFrameCreateCommand.cpp
+    commands/KWFrameDeleteCommand.cpp
+    commands/KWFrameRemoveSilentCommand.cpp
+    commands/KWNewPageStyleCommand.cpp
     commands/KWPageInsertCommand.cpp
     commands/KWPageRemoveCommand.cpp
-    commands/KWNewPageStyleCommand.cpp
-    commands/KWFrameDeleteCommand.cpp
-    commands/KWFrameCreateCommand.cpp
-    commands/KWCreateOutlineCommand.cpp
-    commands/KWClipFrameCommand.cpp
+    commands/KWPageStylePropertiesCommand.cpp
     commands/KWRemoveFrameClipCommand.cpp
-    commands/KWChangePageStyleCommand.cpp
 )
 if( Soprano_FOUND )
     set(kwordprivate_LIB_SRCS ${kwordprivate_LIB_SRCS}
