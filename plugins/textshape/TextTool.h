@@ -249,8 +249,6 @@ private slots:
     void shapeAddedToDoc(KoShape *shape);
     void ensureCursorVisible();
 
-    void testSlot(bool);
-
 private:
     void repaintCaret();
     void repaintSelection();

@@ -1827,11 +1827,6 @@ void TextTool::configureChangeTracking()
     }
 }
 
-void TextTool::testSlot(bool on)
-{
-    kDebug(32500) << "signal received. bool:" << on;
-}
-
 void TextTool::selectAll()
 {
     KoTextEditor *textEditor = m_textEditor.data();
