@@ -831,7 +831,7 @@ QString KoTextLoader::createUniqueBookmarkName(KoBookmarkManager* bmm, QString b
     int uniqID = 0;
 
     while (true) {
-        if (bmm->retrieveBookmark(ret)) {
+        if (bmm->bookmark(ret)) {
             ret = QString("%1_%2").arg(bookmarkName).arg(++uniqID);
         } else {
             if (isEndMarker) {
@@ -1026,7 +1026,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
                     }
                 } else if (localName == "bookmark-end") {
                     bookmark->setType(KoBookmark::EndBookmark);
-                    KoBookmark *startBookmark = textObjectManager->bookmarkManager()->retrieveBookmark(uniqBookmarkName);
+                    KoBookmark *startBookmark = textObjectManager->bookmarkManager()->bookmark(uniqBookmarkName);
                     if (startBookmark) {        // set end bookmark only if we got start bookmark (we might not have in case of broken document)
                         startBookmark->setEndBookmark(bookmark);
                     } else {

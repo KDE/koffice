@@ -931,13 +931,13 @@ void TextTool::mouseReleaseEvent(KoPointerEvent *event)
             KoTextDocument document(m_textEditor.data()->document());
             KoInlineTextObjectManager *inlineManager = document.inlineTextObjectManager();
             if (inlineManager) {
-                QList<QString> bookmarks = inlineManager->bookmarkManager()->bookmarkNameList();
+                QList<QString> bookmarks = inlineManager->bookmarkManager()->bookmarkNames();
                 // Which are the bookmarks we have ?
                 foreach(const QString& s, bookmarks) {
                     // Is this bookmark the good one ?
                     if (s == anchor) {
                         // if Yes, let's jump to it
-                        KoBookmark *bookmark = inlineManager->bookmarkManager()->retrieveBookmark(s);
+                        KoBookmark *bookmark = inlineManager->bookmarkManager()->bookmark(s);
                         m_textEditor.data()->setPosition(bookmark->position());
                         ensureCursorVisible();
                         event->accept();
@@ -972,7 +972,7 @@ void TextTool::mouseReleaseEvent(KoPointerEvent *event)
                 anchorName = anchorList.takeFirst();
             }
             KoTextDocument document(m_textEditor.data()->document());
-            KoBookmark *bookmark = document.inlineTextObjectManager()->bookmarkManager()->retrieveBookmark(anchorName);
+            KoBookmark *bookmark = document.inlineTextObjectManager()->bookmarkManager()->bookmark(anchorName);
             if (bookmark) {
                 m_textEditor.data()->setPosition(bookmark->position());
                 ensureCursorVisible();

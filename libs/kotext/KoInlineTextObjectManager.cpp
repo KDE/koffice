@@ -75,7 +75,7 @@ void KoInlineTextObjectManager::insertInlineObject(QTextCursor &cursor, KoInline
     if (bookmark
             && (bookmark->type() == KoBookmark::StartBookmark
                 || bookmark->type() == KoBookmark::SinglePosition))
-        m_bookmarkManager.insert(bookmark->name(), bookmark);
+        m_bookmarkManager.insert(bookmark);
 
     // reset to use old format so that the InlineInstanceId is no longer set.
     cursor.setCharFormat(oldCf);
@@ -103,9 +103,9 @@ bool KoInlineTextObjectManager::removeInlineObject(QTextCursor &cursor)
             m_bookmarkManager.remove(bookmark->name());
             KoBookmark *endBookmark = bookmark->endBookmark();
             endBookmark->setType(KoBookmark::SinglePosition);
-            m_bookmarkManager.insert(bookmark->name(), endBookmark);
+            m_bookmarkManager.insert(endBookmark);
         } else if (bookmark->type() == KoBookmark::EndBookmark) {
-            KoBookmark *startBookmark = m_bookmarkManager.retrieveBookmark(bookmark->name());
+            KoBookmark *startBookmark = m_bookmarkManager.bookmark(bookmark->name());
             startBookmark->setType(KoBookmark::SinglePosition);
         } else
             m_bookmarkManager.remove(bookmark->name());

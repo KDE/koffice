@@ -974,7 +974,7 @@ void KWView::selectBookmark()
     QString name;
     KoBookmarkManager *manager = m_document->inlineTextObjectManager()->bookmarkManager();
 
-    KWSelectBookmarkDialog *dia = new KWSelectBookmarkDialog(manager->bookmarkNameList(), m_canvas->canvasWidget());
+    KWSelectBookmarkDialog *dia = new KWSelectBookmarkDialog(manager->bookmarkNames(), m_canvas->canvasWidget());
     connect(dia, SIGNAL(nameChanged(const QString &, const QString &)),
             manager, SLOT(rename(const QString &, const QString &)));
     connect(dia, SIGNAL(bookmarkDeleted(const QString &)),
@@ -987,7 +987,7 @@ void KWView::selectBookmark()
     }
     delete dia;
 
-    KoBookmark *bookmark = manager->retrieveBookmark(name);
+    KoBookmark *bookmark = manager->bookmark(name);
     KoShape *shape = bookmark->shape();
     KoSelection *selection = canvasBase()->shapeManager()->selection();
     selection->deselectAll();
@@ -1009,7 +1009,7 @@ void KWView::selectBookmark()
 void KWView::deleteBookmark(const QString &name)
 {
     KoInlineTextObjectManager*manager = m_document->inlineTextObjectManager();
-    KoBookmark *bookmark = manager->bookmarkManager()->retrieveBookmark(name);
+    KoBookmark *bookmark = manager->bookmarkManager()->bookmark(name);
     if (!bookmark || !bookmark->shape())
         return;
 
