@@ -2031,7 +2031,7 @@ QDomDocument KoDocument::createDomDocument(const QString& appName, const QString
 
 QDomDocument KoDocument::saveXML()
 {
-    kError(30003) << "not implemented" << endl;
+    kError(30003) << "not implemented";
     d->lastErrorMessage = i18n("Internal error: saveXML not implemented");
     return QDomDocument();
 }
