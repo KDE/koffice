@@ -123,10 +123,6 @@ private slots:
     void selectionChanged();
     /// force the remainder of the text into the next page
     void insertFrameBreak();
-    /// go to previously bookmarked text cursor location or selection
-    void selectBookmark();
-    /// delete previously bookmarked text cursor location or selection (from the Select Bookmark dialog)
-    void deleteBookmark(const QString &name);
     /// delete the currently selected frame(s)
     void editDeleteFrame();
     /// enable/disable document headers
