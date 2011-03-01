@@ -123,7 +123,7 @@ void KoBookmark::setType(BookmarkType type)
     d->type = type;
 }
 
-KoBookmark::BookmarkType KoBookmark::type()
+KoBookmark::BookmarkType KoBookmark::type() const
 {
     return d->type;
 }
@@ -134,22 +134,22 @@ void KoBookmark::setEndBookmark(KoBookmark *bookmark)
     d->selection = true;
 }
 
-KoBookmark *KoBookmark::endBookmark()
+KoBookmark *KoBookmark::endBookmark() const
 {
     return d->endBookmark;
 }
 
-KoShape *KoBookmark::shape()
+KoShape *KoBookmark::shape() const
 {
     return shapeForPosition(d->document, d->posInDocument);
 }
 
-int KoBookmark::position()
+int KoBookmark::position() const
 {
     return d->posInDocument;
 }
 
-bool KoBookmark::hasSelection()
+bool KoBookmark::hasSelection() const
 {
     return d->selection;
 }

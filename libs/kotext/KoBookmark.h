@@ -90,7 +90,7 @@ public:
     void setType(BookmarkType type);
 
     /// @return the current type of this bookmark
-    BookmarkType type();
+    BookmarkType type() const;
 
     /**
      * Set the end bookmark of this bookmark. This bookmark should be a StartBookmark.
@@ -99,16 +99,16 @@ public:
     void setEndBookmark(KoBookmark *bookmark);
 
     /// @return the end bookmark if the type is StartBookmark
-    KoBookmark *endBookmark();
+    KoBookmark *endBookmark() const;
 
     /// @return the KoShape where this bookmark is located
-    KoShape *shape();
+    KoShape *shape() const;
 
     /// @return the exact cursor position of this bookmark in document
-    int position();
+    int position() const;
 
     /// @return true if this bookmark has selection (type is StartBookmark of EndBookmark)
-    bool hasSelection();
+    bool hasSelection() const;
 
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
