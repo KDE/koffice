@@ -44,10 +44,13 @@ public:
     ~KoBookmarkManager();
 
     /// @return a bookmark with the specified name, or 0 if there is none
-    KoBookmark *bookmark(const QString &name);
+    KoBookmark *bookmark(const QString &name) const;
 
     /// @return a list of QString containing all bookmark names
-    QList<QString> bookmarkNames();
+    QList<QString> bookmarkNames() const;
+
+    /// @return a list of QString containing all bookmark names
+    QList<KoBookmark*> bookmarks() const;
 
     /**
      * Insert a new bookmark to this manager

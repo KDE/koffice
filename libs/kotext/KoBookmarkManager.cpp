@@ -61,7 +61,7 @@ void KoBookmarkManager::remove(const QString &name)
     }
 }
 
-KoBookmark *KoBookmarkManager::bookmark(const QString &name)
+KoBookmark *KoBookmarkManager::bookmark(const QString &name) const
 {
     QList<KoBookmark*>::Iterator iter = d->bookmarks.begin();
     while (iter != d->bookmarks.end()) {
@@ -73,11 +73,16 @@ KoBookmark *KoBookmarkManager::bookmark(const QString &name)
     return 0;
 }
 
-QList<QString> KoBookmarkManager::bookmarkNames()
+QList<QString> KoBookmarkManager::bookmarkNames() const
 {
     QList<QString> answer;
     answer.reserve(d->bookmarks.size());
     foreach (KoBookmark *b, d->bookmarks)
         answer << b->name();
     return answer;
+}
+
+QList<KoBookmark*> KoBookmarkManager::bookmarks() const
+{
+    return d->bookmarks;
 }
