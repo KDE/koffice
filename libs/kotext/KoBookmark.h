@@ -60,15 +60,11 @@ public:
 
     virtual ~KoBookmark();
 
-    /// reimplemented from super
     void saveOdf(KoShapeSavingContext &context);
-    /// reimplemented from super
     virtual void updatePosition(const QTextDocument *document, QTextInlineObject object,
                                 int posInDocument, const QTextCharFormat &format);
-    /// reimplemented from super
     virtual void resize(const QTextDocument *document, QTextInlineObject object,
                         int posInDocument, const QTextCharFormat &format, QPaintDevice *pd);
-    /// reimplemented from super
     virtual void paint(QPainter &painter, QPaintDevice *pd, const QTextDocument *document,
                        const QRectF &rect, QTextInlineObject object, int posInDocument, const QTextCharFormat &format);
 
