@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KWCREATEBOOKMARK_H
-#define KWCREATEBOOKMARK_H
+#ifndef CREATEBOOKMARK_H
+#define CREATEBOOKMARK_H
 
 #include <KDialog>
 #include <QList>
@@ -26,7 +26,6 @@
 
 #include <ui_CreateBookmark.h>
 
-class KoBookmarkManager;
 class KoTextEditor;
 class KoBookmarkManager;
 
