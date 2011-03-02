@@ -896,10 +896,10 @@ QPair<int, int> KoDocumentRdf::findExtent(QTextCursor &cursor)
                     }
                     if (bm->type() == KoBookmark::StartBookmark) {
                         KoBookmark *e = bm->endBookmark();
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                         else
-                            return QPair<int, int>(bm->position(), e->position());
+                            return QPair<int, int>(bm->textPosition(), e->textPosition());
                     }
                 }
                 if (KoTextMeta *bm = dynamic_cast<KoTextMeta*>(inlineObject)) {
@@ -908,10 +908,10 @@ QPair<int, int> KoDocumentRdf::findExtent(QTextCursor &cursor)
                     }
                     if (bm->type() == KoTextMeta::StartBookmark) {
                         KoTextMeta *e = bm->endBookmark();
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                         else
-                            return QPair<int, int>(bm->position(), e->position());
+                            return QPair<int, int>(bm->textPosition(), e->textPosition());
                     }
                 }
             }
@@ -945,10 +945,10 @@ QPair<int, int> KoDocumentRdf::findExtent(KoTextEditor *handler)
                     }
                     if (bm->type() == KoBookmark::StartBookmark) {
                         KoBookmark *e = bm->endBookmark();
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                         else
-                            return QPair<int, int>(bm->position(), e->position());
+                            return QPair<int, int>(bm->textPosition(), e->textPosition());
                     }
                 }
                 if (KoTextMeta *bm = dynamic_cast<KoTextMeta*>(inlineObject)) {
@@ -957,10 +957,10 @@ QPair<int, int> KoDocumentRdf::findExtent(KoTextEditor *handler)
                     }
                     if (bm->type() == KoTextMeta::StartBookmark) {
                         KoTextMeta *e = bm->endBookmark();
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                         else
-                            return QPair<int, int>(bm->position(), e->position());
+                            return QPair<int, int>(bm->textPosition(), e->textPosition());
                     }
                 }
             }
@@ -993,7 +993,7 @@ QString KoDocumentRdf::findXmlId(KoTextEditor *handler)
                     }
                     if (bm->type() == KoBookmark::StartBookmark) {
                         KoBookmark *e = bm->endBookmark();
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                     }
                 }
@@ -1003,7 +1003,7 @@ QString KoDocumentRdf::findXmlId(KoTextEditor *handler)
                     }
                     if (bm->type() == KoTextMeta::StartBookmark) {
                         KoTextMeta *e = bm->endBookmark();
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                     }
                 }
@@ -1048,7 +1048,7 @@ QString KoDocumentRdf::findXmlId(QTextCursor &cursor)
                     }
                     if (bm->type() == KoBookmark::StartBookmark) {
                         KoBookmark *e = bm->endBookmark();
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                     }
                 }
@@ -1058,7 +1058,7 @@ QString KoDocumentRdf::findXmlId(QTextCursor &cursor)
                     }
                     if (bm->type() == KoTextMeta::StartBookmark) {
                         KoTextMeta *e = bm->endBookmark();
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                     }
                 }
@@ -1106,7 +1106,7 @@ Soprano::Model *KoDocumentRdf::findStatements(QTextCursor &cursor, int depth)
                     }
                     if (bm->type() == KoBookmark::StartBookmark) {
                         KoBookmark *e = bm->endBookmark();
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                     }
                 }
@@ -1114,22 +1114,22 @@ Soprano::Model *KoDocumentRdf::findStatements(QTextCursor &cursor, int depth)
                     RDEBUG << "have KoMeta type:" << bm->type() << " at:" <<  tc.position() << endl;
                     if (bm->type() == KoTextMeta::EndBookmark) {
                         RDEBUG << "end text:meta, cursor:" << searchStartPosition;
-                        RDEBUG << " end.pos:" << bm->position();
+                        RDEBUG << " end.pos:" << bm->textPosition();
                         continue;
                     }
                     if (bm->type() == KoTextMeta::StartBookmark) {
                         KoTextMeta *e = bm->endBookmark();
 
                         RDEBUG << "start text:meta, cursor:" << searchStartPosition;
-                        RDEBUG << " start.pos:" << bm->position();
+                        RDEBUG << " start.pos:" << bm->textPosition();
 
                         if (e) {
-                            RDEBUG << " e.pos:" << e->position() << endl;
+                            RDEBUG << " e.pos:" << e->textPosition() << endl;
                         }                         else {
                             RDEBUG << "no end marker!" << endl;
                         }
 
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                     }
                 }
@@ -1210,7 +1210,7 @@ Soprano::Model *KoDocumentRdf::findStatements(KoTextEditor *handler, int depth)
                     }
                     if (bm->type() == KoBookmark::StartBookmark) {
                         KoBookmark *e = bm->endBookmark();
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                     }
                 }
@@ -1218,19 +1218,19 @@ Soprano::Model *KoDocumentRdf::findStatements(KoTextEditor *handler, int depth)
                     RDEBUG << "have KoMeta type:" << bm->type() << " at:" <<  tc.position() << endl;
                     if (bm->type() == KoTextMeta::EndBookmark) {
                         RDEBUG << "end text:meta, cursor:" << searchStartPosition;
-                        RDEBUG << " end.pos:" << bm->position();
+                        RDEBUG << " end.pos:" << bm->textPosition();
                         continue;
                     }
                     if (bm->type() == KoTextMeta::StartBookmark) {
                         KoTextMeta *e = bm->endBookmark();
                         RDEBUG << "start text:meta, cursor:" << searchStartPosition;
-                        RDEBUG << " start.pos:" << bm->position();
+                        RDEBUG << " start.pos:" << bm->textPosition();
                         if (e) {
-                            RDEBUG << " e.pos:" << e->position() << endl;
+                            RDEBUG << " e.pos:" << e->textPosition() << endl;
                         }                         else {
                             RDEBUG << "no end marker!" << endl;
                         }
-                        if (e && e->position() < searchStartPosition)
+                        if (e && e->textPosition() < searchStartPosition)
                             continue;
                     }
                 }

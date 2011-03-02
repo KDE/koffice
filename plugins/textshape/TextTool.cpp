@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2008 Girish Ramakrishnan <girish@forwardbias.in>
  * Copyright (C) 2008 Pierre Stirnweiss \pierre.stirnweiss_koffice@gadz.org>
@@ -943,7 +943,7 @@ void TextTool::mouseReleaseEvent(KoPointerEvent *event)
                     if (s == anchor) {
                         // if Yes, let's jump to it
                         KoBookmark *bookmark = inlineManager->bookmarkManager()->bookmark(s);
-                        m_textEditor.data()->setPosition(bookmark->position());
+                        m_textEditor.data()->setPosition(bookmark->textPosition());
                         ensureCursorVisible();
                         event->accept();
                         return;
@@ -980,7 +980,7 @@ void TextTool::mouseReleaseEvent(KoPointerEvent *event)
             KoTextDocument document(m_textEditor.data()->document());
             KoBookmark *bookmark = document.inlineTextObjectManager()->bookmarkManager()->bookmark(anchorName);
             if (bookmark) {
-                m_textEditor.data()->setPosition(bookmark->position());
+                m_textEditor.data()->setPosition(bookmark->textPosition());
                 ensureCursorVisible();
             } else {
                 kDebug(32500) << "A bookmark should exist but has not been found";

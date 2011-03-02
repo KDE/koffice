@@ -437,14 +437,14 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
                     bool saveInlineObject = true;
 
                     if (KoTextMeta* z = dynamic_cast<KoTextMeta*>(inlineObject)) {
-                        if (z->position() < from) {
+                        if (z->textPosition() < from) {
                             //
                             // This <text:meta> starts before the selection, default
                             // to not saving it with special cases to allow saving
                             //
                             saveInlineObject = false;
                             if (z->type() == KoTextMeta::StartBookmark) {
-                                if (z->endBookmark()->position() > from) {
+                                if (z->endBookmark()->textPosition() > from) {
                                     //
                                     // They have selected something starting after the
                                     // <text:meta> opening but before the </text:meta>

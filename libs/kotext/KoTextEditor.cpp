@@ -687,7 +687,7 @@ void KoTextEditor::setDefaultFormat()
 void KoTextEditor::addBookmark(const QString &name)
 {//TODO changeTracking
     d->updateState(KoTextEditor::Private::Custom, i18n("Insert Bookmark"));
-    KoBookmark *bookmark = new KoBookmark(name, d->document);
+    KoBookmark *bookmark = new KoBookmark(name);
     int startPos = -1, endPos = -1, caretPos = -1;
 
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->document->documentLayout());
@@ -699,7 +699,7 @@ void KoTextEditor::addBookmark(const QString &name)
         caretPos = d->caret.position();
 
         d->caret.setPosition(endPos);
-        KoBookmark *endBookmark = new KoBookmark(name, d->document);
+        KoBookmark *endBookmark = new KoBookmark(name);
         bookmark->setType(KoBookmark::StartBookmark);
         endBookmark->setType(KoBookmark::EndBookmark);
         layout->inlineTextObjectManager()->insertInlineObject(d->caret, endBookmark);

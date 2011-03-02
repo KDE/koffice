@@ -978,7 +978,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
             if (layout) {
                 const QTextDocument *document = cursor.block().document();
                 KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
-                KoTextMeta* startmark = new KoTextMeta(document);
+                KoTextMeta* startmark = new KoTextMeta();
                 textObjectManager->insertInlineObject(cursor, startmark);
 
                 // Add inline Rdf here.
@@ -992,7 +992,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
 
                 loadSpan(ts, cursor, stripLeadingSpace);   // recurse
 
-                KoTextMeta* endmark = new KoTextMeta(document);
+                KoTextMeta* endmark = new KoTextMeta();
                 textObjectManager->insertInlineObject(cursor, endmark);
                 startmark->setEndBookmark(endmark);
             }
@@ -1009,7 +1009,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
                 QString uniqBookmarkName = createUniqueBookmarkName(textObjectManager->bookmarkManager(),
                                            bookmarkName,
                                            (localName == "bookmark-end"));
-                KoBookmark *bookmark = new KoBookmark(uniqBookmarkName, document);
+                KoBookmark *bookmark = new KoBookmark(uniqBookmarkName);
 
                 if (localName == "bookmark")
                     bookmark->setType(KoBookmark::SinglePosition);

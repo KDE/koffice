@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -37,6 +37,7 @@ class KoShapeSavingContext;
 class KoTextInlineRdf;
 class KoXmlElement;
 class KoShapeLoadingContext;
+class KoTextPage;
 
 /**
  * Base class for all inline-text-objects.
@@ -124,13 +125,10 @@ public:
      * Update position of the inline object.
      * This is called each time the paragraph this inline object is in is re-layouted giving you the opportunity
      * to reposition your object based on the new information.
-     * @param document the text document this inline object is operating on.
      * @param object the inline object properties
-     * @param posInDocument the character position in the document (param document) this inline object is at.
      * @param format the character format for the inline object.
      */
-    virtual void updatePosition(const QTextDocument *document, QTextInlineObject object,
-                                int posInDocument, const QTextCharFormat &format) = 0;
+    virtual void updatePosition(QTextInlineObject object, const QTextCharFormat &format) = 0;
 
     /**
      * Update the size of the inline object.
@@ -140,21 +138,16 @@ public:
      * QTextInlineObject::setAscent() and QTextInlineObject::setDescent() methods.
      * Note that this method is called while painting; and thus is time sensitive; avoid doing anything time
      * consuming.
-     * @param document the text document this inline object is operating on.
      * @param object the inline object properties
-     * @param posInDocument the character position in the document (param document) this inline object is at.
      * @param format the character format for the inline object.
      * @param pd the postscript-paintdevice that all text is rendered on. Use this for QFont and related
      *  classes so the inline object can be reused on any paintdevice.
      */
-    virtual void resize(const QTextDocument *document, QTextInlineObject object,
-                        int posInDocument, const QTextCharFormat &format, QPaintDevice *pd) = 0;
+    virtual void resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd) = 0;
 
     /**
      * Paint the inline-object-base using the provided painter within the rectangle specified by rect.
-     * @param document the text document this inline object is operating on.
      * @param object the inline object properties
-     * @param posInDocument the character position in the document (param document) this inline object is at.
      * @param format the character format for the inline object.
      * @param pd the postscript-paintdevice that all text is rendered on. Use this for QFont and related
      *  classes so the inline object can be reused on any paintdevice.
@@ -163,8 +156,8 @@ public:
      * @param rect the rectangle inside which the variable can paint itself.  Painting outside the rect
      *    will give varous problems with regards to repainting issues.
      */
-    virtual void paint(QPainter &painter, QPaintDevice *pd, const QTextDocument *document,
-                       const QRectF &rect, QTextInlineObject object, int posInDocument, const QTextCharFormat &format) = 0;
+    virtual void paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect,
+            QTextInlineObject object, const QTextCharFormat &format) = 0;
 
     /**
      * Overwrite this if you are interrested in propertychanges.
@@ -221,6 +214,24 @@ public:
      */
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context) =  0;
 
+    void setDocument(QTextDocument *doc);
+    QTextDocument *document() const;
+
+    /// set the text position of this inline object in the QTextDocument
+    void setTextPosition(int pos);
+    /// @return the text position of this inline object in the QTextDocument
+    int textPosition() const;
+
+    /**
+     * Returns the page this object is located on, or null if unknown.
+     *
+     * This method searches for the page this object is located on and if the application
+     * has set the KoTextPage object on the KoTextShapeData, we'll return a pointer to that.
+     * Notice that if the text has not yet been layed-out, or if the application doesn't support
+     * this concept, we can return a null pointer.
+     */
+    KoTextPage *page() const;
+
 protected:
     explicit KoInlineObject(KoInlineObjectPrivate &, bool propertyChangeListener = false);
 
@@ -232,6 +243,14 @@ protected:
      * @return the shape the text is laid-out in.  Or 0 if there is no shape for that text character.
      */
     static KoShape *shapeForPosition(const QTextDocument *document, int position);
+
+    /**
+     * Callback to notify any subclasses that the text position and/or document have been updated.
+     * Subclasses can reimplement this method to take action when the position is changed in the
+     * document.
+     * @see document(), textPosition()
+     */
+    virtual void positionChanged();
 
     KoInlineObjectPrivate *d_ptr;
 

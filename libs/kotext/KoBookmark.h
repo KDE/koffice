@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007-2008 Fredy Yanardi <fyanardi@gmail.com>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -27,6 +28,7 @@ class KoShape;
 class QTextDocument;
 class KoShapeSavingContext;
 class KoShapeLoadingContext;
+class KoBookmarkPrivate;
 
 /**
  * A document can store a set of cursor positions/selected cursor locations which can be
@@ -56,17 +58,15 @@ public:
      * @param name the name for this bookmark
      * @param document the text document where this bookmark is located
      */
-    KoBookmark(const QString &name, const QTextDocument *document);
+    KoBookmark(const QString &name);
 
     virtual ~KoBookmark();
 
     void saveOdf(KoShapeSavingContext &context);
-    virtual void updatePosition(const QTextDocument *document, QTextInlineObject object,
-                                int posInDocument, const QTextCharFormat &format);
-    virtual void resize(const QTextDocument *document, QTextInlineObject object,
-                        int posInDocument, const QTextCharFormat &format, QPaintDevice *pd);
-    virtual void paint(QPainter &painter, QPaintDevice *pd, const QTextDocument *document,
-                       const QRectF &rect, QTextInlineObject object, int posInDocument, const QTextCharFormat &format);
+    virtual void updatePosition(QTextInlineObject object, const QTextCharFormat &format);
+    virtual void resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd);
+    virtual void paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect,
+            QTextInlineObject object, const QTextCharFormat &format);
 
     /**
      * Set the new name for this bookmark
@@ -100,17 +100,13 @@ public:
     /// @return the KoShape where this bookmark is located
     KoShape *shape() const;
 
-    /// @return the exact cursor position of this bookmark in document
-    int position() const;
-
     /// @return true if this bookmark has selection (type is StartBookmark of EndBookmark)
     bool hasSelection() const;
 
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
 private:
-    class Private;
-    Private *const d;
+    Q_DECLARE_PRIVATE(KoBookmark)
 };
 
 #endif

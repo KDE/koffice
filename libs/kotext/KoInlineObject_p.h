@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,8 +17,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include <QDebug>
 class KoTextInlineRdf;
+class QTextDocument;
 
 class KoInlineObjectPrivate
 {
@@ -26,15 +26,20 @@ public:
     KoInlineObjectPrivate()
             : manager(0),
             id(-1),
+            positionInDocument(-1),
             propertyChangeListener(0),
-            rdf(0) {
+            rdf(0),
+            document(0)
+    {
     }
     virtual ~KoInlineObjectPrivate();
 
     KoInlineTextObjectManager *manager;
     int id;
+    int positionInDocument;
     bool propertyChangeListener;
     KoTextInlineRdf *rdf; //< An inline object might have RDF, we own it.
+    QTextDocument *document;
 
     virtual QDebug printDebug(QDebug dbg) const;
 };

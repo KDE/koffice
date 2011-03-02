@@ -63,6 +63,8 @@ void KoInlineTextObjectManager::insertInlineObject(QTextCursor &cursor, KoInline
     object->setId(m_lastObjectId);
     m_objects.insert(m_lastObjectId, object);
     object->setManager(this);
+    object->setDocument(cursor.document());
+    object->setTextPosition(cursor.position());
     object->setup();
     if (object->propertyChangeListener()) {
         m_listeners.append(object);
