@@ -169,7 +169,7 @@ void OoImpressImport::createDocumentContent(QDomDocument &doccontent)
 {
     QDomDocument doc = KoDocument::createDomDocument("kpresenter", "DOC", "1.2");
     QDomElement docElement = doc.documentElement();
-    docElement.setAttribute("editor", "KPresenter");
+    docElement.setAttribute("editor", "SCesenter");
     docElement.setAttribute("mime", "application/x-kpresenter");
     docElement.setAttribute("syntaxVersion", "2");
 
@@ -1570,7 +1570,7 @@ void OoImpressImport::parseSpanOrSimilar(QDomDocument& doc, const QDomElement& p
         } else if (isTextNS && localName == "s") { // text:s
             textData = OoUtils::expandWhitespace(ts);
         } else if (isTextNS && localName == "tab-stop") { // text:tab-stop
-            // KPresenter currently uses \t.
+            // SCesenter currently uses \t.
             // Known bug: a line with only \t\t\t\t isn't loaded - XML (QDom) strips out whitespace.
             // One more good reason to switch to <text:tab-stop> instead...
             textData = '\t';
@@ -1588,7 +1588,7 @@ void OoImpressImport::parseSpanOrSimilar(QDomDocument& doc, const QDomElement& p
                 parseSpanOrSimilar(doc, ts, outputParagraph, pos);
             } else {
 #if 0 // TODO
-                // The problem is that KPresenter's hyperlink text is not inside the normal text, but for OOWriter it is nearly a <text:span>
+                // The problem is that SCesenter's hyperlink text is not inside the normal text, but for OOWriter it is nearly a <text:span>
                 // So we have to fake.
                 QDomElement fakeParagraph, fakeFormats;
                 uint fakePos = 0;
@@ -1649,7 +1649,7 @@ void OoImpressImport::parseSpanOrSimilar(QDomDocument& doc, const QDomElement& p
         }
         if (m_styleStack.hasProperty(ooNS::fo, "font-size")) {
             double pointSize = m_styleStack.fontSize();
-            text.setAttribute("pointSize", qRound(pointSize));   // KPresenter uses toInt()!
+            text.setAttribute("pointSize", qRound(pointSize));   // SCesenter uses toInt()!
         }
         if (m_styleStack.hasProperty(ooNS::fo, "font-weight"))     // 3.10.24
             if (m_styleStack.property(ooNS::fo, "font-weight") == "bold")
@@ -1715,7 +1715,7 @@ void OoImpressImport::parseSpanOrSimilar(QDomDocument& doc, const QDomElement& p
             if (smallCaps) {
                 text.setAttribute("fontattribute", "smallcaps");
             } else {
-                // Both KWord/KPresenter and OO use "uppercase" and "lowercase".
+                // Both KWord/SCesenter and OO use "uppercase" and "lowercase".
                 // TODO in KWord: "capitalize".
                 text.setAttribute("fontattribute", m_styleStack.property(ooNS::fo, "text-transform"));
             }

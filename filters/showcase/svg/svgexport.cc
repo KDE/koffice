@@ -28,9 +28,9 @@
 #include <KoStore.h>
 #include <kpluginfactory.h>
 
-#include "KPrDocument.h"
-#include "KPrView.h"
-#include "KPrCanvas.h"
+#include "SCDocument.h"
+#include "SCView.h"
+#include "SCCanvas.h"
 
 
 
@@ -55,8 +55,8 @@ SvgExport::convert(const QByteArray& from, const QByteArray& to)
     if (!document)
         return KoFilter::StupidError;
 
-    if (strcmp(document->className(), "KPrDocument") != 0) {
-        kWarning() << "document isn't a KPrDocument but a "
+    if (strcmp(document->className(), "SCDocument") != 0) {
+        kWarning() << "document isn't a SCDocument but a "
         << document->className() << endl;
         return KoFilter::NotImplemented;
     }
@@ -66,7 +66,7 @@ SvgExport::convert(const QByteArray& from, const QByteArray& to)
         kWarning() << "Invalid mimetypes " << to << " " << from;
         return KoFilter::NotImplemented;
     }
-    KPrDocument * kpresenterdoc = const_cast<KPrDocument *>(static_cast<const KPrDocument *>(document));
+    SCDocument * kpresenterdoc = const_cast<SCDocument *>(static_cast<const SCDocument *>(document));
 
     if (kpresenterdoc->mimeType() != "application/x-kpresenter") {
         kWarning() << "Invalid document mimetype " << kpresenterdoc->mimeType();

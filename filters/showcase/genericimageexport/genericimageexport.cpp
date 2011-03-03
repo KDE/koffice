@@ -28,9 +28,9 @@
 #include <KoDocument.h>
 #include <exportsizedia.h>
 
-#include "KPrDocument.h"
-#include "KPrView.h"
-#include "KPrCanvas.h"
+#include "SCDocument.h"
+#include "SCView.h"
+#include "SCCanvas.h"
 #include "genericimageexport.h"
 
 K_PLUGIN_FACTORY(GenericImageExportFactory, registerPlugin<GenericImageExport>();)
@@ -54,8 +54,8 @@ GenericImageExport::convert(const QByteArray& from, const QByteArray& to)
     if (!document)
         return KoFilter::StupidError;
 
-    if (strcmp(document->className(), "KPrDocument") != 0) {
-        kWarning() << "document isn't a KPrDocument but a "
+    if (strcmp(document->className(), "SCDocument") != 0) {
+        kWarning() << "document isn't a SCDocument but a "
         << document->className();
         return KoFilter::NotImplemented;
     }
@@ -71,7 +71,7 @@ GenericImageExport::convert(const QByteArray& from, const QByteArray& to)
         kWarning() << "Invalid mimetypes " << to << " " << from;
         return KoFilter::NotImplemented;
     }
-    KPrDocument * kpresenterdoc = const_cast<KPrDocument *>(static_cast<const KPrDocument *>(document));
+    SCDocument * kpresenterdoc = const_cast<SCDocument *>(static_cast<const SCDocument *>(document));
 
     if (kpresenterdoc->mimeType() != "application/x-kpresenter") {
         kWarning() << "Invalid document mimetype " << kpresenterdoc->mimeType();
@@ -90,9 +90,9 @@ GenericImageExport::convert(const QByteArray& from, const QByteArray& to)
     }
     delete exportDialog;
     if (ret) {
-        KPrView* view = kpresenterdoc->views().isEmpty() ? 0 : static_cast<KPrView*>(kpresenterdoc->views().first());
+        SCView* view = kpresenterdoc->views().isEmpty() ? 0 : static_cast<SCView*>(kpresenterdoc->views().first());
         if (view) { // no view if embedded document
-            KPrCanvas * canvas = view->getCanvas();
+            SCCanvas * canvas = view->getCanvas();
             canvas->drawPageInPix(pixmap, view->getCurrPgNum() - 1, 0, true, width, height);
         } else { //when it's embedded we use just it.
             pixmap = QPixmap(width, height);

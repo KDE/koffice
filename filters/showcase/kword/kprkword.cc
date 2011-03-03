@@ -37,7 +37,7 @@ KprKword::KprKword(QObject *parent, const QStringList&) :
 }
 
 // This filter can act as an import filter for KWord and as an export
-// filter for KPresenter (isn't our architecture really nice ? :)
+// filter for SCesenter (isn't our architecture really nice ? :)
 // This is why we use the file-to-file method, not a QDomDoc one.
 KoFilter::ConversionStatus KprKword::convert(const QByteArray& from, const QByteArray& to)
 {
@@ -368,7 +368,7 @@ void KprKword::convert()
 
             } // end "for each text element"
 
-            // KPresenter seems to save a trailing space (bug!)
+            // SCesenter seems to save a trailing space (bug!)
             int len = text.length();
             if (len > 0 && text[ len - 1 ] == ' ')
                 text.truncate(len - 1);

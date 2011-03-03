@@ -27,7 +27,7 @@
 
 #include <KPluginFactory>
 #include <KRun>
-#include <KProcess>
+#include <SCocess>
 #include <KShell>
 #include <KDebug>
 

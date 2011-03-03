@@ -59,7 +59,7 @@ const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
                 QString color = page.namedItem("BACKCOLOR1").toElement().attribute("color");
                 //if the backcolor is not present it's implicitally white
                 //unless a draw:fill is found, in which case even though a
-                //draw:fill-color is not present it's black in KPresenter2.0
+                //draw:fill-color is not present it's black in SCesenter2.0
                 style.addProperty("draw:fill", "solid");
                 style.addProperty("draw:fill-color", page.namedItem("BACKCOLOR1").toElement().attribute("color", "#ffffff"));
             } else {
@@ -270,7 +270,7 @@ const QString Filterkpr2odf::createGradientStyle(const KoXmlElement& gradientEle
 {
     KoGenStyle style(KoGenStyle::GradientStyle);
 
-    //KPresenter didn't allow to customize those attributes
+    //SCesenter didn't allow to customize those attributes
     style.addAttribute("draw:start-intensity", "100%");
     style.addAttribute("draw:end-intensity", "100%");
     style.addAttribute("draw:border", "0%");
@@ -394,7 +394,7 @@ const QString Filterkpr2odf::createPageLayout()
     }
     style.addProperty("style:print-orientation", "landscape");
 
-    //NOTE: header-style and footer-style are not present because in KPresenter they are treated as text boxes
+    //NOTE: header-style and footer-style are not present because in SCesenter they are treated as text boxes
 
     return m_styles.insert(style, "pm");
 }
@@ -703,7 +703,7 @@ const QString Filterkpr2odf::createMarkerStyle(int markerType)
         break;
     case 6:
         displayName = "Doble Arrow";
-        viewBox = "0 0 1131 1918";//FIXME: same as Double line arrow, not sure if it's ok, nothing in KPresenter1.6
+        viewBox = "0 0 1131 1918";//FIXME: same as Double line arrow, not sure if it's ok, nothing in SCesenter1.6
         d = "m737 1131h394l-564-1131-567 1131h398l-398 787h1131z";
         break;
     case 7:

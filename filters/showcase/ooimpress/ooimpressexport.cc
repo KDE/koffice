@@ -64,7 +64,7 @@ KoFilter::ConversionStatus OoImpressExport::convert(const QByteArray & from,
         return KoFilter::NotImplemented;
     }
 
-    // read in the KPresenter file
+    // read in the SCesenter file
     KoFilter::ConversionStatus preStatus = openFile();
 
     if (preStatus != KoFilter::OK)
@@ -181,7 +181,7 @@ KoFilter::ConversionStatus OoImpressExport::openFile()
     }
 
     if (!m_storeinp->open("maindoc.xml")) {
-        kWarning(30518) << "This file doesn't seem to be a valid KPresenter file";
+        kWarning(30518) << "This file doesn't seem to be a valid SCesenter file";
         return KoFilter::WrongFormat;
     }
 
@@ -213,7 +213,7 @@ void OoImpressExport::createDocumentMeta(QDomDocument & docmeta)
     QDomNode meta = docmeta.createElement("office:meta");
 
     QDomElement generator = docmeta.createElement("meta:generator");
-    generator.appendChild(docmeta.createTextNode("KPresenter 1.5"));
+    generator.appendChild(docmeta.createTextNode("SCesenter 1.5"));
     meta.appendChild(generator);
 
     QDomNode i = m_documentinfo.namedItem("document-info");

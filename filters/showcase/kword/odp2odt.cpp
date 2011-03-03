@@ -38,7 +38,7 @@ Odp2Odt::Odp2Odt(QObject *parent, const QStringList&) :
 }
 
 // This filter can act as an import filter for KWord and as an export
-// filter for KPresenter (isn't our architecture really nice ? :)
+// filter for SCesenter (isn't our architecture really nice ? :)
 // This is why we use the file-to-file method, not a QDomDoc one.
 KoFilter::ConversionStatus Odp2Odt::convert(const QByteArray& from, const QByteArray& to)
 {

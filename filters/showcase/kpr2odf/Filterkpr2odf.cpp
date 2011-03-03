@@ -729,7 +729,7 @@ void Filterkpr2odf::appendPie(KoXmlWriter* content, const KoXmlElement& objectEl
 
 void Filterkpr2odf::setEndPoints(QPointF points[], const QSizeF& size, int startAngle, int endAngle)
 {
-    //NOTE: this code is ported from the 1.6 series from the KPrPieObject.cpp file
+    //NOTE: this code is ported from the 1.6 series from the SCPieObject.cpp file
 
     int angles[] = { startAngle, endAngle };
     double anglesInRad[] = { angles[0] * M_PI / 180, angles[1] * M_PI / 180 };
@@ -764,7 +764,7 @@ void Filterkpr2odf::setEndPoints(QPointF points[], const QSizeF& size, int start
 
 void Filterkpr2odf::getRealSizeAndOrig(QSizeF &size, QPointF &realOrig, int startAngle, int endAngle, int angle, int pieType)
 {
-    //NOTE: this code is ported from the 1.6 series from the KPrPieObject.cpp file
+    //NOTE: this code is ported from the 1.6 series from the SCPieObject.cpp file
 
     int len;
     if (endAngle < startAngle) {
@@ -967,7 +967,7 @@ void Filterkpr2odf::getRealSizeAndOrig(QSizeF &size, QPointF &realOrig, int star
 void Filterkpr2odf::setMinMax(double &min_x, double &min_y,
                               double &max_x, double &max_y, QPointF point)
 {
-    //NOTE: this code is ported from the 1.6 series from the KPrPieObject.cpp file
+    //NOTE: this code is ported from the 1.6 series from the SCPieObject.cpp file
 
     double tmp_x = point.x();
     double tmp_y = point.y();
