@@ -8,8 +8,8 @@ macro_bool_to_01(X11_dpms_FOUND HAVE_DPMS) # showcase
 add_subdirectory( part )
 
 include_directories(
-		${KOTEXT_INCLUDES}
-        ${KOMAIN_INCLUDES}
+    ${KOTEXT_INCLUDES}
+    ${KOMAIN_INCLUDES}
 )
 
 add_subdirectory( pics )
