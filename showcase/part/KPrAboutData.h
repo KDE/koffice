@@ -27,15 +27,15 @@
 static const char* description=I18N_NOOP("KOffice Presentation Tool");
 static const char* version=KOFFICE_VERSION_STRING;
 
-KAboutData * newKPresenterAboutData()
+KAboutData * newShowcaseAboutData()
 {
-    KAboutData * aboutData=new KAboutData("kpresenter", 0, ki18n("KPresenter"),
+    KAboutData * aboutData=new KAboutData("showcase", 0, ki18n("Showcase"),
                                            version, ki18n(description), KAboutData::License_LGPL,
-                                           ki18n("(c) 1998-2011, The KPresenter Team"), KLocalizedString(),
-                                           "http://www.koffice.org/kpresenter/");
-    aboutData->addAuthor(ki18n("Thorsten Zachmann"), ki18n("Maintainer"), "zachmann@kde.org");
-    aboutData->addAuthor(ki18n("Laurent Montel"), ki18n("Former maintainer"), "montel@kde.org");
-    aboutData->addAuthor(ki18n("Reginald Stadlbauer"),ki18n("Original author"), "reggie@kde.org");
+                                           ki18n("(c) 1998-2011, The Showcase Team"), KLocalizedString(),
+                                           "http://www.koffice.org/showcase/");
+    aboutData->addAuthor(ki18n("Thorsten Zachmann"), KLocalizedString(), "zachmann@kde.org");
+    aboutData->addAuthor(ki18n("Laurent Montel"), KLocalizedString(), "montel@kde.org");
+    aboutData->addAuthor(ki18n("Reginald Stadlbauer"),KLocalizedString(), "reggie@kde.org");
     aboutData->addAuthor(ki18n("Werner Trobin"), KLocalizedString(), "trobin@kde.org");
     aboutData->addAuthor(ki18n("David Faure"), KLocalizedString(), "faure@kde.org");
     aboutData->addAuthor(ki18n("Toshitaka Fujioka"), KLocalizedString(), "fujioka@kde.org");

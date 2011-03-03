@@ -86,7 +86,7 @@
             <array>
             </array>
             <key>CFBundleTypeName</key>
-            <string>KPresenter Presentation File</string>
+            <string>Showcase Presentation File</string>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
         </dict>

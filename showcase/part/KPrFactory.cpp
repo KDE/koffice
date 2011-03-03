@@ -63,7 +63,7 @@ QObject* KPrFactory::create(const char* iface, QWidget* parentWidget, QObject *p
 KAboutData* KPrFactory::aboutData()
 {
     if(!s_aboutData)
-        s_aboutData = newKPresenterAboutData();
+        s_aboutData = newShowcaseAboutData();
 
     return s_aboutData;
 }

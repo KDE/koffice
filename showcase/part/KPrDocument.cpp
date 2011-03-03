@@ -73,7 +73,7 @@ KPrDocument::KPrDocument(QWidget* parentWidget, QObject* parent, bool singleView
     }
 
     setComponentData(KPrFactory::componentData(), false);
-    setTemplateType("kpresenter_template");
+    setTemplateType("showcase_template");
 
     KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
                                                        KoXmlNS::presentation, "placeholder",
@@ -287,7 +287,7 @@ KoPageApp::PageType KPrDocument::pageType() const
 
 void KPrDocument::initEmpty()
 {
-    QString fileName(KStandardDirs::locate("kpresenter_template", "Screen/.source/emptyLandscape.otp", componentData()));
+    QString fileName(KStandardDirs::locate("showcase_template", "Screen/.source/emptyLandscape.otp", componentData()));
     setModified(true);
     bool ok = loadNativeFormat(fileName);
     if (!ok) {
@@ -378,12 +378,12 @@ void KPrDocument::showStartUpWidget(KoMainWindow * parent, bool alwaysShow)
     // TODO: Uncomment i18n calls after release of 2.3
     factory = KoShapeRegistry::instance()->value("TextShapeID");
     if (!factory) {
-        m_errorMessage = /*i18n(*/ "Can not find needed text component, KPresenter will quit now." /*)*/;
+        m_errorMessage = /*i18n(*/ "Can not find needed text component, Showcase will quit now." /*)*/;
         error = true;
     }
     factory = KoShapeRegistry::instance()->value("PictureShape");
     if (!factory) {
-        m_errorMessage = /*i18n(*/ "Can not find needed picture component, KPresenter will quit now." /*)*/;
+        m_errorMessage = /*i18n(*/ "Can not find needed picture component, Showcase will quit now." /*)*/;
         error = true;
     }
 
