@@ -44,6 +44,7 @@ set(TestChangeListCommand_test_SRCS
     ../TextEditingPluginContainer.cpp
     ../ChangeTracker.cpp
     ../dialogs/CreateBookmark.cpp
+    ../dialogs/JumpOverview.cpp
     ../dialogs/FontDia.cpp
     ../dialogs/InsertCharacter.cpp
     ../dialogs/StyleManagerDialog.cpp
@@ -150,6 +151,7 @@ set(TestTextTool_test_SRCS
     ../dialogs/CharacterGeneral.cpp
     ../dialogs/CharacterHighlighting.cpp
     ../dialogs/CreateBookmark.cpp
+    ../dialogs/JumpOverview.cpp
     ../dialogs/FontDecorations.cpp
     ../dialogs/FontDia.cpp
     ../dialogs/FontLayoutTab.cpp
@@ -204,6 +206,7 @@ set(TestChangeTrackedDelete_test_SRCS
     ../TextTool.cpp
     ../TextEditingPluginContainer.cpp
     ../ChangeTracker.cpp
+    ../dialogs/JumpOverview.cpp
     ../dialogs/FontDia.cpp
     ../dialogs/CreateBookmark.cpp
     ../dialogs/InsertCharacter.cpp

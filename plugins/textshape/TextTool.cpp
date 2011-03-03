@@ -24,6 +24,7 @@
 #include "TextTool.h"
 #include "TextEditingPluginContainer.h"
 #include "dialogs/CreateBookmark.h"
+#include "dialogs/JumpOverview.h"
 #include "dialogs/SimpleStyleWidget.h"
 #include "dialogs/StylesWidget.h"
 #include "dialogs/ParagraphSettingsDialog.h"
@@ -283,6 +284,10 @@ TextTool::TextTool(KoCanvasBase *canvas)
     action  = new KAction(i18n("Insert Bookmark..."), this);
     addAction("insert_bookmark", action);
     connect(action, SIGNAL(triggered()), this, SLOT(insertBookmark()));
+
+    action  = new KAction(i18n("Jump To..."), this);
+    addAction("jump_to_text", action);
+    connect(action, SIGNAL(triggered()), this, SLOT(jumpToText()));
 
     action  = new KAction(i18n("Insert Soft Hyphen"), this);
     addAction("soft_hyphen", action);
@@ -1984,6 +1989,22 @@ void TextTool::selectFont()
     connect(fontDlg, SIGNAL(stopMacro()), this, SLOT(stopMacro()));
     fontDlg->exec();
     delete fontDlg;
+}
+
+void TextTool::jumpToText()
+{
+    KoTextEditor *textEditor = m_textEditor.data();
+    if (textEditor == 0)
+        return;
+    const int oldPos = textEditor->position();
+    JumpOverview *dia = new JumpOverview(textEditor->document(), canvas()->canvasWidget());
+    connect (dia, SIGNAL(cursorPositionSelected(int)), textEditor, SLOT(setPosition(int)));
+    connect (dia, SIGNAL(cursorPositionSelected(int)), this, SLOT(ensureCursorVisible()));
+    if (dia->exec() == QDialog::Rejected) {
+        textEditor->setPosition(oldPos);
+        ensureCursorVisible();
+    }
+    delete dia;
 }
 
 void TextTool::shapeAddedToCanvas()

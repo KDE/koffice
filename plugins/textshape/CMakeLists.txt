@@ -40,6 +40,7 @@ SET ( textshape_SRCS
     dialogs/FontTab.cpp
     dialogs/FormattingPreview.cpp
     dialogs/InsertCharacter.cpp
+    dialogs/JumpOverview.cpp
     dialogs/LanguageTab.cpp
     dialogs/ListsSpinBox.cpp
     dialogs/NewStyleWidget.cpp
@@ -76,6 +77,7 @@ kde4_add_ui_files(textshape_SRCS
     dialogs/CharacterGeneral.ui
     dialogs/CharacterHighlighting.ui
     dialogs/CreateBookmark.ui
+    dialogs/JumpOverview.ui
     dialogs/NewStyleWidget.ui
     dialogs/ParagraphBulletsNumbers.ui
     dialogs/ParagraphDecorations.ui

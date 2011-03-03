@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2009 KO GmbH <cbo@kogmbh.com>
  *
@@ -215,6 +215,8 @@ private slots:
     void setStyle(KoParagraphStyle *syle);
     /// set the characterStyle of the current selection. see above.
     void setStyle(KoCharacterStyle *style);
+    /// show dialog with markers (bookmarks, pages)
+    void jumpToText();
 
     /// add a KoDocument wide undo command which will call undo on the qtextdocument.
     void addUndoCommand();
