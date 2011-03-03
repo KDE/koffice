@@ -41,6 +41,11 @@ KoBookmarkManager::~KoBookmarkManager()
 
 void KoBookmarkManager::insert(KoBookmark *bookmark)
 {
+    Q_ASSERT(bookmark);
+    if (bookmark->type() == KoBookmark::EndBookmark) {
+        kWarning(32500) << "Can't insert a bookmark of type EndBookmark in the manager, ignoring";
+        return;
+    }
     d->bookmarks.append(bookmark);
 }
 
