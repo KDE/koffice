@@ -20,14 +20,14 @@
 #ifndef KPREVENTACTIONDATA_H
 #define KPREVENTACTIONDATA_H
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 class SCSoundCollection;
 class KoShape;
 class KoEventAction;
 class SCSoundCollection;
 
-class KPRESENTER_EXPORT SCEventActionData
+class SHOWCASE_EXPORT SCEventActionData
 {
 public:
     SCEventActionData(KoShape * shape, KoEventAction * eventAction , SCSoundCollection * soundCollection);

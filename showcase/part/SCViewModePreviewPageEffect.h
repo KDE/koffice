@@ -21,7 +21,7 @@
 #ifndef KPRVIEWMODEPREVIEWPAGEEFFECT_H
 #define KPRVIEWMODEPREVIEWPAGEEFFECT_H
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 #include <KoPAViewMode.h>
 #include "SCAnimationDirector.h"
@@ -32,7 +32,7 @@ class SCPage;
 class SCPageEffect;
 class SCPageEffectRunner;
 
-class KPRESENTER_EXPORT SCViewModePreviewPageEffect : public KoPAViewMode
+class SHOWCASE_EXPORT SCViewModePreviewPageEffect : public KoPAViewMode
 {
 
     Q_OBJECT

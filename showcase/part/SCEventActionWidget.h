@@ -22,7 +22,7 @@
 
 #include <QWidget>
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 class SCEventActionData;
 class QUndoCommand;
@@ -32,7 +32,7 @@ class QUndoCommand;
  *
  * Each event action needs to implement this widget to make it configurable
  */
-class KPRESENTER_EXPORT SCEventActionWidget : public QWidget
+class SHOWCASE_EXPORT SCEventActionWidget : public QWidget
 {
     Q_OBJECT
 public:

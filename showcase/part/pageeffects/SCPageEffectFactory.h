@@ -23,12 +23,12 @@
 
 #include "SCPageEffect.h"
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 /**
  * Base class for a page effect factories
  */
-class KPRESENTER_EXPORT SCPageEffectFactory
+class SHOWCASE_EXPORT SCPageEffectFactory
 {
 public:
     struct Properties {

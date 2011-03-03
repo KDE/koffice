@@ -27,7 +27,7 @@
 #include "KoXmlReaderForward.h"
 class SCPageEffect;
 
-class KPRESENTER_EXPORT SCPageEffectRegistry : public KoGenericRegistry<SCPageEffectFactory *>
+class SHOWCASE_EXPORT SCPageEffectRegistry : public KoGenericRegistry<SCPageEffectFactory *>
 {
 public:
     class Singleton;

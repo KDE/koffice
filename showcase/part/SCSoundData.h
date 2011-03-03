@@ -22,7 +22,7 @@
 #define KPRSOUNDDATA_H
 
 #include <KUrl>
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 class SCSoundCollection;
 class QIODevice;
@@ -36,7 +36,7 @@ class QIODevice;
 /* 
  * TODO needs a file for playing, store it as a tmp file
  */
-class KPRESENTER_EXPORT SCSoundData {
+class SHOWCASE_EXPORT SCSoundData {
 public:
     /**
      * The storage location

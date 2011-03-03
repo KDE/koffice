@@ -23,9 +23,9 @@
 
 #include "SCPageEffectFactory.h"
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
-class KPRESENTER_EXPORT SCPageEffectStrategy
+class SHOWCASE_EXPORT SCPageEffectStrategy
 {
 public:
     /**

@@ -25,7 +25,7 @@
 #include "SCPageData.h"
 #include "SCDeclarations.h"
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 class KoPADocument;
 class SCDocument;
@@ -34,7 +34,7 @@ class SCNotes;
 class SCPageLayout;
 class SCDeclarations;
 
-class KPRESENTER_EXPORT SCPage : public KoPAPage, public SCPageData
+class SHOWCASE_EXPORT SCPage : public KoPAPage, public SCPageData
 {
 public:
     SCPage(KoPAMasterPage * masterPage, SCDocument * document);

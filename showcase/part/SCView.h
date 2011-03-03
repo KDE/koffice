@@ -21,7 +21,7 @@
 #ifndef KPRVIEW_H
 #define KPRVIEW_H
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 #include <QObject>
 
@@ -36,7 +36,7 @@ class SCViewModePresenterView;
 class KActionMenu;
 class KoPAPageBase;
 
-class KPRESENTER_EXPORT SCView : public KoPAView
+class SHOWCASE_EXPORT SCView : public KoPAView
 {
     Q_OBJECT
 public:

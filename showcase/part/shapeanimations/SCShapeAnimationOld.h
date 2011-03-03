@@ -22,7 +22,7 @@
 
 #include <QTimeLine>
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 #define TIMEFACTOR 1000.0
 
@@ -44,7 +44,7 @@ class SCAnimationData;
  * The state of the animation is kept in the animationData and is 
  * passed to the ainmation when it is run e.g. on a special view.
  */
-class KPRESENTER_TEST_EXPORT SCShapeAnimationOld
+class SHOWCASE_TEST_EXPORT SCShapeAnimationOld
 {
 public:
     enum Type

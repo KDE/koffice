@@ -22,12 +22,12 @@
 #define KPRFACTORY_H
 
 #include <KPluginFactory>
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 class KAboutData;
 class KIconLoader;
 
-class KPRESENTER_EXPORT SCFactory : public KPluginFactory
+class SHOWCASE_EXPORT SCFactory : public KPluginFactory
 {
     Q_OBJECT
 public:

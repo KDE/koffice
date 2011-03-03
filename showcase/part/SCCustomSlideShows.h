@@ -33,9 +33,9 @@ class KoPASavingContext;
 class KoPALoadingContext;
 class SCDocument;
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
-class KPRESENTER_TEST_EXPORT SCCustomSlideShows
+class SHOWCASE_TEST_EXPORT SCCustomSlideShows
 {
 public:
     SCCustomSlideShows();

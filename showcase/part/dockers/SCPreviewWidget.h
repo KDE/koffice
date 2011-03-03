@@ -20,7 +20,7 @@
 #ifndef KPRPREVIEWWIDGET_H
 #define KPRPREVIEWWIDGET_H
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 #include <QWidget>
 #include <KoShape.h>
@@ -33,7 +33,7 @@ class SCPageEffectRunner;
 /**
  * A widget for page effect preview. It shows a transition from a black page to the current page
  */
-class KPRESENTER_EXPORT SCPreviewWidget : public QWidget
+class SHOWCASE_EXPORT SCPreviewWidget : public QWidget
 {
     Q_OBJECT
 public:

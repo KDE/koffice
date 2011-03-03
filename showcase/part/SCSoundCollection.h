@@ -24,7 +24,7 @@
 #include <QObject>
 #include <QVariant>
 
-#include "kpresenter_export.h"
+#include "showcase_export.h"
 
 class SCSoundData;
 class KoStore;
@@ -32,7 +32,7 @@ class KoStore;
 /**
  * An collection of SCSoundData objects to allow loading and saving them all together to the KoStore.
  */
-class KPRESENTER_EXPORT SCSoundCollection : public QObject, public KoDataCenterBase {
+class SHOWCASE_EXPORT SCSoundCollection : public QObject, public KoDataCenterBase {
 public:
     /// constructor
     SCSoundCollection(QObject *parent = 0);
