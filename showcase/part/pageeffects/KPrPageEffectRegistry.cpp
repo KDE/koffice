@@ -102,12 +102,12 @@ void KPrPageEffectRegistry::init()
     KoPluginLoader::PluginsConfig config;
     config.whiteList = "PageEffectPlugins";
     config.blacklist = "PageEffectPluginsDisabled";
-    config.group = "kpresenter";
+    config.group = "showcase";
 
     // XXX: Use minversion here?
     // The plugins are responsible for adding a factory to the registry
-    KoPluginLoader::instance()->load(QString::fromLatin1("KPresenter/PageEffect"),
-            QString::fromLatin1("[X-KPresenter-Version] <= 0"),
+    KoPluginLoader::instance()->load(QString::fromLatin1("Showcase/PageEffect"),
+            QString::fromLatin1("[X-Showcase-Version] <= 0"),
             config);
 
     QList<KPrPageEffectFactory*> factories = values();

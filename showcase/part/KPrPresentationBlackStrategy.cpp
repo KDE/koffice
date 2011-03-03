@@ -33,11 +33,8 @@ KPrPresentationBlackStrategy::KPrPresentationBlackStrategy(KPrPresentationTool *
 {
     m_widget = new KPrPresentationBlackWidget(canvas());
     // TODO
-    QString str("kpresenter");
-    KIconLoader kicon(str);
-    str.clear();
-    str.append("black.png");
-    QPixmap pix(kicon.loadIcon(str, kicon.Small));
+    KIconLoader kicon("showcase");
+    QPixmap pix(kicon.loadIcon("black.png", kicon.Small));
     float factor = 1.0;
     pix = pix.scaledToHeight(pix.height()*factor);
     pix = pix.scaledToWidth(pix.width()*factor);

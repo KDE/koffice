@@ -82,13 +82,12 @@ KIconLoader* KPrFactory::iconLoader()
 
 const KComponentData &KPrFactory::componentData()
 {
-    if (!s_instance)
-    {
+    if (!s_instance) {
         s_instance = new KComponentData(aboutData());
 
-        s_instance->dirs()->addResourceType("kpresenter_template", "data", "kpresenter/templates/");
-        s_instance->dirs()->addResourceType("slideshow", "data", "kpresenter/slideshow/");
-        s_instance->dirs()->addResourceType("styles", "data", "kpresenter/styles/");
+        s_instance->dirs()->addResourceType("showcase_template", "data", "showcase/templates/");
+        s_instance->dirs()->addResourceType("slideshow", "data", "showcase/slideshow/");
+        s_instance->dirs()->addResourceType("styles", "data", "showcase/styles/");
     }
     return *s_instance;
 }

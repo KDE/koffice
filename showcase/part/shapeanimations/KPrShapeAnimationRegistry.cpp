@@ -38,12 +38,12 @@ public:
         KoPluginLoader::PluginsConfig config;
         config.whiteList = "ShapeAnimationPlugins";
         config.blacklist = "ShapeAnimationPluginsDisabled";
-        config.group = "kpresenter";
+        config.group = "showcase";
         
         // XXX: Use minversion here?
         // The plugins are responsible for adding a factory to the registry
-        KoPluginLoader::instance()->load(QString::fromLatin1("KPresenter/ShapeAnimation"),
-                                          QString::fromLatin1("[X-KPresenter-Version] <= 0"),
+        KoPluginLoader::instance()->load(QString::fromLatin1("Showcase/ShapeAnimation"),
+                                          QString::fromLatin1("[X-Showcase-Version] <= 0"),
                                           config);
     }
 
