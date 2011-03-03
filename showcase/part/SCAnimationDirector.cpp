@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimationDirector.h"
+#include "SCAnimationDirector.h"
 #include <QList>
 #include <QPainter>
 #include <QPaintEvent>
@@ -36,23 +36,23 @@
 #include <KoPAView.h>
 #include <KoPAUtil.h>
 
-#include "KPrEndOfSlideShowPage.h"
-#include "KPrPage.h"
-#include "KPrMasterPage.h"
-#include "KPrPageApplicationData.h"
-#include "KPrShapeManagerAnimationStrategy.h"
-#include "KPrShapeManagerDisplayMasterStrategy.h"
-#include "KPrPageSelectStrategyActive.h"
-#include "pageeffects/KPrPageEffectRunner.h"
-#include "pageeffects/KPrPageEffect.h"
+#include "SCEndOfSlideShowPage.h"
+#include "SCPage.h"
+#include "SCMasterPage.h"
+#include "SCPageApplicationData.h"
+#include "SCShapeManagerAnimationStrategy.h"
+#include "SCShapeManagerDisplayMasterStrategy.h"
+#include "SCPageSelectStrategyActive.h"
+#include "pageeffects/SCPageEffectRunner.h"
+#include "pageeffects/SCPageEffect.h"
 
 #include <KoShapeLayer.h>
 #include <KoPAMasterPage.h>
 #include <KoSelection.h>
-#include "KPrShapeAnimations.h"
-#include "animations/KPrAnimationCache.h"
+#include "SCShapeAnimations.h"
+#include "animations/SCAnimationCache.h"
 
-KPrAnimationDirector::KPrAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> & pages, KoPAPageBase* currentPage)
+SCAnimationDirector::SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> & pages, KoPAPageBase* currentPage)
 : m_view(view)
 , m_canvas(canvas)
 , m_pages(pages)
@@ -63,7 +63,7 @@ KPrAnimationDirector::KPrAnimationDirector(KoPAView * view, KoPACanvas * canvas,
 , m_animationCache(0)
 {
     Q_ASSERT(!m_pages.empty());
-    m_animationCache = new KPrAnimationCache();
+    m_animationCache = new SCAnimationCache();
     if(!currentPage || !pages.contains(currentPage))
         updateActivePage(m_pages[0]);
     else
@@ -79,30 +79,30 @@ KPrAnimationDirector::KPrAnimationDirector(KoPAView * view, KoPACanvas * canvas,
     m_timeLine.setCurveShape(QTimeLine::LinearCurve);
     m_timeLine.setUpdateInterval(20);
     // set the animation strategy in the KoShapeManagers
-    m_canvas->shapeManager()->setPaintingStrategy(new KPrShapeManagerAnimationStrategy(m_canvas->shapeManager(), m_animationCache,
-                                                       new KPrPageSelectStrategyActive(m_view->kopaCanvas())));
-    m_canvas->masterShapeManager()->setPaintingStrategy(new KPrShapeManagerAnimationStrategy(m_canvas->masterShapeManager(), m_animationCache,
-                                                             new KPrPageSelectStrategyActive(m_view->kopaCanvas())));
+    m_canvas->shapeManager()->setPaintingStrategy(new SCShapeManagerAnimationStrategy(m_canvas->shapeManager(), m_animationCache,
+                                                       new SCPageSelectStrategyActive(m_view->kopaCanvas())));
+    m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerAnimationStrategy(m_canvas->masterShapeManager(), m_animationCache,
+                                                             new SCPageSelectStrategyActive(m_view->kopaCanvas())));
 
     if (hasAnimation()) {
         startTimeLine(m_animations.at(m_stepIndex)->totalDuration());
     }
 }
 
-KPrAnimationDirector::~KPrAnimationDirector()
+SCAnimationDirector::~SCAnimationDirector()
 {
     // free used resources
     delete m_pageEffectRunner;
     delete m_animationCache;
     //set the KoShapeManagerPaintingStrategy in the KoShapeManagers
     m_canvas->shapeManager()->setPaintingStrategy(new KoShapeManagerPaintingStrategy(m_canvas->shapeManager()));
-    m_canvas->masterShapeManager()->setPaintingStrategy(new KPrShapeManagerDisplayMasterStrategy(m_canvas->masterShapeManager(),
-                                                             new KPrPageSelectStrategyActive(m_view->kopaCanvas())));
+    m_canvas->masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(m_canvas->masterShapeManager(),
+                                                             new SCPageSelectStrategyActive(m_view->kopaCanvas())));
 }
 
 
 
-void KPrAnimationDirector::paint(QPainter& painter, const QRectF &paintRect)
+void SCAnimationDirector::paint(QPainter& painter, const QRectF &paintRect)
 {
     if (m_pageEffectRunner)
     {
@@ -142,38 +142,38 @@ void KPrAnimationDirector::paint(QPainter& painter, const QRectF &paintRect)
     KApplication::kApplication()->syncX();
 }
 
-void KPrAnimationDirector::paintEvent(QPaintEvent* event)
+void SCAnimationDirector::paintEvent(QPaintEvent* event)
 {
     QPainter painter(m_canvas);
     paint(painter, event->rect());
 }
 
-KoViewConverter * KPrAnimationDirector::viewConverter()
+KoViewConverter * SCAnimationDirector::viewConverter()
 {
     return &m_zoomHandler;
 }
 
-int KPrAnimationDirector::numPages() const
+int SCAnimationDirector::numPages() const
 {
     return m_pages.size();
 }
 
-int KPrAnimationDirector::currentPage() const
+int SCAnimationDirector::currentPage() const
 {
     return m_pageIndex;
 }
 
-int KPrAnimationDirector::numStepsInPage() const
+int SCAnimationDirector::numStepsInPage() const
 {
     return m_animations.size();
 }
 
-int KPrAnimationDirector::currentStep() const
+int SCAnimationDirector::currentStep() const
 {
     return m_stepIndex;
 }
 
-bool KPrAnimationDirector::navigate(Navigation navigation)
+bool SCAnimationDirector::navigate(Navigation navigation)
 {
     bool finished = false;
     if (m_pageEffectRunner) {
@@ -214,7 +214,7 @@ bool KPrAnimationDirector::navigate(Navigation navigation)
     return presentationFinished;
 }
 
-void KPrAnimationDirector::navigateToPage(int index)
+void SCAnimationDirector::navigateToPage(int index)
 {
     if (m_pageEffectRunner) {
         m_pageEffectRunner->finish();
@@ -243,7 +243,7 @@ void KPrAnimationDirector::navigateToPage(int index)
     }
 }
 
-void KPrAnimationDirector::updateActivePage(KoPAPageBase * page)
+void SCAnimationDirector::updateActivePage(KoPAPageBase * page)
 {
     deactivate();
 
@@ -273,7 +273,7 @@ void KPrAnimationDirector::updateActivePage(KoPAPageBase * page)
         }
     }
 
-    KPrPage * kprPage = dynamic_cast<KPrPage *>(page);
+    SCPage * kprPage = dynamic_cast<SCPage *>(page);
     Q_ASSERT(kprPage);
     m_pageIndex = m_pages.indexOf(page);
     m_animations = kprPage->animations().steps();
@@ -283,7 +283,7 @@ void KPrAnimationDirector::updateActivePage(KoPAPageBase * page)
     updateZoom(m_canvas->size());
 }
 
-void KPrAnimationDirector::updatePageAnimation()
+void SCAnimationDirector::updatePageAnimation()
 {
     m_animationCache->clear();
 
@@ -292,19 +292,19 @@ void KPrAnimationDirector::updatePageAnimation()
     m_zoomHandler.zoom(&zoom, &zoom);
     m_animationCache->setZoom(zoom);
     int i = 0;
-    foreach (KPrAnimationStep *step, m_animations) {
+    foreach (SCAnimationStep *step, m_animations) {
         step->init(m_animationCache, i);
         i++;
     }
 }
 
-void KPrAnimationDirector::updateStepAnimation()
+void SCAnimationDirector::updateStepAnimation()
 {
     m_animationCache->startStep(m_stepIndex);
 }
 
 
-bool KPrAnimationDirector::changePage(Navigation navigation)
+bool SCAnimationDirector::changePage(Navigation navigation)
 {
     switch (navigation)
     {
@@ -324,7 +324,7 @@ bool KPrAnimationDirector::changePage(Navigation navigation)
             break;
         case LastPage:
             m_pageIndex = m_pages.size() - 1;
-            if (dynamic_cast<KPrEndOfSlideShowPage *>(m_pages[m_pageIndex]) && m_pageIndex > 0) {
+            if (dynamic_cast<SCEndOfSlideShowPage *>(m_pages[m_pageIndex]) && m_pageIndex > 0) {
                 m_pageIndex--;
             }
             break;
@@ -351,7 +351,7 @@ bool KPrAnimationDirector::changePage(Navigation navigation)
     return false;
 }
 
-void KPrAnimationDirector::updateZoom(const QSize & size)
+void SCAnimationDirector::updateZoom(const QSize & size)
 {
     KoPageLayout pageLayout = m_view->activePage()->pageLayout();
     KoPAUtil::setZoom(pageLayout, size, m_zoomHandler);
@@ -363,7 +363,7 @@ void KPrAnimationDirector::updateZoom(const QSize & size)
     updateStepAnimation();
 }
 
-void KPrAnimationDirector::paintStep(QPainter & painter)
+void SCAnimationDirector::paintStep(QPainter & painter)
 {
     painter.translate(m_pageRect.topLeft());
     m_view->activePage()->paintBackground(painter, m_zoomHandler);
@@ -381,7 +381,7 @@ void KPrAnimationDirector::paintStep(QPainter & painter)
     m_canvas->shapeManager()->paint(painter, m_zoomHandler, true);
 }
 
-bool KPrAnimationDirector::nextStep()
+bool SCAnimationDirector::nextStep()
 {
     if (m_stepIndex < numStepsInPage() - 1) {
         // if there are sub steps go to the next substep
@@ -401,7 +401,7 @@ bool KPrAnimationDirector::nextStep()
         }
         m_stepIndex = 0;
 
-        KPrPageEffect * effect = KPrPage::pageData(m_pages[m_pageIndex])->pageEffect();
+        SCPageEffect * effect = SCPage::pageData(m_pages[m_pageIndex])->pageEffect();
 
         // run page effect if there is one
         if (effect) {
@@ -418,7 +418,7 @@ bool KPrAnimationDirector::nextStep()
             newPainter.setRenderHint(QPainter::Antialiasing);
             paintStep(newPainter);
 
-            m_pageEffectRunner = new KPrPageEffectRunner(oldPage, newPage, m_canvas, effect);
+            m_pageEffectRunner = new SCPageEffectRunner(oldPage, newPage, m_canvas, effect);
             startTimeLine(effect->duration());
         }
         else {
@@ -434,7 +434,7 @@ bool KPrAnimationDirector::nextStep()
     return false;
 }
 
-void KPrAnimationDirector::previousStep()
+void SCAnimationDirector::previousStep()
 {
     if (m_stepIndex > 0) {
         --m_stepIndex;
@@ -462,12 +462,12 @@ void KPrAnimationDirector::previousStep()
 }
 
 
-bool KPrAnimationDirector::hasAnimation()
+bool SCAnimationDirector::hasAnimation()
 {
     return m_animations.size() > 0;
 }
 
-void KPrAnimationDirector::animate()
+void SCAnimationDirector::animate()
 {
     if (m_pageEffectRunner) {
         m_pageEffectRunner->next(m_timeLine.currentTime());
@@ -480,13 +480,13 @@ void KPrAnimationDirector::animate()
     }
 }
 
-void KPrAnimationDirector::finishAnimations()
+void SCAnimationDirector::finishAnimations()
 {
     m_animationCache->endStep(m_stepIndex);
     m_canvas->update();
 }
 
-void KPrAnimationDirector::startTimeLine(int duration)
+void SCAnimationDirector::startTimeLine(int duration)
 {
     if (duration == 0) {
         m_timeLine.setDuration(1);
@@ -498,11 +498,11 @@ void KPrAnimationDirector::startTimeLine(int duration)
     m_timeLine.start();
 }
 
-void KPrAnimationDirector::deactivate()
+void SCAnimationDirector::deactivate()
 {
-    foreach (KPrAnimationStep *step, m_animations) {
+    foreach (SCAnimationStep *step, m_animations) {
         step->deactivate();
     }
 }
 
-#include "KPrAnimationDirector.moc"
+#include "SCAnimationDirector.moc"

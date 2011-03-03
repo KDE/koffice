@@ -22,13 +22,13 @@
 #ifndef KPRPRESENTATIONDRAWSTRATEGY_H
 #define KPRPRESENTATIONDRAWSTRATEGY_H
 
-#include "KPrPresentationStrategyBase.h"
+#include "SCPresentationStrategyBase.h"
 
-class KPrPresentationDrawStrategy : public KPrPresentationStrategyBase
+class SCPresentationDrawStrategy : public SCPresentationStrategyBase
 {
 public:
-    KPrPresentationDrawStrategy(KPrPresentationTool * tool);
-    virtual ~KPrPresentationDrawStrategy();
+    SCPresentationDrawStrategy(SCPresentationTool * tool);
+    virtual ~SCPresentationDrawStrategy();
 
     virtual bool keyPressEvent(QKeyEvent * event);
 };

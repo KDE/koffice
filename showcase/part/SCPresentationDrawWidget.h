@@ -23,7 +23,7 @@
 #ifndef KPRPRESENTATIONDRAWWIDGET_H
 #define KPRPRESENTATIONDRAWWIDGET_H
 
-#include "KPrPresentationToolEventForwarder.h"
+#include "SCPresentationToolEventForwarder.h"
 
 #include <QtGui/QLabel>
 #include <QVarLengthArray>
@@ -38,13 +38,13 @@ struct Path
     int size;
 };
 
-class KPrPresentationDrawWidget : public KPrPresentationToolEventForwarder
+class SCPresentationDrawWidget : public SCPresentationToolEventForwarder
 {
     Q_OBJECT
 
 public :
-    KPrPresentationDrawWidget(KoPACanvasBase * canvas);
-    ~KPrPresentationDrawWidget();
+    SCPresentationDrawWidget(KoPACanvasBase * canvas);
+    ~SCPresentationDrawWidget();
 
     /** Draw on the Presentation */
     void paintEvent(QPaintEvent * event);

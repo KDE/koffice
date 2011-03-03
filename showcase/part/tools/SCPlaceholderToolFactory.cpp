@@ -17,26 +17,26 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPlaceholderToolFactory.h"
+#include "SCPlaceholderToolFactory.h"
 
-#include "KPrPlaceholderTool.h"
-#include "KPrPlaceholderShape.h"
+#include "SCPlaceholderTool.h"
+#include "SCPlaceholderShape.h"
 
-KPrPlaceholderToolFactory::KPrPlaceholderToolFactory(QObject *parent)
-    : KoToolFactoryBase(parent, "KPrPlaceholderToolID")
+SCPlaceholderToolFactory::SCPlaceholderToolFactory(QObject *parent)
+    : KoToolFactoryBase(parent, "SCPlaceholderToolID")
 {
     setToolTip(i18n("Layout Tool"));
     setToolType(dynamicToolType());
     setPriority(0);
     //setIcon("animation-kpresenter");
-    setActivationShapeId(KPrPlaceholderShapeId);
+    setActivationShapeId(SCPlaceholderShapeId);
 }
 
-KPrPlaceholderToolFactory::~KPrPlaceholderToolFactory()
+SCPlaceholderToolFactory::~SCPlaceholderToolFactory()
 {
 }
 
-KoToolBase * KPrPlaceholderToolFactory::createTool(KoCanvasBase *canvas)
+KoToolBase * SCPlaceholderToolFactory::createTool(KoCanvasBase *canvas)
 {
-    return new KPrPlaceholderTool(canvas);
+    return new SCPlaceholderTool(canvas);
 }

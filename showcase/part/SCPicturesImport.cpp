@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPicturesImport.h"
+#include "SCPicturesImport.h"
 
 #include <KoShapeFactoryBase.h>
 #include <KoShapeRegistry.h>
@@ -28,18 +28,18 @@
 #include <KoPAMasterPage.h>
 #include <KoPAPageInsertCommand.h>
 #include <KoPAViewMode.h>
-#include "KPrDocument.h"
-#include "KPrView.h"
+#include "SCDocument.h"
+#include "SCView.h"
 #include <KDebug>
 #include <kio/job.h>
 #include <KFileDialog>
 #include <QUndoCommand>
 
-KPrPicturesImport::KPrPicturesImport()
+SCPicturesImport::SCPicturesImport()
 {
 }
 
-void KPrPicturesImport::import(KPrView *view)
+void SCPicturesImport::import(SCView *view)
 {
     m_factory = KoShapeRegistry::instance()->value("PictureShape");
     Q_ASSERT(m_factory);
@@ -63,7 +63,7 @@ void KPrPicturesImport::import(KPrView *view)
     }
 }
 
-void KPrPicturesImport::import()
+void SCPicturesImport::import()
 {
     if (m_urls.isEmpty()) {
         //  TODO check that a picture was added.
@@ -79,7 +79,7 @@ void KPrPicturesImport::import()
     }
 }
 
-void KPrPicturesImport::pictureImported(KJob *job)
+void SCPicturesImport::pictureImported(KJob *job)
 {
     KoShape *shape = m_factory->createDefaultShape();
     if (shape) {
@@ -126,4 +126,4 @@ void KPrPicturesImport::pictureImported(KJob *job)
     import();
 }
 
-#include "KPrPicturesImport.moc"
+#include "SCPicturesImport.moc"

@@ -23,21 +23,21 @@
 #include <KoGenericRegistry.h>
 
 #include "KoXmlReaderForward.h"
-class KPrShapeAnimationOld;
-class KPrShapeAnimationFactory;
+class SCShapeAnimationOld;
+class SCShapeAnimationFactory;
 
-class KPrShapeAnimationRegistry : public KoGenericRegistry<KPrShapeAnimationFactory *>
+class SCShapeAnimationRegistry : public KoGenericRegistry<SCShapeAnimationFactory *>
 {
 public:
     class Singleton;
-    static KPrShapeAnimationRegistry * instance();
+    static SCShapeAnimationRegistry * instance();
 
-    KPrShapeAnimationOld * createShapeAnimation(const KoXmlElement & element);
+    SCShapeAnimationOld * createShapeAnimation(const KoXmlElement & element);
 
 private:
     friend class Singleton;
-    KPrShapeAnimationRegistry();
-    ~KPrShapeAnimationRegistry();
+    SCShapeAnimationRegistry();
+    ~SCShapeAnimationRegistry();
 };
 
 #endif /* KPRSHAPEANIMATIONREGISTRY_H */

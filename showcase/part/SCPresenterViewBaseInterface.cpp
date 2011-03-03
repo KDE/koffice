@@ -17,23 +17,23 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresenterViewBaseInterface.h"
+#include "SCPresenterViewBaseInterface.h"
 
-KPrPresenterViewBaseInterface::KPrPresenterViewBaseInterface(const QList<KoPAPageBase *> &pages, QWidget *parent)
+SCPresenterViewBaseInterface::SCPresenterViewBaseInterface(const QList<KoPAPageBase *> &pages, QWidget *parent)
     : QWidget(parent)
     , m_pages(pages)
 {
 }
 
-void KPrPresenterViewBaseInterface::setActivePage(KoPAPageBase *page)
+void SCPresenterViewBaseInterface::setActivePage(KoPAPageBase *page)
 {
     setActivePage(m_pages.indexOf(page));
 }
 
-void KPrPresenterViewBaseInterface::setActivePage(int pageIndex)
+void SCPresenterViewBaseInterface::setActivePage(int pageIndex)
 {
     m_activePage = pageIndex;
 }
 
-#include "KPrPresenterViewBaseInterface.moc"
+#include "SCPresenterViewBaseInterface.moc"
 

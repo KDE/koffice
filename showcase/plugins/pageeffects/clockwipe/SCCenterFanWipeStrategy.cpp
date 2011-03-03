@@ -17,32 +17,32 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrCenterFanWipeStrategy.h"
+#include "SCCenterFanWipeStrategy.h"
 
 #include <math.h>
 #include <QWidget>
 #include <QPainter>
 #include <QPainterPath>
 
-#include "KPrClockWipeSubpathHelper.h"
+#include "SCClockWipeSubpathHelper.h"
 
-KPrCenterFanWipeStrategy::KPrCenterFanWipeStrategy(int startAngle, int fanCount, int subType, const char * smilType, const char *smilSubType, bool reverse)
-    : KPrPageEffectStrategy(subType, smilType, smilSubType, reverse), m_fanCount(fanCount)
+SCCenterFanWipeStrategy::SCCenterFanWipeStrategy(int startAngle, int fanCount, int subType, const char * smilType, const char *smilSubType, bool reverse)
+    : SCPageEffectStrategy(subType, smilType, smilSubType, reverse), m_fanCount(fanCount)
 {
     m_startAngle = static_cast<double>(startAngle)/180 * M_PI;
 }
 
-KPrCenterFanWipeStrategy::~KPrCenterFanWipeStrategy()
+SCCenterFanWipeStrategy::~SCCenterFanWipeStrategy()
 {
 }
 
-void KPrCenterFanWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCCenterFanWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, 180);
 }
 
-void KPrCenterFanWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCCenterFanWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     int width = data.m_widget->width();
     int height = data.m_widget->height();
@@ -58,14 +58,14 @@ void KPrCenterFanWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPage
         double startAngle = fanStartAngle - angle;
         double endAngle = fanStartAngle + angle;
 
-        KPrClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, rect, startAngle, endAngle);
+        SCClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, rect, startAngle, endAngle);
     }
     p.setClipPath(clipPath);
 
     p.drawPixmap(QPoint(0, 0), data.m_newPage, rect);
 }
 
-void KPrCenterFanWipeStrategy::next(const KPrPageEffect::Data &data)
+void SCCenterFanWipeStrategy::next(const SCPageEffect::Data &data)
 {
     data.m_widget->update();
 }

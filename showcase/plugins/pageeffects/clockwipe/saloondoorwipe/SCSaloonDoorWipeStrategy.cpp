@@ -17,34 +17,34 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSaloonDoorWipeStrategy.h"
-#include "KPrSaloonDoorWipeEffectFactory.h"
+#include "SCSaloonDoorWipeStrategy.h"
+#include "SCSaloonDoorWipeEffectFactory.h"
 
 #include <math.h>
 #include <QWidget>
 #include <QPainter>
 #include <QPainterPath>
 
-#include "KPrClockWipeSubpathHelper.h"
+#include "SCClockWipeSubpathHelper.h"
 
 #include <kdebug.h>
 
-KPrSaloonDoorWipeStrategy::KPrSaloonDoorWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse)
-    : KPrSweepWipeStrategy(subType, smilType, smilSubType, reverse)
+SCSaloonDoorWipeStrategy::SCSaloonDoorWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse)
+    : SCSweepWipeStrategy(subType, smilType, smilSubType, reverse)
 {
 }
 
-KPrSaloonDoorWipeStrategy::~KPrSaloonDoorWipeStrategy()
+SCSaloonDoorWipeStrategy::~SCSaloonDoorWipeStrategy()
 {
 }
 
-void KPrSaloonDoorWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCSaloonDoorWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, 360);
 }
 
-void KPrSaloonDoorWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCSaloonDoorWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     int width = data.m_widget->width();
     int height = data.m_widget->height();
@@ -62,8 +62,8 @@ void KPrSaloonDoorWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
 
     switch(subType())
     {
-        case KPrSaloonDoorWipeEffectFactory::FromTop:
-        case KPrSaloonDoorWipeEffectFactory::ToTop:
+        case SCSaloonDoorWipeEffectFactory::FromTop:
+        case SCSaloonDoorWipeEffectFactory::ToTop:
             startAngle1 = 0;
             boundingRect1 = QRect(-width/2, -height, width, 2*height);
 
@@ -73,8 +73,8 @@ void KPrSaloonDoorWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
             rotationRange1 = -0.5*M_PI;
             rotationRange2 = 0.5*M_PI;
             break;
-        case KPrSaloonDoorWipeEffectFactory::FromLeft:
-        case KPrSaloonDoorWipeEffectFactory::ToLeft:
+        case SCSaloonDoorWipeEffectFactory::FromLeft:
+        case SCSaloonDoorWipeEffectFactory::ToLeft:
             startAngle1 = 1.5*M_PI;
             boundingRect1 = QRect(-width, -height/2, 2*width, height);
 
@@ -84,8 +84,8 @@ void KPrSaloonDoorWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
             rotationRange1 = 0.5*M_PI;
             rotationRange2 = -0.5*M_PI;
             break;
-        case KPrSaloonDoorWipeEffectFactory::FromBottom:
-        case KPrSaloonDoorWipeEffectFactory::ToBottom:
+        case SCSaloonDoorWipeEffectFactory::FromBottom:
+        case SCSaloonDoorWipeEffectFactory::ToBottom:
             startAngle1 = 0;
             boundingRect1 = QRect(-width/2, 0, width, 2*height);
 
@@ -95,8 +95,8 @@ void KPrSaloonDoorWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
             rotationRange1 = 0.5*M_PI;
             rotationRange2 = -0.5*M_PI;
             break;
-        case KPrSaloonDoorWipeEffectFactory::FromRight:
-        case KPrSaloonDoorWipeEffectFactory::ToRight:
+        case SCSaloonDoorWipeEffectFactory::FromRight:
+        case SCSaloonDoorWipeEffectFactory::ToRight:
             startAngle1 = 1.5*M_PI;
             boundingRect1 = QRect(0, -height/2, 2*width, height);
 

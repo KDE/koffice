@@ -33,8 +33,8 @@
 class QSizeF;
 class KoShape;
 class KoPADocument;
-class KPrPageLayout;
-class KPrPlaceholderShape;
+class SCPageLayout;
+class SCPlaceholderShape;
 class KoTextShapeData;
 
 struct Placeholder
@@ -68,11 +68,11 @@ typedef boost::multi_index_container<
 
 typedef boost::multi_index::nth_index<Placeholders,2>::type PlaceholdersByShape;
 
-class KPrPlaceholders
+class SCPlaceholders
 {
 public:
-    KPrPlaceholders();
-    ~KPrPlaceholders();
+    SCPlaceholders();
+    ~SCPlaceholders();
 
     /**
      * @param layout the layout that should be used from now. 
@@ -82,7 +82,7 @@ public:
      * @param pageSize
      * @param styles
      */
-    void setLayout(KPrPageLayout * layout, KoPADocument * document, const QList<KoShape *> & shapes, const QSizeF & pageSize,
+    void setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KoShape *> & shapes, const QSizeF & pageSize,
                     const QMap<QString, KoTextShapeData*> & styles);
 
     /**
@@ -91,9 +91,9 @@ public:
      *        If 0 no layout will be used.
      * TODO tz: maybe make privat and the classes that need to call it a friend
      */
-    void init(KPrPageLayout * layout, const QList<KoShape *> & shapes);
+    void init(SCPageLayout * layout, const QList<KoShape *> & shapes);
 
-    KPrPageLayout * layout() const;
+    SCPageLayout * layout() const;
 
     void shapeAdded(KoShape * shape);
 
@@ -107,18 +107,18 @@ private:
     void add(const QList<KoShape *> & shapes);
 
     // set the new layout 
-    // this gets called by the KPrPageLayoutCommand
-    void setLayout(KPrPageLayout * layout);
+    // this gets called by the SCPageLayoutCommand
+    void setLayout(SCPageLayout * layout);
 
     // apply style to shape
-    void applyStyle(KPrPlaceholderShape * shape, const QString & presentationClass, const QMap<QString, KoTextShapeData*> & styles);
+    void applyStyle(SCPlaceholderShape * shape, const QString & presentationClass, const QMap<QString, KoTextShapeData*> & styles);
 
-    KPrPageLayout * m_layout;
+    SCPageLayout * m_layout;
     // that is set to true when the m_placeholders is initialized
     bool m_initialized;
     Placeholders m_placeholders;
 
-    friend class KPrPageLayoutCommand;
+    friend class SCPageLayoutCommand;
 };
 
 #endif /* KPRPLACEHOLDERS_H */

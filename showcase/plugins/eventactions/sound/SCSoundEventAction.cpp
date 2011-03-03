@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrSoundEventAction.h"
+#include "SCSoundEventAction.h"
 
 #include <phonon/mediaobject.h>
 #include <KoXmlNS.h>
@@ -25,40 +25,40 @@
 #include <KoXmlWriter.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
-#include <KPrSoundData.h>
-#include <KPrSoundCollection.h>
-#include <KPresenter.h>
+#include <SCSoundData.h>
+#include <SCSoundCollection.h>
+#include <Showcase.h>
 
 #include <kdebug.h>
 
-KPrSoundEventAction::KPrSoundEventAction()
+SCSoundEventAction::SCSoundEventAction()
 : QObject()
 , KoEventAction()
 , m_media(0)
 , m_soundData(0)
 {
-    setId(KPrSoundEventActionId);
+    setId(SCSoundEventActionId);
 }
 
-KPrSoundEventAction::~KPrSoundEventAction()
+SCSoundEventAction::~SCSoundEventAction()
 {
     delete m_media;
     delete m_soundData;
 }
 
-bool KPrSoundEventAction::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
+bool SCSoundEventAction::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
 {
     KoXmlElement sound = KoXml::namedItemNS(element, KoXmlNS::presentation, "sound");
 
     bool retval = false;
 
     if (! sound.isNull()) {
-        KPrSoundCollection *soundCollection = context.documentResourceManager()->resource(KPresenter::SoundCollection).value<KPrSoundCollection*>();
+        SCSoundCollection *soundCollection = context.documentResourceManager()->resource(Showcase::SoundCollection).value<SCSoundCollection*>();
 
         if (soundCollection) {
             QString href = sound.attributeNS(KoXmlNS::xlink, "href");
             if (!href.isEmpty()) {
-                m_soundData = new KPrSoundData(soundCollection, href);
+                m_soundData = new SCSoundData(soundCollection, href);
                 retval = true;
             }
         }
@@ -71,7 +71,7 @@ bool KPrSoundEventAction::loadOdf(const KoXmlElement & element, KoShapeLoadingCo
     return retval;
 }
 
-void KPrSoundEventAction::saveOdf(KoShapeSavingContext & context) const
+void SCSoundEventAction::saveOdf(KoShapeSavingContext & context) const
 {
     context.xmlWriter().startElement("presentation:event-listener");
     context.xmlWriter().addAttribute("script:event-name", "dom:click");
@@ -89,7 +89,7 @@ void KPrSoundEventAction::saveOdf(KoShapeSavingContext & context) const
     context.addDataCenter(m_soundData->soundCollection());
 }
 
-void KPrSoundEventAction::start()
+void SCSoundEventAction::start()
 {
     if (m_soundData) {
         finish();
@@ -100,7 +100,7 @@ void KPrSoundEventAction::start()
     }
 }
 
-void KPrSoundEventAction::finish()
+void SCSoundEventAction::finish()
 {
     if (m_media) {
         m_media->stop();
@@ -108,21 +108,21 @@ void KPrSoundEventAction::finish()
     }
 }
 
-void KPrSoundEventAction::setSoundData(KPrSoundData * soundData)
+void SCSoundEventAction::setSoundData(SCSoundData * soundData)
 {
     delete m_soundData;
     m_soundData = soundData;
 }
 
-KPrSoundData * KPrSoundEventAction::soundData() const
+SCSoundData * SCSoundEventAction::soundData() const
 {
     return m_soundData;
 }
 
-void KPrSoundEventAction::finished()
+void SCSoundEventAction::finished()
 {
     delete m_media;
     m_media = 0;
 }
 
-#include <KPrSoundEventAction.moc>
+#include <SCSoundEventAction.moc>

@@ -20,15 +20,15 @@
 #ifndef KPRPLACEHOLDERTEXTSTRATEGY_H
 #define KPRPLACEHOLDERTEXTSTRATEGY_H
 
-#include "KPrPlaceholderStrategy.h"
+#include "SCPlaceholderStrategy.h"
 
 class KoShape;
 class KoParagraphStyle;
 
-class KPrPlaceholderTextStrategy : public KPrPlaceholderStrategy
+class SCPlaceholderTextStrategy : public SCPlaceholderStrategy
 {
 public:
-    virtual ~KPrPlaceholderTextStrategy();
+    virtual ~SCPlaceholderTextStrategy();
 
     virtual KoShape *createShape(KoResourceManager *documentResources);
 
@@ -43,9 +43,9 @@ public:
     virtual KoShapeUserData * userData() const;
 
 protected:
-    KPrPlaceholderTextStrategy(const QString & presentationClass);
+    SCPlaceholderTextStrategy(const QString & presentationClass);
 
-    friend class KPrPlaceholderStrategy;
+    friend class SCPlaceholderStrategy;
 
     KoShape * m_textShape;
 };

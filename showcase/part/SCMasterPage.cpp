@@ -17,30 +17,30 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrMasterPage.h"
+#include "SCMasterPage.h"
 
-#include "pagelayout/KPrPageLayouts.h"
+#include "pagelayout/SCPageLayouts.h"
 #include <KoXmlNS.h>
 //#include <KoResourceManager.h>
-#include "KPresenter.h"
+#include "Showcase.h"
 #include <KoPALoadingContext.h>
 #include <KoOdfWorkaround.h>
 #include <kdebug.h>
 
-KPrMasterPage::KPrMasterPage()
+SCMasterPage::SCMasterPage()
 {
 }
 
-KPrMasterPage::~KPrMasterPage()
+SCMasterPage::~SCMasterPage()
 {
 }
 
-KoPageApp::PageType KPrMasterPage::pageType() const
+KoPageApp::PageType SCMasterPage::pageType() const
 {
     return KoPageApp::Slide;
 }
 
-bool KPrMasterPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCMasterPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
 #ifndef NWORKAROUND_ODF_BUGS
     KoOdfWorkaround::setFixPresentationPlaceholder(true, context);
@@ -52,12 +52,12 @@ bool KPrMasterPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &
     return retval;
 }
 
-void KPrMasterPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & loadingContext)
+void SCMasterPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & loadingContext)
 {
     // the layout needs to be loaded after the shapes are already loaded so the initialization of the data works
-    KPrPageLayout * layout = 0;
+    SCPageLayout * layout = 0;
     if (element.hasAttributeNS(KoXmlNS::presentation, "presentation-page-layout-name")) {
-        KPrPageLayouts *layouts = loadingContext.documentResourceManager()->resource(KPresenter::PageLayouts).value<KPrPageLayouts*>();
+        SCPageLayouts *layouts = loadingContext.documentResourceManager()->resource(Showcase::PageLayouts).value<SCPageLayouts*>();
         Q_ASSERT(layouts);
         if (layouts) {
             QString layoutName = element.attributeNS(KoXmlNS::presentation, "presentation-page-layout-name");

@@ -27,21 +27,21 @@
 
 #include <KoPAView.h>
 
-class KPrDocument;
-class KPrViewAdaptor;
-class KPrViewModeNotes;
-class KPrViewModeSlidesSorter;
-class KPrViewModePresentation;
-class KPrViewModePresenterView;
+class SCDocument;
+class SCViewAdaptor;
+class SCViewModeNotes;
+class SCViewModeSlidesSorter;
+class SCViewModePresentation;
+class SCViewModePresenterView;
 class KActionMenu;
 class KoPAPageBase;
 
-class KPRESENTER_EXPORT KPrView : public KoPAView
+class KPRESENTER_EXPORT SCView : public KoPAView
 {
     Q_OBJECT
 public:
-    explicit KPrView(KPrDocument * document, QWidget * parent = 0);
-    ~KPrView();
+    explicit SCView(SCDocument * document, QWidget * parent = 0);
+    ~SCView();
 
     using KoPAViewBase::viewConverter;
     virtual KoViewConverter * viewConverter(KoPACanvasBase * canvas);
@@ -49,17 +49,17 @@ public:
     /**
      * Get the document object the view was initialised with
      */
-    KPrDocument * kprDocument() const;
+    SCDocument * kprDocument() const;
 
     /**
      * Get the view's dbus adaptor
      */
-    virtual KPrViewAdaptor * dbusObject() const;
+    virtual SCViewAdaptor * dbusObject() const;
 
     /**
      * Get the presentation view mode
      */
-    KPrViewModePresentation * presentationMode() const;
+    SCViewModePresentation * presentationMode() const;
 
     /**
      * Find whether the presentation view mode is active
@@ -113,12 +113,12 @@ private:
     KAction *m_actionHighlightPresentation;
     KAction *m_actionBlackPresentation;
 
-    KPrViewModePresentation *m_presentationMode;
+    SCViewModePresentation *m_presentationMode;
     KoPAViewMode *m_normalMode;
-    KPrViewModeNotes *m_notesMode;
-    KPrViewModeSlidesSorter *m_slidesSorterMode;
+    SCViewModeNotes *m_notesMode;
+    SCViewModeSlidesSorter *m_slidesSorterMode;
 
-    KPrViewAdaptor *m_dbus;
+    SCViewAdaptor *m_dbus;
 
     virtual KoPrintJob *createPdfPrintJob();
 };

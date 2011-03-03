@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrSoundData.h"
-#include "KPrSoundCollection.h"
+#include "SCSoundData.h"
+#include "SCSoundCollection.h"
 
 #include <KoUnit.h>
 #include <KoStore.h>
@@ -30,9 +30,9 @@
 #include <QIODevice>
 
 // make it a QSharedData
-class KPrSoundData::Private {
+class SCSoundData::Private {
 public:
-    Private(KPrSoundCollection *c)
+    Private(SCSoundCollection *c)
     : refCount(0)
     , collection(c)
     , tempFile(0)
@@ -47,12 +47,12 @@ public:
 
     int refCount;
     QString storeHref;
-    KPrSoundCollection *collection;
+    SCSoundCollection *collection;
     KTemporaryFile *tempFile;
     bool taggedForSaving;
 };
 
-KPrSoundData::KPrSoundData(KPrSoundCollection *collection, QString href)
+SCSoundData::SCSoundData(SCSoundCollection *collection, QString href)
     : d(new Private(collection))
 {
     Q_ASSERT(collection);
@@ -63,13 +63,13 @@ KPrSoundData::KPrSoundData(KPrSoundCollection *collection, QString href)
     Q_ASSERT(d->refCount == 1);
 }
 
-KPrSoundData::KPrSoundData(const KPrSoundData &soundData)
+SCSoundData::SCSoundData(const SCSoundData &soundData)
 :    d(soundData.d)
 {
     d->refCount++;
 }
 
-KPrSoundData::~KPrSoundData() {
+SCSoundData::~SCSoundData() {
     if(--d->refCount == 0) {
         d->collection->removeSound(this);
         delete d;
@@ -77,26 +77,26 @@ KPrSoundData::~KPrSoundData() {
 }
 
 
-QString KPrSoundData::tagForSaving() {
+QString SCSoundData::tagForSaving() {
     d->taggedForSaving=true;
     d->storeHref = QString("Sounds/%1").arg(d->title);
 
     return d->storeHref;
 }
 
-QString KPrSoundData::storeHref() const {
+QString SCSoundData::storeHref() const {
     return d->storeHref;
 }
 
-QString KPrSoundData::nameOfTempFile() const {
+QString SCSoundData::nameOfTempFile() const {
     return d->tempFileName;
 }
 
-QString KPrSoundData::title() const {
+QString SCSoundData::title() const {
     return d->title;
 }
 
-bool KPrSoundData::saveToFile(QIODevice *device)
+bool SCSoundData::saveToFile(QIODevice *device)
 {
     if(! d->tempFile->open())
         return false;
@@ -127,13 +127,13 @@ bool KPrSoundData::saveToFile(QIODevice *device)
     return true;
 }
 
-bool KPrSoundData::isTaggedForSaving()
+bool SCSoundData::isTaggedForSaving()
 {
     return d->taggedForSaving;
 }
 
 
-bool KPrSoundData::loadFromFile(QIODevice *device) {
+bool SCSoundData::loadFromFile(QIODevice *device) {
     struct Finally {
         Finally(QIODevice *d) : device (d), bytes(0) {}
         ~Finally() {
@@ -182,7 +182,7 @@ bool KPrSoundData::loadFromFile(QIODevice *device) {
     return true;
 }
 
-KPrSoundCollection * KPrSoundData::soundCollection()
+SCSoundCollection * SCSoundData::soundCollection()
 {
     return d->collection;
 }

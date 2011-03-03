@@ -20,7 +20,7 @@
  */
 #include "Plugin.h"
 #include <kpluginfactory.h>
-#include <KPrPageEffectRegistry.h>
+#include <SCPageEffectRegistry.h>
 
 #include "diagonalwipe/DiagonalWipeEffectFactory.h"
 #include "miscdiagonalwipe/MiscDiagonalWipeEffectFactory.h"
@@ -33,20 +33,20 @@
 #include "barnzigzagwipe/BarnZigZagWipeEffectFactory.h"
 
 K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
-K_EXPORT_PLUGIN(PluginFactory("KPrPageEffect"))
+K_EXPORT_PLUGIN(PluginFactory("SCPageEffect"))
 
 Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)
 {
-    KPrPageEffectRegistry::instance()->add(new DiagonalWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new MiscDiagonalWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new BoxWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new FourBoxWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new BarnDoorWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new VeeWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new BarnVeeWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new ZigZagWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new BarnZigZagWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new DiagonalWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new MiscDiagonalWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new BoxWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new FourBoxWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new BarnDoorWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new VeeWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new BarnVeeWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new ZigZagWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new BarnZigZagWipeEffectFactory());
 }
 
 #include "Plugin.moc"

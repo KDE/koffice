@@ -18,36 +18,36 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimationStep.h"
-#include "KPrAnimationSubStep.h"
+#include "SCAnimationStep.h"
+#include "SCAnimationSubStep.h"
 #include "KoXmlWriter.h"
 
-KPrAnimationStep::KPrAnimationStep()
+SCAnimationStep::SCAnimationStep()
 {
 }
 
-KPrAnimationStep::~KPrAnimationStep()
+SCAnimationStep::~SCAnimationStep()
 {
 }
 
-void KPrAnimationStep::init(KPrAnimationCache *animationCache, int step)
+void SCAnimationStep::init(SCAnimationCache *animationCache, int step)
 {
     for(int i=0;i < this->animationCount(); i++) {
         QAbstractAnimation * animation = this->animationAt(i);
-        if (KPrAnimationSubStep * a = dynamic_cast<KPrAnimationSubStep*>(animation)) {
+        if (SCAnimationSubStep * a = dynamic_cast<SCAnimationSubStep*>(animation)) {
             a->init(animationCache, step);
         }
     }
 }
 
-bool KPrAnimationStep::saveOdf(KoPASavingContext & paContext) const
+bool SCAnimationStep::saveOdf(KoPASavingContext & paContext) const
 {
     KoXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:par");
     for (int i=0; i < this->animationCount(); i++) {
         bool startStep = !i;
         QAbstractAnimation *animation = this->animationAt(i);
-        if (KPrAnimationSubStep *a = dynamic_cast<KPrAnimationSubStep*>(animation)) {
+        if (SCAnimationSubStep *a = dynamic_cast<SCAnimationSubStep*>(animation)) {
             a->saveOdf(paContext, startStep);
         }
     }
@@ -55,11 +55,11 @@ bool KPrAnimationStep::saveOdf(KoPASavingContext & paContext) const
     return true;
 }
 
-void KPrAnimationStep::deactivate()
+void SCAnimationStep::deactivate()
 {
     for (int i=0; i < this->animationCount(); i++) {
         QAbstractAnimation *animation = this->animationAt(i);
-        if (KPrAnimationSubStep *a = dynamic_cast<KPrAnimationSubStep*>(animation)) {
+        if (SCAnimationSubStep *a = dynamic_cast<SCAnimationSubStep*>(animation)) {
             a->deactivate();
         }
     }

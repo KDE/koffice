@@ -22,14 +22,14 @@
 #define KPRANIMATIONSUBSTEP_H
 
 #include <QParallelAnimationGroup>
-#include "KPrAnimationData.h"
+#include "SCAnimationData.h"
 
-class KPrAnimationSubStep : public QParallelAnimationGroup, KPrAnimationData
+class SCAnimationSubStep : public QParallelAnimationGroup, SCAnimationData
 {
 public:
-    KPrAnimationSubStep();
-    virtual ~KPrAnimationSubStep();
-    virtual void init(KPrAnimationCache *animationCache, int step);
+    SCAnimationSubStep();
+    virtual ~SCAnimationSubStep();
+    virtual void init(SCAnimationCache *animationCache, int step);
     virtual bool saveOdf(KoPASavingContext & paContext, bool startStep) const;
     virtual void deactivate();
 };

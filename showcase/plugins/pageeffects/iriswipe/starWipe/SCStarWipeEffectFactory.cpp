@@ -18,13 +18,13 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrStarWipeEffectFactory.h"
+#include "SCStarWipeEffectFactory.h"
 
 #include <cmath>
 
 #include <klocale.h>
 
-#include "../KPrIrisWipeEffectStrategyBase.h"
+#include "../SCIrisWipeEffectStrategyBase.h"
 
 using std::sin;
 using std::cos;
@@ -35,8 +35,8 @@ using std::cos;
 
 #define StarWipeEffectId "StarWipeEffect"
 
-KPrStarWipeEffectFactory::KPrStarWipeEffectFactory()
-: KPrPageEffectFactory(StarWipeEffectId, i18n("Star"))
+SCStarWipeEffectFactory::SCStarWipeEffectFactory()
+: SCPageEffectFactory(StarWipeEffectId, i18n("Star"))
 {
 
      QPainterPath shape;
@@ -51,10 +51,10 @@ KPrStarWipeEffectFactory::KPrStarWipeEffectFactory()
     shape.lineTo(12*cos(7 * M_PI / 4), -12*sin(7 * M_PI / 4));
     shape.lineTo(24*cos(2 * M_PI), -24*sin(2 * M_PI));
     shape.lineTo(12*cos(M_PI / 4), -12*sin(M_PI / 4));
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, FourPoint, "starWipe", "fourPoint", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, FourPoint, "starWipe", "fourPoint", false));
 
     //fourPoint reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, FourPointReverse, "starWipe", "fourPoint", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, FourPointReverse, "starWipe", "fourPoint", true));
 
     //fivePoint
     shape = QPainterPath();
@@ -69,10 +69,10 @@ KPrStarWipeEffectFactory::KPrStarWipeEffectFactory()
     shape.lineTo(24*cos(1 * M_PI / 10), -24*sin(1 * M_PI / 10));
     shape.lineTo(12*cos(3 * M_PI / 10), -12*sin(3 * M_PI / 10));
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, FivePoint, "starWipe", "fivePoint", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, FivePoint, "starWipe", "fivePoint", false));
 
     //fivePoint reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, FivePointReverse, "starWipe", "fivePoint", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, FivePointReverse, "starWipe", "fivePoint", true));
 
     //sixPoint
     shape = QPainterPath();
@@ -89,13 +89,13 @@ KPrStarWipeEffectFactory::KPrStarWipeEffectFactory()
     shape.lineTo(24*cos(1 * M_PI / 6), -24*sin(1 * M_PI / 6));
     shape.lineTo(12*cos(2 * M_PI / 6), -12*sin(2 * M_PI / 6));
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, SixPoint, "starWipe", "sixPoint", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, SixPoint, "starWipe", "sixPoint", false));
 
     //sixPoint reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, SixPointReverse, "starWipe", "sixPoint", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, SixPointReverse, "starWipe", "sixPoint", true));
 }
 
-KPrStarWipeEffectFactory::~KPrStarWipeEffectFactory()
+SCStarWipeEffectFactory::~SCStarWipeEffectFactory()
 {
 }
 
@@ -108,7 +108,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Six Point Star Reverse")
 };
 
-QString KPrStarWipeEffectFactory::subTypeName(int subType) const
+QString SCStarWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

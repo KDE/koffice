@@ -20,17 +20,17 @@
 #ifndef KPRANIMTRANSITIONFILTER_H
 #define KPRANIMTRANSITIONFILTER_H
 
-#include "KPrAnimationBase.h"
+#include "SCAnimationBase.h"
 
-class KPrAnimTransitionFilter : public KPrAnimationBase
+class SCAnimTransitionFilter : public SCAnimationBase
 {
 public:
-    KPrAnimTransitionFilter(KPrShapeAnimation *shapeAnimation);
-    virtual ~KPrAnimTransitionFilter();
+    SCAnimTransitionFilter(SCShapeAnimation *shapeAnimation);
+    virtual ~SCAnimTransitionFilter();
 
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
     virtual bool saveOdf(KoPASavingContext & paContext) const;
-    virtual void init(KPrAnimationCache *animationCache, int step);
+    virtual void init(SCAnimationCache *animationCache, int step);
 
 protected:
     virtual void next(int currentTime);

@@ -17,27 +17,27 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrBarWipeFromLeftStrategy.h"
-#include "KPrBarWipeEffectFactory.h"
+#include "SCBarWipeFromLeftStrategy.h"
+#include "SCBarWipeEffectFactory.h"
 
 #include <QWidget>
 #include <QPainter>
 
-KPrBarWipeFromLeftStrategy::KPrBarWipeFromLeftStrategy()
-: KPrPageEffectStrategy(KPrBarWipeEffectFactory::FromLeft, "barWipe", "leftToRight", false)
+SCBarWipeFromLeftStrategy::SCBarWipeFromLeftStrategy()
+: SCPageEffectStrategy(SCBarWipeEffectFactory::FromLeft, "barWipe", "leftToRight", false)
 {
 }
 
-KPrBarWipeFromLeftStrategy::~KPrBarWipeFromLeftStrategy()
+SCBarWipeFromLeftStrategy::~SCBarWipeFromLeftStrategy()
 {
 }
 
-void KPrBarWipeFromLeftStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCBarWipeFromLeftStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     timeLine.setFrameRange(0, data.m_widget->width());
 }
 
-void KPrBarWipeFromLeftStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCBarWipeFromLeftStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     int height = data.m_widget->height();
     int width = data.m_widget->width();
@@ -47,7 +47,7 @@ void KPrBarWipeFromLeftStrategy::paintStep(QPainter &p, int currPos, const KPrPa
     p.drawPixmap(QPoint(currPos, 0), data.m_oldPage, rect2);
 }
 
-void KPrBarWipeFromLeftStrategy::next(const KPrPageEffect::Data &data)
+void SCBarWipeFromLeftStrategy::next(const SCPageEffect::Data &data)
 {
     int lastPos = data.m_timeLine.frameForTime(data.m_lastTime);
     int currPos = data.m_timeLine.frameForTime(data.m_currentTime);

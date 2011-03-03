@@ -21,23 +21,23 @@
 #ifndef KPRFADEOVERCOLORSTRATEGY_H
 #define KPRFADEOVERCOLORSTRATEGY_H
 
-#include "pageeffects/KPrPageEffectStrategy.h"
+#include "pageeffects/SCPageEffectStrategy.h"
 
 #include <QColor>
 
-class KPrFadeOverColorStrategy : public KPrPageEffectStrategy
+class SCFadeOverColorStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrFadeOverColorStrategy();
-    virtual ~KPrFadeOverColorStrategy();
+    SCFadeOverColorStrategy();
+    virtual ~SCFadeOverColorStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
 
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 
-    virtual void finish(const KPrPageEffect::Data &data);
+    virtual void finish(const SCPageEffect::Data &data);
 
     // reimplemented
     virtual void saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const;

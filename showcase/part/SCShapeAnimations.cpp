@@ -21,32 +21,32 @@
 #include <QSet>
 #include <kdebug.h>
 #include "KoShape.h"
-#include "KPrShapeAnimations.h"
+#include "SCShapeAnimations.h"
 
-KPrShapeAnimations::KPrShapeAnimations()
+SCShapeAnimations::SCShapeAnimations()
 {
 }
 
-KPrShapeAnimations::~KPrShapeAnimations()
+SCShapeAnimations::~SCShapeAnimations()
 {
 }
 
-void KPrShapeAnimations::init(const QList<KPrAnimationStep *> animations)
+void SCShapeAnimations::init(const QList<SCAnimationStep *> animations)
 {
     m_shapeAnimations = animations;
 }
 
-void KPrShapeAnimations::add(KPrShapeAnimation * animation)
+void SCShapeAnimations::add(SCShapeAnimation * animation)
 {
     Q_UNUSED(animation);
 }
 
-void KPrShapeAnimations::remove(KPrShapeAnimation * animation)
+void SCShapeAnimations::remove(SCShapeAnimation * animation)
 {
     Q_UNUSED(animation);
 }
 
-QList<KPrAnimationStep *> KPrShapeAnimations::steps() const
+QList<SCAnimationStep *> SCShapeAnimations::steps() const
 {
     return m_shapeAnimations;
 }

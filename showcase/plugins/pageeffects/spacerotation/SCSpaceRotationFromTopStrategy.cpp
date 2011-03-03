@@ -17,37 +17,37 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSpaceRotationFromTopStrategy.h"
-#include "KPrSpaceRotationEffectFactory.h"
+#include "SCSpaceRotationFromTopStrategy.h"
+#include "SCSpaceRotationEffectFactory.h"
 
 #include <QWidget>
 #include <QPainter>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
 
-KPrSpaceRotationFromTopStrategy::KPrSpaceRotationFromTopStrategy()
-: KPrPageEffectStrategy(KPrSpaceRotationEffectFactory::FromTop, "spaceRotation", "topToBottom", false, true)
+SCSpaceRotationFromTopStrategy::SCSpaceRotationFromTopStrategy()
+: SCPageEffectStrategy(SCSpaceRotationEffectFactory::FromTop, "spaceRotation", "topToBottom", false, true)
 {
 }
 
-KPrSpaceRotationFromTopStrategy::~KPrSpaceRotationFromTopStrategy()
+SCSpaceRotationFromTopStrategy::~SCSpaceRotationFromTopStrategy()
 {
 }
 
-void KPrSpaceRotationFromTopStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCSpaceRotationFromTopStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     timeLine.setFrameRange(0, 180);
     data.m_oldPageItem->show();
 }
 
-void KPrSpaceRotationFromTopStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCSpaceRotationFromTopStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     Q_UNUSED(p);
     Q_UNUSED(currPos);
     Q_UNUSED(data);
 }
 
-void KPrSpaceRotationFromTopStrategy::next(const KPrPageEffect::Data &data)
+void SCSpaceRotationFromTopStrategy::next(const SCPageEffect::Data &data)
 {
     int frame = data.m_timeLine.frameForTime(data.m_currentTime);
     if (frame >= data.m_timeLine.endFrame()) {
@@ -78,7 +78,7 @@ void KPrSpaceRotationFromTopStrategy::next(const KPrPageEffect::Data &data)
     }
 }
 
-void KPrSpaceRotationFromTopStrategy::finish(const KPrPageEffect::Data &data)
+void SCSpaceRotationFromTopStrategy::finish(const SCPageEffect::Data &data)
 {
     data.m_graphicsView->hide();
     data.m_oldPageItem->hide();

@@ -17,33 +17,33 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrFanWipeEffectFactory.h"
+#include "SCFanWipeEffectFactory.h"
 #include <klocale.h>
 
-#include "KPrCenterFanWipeStrategy.h"
-#include "KPrSideFanWipeStrategy.h"
+#include "SCCenterFanWipeStrategy.h"
+#include "SCSideFanWipeStrategy.h"
 
 #define FanWipeEffectId  "FanWipeEffect"
 
-KPrFanWipeEffectFactory::KPrFanWipeEffectFactory()
-: KPrPageEffectFactory(FanWipeEffectId, i18n("Fan"))
+SCFanWipeEffectFactory::SCFanWipeEffectFactory()
+: SCPageEffectFactory(FanWipeEffectId, i18n("Fan"))
 {
-    addStrategy(new KPrCenterFanWipeStrategy(0, 1, CenterRight, "fanWipe", "centerRight", false));
-    addStrategy(new KPrCenterFanWipeStrategy(90, 1, CenterTop, "fanWipe", "centerTop", false));
-    addStrategy(new KPrCenterFanWipeStrategy(180, 1, CenterLeft, "fanWipe", "centerRight", true));
-    addStrategy(new KPrCenterFanWipeStrategy(270, 1, CenterBottom, "fanWipe", "centerTop", true));
+    addStrategy(new SCCenterFanWipeStrategy(0, 1, CenterRight, "fanWipe", "centerRight", false));
+    addStrategy(new SCCenterFanWipeStrategy(90, 1, CenterTop, "fanWipe", "centerTop", false));
+    addStrategy(new SCCenterFanWipeStrategy(180, 1, CenterLeft, "fanWipe", "centerRight", true));
+    addStrategy(new SCCenterFanWipeStrategy(270, 1, CenterBottom, "fanWipe", "centerTop", true));
 
-    addStrategy(new KPrSideFanWipeStrategy(90, 1, FanOutTop, "fanWipe", "top", false));
-    addStrategy(new KPrSideFanWipeStrategy(0, 1, FanOutRight, "fanWipe", "right", false));
-    addStrategy(new KPrSideFanWipeStrategy(270, 1, FanOutBottom, "fanWipe", "bottom", false));
-    addStrategy(new KPrSideFanWipeStrategy(180, 1, FanOutLeft, "fanWipe", "left", false));
-    addStrategy(new KPrSideFanWipeStrategy(90, 1, FanInTop, "fanWipe", "top", true));
-    addStrategy(new KPrSideFanWipeStrategy(0, 1, FanInRight, "fanWipe", "right", true));
-    addStrategy(new KPrSideFanWipeStrategy(270, 1, FanInBottom, "fanWipe", "bottom", true));
-    addStrategy(new KPrSideFanWipeStrategy(180, 1, FanInLeft, "fanWipe", "left", true));
+    addStrategy(new SCSideFanWipeStrategy(90, 1, FanOutTop, "fanWipe", "top", false));
+    addStrategy(new SCSideFanWipeStrategy(0, 1, FanOutRight, "fanWipe", "right", false));
+    addStrategy(new SCSideFanWipeStrategy(270, 1, FanOutBottom, "fanWipe", "bottom", false));
+    addStrategy(new SCSideFanWipeStrategy(180, 1, FanOutLeft, "fanWipe", "left", false));
+    addStrategy(new SCSideFanWipeStrategy(90, 1, FanInTop, "fanWipe", "top", true));
+    addStrategy(new SCSideFanWipeStrategy(0, 1, FanInRight, "fanWipe", "right", true));
+    addStrategy(new SCSideFanWipeStrategy(270, 1, FanInBottom, "fanWipe", "bottom", true));
+    addStrategy(new SCSideFanWipeStrategy(180, 1, FanInLeft, "fanWipe", "left", true));
 }
 
-KPrFanWipeEffectFactory::~KPrFanWipeEffectFactory()
+SCFanWipeEffectFactory::~SCFanWipeEffectFactory()
 {
 }
 
@@ -62,7 +62,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Fan In Left")
 };
 
-QString KPrFanWipeEffectFactory::subTypeName(int subType) const
+QString SCFanWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

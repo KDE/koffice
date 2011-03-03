@@ -17,35 +17,35 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSnakeWipeEffectFactory.h"
+#include "SCSnakeWipeEffectFactory.h"
 
 #include <klocale.h>
 
-#include "KPrSnakeWipeBottomRightHorizontalStrategy.h"
-#include "KPrSnakeWipeBottomRightVerticalStrategy.h"
-#include "KPrSnakeWipeTopLeftHorizontalStrategy.h"
-#include "KPrSnakeWipeTopLeftVerticalStrategy.h"
-#include "KPrSnakeWipeTopLeftDiagonalStrategy.h"
-#include "KPrSnakeWipeTopRightDiagonalStrategy.h"
-#include "KPrSnakeWipeBottomLeftDiagonalStrategy.h"
-#include "KPrSnakeWipeBottomRightDiagonalStrategy.h"
+#include "SCSnakeWipeBottomRightHorizontalStrategy.h"
+#include "SCSnakeWipeBottomRightVerticalStrategy.h"
+#include "SCSnakeWipeTopLeftHorizontalStrategy.h"
+#include "SCSnakeWipeTopLeftVerticalStrategy.h"
+#include "SCSnakeWipeTopLeftDiagonalStrategy.h"
+#include "SCSnakeWipeTopRightDiagonalStrategy.h"
+#include "SCSnakeWipeBottomLeftDiagonalStrategy.h"
+#include "SCSnakeWipeBottomRightDiagonalStrategy.h"
 
 #define SnakeWipeEffectId "SnakeWipeEffect"
 
-KPrSnakeWipeEffectFactory::KPrSnakeWipeEffectFactory()
-: KPrPageEffectFactory(SnakeWipeEffectId, i18n("Snake"))
+SCSnakeWipeEffectFactory::SCSnakeWipeEffectFactory()
+: SCPageEffectFactory(SnakeWipeEffectId, i18n("Snake"))
 {
-    addStrategy(new KPrSnakeWipeTopLeftHorizontalStrategy());
-    addStrategy(new KPrSnakeWipeBottomRightHorizontalStrategy());
-    addStrategy(new KPrSnakeWipeTopLeftVerticalStrategy());
-    addStrategy(new KPrSnakeWipeBottomRightVerticalStrategy());
-    addStrategy(new KPrSnakeWipeTopLeftDiagonalStrategy());
-    addStrategy(new KPrSnakeWipeTopRightDiagonalStrategy());
-    addStrategy(new KPrSnakeWipeBottomRightDiagonalStrategy());
-    addStrategy(new KPrSnakeWipeBottomLeftDiagonalStrategy());
+    addStrategy(new SCSnakeWipeTopLeftHorizontalStrategy());
+    addStrategy(new SCSnakeWipeBottomRightHorizontalStrategy());
+    addStrategy(new SCSnakeWipeTopLeftVerticalStrategy());
+    addStrategy(new SCSnakeWipeBottomRightVerticalStrategy());
+    addStrategy(new SCSnakeWipeTopLeftDiagonalStrategy());
+    addStrategy(new SCSnakeWipeTopRightDiagonalStrategy());
+    addStrategy(new SCSnakeWipeBottomRightDiagonalStrategy());
+    addStrategy(new SCSnakeWipeBottomLeftDiagonalStrategy());
 }
 
-KPrSnakeWipeEffectFactory::~KPrSnakeWipeEffectFactory()
+SCSnakeWipeEffectFactory::~SCSnakeWipeEffectFactory()
 {
 }
 
@@ -60,7 +60,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("From Bottom Right")
 };
 
-QString KPrSnakeWipeEffectFactory::subTypeName(int subType) const
+QString SCSnakeWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

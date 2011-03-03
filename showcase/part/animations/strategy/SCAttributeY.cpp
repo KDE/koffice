@@ -17,18 +17,18 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAttributeY.h"
-#include "../KPrAnimationCache.h"
+#include "SCAttributeY.h"
+#include "../SCAnimationCache.h"
 #include "KoShape.h"
-#include "../KPrShapeAnimation.h"
+#include "../SCShapeAnimation.h"
 
 #include "kdebug.h"
 
-KPrAttributeY::KPrAttributeY() : KPrAnimationAttribute("y")
+SCAttributeY::SCAttributeY() : SCAnimationAttribute("y")
 {
 }
 
-void KPrAttributeY::updateCache(KPrAnimationCache *cache, KPrShapeAnimation *shapeAnimation, qreal value)
+void SCAttributeY::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value)
 {
     KoShape *shape = shapeAnimation->shape();
     QTransform transform;
@@ -39,7 +39,7 @@ void KPrAttributeY::updateCache(KPrAnimationCache *cache, KPrShapeAnimation *sha
     cache->update(shape, shapeAnimation->textBlockData(), "transform", transform);
 }
 
-void KPrAttributeY::initCache(KPrAnimationCache *animationCache, int step, KPrShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
+void SCAttributeY::initCache(SCAnimationCache *animationCache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
 {
     KoShape * shape = shapeAnimation->shape();
     qreal v1 = (startValue * animationCache->pageSize().height() - shape->position().y()) * animationCache->zoom();

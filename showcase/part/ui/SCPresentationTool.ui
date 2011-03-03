@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>KPrPresentationTool</class>
- <widget class="QWidget" name="KPrConfigurePresenterView" >
+ <class>SCPresentationTool</class>
+ <widget class="QWidget" name="SCConfigurePresenterView" >
   <property name="geometry" >
    <rect>
     <x>1</x>

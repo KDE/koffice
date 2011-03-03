@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrMatrixWipeStrategy.h"
+#include "SCMatrixWipeStrategy.h"
 
 #include <QWidget>
 #include <QPainter>
@@ -27,23 +27,23 @@ static const int squaresPerRow = 15;
 static const int squaresPerCol = 11;
 static const int framesPerSquare = 16;
 
-KPrMatrixWipeStrategy::KPrMatrixWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool smooth)
-    : KPrPageEffectStrategy(subType, smilType, smilSubType, reverse), m_smooth(smooth),
+SCMatrixWipeStrategy::SCMatrixWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool smooth)
+    : SCPageEffectStrategy(subType, smilType, smilSubType, reverse), m_smooth(smooth),
     m_squaresPerRow(squaresPerRow), m_squaresPerCol(squaresPerCol)
 {
 }
 
-KPrMatrixWipeStrategy::~KPrMatrixWipeStrategy()
+SCMatrixWipeStrategy::~SCMatrixWipeStrategy()
 {
 }
 
-void KPrMatrixWipeStrategy::setNeedEvenSquares(bool hor, bool vert)
+void SCMatrixWipeStrategy::setNeedEvenSquares(bool hor, bool vert)
 {
     if (hor) m_squaresPerRow++;
     if (vert) m_squaresPerCol++;
 }
 
-void KPrMatrixWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCMatrixWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, (m_smooth ? framesPerSquare : 1) * maxIndex(m_squaresPerRow, m_squaresPerCol));
@@ -52,22 +52,22 @@ void KPrMatrixWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &ti
 static inline int floor(double d) { return (int) (d + 1e-5); }
 static inline int ceil(double d) { return (int) (d + 1 - 1e-5); }
 
-static QRect tileRect(KPrMatrixWipeStrategy::Direction direction, int step, const QRect& base) {
+static QRect tileRect(SCMatrixWipeStrategy::Direction direction, int step, const QRect& base) {
     switch (direction) {
-        case KPrMatrixWipeStrategy::TopToBottom:
+        case SCMatrixWipeStrategy::TopToBottom:
             return QRect(base.topLeft(), QSize(base.width(), base.height() * step / framesPerSquare));
-        case KPrMatrixWipeStrategy::BottomToTop:
+        case SCMatrixWipeStrategy::BottomToTop:
             return QRect(QPoint(base.left(), base.bottom() - base.height() * step / framesPerSquare), base.bottomRight());
-        case KPrMatrixWipeStrategy::LeftToRight:
+        case SCMatrixWipeStrategy::LeftToRight:
             return QRect(base.topLeft(), QSize(base.width() * step / framesPerSquare, base.height()));
-        case KPrMatrixWipeStrategy::RightToLeft:
+        case SCMatrixWipeStrategy::RightToLeft:
             return QRect(QPoint(base.right() - base.width() * step / framesPerSquare, base.top()), base.bottomRight());
         default:
             return base;
     }
 }
 
-void KPrMatrixWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCMatrixWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     int width = data.m_widget->width();
     int height = data.m_widget->height();
@@ -97,7 +97,7 @@ void KPrMatrixWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEff
     }
 }
 
-void KPrMatrixWipeStrategy::next(const KPrPageEffect::Data &data)
+void SCMatrixWipeStrategy::next(const SCPageEffect::Data &data)
 {
     int lastPos = data.m_timeLine.frameForTime(data.m_lastTime);
     int currPos = data.m_timeLine.frameForTime(data.m_currentTime);
@@ -120,7 +120,7 @@ void KPrMatrixWipeStrategy::next(const KPrPageEffect::Data &data)
     }
 }
 
-KPrMatrixWipeStrategy::Direction KPrMatrixWipeStrategy::squareDirection(int x, int y, int columns, int rows)
+SCMatrixWipeStrategy::Direction SCMatrixWipeStrategy::squareDirection(int x, int y, int columns, int rows)
 {
     Q_UNUSED(x);
     Q_UNUSED(y);

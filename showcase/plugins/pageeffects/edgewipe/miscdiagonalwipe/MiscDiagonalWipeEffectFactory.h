@@ -20,9 +20,9 @@
 #ifndef MISCDIAGONALWIPEEFFECTFACTORY_H
 #define MISCDIAGONALWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class MiscDiagonalWipeEffectFactory : public KPrPageEffectFactory
+class MiscDiagonalWipeEffectFactory : public SCPageEffectFactory
 {
 public:
     MiscDiagonalWipeEffectFactory();

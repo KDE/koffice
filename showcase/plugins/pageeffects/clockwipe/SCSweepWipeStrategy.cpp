@@ -17,32 +17,32 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSweepWipeStrategy.h"
+#include "SCSweepWipeStrategy.h"
 
 #include <math.h>
 #include <QWidget>
 #include <QPainter>
 #include <QPainterPath>
 
-#include "KPrClockWipeSubpathHelper.h"
+#include "SCClockWipeSubpathHelper.h"
 
 #include <kdebug.h>
 
-KPrSweepWipeStrategy::KPrSweepWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse)
-    : KPrPageEffectStrategy(subType, smilType, smilSubType, reverse)
+SCSweepWipeStrategy::SCSweepWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse)
+    : SCPageEffectStrategy(subType, smilType, smilSubType, reverse)
 {
 }
 
-KPrSweepWipeStrategy::~KPrSweepWipeStrategy()
+SCSweepWipeStrategy::~SCSweepWipeStrategy()
 {
 }
 
-void KPrSweepWipeStrategy::next(const KPrPageEffect::Data &data)
+void SCSweepWipeStrategy::next(const SCPageEffect::Data &data)
 {
     data.m_widget->update();
 }
 
-void KPrSweepWipeStrategy::drawSweep(QPainter &p, double angle, double rotationRange, QRect boundingRect, const KPrPageEffect::Data &data)
+void SCSweepWipeStrategy::drawSweep(QPainter &p, double angle, double rotationRange, QRect boundingRect, const SCPageEffect::Data &data)
 {
     int width = data.m_widget->width();
     int height = data.m_widget->height();
@@ -61,7 +61,7 @@ void KPrSweepWipeStrategy::drawSweep(QPainter &p, double angle, double rotationR
     }
 
     QPainterPath clipPath;
-    KPrClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, startAngle, endAngle);
+    SCClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, startAngle, endAngle);
     p.setClipPath(clipPath);
 
     p.drawPixmap(rect.intersected(boundingRect), data.m_newPage, rect.intersected(boundingRect));

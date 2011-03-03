@@ -20,13 +20,13 @@
 #ifndef KPRWINDSHIELDWIPEEFFECTFACTORY_H
 #define KPRWINDSHIELDWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class KPrWindShieldWipeEffectFactory : public KPrPageEffectFactory
+class SCWindShieldWipeEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrWindShieldWipeEffectFactory();
-    virtual ~KPrWindShieldWipeEffectFactory();
+    SCWindShieldWipeEffectFactory();
+    virtual ~SCWindShieldWipeEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

@@ -24,13 +24,13 @@
 
 class KoPACanvasBase;
 
-class KPrPresentationToolEventForwarder : public QWidget
+class SCPresentationToolEventForwarder : public QWidget
 {
     Q_OBJECT
 
 public:
-    KPrPresentationToolEventForwarder(KoPACanvasBase *canvas);
-    ~KPrPresentationToolEventForwarder();
+    SCPresentationToolEventForwarder(KoPACanvasBase *canvas);
+    ~SCPresentationToolEventForwarder();
 
     void receiveMousePressEvent(QMouseEvent *event);
     void receiveMouseMoveEvent(QMouseEvent *event);

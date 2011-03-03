@@ -17,7 +17,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KPrPresentationBlackWidget.h"
+#include "SCPresentationBlackWidget.h"
 
 #include <QApplication>
 #include <QDesktopWidget>
@@ -25,8 +25,8 @@
 #include <QPainter>
 #include <QRect>
 
-KPrPresentationBlackWidget::KPrPresentationBlackWidget(KoPACanvasBase * canvas)
-: KPrPresentationToolEventForwarder(canvas)
+SCPresentationBlackWidget::SCPresentationBlackWidget(KoPACanvasBase * canvas)
+: SCPresentationToolEventForwarder(canvas)
 , m_size(canvas->canvasWidget()->size())
 {
     // Size of the canvas is saved because it's used in the paintEvent
@@ -34,11 +34,11 @@ KPrPresentationBlackWidget::KPrPresentationBlackWidget(KoPACanvasBase * canvas)
     update();
 }
 
-KPrPresentationBlackWidget::~KPrPresentationBlackWidget()
+SCPresentationBlackWidget::~SCPresentationBlackWidget()
 {
 }
 
-void KPrPresentationBlackWidget::paintEvent(QPaintEvent * event)
+void SCPresentationBlackWidget::paintEvent(QPaintEvent * event)
 {
     Q_UNUSED(event);
     QPainter painter(this);

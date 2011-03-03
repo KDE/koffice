@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresenterViewWidget.h"
+#include "SCPresenterViewWidget.h"
 
 #include <QtGui/QBoxLayout>
 #include <QtGui/QKeyEvent>
@@ -36,13 +36,13 @@
 #include <KoShape.h>
 #include <KoTextShapeData.h>
 
-#include "KPrAnimationDirector.h"
-#include "KPrPresenterViewInterface.h"
-#include "KPrPresenterViewSlidesInterface.h"
-#include "KPrPresenterViewToolWidget.h"
-#include "KPrViewModePresentation.h"
+#include "SCAnimationDirector.h"
+#include "SCPresenterViewInterface.h"
+#include "SCPresenterViewSlidesInterface.h"
+#include "SCPresenterViewToolWidget.h"
+#include "SCViewModePresentation.h"
 
-KPrPresenterViewWidget::KPrPresenterViewWidget(KPrViewModePresentation *viewMode, const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent)
+SCPresenterViewWidget::SCPresenterViewWidget(SCViewModePresentation *viewMode, const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent)
     : QWidget(parent)
     , m_viewMode(viewMode)
     , m_pages(pages)
@@ -53,10 +53,10 @@ KPrPresenterViewWidget::KPrPresenterViewWidget(KPrViewModePresentation *viewMode
     vLayout->setContentsMargins(20, 20, 20, 0);
 
     m_stackedLayout = new QStackedLayout;
-    m_mainWidget = new KPrPresenterViewInterface(pages, m_canvas);
+    m_mainWidget = new SCPresenterViewInterface(pages, m_canvas);
     m_stackedLayout->addWidget(m_mainWidget);
 
-    m_slidesWidget = new KPrPresenterViewSlidesInterface(pages);
+    m_slidesWidget = new SCPresenterViewSlidesInterface(pages);
     m_stackedLayout->addWidget(m_slidesWidget);
     connect(m_slidesWidget, SIGNAL(selectedPageChanged(int, bool)), this,
             SLOT(requestChangePage(int, bool)));
@@ -65,7 +65,7 @@ KPrPresenterViewWidget::KPrPresenterViewWidget(KPrViewModePresentation *viewMode
 
     QHBoxLayout *hLayout = new QHBoxLayout;
     hLayout->addStretch();
-    m_toolWidget = new KPrPresenterViewToolWidget;
+    m_toolWidget = new SCPresenterViewToolWidget;
     connect(m_toolWidget, SIGNAL(slideThumbnailsToggled(bool)), this, SLOT(showSlideThumbnails(bool)));
     connect(m_toolWidget, SIGNAL(previousSlideClicked()), this, SLOT(requestPreviousSlide()));
     connect(m_toolWidget, SIGNAL(nextSlideClicked()), this, SLOT(requestNextSlide()));
@@ -84,21 +84,21 @@ KPrPresenterViewWidget::KPrPresenterViewWidget(KPrViewModePresentation *viewMode
     m_activeWidget->setActivePage(activePage);
 }
 
-KPrPresenterViewWidget::~KPrPresenterViewWidget()
+SCPresenterViewWidget::~SCPresenterViewWidget()
 {
 }
 
-void KPrPresenterViewWidget::setActivePage(KoPAPageBase *page)
+void SCPresenterViewWidget::setActivePage(KoPAPageBase *page)
 {
     m_activeWidget->setActivePage(page);
 }
 
-void KPrPresenterViewWidget::setActivePage(int pageIndex)
+void SCPresenterViewWidget::setActivePage(int pageIndex)
 {
     m_activeWidget->setActivePage(pageIndex);
 }
 
-void KPrPresenterViewWidget::updateWidget(const QSize &widgetSize, const QSize &canvasSize)
+void SCPresenterViewWidget::updateWidget(const QSize &widgetSize, const QSize &canvasSize)
 {
     // a better way to resize the canvas, still need to find optimum value
 
@@ -118,7 +118,7 @@ void KPrPresenterViewWidget::updateWidget(const QSize &widgetSize, const QSize &
     m_mainWidget->setPreviewSize(previewSize);
 }
 
-void KPrPresenterViewWidget::showSlideThumbnails(bool show)
+void SCPresenterViewWidget::showSlideThumbnails(bool show)
 {
     if (show) {
         m_stackedLayout->setCurrentIndex(1);
@@ -130,17 +130,17 @@ void KPrPresenterViewWidget::showSlideThumbnails(bool show)
     }
 }
 
-void KPrPresenterViewWidget::requestPreviousSlide()
+void SCPresenterViewWidget::requestPreviousSlide()
 {
     m_viewMode->keyPressEvent(new QKeyEvent(QEvent::KeyPress, Qt::Key_PageUp, Qt::NoModifier));
 }
 
-void KPrPresenterViewWidget::requestNextSlide()
+void SCPresenterViewWidget::requestNextSlide()
 {
     m_viewMode->keyPressEvent(new QKeyEvent(QEvent::KeyPress, Qt::Key_PageDown, Qt::NoModifier));
 }
 
-void KPrPresenterViewWidget::requestChangePage(int index, bool enableMainView)
+void SCPresenterViewWidget::requestChangePage(int index, bool enableMainView)
 {
     if (enableMainView) {
         m_toolWidget->toggleSlideThumbnails(false);
@@ -150,5 +150,5 @@ void KPrPresenterViewWidget::requestChangePage(int index, bool enableMainView)
     m_slidesWidget->setActivePage(index);
 }
 
-#include "KPrPresenterViewWidget.moc"
+#include "SCPresenterViewWidget.moc"
 

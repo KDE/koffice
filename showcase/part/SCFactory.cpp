@@ -18,26 +18,26 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrFactory.h"
-#include "KPrDocument.h"
-#include "KPrAboutData.h"
+#include "SCFactory.h"
+#include "SCDocument.h"
+#include "SCAboutData.h"
 
 #include <kiconloader.h>
 #include <kcomponentdata.h>
 #include <kstandarddirs.h>
 
 
-KComponentData* KPrFactory::s_instance = 0;
-KAboutData* KPrFactory::s_aboutData = 0;
-KIconLoader* KPrFactory::s_iconLoader = 0;
+KComponentData* SCFactory::s_instance = 0;
+KAboutData* SCFactory::s_aboutData = 0;
+KIconLoader* SCFactory::s_iconLoader = 0;
 
-KPrFactory::KPrFactory(QObject* parent, const char* /*name*/)
+SCFactory::SCFactory(QObject* parent, const char* /*name*/)
     : KPluginFactory(*aboutData(), parent)
 {
     (void)componentData();
 }
 
-KPrFactory::~KPrFactory()
+SCFactory::~SCFactory()
 {
     delete s_aboutData;
     s_aboutData = 0;
@@ -45,14 +45,14 @@ KPrFactory::~KPrFactory()
     s_instance = 0;
 }
 
-QObject* KPrFactory::create(const char* iface, QWidget* parentWidget, QObject *parent,
+QObject* SCFactory::create(const char* iface, QWidget* parentWidget, QObject *parent,
                              const QVariantList& args, const QString& keyword)
 {
     Q_UNUSED(args);
     Q_UNUSED(keyword);
     bool bWantKoDocument = (strcmp(iface, "KoDocument") == 0);
 
-    KPrDocument *doc = new KPrDocument(parentWidget, parent, !bWantKoDocument);
+    SCDocument *doc = new SCDocument(parentWidget, parent, !bWantKoDocument);
 
     if (!bWantKoDocument)
         doc->setReadWrite(false);
@@ -60,7 +60,7 @@ QObject* KPrFactory::create(const char* iface, QWidget* parentWidget, QObject *p
     return doc;
 }
 
-KAboutData* KPrFactory::aboutData()
+KAboutData* SCFactory::aboutData()
 {
     if(!s_aboutData)
         s_aboutData = newShowcaseAboutData();
@@ -68,7 +68,7 @@ KAboutData* KPrFactory::aboutData()
     return s_aboutData;
 }
 
-KIconLoader* KPrFactory::iconLoader()
+KIconLoader* SCFactory::iconLoader()
 {
     if(!s_iconLoader)
     {
@@ -80,7 +80,7 @@ KIconLoader* KPrFactory::iconLoader()
     return s_iconLoader;
 }
 
-const KComponentData &KPrFactory::componentData()
+const KComponentData &SCFactory::componentData()
 {
     if (!s_instance) {
         s_instance = new KComponentData(aboutData());
@@ -92,4 +92,4 @@ const KComponentData &KPrFactory::componentData()
     return *s_instance;
 }
 
-#include "KPrFactory.moc"
+#include "SCFactory.moc"

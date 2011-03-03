@@ -17,46 +17,46 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrEllipseWipeEffectFactory.h"
+#include "SCEllipseWipeEffectFactory.h"
 
 #include <cmath>
 
 #include <klocale.h>
 
-#include "../KPrIrisWipeEffectStrategyBase.h"
+#include "../SCIrisWipeEffectStrategyBase.h"
 
 #define EllipseWipeEffectFactoryId "EllipseWipeEffectFactory"
 
-KPrEllipseWipeEffectFactory::KPrEllipseWipeEffectFactory()
-: KPrPageEffectFactory(EllipseWipeEffectFactoryId, i18n("Ellipse"))
+SCEllipseWipeEffectFactory::SCEllipseWipeEffectFactory()
+: SCPageEffectFactory(EllipseWipeEffectFactoryId, i18n("Ellipse"))
 {
     QPainterPath shape;
 
     //circle
     shape.addEllipse(-25, -25, 50, 50);
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Circle, "ellipseWipe", "circle", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Circle, "ellipseWipe", "circle", false));
 
     //circle reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, CircleReverse, "ellipseWipe", "circle", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, CircleReverse, "ellipseWipe", "circle", true));
 
     //horizontal
     shape = QPainterPath();
     shape.addEllipse(-25, -12, 50, 24);
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Horizontal, "ellipseWipe", "horizontal", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Horizontal, "ellipseWipe", "horizontal", false));
 
     //horizontal reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, HorizontalReverse, "ellipseWipe", "horizontal", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, HorizontalReverse, "ellipseWipe", "horizontal", true));
 
     //vertical
     shape = QPainterPath();
     shape.addEllipse(-12, -25, 24, 50);
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Vertical, "ellipseWipe", "vertical", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Vertical, "ellipseWipe", "vertical", false));
 
     //vertical reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, VerticalReverse, "ellipseWipe", "vertical", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, VerticalReverse, "ellipseWipe", "vertical", true));
 }
 
-KPrEllipseWipeEffectFactory::~KPrEllipseWipeEffectFactory()
+SCEllipseWipeEffectFactory::~SCEllipseWipeEffectFactory()
 {
 }
 
@@ -69,7 +69,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Vertical Reverse")
 };
 
-QString KPrEllipseWipeEffectFactory::subTypeName(int subType) const
+QString SCEllipseWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

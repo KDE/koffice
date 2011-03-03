@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrClockWipeSubpathHelper.h"
+#include "SCClockWipeSubpathHelper.h"
 
 #include <math.h>
 #include <float.h>
@@ -25,15 +25,15 @@
 
 #include <kdebug.h>
 
-KPrClockWipeSubpathHelper::KPrClockWipeSubpathHelper()
+SCClockWipeSubpathHelper::SCClockWipeSubpathHelper()
 {
 }
 
-KPrClockWipeSubpathHelper::~KPrClockWipeSubpathHelper()
+SCClockWipeSubpathHelper::~SCClockWipeSubpathHelper()
 {
 }
 
-void KPrClockWipeSubpathHelper::addSubpathForCircularArc(QPainterPath* clipPath, QRect& boundingRect, double startAngle, double endAngle)
+void SCClockWipeSubpathHelper::addSubpathForCircularArc(QPainterPath* clipPath, QRect& boundingRect, double startAngle, double endAngle)
 {
     if (fabs(startAngle - endAngle) < DBL_EPSILON)
         return;

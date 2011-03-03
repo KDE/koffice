@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrEventActionData.h"
+#include "SCEventActionData.h"
 
-class KPrEventActionData::Private
+class SCEventActionData::Private
 {
 public:
-    Private(KoShape *s, KoEventAction *ea, KPrSoundCollection *sc)
+    Private(KoShape *s, KoEventAction *ea, SCSoundCollection *sc)
             : shape(s),
             eventAction(ea),
             soundCollection(sc)
@@ -31,30 +31,30 @@ public:
 
     KoShape *shape;
     KoEventAction *eventAction;
-    KPrSoundCollection *soundCollection;
+    SCSoundCollection *soundCollection;
 };
 
-KPrEventActionData::KPrEventActionData(KoShape * shape, KoEventAction * eventAction , KPrSoundCollection * soundCollection)
+SCEventActionData::SCEventActionData(KoShape * shape, KoEventAction * eventAction , SCSoundCollection * soundCollection)
     : d(new Private(shape, eventAction, soundCollection))
 {
 }
 
-KPrEventActionData::~KPrEventActionData()
+SCEventActionData::~SCEventActionData()
 {
     delete d;
 }
 
-KPrSoundCollection * KPrEventActionData::soundCollection() const
+SCSoundCollection * SCEventActionData::soundCollection() const
 {
     return d->soundCollection;
 }
 
-KoShape *KPrEventActionData::shape() const
+KoShape *SCEventActionData::shape() const
 {
     return d->shape;
 }
 
-KoEventAction *KPrEventActionData::eventAction() const
+KoEventAction *SCEventActionData::eventAction() const
 {
     return d->eventAction;
 }

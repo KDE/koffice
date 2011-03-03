@@ -17,19 +17,19 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrConfigureSlideShowDialog.h"
+#include "SCConfigureSlideShowDialog.h"
 
 #include <QtGui/QDesktopWidget>
 
 #include <KLocale>
 #include <KDebug>
 
-#include "KPrDocument.h"
-#include "KPrCustomSlideShows.h"
-#include "KPrCustomSlideShowsDialog.h"
-#include "commands/KPrSetCustomSlideShowsCommand.h"
+#include "SCDocument.h"
+#include "SCCustomSlideShows.h"
+#include "SCCustomSlideShowsDialog.h"
+#include "commands/SCSetCustomSlideShowsCommand.h"
 
-KPrConfigureSlideShowDialog::KPrConfigureSlideShowDialog(KPrDocument *document, QWidget *parent)
+SCConfigureSlideShowDialog::SCConfigureSlideShowDialog(SCDocument *document, QWidget *parent)
     : KDialog(parent)
     , m_document(document)
 {
@@ -38,7 +38,7 @@ KPrConfigureSlideShowDialog::KPrConfigureSlideShowDialog(KPrDocument *document, 
     ui.setupUi(widget);
 
     ui.slidesComboBox->addItem(i18n("All slides"));
-    KPrCustomSlideShows *customSlideShows = document->customSlideShows();
+    SCCustomSlideShows *customSlideShows = document->customSlideShows();
     ui.slidesComboBox->addItems(customSlideShows->names());
 
     setMainWidget(widget);
@@ -59,7 +59,7 @@ KPrConfigureSlideShowDialog::KPrConfigureSlideShowDialog(KPrDocument *document, 
     connect(ui.editSlidesButton, SIGNAL(clicked()), this, SLOT(editCustomSlideShow()));
 }
 
-QString KPrConfigureSlideShowDialog::activeCustomSlideShow() const
+QString SCConfigureSlideShowDialog::activeCustomSlideShow() const
 {
     if (ui.slidesComboBox->currentIndex() != 0) {
         return ui.slidesComboBox->currentText();
@@ -68,14 +68,14 @@ QString KPrConfigureSlideShowDialog::activeCustomSlideShow() const
     return QString();
 }
 
-void KPrConfigureSlideShowDialog::editCustomSlideShow()
+void SCConfigureSlideShowDialog::editCustomSlideShow()
 {
-    KPrCustomSlideShows *finalSlideShows;
+    SCCustomSlideShows *finalSlideShows;
 
-    KPrCustomSlideShowsDialog dialog(this, m_document->customSlideShows(), m_document, finalSlideShows);
+    SCCustomSlideShowsDialog dialog(this, m_document->customSlideShows(), m_document, finalSlideShows);
     dialog.setModal(true);
     if (dialog.exec() == QDialog::Accepted) {
-        m_document->addCommand(new KPrSetCustomSlideShowsCommand(m_document, finalSlideShows));
+        m_document->addCommand(new SCSetCustomSlideShowsCommand(m_document, finalSlideShows));
         QString activeSlideShow = ui.slidesComboBox->currentText();
         int index = ui.slidesComboBox->currentIndex();
 
@@ -99,5 +99,5 @@ void KPrConfigureSlideShowDialog::editCustomSlideShow()
     }
 }
 
-#include "KPrConfigureSlideShowDialog.moc"
+#include "SCConfigureSlideShowDialog.moc"
 

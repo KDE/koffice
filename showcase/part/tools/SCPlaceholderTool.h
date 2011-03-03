@@ -22,12 +22,12 @@
 
 #include <KoToolBase.h>
 
-class KPrPlaceholderTool : public KoToolBase
+class SCPlaceholderTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    KPrPlaceholderTool(KoCanvasBase *canvas);
-    virtual ~KPrPlaceholderTool();
+    SCPlaceholderTool(KoCanvasBase *canvas);
+    virtual ~SCPlaceholderTool();
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 

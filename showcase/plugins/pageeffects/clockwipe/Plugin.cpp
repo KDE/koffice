@@ -19,32 +19,32 @@
  */
 #include "Plugin.h"
 #include <kpluginfactory.h>
-#include <KPrPageEffectRegistry.h>
+#include <SCPageEffectRegistry.h>
 
-#include "clockwipe/KPrClockWipeEffectFactory.h"
-#include "pinwheelwipe/KPrPinWheelWipeEffectFactory.h"
-#include "singlesweepwipe/KPrSingleSweepWipeEffectFactory.h"
-#include "fanwipe/KPrFanWipeEffectFactory.h"
-#include "doublefanwipe/KPrDoubleFanWipeEffectFactory.h"
-#include "doublesweepwipe/KPrDoubleSweepWipeEffectFactory.h"
-#include "saloondoorwipe/KPrSaloonDoorWipeEffectFactory.h"
-#include "windshieldwipe/KPrWindShieldWipeEffectFactory.h"
+#include "clockwipe/SCClockWipeEffectFactory.h"
+#include "pinwheelwipe/SCPinWheelWipeEffectFactory.h"
+#include "singlesweepwipe/SCSingleSweepWipeEffectFactory.h"
+#include "fanwipe/SCFanWipeEffectFactory.h"
+#include "doublefanwipe/SCDoubleFanWipeEffectFactory.h"
+#include "doublesweepwipe/SCDoubleSweepWipeEffectFactory.h"
+#include "saloondoorwipe/SCSaloonDoorWipeEffectFactory.h"
+#include "windshieldwipe/SCWindShieldWipeEffectFactory.h"
 
 
 K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
-K_EXPORT_PLUGIN(PluginFactory("KPrPageEffect"))
+K_EXPORT_PLUGIN(PluginFactory("SCPageEffect"))
 
 Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)
 {
-    KPrPageEffectRegistry::instance()->add(new KPrClockWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrPinWheelWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrSingleSweepWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrFanWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrDoubleFanWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrDoubleSweepWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrSaloonDoorWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrWindShieldWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCClockWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCPinWheelWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCSingleSweepWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCFanWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCDoubleFanWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCDoubleSweepWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCSaloonDoorWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCWindShieldWipeEffectFactory());
 
 }
 

@@ -20,13 +20,13 @@
 #ifndef KPRROUNDRECTWIPEEFFECTFACTORY_H
 #define KPRROUNDRECTWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class KPrRoundRectWipeEffectFactory : public KPrPageEffectFactory
+class SCRoundRectWipeEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrRoundRectWipeEffectFactory();
-    virtual ~KPrRoundRectWipeEffectFactory();
+    SCRoundRectWipeEffectFactory();
+    virtual ~SCRoundRectWipeEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

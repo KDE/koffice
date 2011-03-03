@@ -19,16 +19,16 @@
  */
 #include "Plugin.h"
 #include <kpluginfactory.h>
-#include <KPrPageEffectRegistry.h>
-#include "KPrBarWipeEffectFactory.h"
+#include <SCPageEffectRegistry.h>
+#include "SCBarWipeEffectFactory.h"
 
 K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
-K_EXPORT_PLUGIN(PluginFactory("KPrPageEffect"))
+K_EXPORT_PLUGIN(PluginFactory("SCPageEffect"))
 
 Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)
 {
-    KPrPageEffectRegistry::instance()->add(new KPrBarWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCBarWipeEffectFactory());
 }
 
 #include "Plugin.moc"

@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrCustomSlideShows.h"
+#include "SCCustomSlideShows.h"
 
 #include <kdebug.h>
 //KOffice includes
@@ -29,38 +29,38 @@
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 
-//KPresenter includes
-#include <KPrDocument.h>
+//Showcase includes
+#include <SCDocument.h>
 
-KPrCustomSlideShows::KPrCustomSlideShows()
+SCCustomSlideShows::SCCustomSlideShows()
 {
 }
 
-KPrCustomSlideShows::~KPrCustomSlideShows()
+SCCustomSlideShows::~SCCustomSlideShows()
 {
 }
 
-void KPrCustomSlideShows::insert(const QString &name, const QList<KoPAPageBase*> &slideShow)
+void SCCustomSlideShows::insert(const QString &name, const QList<KoPAPageBase*> &slideShow)
 {
     QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.find(name);
     Q_ASSERT(it == m_customSlideShows.end());
     m_customSlideShows.insert(name, slideShow);
 }
 
-void KPrCustomSlideShows::remove(const QString &name)
+void SCCustomSlideShows::remove(const QString &name)
 {
     QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.find(name);
     Q_ASSERT(it != m_customSlideShows.end());
     m_customSlideShows.erase(it);
 }
 
-void KPrCustomSlideShows::update(const QString &name, const QList<KoPAPageBase*> &slideShow)
+void SCCustomSlideShows::update(const QString &name, const QList<KoPAPageBase*> &slideShow)
 {
     QMap< QString, QList<KoPAPageBase*> >::const_iterator it = m_customSlideShows.constFind(name);
     Q_ASSERT(it != m_customSlideShows.constEnd());
     m_customSlideShows.insert(name, slideShow);
 }
-void KPrCustomSlideShows::rename(const QString &oldName, const QString &newName)
+void SCCustomSlideShows::rename(const QString &oldName, const QString &newName)
 {
     QMap< QString, QList<KoPAPageBase*> >::const_iterator it = m_customSlideShows.constFind(oldName);
     Q_ASSERT(it !=  m_customSlideShows.constEnd());
@@ -69,12 +69,12 @@ void KPrCustomSlideShows::rename(const QString &oldName, const QString &newName)
     insert(newName, value);
 }
 
-const QList<QString> KPrCustomSlideShows::names() const
+const QList<QString> SCCustomSlideShows::names() const
 {
     return m_customSlideShows.keys();
 }
 
-QList<KoPAPageBase*> KPrCustomSlideShows::getByName(const QString &name) const
+QList<KoPAPageBase*> SCCustomSlideShows::getByName(const QString &name) const
 {
     QMap< QString, QList<KoPAPageBase*> >::const_iterator it = m_customSlideShows.constFind(name);
     Q_ASSERT(it !=  m_customSlideShows.constEnd());
@@ -84,7 +84,7 @@ QList<KoPAPageBase*> KPrCustomSlideShows::getByName(const QString &name) const
     return it.value();
 }
 
-void KPrCustomSlideShows::addSlideToAll(KoPAPageBase* page, unsigned int position)
+void SCCustomSlideShows::addSlideToAll(KoPAPageBase* page, unsigned int position)
 {
     QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.begin();
     //FIXME: should we allow negative index?
@@ -96,7 +96,7 @@ void KPrCustomSlideShows::addSlideToAll(KoPAPageBase* page, unsigned int positio
     }
 }
 
-void KPrCustomSlideShows::addSlidesToAll(const QList<KoPAPageBase*> &slideShow, unsigned int position)
+void SCCustomSlideShows::addSlidesToAll(const QList<KoPAPageBase*> &slideShow, unsigned int position)
 {
     //FIXME: should we allow negative index?
     //if (position < 0) return;;
@@ -105,7 +105,7 @@ void KPrCustomSlideShows::addSlidesToAll(const QList<KoPAPageBase*> &slideShow, 
     }
 }
 
-void KPrCustomSlideShows::removeSlideFromAll(KoPAPageBase* page)
+void SCCustomSlideShows::removeSlideFromAll(KoPAPageBase* page)
 {
     QMap< QString, QList<KoPAPageBase*> >::iterator it = m_customSlideShows.begin();
     while (it != m_customSlideShows.end()) {
@@ -114,14 +114,14 @@ void KPrCustomSlideShows::removeSlideFromAll(KoPAPageBase* page)
     }
 }
 
-void KPrCustomSlideShows::removeSlidesFromAll(const QList<KoPAPageBase*> &slideShow)
+void SCCustomSlideShows::removeSlidesFromAll(const QList<KoPAPageBase*> &slideShow)
 {
     for (int i=0; i < slideShow.size(); ++i) {
         removeSlideFromAll(slideShow[i]);
     }
 }
 
-void KPrCustomSlideShows::saveOdf(KoPASavingContext & context)
+void SCCustomSlideShows::saveOdf(KoPASavingContext & context)
 {
     foreach(QString name, m_customSlideShows.keys()) {
         QList<KoPAPageBase*> slideList = m_customSlideShows.value(name);
@@ -142,7 +142,7 @@ void KPrCustomSlideShows::saveOdf(KoPASavingContext & context)
     }
 }
 
-void KPrCustomSlideShows::loadOdf(const KoXmlElement & presentationSettings, KoPALoadingContext & context)
+void SCCustomSlideShows::loadOdf(const KoXmlElement & presentationSettings, KoPALoadingContext & context)
 {
     m_customSlideShows.clear();
 

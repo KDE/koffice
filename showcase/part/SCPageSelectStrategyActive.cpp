@@ -17,19 +17,19 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPageSelectStrategyActive.h"
+#include "SCPageSelectStrategyActive.h"
 
 
-KPrPageSelectStrategyActive::KPrPageSelectStrategyActive(KoPACanvasBase *canvas)
+SCPageSelectStrategyActive::SCPageSelectStrategyActive(KoPACanvasBase *canvas)
 : m_canvas(canvas)
 {
 }
 
-KPrPageSelectStrategyActive::~KPrPageSelectStrategyActive()
+SCPageSelectStrategyActive::~SCPageSelectStrategyActive()
 {
 }
 
-const KoPAPageBase *KPrPageSelectStrategyActive::page() const
+const KoPAPageBase *SCPageSelectStrategyActive::page() const
 {
     KoPAViewBase *view = m_canvas->koPAView();
     Q_ASSERT(view);

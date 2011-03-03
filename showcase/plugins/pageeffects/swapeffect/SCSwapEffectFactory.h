@@ -20,13 +20,13 @@
 #ifndef KPRSWAPEFFECTFACTORY_H
 #define KPRSWAPEFFECTFACTORY_H
 
-#include "pageeffects/KPrPageEffectFactory.h"
+#include "pageeffects/SCPageEffectFactory.h"
 
-class KPrSwapEffectFactory : public KPrPageEffectFactory
+class SCSwapEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrSwapEffectFactory();
-    virtual ~KPrSwapEffectFactory();
+    SCSwapEffectFactory();
+    virtual ~SCSwapEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

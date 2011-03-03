@@ -26,39 +26,39 @@
 
 #include "kpresenter_export.h"
 
-class KPrSoundData;
+class SCSoundData;
 class KoStore;
 
 /**
- * An collection of KPrSoundData objects to allow loading and saving them all together to the KoStore.
+ * An collection of SCSoundData objects to allow loading and saving them all together to the KoStore.
  */
-class KPRESENTER_EXPORT KPrSoundCollection : public QObject, public KoDataCenterBase {
+class KPRESENTER_EXPORT SCSoundCollection : public QObject, public KoDataCenterBase {
 public:
     /// constructor
-    KPrSoundCollection(QObject *parent = 0);
-    ~KPrSoundCollection();
+    SCSoundCollection(QObject *parent = 0);
+    ~SCSoundCollection();
 
     /**
-     * Load all sounds from the store which have a recognized KPrSoundData::storeHref().
+     * Load all sounds from the store which have a recognized SCSoundData::storeHref().
      * @return returns true if load was successful (no sounds failed).
      */
     bool completeLoading(KoStore *store);
 
     /**
      * Save all sounds to the store which are tagged for saving
-     * and have a recognized KPrSoundData::storeHref().
+     * and have a recognized SCSoundData::storeHref().
      * @return returns true if save was successful (no sounds failed).
      */
     bool completeSaving(KoStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context);
 
-    KPrSoundData *findSound(QString title);
+    SCSoundData *findSound(QString title);
 
     QStringList titles();
 
 protected:
-    friend class KPrSoundData;
-    void addSound(KPrSoundData *image);
-    void removeSound(KPrSoundData *image);
+    friend class SCSoundData;
+    void addSound(SCSoundData *image);
+    void removeSound(SCSoundData *image);
 
 
 private:
@@ -66,5 +66,5 @@ private:
     Private * const d;
 };
 
-Q_DECLARE_METATYPE(KPrSoundCollection*)
+Q_DECLARE_METATYPE(SCSoundCollection*)
 #endif

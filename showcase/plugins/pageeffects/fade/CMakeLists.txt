@@ -1,9 +1,9 @@
 include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/showcase/part ${CMAKE_SOURCE_DIR}/showcase/part/pageeffects )
 
 set(kpr_pageeffect_fade_PART_SRCS Plugin.cpp
-    KPrFadeEffectFactory.cpp
-    KPrFadeCrossStrategy.cpp
-    KPrFadeOverColorStrategy.cpp
+    SCFadeEffectFactory.cpp
+    SCFadeCrossStrategy.cpp
+    SCFadeOverColorStrategy.cpp
 )
 
 kde4_add_plugin(kpr_pageeffect_fade ${kpr_pageeffect_fade_PART_SRCS})

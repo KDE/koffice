@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrViewModePresentation.h"
+#include "SCViewModePresentation.h"
 
 #include <QEvent>
 #include <QKeyEvent>
@@ -35,34 +35,34 @@
 #include <KoPADocument.h>
 #include <KoPAView.h>
 #include <KoZoomHandler.h>
-#include <KPrView.h>
+#include <SCView.h>
 
-#include "KPrDocument.h"
-#include "KPrPresenterViewWidget.h"
-#include "KPrEndOfSlideShowPage.h"
+#include "SCDocument.h"
+#include "SCPresenterViewWidget.h"
+#include "SCEndOfSlideShowPage.h"
 
-KPrViewModePresentation::KPrViewModePresentation(KoPAViewBase * view, KoPACanvasBase * canvas)
+SCViewModePresentation::SCViewModePresentation(KoPAViewBase * view, KoPACanvasBase * canvas)
 : KoPAViewMode(view, canvas)
 , m_savedParent(0)
-, m_tool(new KPrPresentationTool(*this))
+, m_tool(new SCPresentationTool(*this))
 , m_animationDirector(0)
 , m_pvAnimationDirector(0)
 , m_presenterViewCanvas(0)
 , m_presenterViewWidget(0)
 , m_endOfSlideShowPage(0)
-, m_view(static_cast<KPrView *>(view))
+, m_view(static_cast<SCView *>(view))
 {
     // TODO: make this viewmode work with non-QWidget-based canvases as well
     m_baseCanvas = dynamic_cast<KoPACanvas*>(canvas);
 }
 
-KPrViewModePresentation::~KPrViewModePresentation()
+SCViewModePresentation::~SCViewModePresentation()
 {
     delete m_animationDirector;
     delete m_tool;
 }
 
-KoViewConverter * KPrViewModePresentation::viewConverter(KoPACanvasBase * canvas)
+KoViewConverter * SCViewModePresentation::viewConverter(KoPACanvasBase * canvas)
 {
     if (m_baseCanvas && m_animationDirector && m_baseCanvas == canvas) {
         return m_animationDirector->viewConverter();
@@ -75,7 +75,7 @@ KoViewConverter * KPrViewModePresentation::viewConverter(KoPACanvasBase * canvas
     }
 }
 
-void KPrViewModePresentation::paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect)
+void SCViewModePresentation::paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect)
 {
     if (m_baseCanvas && m_baseCanvas == canvas && m_animationDirector) {
         m_animationDirector->paint(painter, paintRect);
@@ -84,64 +84,64 @@ void KPrViewModePresentation::paint(KoPACanvasBase* canvas, QPainter& painter, c
     }
 }
 
-void KPrViewModePresentation::tabletEvent(QTabletEvent *event, const QPointF &point)
+void SCViewModePresentation::tabletEvent(QTabletEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
-void KPrViewModePresentation::mousePressEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModePresentation::mousePressEvent(QMouseEvent *event, const QPointF &point)
 {
     KoPointerEvent ev(event, point);
 
     m_tool->mousePressEvent(&ev);
 }
 
-void KPrViewModePresentation::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModePresentation::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
 {
     KoPointerEvent ev(event, point);
 
     m_tool->mouseDoubleClickEvent(&ev);
 }
 
-void KPrViewModePresentation::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModePresentation::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
 {
     KoPointerEvent ev(event, point);
 
     m_tool->mouseMoveEvent(&ev);
 }
 
-void KPrViewModePresentation::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModePresentation::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
 {
     KoPointerEvent ev(event, point);
 
     m_tool->mouseReleaseEvent(&ev);
 }
 
-void KPrViewModePresentation::keyPressEvent(QKeyEvent *event)
+void SCViewModePresentation::keyPressEvent(QKeyEvent *event)
 {
     m_tool->keyPressEvent(event);
 }
 
-void KPrViewModePresentation::keyReleaseEvent(QKeyEvent *event)
+void SCViewModePresentation::keyReleaseEvent(QKeyEvent *event)
 {
     m_tool->keyReleaseEvent(event);
 }
 
-void KPrViewModePresentation::wheelEvent(QWheelEvent * event, const QPointF &point)
+void SCViewModePresentation::wheelEvent(QWheelEvent * event, const QPointF &point)
 {
     KoPointerEvent ev(event, point);
 
     m_tool->wheelEvent(&ev);
 }
 
-void KPrViewModePresentation::closeEvent(QCloseEvent * event)
+void SCViewModePresentation::closeEvent(QCloseEvent * event)
 {
     activateSavedViewMode();
     event->ignore();
 }
 
-void KPrViewModePresentation::activate(KoPAViewMode * previousViewMode)
+void SCViewModePresentation::activate(KoPAViewMode * previousViewMode)
 {
     if (!m_baseCanvas) return;
 
@@ -151,12 +151,12 @@ void KPrViewModePresentation::activate(KoPAViewMode * previousViewMode)
 
     QDesktopWidget desktop;
 
-    KPrDocument *document = static_cast<KPrDocument *>(m_view->kopaDocument());
+    SCDocument *document = static_cast<SCDocument *>(m_view->kopaDocument());
     bool presenterViewEnabled = document->isPresenterViewEnabled();
     int presentationscreen = document->presentationMonitor();
 
     // add end off slideshow page
-    m_endOfSlideShowPage = new KPrEndOfSlideShowPage(desktop.screenGeometry(presentationscreen), document);
+    m_endOfSlideShowPage = new SCEndOfSlideShowPage(desktop.screenGeometry(presentationscreen), document);
     QList<KoPAPageBase*> pages = document->slideShow();
     pages.append(m_endOfSlideShowPage);
 
@@ -169,7 +169,7 @@ void KPrViewModePresentation::activate(KoPAViewMode * previousViewMode)
     // of the presentation
     // the animation director needs to be set before m_baseCanvas->move is called as this might try to call
     // viewConverter.
-    m_animationDirector = new KPrAnimationDirector(m_view, m_baseCanvas, pages, m_view->activePage());
+    m_animationDirector = new SCAnimationDirector(m_view, m_baseCanvas, pages, m_view->activePage());
     // move and resize now as otherwise it is not set when we call activate on the tool.
     m_baseCanvas->move(presentationRect.topLeft());
     m_baseCanvas->resize(presentationRect.size());
@@ -186,7 +186,7 @@ void KPrViewModePresentation::activate(KoPAViewMode * previousViewMode)
             QRect pvRect = desktop.screenGeometry(newscreen);
 
             m_presenterViewCanvas = new KoPACanvas(m_view, document);
-            m_presenterViewWidget = new KPrPresenterViewWidget(this, pages, m_presenterViewCanvas);
+            m_presenterViewWidget = new SCPresenterViewWidget(this, pages, m_presenterViewCanvas);
             m_presenterViewWidget->setParent(desktop.screen(newscreen), Qt::Window);
             m_presenterViewWidget->setWindowState(
                     m_presenterViewWidget->windowState() | Qt::WindowFullScreen);
@@ -196,7 +196,7 @@ void KPrViewModePresentation::activate(KoPAViewMode * previousViewMode)
             m_presenterViewWidget->show();
             m_presenterViewWidget->setFocus();                             // it shown full screen
 
-            m_pvAnimationDirector = new KPrAnimationDirector(m_view,
+            m_pvAnimationDirector = new SCAnimationDirector(m_view,
                     m_presenterViewCanvas, pages, m_view->activePage());
         }
         else {
@@ -212,7 +212,7 @@ void KPrViewModePresentation::activate(KoPAViewMode * previousViewMode)
     emit stepChanged(m_animationDirector->currentStep());
 }
 
-void KPrViewModePresentation::deactivate()
+void SCViewModePresentation::deactivate()
 {
     emit deactivated();
 
@@ -254,7 +254,7 @@ void KPrViewModePresentation::deactivate()
     }
 }
 
-void KPrViewModePresentation::updateActivePage(KoPAPageBase *page)
+void SCViewModePresentation::updateActivePage(KoPAPageBase *page)
 {
     m_view->setActivePage(page);
     if (m_presenterViewWidget) {
@@ -267,47 +267,47 @@ void KPrViewModePresentation::updateActivePage(KoPAPageBase *page)
     }
 }
 
-void KPrViewModePresentation::activateSavedViewMode()
+void SCViewModePresentation::activateSavedViewMode()
 {
     m_view->setViewMode(m_savedViewMode);
 }
 
-KPrAnimationDirector * KPrViewModePresentation::animationDirector()
+SCAnimationDirector * SCViewModePresentation::animationDirector()
 {
     return m_animationDirector;
 }
 
-int KPrViewModePresentation::numPages() const
+int SCViewModePresentation::numPages() const
 {
     Q_ASSERT(0 != m_animationDirector);
     return m_animationDirector ? m_animationDirector->numPages() : -1;
 }
 
-int KPrViewModePresentation::currentPage() const
+int SCViewModePresentation::currentPage() const
 {
     Q_ASSERT(0 != m_animationDirector);
     return m_animationDirector ? m_animationDirector->currentPage() : -1;
 }
 
-int KPrViewModePresentation::numStepsInPage() const
+int SCViewModePresentation::numStepsInPage() const
 {
     Q_ASSERT(0 != m_animationDirector);
     return m_animationDirector ? m_animationDirector->numStepsInPage() : -1;
 }
 
-int KPrViewModePresentation::currentStep() const
+int SCViewModePresentation::currentStep() const
 {
     Q_ASSERT(0 != m_animationDirector);
     return m_animationDirector ? m_animationDirector->currentStep() : -1;
 }
 
-KPrPresentationTool * KPrViewModePresentation::presentationTool() const
+SCPresentationTool * SCViewModePresentation::presentationTool() const
 {
     Q_ASSERT(0 != m_animationDirector);
     return m_tool;
 }
 
-void KPrViewModePresentation::navigate(KPrAnimationDirector::Navigation navigation)
+void SCViewModePresentation::navigate(SCAnimationDirector::Navigation navigation)
 {
     Q_ASSERT(0 != m_animationDirector);
     if (0 == m_animationDirector) {
@@ -330,7 +330,7 @@ void KPrViewModePresentation::navigate(KPrAnimationDirector::Navigation navigati
     }
 }
 
-void KPrViewModePresentation::navigateToPage(int index)
+void SCViewModePresentation::navigateToPage(int index)
 {
     Q_ASSERT(0 != m_animationDirector);
     if (0 == m_animationDirector) {
@@ -345,7 +345,7 @@ void KPrViewModePresentation::navigateToPage(int index)
     emit stepChanged(m_animationDirector->currentStep());
 }
 
-bool KPrViewModePresentation::isActivated()
+bool SCViewModePresentation::isActivated()
 {
     return m_view->isPresentationRunning();
 }

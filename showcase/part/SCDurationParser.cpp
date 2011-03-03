@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrDurationParser.h"
+#include "SCDurationParser.h"
 
 #include <QRegExp>
 #include <QStringList>
 #include <kglobal.h>
 
-int KPrDurationParser::durationMs(const QString & duration)
+int SCDurationParser::durationMs(const QString & duration)
 {
     // define the regex used as statics
     K_GLOBAL_STATIC_WITH_ARGS(QRegExp, clockRegEx, ("^(?:(\\d+):)?(\\d{2}):(\\d{2}(?:\\.\\d+)?)$"))
@@ -57,7 +57,7 @@ int KPrDurationParser::durationMs(const QString & duration)
     return ms;
 }
 
-QString KPrDurationParser::msToString(const int ms)
+QString SCDurationParser::msToString(const int ms)
 {
     QString result;
     if (ms%1000 == 0) {

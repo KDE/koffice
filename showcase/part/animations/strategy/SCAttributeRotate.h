@@ -20,14 +20,14 @@
 #ifndef KPRATTRIBUTEROTATE_H
 #define KPRATTRIBUTEROTATE_H
 
-#include "KPrAnimationAttribute.h"
+#include "SCAnimationAttribute.h"
 
-class KPrAttributeRotate : public KPrAnimationAttribute
+class SCAttributeRotate : public SCAnimationAttribute
 {
 public:
-    KPrAttributeRotate();
-    virtual void updateCache(KPrAnimationCache *cache, KPrShapeAnimation *shapeAnimation, qreal value);
-    virtual void initCache(KPrAnimationCache * cache, int step, KPrShapeAnimation * shapeAnimation, qreal startValue, qreal endValue);
+    SCAttributeRotate();
+    virtual void updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value);
+    virtual void initCache(SCAnimationCache * cache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue);
 };
 
 #endif // KPRATTRIBUTEROTATE_H

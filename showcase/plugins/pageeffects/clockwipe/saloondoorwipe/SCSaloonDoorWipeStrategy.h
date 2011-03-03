@@ -20,16 +20,16 @@
 #ifndef KPRSALOONDOORWIPESTRATEGY_H
 #define KPRSALOONDOORWIPESTRATEGY_H
 
-#include "KPrSweepWipeStrategy.h"
+#include "SCSweepWipeStrategy.h"
 
-class KPrSaloonDoorWipeStrategy : public KPrSweepWipeStrategy
+class SCSaloonDoorWipeStrategy : public SCSweepWipeStrategy
 {
 public:
-    KPrSaloonDoorWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse);
-    virtual ~KPrSaloonDoorWipeStrategy();
+    SCSaloonDoorWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse);
+    virtual ~SCSaloonDoorWipeStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 };
 
 #endif // KPRSALOONDOORWIPESTRATEGY_H

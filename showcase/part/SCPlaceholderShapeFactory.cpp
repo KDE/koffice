@@ -17,18 +17,18 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPlaceholderShapeFactory.h"
+#include "SCPlaceholderShapeFactory.h"
 
 #include <klocale.h>
 
 #include <KoXmlNS.h>
 #include <KoOdfWorkaround.h>
-#include "KPrPlaceholderShape.h"
+#include "SCPlaceholderShape.h"
 
 #include <kdebug.h>
 
-KPrPlaceholderShapeFactory::KPrPlaceholderShapeFactory(QObject *parent)
-: KoShapeFactoryBase(parent, KPrPlaceholderShapeId, i18n("Placeholder shape"))
+SCPlaceholderShapeFactory::SCPlaceholderShapeFactory(QObject *parent)
+: KoShapeFactoryBase(parent, SCPlaceholderShapeId, i18n("Placeholder shape"))
 {
     QStringList elementNames;
     elementNames << "text-box" << "object" << "image";
@@ -38,16 +38,16 @@ KPrPlaceholderShapeFactory::KPrPlaceholderShapeFactory(QObject *parent)
     setHidden(true);
 }
 
-KPrPlaceholderShapeFactory::~KPrPlaceholderShapeFactory()
+SCPlaceholderShapeFactory::~SCPlaceholderShapeFactory()
 {
 }
 
-KoShape *KPrPlaceholderShapeFactory::createDefaultShape(KoResourceManager *) const
+KoShape *SCPlaceholderShapeFactory::createDefaultShape(KoResourceManager *) const
 {
-    return new KPrPlaceholderShape();
+    return new SCPlaceholderShape();
 }
 
-bool KPrPlaceholderShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
+bool SCPlaceholderShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     // check parent if placeholder is set to true

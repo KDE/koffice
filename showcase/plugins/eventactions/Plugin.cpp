@@ -21,14 +21,14 @@
 
 #include <kpluginfactory.h>
 #include <KoEventActionRegistry.h>
-#include "sound/KPrSoundEventActionFactory.h"
+#include "sound/SCSoundEventActionFactory.h"
 
 K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
-K_EXPORT_PLUGIN(PluginFactory("KPrEventActions"))
+K_EXPORT_PLUGIN(PluginFactory("SCEventActions"))
 
 Plugin::Plugin( QObject * parent,  const QVariantList & )
 : QObject( parent )
 {
-    KoEventActionRegistry::instance()->addPresentationEventAction( new KPrSoundEventActionFactory() );
+    KoEventActionRegistry::instance()->addPresentationEventAction( new SCSoundEventActionFactory() );
 }
 

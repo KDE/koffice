@@ -16,7 +16,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KPrPresentationBlackStrategy.h"
+#include "SCPresentationBlackStrategy.h"
 
 #include <QKeyEvent>
 #include <QApplication>
@@ -25,13 +25,13 @@
 
 #include <KoPACanvas.h>
 
-#include "KPrPresentationTool.h"
-#include "KPrPresentationBlackWidget.h"
+#include "SCPresentationTool.h"
+#include "SCPresentationBlackWidget.h"
 
-KPrPresentationBlackStrategy::KPrPresentationBlackStrategy(KPrPresentationTool * tool)
-: KPrPresentationStrategyBase(tool)
+SCPresentationBlackStrategy::SCPresentationBlackStrategy(SCPresentationTool * tool)
+: SCPresentationStrategyBase(tool)
 {
-    m_widget = new KPrPresentationBlackWidget(canvas());
+    m_widget = new SCPresentationBlackWidget(canvas());
     // TODO
     KIconLoader kicon("showcase");
     QPixmap pix(kicon.loadIcon("black.png", kicon.Small));
@@ -46,13 +46,13 @@ KPrPresentationBlackStrategy::KPrPresentationBlackStrategy(KPrPresentationTool *
     m_widget->installEventFilter(m_tool);
 }
 
-KPrPresentationBlackStrategy::~KPrPresentationBlackStrategy()
+SCPresentationBlackStrategy::~SCPresentationBlackStrategy()
 {
     setToolWidgetParent(canvas()->canvasWidget());
     QApplication::restoreOverrideCursor();
 }
 
-bool KPrPresentationBlackStrategy::keyPressEvent(QKeyEvent * event)
+bool SCPresentationBlackStrategy::keyPressEvent(QKeyEvent * event)
 {
     bool handled = true;
     switch (event->key())

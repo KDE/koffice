@@ -1,15 +1,15 @@
 include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/showcase/part ${CMAKE_SOURCE_DIR}/showcase/part/pageeffects )
 
 set(kpr_pageeffect_slidewipe_PART_SRCS Plugin.cpp
-KPrSlideWipeEffectFactory.cpp
-KPrSlideWipeFromBottomStrategy.cpp
-KPrSlideWipeFromLeftStrategy.cpp
-KPrSlideWipeFromRightStrategy.cpp
-KPrSlideWipeFromTopStrategy.cpp
-KPrSlideWipeToBottomStrategy.cpp
-KPrSlideWipeToLeftStrategy.cpp
-KPrSlideWipeToRightStrategy.cpp
-KPrSlideWipeToTopStrategy.cpp
+SCSlideWipeEffectFactory.cpp
+SCSlideWipeFromBottomStrategy.cpp
+SCSlideWipeFromLeftStrategy.cpp
+SCSlideWipeFromRightStrategy.cpp
+SCSlideWipeFromTopStrategy.cpp
+SCSlideWipeToBottomStrategy.cpp
+SCSlideWipeToLeftStrategy.cpp
+SCSlideWipeToRightStrategy.cpp
+SCSlideWipeToTopStrategy.cpp
 )
 
 

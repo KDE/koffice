@@ -20,13 +20,13 @@
 #ifndef KPRPAGEEFFECTRUNNER_H
 #define KPRPAGEEFFECTRUNNER_H
 
-#include "KPrPageEffect.h"
+#include "SCPageEffect.h"
 
 class QPixmap;
 class QPainter;
 class QWidget;
 
-class KPrPageEffectRunner
+class SCPageEffectRunner
 {
 public:
     /**
@@ -37,12 +37,12 @@ public:
      * @param w Widget on which the effect will be displayed
      * @param effect The effect which will be used for displaying the effect
      */
-    KPrPageEffectRunner(const QPixmap &oldPage, const QPixmap &newPage, QWidget *w, KPrPageEffect *effect);
+    SCPageEffectRunner(const QPixmap &oldPage, const QPixmap &newPage, QWidget *w, SCPageEffect *effect);
 
     /**
      * Destructor
      */
-    ~KPrPageEffectRunner();
+    ~SCPageEffectRunner();
 
     /**
      * Paint the page effect
@@ -100,8 +100,8 @@ public:
     QWidget * widget() const;
 
 protected:
-    KPrPageEffect * m_effect;
-    KPrPageEffect::Data m_data;
+    SCPageEffect * m_effect;
+    SCPageEffect::Data m_data;
 };
 
 #endif /* KPRPAGEEFFECTRUNNER_H */

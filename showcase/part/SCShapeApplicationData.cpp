@@ -18,20 +18,20 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include <KPrShapeApplicationData.h>
+#include <SCShapeApplicationData.h>
 
-#include "animations/KPrShapeAnimation.h"
+#include "animations/SCShapeAnimation.h"
 
-KPrShapeApplicationData::KPrShapeApplicationData()
+SCShapeApplicationData::SCShapeApplicationData()
 {
 }
 
-KPrShapeApplicationData::~KPrShapeApplicationData()
+SCShapeApplicationData::~SCShapeApplicationData()
 {
     qDeleteAll(m_animations);
 }
 
-QSet<KPrShapeAnimation *> & KPrShapeApplicationData::animations()
+QSet<SCShapeAnimation *> & SCShapeApplicationData::animations()
 {
     return m_animations;
 }

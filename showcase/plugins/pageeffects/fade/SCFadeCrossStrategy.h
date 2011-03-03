@@ -21,21 +21,21 @@
 #ifndef KPRFADECROSSSTRATEGY_H
 #define KPRFADECROSSSTRATEGY_H
 
-#include "pageeffects/KPrPageEffectStrategy.h"
+#include "pageeffects/SCPageEffectStrategy.h"
 
-class KPrFadeCrossStrategy : public KPrPageEffectStrategy
+class SCFadeCrossStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrFadeCrossStrategy();
-    virtual ~KPrFadeCrossStrategy();
+    SCFadeCrossStrategy();
+    virtual ~SCFadeCrossStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
 
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 
-    virtual void finish(const KPrPageEffect::Data &data);
+    virtual void finish(const SCPageEffect::Data &data);
 };
 
 #endif /* KPRFADECROSSSTRATEGY_H */

@@ -22,14 +22,14 @@
 
 #include <QUndoCommand>
 
-class KPrCustomSlideShows;
-class KPrDocument;
+class SCCustomSlideShows;
+class SCDocument;
 
-class KPrSetCustomSlideShowsCommand : public QUndoCommand
+class SCSetCustomSlideShowsCommand : public QUndoCommand
 {
 public:
-    KPrSetCustomSlideShowsCommand(KPrDocument * doc, KPrCustomSlideShows * newSlideShows, QUndoCommand *parent = 0);
-    virtual ~KPrSetCustomSlideShowsCommand();
+    SCSetCustomSlideShowsCommand(SCDocument * doc, SCCustomSlideShows * newSlideShows, QUndoCommand *parent = 0);
+    virtual ~SCSetCustomSlideShowsCommand();
 
     /// redo the command
     virtual void redo();
@@ -37,9 +37,9 @@ public:
     virtual void undo();
 
 private:
-    KPrDocument * m_doc;
-    KPrCustomSlideShows * m_oldSlideShows;
-    KPrCustomSlideShows * m_newSlideShows;
+    SCDocument * m_doc;
+    SCCustomSlideShows * m_oldSlideShows;
+    SCCustomSlideShows * m_newSlideShows;
     bool m_deleteNewSlideShows;
 };
 

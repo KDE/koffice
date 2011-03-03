@@ -16,7 +16,7 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#include "KPrPageEffectFactory.h"
+#include "SCPageEffectFactory.h"
 
 #define BOOST_MULTI_INDEX_DISABLE_SERIALIZATION
 #include <boost/multi_index_container.hpp>
@@ -27,25 +27,25 @@
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 
-#include "KPrPageEffectStrategy.h"
-#include "KPrDurationParser.h"
+#include "SCPageEffectStrategy.h"
+#include "SCDurationParser.h"
 
 #include <kdebug.h>
 
 struct SmilData : boost::multi_index::composite_key<
-    KPrPageEffectStrategy,
-    boost::multi_index::const_mem_fun<KPrPageEffectStrategy, const QString &, &KPrPageEffectStrategy::smilSubType>,
-    boost::multi_index::const_mem_fun<KPrPageEffectStrategy, bool, &KPrPageEffectStrategy::reverse>
+    SCPageEffectStrategy,
+    boost::multi_index::const_mem_fun<SCPageEffectStrategy, const QString &, &SCPageEffectStrategy::smilSubType>,
+    boost::multi_index::const_mem_fun<SCPageEffectStrategy, bool, &SCPageEffectStrategy::reverse>
 >
 {
 };
 
 
 typedef boost::multi_index_container<
-    KPrPageEffectStrategy *,
+    SCPageEffectStrategy *,
     boost::multi_index::indexed_by<
         boost::multi_index::ordered_unique<
-            boost::multi_index::const_mem_fun<KPrPageEffectStrategy, int, &KPrPageEffectStrategy::subType>
+            boost::multi_index::const_mem_fun<SCPageEffectStrategy, int, &SCPageEffectStrategy::subType>
         >,
         boost::multi_index::ordered_unique<
             SmilData
@@ -53,7 +53,7 @@ typedef boost::multi_index_container<
     >
 > EffectStrategies;
 
-struct KPrPageEffectFactory::Private
+struct SCPageEffectFactory::Private
 {
     Private(const QString & id, const QString & name)
     : id(id)
@@ -78,19 +78,19 @@ struct KPrPageEffectFactory::Private
     QList<QPair<QString, bool> > tags;
 };
 
-KPrPageEffectFactory::KPrPageEffectFactory(const QString & id, const QString & name)
+SCPageEffectFactory::SCPageEffectFactory(const QString & id, const QString & name)
 : d(new Private(id, name))
 {
 }
 
-KPrPageEffectFactory::~KPrPageEffectFactory()
+SCPageEffectFactory::~SCPageEffectFactory()
 {
     delete d;
 }
 
-KPrPageEffect * KPrPageEffectFactory::createPageEffect(const Properties & properties) const
+SCPageEffect * SCPageEffectFactory::createPageEffect(const Properties & properties) const
 {
-    KPrPageEffectStrategy * strategy = 0;
+    SCPageEffectStrategy * strategy = 0;
 
     EffectStrategies::iterator it(d->strategies.find(properties.subType));
 
@@ -99,13 +99,13 @@ KPrPageEffect * KPrPageEffectFactory::createPageEffect(const Properties & proper
     }
     Q_ASSERT(strategy);
 
-    return new KPrPageEffect(properties.duration, d->id, strategy);
+    return new SCPageEffect(properties.duration, d->id, strategy);
 }
 
-KPrPageEffect * KPrPageEffectFactory::createPageEffect(const KoXmlElement & element) const
+SCPageEffect * SCPageEffectFactory::createPageEffect(const KoXmlElement & element) const
 {
-    KPrPageEffectStrategy * strategy = 0;
-    KPrPageEffect * pageEffect = 0;
+    SCPageEffectStrategy * strategy = 0;
+    SCPageEffect * pageEffect = 0;
 
     if (element.hasAttributeNS(KoXmlNS::smil, "subtype")) {
         QString smilSubType(element.attributeNS(KoXmlNS::smil, "subtype"));
@@ -116,7 +116,7 @@ KPrPageEffect * KPrPageEffectFactory::createPageEffect(const KoXmlElement & elem
 
         int duration = 5000;
         if (element.hasAttributeNS(KoXmlNS::smil, "dur")) {
-            duration = KPrDurationParser::durationMs(element.attributeNS(KoXmlNS::smil, "dur"));
+            duration = SCDurationParser::durationMs(element.attributeNS(KoXmlNS::smil, "dur"));
             // TODO what if duration is -1
         }
         else if (element.hasAttributeNS(KoXmlNS::presentation, "transition-speed")) {
@@ -135,7 +135,7 @@ KPrPageEffect * KPrPageEffectFactory::createPageEffect(const KoXmlElement & elem
         if (it != d->strategies.get<1>().end()) {
             strategy = *it;
             strategy->loadOdfSmilAttributes(element);
-            pageEffect = new KPrPageEffect(duration, d->id, strategy);
+            pageEffect = new SCPageEffect(duration, d->id, strategy);
         }
         else {
             kWarning(33002) << "effect for " << d->id << smilSubType << reverse << "not supported";
@@ -145,27 +145,27 @@ KPrPageEffect * KPrPageEffectFactory::createPageEffect(const KoXmlElement & elem
     return pageEffect;
 }
 
-QString KPrPageEffectFactory::id() const
+QString SCPageEffectFactory::id() const
 {
     return d->id;
 }
 
-QString KPrPageEffectFactory::name() const
+QString SCPageEffectFactory::name() const
 {
     return d->name;
 }
 
-QList<int> KPrPageEffectFactory::subTypes() const
+QList<int> SCPageEffectFactory::subTypes() const
 {
     return d->subTypes;
 }
 
-QList<QPair<QString, bool> > KPrPageEffectFactory::tags() const
+QList<QPair<QString, bool> > SCPageEffectFactory::tags() const
 {
     return d->tags;
 }
 
-QMap<QString, int> KPrPageEffectFactory::subTypesByName() const
+QMap<QString, int> SCPageEffectFactory::subTypesByName() const
 {
     QMap<QString, int> nameToType;
     foreach(const int subType, d->subTypes) {
@@ -174,7 +174,7 @@ QMap<QString, int> KPrPageEffectFactory::subTypesByName() const
     return nameToType;
 }
 
-void KPrPageEffectFactory::addStrategy(KPrPageEffectStrategy * strategy)
+void SCPageEffectFactory::addStrategy(SCPageEffectStrategy * strategy)
 {
     bool inserted = d->strategies.insert(strategy).second;
     Q_ASSERT(inserted == true);

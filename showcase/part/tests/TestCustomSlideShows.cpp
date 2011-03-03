@@ -19,7 +19,7 @@
 
 #include "TestCustomSlideShows.h"
 
-#include <KPrCustomSlideShows.h>
+#include <SCCustomSlideShows.h>
 
 void TestCustomSlideShows::insertCustomSlideShow()
 {

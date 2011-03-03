@@ -24,10 +24,10 @@
 #include <KoToolBase.h>
 
 /**
- * The animation tool (associated with the clapperboard icon) is the tool in KPresenter where the user
+ * The animation tool (associated with the clapperboard icon) is the tool in Showcase where the user
  * animates shapes and sets up slide transitions.
  */
-class KPrAnimationTool : public KoToolBase
+class SCAnimationTool : public KoToolBase
 {
     Q_OBJECT
 public:
@@ -35,8 +35,8 @@ public:
      * Constructor for animation tool
      * @param canvas the canvas this tool will be working for.
      */
-    explicit KPrAnimationTool(KoCanvasBase *canvas);
-    virtual ~KPrAnimationTool();
+    explicit SCAnimationTool(KoCanvasBase *canvas);
+    virtual ~SCAnimationTool();
 
 public:
 

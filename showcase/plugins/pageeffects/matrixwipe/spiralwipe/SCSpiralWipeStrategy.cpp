@@ -17,28 +17,28 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSpiralWipeStrategy.h"
-#include "KPrSpiralWipeEffectFactory.h"
+#include "SCSpiralWipeStrategy.h"
+#include "SCSpiralWipeEffectFactory.h"
 
 static int getSubType(int firstLeg, bool clockwise, bool reverse)
 {
     if (!reverse) {
         switch (firstLeg) {
-            case 0: return clockwise ? KPrSpiralWipeEffectFactory::ClockwiseTopLeftIn : KPrSpiralWipeEffectFactory::CounterClockwiseTopLeftIn;
-            case 1: return clockwise ? KPrSpiralWipeEffectFactory::ClockwiseTopRightIn : KPrSpiralWipeEffectFactory::CounterClockwiseBottomLeftIn;
-            case 2: return clockwise ? KPrSpiralWipeEffectFactory::ClockwiseBottomRightIn : KPrSpiralWipeEffectFactory::CounterClockwiseBottomRightIn;
-            case 3: return clockwise ? KPrSpiralWipeEffectFactory::ClockwiseBottomLeftIn : KPrSpiralWipeEffectFactory::CounterClockwiseTopRightIn;
+            case 0: return clockwise ? SCSpiralWipeEffectFactory::ClockwiseTopLeftIn : SCSpiralWipeEffectFactory::CounterClockwiseTopLeftIn;
+            case 1: return clockwise ? SCSpiralWipeEffectFactory::ClockwiseTopRightIn : SCSpiralWipeEffectFactory::CounterClockwiseBottomLeftIn;
+            case 2: return clockwise ? SCSpiralWipeEffectFactory::ClockwiseBottomRightIn : SCSpiralWipeEffectFactory::CounterClockwiseBottomRightIn;
+            case 3: return clockwise ? SCSpiralWipeEffectFactory::ClockwiseBottomLeftIn : SCSpiralWipeEffectFactory::CounterClockwiseTopRightIn;
         }
     } else {
         switch (firstLeg) {
-            case 0: return !clockwise ? KPrSpiralWipeEffectFactory::ClockwiseTopLeftOut : KPrSpiralWipeEffectFactory::CounterClockwiseTopLeftOut;
-            case 1: return !clockwise ? KPrSpiralWipeEffectFactory::ClockwiseTopRightOut : KPrSpiralWipeEffectFactory::CounterClockwiseBottomLeftOut;
-            case 2: return !clockwise ? KPrSpiralWipeEffectFactory::ClockwiseBottomRightOut : KPrSpiralWipeEffectFactory::CounterClockwiseBottomRightOut;
-            case 3: return !clockwise ? KPrSpiralWipeEffectFactory::ClockwiseBottomLeftOut : KPrSpiralWipeEffectFactory::CounterClockwiseTopRightOut;
+            case 0: return !clockwise ? SCSpiralWipeEffectFactory::ClockwiseTopLeftOut : SCSpiralWipeEffectFactory::CounterClockwiseTopLeftOut;
+            case 1: return !clockwise ? SCSpiralWipeEffectFactory::ClockwiseTopRightOut : SCSpiralWipeEffectFactory::CounterClockwiseBottomLeftOut;
+            case 2: return !clockwise ? SCSpiralWipeEffectFactory::ClockwiseBottomRightOut : SCSpiralWipeEffectFactory::CounterClockwiseBottomRightOut;
+            case 3: return !clockwise ? SCSpiralWipeEffectFactory::ClockwiseBottomLeftOut : SCSpiralWipeEffectFactory::CounterClockwiseTopRightOut;
         }
     }
     // not reached
-    return KPrSpiralWipeEffectFactory::ClockwiseTopLeftIn;
+    return SCSpiralWipeEffectFactory::ClockwiseTopLeftIn;
 }
 
 static const char * getSmilSubType(int firstLeg, bool clockwise)
@@ -52,17 +52,17 @@ static const char * getSmilSubType(int firstLeg, bool clockwise)
     }
 }
 
-KPrSpiralWipeStrategy::KPrSpiralWipeStrategy(int firstLeg, bool clockwise, bool reverse)
-    : KPrMatrixWipeStrategy(getSubType(firstLeg, clockwise, reverse), "spiralWipe", getSmilSubType(firstLeg, clockwise), reverse),
+SCSpiralWipeStrategy::SCSpiralWipeStrategy(int firstLeg, bool clockwise, bool reverse)
+    : SCMatrixWipeStrategy(getSubType(firstLeg, clockwise, reverse), "spiralWipe", getSmilSubType(firstLeg, clockwise), reverse),
     m_firstLeg(firstLeg), m_clockwise(clockwise)
 {
 }
 
-KPrSpiralWipeStrategy::~KPrSpiralWipeStrategy()
+SCSpiralWipeStrategy::~SCSpiralWipeStrategy()
 {
 }
 
-int KPrSpiralWipeStrategy::squareIndex(int x, int y, int columns, int rows)
+int SCSpiralWipeStrategy::squareIndex(int x, int y, int columns, int rows)
 {
     int curRing = qMin(qMin(x, y), qMin(columns - x - 1, rows - y - 1));
     int maxRingSize = (columns + rows - 2) * 2;
@@ -139,7 +139,7 @@ int KPrSpiralWipeStrategy::squareIndex(int x, int y, int columns, int rows)
     return reverse() ? columns * rows - passed - 1 : passed;
 }
 
-int KPrSpiralWipeStrategy::maxIndex(int columns, int rows)
+int SCSpiralWipeStrategy::maxIndex(int columns, int rows)
 {
     return columns * rows;
 }

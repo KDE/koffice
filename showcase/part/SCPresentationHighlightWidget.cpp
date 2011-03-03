@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresentationHighlightWidget.h"
+#include "SCPresentationHighlightWidget.h"
 
 #include <KoPACanvas.h>
 
@@ -27,8 +27,8 @@
 #include <QColor>
 #include <QPainter>
 
-KPrPresentationHighlightWidget::KPrPresentationHighlightWidget(KoPACanvasBase * canvas)
-: KPrPresentationToolEventForwarder(canvas)
+SCPresentationHighlightWidget::SCPresentationHighlightWidget(KoPACanvasBase * canvas)
+: SCPresentationToolEventForwarder(canvas)
 , m_size(canvas->canvasWidget()->size())
 {
     // The focus and the track for have the mouse position every time
@@ -41,12 +41,12 @@ KPrPresentationHighlightWidget::KPrPresentationHighlightWidget(KoPACanvasBase * 
     update();
 }
 
-KPrPresentationHighlightWidget::~KPrPresentationHighlightWidget()
+SCPresentationHighlightWidget::~SCPresentationHighlightWidget()
 {
 }
 
 /** paintEvent call with the update in the mouseMoveEvent */
-void KPrPresentationHighlightWidget::paintEvent(QPaintEvent * event)
+void SCPresentationHighlightWidget::paintEvent(QPaintEvent * event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
@@ -67,7 +67,7 @@ void KPrPresentationHighlightWidget::paintEvent(QPaintEvent * event)
 }
 
 /** Take the mouse position every time the mouse is moving */
-void KPrPresentationHighlightWidget::mouseMoveEvent(QMouseEvent* e)
+void SCPresentationHighlightWidget::mouseMoveEvent(QMouseEvent* e)
 {
     // Save the position of the mouse
     m_center = e->pos();

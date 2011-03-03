@@ -20,13 +20,13 @@
 #ifndef KPRELLIPSEWIPEEFFECTFACTORY_H
 #define KPRELLIPSEWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class KPrEllipseWipeEffectFactory : public KPrPageEffectFactory
+class SCEllipseWipeEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrEllipseWipeEffectFactory();
-    virtual ~KPrEllipseWipeEffectFactory();
+    SCEllipseWipeEffectFactory();
+    virtual ~SCEllipseWipeEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

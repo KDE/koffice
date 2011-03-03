@@ -24,18 +24,18 @@
 #include <KUrl>
 #include <QStringList>
 
-class KPrView;
+class SCView;
 class KoPAPageBase;
 class KJob;
 
-class KPrHtmlExport : public QObject
+class SCHtmlExport : public QObject
 {
     Q_OBJECT
 public:
     struct Parameter {
         Parameter() {}
 
-        Parameter(KUrl styleUrl, KPrView *kprView, QList<KoPAPageBase*> slides, KUrl destination,
+        Parameter(KUrl styleUrl, SCView *kprView, QList<KoPAPageBase*> slides, KUrl destination,
                   QString author, QString title, QStringList slidesNames, bool openBrowser)
                       : styleUrl(styleUrl)
                       , kprView(kprView)
@@ -49,7 +49,7 @@ public:
         }
 
         KUrl styleUrl;
-        KPrView *kprView;
+        SCView *kprView;
         QList<KoPAPageBase*> slides;
         KUrl destination;
         QString author;
@@ -58,8 +58,8 @@ public:
         bool openBrowser;
     };
 
-    KPrHtmlExport();
-    ~KPrHtmlExport();
+    SCHtmlExport();
+    ~SCHtmlExport();
     void exportHtml(const Parameter &parameters);
 
     /**

@@ -17,14 +17,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrShapeAnimationRegistry.h"
-#include "KPrShapeAnimationFactory.h"
+#include "SCShapeAnimationRegistry.h"
+#include "SCShapeAnimationFactory.h"
 
 #include <kglobal.h>
 #include <KoPluginLoader.h>
 #include <KoXmlReader.h>
 
-class KPrShapeAnimationRegistry::Singleton
+class SCShapeAnimationRegistry::Singleton
 {
 public:
     Singleton()
@@ -47,30 +47,30 @@ public:
                                           config);
     }
 
-    KPrShapeAnimationRegistry q;
+    SCShapeAnimationRegistry q;
 };
 
-K_GLOBAL_STATIC(KPrShapeAnimationRegistry::Singleton, singleton)
+K_GLOBAL_STATIC(SCShapeAnimationRegistry::Singleton, singleton)
 
-KPrShapeAnimationRegistry * KPrShapeAnimationRegistry::instance()
+SCShapeAnimationRegistry * SCShapeAnimationRegistry::instance()
 {
     return &(singleton->q);
 }
 
-KPrShapeAnimationOld * KPrShapeAnimationRegistry::createShapeAnimation(const KoXmlElement & element)
+SCShapeAnimationOld * SCShapeAnimationRegistry::createShapeAnimation(const KoXmlElement & element)
 {
     Q_UNUSED(element);
     //TODO
     return 0;
 }
 
-KPrShapeAnimationRegistry::KPrShapeAnimationRegistry()
+SCShapeAnimationRegistry::SCShapeAnimationRegistry()
 {
 }
 
-KPrShapeAnimationRegistry::~KPrShapeAnimationRegistry()
+SCShapeAnimationRegistry::~SCShapeAnimationRegistry()
 {
-    foreach (KPrShapeAnimationFactory* factory, values())
+    foreach (SCShapeAnimationFactory* factory, values())
     {
         delete factory;
     }

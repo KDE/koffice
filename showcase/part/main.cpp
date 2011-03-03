@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrAboutData.h"
+#include "SCAboutData.h"
 
 #include <KoApplication.h>
 

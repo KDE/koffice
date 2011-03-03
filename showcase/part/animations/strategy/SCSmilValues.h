@@ -20,24 +20,24 @@
 #ifndef KPRSMILVALUES_H
 #define KPRSMILVALUES_H
 
-#include "KPrAnimationValue.h"
-#include "KPrValueParser.h"
+#include "SCAnimationValue.h"
+#include "SCValueParser.h"
 #include <QList>
 #include <QPair>
 
-class KPrShapeAnimation;
+class SCShapeAnimation;
 
-class KPrSmilValues : public KPrAnimationValue
+class SCSmilValues : public SCAnimationValue
 {
 public:
-    KPrSmilValues(KPrShapeAnimation *shapeAnimation);
+    SCSmilValues(SCShapeAnimation *shapeAnimation);
     virtual qreal value(qreal time) const;
     virtual qreal endValue() const;
     virtual qreal startValue() const;
     bool loadValues(QString values, QString keyTimes, QString keySplines, SmilCalcMode calcMode);
     bool saveOdf(KoPASavingContext &paContext) const;
 protected:
-    QList<KPrValueParser> m_values;
+    QList<SCValueParser> m_values;
     QList<qreal> m_times;
     QList<qreal> m_splines;
 };

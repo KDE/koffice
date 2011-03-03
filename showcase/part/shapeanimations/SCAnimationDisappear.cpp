@@ -17,61 +17,61 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimationDisappear.h"
+#include "SCAnimationDisappear.h"
 
 #include <QPainter>
 #include <KoCanvasBase.h>
 #include <KoShape.h>
 #include <KoViewConverter.h>
 
-#include "KPrAnimationData.h"
+#include "SCAnimationData.h"
 
-KPrAnimationDisappear::KPrAnimationDisappear(KoShape * shape, int step)
-: KPrShapeAnimationOld(shape, step, Disappear)
+SCAnimationDisappear::SCAnimationDisappear(KoShape * shape, int step)
+: SCShapeAnimationOld(shape, step, Disappear)
 {
 }
 
-KPrAnimationDisappear::~KPrAnimationDisappear()
+SCAnimationDisappear::~SCAnimationDisappear()
 {
 }
 
-KPrAnimationData * KPrAnimationDisappear::animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect)
+SCAnimationData * SCAnimationDisappear::animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect)
 {
     Q_UNUSED(pageRect);
-    KPrAnimationDataTranslate * data = new KPrAnimationDataTranslate(canvas, shapeManager, m_shape->boundingRect());
+    SCAnimationDataTranslate * data = new SCAnimationDataTranslate(canvas, shapeManager, m_shape->boundingRect());
     double x = data->m_boundingRect.x() + data->m_boundingRect.width() + 2.0;
     data->m_translate = QPointF(-x, 0);
     data->m_timeLine.setDuration(1);
     return data;
 }
 
-bool KPrAnimationDisappear::animate(QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData )
+bool SCAnimationDisappear::animate(QPainter &painter, const KoViewConverter &converter, SCAnimationData * animationData )
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    SCAnimationDataTranslate * data = dynamic_cast<SCAnimationDataTranslate *>(animationData);
     Q_ASSERT(data);
     painter.translate(converter.documentToView(data->m_translate));
     return data->m_finished;
 }
 
-void KPrAnimationDisappear::animateRect(QRectF & rect, KPrAnimationData * animationData)
+void SCAnimationDisappear::animateRect(QRectF & rect, SCAnimationData * animationData)
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    SCAnimationDataTranslate * data = dynamic_cast<SCAnimationDataTranslate *>(animationData);
     Q_ASSERT(data);
     rect.translate(data->m_translate);
 }
 
-void KPrAnimationDisappear::next(int currentTime, KPrAnimationData * animationData)
+void SCAnimationDisappear::next(int currentTime, SCAnimationData * animationData)
 {
     Q_UNUSED(currentTime);
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    SCAnimationDataTranslate * data = dynamic_cast<SCAnimationDataTranslate *>(animationData);
     Q_ASSERT(data);
     data->m_canvas->updateCanvas(data->m_boundingRect.translated(data->m_translate));
     data->m_finished = true;
 }
 
-void KPrAnimationDisappear::finish(KPrAnimationData * animationData)
+void SCAnimationDisappear::finish(SCAnimationData * animationData)
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    SCAnimationDataTranslate * data = dynamic_cast<SCAnimationDataTranslate *>(animationData);
     Q_ASSERT(data);
     data->m_canvas->updateCanvas(data->m_boundingRect.translated(data->m_translate));
 }

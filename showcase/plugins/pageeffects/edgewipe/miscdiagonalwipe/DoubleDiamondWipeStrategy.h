@@ -20,20 +20,20 @@
 #ifndef DOUBLEDIAMONDWIPESTRATEGY_H
 #define DOUBLEDIAMONDWIPESTRATEGY_H
 
-#include <KPrPageEffectStrategy.h>
+#include <SCPageEffectStrategy.h>
 
-class DoubleDiamondWipeStrategy : public KPrPageEffectStrategy
+class DoubleDiamondWipeStrategy : public SCPageEffectStrategy
 {
 public:
     DoubleDiamondWipeStrategy();
     virtual ~DoubleDiamondWipeStrategy();
 
-    /// reimplemented from KPrPageEffectStrategy
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
-    /// reimplemented from KPrPageEffectStrategy
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
-    /// reimplemented from KPrPageEffectStrategy
-    virtual void next(const KPrPageEffect::Data &data);
+    /// reimplemented from SCPageEffectStrategy
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
+    /// reimplemented from SCPageEffectStrategy
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
+    /// reimplemented from SCPageEffectStrategy
+    virtual void next(const SCPageEffect::Data &data);
 
 private:
     /// calculates clip path for given step

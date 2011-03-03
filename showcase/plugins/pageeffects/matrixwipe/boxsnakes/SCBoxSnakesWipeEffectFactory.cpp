@@ -17,32 +17,32 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrBoxSnakesWipeEffectFactory.h"
+#include "SCBoxSnakesWipeEffectFactory.h"
 
 #include <klocale.h>
 
-#include "KPrBoxSnakesWipeStrategy.h"
+#include "SCBoxSnakesWipeStrategy.h"
 
 #define BoxSnakesWipeEffectId "BoxSnakesWipeEffect"
 
-KPrBoxSnakesWipeEffectFactory::KPrBoxSnakesWipeEffectFactory()
-: KPrPageEffectFactory(BoxSnakesWipeEffectId, i18n("Box Snakes"))
+SCBoxSnakesWipeEffectFactory::SCBoxSnakesWipeEffectFactory()
+: SCPageEffectFactory(BoxSnakesWipeEffectId, i18n("Box Snakes"))
 {
-    addStrategy(new KPrBoxSnakesWipeStrategy(2, 1, true, false));
-    addStrategy(new KPrBoxSnakesWipeStrategy(2, 1, false, false));
-    addStrategy(new KPrBoxSnakesWipeStrategy(1, 2, true, false));
-    addStrategy(new KPrBoxSnakesWipeStrategy(1, 2, false, false));
-    addStrategy(new KPrBoxSnakesWipeStrategy(2, 2, true, false));
-    addStrategy(new KPrBoxSnakesWipeStrategy(2, 2, false, false));
-    addStrategy(new KPrBoxSnakesWipeStrategy(2, 1, true, true));
-    addStrategy(new KPrBoxSnakesWipeStrategy(2, 1, false, true));
-    addStrategy(new KPrBoxSnakesWipeStrategy(1, 2, true, true));
-    addStrategy(new KPrBoxSnakesWipeStrategy(1, 2, false, true));
-    addStrategy(new KPrBoxSnakesWipeStrategy(2, 2, true, true));
-    addStrategy(new KPrBoxSnakesWipeStrategy(2, 2, false, true));
+    addStrategy(new SCBoxSnakesWipeStrategy(2, 1, true, false));
+    addStrategy(new SCBoxSnakesWipeStrategy(2, 1, false, false));
+    addStrategy(new SCBoxSnakesWipeStrategy(1, 2, true, false));
+    addStrategy(new SCBoxSnakesWipeStrategy(1, 2, false, false));
+    addStrategy(new SCBoxSnakesWipeStrategy(2, 2, true, false));
+    addStrategy(new SCBoxSnakesWipeStrategy(2, 2, false, false));
+    addStrategy(new SCBoxSnakesWipeStrategy(2, 1, true, true));
+    addStrategy(new SCBoxSnakesWipeStrategy(2, 1, false, true));
+    addStrategy(new SCBoxSnakesWipeStrategy(1, 2, true, true));
+    addStrategy(new SCBoxSnakesWipeStrategy(1, 2, false, true));
+    addStrategy(new SCBoxSnakesWipeStrategy(2, 2, true, true));
+    addStrategy(new SCBoxSnakesWipeStrategy(2, 2, false, true));
 }
 
-KPrBoxSnakesWipeEffectFactory::~KPrBoxSnakesWipeEffectFactory()
+SCBoxSnakesWipeEffectFactory::~SCBoxSnakesWipeEffectFactory()
 {
 }
 
@@ -61,7 +61,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Four Box Horizontal Out")
 };
 
-QString KPrBoxSnakesWipeEffectFactory::subTypeName(int subType) const
+QString SCBoxSnakesWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

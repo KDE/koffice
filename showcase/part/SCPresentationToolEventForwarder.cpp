@@ -17,30 +17,30 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresentationToolEventForwarder.h"
+#include "SCPresentationToolEventForwarder.h"
 
 #include <KoPACanvas.h>
 
-KPrPresentationToolEventForwarder::KPrPresentationToolEventForwarder(KoPACanvasBase *canvas)
+SCPresentationToolEventForwarder::SCPresentationToolEventForwarder(KoPACanvasBase *canvas)
 :QWidget(canvas->canvasWidget())
 {
 }
 
-KPrPresentationToolEventForwarder::~KPrPresentationToolEventForwarder()
+SCPresentationToolEventForwarder::~SCPresentationToolEventForwarder()
 {
 }
 
-void KPrPresentationToolEventForwarder::receiveMousePressEvent(QMouseEvent *event)
+void SCPresentationToolEventForwarder::receiveMousePressEvent(QMouseEvent *event)
 {
     mousePressEvent(event);
 }
 
-void KPrPresentationToolEventForwarder::receiveMouseMoveEvent(QMouseEvent *event)
+void SCPresentationToolEventForwarder::receiveMouseMoveEvent(QMouseEvent *event)
 {
     mouseMoveEvent(event);
 }
 
-void KPrPresentationToolEventForwarder::receiveMouseReleaseEvent(QMouseEvent *event)
+void SCPresentationToolEventForwarder::receiveMouseReleaseEvent(QMouseEvent *event)
 {
     mouseReleaseEvent(event);
 }

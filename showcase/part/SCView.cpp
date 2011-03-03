@@ -19,7 +19,7 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#include "KPrView.h"
+#include "SCView.h"
 
 #include <klocale.h>
 #include <ktoggleaction.h>
@@ -38,43 +38,43 @@
 #include <KoShapeRegistry.h>
 #include <KoShapeLayer.h>
 
-#include "KPrDocument.h"
-#include "KPrPage.h"
-#include "KPrMasterPage.h"
-#include "KPrPageApplicationData.h"
-#include "KPrViewAdaptor.h"
-#include "KPrViewModePresentation.h"
-#include "KPrViewModeNotes.h"
-#include "KPrViewModeSlidesSorter.h"
-#include "KPrShapeManagerDisplayMasterStrategy.h"
-#include "KPrPageSelectStrategyActive.h"
-#include "KPrPicturesImport.h"
-#include "commands/KPrAnimationCreateCommand.h"
-#include "commands/KPrSetCustomSlideShowsCommand.h"
-#include "dockers/KPrPageLayoutDockerFactory.h"
-#include "dockers/KPrPageLayoutDocker.h"
-#include "KPrHtmlExport.h"
-#include "KPrCustomSlideShows.h"
-#include "ui/KPrCustomSlideShowsDialog.h"
-#include "ui/KPrConfigureSlideShowDialog.h"
-#include "ui/KPrConfigurePresenterViewDialog.h"
-#include "ui/KPrHtmlExportDialog.h"
+#include "SCDocument.h"
+#include "SCPage.h"
+#include "SCMasterPage.h"
+#include "SCPageApplicationData.h"
+#include "SCViewAdaptor.h"
+#include "SCViewModePresentation.h"
+#include "SCViewModeNotes.h"
+#include "SCViewModeSlidesSorter.h"
+#include "SCShapeManagerDisplayMasterStrategy.h"
+#include "SCPageSelectStrategyActive.h"
+#include "SCPicturesImport.h"
+#include "commands/SCAnimationCreateCommand.h"
+#include "commands/SCSetCustomSlideShowsCommand.h"
+#include "dockers/SCPageLayoutDockerFactory.h"
+#include "dockers/SCPageLayoutDocker.h"
+#include "SCHtmlExport.h"
+#include "SCCustomSlideShows.h"
+#include "ui/SCCustomSlideShowsDialog.h"
+#include "ui/SCConfigureSlideShowDialog.h"
+#include "ui/SCConfigurePresenterViewDialog.h"
+#include "ui/SCHtmlExportDialog.h"
 #include <QtGui/QDesktopWidget>
 
-#include "KPrPdfPrintJob.h"
+#include "SCPdfPrintJob.h"
 
-KPrView::KPrView(KPrDocument *document, QWidget *parent)
+SCView::SCView(SCDocument *document, QWidget *parent)
   : KoPAView(document, parent)
-  , m_presentationMode(new KPrViewModePresentation(this, kopaCanvas()))
+  , m_presentationMode(new SCViewModePresentation(this, kopaCanvas()))
   , m_normalMode(viewMode())
-  , m_notesMode(new KPrViewModeNotes(this, kopaCanvas()))
-//   , m_slidesSorterMode(new KPrViewModeSlidesSorter(this, kopaCanvas()))
-  , m_dbus(new KPrViewAdaptor(this))
+  , m_notesMode(new SCViewModeNotes(this, kopaCanvas()))
+//   , m_slidesSorterMode(new SCViewModeSlidesSorter(this, kopaCanvas()))
+  , m_dbus(new SCViewAdaptor(this))
 {
     initGUI();
     initActions();
 
-    // Change strings because in KPresenter it's called slides and not pages
+    // Change strings because in Showcase it's called slides and not pages
     actionCollection()->action("view_masterpages")->setText(i18n("Show Master Slides"));
     actionCollection()->action("import_document")->setText(i18n("Import Slideshow..."));
     actionCollection()->action("page_insertpage")->setText(i18n("Insert Slide"));
@@ -91,51 +91,51 @@ KPrView::KPrView(KPrDocument *document, QWidget *parent)
     actionCollection()->action("page_next")->setText(i18n("Next Slide"));
     actionCollection()->action("page_first")->setText(i18n("First Slide"));
     actionCollection()->action("page_last")->setText(i18n("Last Slide"));
-    actionCollection()->action("configure")->setText(i18n("Configure KPresenter..."));
+    actionCollection()->action("configure")->setText(i18n("Configure Showcase..."));
 
-    masterShapeManager()->setPaintingStrategy(new KPrShapeManagerDisplayMasterStrategy(masterShapeManager(),
-                                                   new KPrPageSelectStrategyActive(kopaCanvas())));
+    masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(masterShapeManager(),
+                                                   new SCPageSelectStrategyActive(kopaCanvas())));
 
     KoPACanvas * canvas = dynamic_cast<KoPACanvas*>(kopaCanvas());
     if (canvas) {
-        m_slidesSorterMode = new KPrViewModeSlidesSorter(this, canvas);
+        m_slidesSorterMode = new SCViewModeSlidesSorter(this, canvas);
     }
 }
 
-KPrView::~KPrView()
+SCView::~SCView()
 {
     delete m_presentationMode;
     delete m_notesMode;
     delete m_slidesSorterMode;
 }
 
-KoViewConverter * KPrView::viewConverter(KoPACanvasBase * canvas)
+KoViewConverter * SCView::viewConverter(KoPACanvasBase * canvas)
 {
     Q_ASSERT(viewMode());
     return viewMode()->viewConverter(canvas);
 }
 
-KPrDocument * KPrView::kprDocument() const
+SCDocument * SCView::kprDocument() const
 {
-    return static_cast<KPrDocument *>(kopaDocument());
+    return static_cast<SCDocument *>(kopaDocument());
 }
 
-KPrViewAdaptor * KPrView::dbusObject() const
+SCViewAdaptor * SCView::dbusObject() const
 {
     return m_dbus;
 }
 
-KPrViewModePresentation * KPrView::presentationMode() const
+SCViewModePresentation * SCView::presentationMode() const
 {
     return m_presentationMode;
 }
 
-bool KPrView::isPresentationRunning() const
+bool SCView::isPresentationRunning() const
 {
     return (viewMode() == m_presentationMode);
 }
 
-void KPrView::drawOnPresentation()
+void SCView::drawOnPresentation()
 {
     if (isPresentationRunning())
     {
@@ -143,7 +143,7 @@ void KPrView::drawOnPresentation()
     }
 }
 
-void KPrView::highlightPresentation()
+void SCView::highlightPresentation()
 {
     if (isPresentationRunning())
     {
@@ -151,7 +151,7 @@ void KPrView::highlightPresentation()
     }
 }
 
-void KPrView::blackPresentation()
+void SCView::blackPresentation()
 {
     if (isPresentationRunning())
     {
@@ -159,12 +159,12 @@ void KPrView::blackPresentation()
     }
 }
 
-void KPrView::initGUI()
+void SCView::initGUI()
 {
     // add page effect docker to the main window
     if (shell()) {
-        KPrPageLayoutDockerFactory pageLayoutFactory;
-        KPrPageLayoutDocker *pageLayoutDocker = qobject_cast<KPrPageLayoutDocker*>(shell()->createDockWidget(&pageLayoutFactory));
+        SCPageLayoutDockerFactory pageLayoutFactory;
+        SCPageLayoutDocker *pageLayoutDocker = qobject_cast<SCPageLayoutDocker*>(shell()->createDockWidget(&pageLayoutFactory));
         pageLayoutDocker->setView(this);
     }
 
@@ -176,7 +176,7 @@ void KPrView::initGUI()
     }
 }
 
-void KPrView::initActions()
+void SCView::initActions()
 {
     if (!kopaDocument()->isReadWrite())
        setXMLFile("showcase_readonly.rc");
@@ -264,7 +264,7 @@ this);
     m_actionBlackPresentation->setEnabled(false);
 }
 
-void KPrView::startPresentation()
+void SCView::startPresentation()
 {
     m_actionDrawOnPresentation->setEnabled(true);
     m_actionHighlightPresentation->setEnabled(true);
@@ -272,9 +272,9 @@ void KPrView::startPresentation()
     setViewMode(m_presentationMode);
 }
 
-void KPrView::startPresentationFromBeginning()
+void SCView::startPresentationFromBeginning()
 {
-    KPrDocument * doc = dynamic_cast<KPrDocument *>(kopaDocument());
+    SCDocument * doc = dynamic_cast<SCDocument *>(kopaDocument());
     QList<KoPAPageBase*> slideshow = doc->slideShow();
     if (!slideshow.isEmpty()) {
         setActivePage(slideshow.first());
@@ -282,7 +282,7 @@ void KPrView::startPresentationFromBeginning()
     startPresentation();
 }
 
-void KPrView::stopPresentation()
+void SCView::stopPresentation()
 {
     m_actionDrawOnPresentation->setEnabled(false);
     m_actionHighlightPresentation->setEnabled(false);
@@ -293,7 +293,7 @@ void KPrView::stopPresentation()
     }
 }
 
-void KPrView::createAnimation()
+void SCView::createAnimation()
 {
     static int animationcount = 0;
     KoSelection * selection = kopaCanvas()->shapeManager()->selection();
@@ -301,20 +301,20 @@ void KPrView::createAnimation()
     foreach(KoShape * shape, selectedShapes)
     {
         Q_UNUSED(shape);
-        /*KPrShapeAnimationOld * animation = new KPrAnimationMoveAppear(shape, animationcount);
-        KPrDocument * doc = static_cast<KPrDocument *>(kopaDocument());
-        KPrAnimationCreateCommand * command = new KPrAnimationCreateCommand(doc, animation);
+        /*SCShapeAnimationOld * animation = new SCAnimationMoveAppear(shape, animationcount);
+        SCDocument * doc = static_cast<SCDocument *>(kopaDocument());
+        SCAnimationCreateCommand * command = new SCAnimationCreateCommand(doc, animation);
         kopaCanvas()->addCommand(command);*/
     }
     animationcount = (animationcount + 1) % 3;
 }
 
-void KPrView::showNormal()
+void SCView::showNormal()
 {
     setViewMode(m_normalMode);
 }
 
-void KPrView::showNotes()
+void SCView::showNotes()
 {
     // Make sure that we are not in master mode
     // since notes master is not supported yet
@@ -325,7 +325,7 @@ void KPrView::showNotes()
     setViewMode(m_notesMode);
 }
 
-void KPrView::showSlidesSorter()
+void SCView::showSlidesSorter()
 {
     // Make sure that we are not in master mode
     // Sort master does not make sense
@@ -336,24 +336,24 @@ void KPrView::showSlidesSorter()
     setViewMode(m_slidesSorterMode);
 }
 
-void KPrView::dialogCustomSlideShows()
+void SCView::dialogCustomSlideShows()
 {
-    KPrDocument *doc = static_cast<KPrDocument *>(kopaDocument());
-    KPrCustomSlideShows *finalSlideShows;
-    KPrCustomSlideShowsDialog dialog(this, doc->customSlideShows(), doc, finalSlideShows);
+    SCDocument *doc = static_cast<SCDocument *>(kopaDocument());
+    SCCustomSlideShows *finalSlideShows;
+    SCCustomSlideShowsDialog dialog(this, doc->customSlideShows(), doc, finalSlideShows);
     dialog.setModal(true);
     if (dialog.exec() == QDialog::Accepted) {
-        kopaCanvas()->addCommand(new KPrSetCustomSlideShowsCommand(doc, finalSlideShows));
+        kopaCanvas()->addCommand(new SCSetCustomSlideShowsCommand(doc, finalSlideShows));
     }
     else {
         delete finalSlideShows;
     }
 }
 
-void KPrView::configureSlideShow()
+void SCView::configureSlideShow()
 {
-    KPrDocument *doc = static_cast<KPrDocument *>(kopaDocument());
-    KPrConfigureSlideShowDialog *dialog = new KPrConfigureSlideShowDialog(doc, this);
+    SCDocument *doc = static_cast<SCDocument *>(kopaDocument());
+    SCConfigureSlideShowDialog *dialog = new SCConfigureSlideShowDialog(doc, this);
 
     if (dialog->exec() == QDialog::Accepted) {
         doc->setActiveCustomSlideShow(dialog->activeCustomSlideShow());
@@ -361,10 +361,10 @@ void KPrView::configureSlideShow()
     delete dialog;
 }
 
-void KPrView::configurePresenterView()
+void SCView::configurePresenterView()
 {
-    KPrDocument *doc = static_cast<KPrDocument *>(kopaDocument());
-    KPrConfigurePresenterViewDialog *dialog = new KPrConfigurePresenterViewDialog(doc, this);
+    SCDocument *doc = static_cast<SCDocument *>(kopaDocument());
+    SCConfigurePresenterViewDialog *dialog = new SCConfigurePresenterViewDialog(doc, this);
 
     if (dialog->exec() == QDialog::Accepted) {
         doc->setPresentationMonitor(dialog->presentationMonitor());
@@ -373,38 +373,38 @@ void KPrView::configurePresenterView()
     delete dialog;
 }
 
-void KPrView::exportToHtml()
+void SCView::exportToHtml()
 {
-    KPrHtmlExportDialog *dialog = new KPrHtmlExportDialog(kopaDocument()->pages(),koDocument()->documentInfo()->aboutInfo("title"),
+    SCHtmlExportDialog *dialog = new SCHtmlExportDialog(kopaDocument()->pages(),koDocument()->documentInfo()->aboutInfo("title"),
                                                           koDocument()->documentInfo()->authorInfo("creator"), this);
     if (dialog->exec() == QDialog::Accepted && !dialog->checkedSlides().isEmpty()) {
         // Get the export directory
         KUrl directoryUrl = KFileDialog::getExistingDirectoryUrl();
         if (directoryUrl.isValid()) {
             directoryUrl.adjustPath(KUrl::AddTrailingSlash);
-            KPrHtmlExport exportHtml;
-            exportHtml.exportHtml(KPrHtmlExport::Parameter(dialog->templateUrl(), this, dialog->checkedSlides(),
+            SCHtmlExport exportHtml;
+            exportHtml.exportHtml(SCHtmlExport::Parameter(dialog->templateUrl(), this, dialog->checkedSlides(),
                                                            directoryUrl, dialog->author(),
                                                            dialog->title(), dialog->slidesNames(), dialog->openBrowser()));
         }
    }
 }
 
-KoPrintJob *KPrView::createPdfPrintJob()
+KoPrintJob *SCView::createPdfPrintJob()
 {
-    return new KPrPdfPrintJob(this);
+    return new SCPdfPrintJob(this);
 }
 
 
-void KPrView::insertPictures()
+void SCView::insertPictures()
 {
     // Make sure that we are in the normal mode and not on master pages
     setViewMode(m_normalMode);
     if (viewMode()->masterMode()) {
         setMasterMode(false);
     }
-    KPrPicturesImport pictureImport;
+    SCPicturesImport pictureImport;
     pictureImport.import(this);
 }
 
-#include "KPrView.moc"
+#include "SCView.moc"

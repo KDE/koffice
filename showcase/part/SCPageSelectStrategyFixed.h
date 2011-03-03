@@ -20,16 +20,16 @@
 #ifndef KPRPAGESELECTSTRATEGYFIXED_H
 #define KPRPAGESELECTSTRATEGYFIXED_H
 
-#include "KPrPageSelectStrategyBase.h"
+#include "SCPageSelectStrategyBase.h"
 
 /**
  * Get a fixed page
  */
-class KPrPageSelectStrategyFixed : public KPrPageSelectStrategyBase
+class SCPageSelectStrategyFixed : public SCPageSelectStrategyBase
 {
 public:
-    KPrPageSelectStrategyFixed(const KoPAPageBase *page);
-    virtual ~KPrPageSelectStrategyFixed();
+    SCPageSelectStrategyFixed(const KoPAPageBase *page);
+    virtual ~SCPageSelectStrategyFixed();
 
     virtual const KoPAPageBase *page() const;
 

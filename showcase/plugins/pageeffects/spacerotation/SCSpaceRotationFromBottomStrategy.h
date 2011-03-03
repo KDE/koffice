@@ -20,22 +20,22 @@
 #ifndef KPRSPACEROTATIONFROMBOTTOMSTRATEGY_H
 #define KPRSPACEROTATIONFROMBOTTOMSTRATEGY_H
 
-#include "pageeffects/KPrPageEffectStrategy.h"
+#include "pageeffects/SCPageEffectStrategy.h"
 #include <QTransform>
 
-class KPrSpaceRotationFromBottomStrategy : public KPrPageEffectStrategy
+class SCSpaceRotationFromBottomStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrSpaceRotationFromBottomStrategy();
-    virtual ~KPrSpaceRotationFromBottomStrategy();
+    SCSpaceRotationFromBottomStrategy();
+    virtual ~SCSpaceRotationFromBottomStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
 
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 
-    virtual void finish(const KPrPageEffect::Data &data);
+    virtual void finish(const SCPageEffect::Data &data);
 
 private:
     QTransform m_transform;

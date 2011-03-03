@@ -17,25 +17,25 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimationMoveAppear.h"
+#include "SCAnimationMoveAppear.h"
 
 #include <KoShape.h>
 
-#include "KPrAnimationData.h"
+#include "SCAnimationData.h"
 
-KPrAnimationMoveAppear::KPrAnimationMoveAppear(KoShape * shape, int step)
-: KPrTranslateAnimation(shape, step, Appear)
+SCAnimationMoveAppear::SCAnimationMoveAppear(KoShape * shape, int step)
+: SCTranslateAnimation(shape, step, Appear)
 {
 }
 
-KPrAnimationMoveAppear::~KPrAnimationMoveAppear()
+SCAnimationMoveAppear::~SCAnimationMoveAppear()
 {
 }
 
-KPrAnimationData * KPrAnimationMoveAppear::animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect)
+SCAnimationData * SCAnimationMoveAppear::animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect)
 {
     Q_UNUSED(pageRect);
-    KPrAnimationDataTranslate * data = new KPrAnimationDataTranslate(canvas, shapeManager, m_shape->boundingRect());
+    SCAnimationDataTranslate * data = new SCAnimationDataTranslate(canvas, shapeManager, m_shape->boundingRect());
     // TODO use bounding rect + shadow
     double x = data->m_boundingRect.x() + data->m_boundingRect.width();
     data->m_translate = QPointF(-x, 0);

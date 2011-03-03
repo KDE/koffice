@@ -17,38 +17,38 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimTransitionFilter.h"
+#include "SCAnimTransitionFilter.h"
 #include "KoShapeSavingContext.h"
 
 
-KPrAnimTransitionFilter::KPrAnimTransitionFilter(KPrShapeAnimation *shapeAnimation)
-: KPrAnimationBase(shapeAnimation)
+SCAnimTransitionFilter::SCAnimTransitionFilter(SCShapeAnimation *shapeAnimation)
+: SCAnimationBase(shapeAnimation)
 {
 }
 
-KPrAnimTransitionFilter::~KPrAnimTransitionFilter()
+SCAnimTransitionFilter::~SCAnimTransitionFilter()
 {
 }
 
-bool KPrAnimTransitionFilter::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimTransitionFilter::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
-    KPrAnimationBase::loadOdf(element, context);
+    SCAnimationBase::loadOdf(element, context);
     return true;
 }
 
-bool KPrAnimTransitionFilter::saveOdf(KoPASavingContext & paContext) const
+bool SCAnimTransitionFilter::saveOdf(KoPASavingContext & paContext) const
 {
     Q_UNUSED(paContext);
     return true;
 }
 
-void KPrAnimTransitionFilter::init(KPrAnimationCache *animationCache, int step)
+void SCAnimTransitionFilter::init(SCAnimationCache *animationCache, int step)
 {
     Q_UNUSED(animationCache);
     Q_UNUSED(step);
 }
 
-void KPrAnimTransitionFilter::next(int currentTime)
+void SCAnimTransitionFilter::next(int currentTime)
 {
     Q_UNUSED(currentTime);
 }

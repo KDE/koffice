@@ -26,14 +26,14 @@
 
 class KoShape;
 class KoImageCollection;
-class KPrDocument;
-class KPrPage;
+class SCDocument;
+class SCPage;
 
-class KPrNotes : public KoPAPageBase
+class SCNotes : public KoPAPageBase
 {
 public:
-    KPrNotes(KPrPage * page, KPrDocument * document);
-    ~KPrNotes();
+    SCNotes(SCPage * page, SCDocument * document);
+    ~SCNotes();
 
     /// Get the main text note shape for this presentation notes
     KoShape *textShape();
@@ -77,8 +77,8 @@ private:
     KoShape *m_textShape;
     KoShape *m_thumbnailShape;
     KoPageLayout m_pageLayout;
-    KPrPage *m_page;
-    KPrDocument *m_doc;
+    SCPage *m_page;
+    SCDocument *m_doc;
     KoImageCollection * m_imageCollection;
 };
 

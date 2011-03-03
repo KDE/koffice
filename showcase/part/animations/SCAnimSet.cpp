@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimSet.h"
+#include "SCAnimSet.h"
 
 #include <QString>
 #include <KoXmlNS.h>
@@ -26,23 +26,23 @@
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextBlockData.h>
-#include "KPrAnimationCache.h"
-#include "KPrTextBlockPaintStrategy.h"
-#include "KPrShapeAnimation.h"
+#include "SCAnimationCache.h"
+#include "SCTextBlockPaintStrategy.h"
+#include "SCShapeAnimation.h"
 #include "KoXmlWriter.h"
-#include "KPrDurationParser.h"
+#include "SCDurationParser.h"
 #include <kdebug.h>
 
-KPrAnimSet::KPrAnimSet(KPrShapeAnimation *shapeAnimation)
-: KPrAnimationBase(shapeAnimation)
+SCAnimSet::SCAnimSet(SCShapeAnimation *shapeAnimation)
+: SCAnimationBase(shapeAnimation)
 {
 }
 
-KPrAnimSet::~KPrAnimSet()
+SCAnimSet::~SCAnimSet()
 {
 }
 
-bool KPrAnimSet::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimSet::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     bool retval = false;
 
@@ -55,12 +55,12 @@ bool KPrAnimSet::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &con
     else {
         kWarning(33003) << "attributeName" << attributeName << "not yet supported";
     }
-    KPrAnimationBase::loadOdf(element, context);
+    SCAnimationBase::loadOdf(element, context);
 
     return retval;
 }
 
-bool KPrAnimSet::saveOdf(KoPASavingContext &paContext) const
+bool SCAnimSet::saveOdf(KoPASavingContext &paContext) const
 {
     KoXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:set");
@@ -69,9 +69,9 @@ bool KPrAnimSet::saveOdf(KoPASavingContext &paContext) const
     return true;
 }
 
-bool KPrAnimSet::saveAttribute(KoPASavingContext &paContext) const
+bool SCAnimSet::saveAttribute(KoPASavingContext &paContext) const
 {
-    KPrAnimationBase::saveAttribute(paContext);
+    SCAnimationBase::saveAttribute(paContext);
     KoXmlWriter &writer = paContext.xmlWriter();
     // Anim set allow only visibility change currently
     writer.addAttribute("smil:attributeName","visibility");
@@ -80,14 +80,14 @@ bool KPrAnimSet::saveAttribute(KoPASavingContext &paContext) const
 }
 
 
-void KPrAnimSet::init(KPrAnimationCache *animationCache, int step)
+void SCAnimSet::init(SCAnimationCache *animationCache, int step)
 {
     m_animationCache = animationCache;
     animationCache->init(step, m_shapeAnimation->shape(), m_shapeAnimation->textBlockData(), "visibility", !m_visible);
     animationCache->init(step + 1, m_shapeAnimation->shape(), m_shapeAnimation->textBlockData(), "visibility", m_visible);
 }
 
-void KPrAnimSet::next(int currentTime)
+void SCAnimSet::next(int currentTime)
 {
     Q_UNUSED(currentTime);
     updateCache("visibility", m_visible);

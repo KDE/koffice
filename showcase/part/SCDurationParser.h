@@ -66,7 +66,7 @@ class QString;
  *     00.5s = 500 milliseconds
  *     00:00.005 = 5 milliseconds
  *  */
-class KPrDurationParser
+class SCDurationParser
 {
 public:
     static int durationMs(const QString & duration);

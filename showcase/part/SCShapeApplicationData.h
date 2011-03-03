@@ -25,19 +25,19 @@
 
 #include <QSet>
 
-class KPrShapeAnimation;
+class SCShapeAnimation;
 
-class KPrShapeApplicationData : public KoShapeApplicationData
+class SCShapeApplicationData : public KoShapeApplicationData
 {
 public:
-    KPrShapeApplicationData();
-    ~KPrShapeApplicationData();
+    SCShapeApplicationData();
+    ~SCShapeApplicationData();
 
-    QSet<KPrShapeAnimation *> & animations();
+    QSet<SCShapeAnimation *> & animations();
 
 private:
     // stores the animations of a shape
-    QSet<KPrShapeAnimation *> m_animations;
+    QSet<SCShapeAnimation *> m_animations;
 };
 
 

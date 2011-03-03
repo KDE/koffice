@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPageEffectStrategy.h"
+#include "SCPageEffectStrategy.h"
 
 #include <QWidget>
 
@@ -26,28 +26,28 @@
 #include <KoXmlReader.h>
 #include <KoGenStyle.h>
 
-KPrPageEffectStrategy::KPrPageEffectStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool graphicsView)
+SCPageEffectStrategy::SCPageEffectStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool graphicsView)
 : m_subType(subType)
 , m_smilData(smilType, smilSubType, reverse)
 , m_graphicsView(graphicsView)
 {
 }
 
-KPrPageEffectStrategy::~KPrPageEffectStrategy()
+SCPageEffectStrategy::~SCPageEffectStrategy()
 {
 }
 
-int KPrPageEffectStrategy::subType() const
+int SCPageEffectStrategy::subType() const
 {
     return m_subType;
 }
 
-void KPrPageEffectStrategy::finish(const KPrPageEffect::Data &data)
+void SCPageEffectStrategy::finish(const SCPageEffect::Data &data)
 {
     data.m_widget->update();
 }
 
-void KPrPageEffectStrategy::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
+void SCPageEffectStrategy::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
 {
     xmlWriter.addAttribute("smil:type", m_smilData.type);
     xmlWriter.addAttribute("smil:subtype", m_smilData.subType);
@@ -56,7 +56,7 @@ void KPrPageEffectStrategy::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
     }
 }
 
-void KPrPageEffectStrategy::saveOdfSmilAttributes(KoGenStyle & style) const
+void SCPageEffectStrategy::saveOdfSmilAttributes(KoGenStyle & style) const
 {
     style.addProperty("smil:type", m_smilData.type);
     style.addProperty("smil:subtype", m_smilData.subType);
@@ -65,27 +65,27 @@ void KPrPageEffectStrategy::saveOdfSmilAttributes(KoGenStyle & style) const
     }
 }
 
-void KPrPageEffectStrategy::loadOdfSmilAttributes(const KoXmlElement & element)
+void SCPageEffectStrategy::loadOdfSmilAttributes(const KoXmlElement & element)
 {
     Q_UNUSED(element);
 }
 
-const QString & KPrPageEffectStrategy::smilType() const
+const QString & SCPageEffectStrategy::smilType() const
 {
     return m_smilData.type;
 }
 
-const QString & KPrPageEffectStrategy::smilSubType() const
+const QString & SCPageEffectStrategy::smilSubType() const
 {
     return m_smilData.subType;
 }
 
-bool KPrPageEffectStrategy::reverse() const
+bool SCPageEffectStrategy::reverse() const
 {
     return m_smilData.reverse;
 }
 
-bool KPrPageEffectStrategy::useGraphicsView() const
+bool SCPageEffectStrategy::useGraphicsView() const
 {
     return m_graphicsView;
 }

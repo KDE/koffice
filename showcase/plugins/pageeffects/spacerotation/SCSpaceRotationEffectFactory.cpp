@@ -17,27 +17,27 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSpaceRotationEffectFactory.h"
+#include "SCSpaceRotationEffectFactory.h"
 
 #include <klocale.h>
 
-#include "KPrSpaceRotationFromBottomStrategy.h"
-#include "KPrSpaceRotationFromTopStrategy.h"
-#include "KPrSpaceRotationFromLeftStrategy.h"
-#include "KPrSpaceRotationFromRightStrategy.h"
+#include "SCSpaceRotationFromBottomStrategy.h"
+#include "SCSpaceRotationFromTopStrategy.h"
+#include "SCSpaceRotationFromLeftStrategy.h"
+#include "SCSpaceRotationFromRightStrategy.h"
 
 #define SpaceRotationEffectId "SpaceRotationEffect"
 
-KPrSpaceRotationEffectFactory::KPrSpaceRotationEffectFactory()
-: KPrPageEffectFactory(SpaceRotationEffectId, i18n("Space Rotation"))
+SCSpaceRotationEffectFactory::SCSpaceRotationEffectFactory()
+: SCPageEffectFactory(SpaceRotationEffectId, i18n("Space Rotation"))
 {
-    addStrategy(new KPrSpaceRotationFromBottomStrategy());
-    addStrategy(new KPrSpaceRotationFromTopStrategy());
-    addStrategy(new KPrSpaceRotationFromLeftStrategy());
-    addStrategy(new KPrSpaceRotationFromRightStrategy());
+    addStrategy(new SCSpaceRotationFromBottomStrategy());
+    addStrategy(new SCSpaceRotationFromTopStrategy());
+    addStrategy(new SCSpaceRotationFromLeftStrategy());
+    addStrategy(new SCSpaceRotationFromRightStrategy());
 }
 
-KPrSpaceRotationEffectFactory::~KPrSpaceRotationEffectFactory()
+SCSpaceRotationEffectFactory::~SCSpaceRotationEffectFactory()
 {
 }
 
@@ -48,7 +48,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("From Right")
 };
 
-QString KPrSpaceRotationEffectFactory::subTypeName(int subType) const
+QString SCSpaceRotationEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

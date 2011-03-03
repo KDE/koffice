@@ -17,27 +17,27 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrIrisWipeEffectFactory.h"
+#include "SCIrisWipeEffectFactory.h"
 
 //KDE includes
 #include <klocale.h>
 
-#include "../KPrIrisWipeEffectStrategyBase.h"
+#include "../SCIrisWipeEffectStrategyBase.h"
 
 #define IrisWipeEffectId "IrisWipeEffect"
 
-KPrIrisWipeEffectFactory::KPrIrisWipeEffectFactory()
-: KPrPageEffectFactory(IrisWipeEffectId, i18n("Iris"))
+SCIrisWipeEffectFactory::SCIrisWipeEffectFactory()
+: SCPageEffectFactory(IrisWipeEffectId, i18n("Iris"))
 {
 
      QPainterPath shape;
 
     //rectangle
     shape.addRect(-25, -25, 50, 50);
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Rectangle, "irisWipe", "rectangle", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Rectangle, "irisWipe", "rectangle", false));
 
     //rectangle reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, RectangleReverse, "irisWipe", "rectangle", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, RectangleReverse, "irisWipe", "rectangle", true));
 
     //diamond
     shape = QPainterPath();
@@ -46,13 +46,13 @@ KPrIrisWipeEffectFactory::KPrIrisWipeEffectFactory()
     shape.lineTo(0, 25);
     shape.lineTo(-25, 0);
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Diamond, "irisWipe", "diamond", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Diamond, "irisWipe", "diamond", false));
 
     //diamond reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, DiamondReverse, "irisWipe", "diamond", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, DiamondReverse, "irisWipe", "diamond", true));
 }
 
-KPrIrisWipeEffectFactory::~KPrIrisWipeEffectFactory()
+SCIrisWipeEffectFactory::~SCIrisWipeEffectFactory()
 {
 }
 
@@ -63,7 +63,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Diamond Reverse")
 };
 
-QString KPrIrisWipeEffectFactory::subTypeName(int subType) const
+QString SCIrisWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

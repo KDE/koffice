@@ -17,18 +17,18 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPentagonWipeEffectFactory.h"
+#include "SCPentagonWipeEffectFactory.h"
 
 #include <cmath>
 
 #include <klocale.h>
 
-#include "../KPrIrisWipeEffectStrategyBase.h"
+#include "../SCIrisWipeEffectStrategyBase.h"
 
 #define PentagonEffectFactoryId "PentagonEffectFactory"
 
-KPrPentagonWipeEffectFactory::KPrPentagonWipeEffectFactory()
-: KPrPageEffectFactory(PentagonEffectFactoryId, i18n("Pentagon"))
+SCPentagonWipeEffectFactory::SCPentagonWipeEffectFactory()
+: SCPageEffectFactory(PentagonEffectFactoryId, i18n("Pentagon"))
 {
     QPainterPath shape;
 
@@ -39,10 +39,10 @@ KPrPentagonWipeEffectFactory::KPrPentagonWipeEffectFactory()
     shape.lineTo(25*cos(17 * M_PI / 10),-25*sin(17 * M_PI / 10));
     shape.lineTo(25*cos(M_PI / 10), -25*sin(M_PI / 10));
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Up, "pentagonWipe", "up", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Up, "pentagonWipe", "up", false));
 
     //up reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, UpReverse, "pentagonWipe", "up", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, UpReverse, "pentagonWipe", "up", true));
 
     //down
     shape = QPainterPath();
@@ -52,13 +52,13 @@ KPrPentagonWipeEffectFactory::KPrPentagonWipeEffectFactory()
     shape.lineTo(25*cos(17 * M_PI / 10),25*sin(17 * M_PI / 10));
     shape.lineTo(25*cos(M_PI / 10), 25*sin(M_PI / 10));
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Down, "pentagonWipe", "down", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Down, "pentagonWipe", "down", false));
 
     //down reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, DownReverse, "pentagonWipe", "down", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, DownReverse, "pentagonWipe", "down", true));
 }
 
-KPrPentagonWipeEffectFactory::~KPrPentagonWipeEffectFactory()
+SCPentagonWipeEffectFactory::~SCPentagonWipeEffectFactory()
 {
 }
 
@@ -69,7 +69,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Down Reverse")
 };
 
-QString KPrPentagonWipeEffectFactory::subTypeName(int subType) const
+QString SCPentagonWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

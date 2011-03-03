@@ -22,14 +22,14 @@
 
 #include "KoPASavingContext.h"
 
-class KPrAnimationCache;
+class SCAnimationCache;
 
-class KPrAnimationData
+class SCAnimationData
 {
 public:
-    KPrAnimationData();
-    virtual ~KPrAnimationData();
-    virtual void init(KPrAnimationCache *animationCache, int step) = 0;
+    SCAnimationData();
+    virtual ~SCAnimationData();
+    virtual void init(SCAnimationCache *animationCache, int step) = 0;
 };
 
 #endif // KPRANIMATIONDATA_H

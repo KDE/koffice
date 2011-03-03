@@ -17,15 +17,15 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrEventActionWidget.h"
+#include "SCEventActionWidget.h"
 
-KPrEventActionWidget::KPrEventActionWidget(QWidget * parent)
+SCEventActionWidget::SCEventActionWidget(QWidget * parent)
         : QWidget(parent)
 {
 }
 
-KPrEventActionWidget::~KPrEventActionWidget()
+SCEventActionWidget::~SCEventActionWidget()
 {
 }
 
-#include <KPrEventActionWidget.moc>
+#include <SCEventActionWidget.moc>

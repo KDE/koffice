@@ -17,19 +17,19 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSnakeWipeTopRightDiagonalStrategy.h"
-#include "KPrSnakeWipeEffectFactory.h"
+#include "SCSnakeWipeTopRightDiagonalStrategy.h"
+#include "SCSnakeWipeEffectFactory.h"
 
-KPrSnakeWipeTopRightDiagonalStrategy::KPrSnakeWipeTopRightDiagonalStrategy()
-    : KPrSnakeWipeDiagonalStrategy(KPrSnakeWipeEffectFactory::FromTopRight, "snakeWipe", "topRightDiagonal", false)
+SCSnakeWipeTopRightDiagonalStrategy::SCSnakeWipeTopRightDiagonalStrategy()
+    : SCSnakeWipeDiagonalStrategy(SCSnakeWipeEffectFactory::FromTopRight, "snakeWipe", "topRightDiagonal", false)
 {
 }
 
-KPrSnakeWipeTopRightDiagonalStrategy::~KPrSnakeWipeTopRightDiagonalStrategy()
+SCSnakeWipeTopRightDiagonalStrategy::~SCSnakeWipeTopRightDiagonalStrategy()
 {
 }
 
-int KPrSnakeWipeTopRightDiagonalStrategy::squareIndex(int x, int y, int columns, int rows)
+int SCSnakeWipeTopRightDiagonalStrategy::squareIndex(int x, int y, int columns, int rows)
 {
     return m_indices[(columns - x - 1) * rows + y];
 }

@@ -22,24 +22,24 @@
 
 #include <KoPAViewMode.h>
 
-#include "KPrAnimationDirector.h"
-#include "KPrPresentationTool.h"
+#include "SCAnimationDirector.h"
+#include "SCPresentationTool.h"
 
 class QWidget;
-class KPrPresentationTool;
-class KPrPresenterViewWidget;
-class KPrViewModePresenterView;
-class KPrEndOfSlideShowPage;
+class SCPresentationTool;
+class SCPresenterViewWidget;
+class SCViewModePresenterView;
+class SCEndOfSlideShowPage;
 class KoPAViewMode;
-class KPrView;
+class SCView;
 
-class KPrViewModePresentation : public KoPAViewMode
+class SCViewModePresentation : public KoPAViewMode
 {
     Q_OBJECT
 
 public:
-    KPrViewModePresentation(KoPAViewBase * view, KoPACanvasBase * m_canvas);
-    ~KPrViewModePresentation();
+    SCViewModePresentation(KoPAViewBase * view, KoPACanvasBase * m_canvas);
+    ~SCViewModePresentation();
 
     KoViewConverter * viewConverter(KoPACanvasBase * canvas);
 
@@ -75,7 +75,7 @@ public:
      *
      * @return animationDirector
      */
-    KPrAnimationDirector * animationDirector();
+    SCAnimationDirector * animationDirector();
 
     /**
      * Get the number of pages.
@@ -110,12 +110,12 @@ public:
      *
      * This assumes that the presentation is active.
      */
-    KPrPresentationTool * presentationTool() const;
+    SCPresentationTool * presentationTool() const;
 
     /**
      * Navigate in the presentation.
      */
-    void navigate(KPrAnimationDirector::Navigation navigation);
+    void navigate(SCAnimationDirector::Navigation navigation);
 
     void navigateToPage(int index);
     void blackPresentation();
@@ -155,14 +155,14 @@ signals:
 protected:
     KoPAViewMode * m_savedViewMode;
     QWidget * m_savedParent;
-    KPrPresentationTool * m_tool;
-    KPrAnimationDirector * m_animationDirector;
-    KPrAnimationDirector * m_pvAnimationDirector;
+    SCPresentationTool * m_tool;
+    SCAnimationDirector * m_animationDirector;
+    SCAnimationDirector * m_pvAnimationDirector;
     KoPACanvas * m_presenterViewCanvas;
     KoPACanvas * m_baseCanvas;
-    KPrPresenterViewWidget * m_presenterViewWidget;
-    KPrEndOfSlideShowPage * m_endOfSlideShowPage;
-    KPrView *m_view;
+    SCPresenterViewWidget * m_presenterViewWidget;
+    SCEndOfSlideShowPage * m_endOfSlideShowPage;
+    SCView *m_view;
 };
 
 #endif /* KPRVIEWMODEPRESENTATION_H */

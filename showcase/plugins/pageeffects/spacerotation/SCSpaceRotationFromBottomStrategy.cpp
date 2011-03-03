@@ -17,37 +17,37 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSpaceRotationFromBottomStrategy.h"
-#include "KPrSpaceRotationEffectFactory.h"
+#include "SCSpaceRotationFromBottomStrategy.h"
+#include "SCSpaceRotationEffectFactory.h"
 
 #include <QWidget>
 #include <QPainter>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
 
-KPrSpaceRotationFromBottomStrategy::KPrSpaceRotationFromBottomStrategy()
-: KPrPageEffectStrategy(KPrSpaceRotationEffectFactory::FromBottom, "spaceRotation", "bottomToTop", false, true)
+SCSpaceRotationFromBottomStrategy::SCSpaceRotationFromBottomStrategy()
+: SCPageEffectStrategy(SCSpaceRotationEffectFactory::FromBottom, "spaceRotation", "bottomToTop", false, true)
 {
 }
 
-KPrSpaceRotationFromBottomStrategy::~KPrSpaceRotationFromBottomStrategy()
+SCSpaceRotationFromBottomStrategy::~SCSpaceRotationFromBottomStrategy()
 {
 }
 
-void KPrSpaceRotationFromBottomStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCSpaceRotationFromBottomStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     timeLine.setFrameRange(0, 180);
     data.m_oldPageItem->show();
 }
 
-void KPrSpaceRotationFromBottomStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCSpaceRotationFromBottomStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     Q_UNUSED(p);
     Q_UNUSED(currPos);
     Q_UNUSED(data);
 }
 
-void KPrSpaceRotationFromBottomStrategy::next(const KPrPageEffect::Data &data)
+void SCSpaceRotationFromBottomStrategy::next(const SCPageEffect::Data &data)
 {
     int frame = data.m_timeLine.frameForTime(data.m_currentTime);
     if (frame >= data.m_timeLine.endFrame()) {
@@ -77,7 +77,7 @@ void KPrSpaceRotationFromBottomStrategy::next(const KPrPageEffect::Data &data)
     }
 }
 
-void KPrSpaceRotationFromBottomStrategy::finish(const KPrPageEffect::Data &data)
+void SCSpaceRotationFromBottomStrategy::finish(const SCPageEffect::Data &data)
 {
     data.m_graphicsView->hide();
     data.m_oldPageItem->hide();

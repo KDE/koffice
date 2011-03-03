@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPageEffectRegistry.h"
+#include "SCPageEffectRegistry.h"
 
 #include <QString>
 
@@ -25,10 +25,10 @@
 #include <KoXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoPluginLoader.h>
-#include <pageeffects/KPrPageEffectFactory.h>
+#include <pageeffects/SCPageEffectFactory.h>
 #include <kdebug.h>
 
-class KPrPageEffectRegistry::Singleton
+class SCPageEffectRegistry::Singleton
 {
 public:
     Singleton()
@@ -36,20 +36,20 @@ public:
     {
     }
 
-    KPrPageEffectRegistry q;
+    SCPageEffectRegistry q;
     bool initDone;
 };
 
-struct KPrPageEffectRegistry::Private
+struct SCPageEffectRegistry::Private
 {
-    QHash<QPair<QString, bool>, KPrPageEffectFactory *> tagToFactory;
+    QHash<QPair<QString, bool>, SCPageEffectFactory *> tagToFactory;
 };
 
-K_GLOBAL_STATIC(KPrPageEffectRegistry::Singleton, singleton)
+K_GLOBAL_STATIC(SCPageEffectRegistry::Singleton, singleton)
 
-KPrPageEffectRegistry * KPrPageEffectRegistry::instance()
+SCPageEffectRegistry * SCPageEffectRegistry::instance()
 {
-    KPrPageEffectRegistry * registry = &(singleton->q);
+    SCPageEffectRegistry * registry = &(singleton->q);
     if (! singleton->initDone) {
         singleton->initDone = true;
         registry->init();
@@ -57,11 +57,11 @@ KPrPageEffectRegistry * KPrPageEffectRegistry::instance()
     return registry;
 }
 
-KPrPageEffect * KPrPageEffectRegistry::createPageEffect(const KoXmlElement & element)
+SCPageEffect * SCPageEffectRegistry::createPageEffect(const KoXmlElement & element)
 {
     Q_UNUSED(element);
 
-    KPrPageEffect * pageEffect = 0;
+    SCPageEffect * pageEffect = 0;
     if (element.hasAttributeNS(KoXmlNS::smil, "type")) {
         QString smilType(element.attributeNS(KoXmlNS::smil, "type"));
         bool reverse = false;
@@ -69,7 +69,7 @@ KPrPageEffect * KPrPageEffectRegistry::createPageEffect(const KoXmlElement & ele
             reverse = true;
         }
 
-        QHash<QPair<QString, bool>, KPrPageEffectFactory *>::iterator it(d->tagToFactory.find(QPair<QString, bool>(smilType, reverse)));
+        QHash<QPair<QString, bool>, SCPageEffectFactory *>::iterator it(d->tagToFactory.find(QPair<QString, bool>(smilType, reverse)));
 
         // call the factory to create the page effect 
         if (it != d->tagToFactory.end()) {
@@ -83,21 +83,21 @@ KPrPageEffect * KPrPageEffectRegistry::createPageEffect(const KoXmlElement & ele
     return pageEffect;
 }
 
-KPrPageEffectRegistry::KPrPageEffectRegistry()
+SCPageEffectRegistry::SCPageEffectRegistry()
 : d(new Private())
 {
 }
 
-KPrPageEffectRegistry::~KPrPageEffectRegistry()
+SCPageEffectRegistry::~SCPageEffectRegistry()
 {
-    foreach (KPrPageEffectFactory* factory, values())
+    foreach (SCPageEffectFactory* factory, values())
     {
         delete factory;
     }
     delete d;
 }
 
-void KPrPageEffectRegistry::init()
+void SCPageEffectRegistry::init()
 {
     KoPluginLoader::PluginsConfig config;
     config.whiteList = "PageEffectPlugins";
@@ -110,9 +110,9 @@ void KPrPageEffectRegistry::init()
             QString::fromLatin1("[X-Showcase-Version] <= 0"),
             config);
 
-    QList<KPrPageEffectFactory*> factories = values();
+    QList<SCPageEffectFactory*> factories = values();
 
-    foreach (KPrPageEffectFactory * factory, factories) {
+    foreach (SCPageEffectFactory * factory, factories) {
         QList<QPair<QString, bool> > tags(factory->tags());
         QList<QPair<QString, bool> >::iterator it(tags.begin());
         for (; it != tags.end(); ++it) {

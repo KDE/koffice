@@ -22,11 +22,11 @@
 
 #include <KoEventActionFactoryBase.h>
 
-class KPrSoundEventActionFactory : public KoEventActionFactoryBase
+class SCSoundEventActionFactory : public KoEventActionFactoryBase
 {
 public:
-    KPrSoundEventActionFactory();
-    virtual ~KPrSoundEventActionFactory();
+    SCSoundEventActionFactory();
+    virtual ~SCSoundEventActionFactory();
 
     virtual KoEventAction * createEventAction();
     virtual QWidget *createOptionWidget();

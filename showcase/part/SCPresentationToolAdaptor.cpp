@@ -17,21 +17,21 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresentationToolAdaptor.h"
+#include "SCPresentationToolAdaptor.h"
 
-#include "KPrPresentationStrategyBase.h"
-#include "KPrPresentationTool.h"
-#include "KPrPresentationDrawWidget.h"
-#include "KPrPresentationDrawStrategy.h"
-#include "KPrPresentationHighlightWidget.h"
-#include "KPrPresentationHighlightStrategy.h"
-#include "KPrPresentationBlackWidget.h"
-#include "KPrPresentationBlackStrategy.h"
-#include "KPrViewModePresentation.h"
+#include "SCPresentationStrategyBase.h"
+#include "SCPresentationTool.h"
+#include "SCPresentationDrawWidget.h"
+#include "SCPresentationDrawStrategy.h"
+#include "SCPresentationHighlightWidget.h"
+#include "SCPresentationHighlightStrategy.h"
+#include "SCPresentationBlackWidget.h"
+#include "SCPresentationBlackStrategy.h"
+#include "SCViewModePresentation.h"
 
 #include <QMouseEvent>
 
-KPrPresentationToolAdaptor::KPrPresentationToolAdaptor(KPrPresentationTool* tool)
+SCPresentationToolAdaptor::SCPresentationToolAdaptor(SCPresentationTool* tool)
 : QDBusAbstractAdaptor(tool)
 , m_tool(tool)
 , m_viewModePresentation(tool->viewModePresentation())
@@ -39,22 +39,22 @@ KPrPresentationToolAdaptor::KPrPresentationToolAdaptor(KPrPresentationTool* tool
 
 }
 
-KPrPresentationToolAdaptor::~KPrPresentationToolAdaptor()
+SCPresentationToolAdaptor::~SCPresentationToolAdaptor()
 {
 
 }
 
-void KPrPresentationToolAdaptor::blankPresentation()
+void SCPresentationToolAdaptor::blankPresentation()
 {
-    if (m_viewModePresentation.isActivated() && ! dynamic_cast<KPrPresentationBlackStrategy *>(m_tool->strategy())) {
+    if (m_viewModePresentation.isActivated() && ! dynamic_cast<SCPresentationBlackStrategy *>(m_tool->strategy())) {
         m_tool->blackPresentation();
     }
 }
 
-void KPrPresentationToolAdaptor::highlightPresentation(int pointx, int pointy)
+void SCPresentationToolAdaptor::highlightPresentation(int pointx, int pointy)
  {
     if (m_viewModePresentation.isActivated()) {
-        if (! dynamic_cast<KPrPresentationHighlightStrategy *>(m_tool->strategy())) {
+        if (! dynamic_cast<SCPresentationHighlightStrategy *>(m_tool->strategy())) {
             m_tool->highlightPresentation();
         }
 
@@ -65,12 +65,12 @@ void KPrPresentationToolAdaptor::highlightPresentation(int pointx, int pointy)
     }
 }
 
-void KPrPresentationToolAdaptor::startDrawPresentation(int pointx, int pointy, int penSize, QString color)
+void SCPresentationToolAdaptor::startDrawPresentation(int pointx, int pointy, int penSize, QString color)
 {
     if (m_viewModePresentation.isActivated()) {
-        if (! dynamic_cast< KPrPresentationDrawStrategy* >(m_tool->strategy())) {
+        if (! dynamic_cast< SCPresentationDrawStrategy* >(m_tool->strategy())) {
             m_tool->drawOnPresentation();
-            KPrPresentationDrawWidget *widget=dynamic_cast< KPrPresentationDrawWidget *>(m_tool->strategy()->widget());
+            SCPresentationDrawWidget *widget=dynamic_cast< SCPresentationDrawWidget *>(m_tool->strategy()->widget());
             widget->updateSize(penSize);
             widget->updateColor(color);
         }
@@ -82,9 +82,9 @@ void KPrPresentationToolAdaptor::startDrawPresentation(int pointx, int pointy, i
     }
 }
 
-void KPrPresentationToolAdaptor::drawOnPresentation(int pointx,int pointy)
+void SCPresentationToolAdaptor::drawOnPresentation(int pointx,int pointy)
 {
-    if (m_viewModePresentation.isActivated() && dynamic_cast<KPrPresentationDrawStrategy*>(m_tool->strategy())) {
+    if (m_viewModePresentation.isActivated() && dynamic_cast<SCPresentationDrawStrategy*>(m_tool->strategy())) {
         QPoint point(pointx,pointy);
         QMouseEvent event(QEvent::MouseMove, point, Qt::NoButton, Qt::LeftButton, Qt::NoModifier);
 
@@ -92,7 +92,7 @@ void KPrPresentationToolAdaptor::drawOnPresentation(int pointx,int pointy)
     }
 }
 
-void KPrPresentationToolAdaptor::stopDrawPresentation() {
+void SCPresentationToolAdaptor::stopDrawPresentation() {
     if (m_viewModePresentation.isActivated()) {
         QPoint point(0,0);
         QMouseEvent event(QEvent::MouseButtonRelease, point, Qt::NoButton, Qt::LeftButton, Qt::NoModifier);
@@ -101,10 +101,10 @@ void KPrPresentationToolAdaptor::stopDrawPresentation() {
     }
 }
 
-void KPrPresentationToolAdaptor::normalPresentation()
+void SCPresentationToolAdaptor::normalPresentation()
 {
     m_tool->normalPresentation();
 }
 
 
-#include "KPrPresentationToolAdaptor.moc"
+#include "SCPresentationToolAdaptor.moc"

@@ -20,19 +20,19 @@
 #ifndef KPRBARWIPEFROMTOPSTRATEGY_H
 #define KPRBARWIPEFROMTOPSTRATEGY_H
 
-#include "pageeffects/KPrPageEffectStrategy.h"
+#include "pageeffects/SCPageEffectStrategy.h"
 
-class KPrBarWipeFromTopStrategy : public KPrPageEffectStrategy
+class SCBarWipeFromTopStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrBarWipeFromTopStrategy();
-    virtual ~KPrBarWipeFromTopStrategy();
+    SCBarWipeFromTopStrategy();
+    virtual ~SCBarWipeFromTopStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
 
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 };
 
 #endif // KPRBARWIPEFROMTOPSTRATEGY_H

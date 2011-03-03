@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrNotes.h"
+#include "SCNotes.h"
 
 #include <KDebug>
 
@@ -34,8 +34,8 @@
 #include <KoXmlWriter.h>
 #include <KoPASavingContext.h>
 
-#include "KPrDocument.h"
-#include "KPrPage.h"
+#include "SCDocument.h"
+#include "SCPage.h"
 
 #include <QPainter>
 // a helper class to load attributes of the thumbnail shape
@@ -56,7 +56,7 @@ public:
     virtual void saveOdf(KoShapeSavingContext &) const { }
 };
 
-KPrNotes::KPrNotes(KPrPage *page, KPrDocument * document)
+SCNotes::SCNotes(SCPage *page, SCDocument * document)
 : KoPAPageBase()
 , m_page(page)
 , m_doc(document)
@@ -87,17 +87,17 @@ KPrNotes::KPrNotes(KPrPage *page, KPrDocument * document)
     layer->addShape(m_thumbnailShape);
 }
 
-KPrNotes::~KPrNotes()
+SCNotes::~SCNotes()
 {
     delete m_imageCollection;
 }
 
-KoShape *KPrNotes::textShape()
+KoShape *SCNotes::textShape()
 {
     return m_textShape;
 }
 
-void KPrNotes::saveOdf(KoShapeSavingContext &context) const
+void SCNotes::saveOdf(KoShapeSavingContext &context) const
 {
     KoXmlWriter & writer = context.xmlWriter();
     writer.startElement("presentation:notes");
@@ -120,7 +120,7 @@ void KPrNotes::saveOdf(KoShapeSavingContext &context) const
     writer.endElement(); // presentation:notes
 }
 
-bool KPrNotes::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCNotes::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     KoXmlElement child;
     KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes().last());
@@ -159,59 +159,59 @@ bool KPrNotes::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &conte
     return true;
 }
 
-void KPrNotes::paintComponent(QPainter& painter, const KoViewConverter& converter)
+void SCNotes::paintComponent(QPainter& painter, const KoViewConverter& converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);
 }
 
-KoPageLayout & KPrNotes::pageLayout()
+KoPageLayout & SCNotes::pageLayout()
 {
     return m_pageLayout;
 }
 
-const KoPageLayout & KPrNotes::pageLayout() const
+const KoPageLayout & SCNotes::pageLayout() const
 {
     return m_pageLayout;
 }
 
-bool KPrNotes::displayMasterShapes()
+bool SCNotes::displayMasterShapes()
 {
     return false;
 }
 
-void KPrNotes::setDisplayMasterShapes(bool)
+void SCNotes::setDisplayMasterShapes(bool)
 {
 }
 
-bool KPrNotes::displayShape(KoShape *) const
+bool SCNotes::displayShape(KoShape *) const
 {
     return true;
 }
 
-bool KPrNotes::displayMasterBackground()
+bool SCNotes::displayMasterBackground()
 {
     return false;
 }
 
-void KPrNotes::setDisplayMasterBackground(bool)
+void SCNotes::setDisplayMasterBackground(bool)
 {
 }
 
-QPixmap KPrNotes::generateThumbnail(const QSize&)
+QPixmap SCNotes::generateThumbnail(const QSize&)
 {
     Q_ASSERT(0);
     return QPixmap();
 }
 
-void KPrNotes::updatePageThumbnail()
+void SCNotes::updatePageThumbnail()
 {
     // set image at least to 150 dpi we might need more when printing
     KoImageData *imageData = m_imageCollection->createImageData(m_doc->pageThumbnail(m_page, (m_thumbnailShape->size() * 150 / 72.).toSize()).toImage());
     m_thumbnailShape->setUserData(imageData);
 }
 
-void KPrNotes::paintPage(QPainter & painter, KoZoomHandler & /*zoomHandler*/)
+void SCNotes::paintPage(QPainter & painter, KoZoomHandler & /*zoomHandler*/)
 {
     Q_UNUSED(painter);
     // TODO implement when printing page with notes

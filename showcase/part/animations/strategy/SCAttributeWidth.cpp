@@ -17,20 +17,20 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAttributeWidth.h"
-#include "../KPrAnimationCache.h"
+#include "SCAttributeWidth.h"
+#include "../SCAnimationCache.h"
 #include "KoShape.h"
-#include "KPrShapeAnimations.h"
+#include "SCShapeAnimations.h"
 #include "KoTextBlockData.h"
 #include "KoTextShapeData.h"
 #include <QTextDocument>
 #include <QTextLayout>
 
-KPrAttributeWidth::KPrAttributeWidth() : KPrAnimationAttribute("width")
+SCAttributeWidth::SCAttributeWidth() : SCAnimationAttribute("width")
 {
 }
 
-void KPrAttributeWidth::updateCache(KPrAnimationCache *cache, KPrShapeAnimation *shapeAnimation, qreal value)
+void SCAttributeWidth::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value)
 {
     qreal tx = 0.0, ty = 0.0;
     KoShape * shape = shapeAnimation->shape();
@@ -60,7 +60,7 @@ void KPrAttributeWidth::updateCache(KPrAnimationCache *cache, KPrShapeAnimation 
     cache->update(shape, shapeAnimation->textBlockData(), "transform", transform);
 }
 
-void KPrAttributeWidth::initCache(KPrAnimationCache *animationCache, int step, KPrShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
+void SCAttributeWidth::initCache(SCAnimationCache *animationCache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
 {
     qreal v1 = 0.0, v2 = 0.0, tx = 0.0, ty = 0.0;
     KoShape * shape = shapeAnimation->shape();

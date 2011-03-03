@@ -17,16 +17,16 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrParallelSnakesWipeHorizontalStrategy.h"
-#include "KPrParallelSnakesWipeEffectFactory.h"
+#include "SCParallelSnakesWipeHorizontalStrategy.h"
+#include "SCParallelSnakesWipeEffectFactory.h"
 
 static int getSubType(bool reverseTop, bool reverseBottom, bool reverse) {
     if (reverseTop) {
-        if (reverseBottom) return reverse ? KPrParallelSnakesWipeEffectFactory::HorizontalRightSameOut : KPrParallelSnakesWipeEffectFactory::HorizontalRightSameIn;
-        else return reverse ? KPrParallelSnakesWipeEffectFactory::HorizontalTopRightOppositeOut : KPrParallelSnakesWipeEffectFactory::HorizontalTopRightOppositeIn;
+        if (reverseBottom) return reverse ? SCParallelSnakesWipeEffectFactory::HorizontalRightSameOut : SCParallelSnakesWipeEffectFactory::HorizontalRightSameIn;
+        else return reverse ? SCParallelSnakesWipeEffectFactory::HorizontalTopRightOppositeOut : SCParallelSnakesWipeEffectFactory::HorizontalTopRightOppositeIn;
     } else {
-        if (reverseBottom) return reverse ? KPrParallelSnakesWipeEffectFactory::HorizontalTopLeftOppositeOut : KPrParallelSnakesWipeEffectFactory::HorizontalTopLeftOppositeIn;
-        else return reverse ? KPrParallelSnakesWipeEffectFactory::HorizontalLeftSameOut : KPrParallelSnakesWipeEffectFactory::HorizontalLeftSameIn;
+        if (reverseBottom) return reverse ? SCParallelSnakesWipeEffectFactory::HorizontalTopLeftOppositeOut : SCParallelSnakesWipeEffectFactory::HorizontalTopLeftOppositeIn;
+        else return reverse ? SCParallelSnakesWipeEffectFactory::HorizontalLeftSameOut : SCParallelSnakesWipeEffectFactory::HorizontalLeftSameIn;
     }
 }
 
@@ -40,18 +40,18 @@ static const char* getSmilSubType(bool reverseTop, bool reverseBottom) {
     }
 }
 
-KPrParallelSnakesWipeHorizontalStrategy::KPrParallelSnakesWipeHorizontalStrategy(bool reverseTop, bool reverseBottom, bool reverse)
-    : KPrMatrixWipeStrategy(getSubType(reverseTop, reverseBottom, reverse), "parallelSnakesWipe", getSmilSubType(reverseTop, reverseBottom), reverse, true),
+SCParallelSnakesWipeHorizontalStrategy::SCParallelSnakesWipeHorizontalStrategy(bool reverseTop, bool reverseBottom, bool reverse)
+    : SCMatrixWipeStrategy(getSubType(reverseTop, reverseBottom, reverse), "parallelSnakesWipe", getSmilSubType(reverseTop, reverseBottom), reverse, true),
     m_reverseTop(reverseTop), m_reverseBottom(reverseBottom)
 {
     setNeedEvenSquares();
 }
 
-KPrParallelSnakesWipeHorizontalStrategy::~KPrParallelSnakesWipeHorizontalStrategy()
+SCParallelSnakesWipeHorizontalStrategy::~SCParallelSnakesWipeHorizontalStrategy()
 {
 }
 
-int KPrParallelSnakesWipeHorizontalStrategy::squareIndex(int x, int y, int columns, int rows)
+int SCParallelSnakesWipeHorizontalStrategy::squareIndex(int x, int y, int columns, int rows)
 {
     int X = x;
     int idx;
@@ -71,7 +71,7 @@ int KPrParallelSnakesWipeHorizontalStrategy::squareIndex(int x, int y, int colum
     }
 }
 
-KPrMatrixWipeStrategy::Direction KPrParallelSnakesWipeHorizontalStrategy::squareDirection(int x, int y, int columns, int rows)
+SCMatrixWipeStrategy::Direction SCParallelSnakesWipeHorizontalStrategy::squareDirection(int x, int y, int columns, int rows)
 {
     Q_UNUSED(x);
     Q_UNUSED(columns);
@@ -87,7 +87,7 @@ KPrMatrixWipeStrategy::Direction KPrParallelSnakesWipeHorizontalStrategy::square
     return reverse ? RightToLeft : LeftToRight;
 }
 
-int KPrParallelSnakesWipeHorizontalStrategy::maxIndex(int columns, int rows)
+int SCParallelSnakesWipeHorizontalStrategy::maxIndex(int columns, int rows)
 {
     return columns * rows / 2;
 }

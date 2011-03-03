@@ -21,26 +21,26 @@
 #define KPRANIMATIONBASE_H
 
 #include <QAbstractAnimation>
-#include "KPrAnimationData.h"
+#include "SCAnimationData.h"
 
 class KoXmlElement;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
 class KoShape;
 class KoTextBlockData;
-class KPrAnimationCache;
-class KPrShapeAnimation;
+class SCAnimationCache;
+class SCShapeAnimation;
 
-class KPrAnimationBase : public QAbstractAnimation, KPrAnimationData
+class SCAnimationBase : public QAbstractAnimation, SCAnimationData
 {
 public:
-    KPrAnimationBase(KPrShapeAnimation *shapeAnimation);
-    virtual ~KPrAnimationBase();
+    SCAnimationBase(SCShapeAnimation *shapeAnimation);
+    virtual ~SCAnimationBase();
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
     virtual bool saveOdf(KoPASavingContext &paContext) const = 0;
 
     virtual int duration() const;
-    virtual void init(KPrAnimationCache *animationCache, int step) = 0;
+    virtual void init(SCAnimationCache *animationCache, int step) = 0;
     int animationDuration() const;
     virtual bool saveAttribute(KoPASavingContext &paContext) const;
 protected:
@@ -49,8 +49,8 @@ protected:
     void updateCache(const QString &id, const QVariant &value);
 
 
-    KPrShapeAnimation *m_shapeAnimation; // we could also use the group() but that would mean we need to cast all the time
-    KPrAnimationCache * m_animationCache;
+    SCShapeAnimation *m_shapeAnimation; // we could also use the group() but that would mean we need to cast all the time
+    SCAnimationCache * m_animationCache;
     int m_begin; // in milliseconds
     int m_duration; // in milliseconds
 };

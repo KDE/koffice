@@ -20,17 +20,17 @@
 #ifndef KPRANIMATECOLOR_H
 #define KPRANIMATECOLOR_H
 
-#include "KPrAnimationBase.h"
+#include "SCAnimationBase.h"
 
-class KPrAnimateColor : public KPrAnimationBase
+class SCAnimateColor : public SCAnimationBase
 {
 public:
-    KPrAnimateColor(KPrShapeAnimation *shapeAnimation);
-    virtual ~KPrAnimateColor();
+    SCAnimateColor(SCShapeAnimation *shapeAnimation);
+    virtual ~SCAnimateColor();
 
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
     virtual bool saveOdf(KoPASavingContext & paContext) const;
-    virtual void init(KPrAnimationCache *animationCache, int step);
+    virtual void init(SCAnimationCache *animationCache, int step);
 
 protected:
     virtual void next(int currentTime);

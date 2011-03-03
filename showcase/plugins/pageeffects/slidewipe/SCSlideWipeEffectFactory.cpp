@@ -17,35 +17,35 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSlideWipeEffectFactory.h"
+#include "SCSlideWipeEffectFactory.h"
 
 #include <klocale.h>
 
-#include "KPrSlideWipeFromBottomStrategy.h"
-#include "KPrSlideWipeFromLeftStrategy.h"
-#include "KPrSlideWipeFromRightStrategy.h"
-#include "KPrSlideWipeFromTopStrategy.h"
-#include "KPrSlideWipeToBottomStrategy.h"
-#include "KPrSlideWipeToLeftStrategy.h"
-#include "KPrSlideWipeToRightStrategy.h"
-#include "KPrSlideWipeToTopStrategy.h"
+#include "SCSlideWipeFromBottomStrategy.h"
+#include "SCSlideWipeFromLeftStrategy.h"
+#include "SCSlideWipeFromRightStrategy.h"
+#include "SCSlideWipeFromTopStrategy.h"
+#include "SCSlideWipeToBottomStrategy.h"
+#include "SCSlideWipeToLeftStrategy.h"
+#include "SCSlideWipeToRightStrategy.h"
+#include "SCSlideWipeToTopStrategy.h"
 
 #define SlideWipeEffectId "SlideWipeEffect"
 
-KPrSlideWipeEffectFactory::KPrSlideWipeEffectFactory()
-: KPrPageEffectFactory(SlideWipeEffectId, i18n("Slide"))
+SCSlideWipeEffectFactory::SCSlideWipeEffectFactory()
+: SCPageEffectFactory(SlideWipeEffectId, i18n("Slide"))
 {
-    addStrategy(new KPrSlideWipeFromTopStrategy());
-    addStrategy(new KPrSlideWipeFromBottomStrategy());
-    addStrategy(new KPrSlideWipeFromLeftStrategy());
-    addStrategy(new KPrSlideWipeFromRightStrategy());
-    addStrategy(new KPrSlideWipeToTopStrategy());
-    addStrategy(new KPrSlideWipeToBottomStrategy());
-    addStrategy(new KPrSlideWipeToLeftStrategy());
-    addStrategy(new KPrSlideWipeToRightStrategy());
+    addStrategy(new SCSlideWipeFromTopStrategy());
+    addStrategy(new SCSlideWipeFromBottomStrategy());
+    addStrategy(new SCSlideWipeFromLeftStrategy());
+    addStrategy(new SCSlideWipeFromRightStrategy());
+    addStrategy(new SCSlideWipeToTopStrategy());
+    addStrategy(new SCSlideWipeToBottomStrategy());
+    addStrategy(new SCSlideWipeToLeftStrategy());
+    addStrategy(new SCSlideWipeToRightStrategy());
 }
 
-KPrSlideWipeEffectFactory::~KPrSlideWipeEffectFactory()
+SCSlideWipeEffectFactory::~SCSlideWipeEffectFactory()
 {
 }
 
@@ -60,7 +60,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("To Bottom")
 };
 
-QString KPrSlideWipeEffectFactory::subTypeName(int subType) const
+QString SCSlideWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

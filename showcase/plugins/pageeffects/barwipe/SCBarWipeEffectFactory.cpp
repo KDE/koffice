@@ -18,27 +18,27 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrBarWipeEffectFactory.h"
+#include "SCBarWipeEffectFactory.h"
 
 #include <klocale.h>
 
-#include "KPrBarWipeFromTopStrategy.h"
-#include "KPrBarWipeFromLeftStrategy.h"
-#include "KPrBarWipeFromBottomStrategy.h"
-#include "KPrBarWipeFromRightStrategy.h"
+#include "SCBarWipeFromTopStrategy.h"
+#include "SCBarWipeFromLeftStrategy.h"
+#include "SCBarWipeFromBottomStrategy.h"
+#include "SCBarWipeFromRightStrategy.h"
 
 #define BarWipeEffectId "BarWipeEffect"
 
-KPrBarWipeEffectFactory::KPrBarWipeEffectFactory()
-: KPrPageEffectFactory(BarWipeEffectId, i18n("Bar"))
+SCBarWipeEffectFactory::SCBarWipeEffectFactory()
+: SCPageEffectFactory(BarWipeEffectId, i18n("Bar"))
 {
-    addStrategy(new KPrBarWipeFromTopStrategy());
-    addStrategy(new KPrBarWipeFromBottomStrategy());
-    addStrategy(new KPrBarWipeFromLeftStrategy());
-    addStrategy(new KPrBarWipeFromRightStrategy());
+    addStrategy(new SCBarWipeFromTopStrategy());
+    addStrategy(new SCBarWipeFromBottomStrategy());
+    addStrategy(new SCBarWipeFromLeftStrategy());
+    addStrategy(new SCBarWipeFromRightStrategy());
 }
 
-KPrBarWipeEffectFactory::~KPrBarWipeEffectFactory()
+SCBarWipeEffectFactory::~SCBarWipeEffectFactory()
 {
 }
 
@@ -49,7 +49,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("From Bottom")
 };
 
-QString KPrBarWipeEffectFactory::subTypeName(int subType) const
+QString SCBarWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

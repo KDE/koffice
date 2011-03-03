@@ -20,13 +20,13 @@
 #ifndef KPRWATERFALLWIPEBOTTOMRIGHTSTRATEGY_H
 #define KPRWATERFALLWIPEBOTTOMRIGHTSTRATEGY_H
 
-#include "../KPrMatrixWipeStrategy.h"
+#include "../SCMatrixWipeStrategy.h"
 
-class KPrWaterfallWipeBottomRightStrategy : public KPrMatrixWipeStrategy
+class SCWaterfallWipeBottomRightStrategy : public SCMatrixWipeStrategy
 {
 public:
-    KPrWaterfallWipeBottomRightStrategy(Direction direction);
-    virtual ~KPrWaterfallWipeBottomRightStrategy();
+    SCWaterfallWipeBottomRightStrategy(Direction direction);
+    virtual ~SCWaterfallWipeBottomRightStrategy();
 protected:
     virtual int squareIndex(int x, int y, int columns, int rows);
     virtual Direction squareDirection(int x, int y, int columns, int rows);

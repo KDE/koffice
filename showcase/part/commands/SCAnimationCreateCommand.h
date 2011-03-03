@@ -22,15 +22,15 @@
 
 #include <QUndoCommand>
 
-class KPrDocument;
-class KPrShapeAnimation;
+class SCDocument;
+class SCShapeAnimation;
 
 /// Command to create an animation
-class KPrAnimationCreateCommand : public QUndoCommand
+class SCAnimationCreateCommand : public QUndoCommand
 {
 public:
-    KPrAnimationCreateCommand(KPrDocument * doc, KPrShapeAnimation * animation);
-    virtual ~KPrAnimationCreateCommand();
+    SCAnimationCreateCommand(SCDocument * doc, SCShapeAnimation * animation);
+    virtual ~SCAnimationCreateCommand();
 
     /// redo the command
     void redo ();
@@ -38,8 +38,8 @@ public:
     void undo ();
 
 private:
-    KPrDocument * m_doc;
-    KPrShapeAnimation * m_animation;
+    SCDocument * m_doc;
+    SCShapeAnimation * m_animation;
     bool m_deleteAnimation;
 };
 

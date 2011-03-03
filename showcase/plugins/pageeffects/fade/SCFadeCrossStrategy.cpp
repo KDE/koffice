@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrFadeCrossStrategy.h"
-#include "KPrFadeEffectFactory.h"
+#include "SCFadeCrossStrategy.h"
+#include "SCFadeEffectFactory.h"
 
 #include <QWidget>
 #include <QPainter>
@@ -28,16 +28,16 @@
 
 #include <kdebug.h>
 
-KPrFadeCrossStrategy::KPrFadeCrossStrategy()
-: KPrPageEffectStrategy(KPrFadeEffectFactory::CrossFade, "fade", "crossfade", false, true)
+SCFadeCrossStrategy::SCFadeCrossStrategy()
+: SCPageEffectStrategy(SCFadeEffectFactory::CrossFade, "fade", "crossfade", false, true)
 {
 }
 
-KPrFadeCrossStrategy::~KPrFadeCrossStrategy()
+SCFadeCrossStrategy::~SCFadeCrossStrategy()
 {
 }
 
-void KPrFadeCrossStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCFadeCrossStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     timeLine.setFrameRange(0, 1000); // TODO might not be needed
     data.m_oldPageItem->setZValue(1);
@@ -47,14 +47,14 @@ void KPrFadeCrossStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &tim
     data.m_newPageItem->show();
 }
 
-void KPrFadeCrossStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCFadeCrossStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     Q_UNUSED(p);
     Q_UNUSED(currPos);
     Q_UNUSED(data);
 }
 
-void KPrFadeCrossStrategy::next(const KPrPageEffect::Data &data)
+void SCFadeCrossStrategy::next(const SCPageEffect::Data &data)
 {
     int frame = data.m_timeLine.frameForTime(data.m_currentTime);
     if (frame >= data.m_timeLine.endFrame()) {
@@ -66,7 +66,7 @@ void KPrFadeCrossStrategy::next(const KPrPageEffect::Data &data)
     }
 }
 
-void KPrFadeCrossStrategy::finish(const KPrPageEffect::Data &data)
+void SCFadeCrossStrategy::finish(const SCPageEffect::Data &data)
 {
     data.m_graphicsView->hide();
 }

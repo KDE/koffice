@@ -20,13 +20,13 @@
 #ifndef KPRPINWHEELWIPEEFFECTFACTORY_H
 #define KPRPINWHEELWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class KPrPinWheelWipeEffectFactory : public KPrPageEffectFactory
+class SCPinWheelWipeEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrPinWheelWipeEffectFactory();
-    virtual ~KPrPinWheelWipeEffectFactory();
+    SCPinWheelWipeEffectFactory();
+    virtual ~SCPinWheelWipeEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

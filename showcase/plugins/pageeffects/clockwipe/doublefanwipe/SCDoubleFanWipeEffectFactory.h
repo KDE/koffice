@@ -20,13 +20,13 @@
 #ifndef KPRDOUBLEFANWIPEEFFECTFACTORY_H
 #define KPRDOUBLEFANWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class KPrDoubleFanWipeEffectFactory : public KPrPageEffectFactory
+class SCDoubleFanWipeEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrDoubleFanWipeEffectFactory();
-    virtual ~KPrDoubleFanWipeEffectFactory();
+    SCDoubleFanWipeEffectFactory();
+    virtual ~SCDoubleFanWipeEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

@@ -25,7 +25,7 @@
 #define DiagonalWipeEffectId "DiagonalWipeEffect"
 
 DiagonalWipeEffectFactory::DiagonalWipeEffectFactory()
-: KPrPageEffectFactory(DiagonalWipeEffectId, i18n("Diagonal"))
+: SCPageEffectFactory(DiagonalWipeEffectId, i18n("Diagonal"))
 {
     addStrategy(new DiagonalWipeStrategy(FromTopLeft, "topLeft", false));
     addStrategy(new DiagonalWipeStrategy(FromBottomRight, "topLeft", true));

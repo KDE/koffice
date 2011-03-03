@@ -18,15 +18,15 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimationToolFactory.h"
-#include "KPrAnimationTool.h"
-#include "KPrView.h"
+#include "SCAnimationToolFactory.h"
+#include "SCAnimationTool.h"
+#include "SCView.h"
 #include <KoPACanvas.h>
 
 #include <klocale.h>
 #include <kdebug.h>
 
-KPrAnimationToolFactory::KPrAnimationToolFactory(QObject *parent)
+SCAnimationToolFactory::SCAnimationToolFactory(QObject *parent)
 : KoToolFactoryBase(parent, "Animation Tool")
 {
     setToolTip(i18n("Animation tool"));
@@ -36,17 +36,17 @@ KPrAnimationToolFactory::KPrAnimationToolFactory(QObject *parent)
     setActivationShapeId("flake/edit");
 }
 
-KPrAnimationToolFactory::~KPrAnimationToolFactory()
+SCAnimationToolFactory::~SCAnimationToolFactory()
 {
 }
 
-bool KPrAnimationToolFactory::canCreateTool(KoCanvasBase *canvas) const
+bool SCAnimationToolFactory::canCreateTool(KoCanvasBase *canvas) const
 {
     KoPACanvas *paCanvas =dynamic_cast<KoPACanvas *>(canvas);
-    return paCanvas!=0; // we only work in KPresenter
+    return paCanvas!=0; // we only work in Showcase
 }
 
-KoToolBase* KPrAnimationToolFactory::createTool(KoCanvasBase *canvas)
+KoToolBase* SCAnimationToolFactory::createTool(KoCanvasBase *canvas)
 {
-    return new KPrAnimationTool(canvas);
+    return new SCAnimationTool(canvas);
 }

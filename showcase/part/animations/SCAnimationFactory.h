@@ -22,14 +22,14 @@
 
 class KoXmlElement;
 class KoShapeLoadingContext;
-class KPrAnimationBase;
-class KPrShapeAnimation;
+class SCAnimationBase;
+class SCShapeAnimation;
 
-class KPrAnimationFactory
+class SCAnimationFactory
 {
 public:
-    static KPrAnimationBase *createAnimationFromOdf(const KoXmlElement &element, KoShapeLoadingContext &context,
-                                                    KPrShapeAnimation *shapeAnimation);
+    static SCAnimationBase *createAnimationFromOdf(const KoXmlElement &element, KoShapeLoadingContext &context,
+                                                    SCShapeAnimation *shapeAnimation);
 };
 
 #endif /* KPRANIMATIONFACTORY_H */

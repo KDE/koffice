@@ -32,7 +32,7 @@ class KoShape;
 class KoShapeManager;
 class KoCanvasBase;
 class KoViewConverter;
-class KPrAnimationData;
+class SCAnimationData;
 
 /**
  * This is the base class for shape animations.
@@ -44,7 +44,7 @@ class KPrAnimationData;
  * The state of the animation is kept in the animationData and is 
  * passed to the ainmation when it is run e.g. on a special view.
  */
-class KPRESENTER_TEST_EXPORT KPrShapeAnimationOld
+class KPRESENTER_TEST_EXPORT SCShapeAnimationOld
 {
 public:
     enum Type
@@ -53,7 +53,7 @@ public:
         Disappear
     };
 
-    virtual ~KPrShapeAnimationOld();
+    virtual ~SCShapeAnimationOld();
 
     /**
      * Get a animation data object
@@ -67,7 +67,7 @@ public:
      * @return animationData the caller has to delete the animationData when
      *                       it is no longer used.
      */
-    virtual KPrAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect) = 0;
+    virtual SCAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect) = 0;
 
     /**
      * @brief Animate the shape
@@ -80,7 +80,7 @@ public:
      *
      * @return true when the animations is finished
      */
-    virtual bool animate(QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData) = 0;
+    virtual bool animate(QPainter &painter, const KoViewConverter &converter, SCAnimationData * animationData) = 0;
 
     /**
      * @brief Update the bounding rect of the shape in the animation
@@ -88,7 +88,7 @@ public:
      * @param rect The bounding rect of the shape to update
      * @param animationData The data needed for running the animation
      */
-    virtual void animateRect(QRectF & rect, KPrAnimationData * animationData) = 0;
+    virtual void animateRect(QRectF & rect, SCAnimationData * animationData) = 0;
 
     /**
      * @brief Trigger an update of the canvas needed for the given time
@@ -96,14 +96,14 @@ public:
      * @param currentTime
      * @param animationData The data needed for running the animation
      */
-    virtual void next(int currentTime, KPrAnimationData * animationData) = 0;
+    virtual void next(int currentTime, SCAnimationData * animationData) = 0;
 
     /**
      * @brief Finish the shape animation
      *
      * @param animationData The data needed for running the animation
      */
-    virtual void finish(KPrAnimationData * animationData) = 0;
+    virtual void finish(SCAnimationData * animationData) = 0;
 
     /**
      * Get the duration of the shape animation
@@ -138,7 +138,7 @@ protected:
      *
      * Only to be called form derived classes
      */
-    KPrShapeAnimationOld(KoShape * shape, int step, Type type);
+    SCShapeAnimationOld(KoShape * shape, int step, Type type);
 
     // the shape for which is aminated
     KoShape * m_shape;

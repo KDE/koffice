@@ -25,11 +25,11 @@ class KoPAPageBase;
 /**
  * Class for selecting the page used for painting the shapes
  */
-class KPrPageSelectStrategyBase
+class SCPageSelectStrategyBase
 {
 public:
-    KPrPageSelectStrategyBase();
-    virtual ~KPrPageSelectStrategyBase();
+    SCPageSelectStrategyBase();
+    virtual ~SCPageSelectStrategyBase();
 
     virtual const KoPAPageBase *page() const = 0;
 };

@@ -17,10 +17,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPlaceholderStrategy.h"
+#include "SCPlaceholderStrategy.h"
 
-#include "KPrPlaceholderPictureStrategy.h"
-#include "KPrPlaceholderTextStrategy.h"
+#include "SCPlaceholderPictureStrategy.h"
+#include "SCPlaceholderTextStrategy.h"
 
 #include <QPainter>
 #include <QPen>
@@ -71,23 +71,23 @@ void fillPlaceholderMap()
     }
 }
 
-KPrPlaceholderStrategy * KPrPlaceholderStrategy::create(const QString & presentationClass)
+SCPlaceholderStrategy * SCPlaceholderStrategy::create(const QString & presentationClass)
 {
     if (s_placeholderMap.isEmpty()) {
         fillPlaceholderMap();
     }
 
-    KPrPlaceholderStrategy * strategy = 0;
+    SCPlaceholderStrategy * strategy = 0;
     if (presentationClass == "graphic") {
-        strategy = new KPrPlaceholderPictureStrategy();
+        strategy = new SCPlaceholderPictureStrategy();
     }
     // TODO make nice
     else if (presentationClass == "outline" || presentationClass == "title" || presentationClass == "subtitle") {
-        strategy = new KPrPlaceholderTextStrategy(presentationClass);
+        strategy = new SCPlaceholderTextStrategy(presentationClass);
     }
     else {
         if (s_placeholderMap.contains(presentationClass)) {
-            strategy = new KPrPlaceholderStrategy(presentationClass);
+            strategy = new SCPlaceholderStrategy(presentationClass);
         }
         else {
             kWarning(33001) << "Unsupported placeholder strategy:" << presentationClass;
@@ -96,7 +96,7 @@ KPrPlaceholderStrategy * KPrPlaceholderStrategy::create(const QString & presenta
     return strategy;
 }
 
-bool KPrPlaceholderStrategy::supported(const QString & presentationClass)
+bool SCPlaceholderStrategy::supported(const QString & presentationClass)
 {
     if (s_placeholderMap.isEmpty()) {
         fillPlaceholderMap();
@@ -105,16 +105,16 @@ bool KPrPlaceholderStrategy::supported(const QString & presentationClass)
     return s_placeholderMap.contains(presentationClass);
 }
 
-KPrPlaceholderStrategy::KPrPlaceholderStrategy(const QString & presentationClass)
+SCPlaceholderStrategy::SCPlaceholderStrategy(const QString & presentationClass)
 : m_placeholderData(s_placeholderMap[presentationClass])
 {
 }
 
-KPrPlaceholderStrategy::~KPrPlaceholderStrategy()
+SCPlaceholderStrategy::~SCPlaceholderStrategy()
 {
 }
 
-KoShape *KPrPlaceholderStrategy::createShape(KoResourceManager *rm)
+KoShape *SCPlaceholderStrategy::createShape(KoResourceManager *rm)
 {
     KoShape * shape = 0;
     KoShapeFactoryBase * factory = KoShapeRegistry::instance()->value(m_placeholderData->m_shapeId);
@@ -125,7 +125,7 @@ KoShape *KPrPlaceholderStrategy::createShape(KoResourceManager *rm)
     return shape;
 }
 
-void KPrPlaceholderStrategy::paint(QPainter & painter, const KoViewConverter &converter, const QRectF & rect)
+void SCPlaceholderStrategy::paint(QPainter & painter, const KoViewConverter &converter, const QRectF & rect)
 {
     KoShape::applyConversion(painter, converter);
     QPen penText(Qt::black);
@@ -143,29 +143,29 @@ void KPrPlaceholderStrategy::paint(QPainter & painter, const KoViewConverter &co
     painter.drawRect(rect);
 }
 
-void KPrPlaceholderStrategy::saveOdf(KoShapeSavingContext & context)
+void SCPlaceholderStrategy::saveOdf(KoShapeSavingContext & context)
 {
     KoXmlWriter & writer = context.xmlWriter();
     writer.addCompleteElement(m_placeholderData->m_xmlElement);
 }
 
-bool KPrPlaceholderStrategy::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
+bool SCPlaceholderStrategy::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);
     return true;
 }
 
-QString KPrPlaceholderStrategy::text() const
+QString SCPlaceholderStrategy::text() const
 {
     return i18n(m_placeholderData->m_text);
 }
 
-void KPrPlaceholderStrategy::init(KoResourceManager *)
+void SCPlaceholderStrategy::init(KoResourceManager *)
 {
 }
 
-KoShapeUserData * KPrPlaceholderStrategy::userData() const
+KoShapeUserData * SCPlaceholderStrategy::userData() const
 {
     return 0;
 }

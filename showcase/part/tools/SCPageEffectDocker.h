@@ -27,21 +27,21 @@ class QLabel;
 class QComboBox;
 class QDoubleSpinBox;
 class QTimer;
-class KPrPageEffect;
-class KPrPageEffectRunner;
-class KPrPageEffectFactory;
+class SCPageEffect;
+class SCPageEffectRunner;
+class SCPageEffectFactory;
 class KoPAViewBase;
-class KPrViewModePreviewPageEffect;
+class SCViewModePreviewPageEffect;
 
 /**
  * This is the page effect docker widget that let's you choose a page animation.
  */
-class KPrPageEffectDocker : public QWidget
+class SCPageEffectDocker : public QWidget
 {
 
     Q_OBJECT
 public:
-    explicit KPrPageEffectDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+    explicit SCPageEffectDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
     void setView(KoPAViewBase* view);
 
@@ -51,8 +51,8 @@ public slots:
     void slotEffectChanged(int index);
 
 protected:
-    void updateSubTypes(const KPrPageEffectFactory * factory);
-    KPrPageEffect * createPageEffect(const KPrPageEffectFactory * factory, int subType, double time);
+    void updateSubTypes(const SCPageEffectFactory * factory);
+    SCPageEffect * createPageEffect(const SCPageEffectFactory * factory, int subType, double time);
 
 protected slots:
     void slotSubTypeChanged(int index);
@@ -67,7 +67,7 @@ private:
     QComboBox* m_effectCombo;
     QComboBox* m_subTypeCombo;
     QDoubleSpinBox* m_durationSpinBox;
-    KPrViewModePreviewPageEffect *m_previewMode;
+    SCViewModePreviewPageEffect *m_previewMode;
 };
 
 #endif // KPRPAGEEFFECTDOCKER_H

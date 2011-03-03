@@ -19,30 +19,30 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresentationHighlightStrategy.h"
+#include "SCPresentationHighlightStrategy.h"
 
 #include <QKeyEvent>
 
 #include <KoPACanvas.h>
 
-#include "KPrPresentationHighlightWidget.h"
-#include "KPrPresentationTool.h"
+#include "SCPresentationHighlightWidget.h"
+#include "SCPresentationTool.h"
 
-KPrPresentationHighlightStrategy::KPrPresentationHighlightStrategy(KPrPresentationTool * tool)
-: KPrPresentationStrategyBase(tool)
+SCPresentationHighlightStrategy::SCPresentationHighlightStrategy(SCPresentationTool * tool)
+: SCPresentationStrategyBase(tool)
 {
-    m_widget = new KPrPresentationHighlightWidget(canvas()) ;
+    m_widget = new SCPresentationHighlightWidget(canvas()) ;
     setToolWidgetParent(m_widget);
     m_widget->show();
     m_widget->installEventFilter(m_tool);
 }
 
-KPrPresentationHighlightStrategy::~KPrPresentationHighlightStrategy()
+SCPresentationHighlightStrategy::~SCPresentationHighlightStrategy()
 {
     setToolWidgetParent(canvas()->canvasWidget());
 }
 
-bool KPrPresentationHighlightStrategy::keyPressEvent(QKeyEvent * event)
+bool SCPresentationHighlightStrategy::keyPressEvent(QKeyEvent * event)
 {
     bool handled = true;
     switch (event->key())

@@ -19,37 +19,37 @@
 
 #include "Plugin.h"
 #include <kpluginfactory.h>
-#include <KPrPageEffectRegistry.h>
+#include <SCPageEffectRegistry.h>
 
-#include "irisWipe/KPrIrisWipeEffectFactory.h"
-#include "triangleWipe/KPrTriangleWipeEffectFactory.h"
-#include "arrowHeadWipe/KPrArrowHeadWipeEffectFactory.h"
-#include "ellipseWipe/KPrEllipseWipeEffectFactory.h"
-#include "roundRectWipe/KPrRoundRectWipeEffectFactory.h"
-#include "pentagonWipe/KPrPentagonWipeEffectFactory.h"
-#include "hexagonWipe/KPrHexagonWipeEffectFactory.h"
-#include "starWipe/KPrStarWipeEffectFactory.h"
-#include "eyeWipe/KPrEyeWipeEffectFactory.h"
-#include "miscShapeWipe/KPrMiscShapeWipeEffectFactory.h"
+#include "irisWipe/SCIrisWipeEffectFactory.h"
+#include "triangleWipe/SCTriangleWipeEffectFactory.h"
+#include "arrowHeadWipe/SCArrowHeadWipeEffectFactory.h"
+#include "ellipseWipe/SCEllipseWipeEffectFactory.h"
+#include "roundRectWipe/SCRoundRectWipeEffectFactory.h"
+#include "pentagonWipe/SCPentagonWipeEffectFactory.h"
+#include "hexagonWipe/SCHexagonWipeEffectFactory.h"
+#include "starWipe/SCStarWipeEffectFactory.h"
+#include "eyeWipe/SCEyeWipeEffectFactory.h"
+#include "miscShapeWipe/SCMiscShapeWipeEffectFactory.h"
 
 
 K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
-K_EXPORT_PLUGIN(PluginFactory("KPrPageEffect"))
+K_EXPORT_PLUGIN(PluginFactory("SCPageEffect"))
 
 Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)
 {
-    KPrPageEffectRegistry::instance()->add(new KPrIrisWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrTriangleWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrArrowHeadWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrArrowHeadWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrEllipseWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrRoundRectWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrPentagonWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrHexagonWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrStarWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrEyeWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrMiscShapeWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCIrisWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCTriangleWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCArrowHeadWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCArrowHeadWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCEllipseWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCRoundRectWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCPentagonWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCHexagonWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCStarWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCEyeWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCMiscShapeWipeEffectFactory());
 }
 
 #include "Plugin.moc"

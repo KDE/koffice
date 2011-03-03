@@ -17,28 +17,28 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrWindShieldWipeEffectFactory.h"
+#include "SCWindShieldWipeEffectFactory.h"
 #include <klocale.h>
 
-#include "KPrWindShieldWipeStrategy.h"
+#include "SCWindShieldWipeStrategy.h"
 
 #define WindShieldWipeEffectId  "WindShieldWipeEffect"
 
-KPrWindShieldWipeEffectFactory::KPrWindShieldWipeEffectFactory()
-: KPrPageEffectFactory(WindShieldWipeEffectId, i18n("Windshield"))
+SCWindShieldWipeEffectFactory::SCWindShieldWipeEffectFactory()
+: SCPageEffectFactory(WindShieldWipeEffectId, i18n("Windshield"))
 {
-    addStrategy(new KPrWindShieldWipeStrategy(Right, "windshieldWipe", "right", false));
-    addStrategy(new KPrWindShieldWipeStrategy(Up, "windshieldWipe", "up", false));
-    addStrategy(new KPrWindShieldWipeStrategy(Vertical, "windshieldWipe", "vertical", false));
-    addStrategy(new KPrWindShieldWipeStrategy(Horizontal, "windshieldWipe", "horizontal", false));
+    addStrategy(new SCWindShieldWipeStrategy(Right, "windshieldWipe", "right", false));
+    addStrategy(new SCWindShieldWipeStrategy(Up, "windshieldWipe", "up", false));
+    addStrategy(new SCWindShieldWipeStrategy(Vertical, "windshieldWipe", "vertical", false));
+    addStrategy(new SCWindShieldWipeStrategy(Horizontal, "windshieldWipe", "horizontal", false));
 
-    addStrategy(new KPrWindShieldWipeStrategy(RightReverse, "windshieldWipe", "right", true));
-    addStrategy(new KPrWindShieldWipeStrategy(UpReverse, "windshieldWipe", "up", true));
-    addStrategy(new KPrWindShieldWipeStrategy(VerticalReverse, "windshieldWipe", "vertical", true));
-    addStrategy(new KPrWindShieldWipeStrategy(HorizontalReverse, "windshieldWipe", "horizontal", true));
+    addStrategy(new SCWindShieldWipeStrategy(RightReverse, "windshieldWipe", "right", true));
+    addStrategy(new SCWindShieldWipeStrategy(UpReverse, "windshieldWipe", "up", true));
+    addStrategy(new SCWindShieldWipeStrategy(VerticalReverse, "windshieldWipe", "vertical", true));
+    addStrategy(new SCWindShieldWipeStrategy(HorizontalReverse, "windshieldWipe", "horizontal", true));
 }
 
-KPrWindShieldWipeEffectFactory::~KPrWindShieldWipeEffectFactory()
+SCWindShieldWipeEffectFactory::~SCWindShieldWipeEffectFactory()
 {
 }
 
@@ -53,7 +53,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Horizontal Reverse")
 };
 
-QString KPrWindShieldWipeEffectFactory::subTypeName(int subType) const
+QString SCWindShieldWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

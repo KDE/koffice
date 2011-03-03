@@ -23,29 +23,29 @@
 
 #include <QList>
 
-class KPrAnimationStep;
+class SCAnimationStep;
 class KoShapeLoadingContext;
 class KoXmlElement;
 class QAbstractAnimation;
 
-class KPrAnimationLoader
+class SCAnimationLoader
 {
 public:
-    KPrAnimationLoader();
-    ~KPrAnimationLoader();
+    SCAnimationLoader();
+    ~SCAnimationLoader();
 
     bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
-    QList<KPrAnimationStep *> animations();
+    QList<SCAnimationStep *> animations();
 protected:
-    bool loadOdfAnimation(KPrAnimationStep **animationStep, const KoXmlElement &element, KoShapeLoadingContext &context);
+    bool loadOdfAnimation(SCAnimationStep **animationStep, const KoXmlElement &element, KoShapeLoadingContext &context);
 
     void debug();
 
     void debug(QAbstractAnimation *animation, int level);
 
 private:
-    QList<KPrAnimationStep *> m_animations;
-    KPrAnimationStep *m_animationStep;
+    QList<SCAnimationStep *> m_animations;
+    SCAnimationStep *m_animationStep;
 };
 
 #endif /* KPRANIMATIONLOADER_H */

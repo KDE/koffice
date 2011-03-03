@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrHtmlExport.h"
+#include "SCHtmlExport.h"
 
 #include <QDir>
 #include <kio/copyjob.h>
@@ -29,19 +29,19 @@
 #include <KZip>
 
 #include <KoPADocument.h>
-#include "KPrHtmlExportUiDelegate.h"
-#include "KPrView.h"
-#include "KPrPage.h"
+#include "SCHtmlExportUiDelegate.h"
+#include "SCView.h"
+#include "SCPage.h"
 
-KPrHtmlExport::KPrHtmlExport()
+SCHtmlExport::SCHtmlExport()
 {
 }
 
-KPrHtmlExport::~KPrHtmlExport()
+SCHtmlExport::~SCHtmlExport()
 {
 }
 
-void KPrHtmlExport::exportHtml(const KPrHtmlExport::Parameter &parameters)
+void SCHtmlExport::exportHtml(const SCHtmlExport::Parameter &parameters)
 {
     m_parameters = parameters;
 
@@ -56,14 +56,14 @@ void KPrHtmlExport::exportHtml(const KPrHtmlExport::Parameter &parameters)
     copyFromTmpToDest();
 }
 
-void KPrHtmlExport::extractStyle()
+void SCHtmlExport::extractStyle()
 {
     KZip zip(m_parameters.styleUrl.toLocalFile());
     zip.open(QIODevice::ReadOnly);
     zip.directory()->copyTo(m_tmpDirPath, true);
 }
 
-KUrl KPrHtmlExport::exportPreview(const Parameter &parameters)
+KUrl SCHtmlExport::exportPreview(const Parameter &parameters)
 {
     m_parameters = parameters;
 
@@ -81,7 +81,7 @@ KUrl KPrHtmlExport::exportPreview(const Parameter &parameters)
     return previewUrl;
 }
 
-void KPrHtmlExport::exportImageToTmpDir()
+void SCHtmlExport::exportImageToTmpDir()
 {
     // Export slides as image into the temporary export directory
     KUrl fileUrl;
@@ -93,7 +93,7 @@ void KPrHtmlExport::exportImageToTmpDir()
     }
 }
 
-void KPrHtmlExport::generateHtml()
+void SCHtmlExport::generateHtml()
 {
     QFile file(KStandardDirs::locate("data", "kpresenter/templates/exportHTML/slides.html"));
     file.open(QIODevice::ReadOnly);
@@ -117,7 +117,7 @@ void KPrHtmlExport::generateHtml()
     }
 }
 
-void KPrHtmlExport::generateToc()
+void SCHtmlExport::generateToc()
 {
     QString toc = "<ul>";
     for(int i=0; i < m_parameters.slidesNames.size(); ++i){
@@ -134,7 +134,7 @@ void KPrHtmlExport::generateToc()
     writeHtmlFileToTmpDir("index.html", content);
 }
 
-void KPrHtmlExport::writeHtmlFileToTmpDir(const QString &fileName, const QString &htmlBody)
+void SCHtmlExport::writeHtmlFileToTmpDir(const QString &fileName, const QString &htmlBody)
 {
     KUrl fileUrl(m_tmpDirPath, fileName);
     QFile file(fileUrl.toLocalFile());
@@ -143,16 +143,16 @@ void KPrHtmlExport::writeHtmlFileToTmpDir(const QString &fileName, const QString
     stream << htmlBody;
 }
 
-void KPrHtmlExport::copyFromTmpToDest()
+void SCHtmlExport::copyFromTmpToDest()
 {
     KIO::CopyJob *job = KIO::moveAs(m_tmpDirPath, m_parameters.destination);
     job->setWriteIntoExistingDirectories(true);
-    job->setUiDelegate(new KPrHtmlExportUiDelegate);
+    job->setUiDelegate(new SCHtmlExportUiDelegate);
     connect(job, SIGNAL(result(KJob *)), this, SLOT(moveResult(KJob *)));
     job->exec();
 }
 
-void KPrHtmlExport::moveResult(KJob *job)
+void SCHtmlExport::moveResult(KJob *job)
 {
     KTempDir::removeDir(m_tmpDirPath);
     if (job->error()) {
@@ -166,4 +166,4 @@ void KPrHtmlExport::moveResult(KJob *job)
     }
 }
 
-#include "KPrHtmlExport.moc"
+#include "SCHtmlExport.moc"

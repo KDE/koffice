@@ -22,15 +22,15 @@
 
 #include <KDialog>
 
-#include "ui_KPrConfigurePresenterView.h"
+#include "ui_SCConfigurePresenterView.h"
 
-class KPrDocument;
+class SCDocument;
 
-class KPrConfigurePresenterViewDialog : public KDialog
+class SCConfigurePresenterViewDialog : public KDialog
 {
     Q_OBJECT
 public:
-    explicit KPrConfigurePresenterViewDialog(KPrDocument *document, QWidget *parent=0);
+    explicit SCConfigurePresenterViewDialog(SCDocument *document, QWidget *parent=0);
 
     int presentationMonitor();
     bool presenterViewEnabled();
@@ -38,8 +38,8 @@ public:
 private slots:
 
 private:
-    Ui::KPrConfigurePresenterView ui;
-    KPrDocument *m_document;
+    Ui::SCConfigurePresenterView ui;
+    SCDocument *m_document;
 };
 
 #endif // KPRCONFIGUREPRESENTERVIEWDIALOG_H

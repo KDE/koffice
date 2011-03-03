@@ -12,128 +12,128 @@ add_subdirectory(tests)
 
 ### showcaseprivate ###
 set( showcaseprivate_LIB_SRCS
-     KPrFactory.cpp
-     KPrDocument.cpp
-     KPrDeclarations.cpp
-     KPrView.cpp
-     KPrViewAdaptor.cpp
-     KPrViewModePresentation.cpp
-     KPrViewModeNotes.cpp
-     KPrViewModeSlidesSorter.cpp
-     KPrViewModePreviewPageEffect.cpp
-     KPrPresentationTool.cpp
-     KPrAnimationDirector.cpp
-     KPrShapeAnimations.cpp
-     KPrShapeManagerAnimationStrategy.cpp
-     KPrShapeManagerDisplayMasterStrategy.cpp
-     KPrPageData.cpp
-     KPrPage.cpp
-     KPrMasterPage.cpp
-     KPrNotes.cpp
-     KPrSoundData.cpp
-     KPrSoundCollection.cpp
-     KPrEventActionData.cpp
-     KPrEventActionWidget.cpp
-     KPrPageApplicationData.cpp
-     KPrShapeApplicationData.cpp
-     KPrCustomSlideShows.cpp
-     KPrPresenterViewBaseInterface.cpp
-     KPrPresenterViewInterface.cpp
-     KPrPresenterViewSlidesInterface.cpp
-     KPrPresenterViewToolWidget.cpp
-     KPrPresenterViewWidget.cpp
-     KPrEndOfSlideShowPage.cpp
-     KPrPlaceholderShape.cpp
-     KPrPlaceholderShapeFactory.cpp
-     KPrPlaceholderStrategy.cpp
-     KPrPlaceholderPictureStrategy.cpp
-     KPrPlaceholderTextStrategy.cpp
-     KPrPresentationHighlightWidget.cpp
-     KPrPresentationDrawWidget.cpp
-     KPrPresentationBlackWidget.cpp
-     KPrPresentationStrategy.cpp
-     KPrPresentationHighlightStrategy.cpp
-     KPrPresentationBlackStrategy.cpp
-     KPrPresentationStrategyBase.cpp
-     KPrPresentationToolAdaptor.cpp
-     KPrPresentationToolEventForwarder.cpp
-     KPrPresentationDrawStrategy.cpp
-     KPrPageSelectStrategyBase.cpp
-     KPrPageSelectStrategyFixed.cpp
-     KPrPageSelectStrategyActive.cpp
-     KPrDurationParser.cpp
-     KPrHtmlExport.cpp
-     KPrHtmlExportUiDelegate.cpp
-     KPrPicturesImport.cpp
-     KPrPdfPrintJob.cpp
+     SCFactory.cpp
+     SCDocument.cpp
+     SCDeclarations.cpp
+     SCView.cpp
+     SCViewAdaptor.cpp
+     SCViewModePresentation.cpp
+     SCViewModeNotes.cpp
+     SCViewModeSlidesSorter.cpp
+     SCViewModePreviewPageEffect.cpp
+     SCPresentationTool.cpp
+     SCAnimationDirector.cpp
+     SCShapeAnimations.cpp
+     SCShapeManagerAnimationStrategy.cpp
+     SCShapeManagerDisplayMasterStrategy.cpp
+     SCPageData.cpp
+     SCPage.cpp
+     SCMasterPage.cpp
+     SCNotes.cpp
+     SCSoundData.cpp
+     SCSoundCollection.cpp
+     SCEventActionData.cpp
+     SCEventActionWidget.cpp
+     SCPageApplicationData.cpp
+     SCShapeApplicationData.cpp
+     SCCustomSlideShows.cpp
+     SCPresenterViewBaseInterface.cpp
+     SCPresenterViewInterface.cpp
+     SCPresenterViewSlidesInterface.cpp
+     SCPresenterViewToolWidget.cpp
+     SCPresenterViewWidget.cpp
+     SCEndOfSlideShowPage.cpp
+     SCPlaceholderShape.cpp
+     SCPlaceholderShapeFactory.cpp
+     SCPlaceholderStrategy.cpp
+     SCPlaceholderPictureStrategy.cpp
+     SCPlaceholderTextStrategy.cpp
+     SCPresentationHighlightWidget.cpp
+     SCPresentationDrawWidget.cpp
+     SCPresentationBlackWidget.cpp
+     SCPresentationStrategy.cpp
+     SCPresentationHighlightStrategy.cpp
+     SCPresentationBlackStrategy.cpp
+     SCPresentationStrategyBase.cpp
+     SCPresentationToolAdaptor.cpp
+     SCPresentationToolEventForwarder.cpp
+     SCPresentationDrawStrategy.cpp
+     SCPageSelectStrategyBase.cpp
+     SCPageSelectStrategyFixed.cpp
+     SCPageSelectStrategyActive.cpp
+     SCDurationParser.cpp
+     SCHtmlExport.cpp
+     SCHtmlExportUiDelegate.cpp
+     SCPicturesImport.cpp
+     SCPdfPrintJob.cpp
 
-     commands/KPrAnimationCreateCommand.cpp
-     commands/KPrPageEffectSetCommand.cpp
-     commands/KPrPageLayoutCommand.cpp
-     commands/KPrSetCustomSlideShowsCommand.cpp
+     commands/SCAnimationCreateCommand.cpp
+     commands/SCPageEffectSetCommand.cpp
+     commands/SCPageLayoutCommand.cpp
+     commands/SCSetCustomSlideShowsCommand.cpp
 
-     dockers/KPrPreviewWidget.cpp
-     dockers/KPrPageLayoutDockerFactory.cpp
-     dockers/KPrPageLayoutDocker.cpp
+     dockers/SCPreviewWidget.cpp
+     dockers/SCPageLayoutDockerFactory.cpp
+     dockers/SCPageLayoutDocker.cpp
 
-     pageeffects/KPrPageEffectRunner.cpp
-     pageeffects/KPrPageEffect.cpp
-     pageeffects/KPrPageEffectStrategy.cpp
-     pageeffects/KPrPageEffectFactory.cpp
-     pageeffects/KPrPageEffectRegistry.cpp
+     pageeffects/SCPageEffectRunner.cpp
+     pageeffects/SCPageEffect.cpp
+     pageeffects/SCPageEffectStrategy.cpp
+     pageeffects/SCPageEffectFactory.cpp
+     pageeffects/SCPageEffectRegistry.cpp
 
-     animations/KPrAnimationBase.cpp
-     animations/KPrAnimSet.cpp
-     animations/KPrAnimate.cpp
-     animations/KPrAnimateColor.cpp
-     animations/KPrAnimateMotion.cpp
-     animations/KPrAnimateTransform.cpp
-     animations/KPrAnimTransitionFilter.cpp
-     animations/KPrAnimationFactory.cpp
-     animations/KPrAnimationCache.cpp
-     animations/KPrTextBlockPaintStrategy.cpp
-     animations/KPrShapeAnimation.cpp
-     animations/KPrAnimationStep.cpp
-     animations/KPrAnimationSubStep.cpp
-     animations/KPrAnimationLoader.cpp
-     animations/KPrAnimationData.cpp
+     animations/SCAnimationBase.cpp
+     animations/SCAnimSet.cpp
+     animations/SCAnimate.cpp
+     animations/SCAnimateColor.cpp
+     animations/SCAnimateMotion.cpp
+     animations/SCAnimateTransform.cpp
+     animations/SCAnimTransitionFilter.cpp
+     animations/SCAnimationFactory.cpp
+     animations/SCAnimationCache.cpp
+     animations/SCTextBlockPaintStrategy.cpp
+     animations/SCShapeAnimation.cpp
+     animations/SCAnimationStep.cpp
+     animations/SCAnimationSubStep.cpp
+     animations/SCAnimationLoader.cpp
+     animations/SCAnimationData.cpp
 
-     animations/strategy/KPrAnimationValue.cpp
-     animations/strategy/KPrValueParser.cpp
-     animations/strategy/KPrAnimationAttribute.cpp
-     animations/strategy/KPrSmilValues.cpp
-     animations/strategy/KPrAttributeX.cpp
-     animations/strategy/KPrAttributeY.cpp
-     animations/strategy/KPrAttributeWidth.cpp
-     animations/strategy/KPrAttributeHeight.cpp
-     animations/strategy/KPrAttributeRotate.cpp
+     animations/strategy/SCAnimationValue.cpp
+     animations/strategy/SCValueParser.cpp
+     animations/strategy/SCAnimationAttribute.cpp
+     animations/strategy/SCSmilValues.cpp
+     animations/strategy/SCAttributeX.cpp
+     animations/strategy/SCAttributeY.cpp
+     animations/strategy/SCAttributeWidth.cpp
+     animations/strategy/SCAttributeHeight.cpp
+     animations/strategy/SCAttributeRotate.cpp
 
-     pagelayout/KPrPlaceholder.cpp
-     pagelayout/KPrPageLayout.cpp
-     pagelayout/KPrPageLayouts.cpp
-     pagelayout/KPrPageLayoutSharedSavingData.cpp
-     pagelayout/KPrPlaceholders.cpp
+     pagelayout/SCPlaceholder.cpp
+     pagelayout/SCPageLayout.cpp
+     pagelayout/SCPageLayouts.cpp
+     pagelayout/SCPageLayoutSharedSavingData.cpp
+     pagelayout/SCPlaceholders.cpp
 
-     ui/KPrCustomSlideShowsDialog.cpp
-     ui/KPrConfigureSlideShowDialog.cpp
-     ui/KPrConfigurePresenterViewDialog.cpp
-     ui/KPrPresentationToolWidget.cpp
-     ui/KPrHtmlExportDialog.cpp
+     ui/SCCustomSlideShowsDialog.cpp
+     ui/SCConfigureSlideShowDialog.cpp
+     ui/SCConfigurePresenterViewDialog.cpp
+     ui/SCPresentationToolWidget.cpp
+     ui/SCHtmlExportDialog.cpp
 
-     tools/KPrPlaceholderTool.cpp
-     tools/KPrPlaceholderToolFactory.cpp
-     tools/KPrAnimationTool.cpp
-     tools/KPrAnimationToolFactory.cpp
-     tools/KPrClickActionDocker.cpp
-     tools/KPrPageEffectDocker.cpp
+     tools/SCPlaceholderTool.cpp
+     tools/SCPlaceholderToolFactory.cpp
+     tools/SCAnimationTool.cpp
+     tools/SCAnimationToolFactory.cpp
+     tools/SCClickActionDocker.cpp
+     tools/SCPageEffectDocker.cpp
    )
 
 kde4_add_ui_files(showcaseprivate_LIB_SRCS
-     ui/KPrCustomSlideShowsDialog.ui
-     ui/KPrConfigureSlideShow.ui
-     ui/KPrConfigurePresenterView.ui
-     ui/KPrPresentationTool.ui
-     ui/KPrHtmlExport.ui
+     ui/SCCustomSlideShowsDialog.ui
+     ui/SCConfigureSlideShow.ui
+     ui/SCConfigurePresenterView.ui
+     ui/SCPresentationTool.ui
+     ui/SCHtmlExport.ui
    )
 
 kde4_add_library(showcaseprivate SHARED ${showcaseprivate_LIB_SRCS})
@@ -145,7 +145,7 @@ set_target_properties(showcaseprivate PROPERTIES VERSION ${GENERIC_KOFFICE_LIB_V
 install(TARGETS showcaseprivate  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ### showcasepart ###
-set(showcasepart_PART_SRCS KPrFactoryInit.cpp )
+set(showcasepart_PART_SRCS SCFactoryInit.cpp )
 
 kde4_add_plugin(showcasepart ${showcasepart_PART_SRCS})
 

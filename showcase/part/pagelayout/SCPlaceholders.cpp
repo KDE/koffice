@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPlaceholders.h"
+#include "SCPlaceholders.h"
 
 #include <KoShape.h>
 #include <KoShapeContainer.h>
@@ -28,10 +28,10 @@
 #include <KoShapeCreateCommand.h>
 #include <KoPADocument.h>
 #include <KoTextShapeData.h>
-#include "KPrPageLayout.h"
-#include "KPrPlaceholder.h"
-#include "KPrPlaceholderShape.h"
-#include "commands/KPrPageLayoutCommand.h"
+#include "SCPageLayout.h"
+#include "SCPlaceholder.h"
+#include "SCPlaceholderShape.h"
+#include "commands/SCPageLayoutCommand.h"
 
 #include <QTextCursor>
 #include <QTextDocument>
@@ -41,30 +41,30 @@
 
 #include <kdebug.h>
 
-KPrPlaceholders::KPrPlaceholders()
+SCPlaceholders::SCPlaceholders()
 :m_layout(0)
 {
 }
 
-KPrPlaceholders::~KPrPlaceholders()
+SCPlaceholders::~SCPlaceholders()
 {
 }
 
-void KPrPlaceholders::setLayout(KPrPageLayout * layout, KoPADocument * document, const QList<KoShape *> & shapes, const QSizeF & pageSize,
+void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KoShape *> & shapes, const QSizeF & pageSize,
                                  const QMap<QString, KoTextShapeData*> & styles)
 {
     Q_ASSERT(m_initialized);
 
     document->beginMacro(i18n("Set Layout")); // we call applyStyle() which creates undo commands too.
     QUndoCommand * cmd = new QUndoCommand(i18n("Set Layout"));
-    new KPrPageLayoutCommand(this, layout, cmd);
+    new SCPageLayoutCommand(this, layout, cmd);
 
     Q_ASSERT(!shapes.isEmpty());
     KoShapeLayer * layer = dynamic_cast<KoShapeLayer*>(shapes[0]);
 
     QMap<QString, QList<QRectF> > placeholders;
     if (layout) {
-        foreach (KPrPlaceholder * placeholder, layout->placeholders()) {
+        foreach (SCPlaceholder * placeholder, layout->placeholders()) {
             placeholders[placeholder->presentationObject()].append(placeholder->rect(pageSize));
         }
     }
@@ -114,14 +114,14 @@ void KPrPlaceholders::setLayout(KPrPageLayout * layout, KoPADocument * document,
         const QList<QRectF> & list(itPlaceholder.value());
         QList<QRectF>::const_iterator listIt(list.begin());
         for (; listIt != list.end(); ++listIt) {
-             KPrPlaceholderShape * shape = new KPrPlaceholderShape(itPlaceholder.key());
+             SCPlaceholderShape * shape = new SCPlaceholderShape(itPlaceholder.key());
              shape->initStrategy(document->resourceManager());
              shape->setAdditionalAttribute("presentation:placeholder", "true");
              shape->setAdditionalAttribute("presentation:class", itPlaceholder.key());
              shape->setSize((* listIt).size());
              shape->setPosition((* listIt).topLeft());
              shape->setParent(layer);
-             shape->setShapeId(KPrPlaceholderShapeId);
+             shape->setShapeId(SCPlaceholderShapeId);
              applyStyle(shape, itPlaceholder.key(), styles);
              new KoShapeCreateCommand(document, shape, cmd);
         }
@@ -130,13 +130,13 @@ void KPrPlaceholders::setLayout(KPrPageLayout * layout, KoPADocument * document,
     document->endMacro();
 }
 
-void KPrPlaceholders::setLayout(KPrPageLayout * layout)
+void SCPlaceholders::setLayout(SCPageLayout * layout)
 {
     Q_ASSERT(m_initialized);
     m_layout = layout;
 }
 
-void KPrPlaceholders::init(KPrPageLayout * layout, const QList<KoShape *> & shapes)
+void SCPlaceholders::init(SCPageLayout * layout, const QList<KoShape *> & shapes)
 {
     m_layout = layout;
     add(shapes);
@@ -144,13 +144,13 @@ void KPrPlaceholders::init(KPrPageLayout * layout, const QList<KoShape *> & shap
     m_initialized = true;
 }
 
-KPrPageLayout * KPrPlaceholders::layout() const
+SCPageLayout * SCPlaceholders::layout() const
 {
     Q_ASSERT(m_initialized);
     return m_layout;
 }
 
-void KPrPlaceholders::shapeAdded(KoShape * shape)
+void SCPlaceholders::shapeAdded(KoShape * shape)
 {
     Q_ASSERT(m_initialized);
 // if presentation:class add to index no matter if it is a placeholder or not
@@ -161,7 +161,7 @@ void KPrPlaceholders::shapeAdded(KoShape * shape)
     }
 }
 
-void KPrPlaceholders::shapeRemoved(KoShape * shape)
+void SCPlaceholders::shapeRemoved(KoShape * shape)
 {
     Q_ASSERT(m_initialized);
 // if it is a placeholder remove it
@@ -177,7 +177,7 @@ void KPrPlaceholders::shapeRemoved(KoShape * shape)
     }
 }
 
-void KPrPlaceholders::add(const QList<KoShape *> & shapes)
+void SCPlaceholders::add(const QList<KoShape *> & shapes)
 {
     foreach(KoShape* shape, shapes) {
         QString presentationClass = shape->additionalAttribute("presentation:class");
@@ -192,7 +192,7 @@ void KPrPlaceholders::add(const QList<KoShape *> & shapes)
     }
 }
 
-void KPrPlaceholders::debug() const
+void SCPlaceholders::debug() const
 {
     kDebug(33001) << "size" << m_placeholders.size() << "init:" << m_initialized;
     Placeholders::iterator it(m_placeholders.begin());
@@ -201,14 +201,14 @@ void KPrPlaceholders::debug() const
     }
 }
 
-QMap<QString, KoTextShapeData *> KPrPlaceholders::styles() const
+QMap<QString, KoTextShapeData *> SCPlaceholders::styles() const
 {
     QMap<QString, KoTextShapeData *> styles;
     Placeholders::iterator it(m_placeholders.begin());
     for (; it != m_placeholders.end(); ++it) {
         KoTextShapeData * data = 0;
         // this is done like that as userData is not virtual
-        if (KPrPlaceholderShape * shape = dynamic_cast<KPrPlaceholderShape *>(it->shape)) {
+        if (SCPlaceholderShape * shape = dynamic_cast<SCPlaceholderShape *>(it->shape)) {
             data = qobject_cast<KoTextShapeData*>(shape->userData());
         }
         else {
@@ -221,7 +221,7 @@ QMap<QString, KoTextShapeData *> KPrPlaceholders::styles() const
     return styles;
 }
 
-void KPrPlaceholders::applyStyle(KPrPlaceholderShape * shape, const QString & presentationClass, const QMap<QString, KoTextShapeData*> & styles)
+void SCPlaceholders::applyStyle(SCPlaceholderShape * shape, const QString & presentationClass, const QMap<QString, KoTextShapeData*> & styles)
 {
     // use outline as fallback
     KoTextShapeData * data = styles.value(presentationClass, 0);

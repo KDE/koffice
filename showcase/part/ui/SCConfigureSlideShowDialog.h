@@ -22,15 +22,15 @@
 
 #include <KDialog>
 
-#include "ui_KPrConfigureSlideShow.h"
+#include "ui_SCConfigureSlideShow.h"
 
-class KPrDocument;
+class SCDocument;
 
-class KPrConfigureSlideShowDialog : public KDialog
+class SCConfigureSlideShowDialog : public KDialog
 {
     Q_OBJECT
 public:
-    explicit KPrConfigureSlideShowDialog(KPrDocument *document, QWidget *parent=0);
+    explicit SCConfigureSlideShowDialog(SCDocument *document, QWidget *parent=0);
 
     QString activeCustomSlideShow() const;
 
@@ -38,8 +38,8 @@ private slots:
     void editCustomSlideShow();
 
 private:
-    Ui::KPrConfigureSlideShow ui;
-    KPrDocument *m_document;
+    Ui::SCConfigureSlideShow ui;
+    SCDocument *m_document;
 };
 
 #endif // KPRCONFIGUREPRESENTERVIEWDIALOG_H

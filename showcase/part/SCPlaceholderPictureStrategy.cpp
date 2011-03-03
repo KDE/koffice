@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPlaceholderPictureStrategy.h"
+#include "SCPlaceholderPictureStrategy.h"
 
 #include <QString>
 #include <KFileDialog>
@@ -29,22 +29,22 @@
 #include <kio/netaccess.h>
 #include <kdebug.h>
 
-KPrPlaceholderPictureStrategy::KPrPlaceholderPictureStrategy()
-: KPrPlaceholderStrategy("graphic")
+SCPlaceholderPictureStrategy::SCPlaceholderPictureStrategy()
+: SCPlaceholderStrategy("graphic")
 {
 }
 
-KPrPlaceholderPictureStrategy::~KPrPlaceholderPictureStrategy()
+SCPlaceholderPictureStrategy::~SCPlaceholderPictureStrategy()
 {
 }
 
-KoShape *KPrPlaceholderPictureStrategy::createShape(KoResourceManager *rm)
+KoShape *SCPlaceholderPictureStrategy::createShape(KoResourceManager *rm)
 {
     KoShape * shape = 0;
 
     KUrl url = KFileDialog::getOpenUrl();
     if (!url.isEmpty()) {
-        shape = KPrPlaceholderStrategy::createShape(rm);
+        shape = SCPlaceholderStrategy::createShape(rm);
 
         KoImageCollection *collection = rm->imageCollection();
         Q_ASSERT(collection);

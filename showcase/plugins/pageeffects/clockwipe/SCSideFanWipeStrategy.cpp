@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSideFanWipeStrategy.h"
+#include "SCSideFanWipeStrategy.h"
 
 #include <math.h>
 #include <QWidget>
@@ -26,26 +26,26 @@
 
 #include <kdebug.h>
 
-#include "KPrClockWipeSubpathHelper.h"
+#include "SCClockWipeSubpathHelper.h"
 
-KPrSideFanWipeStrategy::KPrSideFanWipeStrategy(int positionAngle, int fanCount, int subType, const char * smilType, const char *smilSubType, bool reverse)
-    : KPrPageEffectStrategy(subType, smilType, smilSubType, reverse), m_fanCount(fanCount)
+SCSideFanWipeStrategy::SCSideFanWipeStrategy(int positionAngle, int fanCount, int subType, const char * smilType, const char *smilSubType, bool reverse)
+    : SCPageEffectStrategy(subType, smilType, smilSubType, reverse), m_fanCount(fanCount)
 {
     m_positionAngle = static_cast<double>(positionAngle)/180 * M_PI;
     m_startAngle = static_cast<double>(positionAngle)/180 * M_PI + M_PI;
 }
 
-KPrSideFanWipeStrategy::~KPrSideFanWipeStrategy()
+SCSideFanWipeStrategy::~SCSideFanWipeStrategy()
 {
 }
 
-void KPrSideFanWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCSideFanWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, 180);
 }
 
-void KPrSideFanWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCSideFanWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     int width = data.m_widget->width();
     int height = data.m_widget->height();
@@ -75,20 +75,20 @@ void KPrSideFanWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEf
 
         QPainterPath clipPath;
         if(reverse()) {
-            KPrClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, fanAngle - 0.5*M_PI, fanAngle - 0.5*M_PI + angle);
-            KPrClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, fanAngle + 0.5*M_PI - angle, fanAngle + 0.5*M_PI);
+            SCClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, fanAngle - 0.5*M_PI, fanAngle - 0.5*M_PI + angle);
+            SCClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, fanAngle + 0.5*M_PI - angle, fanAngle + 0.5*M_PI);
             p.setClipPath(clipPath);
             p.drawPixmap(rect.intersected(boundingRect), data.m_newPage, rect.intersected(boundingRect));
         }
         else {
-            KPrClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, fanAngle - angle, fanAngle + angle);
+            SCClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, fanAngle - angle, fanAngle + angle);
             p.setClipPath(clipPath);
             p.drawPixmap(rect.intersected(boundingRect), data.m_newPage, rect.intersected(boundingRect));
         }
     }
 }
 
-void KPrSideFanWipeStrategy::next(const KPrPageEffect::Data &data)
+void SCSideFanWipeStrategy::next(const SCPageEffect::Data &data)
 {
     data.m_widget->update();
 }

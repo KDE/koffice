@@ -29,7 +29,7 @@
 
 #include <KoVariable.h>
 
-#include <KPrDeclarations.h>
+#include <SCDeclarations.h>
 
 /**
  * This is a PresentationVariable for document declaration.
@@ -54,7 +54,7 @@ public:
     bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
 private:
-    KPrDeclarations::Type m_type;
+    SCDeclarations::Type m_type;
 };
 
 #endif

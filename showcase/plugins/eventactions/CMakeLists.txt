@@ -6,9 +6,9 @@ else(NOT QT_MAC_USE_COCOA)
 endif(NOT QT_MAC_USE_COCOA)
 
 set(showcaseeventactions_PART_SRCS
-    sound/KPrSoundEventAction.cpp
-    sound/KPrSoundEventActionFactory.cpp
-    sound/KPrSoundEventActionWidget.cpp
+    sound/SCSoundEventAction.cpp
+    sound/SCSoundEventActionFactory.cpp
+    sound/SCSoundEventActionWidget.cpp
     Plugin.cpp
 )
 

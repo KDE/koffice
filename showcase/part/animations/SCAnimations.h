@@ -20,15 +20,15 @@
 #ifndef KPRANIMATIONS_H
 #define KPRANIMATIONS_H
 
-class KPrAnimations
+class SCAnimations
 {
 public:
-    KPrAnimations();
-    ~KPrAnimations();
+    SCAnimations();
+    ~SCAnimations();
 
     int steps();
-    KPrShapeAnimation * take(int pos);
-    int pos(KPrShapeAnimation * animation);
+    SCShapeAnimation * take(int pos);
+    int pos(SCShapeAnimation * animation);
 
     bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
     void saveOdf(KoShapeSavingContext &context) const;
@@ -36,17 +36,17 @@ public:
 #if REMOVE
     /**
      * Add the animation to the current shape animation
-     * if this fails create a new KPrShapeAnimation and put it in there
+     * if this fails create a new SCShapeAnimation and put it in there
      * the new animation needs to be a with previous
      * should also write out a warning
      */
-    void add(KPrAnimationBase * animation);
+    void add(SCAnimationBase * animation);
 
-    QMap<QPair<KoShape *, KoTextBlockData *>, KPrShapeAnimation *> m_current;
+    QMap<QPair<KoShape *, KoTextBlockData *>, SCShapeAnimation *> m_current;
 #endif
 
 private:
-    QList<KPrShapeAnimation *> m_animations;
+    QList<SCShapeAnimation *> m_animations;
 };
 
 #endif /* KPRANIMATIONS_H */

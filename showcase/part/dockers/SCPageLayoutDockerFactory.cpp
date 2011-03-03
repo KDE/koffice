@@ -17,27 +17,27 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPageLayoutDockerFactory.h"
+#include "SCPageLayoutDockerFactory.h"
 
-#include "KPrPageLayoutDocker.h"
+#include "SCPageLayoutDocker.h"
 
-KPrPageLayoutDockerFactory::KPrPageLayoutDockerFactory()
+SCPageLayoutDockerFactory::SCPageLayoutDockerFactory()
 {
 }
 
-QString KPrPageLayoutDockerFactory::id() const
+QString SCPageLayoutDockerFactory::id() const
 {
     return QString("Slide layout");
 }
 
-QDockWidget* KPrPageLayoutDockerFactory::createDockWidget()
+QDockWidget* SCPageLayoutDockerFactory::createDockWidget()
 {
-    KPrPageLayoutDocker * widget = new KPrPageLayoutDocker();
+    SCPageLayoutDocker * widget = new SCPageLayoutDocker();
     widget->setObjectName( id() );
     return widget;
 }
 
-KoDockFactoryBase::DockPosition KPrPageLayoutDockerFactory::defaultDockPosition() const
+KoDockFactoryBase::DockPosition SCPageLayoutDockerFactory::defaultDockPosition() const
 {
     return DockRight;
 }

@@ -20,19 +20,19 @@
 #ifndef KPRSLIDEWIPEFROMRIGHTSTRATEGY_H
 #define KPRSLIDEWIPEFROMRIGHTSTRATEGY_H
 
-#include "pageeffects/KPrPageEffectStrategy.h"
+#include "pageeffects/SCPageEffectStrategy.h"
 
-class KPrSlideWipeFromRightStrategy : public KPrPageEffectStrategy
+class SCSlideWipeFromRightStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrSlideWipeFromRightStrategy();
-    virtual ~KPrSlideWipeFromRightStrategy();
+    SCSlideWipeFromRightStrategy();
+    virtual ~SCSlideWipeFromRightStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
 
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 };
 
 #endif // KPRSLIDEWIPEFROMRIGHTSTRATEGY_H

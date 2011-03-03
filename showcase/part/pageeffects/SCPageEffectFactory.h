@@ -21,14 +21,14 @@
 
 #include <QPair>
 
-#include "KPrPageEffect.h"
+#include "SCPageEffect.h"
 
 #include "kpresenter_export.h"
 
 /**
  * Base class for a page effect factories
  */
-class KPRESENTER_EXPORT KPrPageEffectFactory
+class KPRESENTER_EXPORT SCPageEffectFactory
 {
 public:
     struct Properties {
@@ -48,16 +48,16 @@ public:
      * @param name The name of the effect. This name is used in the UI
      * @param subTypes The possible subtypes of the page effect
      */
-    KPrPageEffectFactory(const QString & id, const QString & name);
+    SCPageEffectFactory(const QString & id, const QString & name);
 
-    virtual ~KPrPageEffectFactory();
+    virtual ~SCPageEffectFactory();
 
     /**
      * Create a page effect
      *
      * @param properties The properties for creating a page effect
      */
-    KPrPageEffect * createPageEffect(const Properties & properties) const;
+    SCPageEffect * createPageEffect(const Properties & properties) const;
 
     /**
      * Create a page effect
@@ -66,7 +66,7 @@ public:
      *
      * @param element The element containing the information for creating the page effect
      */
-    KPrPageEffect * createPageEffect(const KoXmlElement & element) const;
+    SCPageEffect * createPageEffect(const KoXmlElement & element) const;
 
     /**
      * Get the id of the page effect
@@ -108,7 +108,7 @@ protected:
      *
      * @param strategy The strategy to add
      */
-    void addStrategy(KPrPageEffectStrategy * strategy);
+    void addStrategy(SCPageEffectStrategy * strategy);
 
 private:
     struct Private;

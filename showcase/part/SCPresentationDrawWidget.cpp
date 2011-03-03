@@ -35,10 +35,10 @@
 #include <KoPACanvas.h>
 #include <KoPointerEvent.h>
 
-#include "KPrPresentationDrawWidget.h"
+#include "SCPresentationDrawWidget.h"
 
-KPrPresentationDrawWidget::KPrPresentationDrawWidget(KoPACanvasBase * canvas)
-: KPrPresentationToolEventForwarder(canvas)
+SCPresentationDrawWidget::SCPresentationDrawWidget(KoPACanvasBase * canvas)
+: SCPresentationToolEventForwarder(canvas)
 , m_draw(false)
 , m_penSize(10)
 , m_penColor(Qt::black)
@@ -49,11 +49,11 @@ KPrPresentationDrawWidget::KPrPresentationDrawWidget(KoPACanvasBase * canvas)
     resize(canvas->canvasWidget()->size());
 }
 
-KPrPresentationDrawWidget::~KPrPresentationDrawWidget()
+SCPresentationDrawWidget::~SCPresentationDrawWidget()
 {
 }
 
-void KPrPresentationDrawWidget::paintEvent(QPaintEvent * event)
+void SCPresentationDrawWidget::paintEvent(QPaintEvent * event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
@@ -67,7 +67,7 @@ void KPrPresentationDrawWidget::paintEvent(QPaintEvent * event)
     }
 }
 
-void KPrPresentationDrawWidget::mousePressEvent(QMouseEvent* e)
+void SCPresentationDrawWidget::mousePressEvent(QMouseEvent* e)
 {
     struct Path path;
     path.color = m_penColor;
@@ -77,7 +77,7 @@ void KPrPresentationDrawWidget::mousePressEvent(QMouseEvent* e)
     m_draw = true;
 }
 
-void KPrPresentationDrawWidget::mouseMoveEvent(QMouseEvent* e)
+void SCPresentationDrawWidget::mouseMoveEvent(QMouseEvent* e)
 {
     if (m_draw) {
         m_pointVectors.last().points << e->pos();
@@ -85,13 +85,13 @@ void KPrPresentationDrawWidget::mouseMoveEvent(QMouseEvent* e)
     }
 }
 
-void KPrPresentationDrawWidget::mouseReleaseEvent(QMouseEvent* e)
+void SCPresentationDrawWidget::mouseReleaseEvent(QMouseEvent* e)
 {
     Q_UNUSED(e);
     m_draw = false;
 }
 
-void KPrPresentationDrawWidget::contextMenuEvent(QContextMenuEvent* event)
+void SCPresentationDrawWidget::contextMenuEvent(QContextMenuEvent* event)
 {
     // TODO rework to not recreate the menu all the time
     // make strings translateable.
@@ -128,14 +128,14 @@ void KPrPresentationDrawWidget::contextMenuEvent(QContextMenuEvent* event)
     m_draw = false;
 }
 
-QAction* KPrPresentationDrawWidget::buildActionSize(int size)
+QAction* SCPresentationDrawWidget::buildActionSize(int size)
 {
     QAction *action = new QAction(buildIconSize(size), QString::number(size)+"px", this);
     action->setProperty("size", size);
     return action;
 }
 
-QAction* KPrPresentationDrawWidget::buildActionColor(QColor color, QString name)
+QAction* SCPresentationDrawWidget::buildActionColor(QColor color, QString name)
 {
     QAction *action;
     action = new QAction(buildIconColor (color) , name, this);
@@ -143,7 +143,7 @@ QAction* KPrPresentationDrawWidget::buildActionColor(QColor color, QString name)
     return action;
 }
 
-QIcon KPrPresentationDrawWidget::buildIconSize(int size)
+QIcon SCPresentationDrawWidget::buildIconSize(int size)
 {
     QPen thumbPen(Qt::black, Qt::MiterJoin);
     thumbPen.setCapStyle(Qt::RoundCap);
@@ -157,7 +157,7 @@ QIcon KPrPresentationDrawWidget::buildIconSize(int size)
     return thumbIcon;
 }
 
-QIcon KPrPresentationDrawWidget::buildIconColor(QColor color)
+QIcon SCPresentationDrawWidget::buildIconColor(QColor color)
 {
     QPixmap thumbPixmap(QSize (24, 20));
     thumbPixmap.fill(color);
@@ -165,25 +165,25 @@ QIcon KPrPresentationDrawWidget::buildIconColor(QColor color)
     return thumbIcon;
 }
 
-void KPrPresentationDrawWidget::updateSize(QAction *size)
+void SCPresentationDrawWidget::updateSize(QAction *size)
 {
     m_penSize = size->property("size").toInt();
     m_draw = false;
 }
 
-void KPrPresentationDrawWidget::updateSize(int size)
+void SCPresentationDrawWidget::updateSize(int size)
 {
     m_penSize=size;
     m_draw=false;
 }
 
-void KPrPresentationDrawWidget::updateColor(QAction *color)
+void SCPresentationDrawWidget::updateColor(QAction *color)
 {
     m_penColor = color->property("color").value<QColor>();
     m_draw = false;
 }
 
-void KPrPresentationDrawWidget::updateColor(const QString &color)
+void SCPresentationDrawWidget::updateColor(const QString &color)
 {
     m_penColor.setNamedColor(color);
     m_draw=false;

@@ -24,15 +24,15 @@
 #include <QMap>
 #include <QString>
 
-class KPrPageLayout;
+class SCPageLayout;
 
-#define KPR_PAGE_LAYOUT_SHARED_SAVING_ID "KPrPageLayoutSharedSavingId"
+#define KPR_PAGE_LAYOUT_SHARED_SAVING_ID "SCPageLayoutSharedSavingId"
 
-class KPrPageLayoutSharedSavingData : public KoSharedSavingData
+class SCPageLayoutSharedSavingData : public KoSharedSavingData
 {
 public:
-    KPrPageLayoutSharedSavingData();
-    virtual ~KPrPageLayoutSharedSavingData();
+    SCPageLayoutSharedSavingData();
+    virtual ~SCPageLayoutSharedSavingData();
 
     /**
      * Add page layout style name
@@ -40,7 +40,7 @@ public:
      * @param pageLayout the page layout
      * @param the styleName of the page layout style
      */
-    void addPageLayoutStyle(KPrPageLayout * pageLayout, const QString & styleName);
+    void addPageLayoutStyle(SCPageLayout * pageLayout, const QString & styleName);
 
     /**
      * Get page layout style
@@ -48,10 +48,10 @@ public:
      * @param the pointer to the used page layout
      * @return the style name for the page layout or an null string if it is not found
      */
-    QString pageLayoutStyle(KPrPageLayout * pageLayout);
+    QString pageLayoutStyle(SCPageLayout * pageLayout);
 
 private:
-    QMap<KPrPageLayout *, QString> m_pageLayoutToName;
+    QMap<SCPageLayout *, QString> m_pageLayoutToName;
 };
 
 #endif /* KPRPAGELAYOUTSHAREDSAVINGDATA_H */

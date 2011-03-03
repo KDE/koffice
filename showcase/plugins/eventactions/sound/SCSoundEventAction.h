@@ -28,16 +28,16 @@ namespace Phonon {
     class MediaObject;
 }
 
-class KPrSoundData;
+class SCSoundData;
 
-#define KPrSoundEventActionId "KPrSoundEventAction"
+#define SCSoundEventActionId "SCSoundEventAction"
 
-class KPrSoundEventAction : public QObject, public KoEventAction
+class SCSoundEventAction : public QObject, public KoEventAction
 {
     Q_OBJECT
 public:
-    KPrSoundEventAction();
-    virtual ~KPrSoundEventAction();
+    SCSoundEventAction();
+    virtual ~SCSoundEventAction();
 
     virtual bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context);
     virtual void saveOdf(KoShapeSavingContext & context) const;
@@ -45,15 +45,15 @@ public:
     virtual void start();
     virtual void finish();
 
-    void setSoundData(KPrSoundData * soundData);
-    KPrSoundData * soundData() const;
+    void setSoundData(SCSoundData * soundData);
+    SCSoundData * soundData() const;
 
 public slots:
     void finished();
 
 private:
     Phonon::MediaObject * m_media;
-    KPrSoundData *m_soundData;
+    SCSoundData *m_soundData;
 };
 
 #endif /* KPRSOUNDEVENTACTION_H */

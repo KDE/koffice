@@ -17,41 +17,41 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimationBase.h"
+#include "SCAnimationBase.h"
 
 #include <KoXmlNS.h>
-#include "KPrDurationParser.h"
+#include "SCDurationParser.h"
 #include "KoXmlReader.h"
 #include "KoXmlWriter.h"
-#include "KPrAnimationCache.h"
-#include "KPrShapeAnimation.h"
+#include "SCAnimationCache.h"
+#include "SCShapeAnimation.h"
 #include "KoShapeLoadingContext.h"
 #include "KoTextBlockData.h"
 
-KPrAnimationBase::KPrAnimationBase(KPrShapeAnimation *shapeAnimation)
+SCAnimationBase::SCAnimationBase(SCShapeAnimation *shapeAnimation)
 : m_shapeAnimation(shapeAnimation)
 , m_begin(0)
 ,m_duration(1)
 {
 }
 
-KPrAnimationBase::~KPrAnimationBase()
+SCAnimationBase::~SCAnimationBase()
 {
 }
 
-int KPrAnimationBase::duration() const
+int SCAnimationBase::duration() const
 {
     return m_duration;
 }
 
-bool KPrAnimationBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimationBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(context)
-    m_begin = KPrDurationParser::durationMs(element.attributeNS(KoXmlNS::smil, "begin"));
+    m_begin = SCDurationParser::durationMs(element.attributeNS(KoXmlNS::smil, "begin"));
     if (m_begin == -1) {
         m_begin = 0;
     }
-    m_duration = KPrDurationParser::durationMs(element.attributeNS(KoXmlNS::smil, "dur"));
+    m_duration = SCDurationParser::durationMs(element.attributeNS(KoXmlNS::smil, "dur"));
     if (m_duration == -1) {
         m_duration = 1;
     }
@@ -59,28 +59,28 @@ bool KPrAnimationBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContex
     return true;
 }
 
-void KPrAnimationBase::updateCache(const QString &id, const QVariant &value)
+void SCAnimationBase::updateCache(const QString &id, const QVariant &value)
 {
     m_animationCache->update(m_shapeAnimation->shape(), m_shapeAnimation->textBlockData(), id, value);
 }
 
-void KPrAnimationBase::updateCurrentTime(int currentTime)
+void SCAnimationBase::updateCurrentTime(int currentTime)
 {
     if (currentTime >= m_begin) {
         next(currentTime - m_begin);
     }
 }
 
-int KPrAnimationBase::animationDuration() const
+int SCAnimationBase::animationDuration() const
 {
     return totalDuration() - m_begin;
 }
 
-bool KPrAnimationBase::saveAttribute(KoPASavingContext &paContext) const
+bool SCAnimationBase::saveAttribute(KoPASavingContext &paContext) const
 {
     KoXmlWriter &writer = paContext.xmlWriter();
-    writer.addAttribute("smil:begin", KPrDurationParser::msToString(m_begin));
-    writer.addAttribute("smil:dur", KPrDurationParser::msToString(m_duration));
+    writer.addAttribute("smil:begin", SCDurationParser::msToString(m_begin));
+    writer.addAttribute("smil:dur", SCDurationParser::msToString(m_duration));
     if (m_shapeAnimation->textBlockData()) {
         writer.addAttribute("smil:targetElement", paContext.subId(m_shapeAnimation->textBlockData(), false));
         writer.addAttribute("anim:sub-item", "text");

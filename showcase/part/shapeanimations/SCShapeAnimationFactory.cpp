@@ -16,9 +16,9 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#include "KPrShapeAnimationFactory.h"
+#include "SCShapeAnimationFactory.h"
 
-struct KPrShapeAnimationFactory::Private
+struct SCShapeAnimationFactory::Private
 {
     Private(const QString & id, const QString & name)
     : id(id)
@@ -29,22 +29,22 @@ struct KPrShapeAnimationFactory::Private
     QString name;
 };
 
-KPrShapeAnimationFactory::KPrShapeAnimationFactory(const QString & id, const QString & name)
+SCShapeAnimationFactory::SCShapeAnimationFactory(const QString & id, const QString & name)
 : d(new Private(id, name))
 {
 }
 
-KPrShapeAnimationFactory::~KPrShapeAnimationFactory()
+SCShapeAnimationFactory::~SCShapeAnimationFactory()
 {
     delete d;
 }
 
-QString KPrShapeAnimationFactory::id() const
+QString SCShapeAnimationFactory::id() const
 {
     return d->id;
 }
 
-QString KPrShapeAnimationFactory::name() const
+QString SCShapeAnimationFactory::name() const
 {
     return d->name;
 }

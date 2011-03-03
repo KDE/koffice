@@ -22,21 +22,21 @@
 
 #include <QtGui/QDialog>
 
-#include "ui_KPrCustomSlideShowsDialog.h"
+#include "ui_SCCustomSlideShowsDialog.h"
 
-class KPrCustomSlideShows;
+class SCCustomSlideShows;
 class KoPAPageBase;
 class QListWidgetItem;
-class KPrCustomSlideShows;
-class KPrDocument;
+class SCCustomSlideShows;
+class SCDocument;
 
-class KPrCustomSlideShowsDialog : public QDialog
+class SCCustomSlideShowsDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    KPrCustomSlideShowsDialog(QWidget *parent, KPrCustomSlideShows *slideShows, KPrDocument *doc, KPrCustomSlideShows *&newSlideShows);
-    ~KPrCustomSlideShowsDialog();
+    SCCustomSlideShowsDialog(QWidget *parent, SCCustomSlideShows *slideShows, SCDocument *doc, SCCustomSlideShows *&newSlideShows);
+    ~SCCustomSlideShowsDialog();
 private Q_SLOTS:
     void addCustomSlideShow();
     void addSlidesToCurrentSlideShow();
@@ -59,8 +59,8 @@ private:
     QString m_selectedSlideShowName;
 
     Ui::CustomSlideShowsWidget m_uiWidget;
-    KPrCustomSlideShows *m_slideShows;
-    KPrCustomSlideShows *m_oldSlideShows;
-    KPrDocument *m_doc;
+    SCCustomSlideShows *m_slideShows;
+    SCCustomSlideShows *m_oldSlideShows;
+    SCDocument *m_doc;
 };
 #endif

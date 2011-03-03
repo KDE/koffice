@@ -22,7 +22,7 @@
 #define KPRSHAPEANIMATION_H
 
 #include <QParallelAnimationGroup>
-#include "KPrAnimationData.h"
+#include "SCAnimationData.h"
 #include <QPair>
 
 class KoShape;
@@ -30,13 +30,13 @@ class KoTextBlockData;
 class KoXmlElement;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
-class KPrAnimationCache;
+class SCAnimationCache;
 
-class KPrShapeAnimation : public QParallelAnimationGroup, KPrAnimationData
+class SCShapeAnimation : public QParallelAnimationGroup, SCAnimationData
 {
 public:
-    KPrShapeAnimation(KoShape *shape, KoTextBlockData *textBlockData);
-    virtual ~KPrShapeAnimation();
+    SCShapeAnimation(KoShape *shape, KoTextBlockData *textBlockData);
+    virtual ~SCShapeAnimation();
 
     bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
     virtual bool saveOdf(KoPASavingContext &paContext, bool startStep, bool startSubStep) const;
@@ -44,7 +44,7 @@ public:
     KoShape * shape() const;
     KoTextBlockData * textBlockData() const;
 
-    virtual void init(KPrAnimationCache *animationCache, int step);
+    virtual void init(SCAnimationCache *animationCache, int step);
 
     virtual void deactivate();
     /**
@@ -58,7 +58,7 @@ public:
     bool visible();
 
     /**
-     * Read the value from the first KPrAnimationBase object
+     * Read the value from the first SCAnimationBase object
      */
     //QPair<KoShape *, KoTextBlockData *> animationShape() const;
 

@@ -2,35 +2,35 @@ include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/s
 
 set(kpr_pageeffect_matrixwipe_SRCS
     Plugin.cpp
-    KPrMatrixWipeStrategy.cpp
+    SCMatrixWipeStrategy.cpp
 
-    snakewipe/KPrSnakeWipeEffectFactory.cpp
-    snakewipe/KPrSnakeWipeBottomRightHorizontalStrategy.cpp
-    snakewipe/KPrSnakeWipeBottomRightVerticalStrategy.cpp
-    snakewipe/KPrSnakeWipeTopLeftHorizontalStrategy.cpp
-    snakewipe/KPrSnakeWipeTopLeftVerticalStrategy.cpp
-    snakewipe/KPrSnakeWipeDiagonalStrategy.cpp
-    snakewipe/KPrSnakeWipeTopLeftDiagonalStrategy.cpp
-    snakewipe/KPrSnakeWipeTopRightDiagonalStrategy.cpp
-    snakewipe/KPrSnakeWipeBottomRightDiagonalStrategy.cpp
-    snakewipe/KPrSnakeWipeBottomLeftDiagonalStrategy.cpp
+    snakewipe/SCSnakeWipeEffectFactory.cpp
+    snakewipe/SCSnakeWipeBottomRightHorizontalStrategy.cpp
+    snakewipe/SCSnakeWipeBottomRightVerticalStrategy.cpp
+    snakewipe/SCSnakeWipeTopLeftHorizontalStrategy.cpp
+    snakewipe/SCSnakeWipeTopLeftVerticalStrategy.cpp
+    snakewipe/SCSnakeWipeDiagonalStrategy.cpp
+    snakewipe/SCSnakeWipeTopLeftDiagonalStrategy.cpp
+    snakewipe/SCSnakeWipeTopRightDiagonalStrategy.cpp
+    snakewipe/SCSnakeWipeBottomRightDiagonalStrategy.cpp
+    snakewipe/SCSnakeWipeBottomLeftDiagonalStrategy.cpp
 
-    spiralwipe/KPrSpiralWipeEffectFactory.cpp
-    spiralwipe/KPrSpiralWipeStrategy.cpp
+    spiralwipe/SCSpiralWipeEffectFactory.cpp
+    spiralwipe/SCSpiralWipeStrategy.cpp
 
-    parallelsnakes/KPrParallelSnakesWipeEffectFactory.cpp
-    parallelsnakes/KPrParallelSnakesWipeHorizontalStrategy.cpp
-    parallelsnakes/KPrParallelSnakesWipeVerticalStrategy.cpp
-    parallelsnakes/KPrParallelSnakesWipeDiagonalStrategy.cpp
+    parallelsnakes/SCParallelSnakesWipeEffectFactory.cpp
+    parallelsnakes/SCParallelSnakesWipeHorizontalStrategy.cpp
+    parallelsnakes/SCParallelSnakesWipeVerticalStrategy.cpp
+    parallelsnakes/SCParallelSnakesWipeDiagonalStrategy.cpp
 
-    boxsnakes/KPrBoxSnakesWipeEffectFactory.cpp
-    boxsnakes/KPrBoxSnakesWipeStrategy.cpp
+    boxsnakes/SCBoxSnakesWipeEffectFactory.cpp
+    boxsnakes/SCBoxSnakesWipeStrategy.cpp
 
-    waterfallwipe/KPrWaterfallWipeEffectFactory.cpp
-    waterfallwipe/KPrWaterfallWipeTopLeftStrategy.cpp
-    waterfallwipe/KPrWaterfallWipeTopRightStrategy.cpp
-    waterfallwipe/KPrWaterfallWipeBottomLeftStrategy.cpp
-    waterfallwipe/KPrWaterfallWipeBottomRightStrategy.cpp
+    waterfallwipe/SCWaterfallWipeEffectFactory.cpp
+    waterfallwipe/SCWaterfallWipeTopLeftStrategy.cpp
+    waterfallwipe/SCWaterfallWipeTopRightStrategy.cpp
+    waterfallwipe/SCWaterfallWipeBottomLeftStrategy.cpp
+    waterfallwipe/SCWaterfallWipeBottomRightStrategy.cpp
 )
 
 kde4_add_plugin(kpr_pageeffect_matrixwipe ${kpr_pageeffect_matrixwipe_SRCS})

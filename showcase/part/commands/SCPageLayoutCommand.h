@@ -22,14 +22,14 @@
 
 #include <QUndoCommand>
 
-class KPrPageLayout;
-class KPrPlaceholders;
+class SCPageLayout;
+class SCPlaceholders;
 
-class KPrPageLayoutCommand : public QUndoCommand
+class SCPageLayoutCommand : public QUndoCommand
 {
 public:
-    KPrPageLayoutCommand(KPrPlaceholders * placeholders, KPrPageLayout * layout, QUndoCommand *parent = 0);
-    virtual ~KPrPageLayoutCommand();
+    SCPageLayoutCommand(SCPlaceholders * placeholders, SCPageLayout * layout, QUndoCommand *parent = 0);
+    virtual ~SCPageLayoutCommand();
 
     /// redo the command
     void redo();
@@ -37,9 +37,9 @@ public:
     void undo();
 
 private:
-    KPrPlaceholders * m_placeholders;
-    KPrPageLayout * m_oldLayout;
-    KPrPageLayout * m_newLayout;
+    SCPlaceholders * m_placeholders;
+    SCPageLayout * m_oldLayout;
+    SCPageLayout * m_newLayout;
 };
 
 #endif /* KPRPAGELAYOUTCOMMAND_H */

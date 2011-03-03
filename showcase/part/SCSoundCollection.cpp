@@ -16,8 +16,8 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KPrSoundCollection.h"
-#include "KPrSoundData.h"
+#include "SCSoundCollection.h"
+#include "SCSoundData.h"
 
 #include <KoStoreDevice.h>
 #include <KoXmlWriter.h>
@@ -26,27 +26,27 @@
 #include <KDebug>
 #include <kmimetype.h>
 
-class KPrSoundCollection::Private {
+class SCSoundCollection::Private {
 public:
-    QList<KPrSoundData*> sounds;
+    QList<SCSoundData*> sounds;
 };
 
-KPrSoundCollection::KPrSoundCollection(QObject *parent)
+SCSoundCollection::SCSoundCollection(QObject *parent)
     : QObject(parent),
     d(new Private())
 {
 }
 
-KPrSoundCollection::~KPrSoundCollection() {
+SCSoundCollection::~SCSoundCollection() {
     delete d;
 }
 
-void KPrSoundCollection::addSound(KPrSoundData *image) {
-    d->sounds.append(new KPrSoundData(*image));
+void SCSoundCollection::addSound(SCSoundData *image) {
+    d->sounds.append(new SCSoundData(*image));
 }
 
-void KPrSoundCollection::removeSound(KPrSoundData *image) {
-    foreach(KPrSoundData *data, d->sounds) {
+void SCSoundCollection::removeSound(SCSoundData *image) {
+    foreach(SCSoundData *data, d->sounds) {
         if(data->operator==(*image)) {
             d->sounds.removeAll(data);
             delete data;
@@ -54,7 +54,7 @@ void KPrSoundCollection::removeSound(KPrSoundData *image) {
     }
 }
 
-KPrSoundData *KPrSoundCollection::findSound(QString title)
+SCSoundData *SCSoundCollection::findSound(QString title)
 {
     for (int i = 0; i < d->sounds.size(); ++i) {
         if (d->sounds.at(i)->title() == title)
@@ -63,7 +63,7 @@ KPrSoundData *KPrSoundCollection::findSound(QString title)
     return 0;
 }
 
-QStringList KPrSoundCollection::titles()
+QStringList SCSoundCollection::titles()
 {
     QStringList list;
 
@@ -74,9 +74,9 @@ QStringList KPrSoundCollection::titles()
 }
 
 // TODO move to loading of the actual element using the sound
-bool KPrSoundCollection::completeLoading(KoStore *store)
+bool SCSoundCollection::completeLoading(KoStore *store)
 {
-    foreach(KPrSoundData *sound, d->sounds) {
+    foreach(SCSoundData *sound, d->sounds) {
         if(! store->open(sound->storeHref()))
             return false;
         bool ok = sound->loadFromFile(new KoStoreDevice(store));
@@ -89,10 +89,10 @@ bool KPrSoundCollection::completeLoading(KoStore *store)
 }
 
 // use a KoSharedSavingData in the context to save which sounds need to be saved
-bool KPrSoundCollection::completeSaving(KoStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context)
+bool SCSoundCollection::completeSaving(KoStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context)
 {
     Q_UNUSED(context);
-    foreach(KPrSoundData *sound, d->sounds) {
+    foreach(SCSoundData *sound, d->sounds) {
         if(sound->isTaggedForSaving())
         {
             if(! store->open(sound->storeHref()))

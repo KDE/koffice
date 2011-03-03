@@ -25,7 +25,7 @@
 #define ZigZagWipeEffectId "ZigZagWipeEffect"
 
 ZigZagWipeEffectFactory::ZigZagWipeEffectFactory()
-: KPrPageEffectFactory(ZigZagWipeEffectId, i18n("Zig Zag"))
+: SCPageEffectFactory(ZigZagWipeEffectId, i18n("Zig Zag"))
 {
     addStrategy(new ZigZagWipeStrategy(FromLeft, "leftToRight", false));
     addStrategy(new ZigZagWipeStrategy(FromTop, "topToBottom", false));

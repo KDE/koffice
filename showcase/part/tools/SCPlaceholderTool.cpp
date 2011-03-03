@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPlaceholderTool.h"
+#include "SCPlaceholderTool.h"
 
 #include <QUndoCommand>
 #include <QPainter>
@@ -29,45 +29,45 @@
 #include <KoSelection.h>
 #include <KoToolManager.h>
 
-#include "KPrPlaceholderShape.h"
+#include "SCPlaceholderShape.h"
 
-KPrPlaceholderTool::KPrPlaceholderTool(KoCanvasBase *canvas)
+SCPlaceholderTool::SCPlaceholderTool(KoCanvasBase *canvas)
 : KoToolBase(canvas)
 {
 }
 
-KPrPlaceholderTool::~KPrPlaceholderTool()
+SCPlaceholderTool::~SCPlaceholderTool()
 {
 }
 
-void KPrPlaceholderTool::paint(QPainter &painter, const KoViewConverter &converter)
+void SCPlaceholderTool::paint(QPainter &painter, const KoViewConverter &converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);
 }
 
-void KPrPlaceholderTool::mousePressEvent(KoPointerEvent *event)
+void SCPlaceholderTool::mousePressEvent(KoPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void KPrPlaceholderTool::mouseMoveEvent(KoPointerEvent *event)
+void SCPlaceholderTool::mouseMoveEvent(KoPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void KPrPlaceholderTool::mouseReleaseEvent(KoPointerEvent *event)
+void SCPlaceholderTool::mouseReleaseEvent(KoPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void KPrPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void SCPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
-    QList<KPrPlaceholderShape *> selectedShapes;
+    QList<SCPlaceholderShape *> selectedShapes;
 
     foreach (KoShape *shape, shapes) {
-        if (KPrPlaceholderShape * ps = dynamic_cast<KPrPlaceholderShape*>(shape)) {
+        if (SCPlaceholderShape * ps = dynamic_cast<SCPlaceholderShape*>(shape)) {
             selectedShapes.append(ps);
         }
     }
@@ -77,7 +77,7 @@ void KPrPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KoSh
         return;
     }
 
-    KPrPlaceholderShape * shape = selectedShapes.at(0);
+    SCPlaceholderShape * shape = selectedShapes.at(0);
 
     KoShape * newShape = shape->createShape(canvas()->shapeController()->resourceManager());
     // only do anything when we got a shape back

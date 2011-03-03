@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPageSelectStrategyBase.h"
+#include "SCPageSelectStrategyBase.h"
 
-KPrPageSelectStrategyBase::KPrPageSelectStrategyBase()
+SCPageSelectStrategyBase::SCPageSelectStrategyBase()
 {
 }
 
-KPrPageSelectStrategyBase::~KPrPageSelectStrategyBase()
+SCPageSelectStrategyBase::~SCPageSelectStrategyBase()
 {
 }

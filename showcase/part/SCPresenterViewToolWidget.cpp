@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresenterViewToolWidget.h"
+#include "SCPresenterViewToolWidget.h"
 
 #include <QtGui/QBoxLayout>
 #include <QtGui/QLabel>
@@ -26,7 +26,7 @@
 
 #include <KIcon>
 
-KPrPresenterViewToolWidget::KPrPresenterViewToolWidget(QWidget *parent)
+SCPresenterViewToolWidget::SCPresenterViewToolWidget(QWidget *parent)
     : QFrame(parent)
 {
     QSize iconSize(32, 32);
@@ -97,12 +97,12 @@ KPrPresenterViewToolWidget::KPrPresenterViewToolWidget(QWidget *parent)
     m_clockTimer->start(1000);
 }
 
-void KPrPresenterViewToolWidget::toggleSlideThumbnails(bool toggle)
+void SCPresenterViewToolWidget::toggleSlideThumbnails(bool toggle)
 {
     m_slidesToolButton->setChecked(toggle);
 }
 
-void KPrPresenterViewToolWidget::updateClock()
+void SCPresenterViewToolWidget::updateClock()
 {
     QTime time = QTime::currentTime();
     m_clockLabel->setText(time.toString("hh:mm:ss a"));
@@ -118,5 +118,5 @@ void KPrPresenterViewToolWidget::updateClock()
             .arg(min, 2, 10, QChar('0')).arg(sec, 2, 10, QChar('0')));
 }
 
-#include "KPrPresenterViewToolWidget.moc"
+#include "SCPresenterViewToolWidget.moc"
 

@@ -20,9 +20,9 @@
 #ifndef VEEWIPEEFFECTFACTORY_H
 #define VEEWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class VeeWipeEffectFactory : public KPrPageEffectFactory
+class VeeWipeEffectFactory : public SCPageEffectFactory
 {
 public:
     VeeWipeEffectFactory();

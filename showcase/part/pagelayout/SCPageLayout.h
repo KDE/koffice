@@ -25,12 +25,12 @@
 
 class QRectF;
 class QPixmap;
-class KPrPlaceholder;
+class SCPlaceholder;
 #include "KoXmlReaderForward.h"
 class KoPALoadingContext;
 class KoPASavingContext;
 
-class KPrPageLayout
+class SCPageLayout
 {
 public:
     enum Type {
@@ -38,8 +38,8 @@ public:
         Handout
     };
 
-    KPrPageLayout();
-    ~KPrPageLayout();
+    SCPageLayout();
+    ~SCPageLayout();
 
     /**
      * Load the page layout
@@ -60,7 +60,7 @@ public:
     /**
      * Get the placeholders of the layout
      */
-    QList<KPrPlaceholder *> placeholders() const;
+    QList<SCPlaceholder *> placeholders() const;
 
     /**
      * get the thumbnail of the layout
@@ -77,20 +77,20 @@ public:
      *
      * The page layouts match if the placeholder are the same.
      */
-    bool operator<(const KPrPageLayout & other) const;
+    bool operator<(const SCPageLayout & other) const;
 
     /**
      * @brief Compare layout by content
      *
      * The content is the same when the order of the placholder objects is the same
      */
-    static bool compareByContent(const KPrPageLayout & pl1, const KPrPageLayout & pl2);
+    static bool compareByContent(const SCPageLayout & pl1, const SCPageLayout & pl2);
 
 private:
     // The display name of the layout
     QString m_name;
     // placeholders used in the layout
-    QList<KPrPlaceholder *> m_placeholders;
+    QList<SCPlaceholder *> m_placeholders;
     // the type of the layout.
     // if one placeholder as a presentation:object="handout" then the layout is of tyle Handout
     Type m_layoutType;

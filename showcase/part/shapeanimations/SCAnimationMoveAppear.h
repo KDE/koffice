@@ -20,17 +20,17 @@
 #ifndef KPRANIMATIONMOVEAPPEAR_H
 #define KPRANIMATIONMOVEAPPEAR_H
 
-#include "KPrTranslateAnimation.h"
+#include "SCTranslateAnimation.h"
 
 #include <QRectF>
 
-class KPrAnimationMoveAppear : public KPrTranslateAnimation
+class SCAnimationMoveAppear : public SCTranslateAnimation
 {
 public:
-    KPrAnimationMoveAppear(KoShape * shape, int step);
-    virtual ~KPrAnimationMoveAppear();
+    SCAnimationMoveAppear(KoShape * shape, int step);
+    virtual ~SCAnimationMoveAppear();
 
-    virtual KPrAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect);
+    virtual SCAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect);
 };
 
 #endif /* KPRANIMATIONMOVEAPPEAR_H */

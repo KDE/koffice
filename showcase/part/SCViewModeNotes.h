@@ -27,11 +27,11 @@ class KoPAView;
 class KoPACanvas;
 class KoPAPageBase;
 
-class KPrViewModeNotes : public KoPAViewMode
+class SCViewModeNotes : public KoPAViewMode
 {
 public:
-    KPrViewModeNotes(KoPAViewBase *view, KoPACanvasBase *canvas);
-    ~KPrViewModeNotes();
+    SCViewModeNotes(KoPAViewBase *view, KoPACanvasBase *canvas);
+    ~SCViewModeNotes();
 
     void paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect);
     void tabletEvent(QTabletEvent *event, const QPointF &point);

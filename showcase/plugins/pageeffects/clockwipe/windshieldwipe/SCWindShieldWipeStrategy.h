@@ -20,17 +20,17 @@
 #ifndef KPRWINDSHIELDWIPESTRATEGY_H
 #define KPRWINDSHIELDWIPESTRATEGY_H
 
-#include <KPrPageEffectStrategy.h>
-#include "KPrSweepWipeStrategy.h"
+#include <SCPageEffectStrategy.h>
+#include "SCSweepWipeStrategy.h"
 
-class KPrWindShieldWipeStrategy : public KPrSweepWipeStrategy
+class SCWindShieldWipeStrategy : public SCSweepWipeStrategy
 {
 public:
-    KPrWindShieldWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse);
-    virtual ~KPrWindShieldWipeStrategy();
+    SCWindShieldWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse);
+    virtual ~SCWindShieldWipeStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 };
 
 #endif // KPRWINDSHIELDWIPESTRATEGY_H

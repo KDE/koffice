@@ -25,7 +25,7 @@
 const int StepCount = 250;
 
 DiagonalWipeStrategy::DiagonalWipeStrategy(int subtype, const char *smilSubType, bool reverse)
-    : KPrPageEffectStrategy(subtype, "diagonalWipe", smilSubType, reverse)
+    : SCPageEffectStrategy(subtype, "diagonalWipe", smilSubType, reverse)
 {
 }
 
@@ -33,20 +33,20 @@ DiagonalWipeStrategy::~DiagonalWipeStrategy()
 {
 }
 
-void DiagonalWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void DiagonalWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, StepCount);
 }
 
-void DiagonalWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void DiagonalWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     p.drawPixmap(QPoint(0, 0), data.m_oldPage, data.m_widget->rect());
     p.setClipPath(clipPath(currPos, data.m_widget->rect()));
     p.drawPixmap(QPoint(0, 0), data.m_newPage, data.m_widget->rect());
 }
 
-void DiagonalWipeStrategy::next(const KPrPageEffect::Data &data)
+void DiagonalWipeStrategy::next(const SCPageEffect::Data &data)
 {
     data.m_widget->update();
 }

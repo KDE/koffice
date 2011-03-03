@@ -17,26 +17,26 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrSoundEventActionFactory.h"
+#include "SCSoundEventActionFactory.h"
 
-#include "KPrSoundEventAction.h"
-#include "KPrSoundEventActionWidget.h"
+#include "SCSoundEventAction.h"
+#include "SCSoundEventActionWidget.h"
 
-KPrSoundEventActionFactory::KPrSoundEventActionFactory()
-: KoEventActionFactoryBase(KPrSoundEventActionId, "sound")
+SCSoundEventActionFactory::SCSoundEventActionFactory()
+: KoEventActionFactoryBase(SCSoundEventActionId, "sound")
 {
 }
 
-KPrSoundEventActionFactory::~KPrSoundEventActionFactory()
+SCSoundEventActionFactory::~SCSoundEventActionFactory()
 {
 }
 
-KoEventAction * KPrSoundEventActionFactory::createEventAction()
+KoEventAction * SCSoundEventActionFactory::createEventAction()
 {
-    return new KPrSoundEventAction();
+    return new SCSoundEventAction();
 }
 
-QWidget *KPrSoundEventActionFactory::createOptionWidget()
+QWidget *SCSoundEventActionFactory::createOptionWidget()
 {
-    return new KPrSoundEventActionWidget();
+    return new SCSoundEventActionWidget();
 }

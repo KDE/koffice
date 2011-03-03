@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimationData.h"
+#include "SCAnimationData.h"
 
-KPrAnimationData::KPrAnimationData()
+SCAnimationData::SCAnimationData()
 {
 }
 
-KPrAnimationData::~KPrAnimationData()
+SCAnimationData::~SCAnimationData()
 {
 }

@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrFadeOverColorStrategy.h"
-#include "KPrFadeEffectFactory.h"
+#include "SCFadeOverColorStrategy.h"
+#include "SCFadeEffectFactory.h"
 
 #include <QWidget>
 #include <QPainter>
@@ -32,17 +32,17 @@
 #include <KoGenStyle.h>
 #include <kdebug.h>
 
-KPrFadeOverColorStrategy::KPrFadeOverColorStrategy()
-: KPrPageEffectStrategy(KPrFadeEffectFactory::FadeOverColor, "fade", "fadeOverColor", false, true)
+SCFadeOverColorStrategy::SCFadeOverColorStrategy()
+: SCPageEffectStrategy(SCFadeEffectFactory::FadeOverColor, "fade", "fadeOverColor", false, true)
 , m_fadeColor(Qt::black)
 {
 }
 
-KPrFadeOverColorStrategy::~KPrFadeOverColorStrategy()
+SCFadeOverColorStrategy::~SCFadeOverColorStrategy()
 {
 }
 
-void KPrFadeOverColorStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCFadeOverColorStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     timeLine.setFrameRange(0, 1000); // TODO might not be needed
     data.m_graphicsView->setBackgroundBrush(m_fadeColor);
@@ -53,14 +53,14 @@ void KPrFadeOverColorStrategy::setup(const KPrPageEffect::Data &data, QTimeLine 
     data.m_newPageItem->show();
 }
 
-void KPrFadeOverColorStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCFadeOverColorStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     Q_UNUSED(p);
     Q_UNUSED(currPos);
     Q_UNUSED(data);
 }
 
-void KPrFadeOverColorStrategy::next(const KPrPageEffect::Data &data)
+void SCFadeOverColorStrategy::next(const SCPageEffect::Data &data)
 {
     int frame = data.m_timeLine.frameForTime(data.m_currentTime);
     if (frame >= data.m_timeLine.endFrame()) {
@@ -78,24 +78,24 @@ void KPrFadeOverColorStrategy::next(const KPrPageEffect::Data &data)
     }
 }
 
-void KPrFadeOverColorStrategy::finish(const KPrPageEffect::Data &data)
+void SCFadeOverColorStrategy::finish(const SCPageEffect::Data &data)
 {
     data.m_graphicsView->hide();
 }
 
-void KPrFadeOverColorStrategy::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
+void SCFadeOverColorStrategy::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
 {
-    KPrPageEffectStrategy::saveOdfSmilAttributes(xmlWriter);
+    SCPageEffectStrategy::saveOdfSmilAttributes(xmlWriter);
     xmlWriter.addAttribute("smil:fadeColor", m_fadeColor.name());
 }
 
-void KPrFadeOverColorStrategy::saveOdfSmilAttributes(KoGenStyle & style) const
+void SCFadeOverColorStrategy::saveOdfSmilAttributes(KoGenStyle & style) const
 {
-    KPrPageEffectStrategy::saveOdfSmilAttributes(style);
+    SCPageEffectStrategy::saveOdfSmilAttributes(style);
     style.addProperty("smil:fadeColor", m_fadeColor.name());
 }
 
-void KPrFadeOverColorStrategy::loadOdfSmilAttributes(const KoXmlElement & element)
+void SCFadeOverColorStrategy::loadOdfSmilAttributes(const KoXmlElement & element)
 {
     // use black as default
     m_fadeColor.setNamedColor(element.attributeNS(KoXmlNS::smil, "fadeColor", "#000000"));

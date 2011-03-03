@@ -22,10 +22,10 @@
 
 #include <KoDockFactoryBase.h>
 
-class KPrPageLayoutDockerFactory : public KoDockFactoryBase
+class SCPageLayoutDockerFactory : public KoDockFactoryBase
 {
 public:
-    KPrPageLayoutDockerFactory();
+    SCPageLayoutDockerFactory();
 
     QString id() const;
     QDockWidget* createDockWidget();

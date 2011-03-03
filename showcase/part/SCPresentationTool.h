@@ -30,18 +30,18 @@
 
 class QFrame;
 class KoEventAction;
-class KPrViewModePresentation;
-class KPrPresentationToolWidget;
-class KPrPresentationStrategyBase;
-class KPrPresentationToolAdaptor;
+class SCViewModePresentation;
+class SCPresentationToolWidget;
+class SCPresentationStrategyBase;
+class SCPresentationToolAdaptor;
 
 /// The tool used for presentations
-class KPrPresentationTool : public KoToolBase
+class SCPresentationTool : public KoToolBase
 {
     Q_OBJECT
 public:
-    explicit KPrPresentationTool(KPrViewModePresentation &viewMode);
-    ~KPrPresentationTool();
+    explicit SCPresentationTool(SCViewModePresentation &viewMode);
+    ~SCPresentationTool();
 
     bool wantsAutoScroll() const;
 
@@ -55,8 +55,8 @@ public:
     void keyReleaseEvent(QKeyEvent *event);
     void wheelEvent(KoPointerEvent * event);
 
-    KPrPresentationStrategyBase *strategy();
-    KPrViewModePresentation & viewModePresentation();
+    SCPresentationStrategyBase *strategy();
+    SCViewModePresentation & viewModePresentation();
 
 public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
@@ -68,7 +68,7 @@ public slots:
 
 private:
     void finishEventActions();
-    void switchStrategy(KPrPresentationStrategyBase * strategy);
+    void switchStrategy(SCPresentationStrategyBase * strategy);
     bool eventFilter(QObject * obj, QEvent * event);
 
     /**
@@ -85,14 +85,14 @@ private:
      */
     void runHyperlink(QString hyperLink);
 
-    KPrViewModePresentation & m_viewMode;
+    SCViewModePresentation & m_viewMode;
     QSet<KoEventAction *> m_eventActions;
 
-    KPrPresentationToolWidget * m_presentationToolWidget;
+    SCPresentationToolWidget * m_presentationToolWidget;
     QFrame * m_frame;
-    KPrPresentationStrategyBase * m_strategy;
-    KPrPresentationToolAdaptor *m_bus;
-    friend class KPrPresentationStrategyBase;
+    SCPresentationStrategyBase * m_strategy;
+    SCPresentationToolAdaptor *m_bus;
+    friend class SCPresentationStrategyBase;
 };
 
 #endif /* KPRPRESENTATIONTOOL_H */

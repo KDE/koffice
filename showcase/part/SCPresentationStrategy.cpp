@@ -19,19 +19,19 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresentationStrategy.h"
+#include "SCPresentationStrategy.h"
 #include <QtGlobal>
 
-KPrPresentationStrategy::KPrPresentationStrategy(KPrPresentationTool * tool)
-: KPrPresentationStrategyBase(tool)
+SCPresentationStrategy::SCPresentationStrategy(SCPresentationTool * tool)
+: SCPresentationStrategyBase(tool)
 {
 }
 
-KPrPresentationStrategy::~KPrPresentationStrategy()
+SCPresentationStrategy::~SCPresentationStrategy()
 {
 }
 
-bool KPrPresentationStrategy::keyPressEvent(QKeyEvent * event)
+bool SCPresentationStrategy::keyPressEvent(QKeyEvent * event)
 {
     Q_UNUSED(event);
     return false;

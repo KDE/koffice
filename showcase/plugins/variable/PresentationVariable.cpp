@@ -36,11 +36,11 @@
 #include <KoTextShapeData.h>
 #include <KoXmlNS.h>
 #include <KoPATextPage.h>
-#include <KPrPage.h>
+#include <SCPage.h>
 
 PresentationVariable::PresentationVariable()
     : KoVariable(true)
-    , m_type(KPrDeclarations::Footer)
+    , m_type(SCDeclarations::Footer)
 {
 }
 
@@ -48,13 +48,13 @@ void PresentationVariable::setProperties(const KoProperties *props)
 {
     switch (props->intProperty("vartype")) {
     case 1:
-        m_type = KPrDeclarations::Header;
+        m_type = SCDeclarations::Header;
         break;
     case 2:
-        m_type = KPrDeclarations::Footer;
+        m_type = SCDeclarations::Footer;
         break;
     case 3:
-        m_type = KPrDeclarations::DateTime;
+        m_type = SCDeclarations::DateTime;
         break;
     default:
         Q_ASSERT(false);
@@ -69,7 +69,7 @@ void PresentationVariable::variableMoved(const KoShape *shape, const QTextDocume
 
     if (KoTextShapeData *shapeData = qobject_cast<KoTextShapeData *>(shape ? shape->userData() : 0)) {
         if (KoPATextPage *textPage = dynamic_cast<KoPATextPage*>(shapeData->page())) {
-            if (KPrPage *page = dynamic_cast<KPrPage*>(textPage->page())) {
+            if (SCPage *page = dynamic_cast<SCPage*>(textPage->page())) {
                 setValue(page->declaration(m_type));
             }
         }
@@ -81,13 +81,13 @@ void PresentationVariable::saveOdf(KoShapeSavingContext & context)
     KoXmlWriter *writer = &context.xmlWriter();
     const char * type = "";
     switch (m_type) {
-    case KPrDeclarations::Footer:
+    case SCDeclarations::Footer:
         type = "presentation:footer";
         break;
-    case KPrDeclarations::Header:
+    case SCDeclarations::Header:
         type = "presentation:header";
         break;
-    case KPrDeclarations::DateTime:
+    case SCDeclarations::DateTime:
         type = "presentation:date-time";
         break;
     }
@@ -101,13 +101,13 @@ bool PresentationVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingC
     const QString localName(element.localName());
 
     if (localName == "footer") {
-        m_type = KPrDeclarations::Footer;
+        m_type = SCDeclarations::Footer;
     }
     else if (localName == "header") {
-        m_type = KPrDeclarations::Header;
+        m_type = SCDeclarations::Header;
     }
     else if (localName == "date-time") {
-        m_type = KPrDeclarations::DateTime;
+        m_type = SCDeclarations::DateTime;
     }
     return true;
 }

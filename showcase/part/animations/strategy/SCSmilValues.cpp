@@ -17,17 +17,17 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrSmilValues.h"
+#include "SCSmilValues.h"
 #include <QStringList>
 #include "KoXmlWriter.h"
-#include "KPrShapeAnimations.h"
+#include "SCShapeAnimations.h"
 #include "kdebug.h"
 
-KPrSmilValues::KPrSmilValues(KPrShapeAnimation *shapeAnimation) : KPrAnimationValue(shapeAnimation)
+SCSmilValues::SCSmilValues(SCShapeAnimation *shapeAnimation) : SCAnimationValue(shapeAnimation)
 {
 }
 
-qreal KPrSmilValues::value(qreal time) const
+qreal SCSmilValues::value(qreal time) const
 {
     qreal value = 0.0;
     qreal value1 = 0.0;
@@ -48,17 +48,17 @@ qreal KPrSmilValues::value(qreal time) const
     return value;
 }
 
-qreal KPrSmilValues::startValue() const
+qreal SCSmilValues::startValue() const
 {
     return m_values.at(0).eval(m_cache);
 }
 
-qreal KPrSmilValues::endValue() const
+qreal SCSmilValues::endValue() const
 {
     return m_values.at(m_values.size() - 1).eval(m_cache);
 }
 
-bool KPrSmilValues::loadValues(QString values, QString keyTimes, QString keySplines, SmilCalcMode calcMode)
+bool SCSmilValues::loadValues(QString values, QString keyTimes, QString keySplines, SmilCalcMode calcMode)
 {
     m_calcMode = calcMode;
 
@@ -68,7 +68,7 @@ bool KPrSmilValues::loadValues(QString values, QString keyTimes, QString keySpli
     }
 
     foreach (QString value, valuesList) {
-        KPrValueParser parser(value, m_shape, m_textBlockData);
+        SCValueParser parser(value, m_shape, m_textBlockData);
         if (!parser.valid()) {
             return false;
         }
@@ -97,19 +97,19 @@ bool KPrSmilValues::loadValues(QString values, QString keyTimes, QString keySpli
     }
 
     // keySplines
-    if (m_calcMode ==  KPrAnimationValue::spline) {
+    if (m_calcMode ==  SCAnimationValue::spline) {
         kWarning(33003) << "keySpline not yes supported";
         QStringList keySplinesList = keySplines.split(";");
     }
     return true;
 }
 
-bool KPrSmilValues::saveOdf(KoPASavingContext &paContext) const
+bool SCSmilValues::saveOdf(KoPASavingContext &paContext) const
 {
     KoXmlWriter &writer = paContext.xmlWriter();
     // values
     QString values;
-    foreach (KPrValueParser valueParser, m_values) {
+    foreach (SCValueParser valueParser, m_values) {
         if (values.isEmpty()) {
             values = QString("%1").arg(valueParser.formula());
         } else {

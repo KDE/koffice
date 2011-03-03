@@ -23,26 +23,26 @@
 
 #include <KoShapeApplicationData.h>
 
-class KPrPageEffect;
+class SCPageEffect;
 
-class KPRESENTER_EXPORT KPrPageApplicationData : public KoShapeApplicationData
+class KPRESENTER_EXPORT SCPageApplicationData : public KoShapeApplicationData
 {
 public:
-   KPrPageApplicationData();
-   ~KPrPageApplicationData();
+   SCPageApplicationData();
+   ~SCPageApplicationData();
 
    /**
     * Get the page effect used to go to this page
     */
-   KPrPageEffect * pageEffect();
+   SCPageEffect * pageEffect();
 
    /**
     * Set the page effect used for this page
     */
-   void setPageEffect(KPrPageEffect * effect);
+   void setPageEffect(SCPageEffect * effect);
 
 private:
-   KPrPageEffect * m_pageEffect;
+   SCPageEffect * m_pageEffect;
 };
 
 #endif // KPRPAGEAPPLICATIONDATA_H

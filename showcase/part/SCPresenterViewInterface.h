@@ -20,7 +20,7 @@
 #ifndef KPRPRESENTERVIEWINTERFACE
 #define KPRPRESENTERVIEWINTERFACE
 
-#include "KPrPresenterViewBaseInterface.h"
+#include "SCPresenterViewBaseInterface.h"
 
 #include <QtGui/QFrame>
 
@@ -31,15 +31,15 @@ class KoPACanvas;
 class KoPAPageBase;
 
 /**
- * KPrPresenterViewInterface
+ * SCPresenterViewInterface
  * This widget is the main interface, this widget shows current slide, next slide
  * and the presenter's notes
  */
-class KPrPresenterViewInterface : public KPrPresenterViewBaseInterface
+class SCPresenterViewInterface : public SCPresenterViewBaseInterface
 {
     Q_OBJECT
 public:
-    KPrPresenterViewInterface(const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent = 0);
+    SCPresenterViewInterface(const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent = 0);
 
     void setPreviewSize(const QSize &size);
 

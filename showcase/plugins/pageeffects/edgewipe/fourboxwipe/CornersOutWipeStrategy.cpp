@@ -25,7 +25,7 @@
 const int StepCount = 250;
 
 CornersOutWipeStrategy::CornersOutWipeStrategy(bool reverse)
-    : KPrPageEffectStrategy(reverse ? FourBoxWipeEffectFactory::CornersOutReverse : FourBoxWipeEffectFactory::CornersOut, "fourBoxWipe", "cornersOut", reverse)
+    : SCPageEffectStrategy(reverse ? FourBoxWipeEffectFactory::CornersOutReverse : FourBoxWipeEffectFactory::CornersOut, "fourBoxWipe", "cornersOut", reverse)
 {
 }
 
@@ -33,20 +33,20 @@ CornersOutWipeStrategy::~CornersOutWipeStrategy()
 {
 }
 
-void CornersOutWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void CornersOutWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, StepCount);
 }
 
-void CornersOutWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void CornersOutWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     p.drawPixmap(QPoint(0, 0), data.m_oldPage, data.m_widget->rect());
     p.setClipPath(clipPath(currPos, data.m_widget->rect()));
     p.drawPixmap(QPoint(0, 0), data.m_newPage, data.m_widget->rect());
 }
 
-void CornersOutWipeStrategy::next(const KPrPageEffect::Data &data)
+void CornersOutWipeStrategy::next(const SCPageEffect::Data &data)
 {
     data.m_widget->update();
 }

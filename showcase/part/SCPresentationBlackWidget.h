@@ -21,18 +21,18 @@
 #ifndef KPRPRESENTATIONBLACKWIDGET_H
 #define KPRPRESENTATIONBLACKWIDGET_H
 
-#include "KPrPresentationToolEventForwarder.h"
+#include "SCPresentationToolEventForwarder.h"
 
 #include <KoPACanvas.h>
 
 #include <QSize>
 
-class KPrPresentationBlackWidget : public KPrPresentationToolEventForwarder
+class SCPresentationBlackWidget : public SCPresentationToolEventForwarder
 {
     Q_OBJECT
 public:
-    KPrPresentationBlackWidget(KoPACanvasBase * canvas);
-    virtual ~KPrPresentationBlackWidget();
+    SCPresentationBlackWidget(KoPACanvasBase * canvas);
+    virtual ~SCPresentationBlackWidget();
 
 protected:
     void paintEvent(QPaintEvent * event);

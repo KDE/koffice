@@ -20,7 +20,7 @@
 #ifndef KPRPAGESELECTSTRATEGYACTIVE_H
 #define KPRPAGESELECTSTRATEGYACTIVE_H
 
-#include "KPrPageSelectStrategyBase.h"
+#include "SCPageSelectStrategyBase.h"
 #include <KoPACanvasBase.h>
 #include <KoPAView.h>
 
@@ -29,11 +29,11 @@ class KoPACanvasBase;
 /**
  * Get the active page for the view
  */
-class KPrPageSelectStrategyActive : public KPrPageSelectStrategyBase
+class SCPageSelectStrategyActive : public SCPageSelectStrategyBase
 {
 public:
-    KPrPageSelectStrategyActive(KoPACanvasBase *canvas);
-    ~KPrPageSelectStrategyActive();
+    SCPageSelectStrategyActive(KoPACanvasBase *canvas);
+    ~SCPageSelectStrategyActive();
 
     virtual const KoPAPageBase *page() const;
 

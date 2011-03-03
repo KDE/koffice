@@ -17,7 +17,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include "KPrAnimationCache.h"
+#include "SCAnimationCache.h"
 #include <QList>
 #include <QMap>
 #include <QString>
@@ -28,55 +28,55 @@
 
 #include "kdebug.h"
 
-KPrAnimationCache::KPrAnimationCache()
+SCAnimationCache::SCAnimationCache()
 {
     clear();
 }
 
-KPrAnimationCache::~KPrAnimationCache()
+SCAnimationCache::~SCAnimationCache()
 {
 }
 
 
-bool KPrAnimationCache::hasValue(KoShape *shape, const QString &id)
+bool SCAnimationCache::hasValue(KoShape *shape, const QString &id)
 {
     if (m_currentShapeValues.contains(shape))
         return m_currentShapeValues.value(shape).contains(id);
     return false;
 }
 
-bool KPrAnimationCache::hasValue(int step, KoTextBlockData *textBlockData, const QString &id)
+bool SCAnimationCache::hasValue(int step, KoTextBlockData *textBlockData, const QString &id)
 {
     if (m_textBlockDataValuesStack[step].contains(textBlockData))
         return m_textBlockDataValuesStack[step].value(textBlockData).contains(id);
     return false;
 }
 
-bool KPrAnimationCache::hasValue(int step, KoShape *shape, const QString &id)
+bool SCAnimationCache::hasValue(int step, KoShape *shape, const QString &id)
 {
     if (m_shapeValuesStack[step].contains(shape))
         return m_shapeValuesStack[step].value(shape).contains(id);
     return false;
 }
 
-void KPrAnimationCache::setValue(int step, KoShape *shape, const QString &id, const QVariant &value)
+void SCAnimationCache::setValue(int step, KoShape *shape, const QString &id, const QVariant &value)
 {
     m_shapeValuesStack[step][shape][id] = value;
 }
 
-void KPrAnimationCache::setValue(int step, KoTextBlockData *textBlockData, const QString &id, const QVariant &value)
+void SCAnimationCache::setValue(int step, KoTextBlockData *textBlockData, const QString &id, const QVariant &value)
 {
     m_textBlockDataValuesStack[step][textBlockData][id] = value;
 }
 
-QVariant KPrAnimationCache::value(KoShape *shape, const QString &id, const QVariant &defaultValue)
+QVariant SCAnimationCache::value(KoShape *shape, const QString &id, const QVariant &defaultValue)
 {
     if (m_currentShapeValues.contains(shape))
         return m_currentShapeValues.value(shape).value(id, defaultValue);
     return defaultValue;
 }
 
-QVariant KPrAnimationCache::value(int step, KoShape *shape, const QString &id)
+QVariant SCAnimationCache::value(int step, KoShape *shape, const QString &id)
 {
     if (m_shapeValuesStack[step].contains(shape))
         return m_shapeValuesStack[step].value(shape).value(id);
@@ -84,14 +84,14 @@ QVariant KPrAnimationCache::value(int step, KoShape *shape, const QString &id)
 }
 
 
-QVariant KPrAnimationCache::value(KoTextBlockData *textBlockData, const QString &id, const QVariant &defaultValue)
+QVariant SCAnimationCache::value(KoTextBlockData *textBlockData, const QString &id, const QVariant &defaultValue)
 {
     if (m_currentTextBlockDataValues.contains(textBlockData))
         return m_currentTextBlockDataValues.value(textBlockData).value(id, defaultValue);
     return defaultValue;
 }
 
-void KPrAnimationCache::init(int step, KoShape *shape, KoTextBlockData * textBlockData, const QString &id, const QVariant &value)
+void SCAnimationCache::init(int step, KoShape *shape, KoTextBlockData * textBlockData, const QString &id, const QVariant &value)
 {
     if (textBlockData) {
         for (int i = m_textBlockDataValuesStack.size(); i <= step; ++i) {
@@ -151,7 +151,7 @@ void KPrAnimationCache::init(int step, KoShape *shape, KoTextBlockData * textBlo
     }
 }
 
-void KPrAnimationCache::update(KoShape *shape, KoTextBlockData * textBlockData, const QString &id, const QVariant &value)
+void SCAnimationCache::update(KoShape *shape, KoTextBlockData * textBlockData, const QString &id, const QVariant &value)
 {
     if (textBlockData) {
         if (id == "transform" && !m_next) {
@@ -176,7 +176,7 @@ void KPrAnimationCache::update(KoShape *shape, KoTextBlockData * textBlockData, 
     }
 }
 
-void KPrAnimationCache::startStep(int step)
+void SCAnimationCache::startStep(int step)
 {
     if (m_shapeValuesStack.size() > step) {
         m_currentShapeValues = m_shapeValuesStack[step];
@@ -186,7 +186,7 @@ void KPrAnimationCache::startStep(int step)
     }
 }
 
-void KPrAnimationCache::endStep(int step)
+void SCAnimationCache::endStep(int step)
 {
     if (m_shapeValuesStack.size() > step) {
         m_currentShapeValues = m_shapeValuesStack[step+1];
@@ -196,34 +196,34 @@ void KPrAnimationCache::endStep(int step)
     }
 }
 
-void KPrAnimationCache::next()
+void SCAnimationCache::next()
 {
     m_next = true;
 }
 
 
 
-void KPrAnimationCache::setPageSize(const QSizeF size)
+void SCAnimationCache::setPageSize(const QSizeF size)
 {
     m_pageSize = size;
 }
 
-QSizeF KPrAnimationCache::pageSize() const
+QSizeF SCAnimationCache::pageSize() const
 {
     return m_pageSize;
 }
 
-void KPrAnimationCache::setZoom(const qreal zoom)
+void SCAnimationCache::setZoom(const qreal zoom)
 {
     m_zoom = zoom;
 }
 
-qreal KPrAnimationCache::zoom() const
+qreal SCAnimationCache::zoom() const
 {
     return m_zoom;
 }
 
-void KPrAnimationCache::clear()
+void SCAnimationCache::clear()
 {
     m_zoom = 1;
     m_pageSize = QSizeF();

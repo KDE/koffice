@@ -22,20 +22,20 @@
 
 #include <KoShape.h>
 
-#define KPrPlaceholderShapeId "KPrPlaceholderShapeId"
+#define SCPlaceholderShapeId "SCPlaceholderShapeId"
 
-class KPrPlaceholderStrategy;
+class SCPlaceholderStrategy;
 class KoResourceManager;
 
 /**
  * This shape is used as placeholder as long as the shape is not modified
  */
-class KPrPlaceholderShape : public KoShape
+class SCPlaceholderShape : public KoShape
 {
 public:
-    KPrPlaceholderShape();
-    KPrPlaceholderShape(const QString & presentationClass);
-    virtual ~KPrPlaceholderShape();
+    SCPlaceholderShape();
+    SCPlaceholderShape(const QString & presentationClass);
+    virtual ~SCPlaceholderShape();
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
     virtual bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context);
@@ -46,7 +46,7 @@ public:
     virtual void initStrategy(KoResourceManager *documentResources);
     KoShapeUserData * userData() const;
 private:
-    KPrPlaceholderStrategy * m_strategy;
+    SCPlaceholderStrategy * m_strategy;
 };
 
 #endif /* KPRPLACEHOLDERSHAPE_H */

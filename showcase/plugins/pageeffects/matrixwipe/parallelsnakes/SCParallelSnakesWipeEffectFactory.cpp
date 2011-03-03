@@ -17,42 +17,42 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrParallelSnakesWipeEffectFactory.h"
+#include "SCParallelSnakesWipeEffectFactory.h"
 
 #include <klocale.h>
 
-#include "KPrParallelSnakesWipeVerticalStrategy.h"
-#include "KPrParallelSnakesWipeHorizontalStrategy.h"
-#include "KPrParallelSnakesWipeDiagonalStrategy.h"
+#include "SCParallelSnakesWipeVerticalStrategy.h"
+#include "SCParallelSnakesWipeHorizontalStrategy.h"
+#include "SCParallelSnakesWipeDiagonalStrategy.h"
 
 #define ParallelSnakesWipeEffectId "ParallelSnakesWipeEffect"
 
-KPrParallelSnakesWipeEffectFactory::KPrParallelSnakesWipeEffectFactory()
-    : KPrPageEffectFactory(ParallelSnakesWipeEffectId, i18n("Parallel Snakes"))
+SCParallelSnakesWipeEffectFactory::SCParallelSnakesWipeEffectFactory()
+    : SCPageEffectFactory(ParallelSnakesWipeEffectId, i18n("Parallel Snakes"))
 {
-    addStrategy(new KPrParallelSnakesWipeVerticalStrategy(false, false, false));
-    addStrategy(new KPrParallelSnakesWipeVerticalStrategy(true, true, false));
-    addStrategy(new KPrParallelSnakesWipeVerticalStrategy(false, true, false));
-    addStrategy(new KPrParallelSnakesWipeVerticalStrategy(true, false, false));
-    addStrategy(new KPrParallelSnakesWipeVerticalStrategy(false, false, true));
-    addStrategy(new KPrParallelSnakesWipeVerticalStrategy(true, true, true));
-    addStrategy(new KPrParallelSnakesWipeVerticalStrategy(false, true, true));
-    addStrategy(new KPrParallelSnakesWipeVerticalStrategy(true, false, true));
-    addStrategy(new KPrParallelSnakesWipeHorizontalStrategy(false, false, false));
-    addStrategy(new KPrParallelSnakesWipeHorizontalStrategy(true, true, false));
-    addStrategy(new KPrParallelSnakesWipeHorizontalStrategy(false, true, false));
-    addStrategy(new KPrParallelSnakesWipeHorizontalStrategy(true, false, false));
-    addStrategy(new KPrParallelSnakesWipeHorizontalStrategy(false, false, true));
-    addStrategy(new KPrParallelSnakesWipeHorizontalStrategy(true, true, true));
-    addStrategy(new KPrParallelSnakesWipeHorizontalStrategy(false, true, true));
-    addStrategy(new KPrParallelSnakesWipeHorizontalStrategy(true, false, true));
-    addStrategy(new KPrParallelSnakesWipeDiagonalStrategy(false, true));
-    addStrategy(new KPrParallelSnakesWipeDiagonalStrategy(true, true));
-    addStrategy(new KPrParallelSnakesWipeDiagonalStrategy(false, false));
-    addStrategy(new KPrParallelSnakesWipeDiagonalStrategy(true, false));
+    addStrategy(new SCParallelSnakesWipeVerticalStrategy(false, false, false));
+    addStrategy(new SCParallelSnakesWipeVerticalStrategy(true, true, false));
+    addStrategy(new SCParallelSnakesWipeVerticalStrategy(false, true, false));
+    addStrategy(new SCParallelSnakesWipeVerticalStrategy(true, false, false));
+    addStrategy(new SCParallelSnakesWipeVerticalStrategy(false, false, true));
+    addStrategy(new SCParallelSnakesWipeVerticalStrategy(true, true, true));
+    addStrategy(new SCParallelSnakesWipeVerticalStrategy(false, true, true));
+    addStrategy(new SCParallelSnakesWipeVerticalStrategy(true, false, true));
+    addStrategy(new SCParallelSnakesWipeHorizontalStrategy(false, false, false));
+    addStrategy(new SCParallelSnakesWipeHorizontalStrategy(true, true, false));
+    addStrategy(new SCParallelSnakesWipeHorizontalStrategy(false, true, false));
+    addStrategy(new SCParallelSnakesWipeHorizontalStrategy(true, false, false));
+    addStrategy(new SCParallelSnakesWipeHorizontalStrategy(false, false, true));
+    addStrategy(new SCParallelSnakesWipeHorizontalStrategy(true, true, true));
+    addStrategy(new SCParallelSnakesWipeHorizontalStrategy(false, true, true));
+    addStrategy(new SCParallelSnakesWipeHorizontalStrategy(true, false, true));
+    addStrategy(new SCParallelSnakesWipeDiagonalStrategy(false, true));
+    addStrategy(new SCParallelSnakesWipeDiagonalStrategy(true, true));
+    addStrategy(new SCParallelSnakesWipeDiagonalStrategy(false, false));
+    addStrategy(new SCParallelSnakesWipeDiagonalStrategy(true, false));
 }
 
-KPrParallelSnakesWipeEffectFactory::~KPrParallelSnakesWipeEffectFactory()
+SCParallelSnakesWipeEffectFactory::~SCParallelSnakesWipeEffectFactory()
 {
 }
 
@@ -79,7 +79,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Diagonal Top Left Opposite Out")
 };
 
-QString KPrParallelSnakesWipeEffectFactory::subTypeName(int subType) const
+QString SCParallelSnakesWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

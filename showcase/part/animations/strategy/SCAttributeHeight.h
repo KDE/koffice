@@ -20,14 +20,14 @@
 #ifndef KPRATTRIBUTEHEIGHT_H
 #define KPRATTRIBUTEHEIGHT_H
 
-#include "KPrAnimationAttribute.h"
+#include "SCAnimationAttribute.h"
 
-class KPrAttributeHeight : public KPrAnimationAttribute
+class SCAttributeHeight : public SCAnimationAttribute
 {
 public:
-    KPrAttributeHeight();
-    virtual void updateCache(KPrAnimationCache *cache, KPrShapeAnimation *shapeAnimation, qreal value);
-    virtual void initCache(KPrAnimationCache * cache, int step, KPrShapeAnimation * shapeAnimation, qreal startValue, qreal endValue);
+    SCAttributeHeight();
+    virtual void updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value);
+    virtual void initCache(SCAnimationCache * cache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue);
 };
 
 #endif // KPRATTRIBUTEHEIGHT_H

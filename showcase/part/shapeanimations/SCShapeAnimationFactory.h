@@ -19,12 +19,12 @@
 #ifndef KPRSHAPEANIMATIONFACTORY_H
 #define KPRSHAPEANIMATIONFACTORY_H
 
-#include "KPrShapeAnimationOld.h"
+#include "SCShapeAnimationOld.h"
 
 /**
  * Base class for shape animation factories
  */
-class KPrShapeAnimationFactory
+class SCShapeAnimationFactory
 {
 public:
 
@@ -34,16 +34,16 @@ public:
      * @param id The id of the page effect the factory is creating
      * @param name The name of the effect. This name is used in the UI
      */
-    KPrShapeAnimationFactory(const QString & id, const QString & name);
+    SCShapeAnimationFactory(const QString & id, const QString & name);
 
-    virtual ~KPrShapeAnimationFactory();
+    virtual ~SCShapeAnimationFactory();
 
     /**
      * Create a shape animation
      *
      * @param properties The properties for creating a page effect
      */
-    virtual KPrShapeAnimationOld * createShapeAnimation() const = 0;
+    virtual SCShapeAnimationOld * createShapeAnimation() const = 0;
 
     /**
      * Get the id of the page effect

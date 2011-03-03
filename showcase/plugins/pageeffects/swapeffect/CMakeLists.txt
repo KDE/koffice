@@ -1,8 +1,8 @@
 include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/showcase/part ${CMAKE_SOURCE_DIR}/showcase/part/pageeffects )
 
 set(kpr_pageeffect_swapeffect_PART_SRCS Plugin.cpp
-    KPrSwapEffectFactory.cpp
-    KPrSwapEffectHorizontalStrategy.cpp
+    SCSwapEffectFactory.cpp
+    SCSwapEffectHorizontalStrategy.cpp
 )
 
 kde4_add_plugin(kpr_pageeffect_swapeffect ${kpr_pageeffect_swapeffect_PART_SRCS})

@@ -22,14 +22,14 @@
 
 #include <KoPAMasterPage.h>
 
-#include "KPrPageData.h"
-#include "KPrShapeAnimations.h"
+#include "SCPageData.h"
+#include "SCShapeAnimations.h"
 
-class KPrMasterPage : public KoPAMasterPage, public KPrPageData
+class SCMasterPage : public KoPAMasterPage, public SCPageData
 {
 public:
-    explicit KPrMasterPage();
-    virtual ~KPrMasterPage();
+    explicit SCMasterPage();
+    virtual ~SCMasterPage();
 
     /**
      * Get the page type used in the document

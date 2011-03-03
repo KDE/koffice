@@ -22,14 +22,14 @@
 #define KPRANIMATIONSTEP_H
 
 #include <QSequentialAnimationGroup>
-#include "KPrAnimationData.h"
+#include "SCAnimationData.h"
 
-class KPrAnimationStep : public QSequentialAnimationGroup, KPrAnimationData
+class SCAnimationStep : public QSequentialAnimationGroup, SCAnimationData
 {
 public:
-    KPrAnimationStep();
-    virtual ~KPrAnimationStep();
-    virtual void init(KPrAnimationCache *animationCache, int step);
+    SCAnimationStep();
+    virtual ~SCAnimationStep();
+    virtual void init(SCAnimationCache *animationCache, int step);
     virtual bool saveOdf(KoPASavingContext & paContext) const;
     virtual void deactivate();
 };

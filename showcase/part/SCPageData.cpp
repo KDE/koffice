@@ -18,36 +18,36 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPageData.h"
-#include "KPrShapeAnimations.h"
+#include "SCPageData.h"
+#include "SCShapeAnimations.h"
 
-KPrPageData::KPrPageData()
+SCPageData::SCPageData()
 {
 }
 
-KPrPageData::~KPrPageData()
+SCPageData::~SCPageData()
 {
-    foreach (KPrAnimationStep *step, m_animations.steps()) {
+    foreach (SCAnimationStep *step, m_animations.steps()) {
         delete step;
     }
 }
 
-KPrShapeAnimations & KPrPageData::animations()
+SCShapeAnimations & SCPageData::animations()
 {
     return m_animations;
 }
 
-KPrPlaceholders & KPrPageData::placeholders()
+SCPlaceholders & SCPageData::placeholders()
 {
     return m_placeholders;
 }
 
-const KPrPlaceholders & KPrPageData::placeholders() const
+const SCPlaceholders & SCPageData::placeholders() const
 {
     return m_placeholders;
 }
 
-QList<KPrAnimationStep *> KPrPageData::animationSteps() const
+QList<SCAnimationStep *> SCPageData::animationSteps() const
 {
     return m_animations.steps();
 }

@@ -17,12 +17,12 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrSetCustomSlideShowsCommand.h"
+#include "SCSetCustomSlideShowsCommand.h"
 
-#include "KPrCustomSlideShows.h"
-#include "KPrDocument.h"
+#include "SCCustomSlideShows.h"
+#include "SCDocument.h"
 
-KPrSetCustomSlideShowsCommand::KPrSetCustomSlideShowsCommand( KPrDocument * doc, KPrCustomSlideShows * newSlideShows, QUndoCommand *parent )
+SCSetCustomSlideShowsCommand::SCSetCustomSlideShowsCommand( SCDocument * doc, SCCustomSlideShows * newSlideShows, QUndoCommand *parent )
 : QUndoCommand( parent )
 , m_doc( doc )
 , m_oldSlideShows( doc->customSlideShows() )
@@ -33,7 +33,7 @@ KPrSetCustomSlideShowsCommand::KPrSetCustomSlideShowsCommand( KPrDocument * doc,
     setText( i18n("Edit") );
 }
 
-KPrSetCustomSlideShowsCommand::~KPrSetCustomSlideShowsCommand()
+SCSetCustomSlideShowsCommand::~SCSetCustomSlideShowsCommand()
 {
     if ( m_deleteNewSlideShows ) {
         delete m_newSlideShows;
@@ -43,13 +43,13 @@ KPrSetCustomSlideShowsCommand::~KPrSetCustomSlideShowsCommand()
     }
 }
 
-void KPrSetCustomSlideShowsCommand::redo()
+void SCSetCustomSlideShowsCommand::redo()
 {
     m_doc->setCustomSlideShows( m_newSlideShows );
     m_deleteNewSlideShows = false;
 }
 
-void KPrSetCustomSlideShowsCommand::undo()
+void SCSetCustomSlideShowsCommand::undo()
 {
     m_doc->setCustomSlideShows( m_oldSlideShows );
     m_deleteNewSlideShows = true;

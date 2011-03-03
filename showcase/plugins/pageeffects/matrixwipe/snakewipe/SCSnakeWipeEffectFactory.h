@@ -20,13 +20,13 @@
 #ifndef KPRSNAKEWIPEEFFECTFACTORY_H
 #define KPRSNAKEWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class KPrSnakeWipeEffectFactory : public KPrPageEffectFactory
+class SCSnakeWipeEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrSnakeWipeEffectFactory();
-    virtual ~KPrSnakeWipeEffectFactory();
+    SCSnakeWipeEffectFactory();
+    virtual ~SCSnakeWipeEffectFactory();
     virtual QString subTypeName(int subTypeId) const;
 
     enum SubType {

@@ -17,24 +17,24 @@
     Boston, MA  02110-1301  USA
 */
 
-#include "KPrViewAdaptor.h"
-#include "KPrView.h"
-#include "KPrViewModePresentation.h"
-#include "KPrAnimationDirector.h"
-#include "KPrDocument.h"
-#include "KPrNotes.h"
-#include "KPrPage.h"
+#include "SCViewAdaptor.h"
+#include "SCView.h"
+#include "SCViewModePresentation.h"
+#include "SCAnimationDirector.h"
+#include "SCDocument.h"
+#include "SCNotes.h"
+#include "SCPage.h"
 #include <KoTextShapeData.h>
 
 #include <KUrl>
 
 #include <QTextDocument>
 
-KPrViewAdaptor::KPrViewAdaptor(KPrView* view)
+SCViewAdaptor::SCViewAdaptor(SCView* view)
 : KoViewAdaptor(view)
 , m_view(view)
 {
-    KPrDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->kprDocument();
     connect(doc, SIGNAL(activeCustomSlideShowChanged(const QString &)), this, SIGNAL(activeCustomSlideShowChanged(const QString &)));
     connect(doc, SIGNAL(customSlideShowsModified()), this, SIGNAL(customSlideShowsModified()));
 
@@ -45,29 +45,29 @@ KPrViewAdaptor::KPrViewAdaptor(KPrView* view)
     connect(m_view->presentationMode(), SIGNAL(stepChanged(int)), this, SIGNAL(presentationStepChanged(int)));
 }
 
-KPrViewAdaptor::~KPrViewAdaptor()
+SCViewAdaptor::~SCViewAdaptor()
 {
 }
 
 // custom slideshows
 
-QStringList KPrViewAdaptor::customSlideShows() const
+QStringList SCViewAdaptor::customSlideShows() const
 {
-    KPrDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->kprDocument();
     return doc->customSlideShows()->names();
 }
 
-QString KPrViewAdaptor::activeCustomSlideShow() const
+QString SCViewAdaptor::activeCustomSlideShow() const
 {
-    KPrDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->kprDocument();
     return doc->activeCustomSlideShow();
 }
 
-bool KPrViewAdaptor::setActiveCustomSlideShow(const QString &name)
+bool SCViewAdaptor::setActiveCustomSlideShow(const QString &name)
 {
     // Check that the custom slideshow exists
     if (name.isEmpty() || customSlideShows().contains(name)) {
-        KPrDocument *doc = m_view->kprDocument();
+        SCDocument *doc = m_view->kprDocument();
         doc->setActiveCustomSlideShow(name);
         return true;
     }
@@ -78,15 +78,15 @@ bool KPrViewAdaptor::setActiveCustomSlideShow(const QString &name)
 
 // slides in the custom slideshow
 
-int KPrViewAdaptor::numCustomSlideShowSlides() const
+int SCViewAdaptor::numCustomSlideShowSlides() const
 {
-    KPrDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->kprDocument();
     return doc->slideShow().size();
 }
 
-QString KPrViewAdaptor::pageName(int page) const
+QString SCViewAdaptor::pageName(int page) const
 {
-    KPrDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->kprDocument();
 
     QList<KoPAPageBase *> slideShow = doc->slideShow();
     if (page >= 0 && page < slideShow.size()) {
@@ -95,16 +95,16 @@ QString KPrViewAdaptor::pageName(int page) const
     return QString();
 }
 
-QString KPrViewAdaptor::pageNotes(int page, const QString &format) const
+QString SCViewAdaptor::pageNotes(int page, const QString &format) const
 {
-    KPrDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->kprDocument();
 
     QList<KoPAPageBase *> slideShow = doc->slideShow();
     if (page >= 0 && page < slideShow.size()) {
-        KPrPage *prPage = dynamic_cast<KPrPage *>(slideShow[page]);
+        SCPage *prPage = dynamic_cast<SCPage *>(slideShow[page]);
         Q_ASSERT(0 != prPage);
         if (0 != prPage) {
-            KPrNotes *pageNotes = prPage->pageNotes();
+            SCNotes *pageNotes = prPage->pageNotes();
             KoShape *textShape = pageNotes->textShape();
             KoTextShapeData *textShapeData = qobject_cast<KoTextShapeData *>(textShape->userData());
             Q_ASSERT(0 != textShapeData);
@@ -121,10 +121,10 @@ QString KPrViewAdaptor::pageNotes(int page, const QString &format) const
     return QString();
 }
 
-bool KPrViewAdaptor::exportPageThumbnail(int page, int width, int height,
+bool SCViewAdaptor::exportPageThumbnail(int page, int width, int height,
                                           const QString &filename, const QString &format, int quality)
 {
-    KPrDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->kprDocument();
 
     QList<KoPAPageBase *> slideShow = doc->slideShow();
     if (page >= 0 && page < slideShow.size()) {
@@ -142,64 +142,64 @@ bool KPrViewAdaptor::exportPageThumbnail(int page, int width, int height,
     
 // Presentation control
 
-void KPrViewAdaptor::presentationStart()
+void SCViewAdaptor::presentationStart()
 {
     m_view->startPresentation();
 }
 
-void KPrViewAdaptor::presentationStartFromFirst()
+void SCViewAdaptor::presentationStartFromFirst()
 {
     m_view->startPresentationFromBeginning();
 }
 
-void KPrViewAdaptor::presentationStop()
+void SCViewAdaptor::presentationStop()
 {
     m_view->stopPresentation();
 }
 
-void KPrViewAdaptor::presentationPrev()
+void SCViewAdaptor::presentationPrev()
 {
     if (m_view->isPresentationRunning()) {
-        m_view->presentationMode()->navigate(KPrAnimationDirector::PreviousStep);
+        m_view->presentationMode()->navigate(SCAnimationDirector::PreviousStep);
     }
 }
 
-void KPrViewAdaptor::presentationNext()
+void SCViewAdaptor::presentationNext()
 {
     if (m_view->isPresentationRunning()) {
-        m_view->presentationMode()->navigate(KPrAnimationDirector::NextStep);
+        m_view->presentationMode()->navigate(SCAnimationDirector::NextStep);
     }
 }
 
-void KPrViewAdaptor::presentationPrevSlide()
+void SCViewAdaptor::presentationPrevSlide()
 {
     if (m_view->isPresentationRunning()) {
-        m_view->presentationMode()->navigate(KPrAnimationDirector::PreviousPage);
+        m_view->presentationMode()->navigate(SCAnimationDirector::PreviousPage);
     }
 }
 
-void KPrViewAdaptor::presentationNextSlide()
+void SCViewAdaptor::presentationNextSlide()
 {
     if (m_view->isPresentationRunning()) {
-        m_view->presentationMode()->navigate(KPrAnimationDirector::NextPage);
+        m_view->presentationMode()->navigate(SCAnimationDirector::NextPage);
     }
 }
 
-void KPrViewAdaptor::presentationFirst()
+void SCViewAdaptor::presentationFirst()
 {
     if (m_view->isPresentationRunning()) {
-        m_view->presentationMode()->navigate(KPrAnimationDirector::FirstPage);
+        m_view->presentationMode()->navigate(SCAnimationDirector::FirstPage);
     }
 }
 
-void KPrViewAdaptor::presentationLast()
+void SCViewAdaptor::presentationLast()
 {
     if (m_view->isPresentationRunning()) {
-        m_view->presentationMode()->navigate(KPrAnimationDirector::LastPage);
+        m_view->presentationMode()->navigate(SCAnimationDirector::LastPage);
     }
 }
 
-void KPrViewAdaptor::gotoPresentationPage(int pg)
+void SCViewAdaptor::gotoPresentationPage(int pg)
 {
     if (m_view->isPresentationRunning()) {
         m_view->presentationMode()->navigateToPage(pg);
@@ -208,12 +208,12 @@ void KPrViewAdaptor::gotoPresentationPage(int pg)
 
 // Presentation accessors
 
-bool KPrViewAdaptor::isPresentationRunning() const
+bool SCViewAdaptor::isPresentationRunning() const
 {
     return m_view->isPresentationRunning();
 }
 
-int KPrViewAdaptor::currentPresentationPage() const
+int SCViewAdaptor::currentPresentationPage() const
 {
     if (m_view->isPresentationRunning()) {
         return m_view->presentationMode()->currentPage();
@@ -223,7 +223,7 @@ int KPrViewAdaptor::currentPresentationPage() const
     }
 }
 
-int KPrViewAdaptor::currentPresentationStep() const
+int SCViewAdaptor::currentPresentationStep() const
 {
     if (m_view->isPresentationRunning()) {
         return m_view->presentationMode()->currentStep();
@@ -233,7 +233,7 @@ int KPrViewAdaptor::currentPresentationStep() const
     }
 }
 
-int KPrViewAdaptor::numStepsInPresentationPage() const
+int SCViewAdaptor::numStepsInPresentationPage() const
 {
     if (m_view->isPresentationRunning()) {
         return m_view->presentationMode()->numStepsInPage();
@@ -243,7 +243,7 @@ int KPrViewAdaptor::numStepsInPresentationPage() const
     }
 }
 
-int KPrViewAdaptor::numPresentationPages() const
+int SCViewAdaptor::numPresentationPages() const
 {
     if (m_view->isPresentationRunning()) {
         return m_view->presentationMode()->numPages();
@@ -256,7 +256,7 @@ int KPrViewAdaptor::numPresentationPages() const
 /**
  * Fired when the presentation is activated.
  */
-void KPrViewAdaptor::presentationActivated()
+void SCViewAdaptor::presentationActivated()
 {
     emit presentationStarted(numPresentationPages());
 }

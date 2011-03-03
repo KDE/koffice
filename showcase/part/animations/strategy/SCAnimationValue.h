@@ -24,18 +24,18 @@
 #include "KoPASavingContext.h"
 class KoShape;
 class KoTextBlockData;
-class KPrAnimationCache;
-class KPrShapeAnimation;
+class SCAnimationCache;
+class SCShapeAnimation;
 
-class KPrAnimationValue
+class SCAnimationValue
 {
 public:
-    KPrAnimationValue(KPrShapeAnimation * shapeAnimation);
-    virtual ~KPrAnimationValue();
+    SCAnimationValue(SCShapeAnimation * shapeAnimation);
+    virtual ~SCAnimationValue();
     virtual qreal value(qreal time) const = 0;
     virtual qreal startValue() const = 0;
     virtual qreal endValue() const = 0;
-    virtual void setCache(KPrAnimationCache * cache);
+    virtual void setCache(SCAnimationCache * cache);
     virtual bool saveOdf(KoPASavingContext &paContext) const = 0;
     enum SmilCalcMode{
         discrete,
@@ -45,7 +45,7 @@ public:
     };
 protected:
     SmilCalcMode m_calcMode;
-    KPrAnimationCache * m_cache;
+    SCAnimationCache * m_cache;
     KoShape * m_shape;
     KoTextBlockData * m_textBlockData;
 };

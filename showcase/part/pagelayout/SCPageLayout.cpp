@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPageLayout.h"
+#include "SCPageLayout.h"
 
 #include <QBuffer>
 #include <kdebug.h>
@@ -28,7 +28,7 @@
 #include <KoGenStyle.h>
 #include <KoGenStyles.h>
 #include <KoPASavingContext.h>
-#include "KPrPlaceholder.h"
+#include "SCPlaceholder.h"
 
 #include <KoPAView.h>
 #include <QSize>
@@ -37,17 +37,17 @@
 #include <kiconloader.h>
 #include <QSvgRenderer>
 
-KPrPageLayout::KPrPageLayout()
+SCPageLayout::SCPageLayout()
 : m_layoutType(Page)
 {
 }
 
-KPrPageLayout::~KPrPageLayout()
+SCPageLayout::~SCPageLayout()
 {
     qDeleteAll(m_placeholders);
 }
 
-bool KPrPageLayout::loadOdf(const KoXmlElement &element, const QRectF & pageRect)
+bool SCPageLayout::loadOdf(const KoXmlElement &element, const QRectF & pageRect)
 {
     if (element.hasAttributeNS(KoXmlNS::style, "display-name")) {
         m_name = element.attributeNS(KoXmlNS::style, "display-name");
@@ -59,7 +59,7 @@ bool KPrPageLayout::loadOdf(const KoXmlElement &element, const QRectF & pageRect
     KoXmlElement child;
     forEachElement(child, element) {
         if (child.tagName() == "placeholder" && child.namespaceURI() == KoXmlNS::presentation) {
-            KPrPlaceholder * placeholder = new KPrPlaceholder;
+            SCPlaceholder * placeholder = new SCPlaceholder;
             if (placeholder->loadOdf(child, pageRect)) {
                 m_placeholders.append(placeholder);
                 if (placeholder->presentationObject() == "handout") {
@@ -91,8 +91,8 @@ bool KPrPageLayout::loadOdf(const KoXmlElement &element, const QRectF & pageRect
          *   <presentation:placeholder presentation:object="object" svg:x="14.309cm" svg:y="12.748cm" svg:width="-0.585cm" svg:height="-0.601cm"/>
          * </style:presentation-page-layout>
          */
-        QList<KPrPlaceholder *>::iterator it(m_placeholders.begin());
-        KPrPlaceholder * last = *it;
+        QList<SCPlaceholder *>::iterator it(m_placeholders.begin());
+        SCPlaceholder * last = *it;
         ++it;
         for (; it != m_placeholders.end(); ++it) {
             (*it)->fix(last->rect(QSizeF(1, 1)));
@@ -102,7 +102,7 @@ bool KPrPageLayout::loadOdf(const KoXmlElement &element, const QRectF & pageRect
     return retval;
 }
 
-QString KPrPageLayout::saveOdf(KoPASavingContext & context) const
+QString SCPageLayout::saveOdf(KoPASavingContext & context) const
 {
     KoGenStyle style(KoGenStyle::PresentationPageLayoutStyle);
 
@@ -112,7 +112,7 @@ QString KPrPageLayout::saveOdf(KoPASavingContext & context) const
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter elementWriter(&buffer);
 
-    QList<KPrPlaceholder *>::const_iterator it(m_placeholders.begin());
+    QList<SCPlaceholder *>::const_iterator it(m_placeholders.begin());
     for (; it != m_placeholders.end(); ++it) {
         (*it)->saveOdf(elementWriter);
     }
@@ -124,12 +124,12 @@ QString KPrPageLayout::saveOdf(KoPASavingContext & context) const
     return context.mainStyles().insert(style, "pl");
 }
 
-QList<KPrPlaceholder *> KPrPageLayout::placeholders() const
+QList<SCPlaceholder *> SCPageLayout::placeholders() const
 {
     return m_placeholders;
 }
 
-QPixmap KPrPageLayout::thumbnail() const
+QPixmap SCPageLayout::thumbnail() const
 {
     static KIconLoader * loader = KIconLoader::global();
 
@@ -142,7 +142,7 @@ QPixmap KPrPageLayout::thumbnail() const
 
     QString file = loader->iconPath("layout-elements", KIconLoader::User);
     if (renderer.load(file)) {
-        QList<KPrPlaceholder *>::const_iterator it(m_placeholders.begin());
+        QList<SCPlaceholder *>::const_iterator it(m_placeholders.begin());
         for (; it != m_placeholders.end(); ++it) {
             kDebug(33001) << "-----------------" <<(*it)->presentationObject() << (*it)->rect(size);
             renderer.render(&p, (*it)->presentationObject(), (*it)->rect(size));
@@ -155,60 +155,60 @@ QPixmap KPrPageLayout::thumbnail() const
     return pic;
 }
 
-KPrPageLayout::Type KPrPageLayout::type() const
+SCPageLayout::Type SCPageLayout::type() const
 {
     return m_layoutType;
 }
 
-bool comparePlaceholder(const KPrPlaceholder * p1, const KPrPlaceholder * p2)
+bool comparePlaceholder(const SCPlaceholder * p1, const SCPlaceholder * p2)
 {
     return (* p1) < (* p2);
 }
 
-bool KPrPageLayout::operator<(const KPrPageLayout & other) const
+bool SCPageLayout::operator<(const SCPageLayout & other) const
 {
     if (m_placeholders.size() == other.m_placeholders.size()) {
-        QList<KPrPlaceholder *> placeholders(m_placeholders);
-        QList<KPrPlaceholder *> otherPlaceholders(other.m_placeholders);
+        QList<SCPlaceholder *> placeholders(m_placeholders);
+        QList<SCPlaceholder *> otherPlaceholders(other.m_placeholders);
         qSort(placeholders.begin(), placeholders.end(), comparePlaceholder);
         qSort(otherPlaceholders.begin(), otherPlaceholders.end(), comparePlaceholder);
 
-        QList<KPrPlaceholder *>::iterator it(placeholders.begin());
-        QList<KPrPlaceholder *>::iterator otherIt(otherPlaceholders.begin());
-        kDebug(33001) << "KPrPageLayout::operator< start" << (*it)->rect(QSizeF(1, 1)) << (*otherIt)->rect(QSizeF(1, 1));
+        QList<SCPlaceholder *>::iterator it(placeholders.begin());
+        QList<SCPlaceholder *>::iterator otherIt(otherPlaceholders.begin());
+        kDebug(33001) << "SCPageLayout::operator< start" << (*it)->rect(QSizeF(1, 1)) << (*otherIt)->rect(QSizeF(1, 1));
 
         for (; it != placeholders.end(); ++it, ++otherIt) {
-            kDebug(33001) << "KPrPageLayout::operator<" << (*it)->rect(QSizeF(1, 1)) << (*otherIt)->rect(QSizeF(1, 1));
+            kDebug(33001) << "SCPageLayout::operator<" << (*it)->rect(QSizeF(1, 1)) << (*otherIt)->rect(QSizeF(1, 1));
             if (*(*it) == *(*otherIt)) {
-                kDebug(33001) << "KPrPageLayout::operator< 0" << (*(*it) < *(*otherIt));
+                kDebug(33001) << "SCPageLayout::operator< 0" << (*(*it) < *(*otherIt));
                 continue;
             }
-            kDebug(33001) << "KPrPageLayout::operator< 1" << (*(*it) < *(*otherIt));
+            kDebug(33001) << "SCPageLayout::operator< 1" << (*(*it) < *(*otherIt));
             return *(*it) < *(*otherIt);
         }
-        kDebug(33001) << "KPrPageLayout::operator< 2" << false;
+        kDebug(33001) << "SCPageLayout::operator< 2" << false;
         return false;
         // sort of the different placeholders by position and type
     }
-    kDebug(33001) << "KPrPageLayout::operator< 3" << (m_placeholders.size() < other.m_placeholders.size());
+    kDebug(33001) << "SCPageLayout::operator< 3" << (m_placeholders.size() < other.m_placeholders.size());
     return m_placeholders.size() < other.m_placeholders.size();
 }
 
-bool comparePlaceholderByPosition(const KPrPlaceholder * p1, const KPrPlaceholder * p2)
+bool comparePlaceholderByPosition(const SCPlaceholder * p1, const SCPlaceholder * p2)
 {
-    return KPrPlaceholder::comparePosition(*p1,* p2);
+    return SCPlaceholder::comparePosition(*p1,* p2);
 }
 
-bool KPrPageLayout::compareByContent(const KPrPageLayout & pl1, const KPrPageLayout & pl2)
+bool SCPageLayout::compareByContent(const SCPageLayout & pl1, const SCPageLayout & pl2)
 {
     if (pl1.m_placeholders.size() == pl2.m_placeholders.size()) {
-        QList<KPrPlaceholder *> placeholders(pl1.m_placeholders);
-        QList<KPrPlaceholder *> otherPlaceholders(pl2.m_placeholders);
+        QList<SCPlaceholder *> placeholders(pl1.m_placeholders);
+        QList<SCPlaceholder *> otherPlaceholders(pl2.m_placeholders);
         qSort(placeholders.begin(), placeholders.end(), comparePlaceholderByPosition);
         qSort(otherPlaceholders.begin(), otherPlaceholders.end(), comparePlaceholderByPosition);
 
-        QList<KPrPlaceholder *>::iterator it(placeholders.begin());
-        QList<KPrPlaceholder *>::iterator otherIt(otherPlaceholders.begin());
+        QList<SCPlaceholder *>::iterator it(placeholders.begin());
+        QList<SCPlaceholder *>::iterator otherIt(otherPlaceholders.begin());
 
         for (; it != placeholders.end(); ++it, ++otherIt) {
             QString presentationObject1 = (*it)->presentationObject();

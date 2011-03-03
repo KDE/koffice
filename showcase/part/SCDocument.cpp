@@ -18,25 +18,25 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrDocument.h"
+#include "SCDocument.h"
 
 
-#include "KPrView.h"
-#include "KPresenter.h"
-#include "KPrPage.h"
-#include "KPrMasterPage.h"
-#include "KPrShapeApplicationData.h"
-#include "KPrFactory.h"
-#include "KPrViewModeNotes.h"
-#include "KPrPlaceholderShapeFactory.h"
-#include "KPrSoundCollection.h"
-#include "KPrDeclarations.h"
-#include "KPrShapeManagerDisplayMasterStrategy.h"
-#include "KPrPageSelectStrategyActive.h"
-#include "pagelayout/KPrPageLayouts.h"
-#include "tools/KPrPlaceholderToolFactory.h"
-#include "tools/KPrAnimationToolFactory.h"
-#include "commands/KPrSetCustomSlideShowsCommand.h"
+#include "SCView.h"
+#include "Showcase.h"
+#include "SCPage.h"
+#include "SCMasterPage.h"
+#include "SCShapeApplicationData.h"
+#include "SCFactory.h"
+#include "SCViewModeNotes.h"
+#include "SCPlaceholderShapeFactory.h"
+#include "SCSoundCollection.h"
+#include "SCDeclarations.h"
+#include "SCShapeManagerDisplayMasterStrategy.h"
+#include "SCPageSelectStrategyActive.h"
+#include "pagelayout/SCPageLayouts.h"
+#include "tools/SCPlaceholderToolFactory.h"
+#include "tools/SCAnimationToolFactory.h"
+#include "commands/SCSetCustomSlideShowsCommand.h"
 #include <KoPACanvas.h>
 #include <KoPACanvasItem.h>
 #include <KoPAViewModeNormal.h>
@@ -58,21 +58,21 @@
 #include <QTimer>
 #include <QCoreApplication>
 
-KPrDocument::KPrDocument(QWidget* parentWidget, QObject* parent, bool singleViewMode)
+SCDocument::SCDocument(QWidget* parentWidget, QObject* parent, bool singleViewMode)
 : KoPADocument(parentWidget, parent, singleViewMode)
-, m_customSlideShows(new KPrCustomSlideShows())
+, m_customSlideShows(new SCCustomSlideShows())
 , m_presentationMonitor(0)
 , m_presenterViewEnabled(false)
-, m_declarations(new KPrDeclarations())
+, m_declarations(new SCDeclarations())
 {
-    if (!KoToolRegistry::instance()->contains("KPrPlaceholderToolID")) {
-        KoToolFactoryBase *f = new KPrAnimationToolFactory(KoToolRegistry::instance());
+    if (!KoToolRegistry::instance()->contains("SCPlaceholderToolID")) {
+        KoToolFactoryBase *f = new SCAnimationToolFactory(KoToolRegistry::instance());
         KoToolRegistry::instance()->add(f);
-        f = new KPrPlaceholderToolFactory(KoToolRegistry::instance());
+        f = new SCPlaceholderToolFactory(KoToolRegistry::instance());
         KoToolRegistry::instance()->add(f);
     }
 
-    setComponentData(KPrFactory::componentData(), false);
+    setComponentData(SCFactory::componentData(), false);
     setTemplateType("showcase_template");
 
     KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
@@ -84,46 +84,46 @@ KPrDocument::KPrDocument(QWidget* parentWidget, QObject* parent, bool singleView
                                                        "presentation:class"));
 
     QVariant variant;
-    variant.setValue(new KPrSoundCollection(this));
-    resourceManager()->setResource(KPresenter::SoundCollection, variant);
+    variant.setValue(new SCSoundCollection(this));
+    resourceManager()->setResource(Showcase::SoundCollection, variant);
 
-    variant.setValue(new KPrPageLayouts(this));
-    resourceManager()->setResource(KPresenter::PageLayouts, variant);
+    variant.setValue(new SCPageLayouts(this));
+    resourceManager()->setResource(Showcase::PageLayouts, variant);
 
     loadKPrConfig();
 }
 
-KPrDocument::~KPrDocument()
+SCDocument::~SCDocument()
 {
     saveKPrConfig();
     delete m_customSlideShows;
 }
 
-KoView * KPrDocument::createViewInstance(QWidget *parent)
+KoView * SCDocument::createViewInstance(QWidget *parent)
 {
-    return new KPrView(this, parent);
+    return new SCView(this, parent);
 }
 
-QGraphicsItem *KPrDocument::createCanvasItem()
+QGraphicsItem *SCDocument::createCanvasItem()
 {
     KoPACanvasItem *canvasItem = new KoPACanvasItem(this);
-    canvasItem->masterShapeManager()->setPaintingStrategy(new KPrShapeManagerDisplayMasterStrategy(canvasItem->masterShapeManager(),
-						  new KPrPageSelectStrategyActive(canvasItem)));
+    canvasItem->masterShapeManager()->setPaintingStrategy(new SCShapeManagerDisplayMasterStrategy(canvasItem->masterShapeManager(),
+						  new SCPageSelectStrategyActive(canvasItem)));
     return canvasItem;
 }
 
-const char * KPrDocument::odfTagName(bool withNamespace)
+const char * SCDocument::odfTagName(bool withNamespace)
 {
     return withNamespace ? "office:presentation": "presentation";
 }
 
-bool KPrDocument::saveOdfProlog(KoPASavingContext & context)
+bool SCDocument::saveOdfProlog(KoPASavingContext & context)
 {
     m_declarations->saveOdf(context);
     return true;
 }
 
-bool KPrDocument::saveOdfEpilogue(KoPASavingContext & context)
+bool SCDocument::saveOdfEpilogue(KoPASavingContext & context)
 {
     context.xmlWriter().startElement("presentation:settings");
     if (!m_activeCustomSlideShow.isEmpty() && m_customSlideShows->names().contains( m_activeCustomSlideShow)) {
@@ -134,10 +134,10 @@ bool KPrDocument::saveOdfEpilogue(KoPASavingContext & context)
     return true;
 }
 
-void KPrDocument::saveOdfDocumentStyles(KoPASavingContext & context)
+void SCDocument::saveOdfDocumentStyles(KoPASavingContext & context)
 {
     KoPADocument::saveOdfDocumentStyles(context);
-    KPrPageLayouts *layouts = resourceManager()->resource(KPresenter::PageLayouts).value<KPrPageLayouts*>();
+    SCPageLayouts *layouts = resourceManager()->resource(Showcase::PageLayouts).value<SCPageLayouts*>();
 
     Q_ASSERT(layouts);
     if (layouts) {
@@ -145,7 +145,7 @@ void KPrDocument::saveOdfDocumentStyles(KoPASavingContext & context)
     }
 }
 
-bool KPrDocument::loadOdfEpilogue(const KoXmlElement & body, KoPALoadingContext & context)
+bool SCDocument::loadOdfEpilogue(const KoXmlElement & body, KoPALoadingContext & context)
 {
     const KoXmlElement & presentationSettings(KoXml::namedItemNS(body, KoXmlNS::presentation, "settings"));
     if (!presentationSettings.isNull()) {
@@ -163,104 +163,104 @@ bool KPrDocument::loadOdfEpilogue(const KoXmlElement & body, KoPALoadingContext 
     return true;
 }
 
-bool KPrDocument::loadOdfDocumentStyles(KoPALoadingContext & context)
+bool SCDocument::loadOdfDocumentStyles(KoPALoadingContext & context)
 {
-    KPrPageLayouts *layouts = resourceManager()->resource(KPresenter::PageLayouts).value<KPrPageLayouts*>();
+    SCPageLayouts *layouts = resourceManager()->resource(Showcase::PageLayouts).value<SCPageLayouts*>();
     if (layouts) {
         layouts->loadOdf(context);
     }
     return true;
 }
 
-KoPAPage * KPrDocument::newPage(KoPAMasterPage * masterPage)
+KoPAPage * SCDocument::newPage(KoPAMasterPage * masterPage)
 {
     Q_ASSERT(masterPage);
-    return new KPrPage(masterPage, this);
+    return new SCPage(masterPage, this);
 }
 
-KoPAMasterPage * KPrDocument::newMasterPage()
+KoPAMasterPage * SCDocument::newMasterPage()
 {
-    return new KPrMasterPage();
+    return new SCMasterPage();
 }
 
-KoOdf::DocumentType KPrDocument::documentType() const
+KoOdf::DocumentType SCDocument::documentType() const
 {
     return KoOdf::Presentation;
 }
 
-void KPrDocument::addAnimation(KPrShapeAnimation * animation)
+void SCDocument::addAnimation(SCShapeAnimation * animation)
 {
     KoShape * shape = animation->shape();
 
-    KPrShapeAnimations & animations(animationsByPage(pageByShape(shape)));
+    SCShapeAnimations & animations(animationsByPage(pageByShape(shape)));
 
     // add animation to the list of animations
     animations.add(animation);
 
     // add animation to the shape animation data so that it can be regenerated on delete shape and undo
-    KPrShapeApplicationData * applicationData = dynamic_cast<KPrShapeApplicationData*>(shape->applicationData());
+    SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());
     if (applicationData == 0) {
-        applicationData = new KPrShapeApplicationData();
+        applicationData = new SCShapeApplicationData();
         shape->setApplicationData(applicationData);
     }
     applicationData->animations().insert(animation);
 }
 
-void KPrDocument::removeAnimation(KPrShapeAnimation * animation, bool removeFromApplicationData)
+void SCDocument::removeAnimation(SCShapeAnimation * animation, bool removeFromApplicationData)
 {
     KoShape * shape = animation->shape();
 
-    KPrShapeAnimations & animations(animationsByPage(pageByShape(shape)));
+    SCShapeAnimations & animations(animationsByPage(pageByShape(shape)));
 
     // remove animation from the list of animations
     animations.remove(animation);
 
     if (removeFromApplicationData) {
         // remove animation from the shape animation data
-        KPrShapeApplicationData * applicationData = dynamic_cast<KPrShapeApplicationData*>(shape->applicationData());
+        SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());
         Q_ASSERT(applicationData);
         applicationData->animations().remove(animation);
     }
 }
 
-void KPrDocument::postAddShape(KoPAPageBase * page, KoShape * shape)
+void SCDocument::postAddShape(KoPAPageBase * page, KoShape * shape)
 {
     Q_UNUSED(page);
-    KPrShapeApplicationData * applicationData = dynamic_cast<KPrShapeApplicationData*>(shape->applicationData());
+    SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());
     if (applicationData) {
         // reinsert animations. this is needed on undo of a delete shape that had a animations
-        QSet<KPrShapeAnimation *> animations = applicationData->animations();
-        for (QSet<KPrShapeAnimation *>::const_iterator it(animations.begin()); it != animations.end(); ++it) {
+        QSet<SCShapeAnimation *> animations = applicationData->animations();
+        for (QSet<SCShapeAnimation *>::const_iterator it(animations.begin()); it != animations.end(); ++it) {
             addAnimation(*it);
         }
     }
 }
 
-void KPrDocument::postRemoveShape(KoPAPageBase * page, KoShape * shape)
+void SCDocument::postRemoveShape(KoPAPageBase * page, KoShape * shape)
 {
     Q_UNUSED(page);
-    KPrShapeApplicationData * applicationData = dynamic_cast<KPrShapeApplicationData*>(shape->applicationData());
+    SCShapeApplicationData * applicationData = dynamic_cast<SCShapeApplicationData*>(shape->applicationData());
     if (applicationData) {
-        QSet<KPrShapeAnimation *> animations = applicationData->animations();
-        for (QSet<KPrShapeAnimation *>::const_iterator it(animations.begin()); it != animations.end(); ++it) {
+        QSet<SCShapeAnimation *> animations = applicationData->animations();
+        for (QSet<SCShapeAnimation *>::const_iterator it(animations.begin()); it != animations.end(); ++it) {
             // remove animations, don't remove from shape application data so that it can be reinserted on undo.
             removeAnimation(*it, false);
         }
     }
 }
 
-void KPrDocument::pageRemoved(KoPAPageBase * page, QUndoCommand * parent)
+void SCDocument::pageRemoved(KoPAPageBase * page, QUndoCommand * parent)
 {
     // only normal pages can be part of a slide show
-    if (dynamic_cast<KPrPage *>(page)) {
-        KPrCustomSlideShows * slideShows = new KPrCustomSlideShows(*customSlideShows());
+    if (dynamic_cast<SCPage *>(page)) {
+        SCCustomSlideShows * slideShows = new SCCustomSlideShows(*customSlideShows());
         slideShows->removeSlideFromAll(page);
         // maybe we should check if old and new are different and only than create the command
-        new KPrSetCustomSlideShowsCommand(this, slideShows, parent);
+        new SCSetCustomSlideShowsCommand(this, slideShows, parent);
     }
 }
 
-void KPrDocument::loadKPrConfig()
+void SCDocument::loadKPrConfig()
 {
     KSharedConfigPtr config = componentData().config();
 
@@ -271,7 +271,7 @@ void KPrDocument::loadKPrConfig()
     }
 }
 
-void KPrDocument::saveKPrConfig()
+void SCDocument::saveKPrConfig()
 {
     KSharedConfigPtr config = componentData().config();
     KConfigGroup configGroup = config->group("SlideShow");
@@ -280,12 +280,12 @@ void KPrDocument::saveKPrConfig()
     configGroup.writeEntry("PresenterViewEnabled", m_presenterViewEnabled);
 }
 
-KoPageApp::PageType KPrDocument::pageType() const
+KoPageApp::PageType SCDocument::pageType() const
 {
     return KoPageApp::Slide;
 }
 
-void KPrDocument::initEmpty()
+void SCDocument::initEmpty()
 {
     QString fileName(KStandardDirs::locate("showcase_template", "Screen/.source/emptyLandscape.otp", componentData()));
     setModified(true);
@@ -298,45 +298,45 @@ void KPrDocument::initEmpty()
     resetURL();
 }
 
-KPrShapeAnimations & KPrDocument::animationsByPage(KoPAPageBase * page)
+SCShapeAnimations & SCDocument::animationsByPage(KoPAPageBase * page)
 {
-    KPrPageData * pageData = dynamic_cast<KPrPageData *>(page);
+    SCPageData * pageData = dynamic_cast<SCPageData *>(page);
     Q_ASSERT(pageData);
     return pageData->animations();
 }
 
-KPrCustomSlideShows* KPrDocument::customSlideShows()
+SCCustomSlideShows* SCDocument::customSlideShows()
 {
     return m_customSlideShows;
 }
 
-void KPrDocument::setCustomSlideShows(KPrCustomSlideShows* replacement)
+void SCDocument::setCustomSlideShows(SCCustomSlideShows* replacement)
 {
     m_customSlideShows = replacement;
     emit customSlideShowsModified();
 }
 
-int KPrDocument::presentationMonitor()
+int SCDocument::presentationMonitor()
 {
     return m_presentationMonitor;
 }
 
-void KPrDocument::setPresentationMonitor(int monitor)
+void SCDocument::setPresentationMonitor(int monitor)
 {
     m_presentationMonitor = monitor;
 }
 
-bool KPrDocument::isPresenterViewEnabled()
+bool SCDocument::isPresenterViewEnabled()
 {
     return m_presenterViewEnabled;
 }
 
-void KPrDocument::setPresenterViewEnabled(bool enabled)
+void SCDocument::setPresenterViewEnabled(bool enabled)
 {
     m_presenterViewEnabled = enabled;
 }
 
-QList<KoPAPageBase*> KPrDocument::slideShow() const
+QList<KoPAPageBase*> SCDocument::slideShow() const
 {
     if (!m_activeCustomSlideShow.isEmpty() &&
             m_customSlideShows->names().contains(m_activeCustomSlideShow)) {
@@ -346,12 +346,12 @@ QList<KoPAPageBase*> KPrDocument::slideShow() const
     return pages();
 }
 
-QString KPrDocument::activeCustomSlideShow() const
+QString SCDocument::activeCustomSlideShow() const
 {
     return m_activeCustomSlideShow;
 }
 
-void KPrDocument::setActiveCustomSlideShow(const QString &customSlideShow)
+void SCDocument::setActiveCustomSlideShow(const QString &customSlideShow)
 {
     if (customSlideShow != m_activeCustomSlideShow) {
         m_activeCustomSlideShow = customSlideShow;
@@ -359,17 +359,17 @@ void KPrDocument::setActiveCustomSlideShow(const QString &customSlideShow)
     }
 }
 
-bool KPrDocument::loadOdfProlog(const KoXmlElement & body, KoPALoadingContext & context)
+bool SCDocument::loadOdfProlog(const KoXmlElement & body, KoPALoadingContext & context)
 {
     return m_declarations->loadOdf(body, context);
 }
 
-KPrDeclarations * KPrDocument::declarations() const
+SCDeclarations * SCDocument::declarations() const
 {
     return m_declarations;
 }
 
-void KPrDocument::showStartUpWidget(KoMainWindow * parent, bool alwaysShow)
+void SCDocument::showStartUpWidget(KoMainWindow * parent, bool alwaysShow)
 {
     // Go through all (optional) plugins we require and quit if necessary
     bool error = false;
@@ -394,7 +394,7 @@ void KPrDocument::showStartUpWidget(KoMainWindow * parent, bool alwaysShow)
     }
 }
 
-void KPrDocument::showErrorAndDie()
+void SCDocument::showErrorAndDie()
 {
     KMessageBox::error(widget(), m_errorMessage, i18n("Installation Error"));
     // This means "the environment is incorrect" on Windows
@@ -402,5 +402,5 @@ void KPrDocument::showErrorAndDie()
     QCoreApplication::exit(10);
 }
 
-#include "KPrDocument.moc"
+#include "SCDocument.moc"
 

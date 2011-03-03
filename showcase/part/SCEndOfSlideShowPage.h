@@ -20,9 +20,9 @@
 #ifndef KPRENDOFSLIDESHOWPAGE_H
 #define KPRENDOFSLIDESHOWPAGE_H
 
-class KPrDocument;
+class SCDocument;
 
-#include "KPrPage.h"
+#include "SCPage.h"
 
 /**
  * This is the page that is use as end of presentation slide show.
@@ -31,11 +31,11 @@ class KPrDocument;
  * It also has it's own master page which will also be deleted when
  * the page is deleted.
  */
-class KPrEndOfSlideShowPage : public KPrPage
+class SCEndOfSlideShowPage : public SCPage
 {
 public:
-    KPrEndOfSlideShowPage(const QRectF & screenRect, KPrDocument * document);
-    ~KPrEndOfSlideShowPage();
+    SCEndOfSlideShowPage(const QRectF & screenRect, SCDocument * document);
+    ~SCEndOfSlideShowPage();
 };
 
 #endif /* KPRENDOFSLIDESHOWPAGE_H */

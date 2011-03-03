@@ -27,11 +27,11 @@
 #include "KoXmlReaderForward.h"
 class KoXmlWriter;
 
-class KPrPlaceholder
+class SCPlaceholder
 {
 public:
-    KPrPlaceholder();
-    ~KPrPlaceholder();
+    SCPlaceholder();
+    ~SCPlaceholder();
 
     /**
      * @brief Load the presentation:placeholder
@@ -70,14 +70,14 @@ public:
     /**
      * Check the placeholders are identical 
      */
-    bool operator==(const KPrPlaceholder & other) const;
+    bool operator==(const SCPlaceholder & other) const;
 
-    bool operator<(const KPrPlaceholder & other) const;
+    bool operator<(const SCPlaceholder & other) const;
 
     /**
      * Compare the position of the placeholder
      */
-    static bool comparePosition(const KPrPlaceholder & p1, const KPrPlaceholder & p2);
+    static bool comparePosition(const SCPlaceholder & p1, const SCPlaceholder & p2);
 
 private:
     qreal percent(const KoXmlElement & element, const char * type, qreal absolute);

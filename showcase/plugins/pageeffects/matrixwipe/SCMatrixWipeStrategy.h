@@ -20,19 +20,19 @@
 #ifndef KPRMATRIXWIPESTRATEGY_H
 #define KPRMATRIXWIPESTRATEGY_H
 
-#include <KPrPageEffectStrategy.h>
+#include <SCPageEffectStrategy.h>
 
-class KPrMatrixWipeStrategy : public KPrPageEffectStrategy
+class SCMatrixWipeStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrMatrixWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool smooth = false);
-    virtual ~KPrMatrixWipeStrategy();
+    SCMatrixWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool smooth = false);
+    virtual ~SCMatrixWipeStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
 
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
     enum Direction {
         NotSmooth,
         TopToBottom,

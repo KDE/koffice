@@ -20,9 +20,9 @@
 #ifndef BARNDOORWIPEEFFECTFACTORY_H
 #define BARNDOORWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class BarnDoorWipeEffectFactory : public KPrPageEffectFactory
+class BarnDoorWipeEffectFactory : public SCPageEffectFactory
 {
 public:
     BarnDoorWipeEffectFactory();

@@ -23,12 +23,12 @@
 
 #include <KoToolFactoryBase.h>
 
-/// Factory for the KPrAnimationTool
-class KPrAnimationToolFactory : public KoToolFactoryBase {
+/// Factory for the SCAnimationTool
+class SCAnimationToolFactory : public KoToolFactoryBase {
 public:
     /// constructor
-    KPrAnimationToolFactory(QObject *parent);
-    ~KPrAnimationToolFactory();
+    SCAnimationToolFactory(QObject *parent);
+    ~SCAnimationToolFactory();
 
     bool canCreateTool(KoCanvasBase *canvas) const;
     KoToolBase* createTool(KoCanvasBase *canvas);

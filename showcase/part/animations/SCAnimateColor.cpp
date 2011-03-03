@@ -18,41 +18,41 @@
  */
 
 
-#include "KPrAnimateColor.h"
+#include "SCAnimateColor.h"
 
-#include "KPrAnimationCache.h"
+#include "SCAnimationCache.h"
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoXmlReader.h>
 
-KPrAnimateColor::KPrAnimateColor(KPrShapeAnimation *shapeAnimation)
-: KPrAnimationBase(shapeAnimation)
+SCAnimateColor::SCAnimateColor(SCShapeAnimation *shapeAnimation)
+: SCAnimationBase(shapeAnimation)
 {
 }
 
-KPrAnimateColor::~KPrAnimateColor()
+SCAnimateColor::~SCAnimateColor()
 {
 }
 
-bool KPrAnimateColor::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimateColor::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
-    KPrAnimationBase::loadOdf(element, context);
+    SCAnimationBase::loadOdf(element, context);
     return false;
 }
 
-bool KPrAnimateColor::saveOdf(KoPASavingContext & paContext) const
+bool SCAnimateColor::saveOdf(KoPASavingContext & paContext) const
 {
     Q_UNUSED(paContext);
     return true;
 }
 
-void KPrAnimateColor::init(KPrAnimationCache *animationCache, int step)
+void SCAnimateColor::init(SCAnimationCache *animationCache, int step)
 {
     Q_UNUSED(animationCache);
     Q_UNUSED(step);
 }
 
-void KPrAnimateColor::next(int currentTime)
+void SCAnimateColor::next(int currentTime)
 {
     Q_UNUSED(currentTime);
 }

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# This script uses KPresenter's DCOP interface to automate a presentation
+# This script uses Showcase's DCOP interface to automate a presentation
 # Every 10 seconds, it goes to the next sequence or page (just as if
 # 'space' was pressed)
 #

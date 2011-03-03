@@ -17,22 +17,22 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPageLayoutSharedSavingData.h"
+#include "SCPageLayoutSharedSavingData.h"
 
-KPrPageLayoutSharedSavingData::KPrPageLayoutSharedSavingData()
+SCPageLayoutSharedSavingData::SCPageLayoutSharedSavingData()
 {
 }
 
-KPrPageLayoutSharedSavingData::~KPrPageLayoutSharedSavingData()
+SCPageLayoutSharedSavingData::~SCPageLayoutSharedSavingData()
 {
 }
 
-void KPrPageLayoutSharedSavingData::addPageLayoutStyle(KPrPageLayout * pageLayout, const QString & styleName)
+void SCPageLayoutSharedSavingData::addPageLayoutStyle(SCPageLayout * pageLayout, const QString & styleName)
 {
     m_pageLayoutToName.insert(pageLayout, styleName);
 }
 
-QString KPrPageLayoutSharedSavingData::pageLayoutStyle(KPrPageLayout * pageLayout)
+QString SCPageLayoutSharedSavingData::pageLayoutStyle(SCPageLayout * pageLayout)
 {
     return m_pageLayoutToName.value(pageLayout, QString());
 }

@@ -2,24 +2,24 @@ include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/s
 
 set(kpr_pageeffect_clockwipe_SRCS
     Plugin.cpp
-    KPrClockWipeStrategy.cpp
-    KPrCenterFanWipeStrategy.cpp
-    KPrSideFanWipeStrategy.cpp
-    KPrClockWipeSubpathHelper.cpp
-    KPrSweepWipeStrategy.cpp
+    SCClockWipeStrategy.cpp
+    SCCenterFanWipeStrategy.cpp
+    SCSideFanWipeStrategy.cpp
+    SCClockWipeSubpathHelper.cpp
+    SCSweepWipeStrategy.cpp
 
-    clockwipe/KPrClockWipeEffectFactory.cpp
-    pinwheelwipe/KPrPinWheelWipeEffectFactory.cpp
-    singlesweepwipe/KPrSingleSweepWipeEffectFactory.cpp
-    singlesweepwipe/KPrSingleSweepWipeStrategy.cpp
-    fanwipe/KPrFanWipeEffectFactory.cpp
-    doublefanwipe/KPrDoubleFanWipeEffectFactory.cpp
-    doublesweepwipe/KPrDoubleSweepWipeEffectFactory.cpp
-    doublesweepwipe/KPrDoubleSweepWipeStrategy.cpp
-    saloondoorwipe/KPrSaloonDoorWipeEffectFactory.cpp
-    saloondoorwipe/KPrSaloonDoorWipeStrategy.cpp
-    windshieldwipe/KPrWindShieldWipeEffectFactory.cpp
-    windshieldwipe/KPrWindShieldWipeStrategy.cpp
+    clockwipe/SCClockWipeEffectFactory.cpp
+    pinwheelwipe/SCPinWheelWipeEffectFactory.cpp
+    singlesweepwipe/SCSingleSweepWipeEffectFactory.cpp
+    singlesweepwipe/SCSingleSweepWipeStrategy.cpp
+    fanwipe/SCFanWipeEffectFactory.cpp
+    doublefanwipe/SCDoubleFanWipeEffectFactory.cpp
+    doublesweepwipe/SCDoubleSweepWipeEffectFactory.cpp
+    doublesweepwipe/SCDoubleSweepWipeStrategy.cpp
+    saloondoorwipe/SCSaloonDoorWipeEffectFactory.cpp
+    saloondoorwipe/SCSaloonDoorWipeStrategy.cpp
+    windshieldwipe/SCWindShieldWipeEffectFactory.cpp
+    windshieldwipe/SCWindShieldWipeStrategy.cpp
     )
 
 kde4_add_plugin(kpr_pageeffect_clockwipe ${kpr_pageeffect_clockwipe_SRCS})

@@ -17,17 +17,17 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimationAttribute.h"
+#include "SCAnimationAttribute.h"
 
-KPrAnimationAttribute::KPrAnimationAttribute(QString attributeName):m_attributeName(attributeName)
+SCAnimationAttribute::SCAnimationAttribute(QString attributeName):m_attributeName(attributeName)
 {
 }
 
-KPrAnimationAttribute::~KPrAnimationAttribute()
+SCAnimationAttribute::~SCAnimationAttribute()
 {
 }
 
-QString KPrAnimationAttribute::attributeName() const
+QString SCAnimationAttribute::attributeName() const
 {
     return m_attributeName;
 }

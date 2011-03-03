@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPlaceholderShape.h"
+#include "SCPlaceholderShape.h"
 
 #include <QPainter>
 #include <QTextOption>
@@ -26,25 +26,25 @@
 #include <KoXmlWriter.h>
 #include <KoOdfWorkaround.h>
 
-#include "KPrPlaceholderStrategy.h"
+#include "SCPlaceholderStrategy.h"
 
-KPrPlaceholderShape::KPrPlaceholderShape()
+SCPlaceholderShape::SCPlaceholderShape()
 : m_strategy(0)
 {
 }
 
-KPrPlaceholderShape::KPrPlaceholderShape(const QString & presentationClass)
+SCPlaceholderShape::SCPlaceholderShape(const QString & presentationClass)
 : m_strategy(0)
 {
-    m_strategy = KPrPlaceholderStrategy::create(presentationClass);
+    m_strategy = SCPlaceholderStrategy::create(presentationClass);
 }
 
-KPrPlaceholderShape::~KPrPlaceholderShape()
+SCPlaceholderShape::~SCPlaceholderShape()
 {
     delete m_strategy;
 }
 
-void KPrPlaceholderShape::paint(QPainter &painter, const KoViewConverter &converter)
+void SCPlaceholderShape::paint(QPainter &painter, const KoViewConverter &converter)
 {
     QRectF rect(QPointF(0, 0), size());
     if (m_strategy) {
@@ -59,7 +59,7 @@ void KPrPlaceholderShape::paint(QPainter &painter, const KoViewConverter &conver
     }
 }
 
-bool KPrPlaceholderShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
+bool SCPlaceholderShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
 {
     loadOdfAttributes(element, context, OdfAllAttributes);
 #ifndef NWORKAROUND_ODF_BUGS
@@ -68,7 +68,7 @@ bool KPrPlaceholderShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCo
 
     delete m_strategy;
 
-    m_strategy = KPrPlaceholderStrategy::create(additionalAttribute("presentation:class"));
+    m_strategy = SCPlaceholderStrategy::create(additionalAttribute("presentation:class"));
     if (m_strategy == 0) {
         return false;
     }
@@ -77,7 +77,7 @@ bool KPrPlaceholderShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCo
     return true;
 }
 
-void KPrPlaceholderShape::saveOdf(KoShapeSavingContext & context) const
+void SCPlaceholderShape::saveOdf(KoShapeSavingContext & context) const
 {
     KoXmlWriter & writer = context.xmlWriter();
     writer.startElement("draw:frame");
@@ -89,7 +89,7 @@ void KPrPlaceholderShape::saveOdf(KoShapeSavingContext & context) const
     writer.endElement(); // draw:frame
 }
 
-KoShape *KPrPlaceholderShape::createShape(KoResourceManager *documentResources)
+KoShape *SCPlaceholderShape::createShape(KoResourceManager *documentResources)
 {
     Q_ASSERT(m_strategy);
     KoShape * shape = 0;
@@ -99,7 +99,7 @@ KoShape *KPrPlaceholderShape::createShape(KoResourceManager *documentResources)
     return shape;
 }
 
-void KPrPlaceholderShape::initStrategy(KoResourceManager *documentResources)
+void SCPlaceholderShape::initStrategy(KoResourceManager *documentResources)
 {
     Q_ASSERT(m_strategy);
     if (m_strategy) {
@@ -107,7 +107,7 @@ void KPrPlaceholderShape::initStrategy(KoResourceManager *documentResources)
     }
 }
 
-KoShapeUserData * KPrPlaceholderShape::userData() const
+KoShapeUserData * SCPlaceholderShape::userData() const
 {
     Q_ASSERT(m_strategy);
     return m_strategy ? m_strategy->userData() : 0;

@@ -17,38 +17,38 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSwapEffectHorizontalStrategy.h"
-#include "KPrSwapEffectFactory.h"
+#include "SCSwapEffectHorizontalStrategy.h"
+#include "SCSwapEffectFactory.h"
 
 #include <QWidget>
 #include <QPainter>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
 
-KPrSwapEffectHorizontalStrategy::KPrSwapEffectHorizontalStrategy()
-: KPrPageEffectStrategy(KPrSwapEffectFactory::Horizontal, "swapEffect", "horizontal", false, true)
+SCSwapEffectHorizontalStrategy::SCSwapEffectHorizontalStrategy()
+: SCPageEffectStrategy(SCSwapEffectFactory::Horizontal, "swapEffect", "horizontal", false, true)
 {
 }
 
-KPrSwapEffectHorizontalStrategy::~KPrSwapEffectHorizontalStrategy()
+SCSwapEffectHorizontalStrategy::~SCSwapEffectHorizontalStrategy()
 {
 }
 
-void KPrSwapEffectHorizontalStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCSwapEffectHorizontalStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     timeLine.setFrameRange(0, 500);
     data.m_oldPageItem->show();
     data.m_newPageItem->show();
 }
 
-void KPrSwapEffectHorizontalStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCSwapEffectHorizontalStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     Q_UNUSED(p);
     Q_UNUSED(currPos);
     Q_UNUSED(data);
 }
 
-void KPrSwapEffectHorizontalStrategy::next(const KPrPageEffect::Data &data)
+void SCSwapEffectHorizontalStrategy::next(const SCPageEffect::Data &data)
 {
     int frame = data.m_timeLine.frameForTime(data.m_currentTime);
     if (frame >= data.m_timeLine.endFrame()) {
@@ -116,7 +116,7 @@ void KPrSwapEffectHorizontalStrategy::next(const KPrPageEffect::Data &data)
     }
 }
 
-void KPrSwapEffectHorizontalStrategy::finish(const KPrPageEffect::Data &data)
+void SCSwapEffectHorizontalStrategy::finish(const SCPageEffect::Data &data)
 {
     data.m_graphicsView->hide();
     data.m_oldPageItem->hide();

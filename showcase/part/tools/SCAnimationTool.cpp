@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrAnimationTool.h"
+#include "SCAnimationTool.h"
 
 #include <klocale.h>
 
@@ -29,27 +29,27 @@
 #include <KoPointerEvent.h>
 #include <KoPACanvas.h>
 #include <KoViewConverter.h>
-#include "KPrPageEffectDocker.h"
-#include "KPrClickActionDocker.h"
+#include "SCPageEffectDocker.h"
+#include "SCClickActionDocker.h"
 
-KPrAnimationTool::KPrAnimationTool(KoCanvasBase *canvas)
+SCAnimationTool::SCAnimationTool(KoCanvasBase *canvas)
     : KoToolBase(canvas)
 {
 }
 
-KPrAnimationTool::~KPrAnimationTool()
+SCAnimationTool::~SCAnimationTool()
 {
 }
 
 
-void KPrAnimationTool::paint(QPainter &painter, const KoViewConverter &converter)
+void SCAnimationTool::paint(QPainter &painter, const KoViewConverter &converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);
 }
 
 
-void KPrAnimationTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void SCAnimationTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
 {
     useCursor(Qt::ArrowCursor);
     repaintDecorations();
@@ -57,28 +57,28 @@ void KPrAnimationTool::activate(ToolActivation toolActivation, const QSet<KoShap
     Q_UNUSED(shapes);
 }
 
-void KPrAnimationTool::mousePressEvent(KoPointerEvent *event)
+void SCAnimationTool::mousePressEvent(KoPointerEvent *event)
 {
     event->ignore();
 }
 
-void KPrAnimationTool::mouseMoveEvent(KoPointerEvent *event)
+void SCAnimationTool::mouseMoveEvent(KoPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void KPrAnimationTool::mouseReleaseEvent(KoPointerEvent *event)
+void SCAnimationTool::mouseReleaseEvent(KoPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
 
-QMap<QString, QWidget *> KPrAnimationTool::createOptionWidgets()
+QMap<QString, QWidget *> SCAnimationTool::createOptionWidgets()
 {
-    KPrPageEffectDocker *effectWidget = new KPrPageEffectDocker();
+    SCPageEffectDocker *effectWidget = new SCPageEffectDocker();
     effectWidget->setView((dynamic_cast<KoPACanvas *>(canvas()))->koPAView());
 
-    KPrClickActionDocker *clickActionWidget = new KPrClickActionDocker();
+    SCClickActionDocker *clickActionWidget = new SCClickActionDocker();
     clickActionWidget->setView((dynamic_cast<KoPACanvas *>(canvas()))->koPAView());
 
     QMap<QString, QWidget *> widgets;
@@ -91,4 +91,4 @@ QMap<QString, QWidget *> KPrAnimationTool::createOptionWidgets()
     return widgets;
 }
 
-#include "KPrAnimationTool.moc"
+#include "SCAnimationTool.moc"

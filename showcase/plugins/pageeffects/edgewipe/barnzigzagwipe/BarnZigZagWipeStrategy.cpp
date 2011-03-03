@@ -25,7 +25,7 @@
 const int StepCount = 250;
 
 BarnZigZagWipeStrategy::BarnZigZagWipeStrategy(int subtype, const char *smilSubType, bool reverse)
-    : KPrPageEffectStrategy(subtype, "BarnZigZagWipe", smilSubType, reverse)
+    : SCPageEffectStrategy(subtype, "BarnZigZagWipe", smilSubType, reverse)
 {
 }
 
@@ -33,20 +33,20 @@ BarnZigZagWipeStrategy::~BarnZigZagWipeStrategy()
 {
 }
 
-void BarnZigZagWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void BarnZigZagWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, StepCount);
 }
 
-void BarnZigZagWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void BarnZigZagWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     p.drawPixmap(QPoint(0, 0), data.m_oldPage, data.m_widget->rect());
     p.setClipPath(clipPath(currPos, data.m_widget->rect()));
     p.drawPixmap(QPoint(0, 0), data.m_newPage, data.m_widget->rect());
 }
 
-void BarnZigZagWipeStrategy::next(const KPrPageEffect::Data &data)
+void BarnZigZagWipeStrategy::next(const SCPageEffect::Data &data)
 {
     data.m_widget->update();
 }

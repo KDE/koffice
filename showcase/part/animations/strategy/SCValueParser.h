@@ -27,7 +27,7 @@
 
 class KoShape;
 class KoTextBlockData;
-class KPrAnimationCache;
+class SCAnimationCache;
 
 class Token
 {
@@ -184,17 +184,17 @@ public:
     Opcode(unsigned t, unsigned i): type(t), index(i) {}
 };
 
-class KPrValueParser
+class SCValueParser
 {
 public:
-    KPrValueParser(QString formula, KoShape *shape, KoTextBlockData *textBlockData);
+    SCValueParser(QString formula, KoShape *shape, KoTextBlockData *textBlockData);
     QString formula() const;
-    qreal eval(KPrAnimationCache * cache) const;
+    qreal eval(SCAnimationCache * cache) const;
     bool valid() const;
 protected:
     Tokens scan(QString formula);
     void compile(const Tokens& tokens) const;
-    qreal identifierToValue(QString identifier, KPrAnimationCache * cache) const;
+    qreal identifierToValue(QString identifier, SCAnimationCache * cache) const;
 private:
     KoShape *m_shape;
     KoTextBlockData *m_textBlockData;

@@ -17,25 +17,25 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrWaterfallWipeBottomRightStrategy.h"
-#include "KPrWaterfallWipeEffectFactory.h"
+#include "SCWaterfallWipeBottomRightStrategy.h"
+#include "SCWaterfallWipeEffectFactory.h"
 
-KPrWaterfallWipeBottomRightStrategy::KPrWaterfallWipeBottomRightStrategy(Direction direction)
-    : KPrMatrixWipeStrategy(direction == BottomToTop ? KPrWaterfallWipeEffectFactory::BottomRightVertical : KPrWaterfallWipeEffectFactory::BottomRightHorizontal, "waterfallWipe", direction == BottomToTop ? "verticalLeft" : "horizontalLeft", true, true),
+SCWaterfallWipeBottomRightStrategy::SCWaterfallWipeBottomRightStrategy(Direction direction)
+    : SCMatrixWipeStrategy(direction == BottomToTop ? SCWaterfallWipeEffectFactory::BottomRightVertical : SCWaterfallWipeEffectFactory::BottomRightHorizontal, "waterfallWipe", direction == BottomToTop ? "verticalLeft" : "horizontalLeft", true, true),
     m_direction(direction)
 {
 }
 
-KPrWaterfallWipeBottomRightStrategy::~KPrWaterfallWipeBottomRightStrategy()
+SCWaterfallWipeBottomRightStrategy::~SCWaterfallWipeBottomRightStrategy()
 {
 }
 
-int KPrWaterfallWipeBottomRightStrategy::squareIndex(int x, int y, int columns, int rows)
+int SCWaterfallWipeBottomRightStrategy::squareIndex(int x, int y, int columns, int rows)
 {
     return (columns - x - 1) + (rows - y - 1);
 }
 
-KPrMatrixWipeStrategy::Direction KPrWaterfallWipeBottomRightStrategy::squareDirection(int x, int y, int columns, int rows)
+SCMatrixWipeStrategy::Direction SCWaterfallWipeBottomRightStrategy::squareDirection(int x, int y, int columns, int rows)
 {
     Q_UNUSED(x);
     Q_UNUSED(y);
@@ -44,7 +44,7 @@ KPrMatrixWipeStrategy::Direction KPrWaterfallWipeBottomRightStrategy::squareDire
     return m_direction;
 }
 
-int KPrWaterfallWipeBottomRightStrategy::maxIndex(int columns, int rows)
+int SCWaterfallWipeBottomRightStrategy::maxIndex(int columns, int rows)
 {
     return columns + rows;
 }

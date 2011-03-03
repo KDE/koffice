@@ -17,11 +17,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPageLayoutCommand.h"
+#include "SCPageLayoutCommand.h"
 
-#include "pagelayout/KPrPlaceholders.h"
+#include "pagelayout/SCPlaceholders.h"
 
-KPrPageLayoutCommand::KPrPageLayoutCommand( KPrPlaceholders * placeholders, KPrPageLayout * layout, QUndoCommand *parent )
+SCPageLayoutCommand::SCPageLayoutCommand( SCPlaceholders * placeholders, SCPageLayout * layout, QUndoCommand *parent )
 : QUndoCommand( parent )
 , m_placeholders( placeholders )
 , m_oldLayout( placeholders->layout() )
@@ -29,18 +29,18 @@ KPrPageLayoutCommand::KPrPageLayoutCommand( KPrPlaceholders * placeholders, KPrP
 {
 }
 
-KPrPageLayoutCommand::~KPrPageLayoutCommand()
+SCPageLayoutCommand::~SCPageLayoutCommand()
 {
     // nothing needs to be deleted here as the layouts are only used but not owned
 }
 
-void KPrPageLayoutCommand::redo()
+void SCPageLayoutCommand::redo()
 {
     QUndoCommand::redo();
     m_placeholders->setLayout( m_newLayout );
 }
 
-void KPrPageLayoutCommand::undo()
+void SCPageLayoutCommand::undo()
 {
     QUndoCommand::undo();
     m_placeholders->setLayout( m_oldLayout );

@@ -27,12 +27,12 @@
 class KAboutData;
 class KIconLoader;
 
-class KPRESENTER_EXPORT KPrFactory : public KPluginFactory
+class KPRESENTER_EXPORT SCFactory : public KPluginFactory
 {
     Q_OBJECT
 public:
-    explicit KPrFactory(QObject* parent = 0, const char* name = 0);
-    ~KPrFactory();
+    explicit SCFactory(QObject* parent = 0, const char* name = 0);
+    ~SCFactory();
 
     virtual QObject* create(const char* iface, QWidget* parentWidget, QObject *parent, const QVariantList& args, const QString& keyword);
     static const KComponentData &componentData();

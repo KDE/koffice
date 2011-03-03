@@ -17,18 +17,18 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrTriangleWipeEffectFactory.h"
+#include "SCTriangleWipeEffectFactory.h"
 
 #include <cmath>
 
 #include <klocale.h>
 
-#include "../KPrIrisWipeEffectStrategyBase.h"
+#include "../SCIrisWipeEffectStrategyBase.h"
 
 #define TriangleWipeEffectFactoryId "TriangleWipeEffectFactory"
 
-KPrTriangleWipeEffectFactory::KPrTriangleWipeEffectFactory()
-: KPrPageEffectFactory(TriangleWipeEffectFactoryId, i18n("Triangle"))
+SCTriangleWipeEffectFactory::SCTriangleWipeEffectFactory()
+: SCPageEffectFactory(TriangleWipeEffectFactoryId, i18n("Triangle"))
 {
     QPainterPath shape;
 
@@ -37,10 +37,10 @@ KPrTriangleWipeEffectFactory::KPrTriangleWipeEffectFactory()
     shape.lineTo(-25*cos(7 * M_PI / 6), -25*sin(7 * M_PI / 6));
     shape.lineTo(-25*cos(11 * M_PI / 6), -25*sin(11 * M_PI / 6));
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Up, "triangleWipe", "up", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Up, "triangleWipe", "up", false));
 
     //up reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, UpReverse, "triangleWipe", "up", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, UpReverse, "triangleWipe", "up", true));
 
     //right
     shape = QPainterPath();
@@ -48,10 +48,10 @@ KPrTriangleWipeEffectFactory::KPrTriangleWipeEffectFactory()
     shape.lineTo(25*cos(2 * M_PI / 3), 25*sin(2 * M_PI / 3));
     shape.lineTo(25*cos(4 * M_PI / 3), 25*sin(4 * M_PI / 3));
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Right, "triangleWipe", "right", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Right, "triangleWipe", "right", false));
 
     //right reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, RightReverse, "triangleWipe", "right", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, RightReverse, "triangleWipe", "right", true));
 
     //down
     shape = QPainterPath();
@@ -59,10 +59,10 @@ KPrTriangleWipeEffectFactory::KPrTriangleWipeEffectFactory()
     shape.lineTo(25*cos(7 * M_PI / 6), 25*sin(7 * M_PI / 6));
     shape.lineTo(25*cos(11 * M_PI / 6), 25*sin(11 * M_PI / 6));
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Down, "triangleWipe", "down", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Down, "triangleWipe", "down", false));
 
     //down reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, DownReverse, "triangleWipe", "down", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, DownReverse, "triangleWipe", "down", true));
 
     //left
     shape = QPainterPath();
@@ -70,14 +70,14 @@ KPrTriangleWipeEffectFactory::KPrTriangleWipeEffectFactory()
     shape.lineTo(-25*cos(2 * M_PI / 3), 25*sin(2 * M_PI / 3));
     shape.lineTo(-25*cos(4 * M_PI / 3), 25*sin(4 * M_PI / 3));
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Left, "triangleWipe", "left", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Left, "triangleWipe", "left", false));
 
     //left reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, LeftReverse, "triangleWipe", "left", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, LeftReverse, "triangleWipe", "left", true));
 
 }
 
-KPrTriangleWipeEffectFactory::~KPrTriangleWipeEffectFactory()
+SCTriangleWipeEffectFactory::~SCTriangleWipeEffectFactory()
 {
 }
 
@@ -92,7 +92,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Left Reverse")
 };
 
-QString KPrTriangleWipeEffectFactory::subTypeName(int subType) const
+QString SCTriangleWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

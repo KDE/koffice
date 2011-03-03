@@ -17,13 +17,13 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrHexagonWipeEffectFactory.h"
+#include "SCHexagonWipeEffectFactory.h"
 
 #include <cmath>
 
 #include <klocale.h>
 
-#include "../KPrIrisWipeEffectStrategyBase.h"
+#include "../SCIrisWipeEffectStrategyBase.h"
 
 using std::sin;
 using std::cos;
@@ -34,8 +34,8 @@ using std::cos;
 
 #define HexagonWipeEffectId "HexagonWipeEffect"
 
-KPrHexagonWipeEffectFactory::KPrHexagonWipeEffectFactory()
-: KPrPageEffectFactory(HexagonWipeEffectId, i18n("Hexagon"))
+SCHexagonWipeEffectFactory::SCHexagonWipeEffectFactory()
+: SCPageEffectFactory(HexagonWipeEffectId, i18n("Hexagon"))
 {
 
      QPainterPath shape;
@@ -49,10 +49,10 @@ KPrHexagonWipeEffectFactory::KPrHexagonWipeEffectFactory()
     shape.lineTo(25*cos(5 * M_PI / 3), -25*sin(5 * M_PI / 3));
     shape.lineTo(25*cos(2 * M_PI), -25*sin(2 * M_PI));
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Horizontal, "hexagonWipe", "horizontal", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Horizontal, "hexagonWipe", "horizontal", false));
 
     //horizontal reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, HorizontalReverse, "hexagonWipe", "horizontal", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, HorizontalReverse, "hexagonWipe", "horizontal", true));
 
     //vertical
     shape = QPainterPath();
@@ -64,13 +64,13 @@ KPrHexagonWipeEffectFactory::KPrHexagonWipeEffectFactory()
     shape.lineTo(25*cos(11 * M_PI / 6),-25*sin(11 * M_PI / 6));
     shape.lineTo(25*cos(M_PI / 6), -25*sin(M_PI / 6));
     shape.closeSubpath();
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Vertical, "hexagonWipe", "vertical", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Vertical, "hexagonWipe", "vertical", false));
 
     //vertical reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, VerticalReverse, "hexagonWipe", "vertical", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, VerticalReverse, "hexagonWipe", "vertical", true));
 }
 
-KPrHexagonWipeEffectFactory::~KPrHexagonWipeEffectFactory()
+SCHexagonWipeEffectFactory::~SCHexagonWipeEffectFactory()
 {
 }
 
@@ -81,7 +81,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Vertical Reverse")
 };
 
-QString KPrHexagonWipeEffectFactory::subTypeName(int subType) const
+QString SCHexagonWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

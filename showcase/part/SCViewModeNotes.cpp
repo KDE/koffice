@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrViewModeNotes.h"
+#include "SCViewModeNotes.h"
 
 #include <QtCore/QEvent>
 #include <QtGui/QPainter>
@@ -41,19 +41,19 @@
 #include <KoPAMasterPage.h>
 #include <KoPAView.h>
 
-#include "KPrNotes.h"
-#include "KPrPage.h"
+#include "SCNotes.h"
+#include "SCPage.h"
 
-KPrViewModeNotes::KPrViewModeNotes(KoPAViewBase *view, KoPACanvasBase *canvas)
+SCViewModeNotes::SCViewModeNotes(KoPAViewBase *view, KoPACanvasBase *canvas)
     : KoPAViewMode(view, canvas)
 {
 }
 
-KPrViewModeNotes::~KPrViewModeNotes()
+SCViewModeNotes::~SCViewModeNotes()
 {
 }
 
-void KPrViewModeNotes::paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect)
+void SCViewModeNotes::paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect)
 {
 #ifdef NDEBUG
     Q_UNUSED(canvas);
@@ -71,32 +71,32 @@ void KPrViewModeNotes::paint(KoPACanvasBase* canvas, QPainter& painter, const QR
 
 }
 
-void KPrViewModeNotes::tabletEvent(QTabletEvent *event, const QPointF &point)
+void SCViewModeNotes::tabletEvent(QTabletEvent *event, const QPointF &point)
 {
     m_toolProxy->tabletEvent(event, point);
 }
 
-void KPrViewModeNotes::mousePressEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModeNotes::mousePressEvent(QMouseEvent *event, const QPointF &point)
 {
     m_toolProxy->mousePressEvent(event, point);
 }
 
-void KPrViewModeNotes::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModeNotes::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
 {
     m_toolProxy->mouseDoubleClickEvent(event, point);
 }
 
-void KPrViewModeNotes::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModeNotes::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
 {
     m_toolProxy->mouseMoveEvent(event, point);
 }
 
-void KPrViewModeNotes::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModeNotes::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
 {
     m_toolProxy->mouseReleaseEvent(event, point);
 }
 
-void KPrViewModeNotes::keyPressEvent(QKeyEvent *event)
+void SCViewModeNotes::keyPressEvent(QKeyEvent *event)
 {
     m_toolProxy->keyPressEvent(event);
     KoPageApp::PageNavigation pageNavigation;
@@ -131,17 +131,17 @@ void KPrViewModeNotes::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void KPrViewModeNotes::keyReleaseEvent(QKeyEvent *event)
+void SCViewModeNotes::keyReleaseEvent(QKeyEvent *event)
 {
     m_toolProxy->keyReleaseEvent(event);
 }
 
-void KPrViewModeNotes::wheelEvent(QWheelEvent *event, const QPointF &point)
+void SCViewModeNotes::wheelEvent(QWheelEvent *event, const QPointF &point)
 {
     m_toolProxy->wheelEvent(event, point);
 }
 
-void KPrViewModeNotes::activate(KoPAViewMode *previousViewMode)
+void SCViewModeNotes::activate(KoPAViewMode *previousViewMode)
 {
     Q_UNUSED(previousViewMode);
     m_canvas->resourceManager()->setResource(KoText::ShowTextFrames, true);
@@ -149,23 +149,23 @@ void KPrViewModeNotes::activate(KoPAViewMode *previousViewMode)
     updateActivePage(m_view->activePage());
 }
 
-void KPrViewModeNotes::deactivate()
+void SCViewModeNotes::deactivate()
 {
     m_canvas->resourceManager()->setResource(KoText::ShowTextFrames, 0);
     m_view->setActionEnabled(KoPAView::AllActions, true);
     m_view->doUpdateActivePage(m_view->activePage());
 }
 
-void KPrViewModeNotes::updateActivePage(KoPAPageBase *page)
+void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
 {
     if (m_view->activePage() != page) {
         m_view->setActivePage(page);
     }
 
-    KPrPage *prPage = dynamic_cast<KPrPage *>(page);
+    SCPage *prPage = dynamic_cast<SCPage *>(page);
     if (!prPage) return;
 
-    KPrNotes *notes = prPage->pageNotes();
+    SCNotes *notes = prPage->pageNotes();
     notes->updatePageThumbnail();
     KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(notes->shapes().last());
 
@@ -197,33 +197,33 @@ void KPrViewModeNotes::updateActivePage(KoPAPageBase *page)
     KoToolManager::instance()->switchToolRequested(tool);
 }
 
-void KPrViewModeNotes::addShape(KoShape *shape)
+void SCViewModeNotes::addShape(KoShape *shape)
 {
     KoShape *parent = shape;
-    KPrNotes *notes = 0;
+    SCNotes *notes = 0;
     // similar to KoPADocument::pageByShape()
     while (!notes && (parent = parent->parent())) {
-        notes = dynamic_cast<KPrNotes *>(parent);
+        notes = dynamic_cast<SCNotes *>(parent);
     }
 
     if (notes) {
-        KPrPage *activePage = static_cast<KPrPage *>(m_view->activePage());
+        SCPage *activePage = static_cast<SCPage *>(m_view->activePage());
         if (notes == activePage->pageNotes()) {
             m_view->kopaCanvas()->shapeManager()->addShape(shape);
         }
     }
 }
 
-void KPrViewModeNotes::removeShape(KoShape *shape)
+void SCViewModeNotes::removeShape(KoShape *shape)
 {
     KoShape *parent = shape;
-    KPrNotes *notes = 0;
+    SCNotes *notes = 0;
     while (!notes && (parent = parent->parent())) {
-        notes = dynamic_cast<KPrNotes *>(parent);
+        notes = dynamic_cast<SCNotes *>(parent);
     }
 
     if (notes) {
-        KPrPage *activePage = static_cast<KPrPage *>(m_view->activePage());
+        SCPage *activePage = static_cast<SCPage *>(m_view->activePage());
         if (notes == activePage->pageNotes()) {
             m_view->kopaCanvas()->shapeManager()->remove(shape);
         }

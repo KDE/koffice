@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrCustomSlideShowsDialog.h"
+#include "SCCustomSlideShowsDialog.h"
 
 //Qt includes
 #include <QDebug>
@@ -31,19 +31,19 @@
 
 //KOffice includes
 #include <KoPAPageBase.h>
-#include <KPrDocument.h>
+#include <SCDocument.h>
 
-//KPresenter includes
-#include <KPrCustomSlideShows.h>
+//Showcase includes
+#include <SCCustomSlideShows.h>
 
 //so to be able to use it in a QVariant
 Q_DECLARE_METATYPE(KoPAPageBase*)
 
-KPrCustomSlideShowsDialog::KPrCustomSlideShowsDialog(QWidget *parent, KPrCustomSlideShows *slideShows,
-                                                      KPrDocument *doc, KPrCustomSlideShows *&newSlideShows)
+SCCustomSlideShowsDialog::SCCustomSlideShowsDialog(QWidget *parent, SCCustomSlideShows *slideShows,
+                                                      SCDocument *doc, SCCustomSlideShows *&newSlideShows)
 : QDialog(parent)
 , m_firstTime(true)
-, m_slideShows(new KPrCustomSlideShows(*slideShows))
+, m_slideShows(new SCCustomSlideShows(*slideShows))
 , m_oldSlideShows(slideShows)
 , m_doc(doc)
 {
@@ -85,11 +85,11 @@ KPrCustomSlideShowsDialog::KPrCustomSlideShowsDialog(QWidget *parent, KPrCustomS
     }
 }
 
-KPrCustomSlideShowsDialog::~KPrCustomSlideShowsDialog()
+SCCustomSlideShowsDialog::~SCCustomSlideShowsDialog()
 {
 }
 
-void KPrCustomSlideShowsDialog::addCustomSlideShow()
+void SCCustomSlideShowsDialog::addCustomSlideShow()
 {
     //We create a different default name for every SlideShow:
     static int newSlideShowsCount = 1;
@@ -110,7 +110,7 @@ void KPrCustomSlideShowsDialog::addCustomSlideShow()
     m_uiWidget.customSlideShowsList->editItem(item);
 }
 
-void KPrCustomSlideShowsDialog::renameCustomSlideShow(QListWidgetItem *item)
+void SCCustomSlideShowsDialog::renameCustomSlideShow(QListWidgetItem *item)
 {
     //We disconect the signal so not to call this function over and over:
     disconnect(m_uiWidget.customSlideShowsList, SIGNAL(itemChanged(QListWidgetItem*)),
@@ -141,7 +141,7 @@ void KPrCustomSlideShowsDialog::renameCustomSlideShow(QListWidgetItem *item)
              this, SLOT(renameCustomSlideShow(QListWidgetItem*)));
 }
 
-void KPrCustomSlideShowsDialog::deleteCustomSlideShow()
+void SCCustomSlideShowsDialog::deleteCustomSlideShow()
 {
     //Ask the user if he is sure about it
     KMessageBox Message;
@@ -170,7 +170,7 @@ void KPrCustomSlideShowsDialog::deleteCustomSlideShow()
     }
 }
 
-void KPrCustomSlideShowsDialog::loadCustomSlideShowsData()
+void SCCustomSlideShowsDialog::loadCustomSlideShowsData()
 {
     //We disconect the signal so not to call the rename function over and over:
     disconnect(m_uiWidget.customSlideShowsList, SIGNAL(itemChanged(QListWidgetItem*)),
@@ -180,7 +180,7 @@ void KPrCustomSlideShowsDialog::loadCustomSlideShowsData()
     if (!m_firstTime)
     {
         delete m_slideShows;
-        m_slideShows = new KPrCustomSlideShows(*m_oldSlideShows);
+        m_slideShows = new SCCustomSlideShows(*m_oldSlideShows);
         m_uiWidget.customSlideShowsList->clear();
     }
     m_firstTime = false;
@@ -211,7 +211,7 @@ void KPrCustomSlideShowsDialog::loadCustomSlideShowsData()
              this, SLOT(renameCustomSlideShow(QListWidgetItem*)));
 }
 
-void KPrCustomSlideShowsDialog::changedSelectedSlideshow(QListWidgetItem* current, QListWidgetItem* previous)
+void SCCustomSlideShowsDialog::changedSelectedSlideshow(QListWidgetItem* current, QListWidgetItem* previous)
 {
     Q_UNUSED(previous);
 
@@ -242,7 +242,7 @@ void KPrCustomSlideShowsDialog::changedSelectedSlideshow(QListWidgetItem* curren
     }
 }
 
-void KPrCustomSlideShowsDialog::addSlidesToCurrentSlideShow()
+void SCCustomSlideShowsDialog::addSlidesToCurrentSlideShow()
 {
     //get the selected items and slideshow
     QList<QListWidgetItem*> selectedPages = m_uiWidget.availableSlidesList->selectedItems();
@@ -262,7 +262,7 @@ void KPrCustomSlideShowsDialog::addSlidesToCurrentSlideShow()
     m_slideShows->update(m_selectedSlideShowName, selectedSlideShow);
 }
 
-void KPrCustomSlideShowsDialog::addSlidesToCurrentSlideShow(QListWidgetItem* currentItem)
+void SCCustomSlideShowsDialog::addSlidesToCurrentSlideShow(QListWidgetItem* currentItem)
 {
     Q_UNUSED(currentItem);
     if (!m_selectedSlideShowName.isNull())
@@ -271,7 +271,7 @@ void KPrCustomSlideShowsDialog::addSlidesToCurrentSlideShow(QListWidgetItem* cur
     }
 }
 
-void KPrCustomSlideShowsDialog::removeSlidesFromCurrentSlideShow()
+void SCCustomSlideShowsDialog::removeSlidesFromCurrentSlideShow()
 {
     //get the selected items and slideshow
     QList<QListWidgetItem*> selectedPages = m_uiWidget.currentSlidesList->selectedItems();
@@ -292,10 +292,10 @@ void KPrCustomSlideShowsDialog::removeSlidesFromCurrentSlideShow()
     m_slideShows->update(m_selectedSlideShowName, selectedSlideShow);
 }
 
-void KPrCustomSlideShowsDialog::removeSlidesFromCurrentSlideShow(QListWidgetItem* currentItem)
+void SCCustomSlideShowsDialog::removeSlidesFromCurrentSlideShow(QListWidgetItem* currentItem)
 {
     Q_UNUSED(currentItem);
     removeSlidesFromCurrentSlideShow();
 }
 
-#include "KPrCustomSlideShowsDialog.moc"
+#include "SCCustomSlideShowsDialog.moc"

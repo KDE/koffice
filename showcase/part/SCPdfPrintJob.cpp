@@ -18,9 +18,9 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPdfPrintJob.h"
+#include "SCPdfPrintJob.h"
 
-#include "KPrView.h"
+#include "SCView.h"
 #include "KoPADocument.h"
 #include "KoPAPageBase.h"
 #include "KoPAUtil.h"
@@ -28,16 +28,16 @@
 #include <KoZoomHandler.h>
 #include <QPainter>
 
-KPrPdfPrintJob::KPrPdfPrintJob(KPrView *view)
+SCPdfPrintJob::SCPdfPrintJob(SCView *view)
 : KoPAPrintJob(view)
 {
 }
 
-KPrPdfPrintJob::~KPrPdfPrintJob()
+SCPdfPrintJob::~SCPdfPrintJob()
 {
 }
 
-void KPrPdfPrintJob::startPrinting(RemovePolicy removePolicy)
+void SCPdfPrintJob::startPrinting(RemovePolicy removePolicy)
 {
     int fromPage = m_printer.fromPage() > 0 ? m_printer.fromPage() - 1: 0;
     int toPage = m_printer.toPage() > 0 ? m_printer.toPage() - 1: m_pages.size() - 1;
@@ -77,4 +77,4 @@ void KPrPdfPrintJob::startPrinting(RemovePolicy removePolicy)
     }
 }
 
-#include "KPrPdfPrintJob.moc"
+#include "SCPdfPrintJob.moc"

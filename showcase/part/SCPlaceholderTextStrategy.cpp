@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPlaceholderTextStrategy.h"
+#include "SCPlaceholderTextStrategy.h"
 
 #include <QTextDocument>
 #include <QTextCursor>
@@ -45,20 +45,20 @@
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 
-KPrPlaceholderTextStrategy::KPrPlaceholderTextStrategy(const QString & presentationClass)
-: KPrPlaceholderStrategy(presentationClass)
+SCPlaceholderTextStrategy::SCPlaceholderTextStrategy(const QString & presentationClass)
+: SCPlaceholderStrategy(presentationClass)
 , m_textShape(0)
 {
 }
 
-KPrPlaceholderTextStrategy::~KPrPlaceholderTextStrategy()
+SCPlaceholderTextStrategy::~SCPlaceholderTextStrategy()
 {
     delete m_textShape;
 }
 
-KoShape *KPrPlaceholderTextStrategy::createShape(KoResourceManager *documentResources)
+KoShape *SCPlaceholderTextStrategy::createShape(KoResourceManager *documentResources)
 {
-    KoShape * shape = KPrPlaceholderStrategy::createShape(documentResources);
+    KoShape * shape = SCPlaceholderStrategy::createShape(documentResources);
     if (m_textShape) {
         KoTextShapeData * data = qobject_cast<KoTextShapeData*>(m_textShape->userData());
         KoTextShapeData * newData = qobject_cast<KoTextShapeData*>(shape->userData());
@@ -77,7 +77,7 @@ KoShape *KPrPlaceholderTextStrategy::createShape(KoResourceManager *documentReso
     return shape;
 }
 
-void KPrPlaceholderTextStrategy::paint(QPainter & painter, const KoViewConverter &converter, const QRectF & rect)
+void SCPlaceholderTextStrategy::paint(QPainter & painter, const KoViewConverter &converter, const QRectF & rect)
 {
     if (m_textShape) {
         painter.save();
@@ -99,11 +99,11 @@ void KPrPlaceholderTextStrategy::paint(QPainter & painter, const KoViewConverter
         painter.restore();
     }
     else {
-        KPrPlaceholderStrategy::paint(painter, converter, rect);
+        SCPlaceholderStrategy::paint(painter, converter, rect);
     }
 }
 
-void KPrPlaceholderTextStrategy::saveOdf(KoShapeSavingContext & context)
+void SCPlaceholderTextStrategy::saveOdf(KoShapeSavingContext & context)
 {
     if (m_textShape) {
         KoTextShapeData *shapeData = qobject_cast<KoTextShapeData*>(m_textShape->userData());
@@ -117,10 +117,10 @@ void KPrPlaceholderTextStrategy::saveOdf(KoShapeSavingContext & context)
             }
         }
     }
-    KPrPlaceholderStrategy::saveOdf(context);
+    SCPlaceholderStrategy::saveOdf(context);
 }
 
-bool KPrPlaceholderTextStrategy::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
+bool SCPlaceholderTextStrategy::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
 {
     if (KoTextSharedLoadingData *textSharedData = dynamic_cast<KoTextSharedLoadingData *>(context.sharedData(KOTEXT_SHARED_LOADING_ID))) {
         KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
@@ -160,7 +160,7 @@ bool KPrPlaceholderTextStrategy::loadOdf(const KoXmlElement & element, KoShapeLo
     return true;
 }
 
-void KPrPlaceholderTextStrategy::init(KoResourceManager *documentResources)
+void SCPlaceholderTextStrategy::init(KoResourceManager *documentResources)
 {
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
     Q_ASSERT(factory);
@@ -169,7 +169,7 @@ void KPrPlaceholderTextStrategy::init(KoResourceManager *documentResources)
     m_textShape = factory->createShape(&props, documentResources);
 }
 
-KoShapeUserData * KPrPlaceholderTextStrategy::userData() const
+KoShapeUserData * SCPlaceholderTextStrategy::userData() const
 {
     return m_textShape ? m_textShape->userData() : 0;
 }

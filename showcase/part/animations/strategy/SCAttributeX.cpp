@@ -17,18 +17,18 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAttributeX.h"
-#include "../KPrAnimationCache.h"
+#include "SCAttributeX.h"
+#include "../SCAnimationCache.h"
 #include "KoShape.h"
-#include "../KPrShapeAnimation.h"
+#include "../SCShapeAnimation.h"
 #include "kdebug.h"
 
 #include "KoTextBlockData.h"
-KPrAttributeX::KPrAttributeX() : KPrAnimationAttribute("x")
+SCAttributeX::SCAttributeX() : SCAnimationAttribute("x")
 {
 }
 
-void KPrAttributeX::updateCache(KPrAnimationCache *cache, KPrShapeAnimation *shapeAnimation, qreal value)
+void SCAttributeX::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value)
 {
     KoShape *shape = shapeAnimation->shape();
     QTransform transform;
@@ -39,7 +39,7 @@ void KPrAttributeX::updateCache(KPrAnimationCache *cache, KPrShapeAnimation *sha
     cache->update(shape, shapeAnimation->textBlockData(), "transform", transform);
 }
 
-void KPrAttributeX::initCache(KPrAnimationCache *animationCache, int step, KPrShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
+void SCAttributeX::initCache(SCAnimationCache *animationCache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
 {
     KoShape* shape = shapeAnimation->shape();
     qreal v1 = startValue * animationCache->pageSize().width() - shape->position().x();

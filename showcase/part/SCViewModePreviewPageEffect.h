@@ -24,21 +24,21 @@
 #include "kpresenter_export.h"
 
 #include <KoPAViewMode.h>
-#include "KPrAnimationDirector.h"
+#include "SCAnimationDirector.h"
 #include <QTimeLine>
 #include <QPixmap>
 
-class KPrPage;
-class KPrPageEffect;
-class KPrPageEffectRunner;
+class SCPage;
+class SCPageEffect;
+class SCPageEffectRunner;
 
-class KPRESENTER_EXPORT KPrViewModePreviewPageEffect : public KoPAViewMode
+class KPRESENTER_EXPORT SCViewModePreviewPageEffect : public KoPAViewMode
 {
 
     Q_OBJECT
 public:
-    KPrViewModePreviewPageEffect(KoPAViewBase * view, KoPACanvasBase * m_canvas);
-    ~KPrViewModePreviewPageEffect();
+    SCViewModePreviewPageEffect(KoPAViewBase * view, KoPACanvasBase * m_canvas);
+    ~SCViewModePreviewPageEffect();
 
     void paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
@@ -64,7 +64,7 @@ public:
      * @param page The current page used in the preview. If 0 the preview will be x
      * @param prevpage The page coming before @p page
      */
-    void setPageEffect(KPrPageEffect* pageEffect, KPrPage* page, KPrPage* prevpage);
+    void setPageEffect(SCPageEffect* pageEffect, SCPage* page, SCPage* prevpage);
 
 public slots:
     /**
@@ -84,10 +84,10 @@ private:
     KoPAViewMode * m_savedViewMode;
     QTimeLine m_timeLine;
 
-    KPrPageEffect* m_pageEffect;
-    KPrPageEffectRunner* m_pageEffectRunner;
-    KPrPage* m_page;
-    KPrPage* m_prevpage;
+    SCPageEffect* m_pageEffect;
+    SCPageEffectRunner* m_pageEffectRunner;
+    SCPage* m_page;
+    SCPage* m_prevpage;
 
     QPixmap m_oldPage;
     QPixmap m_newPage;

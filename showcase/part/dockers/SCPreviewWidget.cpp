@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPreviewWidget.h"
+#include "SCPreviewWidget.h"
 
 #include <QPainter>
 #include <QMouseEvent>
@@ -26,23 +26,23 @@
 #include <KoPAMasterPage.h>
 #include <KoZoomHandler.h>
 
-#include "KPrPage.h"
-#include "pageeffects/KPrPageEffect.h"
-#include "pageeffects/KPrPageEffectRunner.h"
+#include "SCPage.h"
+#include "pageeffects/SCPageEffect.h"
+#include "pageeffects/SCPageEffectRunner.h"
 
 #include <kdebug.h>
 
-KPrPreviewWidget::KPrPreviewWidget( QWidget* parent )
+SCPreviewWidget::SCPreviewWidget( QWidget* parent )
 : QWidget( parent ), m_pageEffect(0), m_pageEffectRunner(0), m_page(0)
 {
     connect( &m_timeLine, SIGNAL( valueChanged( qreal ) ), this, SLOT( animate() ) );
 }
 
-KPrPreviewWidget::~KPrPreviewWidget()
+SCPreviewWidget::~SCPreviewWidget()
 {
 }
 
-void KPrPreviewWidget::paintEvent( QPaintEvent *event )
+void SCPreviewWidget::paintEvent( QPaintEvent *event )
 {
     QPainter p(this);
 
@@ -68,7 +68,7 @@ void KPrPreviewWidget::paintEvent( QPaintEvent *event )
     QWidget::paintEvent( event );
 }
 
-void  KPrPreviewWidget::resizeEvent( QResizeEvent* event )
+void  SCPreviewWidget::resizeEvent( QResizeEvent* event )
 {
     if(m_page)
         updatePixmaps();
@@ -81,7 +81,7 @@ void  KPrPreviewWidget::resizeEvent( QResizeEvent* event )
     QWidget::resizeEvent( event );
 }
 
-void KPrPreviewWidget::setPageEffect( KPrPageEffect* pageEffect, KPrPage* page, KPrPage* prevpage )
+void SCPreviewWidget::setPageEffect( SCPageEffect* pageEffect, SCPage* page, SCPage* prevpage )
 {
     delete m_pageEffect;
     m_pageEffect = pageEffect;
@@ -95,21 +95,21 @@ void KPrPreviewWidget::setPageEffect( KPrPageEffect* pageEffect, KPrPage* page, 
         updatePixmaps();
 
         if(m_pageEffect) {
-            m_pageEffectRunner = new KPrPageEffectRunner( m_oldPage, m_newPage, this, m_pageEffect );
+            m_pageEffectRunner = new SCPageEffectRunner( m_oldPage, m_newPage, this, m_pageEffect );
         }
     }
 
     update();
 }
 
-void KPrPreviewWidget::animate()
+void SCPreviewWidget::animate()
 {
     if ( m_pageEffectRunner ) {
         m_pageEffectRunner->next( m_timeLine.currentTime() );
     }
 }
 
-void KPrPreviewWidget::runPreview()
+void SCPreviewWidget::runPreview()
 {
     if(m_pageEffect) {
         m_timeLine.setDuration( m_pageEffect->duration() );
@@ -118,7 +118,7 @@ void KPrPreviewWidget::runPreview()
     }
 }
 
-void KPrPreviewWidget::updatePixmaps()
+void SCPreviewWidget::updatePixmaps()
 {
     if(!m_page || !isVisible())
         return;
@@ -140,10 +140,10 @@ void KPrPreviewWidget::updatePixmaps()
     }
 }
 
-void KPrPreviewWidget::mousePressEvent( QMouseEvent* event )
+void SCPreviewWidget::mousePressEvent( QMouseEvent* event )
 {
     event->accept();
     runPreview();
 }
 
-#include "KPrPreviewWidget.moc"
+#include "SCPreviewWidget.moc"

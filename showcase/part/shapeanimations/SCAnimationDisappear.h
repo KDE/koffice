@@ -20,22 +20,22 @@
 #ifndef KPRANIMATIONDISAPPEAR_H
 #define KPRANIMATIONDISAPPEAR_H
 
-#include "KPrShapeAnimationOld.h"
+#include "SCShapeAnimationOld.h"
 
 #include <QPointF>
 #include <QRectF>
 
-class KPrAnimationDisappear : public KPrShapeAnimationOld
+class SCAnimationDisappear : public SCShapeAnimationOld
 {
 public:
-    KPrAnimationDisappear(KoShape * shape, int step);
-    virtual ~KPrAnimationDisappear();
+    SCAnimationDisappear(KoShape * shape, int step);
+    virtual ~SCAnimationDisappear();
 
-    virtual KPrAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect);
-    virtual bool animate(QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData);
-    virtual void animateRect(QRectF & rect, KPrAnimationData * animationData);
-    virtual void next(int currentTime, KPrAnimationData * animationData);
-    virtual void finish(KPrAnimationData * animationData);
+    virtual SCAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect);
+    virtual bool animate(QPainter &painter, const KoViewConverter &converter, SCAnimationData * animationData);
+    virtual void animateRect(QRectF & rect, SCAnimationData * animationData);
+    virtual void next(int currentTime, SCAnimationData * animationData);
+    virtual void finish(SCAnimationData * animationData);
 };
 
 #endif /* KPRANIMATIONDISAPPEAR_H */

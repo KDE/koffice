@@ -20,13 +20,13 @@
 #ifndef KPRBOXSNAKESWIPESTRATEGY_H
 #define KPRBOXSNAKESWIPESTRATEGY_H
 
-#include "../KPrMatrixWipeStrategy.h"
+#include "../SCMatrixWipeStrategy.h"
 
-class KPrBoxSnakesWipeStrategy : public KPrMatrixWipeStrategy
+class SCBoxSnakesWipeStrategy : public SCMatrixWipeStrategy
 {
 public:
-    KPrBoxSnakesWipeStrategy(int horRepeat, int verRepeat, bool clockwise, bool reverse);
-    virtual ~KPrBoxSnakesWipeStrategy();
+    SCBoxSnakesWipeStrategy(int horRepeat, int verRepeat, bool clockwise, bool reverse);
+    virtual ~SCBoxSnakesWipeStrategy();
 protected:
     virtual int maxIndex(int columns, int rows);
     virtual int squareIndex(int x, int y, int columns, int rows);

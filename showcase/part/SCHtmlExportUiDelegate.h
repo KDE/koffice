@@ -23,11 +23,11 @@
 #include <kio/jobuidelegate.h>
 #include <kio/renamedialog.h>
 
-class KPrHtmlExportUiDelegate : public KIO::JobUiDelegate
+class SCHtmlExportUiDelegate : public KIO::JobUiDelegate
 {
     Q_OBJECT
 public:
-    KPrHtmlExportUiDelegate();
+    SCHtmlExportUiDelegate();
 
     virtual KIO::RenameDialog_Result askFileRename(KJob * job, const QString & caption, const QString& src, const QString & dest,
                                               KIO::RenameDialog_Mode mode, QString& newDest,

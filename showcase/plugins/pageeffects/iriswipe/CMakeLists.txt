@@ -2,18 +2,18 @@ include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/s
 
 set(kpr_pageeffect_iriswipe_SRCS
     Plugin.cpp
-    KPrIrisWipeEffectStrategyBase.cpp
+    SCIrisWipeEffectStrategyBase.cpp
 
-    irisWipe/KPrIrisWipeEffectFactory.cpp
-    triangleWipe/KPrTriangleWipeEffectFactory.cpp
-    arrowHeadWipe/KPrArrowHeadWipeEffectFactory.cpp
-    ellipseWipe/KPrEllipseWipeEffectFactory.cpp
-    roundRectWipe/KPrRoundRectWipeEffectFactory.cpp
-    pentagonWipe/KPrPentagonWipeEffectFactory.cpp
-    hexagonWipe/KPrHexagonWipeEffectFactory.cpp
-    starWipe/KPrStarWipeEffectFactory.cpp
-    eyeWipe/KPrEyeWipeEffectFactory.cpp
-    miscShapeWipe/KPrMiscShapeWipeEffectFactory.cpp
+    irisWipe/SCIrisWipeEffectFactory.cpp
+    triangleWipe/SCTriangleWipeEffectFactory.cpp
+    arrowHeadWipe/SCArrowHeadWipeEffectFactory.cpp
+    ellipseWipe/SCEllipseWipeEffectFactory.cpp
+    roundRectWipe/SCRoundRectWipeEffectFactory.cpp
+    pentagonWipe/SCPentagonWipeEffectFactory.cpp
+    hexagonWipe/SCHexagonWipeEffectFactory.cpp
+    starWipe/SCStarWipeEffectFactory.cpp
+    eyeWipe/SCEyeWipeEffectFactory.cpp
+    miscShapeWipe/SCMiscShapeWipeEffectFactory.cpp
     )
 
 kde4_add_plugin(kpr_pageeffect_iriswipe ${kpr_pageeffect_iriswipe_SRCS})

@@ -20,9 +20,9 @@
 #ifndef BARNVEEWIPEEFFECTFACTORY_H
 #define BARNVEEWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class BarnVeeWipeEffectFactory : public KPrPageEffectFactory
+class BarnVeeWipeEffectFactory : public SCPageEffectFactory
 {
 public:
     BarnVeeWipeEffectFactory();

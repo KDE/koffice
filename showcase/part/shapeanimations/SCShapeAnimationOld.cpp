@@ -17,9 +17,9 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrShapeAnimationOld.h"
+#include "SCShapeAnimationOld.h"
 
-KPrShapeAnimationOld::KPrShapeAnimationOld(KoShape * shape, int step, Type type)
+SCShapeAnimationOld::SCShapeAnimationOld(KoShape * shape, int step, Type type)
 : m_shape(shape)
 , m_step(step)
 , m_type(type)
@@ -30,31 +30,31 @@ KPrShapeAnimationOld::KPrShapeAnimationOld(KoShape * shape, int step, Type type)
     m_timeLine.setCurveShape(QTimeLine::LinearCurve);
 }
 
-KPrShapeAnimationOld::~KPrShapeAnimationOld()
+SCShapeAnimationOld::~SCShapeAnimationOld()
 {
 }
 
-int KPrShapeAnimationOld::duration() const
+int SCShapeAnimationOld::duration() const
 {
     return m_timeLine.duration();
 }
 
-int KPrShapeAnimationOld::step() const
+int SCShapeAnimationOld::step() const
 {
     return m_step;
 }
 
-void KPrShapeAnimationOld::setStep(int step)
+void SCShapeAnimationOld::setStep(int step)
 {
     m_step = step;
 }
 
-KoShape * KPrShapeAnimationOld::shape() const
+KoShape * SCShapeAnimationOld::shape() const
 {
     return m_shape;
 }
 
-KPrShapeAnimationOld::Type KPrShapeAnimationOld::type() const
+SCShapeAnimationOld::Type SCShapeAnimationOld::type() const
 {
     return m_type;
 }

@@ -17,18 +17,18 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPageEffectSetCommand.h"
+#include "SCPageEffectSetCommand.h"
 
 #include <klocale.h>
 
-#include "KPrPage.h"
-#include "KPrPageApplicationData.h"
-#include "pageeffects/KPrPageEffect.h"
+#include "SCPage.h"
+#include "SCPageApplicationData.h"
+#include "pageeffects/SCPageEffect.h"
 
-KPrPageEffectSetCommand::KPrPageEffectSetCommand( KoPAPageBase * page, KPrPageEffect * pageEffect )
+SCPageEffectSetCommand::SCPageEffectSetCommand( KoPAPageBase * page, SCPageEffect * pageEffect )
 : m_page( page )
 , m_newPageEffect( pageEffect )
-, m_oldPageEffect( KPrPage::pageData( m_page )->pageEffect() )
+, m_oldPageEffect( SCPage::pageData( m_page )->pageEffect() )
 , m_deleteNewPageEffect( true )
 {
     // TODO 2.1 rename page to slide
@@ -46,7 +46,7 @@ KPrPageEffectSetCommand::KPrPageEffectSetCommand( KoPAPageBase * page, KPrPageEf
     }
 }
 
-KPrPageEffectSetCommand::~KPrPageEffectSetCommand()
+SCPageEffectSetCommand::~SCPageEffectSetCommand()
 {
     if ( m_deleteNewPageEffect ) {
         delete m_newPageEffect;
@@ -56,14 +56,14 @@ KPrPageEffectSetCommand::~KPrPageEffectSetCommand()
     }
 }
 
-void KPrPageEffectSetCommand::redo()
+void SCPageEffectSetCommand::redo()
 {
-    KPrPage::pageData( m_page )->setPageEffect( m_newPageEffect );
+    SCPage::pageData( m_page )->setPageEffect( m_newPageEffect );
     m_deleteNewPageEffect = false;
 }
 
-void KPrPageEffectSetCommand::undo()
+void SCPageEffectSetCommand::undo()
 {
-    KPrPage::pageData( m_page )->setPageEffect( m_oldPageEffect );
+    SCPage::pageData( m_page )->setPageEffect( m_oldPageEffect );
     m_deleteNewPageEffect = true;
 }

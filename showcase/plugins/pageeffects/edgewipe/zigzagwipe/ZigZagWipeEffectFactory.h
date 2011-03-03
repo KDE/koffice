@@ -20,9 +20,9 @@
 #ifndef ZIGZAGWIPEEFFECTFACTORY_H
 #define ZIGZAGWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class ZigZagWipeEffectFactory : public KPrPageEffectFactory
+class ZigZagWipeEffectFactory : public SCPageEffectFactory
 {
 public:
     ZigZagWipeEffectFactory();

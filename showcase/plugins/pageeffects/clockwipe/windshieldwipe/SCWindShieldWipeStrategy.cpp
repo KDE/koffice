@@ -17,34 +17,34 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrWindShieldWipeStrategy.h"
-#include "KPrWindShieldWipeEffectFactory.h"
+#include "SCWindShieldWipeStrategy.h"
+#include "SCWindShieldWipeEffectFactory.h"
 
 #include <math.h>
 #include <QWidget>
 #include <QPainter>
 #include <QPainterPath>
 
-#include "KPrClockWipeSubpathHelper.h"
+#include "SCClockWipeSubpathHelper.h"
 
 #include <kdebug.h>
 
-KPrWindShieldWipeStrategy::KPrWindShieldWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse)
-    : KPrSweepWipeStrategy(subType, smilType, smilSubType, reverse)
+SCWindShieldWipeStrategy::SCWindShieldWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse)
+    : SCSweepWipeStrategy(subType, smilType, smilSubType, reverse)
 {
 }
 
-KPrWindShieldWipeStrategy::~KPrWindShieldWipeStrategy()
+SCWindShieldWipeStrategy::~SCWindShieldWipeStrategy()
 {
 }
 
-void KPrWindShieldWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCWindShieldWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, 360);
 }
 
-void KPrWindShieldWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCWindShieldWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     int width = data.m_widget->width();
     int height = data.m_widget->height();
@@ -60,13 +60,13 @@ void KPrWindShieldWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
     double rotationRange1 = -0.5*M_PI;
     double rotationRange2 = -0.5*M_PI;
 
-    if (subType() == KPrWindShieldWipeEffectFactory::Right || subType() == KPrWindShieldWipeEffectFactory::Up ||
-       subType() == KPrWindShieldWipeEffectFactory::RightReverse || subType() == KPrWindShieldWipeEffectFactory::UpReverse) {
+    if (subType() == SCWindShieldWipeEffectFactory::Right || subType() == SCWindShieldWipeEffectFactory::Up ||
+       subType() == SCWindShieldWipeEffectFactory::RightReverse || subType() == SCWindShieldWipeEffectFactory::UpReverse) {
 
         switch(subType())
         {
-            case KPrWindShieldWipeEffectFactory::Right:
-            case KPrWindShieldWipeEffectFactory::RightReverse:
+            case SCWindShieldWipeEffectFactory::Right:
+            case SCWindShieldWipeEffectFactory::RightReverse:
                 startAngle1 = 1.5*M_PI;
                 boundingRect1 = QRect(0, 0, width, height/2);
 
@@ -76,8 +76,8 @@ void KPrWindShieldWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
                 rotationRange1 = 2*M_PI;
                 rotationRange2 = -rotationRange1;
                 break;
-            case KPrWindShieldWipeEffectFactory::Up:
-            case KPrWindShieldWipeEffectFactory::UpReverse:
+            case SCWindShieldWipeEffectFactory::Up:
+            case SCWindShieldWipeEffectFactory::UpReverse:
                 startAngle1 = 0;
                 boundingRect1 = QRect(0, 0, width/2, height);
 
@@ -104,8 +104,8 @@ void KPrWindShieldWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
     else {
         switch(subType())
         {
-            case KPrWindShieldWipeEffectFactory::Vertical:
-            case KPrWindShieldWipeEffectFactory::VerticalReverse:
+            case SCWindShieldWipeEffectFactory::Vertical:
+            case SCWindShieldWipeEffectFactory::VerticalReverse:
 
                 startAngle1 = 0.5*M_PI;
                 boundingRect1 = QRect(0, 0, width, height/2);
@@ -116,8 +116,8 @@ void KPrWindShieldWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPag
                 rotationRange1 = 2*M_PI;
                 rotationRange2 = rotationRange1;
                 break;
-            case KPrWindShieldWipeEffectFactory::Horizontal:
-            case KPrWindShieldWipeEffectFactory::HorizontalReverse:
+            case SCWindShieldWipeEffectFactory::Horizontal:
+            case SCWindShieldWipeEffectFactory::HorizontalReverse:
 
                 startAngle1 = M_PI;
                 boundingRect1 = QRect(0, 0, width/2, height);

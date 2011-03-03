@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPlaceholder.h"
+#include "SCPlaceholder.h"
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
@@ -26,21 +26,21 @@
 #include <KoPASavingContext.h>
 #include <kdebug.h>
 
-#include "KPrPlaceholderStrategy.h"
+#include "SCPlaceholderStrategy.h"
 
-KPrPlaceholder::KPrPlaceholder()
+SCPlaceholder::SCPlaceholder()
 {
 }
 
-KPrPlaceholder::~KPrPlaceholder()
+SCPlaceholder::~SCPlaceholder()
 {
 }
 
-bool KPrPlaceholder::loadOdf(const KoXmlElement & element, const QRectF & pageSize)
+bool SCPlaceholder::loadOdf(const KoXmlElement & element, const QRectF & pageSize)
 {
     if (element.hasAttributeNS(KoXmlNS::presentation, "object")) {
         m_presentationObject = element.attributeNS(KoXmlNS::presentation, "object");
-        if (! KPrPlaceholderStrategy::supported(m_presentationObject)) {
+        if (! SCPlaceholderStrategy::supported(m_presentationObject)) {
             kDebug(33001) << "unsupported presentation:object" << m_presentationObject;
             return false;
         }
@@ -67,7 +67,7 @@ bool KPrPlaceholder::loadOdf(const KoXmlElement & element, const QRectF & pageSi
     return true;
 }
 
-void KPrPlaceholder::saveOdf(KoXmlWriter & xmlWriter)
+void SCPlaceholder::saveOdf(KoXmlWriter & xmlWriter)
 {
     xmlWriter.startElement("presentation:placeholder");
     xmlWriter.addAttribute("presentation:object", m_presentationObject);
@@ -78,12 +78,12 @@ void KPrPlaceholder::saveOdf(KoXmlWriter & xmlWriter)
     xmlWriter.endElement();
 }
 
-QString KPrPlaceholder::presentationObject()
+QString SCPlaceholder::presentationObject()
 {
     return m_presentationObject;
 }
 
-QRectF KPrPlaceholder::rect(const QSizeF & pageSize)
+QRectF SCPlaceholder::rect(const QSizeF & pageSize)
 {
     QRectF r;
     r.setX(pageSize.width() * m_relativeSize.x());
@@ -93,7 +93,7 @@ QRectF KPrPlaceholder::rect(const QSizeF & pageSize)
     return r;
 }
 
-void KPrPlaceholder::fix(const QRectF & rect)
+void SCPlaceholder::fix(const QRectF & rect)
 {
     if (m_relativeSize.width() < 0) {
         m_relativeSize.setWidth(rect.width());
@@ -103,7 +103,7 @@ void KPrPlaceholder::fix(const QRectF & rect)
     }
 }
 
-qreal KPrPlaceholder::percent(const KoXmlElement & element, const char * type, qreal absolute)
+qreal SCPlaceholder::percent(const KoXmlElement & element, const char * type, qreal absolute)
 {
     qreal tmp = 0.0;
     QString value = element.attributeNS(KoXmlNS::svg, type, QString("0%"));
@@ -122,12 +122,12 @@ qreal KPrPlaceholder::percent(const KoXmlElement & element, const char * type, q
     return tmp;
 }
 
-bool KPrPlaceholder::operator==(const KPrPlaceholder & other) const
+bool SCPlaceholder::operator==(const SCPlaceholder & other) const
 {
     return m_presentationObject == other.m_presentationObject && m_relativeSize == other.m_relativeSize;
 }
 
-bool KPrPlaceholder::operator<(const KPrPlaceholder & other) const
+bool SCPlaceholder::operator<(const SCPlaceholder & other) const
 {
     if (m_presentationObject == other.m_presentationObject) {
         return comparePosition(*this, other);
@@ -135,7 +135,7 @@ bool KPrPlaceholder::operator<(const KPrPlaceholder & other) const
     return m_presentationObject < other.m_presentationObject;
 }
 
-bool KPrPlaceholder::comparePosition(const KPrPlaceholder & p1, const KPrPlaceholder & p2)
+bool SCPlaceholder::comparePosition(const SCPlaceholder & p1, const SCPlaceholder & p2)
 {
     if (p1.m_relativeSize.x() == p2.m_relativeSize.x()) {
         if (p1.m_relativeSize.y() == p2.m_relativeSize.y()) {

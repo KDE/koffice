@@ -17,39 +17,39 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrRoundRectWipeEffectFactory.h"
+#include "SCRoundRectWipeEffectFactory.h"
 
 #include <cmath>
 
 #include <klocale.h>
 
 
-#include "../KPrIrisWipeEffectStrategyBase.h"
+#include "../SCIrisWipeEffectStrategyBase.h"
 
 #define RoundRectWipeEffectFactoryId "RoundRectWipeEffectFactory"
 
-KPrRoundRectWipeEffectFactory::KPrRoundRectWipeEffectFactory()
-: KPrPageEffectFactory(RoundRectWipeEffectFactoryId, i18n("RoundRect"))
+SCRoundRectWipeEffectFactory::SCRoundRectWipeEffectFactory()
+: SCPageEffectFactory(RoundRectWipeEffectFactoryId, i18n("RoundRect"))
 {
     QPainterPath shape;
 
     //horizontal
     shape.addRoundedRect(-25, -12, 50, 24, 10, Qt::AbsoluteSize);
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Horizontal, "RoundRect", "horizontal", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Horizontal, "RoundRect", "horizontal", false));
 
     //horizontal reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, HorizontalReverse, "RoundRect", "horizontal", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, HorizontalReverse, "RoundRect", "horizontal", true));
 
     //vertical
     shape = QPainterPath();
     shape.addRoundedRect(-12, -25, 24, 50, 10, Qt::AbsoluteSize);
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Vertical, "RoundRect", "vertical", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Vertical, "RoundRect", "vertical", false));
 
     //vertical reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, VerticalReverse, "RoundRect", "vertical", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, VerticalReverse, "RoundRect", "vertical", true));
 }
 
-KPrRoundRectWipeEffectFactory::~KPrRoundRectWipeEffectFactory()
+SCRoundRectWipeEffectFactory::~SCRoundRectWipeEffectFactory()
 {
 }
 
@@ -60,7 +60,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Vertical Reverse")
 };
 
-QString KPrRoundRectWipeEffectFactory::subTypeName(int subType) const
+QString SCRoundRectWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

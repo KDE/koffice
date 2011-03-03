@@ -26,7 +26,7 @@
 #define FourBoxWipeEffectId "FourBoxWipeEffect"
 
 FourBoxWipeEffectFactory::FourBoxWipeEffectFactory()
-: KPrPageEffectFactory(FourBoxWipeEffectId, i18n("Four Box"))
+: SCPageEffectFactory(FourBoxWipeEffectId, i18n("Four Box"))
 {
     addStrategy(new CornersInWipeStrategy(false));
     addStrategy(new CornersInWipeStrategy(true));

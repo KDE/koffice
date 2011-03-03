@@ -1,11 +1,11 @@
 include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/showcase/part ${CMAKE_SOURCE_DIR}/showcase/part/pageeffects )
 
 set(kpr_pageeffect_spacerotation_PART_SRCS Plugin.cpp
-    KPrSpaceRotationEffectFactory.cpp
-    KPrSpaceRotationFromBottomStrategy.cpp
-    KPrSpaceRotationFromTopStrategy.cpp
-    KPrSpaceRotationFromRightStrategy.cpp
-    KPrSpaceRotationFromLeftStrategy.cpp
+    SCSpaceRotationEffectFactory.cpp
+    SCSpaceRotationFromBottomStrategy.cpp
+    SCSpaceRotationFromTopStrategy.cpp
+    SCSpaceRotationFromRightStrategy.cpp
+    SCSpaceRotationFromLeftStrategy.cpp
 )
 
 kde4_add_plugin(kpr_pageeffect_spacerotation ${kpr_pageeffect_spacerotation_PART_SRCS})

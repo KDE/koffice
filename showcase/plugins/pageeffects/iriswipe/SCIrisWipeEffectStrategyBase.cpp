@@ -17,23 +17,23 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrIrisWipeEffectStrategyBase.h"
+#include "SCIrisWipeEffectStrategyBase.h"
 
 #include <QWidget>
 #include <QPainter>
 #include <kdebug.h>
 
-KPrIrisWipeEffectStrategyBase::KPrIrisWipeEffectStrategyBase(QPainterPath shape, int subType, const char * smilType, const char *smilSubType, bool reverse)
-: KPrPageEffectStrategy(subType, smilType, smilSubType, reverse)
+SCIrisWipeEffectStrategyBase::SCIrisWipeEffectStrategyBase(QPainterPath shape, int subType, const char * smilType, const char *smilSubType, bool reverse)
+: SCPageEffectStrategy(subType, smilType, smilSubType, reverse)
 , m_shape(shape)
 {
 }
 
-KPrIrisWipeEffectStrategyBase::~KPrIrisWipeEffectStrategyBase()
+SCIrisWipeEffectStrategyBase::~SCIrisWipeEffectStrategyBase()
 {
 }
 
-int KPrIrisWipeEffectStrategyBase::findMaxScaling(const KPrPageEffect::Data &data)
+int SCIrisWipeEffectStrategyBase::findMaxScaling(const SCPageEffect::Data &data)
 {
     const int width = data.m_widget->width();
     const int height = data.m_widget->height();
@@ -73,12 +73,12 @@ int KPrIrisWipeEffectStrategyBase::findMaxScaling(const KPrPageEffect::Data &dat
     return maxMeasure;
 }
 
-void KPrIrisWipeEffectStrategyBase::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCIrisWipeEffectStrategyBase::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     timeLine.setFrameRange(0, findMaxScaling(data));
 }
 
-void KPrIrisWipeEffectStrategyBase::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCIrisWipeEffectStrategyBase::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     const int width = data.m_widget->width();
     const int height = data.m_widget->height();
@@ -121,7 +121,7 @@ void KPrIrisWipeEffectStrategyBase::paintStep(QPainter &p, int currPos, const KP
 }
 
 
-void KPrIrisWipeEffectStrategyBase::next(const KPrPageEffect::Data &data)
+void SCIrisWipeEffectStrategyBase::next(const SCPageEffect::Data &data)
 {
     const int width = data.m_widget->width();
     const int height = data.m_widget->height();

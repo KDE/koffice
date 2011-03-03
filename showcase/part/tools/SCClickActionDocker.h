@@ -31,17 +31,17 @@ class QUndoCommand;
 class KoPAViewBase;
 class KoCanvasBase;
 class QCheckBox;
-class KPrSoundCollection;
+class SCSoundCollection;
 class KoEventActionWidget;
 
 /**
  * This is the click action docker widget that let's you choose a click action for your shapes
  */
-class KPrClickActionDocker : public QWidget, public KoCanvasObserverBase
+class SCClickActionDocker : public QWidget, public KoCanvasObserverBase
 {
     Q_OBJECT
 public:
-    explicit KPrClickActionDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+    explicit SCClickActionDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
     void setView(KoPAViewBase* view);
 
@@ -57,7 +57,7 @@ private slots:
 
 private:
     KoPAViewBase *m_view;
-    KPrSoundCollection *m_soundCollection;
+    SCSoundCollection *m_soundCollection;
     KoCanvasBase *m_canvas;
     QComboBox *m_cbPlaySound; // TODO remove when the embedded widgets are ok
     QMap<QString, QWidget *> m_eventActionWidgets;

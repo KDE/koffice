@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPage.h"
+#include "SCPage.h"
 
 #include <QString>
 
@@ -31,30 +31,30 @@
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
 
-#include "KPrDocument.h"
-#include "KPrDeclarations.h"
-#include "KPresenter.h"
-#include "KPrPageApplicationData.h"
-#include "KPrMasterPage.h"
-#include "KPrNotes.h"
-#include "KPrPlaceholderShape.h"
-#include "KPrShapeManagerDisplayMasterStrategy.h"
-#include "KPrPageSelectStrategyFixed.h"
-#include "pagelayout/KPrPageLayout.h"
-#include "pagelayout/KPrPageLayouts.h"
-#include "pagelayout/KPrPageLayoutSharedSavingData.h"
-#include "pagelayout/KPrPlaceholder.h"
-#include "pageeffects/KPrPageEffectRegistry.h"
-#include "pageeffects/KPrPageEffect.h"
-#include "animations/KPrAnimationLoader.h"
+#include "SCDocument.h"
+#include "SCDeclarations.h"
+#include "Showcase.h"
+#include "SCPageApplicationData.h"
+#include "SCMasterPage.h"
+#include "SCNotes.h"
+#include "SCPlaceholderShape.h"
+#include "SCShapeManagerDisplayMasterStrategy.h"
+#include "SCPageSelectStrategyFixed.h"
+#include "pagelayout/SCPageLayout.h"
+#include "pagelayout/SCPageLayouts.h"
+#include "pagelayout/SCPageLayoutSharedSavingData.h"
+#include "pagelayout/SCPlaceholder.h"
+#include "pageeffects/SCPageEffectRegistry.h"
+#include "pageeffects/SCPageEffect.h"
+#include "animations/SCAnimationLoader.h"
 
 #include <kdebug.h>
 
-class KPrPage::Private
+class SCPage::Private
 {
 public:
-    Private(KPrPage * page, KPrDocument * document)
-    : pageNotes(new KPrNotes(page, document))
+    Private(SCPage * page, SCDocument * document)
+    : pageNotes(new SCNotes(page, document))
     , declarations(document->declarations())
     {}
 
@@ -62,70 +62,70 @@ public:
     {
         delete pageNotes;
     }
-    KPrNotes * pageNotes;
-    QHash<KPrDeclarations::Type, QString> usedDeclaration;
-    KPrDeclarations *declarations;
+    SCNotes * pageNotes;
+    QHash<SCDeclarations::Type, QString> usedDeclaration;
+    SCDeclarations *declarations;
 
 };
 
-KPrPage::KPrPage(KoPAMasterPage * masterPage, KPrDocument * document)
+SCPage::SCPage(KoPAMasterPage * masterPage, SCDocument * document)
 : KoPAPage(masterPage)
 , d(new Private(this, document))
 {
-    setApplicationData(new KPrPageApplicationData());
+    setApplicationData(new SCPageApplicationData());
     placeholders().init(0, shapes());
 }
 
-KPrPage::~KPrPage()
+SCPage::~SCPage()
 {
     delete d;
 }
 
-KPrPageApplicationData * KPrPage::pageData(KoPAPageBase * page)
+SCPageApplicationData * SCPage::pageData(KoPAPageBase * page)
 {
-    KPrPageApplicationData * data = dynamic_cast<KPrPageApplicationData *>(page->applicationData());
+    SCPageApplicationData * data = dynamic_cast<SCPageApplicationData *>(page->applicationData());
     Q_ASSERT(data);
     return data;
 }
 
-KPrNotes *KPrPage::pageNotes()
+SCNotes *SCPage::pageNotes()
 {
     return d->pageNotes;
 }
 
-void KPrPage::shapeAdded(KoShape * shape)
+void SCPage::shapeAdded(KoShape * shape)
 {
     Q_ASSERT(shape);
     placeholders().shapeAdded(shape);
 }
 
-void KPrPage::shapeRemoved(KoShape * shape)
+void SCPage::shapeRemoved(KoShape * shape)
 {
     Q_ASSERT(shape);
     placeholders().shapeRemoved(shape);
 }
 
-void KPrPage::setLayout(KPrPageLayout * layout, KoPADocument * document)
+void SCPage::setLayout(SCPageLayout * layout, KoPADocument * document)
 {
     QSizeF pageSize(pageLayout().width, pageLayout().height);
-    KPrMasterPage * master = dynamic_cast<KPrMasterPage *>(masterPage());
+    SCMasterPage * master = dynamic_cast<SCMasterPage *>(masterPage());
     Q_ASSERT(master);
     placeholders().setLayout(layout, document, shapes(), pageSize, master ? master->placeholders().styles() : QMap<QString, KoTextShapeData*>());
     kDebug(33001) << "master placeholders";
     master->placeholders().debug();
 }
 
-KPrPageLayout * KPrPage::layout() const
+SCPageLayout * SCPage::layout() const
 {
     return placeholders().layout();
 }
 
-bool KPrPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     if (!KoPAPageBase::loadOdf(element, context)) {
         return false;
     }
-    KPrPageApplicationData * data = dynamic_cast<KPrPageApplicationData *>(applicationData());
+    SCPageApplicationData * data = dynamic_cast<SCPageApplicationData *>(applicationData());
     Q_ASSERT(data);
 
     KoXmlElement animation = KoXml::namedItemNS(element, KoXmlNS::anim, "par");
@@ -139,7 +139,7 @@ bool KPrPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &contex
                     QString begin(animationElement.attributeNS(KoXmlNS::smil, "begin"));
                     if (begin.endsWith("begin")) {
                         KoXmlElement transitionElement(KoXml::namedItemNS(animationElement, KoXmlNS::anim, "transitionFilter"));
-                        data->setPageEffect(KPrPageEffectRegistry::instance()->createPageEffect(transitionElement));
+                        data->setPageEffect(SCPageEffectRegistry::instance()->createPageEffect(transitionElement));
                         kDebug() << "XXXXXXX found page transition";
                         loadOldTransition = false;
                     }
@@ -149,7 +149,7 @@ bool KPrPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &contex
                 if (animationElement.tagName() == "seq") {
                     QString nodeType(animationElement.attributeNS(KoXmlNS::presentation, "node-type"));
                     if (nodeType == "main-sequence") {
-                        KPrAnimationLoader al;
+                        SCAnimationLoader al;
                         al.loadOdf(animationElement, context);
                         animations().init(al.animations());
                     }
@@ -172,18 +172,18 @@ bool KPrPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &contex
 #endif
             if (node.isElement()) {
 
-                data->setPageEffect(KPrPageEffectRegistry::instance()->createPageEffect(node.toElement()));
+                data->setPageEffect(SCPageEffectRegistry::instance()->createPageEffect(node.toElement()));
             }
         }
     }
     return true;
 }
 
-void KPrPage::saveOdfPageContent(KoPASavingContext & paContext) const
+void SCPage::saveOdfPageContent(KoPASavingContext & paContext) const
 {
     KoXmlWriter &writer(paContext.xmlWriter());
     if (layout()) {
-        KPrPageLayoutSharedSavingData * layouts = dynamic_cast<KPrPageLayoutSharedSavingData *>(paContext.sharedData(KPR_PAGE_LAYOUT_SHARED_SAVING_ID));
+        SCPageLayoutSharedSavingData * layouts = dynamic_cast<SCPageLayoutSharedSavingData *>(paContext.sharedData(KPR_PAGE_LAYOUT_SHARED_SAVING_ID));
         Q_ASSERT(layouts);
         if (layouts) {
             QString layoutStyle = layouts->pageLayoutStyle(layout());
@@ -192,16 +192,16 @@ void KPrPage::saveOdfPageContent(KoPASavingContext & paContext) const
             }
         }
     }
-    QHash<KPrDeclarations::Type, QString>::const_iterator it(d->usedDeclaration.constBegin());
+    QHash<SCDeclarations::Type, QString>::const_iterator it(d->usedDeclaration.constBegin());
     for (; it != d->usedDeclaration.constEnd(); ++it) {
         switch (it.key()) {
-        case KPrDeclarations::Footer:
+        case SCDeclarations::Footer:
             writer.addAttribute("presentation:use-footer-name", it.value());
             break;
-        case KPrDeclarations::Header:
+        case SCDeclarations::Header:
             writer.addAttribute("presentation:use-header-name", it.value());
             break;
-        case KPrDeclarations::DateTime:
+        case SCDeclarations::DateTime:
             writer.addAttribute("presentation:use-date-time-name", it.value());
             break;
         }
@@ -209,7 +209,7 @@ void KPrPage::saveOdfPageContent(KoPASavingContext & paContext) const
     KoPAPageBase::saveOdfPageContent(paContext);
 }
 
-void KPrPage::saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const
+void SCPage::saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const
 {
     KoPAPage::saveOdfPageStyleData(style, paContext);
     style.addProperty("presentation:background-visible", (m_pageProperties & DisplayMasterBackground) == DisplayMasterBackground);
@@ -219,16 +219,16 @@ void KPrPage::saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paConte
     style.addProperty("presentation:display-header", (m_pageProperties & DisplayHeader) == DisplayHeader);
     style.addProperty("presentation:display-page-number", (m_pageProperties & DisplayPageNumber) == DisplayPageNumber);
 
-    KPrPageApplicationData * data = dynamic_cast<KPrPageApplicationData *>(applicationData());
+    SCPageApplicationData * data = dynamic_cast<SCPageApplicationData *>(applicationData());
     Q_ASSERT(data);
-    KPrPageEffect * pageEffect = data->pageEffect();
+    SCPageEffect * pageEffect = data->pageEffect();
 
     if (pageEffect) {
         pageEffect->saveOdfSmilAttributes(style);
     }
 }
 
-void KPrPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext)
+void SCPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext)
 {
     KoPAPage::loadOdfPageTag(element, loadingContext);
 
@@ -265,12 +265,12 @@ void KPrPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &lo
     }
 }
 
-void KPrPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & loadingContext)
+void SCPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & loadingContext)
 {
     // the layout needs to be loaded after the shapes are already loaded so the initialization of the data works
-    KPrPageLayout * layout = 0;
+    SCPageLayout * layout = 0;
     if (element.hasAttributeNS(KoXmlNS::presentation, "presentation-page-layout-name")) {
-        KPrPageLayouts *layouts = loadingContext.documentResourceManager()->resource(KPresenter::PageLayouts).value<KPrPageLayouts*>();
+        SCPageLayouts *layouts = loadingContext.documentResourceManager()->resource(Showcase::PageLayouts).value<SCPageLayouts*>();
 
         Q_ASSERT(layouts);
         if (layouts) {
@@ -284,24 +284,24 @@ void KPrPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &
 
     if (element.hasAttributeNS(KoXmlNS::presentation, "use-footer-name")) {
         QString name = element.attributeNS (KoXmlNS::presentation, "use-footer-name");
-        d->usedDeclaration.insert(KPrDeclarations::Footer, name);
+        d->usedDeclaration.insert(SCDeclarations::Footer, name);
     }
     if (element.hasAttributeNS(KoXmlNS::presentation, "use-header-name")) {
         QString name = element.attributeNS (KoXmlNS::presentation, "use-header-name");
-        d->usedDeclaration.insert(KPrDeclarations::Header, name);
+        d->usedDeclaration.insert(SCDeclarations::Header, name);
     }
     if (element.hasAttributeNS(KoXmlNS::presentation, "use-date-time-name")) {
         QString name = element.attributeNS (KoXmlNS::presentation, "use-date-time-name");
-        d->usedDeclaration.insert(KPrDeclarations::DateTime, name);
+        d->usedDeclaration.insert(SCDeclarations::DateTime, name);
     }
 }
 
-bool KPrPage::saveOdfAnimations(KoPASavingContext & paContext) const
+bool SCPage::saveOdfAnimations(KoPASavingContext & paContext) const
 {
-    KPrPageApplicationData *data = dynamic_cast<KPrPageApplicationData *>(applicationData());
+    SCPageApplicationData *data = dynamic_cast<SCPageApplicationData *>(applicationData());
     Q_ASSERT(data);
-    KPrPageEffect *pageEffect = data->pageEffect();
-    QList<KPrAnimationStep*> steps = animationSteps();
+    SCPageEffect *pageEffect = data->pageEffect();
+    QList<SCAnimationStep*> steps = animationSteps();
     if (pageEffect || steps.size() > 1) {
         KoXmlWriter &writer = paContext.xmlWriter();
         writer.startElement("anim:par");
@@ -320,7 +320,7 @@ bool KPrPage::saveOdfAnimations(KoPASavingContext & paContext) const
             writer.startElement("anim:seq");
             writer.addAttribute("presentation:node-type", "main-sequence");
             for (int i = 1; i < steps.size(); i++) {
-                KPrAnimationStep *step = steps.at(i);
+                SCAnimationStep *step = steps.at(i);
                 step->saveOdf(paContext);
             }
             writer.endElement();
@@ -330,23 +330,23 @@ bool KPrPage::saveOdfAnimations(KoPASavingContext & paContext) const
     return true;
 }
 
-bool KPrPage::saveOdfPresentationNotes(KoPASavingContext &paContext) const
+bool SCPage::saveOdfPresentationNotes(KoPASavingContext &paContext) const
 {
     d->pageNotes->saveOdf(paContext);
     return true;
 }
 
-KoPageApp::PageType KPrPage::pageType() const
+KoPageApp::PageType SCPage::pageType() const
 {
     return KoPageApp::Slide;
 }
 
-QString KPrPage::declaration(KPrDeclarations::Type type) const
+QString SCPage::declaration(SCDeclarations::Type type) const
 {
     return d->declarations->declaration(type, d->usedDeclaration.value(type));
 }
 
-bool KPrPage::displayShape(KoShape *shape) const
+bool SCPage::displayShape(KoShape *shape) const
 {
     bool display = true;
     QString presentationClass = shape->additionalAttribute("presentation:class");
@@ -367,7 +367,7 @@ bool KPrPage::displayShape(KoShape *shape) const
     return display;
 }
 
-KoShapeManagerPaintingStrategy * KPrPage::getPaintingStrategy() const
+KoShapeManagerPaintingStrategy * SCPage::getPaintingStrategy() const
 {
-    return new KPrShapeManagerDisplayMasterStrategy(0, new KPrPageSelectStrategyFixed(this));
+    return new SCShapeManagerDisplayMasterStrategy(0, new SCPageSelectStrategyFixed(this));
 }

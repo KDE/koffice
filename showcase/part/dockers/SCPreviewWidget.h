@@ -26,19 +26,19 @@
 #include <KoShape.h>
 #include <QTimeLine>
 
-class KPrPage;
-class KPrPageEffect;
-class KPrPageEffectRunner;
+class SCPage;
+class SCPageEffect;
+class SCPageEffectRunner;
 
 /**
  * A widget for page effect preview. It shows a transition from a black page to the current page
  */
-class KPRESENTER_EXPORT KPrPreviewWidget : public QWidget
+class KPRESENTER_EXPORT SCPreviewWidget : public QWidget
 {
     Q_OBJECT
 public:
-    KPrPreviewWidget(QWidget* parent = 0);
-    ~KPrPreviewWidget();
+    SCPreviewWidget(QWidget* parent = 0);
+    ~SCPreviewWidget();
 
     /**
      * Set a page effect
@@ -47,7 +47,7 @@ public:
      * @param page The current page used in the preview. If 0 the preview will be x
      * @param prevpage The page coming before @p page
      */
-    void setPageEffect(KPrPageEffect* pageEffect, KPrPage* page, KPrPage* prevpage);
+    void setPageEffect(SCPageEffect* pageEffect, SCPage* page, SCPage* prevpage);
 
     /**
      * Run the current page effect. Does nothing if no page effect was set.
@@ -67,10 +67,10 @@ private:
 
     QTimeLine m_timeLine;
 
-    KPrPageEffect* m_pageEffect;
-    KPrPageEffectRunner* m_pageEffectRunner;
-    KPrPage* m_page;
-    KPrPage* m_prevpage;
+    SCPageEffect* m_pageEffect;
+    SCPageEffectRunner* m_pageEffectRunner;
+    SCPage* m_page;
+    SCPage* m_prevpage;
 
     QPixmap m_oldPage;
     QPixmap m_newPage;

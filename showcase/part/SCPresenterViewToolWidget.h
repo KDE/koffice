@@ -28,15 +28,15 @@ class QTimer;
 class QToolButton;
 
 /**
- * KPrPresenterViewToolWidget
+ * SCPresenterViewToolWidget
  * This widget shows all navigation functions (previous and next slide) together
  * with clock and timer
  */
-class KPrPresenterViewToolWidget : public QFrame
+class SCPresenterViewToolWidget : public QFrame
 {
     Q_OBJECT
 public:
-    KPrPresenterViewToolWidget(QWidget *parent = 0);
+    SCPresenterViewToolWidget(QWidget *parent = 0);
     void toggleSlideThumbnails(bool toggle);
 
 signals:

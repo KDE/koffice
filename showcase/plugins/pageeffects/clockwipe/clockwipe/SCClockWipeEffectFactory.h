@@ -20,13 +20,13 @@
 #ifndef KPRCLOCKWIPEEFFECTFACTORY_H
 #define KPRCLOCKWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class KPrClockWipeEffectFactory : public KPrPageEffectFactory
+class SCClockWipeEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrClockWipeEffectFactory();
-    virtual ~KPrClockWipeEffectFactory();
+    SCClockWipeEffectFactory();
+    virtual ~SCClockWipeEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

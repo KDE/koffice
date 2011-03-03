@@ -17,26 +17,26 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrShapeManagerDisplayMasterStrategy.h"
+#include "SCShapeManagerDisplayMasterStrategy.h"
 
-#include "KPrPlaceholderShape.h"
+#include "SCPlaceholderShape.h"
 #include <KoPAPageBase.h>
-#include "KPrPageSelectStrategyBase.h"
+#include "SCPageSelectStrategyBase.h"
 
-KPrShapeManagerDisplayMasterStrategy::KPrShapeManagerDisplayMasterStrategy(KoShapeManager * shapeManager, KPrPageSelectStrategyBase * strategy)
+SCShapeManagerDisplayMasterStrategy::SCShapeManagerDisplayMasterStrategy(KoShapeManager * shapeManager, SCPageSelectStrategyBase * strategy)
 : KoShapeManagerPaintingStrategy(shapeManager)
 , m_strategy(strategy)
 {
 }
 
-KPrShapeManagerDisplayMasterStrategy::~KPrShapeManagerDisplayMasterStrategy()
+SCShapeManagerDisplayMasterStrategy::~SCShapeManagerDisplayMasterStrategy()
 {
     delete m_strategy;
 }
 
-void KPrShapeManagerDisplayMasterStrategy::paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
+void SCShapeManagerDisplayMasterStrategy::paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint)
 {
-    if (! dynamic_cast<KPrPlaceholderShape *>(shape)) {
+    if (! dynamic_cast<SCPlaceholderShape *>(shape)) {
         if (m_strategy->page()->displayShape(shape)) {
             KoShapeManagerPaintingStrategy::paint(shape, painter, converter, forPrint);
         }

@@ -20,16 +20,16 @@
 
 #include "Plugin.h"
 #include <kpluginfactory.h>
-#include <KPrPageEffectRegistry.h>
-#include "KPrFadeEffectFactory.h"
+#include <SCPageEffectRegistry.h>
+#include "SCFadeEffectFactory.h"
 
 K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
-K_EXPORT_PLUGIN(PluginFactory("KPrPageEffect"))
+K_EXPORT_PLUGIN(PluginFactory("SCPageEffect"))
 
 Plugin::Plugin(QObject *parent, const QVariantList &)
 : QObject(parent)
 {
-    KPrPageEffectRegistry::instance()->add(new KPrFadeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCFadeEffectFactory());
 }
 
 #include "Plugin.moc"

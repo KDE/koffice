@@ -20,18 +20,18 @@
 #ifndef KPRSWEEPWIPESTRATEGY_H
 #define KPRSWEEPWIPESTRATEGY_H
 
-#include <KPrPageEffectStrategy.h>
+#include <SCPageEffectStrategy.h>
 
-class KPrSweepWipeStrategy : public KPrPageEffectStrategy
+class SCSweepWipeStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrSweepWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse);
-    virtual ~KPrSweepWipeStrategy();
+    SCSweepWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse);
+    virtual ~SCSweepWipeStrategy();
 
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 
 protected:
-    void drawSweep(QPainter &p, double startAngle, double rotationRange, QRect boundingRect, const KPrPageEffect::Data &data);
+    void drawSweep(QPainter &p, double startAngle, double rotationRange, QRect boundingRect, const SCPageEffect::Data &data);
 };
 
 #endif // KPRSWEEPWIPESTRATEGY_H

@@ -17,21 +17,21 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrParallelSnakesWipeDiagonalStrategy.h"
-#include "KPrParallelSnakesWipeEffectFactory.h"
+#include "SCParallelSnakesWipeDiagonalStrategy.h"
+#include "SCParallelSnakesWipeEffectFactory.h"
 
-KPrParallelSnakesWipeDiagonalStrategy::KPrParallelSnakesWipeDiagonalStrategy(bool reverseAngle, bool reverse)
-    : KPrMatrixWipeStrategy(reverse ? (reverseAngle ? KPrParallelSnakesWipeEffectFactory::DiagonalBottomLeftOppositeIn : KPrParallelSnakesWipeEffectFactory::DiagonalTopLeftOppositeIn) : (reverseAngle ? KPrParallelSnakesWipeEffectFactory::DiagonalBottomLeftOppositeOut : KPrParallelSnakesWipeEffectFactory::DiagonalTopLeftOppositeOut), "parallelSnakesWipe", reverseAngle ? "diagonalTopLeftOpposite" : "diagonalBottomLeftOpposite", reverse),
+SCParallelSnakesWipeDiagonalStrategy::SCParallelSnakesWipeDiagonalStrategy(bool reverseAngle, bool reverse)
+    : SCMatrixWipeStrategy(reverse ? (reverseAngle ? SCParallelSnakesWipeEffectFactory::DiagonalBottomLeftOppositeIn : SCParallelSnakesWipeEffectFactory::DiagonalTopLeftOppositeIn) : (reverseAngle ? SCParallelSnakesWipeEffectFactory::DiagonalBottomLeftOppositeOut : SCParallelSnakesWipeEffectFactory::DiagonalTopLeftOppositeOut), "parallelSnakesWipe", reverseAngle ? "diagonalTopLeftOpposite" : "diagonalBottomLeftOpposite", reverse),
     m_reverseAngle(reverseAngle)
 {
     setNeedEvenSquares(true, false);
 }
 
-KPrParallelSnakesWipeDiagonalStrategy::~KPrParallelSnakesWipeDiagonalStrategy()
+SCParallelSnakesWipeDiagonalStrategy::~SCParallelSnakesWipeDiagonalStrategy()
 {
 }
 
-int KPrParallelSnakesWipeDiagonalStrategy::maxIndex(int columns, int rows)
+int SCParallelSnakesWipeDiagonalStrategy::maxIndex(int columns, int rows)
 {
     m_indices.resize(columns * rows);
     int idx = 0;
@@ -64,7 +64,7 @@ int KPrParallelSnakesWipeDiagonalStrategy::maxIndex(int columns, int rows)
     return columns * rows;
 }
 
-int KPrParallelSnakesWipeDiagonalStrategy::squareIndex(int x, int y, int columns, int rows)
+int SCParallelSnakesWipeDiagonalStrategy::squareIndex(int x, int y, int columns, int rows)
 {
     if (m_reverseAngle) y = rows - y - 1;
     int idx = m_indices[x * rows + y];

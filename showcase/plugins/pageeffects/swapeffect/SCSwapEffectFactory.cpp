@@ -17,21 +17,21 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSwapEffectFactory.h"
+#include "SCSwapEffectFactory.h"
 
 #include <klocale.h>
 
-#include "KPrSwapEffectHorizontalStrategy.h"
+#include "SCSwapEffectHorizontalStrategy.h"
 
 #define SwapEffectId "SwapEffect"
 
-KPrSwapEffectFactory::KPrSwapEffectFactory()
-: KPrPageEffectFactory(SwapEffectId, i18n("Swap effect"))
+SCSwapEffectFactory::SCSwapEffectFactory()
+: SCPageEffectFactory(SwapEffectId, i18n("Swap effect"))
 {
-    addStrategy(new KPrSwapEffectHorizontalStrategy());
+    addStrategy(new SCSwapEffectHorizontalStrategy());
 }
 
-KPrSwapEffectFactory::~KPrSwapEffectFactory()
+SCSwapEffectFactory::~SCSwapEffectFactory()
 {
 }
 
@@ -39,7 +39,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Horizontal")
 };
 
-QString KPrSwapEffectFactory::subTypeName(int subType) const
+QString SCSwapEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

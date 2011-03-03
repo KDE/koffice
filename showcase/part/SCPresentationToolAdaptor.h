@@ -20,21 +20,21 @@
 #ifndef KPRPRESENTATIONTOOLADAPTOR_H
 #define KPRPRESENTATIONTOOLADAPTOR_H
 
-#include "KPrPresentationTool.h"
+#include "SCPresentationTool.h"
 
 #include <QtDBus/QtDBus>
 
-class KPrViewModePresentation;
-class KPrPresentationTool;
+class SCViewModePresentation;
+class SCPresentationTool;
 
-class KPrPresentationToolAdaptor : public QDBusAbstractAdaptor
+class SCPresentationToolAdaptor : public QDBusAbstractAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.koffice.presentation.tool")
 
 public:
-    explicit KPrPresentationToolAdaptor(KPrPresentationTool *tool);
-    virtual ~KPrPresentationToolAdaptor();
+    explicit SCPresentationToolAdaptor(SCPresentationTool *tool);
+    virtual ~SCPresentationToolAdaptor();
 
 public slots: // METHODS
 
@@ -71,8 +71,8 @@ public slots: // METHODS
     void normalPresentation();
 
 private:
-    KPrPresentationTool *m_tool;
-    KPrViewModePresentation &m_viewModePresentation;
+    SCPresentationTool *m_tool;
+    SCViewModePresentation &m_viewModePresentation;
 };
 
 #endif /* KPRPRESENTATIONTOOLADAPTOR_H */

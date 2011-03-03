@@ -20,13 +20,13 @@
 #ifndef KPRSNAKEWIPETOPLEFTDIAGONALSTRATEGY_H
 #define KPRSNAKEWIPETOPLEFTDIAGONALSTRATEGY_H
 
-#include "KPrSnakeWipeDiagonalStrategy.h"
+#include "SCSnakeWipeDiagonalStrategy.h"
 
-class KPrSnakeWipeTopLeftDiagonalStrategy : public KPrSnakeWipeDiagonalStrategy
+class SCSnakeWipeTopLeftDiagonalStrategy : public SCSnakeWipeDiagonalStrategy
 {
 public:
-    KPrSnakeWipeTopLeftDiagonalStrategy();
-    virtual ~KPrSnakeWipeTopLeftDiagonalStrategy();
+    SCSnakeWipeTopLeftDiagonalStrategy();
+    virtual ~SCSnakeWipeTopLeftDiagonalStrategy();
 protected:
     virtual int squareIndex(int x, int y, int columns, int rows);
 };

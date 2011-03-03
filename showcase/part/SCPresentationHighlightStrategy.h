@@ -21,13 +21,13 @@
 #ifndef KPRPRESENTATIONHIGHLIGHTSTRATEGY_H
 #define KPRPRESENTATIONHIGHLIGHTSTRATEGY_H
 
-#include "KPrPresentationStrategyBase.h"
+#include "SCPresentationStrategyBase.h"
 
-class KPrPresentationHighlightStrategy : public KPrPresentationStrategyBase
+class SCPresentationHighlightStrategy : public SCPresentationStrategyBase
 {
 public :
-    KPrPresentationHighlightStrategy(KPrPresentationTool * tool);
-    ~KPrPresentationHighlightStrategy();
+    SCPresentationHighlightStrategy(SCPresentationTool * tool);
+    ~SCPresentationHighlightStrategy();
 
     bool keyPressEvent(QKeyEvent * event);
 };

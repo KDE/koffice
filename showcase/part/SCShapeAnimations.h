@@ -22,16 +22,16 @@
 #define KPRSHAPEANIMATIONS_H
 
 #include <QList>
-#include "animations/KPrShapeAnimation.h"
-#include "animations/KPrAnimationStep.h"
+#include "animations/SCShapeAnimation.h"
+#include "animations/SCAnimationStep.h"
 
 
-class KPrShapeAnimations
+class SCShapeAnimations
 {
 public:
-    KPrShapeAnimations();
-    ~KPrShapeAnimations();
-    void init(const QList<KPrAnimationStep *> animations);
+    SCShapeAnimations();
+    ~SCShapeAnimations();
+    void init(const QList<SCAnimationStep *> animations);
     /**
      * Add animation to the animations
      *
@@ -39,14 +39,14 @@ public:
      *
      * @parama animation the animation to insert
      */
-    void add(KPrShapeAnimation * animation);
+    void add(SCShapeAnimation * animation);
 
     /**
      * Remove  animation to the animations
      *
      * @parama animation the animation to remove
      */
-    void remove(KPrShapeAnimation * animation);
+    void remove(SCShapeAnimation * animation);
 
     /**
      * Get the animations for the given step
@@ -55,15 +55,15 @@ public:
      * @return A map of the shape -> animation if the animation is 0 the shape
      *         is not visible
      */
-/*    QMap<KoShape *, KPrShapeAnimation *> animations(int step) const;
+/*    QMap<KoShape *, SCShapeAnimation *> animations(int step) const;
 */
     /**
      * Get all steps
      */
-    QList<KPrAnimationStep *> steps() const;
+    QList<SCAnimationStep *> steps() const;
 
 private:
-    QList<KPrAnimationStep *> m_shapeAnimations;
+    QList<SCAnimationStep *> m_shapeAnimations;
 };
 
 #endif /* KPRSHAPEANIMATIONS_H */

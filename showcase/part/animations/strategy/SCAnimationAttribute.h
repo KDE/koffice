@@ -23,18 +23,18 @@
 #include <QtGlobal>
 #include <QString>
 
-class KPrAnimationCache;
-class KPrShapeAnimation;
+class SCAnimationCache;
+class SCShapeAnimation;
 
-class KPrAnimationAttribute
+class SCAnimationAttribute
 {
 public:
-    KPrAnimationAttribute(QString attributeName);
-    virtual ~KPrAnimationAttribute();
+    SCAnimationAttribute(QString attributeName);
+    virtual ~SCAnimationAttribute();
     QString attributeName() const;
 
-    virtual void updateCache(KPrAnimationCache * cache, KPrShapeAnimation * shapeAnimation, qreal value) = 0;
-    virtual void initCache(KPrAnimationCache * cache, int step, KPrShapeAnimation * shapeAnimation, qreal startValue, qreal endValue) = 0;
+    virtual void updateCache(SCAnimationCache * cache, SCShapeAnimation * shapeAnimation, qreal value) = 0;
+    virtual void initCache(SCAnimationCache * cache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue) = 0;
 protected:
     QString m_attributeName;
 };

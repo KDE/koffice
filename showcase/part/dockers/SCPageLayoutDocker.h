@@ -25,16 +25,16 @@
 
 class QListWidget;
 class QListWidgetItem;
-class KPrPageLayout;
-class KPrView;
+class SCPageLayout;
+class SCView;
 
-class KPrPageLayoutDocker : public QDockWidget
+class SCPageLayoutDocker : public QDockWidget
 {
     Q_OBJECT
 public:
-    explicit KPrPageLayoutDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
+    explicit SCPageLayoutDocker(QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
-    void setView(KPrView* view);
+    void setView(SCView* view);
 
 public slots:
     void slotActivePageChanged();
@@ -42,11 +42,11 @@ public slots:
     void slotCurrentItemChanged(QListWidgetItem * item, QListWidgetItem * previous);
 
 private:
-    QListWidgetItem * addLayout(KPrPageLayout * layout);
+    QListWidgetItem * addLayout(SCPageLayout * layout);
     void applyLayout(QListWidgetItem * item);
-    KPrView* m_view;
+    SCView* m_view;
     QListWidget * m_layoutsView;
-    QMap<KPrPageLayout *, QListWidgetItem *> m_layout2item;
+    QMap<SCPageLayout *, QListWidgetItem *> m_layout2item;
     // store the last item which was active so we can detect that 
     // the already selected item was clicked again.
     QListWidgetItem * m_previousItem;

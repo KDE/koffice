@@ -24,11 +24,11 @@
 
 class QPainterPath;
 
-class KPrClockWipeSubpathHelper
+class SCClockWipeSubpathHelper
 {
 public:
-    KPrClockWipeSubpathHelper();
-    virtual ~KPrClockWipeSubpathHelper();
+    SCClockWipeSubpathHelper();
+    virtual ~SCClockWipeSubpathHelper();
 
     static void addSubpathForCircularArc(QPainterPath* clipPath, QRect& boundingRect, double startAngle, double endAngle);
 };

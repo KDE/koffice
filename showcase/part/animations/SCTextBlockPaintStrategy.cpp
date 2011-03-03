@@ -17,37 +17,37 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrTextBlockPaintStrategy.h"
+#include "SCTextBlockPaintStrategy.h"
 
 #include <QBrush>
-#include "KPrAnimationCache.h"
+#include "SCAnimationCache.h"
 #include <QTransform>
 #include <QMatrix>
 #include <QPainter>
 
 #include "kdebug.h"
 #include "KoTextBlockData.h"
-KPrTextBlockPaintStrategy::KPrTextBlockPaintStrategy(KoTextBlockData *blockData, KPrAnimationCache *animationCache)
+SCTextBlockPaintStrategy::SCTextBlockPaintStrategy(KoTextBlockData *blockData, SCAnimationCache *animationCache)
     : m_animationCache(animationCache)
     , m_textBlockData(blockData)
 {
 }
 
-KPrTextBlockPaintStrategy::~KPrTextBlockPaintStrategy()
+SCTextBlockPaintStrategy::~SCTextBlockPaintStrategy()
 {
 }
 
-void KPrTextBlockPaintStrategy::setAnimationCache(KPrAnimationCache *animationCache)
+void SCTextBlockPaintStrategy::setAnimationCache(SCAnimationCache *animationCache)
 {
     m_animationCache = animationCache;
 }
 
-QBrush KPrTextBlockPaintStrategy::background(const QBrush &defaultBackground)
+QBrush SCTextBlockPaintStrategy::background(const QBrush &defaultBackground)
 {
     return defaultBackground;
 }
 
-void KPrTextBlockPaintStrategy::applyStrategy(QPainter *painter)
+void SCTextBlockPaintStrategy::applyStrategy(QPainter *painter)
 {
     QTransform animationTransform = m_animationCache->value(m_textBlockData, "transform", QTransform()).value<QTransform>();
     QTransform transform(painter->matrix());
@@ -60,7 +60,7 @@ void KPrTextBlockPaintStrategy::applyStrategy(QPainter *painter)
     painter->setClipping(false);
 }
 
-bool KPrTextBlockPaintStrategy::isVisible()
+bool SCTextBlockPaintStrategy::isVisible()
 {
     if (m_animationCache) {
         return m_animationCache->value(m_textBlockData, "visibility", true).toBool();

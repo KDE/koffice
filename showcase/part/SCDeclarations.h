@@ -31,7 +31,7 @@ class KoXmlElement;
 class KoPALoadingContext;
 class KoPASavingContext;
 
-class KPrDeclarations
+class SCDeclarations
 {
 public:
     /**
@@ -46,12 +46,12 @@ public:
     /**
      * Constructor
      */
-    KPrDeclarations();
+    SCDeclarations();
 
     /**
      * Destructor
      */
-    ~KPrDeclarations();
+    ~SCDeclarations();
 
     /**
      * loadOdfDeclaration

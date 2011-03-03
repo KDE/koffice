@@ -20,13 +20,13 @@
 #ifndef KPRSALOONDOORWIPEEFFECTFACTORY_H
 #define KPRSALOONDOORWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class KPrSaloonDoorWipeEffectFactory : public KPrPageEffectFactory
+class SCSaloonDoorWipeEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrSaloonDoorWipeEffectFactory();
-    virtual ~KPrSaloonDoorWipeEffectFactory();
+    SCSaloonDoorWipeEffectFactory();
+    virtual ~SCSaloonDoorWipeEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

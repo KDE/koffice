@@ -20,9 +20,9 @@
 #ifndef BOXWIPEEFFECTFACTORY_H
 #define BOXWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class BoxWipeEffectFactory : public KPrPageEffectFactory
+class BoxWipeEffectFactory : public SCPageEffectFactory
 {
 public:
     BoxWipeEffectFactory();

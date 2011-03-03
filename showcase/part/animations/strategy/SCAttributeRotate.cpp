@@ -17,21 +17,21 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAttributeRotate.h"
-#include "../KPrAnimationCache.h"
+#include "SCAttributeRotate.h"
+#include "../SCAnimationCache.h"
 #include "KoShape.h"
-#include "KPrShapeAnimations.h"
+#include "SCShapeAnimations.h"
 #include "KoTextBlockData.h"
 #include "KoTextShapeData.h"
 #include <QTextDocument>
 #include <QTextLayout>
 #include "kdebug.h"
 
-KPrAttributeRotate::KPrAttributeRotate() : KPrAnimationAttribute("rotate")
+SCAttributeRotate::SCAttributeRotate() : SCAnimationAttribute("rotate")
 {
 }
 
-void KPrAttributeRotate::updateCache(KPrAnimationCache *cache, KPrShapeAnimation *shapeAnimation, qreal value)
+void SCAttributeRotate::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value)
 {
     qreal tx = 0.0, ty = 0.0;
     KoShape * shape = shapeAnimation->shape();
@@ -58,7 +58,7 @@ void KPrAttributeRotate::updateCache(KPrAnimationCache *cache, KPrShapeAnimation
     cache->update(shape, shapeAnimation->textBlockData(),"transform", transform);
 }
 
-void KPrAttributeRotate::initCache(KPrAnimationCache *animationCache, int step, KPrShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
+void SCAttributeRotate::initCache(SCAnimationCache *animationCache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
 {
     qreal tx = 0.0, ty = 0.0;
     KoShape * shape = shapeAnimation->shape();

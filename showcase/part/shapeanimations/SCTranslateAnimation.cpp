@@ -17,42 +17,42 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrTranslateAnimation.h"
+#include "SCTranslateAnimation.h"
 
 #include <QPainter>
 
 #include <KoCanvasBase.h>
 #include <KoViewConverter.h>
 
-#include "KPrAnimationData.h"
+#include "SCAnimationData.h"
 
-KPrTranslateAnimation::KPrTranslateAnimation(KoShape * shape, int step, Type type)
-: KPrShapeAnimationOld(shape, step, type)
+SCTranslateAnimation::SCTranslateAnimation(KoShape * shape, int step, Type type)
+: SCShapeAnimationOld(shape, step, type)
 {
 }
 
-KPrTranslateAnimation::~KPrTranslateAnimation()
+SCTranslateAnimation::~SCTranslateAnimation()
 {
 }
 
-bool KPrTranslateAnimation::animate(QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData)
+bool SCTranslateAnimation::animate(QPainter &painter, const KoViewConverter &converter, SCAnimationData * animationData)
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    SCAnimationDataTranslate * data = dynamic_cast<SCAnimationDataTranslate *>(animationData);
     Q_ASSERT(data);
     painter.translate(converter.documentToView(data->m_translate));
     return data->m_finished;
 }
 
-void KPrTranslateAnimation::animateRect(QRectF & rect, KPrAnimationData * animationData)
+void SCTranslateAnimation::animateRect(QRectF & rect, SCAnimationData * animationData)
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    SCAnimationDataTranslate * data = dynamic_cast<SCAnimationDataTranslate *>(animationData);
     Q_ASSERT(data);
     rect.translate(data->m_translate);
 }
 
-void KPrTranslateAnimation::next(int currentTime, KPrAnimationData * animationData)
+void SCTranslateAnimation::next(int currentTime, SCAnimationData * animationData)
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    SCAnimationDataTranslate * data = dynamic_cast<SCAnimationDataTranslate *>(animationData);
     Q_ASSERT(data);
     data->m_canvas->updateCanvas(data->m_boundingRect.translated(data->m_translate));
     data->m_translate.setX(data->m_timeLine.frameForTime(currentTime) / TIMEFACTOR);
@@ -60,9 +60,9 @@ void KPrTranslateAnimation::next(int currentTime, KPrAnimationData * animationDa
     data->m_finished = data->m_timeLine.frameForTime(currentTime) == data->m_timeLine.endFrame();
 }
 
-void KPrTranslateAnimation::finish(KPrAnimationData * animationData)
+void SCTranslateAnimation::finish(SCAnimationData * animationData)
 {
-    KPrAnimationDataTranslate * data = dynamic_cast<KPrAnimationDataTranslate *>(animationData);
+    SCAnimationDataTranslate * data = dynamic_cast<SCAnimationDataTranslate *>(animationData);
     Q_ASSERT(data);
     data->m_canvas->updateCanvas(data->m_boundingRect.translated(data->m_translate));
     data->m_translate.setX(data->m_timeLine.endFrame() / TIMEFACTOR);

@@ -20,17 +20,17 @@
 #ifndef KPRSIDEFANWIPESTRATEGY_H
 #define KPRSIDEFANWIPESTRATEGY_H
 
-#include <KPrPageEffectStrategy.h>
+#include <SCPageEffectStrategy.h>
 
-class KPrSideFanWipeStrategy : public KPrPageEffectStrategy
+class SCSideFanWipeStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrSideFanWipeStrategy(int positionAngle, int fanCount, int subType, const char * smilType, const char *smilSubType, bool reverse);
-    virtual ~KPrSideFanWipeStrategy();
+    SCSideFanWipeStrategy(int positionAngle, int fanCount, int subType, const char * smilType, const char *smilSubType, bool reverse);
+    virtual ~SCSideFanWipeStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 
 private:
     double m_startAngle;

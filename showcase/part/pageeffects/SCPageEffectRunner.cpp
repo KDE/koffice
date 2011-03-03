@@ -18,16 +18,16 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPageEffectRunner.h"
+#include "SCPageEffectRunner.h"
 #ifdef HAVE_OPENGL
 #include <QGLFormat>
 #endif
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
-#include "KPrPageEffect.h"
+#include "SCPageEffect.h"
 
-KPrPageEffectRunner::KPrPageEffectRunner(const QPixmap &oldPage, const QPixmap &newPage, QWidget *w, KPrPageEffect *effect)
+SCPageEffectRunner::SCPageEffectRunner(const QPixmap &oldPage, const QPixmap &newPage, QWidget *w, SCPageEffect *effect)
 : m_effect(effect)
 , m_data(oldPage, newPage, w)
 {
@@ -72,18 +72,18 @@ KPrPageEffectRunner::KPrPageEffectRunner(const QPixmap &oldPage, const QPixmap &
     m_effect->setup(m_data, m_data.m_timeLine);
 }
 
-KPrPageEffectRunner::~KPrPageEffectRunner()
+SCPageEffectRunner::~SCPageEffectRunner()
 {
     delete m_data.m_graphicsView;
     delete m_data.m_scene;
 }
 
-bool KPrPageEffectRunner::paint(QPainter &painter)
+bool SCPageEffectRunner::paint(QPainter &painter)
 {
     return m_effect->paint(painter, m_data);
 }
 
-void KPrPageEffectRunner::next(int currentTime)
+void SCPageEffectRunner::next(int currentTime)
 {
     m_data.m_lastTime = m_data.m_currentTime;
     m_data.m_currentTime = currentTime;
@@ -91,33 +91,33 @@ void KPrPageEffectRunner::next(int currentTime)
     m_effect->next(m_data);
 }
 
-void KPrPageEffectRunner::finish()
+void SCPageEffectRunner::finish()
 {
     m_data.m_finished = true;
     m_effect->finish(m_data);
 }
 
-bool KPrPageEffectRunner::isFinished()
+bool SCPageEffectRunner::isFinished()
 {
     return m_data.m_finished;
 }
 
-const QPixmap & KPrPageEffectRunner::oldPage() const
+const QPixmap & SCPageEffectRunner::oldPage() const
 {
     return m_data.m_oldPage;
 }
 
-const QPixmap & KPrPageEffectRunner::newPage() const
+const QPixmap & SCPageEffectRunner::newPage() const
 {
     return m_data.m_newPage;
 }
 
-void KPrPageEffectRunner::setOldPage(const QPixmap & oldPage)
+void SCPageEffectRunner::setOldPage(const QPixmap & oldPage)
 {
     m_data.m_oldPage = oldPage;
 }
 
-void KPrPageEffectRunner::setNewPage(const QPixmap & newPage)
+void SCPageEffectRunner::setNewPage(const QPixmap & newPage)
 {
     m_data.m_newPage = newPage;
 }

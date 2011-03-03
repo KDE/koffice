@@ -21,17 +21,17 @@
 #ifndef KPRHTMLEXPORTDIALOG_H
 #define KPRHTMLEXPORTDIALOG_H
 
-#include "ui_KPrHtmlExport.h"
+#include "ui_SCHtmlExport.h"
 
 #include <QWebPage>
 
 #include <KoPAPageBase.h>
 
-class KPrHtmlExportDialog  : public KDialog
+class SCHtmlExportDialog  : public KDialog
 {
     Q_OBJECT
 public:
-    KPrHtmlExportDialog(const QList<KoPAPageBase*> &slides, const QString &title, const QString &author, QWidget *parent=0);
+    SCHtmlExportDialog(const QList<KoPAPageBase*> &slides, const QString &title, const QString &author, QWidget *parent=0);
 
     QList<KoPAPageBase*> checkedSlides();
     QStringList slidesNames();
@@ -63,7 +63,7 @@ private:
 
     QList<KoPAPageBase*> m_allSlides;
     QString m_title;
-    Ui::KPrHtmlExport ui;
+    Ui::SCHtmlExport ui;
     QWebPage preview;
     int frameToRender;
 

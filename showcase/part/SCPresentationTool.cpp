@@ -22,7 +22,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresentationTool.h"
+#include "SCPresentationTool.h"
 
 #include <QtGui/QWidget>
 #include <QtGui/QVBoxLayout>
@@ -40,21 +40,21 @@
 #include <KoPACanvas.h>
 #include <KoTextShapeData.h>
 
-#include "KPrViewModePresentation.h"
-#include "KPrPresentationStrategy.h"
-#include "KPrPresentationHighlightStrategy.h"
-#include "KPrPresentationDrawStrategy.h"
-#include "KPrPresentationBlackStrategy.h"
-#include "ui/KPrPresentationToolWidget.h"
-#include "KPrPresentationToolAdaptor.h"
-#include "KPrViewModePresentation.h"
+#include "SCViewModePresentation.h"
+#include "SCPresentationStrategy.h"
+#include "SCPresentationHighlightStrategy.h"
+#include "SCPresentationDrawStrategy.h"
+#include "SCPresentationBlackStrategy.h"
+#include "ui/SCPresentationToolWidget.h"
+#include "SCPresentationToolAdaptor.h"
+#include "SCViewModePresentation.h"
 
 
-KPrPresentationTool::KPrPresentationTool(KPrViewModePresentation &viewMode)
+SCPresentationTool::SCPresentationTool(SCViewModePresentation &viewMode)
 : KoToolBase(viewMode.canvas())
 , m_viewMode(viewMode)
-, m_strategy(new KPrPresentationStrategy(this))
-, m_bus (new KPrPresentationToolAdaptor(this))
+, m_strategy(new SCPresentationStrategy(this))
+, m_bus (new SCPresentationToolAdaptor(this))
 {
     QDBusConnection::sessionBus().registerObject("/kpresenter/PresentationTools", this);
 
@@ -63,7 +63,7 @@ KPrPresentationTool::KPrPresentationTool(KPrViewModePresentation &viewMode)
 
     QVBoxLayout *frameLayout = new QVBoxLayout();
 
-    m_presentationToolWidget = new KPrPresentationToolWidget(m_viewMode.canvas()->canvasWidget());
+    m_presentationToolWidget = new SCPresentationToolWidget(m_viewMode.canvas()->canvasWidget());
     frameLayout->addWidget(m_presentationToolWidget, 0, Qt::AlignLeft | Qt::AlignBottom);
     m_frame->setLayout(frameLayout);
     m_frame->show();
@@ -79,23 +79,23 @@ KPrPresentationTool::KPrPresentationTool(KPrViewModePresentation &viewMode)
 
 }
 
-KPrPresentationTool::~KPrPresentationTool()
+SCPresentationTool::~SCPresentationTool()
 {
     delete m_strategy;
 }
 
-bool KPrPresentationTool::wantsAutoScroll() const
+bool SCPresentationTool::wantsAutoScroll() const
 {
     return false;
 }
 
-void KPrPresentationTool::paint(QPainter &painter, const KoViewConverter &converter)
+void SCPresentationTool::paint(QPainter &painter, const KoViewConverter &converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);
 }
 
-void KPrPresentationTool::mousePressEvent(KoPointerEvent *event)
+void SCPresentationTool::mousePressEvent(KoPointerEvent *event)
 {
     if (event->button() & Qt::LeftButton) {
         event->accept();
@@ -117,21 +117,21 @@ void KPrPresentationTool::mousePressEvent(KoPointerEvent *event)
                 return;
             }
         }
-        m_viewMode.navigate(KPrAnimationDirector::NextStep);
+        m_viewMode.navigate(SCAnimationDirector::NextStep);
     }
     else if (event->button() & Qt::RightButton) {
         event->accept();
         finishEventActions();
-        m_viewMode.navigate(KPrAnimationDirector::PreviousStep);
+        m_viewMode.navigate(SCAnimationDirector::PreviousStep);
     }
 }
 
-void KPrPresentationTool::mouseDoubleClickEvent(KoPointerEvent *event)
+void SCPresentationTool::mouseDoubleClickEvent(KoPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void KPrPresentationTool::mouseMoveEvent(KoPointerEvent *event)
+void SCPresentationTool::mouseMoveEvent(KoPointerEvent *event)
 {
     KoShape * shape = canvas()->shapeManager()->shapeAt(event->point);
 
@@ -144,12 +144,12 @@ void KPrPresentationTool::mouseMoveEvent(KoPointerEvent *event)
     canvas()->setCursor(Qt::ArrowCursor);
 }
 
-void KPrPresentationTool::mouseReleaseEvent(KoPointerEvent *event)
+void SCPresentationTool::mouseReleaseEvent(KoPointerEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void KPrPresentationTool::keyPressEvent(QKeyEvent *event)
+void SCPresentationTool::keyPressEvent(QKeyEvent *event)
 {
     finishEventActions();
     // first try to handle the event in the strategy if it is done there no need to use the default action
@@ -160,26 +160,26 @@ void KPrPresentationTool::keyPressEvent(QKeyEvent *event)
                 m_viewMode.activateSavedViewMode();
                 break;
             case Qt::Key_Home:
-                m_viewMode.navigate(KPrAnimationDirector::FirstPage);
+                m_viewMode.navigate(SCAnimationDirector::FirstPage);
                 break;
             case Qt::Key_Up:
             case Qt::Key_PageUp:
-                m_viewMode.navigate(KPrAnimationDirector::PreviousPage);
+                m_viewMode.navigate(SCAnimationDirector::PreviousPage);
                 break;
             case Qt::Key_Backspace:
             case Qt::Key_Left:
-                m_viewMode.navigate(KPrAnimationDirector::PreviousStep);
+                m_viewMode.navigate(SCAnimationDirector::PreviousStep);
                 break;
             case Qt::Key_Right:
             case Qt::Key_Space:
-                m_viewMode.navigate(KPrAnimationDirector::NextStep);
+                m_viewMode.navigate(SCAnimationDirector::NextStep);
                 break;
             case Qt::Key_Down:
             case Qt::Key_PageDown:
-                m_viewMode.navigate(KPrAnimationDirector::NextPage);
+                m_viewMode.navigate(SCAnimationDirector::NextPage);
                 break;
             case Qt::Key_End:
-                m_viewMode.navigate(KPrAnimationDirector::LastPage);
+                m_viewMode.navigate(SCAnimationDirector::LastPage);
                 break;
             default:
                 event->ignore();
@@ -188,17 +188,17 @@ void KPrPresentationTool::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void KPrPresentationTool::keyReleaseEvent(QKeyEvent *event)
+void SCPresentationTool::keyReleaseEvent(QKeyEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void KPrPresentationTool::wheelEvent(KoPointerEvent * event)
+void SCPresentationTool::wheelEvent(KoPointerEvent * event)
 {
     Q_UNUSED(event);
 }
 
-void KPrPresentationTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void SCPresentationTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
 {
     Q_UNUSED(toolActivation);
     Q_UNUSED(shapes);
@@ -210,20 +210,20 @@ void KPrPresentationTool::activate(ToolActivation toolActivation, const QSet<KoS
     m_frame->setMouseTracking(true);
 }
 
-void KPrPresentationTool::deactivate()
+void SCPresentationTool::deactivate()
 {
-    switchStrategy(new KPrPresentationStrategy(this));
+    switchStrategy(new SCPresentationStrategy(this));
     finishEventActions();
 }
 
-void KPrPresentationTool::finishEventActions()
+void SCPresentationTool::finishEventActions()
 {
     foreach (KoEventAction * eventAction, m_eventActions) {
         eventAction->finish();
     }
 }
 
-void KPrPresentationTool::switchStrategy(KPrPresentationStrategyBase * strategy)
+void SCPresentationTool::switchStrategy(SCPresentationStrategyBase * strategy)
 {
     Q_ASSERT(strategy);
     Q_ASSERT(m_strategy != strategy);
@@ -232,43 +232,43 @@ void KPrPresentationTool::switchStrategy(KPrPresentationStrategyBase * strategy)
 }
 
 // SLOTS
-void KPrPresentationTool::highlightPresentation()
+void SCPresentationTool::highlightPresentation()
 {
-    KPrPresentationStrategyBase * strategy;
-    if (dynamic_cast<KPrPresentationHighlightStrategy *>(m_strategy)) {
-        strategy = new KPrPresentationStrategy(this);
+    SCPresentationStrategyBase * strategy;
+    if (dynamic_cast<SCPresentationHighlightStrategy *>(m_strategy)) {
+        strategy = new SCPresentationStrategy(this);
     }
     else {
-        strategy = new KPrPresentationHighlightStrategy(this);
+        strategy = new SCPresentationHighlightStrategy(this);
     }
     switchStrategy(strategy);
 }
 
-void KPrPresentationTool::drawOnPresentation()
+void SCPresentationTool::drawOnPresentation()
 {
-    KPrPresentationStrategyBase * strategy;
-    if (dynamic_cast<KPrPresentationDrawStrategy*>(m_strategy)) {
-        strategy = new KPrPresentationStrategy(this);
+    SCPresentationStrategyBase * strategy;
+    if (dynamic_cast<SCPresentationDrawStrategy*>(m_strategy)) {
+        strategy = new SCPresentationStrategy(this);
     }
     else {
-        strategy = new KPrPresentationDrawStrategy(this);
+        strategy = new SCPresentationDrawStrategy(this);
     }
     switchStrategy(strategy);
 }
 
-void KPrPresentationTool::blackPresentation()
+void SCPresentationTool::blackPresentation()
 {
-    KPrPresentationStrategyBase * strategy;
-    if (dynamic_cast<KPrPresentationBlackStrategy*>(m_strategy)) {
-        strategy = new KPrPresentationStrategy(this);
+    SCPresentationStrategyBase * strategy;
+    if (dynamic_cast<SCPresentationBlackStrategy*>(m_strategy)) {
+        strategy = new SCPresentationStrategy(this);
     }
     else {
-        strategy = new KPrPresentationBlackStrategy(this);
+        strategy = new SCPresentationBlackStrategy(this);
     }
     switchStrategy(strategy);
 }
 
-bool KPrPresentationTool::eventFilter(QObject *obj, QEvent * event)
+bool SCPresentationTool::eventFilter(QObject *obj, QEvent * event)
 {
     if (event->type() == QEvent::MouseMove) {
         QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
@@ -287,7 +287,7 @@ bool KPrPresentationTool::eventFilter(QObject *obj, QEvent * event)
     return false;
 }
 
-bool KPrPresentationTool::checkHyperlink(KoPointerEvent *event, KoShape *shape, QString & hyperLink)
+bool SCPresentationTool::checkHyperlink(KoPointerEvent *event, KoShape *shape, QString & hyperLink)
 {
     if (!shape) {
         return false;
@@ -314,27 +314,27 @@ bool KPrPresentationTool::checkHyperlink(KoPointerEvent *event, KoShape *shape, 
     return false;
 }
 
-void KPrPresentationTool::runHyperlink(QString hyperLink)
+void SCPresentationTool::runHyperlink(QString hyperLink)
 {
     QUrl url = QUrl::fromUserInput(hyperLink);
 
     QDesktopServices::openUrl(url);
 }
 
-KPrPresentationStrategyBase *KPrPresentationTool::strategy()
+SCPresentationStrategyBase *SCPresentationTool::strategy()
 {
     return m_strategy;
 }
 
-KPrViewModePresentation &KPrPresentationTool::viewModePresentation()
+SCViewModePresentation &SCPresentationTool::viewModePresentation()
 {
     return m_viewMode;
 }
 
 
-void KPrPresentationTool::normalPresentation()
+void SCPresentationTool::normalPresentation()
 {
-   switchStrategy(new KPrPresentationStrategy(this));
+   switchStrategy(new SCPresentationStrategy(this));
 }
 
-#include "KPrPresentationTool.moc"
+#include "SCPresentationTool.moc"

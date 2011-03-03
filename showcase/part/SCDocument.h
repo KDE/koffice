@@ -23,18 +23,18 @@
 #include <QObject>
 
 #include <KoPADocument.h>
-#include "KPrCustomSlideShows.h"
+#include "SCCustomSlideShows.h"
 
-class KPrDeclarations;
-class KPrShapeAnimation;
-class KPrShapeAnimations;
+class SCDeclarations;
+class SCShapeAnimation;
+class SCShapeAnimations;
 
-class KPrDocument : public KoPADocument
+class SCDocument : public KoPADocument
 {
     Q_OBJECT
 public:
-    explicit KPrDocument(QWidget* parentWidget, QObject* parent, bool singleViewMode = false);
-    ~KPrDocument();
+    explicit SCDocument(QWidget* parentWidget, QObject* parent, bool singleViewMode = false);
+    ~SCDocument();
 
     /// reimplemented
     virtual KoPAPage *newPage(KoPAMasterPage *masterPage);
@@ -49,7 +49,7 @@ public:
      *
      * @param animation animation to add to shape
      */
-    void addAnimation(KPrShapeAnimation * animation);
+    void addAnimation(SCShapeAnimation * animation);
 
     /**
      * @brief Remove animation from shape
@@ -58,13 +58,13 @@ public:
      * @param removeFromApplicationData if true the animation will also be removed from the
      *        application data
      */
-    void removeAnimation(KPrShapeAnimation * animation, bool removeFromApplicationData = true);
+    void removeAnimation(SCShapeAnimation * animation, bool removeFromApplicationData = true);
 
     /**
      * @brief get the slideShows defined for this document
      */
-    KPrCustomSlideShows* customSlideShows();
-    void setCustomSlideShows(KPrCustomSlideShows* replacement);
+    SCCustomSlideShows* customSlideShows();
+    void setCustomSlideShows(SCCustomSlideShows* replacement);
 
     /**
      * Get the presentation monitor (screen) used for presentation
@@ -112,7 +112,7 @@ public:
 
     /**
      * Set the currently active custom slide show. The custom slide show name should
-     * be valid, i.e. KPrCustomSlideShow::names() contains the name
+     * be valid, i.e. SCCustomSlideShow::names() contains the name
      *
      * @param customSlideShow the new active custom slide show
      */
@@ -135,9 +135,9 @@ public:
     virtual KoPageApp::PageType pageType() const;
 
     /**
-     * Get the KPrDeclarations pointer
+     * Get the SCDeclarations pointer
      */
-    KPrDeclarations * declarations() const;
+    SCDeclarations * declarations() const;
 
     /**
      * Creates and shows the start up widget. Reimplemented from KoDocument.
@@ -190,30 +190,30 @@ protected:
     /// reimplemented
     virtual void pageRemoved(KoPAPageBase * page, QUndoCommand * parent);
 
-    /// load configuration specific to KPresenter
+    /// load configuration specific to Showcase
     void loadKPrConfig();
 
-    /// save configuration specific to KPresenter
+    /// save configuration specific to Showcase
     void saveKPrConfig();
 
     /**
      * @brief get the animations of the page
      */
-    KPrShapeAnimations & animationsByPage(KoPAPageBase * page);
+    SCShapeAnimations & animationsByPage(KoPAPageBase * page);
 
-    KPrCustomSlideShows *m_customSlideShows;
+    SCCustomSlideShows *m_customSlideShows;
 
 protected slots:
-    /// Quits KPresenter with error message from m_errorMessage.
+    /// Quits Showcase with error message from m_errorMessage.
     void showErrorAndDie();
 
 private:
     int m_presentationMonitor;
     bool m_presenterViewEnabled;
     QString m_activeCustomSlideShow;
-    /// Message shown before KPresenter quits with an error if something is wrong
+    /// Message shown before Showcase quits with an error if something is wrong
     QString m_errorMessage;
-    KPrDeclarations *m_declarations;
+    SCDeclarations *m_declarations;
 };
 
 #endif /* KPRDOCUMENT_H */

@@ -22,18 +22,18 @@
 
 #include "kpresenter_export.h"
 
-class KPrSoundCollection;
+class SCSoundCollection;
 class KoShape;
 class KoEventAction;
-class KPrSoundCollection;
+class SCSoundCollection;
 
-class KPRESENTER_EXPORT KPrEventActionData
+class KPRESENTER_EXPORT SCEventActionData
 {
 public:
-    KPrEventActionData(KoShape * shape, KoEventAction * eventAction , KPrSoundCollection * soundCollection);
-    ~KPrEventActionData();
+    SCEventActionData(KoShape * shape, KoEventAction * eventAction , SCSoundCollection * soundCollection);
+    ~SCEventActionData();
 
-    KPrSoundCollection * soundCollection() const;
+    SCSoundCollection * soundCollection() const;
 
     /**
      * Get the shape

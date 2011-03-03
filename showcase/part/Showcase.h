@@ -17,21 +17,21 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KPRESENTER_H
-#define KPRESENTER_H
+#ifndef SHOWCASE_H
+#define SHOWCASE_H
 
 #define TextShape_SHAPEID "TextShapeID"
 
 #include <KoResourceManager.h>
 
-/// The kpresenter-global namespace for all KPresenter related things.
-namespace KPresenter
+/// The showcase-global namespace for all showcase related things.
+namespace Showcase
 {
-    /// Specifies the KPresenter specific resources that you can put and get from the KoResourceManager
-    enum KPresenterDocumentResources {
-        SoundCollection = KoDocumentResource::KPresenterStart + 1,
-        PageLayouts ///< of type KPrPageLayouts
+    /// Specifies the Showcase specific resources that you can put and get from the KoResourceManager
+    enum ShowcaseDocumentResources {
+        SoundCollection = KoDocumentResource::ShowcaseStart + 1,
+        PageLayouts ///< of type SCPageLayouts
     };
 }
 
-#endif // KPRESENTER_H
+#endif

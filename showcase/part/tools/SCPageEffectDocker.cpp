@@ -18,7 +18,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPageEffectDocker.h"
+#include "SCPageEffectDocker.h"
 
 #include <QVBoxLayout>
 #include <QComboBox>
@@ -33,33 +33,33 @@
 #include <KoPADocument.h>
 #include <KoShapeManager.h>
 #include "KoPAView.h"
-#include "KPrPage.h"
-#include "KPrPageApplicationData.h"
-#include "KPrViewModePreviewPageEffect.h"
-#include "pageeffects/KPrPageEffectRegistry.h"
-#include "pageeffects/KPrPageEffectFactory.h"
-#include "commands/KPrPageEffectSetCommand.h"
+#include "SCPage.h"
+#include "SCPageApplicationData.h"
+#include "SCViewModePreviewPageEffect.h"
+#include "pageeffects/SCPageEffectRegistry.h"
+#include "pageeffects/SCPageEffectFactory.h"
+#include "commands/SCPageEffectSetCommand.h"
 
-bool orderFactoryByName(const KPrPageEffectFactory * factory1, const KPrPageEffectFactory * factory2)
+bool orderFactoryByName(const SCPageEffectFactory * factory1, const SCPageEffectFactory * factory2)
 {
     return factory1->name() < factory2->name();
 }
 
-KPrPageEffectDocker::KPrPageEffectDocker(QWidget* parent, Qt::WindowFlags flags)
+SCPageEffectDocker::SCPageEffectDocker(QWidget* parent, Qt::WindowFlags flags)
 : QWidget(parent, flags)
 , m_view(0)
 , m_previewMode(0)
 {
-    setObjectName("KPrPageEffectDocker");
+    setObjectName("SCPageEffectDocker");
     QGridLayout* optionLayout = new QGridLayout();
     m_effectCombo = new QComboBox(this);
     m_effectCombo->addItem(i18n("No Effect"), QString(""));
 
-    QList<KPrPageEffectFactory*> factories = KPrPageEffectRegistry::instance()->values();
+    QList<SCPageEffectFactory*> factories = SCPageEffectRegistry::instance()->values();
 
     qSort(factories.begin(), factories.end(), orderFactoryByName);
 
-    foreach (KPrPageEffectFactory * factory, factories)
+    foreach (SCPageEffectFactory * factory, factories)
     {
         m_effectCombo->addItem(factory->name(), factory->id());
     }
@@ -94,7 +94,7 @@ KPrPageEffectDocker::KPrPageEffectDocker(QWidget* parent, Qt::WindowFlags flags)
     setLayout(layout);
 }
 
-void KPrPageEffectDocker::updateSubTypes(const KPrPageEffectFactory * factory)
+void SCPageEffectDocker::updateSubTypes(const SCPageEffectFactory * factory)
 {
     m_subTypeCombo->clear();
     if (factory) {
@@ -111,19 +111,19 @@ void KPrPageEffectDocker::updateSubTypes(const KPrPageEffectFactory * factory)
     }
 }
 
-void KPrPageEffectDocker::slotActivePageChanged()
+void SCPageEffectDocker::slotActivePageChanged()
 {
     if (!m_view)
         return;
 
     // get the active page
-    KPrPage * page = dynamic_cast<KPrPage*>(m_view->activePage());
+    SCPage * page = dynamic_cast<SCPage*>(m_view->activePage());
     if (page) {
         // set the combo box according to the page's effect
         this->setEnabled(true);
 
-        KPrPageApplicationData * pageData = KPrPage::pageData(page);
-        KPrPageEffect * pageEffect = pageData->pageEffect();
+        SCPageApplicationData * pageData = SCPage::pageData(page);
+        SCPageEffect * pageEffect = pageData->pageEffect();
         QString effectId = pageEffect ? pageEffect->id() : "";
 
         for (int i = 0; i < m_effectCombo->count(); ++i)
@@ -134,7 +134,7 @@ void KPrPageEffectDocker::slotActivePageChanged()
             }
         }
 
-        const KPrPageEffectFactory * factory = pageEffect ? KPrPageEffectRegistry::instance()->value(effectId) : 0;
+        const SCPageEffectFactory * factory = pageEffect ? SCPageEffectRegistry::instance()->value(effectId) : 0;
         updateSubTypes(factory);
 
         for (int i = 0; i < m_subTypeCombo->count(); ++i)
@@ -157,12 +157,12 @@ void KPrPageEffectDocker::slotActivePageChanged()
     }
 }
 
-void KPrPageEffectDocker::slotEffectChanged(int index)
+void SCPageEffectDocker::slotEffectChanged(int index)
 {
     // provide a preview of the chosen page effect
-    KPrPageEffect * pageEffect = 0;
+    SCPageEffect * pageEffect = 0;
     QString effectId = m_effectCombo->itemData(index).toString();
-    const KPrPageEffectFactory * factory = effectId != "" ? KPrPageEffectRegistry::instance()->value(effectId) : 0;
+    const SCPageEffectFactory * factory = effectId != "" ? SCPageEffectRegistry::instance()->value(effectId) : 0;
     updateSubTypes(factory);
     if (factory) {
         pageEffect = createPageEffect(factory, m_subTypeCombo->itemData(m_subTypeCombo->currentIndex()).toInt(), m_durationSpinBox->value());
@@ -172,49 +172,49 @@ void KPrPageEffectDocker::slotEffectChanged(int index)
         // The problem is that a undo is not yet reflected in the UI so it is possible to get the
         // same effect twice.
         // TODO
-        KPrPageApplicationData * pageData = KPrPage::pageData(m_view->activePage());
+        SCPageApplicationData * pageData = SCPage::pageData(m_view->activePage());
         if (pageData->pageEffect() == 0) {
             return;
         }
     }
 
-    m_view->kopaCanvas()->addCommand(new KPrPageEffectSetCommand(m_view->activePage(), pageEffect));
+    m_view->kopaCanvas()->addCommand(new SCPageEffectSetCommand(m_view->activePage(), pageEffect));
 
     setEffectPreview();
 }
 
-void KPrPageEffectDocker::slotSubTypeChanged(int index)
+void SCPageEffectDocker::slotSubTypeChanged(int index)
 {
     QString effectId = m_effectCombo->itemData(m_effectCombo->currentIndex()).toString();
-    const KPrPageEffectFactory * factory = KPrPageEffectRegistry::instance()->value(effectId);
-    KPrPageEffect * pageEffect(createPageEffect(factory, m_subTypeCombo->itemData(index).toInt(), m_durationSpinBox->value()));
+    const SCPageEffectFactory * factory = SCPageEffectRegistry::instance()->value(effectId);
+    SCPageEffect * pageEffect(createPageEffect(factory, m_subTypeCombo->itemData(index).toInt(), m_durationSpinBox->value()));
 
-    m_view->kopaCanvas()->addCommand(new KPrPageEffectSetCommand(m_view->activePage(), pageEffect));
+    m_view->kopaCanvas()->addCommand(new SCPageEffectSetCommand(m_view->activePage(), pageEffect));
 
     setEffectPreview();
 }
 
-void KPrPageEffectDocker::slotDurationChanged(double duration)
+void SCPageEffectDocker::slotDurationChanged(double duration)
 {
     QString effectId = m_effectCombo->itemData(m_effectCombo->currentIndex()).toString();
-    const KPrPageEffectFactory * factory = KPrPageEffectRegistry::instance()->value(effectId);
+    const SCPageEffectFactory * factory = SCPageEffectRegistry::instance()->value(effectId);
 
     if(factory) {
-        KPrPageEffect * pageEffect(createPageEffect(factory, m_subTypeCombo->itemData(m_subTypeCombo->currentIndex()).toInt(), duration));
+        SCPageEffect * pageEffect(createPageEffect(factory, m_subTypeCombo->itemData(m_subTypeCombo->currentIndex()).toInt(), duration));
 
-        m_view->kopaCanvas()->addCommand(new KPrPageEffectSetCommand(m_view->activePage(), pageEffect));
+        m_view->kopaCanvas()->addCommand(new SCPageEffectSetCommand(m_view->activePage(), pageEffect));
     }
 }
 
-KPrPageEffect * KPrPageEffectDocker::createPageEffect(const KPrPageEffectFactory * factory, int subType, double duration)
+SCPageEffect * SCPageEffectDocker::createPageEffect(const SCPageEffectFactory * factory, int subType, double duration)
 {
     Q_ASSERT(factory);
     // TODO get data from input
-    KPrPageEffectFactory::Properties properties(qRound(duration*1000), subType);
+    SCPageEffectFactory::Properties properties(qRound(duration*1000), subType);
     return factory->createPageEffect(properties);
 }
 
-void KPrPageEffectDocker::setView(KoPAViewBase* view)
+void SCPageEffectDocker::setView(KoPAViewBase* view)
 {
     Q_ASSERT(view);
     m_view = view;
@@ -228,25 +228,25 @@ void KPrPageEffectDocker::setView(KoPAViewBase* view)
         slotActivePageChanged();
 }
 
-void KPrPageEffectDocker::setEffectPreview()
+void SCPageEffectDocker::setEffectPreview()
 {
     QString effectId = m_effectCombo->itemData(m_effectCombo->currentIndex()).toString();
-    const KPrPageEffectFactory * factory = KPrPageEffectRegistry::instance()->value(effectId);
+    const SCPageEffectFactory * factory = SCPageEffectRegistry::instance()->value(effectId);
     if(factory){
-        KPrPageEffect * pageEffect(createPageEffect(factory, m_subTypeCombo->itemData(m_subTypeCombo->currentIndex()).toInt(), m_durationSpinBox->value()));
+        SCPageEffect * pageEffect(createPageEffect(factory, m_subTypeCombo->itemData(m_subTypeCombo->currentIndex()).toInt(), m_durationSpinBox->value()));
 
-        KPrPage* page = static_cast<KPrPage*>(m_view->activePage());
-        KPrPage* oldpage = static_cast<KPrPage*>(m_view->kopaDocument()->pageByNavigation(page, KoPageApp::PagePrevious));
+        SCPage* page = static_cast<SCPage*>(m_view->activePage());
+        SCPage* oldpage = static_cast<SCPage*>(m_view->kopaDocument()->pageByNavigation(page, KoPageApp::PagePrevious));
 
         if(!m_previewMode)
-            m_previewMode = new KPrViewModePreviewPageEffect(m_view, m_view->kopaCanvas());
+            m_previewMode = new SCViewModePreviewPageEffect(m_view, m_view->kopaCanvas());
 
         m_previewMode->setPageEffect(pageEffect, page, oldpage); // also stops old if not already stopped
         m_view->setViewMode(m_previewMode); // play the effect (it reverts to normal  when done)
     }
 }
 
-void KPrPageEffectDocker::cleanup(QObject* object)
+void SCPageEffectDocker::cleanup(QObject* object)
 {
     if(object != m_view->proxyObject)
         return;
@@ -254,4 +254,4 @@ void KPrPageEffectDocker::cleanup(QObject* object)
     m_view = 0;
 }
 
-#include "KPrPageEffectDocker.moc"
+#include "SCPageEffectDocker.moc"

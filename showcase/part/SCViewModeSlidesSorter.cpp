@@ -18,7 +18,7 @@
 * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrViewModeSlidesSorter.h"
+#include "SCViewModeSlidesSorter.h"
 
 #include <QtCore/QEvent>
 #include <QtGui/QPainter>
@@ -45,9 +45,9 @@
 
 #include <KDebug>
 
-KPrViewModeSlidesSorter::KPrViewModeSlidesSorter(KoPAView *view, KoPACanvas *canvas)
+SCViewModeSlidesSorter::SCViewModeSlidesSorter(KoPAView *view, KoPACanvas *canvas)
     : KoPAViewMode(view, canvas)
-    , m_slidesSorter(new KPrSlidesSorter(this, view->parentWidget()))
+    , m_slidesSorter(new SCSlidesSorter(this, view->parentWidget()))
     , m_iconSize(QSize(200, 200))
     , m_itemSize(QRect(0, 0, 0, 0))
     , m_sortNeeded(false)
@@ -59,15 +59,15 @@ KPrViewModeSlidesSorter::KPrViewModeSlidesSorter(KoPAView *view, KoPACanvas *can
     m_slidesSorter->setIconSize(m_iconSize);
 }
 
-KPrViewModeSlidesSorter::~KPrViewModeSlidesSorter()
+SCViewModeSlidesSorter::~SCViewModeSlidesSorter()
 {
 }
 
-void KPrViewModeSlidesSorter::paint(KoPACanvasBase* /*canvas*/, QPainter& /*painter*/, const QRectF &/*paintRect*/)
+void SCViewModeSlidesSorter::paint(KoPACanvasBase* /*canvas*/, QPainter& /*painter*/, const QRectF &/*paintRect*/)
 {
 }
 
-void KPrViewModeSlidesSorter::KPrSlidesSorter::paintEvent(QPaintEvent* event)
+void SCViewModeSlidesSorter::SCSlidesSorter::paintEvent(QPaintEvent* event)
 {
     event->accept();
     QListWidget::paintEvent(event);
@@ -100,60 +100,60 @@ void KPrViewModeSlidesSorter::KPrSlidesSorter::paintEvent(QPaintEvent* event)
 
 }
 
-void KPrViewModeSlidesSorter::paintEvent(KoPACanvas * canvas, QPaintEvent* event)
+void SCViewModeSlidesSorter::paintEvent(KoPACanvas * canvas, QPaintEvent* event)
 {
     Q_UNUSED(canvas);
     Q_UNUSED(event);
     Q_ASSERT(m_canvas == canvas);
 }
 
-void KPrViewModeSlidesSorter::tabletEvent(QTabletEvent *event, const QPointF &point)
+void SCViewModeSlidesSorter::tabletEvent(QTabletEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
-void KPrViewModeSlidesSorter::mousePressEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModeSlidesSorter::mousePressEvent(QMouseEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
-void KPrViewModeSlidesSorter::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModeSlidesSorter::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
-void KPrViewModeSlidesSorter::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModeSlidesSorter::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
-void KPrViewModeSlidesSorter::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModeSlidesSorter::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
-void KPrViewModeSlidesSorter::keyPressEvent(QKeyEvent *event)
+void SCViewModeSlidesSorter::keyPressEvent(QKeyEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void KPrViewModeSlidesSorter::keyReleaseEvent(QKeyEvent *event)
+void SCViewModeSlidesSorter::keyReleaseEvent(QKeyEvent *event)
 {
     Q_UNUSED(event);
 }
 
-void KPrViewModeSlidesSorter::wheelEvent(QWheelEvent *event, const QPointF &point)
+void SCViewModeSlidesSorter::wheelEvent(QWheelEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
-void KPrViewModeSlidesSorter::activate(KoPAViewMode *previousViewMode)
+void SCViewModeSlidesSorter::activate(KoPAViewMode *previousViewMode)
 {
     Q_UNUSED(previousViewMode);
     populate();
@@ -165,7 +165,7 @@ void KPrViewModeSlidesSorter::activate(KoPAViewMode *previousViewMode)
     m_slidesSorter->setFocus(Qt::ActiveWindowFocusReason);
 }
 
-void KPrViewModeSlidesSorter::deactivate()
+void SCViewModeSlidesSorter::deactivate()
 {
     m_slidesSorter->hide();
     // Give the ressources back to the canvas
@@ -179,29 +179,29 @@ void KPrViewModeSlidesSorter::deactivate()
     }
 }
 
-void KPrViewModeSlidesSorter::updateActivePage(KoPAPageBase *page)
+void SCViewModeSlidesSorter::updateActivePage(KoPAPageBase *page)
 {
     Q_UNUSED(page);
 }
 
-void KPrViewModeSlidesSorter::addShape(KoShape *shape)
+void SCViewModeSlidesSorter::addShape(KoShape *shape)
 {
     Q_UNUSED(shape);
 }
 
-void KPrViewModeSlidesSorter::removeShape(KoShape *shape)
+void SCViewModeSlidesSorter::removeShape(KoShape *shape)
 {
     Q_UNUSED(shape);
 }
 
-void KPrViewModeSlidesSorter::KPrSlidesSorter::startDrag (Qt::DropActions supportedActions)
+void SCViewModeSlidesSorter::SCSlidesSorter::startDrag (Qt::DropActions supportedActions)
 {
     Q_UNUSED(supportedActions);
     QAbstractItemView::startDrag(Qt::MoveAction);
 }
 
 
-void KPrViewModeSlidesSorter::KPrSlidesSorter::dragMoveEvent(QDragMoveEvent* ev)
+void SCViewModeSlidesSorter::SCSlidesSorter::dragMoveEvent(QDragMoveEvent* ev)
 {
     ev->accept();
     m_viewModeSlidesSorter->setDragingFlag();
@@ -209,7 +209,7 @@ void KPrViewModeSlidesSorter::KPrSlidesSorter::dragMoveEvent(QDragMoveEvent* ev)
     viewport()->update();
 }
 
-void KPrViewModeSlidesSorter::KPrSlidesSorter::dropEvent(QDropEvent* ev)
+void SCViewModeSlidesSorter::SCSlidesSorter::dropEvent(QDropEvent* ev)
 {
     m_viewModeSlidesSorter->setDragingFlag(false);
     ev->setDropAction(Qt::IgnoreAction);
@@ -246,7 +246,7 @@ void KPrViewModeSlidesSorter::KPrSlidesSorter::dropEvent(QDropEvent* ev)
     m_movingPageNumber = -1;
 }
 
-QMimeData* KPrViewModeSlidesSorter::KPrSlidesSorter::mimeData(const QList<QListWidgetItem*> items) const
+QMimeData* SCViewModeSlidesSorter::SCSlidesSorter::mimeData(const QList<QListWidgetItem*> items) const
 {
     QListWidgetItem* page = items.first();
 
@@ -258,12 +258,12 @@ QMimeData* KPrViewModeSlidesSorter::KPrSlidesSorter::mimeData(const QList<QListW
     return mimeData;
 }
 
-QStringList KPrViewModeSlidesSorter::KPrSlidesSorter::mimeTypes() const
+QStringList SCViewModeSlidesSorter::SCSlidesSorter::mimeTypes() const
 {
     return QStringList() << "application/x-koffice-sliderssorter";
 }
 
-int KPrViewModeSlidesSorter::KPrSlidesSorter::pageBefore(QPoint point)
+int SCViewModeSlidesSorter::SCSlidesSorter::pageBefore(QPoint point)
 {
     QListWidgetItem *item = itemAt(point);
     int pageBeforeNumber = -1;
@@ -279,7 +279,7 @@ int KPrViewModeSlidesSorter::KPrSlidesSorter::pageBefore(QPoint point)
     return pageBeforeNumber;
 }
 
-void KPrViewModeSlidesSorter::populate()
+void SCViewModeSlidesSorter::populate()
 {
     int currentPage = 0;
     m_slidesSorter->clear();
@@ -299,7 +299,7 @@ void KPrViewModeSlidesSorter::populate()
     }
 }
 
-void KPrViewModeSlidesSorter::movePage(int pageNumber, int pageAfterNumber)
+void SCViewModeSlidesSorter::movePage(int pageNumber, int pageAfterNumber)
 {
     KoPAPageBase * page = 0;
     KoPAPageBase * pageAfter = 0;
@@ -317,42 +317,42 @@ void KPrViewModeSlidesSorter::movePage(int pageNumber, int pageAfterNumber)
     }
 }
 
-int KPrViewModeSlidesSorter::pageCount() const
+int SCViewModeSlidesSorter::pageCount() const
 {
     return m_pageCount;
 }
 
-QSize KPrViewModeSlidesSorter::iconSize() const
+QSize SCViewModeSlidesSorter::iconSize() const
 {
     return m_iconSize;
 }
 
-QRect KPrViewModeSlidesSorter::itemSize() const
+QRect SCViewModeSlidesSorter::itemSize() const
 {
     return m_itemSize;
 }
 
-void KPrViewModeSlidesSorter::setItemSize(QRect size)
+void SCViewModeSlidesSorter::setItemSize(QRect size)
 {
     m_itemSize = size;
 }
 
-bool KPrViewModeSlidesSorter::isDraging() const
+bool SCViewModeSlidesSorter::isDraging() const
 {
     return m_dragingFlag;
 }
 
-void KPrViewModeSlidesSorter::setDragingFlag(bool flag)
+void SCViewModeSlidesSorter::setDragingFlag(bool flag)
 {
     m_dragingFlag = flag;
 }
 
-int KPrViewModeSlidesSorter::lastItemNumber() const
+int SCViewModeSlidesSorter::lastItemNumber() const
 {
     return m_lastItemNumber;
 }
 
-void KPrViewModeSlidesSorter::setLastItemNumber(int number)
+void SCViewModeSlidesSorter::setLastItemNumber(int number)
 {
     m_lastItemNumber = number;
 }

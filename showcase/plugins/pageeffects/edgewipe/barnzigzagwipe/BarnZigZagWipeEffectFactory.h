@@ -20,9 +20,9 @@
 #ifndef BARNZIGZAGWIPEEFFECTFACTORY_H
 #define BARNZIGZAGWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class BarnZigZagWipeEffectFactory : public KPrPageEffectFactory
+class BarnZigZagWipeEffectFactory : public SCPageEffectFactory
 {
 public:
     BarnZigZagWipeEffectFactory();

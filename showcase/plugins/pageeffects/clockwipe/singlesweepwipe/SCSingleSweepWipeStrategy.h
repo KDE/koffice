@@ -20,17 +20,17 @@
 #ifndef KPRSINGLESWEEPWIPESTRATEGY_H
 #define KPRSINGLESWEEPWIPESTRATEGY_H
 
-#include <KPrPageEffectStrategy.h>
+#include <SCPageEffectStrategy.h>
 
-class KPrSingleSweepWipeStrategy : public KPrPageEffectStrategy
+class SCSingleSweepWipeStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrSingleSweepWipeStrategy(double rotationX, double rotationY, int startAngle, int rotationAngle, int subType, const char * smilType, const char *smilSubType, bool reverse);
-    virtual ~KPrSingleSweepWipeStrategy();
+    SCSingleSweepWipeStrategy(double rotationX, double rotationY, int startAngle, int rotationAngle, int subType, const char * smilType, const char *smilSubType, bool reverse);
+    virtual ~SCSingleSweepWipeStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 
 private:
     double m_startAngle;

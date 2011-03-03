@@ -19,16 +19,16 @@
 */
 #include "Plugin.h"
 #include <kpluginfactory.h>
-#include <KPrPageEffectRegistry.h>
-#include "KPrSwapEffectFactory.h"
+#include <SCPageEffectRegistry.h>
+#include "SCSwapEffectFactory.h"
 
 K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
-K_EXPORT_PLUGIN(PluginFactory("KPrPageEffect"))
+K_EXPORT_PLUGIN(PluginFactory("SCPageEffect"))
 
 Plugin::Plugin(QObject *parent, const QVariantList &)
 : QObject(parent)
 {
-    KPrPageEffectRegistry::instance()->add(new KPrSwapEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCSwapEffectFactory());
 }
 
 #include "Plugin.moc"

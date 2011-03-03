@@ -20,9 +20,9 @@
 #ifndef DIAGONALWIPEEFFECTFACTORY_H
 #define DIAGONALWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class DiagonalWipeEffectFactory : public KPrPageEffectFactory
+class DiagonalWipeEffectFactory : public SCPageEffectFactory
 {
 public:
     DiagonalWipeEffectFactory();

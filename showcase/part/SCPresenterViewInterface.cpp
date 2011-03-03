@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresenterViewInterface.h"
+#include "SCPresenterViewInterface.h"
 
 #include <QtGui/QBoxLayout>
 #include <QtGui/QFrame>
@@ -40,12 +40,12 @@
 #include <KoShape.h>
 #include <KoTextShapeData.h>
 
-#include "KPrEndOfSlideShowPage.h"
-#include "KPrNotes.h"
-#include "KPrPage.h"
+#include "SCEndOfSlideShowPage.h"
+#include "SCNotes.h"
+#include "SCPage.h"
 
-KPrPresenterViewInterface::KPrPresenterViewInterface(const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent)
-    : KPrPresenterViewBaseInterface(pages, parent)
+SCPresenterViewInterface::SCPresenterViewInterface(const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent)
+    : SCPresenterViewBaseInterface(pages, parent)
     , m_canvas(canvas)
 {
     QVBoxLayout *vLayout = new QVBoxLayout;
@@ -82,13 +82,13 @@ KPrPresenterViewInterface::KPrPresenterViewInterface(const QList<KoPAPageBase *>
     setLayout(vLayout);
 }
 
-void KPrPresenterViewInterface::setActivePage(int pageIndex)
+void SCPresenterViewInterface::setActivePage(int pageIndex)
 {
-    KPrPresenterViewBaseInterface::setActivePage(pageIndex);
+    SCPresenterViewBaseInterface::setActivePage(pageIndex);
 
     Q_ASSERT(pageIndex >= 0 && pageIndex < m_pages.size());
     KoPAPageBase *page = m_pages.at(pageIndex);
-    int pageCount = dynamic_cast<KPrEndOfSlideShowPage *>(m_pages.last()) ?
+    int pageCount = dynamic_cast<SCEndOfSlideShowPage *>(m_pages.last()) ?
             m_pages.count() - 1 : m_pages.count();
 
     // set the thumbnail for next page preview
@@ -109,9 +109,9 @@ void KPrPresenterViewInterface::setActivePage(int pageIndex)
             i18n("End of Slide Show"));
 
     // set the presentation notes
-    KPrPage *prPage = dynamic_cast<KPrPage *>(page);
+    SCPage *prPage = dynamic_cast<SCPage *>(page);
     Q_ASSERT(prPage);
-    KPrNotes *pageNotes = prPage->pageNotes();
+    SCNotes *pageNotes = prPage->pageNotes();
     KoShape *textShape = pageNotes->textShape();
     KoTextShapeData *textShapeData = qobject_cast<KoTextShapeData *>(textShape->userData());
     Q_ASSERT(textShapeData);
@@ -119,7 +119,7 @@ void KPrPresenterViewInterface::setActivePage(int pageIndex)
     m_notesTextEdit->setDocument(document);
 }
 
-void KPrPresenterViewInterface::setPreviewSize(const QSize &size)
+void SCPresenterViewInterface::setPreviewSize(const QSize &size)
 {
     m_previewSize = size;
     m_canvas->setFixedSize(size);
@@ -136,5 +136,5 @@ void KPrPresenterViewInterface::setPreviewSize(const QSize &size)
     m_nextSlidePreview->setPixmap(nextPage->thumbnail(m_previewSize));
 }
 
-#include "KPrPresenterViewInterface.moc"
+#include "SCPresenterViewInterface.moc"
 

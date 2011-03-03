@@ -17,19 +17,19 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrBoxSnakesWipeStrategy.h"
-#include "KPrBoxSnakesWipeEffectFactory.h"
+#include "SCBoxSnakesWipeStrategy.h"
+#include "SCBoxSnakesWipeEffectFactory.h"
 
 static int getSubType(int horRepeat, int verRepeat, bool clockwise, bool reverse)
 {
     if (!reverse) {
-        if (horRepeat == 2 && verRepeat == 1) return clockwise ? KPrBoxSnakesWipeEffectFactory::TwoBoxBottomIn : KPrBoxSnakesWipeEffectFactory::TwoBoxTopIn;
-        if (horRepeat == 1 && verRepeat == 2) return clockwise ? KPrBoxSnakesWipeEffectFactory::TwoBoxLeftIn : KPrBoxSnakesWipeEffectFactory::TwoBoxRightIn;
-        return clockwise ? KPrBoxSnakesWipeEffectFactory::FourBoxHorizontalIn : KPrBoxSnakesWipeEffectFactory::FourBoxVerticalIn;
+        if (horRepeat == 2 && verRepeat == 1) return clockwise ? SCBoxSnakesWipeEffectFactory::TwoBoxBottomIn : SCBoxSnakesWipeEffectFactory::TwoBoxTopIn;
+        if (horRepeat == 1 && verRepeat == 2) return clockwise ? SCBoxSnakesWipeEffectFactory::TwoBoxLeftIn : SCBoxSnakesWipeEffectFactory::TwoBoxRightIn;
+        return clockwise ? SCBoxSnakesWipeEffectFactory::FourBoxHorizontalIn : SCBoxSnakesWipeEffectFactory::FourBoxVerticalIn;
     } else {
-        if (horRepeat == 2 && verRepeat == 1) return clockwise ? KPrBoxSnakesWipeEffectFactory::TwoBoxBottomOut : KPrBoxSnakesWipeEffectFactory::TwoBoxTopOut;
-        if (horRepeat == 1 && verRepeat == 2) return clockwise ? KPrBoxSnakesWipeEffectFactory::TwoBoxLeftOut : KPrBoxSnakesWipeEffectFactory::TwoBoxRightOut;
-        return clockwise ? KPrBoxSnakesWipeEffectFactory::FourBoxHorizontalOut : KPrBoxSnakesWipeEffectFactory::FourBoxVerticalOut;
+        if (horRepeat == 2 && verRepeat == 1) return clockwise ? SCBoxSnakesWipeEffectFactory::TwoBoxBottomOut : SCBoxSnakesWipeEffectFactory::TwoBoxTopOut;
+        if (horRepeat == 1 && verRepeat == 2) return clockwise ? SCBoxSnakesWipeEffectFactory::TwoBoxLeftOut : SCBoxSnakesWipeEffectFactory::TwoBoxRightOut;
+        return clockwise ? SCBoxSnakesWipeEffectFactory::FourBoxHorizontalOut : SCBoxSnakesWipeEffectFactory::FourBoxVerticalOut;
     }
 }
 
@@ -40,14 +40,14 @@ static const char * getSmilSubType(int horRepeat, int verRepeat, bool clockwise)
     return clockwise ? "fourBoxHorizontal" : "fourBoxVertical";
 }
 
-KPrBoxSnakesWipeStrategy::KPrBoxSnakesWipeStrategy(int horRepeat, int verRepeat, bool clockwise, bool reverse)
-    : KPrMatrixWipeStrategy(getSubType(horRepeat, verRepeat, clockwise, reverse), "spiralWipe", getSmilSubType(horRepeat, verRepeat, clockwise), reverse),
+SCBoxSnakesWipeStrategy::SCBoxSnakesWipeStrategy(int horRepeat, int verRepeat, bool clockwise, bool reverse)
+    : SCMatrixWipeStrategy(getSubType(horRepeat, verRepeat, clockwise, reverse), "spiralWipe", getSmilSubType(horRepeat, verRepeat, clockwise), reverse),
     m_horRepeat(horRepeat), m_verRepeat(verRepeat), m_clockwise(clockwise)
 {
     setNeedEvenSquares();
 }
 
-KPrBoxSnakesWipeStrategy::~KPrBoxSnakesWipeStrategy()
+SCBoxSnakesWipeStrategy::~SCBoxSnakesWipeStrategy()
 {
 }
 
@@ -58,7 +58,7 @@ static int getFirstLeg(bool clockwise, int verrepeat, int horrepeat) {
     return 0;
 }
 
-int KPrBoxSnakesWipeStrategy::squareIndex(int x, int y, int columns, int rows)
+int SCBoxSnakesWipeStrategy::squareIndex(int x, int y, int columns, int rows)
 {
     if (m_horRepeat == 2) {
         if (x >= columns / 2) {
@@ -149,7 +149,7 @@ int KPrBoxSnakesWipeStrategy::squareIndex(int x, int y, int columns, int rows)
     return reverse() ? columns * rows - passed - 1 : passed;
 }
 
-int KPrBoxSnakesWipeStrategy::maxIndex(int columns, int rows)
+int SCBoxSnakesWipeStrategy::maxIndex(int columns, int rows)
 {
     return columns * rows / m_horRepeat / m_verRepeat;
 }

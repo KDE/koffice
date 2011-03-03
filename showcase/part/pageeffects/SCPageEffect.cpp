@@ -18,16 +18,16 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPageEffect.h"
+#include "SCPageEffect.h"
 
 #include <QWidget>
 #include <QPainter>
 
 #include <KoXmlWriter.h>
 #include <KoGenStyle.h>
-#include "KPrPageEffectStrategy.h"
+#include "SCPageEffectStrategy.h"
 
-KPrPageEffect::KPrPageEffect(int duration, const QString & id, KPrPageEffectStrategy * strategy)
+SCPageEffect::SCPageEffect(int duration, const QString & id, SCPageEffectStrategy * strategy)
 : m_duration(duration)
 , m_id(id)
 , m_strategy(strategy)
@@ -35,23 +35,23 @@ KPrPageEffect::KPrPageEffect(int duration, const QString & id, KPrPageEffectStra
     Q_ASSERT(strategy);
 }
 
-KPrPageEffect::~KPrPageEffect()
+SCPageEffect::~SCPageEffect()
 {
 }
 
-void KPrPageEffect::setup(const Data &data, QTimeLine &timeLine)
+void SCPageEffect::setup(const Data &data, QTimeLine &timeLine)
 {
     timeLine.setDuration(m_duration);
     m_strategy->setup(data, timeLine);
     timeLine.setCurveShape(QTimeLine::LinearCurve);
 }
 
-bool KPrPageEffect::useGraphicsView()
+bool SCPageEffect::useGraphicsView()
 {
     return m_strategy->useGraphicsView();
 }
 
-bool KPrPageEffect::paint(QPainter &p, const Data &data)
+bool SCPageEffect::paint(QPainter &p, const Data &data)
 {
     int currPos = data.m_timeLine.frameForTime(data.m_currentTime);
 
@@ -71,39 +71,39 @@ bool KPrPageEffect::paint(QPainter &p, const Data &data)
     return !finish;
 }
 
-void KPrPageEffect::next(const Data &data)
+void SCPageEffect::next(const Data &data)
 {
     m_strategy->next(data);
 }
 
-void KPrPageEffect::finish(const Data &data)
+void SCPageEffect::finish(const Data &data)
 {
     m_strategy->finish(data);
 }
 
-int KPrPageEffect::duration() const
+int SCPageEffect::duration() const
 {
     return m_duration;
 }
 
-const QString & KPrPageEffect::id() const
+const QString & SCPageEffect::id() const
 {
     return m_id;
 }
 
-int KPrPageEffect::subType() const
+int SCPageEffect::subType() const
 {
     return m_strategy->subType();
 }
 
-void KPrPageEffect::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
+void SCPageEffect::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
 {
     qreal seconds = m_duration / qreal(1000.0);
     xmlWriter.addAttribute("smil:dur", seconds);
     return m_strategy->saveOdfSmilAttributes(xmlWriter);
 }
 
-void KPrPageEffect::saveOdfSmilAttributes(KoGenStyle & style) const
+void SCPageEffect::saveOdfSmilAttributes(KoGenStyle & style) const
 {
     QString speed("slow");
     if (m_duration < 2500) {
@@ -116,6 +116,6 @@ void KPrPageEffect::saveOdfSmilAttributes(KoGenStyle & style) const
     return m_strategy->saveOdfSmilAttributes(style);
 }
 
-void KPrPageEffect::loadOdf(const KoXmlElement & /*element*/)
+void SCPageEffect::loadOdf(const KoXmlElement & /*element*/)
 {
 }

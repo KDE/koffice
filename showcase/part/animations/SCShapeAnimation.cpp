@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrShapeAnimation.h"
-#include "KPrAnimationBase.h"
+#include "SCShapeAnimation.h"
+#include "SCAnimationBase.h"
 
 #include "KoXmlReader.h"
 #include "KoXmlWriter.h"
@@ -27,26 +27,26 @@
 #include "KoShapeSavingContext.h"
 
 #include "KoTextBlockData.h"
-#include "KPrTextBlockPaintStrategy.h"
+#include "SCTextBlockPaintStrategy.h"
 
-KPrShapeAnimation::KPrShapeAnimation(KoShape *shape, KoTextBlockData *textBlockData)
+SCShapeAnimation::SCShapeAnimation(KoShape *shape, KoTextBlockData *textBlockData)
 : m_shape(shape)
 , m_textBlockData(textBlockData)
 {
 }
 
-KPrShapeAnimation::~KPrShapeAnimation()
+SCShapeAnimation::~SCShapeAnimation()
 {
 }
 
-bool KPrShapeAnimation::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCShapeAnimation::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);
     return false;
 }
 
-bool KPrShapeAnimation::saveOdf(KoPASavingContext &paContext, bool startStep, bool startSubStep) const
+bool SCShapeAnimation::saveOdf(KoPASavingContext &paContext, bool startStep, bool startSubStep) const
 {
     KoXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:par");
@@ -64,7 +64,7 @@ bool KPrShapeAnimation::saveOdf(KoPASavingContext &paContext, bool startStep, bo
     writer.addAttribute("presentation:node-type", nodeType);
     for (int i=0;i < this->animationCount(); i++) {
         QAbstractAnimation * animation = this->animationAt(i);
-        if (KPrAnimationBase * a = dynamic_cast<KPrAnimationBase *>(animation)) {
+        if (SCAnimationBase * a = dynamic_cast<SCAnimationBase *>(animation)) {
             a->saveOdf(paContext);
         }
     }
@@ -72,40 +72,40 @@ bool KPrShapeAnimation::saveOdf(KoPASavingContext &paContext, bool startStep, bo
     return true;
 }
 
-KoShape * KPrShapeAnimation::shape() const
+KoShape * SCShapeAnimation::shape() const
 {
     return m_shape;
 }
 
-KoTextBlockData * KPrShapeAnimation::textBlockData() const
+KoTextBlockData * SCShapeAnimation::textBlockData() const
 {
     return m_textBlockData;
 }
 
-void KPrShapeAnimation::init(KPrAnimationCache *animationCache, int step)
+void SCShapeAnimation::init(SCAnimationCache *animationCache, int step)
 {
     if (m_textBlockData) {
-        m_textBlockData->setPaintStrategy(new KPrTextBlockPaintStrategy(m_textBlockData, animationCache));
+        m_textBlockData->setPaintStrategy(new SCTextBlockPaintStrategy(m_textBlockData, animationCache));
     }
     for (int i = 0; i < this->animationCount(); ++i) {
         QAbstractAnimation * animation = this->animationAt(i);
-        if (KPrAnimationBase * a = dynamic_cast<KPrAnimationBase *>(animation)) {
+        if (SCAnimationBase * a = dynamic_cast<SCAnimationBase *>(animation)) {
             a->init(animationCache, step);
         }
     }
 }
 
-bool KPrShapeAnimation::visibilityChange()
+bool SCShapeAnimation::visibilityChange()
 {
     return true;
 }
 
-bool KPrShapeAnimation::visible()
+bool SCShapeAnimation::visible()
 {
     return true;
 }
 
-void KPrShapeAnimation::deactivate()
+void SCShapeAnimation::deactivate()
 {
     if (m_textBlockData) {
         m_textBlockData->setPaintStrategy(new KoTextBlockPaintStrategyBase());
@@ -113,6 +113,6 @@ void KPrShapeAnimation::deactivate()
 }
 
 // we could have a loader that would put the data into the correct pos
-// KPrShapeAnimation would get all the data it would need
+// SCShapeAnimation would get all the data it would need
 // onClick would create a new animation
 // when putting data in it could check if the shape is the correct one if not create a parallel one (with previous)

@@ -33,14 +33,14 @@ class QGraphicsPixmapItem;
 class QGraphicsView;
 class KoXmlWriter;
 class KoGenStyle;
-class KPrPageEffectStrategy;
+class SCPageEffectStrategy;
 
 /**
  * This is the base class for all page effects.
  * It uses an internaly a QTimeLine for calulating the position. The timeline is
  * feed by the time of an external timeline.
  */
-class KPRESENTER_EXPORT KPrPageEffect
+class KPRESENTER_EXPORT SCPageEffect
 {
 public:
     /**
@@ -82,8 +82,8 @@ public:
      * @param duration The duration in milliseconds
      * @param id The id of the page effect
      */
-    KPrPageEffect(int duration, const QString & id, KPrPageEffectStrategy * strategy);
-    virtual ~KPrPageEffect();
+    SCPageEffect(int duration, const QString & id, SCPageEffectStrategy * strategy);
+    virtual ~SCPageEffect();
 
     virtual void setup(const Data &data, QTimeLine &timeLine);
     virtual bool useGraphicsView();
@@ -167,7 +167,7 @@ public:
 protected:
     int m_duration;
     QString m_id;
-    KPrPageEffectStrategy * m_strategy;
+    SCPageEffectStrategy * m_strategy;
 };
 
 #endif // KPRPAGEEFFECT2_H

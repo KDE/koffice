@@ -17,31 +17,31 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrDoubleSweepWipeEffectFactory.h"
+#include "SCDoubleSweepWipeEffectFactory.h"
 #include <klocale.h>
 
-#include "KPrDoubleSweepWipeStrategy.h"
+#include "SCDoubleSweepWipeStrategy.h"
 
 #define DoubleSweepWipeEffectId  "DoubleSweepWipeEffect"
 
-KPrDoubleSweepWipeEffectFactory::KPrDoubleSweepWipeEffectFactory()
-: KPrPageEffectFactory(DoubleSweepWipeEffectId, i18n("Double Sweep"))
+SCDoubleSweepWipeEffectFactory::SCDoubleSweepWipeEffectFactory()
+: SCPageEffectFactory(DoubleSweepWipeEffectId, i18n("Double Sweep"))
 {
-    addStrategy(new KPrDoubleSweepWipeStrategy(ParallelVertical, "doubleSweepWipe", "parallelVertical", false));
-    addStrategy(new KPrDoubleSweepWipeStrategy(ParallelDiagonal, "doubleSweepWipe", "parallelDiagonal", false));
-    addStrategy(new KPrDoubleSweepWipeStrategy(OppositeVertical, "doubleSweepWipe", "oppositeVertical", false));
-    addStrategy(new KPrDoubleSweepWipeStrategy(OppositeHorizontal, "doubleSweepWipe", "oppositeHorizontal", false));
-    addStrategy(new KPrDoubleSweepWipeStrategy(ParallelDiagonalTopLeft, "doubleSweepWipe", "parallelDiagonalTopLeft", false));
-    addStrategy(new KPrDoubleSweepWipeStrategy(ParallelDiagonalBottomLeft, "doubleSweepWipe", "parallelDiagonalBottomLeft", false));
-    addStrategy(new KPrDoubleSweepWipeStrategy(ParallelVerticalReverse, "doubleSweepWipe", "parallelVertical", true));
-    addStrategy(new KPrDoubleSweepWipeStrategy(ParallelDiagonalReverse, "doubleSweepWipe", "parallelDiagonal", true));
-    addStrategy(new KPrDoubleSweepWipeStrategy(OppositeVerticalReverse, "doubleSweepWipe", "oppositeVertical", true));
-    addStrategy(new KPrDoubleSweepWipeStrategy(OppositeHorizontalReverse, "doubleSweepWipe", "oppositeHorizontal", true));
-    addStrategy(new KPrDoubleSweepWipeStrategy(ParallelDiagonalTopLeftReverse, "doubleSweepWipe", "parallelDiagonalTopLeft", true));
-    addStrategy(new KPrDoubleSweepWipeStrategy(ParallelDiagonalBottomLeftReverse, "doubleSweepWipe", "parallelDiagonalBottomLeft", true));
+    addStrategy(new SCDoubleSweepWipeStrategy(ParallelVertical, "doubleSweepWipe", "parallelVertical", false));
+    addStrategy(new SCDoubleSweepWipeStrategy(ParallelDiagonal, "doubleSweepWipe", "parallelDiagonal", false));
+    addStrategy(new SCDoubleSweepWipeStrategy(OppositeVertical, "doubleSweepWipe", "oppositeVertical", false));
+    addStrategy(new SCDoubleSweepWipeStrategy(OppositeHorizontal, "doubleSweepWipe", "oppositeHorizontal", false));
+    addStrategy(new SCDoubleSweepWipeStrategy(ParallelDiagonalTopLeft, "doubleSweepWipe", "parallelDiagonalTopLeft", false));
+    addStrategy(new SCDoubleSweepWipeStrategy(ParallelDiagonalBottomLeft, "doubleSweepWipe", "parallelDiagonalBottomLeft", false));
+    addStrategy(new SCDoubleSweepWipeStrategy(ParallelVerticalReverse, "doubleSweepWipe", "parallelVertical", true));
+    addStrategy(new SCDoubleSweepWipeStrategy(ParallelDiagonalReverse, "doubleSweepWipe", "parallelDiagonal", true));
+    addStrategy(new SCDoubleSweepWipeStrategy(OppositeVerticalReverse, "doubleSweepWipe", "oppositeVertical", true));
+    addStrategy(new SCDoubleSweepWipeStrategy(OppositeHorizontalReverse, "doubleSweepWipe", "oppositeHorizontal", true));
+    addStrategy(new SCDoubleSweepWipeStrategy(ParallelDiagonalTopLeftReverse, "doubleSweepWipe", "parallelDiagonalTopLeft", true));
+    addStrategy(new SCDoubleSweepWipeStrategy(ParallelDiagonalBottomLeftReverse, "doubleSweepWipe", "parallelDiagonalBottomLeft", true));
 }
 
-KPrDoubleSweepWipeEffectFactory::~KPrDoubleSweepWipeEffectFactory()
+SCDoubleSweepWipeEffectFactory::~SCDoubleSweepWipeEffectFactory()
 {
 }
 
@@ -60,7 +60,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Parallel Diagonal Bottom Left Reverse")
 };
 
-QString KPrDoubleSweepWipeEffectFactory::subTypeName(int subType) const
+QString SCDoubleSweepWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

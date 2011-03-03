@@ -18,27 +18,27 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrBarWipeFromBottomStrategy.h"
-#include "KPrBarWipeEffectFactory.h"
+#include "SCBarWipeFromBottomStrategy.h"
+#include "SCBarWipeEffectFactory.h"
 
 #include <QWidget>
 #include <QPainter>
 
-KPrBarWipeFromBottomStrategy::KPrBarWipeFromBottomStrategy()
-: KPrPageEffectStrategy(KPrBarWipeEffectFactory::FromBottom, "barWipe", "topToBottom", true)
+SCBarWipeFromBottomStrategy::SCBarWipeFromBottomStrategy()
+: SCPageEffectStrategy(SCBarWipeEffectFactory::FromBottom, "barWipe", "topToBottom", true)
 {
 }
 
-KPrBarWipeFromBottomStrategy::~KPrBarWipeFromBottomStrategy()
+SCBarWipeFromBottomStrategy::~SCBarWipeFromBottomStrategy()
 {
 }
 
-void KPrBarWipeFromBottomStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCBarWipeFromBottomStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     timeLine.setFrameRange(0, data.m_widget->height());
 }
 
-void KPrBarWipeFromBottomStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCBarWipeFromBottomStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     int width = data.m_widget->width();
     int height = data.m_widget->height();
@@ -48,7 +48,7 @@ void KPrBarWipeFromBottomStrategy::paintStep(QPainter &p, int currPos, const KPr
     p.drawPixmap(QPoint(0, height - currPos), data.m_newPage, rect2);
 }
 
-void KPrBarWipeFromBottomStrategy::next(const KPrPageEffect::Data &data)
+void SCBarWipeFromBottomStrategy::next(const SCPageEffect::Data &data)
 {
     int lastPos = data.m_timeLine.frameForTime(data.m_lastTime);
     int currPos = data.m_timeLine.frameForTime(data.m_currentTime);

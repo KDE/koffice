@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrSoundEventActionWidget.h"
+#include "SCSoundEventActionWidget.h"
 
 #include <QComboBox>
 #include <QVBoxLayout>
@@ -27,13 +27,13 @@
 
 #include <KoEventActionAddCommand.h>
 #include <KoEventActionRemoveCommand.h>
-#include <KPrEventActionData.h>
-#include <KPrSoundCollection.h>
-#include <KPrSoundData.h>
-#include "KPrSoundEventAction.h"
+#include <SCEventActionData.h>
+#include <SCSoundCollection.h>
+#include <SCSoundData.h>
+#include "SCSoundEventAction.h"
 
-KPrSoundEventActionWidget::KPrSoundEventActionWidget(QWidget * parent)
-: KPrEventActionWidget(parent)
+SCSoundEventActionWidget::SCSoundEventActionWidget(QWidget * parent)
+: SCEventActionWidget(parent)
 , m_shape(0)
 , m_eventAction(0)
 , m_soundCollection(0)
@@ -48,17 +48,17 @@ KPrSoundEventActionWidget::KPrSoundEventActionWidget(QWidget * parent)
     updateCombo("");
 }
 
-KPrSoundEventActionWidget::~KPrSoundEventActionWidget()
+SCSoundEventActionWidget::~SCSoundEventActionWidget()
 {
 }
 
-void KPrSoundEventActionWidget::setData(KPrEventActionData * eventActionData)
+void SCSoundEventActionWidget::setData(SCEventActionData * eventActionData)
 {
     m_shape = eventActionData->shape();
     m_eventAction = eventActionData->eventAction();
     // TODO get the sound out ot the action
     QString title;
-    KPrSoundEventAction * eventAction = dynamic_cast<KPrSoundEventAction *>(m_eventAction);
+    SCSoundEventAction * eventAction = dynamic_cast<SCSoundEventAction *>(m_eventAction);
     if (eventAction) {
         title = eventAction->soundData()->title();
     }
@@ -67,21 +67,21 @@ void KPrSoundEventActionWidget::setData(KPrEventActionData * eventActionData)
     updateCombo(title);
 }
 
-void KPrSoundEventActionWidget::soundComboChanged()
+void SCSoundEventActionWidget::soundComboChanged()
 {
     if (! m_shape) {
         return;
     }
 
-    KPrSoundData * soundData = 0;
+    SCSoundData * soundData = 0;
     if (m_soundCombo->currentIndex() > 1) { // a previous sound was chosen
         // copy it rather then just point to it - so the refcount is updated
-        soundData = new KPrSoundData(*m_soundCollection->findSound(m_soundCombo->currentText()));
+        soundData = new SCSoundData(*m_soundCollection->findSound(m_soundCombo->currentText()));
     }
     else if (m_soundCombo->currentIndex() == 1) { // "Import..." was chosen
         KUrl url = KFileDialog::getOpenUrl();
         if (!url.isEmpty()) {
-            soundData = new KPrSoundData(m_soundCollection, url.toLocalFile());
+            soundData = new SCSoundData(m_soundCollection, url.toLocalFile());
             // TODO shouldn't that come from the sound collection
             // what if the user opens a already opened sound again?
             QFile *file = new QFile(url.toLocalFile());
@@ -98,7 +98,7 @@ void KPrSoundEventActionWidget::soundComboChanged()
     }
 
     if (soundData) {
-        KPrSoundEventAction * eventAction = new KPrSoundEventAction();
+        SCSoundEventAction * eventAction = new SCSoundEventAction();
         eventAction->setSoundData(soundData);
         m_eventAction = eventAction;
         new KoEventActionAddCommand(m_shape, eventAction, cmd);
@@ -109,7 +109,7 @@ void KPrSoundEventActionWidget::soundComboChanged()
     updateCombo(soundData ? soundData->title() : "");
 }
 
-void KPrSoundEventActionWidget::updateCombo(const QString & title)
+void SCSoundEventActionWidget::updateCombo(const QString & title)
 {
     m_soundCombo->blockSignals(true);
 
@@ -129,4 +129,4 @@ void KPrSoundEventActionWidget::updateCombo(const QString & title)
     m_soundCombo->blockSignals(false);
 }
 
-#include "KPrSoundEventActionWidget.moc"
+#include "SCSoundEventActionWidget.moc"

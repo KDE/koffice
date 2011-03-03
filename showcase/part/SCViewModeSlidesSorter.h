@@ -31,12 +31,12 @@ class KoPAView;
 class KoPACanvas;
 class KoPAPageBase;
 
-class KPrViewModeSlidesSorter : public KoPAViewMode
+class SCViewModeSlidesSorter : public KoPAViewMode
 {
     Q_OBJECT
 public:
-    KPrViewModeSlidesSorter(KoPAView *view, KoPACanvas *canvas);
-    ~KPrViewModeSlidesSorter();
+    SCViewModeSlidesSorter(KoPAView *view, KoPACanvas *canvas);
+    ~SCViewModeSlidesSorter();
 
     void paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect);
     void paintEvent(KoPACanvas * canvas, QPaintEvent* event);
@@ -60,7 +60,7 @@ public:
 protected:
 
     /**
-     * Fills the editor with presentation slides and ordored them in the KPrSlidesSorter
+     * Fills the editor with presentation slides and ordored them in the SCSlidesSorter
      */
     void populate();
 
@@ -130,12 +130,12 @@ protected:
 
     /**
      * This class manage the QListWidget itself.
-     * Use all the getters and setters of the KPrViewModeSlidesSorter.
+     * Use all the getters and setters of the SCViewModeSlidesSorter.
      * Most of the functions are Qt overrides to have the wished comportment.
      */
-    class KPrSlidesSorter : public QListWidget {
+    class SCSlidesSorter : public QListWidget {
         public:
-            KPrSlidesSorter (KPrViewModeSlidesSorter * viewModeSlidesSorter, QWidget * parent = 0)
+            SCSlidesSorter (SCViewModeSlidesSorter * viewModeSlidesSorter, QWidget * parent = 0)
                 : QListWidget(parent)
                 , m_viewModeSlidesSorter(viewModeSlidesSorter)
                 , m_movingPageNumber(-1)
@@ -144,7 +144,7 @@ protected:
                 setResizeMode(QListView::Adjust);
                 setDragDropMode(QAbstractItemView::DragDrop);
             };
-            ~KPrSlidesSorter(){};
+            ~SCSlidesSorter(){};
 
             virtual Qt::DropActions supportedDropActions() const
             {
@@ -166,12 +166,12 @@ protected:
             int pageBefore(QPoint point);
 
         private:
-            KPrViewModeSlidesSorter * m_viewModeSlidesSorter;
+            SCViewModeSlidesSorter * m_viewModeSlidesSorter;
             int m_movingPageNumber;
     };
 
 private:
-    KPrSlidesSorter * m_slidesSorter;
+    SCSlidesSorter * m_slidesSorter;
     QSize m_iconSize;
     QRect m_itemSize;
     bool m_sortNeeded;

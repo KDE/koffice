@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPageLayoutDocker.h"
+#include "SCPageLayoutDocker.h"
 
 #include <QListWidget>
 #include <QSize>
@@ -27,18 +27,18 @@
 
 #include <KoPADocument.h>
 
-#include "KPrPage.h"
-#include "KPresenter.h"
-#include "KPrView.h"
-#include "pagelayout/KPrPageLayout.h"
-#include "pagelayout/KPrPageLayouts.h"
+#include "SCPage.h"
+#include "Showcase.h"
+#include "SCView.h"
+#include "pagelayout/SCPageLayout.h"
+#include "pagelayout/SCPageLayouts.h"
 
 #include <kdebug.h>
 
 // this is needed so it can be used in a QVariant
-Q_DECLARE_METATYPE( KPrPageLayout* )
+Q_DECLARE_METATYPE( SCPageLayout* )
 
-KPrPageLayoutDocker::KPrPageLayoutDocker( QWidget* parent, Qt::WindowFlags flags )
+SCPageLayoutDocker::SCPageLayoutDocker( QWidget* parent, Qt::WindowFlags flags )
 : QDockWidget( parent, flags )
 , m_view( 0 )
 , m_previousItem( 0 )
@@ -60,7 +60,7 @@ KPrPageLayoutDocker::KPrPageLayoutDocker( QWidget* parent, Qt::WindowFlags flags
     setWidget( base );
 }
 
-void KPrPageLayoutDocker::setView( KPrView* view )
+void SCPageLayoutDocker::setView( SCView* view )
 {
     Q_ASSERT( view );
     m_view = view;
@@ -70,16 +70,16 @@ void KPrPageLayoutDocker::setView( KPrView* view )
     // remove the layouts from the last view
     m_layoutsView->clear();
 
-    KPrPageLayouts *layouts = view->kopaDocument()->resourceManager()->resource(KPresenter::PageLayouts).value<KPrPageLayouts*>();
+    SCPageLayouts *layouts = view->kopaDocument()->resourceManager()->resource(Showcase::PageLayouts).value<SCPageLayouts*>();
 
     Q_ASSERT( layouts );
 
-    const QList<KPrPageLayout *> layoutMap = layouts->layouts();
+    const QList<SCPageLayout *> layoutMap = layouts->layouts();
 
     // TODO add empty layout
 
-    foreach( KPrPageLayout * layout, layoutMap ) {
-        if ( layout->type() == KPrPageLayout::Page ) {
+    foreach( SCPageLayout * layout, layoutMap ) {
+        if ( layout->type() == SCPageLayout::Page ) {
             addLayout( layout );
         }
     }
@@ -92,15 +92,15 @@ void KPrPageLayoutDocker::setView( KPrView* view )
              this, SLOT( slotCurrentItemChanged( QListWidgetItem *, QListWidgetItem * ) ) );
 }
 
-void KPrPageLayoutDocker::slotActivePageChanged()
+void SCPageLayoutDocker::slotActivePageChanged()
 {
     Q_ASSERT( m_view );
 
-    KPrPage * page = dynamic_cast<KPrPage*>( m_view->activePage() );
+    SCPage * page = dynamic_cast<SCPage*>( m_view->activePage() );
     if ( page ) {
-        KPrPageLayout * layout = page->layout();
+        SCPageLayout * layout = page->layout();
         QListWidgetItem * item = m_layout2item.value( layout, 0 );
-        if ( item == 0 && layout != 0 && layout->type() == KPrPageLayout::Page ) {
+        if ( item == 0 && layout != 0 && layout->type() == SCPageLayout::Page ) {
             item = addLayout( layout );
         }
 
@@ -121,7 +121,7 @@ void KPrPageLayoutDocker::slotActivePageChanged()
     }
 }
 
-void KPrPageLayoutDocker::slotItemPressed( QListWidgetItem * item )
+void SCPageLayoutDocker::slotItemPressed( QListWidgetItem * item )
 {
     if ( item == m_previousItem ) {
         applyLayout( item );
@@ -131,14 +131,14 @@ void KPrPageLayoutDocker::slotItemPressed( QListWidgetItem * item )
     }
 }
 
-void KPrPageLayoutDocker::slotCurrentItemChanged( QListWidgetItem * item, QListWidgetItem * previous )
+void SCPageLayoutDocker::slotCurrentItemChanged( QListWidgetItem * item, QListWidgetItem * previous )
 {
     applyLayout( item );
     m_previousItem = previous;
 }
 
 
-QListWidgetItem * KPrPageLayoutDocker::addLayout( KPrPageLayout * layout )
+QListWidgetItem * SCPageLayoutDocker::addLayout( SCPageLayout * layout )
 {
     QListWidgetItem * item = new QListWidgetItem( QIcon( layout->thumbnail() ), "", m_layoutsView );
     item->setData( Qt::UserRole, QVariant::fromValue( layout ) );
@@ -146,16 +146,16 @@ QListWidgetItem * KPrPageLayoutDocker::addLayout( KPrPageLayout * layout )
     return item;
 }
 
-void KPrPageLayoutDocker::applyLayout( QListWidgetItem * item )
+void SCPageLayoutDocker::applyLayout( QListWidgetItem * item )
 {
     // don't crash when all items are replaced
     if ( item ) {
         Q_ASSERT( m_view );
-        KPrPage * page = dynamic_cast<KPrPage*>( m_view->activePage() );
+        SCPage * page = dynamic_cast<SCPage*>( m_view->activePage() );
         if ( page ) {
-            page->setLayout( item->data( Qt::UserRole ).value<KPrPageLayout *>(), m_view->kopaDocument() );
+            page->setLayout( item->data( Qt::UserRole ).value<SCPageLayout *>(), m_view->kopaDocument() );
         }
     }
 }
 
-#include "KPrPageLayoutDocker.moc"
+#include "SCPageLayoutDocker.moc"

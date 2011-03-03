@@ -39,12 +39,12 @@ class KoTextBlockData;
  * about any needed attributes (position, visibility etc) of the animated objects
  * (shapes or paragraphs)
  **/
-class KPrAnimationCache
+class SCAnimationCache
 {
 public:
-    KPrAnimationCache();
+    SCAnimationCache();
 
-    virtual ~KPrAnimationCache();
+    virtual ~SCAnimationCache();
 
     /**
      * Tells if a value has ever been set

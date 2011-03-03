@@ -20,17 +20,17 @@
 #ifndef KPRCLOCKWIPESTRATEGY_H
 #define KPRCLOCKWIPESTRATEGY_H
 
-#include <KPrPageEffectStrategy.h>
+#include <SCPageEffectStrategy.h>
 
-class KPrClockWipeStrategy : public KPrPageEffectStrategy
+class SCClockWipeStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrClockWipeStrategy(int startAngle, int bladeCount, int subType, const char * smilType, const char *smilSubType, bool reverse);
-    virtual ~KPrClockWipeStrategy();
+    SCClockWipeStrategy(int startAngle, int bladeCount, int subType, const char * smilType, const char *smilSubType, bool reverse);
+    virtual ~SCClockWipeStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 
 private:
     double m_startAngle;

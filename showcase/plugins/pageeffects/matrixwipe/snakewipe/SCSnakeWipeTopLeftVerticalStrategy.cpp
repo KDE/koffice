@@ -17,19 +17,19 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSnakeWipeTopLeftVerticalStrategy.h"
-#include "KPrSnakeWipeEffectFactory.h"
+#include "SCSnakeWipeTopLeftVerticalStrategy.h"
+#include "SCSnakeWipeEffectFactory.h"
 
-KPrSnakeWipeTopLeftVerticalStrategy::KPrSnakeWipeTopLeftVerticalStrategy()
-    : KPrMatrixWipeStrategy(KPrSnakeWipeEffectFactory::FromLeft, "snakeWipe", "topLeftVertical", false, true)
+SCSnakeWipeTopLeftVerticalStrategy::SCSnakeWipeTopLeftVerticalStrategy()
+    : SCMatrixWipeStrategy(SCSnakeWipeEffectFactory::FromLeft, "snakeWipe", "topLeftVertical", false, true)
 {
 }
 
-KPrSnakeWipeTopLeftVerticalStrategy::~KPrSnakeWipeTopLeftVerticalStrategy()
+SCSnakeWipeTopLeftVerticalStrategy::~SCSnakeWipeTopLeftVerticalStrategy()
 {
 }
 
-int KPrSnakeWipeTopLeftVerticalStrategy::squareIndex(int x, int y, int columns, int rows)
+int SCSnakeWipeTopLeftVerticalStrategy::squareIndex(int x, int y, int columns, int rows)
 {
     Q_UNUSED(columns);
     int Y = y;
@@ -37,7 +37,7 @@ int KPrSnakeWipeTopLeftVerticalStrategy::squareIndex(int x, int y, int columns, 
     return Y + x * rows;
 }
 
-KPrMatrixWipeStrategy::Direction KPrSnakeWipeTopLeftVerticalStrategy::squareDirection(int x, int y, int columns, int rows)
+SCMatrixWipeStrategy::Direction SCSnakeWipeTopLeftVerticalStrategy::squareDirection(int x, int y, int columns, int rows)
 {
     Q_UNUSED(y);
     Q_UNUSED(columns);
@@ -46,7 +46,7 @@ KPrMatrixWipeStrategy::Direction KPrSnakeWipeTopLeftVerticalStrategy::squareDire
     else return TopToBottom;
 }
 
-int KPrSnakeWipeTopLeftVerticalStrategy::maxIndex(int columns, int rows)
+int SCSnakeWipeTopLeftVerticalStrategy::maxIndex(int columns, int rows)
 {
     return columns * rows;
 }

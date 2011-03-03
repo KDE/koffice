@@ -20,7 +20,7 @@
 #ifndef KPRPRESENTERVIEWSLIDESINTERFACE
 #define KPRPRESENTERVIEWSLIDESINTERFACE
 
-#include "KPrPresenterViewBaseInterface.h"
+#include "SCPresenterViewBaseInterface.h"
 
 class KoPAPageBase;
 class KoPAPageThumbnailModel;
@@ -29,14 +29,14 @@ class QListView;
 class QModelIndex;
 
 /**
- * KPrPresenterViewSlidesInterface
+ * SCPresenterViewSlidesInterface
  * This widget shows all slides in the presentation
  */
-class KPrPresenterViewSlidesInterface : public KPrPresenterViewBaseInterface
+class SCPresenterViewSlidesInterface : public SCPresenterViewBaseInterface
 {
     Q_OBJECT
 public:
-    explicit KPrPresenterViewSlidesInterface(const QList<KoPAPageBase *> &pages, QWidget *parent = 0);
+    explicit SCPresenterViewSlidesInterface(const QList<KoPAPageBase *> &pages, QWidget *parent = 0);
 
 signals:
     void selectedPageChanged(int index, bool doubleClicked);

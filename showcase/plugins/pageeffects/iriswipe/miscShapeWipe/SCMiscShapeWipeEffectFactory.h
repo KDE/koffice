@@ -20,13 +20,13 @@
 #ifndef KPRMISCSHAPEWIPEEFFECTFACTORY_H
 #define KPRMISCSHAPEWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class KPrMiscShapeWipeEffectFactory : public KPrPageEffectFactory
+class SCMiscShapeWipeEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrMiscShapeWipeEffectFactory();
-    virtual ~KPrMiscShapeWipeEffectFactory();
+    SCMiscShapeWipeEffectFactory();
+    virtual ~SCMiscShapeWipeEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

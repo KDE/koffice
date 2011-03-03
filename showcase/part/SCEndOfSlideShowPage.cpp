@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrEndOfSlideShowPage.h"
+#include "SCEndOfSlideShowPage.h"
 
 #include <klocale.h>
 #include <KoShapeLayer.h>
@@ -28,13 +28,13 @@
 #include <QTextCursor>
 #include <QTextDocument>
 
-#include "KPrDocument.h"
-#include "KPrMasterPage.h"
+#include "SCDocument.h"
+#include "SCMasterPage.h"
 
 #include <kdebug.h>
 
-KPrEndOfSlideShowPage::KPrEndOfSlideShowPage(const QRectF & screenRect, KPrDocument * document)
-: KPrPage(new KPrMasterPage(), document)
+SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF & screenRect, SCDocument * document)
+: SCPage(new SCMasterPage(), document)
 {
     qreal ratio = screenRect.width() / screenRect.height();
     KoPageLayout pageLayout;
@@ -72,7 +72,7 @@ KPrEndOfSlideShowPage::KPrEndOfSlideShowPage(const QRectF & screenRect, KPrDocum
     }
 }
 
-KPrEndOfSlideShowPage::~KPrEndOfSlideShowPage()
+SCEndOfSlideShowPage::~SCEndOfSlideShowPage()
 {
     delete masterPage();
 }

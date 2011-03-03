@@ -20,17 +20,17 @@
 #ifndef KPRANIMATEMOTION_H
 #define KPRANIMATEMOTION_H
 
-#include "KPrAnimationBase.h"
+#include "SCAnimationBase.h"
 
-class KPrAnimateMotion : public KPrAnimationBase
+class SCAnimateMotion : public SCAnimationBase
 {
 public:
-    KPrAnimateMotion(KPrShapeAnimation *shapeAnimation);
-    virtual ~KPrAnimateMotion();
+    SCAnimateMotion(SCShapeAnimation *shapeAnimation);
+    virtual ~SCAnimateMotion();
 
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
     virtual bool saveOdf(KoPASavingContext & paContext) const;
-    virtual void init(KPrAnimationCache *animationCache, int step);
+    virtual void init(SCAnimationCache *animationCache, int step);
 
 protected:
     virtual void next(int currentTime);

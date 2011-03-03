@@ -17,31 +17,31 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrWaterfallWipeEffectFactory.h"
+#include "SCWaterfallWipeEffectFactory.h"
 
 #include <klocale.h>
 
-#include "KPrWaterfallWipeTopLeftStrategy.h"
-#include "KPrWaterfallWipeTopRightStrategy.h"
-#include "KPrWaterfallWipeBottomLeftStrategy.h"
-#include "KPrWaterfallWipeBottomRightStrategy.h"
+#include "SCWaterfallWipeTopLeftStrategy.h"
+#include "SCWaterfallWipeTopRightStrategy.h"
+#include "SCWaterfallWipeBottomLeftStrategy.h"
+#include "SCWaterfallWipeBottomRightStrategy.h"
 
 #define WaterfallWipeEffectId "WaterfallWipeEffect"
 
-KPrWaterfallWipeEffectFactory::KPrWaterfallWipeEffectFactory()
-    : KPrPageEffectFactory(WaterfallWipeEffectId, i18n("Waterfall"))
+SCWaterfallWipeEffectFactory::SCWaterfallWipeEffectFactory()
+    : SCPageEffectFactory(WaterfallWipeEffectId, i18n("Waterfall"))
 {
-    addStrategy(new KPrWaterfallWipeTopLeftStrategy(KPrMatrixWipeStrategy::TopToBottom));
-    addStrategy(new KPrWaterfallWipeTopLeftStrategy(KPrMatrixWipeStrategy::LeftToRight));
-    addStrategy(new KPrWaterfallWipeTopRightStrategy(KPrMatrixWipeStrategy::TopToBottom));
-    addStrategy(new KPrWaterfallWipeTopRightStrategy(KPrMatrixWipeStrategy::RightToLeft));
-    addStrategy(new KPrWaterfallWipeBottomLeftStrategy(KPrMatrixWipeStrategy::BottomToTop));
-    addStrategy(new KPrWaterfallWipeBottomLeftStrategy(KPrMatrixWipeStrategy::LeftToRight));
-    addStrategy(new KPrWaterfallWipeBottomRightStrategy(KPrMatrixWipeStrategy::BottomToTop));
-    addStrategy(new KPrWaterfallWipeBottomRightStrategy(KPrMatrixWipeStrategy::RightToLeft));
+    addStrategy(new SCWaterfallWipeTopLeftStrategy(SCMatrixWipeStrategy::TopToBottom));
+    addStrategy(new SCWaterfallWipeTopLeftStrategy(SCMatrixWipeStrategy::LeftToRight));
+    addStrategy(new SCWaterfallWipeTopRightStrategy(SCMatrixWipeStrategy::TopToBottom));
+    addStrategy(new SCWaterfallWipeTopRightStrategy(SCMatrixWipeStrategy::RightToLeft));
+    addStrategy(new SCWaterfallWipeBottomLeftStrategy(SCMatrixWipeStrategy::BottomToTop));
+    addStrategy(new SCWaterfallWipeBottomLeftStrategy(SCMatrixWipeStrategy::LeftToRight));
+    addStrategy(new SCWaterfallWipeBottomRightStrategy(SCMatrixWipeStrategy::BottomToTop));
+    addStrategy(new SCWaterfallWipeBottomRightStrategy(SCMatrixWipeStrategy::RightToLeft));
 }
 
-KPrWaterfallWipeEffectFactory::~KPrWaterfallWipeEffectFactory()
+SCWaterfallWipeEffectFactory::~SCWaterfallWipeEffectFactory()
 {
 }
 
@@ -56,7 +56,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Bottom Right Horizontal")
 };
 
-QString KPrWaterfallWipeEffectFactory::subTypeName(int subType) const
+QString SCWaterfallWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

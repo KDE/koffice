@@ -24,15 +24,15 @@
 
 #include <QPrinter>
 
-class KPrView;
+class SCView;
 class KoPAPageBase;
 
-class KPrPdfPrintJob : public KoPAPrintJob
+class SCPdfPrintJob : public KoPAPrintJob
 {
     Q_OBJECT
 public:
-    KPrPdfPrintJob(KPrView *view);
-    virtual ~KPrPdfPrintJob();
+    SCPdfPrintJob(SCView *view);
+    virtual ~SCPdfPrintJob();
 
 public slots:
     virtual void startPrinting(RemovePolicy removePolicy = DoNotDelete);

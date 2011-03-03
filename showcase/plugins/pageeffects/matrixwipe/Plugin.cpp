@@ -19,25 +19,25 @@
  */
 #include "Plugin.h"
 #include <kpluginfactory.h>
-#include <KPrPageEffectRegistry.h>
+#include <SCPageEffectRegistry.h>
 
-#include "snakewipe/KPrSnakeWipeEffectFactory.h"
-#include "spiralwipe/KPrSpiralWipeEffectFactory.h"
-#include "parallelsnakes/KPrParallelSnakesWipeEffectFactory.h"
-#include "boxsnakes/KPrBoxSnakesWipeEffectFactory.h"
-#include "waterfallwipe/KPrWaterfallWipeEffectFactory.h"
+#include "snakewipe/SCSnakeWipeEffectFactory.h"
+#include "spiralwipe/SCSpiralWipeEffectFactory.h"
+#include "parallelsnakes/SCParallelSnakesWipeEffectFactory.h"
+#include "boxsnakes/SCBoxSnakesWipeEffectFactory.h"
+#include "waterfallwipe/SCWaterfallWipeEffectFactory.h"
 
 K_PLUGIN_FACTORY(PluginFactory, registerPlugin<Plugin>();)
-K_EXPORT_PLUGIN(PluginFactory("KPrPageEffect"))
+K_EXPORT_PLUGIN(PluginFactory("SCPageEffect"))
 
 Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)
 {
-    KPrPageEffectRegistry::instance()->add(new KPrSnakeWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrSpiralWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrParallelSnakesWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrBoxSnakesWipeEffectFactory());
-    KPrPageEffectRegistry::instance()->add(new KPrWaterfallWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCSnakeWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCSpiralWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCParallelSnakesWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCBoxSnakesWipeEffectFactory());
+    SCPageEffectRegistry::instance()->add(new SCWaterfallWipeEffectFactory());
 }
 
 #include "Plugin.moc"

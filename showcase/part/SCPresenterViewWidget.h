@@ -28,19 +28,19 @@ class KoPACanvas;
 class KoPAPageBase;
 class KoPAPageThumbnailModel;
 
-class KPrViewModePresentation;
+class SCViewModePresentation;
 
-class KPrPresenterViewBaseInterface;
-class KPrPresenterViewInterface;
-class KPrPresenterViewSlidesInterface;
-class KPrPresenterViewToolWidget;
+class SCPresenterViewBaseInterface;
+class SCPresenterViewInterface;
+class SCPresenterViewSlidesInterface;
+class SCPresenterViewToolWidget;
 
-class KPrPresenterViewWidget : public QWidget
+class SCPresenterViewWidget : public QWidget
 {
     Q_OBJECT
 public:
-    KPrPresenterViewWidget(KPrViewModePresentation *viewMode, const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent=0);
-    ~KPrPresenterViewWidget();
+    SCPresenterViewWidget(SCViewModePresentation *viewMode, const QList<KoPAPageBase *> &pages, KoPACanvas *canvas, QWidget *parent=0);
+    ~SCPresenterViewWidget();
     void setActivePage(KoPAPageBase *page);
     void setActivePage(int pageIndex);
     void updateWidget(const QSize &widgetSize, const QSize &canvasSize);
@@ -52,16 +52,16 @@ private slots:
     void requestChangePage(int index, bool enableMainView);
 
 private:
-    KPrViewModePresentation *m_viewMode;
+    SCViewModePresentation *m_viewMode;
     QList<KoPAPageBase *> m_pages;
     KoPACanvas *m_canvas;
 
     QStackedLayout *m_stackedLayout;
 
-    KPrPresenterViewInterface *m_mainWidget;
-    KPrPresenterViewSlidesInterface *m_slidesWidget;
-    KPrPresenterViewBaseInterface *m_activeWidget;
-    KPrPresenterViewToolWidget *m_toolWidget;
+    SCPresenterViewInterface *m_mainWidget;
+    SCPresenterViewSlidesInterface *m_slidesWidget;
+    SCPresenterViewBaseInterface *m_activeWidget;
+    SCPresenterViewToolWidget *m_toolWidget;
 };
 
 #endif

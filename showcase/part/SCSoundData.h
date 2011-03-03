@@ -24,19 +24,19 @@
 #include <KUrl>
 #include "kpresenter_export.h"
 
-class KPrSoundCollection;
+class SCSoundCollection;
 class QIODevice;
 
 /**
  * Class meant to hold sound data so it can be shared between shapes.
- * In KPresenter shapes can have click actions attached to them. One such action is playing sound.
+ * In Showcase shapes can have click actions attached to them. One such action is playing sound.
  * The binary data for those sounds are saved in this class.
  */
 
 /* 
  * TODO needs a file for playing, store it as a tmp file
  */
-class KPRESENTER_EXPORT KPrSoundData {
+class KPRESENTER_EXPORT SCSoundData {
 public:
     /**
      * The storage location
@@ -52,15 +52,15 @@ public:
      * @param collection the sound collection which will do the loading of the sound data for us.
      * @param href the url of the sound in the store.
      */
-    explicit KPrSoundData(KPrSoundCollection *collection, QString href="");
+    explicit SCSoundData(SCSoundCollection *collection, QString href="");
 
     /**
      * copy constructor using ref-counting.
      * @param soundData the other one.
      */
-    KPrSoundData(const KPrSoundData &soundData);
+    SCSoundData(const SCSoundData &soundData);
     /// destructor
-    ~KPrSoundData();
+    ~SCSoundData();
 
     /**
      * Tags this sound to be saved and returns the href for reference in the xml.
@@ -100,14 +100,14 @@ public:
     bool isTaggedForSaving();
 
 
-    bool operator==(const KPrSoundData &other) {
+    bool operator==(const SCSoundData &other) {
         return other.d == d;
     }
 
     /**
      * Get the collection used
      */
-    KPrSoundCollection * soundCollection();
+    SCSoundCollection * soundCollection();
 
 private:
     class Private;

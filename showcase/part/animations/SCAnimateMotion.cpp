@@ -17,43 +17,43 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimateMotion.h"
+#include "SCAnimateMotion.h"
 
-#include "KPrAnimationCache.h"
+#include "SCAnimationCache.h"
 
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoXmlReader.h>
 
-KPrAnimateMotion::KPrAnimateMotion(KPrShapeAnimation *shapeAnimation)
-: KPrAnimationBase(shapeAnimation)
+SCAnimateMotion::SCAnimateMotion(SCShapeAnimation *shapeAnimation)
+: SCAnimationBase(shapeAnimation)
 {
 }
 
-KPrAnimateMotion::~KPrAnimateMotion()
+SCAnimateMotion::~SCAnimateMotion()
 {
 }
 
-bool KPrAnimateMotion::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool SCAnimateMotion::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
-    KPrAnimationBase::loadOdf(element, context);
+    SCAnimationBase::loadOdf(element, context);
     return false;
 }
 
-bool KPrAnimateMotion::saveOdf(KoPASavingContext & paContext) const
+bool SCAnimateMotion::saveOdf(KoPASavingContext & paContext) const
 {
     Q_UNUSED(paContext);
     return true;
 }
 
 
-void KPrAnimateMotion::init(KPrAnimationCache *animationCache, int step)
+void SCAnimateMotion::init(SCAnimationCache *animationCache, int step)
 {
     Q_UNUSED(animationCache);
     Q_UNUSED(step);
 }
 
-void KPrAnimateMotion::next(int currentTime)
+void SCAnimateMotion::next(int currentTime)
 {
     Q_UNUSED(currentTime);
 }

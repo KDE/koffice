@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresenterViewSlidesInterface.h"
+#include "SCPresenterViewSlidesInterface.h"
 
 #include <KoPAPageBase.h>
 #include <KoPAPageThumbnailModel.h>
@@ -25,8 +25,8 @@
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QListView>
 
-KPrPresenterViewSlidesInterface::KPrPresenterViewSlidesInterface(const QList<KoPAPageBase *> &pages, QWidget *parent)
-    : KPrPresenterViewBaseInterface(pages, parent)
+SCPresenterViewSlidesInterface::SCPresenterViewSlidesInterface(const QList<KoPAPageBase *> &pages, QWidget *parent)
+    : SCPresenterViewBaseInterface(pages, parent)
 {
     QVBoxLayout *vLayout = new QVBoxLayout;
 
@@ -52,15 +52,15 @@ KPrPresenterViewSlidesInterface::KPrPresenterViewSlidesInterface(const QList<KoP
     setLayout(vLayout);
 }
 
-void KPrPresenterViewSlidesInterface::itemClicked(const QModelIndex &index)
+void SCPresenterViewSlidesInterface::itemClicked(const QModelIndex &index)
 {
     emit selectedPageChanged(index.row(), false);
 }
 
-void KPrPresenterViewSlidesInterface::itemDoubleClicked(const QModelIndex &index)
+void SCPresenterViewSlidesInterface::itemDoubleClicked(const QModelIndex &index)
 {
     emit selectedPageChanged(index.row(), true);
 }
 
-#include "KPrPresenterViewSlidesInterface.moc"
+#include "SCPresenterViewSlidesInterface.moc"
 

@@ -22,39 +22,39 @@
 
 #include <KoPAPage.h>
 
-#include "KPrPageData.h"
-#include "KPrDeclarations.h"
+#include "SCPageData.h"
+#include "SCDeclarations.h"
 
 #include "kpresenter_export.h"
 
 class KoPADocument;
-class KPrDocument;
-class KPrPageApplicationData;
-class KPrNotes;
-class KPrPageLayout;
-class KPrDeclarations;
+class SCDocument;
+class SCPageApplicationData;
+class SCNotes;
+class SCPageLayout;
+class SCDeclarations;
 
-class KPRESENTER_EXPORT KPrPage : public KoPAPage, public KPrPageData
+class KPRESENTER_EXPORT SCPage : public KoPAPage, public SCPageData
 {
 public:
-    KPrPage(KoPAMasterPage * masterPage, KPrDocument * document);
-    virtual ~KPrPage();
+    SCPage(KoPAMasterPage * masterPage, SCDocument * document);
+    virtual ~SCPage();
 
     /**
      * Get the page data
      *
-     * This method is static that you don't need to cast the page to a KPrPage first.
-     * As every KPrPage needs to have a KPrPageApplicationData this call fails with a
+     * This method is static that you don't need to cast the page to a SCPage first.
+     * As every SCPage needs to have a SCPageApplicationData this call fails with a
      * assertion when it is not possible to retrieve.
      */
-    static KPrPageApplicationData * pageData(KoPAPageBase * page);
+    static SCPageApplicationData * pageData(KoPAPageBase * page);
 
     /**
      * Get the presentation notes for this page
      *
      * @return the presentation notes
      */
-    KPrNotes *pageNotes();
+    SCNotes *pageNotes();
 
     /// reimplemented
     virtual void shapeAdded(KoShape * shape);
@@ -68,14 +68,14 @@ public:
      * @param layout the layout that should be used from now. 
      *        If 0 no layout will be used.
      */
-    void setLayout(KPrPageLayout * layout, KoPADocument * document);
+    void setLayout(SCPageLayout * layout, KoPADocument * document);
 
     /**
      * Get the layout used on the page
      *
      * @return layout that is used or 0 if no layout is used
      */
-    KPrPageLayout * layout() const;
+    SCPageLayout * layout() const;
 
     /**
      * Get the page type used in the document
@@ -84,7 +84,7 @@ public:
      */
     virtual KoPageApp::PageType pageType() const;
 
-    QString declaration(KPrDeclarations::Type type) const;
+    QString declaration(SCDeclarations::Type type) const;
 
     /// reimplemented
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);

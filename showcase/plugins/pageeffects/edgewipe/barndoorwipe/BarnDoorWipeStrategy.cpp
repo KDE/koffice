@@ -25,7 +25,7 @@
 const int StepCount = 250;
 
 BarnDoorWipeStrategy::BarnDoorWipeStrategy(int subtype, const char *smilSubType, bool reverse)
-    : KPrPageEffectStrategy(subtype, "barnDoorWipe", smilSubType, reverse)
+    : SCPageEffectStrategy(subtype, "barnDoorWipe", smilSubType, reverse)
 {
 }
 
@@ -33,20 +33,20 @@ BarnDoorWipeStrategy::~BarnDoorWipeStrategy()
 {
 }
 
-void BarnDoorWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void BarnDoorWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, StepCount);
 }
 
-void BarnDoorWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void BarnDoorWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     p.drawPixmap(QPoint(0, 0), data.m_oldPage, data.m_widget->rect());
     p.setClipPath(clipPath(currPos, data.m_widget->rect()));
     p.drawPixmap(QPoint(0, 0), data.m_newPage, data.m_widget->rect());
 }
 
-void BarnDoorWipeStrategy::next(const KPrPageEffect::Data &data)
+void BarnDoorWipeStrategy::next(const SCPageEffect::Data &data)
 {
     data.m_widget->update();
 }

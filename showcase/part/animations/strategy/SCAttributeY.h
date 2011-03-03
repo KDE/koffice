@@ -20,14 +20,14 @@
 #ifndef KPRATTRIBUTEY_H
 #define KPRATTRIBUTEY_H
 
-#include "KPrAnimationAttribute.h"
+#include "SCAnimationAttribute.h"
 
-class KPrAttributeY : public KPrAnimationAttribute
+class SCAttributeY : public SCAnimationAttribute
 {
 public:
-    KPrAttributeY();
-    virtual void updateCache(KPrAnimationCache *cache, KPrShapeAnimation *shapeAnimation, qreal value);
-    virtual void initCache(KPrAnimationCache * cache, int step, KPrShapeAnimation * shapeAnimation, qreal startValue, qreal endValue);
+    SCAttributeY();
+    virtual void updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value);
+    virtual void initCache(SCAnimationCache * cache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue);
 };
 
 #endif // KPRATTRIBUTEY_H

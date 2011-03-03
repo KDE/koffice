@@ -21,7 +21,7 @@
 *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 *  Boston, MA 02110-1301, USA.
 */
-#include "KPrDeclarations.h"
+#include "SCDeclarations.h"
 #include <QDateTime>
 #include <QVariant>
 #include <KoXmlNS.h>
@@ -33,15 +33,15 @@
 #include <KoOdfLoadingContext.h>
 #include <KoOdfNumberStyles.h>
 
-KPrDeclarations::KPrDeclarations()
+SCDeclarations::SCDeclarations()
 {
 }
 
-KPrDeclarations::~KPrDeclarations()
+SCDeclarations::~SCDeclarations()
 {
 }
 
-bool KPrDeclarations::loadOdf(const KoXmlElement &body, KoPALoadingContext &context)
+bool SCDeclarations::loadOdf(const KoXmlElement &body, KoPALoadingContext &context)
 {
     Q_UNUSED(context);
 
@@ -86,7 +86,7 @@ bool KPrDeclarations::loadOdf(const KoXmlElement &body, KoPALoadingContext &cont
 }
 
 
-bool KPrDeclarations::saveOdf(KoPASavingContext &paContext) const
+bool SCDeclarations::saveOdf(KoPASavingContext &paContext) const
 {
     /*
        <presentation:header-decl presentation:name="hdr1">header</presentation:header-decl>
@@ -125,7 +125,7 @@ bool KPrDeclarations::saveOdf(KoPASavingContext &paContext) const
     return true;
 }
 
-const QString KPrDeclarations::declaration(Type type, const QString &key)
+const QString SCDeclarations::declaration(Type type, const QString &key)
 {
     QString retVal;
     if (type == DateTime) {

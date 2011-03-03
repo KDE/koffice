@@ -17,20 +17,20 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAttributeHeight.h"
-#include "../KPrAnimationCache.h"
+#include "SCAttributeHeight.h"
+#include "../SCAnimationCache.h"
 #include "KoShape.h"
-#include "KPrShapeAnimations.h"
+#include "SCShapeAnimations.h"
 #include "KoTextBlockData.h"
 #include "KoTextShapeData.h"
 #include <QTextDocument>
 #include <QTextLayout>
 #include "kdebug.h"
-KPrAttributeHeight::KPrAttributeHeight() : KPrAnimationAttribute("height")
+SCAttributeHeight::SCAttributeHeight() : SCAnimationAttribute("height")
 {
 }
 
-void KPrAttributeHeight::updateCache(KPrAnimationCache *cache, KPrShapeAnimation *shapeAnimation, qreal value)
+void SCAttributeHeight::updateCache(SCAnimationCache *cache, SCShapeAnimation *shapeAnimation, qreal value)
 {
     qreal tx = 0.0, ty = 0.0;
     KoShape * shape = shapeAnimation->shape();
@@ -58,7 +58,7 @@ void KPrAttributeHeight::updateCache(KPrAnimationCache *cache, KPrShapeAnimation
     cache->update(shape, shapeAnimation->textBlockData(), "transform", transform);
 }
 
-void KPrAttributeHeight::initCache(KPrAnimationCache *animationCache, int step, KPrShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
+void SCAttributeHeight::initCache(SCAnimationCache *animationCache, int step, SCShapeAnimation * shapeAnimation, qreal startValue, qreal endValue)
 {
     qreal v1 = 0.0, v2 = 0.0, tx = 0.0, ty = 0.0;
     KoShape * shape = shapeAnimation->shape();

@@ -22,16 +22,16 @@
 
 #include <KoViewAdaptor.h>
 
-class KPrView;
+class SCView;
 
-class KPrViewAdaptor : public KoViewAdaptor
+class SCViewAdaptor : public KoViewAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.koffice.presentation.view")
 
 public:
-    explicit KPrViewAdaptor(KPrView* view);
-    virtual ~KPrViewAdaptor();
+    explicit SCViewAdaptor(SCView* view);
+    virtual ~SCViewAdaptor();
 
 public slots:
 
@@ -176,7 +176,7 @@ private slots:
     void presentationActivated();
 
 private:
-    KPrView* m_view;
+    SCView* m_view;
 };
 
 #endif

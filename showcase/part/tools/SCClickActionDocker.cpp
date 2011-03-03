@@ -18,7 +18,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "KPrClickActionDocker.h"
+#include "SCClickActionDocker.h"
 
 #include <QVBoxLayout>
 #include <QCheckBox>
@@ -30,7 +30,7 @@
 #include <KFileDialog>
 
 #include <KoPACanvas.h>
-#include <KPrDocument.h>
+#include <SCDocument.h>
 #include <KoCanvasBase.h>
 #include <KoSelection.h>
 #include <KoShapeController.h>
@@ -38,22 +38,22 @@
 #include <KoEventAction.h>
 #include <KoEventActionFactoryBase.h>
 #include <KoEventActionRegistry.h>
-#include <KPrEventActionWidget.h>
-#include "KPrSoundData.h"
-#include <KPresenter.h>
-#include "KPrSoundCollection.h"
-#include "KPrView.h"
-#include "KPrPage.h"
-#include "KPrEventActionData.h"
+#include <SCEventActionWidget.h>
+#include "SCSoundData.h"
+#include <Showcase.h>
+#include "SCSoundCollection.h"
+#include "SCView.h"
+#include "SCPage.h"
+#include "SCEventActionData.h"
 
 #include <kdebug.h>
 
-KPrClickActionDocker::KPrClickActionDocker(QWidget* parent, Qt::WindowFlags flags)
+SCClickActionDocker::SCClickActionDocker(QWidget* parent, Qt::WindowFlags flags)
 : QWidget(parent, flags)
 , m_view(0)
 , m_soundCollection(0)
 {
-    setObjectName("KPrClickActionDocker");
+    setObjectName("SCClickActionDocker");
     // setup widget layout
     QVBoxLayout* layout = new QVBoxLayout;
     m_cbPlaySound = new QComboBox();
@@ -71,7 +71,7 @@ KPrClickActionDocker::KPrClickActionDocker(QWidget* parent, Qt::WindowFlags flag
     setLayout(layout);
 }
 
-void KPrClickActionDocker::selectionChanged()
+void SCClickActionDocker::selectionChanged()
 {
     if(! m_canvas)
         return;
@@ -88,26 +88,26 @@ void KPrClickActionDocker::selectionChanged()
         QMap<QString, QWidget *>::const_iterator it(m_eventActionWidgets.constBegin());
 
         for (; it != m_eventActionWidgets.constEnd(); ++it)  {
-            KPrEventActionWidget *actionWidget = dynamic_cast<KPrEventActionWidget*>(it.value());
+            SCEventActionWidget *actionWidget = dynamic_cast<SCEventActionWidget*>(it.value());
             if (actionWidget) {
                 // if it is not in the map a default value 0 pointer will be returned
-                KPrEventActionData data(shape, eventActionMap.value(it.key()), m_soundCollection);
+                SCEventActionData data(shape, eventActionMap.value(it.key()), m_soundCollection);
                 actionWidget->setData(&data);
             }
         }
     }
     else {
         foreach (QWidget *widget, m_eventActionWidgets) {
-            KPrEventActionWidget *actionWidget = dynamic_cast<KPrEventActionWidget*>(widget);
+            SCEventActionWidget *actionWidget = dynamic_cast<SCEventActionWidget*>(widget);
             if (actionWidget) {
-                KPrEventActionData data(0, 0, m_soundCollection);
+                SCEventActionData data(0, 0, m_soundCollection);
                 actionWidget->setData(&data);
             }
         }
     }
 }
 
-void KPrClickActionDocker::setCanvas(KoCanvasBase *canvas)
+void SCClickActionDocker::setCanvas(KoCanvasBase *canvas)
 {
     m_canvas = canvas;
 
@@ -119,22 +119,22 @@ void KPrClickActionDocker::setCanvas(KoCanvasBase *canvas)
     selectionChanged();
 }
 
-void KPrClickActionDocker::setView(KoPAViewBase  *view)
+void SCClickActionDocker::setView(KoPAViewBase  *view)
 {
     m_view = view;
-    if (m_view->kopaDocument()->resourceManager()->hasResource(KPresenter::SoundCollection)) {
-        QVariant variant = m_view->kopaDocument()->resourceManager()->resource(KPresenter::SoundCollection);
-        m_soundCollection = variant.value<KPrSoundCollection*>();
+    if (m_view->kopaDocument()->resourceManager()->hasResource(Showcase::SoundCollection)) {
+        QVariant variant = m_view->kopaDocument()->resourceManager()->resource(Showcase::SoundCollection);
+        m_soundCollection = variant.value<SCSoundCollection*>();
     }
 
     setCanvas(view->kopaCanvas());
 }
 
-void KPrClickActionDocker::addCommand(QUndoCommand * command)
+void SCClickActionDocker::addCommand(QUndoCommand * command)
 {
     if (m_view) {
         m_view->kopaCanvas()->addCommand(command);
     }
 }
 
-#include "KPrClickActionDocker.moc"
+#include "SCClickActionDocker.moc"

@@ -20,21 +20,21 @@
 #ifndef MOCKANIMATION_H
 #define MOCKANIMATION_H
 
-#include "shapeanimations/KPrShapeAnimationOld.h"
-#include "shapeanimations/KPrAnimationData.h"
+#include "shapeanimations/SCShapeAnimationOld.h"
+#include "shapeanimations/SCAnimationData.h"
 
 #include <KoViewConverter.h>
 
 #include <QPainter>
 
-class MockAppearAnimation : public KPrShapeAnimationOld
+class MockAppearAnimation : public SCShapeAnimationOld
 {
 public:
     MockAppearAnimation(KoShape * shape, int step)
-    : KPrShapeAnimationOld(shape, step, Appear)
+    : SCShapeAnimationOld(shape, step, Appear)
     {}
 
-    KPrAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect)
+    SCAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect)
     {
         Q_UNUSED(canvas);
         Q_UNUSED(shapeManager);
@@ -42,7 +42,7 @@ public:
         return 0;
     }
 
-    bool animate(QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData)
+    bool animate(QPainter &painter, const KoViewConverter &converter, SCAnimationData * animationData)
     {
         Q_UNUSED(painter);
         Q_UNUSED(converter);
@@ -50,32 +50,32 @@ public:
         return true;
     }
 
-    void animateRect(QRectF & rect, KPrAnimationData * animationData)
+    void animateRect(QRectF & rect, SCAnimationData * animationData)
     {
         Q_UNUSED(rect);
         Q_UNUSED(animationData);
     }
 
-    void next(int currentTime, KPrAnimationData * animationData)
+    void next(int currentTime, SCAnimationData * animationData)
     {
         Q_UNUSED(currentTime);
         Q_UNUSED(animationData);
     }
 
-    void finish(KPrAnimationData * animationData)
+    void finish(SCAnimationData * animationData)
     {
         Q_UNUSED(animationData);
     }
 };
 
-class MockDisappearAnimation : public KPrShapeAnimationOld
+class MockDisappearAnimation : public SCShapeAnimationOld
 {
 public:
     MockDisappearAnimation(KoShape * shape, int step)
-    : KPrShapeAnimationOld(shape, step, Disappear)
+    : SCShapeAnimationOld(shape, step, Disappear)
     {}
 
-    KPrAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect)
+    SCAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect)
     {
         Q_UNUSED(canvas);
         Q_UNUSED(shapeManager);
@@ -83,7 +83,7 @@ public:
         return 0;
     }
 
-    bool animate(QPainter &painter, const KoViewConverter &converter, KPrAnimationData * animationData)
+    bool animate(QPainter &painter, const KoViewConverter &converter, SCAnimationData * animationData)
     {
         Q_UNUSED(painter);
         Q_UNUSED(converter);
@@ -91,19 +91,19 @@ public:
         return true;
     }
 
-    void animateRect(QRectF & rect, KPrAnimationData * animationData)
+    void animateRect(QRectF & rect, SCAnimationData * animationData)
     {
         Q_UNUSED(rect);
         Q_UNUSED(animationData);
     }
 
-    void next(int currentTime, KPrAnimationData * animationData)
+    void next(int currentTime, SCAnimationData * animationData)
     {
         Q_UNUSED(currentTime);
         Q_UNUSED(animationData);
     }
 
-    void finish(KPrAnimationData * animationData)
+    void finish(SCAnimationData * animationData)
     {
         Q_UNUSED(animationData);
     }

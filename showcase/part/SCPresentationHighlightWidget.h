@@ -22,16 +22,16 @@
 #ifndef KPRPRESENTATIONHIGHLIGHTWIDGET_H
 #define KPRPRESENTATIONHIGHLIGHTWIDGET_H
 
-#include "KPrPresentationToolEventForwarder.h"
+#include "SCPresentationToolEventForwarder.h"
 
 class KoPACanvas;
 
-class KPrPresentationHighlightWidget : public KPrPresentationToolEventForwarder
+class SCPresentationHighlightWidget : public SCPresentationToolEventForwarder
 {
     Q_OBJECT
 public:
-    KPrPresentationHighlightWidget(KoPACanvasBase * canvas);
-    ~KPrPresentationHighlightWidget();
+    SCPresentationHighlightWidget(KoPACanvasBase * canvas);
+    ~SCPresentationHighlightWidget();
 
 protected:
     void mouseMoveEvent(QMouseEvent * event);

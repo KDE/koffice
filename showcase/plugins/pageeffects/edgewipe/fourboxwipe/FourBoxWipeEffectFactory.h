@@ -20,9 +20,9 @@
 #ifndef FOURBOXWIPEEFFECTFACTORY_H
 #define FOURBOXWIPEEFFECTFACTORY_H
 
-#include <KPrPageEffectFactory.h>
+#include <SCPageEffectFactory.h>
 
-class FourBoxWipeEffectFactory : public KPrPageEffectFactory
+class FourBoxWipeEffectFactory : public SCPageEffectFactory
 {
 public:
     FourBoxWipeEffectFactory();

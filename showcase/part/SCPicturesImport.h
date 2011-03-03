@@ -26,18 +26,18 @@
 class KoShapeFactoryBase;
 class KoPAPageBase;
 class KoPAMasterPage;
-class KPrDocument;
-class KPrView;
+class SCDocument;
+class SCView;
 class KJob;
 class QUndoCommand;
 
-class KPrPicturesImport : public QObject
+class SCPicturesImport : public QObject
 {
     Q_OBJECT
 public:
-    KPrPicturesImport();
+    SCPicturesImport();
 
-    void import(KPrView *view);
+    void import(SCView *view);
 
 private slots:
     // starts the transfer of the next image
@@ -45,7 +45,7 @@ private slots:
     void pictureImported(KJob *job);
 
 private:
-    KPrDocument *m_doc;
+    SCDocument *m_doc;
     KUrl::List m_urls;
     KoPAPageBase *m_currentPage;
     KoPAMasterPage *m_masterPage;

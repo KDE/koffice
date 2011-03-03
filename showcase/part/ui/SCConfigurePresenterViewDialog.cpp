@@ -17,16 +17,16 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrConfigurePresenterViewDialog.h"
+#include "SCConfigurePresenterViewDialog.h"
 
 #include <QtGui/QDesktopWidget>
 
 #include <KLocale>
 #include <KDebug>
 
-#include "KPrDocument.h"
+#include "SCDocument.h"
 
-KPrConfigurePresenterViewDialog::KPrConfigurePresenterViewDialog(KPrDocument *document, QWidget *parent)
+SCConfigurePresenterViewDialog::SCConfigurePresenterViewDialog(SCDocument *document, QWidget *parent)
     : KDialog(parent)
     , m_document(document)
 {
@@ -58,15 +58,15 @@ KPrConfigurePresenterViewDialog::KPrConfigurePresenterViewDialog(KPrDocument *do
             document->isPresenterViewEnabled() ? Qt::Checked : Qt::Unchecked);
 }
 
-int KPrConfigurePresenterViewDialog::presentationMonitor()
+int SCConfigurePresenterViewDialog::presentationMonitor()
 {
     return ui.monitorComboBox->currentIndex();
 }
 
-bool KPrConfigurePresenterViewDialog::presenterViewEnabled()
+bool SCConfigurePresenterViewDialog::presenterViewEnabled()
 {
     return (ui.presenterViewCheckBox->checkState() == Qt::Checked);
 }
 
-#include "KPrConfigurePresenterViewDialog.moc"
+#include "SCConfigurePresenterViewDialog.moc"
 

@@ -20,12 +20,12 @@
 #ifndef KPRPLACEHOLDERPICTURESTRATEGY_H
 #define KPRPLACEHOLDERPICTURESTRATEGY_H
 
-#include "KPrPlaceholderStrategy.h"
+#include "SCPlaceholderStrategy.h"
 
-class KPrPlaceholderPictureStrategy : public KPrPlaceholderStrategy
+class SCPlaceholderPictureStrategy : public SCPlaceholderStrategy
 {
 public:
-    virtual ~KPrPlaceholderPictureStrategy();
+    virtual ~SCPlaceholderPictureStrategy();
 
     virtual KoShape *createShape(KoResourceManager *documenResources);
 
@@ -34,9 +34,9 @@ protected:
      * @param shapeId The id of the shape used for creating a shape of that type
      * @param xmlElement The xml element used in saveOdf to write out the content of the frame
      */
-    KPrPlaceholderPictureStrategy();
+    SCPlaceholderPictureStrategy();
 
-    friend class KPrPlaceholderStrategy;
+    friend class SCPlaceholderStrategy;
 };
 
 #endif // KPRPLACEHOLDERPICTURESTRATEGY_H

@@ -17,51 +17,51 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSingleSweepWipeEffectFactory.h"
+#include "SCSingleSweepWipeEffectFactory.h"
 #include <klocale.h>
 
-#include "KPrSingleSweepWipeStrategy.h"
+#include "SCSingleSweepWipeStrategy.h"
 
 #define SingleSweepWipeEffectId  "SingleSweepWipeEffect"
 
-KPrSingleSweepWipeEffectFactory::KPrSingleSweepWipeEffectFactory()
-: KPrPageEffectFactory(SingleSweepWipeEffectId, i18n("Single Sweep"))
+SCSingleSweepWipeEffectFactory::SCSingleSweepWipeEffectFactory()
+: SCPageEffectFactory(SingleSweepWipeEffectId, i18n("Single Sweep"))
 {
-    addStrategy(new KPrSingleSweepWipeStrategy(0.5, 0.0, 0, -180,
+    addStrategy(new SCSingleSweepWipeStrategy(0.5, 0.0, 0, -180,
                                                  ClockwiseTop, "singleSweepWipe", "clockwiseTop", false));
-    addStrategy(new KPrSingleSweepWipeStrategy(1.0, 0.5, 270, -180,
+    addStrategy(new SCSingleSweepWipeStrategy(1.0, 0.5, 270, -180,
                                                  ClockwiseRight, "singleSweepWipe", "clockwiseRight", false));
-    addStrategy(new KPrSingleSweepWipeStrategy(0.5, 1.0, 180, -180,
+    addStrategy(new SCSingleSweepWipeStrategy(0.5, 1.0, 180, -180,
                                                  ClockwiseBottom, "singleSweepWipe", "clockwiseBottom", false));
-    addStrategy(new KPrSingleSweepWipeStrategy(0.0, 0.5, 90, -180,
+    addStrategy(new SCSingleSweepWipeStrategy(0.0, 0.5, 90, -180,
                                                  ClockwiseLeft, "singleSweepWipe", "clockwiseLeft", false));
-    addStrategy(new KPrSingleSweepWipeStrategy(0.0, 0.0, 0, -90,
+    addStrategy(new SCSingleSweepWipeStrategy(0.0, 0.0, 0, -90,
                                                  ClockwiseTopLeft, "singleSweepWipe", "clockwiseTopLeft", false));
-    addStrategy(new KPrSingleSweepWipeStrategy(0.0, 1.0, 0, 90,
+    addStrategy(new SCSingleSweepWipeStrategy(0.0, 1.0, 0, 90,
                                                  CounterClockwiseBottomLeft, "singleSweepWipe", "counterClockwiseBottomLeft", false));
-    addStrategy(new KPrSingleSweepWipeStrategy(1.0, 1.0, 180, -90,
+    addStrategy(new SCSingleSweepWipeStrategy(1.0, 1.0, 180, -90,
                                                  ClockwiseBottomRight, "singleSweepWipe", "clockwiseBottomRight", false));
-    addStrategy(new KPrSingleSweepWipeStrategy(1.0, 0.0, 180, 90,
+    addStrategy(new SCSingleSweepWipeStrategy(1.0, 0.0, 180, 90,
                                                  CounterClockwiseTopRight, "singleSweepWipe", "counterClockwiseTopRight", false));
-    addStrategy(new KPrSingleSweepWipeStrategy(0.5, 0.0, 180, 180,
+    addStrategy(new SCSingleSweepWipeStrategy(0.5, 0.0, 180, 180,
                                                  CounterClockwiseTop, "singleSweepWipe", "clockwiseTop", true));
-    addStrategy(new KPrSingleSweepWipeStrategy(1.0, 0.5, 90, 180,
+    addStrategy(new SCSingleSweepWipeStrategy(1.0, 0.5, 90, 180,
                                                  CounterClockwiseRight, "singleSweepWipe", "clockwiseRight", true));
-    addStrategy(new KPrSingleSweepWipeStrategy(0.5, 1.0, 0, 180,
+    addStrategy(new SCSingleSweepWipeStrategy(0.5, 1.0, 0, 180,
                                                  CounterClockwiseBottom, "singleSweepWipe", "clockwiseBottom", true));
-    addStrategy(new KPrSingleSweepWipeStrategy(0.0, 0.5, 270, 180,
+    addStrategy(new SCSingleSweepWipeStrategy(0.0, 0.5, 270, 180,
                                                  CounterClockwiseLeft, "singleSweepWipe", "clockwiseLeft", true));
-    addStrategy(new KPrSingleSweepWipeStrategy(0.0, 0.0, 270, 90,
+    addStrategy(new SCSingleSweepWipeStrategy(0.0, 0.0, 270, 90,
                                                  CounterClockwiseTopLeft, "singleSweepWipe", "clockwiseTopLeft", true));
-    addStrategy(new KPrSingleSweepWipeStrategy(0.0, 1.0, 90, -90,
+    addStrategy(new SCSingleSweepWipeStrategy(0.0, 1.0, 90, -90,
                                                  ClockwiseBottomLeft, "singleSweepWipe", "counterClockwiseBottomLeft", true));
-    addStrategy(new KPrSingleSweepWipeStrategy(1.0, 1.0, 90, 90,
+    addStrategy(new SCSingleSweepWipeStrategy(1.0, 1.0, 90, 90,
                                                  CounterClockwiseBottomRight, "singleSweepWipe", "clockwiseBottomRight", true));
-    addStrategy(new KPrSingleSweepWipeStrategy(1.0, 0.0, 270, -90,
+    addStrategy(new SCSingleSweepWipeStrategy(1.0, 0.0, 270, -90,
                                                  ClockwiseTopRight, "singleSweepWipe", "counterClockwiseTopRight", true));
 }
 
-KPrSingleSweepWipeEffectFactory::~KPrSingleSweepWipeEffectFactory()
+SCSingleSweepWipeEffectFactory::~SCSingleSweepWipeEffectFactory()
 {
 }
 
@@ -84,7 +84,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Clockwise Top Right")
 };
 
-QString KPrSingleSweepWipeEffectFactory::subTypeName(int subType) const
+QString SCSingleSweepWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

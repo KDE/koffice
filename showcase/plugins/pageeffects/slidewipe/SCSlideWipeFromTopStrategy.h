@@ -20,19 +20,19 @@
 #ifndef KPRSLIDEWIPEFROMTOPSTRATEGY_H
 #define KPRSLIDEWIPEFROMTOPSTRATEGY_H
 
-#include "pageeffects/KPrPageEffectStrategy.h"
+#include "pageeffects/SCPageEffectStrategy.h"
 
-class KPrSlideWipeFromTopStrategy : public KPrPageEffectStrategy
+class SCSlideWipeFromTopStrategy : public SCPageEffectStrategy
 {
 public:
-    KPrSlideWipeFromTopStrategy();
-    virtual ~KPrSlideWipeFromTopStrategy();
+    SCSlideWipeFromTopStrategy();
+    virtual ~SCSlideWipeFromTopStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
 
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 };
 
 #endif // KPRSLIDEWIPEFROMTOPSTRATEGY_H

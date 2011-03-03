@@ -20,13 +20,13 @@
 #ifndef KPRSPACEROTATIONEFFECTFACTORY_H
 #define KPRSPACEROTATIONEFFECTFACTORY_H
 
-#include "pageeffects/KPrPageEffectFactory.h"
+#include "pageeffects/SCPageEffectFactory.h"
 
-class KPrSpaceRotationEffectFactory : public KPrPageEffectFactory
+class SCSpaceRotationEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrSpaceRotationEffectFactory();
-    virtual ~KPrSpaceRotationEffectFactory();
+    SCSpaceRotationEffectFactory();
+    virtual ~SCSpaceRotationEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

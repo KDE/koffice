@@ -18,23 +18,23 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrFadeEffectFactory.h"
+#include "SCFadeEffectFactory.h"
 
 #include <klocale.h>
 
-#include "KPrFadeCrossStrategy.h"
-#include "KPrFadeOverColorStrategy.h"
+#include "SCFadeCrossStrategy.h"
+#include "SCFadeOverColorStrategy.h"
 
 #define FadeEffectId "FadeEffect"
 
-KPrFadeEffectFactory::KPrFadeEffectFactory()
-: KPrPageEffectFactory(FadeEffectId, i18n("Fade"))
+SCFadeEffectFactory::SCFadeEffectFactory()
+: SCPageEffectFactory(FadeEffectId, i18n("Fade"))
 {
-    addStrategy(new KPrFadeCrossStrategy());
-    addStrategy(new KPrFadeOverColorStrategy());
+    addStrategy(new SCFadeCrossStrategy());
+    addStrategy(new SCFadeOverColorStrategy());
 }
 
-KPrFadeEffectFactory::~KPrFadeEffectFactory()
+SCFadeEffectFactory::~SCFadeEffectFactory()
 {
 }
 
@@ -43,7 +43,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Fade over Color")
 };
 
-QString KPrFadeEffectFactory::subTypeName(int subType) const
+QString SCFadeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

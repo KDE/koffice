@@ -27,17 +27,17 @@
 class KoCanvasBase;
 class KoShapeManager;
 
-class KPrAnimationData
+class SCAnimationData
 {
 public:
-    KPrAnimationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, QRectF boundingRect)
+    SCAnimationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, QRectF boundingRect)
     : m_canvas(canvas)
     , m_shapeManager(shapeManager)
     , m_boundingRect(boundingRect)
     , m_finished(false)
     {}
 
-    virtual ~KPrAnimationData() {}
+    virtual ~SCAnimationData() {}
 
     KoCanvasBase * m_canvas;
     KoShapeManager * m_shapeManager;
@@ -46,14 +46,14 @@ public:
     bool m_finished;
 };
 
-class KPrAnimationDataTranslate : public KPrAnimationData
+class SCAnimationDataTranslate : public SCAnimationData
 {
 public:
-    KPrAnimationDataTranslate(KoCanvasBase * canvas, KoShapeManager * shapeManager, QRectF boundingRect)
-    : KPrAnimationData(canvas, shapeManager, boundingRect)
+    SCAnimationDataTranslate(KoCanvasBase * canvas, KoShapeManager * shapeManager, QRectF boundingRect)
+    : SCAnimationData(canvas, shapeManager, boundingRect)
     {}
 
-    virtual ~KPrAnimationDataTranslate() {}
+    virtual ~SCAnimationDataTranslate() {}
 
     QPointF m_translate;
 };

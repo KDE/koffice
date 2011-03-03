@@ -23,15 +23,15 @@
 
 class QWidget;
 class QKeyEvent;
-class KPrPresentationToolEventForwarder;
+class SCPresentationToolEventForwarder;
 class KoPACanvasBase;
-class KPrPresentationTool;
+class SCPresentationTool;
 
-class KPrPresentationStrategyBase
+class SCPresentationStrategyBase
 {
 public:
-    KPrPresentationStrategyBase(KPrPresentationTool * tool);
-    virtual ~KPrPresentationStrategyBase();
+    SCPresentationStrategyBase(SCPresentationTool * tool);
+    virtual ~SCPresentationStrategyBase();
 
     /**
      * If the event is handled or should be ignored by the tool return true. Otherwise
@@ -39,15 +39,15 @@ public:
      */
     virtual bool keyPressEvent(QKeyEvent * event) = 0;
 
-    KPrPresentationToolEventForwarder * widget();
+    SCPresentationToolEventForwarder * widget();
 
 protected:
     void setToolWidgetParent(QWidget * widget);
     void activateDefaultStrategy();
     KoPACanvasBase * canvas();
 
-    KPrPresentationTool *m_tool;
-    KPrPresentationToolEventForwarder *m_widget;
+    SCPresentationTool *m_tool;
+    SCPresentationToolEventForwarder *m_widget;
 
 };
 

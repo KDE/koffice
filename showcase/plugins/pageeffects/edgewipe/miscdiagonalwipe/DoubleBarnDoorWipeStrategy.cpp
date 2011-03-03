@@ -25,7 +25,7 @@
 const int StepCount = 250;
 
 DoubleBarnDoorWipeStrategy::DoubleBarnDoorWipeStrategy()
-    : KPrPageEffectStrategy(MiscDiagonalWipeEffectFactory::DoubleBarnDoor, "miscDiagonalWipe", "doubleBarnDoor", false)
+    : SCPageEffectStrategy(MiscDiagonalWipeEffectFactory::DoubleBarnDoor, "miscDiagonalWipe", "doubleBarnDoor", false)
 {
 }
 
@@ -33,20 +33,20 @@ DoubleBarnDoorWipeStrategy::~DoubleBarnDoorWipeStrategy()
 {
 }
 
-void DoubleBarnDoorWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void DoubleBarnDoorWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, StepCount);
 }
 
-void DoubleBarnDoorWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void DoubleBarnDoorWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     p.drawPixmap(QPoint(0, 0), data.m_oldPage, data.m_widget->rect());
     p.setClipPath(clipPath(currPos, data.m_widget->rect()));
     p.drawPixmap(QPoint(0, 0), data.m_newPage, data.m_widget->rect());
 }
 
-void DoubleBarnDoorWipeStrategy::next(const KPrPageEffect::Data &data)
+void DoubleBarnDoorWipeStrategy::next(const SCPageEffect::Data &data)
 {
     data.m_widget->update();
 }

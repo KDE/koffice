@@ -17,41 +17,41 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimationFactory.h"
+#include "SCAnimationFactory.h"
 
-#include "KPrAnimSet.h"
-#include "KPrAnimate.h"
-#include "KPrAnimateColor.h"
-#include "KPrAnimateMotion.h"
-#include "KPrAnimateTransform.h"
-#include "KPrAnimTransitionFilter.h"
+#include "SCAnimSet.h"
+#include "SCAnimate.h"
+#include "SCAnimateColor.h"
+#include "SCAnimateMotion.h"
+#include "SCAnimateTransform.h"
+#include "SCAnimTransitionFilter.h"
 
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
 
-KPrAnimationBase * KPrAnimationFactory::createAnimationFromOdf(const KoXmlElement &element, KoShapeLoadingContext &context,
-                                                               KPrShapeAnimation *shapeAnimation)
+SCAnimationBase * SCAnimationFactory::createAnimationFromOdf(const KoXmlElement &element, KoShapeLoadingContext &context,
+                                                               SCShapeAnimation *shapeAnimation)
 {
-    KPrAnimationBase * animation = 0;
+    SCAnimationBase * animation = 0;
     if (element.namespaceURI() == KoXmlNS::anim) {
         if (element.tagName() == "set") {
-            animation = new KPrAnimSet(shapeAnimation);
+            animation = new SCAnimSet(shapeAnimation);
         }
         else if (element.tagName() == "animate") {
-            animation = new KPrAnimate(shapeAnimation);
+            animation = new SCAnimate(shapeAnimation);
         }
         else if (element.tagName() == "animateMotion") {
-            animation = new KPrAnimateMotion(shapeAnimation);
+            animation = new SCAnimateMotion(shapeAnimation);
         }
         else if (element.tagName() == "animateColor") {
-            animation = new KPrAnimateColor(shapeAnimation);
+            animation = new SCAnimateColor(shapeAnimation);
         }
         else if (element.tagName() == "animationTransform") {
-            animation = new KPrAnimateTransform(shapeAnimation);
+            animation = new SCAnimateTransform(shapeAnimation);
         }
         else if (element.tagName() == "transitionFilter") {
-            animation = new KPrAnimTransitionFilter(shapeAnimation);
+            animation = new SCAnimTransitionFilter(shapeAnimation);
         }
 
         if (animation) {

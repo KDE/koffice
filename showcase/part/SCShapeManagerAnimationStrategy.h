@@ -22,15 +22,15 @@
 
 #include <KoShapeManagerPaintingStrategy.h>
 
-class KPrAnimationCache;
-class KPrPageSelectStrategyBase;
+class SCAnimationCache;
+class SCPageSelectStrategyBase;
 
-class KPrShapeManagerAnimationStrategy : public KoShapeManagerPaintingStrategy
+class SCShapeManagerAnimationStrategy : public KoShapeManagerPaintingStrategy
 {
 public:
-    KPrShapeManagerAnimationStrategy(KoShapeManager * shapeManager, KPrAnimationCache * animationCache,
-                                      KPrPageSelectStrategyBase * strategy);
-    virtual ~KPrShapeManagerAnimationStrategy();
+    SCShapeManagerAnimationStrategy(KoShapeManager * shapeManager, SCAnimationCache * animationCache,
+                                      SCPageSelectStrategyBase * strategy);
+    virtual ~SCShapeManagerAnimationStrategy();
 
     /// reimplemented
     virtual void paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
@@ -39,8 +39,8 @@ public:
     virtual void adapt(KoShape * shape, QRectF & rect);
 
 private:
-    KPrAnimationCache * m_animationCache;
-    KPrPageSelectStrategyBase * m_strategy;
+    SCAnimationCache * m_animationCache;
+    SCPageSelectStrategyBase * m_strategy;
 };
 
 #endif /* KPRSHAPEMANAGERANIMATIONSTRATEGY_H */

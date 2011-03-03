@@ -26,16 +26,16 @@
 #include <QVariant>
 
 class QRectF;
-class KPrPageLayout;
-class KPrPageLayoutWrapper;
+class SCPageLayout;
+class SCPageLayoutWrapper;
 class KoPALoadingContext;
 class KoPASavingContext;
 
-class KPrPageLayouts : public QObject
+class SCPageLayouts : public QObject
 {
 public:
-    KPrPageLayouts(QObject *parent = 0);
-    ~KPrPageLayouts();
+    SCPageLayouts(QObject *parent = 0);
+    ~SCPageLayouts();
 
     bool saveOdf(KoPASavingContext & context);
 
@@ -47,15 +47,15 @@ public:
     /**
      *
      */
-    KPrPageLayout * pageLayout(const QString & name, KoPALoadingContext & loadingContext, const QRectF & pageRect);
+    SCPageLayout * pageLayout(const QString & name, KoPALoadingContext & loadingContext, const QRectF & pageRect);
 
 
-    const QList<KPrPageLayout *> layouts() const;
+    const QList<SCPageLayout *> layouts() const;
 
 private:
-    // this is a simulation of a std::set<KPrPageLayout, compareByKPrPageLayout>()
-    QMap<KPrPageLayoutWrapper, KPrPageLayout *> m_pageLayouts;
+    // this is a simulation of a std::set<SCPageLayout, compareByKPrPageLayout>()
+    QMap<SCPageLayoutWrapper, SCPageLayout *> m_pageLayouts;
 };
 
-Q_DECLARE_METATYPE(KPrPageLayouts*)
+Q_DECLARE_METATYPE(SCPageLayouts*)
 #endif /* KPRPAGELAYOUTS_H */

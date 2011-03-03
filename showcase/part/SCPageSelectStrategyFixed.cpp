@@ -17,18 +17,18 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPageSelectStrategyFixed.h"
+#include "SCPageSelectStrategyFixed.h"
 
-KPrPageSelectStrategyFixed::KPrPageSelectStrategyFixed(const KoPAPageBase *page)
+SCPageSelectStrategyFixed::SCPageSelectStrategyFixed(const KoPAPageBase *page)
 : m_page(page)
 {
 }
 
-KPrPageSelectStrategyFixed::~KPrPageSelectStrategyFixed()
+SCPageSelectStrategyFixed::~SCPageSelectStrategyFixed()
 {
 }
 
-const KoPAPageBase *KPrPageSelectStrategyFixed::page() const
+const KoPAPageBase *SCPageSelectStrategyFixed::page() const
 {
     return m_page;
 }

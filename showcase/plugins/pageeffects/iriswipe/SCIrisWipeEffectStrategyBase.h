@@ -23,22 +23,22 @@
 //Qt includes
 #include <QPainterPath>
 
-//KPresenter includes
-#include "pageeffects/KPrPageEffectStrategy.h"
+//Showcase includes
+#include "pageeffects/SCPageEffectStrategy.h"
 
-class KPrIrisWipeEffectStrategyBase : public KPrPageEffectStrategy
+class SCIrisWipeEffectStrategyBase : public SCPageEffectStrategy
 {
 public:
-    KPrIrisWipeEffectStrategyBase(QPainterPath shape, int subType, const char * smilType, const char *smilSubType, bool reverse = false);
-    virtual ~KPrIrisWipeEffectStrategyBase();
+    SCIrisWipeEffectStrategyBase(QPainterPath shape, int subType, const char * smilType, const char *smilSubType, bool reverse = false);
+    virtual ~SCIrisWipeEffectStrategyBase();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
 
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 
-    virtual void next(const KPrPageEffect::Data &data);
+    virtual void next(const SCPageEffect::Data &data);
 
-    int findMaxScaling(const KPrPageEffect::Data &data);
+    int findMaxScaling(const SCPageEffect::Data &data);
 
 protected:
     QPainterPath m_shape;

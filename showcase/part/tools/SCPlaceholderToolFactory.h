@@ -22,11 +22,11 @@
 
 #include <KoToolFactoryBase.h>
 
-class KPrPlaceholderToolFactory : public KoToolFactoryBase
+class SCPlaceholderToolFactory : public KoToolFactoryBase
 {
 public:
-    KPrPlaceholderToolFactory(QObject *parent);
-    virtual ~KPrPlaceholderToolFactory();
+    SCPlaceholderToolFactory(QObject *parent);
+    virtual ~SCPlaceholderToolFactory();
 
     /// reimplemented
     virtual KoToolBase * createTool(KoCanvasBase *canvas);

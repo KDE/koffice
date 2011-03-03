@@ -21,20 +21,20 @@
 #ifndef KPRPRESENTATIONTOOLDIALOG_H
 #define KPRPRESENTATIONTOOLDIALOG_H
 
-#include "ui_KPrPresentationTool.h"
+#include "ui_SCPresentationTool.h"
 
-class KPrPresentationToolWidget : public QWidget
+class SCPresentationToolWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit KPrPresentationToolWidget(QWidget * parent = 0);
-    Ui::KPrPresentationTool presentationToolUi();
+    explicit SCPresentationToolWidget(QWidget * parent = 0);
+    Ui::SCPresentationTool presentationToolUi();
 
 protected:
     virtual void paintEvent(QPaintEvent *event);
 
 private:
-    Ui::KPrPresentationTool m_uiWidget;
+    Ui::SCPresentationTool m_uiWidget;
 };
 
 #endif // KPRPRESENTATIONTOOLDIALOG_H

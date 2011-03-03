@@ -20,14 +20,14 @@
 #ifndef KPRSNAKEWIPEDIAGONALSTRATEGY_H
 #define KPRSNAKEWIPEDIAGONALSTRATEGY_H
 
-#include "../KPrMatrixWipeStrategy.h"
+#include "../SCMatrixWipeStrategy.h"
 #include <QtCore/QVector>
 
-class KPrSnakeWipeDiagonalStrategy : public KPrMatrixWipeStrategy
+class SCSnakeWipeDiagonalStrategy : public SCMatrixWipeStrategy
 {
 public:
-    KPrSnakeWipeDiagonalStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse);
-    virtual ~KPrSnakeWipeDiagonalStrategy();
+    SCSnakeWipeDiagonalStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse);
+    virtual ~SCSnakeWipeDiagonalStrategy();
 protected:
     virtual int maxIndex(int columns, int rows);
     QVector<int> m_indices;

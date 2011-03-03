@@ -20,13 +20,13 @@
 #ifndef KPRSPIRALWIPESTRATEGY_H
 #define KPRSPIRALWIPESTRATEGY_H
 
-#include "../KPrMatrixWipeStrategy.h"
+#include "../SCMatrixWipeStrategy.h"
 
-class KPrSpiralWipeStrategy : public KPrMatrixWipeStrategy
+class SCSpiralWipeStrategy : public SCMatrixWipeStrategy
 {
 public:
-    KPrSpiralWipeStrategy(int firstLeg, bool clockwise, bool reverse);
-    virtual ~KPrSpiralWipeStrategy();
+    SCSpiralWipeStrategy(int firstLeg, bool clockwise, bool reverse);
+    virtual ~SCSpiralWipeStrategy();
 protected:
     virtual int maxIndex(int columns, int rows);
     virtual int squareIndex(int x, int y, int columns, int rows);

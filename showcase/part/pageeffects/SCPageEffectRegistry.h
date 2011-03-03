@@ -22,24 +22,24 @@
 
 #include <KoGenericRegistry.h>
 
-#include "KPrPageEffectFactory.h"
+#include "SCPageEffectFactory.h"
 
 #include "KoXmlReaderForward.h"
-class KPrPageEffect;
+class SCPageEffect;
 
-class KPRESENTER_EXPORT KPrPageEffectRegistry : public KoGenericRegistry<KPrPageEffectFactory *>
+class KPRESENTER_EXPORT SCPageEffectRegistry : public KoGenericRegistry<SCPageEffectFactory *>
 {
 public:
     class Singleton;
-    static KPrPageEffectRegistry * instance();
+    static SCPageEffectRegistry * instance();
 
-    KPrPageEffect * createPageEffect(const KoXmlElement & element);
+    SCPageEffect * createPageEffect(const KoXmlElement & element);
 
 private:
     void init();
 
-    KPrPageEffectRegistry();
-    ~KPrPageEffectRegistry();
+    SCPageEffectRegistry();
+    ~SCPageEffectRegistry();
 
     friend class Singleton;
 

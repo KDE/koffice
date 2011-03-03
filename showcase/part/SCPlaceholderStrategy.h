@@ -36,15 +36,15 @@ class KoViewConverter;
 class PlaceholderData;
 class KoResourceManager;
 
-class KPrPlaceholderStrategy
+class SCPlaceholderStrategy
 {
 public:
     /**
-     * Factory method to create a KPrPlaceholderStrategy
+     * Factory method to create a SCPlaceholderStrategy
      *
      * @param presentationClass The presentation:class attribute of the placeholder
      */
-    static KPrPlaceholderStrategy * create(const QString & presentationClass);
+    static SCPlaceholderStrategy * create(const QString & presentationClass);
 
     /**
      * Check if the presentation class is supported
@@ -53,7 +53,7 @@ public:
      */
     static bool supported(const QString & presentationClass);
 
-    virtual ~KPrPlaceholderStrategy();
+    virtual ~SCPlaceholderStrategy();
 
     virtual KoShape *createShape(KoResourceManager *documentResources);
 
@@ -71,7 +71,7 @@ protected:
     /**
      * @param presentationClass The presentation:class of the shape used for creating a shape of that type
      */
-    KPrPlaceholderStrategy(const QString & presentationClass);
+    SCPlaceholderStrategy(const QString & presentationClass);
 
     /**
      * Get the text that is displayed

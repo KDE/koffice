@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrViewModePreviewPageEffect.h"
+#include "SCViewModePreviewPageEffect.h"
 
 #include <QEvent>
 #include <QKeyEvent>
@@ -35,13 +35,13 @@
 #include <KoPAView.h>
 #include <KoZoomHandler.h>
 
-#include "KPrDocument.h"
-#include "KPrEndOfSlideShowPage.h"
-#include "KPrPage.h"
-#include "pageeffects/KPrPageEffect.h"
-#include "pageeffects/KPrPageEffectRunner.h"
+#include "SCDocument.h"
+#include "SCEndOfSlideShowPage.h"
+#include "SCPage.h"
+#include "pageeffects/SCPageEffect.h"
+#include "pageeffects/SCPageEffectRunner.h"
 
-KPrViewModePreviewPageEffect::KPrViewModePreviewPageEffect(KoPAViewBase * view, KoPACanvasBase * canvas)
+SCViewModePreviewPageEffect::SCViewModePreviewPageEffect(KoPAViewBase * view, KoPACanvasBase * canvas)
 : KoPAViewMode(view, canvas)
 , m_savedViewMode(0)
 , m_pageEffect(0)
@@ -53,12 +53,12 @@ KPrViewModePreviewPageEffect::KPrViewModePreviewPageEffect(KoPAViewBase * view, 
     connect(&m_timeLine, SIGNAL(finished()), this, SLOT(activateSavedViewMode()));
 }
 
-KPrViewModePreviewPageEffect::~KPrViewModePreviewPageEffect()
+SCViewModePreviewPageEffect::~SCViewModePreviewPageEffect()
 {
 }
 
 
-void KPrViewModePreviewPageEffect::paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect)
+void SCViewModePreviewPageEffect::paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect)
 {
     Q_UNUSED(canvas);
     Q_UNUSED(paintRect);
@@ -70,61 +70,61 @@ void KPrViewModePreviewPageEffect::paint(KoPACanvasBase* canvas, QPainter& paint
 }
 
 
-void KPrViewModePreviewPageEffect::tabletEvent(QTabletEvent *event, const QPointF &point)
+void SCViewModePreviewPageEffect::tabletEvent(QTabletEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
 
-void KPrViewModePreviewPageEffect::mousePressEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModePreviewPageEffect::mousePressEvent(QMouseEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
 
-void KPrViewModePreviewPageEffect::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModePreviewPageEffect::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
 
-void KPrViewModePreviewPageEffect::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModePreviewPageEffect::mouseMoveEvent(QMouseEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
 
-void KPrViewModePreviewPageEffect::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
+void SCViewModePreviewPageEffect::mouseReleaseEvent(QMouseEvent *event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
 
-void KPrViewModePreviewPageEffect::keyPressEvent(QKeyEvent *event)
+void SCViewModePreviewPageEffect::keyPressEvent(QKeyEvent *event)
 {
     Q_UNUSED(event);
 }
 
 
-void KPrViewModePreviewPageEffect::keyReleaseEvent(QKeyEvent *event)
+void SCViewModePreviewPageEffect::keyReleaseEvent(QKeyEvent *event)
 {
     Q_UNUSED(event);
 }
 
 
-void KPrViewModePreviewPageEffect::wheelEvent(QWheelEvent * event, const QPointF &point)
+void SCViewModePreviewPageEffect::wheelEvent(QWheelEvent * event, const QPointF &point)
 {
     Q_UNUSED(event);
     Q_UNUSED(point);
 }
 
 
-void KPrViewModePreviewPageEffect::activate(KoPAViewMode * previousViewMode)
+void SCViewModePreviewPageEffect::activate(KoPAViewMode * previousViewMode)
 {
     m_savedViewMode = previousViewMode;               // store the previous view mode
 
@@ -136,26 +136,26 @@ void KPrViewModePreviewPageEffect::activate(KoPAViewMode * previousViewMode)
 }
 
 
-void KPrViewModePreviewPageEffect::deactivate()
+void SCViewModePreviewPageEffect::deactivate()
 {
     m_savedViewMode = 0;               // store the previous view mode
 }
 
 
-void KPrViewModePreviewPageEffect::updateActivePage(KoPAPageBase *page)
+void SCViewModePreviewPageEffect::updateActivePage(KoPAPageBase *page)
 {
     m_view->setActivePage(page);
 }
 
 
-void KPrViewModePreviewPageEffect::activateSavedViewMode()
+void SCViewModePreviewPageEffect::activateSavedViewMode()
 {
     m_view->setViewMode(m_savedViewMode);
     //canvas()->update();
 }
 
 
-void KPrViewModePreviewPageEffect::setPageEffect(KPrPageEffect* pageEffect, KPrPage* page, KPrPage* prevpage)
+void SCViewModePreviewPageEffect::setPageEffect(SCPageEffect* pageEffect, SCPage* page, SCPage* prevpage)
 {
     if(m_savedViewMode) {//stop the previous playing
         activateSavedViewMode();
@@ -173,19 +173,19 @@ void KPrViewModePreviewPageEffect::setPageEffect(KPrPageEffect* pageEffect, KPrP
         updatePixmaps();
 
         if(m_pageEffect) {
-            m_pageEffectRunner = new KPrPageEffectRunner(m_oldPage, m_newPage, canvas()->canvasWidget(), m_pageEffect);
+            m_pageEffectRunner = new SCPageEffectRunner(m_oldPage, m_newPage, canvas()->canvasWidget(), m_pageEffect);
         }
     }
 }
 
-void KPrViewModePreviewPageEffect::animate()
+void SCViewModePreviewPageEffect::animate()
 {
     if (m_pageEffectRunner) {
         m_pageEffectRunner->next(m_timeLine.currentTime());
     }
 }
 
-void KPrViewModePreviewPageEffect::updatePixmaps()
+void SCViewModePreviewPageEffect::updatePixmaps()
 {
     if(!m_page)
         return;
@@ -209,4 +209,4 @@ void KPrViewModePreviewPageEffect::updatePixmaps()
     }
 }
 
-#include "KPrViewModePreviewPageEffect.moc"
+#include "SCViewModePreviewPageEffect.moc"

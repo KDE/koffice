@@ -1,11 +1,11 @@
 include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/showcase/part ${CMAKE_SOURCE_DIR}/showcase/part/pageeffects )
 
 set(kpr_pageeffect_barwipe_PART_SRCS Plugin.cpp
-    KPrBarWipeEffectFactory.cpp
-    KPrBarWipeFromLeftStrategy.cpp
-    KPrBarWipeFromRightStrategy.cpp
-    KPrBarWipeFromTopStrategy.cpp
-    KPrBarWipeFromBottomStrategy.cpp
+    SCBarWipeEffectFactory.cpp
+    SCBarWipeFromLeftStrategy.cpp
+    SCBarWipeFromRightStrategy.cpp
+    SCBarWipeFromTopStrategy.cpp
+    SCBarWipeFromBottomStrategy.cpp
 )
 
 kde4_add_plugin(kpr_pageeffect_barwipe ${kpr_pageeffect_barwipe_PART_SRCS})

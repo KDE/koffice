@@ -27,7 +27,7 @@
 #include <QTimeLine>
 #include <QTransform>
 #include <KoZoomHandler.h>
-#include "KPrShapeAnimations.h"
+#include "SCShapeAnimations.h"
 
 class QPainter;
 class QPaintEvent;
@@ -37,14 +37,14 @@ class KoShapeManager;
 class KoPACanvas;
 class KoPAPageBase;
 class KoPAView;
-class KPrPageEffect;
-class KPrPageEffectRunner;
-class KPrAnimationData;
-class KPrPage;
-class KPrPageData;
-class KPrShapeAnimation;
+class SCPageEffect;
+class SCPageEffectRunner;
+class SCAnimationData;
+class SCPage;
+class SCPageData;
+class SCShapeAnimation;
 
-class KPrAnimationDirector : public QObject
+class SCAnimationDirector : public QObject
 {
     Q_OBJECT
 public:
@@ -58,8 +58,8 @@ public:
         LastPage
     };
 
-    KPrAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> & pages, KoPAPageBase* currentPage);
-    virtual ~KPrAnimationDirector();
+    SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> & pages, KoPAPageBase* currentPage);
+    virtual ~SCAnimationDirector();
 
     void paint(QPainter& painter, const QRectF &paintRect);
     void paintEvent(QPaintEvent* event);
@@ -104,7 +104,7 @@ public:
      * @param shape which should be animated
      * @return pair of the animation and the animation data for the shape or a 0, 0 if there is no animation
      */
-    KPrShapeAnimation shapeAnimation(KoShape * shape);
+    SCShapeAnimation shapeAnimation(KoShape * shape);
 
     void deactivate();
 protected:
@@ -167,15 +167,15 @@ private:
     QPoint m_offset;
     QRect m_pageRect;
 
-    KPrPageEffectRunner * m_pageEffectRunner;
-    QList<KPrAnimationStep *> m_animations;
+    SCPageEffectRunner * m_pageEffectRunner;
+    QList<SCAnimationStep *> m_animations;
     QTimeLine m_timeLine;
     int m_pageIndex;
     int m_stepIndex;
     int m_maxShapeDuration;
     // true when there is an animtion in this step
     bool m_hasAnimation;
-    KPrAnimationCache * m_animationCache;
+    SCAnimationCache * m_animationCache;
 };
 
 #endif /* KPRANIMATIONDIRECTOR_H */

@@ -23,22 +23,22 @@
 
 #include <KoShapeManagerPaintingStrategy.h>
 
-class KPrPageSelectStrategyBase;
+class SCPageSelectStrategyBase;
 
-class KPrShapeManagerDisplayMasterStrategy : public KoShapeManagerPaintingStrategy
+class SCShapeManagerDisplayMasterStrategy : public KoShapeManagerPaintingStrategy
 {
 public:
     /**
      * 
      */
-    KPrShapeManagerDisplayMasterStrategy(KoShapeManager * shapeManager, KPrPageSelectStrategyBase * strategy);
-    virtual ~KPrShapeManagerDisplayMasterStrategy();
+    SCShapeManagerDisplayMasterStrategy(KoShapeManager * shapeManager, SCPageSelectStrategyBase * strategy);
+    virtual ~SCShapeManagerDisplayMasterStrategy();
 
     /// reimplemented
     virtual void paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
 
 private:
-    KPrPageSelectStrategyBase *m_strategy;
+    SCPageSelectStrategyBase *m_strategy;
 };
 
 #endif /* KPRSHAPEMANAGERDISPLAYMASTERSTRATEGY_H */

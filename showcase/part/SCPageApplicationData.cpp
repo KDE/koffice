@@ -17,25 +17,25 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrPageApplicationData.h"
-#include "pageeffects/KPrPageEffect.h"
+#include "SCPageApplicationData.h"
+#include "pageeffects/SCPageEffect.h"
 
-KPrPageApplicationData::KPrPageApplicationData()
+SCPageApplicationData::SCPageApplicationData()
 : m_pageEffect(0)
 {
 }
 
-KPrPageApplicationData::~KPrPageApplicationData()
+SCPageApplicationData::~SCPageApplicationData()
 {
     delete m_pageEffect;
 }
 
-KPrPageEffect * KPrPageApplicationData::pageEffect()
+SCPageEffect * SCPageApplicationData::pageEffect()
 {
     return m_pageEffect;
 }
 
-void KPrPageApplicationData::setPageEffect(KPrPageEffect * effect)
+void SCPageApplicationData::setPageEffect(SCPageEffect * effect)
 {
     m_pageEffect = effect;
 }

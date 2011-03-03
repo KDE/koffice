@@ -20,21 +20,21 @@
 #ifndef BARNVEEWIPESTRATEGY_H
 #define BARNVEEWIPESTRATEGY_H
 
-#include <KPrPageEffectStrategy.h>
-#include <KPrPageEffect.h>
+#include <SCPageEffectStrategy.h>
+#include <SCPageEffect.h>
 
-class BarnVeeWipeStrategy : public KPrPageEffectStrategy
+class BarnVeeWipeStrategy : public SCPageEffectStrategy
 {
 public:
     BarnVeeWipeStrategy(int subtype, const char *smilSubType, bool reverse);
     virtual ~BarnVeeWipeStrategy();
 
-    /// reimplemented from KPrPageEffectStrategy
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
-    /// reimplemented from KPrPageEffectStrategy
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
-    /// reimplemented from KPrPageEffectStrategy
-    virtual void next(const KPrPageEffect::Data &data);
+    /// reimplemented from SCPageEffectStrategy
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
+    /// reimplemented from SCPageEffectStrategy
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
+    /// reimplemented from SCPageEffectStrategy
+    virtual void next(const SCPageEffect::Data &data);
 
 private:
     /// calculates clip path for given step

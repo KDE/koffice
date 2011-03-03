@@ -21,11 +21,11 @@
 #ifndef KPRPAGEEFFECTSTRATEGY_H
 #define KPRPAGEEFFECTSTRATEGY_H
 
-#include "KPrPageEffectFactory.h"
+#include "SCPageEffectFactory.h"
 
 #include "kpresenter_export.h"
 
-class KPRESENTER_EXPORT KPrPageEffectStrategy
+class KPRESENTER_EXPORT SCPageEffectStrategy
 {
 public:
     /**
@@ -36,8 +36,8 @@ public:
      * @param smilSubType The smil:subType used for loading/saving
      * @param revers The flag for the smil:direction used for loading/saving true means reverse false means forward
      */
-    KPrPageEffectStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool graphicsView = false);
-    virtual ~KPrPageEffectStrategy();
+    SCPageEffectStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool graphicsView = false);
+    virtual ~SCPageEffectStrategy();
 
     /**
      * Get the sub type of this strategy
@@ -49,7 +49,7 @@ public:
     /**
      * Setup the timeline used by this strategy
      */
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine) = 0;
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine) = 0;
 
     /**
      * Paint the page effect
@@ -63,7 +63,7 @@ public:
      *
      * @see next()
      */
-    virtual void paintStep(QPainter &p, int curPos, const KPrPageEffect::Data &data) = 0;
+    virtual void paintStep(QPainter &p, int curPos, const SCPageEffect::Data &data) = 0;
 
     /**
      * Trigger the next paint paint event.
@@ -73,13 +73,13 @@ public:
      *
      * @param data The data used for the effect.
      */
-    virtual void next(const KPrPageEffect::Data &data) = 0;
+    virtual void next(const SCPageEffect::Data &data) = 0;
 
     /**
      * The default implementation triggers an update of the whole widget. If you only need to
      * update a smaller part of the widget reimplement this function.
      */
-    virtual void finish(const KPrPageEffect::Data &data);
+    virtual void finish(const SCPageEffect::Data &data);
 
     /**
      * Save transitions in an xml writer

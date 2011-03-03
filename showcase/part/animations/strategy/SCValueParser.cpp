@@ -19,12 +19,12 @@
 
  /* heavily based on Ariya's work (see kspread/formula) -- all errors are my own! */
 
-#include "KPrValueParser.h"
+#include "SCValueParser.h"
 
 #include <QStack>
 #include <QString>
 #include <math.h>
-#include "../KPrAnimationCache.h"
+#include "../SCAnimationCache.h"
 #include "KoShape.h"
 #include "KoTextBlockData.h"
 #include <QTextLayout>
@@ -171,9 +171,9 @@ void TokenStack::ensureSpace()
 }
 
 /**********************
-    KPrValueParser
+    SCValueParser
  **********************/
-KPrValueParser::KPrValueParser(QString formula, KoShape *shape, KoTextBlockData *textBlockData)
+SCValueParser::SCValueParser(QString formula, KoShape *shape, KoTextBlockData *textBlockData)
     : m_shape(shape)
     , m_textBlockData(textBlockData)
     , m_formula(formula)
@@ -183,12 +183,12 @@ KPrValueParser::KPrValueParser(QString formula, KoShape *shape, KoTextBlockData 
     compile(scan(formula));
 }
 
-QString KPrValueParser::formula() const
+QString SCValueParser::formula() const
 {
     return m_formula;
 }
 
-Tokens KPrValueParser::scan(QString formula)
+Tokens SCValueParser::scan(QString formula)
 {
     Tokens tokens;
     // parsing state
@@ -266,7 +266,7 @@ Tokens KPrValueParser::scan(QString formula)
     return tokens;
 }
 
-void KPrValueParser::compile(const Tokens& tokens) const
+void SCValueParser::compile(const Tokens& tokens) const
 {
     // initialize variables
     m_valid = false;
@@ -457,7 +457,7 @@ void KPrValueParser::compile(const Tokens& tokens) const
     }
 }
 
-qreal KPrValueParser::eval(KPrAnimationCache * cache) const
+qreal SCValueParser::eval(SCAnimationCache * cache) const
 {
     QStack<qreal> stack;
     qreal val1, val2;
@@ -530,12 +530,12 @@ qreal KPrValueParser::eval(KPrAnimationCache * cache) const
     return stack.pop();
 }
 
-bool KPrValueParser::valid() const
+bool SCValueParser::valid() const
 {
     return m_valid;
 }
 
-qreal KPrValueParser::identifierToValue(QString identifier, KPrAnimationCache * cache) const
+qreal SCValueParser::identifierToValue(QString identifier, SCAnimationCache * cache) const
 {
     if (identifier == "width") {
         if (m_textBlockData) {

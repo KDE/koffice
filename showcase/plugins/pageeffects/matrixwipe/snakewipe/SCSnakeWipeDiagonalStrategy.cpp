@@ -17,18 +17,18 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSnakeWipeTopLeftDiagonalStrategy.h"
+#include "SCSnakeWipeTopLeftDiagonalStrategy.h"
 
-KPrSnakeWipeDiagonalStrategy::KPrSnakeWipeDiagonalStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse)
-    : KPrMatrixWipeStrategy(subType, smilType, smilSubType, reverse)
+SCSnakeWipeDiagonalStrategy::SCSnakeWipeDiagonalStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse)
+    : SCMatrixWipeStrategy(subType, smilType, smilSubType, reverse)
 {
 }
 
-KPrSnakeWipeDiagonalStrategy::~KPrSnakeWipeDiagonalStrategy()
+SCSnakeWipeDiagonalStrategy::~SCSnakeWipeDiagonalStrategy()
 {
 }
 
-int KPrSnakeWipeDiagonalStrategy::maxIndex(int columns, int rows)
+int SCSnakeWipeDiagonalStrategy::maxIndex(int columns, int rows)
 {
     m_indices.resize(columns * rows);
     int idx = 0;

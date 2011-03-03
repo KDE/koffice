@@ -17,19 +17,19 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSingleSweepWipeStrategy.h"
+#include "SCSingleSweepWipeStrategy.h"
 
 #include <math.h>
 #include <QWidget>
 #include <QPainter>
 #include <QPainterPath>
 
-#include "KPrClockWipeSubpathHelper.h"
+#include "SCClockWipeSubpathHelper.h"
 
 #include <kdebug.h>
 
-KPrSingleSweepWipeStrategy::KPrSingleSweepWipeStrategy(double rotationX, double rotationY, int startAngle, int rotationAngle, int subType, const char * smilType, const char *smilSubType, bool reverse)
-    : KPrPageEffectStrategy(subType, smilType, smilSubType, reverse)
+SCSingleSweepWipeStrategy::SCSingleSweepWipeStrategy(double rotationX, double rotationY, int startAngle, int rotationAngle, int subType, const char * smilType, const char *smilSubType, bool reverse)
+    : SCPageEffectStrategy(subType, smilType, smilSubType, reverse)
     , m_rotationX(rotationX)
     , m_rotationY(rotationY)
 {
@@ -37,17 +37,17 @@ KPrSingleSweepWipeStrategy::KPrSingleSweepWipeStrategy(double rotationX, double 
     m_rotationAngle = static_cast<double>(rotationAngle)/180 * M_PI;
 }
 
-KPrSingleSweepWipeStrategy::~KPrSingleSweepWipeStrategy()
+SCSingleSweepWipeStrategy::~SCSingleSweepWipeStrategy()
 {
 }
 
-void KPrSingleSweepWipeStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCSingleSweepWipeStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     Q_UNUSED(data);
     timeLine.setFrameRange(0, 180);
 }
 
-void KPrSingleSweepWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCSingleSweepWipeStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     int width = data.m_widget->width();
     int height = data.m_widget->height();
@@ -73,13 +73,13 @@ void KPrSingleSweepWipeStrategy::paintStep(QPainter &p, int currPos, const KPrPa
     boundingRect.moveCenter(rotationCenter);
 
     QPainterPath clipPath;
-    KPrClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, startAngle, endAngle);
+    SCClockWipeSubpathHelper::addSubpathForCircularArc(&clipPath, boundingRect, startAngle, endAngle);
     p.setClipPath(clipPath);
 
     p.drawPixmap(QPoint(0, 0), data.m_newPage, rect);
 }
 
-void KPrSingleSweepWipeStrategy::next(const KPrPageEffect::Data &data)
+void SCSingleSweepWipeStrategy::next(const SCPageEffect::Data &data)
 {
     data.m_widget->update();
 }

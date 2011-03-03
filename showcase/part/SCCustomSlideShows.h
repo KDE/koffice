@@ -31,15 +31,15 @@ class KoPAPageBase;
 #include "KoXmlReaderForward.h"
 class KoPASavingContext;
 class KoPALoadingContext;
-class KPrDocument;
+class SCDocument;
 
 #include "kpresenter_export.h"
 
-class KPRESENTER_TEST_EXPORT KPrCustomSlideShows
+class KPRESENTER_TEST_EXPORT SCCustomSlideShows
 {
 public:
-    KPrCustomSlideShows();
-    ~KPrCustomSlideShows();
+    SCCustomSlideShows();
+    ~SCCustomSlideShows();
 
     /**
      * @brief Insert a new Custom SlideShow

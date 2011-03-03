@@ -21,13 +21,13 @@
 #ifndef KPRFADEEFFECTFACTORY_H
 #define KPRFADEEFFECTFACTORY_H
 
-#include "pageeffects/KPrPageEffectFactory.h"
+#include "pageeffects/SCPageEffectFactory.h"
 
-class KPrFadeEffectFactory : public KPrPageEffectFactory
+class SCFadeEffectFactory : public SCPageEffectFactory
 {
 public:
-    KPrFadeEffectFactory();
-    virtual ~KPrFadeEffectFactory();
+    SCFadeEffectFactory();
+    virtual ~SCFadeEffectFactory();
     virtual QString subTypeName(int subType) const;
 
     enum SubType {

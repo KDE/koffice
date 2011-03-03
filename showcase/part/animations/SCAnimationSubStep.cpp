@@ -18,37 +18,37 @@
  */
 
 
-#include "KPrAnimationSubStep.h"
-#include "KPrShapeAnimation.h"
+#include "SCAnimationSubStep.h"
+#include "SCShapeAnimation.h"
 #include <KoXmlWriter.h>
 
 
-KPrAnimationSubStep::KPrAnimationSubStep()
+SCAnimationSubStep::SCAnimationSubStep()
 {
 }
 
-KPrAnimationSubStep::~KPrAnimationSubStep()
+SCAnimationSubStep::~SCAnimationSubStep()
 {
 }
 
-void KPrAnimationSubStep::init(KPrAnimationCache *animationCache, int step)
+void SCAnimationSubStep::init(SCAnimationCache *animationCache, int step)
 {
     for(int i=0;i < this->animationCount();i++) {
         QAbstractAnimation * animation = this->animationAt(i);
-        if (KPrShapeAnimation *a = dynamic_cast<KPrShapeAnimation*>(animation)) {
+        if (SCShapeAnimation *a = dynamic_cast<SCShapeAnimation*>(animation)) {
             a->init(animationCache, step);
         }
     }
 }
 
-bool KPrAnimationSubStep::saveOdf(KoPASavingContext & paContext, bool startStep) const
+bool SCAnimationSubStep::saveOdf(KoPASavingContext & paContext, bool startStep) const
 {
     KoXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:par");
     for (int i=0; i < this->animationCount(); i++) {
         bool startSubStep = !i;
         QAbstractAnimation *animation = this->animationAt(i);
-        if (KPrShapeAnimation *a = dynamic_cast<KPrShapeAnimation*>(animation)) {
+        if (SCShapeAnimation *a = dynamic_cast<SCShapeAnimation*>(animation)) {
             a->saveOdf(paContext, startStep, startSubStep);
         }
     }
@@ -56,11 +56,11 @@ bool KPrAnimationSubStep::saveOdf(KoPASavingContext & paContext, bool startStep)
     return true;
 }
 
-void KPrAnimationSubStep::deactivate()
+void SCAnimationSubStep::deactivate()
 {
     for (int i=0; i < this->animationCount(); i++) {
         QAbstractAnimation *animation = this->animationAt(i);
-        if (KPrShapeAnimation *a = dynamic_cast<KPrShapeAnimation*>(animation)) {
+        if (SCShapeAnimation *a = dynamic_cast<SCShapeAnimation*>(animation)) {
             a->deactivate();
         }
     }

@@ -18,16 +18,16 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrMiscShapeWipeEffectFactory.h"
+#include "SCMiscShapeWipeEffectFactory.h"
 
 #include <klocale.h>
 
-#include "../KPrIrisWipeEffectStrategyBase.h"
+#include "../SCIrisWipeEffectStrategyBase.h"
 
 #define MiscShapeWipeEffectFactoryId "MiscShapeWipeEffect"
 
-KPrMiscShapeWipeEffectFactory::KPrMiscShapeWipeEffectFactory()
-: KPrPageEffectFactory(MiscShapeWipeEffectFactoryId, i18n("Misc"))
+SCMiscShapeWipeEffectFactory::SCMiscShapeWipeEffectFactory()
+: SCPageEffectFactory(MiscShapeWipeEffectFactoryId, i18n("Misc"))
 {
      QPainterPath shape;
 
@@ -37,7 +37,7 @@ KPrMiscShapeWipeEffectFactory::KPrMiscShapeWipeEffectFactory()
 //     shape.lineTo(0, 12);
 //     shape.lineTo(12, 0);
 //     shape.quadTo(6, -12, 0, 0);
-//     addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Heart, "miscShapeWipe", "heart", false));
+//     addStrategy(new SCIrisWipeEffectStrategyBase(shape, Heart, "miscShapeWipe", "heart", false));
 
     //keyhole
     shape = QPainterPath();
@@ -48,13 +48,13 @@ KPrMiscShapeWipeEffectFactory::KPrMiscShapeWipeEffectFactory()
     QPainterPath shape2;
     shape2.addEllipse(-6, -12, 12, 12);
     shape = shape.united(shape2);
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, Keyhole, "miscShapeWipe", "keyhole", false));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, Keyhole, "miscShapeWipe", "keyhole", false));
 
     //keyhole reverse
-    addStrategy(new KPrIrisWipeEffectStrategyBase(shape, KeyholeReverse, "miscShapeWipe", "keyhole", true));
+    addStrategy(new SCIrisWipeEffectStrategyBase(shape, KeyholeReverse, "miscShapeWipe", "keyhole", true));
 }
 
-KPrMiscShapeWipeEffectFactory::~KPrMiscShapeWipeEffectFactory()
+SCMiscShapeWipeEffectFactory::~SCMiscShapeWipeEffectFactory()
 {
 }
 
@@ -65,7 +65,7 @@ static const char* s_subTypes[] = {
     I18N_NOOP("Keyhole Reverse")
 };
 
-QString KPrMiscShapeWipeEffectFactory::subTypeName(int subType) const
+QString SCMiscShapeWipeEffectFactory::subTypeName(int subType) const
 {
     if (subType >= 0 && (uint)subType < sizeof s_subTypes / sizeof s_subTypes[0]) {
         return i18n(s_subTypes[subType]);

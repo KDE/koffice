@@ -24,7 +24,7 @@
 
 #include "kpresenter_export.h"
 
-class KPrEventActionData;
+class SCEventActionData;
 class QUndoCommand;
 
 /**
@@ -32,17 +32,17 @@ class QUndoCommand;
  *
  * Each event action needs to implement this widget to make it configurable
  */
-class KPRESENTER_EXPORT KPrEventActionWidget : public QWidget
+class KPRESENTER_EXPORT SCEventActionWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit KPrEventActionWidget(QWidget *parent = 0);
-    virtual ~KPrEventActionWidget();
+    explicit SCEventActionWidget(QWidget *parent = 0);
+    virtual ~SCEventActionWidget();
 
     /**
      * Set the data for the widget
      */
-    virtual void setData(KPrEventActionData *eventActionData) = 0;
+    virtual void setData(SCEventActionData *eventActionData) = 0;
 
 signals:
     /**

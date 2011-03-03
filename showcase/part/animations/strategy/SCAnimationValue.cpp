@@ -17,20 +17,20 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrAnimationValue.h"
-#include "KPrShapeAnimations.h"
+#include "SCAnimationValue.h"
+#include "SCShapeAnimations.h"
 
-KPrAnimationValue::KPrAnimationValue(KPrShapeAnimation *shapeAnimation)
+SCAnimationValue::SCAnimationValue(SCShapeAnimation *shapeAnimation)
     : m_shape(shapeAnimation->shape())
     , m_textBlockData(shapeAnimation->textBlockData())
 {
 }
 
-KPrAnimationValue::~KPrAnimationValue()
+SCAnimationValue::~SCAnimationValue()
 {
 }
 
-void KPrAnimationValue::setCache(KPrAnimationCache *cache)
+void SCAnimationValue::setCache(SCAnimationCache *cache)
 {
     m_cache = cache;
 }

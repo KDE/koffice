@@ -17,27 +17,27 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrSlideWipeFromTopStrategy.h"
-#include "KPrSlideWipeEffectFactory.h"
+#include "SCSlideWipeFromTopStrategy.h"
+#include "SCSlideWipeEffectFactory.h"
 
 #include <QWidget>
 #include <QPainter>
 
-KPrSlideWipeFromTopStrategy::KPrSlideWipeFromTopStrategy()
-: KPrPageEffectStrategy(KPrSlideWipeEffectFactory::FromTop, "slideWipe", "fromTop", false)
+SCSlideWipeFromTopStrategy::SCSlideWipeFromTopStrategy()
+: SCPageEffectStrategy(SCSlideWipeEffectFactory::FromTop, "slideWipe", "fromTop", false)
 {
 }
 
-KPrSlideWipeFromTopStrategy::~KPrSlideWipeFromTopStrategy()
+SCSlideWipeFromTopStrategy::~SCSlideWipeFromTopStrategy()
 {
 }
 
-void KPrSlideWipeFromTopStrategy::setup(const KPrPageEffect::Data &data, QTimeLine &timeLine)
+void SCSlideWipeFromTopStrategy::setup(const SCPageEffect::Data &data, QTimeLine &timeLine)
 {
     timeLine.setFrameRange(0, data.m_widget->height());
 }
 
-void KPrSlideWipeFromTopStrategy::paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data)
+void SCSlideWipeFromTopStrategy::paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data)
 {
     int height = data.m_widget->height();
     int width = data.m_widget->width();
@@ -47,7 +47,7 @@ void KPrSlideWipeFromTopStrategy::paintStep(QPainter &p, int currPos, const KPrP
     p.drawPixmap(QPoint(0, 0), data.m_newPage, rect2);
 }
 
-void KPrSlideWipeFromTopStrategy::next(const KPrPageEffect::Data &data)
+void SCSlideWipeFromTopStrategy::next(const SCPageEffect::Data &data)
 {
     int currPos = data.m_timeLine.frameForTime(data.m_currentTime);
     data.m_widget->update(0, 0, data.m_widget->width(), currPos);

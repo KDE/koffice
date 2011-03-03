@@ -20,24 +20,24 @@
 #ifndef KPRPAGEDATA_H
 #define KPRPAGEDATA_H
 
-#include "KPrShapeAnimations.h"
-#include "pagelayout/KPrPlaceholders.h"
+#include "SCShapeAnimations.h"
+#include "pagelayout/SCPlaceholders.h"
 
 class KprAnimationStep;
 
-class KPrPageData
+class SCPageData
 {
 public:
-    KPrPageData();
-    ~KPrPageData();
+    SCPageData();
+    ~SCPageData();
 
-    KPrShapeAnimations & animations();
-    KPrPlaceholders & placeholders();
-    const KPrPlaceholders & placeholders() const;
-    QList<KPrAnimationStep *> animationSteps() const;
+    SCShapeAnimations & animations();
+    SCPlaceholders & placeholders();
+    const SCPlaceholders & placeholders() const;
+    QList<SCAnimationStep *> animationSteps() const;
 private:
-    KPrShapeAnimations m_animations;
-    KPrPlaceholders m_placeholders;
+    SCShapeAnimations m_animations;
+    SCPlaceholders m_placeholders;
 };
 
 #endif /* KPRPAGEDATA_H */

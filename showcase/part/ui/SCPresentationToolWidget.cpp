@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KPrPresentationToolWidget.h"
+#include "SCPresentationToolWidget.h"
 
 #include <QtGui/QPainter>
 #include <QtGui/QPaintEvent>
@@ -27,7 +27,7 @@
 
 #include <KIcon>
 
-KPrPresentationToolWidget::KPrPresentationToolWidget(QWidget *parent)
+SCPresentationToolWidget::SCPresentationToolWidget(QWidget *parent)
 : QWidget(parent)
 {
     // This QWidget will be the setup User Interface
@@ -47,16 +47,16 @@ KPrPresentationToolWidget::KPrPresentationToolWidget(QWidget *parent)
     m_uiWidget.blackButton->setIcon(KIcon("black"));
 }
 
-void KPrPresentationToolWidget::paintEvent(QPaintEvent *event)
+void SCPresentationToolWidget::paintEvent(QPaintEvent *event)
 {
     //For the transparent background...
     QPainter painter(this);
     painter.fillRect(event->rect(), Qt::transparent);
 }
 
-Ui::KPrPresentationTool KPrPresentationToolWidget::presentationToolUi()
+Ui::SCPresentationTool SCPresentationToolWidget::presentationToolUi()
 {
     return m_uiWidget;
 }
 
-#include "KPrPresentationToolWidget.moc"
+#include "SCPresentationToolWidget.moc"

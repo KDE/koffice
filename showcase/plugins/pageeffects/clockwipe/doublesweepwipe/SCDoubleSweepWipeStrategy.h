@@ -20,17 +20,17 @@
 #ifndef KPRDOUBLESWEEPWIPESTRATEGY_H
 #define KPRDOUBLESWEEPWIPESTRATEGY_H
 
-#include <KPrPageEffectStrategy.h>
-#include "KPrSweepWipeStrategy.h"
+#include <SCPageEffectStrategy.h>
+#include "SCSweepWipeStrategy.h"
 
-class KPrDoubleSweepWipeStrategy : public KPrSweepWipeStrategy
+class SCDoubleSweepWipeStrategy : public SCSweepWipeStrategy
 {
 public:
-    KPrDoubleSweepWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse);
-    virtual ~KPrDoubleSweepWipeStrategy();
+    SCDoubleSweepWipeStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse);
+    virtual ~SCDoubleSweepWipeStrategy();
 
-    virtual void setup(const KPrPageEffect::Data &data, QTimeLine &timeLine);
-    virtual void paintStep(QPainter &p, int currPos, const KPrPageEffect::Data &data);
+    virtual void setup(const SCPageEffect::Data &data, QTimeLine &timeLine);
+    virtual void paintStep(QPainter &p, int currPos, const SCPageEffect::Data &data);
 };
 
 #endif // KPRDOUBLESWEEPWIPESTRATEGY_H

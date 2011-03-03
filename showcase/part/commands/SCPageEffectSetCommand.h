@@ -25,13 +25,13 @@
 #include <QUndoCommand>
 
 class KoPAPageBase;
-class KPrPageEffect;
+class SCPageEffect;
 
-class KPRESENTER_EXPORT KPrPageEffectSetCommand : public QUndoCommand
+class KPRESENTER_EXPORT SCPageEffectSetCommand : public QUndoCommand
 {
 public:
-    KPrPageEffectSetCommand(KoPAPageBase * page, KPrPageEffect * pageEffect);
-    virtual ~KPrPageEffectSetCommand();
+    SCPageEffectSetCommand(KoPAPageBase * page, SCPageEffect * pageEffect);
+    virtual ~SCPageEffectSetCommand();
 
     /// redo the command
     void redo();
@@ -40,8 +40,8 @@ public:
 
 private:
     KoPAPageBase * m_page;
-    KPrPageEffect * m_newPageEffect;
-    KPrPageEffect * m_oldPageEffect;
+    SCPageEffect * m_newPageEffect;
+    SCPageEffect * m_oldPageEffect;
     bool m_deleteNewPageEffect;
 };
 

@@ -17,14 +17,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KPrHtmlExportUiDelegate.h"
+#include "SCHtmlExportUiDelegate.h"
 
-KPrHtmlExportUiDelegate::KPrHtmlExportUiDelegate()
+SCHtmlExportUiDelegate::SCHtmlExportUiDelegate()
 : JobUiDelegate()
 {
 }
 
-KIO::RenameDialog_Result KPrHtmlExportUiDelegate::askFileRename (KJob* job, const QString& caption, const QString& src,
+KIO::RenameDialog_Result SCHtmlExportUiDelegate::askFileRename (KJob* job, const QString& caption, const QString& src,
                                                                   const QString& dest, KIO::RenameDialog_Mode mode, QString& newDest,
                                                                   KIO::filesize_t sizeSrc, KIO::filesize_t sizeDest, time_t ctimeSrc,
                                                                   time_t ctimeDest, time_t mtimeSrc, time_t mtimeDest)
