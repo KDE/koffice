@@ -176,7 +176,11 @@ target_link_libraries(showcase kdeinit_showcase)
 install(TARGETS showcase ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ### desktop files ###
-install( FILES showcasepart.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES
+    showcasepart.desktop
+    pageeffects/kpr_pageeffect.desktop
+    shapeanimations/kpr_shapeanimation.desktop
+    DESTINATION ${SERVICES_INSTALL_DIR})
 install( PROGRAMS showcase.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 
 ### GUI files ###
