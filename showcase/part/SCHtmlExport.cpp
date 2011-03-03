@@ -95,7 +95,7 @@ void SCHtmlExport::exportImageToTmpDir()
 
 void SCHtmlExport::generateHtml()
 {
-    QFile file(KStandardDirs::locate("data", "kpresenter/templates/exportHTML/slides.html"));
+    QFile file(KStandardDirs::locate("data", "showcase/templates/exportHTML/slides.html"));
     file.open(QIODevice::ReadOnly);
     QString slideContent = file.readAll();
     file.close();
@@ -124,7 +124,7 @@ void SCHtmlExport::generateToc()
         toc.append(QString("<li><a href=\"slide%1.html\">%2</a></li>").arg(i).arg(m_parameters.slidesNames.at(i)));
     }
     toc.append("</ul>");
-    QFile file(KStandardDirs::locate("data", "kpresenter/templates/exportHTML/toc.html"));
+    QFile file(KStandardDirs::locate("data", "showcase/templates/exportHTML/toc.html"));
     file.open(QIODevice::ReadOnly);
     QString content = file.readAll();
     file.close();

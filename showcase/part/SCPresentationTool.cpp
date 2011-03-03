@@ -56,7 +56,7 @@ SCPresentationTool::SCPresentationTool(SCViewModePresentation &viewMode)
 , m_strategy(new SCPresentationStrategy(this))
 , m_bus (new SCPresentationToolAdaptor(this))
 {
-    QDBusConnection::sessionBus().registerObject("/kpresenter/PresentationTools", this);
+    QDBusConnection::sessionBus().registerObject("/showcase/PresentationTools", this);
 
     // tool box
     m_frame = new QFrame(m_viewMode.canvas()->canvasWidget());

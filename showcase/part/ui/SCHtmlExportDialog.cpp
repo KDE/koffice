@@ -131,7 +131,7 @@ void SCHtmlExportDialog::generateSlidesNames(const QList<KoPAPageBase*> &slides)
 void SCHtmlExportDialog::loadTemplatesList()
 {
     KStandardDirs std;
-    QStringList dirs = std.findDirs("data", "kpresenter/templates/exportHTML/templates");
+    QStringList dirs = std.findDirs("data", "showcase/templates/exportHTML/templates");
     for (QStringList::ConstIterator path=dirs.constBegin(); path!=dirs.constEnd(); ++path) {
         QDir dir(*path);
         dir.setFilter(QDir::Files);
@@ -151,7 +151,7 @@ void SCHtmlExportDialog::loadTemplatesList()
 
 void SCHtmlExportDialog::addSelectedTemplateToFavorite()
 {
-    QString savePath = KStandardDirs::locateLocal("data", "kpresenter/templates/exportHTML/templates/");
+    QString savePath = KStandardDirs::locateLocal("data", "showcase/templates/exportHTML/templates/");
     KUrl templatePath(ui.kcombobox->itemData(ui.kcombobox->currentIndex()).toString());
     savePath += templatePath.fileName();
     if(!(QFile::copy(templatePath.toLocalFile(), savePath))){
@@ -277,7 +277,7 @@ void SCHtmlExportDialog::renderPreview()
 bool SCHtmlExportDialog::selectedTemplateIsFavorite()
 {
     QString templatePath(ui.kcombobox->itemData(ui.kcombobox->currentIndex()).toString());
-    return templatePath.contains(KStandardDirs::locateLocal("data","kpresenter/templates/exportHTML"));
+    return templatePath.contains(KStandardDirs::locateLocal("data","showcase/templates/exportHTML"));
 }
 
 bool SCHtmlExportDialog::selectedTemplateIsSystemFavorite()
@@ -285,9 +285,9 @@ bool SCHtmlExportDialog::selectedTemplateIsSystemFavorite()
     QString templatePath(ui.kcombobox->itemData(ui.kcombobox->currentIndex()).toString());
     QString dir;
 
-    QStringList dirs(KStandardDirs().findDirs("data", "kpresenter/templates/exportHTML"));
+    QStringList dirs(KStandardDirs().findDirs("data", "showcase/templates/exportHTML"));
     for (QStringList::ConstIterator path=dirs.constBegin(); path!=dirs.constEnd(); ++path) {
-        if (!path->contains(KStandardDirs::locateLocal("data","kpresenter/templates/exportHTML"))) {
+        if (!path->contains(KStandardDirs::locateLocal("data","showcase/templates/exportHTML"))) {
             dir = *path;
         }
     }
