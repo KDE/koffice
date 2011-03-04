@@ -1,7 +1,4 @@
-add_subdirectory( rotate )
-
 install( FILES
-         webslideshow-sidebar.png
          layout-elements.svg
          DESTINATION ${DATA_INSTALL_DIR}/showcase/pics)
 
