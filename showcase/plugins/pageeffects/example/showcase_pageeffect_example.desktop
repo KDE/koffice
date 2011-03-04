@@ -61,5 +61,5 @@ Comment[x-test]=xxExploding Page Page Effectxx
 Comment[zh_TW]=爆炸頁面效果
 X-KDE-ServiceTypes=Showcase/PageEffect
 Type=Service
-X-KDE-Library=kpr_pageeffect_example
+X-KDE-Library=showcase_pageeffect_example
 X-Showcase-Version=1

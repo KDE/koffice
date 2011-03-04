@@ -27,6 +27,6 @@ Name[zh_CN]=幻灯片变量
 Name[zh_TW]=簡報變數
 X-KDE-ServiceTypes=KOffice/Text-InlineObject
 Type=Service
-X-KDE-Library=kprvariables
+X-KDE-Library=showcasevariables
 X-KoText-MinVersion=0
 X-Flake-PluginVersion=1

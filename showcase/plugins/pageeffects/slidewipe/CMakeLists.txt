@@ -1,6 +1,6 @@
 include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/showcase/part ${CMAKE_SOURCE_DIR}/showcase/part/pageeffects )
 
-set(kpr_pageeffect_slidewipe_PART_SRCS Plugin.cpp
+set(showcase_pageeffect_slidewipe_PART_SRCS Plugin.cpp
 SCSlideWipeEffectFactory.cpp
 SCSlideWipeFromBottomStrategy.cpp
 SCSlideWipeFromLeftStrategy.cpp
@@ -13,10 +13,10 @@ SCSlideWipeToTopStrategy.cpp
 )
 
 
-kde4_add_plugin(kpr_pageeffect_slidewipe ${kpr_pageeffect_slidewipe_PART_SRCS})
+kde4_add_plugin(showcase_pageeffect_slidewipe ${showcase_pageeffect_slidewipe_PART_SRCS})
 
 target_link_libraries(
-    kpr_pageeffect_slidewipe
+    showcase_pageeffect_slidewipe
     showcaseprivate
     flake
     
@@ -25,8 +25,8 @@ target_link_libraries(
     ${QT_QTGUI_LIBRARY}    
     )
 
-install(TARGETS kpr_pageeffect_slidewipe  DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS showcase_pageeffect_slidewipe  DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install( FILES kpr_pageeffect_slidewipe.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install( FILES showcase_pageeffect_slidewipe.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 

@@ -41,5 +41,5 @@ Comment[x-test]=xxSwap Page Effectxx
 Comment[zh_TW]=變換頁面效果
 X-KDE-ServiceTypes=Showcase/PageEffect
 Type=Service
-X-KDE-Library=kpr_pageeffect_swapeffect
+X-KDE-Library=showcase_pageeffect_swapeffect
 X-Showcase-Version=0

@@ -1,6 +1,6 @@
 include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/showcase/part ${CMAKE_SOURCE_DIR}/showcase/part/pageeffects )
 
-set(kpr_pageeffect_clockwipe_SRCS
+set(showcase_pageeffect_clockwipe_SRCS
     Plugin.cpp
     SCClockWipeStrategy.cpp
     SCCenterFanWipeStrategy.cpp
@@ -22,20 +22,20 @@ set(kpr_pageeffect_clockwipe_SRCS
     windshieldwipe/SCWindShieldWipeStrategy.cpp
     )
 
-kde4_add_plugin(kpr_pageeffect_clockwipe ${kpr_pageeffect_clockwipe_SRCS})
+kde4_add_plugin(showcase_pageeffect_clockwipe ${showcase_pageeffect_clockwipe_SRCS})
 
 target_link_libraries(
-    kpr_pageeffect_clockwipe 
-    showcaseprivate 
+    showcase_pageeffect_clockwipe
+    showcaseprivate
     flake
-    
+
     ${KDE4_KDECORE_LIBS}
     ${QT_QTCORE_LIBRARY}
     ${QT_QTGUI_LIBRARY}
     )
 
-install(TARGETS kpr_pageeffect_clockwipe  DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS showcase_pageeffect_clockwipe  DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install( FILES kpr_pageeffect_clockwipe.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install( FILES showcase_pageeffect_clockwipe.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 

@@ -41,5 +41,5 @@ Comment[x-test]=xxSpace Rotation Page Effectxx
 Comment[zh_TW]=空間旋轉頁面效果
 X-KDE-ServiceTypes=Showcase/PageEffect
 Type=Service
-X-KDE-Library=kpr_pageeffect_spacerotation
+X-KDE-Library=showcase_pageeffect_spacerotation
 X-Showcase-Version=0

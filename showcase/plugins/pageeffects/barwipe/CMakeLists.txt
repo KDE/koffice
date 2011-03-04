@@ -1,6 +1,6 @@
 include_directories( ${KOMAIN_INCLUDES} ${FLAKE_INCLUDES}  ${CMAKE_SOURCE_DIR}/showcase/part ${CMAKE_SOURCE_DIR}/showcase/part/pageeffects )
 
-set(kpr_pageeffect_barwipe_PART_SRCS Plugin.cpp
+set(showcase_pageeffect_barwipe_PART_SRCS Plugin.cpp
     SCBarWipeEffectFactory.cpp
     SCBarWipeFromLeftStrategy.cpp
     SCBarWipeFromRightStrategy.cpp
@@ -8,10 +8,10 @@ set(kpr_pageeffect_barwipe_PART_SRCS Plugin.cpp
     SCBarWipeFromBottomStrategy.cpp
 )
 
-kde4_add_plugin(kpr_pageeffect_barwipe ${kpr_pageeffect_barwipe_PART_SRCS})
+kde4_add_plugin(showcase_pageeffect_barwipe ${showcase_pageeffect_barwipe_PART_SRCS})
 
 target_link_libraries(
-    kpr_pageeffect_barwipe
+    showcase_pageeffect_barwipe
     showcaseprivate
     flake 
     
@@ -20,8 +20,8 @@ target_link_libraries(
     ${QT_QTGUI_LIBRARY}
     )
 
-install(TARGETS kpr_pageeffect_barwipe  DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS showcase_pageeffect_barwipe  DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install( FILES kpr_pageeffect_barwipe.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install( FILES showcase_pageeffect_barwipe.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 

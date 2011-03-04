@@ -57,5 +57,5 @@ Comment[x-test]=xxSlide Wipe Page Effectxx
 Comment[zh_TW]=滑動掃描頁面效果
 X-KDE-ServiceTypes=Showcase/PageEffect
 Type=Service
-X-KDE-Library=kpr_pageeffect_slidewipe
+X-KDE-Library=showcase_pageeffect_slidewipe
 X-Showcase-Version=0
