@@ -1001,7 +1001,6 @@ void KoTextEditor::newLine()
         if (currentStyle == nextStyle)
             nextStyle = 0;
     }
-    d->caret.insertBlock();
     QTextBlockFormat bf = d->caret.blockFormat();
     QVariant direction = bf.property(KoParagraphStyle::TextProgressionDirection);
     bf.clearProperty(QTextFormat::PageBreak_Auto);
@@ -1009,12 +1008,25 @@ void KoTextEditor::newLine()
     bf.clearProperty(KoParagraphStyle::UnnumberedListItem);
     bf.clearProperty(KoParagraphStyle::IsListHeader);
     bf.clearProperty(KoParagraphStyle::MasterPageName);
-    d->caret.setBlockFormat(bf);
+    d->caret.insertBlock(bf); // does not inherit list
+
     if (nextStyle) {
         QTextBlock block = d->caret.block();
         if (currentStyle)
             currentStyle->unapplyStyle(block);
         nextStyle->applyStyle(block);
+    } else { // need to inherit list manually
+        QTextBlock block = d->caret.block();
+        QTextBlock prev = block.previous();
+        QTextList *list = prev.textList();
+        if (list) {
+            if (prev.length() > 1) { // if not empty
+                list->add(block);
+            } else if (list->count() > 1 && list->itemNumber(prev) == list->count() -1) {
+                // remove list from prevblock
+                list->remove(prev);
+            }
+        }
     }
 
     bf = d->caret.blockFormat();
