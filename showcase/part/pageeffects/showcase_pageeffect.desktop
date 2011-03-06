@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=ServiceType
 X-KDE-ServiceType=Showcase/PageEffect
+Name=Page Effect
 Comment=Page effect plugin for Showcase
 Comment[pt]='Plugin' de efeitos das páginas do Showcase
 Comment[pt_BR]=Plug-in de efeitos das páginas do Showcase
