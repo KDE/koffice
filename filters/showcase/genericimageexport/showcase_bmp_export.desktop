@@ -1,6 +1,11 @@
 [Desktop Entry]
 Type=Service
 Name=Showcase BMP Export Filter
+Name[pt]=Filtro de Exportação de BMP para o Showcase
+Name[pt_BR]=Filtro de exportação de BMP para o Showcase
+Name[sv]=Showcase BMP-exportfilter
+Name[uk]=Фільтр експорту BMP для Showcase
+Name[x-test]=xxShowcase BMP Export Filterxx
 X-KDE-Import=application/x-kpresenter
 X-KDE-Export=image/x-bmp
 X-KDE-Weight=1

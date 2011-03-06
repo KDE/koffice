@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=Showcase
+Name[pt]=Showcase
+Name[pt_BR]=Showcase
+Name[sv]=Showcase
+Name[uk]=Showcase
+Name[x-test]=xxShowcasexx
 Exec=showcase %u
 GenericName=Presentation
 GenericName[bg]=Екранни презентации

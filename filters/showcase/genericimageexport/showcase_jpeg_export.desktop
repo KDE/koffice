@@ -1,6 +1,11 @@
 [Desktop Entry]
 Type=Service
 Name=Showcase JPEG Export Filter
+Name[pt]=Filtro de Exportação de JPEG para o Showcase
+Name[pt_BR]=Filtro de exportação de JPEG para o Showcase
+Name[sv]=Showcase JPEG-exportfilter
+Name[uk]=Фільтр експорту JPEG для Showcase
+Name[x-test]=xxShowcase JPEG Export Filterxx
 X-KDE-Import=application/x-kpresenter
 X-KDE-Export=image/jpeg
 X-KDE-Weight=1

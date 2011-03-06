@@ -1,6 +1,11 @@
 [Desktop Entry]
 Type=Service
 Name=Showcase MNG Export Filter
+Name[pt]=Filtro de Exportação de MNG para o Showcase
+Name[pt_BR]=Filtro de exportação de MNG para o Showcase
+Name[sv]=Showcase MNG-exportfilter
+Name[uk]=Фільтр експорту MNG для Showcase
+Name[x-test]=xxShowcase MNG Export Filterxx
 X-KDE-Import=application/x-kpresenter
 X-KDE-Export=video/x-mng
 X-KDE-Weight=1

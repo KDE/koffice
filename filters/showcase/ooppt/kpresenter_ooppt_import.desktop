@@ -1,6 +1,11 @@
 [Desktop Entry]
 Type=Service
 Name=PPT Import Filter for Showcase
+Name[pt]=Filtro de Importação de PPT para o Showcase
+Name[pt_BR]=Filtro de importação de PPT para o Showcase
+Name[sv]=PPT-importfilter för Showcase
+Name[uk]=Фільтр імпорту PPT для Showcase
+Name[x-test]=xxPPT Import Filter for Showcasexx
 X-KDE-Export=application/vnd.oasis.opendocument.presentation
 X-KDE-Import=application/vnd.ms-powerpoint
 X-KDE-Weight=1

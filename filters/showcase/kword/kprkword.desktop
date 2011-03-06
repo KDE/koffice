@@ -1,6 +1,11 @@
 [Desktop Entry]
 Type=Service
 Name=Showcase KWord Filter
+Name[pt]=Filtro de KWord para o Showcase
+Name[pt_BR]=Filtro do KWord para o Showcase
+Name[sv]=Showcase Kword-filter
+Name[uk]=Фільтр KWord для Showcase
+Name[x-test]=xxShowcase KWord Filterxx
 X-KDE-Import=application/x-kpresenter
 X-KDE-Weight=1
 X-KDE-Export=application/x-kword

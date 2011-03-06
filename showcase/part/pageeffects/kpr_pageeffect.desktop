@@ -2,5 +2,10 @@
 Type=ServiceType
 X-KDE-ServiceType=Showcase/PageEffect
 Comment=Page effect plugin for Showcase
+Comment[pt]='Plugin' de efeitos das páginas do Showcase
+Comment[pt_BR]=Plug-in de efeitos das páginas do Showcase
+Comment[sv]=Insticksprogram med sideffekter för Showcase
+Comment[uk]=Додаток ефектів сторінки для Showcase
+Comment[x-test]=xxPage effect plugin for Showcasexx
 [PropertyDef::X-Showcase-Version]
 Type=int
