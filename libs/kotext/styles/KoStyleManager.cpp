@@ -161,8 +161,8 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
     foreach(KoParagraphStyle *paragraphStyle, d->paragStyles) {
         if (paragraphStyle == d->defaultParagraphStyle)
             continue;
-
-        QString name(QString(QUrl::toPercentEncoding(paragraphStyle->name(), "", " ")).replace('%', '_'));
+        QString name(QUrl::toPercentEncoding(QString(paragraphStyle->name()).replace(' ', '_')));
+        name.replace('%', '_');
         if (name.isEmpty()) {
             name = 'P';
         }
@@ -187,7 +187,8 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
         if (characterStyle == d->defaultParagraphStyle->characterStyle() || characterParagraphStyles.contains(characterStyle))
             continue;
 
-        QString name(QString(QUrl::toPercentEncoding(characterStyle->name(), "", " ")).replace('%', '_'));
+        QString name(QUrl::toPercentEncoding(QString(characterStyle->name()).replace(' ', '_')));
+        name.replace('%', '_');
         if (name.isEmpty()) {
             name = 'T';
         }
@@ -200,7 +201,8 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
     foreach(KoListStyle *listStyle, d->listStyles) {
         if (listStyle == d->defaultListStyle)
             continue;
-        QString name(QString(QUrl::toPercentEncoding(listStyle->name(), "", " ")).replace('%', '_'));
+        QString name(QUrl::toPercentEncoding(QString(listStyle->name()).replace(' ', '_')));
+        name.replace('%', '_');
         if (name.isEmpty())
             name = 'L';
 
@@ -210,9 +212,10 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
     }
 
     foreach(KoTableStyle *tableStyle, d->tableStyles) {
-        QString name(QString(QUrl::toPercentEncoding(tableStyle->name(), "", " ")).replace('%', '_'));
+        QString name(QUrl::toPercentEncoding(QString(tableStyle->name()).replace(' ', '_')));
+        name.replace('%', '_');
         if (name.isEmpty())
-            name = 'T'; //TODO is this correct?
+            name = "table";
 
         KoGenStyle style(KoGenStyle::TableStyle);
         tableStyle->saveOdf(style);
@@ -220,9 +223,10 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
     }
 
     foreach(KoTableColumnStyle *tableColumnStyle, d->tableColumnStyles) {
-        QString name(QString(QUrl::toPercentEncoding(tableColumnStyle->name(), "", " ")).replace('%', '_'));
+        QString name(QUrl::toPercentEncoding(QString(tableColumnStyle->name()).replace(' ', '_')));
+        name.replace('%', '_');
         if (name.isEmpty())
-            name = 'T'; //TODO is this correct?
+            name = "Tc";
 
         KoGenStyle style(KoGenStyle::TableColumnStyle);
         tableColumnStyle->saveOdf(style);
@@ -230,9 +234,10 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
     }
 
     foreach(KoTableRowStyle *tableRowStyle, d->tableRowStyles) {
-        QString name(QString(QUrl::toPercentEncoding(tableRowStyle->name(), "", " ")).replace('%', '_'));
+        QString name(QUrl::toPercentEncoding(QString(tableRowStyle->name()).replace(' ', '_')));
+        name.replace('%', '_');
         if (name.isEmpty())
-            name = 'T'; //TODO is this correct?
+            name = "Tr";
 
         KoGenStyle style(KoGenStyle::TableRowStyle);
         tableRowStyle->saveOdf(style);
@@ -240,9 +245,10 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
     }
 
     foreach(KoTableCellStyle *tableCellStyle, d->tableCellStyles) {
-        QString name(QString(QUrl::toPercentEncoding(tableCellStyle->name(), "", " ")).replace('%', '_'));
+        QString name(QUrl::toPercentEncoding(QString(tableCellStyle->name()).replace(' ', '_')));
+        name.replace('%', '_');
         if (name.isEmpty())
-            name = "T."; //TODO is this correct?
+            name = "Tc";
 
         KoGenStyle style(KoGenStyle::TableCellStyle);
         tableCellStyle->saveOdf(style);
@@ -250,9 +256,10 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
     }
 
     foreach(KoSectionStyle *sectionStyle, d->sectionStyles) {
-        QString name(QString(QUrl::toPercentEncoding(sectionStyle->name(), "", " ")).replace('%', '_'));
+        QString name(QUrl::toPercentEncoding(QString(sectionStyle->name()).replace(' ', '_')));
+        name.replace('%', '_');
         if (name.isEmpty())
-            name = "T."; //TODO is this correct?
+            name = "S";
 
         KoGenStyle style(KoGenStyle::SectionStyle);
         sectionStyle->saveOdf(style);
