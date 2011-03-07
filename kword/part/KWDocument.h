@@ -4,7 +4,6 @@
  * Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2008 Pierre Ducroquet <pinaraf@pinaraf.info>
  * Copyright (C) 2008 Sebastian Sauer <mail@dipe.org>
- * Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -80,8 +79,6 @@ public:
     virtual bool saveOdf(SavingContext &documentContext);
     /// reimplemented from KoDocument
     virtual KoView* createViewInstance(QWidget*);
-    /// reimplemented from KoDocument
-    virtual QGraphicsItem *createCanvasItem();
     /// reimplemented from KoDocument
     virtual int pageCount() const {
         return pageManager()->pageCount();

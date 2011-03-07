@@ -2,7 +2,7 @@
  *
  * Copyright (C) 2006-2007, 2009 Thomas Zander <zander@kde.org>
  * Copyright (C) 2006 Thorsten Zachmann <zachmann@kde.org>
- * Copyright (C) 2007-2010 Boudewijn Rempt <boud@valdyas.org>
+ * Copyright (C) 2007 Boudewijn Rempt <boud@valdyas.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoCanvasControllerWidget.h"
-#include "KoCanvasControllerWidgetViewport_p.h"
+#include "KoCanvasController_p.h"
+#include "KoShape.h"
 #include "KoShape_p.h"
 #include "KoShapeFactoryBase.h" // for the SHAPE mimetypes
 #include "KoShapeRegistry.h"
@@ -35,12 +35,18 @@
 #include <KoProperties.h>
 
 #include <kdebug.h>
+#include <ksharedconfig.h>
+#include <kglobal.h>
+#include <kconfiggroup.h>
 
 #include <QPainter>
 #include <QDragEnterEvent>
 
+#include <limits.h>
+#include <stdlib.h>
+
 // ********** Viewport **********
-Viewport::Viewport(KoCanvasControllerWidget *parent)
+Viewport::Viewport(KoCanvasController *parent)
         : QWidget(parent)
         , m_draggedShape(0)
         , m_drawShadow(false)
@@ -128,29 +134,27 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
         // So, lets remove this again when Zagge adds his new class that does this kind of thing. (KoLoadSave)
         KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(id);
         if (! factory) {
-            kWarning(30006) << "Application requested a shape that is not registered '"
-                << id << "', Ignoring";
+            kWarning(30006) << "Application requested a shape that is not registered '" <<
+            id << "', Ignoring";
             event->ignore();
             return;
         }
-        event->acceptProposedAction();
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
 
         if (isTemplate) {
             KoProperties props;
             props.load(properties);
             m_draggedShape = factory->createShape(&props, m_parent->canvas()->shapeController()->resourceManager());
-        } else {
+        } else
             m_draggedShape = factory->createDefaultShape(m_parent->canvas()->shapeController()->resourceManager());
-        }
 
         Q_ASSERT(m_draggedShape);
-        if (!m_draggedShape)
-            return;
+        if (!m_draggedShape) return;
 
         if (m_draggedShape->shapeId().isEmpty())
             m_draggedShape->setShapeId(factory->id());
         m_draggedShape->setZIndex(KoShapePrivate::MaxZIndex);
-        m_draggedShape->setAbsolutePosition(correctPosition(event->pos()));
 
         m_parent->canvas()->shapeManager()->addShape(m_draggedShape);
     }
@@ -160,18 +164,21 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
         if (paste.paste(KoOdf::Text, data)) {
             QList<KoShape *> shapes = paste.pastedShapes();
             Q_ASSERT(!shapes.isEmpty());
-            Q_ASSERT(shapes.count() == 1); // would cause mem leak
+            if (shapes.count() > 1) {
+                Q_ASSERT(0); // hmm hmm, when does this happen?
+            }
             m_draggedShape = shapes.first();
             m_draggedShape->setZIndex(KoShapePrivate::MaxZIndex);
-            event->acceptProposedAction();
+            event->setDropAction(Qt::CopyAction);
+            event->accept();
         }
     }
 }
 
 void Viewport::handleDropEvent(QDropEvent *event)
 {
-    if (!m_draggedShape)
-        return;
+
+    if (!m_draggedShape) return;
     repaint(m_draggedShape);
     m_parent->canvas()->shapeManager()->remove(m_draggedShape); // remove it to not interfere with z-index calc.
 
@@ -190,9 +197,8 @@ void Viewport::handleDropEvent(QDropEvent *event)
 
         selection->deselectAll();
         selection->select(m_draggedShape);
-    } else {
+    } else
         delete m_draggedShape;
-    }
 
     m_draggedShape = 0;
 }
@@ -364,4 +370,4 @@ void Viewport::resetLayout()
 #endif
 }
 
-#include <KoCanvasControllerWidgetViewport_p.moc>
+#include <KoCanvasController_p.moc>

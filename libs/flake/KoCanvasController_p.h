@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2006-2007 Thomas Zander <zander@kde.org>
- * Copyright (C) 2007-2010 Boudewijn Rempt <boud@valdyas.org>
+ * Copyright (C) 2007 Boudewijn Rempt <boud@valdyas.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,24 +18,41 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KOCANVASCONTROLLERWIDGET_P_H
-#define KOCANVASCONTROLLERWIDGET_P_H
+#ifndef KOCANVASCONTROLLER_P_H
+#define KOCANVASCONTROLLER_P_H
 
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Flake API.  It exists purely as an
-// implementation detail.  This header file may change from version to
-// version without notice, or even be removed.
-//
-// We mean it.
-//
-
+#include "KoCanvasController.h"
 
 #include <QWidget>
 
-class KoCanvasControllerWidget;
+class Viewport;
+
+class KoCanvasController::Private
+{
+public:
+    Private(KoCanvasController *qq);
+
+    /**
+     * Gets called by the tool manager if this canvas controller is the current active canvas controller.
+     */
+    void setDocumentOffset();
+
+    void resetScrollBars();
+    void emitPointerPositionChangedSignals(QEvent *event);
+
+    void activate();
+
+    KoCanvasController *q;
+    KoCanvasBase * canvas;
+    CanvasMode canvasMode;
+    int margin; // The viewport margin around the document // TODO can we remove this one? The viewport has a copy...
+    QSize documentSize;
+    QPoint documentOffset;
+    Viewport * viewportWidget;
+    qreal preferredCenterFractionX;
+    qreal preferredCenterFractionY;
+    bool ignoreScrollSignals;
+};
 
 class Viewport : public QWidget
 {
@@ -43,7 +60,7 @@ class Viewport : public QWidget
 
 public:
 
-    Viewport(KoCanvasControllerWidget *parent);
+    Viewport(KoCanvasController *parent);
     ~Viewport() {}
 
     void setCanvas(QWidget *canvas);
@@ -84,7 +101,7 @@ private:
 
 private:
 
-    KoCanvasControllerWidget *m_parent;
+    KoCanvasController *m_parent;
     KoShape *m_draggedShape;
 
     bool m_drawShadow;

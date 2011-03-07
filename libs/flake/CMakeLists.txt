@@ -44,8 +44,7 @@ set(flake_SRCS
     KoFrameShape.cpp
     KoToolBase.cpp
     KoCanvasController.cpp
-    KoCanvasControllerWidget.cpp
-    KoCanvasControllerWidgetViewport_p.cpp
+    KoCanvasController_p.cpp
     KoShapeRegistry.cpp
     KoToolFactoryBase.cpp
     KoPathShapeFactory.cpp
@@ -248,7 +247,6 @@ install(
     flake_export.h
     KoCanvasBase.h
     KoCanvasController.h
-    KoCanvasControllerWidget.h
     KoCanvasObserverBase.h
     KoCanvasSupervisor.h
     KoColorBackground.h

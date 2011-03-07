@@ -31,7 +31,7 @@
 #include <QClipboard>
 #include <QLabel>
 
-#include <KoCanvasControllerWidget.h>
+#include <KoCanvasController.h>
 #include <KoResourceManager.h>
 #include <KoColorBackground.h>
 #include <KoFind.h>
@@ -179,7 +179,7 @@ void KoPAView::initGUI()
     setLayout( gridLayout );
 
     d->canvas = new KoPACanvas( this, d->doc, this );
-    KoCanvasControllerWidget *canvasController = new KoCanvasControllerWidget( this );
+    KoCanvasController *canvasController = new KoCanvasController(this);
     d->canvasController = canvasController;
     d->canvasController->setCanvas( d->canvas );
     KoToolManager::instance()->addController( d->canvasController );
@@ -225,13 +225,13 @@ void KoPAView::initGUI()
     gridLayout->addWidget(d->verticalRuler, 1, 0);
     gridLayout->addWidget(canvasController, 1, 1 );
 
-    connect(d->canvasController->proxyObject, SIGNAL(canvasOffsetXChanged(int)),
+    connect(d->canvasController, SIGNAL(canvasOffsetXChanged(int)),
             this, SLOT(pageOffsetChanged()));
-    connect(d->canvasController->proxyObject, SIGNAL(canvasOffsetYChanged(int)),
+    connect(d->canvasController, SIGNAL(canvasOffsetYChanged(int)),
             this, SLOT(pageOffsetChanged()));
-    connect(d->canvasController->proxyObject, SIGNAL(sizeChanged(const QSize&)),
+    connect(d->canvasController, SIGNAL(sizeChanged(const QSize&)),
             this, SLOT(pageOffsetChanged()));
-    connect(d->canvasController->proxyObject, SIGNAL(canvasMousePositionChanged(const QPoint&)),
+    connect(d->canvasController, SIGNAL(canvasMousePositionChanged(const QPoint&)),
             this, SLOT(updateMousePosition(const QPoint&)));
     d->verticalRuler->createGuideToolConnection(d->canvas);
     d->horizontalRuler->createGuideToolConnection(d->canvas);
@@ -245,8 +245,8 @@ void KoPAView::initGUI()
     }
 
     connect(shapeManager(), SIGNAL(selectionChanged()), this, SLOT(selectionChanged()));
-    connect(d->canvas, SIGNAL(documentSize(const QSize&)), d->canvasController->proxyObject, SLOT(updateDocumentSize(const QSize&)));
-    connect(d->canvasController->proxyObject, SIGNAL(moveDocumentOffset(const QPoint&)), d->canvas, SLOT(slotSetDocumentOffset(const QPoint&)));
+    connect(d->canvas, SIGNAL(documentSize(const QSize&)), d->canvasController, SLOT(setDocumentSize(const QSize&)));
+    connect(d->canvasController, SIGNAL(moveDocumentOffset(const QPoint&)), d->canvas, SLOT(slotSetDocumentOffset(const QPoint&)));
 
     if (shell()) {
         KoPADocumentStructureDockerFactory structureDockerFactory( KoDocumentSectionView::ThumbnailMode, d->doc->pageType() );

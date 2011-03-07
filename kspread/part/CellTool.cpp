@@ -82,14 +82,14 @@ using namespace KSpread;
 class CellTool::Private
 {
 public:
-    CanvasBase* canvas;
+    Canvas* canvas;
 };
 
 CellTool::CellTool(KoCanvasBase* canvas)
         : CellToolBase(canvas)
         , d(new Private)
 {
-    d->canvas = static_cast<CanvasBase*>(canvas);
+    d->canvas = static_cast<Canvas*>(canvas);
 
     KAction* action = 0;
 
@@ -157,7 +157,7 @@ int CellTool::maxRow() const
 
 SheetView* CellTool::sheetView(const Sheet* sheet) const
 {
-    return d->canvas->sheetView(sheet);
+    return d->canvas->view()->sheetView(sheet);
 }
 
 void CellTool::definePrintRange()

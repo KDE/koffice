@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2006, 2008 Thomas Zander <zander@kde.org>
- * Copyright (C) 2007-2010 Boudewijn Rempt <boud@valdyas.org>
+ * Copyright (C) 2007 Boudewijn Rempt <boud@valdyas.org>
  * Copyright (C) 2007-2008 Casper Boemann <cbr@boemann.dk>
  * Copyright (C) 2006-2007 Jan Hambrecht <jaham@gmx.net>
  * Copyright (C) 2009 Thorsten Zachmann <zachmann@kde.org>
@@ -25,47 +25,36 @@
 #define KOCANVASCONTROLLER_H
 
 #include "flake_export.h"
-#include <QObject>
 
-class QRect;
-class QRectF;
-class QPoint;
-class QPointF;
-class QSize;
+#include <QAbstractScrollArea>
 
 class KoShape;
 class KoCanvasBase;
 class KoView;
-class KoCanvasControllerProxyObject;
 
 /**
- * KoCanvasController is the base class for wrappers around your canvas
- * that provides scrolling and zoomming for your canvas.
- *
+ * This widget is a wrapper around your canvas providing scrollbars.
  * Flake does not provide a canvas, the application will have to
- * implement a canvas themselves. You canvas can be QWidget-based, QGraphicsItem-based
- * or something we haven't invented yet -- as long the class that holds the canvas
- * imlements KoCanvasController, tools, scrolling and zooming will work.
- *
- * A KoCanvasController implementation acts as a decorator around the canvas widget or
- * graphics item and provides a way to scroll the cavasn, allows the canvas to be centered
- * in the viewArea and manages tool activation.
- *
- * <p>The using application can instantiate this class and add its
+ * extend a QWidget and implement that themselves; but Flake does make
+ * it a lot easier to do so. One of those things is this widget that
+ * acts as a decorator around the canvas widget and provides
+ * scrollbars and allows the canvas to be centered in the viewArea
+ * <p>The using application can intantiate this class and add its
  * canvas using the setCanvas() call. Which is designed so it can be
- * called multiple times if you need to exchange one canvas
- * widget for another, for instance, switching between a plain QWidget or a QGLWidget.
+ * called multiple times for those that wish to exchange one canvas
+ * widget for another.
  *
- * <p>There is _one_ KoCanvasController per canvas in your
+ * Effectively, there is _one_ KoCanvasController per KoView in your
  * application.
  *
- * <p>The canvas widget is at most as big as the viewport of the scroll
+ * The canvas widget is at most as big as the viewport of the scroll
  * area, and when the view on the document is near its edges, smaller.
  * In your canvas widget code, you can find the right place in your
  * document in view coordinates (pixels) by adding the documentOffset
  */
-class FLAKE_EXPORT KoCanvasController
+class FLAKE_EXPORT KoCanvasController : public QAbstractScrollArea
 {
+    Q_OBJECT
 public:
     /// An enum to alter the positioning and size of the canvas inside the canvas controller
     enum CanvasMode {
@@ -76,45 +65,16 @@ public:
         Spreadsheet   ///< same as Infinite, but supports right-to-left layouts
     };
 
-    // proxy QObject: use this to connect to slots and signals.
-    KoCanvasControllerProxyObject *proxyObject;
-
     /**
      * Constructor.
+     * @param parent the parent this widget will belong to
      */
-    explicit KoCanvasController();
+    explicit KoCanvasController(QWidget *parent = 0);
     virtual ~KoCanvasController();
-
-public:
     /**
-     * Returns the current margin that is used to pad the canvas with.
-     * This value is read from the KConfig property "canvasmargin"
+     * Reimplemented from QAbstractScrollArea.
      */
-    virtual int margin() const;
-
-    /**
-     * Set the new margin to pad the canvas with.
-     */
-    virtual void setMargin(int margin);
-
-    /**
-     * Sets the how the canvas behaves if the zoomed document becomes smaller than the viewport.
-     * @param mode the new canvas mode, CanvasMode::Centered is the default value
-     */
-    virtual void setCanvasMode(KoCanvasController::CanvasMode mode);
-
-    /// Returns the current canvas mode
-    virtual KoCanvasController::CanvasMode canvasMode() const;
-
-    /**
-     * compatibility with QAbstractScrollArea
-     */
-    virtual void scrollContentsBy(int dx, int dy) = 0;
-
-    /**
-     * @return the size of the viewport
-     */
-    virtual QSize viewportSize() const = 0;
+    void scrollContentsBy(int dx, int dy);
 
     /**
      * Set the shadow option -- by default the canvas controller draws
@@ -123,7 +83,7 @@ public:
      *
      * @param drawShadow if true, the shadow is drawn, if false, not
      */
-    virtual void setDrawShadow(bool drawShadow) = 0;
+    void setDrawShadow(bool drawShadow);
 
     /**
      * Set the new canvas to be shown as a child
@@ -132,37 +92,56 @@ public:
      * @param canvas the new canvas. The KoCanvasBase::canvas() will be called to retrieve the
      *        actual widget which will then be added as child of this one.
      */
-    virtual void setCanvas(KoCanvasBase *canvas) = 0;
-
+    void setCanvas(KoCanvasBase *canvas);
     /**
      * Return the currently set canvas
      * @return the currently set canvas
      */
-    virtual KoCanvasBase *canvas() const = 0;
+    KoCanvasBase *canvas() const;
+
+    /**
+     * Change the actual canvas widget used by the current canvas. This allows the canvas widget
+     * to be changed while keeping the current KoCanvasBase canvas and its associated resources as
+     * they are. This might be used, for example, to switch from a QWidget to a QGLWidget canvas.
+     * @param widget the new canvas widget.
+     */
+    void changeCanvasWidget(QWidget *widget);
 
     /**
      * return the amount of pixels vertically visible of the child canvas.
      * @return the amount of pixels vertically visible of the child canvas.
      */
-    virtual int visibleHeight() const = 0;
-
+    int visibleHeight() const;
     /**
      * return the amount of pixels horizontally visible of the child canvas.
      * @return the amount of pixels horizontally visible of the child canvas.
      */
-    virtual int visibleWidth() const = 0;
-
+    int visibleWidth() const;
     /**
      * return the amount of pixels that are not visible on the left side of the canvas.
      * The leftmost pixel that is shown is returned.
      */
-    virtual int canvasOffsetX() const = 0;
-
+    int canvasOffsetX() const;
     /**
      * return the amount of pixels that are not visible on the top side of the canvas.
      * The topmost pixel that is shown is returned.
      */
-    virtual int canvasOffsetY() const = 0;
+    int canvasOffsetY() const;
+
+    /**
+     * Sets the how the canvas behaves if the zoomed document becomes smaller than the viewport.
+     * @param mode the new canvas mode, CanvasMode::Centered is the default value
+     */
+    void setCanvasMode(CanvasMode mode);
+
+    /// Returns the current canvas mode
+    CanvasMode canvasMode() const;
+
+    /// Returns true if canvas uses QGLWidget (OpenGL can be used for painting on canvas)
+    bool isCanvasOpenGL() const;
+
+    /// Reimplemented from QObject
+    virtual bool eventFilter(QObject *watched, QEvent *event);
 
     /**
      * @brief Scrolls the content of the canvas so that the given rect is visible.
@@ -174,7 +153,7 @@ public:
      * @param smooth if true the viewport translation will make be just enough to ensure visibility, no more.
      * @see KoViewConverter::documentToView()
      */
-    virtual void ensureVisible(const QRectF &rect, bool smooth = false) = 0;
+    void ensureVisible(const QRectF &rect, bool smooth = false);
 
     /**
      * @brief Scrolls the content of the canvas so that the given shape is visible.
@@ -183,7 +162,18 @@ public:
      *
      * @param shape the shape to make visible
      */
-    virtual void ensureVisible(KoShape *shape) = 0;
+    void ensureVisible(KoShape *shape);
+
+    /**
+     * will cause the toolOptionWidgetsChanged to be emitted and all
+     * listeners to be updated to the new widget.
+     *
+     * FIXME: This doesn't belong her and it does an
+     * inherits("KoView") so it too much tied to komain
+     *
+     * @param widgets the map of widgets
+     */
+    void setToolOptionWidgets(const QMap<QString, QWidget *> &widgets);
 
     /**
      * @brief zooms in around the center.
@@ -193,7 +183,7 @@ public:
      *
      * @param center the position to zoom in on
      */
-    virtual void zoomIn(const QPoint &center) = 0;
+    void zoomIn(const QPoint &center);
 
     /**
      * @brief zooms out around the center.
@@ -203,7 +193,7 @@ public:
      *
      * @param center the position to zoom out around
      */
-    virtual void zoomOut(const QPoint &center) = 0;
+    void zoomOut(const QPoint &center);
 
     /**
      * @brief zooms around the center.
@@ -214,7 +204,7 @@ public:
      * @param center the position to zoom around
      * @param zoom the zoom to apply
      */
-    virtual void zoomBy(const QPoint &center, qreal zoom) = 0;
+    void zoomBy(const QPoint &center, qreal zoom);
 
     /**
      * @brief zoom so that rect is exactly visible (as close as possible)
@@ -224,7 +214,7 @@ public:
      *
      * @param rect the rect in view coordinates (pixels) that should fit the view afterwards
      */
-    virtual void zoomTo(const QRect &rect) = 0;
+    void zoomTo(const QRect &rect);
 
     /**
      * @brief repositions the scrollbars so previous center is once again center
@@ -235,108 +225,50 @@ public:
      *
      * The success of this method is limited by the size of thing. But we try our best.
      */
-    virtual void recenterPreferred() = 0;
+    void recenterPreferred();
 
     /**
      * Sets the preferred center point in view coordinates (pixels).
      * @param viewPoint the new preferred center
      */
-    virtual void setPreferredCenter(const QPoint &viewPoint) = 0;
+    void setPreferredCenter(const QPoint &viewPoint);
 
     /// Returns the currently set preferred center point in view coordinates (pixels)
-    virtual QPoint preferredCenter() const = 0;
+    QPoint preferredCenter() const;
 
     /**
      * Move the canvas over the x and y distance of the parameter distance
      * @param distance the distance in view coordinates (pixels).  A positive distance means moving the canvas up/left.
      */
-    virtual void pan(const QPoint &distance) = 0;
+    void pan(const QPoint &distance);
+
+    /**
+     * Returns the current margin that is used to pad the canvas with.
+     * This value is read from the KConfig property "canvasmargin"
+     */
+    int margin() const;
+
+    /**
+     * Set the new margin to pad the canvas with.
+     */
+    void setMargin(int margin);
 
     /**
      * Get the position of the scrollbar
      */
-    virtual QPoint scrollBarValue() const = 0;
+    QPoint scrollBarValue() const;
 
     /**
      * Set the position of the scrollbar
      * @param value the new values of the scroll bars
      */
-    virtual void setScrollBarValue(const QPoint &value) = 0;
+    void setScrollBarValue(const QPoint &value);
 
     /**
-     * Called when the size of your document in view coordinates (pixels) changes, for instance when zooming.
-     *
-     * @param newSize the new size, in view coordinates (pixels), of the document.
-     * @param recalculateCenter if true the offset in the document we center on after calling
-     *      recenterPreferred() will be recalculated for the new document size so the visual offset stays the same.
+     * \internal
      */
-    virtual void updateDocumentSize(const QSize &newSize, bool recalculateCenter) = 0;
-
-    /**
-     * Set mouse wheel to zoom behaviour
-     * @param zoom if true wheel will zoom instead of scroll, control modifier will scroll
-     */
-    virtual void setZoomWithWheel(bool zoom) = 0;
-
-    /**
-     * Set scroll area to be bigger than actual document.
-     * It allows the user to move the corner of the document
-     * to e.g. the center of the screen
-     *
-     * @param factor the coefficient, defining how much we can scroll out,
-     *     measured in parts of the widget size. Null value means vast
-     *     scrolling is disabled.
-     */
-    virtual void setVastScrolling(qreal factor) = 0;
-
-protected:
-    void setDocumentSize(const QSize &size);
-    QSize documentSize() const;
-
-    void setPreferredCenterFractionX(qreal);
-    qreal preferredCenterFractionX() const;
-
-    void setPreferredCenterFractionY(qreal);
-    qreal preferredCenterFractionY() const;
-
-    void setDocumentOffset(QPoint &offset);
-    QPoint documentOffset() const;
-
-private:
     class Private;
-    Private * const d;
-};
-
-
-/**
- * Workaround class for the problem that Qt does not allow two QObject base classes.
- * KoCanvasController can be implemented by for instance QWidgets, so it cannot be
- * a QObject directly. The interface of this class should be considered public interface
- * for KoCanvasController.
- */
-class FLAKE_EXPORT KoCanvasControllerProxyObject : public QObject
-{
-    Q_OBJECT
-    Q_DISABLE_COPY(KoCanvasControllerProxyObject);
-public:
-    KoCanvasControllerProxyObject(KoCanvasController *canvasController, QObject *parent = 0);
-
-public:
-
-    // Convenience methods to invoke the signals from subclasses
-
-    void emitCanvasRemoved(KoCanvasController *canvasController) { emit canvasRemoved(canvasController); }
-    void emitCanvasSet(KoCanvasController *canvasController) { emit canvasSet(canvasController); }
-    void emitCanvasOffsetXChanged(int offset) { emit canvasOffsetXChanged(offset); }
-    void emitCanvasOffsetYChanged(int offset) { emit canvasOffsetYChanged(offset); }
-    void emitCanvasMousePositionChanged(const QPoint &position) { emit canvasMousePositionChanged(position); }
-    void emitDocumentMousePositionChanged(const QPointF &position) { emit documentMousePositionChanged(position); }
-    void emitSizeChanged(const QSize &size) { emit sizeChanged(size); }
-    void emitMoveDocumentOffset(const QPoint &point) { emit moveDocumentOffset(point); }
-    void emitZoomBy(const qreal factor) { emit zoomBy(factor); }
-
-    // Convenience method to retrieve the canvas controller for who needs to use QPointer
-    KoCanvasController *canvasController() const { return m_canvasController; }
+    KoCanvasController::Private *priv();
 
 signals:
     /**
@@ -385,6 +317,16 @@ signals:
     void sizeChanged(const QSize &size);
 
     /**
+     * Emit the new tool option widgets to be used with this canvas.
+     */
+    void toolOptionWidgetsChanged(const QMap<QString, QWidget *> &map, QWidget *widgets);
+
+    /**
+     * Emit the new tool option widgets to be used with this canvas.
+     */
+    void toolOptionWidgetsChanged(const QMap<QString, QWidget *> &widgets);
+
+    /**
      * Emitted whenever the document is scrolled.
      *
      * @param point the new top-left point from which the document should
@@ -402,6 +344,7 @@ signals:
     void zoomBy(const qreal factor);
 
 public slots:
+
     /**
      * Call this slot whenever the size of your document in view coordinates (pixels)
      * changes, for instance when zooming.
@@ -409,10 +352,40 @@ public slots:
      * @param recalculateCenter if true the offset in the document we center on after calling
      *      recenterPreferred() will be recalculated for the new document size so the visual offset stays the same.
      */
-    void updateDocumentSize(const QSize &newSize, bool recalculateCenter = true);
+    void setDocumentSize(const QSize &newSize, bool recalculateCenter = true);
+
+protected slots:
+
+    /// Called by the horizontal scrollbar when its value changes
+    void updateCanvasOffsetX();
+
+    /// Called by the vertical scrollbar when its value changes
+    void updateCanvasOffsetY();
+
+protected:
+    /// reimplemented from QWidget
+    virtual void paintEvent(QPaintEvent *event);
+    /// reimplemented from QWidget
+    virtual void resizeEvent(QResizeEvent *resizeEvent);
+    /// reimplemented from QWidget
+    virtual void dragEnterEvent(QDragEnterEvent *event);
+    /// reimplemented from QWidget
+    virtual void dropEvent(QDropEvent *event);
+    /// reimplemented from QWidget
+    virtual void dragMoveEvent(QDragMoveEvent *event);
+    /// reimplemented from QWidget
+    virtual void dragLeaveEvent(QDragLeaveEvent *event);
+    /// reimplemented from QWidget
+    virtual void wheelEvent(QWheelEvent *event);
+    /// reimplemented from QWidget
+    virtual void keyPressEvent(QKeyEvent *event);
+    /// reimplemented from QWidget
+    virtual bool focusNextPrevChild(bool next);
 
 private:
-    KoCanvasController *m_canvasController;
+    Q_PRIVATE_SLOT(d, void activate())
+
+    Private * const d;
 };
 
 #endif

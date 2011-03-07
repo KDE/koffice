@@ -10,9 +10,7 @@ set(kwordprivate_LIB_SRCS
     KWFactory.cpp
     KWord.cpp
     KWApplicationConfig.cpp
-    KWCanvasBase.cpp
     KWCanvas.cpp
-    KWCanvasItem.cpp
     KWDocument.cpp
     KWGui.cpp
     KWView.cpp
@@ -150,19 +148,3 @@ install( FILES kword.rc kword_readonly.rc  DESTINATION ${DATA_INSTALL_DIR}/kword
 install( FILES kwordpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install( PROGRAMS kword.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
 install( FILES kwordrc DESTINATION ${CONFIG_INSTALL_DIR} )
-
-install( FILES
-kword_export.h
-KWPage.h
-KWPageManager.h
-KWPageStyle.h
-KWord.h
-KWCanvasBase.h
-KWCanvas.h
-KWCanvasItem.h
-KWDocument.h
-KWApplicationConfig.h
-frames/KWFrameLayout.h
-KWViewMode.h
-DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
-

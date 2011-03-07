@@ -169,8 +169,6 @@ protected:
     /// reimplemented
     virtual KoView * createViewInstance(QWidget *parent);
     /// reimplemented
-    virtual QGraphicsItem *createCanvasItem();
-    /// reimplemented
     virtual const char *odfTagName(bool withNamespace);
 
     /// reimplemented

@@ -1,6 +1,5 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Fredy Yanardi <fyanardi@gmail.com>
- * Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -53,7 +52,7 @@ void KWStatisticsDocker::setView(KWView *view)
     if (wdg)
         delete wdg;
     KWStatistics *statistics = new KWStatistics(view->kwdocument(),
-            view->canvasBase()->shapeManager()->selection(), this);
+            view->kwcanvas()->shapeManager()->selection(), this);
     setWidget(statistics);
 }
 

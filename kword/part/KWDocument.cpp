@@ -4,7 +4,6 @@
  * Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2008 Pierre Ducroquet <pinaraf@pinaraf.info>
  * Copyright (C) 2008 Sebastian Sauer <mail@dipe.org>
- * Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -28,7 +27,6 @@
 #include "KWFactory.h"
 #include "KWView.h"
 #include "KWCanvas.h"
-#include "KWCanvasItem.h"
 #include "KWPageManager.h"
 #include "KWPage.h"
 #include "KWPageStyle.h"
@@ -203,7 +201,7 @@ void KWDocument::addShape(KoShape *shape)
     addFrameSet(frame->frameSet());
 
     foreach (KoView *view, views()) {
-        KoCanvasBase *canvas = static_cast<KWView*>(view)->canvasBase();
+        KWCanvas *canvas = static_cast<KWView*>(view)->kwcanvas();
         canvas->shapeManager()->addShape(shape);
     }
 }
@@ -237,7 +235,7 @@ void KWDocument::removeShape(KoShape *shape)
             fs->removeFrame(frame);
     } else { // not a frame, but we still have to remove it from views.
         foreach (KoView *view, views()) {
-            KoCanvasBase *canvas = static_cast<KWView*>(view)->canvasBase();
+            KWCanvas *canvas = static_cast<KWView*>(view)->kwcanvas();
             canvas->shapeManager()->remove(shape);
         }
     }
@@ -256,19 +254,19 @@ KoView *KWDocument::createViewInstance(QWidget *parent)
 {
     KWView *view = new KWView(m_viewMode, this, parent);
     if (m_magicCurtain)
-        view->canvasBase()->shapeManager()->addShape(m_magicCurtain, KoShapeManager::AddWithoutRepaint);
+        view->kwcanvas()->shapeManager()->addShape(m_magicCurtain, KoShapeManager::AddWithoutRepaint);
 
     bool switchToolCalled = false;
     foreach (KWFrameSet *fs, m_frameSets) {
         if (fs->frameCount() == 0)
             continue;
         foreach (KWFrame *frame, fs->frames())
-            view->canvasBase()->shapeManager()->addShape(frame->shape(), KoShapeManager::AddWithoutRepaint);
+            view->kwcanvas()->shapeManager()->addShape(frame->shape(), KoShapeManager::AddWithoutRepaint);
         if (switchToolCalled)
             continue;
         KWTextFrameSet *tfs = dynamic_cast<KWTextFrameSet*>(fs);
         if (tfs && tfs->textFrameSetType() == KWord::MainTextFrameSet) {
-            KoSelection *selection = view->canvasBase()->shapeManager()->selection();
+            KoSelection *selection = view->kwcanvas()->shapeManager()->selection();
             selection->select(fs->frames().first()->shape());
 
             KoToolManager::instance()->switchToolRequested(
@@ -280,25 +278,6 @@ KoView *KWDocument::createViewInstance(QWidget *parent)
         KoToolManager::instance()->switchToolRequested(KoInteractionTool_ID);
 
     return view;
-}
-
-QGraphicsItem *KWDocument::createCanvasItem()
-{
-    // caller owns the canvas item
-    KWCanvasItem *item = new KWCanvasItem(m_viewMode, this);
-
-    if (m_magicCurtain) {
-        item->shapeManager()->addShape(m_magicCurtain, KoShapeManager::AddWithoutRepaint);
-    }
-    foreach (KWFrameSet *fs, m_frameSets) {
-        if (fs->frameCount() == 0) {
-            continue;
-        }
-        foreach (KWFrame *frame, fs->frames()) {
-            item->shapeManager()->addShape(frame->shape(), KoShapeManager::AddWithoutRepaint);
-        }
-    }
-    return item;
 }
 
 KWPage KWDocument::insertPage(int afterPageNum, const QString &masterPageName)
@@ -384,7 +363,7 @@ void KWDocument::addFrameSet(KWFrameSet *fs)
 void KWDocument::addFrame(KWFrame *frame)
 {
     foreach (KoView *view, views()) {
-        KoCanvasBase *canvas = static_cast<KWView*>(view)->canvasBase();
+        KWCanvas *canvas = static_cast<KWView*>(view)->kwcanvas();
         if (frame->outlineShape())
             canvas->shapeManager()->addShape(frame->outlineShape()->parent());
         else
@@ -395,7 +374,7 @@ void KWDocument::addFrame(KWFrame *frame)
             m_magicCurtain = new MagicCurtain();
             m_magicCurtain->setVisible(false);
             foreach (KoView *view, views())
-                static_cast<KWView*>(view)->canvasBase()->shapeManager()->addShape(m_magicCurtain);
+                static_cast<KWView*>(view)->kwcanvas()->shapeManager()->addShape(m_magicCurtain);
         }
         m_magicCurtain->addFrame(frame);
     } else {
@@ -806,7 +785,7 @@ void KWDocument::endOfLoading() // called by both oasis and oldxml
                     m_magicCurtain = new MagicCurtain();
                     m_magicCurtain->setVisible(false);
                     foreach (KoView *view, views())
-                        static_cast<KWView*>(view)->canvasBase()->shapeManager()->addShape(m_magicCurtain);
+                        static_cast<KWView*>(view)->kwcanvas()->shapeManager()->addShape(m_magicCurtain);
                 }
                 m_magicCurtain->addShape(anchor->shape());
             }
@@ -926,7 +905,7 @@ void KWDocument::removeFrameFromViews(KWFrame *frame)
 {
     Q_ASSERT(frame);
     foreach (KoView *view, views()) {
-        KoCanvasBase *canvas = static_cast<KWView*>(view)->canvasBase();
+        KWCanvas *canvas = static_cast<KWView*>(view)->kwcanvas();
         canvas->shapeManager()->remove(frame->shape());
     }
 }

@@ -79,7 +79,6 @@
 #include "BindingManager.h"
 #include "CalculationSettings.h"
 #include "Canvas.h"
-#include "CanvasItem.h"
 #include "DependencyManager.h"
 #include "Factory.h"
 #include "Formula.h"
@@ -219,11 +218,6 @@ void Doc::initConfig()
 KoView* Doc::createViewInstance(QWidget* parent)
 {
     return new View(parent, this);
-}
-
-QGraphicsItem *Doc::createCanvasItem()
-{
-    return new CanvasItem(this);
 }
 
 bool Doc::saveChildren(KoStore* _store)

@@ -32,34 +32,26 @@
 #ifndef KSPREAD_CANVAS
 #define KSPREAD_CANVAS
 
-#include <QList>
-#include <QWidget>
-
-#include <KoCanvasBase.h>
-
 #include "kspread_export.h"
 
 #include "Global.h"
-#include "CanvasBase.h"
 
-class QDragLeaveEvent;
-class QDragMoveEvent;
-class QDropEvent;
-class QEvent;
-class QFocusEvent;
-class QKeyEvent;
-class QMouseEvent;
-class QPainter;
-class QPaintEvent;
-class QPen;
-class QResizeEvent;
-class QScrollBar;
+#include <KoCanvasBase.h>
+
+#include <QList>
+#include <QWidget>
+
+// Width of row header and height of column headers.  These are not
+// part of the styles.
+// FIXME: Rename to ROWHEADER_WIDTH and COLHEADER_HEIGHT?
+#define YBORDER_WIDTH  35
+#define XBORDER_HEIGHT 20
+
+class KoPointerEvent;
+class KoZoomHandler;
 
 namespace KSpread
 {
-class Cell;
-class CellEditor;
-class Canvas;
 class ColumnHeader;
 class Doc;
 class Sheet;
@@ -71,7 +63,7 @@ class View;
 /**
  * The scrollable area showing the cells.
  */
-class KSPREAD_EXPORT Canvas : public QWidget, public CanvasBase
+class KSPREAD_EXPORT Canvas : public QWidget, public KoCanvasBase
 {
     friend class ColumnHeader;
     friend class RowHeader;
@@ -90,100 +82,139 @@ public:
     virtual QWidget* canvasWidget() {
         return this;
     }
+    /// reimplemented method from KoCanvasBase
     virtual const QWidget* canvasWidget() const {
         return this;
     }
+    /// reimplemented method from KoCanvasBase
+    virtual void gridSize(qreal* horizontal, qreal* vertical) const;
+    /// reimplemented method from KoCanvasBase
+    virtual bool snapToGrid() const;
+    /// reimplemented method from KoCanvasBase
+    virtual void addCommand(QUndoCommand* command);
+    /// reimplemented method from KoCanvasBase
+    virtual KoShapeManager* shapeManager() const;
+    /// reimplemented method from KoCanvasBase
+    virtual void updateCanvas(const QRectF& rc);
+    /// reimplemented method from KoCanvasBase
+    virtual KoToolProxy* toolProxy() const;
+    /// reimplemented method from KoCanvasBase
+    virtual KoUnit unit() const;
+    /// reimplemented method from KoCanvasBase
+    virtual void updateInputMethodInfo();
+    /// reimplemented method from KoCanvasBase
+    virtual const KoViewConverter* viewConverter() const;
 
-    virtual Sheet* activeSheet() const;
+
+    QPointF offset() const {
+        return m_offset;
+    }
+
+    /**
+     * @return a pointer to the active sheet
+     */
+    Sheet* activeSheet() const;
     virtual KSpread::Selection* selection() const;
-    virtual void setCursor(const QCursor &cursor);
-
-public Q_SLOTS:
-    void setDocumentOffset(const QPoint& offset) {
-        CanvasBase::setDocumentOffset(offset);
-    }
-    void setDocumentSize(const QSizeF& size) {
-        CanvasBase::setDocumentSize(size);
+    Doc *doc() const {
+        return m_doc;
     }
 
-Q_SIGNALS:
-    /* virtual */ void documentSizeChanged(const QSize&);
+    /**
+     * @return the width of the columns before the current screen
+     */
+    qreal xOffset() const {
+        return m_offset.x();
+    }
+
+    /**
+     * @return the height of the rows before the current screen
+     */
+    qreal yOffset() const {
+        return m_offset.y();
+    }
+
+    /**
+     * Validates the selected cell.
+     */
+    void validateSelection();
+    /**
+     * Calculates the region in view coordinates occupied by a range of cells on
+     * the currently active sheet. Respects the scrolling offset and the layout
+     * direction
+     *
+     * \param cellRange The range of cells on the current sheet.
+     */
+    QRectF cellCoordinatesToView(const QRect &cellRange) const;
+
+    KoZoomHandler* zoomHandler() const;
+    bool isViewLoading() const;
+    void enableAutoScroll();
+    void disableAutoScroll();
+    void showContextMenu(const QPoint& globalPos);
+    ColumnHeader* columnHeader() const;
+    RowHeader* rowHeader() const;
+
+public slots:
+    void setDocumentOffset(const QPoint &offset);
+    void setDocumentSize(const QSizeF &size);
+
+signals:
+    void documentSizeChanged(const QSize&);
 
 protected:
     virtual bool event(QEvent *e);
-    virtual void keyPressEvent(QKeyEvent* _ev) {
-        CanvasBase::keyPressed(_ev);
-    }
-    virtual void paintEvent(QPaintEvent* _ev);
-    virtual void mousePressEvent(QMouseEvent* _ev);
-    virtual void mouseReleaseEvent(QMouseEvent* _ev);
-    virtual void mouseMoveEvent(QMouseEvent* _ev);
+    virtual void paintEvent(QPaintEvent *ev);
+    virtual void mousePressEvent(QMouseEvent *ev);
+    virtual void mouseReleaseEvent(QMouseEvent *ev);
+    virtual void mouseMoveEvent(QMouseEvent *ev);
     virtual void mouseDoubleClickEvent(QMouseEvent*);
-    virtual void focusInEvent(QFocusEvent* _ev) {
-        CanvasBase::focusIn(_ev);
-        QWidget::focusInEvent(_ev);
-    }
+    virtual void focusInEvent(QFocusEvent *ev);
     virtual void dragEnterEvent(QDragEnterEvent*);
     virtual void dragMoveEvent(QDragMoveEvent*);
     virtual void dragLeaveEvent(QDragLeaveEvent*);
     virtual void dropEvent(QDropEvent*);
     /// reimplemented method from superclass
-    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const {
-        return CanvasBase::inputMethodQuery(query);
-    }
+    virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const;
     /// reimplemented method from superclass
-    virtual void inputMethodEvent(QInputMethodEvent *event) {
-        CanvasBase::inputMethodEvent(event);
-    }
+    virtual void inputMethodEvent(QInputMethodEvent *event);
     /// reimplemented method from superclass
-    virtual void tabletEvent(QTabletEvent *e) {
-        CanvasBase::tabletEvent(e);
-    }
+    virtual void tabletEvent(QTabletEvent *e);
 
-public:
-    virtual void update() {
-        QWidget::update();
-    }
-    virtual void update(const QRectF& rect) {
-        QWidget::update(rect.toRect());
-    }
-    virtual Qt::LayoutDirection layoutDirection() const {
-        return QWidget::layoutDirection();
-    }
-    virtual QRectF rect() const {
-        return QWidget::rect();
-    }
-    virtual QSizeF size() const {
-        return QWidget::size();
-    }
-    virtual QPoint mapToGlobal(const QPointF& point) const {
-        return QWidget::mapToGlobal(point.toPoint());
-    }
-    virtual void updateMicroFocus() {
-        QWidget::updateMicroFocus();
-    }
-
-    virtual KoZoomHandler* zoomHandler() const;
-    virtual bool isViewLoading() const;
-    virtual SheetView* sheetView(const Sheet* sheet) const;
-    virtual void enableAutoScroll();
-    virtual void disableAutoScroll();
-    virtual void showContextMenu(const QPoint& globalPos);
-    virtual ColumnHeader* columnHeader() const;
-    virtual RowHeader* rowHeader() const;
 private:
-    virtual void setVertScrollBarPos(qreal pos);
-    virtual void setHorizScrollBarPos(qreal pos);
+    void setVertScrollBarPos(qreal pos);
+    void setHorizScrollBarPos(qreal pos);
 
-    virtual bool eventFilter(QObject *o, QEvent *e) {
-        return CanvasBase::eventFilter(o, e);
-    }
+    bool eventFilter(QObject *o, QEvent *e);
+    void keyPressed(QKeyEvent *ev);
+    /**
+     * Determines the cell at @p point and shows its tooltip.
+     * @param point the position for which a tooltip is requested
+     */
+    void showToolTip(const QPoint& point);
+
+    /**
+     * Returns the range of cells which appear in the specified area of the Canvas widget
+     * For example, viewToCellCoordinates( QRect(0,0,width(),height()) ) returns a range containing all visible cells
+     *
+     * @param area The area (in pixels) on the Canvas widget
+     */
+    QRect viewToCellCoordinates(const QRectF& area) const;
 
 private:
     Q_DISABLE_COPY(Canvas)
 
-    class Private;
-    Private * const cd;
+    View *m_view;
+    Doc *m_doc;
+    // Non-visible range top-left from current screen
+    // Example: If the first visible column is 'E', then offset stores
+    // the width of the invisible columns 'A' to 'D'.
+    // Example: If the first visible row is '5', then offset stores
+    // the height of the invisible rows '1' to '4'.
+    QPointF m_offset;
+
+    // flake
+    KoShapeManager *m_shapeManager;
+    KoToolProxy *m_toolProxy;
 };
 
 } // namespace KSpread
