@@ -35,6 +35,7 @@ class KWDocument;
 class KWCanvas;
 class KWFrame;
 class KWGui;
+class KWCanvas;
 
 class KoCanvasBase;
 class KoZoomController;
@@ -86,7 +87,7 @@ public:
     /**
      * Return the current canvas; much like canvas(), but this one does not downcast.
      */
-    KoCanvasBase *canvasBase() const;
+    KWCanvas *kwcanvas() const;
 
     /// Return the view converter for this view.
     KoViewConverter *viewConverter() {

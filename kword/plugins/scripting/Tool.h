@@ -2,7 +2,6 @@
  * This file is part of KWord
  *
  * Copyright (c) 2007 Sebastian Sauer <mail@dipe.org>
- * Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Library General Public License as published by
@@ -30,7 +29,7 @@
 #include <KoToolProxy.h>
 #include <KoTextEditor.h>
 #include <KWView.h>
-#include <KoCanvasBase.h>
+#include <KWCanvas.h>
 
 #include "Module.h"
 #include "TextCursor.h"
@@ -63,7 +62,7 @@ class Tool : public QObject
 public:
     explicit Tool(Module* module) : QObject(module), m_module(module) {
         KWView* v = dynamic_cast< KWView* >(m_module->view());
-        KoCanvasBase* c = v ? v->canvasBase() : 0;
+        KWCanvas* c = v ? v->kwcanvas() : 0;
         m_toolproxy = c ? c->toolProxy() : 0;
 
         m_signalMapper = new QSignalMapper(this);
@@ -118,7 +117,7 @@ public slots:
         TextCursor* textcursor = dynamic_cast< TextCursor* >(cursor);
         if (! textcursor) return false;
         KWView* v = dynamic_cast< KWView* >(m_module->view());
-        KoCanvasBase* c = v ? v->KoCanvasBase() : 0;
+        KWCanvas* c = v ? v->kwcanvas() : 0;
         KoResourceManager* r = c ? c->resourceManager() : 0;
         if (! r) return false;
         QVariant variant;

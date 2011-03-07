@@ -24,7 +24,6 @@
 #include "KoPointerEvent.h"
 #include "KoCanvasBase.h"
 #include "KoCanvasController.h"
-#include "KoCanvasControllerWidget.h"
 #include "KoViewConverter.h"
 
 #include <QKeyEvent>
@@ -74,8 +73,7 @@ void KoPanTool::mouseReleaseEvent(KoPointerEvent *event)
 
 void KoPanTool::keyPressEvent(QKeyEvent *event)
 {
-    // XXX: Make widget-independent!
-    KoCanvasControllerWidget *canvasControllerWidget = dynamic_cast<KoCanvasControllerWidget*>(m_controller);
+    KoCanvasController *canvasControllerWidget = dynamic_cast<KoCanvasController*>(m_controller);
     if (!canvasControllerWidget) {
         return;
     }

@@ -30,7 +30,6 @@
 #include "KoFilterManager.h"
 #include "KoDocumentInfo.h"
 #include "KoCanvasController.h"
-#include "KoCanvasControllerWidget.h"
 #include "rdf/KoDocumentRdfBase.h"
 #ifdef SHOULD_BUILD_RDF
 #include "rdf/KoDocumentRdf.h"

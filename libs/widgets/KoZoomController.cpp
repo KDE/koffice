@@ -94,9 +94,8 @@ KoZoomController::KoZoomController(KoCanvasController *co, KoZoomHandler *zh, KA
     actionCollection->addAction(KStandardAction::ZoomIn,  "zoom_in", d->action, SLOT(zoomIn()));
     actionCollection->addAction(KStandardAction::ZoomOut,  "zoom_out", d->action, SLOT(zoomOut()));
 
-    connect(d->canvasController->proxyObject, SIGNAL( sizeChanged(const QSize & ) ), this, SLOT( setAvailableSize() ) );
-
-    connect(d->canvasController->proxyObject, SIGNAL( zoomBy(const qreal ) ), this, SLOT( requestZoomBy( const qreal ) ) );
+    connect(d->canvasController, SIGNAL(sizeChanged(const QSize&) ), this, SLOT(setAvailableSize()));
+    connect(d->canvasController, SIGNAL(zoomBy(const qreal)), this, SLOT(requestZoomBy(const qreal)));
 }
 
 KoZoomController::~KoZoomController()
@@ -128,7 +127,7 @@ void KoZoomController::setPageSize(const QSizeF &pageSize)
 void KoZoomController::setDocumentSize(const QSizeF &documentSize, bool recalculateCenter)
 {
     d->documentSize = documentSize;
-    d->canvasController->updateDocumentSize( d->zoomHandler->documentToView(d->documentSize).toSize(), recalculateCenter);
+    d->canvasController->setDocumentSize(d->zoomHandler->documentToView(d->documentSize).toSize(), recalculateCenter);
 
     // Finally ask the canvasController to recenter
     d->canvasController->recenterPreferred();
@@ -145,14 +144,14 @@ void KoZoomController::setZoom(KoZoomMode::Mode mode, qreal zoom)
         if(zoom == 0.0) return;
         d->action->setZoom(zoom);
     } else if (mode == KoZoomMode::ZOOM_WIDTH) {
-        zoom = (d->canvasController->viewportSize().width() - 2*d->fitMargin)
+        zoom = (d->canvasController->viewport()->size().width() - 2*d->fitMargin)
                          / (d->zoomHandler->resolutionX() * d->pageSize.width());
         d->action->setSelectedZoomMode(mode);
         d->action->setEffectiveZoom(zoom);
     } else if (mode == KoZoomMode::ZOOM_PAGE) {
-        zoom = (d->canvasController->viewportSize().width() - 2*d->fitMargin)
+        zoom = (d->canvasController->viewport()->size().width() - 2*d->fitMargin)
                          / (d->zoomHandler->resolutionX() * d->pageSize.width());
-        zoom = qMin(zoom, (d->canvasController->viewportSize().height() - 2*d->fitMargin)
+        zoom = qMin(zoom, (d->canvasController->viewport()->size().height() - 2*d->fitMargin)
                      / (d->zoomHandler->resolutionY() * d->pageSize.height()));
 
         d->action->setSelectedZoomMode(mode);
@@ -171,7 +170,7 @@ void KoZoomController::setZoom(KoZoomMode::Mode mode, qreal zoom)
         kWarning(30004) << "ZoomController; Your page size is larger than your document size (" <<
             d->pageSize << " > " << d->documentSize << ")\n";
 #endif
-    d->canvasController->updateDocumentSize( d->zoomHandler->documentToView(d->documentSize).toSize(), true );
+    d->canvasController->setDocumentSize(d->zoomHandler->documentToView(d->documentSize).toSize(), true );
 
     if(d->canvasController->canvasMode() == KoCanvasController::Infinite
        && (mode == KoZoomMode::ZOOM_WIDTH || mode == KoZoomMode::ZOOM_PAGE)) {

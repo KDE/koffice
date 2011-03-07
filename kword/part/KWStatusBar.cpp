@@ -1,7 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Sebastian Sauer <mail@dipe.org>
  * Copyright (C) 2008-2010 Thomas Zander <zander@kde.org>
- * Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,10 +21,10 @@
 #include "KWStatusBar.h"
 #include "KWView.h"
 #include "KWDocument.h"
+#include "KWCanvas.h"
 
-#include <KoCanvasBase.h>
 #include <KoToolManager.h>
-#include <KoCanvasControllerWidget.h>
+#include <KoCanvasController.h>
 #include <KoZoomController.h>
 
 #include <QLabel>
@@ -111,7 +110,7 @@ KWStatusBar::KWStatusBar(KStatusBar *statusBar, KWView *view)
     m_statusbar->addAction(m_zoomAction);
 
     updateCurrentTool(0);
-    setCurrentView(view);
+    setCurrentCanvas(view->kwcanvas());
     connect(KoToolManager::instance(), SIGNAL(changedTool(KoCanvasController*, int)),
             this, SLOT(updateCurrentTool(KoCanvasController*)));
 }
@@ -157,32 +156,18 @@ void KWStatusBar::resourceChanged(int key, const QVariant &value)
 
 void KWStatusBar::updateCurrentTool(KoCanvasController *canvasController)
 {
-    KoCanvasControllerWidget *widget = dynamic_cast<KoCanvasControllerWidget*>(canvasController);
-    if (!widget) {
-        return;
-    }
     QWidget *root = m_statusbar->window();
-    if (root && !root->isAncestorOf(widget))
+    if (root && !root->isAncestorOf(canvasController))
         return; // ignore tool changes in other mainWindows
-
     if (m_controller) {
         disconnect(m_controller, SIGNAL(canvasMousePositionChanged(const QPoint&)),
                 this, SLOT(updateMousePosition(const QPoint&)));
     }
-    m_controller = canvasController->proxyObject;
-    if (canvasController) {
-        // find KWView parent of the canvas controller widget
-        KWView *view = 0;
-        QWidget *parent = widget->parentWidget();
-        while (view == 0 && parent != 0) {
-            view = dynamic_cast<KWView*>(parent);
-            if (!view) {
-                parent = parent->parentWidget();
-            }
-        }
-        if (view) {
-            setCurrentView(view);
-        }
+    m_controller = canvasController;
+    if (m_controller) {
+        KWCanvas *canvas = dynamic_cast<KWCanvas*>(m_controller->canvas());
+        if (canvas)
+            setCurrentCanvas(canvas);
         connect(m_controller, SIGNAL(canvasMousePositionChanged(const QPoint&)), this,
                 SLOT(updateMousePosition(const QPoint&)));
     } else {
@@ -190,20 +175,17 @@ void KWStatusBar::updateCurrentTool(KoCanvasController *canvasController)
     }
 }
 
-void KWStatusBar::setCurrentView(KWView *view)
+void KWStatusBar::setCurrentCanvas(KWCanvas *canvas)
 {
-    if (view == 0) {
+    if (canvas == 0) {
         m_currentView = 0;
         return;
-    } else if (view == m_currentView) {
-        return;
-    } else if (view->canvasBase() == 0 ) {
+    } else if (canvas->view() == m_currentView) {
         return;
     }
 
-
     if (m_currentView) {
-        KoCanvasBase *const canvas =  m_currentView->canvasBase();
+        KWCanvas *const canvas =  m_currentView->kwcanvas();
         Q_ASSERT(canvas);
         KoResourceManager *resourceManager = canvas->resourceManager();
         Q_ASSERT(resourceManager);
@@ -216,7 +198,7 @@ void KWStatusBar::setCurrentView(KWView *view)
         }
     }
 
-    m_currentView = view;
+    m_currentView = canvas->view();
     if (m_currentView == 0)
         return;
     QWidget *zoomWidget = m_zoomWidgets.value(m_currentView);
@@ -230,7 +212,7 @@ void KWStatusBar::setCurrentView(KWView *view)
         QTimer::singleShot(0, this, SLOT(createZoomWidget()));
     }
 
-    KoResourceManager *resourceManager = view->canvasBase()->resourceManager();
+    KoResourceManager *resourceManager = canvas->resourceManager();
     Q_ASSERT(resourceManager);
     connect(resourceManager, SIGNAL(resourceChanged(int, QVariant)),
         this, SLOT(resourceChanged(int, QVariant)));
