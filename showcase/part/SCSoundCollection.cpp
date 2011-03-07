@@ -46,7 +46,7 @@ void SCSoundCollection::addSound(SCSoundData *image) {
 }
 
 void SCSoundCollection::removeSound(SCSoundData *image) {
-    foreach(SCSoundData *data, d->sounds) {
+    foreach (SCSoundData *data, d->sounds) {
         if(data->operator==(*image)) {
             d->sounds.removeAll(data);
             delete data;
@@ -76,7 +76,7 @@ QStringList SCSoundCollection::titles()
 // TODO move to loading of the actual element using the sound
 bool SCSoundCollection::completeLoading(KoStore *store)
 {
-    foreach(SCSoundData *sound, d->sounds) {
+    foreach (SCSoundData *sound, d->sounds) {
         if(! store->open(sound->storeHref()))
             return false;
         bool ok = sound->loadFromFile(new KoStoreDevice(store));
@@ -92,7 +92,7 @@ bool SCSoundCollection::completeLoading(KoStore *store)
 bool SCSoundCollection::completeSaving(KoStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context)
 {
     Q_UNUSED(context);
-    foreach(SCSoundData *sound, d->sounds) {
+    foreach (SCSoundData *sound, d->sounds) {
         if(sound->isTaggedForSaving())
         {
             if(! store->open(sound->storeHref()))

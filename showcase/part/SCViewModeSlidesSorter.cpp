@@ -287,7 +287,7 @@ void SCViewModeSlidesSorter::populate()
     QListWidgetItem * item = 0;
 
     //Load the available slides
-    foreach(KoPAPageBase* page, m_view->kopaDocument()->pages())
+    foreach (KoPAPageBase *page, m_view->kopaDocument()->pages())
     {
         currentPage++;
         QString slideName = page->name().isEmpty() ? i18n("Slide %1", currentPage) : page->name();

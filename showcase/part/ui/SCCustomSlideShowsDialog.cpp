@@ -77,7 +77,7 @@ SCCustomSlideShowsDialog::SCCustomSlideShowsDialog(QWidget *parent, SCCustomSlid
     int currentPage = 1;
     QListWidgetItem * item;
 
-    foreach(KoPAPageBase* page, doc->pages())
+    foreach (KoPAPageBase *page, doc->pages())
     {
         item = new QListWidgetItem(QIcon(page->thumbnail(QSize(75,75))), i18n("Slide %1", currentPage++), m_uiWidget.availableSlidesList);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
@@ -194,7 +194,7 @@ void SCCustomSlideShowsDialog::loadCustomSlideShowsData()
 
     //build, configure and insert every Item:
     QListWidgetItem * item;
-    foreach(QString slideShowName, m_oldSlideShows->names())
+    foreach (const QString &slideShowName, m_oldSlideShows->names())
     {
         item = new QListWidgetItem(slideShowName, m_uiWidget.customSlideShowsList);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
@@ -234,7 +234,7 @@ void SCCustomSlideShowsDialog::changedSelectedSlideshow(QListWidgetItem* current
 
     //insert them into the current slideShow list
     QListWidgetItem * item;
-    foreach(KoPAPageBase* page, pages)
+    foreach (KoPAPageBase *page, pages)
     {
         item = new QListWidgetItem(QIcon(page->thumbnail(QSize(75,75))), i18n("Slide %1", m_doc->pageIndex(page)+1), m_uiWidget.currentSlidesList);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable);
@@ -249,7 +249,7 @@ void SCCustomSlideShowsDialog::addSlidesToCurrentSlideShow()
     QList<KoPAPageBase*> selectedSlideShow = m_slideShows->getByName(m_selectedSlideShowName);
 
     //insert the slides at the end and update the Widget
-    foreach(QListWidgetItem* item, selectedPages)
+    foreach (QListWidgetItem *item, selectedPages)
     {
         KoPAPageBase* page((item->data(SlideData).value<KoPAPageBase*>()));
         selectedSlideShow.append(page);
@@ -281,7 +281,7 @@ void SCCustomSlideShowsDialog::removeSlidesFromCurrentSlideShow()
     QList<KoPAPageBase*> selectedSlideShow = m_slideShows->getByName(m_selectedSlideShowName);
 
     //remove the slides and update the widget
-    foreach(QListWidgetItem* item, selectedPages)
+    foreach (QListWidgetItem *item, selectedPages)
     {
         int row = m_uiWidget.currentSlidesList->row(item);
         m_uiWidget.currentSlidesList->takeItem(row);

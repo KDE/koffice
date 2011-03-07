@@ -168,7 +168,7 @@ QList<QPair<QString, bool> > SCPageEffectFactory::tags() const
 QMap<QString, int> SCPageEffectFactory::subTypesByName() const
 {
     QMap<QString, int> nameToType;
-    foreach(const int subType, d->subTypes) {
+    foreach (const int subType, d->subTypes) {
         nameToType.insertMulti(subTypeName(subType), subType);
     }
     return nameToType;

@@ -78,7 +78,7 @@ void SCPageLayoutDocker::setView( SCView* view )
 
     // TODO add empty layout
 
-    foreach( SCPageLayout * layout, layoutMap ) {
+    foreach (SCPageLayout *layout, layoutMap ) {
         if ( layout->type() == SCPageLayout::Page ) {
             addLayout( layout );
         }

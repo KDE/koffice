@@ -88,7 +88,7 @@ bool SCAnimationLoader::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
 
 void SCAnimationLoader::debug()
 {
-    foreach(SCAnimationStep *step, m_animations) {
+    foreach (SCAnimationStep *step, m_animations) {
         kDebug() << "step";
         debug(step, 1);
     }

@@ -179,7 +179,7 @@ void SCPlaceholders::shapeRemoved(KoShape * shape)
 
 void SCPlaceholders::add(const QList<KoShape *> & shapes)
 {
-    foreach(KoShape* shape, shapes) {
+    foreach (KoShape *shape, shapes) {
         QString presentationClass = shape->additionalAttribute("presentation:class");
         QString placeholder = shape->additionalAttribute("presentation:placeholder");
         if (!presentationClass.isNull()) {
