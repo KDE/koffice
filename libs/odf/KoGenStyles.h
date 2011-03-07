@@ -137,8 +137,9 @@ public:
 
     /**
      * @return an existing style by name. If no such style exists, 0 is returned.
+     * @param family if passed the odf style:family is used to limit the result to that type
      */
-    const KoGenStyle *style(const QString& name) const;
+    const KoGenStyle *style(const QString &name, const QByteArray &family = QByteArray()) const;
 
     /**
      * @return an existing style by name, which can be modified.
