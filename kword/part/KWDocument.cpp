@@ -35,7 +35,7 @@
 #include "KWOdfWriter.h"
 #include "frames/KWFrameSet.h"
 #include "frames/KWTextFrameSet.h"
-#include "frames/KWFrame.h"
+#include "frames/KWTextFrame.h"
 #include "frames/KWFrameLayout.h"
 #include "frames/KWOutlineShape.h"
 #include "dialogs/KWFrameDialog.h"
@@ -186,13 +186,21 @@ void KWDocument::addShape(KoShape *shape)
 {
     // KWord adds a couple of dialogs (like KWFrameDialog) which will not call addShape(), but
     // will call addFrameSet.  Which will itself call addFrame()
-    // any call coming in here is due to the undo/redo framework or for nested frames
+    // any call coming in here is due to the undo/redo framework, pasting or for nested frames
 
     KWFrame *frame = dynamic_cast<KWFrame*>(shape->applicationData());
     if (frame == 0) {
-        KWFrameSet *fs = new KWFrameSet();
-        fs->setName(shape->shapeId());
-        frame = new KWFrame(shape, fs);
+        KWFrameSet *fs;
+        if (shape->shapeId() == TextShape_SHAPEID) {
+            KWTextFrameSet *tfs = new KWTextFrameSet(this);
+            fs = tfs;
+            fs->setName("Text");
+            frame = new KWTextFrame(shape, tfs);
+        } else {
+            fs = new KWFrameSet();
+            fs->setName(shape->shapeId());
+            frame = new KWFrame(shape, fs);
+        }
         // since we auto-decorate we can expect someone to add a shape that has
         // as a child an already existing shape we previous decorated with a frame.
         recurseFrameRemovalOn(dynamic_cast<KoShapeContainer*>(shape), m_commandBeingAdded);
