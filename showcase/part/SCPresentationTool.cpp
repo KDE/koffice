@@ -137,11 +137,11 @@ void SCPresentationTool::mouseMoveEvent(KoPointerEvent *event)
 
     QString link;
     if (checkHyperlink(event, shape, link)) {
-        useCursor(Qt::PointingHandCursor);
+        setCursor(Qt::PointingHandCursor);
         return;
     }
 
-    useCursor(Qt::ArrowCursor);
+    setCursor(Qt::ArrowCursor);
 }
 
 void SCPresentationTool::mouseReleaseEvent(KoPointerEvent *event)

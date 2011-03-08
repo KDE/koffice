@@ -111,7 +111,7 @@ void KoToolBase::inputMethodEvent(QInputMethodEvent * event)
     event->accept();
 }
 
-void KoToolBase::useCursor(const QCursor &cursor)
+void KoToolBase::setCursor(const QCursor &cursor)
 {
     Q_D(KoToolBase);
     d->currentCursor = cursor;

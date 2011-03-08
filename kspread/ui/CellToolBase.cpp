@@ -915,9 +915,9 @@ void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
     if (SelectionStrategy::hitTestReferenceSizeGrip(canvas(), selection(), position) ||
         SelectionStrategy::hitTestSelectionSizeGrip(canvas(), selection(), position)) {
         if (selection()->activeSheet()->layoutDirection() == Qt::RightToLeft) {
-            useCursor(Qt::SizeBDiagCursor);
+            setCursor(Qt::SizeBDiagCursor);
         } else {
-            useCursor(Qt::SizeFDiagCursor);
+            setCursor(Qt::SizeFDiagCursor);
         }
         return KoInteractionTool::mouseMoveEvent(event);
     }
@@ -928,7 +928,7 @@ void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
         for (Region::ConstIterator it(selection()->constBegin()); it != end; ++it) {
             const QRect range = (*it)->rect();
             if (sheet->cellCoordinatesToDocument(range).contains(position)) {
-                useCursor(Qt::PointingHandCursor);
+                setCursor(Qt::PointingHandCursor);
                 return KoInteractionTool::mouseMoveEvent(event);
             }
         }
@@ -954,13 +954,13 @@ void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
             url = cellView.testAnchor(sheetView, cell, position.x() - xpos, position.y() - ypos);
         }
         if (!url.isEmpty()) {
-            useCursor(Qt::PointingHandCursor);
+            setCursor(Qt::PointingHandCursor);
             return KoInteractionTool::mouseMoveEvent(event);
         }
     }
 
     // Reset to normal cursor.
-    useCursor(Qt::ArrowCursor);
+    setCursor(Qt::ArrowCursor);
     KoInteractionTool::mouseMoveEvent(event);
 }
 
@@ -1087,7 +1087,7 @@ void CellToolBase::activate(ToolActivation toolActivation, const QSet<KoShape*> 
         d->initialized = true;
     }
 
-    useCursor(Qt::ArrowCursor);
+    setCursor(Qt::ArrowCursor);
 
     // paint the selection rectangle
     selection()->update();

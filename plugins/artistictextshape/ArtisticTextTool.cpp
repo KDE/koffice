@@ -292,11 +292,11 @@ void ArtisticTextTool::mouseMoveEvent( KoPointerEvent *event )
         }
     }
     if ( m_tmpPath )
-        useCursor( QCursor( Qt::PointingHandCursor ) );
+        setCursor( QCursor( Qt::PointingHandCursor ) );
     else if ( textShape )
-        useCursor( QCursor( Qt::IBeamCursor ) );
+        setCursor( QCursor( Qt::IBeamCursor ) );
     else
-        useCursor( QCursor( Qt::ArrowCursor ) );
+        setCursor( QCursor( Qt::ArrowCursor ) );
 }
 
 void ArtisticTextTool::mouseReleaseEvent( KoPointerEvent *event )

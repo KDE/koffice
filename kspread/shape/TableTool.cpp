@@ -150,7 +150,7 @@ void TableTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &sh
     }
     d->selection->setActiveSheet(d->tableShape->sheet());
     d->selection->setOriginSheet(d->tableShape->sheet());
-    useCursor(Qt::ArrowCursor);
+    setCursor(Qt::ArrowCursor);
     d->tableShape->update();
 
     CellToolBase::activate(toolActivation, shapes);

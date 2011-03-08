@@ -511,7 +511,7 @@ void KoPathTool::mouseMoveEvent(KoPointerEvent *event)
         if (parameterShape && parameterShape->isParametricShape()) {
             int handleId = parameterShape->handleIdAt(roi);
             if (handleId != -1) {
-                useCursor(m_moveCursor);
+                setCursor(m_moveCursor);
                 emit statusTextChanged(i18n("Drag to move handle."));
                 if (m_activeHandle)
                     m_activeHandle->repaint();
@@ -574,7 +574,7 @@ void KoPathTool::mouseMoveEvent(KoPointerEvent *event)
                 if (! bestPoint)
                     return;
 
-                useCursor(m_moveCursor);
+                setCursor(m_moveCursor);
                 if (bestPointType == KoPathPoint::Node)
                     emit statusTextChanged(i18n("Drag to move point. Shift click to change point type."));
                 else
@@ -594,7 +594,7 @@ void KoPathTool::mouseMoveEvent(KoPointerEvent *event)
         }
     }
 
-    useCursor(m_selectCursor);
+    setCursor(m_selectCursor);
     if (m_activeHandle)
         m_activeHandle->repaint();
     delete m_activeHandle;
@@ -858,7 +858,7 @@ void KoPathTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &s
         return;
     }
     m_pointSelection.setSelectedShapes(selectedShapes);
-    useCursor(m_selectCursor);
+    setCursor(m_selectCursor);
     connect(d->canvas->shapeManager()->selection(), SIGNAL(selectionChanged()), this, SLOT(activate()));
     updateOptionsWidget();
     updateActions();

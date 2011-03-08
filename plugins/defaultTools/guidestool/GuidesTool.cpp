@@ -106,9 +106,9 @@ void GuidesTool::repaintDecorations()
 void GuidesTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
 {
     if (m_mode != None)
-        useCursor(m_orientation == Qt::Horizontal ? Qt::SizeVerCursor : Qt::SizeHorCursor);
+        setCursor(m_orientation == Qt::Horizontal ? Qt::SizeVerCursor : Qt::SizeHorCursor);
     else
-        useCursor(Qt::ArrowCursor);
+        setCursor(Qt::ArrowCursor);
     if (toolActivation == KoToolBase::TemporaryActivation)
         canvas()->canvasWidget()->grabMouse();
 
@@ -141,16 +141,16 @@ void GuidesTool::mousePressEvent(KoPointerEvent *event)
 void GuidesTool::mouseMoveEvent(KoPointerEvent *event)
 {
     if (m_mode == None) {
-        useCursor(Qt::ArrowCursor);
+        setCursor(Qt::ArrowCursor);
         return;
     }
 
     if (m_mode == EditGuide && ! m_isMoving) {
         GuideLine line = guideLineAtPosition(event->point);
         if (line.second < 0)
-            useCursor(Qt::ArrowCursor);
+            setCursor(Qt::ArrowCursor);
         else
-            useCursor(line.first == Qt::Horizontal ? Qt::SizeVerCursor : Qt::SizeHorCursor);
+            setCursor(line.first == Qt::Horizontal ? Qt::SizeVerCursor : Qt::SizeHorCursor);
     } else {
         repaintDecorations();
         m_position = m_orientation == Qt::Horizontal ? event->point.y() : event->point.x();

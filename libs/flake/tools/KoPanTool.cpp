@@ -46,7 +46,7 @@ void KoPanTool::mousePressEvent(KoPointerEvent *event)
 {
     m_lastPosition = documentToViewport(event->point);
     event->accept();
-    useCursor(QCursor(Qt::ClosedHandCursor));
+    setCursor(QCursor(Qt::ClosedHandCursor));
 }
 
 void KoPanTool::mouseMoveEvent(KoPointerEvent *event)
@@ -66,7 +66,7 @@ void KoPanTool::mouseMoveEvent(KoPointerEvent *event)
 void KoPanTool::mouseReleaseEvent(KoPointerEvent *event)
 {
     event->accept();
-    useCursor(QCursor(Qt::OpenHandCursor));
+    setCursor(QCursor(Qt::OpenHandCursor));
     if (m_temporary)
         emit done();
 }
@@ -101,7 +101,7 @@ void KoPanTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
         return;
     }
     m_temporary = toolActivation == TemporaryActivation;
-    useCursor(QCursor(Qt::OpenHandCursor));
+    setCursor(QCursor(Qt::OpenHandCursor));
 }
 
 void KoPanTool::customMoveEvent(KoPointerEvent * event)

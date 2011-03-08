@@ -886,7 +886,7 @@ void TextTool::mouseMoveEvent(KoPointerEvent *event)
         return;
     m_changeTipPos = event->globalPos();
 
-    useCursor(Qt::IBeamCursor);
+    setCursor(Qt::IBeamCursor);
     if (event->buttons()) {
         updateSelectedShape(event->point);
     }
@@ -904,9 +904,9 @@ void TextTool::mouseMoveEvent(KoPointerEvent *event)
         QTextCharFormat fmt = mouseOver.charFormat();
 
         if (fmt.isAnchor())
-            useCursor(Qt::PointingHandCursor);
+            setCursor(Qt::PointingHandCursor);
         else
-            useCursor(Qt::IBeamCursor);
+            setCursor(Qt::IBeamCursor);
 
         if (m_changeTracker && m_changeTracker->containsInlineChanges(fmt)) {
             m_changeTipTimer.start();
@@ -1109,7 +1109,7 @@ void TextTool::keyPressEvent(QKeyEvent *event)
         }
     }
     if (moveOperation != QTextCursor::NoMove || destinationPosition != -1) {
-        useCursor(Qt::BlankCursor);
+        setCursor(Qt::BlankCursor);
         bool shiftPressed = event->modifiers() & Qt::ShiftModifier;
         if (textEditor->hasSelection() && !shiftPressed)
             repaintSelection(); // will erase selection
@@ -1355,7 +1355,7 @@ void TextTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &sha
     }
 
     setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
-    useCursor(Qt::IBeamCursor);
+    setCursor(Qt::IBeamCursor);
 
     // restore the selection from a previous time we edited this document.
     KoTextEditor *textEditor = m_textEditor.data();

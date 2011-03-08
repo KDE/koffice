@@ -473,7 +473,7 @@ void DefaultTool::updateCursor()
             statusText = i18n("Click and drag to move guide line.");
         }
     }
-    useCursor(cursor);
+    setCursor(cursor);
     if (currentStrategy() == 0)
         emit statusTextChanged(statusText);
 }
@@ -893,7 +893,7 @@ void DefaultTool::activate(ToolActivation, const QSet<KoShape*> &)
 {
     m_mouseWasInsideHandles = false;
     m_lastHandle = KoFlake::NoHandle;
-    useCursor(Qt::ArrowCursor);
+    setCursor(Qt::ArrowCursor);
     repaintDecorations();
     delete m_guideLine;
     m_guideLine = new GuideLine();

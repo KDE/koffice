@@ -55,7 +55,7 @@ void PictureTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &
         emit done();
         return;
     }
-    useCursor(Qt::ArrowCursor);
+    setCursor(Qt::ArrowCursor);
 }
 
 void PictureTool::deactivate()
