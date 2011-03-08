@@ -58,8 +58,7 @@ public:
             position(-1),
             endPosition(-1),
             direction(KoText::AutoDirection),
-            textpage(0),
-            padding(7, 7, 7, 7)
+            textpage(0)
     {
     }
 
