@@ -221,7 +221,7 @@ void SCView::initActions()
     actionCollection()->addAction("edit_customslideshows", m_actionCreateCustomSlideShowsDialog);
     connect(m_actionCreateCustomSlideShowsDialog, SIGNAL(activated()), this, SLOT(dialogCustomSlideShows()));
 
-    m_actionStartPresentation = new KActionMenu(KIcon("view-presentation"), i18n("Start Presentation"), this);
+    m_actionStartPresentation = new KActionMenu(KIcon("view-presentation"), i18nc("Start of presentation", "Start"), this);
     actionCollection()->addAction("slideshow_start", m_actionStartPresentation);
     connect(m_actionStartPresentation, SIGNAL(activated()), this, SLOT(startPresentation()));
     KAction* action = new KAction(i18n("From Current Slide"),

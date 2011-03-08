@@ -87,7 +87,8 @@
         <Separator/>
         <Action name="page_insertpage"/>
         <Action name="slideshow_start"/>
-        <Separator/>
+    </ToolBar>
+    <ToolBar name="editToolBar" iconText="textundericon"><Text>Edit</Text>
         <Action name="edit_undo"/>
         <Action name="edit_redo"/>
         <Separator/>
