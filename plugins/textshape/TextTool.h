@@ -315,7 +315,7 @@ private:
 
     /// structure that allows us to remember the text position and selection of previously edited documents.
     struct TextSelection {
-        QTextDocument *document; // be warned that this may end up being a dangling pointer, so don't use.
+        QTextDocument *document; // be warned that this may end up being a dangling pointer, so don't rereference.
         int position;
         int anchor;
     };
