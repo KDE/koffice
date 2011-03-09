@@ -153,7 +153,7 @@ void TextShapeFactory::createUndoStack(KoResourceManager *manager)
 
 void TextShapeFactory::createEditingPluginContainer(KoResourceManager *manager)
 {
-    TextEditingPluginContainer *container = new TextEditingPluginContainer(manager);
+    TextEditingPluginContainer *container = TextEditingPluginContainer::create(manager);
     QVariant variant;
     variant.setValue<TextEditingPluginContainer*>(container);
     manager->setResource(TextEditingPluginContainer::ResourceId, variant);

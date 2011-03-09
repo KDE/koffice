@@ -451,6 +451,8 @@ TextTool::TextTool(MockCanvas *canvas)  // constructor for our unit tests;
     m_changeTipTimer(this),
     m_changeTipCursorPos(0)
 {
+    m_textEditingPlugins = TextEditingPluginContainer::create(0, TextEditingPluginContainer::TestSetup);
+    m_textEditingPlugins->setParent(this); // don't loose memory
     // we could init some vars here, but we probably don't have to
     KGlobal::setLocale(new KLocale("en"));
     QTextDocument *document = new QTextDocument();
