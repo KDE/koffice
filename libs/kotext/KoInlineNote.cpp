@@ -229,6 +229,10 @@ void KoInlineNote::saveOdf(KoShapeSavingContext & context)
     KoTextDocument textDocument(document);
     Q_ASSERT(!d->styleManager.isNull());
     textDocument.setStyleManager(d->styleManager.data());
+    if (this->document()) {
+        KoTextDocument origDoc(this->document());
+        textDocument.setChangeTracker(origDoc.changeTracker());
+    }
 
     QTextCursor cursor(document);
     cursor.insertFragment(d->text);
