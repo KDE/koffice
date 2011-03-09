@@ -147,6 +147,7 @@ void KWTextFrameSet::setupFrame(KWFrame *frame)
         // just added first frame, replace our document with the one from the frame...
         delete m_document;
         m_document = data->document();
+/*
         m_document->setDocumentLayout(new KWTextDocumentLayout(this));
         if (m_kwordDocument) {
             KoTextDocument doc(m_document);
@@ -157,7 +158,8 @@ void KWTextFrameSet::setupFrame(KWFrame *frame)
             doc.setInlineTextObjectManager(m_kwordDocument->inlineTextObjectManager());
             doc.setUndoStack(m_kwordDocument->resourceManager()->undoStack());
         }
-        data->setDocument(m_document, false);
+*/
+        data->setDocument(m_document, false); // claim doc for ourselves
     } else {
         if (frameCount() > 1) {
             KoShape *lastShape = frames().value(frameCount() - 2)->shape();
