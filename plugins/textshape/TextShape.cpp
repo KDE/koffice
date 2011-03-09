@@ -80,13 +80,13 @@ struct Finalizer {
 #include <kdebug.h>
 
 
-TextShape::TextShape(KoInlineTextObjectManager *inlineTextObjectManager)
-        : KoShapeContainer(new KoTextShapeContainerModel())
-        , KoFrameShape(KoXmlNS::draw, "text-box")
-        , m_footnotes(0)
-        , m_demoText(false)
-        ,m_pageProvider(0)
-        ,m_imageCollection(0)
+TextShape::TextShape()
+    : KoShapeContainer(new KoTextShapeContainerModel()),
+    KoFrameShape(KoXmlNS::draw, "text-box"),
+    m_footnotes(0),
+    m_demoText(false),
+    m_pageProvider(0),
+    m_imageCollection(0)
 {
     setShapeId(TextShape_SHAPEID);
     m_textShapeData = new KoTextShapeData();
@@ -96,7 +96,6 @@ TextShape::TextShape(KoInlineTextObjectManager *inlineTextObjectManager)
     lay->addShape(this);
     m_textShapeData->document()->setDocumentLayout(lay);
 
-    KoTextDocument(m_textShapeData->document()).setInlineTextObjectManager(inlineTextObjectManager);
     setCollisionDetection(true);
 
     lay->connect(m_textShapeData, SIGNAL(relayout()), SLOT(scheduleLayout()));
