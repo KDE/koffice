@@ -48,6 +48,7 @@
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>
+#include <KoVariable.h>
 #include <KoColorBackground.h>
 #include <KoColorPopupAction.h>
 #include <KoTextDocumentLayout.h>
@@ -69,6 +70,7 @@
 
 #include <kdebug.h>
 #include <KRun>
+#include <KPageDialog>
 #include <KStandardShortcut>
 #include <KFontSizeAction>
 #include <KFontChooser>
@@ -638,53 +640,6 @@ void TextTool::updateSelectedShape(const QPointF &point)
     }
 }
 
-void TextTool::mousePressEvent(KoPointerEvent *event)
-{
-    if (m_textEditor.isNull())
-        return;
-    if (event->button() != Qt::RightButton)
-        updateSelectedShape(event->point);
-    KoSelection *selection = canvas()->shapeManager()->selection();
-    if (!selection->isSelected(m_textShape) && m_textShape->isSelectable()) {
-        selection->deselectAll();
-        selection->select(m_textShape);
-    }
-
-    const bool canMoveCaret = !m_textEditor.data()->hasSelection() || event->button() !=  Qt::RightButton;
-    if (canMoveCaret) {
-        bool shiftPressed = event->modifiers() & Qt::ShiftModifier;
-        if (m_textEditor.data()->hasSelection() && !shiftPressed)
-            repaintSelection(); // will erase selection
-        else if (! m_textEditor.data()->hasSelection())
-            repaintCaret();
-        int prevPosition = m_textEditor.data()->position();
-        int position = pointToPosition(event->point);
-        if (position >= 0)
-            m_textEditor.data()->setPosition(position,
-                    shiftPressed ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor);
-        if (shiftPressed) // altered selection.
-            repaintSelection(prevPosition, m_textEditor.data()->position());
-        else
-            repaintCaret();
-
-        updateSelectionHandler();
-        updateStyleManager();
-    }
-    updateActions();
-
-    //activate context-menu for spelling-suggestions
-    if (event->button() == Qt::RightButton) {
-        KoTextEditingPlugin *plugin = m_textEditingPlugins->spellcheck();
-        if (plugin)
-            plugin->setCurrentCursorPosition(m_textEditor.data()->document(), m_textEditor.data()->position());
-    }
-
-    if (event->button() ==  Qt::MidButton) // Paste
-        paste();
-    else
-        event->ignore();
-}
-
 const QTextCursor TextTool::cursor()
 {
     return *(m_textEditor.data()->cursor());
@@ -863,6 +818,78 @@ int TextTool::pointToPosition(const QPointF &point) const
     }
     caretPos = qMin(caretPos, m_textShapeData->endPosition());
     return caretPos;
+}
+
+void TextTool::mousePressEvent(KoPointerEvent *event)
+{
+    if (m_textEditor.isNull())
+        return;
+    if (event->button() != Qt::RightButton)
+        updateSelectedShape(event->point);
+    KoSelection *selection = canvas()->shapeManager()->selection();
+    if (!selection->isSelected(m_textShape) && m_textShape->isSelectable()) {
+        selection->deselectAll();
+        selection->select(m_textShape);
+    }
+
+    const bool canMoveCaret = !m_textEditor.data()->hasSelection() || event->button() !=  Qt::RightButton;
+    if (canMoveCaret) {
+        bool shiftPressed = event->modifiers() & Qt::ShiftModifier;
+        if (m_textEditor.data()->hasSelection() && !shiftPressed)
+            repaintSelection(); // will erase selection
+        else if (! m_textEditor.data()->hasSelection())
+            repaintCaret();
+        int prevPosition = m_textEditor.data()->position();
+        int position = pointToPosition(event->point);
+        if (position >= 0)
+            m_textEditor.data()->setPosition(position,
+                    shiftPressed ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor);
+        if (shiftPressed) // altered selection.
+            repaintSelection(prevPosition, m_textEditor.data()->position());
+        else
+            repaintCaret();
+
+        updateSelectionHandler();
+        updateStyleManager();
+    }
+    updateActions();
+
+    if (event->button() == Qt::RightButton) {
+        // activate context-menu for spelling-suggestions
+        KoTextEditingPlugin *plugin = m_textEditingPlugins->spellcheck();
+        if (plugin)
+            plugin->setCurrentCursorPosition(m_textEditor.data()->document(), m_textEditor.data()->position());
+
+        // Is there a KoVariable here?
+        KoInlineTextObjectManager *inlineTextObjectManager = KoTextDocument(m_textEditor.data()->document()).inlineTextObjectManager();
+        KoVariable *variable = 0;
+        if (inlineTextObjectManager) {
+            const int position = pointToPosition(event->point);
+            QTextCursor cursor(m_textEditor.data()->document());
+            cursor.setPosition(position);
+            KoInlineObject *obj = inlineTextObjectManager->inlineTextObject(cursor.charFormat());
+            variable = dynamic_cast<KoVariable*>(obj);
+        }
+
+        if (variable) {
+            QWidget *optionsWidget = variable->createOptionsWidget();
+            if (optionsWidget) {
+                KPageDialog *dialog = new KPageDialog(canvas()->canvasWidget());
+                dialog->setCaption(i18n("Variable Options"));
+                dialog->addPage(optionsWidget, QString());
+    // TODO make this qundocommand based ...
+                dialog->exec();
+                delete dialog;
+            }
+            event->accept();
+            return;
+        }
+    }
+
+    if (event->button() ==  Qt::MidButton) // Paste
+        paste();
+    else
+        event->ignore();
 }
 
 void TextTool::mouseDoubleClickEvent(KoPointerEvent *event)
