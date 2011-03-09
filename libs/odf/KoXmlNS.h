@@ -59,6 +59,10 @@ public:
 
     static const QString koffice;
     static const QString officeooo;
+    
+    static const QString delta;
+    static const QString split;
+    static const QString ac;
 private:
     KoXmlNS(); // don't create an instance of me :)
 };

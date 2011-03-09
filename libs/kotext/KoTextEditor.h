@@ -78,7 +78,7 @@ public slots:
     ///This should be used only as read-only cursor or within a QUndoCommand sub-class which will be added to the textEditor with addCommand. For examples of proper implementation of such undoCommands, see the TextShape commands.
     QTextCursor* cursor();
 
-    void addCommand(QUndoCommand *command);
+    void addCommand(QUndoCommand *command, bool addCommandToStack = true);
 
     void registerTrackedChange(QTextCursor &selection, KoGenChange::Type changeType, QString title, QTextFormat &format, QTextFormat &prevFormat, bool applyToWholeBlock = false);
 
@@ -194,6 +194,46 @@ public slots:
      * @param columns the number of columns in the created table.
      */
     void insertTable(int rows, int columns);
+
+     /** 
+     * Insert a table row above the current cursor position (if in a table).
+     */
+    void insertTableRowAbove();
+
+     /** 
+     * Insert a table row below the current cursor position (if in a table).
+     */
+    void insertTableRowBelow();
+
+     /** 
+     * Insert a table column to the left of the current cursor position (if in a table).
+     */
+    void insertTableColumnLeft();
+
+     /**
+     * Insert a table column to the right of the current cursor position (if in a table).
+     */
+    void insertTableColumnRight();
+
+     /**
+     * Delete a table column where the cursor is (if in a table).
+     */
+    void deleteTableColumn();
+
+     /**
+     * Delete a table row where the cursor is (if in a table).
+     */
+    void deleteTableRow();
+
+     /**
+     * Merge table cells (selected by the cursor).
+     */
+    void mergeTableCells();
+
+     /**
+     * Split table cells (selected by the cursor) that were previously merged.
+     */
+    void splitTableCells();
 
     void insertText(const QString &text);
 
