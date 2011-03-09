@@ -935,10 +935,11 @@ void TextTool::mouseReleaseEvent(KoPointerEvent *event)
     event->ignore();
     editingPluginEvents();
     Q_ASSERT(m_textEditor.data());
+    const QTextCharFormat cfm = m_textEditor.data()->charFormat();
 
     // Is there an anchor here ?
-    if (m_textEditor.data()->charFormat().isAnchor() && !m_textEditor.data()->hasSelection()) {
-        QString anchor = m_textEditor.data()->charFormat().anchorHref();
+    if (cfm.isAnchor() && !m_textEditor.data()->hasSelection()) {
+        QString anchor = cfm.anchorHref();
         if (!anchor.isEmpty()) {
             KoTextDocument document(m_textEditor.data()->document());
             KoInlineTextObjectManager *inlineManager = document.inlineTextObjectManager();
@@ -974,12 +975,12 @@ void TextTool::mouseReleaseEvent(KoPointerEvent *event)
             }
 
             event->accept();
-            new KRun(m_textEditor.data()->charFormat().anchorHref(), 0);
+            new KRun(cfm.anchorHref(), 0);
             m_textEditor.data()->setPosition(0);
             ensureCursorVisible();
             return;
         } else {
-            QStringList anchorList = m_textEditor.data()->charFormat().anchorNames();
+            QStringList anchorList = cfm.anchorNames();
             QString anchorName;
             if (!anchorList.isEmpty()) {
                 anchorName = anchorList.takeFirst();
@@ -1355,7 +1356,6 @@ void TextTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &sha
         emit done();
         return;
     }
-
     setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
     setCursor(Qt::IBeamCursor);
 
