@@ -32,7 +32,8 @@
 //
 
 
-#include <KoToolBase.h>
+#include "../KoToolBase.h"
+#include "../KoToolBase_p.h"
 
 class KoInteractionStrategyPrivate
 {
@@ -41,9 +42,10 @@ public:
         : tool(t)
     {
     }
+
     ~KoInteractionStrategyPrivate()
     {
-        tool->setStatusText(QString());
+        tool->priv()->emitStatusText(QString());
     }
 
     KoToolBase *tool; ///< the KoToolBase instance that controls this strategy.

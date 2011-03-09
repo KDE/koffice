@@ -292,4 +292,10 @@ bool KoToolBase::isInTextMode() const
     return d->isInTextMode;
 }
 
+KoToolBasePrivate *KoToolBase::priv()
+{
+    Q_D(KoToolBase);
+    return d;
+}
+
 #include <KoToolBase.moc>

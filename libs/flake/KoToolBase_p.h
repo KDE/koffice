@@ -71,6 +71,10 @@ public:
         }
     }
 
+    void emitStatusText(const QString &statusText) {
+        q->statusTextChanged(statusText);
+    }
+
     QMap<QString, QWidget *> optionWidgets; ///< the optionwidgets associated with this tool
     QCursor currentCursor;
     QHash<QString, KAction*> actionCollection;

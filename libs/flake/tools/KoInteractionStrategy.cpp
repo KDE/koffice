@@ -56,3 +56,10 @@ KoToolBase *KoInteractionStrategy::tool() const
     Q_D(const KoInteractionStrategy);
     return d->tool;
 }
+
+void KoInteractionStrategy::setStatusText(const QString &statusText)
+{
+    Q_D(KoInteractionStrategy);
+    d->tool->priv()->emitStatusText(statusText);
+}
+

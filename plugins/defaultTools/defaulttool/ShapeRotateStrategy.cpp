@@ -58,7 +58,7 @@ ShapeRotateStrategy::ShapeRotateStrategy(KoToolBase *tool, const QPointF &clicke
     else
         m_rotationCenter = m_initialBoundingRect.center();
 
-    tool->setStatusText(i18n("Press ALT to rotate in 45 degree steps."));
+    setStatusText(i18n("Press ALT to rotate in 45 degree steps."));
 }
 
 void ShapeRotateStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers)

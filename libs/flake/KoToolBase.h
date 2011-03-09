@@ -311,12 +311,8 @@ public:
      */
     virtual void deactivate();
 
-    /**
-     * This method just relays the given text via the tools statusTextChanged signal.
-     * @param statusText the new status text
-     */
-    void setStatusText(const QString &statusText);
-
+    /// \internal
+    KoToolBasePrivate *priv();
 
 public slots:
     /**
@@ -376,6 +372,12 @@ protected:
      * @param cursor the new cursor.
      */
     void setCursor(const QCursor &cursor);
+
+    /**
+     * This method just relays the given text via the tools statusTextChanged signal.
+     * @param statusText the new status text
+     */
+    void setStatusText(const QString &statusText);
 
     /**
      * Reimplement this if your tool actually has an option widget.
