@@ -144,7 +144,7 @@ void KWTextFrameSet::setupFrame(KWFrame *frame)
         data->setInsets(KoInsets());
     }
     if (frameCount() == 1 && m_document->isEmpty() && m_document->allFormats().count() == 2) {
-        // just added first frame...
+        // just added first frame, replace our document with the one from the frame...
         delete m_document;
         m_document = data->document();
         m_document->setDocumentLayout(new KWTextDocumentLayout(this));
