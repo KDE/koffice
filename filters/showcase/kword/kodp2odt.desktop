@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Service
+Name=Showcase KWord Filter
+Name[et]=Showcase'i KWordi filter
+Name[pt]=Filtro de KWord para o Showcase
+Name[pt_BR]=Filtro do KWord para o Showcase
+Name[sv]=Showcase Kword-filter
+Name[uk]=Фільтр KWord для Showcase
+Name[x-test]=xxShowcase KWord Filterxx
+X-KDE-Import=application/vnd.oasis.opendocument.presentation
+X-KDE-Weight=1
+X-KDE-Export=application/vnd.oasis.opendocument.text
+X-KDE-Library=kodp2odt
+X-KDE-ServiceTypes=KOfficeFilter

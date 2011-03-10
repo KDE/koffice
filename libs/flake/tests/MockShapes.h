@@ -106,7 +106,6 @@ public:
         return KoUnit(KoUnit::Millimeter);
     }
     void updateInputMethodInfo() {}
-    void setCursor(const QCursor &) {}
 };
 
 class MockShapeController : public KoShapeControllerBase

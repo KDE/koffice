@@ -86,6 +86,12 @@ public:
     KoToolBase *tool() const;
 
 protected:
+    /**
+     * This method sets the new status text to be used for statusbar messages etc.
+     * @param statusText the new status text
+     */
+    void setStatusText(const QString &statusText);
+
     /// constructor
     KoInteractionStrategy(KoInteractionStrategyPrivate &);
 

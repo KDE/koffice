@@ -30,6 +30,7 @@ class KoShape;
 class KoShapeGroup;
 class KoShapeContainer;
 class KoShapeGroupCommandPrivate;
+class KoShapeController;
 
 /// The undo / redo command for grouping shapes
 class FLAKE_EXPORT KoShapeGroupCommand : public QUndoCommand
@@ -45,7 +46,19 @@ public:
      * @param parent the parent command if the resulting command is a compound undo command.
      * @param shapes a list of all the shapes that should be grouped.
      */
-    static KoShapeGroupCommand *createCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent = 0);
+    static QUndoCommand *createCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent = 0);
+
+    /**
+     * Create command to group a set of shapes into a KoShapeGroup, which is added to the controller.
+     * This uses the KoShapeGroupCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent = 0);
+     * constructor.
+     * The createCommand will make sure that the group will have the z-index and the parent of the top most shape in the group.
+     *
+     * @param parent the parent command if the resulting command is a compound undo command.
+     * @param shapeController a shape controller where the new group shape can be added to.
+     * @param shapes a list of all the shapes that should be grouped.
+     */
+    static QUndoCommand *createCommand(const QList<KoShape *> &shapes, KoShapeController *shapeController, QUndoCommand *parent = 0);
 
     /**
      * Command to group a set of shapes into a predefined container.

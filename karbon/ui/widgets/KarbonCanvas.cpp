@@ -307,7 +307,7 @@ void KarbonCanvas::updateSizeAndOffset()
         KoCanvasController * controller = canvasController();
         if (controller) {
             // tell canvas controller the new document size in pixel
-            controller->updateDocumentSize(viewRect.size().toSize(), true);
+            controller->setDocumentSize(viewRect.size().toSize(), true);
             // make sure the actual selection is visible
             KoSelection * selection = d->shapeManager->selection();
             if (selection->count())
@@ -426,11 +426,6 @@ void KarbonCanvas::setBackgroundColor(const QColor &color)
     pal.setColor(QPalette::Normal, backgroundRole(), color);
     pal.setColor(QPalette::Inactive, backgroundRole(), color);
     setPalette(pal);
-}
-
-void KarbonCanvas::setCursor(const QCursor &cursor)
-{
-    QWidget::setCursor(cursor);
 }
 
 #include "KarbonCanvas.moc"

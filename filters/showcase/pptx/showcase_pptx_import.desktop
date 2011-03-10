@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Service
+Name=MS PowerPoint 2007 Import Filter for Showcase
+Name[et]=Showcase'i MS PowerPoint 2007 impordifilter
+Name[pt]=Filtro de Importação do Microsoft PowerPoint 2007 para o Showcase
+Name[pt_BR]=Filtro de importação de Microsoft PowerPoint 2007 para o Showcase
+Name[sv]=Microsoft PowerPoint 2007-importfilter för Showcase
+Name[uk]=Фільтр імпорту MS PowerPoint 2007 для Showcase
+Name[x-test]=xxMS PowerPoint 2007 Import Filter for Showcasexx
+X-KDE-Export=application/vnd.oasis.opendocument.presentation
+X-KDE-Import=application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.presentationml.template,application/vnd.openxmlformats-officedocument.presentationml.slideshow,application/vnd.ms-powerpoint.presentation.macroEnabled.12,application/vnd.ms-powerpoint.template.macroEnabled.12,application/vnd.ms-powerpoint.slideshow.macroEnabled.12
+X-KDE-Weight=1
+X-KDE-Library=pptximport
+X-KDE-LibraryMajor=0
+X-KDE-LibraryMinor=1
+X-KDE-LibraryDependencies=
+X-KDE-ServiceTypes=KOfficeFilter

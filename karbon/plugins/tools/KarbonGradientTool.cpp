@@ -203,14 +203,14 @@ void KarbonGradientTool::mouseMoveEvent(KoPointerEvent *event)
         // are we on a gradient handle ?
         else if (m_currentStrategy->hitHandle(event->point, *canvas()->viewConverter(), false)) {
             m_currentStrategy->repaint(*canvas()->viewConverter());
-            useCursor(KarbonCursor::needleMoveArrow());
+            setCursor(KarbonCursor::needleMoveArrow());
             emit statusTextChanged(i18n("Drag to move gradient position."));
             return;
         }
         // are we on a gradient stop handle ?
         else if (m_currentStrategy->hitStop(event->point, *canvas()->viewConverter(), false)) {
             m_currentStrategy->repaint(*canvas()->viewConverter());
-            useCursor(KarbonCursor::needleMoveArrow());
+            setCursor(KarbonCursor::needleMoveArrow());
             const QGradient * g = m_currentStrategy->gradient();
             if (g && g->stops().count() > 2)
                 emit statusTextChanged(i18n("Drag to move color stop. Double click to remove color stop."));
@@ -221,7 +221,7 @@ void KarbonGradientTool::mouseMoveEvent(KoPointerEvent *event)
         // are we near the gradient line ?
         else if (m_currentStrategy->hitLine(event->point, *canvas()->viewConverter(), false)) {
             m_currentStrategy->repaint(*canvas()->viewConverter());
-            useCursor(Qt::SizeAllCursor);
+            setCursor(Qt::SizeAllCursor);
             emit statusTextChanged(i18n("Drag to move gradient position. Double click to insert color stop."));
             return;
         }
@@ -234,7 +234,7 @@ void KarbonGradientTool::mouseMoveEvent(KoPointerEvent *event)
     foreach(GradientStrategy *strategy, m_strategies) {
         if (strategy->hitHandle(event->point, *canvas()->viewConverter(), false)) {
             m_hoverStrategy = strategy;
-            useCursor(KarbonCursor::needleMoveArrow());
+            setCursor(KarbonCursor::needleMoveArrow());
             return;
         }
     }
@@ -242,12 +242,12 @@ void KarbonGradientTool::mouseMoveEvent(KoPointerEvent *event)
     foreach(GradientStrategy *strategy, m_strategies) {
         if (strategy->hitLine(event->point, *canvas()->viewConverter(), false)) {
             m_hoverStrategy = strategy;
-            useCursor(Qt::SizeAllCursor);
+            setCursor(Qt::SizeAllCursor);
             return;
         }
     }
 
-    useCursor(KarbonCursor::needleArrow());
+    setCursor(KarbonCursor::needleArrow());
 }
 
 void KarbonGradientTool::mouseReleaseEvent(KoPointerEvent *event)
@@ -322,7 +322,7 @@ void KarbonGradientTool::activate(ToolActivation toolActivation, const QSet<KoSh
     initialize();
     repaintDecorations();
 
-    useCursor(KarbonCursor::needleArrow());
+    setCursor(KarbonCursor::needleArrow());
 
     // save old enabled snap strategies, set bounding box snap strategy
     m_oldSnapStrategies = canvas()->snapGuide()->enabledSnapStrategies();

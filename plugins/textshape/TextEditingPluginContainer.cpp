@@ -28,25 +28,36 @@ TextEditingPluginContainer::TextEditingPluginContainer(KoResourceManager *docume
     : QObject(documentResourceManager),
     m_spellcheckPlugin(0)
 {
-    foreach (const QString &key, KoTextEditingRegistry::instance()->keys()) {
-        kDebug(32500) << "Loading plugin" << key;
-        KoTextEditingFactory *factory =  KoTextEditingRegistry::instance()->value(key);
-        Q_ASSERT(factory);
-        if (m_textEditingPlugins.contains(factory->id())) {
-            kWarning(32500) << "Duplicate id for textEditingPlugin, ignoring one! (" << factory->id() << ")";
-            continue;
-        }
-        QString factoryId = factory->id();
-        KoTextEditingPlugin *plugin = factory->create(documentResourceManager);
-        if (factoryId == "spellcheck") {
-            kDebug(32500) << "KOffice SpellCheck plugin found";
-            m_spellcheckPlugin = plugin;
-        }
-        m_textEditingPlugins.insert(factory->id(), plugin);
-    }
 }
 
 TextEditingPluginContainer::~TextEditingPluginContainer()
 {
     qDeleteAll(m_textEditingPlugins);
 }
+
+// static
+TextEditingPluginContainer *TextEditingPluginContainer::create(KoResourceManager *documentResourceManager, TextEditingPluginContainer::Type init)
+{
+    TextEditingPluginContainer *answer = new TextEditingPluginContainer(documentResourceManager);
+
+    if (init == Normal) {
+        foreach (const QString &key, KoTextEditingRegistry::instance()->keys()) {
+            kDebug(32500) << "Loading plugin" << key;
+            KoTextEditingFactory *factory =  KoTextEditingRegistry::instance()->value(key);
+            Q_ASSERT(factory);
+            if (answer->m_textEditingPlugins.contains(factory->id())) {
+                kWarning(32500) << "Duplicate id for textEditingPlugin, ignoring one! (" << factory->id() << ")";
+                continue;
+            }
+            QString factoryId = factory->id();
+            KoTextEditingPlugin *plugin = factory->create(documentResourceManager);
+            if (factoryId == "spellcheck") {
+                kDebug(32500) << "KOffice SpellCheck plugin found";
+                answer->m_spellcheckPlugin = plugin;
+            }
+            answer->m_textEditingPlugins.insert(factory->id(), plugin);
+        }
+    }
+    return answer;
+}
+

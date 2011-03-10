@@ -143,7 +143,7 @@ bool KoColorSet::init()
     QString s = QString::fromUtf8(m_data.data(), m_data.count());
 
     if (s.isEmpty() || s.isNull() || s.length() < 50) {
-        kWarning(30009) << "Illegal Gimp palette file: " << filename();
+        //kWarning(30009) << "Illegal Gimp palette file: " << filename();
         return false;
     }
 

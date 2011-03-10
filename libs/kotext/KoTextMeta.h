@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2010 KO GmbH <ben.martin@kogmbh.com>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -43,9 +44,8 @@ public:
 
     /**
      * Constructor
-     * @param document the text document where this bookmark is located
      */
-    KoTextMeta(const QTextDocument *document);
+    KoTextMeta();
 
     virtual ~KoTextMeta();
 
@@ -54,30 +54,26 @@ public:
     bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
     /// reimplemented from super
-    virtual void updatePosition(const QTextDocument *document, QTextInlineObject object,
-                                int posInDocument, const QTextCharFormat &format);
+    virtual void updatePosition(QTextInlineObject object, const QTextCharFormat &format);
     /// reimplemented from super
-    virtual void resize(const QTextDocument *document, QTextInlineObject object,
-                        int posInDocument, const QTextCharFormat &format, QPaintDevice *pd);
+    virtual void resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd);
     /// reimplemented from super
-    virtual void paint(QPainter &painter, QPaintDevice *pd, const QTextDocument *document,
-                       const QRectF &rect, QTextInlineObject object, int posInDocument, const QTextCharFormat &format);
+    virtual void paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect,
+            QTextInlineObject object, const QTextCharFormat &format);
 
     void setType(BookmarkType type);
 
     /// @return the current type of this bookmark
     BookmarkType type() const;
 
+    // TODO rename to an appropriate method name
     void setEndBookmark(KoTextMeta *bookmark);
 
     /// @return the end bookmark if the type is StartBookmark
-    KoTextMeta* endBookmark() const;
+    KoTextMeta* endBookmark() const; // TODO rename to an appropriate method name
 
     /// @return the KoShape where this bookmark is located
     KoShape *shape() const;
-
-    /// @return the exact cursor position of this bookmark in document
-    int position() const;
 
 private:
     class Private; // TODO share the private with super

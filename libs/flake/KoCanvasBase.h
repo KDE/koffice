@@ -87,15 +87,6 @@ public:
      */
     virtual bool snapToGrid() const = 0;
 
-
-    /**
-     * set the specified cursor on this canvas
-     *
-     * @param cursor the new cursor
-     * @return the old cursor
-     */
-    virtual void setCursor(const QCursor &cursor) = 0;
-
     /**
      * Adds a command to the history. Call this for each @p command you create.
      * This will also execute the command.
@@ -143,16 +134,6 @@ public:
      * Return the widget that will be added to the scrollArea.
      */
     virtual const QWidget *canvasWidget() const = 0;
-
-    /**
-     * Return the widget that will be added to the scrollArea.
-     */
-    virtual QGraphicsWidget *canvasItem() { return 0; }
-
-    /**
-     * Return the widget that will be added to the scrollArea.
-     */
-    virtual const QGraphicsWidget *canvasItem() const{ return 0; }
 
     /**
      * Return the unit of the current document for initialization of the widgets created

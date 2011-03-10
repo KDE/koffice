@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2008 Girish Ramakrishnan <girish@forwardbias.in>
  * Copyright (C) 2008 Pierre Stirnweiss \pierre.stirnweiss_koffice@gadz.org>
@@ -23,6 +23,8 @@
 
 #include "TextTool.h"
 #include "TextEditingPluginContainer.h"
+#include "dialogs/CreateBookmark.h"
+#include "dialogs/JumpOverview.h"
 #include "dialogs/SimpleStyleWidget.h"
 #include "dialogs/StylesWidget.h"
 #include "dialogs/ParagraphSettingsDialog.h"
@@ -48,6 +50,7 @@
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 #include <KoPointerEvent.h>
+#include <KoVariable.h>
 #include <KoColorBackground.h>
 #include <KoColorPopupAction.h>
 #include <KoTextDocumentLayout.h>
@@ -69,6 +72,7 @@
 
 #include <kdebug.h>
 #include <KRun>
+#include <KPageDialog>
 #include <KStandardShortcut>
 #include <KFontSizeAction>
 #include <KFontChooser>
@@ -282,6 +286,14 @@ TextTool::TextTool(KoCanvasBase *canvas)
     addAction("insert_index", action);
     connect(action, SIGNAL(triggered()), this, SLOT(insertIndexMarker()));
 
+    action  = new KAction(i18n("Insert Bookmark..."), this);
+    addAction("insert_bookmark", action);
+    connect(action, SIGNAL(triggered()), this, SLOT(insertBookmark()));
+
+    action  = new KAction(i18n("Jump To..."), this);
+    addAction("jump_to_text", action);
+    connect(action, SIGNAL(triggered()), this, SLOT(jumpToText()));
+
     action  = new KAction(i18n("Insert Soft Hyphen"), this);
     addAction("soft_hyphen", action);
     //action->setShortcut(Qt::CTRL+Qt::Key_Minus); // TODO this one is also used for the kde-global zoom-out :(
@@ -479,6 +491,8 @@ TextTool::TextTool(MockCanvas *canvas)  // constructor for our unit tests;
     m_changeTipTimer(this),
     m_changeTipCursorPos(0)
 {
+    m_textEditingPlugins = TextEditingPluginContainer::create(0, TextEditingPluginContainer::TestSetup);
+    m_textEditingPlugins->setParent(this); // don't loose memory
     // we could init some vars here, but we probably don't have to
     KGlobal::setLocale(new KLocale("en"));
     QTextDocument *document = new QTextDocument();
@@ -658,55 +672,9 @@ void TextTool::updateSelectedShape(const QPointF &point)
                     break; // stop looking.
             }
         }
-        setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
+        if (m_textShape)
+            setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
     }
-}
-
-void TextTool::mousePressEvent(KoPointerEvent *event)
-{
-    if (m_textEditor.isNull())
-        return;
-    if (event->button() != Qt::RightButton)
-        updateSelectedShape(event->point);
-    KoSelection *selection = canvas()->shapeManager()->selection();
-    if (!selection->isSelected(m_textShape) && m_textShape->isSelectable()) {
-        selection->deselectAll();
-        selection->select(m_textShape);
-    }
-
-    const bool canMoveCaret = !m_textEditor.data()->hasSelection() || event->button() !=  Qt::RightButton;
-    if (canMoveCaret) {
-        bool shiftPressed = event->modifiers() & Qt::ShiftModifier;
-        if (m_textEditor.data()->hasSelection() && !shiftPressed)
-            repaintSelection(); // will erase selection
-        else if (! m_textEditor.data()->hasSelection())
-            repaintCaret();
-        int prevPosition = m_textEditor.data()->position();
-        int position = pointToPosition(event->point);
-        if (position >= 0)
-            m_textEditor.data()->setPosition(position,
-                    shiftPressed ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor);
-        if (shiftPressed) // altered selection.
-            repaintSelection(prevPosition, m_textEditor.data()->position());
-        else
-            repaintCaret();
-
-        updateSelectionHandler();
-        updateStyleManager();
-    }
-    updateActions();
-
-    //activate context-menu for spelling-suggestions
-    if (event->button() == Qt::RightButton) {
-        KoTextEditingPlugin *plugin = m_textEditingPlugins->spellcheck();
-        if (plugin)
-            plugin->setCurrentCursorPosition(m_textEditor.data()->document(), m_textEditor.data()->position());
-    }
-
-    if (event->button() ==  Qt::MidButton) // Paste
-        paste();
-    else
-        event->ignore();
 }
 
 const QTextCursor TextTool::cursor()
@@ -857,19 +825,108 @@ QStringList TextTool::supportedPasteMimeTypes() const
 
 int TextTool::pointToPosition(const QPointF &point) const
 {
-    if (!m_textShapeData) // TODO use all shapes
+    KoTextShapeData *textShapeData = m_textShapeData;
+    if (textShapeData == 0)
         return -1;
+    if (textShapeData->endPosition() == -1) {
+        KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(textShapeData->document()->documentLayout());
+        if (lay) {
+            foreach (KoShape *shape, lay->shapes()) {
+                KoTextShapeData *sd = dynamic_cast<KoTextShapeData*>(shape->userData());
+                if (sd && sd->endPosition() >= 0)
+                    textShapeData = sd;
+                if (shape->boundingRect().contains(point))
+                    break;
+                if (shape == m_textShape)
+                    break;
+            }
+        }
+        if (textShapeData == 0) // we have no textShapeData and probably no KoTextDocumentLayout
+            return -1;
+        if (textShapeData->endPosition() == -1) // never been layed-out before   
+            return 0;
+    }
     Q_ASSERT(m_textShapeData);
     QPointF p = m_textShape->convertScreenPos(point);
     int caretPos = m_textEditor.data()->document()->documentLayout()->hitTest(p, Qt::ExactHit);
     caretPos = qMax(caretPos, m_textShapeData->position());
-    if (m_textShapeData->endPosition() == -1) {
-        //kWarning(32500) << "Clicking in not fully laid-out textframe";
-        //m_textShapeData->fireResizeEvent(); // requests a layout run ;)
+    if (m_textShapeData->endPosition() == -1) { // not fully laid-out textframe
         return -1;
     }
     caretPos = qMin(caretPos, m_textShapeData->endPosition());
     return caretPos;
+}
+
+void TextTool::mousePressEvent(KoPointerEvent *event)
+{
+    if (m_textEditor.isNull())
+        return;
+    if (event->button() != Qt::RightButton)
+        updateSelectedShape(event->point);
+    KoSelection *selection = canvas()->shapeManager()->selection();
+    if (!selection->isSelected(m_textShape) && m_textShape->isSelectable()) {
+        selection->deselectAll();
+        selection->select(m_textShape);
+    }
+
+    const bool canMoveCaret = !m_textEditor.data()->hasSelection() || event->button() !=  Qt::RightButton;
+    if (canMoveCaret) {
+        bool shiftPressed = event->modifiers() & Qt::ShiftModifier;
+        if (m_textEditor.data()->hasSelection() && !shiftPressed)
+            repaintSelection(); // will erase selection
+        else if (! m_textEditor.data()->hasSelection())
+            repaintCaret();
+        int prevPosition = m_textEditor.data()->position();
+        int position = pointToPosition(event->point);
+        if (position >= 0)
+            m_textEditor.data()->setPosition(position,
+                    shiftPressed ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor);
+        if (shiftPressed) // altered selection.
+            repaintSelection(prevPosition, m_textEditor.data()->position());
+        else
+            repaintCaret();
+
+        updateSelectionHandler();
+        updateStyleManager();
+    }
+    updateActions();
+
+    if (event->button() == Qt::RightButton) {
+        // activate context-menu for spelling-suggestions
+        KoTextEditingPlugin *plugin = m_textEditingPlugins->spellcheck();
+        if (plugin)
+            plugin->setCurrentCursorPosition(m_textEditor.data()->document(), m_textEditor.data()->position());
+
+        // Is there a KoVariable here?
+        KoInlineTextObjectManager *inlineTextObjectManager = KoTextDocument(m_textEditor.data()->document()).inlineTextObjectManager();
+        KoVariable *variable = 0;
+        if (inlineTextObjectManager) {
+            const int position = pointToPosition(event->point);
+            QTextCursor cursor(m_textEditor.data()->document());
+            cursor.setPosition(position);
+            KoInlineObject *obj = inlineTextObjectManager->inlineTextObject(cursor.charFormat());
+            variable = dynamic_cast<KoVariable*>(obj);
+        }
+
+        if (variable) {
+            QWidget *optionsWidget = variable->createOptionsWidget();
+            if (optionsWidget) {
+                KPageDialog *dialog = new KPageDialog(canvas()->canvasWidget());
+                dialog->setCaption(i18n("Variable Options"));
+                dialog->addPage(optionsWidget, QString());
+    // TODO make this qundocommand based ...
+                dialog->exec();
+                delete dialog;
+            }
+            event->accept();
+            return;
+        }
+    }
+
+    if (event->button() ==  Qt::MidButton) // Paste
+        paste();
+    else
+        event->ignore();
 }
 
 void TextTool::mouseDoubleClickEvent(KoPointerEvent *event)
@@ -895,7 +952,7 @@ void TextTool::mouseMoveEvent(KoPointerEvent *event)
         return;
     m_changeTipPos = event->globalPos();
 
-    useCursor(Qt::IBeamCursor);
+    setCursor(Qt::IBeamCursor);
     if (event->buttons()) {
         updateSelectedShape(event->point);
     }
@@ -907,29 +964,26 @@ void TextTool::mouseMoveEvent(KoPointerEvent *event)
 
     int position = pointToPosition(event->point);
 
-    if (position > 0  && event->buttons() == Qt::NoButton) {
-        QTextCursor cursor(*(m_textEditor.data()->cursor()));
-        cursor.setPosition(position);
-
+    if (position > 0 && event->buttons() == Qt::NoButton) {
         QTextCursor mouseOver(m_textEditor.data()->document());
         mouseOver.setPosition(position);
-
         QTextCharFormat fmt = mouseOver.charFormat();
 
-        if (m_changeTracker && m_changeTracker->containsInlineChanges(mouseOver.charFormat())) {
-                m_changeTipTimer.start();
-                m_changeTipCursorPos = position;
-        }
-
-        if (cursor.charFormat().isAnchor())
-            useCursor(Qt::PointingHandCursor);
+        if (fmt.isAnchor())
+            setCursor(Qt::PointingHandCursor);
         else
-            useCursor(Qt::IBeamCursor);
+            setCursor(Qt::IBeamCursor);
 
+        if (m_changeTracker && m_changeTracker->containsInlineChanges(fmt)) {
+            m_changeTipTimer.start();
+            m_changeTipCursorPos = position;
+        }
         return;
     }
-
-    if (position == m_textEditor.data()->position()) return;
+    if (event->buttons() == Qt::NoButton)
+        return;
+    if (position == m_textEditor.data()->position())
+        return;
     if (position >= 0) {
         repaintCaret();
         int prevPos = m_textEditor.data()->position();
@@ -945,22 +999,23 @@ void TextTool::mouseReleaseEvent(KoPointerEvent *event)
     event->ignore();
     editingPluginEvents();
     Q_ASSERT(m_textEditor.data());
+    const QTextCharFormat cfm = m_textEditor.data()->charFormat();
 
     // Is there an anchor here ?
-    if (m_textEditor.data()->charFormat().isAnchor() && !m_textEditor.data()->hasSelection()) {
-        QString anchor = m_textEditor.data()->charFormat().anchorHref();
+    if (cfm.isAnchor() && !m_textEditor.data()->hasSelection()) {
+        QString anchor = cfm.anchorHref();
         if (!anchor.isEmpty()) {
             KoTextDocument document(m_textEditor.data()->document());
             KoInlineTextObjectManager *inlineManager = document.inlineTextObjectManager();
             if (inlineManager) {
-                QList<QString> bookmarks = inlineManager->bookmarkManager()->bookmarkNameList();
+                QList<QString> bookmarks = inlineManager->bookmarkManager()->bookmarkNames();
                 // Which are the bookmarks we have ?
                 foreach(const QString& s, bookmarks) {
                     // Is this bookmark the good one ?
                     if (s == anchor) {
                         // if Yes, let's jump to it
-                        KoBookmark *bookmark = inlineManager->bookmarkManager()->retrieveBookmark(s);
-                        m_textEditor.data()->setPosition(bookmark->position());
+                        KoBookmark *bookmark = inlineManager->bookmarkManager()->bookmark(s);
+                        m_textEditor.data()->setPosition(bookmark->textPosition());
                         ensureCursorVisible();
                         event->accept();
                         return;
@@ -977,26 +1032,27 @@ void TextTool::mouseReleaseEvent(KoPointerEvent *event)
                                         "Are you sure that you want to run this program?", anchor);
                 // this will also start local programs, so adding a "don't warn again"
                 // checkbox will probably be too dangerous
-                int choice = KMessageBox::warningYesNo(0, question, i18n("Open Link?"));
+                const int choice = KMessageBox::warningYesNo(canvas()->canvasWidget(), question,
+                        i18n("Open Link?"));
                 if (choice != KMessageBox::Yes)
                     return;
             }
 
             event->accept();
-            new KRun(m_textEditor.data()->charFormat().anchorHref(), 0);
+            new KRun(cfm.anchorHref(), 0);
             m_textEditor.data()->setPosition(0);
             ensureCursorVisible();
             return;
         } else {
-            QStringList anchorList = m_textEditor.data()->charFormat().anchorNames();
+            QStringList anchorList = cfm.anchorNames();
             QString anchorName;
             if (!anchorList.isEmpty()) {
                 anchorName = anchorList.takeFirst();
             }
             KoTextDocument document(m_textEditor.data()->document());
-            KoBookmark *bookmark = document.inlineTextObjectManager()->bookmarkManager()->retrieveBookmark(anchorName);
+            KoBookmark *bookmark = document.inlineTextObjectManager()->bookmarkManager()->bookmark(anchorName);
             if (bookmark) {
-                m_textEditor.data()->setPosition(bookmark->position());
+                m_textEditor.data()->setPosition(bookmark->textPosition());
                 ensureCursorVisible();
             } else {
                 kDebug(32500) << "A bookmark should exist but has not been found";
@@ -1120,7 +1176,7 @@ void TextTool::keyPressEvent(QKeyEvent *event)
         }
     }
     if (moveOperation != QTextCursor::NoMove || destinationPosition != -1) {
-        useCursor(Qt::BlankCursor);
+        setCursor(Qt::BlankCursor);
         bool shiftPressed = event->modifiers() & Qt::ShiftModifier;
         if (textEditor->hasSelection() && !shiftPressed)
             repaintSelection(); // will erase selection
@@ -1364,9 +1420,8 @@ void TextTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &sha
         emit done();
         return;
     }
-
     setShapeData(static_cast<KoTextShapeData*>(m_textShape->userData()));
-    useCursor(Qt::IBeamCursor);
+    setCursor(Qt::IBeamCursor);
 
     // restore the selection from a previous time we edited this document.
     KoTextEditor *textEditor = m_textEditor.data();
@@ -1783,8 +1838,9 @@ void TextTool::setDefaultFormat()
 
 void TextTool::insertIndexMarker()
 {
-    // TODO handle result when we figure out how to report errors from a tool.
-    m_textEditor.data()->insertIndexMarker();
+    if (!m_textEditor.data()->insertIndexMarker()) {
+        KMessageBox::sorry(canvas()->canvasWidget(), i18n("Failed to mark word for inclusion in index.\nPlease reposition cursor and try again"));
+    }
 }
 
 void TextTool::setStyle(KoCharacterStyle *style)
@@ -1897,9 +1953,14 @@ void TextTool::configureChangeTracking()
     }
 }
 
-void TextTool::testSlot(bool on)
+void TextTool::insertBookmark()
 {
-    kDebug(32500) << "signal received. bool:" << on;
+    KoTextEditor *textEditor = m_textEditor.data();
+    if (textEditor == 0)
+        return;
+    CreateBookmark *dia = new CreateBookmark(textEditor, canvas()->canvasWidget());
+    dia->exec();
+    delete dia;
 }
 
 void TextTool::selectAll()
@@ -2043,6 +2104,22 @@ void TextTool::selectFont()
     connect(fontDlg, SIGNAL(stopMacro()), this, SLOT(stopMacro()));
     fontDlg->exec();
     delete fontDlg;
+}
+
+void TextTool::jumpToText()
+{
+    KoTextEditor *textEditor = m_textEditor.data();
+    if (textEditor == 0)
+        return;
+    const int oldPos = textEditor->position();
+    JumpOverview *dia = new JumpOverview(textEditor->document(), canvas()->canvasWidget());
+    connect (dia, SIGNAL(cursorPositionSelected(int)), textEditor, SLOT(setPosition(int)));
+    connect (dia, SIGNAL(cursorPositionSelected(int)), this, SLOT(ensureCursorVisible()));
+    if (dia->exec() == QDialog::Rejected) {
+        textEditor->setPosition(oldPos);
+        ensureCursorVisible();
+    }
+    delete dia;
 }
 
 void TextTool::shapeAddedToCanvas()

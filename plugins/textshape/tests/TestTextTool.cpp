@@ -20,7 +20,7 @@
 #include "TestTextTool.h"
 
 #include "../TextTool.h"
-#include "MockTextShape.h"
+#include <MockTextShape.h>
 
 #include <tests/MockShapes.h>
 

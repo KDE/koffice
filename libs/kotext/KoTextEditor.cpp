@@ -712,7 +712,7 @@ void KoTextEditor::setDefaultFormat()
 void KoTextEditor::addBookmark(const QString &name)
 {//TODO changeTracking
     d->updateState(KoTextEditor::Private::Custom, i18n("Insert Bookmark"));
-    KoBookmark *bookmark = new KoBookmark(name, d->document);
+    KoBookmark *bookmark = new KoBookmark(name);
     int startPos = -1, endPos = -1, caretPos = -1;
 
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->document->documentLayout());
@@ -724,7 +724,7 @@ void KoTextEditor::addBookmark(const QString &name)
         caretPos = d->caret.position();
 
         d->caret.setPosition(endPos);
-        KoBookmark *endBookmark = new KoBookmark(name, d->document);
+        KoBookmark *endBookmark = new KoBookmark(name);
         bookmark->setType(KoBookmark::StartBookmark);
         endBookmark->setType(KoBookmark::EndBookmark);
         layout->inlineTextObjectManager()->insertInlineObject(d->caret, endBookmark);
@@ -1320,16 +1320,7 @@ void KoTextEditor::newLine()
     if (format.hasProperty(KoCharacterStyle::ChangeTrackerId)) {
         format.clearProperty(KoCharacterStyle::ChangeTrackerId);
     }
-    d->caret.insertBlock();
-    int endPosition = d->caret.position();
 
-    //Mark the inserted text
-    d->caret.setPosition(startPosition);
-    d->caret.setPosition(endPosition, QTextCursor::KeepAnchor);
-
-    registerTrackedChange(d->caret, KoGenChange::InsertChange, i18n("Key Press"), format, format, false);
-
-    d->caret.clearSelection();
     QTextBlockFormat bf = d->caret.blockFormat();
     QVariant direction = bf.property(KoParagraphStyle::TextProgressionDirection);
     bf.clearProperty(QTextFormat::PageBreak_Auto);
@@ -1337,12 +1328,25 @@ void KoTextEditor::newLine()
     bf.clearProperty(KoParagraphStyle::UnnumberedListItem);
     bf.clearProperty(KoParagraphStyle::IsListHeader);
     bf.clearProperty(KoParagraphStyle::MasterPageName);
-    d->caret.setBlockFormat(bf);
+    d->caret.insertBlock(bf); // does not inherit list
+
     if (nextStyle) {
         QTextBlock block = d->caret.block();
         if (currentStyle)
             currentStyle->unapplyStyle(block);
         nextStyle->applyStyle(block);
+    } else { // need to inherit list manually
+        QTextBlock block = d->caret.block();
+        QTextBlock prev = block.previous();
+        QTextList *list = prev.textList();
+        if (list) {
+            if (prev.length() > 1) { // if not empty
+                list->add(block);
+            } else if (list->count() > 1 && list->itemNumber(prev) == list->count() -1) {
+                // remove list from prevblock
+                list->remove(prev);
+            }
+        }
     }
 
     bf = d->caret.blockFormat();
@@ -1361,6 +1365,17 @@ void KoTextEditor::newLine()
         bf.setProperty(KoParagraphStyle::TextProgressionDirection, direction);
     }
     d->caret.setBlockFormat(bf);
+
+    int endPosition = d->caret.position();
+
+    //Mark the inserted text
+    d->caret.setPosition(startPosition);
+    d->caret.setPosition(endPosition, QTextCursor::KeepAnchor);
+
+    registerTrackedChange(d->caret, KoGenChange::InsertChange, i18n("Key Press"), format, format, false);
+
+    d->caret.clearSelection();
+
     d->updateState(KoTextEditor::Private::NoOp);
 }
 

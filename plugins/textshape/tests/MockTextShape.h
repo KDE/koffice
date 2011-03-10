@@ -27,7 +27,7 @@ class MockTextShape : public TextShape
 {
 public:
     MockTextShape()
-        : TextShape(0)
+        : TextShape()
     {
         layout = qobject_cast<KoTextDocumentLayout*>(textShapeData()->document()->documentLayout());
     }

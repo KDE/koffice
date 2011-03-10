@@ -25,7 +25,6 @@
 #include <KAction>
 #include <KoTextBlockData.h>
 #include <KoParagraphStyle.h>
-#include <KoInlineTextObjectManager.h>
 #include <KoTextDocumentLayout.h>
 #include <KoZoomHandler.h>
 
@@ -92,8 +91,7 @@ void SimpleStyleWidget::fillListsCombobox()
     KoZoomHandler zoomHandler;
     zoomHandler.setZoomAndResolution(100, 72, 72);
 
-    KoInlineTextObjectManager itom;
-    TextShape textShape(&itom);
+    TextShape textShape;
     textShape.setSize(QSizeF(300, 100));
     KoTextDocumentLayout *layouter = qobject_cast<KoTextDocumentLayout*> (textShape.textShapeData()->document()->documentLayout());
     Q_ASSERT(layouter);

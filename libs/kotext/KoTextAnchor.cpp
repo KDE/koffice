@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2009-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2010 Ko Gmbh <casper.boemann@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -55,8 +55,6 @@ public:
             shape(s),
             horizontalAlignment(KoTextAnchor::HorizontalOffset),
             verticalAlignment(KoTextAnchor::VerticalOffset),
-            document(0),
-            position(-1),
             model(0),
             isPositionedInline(false)
     {
@@ -148,8 +146,6 @@ public:
     KoShape * const shape;
     KoTextAnchor::AnchorHorizontal horizontalAlignment;
     KoTextAnchor::AnchorVertical verticalAlignment;
-    const QTextDocument *document;
-    int position;
     QTextCharFormat format;
     KoTextShapeContainerModel *model;
     QPointF distance;
@@ -204,22 +200,18 @@ KoTextAnchor::AnchorHorizontal KoTextAnchor::horizontalAlignment() const
     return d->horizontalAlignment;
 }
 
-void KoTextAnchor::updatePosition(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format)
+void KoTextAnchor::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
     Q_D(KoTextAnchor);
-    d->document = document;
-    d->position = posInDocument;
     d->format = format;
-    d->setContainer(dynamic_cast<KoShapeContainer*>(shapeForPosition(document, posInDocument)));
+    d->setContainer(dynamic_cast<KoShapeContainer*>(shapeForPosition(d->document, d->positionInDocument)));
 }
 
-void KoTextAnchor::resize(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format, QPaintDevice *pd)
+void KoTextAnchor::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
-    Q_UNUSED(document);
     Q_UNUSED(object);
-    Q_UNUSED(posInDocument);
     Q_UNUSED(format);
     Q_UNUSED(pd);
     Q_D(KoTextAnchor);
@@ -242,7 +234,7 @@ void KoTextAnchor::resize(const QTextDocument *document, QTextInlineObject objec
     }
 }
 
-void KoTextAnchor::paint(QPainter &painter, QPaintDevice *, const QTextDocument *document, const QRectF &rect, QTextInlineObject , int , const QTextCharFormat &)
+void KoTextAnchor::paint(QPainter &painter, QPaintDevice *, const QRectF &rect, QTextInlineObject, const QTextCharFormat &)
 {
     Q_UNUSED(painter);
     Q_UNUSED(rect);
@@ -267,7 +259,7 @@ void KoTextAnchor::paint(QPainter &painter, QPaintDevice *, const QTextDocument 
     painter.fillRect(charSpace, QColor(Qt::green));
 #endif
 
-    KoChangeTracker *changeTracker = KoTextDocument(document).changeTracker();
+    KoChangeTracker *changeTracker = KoTextDocument(document()).changeTracker();
     if (!changeTracker)
         return;
     
@@ -287,18 +279,6 @@ void KoTextAnchor::paint(QPainter &painter, QPaintDevice *, const QTextDocument 
         painter.drawRect(changeRect);
 
     // End of Change Visualization Section. Can be removed once the new approach is finalized
-}
-
-int KoTextAnchor::positionInDocument() const
-{
-    Q_D(const KoTextAnchor);
-    return d->position;
-}
-
-const QTextDocument *KoTextAnchor::document() const
-{
-    Q_D(const KoTextAnchor);
-    return d->document;
 }
 
 const QPointF &KoTextAnchor::offset() const

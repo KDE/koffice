@@ -97,33 +97,45 @@ void StylesWidget::setCurrentFormat(const QTextBlockFormat &format)
     if (m_styleManager)
         usedStyle = m_styleManager->paragraphStyle(id);
     if (usedStyle) {
-        foreach(int property, m_currentBlockFormat.properties().keys()) {
-            if (property == QTextFormat::ObjectIndex || property == KoParagraphStyle::ListStyleId)
+        foreach (int property, m_currentBlockFormat.properties().keys()) {
+            if (property == QTextFormat::ObjectIndex || property == KoParagraphStyle::ListStyleId
+                    || property == KoParagraphStyle::MasterPageName
+                    || property == QTextFormat::PageBreakPolicy)
                 continue;
             if (property == KoParagraphStyle::OutlineLevel) {
                 // OutlineLevel itself is not present in the style, but DefaultOutlineLevel is.
                 property = KoParagraphStyle::DefaultOutlineLevel;
             }
-            if (m_currentBlockFormat.property(property) != usedStyle->value(property)) {
+            QVariant cur(m_currentBlockFormat.property(property));
+            QVariant style(usedStyle->value(property));
+            if (cur == style)
+                continue;
+            if (cur.type() == QVariant::Int && cur.toInt() == 0)
+                continue;
+            if (cur.type() == QVariant::Double && cur.toDouble() == 0.)
+                continue;
+            if (style.type() == QVariant::Int && style.toInt() == 0)
+                continue;
+            if (style.type() == QVariant::Double && style.toDouble() == 0.)
+                continue;
 #ifdef DEBUG_CHANGED
-                QString type;
-                if (m_currentBlockFormat.hasProperty(property)) {
-                    if (usedStyle->hasProperty(property))
-                        type = "Changed";
-                    else
-                        type = "New";
-                } else {
-                    type = "Removed";
-                }
-                type += " 0x%1";
-                type = type.arg(property, 4, 16);
-                if (property >= QTextFormat::UserProperty)
-                    type += QString(" User+%2").arg(property - QTextFormat::UserProperty);
-                kDebug() << "parag--" << type;
-#endif
-                unchanged = false;
-                break;
+            QString type;
+            if (m_currentBlockFormat.hasProperty(property)) {
+                if (usedStyle->hasProperty(property))
+                    type = "Changed";
+                else
+                    type = "New";
+            } else {
+                type = "Removed";
             }
+            type += " 0x%1";
+            type = type.arg(property, 4, 16);
+            if (property >= QTextFormat::UserProperty)
+                type += QString(" User+%2").arg(property - QTextFormat::UserProperty);
+            kDebug() << "parag--" << type;
+#endif
+            unchanged = false;
+            break;
         }
     }
 
@@ -148,7 +160,10 @@ void StylesWidget::setCurrentFormat(const QTextCharFormat &format)
         QTextCharFormat defaultFormat;
         usedStyle->unapplyStyle(defaultFormat); // sets the default properties.
         foreach(int property, m_currentCharFormat.properties().keys()) {
-            if (property == QTextFormat::ObjectIndex)
+            if (property == QTextFormat::ObjectIndex || property == QTextFormat::ObjectType
+                    || property == QTextFormat::ForegroundBrush
+                    || property == QTextFormat::FontFamily
+                    || property == KoCharacterStyle::InlineInstanceId)
                 continue;
             if (m_currentCharFormat.property(property) != usedStyle->value(property)
                     && m_currentCharFormat.property(property) != defaultFormat.property(property)) {

@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -34,9 +34,7 @@ class KoVariablePrivate : public KoInlineObjectPrivate
 {
 public:
     KoVariablePrivate()
-            : modified(true),
-            document(0),
-            lastPositionInDocument(-1)
+        : modified(true)
     {
     }
 
@@ -48,8 +46,6 @@ public:
 
     QString value;
     bool modified;
-    const QTextDocument *document;
-    int lastPositionInDocument;
 };
 
 KoVariable::KoVariable(bool propertyChangeListener)
@@ -71,26 +67,19 @@ void KoVariable::setValue(const QString &value)
     if (d->document) {
         KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(d->document->documentLayout());
         if (lay)
-            lay->documentChanged(d->lastPositionInDocument, 0, 0);
+            lay->documentChanged(d->positionInDocument, 0, 0);
     }
 }
 
-void KoVariable::updatePosition(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat & format)
+void KoVariable::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
-    Q_D(KoVariable);
-    d->document = document;
-    d->lastPositionInDocument = posInDocument;
     Q_UNUSED(object);
     Q_UNUSED(format);
-    // Variables are always 'in place' so the position is 100% defined by the text layout.
-    variableMoved(shapeForPosition(d->document, posInDocument), d->document, posInDocument);
 }
 
-void KoVariable::resize(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format, QPaintDevice *pd)
+void KoVariable::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
     Q_D(KoVariable);
-    Q_UNUSED(document);
-    Q_UNUSED(posInDocument);
     if (d->modified == false)
         return;
     Q_ASSERT(format.isCharFormat());
@@ -101,12 +90,10 @@ void KoVariable::resize(const QTextDocument *document, QTextInlineObject object,
     d->modified = true;
 }
 
-void KoVariable::paint(QPainter &painter, QPaintDevice *pd, const QTextDocument *document, const QRectF &rect, QTextInlineObject object, int posInDocument, const QTextCharFormat &format)
+void KoVariable::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_D(KoVariable);
-    Q_UNUSED(document);
     Q_UNUSED(object);
-    Q_UNUSED(posInDocument);
 
     // TODO set all the font properties from the format (color etc)
     QFont font(format.font(), pd);
@@ -142,8 +129,9 @@ QString KoVariable::value() const
     return d->value;
 }
 
-int KoVariable::positionInDocument() const
+void KoVariable::positionChanged()
 {
-    Q_D(const KoVariable);
-    return d->lastPositionInDocument;
+    Q_D(KoVariable);
+    // Variables are always 'in place' so the position is 100% defined by the text layout.
+    variableMoved(shapeForPosition(d->document, d->positionInDocument), d->document, d->positionInDocument);
 }

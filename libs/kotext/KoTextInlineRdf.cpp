@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2010 KO GmbH <ben.martin@kogmbh.com>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -211,14 +212,14 @@ QPair<int, int>  KoTextInlineRdf::findExtent()
 {
     if (d->bookmark && d->document) {
         KoBookmark *e = d->bookmark->endBookmark();
-        return QPair<int, int>(d->bookmark->position(), e->position());
+        return QPair<int, int>(d->bookmark->textPosition(), e->textPosition());
     }
     if (d->kotextmeta && d->document) {
         KoTextMeta *e = d->kotextmeta->endBookmark();
         if (!e) {
             return QPair<int, int>(0, 0);
         }
-        return QPair<int, int>(d->kotextmeta->position(), e->position());
+        return QPair<int, int>(d->kotextmeta->textPosition(), e->textPosition());
     }
     if (d->cell.isValid() && d->document) {
         QTextCursor b = d->cell.firstCursorPosition();
@@ -237,8 +238,8 @@ QString KoTextInlineRdf::object()
         KoBookmark *e = d->bookmark->endBookmark();
         QTextCursor cursor(d->document);
 
-        cursor.setPosition(d->bookmark->position(), QTextCursor::MoveAnchor);
-        cursor.setPosition(e->position(), QTextCursor::KeepAnchor);
+        cursor.setPosition(d->bookmark->textPosition(), QTextCursor::MoveAnchor);
+        cursor.setPosition(e->textPosition(), QTextCursor::KeepAnchor);
         QString ret = cursor.QTextCursor::selectedText();
         return ret.remove(QChar::ObjectReplacementCharacter);
     }
@@ -250,8 +251,8 @@ QString KoTextInlineRdf::object()
             kDebug(30015) << "Broken KoTextMeta, no end tag found!";
             return QString();
         } else {
-            cursor.setPosition(d->kotextmeta->position(), QTextCursor::MoveAnchor);
-            cursor.setPosition(e->position(), QTextCursor::KeepAnchor);
+            cursor.setPosition(d->kotextmeta->textPosition(), QTextCursor::MoveAnchor);
+            cursor.setPosition(e->textPosition(), QTextCursor::KeepAnchor);
             QString ret = cursor.selectedText();
             return ret.remove(QChar::ObjectReplacementCharacter);
         }

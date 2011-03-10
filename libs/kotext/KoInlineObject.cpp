@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,9 +20,12 @@
 #include "KoInlineObject.h"
 #include "KoInlineObject_p.h"
 #include "KoTextDocumentLayout.h"
+#include "KoTextShapeData.h"
 #include "KoShapeSavingContext.h"
 #include "KoInlineTextObjectManager.h"
 #include "KoTextInlineRdf.h"
+
+#include <KoShape.h>
 
 #include <kdebug.h>
 #include <QDebug>
@@ -122,5 +125,51 @@ KoTextInlineRdf* KoInlineObject::inlineRdf() const
 {
     Q_D(const KoInlineObject);
     return d->rdf;
+}
+
+void KoInlineObject::setDocument(QTextDocument *doc)
+{
+    Q_D(KoInlineObject);
+    if (d->document == doc)
+        return;
+    d->document = doc;
+    d->positionInDocument = -1;
+}
+
+QTextDocument *KoInlineObject::document() const
+{
+    Q_D(const KoInlineObject);
+    return d->document;
+}
+
+void KoInlineObject::setTextPosition(int pos)
+{
+    Q_D(KoInlineObject);
+    if (d->positionInDocument == pos)
+        return;
+    d->positionInDocument = pos;
+    positionChanged();
+}
+
+int KoInlineObject::textPosition() const
+{
+    Q_D(const KoInlineObject);
+    return d->positionInDocument;
+}
+
+KoTextPage *KoInlineObject::page() const
+{
+    Q_D(const KoInlineObject);
+    KoShape *shape = shapeForPosition(d->document, d->positionInDocument);
+    if (shape == 0)
+        return 0;
+    KoTextShapeData *data = static_cast<KoTextShapeData*>(shape->userData());
+    if (data == 0)
+        return 0;
+    return data->page();
+}
+
+void KoInlineObject::positionChanged()
+{
 }
 

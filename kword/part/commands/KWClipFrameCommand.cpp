@@ -1,6 +1,5 @@
 /* This file is part of the KDE project
  * Copyright (C) 2010 Thomas Zander <zander@kde.org>
- * Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -71,7 +70,7 @@ void KWClipFrameCommand::redo()
         container->setClipped(frame->shape(), true);
         frame->shape()->setTransformation(QTransform());
         foreach (KoView *view, m_document->views()) {
-            KoCanvasBase *canvas = static_cast<KWView*>(view)->canvasBase();
+            KoCanvasBase *canvas = static_cast<KWView*>(view)->kwcanvas();
             canvas->shapeManager()->addShape(container);
         }
     }
@@ -92,7 +91,7 @@ void KWClipFrameCommand::undo()
         frame->shape()->setAbsolutePosition(pos);
         frame->shape()->setTransformation(container->transformation());
         foreach (KoView *view, m_document->views()) {
-            KoCanvasBase *canvas = static_cast<KWView*>(view)->canvasBase();
+            KoCanvasBase *canvas = static_cast<KWView*>(view)->kwcanvas();
             canvas->shapeManager()->remove(container);
         }
     }

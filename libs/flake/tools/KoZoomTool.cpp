@@ -128,8 +128,8 @@ void KoZoomTool::updateCursor(bool swap)
     }
 
     if (setZoomInCursor) {
-        useCursor(m_inCursor);
+        setCursor(m_inCursor);
     } else {
-        useCursor(m_outCursor);
+        setCursor(m_outCursor);
     }
 }

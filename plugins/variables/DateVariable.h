@@ -52,14 +52,14 @@ public:
     virtual ~DateVariable();
 
     ///reimplemented
-    void saveOdf(KoShapeSavingContext & context);
+    void saveOdf(KoShapeSavingContext &context);
 
     ///reimplemented
-    bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context);
+    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
     void readProperties(const KoProperties *props);
 
-    QWidget *createOptionsWidget();
+    virtual QWidget *createOptionsWidget();
 
     QString definition() const {
         return m_definition;
@@ -88,7 +88,7 @@ public:
 
 private:
     void update();
-    void adjustTime(const QString & adjustTime);
+    void adjustTime(const QString &adjustTime);
 
     DateType m_type;
     DisplayType m_displayType;

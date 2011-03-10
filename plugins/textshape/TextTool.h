@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2009 KO GmbH <cbo@kogmbh.com>
  *
@@ -220,6 +220,8 @@ private slots:
     void selectAll();
     /// show the style manager
     void showStyleManager();
+    /// show the insert bookmark dialog
+    void insertBookmark();
     /// change color of a selected text
     void setTextColor(const KoColor &color);
     /// change background color of a selected text
@@ -228,6 +230,8 @@ private slots:
     void setStyle(KoParagraphStyle *syle);
     /// set the characterStyle of the current selection. see above.
     void setStyle(KoCharacterStyle *style);
+    /// show dialog with markers (bookmarks, pages)
+    void jumpToText();
 
     /// add a KoDocument wide undo command which will call undo on the qtextdocument.
     void addUndoCommand();
@@ -263,8 +267,6 @@ private slots:
     /// the document we are editing has received an extra shape
     void shapeAddedToDoc(KoShape *shape);
     void ensureCursorVisible();
-
-    void testSlot(bool);
 
 private:
     void repaintCaret();
@@ -328,7 +330,7 @@ private:
 
     /// structure that allows us to remember the text position and selection of previously edited documents.
     struct TextSelection {
-        QTextDocument *document; // be warned that this may end up being a dangling pointer, so don't use.
+        QTextDocument *document; // be warned that this may end up being a dangling pointer, so don't rereference.
         int position;
         int anchor;
     };

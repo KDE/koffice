@@ -109,7 +109,7 @@ public:
     void fireResizeEvent();
 
     enum RelayoutForPageState {
-        NormalState = 5, ///< totally outside the relayout-for-page
+        NormalState = 0, ///< totally outside the relayout-for-page
         LayoutCopyShape, ///< doing a relayout for page
         LayoutOrig  ///< The relayout for page triggered a relayout of the original due to a change in variables
     };

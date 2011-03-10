@@ -92,7 +92,7 @@ ShapeResizeStrategy::ShapeResizeStrategy(KoToolBase *tool,
          Q_ASSERT(0); // illegal 'corner'
     }
 
-    tool->setStatusText(i18n("Press CTRL to resize from center."));
+    setStatusText(i18n("Press CTRL to resize from center."));
 }
 
 void ShapeResizeStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers)

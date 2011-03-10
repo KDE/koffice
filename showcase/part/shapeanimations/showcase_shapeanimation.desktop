@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=Showcase/ShapeAnimation
+Comment=Shape animation plugin for Showcase
+Comment[et]=Showcase'i kujundi animeerimise plugin
+Comment[pt]='Plugin' de animação de formas para o Showcase
+Comment[pt_BR]=Plug-in de animação de formas para o Showcase
+Comment[sv]=Insticksprogram med animeringsåtgärderför Showcase
+Comment[uk]=Додаток анімації форм для Showcase
+Comment[x-test]=xxShape animation plugin for Showcasexx
+[PropertyDef::X-Showcase-Version]
+Type=int

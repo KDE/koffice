@@ -4,7 +4,6 @@
  * Copyright (C) 2007 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2008 Pierre Ducroquet <pinaraf@pinaraf.info>
  * Copyright (C) 2008 Sebastian Sauer <mail@dipe.org>
- * Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -44,6 +43,7 @@ class KWFrameSet;
 class MagicCurtain;
 
 class KoInlineTextObjectManager;
+class KoShapeContainer;
 
 class KLocalizedString;
 class QIODevice;
@@ -79,8 +79,6 @@ public:
     virtual bool saveOdf(SavingContext &documentContext);
     /// reimplemented from KoDocument
     virtual KoView* createViewInstance(QWidget*);
-    /// reimplemented from KoDocument
-    virtual QGraphicsItem *createCanvasItem();
     /// reimplemented from KoDocument
     virtual int pageCount() const {
         return pageManager()->pageCount();
@@ -183,6 +181,8 @@ public slots:
      * \sa addFrameSet()
      */
     void removeFrameSet(KWFrameSet *fs);
+    /// reimplemented
+    virtual void addCommand(QUndoCommand *command);
 
 signals:
     /// signal emitted when a page has been added
@@ -208,6 +208,7 @@ private:
     friend class PageProcessingQueue;
     friend class KWDLoader;
     friend class KWOdfLoader;
+    friend class KWFrameRemoveSilentCommand;
     friend class KWPagePropertiesCommand;
     QString renameFrameSet(const QString &prefix , const QString &base);
     /// post process loading after either oasis or oldxml loading finished
@@ -225,6 +226,9 @@ private:
 
     void saveConfig();
 
+    /// remove the KWFrame 'applicationData' from shapes that the container holds
+    void recurseFrameRemovalOn(KoShapeContainer *container, QUndoCommand *parent);
+
 private:
     QList<KWFrameSet*> m_frameSets;
     QString m_viewMode;
@@ -236,6 +240,7 @@ private:
     MagicCurtain *m_magicCurtain; ///< all things we don't want to show are behind this one
     bool m_mainFramesetEverFinished;
     bool m_loadingTemplate;
+    QUndoCommand *m_commandBeingAdded;
 };
 
 #endif

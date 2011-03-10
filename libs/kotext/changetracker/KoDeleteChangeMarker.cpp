@@ -53,10 +53,8 @@ public:
     Private() {}
 
     KoChangeTracker *changeTracker;
-    QTextDocument *document;
     QString text;
     int id;
-    int position;
     QString deleteChangeXml;
     QHash<KoListStyle::ListIdType, KoListStyle *> deletedListStyles;
 };
@@ -65,7 +63,6 @@ KoDeleteChangeMarker::KoDeleteChangeMarker(KoChangeTracker* changeTracker)
         : d(new Private())
 {
     d->changeTracker = changeTracker;
-    d->document = 0;
 }
 
 KoDeleteChangeMarker::~KoDeleteChangeMarker()
@@ -95,7 +92,7 @@ int KoDeleteChangeMarker::changeId() const
 
 int KoDeleteChangeMarker::position() const
 {
-    return d->position;
+    return textPosition();
 }
 
 bool KoDeleteChangeMarker::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
@@ -105,42 +102,28 @@ bool KoDeleteChangeMarker::loadOdf(const KoXmlElement &element, KoShapeLoadingCo
     return false;
 }
 
-void KoDeleteChangeMarker::paint(QPainter& painter, QPaintDevice *pd, const QTextDocument *document, const QRectF &rect, QTextInlineObject object, int posInDocument, const QTextCharFormat &format)
+void KoDeleteChangeMarker::paint(QPainter& painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(painter);
     Q_UNUSED(pd);
-    Q_UNUSED(document);
     Q_UNUSED(rect);
-    Q_UNUSED(posInDocument);
     Q_UNUSED(object);
     Q_UNUSED(format);
 }
 
-void KoDeleteChangeMarker::resize(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format, QPaintDevice *pd)
+void KoDeleteChangeMarker::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
-    Q_UNUSED(document);
     Q_UNUSED(object);
     Q_UNUSED(format);
     Q_UNUSED(pd);
-    Q_UNUSED(document);
 
-    d->position = posInDocument;
     object.setWidth(0);
 }
 
-void KoDeleteChangeMarker::updatePosition(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format)
+void KoDeleteChangeMarker::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
-    d->position = posInDocument;
-    if (document != d->document)
-        d->document = const_cast<QTextDocument*>(document); //TODO: when we get rid of the current visualisation of deleted changes (ie inserting them in the doc), we can get rid of this.
-
     Q_UNUSED(object);
     Q_UNUSED(format);
-}
-
-QTextDocument* KoDeleteChangeMarker::document() const
-{
-    return d->document;
 }
 
 void KoDeleteChangeMarker::saveOdf(KoShapeSavingContext &context)

@@ -514,6 +514,30 @@ void TestFrameLayout::testCopyFramesForPage()
     QCOMPARE(shape->isGeometryProtected(), false);
     QCOMPARE(shape->isContentProtected(), false);
     QCOMPARE(shape->isSelectable(), false);
+
+    // new page
+    // emulate loading where there are already frames created
+    KWPage page3 = helper.pageManager->appendPage();
+    textshapePlain = new MockTextShape();
+    textshapePlain->setPosition(10, page3.offsetInDocument() + 10);
+    tFrame = new KWTextFrame(textshapePlain, textshapePlainFS);
+    textshapePlain = new MockTextShape();
+    textshapePlain->setPosition(100, page3.offsetInDocument() + 10);
+    tFrame = new KWTextFrame(textshapePlain, textshapePlainFS);
+    QCOMPARE(textshapePlainFS->frameCount(), 4);
+    bfl.createNewFramesForPage(page3.pageNumber());
+    QCOMPARE(textshapePlainFS->frameCount(), 4); // none added
+
+    // new page
+    // now test that when 1 FS has 2 frames on a page, only the first is copied.
+    KWPage page4 = helper.pageManager->appendPage();
+    bfl.createNewFramesForPage(page4.pageNumber());
+
+    QCOMPARE(textshapePlainFS->frameCount(), 5);
+    QVERIFY(!textshapePlainFS->frames()[4]->isCopy());
+    shape = textshapePlainFS->frames()[4]->shape();
+    QCOMPARE(shape->position().x(), 10.);
+    QCOMPARE(shape->position().y(), 10. + page4.offsetInDocument());
 }
 
 void TestFrameLayout::testLargeHeaders()

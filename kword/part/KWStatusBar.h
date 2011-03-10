@@ -1,7 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Sebastian Sauer <mail@dipe.org>
  * Copyright (C) 2008-2010 Thomas Zander <zander@kde.org>
- * Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -26,19 +25,14 @@
 #include <QMap>
 
 class QPoint;
-class QAction;
-class QLabel;
-
 class KStatusBar;
-class KSqueezedTextLabel;
-
-class KoCanvasController;
-class KoCanvasControllerProxyObject;
-class KoCanvasBase;
-
-class KWDocument;
 class KWView;
-
+class QLabel;
+class KSqueezedTextLabel;
+class KoCanvasController;
+class KWDocument;
+class KWCanvas;
+class QAction;
 
 /**
  * The KWStatusBar class implements an extended statusbar for KWord.
@@ -54,6 +48,8 @@ public:
     virtual ~KWStatusBar();
 
     static void addViewControls(KStatusBar *statusBar, KWView *view);
+
+    void addView(KWView *view);
 
 public slots:
     void setText(const QString &text);
@@ -82,12 +78,12 @@ private:
     */
     KWStatusBar(KStatusBar *statusBar, KWView* view);
 
-    void setCurrentView(KWView *view);
+    void setCurrentCanvas(KWCanvas *view);
 
     KStatusBar *m_statusbar;
     QPointer<KWView> m_currentView;
     QMap<KWView*, QWidget*> m_zoomWidgets;
-    QPointer<KoCanvasControllerProxyObject> m_controller;
+    QPointer<KoCanvasController> m_controller;
     int m_currentPageNumber;
     QAction *m_zoomAction;
 

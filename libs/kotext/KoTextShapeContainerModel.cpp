@@ -198,9 +198,9 @@ void KoTextShapeContainerModel::proposeMove(KoShape *child, QPointF &move)
         relation.anchor->setOffset(QPointF(0, relation.anchor->offset().y()));
     } else {
         relation.anchor->setAlignment(KoTextAnchor::HorizontalOffset);
-        QTextBlock block = relation.anchor->document()->findBlock(relation.anchor->positionInDocument());
+        QTextBlock block = relation.anchor->document()->findBlock(relation.anchor->textPosition());
         layout = block.layout();
-        anchorPosInParag = relation.anchor->positionInDocument() - block.position();
+        anchorPosInParag = relation.anchor->textPosition() - block.position();
         QTextLine tl = layout->lineForTextPosition(anchorPosInParag);
         relation.anchor->setOffset(QPointF(newPosition.x() - tl.cursorToX(anchorPosInParag) + tl.x(),
                     relation.anchor->offset().y()));
@@ -219,9 +219,9 @@ void KoTextShapeContainerModel::proposeMove(KoShape *child, QPointF &move)
         // the rest of the code uses the shape baseline, at this time the bottom. So adjust
         newPosition.setY(newPosition.y() + child->size().height());
         if (layout == 0) {
-            QTextBlock block = relation.anchor->document()->findBlock(relation.anchor->positionInDocument());
+            QTextBlock block = relation.anchor->document()->findBlock(relation.anchor->textPosition());
             layout = block.layout();
-            anchorPosInParag = relation.anchor->positionInDocument() - block.position();
+            anchorPosInParag = relation.anchor->textPosition() - block.position();
         }
         if (layout->lineCount() > 0) {
             KoTextShapeData *data = qobject_cast<KoTextShapeData*>(child->parent()->userData());

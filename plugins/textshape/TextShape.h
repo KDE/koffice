@@ -45,7 +45,7 @@ class KoImageCollection;
 class TextShape : public KoShapeContainer, public KoFrameShape
 {
 public:
-    TextShape(KoInlineTextObjectManager *inlineTextObjectManager);
+    TextShape();
     virtual ~TextShape();
 
     /// reimplemented

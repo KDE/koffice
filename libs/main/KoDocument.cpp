@@ -30,7 +30,6 @@
 #include "KoFilterManager.h"
 #include "KoDocumentInfo.h"
 #include "KoCanvasController.h"
-#include "KoCanvasControllerWidget.h"
 #include "rdf/KoDocumentRdfBase.h"
 #ifdef SHOULD_BUILD_RDF
 #include "rdf/KoDocumentRdf.h"
@@ -128,8 +127,7 @@ public:
             storeInternal(false),
             bLoading(false),
             startUpWidget(0),
-            undoStack(0),
-            canvasItem(0)
+            undoStack(0)
 
     {
         confirmNonNativeSave[0] = true;
@@ -206,8 +204,6 @@ public:
     bool bEmpty;
 
     KoPageLayout pageLayout;
-
-    QGraphicsItem *canvasItem;
 };
 
 // Used in singleViewMode
@@ -2031,7 +2027,7 @@ QDomDocument KoDocument::createDomDocument(const QString& appName, const QString
 
 QDomDocument KoDocument::saveXML()
 {
-    kError(30003) << "not implemented" << endl;
+    kError(30003) << "not implemented";
     d->lastErrorMessage = i18n("Internal error: saveXML not implemented");
     return QDomDocument();
 }
@@ -2581,23 +2577,6 @@ bool KoDocument::isEmpty() const
 void KoDocument::setEmpty()
 {
     d->bEmpty = true;
-}
-
-QGraphicsItem *KoDocument::canvasItem()
-{
-    if (!d->canvasItem) {
-        d->canvasItem = createCanvasItem();
-    }
-    return d->canvasItem;
-}
-
-QGraphicsItem *KoDocument::createCanvasItem()
-{
-    KoView *view = createView();
-    QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget();
-    QWidget *canvasController = view->findChild<KoCanvasControllerWidget*>();
-    proxy->setWidget(canvasController);
-    return proxy;
 }
 
 // static

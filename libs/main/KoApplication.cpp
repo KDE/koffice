@@ -137,6 +137,7 @@ bool KoApplication::start()
     // No argument -> create an empty document
     if (!argsCount) {
         QString errorMsg;
+        /// this is a potential improvement point; why create a document while there is a big chance we have to delete it and show the startup widget?  (Thomas) TODO avoid the expensive 'createDoc' if possible.
         KoDocument* doc = entry.createDoc(&errorMsg);
         if (!doc) {
             if (!errorMsg.isEmpty())

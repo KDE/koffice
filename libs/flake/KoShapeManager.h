@@ -61,14 +61,17 @@ public:
 
     /**
      * Constructor.
+     * @param canvas the canvas this shape manager is working on.
+     * @param parent is a QObject based parent for memory management purposes
      */
-    explicit KoShapeManager(KoCanvasBase *canvas);
+    explicit KoShapeManager(KoCanvasBase *canvas, QObject *parent = 0);
     /**
      * Constructor that takes a list of shapes, convenience version.
      * @param shapes the shapes to start out with, see also setShapes()
      * @param canvas the canvas this shape manager is working on.
+     * @param parent is a QObject based parent for memory management purposes
      */
-    KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &shapes);
+    KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &shapes, QObject *parent = 0);
     virtual ~KoShapeManager();
 
     /**

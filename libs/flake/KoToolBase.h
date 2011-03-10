@@ -293,7 +293,7 @@ public:
      * where one tool delegates work to another temporarily.  For example, while shift is
      * being held down.  The second tool will get activated with temporary=true and
      * it should emit done() when the state that activated it is ended.
-     * <p>One of the important tasks of activate is to call useCursor()
+     * <p>One of the important tasks of activate is to call setCursor()
      *
      * @param shapes the set of shapes that are selected or suggested for editing by a
      *      selected shape for the tool to work on.  Not all shapes will be meant for this
@@ -311,12 +311,8 @@ public:
      */
     virtual void deactivate();
 
-    /**
-     * This method just relays the given text via the tools statusTextChanged signal.
-     * @param statusText the new status text
-     */
-    void setStatusText(const QString &statusText);
-
+    /// \internal
+    KoToolBasePrivate *priv();
 
 public slots:
     /**
@@ -351,7 +347,7 @@ signals:
     void done();
 
     /**
-     * Emitted by useCursor() when the cursor to display on the canvas is changed.
+     * Emitted by setCursor() when the cursor to display on the canvas is changed.
      * The KoToolManager should connect to this signal to handle cursors further.
      */
     void cursorChanged(const QCursor &cursor);
@@ -375,7 +371,13 @@ protected:
      * incoming event has been handled.
      * @param cursor the new cursor.
      */
-    void useCursor(const QCursor &cursor);
+    void setCursor(const QCursor &cursor);
+
+    /**
+     * This method just relays the given text via the tools statusTextChanged signal.
+     * @param statusText the new status text
+     */
+    void setStatusText(const QString &statusText);
 
     /**
      * Reimplement this if your tool actually has an option widget.

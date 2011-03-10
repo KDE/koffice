@@ -23,11 +23,12 @@
 #include "KoShape.h"
 #include "KoShapeGroup.h"
 #include "KoShapeContainer.h"
+#include "KoShapeController.h"
 
 #include <klocale.h>
 
 // static
-KoShapeGroupCommand * KoShapeGroupCommand::createCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent)
+QUndoCommand * KoShapeGroupCommand::createCommand(KoShapeGroup *container, const QList<KoShape *> &shapes, QUndoCommand *parent)
 {
     QList<KoShape*> orderedShapes(shapes);
     qSort(orderedShapes.begin(), orderedShapes.end(), KoShape::compareShapeZIndex);
@@ -38,6 +39,19 @@ KoShapeGroupCommand * KoShapeGroupCommand::createCommand(KoShapeGroup *container
     }
 
     return new KoShapeGroupCommand(container, orderedShapes, parent);
+}
+
+//static
+QUndoCommand * KoShapeGroupCommand::createCommand(const QList<KoShape *> &shapes, KoShapeController *shapeController, QUndoCommand *parent)
+{
+    KoShapeGroup *container = new KoShapeGroup();
+    QUndoCommand *addShapeCommand = parent;
+    if (shapeController)
+        addShapeCommand = shapeController->addShapeDirect(container, parent);
+    QUndoCommand *cmd = createCommand(container, shapes, addShapeCommand);
+    if (addShapeCommand) // adding should be done last, so the group is a child of the add-command
+        return addShapeCommand;
+    return cmd;
 }
 
 KoShapeGroupCommandPrivate::KoShapeGroupCommandPrivate(KoShapeContainer *c, const QList<KoShape *> &s, const QList<bool> &clip, const QList<bool> &it)

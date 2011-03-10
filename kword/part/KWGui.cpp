@@ -1,7 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2001 David Faure <faure@kde.org>
  * Copyright (C) 2005-2007, 2009 Thomas Zander <zander@kde.org>
- * Copyright (C) 2010 Boudewijn Rempt <boud@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -25,7 +24,7 @@
 #include "KWCanvas.h"
 #include "KWPage.h"
 
-#include <KoCanvasControllerWidget.h>
+#include <KoCanvasController.h>
 #include <KoToolManager.h>
 #include <KoShapeManager.h>
 #include <KoShape.h>
@@ -60,7 +59,7 @@ KWGui::KWGui(const QString &viewMode, KWView *parent)
     m_verticalRuler->setShowMousePosition(true);
 
     m_canvas = new KWCanvas(viewMode, static_cast<KWDocument*>(m_view->koDocument()), m_view, this);
-    KoCanvasControllerWidget *canvasController = new KoCanvasControllerWidget(this);
+    KoCanvasController *canvasController = new KoCanvasController(this);
     m_canvasController = canvasController;
     m_canvasController->setMargin(10);
     m_canvasController->setCanvas(m_canvas);
@@ -88,11 +87,11 @@ KWGui::KWGui(const QString &viewMode, KWView *parent)
     connect(m_view->kwdocument(), SIGNAL(unitChanged(const KoUnit&)), m_verticalRuler, SLOT(setUnit(const KoUnit&)));
     connect(m_view->kwdocument(), SIGNAL(pageSetupChanged()), this, SLOT(pageSetupChanged()));
 
-    connect(m_canvasController->proxyObject, SIGNAL(canvasOffsetXChanged(int)), m_horizontalRuler, SLOT(setOffset(int)));
-    connect(m_canvasController->proxyObject, SIGNAL(canvasOffsetYChanged(int)), m_verticalRuler, SLOT(setOffset(int)));
-    connect(m_canvasController->proxyObject, SIGNAL(canvasOffsetYChanged(int)), parent, SLOT(offsetInDocumentMoved(int)));
-    connect(m_canvasController->proxyObject, SIGNAL(canvasMousePositionChanged(const QPoint &)), this, SLOT(updateMousePos(const QPoint&)));
-    connect(m_canvasController->proxyObject, SIGNAL(moveDocumentOffset(const QPoint&)), m_canvas, SLOT(setDocumentOffset(const QPoint&)));
+    connect(m_canvasController, SIGNAL(canvasOffsetXChanged(int)), m_horizontalRuler, SLOT(setOffset(int)));
+    connect(m_canvasController, SIGNAL(canvasOffsetYChanged(int)), m_verticalRuler, SLOT(setOffset(int)));
+    connect(m_canvasController, SIGNAL(canvasOffsetYChanged(int)), parent, SLOT(offsetInDocumentMoved(int)));
+    connect(m_canvasController, SIGNAL(canvasMousePositionChanged(const QPoint &)), this, SLOT(updateMousePos(const QPoint&)));
+    connect(m_canvasController, SIGNAL(moveDocumentOffset(const QPoint&)), m_canvas, SLOT(setDocumentOffset(const QPoint&)));
 
     connect(m_canvas->shapeManager()->selection(), SIGNAL(selectionChanged()), this, SLOT(shapeSelectionChanged()));
 
@@ -121,14 +120,13 @@ int KWGui::visibleHeight() const
 
 QSize KWGui::viewportSize() const
 {
-    return m_canvasController->viewportSize();
+    return m_canvasController->viewport()->size();
 }
-
 
 bool KWGui::horizontalScrollBarVisible()
 {
-    return static_cast<KoCanvasControllerWidget*>(m_canvasController)->horizontalScrollBar() &&
-           static_cast<KoCanvasControllerWidget*>(m_canvasController)->horizontalScrollBar()->isVisible();
+    return m_canvasController->horizontalScrollBar()
+        && m_canvasController->horizontalScrollBar()->isVisible();
 }
 
 void KWGui::pageSetupChanged()

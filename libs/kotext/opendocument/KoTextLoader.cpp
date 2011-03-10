@@ -408,8 +408,9 @@ KoTextLoader::KoTextLoader(KoShapeLoadingContext &context, KoShape *shape)
 
     if (!d->textSharedData) {
         d->textSharedData = new KoTextSharedLoadingData();
-        // TODO pass style manager so that on copy and paste we can recognice the same styles
-        d->textSharedData->loadOdfStyles(context, 0);
+        KoResourceManager *rm = context.documentResourceManager();
+        KoStyleManager *styleManager = rm->resource(KoText::StyleManager).value<KoStyleManager*>();
+        d->textSharedData->loadOdfStyles(context, styleManager);
         if (!sharedData) {
             context.addSharedData(KOTEXT_SHARED_LOADING_ID, d->textSharedData);
         } else {
@@ -1404,7 +1405,7 @@ QString KoTextLoader::createUniqueBookmarkName(KoBookmarkManager* bmm, QString b
     int uniqID = 0;
 
     while (true) {
-        if (bmm->retrieveBookmark(ret)) {
+        if (bmm->bookmark(ret)) {
             ret = QString("%1_%2").arg(bookmarkName).arg(++uniqID);
         } else {
             if (isEndMarker) {
@@ -1595,7 +1596,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
             if (layout) {
                 const QTextDocument *document = cursor.block().document();
                 KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
-                KoTextMeta* startmark = new KoTextMeta(document);
+                KoTextMeta* startmark = new KoTextMeta();
                 textObjectManager->insertInlineObject(cursor, startmark);
 
                 // Add inline Rdf here.
@@ -1609,7 +1610,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
 
                 loadSpan(ts, cursor, stripLeadingSpace);   // recurse
 
-                KoTextMeta* endmark = new KoTextMeta(document);
+                KoTextMeta* endmark = new KoTextMeta();
                 textObjectManager->insertInlineObject(cursor, endmark);
                 startmark->setEndBookmark(endmark);
             }
@@ -1626,7 +1627,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
                 QString uniqBookmarkName = createUniqueBookmarkName(textObjectManager->bookmarkManager(),
                                            bookmarkName,
                                            (localName == "bookmark-end"));
-                KoBookmark *bookmark = new KoBookmark(uniqBookmarkName, document);
+                KoBookmark *bookmark = new KoBookmark(uniqBookmarkName);
 
                 if (localName == "bookmark")
                     bookmark->setType(KoBookmark::SinglePosition);
@@ -1643,7 +1644,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
                     }
                 } else if (localName == "bookmark-end") {
                     bookmark->setType(KoBookmark::EndBookmark);
-                    KoBookmark *startBookmark = textObjectManager->bookmarkManager()->retrieveBookmark(uniqBookmarkName);
+                    KoBookmark *startBookmark = textObjectManager->bookmarkManager()->bookmark(uniqBookmarkName);
                     if (startBookmark) {        // set end bookmark only if we got start bookmark (we might not have in case of broken document)
                         startBookmark->setEndBookmark(bookmark);
                     } else {
@@ -1997,10 +1998,7 @@ void KoTextLoader::loadTableColumn(KoXmlElement &tblTag, QTextTable *tbl, int &c
     }
 
     columns = columns + repeatColumn;
-    if (rows > 0)
-        tbl->resize(rows, columns);
-    else
-        tbl->resize(1, columns);
+    tbl->resize(qMax(rows, 1), columns);
 }
 
 void KoTextLoader::loadTableRow(KoXmlElement &tblTag, QTextTable *tbl, QList<QRect> &spanStore, QTextCursor &cursor, int &rows)
@@ -2024,10 +2022,7 @@ void KoTextLoader::loadTableRow(KoXmlElement &tblTag, QTextTable *tbl, QList<QRe
     }
 
     rows++;
-    if (columns > 0)
-        tbl->resize(rows, columns);
-    else
-        tbl->resize(rows, 1);
+    tbl->resize(rows, qMax(columns,1));
 
     // Added a row
     int currentCell = 0;

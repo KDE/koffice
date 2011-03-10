@@ -45,7 +45,7 @@
 #include <kdebug.h>
 
 KoShapeManagerPrivate::KoShapeManagerPrivate(KoShapeManager *shapeManager, KoCanvasBase *c)
-    : selection(new KoSelection()),
+    : selection(new KoSelection(shapeManager)),
     canvas(c),
     tree(4, 2),
     connectionTree(4, 2),
@@ -55,7 +55,6 @@ KoShapeManagerPrivate::KoShapeManagerPrivate(KoShapeManager *shapeManager, KoCan
 }
 
 KoShapeManagerPrivate::~KoShapeManagerPrivate() {
-    delete selection;
     delete strategy;
 }
 
@@ -136,16 +135,18 @@ void KoShapeManagerPrivate::update(const QRectF &rect, const KoShape *shape, boo
 }
 
 
-KoShapeManager::KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &shapes)
-        : d(new KoShapeManagerPrivate(this, canvas))
+KoShapeManager::KoShapeManager(KoCanvasBase *canvas, const QList<KoShape *> &shapes, QObject *parent)
+        : QObject(parent),
+        d(new KoShapeManagerPrivate(this, canvas))
 {
     Q_ASSERT(d->canvas); // not optional.
     connect(d->selection, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
     setShapes(shapes);
 }
 
-KoShapeManager::KoShapeManager(KoCanvasBase *canvas)
-        : d(new KoShapeManagerPrivate(this, canvas))
+KoShapeManager::KoShapeManager(KoCanvasBase *canvas, QObject *parent)
+        : QObject(parent),
+        d(new KoShapeManagerPrivate(this, canvas))
 {
     Q_ASSERT(d->canvas); // not optional.
     connect(d->selection, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));

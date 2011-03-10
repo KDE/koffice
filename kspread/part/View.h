@@ -52,7 +52,7 @@ class KoZoomHandler;
 namespace KSpread
 {
 class Cell;
-class ColumnHeaderWidget;
+class ColumnHeader;
 class Damage;
 class Sheet;
 class Canvas;
@@ -60,7 +60,7 @@ class Doc;
 class Region;
 class Selection;
 class SheetView;
-class RowHeaderWidget;
+class RowHeader;
 class View;
 class TabBar;
 
@@ -100,10 +100,10 @@ public:
     KoCanvasController* canvasController() const;
 
     /** \return the column header */
-    ColumnHeaderWidget* columnHeader() const;
+    ColumnHeader* columnHeader() const;
 
     /** \return the row header */
-    RowHeaderWidget* rowHeader() const;
+    RowHeader* rowHeader() const;
 
     /** \return the horizontal scrollbar */
     QScrollBar* horzScrollBar() const;

@@ -60,15 +60,14 @@ TextShapeFactory::TextShapeFactory(QObject *parent)
 
 KoShape *TextShapeFactory::createDefaultShape(KoResourceManager *documentResources) const
 {
-    KoInlineTextObjectManager *manager = 0;
-    if (documentResources && documentResources->hasResource(KoText::InlineTextObjectManager)) {
-        QVariant variant = documentResources->resource(KoText::InlineTextObjectManager);
-        manager = variant.value<KoInlineTextObjectManager*>();
-    }
-    TextShape *text = new TextShape(manager);
+    TextShape *text = new TextShape();
     if (documentResources) {
         KoTextDocument document(text->textShapeData()->document());
         document.setUndoStack(documentResources->undoStack());
+
+        KoInlineTextObjectManager *itom = documentResources->resource(KoText::InlineTextObjectManager).value<KoInlineTextObjectManager*>();
+        if (itom)
+            document.setInlineTextObjectManager(itom);
 
         KoStyleManager *styleManager = documentResources->resource(KoText::StyleManager).value<KoStyleManager*>();
         if (styleManager)
@@ -153,7 +152,7 @@ void TextShapeFactory::createUndoStack(KoResourceManager *manager)
 
 void TextShapeFactory::createEditingPluginContainer(KoResourceManager *manager)
 {
-    TextEditingPluginContainer *container = new TextEditingPluginContainer(manager);
+    TextEditingPluginContainer *container = TextEditingPluginContainer::create(manager);
     QVariant variant;
     variant.setValue<TextEditingPluginContainer*>(container);
     manager->setResource(TextEditingPluginContainer::ResourceId, variant);

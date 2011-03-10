@@ -438,7 +438,7 @@ void KWTextDocumentLayout::layout()
             continue;
         foreach (KWAnchorStrategy *strategy, m_activeAnchors + m_newAnchors) {
             ADEBUG << " + isFinished?"<< strategy->isFinished();
-            if (strategy->isFinished() && strategy->anchor()->positionInDocument() < m_state->cursorPosition()) {
+            if (strategy->isFinished() && strategy->anchor()->textPosition() < m_state->cursorPosition()) {
                 ADEBUG << "  is finished";
                 m_activeAnchors.removeAll(strategy);
                 m_newAnchors.removeAll(strategy);
@@ -461,7 +461,7 @@ void KWTextDocumentLayout::layout()
                 // sure that a line like this always have height so infinite that it
                 // doesn't happen.
                 const int cursorPosition = m_state->cursorPosition();
-                if (cursorPosition == startOfBlockText && strategy->anchor()->positionInDocument() == cursorPosition && !strategy->anchor()->isPositionedInline()) {
+                if (cursorPosition == startOfBlockText && strategy->anchor()->textPosition() == cursorPosition && !strategy->anchor()->isPositionedInline()) {
                     ADEBUG << "   creating line for anchor";
                     QTextLine line = m_state->layout->createLine();
                     line.setNumColumns(1);
@@ -578,8 +578,12 @@ void KWTextDocumentLayout::layout()
 
         bottomOfText = line.line.y() + line.line.height();
         if (bottomOfText > m_state->shape->size().height() && document()->blockCount() == 1 && KWord::isHeaderFooter(m_frameSet)) {
-            TDEBUG << "requestMoreFrames" << (bottomOfText - m_state->shape->size().height());
-            m_frameSet->requestMoreFrames(bottomOfText - m_state->shape->size().height());
+            const KoTextShapeData::RelayoutForPageState relayoutState =
+                (KoTextShapeData::RelayoutForPageState) property("KoTextRelayoutForPage").toInt();
+            if (relayoutState == KoTextShapeData::NormalState) {
+                TDEBUG << "requestMoreFrames" << (bottomOfText - m_state->shape->size().height());
+                m_frameSet->requestMoreFrames(bottomOfText - m_state->shape->size().height());
+            }
             cleanupAnchors();
             return;
         }

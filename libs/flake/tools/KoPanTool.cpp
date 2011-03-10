@@ -24,7 +24,6 @@
 #include "KoPointerEvent.h"
 #include "KoCanvasBase.h"
 #include "KoCanvasController.h"
-#include "KoCanvasControllerWidget.h"
 #include "KoViewConverter.h"
 
 #include <QKeyEvent>
@@ -47,7 +46,7 @@ void KoPanTool::mousePressEvent(KoPointerEvent *event)
 {
     m_lastPosition = documentToViewport(event->point);
     event->accept();
-    useCursor(QCursor(Qt::ClosedHandCursor));
+    setCursor(QCursor(Qt::ClosedHandCursor));
 }
 
 void KoPanTool::mouseMoveEvent(KoPointerEvent *event)
@@ -67,15 +66,14 @@ void KoPanTool::mouseMoveEvent(KoPointerEvent *event)
 void KoPanTool::mouseReleaseEvent(KoPointerEvent *event)
 {
     event->accept();
-    useCursor(QCursor(Qt::OpenHandCursor));
+    setCursor(QCursor(Qt::OpenHandCursor));
     if (m_temporary)
         emit done();
 }
 
 void KoPanTool::keyPressEvent(QKeyEvent *event)
 {
-    // XXX: Make widget-independent!
-    KoCanvasControllerWidget *canvasControllerWidget = dynamic_cast<KoCanvasControllerWidget*>(m_controller);
+    KoCanvasController *canvasControllerWidget = dynamic_cast<KoCanvasController*>(m_controller);
     if (!canvasControllerWidget) {
         return;
     }
@@ -103,7 +101,7 @@ void KoPanTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &)
         return;
     }
     m_temporary = toolActivation == TemporaryActivation;
-    useCursor(QCursor(Qt::OpenHandCursor));
+    setCursor(QCursor(Qt::OpenHandCursor));
 }
 
 void KoPanTool::customMoveEvent(KoPointerEvent * event)

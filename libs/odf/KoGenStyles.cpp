@@ -1,7 +1,7 @@
 /* This file is part of the KDE project
    Copyright (C) 2004-2006 David Faure <faure@kde.org>
    Copyright (C) 2007-2008 Thorsten Zachmann <zachmann@kde.org>
-   Copyright (C) 2009 Thomas Zander <zander@kde.org>
+   Copyright (C) 2009-2011 Thomas Zander <zander@kde.org>
    Copyright (C) 2008 Girish Ramakrishnan <girish@forwardbias.in>
    Copyright (C) 2009 Inge Wallin <inge@lysator.liu.se>
    Copyright (C) 2010 KO GmbH <jos.van.den.oever@kogmbh.com>
@@ -338,16 +338,12 @@ QString KoGenStyles::insert(const KoGenStyle& style, const QString& baseName, In
         // wouldn't have found it, due to m_parentName being set).
         if (!style.parentName().isEmpty()) {
             KoGenStyle testStyle(style);
-            const KoGenStyle* parentStyle = this->style(style.parentName());   // ## linear search
+            const KoGenStyle* parentStyle = this->style(style.parentName(), style.m_familyName);   // ## linear search
             if (!parentStyle) {
                 kDebug(30003) << "baseName=" << baseName << "parent style" << style.parentName()
                               << "not found in collection";
             } else {
-                if (testStyle.m_familyName != parentStyle->m_familyName) {
-                    kWarning(30003) << "baseName=" << baseName << "family=" << testStyle.m_familyName
-                                    << "parent style" << style.parentName() << "has a different family:"
-                                    << parentStyle->m_familyName;
-                }
+                Q_ASSERT(testStyle.m_familyName == parentStyle->m_familyName);
 
                 testStyle.m_parentName = parentStyle->m_parentName;
                 // Exclude the type from the comparison. It's ok for an auto style
@@ -411,20 +407,20 @@ QList<KoGenStyles::NamedStyle> KoGenStyles::stylesForStylesXml(KoGenStyle::Type 
     return d->styles(d->autoStylesInStylesDotXml, type);
 }
 
-const KoGenStyle* KoGenStyles::style(const QString& name) const
+const KoGenStyle* KoGenStyles::style(const QString &name, const QByteArray &family) const
 {
     QList<KoGenStyles::NamedStyle>::const_iterator it = d->styleList.constBegin();
     const QList<KoGenStyles::NamedStyle>::const_iterator end = d->styleList.constEnd();
     for (; it != end ; ++it) {
-        if ((*it).name == name)
+        if ((*it).name == name && (family.isEmpty() || (*it).style->m_familyName == family))
             return (*it).style;
     }
     return 0;
 }
 
-KoGenStyle* KoGenStyles::styleForModification(const QString& name)
+KoGenStyle* KoGenStyles::styleForModification(const QString &name)
 {
-    return const_cast<KoGenStyle *>(style(name));
+    return const_cast<KoGenStyle *>(style(name, QByteArray()));
 }
 
 void KoGenStyles::markStyleForStylesXml(const QString& name)
@@ -541,7 +537,7 @@ QDebug operator<<(QDebug dbg, const KoGenStyles& styles)
          it != styles.d->autoStylesInStylesDotXml.constEnd(); ++it)
     {
         dbg.space() << "auto style for style.xml:" << *it;
-        const KoGenStyle* s = styles.style(*it);
+        const KoGenStyle* s = styles.style(*it, QByteArray());
         Q_ASSERT(s);
         Q_ASSERT(s->autoStyleInStylesDotXml());
     }

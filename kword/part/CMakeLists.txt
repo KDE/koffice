@@ -10,9 +10,7 @@ set(kwordprivate_LIB_SRCS
     KWFactory.cpp
     KWord.cpp
     KWApplicationConfig.cpp
-    KWCanvasBase.cpp
     KWCanvas.cpp
-    KWCanvasItem.cpp
     KWDocument.cpp
     KWGui.cpp
     KWView.cpp
@@ -41,7 +39,6 @@ set(kwordprivate_LIB_SRCS
     frames/Outline.cpp
     frames/KWPageBackground.cpp
 
-    dialogs/KWCreateBookmarkDialog.cpp
     dialogs/KWDocumentColumns.cpp
     dialogs/KWFrameConnectSelector.cpp
     dialogs/KWFrameDialog.cpp
@@ -52,23 +49,23 @@ set(kwordprivate_LIB_SRCS
     dialogs/KWInsertPageDialog.cpp
     dialogs/KWPageSettingsDialog.cpp
     dialogs/KWPrintingDialog.cpp
-    dialogs/KWSelectBookmarkDialog.cpp
     dialogs/KWShapeConfigFactory.cpp
     dialogs/KWStartupWidget.cpp
     dialogs/KWStatistics.cpp
     dialogs/KWStatisticsDialog.cpp
     dockers/KWStatisticsDocker.cpp
 
-    commands/KWPageStylePropertiesCommand.cpp
+    commands/KWChangePageStyleCommand.cpp
+    commands/KWClipFrameCommand.cpp
+    commands/KWCreateOutlineCommand.cpp
+    commands/KWFrameCreateCommand.cpp
+    commands/KWFrameDeleteCommand.cpp
+    commands/KWFrameRemoveSilentCommand.cpp
+    commands/KWNewPageStyleCommand.cpp
     commands/KWPageInsertCommand.cpp
     commands/KWPageRemoveCommand.cpp
-    commands/KWNewPageStyleCommand.cpp
-    commands/KWFrameDeleteCommand.cpp
-    commands/KWFrameCreateCommand.cpp
-    commands/KWCreateOutlineCommand.cpp
-    commands/KWClipFrameCommand.cpp
+    commands/KWPageStylePropertiesCommand.cpp
     commands/KWRemoveFrameClipCommand.cpp
-    commands/KWChangePageStyleCommand.cpp
 )
 if( Soprano_FOUND )
     set(kwordprivate_LIB_SRCS ${kwordprivate_LIB_SRCS}
@@ -79,7 +76,6 @@ if( Soprano_FOUND )
 endif( Soprano_FOUND )
 
 kde4_add_ui_files(kwordprivate_LIB_SRCS
-    dialogs/KWCreateBookmark.ui
     dialogs/KWDocumentColumns.ui
     dialogs/KWFrameConnectSelector.ui
     dialogs/KWFrameGeometry.ui
@@ -87,7 +83,6 @@ kde4_add_ui_files(kwordprivate_LIB_SRCS
     dialogs/KWGeneralFrameProperties.ui
     dialogs/KWHeaderFooter.ui
     dialogs/KWInsertPageDialog.ui
-    dialogs/KWSelectBookmark.ui
     dialogs/KWStartupWidget.ui
     dialogs/KWStatistics.ui
     dockers/KWStatisticsDocker.ui
@@ -153,19 +148,3 @@ install( FILES kword.rc kword_readonly.rc  DESTINATION ${DATA_INSTALL_DIR}/kword
 install( FILES kwordpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install( PROGRAMS kword.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
 install( FILES kwordrc DESTINATION ${CONFIG_INSTALL_DIR} )
-
-install( FILES
-kword_export.h
-KWPage.h
-KWPageManager.h
-KWPageStyle.h
-KWord.h
-KWCanvasBase.h
-KWCanvas.h
-KWCanvasItem.h
-KWDocument.h
-KWApplicationConfig.h
-frames/KWFrameLayout.h
-KWViewMode.h
-DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
-

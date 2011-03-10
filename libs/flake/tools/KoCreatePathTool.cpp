@@ -288,7 +288,7 @@ void KoCreatePathTool::keyPressEvent(QKeyEvent *event)
 void KoCreatePathTool::activate(ToolActivation, const QSet<KoShape*> &)
 {
     Q_D(KoCreatePathTool);
-    useCursor(Qt::ArrowCursor);
+    setCursor(Qt::ArrowCursor);
 
     // retrieve the actual global handle radius
     d->handleRadius = canvas()->resourceManager()->handleRadius();

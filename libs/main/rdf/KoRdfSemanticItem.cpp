@@ -250,7 +250,7 @@ void KoRdfSemanticItem::insert(KoCanvasBase *host)
     KoTextDocument ktd(editor->document());
     KoChangeTrackerDisabledRAII disableChangeTracker(ktd.changeTracker());
 
-    KoTextMeta *startmark = new KoTextMeta(editor->document());
+    KoTextMeta *startmark = new KoTextMeta();
     editor->insertInlineObject(startmark);
     KoTextInlineRdf *inlineRdf(new KoTextInlineRdf((QTextDocument*)editor->document(), startmark));
 
@@ -290,7 +290,7 @@ void KoRdfSemanticItem::insert(KoCanvasBase *host)
     //
     editor->insertText(name());
 
-    KoTextMeta *endmark = new KoTextMeta(editor->document());
+    KoTextMeta *endmark = new KoTextMeta();
     editor->insertInlineObject(endmark);
     startmark->setEndBookmark(endmark);
 

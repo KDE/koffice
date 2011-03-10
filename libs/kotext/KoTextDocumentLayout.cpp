@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2007, 2009-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2010 Johannes Simon <johannes.simon@gmail.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -398,8 +398,13 @@ void KoTextDocumentLayout::drawInlineObject(QPainter *painter, const QRectF &rec
         return;
     QTextCharFormat cf = format.toCharFormat();
     KoInlineObject *obj = d->inlineTextObjectManager->inlineTextObject(cf);
-    if (obj)
-        obj->paint(*painter, paintDevice(), document(), rect, object, position, cf);
+    if (obj) {
+        Q_ASSERT(obj->document() == document());
+        Q_ASSERT(obj->textPosition() == position);
+        //obj->setDocument(document());
+        //obj->setTextPosition(position);
+        obj->paint(*painter, paintDevice(), rect, object, cf);
+    }
 }
 
 void KoTextDocumentLayout::positionInlineObject(QTextInlineObject item, int position, const QTextFormat &format)
@@ -409,8 +414,11 @@ void KoTextDocumentLayout::positionInlineObject(QTextInlineObject item, int posi
         return;
     QTextCharFormat cf = format.toCharFormat();
     KoInlineObject *obj = d->inlineTextObjectManager->inlineTextObject(cf);
-    if (obj)
-        obj->updatePosition(document(), item, position, cf);
+    if (obj) {
+        obj->setDocument(document());
+        obj->setTextPosition(position);
+        obj->updatePosition(item, cf);
+    }
 }
 
 void KoTextDocumentLayout::resizeInlineObject(QTextInlineObject item, int position, const QTextFormat &format)
@@ -421,7 +429,9 @@ void KoTextDocumentLayout::resizeInlineObject(QTextInlineObject item, int positi
     QTextCharFormat cf = format.toCharFormat();
     KoInlineObject *obj = d->inlineTextObjectManager->inlineTextObject(cf);
     if (obj) {
-        obj->resize(document(), item, position, cf, paintDevice());
+        obj->setDocument(document());
+        obj->setTextPosition(position);
+        obj->resize(item, cf, paintDevice());
         m_state->registerInlineObject(item);
     }
 }
@@ -516,6 +526,7 @@ QList<KoShape*> KoTextDocumentLayout::shapes() const
 
 KoShape* KoTextDocumentLayout::shapeForPosition(int position) const
 {
+    // TODO make faster
     foreach(KoShape *shape, shapes()) {
         KoTextShapeData *data = qobject_cast<KoTextShapeData*>(shape->userData());
         if (data == 0)

@@ -88,7 +88,7 @@ void KarbonPatternTool::mousePressEvent(KoPointerEvent *event)
         if (strategy->selectHandle(event->point, *canvas()->viewConverter())) {
             m_currentStrategy = strategy;
             m_currentStrategy->repaint();
-            useCursor(Qt::SizeAllCursor);
+            setCursor(Qt::SizeAllCursor);
             break;
         }
     }
@@ -110,11 +110,11 @@ void KarbonPatternTool::mouseMoveEvent(KoPointerEvent *event)
     }
     foreach(KarbonPatternEditStrategyBase *strategy, m_strategies) {
         if (strategy->selectHandle(event->point, *canvas()->viewConverter())) {
-            useCursor(Qt::SizeAllCursor);
+            setCursor(Qt::SizeAllCursor);
             return;
         }
     }
-    useCursor(Qt::ArrowCursor);
+    setCursor(Qt::ArrowCursor);
 }
 
 void KarbonPatternTool::mouseReleaseEvent(KoPointerEvent *event)
@@ -223,7 +223,7 @@ void KarbonPatternTool::activate(ToolActivation toolActivation, const QSet<KoSha
     KarbonPatternEditStrategyBase::setHandleRadius(canvas()->resourceManager()->handleRadius());
     KarbonPatternEditStrategyBase::setGrabSensitivity(canvas()->resourceManager()->grabSensitivity());
 
-    useCursor(Qt::ArrowCursor);
+    setCursor(Qt::ArrowCursor);
 
     connect(canvas()->shapeManager(), SIGNAL(selectionContentChanged()), this, SLOT(initialize()));
 }

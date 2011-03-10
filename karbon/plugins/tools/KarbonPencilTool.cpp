@@ -177,7 +177,7 @@ void KarbonPencilTool::activate(ToolActivation, const QSet<KoShape*> &)
 {
     m_points.clear();
     m_close = false;
-    useCursor(Qt::ArrowCursor);
+    setCursor(Qt::ArrowCursor);
 }
 
 void KarbonPencilTool::deactivate()

@@ -74,9 +74,6 @@ public:
     ///Return the position of the marker in the document
     int position() const;
 
-    ///Return the document this marker belongs to.
-    QTextDocument* document() const;
-
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
     ///reimplemented
     virtual void saveOdf(KoShapeSavingContext &context);
@@ -91,9 +88,11 @@ public:
 
 protected:
 
-    virtual void paint(QPainter &painter, QPaintDevice *pd, const QTextDocument *document, const QRectF &rect, QTextInlineObject object, int posInDocument, const QTextCharFormat &format);
+    virtual void paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format);
 
-    virtual void resize(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format, QPaintDevice *pd);
+    virtual void resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd);
+
+    virtual void updatePosition(QTextInlineObject object, const QTextCharFormat &format);
 
 private:
 

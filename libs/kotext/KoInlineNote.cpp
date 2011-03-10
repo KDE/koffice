@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2010 KO Gmbh <boud@kogmbh.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -115,18 +115,14 @@ KoInlineNote::Type KoInlineNote::type() const
     return d->type;
 }
 
-void KoInlineNote::updatePosition(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format)
+void KoInlineNote::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
-    Q_UNUSED(document);
     Q_UNUSED(object);
-    Q_UNUSED(posInDocument);
     Q_UNUSED(format);
 }
 
-void KoInlineNote::resize(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format, QPaintDevice *pd)
+void KoInlineNote::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
-    Q_UNUSED(document);
-    Q_UNUSED(posInDocument);
     if (d->label.isEmpty())
         return;
     Q_ASSERT(format.isCharFormat());
@@ -136,11 +132,9 @@ void KoInlineNote::resize(const QTextDocument *document, QTextInlineObject objec
     object.setDescent(fm.descent());
 }
 
-void KoInlineNote::paint(QPainter &painter, QPaintDevice *pd, const QTextDocument *document, const QRectF &rect, QTextInlineObject object, int posInDocument, const QTextCharFormat &format)
+void KoInlineNote::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format)
 {
-    Q_UNUSED(document);
     Q_UNUSED(object);
-    Q_UNUSED(posInDocument);
 
     if (d->label.isEmpty())
         return;

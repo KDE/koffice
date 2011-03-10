@@ -111,7 +111,7 @@ void KoToolBase::inputMethodEvent(QInputMethodEvent * event)
     event->accept();
 }
 
-void KoToolBase::useCursor(const QCursor &cursor)
+void KoToolBase::setCursor(const QCursor &cursor)
 {
     Q_D(KoToolBase);
     d->currentCursor = cursor;
@@ -290,6 +290,12 @@ bool KoToolBase::isInTextMode() const
 {
     Q_D(const KoToolBase);
     return d->isInTextMode;
+}
+
+KoToolBasePrivate *KoToolBase::priv()
+{
+    Q_D(KoToolBase);
+    return d;
 }
 
 #include <KoToolBase.moc>

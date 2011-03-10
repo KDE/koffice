@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -91,21 +91,12 @@ protected:
      * you should implement this method and act on it.
      */
     virtual void variableMoved(const KoShape *shape, const QTextDocument *document, int posInDocument);
-
-    friend class KoVariableManager;
-    /**
-     * return the last known position in the document. Note that if the variable has not yet been layouted,
-     * it does not know the position.
-     */
-    int positionInDocument() const;
-
 private:
-    void updatePosition(const QTextDocument *document, QTextInlineObject object,
-                        int posInDocument, const QTextCharFormat &format);
-    void resize(const QTextDocument *document, QTextInlineObject object,
-                int posInDocument, const QTextCharFormat &format, QPaintDevice *pd);
-    void paint(QPainter &painter, QPaintDevice *pd, const QTextDocument *document,
-               const QRectF &rect, QTextInlineObject object, int posInDocument, const QTextCharFormat &format);
+    void updatePosition(QTextInlineObject object, const QTextCharFormat &format);
+    void resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd);
+    void paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect,
+            QTextInlineObject object, const QTextCharFormat &format);
+    virtual void positionChanged();
 
 private:
     Q_DECLARE_PRIVATE(KoVariable)

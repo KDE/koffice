@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -119,21 +119,13 @@ public:
     /// return the current horizontal aligment
     AnchorHorizontal horizontalAlignment() const;
 
-    /// returns the cursor position in the document where this anchor is positioned.
-    int positionInDocument() const;
-
-    /// returns the document that this anchor is associated with.
-    const QTextDocument *document() const;
-
     /// reimplemented from KoInlineObject
-    virtual void updatePosition(const QTextDocument *document, QTextInlineObject object,
-                                int posInDocument, const QTextCharFormat &format);
+    virtual void updatePosition(QTextInlineObject object, const QTextCharFormat &format);
     /// reimplemented from KoInlineObject
-    virtual void resize(const QTextDocument *document, QTextInlineObject object,
-                        int posInDocument, const QTextCharFormat &format, QPaintDevice *pd);
+    virtual void resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd);
     /// reimplemented from KoInlineObject
-    virtual void paint(QPainter &painter, QPaintDevice *pd, const QTextDocument *document,
-                       const QRectF &rect, QTextInlineObject object, int posInDocument, const QTextCharFormat &format);
+    virtual void paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect,
+            QTextInlineObject object, const QTextCharFormat &format);
 
     /// return the offset of the shape from the anchor.
     const QPointF &offset() const;

@@ -183,7 +183,7 @@ void KWGeneralFrameProperties::save()
 void KWGeneralFrameProperties::newPageGroupUpdated(int which)
 {
     widget.createNewPage->setEnabled(which == KWord::ReconnectNewFrame);
-    widget.mirrorPos->setEnabled(which == KWord::NoFollowupFrame
+    widget.mirrorPos->setEnabled((which == KWord::NoFollowupFrame || which == KWord::CopyNewFrame)
             && widget.syncPos->isChecked());
 }
 

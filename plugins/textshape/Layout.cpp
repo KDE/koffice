@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2008 Girish Ramakrishnan <girish@forwardbias.in>
  * Copyright (C) 2008 Roopesh Chander <roop@forwardbias.in>
@@ -354,6 +354,7 @@ bool Layout::nextParag()
 {
     Q_ASSERT(shape);
     m_inlineObjectHeights.clear();
+    QTextBlock prevBlock = m_block;
     if (layout && !m_restartingFirstCellAfterTableBreak) { // guard against first time or first time after table relayout
         layout->endLayout();
         m_block = m_block.next();
@@ -387,11 +388,8 @@ bool Layout::nextParag()
     m_blockData = 0;
     if (m_data == 0) // no shape to layout, so stop here.
         return true;
-    if (m_block.userState() == KoText::BlockTextLayoutState)
-        return false;
     if (! m_block.isValid()) {
-        QTextBlock block = m_block.previous(); // last correct one.
-        m_data->setEndPosition(block.position() + block.length());
+        m_data->setEndPosition(prevBlock.position() + prevBlock.length());
         if (m_data->position() > m_data->endPosition()) // we have no text for this shape
             m_data->setEndPosition(-1);
 
@@ -406,6 +404,8 @@ bool Layout::nextParag()
         cleanupShapes();
         return false;
     }
+    if (m_block.userState() == KoText::BlockTextLayoutState)
+        return false;
 
     // make sure m_tableLayout is refering to the right table
     QTextCursor tableFinder(m_block);

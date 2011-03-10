@@ -109,8 +109,9 @@ void KoSelectionPrivate::deselectGroupChildren(KoShapeGroup *group)
 
 ////////////
 
-KoSelection::KoSelection()
-    : KoShape(*(new KoSelectionPrivate(this)))
+KoSelection::KoSelection(QObject *parent)
+    : QObject(parent),
+    KoShape(*(new KoSelectionPrivate(this)))
 {
 }
 

@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2010 KO GmbH <ben.martin@kogmbh.com>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -36,18 +37,13 @@
 class KoTextMeta::Private
 {
 public:
-    Private(const QTextDocument *doc)
-            : document(doc),
-            posInDocument(0) { }
-    const QTextDocument *document;
-    int posInDocument;
     KoTextMeta *endBookmark;
     BookmarkType type;
 };
 
-KoTextMeta::KoTextMeta(const QTextDocument *document)
+KoTextMeta::KoTextMeta()
         : KoInlineObject(false),
-        d(new Private(document))
+        d(new Private())
 {
     d->endBookmark = 0;
 }
@@ -88,24 +84,20 @@ bool KoTextMeta::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &con
     return true;
 }
 
-void KoTextMeta::updatePosition(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format)
+void KoTextMeta::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
-    d->document = document;
-    d->posInDocument = posInDocument;
 }
 
-void KoTextMeta::resize(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format, QPaintDevice *pd)
+void KoTextMeta::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
     Q_UNUSED(object);
     Q_UNUSED(pd);
     Q_UNUSED(format);
-    Q_UNUSED(document);
-    Q_UNUSED(posInDocument);
 }
 
-void KoTextMeta::paint(QPainter &, QPaintDevice *, const QTextDocument *, const QRectF &, QTextInlineObject , int , const QTextCharFormat &)
+void KoTextMeta::paint(QPainter &, QPaintDevice *, const QRectF &, QTextInlineObject, const QTextCharFormat &)
 {
     // nothing to paint.
 }
@@ -134,10 +126,5 @@ KoTextMeta *KoTextMeta::endBookmark() const
 
 KoShape *KoTextMeta::shape() const
 {
-    return shapeForPosition(d->document, d->posInDocument);
-}
-
-int KoTextMeta::position() const
-{
-    return d->posInDocument;
+    return shapeForPosition(document(), textPosition());
 }

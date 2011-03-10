@@ -27,8 +27,6 @@
 #include "KivioView.h"
 #include "KivioFactory.h"
 
-#include <KoPACanvasItem.h>
-
 KivioDocument::KivioDocument(QWidget* parentWidget, QObject* parent, bool singleViewMode)
   : KoPADocument(parentWidget, parent, singleViewMode)
 {
@@ -48,11 +46,6 @@ KoOdf::DocumentType KivioDocument::documentType() const
 KoView* KivioDocument::createViewInstance(QWidget* parent)
 {
     return new KivioView(this, parent);
-}
-
-QGraphicsItem *KivioDocument::createCanvasItem()
-{
-    return new KoPACanvasItem(this);
 }
 
 const char * KivioDocument::odfTagName( bool withNamespace )

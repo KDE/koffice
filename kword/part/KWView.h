@@ -35,6 +35,7 @@ class KWDocument;
 class KWCanvas;
 class KWFrame;
 class KWGui;
+class KWCanvas;
 
 class KoCanvasBase;
 class KoZoomController;
@@ -86,7 +87,7 @@ public:
     /**
      * Return the current canvas; much like canvas(), but this one does not downcast.
      */
-    KoCanvasBase *canvasBase() const;
+    KWCanvas *kwcanvas() const;
 
     /// Return the view converter for this view.
     KoViewConverter *viewConverter() {
@@ -123,12 +124,6 @@ private slots:
     void selectionChanged();
     /// force the remainder of the text into the next page
     void insertFrameBreak();
-    /// insert a bookmark on current text cursor location or selection
-    void addBookmark();
-    /// go to previously bookmarked text cursor location or selection
-    void selectBookmark();
-    /// delete previously bookmarked text cursor location or selection (from the Select Bookmark dialog)
-    void deleteBookmark(const QString &name);
     /// delete the currently selected frame(s)
     void editDeleteFrame();
     /// enable/disable document headers

@@ -270,18 +270,18 @@ void KarbonFilterEffectsTool::mouseMoveEvent(KoPointerEvent *event)
         EditMode mode = d->editModeFromMousePosition(event->point, this);
         switch(mode) {
             case MoveAll:
-                useCursor(Qt::SizeAllCursor);
+                setCursor(Qt::SizeAllCursor);
                 break;
             case MoveLeft:
             case MoveRight:
-                useCursor(Qt::SizeHorCursor);
+                setCursor(Qt::SizeHorCursor);
                 break;
             case MoveTop:
             case MoveBottom:
-                useCursor(Qt::SizeVerCursor);
+                setCursor(Qt::SizeVerCursor);
                 break;
             case None:
-                useCursor(Qt::ArrowCursor);
+                setCursor(Qt::ArrowCursor);
                 break;
         }
     }

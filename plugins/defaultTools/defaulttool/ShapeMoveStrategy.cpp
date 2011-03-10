@@ -52,7 +52,7 @@ ShapeMoveStrategy::ShapeMoveStrategy(KoToolBase *tool, const QPointF &clicked)
     m_initialSelectionPosition = selection->position();
     tool->canvas()->snapGuide()->setIgnoredShapes( selection->selectedShapes( KoFlake::FullSelection ) );
 
-    tool->setStatusText(i18n("Press ALT to hold x- or y-position."));
+    setStatusText(i18n("Press ALT to hold x- or y-position."));
 }
 
 void ShapeMoveStrategy::handleMouseMove(const QPointF &point, Qt::KeyboardModifiers modifiers)

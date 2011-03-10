@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Fredy Yanardi <fyanardi@gmail.com>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,15 +22,11 @@
 #include "KoBookmark.h"
 
 #include <KDebug>
-#include <QHash>
 
 class KoBookmarkManagerPrivate
 {
 public:
-    KoBookmarkManagerPrivate() { }
-    QHash<QString, KoBookmark*> bookmarkHash;
-    QList<QString> bookmarkNameList;
-    int lastId;
+    QList<KoBookmark*> bookmarks;
 };
 
 KoBookmarkManager::KoBookmarkManager()
@@ -42,45 +39,55 @@ KoBookmarkManager::~KoBookmarkManager()
     delete d;
 }
 
-void KoBookmarkManager::insert(const QString &name, KoBookmark *bookmark)
+void KoBookmarkManager::insert(KoBookmark *bookmark)
 {
-    d->bookmarkHash[name] = bookmark;
-    d->bookmarkNameList.append(name);
+    Q_ASSERT(bookmark);
+    if (bookmark->type() == KoBookmark::EndBookmark) {
+        kWarning(32500) << "Can't insert a bookmark of type EndBookmark in the manager, ignoring";
+        return;
+    }
+    d->bookmarks.append(bookmark);
+}
+
+void KoBookmarkManager::remove(KoBookmark *bookmark)
+{
+    d->bookmarks.removeAll(bookmark);
 }
 
 void KoBookmarkManager::remove(const QString &name)
 {
-    d->bookmarkHash.remove(name);
-    d->bookmarkNameList.removeAt(d->bookmarkNameList.indexOf(name));
-}
-
-void KoBookmarkManager::rename(const QString &oldName, const QString &newName)
-{
-    QHash<QString, KoBookmark*>::iterator i = d->bookmarkHash.begin();
-
-    while (i != d->bookmarkHash.end()) {
-        if (i.key() == oldName) {
-            KoBookmark *bookmark = d->bookmarkHash.take(i.key());
-            bookmark->setName(newName);
-            d->bookmarkHash.insert(newName, bookmark);
-            int listPos = d->bookmarkNameList.indexOf(oldName);
-            d->bookmarkNameList.replace(listPos, newName);
-            return;
+    QList<KoBookmark*>::Iterator iter = d->bookmarks.begin();
+    while (iter != d->bookmarks.end()) {
+        if ((*iter)->name() == name) {
+            d->bookmarks.erase(iter);
+            break;
         }
-        i++;
+        ++iter;
     }
 }
 
-KoBookmark *KoBookmarkManager::retrieveBookmark(const QString &name)
+KoBookmark *KoBookmarkManager::bookmark(const QString &name) const
 {
-    KoBookmark *bookmark = d->bookmarkHash.value(name);
-    return bookmark;
+    QList<KoBookmark*>::Iterator iter = d->bookmarks.begin();
+    while (iter != d->bookmarks.end()) {
+        if ((*iter)->name() == name) {
+            return *iter;
+        }
+        ++iter;
+    }
+    return 0;
 }
 
-QList<QString> KoBookmarkManager::bookmarkNameList()
+QList<QString> KoBookmarkManager::bookmarkNames() const
 {
-    return d->bookmarkNameList;
+    QList<QString> answer;
+    answer.reserve(d->bookmarks.size());
+    foreach (KoBookmark *b, d->bookmarks)
+        answer << b->name();
+    return answer;
 }
 
-#include <KoBookmarkManager.moc>
-
+QList<KoBookmark*> KoBookmarkManager::bookmarks() const
+{
+    return d->bookmarks;
+}

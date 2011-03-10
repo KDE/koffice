@@ -61,19 +61,19 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
     if (m_knowledgePoint < 0)
         return false;
 
-    if (m_lastknownPosInDoc != m_anchor->positionInDocument()
+    if (m_lastknownPosInDoc != m_anchor->textPosition()
             || m_lastOffset != m_anchor->offset()
             || m_lastVerticalAnchorAlignment != m_anchor->verticalAlignment()
             || m_lastHorizontalAnchorAlignment != m_anchor->horizontalAlignment()) { // different layout run
         m_finished = false;
-        m_lastknownPosInDoc = m_anchor->positionInDocument();
+        m_lastknownPosInDoc = m_anchor->textPosition();
         m_lastOffset = m_anchor->offset();
         m_lastVerticalAnchorAlignment = m_anchor->verticalAlignment();
         m_lastHorizontalAnchorAlignment = m_anchor->horizontalAlignment();
         m_pass = 0;
     }
-    QTextBlock block = m_anchor->document()->findBlock(m_anchor->positionInDocument());
-    // kDebug() << m_anchor->positionInDocument() << "pass:" << m_pass <<"pos:" << state->cursorPosition() <<" (need;" << m_knowledgePoint << (m_finished?") Already finished!":")");
+    QTextBlock block = m_anchor->document()->findBlock(m_anchor->textPosition());
+    // kDebug() << m_anchor->textPosition() << "pass:" << m_pass <<"pos:" << state->cursorPosition() <<" (need;" << m_knowledgePoint << (m_finished?") Already finished!":")");
     // exit when finished or when we can expect another call with a higher cursor position
     if (m_finished || (m_knowledgePoint > state->cursorPosition()))
         return false;
@@ -115,14 +115,14 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
         break;
     case KoTextAnchor::HorizontalOffset: {
         qreal x;
-        if (m_anchor->positionInDocument() == block.position()) {
+        if (m_anchor->textPosition() == block.position()) {
             // at first position of parag.
             x = state->x();
         } else {
             Q_ASSERT(layout->lineCount());
-            QTextLine tl = layout->lineForTextPosition(m_anchor->positionInDocument() - block.position());
+            QTextLine tl = layout->lineForTextPosition(m_anchor->textPosition() - block.position());
             Q_ASSERT(tl.isValid());
-            x = tl.cursorToX(m_anchor->positionInDocument() - block.position());
+            x = tl.cursorToX(m_anchor->textPosition() - block.position());
             recalcFrom = 0;
         }
         newPosition.setX(x);
@@ -167,7 +167,7 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
     }
     case KoTextAnchor::AboveCurrentLine:
     case KoTextAnchor::BelowCurrentLine: {
-        QTextLine tl = layout->lineForTextPosition(m_anchor->positionInDocument() - block.position());
+        QTextLine tl = layout->lineForTextPosition(m_anchor->textPosition() - block.position());
         Q_ASSERT(tl.isValid());
         m_currentLineY = tl.y() + tl.height() - data->documentOffset();
         if (m_anchor->verticalAlignment() == KoTextAnchor::BelowCurrentLine)
@@ -195,7 +195,7 @@ bool KWAnchorStrategy::checkState(KoTextDocumentLayout::LayoutState *state, int 
             // the anchor is the only thing in the block, and not inline
             y = state->y();
         } else if (layout->lineCount()) {
-            QTextLine tl = layout->lineForTextPosition(m_anchor->positionInDocument() - block.position());
+            QTextLine tl = layout->lineForTextPosition(m_anchor->textPosition() - block.position());
             Q_ASSERT(tl.isValid());
             y = tl.y() + tl.ascent();
             recalcFrom = block.position();
@@ -339,12 +339,12 @@ void KWAnchorStrategy::calculateKnowledgePoint()
         break;
     }
     case KoTextAnchor::HorizontalOffset:
-        m_knowledgePoint = m_anchor->positionInDocument()+1;
+        m_knowledgePoint = m_anchor->textPosition()+1;
     }
     switch (m_anchor->verticalAlignment()) {
     case KoTextAnchor::TopOfParagraph:
         m_knowledgePoint = qMax(m_knowledgePoint,
-                                m_anchor->document()->findBlock(m_anchor->positionInDocument()).position() + 1);
+                                m_anchor->document()->findBlock(m_anchor->textPosition()).position() + 1);
         break;
     case KoTextAnchor::VerticalOffset:
     case KoTextAnchor::AboveCurrentLine:
@@ -353,7 +353,7 @@ void KWAnchorStrategy::calculateKnowledgePoint()
     case KoTextAnchor::BottomOfPage:
     case KoTextAnchor::TopOfPageContent:
     case KoTextAnchor::BottomOfPageContent:
-        m_knowledgePoint = qMax(m_knowledgePoint, m_anchor->positionInDocument()+1);
+        m_knowledgePoint = qMax(m_knowledgePoint, m_anchor->textPosition()+1);
         break;
     case KoTextAnchor::TopOfFrame:
     case KoTextAnchor::BottomOfFrame: {
@@ -365,7 +365,7 @@ void KWAnchorStrategy::calculateKnowledgePoint()
         break;
     }
     case KoTextAnchor::BottomOfParagraph: {
-        QTextBlock block = m_anchor->document()->findBlock(m_anchor->positionInDocument());
+        QTextBlock block = m_anchor->document()->findBlock(m_anchor->textPosition());
         m_knowledgePoint = qMax(m_knowledgePoint, block.position() + block.length() - 2);
         break;
     }

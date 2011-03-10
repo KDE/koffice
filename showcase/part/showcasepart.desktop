@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Showcase
+Name[et]=Showcase
+Name[pt]=Showcase
+Name[pt_BR]=Showcase
+Name[sv]=Showcase
+Name[uk]=Showcase
+Name[x-test]=xxShowcasexx
+X-KDE-Library=showcasepart
+MimeType=application/vnd.oasis.opendocument.presentation;application/vnd.oasis.opendocument.presentation-template;application/x-kpresenter;application/mspowerpoint;application/vnd.ms-powerpoint;application/vnd.openxmlformats-officedocument.presentationml.presentation;application/vnd.openxmlformats-officedocument.presentationml.template;
+Type=Service
+X-KDE-ServiceTypes=KOfficePart,KParts/ReadOnlyPart,KParts/ReadWritePart
+X-KDE-NativeMimeType=application/vnd.oasis.opendocument.presentation
+X-KDE-NativeOasisMimeType=application/vnd.oasis.opendocument.presentation
+X-KDE-ExtraNativeMimeTypes=application/vnd.oasis.opendocument.presentation-template
+Icon=kpresenter

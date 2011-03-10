@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007-2008 Fredy Yanardi <fyanardi@gmail.com>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,6 +19,7 @@
  */
 
 #include "KoBookmark.h"
+#include "KoInlineObject_p.h"
 
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
@@ -33,24 +35,25 @@
 
 #include <KDebug>
 
-class KoBookmark::Private
+class KoBookmarkPrivate : public KoInlineObjectPrivate
 {
 public:
-    Private(const QTextDocument *doc)
-            : document(doc),
-            posInDocument(0) { }
-    const QTextDocument *document;
-    int posInDocument;
+    KoBookmarkPrivate()
+        : endBookmark(0),
+        selection(false),
+        type(KoBookmark::SinglePosition)
+    {
+    }
     KoBookmark *endBookmark;
     bool selection;
     QString name;
-    BookmarkType type;
+    KoBookmark::BookmarkType type;
 };
 
-KoBookmark::KoBookmark(const QString &name, const QTextDocument *document)
-        : KoInlineObject(false),
-        d(new Private(document))
+KoBookmark::KoBookmark(const QString &name)
+        : KoInlineObject(*(new KoBookmarkPrivate()), false)
 {
+    Q_D(KoBookmark);
     d->selection = false;
     d->endBookmark = 0;
     d->name = name;
@@ -58,11 +61,11 @@ KoBookmark::KoBookmark(const QString &name, const QTextDocument *document)
 
 KoBookmark::~KoBookmark()
 {
-    delete d;
 }
 
 void KoBookmark::saveOdf(KoShapeSavingContext &context)
 {
+    Q_D(KoBookmark);
     KoXmlWriter *writer = &context.xmlWriter();
     QString nodeName;
     if (d->type == SinglePosition)
@@ -80,30 +83,27 @@ void KoBookmark::saveOdf(KoShapeSavingContext &context)
     writer->endElement();
 }
 
-void KoBookmark::updatePosition(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format)
+void KoBookmark::updatePosition(QTextInlineObject object, const QTextCharFormat &format)
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
-    d->document = document;
-    d->posInDocument = posInDocument;
 }
 
-void KoBookmark::resize(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format, QPaintDevice *pd)
+void KoBookmark::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
 {
     Q_UNUSED(object);
     Q_UNUSED(pd);
     Q_UNUSED(format);
-    Q_UNUSED(document);
-    Q_UNUSED(posInDocument);
 }
 
-void KoBookmark::paint(QPainter &, QPaintDevice *, const QTextDocument *, const QRectF &, QTextInlineObject , int , const QTextCharFormat &)
+void KoBookmark::paint(QPainter &, QPaintDevice *, const QRectF &, QTextInlineObject, const QTextCharFormat &)
 {
     // nothing to paint.
 }
 
 void KoBookmark::setName(const QString &name)
 {
+    Q_D(KoBookmark);
     d->name = name;
     if (d->selection)
         d->endBookmark->setName(name);
@@ -111,11 +111,13 @@ void KoBookmark::setName(const QString &name)
 
 QString KoBookmark::name() const
 {
+    Q_D(const KoBookmark);
     return d->name;
 }
 
 void KoBookmark::setType(BookmarkType type)
 {
+    Q_D(KoBookmark);
     if (type == SinglePosition) {
         d->selection = false;
         d->endBookmark = 0;
@@ -123,34 +125,34 @@ void KoBookmark::setType(BookmarkType type)
     d->type = type;
 }
 
-KoBookmark::BookmarkType KoBookmark::type()
+KoBookmark::BookmarkType KoBookmark::type() const
 {
+    Q_D(const KoBookmark);
     return d->type;
 }
 
 void KoBookmark::setEndBookmark(KoBookmark *bookmark)
 {
+    Q_D(KoBookmark);
     d->endBookmark = bookmark;
     d->selection = true;
 }
 
-KoBookmark *KoBookmark::endBookmark()
+KoBookmark *KoBookmark::endBookmark() const
 {
+    Q_D(const KoBookmark);
     return d->endBookmark;
 }
 
-KoShape *KoBookmark::shape()
+KoShape *KoBookmark::shape() const
 {
-    return shapeForPosition(d->document, d->posInDocument);
+    Q_D(const KoBookmark);
+    return shapeForPosition(d->document, d->positionInDocument);
 }
 
-int KoBookmark::position()
+bool KoBookmark::hasSelection() const
 {
-    return d->posInDocument;
-}
-
-bool KoBookmark::hasSelection()
-{
+    Q_D(const KoBookmark);
     return d->selection;
 }
 
