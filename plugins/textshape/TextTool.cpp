@@ -922,12 +922,12 @@ void TextTool::mousePressEvent(KoPointerEvent *event)
             event->accept();
             return;
         }
+
+        event->ignore();
     }
 
     if (event->button() ==  Qt::MidButton) // Paste
         paste();
-    else
-        event->ignore();
 }
 
 void TextTool::mouseDoubleClickEvent(KoPointerEvent *event)
