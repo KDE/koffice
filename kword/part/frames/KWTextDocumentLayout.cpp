@@ -505,7 +505,8 @@ void KWTextDocumentLayout::layout()
                     // if there is more space in the shape then there is text. Reset the no-grow bool.
                     const KoTextShapeData::RelayoutForPageState relayoutState =
                         (KoTextShapeData::RelayoutForPageState) property("KoTextRelayoutForPage").toInt();
-                    QList<KWFrame*>::const_iterator iter = m_frameSet->frames().end();
+                    QList<KWFrame*> frames = m_frameSet->frames();
+                    QList<KWFrame*>::const_iterator iter = frames.end();
                     KWTextFrame *lastFrame;
                     do {
                         iter--;
