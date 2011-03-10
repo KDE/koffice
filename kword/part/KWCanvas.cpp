@@ -47,6 +47,7 @@ KWCanvas::KWCanvas(const QString &viewMode, KWDocument *document, KWView *view, 
         : QWidget(parent),
         KoCanvasBase(document),
         m_document(document),
+        m_toolProxy(new KoToolProxy(this, this)),
         m_view(view),
         m_viewMode(0)
 {
@@ -56,7 +57,6 @@ KWCanvas::KWCanvas(const QString &viewMode, KWDocument *document, KWView *view, 
 
     connect(document, SIGNAL(pageSetupChanged()), this, SLOT(pageSetupChanged()));
 
-    m_toolProxy = new KoToolProxy(this, this);
     setAttribute(Qt::WA_OpaquePaintEvent, true);
     setAttribute(Qt::WA_InputMethodEnabled, true);
 }
@@ -254,9 +254,7 @@ void KWCanvas::ensureVisible(const QRectF &rect)
 
 bool KWCanvas::event(QEvent *e)
 {
-    if (toolProxy()) {
-        toolProxy()->processEvent(e);
-    }
+    m_toolProxy->processEvent(e);
     return QWidget::event(e);
 }
 
