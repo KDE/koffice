@@ -910,16 +910,13 @@ void TextTool::mousePressEvent(KoPointerEvent *event)
         }
 
         if (variable) {
-            QWidget *optionsWidget = variable->createOptionsWidget();
-            if (optionsWidget) {
-                KPageDialog *dialog = new KPageDialog(canvas()->canvasWidget());
-                dialog->setCaption(i18n("Variable Options"));
-                dialog->addPage(optionsWidget, QString());
-    // TODO make this qundocommand based ...
-                dialog->exec();
-                delete dialog;
-            }
-            event->accept();
+            QMenu menu(canvas()->canvasWidget());
+            QAction *action = menu.addAction(i18n("Edit Variable..."), this, SLOT(showEditVariableDialog()));
+            QVariant v;
+            v.setValue<void*>(variable);
+            action->setData(v);
+            menu.exec(canvas()->canvasWidget()->mapToGlobal(canvas()->viewConverter()->
+                        documentToView(event->point).toPoint()), 0);
             return;
         }
 
@@ -2052,6 +2049,24 @@ void TextTool::startTextEditingPlugin(const QString &pluginId)
             plugin->checkSection(textEditor->document(), from, to);
         } else
             plugin->finishedWord(textEditor->document(), m_textEditor.data()->position());
+    }
+}
+
+void TextTool::showEditVariableDialog()
+{
+    QAction *action = qobject_cast<QAction*>(sender());
+    if (action) {
+        KoVariable *variable = static_cast<KoVariable*>(action->data().value<void*>());
+        if (variable) {
+            QWidget *optionsWidget = variable->createOptionsWidget();
+            KPageDialog *dialog = new KPageDialog(canvas()->canvasWidget());
+            dialog->setCaption(i18n("Variable Options"));
+            if (optionsWidget)
+                dialog->addPage(optionsWidget, QString());
+    // TODO make this qundocommand based ...
+            dialog->exec();
+            delete dialog;
+        }
     }
 }
 
