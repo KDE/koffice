@@ -7,6 +7,7 @@ Name[pt_BR]=Filtro de exportação de OpenOffice.org Impress para o Showcase
 Name[sv]=OpenOffice.org Impress-exportfilter för Showcase
 Name[uk]=Фільтр експорту презентацій OpenOffice.org для Showcase
 Name[x-test]=xxOpenOffice.org Impress Export Filter for Showcasexx
+Name[zh_TW]=Showcase 的 OpenOffice.org Impress 匯出過濾程式
 X-KDE-Export=application/vnd.sun.xml.impress
 X-KDE-Import=application/x-kpresenter
 X-KDE-Weight=1
