@@ -229,8 +229,21 @@ public:
      * has set the KoTextPage object on the KoTextShapeData, we'll return a pointer to that.
      * Notice that if the text has not yet been layed-out, or if the application doesn't support
      * this concept, we can return a null pointer.
+     * @see shape()
      */
     KoTextPage *page() const;
+
+    /**
+     * Returns the shape this object is located on, or null if unknown.
+     *
+     * This method searches for the shape this object is located on.
+     * Notice that if the text has not yet been layed-out we can return a null pointer.
+     * @see page()
+     */
+    KoShape *shape() const;
+
+    /// \inline
+    KoInlineObjectPrivate *priv();
 
 protected:
     explicit KoInlineObject(KoInlineObjectPrivate &, bool propertyChangeListener = false);
@@ -248,7 +261,7 @@ protected:
      * Callback to notify any subclasses that the text position and/or document have been updated.
      * Subclasses can reimplement this method to take action when the position is changed in the
      * document.
-     * @see document(), textPosition()
+     * @see page(), document(), textPosition(), shape()
      */
     virtual void positionChanged();
 

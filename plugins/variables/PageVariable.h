@@ -55,7 +55,7 @@ public:
     bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context);
 
 private:
-    void variableMoved(const KoShape *shape, const QTextDocument *document, int posInDocument);
+    void positionChanged();
 
     PageType m_type;
 

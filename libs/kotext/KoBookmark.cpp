@@ -38,8 +38,9 @@
 class KoBookmarkPrivate : public KoInlineObjectPrivate
 {
 public:
-    KoBookmarkPrivate()
-        : endBookmark(0),
+    KoBookmarkPrivate(KoBookmark *qq)
+        : KoInlineObjectPrivate(qq),
+        endBookmark(0),
         selection(false),
         type(KoBookmark::SinglePosition)
     {
@@ -48,10 +49,12 @@ public:
     bool selection;
     QString name;
     KoBookmark::BookmarkType type;
+
+    Q_DECLARE_PUBLIC(KoBookmark)
 };
 
 KoBookmark::KoBookmark(const QString &name)
-        : KoInlineObject(*(new KoBookmarkPrivate()), false)
+        : KoInlineObject(*(new KoBookmarkPrivate(this)), false)
 {
     Q_D(KoBookmark);
     d->selection = false;

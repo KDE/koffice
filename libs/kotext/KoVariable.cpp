@@ -28,13 +28,13 @@
 #include <QFontMetricsF>
 #include <QTextDocument>
 #include <QTextInlineObject>
-#include <QDebug>
 
 class KoVariablePrivate : public KoInlineObjectPrivate
 {
 public:
-    KoVariablePrivate()
-        : modified(true)
+    KoVariablePrivate(KoVariable *qq)
+        : KoInlineObjectPrivate(qq),
+        modified(true)
     {
     }
 
@@ -46,10 +46,12 @@ public:
 
     QString value;
     bool modified;
+
+    Q_DECLARE_PUBLIC(KoVariable)
 };
 
 KoVariable::KoVariable(bool propertyChangeListener)
-        : KoInlineObject(*(new KoVariablePrivate()), propertyChangeListener)
+        : KoInlineObject(*(new KoVariablePrivate(this)), propertyChangeListener)
 {
 }
 
@@ -75,6 +77,7 @@ void KoVariable::updatePosition(QTextInlineObject object, const QTextCharFormat 
 {
     Q_UNUSED(object);
     Q_UNUSED(format);
+    positionChanged(); // force recalc. Even if the pos may not have actually changed.
 }
 
 void KoVariable::resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd)
@@ -116,22 +119,8 @@ void KoVariable::paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect, 
     layout.draw(&painter, rect.topLeft());
 }
 
-void KoVariable::variableMoved(const KoShape *shape, const QTextDocument *document, int posInDocument)
-{
-    Q_UNUSED(shape);
-    Q_UNUSED(document);
-    Q_UNUSED(posInDocument);
-}
-
 QString KoVariable::value() const
 {
     Q_D(const KoVariable);
     return d->value;
-}
-
-void KoVariable::positionChanged()
-{
-    Q_D(KoVariable);
-    // Variables are always 'in place' so the position is 100% defined by the text layout.
-    variableMoved(shapeForPosition(d->document, d->positionInDocument), d->document, d->positionInDocument);
 }

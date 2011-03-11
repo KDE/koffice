@@ -23,8 +23,9 @@ class QTextDocument;
 class KoInlineObjectPrivate
 {
 public:
-    KoInlineObjectPrivate()
+    KoInlineObjectPrivate(KoInlineObject *qq)
             : manager(0),
+            q_ptr(qq),
             id(-1),
             positionInDocument(-1),
             propertyChangeListener(0),
@@ -35,6 +36,7 @@ public:
     virtual ~KoInlineObjectPrivate();
 
     KoInlineTextObjectManager *manager;
+    KoInlineObject *q_ptr;
     int id;
     int positionInDocument;
     bool propertyChangeListener;
@@ -42,4 +44,8 @@ public:
     QTextDocument *document;
 
     virtual QDebug printDebug(QDebug dbg) const;
+
+    void callbackPositionChanged();
+
+    Q_DECLARE_PUBLIC(KoInlineObject)
 };

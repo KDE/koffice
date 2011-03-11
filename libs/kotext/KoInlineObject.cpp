@@ -36,14 +36,22 @@ QDebug KoInlineObjectPrivate::printDebug(QDebug dbg) const
     return dbg.space();
 }
 
+void KoInlineObjectPrivate::callbackPositionChanged()
+{
+    Q_Q(KoInlineObject);
+    q->positionChanged();
+}
 
 KoInlineObjectPrivate::~KoInlineObjectPrivate()
 {
     delete rdf;
 }
 
+
+//////////////////////////////////////
+
 KoInlineObject::KoInlineObject(bool propertyChangeListener)
-        : d_ptr(new KoInlineObjectPrivate)
+        : d_ptr(new KoInlineObjectPrivate(this))
 {
     Q_D(KoInlineObject);
     d->propertyChangeListener = propertyChangeListener;
@@ -157,6 +165,12 @@ int KoInlineObject::textPosition() const
     return d->positionInDocument;
 }
 
+KoShape *KoInlineObject::shape() const
+{
+    Q_D(const KoInlineObject);
+    return shapeForPosition(d->document, d->positionInDocument);
+}
+
 KoTextPage *KoInlineObject::page() const
 {
     Q_D(const KoInlineObject);
@@ -173,3 +187,8 @@ void KoInlineObject::positionChanged()
 {
 }
 
+KoInlineObjectPrivate *KoInlineObject::priv()
+{
+    Q_D(KoInlineObject);
+    return d;
+}

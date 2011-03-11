@@ -45,13 +45,14 @@ public:
 
     void setProperties(const KoProperties *props);
 
-    void variableMoved(const KoShape *shape, const QTextDocument *document, int posInDocument);
-
     ///reimplemented
     void saveOdf(KoShapeSavingContext &context);
 
     ///reimplemented
     bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+
+protected:
+    void positionChanged();
 
 private:
     SCDeclarations::Type m_type;
