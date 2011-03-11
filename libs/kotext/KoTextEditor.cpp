@@ -358,18 +358,12 @@ void KoTextEditor::registerTrackedChange(QTextCursor &selection, KoGenChange::Ty
 
                 QTextCursor cursor(block);
                 cursor.setPosition(fragment.position());
-                QTextCharFormat fm = cursor.charFormat();
-                if (fm.hasProperty(KoCharacterStyle::ChangeTrackerId)) {
-                    fm.clearProperty(KoCharacterStyle::ChangeTrackerId);
-                    int to = qMin(end, fragment.position() + fragment.length());
-                    cursor.setPosition(to, QTextCursor::KeepAnchor);
-                    cursor.setCharFormat(fm);
-
-                    //Changing the format invalidates the iterator. So, reset the iterator and start from the beginning.
-                    iter = block.begin();
-                    continue;
-                }
-                iter++;
+                QTextCharFormat fm = fragment.charFormat();
+                fm.clearProperty(KoCharacterStyle::ChangeTrackerId);
+                int to = qMin(end, fragment.position() + fragment.length());
+                cursor.setPosition(to, QTextCursor::KeepAnchor);
+                cursor.setCharFormat(fm);
+                ++iter;
             }
             block = block.next();
         }
@@ -1326,16 +1320,7 @@ void KoTextEditor::newLine()
     if (format.hasProperty(KoCharacterStyle::ChangeTrackerId)) {
         format.clearProperty(KoCharacterStyle::ChangeTrackerId);
     }
-    d->caret.insertBlock();
-    int endPosition = d->caret.position();
 
-    //Mark the inserted text
-    d->caret.setPosition(startPosition);
-    d->caret.setPosition(endPosition, QTextCursor::KeepAnchor);
-
-    registerTrackedChange(d->caret, KoGenChange::InsertChange, i18n("Key Press"), format, format, false);
-
-    d->caret.clearSelection();
     QTextBlockFormat bf = d->caret.blockFormat();
     QVariant direction = bf.property(KoParagraphStyle::TextProgressionDirection);
     bf.clearProperty(QTextFormat::PageBreakPolicy);
@@ -1380,6 +1365,17 @@ void KoTextEditor::newLine()
         bf.setProperty(KoParagraphStyle::TextProgressionDirection, direction);
     }
     d->caret.setBlockFormat(bf);
+
+    int endPosition = d->caret.position();
+
+    //Mark the inserted text
+    d->caret.setPosition(startPosition);
+    d->caret.setPosition(endPosition, QTextCursor::KeepAnchor);
+
+    registerTrackedChange(d->caret, KoGenChange::InsertChange, i18n("Key Press"), format, format, false);
+
+    d->caret.clearSelection();
+
     d->updateState(KoTextEditor::Private::NoOp);
 }
 

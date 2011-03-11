@@ -691,6 +691,7 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
         }
         endBody();
     }
+
     if (document->isEmpty() && d->styleManager && document->allFormats().count() == 2) {
         QTextBlock block = document->begin();
         d->styleManager->defaultParagraphStyle()->applyStyle(block);
@@ -1996,10 +1997,7 @@ void KoTextLoader::loadTableColumn(KoXmlElement &tblTag, QTextTable *tbl, int &c
     }
 
     columns = columns + repeatColumn;
-    if (rows > 0)
-        tbl->resize(rows, columns);
-    else
-        tbl->resize(1, columns);
+    tbl->resize(qMax(rows, 1), columns);
 }
 
 void KoTextLoader::loadTableRow(KoXmlElement &tblTag, QTextTable *tbl, QList<QRect> &spanStore, QTextCursor &cursor, int &rows)
@@ -2023,10 +2021,7 @@ void KoTextLoader::loadTableRow(KoXmlElement &tblTag, QTextTable *tbl, QList<QRe
     }
 
     rows++;
-    if (columns > 0)
-        tbl->resize(rows, columns);
-    else
-        tbl->resize(rows, 1);
+    tbl->resize(rows, qMax(columns,1));
 
     // Added a row
     int currentCell = 0;
@@ -2119,6 +2114,7 @@ void KoTextLoader::loadTableCell(KoXmlElement &rowTag, QTextTable *tbl, QList<QR
 
     if (rowTag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
         d->closeChangeRegion(rowTag);
+    
 }
 
 void KoTextLoader::loadShape(const KoXmlElement &element, QTextCursor &cursor)

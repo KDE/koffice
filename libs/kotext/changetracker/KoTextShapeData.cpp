@@ -68,7 +68,8 @@ public:
             position(-1),
             endPosition(-1),
             direction(KoText::AutoDirection),
-            textpage(0)
+            textpage(0),
+            padding(7, 7, 7, 7)
     {
     }
 
@@ -312,8 +313,8 @@ void RemoveDeleteChangesCommand::removeDeleteChanges()
             caret.setPosition(deletePosition + deletedLength, QTextCursor::KeepAnchor);
             caret.removeSelectedText();
             numDeletedChars += KoChangeTracker::fragmentLength(element->getDeleteData());
-        }
-    }
+        }   
+    }   
 }
 
 void KoTextShapeData::saveOdf(KoShapeSavingContext &context, KoDocumentRdfBase *rdfData, int from, int to) const
@@ -338,18 +339,11 @@ void KoTextShapeData::saveOdf(KoShapeSavingContext &context, KoDocumentRdfBase *
     KoTextWriter writer(context, rdfData);
     writer.write(d->document, from, to);
 
-    if (changeTracker) {
-        changeSaveFormat = changeTracker->saveFormat();
-        if (!changeTracker->displayChanges() && (changeSaveFormat == KoChangeTracker::DELTAXML)) {
-            insertCommand->undo();
-            delete insertCommand;
-        }
-
-        if (changeTracker->displayChanges() && (changeSaveFormat == KoChangeTracker::ODF_1_2)) {
-            removeCommand->undo();
-            delete removeCommand;
-        }
+    if (changeTracker && ((!changeTracker->displayChanges() && (changeSaveFormat == KoChangeTracker::DELTAXML)) ||
+                           (changeTracker->displayChanges() && (changeSaveFormat == KoChangeTracker::ODF_1_2)))) {
+        insertCommand->undo();
     }
+    delete insertCommand;
 }
 
 void KoTextShapeData::relayoutFor(KoTextPage &textPage)
