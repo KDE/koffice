@@ -2,6 +2,7 @@
 Type=ServiceType
 X-KDE-ServiceType=Showcase/PageEffect
 Name=Page Effect
+Name[et]=Leheküljeefekt
 Name[pt]=Efeito da Página
 Name[pt_BR]=Efeito de página
 Name[sv]=Sideffekt
