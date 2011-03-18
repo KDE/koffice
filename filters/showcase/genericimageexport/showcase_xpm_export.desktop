@@ -2,6 +2,7 @@
 Type=Service
 Name=Showcase XPM Export Filter
 Name[et]=Showcase'i XPM-i ekspordifilter
+Name[nl]=XPM-exportfilter voor Showcase
 Name[pt]=Filtro de Exportação de XPM para o Showcase
 Name[pt_BR]=Filtro de exportação de XPM para o KChart
 Name[sv]=Showcase XPM-exportfilter

@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=Showcase/ShapeAnimation
 Comment=Shape animation plugin for Showcase
 Comment[et]=Showcase'i kujundi animeerimise plugin
+Comment[nl]=Vormanimatieplugin voor Showcase
 Comment[pt]='Plugin' de animação de formas para o Showcase
 Comment[pt_BR]=Plug-in de animação de formas para o Showcase
 Comment[sv]=Insticksprogram med animeringsåtgärderför Showcase
