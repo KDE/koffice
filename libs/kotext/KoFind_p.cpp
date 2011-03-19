@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Fredy Yanardi <fyanardi@gmail.com>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  *
@@ -54,56 +54,56 @@ private:
 };
 
 KoFindPrivate::KoFindPrivate(KoFind *find, KoResourceManager *crp, QWidget *w)
-        : findNext(0)
-        , findPrev(0)
-        , q(find)
-        , provider(crp)
-        , findStrategy(w)
-        , replaceStrategy(w)
-        , strategy(&findStrategy)
-        , document(0)
-        , restarted(false)
-        , start(false)
-        , inFind(false)
-        , findDirection(0)
-        , findForward(crp)
-        , findBackward(crp)
+        : findNext(0),
+        findPrev(0),
+        q(find),
+        m_provider(crp),
+        m_findStrategy(w),
+        m_replaceStrategy(w),
+        m_strategy(&m_findStrategy),
+        m_document(0),
+        m_restarted(false),
+        m_start(false),
+        m_inFind(false),
+        m_findDirection(0),
+        m_findForward(crp),
+        m_findBackward(crp)
 {
-    QObject::connect(findStrategy.dialog(), SIGNAL(okClicked()), q, SLOT(startFind()));
-    QObject::connect(replaceStrategy.dialog(), SIGNAL(okClicked()), q, SLOT(startReplace()));
+    QObject::connect(m_findStrategy.dialog(), SIGNAL(okClicked()), q, SLOT(startFind()));
+    QObject::connect(m_replaceStrategy.dialog(), SIGNAL(okClicked()), q, SLOT(startReplace()));
 }
 
 void KoFindPrivate::resourceChanged(int key, const QVariant &variant)
 {
     if (key == KoText::CurrentTextDocument) {
-        document = static_cast<QTextDocument*>(variant.value<void*>());
-        if (!inFind) {
-            start = true;
+        m_document = static_cast<QTextDocument*>(variant.value<void*>());
+        if (!m_inFind) {
+            m_start = true;
         }
     } else if (key == KoText::CurrentTextPosition || key == KoText::CurrentTextAnchor) {
-        if (!inFind) {
-            const int selectionStart = provider->intResource(KoText::CurrentTextPosition);
-            const int selectionEnd = provider->intResource(KoText::CurrentTextAnchor);
-            findStrategy.dialog()->setHasSelection(selectionEnd != selectionStart);
-            replaceStrategy.dialog()->setHasSelection(selectionEnd != selectionStart);
+        if (!m_inFind) {
+            const int selectionStart = m_provider->intResource(KoText::CurrentTextPosition);
+            const int selectionEnd = m_provider->intResource(KoText::CurrentTextAnchor);
+            m_findStrategy.dialog()->setHasSelection(selectionEnd != selectionStart);
+            m_replaceStrategy.dialog()->setHasSelection(selectionEnd != selectionStart);
 
-            start = true;
-            provider->clearResource(KoText::SelectedTextPosition);
-            provider->clearResource(KoText::SelectedTextAnchor);
+            m_start = true;
+            m_provider->clearResource(KoText::SelectedTextPosition);
+            m_provider->clearResource(KoText::SelectedTextAnchor);
         }
     }
 }
 
 void KoFindPrivate::findActivated()
 {
-    start = true;
+    m_start = true;
 
-    findStrategy.dialog()->setFindHistory(strategy->dialog()->findHistory());
+    m_findStrategy.dialog()->setFindHistory(m_strategy->dialog()->findHistory());
 
-    strategy = &findStrategy;
+    m_strategy = &m_findStrategy;
 
-    strategy->dialog()->show();
-    KWindowSystem::activateWindow(strategy->dialog()->winId());
+    m_strategy->dialog()->show();
+    KWindowSystem::activateWindow(m_strategy->dialog()->winId());
 
     findNext->setEnabled(true);
     findPrev->setEnabled(true);
@@ -111,63 +111,63 @@ void KoFindPrivate::findActivated()
 
 void KoFindPrivate::findNextActivated()
 {
-    Q_ASSERT(strategy);
-    findStrategy.dialog()->setOptions((strategy->dialog()->options() | KFind::FindBackwards) ^ KFind::FindBackwards);
-    strategy = &findStrategy;
+    Q_ASSERT(m_strategy);
+    m_findStrategy.dialog()->setOptions((m_strategy->dialog()->options() | KFind::FindBackwards) ^ KFind::FindBackwards);
+    m_strategy = &m_findStrategy;
     parseSettingsAndFind();
 }
 
 void KoFindPrivate::findPreviousActivated()
 {
-    Q_ASSERT(strategy);
-    findStrategy.dialog()->setOptions(strategy->dialog()->options() | KFind::FindBackwards);
-    strategy = &findStrategy;
+    Q_ASSERT(m_strategy);
+    m_findStrategy.dialog()->setOptions(m_strategy->dialog()->options() | KFind::FindBackwards);
+    m_strategy = &m_findStrategy;
     parseSettingsAndFind();
 }
 
 void KoFindPrivate::replaceActivated()
 {
-    start = true;
+    m_start = true;
 
-    replaceStrategy.dialog()->setFindHistory(strategy->dialog()->findHistory());
+    m_replaceStrategy.dialog()->setFindHistory(m_strategy->dialog()->findHistory());
 
-    strategy = &replaceStrategy;
+    m_strategy = &m_replaceStrategy;
 
-    strategy->dialog()->show();
-    KWindowSystem::activateWindow(strategy->dialog()->winId());
+    m_strategy->dialog()->show();
+    KWindowSystem::activateWindow(m_strategy->dialog()->winId());
 }
 
 void KoFindPrivate::startFind()
 {
     parseSettingsAndFind();
 
-    QTimer::singleShot(0, findStrategy.dialog(), SLOT(show())); // show the findDialog again.
+    QTimer::singleShot(0, m_findStrategy.dialog(), SLOT(show())); // show the findDialog again.
 }
 
 void KoFindPrivate::startReplace()
 {
-    replaceStrategy.dialog()->hide(); // We don't want the replace dialog to keep popping up
+    m_replaceStrategy.dialog()->hide(); // We don't want the replace dialog to keep popping up
     parseSettingsAndFind();
 }
 
-void KoFindPrivate::findDocumentSetNext(QTextDocument * document)
+void KoFindPrivate::findDocumentSetNext(QTextDocument *document)
 {
     emit q->findDocumentSetNext(document);
 }
 
-void KoFindPrivate::findDocumentSetPrevious(QTextDocument * document)
+void KoFindPrivate::findDocumentSetPrevious(QTextDocument *document)
 {
     emit q->findDocumentSetPrevious(document);
 }
 
 void KoFindPrivate::parseSettingsAndFind()
 {
-    if (document == 0)
+    if (m_document == 0 || m_document->isEmpty())
         return;
 
-    InUse used(inFind);
+    InUse used(m_inFind);
 
-    long options = strategy->dialog()->options();
+    long options = m_strategy->dialog()->options();
 
     QTextDocument::FindFlags flags;
     if ((options & KFind::WholeWordsOnly) != 0) {
@@ -178,81 +178,81 @@ void KoFindPrivate::parseSettingsAndFind()
     }
     if ((options & KFind::FindBackwards) != 0) {
         flags |= QTextDocument::FindBackward;
-        findDirection = &findBackward;
+        m_findDirection = &m_findBackward;
     } else {
-        findDirection = &findForward;
+        m_findDirection = &m_findForward;
     }
 
     const bool selectedText = (options & KFind::SelectedText) != 0;
 
-    if (start) {
-        start = false;
-        restarted = false;
-        strategy->reset();
-        startDocument = document;
-        lastKnownPosition = QTextCursor(document);
+    if (m_start) {
+        m_start = false;
+        m_restarted = false;
+        m_strategy->reset();
+        m_startDocument = m_document;
+        m_lastKnownPosition = QTextCursor(m_document);
         if (selectedText) {
-            int selectionStart = provider->intResource(KoText::CurrentTextPosition);
-            int selectionEnd = provider->intResource(KoText::CurrentTextAnchor);
+            int selectionStart = m_provider->intResource(KoText::CurrentTextPosition);
+            int selectionEnd = m_provider->intResource(KoText::CurrentTextAnchor);
             if (selectionEnd < selectionStart) {
                 qSwap(selectionStart, selectionEnd);
             }
             // TODO the SelectedTextPosition and SelectedTextAnchor are not highlighted yet
             // it would be cool to have the highlighted ligher when searching in selected text
-            provider->setResource(KoText::SelectedTextPosition, selectionStart);
-            provider->setResource(KoText::SelectedTextAnchor, selectionEnd);
+            m_provider->setResource(KoText::SelectedTextPosition, selectionStart);
+            m_provider->setResource(KoText::SelectedTextAnchor, selectionEnd);
             if ((options & KFind::FindBackwards) != 0) {
-                lastKnownPosition.setPosition(selectionEnd);
-                endPosition.setPosition(selectionStart);
+                m_lastKnownPosition.setPosition(selectionEnd);
+                m_endPosition.setPosition(selectionStart);
             } else {
-                lastKnownPosition.setPosition(selectionStart);
-                endPosition.setPosition(selectionEnd);
+                m_lastKnownPosition.setPosition(selectionStart);
+                m_endPosition.setPosition(selectionEnd);
             }
-            startPosition = lastKnownPosition;
+            m_startPosition = m_lastKnownPosition;
         } else {
             if ((options & KFind::FromCursor) != 0) {
-                lastKnownPosition.setPosition(provider->intResource(KoText::CurrentTextPosition));
+                m_lastKnownPosition.setPosition(m_provider->intResource(KoText::CurrentTextPosition));
             } else {
-                lastKnownPosition.setPosition(0);
+                m_lastKnownPosition.setPosition(0);
             }
-            endPosition = lastKnownPosition;
-            startPosition = lastKnownPosition;
+            m_endPosition = m_lastKnownPosition;
+            m_startPosition = m_lastKnownPosition;
         }
-        //kDebug() << "start" << lastKnownPosition.position();
+        //kDebug() << "start" << m_lastKnownPosition.position();
     }
 
     QRegExp regExp;
-    QString pattern = strategy->dialog()->pattern();
+    QString pattern = m_strategy->dialog()->pattern();
     if (options & KFind::RegularExpression) {
         regExp = QRegExp(pattern);
     }
 
     QTextCursor cursor;
     if (!regExp.isEmpty() && regExp.isValid()) {
-        cursor = document->find(regExp, lastKnownPosition, flags);
+        cursor = m_document->find(regExp, m_lastKnownPosition, flags);
     } else {
-        cursor = document->find(pattern, lastKnownPosition, flags);
+        cursor = m_document->find(pattern, m_lastKnownPosition, flags);
     }
 
-    //kDebug() << "r" << restarted << "c > e" << ( document == startDocument && cursor > endPosition ) << ( startDocument == document && findDirection->positionReached(  cursor, endPosition ) )<< "e" << cursor.atEnd() << "n" << cursor.isNull();
-    if ((((document == startDocument) && restarted) || selectedText)
-            && (cursor.isNull() || findDirection->positionReached(cursor, endPosition))) {
-        restarted = false;
-        strategy->displayFinalDialog();
-        lastKnownPosition = startPosition;
+    //kDebug() << "r" << m_restarted << "c > e" << ( m_document == m_startDocument && cursor > m_endPosition ) << ( m_startDocument == m_document && m_findDirection->positionReached(  cursor, m_endPosition ) )<< "e" << cursor.atEnd() << "n" << cursor.isNull();
+    if ((((m_document == m_startDocument) && m_restarted) || selectedText)
+            && (cursor.isNull() || m_findDirection->positionReached(cursor, m_endPosition))) {
+        m_restarted = false;
+        m_strategy->displayFinalDialog();
+        m_lastKnownPosition = m_startPosition;
         return;
     } else if (cursor.isNull()) {
-        restarted = true;
-        findDirection->nextDocument(document, this);
-        lastKnownPosition = QTextCursor(document);
-        findDirection->positionCursor(lastKnownPosition);
+        m_restarted = true;
+        m_findDirection->nextDocument(m_document, this);
+        m_lastKnownPosition = QTextCursor(m_document);
+        m_findDirection->positionCursor(m_lastKnownPosition);
         // restart from the beginning
         parseSettingsAndFind();
         return;
     } else {
         // found something
-        bool goOn = strategy->foundMatch(cursor, findDirection);
-        lastKnownPosition = cursor;
+        bool goOn = m_strategy->foundMatch(cursor, m_findDirection);
+        m_lastKnownPosition = cursor;
         if (goOn) {
             parseSettingsAndFind();
         }
