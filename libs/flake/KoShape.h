@@ -992,7 +992,7 @@ protected:
      * This is called whenever the shape, position rotation or scale properties were altered.
      * @param type an indicator which type was changed.
      */
-    virtual void shapeChanged(ChangeType type, KoShape *shape = 0);
+    virtual void shapeChanged(ChangeType type, KoShape *shape);
 
     /// return the current matrix that contains the rotation/scale/position of this shape
     QTransform transform() const;

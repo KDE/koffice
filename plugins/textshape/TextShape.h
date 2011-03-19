@@ -120,7 +120,7 @@ protected:
     virtual QString saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const;
 
 private:
-    void shapeChanged(ChangeType type, KoShape *shape = 0);
+    void shapeChanged(ChangeType type, KoShape *shape);
 
     KoTextShapeData *m_textShapeData;
     QTextDocument *m_footnotes;

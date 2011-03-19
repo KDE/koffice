@@ -213,7 +213,7 @@ protected:
     KoShapeContainer(KoShapeContainerPrivate &);
 
 private:
-    void shapeChanged(ChangeType type, KoShape *shape = 0);
+    void shapeChanged(ChangeType type, KoShape *shape);
 
     Q_DECLARE_PRIVATE(KoShapeContainer)
 };
