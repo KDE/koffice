@@ -101,8 +101,11 @@ void SCPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KoSha
         shapes.append(newShape);
         canvas()->shapeManager()->selection()->select(newShape);
         activateTool(KoToolManager::instance()->preferredToolForSelection(shapes));
-    }
-    else {
+    } else {
+        // TODO show some dialog or popup to indicate to the user the reason of not continuing here.
+        //  maybe we can investigate if we can avoid calling down two levels
+        //  CPlaceholderShape::createShape  + SCPlaceholderStrategy::createShape
+        //  to do the actualfactory create so we can get much better error reporting too...
         emit done();
     }
 }
