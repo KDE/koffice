@@ -133,11 +133,7 @@ bool KWCopyShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &co
 {
     Q_UNUSED(element);
     Q_UNUSED(context);
-#ifdef __GNUC__
-    #warning TODO: implement KWCopyShape::loadOdf
-#endif
-
-    return false; // TODO
+    return false; // TODO implement
 }
 
 void KWCopyShape::resetOriginal()
