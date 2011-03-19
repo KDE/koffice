@@ -195,6 +195,14 @@ QPointF TextShape::convertScreenPos(const QPointF &point)
 
 void TextShape::shapeChanged(ChangeType type, KoShape *shape)
 {
+    Q_ASSERT(shape);
+    // children can be moved by the layout process, we should ignore them here.
+    KoShape *parent = shape->parent();
+    while (parent) {
+        if (parent == this)
+            return;
+        parent = parent->parent();
+    }
     if (type == PositionChanged || type == SizeChanged || type == CollisionDetected) {
         m_textShapeData->foul();
         KoTextDocumentLayout *lay = qobject_cast<KoTextDocumentLayout*>(m_textShapeData->document()->documentLayout());
