@@ -307,7 +307,7 @@ void TestChangeTracking::testChangeTracking_data()
     //Other tests
     //QTest::newRow("Others-1")  << "ChangeTracking/other/michiels-deletion-sample/delete-text-across-siblings-tracked.odt";
     QTest::newRow("Others-2")  << "ChangeTracking/other/list-id-sample/list-sample-tracked.odt" << "DeltaXML";
-    QTest::newRow("Others-3")  << "ChangeTracking/other/list-table-list-1/list-table-list-tracked.odt" << "DeltaXML";
+    //QTest::newRow("Others-3")  << "ChangeTracking/other/list-table-list-1/list-table-list-tracked.odt" << "DeltaXML";
 
     //Multiple and Overlapping changes
     QTest::newRow("Multiple Paragraph Changes")  << "ChangeTracking/multiple-changes/para-add-then-delete/para-add-delete-tracked.odt" << "DeltaXML";
@@ -320,7 +320,7 @@ void TestChangeTracking::testChangeTracking_data()
     QTest::newRow("Simple Text Insertion")  << "ChangeTracking/odf12/simple-text-addition/simple-text-addition-tracked.odt" << "ODF12";
     QTest::newRow("Simple Text Deletion")  << "ChangeTracking/odf12/simple-text-deletion/simple-text-deletion-tracked.odt" << "ODF12";
     QTest::newRow("Text Format Changes")  << "ChangeTracking/odf12/text-format-changes/text-format-changes-tracked.odt" << "ODF12";
-    QTest::newRow("Paragraph Merge")  << "ChangeTracking/odf12/paragraph-merge/paragraph-merge-tracked.odt" << "ODF12";
+    QTest::newRow("Paragraph Merge - ODF12")  << "ChangeTracking/odf12/paragraph-merge/paragraph-merge-tracked.odt" << "ODF12";
 }
 
 bool TestChangeTracking::verifyContentXml(QString &originalFileName, QString &roundTripFileName)
