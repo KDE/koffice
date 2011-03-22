@@ -50,8 +50,8 @@
 class KoTextAnchorPrivate : public KoInlineObjectPrivate
 {
 public:
-    KoTextAnchorPrivate(KoTextAnchor *p, KoShape *s)
-            : parent(p),
+    KoTextAnchorPrivate(KoTextAnchor *qq, KoShape *s)
+            : KoInlineObjectPrivate(qq),
             shape(s),
             horizontalAlignment(KoTextAnchor::HorizontalOffset),
             verticalAlignment(KoTextAnchor::VerticalOffset),
@@ -77,9 +77,10 @@ public:
     /// as multiple shapes can hold 1 text flow; the anchored shape can be moved between containers and thus models
     void setContainer(KoShapeContainer *container)
     {
+        Q_Q(KoTextAnchor);
         if (container == 0) {
             if (model)
-                model->removeAnchor(parent);
+                model->removeAnchor(q);
             model = 0;
             shape->setParent(0);
             return;
@@ -87,7 +88,7 @@ public:
         KoTextShapeContainerModel *theModel = dynamic_cast<KoTextShapeContainerModel*>(container->model());
         if (theModel != model) {
             if (model)
-                model->removeAnchor(parent);
+                model->removeAnchor(q);
             if (shape->parent() != container) {
                 if (shape->parent()) {
                     shape->parent()->removeShape(shape);
@@ -95,7 +96,7 @@ public:
                 container->addShape(shape);
             }
             model = theModel;
-            model->addAnchor(parent);
+            model->addAnchor(q);
         }
         Q_ASSERT(model == theModel);
     }
@@ -142,7 +143,6 @@ public:
         return answer;
     }
 
-    KoTextAnchor * const parent;
     KoShape * const shape;
     KoTextAnchor::AnchorHorizontal horizontalAlignment;
     KoTextAnchor::AnchorVertical verticalAlignment;
@@ -150,6 +150,8 @@ public:
     KoTextShapeContainerModel *model;
     QPointF distance;
     bool isPositionedInline;
+
+    Q_DECLARE_PUBLIC(KoTextAnchor)
 };
 
 KoTextAnchor::KoTextAnchor(KoShape *shape)

@@ -449,10 +449,10 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
     kDebug(32500) << "text-style:" << KoTextDebug::textAttributes(cursor.blockCharFormat());
     bool usedParagraph = false; // set to true if we found a tag that used the paragraph, indicating that the next round needs to start a new one.
     if (bodyElem.namespaceURI() == KoXmlNS::table && bodyElem.localName() == "table") {
-        if (bodyElem.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+        if (!bodyElem.attributeNS(KoXmlNS::delta, "insertion-type").isEmpty())
             d->openChangeRegion(bodyElem);
         loadTable(bodyElem, cursor);
-        if(bodyElem.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+        if (!bodyElem.attributeNS(KoXmlNS::delta, "insertion-type").isEmpty())
             d->closeChangeRegion(bodyElem);
     }
     else {
@@ -1815,7 +1815,6 @@ KoDeleteChangeMarker * KoTextLoader::Private::insertDeleteChangeMarker(QTextCurs
         KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
         if (layout) {
             KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();
-            deleteChangemarker->updatePosition(cursor.block().document(), QTextInlineObject(), cursor.position(), QTextCharFormat());
             textObjectManager->insertInlineObject(cursor, deleteChangemarker);
         }
         retMarker = deleteChangemarker;
@@ -1936,12 +1935,12 @@ void KoTextLoader::loadTable(const KoXmlElement &tableElem, QTextCursor &cursor)
                 if (tblLocalName == "table-column") {
                     loadTableColumn(tblTag, tbl, columns);
                 } else if (tblLocalName == "table-row") {
-                    if (tblTag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+                    if (!tblTag.attributeNS(KoXmlNS::delta, "insertion-type").isEmpty())
                         d->openChangeRegion(tblTag);
 
                     loadTableRow(tblTag, tbl, spanStore, cursor, rows);
 
-                    if (tblTag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+                    if (!tblTag.attributeNS(KoXmlNS::delta, "insertion-type").isEmpty())
                         d->closeChangeRegion(tblTag);
                 }
             } else if(tblTag.namespaceURI() == KoXmlNS::delta) {

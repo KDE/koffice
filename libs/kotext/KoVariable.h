@@ -23,6 +23,7 @@
 // KOffice libs
 #include "KoInlineObject.h"
 #include "kotext_export.h"
+#include <KoXmlReaderForward.h>
 
 // Qt + kde
 #include <QHash>
@@ -30,7 +31,6 @@
 
 class QTextInlineObject;
 class QTextDocument;
-#include "KoXmlReaderForward.h"
 class KoShape;
 class KoShapeLoadingContext;
 class KoProperties;
@@ -44,6 +44,12 @@ class KoVariablePrivate;
  * A variable is a field inserted into the text and the content is set to a specific value that
  * is used as text.  This class is pretty boring in that it has just a setValue() to alter the
  * text shown; we depend on plugin writers to create more exciting ways to update variables.
+ *
+ * The inheriting class can choose from a number of callbacks to reimplement, see the
+ *  KoInlineObject API. The most important one for variable authors is the positionChanged()
+ * virtual method. That hook is called whenever the variable gets a new position.
+ * For variables that needs to change their value based on position in the document,
+ * you should implement that hook.  Useful methods.
  */
 class KOTEXT_EXPORT KoVariable : public KoInlineObject
 {
@@ -84,19 +90,11 @@ public:
         return 0;
     }
 
-protected:
-    /**
-     * This hook is called whenever the variable gets a new position.
-     * If this is a type of variable that needs to change its value based on that
-     * you should implement this method and act on it.
-     */
-    virtual void variableMoved(const KoShape *shape, const QTextDocument *document, int posInDocument);
 private:
     void updatePosition(QTextInlineObject object, const QTextCharFormat &format);
     void resize(QTextInlineObject object, const QTextCharFormat &format, QPaintDevice *pd);
     void paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect,
             QTextInlineObject object, const QTextCharFormat &format);
-    virtual void positionChanged();
 
 private:
     Q_DECLARE_PRIVATE(KoVariable)

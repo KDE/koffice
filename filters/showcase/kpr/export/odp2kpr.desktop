@@ -2,11 +2,13 @@
 Type=Service
 Name=Showcase Old File Format Filter
 Name[et]=Showcase'i vana failivormingu filter
+Name[nl]=Oud bestandsformaatfilter voor Showcase
 Name[pt]=Filtro do Formato Antigo do Showcase
 Name[pt_BR]=Filtro do formato de arquivo antigo do Showcase
 Name[sv]=Showcase gammalt filformatfilter
 Name[uk]=Фільтр старого формату файлів Showcase
 Name[x-test]=xxShowcase Old File Format Filterxx
+Name[zh_TW]=Showcase 舊檔案格式過濾程式
 X-KDE-Export=application/x-kpresenter
 X-KDE-Weight=1
 X-KDE-Import=application/vnd.oasis.opendocument.presentation

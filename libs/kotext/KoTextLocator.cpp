@@ -38,17 +38,25 @@
 class KoTextLocatorPrivate : public KoInlineObjectPrivate
 {
 public:
-    KoTextLocatorPrivate(KoTextLocator *q) : q(q), document(0), dirty(false), chapterPosition(-1), pageNumber(0) { }
+    KoTextLocatorPrivate(KoTextLocator *q)
+        : KoInlineObjectPrivate(q),
+        dirty(false),
+        chapterPosition(-1),
+        pageNumber(0)
+    {
+    }
+
     void update() {
         if (dirty == false)
             return;
         dirty = false;
-        chapterPosition = -1;
-
-        int pageTmp = pageNumber, chapterTmp = chapterPosition;
         if (document == 0)
             return;
+        Q_Q(KoInlineObject);
 
+        const int oldPage = pageNumber;
+        const int oldChapter = chapterPosition;
+        chapterPosition = -1;
         QTextBlock block = document->findBlock(positionInDocument);
         while (block.isValid()) {
             QTextList *list = block.textList();
@@ -63,27 +71,21 @@ public:
             block = block.previous();
         }
 
-        KoShape *shape = q->shapeForPosition(document, positionInDocument);
-        if (shape == 0)
-            pageNumber = -1;
-        else {
-            KoTextShapeData *data = static_cast<KoTextShapeData*>(shape->userData());
-            KoTextPage* page = data->page();
-            pageNumber = page->pageNumber();
-        }
-        if (pageTmp != pageNumber || chapterTmp != chapterPosition) {
-            foreach(KoTextReference* reference, listeners)
-                reference->variableMoved(0, 0, 0);
+        KoTextPage *page = q->page();
+        pageNumber = page == 0 ? -1 : page->pageNumber();
+        if (oldPage != pageNumber || oldChapter != chapterPosition) {
+            foreach (KoTextReference *reference, listeners)
+                reference->priv()->callbackPositionChanged();
         }
     }
 
-    KoTextLocator *q;
-    const QTextDocument *document;
     bool dirty;
     int chapterPosition;
     int pageNumber;
 
     QList<KoTextReference*> listeners;
+
+    Q_DECLARE_PUBLIC(KoTextLocator)
 };
 
 
@@ -143,9 +145,8 @@ int KoTextLocator::pageNumber() const
 
 QString KoTextLocator::word() const
 {
-    Q_D(const KoTextLocator);
-    QTextCursor cursor(const_cast<QTextDocument*>(document()));
-    cursor.setPosition(d->positionInDocument);
+    QTextCursor cursor(document());
+    cursor.setPosition(textPosition());
     cursor.movePosition(QTextCursor::NextWord);
     cursor.movePosition(QTextCursor::WordLeft, QTextCursor::KeepAnchor);
     return cursor.selectedText().trimmed().remove(QChar::ObjectReplacementCharacter);

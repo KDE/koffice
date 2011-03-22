@@ -268,6 +268,8 @@ private slots:
     void shapeAddedToDoc(KoShape *shape);
     void ensureCursorVisible();
 
+    void showEditVariableDialog();
+
 private:
     void repaintCaret();
     void repaintSelection();

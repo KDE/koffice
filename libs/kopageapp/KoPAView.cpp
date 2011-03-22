@@ -270,8 +270,13 @@ void KoPAView::initActions()
     connect(QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(clipboardDataChanged()));
     connect(d->canvas->toolProxy(), SIGNAL(toolChanged(const QString&)), this, SLOT(clipboardDataChanged()));
     clipboardDataChanged();
-    actionCollection()->addAction(KStandardAction::SelectAll,  "edit_select_all", this, SLOT(editSelectAll()));
-    actionCollection()->addAction(KStandardAction::Deselect,  "edit_deselect_all", this, SLOT(editDeselectAll()));
+
+    action = new KAction(i18n("Select All Shapes"), this);
+    actionCollection()->addAction("edit_selectall_shapes", action);
+    connect(action, SIGNAL(triggered()), this, SLOT(editSelectAll()));
+
+    actionCollection()->addAction(KStandardAction::Deselect,  "edit_deselect_all",
+            this, SLOT(editDeselectAll()));
 
     d->deleteSelectionAction = new KAction(KIcon("edit-delete"), i18n("D&elete"), this);
     actionCollection()->addAction("edit_delete", d->deleteSelectionAction );

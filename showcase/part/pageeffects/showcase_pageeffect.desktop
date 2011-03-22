@@ -2,17 +2,22 @@
 Type=ServiceType
 X-KDE-ServiceType=Showcase/PageEffect
 Name=Page Effect
+Name[et]=Leheküljeefekt
+Name[nl]=Pagina-effect
 Name[pt]=Efeito da Página
 Name[pt_BR]=Efeito de página
 Name[sv]=Sideffekt
 Name[uk]=Ефект сторінки
 Name[x-test]=xxPage Effectxx
+Name[zh_TW]=頁面效果
 Comment=Page effect plugin for Showcase
 Comment[et]=Showcase'i leheküljeefektide plugin
+Comment[nl]=Pagina-effectplugin voor Showcase
 Comment[pt]='Plugin' de efeitos das páginas do Showcase
 Comment[pt_BR]=Plug-in de efeitos das páginas do Showcase
 Comment[sv]=Insticksprogram med sideffekter för Showcase
 Comment[uk]=Додаток ефектів сторінки для Showcase
 Comment[x-test]=xxPage effect plugin for Showcasexx
+Comment[zh_TW]=Showcase 頁面效果外掛程式
 [PropertyDef::X-Showcase-Version]
 Type=int

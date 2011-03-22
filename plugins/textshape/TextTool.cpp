@@ -492,7 +492,7 @@ TextTool::TextTool(MockCanvas *canvas)  // constructor for our unit tests;
     m_changeTipCursorPos(0)
 {
     m_textEditingPlugins = TextEditingPluginContainer::create(0, TextEditingPluginContainer::TestSetup);
-    m_textEditingPlugins->setParent(this); // don't loose memory
+    m_textEditingPlugins->setParent(this); // don't leak memory
     // we could init some vars here, but we probably don't have to
     KGlobal::setLocale(new KLocale("en"));
     QTextDocument *document = new QTextDocument();
@@ -514,7 +514,8 @@ TextTool::~TextTool()
 
 void TextTool::showChangeTip()
 {
-    if (!m_textShapeData || !m_changeTipCursorPos || !m_changeTracker->displayChanges())
+    KoTextEditor *textEditor = m_textEditor.data();
+    if (!textEditor || !m_changeTipCursorPos || !m_changeTracker->displayChanges())
         return;
     QTextCursor c(m_textShapeData->document());
     c.setPosition(m_changeTipCursorPos);
@@ -909,24 +910,21 @@ void TextTool::mousePressEvent(KoPointerEvent *event)
         }
 
         if (variable) {
-            QWidget *optionsWidget = variable->createOptionsWidget();
-            if (optionsWidget) {
-                KPageDialog *dialog = new KPageDialog(canvas()->canvasWidget());
-                dialog->setCaption(i18n("Variable Options"));
-                dialog->addPage(optionsWidget, QString());
-    // TODO make this qundocommand based ...
-                dialog->exec();
-                delete dialog;
-            }
-            event->accept();
+            QMenu menu(canvas()->canvasWidget());
+            QAction *action = menu.addAction(i18n("Edit Variable..."), this, SLOT(showEditVariableDialog()));
+            QVariant v;
+            v.setValue<void*>(variable);
+            action->setData(v);
+            menu.exec(canvas()->canvasWidget()->mapToGlobal(canvas()->viewConverter()->
+                        documentToView(event->point).toPoint()), 0);
             return;
         }
+
+        event->ignore();
     }
 
     if (event->button() ==  Qt::MidButton) // Paste
         paste();
-    else
-        event->ignore();
 }
 
 void TextTool::mouseDoubleClickEvent(KoPointerEvent *event)
@@ -1917,8 +1915,11 @@ void TextTool::formatParagraph()
 
 void TextTool::toggleShowChanges(bool on)//TODO transfer this in KoTextEditor
 {
+    KoTextEditor *textEditor = m_textEditor.data();
+    if (textEditor == 0)
+        return;
     m_actionShowChanges->setChecked(on);
-    ShowChangesCommand *command = new ShowChangesCommand(on, m_textShapeData->document(), this->canvas());
+    ShowChangesCommand *command = new ShowChangesCommand(on, textEditor->document(), canvas());
     connect(command, SIGNAL(toggledShowChange(bool)), m_actionShowChanges, SLOT(setChecked(bool)));
     m_textEditor.data()->addCommand(command);
 }
@@ -2048,6 +2049,24 @@ void TextTool::startTextEditingPlugin(const QString &pluginId)
             plugin->checkSection(textEditor->document(), from, to);
         } else
             plugin->finishedWord(textEditor->document(), m_textEditor.data()->position());
+    }
+}
+
+void TextTool::showEditVariableDialog()
+{
+    QAction *action = qobject_cast<QAction*>(sender());
+    if (action) {
+        KoVariable *variable = static_cast<KoVariable*>(action->data().value<void*>());
+        if (variable) {
+            QWidget *optionsWidget = variable->createOptionsWidget();
+            KPageDialog *dialog = new KPageDialog(canvas()->canvasWidget());
+            dialog->setCaption(i18n("Variable Options"));
+            if (optionsWidget)
+                dialog->addPage(optionsWidget, QString());
+    // TODO make this qundocommand based ...
+            dialog->exec();
+            delete dialog;
+        }
     }
 }
 

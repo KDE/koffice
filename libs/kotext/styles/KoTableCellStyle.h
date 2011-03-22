@@ -92,7 +92,6 @@ public:
      */
     QRectF boundingRect(const QRectF &contentRect) const;
 
-
     /**
      * Paint the background.
      *

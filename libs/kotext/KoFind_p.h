@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Fredy Yanardi <fyanardi@gmail.com>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  *
@@ -62,27 +62,27 @@ public:
     void findDocumentSetNext(QTextDocument * document);
     void findDocumentSetPrevious(QTextDocument * document);
 
-protected:
-    void parseSettingsAndFind();
+    KoFind *q;
 
 private:
-    KoFind * q;
-    KoResourceManager *provider;
-    KoFindStrategy findStrategy; /// strategy used for find
-    KoReplaceStrategy replaceStrategy; /// strategy used for replace
-    KoFindStrategyBase * strategy; /// the current strategy used
+    void parseSettingsAndFind();
 
-    QTextDocument *document;
-    QTextDocument *startDocument;
-    QTextCursor lastKnownPosition;
-    bool restarted;
-    bool start; /// if true find/replace is restarted
-    bool inFind; /// if true find/replace is running (not showing the dialog)
-    QTextCursor startPosition;
-    QTextCursor endPosition;
-    FindDirection * findDirection; /// the current direction used
-    FindForward findForward;
-    FindBackward findBackward;
+    KoResourceManager *m_provider;
+    KoFindStrategy m_findStrategy; /// strategy used for find
+    KoReplaceStrategy m_replaceStrategy; /// strategy used for replace
+    KoFindStrategyBase *m_strategy; /// the current strategy used
+
+    QTextDocument *m_document;
+    QTextDocument *m_startDocument;
+    QTextCursor m_lastKnownPosition;
+    bool m_restarted;
+    bool m_start; /// if true find/replace is restarted
+    bool m_inFind; /// if true find/replace is running (not showing the dialog)
+    QTextCursor m_startPosition;
+    QTextCursor m_endPosition;
+    FindDirection *m_findDirection; /// the current direction used
+    FindForward m_findForward;
+    FindBackward m_findBackward;
 };
 
 #endif /* KOFIND_P_H */

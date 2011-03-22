@@ -65,7 +65,7 @@ public:
     void resetOriginal();
 
 protected:
-    virtual void shapeChanged(ChangeType type, KoShape *shape = 0);
+    virtual void shapeChanged(ChangeType type, KoShape *shape);
 
 private:
     KoShape *m_original;

@@ -84,8 +84,6 @@ public:
 
     void setDeletedListStyle(KoListStyle::ListIdType, KoListStyle *style);
 
-    virtual void updatePosition(const QTextDocument *document, QTextInlineObject object, int posInDocument, const QTextCharFormat &format);
-
 protected:
 
     virtual void paint(QPainter &painter, QPaintDevice *pd, const QRectF &rect, QTextInlineObject object, const QTextCharFormat &format);

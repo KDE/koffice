@@ -2,6 +2,7 @@
  * Copyright (C) 2007 Pierre Ducroquet <pinaraf@gmail.com>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  * Copyright (C) 2008 Sebastian Sauer <mail@dipe.org>
+ * Copyright (C) 2011 Thomas Zanader <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,11 +25,12 @@
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoProperties.h>
-#include <kdebug.h>
+#include <KoXmlNS.h>
 #include <KoShape.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
-#include <KoXmlNS.h>
+
+#include <kdebug.h>
 
 PageVariable::PageVariable()
         : KoVariable(true),
@@ -52,59 +54,43 @@ void PageVariable::readProperties(const KoProperties *props)
         m_type = PageContinuation;
         break;
     default:
-        Q_ASSERT(false);
+        kWarning() << "property 'vartype' has to be 1, 2 or 3. Ignoring";
         break;
     }
 }
 
 void PageVariable::propertyChanged(Property property, const QVariant &value)
 {
-    switch (m_type) {
-    case PageCount:
-        if (property == KoInlineObject::PageCount) {
-            setValue(value.toString());
-        }
-        break;
-    case PageNumber:
-        break;
-    case PageContinuation:
-        break;
-    }
+    if (m_type == PageCount && property == KoInlineObject::PageCount)
+        setValue(value.toString());
 }
 
-void PageVariable::variableMoved(const KoShape *shape, const QTextDocument *document, int posInDocument)
+void PageVariable::positionChanged()
 {
-    Q_UNUSED(document);
-    Q_UNUSED(posInDocument);
     switch (m_type) {
     case PageCount:
         break;
     case PageNumber:
         if (value().isEmpty() || ! m_fixed) {
-            if (KoTextShapeData *shapeData = qobject_cast<KoTextShapeData *>(shape ? shape->userData() : 0)) {
-                KoTextPage* page = shapeData->page();
-                int pagenumber = 0;
-                if (page) {
-                    pagenumber = page->pageNumber(m_pageselect, m_pageadjust);
-                }
-                setValue(pagenumber >= 0 ? QString::number(pagenumber) : QString());
-            }
+            KoTextPage *thePage = page();
+            int pageNumber = 0;
+            if (thePage)
+                pageNumber = thePage->pageNumber(m_pageselect, m_pageadjust);
+            setValue(pageNumber > 0 ? QString::number(pageNumber) : QString());
         }
         break;
-    case PageContinuation:
-        if (KoTextShapeData *shapeData = qobject_cast<KoTextShapeData *>(shape ? shape->userData() : 0)) {
-            KoTextPage* page = shapeData->page();
-            int pagenumber = 0;
-            if (page) {
-                pagenumber = page->pageNumber(m_pageselect);
-            }
-            setValue(pagenumber >= 0 ? m_continuation : QString());
-        }
+    case PageContinuation: {
+        KoTextPage *thePage = page();
+        int pageNumber = 0;
+        if (thePage)
+            pageNumber = thePage->pageNumber(m_pageselect);
+        setValue(pageNumber >= 0 ? m_continuation : QString());
         break;
+    }
     }
 }
 
-void PageVariable::saveOdf(KoShapeSavingContext & context)
+void PageVariable::saveOdf(KoShapeSavingContext &context)
 {
     KoXmlWriter *writer = &context.xmlWriter();
     switch (m_type) {
@@ -149,7 +135,7 @@ void PageVariable::saveOdf(KoShapeSavingContext & context)
     }
 }
 
-bool PageVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
+bool PageVariable::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(context);
     const QString localName(element.localName());
@@ -160,7 +146,7 @@ bool PageVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
 
         // The text:select-page attribute is used to display the number of the previous or the following
         // page rather than the number of the current page.
-        QString pageselect = element.attributeNS(KoXmlNS::text, "select-page", QString());
+        QString pageselect = element.attributeNS(KoXmlNS::text, "select-page");
         if (pageselect == "previous")
             m_pageselect = KoTextPage::PreviousPage;
         else if (pageselect == "next")
@@ -171,7 +157,7 @@ bool PageVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
         // The value of a page number field can be adjusted by a specified number, allowing the display
         // of page numbers of following or preceding pages. The adjustment amount is specified using
         // the text:page-adjust attribute.
-        m_pageadjust = element.attributeNS(KoXmlNS::text, "page-adjust", QString()).toInt();
+        m_pageadjust = element.attributeNS(KoXmlNS::text, "page-adjust").toInt();
 
         // The text:fixed attribute specifies whether or not the value of a field element is fixed. If
         // the value of a field is fixed, the value of the field element to which this attribute is
@@ -183,7 +169,7 @@ bool PageVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
 
         // This attribute specifies whether to check for a previous or next page and if the page exists, the
         // continuation text is printed.
-        QString pageselect = element.attributeNS(KoXmlNS::text, "select-page", QString());
+        QString pageselect = element.attributeNS(KoXmlNS::text, "select-page");
         if (pageselect == "previous")
             m_pageselect = KoTextPage::PreviousPage;
         else if (pageselect == "next")

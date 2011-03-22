@@ -62,16 +62,11 @@ void PresentationVariable::setProperties(const KoProperties *props)
     }
 }
 
-void PresentationVariable::variableMoved(const KoShape *shape, const QTextDocument *document, int posInDocument)
+void PresentationVariable::positionChanged()
 {
-    Q_UNUSED(document);
-    Q_UNUSED(posInDocument);
-
-    if (KoTextShapeData *shapeData = qobject_cast<KoTextShapeData *>(shape ? shape->userData() : 0)) {
-        if (KoPATextPage *textPage = dynamic_cast<KoPATextPage*>(shapeData->page())) {
-            if (SCPage *page = dynamic_cast<SCPage*>(textPage->page())) {
-                setValue(page->declaration(m_type));
-            }
+    if (KoPATextPage *textPage = dynamic_cast<KoPATextPage*>(page())) {
+        if (SCPage *page = dynamic_cast<SCPage*>(textPage->page())) {
+            setValue(page->declaration(m_type));
         }
     }
 }

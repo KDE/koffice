@@ -285,7 +285,7 @@ void ChangeTrackedDeleteCommand::deleteSelection(QTextCursor &selection)
     selection.setPosition(selectionBegin);
     selection.setPosition(selectionEnd, QTextCursor::KeepAnchor);
     QTextDocumentFragment deletedFragment;
-    changeId = KoTextDocument(document).changeTracker()->getDeleteChangeId(i18n("Delete"), deletedFragment, 0);
+    changeId = KoTextDocument(document).changeTracker()->getDeleteChangeId(i18n("Deletion"), deletedFragment, 0);
     KoChangeTrackerElement *element = KoTextDocument(document).changeTracker()->elementById(changeId);
     deleteChangemarker = new KoDeleteChangeMarker(KoTextDocument(document).changeTracker());
     deleteChangemarker->setChangeId(changeId);

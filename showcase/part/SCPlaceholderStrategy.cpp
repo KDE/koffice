@@ -118,7 +118,6 @@ KoShape *SCPlaceholderStrategy::createShape(KoResourceManager *rm)
 {
     KoShape * shape = 0;
     KoShapeFactoryBase * factory = KoShapeRegistry::instance()->value(m_placeholderData->m_shapeId);
-    Q_ASSERT(factory);
     if (factory) {
         shape = factory->createDefaultShape(rm);
     }

@@ -34,11 +34,8 @@ KoTextReference::~KoTextReference()
         loc->removeListener(this);
 }
 
-void KoTextReference::variableMoved(const KoShape *shape, const QTextDocument *document, int posInDocument)
+void KoTextReference::positionChanged()
 {
-    Q_UNUSED(shape);
-    Q_UNUSED(document);
-    Q_UNUSED(posInDocument);
     Q_ASSERT(manager());
     KoTextLocator *loc = locator();
     if (loc)
@@ -50,7 +47,7 @@ void KoTextReference::variableMoved(const KoShape *shape, const QTextDocument *d
 void KoTextReference::setup()
 {
     locator()->addListener(this);
-    variableMoved(0, 0, 0);
+    positionChanged();
 }
 
 KoTextLocator* KoTextReference::locator()

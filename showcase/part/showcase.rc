@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
 
-<kpartgui name="showcase" version="124">
+<kpartgui name="showcase" version="125">
     <MenuBar>
         <Menu name="file">
             <Action name="file_export_html" />
@@ -14,7 +14,7 @@
             <Action name="edit_paste"/>
             <Action name="edit_delete"/>
             <Separator/>
-            <Action name="edit_select_all"/>
+            <Action name="edit_selectall_shapes"/>
             <Action name="edit_deselect_all"/>
             <Separator/>
             <Action name="edit_find"/>

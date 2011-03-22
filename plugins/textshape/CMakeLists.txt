@@ -30,7 +30,9 @@ SET ( textshape_SRCS
     TableLayout.cpp
     TableLayoutData.cpp
 
+    dialogs/AcceptRejectChangeDialog.cpp
     dialogs/ChangeConfigureDialog.cpp
+    dialogs/ChangeTrackingOptionsWidget.cpp
     dialogs/CharacterGeneral.cpp
     dialogs/CharacterHighlighting.cpp
     dialogs/CreateBookmark.cpp
@@ -51,19 +53,15 @@ SET ( textshape_SRCS
     dialogs/ParagraphLayout.cpp
     dialogs/ParagraphSettingsDialog.cpp
     dialogs/SimpleStyleWidget.cpp
+    dialogs/SimpleTableWidget.cpp
     dialogs/StyleManager.cpp
     dialogs/StyleManagerDialog.cpp
     dialogs/StyleManagerWelcome.cpp
     dialogs/StylesModel.cpp
     dialogs/StylesWidget.cpp
     dialogs/TableDialog.cpp
-    dialogs/ChangeConfigureDialog.cpp
-    dialogs/AcceptRejectChangeDialog.cpp
-    dialogs/TrackedChangeModel.cpp
     dialogs/TrackedChangeManager.cpp
-    dialogs/ChangeTrackingOptionsWidget.cpp
-    dialogs/SimpleTableWidget.cpp
-
+    dialogs/TrackedChangeModel.cpp
     commands/ChangeListCommand.cpp
     commands/ChangeListLevelCommand.cpp
     commands/ListItemNumberingCommand.cpp

@@ -2302,8 +2302,8 @@ void KoTextWriter::Private::writeNode(QTextStream &outputXmlStream, KoXmlNode &n
 }
 
 void KoTextWriter::write(QTextDocument *document, int from, int to)
-{ 
-    d->document = document;  
+{
+    d->document = document;
     d->styleManager = KoTextDocument(document).styleManager();
     d->layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
 
@@ -2314,9 +2314,11 @@ void KoTextWriter::write(QTextDocument *document, int from, int to)
     QTextBlock block = document->findBlock(from);
 
     QVector<int> changesVector;
-    d->changeTracker->allChangeIds(changesVector);
-    foreach (int changeId, changesVector) {
-        d->saveChange(changeId);
+    if (d->changeTracker) {
+        d->changeTracker->allChangeIds(changesVector);
+        foreach (int changeId, changesVector) {
+            d->saveChange(changeId);
+        }
     }
 
     QHash<QTextList *, QString> listStyles = d->saveListStyles(block, to);

@@ -136,7 +136,7 @@ void KoShapePrivate::shapeChanged(KoShape::ChangeType type)
 
     if (parent)
         parent->model()->childChanged(q, type);
-    q->shapeChanged(type);
+    q->shapeChanged(type, q);
     foreach (KoShape * shape, dependees)
         shape->shapeChanged(type, q);
 }

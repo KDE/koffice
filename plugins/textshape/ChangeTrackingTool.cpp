@@ -89,11 +89,11 @@ void ChangeTrackingTool::mouseMoveEvent(KoPointerEvent* event)
 
     int changeId = cursor.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
     if (changeId) {
-        m_canvas->setCursor(QCursor(Qt::PointingHandCursor));
+        setCursor(QCursor(Qt::PointingHandCursor));
         QModelIndex index = m_model->indexForChangeId(changeId);
         m_changesTreeView->setCurrentIndex(index);
     } else {
-        m_canvas->setCursor(QCursor(Qt::ArrowCursor));
+        setCursor(QCursor(Qt::ArrowCursor));
         m_changesTreeView->setCurrentIndex(QModelIndex());
     }
 }
