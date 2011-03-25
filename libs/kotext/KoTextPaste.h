@@ -48,6 +48,7 @@ protected:
     /// reimplemented
     virtual bool process(const KoXmlElement &body, KoOdfReadStore &odfStore);
 
+private:
     class Private;
     Private * const d;
 };
