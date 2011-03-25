@@ -25,7 +25,7 @@
 #include <QTextCursor>
 
 #include "KoFindStrategy_p.h"
-#include "KoReplaceStrategy.h"
+#include "KoReplaceStrategy_p.h"
 #include "FindDirection_p.h"
 
 class KoFind;
