@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextReference.h"
+#include "KoTextReference_p.h"
 #include "KoTextLocator.h"
 #include "KoInlineTextObjectManager.h"
 

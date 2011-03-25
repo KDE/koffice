@@ -19,7 +19,7 @@
 
 #include "InsertTextReferenceAction_p.h"
 #include "KoTextLocator.h"
-#include "KoTextReference.h"
+#include "KoTextReference_p.h"
 #include "KoInlineTextObjectManager.h"
 
 #include <KoCanvasBase.h>

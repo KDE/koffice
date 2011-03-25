@@ -21,7 +21,7 @@
 #include "KoInlineObject_p.h"
 #include "KoTextBlockData.h"
 #include "KoTextShapeData.h"
-#include "KoTextReference.h"
+#include "KoTextReference_p.h"
 #include "KoTextPage.h"
 #include "styles/KoListStyle.h"
 
