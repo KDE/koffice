@@ -29,7 +29,6 @@
 #include "KoTextDrag.h"
 #include "KoTextLocator.h"
 #include "KoTextOdfSaveHelper.h"
-#include "KoTextPaste.h"
 #include "changetracker/KoChangeTracker.h"
 #include "changetracker/KoChangeTrackerElement.h"
 #include "changetracker/KoDeleteChangeMarker.h"

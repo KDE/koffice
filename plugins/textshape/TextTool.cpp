@@ -52,6 +52,7 @@
 #include <KoPointerEvent.h>
 #include <KoVariable.h>
 #include <KoColorBackground.h>
+#include <KoOdf.h>
 #include <KoColorPopupAction.h>
 #include <KoTextDocumentLayout.h>
 #include <KoParagraphStyle.h>
@@ -61,7 +62,6 @@
 #include <KoStyleManager.h>
 #include <KoTextOdfSaveHelper.h>
 #include <KoTextDrag.h>
-#include <KoTextPaste.h>
 #include <KoTextDocument.h>
 #include <KoTextEditor.h>
 #include <KoGlobal.h>
