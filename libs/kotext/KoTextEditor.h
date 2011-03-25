@@ -42,6 +42,7 @@ class QTextDocument;
 class QTextDocumentFragment;
 class QString;
 class QUndoCommand;
+class KoTextEditorPrivate;
 
 class KOTEXT_EXPORT KoTextEditor: public KoToolSelection
 {
@@ -286,8 +287,8 @@ private:
     Q_PRIVATE_SLOT(d, void documentCommandAdded())
     Q_PRIVATE_SLOT(d, void runDirectionUpdater())
 
-    class Private;
-    Private* const d;
+    friend class KoTextEditorPrivate;
+    KoTextEditorPrivate *d;
 };
 
 Q_DECLARE_METATYPE(KoTextEditor*)

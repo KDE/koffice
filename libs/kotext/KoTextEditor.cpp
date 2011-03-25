@@ -89,7 +89,7 @@ static bool isRightToLeft(const QString &text)
 
 /*Private*/
 
-KoTextEditor::Private::Private(KoTextEditor *qq, QTextDocument *document)
+KoTextEditorPrivate::KoTextEditorPrivate(KoTextEditor *qq, QTextDocument *document)
     : q(qq),
     document (document),
     headCommand(0),
@@ -102,7 +102,7 @@ KoTextEditor::Private::Private(KoTextEditor *qq, QTextDocument *document)
     QObject::connect(&updateRtlTimer, SIGNAL(timeout()), q, SLOT(runDirectionUpdater()));
 }
 
-void KoTextEditor::Private::documentCommandAdded()
+void KoTextEditorPrivate::documentCommandAdded()
 {
     class UndoTextCommand : public QUndoCommand
     {
@@ -148,7 +148,7 @@ void KoTextEditor::Private::documentCommandAdded()
     new UndoTextCommand(document, headCommand);
 }
 
-void KoTextEditor::Private::updateState(KoTextEditor::Private::State newState, QString title)
+void KoTextEditorPrivate::updateState(KoTextEditorPrivate::State newState, QString title)
 {
     if (editorState == Custom && newState !=NoOp)
         return;
@@ -168,7 +168,7 @@ void KoTextEditor::Private::updateState(KoTextEditor::Private::State newState, Q
     //kDebug() << "commandTitle is now: " << commandTitle;
 }
 
-bool KoTextEditor::Private::deleteInlineObjects(bool backwards)
+bool KoTextEditorPrivate::deleteInlineObjects(bool backwards)
 {
     Q_UNUSED(backwards)
     return false;
@@ -216,7 +216,7 @@ return found;
 */
 }
 
-void KoTextEditor::Private::deleteSelection()
+void KoTextEditorPrivate::deleteSelection()
 {
 #ifndef NDEBUG
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
@@ -233,7 +233,7 @@ void KoTextEditor::Private::deleteSelection()
     caret.deleteChar();
 }
 
-void KoTextEditor::Private::runDirectionUpdater()
+void KoTextEditorPrivate::runDirectionUpdater()
 {
     while (! dirtyBlocks.isEmpty()) {
         const int blockNumber = dirtyBlocks.first();
@@ -273,7 +273,7 @@ void KoTextEditor::Private::runDirectionUpdater()
     }
 }
 
-void KoTextEditor::Private::clearCharFormatProperty(int property)
+void KoTextEditorPrivate::clearCharFormatProperty(int property)
 {
     class PropertyWiper : public CharFormatVisitor
     {
@@ -300,7 +300,7 @@ void KoTextEditor::Private::clearCharFormatProperty(int property)
 
 KoTextEditor::KoTextEditor(QTextDocument *document)
     : KoToolSelection(document),
-    d (new Private(this, document))
+    d (new KoTextEditorPrivate(this, document))
 {
     connect (d->document, SIGNAL (undoCommandAdded()), this, SLOT (documentCommandAdded()));
 }
@@ -322,7 +322,7 @@ QTextCursor* KoTextEditor::cursor()
 
 void KoTextEditor::addCommand(QUndoCommand *command, bool addCommandToStack)
 {
-    d->updateState(KoTextEditor::Private::Custom, (!command->text().isEmpty())?command->text():i18n("Text"));
+    d->updateState(KoTextEditorPrivate::Custom, (!command->text().isEmpty())?command->text():i18n("Text"));
     //kDebug() << "will push the custom command: " << command->text();
     d->headCommand = command;
     QUndoStack *stack = KoTextDocument(d->document).undoStack();
@@ -331,7 +331,7 @@ void KoTextEditor::addCommand(QUndoCommand *command, bool addCommandToStack)
     else
         command->redo();
     //kDebug() << "custom command pushed";
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::registerTrackedChange(QTextCursor &selection, KoGenChange::Type changeType, QString title, QTextFormat& format, QTextFormat& prevFormat, bool applyToWholeBlock)
@@ -454,31 +454,31 @@ void KoTextEditor::registerTrackedChange(QTextCursor &selection, KoGenChange::Ty
 
 void KoTextEditor::bold(bool bold)
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Bold"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Bold"));
     QTextCharFormat format;
     format.setFontWeight(bold ? QFont::Bold : QFont::Normal);
 
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.mergeCharFormat(format);
     registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Bold"), format, prevFormat, false);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::italic(bool italic)
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Italic"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Italic"));
     QTextCharFormat format;
     format.setFontItalic(italic);
 
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.mergeCharFormat(format);
     registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Italic"), format, prevFormat, false);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::underline(bool underline)
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Underline"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Underline"));
     QTextCharFormat format;
     if (underline) {
         format.setProperty(KoCharacterStyle::UnderlineType, KoCharacterStyle::SingleLine);
@@ -491,12 +491,12 @@ void KoTextEditor::underline(bool underline)
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.mergeCharFormat(format);
     registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Underline"), format, prevFormat, false);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::strikeOut(bool strikeout)
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Strike Out"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Strike Out"));
     QTextCharFormat format;
     if (strikeout) {
         format.setProperty(KoCharacterStyle::StrikeOutType, KoCharacterStyle::SingleLine);
@@ -508,7 +508,7 @@ void KoTextEditor::strikeOut(bool strikeout)
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.mergeCharFormat(format);
     registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Strike Out"), format, prevFormat, false);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::setHorizontalTextAlignment(Qt::Alignment align)
@@ -524,9 +524,9 @@ void KoTextEditor::setHorizontalTextAlignment(Qt::Alignment align)
     };
 
     Aligner aligner(align);
-    d->updateState(KoTextEditor::Private::Format, i18n("Set Horizontal Alignment"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Set Horizontal Alignment"));
     BlockFormatVisitor::visitSelection(this, aligner, i18n("Set Horizontal Alignment"));
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::setVerticalTextAlignment(Qt::Alignment align)
@@ -537,13 +537,13 @@ void KoTextEditor::setVerticalTextAlignment(Qt::Alignment align)
     else if (align == Qt::AlignBottom)
         charAlign = QTextCharFormat::AlignSubScript;
 
-    d->updateState(KoTextEditor::Private::Format, i18n("Set Vertical Alignment"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Set Vertical Alignment"));
     QTextCharFormat format;
     format.setVerticalAlignment(charAlign);
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.mergeCharFormat(format);
     registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Set Vertical Alignment"), format, prevFormat, false);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::decreaseIndent()
@@ -559,9 +559,9 @@ void KoTextEditor::decreaseIndent()
     };
 
     Indenter indenter;
-    d->updateState(KoTextEditor::Private::Format, i18n("Decrease Indent"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Decrease Indent"));
     BlockFormatVisitor::visitSelection(this, indenter, i18n("Decrease Indent"));
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::increaseIndent()
@@ -577,9 +577,9 @@ void KoTextEditor::increaseIndent()
     };
 
     Indenter indenter;
-    d->updateState(KoTextEditor::Private::Format, i18n("Increase Indent"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Increase Indent"));
     BlockFormatVisitor::visitSelection(this, indenter, i18n("Increase Indent"));
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 class FontResizer : public CharFormatVisitor
@@ -608,79 +608,79 @@ public:
 
 void KoTextEditor::decreaseFontSize()
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Decrease font size"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Decrease font size"));
     FontResizer sizer(FontResizer::Shrink);
     CharFormatVisitor::visitSelection(this, sizer, i18n("Decrease font size"));
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::increaseFontSize()
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Increase font size"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Increase font size"));
     FontResizer sizer(FontResizer::Grow);
     CharFormatVisitor::visitSelection(this, sizer, i18n("Increase font size"));
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::setFontFamily(const QString &font)
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Set Font"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Set Font"));
     QTextCharFormat format;
     format.setFontFamily(font);
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.mergeCharFormat(format);
     registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Set Font"), format, prevFormat, false);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::setFontSize(int size)
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Set Font Size"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Set Font Size"));
     QTextCharFormat format;
     format.setFontPointSize(size);
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.mergeCharFormat(format);
     registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Set Font Size"), format, prevFormat, false);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::setTextBackgroundColor(const QColor &color)
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Set Background Color"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Set Background Color"));
     QTextCharFormat format;
     format.setBackground(QBrush(color));
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.mergeCharFormat(format);
     registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Set Background Color"), format, prevFormat, false);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::setTextColor(const QColor &color)
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Set Text Color"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Set Text Color"));
     QTextCharFormat format;
     format.setForeground(QBrush(color));
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.mergeCharFormat(format);
     registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Set Text Color"), format, prevFormat, false);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::setStyle(KoCharacterStyle *style)
 {
     Q_ASSERT(style);
-    d->updateState(KoTextEditor::Private::Format, i18n("Set Character Style"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Set Character Style"));
     QTextCharFormat format;
     style->applyStyle(format);
     QTextCharFormat prevFormat(d->caret.charFormat());
     d->caret.setCharFormat(format);
     registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Set Character Style"), format, prevFormat, false);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::setStyle(KoParagraphStyle *style)
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Set Paragraph Style"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Set Paragraph Style"));
     const int start = qMin(position(), anchor());
     const int end = qMax(position(), anchor());
     QTextBlock block = d->document->findBlock(start);
@@ -695,12 +695,12 @@ void KoTextEditor::setStyle(KoParagraphStyle *style)
         style->applyStyle(block);
         block = block.next();
     }
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::setDefaultFormat()
 {
-    d->updateState(KoTextEditor::Private::Format, i18n("Set default format"));
+    d->updateState(KoTextEditorPrivate::Format, i18n("Set default format"));
     if (KoStyleManager *styleManager = KoTextDocument(d->document).styleManager()) {
         KoCharacterStyle *defaultCharStyle = styleManager->defaultParagraphStyle()->characterStyle();
         QTextCharFormat format;
@@ -709,12 +709,12 @@ void KoTextEditor::setDefaultFormat()
         d->caret.setCharFormat(format);
         registerTrackedChange(d->caret, KoGenChange::FormatChange, i18n("Set default format"), format, prevFormat, false);
     }
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::addBookmark(const QString &name)
 {//TODO changeTracking
-    d->updateState(KoTextEditor::Private::Custom, i18n("Insert Bookmark"));
+    d->updateState(KoTextEditorPrivate::Custom, i18n("Insert Bookmark"));
     KoBookmark *bookmark = new KoBookmark(name);
     int startPos = -1, endPos = -1, caretPos = -1;
 
@@ -749,7 +749,7 @@ void KoTextEditor::addBookmark(const QString &name)
         d->caret.setPosition(startPos);
         d->caret.setPosition(endPos, QTextCursor::KeepAnchor);
     }
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 bool KoTextEditor::insertIndexMarker()
@@ -760,19 +760,19 @@ bool KoTextEditor::insertIndexMarker()
     if (block.text()[ d->caret.position() - block.position()].isSpace())
         return false; // can't insert one on a whitespace as that does not indicate a word.
 
-    d->updateState(KoTextEditor::Private::Custom, i18n("Insert Index"));
+    d->updateState(KoTextEditorPrivate::Custom, i18n("Insert Index"));
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->document->documentLayout());
     Q_ASSERT(layout);
     Q_ASSERT(layout->inlineTextObjectManager());
     KoTextLocator *tl = new KoTextLocator();
     layout->inlineTextObjectManager()->insertInlineObject(d->caret, tl);
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
     return true;
 }
 
 void KoTextEditor::insertInlineObject(KoInlineObject *inliner)
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Insert Variable"));
+    d->updateState(KoTextEditorPrivate::Custom, i18n("Insert Variable"));
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(d->document->documentLayout());
     Q_ASSERT(layout);
     Q_ASSERT(layout->inlineTextObjectManager());
@@ -791,12 +791,12 @@ void KoTextEditor::insertInlineObject(KoInlineObject *inliner)
     registerTrackedChange(d->caret, KoGenChange::InsertChange, i18n("Key Press"), format, format, false);
     d->caret.clearSelection();
 
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::insertFrameBreak()
 {
-    d->updateState(KoTextEditor::Private::KeyPress, i18n("Insert Break"));
+    d->updateState(KoTextEditorPrivate::KeyPress, i18n("Insert Break"));
     QTextBlock block = d->caret.block();
     if (d->caret.position() == block.position() && block.length() > 0) { // start of parag
         QTextBlockFormat bf = d->caret.blockFormat();
@@ -811,7 +811,7 @@ void KoTextEditor::insertFrameBreak()
         bf.setPageBreakPolicy(QTextFormat::PageBreak_AlwaysBefore); // TODO we should create an autostyle instead
         d->caret.setBlockFormat(bf);
     }
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 bool KoTextEditor::deleteInlineObjects(bool backward)
@@ -884,7 +884,7 @@ void KoTextEditor::deleteChar()
     if (!d->caret.hasSelection() && d->caret.atEnd())
         return;
     if (!d->deleteInlineObjects(false) || d->caret.hasSelection()) {
-        d->updateState(KoTextEditor::Private::Delete, i18n("Delete"));
+        d->updateState(KoTextEditorPrivate::Delete, i18n("Delete"));
 
         if (!d->caret.hasSelection())
             d->caret.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
@@ -897,7 +897,7 @@ void KoTextEditor::deletePreviousChar()
     if (!d->caret.hasSelection() && d->caret.atStart())
         return;
     if (!d->deleteInlineObjects(false) || d->caret.hasSelection()) {
-        d->updateState(KoTextEditor::Private::Delete, i18n("Delete"));
+        d->updateState(KoTextEditorPrivate::Delete, i18n("Delete"));
 
         if (!d->caret.hasSelection())
             d->caret.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
@@ -946,7 +946,7 @@ void KoTextEditor::insertFragment(const QTextDocumentFragment &fragment)
 
 void KoTextEditor::insertTable(int rows, int columns)
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Insert Table"));
+    d->updateState(KoTextEditorPrivate::Custom, i18n("Insert Table"));
     QTextTableFormat tableFormat;
 
     tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
@@ -989,7 +989,7 @@ void KoTextEditor::insertTable(int rows, int columns)
         }
     }
 
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::insertTableRowAbove()
@@ -1079,7 +1079,7 @@ void KoTextEditor::deleteTableRow()
 
 void KoTextEditor::mergeTableCells()
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Merge Cells"));
+    d->updateState(KoTextEditorPrivate::Custom, i18n("Merge Cells"));
 
     QTextTable *table = d->caret.currentTable();
 
@@ -1087,12 +1087,12 @@ void KoTextEditor::mergeTableCells()
         table->mergeCells(d->caret);
     }
 
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::splitTableCells()
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Split Cells"));
+    d->updateState(KoTextEditorPrivate::Custom, i18n("Split Cells"));
 
     QTextTable *table = d->caret.currentTable();
 
@@ -1101,12 +1101,12 @@ void KoTextEditor::splitTableCells()
         table->splitCell(cell.row(), cell.column(),  cell.rowSpan(), cell.columnSpan());
     }
 
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::insertText(const QString &text)
 {
-    d->updateState(KoTextEditor::Private::KeyPress, i18n("Key Press"));
+    d->updateState(KoTextEditorPrivate::KeyPress, i18n("Key Press"));
 
     //first we make sure that we clear the inlineObject charProperty, if we have no selection
     if (!d->caret.hasSelection() && d->caret.charFormat().hasProperty(KoCharacterStyle::InlineInstanceId))
@@ -1169,7 +1169,7 @@ bool KoTextEditor::movePosition(QTextCursor::MoveOperation operation, QTextCurso
 
 void KoTextEditor::newLine()
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Line Break"));
+    d->updateState(KoTextEditorPrivate::Custom, i18n("Line Break"));
     if (d->caret.hasSelection())
         d->deleteInlineObjects();
     KoTextDocument koDocument(d->document);
@@ -1249,7 +1249,7 @@ void KoTextEditor::newLine()
 
     d->caret.clearSelection();
 
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 int KoTextEditor::position() const
@@ -1328,14 +1328,14 @@ bool KoTextEditor::isBidiDocument() const
 
 void KoTextEditor::beginEditBlock()
 {
-    d->updateState(KoTextEditor::Private::Custom);
+    d->updateState(KoTextEditorPrivate::Custom);
     d->caret.beginEditBlock();
 }
 
 void KoTextEditor::endEditBlock()
 {
     d->caret.endEditBlock();
-    d->updateState(KoTextEditor::Private::NoOp);
+    d->updateState(KoTextEditorPrivate::NoOp);
 }
 
 void KoTextEditor::finishedLoading()

@@ -35,7 +35,7 @@
 #include <QTextDocument>
 #include <QTimer>
 
-class KoTextEditor::Private
+class KoTextEditorPrivate
 {
 public:
     enum State {
@@ -46,9 +46,9 @@ public:
         Custom
     };
 
-    explicit Private(KoTextEditor *qq, QTextDocument *document);
+    explicit KoTextEditorPrivate(KoTextEditor *qq, QTextDocument *document);
 
-    ~Private() {}
+    ~KoTextEditorPrivate() {}
 
     void documentCommandAdded();
     void updateState(State newState, QString title = QString());
