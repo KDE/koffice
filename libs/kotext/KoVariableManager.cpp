@@ -18,7 +18,7 @@
  */
 #include "KoVariableManager.h"
 #include "KoInlineTextObjectManager.h"
-#include "KoNamedVariable.h"
+#include "KoNamedVariable_p.h"
 
 class KoVariableManagerPrivate
 {

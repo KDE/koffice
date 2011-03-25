@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoNamedVariable.h"
+#include "KoNamedVariable_p.h"
 #include "KoInlineTextObjectManager.h"
 #include <KoProperties.h>
 
