@@ -517,7 +517,7 @@ void TextTool::showChangeTip()
     KoTextEditor *textEditor = m_textEditor.data();
     if (!textEditor || !m_changeTipCursorPos || !m_changeTracker->displayChanges())
         return;
-    QTextCursor c(m_textShapeData->document());
+    QTextCursor c(textEditor->document());
     c.setPosition(m_changeTipCursorPos);
     if (m_changeTracker && m_changeTracker->containsInlineChanges(c.charFormat())) {
         KoChangeTrackerElement *element = m_changeTracker->elementById(c.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt());
