@@ -20,7 +20,7 @@
 #ifndef KOREPLACESTRATEGY_H
 #define KOREPLACESTRATEGY_H
 
-#include "KoFindStrategyBase.h"
+#include "KoFindStrategyBase_p.h"
 
 class QWidget;
 class KReplaceDialog;

@@ -20,7 +20,7 @@
 #ifndef KOFINDSTRATEGY_H
 #define KOFINDSTRATEGY_H
 
-#include "KoFindStrategyBase.h"
+#include "KoFindStrategyBase_p.h"
 
 class QWidget;
 
