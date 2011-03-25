@@ -195,17 +195,17 @@ public slots:
      */
     void insertTable(int rows, int columns);
 
-     /** 
+     /**
      * Insert a table row above the current cursor position (if in a table).
      */
     void insertTableRowAbove();
 
-     /** 
+     /**
      * Insert a table row below the current cursor position (if in a table).
      */
     void insertTableRowBelow();
 
-     /** 
+     /**
      * Insert a table column to the left of the current cursor position (if in a table).
      */
     void insertTableColumnLeft();

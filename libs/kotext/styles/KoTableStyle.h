@@ -96,7 +96,7 @@ public:
     bool breakBefore();
     void setBreakAfter(bool on);
     bool breakAfter();
-    
+
     void setCollapsingBorderModel(bool on);
     bool collapsingBorderModel();
 

@@ -76,14 +76,14 @@ void DeleteTableRowCommand::redo()
                 m_deletedStyles.append(carsManager.rowStyle(i));
             }
             carsManager.removeRows(m_selectionRow, m_selectionRowSpan);
-    
+
             m_table->removeRows(m_selectionRow, m_selectionRowSpan);
         } else {
             for (int i=0; i < m_table->columns(); i++) {
                 QTextTableCellFormat cellFormat = m_table->cellAt(m_selectionRow, i).format().toTableCellFormat();
                 cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, m_changeId);
                 m_table->cellAt(m_selectionRow, i).setFormat(cellFormat);
-            }    
+            }
         }
     }
 }

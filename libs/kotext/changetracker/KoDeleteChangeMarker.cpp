@@ -134,7 +134,7 @@ void KoDeleteChangeMarker::saveOdf(KoShapeSavingContext &context)
     } else {
         change.setChangeFormat(KoGenChange::DELTAXML);
     }
-    
+
     QString changeName;
     KoTextSharedSavingData *sharedData = 0;
     if (context.sharedData(KOTEXT_SHARED_SAVING_ID)) {
@@ -142,8 +142,8 @@ void KoDeleteChangeMarker::saveOdf(KoShapeSavingContext &context)
         if (!sharedData) {
             kWarning(32500) << "There is no KoTextSharedSavingData in the context. This should not be the case";
             return;
-        }   
-    }   
+        }
+    }
     d->changeTracker->saveInlineChange(d->id, change);
     change.addChildElement("deleteChangeXml", d->deleteChangeXml);
     changeName = sharedData->genChanges().insert(change);

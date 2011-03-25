@@ -71,7 +71,7 @@ void DeleteTableColumnCommand::redo()
             m_selectionColumn = cell.column();
             m_selectionColumnSpan = 1;
         }
-        
+
         if (!m_changeId) {
             m_table->removeColumns(m_selectionColumn, m_selectionColumnSpan);
 
@@ -84,7 +84,7 @@ void DeleteTableColumnCommand::redo()
                 QTextTableCellFormat cellFormat = m_table->cellAt(i, m_selectionColumn).format().toTableCellFormat();
                 cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, m_changeId);
                 m_table->cellAt(i, m_selectionColumn).setFormat(cellFormat);
-            }    
+            }
         }
     }
 }

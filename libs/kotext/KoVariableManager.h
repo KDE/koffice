@@ -42,7 +42,7 @@ class KoVariableManagerPrivate;
  */
 class KOTEXT_EXPORT KoVariableManager : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
     /// constructor
     explicit KoVariableManager(KoInlineTextObjectManager *inlineObjectManager);
@@ -89,7 +89,7 @@ public:
     QList<QString> variables() const;
 
 signals:
-	void valueChanged();
+    void valueChanged();
 
 private:
     KoVariableManagerPrivate * const d;

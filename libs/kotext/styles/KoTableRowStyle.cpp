@@ -339,6 +339,6 @@ void KoTableRowStyle::saveOdf(KoGenStyle &style)
         } else if (key == KoTableRowStyle::BreakAfter) {
             if (breakAfter())
                 style.addProperty("fo:break-after", "page", KoGenStyle::ParagraphType);
-        } 
+        }
 */
 }

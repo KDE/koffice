@@ -256,7 +256,7 @@ static bool isPositionLessThan(KoChangeTrackerElement *element1, KoChangeTracker
 }
 
 void InsertDeleteChangesCommand::insertDeleteChanges()
-{   
+{
     int numAddedChars = 0;
     QVector<KoChangeTrackerElement *> elementVector;
     KoTextDocument(m_document).changeTracker()->getDeletedChanges(elementVector);

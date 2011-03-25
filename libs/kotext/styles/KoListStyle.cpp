@@ -210,10 +210,10 @@ void KoListStyle::saveOdf(KoGenStyle &style)
 
 bool KoListStyle::isNumberingStyle(int style)
 {
-    return !(style == KoListStyle::SquareItem || style == KoListStyle::DiscItem 
-             || style == KoListStyle::CircleItem || style == KoListStyle::BoxItem 
-             || style == KoListStyle::RhombusItem || style == KoListStyle::HeavyCheckMarkItem 
-             || style == KoListStyle::BallotXItem || style == KoListStyle::RightArrowItem 
+    return !(style == KoListStyle::SquareItem || style == KoListStyle::DiscItem
+             || style == KoListStyle::CircleItem || style == KoListStyle::BoxItem
+             || style == KoListStyle::RhombusItem || style == KoListStyle::HeavyCheckMarkItem
+             || style == KoListStyle::BallotXItem || style == KoListStyle::RightArrowItem
              || style == KoListStyle::RightArrowHeadItem);
 }
 

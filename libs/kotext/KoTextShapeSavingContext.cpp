@@ -26,7 +26,7 @@
 KoTextShapeSavingContext::KoTextShapeSavingContext(KoXmlWriter &xmlWriter, KoGenStyles& mainStyles,
         KoEmbeddedDocumentSaver& embeddedSaver, KoGenChanges& changes)
         : KoShapeSavingContext(xmlWriter, mainStyles, embeddedSaver)
-	, m_changes(changes)
+    , m_changes(changes)
 {
 }
 

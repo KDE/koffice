@@ -285,7 +285,7 @@ int KoChangeTracker::createDuplicateChangeId(int existingChangeId)
 {
     int duplicateChangeId = d->changeId;
     d->changeId++;
-    
+
     d->duplicateIds.insert(existingChangeId, duplicateChangeId);
 
     return duplicateChangeId;
@@ -293,7 +293,7 @@ int KoChangeTracker::createDuplicateChangeId(int existingChangeId)
 
 bool KoChangeTracker::isDuplicateChangeId(int duplicateChangeId)
 {
-    bool isDuplicate = d->duplicateIds.values().contains(duplicateChangeId);    
+    bool isDuplicate = d->duplicateIds.values().contains(duplicateChangeId);
     return isDuplicate;
 }
 
@@ -309,7 +309,7 @@ int KoChangeTracker::originalChangeId(int duplicateChangeId)
         }
         ++i;
     }
-    
+
     return originalChangeId;
 }
 
@@ -505,12 +505,12 @@ QTextDocumentFragment KoChangeTracker::generateDeleteFragment(QTextCursor &curso
     int changeId = marker->changeId();
     QTextCursor editCursor(cursor);
     QTextDocument *document = cursor.document();
-    
+
     QTextDocument deletedDocument;
     QTextDocument deleteCursor(&deletedDocument);
 
     KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(document->documentLayout());
-    
+
     for (int i = cursor.anchor();i <= cursor.position(); i++) {
         if (document->characterAt(i) == QChar::ObjectReplacementCharacter) {
             editCursor.setPosition(i+1);
@@ -565,20 +565,20 @@ QTextDocumentFragment KoChangeTracker::generateDeleteFragment(QTextCursor &curso
                 editCursor.mergeBlockFormat(blockFormat);
             }
         }
-        
+
         if (editCursor.currentTable()) {
             QTextTableFormat tableFormat = editCursor.currentTable()->format();
             tableFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
             editCursor.currentTable()->setFormat(tableFormat);
         }
-        
+
         if (currentBlock != startBlock) {
             QTextBlockFormat blockFormat;
             blockFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
             editCursor.mergeBlockFormat(blockFormat);
         }
     }
-    
+
     return cursor.selection();
 }
 
@@ -601,7 +601,7 @@ bool KoChangeTracker::checkListDeletion(QTextList *list, QTextCursor &cursor)
             return false;
         }
     }
-} 
+}
 
 void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker)
 {
@@ -611,7 +611,7 @@ void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMa
     tempCursor.insertFragment(fragment);
 
     bool deletedListItem = false;
-    
+
     for (QTextBlock currentBlock = tempDoc.begin(); currentBlock != tempDoc.end(); currentBlock = currentBlock.next()) {
         //This condition is for the work-around for a Qt behaviour
         //Even if a delete ends at the end of a table, the fragment will have an empty block after the table
@@ -619,7 +619,7 @@ void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMa
         if ((currentBlock.next() == tempDoc.end()) && (currentBlock.text().length() == 0) && (QTextCursor(currentBlock.previous()).currentTable())) {
             continue;
         }
-        
+
         tempCursor.setPosition(currentBlock.position());
         QTextList *textList = tempCursor.currentList();
         int outlineLevel = currentBlock.blockFormat().property(KoParagraphStyle::OutlineLevel).toInt();
@@ -636,7 +636,7 @@ void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMa
             //Even though we are already in a list, the QTextList* of the current block is differnt from that of the previous block
             //Also the levels of the list-items ( previous and current ) are the same.
             //This can happen only when two lists are merged together without any intermediate content.
-            //So we need to create a new list. 
+            //So we need to create a new list.
             currentList = NULL;
         }
 
@@ -649,9 +649,9 @@ void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMa
                 else
                     listId = textList->format().property(KoListStyle::ListId).toULongLong();
                 KoListStyle *style = marker->getDeletedListStyle(listId);
-                currentList = new KoList(cursor.document(), style);    
+                currentList = new KoList(cursor.document(), style);
             }
-            
+
             deletedListItem = currentBlock.blockFormat().property(KoDeleteChangeMarker::DeletedListItem).toBool();
             if (deletedListItem && currentBlock != tempDoc.begin()) {
                 // Found a deleted list item in the fragment. So insert a new list-item
@@ -675,7 +675,7 @@ void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMa
                         KoList *headingList = KoTextDocument(cursor.document()).headingList();
                         currentList = headingList;
                     }
-                } 
+                }
                 currentList->add(cursor.block(), deletedListItemLevel);
             }
         } else if (tempCursor.currentTable()) {
@@ -698,7 +698,7 @@ void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMa
             cursor.setPosition(cursor.position() + 1);
             continue;
         } else {
-            // This block does not contain a list. So no special work here. 
+            // This block does not contain a list. So no special work here.
             if ((currentBlock != tempDoc.begin()) && !(QTextCursor(currentBlock.previous()).currentTable())) {
                 cursor.insertBlock(currentBlock.blockFormat(), currentBlock.charFormat());
             }
@@ -721,7 +721,7 @@ void KoChangeTracker::insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMa
             currentList->add(cursor.block(), KoList::level(currentBlock));
         }
         /********************************************************************************************************************/
-        
+
         // Finally insert all the contents of the block into the main document.
         QTextBlock::iterator it;
         for (it = currentBlock.begin(); !(it.atEnd()); ++it) {
@@ -764,7 +764,7 @@ int KoChangeTracker::fragmentLength(QTextDocumentFragment fragment)
             if ((currentBlock != tempDoc.begin()) && !(QTextCursor(currentBlock.previous()).currentTable()))
                 length += 1; //For the Block Separator
         }
-        
+
 
         QTextBlock::iterator it;
         for (it = currentBlock.begin(); !(it.atEnd()); ++it) {
@@ -773,7 +773,7 @@ int KoChangeTracker::fragmentLength(QTextDocumentFragment fragment)
                 length += currentFragment.text().length();
         }
     }
-    
+
     return length;
 }
 

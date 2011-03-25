@@ -50,7 +50,7 @@ class KOTEXT_EXPORT KoChangeTracker : public QObject
 {
     Q_OBJECT
 public:
-    
+
     typedef enum
     {
         ODF_1_2 = 0,
@@ -76,7 +76,7 @@ public:
 
     void setFormatChangeInformation(int formatChangeId, KoFormatChangeInformation *formatInformation);
     KoFormatChangeInformation *formatChangeInformation(int formatChangeId);
-    
+
     KoChangeTrackerElement* elementById(int id);
     bool removeById(int id, bool freeMemory = true);
 
@@ -123,7 +123,7 @@ public:
     void setAuthorName(const QString &authorName);
 
     ChangeSaveFormat saveFormat();
-    void setSaveFormat(ChangeSaveFormat saveFormat); 
+    void setSaveFormat(ChangeSaveFormat saveFormat);
 private:
     static bool checkListDeletion(QTextList *list, QTextCursor &cursor);
     class Private;

@@ -629,12 +629,12 @@ void KoListLevelProperties::saveOdf(KoXmlWriter *writer) const
         writer->addAttribute("text:min-label-distance", toPoint(minimumDistance()));
 
     writer->endElement(); // list-level-properties
-    
+
     writer->startElement("style:text-properties", false);
 
     if (d->stylesPrivate.contains(KoListStyle::BulletColor))
         writer->addAttribute("fo:color",bulletColor().name());
-    
+
     writer->endElement(); // text-properties
 
 //   kDebug(32500) << "Key KoListStyle::ListItemPrefix :" << d->stylesPrivate.value(KoListStyle::ListItemPrefix);

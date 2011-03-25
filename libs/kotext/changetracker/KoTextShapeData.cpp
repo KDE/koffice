@@ -257,7 +257,7 @@ static bool isPositionLessThan(KoChangeTrackerElement *element1, KoChangeTracker
 }
 
 void InsertDeleteChangesCommand::insertDeleteChanges()
-{   
+{
     int numAddedChars = 0;
     QVector<KoChangeTrackerElement *> elementVector;
     KoTextDocument(m_document).changeTracker()->getDeletedChanges(elementVector);
@@ -313,8 +313,8 @@ void RemoveDeleteChangesCommand::removeDeleteChanges()
             caret.setPosition(deletePosition + deletedLength, QTextCursor::KeepAnchor);
             caret.removeSelectedText();
             numDeletedChars += KoChangeTracker::fragmentLength(element->getDeleteData());
-        }   
-    }   
+        }
+    }
 }
 
 void KoTextShapeData::saveOdf(KoShapeSavingContext &context, KoDocumentRdfBase *rdfData, int from, int to) const

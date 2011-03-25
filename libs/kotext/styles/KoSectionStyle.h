@@ -86,9 +86,9 @@ public:
     qreal rightMargin() const;
 
     KoText::Direction textProgressionDirection() const;
-    
+
     void setTextProgressionDirection(KoText::Direction dir);
-    
+
     /// See similar named method on QTextBlockFormat
     void setBackground(const QBrush &brush);
     /// See similar named method on QTextBlockFormat

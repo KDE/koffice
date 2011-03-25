@@ -64,7 +64,7 @@ void KoDeletedColumnData::storeDeletedCells(QTextTable *table)
 {
     QTextCursor cursor(table->document());
     int rows = table->rows();
-    
+
     for (int i=0; i < rows; i++) {
         KoDeletedCellData *cellData = new KoDeletedCellData(i, column_number);
         QTextTableCell cell = table->cellAt(i, column_number);

@@ -407,7 +407,7 @@ void KoTableStyle::loadOdfProperties(KoStyleStack &styleStack)
         hasMarginRight = true;
     }
 
-    // keep table with next paragraph? 
+    // keep table with next paragraph?
     if (styleStack.hasProperty(KoXmlNS::fo, "keep-with-next")) {
         // OASIS spec says it's "auto"/"always", not a boolean.
         QString val = styleStack.property(KoXmlNS::fo, "keep-with-next");
@@ -444,8 +444,8 @@ void KoTableStyle::loadOdfProperties(KoStyleStack &styleStack)
         }
         setBackground(brush);
     }
-    
-    // border-model 
+
+    // border-model
     if (styleStack.hasProperty(KoXmlNS::table, "border-model")) {
         // OASIS spec says it's "auto"/"always", not a boolean.
         QString val = styleStack.property(KoXmlNS::table, "border-model");
