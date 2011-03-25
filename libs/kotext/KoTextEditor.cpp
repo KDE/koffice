@@ -40,6 +40,10 @@
 #include "styles/KoTableColumnStyle.h"
 #include "styles/KoTableRowStyle.h"
 #include "KoTableColumnAndRowStyleManager.h"
+#include "commands/DeleteTableRowCommand.h"
+#include "commands/DeleteTableColumnCommand.h"
+#include "commands/InsertTableRowCommand.h"
+#include "commands/InsertTableColumnCommand.h"
 
 #include <KLocale>
 #include <KUndoStack>
@@ -991,217 +995,87 @@ void KoTextEditor::insertTable(int rows, int columns)
 
 void KoTextEditor::insertTableRowAbove()
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Insert Row Above"));
-
     QTextTable *table = d->caret.currentTable();
-
     if (table) {
-        KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(table);
-        QTextTableCell cell = table->cellAt(d->caret);
-        int row = cell.row();
-        table->insertRows(row, 1);
-        carsManager.insertRows(row, 1, carsManager.rowStyle(row));
-    
+        int changeId = 0;
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
-            int changeId;
             QString title(i18n("Insert Row Above"));
             changeId = changeTracker->getInsertChangeId(title, 0);
-            for (int i=0; i < table->columns(); i++) {
-                QTextTableCellFormat cellFormat = table->cellAt(row, i).format().toTableCellFormat();
-                cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
-                table->cellAt(row, i).setFormat(cellFormat);
-            }
         }
+        addCommand(new InsertTableRowCommand(this, table, false, changeId));
     }
-
-    d->updateState(KoTextEditor::Private::NoOp);
 }
 
 void KoTextEditor::insertTableRowBelow()
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Insert Row Below"));
-
     QTextTable *table = d->caret.currentTable();
-
     if (table) {
-        KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(table);
-        QTextTableCell cell = table->cellAt(d->caret);
-        int row = cell.row() +1;
-        if (row == table->rows()) {
-            table->appendRows(1);
-            carsManager.setRowStyle(row, carsManager.rowStyle(row-1));
-
-            // Copy the cells styles.
-            for (int col = 0; col < table->columns(); ++col) {
-                QTextTableCell cell = table->cellAt(row-1, col);
-                QTextCharFormat format = cell.format();
-                cell = table->cellAt(row, col);
-                cell.setFormat(format);
-            }
-        } else {
-            table->insertRows(row, 1);
-            carsManager.insertRows(row, 1, carsManager.rowStyle(row-1));
-        }
-
+        int changeId = 0;
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
-            int changeId;
             QString title(i18n("Insert Row Above"));
             changeId = changeTracker->getInsertChangeId(title, 0);
-            for (int i=0; i < table->columns(); i++) {
-                QTextTableCellFormat cellFormat = table->cellAt(row, i).format().toTableCellFormat();
-                cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
-                table->cellAt(row, i).setFormat(cellFormat);
-            }
         }
+        addCommand(new InsertTableRowCommand(this, table, true, changeId));
     }
-
-    d->updateState(KoTextEditor::Private::NoOp);
 }
 
 void KoTextEditor::insertTableColumnLeft()
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Insert Column Left"));
-
     QTextTable *table = d->caret.currentTable();
-
     if (table) {
-        KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(table);
-        QTextTableCell cell = table->cellAt(d->caret);
-        int column = cell.column();
-        table->insertColumns(column, 1);
-        carsManager.insertColumns(column, 1, carsManager.columnStyle(column));
-
+        int changeId = 0;
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
-            int changeId;
             QString title(i18n("Insert Column Left"));
             changeId = changeTracker->getInsertChangeId(title, 0);
-            for (int i=0; i < table->rows(); i++) {
-                QTextTableCellFormat cellFormat = table->cellAt(i, column).format().toTableCellFormat();
-                cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
-                table->cellAt(i, column).setFormat(cellFormat);
-            }
         }
+        addCommand(new InsertTableColumnCommand(this, table, false, changeId));
     }
-
-    d->updateState(KoTextEditor::Private::NoOp);
 }
 
 void KoTextEditor::insertTableColumnRight()
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Insert Column Right"));
-
     QTextTable *table = d->caret.currentTable();
-
     if (table) {
-        KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(table);
-        QTextTableCell cell = table->cellAt(d->caret);
-        int column = cell.column()+1;
-        if (column == table->columns()) {
-            table->appendColumns(1);
-            carsManager.setColumnStyle(column, carsManager.columnStyle(column-1));
-            // Copy the cells style. for the bottomright cell which Qt doesn't
-            QTextTableCell cell = table->cellAt(table->rows()-1, column-1);
-            QTextCharFormat format = cell.format();
-            cell = table->cellAt(table->rows()-1, column);
-            cell.setFormat(format);
-        } else {
-            table->insertColumns(column, 1);
-            carsManager.insertColumns(column, 1, carsManager.columnStyle(column-1));
-        }
-
+        int changeId = 0;
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
-            int changeId;
             QString title(i18n("Insert Column Right"));
             changeId = changeTracker->getInsertChangeId(title, 0);
-            for (int i=0; i < table->rows(); i++) {
-                QTextTableCellFormat cellFormat = table->cellAt(i, column).format().toTableCellFormat();
-                cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
-                table->cellAt(i, column).setFormat(cellFormat);
-            }
         }
+        addCommand(new InsertTableColumnCommand(this, table, true, changeId));
     }
-
-    d->updateState(KoTextEditor::Private::NoOp);
 }
 
 void KoTextEditor::deleteTableColumn()
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Delete Column"));
-
     QTextTable *table = d->caret.currentTable();
-
     if (table) {
-        KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(table);
-        int selectionRow;
-        int selectionColumn;
-        int selectionRowSpan;
-        int selectionColumnSpan;
-        if(d->caret.hasComplexSelection()) {
-            d->caret.selectedTableCells(&selectionRow, &selectionRowSpan, &selectionColumn, &selectionColumnSpan);
-        } else {
-            QTextTableCell cell = table->cellAt(d->caret);
-            selectionColumn = cell.column();
-            selectionColumnSpan = 1;
-        }
-
+        int changeId = 0;
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Delete Column"));
-            int changeId = changeTracker->getDeleteChangeId(title, QTextDocumentFragment(), 0);
-            for (int i=0; i < table->rows(); i++) {
-                QTextTableCellFormat cellFormat = table->cellAt(i, selectionColumn).format().toTableCellFormat();
-                cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
-                table->cellAt(i, selectionColumn).setFormat(cellFormat);
-            }
-        } else {
-            table->removeColumns(selectionColumn, selectionColumnSpan);
-            carsManager.removeColumns(selectionColumn, selectionColumnSpan);
+            changeId = changeTracker->getDeleteChangeId(title, QTextDocumentFragment(), 0);
         }
-    }
 
-    d->updateState(KoTextEditor::Private::NoOp);
+        addCommand(new DeleteTableColumnCommand(this, table, changeId));
+    }
 }
 
 void KoTextEditor::deleteTableRow()
 {
-    d->updateState(KoTextEditor::Private::Custom, i18n("Delete Row"));
-
     QTextTable *table = d->caret.currentTable();
-
     if (table) {
-        KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(table);
-        int selectionRow;
-        int selectionColumn;
-        int selectionRowSpan;
-        int selectionColumnSpan;
-        if(d->caret.hasComplexSelection()) {
-            d->caret.selectedTableCells(&selectionRow, &selectionRowSpan, &selectionColumn, &selectionColumnSpan);
-        } else {
-            QTextTableCell cell = table->cellAt(d->caret);
-            selectionRow = cell.row();
-            selectionRowSpan = 1;
-        }
-
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
+        int changeId = 0;
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Delete Row"));
-            int changeId = changeTracker->getDeleteChangeId(title, QTextDocumentFragment(), 0);
-            for (int i=0; i < table->columns(); i++) {
-                QTextTableCellFormat cellFormat = table->cellAt(selectionRow, i).format().toTableCellFormat();
-                cellFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
-                table->cellAt(selectionRow, i).setFormat(cellFormat);
-            }
-        } else {
-            table->removeRows(selectionRow, selectionRowSpan);
-            carsManager.removeRows(selectionRow, selectionRowSpan);
+            changeId = changeTracker->getDeleteChangeId(title, QTextDocumentFragment(), 0);
         }
+        addCommand(new DeleteTableRowCommand(this, table, changeId));
     }
-
-    d->updateState(KoTextEditor::Private::NoOp);
 }
 
 void KoTextEditor::mergeTableCells()
