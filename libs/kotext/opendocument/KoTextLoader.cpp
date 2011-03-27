@@ -42,7 +42,7 @@
 #include <KoTableColumnAndRowStyleManager.h>
 #include <KoTextAnchor.h>
 #include <KoTextBlockData.h>
-#include "KoTextDebug.h"
+#include "KoTextDebug_p.h"
 #include "KoTextDocument.h"
 #include <KoTextDocumentLayout.h>
 #include <KoTextShapeData.h>

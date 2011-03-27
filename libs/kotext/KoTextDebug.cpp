@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoTextDebug.h"
+#include "KoTextDebug_p.h"
 
 #include <QTextDocument>
 #include <QTextDocumentFragment>

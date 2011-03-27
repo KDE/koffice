@@ -44,7 +44,7 @@
 #include <KoGenStyles.h>
 #include <KoXmlNS.h>
 #include <kcomponentdata.h>
-#include <KoTextDebug.h>
+#include <KoTextDebug_p.h>
 #include <KoListStyle.h>
 #include <KoTableStyle.h>
 #include <KoTableCellStyle.h>
