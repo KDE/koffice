@@ -20,7 +20,7 @@
 #include <QTextTableCellFormat>
 #include <QTextDocumentFragment>
 
-#include "KoDeletedCellData.h"
+#include "KoDeletedCellData_p.h"
 
 KoDeletedCellData::KoDeletedCellData(int rowNumber, int columnNumber)
 {

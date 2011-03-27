@@ -23,7 +23,7 @@
 #include <QTextTable>
 
 #include "KoDeletedRowData.h"
-#include "KoDeletedCellData.h"
+#include "KoDeletedCellData_p.h"
 
 #include <styles/KoTableRowStyle.h>
 
