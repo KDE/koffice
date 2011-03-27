@@ -21,30 +21,23 @@
 
 //KOffice includes
 #include "kotext_export.h"
-//#include "KoChangeTrackerElement.h"
-class KoChangeTrackerElement;
-class KoFormatChangeInformation;
 
 #include <KoGenChange.h>
 #include <KoGenChanges.h>
 
-class KoXmlElement;
-
-//KDE includes
-
 //Qt includes
 #include <QObject>
 #include <QMetaType>
-//#include <QTextCharFormat>
-//#include <QTextFormat>
+
 class QTextCursor;
 class QTextFormat;
-//#include <QHash>
 class QString;
-//#include <QList>
 class QTextDocumentFragment;
 class QTextList;
 class KoDeleteChangeMarker;
+class KoXmlElement;
+class KoChangeTrackerElement;
+class KoFormatChangeInformation;
 
 class KOTEXT_EXPORT KoChangeTracker : public QObject
 {
