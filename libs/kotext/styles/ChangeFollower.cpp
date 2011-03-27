@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "ChangeFollower.h"
+#include "ChangeFollower_p.h"
 #include "KoCharacterStyle.h"
 #include "KoParagraphStyle.h"
 
@@ -129,5 +129,5 @@ void ChangeFollower::processUpdates(const QMap<int, QList<int> > &changedStyles)
     cursor.endEditBlock();
 }
 
-#include <ChangeFollower.moc>
+#include <ChangeFollower_p.moc>
 

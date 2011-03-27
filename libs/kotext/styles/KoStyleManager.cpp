@@ -32,7 +32,7 @@
 #include "KoTableRowStyle.h"
 #include "KoTableCellStyle.h"
 #include "KoSectionStyle.h"
-#include "ChangeFollower.h"
+#include "ChangeFollower_p.h"
 #include "KoTextDocument.h"
 
 #include <KoGenStyle.h>
