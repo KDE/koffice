@@ -42,6 +42,7 @@
 
 #ifdef SHOULD_BUILD_RDF
 #include "KoTextRdfCore.h"
+#include "KoTextRdfCore_p.h"
 #endif
 
 KoTextDrag::KoTextDrag()

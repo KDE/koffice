@@ -18,6 +18,7 @@
 */
 
 #include "KoTextRdfCore.h"
+#include "KoTextRdfCore_p.h"
 #include <kdebug.h>
 #include <KoStoreDevice.h>
 #include <KoXmlWriter.h>

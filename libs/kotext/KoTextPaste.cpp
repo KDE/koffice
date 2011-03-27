@@ -31,6 +31,7 @@
 #include <kdebug.h>
 #ifdef SHOULD_BUILD_RDF
 #include "KoTextRdfCore.h"
+#include "KoTextRdfCore_p.h"
 #endif
 
 class KoTextPaste::Private

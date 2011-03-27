@@ -42,33 +42,6 @@ class KoXmlWriter;
 namespace KoTextRdfCore
 {
 /**
- * Save the RDF selected triples from model to the store with the
- * given RDF/XML filename
- */
-bool saveRdf(Soprano::Model *model, Soprano::StatementIterator triples,
-        KoStore *store, KoXmlWriter *manifestWriter, const QString &fileName);
-
-/**
- * Save the given RDF model to the manifest.rdf file. The idmap is used
- * to maintain xml:id links from the model so they will be valid with
- * the content.xml that generated the idmap.
- */
-bool createAndSaveManifest(Soprano::Model *model,
-        const QMap<QString, QString> &idmap, KoStore *store, KoXmlWriter *manifestWriter);
-
-/**
- * Load the manifest.rdf file from the ODF container store
- * into the model provided.
- */
-bool loadManifest(KoStore *store, Soprano::Model *model);
-
-/**
- * For debugging, dump the model to kDebug() along with the
- * given header message for identification
- */
-void dumpModel(const QString &message, Soprano::Model *model);
-
-/**
  * Load an Rdf linked list of statements. See saveList() for the
  * details. The return value of loadList() is the equivalent of
  * dataBNodeList in saveList().
@@ -135,7 +108,7 @@ void KOTEXT_EXPORT removeStatementsIfTheyExist(Soprano::Model *model,
  */
 Soprano::Node KOTEXT_EXPORT getObject(Soprano::Model *model, Soprano::Node s, Soprano::Node p);
 
-QString KOTEXT_EXPORT getProperty(Soprano::Model* m,
+QString KOTEXT_EXPORT getProperty(Soprano::Model *m,
                                   Soprano::Node subj,
                                   Soprano::Node pred,
                                   const QString &defval);
