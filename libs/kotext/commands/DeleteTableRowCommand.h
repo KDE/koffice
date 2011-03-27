@@ -17,9 +17,19 @@
  * along with this library; see the file COPYING.LIB.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.*/
-
 #ifndef DELETETABLEROWCOMMAND_H
 #define DELETETABLEROWCOMMAND_H
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the KoText API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
 
 #include <QUndoStack>
 #include <QList>
@@ -47,4 +57,4 @@ private:
     QList<KoTableRowStyle> m_deletedStyles;
 };
 
-#endif // DELETETABLEROWCOMMAND_H
+#endif

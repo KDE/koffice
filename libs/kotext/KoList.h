@@ -97,4 +97,4 @@ private:
 Q_DECLARE_METATYPE(KoList*)
 Q_DECLARE_METATYPE(QList<KoList*>)
 
-#endif // KOLIST_H
+#endif

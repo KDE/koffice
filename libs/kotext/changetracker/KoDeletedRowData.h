@@ -16,9 +16,19 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-
 #ifndef __KODELETEDROWDATA_H__
 #define __KODELETEDROWDATA_H__
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the KoText API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
 
 #include <QVector>
 
@@ -28,27 +38,27 @@ class QTextTable;
 
 class KoDeletedRowData
 {
-    public:
-        KoDeletedRowData(int rowNumber);
+public:
+    KoDeletedRowData(int rowNumber);
 
-        ~KoDeletedRowData();
+    ~KoDeletedRowData();
 
-        int rowNumber();
+    int rowNumber();
 
-        void setRowStyle(KoTableRowStyle *rowStyle);
+    void setRowStyle(KoTableRowStyle *rowStyle);
 
-        KoTableRowStyle *rowStyle();
+    KoTableRowStyle *rowStyle();
 
-        const QVector<KoDeletedCellData *>& deletedCells();
+    const QVector<KoDeletedCellData *>& deletedCells();
 
-        void storeDeletedCells(QTextTable *table);
+    void storeDeletedCells(QTextTable *table);
 
-    private:
-        int row_number;
+private:
+    int row_number;
 
-        KoTableRowStyle *row_style;
+    KoTableRowStyle *row_style;
 
-        QVector<KoDeletedCellData *> deleted_cells;
+    QVector<KoDeletedCellData *> deleted_cells;
 };
 
 #endif

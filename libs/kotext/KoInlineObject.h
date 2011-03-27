@@ -21,9 +21,8 @@
 
 #include "kotext_export.h"
 
-#include <QVariant>
-
 class QTextDocument;
+class QVariant;
 class QTextCharFormat;
 class QTextInlineObject;
 class QPaintDevice;

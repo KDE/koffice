@@ -24,18 +24,17 @@
 
 #include "KoText.h"
 #include "kotext_export.h"
+#include <KoXmlReaderForward.h>
 
 #include <QObject>
 #include <QVector>
 #include <QString>
 #include <QVariant>
 
-struct Property;
 class QTextTable;
 class KoStyleStack;
 class KoGenStyle;
 class KoGenStyles;
-#include "KoXmlReaderForward.h"
 class KoOdfLoadingContext;
 
 /**

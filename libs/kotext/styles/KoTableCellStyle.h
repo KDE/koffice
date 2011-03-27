@@ -26,6 +26,8 @@
 #include "KoText.h"
 #include "kotext_export.h"
 
+#include <KoXmlReaderForward.h>
+
 #include <QColor>
 
 #include <QObject>
@@ -34,7 +36,6 @@
 #include <QVariant>
 #include <QPainter>
 
-struct Property;
 class QTextTableCell;
 class QRectF;
 class QPainter;
@@ -42,7 +43,6 @@ class QPainterPath;
 class KoStyleStack;
 class KoGenStyle;
 class KoGenStyles;
-#include "KoXmlReaderForward.h"
 class KoOdfLoadingContext;
 class KoTableCellStylePrivate;
 

@@ -168,5 +168,4 @@ private:
 
 Q_DECLARE_METATYPE(KoTableColumnAndRowStyleManager)
 
-#endif // KOTABLECOLUMNANDROWSTYLEMANAGER_H
-
+#endif

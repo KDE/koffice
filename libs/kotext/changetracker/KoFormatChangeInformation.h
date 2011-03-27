@@ -16,59 +16,75 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-
 #ifndef __FORMAT_CHANGE_INFORMATION_H__
 #define __FORMAT_CHANGE_INFORMATION_H__
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the KoText API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
+
+
 #include <QTextCharFormat>
 #include <QTextBlockFormat>
 
-class KoFormatChangeInformation {
-    public:
-        typedef enum {
-            eTextStyleChange = 0,
-            eParagraphStyleChange,
-            eListItemNumberingChange
-        }FormatChangeType;
+class KoFormatChangeInformation
+{
+public:
+    typedef enum {
+        eTextStyleChange = 0,
+        eParagraphStyleChange,
+        eListItemNumberingChange
+    } FormatChangeType;
 
     KoFormatChangeInformation::FormatChangeType formatType();
 
-    protected:
-        KoFormatChangeInformation(KoFormatChangeInformation::FormatChangeType formatChangeType);
+protected:
+    KoFormatChangeInformation(KoFormatChangeInformation::FormatChangeType formatChangeType);
 
-    private:
-        KoFormatChangeInformation::FormatChangeType formatChangeType;
+private:
+    KoFormatChangeInformation::FormatChangeType formatChangeType;
 };
 
-class KoTextStyleChangeInformation:public KoFormatChangeInformation {
-    public:
-        KoTextStyleChangeInformation(KoFormatChangeInformation::FormatChangeType formatChangeType = KoFormatChangeInformation::eTextStyleChange);
-        void setPreviousCharFormat(QTextCharFormat &oldFormat);
-        QTextCharFormat& previousCharFormat();
-    private:
-        QTextCharFormat previousTextCharFormat;
+class KoTextStyleChangeInformation : public KoFormatChangeInformation
+{
+public:
+    KoTextStyleChangeInformation(KoFormatChangeInformation::FormatChangeType formatChangeType = KoFormatChangeInformation::eTextStyleChange);
+    void setPreviousCharFormat(QTextCharFormat &oldFormat);
+    QTextCharFormat& previousCharFormat();
+private:
+    QTextCharFormat previousTextCharFormat;
 };
 
-class KoParagraphStyleChangeInformation:public KoTextStyleChangeInformation {
-    public:
-        KoParagraphStyleChangeInformation();
-        void setPreviousBlockFormat(QTextBlockFormat &oldFormat);
-        QTextBlockFormat& previousBlockFormat();
-    private:
-        QTextBlockFormat previousTextBlockFormat;
+class KoParagraphStyleChangeInformation : public KoTextStyleChangeInformation
+{
+public:
+    KoParagraphStyleChangeInformation();
+    void setPreviousBlockFormat(QTextBlockFormat &oldFormat);
+    QTextBlockFormat& previousBlockFormat();
+private:
+    QTextBlockFormat previousTextBlockFormat;
 };
 
-class KoListItemNumChangeInformation:public KoFormatChangeInformation {
-    public:
-        typedef enum {
-            eNumberingRestarted = 0,
-            eRestartRemoved
-        }ListItemNumChangeType;
-        KoListItemNumChangeInformation(KoListItemNumChangeInformation::ListItemNumChangeType eSubType);
-        void setPreviousStartNumber(int oldRestartNumber);
-        KoListItemNumChangeInformation::ListItemNumChangeType listItemNumChangeType();
-        int previousStartNumber();
-    private:
-        int oldStartNumber;
-        KoListItemNumChangeInformation::ListItemNumChangeType eSubType;
+class KoListItemNumChangeInformation : public KoFormatChangeInformation
+{
+public:
+    typedef enum {
+        eNumberingRestarted = 0,
+        eRestartRemoved
+    } ListItemNumChangeType;
+    KoListItemNumChangeInformation(KoListItemNumChangeInformation::ListItemNumChangeType eSubType);
+    void setPreviousStartNumber(int oldRestartNumber);
+    KoListItemNumChangeInformation::ListItemNumChangeType listItemNumChangeType();
+    int previousStartNumber();
+private:
+    int oldStartNumber;
+    KoListItemNumChangeInformation::ListItemNumChangeType eSubType;
 };
 #endif

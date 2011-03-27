@@ -16,9 +16,19 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-
 #ifndef KOFINDSTRATEGYBASE_H
 #define KOFINDSTRATEGYBASE_H
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the KoText API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
 
 class KFindDialog;
 class QTextCursor;
@@ -59,4 +69,4 @@ public:
     virtual bool foundMatch(QTextCursor & cursor, FindDirection * findDirection) = 0;
 };
 
-#endif /* KOFINDSTRATEGYBASE_H */
+#endif

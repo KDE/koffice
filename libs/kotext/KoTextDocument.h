@@ -166,4 +166,4 @@ private:
     QTextDocument *m_document;
 };
 
-#endif // KOTEXTDOCUMENT_H
+#endif

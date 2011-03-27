@@ -49,11 +49,11 @@ public:
      *
      * @return changes (tracked)
      */
-    KoGenChanges & changes();
+    KoGenChanges &changes();
 
 
 private:
-    KoGenChanges& m_changes;
+    KoGenChanges &m_changes;
 };
 
-#endif // KOTEXTSHAPESAVINGCONTEXT_H
+#endif

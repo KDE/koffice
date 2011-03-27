@@ -75,4 +75,4 @@ private:
     QMimeData * m_mimeData;
 };
 
-#endif /* KOTEXTDRAG_H */
+#endif
