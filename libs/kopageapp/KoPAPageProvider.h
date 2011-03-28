@@ -20,7 +20,7 @@
 #ifndef KOPAPAGEPROVIDER_H
 #define KOPAPAGEPROVIDER_H
 
-#include <KoPageProvider.h>
+#include <KoPageProvider_p.h>
 #include "kopageapp_export.h"
 
 class KoPAPageBase;

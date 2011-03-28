@@ -63,7 +63,7 @@ struct Finalizer {
 #include <KoTextEditor.h>
 #include <KoTextPage.h>
 #include <KoTextShapeContainerModel.h>
-#include <KoPageProvider.h>
+#include <KoPageProvider_p.h> // the exported class for the showcase hack
 #include <KoViewConverter.h>
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>
