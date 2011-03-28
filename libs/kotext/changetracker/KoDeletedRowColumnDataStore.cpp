@@ -18,7 +18,7 @@
  */
 
 #include "KoDeletedRowColumnDataStore_p.h"
-#include "KoDeletedRowData.h"
+#include "KoDeletedRowData_p.h"
 #include "KoDeletedColumnData_p.h"
 
 KoDeletedRowColumnDataStore::KoDeletedRowColumnDataStore()
