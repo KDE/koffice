@@ -42,7 +42,7 @@
 #include "commands/DeleteTableRowCommand_p.h"
 #include "commands/DeleteTableColumnCommand_p.h"
 #include "commands/InsertTableRowCommand.h"
-#include "commands/InsertTableColumnCommand.h"
+#include "commands/InsertTableColumnCommand_p.h"
 
 #include <KLocale>
 #include <KUndoStack>
