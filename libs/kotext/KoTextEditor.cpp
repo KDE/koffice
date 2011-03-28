@@ -40,7 +40,7 @@
 #include "styles/KoTableRowStyle.h"
 #include "KoTableColumnAndRowStyleManager.h"
 #include "commands/DeleteTableRowCommand.h"
-#include "commands/DeleteTableColumnCommand.h"
+#include "commands/DeleteTableColumnCommand_p.h"
 #include "commands/InsertTableRowCommand.h"
 #include "commands/InsertTableColumnCommand.h"
 
