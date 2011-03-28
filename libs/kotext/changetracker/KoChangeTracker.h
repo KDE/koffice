@@ -55,17 +55,17 @@ public:
     ~KoChangeTracker();
 
     void setRecordChanges(bool enabled);
-    bool recordChanges();
+    bool recordChanges() const;
 
     void setDisplayChanges(bool enabled);
-    bool displayChanges();
+    bool displayChanges() const;
 
     /// returns the changeId of the changeElement registered for the given change. This may be an already existing changeId, if the change could be merged.
-    int changeId(QString &title, KoGenChange::Type type, QTextCursor &selection, QTextFormat &newFormat, int prevCharChangeId, int nextCharChangeId);
+    int changeId(const QString &title, KoGenChange::Type type, const QTextCursor &selection, const QTextFormat &newFormat, int prevCharChangeId, int nextCharChangeId);
 
-    int formatChangeId(QString title, QTextFormat &format, QTextFormat &prevFormat, int existingChangeId);
-    int insertChangeId(QString title, int existingChangeId);
-    int deleteChangeId(QString title, QTextDocumentFragment selection, int existingChangeId);
+    int formatChangeId(const QString &title, const QTextFormat &format, const QTextFormat &prevFormat, int existingChangeId);
+    int insertChangeId(const QString &title, int existingChangeId);
+    int deleteChangeId(const QString &title, const QTextDocumentFragment &selection, int existingChangeId);
 
     void setFormatChangeInformation(int formatChangeId, KoFormatChangeInformation *formatInformation);
     KoFormatChangeInformation *formatChangeInformation(int formatChangeId);
@@ -74,27 +74,27 @@ public:
     bool removeById(int id, bool freeMemory = true);
 
     //Returns all the deleted changes
-    int deletedChanges(QVector<KoChangeTrackerElement *>& deleteVector);
+    int deletedChanges(QVector<KoChangeTrackerElement *> &deleteVector) const;
 
-    int allChangeIds(QVector<int>& changesVector);
+    int allChangeIds(QVector<int> &changesVector) const;
 
     bool containsInlineChanges(const QTextFormat &format);
-    int mergeableId(KoGenChange::Type type, QString &title, int existingId);
+    int mergeableId(KoGenChange::Type type, const QString &title, int existingId) const;
 
-    const QColor &insertionBgColor();
-    const QColor &deletionBgColor();
-    const QColor &formatChangeBgColor();
+    QColor insertionBgColor() const;
+    QColor deletionBgColor() const;
+    QColor formatChangeBgColor() const;
 
-    void setInsertionBgColor(const QColor &bgColor);
+    void setInsertionBgColor(const QColor &color);
     void setDeletionBgColor(const QColor &color);
     void setFormatChangeBgColor(const QColor &color);
 
     /// Splits a changeElement. This creates a duplicate changeElement with a different changeId. This is used because we do not support overlapping change regions. The function returns the new changeId
     int split(int changeId);
 
-    bool isParent(int testedParentId, int testedChildId);
+    bool isParent(int testedParentId, int testedChildId) const;
     void setParent(int child, int parent);
-    int parent(int changeId);
+    int parent(int changeId) const;
 
     int createDuplicateChangeId(int existingChangeId);
     bool isDuplicateChangeId(int duplicateChangeId);
@@ -112,13 +112,13 @@ public:
     static void insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker);
     static int fragmentLength(QTextDocumentFragment fragment);
 
-    const QString& authorName();
+    QString authorName();
     void setAuthorName(const QString &authorName);
 
     ChangeSaveFormat saveFormat();
     void setSaveFormat(ChangeSaveFormat saveFormat);
+
 private:
-    static bool checkListDeletion(QTextList *list, QTextCursor &cursor);
     class Private;
     Private* const d;
 };
