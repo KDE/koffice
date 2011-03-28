@@ -107,28 +107,28 @@ void ShowChangesCommand::enableDisableStates(bool showChanges)
 
 bool isPositionLessThan(KoChangeTrackerElement *element1, KoChangeTrackerElement *element2)
 {
-    return element1->getDeleteChangeMarker()->position() < element2->getDeleteChangeMarker()->position();
+    return element1->deleteChangeMarker()->position() < element2->deleteChangeMarker()->position();
 }
 
 void ShowChangesCommand::insertDeletedChanges()
 {
     int numAddedChars = 0;
     QVector<KoChangeTrackerElement *> elementVector;
-    KoTextDocument(m_textEditor->document()).changeTracker()->getDeletedChanges(elementVector);
+    KoTextDocument(m_textEditor->document()).changeTracker()->deletedChanges(elementVector);
     qSort(elementVector.begin(), elementVector.end(), isPositionLessThan);
 
     foreach (KoChangeTrackerElement *element, elementVector) {
-        if (element->isValid() && element->getDeleteChangeMarker()) {
-            QTextCursor caret(element->getDeleteChangeMarker()->document());
-            caret.setPosition(element->getDeleteChangeMarker()->position() + numAddedChars +  1);
+        if (element->isValid() && element->deleteChangeMarker()) {
+            QTextCursor caret(element->deleteChangeMarker()->document());
+            caret.setPosition(element->deleteChangeMarker()->position() + numAddedChars +  1);
             QTextCharFormat f = caret.charFormat();
-            f.setProperty(KoCharacterStyle::ChangeTrackerId, element->getDeleteChangeMarker()->changeId());
+            f.setProperty(KoCharacterStyle::ChangeTrackerId, element->deleteChangeMarker()->changeId());
             f.clearProperty(KoCharacterStyle::InlineInstanceId);
             caret.setCharFormat(f);
             int insertPosition = caret.position();
-            KoChangeTracker::insertDeleteFragment(caret, element->getDeleteChangeMarker());
-            checkAndAddAnchoredShapes(insertPosition, KoChangeTracker::fragmentLength(element->getDeleteData()));
-            numAddedChars += KoChangeTracker::fragmentLength(element->getDeleteData());
+            KoChangeTracker::insertDeleteFragment(caret, element->deleteChangeMarker());
+            checkAndAddAnchoredShapes(insertPosition, KoChangeTracker::fragmentLength(element->deleteData()));
+            numAddedChars += KoChangeTracker::fragmentLength(element->deleteData());
         }
     }
 }
@@ -168,20 +168,20 @@ void ShowChangesCommand::removeDeletedChanges()
 {
     int numDeletedChars = 0;
     QVector<KoChangeTrackerElement *> elementVector;
-    m_changeTracker->getDeletedChanges(elementVector);
+    m_changeTracker->deletedChanges(elementVector);
     qSort(elementVector.begin(), elementVector.end(), isPositionLessThan);
 
     foreach(KoChangeTrackerElement *element, elementVector) {
-        if (element->isValid() && element->getDeleteChangeMarker()) {
-            QTextCursor caret(element->getDeleteChangeMarker()->document());
+        if (element->isValid() && element->deleteChangeMarker()) {
+            QTextCursor caret(element->deleteChangeMarker()->document());
             QTextCharFormat f;
-            int deletePosition = element->getDeleteChangeMarker()->position() + 1 - numDeletedChars;
+            int deletePosition = element->deleteChangeMarker()->position() + 1 - numDeletedChars;
             caret.setPosition(deletePosition);
-            int deletedLength = KoChangeTracker::fragmentLength(element->getDeleteData());
+            int deletedLength = KoChangeTracker::fragmentLength(element->deleteData());
             caret.setPosition(deletePosition + deletedLength, QTextCursor::KeepAnchor);
-            checkAndRemoveAnchoredShapes(deletePosition, KoChangeTracker::fragmentLength(element->getDeleteData()));
+            checkAndRemoveAnchoredShapes(deletePosition, KoChangeTracker::fragmentLength(element->deleteData()));
             caret.removeSelectedText();
-            numDeletedChars += KoChangeTracker::fragmentLength(element->getDeleteData());
+            numDeletedChars += KoChangeTracker::fragmentLength(element->deleteData());
         }
     }
 }

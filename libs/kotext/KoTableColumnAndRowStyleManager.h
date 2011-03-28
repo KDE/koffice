@@ -52,7 +52,7 @@ public:
     virtual ~KoTableColumnAndRowStyleManager();
 
     /// Convenience function to get the KoTableColumnAndRowStyleManager for a table (or create one)
-    static KoTableColumnAndRowStyleManager getManager(QTextTable *table);
+    static KoTableColumnAndRowStyleManager manager(QTextTable *table);
 
     /// Constructor
     KoTableColumnAndRowStyleManager(const KoTableColumnAndRowStyleManager &rhs);

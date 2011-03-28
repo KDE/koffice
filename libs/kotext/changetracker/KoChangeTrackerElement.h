@@ -54,35 +54,35 @@ public:
     bool isValid() const;
 
     void setChangeType(KoGenChange::Type type);
-    KoGenChange::Type getChangeType() const;
+    KoGenChange::Type changeType() const;
 
     void setChangeTitle(const QString& title);
-    QString getChangeTitle() const;
+    QString changeTitle() const;
 
     void setChangeFormat(const QTextFormat &format);
-    QTextFormat getChangeFormat() const;
+    QTextFormat changeFormat() const;
 
     void setPrevFormat(const QTextFormat &prevFormat);
-    QTextFormat getPrevFormat() const;
+    QTextFormat prevFormat() const;
 
     bool hasCreator() const;
     void setCreator(const QString& creator);
-    QString getCreator() const;
+    QString creator() const;
 
     bool hasDate() const;
     void setDate(const QString& date);
-    QString getDate() const;
+    QString date() const;
 
     bool hasExtraMetaData()const;
     void setExtraMetaData(const QString& metaData);
-    QString getExtraMetaData() const;
+    QString extraMetaData() const;
 
     bool hasDeleteData() const;
     void setDeleteData(const QTextDocumentFragment& fragment);
-    QTextDocumentFragment getDeleteData() const;
+    QTextDocumentFragment deleteData() const;
 
     void setDeleteChangeMarker(KoDeleteChangeMarker *marker);
-    KoDeleteChangeMarker *getDeleteChangeMarker();
+    KoDeleteChangeMarker *deleteChangeMarker();
 
 private:
     class Private;

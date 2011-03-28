@@ -140,7 +140,7 @@ void TableLayout::startNewTableRect(QPointF position, qreal parentWidth, int fro
     tableRect.columnWidths.resize(m_table->columns());
 
     // Get the column and row style manager.
-    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(m_table);
+    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
 
     // Column widths.
     qreal availableWidth = tableWidth; // Width available for columns.
@@ -227,7 +227,7 @@ void TableLayout::layoutRow(int row)
     QTextTableFormat tableFormat = m_table->format();
 
     // Get the column and row style manager.
-    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(m_table);
+    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
 
     /*
      * Implementation Note:
@@ -317,7 +317,7 @@ void TableLayout::drawBackground(QPainter *painter, const KoTextDocumentLayout::
     }
     painter->save();
     // Draw table background and row backgrounds
-    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(m_table);
+    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
     foreach (TableRect tRect, m_tableLayoutData->m_tableRects) {
         painter->fillRect(tRect.rect, m_table->format().background());
         QRectF tableRect = tRect.rect;
@@ -379,15 +379,15 @@ void TableLayout::drawBackground(QPainter *painter, const KoTextDocumentLayout::
                 }
 
                 if (changeElement && changeElement->isEnabled()) {
-                    switch(changeElement->getChangeType()) {
+                    switch(changeElement->changeType()) {
                         case KoGenChange::InsertChange:
-                            painter->fillRect(cellBoundingRect(tableCell), changeTracker->getInsertionBgColor());
+                            painter->fillRect(cellBoundingRect(tableCell), changeTracker->insertionBgColor());
                         break;
                         case KoGenChange::FormatChange:
-                            painter->fillRect(cellBoundingRect(tableCell), changeTracker->getFormatChangeBgColor());
+                            painter->fillRect(cellBoundingRect(tableCell), changeTracker->formatChangeBgColor());
                         break;
                         case KoGenChange::DeleteChange:
-                            painter->fillRect(cellBoundingRect(tableCell), changeTracker->getDeletionBgColor());
+                            painter->fillRect(cellBoundingRect(tableCell), changeTracker->deletionBgColor());
                         break;
                     }
                 }

@@ -266,7 +266,7 @@ void KoTextLoader::Private::openChangeRegion(const KoXmlElement& element)
     } else {
     }
 
-    int changeId = changeTracker->getLoadedChangeId(id);
+    int changeId = changeTracker->loadedChangeId(id);
     if (!changeId)
         return;
 
@@ -366,7 +366,7 @@ void KoTextLoader::Private::closeChangeRegion(const KoXmlElement& element)
     } else {
     }
 
-    changeId = changeTracker->getLoadedChangeId(id);
+    changeId = changeTracker->loadedChangeId(id);
     splitStack(changeId);
 }
 
@@ -527,7 +527,7 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
                         usedParagraph = false;
                     } else if (d->changeTracker && localName == "change") {
                         QString id = tag.attributeNS(KoXmlNS::text, "change-id");
-                        int changeId = d->changeTracker->getLoadedChangeId(id);
+                        int changeId = d->changeTracker->loadedChangeId(id);
                         if (changeId) {
                             if (d->changeStack.count() && (d->changeStack.top() != changeId))
                                 d->changeTracker->setParent(changeId, d->changeStack.top());
@@ -913,7 +913,7 @@ void KoTextLoader::Private::copyTagEnd(const KoXmlElement &element, QTextStream 
 void KoTextLoader::loadDeleteChangeOutsidePorH(QString id, QTextCursor &cursor)
 {
     int startPosition = cursor.position();
-    int changeId = d->changeTracker->getLoadedChangeId(id);
+    int changeId = d->changeTracker->loadedChangeId(id);
 
     if (changeId) {
         KoChangeTrackerElement *changeElement = d->changeTracker->elementById(changeId);
@@ -1507,7 +1507,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
             d->closeChangeRegion(ts);
         } else if (isTextNS && localName == "change") {
             QString id = ts.attributeNS(KoXmlNS::text, "change-id");
-            int changeId = d->changeTracker->getLoadedChangeId(id);
+            int changeId = d->changeTracker->loadedChangeId(id);
             if (changeId) {
                 if (d->changeStack.count() && (d->changeStack.top() != changeId))
                     d->changeTracker->setParent(changeId, d->changeStack.top());
@@ -1718,7 +1718,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
 void KoTextLoader::loadDeleteChangeWithinPorH(QString id, QTextCursor &cursor)
 {
     int startPosition = cursor.position();
-    int changeId = d->changeTracker->getLoadedChangeId(id);
+    int changeId = d->changeTracker->loadedChangeId(id);
     int loadedTags = 0;
 
     QTextCharFormat charFormat = cursor.block().charFormat();
@@ -1755,7 +1755,7 @@ void KoTextLoader::loadDeleteChangeWithinPorH(QString id, QTextCursor &cursor)
         cursor.mergeCharFormat(format);
 
         //Get the QTextDocumentFragment from the selection and store it in the changeElement
-        QTextDocumentFragment deletedFragment = KoChangeTracker::generateDeleteFragment(cursor, changeElement->getDeleteChangeMarker());
+        QTextDocumentFragment deletedFragment = KoChangeTracker::generateDeleteFragment(cursor, changeElement->deleteChangeMarker());
         changeElement->setDeleteData(deletedFragment);
 
         //Now Remove this from the document. Will be re-inserted whenever changes have to be seen
@@ -1804,7 +1804,7 @@ void KoTextLoader::loadMerge(const KoXmlElement &element, QTextCursor &cursor)
 KoDeleteChangeMarker * KoTextLoader::Private::insertDeleteChangeMarker(QTextCursor &cursor, const QString &id)
 {
     KoDeleteChangeMarker *retMarker = NULL;
-    int changeId = changeTracker->getLoadedChangeId(id);
+    int changeId = changeTracker->loadedChangeId(id);
     if (changeId) {
         KoDeleteChangeMarker *deleteChangemarker = new KoDeleteChangeMarker(changeTracker);
         deleteChangemarker->setChangeId(changeId);
@@ -1826,7 +1826,7 @@ bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QStri
 {
     bool result = false;
 
-    int changeId = changeTracker->getLoadedChangeId(id);
+    int changeId = changeTracker->loadedChangeId(id);
     if (changeId) {
         KoChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
         //Check if this change is at the beginning of the block and if there is a
@@ -1854,9 +1854,9 @@ bool KoTextLoader::Private::checkForDeleteMerge(QTextCursor &cursor, const QStri
         }
 
         if ((prevChangeId) && (prevChangeId == changeId)) {
-            QPair<int, int> deleteMarkerRange = deleteChangeMarkerMap.value(changeElement->getDeleteChangeMarker());
+            QPair<int, int> deleteMarkerRange = deleteChangeMarkerMap.value(changeElement->deleteChangeMarker());
             deleteMarkerRange.second = cursor.position();
-            deleteChangeMarkerMap.insert(changeElement->getDeleteChangeMarker(), deleteMarkerRange);
+            deleteChangeMarkerMap.insert(changeElement->deleteChangeMarker(), deleteMarkerRange);
             result = true;
         }
     }
@@ -1880,7 +1880,7 @@ void KoTextLoader::Private::processDeleteChange(QTextCursor &cursor)
         cursor.setPosition(endPosition, QTextCursor::KeepAnchor);
 
         //Get the QTextDocumentFragment from the selection and store it in the changeElement
-        QTextDocumentFragment deletedFragment = KoChangeTracker::generateDeleteFragment(cursor, changeElement->getDeleteChangeMarker());
+        QTextDocumentFragment deletedFragment = KoChangeTracker::generateDeleteFragment(cursor, changeElement->deleteChangeMarker());
         changeElement->setDeleteData(deletedFragment);
 
         cursor.removeSelectedText();
@@ -2271,7 +2271,7 @@ void KoTextLoader::markBlocksAsInserted(QTextCursor& cursor,int from, const QStr
     QTextBlock startBlock = document->findBlock(from);
     QTextBlock endBlock = document->findBlock(to);
 
-    int changeId = d->changeTracker->getLoadedChangeId(id);
+    int changeId = d->changeTracker->loadedChangeId(id);
 
     QTextBlockFormat format;
     format.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);

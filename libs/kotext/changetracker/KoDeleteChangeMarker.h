@@ -80,7 +80,7 @@ public:
 
     void setDeleteChangeXml(QString &deleteChangeXml);
 
-    KoListStyle *getDeletedListStyle(KoListStyle::ListIdType id);
+    KoListStyle *deletedListStyle(KoListStyle::ListIdType id);
 
     void setDeletedListStyle(KoListStyle::ListIdType, KoListStyle *style);
 

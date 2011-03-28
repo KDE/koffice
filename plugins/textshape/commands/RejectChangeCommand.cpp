@@ -59,7 +59,7 @@ void RejectChangeCommand::redo()
     if (m_first) {
         m_first = false;
         QTextCursor cursor(m_document);
-        if (m_changeTracker->elementById(m_changeId)->getChangeType() == KoGenChange::InsertChange) {
+        if (m_changeTracker->elementById(m_changeId)->changeType() == KoGenChange::InsertChange) {
             QList<QPair<int, int> >::const_iterator it;
             QStack<QPair<int, int> > deleteRanges;
             for (it = m_changeRanges.constBegin(); it != m_changeRanges.constEnd(); it++) {
@@ -72,13 +72,13 @@ void RejectChangeCommand::redo()
                 cursor.deleteChar();
             }
         }
-        else if (m_changeTracker->elementById(m_changeId)->getChangeType() == KoGenChange::FormatChange) {
+        else if (m_changeTracker->elementById(m_changeId)->changeType() == KoGenChange::FormatChange) {
             QList<QPair<int, int> >::const_iterator it;
             for (it = m_changeRanges.constBegin(); it != m_changeRanges.constEnd(); it++) {
                 cursor.setPosition((*it).first);
                 cursor.setPosition((*it).second, QTextCursor::KeepAnchor);
                 int changeId = cursor.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
-                QTextCharFormat format = m_changeTracker->elementById(m_changeId)->getPrevFormat().toCharFormat();
+                QTextCharFormat format = m_changeTracker->elementById(m_changeId)->prevFormat().toCharFormat();
                 if (changeId == m_changeId) {
                     if (int parentChangeId = m_changeTracker->parent(m_changeId)) {
                         format.setProperty(KoCharacterStyle::ChangeTrackerId, parentChangeId);
@@ -89,7 +89,7 @@ void RejectChangeCommand::redo()
                     cursor.setCharFormat(format);
                 }
             }
-        } else if (m_changeTracker->elementById(m_changeId)->getChangeType() == KoGenChange::DeleteChange){
+        } else if (m_changeTracker->elementById(m_changeId)->changeType() == KoGenChange::DeleteChange){
             QList<QPair<int, int> >::const_iterator it;
             QStack<QPair<int, int> > deleteRanges;
             for (it = m_changeRanges.constBegin(); it != m_changeRanges.constEnd(); it++) {

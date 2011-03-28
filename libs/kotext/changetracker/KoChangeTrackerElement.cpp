@@ -115,7 +115,7 @@ void KoChangeTrackerElement::setChangeType(KoGenChange::Type type)
     d->type = type;
 }
 
-KoGenChange::Type KoChangeTrackerElement::getChangeType() const
+KoGenChange::Type KoChangeTrackerElement::changeType() const
 {
     return d->type;
 }
@@ -125,7 +125,7 @@ void KoChangeTrackerElement::setChangeTitle(const QString& title)
     d->title = title;
 }
 
-QString KoChangeTrackerElement::getChangeTitle() const
+QString KoChangeTrackerElement::changeTitle() const
 {
     return d->title;
 }
@@ -135,7 +135,7 @@ void KoChangeTrackerElement::setChangeFormat(const QTextFormat &format)
     d->changeFormat = format;
 }
 
-QTextFormat KoChangeTrackerElement::getChangeFormat() const
+QTextFormat KoChangeTrackerElement::changeFormat() const
 {
     return d->changeFormat;
 }
@@ -145,7 +145,7 @@ void KoChangeTrackerElement::setPrevFormat(const QTextFormat &format)
     d->prevFormat = format;
 }
 
-QTextFormat KoChangeTrackerElement::getPrevFormat() const
+QTextFormat KoChangeTrackerElement::prevFormat() const
 {
     return d->prevFormat;
 }
@@ -160,7 +160,7 @@ void KoChangeTrackerElement::setCreator(const QString& creator)
     d->creator = creator;
 }
 
-QString KoChangeTrackerElement::getCreator() const
+QString KoChangeTrackerElement::creator() const
 {
     return d->creator;
 }
@@ -175,7 +175,7 @@ void KoChangeTrackerElement::setDate(const QString& date)
     d->date = date;
 }
 
-QString KoChangeTrackerElement::getDate() const
+QString KoChangeTrackerElement::date() const
 {
     return d->date;
 }
@@ -190,7 +190,7 @@ void KoChangeTrackerElement::setExtraMetaData(const QString& metaData)
     d->extraMetaData = metaData;
 }
 
-QString KoChangeTrackerElement::getExtraMetaData() const
+QString KoChangeTrackerElement::extraMetaData() const
 {
     return d->extraMetaData;
 }
@@ -205,7 +205,7 @@ void KoChangeTrackerElement::setDeleteData(const QTextDocumentFragment& fragment
     d->deleteFragment = fragment;
 }
 
-QTextDocumentFragment KoChangeTrackerElement::getDeleteData() const
+QTextDocumentFragment KoChangeTrackerElement::deleteData() const
 {
     return d->deleteFragment;
 }
@@ -215,7 +215,7 @@ void KoChangeTrackerElement::setDeleteChangeMarker(KoDeleteChangeMarker *marker)
     d->marker = marker;
 }
 
-KoDeleteChangeMarker *KoChangeTrackerElement::getDeleteChangeMarker()
+KoDeleteChangeMarker *KoChangeTrackerElement::deleteChangeMarker()
 {
     return d->marker;
 }

@@ -47,7 +47,7 @@ InsertTableRowCommand::InsertTableRowCommand(KoTextEditor *te, QTextTable *t, bo
 
 void InsertTableRowCommand::undo()
 {
-    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(m_table);
+    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
 
     carsManager.removeRows(m_row, 1);
 
@@ -56,7 +56,7 @@ void InsertTableRowCommand::undo()
 
 void InsertTableRowCommand::redo()
 {
-    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(m_table);
+    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
     if (!m_first) {
         carsManager.insertRows(m_row, 1, m_style);
         QUndoCommand::redo();

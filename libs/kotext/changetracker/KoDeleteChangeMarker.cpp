@@ -163,7 +163,7 @@ void KoDeleteChangeMarker::setDeletedListStyle(KoListStyle::ListIdType id, KoLis
     d->deletedListStyles.insert(id, style);
 }
 
-KoListStyle *KoDeleteChangeMarker::getDeletedListStyle(KoListStyle::ListIdType id)
+KoListStyle *KoDeleteChangeMarker::deletedListStyle(KoListStyle::ListIdType id)
 {
     return d->deletedListStyles.value(id);
 }

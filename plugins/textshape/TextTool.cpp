@@ -523,21 +523,21 @@ void TextTool::showChangeTip()
         KoChangeTrackerElement *element = m_changeTracker->elementById(c.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt());
         if (element->isEnabled()) {
             QString changeType;
-            if (element->getChangeType() == KoGenChange::InsertChange)
+            if (element->changeType() == KoGenChange::InsertChange)
                 changeType = i18n("Insertion");
-            else if (element->getChangeType() == KoGenChange::DeleteChange)
+            else if (element->changeType() == KoGenChange::DeleteChange)
                 changeType = i18n("Deletion");
             else
                 changeType = i18n("Formatting");
 
             QString change = "<p align=center style=\'white-space:pre\' ><b>" + changeType + "</b><br/>";
 
-            QString date = element->getDate();
+            QString date = element->date();
             //Remove the T which separates the Data and Time.
             date[10] = ' ';
-            change += element->getCreator() + " " + date + "</p>";
+            change += element->creator() + " " + date + "</p>";
 
-            int toolTipWidth = QFontMetrics(QToolTip::font()).boundingRect(element->getDate() + ' ' + element->getCreator()).width();
+            int toolTipWidth = QFontMetrics(QToolTip::font()).boundingRect(element->date() + ' ' + element->creator()).width();
             m_changeTipPos.setX(m_changeTipPos.x() - toolTipWidth/2);
 
             QToolTip::showText(m_changeTipPos,change,canvas()->canvasWidget());
@@ -1935,18 +1935,18 @@ void TextTool::configureChangeTracking()
 {
     if (m_changeTracker) {
         QColor insertionBgColor, deletionBgColor, formatChangeBgColor;
-        insertionBgColor = m_changeTracker->getInsertionBgColor();
-        deletionBgColor = m_changeTracker->getDeletionBgColor();
-        formatChangeBgColor = m_changeTracker->getFormatChangeBgColor();
+        insertionBgColor = m_changeTracker->insertionBgColor();
+        deletionBgColor = m_changeTracker->deletionBgColor();
+        formatChangeBgColor = m_changeTracker->formatChangeBgColor();
         QString authorName = m_changeTracker->authorName();
         KoChangeTracker::ChangeSaveFormat changeSaveFormat = m_changeTracker->saveFormat();
 
         ChangeConfigureDialog changeDialog(insertionBgColor, deletionBgColor, formatChangeBgColor, authorName, changeSaveFormat, canvas()->canvasWidget());
 
         if (changeDialog.exec()) {
-            m_changeTracker->setInsertionBgColor(changeDialog.getInsertionBgColor());
-            m_changeTracker->setDeletionBgColor(changeDialog.getDeletionBgColor());
-            m_changeTracker->setFormatChangeBgColor(changeDialog.getFormatChangeBgColor());
+            m_changeTracker->setInsertionBgColor(changeDialog.insertionBgColor());
+            m_changeTracker->setDeletionBgColor(changeDialog.deletionBgColor());
+            m_changeTracker->setFormatChangeBgColor(changeDialog.formatChangeBgColor());
             m_changeTracker->setAuthorName(changeDialog.authorName());
             m_changeTracker->setSaveFormat(changeDialog.saveFormat());
             writeConfig();
@@ -2286,9 +2286,9 @@ void TextTool::writeConfig()
 {
     if (m_changeTracker) {
         KConfigGroup interface = KoGlobal::kofficeConfig()->group("Change-Tracking");
-        interface.writeEntry("insertionBgColor", m_changeTracker->getInsertionBgColor());
-        interface.writeEntry("deletionBgColor", m_changeTracker->getDeletionBgColor());
-        interface.writeEntry("formatChangeBgColor", m_changeTracker->getFormatChangeBgColor());
+        interface.writeEntry("insertionBgColor", m_changeTracker->insertionBgColor());
+        interface.writeEntry("deletionBgColor", m_changeTracker->deletionBgColor());
+        interface.writeEntry("formatChangeBgColor", m_changeTracker->formatChangeBgColor());
         KUser user(KUser::UseRealUserID);
         QString changeAuthor = m_changeTracker->authorName();
         if (changeAuthor != user.property(KUser::FullName).toString()) {

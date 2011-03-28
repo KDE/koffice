@@ -54,9 +54,9 @@ class ChangeConfigureDialog:public QDialog
         ChangeConfigureDialog(const QColor& insertionColor, const QColor& deletionColor, const QColor& formatChangeColor, const QString& authorName, KoChangeTracker::ChangeSaveFormat changeSaveFormat, QWidget *parent=NULL);
         ~ChangeConfigureDialog();
         
-        const QColor& getInsertionBgColor();
-        const QColor& getDeletionBgColor();
-        const QColor& getFormatChangeBgColor();
+        const QColor& insertionBgColor();
+        const QColor& deletionBgColor();
+        const QColor& formatChangeBgColor();
         const QString authorName();
         KoChangeTracker::ChangeSaveFormat saveFormat();
 

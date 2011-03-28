@@ -61,11 +61,11 @@ public:
     bool displayChanges();
 
     /// returns the changeId of the changeElement registered for the given change. This may be an already existing changeId, if the change could be merged.
-    int getChangeId(QString &title, KoGenChange::Type type, QTextCursor &selection, QTextFormat &newFormat, int prevCharChangeId, int nextCharChangeId);
+    int changeId(QString &title, KoGenChange::Type type, QTextCursor &selection, QTextFormat &newFormat, int prevCharChangeId, int nextCharChangeId);
 
-    int getFormatChangeId(QString title, QTextFormat &format, QTextFormat &prevFormat, int existingChangeId);
-    int getInsertChangeId(QString title, int existingChangeId);
-    int getDeleteChangeId(QString title, QTextDocumentFragment selection, int existingChangeId);
+    int formatChangeId(QString title, QTextFormat &format, QTextFormat &prevFormat, int existingChangeId);
+    int insertChangeId(QString title, int existingChangeId);
+    int deleteChangeId(QString title, QTextDocumentFragment selection, int existingChangeId);
 
     void setFormatChangeInformation(int formatChangeId, KoFormatChangeInformation *formatInformation);
     KoFormatChangeInformation *formatChangeInformation(int formatChangeId);
@@ -74,20 +74,20 @@ public:
     bool removeById(int id, bool freeMemory = true);
 
     //Returns all the deleted changes
-    int getDeletedChanges(QVector<KoChangeTrackerElement *>& deleteVector);
+    int deletedChanges(QVector<KoChangeTrackerElement *>& deleteVector);
 
     int allChangeIds(QVector<int>& changesVector);
 
     bool containsInlineChanges(const QTextFormat &format);
     int mergeableId(KoGenChange::Type type, QString &title, int existingId);
 
-    const QColor& getInsertionBgColor();
-    const QColor& getDeletionBgColor();
-    const QColor& getFormatChangeBgColor();
+    const QColor &insertionBgColor();
+    const QColor &deletionBgColor();
+    const QColor &formatChangeBgColor();
 
-    void setInsertionBgColor(const QColor& bgColor);
-    void setDeletionBgColor(const QColor& color);
-    void setFormatChangeBgColor(const QColor& color);
+    void setInsertionBgColor(const QColor &bgColor);
+    void setDeletionBgColor(const QColor &color);
+    void setFormatChangeBgColor(const QColor &color);
 
     /// Splits a changeElement. This creates a duplicate changeElement with a different changeId. This is used because we do not support overlapping change regions. The function returns the new changeId
     int split(int changeId);
@@ -105,8 +105,8 @@ public:
     /// Load/save methods
     bool saveInlineChange(int changeId, KoGenChange &change);
 
-    void loadOdfChanges(const KoXmlElement& element);
-    int getLoadedChangeId(QString odfId);
+    void loadOdfChanges(const KoXmlElement &element);
+    int loadedChangeId(QString odfId);
 
     static QTextDocumentFragment generateDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker);
     static void insertDeleteFragment(QTextCursor &cursor, KoDeleteChangeMarker *marker);

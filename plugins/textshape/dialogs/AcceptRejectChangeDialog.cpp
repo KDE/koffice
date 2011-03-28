@@ -24,9 +24,9 @@
 AcceptRejectChangeDialog::AcceptRejectChangeDialog(KoChangeTracker *changeTracker, int changeId)
 {
     ui.setupUi(this);
-    ui.authorNameLineEdit->setText(changeTracker->elementById(changeId)->getCreator());
-    ui.dateLineEdit->setText(changeTracker->elementById(changeId)->getDate());
-    KoGenChange::Type changeType = changeTracker->elementById(changeId)->getChangeType();
+    ui.authorNameLineEdit->setText(changeTracker->elementById(changeId)->creator());
+    ui.dateLineEdit->setText(changeTracker->elementById(changeId)->date());
+    KoGenChange::Type changeType = changeTracker->elementById(changeId)->changeType();
 
     if (changeType == KoGenChange::InsertChange) {
         ui.changeTypeLineEdit->setText(QString("Insertion"));

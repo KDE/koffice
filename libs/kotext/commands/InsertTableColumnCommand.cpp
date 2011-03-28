@@ -47,7 +47,7 @@ InsertTableColumnCommand::InsertTableColumnCommand(KoTextEditor *te, QTextTable 
 
 void InsertTableColumnCommand::undo()
 {
-    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(m_table);
+    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
 
     carsManager.removeColumns(m_column, 1);
 
@@ -56,7 +56,7 @@ void InsertTableColumnCommand::undo()
 
 void InsertTableColumnCommand::redo()
 {
-    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(m_table);
+    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
     if (!m_first) {
         carsManager.insertColumns(m_column, 1, m_style);
         QUndoCommand::redo();

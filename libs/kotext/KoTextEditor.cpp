@@ -385,12 +385,12 @@ void KoTextEditor::registerTrackedChange(QTextCursor &selection, KoGenChange::Ty
             KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
             if (!checker.atBlockStart()) {
                 int changeId = checker.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
-                if (changeId && changeTracker->elementById(changeId)->getChangeType() == changeType)
+                if (changeId && changeTracker->elementById(changeId)->changeType() == changeType)
                     idBefore = changeId;
             } else {
                 if (!checker.currentTable()) {
                     int changeId = checker.blockFormat().intProperty(KoCharacterStyle::ChangeTrackerId);
-                    if (changeId && changeTracker->elementById(changeId)->getChangeType() == changeType)
+                    if (changeId && changeTracker->elementById(changeId)->changeType() == changeType)
                         idBefore = changeId;
                 } else {
                     idBefore = checker.currentTable()->format().intProperty(KoCharacterStyle::ChangeTrackerId);
@@ -410,11 +410,11 @@ void KoTextEditor::registerTrackedChange(QTextCursor &selection, KoGenChange::Ty
             switch (changeType) {//TODO: this whole thing actually needs to be done like a visitor. If the selection contains several change regions, the parenting needs to be individualised.
                 case KoGenChange::InsertChange:
                     if (!changeId)
-                        changeId = KoTextDocument(d->document).changeTracker()->getInsertChangeId(title, 0);
+                        changeId = KoTextDocument(d->document).changeTracker()->insertChangeId(title, 0);
                 break;
                 case KoGenChange::FormatChange:
                     if (!changeId)
-                        changeId = KoTextDocument(d->document).changeTracker()->getFormatChangeId(title, format, prevFormat, 0);
+                        changeId = KoTextDocument(d->document).changeTracker()->formatChangeId(title, format, prevFormat, 0);
                 break;
                 case KoGenChange::DeleteChange:
                     //this should never be the case
@@ -965,7 +965,7 @@ void KoTextEditor::insertTable(int rows, int columns)
             changeId = changeTracker->mergeableId(KoGenChange::InsertChange, title, blockFormat.intProperty(KoCharacterStyle::ChangeTrackerId));
 
         if (!changeId)
-            changeId = KoTextDocument(d->document).changeTracker()->getInsertChangeId(title, 0);
+            changeId = KoTextDocument(d->document).changeTracker()->insertChangeId(title, 0);
 
         tableFormat.setProperty(KoCharacterStyle::ChangeTrackerId, changeId);
     }
@@ -1000,7 +1000,7 @@ void KoTextEditor::insertTableRowAbove()
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Insert Row Above"));
-            changeId = changeTracker->getInsertChangeId(title, 0);
+            changeId = changeTracker->insertChangeId(title, 0);
         }
         addCommand(new InsertTableRowCommand(this, table, false, changeId));
     }
@@ -1014,7 +1014,7 @@ void KoTextEditor::insertTableRowBelow()
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Insert Row Above"));
-            changeId = changeTracker->getInsertChangeId(title, 0);
+            changeId = changeTracker->insertChangeId(title, 0);
         }
         addCommand(new InsertTableRowCommand(this, table, true, changeId));
     }
@@ -1028,7 +1028,7 @@ void KoTextEditor::insertTableColumnLeft()
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Insert Column Left"));
-            changeId = changeTracker->getInsertChangeId(title, 0);
+            changeId = changeTracker->insertChangeId(title, 0);
         }
         addCommand(new InsertTableColumnCommand(this, table, false, changeId));
     }
@@ -1042,7 +1042,7 @@ void KoTextEditor::insertTableColumnRight()
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Insert Column Right"));
-            changeId = changeTracker->getInsertChangeId(title, 0);
+            changeId = changeTracker->insertChangeId(title, 0);
         }
         addCommand(new InsertTableColumnCommand(this, table, true, changeId));
     }
@@ -1056,7 +1056,7 @@ void KoTextEditor::deleteTableColumn()
         KoChangeTracker *changeTracker = KoTextDocument(d->document).changeTracker();
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Delete Column"));
-            changeId = changeTracker->getDeleteChangeId(title, QTextDocumentFragment(), 0);
+            changeId = changeTracker->deleteChangeId(title, QTextDocumentFragment(), 0);
         }
 
         addCommand(new DeleteTableColumnCommand(this, table, changeId));
@@ -1071,7 +1071,7 @@ void KoTextEditor::deleteTableRow()
         int changeId = 0;
         if (changeTracker && changeTracker->recordChanges()) {
             QString title(i18n("Delete Row"));
-            changeId = changeTracker->getDeleteChangeId(title, QTextDocumentFragment(), 0);
+            changeId = changeTracker->deleteChangeId(title, QTextDocumentFragment(), 0);
         }
         addCommand(new DeleteTableRowCommand(this, table, changeId));
     }

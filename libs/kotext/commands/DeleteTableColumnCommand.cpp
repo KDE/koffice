@@ -43,7 +43,7 @@ DeleteTableColumnCommand::DeleteTableColumnCommand(KoTextEditor *te, QTextTable 
 void DeleteTableColumnCommand::undo()
 {
     if (!m_changeId) {
-        KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(m_table);
+        KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
         for (int i = 0; i < m_selectionColumnSpan; ++i) {
             carsManager.insertColumns(m_selectionColumn + i, 1, m_deletedStyles.at(i));
         }
@@ -54,7 +54,7 @@ void DeleteTableColumnCommand::undo()
 
 void DeleteTableColumnCommand::redo()
 {
-    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::getManager(m_table);
+    KoTableColumnAndRowStyleManager carsManager = KoTableColumnAndRowStyleManager::manager(m_table);
     if (!m_first) {
         if (!m_changeId) {
             carsManager.removeColumns(m_selectionColumn, m_selectionColumnSpan);

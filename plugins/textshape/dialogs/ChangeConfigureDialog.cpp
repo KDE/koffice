@@ -79,17 +79,17 @@ KoChangeTracker::ChangeSaveFormat ChangeConfigureDialog::saveFormat()
     }
 }
 
-const QColor& ChangeConfigureDialog::getInsertionBgColor()
+const QColor& ChangeConfigureDialog::insertionBgColor()
 {
     return ui.insertionColorDisplayLabel->color();
 }
 
-const QColor& ChangeConfigureDialog::getDeletionBgColor()
+const QColor& ChangeConfigureDialog::deletionBgColor()
 {
     return ui.deletionColorDisplayLabel->color();
 }
 
-const QColor& ChangeConfigureDialog::getFormatChangeBgColor()
+const QColor& ChangeConfigureDialog::formatChangeBgColor()
 {
     return ui.formatColorDisplayLabel->color();
 }

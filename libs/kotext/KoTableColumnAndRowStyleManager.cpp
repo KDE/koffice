@@ -65,7 +65,7 @@ KoTableColumnAndRowStyleManager::~KoTableColumnAndRowStyleManager()
 {
 }
 
-KoTableColumnAndRowStyleManager KoTableColumnAndRowStyleManager::getManager(QTextTable *table)
+KoTableColumnAndRowStyleManager KoTableColumnAndRowStyleManager::manager(QTextTable *table)
 {
     QTextTableFormat tableFormat = table->format();
 

@@ -79,7 +79,7 @@ void TestTableLayout::initTest(int rows, int columns,
     Q_ASSERT(m_table);
 
     // Column and row style manager.
-    m_tableColumnAndRowStyleManager = KoTableColumnAndRowStyleManager::getManager(m_table);
+    m_tableColumnAndRowStyleManager = KoTableColumnAndRowStyleManager::manager(m_table);
 
     // Column styles.
     m_defaultColumnStyle.setRelativeColumnWidth(50.0);
