@@ -61,7 +61,7 @@
 #include <changetracker/KoChangeTracker.h>
 #include <changetracker/KoChangeTrackerElement.h>
 #include <changetracker/KoDeleteChangeMarker.h>
-#include <changetracker/KoFormatChangeInformation.h>
+#include <KoFormatChangeInformation_p.h>
 #include <KoGenChange.h>
 #include <KoGenChanges.h>
 #include <rdf/KoDocumentRdfBase.h>

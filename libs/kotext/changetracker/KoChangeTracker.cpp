@@ -18,6 +18,7 @@
  */
 
 #include "KoChangeTracker.h"
+#include "KoFormatChangeInformation_p.h"
 
 //KOffice includes
 #include "styles/KoCharacterStyle.h"
@@ -31,7 +32,6 @@
 #include <KoListStyle.h>
 #include <KoParagraphStyle.h>
 #include <KoStyleManager.h>
-#include <KoFormatChangeInformation.h>
 
 //KDE includes
 #include <KDebug>
