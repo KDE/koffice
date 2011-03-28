@@ -82,6 +82,7 @@
 #include <QTextTable>
 #include <QTime>
 #include <QString>
+#include <QTextDocumentFragment>
 
 #include <QTextStream>
 #include <QXmlStreamReader>

@@ -30,6 +30,7 @@
 #include <QTextTableCellFormat>
 #include <QBuffer>
 #include <QUuid>
+#include <QTextDocumentFragment>
 #include <QXmlStreamReader>
 
 #include "KoInlineObject.h"

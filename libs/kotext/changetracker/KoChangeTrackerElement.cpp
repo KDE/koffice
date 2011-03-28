@@ -18,6 +18,8 @@
  */
 
 #include "KoChangeTrackerElement.h"
+#include "KoDeleteChangeMarker.h"
+#include <QTextDocumentFragment>
 
 #include <KDebug>
 
@@ -95,7 +97,7 @@ void KoChangeTrackerElement::setAcceptedRejected(bool set)
     d->acceptedRejected = set;
 }
 
-bool KoChangeTrackerElement::acceptedRejected()
+bool KoChangeTrackerElement::acceptedRejected() const
 {
     return d->acceptedRejected;
 }

@@ -24,9 +24,10 @@
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
 
-#include <changetracker/KoChangeTracker.h>
-#include <changetracker/KoChangeTrackerElement.h>
-#include <styles/KoCharacterStyle.h>
+#include <KoChangeTracker.h>
+#include <KoChangeTrackerElement.h>
+#include <KoCharacterStyle.h>
+#include <KoDeleteChangeMarker.h>
 
 #include <KLocale>
 
@@ -37,6 +38,7 @@
 #include <QTextCursor>
 #include <QTextDocument>
 #include <QTextFragment>
+#include <QTextDocumentFragment>
 
 RejectChangeCommand::RejectChangeCommand (int changeId, QList<QPair<int, int> > changeRanges, QTextDocument *document, QUndoCommand* parent) : TextCommandBase(parent),
     m_first(true),

@@ -19,6 +19,7 @@
 
 #include "KoChangeTracker.h"
 #include "KoFormatChangeInformation_p.h"
+#include "KoDeleteChangeMarker.h"
 
 //KOffice includes
 #include "styles/KoCharacterStyle.h"

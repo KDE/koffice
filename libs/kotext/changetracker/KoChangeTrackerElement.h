@@ -20,22 +20,22 @@
 #define KOCHANGETRACKERELEMT_H
 
 #include <QObject>
-#include <QMetaType>
-#include <QTextFormat>
-#include <QString>
-#include <QTextDocumentFragment>
 
 #include <KoGenChange.h>
 
 #include "kotext_export.h"
-#include "KoDeleteChangeMarker.h"
+
+class QTextFormat;
+class QString;
+class QTextDocumentFragment;
+class KoDeleteChangeMarker;
 
 
 class KOTEXT_EXPORT KoChangeTrackerElement
 {
 public:
 
-    KoChangeTrackerElement(const QString& title, KoGenChange::Type type);
+    KoChangeTrackerElement(const QString &title, KoGenChange::Type type);
 
     KoChangeTrackerElement();
 
@@ -48,7 +48,7 @@ public:
 
     ///This flag is used when a change is accepted or rejected. When set, the change becomes transparent to functions like KoChangeTracker::isParent,... The KoChangeTrackerElement behaves like it has been destroyed. This is not done because of the undo/redo. A KoChangeTrackerElement can only be destroyed when its accept/reject command is destroyed.
     void setAcceptedRejected(bool set);
-    bool acceptedRejected();
+    bool acceptedRejected() const;
 
     void setValid(bool valid);
     bool isValid() const;
@@ -66,19 +66,19 @@ public:
     QTextFormat prevFormat() const;
 
     bool hasCreator() const;
-    void setCreator(const QString& creator);
+    void setCreator(const QString &creator);
     QString creator() const;
 
     bool hasDate() const;
-    void setDate(const QString& date);
+    void setDate(const QString &date);
     QString date() const;
 
-    bool hasExtraMetaData()const;
-    void setExtraMetaData(const QString& metaData);
+    bool hasExtraMetaData() const;
+    void setExtraMetaData(const QString &metaData);
     QString extraMetaData() const;
 
     bool hasDeleteData() const;
-    void setDeleteData(const QTextDocumentFragment& fragment);
+    void setDeleteData(const QTextDocumentFragment &fragment);
     QTextDocumentFragment deleteData() const;
 
     void setDeleteChangeMarker(KoDeleteChangeMarker *marker);

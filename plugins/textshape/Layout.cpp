@@ -57,6 +57,7 @@
 #include <QFontMetrics>
 #include <QTextTableCell>
 #include <QTextFragment>
+#include <QTextDocumentFragment>
 
 extern int qt_defaultDpiY();
 

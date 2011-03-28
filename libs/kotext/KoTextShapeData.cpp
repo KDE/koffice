@@ -27,9 +27,11 @@
 #include "KoTextDocumentLayout.h"
 #include "styles/KoStyleManager.h"
 #include "styles/KoParagraphStyle.h"
+#include "KoDeleteChangeMarker.h"
 
 #include <KDebug>
 #include <QUrl>
+#include <QTextDocumentFragment>
 #include <QTextDocument>
 #include <QTextBlock>
 #include <QMetaObject>

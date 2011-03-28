@@ -33,6 +33,7 @@
 #include <KoInlineTextObjectManager.h>
 #include <KAction>
 #include <KoTextAnchor.h>
+#include <KoDeleteChangeMarker.h>
 #include <KoCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoList.h>

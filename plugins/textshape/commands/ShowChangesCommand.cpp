@@ -31,11 +31,13 @@
 #include <KoCanvasBase.h>
 #include <KoShapeController.h>
 #include <KoShapeContainer.h>
+#include <KoDeleteChangeMarker.h>
 
 #include <KAction>
 #include <klocale.h>
 
 #include <QTextDocument>
+#include <QTextDocumentFragment>
 #include <QtAlgorithms>
 #include <QList>
 
