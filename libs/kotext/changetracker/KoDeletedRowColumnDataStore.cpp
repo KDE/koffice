@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoDeletedRowColumnDataStore.h"
+#include "KoDeletedRowColumnDataStore_p.h"
 #include "KoDeletedRowData.h"
 #include "KoDeletedColumnData_p.h"
 
