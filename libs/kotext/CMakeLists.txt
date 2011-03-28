@@ -157,7 +157,6 @@ install(
     changetracker/KoDeleteChangeMarker.h
     changetracker/KoDeletedRowColumnDataStore.h
     changetracker/KoDeletedRowData.cpp
-    changetracker/KoDeletedColumnData.cpp
     changetracker/KoDeletedCellData.cpp
     DESTINATION
     ${INCLUDE_INSTALL_DIR} COMPONENT Devel

@@ -19,7 +19,7 @@
 
 #include "KoDeletedRowColumnDataStore.h"
 #include "KoDeletedRowData.h"
-#include "KoDeletedColumnData.h"
+#include "KoDeletedColumnData_p.h"
 
 KoDeletedRowColumnDataStore::KoDeletedRowColumnDataStore()
 {
