@@ -16,24 +16,23 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-
 #ifndef __CHANGE_CONFIGURE_DIALOG_H__
 #define __CHANGE_CONFIGURE_DIALOG_H__
 
 #include <QtGui>
 #include <KoChangeTracker.h>
 
-class ColorDisplayLabel:public QLabel
+class ColorDisplayLabel : public QLabel
 {
-    public:
-        ColorDisplayLabel(QWidget *parent = NULL);
-        ~ColorDisplayLabel();
-        void paintEvent(QPaintEvent *event);
-        const QColor& color() const;
-        void setColor(const QColor &color);
+public:
+    ColorDisplayLabel(QWidget *parent = 0);
+    ~ColorDisplayLabel();
+    void paintEvent(QPaintEvent *event);
+    QColor color() const;
+    void setColor(const QColor &color);
 
-    private:
-        QColor labelColor;
+private:
+    QColor labelColor;
 };
 
 #include <ui_ChangeConfigureDialog.h>
@@ -48,26 +47,27 @@ class ChangeConfigureDialog:public QDialog
         eDelete,
         eFormatChange,
         eChangeTypeNone
-    }ChangeType;
+    } ChangeType;
 
-    public:
-        ChangeConfigureDialog(const QColor& insertionColor, const QColor& deletionColor, const QColor& formatChangeColor, const QString& authorName, KoChangeTracker::ChangeSaveFormat changeSaveFormat, QWidget *parent=NULL);
-        ~ChangeConfigureDialog();
-        
-        const QColor& insertionBgColor();
-        const QColor& deletionBgColor();
-        const QColor& formatChangeBgColor();
-        const QString authorName();
-        KoChangeTracker::ChangeSaveFormat saveFormat();
+public:
+    ChangeConfigureDialog(const QColor &insertionColor, const QColor &deletionColor, const QColor &formatChangeColor, const QString &authorName, KoChangeTracker::ChangeSaveFormat changeSaveFormat, QWidget *parent = 0);
+    ~ChangeConfigureDialog();
 
-    private:
-        Ui::ChangeConfigureDialog ui;
-        void updatePreviewText();
-        void colorSelect(ChangeType type);
+    QColor insertionBgColor() const;
+    QColor deletionBgColor() const;
+    QColor formatChangeBgColor() const;
+    QString authorName() const;
+    KoChangeTracker::ChangeSaveFormat saveFormat() const;
 
-    private slots:
-        void insertionColorSelect();
-        void deletionColorSelect();
-        void formatChangeColorSelect();
+private:
+    Ui::ChangeConfigureDialog ui;
+    void updatePreviewText();
+    void colorSelect(ChangeType type);
+
+private slots:
+    void insertionColorSelect();
+    void deletionColorSelect();
+    void formatChangeColorSelect();
 };
+
 #endif

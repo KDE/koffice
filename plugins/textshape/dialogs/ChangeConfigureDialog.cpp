@@ -20,13 +20,14 @@
 #include "ChangeConfigureDialog.h"
 #include <QColorDialog>
 
-ColorDisplayLabel::ColorDisplayLabel(QWidget *parent):QLabel(parent), labelColor(255,255,0)
+ColorDisplayLabel::ColorDisplayLabel(QWidget *parent)
+    : QLabel(parent),
+    labelColor(255,255,0)
 {
 }
 
 ColorDisplayLabel::~ColorDisplayLabel()
 {
-
 }
 
 void ColorDisplayLabel::paintEvent(QPaintEvent *event)
@@ -37,7 +38,7 @@ void ColorDisplayLabel::paintEvent(QPaintEvent *event)
     painter.drawRect(rect().x(), rect().y(), rect().width(), rect().height());
 }
 
-const QColor& ColorDisplayLabel::color() const
+QColor ColorDisplayLabel::color() const
 {
     return labelColor;
 }
@@ -47,7 +48,8 @@ void ColorDisplayLabel::setColor(const QColor &color)
     labelColor = color;
 }
 
-ChangeConfigureDialog::ChangeConfigureDialog(const QColor &insertionColor, const QColor &deletionColor, const QColor &formatChangeColor, const QString &authorName, KoChangeTracker::ChangeSaveFormat changeSaveFormat, QWidget *parent):QDialog(parent)
+ChangeConfigureDialog::ChangeConfigureDialog(const QColor &insertionColor, const QColor &deletionColor, const QColor &formatChangeColor, const QString &authorName, KoChangeTracker::ChangeSaveFormat changeSaveFormat, QWidget *parent)
+    :QDialog(parent)
 {
     ui.setupUi(this);
     ui.insertionColorDisplayLabel->setColor(insertionColor);
@@ -65,12 +67,12 @@ ChangeConfigureDialog::ChangeConfigureDialog(const QColor &insertionColor, const
     updatePreviewText();
 }
 
-const QString ChangeConfigureDialog::authorName()
+QString ChangeConfigureDialog::authorName() const
 {
     return ui.authorNameLineEdit->text();
 }
 
-KoChangeTracker::ChangeSaveFormat ChangeConfigureDialog::saveFormat()
+KoChangeTracker::ChangeSaveFormat ChangeConfigureDialog::saveFormat() const
 {
     if (ui.odf12RadioButton->isChecked()) {
         return KoChangeTracker::ODF_1_2;
@@ -79,17 +81,17 @@ KoChangeTracker::ChangeSaveFormat ChangeConfigureDialog::saveFormat()
     }
 }
 
-const QColor& ChangeConfigureDialog::insertionBgColor()
+QColor ChangeConfigureDialog::insertionBgColor() const
 {
     return ui.insertionColorDisplayLabel->color();
 }
 
-const QColor& ChangeConfigureDialog::deletionBgColor()
+QColor ChangeConfigureDialog::deletionBgColor() const
 {
     return ui.deletionColorDisplayLabel->color();
 }
 
-const QColor& ChangeConfigureDialog::formatChangeBgColor()
+QColor ChangeConfigureDialog::formatChangeBgColor() const
 {
     return ui.formatColorDisplayLabel->color();
 }
