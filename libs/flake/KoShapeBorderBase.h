@@ -27,7 +27,7 @@ class KoShape;
 class KoGenStyle;
 class KoShapeSavingContext;
 class KoViewConverter;
-class KoInsets;
+struct KoInsets;
 class QColor;
 class QPainter;
 
