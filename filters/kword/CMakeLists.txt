@@ -74,6 +74,7 @@ if (NOT TINY)
 
     #html FIXME: export dialog is Qt 3 version ui file
     if(NOT WIN32 AND NOT QT_MAC_USE_COCOA)
+        add_subdirectory( docx )
         add_subdirectory( html )
 #        if (TARGET kowmf)
 #            add_subdirectory( mswrite )
@@ -104,5 +105,3 @@ add_subdirectory( rtf )
 if(GLIB2_FOUND AND GOBJECT_FOUND AND ICONV_FOUND AND LIBGSF_FOUND)
 	add_subdirectory(msword-odf)
 endif(GLIB2_FOUND AND GOBJECT_FOUND AND ICONV_FOUND AND LIBGSF_FOUND)
-
-add_subdirectory( docx )

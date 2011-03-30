@@ -1,6 +1,8 @@
 include_directories(${ZLIB_INCLUDE_DIR} ../../libmso)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -fPIC")
+if(NOT WIN32)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -fPIC")
+endif(NOT WIN32)
 
 kde4_add_library(ppttoodplib STATIC PptToOdp.cpp ParsedPresentation.cpp DateTimeFormat.cpp pptstyle.cpp)
 target_link_libraries(ppttoodplib koodf mso ${ZLIB_LIBRARIES})
