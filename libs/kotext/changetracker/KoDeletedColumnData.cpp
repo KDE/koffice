@@ -22,12 +22,16 @@
 #include <QTextCursor>
 #include <QTextTable>
 
+#include <KoTableColumnAndRowStyleManager.h>
+
 #include "KoDeletedColumnData.h"
 #include "KoDeletedCellData.h"
 
 KoDeletedColumnData::KoDeletedColumnData(QTextTable *table, int columnNumber)
 {
     this->column_number = columnNumber;
+    KoTableColumnStyle columnStyle = KoTableColumnAndRowStyleManager::getManager(table).columnStyle(columnNumber);
+    setColumnStyle(columnStyle);
     storeDeletedCells(table);
 }
 
