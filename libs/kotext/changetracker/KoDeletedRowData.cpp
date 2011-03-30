@@ -25,11 +25,10 @@
 #include "KoDeletedRowData.h"
 #include "KoDeletedCellData.h"
 
-#include <styles/KoTableRowStyle.h>
-
-KoDeletedRowData::KoDeletedRowData(int rowNumber)
+KoDeletedRowData::KoDeletedRowData(QTextTable *table, int rowNumber)
 {
     this->row_number = rowNumber;
+    storeDeletedCells(table);
 }
 
 KoDeletedRowData::~KoDeletedRowData()
@@ -45,12 +44,12 @@ int KoDeletedRowData::rowNumber()
     return row_number;
 }
 
-void KoDeletedRowData::setRowStyle(KoTableRowStyle *rowStyle)
+void KoDeletedRowData::setRowStyle(KoTableRowStyle rowStyle)
 {
     this->row_style = rowStyle;
 }
 
-KoTableRowStyle *KoDeletedRowData::rowStyle()
+KoTableRowStyle KoDeletedRowData::rowStyle()
 {
     return row_style;
 }

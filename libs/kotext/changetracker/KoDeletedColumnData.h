@@ -21,34 +21,34 @@
 #define __KODELETEDCOLUMNDATA_H__
 
 #include <QVector>
+#include <styles/KoTableColumnStyle.h>
 
 class KoDeletedCellData;
-class KoTableColumnStyle;
 class QTextTable;
 
 class KoDeletedColumnData
 {
     public:
-        KoDeletedColumnData(int columnNumber);
+        KoDeletedColumnData(QTextTable *table, int columnNumber);
 
         ~KoDeletedColumnData();
 
         int columnNumber();
 
-        void setColumnStyle(KoTableColumnStyle *columnStyle);
-
-        KoTableColumnStyle *columnStyle();
+        KoTableColumnStyle columnStyle();
 
         const QVector<KoDeletedCellData *>& deletedCells();
-
-        void storeDeletedCells(QTextTable *table);
 
     private:
         int column_number;
 
-        KoTableColumnStyle *column_style;
+        KoTableColumnStyle column_style;
 
         QVector<KoDeletedCellData *> deleted_cells;
+
+        void storeDeletedCells(QTextTable *table);
+
+        void setColumnStyle(KoTableColumnStyle columnStyle);
 };
 
 #endif

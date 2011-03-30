@@ -32,6 +32,7 @@
 #include <KoParagraphStyle.h>
 #include <KoStyleManager.h>
 #include <KoFormatChangeInformation.h>
+#include <KoDeletedRowColumnDataStore.h>
 
 //KDE includes
 #include <KDebug>
@@ -63,6 +64,7 @@ public:
         deletionBgColor(255,185,185),
         formatChangeBgColor(195,195,255)
     {
+        deletedRowColumnData = new KoDeletedRowColumnDataStore();
     }
     ~Private() { }
 
@@ -80,6 +82,7 @@ public:
     QColor insertionBgColor, deletionBgColor, formatChangeBgColor;
     QString changeAuthorName;
     KoChangeTracker::ChangeSaveFormat changeSaveFormat;
+    KoDeletedRowColumnDataStore *deletedRowColumnData;
 };
 
 KoChangeTracker::KoChangeTracker(QObject *parent)
@@ -485,6 +488,11 @@ void KoChangeTracker::setDeletionBgColor(const QColor& bgColor)
 void KoChangeTracker::setFormatChangeBgColor(const QColor& bgColor)
 {
     d->formatChangeBgColor = bgColor;
+}
+
+KoDeletedRowColumnDataStore *KoChangeTracker::deletedRowColumnData()
+{
+    return d->deletedRowColumnData;
 }
 
 //A convenience function to get a ListIdType from a format

@@ -24,6 +24,7 @@
 //#include "KoChangeTrackerElement.h"
 class KoChangeTrackerElement;
 class KoFormatChangeInformation;
+class KoDeletedRowColumnDataStore;
 
 #include <KoGenChange.h>
 #include <KoGenChanges.h>
@@ -124,6 +125,8 @@ public:
 
     ChangeSaveFormat saveFormat();
     void setSaveFormat(ChangeSaveFormat saveFormat); 
+
+    KoDeletedRowColumnDataStore *deletedRowColumnData();
 private:
     static bool checkListDeletion(QTextList *list, QTextCursor &cursor);
     class Private;
