@@ -46,10 +46,6 @@
 
 #include <KoConfig.h>
 
-#ifdef HAVE_OPENGL
-#include <QtOpenGL/QGLWidget>
-#endif
-
 KoCanvasController::Private::Private(KoCanvasController *qq)
     : q(qq),
     canvas(0),
@@ -78,13 +74,11 @@ void KoCanvasController::Private::setDocumentOffset()
     QWidget *canvasWidget = canvas->canvasWidget();
 
     if (canvasWidget) {
-        if (!q->isCanvasOpenGL()) {
-            QPoint diff = documentOffset - pt;
-            if (canvasMode == Spreadsheet && canvasWidget->layoutDirection() == Qt::RightToLeft) {
-                canvasWidget->scroll(-diff.x(), diff.y());
-            } else {
-                canvasWidget->scroll(diff.x(), diff.y());
-            }
+        QPoint diff = documentOffset - pt;
+        if (canvasMode == Spreadsheet && canvasWidget->layoutDirection() == Qt::RightToLeft) {
+            canvasWidget->scroll(-diff.x(), diff.y());
+        } else {
+            canvasWidget->scroll(diff.x(), diff.y());
         }
     }
 
@@ -533,21 +527,6 @@ void KoCanvasController::setDocumentSize(const QSize &sz, bool recalculateCenter
         updateCanvasOffsetX();
     if (verticalScrollBar()->isHidden())
         updateCanvasOffsetY();
-}
-
-bool KoCanvasController::isCanvasOpenGL() const
-{
-    QWidget *canvasWidget = d->canvas->canvasWidget();
-
-    if (canvasWidget) {
-#ifdef HAVE_OPENGL
-        if (qobject_cast<QGLWidget*>(canvasWidget) != 0) {
-            return true;
-        }
-#endif
-    }
-
-    return false;
 }
 
 void KoCanvasController::pan(const QPoint &distance)
