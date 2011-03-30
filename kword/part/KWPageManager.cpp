@@ -1,5 +1,5 @@
 /* This file is part of the KOffice project
- * Copyright (C) 2005-2010 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2005-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Pierre Ducroquet <pinaraf@pinaraf.info>
  * Copyright (C) 2008 Sebastian Sauer <mail@dipe.org>
  *
@@ -65,10 +65,10 @@ void KWPageManagerPrivate::setPageNumberForId(int pageId, int newPageNumber)
     if (pageNumbers.isEmpty() || ! pages.contains(pageId))
         return;
 
-    const int oldPageNumber = pages[pageId].pageNumber;
+    const uint oldPageNumber = pages[pageId].pageNumber;
     int diff = newPageNumber - oldPageNumber;
-    int from = oldPageNumber;
-    int to = newPageNumber;
+    uint from = oldPageNumber;
+    uint to = newPageNumber;
     if (from > to)
         qSwap(from, to);
 
@@ -120,7 +120,7 @@ void KWPageManagerPrivate::insertPage(const Page &newPage)
         do {
             --iter;
 
-            if (iter.key() < newPage.pageNumber)
+            if (((uint) iter.key()) < newPage.pageNumber)
                 break;
             KWPageManagerPrivate::Page page = pages[iter.value()];
             pageNumbers.remove(iter.key());
