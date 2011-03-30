@@ -27,6 +27,7 @@
 
 #include <QtXml/qxml.h>
 #include <QtXml/qdom.h>
+#include <QtCore/qpair.h>
 
 class QIODevice;
 class QTextDecoder;
@@ -44,7 +45,6 @@ typedef QDomDocument KoXmlDocument;
 
 class QString;
 class QXmlStreamReader;
-template<class T1, class T2> class QPair;
 
 class KoXmlNode;
 class KoXmlText;
