@@ -24,12 +24,14 @@
 
 #include "KoDeletedColumnData_p.h"
 #include "KoDeletedCellData_p.h"
+#include <KoTableColumnAndRowStyleManager.h>
 
-#include <styles/KoTableColumnStyle.h>
-
-KoDeletedColumnData::KoDeletedColumnData(int columnNumber)
+KoDeletedColumnData::KoDeletedColumnData(QTextTable *table, int columnNumber)
 {
     this->column_number = columnNumber;
+    KoTableColumnStyle columnStyle = KoTableColumnAndRowStyleManager::manager(table).columnStyle(columnNumber);
+    setColumnStyle(columnStyle);
+    storeDeletedCells(table);
 }
 
 KoDeletedColumnData::~KoDeletedColumnData()
@@ -45,12 +47,12 @@ int KoDeletedColumnData::columnNumber()
     return column_number;
 }
 
-void KoDeletedColumnData::setColumnStyle(KoTableColumnStyle *columnStyle)
+void KoDeletedColumnData::setColumnStyle(KoTableColumnStyle columnStyle)
 {
     this->column_style = columnStyle;
 }
 
-KoTableColumnStyle *KoDeletedColumnData::columnStyle()
+KoTableColumnStyle KoDeletedColumnData::columnStyle()
 {
     return column_style;
 }

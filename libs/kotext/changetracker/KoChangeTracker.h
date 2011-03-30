@@ -38,6 +38,7 @@ class KoDeleteChangeMarker;
 class KoXmlElement;
 class KoChangeTrackerElement;
 class KoFormatChangeInformation;
+class KoDeletedRowColumnDataStore;
 
 class KOTEXT_EXPORT KoChangeTracker : public QObject
 {
@@ -118,6 +119,7 @@ public:
     ChangeSaveFormat saveFormat();
     void setSaveFormat(ChangeSaveFormat saveFormat);
 
+    KoDeletedRowColumnDataStore *deletedRowColumnData();
 private:
     class Private;
     Private* const d;
