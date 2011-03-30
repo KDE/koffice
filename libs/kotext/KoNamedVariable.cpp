@@ -21,6 +21,10 @@
 #include "KoInlineTextObjectManager.h"
 #include <KoProperties.h>
 
+#include <KoXmlReader.h> // for usage in Q_UNUSED
+#include <KoShapeLoadingContext.h> // for usage in Q_UNUSED
+#include <KoShapeSavingContext.h> // for usage in Q_UNUSED
+
 KoNamedVariable::KoNamedVariable(Property key, const QString &name)
         : KoVariable(true),
         m_name(name),

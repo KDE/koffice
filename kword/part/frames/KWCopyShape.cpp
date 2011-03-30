@@ -26,6 +26,7 @@
 #include <KoViewConverter.h>
 #include <KoTextShapeData.h>
 #include <KoShapeContainer.h>
+#include <KoShapeLoadingContext.h> //for Q_UNUSED
 
 #include <QPainter>
 #include <QPainterPath>

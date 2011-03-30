@@ -24,6 +24,7 @@
 #include <KoXmlNS.h>
 #include <KoOdfWorkaround.h>
 #include "SCPlaceholderShape.h"
+#include <KoShapeLoadingContext.h> // for Q_UNUSED
 
 #include <kdebug.h>
 
