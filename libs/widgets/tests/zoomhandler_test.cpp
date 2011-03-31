@@ -17,6 +17,7 @@
  */
 
 #include <QTest>
+#include <qtest_kde.h>
 #include <QCoreApplication>
 
 #include <kdebug.h>
@@ -118,6 +119,6 @@ void zoomhandler_test::testDocumentToView()
 }
 
 
-QTEST_APPLESS_MAIN(zoomhandler_test)
+QTEST_KDEMAIN(zoomhandler_test, GUI)
 
 #include <zoomhandler_test.moc>
