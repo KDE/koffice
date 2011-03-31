@@ -111,15 +111,11 @@ install(TARGETS kwordprivate  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 set(kwordpart_PART_SRCS KWFactoryInit.cpp )
 
-
 kde4_add_plugin(kwordpart ${kwordpart_PART_SRCS})
-
-
 
 target_link_libraries(kwordpart ${KDE4_KDECORE_LIBS} ${KDE4_KPARTS_LIBS} kwordprivate )
 
 install(TARGETS kwordpart  DESTINATION ${PLUGIN_INSTALL_DIR})
-
 
 ########### KWord exe ###############
 
@@ -148,3 +144,4 @@ install( FILES kword.rc kword_readonly.rc  DESTINATION ${DATA_INSTALL_DIR}/kword
 install( FILES kwordpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install( PROGRAMS kword.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
 install( FILES kwordrc DESTINATION ${CONFIG_INSTALL_DIR} )
+

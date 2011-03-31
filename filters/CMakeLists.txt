@@ -44,27 +44,28 @@ macro_optional_add_subdirectory( libkowmf )
 macro_optional_add_subdirectory( libmsooxml )
 
 if (SHOULD_BUILD_KWORD)
-    macro_optional_add_subdirectory(kword)
+    add_subdirectory(kword)
 endif (SHOULD_BUILD_KWORD)
 
 if(SHOULD_BUILD_SHOWCASE)
-    macro_optional_add_subdirectory(showcase)
+    add_subdirectory(showcase)
 endif(SHOULD_BUILD_SHOWCASE)
 
 if(SHOULD_BUILD_KSPREAD)
-    macro_optional_add_subdirectory(kspread)
+    add_subdirectory(kspread)
 endif(SHOULD_BUILD_KSPREAD)
 
 if(SHOULD_BUILD_KARBON)
-  macro_optional_add_subdirectory(karbon)
+  add_subdirectory(karbon)
 endif(SHOULD_BUILD_KARBON)
 
 if(SHOULD_BUILD_KIVIO)
-    #macro_optional_add_subdirectory(kivio)
+    #add_subdirectory(kivio)
 endif(SHOULD_BUILD_KIVIO)
 
-if(NOT TINY AND LIBXML2_FOUND AND LIBXSLT_FOUND AND NOT WIN32 AND NOT QT_MAC_USE_COCOA)
-	add_subdirectory(xsltfilter)
-endif(NOT TINY AND LIBXML2_FOUND AND LIBXSLT_FOUND AND NOT WIN32 AND NOT QT_MAC_USE_COCOA)
+if(LIBXML2_FOUND AND LIBXSLT_FOUND AND NOT WIN32 AND NOT QT_MAC_USE_COCOA)
+    add_subdirectory(xsltfilter)
+endif(LIBXML2_FOUND AND LIBXSLT_FOUND AND NOT WIN32 AND NOT QT_MAC_USE_COCOA)
 
 ########### install files ###############
+

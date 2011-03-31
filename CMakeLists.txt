@@ -30,25 +30,38 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
 
 option(GHNS "support Get Hot New Stuff" ON)
 
-option(TINY "compile a tiny KOffice" OFF)
+if (DEFINED BUILD_kword )
+    set(SHOULD_BUILD_KWORD ${BUILD_kword})
+else (DEFINED BUILD_kword )
+    set(SHOULD_BUILD_KWORD TRUE)
+endif (DEFINED BUILD_kword )
 
-IF (TINY)
-    set(SHOULD_BUILD_KWORD TRUE)
-    set(SHOULD_BUILD_SHOWCASE TRUE)
+if (DEFINED BUILD_kspread )
+    set(SHOULD_BUILD_KSPREAD ${BUILD_kspread})
+else (DEFINED BUILD_kspread )
     set(SHOULD_BUILD_KSPREAD TRUE)
-    set(SHOULD_BUILD_KARBON FALSE)
-    set(SHOULD_BUILD_KIVIO FALSE)
-    set(SHOULD_BUILD_KOUNAVAIL FALSE)
-    set(SHOULD_BUILD_SCRIPTING FALSE)
-ELSE(TINY)
-    set(SHOULD_BUILD_KWORD TRUE)
-    set(SHOULD_BUILD_SHOWCASE TRUE)
-    set(SHOULD_BUILD_KSPREAD TRUE)
+endif (DEFINED BUILD_kspread )
+
+if (DEFINED BUILD_karbon )
+    set(SHOULD_BUILD_KARBON ${BUILD_karbon})
+else (DEFINED BUILD_karbon )
     set(SHOULD_BUILD_KARBON TRUE)
+endif (DEFINED BUILD_karbon )
+
+if (DEFINED BUILD_kivio )
+    set(SHOULD_BUILD_KIVIO ${BUILD_kivio})
+else (DEFINED BUILD_kivio )
     set(SHOULD_BUILD_KIVIO TRUE)
-    set(SHOULD_BUILD_KOUNAVAIL TRUE)
-    set(SHOULD_BUILD_SCRIPTING TRUE)
-ENDIF(TINY)
+endif (DEFINED BUILD_kivio )
+
+if (DEFINED BUILD_showcase )
+    set(SHOULD_BUILD_SHOWCASE ${BUILD_showcase})
+else (DEFINED BUILD_showcase )
+    set(SHOULD_BUILD_SHOWCASE TRUE)
+endif (DEFINED BUILD_showcase )
+
+set(SHOULD_BUILD_KOUNAVAIL TRUE)
+set(SHOULD_BUILD_SCRIPTING TRUE)
 
 if(KDE4_BUILD_TESTS)
     # only with this definition will the FOO_TEST_EXPORT macro do something
@@ -160,10 +173,8 @@ if(NOT Soprano_FOUND)
     set(SOPRANO_INCLUDE_DIR "")
 else(NOT Soprano_FOUND)
     set(SHOULD_BUILD_RDF TRUE)
+    add_definitions( -DSHOULD_BUILD_RDF )
 endif(NOT Soprano_FOUND)
-if( Soprano_FOUND )
-   add_definitions( -DSHOULD_BUILD_RDF )
-endif( Soprano_FOUND )
 
 
 ##
@@ -326,27 +337,27 @@ endif(NOT Boost_FOUND)
 ###################
 
 if(SHOULD_BUILD_KWORD)
-    macro_optional_add_subdirectory(kword)
+    add_subdirectory(kword)
 endif(SHOULD_BUILD_KWORD)
 
 if (SHOULD_BUILD_KIVIO)
-    macro_optional_add_subdirectory(kivio)
+    add_subdirectory(kivio)
 endif (SHOULD_BUILD_KIVIO)
 
 if (SHOULD_BUILD_KOUNAVAIL)
-    macro_optional_add_subdirectory(kounavail)
+    add_subdirectory(kounavail)
 endif (SHOULD_BUILD_KOUNAVAIL)
 
 if(SHOULD_BUILD_SHOWCASE)
-  macro_optional_add_subdirectory(showcase)
+  add_subdirectory(showcase)
 endif(SHOULD_BUILD_SHOWCASE)
 
 if(SHOULD_BUILD_KSPREAD)
-    macro_optional_add_subdirectory(kspread)
+    add_subdirectory(kspread)
 endif(SHOULD_BUILD_KSPREAD)
 
 if(SHOULD_BUILD_KARBON)
-  macro_optional_add_subdirectory(karbon)
+  add_subdirectory(karbon)
 endif(SHOULD_BUILD_KARBON)
 
 macro_optional_add_subdirectory(doc)
@@ -383,3 +394,4 @@ add_custom_target(apidox doc/api/gendocs.pl WORKING_DIRECTORY ${CMAKE_SOURCE_DIR
 
 configure_file(KoConfig.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/KoConfig.h )
 install( FILES  ${CMAKE_CURRENT_BINARY_DIR}/KoConfig.h DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+
