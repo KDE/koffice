@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -69,6 +69,16 @@ public:
      * @see KoImageData::isValid()
      */
     KoImageData *createExternalImageData(const QUrl &url);
+
+    /**
+     * Create a data object for the image data.
+     * The collection will create an image data in a way that if there is an
+     * existing data object with the same image the returned KoImageData will
+     * share its data.
+     * @param localPath a valid, local path to point to an image on the filesystem.
+     * @see KoImageData::isValid()
+     */
+    KoImageData *createExternalImageData(const QString &localPath);
 
     /**
      * Create a data object for the image data.

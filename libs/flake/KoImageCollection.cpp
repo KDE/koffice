@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -117,6 +117,11 @@ KoImageData *KoImageCollection::createImageData(const QImage &image)
 
     data = cacheImage(data);
     return data;
+}
+
+KoImageData *KoImageCollection::createExternalImageData(const QString &localPath)
+{
+    return createExternalImageData(QUrl::fromUserInput(localPath));
 }
 
 KoImageData *KoImageCollection::createExternalImageData(const QUrl &url)

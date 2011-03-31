@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
  *
@@ -85,6 +85,7 @@ public:
     void setImage(const QImage &image, KoImageCollection *collection = 0);
     void setImage(const QByteArray &imageData, KoImageCollection *collection = 0);
     void setExternalImage(const QUrl &location, KoImageCollection *collection = 0);
+    void setExternalImage(const QString &location, KoImageCollection *collection = 0);
     void setImage(const QString &location, KoStore *store, KoImageCollection *collection = 0);
 
     /**

@@ -97,7 +97,7 @@ bool KoImageDataPrivate::saveData(QIODevice &device)
 
 void KoImageDataPrivate::setSuffix(const QString &name)
 {
-    QRegExp rx("\\.([^/]+$)"); // TODO does this work on windows or do we have to use \ instead of / for a path separator?
+    QRegExp rx("\\.([^/]+$)");
     if (rx.indexIn(name) != -1) {
         suffix = rx.cap(1);
     }

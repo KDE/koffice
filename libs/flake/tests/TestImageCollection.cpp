@@ -74,7 +74,7 @@ void TestImageCollection::testGetImageImage()
 void TestImageCollection::testGetExternalImage()
 {
     KoImageCollection collection;
-    QUrl url(KDESRCDIR "/logo-koffice.png");
+    QUrl url = QUrl::fromUserInput(KDESRCDIR "/logo-koffice.png");
     KoImageData *id1 = collection.createExternalImageData(url);
     QCOMPARE(id1->suffix(), QString("png"));
     QCOMPARE(id1->hasCachedImage(), false);
@@ -202,12 +202,12 @@ void TestImageCollection::testPreload1()
 void TestImageCollection::testPreload2()
 {
     KoImageData data;
-    QUrl url(KDESRCDIR "/logo-koffice.png");
-    data.setExternalImage(url);
+    data.setExternalImage(KDESRCDIR "/logo-koffice.png");
 
     QCOMPARE(data.hasCachedImage(), false);
     QCOMPARE(data.hasCachedPixmap(), false);
     QPixmap pixmap = data.pixmap(QSize(40, 41));
+    QCOMPARE(data.hasCachedImage(), true);
     QCOMPARE(data.hasCachedImage(), true);
     QCOMPARE(pixmap.width(), 40);
     QCOMPARE(pixmap.height(), 41);

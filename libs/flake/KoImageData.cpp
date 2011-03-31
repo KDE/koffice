@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2007, 2009 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2007-2011 Thomas Zander <zander@kde.org>
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
  * Copyright (C) 2008 Casper Boemann <cbr@boemann.dk>
  * Copyright (C) 2008 Thorsten Zachmann <zachmann@kde.org>
@@ -199,6 +199,11 @@ void KoImageData::setImage(const QImage &image, KoImageCollection *collection)
             d->key = KoImageDataPrivate::generateKey(md5.result());
         }
     }
+}
+
+void KoImageData::setExternalImage(const QString &location, KoImageCollection *collection)
+{
+    setExternalImage(QUrl::fromUserInput(location), collection);
 }
 
 void KoImageData::setExternalImage(const QUrl &location, KoImageCollection *collection)
