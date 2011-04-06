@@ -595,7 +595,7 @@ bool Layout::nextParag()
             m_dropCapsAffectedLineWidthAdjust += fm.rightBearing(lastChar);
             const qreal diff = dropCapsHeight - rect.height();
             m_dropCapsPositionAdjust = rect.top() + fm.ascent();
-            if (qAbs(diff < 0.5)) // good enough
+            if (qAbs(diff) < 0.5) // good enough
                 break;
 
             const qreal adjustment = diff * ((f.pointSizeF() / diff) / (rect.height() / diff));
