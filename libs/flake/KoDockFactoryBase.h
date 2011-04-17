@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
    Copyright (C) 2006 Peter Simonsson <peter.simonsson@gmail.com>
+   Copyright (C) 2011 Thomas Zander <zander@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -21,18 +22,21 @@
 #define KODOCKFACTORY_H
 
 #include <QtCore/QString>
+#include <QtCore/QObject>
 
 #include "flake_export.h"
 
 class QDockWidget;
+class KoDockFactoryBasePrivate;
 
 /**
  * Base class for factories used to create new dock widgets.
  * @see KoDockRegistry
  * @see KoCanvasObserverBase
  */
-class FLAKE_EXPORT KoDockFactoryBase
+class FLAKE_EXPORT KoDockFactoryBase : public QObject
 {
+    Q_OBJECT
 public:
     enum DockPosition {
         DockTornOff, ///< Floating as its own top level window
@@ -43,31 +47,44 @@ public:
         DockMinimized  ///< Not docked, but reachable via the menu
     };
 
-    KoDockFactoryBase();
+    /**
+     * Constuctor for the dockerFactory.
+     * @param parent a parent qobject for memory management purposes.
+     * @param dockerId a string that identifies the type of docker for purposes like storing
+     *  and restoring the state and position between restarts.
+     */
+    KoDockFactoryBase(QObject *parent, const QString &dockerId);
     virtual ~KoDockFactoryBase();
 
-    /// @return the id of the dock widget
-    virtual QString id() const = 0;
+    /// @return the id of the dock widget used in docker management.
+    QString id() const;
 
     /// @return the dock widget area the widget should appear in by default
-    virtual DockPosition defaultDockPosition() const = 0;
+    DockPosition defaultDockPosition() const;
 
     /// Returns true if the dock widget should get a collapsable header.
-    virtual bool isCollapsable() const {
-        return true;
-    }
+    bool isCollapsable() const;
 
     /**
      * In case the docker is collapsable, returns true if the dock widget
      * will start collapsed by default.
      */
-    virtual bool defaultCollapsed() const {
-        return false;
-    }
+    bool isDefaultCollapsed() const;
 
     /// Creates the dock widget
     /// @return the created dock widget
-    virtual QDockWidget* createDockWidget() = 0;
+    virtual QDockWidget *createDockWidget() = 0;
+
+protected:
+    // add setters.
+    void setDefaultDockPosition(DockPosition pos);
+    void setIsCollapsable(bool collapsable);
+    void setDefaultCollapsed(bool collapsed);
+
+    KoDockFactoryBasePrivate *d_ptr;
+
+private:
+    Q_DECLARE_PRIVATE(KoDockFactoryBase)
 };
 
 #endif
