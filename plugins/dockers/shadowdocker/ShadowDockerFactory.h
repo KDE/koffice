@@ -26,13 +26,11 @@
 /// the factory which creates the shadow docker
 class ShadowDockerFactory : public KoDockFactoryBase
 {
+    Q_OBJECT
 public:
-    ShadowDockerFactory();
+    ShadowDockerFactory(QObject *parent);
 
-    virtual QString id() const;
     virtual QDockWidget* createDockWidget();
-    virtual KoDockFactoryBase::DockPosition defaultDockPosition() const;
-
 };
 
 #endif // SHADOWDOCKERFACTORY_H

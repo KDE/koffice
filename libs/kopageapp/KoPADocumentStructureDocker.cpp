@@ -61,14 +61,11 @@ enum ButtonIds
 };
 
 KoPADocumentStructureDockerFactory::KoPADocumentStructureDockerFactory( KoDocumentSectionView::DisplayMode mode, KoPageApp::PageType pageType)
-: m_mode( mode )
-, m_pageType(pageType)
+    : KoDockFactoryBase(0, "document section view"),
+    m_mode(mode),
+    m_pageType(pageType)
 {
-}
-
-QString KoPADocumentStructureDockerFactory::id() const
-{
-    return QString("document section view");
+    setDefaultDockPosition(DockRight);
 }
 
 QDockWidget* KoPADocumentStructureDockerFactory::createDockWidget()

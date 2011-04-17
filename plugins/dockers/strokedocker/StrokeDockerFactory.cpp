@@ -20,13 +20,10 @@
 #include "StrokeDockerFactory.h"
 #include "StrokeDocker.h"
 
-StrokeDockerFactory::StrokeDockerFactory()
+StrokeDockerFactory::StrokeDockerFactory(QObject *parent)
+    : KoDockFactoryBase(parent, "Stroke Properties")
 {
-}
-
-QString StrokeDockerFactory::id() const
-{
-    return QString("Stroke Properties");
+    setDefaultDockPosition(DockMinimized);
 }
 
 QDockWidget* StrokeDockerFactory::createDockWidget()
@@ -35,9 +32,4 @@ QDockWidget* StrokeDockerFactory::createDockWidget()
     widget->setObjectName(id());
 
     return widget;
-}
-
-KoDockFactoryBase::DockPosition StrokeDockerFactory::defaultDockPosition() const
-{
-    return DockMinimized;
 }

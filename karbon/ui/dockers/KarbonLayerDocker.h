@@ -40,14 +40,11 @@ class Part;
 
 class KarbonLayerDockerFactory : public KoDockFactoryBase
 {
+    Q_OBJECT
 public:
-    KarbonLayerDockerFactory();
+    KarbonLayerDockerFactory(QObject *parent = 0);
 
-    virtual QString id() const;
     virtual QDockWidget* createDockWidget();
-    DockPosition defaultDockPosition() const {
-        return DockRight;
-    }
 };
 
 class KarbonLayerDocker : public QDockWidget

@@ -20,13 +20,10 @@
 #include "ShadowDockerFactory.h"
 #include "ShadowDocker.h"
 
-ShadowDockerFactory::ShadowDockerFactory()
+ShadowDockerFactory::ShadowDockerFactory(QObject *parent)
+    : KoDockFactoryBase(parent, "Shadow Properties")
 {
-}
-
-QString ShadowDockerFactory::id() const
-{
-    return QString("Shadow Properties");
+    setDefaultDockPosition(DockMinimized);
 }
 
 QDockWidget* ShadowDockerFactory::createDockWidget()
@@ -35,9 +32,4 @@ QDockWidget* ShadowDockerFactory::createDockWidget()
     widget->setObjectName(id());
 
     return widget;
-}
-
-KoDockFactoryBase::DockPosition ShadowDockerFactory::defaultDockPosition() const
-{
-    return DockMinimized;
 }

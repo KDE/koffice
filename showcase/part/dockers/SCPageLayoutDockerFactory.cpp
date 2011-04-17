@@ -21,13 +21,9 @@
 
 #include "SCPageLayoutDocker.h"
 
-SCPageLayoutDockerFactory::SCPageLayoutDockerFactory()
+SCPageLayoutDockerFactory::SCPageLayoutDockerFactory(QObject *parent)
+    : KoDockFactoryBase(parent, "SlideLayout")
 {
-}
-
-QString SCPageLayoutDockerFactory::id() const
-{
-    return QString("Slide layout");
 }
 
 QDockWidget* SCPageLayoutDockerFactory::createDockWidget()
@@ -35,9 +31,4 @@ QDockWidget* SCPageLayoutDockerFactory::createDockWidget()
     SCPageLayoutDocker * widget = new SCPageLayoutDocker();
     widget->setObjectName( id() );
     return widget;
-}
-
-KoDockFactoryBase::DockPosition SCPageLayoutDockerFactory::defaultDockPosition() const
-{
-    return DockRight;
 }

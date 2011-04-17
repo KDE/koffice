@@ -46,13 +46,7 @@ class KoPADocumentStructureDockerFactory : public KoDockFactoryBase
 public:
     explicit KoPADocumentStructureDockerFactory(KoDocumentSectionView::DisplayMode mode, KoPageApp::PageType pageType = KoPageApp::Page);
 
-    virtual QString id() const;
     virtual QDockWidget* createDockWidget();
-
-    DockPosition defaultDockPosition() const
-    {
-        return DockRight;
-    }
 
 private:
     KoDocumentSectionView::DisplayMode m_mode;

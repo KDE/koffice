@@ -28,15 +28,10 @@
 
 class ShapeCollectionDockerFactory : public KoDockFactoryBase
 {
-    public:
-        ShapeCollectionDockerFactory();
+public:
+    ShapeCollectionDockerFactory(QObject *parent);
 
-        virtual QString id() const;
-        virtual QDockWidget* createDockWidget();
-        DockPosition defaultDockPosition() const
-        {
-            return DockRight;
-        }
+    virtual QDockWidget* createDockWidget();
 };
 
 class CollectionItemModel;

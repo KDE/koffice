@@ -35,24 +35,17 @@
 class ToolDockerFactory : public KoDockFactoryBase
 {
 public:
-    ToolDockerFactory(const QString &name) : m_id(name) { }
-
-    QString id() const {
-        return m_id;
+    ToolDockerFactory(const QString &name, QObject *parent = 0)
+        : KoDockFactoryBase(parent, name)
+    {
+        setDefaultDockPosition(DockRight);
     }
 
-    QDockWidget* createDockWidget() {
+    QDockWidget *createDockWidget() {
         KoToolDocker * dockWidget = new KoToolDocker();
-        dockWidget->setObjectName(m_id);
+        dockWidget->setObjectName(id());
         return dockWidget;
     }
-
-    DockPosition defaultDockPosition() const {
-        return DockRight;
-    }
-
-private:
-    QString m_id;
 };
 
 

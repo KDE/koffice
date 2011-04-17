@@ -26,13 +26,11 @@
 /// the factory which creates the stroke docker
 class StrokeDockerFactory : public KoDockFactoryBase
 {
+    Q_OBJECT
 public:
-    StrokeDockerFactory();
+    explicit StrokeDockerFactory(QObject *parent);
 
-    virtual QString id() const;
     virtual QDockWidget* createDockWidget();
-    virtual KoDockFactoryBase::DockPosition defaultDockPosition() const;
-
 };
 
 #endif // STROKEDOCKERFACTORY_H

@@ -25,11 +25,9 @@
 class SCPageLayoutDockerFactory : public KoDockFactoryBase
 {
 public:
-    SCPageLayoutDockerFactory();
+    SCPageLayoutDockerFactory(QObject *parent = 0);
 
-    QString id() const;
     QDockWidget* createDockWidget();
-    DockPosition defaultDockPosition() const;
 };
 
-#endif /* KPRPAGELAYOUTDOCKERFACTORY_H */
+#endif

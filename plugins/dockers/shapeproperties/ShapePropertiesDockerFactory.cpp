@@ -20,13 +20,10 @@
 #include "ShapePropertiesDockerFactory.h"
 #include "ShapePropertiesDocker.h"
 
-ShapePropertiesDockerFactory::ShapePropertiesDockerFactory()
+ShapePropertiesDockerFactory::ShapePropertiesDockerFactory(QObject *parent)
+    : KoDockFactoryBase(parent, "Shape Properties")
 {
-}
-
-QString ShapePropertiesDockerFactory::id() const
-{
-    return QString("Shape Properties");
+    setDefaultDockPosition(DockMinimized);
 }
 
 QDockWidget* ShapePropertiesDockerFactory::createDockWidget()
@@ -35,9 +32,4 @@ QDockWidget* ShapePropertiesDockerFactory::createDockWidget()
     widget->setObjectName(id());
 
     return widget;
-}
-
-KoDockFactoryBase::DockPosition ShapePropertiesDockerFactory::defaultDockPosition() const
-{
-    return DockMinimized;
 }

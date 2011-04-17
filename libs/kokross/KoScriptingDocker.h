@@ -55,16 +55,6 @@ public:
     explicit KoScriptingDockerFactory(QWidget *parent = 0, KoScriptingModule *module = 0, Kross::Action *action = 0);
 
     /**
-    * \return the id the docker has. This will be always "Scripting".
-    */
-    virtual QString id() const;
-
-    /**
-    * \return the default docking area.
-    */
-    virtual KoDockFactoryBase::DockPosition defaultDockPosition() const;
-
-    /**
     * \return a newly created \a KoScriptingDocker instance.
     */
     virtual QDockWidget *createDockWidget();

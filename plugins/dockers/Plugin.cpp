@@ -35,15 +35,14 @@ K_EXPORT_PLUGIN(PluginFactory("koffice-dockers"))
 Plugin::Plugin(QObject *parent, const QVariantList&)
     : QObject(parent)
 {
-    Q_UNUSED(parent);
-    KoDockRegistry::instance()->add(new StrokeDockerFactory() );
-    KoDockRegistry::instance()->add(new ShapePropertiesDockerFactory());
-    KoDockRegistry::instance()->add(new StyleDockerFactory());
-    KoDockRegistry::instance()->add(new ShadowDockerFactory());
-    KoDockRegistry::instance()->add(new ShapeSelectorFactory());
+    KoDockRegistry::instance()->add(new StrokeDockerFactory(parent));
+    KoDockRegistry::instance()->add(new ShapePropertiesDockerFactory(parent));
+    KoDockRegistry::instance()->add(new StyleDockerFactory(parent));
+    KoDockRegistry::instance()->add(new ShadowDockerFactory(parent));
+    KoDockRegistry::instance()->add(new ShapeSelectorFactory(parent));
     // TODO color docker isn't finished and connected'
-//     KoDockRegistry::instance()->add(new ColorDockerFactory());
-    KoDockRegistry::instance()->add(new ShapeCollectionDockerFactory());
+//     KoDockRegistry::instance()->add(new ColorDockerFactory(parent));
+    KoDockRegistry::instance()->add(new ShapeCollectionDockerFactory(parent));
 }
 
 #include <Plugin.moc>

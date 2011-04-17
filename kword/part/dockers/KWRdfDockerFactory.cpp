@@ -24,13 +24,10 @@
 #include "KWCanvas.h"
 
 KWRdfDockerFactory::KWRdfDockerFactory(KWView *view)
+    : KoDockFactoryBase(view, "Rdf")
 {
+    setDefaultDockPosition(DockMinimized);
     m_view = view;
-}
-
-QString KWRdfDockerFactory::id() const
-{
-    return QString("Rdf");
 }
 
 QDockWidget* KWRdfDockerFactory::createDockWidget()

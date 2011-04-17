@@ -75,14 +75,9 @@ QSize CollectionMenu::sizeHint() const
 // ShapeCollectionDockerFactory
 //
 
-ShapeCollectionDockerFactory::ShapeCollectionDockerFactory()
-    : KoDockFactoryBase()
+ShapeCollectionDockerFactory::ShapeCollectionDockerFactory(QObject *parent)
+    : KoDockFactoryBase(parent, "ShapeCollectionDocker")
 {
-}
-
-QString ShapeCollectionDockerFactory::id() const
-{
-    return QString("ShapeCollectionDocker");
 }
 
 QDockWidget* ShapeCollectionDockerFactory::createDockWidget()

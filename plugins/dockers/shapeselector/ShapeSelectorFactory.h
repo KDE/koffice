@@ -27,16 +27,12 @@
  */
 class ShapeSelectorFactory : public KoDockFactoryBase
 {
+    Q_OBJECT
 public:
     /// constructor
-    ShapeSelectorFactory();
+    ShapeSelectorFactory(QObject *parent);
 
-    virtual QString id() const;
-    QDockWidget* createDockWidget();
-    DockPosition defaultDockPosition() const
-    {
-        return DockRight;
-    }
+    virtual QDockWidget *createDockWidget();
 };
 
 #endif

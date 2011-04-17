@@ -61,13 +61,9 @@ enum ButtonIds {
     Button_Delete
 };
 
-KarbonLayerDockerFactory::KarbonLayerDockerFactory()
+KarbonLayerDockerFactory::KarbonLayerDockerFactory(QObject *parent)
+    : KoDockFactoryBase(parent, "Layer View")
 {
-}
-
-QString KarbonLayerDockerFactory::id() const
-{
-    return QString("Layer view");
 }
 
 QDockWidget* KarbonLayerDockerFactory::createDockWidget()

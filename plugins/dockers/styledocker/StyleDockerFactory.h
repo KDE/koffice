@@ -24,13 +24,11 @@
 
 class StyleDockerFactory : public KoDockFactoryBase
 {
+    Q_OBJECT
 public:
-    StyleDockerFactory();
+    StyleDockerFactory(QObject *parent);
 
-    virtual QString id() const;
-    virtual KoDockFactoryBase::DockPosition defaultDockPosition() const;
     virtual QDockWidget* createDockWidget();
-    virtual bool isCollapsable() const;
 };
 
 #endif // STYLEDOCKERFACTORY_H

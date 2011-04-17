@@ -1847,7 +1847,7 @@ QDockWidget* KoMainWindow::createDockWidget(KoDockFactoryBase* factory)
                 dockWidget->hide();
         }
 
-        bool collapsed = factory->defaultCollapsed();
+        bool collapsed = factory->isDefaultCollapsed();
         if (rootDocument()) {
             KConfigGroup group = KGlobal::config()->group(rootDocument()->componentData().componentName()).group("DockWidget " + factory->id());
             collapsed = group.readEntry("Collapsed", collapsed);

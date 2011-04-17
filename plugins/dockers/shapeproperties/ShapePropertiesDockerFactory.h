@@ -26,13 +26,11 @@
 /// the factory which creates the shape properties docker
 class ShapePropertiesDockerFactory : public KoDockFactoryBase
 {
+    Q_OBJECT
 public:
-    ShapePropertiesDockerFactory();
+    ShapePropertiesDockerFactory(QObject *parent);
 
-    virtual QString id() const;
     virtual QDockWidget* createDockWidget();
-    virtual DockPosition defaultDockPosition() const;
-
 };
 
 #endif // SHAPEPROPERTIESDOCKERFACTORY_H

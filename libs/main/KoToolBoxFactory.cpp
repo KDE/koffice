@@ -22,16 +22,20 @@
 #include <KoToolManager.h>
 #include "KoToolBox_p.h"
 
-class KoToolBoxFactory::Private {
+#include <KoCanvasController.h>
+
+class KoToolBoxFactory::Private { // TODO make inherit from KoToolBoxFactoryPrivate
 public:
     KoCanvasController *canvas;
     QString appName;
 };
 
-
 KoToolBoxFactory::KoToolBoxFactory(KoCanvasController *canvas, const QString& title)
-    : d( new Private())
+    : KoDockFactoryBase(canvas, "ToolBox"),
+    d(new Private())
 {
+    setDefaultDockPosition(DockLeft);
+    setIsCollapsable(false);
     if (title.isEmpty()) {
         d->appName = i18n("Tools");
     }
@@ -43,16 +47,6 @@ KoToolBoxFactory::KoToolBoxFactory(KoCanvasController *canvas, const QString& ti
 
 KoToolBoxFactory::~KoToolBoxFactory() {
     delete d;
-}
-
-QString KoToolBoxFactory::id() const
-{
-    return QString("ToolBox");
-}
-
-KoDockFactoryBase::DockPosition KoToolBoxFactory::defaultDockPosition() const
-{
-    return KoDockFactoryBase::DockLeft;
 }
 
 QDockWidget* KoToolBoxFactory::createDockWidget()

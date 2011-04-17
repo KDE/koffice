@@ -20,18 +20,10 @@
 #include "StyleDockerFactory.h"
 #include "StyleDocker.h"
 
-StyleDockerFactory::StyleDockerFactory()
+StyleDockerFactory::StyleDockerFactory(QObject *parent)
+    : KoDockFactoryBase(parent, "StyleDocker")
 {
-}
-
-QString StyleDockerFactory::id() const
-{
-    return QString("StyleDocker");
-}
-
-KoDockFactoryBase::DockPosition StyleDockerFactory::defaultDockPosition() const
-{
-    return DockRight;
+    setIsCollapsable(false);
 }
 
 QDockWidget* StyleDockerFactory::createDockWidget()
@@ -40,9 +32,4 @@ QDockWidget* StyleDockerFactory::createDockWidget()
     widget->setObjectName(id());
 
     return widget;
-}
-
-bool StyleDockerFactory::isCollapsable() const
-{
-    return false;
 }

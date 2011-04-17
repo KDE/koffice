@@ -31,14 +31,9 @@
 class ColorDockerFactory : public KoDockFactoryBase
 {
 public:
-    ColorDockerFactory() {}
-    virtual ~ColorDockerFactory() {}
+    ColorDockerFactory(QObject *parent);
 
-    virtual QString id() const;
     virtual QDockWidget *createDockWidget();
-    virtual KoDockFactoryBase::DockPosition defaultDockPosition() const;
-
-private:
 };
 
 #endif

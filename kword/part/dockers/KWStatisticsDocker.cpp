@@ -57,13 +57,10 @@ void KWStatisticsDocker::setView(KWView *view)
 }
 
 KWStatisticsDockerFactory::KWStatisticsDockerFactory(KWView *view)
+    : KoDockFactoryBase(view, "Statistics")
 {
+    setDefaultDockPosition(DockMinimized);
     m_view = view;
-}
-
-QString KWStatisticsDockerFactory::id() const
-{
-    return QString("Statistics");
 }
 
 QDockWidget *KWStatisticsDockerFactory::createDockWidget()

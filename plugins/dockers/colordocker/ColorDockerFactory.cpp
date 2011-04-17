@@ -22,9 +22,11 @@
 #include "ColorDockerFactory.h"
 #include "ColorDocker.h"
 
-QString ColorDockerFactory::id() const
+
+ColorDockerFactory::ColorDockerFactory(QObject *parent)
+    : KoDockFactoryBase(parent, "ColorDocker")
 {
-    return QString("KoColorDocker");
+    setDefaultDockPosition(DockMinimized);
 }
 
 QDockWidget* ColorDockerFactory::createDockWidget()
@@ -33,9 +35,4 @@ QDockWidget* ColorDockerFactory::createDockWidget()
     widget->setObjectName(id());
 
     return widget;
-}
-
-ColorDockerFactory::DockPosition ColorDockerFactory::defaultDockPosition() const
-{
-    return DockMinimized;
 }

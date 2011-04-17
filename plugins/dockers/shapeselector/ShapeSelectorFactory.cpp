@@ -22,13 +22,9 @@
 
 #include <QDockWidget>
 
-ShapeSelectorFactory::ShapeSelectorFactory()
+ShapeSelectorFactory::ShapeSelectorFactory(QObject *parent)
+    : KoDockFactoryBase(parent, "ShapeSelector")
 {
-}
-
-QString ShapeSelectorFactory::id() const
-{
-    return QString("ShapeSelector");
 }
 
 QDockWidget* ShapeSelectorFactory::createDockWidget()
