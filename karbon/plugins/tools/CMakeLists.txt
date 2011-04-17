@@ -21,12 +21,6 @@ set(karbon_tools_PART_SRCS
    CalligraphyTool/KarbonCalligraphicShape.cpp
    CalligraphyTool/KarbonCalligraphicShapeFactory.cpp
    CalligraphyTool/KarbonSimplifyPath.cpp
-   KarbonGradientTool.cpp
-   KarbonGradientToolFactory.cpp
-   KarbonGradientEditStrategy.cpp
-   KarbonPatternTool.cpp
-   KarbonPatternToolFactory.cpp
-   KarbonPatternEditStrategy.cpp
    filterEffectTool/KarbonFilterEffectsTool.cpp
    filterEffectTool/KarbonFilterEffectsToolFactory.cpp
    filterEffectTool/FilterEffectEditWidget.cpp

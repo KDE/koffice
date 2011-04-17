@@ -17,12 +17,9 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "Plugin.h"
-#include "strokedocker/StrokeDockerFactory.h"
 #include "shapeproperties/ShapePropertiesDockerFactory.h"
-#include "styledocker/StyleDockerFactory.h"
 #include "shadowdocker/ShadowDockerFactory.h"
 #include "shapeselector/ShapeSelectorFactory.h"
-#include "colordocker/ColorDockerFactory.h"
 #include "shapecollection/ShapeCollectionDocker.h"
 
 #include <KoDockRegistry.h>
@@ -35,13 +32,9 @@ K_EXPORT_PLUGIN(PluginFactory("koffice-dockers"))
 Plugin::Plugin(QObject *parent, const QVariantList&)
     : QObject(parent)
 {
-    KoDockRegistry::instance()->add(new StrokeDockerFactory(parent));
     KoDockRegistry::instance()->add(new ShapePropertiesDockerFactory(parent));
-    KoDockRegistry::instance()->add(new StyleDockerFactory(parent));
     KoDockRegistry::instance()->add(new ShadowDockerFactory(parent));
     KoDockRegistry::instance()->add(new ShapeSelectorFactory(parent));
-    // TODO color docker isn't finished and connected'
-//     KoDockRegistry::instance()->add(new ColorDockerFactory(parent));
     KoDockRegistry::instance()->add(new ShapeCollectionDockerFactory(parent));
 }
 

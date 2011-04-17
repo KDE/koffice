@@ -24,8 +24,6 @@ set(karbonui_SRCS
     dockers/KarbonLayerSortingModel.cpp
 
     widgets/KarbonCanvas.cpp
-    widgets/KarbonGradientWidget.cpp
-    widgets/KarbonGradientEditWidget.cpp
     widgets/KarbonSmallStylePreview.cpp
     widgets/KarbonPatternOptionsWidget.cpp
 )

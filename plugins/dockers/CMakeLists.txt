@@ -2,16 +2,9 @@ project(kofficedockers)
 
 include_directories(${KDE4_INCLUDE_DIR}
      ${FLAKE_INCLUDES}
-     ${PIGMENT_INCLUDES}
-     ${KOPAGEAPP_INCLUDES}
-     ${CMAKE_SOURCE_DIR}/libs/widgets/colorwidgets
 )
 
 set(kofficedockers_SRCS
-
-    strokedocker/StrokeDocker.cpp
-    strokedocker/StrokeDockerFactory.cpp
-
     shapeproperties/ShapePropertiesDocker.cpp
     shapeproperties/ShapePropertiesDockerFactory.cpp
 
@@ -41,28 +34,12 @@ set(kofficedockers_SRCS
     shapeselector/ClipboardProxyShape.cpp
     shapeselector/ResizeFolderStrategy.cpp
 
-    styledocker/StyleButtonBox.cpp
-    styledocker/StylePreview.cpp
-    styledocker/StyleDocker.cpp
-    styledocker/StyleDockerFactory.cpp
-
     Plugin.cpp
 )
 
-add_subdirectory( strokedocker/pics )
-
-set(kofficedockers_SRCS ${kofficedockers_SRCS}
-    colordocker/ColorDocker.h
-    colordocker/ColorDockerFactory.h
-    colordocker/ColorDocker.cpp
-    colordocker/ColorDockerFactory.cpp
-)
-set(EXTRA_LIBS pigmentcms kowidgets)
-
-
 kde4_add_plugin(kofficedockers ${kofficedockers_SRCS})
 
-target_link_libraries(kofficedockers komain ${EXTRA_LIBS})
+target_link_libraries(kofficedockers komain)
 
 install(TARGETS kofficedockers DESTINATION ${PLUGIN_INSTALL_DIR})
 
