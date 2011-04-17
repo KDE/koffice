@@ -74,36 +74,42 @@ set_target_properties(kowidgets PROPERTIES
 install(TARGETS kowidgets  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install( FILES
-    KoGenericRegistryModel.h
+    KoAspectButton.h
+    KoCheckerBoardPainter.h
+    KoColorPatch.h
+    KoColorPopupAction.h
+    KoColorSetWidget.h
+    KoColorSlider.h
+    KoCsvImportDialog.h
+    KoDockWidgetTitleBarButton.h
+    KoDockWidgetTitleBar.h
+    KoDpi.h
+    KoDualColorButton.h
+    KoEditColorSetDialog.h
+    KoImageResource.h
+    KoLineStyleSelector.h
     KoPageLayoutDialog.h
     KoPageLayoutWidget.h
     KoPagePreviewWidget.h
     KoPositionSelector.h
-    kowidgets_export.h
-    KoZoomAction.h
-    KoZoomController.h
-    KoZoomInput.h
-    KoDpi.h
-    KoZoomHandler.h
-    KoZoomMode.h
-
-    KoColorPatch.h
+    KoResourceItemChooser.h
+    KoResourceSelector.h
+    KoResourceServerAdapter.h
+    KoResourceServer.h
+    KoResourceServerObserver.h
+    KoResourceServerProvider.h
     KoShadowConfigWidget.h
-    KoColorPopupAction.h
-    KoColorSetWidget.h
-    KoColorSlider.h
-    KoDualColorButton.h
-    KoEditColorSetDialog.h
+    KoSliderCombo.h
     KoTriangleColorSelector.h
     KoUniColorChooser.h
     KoUniColorDialog.h
+    KoUnitDoubleSpinBox.h
+    kowidgets_export.h
     KoXYColorSelector.h
-    KoResourceItemChooser.h
-    KoResourceSelector.h
-    KoLineStyleSelector.h
-    KoDockWidgetTitleBar.h
-    KoDockWidgetTitleBar.h
-    KoDockWidgetTitleBarButton.h
+    KoZoomAction.h
+    KoZoomController.h
+    KoZoomHandler.h
+    KoZoomMode.h
 
     DESTINATION
     ${INCLUDE_INSTALL_DIR}
