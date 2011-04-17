@@ -10,8 +10,10 @@ if(OPENEXR_FOUND)
     add_definitions(${OPENEXR_DEFINITIONS})
 endif(OPENEXR_FOUND)
 
-add_subdirectory(tests)
-add_subdirectory(benchmarks)
+if (NOT MSVC)
+    add_subdirectory(tests)
+    add_subdirectory(benchmarks)
+endif (NOT MSVC)
 
 set(pigmentcms_SRCS
     PluginLoader.cpp
