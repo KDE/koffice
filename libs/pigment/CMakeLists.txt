@@ -53,38 +53,6 @@ set(pigmentcms_SRCS
     resources/KoSegmentGradient.cpp
 )
 
-set(PIGMENT_INSTALL_FILES 
-        pigment_export.h
-        DebugPigment.h
-        KoBasicHistogramProducers.h
-        KoChannelInfo.h
-        KoColor.h
-        KoColorConversionTransformation.h
-        KoColorConversionTransformationAbstractFactory.h
-        KoColorConversionTransformationFactory.h
-        KoColorModelStandardIds.h
-        KoColorProfile.h
-        KoColorSpace.h
-        KoColorSpaceEngine.h
-        KoColorSpaceFactory.h
-        KoColorSpaceAbstract.h
-        KoColorSpaceConstants.h
-        KoColorSpaceMaths.h
-        KoColorSpaceRegistry.h
-        KoColorSpaceTraits.h
-        KoColorTransformation.h
-        KoColorTransformationFactory.h
-        KoColorTransformationFactoryRegistry.h
-        KoCompositeOp.h
-        KoConvolutionOp.h
-        KoFallBackColorTransformation.h
-        KoIntegerMaths.h
-        KoLabDarkenColorTransformation.h
-        KoMixColorsOp.h
-        KoMixColorsOpImpl.h
-        KoHistogramProducer.h
-)
-
 set (EXTRA_LIBRARIES ${LINK_OPENEXR_LIB})
 
 if(MSVC)
@@ -112,7 +80,39 @@ set_target_properties(pigmentcms PROPERTIES
 
 install(TARGETS pigmentcms  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-install( FILES ${PIGMENT_INSTALL_FILES}
-         DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
+install(FILES
+    KoBasicHistogramProducers.h
+    KoColor.h
+    KoColorConversionSystem.h
+    KoColorConversionTransformation.h
+    KoColorConversionTransformationAbstractFactory.h
+    KoColorConversionTransformationFactory.h
+    KoColorConversions.h
+    KoColorModelStandardIds.h
+    KoColorProfile.h
+    KoColorSpace.h
+    KoColorSpaceEngine.h
+    KoColorSpaceFactory.h
+    KoColorSpaceMaths.h
+    KoColorSpaceRegistry.h
+    KoColorTransformation.h
+    KoColorTransformationFactory.h
+    KoColorTransformationFactoryRegistry.h
+    KoCompositeOp.h
+    KoFallBackColorTransformation.h
+    KoHistogramProducer.h
+    KoMultipleColorConversionTransformation.h
+    KoUniqueNumberForIdServer.h
+    colorspaces/KoAlphaColorSpace.h
+    pigment_export.h
+    resources/KoAbstractGradient.h
+    resources/KoColorSet.h
+    resources/KoPattern.h
+    resources/KoResource.h
+    resources/KoSegmentGradient.h
+    resources/KoStopGradient.h
+    DESTINATION
+    ${INCLUDE_INSTALL_DIR} COMPONENT Devel
+)
 
 install( FILES pigment.desktop pigmentextension.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
