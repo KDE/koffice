@@ -21,7 +21,7 @@
 #ifndef KPRPRESENTATIONTOOLDIALOG_H
 #define KPRPRESENTATIONTOOLDIALOG_H
 
-#include "ui_SCPresentationTool.h"
+#include <ui_SCPresentationTool.h>
 
 class SCPresentationToolWidget : public QWidget
 {

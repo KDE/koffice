@@ -21,7 +21,7 @@
 #ifndef KPRHTMLEXPORTDIALOG_H
 #define KPRHTMLEXPORTDIALOG_H
 
-#include "ui_SCHtmlExport.h"
+#include <ui_SCHtmlExport.h>
 
 #include <QWebPage>
 

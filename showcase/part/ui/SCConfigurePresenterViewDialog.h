@@ -22,7 +22,7 @@
 
 #include <KDialog>
 
-#include "ui_SCConfigurePresenterView.h"
+#include <ui_SCConfigurePresenterView.h>
 
 class SCDocument;
 

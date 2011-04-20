@@ -22,7 +22,7 @@
 
 #include <KDialog>
 
-#include "ui_SCConfigureSlideShow.h"
+#include <ui_SCConfigureSlideShow.h>
 
 class SCDocument;
 

@@ -22,7 +22,7 @@
 
 #include <QtGui/QDialog>
 
-#include "ui_SCCustomSlideShowsDialog.h"
+#include <ui_SCCustomSlideShowsDialog.h>
 
 class SCCustomSlideShows;
 class KoPAPageBase;
@@ -37,7 +37,7 @@ class SCCustomSlideShowsDialog : public QDialog
 public:
     SCCustomSlideShowsDialog(QWidget *parent, SCCustomSlideShows *slideShows, SCDocument *doc, SCCustomSlideShows *&newSlideShows);
     ~SCCustomSlideShowsDialog();
-private Q_SLOTS:
+private slots:
     void addCustomSlideShow();
     void addSlidesToCurrentSlideShow();
     void addSlidesToCurrentSlideShow(QListWidgetItem* currentItem);
@@ -48,7 +48,6 @@ private Q_SLOTS:
     void removeSlidesFromCurrentSlideShow();
     void removeSlidesFromCurrentSlideShow(QListWidgetItem* currentItem);
 
-//     Q_SIGNALS:
 private:
     enum {
         SlideShowNameData = 33,
