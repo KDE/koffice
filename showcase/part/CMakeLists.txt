@@ -183,7 +183,6 @@ install( PROGRAMS showcase.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 
 install(FILES
     pageeffects/showcase_pageeffect.desktop
-    shapeanimations/showcase_shapeanimation.desktop
     DESTINATION ${SERVICETYPES_INSTALL_DIR})
 
 

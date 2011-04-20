@@ -22,7 +22,6 @@
 #include <klocale.h>
 
 #include "SCDocument.h"
-#include "shapeanimations/SCShapeAnimationOld.h"
 #include "SCShapeAnimations.h"
 #include "animations/SCShapeAnimation.h"
 
