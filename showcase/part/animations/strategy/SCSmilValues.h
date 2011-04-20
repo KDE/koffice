@@ -23,7 +23,8 @@
 #include "SCAnimationValue.h"
 #include "SCValueParser.h"
 #include <QList>
-#include <QPair>
+
+class KoPASavingContext;
 
 class SCShapeAnimation;
 

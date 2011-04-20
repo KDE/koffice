@@ -20,7 +20,6 @@
 #ifndef KPRANIMATIONATTRIBUTE_H
 #define KPRANIMATIONATTRIBUTE_H
 
-#include <QtGlobal>
 #include <QString>
 
 class SCAnimationCache;

@@ -30,6 +30,7 @@ class KoShape;
 class KoTextBlockData;
 class SCAnimationCache;
 class SCShapeAnimation;
+class KoPASavingContext;
 
 class SCAnimationBase : public QAbstractAnimation, SCAnimationData
 {

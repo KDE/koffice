@@ -21,11 +21,12 @@
 #define KPRANIMATIONVALUE_H
 
 #include <QtGlobal>
-#include "KoPASavingContext.h"
+
 class KoShape;
 class KoTextBlockData;
 class SCAnimationCache;
 class SCShapeAnimation;
+class KoPASavingContext;
 
 class SCAnimationValue
 {

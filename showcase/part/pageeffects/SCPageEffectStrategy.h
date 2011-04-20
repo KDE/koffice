@@ -21,7 +21,7 @@
 #ifndef KPRPAGEEFFECTSTRATEGY_H
 #define KPRPAGEEFFECTSTRATEGY_H
 
-#include "SCPageEffectFactory.h"
+#include "SCPageEffect.h"
 
 #include "showcase_export.h"
 

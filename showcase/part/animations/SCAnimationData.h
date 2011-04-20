@@ -20,8 +20,6 @@
 #ifndef KPRANIMATIONDATA_H
 #define KPRANIMATIONDATA_H
 
-#include "KoPASavingContext.h"
-
 class SCAnimationCache;
 
 class SCAnimationData

@@ -26,9 +26,9 @@
 class QRectF;
 class QPixmap;
 class SCPlaceholder;
-#include "KoXmlReaderForward.h"
 class KoPALoadingContext;
 class KoPASavingContext;
+class KoXmlElement;
 
 class SCPageLayout
 {

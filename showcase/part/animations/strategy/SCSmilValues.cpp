@@ -18,10 +18,12 @@
  */
 
 #include "SCSmilValues.h"
-#include <QStringList>
-#include "KoXmlWriter.h"
 #include "SCShapeAnimations.h"
-#include "kdebug.h"
+
+#include <KoXmlWriter.h>
+#include <KoPASavingContext.h>
+#include <kdebug.h>
+#include <QStringList>
 
 SCSmilValues::SCSmilValues(SCShapeAnimation *shapeAnimation) : SCAnimationValue(shapeAnimation)
 {

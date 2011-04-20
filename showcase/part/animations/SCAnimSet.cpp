@@ -20,17 +20,19 @@
 
 #include "SCAnimSet.h"
 
+#include "SCDurationParser.h"
+#include "SCAnimationCache.h"
+#include "SCTextBlockPaintStrategy.h"
+#include "SCShapeAnimation.h"
+
+#include <KoPASavingContext.h>
 #include <QString>
 #include <KoXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextBlockData.h>
-#include "SCAnimationCache.h"
-#include "SCTextBlockPaintStrategy.h"
-#include "SCShapeAnimation.h"
 #include "KoXmlWriter.h"
-#include "SCDurationParser.h"
 #include <kdebug.h>
 
 SCAnimSet::SCAnimSet(SCShapeAnimation *shapeAnimation)

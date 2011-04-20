@@ -20,14 +20,15 @@
 
 #include "SCShapeAnimation.h"
 #include "SCAnimationBase.h"
-
-#include "KoXmlReader.h"
-#include "KoXmlWriter.h"
-#include "KoShapeLoadingContext.h"
-#include "KoShapeSavingContext.h"
-
-#include "KoTextBlockData.h"
 #include "SCTextBlockPaintStrategy.h"
+
+#include <KoXmlReader.h>
+#include <KoXmlWriter.h>
+#include <KoShapeLoadingContext.h>
+#include <KoShapeSavingContext.h>
+#include <KoPASavingContext.h>
+
+#include <KoTextBlockData.h>
 
 SCShapeAnimation::SCShapeAnimation(KoShape *shape, KoTextBlockData *textBlockData)
 : m_shape(shape)

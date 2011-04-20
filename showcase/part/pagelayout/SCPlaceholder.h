@@ -24,8 +24,8 @@
 #include <QString>
 #include <QRectF>
 
-#include "KoXmlReaderForward.h"
 class KoXmlWriter;
+class KoXmlElement;
 
 class SCPlaceholder
 {

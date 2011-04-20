@@ -19,18 +19,6 @@
  */
 
 #include "SCAnimate.h"
-
-#include "SCAnimationCache.h"
-#include <KoXmlNS.h>
-#include <KoXmlReader.h>
-#include <KoShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
-#include <KoTextBlockData.h>
-#include <KoShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
-#include <KoXmlReader.h>
-#include "KoXmlWriter.h"
-
 #include "SCAnimationCache.h"
 #include "SCShapeAnimation.h"
 
@@ -43,7 +31,18 @@
 #include "strategy/SCAttributeHeight.h"
 #include "strategy/SCAttributeRotate.h"
 
-#include "KoShape.h"
+#include <KoXmlNS.h>
+#include <KoShape.h>
+#include <KoXmlReader.h>
+#include <KoShapeLoadingContext.h>
+#include <KoShapeSavingContext.h>
+#include <KoTextBlockData.h>
+#include <KoShapeLoadingContext.h>
+#include <KoShapeSavingContext.h>
+#include <KoXmlReader.h>
+#include <KoXmlWriter.h>
+#include <KoPASavingContext.h>
+
 #include <kdebug.h>
 
 SCAnimate::SCAnimate(SCShapeAnimation *shapeAnimation)

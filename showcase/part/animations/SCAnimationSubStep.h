@@ -24,6 +24,8 @@
 #include <QParallelAnimationGroup>
 #include "SCAnimationData.h"
 
+class KoPASavingContext;
+
 class SCAnimationSubStep : public QParallelAnimationGroup, SCAnimationData
 {
 public:

@@ -23,7 +23,6 @@
 
 #include <QParallelAnimationGroup>
 #include "SCAnimationData.h"
-#include <QPair>
 
 class KoShape;
 class KoTextBlockData;
@@ -31,6 +30,7 @@ class KoXmlElement;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
 class SCAnimationCache;
+class KoPASavingContext;
 
 class SCShapeAnimation : public QParallelAnimationGroup, SCAnimationData
 {

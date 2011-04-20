@@ -23,7 +23,6 @@
 #include "showcase_export.h"
 
 #include <QWidget>
-#include <KoShape.h>
 #include <QTimeLine>
 
 class SCPage;

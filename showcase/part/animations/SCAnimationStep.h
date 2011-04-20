@@ -24,6 +24,8 @@
 #include <QSequentialAnimationGroup>
 #include "SCAnimationData.h"
 
+class KoPASavingContext;
+
 class SCAnimationStep : public QSequentialAnimationGroup, SCAnimationData
 {
 public:

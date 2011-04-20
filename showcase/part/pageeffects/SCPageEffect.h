@@ -24,7 +24,6 @@
 #include <QPixmap>
 #include <QTimeLine>
 
-#include <KoXmlReaderForward.h>
 #include "showcase_export.h"
 
 class QPainter;
@@ -34,6 +33,7 @@ class QGraphicsView;
 class KoXmlWriter;
 class KoGenStyle;
 class SCPageEffectStrategy;
+class KoXmlElement;
 
 /**
  * This is the base class for all page effects.

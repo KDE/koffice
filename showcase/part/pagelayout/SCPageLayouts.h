@@ -21,7 +21,6 @@
 #define KPRPAGELAYOUTS_H
 
 #include <QMap>
-#include <QString>
 #include <QObject>
 #include <QVariant>
 
@@ -30,6 +29,7 @@ class SCPageLayout;
 class SCPageLayoutWrapper;
 class KoPALoadingContext;
 class KoPASavingContext;
+class QString;
 
 class SCPageLayouts : public QObject
 {

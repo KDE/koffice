@@ -21,14 +21,10 @@
 #define KPRPAGEEFFECTDOCKER_H
 
 #include <QWidget>
-#include <QPixmap>
 
-class QLabel;
 class QComboBox;
 class QDoubleSpinBox;
-class QTimer;
 class SCPageEffect;
-class SCPageEffectRunner;
 class SCPageEffectFactory;
 class KoPAViewBase;
 class SCViewModePreviewPageEffect;

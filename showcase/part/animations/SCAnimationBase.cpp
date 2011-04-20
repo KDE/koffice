@@ -28,6 +28,8 @@
 #include "KoShapeLoadingContext.h"
 #include "KoTextBlockData.h"
 
+#include <KoPASavingContext.h>
+
 SCAnimationBase::SCAnimationBase(SCShapeAnimation *shapeAnimation)
 : m_shapeAnimation(shapeAnimation)
 , m_begin(0)

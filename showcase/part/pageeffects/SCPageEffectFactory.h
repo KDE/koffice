@@ -19,6 +19,7 @@
 #ifndef KPRPAGEEFFECTFACTORY_H
 #define KPRPAGEEFFECTFACTORY_H
 
+#include <QList>
 #include <QPair>
 
 #include "SCPageEffect.h"

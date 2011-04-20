@@ -20,7 +20,9 @@
 
 #include "SCAnimationStep.h"
 #include "SCAnimationSubStep.h"
-#include "KoXmlWriter.h"
+
+#include <KoXmlWriter.h>
+#include <KoPASavingContext.h>
 
 SCAnimationStep::SCAnimationStep()
 {
