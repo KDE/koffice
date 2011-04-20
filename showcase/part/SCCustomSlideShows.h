@@ -20,15 +20,12 @@
 #ifndef KPRCUSTOMSLIDESHOWS_H
 #define KPRCUSTOMSLIDESHOWS_H
 
-//Qt includes
 #include<QMap>
-#include<QList>
-#include<QString>
 
 //Forward declarations
 class KoXmlWriter;
+class KoXmlElement;
 class KoPAPageBase;
-#include "KoXmlReaderForward.h"
 class KoPASavingContext;
 class KoPALoadingContext;
 class SCDocument;

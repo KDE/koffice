@@ -23,7 +23,6 @@
 #include "SCPlaceholderStrategy.h"
 
 class KoShape;
-class KoParagraphStyle;
 
 class SCPlaceholderTextStrategy : public SCPlaceholderStrategy
 {

@@ -73,7 +73,7 @@ public:
     const QString declaration(Type type, const QString &key);
 
 private:
-    QHash<Type, QHash<QString /*key*/, QVariant /*data*/> > m_declarations;
+    QHash<Type, QHash<QString, QVariant> > m_declarations;
 };
 
 #endif /* KPRDECLARATIONS_H */

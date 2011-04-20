@@ -65,7 +65,6 @@ KoShape *SCPlaceholderTextStrategy::createShape(KoResourceManager *documentResou
         if (data && newData) {
             QTextCursor cursor(data->document());
             QTextCursor newCursor(newData->document());
-            KoTextDocument textDocument(newData->document());
 
             QTextBlockFormat blockFormat(cursor.blockFormat());
             newCursor.setBlockFormat(blockFormat);
@@ -122,6 +121,7 @@ void SCPlaceholderTextStrategy::saveOdf(KoShapeSavingContext & context)
 
 bool SCPlaceholderTextStrategy::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
 {
+kDebug();
     if (KoTextSharedLoadingData *textSharedData = dynamic_cast<KoTextSharedLoadingData *>(context.sharedData(KOTEXT_SHARED_LOADING_ID))) {
         KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
         Q_ASSERT(factory);
@@ -146,8 +146,10 @@ bool SCPlaceholderTextStrategy::loadOdf(const KoXmlElement & element, KoShapeLoa
         }
 
         const QString textStyleName = element.attributeNS(KoXmlNS::draw, "text-style-name");
+kDebug() << textStyleName;
         if (!textStyleName.isEmpty()) {
             KoParagraphStyle *style = textSharedData->paragraphStyle(textStyleName, context.odfLoadingContext().useStylesAutoStyles());
+kDebug() << style;
             if (style) {
                 style->applyStyle(block, false); // TODO t.zachmann is the false correct?
             }

@@ -23,8 +23,6 @@
 
 #include "showcase_export.h"
 
-#include <QObject>
-
 #include <KoPAView.h>
 
 class SCDocument;

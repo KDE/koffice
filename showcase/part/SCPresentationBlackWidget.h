@@ -23,9 +23,9 @@
 
 #include "SCPresentationToolEventForwarder.h"
 
-#include <KoPACanvas.h>
-
 #include <QSize>
+
+class KoPACanvasBase;
 
 class SCPresentationBlackWidget : public SCPresentationToolEventForwarder
 {

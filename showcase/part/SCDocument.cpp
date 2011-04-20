@@ -20,7 +20,7 @@
 
 #include "SCDocument.h"
 
-
+#include "SCCustomSlideShows.h"
 #include "SCView.h"
 #include "Showcase.h"
 #include "SCPage.h"
@@ -37,6 +37,8 @@
 #include "tools/SCPlaceholderToolFactory.h"
 #include "tools/SCAnimationToolFactory.h"
 #include "commands/SCSetCustomSlideShowsCommand.h"
+#include "animations/SCShapeAnimation.h"
+
 #include <KoPACanvas.h>
 #include <KoPAViewModeNormal.h>
 #include <KoPASavingContext.h>

@@ -24,8 +24,6 @@
 
 #include "SCPresentationToolEventForwarder.h"
 
-class KoPACanvas;
-
 class SCPresentationHighlightWidget : public SCPresentationToolEventForwarder
 {
     Q_OBJECT

@@ -22,10 +22,7 @@
 
 #include <KoPAPrintJob.h>
 
-#include <QPrinter>
-
 class SCView;
-class KoPAPageBase;
 
 class SCPdfPrintJob : public KoPAPrintJob
 {

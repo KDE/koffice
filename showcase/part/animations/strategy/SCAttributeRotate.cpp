@@ -19,10 +19,11 @@
 
 #include "SCAttributeRotate.h"
 #include "../SCAnimationCache.h"
-#include "KoShape.h"
+#include "../SCShapeAnimation.h"
+#include <KoShape.h>
 #include "SCShapeAnimations.h"
-#include "KoTextBlockData.h"
-#include "KoTextShapeData.h"
+#include <KoTextBlockData.h>
+#include <KoTextShapeData.h>
 #include <QTextDocument>
 #include <QTextLayout>
 #include "kdebug.h"

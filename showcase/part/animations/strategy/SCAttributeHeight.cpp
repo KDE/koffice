@@ -19,10 +19,12 @@
 
 #include "SCAttributeHeight.h"
 #include "../SCAnimationCache.h"
-#include "KoShape.h"
-#include "SCShapeAnimations.h"
-#include "KoTextBlockData.h"
-#include "KoTextShapeData.h"
+#include "../SCShapeAnimation.h"
+#include <SCShapeAnimations.h>
+
+#include <KoTextBlockData.h>
+#include <KoTextShapeData.h>
+#include <KoShape.h>
 #include <QTextDocument>
 #include <QTextLayout>
 #include "kdebug.h"

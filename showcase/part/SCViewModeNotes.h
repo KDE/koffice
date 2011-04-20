@@ -20,7 +20,6 @@
 #ifndef KPRVIEWMODENOTES_H
 #define KPRVIEWMODENOTES_H
 
-#include <KoPageApp.h>
 #include <KoPAViewMode.h>
 
 class KoPAView;

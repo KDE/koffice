@@ -20,8 +20,6 @@
 #ifndef KPRPRESENTATIONTOOLADAPTOR_H
 #define KPRPRESENTATIONTOOLADAPTOR_H
 
-#include "SCPresentationTool.h"
-
 #include <QtDBus/QtDBus>
 
 class SCViewModePresentation;

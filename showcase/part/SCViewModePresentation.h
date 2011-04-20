@@ -21,16 +21,12 @@
 #define KPRVIEWMODEPRESENTATION_H
 
 #include <KoPAViewMode.h>
-
 #include "SCAnimationDirector.h"
-#include "SCPresentationTool.h"
 
 class QWidget;
 class SCPresentationTool;
 class SCPresenterViewWidget;
-class SCViewModePresenterView;
 class SCEndOfSlideShowPage;
-class KoPAViewMode;
 class SCView;
 
 class SCViewModePresentation : public KoPAViewMode

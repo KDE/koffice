@@ -21,8 +21,9 @@
 #ifndef KPRSOUNDDATA_H
 #define KPRSOUNDDATA_H
 
-#include <KUrl>
 #include "showcase_export.h"
+
+#include <QString>
 
 class SCSoundCollection;
 class QIODevice;
@@ -52,7 +53,7 @@ public:
      * @param collection the sound collection which will do the loading of the sound data for us.
      * @param href the url of the sound in the store.
      */
-    explicit SCSoundData(SCSoundCollection *collection, QString href="");
+    explicit SCSoundData(SCSoundCollection *collection, QString href = QString());
 
     /**
      * copy constructor using ref-counting.

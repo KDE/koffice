@@ -19,6 +19,8 @@
  */
 #include "SCPresentationBlackWidget.h"
 
+#include <KoPACanvas.h>
+
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QKeyEvent>

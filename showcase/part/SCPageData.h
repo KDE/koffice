@@ -23,8 +23,6 @@
 #include "SCShapeAnimations.h"
 #include "pagelayout/SCPlaceholders.h"
 
-class KprAnimationStep;
-
 class SCPageData
 {
 public:

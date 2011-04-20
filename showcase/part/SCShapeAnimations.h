@@ -22,9 +22,9 @@
 #define KPRSHAPEANIMATIONS_H
 
 #include <QList>
-#include "animations/SCShapeAnimation.h"
-#include "animations/SCAnimationStep.h"
 
+class SCAnimationStep;
+class SCShapeAnimation;
 
 class SCShapeAnimations
 {

@@ -24,7 +24,6 @@
 #include "showcase_export.h"
 
 #include <KoPAViewMode.h>
-#include "SCAnimationDirector.h"
 #include <QTimeLine>
 #include <QPixmap>
 

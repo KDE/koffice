@@ -19,6 +19,7 @@
 
 #include "SCAttributeWidth.h"
 #include "../SCAnimationCache.h"
+#include "../SCShapeAnimation.h"
 #include "KoShape.h"
 #include "SCShapeAnimations.h"
 #include "KoTextBlockData.h"

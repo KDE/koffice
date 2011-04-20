@@ -23,7 +23,6 @@
 #include <KoPAMasterPage.h>
 
 #include "SCPageData.h"
-#include "SCShapeAnimations.h"
 
 class SCMasterPage : public KoPAMasterPage, public SCPageData
 {

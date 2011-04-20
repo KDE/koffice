@@ -21,13 +21,9 @@
 #ifndef KPRANIMATIONDIRECTOR_H
 #define KPRANIMATIONDIRECTOR_H
 
-#include <QList>
 #include <QObject>
-#include <QPair>
 #include <QTimeLine>
-#include <QTransform>
 #include <KoZoomHandler.h>
-#include "SCShapeAnimations.h"
 
 class QPainter;
 class QPaintEvent;
@@ -43,6 +39,8 @@ class SCAnimationData;
 class SCPage;
 class SCPageData;
 class SCShapeAnimation;
+class SCAnimationStep;
+class SCAnimationCache;
 
 class SCAnimationDirector : public QObject
 {

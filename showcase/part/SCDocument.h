@@ -20,14 +20,12 @@
 #ifndef KPRDOCUMENT_H
 #define KPRDOCUMENT_H
 
-#include <QObject>
-
 #include <KoPADocument.h>
-#include "SCCustomSlideShows.h"
 
 class SCDeclarations;
 class SCShapeAnimation;
 class SCShapeAnimations;
+class SCCustomSlideShows;
 
 class SCDocument : public KoPADocument
 {

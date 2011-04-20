@@ -21,10 +21,9 @@
 #ifndef KPRVIEWMODESLIDESSORTER_H
 #define KPRVIEWMODESLIDESSORTER_H
 
-#include <QListWidget>
 #include <QSize>
+#include <QRect>
 
-#include <KoPageApp.h>
 #include <KoPAViewMode.h>
 
 class KoPAView;
@@ -128,49 +127,8 @@ protected:
      */
     void setLastItemNumber(int number);
 
-    /**
-     * This class manage the QListWidget itself.
-     * Use all the getters and setters of the SCViewModeSlidesSorter.
-     * Most of the functions are Qt overrides to have the wished comportment.
-     */
-    class SCSlidesSorter : public QListWidget {
-        public:
-            SCSlidesSorter (SCViewModeSlidesSorter * viewModeSlidesSorter, QWidget * parent = 0)
-                : QListWidget(parent)
-                , m_viewModeSlidesSorter(viewModeSlidesSorter)
-                , m_movingPageNumber(-1)
-            {
-                setViewMode(QListView::IconMode);
-                setResizeMode(QListView::Adjust);
-                setDragDropMode(QAbstractItemView::DragDrop);
-            };
-            ~SCSlidesSorter(){};
-
-            virtual Qt::DropActions supportedDropActions() const
-            {
-                return Qt::MoveAction;
-            }
-
-            virtual void paintEvent (QPaintEvent * ev);
-
-            virtual void startDrag (Qt::DropActions supportedActions);
-
-            virtual void dropEvent(QDropEvent* ev);
-
-            virtual void dragMoveEvent(QDragMoveEvent* ev);
-
-            virtual QStringList mimeTypes() const;
-
-            virtual QMimeData* mimeData(const QList<QListWidgetItem*> items) const;
-
-            int pageBefore(QPoint point);
-
-        private:
-            SCViewModeSlidesSorter * m_viewModeSlidesSorter;
-            int m_movingPageNumber;
-    };
-
 private:
+    class SCSlidesSorter;
     SCSlidesSorter * m_slidesSorter;
     QSize m_iconSize;
     QRect m_itemSize;

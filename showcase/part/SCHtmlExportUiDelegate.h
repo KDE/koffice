@@ -21,7 +21,6 @@
 #define KPRHTMLEXPORTUIDELEGATE_H
 
 #include <kio/jobuidelegate.h>
-#include <kio/renamedialog.h>
 
 class SCHtmlExportUiDelegate : public KIO::JobUiDelegate
 {

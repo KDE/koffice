@@ -20,15 +20,11 @@
 #ifndef KPRPLACEHOLDERSTRATEGY_H
 #define KPRPLACEHOLDERSTRATEGY_H
 
-#include <QMap>
-
 class QString;
 class QRectF;
 class QPainter;
-#include "KoXmlReaderForward.h"
+class KoXmlElement;
 class KoShape;
-class KoDataCenterBase;
-class KoShapeControllerBase;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
 class KoShapeUserData;

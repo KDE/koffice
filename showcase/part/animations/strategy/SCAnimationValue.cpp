@@ -18,7 +18,8 @@
  */
 
 #include "SCAnimationValue.h"
-#include "SCShapeAnimations.h"
+#include <SCShapeAnimations.h>
+#include "../SCShapeAnimation.h"
 
 SCAnimationValue::SCAnimationValue(SCShapeAnimation *shapeAnimation)
     : m_shape(shapeAnimation->shape())

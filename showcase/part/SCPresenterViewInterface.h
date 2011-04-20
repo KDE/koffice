@@ -22,8 +22,6 @@
 
 #include "SCPresenterViewBaseInterface.h"
 
-#include <QtGui/QFrame>
-
 class QLabel;
 class QTextEdit;
 

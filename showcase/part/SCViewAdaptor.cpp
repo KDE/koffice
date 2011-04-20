@@ -18,6 +18,7 @@
 */
 
 #include "SCViewAdaptor.h"
+#include "SCCustomSlideShows.h"
 #include "SCView.h"
 #include "SCViewModePresentation.h"
 #include "SCAnimationDirector.h"

@@ -23,7 +23,6 @@
 */
 #include "SCDeclarations.h"
 #include <QDateTime>
-#include <QVariant>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>

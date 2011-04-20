@@ -25,9 +25,6 @@
 
 #include "SCPresentationToolEventForwarder.h"
 
-#include <QtGui/QLabel>
-#include <QVarLengthArray>
-
 class QAction;
 class KoPACanvas;
 

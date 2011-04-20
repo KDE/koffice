@@ -20,6 +20,7 @@
 
 #include "SCPageData.h"
 #include "SCShapeAnimations.h"
+#include "animations/SCAnimationStep.h"
 
 SCPageData::SCPageData()
 {

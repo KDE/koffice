@@ -19,6 +19,23 @@
  */
 
 #include "SCAnimationDirector.h"
+#include "SCShapeAnimations.h"
+#include "animations/SCAnimationCache.h"
+#include "animations/SCAnimationStep.h"
+#include "SCEndOfSlideShowPage.h"
+#include "SCPage.h"
+#include "SCMasterPage.h"
+#include "SCPageApplicationData.h"
+#include "SCShapeManagerAnimationStrategy.h"
+#include "SCShapeManagerDisplayMasterStrategy.h"
+#include "SCPageSelectStrategyActive.h"
+#include "pageeffects/SCPageEffectRunner.h"
+#include "pageeffects/SCPageEffect.h"
+
+#include <KoShapeLayer.h>
+#include <KoPAMasterPage.h>
+#include <KoSelection.h>
+
 #include <QList>
 #include <QPainter>
 #include <QPaintEvent>
@@ -35,22 +52,6 @@
 #include <KoPAPageBase.h>
 #include <KoPAView.h>
 #include <KoPAUtil.h>
-
-#include "SCEndOfSlideShowPage.h"
-#include "SCPage.h"
-#include "SCMasterPage.h"
-#include "SCPageApplicationData.h"
-#include "SCShapeManagerAnimationStrategy.h"
-#include "SCShapeManagerDisplayMasterStrategy.h"
-#include "SCPageSelectStrategyActive.h"
-#include "pageeffects/SCPageEffectRunner.h"
-#include "pageeffects/SCPageEffect.h"
-
-#include <KoShapeLayer.h>
-#include <KoPAMasterPage.h>
-#include <KoSelection.h>
-#include "SCShapeAnimations.h"
-#include "animations/SCAnimationCache.h"
 
 SCAnimationDirector::SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> & pages, KoPAPageBase* currentPage)
 : m_view(view)

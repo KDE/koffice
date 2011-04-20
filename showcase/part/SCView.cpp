@@ -21,6 +21,30 @@
 */
 #include "SCView.h"
 
+#include "SCPresentationTool.h"
+#include "SCDocument.h"
+#include "SCPage.h"
+#include "SCMasterPage.h"
+#include "SCPageApplicationData.h"
+#include "SCViewAdaptor.h"
+#include "SCPdfPrintJob.h"
+#include "SCViewModePresentation.h"
+#include "SCViewModeNotes.h"
+#include "SCViewModeSlidesSorter.h"
+#include "SCShapeManagerDisplayMasterStrategy.h"
+#include "SCPageSelectStrategyActive.h"
+#include "SCPicturesImport.h"
+#include "commands/SCAnimationCreateCommand.h"
+#include "commands/SCSetCustomSlideShowsCommand.h"
+#include "dockers/SCPageLayoutDockerFactory.h"
+#include "dockers/SCPageLayoutDocker.h"
+#include "SCHtmlExport.h"
+#include "SCCustomSlideShows.h"
+#include "ui/SCCustomSlideShowsDialog.h"
+#include "ui/SCConfigureSlideShowDialog.h"
+#include "ui/SCConfigurePresenterViewDialog.h"
+#include "ui/SCHtmlExportDialog.h"
+
 #include <klocale.h>
 #include <ktoggleaction.h>
 #include <kactioncollection.h>
@@ -38,30 +62,7 @@
 #include <KoShapeRegistry.h>
 #include <KoShapeLayer.h>
 
-#include "SCDocument.h"
-#include "SCPage.h"
-#include "SCMasterPage.h"
-#include "SCPageApplicationData.h"
-#include "SCViewAdaptor.h"
-#include "SCViewModePresentation.h"
-#include "SCViewModeNotes.h"
-#include "SCViewModeSlidesSorter.h"
-#include "SCShapeManagerDisplayMasterStrategy.h"
-#include "SCPageSelectStrategyActive.h"
-#include "SCPicturesImport.h"
-#include "commands/SCAnimationCreateCommand.h"
-#include "commands/SCSetCustomSlideShowsCommand.h"
-#include "dockers/SCPageLayoutDockerFactory.h"
-#include "dockers/SCPageLayoutDocker.h"
-#include "SCHtmlExport.h"
-#include "SCCustomSlideShows.h"
-#include "ui/SCCustomSlideShowsDialog.h"
-#include "ui/SCConfigureSlideShowDialog.h"
-#include "ui/SCConfigurePresenterViewDialog.h"
-#include "ui/SCHtmlExportDialog.h"
 #include <QtGui/QDesktopWidget>
-
-#include "SCPdfPrintJob.h"
 
 SCView::SCView(SCDocument *document, QWidget *parent)
   : KoPAView(document, parent)

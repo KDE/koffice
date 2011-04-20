@@ -19,18 +19,6 @@
 
 #include "SCPage.h"
 
-#include <QString>
-
-#include <KoXmlNS.h>
-#include <KoXmlWriter.h>
-#include <KoOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
-#include <KoStyleStack.h>
-#include <KoGenStyle.h>
-#include <KoShapeLayer.h>
-#include <KoPALoadingContext.h>
-#include <KoPASavingContext.h>
-
 #include "SCDocument.h"
 #include "SCDeclarations.h"
 #include "Showcase.h"
@@ -47,8 +35,20 @@
 #include "pageeffects/SCPageEffectRegistry.h"
 #include "pageeffects/SCPageEffect.h"
 #include "animations/SCAnimationLoader.h"
+#include "animations/SCAnimationStep.h"
+
+#include <KoXmlNS.h>
+#include <KoXmlWriter.h>
+#include <KoOdfLoadingContext.h>
+#include <KoOdfStylesReader.h>
+#include <KoStyleStack.h>
+#include <KoGenStyle.h>
+#include <KoShapeLayer.h>
+#include <KoPALoadingContext.h>
+#include <KoPASavingContext.h>
 
 #include <kdebug.h>
+#include <QString>
 
 class SCPage::Private
 {

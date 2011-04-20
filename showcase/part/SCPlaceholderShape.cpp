@@ -18,15 +18,13 @@
  */
 
 #include "SCPlaceholderShape.h"
+#include "SCPlaceholderStrategy.h"
 
-#include <QPainter>
-#include <QTextOption>
 #include <KoShapeSavingContext.h>
-#include <KoViewConverter.h>
 #include <KoXmlWriter.h>
 #include <KoOdfWorkaround.h>
 
-#include "SCPlaceholderStrategy.h"
+#include <QPainter>
 
 SCPlaceholderShape::SCPlaceholderShape()
 : m_strategy(0)

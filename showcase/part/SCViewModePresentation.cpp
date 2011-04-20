@@ -19,6 +19,11 @@
  */
 
 #include "SCViewModePresentation.h"
+#include "SCPresentationTool.h"
+#include "SCView.h"
+#include "SCDocument.h"
+#include "SCPresenterViewWidget.h"
+#include "SCEndOfSlideShowPage.h"
 
 #include <QEvent>
 #include <QKeyEvent>
@@ -35,11 +40,6 @@
 #include <KoPADocument.h>
 #include <KoPAView.h>
 #include <KoZoomHandler.h>
-#include <SCView.h>
-
-#include "SCDocument.h"
-#include "SCPresenterViewWidget.h"
-#include "SCEndOfSlideShowPage.h"
 
 SCViewModePresentation::SCViewModePresentation(KoPAViewBase * view, KoPACanvasBase * canvas)
 : KoPAViewMode(view, canvas)
