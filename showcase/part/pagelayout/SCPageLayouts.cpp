@@ -144,26 +144,24 @@ bool SCPageLayouts::loadOdf(KoPALoadingContext & context)
     return true;
 }
 
-SCPageLayout * SCPageLayouts::pageLayout(const QString & name, KoPALoadingContext & loadingContext, const QRectF & pageRect)
+SCPageLayout *SCPageLayouts::pageLayout(const QString &name, KoPALoadingContext &loadingContext, const QRectF &pageRect)
 {
-    SCPageLayout * pageLayout = 0;
+    SCPageLayout *pageLayout = 0;
 
     QHash<QString, KoXmlElement*> layouts = loadingContext.odfLoadingContext().stylesReader().presentationPageLayouts();
     QHash<QString, KoXmlElement*>::iterator it(layouts.find(name));
 
-    if (it != layouts.end()) {
+    if (it != layouts.end()) { // Found the xmlelement
         pageLayout = new SCPageLayout();
         if (pageLayout->loadOdf(*(it.value()), pageRect)) {
-            QMap<SCPageLayoutWrapper, SCPageLayout *>::const_iterator it(m_pageLayouts.constFind(SCPageLayoutWrapper(pageLayout)));
-            if (it != m_pageLayouts.constEnd()) {
+            QMap<SCPageLayoutWrapper, SCPageLayout *>::const_iterator iter(m_pageLayouts.constFind(SCPageLayoutWrapper(pageLayout)));
+            if (iter != m_pageLayouts.constEnd()) { // found it in our m_pageLayouts map
                 delete pageLayout;
-                pageLayout = *it;
-            }
-            else {
+                pageLayout = *iter;
+            } else {
                 m_pageLayouts.insert(SCPageLayoutWrapper(pageLayout), pageLayout);
             }
-        }
-        else {
+        } else { // load failed
             delete pageLayout;
             pageLayout = 0;
         }

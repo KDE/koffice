@@ -45,15 +45,14 @@ public:
     bool loadOdf(KoPALoadingContext & context);
 
     /**
-     *
+     * Return a pagelayout by name.
      */
-    SCPageLayout * pageLayout(const QString & name, KoPALoadingContext & loadingContext, const QRectF & pageRect);
-
+    SCPageLayout *pageLayout(const QString &name, KoPALoadingContext &loadingContext, const QRectF &pageRect);
 
     const QList<SCPageLayout *> layouts() const;
 
 private:
-    // this is a simulation of a std::set<SCPageLayout, compareByKPrPageLayout>()
+    // this is a simulation of a std::set<SCPageLayout, compareBySCPageLayout>()
     QMap<SCPageLayoutWrapper, SCPageLayout *> m_pageLayouts;
 };
 
