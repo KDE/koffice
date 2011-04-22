@@ -53,7 +53,7 @@ void SCPicturesImport::import(SCView *view)
         if (activePage) {
             m_masterPage = activePage->masterPage();
 
-            m_doc = view->kprDocument();
+            m_doc = view->scDocument();
             m_cmd = new QUndoCommand(i18n("Insert Pictures"));
             import();
         }

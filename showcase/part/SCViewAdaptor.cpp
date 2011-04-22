@@ -35,7 +35,7 @@ SCViewAdaptor::SCViewAdaptor(SCView* view)
 : KoViewAdaptor(view)
 , m_view(view)
 {
-    SCDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->scDocument();
     connect(doc, SIGNAL(activeCustomSlideShowChanged(const QString &)), this, SIGNAL(activeCustomSlideShowChanged(const QString &)));
     connect(doc, SIGNAL(customSlideShowsModified()), this, SIGNAL(customSlideShowsModified()));
 
@@ -54,13 +54,13 @@ SCViewAdaptor::~SCViewAdaptor()
 
 QStringList SCViewAdaptor::customSlideShows() const
 {
-    SCDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->scDocument();
     return doc->customSlideShows()->names();
 }
 
 QString SCViewAdaptor::activeCustomSlideShow() const
 {
-    SCDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->scDocument();
     return doc->activeCustomSlideShow();
 }
 
@@ -68,7 +68,7 @@ bool SCViewAdaptor::setActiveCustomSlideShow(const QString &name)
 {
     // Check that the custom slideshow exists
     if (name.isEmpty() || customSlideShows().contains(name)) {
-        SCDocument *doc = m_view->kprDocument();
+        SCDocument *doc = m_view->scDocument();
         doc->setActiveCustomSlideShow(name);
         return true;
     }
@@ -81,13 +81,13 @@ bool SCViewAdaptor::setActiveCustomSlideShow(const QString &name)
 
 int SCViewAdaptor::numCustomSlideShowSlides() const
 {
-    SCDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->scDocument();
     return doc->slideShow().size();
 }
 
 QString SCViewAdaptor::pageName(int page) const
 {
-    SCDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->scDocument();
 
     QList<KoPAPageBase *> slideShow = doc->slideShow();
     if (page >= 0 && page < slideShow.size()) {
@@ -98,7 +98,7 @@ QString SCViewAdaptor::pageName(int page) const
 
 QString SCViewAdaptor::pageNotes(int page, const QString &format) const
 {
-    SCDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->scDocument();
 
     QList<KoPAPageBase *> slideShow = doc->slideShow();
     if (page >= 0 && page < slideShow.size()) {
@@ -125,7 +125,7 @@ QString SCViewAdaptor::pageNotes(int page, const QString &format) const
 bool SCViewAdaptor::exportPageThumbnail(int page, int width, int height,
                                           const QString &filename, const QString &format, int quality)
 {
-    SCDocument *doc = m_view->kprDocument();
+    SCDocument *doc = m_view->scDocument();
 
     QList<KoPAPageBase *> slideShow = doc->slideShow();
     if (page >= 0 && page < slideShow.size()) {
@@ -140,7 +140,7 @@ bool SCViewAdaptor::exportPageThumbnail(int page, int width, int height,
         return false;
     }
 }
-    
+
 // Presentation control
 
 void SCViewAdaptor::presentationStart()

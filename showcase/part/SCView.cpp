@@ -116,7 +116,7 @@ KoViewConverter * SCView::viewConverter(KoPACanvasBase * canvas)
     return viewMode()->viewConverter(canvas);
 }
 
-SCDocument * SCView::kprDocument() const
+SCDocument * SCView::scDocument() const
 {
     return static_cast<SCDocument *>(kopaDocument());
 }

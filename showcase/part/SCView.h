@@ -47,7 +47,7 @@ public:
     /**
      * Get the document object the view was initialised with
      */
-    SCDocument * kprDocument() const;
+    SCDocument * scDocument() const;
 
     /**
      * Get the view's dbus adaptor
