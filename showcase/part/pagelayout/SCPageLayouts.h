@@ -37,12 +37,12 @@ public:
     SCPageLayouts(QObject *parent = 0);
     ~SCPageLayouts();
 
-    bool saveOdf(KoPASavingContext & context);
+    bool saveOdf(KoPASavingContext &context);
 
     /**
      * load all not yet loaded styles and add application styles
      */
-    bool loadOdf(KoPALoadingContext & context);
+    bool loadOdf(KoPALoadingContext &context);
 
     /**
      * Return a pagelayout by name.

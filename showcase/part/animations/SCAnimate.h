@@ -32,7 +32,7 @@ public:
     virtual ~SCAnimate();
 
     virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
-    virtual bool saveOdf(KoPASavingContext & paContext) const;
+    virtual bool saveOdf(KoPASavingContext &paContext) const;
     virtual void init(SCAnimationCache *animationCache, int step);
     virtual bool saveAttribute(KoPASavingContext &paContext) const;
 protected:

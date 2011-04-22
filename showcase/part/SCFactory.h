@@ -34,7 +34,7 @@ public:
     explicit SCFactory(QObject* parent = 0, const char* name = 0);
     ~SCFactory();
 
-    virtual QObject* create(const char* iface, QWidget* parentWidget, QObject *parent, const QVariantList& args, const QString& keyword);
+    virtual QObject* create(const char* iface, QWidget* parentWidget, QObject *parent, const QVariantList &args, const QString &keyword);
     static const KComponentData &componentData();
 
     // _Creates_ a KAboutData but doesn't keep ownership

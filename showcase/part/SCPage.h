@@ -94,7 +94,7 @@ public:
 
 protected:
     /// reimplemented
-    virtual void saveOdfPageContent(KoPASavingContext & paContext) const;
+    virtual void saveOdfPageContent(KoPASavingContext &paContext) const;
 
     /// reimplemented
     virtual void saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const;
@@ -103,10 +103,10 @@ protected:
     virtual void loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext);
 
     /// reimplemented
-    virtual void loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & loadingContext);
+    virtual void loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &loadingContext);
 
     /// reimplemented
-    virtual bool saveOdfAnimations(KoPASavingContext & paContext) const;
+    virtual bool saveOdfAnimations(KoPASavingContext &paContext) const;
 
     /// reimplemented
     virtual bool saveOdfPresentationNotes(KoPASavingContext &paContext) const;

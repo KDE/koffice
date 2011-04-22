@@ -162,7 +162,7 @@ bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context
     }
 
     if (loadOldTransition) {
-        KoOdfStylesReader& stylesReader = context.odfLoadingContext().stylesReader();
+        KoOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
         const KoXmlElement * styleElement = stylesReader.findContentAutoStyle(element.attributeNS(KoXmlNS::draw, "style-name"), "drawing-page");
         if (styleElement) {
 #ifndef KOXML_USE_QDOM
@@ -179,7 +179,7 @@ bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context
     return true;
 }
 
-void SCPage::saveOdfPageContent(KoPASavingContext & paContext) const
+void SCPage::saveOdfPageContent(KoPASavingContext &paContext) const
 {
     KoXmlWriter &writer(paContext.xmlWriter());
     if (layout()) {
@@ -232,7 +232,7 @@ void SCPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loa
 {
     KoPAPage::loadOdfPageTag(element, loadingContext);
 
-    KoStyleStack& styleStack = loadingContext.odfLoadingContext().styleStack();
+    KoStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
 
     int pageProperties = m_pageProperties & UseMasterBackground;
     if (styleStack.property(KoXmlNS::presentation, "background-objects-visible") == "true") {
@@ -265,7 +265,7 @@ void SCPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loa
     }
 }
 
-void SCPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & loadingContext)
+void SCPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &loadingContext)
 {
     // the layout needs to be loaded after the shapes are already loaded so the initialization of the data works
     SCPageLayout * layout = 0;
@@ -296,7 +296,7 @@ void SCPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & 
     }
 }
 
-bool SCPage::saveOdfAnimations(KoPASavingContext & paContext) const
+bool SCPage::saveOdfAnimations(KoPASavingContext &paContext) const
 {
     SCPageApplicationData *data = dynamic_cast<SCPageApplicationData *>(applicationData());
     Q_ASSERT(data);

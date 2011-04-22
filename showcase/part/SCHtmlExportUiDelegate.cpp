@@ -24,10 +24,10 @@ SCHtmlExportUiDelegate::SCHtmlExportUiDelegate()
 {
 }
 
-KIO::RenameDialog_Result SCHtmlExportUiDelegate::askFileRename (KJob* job, const QString& caption, const QString& src,
-                                                                  const QString& dest, KIO::RenameDialog_Mode mode, QString& newDest,
-                                                                  KIO::filesize_t sizeSrc, KIO::filesize_t sizeDest, time_t ctimeSrc,
-                                                                  time_t ctimeDest, time_t mtimeSrc, time_t mtimeDest)
+KIO::RenameDialog_Result SCHtmlExportUiDelegate::askFileRename (KJob* job, const QString &caption, const QString &src,
+        const QString &dest, KIO::RenameDialog_Mode mode, QString &newDest,
+        KIO::filesize_t sizeSrc, KIO::filesize_t sizeDest, time_t ctimeSrc,
+        time_t ctimeDest, time_t mtimeSrc, time_t mtimeDest)
 {
     // Change mode, remove rename possibility
     mode = (KIO::RenameDialog_Mode)(mode | KIO::M_NORENAME);

@@ -110,13 +110,13 @@ const char * SCDocument::odfTagName(bool withNamespace)
     return withNamespace ? "office:presentation": "presentation";
 }
 
-bool SCDocument::saveOdfProlog(KoPASavingContext & context)
+bool SCDocument::saveOdfProlog(KoPASavingContext &context)
 {
     m_declarations->saveOdf(context);
     return true;
 }
 
-bool SCDocument::saveOdfEpilogue(KoPASavingContext & context)
+bool SCDocument::saveOdfEpilogue(KoPASavingContext &context)
 {
     context.xmlWriter().startElement("presentation:settings");
     if (!m_activeCustomSlideShow.isEmpty() && m_customSlideShows->names().contains( m_activeCustomSlideShow)) {
@@ -127,7 +127,7 @@ bool SCDocument::saveOdfEpilogue(KoPASavingContext & context)
     return true;
 }
 
-void SCDocument::saveOdfDocumentStyles(KoPASavingContext & context)
+void SCDocument::saveOdfDocumentStyles(KoPASavingContext &context)
 {
     KoPADocument::saveOdfDocumentStyles(context);
     SCPageLayouts *layouts = resourceManager()->resource(Showcase::PageLayouts).value<SCPageLayouts*>();
@@ -138,9 +138,9 @@ void SCDocument::saveOdfDocumentStyles(KoPASavingContext & context)
     }
 }
 
-bool SCDocument::loadOdfEpilogue(const KoXmlElement & body, KoPALoadingContext & context)
+bool SCDocument::loadOdfEpilogue(const KoXmlElement &body, KoPALoadingContext &context)
 {
-    const KoXmlElement & presentationSettings(KoXml::namedItemNS(body, KoXmlNS::presentation, "settings"));
+    const KoXmlElement &presentationSettings(KoXml::namedItemNS(body, KoXmlNS::presentation, "settings"));
     if (!presentationSettings.isNull()) {
         m_customSlideShows->loadOdf(presentationSettings, context);
     }
@@ -156,7 +156,7 @@ bool SCDocument::loadOdfEpilogue(const KoXmlElement & body, KoPALoadingContext &
     return true;
 }
 
-bool SCDocument::loadOdfDocumentStyles(KoPALoadingContext & context)
+bool SCDocument::loadOdfDocumentStyles(KoPALoadingContext &context)
 {
     SCPageLayouts *layouts = resourceManager()->resource(Showcase::PageLayouts).value<SCPageLayouts*>();
     if (layouts) {
@@ -185,7 +185,7 @@ void SCDocument::addAnimation(SCShapeAnimation * animation)
 {
     KoShape * shape = animation->shape();
 
-    SCShapeAnimations & animations(animationsByPage(pageByShape(shape)));
+    SCShapeAnimations &animations(animationsByPage(pageByShape(shape)));
 
     // add animation to the list of animations
     animations.add(animation);
@@ -203,7 +203,7 @@ void SCDocument::removeAnimation(SCShapeAnimation * animation, bool removeFromAp
 {
     KoShape * shape = animation->shape();
 
-    SCShapeAnimations & animations(animationsByPage(pageByShape(shape)));
+    SCShapeAnimations &animations(animationsByPage(pageByShape(shape)));
 
     // remove animation from the list of animations
     animations.remove(animation);
@@ -291,7 +291,7 @@ void SCDocument::initEmpty()
     resetURL();
 }
 
-SCShapeAnimations & SCDocument::animationsByPage(KoPAPageBase * page)
+SCShapeAnimations &SCDocument::animationsByPage(KoPAPageBase * page)
 {
     SCPageData * pageData = dynamic_cast<SCPageData *>(page);
     Q_ASSERT(pageData);
@@ -352,7 +352,7 @@ void SCDocument::setActiveCustomSlideShow(const QString &customSlideShow)
     }
 }
 
-bool SCDocument::loadOdfProlog(const KoXmlElement & body, KoPALoadingContext & context)
+bool SCDocument::loadOdfProlog(const KoXmlElement &body, KoPALoadingContext &context)
 {
     return m_declarations->loadOdf(body, context);
 }

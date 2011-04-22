@@ -136,7 +136,7 @@ bool SCAnimate::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &cont
     return retval;
 }
 
-bool SCAnimate::saveOdf(KoPASavingContext & paContext) const
+bool SCAnimate::saveOdf(KoPASavingContext &paContext) const
 {
     KoXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:animate");

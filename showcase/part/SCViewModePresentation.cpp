@@ -75,7 +75,7 @@ KoViewConverter * SCViewModePresentation::viewConverter(KoPACanvasBase * canvas)
     }
 }
 
-void SCViewModePresentation::paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect)
+void SCViewModePresentation::paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect)
 {
     if (m_baseCanvas && m_baseCanvas == canvas && m_animationDirector) {
         m_animationDirector->paint(painter, paintRect);

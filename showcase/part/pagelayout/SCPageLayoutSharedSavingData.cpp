@@ -27,7 +27,7 @@ SCPageLayoutSharedSavingData::~SCPageLayoutSharedSavingData()
 {
 }
 
-void SCPageLayoutSharedSavingData::addPageLayoutStyle(SCPageLayout * pageLayout, const QString & styleName)
+void SCPageLayoutSharedSavingData::addPageLayoutStyle(SCPageLayout * pageLayout, const QString &styleName)
 {
     m_pageLayoutToName.insert(pageLayout, styleName);
 }

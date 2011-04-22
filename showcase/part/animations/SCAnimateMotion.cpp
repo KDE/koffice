@@ -40,7 +40,7 @@ bool SCAnimateMotion::loadOdf(const KoXmlElement &element, KoShapeLoadingContext
     return false;
 }
 
-bool SCAnimateMotion::saveOdf(KoPASavingContext & paContext) const
+bool SCAnimateMotion::saveOdf(KoPASavingContext &paContext) const
 {
     Q_UNUSED(paContext);
     return true;

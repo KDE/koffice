@@ -36,7 +36,7 @@ public:
     virtual void paint(KoShape * shape, QPainter &painter, const KoViewConverter &converter, bool forPrint);
 
     /// reimplemented
-    virtual void adapt(KoShape * shape, QRectF & rect);
+    virtual void adapt(KoShape * shape, QRectF &rect);
 
 private:
     SCAnimationCache * m_animationCache;

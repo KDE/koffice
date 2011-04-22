@@ -36,7 +36,7 @@ SCPlaceholder::~SCPlaceholder()
 {
 }
 
-bool SCPlaceholder::loadOdf(const KoXmlElement & element, const QRectF & pageSize)
+bool SCPlaceholder::loadOdf(const KoXmlElement &element, const QRectF &pageSize)
 {
     if (element.hasAttributeNS(KoXmlNS::presentation, "object")) {
         m_presentationObject = element.attributeNS(KoXmlNS::presentation, "object");
@@ -67,7 +67,7 @@ bool SCPlaceholder::loadOdf(const KoXmlElement & element, const QRectF & pageSiz
     return true;
 }
 
-void SCPlaceholder::saveOdf(KoXmlWriter & xmlWriter)
+void SCPlaceholder::saveOdf(KoXmlWriter &xmlWriter)
 {
     xmlWriter.startElement("presentation:placeholder");
     xmlWriter.addAttribute("presentation:object", m_presentationObject);
@@ -83,7 +83,7 @@ QString SCPlaceholder::presentationObject()
     return m_presentationObject;
 }
 
-QRectF SCPlaceholder::rect(const QSizeF & pageSize)
+QRectF SCPlaceholder::rect(const QSizeF &pageSize)
 {
     QRectF r;
     r.setX(pageSize.width() * m_relativeSize.x());
@@ -93,7 +93,7 @@ QRectF SCPlaceholder::rect(const QSizeF & pageSize)
     return r;
 }
 
-void SCPlaceholder::fix(const QRectF & rect)
+void SCPlaceholder::fix(const QRectF &rect)
 {
     if (m_relativeSize.width() < 0) {
         m_relativeSize.setWidth(rect.width());
@@ -103,7 +103,7 @@ void SCPlaceholder::fix(const QRectF & rect)
     }
 }
 
-qreal SCPlaceholder::percent(const KoXmlElement & element, const char * type, qreal absolute)
+qreal SCPlaceholder::percent(const KoXmlElement &element, const char * type, qreal absolute)
 {
     qreal tmp = 0.0;
     QString value = element.attributeNS(KoXmlNS::svg, type, QString("0%"));
@@ -122,12 +122,12 @@ qreal SCPlaceholder::percent(const KoXmlElement & element, const char * type, qr
     return tmp;
 }
 
-bool SCPlaceholder::operator==(const SCPlaceholder & other) const
+bool SCPlaceholder::operator==(const SCPlaceholder &other) const
 {
     return m_presentationObject == other.m_presentationObject && m_relativeSize == other.m_relativeSize;
 }
 
-bool SCPlaceholder::operator<(const SCPlaceholder & other) const
+bool SCPlaceholder::operator<(const SCPlaceholder &other) const
 {
     if (m_presentationObject == other.m_presentationObject) {
         return comparePosition(*this, other);
@@ -135,7 +135,7 @@ bool SCPlaceholder::operator<(const SCPlaceholder & other) const
     return m_presentationObject < other.m_presentationObject;
 }
 
-bool SCPlaceholder::comparePosition(const SCPlaceholder & p1, const SCPlaceholder & p2)
+bool SCPlaceholder::comparePosition(const SCPlaceholder &p1, const SCPlaceholder &p2)
 {
     if (p1.m_relativeSize.x() == p2.m_relativeSize.x()) {
         if (p1.m_relativeSize.y() == p2.m_relativeSize.y()) {

@@ -28,8 +28,8 @@ class SCHtmlExportUiDelegate : public KIO::JobUiDelegate
 public:
     SCHtmlExportUiDelegate();
 
-    virtual KIO::RenameDialog_Result askFileRename(KJob * job, const QString & caption, const QString& src, const QString & dest,
-                                              KIO::RenameDialog_Mode mode, QString& newDest,
+    virtual KIO::RenameDialog_Result askFileRename(KJob * job, const QString &caption, const QString&src, const QString &dest,
+                                              KIO::RenameDialog_Mode mode, QString &newDest,
                                               KIO::filesize_t sizeSrc = (KIO::filesize_t) -1,
                                               KIO::filesize_t sizeDest = (KIO::filesize_t) -1,
                                               time_t ctimeSrc = (time_t) -1, time_t ctimeDest = (time_t) -1,

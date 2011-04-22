@@ -46,7 +46,7 @@ SCFactory::~SCFactory()
 }
 
 QObject* SCFactory::create(const char* iface, QWidget* parentWidget, QObject *parent,
-                             const QVariantList& args, const QString& keyword)
+                             const QVariantList &args, const QString &keyword)
 {
     Q_UNUSED(args);
     Q_UNUSED(keyword);

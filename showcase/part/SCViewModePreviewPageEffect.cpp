@@ -58,7 +58,7 @@ SCViewModePreviewPageEffect::~SCViewModePreviewPageEffect()
 }
 
 
-void SCViewModePreviewPageEffect::paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect)
+void SCViewModePreviewPageEffect::paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect)
 {
     Q_UNUSED(canvas);
     Q_UNUSED(paintRect);

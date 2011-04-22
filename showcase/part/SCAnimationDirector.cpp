@@ -53,7 +53,7 @@
 #include <KoPAView.h>
 #include <KoPAUtil.h>
 
-SCAnimationDirector::SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> & pages, KoPAPageBase* currentPage)
+SCAnimationDirector::SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> &pages, KoPAPageBase* currentPage)
 : m_view(view)
 , m_canvas(canvas)
 , m_pages(pages)
@@ -103,7 +103,7 @@ SCAnimationDirector::~SCAnimationDirector()
 
 
 
-void SCAnimationDirector::paint(QPainter& painter, const QRectF &paintRect)
+void SCAnimationDirector::paint(QPainter &painter, const QRectF &paintRect)
 {
     if (m_pageEffectRunner)
     {
@@ -352,7 +352,7 @@ bool SCAnimationDirector::changePage(Navigation navigation)
     return false;
 }
 
-void SCAnimationDirector::updateZoom(const QSize & size)
+void SCAnimationDirector::updateZoom(const QSize &size)
 {
     KoPageLayout pageLayout = m_view->activePage()->pageLayout();
     KoPAUtil::setZoom(pageLayout, size, m_zoomHandler);
@@ -364,7 +364,7 @@ void SCAnimationDirector::updateZoom(const QSize & size)
     updateStepAnimation();
 }
 
-void SCAnimationDirector::paintStep(QPainter & painter)
+void SCAnimationDirector::paintStep(QPainter &painter)
 {
     painter.translate(m_pageRect.topLeft());
     m_view->activePage()->paintBackground(painter, m_zoomHandler);

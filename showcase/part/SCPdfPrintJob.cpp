@@ -48,14 +48,14 @@ void SCPdfPrintJob::startPrinting(RemovePolicy removePolicy)
     KoZoomHandler zoomHandler;
     zoomHandler.setResolution(m_printer.resolution(), m_printer.resolution());
     m_printer.setFullPage(true);
-    const KoPageLayout & firstLayout = m_pages.at(fromPage)->pageLayout();
+    const KoPageLayout &firstLayout = m_pages.at(fromPage)->pageLayout();
     m_printer.setPaperSize(QSizeF(firstLayout.width,firstLayout.height),QPrinter::Millimeter);
     QPainter painter(&m_printer);
 
     for (int i = fromPage; i <= toPage; ++i) {
 
         KoPAPageBase *page = m_pages.at(i);
-        const KoPageLayout & layout = page->pageLayout();
+        const KoPageLayout &layout = page->pageLayout();
         m_printer.setPaperSize(QSizeF(layout.width,layout.height),QPrinter::Millimeter);
         QSize size = m_printer.pageRect().size();
         painter.save();

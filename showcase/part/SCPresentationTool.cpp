@@ -287,7 +287,7 @@ bool SCPresentationTool::eventFilter(QObject *obj, QEvent * event)
     return false;
 }
 
-bool SCPresentationTool::checkHyperlink(KoPointerEvent *event, KoShape *shape, QString & hyperLink)
+bool SCPresentationTool::checkHyperlink(KoPointerEvent *event, KoShape *shape, QString &hyperLink)
 {
     if (!shape) {
         return false;

@@ -107,7 +107,7 @@ SCViewModeSlidesSorter::~SCViewModeSlidesSorter()
 {
 }
 
-void SCViewModeSlidesSorter::paint(KoPACanvasBase* /*canvas*/, QPainter& /*painter*/, const QRectF &/*paintRect*/)
+void SCViewModeSlidesSorter::paint(KoPACanvasBase* /*canvas*/, QPainter &/*painter*/, const QRectF &/*paintRect*/)
 {
 }
 

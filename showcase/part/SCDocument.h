@@ -117,13 +117,13 @@ public:
     void setActiveCustomSlideShow(const QString &customSlideShow);
 
     /// reimplemented
-    virtual void saveOdfDocumentStyles(KoPASavingContext & context);
+    virtual void saveOdfDocumentStyles(KoPASavingContext &context);
 
     /// reimplemented
-    virtual bool loadOdfDocumentStyles(KoPALoadingContext & context);
+    virtual bool loadOdfDocumentStyles(KoPALoadingContext &context);
 
     /// reimplemented
-    virtual bool loadOdfProlog(const KoXmlElement & body, KoPALoadingContext & context);
+    virtual bool loadOdfProlog(const KoXmlElement &body, KoPALoadingContext &context);
 
     /**
      * Get the page type used in the document
@@ -170,13 +170,13 @@ protected:
     virtual const char *odfTagName(bool withNamespace);
 
     /// reimplemented
-    virtual bool loadOdfEpilogue(const KoXmlElement & body, KoPALoadingContext & context);
+    virtual bool loadOdfEpilogue(const KoXmlElement &body, KoPALoadingContext &context);
 
     /// reimplemented
-    virtual bool saveOdfProlog(KoPASavingContext & paContext);
+    virtual bool saveOdfProlog(KoPASavingContext &paContext);
 
     /// reimplemented
-    virtual bool saveOdfEpilogue(KoPASavingContext & context);
+    virtual bool saveOdfEpilogue(KoPASavingContext &context);
 
     /// reimplemented
     virtual void postAddShape(KoPAPageBase * page, KoShape * shape);
@@ -195,7 +195,7 @@ protected:
     /**
      * @brief get the animations of the page
      */
-    SCShapeAnimations & animationsByPage(KoPAPageBase * page);
+    SCShapeAnimations &animationsByPage(KoPAPageBase * page);
 
     SCCustomSlideShows *m_customSlideShows;
 

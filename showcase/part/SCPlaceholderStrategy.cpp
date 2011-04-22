@@ -71,7 +71,7 @@ void fillPlaceholderMap()
     }
 }
 
-SCPlaceholderStrategy * SCPlaceholderStrategy::create(const QString & presentationClass)
+SCPlaceholderStrategy * SCPlaceholderStrategy::create(const QString &presentationClass)
 {
     if (s_placeholderMap.isEmpty()) {
         fillPlaceholderMap();
@@ -96,7 +96,7 @@ SCPlaceholderStrategy * SCPlaceholderStrategy::create(const QString & presentati
     return strategy;
 }
 
-bool SCPlaceholderStrategy::supported(const QString & presentationClass)
+bool SCPlaceholderStrategy::supported(const QString &presentationClass)
 {
     if (s_placeholderMap.isEmpty()) {
         fillPlaceholderMap();
@@ -105,7 +105,7 @@ bool SCPlaceholderStrategy::supported(const QString & presentationClass)
     return s_placeholderMap.contains(presentationClass);
 }
 
-SCPlaceholderStrategy::SCPlaceholderStrategy(const QString & presentationClass)
+SCPlaceholderStrategy::SCPlaceholderStrategy(const QString &presentationClass)
 : m_placeholderData(s_placeholderMap[presentationClass])
 {
 }
@@ -124,7 +124,7 @@ KoShape *SCPlaceholderStrategy::createShape(KoResourceManager *rm)
     return shape;
 }
 
-void SCPlaceholderStrategy::paint(QPainter & painter, const KoViewConverter &converter, const QRectF & rect)
+void SCPlaceholderStrategy::paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect)
 {
     KoShape::applyConversion(painter, converter);
     QPen penText(Qt::black);
@@ -142,13 +142,13 @@ void SCPlaceholderStrategy::paint(QPainter & painter, const KoViewConverter &con
     painter.drawRect(rect);
 }
 
-void SCPlaceholderStrategy::saveOdf(KoShapeSavingContext & context)
+void SCPlaceholderStrategy::saveOdf(KoShapeSavingContext &context)
 {
-    KoXmlWriter & writer = context.xmlWriter();
+    KoXmlWriter &writer = context.xmlWriter();
     writer.addCompleteElement(m_placeholderData->m_xmlElement);
 }
 
-bool SCPlaceholderStrategy::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
+bool SCPlaceholderStrategy::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);

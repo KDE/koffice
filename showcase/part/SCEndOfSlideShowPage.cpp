@@ -33,7 +33,7 @@
 
 #include <kdebug.h>
 
-SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF & screenRect, SCDocument * document)
+SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument * document)
 : SCPage(new SCMasterPage(), document)
 {
     qreal ratio = screenRect.width() / screenRect.height();

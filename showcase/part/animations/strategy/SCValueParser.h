@@ -59,12 +59,12 @@ public:
     /**
     * Creates a token.
     */
-    explicit Token(Type type = Unknown, const QString& text = QString(), int pos = -1);
+    explicit Token(Type type = Unknown, const QString &text = QString(), int pos = -1);
 
     static const Token null;
 
     Token(const Token&);
-    Token& operator=(const Token&);
+    Token &operator=(const Token&);
 
     /**
     * Returns type of the token.
@@ -159,10 +159,10 @@ public:
     TokenStack();
     bool isEmpty() const;
     unsigned itemCount() const;
-    void push(const Token& token);
+    void push(const Token &token);
     Token pop();
-    const Token& top();
-    const Token& top(unsigned index);
+    const Token &top();
+    const Token &top(unsigned index);
 private:
     void ensureSpace();
     unsigned topIndex;
@@ -193,7 +193,7 @@ public:
     bool valid() const;
 protected:
     Tokens scan(QString formula);
-    void compile(const Tokens& tokens) const;
+    void compile(const Tokens &tokens) const;
     qreal identifierToValue(QString identifier, SCAnimationCache * cache) const;
 private:
     KoShape *m_shape;

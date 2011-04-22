@@ -50,8 +50,8 @@ SCPlaceholders::~SCPlaceholders()
 {
 }
 
-void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KoShape *> & shapes, const QSizeF & pageSize,
-                                 const QMap<QString, KoTextShapeData*> & styles)
+void SCPlaceholders::setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KoShape *> &shapes, const QSizeF &pageSize,
+                                 const QMap<QString, KoTextShapeData*> &styles)
 {
     Q_ASSERT(m_initialized);
 
@@ -136,7 +136,7 @@ void SCPlaceholders::setLayout(SCPageLayout * layout)
     m_layout = layout;
 }
 
-void SCPlaceholders::init(SCPageLayout * layout, const QList<KoShape *> & shapes)
+void SCPlaceholders::init(SCPageLayout * layout, const QList<KoShape *> &shapes)
 {
     m_layout = layout;
     add(shapes);
@@ -177,7 +177,7 @@ void SCPlaceholders::shapeRemoved(KoShape * shape)
     }
 }
 
-void SCPlaceholders::add(const QList<KoShape *> & shapes)
+void SCPlaceholders::add(const QList<KoShape *> &shapes)
 {
     foreach (KoShape *shape, shapes) {
         QString presentationClass = shape->additionalAttribute("presentation:class");
@@ -221,7 +221,7 @@ QMap<QString, KoTextShapeData *> SCPlaceholders::styles() const
     return styles;
 }
 
-void SCPlaceholders::applyStyle(SCPlaceholderShape * shape, const QString & presentationClass, const QMap<QString, KoTextShapeData*> & styles)
+void SCPlaceholders::applyStyle(SCPlaceholderShape * shape, const QString &presentationClass, const QMap<QString, KoTextShapeData*> &styles)
 {
     // use outline as fallback
     KoTextShapeData * data = styles.value(presentationClass, 0);

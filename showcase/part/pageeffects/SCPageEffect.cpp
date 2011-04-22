@@ -27,7 +27,7 @@
 #include <KoGenStyle.h>
 #include "SCPageEffectStrategy.h"
 
-SCPageEffect::SCPageEffect(int duration, const QString & id, SCPageEffectStrategy * strategy)
+SCPageEffect::SCPageEffect(int duration, const QString &id, SCPageEffectStrategy * strategy)
 : m_duration(duration)
 , m_id(id)
 , m_strategy(strategy)
@@ -86,7 +86,7 @@ int SCPageEffect::duration() const
     return m_duration;
 }
 
-const QString & SCPageEffect::id() const
+const QString &SCPageEffect::id() const
 {
     return m_id;
 }
@@ -96,14 +96,14 @@ int SCPageEffect::subType() const
     return m_strategy->subType();
 }
 
-void SCPageEffect::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
+void SCPageEffect::saveOdfSmilAttributes(KoXmlWriter &xmlWriter) const
 {
     qreal seconds = m_duration / qreal(1000.0);
     xmlWriter.addAttribute("smil:dur", seconds);
     return m_strategy->saveOdfSmilAttributes(xmlWriter);
 }
 
-void SCPageEffect::saveOdfSmilAttributes(KoGenStyle & style) const
+void SCPageEffect::saveOdfSmilAttributes(KoGenStyle &style) const
 {
     QString speed("slow");
     if (m_duration < 2500) {
@@ -116,6 +116,6 @@ void SCPageEffect::saveOdfSmilAttributes(KoGenStyle & style) const
     return m_strategy->saveOdfSmilAttributes(style);
 }
 
-void SCPageEffect::loadOdf(const KoXmlElement & /*element*/)
+void SCPageEffect::loadOdf(const KoXmlElement &)
 {
 }

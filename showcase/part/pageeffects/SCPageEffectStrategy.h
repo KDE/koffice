@@ -84,33 +84,33 @@ public:
     /**
      * Save transitions in an xml writer
      */
-    virtual void saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const;
+    virtual void saveOdfSmilAttributes(KoXmlWriter &xmlWriter) const;
 
     /**
      * Save transition as part of the style
      */
-    virtual void saveOdfSmilAttributes(KoGenStyle & style) const;
+    virtual void saveOdfSmilAttributes(KoGenStyle &style) const;
 
     /**
      * Load additional attributes needed by the strategy.
      *
      * The default implementation is empty
      */
-    virtual void loadOdfSmilAttributes(const KoXmlElement & element);
+    virtual void loadOdfSmilAttributes(const KoXmlElement &element);
 
     /**
      * Get the smil:type
      *
      * @return the type used for saving
      */
-    const QString & smilType() const;
+    const QString &smilType() const;
 
     /**
      * Get the smil:subtype
      *
      * @return the subtype used for saving
      */
-    const QString & smilSubType() const;
+    const QString &smilSubType() const;
 
     /**
      * Get the smil:direction

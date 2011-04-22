@@ -48,7 +48,7 @@ KoShape *SCPlaceholderShapeFactory::createDefaultShape(KoResourceManager *) cons
     return new SCPlaceholderShape();
 }
 
-bool SCPlaceholderShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
+bool SCPlaceholderShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     // check parent if placeholder is set to true

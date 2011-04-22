@@ -69,7 +69,7 @@ class QString;
 class SCDurationParser
 {
 public:
-    static int durationMs(const QString & duration);
+    static int durationMs(const QString &duration);
     static QString msToString(const int ms);
 
 };

@@ -31,7 +31,7 @@ SCPlaceholderShape::SCPlaceholderShape()
 {
 }
 
-SCPlaceholderShape::SCPlaceholderShape(const QString & presentationClass)
+SCPlaceholderShape::SCPlaceholderShape(const QString &presentationClass)
 : m_strategy(0)
 {
     m_strategy = SCPlaceholderStrategy::create(presentationClass);
@@ -57,7 +57,7 @@ void SCPlaceholderShape::paint(QPainter &painter, const KoViewConverter &convert
     }
 }
 
-bool SCPlaceholderShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
+bool SCPlaceholderShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     loadOdfAttributes(element, context, OdfAllAttributes);
 #ifndef NWORKAROUND_ODF_BUGS
@@ -75,9 +75,9 @@ bool SCPlaceholderShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCon
     return true;
 }
 
-void SCPlaceholderShape::saveOdf(KoShapeSavingContext & context) const
+void SCPlaceholderShape::saveOdf(KoShapeSavingContext &context) const
 {
-    KoXmlWriter & writer = context.xmlWriter();
+    KoXmlWriter &writer = context.xmlWriter();
     writer.startElement("draw:frame");
     saveOdfAttributes(context, OdfAllAttributes);
     if (m_strategy) {

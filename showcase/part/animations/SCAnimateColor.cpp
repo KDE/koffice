@@ -40,7 +40,7 @@ bool SCAnimateColor::loadOdf(const KoXmlElement &element, KoShapeLoadingContext 
     return false;
 }
 
-bool SCAnimateColor::saveOdf(KoPASavingContext & paContext) const
+bool SCAnimateColor::saveOdf(KoPASavingContext &paContext) const
 {
     Q_UNUSED(paContext);
     return true;

@@ -34,7 +34,7 @@ class SCDocument;
 class SCEndOfSlideShowPage : public SCPage
 {
 public:
-    SCEndOfSlideShowPage(const QRectF & screenRect, SCDocument * document);
+    SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument * document);
     ~SCEndOfSlideShowPage();
 };
 

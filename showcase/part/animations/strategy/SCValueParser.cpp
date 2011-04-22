@@ -49,7 +49,7 @@ static int opPrecedence(Token::Op op)
 }
 
 
-static Token::Op matchOperator(const QString& text)
+static Token::Op matchOperator(const QString &text)
 {
     Token::Op result = Token::InvalidOp;
 
@@ -76,7 +76,7 @@ const Token Token::null;
     Token
  **********************/
 
-Token::Token(Type type, const QString& text, int pos)
+Token::Token(Type type, const QString &text, int pos)
 {
     m_type = type;
     m_text = text;
@@ -84,7 +84,7 @@ Token::Token(Type type, const QString& text, int pos)
 }
 
 // copy constructor
-Token::Token(const Token& token)
+Token::Token(const Token &token)
 {
     m_type = token.m_type;
     m_text = token.m_text;
@@ -92,7 +92,7 @@ Token::Token(const Token& token)
 }
 
 // assignment operator
-Token& Token::operator=(const Token & token)
+Token &Token::operator=(const Token & token)
 {
     m_type = token.m_type;
     m_text = token.m_text;
@@ -140,7 +140,7 @@ unsigned TokenStack::itemCount() const
     return topIndex;
 }
 
-void TokenStack::push(const Token& token)
+void TokenStack::push(const Token &token)
 {
     ensureSpace();
     insert(topIndex++, token);
@@ -151,12 +151,12 @@ Token TokenStack::pop()
     return (topIndex > 0) ? Token(at(--topIndex)) : Token();
 }
 
-const Token& TokenStack::top()
+const Token &TokenStack::top()
 {
     return top(0);
 }
 
-const Token& TokenStack::top(unsigned index)
+const Token &TokenStack::top(unsigned index)
 {
     if (topIndex > index)
         return at(topIndex -index - 1);
@@ -266,7 +266,7 @@ Tokens SCValueParser::scan(QString formula)
     return tokens;
 }
 
-void SCValueParser::compile(const Tokens& tokens) const
+void SCValueParser::compile(const Tokens &tokens) const
 {
     // initialize variables
     m_valid = false;
@@ -466,7 +466,7 @@ qreal SCValueParser::eval(SCAnimationCache * cache) const
     }
 
     for (int pc = 0; pc < m_codes.count(); pc++) {
-        Opcode& opcode = m_codes[pc];
+        Opcode &opcode = m_codes[pc];
         switch (opcode.type) {
         // load a constant, push to stack
         case Opcode::Load:

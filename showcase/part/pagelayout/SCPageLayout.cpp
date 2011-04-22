@@ -47,7 +47,7 @@ SCPageLayout::~SCPageLayout()
     qDeleteAll(m_placeholders);
 }
 
-bool SCPageLayout::loadOdf(const KoXmlElement &element, const QRectF & pageRect)
+bool SCPageLayout::loadOdf(const KoXmlElement &element, const QRectF &pageRect)
 {
     if (element.hasAttributeNS(KoXmlNS::style, "display-name")) {
         m_name = element.attributeNS(KoXmlNS::style, "display-name");
@@ -102,7 +102,7 @@ bool SCPageLayout::loadOdf(const KoXmlElement &element, const QRectF & pageRect)
     return retval;
 }
 
-QString SCPageLayout::saveOdf(KoPASavingContext & context) const
+QString SCPageLayout::saveOdf(KoPASavingContext &context) const
 {
     KoGenStyle style(KoGenStyle::PresentationPageLayoutStyle);
 
@@ -165,7 +165,7 @@ bool comparePlaceholder(const SCPlaceholder * p1, const SCPlaceholder * p2)
     return (* p1) < (* p2);
 }
 
-bool SCPageLayout::operator<(const SCPageLayout & other) const
+bool SCPageLayout::operator<(const SCPageLayout &other) const
 {
     if (m_placeholders.size() == other.m_placeholders.size()) {
         QList<SCPlaceholder *> placeholders(m_placeholders);
@@ -199,7 +199,7 @@ bool comparePlaceholderByPosition(const SCPlaceholder * p1, const SCPlaceholder 
     return SCPlaceholder::comparePosition(*p1,* p2);
 }
 
-bool SCPageLayout::compareByContent(const SCPageLayout & pl1, const SCPageLayout & pl2)
+bool SCPageLayout::compareByContent(const SCPageLayout &pl1, const SCPageLayout &pl2)
 {
     if (pl1.m_placeholders.size() == pl2.m_placeholders.size()) {
         QList<SCPlaceholder *> placeholders(pl1.m_placeholders);

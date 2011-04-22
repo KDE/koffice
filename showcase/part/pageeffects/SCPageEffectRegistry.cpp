@@ -57,7 +57,7 @@ SCPageEffectRegistry * SCPageEffectRegistry::instance()
     return registry;
 }
 
-SCPageEffect * SCPageEffectRegistry::createPageEffect(const KoXmlElement & element)
+SCPageEffect * SCPageEffectRegistry::createPageEffect(const KoXmlElement &element)
 {
     Q_UNUSED(element);
 

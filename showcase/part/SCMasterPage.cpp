@@ -52,7 +52,7 @@ bool SCMasterPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
     return retval;
 }
 
-void SCMasterPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & loadingContext)
+void SCMasterPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &loadingContext)
 {
     // the layout needs to be loaded after the shapes are already loaded so the initialization of the data works
     SCPageLayout * layout = 0;

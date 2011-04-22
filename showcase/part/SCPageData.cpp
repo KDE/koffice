@@ -33,17 +33,17 @@ SCPageData::~SCPageData()
     }
 }
 
-SCShapeAnimations & SCPageData::animations()
+SCShapeAnimations &SCPageData::animations()
 {
     return m_animations;
 }
 
-SCPlaceholders & SCPageData::placeholders()
+SCPlaceholders &SCPageData::placeholders()
 {
     return m_placeholders;
 }
 
-const SCPlaceholders & SCPageData::placeholders() const
+const SCPlaceholders &SCPageData::placeholders() const
 {
     return m_placeholders;
 }

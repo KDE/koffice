@@ -53,7 +53,7 @@ SCViewModeNotes::~SCViewModeNotes()
 {
 }
 
-void SCViewModeNotes::paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect)
+void SCViewModeNotes::paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect)
 {
 #ifdef NDEBUG
     Q_UNUSED(canvas);

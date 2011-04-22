@@ -121,7 +121,7 @@ void SCCustomSlideShows::removeSlidesFromAll(const QList<KoPAPageBase*> &slideSh
     }
 }
 
-void SCCustomSlideShows::saveOdf(KoPASavingContext & context)
+void SCCustomSlideShows::saveOdf(KoPASavingContext &context)
 {
     foreach (const QString &name, m_customSlideShows.keys()) {
         QList<KoPAPageBase*> slideList = m_customSlideShows.value(name);
@@ -142,7 +142,7 @@ void SCCustomSlideShows::saveOdf(KoPASavingContext & context)
     }
 }
 
-void SCCustomSlideShows::loadOdf(const KoXmlElement & presentationSettings, KoPALoadingContext & context)
+void SCCustomSlideShows::loadOdf(const KoXmlElement &presentationSettings, KoPALoadingContext &context)
 {
     m_customSlideShows.clear();
 

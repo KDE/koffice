@@ -39,7 +39,7 @@ public:
 
     KoViewConverter * viewConverter(KoPACanvasBase * canvas);
 
-    void paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect);
+    void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect);
     void tabletEvent(QTabletEvent *event, const QPointF &point);
     void mousePressEvent(QMouseEvent *event, const QPointF &point);
     void mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point);

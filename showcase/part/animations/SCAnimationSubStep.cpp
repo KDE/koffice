@@ -43,7 +43,7 @@ void SCAnimationSubStep::init(SCAnimationCache *animationCache, int step)
     }
 }
 
-bool SCAnimationSubStep::saveOdf(KoPASavingContext & paContext, bool startStep) const
+bool SCAnimationSubStep::saveOdf(KoPASavingContext &paContext, bool startStep) const
 {
     KoXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:par");

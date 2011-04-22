@@ -47,7 +47,7 @@ void SCPageEffectStrategy::finish(const SCPageEffect::Data &data)
     data.m_widget->update();
 }
 
-void SCPageEffectStrategy::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
+void SCPageEffectStrategy::saveOdfSmilAttributes(KoXmlWriter &xmlWriter) const
 {
     xmlWriter.addAttribute("smil:type", m_smilData.type);
     xmlWriter.addAttribute("smil:subtype", m_smilData.subType);
@@ -56,7 +56,7 @@ void SCPageEffectStrategy::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
     }
 }
 
-void SCPageEffectStrategy::saveOdfSmilAttributes(KoGenStyle & style) const
+void SCPageEffectStrategy::saveOdfSmilAttributes(KoGenStyle &style) const
 {
     style.addProperty("smil:type", m_smilData.type);
     style.addProperty("smil:subtype", m_smilData.subType);
@@ -65,17 +65,17 @@ void SCPageEffectStrategy::saveOdfSmilAttributes(KoGenStyle & style) const
     }
 }
 
-void SCPageEffectStrategy::loadOdfSmilAttributes(const KoXmlElement & element)
+void SCPageEffectStrategy::loadOdfSmilAttributes(const KoXmlElement &element)
 {
     Q_UNUSED(element);
 }
 
-const QString & SCPageEffectStrategy::smilType() const
+const QString &SCPageEffectStrategy::smilType() const
 {
     return m_smilData.type;
 }
 
-const QString & SCPageEffectStrategy::smilSubType() const
+const QString &SCPageEffectStrategy::smilSubType() const
 {
     return m_smilData.subType;
 }

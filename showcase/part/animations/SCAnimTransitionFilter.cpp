@@ -36,7 +36,7 @@ bool SCAnimTransitionFilter::loadOdf(const KoXmlElement &element, KoShapeLoading
     return true;
 }
 
-bool SCAnimTransitionFilter::saveOdf(KoPASavingContext & paContext) const
+bool SCAnimTransitionFilter::saveOdf(KoPASavingContext &paContext) const
 {
     Q_UNUSED(paContext);
     return true;

@@ -48,7 +48,7 @@ public:
 
     virtual void paintDecorations(QPainter &, const KoViewConverter &, const KoCanvasBase *) { }
 
-    virtual bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
+    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
     {
         return loadOdfAttributes(element, context, OdfAllAttributes);
     }
@@ -99,7 +99,7 @@ KoShape *SCNotes::textShape()
 
 void SCNotes::saveOdf(KoShapeSavingContext &context) const
 {
-    KoXmlWriter & writer = context.xmlWriter();
+    KoXmlWriter &writer = context.xmlWriter();
     writer.startElement("presentation:notes");
 
     context.addOption(KoShapeSavingContext::PresentationShape);
@@ -159,18 +159,18 @@ bool SCNotes::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &contex
     return true;
 }
 
-void SCNotes::paintComponent(QPainter& painter, const KoViewConverter& converter)
+void SCNotes::paintComponent(QPainter &painter, const KoViewConverter &converter)
 {
     Q_UNUSED(painter);
     Q_UNUSED(converter);
 }
 
-KoPageLayout & SCNotes::pageLayout()
+KoPageLayout &SCNotes::pageLayout()
 {
     return m_pageLayout;
 }
 
-const KoPageLayout & SCNotes::pageLayout() const
+const KoPageLayout &SCNotes::pageLayout() const
 {
     return m_pageLayout;
 }
@@ -211,7 +211,7 @@ void SCNotes::updatePageThumbnail()
     m_thumbnailShape->setUserData(imageData);
 }
 
-void SCNotes::paintPage(QPainter & painter, KoZoomHandler & /*zoomHandler*/)
+void SCNotes::paintPage(QPainter &painter, KoZoomHandler &)
 {
     Q_UNUSED(painter);
     // TODO implement when printing page with notes

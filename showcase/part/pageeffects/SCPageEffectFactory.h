@@ -49,7 +49,7 @@ public:
      * @param name The name of the effect. This name is used in the UI
      * @param subTypes The possible subtypes of the page effect
      */
-    SCPageEffectFactory(const QString & id, const QString & name);
+    SCPageEffectFactory(const QString &id, const QString &name);
 
     virtual ~SCPageEffectFactory();
 
@@ -58,7 +58,7 @@ public:
      *
      * @param properties The properties for creating a page effect
      */
-    SCPageEffect * createPageEffect(const Properties & properties) const;
+    SCPageEffect * createPageEffect(const Properties &properties) const;
 
     /**
      * Create a page effect
@@ -67,7 +67,7 @@ public:
      *
      * @param element The element containing the information for creating the page effect
      */
-    SCPageEffect * createPageEffect(const KoXmlElement & element) const;
+    SCPageEffect * createPageEffect(const KoXmlElement &element) const;
 
     /**
      * Get the id of the page effect

@@ -45,7 +45,7 @@ SCAnimationLoader::~SCAnimationLoader()
 {
 }
 
-void debugXml(const QString & pos, const KoXmlElement &element)
+void debugXml(const QString &pos, const KoXmlElement &element)
 {
     QByteArray array;
     QDomDocument doc;

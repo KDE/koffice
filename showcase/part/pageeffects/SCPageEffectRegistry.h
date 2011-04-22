@@ -32,7 +32,7 @@ public:
     class Singleton;
     static SCPageEffectRegistry * instance();
 
-    SCPageEffect * createPageEffect(const KoXmlElement & element);
+    SCPageEffect * createPageEffect(const KoXmlElement &element);
 
 private:
     void init();

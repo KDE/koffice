@@ -23,7 +23,7 @@
 #include <QStringList>
 #include <kglobal.h>
 
-int SCDurationParser::durationMs(const QString & duration)
+int SCDurationParser::durationMs(const QString &duration)
 {
     // define the regex used as statics
     K_GLOBAL_STATIC_WITH_ARGS(QRegExp, clockRegEx, ("^(?:(\\d+):)?(\\d{2}):(\\d{2}(?:\\.\\d+)?)$"))

@@ -34,12 +34,12 @@ class SCPlaceholderShape : public KoShape
 {
 public:
     SCPlaceholderShape();
-    SCPlaceholderShape(const QString & presentationClass);
+    SCPlaceholderShape(const QString &presentationClass);
     virtual ~SCPlaceholderShape();
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
-    virtual bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context);
-    virtual void saveOdf(KoShapeSavingContext & context) const;
+    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual void saveOdf(KoShapeSavingContext &context) const;
 
     KoShape *createShape(KoResourceManager *documentResources);
 

@@ -34,7 +34,7 @@ public:
     : SCShapeAnimationOld(shape, step, Appear)
     {}
 
-    SCAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect)
+    SCAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF &pageRect)
     {
         Q_UNUSED(canvas);
         Q_UNUSED(shapeManager);
@@ -50,7 +50,7 @@ public:
         return true;
     }
 
-    void animateRect(QRectF & rect, SCAnimationData * animationData)
+    void animateRect(QRectF &rect, SCAnimationData * animationData)
     {
         Q_UNUSED(rect);
         Q_UNUSED(animationData);
@@ -75,7 +75,7 @@ public:
     : SCShapeAnimationOld(shape, step, Disappear)
     {}
 
-    SCAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF & pageRect)
+    SCAnimationData * animationData(KoCanvasBase * canvas, KoShapeManager * shapeManager, const QRectF &pageRect)
     {
         Q_UNUSED(canvas);
         Q_UNUSED(shapeManager);
@@ -91,7 +91,7 @@ public:
         return true;
     }
 
-    void animateRect(QRectF & rect, SCAnimationData * animationData)
+    void animateRect(QRectF &rect, SCAnimationData * animationData)
     {
         Q_UNUSED(rect);
         Q_UNUSED(animationData);

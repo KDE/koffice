@@ -123,7 +123,7 @@ public:
      *
      * @param context The saving context
      */
-    void saveOdf(KoPASavingContext & context);
+    void saveOdf(KoPASavingContext &context);
 
     /**
      * @brief Load the slide shows
@@ -131,7 +131,7 @@ public:
      * @param element The element containing the presentation:settings
      * @param context The loading context
      */
-    void loadOdf(const KoXmlElement & presentationSettings, KoPALoadingContext & context);
+    void loadOdf(const KoXmlElement &presentationSettings, KoPALoadingContext &context);
 
 private:
     QMap< QString, QList<KoPAPageBase*> > m_customSlideShows;

@@ -29,9 +29,9 @@ public:
     SCPageData();
     ~SCPageData();
 
-    SCShapeAnimations & animations();
-    SCPlaceholders & placeholders();
-    const SCPlaceholders & placeholders() const;
+    SCShapeAnimations &animations();
+    SCPlaceholders &placeholders();
+    const SCPlaceholders &placeholders() const;
     QList<SCAnimationStep *> animationSteps() const;
 private:
     SCShapeAnimations m_animations;

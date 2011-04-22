@@ -102,22 +102,22 @@ bool SCPageEffectRunner::isFinished()
     return m_data.m_finished;
 }
 
-const QPixmap & SCPageEffectRunner::oldPage() const
+const QPixmap &SCPageEffectRunner::oldPage() const
 {
     return m_data.m_oldPage;
 }
 
-const QPixmap & SCPageEffectRunner::newPage() const
+const QPixmap &SCPageEffectRunner::newPage() const
 {
     return m_data.m_newPage;
 }
 
-void SCPageEffectRunner::setOldPage(const QPixmap & oldPage)
+void SCPageEffectRunner::setOldPage(const QPixmap &oldPage)
 {
     m_data.m_oldPage = oldPage;
 }
 
-void SCPageEffectRunner::setNewPage(const QPixmap & newPage)
+void SCPageEffectRunner::setNewPage(const QPixmap &newPage)
 {
     m_data.m_newPage = newPage;
 }

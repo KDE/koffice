@@ -40,7 +40,7 @@ public:
      * @param pageLayout the page layout
      * @param the styleName of the page layout style
      */
-    void addPageLayoutStyle(SCPageLayout * pageLayout, const QString & styleName);
+    void addPageLayoutStyle(SCPageLayout * pageLayout, const QString &styleName);
 
     /**
      * Get page layout style

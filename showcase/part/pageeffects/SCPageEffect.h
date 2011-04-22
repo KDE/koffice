@@ -82,7 +82,7 @@ public:
      * @param duration The duration in milliseconds
      * @param id The id of the page effect
      */
-    SCPageEffect(int duration, const QString & id, SCPageEffectStrategy * strategy);
+    SCPageEffect(int duration, const QString &id, SCPageEffectStrategy * strategy);
     virtual ~SCPageEffect();
 
     virtual void setup(const Data &data, QTimeLine &timeLine);
@@ -135,7 +135,7 @@ public:
      *
      * @return id of the page effect
      */
-    const QString & id() const;
+    const QString &id() const;
 
     /**
      * Get the sub type of the page effect.
@@ -149,12 +149,12 @@ public:
      *
      * @param xmlWriter The xml writer used for saving
      */
-    void saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const;
+    void saveOdfSmilAttributes(KoXmlWriter &xmlWriter) const;
 
     /**
      * Save transition as part of the style
      */
-    void saveOdfSmilAttributes(KoGenStyle & style) const;
+    void saveOdfSmilAttributes(KoGenStyle &style) const;
 
     /**
      * Load effect from odf.
@@ -162,7 +162,7 @@ public:
      * Only generic data is loaded here. e.g. the duration of the effect
      * is loaded here
      */
-    void loadOdf(const KoXmlElement & element);
+    void loadOdf(const KoXmlElement &element);
 
 protected:
     int m_duration;

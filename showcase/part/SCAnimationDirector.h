@@ -56,10 +56,10 @@ public:
         LastPage
     };
 
-    SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> & pages, KoPAPageBase* currentPage);
+    SCAnimationDirector(KoPAView * view, KoPACanvas * canvas, const QList<KoPAPageBase*> &pages, KoPAPageBase* currentPage);
     virtual ~SCAnimationDirector();
 
-    void paint(QPainter& painter, const QRectF &paintRect);
+    void paint(QPainter &painter, const QRectF &paintRect);
     void paintEvent(QPaintEvent* event);
 
     KoViewConverter * viewConverter();
@@ -129,7 +129,7 @@ protected:
     void previousStep();
 
     // paint the given step to the painter
-    void paintStep(QPainter & painter);
+    void paintStep(QPainter &painter);
 
     /**
      * Finish the running shape animations
@@ -152,7 +152,7 @@ protected:
 
 protected slots:
     // update the zoom value
-    void updateZoom(const QSize & size);
+    void updateZoom(const QSize &size);
     // acts on the time line event
     void animate();
 

@@ -77,22 +77,22 @@ public:
     /**
      * Get the pixmap of the old page
      */
-    const QPixmap & oldPage() const;
+    const QPixmap &oldPage() const;
 
     /**
      * Get the pixmap of the new page
      */
-    const QPixmap & newPage() const;
+    const QPixmap &newPage() const;
 
     /**
      * Set the pixmap of the old page
      */
-    void setOldPage(const QPixmap & oldPage);
+    void setOldPage(const QPixmap &oldPage);
 
     /**
      * Set the pixmap of the new page
      */
-    void setNewPage(const QPixmap & newPage);
+    void setNewPage(const QPixmap &newPage);
 
     /**
      * Get the wiget where the animation is shown

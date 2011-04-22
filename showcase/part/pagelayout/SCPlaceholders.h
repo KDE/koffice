@@ -39,7 +39,7 @@ class KoTextShapeData;
 
 struct Placeholder
 {
-    Placeholder(const QString & presentationClass, KoShape * shape, bool isPlaceholder)
+    Placeholder(const QString &presentationClass, KoShape * shape, bool isPlaceholder)
     : presentationClass(presentationClass)
     , shape(shape)
     , isPlaceholder(isPlaceholder)
@@ -82,8 +82,8 @@ public:
      * @param pageSize
      * @param styles
      */
-    void setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KoShape *> & shapes, const QSizeF & pageSize,
-                    const QMap<QString, KoTextShapeData*> & styles);
+    void setLayout(SCPageLayout * layout, KoPADocument * document, const QList<KoShape *> &shapes, const QSizeF &pageSize,
+                    const QMap<QString, KoTextShapeData*> &styles);
 
     /**
      * This function should only be used during loading
@@ -91,7 +91,7 @@ public:
      *        If 0 no layout will be used.
      * TODO tz: maybe make privat and the classes that need to call it a friend
      */
-    void init(SCPageLayout * layout, const QList<KoShape *> & shapes);
+    void init(SCPageLayout * layout, const QList<KoShape *> &shapes);
 
     SCPageLayout * layout() const;
 
@@ -104,14 +104,14 @@ public:
     QMap<QString, KoTextShapeData *> styles() const;
 
 private:
-    void add(const QList<KoShape *> & shapes);
+    void add(const QList<KoShape *> &shapes);
 
     // set the new layout 
     // this gets called by the SCPageLayoutCommand
     void setLayout(SCPageLayout * layout);
 
     // apply style to shape
-    void applyStyle(SCPlaceholderShape * shape, const QString & presentationClass, const QMap<QString, KoTextShapeData*> & styles);
+    void applyStyle(SCPlaceholderShape * shape, const QString &presentationClass, const QMap<QString, KoTextShapeData*> &styles);
 
     SCPageLayout * m_layout;
     // that is set to true when the m_placeholders is initialized

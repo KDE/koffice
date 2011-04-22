@@ -36,7 +36,7 @@ public:
     : layout(pageLayout)
     {}
 
-    bool operator<(const SCPageLayoutWrapper & other) const
+    bool operator<(const SCPageLayoutWrapper &other) const
     {
         return *layout < *(other.layout);
     }
@@ -57,7 +57,7 @@ SCPageLayouts::~SCPageLayouts()
     }
 }
 
-bool SCPageLayouts::saveOdf(KoPASavingContext & context)
+bool SCPageLayouts::saveOdf(KoPASavingContext &context)
 {
     SCPageLayoutSharedSavingData * sharedData = new SCPageLayoutSharedSavingData();
 
@@ -76,16 +76,16 @@ bool compareLayouts(const SCPageLayout * p1, const SCPageLayout * p2)
     return SCPageLayout::compareByContent(*p1,* p2);
 }
 
-bool SCPageLayouts::loadOdf(KoPALoadingContext & context)
+bool SCPageLayouts::loadOdf(KoPALoadingContext &context)
 {
     QHash<QString, KoXmlElement*> layouts = context.odfLoadingContext().stylesReader().presentationPageLayouts();
     QHash<QString, KoXmlElement*>::iterator it(layouts.begin());
 
     // TODO need to use the correct page size
     // we should check which layouts are already loaded
-    const QMap<QString, KoPAMasterPage *> & masterPages = context.masterPages();
+    const QMap<QString, KoPAMasterPage *> &masterPages = context.masterPages();
     if (! masterPages.isEmpty()) {
-        KoPageLayout & layout = masterPages.begin().value()->pageLayout();
+        KoPageLayout &layout = masterPages.begin().value()->pageLayout();
         QRectF pageRect(0, 0, layout.width, layout.height);
         for (; it != layouts.end(); ++it) {
             SCPageLayout * pageLayout = new SCPageLayout();

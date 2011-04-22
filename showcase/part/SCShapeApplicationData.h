@@ -33,7 +33,7 @@ public:
     SCShapeApplicationData();
     ~SCShapeApplicationData();
 
-    QSet<SCShapeAnimation *> & animations();
+    QSet<SCShapeAnimation *> &animations();
 
 private:
     // stores the animations of a shape

@@ -55,7 +55,7 @@ typedef boost::multi_index_container<
 
 struct SCPageEffectFactory::Private
 {
-    Private(const QString & id, const QString & name)
+    Private(const QString &id, const QString &name)
     : id(id)
     , name(name)
     {}
@@ -78,7 +78,7 @@ struct SCPageEffectFactory::Private
     QList<QPair<QString, bool> > tags;
 };
 
-SCPageEffectFactory::SCPageEffectFactory(const QString & id, const QString & name)
+SCPageEffectFactory::SCPageEffectFactory(const QString &id, const QString &name)
 : d(new Private(id, name))
 {
 }
@@ -88,7 +88,7 @@ SCPageEffectFactory::~SCPageEffectFactory()
     delete d;
 }
 
-SCPageEffect * SCPageEffectFactory::createPageEffect(const Properties & properties) const
+SCPageEffect * SCPageEffectFactory::createPageEffect(const Properties &properties) const
 {
     SCPageEffectStrategy * strategy = 0;
 
@@ -102,7 +102,7 @@ SCPageEffect * SCPageEffectFactory::createPageEffect(const Properties & properti
     return new SCPageEffect(properties.duration, d->id, strategy);
 }
 
-SCPageEffect * SCPageEffectFactory::createPageEffect(const KoXmlElement & element) const
+SCPageEffect * SCPageEffectFactory::createPageEffect(const KoXmlElement &element) const
 {
     SCPageEffectStrategy * strategy = 0;
     SCPageEffect * pageEffect = 0;

@@ -45,7 +45,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 
-SCPlaceholderTextStrategy::SCPlaceholderTextStrategy(const QString & presentationClass)
+SCPlaceholderTextStrategy::SCPlaceholderTextStrategy(const QString &presentationClass)
 : SCPlaceholderStrategy(presentationClass)
 , m_textShape(0)
 {
@@ -76,7 +76,7 @@ KoShape *SCPlaceholderTextStrategy::createShape(KoResourceManager *documentResou
     return shape;
 }
 
-void SCPlaceholderTextStrategy::paint(QPainter & painter, const KoViewConverter &converter, const QRectF & rect)
+void SCPlaceholderTextStrategy::paint(QPainter &painter, const KoViewConverter &converter, const QRectF &rect)
 {
     if (m_textShape) {
         painter.save();
@@ -102,7 +102,7 @@ void SCPlaceholderTextStrategy::paint(QPainter & painter, const KoViewConverter 
     }
 }
 
-void SCPlaceholderTextStrategy::saveOdf(KoShapeSavingContext & context)
+void SCPlaceholderTextStrategy::saveOdf(KoShapeSavingContext &context)
 {
     if (m_textShape) {
         KoTextShapeData *shapeData = qobject_cast<KoTextShapeData*>(m_textShape->userData());
@@ -119,7 +119,7 @@ void SCPlaceholderTextStrategy::saveOdf(KoShapeSavingContext & context)
     SCPlaceholderStrategy::saveOdf(context);
 }
 
-bool SCPlaceholderTextStrategy::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context)
+bool SCPlaceholderTextStrategy::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
 kDebug();
     if (KoTextSharedLoadingData *textSharedData = dynamic_cast<KoTextSharedLoadingData *>(context.sharedData(KOTEXT_SHARED_LOADING_ID))) {

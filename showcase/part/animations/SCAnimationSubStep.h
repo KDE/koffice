@@ -32,7 +32,7 @@ public:
     SCAnimationSubStep();
     virtual ~SCAnimationSubStep();
     virtual void init(SCAnimationCache *animationCache, int step);
-    virtual bool saveOdf(KoPASavingContext & paContext, bool startStep) const;
+    virtual bool saveOdf(KoPASavingContext &paContext, bool startStep) const;
     virtual void deactivate();
 };
 

@@ -31,7 +31,7 @@ SCShapeApplicationData::~SCShapeApplicationData()
     qDeleteAll(m_animations);
 }
 
-QSet<SCShapeAnimation *> & SCShapeApplicationData::animations()
+QSet<SCShapeAnimation *> &SCShapeApplicationData::animations()
 {
     return m_animations;
 }

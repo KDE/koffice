@@ -56,7 +56,7 @@ public:
     void wheelEvent(KoPointerEvent * event);
 
     SCPresentationStrategyBase *strategy();
-    SCViewModePresentation & viewModePresentation();
+    SCViewModePresentation &viewModePresentation();
 
 public slots:
     virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
@@ -77,7 +77,7 @@ private:
      * @param shape the shape fhich is searched for hyperlink
      * @param hyperLink the string which is filled with hyperlink url
      */
-    bool checkHyperlink(KoPointerEvent *event, KoShape * shape, QString & hyperLink);
+    bool checkHyperlink(KoPointerEvent *event, KoShape * shape, QString &hyperLink);
 
     /**
      * Runs url string defined inside hyperlink
@@ -85,7 +85,7 @@ private:
      */
     void runHyperlink(QString hyperLink);
 
-    SCViewModePresentation & m_viewMode;
+    SCViewModePresentation &m_viewMode;
     QSet<KoEventAction *> m_eventActions;
 
     SCPresentationToolWidget * m_presentationToolWidget;
