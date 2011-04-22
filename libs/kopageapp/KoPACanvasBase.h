@@ -65,20 +65,20 @@ public:
     void setDocumentOffset(const QPoint &offset);
 
     /// XXX
-    const QPoint & documentOffset() const;
+    const QPoint &documentOffset() const;
 
     /// reimplemented in view coordinates
     virtual QPoint documentOrigin() const;
     /// Set the origin of the page inside the canvas in document coordinates
-    void setDocumentOrigin(const QPointF & origin);
+    void setDocumentOrigin(const QPointF &origin);
 
     KoPAViewBase* koPAView () const;
 
     /// translate widget coordinates to view coordinates
-    QPoint widgetToView(const QPoint& p) const;
-    QRect widgetToView(const QRect& r) const;
-    QPoint viewToWidget(const QPoint& p) const;
-    QRect viewToWidget(const QRect& r) const;
+    QPoint widgetToView(const QPoint &p) const;
+    QRect widgetToView(const QRect &r) const;
+    QPoint viewToWidget(const QPoint &p) const;
+    QRect viewToWidget(const QRect &r) const;
 
     /// Recalculates the size of the canvas (needed when zooming or changing pagelayout)
     virtual void updateSize() = 0;

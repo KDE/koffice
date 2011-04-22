@@ -49,10 +49,10 @@ public:
 
     void paintContent(QPainter &painter, const QRect &rect);
 
-    bool loadXML(const KoXmlDocument & doc, KoStore *store);
-    bool loadOdf(KoOdfReadStore & odfStore);
+    bool loadXML(const KoXmlDocument &doc, KoStore *store);
+    bool loadOdf(KoOdfReadStore &odfStore);
 
-    bool saveOdf(SavingContext & documentContext);
+    bool saveOdf(SavingContext &documentContext);
 
     /**
      * The tag the body is saved in
@@ -65,7 +65,7 @@ public:
      * @param masterStyles
      * @param context
      */
-    QList<KoPAPageBase *> loadOdfMasterPages(const QHash<QString, KoXmlElement*> masterStyles, KoPALoadingContext & context);
+    QList<KoPAPageBase *> loadOdfMasterPages(const QHash<QString, KoXmlElement*> masterStyles, KoPALoadingContext &context);
 
     /**
      * Save pages
@@ -74,17 +74,17 @@ public:
      *
      * For all pages that are specified also the master slide has to be specified.
      */
-    bool saveOdfPages(KoPASavingContext & paContext, QList<KoPAPageBase *> &pages, QList<KoPAPageBase *> &masterPages);
+    bool saveOdfPages(KoPASavingContext &paContext, QList<KoPAPageBase *> &pages, QList<KoPAPageBase *> &masterPages);
 
     /**
      * Save document styles
      */
-    virtual void saveOdfDocumentStyles(KoPASavingContext & context);
+    virtual void saveOdfDocumentStyles(KoPASavingContext &context);
 
     /**
      * Load document styles
      */
-    virtual bool loadOdfDocumentStyles(KoPALoadingContext & context);
+    virtual bool loadOdfDocumentStyles(KoPALoadingContext &context);
 
     /**
      * Get page by index.
@@ -217,7 +217,7 @@ public:
      *
      * Use this method instead the one in the pages directly
      */
-    QPixmap pageThumbnail(KoPAPageBase* page, const QSize& size);
+    QPixmap pageThumbnail(KoPAPageBase* page, const QSize &size);
 
 public slots:
     /// reimplemented
@@ -237,7 +237,7 @@ protected:
      *
      * The default implementation is empty
      */
-    virtual bool loadOdfProlog(const KoXmlElement & body, KoPALoadingContext & context);
+    virtual bool loadOdfProlog(const KoXmlElement &body, KoPALoadingContext &context);
 
 
     /**
@@ -245,21 +245,21 @@ protected:
      *
      * The default implementation is empty
      */
-    virtual bool loadOdfEpilogue(const KoXmlElement & body, KoPALoadingContext & context);
+    virtual bool loadOdfEpilogue(const KoXmlElement &body, KoPALoadingContext &context);
 
     /**
      * Save the prolog
      *
      * The default implementation is empty
      */
-    virtual bool saveOdfProlog(KoPASavingContext & paContext);
+    virtual bool saveOdfProlog(KoPASavingContext &paContext);
 
     /**
      * Save the epilouge
      *
      * The default implementation is empty
      */
-    virtual bool saveOdfEpilogue(KoPASavingContext & paContext);
+    virtual bool saveOdfEpilogue(KoPASavingContext &paContext);
 
     /**
      * Save settings
@@ -269,7 +269,7 @@ protected:
     /**
      * Load settings
      */
-    void loadOdfSettings(const KoXmlDocument & settingsDoc);
+    void loadOdfSettings(const KoXmlDocument &settingsDoc);
 
     /**
      * This function is called by at the end of addShape. This is used
@@ -324,7 +324,7 @@ private:
      * @param body
      * @param context
      */
-    QList<KoPAPageBase *> loadOdfPages(const KoXmlElement & body, KoPALoadingContext & context);
+    QList<KoPAPageBase *> loadOdfPages(const KoXmlElement &body, KoPALoadingContext &context);
 
 
 private:

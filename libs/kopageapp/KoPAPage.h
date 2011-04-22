@@ -31,15 +31,15 @@ public:
     /** Constructor
      * @param masterPage masterpage used for this page
      */
-    explicit KoPAPage(KoPAMasterPage * masterPage);
+    explicit KoPAPage(KoPAMasterPage *masterPage);
     ~KoPAPage();
 
     /// reimplemented
-    virtual void saveOdf(KoShapeSavingContext & context) const;
+    virtual void saveOdf(KoShapeSavingContext &context) const;
 
     /// @return the layout set by the masterpage
-    KoPageLayout & pageLayout();
-    const KoPageLayout & pageLayout() const;
+    KoPageLayout &pageLayout();
+    const KoPageLayout &pageLayout() const;
 
     /// Set the masterpage for this page to @p masterPage
     void setMasterPage(KoPAMasterPage * masterPage);
@@ -47,7 +47,7 @@ public:
     KoPAMasterPage * masterPage() { return m_masterPage; }
 
     /// reimplemented
-    virtual void paintBackground(QPainter & painter, const KoViewConverter & converter);
+    virtual void paintBackground(QPainter &painter, const KoViewConverter &converter);
 
     /// reimplemented
     virtual bool displayMasterShapes();
@@ -65,7 +65,7 @@ public:
     virtual bool displayShape(KoShape *shape) const;
 
     /// reimplemented
-    virtual void paintPage(QPainter & painter, KoZoomHandler & zoomHandler);
+    virtual void paintPage(QPainter &painter, KoZoomHandler &zoomHandler);
 
 protected:
     /**
@@ -90,9 +90,9 @@ protected:
     virtual void saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const;
 
     /// reimplemented
-    virtual QPixmap generateThumbnail(const QSize& size = QSize(512, 512));
+    virtual QPixmap generateThumbnail(const QSize &size = QSize(512, 512));
 
-    KoPAMasterPage * m_masterPage;
+    KoPAMasterPage *m_masterPage;
 
     int m_pageProperties;
 };

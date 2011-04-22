@@ -41,7 +41,7 @@ public:
     KoPAPrintJob(KoPAView * view);
     virtual ~KoPAPrintJob();
 
-    virtual QPrinter & printer();
+    virtual QPrinter &printer();
     virtual QList<QWidget*> createOptionWidgets() const;
 
 public slots:

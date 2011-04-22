@@ -45,7 +45,7 @@ KoPAMasterPage::~KoPAMasterPage()
 {
 }
 
-void KoPAMasterPage::saveOdf(KoShapeSavingContext & context) const
+void KoPAMasterPage::saveOdf(KoShapeSavingContext &context) const
 {
     KoPASavingContext &paContext = static_cast<KoPASavingContext&>(context);
 
@@ -86,7 +86,7 @@ void KoPAMasterPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingCont
         setName(element.attributeNS(KoXmlNS::style, "name"));
     }
     QString pageLayoutName = element.attributeNS(KoXmlNS::style, "page-layout-name");
-    const KoOdfStylesReader& styles = loadingContext.odfLoadingContext().stylesReader();
+    const KoOdfStylesReader &styles = loadingContext.odfLoadingContext().stylesReader();
     const KoXmlElement* masterPageStyle = styles.findStyle(pageLayoutName);
     KoPageLayout pageLayout;
 
@@ -130,14 +130,14 @@ void KoPAMasterPage::pageUpdated()
     KoPAPixmapCache::instance()->clear(false);
 }
 
-QPixmap KoPAMasterPage::generateThumbnail(const QSize& size)
+QPixmap KoPAMasterPage::generateThumbnail(const QSize &size)
 {
     // don't paint null pixmap
     if (size.isEmpty()) // either width or height is <= 0
         return QPixmap();
 
     KoZoomHandler zoomHandler;
-    const KoPageLayout & layout = pageLayout();
+    const KoPageLayout &layout = pageLayout();
     KoPAUtil::setZoom(layout, size, zoomHandler);
     QRect pageRect(KoPAUtil::pageRect(layout, size, zoomHandler));
 
@@ -153,7 +153,7 @@ QPixmap KoPAMasterPage::generateThumbnail(const QSize& size)
     return pixmap;
 }
 
-void KoPAMasterPage::paintPage(QPainter & painter, KoZoomHandler & zoomHandler)
+void KoPAMasterPage::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
 {
     paintBackground(painter, zoomHandler);
 

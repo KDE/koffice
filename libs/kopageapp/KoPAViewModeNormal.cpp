@@ -43,7 +43,7 @@ KoPAViewModeNormal::~KoPAViewModeNormal()
 {
 }
 
-void KoPAViewModeNormal::paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect)
+void KoPAViewModeNormal::paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect)
 {
 #ifdef NDEBUG
     Q_UNUSED(canvas)

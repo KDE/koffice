@@ -459,7 +459,7 @@ void KoPADocumentStructureDocker::extractSelectedLayersAndShapes(QList<KoPAPageB
     // 1. only make it possible to select one type of object page, layer, shape
     // 2. don't add shapes when we already have the page/layer/group in the selection
     // separate selected layers and selected shapes
-    foreach(const QModelIndex & index, selectedItems)
+    foreach (const QModelIndex &index, selectedItems)
     {
         KoShape *shape = static_cast<KoShape*>(index.internalPointer());
         KoPAPageBase * page = dynamic_cast<KoPAPageBase*>(shape);
@@ -556,7 +556,7 @@ QModelIndex KoPADocumentStructureDocker::getRootIndex(const QModelIndex &index) 
     return currentIndex;
 }
 
-KoDocumentSectionView::DisplayMode KoPADocumentStructureDocker::viewModeFromString(const QString& mode)
+KoDocumentSectionView::DisplayMode KoPADocumentStructureDocker::viewModeFromString(const QString &mode)
 {
     if(mode == "Minimal")
         return KoDocumentSectionView::MinimalMode;
@@ -586,7 +586,7 @@ QString KoPADocumentStructureDocker::viewModeToString(KoDocumentSectionView::Dis
     return QString();
 }
 
-void KoPADocumentStructureDocker::itemSelected(const QItemSelection& selected, const QItemSelection& deselected)
+void KoPADocumentStructureDocker::itemSelected(const QItemSelection &selected, const QItemSelection &deselected)
 {
     Q_UNUSED(deselected);
 

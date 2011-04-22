@@ -35,12 +35,12 @@
 #include <qtest_kde.h>
 #include <kdebug.h>
 
-void TestPACopyPastePage::copyAndPaste(MockDocument * doc, QList<KoPAPageBase *> & pages, KoPAPageBase * after)
+void TestPACopyPastePage::copyAndPaste(MockDocument * doc, QList<KoPAPageBase *> &pages, KoPAPageBase * after)
 {
     paste(doc, copy(doc, pages), after);
 }
 
-QMimeData * TestPACopyPastePage::copy(MockDocument * doc, QList<KoPAPageBase *> & pages)
+QMimeData * TestPACopyPastePage::copy(MockDocument * doc, QList<KoPAPageBase *> &pages)
 {
     KoPAOdfPageSaveHelper saveHelper(doc, pages);
     KoDrag drag;

@@ -51,7 +51,7 @@ public:
     KoPAViewMode(KoPAViewBase * view, KoPACanvasBase * canvas);
     virtual ~KoPAViewMode();
 
-    virtual void paint(KoPACanvasBase* canvas, QPainter& painter, const QRectF &paintRect) = 0;
+    virtual void paint(KoPACanvasBase* canvas, QPainter &painter, const QRectF &paintRect) = 0;
     //virtual void paintEvent(KoPACanvas * canvas, QPaintEvent* event) = 0;
     virtual void tabletEvent(QTabletEvent *event, const QPointF &point) = 0;
     virtual void mousePressEvent(QMouseEvent *event, const QPointF &point) = 0;

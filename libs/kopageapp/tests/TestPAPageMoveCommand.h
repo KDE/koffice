@@ -41,7 +41,7 @@ private slots:
     void redoUndoAfterInBetween();
 
 private:
-    void checkOrder(QList<KoPAMasterPage*> & pages);
+    void checkOrder(QList<KoPAMasterPage*> &pages);
     MockDocument m_doc;
 
     QList<KoPAMasterPage*> m_pages;

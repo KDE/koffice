@@ -48,7 +48,7 @@ public:
      * @return The shape with the shape id given after the current one or 0 if there is no 
      *         such shape after the current one
      */
-    static KoShape * nextShape(const KoShape * current, const QString & shapeId);
+    static KoShape * nextShape(const KoShape * current, const QString &shapeId);
 
     /**
      * @brief Get the previous shape in the tree
@@ -68,7 +68,7 @@ public:
      * @return The shape with the shape id given before the current one or 0 if there is no 
      *         such shape before the current one
      */
-    static KoShape * previousShape(const KoShape * current, const QString & shapeId);
+    static KoShape * previousShape(const KoShape * current, const QString &shapeId);
 
     /**
      * @brief Get the last shape in subtree

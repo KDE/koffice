@@ -48,7 +48,7 @@ KoPAPage::~KoPAPage()
 {
 }
 
-void KoPAPage::saveOdf(KoShapeSavingContext & context) const
+void KoPAPage::saveOdf(KoShapeSavingContext &context) const
 {
     KoPASavingContext &paContext = static_cast<KoPASavingContext&>(context);
 
@@ -66,14 +66,14 @@ void KoPAPage::saveOdf(KoShapeSavingContext & context) const
     paContext.xmlWriter().endElement();
 }
 
-KoPageLayout & KoPAPage::pageLayout()
+KoPageLayout &KoPAPage::pageLayout()
 {
     Q_ASSERT(m_masterPage);
 
     return m_masterPage->pageLayout();
 }
 
-const KoPageLayout & KoPAPage::pageLayout() const
+const KoPageLayout &KoPAPage::pageLayout() const
 {
     Q_ASSERT(m_masterPage);
 
@@ -90,7 +90,7 @@ void KoPAPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &l
     else
         kWarning(30010) << "Loading didn't provide a page under name; " << master;
 #endif
-    KoStyleStack& styleStack = loadingContext.odfLoadingContext().styleStack();
+    KoStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
     int pageProperties = UseMasterBackground | DisplayMasterShapes | DisplayMasterBackground;
     if (styleStack.hasProperty(KoXmlNS::draw, "fill")) {
         KoPAPageBase::loadOdfPageTag(element, loadingContext);
@@ -114,7 +114,7 @@ void KoPAPage::setMasterPage(KoPAMasterPage * masterPage)
     m_masterPage = masterPage;
 }
 
-void KoPAPage::paintBackground(QPainter & painter, const KoViewConverter & converter)
+void KoPAPage::paintBackground(QPainter &painter, const KoViewConverter &converter)
 {
     if (m_pageProperties & UseMasterBackground) {
         if (m_pageProperties & DisplayMasterBackground) {
@@ -163,7 +163,7 @@ bool KoPAPage::displayShape(KoShape *shape) const
     return true;
 }
 
-QPixmap KoPAPage::generateThumbnail(const QSize& size)
+QPixmap KoPAPage::generateThumbnail(const QSize &size)
 {
     // don't paint null pixmap
     if (size.isEmpty()) // either width or height is <= 0
@@ -184,7 +184,7 @@ QPixmap KoPAPage::generateThumbnail(const QSize& size)
     return pixmap;
 }
 
-void KoPAPage::paintPage(QPainter & painter, KoZoomHandler & zoomHandler)
+void KoPAPage::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
 {
     paintBackground(painter, zoomHandler);
 

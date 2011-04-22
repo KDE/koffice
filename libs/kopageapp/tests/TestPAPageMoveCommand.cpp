@@ -413,7 +413,7 @@ void TestPAPageMoveCommand::redoUndoAfterInBetween()
     checkOrder(m_pages);
 }
 
-void TestPAPageMoveCommand::checkOrder(QList<KoPAMasterPage*> & pages)
+void TestPAPageMoveCommand::checkOrder(QList<KoPAMasterPage*> &pages)
 {
     for(int i = 0; i < pages.size(); ++i) {
         QVERIFY(pages[i] == m_doc.pageByIndex(i, true));

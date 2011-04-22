@@ -59,8 +59,8 @@ public:
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
     virtual Qt::DropActions supportedDropActions() const;
     virtual QStringList mimeTypes() const;
-    virtual QMimeData * mimeData(const QModelIndexList & indexes) const;
-    virtual bool dropMimeData(const QMimeData * data, Qt::DropAction action, int row, int column, const QModelIndex & parent);
+    virtual QMimeData * mimeData(const QModelIndexList &indexes) const;
+    virtual bool dropMimeData(const QMimeData * data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
 
 public slots:
     /// Triggers an update of the complete model

@@ -57,7 +57,7 @@ void KoPAPixmapCache::clear(bool all)
         QMap<QString, QList<QSize> >::iterator it(m_keySize.begin());
 
         for (; it != m_keySize.end(); ++it) {
-            foreach(const QSize& size, it.value()) {
+            foreach(const QSize &size, it.value()) {
                 QString k = generateKey(it.key(), size);
                 QPixmapCache::remove(k);
             }
@@ -66,25 +66,25 @@ void KoPAPixmapCache::clear(bool all)
     }
 }
 
-bool KoPAPixmapCache::find(const QString & key, const QSize & size, QPixmap & pm)
+bool KoPAPixmapCache::find(const QString &key, const QSize &size, QPixmap &pm)
 {
     QString k = generateKey(key, size);
     return QPixmapCache::find(k, pm);
 }
 
-bool KoPAPixmapCache::insert(const QString & key, const QPixmap & pm)
+bool KoPAPixmapCache::insert(const QString &key, const QPixmap &pm)
 {
     QString k = generateKey(key, pm.size());
     m_keySize[key].append(pm.size());
     return QPixmapCache::insert(k, pm);
 }
 
-void KoPAPixmapCache::remove(const QString & key)
+void KoPAPixmapCache::remove(const QString &key)
 {
     QMap<QString, QList<QSize> >::iterator it(m_keySize.find(key));
 
     if (it != m_keySize.end()) {
-        foreach(const QSize& size, it.value()) {
+        foreach(const QSize &size, it.value()) {
             QString k = generateKey(key, size);
             QPixmapCache::remove(k);
         }
@@ -97,7 +97,7 @@ void KoPAPixmapCache::setCacheLimit(int n)
     QPixmapCache::setCacheLimit(n);
 }
 
-QString KoPAPixmapCache::generateKey(const QString &key, const QSize & size)
+QString KoPAPixmapCache::generateKey(const QString &key, const QSize &size)
 {
     return QString("%1-%2-%3").arg(key).arg(size.width()).arg(size.height());
 }

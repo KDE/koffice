@@ -98,7 +98,7 @@ QPoint KoPACanvasBase::documentOrigin() const
     return viewConverter()->documentToView(d->origin()).toPoint();
 }
 
-void KoPACanvasBase::setDocumentOrigin(const QPointF & o)
+void KoPACanvasBase::setDocumentOrigin(const QPointF &o)
 {
     d->view->viewMode()->setOrigin(o);
 }
@@ -139,7 +139,7 @@ KoUnit KoPACanvasBase::unit() const
     return d->doc->unit();
 }
 
-const QPoint & KoPACanvasBase::documentOffset() const
+const QPoint &KoPACanvasBase::documentOffset() const
 {
     return d->documentOffset;
 }
@@ -148,22 +148,22 @@ void KoPACanvasBase::setDocumentOffset(const QPoint &offset) {
     d->documentOffset = offset;
 }
 
-QPoint KoPACanvasBase::widgetToView(const QPoint& p) const
+QPoint KoPACanvasBase::widgetToView(const QPoint&p) const
 {
     return p - viewConverter()->documentToView(d->origin()).toPoint();
 }
 
-QRect KoPACanvasBase::widgetToView(const QRect& r) const
+QRect KoPACanvasBase::widgetToView(const QRect &r) const
 {
     return r.translated(viewConverter()->documentToView(-d->origin()).toPoint());
 }
 
-QPoint KoPACanvasBase::viewToWidget(const QPoint& p) const
+QPoint KoPACanvasBase::viewToWidget(const QPoint &p) const
 {
     return p + viewConverter()->documentToView(d->origin()).toPoint();
 }
 
-QRect KoPACanvasBase::viewToWidget(const QRect& r) const
+QRect KoPACanvasBase::viewToWidget(const QRect &r) const
 {
     return r.translated(viewConverter()->documentToView(d->origin()).toPoint());
 }

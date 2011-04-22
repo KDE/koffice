@@ -375,7 +375,7 @@ QStringList KoPADocumentModel::mimeTypes() const
     return types;
 }
 
-QMimeData * KoPADocumentModel::mimeData(const QModelIndexList & indexes) const
+QMimeData * KoPADocumentModel::mimeData(const QModelIndexList &indexes) const
 {
     // check if there is data to encode
     if(! indexes.count())
@@ -400,7 +400,7 @@ QMimeData * KoPADocumentModel::mimeData(const QModelIndexList & indexes) const
     return data;
 }
 
-bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction action, int row, int column, const QModelIndex & parent)
+bool KoPADocumentModel::dropMimeData(const QMimeData * data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
 {
     Q_UNUSED(row);
     Q_UNUSED(column);

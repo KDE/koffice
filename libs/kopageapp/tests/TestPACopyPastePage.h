@@ -30,8 +30,8 @@ class TestPACopyPastePage : public QObject
 {
     Q_OBJECT
 private:
-    void copyAndPaste(MockDocument * doc, QList<KoPAPageBase *> & pages, KoPAPageBase * after);
-    QMimeData * copy(MockDocument * doc, QList<KoPAPageBase *> & pages);
+    void copyAndPaste(MockDocument * doc, QList<KoPAPageBase *> &pages, KoPAPageBase * after);
+    QMimeData * copy(MockDocument * doc, QList<KoPAPageBase *> &pages);
     void paste(MockDocument * doc, QMimeData * data, KoPAPageBase * after);
     void addShape(KoPAPageBase * page);
 

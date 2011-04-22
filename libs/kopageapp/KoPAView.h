@@ -120,7 +120,7 @@ public:
      *
      * Us this method instead the on in the pages directly
      */
-    QPixmap pageThumbnail(KoPAPageBase* page, const QSize& size);
+    QPixmap pageThumbnail(KoPAPageBase* page, const QSize &size);
 
     /**
      * Save thumbnail to an image file.
@@ -136,7 +136,7 @@ public:
      *
      * @returns whether the image was successfully saved
      */
-    bool exportPageThumbnail(KoPAPageBase * page, const KUrl& url, const QSize& size = QSize(512, 512),
+    bool exportPageThumbnail(KoPAPageBase * page, const KUrl &url, const QSize &size = QSize(512, 512),
                               const char * format = 0, int quality = -1);
 
     /// Update page navigation actions
@@ -185,7 +185,7 @@ protected slots:
     void pageOffsetChanged();
 
     /// Called when the mouse position changes on the canvas
-    virtual void updateMousePosition(const QPoint& position);
+    virtual void updateMousePosition(const QPoint &position);
 
     /// Called when the selection changed
     virtual void selectionChanged();

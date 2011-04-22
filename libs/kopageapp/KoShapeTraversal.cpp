@@ -29,7 +29,7 @@ KoShape * KoShapeTraversal::nextShape(const KoShape * current)
     return nextShapeStep(current, 0);
 }
 
-KoShape * KoShapeTraversal::nextShape(const KoShape * current, const QString & shapeId)
+KoShape * KoShapeTraversal::nextShape(const KoShape * current, const QString &shapeId)
 {
     KoShape * next = nextShapeStep(current, 0);
 
@@ -45,7 +45,7 @@ KoShape * KoShapeTraversal::previousShape(const KoShape * current)
     return previousShapeStep(current, 0);
 }
 
-KoShape * KoShapeTraversal::previousShape(const KoShape * current, const QString & shapeId)
+KoShape * KoShapeTraversal::previousShape(const KoShape * current, const QString &shapeId)
 {
     KoShape * previous = previousShapeStep(current, 0);
 

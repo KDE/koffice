@@ -39,7 +39,7 @@ public:
     const QWidget* canvasWidget() const;
 
     /// reimplemented method
-    virtual void updateCanvas(const QRectF& rc);
+    virtual void updateCanvas(const QRectF &rc);
 
     /// reimplemented method
     virtual void updateInputMethodInfo();
@@ -58,7 +58,7 @@ signals:
      * Emitted when the entire controller size changes
      * @param size the size in widget pixels.
      */
-    void sizeChanged(const QSize & size);
+    void sizeChanged(const QSize &size);
 
     /// Emitted when updateCanvas has been called.
     void canvasUpdated();
@@ -99,7 +99,7 @@ protected:
      * @param globalPos global position to show the menu at.
      * @param actionList action list to be inserted into the menu
      */
-    void showContextMenu(const QPoint& globalPos, const QList<QAction*>& actionList);
+    void showContextMenu(const QPoint &globalPos, const QList<QAction*> &actionList);
 };
 
 #endif /* KOPACANVAS_H */

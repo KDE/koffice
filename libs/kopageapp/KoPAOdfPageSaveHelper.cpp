@@ -58,7 +58,7 @@ KoPAOdfPageSaveHelper::~KoPAOdfPageSaveHelper()
     delete m_context;
 }
 
-KoShapeSavingContext * KoPAOdfPageSaveHelper::context(KoXmlWriter * bodyWriter, KoGenStyles & mainStyles, KoEmbeddedDocumentSaver & embeddedSaver)
+KoShapeSavingContext * KoPAOdfPageSaveHelper::context(KoXmlWriter * bodyWriter, KoGenStyles &mainStyles, KoEmbeddedDocumentSaver &embeddedSaver)
 {
     m_context = new KoPASavingContext(*bodyWriter, mainStyles, embeddedSaver, 1);
     return m_context;
@@ -69,7 +69,7 @@ bool KoPAOdfPageSaveHelper::writeBody()
     Q_ASSERT(m_context);
     if (m_context) {
         m_doc->saveOdfDocumentStyles(*(static_cast<KoPASavingContext*>(m_context)));
-        KoXmlWriter & bodyWriter = static_cast<KoPASavingContext*>(m_context)->xmlWriter();
+        KoXmlWriter &bodyWriter = static_cast<KoPASavingContext*>(m_context)->xmlWriter();
         bodyWriter.startElement("office:body");
         bodyWriter.startElement(m_doc->odfTagName(true));
 

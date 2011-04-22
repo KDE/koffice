@@ -710,7 +710,7 @@ void KoPAView::pageOffsetChanged()
     d->verticalRuler->setOffset(d->canvasController->canvasOffsetY() + documentOrigin.y());
 }
 
-void KoPAView::updateMousePosition(const QPoint& position)
+void KoPAView::updateMousePosition(const QPoint &position)
 {
     QPoint canvasOffset(d->canvasController->canvasOffsetX(), d->canvasController->canvasOffsetY());
     // the offset is positive it the canvas is shown fully visible
@@ -760,7 +760,7 @@ void KoPAView::insertPage()
         KoPAMasterPage * masterPage = d->doc->newMasterPage();
         masterPage->setBackground(new KoColorBackground(Qt::white));
         // use the layout of the current active page for the new page
-        KoPageLayout & layout = masterPage->pageLayout();
+        KoPageLayout &layout = masterPage->pageLayout();
         KoPAMasterPage * activeMasterPage = dynamic_cast<KoPAMasterPage *>(d->activePage);
         if (activeMasterPage) {
             layout = activeMasterPage->pageLayout();
@@ -820,12 +820,12 @@ void KoPAView::setActionEnabled(int actions, bool enable)
     }
 }
 
-QPixmap KoPAView::pageThumbnail(KoPAPageBase* page, const QSize& size)
+QPixmap KoPAView::pageThumbnail(KoPAPageBase* page, const QSize &size)
 {
     return d->doc->pageThumbnail(page, size);
 }
 
-bool KoPAView::exportPageThumbnail(KoPAPageBase * page, const KUrl& url, const QSize& size,
+bool KoPAView::exportPageThumbnail(KoPAPageBase * page, const KUrl &url, const QSize &size,
                                     const char * format, int quality)
 {
     bool res = false;
@@ -883,7 +883,7 @@ void KoPAView::clipboardDataChanged()
         mimeTypes << KoOdf::mimeType(KoOdf::Graphics);
         mimeTypes << KoOdf::mimeType(KoOdf::Presentation);
 
-        foreach(const QString & mimeType, mimeTypes)
+        foreach(const QString &mimeType, mimeTypes)
         {
             if (data->hasFormat(mimeType)) {
                 paste = true;

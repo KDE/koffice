@@ -48,7 +48,7 @@ public:
      *
      * @param name name of the master page.
      */
-    KoPAMasterPage* masterPageByName(const QString& name);
+    KoPAMasterPage* masterPageByName(const QString &name);
 
     /**
      * Add a master page to the context.
@@ -56,19 +56,19 @@ public:
      * @param name name of the master page.
      * @param master master page to add.
      */
-    void addMasterPage(const QString& name, KoPAMasterPage* master);
+    void addMasterPage(const QString &name, KoPAMasterPage* master);
 
     /**
      * Get the master pages
      */
-    const QMap<QString, KoPAMasterPage *> & masterPages();
+    const QMap<QString, KoPAMasterPage *> &masterPages();
 
     /**
      * Get the page with the name @p name.
      *
      * @param name name of the page.
      */
-    KoPAPage* pageByName(const QString& name);
+    KoPAPage* pageByName(const QString &name);
 
     /**
      * Add a master page to the context.
@@ -76,7 +76,7 @@ public:
      * @param name name of the page.
      * @param page page to add.
      */
-    void addPage(const QString& name, KoPAPage* page);
+    void addPage(const QString &name, KoPAPage* page);
 
 private:
     class Private;

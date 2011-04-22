@@ -75,7 +75,7 @@ void KoPACanvas::updateSize()
     emit documentSize(size);
 }
 
-void KoPACanvas::updateCanvas(const QRectF& rc)
+void KoPACanvas::updateCanvas(const QRectF &rc)
 {
     QRect clipRect(viewToWidget(viewConverter()->documentToView(rc).toRect()));
     clipRect.adjust(-2, -2, 2, 2); // Resize to fit anti-aliasing
@@ -178,7 +178,7 @@ void KoPACanvas::resizeEvent(QResizeEvent * event)
     emit sizeChanged(event->size());
 }
 
-void KoPACanvas::showContextMenu(const QPoint& globalPos, const QList<QAction*>& actionList)
+void KoPACanvas::showContextMenu(const QPoint &globalPos, const QList<QAction*> &actionList)
 {
     KoPAView *view = dynamic_cast<KoPAView*>(koPAView());
     if (!view || !view->factory()) return;

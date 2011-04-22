@@ -61,17 +61,17 @@ public:
      * @param context the pageapp saving context
      * @return true on success, false otherwise
      */
-    virtual void saveOdf(KoShapeSavingContext & context) const = 0;
+    virtual void saveOdf(KoShapeSavingContext &context) const = 0;
 
     /// reimplemented
-    virtual bool loadOdf(const KoXmlElement & element, KoShapeLoadingContext & context);
+    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
 
 
     /// @return the layout of the page
-    virtual KoPageLayout & pageLayout() = 0;
-    virtual const KoPageLayout & pageLayout() const = 0;
+    virtual KoPageLayout &pageLayout() = 0;
+    virtual const KoPageLayout &pageLayout() const = 0;
 
-    virtual void paintComponent(QPainter& painter, const KoViewConverter& converter);
+    virtual void paintComponent(QPainter &painter, const KoViewConverter &converter);
 
     /**
      * @brief Paint background
@@ -79,7 +79,7 @@ public:
      * @param painter used to paint the background
      * @param converter to convert between internal and view coordinates
      */
-    virtual void paintBackground(QPainter & painter, const KoViewConverter & converter);
+    virtual void paintBackground(QPainter &painter, const KoViewConverter &converter);
 
     /**
      * Get if master shapes should be displayed
@@ -118,7 +118,7 @@ public:
      */
     virtual bool displayShape(KoShape *shape) const = 0;
 
-    QPixmap thumbnail(const QSize& size = QSize(512, 512));
+    QPixmap thumbnail(const QSize &size = QSize(512, 512));
 
     /**
      * This function is called when the content of the page changes
@@ -167,13 +167,13 @@ public:
      * @param painter The painter used to paint the page
      * @param zoomHandler The zoomHandler used to paint the page
      */
-    virtual void paintPage(QPainter & painter, KoZoomHandler & zoomHandler) = 0;
+    virtual void paintPage(QPainter &painter, KoZoomHandler &zoomHandler) = 0;
 
 protected:
     /**
      * @param paContext the pageapp saving context
      */
-    virtual void saveOdfPageContent(KoPASavingContext & paContext) const;
+    virtual void saveOdfPageContent(KoPASavingContext &paContext) const;
 
     /**
      * @brief Save the layers of a page
@@ -188,7 +188,7 @@ protected:
      * @param paContext the pageapp saving context
      * @return true on success, false otherwise
      */
-    void saveOdfShapes(KoShapeSavingContext & context) const;
+    void saveOdfShapes(KoShapeSavingContext &context) const;
 
     /**
      * @brief Save animations
@@ -198,7 +198,7 @@ protected:
      * @param paContext the pageapp saving context
      * @return true on success, false otherwise
      */
-    virtual bool saveOdfAnimations(KoPASavingContext & paContext) const;
+    virtual bool saveOdfAnimations(KoPASavingContext &paContext) const;
 
     /**
      * @brief Save presentation notes
@@ -217,7 +217,7 @@ protected:
      *
      * @return name of the page style
      */
-    QString saveOdfPageStyle(KoPASavingContext & paContext) const;
+    QString saveOdfPageStyle(KoPASavingContext &paContext) const;
 
     /**
      * @brief Save special data of a style
@@ -246,12 +246,12 @@ protected:
      * @param element the page element
      * @param paContext the pageapp loading context
      */
-    virtual void loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext & loadingContext);
+    virtual void loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &loadingContext);
 
     /**
      * Create thumbnail for the page
      */
-    virtual QPixmap generateThumbnail(const QSize& size = QSize(512, 512)) = 0;
+    virtual QPixmap generateThumbnail(const QSize &size = QSize(512, 512)) = 0;
 
     /**
      * Get the key used for caching the thumbnail pixmap

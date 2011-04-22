@@ -44,7 +44,7 @@ KoPAPrintJob::~KoPAPrintJob()
 {
 }
 
-QPrinter & KoPAPrintJob::printer()
+QPrinter &KoPAPrintJob::printer()
 {
     return m_printer;
 }
@@ -79,7 +79,7 @@ void KoPAPrintJob::startPrinting(RemovePolicy removePolicy)
         }
 
         KoPAPageBase * page = m_pages.at(i);
-        const KoPageLayout & layout = page->pageLayout();
+        const KoPageLayout &layout = page->pageLayout();
         KoPAUtil::setZoom(layout, size, zoomHandler);
         QRect pageRect(KoPAUtil::pageRect(layout, size, zoomHandler));
 

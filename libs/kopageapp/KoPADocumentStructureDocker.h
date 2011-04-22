@@ -93,7 +93,7 @@ private slots:
     void detailedView();
     void thumbnailView();
 
-    void itemSelected(const QItemSelection& selected, const QItemSelection& deselected);
+    void itemSelected(const QItemSelection &selected, const QItemSelection &deselected);
     void editCut();
     void editCopy();
     void editPaste(); 
@@ -103,7 +103,7 @@ private:
     void setViewMode(KoDocumentSectionView::DisplayMode mode);
     QModelIndex getRootIndex(const QModelIndex &index) const;
 
-    KoDocumentSectionView::DisplayMode viewModeFromString(const QString& mode);
+    KoDocumentSectionView::DisplayMode viewModeFromString(const QString &mode);
     QString viewModeToString(KoDocumentSectionView::DisplayMode mode);
 
     KoPADocument * m_doc;

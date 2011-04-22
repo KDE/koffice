@@ -32,14 +32,14 @@ public:
     ~KoPAMasterPage();
 
     /// reimplemented
-    virtual void saveOdf(KoShapeSavingContext & context) const;
+    virtual void saveOdf(KoShapeSavingContext &context) const;
 
     /// @return the page layout set for this masterpage
-    KoPageLayout & pageLayout() { return m_pageLayout; }
-    const KoPageLayout & pageLayout() const { return m_pageLayout; }
+    KoPageLayout &pageLayout() { return m_pageLayout; }
+    const KoPageLayout &pageLayout() const { return m_pageLayout; }
 
     /// Set the page layout to @p layout
-    void setPageLayout(const KoPageLayout& layout) { m_pageLayout = layout; }
+    void setPageLayout(const KoPageLayout &layout) { m_pageLayout = layout; }
 
     /// reimplemented
     virtual bool displayMasterShapes();
@@ -60,14 +60,14 @@ public:
     virtual void pageUpdated();
 
     /// reimplemented
-    virtual void paintPage(QPainter & painter, KoZoomHandler & zoomHandler);
+    virtual void paintPage(QPainter &painter, KoZoomHandler &zoomHandler);
 
 protected:
     /// Reimplemented from KoPageBase
     virtual void loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext);
 
     /// reimplemented
-    virtual QPixmap generateThumbnail(const QSize& size = QSize(512, 512));
+    virtual QPixmap generateThumbnail(const QSize &size = QSize(512, 512));
 
     KoPageLayout m_pageLayout;
 };
