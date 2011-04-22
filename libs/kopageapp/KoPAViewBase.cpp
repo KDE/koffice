@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright ( C ) 2010 Boudewijn Rempt <boud@valdyas.org>
+ * Copyright (C ) 2010 Boudewijn Rempt <boud@valdyas.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -41,9 +41,9 @@ KoPAViewBase::~KoPAViewBase()
     delete proxyObject;
 }
 
-KoViewConverter* KoPAViewBase::viewConverter( KoPACanvasBase * canvas )
+KoViewConverter* KoPAViewBase::viewConverter(KoPACanvasBase * canvas )
 {
-    Q_UNUSED( canvas );
+    Q_UNUSED(canvas );
 
     return &d->zoomHandler;
 }
@@ -63,17 +63,17 @@ KoZoomHandler* KoPAViewBase::zoomHandler() const
     return &d->zoomHandler;
 }
 
-void KoPAViewBase::setViewMode( KoPAViewMode* mode )
+void KoPAViewBase::setViewMode(KoPAViewMode* mode )
 {
-    Q_ASSERT( mode );
-    if ( !d->viewMode ) {
+    Q_ASSERT(mode );
+    if (!d->viewMode ) {
         d->viewMode = mode;
     }
-    else if ( mode != d->viewMode ) {
+    else if (mode != d->viewMode ) {
         KoPAViewMode * previousViewMode = d->viewMode;
         d->viewMode->deactivate();
         d->viewMode = mode;
-        d->viewMode->activate( previousViewMode );
+        d->viewMode->activate(previousViewMode );
     }
 }
 

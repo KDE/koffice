@@ -38,7 +38,7 @@ public:
 
 KoPALoadingContext::KoPALoadingContext(KoOdfLoadingContext &context, KoResourceManager *documentResources)
 : KoShapeLoadingContext(context, documentResources)
-, d( new Private() )
+, d(new Private() )
 {
 }
 
@@ -47,14 +47,14 @@ KoPALoadingContext::~KoPALoadingContext()
     delete d;
 }
 
-KoPAMasterPage* KoPALoadingContext::masterPageByName( const QString& name )
+KoPAMasterPage* KoPALoadingContext::masterPageByName(const QString& name )
 {
-    return d->masterPages.value( name, 0 );
+    return d->masterPages.value(name, 0 );
 }
 
-void KoPALoadingContext::addMasterPage( const QString& name, KoPAMasterPage* master )
+void KoPALoadingContext::addMasterPage(const QString& name, KoPAMasterPage* master )
 {
-    d->masterPages.insert( name, master );
+    d->masterPages.insert(name, master );
 }
 
 const QMap<QString, KoPAMasterPage *> & KoPALoadingContext::masterPages()
@@ -62,12 +62,12 @@ const QMap<QString, KoPAMasterPage *> & KoPALoadingContext::masterPages()
     return d->masterPages;
 }
 
-KoPAPage* KoPALoadingContext::pageByName( const QString& name )
+KoPAPage* KoPALoadingContext::pageByName(const QString& name )
 {
-    return d->pages.value( name, 0 );
+    return d->pages.value(name, 0 );
 }
 
-void KoPALoadingContext::addPage( const QString& name, KoPAPage* page )
+void KoPALoadingContext::addPage(const QString& name, KoPAPage* page )
 {
-    d->pages.insert( name, page );
+    d->pages.insert(name, page );
 }

@@ -37,7 +37,7 @@ KoTextPage * KoPAPageProvider::page(KoShape * shape)
     return new KoPATextPage(m_pageNumber, m_page);
 }
 
-void KoPAPageProvider::setPageData( int pageNumber, KoPAPageBase *page )
+void KoPAPageProvider::setPageData(int pageNumber, KoPAPageBase *page )
 {
     m_pageNumber = pageNumber;
     m_page = page;

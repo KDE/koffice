@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright ( C ) 2007 Thorsten Zachmann <zachmann@kde.org>
+ * Copyright (C ) 2007 Thorsten Zachmann <zachmann@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,38 +24,38 @@
 #include "KoPADocument.h"
 #include "KoPAPageBase.h"
 
-KoPAPageInsertCommand::KoPAPageInsertCommand( KoPADocument *document, KoPAPageBase *page, KoPAPageBase *after, QUndoCommand *parent )
-: QUndoCommand( parent )
-, m_document( document )
-, m_page( page )
-, m_after( after )
-, m_deletePage( true )
+KoPAPageInsertCommand::KoPAPageInsertCommand(KoPADocument *document, KoPAPageBase *page, KoPAPageBase *after, QUndoCommand *parent )
+: QUndoCommand(parent )
+, m_document(document )
+, m_page(page )
+, m_after(after )
+, m_deletePage(true )
 {
-    Q_ASSERT( document );
-    Q_ASSERT( page );
-    if ( m_page->pageType() == KoPageApp::Slide ) {
-        setText( i18n( "Insert slide" ) );
+    Q_ASSERT(document );
+    Q_ASSERT(page );
+    if (m_page->pageType() == KoPageApp::Slide ) {
+        setText(i18n("Insert slide" ) );
     }
     else {
-        setText( i18n( "Insert page" ) );
+        setText(i18n("Insert page" ) );
     }
 }
 
 KoPAPageInsertCommand::~KoPAPageInsertCommand()
 {
-    if ( m_deletePage ) {
+    if (m_deletePage ) {
         delete m_page;
     }
 }
 
 void KoPAPageInsertCommand::redo()
 {
-    m_document->insertPage( m_page, m_after );
+    m_document->insertPage(m_page, m_after );
     m_deletePage = false;
 }
 
 void KoPAPageInsertCommand::undo()
 {
-    m_document->takePage( m_page );
+    m_document->takePage(m_page );
     m_deletePage = true;
 }
