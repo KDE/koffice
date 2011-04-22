@@ -63,16 +63,16 @@ void KoPAPrintJob::startPrinting(RemovePolicy removePolicy)
     int fromPage = m_printer.fromPage() ? m_printer.fromPage() - 1: 0;
     int toPage = m_printer.toPage() ? m_printer.toPage() - 1: m_pages.size() - 1;
 
-    Q_ASSERT(fromPage >= 0 && fromPage < m_pages.size() );
-    Q_ASSERT(toPage >= 0 && toPage < m_pages.size() );
+    Q_ASSERT(fromPage >= 0 && fromPage < m_pages.size());
+    Q_ASSERT(toPage >= 0 && toPage < m_pages.size());
 
     KoZoomHandler zoomHandler;
-    zoomHandler.setResolution(m_printer.resolution(), m_printer.resolution() );
+    zoomHandler.setResolution(m_printer.resolution(), m_printer.resolution());
 
     QSize size = m_printer.pageRect().size();
 
-    QPainter painter(&m_printer );
-    for (int i = fromPage; i <= toPage; ++i ) {
+    QPainter painter(&m_printer);
+    for (int i = fromPage; i <= toPage; ++i) {
         painter.save();
         if (i != fromPage) {
             m_printer.newPage();
@@ -80,18 +80,18 @@ void KoPAPrintJob::startPrinting(RemovePolicy removePolicy)
 
         KoPAPageBase * page = m_pages.at(i);
         const KoPageLayout & layout = page->pageLayout();
-        KoPAUtil::setZoom(layout, size, zoomHandler );
-        QRect pageRect(KoPAUtil::pageRect(layout, size, zoomHandler ) );
+        KoPAUtil::setZoom(layout, size, zoomHandler);
+        QRect pageRect(KoPAUtil::pageRect(layout, size, zoomHandler));
 
-        painter.setClipRect(pageRect );
-        painter.setRenderHint(QPainter::Antialiasing );
-        painter.translate(pageRect.topLeft() );
+        painter.setClipRect(pageRect);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.translate(pageRect.topLeft());
         m_pageProvider->setPageData(i + 1, page);
-        page->paintPage(painter, zoomHandler );
+        page->paintPage(painter, zoomHandler);
         painter.restore();
     }
 
-    if (removePolicy == DeleteWhenDone ) {
+    if (removePolicy == DeleteWhenDone) {
         deleteLater();
     }
 }

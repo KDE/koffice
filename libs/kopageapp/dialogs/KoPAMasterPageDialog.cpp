@@ -37,7 +37,7 @@ KoPAMasterPageDialog::KoPAMasterPageDialog(KoPADocument *document, KoPAMasterPag
     QSize iconSize(128, 128);
     QWidget *mainWidget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout;
-    if(m_document->pageType() == KoPageApp::Slide ) {
+    if(m_document->pageType() == KoPageApp::Slide) {
         layout->addWidget(new QLabel(i18n("Select a master slide design:"), mainWidget));
         setCaption(i18n("Master Slide"));
     } else {

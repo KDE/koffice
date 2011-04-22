@@ -34,9 +34,9 @@ KoPAConfigureDialog::KoPAConfigureDialog(KoPAView* parent)
     setButtons(KDialog::Ok | KDialog::Apply | KDialog::Cancel | KDialog::Default);
     setDefaultButton(KDialog::Ok);
 
-    m_miscPage = new KoConfigMiscPage(parent->koDocument() );
-    KPageWidgetItem *item = addPage(m_miscPage, i18n("Misc" ) );
-    item->setHeader(i18n("Misc" ) );
+    m_miscPage = new KoConfigMiscPage(parent->koDocument());
+    KPageWidgetItem *item = addPage(m_miscPage, i18n("Misc"));
+    item->setHeader(i18n("Misc"));
     item->setIcon(KIcon(BarIcon("preferences-other", KIconLoader::SizeMedium)));
 
     m_gridPage = new KoConfigGridPage(parent->koDocument());
@@ -46,13 +46,13 @@ KoPAConfigureDialog::KoPAConfigureDialog(KoPAView* parent)
 
     connect(m_miscPage, SIGNAL(unitChanged(int)), m_gridPage, SLOT(slotUnitChanged(int)));
 
-    m_docPage = new KoConfigDocumentPage(parent->koDocument() );
-    item = addPage(m_docPage, i18nc("@title:tab Document settings page", "Document" ) );
-    item->setHeader(i18n("Document Settings" ) );
+    m_docPage = new KoConfigDocumentPage(parent->koDocument());
+    item = addPage(m_docPage, i18nc("@title:tab Document settings page", "Document"));
+    item->setHeader(i18n("Document Settings"));
     item->setIcon(KIcon(BarIcon("document-properties", KIconLoader::SizeMedium)));
 
-    connect(this, SIGNAL(okClicked() ), this, SLOT(slotApply() ) );
-    connect(this, SIGNAL(defaultClicked() ), this, SLOT(slotDefault() ) );
+    connect(this, SIGNAL(okClicked()), this, SLOT(slotApply()));
+    connect(this, SIGNAL(defaultClicked()), this, SLOT(slotDefault()));
 }
 
 void KoPAConfigureDialog::slotApply()

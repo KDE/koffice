@@ -59,13 +59,13 @@ public:
     QPoint documentOffset;
 };
 
-KoPACanvasBase::KoPACanvasBase(KoPADocument * doc )
-    : KoCanvasBase(doc )
+KoPACanvasBase::KoPACanvasBase(KoPADocument * doc)
+    : KoCanvasBase(doc)
     , d(new Private(doc))
 {
-    d->shapeManager = new KoShapeManager(this );
-    d->masterShapeManager = new KoShapeManager(this );
-    d->toolProxy = new KoToolProxy(this );
+    d->shapeManager = new KoShapeManager(this);
+    d->masterShapeManager = new KoShapeManager(this);
+    d->toolProxy = new KoToolProxy(this);
 }
 
 KoPACanvasBase::~KoPACanvasBase()
@@ -103,7 +103,7 @@ void KoPACanvasBase::setDocumentOrigin(const QPointF & o)
     d->view->viewMode()->setOrigin(o);
 }
 
-void KoPACanvasBase::gridSize(qreal *horizontal, qreal *vertical ) const
+void KoPACanvasBase::gridSize(qreal *horizontal, qreal *vertical) const
 {
     *horizontal = d->doc->gridData().gridX();
     *vertical = d->doc->gridData().gridY();
@@ -114,9 +114,9 @@ bool KoPACanvasBase::snapToGrid() const
     return d->doc->gridData().snapToGrid();
 }
 
-void KoPACanvasBase::addCommand(QUndoCommand *command )
+void KoPACanvasBase::addCommand(QUndoCommand *command)
 {
-    d->doc->addCommand(command );
+    d->doc->addCommand(command);
 }
 
 KoShapeManager * KoPACanvasBase::shapeManager() const
@@ -131,7 +131,7 @@ KoShapeManager * KoPACanvasBase::masterShapeManager() const
 
 const KoViewConverter * KoPACanvasBase::viewConverter() const
 {
-    return d->view->viewMode()->viewConverter(const_cast<KoPACanvasBase *>(this ) );
+    return d->view->viewMode()->viewConverter(const_cast<KoPACanvasBase *>(this));
 }
 
 KoUnit KoPACanvasBase::unit() const
@@ -177,7 +177,7 @@ void KoPACanvasBase::paint(QPainter &painter, const QRectF paintRect) {
 
     KoPAPageBase *activePage(d->view->activePage());
     if (d->view->activePage()) {
-        int pageNumber = d->doc->pageIndex(d->view->activePage() ) + 1;
+        int pageNumber = d->doc->pageIndex(d->view->activePage()) + 1;
         QVariant var = d->doc->resourceManager()->resource(KoText::PageProvider);
         static_cast<KoPAPageProvider*>(var.value<void*>())->setPageData(pageNumber, activePage);
         d->view->viewMode()->paint(this, painter, paintRect);

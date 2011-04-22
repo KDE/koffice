@@ -25,12 +25,12 @@
 #include "KoPADocument.h"
 #include "KoPAMasterPage.h"
 
-KoPAPageLayoutDialog::KoPAPageLayoutDialog(KoPADocument *document, const KoPageLayout &pageLayout, QWidget *parent )
-: KoPageLayoutDialog(parent, pageLayout )
-, m_document(document )
+KoPAPageLayoutDialog::KoPAPageLayoutDialog(KoPADocument *document, const KoPageLayout &pageLayout, QWidget *parent)
+: KoPageLayoutDialog(parent, pageLayout)
+, m_document(document)
 {
-    setPageSpread(false );
-    showPageSpread(false );
+    setPageSpread(false);
+    showPageSpread(false);
 }
 
 KoPAPageLayoutDialog::~KoPAPageLayoutDialog()

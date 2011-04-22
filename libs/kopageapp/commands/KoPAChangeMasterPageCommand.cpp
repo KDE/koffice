@@ -25,17 +25,17 @@
 #include "KoPADocument.h"
 #include "KoPAView.h"
 
-KoPAChangeMasterPageCommand::KoPAChangeMasterPageCommand(KoPADocument *document, KoPAPage * page, KoPAMasterPage * masterPage )
-: m_document(document )
-, m_page(page )
-, m_oldMasterPage(page->masterPage() )
-, m_newMasterPage(masterPage )
+KoPAChangeMasterPageCommand::KoPAChangeMasterPageCommand(KoPADocument *document, KoPAPage * page, KoPAMasterPage * masterPage)
+: m_document(document)
+, m_page(page)
+, m_oldMasterPage(page->masterPage())
+, m_newMasterPage(masterPage)
 {
-    if (m_page->pageType() == KoPageApp::Slide ) {
-        setText(i18n("Change master slide" ) );
+    if (m_page->pageType() == KoPageApp::Slide) {
+        setText(i18n("Change master slide"));
     }
     else {
-        setText(i18n("Change master page" ) );
+        setText(i18n("Change master page"));
     }
 }
 
@@ -45,13 +45,13 @@ KoPAChangeMasterPageCommand::~KoPAChangeMasterPageCommand()
 
 void KoPAChangeMasterPageCommand::redo()
 {
-    m_page->setMasterPage(m_newMasterPage );
+    m_page->setMasterPage(m_newMasterPage);
     m_document->updateViews(m_page);
 }
 
 void KoPAChangeMasterPageCommand::undo()
 {
-    m_page->setMasterPage(m_oldMasterPage );
+    m_page->setMasterPage(m_oldMasterPage);
     m_document->updateViews(m_page);
 }
 

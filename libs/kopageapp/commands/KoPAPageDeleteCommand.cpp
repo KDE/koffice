@@ -24,9 +24,9 @@
 #include "KoPADocument.h"
 #include "KoPAPageBase.h"
 
-KoPAPageDeleteCommand::KoPAPageDeleteCommand(KoPADocument *document, KoPAPageBase *page, QUndoCommand *parent )
-: QUndoCommand(parent )
-, m_document(document )
+KoPAPageDeleteCommand::KoPAPageDeleteCommand(KoPADocument *document, KoPAPageBase *page, QUndoCommand *parent)
+: QUndoCommand(parent)
+, m_document(document)
 , m_deletePages(false)
 {
     Q_ASSERT(m_document);
@@ -35,11 +35,11 @@ KoPAPageDeleteCommand::KoPAPageDeleteCommand(KoPADocument *document, KoPAPageBas
     Q_ASSERT(index != -1);
     m_pages.insert(index, page);
 
-    if (page->pageType() == KoPageApp::Slide ) {
-        setText(i18n("Delete slide" ) );
+    if (page->pageType() == KoPageApp::Slide) {
+        setText(i18n("Delete slide"));
     }
     else {
-        setText(i18n("Delete page" ) );
+        setText(i18n("Delete page"));
     }
 }
 
