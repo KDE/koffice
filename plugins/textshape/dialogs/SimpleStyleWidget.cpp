@@ -106,7 +106,6 @@ void SimpleStyleWidget::fillListsCombobox()
         QPixmap pixmap(16, 16); // can we get the actual size from the style?
         pixmap.fill(Qt::transparent);
         QPainter p(&pixmap);
-        p.translate(-4, -6);
         KoListStyle listStyle;
         KoListLevelProperties llp = listStyle.levelProperties(1);
         llp.setStyle(item.style);
