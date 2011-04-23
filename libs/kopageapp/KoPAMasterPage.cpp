@@ -81,8 +81,7 @@ void KoPAMasterPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingCont
     KoPAPageBase::loadOdfPageTag(element, loadingContext);
     if (element.hasAttributeNS(KoXmlNS::style, "display-name")) {
         setName(element.attributeNS(KoXmlNS::style, "display-name"));
-    }
-    else {
+    } else {
         setName(element.attributeNS(KoXmlNS::style, "name"));
     }
     QString pageLayoutName = element.attributeNS(KoXmlNS::style, "page-layout-name");

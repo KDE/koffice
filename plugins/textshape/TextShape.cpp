@@ -416,11 +416,10 @@ bool TextShape::loadOdfFrame(const KoXmlElement &element, KoShapeLoadingContext 
 {
     // if the loadOdfFrame from the base class for draw:text-box failes check for table:table
     if (!KoFrameShape::loadOdfFrame(element, context)) {
-        const KoXmlElement & frameElement(KoXml::namedItemNS(element, KoXmlNS::table, "table"));
+        const KoXmlElement &frameElement(KoXml::namedItemNS(element, KoXmlNS::table, "table"));
         if (frameElement.isNull()) {
             return false;
-        }
-        else {
+        } else {
             return loadOdfFrameElement(frameElement, context);
         }
     }

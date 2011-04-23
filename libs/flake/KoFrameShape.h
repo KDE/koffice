@@ -58,10 +58,10 @@ public:
     /**
     * Constructor.
     *
-    * \param ns The namespace. E.g. KoXmlNS::draw
+    * \param XmlNamespace The namespace. E.g. KoXmlNS::draw
     * \param tag The element tag-name. E.g. "image"
     */
-    KoFrameShape(const QString &ns, const QString &tag);
+    KoFrameShape(const QString &XmlNamespace, const QString &tag);
 
     /**
     * Destructor.

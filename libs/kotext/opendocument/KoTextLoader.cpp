@@ -443,9 +443,6 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
 
     d->styleManager = KoTextDocument(document).styleManager();
     d->changeTracker = KoTextDocument(document).changeTracker();
-//    if (!d->changeTracker)
-//        d->changeTracker = dynamic_cast<KoChangeTracker *>(d->context.dataCenterMap().value("ChangeTracker"));
-//    Q_ASSERT(d->changeTracker);
 
     kDebug(32500) << "text-style:" << KoTextDebug::textAttributes(cursor.blockCharFormat());
     bool usedParagraph = false; // set to true if we found a tag that used the paragraph, indicating that the next round needs to start a new one.
@@ -693,7 +690,8 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
         endBody();
     }
 
-    if (document->isEmpty() && d->styleManager && document->allFormats().count() == 2) {
+    if (document->isEmpty() && d->styleManager && !document->begin().blockFormat()
+            .hasProperty(KoParagraphStyle::StyleId)) {
         QTextBlock block = document->begin();
         d->styleManager->defaultParagraphStyle()->applyStyle(block);
     }
