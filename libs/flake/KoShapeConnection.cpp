@@ -25,6 +25,7 @@
 #include "KoPathShape.h"
 #include "KoPathShape_p.h"
 #include "KoPathPoint.h"
+#include "KoLoadingShapeUpdater.h"
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
@@ -72,6 +73,32 @@ class ConnectCurve : public ConnectStrategy {
 
     KoPathShape shape;
     bool needsResize;
+};
+
+class ConnectionLoaderUpdater : public KoLoadingShapeUpdater
+{
+public:
+    enum Pos {
+        First,
+        Second
+    };
+
+    ConnectionLoaderUpdater(KoShapeConnection *connectionShape, Pos pos)
+        : m_connectionShape(connectionShape), m_pos(pos)
+    {
+    }
+
+    virtual void update(KoShape *shape) {
+        if (m_pos == First) {
+            m_connectionShape->setStartPoint(shape, m_connectionShape->gluePointIndex1());
+        } else {
+            m_connectionShape->setEndPoint(shape, m_connectionShape->gluePointIndex2());
+        }
+    }
+
+private:
+    KoShapeConnection *m_connectionShape;
+    Pos m_pos;
 };
 
 KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, KoShape *to, int gp2)
@@ -490,7 +517,8 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         if (d->shape1) {
             d->shape1->priv()->addConnection(this);
         } else {
-//            context.updateShape(shapeId1, new KoConnectionShapeLoadingUpdater(this, KoConnectionShapeLoadingUpdater::First));
+            context.updateShape(shapeId1,
+                    new ConnectionLoaderUpdater(this, ConnectionLoaderUpdater::First));
         }
         d->hasDummyShape = false;
     } else {
@@ -506,7 +534,8 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         if (d->shape2) {
             d->shape2->priv()->addConnection(this);
         } else {
-//            context.updateShape(shapeId2, new KoConnectionShapeLoadingUpdater(this, KoConnectionShapeLoadingUpdater::Second));
+            context.updateShape(shapeId2,
+                    new ConnectionLoaderUpdater(this, ConnectionLoaderUpdater::Second));
         }
         d->hasDummyShape = false;
     } else {
