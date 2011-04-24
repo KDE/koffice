@@ -27,32 +27,22 @@
 #include "SCMasterPage.h"
 #include "SCShapeApplicationData.h"
 #include "SCFactory.h"
-#include "SCViewModeNotes.h"
-#include "SCPlaceholderShapeFactory.h"
 #include "SCSoundCollection.h"
 #include "SCDeclarations.h"
-#include "SCShapeManagerDisplayMasterStrategy.h"
-#include "SCPageSelectStrategyActive.h"
 #include "pagelayout/SCPageLayouts.h"
 #include "tools/SCPlaceholderToolFactory.h"
 #include "tools/SCAnimationToolFactory.h"
 #include "commands/SCSetCustomSlideShowsCommand.h"
 #include "animations/SCShapeAnimation.h"
 
-#include <KoPACanvas.h>
-#include <KoPAViewModeNormal.h>
 #include <KoPASavingContext.h>
-#include <KoPALoadingContext.h>
-#include <KoShapeManager.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
 #include <KoToolRegistry.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 
-#include <KConfig>
 #include <KConfigGroup>
-#include <KGlobal>
 #include <KStandardDirs>
 #include <KMessageBox>
 

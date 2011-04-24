@@ -54,12 +54,6 @@ KoPAPageBase::~KoPAPageBase()
 {
 }
 
-void KoPAPageBase::paintComponent(QPainter &painter, const KoViewConverter &converter)
-{
-    Q_UNUSED(painter);
-    Q_UNUSED(converter);
-}
-
 void KoPAPageBase::paintBackground(QPainter &painter, const KoViewConverter &converter)
 {
     painter.save();
