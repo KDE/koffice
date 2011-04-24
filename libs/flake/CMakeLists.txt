@@ -246,7 +246,6 @@ install(
     KoCanvasObserverBase.h
     KoCanvasSupervisor.h
     KoColorBackground.h
-    KoConnectionShape.h
     KoCopyController.h
     KoCutController.h
     KoDataCenterBase.h
