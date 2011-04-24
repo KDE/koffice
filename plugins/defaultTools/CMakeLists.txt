@@ -26,10 +26,6 @@ SET ( defaulttools_SRCS
     guidestool/GuidesToolFactory.cpp
     guidestool/GuidesToolOptionWidget.cpp
     guidestool/InsertGuidesToolOptionWidget.cpp
-
-    connectionTool/ConnectionTool.cpp
-    connectionTool/ConnectionToolFactory.cpp
-    connectionTool/ConnectionToolWidget.cpp
 )
 
 kde4_add_ui_files(defaulttools_SRCS
@@ -38,15 +34,12 @@ kde4_add_ui_files(defaulttools_SRCS
     defaulttool/DefaultToolTransformWidget.ui
     guidestool/GuidesToolOptionWidget.ui
     guidestool/InsertGuidesToolOptionWidget.ui
-    connectionTool/ConnectionToolWidget.ui
 )
 
 kde4_add_plugin(defaulttools ${defaulttools_SRCS})
 target_link_libraries(defaulttools flake kowidgets)
-install(TARGETS defaulttools DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ########### install files ###############
 
+install(TARGETS defaulttools DESTINATION ${PLUGIN_INSTALL_DIR})
 install( FILES defaulttools.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-
-#kde4_install_icons( ${DATA_INSTALL_DIR}/koffice/icons )
