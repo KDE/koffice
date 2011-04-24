@@ -82,10 +82,6 @@ set(flake_SRCS
     KoDragOdfSaveHelper.cpp
     KoShapeOdfSaveHelper.cpp
     KoShapePaste.cpp
-    KoConnectionShape.cpp
-    KoConnectionShapeLoadingUpdater.cpp
-    KoConnectionShapeFactory.cpp
-    KoConnectionShapeConfigWidget.cpp
     KoSnapGuide.cpp
     KoSnapProxy.cpp
     KoSnapStrategy.cpp
@@ -142,7 +138,6 @@ set(flake_SRCS
     commands/KoParameterToPathCommand.cpp
     commands/KoShapeTransformCommand.cpp
     commands/KoPathFillRuleCommand.cpp
-    commands/KoConnectionShapeTypeCommand.cpp
     commands/KoShapeShadowCommand.cpp
     commands/KoPathReverseCommand.cpp
     commands/KoEventActionAddCommand.cpp
@@ -160,7 +155,6 @@ set(flake_SRCS
     tools/PathToolOptionWidget.cpp
     tools/KoPathPointRubberSelectStrategy.cpp
     tools/KoPathPointMoveStrategy.cpp
-    tools/KoPathConnectionPointStrategy.cpp
     tools/KoPathControlPointMoveStrategy.cpp
     tools/KoParameterChangeStrategy.cpp
     tools/KoZoomTool.cpp
@@ -179,7 +173,6 @@ set(flake_SRCS
 
 kde4_add_ui_files(flake_SRCS
     tools/PathToolOptionWidgetBase.ui
-    KoConnectionShapeConfigWidget.ui
     SnapGuideConfigWidget.ui
     tools/KoZoomToolWidget.ui
 )

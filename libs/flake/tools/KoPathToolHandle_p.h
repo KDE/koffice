@@ -90,14 +90,4 @@ protected:
     int m_handleId;
 };
 
-class ConnectionHandle : public ParameterHandle
-{
-public:
-    ConnectionHandle(KoPathTool *tool, KoParameterShape *parameterShape, int handleId);
-
-    // XXX: Later: create a paint even to distinguish a connection
-    // handle  from another handle type
-    KoInteractionStrategy *handleMousePress(KoPointerEvent *event);
-};
-
 #endif // KOPATHTOOLHANDLE_H
