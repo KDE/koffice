@@ -53,11 +53,6 @@ void KoPathControlPointMoveStrategy::handleMouseMove(const QPointF &mouseLocatio
     cmd.redo();
 }
 
-void KoPathControlPointMoveStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
-{
-    Q_UNUSED(modifiers);
-}
-
 QUndoCommand* KoPathControlPointMoveStrategy::createCommand(QUndoCommand *parent)
 {
     QUndoCommand *cmd = 0;

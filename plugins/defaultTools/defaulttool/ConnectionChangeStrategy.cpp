@@ -112,11 +112,6 @@ QUndoCommand* ConnectionChangeStrategy::createCommand(QUndoCommand *parent)
     }
 }
 
-void ConnectionChangeStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
-{
-    Q_UNUSED(modifiers);
-}
-
 void ConnectionChangeStrategy::paint(QPainter &painter, const KoViewConverter &converter)
 {
     //m_connection->paintDecorations(painter, converter);

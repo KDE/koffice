@@ -130,11 +130,6 @@ void KoPathSegmentChangeStrategy::handleMouseMove(const QPointF &mouseLocation, 
     m_lastPosition = mouseLocation;
 }
 
-void KoPathSegmentChangeStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
-{
-    Q_UNUSED(modifiers);
-}
-
 QUndoCommand* KoPathSegmentChangeStrategy::createCommand(QUndoCommand *parent)
 {
     m_tool->canvas()->updateCanvas(m_tool->canvas()->snapGuide()->boundingRect());

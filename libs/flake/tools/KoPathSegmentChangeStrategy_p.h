@@ -50,7 +50,6 @@ public:
     KoPathSegmentChangeStrategy(KoPathTool *tool, const QPointF &pos, const KoPathPointData &segment, qreal segmentParam);
     virtual ~KoPathSegmentChangeStrategy();
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
-    virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
     virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
 
 private:

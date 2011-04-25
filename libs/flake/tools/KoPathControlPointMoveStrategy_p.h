@@ -52,7 +52,6 @@ public:
                                    KoPathPoint::PointType type, const QPointF &pos);
     virtual ~KoPathControlPointMoveStrategy();
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
-    virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
     virtual QUndoCommand* createCommand(QUndoCommand *parent = 0);
 
 private:

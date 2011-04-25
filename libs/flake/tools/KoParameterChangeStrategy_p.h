@@ -51,9 +51,6 @@ public:
     virtual ~KoParameterChangeStrategy();
 
     virtual void handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers);
-    virtual void finishInteraction(Qt::KeyboardModifiers modifiers) {
-        Q_UNUSED(modifiers);
-    }
     virtual QUndoCommand* createCommand(QUndoCommand *parent = 0);
 
 private:

@@ -79,11 +79,6 @@ QUndoCommand *FilterRegionEditStrategy::createCommand(QUndoCommand *parent)
     return new FilterRegionChangeCommand(m_effect, QRectF(x,y,w,h), m_shape, parent);
 }
 
-void FilterRegionEditStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
-{
-    Q_UNUSED(modifiers);
-}
-
 void FilterRegionEditStrategy::paint(QPainter &painter, const KoViewConverter &converter)
 {
     Q_UNUSED(converter);

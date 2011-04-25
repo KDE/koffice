@@ -62,11 +62,6 @@ void KoPathPointMoveStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::
     m_move = move;
 }
 
-void KoPathPointMoveStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
-{
-    Q_UNUSED(modifiers);
-}
-
 QUndoCommand* KoPathPointMoveStrategy::createCommand(QUndoCommand *parent)
 {
     m_tool->canvas()->updateCanvas(m_tool->canvas()->snapGuide()->boundingRect());
