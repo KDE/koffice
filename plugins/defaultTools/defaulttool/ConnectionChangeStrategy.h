@@ -27,6 +27,7 @@
 #include <QPointF>
 
 class KoShapeConnection;
+class KoShape;
 
 /**
  * 
@@ -53,6 +54,15 @@ public:
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
 private:
+    struct Connection {
+        Connection() : shape(0), index(0) { }
+        KoShape *shape;
+        int index;
+    };
+
+    Connection findConnectionForPoint(const QPointF &point) const;
+
+
     KoShapeConnection *m_connection;
     Type m_type;
     QPointF m_origPoint;

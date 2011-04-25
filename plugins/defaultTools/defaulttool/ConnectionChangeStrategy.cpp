@@ -21,11 +21,14 @@
 #include "ConnectionChangeStrategy.h"
 
 #include <KoShapeConnection.h>
+#include <KoShapeManager.h>
+#include <KoShape.h>
 #include <KoToolBase.h>
 #include <KoCanvasBase.h>
 #include <KoViewConverter.h>
 #include <KoSnapGuide.h>
 
+#include <QLineF>
 #include <KDebug>
 
 ConnectionChangeStrategy::ConnectionChangeStrategy(KoToolBase *tool, KoShapeConnection *connection, const QPointF &clicked, Type type)
@@ -33,6 +36,7 @@ ConnectionChangeStrategy::ConnectionChangeStrategy(KoToolBase *tool, KoShapeConn
     m_connection(connection),
     m_type(type)
 {
+    Q_UNUSED(clicked);
     Q_ASSERT(connection);
     if (type == StartPointDrag)
         m_origPoint = connection->startPoint();
@@ -44,21 +48,30 @@ void ConnectionChangeStrategy::handleMouseMove(const QPointF &mouseLocation, Qt:
 {
     QPointF newLocation = tool()->canvas()->snapGuide()->snap(mouseLocation, modifiers);
     switch (m_type) {
-    case StartPointDrag:
+    case StartPointDrag: {
         tool()->repaintDecorations();
         if (m_connection->shape1()) { // disconnect
             m_connection->setStartPoint(0, 0);
         }
-        m_connection->setStartPoint(newLocation);
-        // TODO connect to existing shapes
+        Connection connection = findConnectionForPoint(newLocation);
+        if (connection.shape != 0)
+            m_connection->setStartPoint(connection.shape, connection.index);
+        else
+            m_connection->setStartPoint(newLocation);
         break;
-    case EndPointDrag:
+    }
+    case EndPointDrag: {
         tool()->repaintDecorations();
         if (m_connection->shape2()) { // disconnect
             m_connection->setEndPoint(0, 0);
         }
-        m_connection->setEndPoint(newLocation);
+        Connection connection = findConnectionForPoint(newLocation);
+        if (connection.shape != 0)
+            m_connection->setEndPoint(connection.shape, connection.index);
+        else
+            m_connection->setEndPoint(newLocation);
         break;
+    }
     default:
         return;
     };
@@ -81,4 +94,25 @@ void ConnectionChangeStrategy::finishInteraction(Qt::KeyboardModifiers modifiers
 void ConnectionChangeStrategy::paint(QPainter &painter, const KoViewConverter &converter)
 {
     //m_connection->paintDecorations(painter, converter);
+    // TODO implement
+}
+
+ConnectionChangeStrategy::Connection ConnectionChangeStrategy::findConnectionForPoint(const QPointF &point) const
+{
+    const int distance = tool()->canvas()->snapGuide()->snapDistance();
+    QRectF rect(point.x() - distance, point.y() - distance, distance * 2, distance * 2);
+    Connection answer;
+    foreach (KoShape *shape, tool()->canvas()->shapeManager()->shapesAt(rect)) {
+        QTransform st = shape->absoluteTransformation(0);
+        QList<QPointF> points = shape->connectionPoints();
+        for (int i = 0; i < points.size(); ++i) {
+            QLineF line(point, st.map(points[i]));
+            if (line.length() <= distance) {
+                answer.shape = shape;
+                answer.index = i;
+                return answer;
+            }
+        }
+    }
+    return answer;
 }
