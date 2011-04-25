@@ -20,6 +20,8 @@
 #include "KoShapeConnection_p.h"
 #include "KoShape.h"
 #include "KoShape_p.h"
+#include "KoShapeManager.h"
+#include "KoShapeManager_p.h"
 #include "KoShapeBorderBase.h"
 #include "KoViewConverter.h"
 #include "KoPathShape.h"
@@ -620,4 +622,17 @@ void KoShapeConnection::setType(ConnectionType newType)
         d->connectionStrategy = new ConnectCurve(d);
     else
         d->connectionStrategy = new ConnectLines(d, newType);
+}
+
+void KoShapeConnection::update() const
+{
+    KoShape *shape = d->shape1;
+    if (shape == 0)
+        shape = d->shape2;
+    if (shape == 0)
+        return;
+    QRectF mySize = boundingRect();
+    foreach (KoShapeManager *shapeManager, shape->priv()->shapeManagers) {
+        shapeManager->priv()->update(mySize, 0, false);
+    }
 }

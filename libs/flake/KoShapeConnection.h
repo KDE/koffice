@@ -47,7 +47,6 @@ class KoShapeConnectionPrivate;
 class FLAKE_EXPORT KoShapeConnection
 {
 public:
-
     /// the visual type of connection
     enum ConnectionType {
         /** a standard connector escapes two connecting objects with straight lines and
@@ -180,6 +179,13 @@ public:
 
     ConnectionType type() const;
     void setType(ConnectionType type);
+
+    /**
+     * Request a repaint to be queued.
+     * <p>This method will return immediately and only request a repaint. Successive calls
+     * will be merged into an appropriate repaint action.
+     */
+    void update() const;
 
     /// \internal
     KoShapeConnectionPrivate * priv();
