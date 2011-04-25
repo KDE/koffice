@@ -315,7 +315,7 @@ public:
 
     /**
      * Return a list of the connection points that have been added to this shape.
-     * All the points are relative to the shape position, see absolutePosition().
+     * All the points are relative to the shape position, see absoluteTransformation()
      * @return a list of the connectors that have been added to this shape.
      */
     QList<QPointF> connectionPoints() const;
