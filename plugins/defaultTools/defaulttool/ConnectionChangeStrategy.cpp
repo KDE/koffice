@@ -38,10 +38,21 @@ ConnectionChangeStrategy::ConnectionChangeStrategy(KoToolBase *tool, KoShapeConn
 {
     Q_UNUSED(clicked);
     Q_ASSERT(connection);
-    if (type == StartPointDrag)
+    if (type == StartPointDrag) {
         m_origPoint = connection->startPoint();
-    else if (type == EndPointDrag)
+        m_start.shape = connection->shape1();
+        if (m_start.shape)
+            m_start.index = connection->gluePointIndex1();
+        else
+            m_start.point = connection->startPoint();
+    } else if (type == EndPointDrag) {
         m_origPoint = connection->endPoint();
+        m_start.shape = connection->shape2();
+        if (m_start.shape)
+            m_start.index = connection->gluePointIndex2();
+        else
+            m_start.point = connection->endPoint();
+    }
 }
 
 void ConnectionChangeStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardModifiers modifiers)
@@ -80,15 +91,30 @@ void ConnectionChangeStrategy::handleMouseMove(const QPointF &mouseLocation, Qt:
 
 QUndoCommand* ConnectionChangeStrategy::createCommand(QUndoCommand *parent)
 {
-    // TODO
-
-    return 0;
+    if (m_type == StartPointDrag) {
+        ConnectionHook end;
+        end.shape = m_connection->shape1();
+        if (end.shape)
+            end.index = m_connection->gluePointIndex1();
+        else
+            end.point = m_connection->startPoint();
+        return new ConnectionChangeCommand(m_connection, ConnectionChangeCommand::StartOnly,
+                m_start, end, parent);
+    } else {
+        ConnectionHook end;
+        end.shape = m_connection->shape2();
+        if (end.shape)
+            end.index = m_connection->gluePointIndex2();
+        else
+            end.point = m_connection->endPoint();
+        return new ConnectionChangeCommand(m_connection, ConnectionChangeCommand::EndOnly,
+                m_start, end, parent);
+    }
 }
 
 void ConnectionChangeStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
 {
     Q_UNUSED(modifiers);
-    // TODO set values back to orig so the command can do stuff?
 }
 
 void ConnectionChangeStrategy::paint(QPainter &painter, const KoViewConverter &converter)

@@ -23,6 +23,8 @@
 
 #include <KoInteractionStrategy.h>
 
+#include "ConnectionChangeCommand.h"
+
 #include <QList>
 #include <QPointF>
 
@@ -66,6 +68,8 @@ private:
     KoShapeConnection *m_connection;
     Type m_type;
     QPointF m_origPoint;
+
+    ConnectionHook m_start; // for the connection we are editing, this is the state at start
 };
 
 #endif

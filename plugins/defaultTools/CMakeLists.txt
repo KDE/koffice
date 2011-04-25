@@ -21,6 +21,7 @@ SET ( defaulttools_SRCS
     defaulttool/SelectionDecorator.cpp
     defaulttool/SelectionTransformCommand.cpp
     defaulttool/ConnectionChangeStrategy.cpp
+    defaulttool/ConnectionChangeCommand.cpp
 
     guidestool/GuidesTool.cpp
     guidestool/GuidesToolFactory.cpp
