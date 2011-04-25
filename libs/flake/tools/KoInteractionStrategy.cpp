@@ -36,6 +36,11 @@ void KoInteractionStrategy::cancelInteraction()
     }
 }
 
+void KoInteractionStrategy::finishInteraction(Qt::KeyboardModifiers)
+{
+    // empty!
+}
+
 KoInteractionStrategy::KoInteractionStrategy(KoInteractionStrategyPrivate &dd)
     : d_ptr(&dd)
 {

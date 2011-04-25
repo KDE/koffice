@@ -80,8 +80,9 @@ public:
     virtual void cancelInteraction();
     /**
      * Override to make final changes to the data on the end of an interaction.
+     * The default is empty.
      */
-    virtual void finishInteraction(Qt::KeyboardModifiers modifiers) = 0;
+    virtual void finishInteraction(Qt::KeyboardModifiers modifiers);
 
     KoToolBase *tool() const;
 
