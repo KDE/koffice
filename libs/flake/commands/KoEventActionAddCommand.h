@@ -35,9 +35,9 @@ public:
     virtual ~KoEventActionAddCommand();
 
     /// redo the command
-    void redo();
+    virtual void redo();
     /// revert the actions done in redo
-    void undo();
+    virtual void undo();
 
 private:
     KoEventActionAddCommandPrivate *d;

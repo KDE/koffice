@@ -75,7 +75,7 @@ public:
     virtual QUndoCommand *createCommand(QUndoCommand *parent = 0) = 0;
     /**
      * This method will undo frames based interactions by calling createCommand()
-     * and unexecuting that.
+     * and executing undo on that.
      */
     virtual void cancelInteraction();
     /**
