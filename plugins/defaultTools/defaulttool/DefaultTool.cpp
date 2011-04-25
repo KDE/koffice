@@ -1150,26 +1150,26 @@ KoInteractionStrategy *DefaultTool::createStrategy(KoPointerEvent *event)
 
     if ((event->buttons() & Qt::LeftButton) == 0)
         return 0;  // Nothing to do for middle/right mouse button
-    KoShapeConnection *connection = shapeManager->connectionAt(event->point);
-    if (connection && m_selectedConnections.contains(connection)) {
-        // edit already selected connection
 
-        QPointF distance(HANDLE_DISTANCE/2, HANDLE_DISTANCE/2); // radius
-        const KoViewConverter *viewConverter = canvas()->viewConverter();
-        if (viewConverter)
-            distance = viewConverter->viewToDocument(distance);
-        QPointF start = connection->startPoint();
-        QPointF end = connection->endPoint();
-        if (qAbs(start.x() - event->point.x()) < distance.x()
-                && qAbs(start.y() - event->point.y()) < distance.y()) {
+    // check if we clicked near any of the selected connectors end-points.
+    qreal clickDistance = HANDLE_DISTANCE/2;
+    const KoViewConverter *viewConverter = canvas()->viewConverter();
+    if (viewConverter)
+        clickDistance = viewConverter->viewToDocumentX(clickDistance);
+    foreach (KoShapeConnection *connection, m_selectedConnections) {
+        QLineF distance1(event->point, connection->startPoint());
+        if (distance1.length() < clickDistance)
             return new ConnectionChangeStrategy(this, connection, event->point,
                     ConnectionChangeStrategy::StartPointDrag);
-        } else if (qAbs(end.x() - event->point.x()) < distance.x()
-                && qAbs(end.y() - event->point.y()) < distance.y()) {
+        QLineF distance2(event->point, connection->endPoint());
+        if (distance2.length() < clickDistance)
             return new ConnectionChangeStrategy(this, connection, event->point,
                     ConnectionChangeStrategy::EndPointDrag);
-        }
-        if (selectMultiple) {
+    }
+
+    if (selectMultiple) {
+        KoShapeConnection *connection = shapeManager->connectionAt(event->point);
+        if (connection && m_selectedConnections.contains(connection)) {
             repaintDecorations();
             m_selectedConnections.removeAll(connection);
             return 0;
@@ -1179,6 +1179,7 @@ KoInteractionStrategy *DefaultTool::createStrategy(KoPointerEvent *event)
     KoShape *shape = shapeManager->shapeAt(event->point, selectNextInStack ? KoFlake::NextUnselected : KoFlake::ShapeOnTop);
 
     if (!shape && handle == KoFlake::NoHandle) {
+        KoShapeConnection *connection = shapeManager->connectionAt(event->point);
         if (connection) { // clicked on a shape-to-shape connector
             if (!selectMultiple && (select->count() > 0 || !m_selectedConnections.isEmpty())) {
                 repaintDecorations();
