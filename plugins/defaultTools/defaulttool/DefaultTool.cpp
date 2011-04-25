@@ -623,6 +623,8 @@ void DefaultTool::mouseReleaseEvent(KoPointerEvent *event)
 
 void DefaultTool::mouseDoubleClickEvent(KoPointerEvent *event)
 {
+    if (event->button() != Qt::LeftButton)
+        return;
     QList<KoShape*> shapes;
     foreach(KoShape *shape, koSelection()->selectedShapes()) {
         if (shape->boundingRect().contains(event->point) && // first 'cheap' check

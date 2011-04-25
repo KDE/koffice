@@ -196,7 +196,7 @@ void KoToolProxy::mouseDoubleClickEvent(QMouseEvent *event, const QPointF &point
 
     KoPointerEvent ev(event, point);
     d->activeTool->mouseDoubleClickEvent(&ev);
-    if (! event->isAccepted())
+    if (! event->isAccepted() && event->button() == Qt::LeftButton)
         d->activeTool->canvas()->shapeManager()->suggestChangeTool(&ev);
 }
 
