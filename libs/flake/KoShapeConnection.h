@@ -160,8 +160,16 @@ public:
 
     /// Set startPoint to @p point
     void setStartPoint(const QPointF &point);
+    /// Set startPoint to a point
+    void setStartPoint(qreal x, qreal y) {
+        setStartPoint(QPointF(x, y));
+    }
     /// Set endPoint to @p point
     void setEndPoint(const QPointF &point);
+    /// Set endPoint to a point
+    void setEndPoint(qreal x, qreal y) {
+        setEndPoint(QPointF(x, y));
+    }
     /// Sets shape1 to @p shape and gluePointIndex1 to @p gluePointIndex
     void setStartPoint(KoShape *shape, int gluePointIndex);
     /// Sets shape2 to @p shape and gluePointIndex2 to @p gluePointIndex
