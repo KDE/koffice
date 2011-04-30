@@ -22,7 +22,7 @@
 
 #include "CalendarToolWidget.h"
 
-#include <Sheet.h>
+#include <KCSheet.h>
 #include <part/Doc.h>
 #include <Value.h>
 
@@ -87,7 +87,7 @@ void CalendarTool::insertCalendar(const QDate &start, const QDate &end)
     }
 
     const QPoint marker = this->selection()->lastRange().topLeft();
-    Sheet* const sheet = this->selection()->activeSheet();
+    KCSheet* const sheet = this->selection()->activeSheet();
 
     //now let's check if the area is really empty...
     //we use two columns per day and one column for the week number
@@ -195,7 +195,7 @@ QWidget* CalendarTool::createOptionWidget()
     return widget;
 }
 
-void CalendarTool::setText(Sheet* sheet, int _row, int _column, const QString& _text, bool asString)
+void CalendarTool::setText(KCSheet* sheet, int _row, int _column, const QString& _text, bool asString)
 {
     Cell cell(sheet, _column, _row);
     if (asString) {

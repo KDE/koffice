@@ -27,7 +27,7 @@
 #include "Cell.h"
 #include "CellStorage.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 
 IndentationCommand::IndentationCommand()

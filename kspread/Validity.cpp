@@ -32,7 +32,7 @@
 #include "Cell.h"
 #include "Map.h"
 #include "OdfLoadingContext.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Value.h"
 #include "ValueConverter.h"
 #include "ValueParser.h"

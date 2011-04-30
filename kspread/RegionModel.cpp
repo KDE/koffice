@@ -21,12 +21,12 @@
 
 // KSpread
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 class RegionModel::Private
 {
 public:
-    Sheet* sheet;
+    KCSheet* sheet;
     QRect range;
     bool overwriteMode;
 };

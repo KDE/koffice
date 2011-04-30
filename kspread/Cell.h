@@ -63,7 +63,7 @@ class Doc;
 class Formula;
 class OdfLoadingContext;
 class OdfSavingContext;
-class Sheet;
+class KCSheet;
 class Validity;
 class Value;
 
@@ -88,13 +88,13 @@ public:
      * Constructor.
      * Creates a Cell for accessing the data in \p sheet at position \p col , \p row .
      */
-    Cell(const Sheet* sheet, int column, int row);
+    Cell(const KCSheet* sheet, int column, int row);
 
     /**
      * Constructor.
      * Creates a Cell for accessing the data in \p sheet at position \p pos .
      */
-    Cell(const Sheet* sheet, const QPoint& pos);
+    Cell(const KCSheet* sheet, const QPoint& pos);
 
     /**
      * Copy constructor.
@@ -109,7 +109,7 @@ public:
     /**
      * \return the sheet this cell belongs to
      */
-    Sheet* sheet() const;
+    KCSheet* sheet() const;
 
     /**
      * Returns the locale setting of this cell.
@@ -181,7 +181,7 @@ public:
      * Given the sheet and cell position, this static function returns the full name
      * of the cell, i.e. with the name of the sheet.
      */
-    static QString fullName(const Sheet *s, int col, int row);
+    static QString fullName(const KCSheet *s, int col, int row);
 
     /**
      * Given the column number, this static function returns the corresponding
@@ -404,7 +404,7 @@ public:
      *         That's the case, if it has any content, border, backgroundcolor,
      *         or background brush.
      *
-     * @see Sheet::print
+     * @see KCSheet::print
      */
     bool needsPrinting() const;
 

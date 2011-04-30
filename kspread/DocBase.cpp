@@ -255,8 +255,8 @@ bool DocBase::loadOdf(KoOdfReadStore & odfStore)
 
     //update plugins that rely on bindings, as loading order can mess up the data of the plugins
     SheetAccessModel* sheetModel = sheetAccessModel();
-    QList< Sheet* > sheets = map()->sheetList();
-    Q_FOREACH( Sheet* sheet, sheets ){
+    QList< KCSheet* > sheets = map()->sheetList();
+    Q_FOREACH( KCSheet* sheet, sheets ){
         // This region contains the entire sheet
         const QRect region (0, 0, KS_colMax - 1, KS_rowMax - 1);
         QModelIndex index = sheetModel->index( 0, map()->indexOf( sheet ) );
@@ -293,7 +293,7 @@ void DocBase::saveOdfSettings(KoXmlWriter &settingsWriter)
     //<config:config-item-map-named config:name="Tables">
     settingsWriter.startElement("config:config-item-map-named");
     settingsWriter.addAttribute("config:name", "Tables");
-    foreach (Sheet *sheet, map()->sheetList()) {
+    foreach (KCSheet *sheet, map()->sheetList()) {
         settingsWriter.startElement("config:config-item-map-entry");
         settingsWriter.addAttribute("config:name", sheet->sheetName());
         saveOdfViewSheetSettings(sheet, settingsWriter);
@@ -333,6 +333,6 @@ void DocBase::saveOdfViewSettings(KoXmlWriter&)
 {
 }
 
-void DocBase::saveOdfViewSheetSettings(Sheet *, KoXmlWriter&)
+void DocBase::saveOdfViewSheetSettings(KCSheet *, KoXmlWriter&)
 {
 }

@@ -45,7 +45,7 @@ class QFontMetricsF;
 class QRectF;
 
 class Cell;
-class Sheet;
+class KCSheet;
 class SheetView;
 class KCStyle;
 

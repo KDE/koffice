@@ -322,7 +322,7 @@
       <!--     config->writeEntry( "PageBorderColor", _pbColor ); -->
     </entry>
   </group>
-  <group name="Sheet-Style">
+  <group name="KCSheet-Style">
     <entry key="XML" type="String">
       <default></default>
       <label></label>

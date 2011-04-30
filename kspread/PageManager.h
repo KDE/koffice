@@ -26,7 +26,7 @@ class QRect;
 class QSizeF;
 
 class PrintSettings;
-class Sheet;
+class KCSheet;
 
 /**
  * Manages the layouting of pages.
@@ -40,7 +40,7 @@ public:
     /**
      * Constructor.
      */
-    PageManager(Sheet* sheet);
+    PageManager(KCSheet* sheet);
 
     /**
      * Destructor.
@@ -81,7 +81,7 @@ public:
     virtual QSizeF size(int page) const;
 
 protected:
-    Sheet* sheet() const;
+    KCSheet* sheet() const;
     const PrintSettings& printSettings() const;
     virtual void clearPages();
     virtual bool pageNeedsPrinting(const QRect& cellRange) const;

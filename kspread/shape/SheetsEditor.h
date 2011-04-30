@@ -24,7 +24,7 @@
 #include <QListWidgetItem>
 
 class TableShape;
-class Sheet;
+class KCSheet;
 
 class SheetsEditor : public QWidget
 {
@@ -34,8 +34,8 @@ public:
     virtual ~SheetsEditor();
 
 private Q_SLOTS:
-    void sheetAdded(Sheet* sheet);
-    void sheetNameChanged(Sheet* sheet, const QString& old_name);
+    void sheetAdded(KCSheet* sheet);
+    void sheetNameChanged(KCSheet* sheet, const QString& old_name);
 
     void selectionChanged();
     void itemChanged(QListWidgetItem* item);

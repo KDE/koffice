@@ -26,7 +26,7 @@
 #include "PrintSettings.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 void SheetPrint::Private::calculateHorizontalPageParameters(int _column)
 {

@@ -32,7 +32,7 @@
 // KSpread
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "ValueConverter.h"
 
 // commands
@@ -83,7 +83,7 @@ public:
         const QString itemText = model->data(index, Qt::DisplayRole).toString();
         const int itemIndex = model->data(index, Qt::UserRole).toInt();
         const bool hasHeader = mainWidget.m_useHeader->isChecked();
-        Sheet *const sheet = selection->lastSheet();
+        KCSheet *const sheet = selection->lastSheet();
         ValueConverter *const converter = sheet->map()->converter();
 
         if (mainWidget.m_sortVertical->isChecked()) /* data grouped in rows; criteria/header per column */ {
@@ -181,7 +181,7 @@ public:
 
 bool SortDialog::Private::hasHeader(const KCRegion &region, Qt::Orientation orientation) const
 {
-    Sheet *const sheet = region.lastSheet();
+    KCSheet *const sheet = region.lastSheet();
     const QRect range = region.lastRange();
     if (orientation == Qt::Horizontal) /* check for column headers */ {
         for (int col = range.left(); col <= range.right(); ++col) {
@@ -234,7 +234,7 @@ void SortDialog::Private::insertIndex(int index, Qt::Orientation orientation) co
 
 QString SortDialog::Private::itemText(int index, bool useHeader) const
 {
-    Sheet *const sheet = selection->lastSheet();
+    KCSheet *const sheet = selection->lastSheet();
     ValueConverter *const converter = sheet->map()->converter();
 
     if (mainWidget.m_sortHorizontal->isChecked()) /* data grouped in columns; criteria/header per row */ {
@@ -390,7 +390,7 @@ void SortDialog::init()
     }
     d->detailsWidget.m_customList->insertItems(0, lst);
 
-    Sheet *const sheet = d->selection->lastSheet();
+    KCSheet *const sheet = d->selection->lastSheet();
     const QRect range = d->selection->lastRange();
     const KCRegion region(range, sheet);
 
@@ -461,7 +461,7 @@ void SortDialog::orientationChanged(bool horizontal)
 
 void SortDialog::accept()
 {
-    Sheet *const sheet = d->selection->activeSheet();
+    KCSheet *const sheet = d->selection->activeSheet();
 
     SortManipulator *const command = new SortManipulator();
     command->setSheet(sheet);

@@ -32,7 +32,7 @@
 #include "CellStorage.h"
 #include "Damages.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 //BEGIN NOTE Stefan: some words on operations
 //

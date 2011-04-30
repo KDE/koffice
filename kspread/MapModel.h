@@ -25,7 +25,7 @@
 class QUndoCommand;
 
 class Map;
-class Sheet;
+class KCSheet;
 
 /**
  * A model for the 'embedded document'.
@@ -53,7 +53,7 @@ public Q_SLOTS:
      * Shows \p sheet, if \p hidden is \c false and \p sheet is hidden.
      * \return \c true on success; \c false on failure
      */
-    bool setHidden(Sheet* sheet, bool hidden = true);
+    bool setHidden(KCSheet* sheet, bool hidden = true);
 
 Q_SIGNALS:
     void addCommandRequested(QUndoCommand* command);
@@ -62,8 +62,8 @@ protected:
     Map* map() const;
 
 protected Q_SLOTS:
-    virtual void addSheet(Sheet *sheet);
-    virtual void removeSheet(Sheet *sheet);
+    virtual void addSheet(KCSheet *sheet);
+    virtual void removeSheet(KCSheet *sheet);
 
 private:
     class Private;

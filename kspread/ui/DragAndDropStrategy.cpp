@@ -22,7 +22,7 @@
 #include "Cell.h"
 #include "kspread_limits.h"
 #include "Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include <KoCanvasBase.h>
 #include <KoToolBase.h>

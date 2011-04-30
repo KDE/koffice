@@ -29,7 +29,7 @@
 #include "FunctionCompletion.h"
 #include "Map.h"
 #include "Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 
 // KOffice
@@ -391,7 +391,7 @@ void CellEditor::Private::rebuildSelection()
     // because the selection gets already build based on the current formula.
     selectionChangedLocked = true;
 
-    Sheet *const originSheet = selection->originSheet();
+    KCSheet *const originSheet = selection->originSheet();
     Map *const map = originSheet->map();
 
     // Rebuild the reference selection by using the formula tokens.
@@ -421,7 +421,7 @@ void CellEditor::Private::rebuildSelection()
             alreadyUsedRegions.insert(region.name());
 
             const QRect range = region.firstRange();
-            Sheet *const sheet = region.firstSheet();
+            KCSheet *const sheet = region.firstSheet();
 
             selection->initialize(range, sheet);
             // Always append the next range by pointing behind the last item.
@@ -746,7 +746,7 @@ void CellEditor::permuteFixation()
     Map *const map = d->selection->activeSheet()->map();
     QString regionName = token.text();
     // Filter sheet; truncates regionName; range without sheet name resides.
-    Sheet *const sheet = KCRegion(QString(), map).filterSheetName(regionName);
+    KCSheet *const sheet = KCRegion(QString(), map).filterSheetName(regionName);
     const KCRegion region(regionName, map, 0);
     // TODO Stefan: Skip named areas.
     if (!region.isValid()) {

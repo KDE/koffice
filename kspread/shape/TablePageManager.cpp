@@ -21,7 +21,7 @@
 
 #include "TableShape.h"
 
-#include <Sheet.h>
+#include <KCSheet.h>
 
 #include <KoShapeContainer.h>
 #include <KoTextDocumentLayout.h>

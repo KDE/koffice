@@ -52,7 +52,7 @@ class KoZoomHandler;
 
 class ColumnHeader;
 class Doc;
-class Sheet;
+class KCSheet;
 class RowHeader;
 class Selection;
 class View;
@@ -111,7 +111,7 @@ public:
     /**
      * @return a pointer to the active sheet
      */
-    Sheet* activeSheet() const;
+    KCSheet* activeSheet() const;
     virtual Selection* selection() const;
     Doc *doc() const {
         return m_doc;

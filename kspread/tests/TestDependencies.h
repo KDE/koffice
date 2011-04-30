@@ -25,7 +25,7 @@
 
 class CellStorage;
 class Map;
-class Sheet;
+class KCSheet;
 
 class TestDependencies : public QObject
 {
@@ -40,7 +40,7 @@ private Q_SLOTS:
 private:
     CellStorage* m_storage;
     Map* m_map;
-    Sheet* m_sheet;
+    KCSheet* m_sheet;
 };
 
 #endif // KSPREAD_TEST_DEPENDENCIES

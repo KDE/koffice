@@ -27,7 +27,7 @@
 #include "SeriesDialog.h"
 
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include "commands/DataManipulators.h"
 
@@ -132,7 +132,7 @@ void SeriesDialog::slotButtonClicked(int button)
 
     QString tmp;
     double dstep, dend, dstart;
-    Sheet * m_pSheet;
+    KCSheet * m_pSheet;
     m_pSheet = m_selection->activeSheet();
 
     dstart = start->value();

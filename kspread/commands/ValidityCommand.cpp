@@ -24,7 +24,7 @@
 #include <klocale.h>
 
 #include "CellStorage.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "ValidityStorage.h"
 
 ValidityCommand::ValidityCommand()

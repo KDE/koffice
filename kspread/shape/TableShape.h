@@ -28,7 +28,7 @@
 
 class Damage;
 class Map;
-class Sheet;
+class KCSheet;
 class SheetView;
 
 class TableShape : public QObject, public KoShape
@@ -59,7 +59,7 @@ public:
     /**
      * \return the sheet containing the data for this shape
      */
-    Sheet* sheet() const;
+    KCSheet* sheet() const;
 
     SheetView* sheetView() const;
 

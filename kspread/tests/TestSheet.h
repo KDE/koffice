@@ -23,7 +23,7 @@
 
 
 class Doc;
-class Sheet;
+class KCSheet;
 
 class SheetTest : public QObject
 {
@@ -37,7 +37,7 @@ private Q_SLOTS:
     void testRemoveColumns_data();
     void testRemoveColumns();
 private:
-    Sheet* m_sheet;
+    KCSheet* m_sheet;
     Doc* m_doc;
 };
 

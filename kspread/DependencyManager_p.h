@@ -33,7 +33,7 @@
 
 class Formula;
 class Map;
-class Sheet;
+class KCSheet;
 
 class DependencyManager::Private
 {
@@ -135,7 +135,7 @@ public:
     // stores providing regions ordered by their consuming cell locations
     QHash<Cell, KCRegion> providers;
     // stores consuming cell locations ordered by their providing regions
-    QHash<Sheet*, RTree<Cell>*> consumers;
+    QHash<KCSheet*, RTree<Cell>*> consumers;
     // stores consuming cell locations ordered by their providing named area
     // (in addition to the general storage of the consuming cell locations)
     QHash<QString, QList<Cell> > namedAreaConsumers;

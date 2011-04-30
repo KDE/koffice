@@ -39,7 +39,7 @@
 #include "RecalcManager.h"
 #include "RectStorage.h"
 #include "RowRepeatStorage.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "StyleStorage.h"
 #include "ValidityStorage.h"
 #include "ValueStorage.h"
@@ -60,7 +60,7 @@ typedef RectStorage<QString> NamedAreaStorage;
 class CellStorage::Private
 {
 public:
-    Private(Sheet* sheet)
+    Private(KCSheet* sheet)
             : sheet(sheet)
             , bindingStorage(new BindingStorage(sheet->map()))
             , commentStorage(new CommentStorage(sheet->map()))
@@ -79,7 +79,7 @@ public:
             , rowRepeatStorage(new RowRepeatStorage())
             , undoData(0) {}
 
-    Private(const Private& other, Sheet* sheet)
+    Private(const Private& other, KCSheet* sheet)
             : sheet(sheet)
             , bindingStorage(new BindingStorage(*other.bindingStorage))
             , commentStorage(new CommentStorage(*other.commentStorage))
@@ -118,7 +118,7 @@ public:
 
     void createCommand(QUndoCommand *parent) const;
 
-    Sheet*                  sheet;
+    KCSheet*                  sheet;
     BindingStorage*         bindingStorage;
     CommentStorage*         commentStorage;
     ConditionsStorage*      conditionsStorage;
@@ -212,7 +212,7 @@ void CellStorage::Private::createCommand(QUndoCommand *parent) const
 }
 
 
-CellStorage::CellStorage(Sheet* sheet)
+CellStorage::CellStorage(KCSheet* sheet)
         : QObject(sheet)
         , d(new Private(sheet))
 {
@@ -224,7 +224,7 @@ CellStorage::CellStorage(const CellStorage& other)
 {
 }
 
-CellStorage::CellStorage(const CellStorage& other, Sheet* sheet)
+CellStorage::CellStorage(const CellStorage& other, KCSheet* sheet)
         : QObject(sheet)
         , d(new Private(*other.d, sheet))
 {
@@ -235,7 +235,7 @@ CellStorage::~CellStorage()
     delete d;
 }
 
-Sheet* CellStorage::sheet() const
+KCSheet* CellStorage::sheet() const
 {
     return d->sheet;
 }

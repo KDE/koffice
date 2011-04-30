@@ -52,7 +52,7 @@ class KReplace;
 class CharacterSelectDialog;
 class CellEditor;
 class CellToolOptionWidget;
-class Sheet;
+class KCSheet;
 
 class CellToolBase::Private
 {
@@ -94,8 +94,8 @@ public:
     QPoint findEnd;
 
     struct {
-        Sheet * currentSheet;
-        Sheet * firstSheet;
+        KCSheet * currentSheet;
+        KCSheet * firstSheet;
     } searchInSheets;
 
 public:

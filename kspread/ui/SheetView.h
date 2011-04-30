@@ -36,7 +36,7 @@ class KoViewConverter;
 
 class CellView;
 class KCRegion;
-class Sheet;
+class KCSheet;
 
 /**
  * \ingroup Painting
@@ -53,7 +53,7 @@ public:
     /**
      * Constructor.
      */
-    explicit SheetView(const Sheet* sheet);
+    explicit SheetView(const KCSheet* sheet);
 
     /**
      * Destructor.
@@ -61,9 +61,9 @@ public:
     ~SheetView();
 
     /**
-     * \return the Sheet
+     * \return the KCSheet
      */
-    const Sheet* sheet() const;
+    const KCSheet* sheet() const;
 
     /**
      * Sets the KoViewConverter used by this SheetView.
@@ -71,7 +71,7 @@ public:
     void setViewConverter(const KoViewConverter* viewConverter);
 
     /**
-     * \return the view in which the Sheet is painted
+     * \return the view in which the KCSheet is painted
      */
     const KoViewConverter* viewConverter() const;
 

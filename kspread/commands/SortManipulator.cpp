@@ -21,7 +21,7 @@
 #include "SortManipulator.h"
 
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
 

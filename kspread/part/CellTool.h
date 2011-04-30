@@ -48,7 +48,7 @@ protected:
     virtual QPointF canvasOffset() const;
     virtual int maxCol() const;
     virtual int maxRow() const;
-    virtual SheetView* sheetView(const Sheet* sheet) const;
+    virtual SheetView* sheetView(const KCSheet* sheet) const;
 
 protected Q_SLOTS:
     // -- misc actions --

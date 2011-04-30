@@ -27,7 +27,7 @@
 
 
 class Doc;
-class Sheet;
+class KCSheet;
 
 class TestLogicFunctions: public QObject
 {
@@ -47,7 +47,7 @@ private slots:
     void testXOR();
 private:
     Doc* m_doc;
-    Sheet* m_sheet;
+    KCSheet* m_sheet;
     Value evaluate(const QString&, Value& ex);
 };
 

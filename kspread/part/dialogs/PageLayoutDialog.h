@@ -22,7 +22,7 @@
 
 #include <KoPageLayoutDialog.h>
 
-class Sheet;
+class KCSheet;
 
 /**
  * \ingroup UI
@@ -35,7 +35,7 @@ public:
     /**
      * Constructor.
      */
-    explicit PageLayoutDialog(QWidget* parent, Sheet* sheet);
+    explicit PageLayoutDialog(QWidget* parent, KCSheet* sheet);
 
     /**
      * Destructor.

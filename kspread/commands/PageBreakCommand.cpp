@@ -22,7 +22,7 @@
 #include "Damages.h"
 #include "Map.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "SheetPrint.h"
 
 PageBreakCommand::PageBreakCommand(QUndoCommand *parent)
@@ -44,7 +44,7 @@ bool PageBreakCommand::process(Element *element)
 {
     // No reverse means setting; reverse means unsetting.
     const bool enable = !m_reverse;
-    Sheet *const sheet = element->sheet();
+    KCSheet *const sheet = element->sheet();
     const QRect range = element->rect();
     if (m_mode == BreakBeforeColumn && range.left() > 1) {
         sheet->nonDefaultColumnFormat(range.left())->setPageBreak(enable);

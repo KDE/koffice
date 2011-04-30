@@ -42,7 +42,7 @@ bool util_isRectValid(const QRect& rect);
 
 class Cell;
 class Map;
-class Sheet;
+class KCSheet;
 
 namespace KSpread
 {

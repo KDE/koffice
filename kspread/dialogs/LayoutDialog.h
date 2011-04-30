@@ -65,7 +65,7 @@ class KComboBox;
 class KComboBox;
 class KoUnitDoubleSpinBox;
 
-class Sheet;
+class KCSheet;
 class CustomStyle;
 class StyleManager;
 class CellFormatDialog;
@@ -401,7 +401,7 @@ public slots:
 
 protected:
 
-    Sheet* sheet;
+    KCSheet* sheet;
     BorderButton* borderButtons[BorderType_END];
     BorderButton* shortcutButtons[BorderShortcutType_END];
 #define NUM_BORDER_PATTERNS 10
@@ -574,7 +574,7 @@ public:
     void checkBorderVertical(const KCStyle& obj);
     void checkBorderHorizontal(const KCStyle& obj);
 
-    Sheet * getSheet() const {
+    KCSheet * getSheet() const {
         return m_sheet;
     }
     Selection* selection() const {
@@ -707,7 +707,7 @@ protected:
     CellFormatPagePattern *patternPage;
     CellFormatPageProtection *protectPage;
 
-    Sheet * m_sheet;
+    KCSheet * m_sheet;
     Selection  * m_selection;
     CustomStyle * m_style;
     StyleManager * m_styleManager;

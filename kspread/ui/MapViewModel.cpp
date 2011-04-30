@@ -21,7 +21,7 @@
 
 #include "Map.h"
 #include "ModelSupport.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include "commands/SheetCommands.h"
 
@@ -38,7 +38,7 @@
 class MapViewModel::Private
 {
 public:
-    Sheet* activeSheet;
+    KCSheet* activeSheet;
     KoCanvasBase *canvas;
     KXMLGUIClient *xmlGuiClient;
     QActionGroup *gotoSheetActionGroup;
@@ -58,7 +58,7 @@ MapViewModel::MapViewModel(Map *map, KoCanvasBase *canvas, KXMLGUIClient *xmlGui
             this, SLOT(gotoSheetActionTriggered(QAction *)));
 
     // Add the initial controlled sheets.
-    const QList<Sheet *> sheets = map->sheetList();
+    const QList<KCSheet *> sheets = map->sheetList();
     for (int i = 0; i < sheets.count(); ++i) {
         addSheet(sheets[i]);
     }
@@ -84,7 +84,7 @@ QVariant MapViewModel::data(const QModelIndex &index, int role) const
     if (index.row() >= map()->count()) {
         return QVariant();
     }
-    const Sheet* const sheet = map()->sheet(index.row());
+    const KCSheet* const sheet = map()->sheet(index.row());
     return QVariant(sheet == d->activeSheet);
 }
 
@@ -118,22 +118,22 @@ bool MapViewModel::setData(const QModelIndex &index, const QVariant &value, int 
     if (index.row() >= map()->count()) {
         return false;
     }
-    Sheet* const sheet(map()->sheet(index.row()));
+    KCSheet* const sheet(map()->sheet(index.row()));
     setActiveSheet(sheet);
     return true;
 }
 
-Sheet* MapViewModel::activeSheet() const
+KCSheet* MapViewModel::activeSheet() const
 {
     return d->activeSheet;
 }
 
-void MapViewModel::setActiveSheet(Sheet* sheet)
+void MapViewModel::setActiveSheet(KCSheet* sheet)
 {
     if (d->activeSheet == sheet) {
         return;
     }
-    const QList<Sheet*> list = map()->sheetList();
+    const QList<KCSheet*> list = map()->sheetList();
     const int oldRow = list.indexOf(d->activeSheet);
     const int newRow = list.indexOf(sheet);
 
@@ -182,14 +182,14 @@ bool MapViewModel::eventFilter(QObject *object, QEvent *event)
     return false;
 }
 
-void MapViewModel::addSheet(Sheet *sheet)
+void MapViewModel::addSheet(KCSheet *sheet)
 {
     MapModel::addSheet(sheet);
 
-    connect(sheet, SIGNAL(shapeAdded(Sheet *, KoShape *)),
-            this, SLOT(addShape(Sheet *, KoShape *)));
-    connect(sheet, SIGNAL(shapeRemoved(Sheet *, KoShape *)),
-            this, SLOT(removeShape(Sheet *, KoShape *)));
+    connect(sheet, SIGNAL(shapeAdded(KCSheet *, KoShape *)),
+            this, SLOT(addShape(KCSheet *, KoShape *)));
+    connect(sheet, SIGNAL(shapeRemoved(KCSheet *, KoShape *)),
+            this, SLOT(removeShape(KCSheet *, KoShape *)));
 
     if (!d->xmlGuiClient) {
         return;
@@ -208,14 +208,14 @@ void MapViewModel::addSheet(Sheet *sheet)
     d->xmlGuiClient->plugActionList("go_goto_sheet_actionlist", actions);
 }
 
-void MapViewModel::removeSheet(Sheet *sheet)
+void MapViewModel::removeSheet(KCSheet *sheet)
 {
     MapModel::removeSheet(sheet);
 
-    disconnect(sheet, SIGNAL(shapeAdded(Sheet *, KoShape *)),
-               this, SLOT(addShape(Sheet *, KoShape *)));
-    disconnect(sheet, SIGNAL(shapeRemoved(Sheet *, KoShape *)),
-               this, SLOT(removeShape(Sheet *, KoShape *)));
+    disconnect(sheet, SIGNAL(shapeAdded(KCSheet *, KoShape *)),
+               this, SLOT(addShape(KCSheet *, KoShape *)));
+    disconnect(sheet, SIGNAL(shapeRemoved(KCSheet *, KoShape *)),
+               this, SLOT(removeShape(KCSheet *, KoShape *)));
 
     if (!d->xmlGuiClient) {
         return;
@@ -238,14 +238,14 @@ void MapViewModel::removeSheet(Sheet *sheet)
     }
 }
 
-void MapViewModel::addShape(Sheet *sheet, KoShape *shape)
+void MapViewModel::addShape(KCSheet *sheet, KoShape *shape)
 {
     if (sheet == d->activeSheet) {
         d->canvas->shapeManager()->addShape(shape);
     }
 }
 
-void MapViewModel::removeShape(Sheet *sheet, KoShape *shape)
+void MapViewModel::removeShape(KCSheet *sheet, KoShape *shape)
 {
     if (sheet == d->activeSheet) {
         d->canvas->shapeManager()->remove(shape);
@@ -257,7 +257,7 @@ void MapViewModel::gotoSheetActionTriggered(QAction *action)
     const QList<QAction *> actions = d->gotoSheetActionGroup->actions();
     for (int i = 0; i < actions.count(); ++i) {
         if (actions[i]->text() == action->text()) {
-            Sheet *const sheet = map()->findSheet(action->iconText());
+            KCSheet *const sheet = map()->findSheet(action->iconText());
             if (sheet) {
                 setActiveSheet(sheet);
             } else { // should not happen

@@ -66,7 +66,7 @@
 #include "Localization.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
 #include "StyleStorage.h"
@@ -611,7 +611,7 @@ void CellFormatDialog::initMembers()
 
     m_currency      = Currency(); // locale default
 
-    Sheet* sheet = m_sheet;
+    KCSheet* sheet = m_sheet;
     defaultWidthSize  = sheet ? sheet->map()->defaultColumnFormat()->width() : 0;
     defaultHeightSize = sheet ? sheet->map()->defaultRowFormat()->height() : 0;
 }

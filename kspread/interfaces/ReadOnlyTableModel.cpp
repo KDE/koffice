@@ -23,7 +23,7 @@
 #include "Cell.h"
 #include "kspread_limits.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 #include "Value.h"
 #include "ValueFormatter.h"
@@ -35,11 +35,11 @@
 class ReadOnlyTableModel::Private
 {
 public:
-    Sheet* sheet;
+    KCSheet* sheet;
     QSize size;
 };
 
-ReadOnlyTableModel::ReadOnlyTableModel(Sheet* sheet, int columns, int rows)
+ReadOnlyTableModel::ReadOnlyTableModel(KCSheet* sheet, int columns, int rows)
         : QAbstractTableModel(sheet)
         , d(new Private)
 {
@@ -135,7 +135,7 @@ QModelIndex ReadOnlyTableModel::index(int row, int column, const QModelIndex &pa
     return index;
 }
 
-Sheet* ReadOnlyTableModel::sheet() const
+KCSheet* ReadOnlyTableModel::sheet() const
 {
     return d->sheet;
 }

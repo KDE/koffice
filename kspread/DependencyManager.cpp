@@ -34,7 +34,7 @@
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
 #include "RTree.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Value.h"
 
 // This is currently not called - but it's really convenient to call it from
@@ -54,7 +54,7 @@ void DependencyManager::Private::dump() const
         kDebug(36002) << cell.name() << " consumes values of:" << debugStr.join(",");
     }
 
-    foreach(Sheet* sheet, consumers.keys()) {
+    foreach(KCSheet* sheet, consumers.keys()) {
         QList<QRectF> keys = consumers[sheet]->keys();
         QList<Cell> values = consumers[sheet]->values();
         QHash<QString, QString> table;
@@ -100,7 +100,7 @@ void DependencyManager::regionChanged(const KCRegion& region)
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
-        const Sheet* sheet = (*it)->sheet();
+        const KCSheet* sheet = (*it)->sheet();
 
         for (int col = range.left(); col <= range.right(); ++col) {
             for (int row = range.top(); row <= range.bottom(); ++row) {
@@ -139,7 +139,7 @@ void DependencyManager::namedAreaModified(const QString &name)
     d->namedAreaModified(name);
 }
 
-void DependencyManager::addSheet(Sheet *sheet)
+void DependencyManager::addSheet(KCSheet *sheet)
 {
     // Manages also the revival of a deleted sheet.
     Q_UNUSED(sheet);
@@ -149,7 +149,7 @@ void DependencyManager::addSheet(Sheet *sheet)
     // Clear orphaned dependencies (i.e. cells formerly containing formulas)
     // FIXME Stefan: Iterate only over the consumers in sheet. Needs adjustment
     //               of the way the providers are stored. Now: only by cell.
-    //               Future: QHash<Sheet*, QHash<Cell, KCRegion> >
+    //               Future: QHash<KCSheet*, QHash<Cell, KCRegion> >
     const QList<Cell> consumers = d->providers.keys();
     foreach(const Cell& cell, consumers) {
         if (cell.sheet() == sheet) {
@@ -174,7 +174,7 @@ void DependencyManager::addSheet(Sheet *sheet)
 #endif
 }
 
-void DependencyManager::removeSheet(Sheet *sheet)
+void DependencyManager::removeSheet(KCSheet *sheet)
 {
     Q_UNUSED(sheet);
     // TODO Stefan: Implement, if dependencies should not be tracked all the time.
@@ -192,7 +192,7 @@ void DependencyManager::updateAllDependencies(const Map* map)
     d->depths.clear();
 
     Cell cell;
-    foreach(const Sheet* sheet, map->sheetList()) {
+    foreach(const KCSheet* sheet, map->sheetList()) {
         for (int c = 0; c < sheet->formulaStorage()->count(); ++c) {
             cell = Cell(sheet, sheet->formulaStorage()->col(c), sheet->formulaStorage()->row(c));
 
@@ -238,7 +238,7 @@ void DependencyManager::regionMoved(const KCRegion& movedRegion, const Cell& des
 
     KCRegion::ConstIterator end(movedRegion.constEnd());
     for (KCRegion::ConstIterator it(movedRegion.constBegin()); it != end; ++it) {
-        Sheet* const sheet = (*it)->sheet();
+        KCSheet* const sheet = (*it)->sheet();
         locationOffset.setSheet((sheet == destination.sheet()) ? 0 : destination.sheet());
 
         if (d->consumers.contains(sheet)) {
@@ -271,7 +271,7 @@ void DependencyManager::updateFormula(const Cell& cell, const KCRegion::Element*
         return;
 
     QString expression('=');
-    Sheet* sheet = cell.sheet();
+    KCSheet* sheet = cell.sheet();
     for (int i = 0; i < tokens.count(); ++i) {
         Token token = tokens[i];
         Token::Type tokenType = token.type();
@@ -347,7 +347,7 @@ void DependencyManager::Private::removeDependencies(const Cell& cell)
     KCRegion region = providers[cell];
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
-        Sheet* const sheet = (*it)->sheet();
+        KCSheet* const sheet = (*it)->sheet();
         const QRect range = (*it)->rect();
 
         if (consumers.contains(sheet)) {
@@ -403,7 +403,7 @@ void DependencyManager::Private::generateDepths(const KCRegion& region)
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
-        const Sheet* sheet = (*it)->sheet();
+        const KCSheet* sheet = (*it)->sheet();
         const CellStorage *cells = sheet->cellStorage();
 
         int bottom = range.bottom();
@@ -495,7 +495,7 @@ int DependencyManager::Private::computeDepth(Cell cell) const
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
-        Sheet* sheet = (*it)->sheet();
+        KCSheet* sheet = (*it)->sheet();
         const int right = range.right();
         const int bottom = range.bottom();
         for (int col = range.left(); col <= right; ++col) {
@@ -539,7 +539,7 @@ void DependencyManager::Private::computeDependencies(const Cell& cell, const For
     if (!tokens.valid())
         return;
 
-    Sheet* sheet = cell.sheet();
+    KCSheet* sheet = cell.sheet();
     int inAreasCall = 0;
     KCRegion providingRegion;
     for (int i = 0; i < tokens.count(); i++) {
@@ -581,7 +581,7 @@ void DependencyManager::Private::computeDependencies(const Cell& cell, const For
                     // add it to the providers
                     providingRegion.add(region);
 
-                    Sheet* sheet = region.firstSheet();
+                    KCSheet* sheet = region.firstSheet();
 
                     // create consumer tree, if not existing yet
                     if (!consumers.contains(sheet)) consumers.insert(sheet, new RTree<Cell>());
@@ -607,7 +607,7 @@ void DependencyManager::Private::removeCircularDependencyFlags(const KCRegion& r
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
-        const Sheet* sheet = (*it)->sheet();
+        const KCSheet* sheet = (*it)->sheet();
         for (int col = range.left(); col <= range.right(); ++col) {
             for (int row = range.top(); row <= range.bottom(); ++row) {
                 Cell cell(sheet, col, row);

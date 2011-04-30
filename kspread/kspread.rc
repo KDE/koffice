@@ -119,7 +119,7 @@
     <Action name="hideColumn"/>
     <Action name="showColumn"/>
   </Menu>
-  <Menu name="Sheet"><text>&amp;Sheet</text>
+  <Menu name="KCSheet"><text>&amp;KCSheet</text>
   <Action name="hideSheet"/>
   <Action name="showSheet"/>
   <Separator/>

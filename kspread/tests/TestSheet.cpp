@@ -20,7 +20,7 @@
 
 #include <part/Doc.h> // FIXME detach from part
 #include <Map.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 
 #include <qtest_kde.h>
 

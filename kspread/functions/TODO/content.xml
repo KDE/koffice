@@ -117,8 +117,8 @@
  <table:table-column table:style-name="co6"/>
  <table:table-column table:style-name="co7"/>
  <table:table-row table:style-name="ro1" table:default-cell-style-name="ce1">
-  <table:table-cell office:value-type="string" office:string-value="Formula Status Sheet">
-   <text:p>Formula Status Sheet</text:p>
+  <table:table-cell office:value-type="string" office:string-value="Formula Status KCSheet">
+   <text:p>Formula Status KCSheet</text:p>
   </table:table-cell>
   <table:table-cell table:number-columns-repeated="6"/>
  </table:table-row>

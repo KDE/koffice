@@ -34,7 +34,7 @@
 #include "DependencyManager.h"
 #include "Map.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 #include "Value.h"
 
@@ -44,7 +44,7 @@ class Inspector::Private
 public:
     Cell cell;
     KCStyle style;
-    Sheet* sheet;
+    KCSheet* sheet;
 
     QTreeWidget *cellView;
     QTreeWidget *sheetView;
@@ -199,7 +199,7 @@ Inspector::Inspector(const Cell& cell)
     d->styleView->setHeaderLabels(QStringList() << "Key" << "Value");
 
     QFrame* sheetPage = new QFrame();
-    addPage(sheetPage,  QString("Sheet"));
+    addPage(sheetPage,  QString("KCSheet"));
     QVBoxLayout* sheetLayout = new QVBoxLayout(sheetPage);
     sheetLayout->setMargin(KDialog::marginHint());
     sheetLayout->setSpacing(KDialog::spacingHint());

@@ -28,7 +28,7 @@
 
 class Cell;
 class Map;
-class Sheet;
+class KCSheet;
 class KCRegion;
 
 /**
@@ -82,7 +82,7 @@ public:
     Q_DECLARE_FLAGS(Changes, Change)
 
     CellDamage(const Cell& cell, Changes changes);
-    CellDamage(Sheet* sheet, const KCRegion& region, Changes changes);
+    CellDamage(KCSheet* sheet, const KCRegion& region, Changes changes);
 
     virtual ~CellDamage();
 
@@ -90,7 +90,7 @@ public:
         return Damage::DamagedCell;
     }
 
-    Sheet* sheet() const;
+    KCSheet* sheet() const;
     const KCRegion& region() const;
 
     Changes changes() const;
@@ -124,7 +124,7 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    SheetDamage(Sheet* sheet, Changes changes);
+    SheetDamage(KCSheet* sheet, Changes changes);
 
     virtual ~SheetDamage();
 
@@ -132,7 +132,7 @@ public:
         return Damage::DamagedSheet;
     }
 
-    Sheet* sheet() const;
+    KCSheet* sheet() const;
 
     Changes changes() const;
 

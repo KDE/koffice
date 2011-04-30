@@ -26,7 +26,7 @@
 #include <QPoint>
 #include <QPointF>
 
-class Sheet;
+class KCSheet;
 
 /// Temporary information used only during loading
 class LoadingInfo
@@ -52,24 +52,24 @@ public:
         m_fileFormat = format;
     }
 
-    Sheet* initialActiveSheet() const {
+    KCSheet* initialActiveSheet() const {
         return m_initialActiveSheet;
     }
-    void setInitialActiveSheet(Sheet* sheet) {
+    void setInitialActiveSheet(KCSheet* sheet) {
         m_initialActiveSheet = sheet;
     }
 
     /**
      * @return the cursor positions
      */
-    const QMap<Sheet*, QPoint>& cursorPositions() const {
+    const QMap<KCSheet*, QPoint>& cursorPositions() const {
         return m_cursorPositions;
     }
 
     /**
      * Stores the cursor position @p point for @p sheet .
      */
-    void setCursorPosition(Sheet* sheet, const QPoint& point) {
+    void setCursorPosition(KCSheet* sheet, const QPoint& point) {
         Q_ASSERT(1 <= point.x() && point.x() <= KS_colMax);
         Q_ASSERT(1 <= point.y() && point.y() <= KS_rowMax);
         m_cursorPositions.insert(sheet, point);
@@ -78,14 +78,14 @@ public:
     /**
      * @return scrolling offsets
      */
-    const QMap<Sheet*, QPointF>& scrollingOffsets() const {
+    const QMap<KCSheet*, QPointF>& scrollingOffsets() const {
         return m_scrollingOffsets;
     }
 
     /**
      * Stores the scrolling offset @p point for @p sheet .
      */
-    void setScrollingOffset(Sheet* sheet, const QPointF& point) {
+    void setScrollingOffset(KCSheet* sheet, const QPointF& point) {
         m_scrollingOffsets.insert(sheet, point);
     }
 
@@ -98,9 +98,9 @@ public:
 
 private:
     FileFormat m_fileFormat;
-    Sheet* m_initialActiveSheet;
-    QMap<Sheet*, QPoint> m_cursorPositions;
-    QMap<Sheet*, QPointF> m_scrollingOffsets;
+    KCSheet* m_initialActiveSheet;
+    QMap<KCSheet*, QPoint> m_cursorPositions;
+    QMap<KCSheet*, QPointF> m_scrollingOffsets;
     bool m_loadTemplate;
 };
 

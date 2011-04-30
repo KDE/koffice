@@ -51,7 +51,7 @@
 #include <Localization.h>
 #include <Map.h>
 #include "ui/Selection.h"
-#include <Sheet.h>
+#include <KCSheet.h>
 #include <Util.h>
 
 #include <Formula.h>
@@ -71,7 +71,7 @@ public:
     Ui::ConsolidateDetailsWidget detailsWidget;
 
 public:
-    void setContent(Sheet *sheet, int row, int column, const QString &text, QUndoCommand *parent);
+    void setContent(KCSheet *sheet, int row, int column, const QString &text, QUndoCommand *parent);
 };
 
 
@@ -135,7 +135,7 @@ void ConsolidateDialog::accept()
     Map *const map = d->selection->activeSheet()->map();
     ValueConverter *const converter = map->converter();
 
-    Sheet *const destinationSheet = d->selection->activeSheet();
+    KCSheet *const destinationSheet = d->selection->activeSheet();
     int dx = d->selection->lastRange().left();
     int dy = d->selection->lastRange().top();
 
@@ -212,7 +212,7 @@ void ConsolidateDialog::accept()
         // Check whether the destination is part of the source ...
         const QRect destinationRange(dx, dy, columns, rows);
         for (int i = 0; i < ranges.count(); ++i) {
-            Sheet *const sheet = ranges[i].firstSheet();
+            KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
 
@@ -229,7 +229,7 @@ void ConsolidateDialog::accept()
                 bool novalue = true;
                 QString formula = '=' + function + '(';
                 for (int i = 0; i < ranges.count(); ++i) {
-                    Sheet *const sheet = ranges[i].firstSheet();
+                    KCSheet *const sheet = ranges[i].firstSheet();
                     Q_ASSERT(sheet);
                     const QRect range = ranges[i].firstRange();
                     const Cell cell(sheet, col + range.left(), row + range.top());
@@ -251,7 +251,7 @@ void ConsolidateDialog::accept()
         // Get list of all descriptions in the columns
         QHash<QString, QList<Cell> > columnHeaderCells;
         for (int i = 0; i < ranges.count(); ++i) {
-            Sheet *const sheet = ranges[i].firstSheet();
+            KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int col = range.left(); col <= range.right() ; ++col) {
@@ -267,7 +267,7 @@ void ConsolidateDialog::accept()
         // Check whether the destination is part of the source ...
         const QRect destinationRange(dx, dy, columnHeaders.count(), rows);
         for (int i = 0; i < ranges.count(); ++i) {
-            Sheet *const sheet = ranges[i].firstSheet();
+            KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             if (sheet == destinationSheet && range.intersects(destinationRange)) {
@@ -290,7 +290,7 @@ void ConsolidateDialog::accept()
                     if (i != 0) {
                         formula += ';';
                     }
-                    Sheet *const sheet = cells[i].sheet();
+                    KCSheet *const sheet = cells[i].sheet();
                     const int headerColumn = cells[i].column();
                     const int headerRow = cells[i].row();
                     const Cell cell(sheet, headerColumn, headerRow + row);
@@ -306,7 +306,7 @@ void ConsolidateDialog::accept()
         // Get list of all descriptions in the rows
         QHash<QString, QList<Cell> > rowHeaderCells;
         for (int i = 0; i < ranges.count(); ++i) {
-            Sheet *const sheet = ranges[i].firstSheet();
+            KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int row = range.top(); row <= range.bottom() ; ++row) {
@@ -322,7 +322,7 @@ void ConsolidateDialog::accept()
         // Check whether the destination is part of the source ...
         const QRect destinationRange(dx, dy, columns, rowHeaders.count());
         for (int i = 0; i < ranges.count(); ++i) {
-            Sheet *const sheet = ranges[i].firstSheet();
+            KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             if (sheet == destinationSheet && range.intersects(destinationRange)) {
@@ -345,7 +345,7 @@ void ConsolidateDialog::accept()
                     if (i != 0) {
                         formula += ';';
                     }
-                    Sheet *const sheet = cells[i].sheet();
+                    KCSheet *const sheet = cells[i].sheet();
                     const int headerColumn = cells[i].column();
                     const int headerRow = cells[i].row();
                     const Cell cell(sheet, headerColumn + col, headerRow);
@@ -361,7 +361,7 @@ void ConsolidateDialog::accept()
         // Get list of all descriptions in the rows
         QStringList rowHeaders;
         for (int i = 0; i < ranges.count(); ++i) {
-            Sheet *const sheet = ranges[i].firstSheet();
+            KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int row = range.top() + 1; row <= range.bottom() ; ++row) {
@@ -377,7 +377,7 @@ void ConsolidateDialog::accept()
         // Get list of all descriptions in the columns
         QStringList columnHeaders;
         for (int i = 0; i < ranges.count(); ++i) {
-            Sheet *const sheet = ranges[i].firstSheet();
+            KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int col = range.left() + 1; col <= range.right() ; ++col) {
@@ -393,7 +393,7 @@ void ConsolidateDialog::accept()
         // Check whether the destination is part of the source ...
         const QRect destinationRange(dx, dy, columnHeaders.count(), rowHeaders.count());
         for (int i = 0; i < ranges.count(); ++i) {
-            Sheet *const sheet = ranges[i].firstSheet();
+            KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             if (sheet == destinationSheet && range.intersects(destinationRange)) {
@@ -406,7 +406,7 @@ void ConsolidateDialog::accept()
         // Fill the list with all interesting cells
         QHash<QString /* row */, QHash<QString /* col */, QList<Cell> > > list;
         for (int i = 0; i < ranges.count(); ++i) {
-            Sheet *const sheet = ranges[i].firstSheet();
+            KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int col = range.left() + 1; col <= range.right() ; ++col) {
@@ -502,7 +502,7 @@ void ConsolidateDialog::slotReturnPressed()
     }
 }
 
-void ConsolidateDialog::Private::setContent(Sheet *sheet, int row, int column,
+void ConsolidateDialog::Private::setContent(KCSheet *sheet, int row, int column,
                                             const QString &text, QUndoCommand *parent)
 {
     Value value;

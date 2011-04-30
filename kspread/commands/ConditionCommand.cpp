@@ -24,7 +24,7 @@
 
 #include "CellStorage.h"
 #include "ConditionsStorage.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 CondtionCommand::CondtionCommand()
         : AbstractRegionCommand()

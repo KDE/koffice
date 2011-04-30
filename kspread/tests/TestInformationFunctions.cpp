@@ -21,7 +21,7 @@
 #include <CellStorage.h>
 #include <Formula.h>
 #include <Map.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 
 #include "TestKspreadCommon.h"
 
@@ -32,7 +32,7 @@
 
 Value TestInformationFunctions::evaluate(const QString& formula, Value& ex)
 {
-    Sheet* sheet = m_map->sheet(0);
+    KCSheet* sheet = m_map->sheet(0);
     Formula f(sheet);
     QString expr = formula;
     if (expr[0] != '=')
@@ -53,7 +53,7 @@ void TestInformationFunctions::initTestCase()
     FunctionModuleRegistry::instance()->loadFunctionModules();
     m_map = new Map(0 /* no Doc */);
     m_map->addNewSheet();
-    Sheet* sheet = m_map->sheet(0);
+    KCSheet* sheet = m_map->sheet(0);
     sheet->setSheetName("Sheet1");
     CellStorage* storage = sheet->cellStorage();
 

@@ -28,7 +28,7 @@
 #include "Cell.h"
 #include "CellStorage.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include "commands/DataManipulators.h"
 
@@ -73,8 +73,8 @@ public:
         referenceMode = false;
     }
 
-    Sheet* activeSheet;
-    Sheet* originSheet;
+    KCSheet* activeSheet;
+    KCSheet* originSheet;
     QPoint anchor;
     QPoint cursor;
     QPoint marker;
@@ -140,7 +140,7 @@ KoCanvasBase* Selection::canvas() const
     return d->canvasBase;
 }
 
-void Selection::initialize(const QPoint& point, Sheet* sheet)
+void Selection::initialize(const QPoint& point, KCSheet* sheet)
 {
     if (!isValid(point))
         return;
@@ -202,7 +202,7 @@ void Selection::initialize(const QPoint& point, Sheet* sheet)
     emitChanged(changedRegion);
 }
 
-void Selection::initialize(const QRect& range, Sheet* sheet)
+void Selection::initialize(const QRect& range, KCSheet* sheet)
 {
     if (!isValid(range) || (range == QRect(0, 0, 1, 1)))
         return;
@@ -276,7 +276,7 @@ void Selection::initialize(const QRect& range, Sheet* sheet)
     emitChanged(changedRegion);
 }
 
-void Selection::initialize(const KCRegion& region, Sheet* sheet)
+void Selection::initialize(const KCRegion& region, KCSheet* sheet)
 {
     if (!region.isValid())
         return;
@@ -379,7 +379,7 @@ void Selection::update(const QPoint& point)
         d->activeElement = subRegionEnd - 1;
     }
 
-    Sheet* sheet = cells()[d->activeElement]->sheet();
+    KCSheet* sheet = cells()[d->activeElement]->sheet();
     if (sheet != d->activeSheet) {
         extend(point);
         d->activeElement = cells().count();
@@ -482,7 +482,7 @@ void Selection::update(const QPoint& point)
     emitChanged(changedRegion);
 }
 
-void Selection::extend(const QPoint& point, Sheet* sheet)
+void Selection::extend(const QPoint& point, KCSheet* sheet)
 {
     if (!isValid(point))
         return;
@@ -542,7 +542,7 @@ void Selection::extend(const QPoint& point, Sheet* sheet)
     emitChanged(changedRegion);
 }
 
-void Selection::extend(const QRect& range, Sheet* sheet)
+void Selection::extend(const QRect& range, KCSheet* sheet)
 {
     if (!isValid(range) || (range == QRect(0, 0, 1, 1)))
         return;
@@ -634,7 +634,7 @@ void Selection::extend(const KCRegion& region)
     emitChanged(*this);
 }
 
-Selection::Element* Selection::eor(const QPoint& point, Sheet* sheet)
+Selection::Element* Selection::eor(const QPoint& point, KCSheet* sheet)
 {
     // The selection always has to contain one location/range at least.
     if (isSingular()) {
@@ -663,12 +663,12 @@ bool Selection::isSingular() const
     return KCRegion::isSingular();
 }
 
-QString Selection::name(Sheet* sheet) const
+QString Selection::name(KCSheet* sheet) const
 {
     return KCRegion::name(sheet ? sheet : d->originSheet);
 }
 
-void Selection::setActiveSheet(Sheet* sheet)
+void Selection::setActiveSheet(KCSheet* sheet)
 {
     if (d->activeSheet == sheet) {
         return;
@@ -677,17 +677,17 @@ void Selection::setActiveSheet(Sheet* sheet)
     emit activeSheetChanged(sheet);
 }
 
-Sheet* Selection::activeSheet() const
+KCSheet* Selection::activeSheet() const
 {
     return d->activeSheet;
 }
 
-void Selection::setOriginSheet(Sheet* sheet)
+void Selection::setOriginSheet(KCSheet* sheet)
 {
     d->originSheet = sheet;
 }
 
-Sheet* Selection::originSheet() const
+KCSheet* Selection::originSheet() const
 {
     return d->originSheet;
 }
@@ -898,7 +898,7 @@ void Selection::emitRefreshSheetViews()
     emit refreshSheetViews();
 }
 
-void Selection::emitVisibleSheetRequested(Sheet* sheet)
+void Selection::emitVisibleSheetRequested(KCSheet* sheet)
 {
     emit visibleSheetRequested(sheet);
 }
@@ -995,7 +995,7 @@ KCRegion::Range* Selection::createRange(const KCRegion::Range& range) const
 
 void Selection::emitChanged(const KCRegion& region)
 {
-    Sheet * const sheet = d->activeSheet;
+    KCSheet * const sheet = d->activeSheet;
     if(!sheet) // no sheet no update needed
         return;
     KCRegion extendedRegion;

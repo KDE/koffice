@@ -38,7 +38,7 @@
 
 // KSpread
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 // commands
 #include "commands/DataManipulators.h"
@@ -81,7 +81,7 @@ SubtotalDialog::~SubtotalDialog()
 
 void SubtotalDialog::accept()
 {
-    Sheet *const sheet = d->selection->lastSheet();
+    KCSheet *const sheet = d->selection->lastSheet();
     const QRect range = d->selection->lastRange();
 
     int numOfCols = range.width();
@@ -193,7 +193,7 @@ void SubtotalDialog::removeSubtotalLines()
 {
     kDebug() << "Removing subtotal lines";
 
-    Sheet *const sheet = d->selection->lastSheet();
+    KCSheet *const sheet = d->selection->lastSheet();
     QRect range = d->selection->lastRange();
 
     int r = range.right();
@@ -238,7 +238,7 @@ void SubtotalDialog::removeSubtotalLines()
 
 void SubtotalDialog::fillColumnBoxes()
 {
-    Sheet *const sheet = d->selection->lastSheet();
+    KCSheet *const sheet = d->selection->lastSheet();
     const QRect range = d->selection->lastRange();
 
     int r = range.right();
@@ -288,7 +288,7 @@ void SubtotalDialog::fillFunctionBox()
 bool SubtotalDialog::addSubtotal(int mainCol, int column, int row, int topRow,
                                  bool addRow, QString const & text)
 {
-    Sheet *const sheet = d->selection->lastSheet();
+    KCSheet *const sheet = d->selection->lastSheet();
     QRect range = d->selection->lastRange();
 
     kDebug() << "Adding subtotal:" << mainCol << "," << column << ", Rows:" << row << "," << topRow

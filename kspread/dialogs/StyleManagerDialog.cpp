@@ -32,7 +32,7 @@
 #include "Cell.h"
 #include "LayoutDialog.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
 

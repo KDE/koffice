@@ -45,13 +45,13 @@ public:
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
-    Sheet* activeSheet() const;
+    KCSheet* activeSheet() const;
 
 public Q_SLOTS:
     /**
-     * Set the active \p sheet and emits activeSheetChanged(Sheet*) afterwards.
+     * Set the active \p sheet and emits activeSheetChanged(KCSheet*) afterwards.
      */
-    void setActiveSheet(Sheet* sheet);
+    void setActiveSheet(KCSheet* sheet);
 
 protected:
     /**
@@ -64,22 +64,22 @@ private Q_SLOTS:
     /**
      * Adds \p sheet to the goto sheet actions.
      */
-    virtual void addSheet(Sheet *sheet);
+    virtual void addSheet(KCSheet *sheet);
 
     /**
      * Removes \p sheet from the goto sheet actions.
      */
-    virtual void removeSheet(Sheet *sheet);
+    virtual void removeSheet(KCSheet *sheet);
 
     /**
      * Adds the \p shape, if \p sheet is active.
      */
-    void addShape(Sheet *sheet, KoShape *shape);
+    void addShape(KCSheet *sheet, KoShape *shape);
 
     /**
      * Removes the \p shape, if \p sheet is active.
      */
-    void removeShape(Sheet *sheet, KoShape *shape);
+    void removeShape(KCSheet *sheet, KoShape *shape);
 
     /**
      * Activates the associated sheet of the \p action.
@@ -87,7 +87,7 @@ private Q_SLOTS:
     void gotoSheetActionTriggered(QAction *action);
 
 Q_SIGNALS:
-    void activeSheetChanged(Sheet* sheet);
+    void activeSheetChanged(KCSheet* sheet);
 
 private:
     class Private;

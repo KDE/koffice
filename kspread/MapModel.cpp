@@ -21,7 +21,7 @@
 
 #include "Map.h"
 #include "ModelSupport.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "SheetModel.h"
 
 #include "commands/SheetCommands.h"
@@ -67,10 +67,10 @@ MapModel::MapModel(Map* map)
         , d(new Private)
 {
     d->map = map;
-    connect(d->map, SIGNAL(sheetAdded(Sheet *)),
-            this, SLOT(addSheet(Sheet *)));
-    connect(d->map, SIGNAL(sheetRemoved(Sheet *)),
-            this, SLOT(removeSheet(Sheet *)));
+    connect(d->map, SIGNAL(sheetAdded(KCSheet *)),
+            this, SLOT(addSheet(KCSheet *)));
+    connect(d->map, SIGNAL(sheetRemoved(KCSheet *)),
+            this, SLOT(removeSheet(KCSheet *)));
 }
 
 MapModel::~MapModel()
@@ -91,7 +91,7 @@ QVariant MapModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
     //
-    const Sheet* const sheet = d->map->sheet(index.row());
+    const KCSheet* const sheet = d->map->sheet(index.row());
     switch (role) {
     case Qt::DisplayRole:
     case Qt::EditRole:
@@ -124,7 +124,7 @@ Qt::ItemFlags MapModel::flags(const QModelIndex &index) const
     Qt::ItemFlags flags = Qt::ItemIsEnabled;
     if (!d->map->isProtected()) {
         flags |= Qt::ItemIsSelectable;
-        const Sheet* const sheet = d->map->sheet(index.row());
+        const KCSheet* const sheet = d->map->sheet(index.row());
         if (!sheet->isProtected()) {
             flags |= Qt::ItemIsEditable;
         }
@@ -136,7 +136,7 @@ QVariant MapModel::headerData(int section, Qt::Orientation orientation, int role
 {
     Q_UNUSED(orientation)
     if (section == 0 && role == Qt::DisplayRole) {
-        return QVariant(i18n("Sheet name"));
+        return QVariant(i18n("KCSheet name"));
     }
     return QVariant();
 }
@@ -157,7 +157,7 @@ QModelIndex MapModel::index(int row, int column, const QModelIndex &parent) cons
         if (parent.row() >= d->map->count()) {
             return QModelIndex();
         }
-        Sheet* const sheet = d->map->sheet(index.parent().row());
+        KCSheet* const sheet = d->map->sheet(index.parent().row());
         index = sheet->model()->index(row, column, parent);
     } else {
         index = createIndex(row, column, d->map);
@@ -181,7 +181,7 @@ bool MapModel::setData(const QModelIndex &index, const QVariant &value, int role
     }
 
     if (index.isValid() && index.row() < d->map->count()) {
-        Sheet* const sheet(d->map->sheet(index.row()));
+        KCSheet* const sheet(d->map->sheet(index.row()));
         switch (role) {
         case Qt::EditRole: {
             const QString name(value.toString());
@@ -205,7 +205,7 @@ bool MapModel::setData(const QModelIndex &index, const QVariant &value, int role
     return false;
 }
 
-bool MapModel::setHidden(Sheet* sheet, bool hidden)
+bool MapModel::setHidden(KCSheet* sheet, bool hidden)
 {
     QUndoCommand* command;
     if (hidden && !sheet->isHidden()) {
@@ -224,13 +224,13 @@ Map* MapModel::map() const
     return d->map;
 }
 
-void MapModel::addSheet(Sheet* sheet)
+void MapModel::addSheet(KCSheet* sheet)
 {
     kDebug() << "Added sheet:" << sheet->sheetName();
     emit layoutChanged();
 }
 
-void MapModel::removeSheet(Sheet *sheet)
+void MapModel::removeSheet(KCSheet *sheet)
 {
     kDebug() << "Removed sheet:" << sheet->sheetName();
     emit layoutChanged();

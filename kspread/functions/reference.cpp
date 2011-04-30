@@ -23,7 +23,7 @@
 
 #include "Cell.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Util.h"
 #include "Value.h"
 

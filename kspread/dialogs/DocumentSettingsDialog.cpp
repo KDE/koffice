@@ -50,7 +50,7 @@
 #include "Localization.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 class DocumentSettingsDialog::Private
 {
@@ -130,8 +130,8 @@ parameterLocale::parameterLocale(Selection* selection, KVBox *box , char * /*nam
 void parameterLocale::apply()
 {
     if (m_bUpdateLocale) {
-        const QList<Sheet*> sheets = m_selection->activeSheet()->map()->sheetList();
-        foreach(Sheet* sheet, sheets) {
+        const QList<KCSheet*> sheets = m_selection->activeSheet()->map()->sheetList();
+        foreach(KCSheet* sheet, sheets) {
             sheet->updateLocale();
         }
     }

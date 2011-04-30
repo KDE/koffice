@@ -34,7 +34,7 @@
 #include "Damages.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 // commands
 #include "commands/SheetCommands.h"
@@ -43,7 +43,7 @@ ShowDialog::ShowDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
         , m_selection(selection)
 {
-    setCaption(i18n("Show Sheet"));
+    setCaption(i18n("Show KCSheet"));
     setModal(true);
     setButtons(Ok | Cancel);
     setObjectName("ShowDialog");
@@ -82,8 +82,8 @@ void ShowDialog::accept()
     }
 
     Map *const map = m_selection->activeSheet()->map();
-    Sheet *sheet;
-    QUndoCommand* macroCommand = new QUndoCommand(i18n("Show Sheet"));
+    KCSheet *sheet;
+    QUndoCommand* macroCommand = new QUndoCommand(i18n("Show KCSheet"));
     for (int i = 0; i < items.count(); ++i) {
         sheet = map->findSheet(items[i]->text());
         if (!sheet)

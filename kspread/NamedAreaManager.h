@@ -55,10 +55,10 @@ public:
      */
     virtual ~NamedAreaManager();
 
-    void remove(Sheet* sheet);
+    void remove(KCSheet* sheet);
 
     KCRegion namedArea(const QString& name) const;
-    Sheet* sheet(const QString& name) const;
+    KCSheet* sheet(const QString& name) const;
     bool contains(const QString& name) const;
 
     /**

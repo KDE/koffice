@@ -994,7 +994,7 @@
     <format parent="Default" >
      <font size="24" family="Arial" bold="yes" weight="75" />
     </format>
-    <text outStr="Balance Sheet" dataType="Str" >Balance Sheet</text>
+    <text outStr="Balance KCSheet" dataType="Str" >Balance KCSheet</text>
    </cell>
    <row row="22" height="15" >
     <format style-name="Default" />

@@ -25,7 +25,7 @@
 
 #include <QUndoCommand>
 
-class Sheet;
+class KCSheet;
 
 /**
  * \ingroup Commands
@@ -34,13 +34,13 @@ class Sheet;
 class PageLayoutCommand : public QUndoCommand
 {
 public:
-    explicit PageLayoutCommand(Sheet* sheet, const PrintSettings& settings, QUndoCommand* parent = 0);
+    explicit PageLayoutCommand(KCSheet* sheet, const PrintSettings& settings, QUndoCommand* parent = 0);
 
     virtual void redo();
     virtual void undo();
 
 private:
-    Sheet* m_sheet;
+    KCSheet* m_sheet;
     PrintSettings m_settings;
 };
 

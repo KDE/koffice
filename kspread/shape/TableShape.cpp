@@ -41,7 +41,7 @@
 #include <PrintSettings.h>
 #include <KCRegion.h>
 #include <RowColumnFormat.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 #include <SheetView.h>
 #include <StyleManager.h>
 
@@ -55,11 +55,11 @@ public:
     TablePageManager* pageManager;
 
 public:
-    void adjustColumnDimensions(Sheet* sheet, double factor);
-    void adjustRowDimensions(Sheet* sheet, double factor);
+    void adjustColumnDimensions(KCSheet* sheet, double factor);
+    void adjustRowDimensions(KCSheet* sheet, double factor);
 };
 
-void TableShape::Private::adjustColumnDimensions(Sheet* sheet, double factor)
+void TableShape::Private::adjustColumnDimensions(KCSheet* sheet, double factor)
 {
     for (int col = 1; col <= columns; ++col) {
         ColumnFormat* const columnFormat = sheet->nonDefaultColumnFormat(col);
@@ -67,7 +67,7 @@ void TableShape::Private::adjustColumnDimensions(Sheet* sheet, double factor)
     }
 }
 
-void TableShape::Private::adjustRowDimensions(Sheet* sheet, double factor)
+void TableShape::Private::adjustRowDimensions(KCSheet* sheet, double factor)
 {
     for (int row = 1; row <= rows; ++row) {
         RowFormat* const rowFormat = sheet->nonDefaultRowFormat(row);
@@ -93,7 +93,7 @@ TableShape::~TableShape()
     delete d->pageManager;
     delete d->sheetView;
     if (KoShape::userData()) {
-        map()->removeSheet(qobject_cast<Sheet*>(KoShape::userData())); // declare the sheet as deleted
+        map()->removeSheet(qobject_cast<KCSheet*>(KoShape::userData())); // declare the sheet as deleted
     }
     delete d;
 }
@@ -115,7 +115,7 @@ void TableShape::setColumns(int columns)
         return;
     const double factor = (double) d->columns / columns;
     d->columns = columns;
-    d->adjustColumnDimensions(qobject_cast<Sheet*>(KoShape::userData()), factor);
+    d->adjustColumnDimensions(qobject_cast<KCSheet*>(KoShape::userData()), factor);
     setVisibleCellRange(QRect(1, 1, d->columns, d->rows));
     d->sheetView->invalidate();
     if (!d->pageManager) {
@@ -133,7 +133,7 @@ void TableShape::setRows(int rows)
         return;
     const double factor = (double) d->rows / rows;
     d->rows = rows;
-    d->adjustRowDimensions(qobject_cast<Sheet*>(KoShape::userData()), factor);
+    d->adjustRowDimensions(qobject_cast<KCSheet*>(KoShape::userData()), factor);
     setVisibleCellRange(QRect(1, 1, d->columns, d->rows));
     d->sheetView->invalidate();
     if (!d->pageManager) {
@@ -232,7 +232,7 @@ void TableShape::setMap(Map *map)
 {
     if (map == 0)
         return;
-    Sheet* const sheet = map->addNewSheet();
+    KCSheet* const sheet = map->addNewSheet();
     d->sheetView = new SheetView(sheet);
     KoShape::setUserData(sheet);
     d->isMaster = true;
@@ -287,12 +287,12 @@ void TableShape::setSize(const QSizeF& newSize)
 
 Map* TableShape::map() const
 {
-    return qobject_cast<Sheet*>(KoShape::userData())->map();
+    return qobject_cast<KCSheet*>(KoShape::userData())->map();
 }
 
-Sheet* TableShape::sheet() const
+KCSheet* TableShape::sheet() const
 {
-    return qobject_cast<Sheet*>(KoShape::userData());
+    return qobject_cast<KCSheet*>(KoShape::userData());
 }
 
 SheetView* TableShape::sheetView() const
@@ -302,7 +302,7 @@ SheetView* TableShape::sheetView() const
 
 void TableShape::setSheet(const QString& sheetName)
 {
-    Sheet* const sheet = map()->findSheet(sheetName);
+    KCSheet* const sheet = map()->findSheet(sheetName);
     if (! sheet)
         return;
     delete d->sheetView;

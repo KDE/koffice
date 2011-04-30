@@ -23,7 +23,7 @@
 #include "CellStorage.h"
 #include "Map.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include <QAbstractItemModel>
 
@@ -59,9 +59,9 @@ bool BindingManager::removeModel(const QAbstractItemModel* model)
 {
     QList< QPair<QRectF, Binding> > bindings;
     const QRect rect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax));
-    const QList<Sheet*> sheets = d->map->sheetList();
+    const QList<KCSheet*> sheets = d->map->sheetList();
     for (int i = 0; i < sheets.count(); ++i) {
-        Sheet* const sheet = sheets[i];
+        KCSheet* const sheet = sheets[i];
         bindings = sheet->cellStorage()->bindingStorage()->intersectingPairs(KCRegion(rect, sheet));
         for (int j = 0; j < bindings.count(); ++j) {
             if (bindings[j].second.model() == model) {
@@ -82,7 +82,7 @@ bool BindingManager::isCellRegionValid(const QString& regionName) const
 
 void BindingManager::regionChanged(const KCRegion& region)
 {
-    Sheet* sheet;
+    KCSheet* sheet;
     QList< QPair<QRectF, Binding> > bindings;
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
@@ -98,7 +98,7 @@ void BindingManager::updateAllBindings()
 {
     QList< QPair<QRectF, Binding> > bindings;
     const QRect rect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax));
-    const QList<Sheet*> sheets = d->map->sheetList();
+    const QList<KCSheet*> sheets = d->map->sheetList();
     for (int i = 0; i < sheets.count(); ++i) {
         bindings = sheets[i]->cellStorage()->bindingStorage()->intersectingPairs(KCRegion(rect, sheets[i]));
         for (int j = 0; j < bindings.count(); ++j)

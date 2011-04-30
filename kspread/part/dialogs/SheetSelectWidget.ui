@@ -44,7 +44,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
    <item row="1" column="0" >
     <widget class="QRadioButton" name="activeSheetButton" >
      <property name="text" >
-      <string>Active Sheet</string>
+      <string>Active KCSheet</string>
      </property>
      <property name="checked" >
       <bool>true</bool>

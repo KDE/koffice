@@ -27,7 +27,7 @@
 #include "Cell.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "StyleManager.h"
 #include "ValueConverter.h"
 #include "ValueParser.h"
@@ -282,7 +282,7 @@ void ConditionalDialog::init()
     QLinkedList<Conditional>::iterator it1;
     QLinkedList<Conditional>::iterator it2;
 
-    Sheet* sheet = m_selection->activeSheet();
+    KCSheet* sheet = m_selection->activeSheet();
 
     conditionList = Cell(sheet, m_selection->marker()).conditions().conditionList();
     /* this is the list, but only display the conditions common to all selected

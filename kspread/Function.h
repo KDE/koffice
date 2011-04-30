@@ -33,7 +33,7 @@
 
 class QDomElement;
 
-class Sheet;
+class KCSheet;
 class Value;
 class ValueCalc;
 class Function;
@@ -54,7 +54,7 @@ struct FuncExtra {
     Function* function;
     QVector<rangeInfo> ranges;
     QVector<KCRegion> regions;
-    Sheet *sheet;
+    KCSheet *sheet;
     int myrow, mycol;
 };
 

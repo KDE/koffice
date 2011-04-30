@@ -32,7 +32,7 @@
 
 #include "Localization.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Value.h"
 #include "ValueConverter.h"
 

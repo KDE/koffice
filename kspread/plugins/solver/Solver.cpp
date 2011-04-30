@@ -27,7 +27,7 @@
 #include <Formula.h>
 #include <Cell.h>
 #include <part/Doc.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 #include <Value.h>
 #include <part/View.h>
 #include <KCRegion.h>
@@ -82,7 +82,7 @@ void Solver::showDialog()
 
 void Solver::optimize()
 {
-    register Sheet * const sheet = d->view->activeSheet();
+    register KCSheet * const sheet = d->view->activeSheet();
     if (!sheet)
         return;
 

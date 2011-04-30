@@ -30,7 +30,7 @@ class QPainter;
 
 class HeaderFooter;
 class PrintSettings;
-class Sheet;
+class KCSheet;
 
 /**
  * \class SheetPrint
@@ -42,7 +42,7 @@ class Sheet;
 class KSPREAD_EXPORT SheetPrint
 {
 public:
-    explicit SheetPrint(Sheet * sheet = 0);
+    explicit SheetPrint(KCSheet * sheet = 0);
     SheetPrint(const SheetPrint &other);
     ~SheetPrint();
 

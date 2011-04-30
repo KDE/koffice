@@ -24,7 +24,7 @@
 #include <QPoint>
 
 #include "Cell.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCRegion.h"
 
 class WorkbookDamage::Private
@@ -37,14 +37,14 @@ public:
 class SheetDamage::Private
 {
 public:
-    Sheet* sheet;
+    KCSheet* sheet;
     Changes changes;
 };
 
 class CellDamage::Private
 {
 public:
-    Sheet* sheet;
+    KCSheet* sheet;
     KCRegion region;
     Changes changes;
 };
@@ -64,7 +64,7 @@ CellDamage::CellDamage(const Cell& cell, Changes changes)
     d->changes = changes;
 }
 
-CellDamage::CellDamage(Sheet* sheet, const KCRegion& region, Changes changes)
+CellDamage::CellDamage(KCSheet* sheet, const KCRegion& region, Changes changes)
         : d(new Private)
 {
     d->sheet = sheet;
@@ -77,7 +77,7 @@ CellDamage::~CellDamage()
     delete d;
 }
 
-Sheet* CellDamage::sheet() const
+KCSheet* CellDamage::sheet() const
 {
     return d->sheet;
 }
@@ -93,7 +93,7 @@ CellDamage::Changes CellDamage::changes() const
 }
 
 
-SheetDamage::SheetDamage(Sheet* sheet, Changes changes)
+SheetDamage::SheetDamage(KCSheet* sheet, Changes changes)
         : d(new Private)
 {
     d->sheet = sheet;
@@ -105,7 +105,7 @@ SheetDamage::~SheetDamage()
     delete d;
 }
 
-Sheet* SheetDamage::sheet() const
+KCSheet* SheetDamage::sheet() const
 {
     return d->sheet;
 }
@@ -166,7 +166,7 @@ QDebug operator<<(QDebug str, const Damage& d)
     case Damage::NoDamage: return str << "NoDamage";
     case Damage::DamagedDocument:  return str << "Document";
     case Damage::DamagedWorkbook: return str << "Workbook";
-    case Damage::DamagedSheet: return str << "Sheet";
+    case Damage::DamagedSheet: return str << "KCSheet";
     case Damage::DamagedRange: return str << "Range";
     case Damage::DamagedCell: return str << "Cell";
     case Damage::DamagedSelection: return str << "Selection";

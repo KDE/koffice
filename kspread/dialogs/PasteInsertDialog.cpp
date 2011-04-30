@@ -35,7 +35,7 @@
 #include "commands/PasteCommand.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 PasteInsertDialog::PasteInsertDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)

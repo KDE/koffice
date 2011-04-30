@@ -50,7 +50,7 @@
 #include "NamedAreaManager.h"
 #include "PasteStrategy.h"
 #include "SelectionStrategy.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "SheetView.h"
 #include "StyleManager.h"
 
@@ -904,7 +904,7 @@ void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
         return KoInteractionTool::mouseMoveEvent(event);
     }
 
-    Sheet *const sheet = selection()->activeSheet();
+    KCSheet *const sheet = selection()->activeSheet();
 
     // Get info about where the event occurred.
     QPointF position = event->point - offset(); // the shape offset, not the scrolling one.
@@ -978,7 +978,7 @@ void CellToolBase::mouseDoubleClickEvent(KoPointerEvent* event)
 
 void CellToolBase::keyPressEvent(QKeyEvent* event)
 {
-    register Sheet * const sheet = selection()->activeSheet();
+    register KCSheet * const sheet = selection()->activeSheet();
     if (!sheet) {
         return;
     }
@@ -1101,8 +1101,8 @@ void CellToolBase::activate(ToolActivation toolActivation, const QSet<KoShape*> 
             this, SLOT(deleteEditor(bool, bool)));
     connect(selection(), SIGNAL(modified(const KCRegion&)),
             this, SLOT(updateEditor()));
-    connect(selection(), SIGNAL(activeSheetChanged(Sheet*)),
-            this, SLOT(activeSheetChanged(Sheet*)));
+    connect(selection(), SIGNAL(activeSheetChanged(KCSheet*)),
+            this, SLOT(activeSheetChanged(KCSheet*)));
     connect(selection(), SIGNAL(requestFocusEditor()),
             this, SLOT(focusEditorRequested()));
     connect(selection(), SIGNAL(documentReadWriteToggled(bool)),
@@ -1256,7 +1256,7 @@ void CellToolBase::selectionChanged(const KCRegion& region)
     bool rowBreakEnabled = false;
     const KCRegion::ConstIterator end(selection()->constEnd());
     for (KCRegion::ConstIterator it = selection()->constBegin(); it != end; ++it) {
-        const Sheet *const sheet = (*it)->sheet();
+        const KCSheet *const sheet = (*it)->sheet();
         if (!sheet) {
             continue;
         }
@@ -1302,7 +1302,7 @@ void CellToolBase::selectionChanged(const KCRegion& region)
 
 void CellToolBase::scrollToCell(const QPoint &location)
 {
-    Sheet *const sheet = selection()->activeSheet();
+    KCSheet *const sheet = selection()->activeSheet();
 
     // Adjust the maximum accessed column and row for the scrollbars.
     sheetView(sheet)->updateAccessedCellRange(location);
@@ -1444,7 +1444,7 @@ void CellToolBase::deleteEditor(bool saveChanges, bool expandMatrix)
     canvas()->canvasWidget()->setFocus();
 }
 
-void CellToolBase::activeSheetChanged(Sheet* sheet)
+void CellToolBase::activeSheetChanged(KCSheet* sheet)
 {
 #ifdef NDEBUG
     Q_UNUSED(sheet);
@@ -2387,7 +2387,7 @@ void CellToolBase::comment()
 void CellToolBase::clearComment()
 {
     // TODO Stefan: Actually this check belongs into the command!
-    if (selection()->activeSheet()->areaIsEmpty(*selection(), Sheet::Comment))
+    if (selection()->activeSheet()->areaIsEmpty(*selection(), KCSheet::Comment))
         return;
 
     CommentCommand* command = new CommentCommand();
@@ -2408,7 +2408,7 @@ void CellToolBase::conditional()
 void CellToolBase::clearConditionalStyles()
 {
     // TODO Stefan: Actually this check belongs into the command!
-    if (selection()->activeSheet()->areaIsEmpty(*selection(), Sheet::ConditionalCellAttribute))
+    if (selection()->activeSheet()->areaIsEmpty(*selection(), KCSheet::ConditionalCellAttribute))
         return;
 
     CondtionCommand* command = new CondtionCommand();
@@ -2472,7 +2472,7 @@ void CellToolBase::validity()
 void CellToolBase::clearValidity()
 {
     // TODO Stefan: Actually this check belongs into the command!
-    if (selection()->activeSheet()->areaIsEmpty(*selection(), Sheet::Validity))
+    if (selection()->activeSheet()->areaIsEmpty(*selection(), KCSheet::Validity))
         return;
 
     ValidityCommand* command = new ValidityCommand();
@@ -3068,7 +3068,7 @@ void CellToolBase::initFindReplace()
             this, SLOT(findNext()));
 
     bool bck = d->findOptions & KFind::FindBackwards;
-    Sheet* currentSheet = d->searchInSheets.currentSheet;
+    KCSheet* currentSheet = d->searchInSheets.currentSheet;
 
     QRect region = (d->findOptions & KFind::SelectedText)
                    ? selection()->lastRange()
@@ -3169,7 +3169,7 @@ Cell CellToolBase::findNextCell()
     // cellStorage()->firstInRow / cellStorage()->nextInRow would be faster at doing that,
     // but it doesn't seem to be easy to combine it with 'start a column d->find.x()'...
 
-    Sheet* sheet = d->searchInSheets.currentSheet;
+    KCSheet* sheet = d->searchInSheets.currentSheet;
     Cell cell;
     bool forw = !(d->findOptions & KFind::FindBackwards);
     int col = d->findPos.x();
@@ -3373,7 +3373,7 @@ void CellToolBase::listChoosePopupMenu()
     delete d->popupListChoose;
     d->popupListChoose = new QMenu();
 
-    const Sheet *const sheet = selection()->activeSheet();
+    const KCSheet *const sheet = selection()->activeSheet();
     const Cell cursorCell(sheet, selection()->cursor());
     const QString text = cursorCell.userInput();
     const CellStorage *const storage = sheet->cellStorage();

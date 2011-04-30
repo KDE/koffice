@@ -22,7 +22,7 @@
 #include "Cell.h"
 #include "CellStorage.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCRegion.h"
 #include "ValueStorage.h"
 
@@ -41,7 +41,7 @@ public:
     int index;
     KCRegion region;
     Cell currentCell;
-    Sheet* currentSheet;
+    KCSheet* currentSheet;
     ValueStorage storage;
     Sonnet::Speller speller;
     Sonnet::Dialog* dialog;

@@ -24,7 +24,7 @@
 #include "CellStorage.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 // era: encode references absolutely
 QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
@@ -45,7 +45,7 @@ QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
 
     const KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
-        Sheet *const sheet = (*it)->sheet();
+        KCSheet *const sheet = (*it)->sheet();
         const QRect range = (*it)->rect();
         CellStorage *const storage = sheet->cellStorage();
 
@@ -187,7 +187,7 @@ QDomDocument CopyCommand::saveAsHtml(const KCRegion &region)
 
     const KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
-        Sheet *const sheet = (*it)->sheet();
+        KCSheet *const sheet = (*it)->sheet();
         const QRect range = (*it)->rect();
 
         // TODO

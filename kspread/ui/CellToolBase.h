@@ -118,11 +118,11 @@ protected:
     virtual QPointF canvasOffset() const = 0;
     virtual int maxCol() const = 0;
     virtual int maxRow() const = 0;
-    virtual SheetView* sheetView(const Sheet* sheet) const = 0;
+    virtual SheetView* sheetView(const KCSheet* sheet) const = 0;
 
 protected Q_SLOTS:
     void selectionChanged(const KCRegion&);
-    void activeSheetChanged(Sheet*);
+    void activeSheetChanged(KCSheet*);
     void updateEditor();
     void focusEditorRequested();
     void documentReadWriteToggled(bool enable);

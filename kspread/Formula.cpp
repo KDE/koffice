@@ -26,7 +26,7 @@
 #include "CellStorage.h"
 #include "Function.h"
 #include "FunctionRepository.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Map.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
@@ -111,7 +111,7 @@ class Formula::Private : public QSharedData
 {
 public:
     Cell cell;
-    Sheet *sheet;
+    KCSheet *sheet;
     mutable bool dirty;
     mutable bool valid;
     QString expression;
@@ -435,7 +435,7 @@ bool KSpread::isIdentifier(const QChar &ch)
 
 // Constructor
 
-Formula::Formula(Sheet *sheet, const Cell& cell)
+Formula::Formula(KCSheet *sheet, const Cell& cell)
         : d(new Private)
 {
     d->cell = cell;
@@ -443,7 +443,7 @@ Formula::Formula(Sheet *sheet, const Cell& cell)
     clear();
 }
 
-Formula::Formula(Sheet *sheet)
+Formula::Formula(KCSheet *sheet)
         : d(new Private)
 {
     d->cell = Cell();
@@ -481,7 +481,7 @@ const Cell& Formula::cell() const
     return d->cell;
 }
 
-Sheet* Formula::sheet() const
+KCSheet* Formula::sheet() const
 {
     return d->sheet;
 }

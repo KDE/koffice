@@ -29,7 +29,7 @@
 #include <kdebug.h>
 
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 
 MapAdaptor::MapAdaptor(Map* map)
@@ -41,7 +41,7 @@ MapAdaptor::MapAdaptor(Map* map)
 
 QString MapAdaptor::sheet(const QString& name)
 {
-    Sheet* t = m_map->findSheet(name);
+    KCSheet* t = m_map->findSheet(name);
     if (!t)
         return QString();
 
@@ -50,7 +50,7 @@ QString MapAdaptor::sheet(const QString& name)
 
 QString MapAdaptor::sheetByIndex(int index)
 {
-    Sheet* t = m_map->sheetList().at(index);
+    KCSheet* t = m_map->sheetList().at(index);
     if (!t) {
         kDebug(36001) << "+++++ No table found at index" << index;
         return QString();
@@ -69,7 +69,7 @@ int MapAdaptor::sheetCount() const
 QStringList MapAdaptor::sheetNames() const
 {
     QStringList names;
-    foreach(Sheet* sheet, m_map->sheetList()) {
+    foreach(KCSheet* sheet, m_map->sheetList()) {
         names.append(sheet->objectName());
     }
     return names;
@@ -78,7 +78,7 @@ QStringList MapAdaptor::sheetNames() const
 QStringList MapAdaptor::sheets()
 {
     QStringList t;
-    foreach(Sheet* sheet, m_map->sheetList()) {
+    foreach(KCSheet* sheet, m_map->sheetList()) {
         t.append(sheet->objectName());
     }
     return t;
@@ -89,7 +89,7 @@ QString MapAdaptor::insertSheet(const QString& name)
     if (m_map->findSheet(name))
         return sheet(name);
 
-    Sheet* t = m_map->addNewSheet();
+    KCSheet* t = m_map->addNewSheet();
     t->setSheetName(name);
 
     return sheet(name);
@@ -106,7 +106,7 @@ QString MapAdaptor::insertSheet(const QString& name)
 //     if ( fun[ len - 1 ] != ')' || fun[ len - 2 ] != '(' )
 //         return false;
 //
-//     Sheet* t = m_map->findSheet( fun.left( len - 2 ).data() );
+//     KCSheet* t = m_map->findSheet( fun.left( len - 2 ).data() );
 //     if ( !t )
 //         return false;
 //

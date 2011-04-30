@@ -26,7 +26,7 @@
 
 class Cell;
 class Map;
-class Sheet;
+class KCSheet;
 
 /**
  * \class RecalcManager
@@ -76,7 +76,7 @@ public:
      *
      * \see recalc()
      */
-    void recalcSheet(Sheet* const sheet);
+    void recalcSheet(KCSheet* const sheet);
 
     /**
      * Recalculates the whole map.
@@ -101,12 +101,12 @@ public Q_SLOTS:
     /**
      * Called after a sheet was added.
      */
-    void addSheet(Sheet *sheet);
+    void addSheet(KCSheet *sheet);
 
     /**
      * Called after a sheet was removed.
      */
-    void removeSheet(Sheet *sheet);
+    void removeSheet(KCSheet *sheet);
 
 protected:
     /**

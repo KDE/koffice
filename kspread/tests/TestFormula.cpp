@@ -125,14 +125,14 @@ void TestFormula::testTokenizer()
     CHECK_TOKENIZE("A1", "c");
     CHECK_TOKENIZE("Sheet1!A1", "c");
     CHECK_TOKENIZE("'Sheet1'!A1", "c");
-    CHECK_TOKENIZE("'Sheet One'!A1", "c");
+    CHECK_TOKENIZE("'KCSheet One'!A1", "c");
     CHECK_TOKENIZE("2006!A1", "c");
     CHECK_TOKENIZE("2006bak!A1", "c");
     CHECK_TOKENIZE("2006bak2!A1", "c");
     CHECK_TOKENIZE("'2006bak2'!A1", "c");
     CHECK_TOKENIZE("A1:B100", "r");
     CHECK_TOKENIZE("Sheet1!A1:B100", "r");
-    CHECK_TOKENIZE("'Sheet One'!A1:B100", "r");
+    CHECK_TOKENIZE("'KCSheet One'!A1:B100", "r");
     CHECK_TOKENIZE("SIN", "x");
 
     // log2 and log10 are cell references and function identifiers

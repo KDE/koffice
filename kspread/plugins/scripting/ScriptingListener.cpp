@@ -24,7 +24,7 @@
 
 #include <Binding.h>
 #include <CellStorage.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 
 #include <QAbstractItemModel>
 
@@ -33,11 +33,11 @@
 class ScriptingCellListener::Private
 {
 public:
-    Sheet* sheet;
+    KCSheet* sheet;
     Binding* cellbinding;
 };
 
-ScriptingCellListener::ScriptingCellListener(Sheet *sheet, const QRect& area)
+ScriptingCellListener::ScriptingCellListener(KCSheet *sheet, const QRect& area)
         : QObject()
         , d(new Private())
 {

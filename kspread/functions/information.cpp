@@ -34,7 +34,7 @@
 #include "FunctionModuleRegistry.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCRegion.h"
 #include "Cell.h"
 #include "Formula.h"

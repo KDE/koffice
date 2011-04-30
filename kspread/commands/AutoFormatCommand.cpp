@@ -20,7 +20,7 @@
 #include "AutoFormatCommand.h"
 
 #include "CellStorage.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 #include "KCRegion.h"
 

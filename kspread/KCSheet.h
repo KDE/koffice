@@ -73,7 +73,7 @@ class OdfSavingContext;
 class PrintSettings;
 class KCRegion;
 class RowFormat;
-class Sheet;
+class KCSheet;
 class SheetPrint;
 class KCStyle;
 class StyleStorage;
@@ -86,7 +86,7 @@ template<typename T> class IntervalMap;
 /**
  * A sheet contains several cells.
  */
-class KSPREAD_EXPORT Sheet : public KoShapeUserData, public KoShapeControllerBase,
+class KSPREAD_EXPORT KCSheet : public KoShapeUserData, public KoShapeControllerBase,
         public ProtectableObject
 {
     Q_OBJECT
@@ -101,18 +101,18 @@ public:
     /**
      * Creates a sheet in \p map with the name \p sheetName.
      */
-    Sheet(Map* map, const QString& sheetName);
+    KCSheet(Map* map, const QString& sheetName);
 
     /**
      * Copy constructor.
      * Creates a sheet with the contents and the settings of \p other.
      */
-    Sheet(const Sheet& other);
+    KCSheet(const KCSheet& other);
 
     /**
      * Destructor.
      */
-    ~Sheet();
+    ~KCSheet();
 
     /**
      * \return a model for this sheet
@@ -263,7 +263,7 @@ public:
      * @return a flag that indicates whether the sheet should paint the page breaks.
      *
      * @see setShowPageBorders
-     * @see Sheet::Private::showPageBorders
+     * @see KCSheet::Private::showPageBorders
      */
     bool isShowPageBorders() const;
 
@@ -271,7 +271,7 @@ public:
      * Turns the page break lines on or off.
      *
      * @see isShowPageBorders
-     * @see Sheet::Private::showPageBorders
+     * @see KCSheet::Private::showPageBorders
      */
     void setShowPageBorders(bool _b);
 
@@ -816,14 +816,14 @@ signals:
      * Emitted, if a \p shape was added.
      * \param sheet this sheet (for the View to determine, if it's the active one)
      */
-    void shapeAdded(Sheet *sheet, KoShape *shape);
+    void shapeAdded(KCSheet *sheet, KoShape *shape);
 
     /**
      * \ingroup Embedding
      * Emitted, if a \p shape was removed.
      * \param sheet this sheet (for the View to determine, if it's the active one)
      */
-    void shapeRemoved(Sheet *sheet, KoShape *shape);
+    void shapeRemoved(KCSheet *sheet, KoShape *shape);
 
 protected:
     /**
@@ -969,7 +969,7 @@ private:
     void checkContentDirection(QString const & name);
 
     // disable assignment operator
-    void operator=(const Sheet& other);
+    void operator=(const KCSheet& other);
 
     class Private;
     Private * const d;

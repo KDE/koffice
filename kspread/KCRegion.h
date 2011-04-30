@@ -38,7 +38,7 @@ inline uint qHash(const QPoint& point)
 
 class Cell;
 class Map;
-class Sheet;
+class KCSheet;
 
 /**
  * \class KCRegion
@@ -65,7 +65,7 @@ public:
      * @param point the point's location
      * @param sheet the sheet the point belongs to
      */
-    explicit KCRegion(const QPoint& point, Sheet* sheet = 0);
+    explicit KCRegion(const QPoint& point, KCSheet* sheet = 0);
 
     /**
      * Constructor.
@@ -73,7 +73,7 @@ public:
      * @param range the range's location
      * @param sheet the sheet the range belongs to
      */
-    explicit KCRegion(const QRect& range, Sheet* sheet = 0);
+    explicit KCRegion(const QRect& range, KCSheet* sheet = 0);
 
     /**
      * Constructor.
@@ -82,7 +82,7 @@ public:
      * @param map used to determine the sheet, if it's named in the string
      * @param sheet the fallback sheet, if \p expression does not contain one
      */
-    explicit KCRegion(const QString& expression, const Map* map = 0, Sheet* sheet = 0);
+    explicit KCRegion(const QString& expression, const Map* map = 0, KCSheet* sheet = 0);
 
     /**
      * Copy Constructor.
@@ -98,7 +98,7 @@ public:
      * @param row the row of the point
      * @param sheet the sheet the point belongs to
      */
-    KCRegion(int col, int row, Sheet* sheet = 0);
+    KCRegion(int col, int row, KCSheet* sheet = 0);
 
     /**
      * Constructor.
@@ -109,7 +109,7 @@ public:
      * @param height the height of the range
      * @param sheet the sheet the range belongs to
      */
-    KCRegion(int col, int row, int width, int height, Sheet* sheet = 0);
+    KCRegion(int col, int row, int width, int height, KCSheet* sheet = 0);
 
     /**
      * Destructor.
@@ -126,14 +126,14 @@ public:
      * @param originSheet The name is created relative to this sheet.
      * @return the name of the region (e.g. "A1:A2")
      */
-    QString name(Sheet* originSheet = 0) const;
+    QString name(KCSheet* originSheet = 0) const;
 
     /**
      * @param sRegion will be modified, if a valid sheet was found. The sheetname
      * will be removed
      * @return sheet named in the @p sRegion or null
      */
-    Sheet* filterSheetName(QString& sRegion);
+    KCSheet* filterSheetName(QString& sRegion);
 
 
 
@@ -216,7 +216,7 @@ public:
      * @param sheet the sheet the point belongs to
      * @return @c true, if the region contains the point @p point
      */
-    bool contains(const QPoint& point, Sheet* sheet = 0) const;
+    bool contains(const QPoint& point, KCSheet* sheet = 0) const;
 
 
 
@@ -226,21 +226,21 @@ public:
      * @param point the point's location
      * @param sheet the sheet the point belongs to
      */
-    Element* add(const QPoint& point, Sheet* sheet = 0);
+    Element* add(const QPoint& point, KCSheet* sheet = 0);
 
     /**
      * Adds the range @p range to this region.
      * @param range the range's location
      * @param sheet the sheet the range belongs to
      */
-    Element* add(const QRect& range, Sheet* sheet = 0);
+    Element* add(const QRect& range, KCSheet* sheet = 0);
 
     /**
      * Adds the region @p region to this region.
      * @param region the region to be added
      * @param sheet the fallback sheet used, if an element has no sheet set
      */
-    Element* add(const KCRegion& region, Sheet* sheet = 0);
+    Element* add(const KCRegion& region, KCSheet* sheet = 0);
 
     /* TODO Stefan #3: Improve! */
     /**
@@ -248,14 +248,14 @@ public:
      * @param point the point's location
      * @param sheet the sheet the point belongs to
      */
-    void sub(const QPoint& point, Sheet* sheet);
+    void sub(const QPoint& point, KCSheet* sheet);
 
     /**
      * Substracts the range @p range from this region.
      * @param range the range's location
      * @param sheet the sheet the range belongs to
      */
-    void sub(const QRect& range, Sheet* sheet);
+    void sub(const QRect& range, KCSheet* sheet);
 
     /**
      * Substracts the region @p region from this region.
@@ -279,7 +279,7 @@ public:
      * @param point the point's location
      * @param sheet the sheet the point belongs to
      */
-    virtual Element* eor(const QPoint& point, Sheet* sheet = 0);
+    virtual Element* eor(const QPoint& point, KCSheet* sheet = 0);
 
     /**
      * Deletes all elements of the region. The result is an empty region.
@@ -289,8 +289,8 @@ public:
 
     QRect firstRange() const;
     QRect lastRange() const;
-    Sheet* firstSheet() const;
-    Sheet* lastSheet() const;
+    KCSheet* firstSheet() const;
+    KCSheet* lastSheet() const;
 
     QRect boundingRect() const;
 
@@ -354,7 +354,7 @@ protected:
      * @return the added point, a null pointer, if @p point is not
      * valid or the element containing @p point
      */
-    Element* insert(int index, const QPoint& point, Sheet* sheet, bool multi = true);
+    Element* insert(int index, const QPoint& point, KCSheet* sheet, bool multi = true);
 
     /**
      * @param index the index of the element in whose front the new range
@@ -365,7 +365,7 @@ protected:
      * @return the added range, a null pointer, if @p range is not
      * valid or the element containing @p range
      */
-    Element* insert(int index, const QRect& range, Sheet* sheet, bool multi = true);
+    Element* insert(int index, const QRect& range, KCSheet* sheet, bool multi = true);
 
     /**
      * @internal used to create derived Points
@@ -451,7 +451,7 @@ public:
         return false;
     }
 
-    virtual QString name(Sheet* = 0) const {
+    virtual QString name(KCSheet* = 0) const {
         return QString("");
     }
     virtual QRect rect() const {
@@ -477,10 +477,10 @@ public:
         return false;
     }
 
-    Sheet* sheet() const {
+    KCSheet* sheet() const {
         return m_sheet;
     }
-    void setSheet(Sheet* sheet) {
+    void setSheet(KCSheet* sheet) {
         m_sheet = sheet;
     }
 
@@ -489,7 +489,7 @@ protected:
         Elaborate, if this pointer could be avoided by QDict or whatever in
         KCRegion.
     */
-    Sheet* m_sheet;
+    KCSheet* m_sheet;
 };
 
 
@@ -535,7 +535,7 @@ public:
     virtual bool contains(const QPoint&) const;
     virtual bool contains(const QRect&) const;
 
-    virtual QString name(Sheet* originSheet = 0) const;
+    virtual QString name(KCSheet* originSheet = 0) const;
 
     virtual QRect rect() const {
         return QRect(m_point, m_point);
@@ -611,7 +611,7 @@ public:
     virtual bool contains(const QPoint&) const;
     virtual bool contains(const QRect&) const;
 
-    virtual QString name(Sheet* originSheet = 0) const;
+    virtual QString name(KCSheet* originSheet = 0) const;
 
     virtual QRect rect() const {
         return m_range;

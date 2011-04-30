@@ -28,12 +28,12 @@
 
 #include "kspread_export.h"
 
-class Sheet;
+class KCSheet;
 
 class KSPREAD_EXPORT HeaderFooter
 {
 public:
-    explicit HeaderFooter(Sheet* sheet);
+    explicit HeaderFooter(KCSheet* sheet);
     ~HeaderFooter();
 
     QString headLeft(int _p, const QString &_t)const {
@@ -110,11 +110,11 @@ private:
      * returns the modified one.
      *
      * @param _page is the page number for which the heading is produced.
-     * @param _Sheet is the name of the Sheet for which we generate the headings.
+     * @param _Sheet is the name of the KCSheet for which we generate the headings.
      */
     QString completeHeading(const QString &_data, int _page, const QString &_sheet) const ;
 
-    Sheet *m_pSheet;
+    KCSheet *m_pSheet;
 
     /**
      * Header string. The string may contains makros. That means

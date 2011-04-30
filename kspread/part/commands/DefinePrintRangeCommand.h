@@ -26,7 +26,7 @@
 
 #include "commands/AbstractRegionCommand.h"
 
-class Sheet;
+class KCSheet;
 
 /**
  * \ingroup Commands

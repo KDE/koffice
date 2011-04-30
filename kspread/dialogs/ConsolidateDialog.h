@@ -32,7 +32,7 @@
 #include <KDialog>
 
 class Selection;
-class Sheet;
+class KCSheet;
 
 /**
  * \ingroup UI

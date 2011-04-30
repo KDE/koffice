@@ -22,7 +22,7 @@
 
 #include <QAbstractTableModel>
 
-class Sheet;
+class KCSheet;
 
 class ReadOnlyTableModel : public QAbstractTableModel
 {
@@ -30,7 +30,7 @@ public:
     /**
      * Constructor.
      */
-    explicit ReadOnlyTableModel(Sheet* sheet, int columns = 0, int rows = 0);
+    explicit ReadOnlyTableModel(KCSheet* sheet, int columns = 0, int rows = 0);
 
     /**
      * Destructor.
@@ -45,7 +45,7 @@ public:
     virtual QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
 
 protected:
-    Sheet* sheet() const;
+    KCSheet* sheet() const;
     const QSize& size() const;
 
 private:

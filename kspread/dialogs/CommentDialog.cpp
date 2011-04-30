@@ -33,7 +33,7 @@
 //KSpread includes
 #include "Cell.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include "commands/CommentCommand.h"
 

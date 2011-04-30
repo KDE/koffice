@@ -32,7 +32,7 @@ class QRadioButton;
 class KDoubleNumInput;
 
 class Selection;
-class Sheet;
+class KCSheet;
 
 /**
  * \ingroup UI
@@ -45,7 +45,7 @@ public:
 
     SeriesDialog(QWidget* parent, Selection* selection);
 
-    Sheet* sheet;
+    KCSheet* sheet;
 
 public slots:
     virtual void slotButtonClicked(int button);

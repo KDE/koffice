@@ -28,12 +28,12 @@
 #include "PrintSettings.h"
 #include "kspread_limits.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include <KDebug>
 #include <KMessageBox>
 
-SheetPrint::SheetPrint(Sheet *sheet)
+SheetPrint::SheetPrint(KCSheet *sheet)
         : d(new Private(this))
 {
     d->m_pSheet = sheet;

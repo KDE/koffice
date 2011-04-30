@@ -39,7 +39,7 @@ class KoOasisSettings;
 class KoResourceManager;
 
 class Map;
-class Sheet;
+class KCSheet;
 class SheetAccessModel;
 
 class KSPREAD_EXPORT DocBase : public KoDocument
@@ -129,7 +129,7 @@ protected:
     virtual KoView* createViewInstance(QWidget* parent);
 
     virtual void saveOdfViewSettings(KoXmlWriter& settingsWriter);
-    virtual void saveOdfViewSheetSettings(Sheet *sheet, KoXmlWriter& settingsWriter);
+    virtual void saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter& settingsWriter);
 private:
     Q_DISABLE_COPY(DocBase)
 

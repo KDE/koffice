@@ -23,7 +23,7 @@
 #include "HeaderFooter.h"
 
 #include "part/Doc.h" // FIXME detach from part
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "SheetPrint.h"
 
 #include <KDebug>
@@ -46,7 +46,7 @@
     } while(0)
 
 
-HeaderFooter::HeaderFooter(Sheet *sheet)
+HeaderFooter::HeaderFooter(KCSheet *sheet)
         : m_pSheet(sheet)
 {
 }

@@ -40,7 +40,7 @@
 #include "Global.h"
 #include "Map.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "SheetPrint.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
@@ -56,7 +56,7 @@ using namespace std;
 class RowFormat::Private
 {
 public:
-    Sheet*      sheet;
+    KCSheet*      sheet;
     int         row;
     double      height;
     bool        hide;
@@ -93,7 +93,7 @@ RowFormat::~RowFormat()
     delete d;
 }
 
-void RowFormat::setSheet(Sheet* sheet)
+void RowFormat::setSheet(KCSheet* sheet)
 {
     d->sheet = sheet;
 }
@@ -305,7 +305,7 @@ bool RowFormat::operator==(const RowFormat& other) const
 class ColumnFormat::Private
 {
 public:
-    Sheet*          sheet;
+    KCSheet*          sheet;
     int             column;
     double          width;
     bool            hide;
@@ -342,7 +342,7 @@ ColumnFormat::~ColumnFormat()
     delete d;
 }
 
-void ColumnFormat::setSheet(Sheet* sheet)
+void ColumnFormat::setSheet(KCSheet* sheet)
 {
     d->sheet = sheet;
 }

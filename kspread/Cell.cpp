@@ -61,7 +61,7 @@
 #include "OdfSavingContext.h"
 #include "RowColumnFormat.h"
 #include "ShapeApplicationData.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
 #include "Util.h"
@@ -100,7 +100,7 @@ class Cell::Private : public QSharedData
 public:
     Private() : sheet(0), column(0), row(0) {}
 
-    Sheet*  sheet;
+    KCSheet*  sheet;
     uint    column  : 17; // KS_colMax
     uint    row     : 17; // KS_rowMax
 };
@@ -111,24 +111,24 @@ Cell::Cell()
 {
 }
 
-Cell::Cell(const Sheet* sheet, int col, int row)
+Cell::Cell(const KCSheet* sheet, int col, int row)
         : d(new Private)
 {
     Q_ASSERT(sheet != 0);
     Q_ASSERT(1 <= col && col <= KS_colMax);
     Q_ASSERT(1 <= row && row <= KS_rowMax);
-    d->sheet = const_cast<Sheet*>(sheet);
+    d->sheet = const_cast<KCSheet*>(sheet);
     d->column = col;
     d->row = row;
 }
 
-Cell::Cell(const Sheet* sheet, const QPoint& pos)
+Cell::Cell(const KCSheet* sheet, const QPoint& pos)
         : d(new Private)
 {
     Q_ASSERT(sheet != 0);
     Q_ASSERT(1 <= pos.x() && pos.x() <= KS_colMax);
     Q_ASSERT(1 <= pos.y() && pos.y() <= KS_rowMax);
-    d->sheet = const_cast<Sheet*>(sheet);
+    d->sheet = const_cast<KCSheet*>(sheet);
     d->column = pos.x();
     d->row = pos.y();
 }
@@ -143,7 +143,7 @@ Cell::~Cell()
 }
 
 // Return the sheet that this cell belongs to.
-Sheet* Cell::sheet() const
+KCSheet* Cell::sheet() const
 {
     Q_ASSERT(!isNull());
     return d->sheet;
@@ -270,7 +270,7 @@ QString Cell::fullName() const
 // Return the full name of any cell given a sheet and (col, row).
 //
 // static
-QString Cell::fullName(const Sheet* s, int col, int row)
+QString Cell::fullName(const KCSheet* s, int col, int row)
 {
     return s->sheetName() + '!' + name(col, row);
 }
@@ -1142,7 +1142,7 @@ bool Cell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
                 }
                 // otherwise we just stop here to process the adjacent
                 // cell in the next iteration of the outer loop
-                // (in Sheet::saveOdfCells)
+                // (in KCSheet::saveOdfCells)
                 break;
             }
 

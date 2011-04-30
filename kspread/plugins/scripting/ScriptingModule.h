@@ -31,7 +31,7 @@
 class Doc;
 class View;
 class ViewAdaptor;
-//class Sheet;
+//class KCSheet;
 class SheetAdaptor;
 
 /**

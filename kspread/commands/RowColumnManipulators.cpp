@@ -32,7 +32,7 @@
 #include "Damages.h"
 #include "Map.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Value.h"
 
 /***************************************************************************
@@ -237,7 +237,7 @@ AdjustColumnRowManipulator::~AdjustColumnRowManipulator()
 
 bool AdjustColumnRowManipulator::process(Element* element)
 {
-    Sheet* sheet = m_sheet; // TODO Stefan: element->sheet();
+    KCSheet* sheet = m_sheet; // TODO Stefan: element->sheet();
     if (m_sheet && sheet != m_sheet) {
         return true;
     }

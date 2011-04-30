@@ -22,18 +22,18 @@
 #include "PrintSettings.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 class PageManager::Private
 {
 public:
-    Sheet* sheet;
+    KCSheet* sheet;
     QList<QRect> pages; // page number to cell range
     PrintSettings settings;
 };
 
 
-PageManager::PageManager(Sheet* sheet)
+PageManager::PageManager(KCSheet* sheet)
         : d(new Private)
 {
     d->sheet = sheet;
@@ -47,7 +47,7 @@ PageManager::~PageManager()
 
 void PageManager::layoutPages()
 {
-    const Sheet* sheet = d->sheet;
+    const KCSheet* sheet = d->sheet;
     const PrintSettings settings = d->settings;
     d->pages.clear();
     clearPages();
@@ -214,7 +214,7 @@ QSizeF PageManager::size(int page) const
     return QSizeF(d->settings.printWidth() + 0.5, d->settings.printHeight() + 0.5); // FIXME
 }
 
-Sheet* PageManager::sheet() const
+KCSheet* PageManager::sheet() const
 {
     return d->sheet;
 }

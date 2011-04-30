@@ -61,7 +61,7 @@
 #include "Headers.h"
 #include "Map.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "View.h"
 
 // commands
@@ -238,7 +238,7 @@ void Canvas::paintEvent(QPaintEvent *event)
     if (m_doc->map()->isLoading() || isViewLoading())
         return;
 
-    register Sheet * const sheet = activeSheet();
+    register KCSheet * const sheet = activeSheet();
     if (!sheet)
         return;
 
@@ -296,7 +296,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
 {
     const QMimeData *mimeData = event->mimeData();
     QPointF eventPos = event->pos();
-    register Sheet * const sheet = activeSheet();
+    register KCSheet * const sheet = activeSheet();
     if (!sheet) {
         return;
     }
@@ -382,8 +382,8 @@ void Canvas::dropEvent(QDropEvent *event)
 {
     const QMimeData *mimeData = event->mimeData();
     QPointF eventPos = event->pos();
-    register Sheet * const sheet = activeSheet();
-    // FIXME Sheet protection: Not all cells have to be protected.
+    register KCSheet * const sheet = activeSheet();
+    // FIXME KCSheet protection: Not all cells have to be protected.
     if (!sheet || sheet->isProtected()) {
         return;
     }
@@ -457,7 +457,7 @@ KoZoomHandler* Canvas::zoomHandler() const
     return view()->zoomHandler();
 }
 
-Sheet* Canvas::activeSheet() const
+KCSheet* Canvas::activeSheet() const
 {
     return view()->activeSheet();
 }
@@ -467,7 +467,7 @@ bool Canvas::isViewLoading() const
     return view()->isLoading();
 }
 
-//   SheetView* Canvas::sheetView(const Sheet* sheet) const
+//   SheetView* Canvas::sheetView(const KCSheet* sheet) const
 //   {
 //       return view()->sheetView(sheet);
 //   }
@@ -499,7 +499,7 @@ void Canvas::disableAutoScroll()
 
 QRect Canvas::viewToCellCoordinates(const QRectF &viewRect) const
 {
-    register Sheet * const sheet = activeSheet();
+    register KCSheet * const sheet = activeSheet();
     if (!sheet)
         return QRect();
 
@@ -565,7 +565,7 @@ void Canvas::updateInputMethodInfo()
 
 void Canvas::validateSelection()
 {
-    register Sheet * const sheet = activeSheet();
+    register KCSheet * const sheet = activeSheet();
     if (!sheet)
         return;
 #if 0
@@ -621,7 +621,7 @@ XXX TODO
 
 QRectF Canvas::cellCoordinatesToView(const QRect &cellRange) const
 {
-    register Sheet * const sheet = activeSheet();
+    register KCSheet * const sheet = activeSheet();
     if (!sheet)
         return QRectF();
 
@@ -648,7 +648,7 @@ void Canvas::keyPressed(QKeyEvent* event)
 
 void Canvas::showToolTip(const QPoint &p)
 {
-    register Sheet * const sheet = activeSheet();
+    register KCSheet * const sheet = activeSheet();
     if (!sheet)
         return;
 

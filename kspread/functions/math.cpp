@@ -39,7 +39,7 @@
 
 // needed for SUBTOTAL:
 #include "Cell.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "RowColumnFormat.h"
 
 // needed by MDETERM and MINVERSE
@@ -1192,7 +1192,7 @@ Value func_munit(valVector args, ValueCalc* calc, FuncExtra*)
 }
 
 // Function: SUBTOTAL
-// This function requires access to the Sheet and so on, because
+// This function requires access to the KCSheet and so on, because
 // it needs to check whether cells contain the SUBTOTAL formula or not ...
 // Cells containing a SUBTOTAL formula must be ignored.
 Value func_subtotal(valVector args, ValueCalc *calc, FuncExtra *e)
@@ -1347,7 +1347,7 @@ Value func_multipleOP (valVector args, ValueCalc *calc, FuncExtra *)
   kDebug() <<"Old values: Col:" << oldCol <<", Row:" << oldRow;
 
   Cell * cell;
-  Sheet * sheet = ((Interpreter *) context.interpreter() )->sheet();
+  KCSheet * sheet = ((Interpreter *) context.interpreter() )->sheet();
 
   Point point( extra[1]->stringValue() );
   Point point2( extra[3]->stringValue() );

@@ -35,7 +35,7 @@
 
 class KLocale;
 
-class Sheet;
+class KCSheet;
 class Value;
 typedef QHash<Cell, Cell> CellIndirection;
 
@@ -303,12 +303,12 @@ public:
     /**
      * Creates a formula. It must be owned by a sheet.
      */
-    Formula(Sheet *sheet, const Cell& cell);
+    Formula(KCSheet *sheet, const Cell& cell);
 
     /**
      * Creates a formula. It must be owned by a sheet.
      */
-    explicit Formula(Sheet *sheet);
+    explicit Formula(KCSheet *sheet);
 
     /**
      * Creates a formula that is not owned by any sheet.
@@ -334,7 +334,7 @@ public:
     /**
      * Returns the cell which owns this formula.
      */
-    Sheet* sheet() const;
+    KCSheet* sheet() const;
     /**
      * Returns the cell which owns this formula.
      */

@@ -27,7 +27,7 @@
 
 #include "CellStorage.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Value.h"
 
 class Binding::Private : public QSharedData
@@ -86,7 +86,7 @@ void Binding::update(const KCRegion& region)
     KCRegion changedRegion;
     const QPoint offset = d->model->region().firstRange().topLeft();
     const QRect range = d->model->region().firstRange();
-    const Sheet* sheet = d->model->region().firstSheet();
+    const KCSheet* sheet = d->model->region().firstSheet();
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
         if (sheet != (*it)->sheet())
@@ -194,7 +194,7 @@ QVariant BindingModel::data(const QModelIndex& index, int role) const
     if ((m_region.isEmpty()) || (role != Qt::EditRole && role != Qt::DisplayRole))
         return QVariant();
     const QPoint offset = m_region.firstRange().topLeft();
-    const Sheet* sheet = m_region.firstSheet();
+    const KCSheet* sheet = m_region.firstSheet();
     const Value value = sheet->cellStorage()->value(offset.x() + index.column(),
                         offset.y() + index.row());
     // KoChart::Value is either:
@@ -242,7 +242,7 @@ QVariant BindingModel::headerData(int section, Qt::Orientation orientation, int 
     const QPoint offset = m_region.firstRange().topLeft();
     const int col = (orientation == Qt::Vertical) ? offset.x() : offset.x() + section;
     const int row = (orientation == Qt::Vertical) ? offset.y() + section : offset.y();
-    const Sheet* sheet = m_region.firstSheet();
+    const KCSheet* sheet = m_region.firstSheet();
     const Value value = sheet->cellStorage()->value(col, row);
     return value.asVariant();
 }

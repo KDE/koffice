@@ -28,7 +28,7 @@
 #include <CellStorage.h>
 #include <Formula.h>
 #include <Map.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 
 #include "TestKspreadCommon.h"
 
@@ -130,7 +130,7 @@ void TestStatisticalFunctions::initTestCase()
     FunctionModuleRegistry::instance()->loadFunctionModules();
     m_map = new Map(0 /*no Doc*/);
     m_map->addNewSheet();
-    Sheet* sheet = m_map->sheet(0);
+    KCSheet* sheet = m_map->sheet(0);
     CellStorage* storage = sheet->cellStorage();
 
     //

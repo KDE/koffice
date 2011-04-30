@@ -71,7 +71,7 @@
 #include "Doc.h"
 #include "kspread_limits.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "View.h"
 
 #include "ui/Selection.h"
@@ -120,7 +120,7 @@ void RowHeader::mousePressEvent(QMouseEvent * _ev)
     if (!m_pView->koDocument()->isReadWrite())
         return;
 
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -213,7 +213,7 @@ void RowHeader::mouseReleaseEvent(QMouseEvent * _ev)
     if (!m_pView->koDocument()->isReadWrite())
         return;
 
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -323,7 +323,7 @@ void RowHeader::mouseDoubleClickEvent(QMouseEvent*)
 {
     if (!m_cellToolIsActive)
         return;
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -347,7 +347,7 @@ void RowHeader::mouseMoveEvent(QMouseEvent * _ev)
     if (!m_pView->koDocument()->isReadWrite())
         return;
 
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -435,7 +435,7 @@ void RowHeader::wheelEvent(QWheelEvent* _ev)
 
 void RowHeader::paintSizeIndicator(int mouseY)
 {
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -483,7 +483,7 @@ void RowHeader::paintSizeIndicator(int mouseY)
 
 void RowHeader::updateRows(int from, int to)
 {
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -494,7 +494,7 @@ void RowHeader::updateRows(int from, int to)
 
 void RowHeader::paintEvent(QPaintEvent* event)
 {
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -609,7 +609,7 @@ void RowHeader::focusOutEvent(QFocusEvent*)
 void RowHeader::drawText(QPainter& painter, const QFont& font,
                          const QPointF& location, const QString& text) const
 {
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -688,7 +688,7 @@ void ColumnHeader::mousePressEvent(QMouseEvent * _ev)
         m_pView->enableAutoScroll();
     }
 
-    const register Sheet * const sheet = m_pView->activeSheet();
+    const register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -828,7 +828,7 @@ void ColumnHeader::mouseReleaseEvent(QMouseEvent * _ev)
     if (!m_pView->koDocument()->isReadWrite())
         return;
 
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -947,7 +947,7 @@ void ColumnHeader::mouseDoubleClickEvent(QMouseEvent*)
 {
     if (!m_cellToolIsActive)
         return;
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -968,7 +968,7 @@ void ColumnHeader::mouseMoveEvent(QMouseEvent * _ev)
     if (!m_pView->koDocument()->isReadWrite())
         return;
 
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
 
     if (!sheet)
         return;
@@ -1092,7 +1092,7 @@ void ColumnHeader::wheelEvent(QWheelEvent* _ev)
 
 void ColumnHeader::resizeEvent(QResizeEvent* _ev)
 {
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -1110,7 +1110,7 @@ void ColumnHeader::resizeEvent(QResizeEvent* _ev)
 
 void ColumnHeader::paintSizeIndicator(int mouseX)
 {
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -1169,7 +1169,7 @@ void ColumnHeader::paintSizeIndicator(int mouseX)
 
 void ColumnHeader::updateColumns(int from, int to)
 {
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -1180,7 +1180,7 @@ void ColumnHeader::updateColumns(int from, int to)
 
 void ColumnHeader::paintEvent(QPaintEvent* event)
 {
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 
@@ -1360,7 +1360,7 @@ void ColumnHeader::drawText(QPainter& painter, const QFont& font,
                             const QPointF& location, const QString& text,
                             double width) const
 {
-    register Sheet * const sheet = m_pView->activeSheet();
+    register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
         return;
 

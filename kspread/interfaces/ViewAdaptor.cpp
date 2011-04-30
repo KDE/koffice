@@ -31,7 +31,7 @@
 #include "part/Doc.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "part/View.h"
 #include "part/Canvas.h"
 #include "MapAdaptor.h"
@@ -151,7 +151,7 @@ void ViewAdaptor::nextSheet()
 
 bool ViewAdaptor::showSheet(const QString& sheetName)
 {
-    Sheet *const sheet = m_view->doc()->map()->findSheet(sheetName);
+    KCSheet *const sheet = m_view->doc()->map()->findSheet(sheetName);
     if (!sheet) {
         kDebug(36001) << "Unknown sheet" << sheetName;
         return false;

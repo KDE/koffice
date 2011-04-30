@@ -23,7 +23,7 @@
 #include "kspread_limits.h"
 #include "RowColumnFormat.h"
 #include "Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include <KoCanvasBase.h>
 #include <KoSelection.h>
@@ -104,7 +104,7 @@ bool AbstractSelectionStrategy::hitTestSelectionSizeGrip(KoCanvasBase *canvas,
     const qreal pixelY = canvas->viewConverter()->viewToDocumentY(1);
     const QRectF gripArea(-2 * pixelX, -2 * pixelY, 5 * pixelX, 5 * pixelY);
 
-    Sheet *const sheet = selection->activeSheet();
+    KCSheet *const sheet = selection->activeSheet();
 
     int column, row;
     if (selection->isColumnOrRowSelected()) {
@@ -142,7 +142,7 @@ bool AbstractSelectionStrategy::hitTestReferenceSizeGrip(KoCanvasBase *canvas,
     // Iterate over the referenced ranges.
     const KCRegion::ConstIterator end(selection->constEnd());
     for (KCRegion::ConstIterator it(selection->constBegin()); it != end; ++it) {
-        Sheet *const sheet = (*it)->sheet();
+        KCSheet *const sheet = (*it)->sheet();
         // Only check the ranges on the active sheet.
         if (sheet != selection->activeSheet()) {
             continue;

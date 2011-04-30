@@ -23,7 +23,7 @@
 #include "CellToolBase.h"
 #include "kspread_limits.h"
 #include "Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include <KoCanvasBase.h>
 #include <KoSelection.h>
@@ -44,7 +44,7 @@ SelectionStrategy::SelectionStrategy(CellToolBase *cellTool,
 
     const KoShape* shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
     const QPointF position = documentPos - (shape ? shape->position() : QPointF(0.0, 0.0));
-    Sheet *const sheet = this->selection()->activeSheet();
+    KCSheet *const sheet = this->selection()->activeSheet();
     Selection *const selection = this->selection();
 
 #if 0 // KSPREAD_WIP_DRAG_REFERENCE_SELECTION
@@ -127,7 +127,7 @@ void SelectionStrategy::handleMouseMove(const QPointF &documentPos,
     Q_UNUSED(modifiers);
     const KoShape* shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
     const QPointF position = documentPos - (shape ? shape->position() : QPointF(0.0, 0.0));
-    Sheet *const sheet = selection()->activeSheet();
+    KCSheet *const sheet = selection()->activeSheet();
 
     if (selection()->referenceSelectionMode()) {
         // In which cell did the user move?

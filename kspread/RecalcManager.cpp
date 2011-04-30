@@ -30,7 +30,7 @@
 #include "Formula.h"
 #include "FormulaStorage.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCRegion.h"
 #include "Value.h"
 #include "ValueFormatter.h"
@@ -53,10 +53,10 @@ public:
      * \see RecalcManager::recalcMap
      * \see RecalcManager::recalcSheet
      */
-    void cellsToCalculate(Sheet* sheet = 0);
+    void cellsToCalculate(KCSheet* sheet = 0);
 
     /**
-     * Helper function for cellsToCalculate(const KCRegion&) and cellsToCalculate(Sheet*).
+     * Helper function for cellsToCalculate(const KCRegion&) and cellsToCalculate(KCSheet*).
      */
     void cellsToCalculate(const KCRegion& region, QSet<Cell>& cells) const;
 
@@ -98,7 +98,7 @@ void RecalcManager::Private::cellsToCalculate(const KCRegion& region)
     }
 }
 
-void RecalcManager::Private::cellsToCalculate(Sheet* sheet)
+void RecalcManager::Private::cellsToCalculate(KCSheet* sheet)
 {
     // retrieve the cell depths
     QHash<Cell, int> depths = map->dependencyManager()->depths();
@@ -131,7 +131,7 @@ void RecalcManager::Private::cellsToCalculate(const KCRegion& region, QSet<Cell>
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
-        const Sheet* sheet = (*it)->sheet();
+        const KCSheet* sheet = (*it)->sheet();
         for (int col = range.left(); col <= range.right(); ++col) {
             for (int row = range.top(); row <= range.bottom(); ++row) {
                 Cell cell(sheet, col, row);
@@ -178,7 +178,7 @@ void RecalcManager::regionChanged(const KCRegion& region)
     d->active = false;
 }
 
-void RecalcManager::recalcSheet(Sheet* const sheet)
+void RecalcManager::recalcSheet(KCSheet* const sheet)
 {
     if (d->active)
         return;
@@ -205,14 +205,14 @@ bool RecalcManager::isActive() const
     return d->active;
 }
 
-void RecalcManager::addSheet(Sheet *sheet)
+void RecalcManager::addSheet(KCSheet *sheet)
 {
     // Manages also the revival of a deleted sheet.
     Q_UNUSED(sheet);
     recalcMap(); // FIXME Stefan: Implement a more elegant solution.
 }
 
-void RecalcManager::removeSheet(Sheet *sheet)
+void RecalcManager::removeSheet(KCSheet *sheet)
 {
     Q_UNUSED(sheet);
     recalcMap(); // FIXME Stefan: Implement a more elegant solution.
@@ -231,7 +231,7 @@ void RecalcManager::recalc()
         if (!cells.value(c).formula().isValid())
             continue;
 
-        const Sheet* sheet = cells.value(c).sheet();
+        const KCSheet* sheet = cells.value(c).sheet();
 
         // evaluate the formula and set the result
         Value result = cells.value(c).formula().eval();

@@ -20,7 +20,7 @@
 #include "HyperlinkStrategy.h"
 
 #include "Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Util.h"
 
 #include <KoCanvasBase.h>

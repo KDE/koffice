@@ -26,7 +26,7 @@
 
 class QItemSelectionRange;
 
-class Sheet;
+class KCSheet;
 
 /**
  * A model for a sheet.
@@ -35,7 +35,7 @@ class Sheet;
 class KSPREAD_EXPORT SheetModel : public QAbstractTableModel
 {
 public:
-    explicit SheetModel(Sheet* sheet);
+    explicit SheetModel(KCSheet* sheet);
     virtual ~SheetModel();
 
     // QAbstractTableModel interface
@@ -52,7 +52,7 @@ public:
                  const QVariant &value, int role = Qt::EditRole);
 
 protected:
-    Sheet* sheet() const;
+    KCSheet* sheet() const;
 
 private:
     class Private;

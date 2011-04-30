@@ -50,7 +50,7 @@
 #include "MergeStrategy.h"
 #include "Selection.h"
 #include "SelectionStrategy.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include "commands/DataManipulators.h"
 
@@ -103,7 +103,7 @@ void TableTool::importDocument()
         return;
 #endif
     updateSheetsList();
-    if (Sheet* sheet = d->tableShape->sheet()) {
+    if (KCSheet* sheet = d->tableShape->sheet()) {
         QRect area = sheet->usedArea();
         if (area.width() > d->tableShape->columns())
             d->tableShape->setColumns(area.width());
@@ -185,7 +185,7 @@ int TableTool::maxRow() const
     return d->tableShape->rows();
 }
 
-SheetView* TableTool::sheetView(const Sheet* sheet) const
+SheetView* TableTool::sheetView(const KCSheet* sheet) const
 {
     Q_UNUSED(sheet);
     return d->tableShape->sheetView();
@@ -208,7 +208,7 @@ void TableTool::updateSheetsList()
     d->sheetComboBox->blockSignals(true);
     d->sheetComboBox->clear();
     Map *map = d->tableShape->map();
-    foreach(Sheet* sheet, map->sheetList()) {
+    foreach(KCSheet* sheet, map->sheetList()) {
         if (sheet->isHidden())
             continue;
         d->sheetComboBox->addItem(sheet->sheetName());
@@ -258,7 +258,7 @@ QMap<QString, QWidget*> TableTool::createOptionWidgets()
     d->sheetComboBox = new KComboBox(optionWidget);
     sheetlayout->addWidget(d->sheetComboBox, 1);
     Map *map = d->tableShape->map();
-    foreach(Sheet* s, map->sheetList()) {
+    foreach(KCSheet* s, map->sheetList()) {
         d->sheetComboBox->addItem(s->sheetName());
         //d->sheetComboBox->setCurrentIndex( d->sheetComboBox->count()-1 );
     }
@@ -268,9 +268,9 @@ QMap<QString, QWidget*> TableTool::createOptionWidgets()
     sheetbtn->setFixedHeight(d->sheetComboBox->sizeHint().height());
     connect(sheetbtn, SIGNAL(clicked()), this, SLOT(sheetsBtnClicked()));
     sheetlayout->addWidget(sheetbtn);
-    label = new QLabel(i18n("Sheet:"), optionWidget);
+    label = new QLabel(i18n("KCSheet:"), optionWidget);
     label->setBuddy(d->sheetComboBox);
-    label->setToolTip(i18n("Selected Sheet"));
+    label->setToolTip(i18n("Selected KCSheet"));
     layout->addWidget(label, 0, 0);
 
     spinBox = new QSpinBox(optionWidget);

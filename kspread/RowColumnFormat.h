@@ -33,7 +33,7 @@ class QDomElement;
 class QDomDocument;
 class KoGenStyle;
 
-class Sheet;
+class KCSheet;
 
 /**
  * A row style.
@@ -45,7 +45,7 @@ public:
     RowFormat(const RowFormat& other);
     ~RowFormat();
 
-    void setSheet(Sheet* sheet);
+    void setSheet(KCSheet* sheet);
 
     QDomElement save(QDomDocument&, int yshift = 0) const;
     bool load(const KoXmlElement& row, int yshift = 0, Paste::Mode mode = Paste::Normal);
@@ -130,7 +130,7 @@ public:
     ColumnFormat(const ColumnFormat& other);
     ~ColumnFormat();
 
-    void setSheet(Sheet* sheet);
+    void setSheet(KCSheet* sheet);
 
     QDomElement save(QDomDocument&, int xshift = 0) const;
     bool load(const KoXmlElement& row, int xshift = 0, Paste::Mode mode = Paste::Normal);

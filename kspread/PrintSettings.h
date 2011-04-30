@@ -31,7 +31,7 @@
 class QSize;
 
 class KCRegion;
-class Sheet;
+class KCSheet;
 
 /**
  * Settings used for printing.

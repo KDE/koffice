@@ -43,7 +43,7 @@
 #include "CellStorage.h"
 #include "Localization.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
 
@@ -73,7 +73,7 @@ AutoFormatDialog::AutoFormatDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
         , d(new Private())
 {
-    setCaption(i18n("Sheet KCStyle"));
+    setCaption(i18n("KCSheet KCStyle"));
     setObjectName("AutoAutoFormatDialog");
     setModal(true);
     setButtons(Ok | Cancel);
@@ -100,7 +100,7 @@ AutoFormatDialog::AutoFormatDialog(QWidget* parent, Selection* selection)
     QStringList::ConstIterator it = lst.begin();
     for (; it != lst.end(); ++it) {
         KConfig config(*it, KConfig::SimpleConfig);
-        const KConfigGroup sheetStyleGroup = config.group("Sheet-KCStyle");
+        const KConfigGroup sheetStyleGroup = config.group("KCSheet-KCStyle");
 
         Entry e;
         e.config = *it;

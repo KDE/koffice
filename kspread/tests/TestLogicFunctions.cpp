@@ -22,7 +22,7 @@
 
 #include <part/Doc.h>
 #include <Map.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 
 void TestLogicFunctions::init()
 {

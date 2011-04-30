@@ -85,21 +85,21 @@ public:
      * @param point the point's location
      * @param sheet the sheet the point belongs to
      */
-    void initialize(const QPoint& point, Sheet* sheet = 0);
+    void initialize(const QPoint& point, KCSheet* sheet = 0);
 
     /**
      * Sets the selection to @p range
      * @param range the range's location
      * @param sheet the sheet the range belongs to
      */
-    void initialize(const QRect& range, Sheet* sheet = 0);
+    void initialize(const QRect& range, KCSheet* sheet = 0);
 
     /**
      * Sets the selection to @p region
      * @param region the region's locations
      * @param sheet the sheet the region belongs to
      */
-    void initialize(const KCRegion& region, Sheet* sheet = 0);
+    void initialize(const KCRegion& region, KCSheet* sheet = 0);
 
     /**
      * Emits signal changed(const KCRegion&)
@@ -118,14 +118,14 @@ public:
      * @param point the point's location
      * @param sheet the sheet the point belongs to
      */
-    void extend(const QPoint& point, Sheet* sheet = 0);
+    void extend(const QPoint& point, KCSheet* sheet = 0);
 
     /**
      * Extends the current selection with the Range @p range
      * @param range the range's location
      * @param sheet the sheet the range belongs to
      */
-    void extend(const QRect& range, Sheet* sheet = 0);
+    void extend(const QRect& range, KCSheet* sheet = 0);
 
     /**
      * Extends the current selection with the KCRegion @p region
@@ -137,7 +137,7 @@ public:
      * @param point the point's location
      * @param sheet the sheet the point belongs to
      */
-    virtual Element* eor(const QPoint& point, Sheet* sheet = 0);
+    virtual Element* eor(const QPoint& point, KCSheet* sheet = 0);
 
     /**
      * The anchor is the starting point of a range. For points marker and anchor are the same
@@ -162,7 +162,7 @@ public:
     /**
      * @return the name of the region (e.g. "A1:A2")
      */
-    QString name(Sheet* originSheet = 0) const;
+    QString name(KCSheet* originSheet = 0) const;
 
     /**
      * Sets the selection's active sheet.
@@ -170,23 +170,23 @@ public:
      * but for cell choices used for formulaes it may differ.
      * @param sheet the sheet which is currently active
      */
-    void setActiveSheet(Sheet* sheet);
+    void setActiveSheet(KCSheet* sheet);
 
     /**
      * @return the selection's active sheet
      */
-    Sheet* activeSheet() const;
+    KCSheet* activeSheet() const;
 
     /**
      * Sets the selection's origin sheet.
      * @param sheet the sheet from which the selection starts
      */
-    void setOriginSheet(Sheet* sheet);
+    void setOriginSheet(KCSheet* sheet);
 
     /**
      * @return the selection's origin sheet
      */
-    Sheet* originSheet() const;
+    KCSheet* originSheet() const;
 
     /**
      * Activates the cell location/range, that has \p cell as bottom left or
@@ -272,7 +272,7 @@ public:
     void emitAboutToModify();
     void emitModified();
     void emitRefreshSheetViews();
-    void emitVisibleSheetRequested(Sheet* sheet);
+    void emitVisibleSheetRequested(KCSheet* sheet);
     void emitCloseEditor(bool saveChanges, bool expandMatrix = false);
     void emitRequestFocusEditor();
 
@@ -294,9 +294,9 @@ signals:
     void modified(const KCRegion& region);
 
     void refreshSheetViews();
-    void visibleSheetRequested(Sheet* sheet);
+    void visibleSheetRequested(KCSheet* sheet);
     void closeEditor(bool saveChanges, bool expandMatrix);
-    void activeSheetChanged(Sheet* sheet);
+    void activeSheetChanged(KCSheet* sheet);
     void requestFocusEditor();
 
     void documentReadWriteToggled(bool readWrite);

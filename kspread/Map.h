@@ -61,7 +61,7 @@ class LoadingInfo;
 class NamedAreaManager;
 class RecalcManager;
 class RowFormat;
-class Sheet;
+class KCSheet;
 class KCStyle;
 class StyleManager;
 class ValueParser;
@@ -232,62 +232,62 @@ public:
      * @return a pointer to the searched sheet
      * @return @c 0 if nothing was found
      */
-    Sheet* findSheet(const QString& name) const;
+    KCSheet* findSheet(const QString& name) const;
 
     /**
      * @return a pointer to the next sheet to @p sheet
      */
-    Sheet* nextSheet(Sheet* sheet) const;
+    KCSheet* nextSheet(KCSheet* sheet) const;
 
     /**
      * @return a pointer to the previous sheet to @p sheet
      */
-    Sheet* previousSheet(Sheet*) const;
+    KCSheet* previousSheet(KCSheet*) const;
 
     /**
      * Creates a new sheet.
      * The sheet is not added to the map nor added to the GUI.
-     * @return a pointer to a new Sheet
+     * @return a pointer to a new KCSheet
      */
-    Sheet* createSheet(const QString& name = QString());
+    KCSheet* createSheet(const QString& name = QString());
 
     /**
      * Adds @p sheet to this map.
      * The sheet becomes the active sheet.
     */
-    void addSheet(Sheet* sheet);
+    void addSheet(KCSheet* sheet);
 
     /**
      * Creates a new sheet.
      * Adds a new sheet to this map.
      * @return a pointer to the new sheet
      */
-    Sheet* addNewSheet(const QString& name = QString());
+    KCSheet* addNewSheet(const QString& name = QString());
 
     /**
      * @return a pointer to the sheet at index @p index in this map
      * @return @c 0 if the index exceeds the list boundaries
      */
-    Sheet* sheet(int index) const;
+    KCSheet* sheet(int index) const;
 
     /**
      * @return index of @p sheet in this map
      * @return @c 0 if the index exceeds the list boundaries
      */
-    int indexOf(Sheet* sheet) const;
+    int indexOf(KCSheet* sheet) const;
 
     /**
      * @return the list of sheets in this map
      */
-    QList<Sheet*>& sheetList() const;
+    QList<KCSheet*>& sheetList() const;
 
     /**
      * @return amount of sheets in this map
      */
     int count() const;
 
-    void removeSheet(Sheet* sheet);
-    void reviveSheet(Sheet* sheet);
+    void removeSheet(KCSheet* sheet);
+    void reviveSheet(KCSheet* sheet);
 
     QStringList visibleSheets() const;
     QStringList hiddenSheets() const;
@@ -384,17 +384,17 @@ Q_SIGNALS:
     /**
      * Emitted, if a newly created sheet was added to the document.
      */
-    void sheetAdded(Sheet* sheet);
+    void sheetAdded(KCSheet* sheet);
 
     /**
      * Emitted, if a sheet was deleted from the document.
      */
-    void sheetRemoved(Sheet* sheet);
+    void sheetRemoved(KCSheet* sheet);
 
     /**
      * Emitted, if a sheet was revived, i.e. a deleted sheet was reinserted.
      */
-    void sheetRevived(Sheet* sheet);
+    void sheetRevived(KCSheet* sheet);
 
     /**
      * Emitted, if a status \p message should be shown in the status bar

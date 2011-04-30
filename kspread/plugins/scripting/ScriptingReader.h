@@ -28,7 +28,7 @@
 #include "ScriptingModule.h"
 
 #include <part/Doc.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 #include <Map.h>
 #include <KCRegion.h>
 #include <Cell.h>
@@ -205,7 +205,7 @@ public slots:
             m_ranges.remove(sheetname);
             return;
         }
-        Sheet* sheet = m_module->kspreadDoc()->map()->findSheet(sheetname);
+        KCSheet* sheet = m_module->kspreadDoc()->map()->findSheet(sheetname);
         if (! sheet) return;
         QVariantList ranges;
         KCRegion region(range, m_module->kspreadDoc()->map(), sheet);
@@ -302,7 +302,7 @@ private:
 
     enum State { Stopped, Running, Shutdown };
     State m_state;
-    Sheet* m_currentSheet;
+    KCSheet* m_currentSheet;
     int m_currentRow, m_currentLeft, m_currentRight;
 
     void clear() {

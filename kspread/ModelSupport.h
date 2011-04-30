@@ -25,7 +25,7 @@
 
 #include "Cell.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 
 /**
@@ -34,7 +34,7 @@
  */
 enum SheetDataRole {
     // Qt::UserRole = 32
-    // Sheet properties; MapModel, MapViewModel
+    // KCSheet properties; MapModel, MapViewModel
     VisibilityRole      = Qt::UserRole, ///< sheet visibility; bool
     ProtectionRole,                     ///< sheet protection; bool
     ActivityRole                        ///< active sheet; bool
@@ -77,7 +77,7 @@ static inline Cell toCell(const QModelIndex &index)
 {
     const int column = index.column() + 1;
     const int row = index.row() + 1;
-    Sheet *const sheet = static_cast<Sheet*>(index.internalPointer());
+    KCSheet *const sheet = static_cast<KCSheet*>(index.internalPointer());
     return Cell(sheet, column, row);
 }
 
@@ -110,7 +110,7 @@ static inline KCRegion toRegion(const QItemSelection &selection)
     KCRegion region;
     for (int i = 0; i < selection.count(); ++i) {
         const QItemSelectionRange range = selection[i];
-        Sheet *const sheet = static_cast<Sheet*>(range.topLeft().internalPointer());
+        KCSheet *const sheet = static_cast<KCSheet*>(range.topLeft().internalPointer());
         region.add(toRange(range), sheet);
     }
     return region;
@@ -131,7 +131,7 @@ static inline QItemSelectionRange fromRange(const QRect &range, const QAbstractI
  * Converts a range in cell coordinates into a model item range.
  * \ingroup Model
  */
-static inline QItemSelectionRange fromRange(const QRect &range, Sheet *const sheet)
+static inline QItemSelectionRange fromRange(const QRect &range, KCSheet *const sheet)
 {
     return fromRange(range, sheet->model());
 }

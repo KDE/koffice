@@ -33,7 +33,7 @@
 #include "Filter.h"
 #include "Map.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "ValueConverter.h"
 
 #include "commands/ApplyFilterCommand.h"
@@ -77,7 +77,7 @@ void FilterPopup::Private::initGUI(FilterPopup* parent, const Cell& cell, const 
     layout->addWidget(notEmptyCheckbox);
     layout->addSpacing(3);
 
-    const Sheet* sheet = cell.sheet();
+    const KCSheet* sheet = cell.sheet();
     const QRect range = database->range().lastRange();
     const bool isRowFilter = database->orientation() == Qt::Vertical;
     const int start = isRowFilter ? range.top() : range.left();

@@ -22,7 +22,7 @@
 // KSpread
 #include "Formula.h"
 #include "Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 // KOffice
 
@@ -90,7 +90,7 @@ void FormulaEditorHighlighter::highlightBlock(const QString& text)
     QList<QColor> colors = d->selection->colors();
     QList<QString> alreadyFoundRanges;
 
-    Sheet *const originSheet = d->selection->originSheet();
+    KCSheet *const originSheet = d->selection->originSheet();
     Map *const map = originSheet->map();
 
     for (int i = 0; i < d->tokens.count(); ++i) {

@@ -29,7 +29,7 @@
 #include "Map.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
 #include "Util.h"

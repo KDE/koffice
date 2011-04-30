@@ -49,7 +49,7 @@
 #include "Map.h"
 #include "NamedAreaManager.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Util.h"
 
 #include "commands/NamedAreaCommand.h"
@@ -120,7 +120,7 @@ void NamedAreaDialog::slotOk()
     if (m_list->count() > 0) {
         QListWidgetItem* item = m_list->currentItem();
         KCRegion region = m_selection->activeSheet()->map()->namedAreaManager()->namedArea(item->text());
-        Sheet* sheet = m_selection->activeSheet()->map()->namedAreaManager()->sheet(item->text());
+        KCSheet* sheet = m_selection->activeSheet()->map()->namedAreaManager()->sheet(item->text());
         if (!sheet || !region.isValid()) {
             return;
         }
@@ -235,7 +235,7 @@ EditNamedAreaDialog::EditNamedAreaDialog(QWidget* parent, Selection* selection)
     gridLayout->addWidget(m_cellRange, 2, 1);
 
     QLabel * textLabel1 = new QLabel(page);
-    textLabel1->setText(i18n("Sheet:"));
+    textLabel1->setText(i18n("KCSheet:"));
     gridLayout->addWidget(textLabel1, 1, 0);
 
     m_sheets = new KComboBox(page);
@@ -248,9 +248,9 @@ EditNamedAreaDialog::EditNamedAreaDialog(QWidget* parent, Selection* selection)
     m_areaNameEdit = new KLineEdit(page);
     gridLayout->addWidget(m_areaNameEdit, 0, 1);
 
-    const QList<Sheet*> sheetList = m_selection->activeSheet()->map()->sheetList();
+    const QList<KCSheet*> sheetList = m_selection->activeSheet()->map()->sheetList();
     for (int i = 0; i < sheetList.count(); ++i) {
-        Sheet* sheet = sheetList.at(i);
+        KCSheet* sheet = sheetList.at(i);
         if (!sheet)
             continue;
         m_sheets->insertItem(i, sheet->sheetName());
@@ -274,14 +274,14 @@ void EditNamedAreaDialog::setAreaName(const QString& name)
 {
     m_initialAreaName = name;
     m_areaNameEdit->setText(name);
-    Sheet* sheet = m_selection->activeSheet()->map()->namedAreaManager()->sheet(name);
+    KCSheet* sheet = m_selection->activeSheet()->map()->namedAreaManager()->sheet(name);
     const QString tmpName = m_selection->activeSheet()->map()->namedAreaManager()->namedArea(name).name(sheet);
     m_cellRange->setText(tmpName);
 }
 
 void EditNamedAreaDialog::setRegion(const KCRegion& region)
 {
-    Sheet* sheet = region.firstSheet();
+    KCSheet* sheet = region.firstSheet();
     m_sheets->setCurrentIndex(m_sheets->findText(sheet->sheetName()));
     m_cellRange->setText(region.name(sheet));
 }
@@ -290,7 +290,7 @@ void EditNamedAreaDialog::slotOk()
 {
     if (m_areaNameEdit->text().isEmpty())
         return;
-    Sheet* sheet = m_selection->activeSheet()->map()->sheet(m_sheets->currentIndex());
+    KCSheet* sheet = m_selection->activeSheet()->map()->sheet(m_sheets->currentIndex());
     KCRegion region(m_cellRange->text(), m_selection->activeSheet()->map(), sheet);
     if (!region.isValid())
         return;

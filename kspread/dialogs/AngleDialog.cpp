@@ -35,7 +35,7 @@
 
 #include "Cell.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include "commands/StyleCommand.h"
 #include "commands/RowColumnManipulators.h"

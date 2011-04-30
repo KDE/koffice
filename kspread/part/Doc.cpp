@@ -91,7 +91,7 @@
 #include "NamedAreaManager.h"
 #include "PrintSettings.h"
 #include "RecalcManager.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "SheetPrint.h"
 #include "StyleManager.h"
 #include "Util.h"
@@ -144,7 +144,7 @@ Doc::Doc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
         : DocBase(parentWidget, parent, singleViewMode)
         , dd(new Private)
 {
-    connect(d->map, SIGNAL(sheetAdded(Sheet*)), this, SLOT(sheetAdded(Sheet*)));
+    connect(d->map, SIGNAL(sheetAdded(KCSheet*)), this, SLOT(sheetAdded(KCSheet*)));
     new MapAdaptor(d->map);
     QDBusConnection::sessionBus().registerObject('/' + objectName() + '/' + d->map->objectName(), d->map);
 
@@ -435,7 +435,7 @@ void Doc::loadPaper(KoXmlElement const & paper)
     }
 
     //apply to all sheet
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         sheet->printSettings()->setPageLayout(pageLayout);
     }
 
@@ -475,7 +475,7 @@ void Doc::loadPaper(KoXmlElement const & paper)
     fcenter = fcenter.replace("<table>", "<sheet>");
     fright  = fright.replace("<table>", "<sheet>");
 
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         sheet->print()->headerFooter()->setHeadFootLine(hleft, hcenter, hright,
                 fleft, fcenter, fright);
     }
@@ -518,12 +518,12 @@ void Doc::paintContent(QPainter& painter, const QRect& rect)
     paintContent(painter, rect, 0);
 }
 
-void Doc::paintContent(QPainter& painter, const QRect& rect, Sheet* _sheet)
+void Doc::paintContent(QPainter& painter, const QRect& rect, KCSheet* _sheet)
 {
     if (rect.isEmpty()) {
         return;
     }
-    Sheet *const sheet = _sheet ? _sheet : d->map->sheet(0);
+    KCSheet *const sheet = _sheet ? _sheet : d->map->sheet(0);
 
     const KoPageLayout pageLayout = sheet->printSettings()->pageLayout();
     QPixmap thumbnail(pageLayout.width, pageLayout.height);
@@ -585,7 +585,7 @@ bool Doc::configLoadFromFile() const
     return d->configLoadFromFile;
 }
 
-void Doc::sheetAdded(Sheet* sheet)
+void Doc::sheetAdded(KCSheet* sheet)
 {
     new SheetAdaptor(sheet);
     QString dbusPath('/' + sheet->map()->objectName() + '/' + objectName());
@@ -605,13 +605,13 @@ void Doc::saveOdfViewSettings(KoXmlWriter& settingsWriter)
         // save current sheet selection before to save marker, otherwise current pos is not saved
         view->saveCurrentSheetSelection();
         //<config:config-item config:name="ActiveTable" config:type="string">Feuille1</config:config-item>
-        if (Sheet *sheet = view->activeSheet()) {
+        if (KCSheet *sheet = view->activeSheet()) {
             settingsWriter.addConfigItem("ActiveTable", sheet->sheetName());
         }
     }
 }
 
-void Doc::saveOdfViewSheetSettings(Sheet *sheet, KoXmlWriter &settingsWriter)
+void Doc::saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter &settingsWriter)
 {
     if (!views().isEmpty()) {
         View *const view = static_cast<View*>(views().first());

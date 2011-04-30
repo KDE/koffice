@@ -27,7 +27,7 @@
 #include "Damages.h"
 #include "Map.h"
 #include "ui/Selection.h" // FIXME detach from ui
-#include "Sheet.h"
+#include "KCSheet.h"
 
 MergeCommand::MergeCommand(QUndoCommand* parent)
         : AbstractRegionCommand(parent),

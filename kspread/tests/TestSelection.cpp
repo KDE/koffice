@@ -24,14 +24,14 @@
 #include "part/Canvas.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 void TestSelection::initialize()
 {
     Map map;
-    Sheet* sheet1 = new Sheet(&map, "Sheet1");
+    KCSheet* sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
-    Sheet* sheet2 = new Sheet(&map, "Sheet2");
+    KCSheet* sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
     Canvas canvas(0);
     Selection selection(&canvas);
@@ -107,9 +107,9 @@ void TestSelection::initialize()
 void TestSelection::update()
 {
     Map map;
-    Sheet *sheet1 = new Sheet(&map, "Sheet1");
+    KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
-    Sheet *sheet2 = new Sheet(&map, "Sheet2");
+    KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
     Canvas canvas(0);
     Selection selection(&canvas);
@@ -177,9 +177,9 @@ void TestSelection::update()
 void TestSelection::extend()
 {
     Map map;
-    Sheet *sheet1 = new Sheet(&map, "Sheet1");
+    KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
-    Sheet *sheet2 = new Sheet(&map, "Sheet2");
+    KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
     Canvas canvas(0);
     Selection selection(&canvas);
@@ -282,9 +282,9 @@ void TestSelection::extend()
 void TestSelection::activeElement()
 {
     Map map;
-    Sheet *sheet1 = new Sheet(&map, "Sheet1");
+    KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
-    Sheet *sheet2 = new Sheet(&map, "Sheet2");
+    KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
     Canvas canvas(0);
     Selection selection(&canvas);
@@ -329,9 +329,9 @@ void TestSelection::activeElement()
 void TestSelection::referenceSelectionMode()
 {
     Map map;
-    Sheet *sheet1 = new Sheet(&map, "Sheet1");
+    KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
-    Sheet *sheet2 = new Sheet(&map, "Sheet2");
+    KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
     Canvas canvas(0);
     Selection selection(&canvas);
@@ -385,9 +385,9 @@ void TestSelection::referenceSelectionMode()
 void TestSelection::covering()
 {
     Map map;
-    Sheet *sheet1 = new Sheet(&map, "Sheet1");
+    KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
-    Sheet *sheet2 = new Sheet(&map, "Sheet2");
+    KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
     Canvas canvas(0);
     Selection selection(&canvas);
@@ -426,9 +426,9 @@ void TestSelection::covering()
 void TestSelection::splitting()
 {
     Map map;
-    Sheet *sheet1 = new Sheet(&map, "Sheet1");
+    KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
-    Sheet *sheet2 = new Sheet(&map, "Sheet2");
+    KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
     Canvas canvas(0);
     Selection selection(&canvas);

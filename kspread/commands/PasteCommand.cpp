@@ -33,7 +33,7 @@
 #include "DependencyManager.h"
 #include "Map.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 // TODO
 // - Extract the pasting code from Cell.
@@ -267,7 +267,7 @@ bool PasteCommand::postProcessing()
 bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
 {
     const QRect pasteArea = element->rect();
-    Sheet *const sheet = element->sheet();
+    KCSheet *const sheet = element->sheet();
     Q_ASSERT(sheet == m_sheet);
     Map *const map = sheet->map();
 

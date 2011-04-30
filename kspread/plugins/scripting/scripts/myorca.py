@@ -91,7 +91,7 @@ class MyKSpread:
         self._listener.connect("cellChanged(int,int)", cellChanged)
 
         def sheetNameChanged(*args):
-            self.myorca.speak("Sheet name changed")
+            self.myorca.speak("KCSheet name changed")
         self.sheet.connect("nameChanged()", sheetNameChanged)
 
         def sheetShowChanged(*args):
@@ -143,7 +143,7 @@ class MyDialog:
         self.cellValueBtn.connect("clicked()", self.cellValueBtnClicked)
 
         self.sheetNameBtn = forms.createWidget(page, "QPushButton")
-        self.sheetNameBtn.text = "Sheet Name"
+        self.sheetNameBtn.text = "KCSheet Name"
         self.sheetNameBtn.connect("clicked()", self.sheetNameBtnClicked)
 
         page = self.dialog.addPage("Option","")
@@ -159,7 +159,7 @@ class MyDialog:
         self.cellValueCheckbox.connect("stateChanged(int)", self.optionChanged)
 
         self.sheetNameChanged = forms.createWidget(page, "QCheckBox")
-        self.sheetNameChanged.text = "Sheet Name if sheet changed"
+        self.sheetNameChanged.text = "KCSheet Name if sheet changed"
         self.sheetNameChanged.checked = self.config.sheetNameOnSheetChanged
         self.sheetNameChanged.connect("stateChanged(int)", self.optionChanged)
 

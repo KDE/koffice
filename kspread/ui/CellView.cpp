@@ -67,7 +67,7 @@
 #include "PrintSettings.h"
 #include "RowColumnFormat.h"
 #include "Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "SheetPrint.h"
 #include "SheetView.h"
 #include "StyleManager.h"
@@ -172,7 +172,7 @@ CellView::CellView(SheetView* sheetView, int col, int row)
     Q_ASSERT(1 <= col && col <= KS_colMax);
     Q_ASSERT(1 <= row && row <= KS_rowMax);
 
-    const Sheet* sheet = sheetView->sheet();
+    const KCSheet* sheet = sheetView->sheet();
     Cell cell(sheet, col, row);
 
     // create the effective style
@@ -293,7 +293,7 @@ QRectF CellView::textRect() const
 QString CellView::testAnchor(SheetView* sheetView, const Cell& cell, qreal x, qreal y) const
 {
     if (isObscured()) {
-        Sheet* sheet = cell.sheet();
+        KCSheet* sheet = cell.sheet();
         Cell otherCell = Cell(sheet, d->obscuringCellX, d->obscuringCellY);
         const CellView& otherView = sheetView->cellView(otherCell.column(), otherCell.row());
         if (cell.column() != otherCell.column()) x += sheet->columnPosition(cell.column()) - sheet->columnPosition(otherCell.column());

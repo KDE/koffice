@@ -21,7 +21,7 @@
 */
 
 // Local
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include <QApplication>
 #include <QBuffer>
@@ -128,7 +128,7 @@ static QString createObjectName(const QString &sheetName)
 }
 
 
-class Sheet::Private
+class KCSheet::Private
 {
 public:
     Map* workbook;
@@ -169,11 +169,11 @@ public:
     QSizeF documentSize;
 
     QImage backgroundImage;
-    Sheet::BackgroundImageProperties backgroundProperties;
+    KCSheet::BackgroundImageProperties backgroundProperties;
 };
 
 
-Sheet::Sheet(Map* map, const QString &sheetName)
+KCSheet::KCSheet(Map* map, const QString &sheetName)
         : KoShapeUserData(map)
         , KoShapeControllerBase()
         , d(new Private)
@@ -224,7 +224,7 @@ Sheet::Sheet(Map* map, const QString &sheetName)
             d->workbook->namedAreaManager(), SLOT(remove(const QString&)));
 }
 
-Sheet::Sheet(const Sheet &other)
+KCSheet::KCSheet(const KCSheet &other)
         : KoShapeUserData(other.d->workbook)
         , KoShapeControllerBase()
         , ProtectableObject(other)
@@ -277,7 +277,7 @@ Sheet::Sheet(const Sheet &other)
     d->documentSize = other.d->documentSize;
 }
 
-Sheet::~Sheet()
+KCSheet::~KCSheet()
 {
     //Disable automatic recalculation of dependancies on this sheet to prevent crashes
     //in certain situations:
@@ -293,27 +293,27 @@ Sheet::~Sheet()
     delete d;
 }
 
-QAbstractItemModel* Sheet::model() const
+QAbstractItemModel* KCSheet::model() const
 {
     return d->model;
 }
 
-QString Sheet::sheetName() const
+QString KCSheet::sheetName() const
 {
     return d->name;
 }
 
-Map* Sheet::map() const
+Map* KCSheet::map() const
 {
     return d->workbook;
 }
 
-DocBase* Sheet::doc() const
+DocBase* KCSheet::doc() const
 {
     return d->workbook->doc();
 }
 
-void Sheet::addShape(KoShape* shape)
+void KCSheet::addShape(KoShape* shape)
 {
     if (!shape)
         return;
@@ -322,7 +322,7 @@ void Sheet::addShape(KoShape* shape)
     emit shapeAdded(this, shape);
 }
 
-void Sheet::removeShape(KoShape* shape)
+void KCSheet::removeShape(KoShape* shape)
 {
     if (!shape)
         return;
@@ -330,98 +330,98 @@ void Sheet::removeShape(KoShape* shape)
     emit shapeRemoved(this, shape);
 }
 
-void Sheet::deleteShapes()
+void KCSheet::deleteShapes()
 {
     qDeleteAll(d->shapes);
     d->shapes.clear();
 }
 
-KoResourceManager* Sheet::resourceManager() const
+KoResourceManager* KCSheet::resourceManager() const
 {
     return map()->resourceManager();
 }
 
-QList<KoShape*> Sheet::shapes() const
+QList<KoShape*> KCSheet::shapes() const
 {
     return d->shapes;
 }
 
-Qt::LayoutDirection Sheet::layoutDirection() const
+Qt::LayoutDirection KCSheet::layoutDirection() const
 {
     return d->layoutDirection;
 }
 
-void Sheet::setLayoutDirection(Qt::LayoutDirection dir)
+void KCSheet::setLayoutDirection(Qt::LayoutDirection dir)
 {
     d->layoutDirection = dir;
 }
 
-bool Sheet::isHidden() const
+bool KCSheet::isHidden() const
 {
     return d->hide;
 }
 
-void Sheet::setHidden(bool hidden)
+void KCSheet::setHidden(bool hidden)
 {
     d->hide = hidden;
 }
 
-bool Sheet::getShowGrid() const
+bool KCSheet::getShowGrid() const
 {
     return d->showGrid;
 }
 
-void Sheet::setShowGrid(bool _showGrid)
+void KCSheet::setShowGrid(bool _showGrid)
 {
     d->showGrid = _showGrid;
 }
 
-bool Sheet::getShowFormula() const
+bool KCSheet::getShowFormula() const
 {
     return d->showFormula;
 }
 
-void Sheet::setShowFormula(bool _showFormula)
+void KCSheet::setShowFormula(bool _showFormula)
 {
     d->showFormula = _showFormula;
 }
 
-bool Sheet::getShowFormulaIndicator() const
+bool KCSheet::getShowFormulaIndicator() const
 {
     return d->showFormulaIndicator;
 }
 
-void Sheet::setShowFormulaIndicator(bool _showFormulaIndicator)
+void KCSheet::setShowFormulaIndicator(bool _showFormulaIndicator)
 {
     d->showFormulaIndicator = _showFormulaIndicator;
 }
 
-bool Sheet::getShowCommentIndicator() const
+bool KCSheet::getShowCommentIndicator() const
 {
     return d->showCommentIndicator;
 }
 
-void Sheet::setShowCommentIndicator(bool _indic)
+void KCSheet::setShowCommentIndicator(bool _indic)
 {
     d->showCommentIndicator = _indic;
 }
 
-bool Sheet::getLcMode() const
+bool KCSheet::getLcMode() const
 {
     return d->lcMode;
 }
 
-void Sheet::setLcMode(bool _lcMode)
+void KCSheet::setLcMode(bool _lcMode)
 {
     d->lcMode = _lcMode;
 }
 
-bool Sheet::isAutoCalculationEnabled() const
+bool KCSheet::isAutoCalculationEnabled() const
 {
     return d->autoCalc;
 }
 
-void Sheet::setAutoCalculationEnabled(bool enable)
+void KCSheet::setAutoCalculationEnabled(bool enable)
 {
     //Avoid possible recalculation of dependancies if the auto calc setting hasn't changed
     if (d->autoCalc == enable)
@@ -437,42 +437,42 @@ void Sheet::setAutoCalculationEnabled(bool enable)
     }
 }
 
-bool Sheet::getShowColumnNumber() const
+bool KCSheet::getShowColumnNumber() const
 {
     return d->showColumnNumber;
 }
 
-void Sheet::setShowColumnNumber(bool _showColumnNumber)
+void KCSheet::setShowColumnNumber(bool _showColumnNumber)
 {
     d->showColumnNumber = _showColumnNumber;
 }
 
-bool Sheet::getHideZero() const
+bool KCSheet::getHideZero() const
 {
     return d->hideZero;
 }
 
-void Sheet::setHideZero(bool _hideZero)
+void KCSheet::setHideZero(bool _hideZero)
 {
     d->hideZero = _hideZero;
 }
 
-bool Sheet::getFirstLetterUpper() const
+bool KCSheet::getFirstLetterUpper() const
 {
     return d->firstLetterUpper;
 }
 
-void Sheet::setFirstLetterUpper(bool _firstUpper)
+void KCSheet::setFirstLetterUpper(bool _firstUpper)
 {
     d->firstLetterUpper = _firstUpper;
 }
 
-bool Sheet::isShowPageBorders() const
+bool KCSheet::isShowPageBorders() const
 {
     return d->showPageBorders;
 }
 
-const ColumnFormat* Sheet::columnFormat(int _column) const
+const ColumnFormat* KCSheet::columnFormat(int _column) const
 {
     const ColumnFormat *p = d->columns.lookup(_column);
     if (p != 0)
@@ -481,7 +481,7 @@ const ColumnFormat* Sheet::columnFormat(int _column) const
     return map()->defaultColumnFormat();
 }
 
-const RowFormat* Sheet::rowFormat(int _row) const
+const RowFormat* KCSheet::rowFormat(int _row) const
 {
     const RowFormat *p = d->rows.lookup(_row);
     if (p != 0)
@@ -490,62 +490,62 @@ const RowFormat* Sheet::rowFormat(int _row) const
     return map()->defaultRowFormat();
 }
 
-CellStorage* Sheet::cellStorage() const
+CellStorage* KCSheet::cellStorage() const
 {
     return d->cellStorage;
 }
 
-const CommentStorage* Sheet::commentStorage() const
+const CommentStorage* KCSheet::commentStorage() const
 {
     return d->cellStorage->commentStorage();
 }
 
-const ConditionsStorage* Sheet::conditionsStorage() const
+const ConditionsStorage* KCSheet::conditionsStorage() const
 {
     return d->cellStorage->conditionsStorage();
 }
 
-const FormulaStorage* Sheet::formulaStorage() const
+const FormulaStorage* KCSheet::formulaStorage() const
 {
     return d->cellStorage->formulaStorage();
 }
 
-const FusionStorage* Sheet::fusionStorage() const
+const FusionStorage* KCSheet::fusionStorage() const
 {
     return d->cellStorage->fusionStorage();
 }
 
-const LinkStorage* Sheet::linkStorage() const
+const LinkStorage* KCSheet::linkStorage() const
 {
     return d->cellStorage->linkStorage();
 }
 
-const StyleStorage* Sheet::styleStorage() const
+const StyleStorage* KCSheet::styleStorage() const
 {
     return d->cellStorage->styleStorage();
 }
 
-const ValidityStorage* Sheet::validityStorage() const
+const ValidityStorage* KCSheet::validityStorage() const
 {
     return d->cellStorage->validityStorage();
 }
 
-const ValueStorage* Sheet::valueStorage() const
+const ValueStorage* KCSheet::valueStorage() const
 {
     return d->cellStorage->valueStorage();
 }
 
-SheetPrint* Sheet::print() const
+SheetPrint* KCSheet::print() const
 {
     return d->print;
 }
 
-PrintSettings* Sheet::printSettings() const
+PrintSettings* KCSheet::printSettings() const
 {
     return d->print->settings();
 }
 
-void Sheet::setPrintSettings(const PrintSettings &settings)
+void KCSheet::setPrintSettings(const PrintSettings &settings)
 {
     d->print->setSettings(settings);
     // Repaint, if page borders are shown and this is the active sheet.
@@ -555,29 +555,29 @@ void Sheet::setPrintSettings(const PrintSettings &settings)
     }
 }
 
-HeaderFooter *Sheet::headerFooter() const
+HeaderFooter *KCSheet::headerFooter() const
 {
     return d->print->headerFooter();
 }
 
-QSizeF Sheet::documentSize() const
+QSizeF KCSheet::documentSize() const
 {
     return d->documentSize;
 }
 
-void Sheet::adjustDocumentWidth(double deltaWidth)
+void KCSheet::adjustDocumentWidth(double deltaWidth)
 {
     d->documentSize.rwidth() += deltaWidth;
     emit documentSizeChanged(d->documentSize);
 }
 
-void Sheet::adjustDocumentHeight(double deltaHeight)
+void KCSheet::adjustDocumentHeight(double deltaHeight)
 {
     d->documentSize.rheight() += deltaHeight;
     emit documentSizeChanged(d->documentSize);
 }
 
-int Sheet::leftColumn(double _xpos, double &_left) const
+int KCSheet::leftColumn(double _xpos, double &_left) const
 {
     _left = 0.0;
     int col = 1;
@@ -589,7 +589,7 @@ int Sheet::leftColumn(double _xpos, double &_left) const
     return col;
 }
 
-int Sheet::rightColumn(double _xpos) const
+int KCSheet::rightColumn(double _xpos) const
 {
     int col = 1;
     double x = columnFormat(col)->visibleWidth();
@@ -598,7 +598,7 @@ int Sheet::rightColumn(double _xpos) const
     return col;
 }
 
-int Sheet::topRow(double _ypos, double & _top) const
+int KCSheet::topRow(double _ypos, double & _top) const
 {
     _top = 0.0;
     int row = 1;
@@ -610,7 +610,7 @@ int Sheet::topRow(double _ypos, double & _top) const
     return row;
 }
 
-int Sheet::bottomRow(double _ypos) const
+int KCSheet::bottomRow(double _ypos) const
 {
     int row = 1;
     double y = rowFormat(row)->visibleHeight();
@@ -619,7 +619,7 @@ int Sheet::bottomRow(double _ypos) const
     return row;
 }
 
-QRectF Sheet::cellCoordinatesToDocument(const QRect& cellRange) const
+QRectF KCSheet::cellCoordinatesToDocument(const QRect& cellRange) const
 {
     // TODO Stefan: Rewrite to save some iterations over the columns/rows.
     QRectF rect;
@@ -630,7 +630,7 @@ QRectF Sheet::cellCoordinatesToDocument(const QRect& cellRange) const
     return rect;
 }
 
-QRect Sheet::documentToCellCoordinates(const QRectF &area) const
+QRect KCSheet::documentToCellCoordinates(const QRectF &area) const
 {
     double width = 0.0;
     int left = 0;
@@ -649,7 +649,7 @@ QRect Sheet::documentToCellCoordinates(const QRectF &area) const
     return QRect(left, top, right - left + 1, bottom - top + 1);
 }
 
-double Sheet::columnPosition(int _col) const
+double KCSheet::columnPosition(int _col) const
 {
     const int max = qMin(_col, KS_colMax);
     double x = 0.0;
@@ -659,7 +659,7 @@ double Sheet::columnPosition(int _col) const
 }
 
 
-double Sheet::rowPosition(int _row) const
+double KCSheet::rowPosition(int _row) const
 {
     const int max = qMin(_row, KS_rowMax);
     double y = 0.0;
@@ -669,17 +669,17 @@ double Sheet::rowPosition(int _row) const
 }
 
 
-RowFormat* Sheet::firstRow() const
+RowFormat* KCSheet::firstRow() const
 {
     return d->rows.first();
 }
 
-ColumnFormat* Sheet::firstCol() const
+ColumnFormat* KCSheet::firstCol() const
 {
     return d->columns.first();
 }
 
-ColumnFormat* Sheet::nonDefaultColumnFormat(int _column, bool force_creation)
+ColumnFormat* KCSheet::nonDefaultColumnFormat(int _column, bool force_creation)
 {
     Q_ASSERT(_column >= 1 && _column <= KS_colMax);
     ColumnFormat *p = d->columns.lookup(_column);
@@ -695,7 +695,7 @@ ColumnFormat* Sheet::nonDefaultColumnFormat(int _column, bool force_creation)
     return p;
 }
 
-RowFormat* Sheet::nonDefaultRowFormat(int _row, bool force_creation)
+RowFormat* KCSheet::nonDefaultRowFormat(int _row, bool force_creation)
 {
     Q_ASSERT(_row >= 1 && _row <= KS_rowMax);
     RowFormat *p = d->rows.lookup(_row);
@@ -711,7 +711,7 @@ RowFormat* Sheet::nonDefaultRowFormat(int _row, bool force_creation)
     return p;
 }
 
-void Sheet::changeCellTabName(QString const & old_name, QString const & new_name)
+void KCSheet::changeCellTabName(QString const & old_name, QString const & new_name)
 {
     for (int c = 0; c < formulaStorage()->count(); ++c) {
         if (formulaStorage()->data(c).expression().contains(old_name)) {
@@ -733,51 +733,51 @@ void Sheet::changeCellTabName(QString const & old_name, QString const & new_name
     }
 }
 
-void Sheet::insertShiftRight(const QRect& rect)
+void KCSheet::insertShiftRight(const QRect& rect)
 {
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         for (int i = rect.top(); i <= rect.bottom(); ++i) {
             sheet->changeNameCellRef(QPoint(rect.left(), i), false,
-                                     Sheet::ColumnInsert, sheetName(),
+                                     KCSheet::ColumnInsert, sheetName(),
                                      rect.right() - rect.left() + 1);
         }
     }
 }
 
-void Sheet::insertShiftDown(const QRect& rect)
+void KCSheet::insertShiftDown(const QRect& rect)
 {
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         for (int i = rect.left(); i <= rect.right(); ++i) {
             sheet->changeNameCellRef(QPoint(i, rect.top()), false,
-                                     Sheet::RowInsert, sheetName(),
+                                     KCSheet::RowInsert, sheetName(),
                                      rect.bottom() - rect.top() + 1);
         }
     }
 }
 
-void Sheet::removeShiftUp(const QRect& rect)
+void KCSheet::removeShiftUp(const QRect& rect)
 {
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         for (int i = rect.left(); i <= rect.right(); ++i) {
             sheet->changeNameCellRef(QPoint(i, rect.top()), false,
-                                     Sheet::RowRemove, sheetName(),
+                                     KCSheet::RowRemove, sheetName(),
                                      rect.bottom() - rect.top() + 1);
         }
     }
 }
 
-void Sheet::removeShiftLeft(const QRect& rect)
+void KCSheet::removeShiftLeft(const QRect& rect)
 {
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         for (int i = rect.top(); i <= rect.bottom(); ++i) {
             sheet->changeNameCellRef(QPoint(rect.left(), i), false,
-                                     Sheet::ColumnRemove, sheetName(),
+                                     KCSheet::ColumnRemove, sheetName(),
                                      rect.right() - rect.left() + 1);
         }
     }
 }
 
-void Sheet::insertColumns(int col, int number)
+void KCSheet::insertColumns(int col, int number)
 {
     double deltaWidth = 0.0;
     for (int i = 0; i < number; i++) {
@@ -788,16 +788,16 @@ void Sheet::insertColumns(int col, int number)
     // Adjust document width (plus widths of new columns; minus widths of removed columns).
     adjustDocumentWidth(deltaWidth);
 
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         sheet->changeNameCellRef(QPoint(col, 1), true,
-                                 Sheet::ColumnInsert, sheetName(),
+                                 KCSheet::ColumnInsert, sheetName(),
                                  number);
     }
     //update print settings
     d->print->insertColumn(col, number);
 }
 
-void Sheet::insertRows(int row, int number)
+void KCSheet::insertRows(int row, int number)
 {
     double deltaHeight = 0.0;
     for (int i = 0; i < number; i++) {
@@ -808,16 +808,16 @@ void Sheet::insertRows(int row, int number)
     // Adjust document height (plus heights of new rows; minus heights of removed rows).
     adjustDocumentHeight(deltaHeight);
 
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         sheet->changeNameCellRef(QPoint(1, row), true,
-                                 Sheet::RowInsert, sheetName(),
+                                 KCSheet::RowInsert, sheetName(),
                                  number);
     }
     //update print settings
     d->print->insertRow(row, number);
 }
 
-void Sheet::removeColumns(int col, int number)
+void KCSheet::removeColumns(int col, int number)
 {
     double deltaWidth = 0.0;
     for (int i = 0; i < number; ++i) {
@@ -828,16 +828,16 @@ void Sheet::removeColumns(int col, int number)
     // Adjust document width (plus widths of new columns; minus widths of removed columns).
     adjustDocumentWidth(deltaWidth);
 
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         sheet->changeNameCellRef(QPoint(col, 1), true,
-                                 Sheet::ColumnRemove, sheetName(),
+                                 KCSheet::ColumnRemove, sheetName(),
                                  number);
     }
     //update print settings
     d->print->removeColumn(col, number);
 }
 
-void Sheet::removeRows(int row, int number)
+void KCSheet::removeRows(int row, int number)
 {
     double deltaHeight = 0.0;
     for (int i = 0; i < number; i++) {
@@ -848,9 +848,9 @@ void Sheet::removeRows(int row, int number)
     // Adjust document height (plus heights of new rows; minus heights of removed rows).
     adjustDocumentHeight(deltaHeight);
 
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         sheet->changeNameCellRef(QPoint(1, row), true,
-                                 Sheet::RowRemove, sheetName(),
+                                 KCSheet::RowRemove, sheetName(),
                                  number);
     }
 
@@ -858,7 +858,7 @@ void Sheet::removeRows(int row, int number)
     d->print->removeRow(row, number);
 }
 
-QString Sheet::changeNameCellRefHelper(const QPoint& pos, bool fullRowOrColumn, ChangeRef ref,
+QString KCSheet::changeNameCellRefHelper(const QPoint& pos, bool fullRowOrColumn, ChangeRef ref,
                                        int nbCol, const QPoint& point, bool isColumnFixed,
                                        bool isRowFixed)
 {
@@ -914,7 +914,7 @@ QString Sheet::changeNameCellRefHelper(const QPoint& pos, bool fullRowOrColumn, 
     return newPoint;
 }
 
-void Sheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeRef ref,
+void KCSheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeRef ref,
                               const QString& tabname, int nbCol)
 {
     for (int c = 0; c < formulaStorage()->count(); ++c) {
@@ -984,8 +984,8 @@ void Sheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeRef
     }
 }
 
-// helper function for Sheet::areaIsEmpty
-bool Sheet::cellIsEmpty(const Cell& cell, TestType _type)
+// helper function for KCSheet::areaIsEmpty
+bool KCSheet::cellIsEmpty(const Cell& cell, TestType _type)
 {
     if (!cell.isPartOfMerged()) {
         switch (_type) {
@@ -1011,7 +1011,7 @@ bool Sheet::cellIsEmpty(const Cell& cell, TestType _type)
 }
 
 // TODO: convert into a manipulator, similar to the Dilation one
-bool Sheet::areaIsEmpty(const KCRegion& region, TestType _type)
+bool KCSheet::areaIsEmpty(const KCRegion& region, TestType _type)
 {
     KCRegion::ConstIterator endOfList = region.constEnd();
     for (KCRegion::ConstIterator it = region.constBegin(); it != endOfList; ++it) {
@@ -1052,7 +1052,7 @@ bool Sheet::areaIsEmpty(const KCRegion& region, TestType _type)
     return true;
 }
 
-QDomElement Sheet::saveXML(QDomDocument& dd)
+QDomElement KCSheet::saveXML(QDomDocument& dd)
 {
     QDomElement sheet = dd.createElement("table");
 
@@ -1258,12 +1258,12 @@ QDomElement Sheet::saveXML(QDomDocument& dd)
     return sheet;
 }
 
-bool Sheet::isLoading()
+bool KCSheet::isLoading()
 {
     return map()->isLoading();
 }
 
-void Sheet::checkContentDirection(QString const & name)
+void KCSheet::checkContentDirection(QString const & name)
 {
     /* set sheet's direction to RTL if sheet name is an RTL string */
     if ((name.isRightToLeft()))
@@ -1272,7 +1272,7 @@ void Sheet::checkContentDirection(QString const & name)
         setLayoutDirection(Qt::LeftToRight);
 }
 
-bool Sheet::loadSheetStyleFormat(KoXmlElement *style)
+bool KCSheet::loadSheetStyleFormat(KoXmlElement *style)
 {
     QString hleft, hmiddle, hright;
     QString fleft, fmiddle, fright;
@@ -1345,14 +1345,14 @@ bool Sheet::loadSheetStyleFormat(KoXmlElement *style)
     return true;
 }
 
-void Sheet::replaceMacro(QString & text, const QString & old, const QString & newS)
+void KCSheet::replaceMacro(QString & text, const QString & old, const QString & newS)
 {
     int n = text.indexOf(old);
     if (n != -1)
         text = text.replace(n, old.length(), newS);
 }
 
-QString Sheet::getPart(const KoXmlNode & part)
+QString KCSheet::getPart(const KoXmlNode & part)
 {
     QString result;
     KoXmlElement e = KoXml::namedItemNS(part, KoXmlNS::text, "p");
@@ -1397,7 +1397,7 @@ QString Sheet::getPart(const KoXmlNode & part)
     return result;
 }
 
-void Sheet::loadColumnNodes(const KoXmlElement& parent,
+void KCSheet::loadColumnNodes(const KoXmlElement& parent,
                             int& indexCol,
                             int& maxColumn,
                             KoOdfLoadingContext& odfContext,
@@ -1420,7 +1420,7 @@ void Sheet::loadColumnNodes(const KoXmlElement& parent,
     }
 }
 
-void Sheet::loadRowNodes(const KoXmlElement& parent,
+void KCSheet::loadRowNodes(const KoXmlElement& parent,
                             int& rowIndex,
                             int& maxColumn,
                             OdfLoadingContext& tableContext,
@@ -1449,7 +1449,7 @@ void Sheet::loadRowNodes(const KoXmlElement& parent,
 }
 
 
-bool Sheet::loadOdf(const KoXmlElement& sheetElement,
+bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
                     OdfLoadingContext& tableContext,
                     const Styles& autoStyles,
                     const QHash<QString, Conditions>& conditionalStyles)
@@ -1458,7 +1458,7 @@ bool Sheet::loadOdf(const KoXmlElement& sheetElement,
     QPointer<KoUpdater> updater;
     if (doc() && doc()->progressUpdater()) {
         updater = doc()->progressUpdater()->startSubtask(1,
-                                                     "KSpread::Sheet::loadOdf");
+                                                     "KSpread::KCSheet::loadOdf");
         updater->setProgress(0);
     }
 
@@ -1622,7 +1622,7 @@ bool Sheet::loadOdf(const KoXmlElement& sheetElement,
             // slightly faster
             KoXml::load(rowElement);
 
-            //kDebug(36003) << " Sheet::loadOdf rowElement.tagName() :" << rowElement.localName();
+            //kDebug(36003) << " KCSheet::loadOdf rowElement.tagName() :" << rowElement.localName();
             if (rowElement.namespaceURI() == KoXmlNS::table) {
                 if (rowElement.localName() == "table-header-columns") {
                     // NOTE Handle header cols as ordinary ones
@@ -1704,7 +1704,7 @@ bool Sheet::loadOdf(const KoXmlElement& sheetElement,
     return true;
 }
 
-void Sheet::loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& shapeContext)
+void KCSheet::loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& shapeContext)
 {
     KoShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
     if (!shape)
@@ -1713,7 +1713,7 @@ void Sheet::loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& sh
     dynamic_cast<ShapeApplicationData*>(shape->applicationData())->setAnchoredToCell(false);
 }
 
-void Sheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
+void KCSheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
 {
     KoPageLayout pageLayout;
 
@@ -1823,11 +1823,11 @@ void Sheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
 }
 
 
-bool Sheet::loadColumnFormat(const KoXmlElement& column,
+bool KCSheet::loadColumnFormat(const KoXmlElement& column,
                              const KoOdfStylesReader& stylesReader, int & indexCol,
                              QHash<QString, QRegion>& columnStyleRegions, IntervalMap<QString>& columnStyles)
 {
-//   kDebug(36003)<<"bool Sheet::loadColumnFormat(const KoXmlElement& column, const KoOdfStylesReader& stylesReader, unsigned int & indexCol ) index Col :"<<indexCol;
+//   kDebug(36003)<<"bool KCSheet::loadColumnFormat(const KoXmlElement& column, const KoOdfStylesReader& stylesReader, unsigned int & indexCol ) index Col :"<<indexCol;
 
     bool isNonDefaultColumn = false;
 
@@ -1928,7 +1928,7 @@ bool Sheet::loadColumnFormat(const KoXmlElement& column,
     return true;
 }
 
-void Sheet::loadOdfInsertStyles(const Styles& autoStyles,
+void KCSheet::loadOdfInsertStyles(const Styles& autoStyles,
                                 const QHash<QString, QRegion>& styleRegions,
                                 const QHash<QString, Conditions>& conditionalStyles,
                                 const QRect& usedArea,
@@ -1962,7 +1962,7 @@ void Sheet::loadOdfInsertStyles(const Styles& autoStyles,
     }
 }
 
-int Sheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
+int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
                           OdfLoadingContext& tableContext,
                           QHash<QString, QRegion>& rowStyleRegions,
                           QHash<QString, QRegion>& cellStyleRegions,
@@ -1981,7 +1981,7 @@ int Sheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     static const QString sCoveredTableCell      = QString::fromLatin1("covered-table-cell");
     static const QString sNumberColumnsRepeated = QString::fromLatin1("number-columns-repeated");
 
-//    kDebug(36003)<<"Sheet::loadRowFormat( const KoXmlElement& row, int &rowIndex,const KoOdfStylesReader& stylesReader, bool isLast )***********";
+//    kDebug(36003)<<"KCSheet::loadRowFormat( const KoXmlElement& row, int &rowIndex,const KoOdfStylesReader& stylesReader, bool isLast )***********";
     KoOdfLoadingContext& odfContext = tableContext.odfContext;
     bool isNonDefaultRow = false;
 
@@ -2130,7 +2130,7 @@ int Sheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     return columnMaximal;
 }
 
-QRect Sheet::usedArea(bool onlyContent) const
+QRect KCSheet::usedArea(bool onlyContent) const
 {
     int maxCols = d->cellStorage->columns(!onlyContent);
     int maxRows = d->cellStorage->rows(!onlyContent);
@@ -2164,7 +2164,7 @@ QRect Sheet::usedArea(bool onlyContent) const
     return QRect(1, 1, maxCols, maxRows);
 }
 
-bool Sheet::compareRows(int row1, int row2, int& maxCols, OdfSavingContext& tableContext) const
+bool KCSheet::compareRows(int row1, int row2, int& maxCols, OdfSavingContext& tableContext) const
 {
     if (*rowFormat(row1) != *rowFormat(row2)) {
 //         kDebug(36003) <<"\t Formats of" << row1 <<" and" << row2 <<" are different";
@@ -2194,7 +2194,7 @@ bool Sheet::compareRows(int row1, int row2, int& maxCols, OdfSavingContext& tabl
     return true;
 }
 
-void Sheet::saveOdfHeaderFooter(KoXmlWriter &xmlWriter) const
+void KCSheet::saveOdfHeaderFooter(KoXmlWriter &xmlWriter) const
 {
     QString headerLeft = print()->headerFooter()->headLeft();
     QString headerCenter = print()->headerFooter()->headMid();
@@ -2276,13 +2276,13 @@ void Sheet::saveOdfHeaderFooter(KoXmlWriter &xmlWriter) const
 
 }
 
-void Sheet::addText(const QString & text, KoXmlWriter & writer) const
+void KCSheet::addText(const QString & text, KoXmlWriter & writer) const
 {
     if (!text.isEmpty())
         writer.addTextNode(text);
 }
 
-void Sheet::convertPart(const QString & part, KoXmlWriter & xmlWriter) const
+void KCSheet::convertPart(const QString & part, KoXmlWriter & xmlWriter) const
 {
     QString text;
     QString var;
@@ -2381,7 +2381,7 @@ void Sheet::convertPart(const QString & part, KoXmlWriter & xmlWriter) const
     kDebug(36003) << " text end :" << text << " var :" << var;
 }
 
-void Sheet::saveOdfBackgroundImage(KoXmlWriter& xmlWriter) const
+void KCSheet::saveOdfBackgroundImage(KoXmlWriter& xmlWriter) const
 {
     const BackgroundImageProperties& properties = backgroundImageProperties();
     xmlWriter.startElement("style:backgroundImage");
@@ -2434,7 +2434,7 @@ void Sheet::saveOdfBackgroundImage(KoXmlWriter& xmlWriter) const
 }
 
 
-void Sheet::loadOdfSettings(const KoOasisSettings::NamedMap &settings)
+void KCSheet::loadOdfSettings(const KoOasisSettings::NamedMap &settings)
 {
     // Find the entry in the map that applies to this sheet (by name)
     KoOasisSettings::Items items = settings.entry(sheetName());
@@ -2460,7 +2460,7 @@ void Sheet::loadOdfSettings(const KoOasisSettings::NamedMap &settings)
     setShowColumnNumber(items.parseConfigItemBool("ShowColumnNumber"));
 }
 
-void Sheet::saveOdfSettings(KoXmlWriter &settingsWriter) const
+void KCSheet::saveOdfSettings(KoXmlWriter &settingsWriter) const
 {
     //not into each page into oo spec
     settingsWriter.addConfigItem("ShowZeroValues", !getHideZero());
@@ -2475,7 +2475,7 @@ void Sheet::saveOdfSettings(KoXmlWriter &settingsWriter) const
     settingsWriter.addConfigItem("ShowColumnNumber", getShowColumnNumber());
 }
 
-bool Sheet::saveOdf(OdfSavingContext& tableContext)
+bool KCSheet::saveOdf(OdfSavingContext& tableContext)
 {
     KoXmlWriter & xmlWriter = tableContext.shapeContext.xmlWriter();
     KoGenStyles & mainStyles = tableContext.shapeContext.mainStyles();
@@ -2530,7 +2530,7 @@ bool Sheet::saveOdf(OdfSavingContext& tableContext)
     return true;
 }
 
-QString Sheet::saveOdfSheetStyleName(KoGenStyles &mainStyles)
+QString KCSheet::saveOdfSheetStyleName(KoGenStyles &mainStyles)
 {
     KoGenStyle pageStyle(KoGenStyle::TableAutoStyle, "table"/*FIXME I don't know if name is sheet*/);
 
@@ -2565,10 +2565,10 @@ QString Sheet::saveOdfSheetStyleName(KoGenStyles &mainStyles)
 }
 
 
-void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
+void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
                               int maxCols, int maxRows, OdfSavingContext& tableContext)
 {
-    kDebug(36003) << "Sheet::saveOdfColRowCell:" << d->name;
+    kDebug(36003) << "KCSheet::saveOdfColRowCell:" << d->name;
 
     // calculate the column/row default cell styles
     int maxMaxRows = maxRows; // includes the max row a column default style occupies
@@ -2580,14 +2580,14 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
     maxCols = qMin(KS_colMax, qMax(1, maxCols));
     maxRows = qMin(KS_rowMax, qMax(1, maxRows));
     maxMaxRows = maxMaxRows;
-    kDebug(36003) << "\t Sheet dimension:" << maxCols << " x" << maxRows;
+    kDebug(36003) << "\t KCSheet dimension:" << maxCols << " x" << maxRows;
 
     // saving the columns
     //
     int i = 1;
     while (i <= maxCols) {
         const ColumnFormat* column = columnFormat(i);
-//         kDebug(36003) << "Sheet::saveOdfColRowCell: first col loop:"
+//         kDebug(36003) << "KCSheet::saveOdfColRowCell: first col loop:"
 //                       << "i:" << i
 //                       << "column:" << (column ? column->column() : 0)
 //                       << "default:" << (column ? column->isDefault() : false);
@@ -2607,7 +2607,7 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
             // j becomes the index of the adjacent column
             ++j;
 
-//           kDebug(36003) <<"Sheet::saveOdfColRowCell: second col loop:"
+//           kDebug(36003) <<"KCSheet::saveOdfColRowCell: second col loop:"
 //                         << "j:" << j
 //                         << "next column:" << (nextColumn ? nextColumn->column() : 0)
 //                         << "next styled column:" << nextStyleColumnIndex;
@@ -2664,7 +2664,7 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
             xmlWriter.addAttribute("table:number-columns-repeated", count);
         xmlWriter.endElement();
 
-        kDebug(36003) << "Sheet::saveOdfColRowCell: column" << i
+        kDebug(36003) << "KCSheet::saveOdfColRowCell: column" << i
         << "repeated" << count - 1 << "time(s)";
 
         i += count;
@@ -2692,7 +2692,7 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
         int repeated = cellStorage()->rowRepeat(i);
         // empty row?
         if (!d->cellStorage->firstInRow(i) && !tableContext.rowHasCellAnchoredShapes(this, i)) { // row is empty
-//             kDebug(36003) <<"Sheet::saveOdfColRowCell: first row loop:"
+//             kDebug(36003) <<"KCSheet::saveOdfColRowCell: first row loop:"
 //                           << " i: " << i
 //                           << " row: " << row->row();
             int j = i + repeated;
@@ -2703,7 +2703,7 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
             //   next row with different Format
             while (j <= maxRows && !d->cellStorage->firstInRow(j) && !tableContext.rowHasCellAnchoredShapes(this, j)) {
                 const RowFormat* nextRow = rowFormat(j);
-//               kDebug(36003) <<"Sheet::saveOdfColRowCell: second row loop:"
+//               kDebug(36003) <<"KCSheet::saveOdfColRowCell: second row loop:"
 //                         << " j: " << j
 //                         << " row: " << nextRow->row();
 
@@ -2753,7 +2753,7 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
             }
             xmlWriter.endElement();
 
-            kDebug(36003) << "Sheet::saveOdfColRowCell: empty row" << i
+            kDebug(36003) << "KCSheet::saveOdfColRowCell: empty row" << i
             << "repeated" << repeated << "time(s)";
 
             // copy the index for the next row to process
@@ -2776,7 +2776,7 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
             }
             repeated = j - i;
             if (repeated > 1) {
-                kDebug(36003) << "Sheet::saveOdfColRowCell: NON-empty row" << i
+                kDebug(36003) << "KCSheet::saveOdfColRowCell: NON-empty row" << i
                 << "repeated" << repeated << "times";
 
                 xmlWriter.addAttribute("table:number-rows-repeated", repeated);
@@ -2805,7 +2805,7 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
     }
 }
 
-void Sheet::saveOdfCells(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles, int row, int maxCols,
+void KCSheet::saveOdfCells(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles, int row, int maxCols,
                          OdfSavingContext& tableContext)
 {
     int i = 1;
@@ -2822,7 +2822,7 @@ void Sheet::saveOdfCells(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles, int ro
     // or
     //   we have a further cell in this row
     while (!cell.isDefault() || tableContext.cellHasAnchoredShapes(this, cell.row(), cell.column()) || !nextCell.isNull()) {
-//         kDebug(36003) <<"Sheet::saveOdfCells:"
+//         kDebug(36003) <<"KCSheet::saveOdfCells:"
 //                       << " i: " << i
 //                       << " column: " << cell.column() << endl;
 
@@ -2866,14 +2866,14 @@ void Sheet::saveOdfCells(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles, int ro
     }
 }
 
-bool Sheet::loadXML(const KoXmlElement& sheet)
+bool KCSheet::loadXML(const KoXmlElement& sheet)
 {
     bool ok = false;
     QString sname = sheetName();
     if (!map()->loadingInfo()->loadTemplate()) {
         sname = sheet.attribute("name");
         if (sname.isEmpty()) {
-            doc()->setErrorMessage(i18n("Invalid document. Sheet name is empty."));
+            doc()->setErrorMessage(i18n("Invalid document. KCSheet name is empty."));
             return false;
         }
     }
@@ -2922,7 +2922,7 @@ bool Sheet::loadXML(const KoXmlElement& sheet)
         }
         sname = testName;
 
-        kDebug(36001) << "Sheet::loadXML: table name =" << sname;
+        kDebug(36001) << "KCSheet::loadXML: table name =" << sname;
         setObjectName(sname.toUtf8());
         setSheetName(sname, true);
     }
@@ -3156,7 +3156,7 @@ bool Sheet::loadXML(const KoXmlElement& sheet)
 }
 
 
-bool Sheet::loadChildren(KoStore* _store)
+bool KCSheet::loadChildren(KoStore* _store)
 {
     Q_UNUSED(_store);
 #if 0 // KSPREAD_KOPART_EMBEDDING
@@ -3172,7 +3172,7 @@ bool Sheet::loadChildren(KoStore* _store)
 }
 
 
-void Sheet::setShowPageBorders(bool b)
+void KCSheet::setShowPageBorders(bool b)
 {
     if (b == d->showPageBorders)
         return;
@@ -3184,27 +3184,27 @@ void Sheet::setShowPageBorders(bool b)
     }
 }
 
-QImage Sheet::backgroundImage() const
+QImage KCSheet::backgroundImage() const
 {
     return d->backgroundImage;
 }
 
-void Sheet::setBackgroundImage(const QImage& image)
+void KCSheet::setBackgroundImage(const QImage& image)
 {
     d->backgroundImage = image;
 }
 
-Sheet::BackgroundImageProperties Sheet::backgroundImageProperties() const
+KCSheet::BackgroundImageProperties KCSheet::backgroundImageProperties() const
 {
     return d->backgroundProperties;
 }
 
-void Sheet::setBackgroundImageProperties(const Sheet::BackgroundImageProperties& properties)
+void KCSheet::setBackgroundImageProperties(const KCSheet::BackgroundImageProperties& properties)
 {
     d->backgroundProperties = properties;
 }
 
-void Sheet::insertColumnFormat(ColumnFormat *l)
+void KCSheet::insertColumnFormat(ColumnFormat *l)
 {
     d->columns.insertElement(l, l->column());
     if (!map()->isLoading()) {
@@ -3212,7 +3212,7 @@ void Sheet::insertColumnFormat(ColumnFormat *l)
     }
 }
 
-void Sheet::insertRowFormat(RowFormat *l)
+void KCSheet::insertRowFormat(RowFormat *l)
 {
     d->rows.insertElement(l, l->row());
     if (!map()->isLoading()) {
@@ -3220,7 +3220,7 @@ void Sheet::insertRowFormat(RowFormat *l)
     }
 }
 
-void Sheet::deleteColumnFormat(int column)
+void KCSheet::deleteColumnFormat(int column)
 {
     d->columns.removeElement(column);
     if (!map()->isLoading()) {
@@ -3228,7 +3228,7 @@ void Sheet::deleteColumnFormat(int column)
     }
 }
 
-void Sheet::deleteRowFormat(int row)
+void KCSheet::deleteRowFormat(int row)
 {
     d->rows.removeElement(row);
     if (!map()->isLoading()) {
@@ -3236,12 +3236,12 @@ void Sheet::deleteRowFormat(int row)
     }
 }
 
-void Sheet::showStatusMessage(const QString &message, int timeout)
+void KCSheet::showStatusMessage(const QString &message, int timeout)
 {
     emit statusMessage(message, timeout);
 }
 
-bool Sheet::saveChildren(KoStore* _store, const QString &_path)
+bool KCSheet::saveChildren(KoStore* _store, const QString &_path)
 {
     Q_UNUSED(_store);
     Q_UNUSED(_path);
@@ -3258,7 +3258,7 @@ bool Sheet::saveChildren(KoStore* _store, const QString &_path)
     return true;
 }
 
-void Sheet::hideSheet(bool _hide)
+void KCSheet::hideSheet(bool _hide)
 {
     setHidden(_hide);
     if (_hide)
@@ -3267,7 +3267,7 @@ void Sheet::hideSheet(bool _hide)
         map()->addDamage(new SheetDamage(this, SheetDamage::Shown));
 }
 
-bool Sheet::setSheetName(const QString& name, bool init)
+bool KCSheet::setSheetName(const QString& name, bool init)
 {
     Q_UNUSED(init);
     if (map()->findSheet(name))
@@ -3288,7 +3288,7 @@ bool Sheet::setSheetName(const QString& name, bool init)
     //if (init)
     //    return true;
 
-    foreach(Sheet* sheet, map()->sheetList()) {
+    foreach(KCSheet* sheet, map()->sheetList()) {
         sheet->changeCellTabName(old_name, name);
     }
 
@@ -3301,7 +3301,7 @@ bool Sheet::setSheetName(const QString& name, bool init)
 }
 
 
-void Sheet::updateLocale()
+void KCSheet::updateLocale()
 {
     for (int c = 0; c < valueStorage()->count(); ++c) {
         Cell cell(this, valueStorage()->col(c), valueStorage()->row(c));
@@ -3313,7 +3313,7 @@ void Sheet::updateLocale()
     map()->addDamage(new CellDamage(this, region, CellDamage::Appearance));
 }
 
-void Sheet::convertObscuringBorders()
+void KCSheet::convertObscuringBorders()
 {
     // FIXME Stefan: Verify that this is not needed anymore.
 #if 0
@@ -3365,7 +3365,7 @@ void Sheet::convertObscuringBorders()
  **********************/
 
 #ifndef NDEBUG
-void Sheet::printDebug()
+void KCSheet::printDebug()
 {
     int iMaxColumn = d->cellStorage->columns();
     int iMaxRow = d->cellStorage->rows();
@@ -3395,4 +3395,4 @@ void Sheet::printDebug()
 }
 #endif
 
-#include "Sheet.moc"
+#include "KCSheet.moc"

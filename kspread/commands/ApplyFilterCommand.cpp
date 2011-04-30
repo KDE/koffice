@@ -24,7 +24,7 @@
 #include "CellStorage.h"
 #include "Damages.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "RowColumnFormat.h"
 
 #include "database/Database.h"
@@ -45,7 +45,7 @@ void ApplyFilterCommand::redo()
     m_undoData.clear();
     Database database = m_database;
 
-    Sheet* const sheet = database.range().lastSheet();
+    KCSheet* const sheet = database.range().lastSheet();
     const QRect range = database.range().lastRange();
     const int start = database.orientation() == Qt::Vertical ? range.top() : range.left();
     const int end = database.orientation() == Qt::Vertical ? range.bottom() : range.right();
@@ -75,7 +75,7 @@ void ApplyFilterCommand::undo()
     Database database = m_database;
     database.setFilter(*m_oldFilter);
 
-    Sheet* const sheet = database.range().lastSheet();
+    KCSheet* const sheet = database.range().lastSheet();
     const QRect range = database.range().lastRange();
     const int start = database.orientation() == Qt::Vertical ? range.top() : range.left();
     const int end = database.orientation() == Qt::Vertical ? range.bottom() : range.right();

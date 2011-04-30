@@ -46,7 +46,7 @@ class FusionStorage;
 class LinkStorage;
 class KCRegion;
 class RichTextStorage;
-class Sheet;
+class KCSheet;
 class StyleStorage;
 class Validity;
 class ValidityStorage;
@@ -85,7 +85,7 @@ public:
      * Constructor.
      * Creates an empty storage for \p sheet.
      */
-    CellStorage(Sheet* sheet);
+    CellStorage(KCSheet* sheet);
 
     /**
      * Copy constructor.
@@ -97,7 +97,7 @@ public:
      * Copy constructor.
      * Creates a CellStorage for \p sheet and copies the data from \p other.
      */
-    CellStorage(const CellStorage& other, Sheet* sheet);
+    CellStorage(const CellStorage& other, KCSheet* sheet);
 
     /**
      * Destructor.
@@ -107,7 +107,7 @@ public:
     /**
      * \return the sheet this CellStorage is for.
      */
-    Sheet* sheet() const;
+    KCSheet* sheet() const;
 
     /**
      * Removes all data at \p col , \p row .

@@ -42,7 +42,7 @@
 #include "Localization.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "ValueParser.h"
 
 // commands

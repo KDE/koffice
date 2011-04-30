@@ -26,7 +26,7 @@
 
 class KoCanvasBase;
 
-class Sheet;
+class KCSheet;
 
 /**
  * \class AbstractRegionCommand
@@ -47,16 +47,16 @@ public:
     virtual ~AbstractRegionCommand();
 
     /**
-     * \return the Sheet this AbstractRegionCommand works on
+     * \return the KCSheet this AbstractRegionCommand works on
      */
-    Sheet* sheet() const {
+    KCSheet* sheet() const {
         return m_sheet;
     }
 
     /**
-     * Sets \p sheet to be the Sheet to work on.
+     * Sets \p sheet to be the KCSheet to work on.
      */
-    void setSheet(Sheet* sheet) {
+    void setSheet(KCSheet* sheet) {
         m_sheet = sheet;
     }
 
@@ -131,7 +131,7 @@ protected:
     bool isApproved() const;
 
 protected:
-    Sheet*  m_sheet;
+    KCSheet*  m_sheet;
     bool    m_reverse   : 1;
     bool    m_firstrun  : 1;
     bool    m_register  : 1;

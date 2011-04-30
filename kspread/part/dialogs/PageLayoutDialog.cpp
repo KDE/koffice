@@ -23,7 +23,7 @@
 #include "part/Doc.h"
 #include "Map.h"
 #include "PrintSettings.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "ui_PageLayoutSheetPage.h"
 #include "Util.h"
 
@@ -36,7 +36,7 @@
 class PageLayoutDialog::Private
 {
 public:
-    Sheet* sheet;
+    KCSheet* sheet;
     Ui::SheetPage sheetPage;
 
 public:
@@ -131,7 +131,7 @@ void PageLayoutDialog::Private::setup()
 }
 
 
-PageLayoutDialog::PageLayoutDialog(QWidget* parent, Sheet* sheet)
+PageLayoutDialog::PageLayoutDialog(QWidget* parent, KCSheet* sheet)
         : KoPageLayoutDialog(parent, sheet->printSettings()->pageLayout())
         , d(new Private)
 {
@@ -140,7 +140,7 @@ PageLayoutDialog::PageLayoutDialog(QWidget* parent, Sheet* sheet)
 
     QWidget* page = new QWidget(this);
     d->sheetPage.setupUi(page);
-    addPage(page, i18n("Sheet"));
+    addPage(page, i18n("KCSheet"));
 
     connect(d->sheetPage.columnsCheckBox, SIGNAL(toggled(bool)),
             d->sheetPage.startColumnComboBox, SLOT(setEnabled(bool)));
@@ -219,7 +219,7 @@ void PageLayoutDialog::accept()
     if (applyToDocument()) {
         // Apply to all sheets.
         QUndoCommand* macroCommand = new QUndoCommand(i18n("Set Page Layout"));
-        const QList<Sheet*> sheets = d->sheet->map()->sheetList();
+        const QList<KCSheet*> sheets = d->sheet->map()->sheetList();
         for (int i = 0; i < sheets.count(); ++i) {
             PageLayoutCommand* command = new PageLayoutCommand(sheets[i], settings, macroCommand);
             Q_UNUSED(command);

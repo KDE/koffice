@@ -32,7 +32,7 @@
 #include <QString>
 
 class Damage;
-class Sheet;
+class KCSheet;
 class CellProxy;
 
 class KSPREAD_EXPORT SheetAdaptor : public QDBusAbstractAdaptor
@@ -40,7 +40,7 @@ class KSPREAD_EXPORT SheetAdaptor : public QDBusAbstractAdaptor
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.koffice.spreadsheet.sheet")
 public:
-    explicit SheetAdaptor(Sheet*);
+    explicit SheetAdaptor(KCSheet*);
     ~SheetAdaptor();
 
 public Q_SLOTS: // METHODS
@@ -179,7 +179,7 @@ private Q_SLOTS:
     void handleDamages(const QList<Damage*>& damages);
 
 private:
-    Sheet* m_sheet;
+    KCSheet* m_sheet;
     QByteArray ident;
 };
 

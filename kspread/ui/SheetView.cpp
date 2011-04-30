@@ -31,12 +31,12 @@
 #include "kspread_limits.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 class SheetView::Private
 {
 public:
-    const Sheet* sheet;
+    const KCSheet* sheet;
     const KoViewConverter* viewConverter;
     QRect visibleRect;
     QCache<QPoint, CellView> cache;
@@ -109,8 +109,8 @@ CellView SheetView::Private::cellViewToProcess(Cell& cell, QPointF& coordinate,
 }
 
 
-SheetView::SheetView(const Sheet* sheet)
-        : QObject(const_cast<Sheet*>(sheet))
+SheetView::SheetView(const KCSheet* sheet)
+        : QObject(const_cast<KCSheet*>(sheet))
         , d(new Private)
 {
     d->sheet = sheet;
@@ -127,7 +127,7 @@ SheetView::~SheetView()
     delete d;
 }
 
-const Sheet* SheetView::sheet() const
+const KCSheet* SheetView::sheet() const
 {
     return d->sheet;
 }
@@ -202,8 +202,8 @@ void SheetView::paintCells(QPainter& painter, const QRectF& paintRect, const QPo
     // 0. Paint the sheet background
     if (!sheet()->backgroundImage().isNull()) {
         //TODO support all the different properties
-        Sheet::BackgroundImageProperties properties = sheet()->backgroundImageProperties();
-        if( properties.repeat == Sheet::BackgroundImageProperties::Repeat ) {
+        KCSheet::BackgroundImageProperties properties = sheet()->backgroundImageProperties();
+        if( properties.repeat == KCSheet::BackgroundImageProperties::Repeat ) {
             const int firstCol = d->visibleRect.left();
             const int firstRow = d->visibleRect.top();
             const int firstColPosition = d->sheet->columnPosition(firstCol);

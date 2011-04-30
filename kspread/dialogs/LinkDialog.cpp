@@ -28,7 +28,7 @@
 #include "Map.h"
 #include "NamedAreaManager.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include <QLabel>
 #include <QVBoxLayout>
@@ -159,7 +159,7 @@ LinkDialog::LinkDialog(QWidget* parent, Selection* selection)
     d->cellLink = new KComboBox(d->cellPage);
     d->cellLink->setEditable(true);
 
-    const Sheet *sheet = selection->activeSheet();
+    const KCSheet *sheet = selection->activeSheet();
     if (sheet && selection) {
         Cell cell(sheet, selection->cursor());
         d->cellLink->addItem(cell.fullName());

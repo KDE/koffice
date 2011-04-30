@@ -28,7 +28,7 @@
 #include "Database.h"
 #include "Map.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 class DatabaseManager::Private
 {
@@ -70,7 +70,7 @@ bool DatabaseManager::loadOdf(const KoXmlElement& body)
             const KCRegion region = database.range();
             if (!region.isValid())
                 continue;
-            const Sheet* sheet = region.lastSheet();
+            const KCSheet* sheet = region.lastSheet();
             if (!sheet)
                 continue;
             sheet->cellStorage()->setDatabase(region, database);
@@ -83,7 +83,7 @@ void DatabaseManager::saveOdf(KoXmlWriter& xmlWriter) const
 {
     QList< QPair<QRectF, Database> > databases;
     const KCRegion region(QRect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax)));
-    const QList<Sheet*>& sheets = d->map->sheetList();
+    const QList<KCSheet*>& sheets = d->map->sheetList();
     for (int i = 0; i < sheets.count(); ++i)
         databases << sheets[i]->cellStorage()->databases(region);
     if (databases.isEmpty())

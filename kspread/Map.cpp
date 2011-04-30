@@ -59,7 +59,7 @@
 #include "OdfSavingContext.h"
 #include "RecalcManager.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "StyleManager.h"
 #include "Validity.h"
 #include "ValueCalc.h"
@@ -78,10 +78,10 @@ public:
     /**
      * List of all sheets in this map.
      */
-    QList<Sheet*> lstSheets;
-    QList<Sheet*> lstDeletedSheets;
+    QList<KCSheet*> lstSheets;
+    QList<KCSheet*> lstDeletedSheets;
 
-    // used to give every Sheet a unique default name.
+    // used to give every KCSheet a unique default name.
     int tableId;
 
     // used to determine the loading progress
@@ -159,18 +159,18 @@ Map::Map(DocBase* doc, int syntaxVersion)
     // default document properties
     d->syntaxVersion = syntaxVersion;
 
-    connect(this, SIGNAL(sheetAdded(Sheet*)),
-            d->dependencyManager, SLOT(addSheet(Sheet*)));
-    connect(this, SIGNAL(sheetAdded(Sheet*)),
-            d->recalcManager, SLOT(addSheet(Sheet*)));
-    connect(this, SIGNAL(sheetRemoved(Sheet*)),
-            d->dependencyManager, SLOT(removeSheet(Sheet*)));
-    connect(this, SIGNAL(sheetRemoved(Sheet*)),
-            d->recalcManager, SLOT(removeSheet(Sheet*)));
-    connect(this, SIGNAL(sheetRevived(Sheet*)),
-            d->dependencyManager, SLOT(addSheet(Sheet*)));
-    connect(this, SIGNAL(sheetRevived(Sheet*)),
-            d->recalcManager, SLOT(addSheet(Sheet*)));
+    connect(this, SIGNAL(sheetAdded(KCSheet*)),
+            d->dependencyManager, SLOT(addSheet(KCSheet*)));
+    connect(this, SIGNAL(sheetAdded(KCSheet*)),
+            d->recalcManager, SLOT(addSheet(KCSheet*)));
+    connect(this, SIGNAL(sheetRemoved(KCSheet*)),
+            d->dependencyManager, SLOT(removeSheet(KCSheet*)));
+    connect(this, SIGNAL(sheetRemoved(KCSheet*)),
+            d->recalcManager, SLOT(removeSheet(KCSheet*)));
+    connect(this, SIGNAL(sheetRevived(KCSheet*)),
+            d->dependencyManager, SLOT(addSheet(KCSheet*)));
+    connect(this, SIGNAL(sheetRevived(KCSheet*)),
+            d->recalcManager, SLOT(addSheet(KCSheet*)));
     connect(d->namedAreaManager, SIGNAL(namedAreaModified(const QString&)),
             d->dependencyManager, SLOT(namedAreaModified(const QString&)));
     connect(this, SIGNAL(damagesFlushed(const QList<Damage*>&)),
@@ -181,7 +181,7 @@ Map::~Map()
 {
     // Because some of the shapes might be using a sheet in this map, delete
     // all shapes in each sheet before all sheets are deleted together.
-    foreach(Sheet *sheet, d->lstSheets)
+    foreach(KCSheet *sheet, d->lstSheets)
         sheet->deleteShapes();
     // we have to explicitly delete the Sheets, not let QObject take care of that
     // as the sheet in its destructor expects the Map to still exist
@@ -329,34 +329,34 @@ CalculationSettings* Map::calculationSettings() const
     return d->calculationSettings;
 }
 
-Sheet* Map::createSheet(const QString& name)
+KCSheet* Map::createSheet(const QString& name)
 {
-    QString sheetName(i18n("Sheet%1", d->tableId++));
+    QString sheetName(i18n("KCSheet%1", d->tableId++));
     if ( !name.isEmpty() )
         sheetName = name;
-    Sheet* sheet = new Sheet(this, sheetName);
+    KCSheet* sheet = new KCSheet(this, sheetName);
     connect(sheet, SIGNAL(statusMessage(const QString &, int)),
             this, SIGNAL(statusMessage(const QString &, int)));
     return sheet;
 }
 
-void Map::addSheet(Sheet *_sheet)
+void Map::addSheet(KCSheet *_sheet)
 {
     d->lstSheets.append(_sheet);
     emit sheetAdded(_sheet);
 }
 
-Sheet *Map::addNewSheet(const QString& name)
+KCSheet *Map::addNewSheet(const QString& name)
 {
-    Sheet *t = createSheet(name);
+    KCSheet *t = createSheet(name);
     addSheet(t);
     return t;
 }
 
 void Map::moveSheet(const QString & _from, const QString & _to, bool _before)
 {
-    Sheet* sheetfrom = findSheet(_from);
-    Sheet* sheetto = findSheet(_to);
+    KCSheet* sheetfrom = findSheet(_from);
+    KCSheet* sheetto = findSheet(_to);
 
     int from = d->lstSheets.indexOf(sheetfrom) ;
     int to = d->lstSheets.indexOf(sheetto) ;
@@ -384,7 +384,7 @@ void Map::loadOdfSettings(KoOasisSettings &settings)
     KoOasisSettings::NamedMap sheetsMap = firstView.namedMap("Tables");
     kDebug() << " loadOdfSettings( KoOasisSettings &settings ) exist :" << !sheetsMap.isNull();
     if (!sheetsMap.isNull()) {
-        foreach(Sheet* sheet, d->lstSheets) {
+        foreach(KCSheet* sheet, d->lstSheets) {
             sheet->loadOdfSettings(sheetsMap);
         }
     }
@@ -426,7 +426,7 @@ bool Map::saveOdf(KoXmlWriter & xmlWriter, KoShapeSavingContext & savingContext)
 
     OdfSavingContext tableContext(savingContext);
 
-    foreach(Sheet* sheet, d->lstSheets) {
+    foreach(KCSheet* sheet, d->lstSheets) {
         sheet->saveOdf(tableContext);
     }
 
@@ -468,7 +468,7 @@ QDomElement Map::save(QDomDocument& doc)
         }
     }
 
-    foreach(Sheet* sheet, d->lstSheets) {
+    foreach(KCSheet* sheet, d->lstSheets) {
         QDomElement e = sheet->saveXML(doc);
         if (e.isNull())
             return e;
@@ -592,7 +592,7 @@ bool Map::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
             if (sheetElement.nodeName() == "table:table") {
                 if (!sheetElement.attributeNS(KoXmlNS::table, "name", QString()).isEmpty()) {
                     const QString sheetName = sheetElement.attributeNS(KoXmlNS::table, "name", QString());
-                    Sheet* sheet = addNewSheet(sheetName);
+                    KCSheet* sheet = addNewSheet(sheetName);
                     sheet->setSheetName(sheetName, true);
                     d->overallRowCount += KoXml::childNodesCount(sheetElement);
                 }
@@ -621,7 +621,7 @@ bool Map::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
             if (sheetElement.nodeName() == "table:table") {
                 if (!sheetElement.attributeNS(KoXmlNS::table, "name", QString()).isEmpty()) {
                     QString name = sheetElement.attributeNS(KoXmlNS::table, "name", QString());
-                    Sheet* sheet = findSheet(name);
+                    KCSheet* sheet = findSheet(name);
                     if (sheet) {
                         sheet->loadOdf(sheetElement, tableContext, autoStyles, conditionalStyles);
                     }
@@ -671,7 +671,7 @@ bool Map::loadXML(const KoXmlElement& mymap)
     while (!n.isNull()) {
         KoXmlElement e = n.toElement();
         if (!e.isNull() && e.tagName() == "table") {
-            Sheet *t = addNewSheet();
+            KCSheet *t = addNewSheet();
             if (!t->loadXML(e)) {
                 d->isLoading = false;
                 return false;
@@ -691,21 +691,21 @@ bool Map::loadXML(const KoXmlElement& mymap)
     return true;
 }
 
-Sheet* Map::findSheet(const QString & _name) const
+KCSheet* Map::findSheet(const QString & _name) const
 {
-    foreach(Sheet* sheet, d->lstSheets) {
+    foreach(KCSheet* sheet, d->lstSheets) {
         if (_name.toLower() == sheet->sheetName().toLower())
             return sheet;
     }
     return 0;
 }
 
-Sheet * Map::nextSheet(Sheet * currentSheet) const
+KCSheet * Map::nextSheet(KCSheet * currentSheet) const
 {
     if (currentSheet == d->lstSheets.last())
         return currentSheet;
     int index = 0;
-    foreach(Sheet* sheet, d->lstSheets) {
+    foreach(KCSheet* sheet, d->lstSheets) {
         if (sheet == currentSheet)
             return d->lstSheets.value(++index);
         ++index;
@@ -713,12 +713,12 @@ Sheet * Map::nextSheet(Sheet * currentSheet) const
     return 0;
 }
 
-Sheet * Map::previousSheet(Sheet * currentSheet) const
+KCSheet * Map::previousSheet(KCSheet * currentSheet) const
 {
     if (currentSheet == d->lstSheets.first())
         return currentSheet;
     int index = 0;
-    foreach(Sheet* sheet, d->lstSheets) {
+    foreach(KCSheet* sheet, d->lstSheets) {
         if (sheet  == currentSheet)
             return d->lstSheets.value(--index);
         ++index;
@@ -728,7 +728,7 @@ Sheet * Map::previousSheet(Sheet * currentSheet) const
 
 bool Map::saveChildren(KoStore * _store)
 {
-    foreach(Sheet* sheet, d->lstSheets) {
+    foreach(KCSheet* sheet, d->lstSheets) {
         // set the child document's url to an internal url (ex: "tar:/0/1")
         if (!sheet->saveChildren(_store, sheet->sheetName()))
             return false;
@@ -738,14 +738,14 @@ bool Map::saveChildren(KoStore * _store)
 
 bool Map::loadChildren(KoStore * _store)
 {
-    foreach(Sheet* sheet, d->lstSheets) {
+    foreach(KCSheet* sheet, d->lstSheets) {
         if (!sheet->loadChildren(_store))
             return false;
     }
     return true;
 }
 
-void Map::removeSheet(Sheet* sheet)
+void Map::removeSheet(KCSheet* sheet)
 {
     d->lstSheets.removeAll(sheet);
     d->lstDeletedSheets.append(sheet);
@@ -753,7 +753,7 @@ void Map::removeSheet(Sheet* sheet)
     emit sheetRemoved(sheet);
 }
 
-void Map::reviveSheet(Sheet* sheet)
+void Map::reviveSheet(KCSheet* sheet)
 {
     d->lstDeletedSheets.removeAll(sheet);
     d->lstSheets.append(sheet);
@@ -764,7 +764,7 @@ void Map::reviveSheet(Sheet* sheet)
 QStringList Map::visibleSheets() const
 {
     QStringList result;
-    foreach(Sheet* sheet, d->lstSheets) {
+    foreach(KCSheet* sheet, d->lstSheets) {
         if (!sheet->isHidden())
             result.append(sheet->sheetName());
     }
@@ -775,24 +775,24 @@ QStringList Map::visibleSheets() const
 QStringList Map::hiddenSheets() const
 {
     QStringList result;
-    foreach(Sheet* sheet, d->lstSheets) {
+    foreach(KCSheet* sheet, d->lstSheets) {
         if (sheet->isHidden())
             result.append(sheet->sheetName());
     }
     return result;
 }
 
-Sheet* Map::sheet(int index) const
+KCSheet* Map::sheet(int index) const
 {
     return d->lstSheets.value(index);
 }
 
-int Map::indexOf(Sheet* sheet) const
+int Map::indexOf(KCSheet* sheet) const
 {
     return d->lstSheets.indexOf(sheet);
 }
 
-QList<Sheet*>& Map::sheetList() const
+QList<KCSheet*>& Map::sheetList() const
 {
     return d->lstSheets;
 }
@@ -857,7 +857,7 @@ void Map::addDamage(Damage* damage)
 {
     // Do not create a new Damage, if we are in loading process. Check for it before
     // calling this function. This prevents unnecessary memory allocations (new).
-    // see FIXME in Sheet::setSheetName().
+    // see FIXME in KCSheet::setSheetName().
 //     Q_ASSERT(!isLoading());
     Q_CHECK_PTR(damage);
 
@@ -904,7 +904,7 @@ void Map::handleDamages(const QList<Damage*>& damages)
         if (damage->type() == Damage::DamagedCell) {
             CellDamage* cellDamage = static_cast<CellDamage*>(damage);
             kDebug(36007) << "Processing\t" << *cellDamage;
-            Sheet* const damagedSheet = cellDamage->sheet();
+            KCSheet* const damagedSheet = cellDamage->sheet();
             const KCRegion& region = cellDamage->region();
             const CellDamage::Changes changes = cellDamage->changes();
 
@@ -935,7 +935,7 @@ void Map::handleDamages(const QList<Damage*>& damages)
         if (damage->type() == Damage::DamagedSheet) {
             SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
             kDebug(36007) << "Processing\t" << *sheetDamage;
-//             Sheet* damagedSheet = sheetDamage->sheet();
+//             KCSheet* damagedSheet = sheetDamage->sheet();
 
             if (sheetDamage->changes() & SheetDamage::PropertiesChanged) {
             }

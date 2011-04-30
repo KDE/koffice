@@ -32,7 +32,7 @@
 #include <part/View.h>
 #include <part/Doc.h>
 #include <Map.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 #include <Cell.h>
 #include <KCRegion.h>
 
@@ -79,7 +79,7 @@ void ScriptingSheetsListView::initialize()
     kDebug() << "ScriptingSheetsListView::initialize()";
 
     QStringList headers;
-    headers << i18n("Sheet");
+    headers << i18n("KCSheet");
     switch (m_editortype) {
     case Disabled: break;
     case Cell: headers << i18n("Cell"); break;
@@ -90,9 +90,9 @@ void ScriptingSheetsListView::initialize()
     model->setHorizontalHeaderLabels(headers);
     Doc* doc = m_module->kspreadDoc();
     View* view = m_module->kspreadView();
-    Sheet* activeSheet = view ? view->activeSheet() : 0;
+    KCSheet* activeSheet = view ? view->activeSheet() : 0;
     if (doc && doc->map()) {
-        foreach(Sheet* sheet, doc->map()->sheetList()) {
+        foreach(KCSheet* sheet, doc->map()->sheetList()) {
             if (! sheet || sheet->isHidden())
                 continue;
             QRect area = sheet->usedArea();
@@ -207,7 +207,7 @@ QVariantList ScriptingSheetsListView::sheets()
         bool enabled = nameitem->checkState() == Qt::Checked;
 
         const QString sheetname = nameitem->text();
-        Sheet* sheet = m_module->kspreadDoc()->map()->findSheet(sheetname);
+        KCSheet* sheet = m_module->kspreadDoc()->map()->findSheet(sheetname);
         if (! sheet)
             continue;
 

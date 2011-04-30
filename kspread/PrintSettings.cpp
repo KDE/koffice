@@ -400,7 +400,7 @@ QString PrintSettings::saveOdfPageLayout(KoGenStyles &mainStyles,
         pageLayout.addProperty("style:table-centering", "none");
     }
 
-    // this is called from Sheet::saveOdfSheetStyleName for writing the SytleMaster so
+    // this is called from KCSheet::saveOdfSheetStyleName for writing the SytleMaster so
     // the style has to be in the styles.xml file and only there
     pageLayout.setAutoStyleInStylesDotXml(true);
 

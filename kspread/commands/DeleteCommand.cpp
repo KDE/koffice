@@ -22,7 +22,7 @@
 #include "CellStorage.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Validity.h"
 
 #include <klocale.h>

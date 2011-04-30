@@ -27,7 +27,7 @@
 #include "Formula.h"
 #include "Map.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Value.h"
 
 void TestDependencies::initTestCase()

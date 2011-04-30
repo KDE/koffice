@@ -24,7 +24,7 @@
 
 #include "Cell.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Util.h"
 
 #include "commands/DataManipulators.h"
@@ -453,7 +453,7 @@ void DatabaseDialog::back()
 
 void DatabaseDialog::accept()
 {
-    Sheet * sheet = m_selection->activeSheet();
+    KCSheet * sheet = m_selection->activeSheet();
     int top;
     int left;
     int width  = -1;

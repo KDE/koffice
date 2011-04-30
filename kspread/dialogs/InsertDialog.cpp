@@ -37,7 +37,7 @@
 #include <kmessagebox.h>
 
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 // commands
 #include "commands/DataManipulators.h"

@@ -29,7 +29,7 @@ public:
     /**
      * Constructor.
      */
-    explicit ReadWriteTableModel(Sheet* sheet, int columns = 0, int rows = 0);
+    explicit ReadWriteTableModel(KCSheet* sheet, int columns = 0, int rows = 0);
 
     /**
      * Destructor.

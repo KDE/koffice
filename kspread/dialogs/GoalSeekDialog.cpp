@@ -33,7 +33,7 @@
 #include "Formula.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Util.h"
 
 // commands
@@ -130,7 +130,7 @@ void GoalSeekDialog::textChanged()
 void GoalSeekDialog::accept()
 {
     if (!d->widget.preview->isVisible()) {
-        Sheet * sheet = d->selection->activeSheet();
+        KCSheet * sheet = d->selection->activeSheet();
 
         const KCRegion source(d->widget.selector3->textEdit()->toPlainText(), sheet->map(), sheet);
         if (!source.isValid() || !source.isSingular()) {
@@ -197,7 +197,7 @@ void GoalSeekDialog::accept()
     // Reset the value for a proper undo value.
     const Value value = d->sourceCell.value();
     d->sourceCell.setValue(Value(d->oldSource));
-    Sheet *const sheet = d->selection->activeSheet();
+    KCSheet *const sheet = d->selection->activeSheet();
     DataManipulator *const command = new DataManipulator();
     command->setSheet(sheet);
     command->add(KCRegion(d->sourceCell.cellPosition(), sheet));

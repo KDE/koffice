@@ -28,7 +28,7 @@
 #include <KInputDialog>
 
 #include "TableShape.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Map.h"
 
 class SheetsEditor::Private
@@ -56,10 +56,10 @@ SheetsEditor::SheetsEditor(TableShape* tableShape, QWidget* parent)
     layout->addWidget(d->list);
 
     Map *map = d->tableShape->map();
-    foreach(Sheet* sheet, map->sheetList()) {
+    foreach(KCSheet* sheet, map->sheetList()) {
         sheetAdded(sheet);
     }
-    connect(map, SIGNAL(sheetAdded(Sheet*)), this, SLOT(sheetAdded(Sheet*)));
+    connect(map, SIGNAL(sheetAdded(KCSheet*)), this, SLOT(sheetAdded(KCSheet*)));
 
     QVBoxLayout* btnlayout = new QVBoxLayout(this);
     layout->addLayout(btnlayout);
@@ -85,16 +85,16 @@ SheetsEditor::~SheetsEditor()
     delete d;
 }
 
-void SheetsEditor::sheetAdded(Sheet* sheet)
+void SheetsEditor::sheetAdded(KCSheet* sheet)
 {
     Q_ASSERT(sheet);
     QListWidgetItem* item = new QListWidgetItem(sheet->sheetName());
     item->setCheckState(sheet->isHidden() ? Qt::Unchecked : Qt::Checked);
     d->list->addItem(item);
-    connect(sheet, SIGNAL(sig_nameChanged(Sheet*, QString)), this, SLOT(sheetNameChanged(Sheet*, QString)));
+    connect(sheet, SIGNAL(sig_nameChanged(KCSheet*, QString)), this, SLOT(sheetNameChanged(KCSheet*, QString)));
 }
 
-void SheetsEditor::sheetNameChanged(Sheet* sheet, const QString& old_name)
+void SheetsEditor::sheetNameChanged(KCSheet* sheet, const QString& old_name)
 {
     for (int i = 0; i < d->list->count(); ++i)
         if (d->list->item(i)->text() == old_name)
@@ -112,7 +112,7 @@ void SheetsEditor::itemChanged(QListWidgetItem* item)
 {
     Q_ASSERT(item);
     Map *map = d->tableShape->map();
-    Sheet* sheet = map->findSheet(item->text());
+    KCSheet* sheet = map->findSheet(item->text());
     if (sheet)
         sheet->setHidden(item->checkState() != Qt::Checked);
 }
@@ -123,7 +123,7 @@ void SheetsEditor::renameClicked()
     if (! item)
         return;
     Map *map = d->tableShape->map();
-    Sheet* sheet = map->findSheet(item->text());
+    KCSheet* sheet = map->findSheet(item->text());
     if (! sheet)
         return;
     QString name = KInputDialog::getText(i18n("Rename"), i18n("Enter Name:"), sheet->sheetName());
@@ -143,7 +143,7 @@ void SheetsEditor::removeClicked()
     if (! item)
         return;
     Map *map = d->tableShape->map();
-    Sheet* sheet = map->findSheet(item->text());
+    KCSheet* sheet = map->findSheet(item->text());
     if (! sheet)
         return;
     map->removeSheet(sheet);

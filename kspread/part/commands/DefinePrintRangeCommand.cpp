@@ -24,7 +24,7 @@
 #include "Localization.h"
 #include "Map.h"
 #include "PrintSettings.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "SheetPrint.h"
 
 // ----- DefinePrintRangeCommand -----

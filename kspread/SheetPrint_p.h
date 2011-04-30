@@ -25,7 +25,7 @@
 #include <QList>
 
 class HeaderFooter;
-class Sheet;
+class KCSheet;
 class SheetPrint;
 
 /**
@@ -119,7 +119,7 @@ public:
 
 public:
     SheetPrint *q;
-    Sheet * m_pSheet;
+    KCSheet * m_pSheet;
 
     PrintSettings* m_settings;
     HeaderFooter *m_headerFooter;

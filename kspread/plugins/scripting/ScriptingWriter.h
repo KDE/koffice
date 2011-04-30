@@ -28,7 +28,7 @@
 #include <klocale.h>
 
 #include <part/Doc.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 #include <Map.h>
 #include <KCRegion.h>
 #include <Cell.h>
@@ -99,7 +99,7 @@ public Q_SLOTS:
     * is returned.
     */
     bool setSheet(const QString& sheetname) {
-        Sheet* s = m_module->kspreadDoc()->map()->findSheet(sheetname);
+        KCSheet* s = m_module->kspreadDoc()->map()->findSheet(sheetname);
         if (! s) return false;
         clearAll();
         m_sheet = s;
@@ -260,7 +260,7 @@ private:
     Q_DISABLE_COPY(ScriptingWriter)
 
     ScriptingModule* const m_module;
-    Sheet* m_sheet;
+    KCSheet* m_sheet;
     int m_column, m_row;
     Cell* m_cell;
 

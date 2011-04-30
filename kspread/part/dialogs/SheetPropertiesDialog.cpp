@@ -25,12 +25,12 @@
 #include <klocale.h>
 #include <kvbox.h>
 
-#include "Sheet.h"
+#include "KCSheet.h"
 
 SheetPropertiesDialog::SheetPropertiesDialog(QWidget* parent):
         KDialog(parent)
 {
-    setCaption(i18n("Sheet Properties"));
+    setCaption(i18n("KCSheet Properties"));
     setObjectName("sheetPropertiesDialog");
     setModal(true);
     setButtons(Ok | Cancel | Default);

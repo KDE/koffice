@@ -52,7 +52,7 @@ class KoZoomHandler;
 class Cell;
 class ColumnHeader;
 class Damage;
-class Sheet;
+class KCSheet;
 class Canvas;
 class Doc;
 class KCRegion;
@@ -116,12 +116,12 @@ public:
     KoZoomHandler* zoomHandler() const;
 
     /** \return the sheet, that is currently displayed */
-    Sheet* activeSheet() const;
+    KCSheet* activeSheet() const;
 
     /**
      * \return the SheetView for \p sheet
      */
-    SheetView* sheetView(const Sheet* sheet) const;
+    SheetView* sheetView(const KCSheet* sheet) const;
 
     /** Loads the view settings. */
     void initConfig();
@@ -153,12 +153,12 @@ public:
     /**
      * @return marker for @p sheet
      */
-    QPoint markerFromSheet(Sheet* sheet) const;
+    QPoint markerFromSheet(KCSheet* sheet) const;
 
     /**
      * @return scroll offset for @p sheet
      */
-    QPointF offsetFromSheet(Sheet* sheet) const;
+    QPointF offsetFromSheet(KCSheet* sheet) const;
 
     /**
      * Save current sheet selection.
@@ -225,7 +225,7 @@ public Q_SLOTS:
      * Sets the currently displayed \p sheet.
      * \param updateTabBar if \c true, updates the tab bar
      */
-    void setActiveSheet(Sheet* sheet, bool updateTabBar = true);
+    void setActiveSheet(KCSheet* sheet, bool updateTabBar = true);
 
     /**
      * Switch the active sheet to the name. This slot is connected to the tab bar
@@ -360,10 +360,10 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     /** Adds \p sheet to the displayed sheets. */
-    void addSheet(Sheet *sheet);
+    void addSheet(KCSheet *sheet);
 
     /** Removes \p sheet from the displayed sheets. */
-    void removeSheet(Sheet* sheet);
+    void removeSheet(KCSheet* sheet);
 
 private:
     Q_DISABLE_COPY(View)

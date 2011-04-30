@@ -26,7 +26,7 @@
 #include <QObject>
 
 
-class Sheet;
+class KCSheet;
 class KCRegion;
 
 /**
@@ -52,7 +52,7 @@ class ScriptingCellListener : public QObject
 {
     Q_OBJECT
 public:
-    explicit ScriptingCellListener(Sheet *sheet, const QRect& area);
+    explicit ScriptingCellListener(KCSheet *sheet, const QRect& area);
     virtual ~ScriptingCellListener();
 
 Q_SIGNALS:

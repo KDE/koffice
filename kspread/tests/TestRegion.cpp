@@ -24,19 +24,19 @@
 #include "kspread_limits.h"
 #include "Map.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 void TestRegion::initTestCase()
 {
     m_map = new Map(0 /* no Doc*/);
-    Sheet* sheet = m_map->addNewSheet();
+    KCSheet* sheet = m_map->addNewSheet();
     sheet->setSheetName("Sheet1");
     sheet = m_map->addNewSheet();
     sheet->setSheetName("Sheet2");
     sheet = m_map->addNewSheet();
     sheet->setSheetName("Sheet3");
     sheet = m_map->addNewSheet();
-    sheet->setSheetName("Sheet 4");
+    sheet->setSheetName("KCSheet 4");
 }
 
 void TestRegion::testComparison()
@@ -89,7 +89,7 @@ void TestRegion::testSheet()
     QCOMPARE(region.firstSheet(), m_map->sheet(0));
     region = KCRegion("A1");
     QCOMPARE(region.name(), QString("A1"));
-    QCOMPARE(region.firstSheet(), (Sheet*)0);
+    QCOMPARE(region.firstSheet(), (KCSheet*)0);
     region = KCRegion("A1", m_map, m_map->sheet(0));
     QCOMPARE(region.name(), QString("Sheet1!A1"));
     QCOMPARE(region.firstSheet(), m_map->sheet(0));
@@ -102,11 +102,11 @@ void TestRegion::testSheet()
     region = KCRegion("Sheet2!A1", m_map, m_map->sheet(0));
     QCOMPARE(region.name(), QString("Sheet2!A1"));
     QCOMPARE(region.firstSheet(), m_map->sheet(1));
-    region = KCRegion("Sheet 4!A1", m_map, m_map->sheet(0));
-    QCOMPARE(region.name(), QString("'Sheet 4'!A1"));
+    region = KCRegion("KCSheet 4!A1", m_map, m_map->sheet(0));
+    QCOMPARE(region.name(), QString("'KCSheet 4'!A1"));
     QCOMPARE(region.firstSheet(), m_map->sheet(3));
-    region = KCRegion("'Sheet 4'!A1", m_map, m_map->sheet(0));
-    QCOMPARE(region.name(), QString("'Sheet 4'!A1"));
+    region = KCRegion("'KCSheet 4'!A1", m_map, m_map->sheet(0));
+    QCOMPARE(region.name(), QString("'KCSheet 4'!A1"));
     QCOMPARE(region.firstSheet(), m_map->sheet(3));
     // invalid calls:
     region = KCRegion("!A1", m_map, m_map->sheet(0));

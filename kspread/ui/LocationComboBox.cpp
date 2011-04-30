@@ -25,7 +25,7 @@
 #include "Map.h"
 #include "NamedAreaManager.h"
 #include "Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include "commands/NamedAreaCommand.h"
 

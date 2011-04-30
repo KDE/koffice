@@ -220,7 +220,7 @@ set (kspreadodf_LIB_SRCS
     RowColumnFormat.cpp
     RowRepeatStorage.cpp
     ShapeApplicationData.cpp
-    Sheet.cpp
+    KCSheet.cpp
     SheetAccessModel.cpp
     SheetModel.cpp
     KCStyle.cpp
@@ -245,7 +245,7 @@ set (kspreadodf_LIB_SRCS
     FunctionModuleRegistry.cpp
     FunctionRepository.cpp
 
-    # TODO: move HeaderFooter from SheetPrint to PrintSettings, and replace SheetPrint with PrintSettings in Sheet to get rid of this dependency
+    # TODO: move HeaderFooter from SheetPrint to PrintSettings, and replace SheetPrint with PrintSettings in KCSheet to get rid of this dependency
     SheetPrint.cpp
     SheetPrint_p.cpp
 

@@ -30,7 +30,7 @@
 #include "commands/PasteCommand.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 SpecialPasteDialog::SpecialPasteDialog(QWidget* parent, Selection* selection)
         : KDialog(parent),

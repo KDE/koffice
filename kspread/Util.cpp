@@ -32,7 +32,7 @@
 #include "Map.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 
 #include <QPen>
@@ -259,7 +259,7 @@ QString KSpread::Odf::convertRefToRange(const QString & sheet, const QRect & rec
 }
 
 // e.g.: Sheet4.A1:Sheet4.E28
-//used in Sheet::saveOdf
+//used in KCSheet::saveOdf
 QString KSpread::Odf::convertRangeToRef(const QString & sheetName, const QRect & _area)
 {
     return sheetName + '.' + Cell::name(_area.left(), _area.top()) + ':' + sheetName + '.' + Cell::name(_area.right(), _area.bottom());

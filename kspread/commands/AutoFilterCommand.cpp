@@ -24,7 +24,7 @@
 #include "CellStorage.h"
 #include "Damages.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include "database/Database.h"
 #include "database/DatabaseManager.h"

@@ -21,7 +21,7 @@
 
 // KSpread
 #include "Cell.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 // Qt
 #include <QSize>
@@ -31,7 +31,7 @@ class ReadWriteTableModel::Private
 public:
 };
 
-ReadWriteTableModel::ReadWriteTableModel(Sheet* sheet, int columns, int rows)
+ReadWriteTableModel::ReadWriteTableModel(KCSheet* sheet, int columns, int rows)
         : ReadOnlyTableModel(sheet, columns, rows)
         , d(new Private)
 {

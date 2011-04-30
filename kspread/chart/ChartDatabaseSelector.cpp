@@ -32,7 +32,7 @@
 #include "CellStorage.h"
 #include "KCRegion.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "DocBase.h"
 #include "SheetAccessModel.h"
 
@@ -73,7 +73,7 @@ void ChartDatabaseSelector::open(KoShape* shape)
 
 void ChartDatabaseSelector::save()
 {
-    Sheet *sheet = d->selection->activeSheet();
+    KCSheet *sheet = d->selection->activeSheet();
     const KCRegion selectedRegion(d->widget.m_cellRegion->text(), d->map, sheet);
     if(!selectedRegion.isValid())
         return;

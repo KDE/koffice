@@ -36,7 +36,7 @@
 #include "Damages.h"
 #include "Map.h"
 #include "PrintSettings.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "SheetPrint.h"
 #include "KCRegion.h"
 #include "ValueConverter.h"
@@ -45,7 +45,7 @@
 #include "commands/DataManipulators.h"
 #include "commands/RowColumnManipulators.h"
 
-SheetAdaptor::SheetAdaptor(Sheet* t)
+SheetAdaptor::SheetAdaptor(KCSheet* t)
         : QDBusAbstractAdaptor(t)
 {
     setAutoRelaySignals(false);
@@ -124,7 +124,7 @@ bool SheetAdaptor::setText(const QString& cellname, const QString& text, bool pa
     return setText(location.x(), location.y(), text, parse);
 }
 
-QVariant valueToVariant(const Value& value, Sheet* sheet)
+QVariant valueToVariant(const Value& value, KCSheet* sheet)
 {
     //Should we use following value-format enums here?
     //fmt_None, fmt_Boolean, fmt_Number, fmt_Percent, fmt_Money, fmt_DateTime, fmt_Date, fmt_Time, fmt_String

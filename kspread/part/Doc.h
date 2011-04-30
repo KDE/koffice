@@ -57,7 +57,7 @@ class KoXmlWriter;
 
 #define MIME_TYPE "application/x-kspread"
 
-class Sheet;
+class KCSheet;
 class Doc;
 class View;
 class Map;
@@ -126,7 +126,7 @@ public:
 
     // reimplemented; paints the thumbnail
     virtual void paintContent(QPainter & painter, const QRect & rect);
-    virtual void paintContent(QPainter & painter, const QRect & rect, Sheet* sheet);
+    virtual void paintContent(QPainter & painter, const QRect & rect, KCSheet* sheet);
 
     void initConfig();
     void saveConfig();
@@ -164,7 +164,7 @@ Q_SIGNALS:
 protected Q_SLOTS:
     virtual void openTemplate(const KUrl& url);
 
-    void sheetAdded(Sheet* sheet);
+    void sheetAdded(KCSheet* sheet);
 protected:
 
     KoView* createViewInstance(QWidget* parent);
@@ -180,7 +180,7 @@ protected:
     virtual bool saveChildren(KoStore* _store);
 
     virtual void saveOdfViewSettings(KoXmlWriter& settingsWriter);
-    virtual void saveOdfViewSheetSettings(Sheet *sheet, KoXmlWriter &settingsWriter);
+    virtual void saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter &settingsWriter);
 private:
     Q_DISABLE_COPY(Doc)
 

@@ -45,10 +45,10 @@ class SheetAccessModel::Private
 {
 public:
     Map *map;
-    /// Stores in what column each Sheet is. We need this because
-    /// a Sheet is removed from its Map before the sheetRemoved() signal
+    /// Stores in what column each KCSheet is. We need this because
+    /// a KCSheet is removed from its Map before the sheetRemoved() signal
     /// is emitted, thus we can't ask the Map what index it had.
-    QMap<Sheet*, int> cols;
+    QMap<KCSheet*, int> cols;
 };
 
 SheetAccessModel::SheetAccessModel(Map *map)
@@ -56,13 +56,13 @@ SheetAccessModel::SheetAccessModel(Map *map)
 {
     d->map = map;
 
-    connect(map, SIGNAL(sheetAdded(Sheet*)),
-            this, SLOT(slotSheetAdded(Sheet*)));
+    connect(map, SIGNAL(sheetAdded(KCSheet*)),
+            this, SLOT(slotSheetAdded(KCSheet*)));
     // FIXME: Check if we can simply connect sheetRevived() to slotSheetAdded()
-    connect(map, SIGNAL(sheetRevived(Sheet*)),
-            this, SLOT(slotSheetAdded(Sheet*)));
-    connect(map, SIGNAL(sheetRemoved(Sheet*)),
-            this, SLOT(slotSheetRemoved(Sheet*)));
+    connect(map, SIGNAL(sheetRevived(KCSheet*)),
+            this, SLOT(slotSheetAdded(KCSheet*)));
+    connect(map, SIGNAL(sheetRemoved(KCSheet*)),
+            this, SLOT(slotSheetRemoved(KCSheet*)));
     connect(map, SIGNAL(damagesFlushed(const QList<Damage*>&)),
             this, SLOT(handleDamages(const QList<Damage*>&)));
 
@@ -75,7 +75,7 @@ SheetAccessModel::~SheetAccessModel()
     delete d;
 }
 
-void SheetAccessModel::slotSheetAdded(Sheet *sheet)
+void SheetAccessModel::slotSheetAdded(KCSheet *sheet)
 {
     Q_ASSERT(!d->cols.contains(sheet));
 
@@ -96,7 +96,7 @@ void SheetAccessModel::slotSheetAdded(Sheet *sheet)
     setHeaderData( sheetIndex, Qt::Horizontal, sheet->sheetName() );
 }
 
-void SheetAccessModel::slotSheetRemoved(Sheet *sheet)
+void SheetAccessModel::slotSheetRemoved(KCSheet *sheet)
 {
     Q_ASSERT(d->cols.contains(sheet));
     removeColumn(d->cols[sheet]);
@@ -117,7 +117,7 @@ void SheetAccessModel::handleDamages(const QList<Damage*>& damages)
             kDebug(36007) << "Processing\t" << *sheetDamage;
 
             if (sheetDamage->changes() & SheetDamage::Name) {
-                Sheet *sheet = sheetDamage->sheet();
+                KCSheet *sheet = sheetDamage->sheet();
                 // We should never receive signals from sheets that are not in our model
                 Q_ASSERT(d->cols.contains(sheet));
                 const int sheetIndex = d->cols[sheet];

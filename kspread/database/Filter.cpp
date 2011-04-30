@@ -29,7 +29,7 @@
 #include "Database.h"
 #include "Map.h"
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Value.h"
 #include "ValueConverter.h"
 
@@ -332,7 +332,7 @@ public:
         xmlWriter.endElement();
     }
     virtual bool evaluate(const Database& database, int index) const {
-        const Sheet* sheet = database.range().lastSheet();
+        const KCSheet* sheet = database.range().lastSheet();
         const QRect range = database.range().lastRange();
         const int start = database.orientation() == Qt::Vertical ? range.left() : range.top();
 //         kDebug() <<"index:" << index <<" start:" << start <<" fieldNumber:" << fieldNumber;

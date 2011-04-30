@@ -36,7 +36,7 @@
 #include "Map.h"
 #include "NamedAreaManager.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Util.h"
 
 GotoDialog::GotoDialog(QWidget* parent, Selection* selection)
@@ -61,7 +61,7 @@ GotoDialog::GotoDialog(QWidget* parent, Selection* selection)
     m_nameCell->setEditable(true);
     lay1->addWidget(m_nameCell);
 
-    const Sheet* sheet = m_selection->activeSheet();
+    const KCSheet* sheet = m_selection->activeSheet();
     if (sheet && selection) {
         Cell cell(sheet, selection->cursor());
         m_nameCell->addItem(cell.name());

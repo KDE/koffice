@@ -43,7 +43,7 @@
 #include "Damages.h"
 #include "Map.h"
 #include "ui/Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 #include "commands/CSVDataCommand.h"
 
@@ -120,7 +120,7 @@ void CSVDialog::init()
     } else { // if ( m_mode == Column )
         setData(QByteArray());
         Cell cell;
-        Sheet * sheet = m_selection->activeSheet();
+        KCSheet * sheet = m_selection->activeSheet();
         QByteArray data;
         int col = m_selection->lastRange().left();
         for (int i = m_selection->lastRange().top(); i <= m_selection->lastRange().bottom(); ++i) {
@@ -141,7 +141,7 @@ bool CSVDialog::canceled()
 
 void CSVDialog::accept()
 {
-    Sheet * sheet  = m_selection->activeSheet();
+    KCSheet * sheet  = m_selection->activeSheet();
 
     int numRows = rows();
     int numCols = cols();

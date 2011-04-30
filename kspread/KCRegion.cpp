@@ -29,7 +29,7 @@
 #include "kspread_limits.h"
 #include "Map.h"
 #include "NamedAreaManager.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Util.h"
 
 
@@ -55,7 +55,7 @@ KCRegion::KCRegion()
     d = new Private();
 }
 
-KCRegion::KCRegion(const QString& string, const Map* map, Sheet* fallbackSheet)
+KCRegion::KCRegion(const QString& string, const Map* map, KCSheet* fallbackSheet)
 {
     d = new Private();
     d->map = map;
@@ -93,8 +93,8 @@ KCRegion::KCRegion(const QString& string, const Map* map, Sheet* fallbackSheet)
             QString sUL = sRegion.left(delimiterPos);
             QString sLR = sRegion.mid(delimiterPos + 1);
 
-            Sheet* firstSheet = map ? filterSheetName(sUL) : 0;
-            Sheet* lastSheet = map ? filterSheetName(sLR) : 0;
+            KCSheet* firstSheet = map ? filterSheetName(sUL) : 0;
+            KCSheet* lastSheet = map ? filterSheetName(sLR) : 0;
             // TODO: lastSheet is silently ignored if it is different from firstSheet
 
             // Still has the sheet name separator?
@@ -124,7 +124,7 @@ KCRegion::KCRegion(const QString& string, const Map* map, Sheet* fallbackSheet)
             }
         } else {
             // single cell
-            Sheet* sheet = map ? filterSheetName(sRegion) : 0;
+            KCSheet* sheet = map ? filterSheetName(sRegion) : 0;
             // Still has the sheet name separator?
             if (sRegion.contains('!'))
                 return;
@@ -137,7 +137,7 @@ KCRegion::KCRegion(const QString& string, const Map* map, Sheet* fallbackSheet)
     }
 }
 
-KCRegion::KCRegion(const QRect& rect, Sheet* sheet)
+KCRegion::KCRegion(const QRect& rect, KCSheet* sheet)
 {
     d = new Private();
 
@@ -149,7 +149,7 @@ KCRegion::KCRegion(const QRect& rect, Sheet* sheet)
     add(rect, sheet);
 }
 
-KCRegion::KCRegion(const QPoint& point, Sheet* sheet)
+KCRegion::KCRegion(const QPoint& point, KCSheet* sheet)
 {
     d = new Private();
 
@@ -179,7 +179,7 @@ KCRegion::KCRegion(const KCRegion& list)
     }
 }
 
-KCRegion::KCRegion(int x, int y, Sheet* sheet)
+KCRegion::KCRegion(int x, int y, KCSheet* sheet)
 {
     d = new Private();
 
@@ -191,7 +191,7 @@ KCRegion::KCRegion(int x, int y, Sheet* sheet)
     add(QPoint(x, y), sheet);
 }
 
-KCRegion::KCRegion(int x, int y, int width, int height, Sheet* sheet)
+KCRegion::KCRegion(int x, int y, int width, int height, KCSheet* sheet)
 {
     d = new Private();
 
@@ -257,7 +257,7 @@ bool KCRegion::isContiguous() const
     return true;
 }
 
-QString KCRegion::name(Sheet* originSheet) const
+QString KCRegion::name(KCSheet* originSheet) const
 {
     QStringList names;
     ConstIterator endOfList(d->cells.constEnd());
@@ -268,12 +268,12 @@ QString KCRegion::name(Sheet* originSheet) const
     return names.isEmpty() ? "" : names.join(";");
 }
 
-KCRegion::Element* KCRegion::add(const QPoint& point, Sheet* sheet)
+KCRegion::Element* KCRegion::add(const QPoint& point, KCSheet* sheet)
 {
     return insert(d->cells.count(), point, sheet, false);
 }
 
-KCRegion::Element* KCRegion::add(const QRect& range, Sheet* sheet)
+KCRegion::Element* KCRegion::add(const QRect& range, KCSheet* sheet)
 {
     const QRect normalizedRange = normalized(range);
     if (normalizedRange.width() == 0 || normalizedRange.height() == 0) {
@@ -285,7 +285,7 @@ KCRegion::Element* KCRegion::add(const QRect& range, Sheet* sheet)
     return insert(d->cells.count(), normalizedRange, sheet, false);
 }
 
-KCRegion::Element* KCRegion::add(const KCRegion& region, Sheet* sheet)
+KCRegion::Element* KCRegion::add(const KCRegion& region, KCSheet* sheet)
 {
     ConstIterator endOfList(region.d->cells.constEnd());
     for (ConstIterator it = region.d->cells.constBegin(); it != endOfList; ++it) {
@@ -294,7 +294,7 @@ KCRegion::Element* KCRegion::add(const KCRegion& region, Sheet* sheet)
     return d->cells.isEmpty() ? 0 : d->cells.last();
 }
 
-void KCRegion::sub(const QPoint& point, Sheet* sheet)
+void KCRegion::sub(const QPoint& point, KCSheet* sheet)
 {
     // TODO Stefan: Improve!
     Iterator endOfList(d->cells.end());
@@ -311,7 +311,7 @@ void KCRegion::sub(const QPoint& point, Sheet* sheet)
     }
 }
 
-void KCRegion::sub(const QRect& range, Sheet* sheet)
+void KCRegion::sub(const QRect& range, KCSheet* sheet)
 {
     const QRect normalizedRange = normalized(range);
     // TODO Stefan: Improve!
@@ -387,7 +387,7 @@ KCRegion KCRegion::intersectedWithRow(int row) const
     return result;
 }
 
-KCRegion::Element* KCRegion::eor(const QPoint& point, Sheet* sheet)
+KCRegion::Element* KCRegion::eor(const QPoint& point, KCSheet* sheet)
 {
     bool containsPoint = false;
 
@@ -444,7 +444,7 @@ KCRegion::Element* KCRegion::eor(const QPoint& point, Sheet* sheet)
     return 0;
 }
 
-KCRegion::Element* KCRegion::insert(int pos, const QPoint& point, Sheet* sheet, bool multi)
+KCRegion::Element* KCRegion::insert(int pos, const QPoint& point, KCSheet* sheet, bool multi)
 {
     if (point.x() < 1 || point.y() < 1) {
         return 0;
@@ -495,7 +495,7 @@ KCRegion::Element* KCRegion::insert(int pos, const QPoint& point, Sheet* sheet, 
     return 0;
 }
 
-KCRegion::Element* KCRegion::insert(int pos, const QRect& range, Sheet* sheet, bool multi)
+KCRegion::Element* KCRegion::insert(int pos, const QRect& range, KCSheet* sheet, bool multi)
 {
     // Keep boundaries.
     pos = qBound(0, pos, cells().count());
@@ -647,7 +647,7 @@ bool KCRegion::isAllSelected() const
     return d->cells.first()->isAll();
 }
 
-bool KCRegion::contains(const QPoint& point, Sheet* sheet) const
+bool KCRegion::contains(const QPoint& point, KCSheet* sheet) const
 {
     if (d->cells.isEmpty()) {
         return false;
@@ -690,14 +690,14 @@ QRect KCRegion::lastRange() const
     return d->cells.value(d->cells.count() - 1)->rect();
 }
 
-Sheet* KCRegion::firstSheet() const
+KCSheet* KCRegion::firstSheet() const
 {
     if (!isValid())
         return 0;
     return d->cells.value(0)->sheet();
 }
 
-Sheet* KCRegion::lastSheet() const
+KCSheet* KCRegion::lastSheet() const
 {
     if (!isValid())
         return 0;
@@ -944,9 +944,9 @@ void KCRegion::operator=(const KCRegion& other)
     }
 }
 
-Sheet* KCRegion::filterSheetName(QString& sRegion)
+KCSheet* KCRegion::filterSheetName(QString& sRegion)
 {
-    Sheet* sheet = 0;
+    KCSheet* sheet = 0;
     int delimiterPos = sRegion.lastIndexOf('!');
     if (delimiterPos < 0)
         delimiterPos = sRegion.lastIndexOf('.');
@@ -1107,7 +1107,7 @@ KCRegion::Point::~Point()
 {
 }
 
-QString KCRegion::Point::name(Sheet* originSheet) const
+QString KCRegion::Point::name(KCSheet* originSheet) const
 {
     QString name;
     if (m_sheet && m_sheet != originSheet) {
@@ -1227,7 +1227,7 @@ bool KCRegion::Range::contains(const QRect& range) const
     return m_range.contains(normalized(range));
 }
 
-QString KCRegion::Range::name(Sheet* originSheet) const
+QString KCRegion::Range::name(KCSheet* originSheet) const
 {
     QString name;
     if (m_sheet && m_sheet != originSheet) {

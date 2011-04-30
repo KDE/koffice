@@ -25,7 +25,7 @@
 
 #include "Cell.h"
 #include "CellStorage.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 #include "StyleStorage.h"
 

@@ -19,12 +19,12 @@
 
 #include <QStandardItemModel>
 
-#include "Sheet.h"
+#include "KCSheet.h"
 
 
 class Damage;
 class Map;
-class Sheet;
+class KCSheet;
 
 /**
  * @brief Class that can be used by any shape embedded in KSpread to access sheet data,
@@ -35,7 +35,7 @@ class Sheet;
  * and has exactly one sheet model per column. In short, a model containing models.
  *
  * To allow name-based referencing of a sheet's data (e.g. in an ODF-conform cell region like "Table1.A1:B2")
- * each column's header contains the name of the sheet returned by KSpread::Sheet::sheetName() .
+ * each column's header contains the name of the sheet returned by KSpread::KCSheet::sheetName() .
  *
  * To access the QAbstractItemModel instance for a sheet's data, take the following code as example:
  * @code
@@ -54,8 +54,8 @@ public:
     virtual ~SheetAccessModel();
 
 public Q_SLOTS:
-    void slotSheetAdded(Sheet *sheet);
-    void slotSheetRemoved(Sheet *sheet);
+    void slotSheetAdded(KCSheet *sheet);
+    void slotSheetRemoved(KCSheet *sheet);
         void handleDamages(const QList<Damage*> &damages);
 
 private:

@@ -23,7 +23,7 @@
 #include "CellToolBase.h"
 #include "ExternalEditor.h"
 #include "LocationComboBox.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "Selection.h"
 
 #include <KoCanvasBase.h>

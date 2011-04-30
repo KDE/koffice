@@ -21,7 +21,7 @@
 
 // KSpread
 #include "KCRegion.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 class ReadOnlyRegionModel::Private
 {

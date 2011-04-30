@@ -133,7 +133,7 @@ target_link_libraries(TestValueFormatter kspreadcommon ${QT_QTCORE_LIBRARY} ${QT
 ########### next target ###############
 
 set(TestSheet_SRCS TestSheet.cpp)
-kde4_add_unit_test(TestSheet TESTNAME kspread-Sheet  ${TestSheet_SRCS})
+kde4_add_unit_test(TestSheet TESTNAME kspread-KCSheet  ${TestSheet_SRCS})
 macro_add_compile_flags(TestSheet "-DKSPREAD_UNIT_TEST")
 target_link_libraries(TestSheet kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY})
 

@@ -46,7 +46,7 @@
 #include "Map.h"
 #include "RowColumnFormat.h"
 #include "ui/Selection.h"
-#include <Sheet.h>
+#include <KCSheet.h>
 
 // commands
 #include "commands/RowColumnManipulators.h"
@@ -102,7 +102,7 @@ void ResizeRow::slotOk()
 
 void ResizeRow::slotDefault()
 {
-    Sheet* sheet = m_selection->activeSheet();
+    KCSheet* sheet = m_selection->activeSheet();
     if (!sheet)
         return;
     double points = sheet->map()->defaultRowFormat()->height();
@@ -161,7 +161,7 @@ void ResizeColumn::slotOk()
 
 void ResizeColumn::slotDefault()
 {
-    Sheet* sheet = m_selection->activeSheet();
+    KCSheet* sheet = m_selection->activeSheet();
     if (!sheet)
         return;
     double points = sheet->map()->defaultColumnFormat()->width();

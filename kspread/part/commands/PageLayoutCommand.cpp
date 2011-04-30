@@ -21,11 +21,11 @@
 // Local
 #include "PageLayoutCommand.h"
 
-#include "Sheet.h"
+#include "KCSheet.h"
 
 // ----- PageLayoutCommand -----
 
-PageLayoutCommand::PageLayoutCommand(Sheet* sheet, const PrintSettings& settings, QUndoCommand* parent)
+PageLayoutCommand::PageLayoutCommand(KCSheet* sheet, const PrintSettings& settings, QUndoCommand* parent)
         : QUndoCommand(parent)
         , m_sheet(sheet)
         , m_settings(settings)

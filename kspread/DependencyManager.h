@@ -102,12 +102,12 @@ public Q_SLOTS:
     /**
      * Called after a sheet was added.
      */
-    void addSheet(Sheet *sheet);
+    void addSheet(KCSheet *sheet);
 
     /**
      * Called after a sheet was removed.
      */
-    void removeSheet(Sheet *sheet);
+    void removeSheet(KCSheet *sheet);
 
 protected:
     /**

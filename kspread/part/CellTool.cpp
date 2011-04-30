@@ -65,7 +65,7 @@
 #include "Doc.h"
 #include "kspread_limits.h"
 #include "PrintSettings.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "StyleManager.h"
 #include "Util.h"
 #include "View.h"
@@ -153,7 +153,7 @@ int CellTool::maxRow() const
     return KS_rowMax;
 }
 
-SheetView* CellTool::sheetView(const Sheet* sheet) const
+SheetView* CellTool::sheetView(const KCSheet* sheet) const
 {
     return d->canvas->view()->sheetView(sheet);
 }

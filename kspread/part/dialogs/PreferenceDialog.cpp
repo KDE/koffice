@@ -56,7 +56,7 @@
 #include "FunctionModuleRegistry.h"
 #include "Localization.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "part/View.h"
 
 #include "ui_FileOptionsWidget.h"

@@ -24,16 +24,16 @@
 #include "Damages.h"
 #include "Localization.h"
 #include "Map.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 // ----- RenameSheetCommand -----
 
-RenameSheetCommand::RenameSheetCommand(Sheet* s, const QString &name)
+RenameSheetCommand::RenameSheetCommand(KCSheet* s, const QString &name)
 {
     sheet = s;
     if (s) oldName = s->sheetName();
     newName = name;
-    setText(i18n("Rename Sheet"));
+    setText(i18n("Rename KCSheet"));
 }
 
 void RenameSheetCommand::redo()
@@ -50,18 +50,18 @@ void RenameSheetCommand::undo()
 
 // ----- HideSheetCommand -----
 
-HideSheetCommand::HideSheetCommand(Sheet* sheet)
+HideSheetCommand::HideSheetCommand(KCSheet* sheet)
 {
     map = sheet->map();
     sheetName = sheet->sheetName();
-    QString n =  i18n("Hide Sheet %1", sheetName);
-    if (n.length() > 64) n = i18n("Hide Sheet");
+    QString n =  i18n("Hide KCSheet %1", sheetName);
+    if (n.length() > 64) n = i18n("Hide KCSheet");
     setText(n);
 }
 
 void HideSheetCommand::redo()
 {
-    Sheet* sheet = map->findSheet(sheetName);
+    KCSheet* sheet = map->findSheet(sheetName);
     if (!sheet) return;
 
     sheet->hideSheet(true);
@@ -69,7 +69,7 @@ void HideSheetCommand::redo()
 
 void HideSheetCommand::undo()
 {
-    Sheet* sheet = map->findSheet(sheetName);
+    KCSheet* sheet = map->findSheet(sheetName);
     if (!sheet) return;
 
     sheet->hideSheet(false);
@@ -77,19 +77,19 @@ void HideSheetCommand::undo()
 
 // ----- ShowSheetCommand -----
 
-ShowSheetCommand::ShowSheetCommand(Sheet* sheet, QUndoCommand* parent)
+ShowSheetCommand::ShowSheetCommand(KCSheet* sheet, QUndoCommand* parent)
         : QUndoCommand(parent)
 {
     map = sheet->map();
     sheetName = sheet->sheetName();
-    QString n =  i18n("Show Sheet %1", sheetName);
-    if (n.length() > 64) n = i18n("Show Sheet");
+    QString n =  i18n("Show KCSheet %1", sheetName);
+    if (n.length() > 64) n = i18n("Show KCSheet");
     setText(n);
 }
 
 void ShowSheetCommand::redo()
 {
-    Sheet* sheet = map->findSheet(sheetName);
+    KCSheet* sheet = map->findSheet(sheetName);
     if (!sheet) return;
 
     sheet->hideSheet(false);
@@ -97,7 +97,7 @@ void ShowSheetCommand::redo()
 
 void ShowSheetCommand::undo()
 {
-    Sheet* sheet = map->findSheet(sheetName);
+    KCSheet* sheet = map->findSheet(sheetName);
     if (!sheet) return;
 
     sheet->hideSheet(true);
@@ -106,8 +106,8 @@ void ShowSheetCommand::undo()
 
 // ----- AddSheetCommand -----
 
-AddSheetCommand::AddSheetCommand(Sheet* sheet)
-        : QUndoCommand(i18n("Add Sheet"))
+AddSheetCommand::AddSheetCommand(KCSheet* sheet)
+        : QUndoCommand(i18n("Add KCSheet"))
         , m_sheet(sheet)
         , m_firstrun(true)
 {
@@ -134,14 +134,14 @@ void AddSheetCommand::undo()
 // ----- DuplicateSheetCommand -----
 
 DuplicateSheetCommand::DuplicateSheetCommand()
-        : QUndoCommand(i18n("Duplicate Sheet"))
+        : QUndoCommand(i18n("Duplicate KCSheet"))
         , m_oldSheet(0)
         , m_newSheet(0)
         , m_firstrun(true)
 {
 }
 
-void DuplicateSheetCommand::setSheet(Sheet* sheet)
+void DuplicateSheetCommand::setSheet(KCSheet* sheet)
 {
     m_oldSheet = sheet;
 }
@@ -150,7 +150,7 @@ void DuplicateSheetCommand::redo()
 {
     // Once created the sheet stays alive forever. See comment in undo.
     if (m_firstrun) {
-        m_newSheet = new Sheet(*m_oldSheet);
+        m_newSheet = new KCSheet(*m_oldSheet);
         m_newSheet->map()->addSheet(m_newSheet);
         m_firstrun = false;
     } else {
@@ -168,11 +168,11 @@ void DuplicateSheetCommand::undo()
 
 // ----- RemoveSheetCommand -----
 
-RemoveSheetCommand::RemoveSheetCommand(Sheet* s)
+RemoveSheetCommand::RemoveSheetCommand(KCSheet* s)
 {
     sheet = s;
     map = sheet->map();
-    setText(i18n("Remove Sheet"));
+    setText(i18n("Remove KCSheet"));
 }
 
 void RemoveSheetCommand::redo()
@@ -187,7 +187,7 @@ void RemoveSheetCommand::undo()
 
 // ----- SheetPropertiesCommand -----
 
-SheetPropertiesCommand::SheetPropertiesCommand(Sheet* s)
+SheetPropertiesCommand::SheetPropertiesCommand(KCSheet* s)
 {
     sheet = s;
     map = s->map();
@@ -202,7 +202,7 @@ SheetPropertiesCommand::SheetPropertiesCommand(Sheet* s)
     oldColumnAsNumber = newColumnAsNumber = sheet->getShowColumnNumber();
     oldLcMode = newLcMode = sheet->getLcMode();
     oldCapitalizeFirstLetter = newCapitalizeFirstLetter = sheet->getFirstLetterUpper();
-    setText(i18n("Change Sheet Properties"));
+    setText(i18n("Change KCSheet Properties"));
 }
 
 void SheetPropertiesCommand::setLayoutDirection(Qt::LayoutDirection dir)

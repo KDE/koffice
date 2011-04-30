@@ -50,7 +50,7 @@
 #include "Map.h"
 #include "RowColumnFormat.h"
 #include "Selection.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 // commands
 #include "commands/DataManipulators.h"
@@ -241,7 +241,7 @@ void CellToolBase::Private::processArrowKey(QKeyEvent *event)
     /* NOTE:  hitting the tab key also calls this function.  Don't forget
         to account for it
     */
-    register Sheet * const sheet = q->selection()->activeSheet();
+    register KCSheet * const sheet = q->selection()->activeSheet();
     if (!sheet)
         return;
 
@@ -295,7 +295,7 @@ void CellToolBase::Private::processEscapeKey(QKeyEvent * event)
 
 bool CellToolBase::Private::processHomeKey(QKeyEvent* event)
 {
-    register Sheet * const sheet = q->selection()->activeSheet();
+    register KCSheet * const sheet = q->selection()->activeSheet();
     if (!sheet)
         return false;
 
@@ -350,7 +350,7 @@ bool CellToolBase::Private::processHomeKey(QKeyEvent* event)
 
 bool CellToolBase::Private::processEndKey(QKeyEvent *event)
 {
-    register Sheet * const sheet = q->selection()->activeSheet();
+    register KCSheet * const sheet = q->selection()->activeSheet();
     if (!sheet)
         return false;
 
@@ -433,7 +433,7 @@ bool CellToolBase::Private::processNextKey(QKeyEvent *event)
 
 void CellToolBase::Private::processOtherKey(QKeyEvent *event)
 {
-    register Sheet * const sheet = q->selection()->activeSheet();
+    register KCSheet * const sheet = q->selection()->activeSheet();
 
     // No null character ...
     if (event->text().isEmpty() || !q->selection()->activeSheet()->map()->isReadWrite() ||
@@ -451,7 +451,7 @@ void CellToolBase::Private::processOtherKey(QKeyEvent *event)
 
 bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
 {
-    register Sheet * const sheet = q->selection()->activeSheet();
+    register KCSheet * const sheet = q->selection()->activeSheet();
     if (!sheet)
         return false;
 
@@ -794,7 +794,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
 {
     kDebug(36005) << "Canvas::moveDirection";
 
-    register Sheet * const sheet = q->selection()->activeSheet();
+    register KCSheet * const sheet = q->selection()->activeSheet();
     if (!sheet)
         return QRect();
 
@@ -890,7 +890,7 @@ void CellToolBase::Private::paintSelection(QPainter &painter, const QRectF &view
     if (q->selection()->referenceSelection() || q->editor()) {
         return;
     }
-    Sheet *const sheet = q->selection()->activeSheet();
+    KCSheet *const sheet = q->selection()->activeSheet();
 
     // save the painter state
     painter.save();
@@ -1052,7 +1052,7 @@ void CellToolBase::Private::paintReferenceSelection(QPainter &painter, const QRe
     // Iterate over the referenced ranges.
     const KCRegion::ConstIterator end(q->selection()->constEnd());
     for (KCRegion::ConstIterator it(q->selection()->constBegin()); it != end; ++it) {
-        Sheet *const sheet = (*it)->sheet();
+        KCSheet *const sheet = (*it)->sheet();
         // Only paint ranges or cells on the current sheet
         if (sheet != q->selection()->activeSheet()) {
             index++;
@@ -1110,7 +1110,7 @@ void CellToolBase::Private::retrieveMarkerInfo(const QRect &cellRange, const QRe
     // Everything is in document coordinates here.
     // The layout direction, which is view dependent, is applied afterwards.
 
-    const Sheet* sheet = q->selection()->activeSheet();
+    const KCSheet* sheet = q->selection()->activeSheet();
     const QRectF visibleRect = sheet->cellCoordinatesToDocument(cellRange);
 
     /* these vars are used for clarity, the array for simpler function arguments  */
@@ -1300,7 +1300,7 @@ void CellToolBase::Private::createPopupMenuActions()
 
 bool CellToolBase::Private::testListChoose(Selection *selection) const
 {
-    const Sheet *const sheet = selection->activeSheet();
+    const KCSheet *const sheet = selection->activeSheet();
     const Cell cursorCell(sheet, selection->cursor());
     const CellStorage *const storage = sheet->cellStorage();
 

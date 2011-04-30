@@ -26,7 +26,7 @@
 #include "kspread_limits.h"
 #include "Map.h"
 #include "NamedAreaManager.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 
 NamedAreaCommand::NamedAreaCommand(QUndoCommand* parent)
         : AbstractRegionCommand(parent)
@@ -88,7 +88,7 @@ bool NamedAreaCommand::postProcessing()
 {
     // update formulas containing either the new or the old name
     Map* const map = m_sheet->map();
-    foreach(Sheet* sheet, map->sheetList()) {
+    foreach(KCSheet* sheet, map->sheetList()) {
         const QString tmp = '\'' + m_areaName + '\'';
         const FormulaStorage* const storage = sheet->formulaStorage();
         for (int c = 0; c < storage->count(); ++c) {

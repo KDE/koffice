@@ -34,7 +34,7 @@
 #include <part/Doc.h>
 #include <part/View.h>
 #include <interfaces/ViewAdaptor.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 #include <interfaces/SheetAdaptor.h>
 #include <Map.h>
 #include <interfaces/MapAdaptor.h>
@@ -104,14 +104,14 @@ QObject* ScriptingModule::view()
 QObject* ScriptingModule::currentSheet()
 {
     View* v = kspreadView();
-    Sheet* s = v ? v->activeSheet() : 0;
+    KCSheet* s = v ? v->activeSheet() : 0;
     return s ? s->findChild<SheetAdaptor* >() : 0;
 }
 
 QObject* ScriptingModule::sheetByName(const QString& name)
 {
     if (kspreadDoc()->map())
-        foreach(Sheet* sheet, kspreadDoc()->map()->sheetList()) {
+        foreach(KCSheet* sheet, kspreadDoc()->map()->sheetList()) {
         if (sheet->sheetName() == name) {
             return sheet->findChild<SheetAdaptor* >(); {
             }
@@ -123,7 +123,7 @@ QObject* ScriptingModule::sheetByName(const QString& name)
 QStringList ScriptingModule::sheetNames()
 {
     QStringList names;
-    foreach(Sheet* sheet, kspreadDoc()->map()->sheetList()) {
+    foreach(KCSheet* sheet, kspreadDoc()->map()->sheetList()) {
         names.append(sheet->sheetName());
     }
     return names;
@@ -147,7 +147,7 @@ QObject* ScriptingModule::function(const QString& name)
 
 QObject* ScriptingModule::createListener(const QString& sheetname, const QString& range)
 {
-    Sheet* sheet = kspreadDoc()->map()->findSheet(sheetname);
+    KCSheet* sheet = kspreadDoc()->map()->findSheet(sheetname);
     if (! sheet) return 0;
     KCRegion region(range, kspreadDoc()->map(), sheet);
     QRect r = region.firstRange();

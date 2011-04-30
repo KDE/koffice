@@ -24,7 +24,7 @@
 #include <CellStorage.h>
 #include <Formula.h>
 #include <Map.h>
-#include <Sheet.h>
+#include <KCSheet.h>
 
 // NOTE: we do not compare the numbers _exactly_ because it is difficult
 // to get one "true correct" expected values for the functions due to:
@@ -99,7 +99,7 @@ void TestMathFunctions::initTestCase()
 
     m_map = new Map(0 /* no Doc */);
     m_map->addNewSheet();
-    Sheet* sheet = m_map->sheet(0);
+    KCSheet* sheet = m_map->sheet(0);
     CellStorage* storage = sheet->cellStorage();
 
     // B3:B7

@@ -28,7 +28,7 @@
 #include "Formula.h"
 #include "Map.h"
 #include "ModelSupport.h"
-#include "Sheet.h"
+#include "KCSheet.h"
 #include "KCStyle.h"
 #include "Validity.h"
 #include "Value.h"
@@ -42,10 +42,10 @@
 class SheetModel::Private
 {
 public:
-    Sheet* sheet;
+    KCSheet* sheet;
 };
 
-SheetModel::SheetModel(Sheet* sheet)
+SheetModel::SheetModel(KCSheet* sheet)
         : QAbstractTableModel(sheet)
         , d(new Private)
 {
@@ -290,7 +290,7 @@ bool SheetModel::setData(const QModelIndex &topLeft, const QModelIndex &bottomRi
     return setData(QItemSelectionRange(topLeft, bottomRight), value, role);
 }
 
-Sheet* SheetModel::sheet() const
+KCSheet* SheetModel::sheet() const
 {
     return d->sheet;
 }

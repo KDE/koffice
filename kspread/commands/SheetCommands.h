@@ -24,7 +24,7 @@
 #include <QString>
 #include <QUndoCommand>
 class Map;
-class Sheet;
+class KCSheet;
 
 /**
  * \ingroup Commands
@@ -33,13 +33,13 @@ class Sheet;
 class RenameSheetCommand : public QUndoCommand
 {
 public:
-    RenameSheetCommand(Sheet* sheet, const QString &name);
+    RenameSheetCommand(KCSheet* sheet, const QString &name);
 
     virtual void redo();
     virtual void undo();
 
 protected:
-    Sheet* sheet;
+    KCSheet* sheet;
     QString oldName;
     QString newName;
 };
@@ -52,7 +52,7 @@ protected:
 class HideSheetCommand : public QUndoCommand
 {
 public:
-    explicit HideSheetCommand(Sheet* sheet);
+    explicit HideSheetCommand(KCSheet* sheet);
 
     virtual void redo();
     virtual void undo();
@@ -70,7 +70,7 @@ protected:
 class ShowSheetCommand : public QUndoCommand
 {
 public:
-    explicit ShowSheetCommand(Sheet* sheet, QUndoCommand* parent = 0);
+    explicit ShowSheetCommand(KCSheet* sheet, QUndoCommand* parent = 0);
 
     virtual void redo();
     virtual void undo();
@@ -88,13 +88,13 @@ protected:
 class AddSheetCommand : public QUndoCommand
 {
 public:
-    explicit AddSheetCommand(Sheet* sheet);
+    explicit AddSheetCommand(KCSheet* sheet);
 
     virtual void redo();
     virtual void undo();
 
 protected:
-    Sheet*  m_sheet;
+    KCSheet*  m_sheet;
     bool    m_firstrun;
 };
 
@@ -108,14 +108,14 @@ class DuplicateSheetCommand : public QUndoCommand
 public:
     explicit DuplicateSheetCommand();
 
-    void setSheet(Sheet* sheet);
+    void setSheet(KCSheet* sheet);
 
     virtual void redo();
     virtual void undo();
 
 protected:
-    Sheet* m_oldSheet;
-    Sheet* m_newSheet;
+    KCSheet* m_oldSheet;
+    KCSheet* m_newSheet;
     bool m_firstrun;
 };
 
@@ -127,13 +127,13 @@ protected:
 class RemoveSheetCommand : public QUndoCommand
 {
 public:
-    explicit RemoveSheetCommand(Sheet* sheet);
+    explicit RemoveSheetCommand(KCSheet* sheet);
 
     virtual void redo();
     virtual void undo();
 
 protected:
-    Sheet* sheet;
+    KCSheet* sheet;
     Map* map;
 };
 
@@ -145,7 +145,7 @@ protected:
 class SheetPropertiesCommand : public QUndoCommand
 {
 public:
-    SheetPropertiesCommand(Sheet* sheet);
+    SheetPropertiesCommand(KCSheet* sheet);
     void setLayoutDirection(Qt::LayoutDirection direction);
     void setAutoCalculationEnabled(bool b);
     void setShowGrid(bool b);
@@ -162,7 +162,7 @@ public:
     virtual void undo();
 
 protected:
-    Sheet* sheet;
+    KCSheet* sheet;
     Map* map;
     Qt::LayoutDirection oldDirection, newDirection;
     bool oldAutoCalc, newAutoCalc;
