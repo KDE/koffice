@@ -38,8 +38,6 @@
 
 #include "commands/StyleCommand.h"
 
-using namespace KSpread;
-
 StyleManagerDialog::StyleManagerDialog(QWidget* parent, Selection* selection, StyleManager* manager)
         : KDialog(parent)
         , m_selection(selection)

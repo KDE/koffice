@@ -31,8 +31,6 @@
 
 class KoShape;
 
-namespace KSpread
-{
 
 /**
  * \ingroup OpenDocument
@@ -84,7 +82,5 @@ public:
 private:
     QHash < const Sheet*, QHash < int /*row*/, QMultiHash < int /*col*/, KoShape* > > > m_cellAnchoredShapes;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_ODF_SAVING_CONTEXT

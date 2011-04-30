@@ -24,8 +24,6 @@
 
 #include "AbstractRegionCommand.h"
 
-namespace KSpread
-{
 
 /**
  * \class ValidityCommand
@@ -46,7 +44,5 @@ private:
     Validity m_validity;
     QList< QPair<QRectF, Validity> > m_undoData;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_VALIDITY_COMMAND

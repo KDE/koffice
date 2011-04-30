@@ -34,8 +34,6 @@
 #include <float.h>
 #include <math.h>
 
-using namespace KSpread;
-
 AbstractDataManipulator::AbstractDataManipulator(QUndoCommand* parent)
         : AbstractRegionCommand(parent)
 {
@@ -168,7 +166,7 @@ DataManipulator::~DataManipulator()
 bool DataManipulator::preProcessing()
 {
     // extend a singular region to the matrix size, if applicable
-    if (m_firstrun && m_parsing && m_expandMatrix && Region::isSingular()) {
+    if (m_firstrun && m_parsing && m_expandMatrix && KCRegion::isSingular()) {
         const QString expression = m_data.asString();
         if (!expression.isEmpty() && expression[0] == '=') {
             Formula formula(m_sheet);
@@ -177,7 +175,7 @@ bool DataManipulator::preProcessing()
                 const Value result = formula.eval();
                 if (result.columns() > 1 || result.rows() > 1) {
                     const QPoint point = cells()[0]->rect().topLeft();
-                    Region::add(QRect(point.x(), point.y(), result.columns(), result.rows()), m_sheet);
+                    KCRegion::add(QRect(point.x(), point.y(), result.columns(), result.rows()), m_sheet);
                 }
             }
         } else if (!m_data.isArray()) {
@@ -253,7 +251,7 @@ void SeriesManipulator::setupSeries(const QPoint &_marker, double start,
         numberOfCells = (int)(::log(end / start) / ::log(step) + DBL_EPSILON) + 1;
 
     // with this, generate range information
-    Region range(_marker.x(), _marker.y(), (mode == Column) ? 1 : numberOfCells,
+    KCRegion range(_marker.x(), _marker.y(), (mode == Column) ? 1 : numberOfCells,
                  (mode == Row) ? 1 : numberOfCells);
 
     // and add the range to the manipulator
@@ -442,18 +440,15 @@ bool ShiftManipulator::process(Element* element)
     return true;
 }
 
-namespace KSpread
-{
-bool topRowLessThan(const Region::Element *e1, const Region::Element *e2)
+bool topRowLessThan(const KCRegion::Element *e1, const KCRegion::Element *e2)
 {
     return e1->rect().top() < e2->rect().top();
 }
 
-bool leftColumnLessThan(const Region::Element *e1, const Region::Element *e2)
+bool leftColumnLessThan(const KCRegion::Element *e1, const KCRegion::Element *e2)
 {
     return e1->rect().top() < e2->rect().top();
 }
-} // namespace KSpread
 
 bool ShiftManipulator::preProcessing()
 {
@@ -467,11 +462,11 @@ bool ShiftManipulator::preProcessing()
                 qStableSort(cells().begin(), cells().end(), leftColumnLessThan);
             }
             // Create sub-commands.
-            const Region::ConstIterator end(constEnd());
-            for (Region::ConstIterator it = constBegin(); it != end; ++it) {
+            const KCRegion::ConstIterator end(constEnd());
+            for (KCRegion::ConstIterator it = constBegin(); it != end; ++it) {
                 ShiftManipulator *const command = new ShiftManipulator(this);
                 command->setSheet(m_sheet);
-                command->add(Region((*it)->rect(), (*it)->sheet()));
+                command->add(KCRegion((*it)->rect(), (*it)->sheet()));
                 if (m_mode == Delete) {
                     command->setReverse(true);
                 }
@@ -508,11 +503,11 @@ bool ShiftManipulator::postProcessing()
     CellDamage *damage = 0;
     if (m_direction == ShiftBottom) {
         const QPoint bottomRight(lastRange().right(), KS_rowMax);
-        const Region region(QRect(lastRange().topLeft(), bottomRight), m_sheet);
+        const KCRegion region(QRect(lastRange().topLeft(), bottomRight), m_sheet);
         damage = new CellDamage(m_sheet, region, CellDamage::Appearance);
     } else { // ShiftRight
         const QPoint bottomRight(KS_colMax, lastRange().bottom());
-        const Region region(QRect(lastRange().topLeft(), bottomRight), m_sheet);
+        const KCRegion region(QRect(lastRange().topLeft(), bottomRight), m_sheet);
         damage = new CellDamage(m_sheet, region, CellDamage::Appearance);
     }
     m_sheet->map()->addDamage(damage);

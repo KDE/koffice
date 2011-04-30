@@ -34,8 +34,6 @@
 #include <KGlobal>
 #include <klocale.h>
 
-using namespace KSpread;
-
 class FunctionRepository::Private
 {
 public:

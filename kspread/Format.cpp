@@ -20,8 +20,6 @@
 
 #include "Format.h"
 
-using namespace KSpread;
-
 bool Format::isDate(Type fmt)
 {
     return ((fmt == Format::ShortDate) || (fmt == Format::TextDate) ||

@@ -26,11 +26,9 @@
 #include <QRect>
 
 #include "kspread_export.h"
-#include <Region.h>
+#include <KCRegion.h>
 #include <Style.h>
 
-namespace KSpread
-{
 class Map;
 class OdfSavingContext;
 class Style;
@@ -82,7 +80,7 @@ public:
      * reconstruct the former state of the storage after modification.
      * \return all substyle/range pairs intersecting \p rect
      */
-    QList< QPair<QRectF, SharedSubStyle> > undoData(const Region& rect) const;
+    QList< QPair<QRectF, SharedSubStyle> > undoData(const KCRegion& rect) const;
 
     /**
      * Returns the area, which got a style attached.
@@ -132,7 +130,7 @@ public:
     /**
      * Assigns the substyles contained in \p style to the area \p region .
      */
-    void insert(const Region& region, const Style& style);
+    void insert(const KCRegion& region, const Style& style);
 
     /**
      * Replaces the current styles with those in \p styles
@@ -229,7 +227,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_STYLE_STORAGE

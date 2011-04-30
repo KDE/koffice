@@ -35,8 +35,6 @@
 #include <kparts/event.h>
 #include <KXMLGUIClient>
 
-using namespace KSpread;
-
 class MapViewModel::Private
 {
 public:

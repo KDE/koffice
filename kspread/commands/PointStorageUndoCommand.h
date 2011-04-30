@@ -29,9 +29,6 @@
 // KSpread
 #include "Formula.h"
 
-namespace KSpread
-{
-
 /**
  * \ingroup Commands
  * \brief An undo command for PointStorage data.
@@ -105,7 +102,5 @@ PointStorageUndoCommand<T>& PointStorageUndoCommand<T>::operator<<(const QVector
     m_undoData << pairs;
     return *this;
 }
-
-} // namespace KSpread
 
 #endif // KSPREAD_POINT_STORAGE_UNDO_COMMAND

@@ -21,8 +21,6 @@
 
 #include <QObject>
 
-namespace KSpread
-{
 
 class TestRowRepeatStorage : public QObject
 {
@@ -50,7 +48,5 @@ private slots:
     void testInsertShiftRight();
     void testRemoveShiftLeft();
 };
-
-} // namespace KSpread
 
 #endif // TESTROWREPEATSTORAGE_H

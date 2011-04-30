@@ -36,19 +36,17 @@ inline uint qHash(const QPoint& point)
     return (static_cast<uint>(point.x()) << 16) + static_cast<uint>(point.y());
 }
 
-namespace KSpread
-{
 class Cell;
 class Map;
 class Sheet;
 
 /**
- * \class Region
+ * \class KCRegion
  * \brief The one for all class for points and ranges.
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  * \since 1.5
  */
-class KSPREAD_EXPORT Region
+class KSPREAD_EXPORT KCRegion
 {
 public:
     class Element;
@@ -59,7 +57,7 @@ public:
      * Constructor.
      * Creates an empty region.
      */
-    Region();
+    KCRegion();
 
     /**
      * Constructor.
@@ -67,7 +65,7 @@ public:
      * @param point the point's location
      * @param sheet the sheet the point belongs to
      */
-    explicit Region(const QPoint& point, Sheet* sheet = 0);
+    explicit KCRegion(const QPoint& point, Sheet* sheet = 0);
 
     /**
      * Constructor.
@@ -75,7 +73,7 @@ public:
      * @param range the range's location
      * @param sheet the sheet the range belongs to
      */
-    explicit Region(const QRect& range, Sheet* sheet = 0);
+    explicit KCRegion(const QRect& range, Sheet* sheet = 0);
 
     /**
      * Constructor.
@@ -84,14 +82,14 @@ public:
      * @param map used to determine the sheet, if it's named in the string
      * @param sheet the fallback sheet, if \p expression does not contain one
      */
-    explicit Region(const QString& expression, const Map* map = 0, Sheet* sheet = 0);
+    explicit KCRegion(const QString& expression, const Map* map = 0, Sheet* sheet = 0);
 
     /**
      * Copy Constructor.
      * Creates a copy of the region.
      * @param region the region to copy
      */
-    Region(const Region& region);
+    KCRegion(const KCRegion& region);
 
     /**
      * Constructor.
@@ -100,7 +98,7 @@ public:
      * @param row the row of the point
      * @param sheet the sheet the point belongs to
      */
-    Region(int col, int row, Sheet* sheet = 0);
+    KCRegion(int col, int row, Sheet* sheet = 0);
 
     /**
      * Constructor.
@@ -111,12 +109,12 @@ public:
      * @param height the height of the range
      * @param sheet the sheet the range belongs to
      */
-    Region(int col, int row, int width, int height, Sheet* sheet = 0);
+    KCRegion(int col, int row, int width, int height, Sheet* sheet = 0);
 
     /**
      * Destructor.
      */
-    virtual ~Region();
+    virtual ~KCRegion();
 
 
     /**
@@ -242,7 +240,7 @@ public:
      * @param region the region to be added
      * @param sheet the fallback sheet used, if an element has no sheet set
      */
-    Element* add(const Region& region, Sheet* sheet = 0);
+    Element* add(const KCRegion& region, Sheet* sheet = 0);
 
     /* TODO Stefan #3: Improve! */
     /**
@@ -263,19 +261,19 @@ public:
      * Substracts the region @p region from this region.
      * @param region the region to subtract
      */
-    void sub(const Region& region);
+    void sub(const KCRegion& region);
 
     /**
      * Intersects the region @p region and this region and
-     * returns the result of the intersection as a new Region.
+     * returns the result of the intersection as a new KCRegion.
      */
-    Region intersected(const Region& region) const;
+    KCRegion intersected(const KCRegion& region) const;
 
     /**
      * Intersects this region with the row @p row and returns
-     * the result of the intersection as a new Region.
+     * the result of the intersection as a new KCRegion.
      */
-    Region intersectedWithRow(int row) const;
+    KCRegion intersectedWithRow(int row) const;
 
     /**
      * @param point the point's location
@@ -304,15 +302,15 @@ public:
      * @param region the region to compare
      * @return @c true, if this region equals region @p region
      */
-    bool operator==(const Region& region) const;
-    inline bool operator!=(const Region& region) const {
+    bool operator==(const KCRegion& region) const;
+    inline bool operator!=(const KCRegion& region) const {
         return !operator==(region);
     }
 
     /**
      * @param region the region to copy
      */
-    void operator=(const Region& region);
+    void operator=(const KCRegion& region);
 
 
 
@@ -411,18 +409,18 @@ private:
 
 
 /***************************************************************************
-  class Region::Element
+  class KCRegion::Element
 ****************************************************************************/
 /**
  * Base class for region elements, which can be points or ranges.
- * This class is used by KSpread::Region and could not be used outside of it.
+ * This class is used by KSpread::KCRegion and could not be used outside of it.
  *
  * Size:
  * m_sheet: 4 bytes
  * vtable: 4 bytes
  * sum: 8 bytes
  */
-class Region::Element
+class KCRegion::Element
 {
 public:
     enum Type { Undefined, Point, Range };
@@ -489,19 +487,19 @@ public:
 protected:
     /* TODO Stefan #6:
         Elaborate, if this pointer could be avoided by QDict or whatever in
-        Region.
+        KCRegion.
     */
     Sheet* m_sheet;
 };
 
 
 /***************************************************************************
-  class Region::Point
+  class KCRegion::Point
 ****************************************************************************/
 
 /**
  * A point in a region.
- * This class is used by KSpread::Region and could not be used outside of it.
+ * This class is used by KSpread::KCRegion and could not be used outside of it.
  *
  * Size:
  * m_sheet: 4 bytes
@@ -509,7 +507,7 @@ protected:
  * m_point: 8 bytes
  * sum: 16 bytes
  */
-class Region::Point : public Region::Element
+class KCRegion::Point : public KCRegion::Element
 {
 public:
     Point() : Element(), m_point() {}
@@ -522,7 +520,7 @@ public:
         return Element::Point;
     }
     virtual bool isValid() const {
-        return (!m_point.isNull() && Region::isValid(m_point));
+        return (!m_point.isNull() && KCRegion::isValid(m_point));
     }
     virtual bool isColumn() const {
         return false;
@@ -579,12 +577,12 @@ private:
 
 
 /***************************************************************************
-  class Region:.Range
+  class KCRegion:.Range
 ****************************************************************************/
 
 /**
  * A range in a region.
- * This class is used by KSpread::Region and could not be used outside of it.
+ * This class is used by KSpread::KCRegion and could not be used outside of it.
  *
  * Size:
  * m_sheet: 4 bytes
@@ -592,11 +590,11 @@ private:
  * m_range: 16 bytes
  * sum: 24 bytes
  */
-class Region::Range : public Region::Element
+class KCRegion::Range : public KCRegion::Element
 {
 public:
     Range(const QRect&);
-    Range(const Region::Point&, const Region::Point&);
+    Range(const KCRegion::Point&, const KCRegion::Point&);
     Range(const QString&);
     virtual ~Range();
 
@@ -604,7 +602,7 @@ public:
         return Element::Range;
     }
     virtual bool isValid() const {
-        return !m_range.isNull() && Region::isValid(m_range);
+        return !m_range.isNull() && KCRegion::isValid(m_range);
     }
     virtual bool isColumn() const;
     virtual bool isRow() const;
@@ -649,16 +647,14 @@ private:
     bool m_fixedRight;
 };
 
-} // namespace KSpread
-
-Q_DECLARE_TYPEINFO(KSpread::Region, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KCRegion, Q_MOVABLE_TYPE);
 
 
 /***************************************************************************
   kDebug support
 ****************************************************************************/
 
-inline QDebug operator<<(QDebug str, const KSpread::Region& r)
+inline QDebug operator<<(QDebug str, const KCRegion& r)
 {
     return str << qPrintable(r.name());
 }

@@ -34,8 +34,6 @@
 #include <QString>
 #include <QStringList>
 
-namespace KSpread
-{
 class AutoFillSequence;
 class Cell;
 
@@ -85,7 +83,5 @@ private:
     QRect m_sourceRange;
     QRect m_targetRange;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_AUTOFILL_COMMAND

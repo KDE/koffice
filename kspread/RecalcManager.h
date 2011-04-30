@@ -20,12 +20,10 @@
 #ifndef KSPREAD_RECALC_MANAGER
 #define KSPREAD_RECALC_MANAGER
 
-#include <Region.h>
+#include <KCRegion.h>
 
 #include <QObject>
 
-namespace KSpread
-{
 class Cell;
 class Map;
 class Sheet;
@@ -70,7 +68,7 @@ public:
      *
      * \see recalc()
      */
-    void regionChanged(const Region& region);
+    void regionChanged(const KCRegion& region);
 
     /**
      * Recalculates the sheet \p sheet .
@@ -125,7 +123,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_RECALC_MANAGER

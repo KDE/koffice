@@ -29,8 +29,6 @@
 
 class KDatePicker;
 
-namespace KSpread
-{
 
 /**
 * The CalendarToolWidget class implements a dialog window that allows to
@@ -142,7 +140,5 @@ signals:
      */
     void insertCalendar(const QDate &from, const QDate &to);
 };
-
-}
 
 #endif // KSPREAD_CALENDAR_TOOL_WIDGET

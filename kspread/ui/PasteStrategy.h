@@ -23,8 +23,6 @@
 #include "SelectionStrategy.h"
 #include "kspread_export.h"
 
-namespace KSpread
-{
 
 /**
  * A strategy for pasting the global mouse selection.
@@ -52,7 +50,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_PASTE_STRATEGY

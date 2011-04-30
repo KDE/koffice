@@ -28,8 +28,6 @@
 // KSpread
 #include "StyleStorage.h"
 
-namespace KSpread
-{
 
 /**
  * \ingroup Commands
@@ -89,7 +87,5 @@ StyleStorageUndoCommand& StyleStorageUndoCommand::operator<<(const QList<Pair>& 
     m_undoData << pairs;
     return *this;
 }
-
-} // namespace KSpread
 
 #endif // KSPREAD_STYLE_STORAGE_UNDO_COMMAND

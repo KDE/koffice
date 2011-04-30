@@ -38,14 +38,12 @@
 #include "PrintSettings.h"
 #include "Sheet.h"
 #include "SheetPrint.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "ValueConverter.h"
 
 // commands
 #include "commands/DataManipulators.h"
 #include "commands/RowColumnManipulators.h"
-
-using namespace KSpread;
 
 SheetAdaptor::SheetAdaptor(Sheet* t)
         : QDBusAbstractAdaptor(t)
@@ -88,7 +86,7 @@ int SheetAdaptor::cellColumn(const QString& cellname)
 
 QPoint SheetAdaptor::cellLocation(const QString& cellname)
 {
-    const Region region(cellname, m_sheet->map(), m_sheet);
+    const KCRegion region(cellname, m_sheet->map(), m_sheet);
     if (region.firstRange().isNull())
         return QPoint();
     return region.firstRange().topLeft();
@@ -112,7 +110,7 @@ bool SheetAdaptor::setText(int x, int y, const QString& text, bool parse)
     //to true KSpread says: ASSERT: "f" in Dependencies.cpp (621)
     //kspread: Cell at row 6, col 1 marked as formula, but formula is NULL
 
-    KSpread::DataManipulator *dm = new KSpread::DataManipulator();
+    DataManipulator *dm = new DataManipulator();
     dm->setSheet(m_sheet);
     dm->setValue(Value(text));
     dm->setParsing(parse);
@@ -126,29 +124,29 @@ bool SheetAdaptor::setText(const QString& cellname, const QString& text, bool pa
     return setText(location.x(), location.y(), text, parse);
 }
 
-QVariant valueToVariant(const KSpread::Value& value, Sheet* sheet)
+QVariant valueToVariant(const Value& value, Sheet* sheet)
 {
     //Should we use following value-format enums here?
     //fmt_None, fmt_Boolean, fmt_Number, fmt_Percent, fmt_Money, fmt_DateTime, fmt_Date, fmt_Time, fmt_String
     switch (value.type()) {
-    case KSpread::Value::Empty:
+    case Value::Empty:
         return QVariant();
-    case KSpread::Value::Boolean:
+    case Value::Boolean:
         return QVariant(value.asBoolean());
-    case KSpread::Value::Integer:
+    case Value::Integer:
         return static_cast<qint64>(value.asInteger());
-    case KSpread::Value::Float:
+    case Value::Float:
         return (double) numToDouble(value.asFloat());
-    case KSpread::Value::Complex:
+    case Value::Complex:
         return sheet->map()->converter()->asString(value).asString();
-    case KSpread::Value::String:
+    case Value::String:
         return value.asString();
-    case KSpread::Value::Array: {
+    case Value::Array: {
         QVariantList colarray;
         for (uint j = 0; j < value.rows(); j++) {
             QVariantList rowarray;
             for (uint i = 0; i < value.columns(); i++) {
-                KSpread::Value v = value.element(i, j);
+                Value v = value.element(i, j);
                 rowarray.append(valueToVariant(v, sheet));
             }
             colarray.append(rowarray);
@@ -156,10 +154,10 @@ QVariant valueToVariant(const KSpread::Value& value, Sheet* sheet)
         return colarray;
     }
     break;
-    case KSpread::Value::CellRange:
+    case Value::CellRange:
         //FIXME: not yet used
         return QVariant();
-    case KSpread::Value::Error:
+    case Value::Error:
         return QVariant();
     }
     return QVariant();
@@ -181,7 +179,7 @@ bool SheetAdaptor::setValue(int x, int y, const QVariant& value)
 {
     Cell cell = Cell(m_sheet, x, y);
     if (! cell) return false;
-    KSpread::Value v = cell.value();
+    Value v = cell.value();
     switch (value.type()) {
     case QVariant::Bool: v = Value(value.toBool()); break;
     case QVariant::ULongLong: v = Value(value.toLongLong()); break;
@@ -271,7 +269,7 @@ void SheetAdaptor::insertColumn(int col, int nbCol)
 {
     InsertDeleteColumnManipulator* manipulator = new InsertDeleteColumnManipulator();
     manipulator->setSheet(m_sheet);
-    manipulator->add(Region(QRect(col, 1, nbCol, 1)));
+    manipulator->add(KCRegion(QRect(col, 1, nbCol, 1)));
     manipulator->execute();
 }
 
@@ -279,7 +277,7 @@ void SheetAdaptor::insertRow(int row, int nbRow)
 {
     InsertDeleteRowManipulator* manipulator = new InsertDeleteRowManipulator();
     manipulator->setSheet(m_sheet);
-    manipulator->add(Region(QRect(1, row, 1, nbRow)));
+    manipulator->add(KCRegion(QRect(1, row, 1, nbRow)));
     manipulator->execute();
 }
 
@@ -288,7 +286,7 @@ void SheetAdaptor::removeColumn(int col, int nbCol)
     InsertDeleteColumnManipulator* manipulator = new InsertDeleteColumnManipulator();
     manipulator->setSheet(m_sheet);
     manipulator->setReverse(true);
-    manipulator->add(Region(QRect(col, 1, nbCol, 1)));
+    manipulator->add(KCRegion(QRect(col, 1, nbCol, 1)));
     manipulator->execute();
 }
 
@@ -297,7 +295,7 @@ void SheetAdaptor::removeRow(int row, int nbRow)
     InsertDeleteRowManipulator* manipulator = new InsertDeleteRowManipulator();
     manipulator->setSheet(m_sheet);
     manipulator->setReverse(true);
-    manipulator->add(Region(QRect(1, row, 1, nbRow)));
+    manipulator->add(KCRegion(QRect(1, row, 1, nbRow)));
     manipulator->execute();
 }
 
@@ -517,7 +515,7 @@ void SheetAdaptor::handleDamages(const QList<Damage*>& damages)
         if (!damage) {
             continue;
         }
-        if (damage->type() == Damage::Sheet) {
+        if (damage->type() == Damage::DamagedSheet) {
             const SheetDamage *const sheetDamage = static_cast<const SheetDamage *>(damage);
             // Only process the sheet this adaptor works for.
             if (sheetDamage->sheet() != m_sheet) {

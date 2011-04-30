@@ -23,8 +23,6 @@
 #include <QObject>
 #include "RTree.h"
 
-namespace KSpread
-{
 
 class RTreeBenchmark : public QObject
 {
@@ -42,7 +40,5 @@ private Q_SLOTS:
 private:
     RTree<double> m_tree;
 };
-
-} // namepsace KSpread
 
 #endif // KSPREAD_RTREE_BENCHMARK_H

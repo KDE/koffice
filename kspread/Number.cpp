@@ -23,8 +23,6 @@
 
 #include <math.h>
 
-using namespace KSpread;
-
 class Number::Private : public QSharedData
 {
 public:
@@ -279,8 +277,6 @@ Number Number::atgh() const
 
 // *** EXTERNAL FUNCTIONS ***
 
-namespace KSpread
-{
 
 long double numToDouble(Number n)
 {
@@ -431,7 +427,5 @@ Number atgh(const Number &n)
 {
     return n.atgh();
 }
-
-}  // nsmespace KSpread
 
 #endif // KSPREAD_HIGH_PRECISION_SUPPORT

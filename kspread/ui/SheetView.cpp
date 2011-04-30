@@ -29,11 +29,9 @@
 
 #include "CellView.h"
 #include "kspread_limits.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "Sheet.h"
-
-using namespace KSpread;
 
 class SheetView::Private
 {
@@ -163,11 +161,11 @@ void SheetView::setPaintCellRange(const QRect& rect)
     d->cache.setMaxCost(2 * rect.width() * rect.height());
 }
 
-void SheetView::invalidateRegion(const Region& region)
+void SheetView::invalidateRegion(const KCRegion& region)
 {
     QRegion qregion;
-    Region::ConstIterator end(region.constEnd());
-    for (Region::ConstIterator it(region.constBegin()); it != end; ++it) {
+    KCRegion::ConstIterator end(region.constEnd());
+    for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         qregion += (*it)->rect();
     }
     // reduce to the cached area

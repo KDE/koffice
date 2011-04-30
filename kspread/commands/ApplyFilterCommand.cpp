@@ -30,8 +30,6 @@
 #include "database/Database.h"
 #include "database/Filter.h"
 
-using namespace KSpread;
-
 ApplyFilterCommand::ApplyFilterCommand()
         : AbstractRegionCommand()
 {

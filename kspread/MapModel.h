@@ -24,8 +24,6 @@
 
 class QUndoCommand;
 
-namespace KSpread
-{
 class Map;
 class Sheet;
 
@@ -71,7 +69,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_MAP_MODEL

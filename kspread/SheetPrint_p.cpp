@@ -24,11 +24,9 @@
 #include "SheetPrint_p.h"
 
 #include "PrintSettings.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "Sheet.h"
-
-using namespace KSpread;
 
 void SheetPrint::Private::calculateHorizontalPageParameters(int _column)
 {

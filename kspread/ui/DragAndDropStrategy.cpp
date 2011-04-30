@@ -38,8 +38,6 @@
 
 #include "commands/CopyCommand.h"
 
-using namespace KSpread;
-
 class DragAndDropStrategy::Private
 {
 public:

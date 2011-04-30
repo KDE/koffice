@@ -22,8 +22,6 @@
 
 #include "AbstractRegionCommand.h"
 
-namespace KSpread
-{
 class RowFormat;
 
 /**
@@ -50,7 +48,5 @@ private:
     bool m_pageBreak;
     QMap<int, RowFormat *> m_rowFormats;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_ROW_STYLE_COMMAND

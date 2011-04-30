@@ -48,8 +48,6 @@
 // commands
 #include "commands/ValidityCommand.h"
 
-using namespace KSpread;
-
 Q_DECLARE_METATYPE(Conditional::Type)
 Q_DECLARE_METATYPE(Validity::Action)
 Q_DECLARE_METATYPE(Validity::Restriction)

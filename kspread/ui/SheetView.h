@@ -34,10 +34,8 @@ class QSizeF;
 
 class KoViewConverter;
 
-namespace KSpread
-{
 class CellView;
-class Region;
+class KCRegion;
 class Sheet;
 
 /**
@@ -94,7 +92,7 @@ public:
     /**
      * Invalidates all cached CellViews in \p region .
      */
-    void invalidateRegion(const Region& region);
+    void invalidateRegion(const KCRegion& region);
 
     /**
      * Invalidates all CellViews, the cached and the default.
@@ -137,7 +135,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHEET_VIEW

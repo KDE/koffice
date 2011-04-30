@@ -70,8 +70,6 @@
 // database
 #include "database/DatabaseManager.h"
 
-using namespace KSpread;
-
 class Map::Private
 {
 public:
@@ -864,11 +862,11 @@ void Map::addDamage(Damage* damage)
     Q_CHECK_PTR(damage);
 
 #ifndef NDEBUG
-    if (damage->type() == Damage::Cell) {
+    if (damage->type() == Damage::DamagedCell) {
         kDebug(36007) << "Adding\t" << *static_cast<CellDamage*>(damage);
-    } else if (damage->type() == Damage::Sheet) {
+    } else if (damage->type() == Damage::DamagedSheet) {
         kDebug(36007) << "Adding\t" << *static_cast<SheetDamage*>(damage);
-    } else if (damage->type() == Damage::Selection) {
+    } else if (damage->type() == Damage::DamagedSelection) {
         kDebug(36007) << "Adding\t" << *static_cast<SelectionDamage*>(damage);
     } else {
         kDebug(36007) << "Adding\t" << *damage;
@@ -893,21 +891,21 @@ void Map::flushDamages()
 
 void Map::handleDamages(const QList<Damage*>& damages)
 {
-    Region bindingChangedRegion;
-    Region formulaChangedRegion;
-    Region namedAreaChangedRegion;
-    Region valueChangedRegion;
+    KCRegion bindingChangedRegion;
+    KCRegion formulaChangedRegion;
+    KCRegion namedAreaChangedRegion;
+    KCRegion valueChangedRegion;
     WorkbookDamage::Changes workbookChanges = WorkbookDamage::None;
 
     QList<Damage*>::ConstIterator end(damages.end());
     for (QList<Damage*>::ConstIterator it = damages.begin(); it != end; ++it) {
         Damage* damage = *it;
 
-        if (damage->type() == Damage::Cell) {
+        if (damage->type() == Damage::DamagedCell) {
             CellDamage* cellDamage = static_cast<CellDamage*>(damage);
             kDebug(36007) << "Processing\t" << *cellDamage;
             Sheet* const damagedSheet = cellDamage->sheet();
-            const Region& region = cellDamage->region();
+            const KCRegion& region = cellDamage->region();
             const CellDamage::Changes changes = cellDamage->changes();
 
             // TODO Stefan: Detach the style cache from the CellView cache.
@@ -934,7 +932,7 @@ void Map::handleDamages(const QList<Damage*>& damages)
             continue;
         }
 
-        if (damage->type() == Damage::Sheet) {
+        if (damage->type() == Damage::DamagedSheet) {
             SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
             kDebug(36007) << "Processing\t" << *sheetDamage;
 //             Sheet* damagedSheet = sheetDamage->sheet();
@@ -944,7 +942,7 @@ void Map::handleDamages(const QList<Damage*>& damages)
             continue;
         }
 
-        if (damage->type() == Damage::Workbook) {
+        if (damage->type() == Damage::DamagedWorkbook) {
             WorkbookDamage* workbookDamage = static_cast<WorkbookDamage*>(damage);
             kDebug(36007) << "Processing\t" << *damage;
 

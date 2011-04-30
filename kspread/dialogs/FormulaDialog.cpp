@@ -60,8 +60,6 @@
 #include <QSortFilterProxyModel>
 #include <QItemSelectionModel>
 
-using namespace KSpread;
-
 FormulaDialog::FormulaDialog(QWidget* parent, Selection* selection, CellEditorBase* editor, const QString& formulaName)
         : KDialog(parent)
 {
@@ -223,7 +221,7 @@ FormulaDialog::FormulaDialog(QWidget* parent, Selection* selection, CellEditorBa
     connect(fiveElement, SIGNAL(textChanged(const QString &)),
             this, SLOT(slotChangeText(const QString &)));
 
-    connect(m_selection, SIGNAL(changed(const Region&)),
+    connect(m_selection, SIGNAL(changed(const KCRegion&)),
             this, SLOT(slotSelectionChanged()));
 
     connect(m_browser, SIGNAL(urlClick(const QString&)),
@@ -497,7 +495,7 @@ QString FormulaDialog::createParameter(const QString& _text, int param)
             text += tmp;
             text += '"';
         } else {
-            const Region region(_text, m_selection->activeSheet()->map());
+            const KCRegion region(_text, m_selection->activeSheet()->map());
             if (!region.isValid()) {
                 text = '"';
 

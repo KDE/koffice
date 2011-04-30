@@ -28,8 +28,6 @@
 
 class QPainter;
 
-namespace KSpread
-{
 class HeaderFooter;
 class PrintSettings;
 class Sheet;
@@ -153,7 +151,5 @@ private:
     class Private;
     Private *const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHEET_PRINT

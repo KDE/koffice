@@ -31,8 +31,6 @@
 
 #include <QPen>
 
-using namespace KSpread;
-
 BorderColorCommand::BorderColorCommand()
         : AbstractRegionCommand()
 {
@@ -100,13 +98,13 @@ bool BorderColorCommand::mainProcessing()
                 pen.setColor(m_color);
                 style.setGoUpDiagonalPen(pen);
             }
-            m_sheet->cellStorage()->setStyle(Region(m_undoData[i].first.toRect()), style);
+            m_sheet->cellStorage()->setStyle(KCRegion(m_undoData[i].first.toRect()), style);
         }
     } else { // m_reverse
         for (int i = 0; i < m_undoData.count(); ++i) {
             Style style;
             style.insertSubStyle(m_undoData[i].second);
-            m_sheet->cellStorage()->setStyle(Region(m_undoData[i].first.toRect()), style);
+            m_sheet->cellStorage()->setStyle(KCRegion(m_undoData[i].first.toRect()), style);
         }
     }
     return true;

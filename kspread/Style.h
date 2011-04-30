@@ -37,8 +37,6 @@ class KoGenStyles;
 class KoOdfStylesReader;
 class KoStyleStack;
 
-namespace KSpread
-{
 class Conditions;
 class CustomStyle;
 class SharedSubStyle;
@@ -545,10 +543,8 @@ public:
     Value1 value1;
 };
 
-} // namespace KSpread
-
-Q_DECLARE_TYPEINFO(KSpread::Style, Q_MOVABLE_TYPE);
-Q_DECLARE_TYPEINFO(KSpread::CustomStyle, Q_MOVABLE_TYPE);
-Q_DECLARE_TYPEINFO(KSpread::SharedSubStyle, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(Style, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(CustomStyle, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(SharedSubStyle, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_STYLE

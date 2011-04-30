@@ -29,8 +29,6 @@
 
 class KComboBox;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -52,7 +50,5 @@ protected:
     Selection* m_selection;
     KComboBox* m_nameCell;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_GOTO_DIALOG

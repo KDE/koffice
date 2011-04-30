@@ -22,9 +22,6 @@
 
 #include "AbstractRegionCommand.h"
 
-namespace KSpread
-{
-
 /**
  * \ingroup Commands
  * \brief Sets the decimal precision level.
@@ -40,7 +37,5 @@ protected:
     virtual bool mainProcessing();
     virtual bool postProcessing();
 };
-
-}  // namespace KSpread
 
 #endif // KSPREAD_PRECISION_COMMAND

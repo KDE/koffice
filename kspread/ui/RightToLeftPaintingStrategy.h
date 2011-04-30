@@ -24,8 +24,6 @@
 
 class KoCanvasBase;
 
-namespace KSpread
-{
 
 /**
  */
@@ -56,7 +54,5 @@ private:
     class Private;
     Private *const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_RIGHTTOLEFT_PAINTING_STRATEGY

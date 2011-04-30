@@ -25,11 +25,6 @@
 
 #include <QUndoCommand>
 
-/**
- * The KSpread namespace.
- */
-namespace KSpread
-{
 class Sheet;
 
 /**
@@ -48,7 +43,5 @@ private:
     Sheet* m_sheet;
     PrintSettings m_settings;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_PAGE_LAYOUT_COMMAND

@@ -25,8 +25,6 @@
 #include <KPluginFactory>
 #include <KLocale>
 
-using namespace KSpread;
-
 K_PLUGIN_FACTORY(CalendarToolPluginFactory,
                  registerPlugin<CalendarToolFactory>();
                 )

@@ -34,8 +34,6 @@ namespace Sonnet
 class ConfigWidget;
 }
 
-namespace KSpread
-{
 class View;
 
 /**
@@ -71,7 +69,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_PREFERENCE_DIALOG

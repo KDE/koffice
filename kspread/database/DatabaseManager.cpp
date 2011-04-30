@@ -27,10 +27,8 @@
 #include "CellStorage.h"
 #include "Database.h"
 #include "Map.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
-
-using namespace KSpread;
 
 class DatabaseManager::Private
 {
@@ -69,7 +67,7 @@ bool DatabaseManager::loadOdf(const KoXmlElement& body)
             Database database;
             if (!database.loadOdf(element, d->map))
                 return false;
-            const Region region = database.range();
+            const KCRegion region = database.range();
             if (!region.isValid())
                 continue;
             const Sheet* sheet = region.lastSheet();
@@ -84,7 +82,7 @@ bool DatabaseManager::loadOdf(const KoXmlElement& body)
 void DatabaseManager::saveOdf(KoXmlWriter& xmlWriter) const
 {
     QList< QPair<QRectF, Database> > databases;
-    const Region region(QRect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax)));
+    const KCRegion region(QRect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax)));
     const QList<Sheet*>& sheets = d->map->sheetList();
     for (int i = 0; i < sheets.count(); ++i)
         databases << sheets[i]->cellStorage()->databases(region);
@@ -94,7 +92,7 @@ void DatabaseManager::saveOdf(KoXmlWriter& xmlWriter) const
     xmlWriter.startElement("table:database-ranges");
     for (int i = 0; i < databases.count(); ++i) {
         Database database = databases[i].second;
-        database.setRange(Region(databases[i].first.toRect(), database.range().firstSheet()));
+        database.setRange(KCRegion(databases[i].first.toRect(), database.range().firstSheet()));
         if (!database.range().isValid())
             continue;
         database.saveOdf(xmlWriter);

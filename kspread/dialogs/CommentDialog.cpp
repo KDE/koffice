@@ -37,8 +37,6 @@
 
 #include "commands/CommentCommand.h"
 
-using namespace KSpread;
-
 CommentDialog::CommentDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
 {

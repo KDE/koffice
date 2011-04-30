@@ -57,13 +57,11 @@ class KoXmlWriter;
 
 #define MIME_TYPE "application/x-kspread"
 
-namespace KSpread
-{
 class Sheet;
 class Doc;
 class View;
 class Map;
-class Region;
+class KCRegion;
 class UndoAction;
 class SheetAccessModel;
 
@@ -194,7 +192,5 @@ private:
      */
     void loadPaper(KoXmlElement const & paper);
 };
-
-} // namespace KSpread
 
 #endif /* KSPREAD_DOC */

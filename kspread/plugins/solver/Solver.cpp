@@ -30,18 +30,16 @@
 #include <Sheet.h>
 #include <Value.h>
 #include <part/View.h>
-#include <Region.h>
+#include <KCRegion.h>
 
 #include "SolverDialog.h"
 
-using namespace KSpread::Plugins;
-
 // make the plugin available
-K_PLUGIN_FACTORY(SolverFactory, registerPlugin<KSpread::Plugins::Solver>();)
+K_PLUGIN_FACTORY(SolverFactory, registerPlugin<Solver>();)
 K_EXPORT_PLUGIN(SolverFactory("kspreadsolver"))
 
-KSpread::View* s_view = 0;
-KSpread::Formula* s_formula = 0;
+View* s_view = 0;
+Formula* s_formula = 0;
 double function(const gsl_vector* vector, void *params);
 
 
@@ -61,7 +59,7 @@ Solver::Solver(QObject* parent, const QVariantList& args)
     d->dialog = 0;
     d->view = qobject_cast<View*>(parent);
     if (!d->view) {
-        kError() << "Solver: Parent object is not a KSpread::View! Quitting." << endl;
+        kError() << "Solver: Parent object is not a View! Quitting." << endl;
         return;
     }
 
@@ -94,7 +92,7 @@ void Solver::optimize()
     if (d->dialog->parameters->textEdit()->toPlainText().isEmpty())
         return;
 
-    Region region(d->dialog->function->textEdit()->toPlainText(), d->view->doc()->map(), d->view->activeSheet());
+    KCRegion region(d->dialog->function->textEdit()->toPlainText(), d->view->doc()->map(), d->view->activeSheet());
     if (!region.isValid())
         return;
 
@@ -119,9 +117,9 @@ void Solver::optimize()
     // Determine the parameters
     int dimension = 0;
     Parameters* parameters = new Parameters;
-    region = Region(d->dialog->parameters->textEdit()->toPlainText(), d->view->doc()->map(), d->view->activeSheet());
-    Region::ConstIterator end(region.constEnd());
-    for (Region::ConstIterator it(region.constBegin()); it != end; ++it) {
+    region = KCRegion(d->dialog->parameters->textEdit()->toPlainText(), d->view->doc()->map(), d->view->activeSheet());
+    KCRegion::ConstIterator end(region.constEnd());
+    for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         QRect range = (*it)->rect();
         for (int col = range.left(); col <= range.right(); ++col) {
             for (int row = range.top(); row <= range.bottom(); ++row) {
@@ -199,7 +197,7 @@ double function(const gsl_vector* vector, void *params)
     Solver::Parameters* parameters = static_cast<Solver::Parameters*>(params);
 
     for (int i = 0; i < parameters->cells.count(); ++i) {
-        parameters->cells[i].setValue(KSpread::Value(gsl_vector_get(vector, i)));
+        parameters->cells[i].setValue(Value(gsl_vector_get(vector, i)));
     }
 
     // TODO check for errors/correct type

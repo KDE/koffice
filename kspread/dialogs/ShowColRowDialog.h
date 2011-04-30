@@ -30,8 +30,6 @@
 class QListWidget;
 class QListWidgetItem;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -55,7 +53,5 @@ protected:
     Type typeShow;
     QList<int> listInt;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHOW_COL_ROW_DIALOG

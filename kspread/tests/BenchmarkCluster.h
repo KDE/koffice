@@ -23,8 +23,6 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 
 class ClusterBenchmark : public QObject
 {
@@ -41,7 +39,5 @@ private Q_SLOTS:
     void testShiftUpPerformance();
     void testShiftDownPerformance();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CLUSTER_BENCHMARK

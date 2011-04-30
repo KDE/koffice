@@ -21,10 +21,8 @@
 
 #include "Sheet.h"
 
-namespace KSpread
-{
 
-    class Damage;
+class Damage;
 class Map;
 class Sheet;
 
@@ -64,5 +62,3 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread

@@ -25,8 +25,6 @@
 
 #include <Value.h>
 
-namespace KSpread
-{
 class Map;
 
 class TestDatabaseFunctions: public QObject
@@ -54,7 +52,5 @@ private:
 
     Map* m_map;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_DATABASE_FUNCTIONS

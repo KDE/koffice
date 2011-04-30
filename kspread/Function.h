@@ -27,14 +27,12 @@
 #include <QStringList>
 #include <QVector>
 
-#include "Region.h"
+#include "KCRegion.h"
 
 #include "kspread_export.h"
 
 class QDomElement;
 
-namespace KSpread
-{
 class Sheet;
 class Value;
 class ValueCalc;
@@ -55,7 +53,7 @@ struct FuncExtra {
     // here we'll add all the extras a function may need
     Function* function;
     QVector<rangeInfo> ranges;
-    QVector<Region> regions;
+    QVector<KCRegion> regions;
     Sheet *sheet;
     int myrow, mycol;
 };
@@ -99,7 +97,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FUNCTIONS

@@ -27,8 +27,6 @@
 
 class QRadioButton;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -49,7 +47,5 @@ private:
     QRadioButton *rb2;
     QRect  rect;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_PASTE_INSERT_DIALOG

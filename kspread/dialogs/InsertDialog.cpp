@@ -43,8 +43,6 @@
 #include "commands/DataManipulators.h"
 #include "commands/RowColumnManipulators.h"
 
-using namespace KSpread;
-
 InsertDialog::InsertDialog(QWidget* parent, Selection* selection, Mode _mode)
         : KDialog(parent)
 {

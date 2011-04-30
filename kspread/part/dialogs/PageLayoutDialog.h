@@ -22,8 +22,6 @@
 
 #include <KoPageLayoutDialog.h>
 
-namespace KSpread
-{
 class Sheet;
 
 /**
@@ -51,7 +49,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_PAGE_LAYOUT_DIALOG

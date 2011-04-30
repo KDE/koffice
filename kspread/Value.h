@@ -37,8 +37,6 @@
 
 using namespace std;
 
-namespace KSpread
-{
 class CalculationSettings;
 class ValueStorage;
 
@@ -507,24 +505,22 @@ private:
 
 uint qHash(const Value& value);
 
-} // namespace KSpread
-
-Q_DECLARE_METATYPE(KSpread::Value)
-Q_DECLARE_TYPEINFO(KSpread::Value, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(Value)
+Q_DECLARE_TYPEINFO(Value, Q_MOVABLE_TYPE);
 
 
 /***************************************************************************
   QTextStream support
 ****************************************************************************/
 
-KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, KSpread::Value::Type type);
-KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, KSpread::Value value);
+KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, Value::Type type);
+KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, Value value);
 
 /***************************************************************************
   kDebug support
 ****************************************************************************/
 
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const KSpread::Value& v);
-QDebug operator<<(QDebug stream, const KSpread::Value::Format& f);
+KSPREAD_EXPORT QDebug operator<<(QDebug str, const Value& v);
+QDebug operator<<(QDebug stream, const Value::Format& f);
 
 #endif // KSPREAD_VALUE_H

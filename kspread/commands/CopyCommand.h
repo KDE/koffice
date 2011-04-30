@@ -22,9 +22,7 @@
 
 #include <QDomDocument>
 
-namespace KSpread
-{
-class Region;
+class KCRegion;
 
 /**
  * \ingroup Commands
@@ -39,25 +37,23 @@ namespace CopyCommand
  *            absolutely (they will be switched back to relative
  *            references during decoding) - used for cut to clipboard
  */
-QDomDocument saveAsXml(const Region&, bool era = false);
+QDomDocument saveAsXml(const KCRegion&, bool era = false);
 
 /**
  * Saves the cell \p region as plain text.
  * \param region the cell region to process
  */
-QString saveAsPlainText(const Region &region);
+QString saveAsPlainText(const KCRegion &region);
 
 /**
  * Saves the cell \p region as HTML.
  */
-QDomDocument saveAsHtml(const Region& region);
+QDomDocument saveAsHtml(const KCRegion& region);
 
 /**
  * Saves the cell \p region as CSV data.
  */
-QString saveAsCSV(const Region& region);
+QString saveAsCSV(const KCRegion& region);
 }
-
-} // namespace KSpread
 
 #endif // KSPREAD_COPY_COMMAND

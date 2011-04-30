@@ -24,8 +24,6 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
 
 /**
  * Registry for tools.
@@ -56,7 +54,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TOOL_REGISTRY

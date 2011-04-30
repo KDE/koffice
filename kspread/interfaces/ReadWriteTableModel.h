@@ -22,8 +22,6 @@
 
 #include "ReadOnlyTableModel.h"
 
-namespace KSpread
-{
 
 class ReadWriteTableModel : public ReadOnlyTableModel
 {
@@ -46,7 +44,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_READWRITE_TABLE_MODEL

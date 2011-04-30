@@ -28,8 +28,6 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
 class Sheet;
 
 class KSPREAD_EXPORT HeaderFooter
@@ -154,7 +152,5 @@ private:
      */
     QString m_footMid;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_HEADER_FOOTER

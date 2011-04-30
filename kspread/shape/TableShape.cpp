@@ -39,13 +39,11 @@
 #include <OdfLoadingContext.h>
 #include <OdfSavingContext.h>
 #include <PrintSettings.h>
-#include <Region.h>
+#include <KCRegion.h>
 #include <RowColumnFormat.h>
 #include <Sheet.h>
 #include <SheetView.h>
 #include <StyleManager.h>
-
-using namespace KSpread;
 
 class TableShape::Private
 {
@@ -124,7 +122,7 @@ void TableShape::setColumns(int columns)
         return;
     }
     PrintSettings settings = *sheet()->printSettings();
-    settings.setPrintRegion(Region(1, 1, d->columns, d->rows, sheet()));
+    settings.setPrintRegion(KCRegion(1, 1, d->columns, d->rows, sheet()));
     d->pageManager->setPrintSettings(settings);
 }
 
@@ -142,7 +140,7 @@ void TableShape::setRows(int rows)
         return;
     }
     PrintSettings settings = *sheet()->printSettings();
-    settings.setPrintRegion(Region(1, 1, d->columns, d->rows, sheet()));
+    settings.setPrintRegion(KCRegion(1, 1, d->columns, d->rows, sheet()));
     d->pageManager->setPrintSettings(settings);
 }
 
@@ -351,16 +349,16 @@ void TableShape::handleDamages(const QList<Damage*>& damages)
         Damage* damage = *it;
         if (!damage) continue;
 
-        if (damage->type() == Damage::Cell) {
+        if (damage->type() == Damage::DamagedCell) {
             CellDamage* cellDamage = static_cast<CellDamage*>(damage);
-            const Region region = cellDamage->region();
+            const KCRegion region = cellDamage->region();
 
             if (cellDamage->changes() & CellDamage::Appearance)
                 d->sheetView->invalidateRegion(region);
             continue;
         }
 
-        if (damage->type() == Damage::Sheet) {
+        if (damage->type() == Damage::DamagedSheet) {
             SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
 
             if (sheetDamage->changes() & SheetDamage::PropertiesChanged)

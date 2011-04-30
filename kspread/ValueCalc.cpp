@@ -31,8 +31,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-using namespace KSpread;
-
 
 //
 // helper: gammaHelper
@@ -681,7 +679,7 @@ Value ValueCalc::log(const Value &number,
 
 Value ValueCalc::ln(const Value &number)
 {
-    Value res = Value(::ln(converter->toFloat(number)));
+    Value res = Value(KSpread::ln(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -904,7 +902,7 @@ Value ValueCalc::cos(const Value &number)
 
 Value ValueCalc::tg(const Value &number)
 {
-    Value res = Value(::tg(converter->toFloat(number)));
+    Value res = Value(KSpread::tg(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -914,7 +912,7 @@ Value ValueCalc::tg(const Value &number)
 
 Value ValueCalc::cotg(const Value &number)
 {
-    Value res = div(1, Value(::tg(converter->toFloat(number))));
+    Value res = div(1, Value(KSpread::tg(converter->toFloat(number))));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -965,7 +963,7 @@ Value ValueCalc::acos(const Value &number)
 Value ValueCalc::atg(const Value &number)
 {
     errno = 0;
-    Value res = Value(::atg(converter->toFloat(number)));
+    Value res = Value(KSpread::atg(converter->toFloat(number)));
     if (errno)
         return Value::errorVALUE();
 
@@ -1004,7 +1002,7 @@ Value ValueCalc::cosh(const Value &number)
 
 Value ValueCalc::tgh(const Value &number)
 {
-    Value res = Value(::tgh(converter->toFloat(number)));
+    Value res = Value(KSpread::tgh(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -1041,7 +1039,7 @@ Value ValueCalc::acosh(const Value &number)
 Value ValueCalc::atgh(const Value &number)
 {
     errno = 0;
-    Value res = Value(::atgh(converter->toFloat(number)));
+    Value res = Value(KSpread::atgh(converter->toFloat(number)));
     if (errno)
         return Value::errorVALUE();
 
@@ -2210,35 +2208,35 @@ void ValueCalc::getCond(Condition &cond, Value val)
     // not a string - we simply take it as a numeric value
     // that also handles floats, logical values, date/time and such
     if (!val.isString()) {
-        cond.comp = isEqual;
-        cond.type = numeric;
+        cond.comp = IsEqual;
+        cond.type = Numeric;
         cond.value = converter->toFloat(val);
         return;
     }
     QString text = converter->asString(val).asString();
-    cond.comp = isEqual;
+    cond.comp = IsEqual;
     text = text.trimmed();
 
     if (text.startsWith("<=")) {
-        cond.comp = lessEqual;
+        cond.comp = LessEqual;
         text = text.remove(0, 2);
     } else if (text.startsWith(">=")) {
-        cond.comp = greaterEqual;
+        cond.comp = GreaterEqual;
         text = text.remove(0, 2);
     } else if (text.startsWith("!=") || text.startsWith("<>")) {
-        cond.comp = notEqual;
+        cond.comp = NotEqual;
         text = text.remove(0, 2);
     } else if (text.startsWith("==")) {
-        cond.comp = isEqual;
+        cond.comp = IsEqual;
         text = text.remove(0, 2);
     } else if (text.startsWith('<')) {
-        cond.comp = isLess;
+        cond.comp = IsLess;
         text = text.remove(0, 1);
     } else if (text.startsWith('>')) {
-        cond.comp = isGreater;
+        cond.comp = IsGreater;
         text = text.remove(0, 1);
     } else if (text.startsWith('=')) {
-        cond.comp = isEqual;
+        cond.comp = IsEqual;
         text = text.remove(0, 1);
     }
 
@@ -2247,10 +2245,10 @@ void ValueCalc::getCond(Condition &cond, Value val)
     bool ok = false;
     double d = text.toDouble(&ok);
     if (ok) {
-        cond.type = numeric;
+        cond.type = Numeric;
         cond.value = d;
     } else {
-        cond.type = string;
+        cond.type = String;
         cond.stringValue = text;
     }
     //TODO: date values
@@ -2260,57 +2258,57 @@ bool ValueCalc::matches(const Condition &cond, Value val)
 {
     if (val.isEmpty())
         return false;
-    if (cond.type == numeric) {
+    if (cond.type == Numeric) {
         Number d = converter->toFloat(val);
         switch (cond.comp) {
-        case isEqual:
+        case IsEqual:
             if (approxEqual(Value(d), Value(cond.value))) return true;
             break;
 
-        case isLess:
+        case IsLess:
             if (d < cond.value) return true;
             break;
 
-        case isGreater:
+        case IsGreater:
             if (d > cond.value) return true;
             break;
 
-        case lessEqual:
+        case LessEqual:
             if (d <= cond.value) return true;
             break;
 
-        case greaterEqual:
+        case GreaterEqual:
             if (d >= cond.value) return true;
             break;
 
-        case notEqual:
+        case NotEqual:
             if (d != cond.value) return true;
             break;
         }
     } else {
         QString d = converter->asString(val).asString();
         switch (cond.comp) {
-        case isEqual:
+        case IsEqual:
             if (d == cond.stringValue) return true;
             break;
 
-        case isLess:
+        case IsLess:
             if (d < cond.stringValue) return true;
             break;
 
-        case isGreater:
+        case IsGreater:
             if (d > cond.stringValue) return true;
             break;
 
-        case lessEqual:
+        case LessEqual:
             if (d <= cond.stringValue) return true;
             break;
 
-        case greaterEqual:
+        case GreaterEqual:
             if (d >= cond.stringValue) return true;
             break;
 
-        case notEqual:
+        case NotEqual:
             if (d != cond.stringValue) return true;
             break;
         }

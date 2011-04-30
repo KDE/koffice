@@ -28,8 +28,6 @@
 // KOffice includes
 // KSpread includes
 
-using namespace KSpread;
-
 SheetSelectPage::SheetSelectPage(QWidget *parent)
         : QWidget(parent)
 {

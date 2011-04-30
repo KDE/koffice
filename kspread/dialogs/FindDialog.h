@@ -29,8 +29,6 @@ class QCheckBox;
 class QPushButton;
 class KComboBox;
 
-namespace KSpread
-{
 
 /**
  * \ingroup UI
@@ -120,7 +118,5 @@ private slots:
 private:
     FindOption *m_findOptions;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FIND_DIALOG

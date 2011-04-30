@@ -35,8 +35,6 @@
 #include "Sheet.h"
 #include "Value.h"
 
-using namespace KSpread;
-
 /***************************************************************************
   class ResizeColumnManipulator
 ****************************************************************************/
@@ -63,7 +61,7 @@ bool ResizeColumnManipulator::process(Element* element)
     // Just repaint everything visible; no need to invalidate the visual cache.
     m_sheet->map()->addDamage(new SheetDamage(m_sheet, SheetDamage::ContentChanged));
     // TODO: only invalidate the cells that are actually effected by this resize (so everythin in this column, and everything that covers something in this column)
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, Region(1, 1, KS_colMax, KS_rowMax, m_sheet), CellDamage::Appearance));
+    m_sheet->map()->addDamage(new CellDamage(m_sheet, KCRegion(1, 1, KS_colMax, KS_rowMax, m_sheet), CellDamage::Appearance));
     return true;
 }
 
@@ -95,7 +93,7 @@ bool ResizeRowManipulator::process(Element* element)
     // Just repaint everything visible; no need to invalidate the visual cache.
     m_sheet->map()->addDamage(new SheetDamage(m_sheet, SheetDamage::ContentChanged));
     // TODO: only invalidate the cells that are actually effected by this resize (so everythin in this row, and everything that covers something in this row)
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, Region(1, 1, KS_colMax, KS_rowMax, m_sheet), CellDamage::Appearance));
+    m_sheet->map()->addDamage(new CellDamage(m_sheet, KCRegion(1, 1, KS_colMax, KS_rowMax, m_sheet), CellDamage::Appearance));
     return true;
 }
 
@@ -136,7 +134,7 @@ bool HideShowManipulator::preProcessing()
 {
     if (m_firstrun)
         setText(name());
-    Region region;
+    KCRegion region;
     ConstIterator endOfList = cells().constEnd();
     for (ConstIterator it = cells().constBegin(); it != endOfList; ++it) {
         if (m_reverse) {
@@ -312,7 +310,7 @@ bool AdjustColumnRowManipulator::process(Element* element)
         }
     }
     // The cell width(s) or height(s) changed, which are cached: rebuild them.
-    const Region region(m_adjustRow ? 1 : range.left(),
+    const KCRegion region(m_adjustRow ? 1 : range.left(),
                         m_adjustColumn ? 1 : range.top(),
                         m_adjustRow ? KS_colMax : range.width(),
                         m_adjustColumn ? KS_rowMax : range.height());
@@ -622,7 +620,7 @@ bool InsertDeleteColumnManipulator::process(Element* element)
     return true;
 }
 
-bool elementLeftColumnLessThan(const KSpread::Region::Element *e1, const KSpread::Region::Element *e2)
+bool elementLeftColumnLessThan(const KCRegion::Element *e1, const KCRegion::Element *e2)
 {
     return e1->rect().left() < e2->rect().left();
 }
@@ -635,11 +633,11 @@ bool InsertDeleteColumnManipulator::preProcessing()
             // Sort the elements by their top row.
             qStableSort(cells().begin(), cells().end(), elementLeftColumnLessThan);
             // Create sub-commands.
-            const Region::ConstIterator end(constEnd());
-            for (Region::ConstIterator it = constBegin(); it != end; ++it) {
+            const KCRegion::ConstIterator end(constEnd());
+            for (KCRegion::ConstIterator it = constBegin(); it != end; ++it) {
                 InsertDeleteColumnManipulator *const command = new InsertDeleteColumnManipulator(this);
                 command->setSheet(m_sheet);
-                command->add(Region((*it)->rect(), (*it)->sheet()));
+                command->add(KCRegion((*it)->rect(), (*it)->sheet()));
                 if (m_mode == Delete) {
                     command->setReverse(true);
                 }
@@ -673,7 +671,7 @@ bool InsertDeleteColumnManipulator::postProcessing()
         m_sheet->cellStorage()->stopUndoRecording(this);
     }
     const QRect rect(QPoint(boundingRect().left(), 1), QPoint(KS_colMax, KS_rowMax));
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, Region(rect, m_sheet), CellDamage::Appearance));
+    m_sheet->map()->addDamage(new CellDamage(m_sheet, KCRegion(rect, m_sheet), CellDamage::Appearance));
     return true;
 }
 
@@ -745,7 +743,7 @@ bool InsertDeleteRowManipulator::process(Element* element)
     return true;
 }
 
-bool elementTopRowLessThan(const KSpread::Region::Element *e1, const KSpread::Region::Element *e2)
+bool elementTopRowLessThan(const KCRegion::Element *e1, const KCRegion::Element *e2)
 {
     return e1->rect().top() < e2->rect().top();
 }
@@ -758,11 +756,11 @@ bool InsertDeleteRowManipulator::preProcessing()
             // Sort the elements by their top row.
             qStableSort(cells().begin(), cells().end(), elementTopRowLessThan);
             // Create sub-commands.
-            const Region::ConstIterator end(constEnd());
-            for (Region::ConstIterator it = constBegin(); it != end; ++it) {
+            const KCRegion::ConstIterator end(constEnd());
+            for (KCRegion::ConstIterator it = constBegin(); it != end; ++it) {
                 InsertDeleteRowManipulator *const command = new InsertDeleteRowManipulator(this);
                 command->setSheet(m_sheet);
-                command->add(Region((*it)->rect(), (*it)->sheet()));
+                command->add(KCRegion((*it)->rect(), (*it)->sheet()));
                 if (m_mode == Delete) {
                     command->setReverse(true);
                 }
@@ -796,6 +794,6 @@ bool InsertDeleteRowManipulator::postProcessing()
         m_sheet->cellStorage()->stopUndoRecording(this);
     }
     const QRect rect(QPoint(1, boundingRect().top()), QPoint(KS_colMax, KS_rowMax));
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, Region(rect, m_sheet), CellDamage::Appearance));
+    m_sheet->map()->addDamage(new CellDamage(m_sheet, KCRegion(rect, m_sheet), CellDamage::Appearance));
     return true;
 }

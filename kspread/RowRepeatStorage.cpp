@@ -24,8 +24,6 @@
 
 #include "kspread_limits.h"
 
-using namespace KSpread;
-
 RowRepeatStorage::RowRepeatStorage()
 {
 }

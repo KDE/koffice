@@ -31,8 +31,6 @@
 #include "Sheet.h"
 #include "Map.h"
 
-using namespace KSpread;
-
 class SheetsEditor::Private
 {
 public:

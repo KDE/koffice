@@ -28,9 +28,7 @@
 #include "Filter.h"
 #include "FilterPopup.h"
 #include "Map.h"
-#include "Region.h"
-
-using namespace KSpread;
+#include "KCRegion.h"
 
 class Sort;
 class SubtotalRules;
@@ -90,7 +88,7 @@ public:
     enum { Row, Column } orientation    : 1;
     bool containsHeader                 : 1;
     bool displayFilterButtons           : 1;
-    Region targetRangeAddress;
+    KCRegion targetRangeAddress;
     int refreshDelay;
 
 private:
@@ -157,12 +155,12 @@ void Database::setDisplayFilterButtons(bool enable)
     d->displayFilterButtons = enable;
 }
 
-const KSpread::Region& Database::range() const
+const KCRegion& Database::range() const
 {
     return d->targetRangeAddress;
 }
 
-void Database::setRange(const Region& region)
+void Database::setRange(const KCRegion& region)
 {
     Q_ASSERT(region.isContiguous());
     d->targetRangeAddress = region;
@@ -230,7 +228,7 @@ bool Database::loadOdf(const KoXmlElement& element, const Map* map)
     if (element.hasAttributeNS(KoXmlNS::table, "target-range-address")) {
         const QString address = element.attributeNS(KoXmlNS::table, "target-range-address", QString());
         // only absolute addresses allowed; no fallback sheet needed
-        d->targetRangeAddress = Region(Region::loadOdf(address), map);
+        d->targetRangeAddress = KCRegion(KCRegion::loadOdf(address), map);
         if (!d->targetRangeAddress.isValid())
             return false;
     }

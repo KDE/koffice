@@ -25,48 +25,46 @@
 
 #include "Cell.h"
 #include "Sheet.h"
-#include "Region.h"
-
-using namespace KSpread;
+#include "KCRegion.h"
 
 class WorkbookDamage::Private
 {
 public:
-    KSpread::Map* map;
+    Map* map;
     Changes changes;
 };
 
 class SheetDamage::Private
 {
 public:
-    KSpread::Sheet* sheet;
+    Sheet* sheet;
     Changes changes;
 };
 
 class CellDamage::Private
 {
 public:
-    KSpread::Sheet* sheet;
-    Region region;
+    Sheet* sheet;
+    KCRegion region;
     Changes changes;
 };
 
 class SelectionDamage::Private
 {
 public:
-    Region region;
+    KCRegion region;
 };
 
-CellDamage::CellDamage(const KSpread::Cell& cell, Changes changes)
+CellDamage::CellDamage(const Cell& cell, Changes changes)
         : d(new Private)
 {
     d->sheet = cell.sheet();
-    if (Region::isValid(QPoint(cell.column(), cell.row())))
-        d->region = Region(cell.column(), cell.row(), d->sheet);
+    if (KCRegion::isValid(QPoint(cell.column(), cell.row())))
+        d->region = KCRegion(cell.column(), cell.row(), d->sheet);
     d->changes = changes;
 }
 
-CellDamage::CellDamage(KSpread::Sheet* sheet, const Region& region, Changes changes)
+CellDamage::CellDamage(Sheet* sheet, const KCRegion& region, Changes changes)
         : d(new Private)
 {
     d->sheet = sheet;
@@ -84,7 +82,7 @@ Sheet* CellDamage::sheet() const
     return d->sheet;
 }
 
-const KSpread::Region& CellDamage::region() const
+const KCRegion& CellDamage::region() const
 {
     return d->region;
 }
@@ -95,7 +93,7 @@ CellDamage::Changes CellDamage::changes() const
 }
 
 
-SheetDamage::SheetDamage(KSpread::Sheet* sheet, Changes changes)
+SheetDamage::SheetDamage(Sheet* sheet, Changes changes)
         : d(new Private)
 {
     d->sheet = sheet;
@@ -118,7 +116,7 @@ SheetDamage::Changes SheetDamage::changes() const
 }
 
 
-WorkbookDamage::WorkbookDamage(KSpread::Map* map, Changes changes)
+WorkbookDamage::WorkbookDamage(Map* map, Changes changes)
         : d(new Private)
 {
     d->map = map;
@@ -141,7 +139,7 @@ WorkbookDamage::Changes WorkbookDamage::changes() const
 }
 
 
-SelectionDamage::SelectionDamage(const Region& region)
+SelectionDamage::SelectionDamage(const KCRegion& region)
         : d(new Private)
 {
     d->region = region;
@@ -152,7 +150,7 @@ SelectionDamage::~SelectionDamage()
     delete d;
 }
 
-const KSpread::Region& SelectionDamage::region() const
+const KCRegion& SelectionDamage::region() const
 {
     return d->region;
 }
@@ -162,21 +160,21 @@ const KSpread::Region& SelectionDamage::region() const
   kDebug support
 ****************************************************************************/
 
-QDebug operator<<(QDebug str, const KSpread::Damage& d)
+QDebug operator<<(QDebug str, const Damage& d)
 {
     switch (d.type()) {
-    case Damage::Nothing:   return str << "NoDamage";
-    case Damage::Document:  return str << "Document";
-    case Damage::Workbook:  return str << "Workbook";
-    case Damage::Sheet:     return str << "Sheet";
-    case Damage::Range:     return str << "Range";
-    case Damage::Cell:      return str << "Cell";
-    case Damage::Selection: return str << "Selection";
+    case Damage::NoDamage: return str << "NoDamage";
+    case Damage::DamagedDocument:  return str << "Document";
+    case Damage::DamagedWorkbook: return str << "Workbook";
+    case Damage::DamagedSheet: return str << "Sheet";
+    case Damage::DamagedRange: return str << "Range";
+    case Damage::DamagedCell: return str << "Cell";
+    case Damage::DamagedSelection: return str << "Selection";
     }
     return str;
 }
 
-QDebug operator<<(QDebug str, const KSpread::CellDamage& d)
+QDebug operator<<(QDebug str, const CellDamage& d)
 {
     str << "CellDamage: " << d.region().name(d.sheet());
     if (d.changes() & CellDamage::Appearance) str << " Appearance";
@@ -186,7 +184,7 @@ QDebug operator<<(QDebug str, const KSpread::CellDamage& d)
     return str;
 }
 
-QDebug operator<<(QDebug str, const KSpread::SheetDamage& d)
+QDebug operator<<(QDebug str, const SheetDamage& d)
 {
     str << "SheetDamage: " << (d.sheet() ? d.sheet()->sheetName() : "NULL POINTER!");
     switch (d.changes()) {
@@ -202,7 +200,7 @@ QDebug operator<<(QDebug str, const KSpread::SheetDamage& d)
     return str;
 }
 
-QDebug operator<<(QDebug str, const KSpread::SelectionDamage& d)
+QDebug operator<<(QDebug str, const SelectionDamage& d)
 {
     str << "SelectionDamage: " << d.region().name();
     return str;

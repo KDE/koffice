@@ -49,8 +49,6 @@ class KoXmlWriter;
 class KoGenStyles;
 class KoOasisSettings;
 
-namespace KSpread
-{
 class ApplicationSettings;
 class BindingManager;
 class CalculationSettings;
@@ -410,7 +408,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif

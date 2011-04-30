@@ -60,9 +60,7 @@ inline Number atgh(const Number &n)
 {
     return ::atanh(n);
 }
-
-} // namespace KSpread
-
+}
 #else // KSPREAD_HIGH_PRECISION_SUPPORT
 
 #include <QSharedDataPointer>
@@ -71,10 +69,6 @@ inline Number atgh(const Number &n)
 
 #include <complex>
 
-using namespace std;
-
-namespace KSpread
-{
 
 /**
 The Number class holds a single floating-point number. At the moment, it's just a wrapper for long double, but it's going to support GnuMP or something eventually.
@@ -226,8 +220,6 @@ Number tgh(const Number &n);
 Number asinh(const Number &n);
 Number acosh(const Number &n);
 Number atgh(const Number &n);
-
-} // namespace KSpread
 
 #endif // KSPREAD_HIGH_PRECISION_SUPPORT
 

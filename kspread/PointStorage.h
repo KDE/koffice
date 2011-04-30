@@ -24,13 +24,11 @@
 #include <QString>
 #include <QVector>
 
-#include "Region.h"
+#include "KCRegion.h"
 #include "kspread_limits.h"
 
 // #define KSPREAD_POINT_STORAGE_HASH
 
-namespace KSpread
-{
 
 /**
  * \ingroup Storage
@@ -824,13 +822,13 @@ public:
      * and all positions are adjusted.
      * \return a subset of the storage stripped down to the values in \p region
      */
-    PointStorage<T> subStorage(const Region& region, bool keepOffset = true) const {
+    PointStorage<T> subStorage(const KCRegion& region, bool keepOffset = true) const {
         // Determine the offset.
         const QPoint offset = keepOffset ? QPoint(0, 0) : region.boundingRect().topLeft() - QPoint(1, 1);
         // this generates an array of values
         PointStorage<T> subStorage;
-        Region::ConstIterator end(region.constEnd());
-        for (Region::ConstIterator it(region.constBegin()); it != end; ++it) {
+        KCRegion::ConstIterator end(region.constEnd());
+        for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
             const QRect rect = (*it)->rect();
             for (int row = rect.top(); row <= rect.bottom() && row <= m_rows.count(); ++row) {
                 const QVector<int>::const_iterator cstart(m_cols.begin() + m_rows.value(row - 1));
@@ -871,7 +869,5 @@ private:
     QSet<T> m_usedData;
 #endif
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_POINT_STORAGE

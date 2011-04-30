@@ -29,8 +29,6 @@
 
 class KoXmlWriter;
 
-namespace KSpread
-{
 class Validity;
 class ValueConverter;
 class GenValidationStyles;
@@ -106,7 +104,5 @@ private:
     NameMap m_names;
 
 };
-
-} // namespace KSpread
 
 #endif

@@ -51,8 +51,8 @@ extern "C" {
 class ScriptingModule::Private
 {
 public:
-    QPointer<KSpread::Doc> doc;
-    QHash< QString, ScriptingFunction* > functions;
+    QPointer<Doc> doc;
+    QHash<QString, ScriptingFunction* > functions;
     QStringList functionnames;
 };
 
@@ -69,18 +69,18 @@ ScriptingModule::~ScriptingModule()
     delete d;
 }
 
-KSpread::View* ScriptingModule::kspreadView()
+View* ScriptingModule::kspreadView()
 {
-    return dynamic_cast< KSpread::View* >(KoScriptingModule::view());
+    return dynamic_cast<View* >(KoScriptingModule::view());
 }
 
-KSpread::Doc* ScriptingModule::kspreadDoc()
+Doc* ScriptingModule::kspreadDoc()
 {
     if (! d->doc) {
-        if (KSpread::View* v = kspreadView())
+        if (View* v = kspreadView())
             d->doc = v->doc();
         if (! d->doc)
-            d->doc = new KSpread::Doc(0, this);
+            d->doc = new Doc(0, this);
     }
     return d->doc;
 }
@@ -92,28 +92,28 @@ KoDocument* ScriptingModule::doc()
 
 QObject* ScriptingModule::map()
 {
-    return kspreadDoc()->map()->findChild< KSpread::MapAdaptor* >();
+    return kspreadDoc()->map()->findChild<MapAdaptor* >();
 }
 
 QObject* ScriptingModule::view()
 {
-    KSpread::View* v = kspreadView();
-    return v ? v->findChild< KSpread::ViewAdaptor* >() : 0;
+    View* v = kspreadView();
+    return v ? v->findChild<ViewAdaptor* >() : 0;
 }
 
 QObject* ScriptingModule::currentSheet()
 {
-    KSpread::View* v = kspreadView();
-    KSpread::Sheet* s = v ? v->activeSheet() : 0;
-    return s ? s->findChild< KSpread::SheetAdaptor* >() : 0;
+    View* v = kspreadView();
+    Sheet* s = v ? v->activeSheet() : 0;
+    return s ? s->findChild<SheetAdaptor* >() : 0;
 }
 
 QObject* ScriptingModule::sheetByName(const QString& name)
 {
     if (kspreadDoc()->map())
-        foreach(KSpread::Sheet* sheet, kspreadDoc()->map()->sheetList()) {
+        foreach(Sheet* sheet, kspreadDoc()->map()->sheetList()) {
         if (sheet->sheetName() == name) {
-            return sheet->findChild< KSpread::SheetAdaptor* >(); {
+            return sheet->findChild<SheetAdaptor* >(); {
             }
         }
     }
@@ -123,7 +123,7 @@ QObject* ScriptingModule::sheetByName(const QString& name)
 QStringList ScriptingModule::sheetNames()
 {
     QStringList names;
-    foreach(KSpread::Sheet* sheet, kspreadDoc()->map()->sheetList()) {
+    foreach(Sheet* sheet, kspreadDoc()->map()->sheetList()) {
         names.append(sheet->sheetName());
     }
     return names;
@@ -147,11 +147,11 @@ QObject* ScriptingModule::function(const QString& name)
 
 QObject* ScriptingModule::createListener(const QString& sheetname, const QString& range)
 {
-    KSpread::Sheet* sheet = kspreadDoc()->map()->findSheet(sheetname);
+    Sheet* sheet = kspreadDoc()->map()->findSheet(sheetname);
     if (! sheet) return 0;
-    KSpread::Region region(range, kspreadDoc()->map(), sheet);
+    KCRegion region(range, kspreadDoc()->map(), sheet);
     QRect r = region.firstRange();
-    return new KSpread::ScriptingCellListener(sheet, r.isNull() ? sheet->usedArea() : r);
+    return new ScriptingCellListener(sheet, r.isNull() ? sheet->usedArea() : r);
 }
 
 bool ScriptingModule::fromXML(const QString& xml)

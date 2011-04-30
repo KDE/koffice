@@ -67,7 +67,7 @@ void TestDatabaseFunctions::initTestCase()
     CellStorage* storage = sheet->cellStorage();
 
     // TESTDB = A18:I31
-    m_map->namedAreaManager()->insert(Region(QRect(QPoint(1, 18), QPoint(9, 31)), sheet), "TESTDB");
+    m_map->namedAreaManager()->insert(KCRegion(QRect(QPoint(1, 18), QPoint(9, 31)), sheet), "TESTDB");
     // A18:A31
     storage->setValue(1, 18, Value("TestID"));
     for (int row = 19; row <= 31; ++row)

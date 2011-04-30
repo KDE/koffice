@@ -36,8 +36,6 @@
 #include <QResizeEvent>
 #include <QToolButton>
 
-using namespace KSpread;
-
 class CellToolOptionWidget::Private
 {
 public:
@@ -96,7 +94,7 @@ CellToolOptionWidget::CellToolOptionWidget(CellToolBase *parent)
             d->editor, SLOT(applyChanges()));
     connect(d->cancelButton, SIGNAL(clicked(bool)),
             d->editor, SLOT(discardChanges()));
-    connect(d->cellTool->selection(), SIGNAL(changed(const Region&)),
+    connect(d->cellTool->selection(), SIGNAL(changed(const KCRegion&)),
             this, SLOT(updateLocationComboBox()));
 }
 

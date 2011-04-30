@@ -56,8 +56,6 @@
 
 #include "TableShape.h"
 
-using namespace KSpread;
-
 class TableTool::Private
 {
 public:

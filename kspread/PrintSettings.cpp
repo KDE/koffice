@@ -25,7 +25,7 @@
 
 // KSpread
 #include "kspread_limits.h"
-#include "Region.h"
+#include "KCRegion.h"
 
 // KOffice
 #include <KoPageLayout.h>
@@ -33,8 +33,6 @@
 
 // Qt
 #include <QSize>
-
-using namespace KSpread;
 
 class PrintSettings::Private
 {
@@ -51,7 +49,7 @@ public:
     bool centerHorizontally     : 1;
     bool centerVertically       : 1;
     PageOrder pageOrder;
-    Region printRegion;
+    KCRegion printRegion;
     double zoom;
     QSize pageLimits;
     QPair<int, int> repeatedColumns;
@@ -83,7 +81,7 @@ PrintSettings::PrintSettings()
     d->centerHorizontally = false;
     d->centerVertically = false;
     d->pageOrder = LeftToRight;
-    d->printRegion = Region(1, 1, KS_colMax, KS_rowMax);
+    d->printRegion = KCRegion(1, 1, KS_colMax, KS_rowMax);
     d->zoom = 1.0;
 }
 
@@ -277,12 +275,12 @@ void PrintSettings::setCenterVertically(bool center)
     d->centerVertically = center;
 }
 
-const KSpread::Region& PrintSettings::printRegion() const
+const KCRegion& PrintSettings::printRegion() const
 {
     return d->printRegion;
 }
 
-void PrintSettings::setPrintRegion(const Region& region)
+void PrintSettings::setPrintRegion(const KCRegion& region)
 {
     d->printRegion = region;
 }

@@ -31,8 +31,6 @@
 #include <QString>
 #include <QtDBus/QtDBus>
 #include "kspread_export.h"
-namespace KSpread
-{
 class View;
 class CellProxy;
 
@@ -253,7 +251,5 @@ private:
     View* m_view;
     CellProxy* m_proxy;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_VIEW_ADAPTOR

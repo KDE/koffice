@@ -22,8 +22,6 @@
 
 #include <QObject>
 
-namespace KSpread
-{
 
 class TestStyleStorage : public QObject
 {
@@ -31,7 +29,5 @@ class TestStyleStorage : public QObject
 private slots:
     void testGarbageCollection();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_STYLESTORAGE

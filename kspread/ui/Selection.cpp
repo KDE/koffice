@@ -34,8 +34,6 @@
 
 #include "ui/CellEditor.h"
 
-using namespace KSpread;
-
 // TODO
 // - Allow resizing of all ranges in a normal selection; not just the last one.
 // - Get rid of anchor and marker. They are the corners of the active element.
@@ -103,8 +101,8 @@ public:
 
     KoCanvasBase* canvasBase;
     bool referenceMode : 1;
-    Region formerSelection; // for reference selection mode
-    Region oldSelection; // for select all
+    KCRegion formerSelection; // for reference selection mode
+    KCRegion oldSelection; // for select all
 };
 
 /***************************************************************************
@@ -113,7 +111,7 @@ public:
 
 Selection::Selection(KoCanvasBase* canvasBase)
         : KoToolSelection(0)
-        , Region(1, 1)
+        , KCRegion(1, 1)
         , d(new Private())
 {
     d->canvasBase = canvasBase;
@@ -121,7 +119,7 @@ Selection::Selection(KoCanvasBase* canvasBase)
 
 Selection::Selection(const Selection& selection)
         : KoToolSelection(selection.parent())
-        , Region()
+        , KCRegion()
         , d(new Private())
 {
     d->activeSheet = selection.d->activeSheet;
@@ -158,7 +156,7 @@ void Selection::initialize(const QPoint& point, Sheet* sheet)
         }
     }
 
-    Region changedRegion(*this);
+    KCRegion changedRegion(*this);
     changedRegion.add(extendToMergedAreas(QRect(d->anchor, d->marker)));
 
     // for the case of a merged cell
@@ -196,7 +194,7 @@ void Selection::initialize(const QPoint& point, Sheet* sheet)
     }
 
     if (changedRegion == *this) {
-        emitChanged(Region(topLeft, sheet));
+        emitChanged(KCRegion(topLeft, sheet));
         return;
     }
     changedRegion.add(topLeft, sheet);
@@ -225,7 +223,7 @@ void Selection::initialize(const QRect& range, Sheet* sheet)
         }
     }
 
-    Region changedRegion(*this);
+    KCRegion changedRegion(*this);
     changedRegion.add(extendToMergedAreas(QRect(d->anchor, d->marker)));
 
     // for the case of a merged cell
@@ -278,7 +276,7 @@ void Selection::initialize(const QRect& range, Sheet* sheet)
     emitChanged(changedRegion);
 }
 
-void Selection::initialize(const Region& region, Sheet* sheet)
+void Selection::initialize(const KCRegion& region, Sheet* sheet)
 {
     if (!region.isValid())
         return;
@@ -297,12 +295,12 @@ void Selection::initialize(const Region& region, Sheet* sheet)
         }
     }
 
-    Region changedRegion(*this);
+    KCRegion changedRegion(*this);
     changedRegion.add(extendToMergedAreas(QRect(d->anchor, d->marker)));
 
     // TODO Stefan: handle subregion insertion
     // TODO Stefan: handle obscured cells correctly
-    Region::clear(); // all elements; no residuum
+    KCRegion::clear(); // all elements; no residuum
     Element* element = add(region);
     if (element && element->type() == Element::Point) {
         Point* point = static_cast<Point*>(element);
@@ -422,7 +420,7 @@ void Selection::update(const QPoint& point)
     }
 
     QRect area2 = newRange;
-    Region changedRegion;
+    KCRegion changedRegion;
 
     bool newLeft   = area1.left() != area2.left();
     bool newTop    = area1.top() != area2.top();
@@ -504,7 +502,7 @@ void Selection::extend(const QPoint& point, Sheet* sheet)
         }
     }
 
-    Region changedRegion = Region(extendToMergedAreas(QRect(d->marker, d->marker)));
+    KCRegion changedRegion = KCRegion(extendToMergedAreas(QRect(d->marker, d->marker)));
 
     // for the case of a merged cell
     QPoint topLeft(point);
@@ -613,7 +611,7 @@ void Selection::extend(const QRect& range, Sheet* sheet)
     emitChanged(*this);
 }
 
-void Selection::extend(const Region& region)
+void Selection::extend(const KCRegion& region)
 {
     if (!region.isValid())
         return;
@@ -640,9 +638,9 @@ Selection::Element* Selection::eor(const QPoint& point, Sheet* sheet)
 {
     // The selection always has to contain one location/range at least.
     if (isSingular()) {
-        return Region::add(point, sheet);
+        return KCRegion::add(point, sheet);
     }
-    return Region::eor(point, sheet);
+    return KCRegion::eor(point, sheet);
 }
 
 const QPoint& Selection::anchor() const
@@ -662,12 +660,12 @@ const QPoint& Selection::marker() const
 
 bool Selection::isSingular() const
 {
-    return Region::isSingular();
+    return KCRegion::isSingular();
 }
 
 QString Selection::name(Sheet* sheet) const
 {
-    return Region::name(sheet ? sheet : d->originSheet);
+    return KCRegion::name(sheet ? sheet : d->originSheet);
 }
 
 void Selection::setActiveSheet(Sheet* sheet)
@@ -721,7 +719,7 @@ int Selection::setActiveElement(const Cell &cell)
     return -1;
 }
 
-KSpread::Region::Element* Selection::activeElement() const
+KCRegion::Element* Selection::activeElement() const
 {
     return (d->activeElement == cells().count()) ? 0 : cells()[d->activeElement];
 }
@@ -731,7 +729,7 @@ void Selection::clear()
     d->activeElement = 0;
     d->activeSubRegionStart = 0;
     d->activeSubRegionLength = 0;
-    Region::clear();
+    KCRegion::clear();
     // If this is the normal, not the reference mode, one element must survive.
     if (!referenceSelection()) {
         initialize(QPoint(1, 1), d->activeSheet);
@@ -923,7 +921,7 @@ QRect Selection::extendToMergedAreas(const QRect& _area) const
     QRect area = normalized(_area);
     Cell cell(d->activeSheet, area.left(), area.top());
 
-    if (Region::Range(area).isColumn() || Region::Range(area).isRow()) {
+    if (KCRegion::Range(area).isColumn() || KCRegion::Range(area).isRow()) {
         return area;
     } else if (!(cell.isPartOfMerged()) &&
                (cell.mergedXCells() + 1) >= area.width() &&
@@ -960,47 +958,47 @@ QRect Selection::extendToMergedAreas(const QRect& _area) const
     return area;
 }
 
-KSpread::Region::Point* Selection::createPoint(const QPoint& point) const
+KCRegion::Point* Selection::createPoint(const QPoint& point) const
 {
     return new Point(point);
 }
 
-KSpread::Region::Point* Selection::createPoint(const QString& string) const
+KCRegion::Point* Selection::createPoint(const QString& string) const
 {
     return new Point(string);
 }
 
-KSpread::Region::Point* Selection::createPoint(const Region::Point& point) const
+KCRegion::Point* Selection::createPoint(const KCRegion::Point& point) const
 {
     return new Point(point);
 }
 
-KSpread::Region::Range* Selection::createRange(const QRect& rect) const
+KCRegion::Range* Selection::createRange(const QRect& rect) const
 {
     return new Range(rect);
 }
 
-KSpread::Region::Range* Selection::createRange(const KSpread::Region::Point& tl, const KSpread::Region::Point& br) const
+KCRegion::Range* Selection::createRange(const KCRegion::Point& tl, const KCRegion::Point& br) const
 {
     return new Range(tl, br);
 }
 
-KSpread::Region::Range* Selection::createRange(const QString& string) const
+KCRegion::Range* Selection::createRange(const QString& string) const
 {
     return new Range(string);
 }
 
-KSpread::Region::Range* Selection::createRange(const Region::Range& range) const
+KCRegion::Range* Selection::createRange(const KCRegion::Range& range) const
 {
     return new Range(range);
 }
 
-void Selection::emitChanged(const Region& region)
+void Selection::emitChanged(const KCRegion& region)
 {
     Sheet * const sheet = d->activeSheet;
     if(!sheet) // no sheet no update needed
         return;
-    Region extendedRegion;
+    KCRegion extendedRegion;
     ConstIterator end(region.constEnd());
     for (ConstIterator it = region.constBegin(); it != end; ++it) {
         Element* element = *it;
@@ -1016,7 +1014,7 @@ void Selection::emitChanged(const Region& region)
         int bottom = area.bottom();
 
         // a merged cells is selected
-        if (element->type() == Region::Element::Point) {
+        if (element->type() == KCRegion::Element::Point) {
             Cell cell(sheet, left, top);
             if (cell.doesMergeCells()) {
                 // extend to the merged region
@@ -1081,19 +1079,19 @@ void Selection::dump() const
 ****************************************************************************/
 
 Selection::Point::Point(const QPoint& point)
-        : Region::Point(point),
+        : KCRegion::Point(point),
         m_color(Qt::black)
 {
 }
 
 Selection::Point::Point(const QString& string)
-        : Region::Point(string),
+        : KCRegion::Point(string),
         m_color(Qt::black)
 {
 }
 
-Selection::Point::Point(const Region::Point& point)
-        : Region::Point(point),
+Selection::Point::Point(const KCRegion::Point& point)
+        : KCRegion::Point(point),
         m_color(Qt::black)
 {
 }
@@ -1103,25 +1101,25 @@ Selection::Point::Point(const Region::Point& point)
 ****************************************************************************/
 
 Selection::Range::Range(const QRect& range)
-        : Region::Range(range),
+        : KCRegion::Range(range),
         m_color(Qt::black)
 {
 }
 
-Selection::Range::Range(const KSpread::Region::Point& tl, const KSpread::Region::Point& br)
-        : Region::Range(tl, br),
+Selection::Range::Range(const KCRegion::Point& tl, const KCRegion::Point& br)
+        : KCRegion::Range(tl, br),
         m_color(Qt::black)
 {
 }
 
 Selection::Range::Range(const QString& string)
-        : Region::Range(string),
+        : KCRegion::Range(string),
         m_color(Qt::black)
 {
 }
 
-Selection::Range::Range(const Region::Range& range)
-        : Region::Range(range),
+Selection::Range::Range(const KCRegion::Range& range)
+        : KCRegion::Range(range),
         m_color(Qt::black)
 {
 }

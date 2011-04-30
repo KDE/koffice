@@ -33,8 +33,6 @@ namespace KChart
 class ChartShape;
 }
 
-namespace KSpread
-{
 class Map;
 
 /// A dialog for showing and altering frame properties
@@ -107,7 +105,5 @@ public:
 
     State m_state; ///< the current state
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CHART_DIALOG

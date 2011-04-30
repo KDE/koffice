@@ -25,8 +25,6 @@
 
 #include "BenchmarkPointStorage.h"
 
-using namespace KSpread;
-
 void PointStorageBenchmark::testInsertionPerformance_loadingLike()
 {
     PointStorage<int> storage;

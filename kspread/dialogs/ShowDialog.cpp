@@ -39,8 +39,6 @@
 // commands
 #include "commands/SheetCommands.h"
 
-using namespace KSpread;
-
 ShowDialog::ShowDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
         , m_selection(selection)

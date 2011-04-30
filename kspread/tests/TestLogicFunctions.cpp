@@ -24,8 +24,6 @@
 #include <Map.h>
 #include <Sheet.h>
 
-using namespace KSpread;
-
 void TestLogicFunctions::init()
 {
     m_doc = new Doc();

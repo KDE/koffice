@@ -30,8 +30,6 @@
 
 class QCloseEvent;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -63,7 +61,5 @@ private:
 
     void startCalc(double _start, double _goal);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_GOALSEEK_DIALOG

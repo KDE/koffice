@@ -24,9 +24,7 @@
 
 class KoCanvasBase;
 
-namespace KSpread
-{
-class Region;
+class KCRegion;
 
 /**
  * \ingroup Commands
@@ -39,7 +37,7 @@ public:
     /**
      * Constructor.
      */
-    SpellCheckCommand(const Region &region, KoCanvasBase* canvasBase);
+    SpellCheckCommand(const KCRegion &region, KoCanvasBase* canvasBase);
 
     /**
      * Destructor.
@@ -57,7 +55,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SPELLCHECK_COMMAND

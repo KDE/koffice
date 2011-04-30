@@ -26,9 +26,6 @@
 
 #include <Value.h>
 
-namespace KSpread
-{
-
 class TestFinancialFunctions: public QObject
 {
     Q_OBJECT
@@ -104,7 +101,5 @@ private slots:
 //   Value evaluate(const QString&);
 //   Value evaluateShort(const QString&);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_FINANCIAL_FUNCTIONS

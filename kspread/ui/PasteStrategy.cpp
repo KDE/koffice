@@ -27,8 +27,6 @@
 #include "Selection.h"
 #include "Sheet.h"
 
-using namespace KSpread;
-
 class PasteStrategy::Private
 {
 public:

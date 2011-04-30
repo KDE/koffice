@@ -22,9 +22,6 @@
 
 #include <KoResourceManager.h>
 
-namespace KSpread
-{
-
 /**
  * KSpread specific canvas resources
  */
@@ -34,7 +31,5 @@ enum {
     Selection = KoCanvasResource::KSpreadStart  ///< the cell selection
 };
 } // namespace CanvasResource
-
-} // namespace KSpread
 
 #endif // KSPREAD_CANVAS_RESOURCES

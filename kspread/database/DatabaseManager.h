@@ -28,8 +28,6 @@
 
 class KoXmlWriter;
 
-namespace KSpread
-{
 class Map;
 
 class KSPREAD_EXPORT DatabaseManager : public QObject
@@ -68,7 +66,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DATABASE_MANAGER

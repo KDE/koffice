@@ -25,9 +25,6 @@
 
 #include <Value.h>
 
-namespace KSpread
-{
-
 class TestDatetimeFunctions: public QObject
 {
     Q_OBJECT
@@ -70,7 +67,5 @@ private slots:
 private:
     Value evaluate(const QString&, Value& ex);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_DATETIME_FUNCTIONS

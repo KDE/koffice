@@ -37,8 +37,6 @@
 
 class KoColor;
 
-namespace KSpread
-{
 class SheetView;
 class CellEditorBase;
 
@@ -123,7 +121,7 @@ protected:
     virtual SheetView* sheetView(const Sheet* sheet) const = 0;
 
 protected Q_SLOTS:
-    void selectionChanged(const Region&);
+    void selectionChanged(const KCRegion&);
     void activeSheetChanged(Sheet*);
     void updateEditor();
     void focusEditorRequested();
@@ -285,7 +283,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CELL_TOOL_BASE

@@ -28,8 +28,6 @@
 
 #include <KIcon>
 
-using namespace KSpread;
-
 class MapModel::Private
 {
 public:

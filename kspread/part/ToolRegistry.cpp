@@ -28,8 +28,6 @@
 
 #include <KoToolRegistry.h>
 
-using namespace KSpread;
-
 
 class ToolRegistry::Private
 {

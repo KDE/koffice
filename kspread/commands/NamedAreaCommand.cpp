@@ -28,8 +28,6 @@
 #include "NamedAreaManager.h"
 #include "Sheet.h"
 
-using namespace KSpread;
-
 NamedAreaCommand::NamedAreaCommand(QUndoCommand* parent)
         : AbstractRegionCommand(parent)
 {
@@ -61,7 +59,7 @@ bool NamedAreaCommand::preProcessing()
     if (m_reverse)
         return true;
 
-    const Region namedArea = m_sheet->map()->namedAreaManager()->namedArea(m_areaName);
+    const KCRegion namedArea = m_sheet->map()->namedAreaManager()->namedArea(m_areaName);
     if (!namedArea.isEmpty()) {
         if (namedArea == *this)
             return false;

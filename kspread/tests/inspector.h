@@ -22,8 +22,6 @@
 
 #include <kpagedialog.h>
 
-namespace KSpread
-{
 class Cell;
 
 class Inspector : public KPageDialog
@@ -39,7 +37,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_INSPECTOR

@@ -43,7 +43,6 @@ KSPREAD_EXPORT int daysPerYear(QDate const & date, int basis);
  */
 KSPREAD_EXPORT int daysBetweenDates(QDate const & date1, QDate const & date2, int basis);
 
-
 // ODF
 KSPREAD_EXPORT int days360(const QDate& _date1, const QDate& _date2, bool european);
 KSPREAD_EXPORT int days360(int day1, int month1, int year1, bool leapYear1, int  day2, int month2, int year2, bool leapYear2, bool usa);

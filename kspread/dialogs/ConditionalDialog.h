@@ -31,8 +31,6 @@
 class KComboBox;
 class KLineEdit;
 
-namespace KSpread
-{
 class Selection;
 class Style;
 
@@ -102,7 +100,5 @@ private:
                       const KComboBox * sb);
 
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CONDITIONAL_DIALOG

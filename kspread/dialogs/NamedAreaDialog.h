@@ -35,9 +35,7 @@ class KLineEdit;
 
 class KListWidget;
 
-namespace KSpread
-{
-class Region;
+class KCRegion;
 class Selection;
 
 /**
@@ -80,7 +78,7 @@ public:
 
     QString areaName() const;
     void setAreaName(const QString& areaname);
-    void setRegion(const Region& region);
+    void setRegion(const KCRegion& region);
 
 public Q_SLOTS:
     void slotOk();
@@ -93,7 +91,5 @@ private:
     KLineEdit*  m_cellRange;
     QString     m_initialAreaName;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_NAMED_AREA_DIALOG

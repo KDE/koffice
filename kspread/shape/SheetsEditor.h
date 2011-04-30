@@ -23,8 +23,6 @@
 #include <QWidget>
 #include <QListWidgetItem>
 
-namespace KSpread
-{
 class TableShape;
 class Sheet;
 
@@ -52,7 +50,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TABLE_TOOL

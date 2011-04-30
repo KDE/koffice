@@ -23,8 +23,6 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 class CellStorage;
 class Map;
 class Sheet;
@@ -44,7 +42,5 @@ private:
     Map* m_map;
     Sheet* m_sheet;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_DEPENDENCIES

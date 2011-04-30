@@ -34,9 +34,6 @@
 #include <kiconloader.h>
 #include <QTime>
 
-namespace KSpread
-{
-
 class ElapsedTime
 {
 public:
@@ -113,10 +110,13 @@ enum Operation {
 };
 } // namespace Paste
 
+namespace KSpread
+{
+
 // necessary due to QDock* enums (Werner)
 enum MoveTo { Bottom, Left, Top, Right, BottomFirst, NoMovement };
 enum MethodOfCalc { SumOfNumber, Min, Max, Average, Count, NoneCalc, CountA };
 
-} // namespace KSpread
+}
 
 #endif

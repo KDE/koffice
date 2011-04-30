@@ -32,8 +32,6 @@
 
 class QTableWidgetItem;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -68,7 +66,5 @@ private:
     class Private;
     Private *const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SORT_DIALOG

@@ -38,8 +38,6 @@
 class KoOasisSettings;
 class KoResourceManager;
 
-namespace KSpread
-{
 class Map;
 class Sheet;
 class SheetAccessModel;
@@ -157,7 +155,5 @@ private:
      */
     void loadOdfIgnoreList(const KoOasisSettings& settings);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DOCBASE_H

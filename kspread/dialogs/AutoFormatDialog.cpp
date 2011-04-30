@@ -49,8 +49,6 @@
 
 #include "commands/AutoFormatCommand.h"
 
-using namespace KSpread;
-
 struct Entry {
     QString xml;
     QString image;

@@ -29,8 +29,6 @@
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 
-using namespace KSpread;
-
 class SelectionStrategy::Private
 {
 public:
@@ -52,8 +50,8 @@ SelectionStrategy::SelectionStrategy(CellToolBase *cellTool,
 #if 0 // KSPREAD_WIP_DRAG_REFERENCE_SELECTION
     // Check, if the selected area was hit.
     bool hitSelection = false;
-    const Region::ConstIterator end(selection->constEnd());
-    for (Region::ConstIterator it(selection->constBegin()); it != end; ++it) {
+    const KCRegion::ConstIterator end(selection->constEnd());
+    for (KCRegion::ConstIterator it(selection->constBegin()); it != end; ++it) {
         // Only process ranges on the active sheet.
         if (sheet != (*it)->sheet()) {
             continue;

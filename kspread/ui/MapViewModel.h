@@ -29,8 +29,6 @@ class KXMLGUIClient;
 
 class QAction;
 
-namespace KSpread
-{
 
 /**
  * Extends the map model by active sheet tracking.
@@ -95,7 +93,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_MAP_VIEW_MODEL

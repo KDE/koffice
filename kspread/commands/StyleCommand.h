@@ -26,8 +26,6 @@
 #include "AbstractRegionCommand.h"
 #include "Style.h"
 
-namespace KSpread
-{
 class Style;
 
 /**
@@ -178,7 +176,5 @@ private:
     Style* m_style;
     QList< QPair<QRectF, SharedSubStyle> > m_undoData;
 };
-
-}  // namespace KSpread
 
 #endif // KSPREAD_STYLE_COMMAND

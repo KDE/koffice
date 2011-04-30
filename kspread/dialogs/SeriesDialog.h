@@ -31,8 +31,6 @@
 class QRadioButton;
 class KDoubleNumInput;
 
-namespace KSpread
-{
 class Selection;
 class Sheet;
 
@@ -64,7 +62,5 @@ protected:
     QRadioButton* geometric;
     QPoint  marker;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SERIES_DIALOG

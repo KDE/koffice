@@ -22,7 +22,7 @@
 #include "ReferenceModule.h"
 
 #include "Cell.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
 #include "Util.h"
 #include "Value.h"
@@ -227,7 +227,7 @@ Value func_areas(valVector args, ValueCalc *calc, FuncExtra *e)
     QString ref;
     for (int i = 1; i < l; ++i) {
         if (s[i] == ',' || s[i] == ')') {
-            if (!KSpread::Region(ref).isValid())
+            if (!KCRegion(ref).isValid())
                 return Value::errorVALUE();
             else {
                 ++num;
@@ -351,7 +351,7 @@ Value func_indirect(valVector args, ValueCalc *calc, FuncExtra *e)
         ref = ref;
     }
 
-    const KSpread::Region region(ref, e->sheet->map(), e->sheet);
+    const KCRegion region(ref, e->sheet->map(), e->sheet);
     if (!region.isValid() || !region.isSingular())
         return Value::errorVALUE();
 

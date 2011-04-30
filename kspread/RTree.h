@@ -30,8 +30,6 @@
 
 #include "kspread_limits.h"
 
-namespace KSpread
-{
 
 /**
  * \class RTree
@@ -1037,7 +1035,5 @@ void RTree<T>::NonLeafNode::operator=(const NonLeafNode& other)
         }
     }
 }
-
-} // namespace KSpread
 
 #endif // KSPREAD_RTREE

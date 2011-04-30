@@ -28,8 +28,6 @@
 
 class KIntNumInput;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -49,7 +47,5 @@ protected:
     Selection* m_selection;
     KIntNumInput *m_pAngle;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_ANGLE_DIALOG

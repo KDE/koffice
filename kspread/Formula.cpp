@@ -29,7 +29,7 @@
 #include "Sheet.h"
 #include "Map.h"
 #include "NamedAreaManager.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Value.h"
 
 #include "ValueCalc.h"
@@ -78,9 +78,6 @@ TODO - optimizations:
 - expression optimization (e.g. 1+2+A1 becomes 3+A1)
 */
 
-namespace KSpread
-{
-
 class Opcode
 {
 public:
@@ -101,11 +98,11 @@ public:
 struct stackEntry {
     void reset() {
         row1 = col1 = row2 = col2 = -1;
-        reg = KSpread::Region();
+        reg = KCRegion();
         regIsNamedOrLabeled = false;
     }
     Value val;
-    KSpread::Region reg;
+    KCRegion reg;
     bool regIsNamedOrLabeled;
     int row1, col1, row2, col2;
 };
@@ -139,16 +136,13 @@ private:
     unsigned topIndex;
 };
 
-}
-
-using namespace KSpread;
-
 // for null token
 const Token Token::null;
 
+// static
 // helper function: return operator of given token text
 // e.g. '*' yields Operator::Asterisk, and so on
-Token::Op KSpread::matchOperator(const QString& text)
+Token::Op Token::matchOperator(const QString& text)
 {
     Token::Op result = Token::InvalidOp;
 
@@ -334,7 +328,7 @@ QString Token::asError() const
 
 Token::Op Token::asOperator() const
 {
-    if (isOperator()) return matchOperator(m_text);
+    if (isOperator()) return Token::matchOperator(m_text);
     else return InvalidOp;
 }
 
@@ -427,7 +421,7 @@ void TokenStack::ensureSpace()
  **********************/
 
 // helper function: return true for valid identifier character
-bool KSpread::isIdentifier(QChar ch)
+bool KSpread::isIdentifier(const QChar &ch)
 {
     return (ch.unicode() == '_') || (ch.unicode() == '$') || (ch.unicode() == '.') || (ch.isLetter());
 }
@@ -619,7 +613,7 @@ Tokens Formula::scan(const QString& expr, const KLocale* locale) const
 
             // beginning with alphanumeric ?
             // could be identifier, cell, range, or function...
-            else if (isIdentifier(ch)) {
+            else if (KSpread::isIdentifier(ch)) {
                 state = InIdentifier;
             }
 
@@ -646,12 +640,12 @@ Tokens Formula::scan(const QString& expr, const KLocale* locale) const
 
                 // check for two-chars operator, such as '<=', '>=', etc
                 s.append(ch).append(ex[i+1]);
-                op = matchOperator(s);
+                op = Token::matchOperator(s);
 
                 // check for one-char operator, such as '+', ';', etc
                 if (op == Token::InvalidOp) {
                     s = QString(ch);
-                    op = matchOperator(s);
+                    op = Token::matchOperator(s);
                 }
 
                 // any matched operator ?
@@ -671,7 +665,7 @@ Tokens Formula::scan(const QString& expr, const KLocale* locale) const
         case InIdentifier:
 
             // consume as long as alpha, dollar sign, underscore, or digit
-            if (isIdentifier(ch)  || ch.isDigit()) tokenText.append(ex[i++]);
+            if (KSpread::isIdentifier(ch)  || ch.isDigit()) tokenText.append(ex[i++]);
 
             // a '!' ? then this must be sheet name, e.g "Sheet4!", unless the next character is '='
             else if (ch == '!' && ex[i+1] != '=') {
@@ -709,7 +703,7 @@ Tokens Formula::scan(const QString& expr, const KLocale* locale) const
         case InCell:
 
             // consume as long as alpha, dollar sign, underscore, or digit
-            if (isIdentifier(ch)  || ch.isDigit()) tokenText.append(ex[i++]);
+            if (KSpread::isIdentifier(ch)  || ch.isDigit()) tokenText.append(ex[i++]);
 
             // we're done with cell ref, possibly with sheet name (like "Sheet2!B2")
             // note that "Sheet2!TotalSales" is also possible, in which "TotalSales" is a named area
@@ -752,7 +746,7 @@ Tokens Formula::scan(const QString& expr, const KLocale* locale) const
         case InRange:
 
             // consume as long as alpha, dollar sign, underscore, or digit or !
-            if (isIdentifier(ch) || ch.isDigit() || ch == '!') tokenText.append(ex[i++]);
+            if (KSpread::isIdentifier(ch) || ch.isDigit() || ch == '!') tokenText.append(ex[i++]);
 
             // we're done with range reference
             else {
@@ -820,7 +814,7 @@ Tokens Formula::scan(const QString& expr, const KLocale* locale) const
             }
 
             // identifier?
-            else if (isIdentifier(ch)) {
+            else if (KSpread::isIdentifier(ch)) {
                 // has to be a sheet or area name then
                 state = InIdentifier;
             }
@@ -1343,7 +1337,7 @@ Value Formula::eval(CellIndirection cellIndirections) const
 Value Formula::Private::valueOrElement(FuncExtra &fe, const stackEntry& entry) const
 {
     const Value& v = entry.val;
-    const Region& region = entry.reg;
+    const KCRegion& region = entry.reg;
     if(v.isArray()) {
         if(v.count() == 1) // if there is only one item, use that one
             return v.element(0);
@@ -1506,12 +1500,12 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<Cell, Value
         case Opcode::Intersect: {
             val1 = stack.pop().val;
             val2 = stack.pop().val;
-            Region r1(d->constants[index].asString(), map, d->sheet);
-            Region r2(d->constants[index+1].asString(), map, d->sheet);
+            KCRegion r1(d->constants[index].asString(), map, d->sheet);
+            KCRegion r2(d->constants[index+1].asString(), map, d->sheet);
             if(!r1.isValid() || !r2.isValid()) {
                 val1 = Value::errorNULL();
             } else {
-                Region r = r1.intersected(r2);
+                KCRegion r = r1.intersected(r2);
                 QRect rect = r.boundingRect();
                 Cell cell;
                 if(rect.top() == rect.bottom())
@@ -1532,12 +1526,12 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<Cell, Value
 
           // region union
         case Opcode::Union: {
-            Region r = stack.pop().reg;
-            Region r2 = stack.pop().reg;
+            KCRegion r = stack.pop().reg;
+            KCRegion r2 = stack.pop().reg;
             entry.reset();
             if (!r.isValid() || !r2.isValid()) {
                 val1 = Value::errorVALUE();
-                r = Region();
+                r = KCRegion();
             } else {
                 r.add(r2);
                 r.firstSheet()->cellStorage()->valueRegion(r);
@@ -1622,7 +1616,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<Cell, Value
             val1 = Value::empty();
             entry.reset();
 
-            const Region region(c, map, d->sheet);
+            const KCRegion region(c, map, d->sheet);
             if (!region.isValid()) {
                 val1 = Value::errorREF();
             } else if (region.isSingular()) {
@@ -1662,7 +1656,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<Cell, Value
             val1 = Value::empty();
             entry.reset();
 
-            const Region region(c, map, d->sheet);
+            const KCRegion region(c, map, d->sheet);
             if (region.isValid()) {
                 val1 = region.firstSheet()->cellStorage()->valueRegion(region);
                 // store the reference, so we can use it within functions

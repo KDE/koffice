@@ -32,8 +32,6 @@
 
 #include <QPointer>
 
-using namespace KSpread;
-
 void ProtectableObject::password(QByteArray & password) const
 {
     password = m_password;

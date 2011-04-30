@@ -23,8 +23,6 @@
 
 #include <KoShapeConfigWidgetBase.h>
 
-namespace KSpread
-{
 class Map;
 
 /// A widget that is shown for selecting the cell region providding the chart data
@@ -55,7 +53,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CHART_DATABASE_SELECTOR

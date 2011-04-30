@@ -79,8 +79,6 @@
 #include <QPainter>
 #include <QToolButton>
 
-using namespace KSpread;
-
 void CellToolBase::Private::updateEditor(const Cell& cell)
 {
     const Cell& theCell = cell.isPartOfMerged() ? cell.masterCell() : cell;
@@ -210,23 +208,23 @@ void CellToolBase::Private::processEnterKey(QKeyEvent* event)
 //if shift Button clicked inverse move direction
     if (event->modifiers() & Qt::ShiftModifier) {
         switch (direction) {
-        case Bottom:
-            direction = Top;
+        case KSpread::Bottom:
+            direction = KSpread::Top;
             break;
-        case Top:
-            direction = Bottom;
+        case KSpread::Top:
+            direction = KSpread::Bottom;
             break;
-        case Left:
-            direction = Right;
+        case KSpread::Left:
+            direction = KSpread::Right;
             break;
-        case Right:
-            direction = Left;
+        case KSpread::Right:
+            direction = KSpread::Left;
             break;
-        case BottomFirst:
-            direction = BottomFirst;
+        case KSpread::BottomFirst:
+            direction = KSpread::BottomFirst;
             break;
-        case NoMovement:
-            direction = NoMovement;
+        case KSpread::NoMovement:
+            direction = KSpread::NoMovement;
             break;
         }
     }
@@ -250,34 +248,34 @@ void CellToolBase::Private::processArrowKey(QKeyEvent *event)
     /* save changes to the current editor */
     q->selection()->emitCloseEditor(true);
 
-    KSpread::MoveTo direction = Bottom;
+    KSpread::MoveTo direction = KSpread::Bottom;
     bool makingSelection = event->modifiers() & Qt::ShiftModifier;
 
     switch (event->key()) {
     case Qt::Key_Down:
-        direction = Bottom;
+        direction = KSpread::Bottom;
         break;
     case Qt::Key_Up:
-        direction = Top;
+        direction = KSpread::Top;
         break;
     case Qt::Key_Left:
         if (sheet->layoutDirection() == Qt::RightToLeft)
-            direction = Right;
+            direction = KSpread::Right;
         else
-            direction = Left;
+            direction = KSpread::Left;
         break;
     case Qt::Key_Right:
         if (sheet->layoutDirection() == Qt::RightToLeft)
-            direction = Left;
+            direction = KSpread::Left;
         else
-            direction = Right;
+            direction = KSpread::Right;
         break;
     case Qt::Key_Tab:
-        direction = Right;
+        direction = KSpread::Right;
         break;
     case Qt::Key_Backtab:
         //Shift+Tab moves to the left
-        direction = Left;
+        direction = KSpread::Left;
         makingSelection = false;
         break;
     default:
@@ -818,14 +816,13 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
     int offset = 0;
     const RowFormat *rl = 0;
     const ColumnFormat *cl = 0;
-    switch (direction)
+    switch (direction) {
         /* for each case, figure out how far away the next cell is and then keep
             going one row/col at a time after that until a visible row/col is found
 
             NEVER use cell.column() or cell.row() -- it might be a default cell
         */
-    {
-    case Bottom:
+    case KSpread::Bottom:
         offset = cell.mergedYCells() - (cursor.y() - cellCorner.y()) + 1;
         rl = sheet->rowFormat(cursor.y() + offset);
         while (((cursor.y() + offset) <= q->maxRow()) && rl->isHiddenOrFiltered()) {
@@ -835,7 +832,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
 
         destination = QPoint(cursor.x(), qMin(cursor.y() + offset, q->maxRow()));
         break;
-    case Top:
+    case KSpread::Top:
         offset = (cellCorner.y() - cursor.y()) - 1;
         rl = sheet->rowFormat(cursor.y() + offset);
         while (((cursor.y() + offset) >= 1) && rl->isHiddenOrFiltered()) {
@@ -844,7 +841,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
         }
         destination = QPoint(cursor.x(), qMax(cursor.y() + offset, 1));
         break;
-    case Left:
+    case KSpread::Left:
         offset = (cellCorner.x() - cursor.x()) - 1;
         cl = sheet->columnFormat(cursor.x() + offset);
         while (((cursor.x() + offset) >= 1) && cl->isHiddenOrFiltered()) {
@@ -853,7 +850,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
         }
         destination = QPoint(qMax(cursor.x() + offset, 1), cursor.y());
         break;
-    case Right:
+    case KSpread::Right:
         offset = cell.mergedXCells() - (cursor.x() - cellCorner.x()) + 1;
         cl = sheet->columnFormat(cursor.x() + offset);
         while (((cursor.x() + offset) <= q->maxCol()) && cl->isHiddenOrFiltered()) {
@@ -862,7 +859,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
         }
         destination = QPoint(qMin(cursor.x() + offset, q->maxCol()), cursor.y());
         break;
-    case BottomFirst:
+    case KSpread::BottomFirst:
         offset = cell.mergedYCells() - (cursor.y() - cellCorner.y()) + 1;
         rl = sheet->rowFormat(cursor.y() + offset);
         while (((cursor.y() + offset) <= q->maxRow()) && rl->isHiddenOrFiltered()) {
@@ -872,7 +869,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
 
         destination = QPoint(1, qMin(cursor.y() + offset, q->maxRow()));
         break;
-    case NoMovement:
+    case KSpread::NoMovement:
         destination = cursor;
         break;
     }
@@ -907,10 +904,10 @@ void CellToolBase::Private::paintSelection(QPainter &painter, const QRectF &view
     QPen pen(QApplication::palette().text().color(), q->canvas()->viewConverter()->viewToDocumentX(2.0));
     painter.setPen(pen);
 
-    const KSpread::Selection* selection = q->selection();
+    const Selection* selection = q->selection();
     const QRect currentRange = selection->extendToMergedAreas(QRect(selection->anchor(), selection->marker()));
-    Region::ConstIterator end(selection->constEnd());
-    for (Region::ConstIterator it(selection->constBegin()); it != end; ++it) {
+    KCRegion::ConstIterator end(selection->constEnd());
+    for (KCRegion::ConstIterator it(selection->constBegin()); it != end; ++it) {
         const QRect range = (*it)->isAll() ? (*it)->rect() : selection->extendToMergedAreas((*it)->rect());
 
         // Only the active element (the one with the anchor) will be drawn with a border
@@ -1053,8 +1050,8 @@ void CellToolBase::Private::paintReferenceSelection(QPainter &painter, const QRe
     int index = 0;
 
     // Iterate over the referenced ranges.
-    const Region::ConstIterator end(q->selection()->constEnd());
-    for (Region::ConstIterator it(q->selection()->constBegin()); it != end; ++it) {
+    const KCRegion::ConstIterator end(q->selection()->constEnd());
+    for (KCRegion::ConstIterator it(q->selection()->constBegin()); it != end; ++it) {
         Sheet *const sheet = (*it)->sheet();
         // Only paint ranges or cells on the current sheet
         if (sheet != q->selection()->activeSheet()) {
@@ -1175,8 +1172,8 @@ QList<QAction*> CellToolBase::Private::popupActionList() const
 
             q->action("showSelColumns")->setEnabled(false);
             const ColumnFormat* columnFormat;
-            Region::ConstIterator endOfList = q->selection()->constEnd();
-            for (Region::ConstIterator it = q->selection()->constBegin(); it != endOfList; ++it) {
+            KCRegion::ConstIterator endOfList = q->selection()->constEnd();
+            for (KCRegion::ConstIterator it = q->selection()->constBegin(); it != endOfList; ++it) {
                 QRect range = (*it)->rect();
                 int col;
                 for (col = range.left(); col < range.right(); ++col) {
@@ -1212,8 +1209,8 @@ QList<QAction*> CellToolBase::Private::popupActionList() const
 
             q->action("showSelRows")->setEnabled(false);
             const RowFormat* rowFormat;
-            Region::ConstIterator endOfList = q->selection()->constEnd();
-            for (Region::ConstIterator it = q->selection()->constBegin(); it != endOfList; ++it) {
+            KCRegion::ConstIterator endOfList = q->selection()->constEnd();
+            for (KCRegion::ConstIterator it = q->selection()->constBegin(); it != endOfList; ++it) {
                 QRect range = (*it)->rect();
                 int row;
                 for (row = range.top(); row < range.bottom(); ++row) {
@@ -1307,8 +1304,8 @@ bool CellToolBase::Private::testListChoose(Selection *selection) const
     const Cell cursorCell(sheet, selection->cursor());
     const CellStorage *const storage = sheet->cellStorage();
 
-    const Region::ConstIterator end(selection->constEnd());
-    for (Region::ConstIterator it(selection->constBegin()); it != end; ++it) {
+    const KCRegion::ConstIterator end(selection->constEnd());
+    for (KCRegion::ConstIterator it(selection->constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
         if (cursorCell.column() < range.left() || cursorCell.column() > range.right()) {
             continue; // next range

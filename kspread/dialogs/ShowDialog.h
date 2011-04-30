@@ -29,8 +29,6 @@
 
 class QListWidget;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -51,7 +49,5 @@ private:
     Selection* m_selection;
     QListWidget *m_listWidget;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHOW_DIALOG

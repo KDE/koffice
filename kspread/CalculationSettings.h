@@ -40,9 +40,6 @@ class KLocale;
 
 class KoXmlWriter;
 
-namespace KSpread
-{
-
 /**
  * Calculation settings
  * \ingroup Value
@@ -153,7 +150,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CALCULATION_SETTINGS

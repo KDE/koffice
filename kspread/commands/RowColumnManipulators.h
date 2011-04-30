@@ -26,8 +26,6 @@
 
 #include "AbstractRegionCommand.h"
 
-namespace KSpread
-{
 class ColumnFormat;
 class RowFormat;
 
@@ -204,7 +202,5 @@ private:
     Mode m_mode;
     RowFormat *m_template;
 };
-
-}  // namespace KSpread
 
 #endif // KSPREAD_ROW_COLUMN_MANIPULATORS

@@ -32,8 +32,6 @@ class QDialog;
 class QEvent;
 class QObject;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -71,7 +69,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_REGION_SELECTOR

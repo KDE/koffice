@@ -34,8 +34,6 @@ class KoXmlWriter;
 
 class QUndoCommand;
 
-namespace KSpread
-{
 class Binding;
 class BindingStorage;
 class Cell;
@@ -46,7 +44,7 @@ class Formula;
 class FormulaStorage;
 class FusionStorage;
 class LinkStorage;
-class Region;
+class KCRegion;
 class RichTextStorage;
 class Sheet;
 class StyleStorage;
@@ -120,27 +118,27 @@ public:
      * \return the binding associated with the Cell at \p column , \p row .
      */
     Binding binding(int column, int row) const;
-    void setBinding(const Region& region, const Binding& binding);
-    void removeBinding(const Region& region, const Binding& binding);
+    void setBinding(const KCRegion& region, const Binding& binding);
+    void removeBinding(const KCRegion& region, const Binding& binding);
 
     /**
      * \return the comment associated with the Cell at \p column , \p row .
      */
     QString comment(int column, int row) const;
-    void setComment(const Region& region, const QString& comment);
+    void setComment(const KCRegion& region, const QString& comment);
 
     /**
      * \return the conditional formattings associated with the Cell at \p column , \p row .
      */
     Conditions conditions(int column, int row) const;
-    void setConditions(const Region& region, Conditions conditions);
+    void setConditions(const KCRegion& region, Conditions conditions);
 
     /**
      * \return the database associated with the Cell at \p column , \p row .
      */
     Database database(int column, int row) const;
-    QList< QPair<QRectF, Database> > databases(const Region& region) const;
-    void setDatabase(const Region& region, const Database& database);
+    QList< QPair<QRectF, Database> > databases(const KCRegion& region) const;
+    void setDatabase(const KCRegion& region, const Database& database);
 
     /**
      * \return the formula associated with the Cell at \p column , \p row .
@@ -158,9 +156,9 @@ public:
      * \return the named area's name associated with the Cell at \p column , \p row .
      */
     QString namedArea(int column, int row) const;
-    QList< QPair<QRectF, QString> > namedAreas(const Region& region) const;
-    void setNamedArea(const Region& region, const QString& namedArea);
-    void emitInsertNamedArea(const Region &region, const QString &namedArea);
+    QList< QPair<QRectF, QString> > namedAreas(const KCRegion& region) const;
+    void setNamedArea(const KCRegion& region, const QString& namedArea);
+    void emitInsertNamedArea(const KCRegion &region, const QString &namedArea);
 
     /**
      * \return the Style associated with the Cell at \p column , \p row .
@@ -171,7 +169,7 @@ public:
      * \return the Style associated with \p rect.
      */
     Style style(const QRect& rect) const;
-    void setStyle(const Region& region, const Style& style);
+    void setStyle(const KCRegion& region, const Style& style);
     void insertSubStyle(const QRect& rect, const SharedSubStyle& subStyle);
 
     /**
@@ -184,7 +182,7 @@ public:
      * \return the validity checks associated with the Cell at \p column , \p row .
      */
     Validity validity(int column, int row) const;
-    void setValidity(const Region& region, Validity validity);
+    void setValidity(const KCRegion& region, Validity validity);
 
     /**
      * \return the value associated with the Cell at \p column , \p row .
@@ -194,7 +192,7 @@ public:
     /**
      * Creates a value array containing the values in \p region.
      */
-    Value valueRegion(const Region& region) const;
+    Value valueRegion(const KCRegion& region) const;
     void setValue(int column, int row, const Value& value);
 
     QSharedPointer<QTextDocument> richText(int column, int row) const;
@@ -221,14 +219,14 @@ public:
     Cell masterCell(int column, int row) const;
     int mergedXCells(int column, int row) const;
     int mergedYCells(int column, int row) const;
-    QList<Cell> masterCells(const Region& region) const;
+    QList<Cell> masterCells(const KCRegion& region) const;
 
     /**
      * \return \c true, if the cell's value is a matrix and obscures other cells
      */
     bool locksCells(int column, int row) const;
     bool isLocked(int column, int row) const;
-    bool hasLockedCells(const Region& region) const;
+    bool hasLockedCells(const KCRegion& region) const;
     void lockCells(const QRect& rect);
     void unlockCells(int column, int row);
     QRect lockedCells(int column, int row) const;
@@ -369,7 +367,7 @@ public:
      * Creates a substorage consisting of the values in \p region.
      * \return a subset of the storage stripped down to the values in \p region
      */
-    CellStorage subStorage(const Region& region) const;
+    CellStorage subStorage(const KCRegion& region) const;
 
     const BindingStorage* bindingStorage() const;
     const CommentStorage* commentStorage() const;
@@ -403,7 +401,7 @@ public:
     void stopUndoRecording(QUndoCommand *parent);
 
 Q_SIGNALS:
-    void insertNamedArea(const Region&, const QString&);
+    void insertNamedArea(const KCRegion&, const QString&);
     void namedAreaRemoved(const QString&);
 
 private:
@@ -440,7 +438,5 @@ public:
         return *this;
     }
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CELL_STORAGE

@@ -26,8 +26,6 @@
 
 #include <Value.h>
 
-namespace KSpread
-{
 class Map;
 
 class TestMathFunctions: public QObject
@@ -113,7 +111,5 @@ private:
 
     Map* m_map;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_MATH_FUNCTIONS

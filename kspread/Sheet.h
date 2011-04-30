@@ -57,8 +57,6 @@ class KoShape;
 class KoShapeSavingContext;
 class KoXmlWriter;
 
-namespace KSpread
-{
 class Cell;
 class CellStorage;
 class ColumnFormat;
@@ -73,7 +71,7 @@ class Map;
 class OdfLoadingContext;
 class OdfSavingContext;
 class PrintSettings;
-class Region;
+class KCRegion;
 class RowFormat;
 class Sheet;
 class SheetPrint;
@@ -620,7 +618,7 @@ public:
     /**
      * \ingroup Commands
      */
-    bool areaIsEmpty(const Region& area, TestType _type = Text) ;
+    bool areaIsEmpty(const KCRegion& area, TestType _type = Text) ;
 
     //
     //END Methods related to manipulations of selected cells
@@ -976,7 +974,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif  // KSPREAD_SHEET

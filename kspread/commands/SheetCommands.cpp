@@ -26,8 +26,6 @@
 #include "Map.h"
 #include "Sheet.h"
 
-using namespace KSpread;
-
 // ----- RenameSheetCommand -----
 
 RenameSheetCommand::RenameSheetCommand(Sheet* s, const QString &name)

@@ -15,7 +15,7 @@ Date: 10.12.2009
   Thoughts/Proposed solution:
     - Implement the following methods, that emit different signals depending on
         the damage:
-        void Sheet::addDamage(CellDamage::Changes, const Region&);
+        void Sheet::addDamage(CellDamage::Changes, const KCRegion&);
         void Sheet::addDamage(SheetDamage::Changes);
         void Map::addDamage(WorkbookDamage::Changes);
       They still collect damages though.

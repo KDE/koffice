@@ -77,8 +77,6 @@
 #include "ui/Selection.h"
 #include "ui/SheetView.h"
 
-using namespace KSpread;
-
 class CellTool::Private
 {
 public:
@@ -125,7 +123,7 @@ void CellTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &sha
     CellToolBase::activate(toolActivation, shapes);
 }
 
-KSpread::Selection* CellTool::selection()
+Selection* CellTool::selection()
 {
     return d->canvas->selection();
 }

@@ -22,9 +22,7 @@
 
 #include <QAbstractProxyModel>
 
-namespace KSpread
-{
-class Region;
+class KCRegion;
 
 /**
  * A model for a contiguous cell region.
@@ -35,7 +33,7 @@ public:
     /**
      * Constructor.
      */
-    ReadOnlyRegionModel(const Region& region);
+    ReadOnlyRegionModel(const KCRegion& region);
 
     /**
      * Destructor.
@@ -56,7 +54,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_READONLY_REGION_MODEL

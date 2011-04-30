@@ -23,9 +23,6 @@
 #include "Binding.h"
 #include "RectStorage.h"
 
-namespace KSpread
-{
-
 /**
  * \class BindingStorage
  * \ingroup Storage
@@ -46,7 +43,5 @@ protected Q_SLOTS:
         RectStorage<Binding>::garbageCollection();
     }
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_BINDING_STORAGE

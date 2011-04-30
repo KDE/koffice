@@ -3,8 +3,6 @@
 
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 
 class TestRTree: public QObject
 {
@@ -21,7 +19,5 @@ private Q_SLOTS:
     void testRemoveRows();
     void testPrimitive();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_RTREE

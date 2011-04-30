@@ -28,12 +28,7 @@
 class QCloseEvent;
 class QWidget;
 
-namespace KSpread
-{
 class Selection;
-
-namespace Plugins
-{
 
 /**
  * \class SolverDialog
@@ -58,8 +53,5 @@ protected Q_SLOTS:
      */
     void finishDialog();
 };
-
-} // namespace Plugins
-} // namespace KSpread
 
 #endif

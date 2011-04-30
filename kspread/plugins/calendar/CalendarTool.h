@@ -22,9 +22,6 @@
 
 #include <part/CellTool.h>
 
-namespace KSpread
-{
-
 class CalendarTool : public CellTool
 {
     Q_OBJECT
@@ -53,7 +50,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CALENDAR_TOOL

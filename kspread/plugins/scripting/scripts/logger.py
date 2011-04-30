@@ -52,7 +52,7 @@ class Logger:
 
     def regionChanged(self, regions):
         self.lastCount = len(regions)
-        print "Logger: Region changed %s" % regions
+        print "Logger: KCRegion changed %s" % regions
         self.addLog( "regions=%s" % regions )
 
     def cellChanged(self, column, row):

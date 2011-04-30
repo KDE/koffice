@@ -31,8 +31,6 @@
 #include "kspread_export.h"
 #include <QString>
 
-namespace KSpread
-{
 class Damage;
 class Sheet;
 class CellProxy;
@@ -184,7 +182,5 @@ private:
     Sheet* m_sheet;
     QByteArray ident;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHEET_ADAPTOR

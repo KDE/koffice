@@ -29,8 +29,6 @@
 #include "database/Database.h"
 #include "database/DatabaseManager.h"
 
-using namespace KSpread;
-
 AutoFilterCommand::AutoFilterCommand()
         : AbstractRegionCommand()
 {

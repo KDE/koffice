@@ -22,9 +22,6 @@
 
 #include "AbstractRegionCommand.h"
 
-namespace KSpread
-{
-
 class Selection;
 
 /**
@@ -67,7 +64,5 @@ private:
     AbstractRegionCommand* m_unmerger; // to restore old merging
     Selection *m_selection;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_MERGE_COMMAND

@@ -35,8 +35,6 @@
 
 class KLocale;
 
-namespace KSpread
-{
 class Sheet;
 class Value;
 typedef QHash<Cell, Cell> CellIndirection;
@@ -256,6 +254,12 @@ public:
      */
     QString description() const;
 
+    /**
+     * helper function: return operator of given token text
+     * e.g. "*" yields Operator::Asterisk, and so on
+     */
+    static Op matchOperator(const QString& text);
+
 protected:
 
     Type m_type;
@@ -420,16 +424,14 @@ private:
 QTextStream& operator<<(QTextStream& ts, Formula formula);
 
 
-/**
- * helper function: return operator of given token text
- * e.g. "*" yields Operator::Asterisk, and so on
- */
-Token::Op matchOperator(const QString& text);
 
+namespace KSpread
+{
 /**
  * helper function: return true for valid identifier character
  */
-bool isIdentifier(QChar ch);
+bool isIdentifier(const QChar &ch);
+}
 
 /***************************************************************************
   QHash/QSet support
@@ -440,9 +442,7 @@ inline uint qHash(const Formula& formula)
     return qHash(formula.expression());
 }
 
-} // namespace KSpread
-
-Q_DECLARE_METATYPE(KSpread::Formula)
-Q_DECLARE_TYPEINFO(KSpread::Formula, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(Formula)
+Q_DECLARE_TYPEINFO(Formula, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_FORMULA

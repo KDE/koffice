@@ -28,11 +28,9 @@
 #include <QList>
 
 #include "Cell.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "RTree.h"
 
-namespace KSpread
-{
 class Formula;
 class Map;
 class Sheet;
@@ -79,7 +77,7 @@ public:
      * \see computeDepth
      * \see generateDepths(Cell cell)
      */
-    void generateDepths(const Region& region);
+    void generateDepths(const KCRegion& region);
 
     /**
      * Generates the depth of cell and all of its consumers.
@@ -92,7 +90,7 @@ public:
      * \see DependencyManager::consumingRegion(const Cell&)
      * \return region consuming \p cell 's value
      */
-    Region consumingRegion(const Cell& cell) const;
+    KCRegion consumingRegion(const Cell& cell) const;
 
     void namedAreaModified(const QString& name);
 
@@ -126,7 +124,7 @@ public:
     /**
      * Removes the circular dependency flag from \p region and all their dependencies.
      */
-    void removeCircularDependencyFlags(const Region& region, Direction direction);
+    void removeCircularDependencyFlags(const KCRegion& region, Direction direction);
 
     /**
      * For debugging/testing purposes.
@@ -135,7 +133,7 @@ public:
 
     const Map* map;
     // stores providing regions ordered by their consuming cell locations
-    QHash<Cell, Region> providers;
+    QHash<Cell, KCRegion> providers;
     // stores consuming cell locations ordered by their providing regions
     QHash<Sheet*, RTree<Cell>*> consumers;
     // stores consuming cell locations ordered by their providing named area
@@ -158,7 +156,5 @@ public:
      */
     QHash<Cell, int> depths;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DEPENDENCY_MANAGER_P

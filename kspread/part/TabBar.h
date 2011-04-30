@@ -32,8 +32,6 @@
 #include <QResizeEvent>
 #include <QPaintEvent>
 
-namespace KSpread
-{
 class TabBarPrivate;
 
 /**
@@ -264,6 +262,4 @@ private:
     TabBar(const TabBar&);
     TabBar& operator=(const TabBar&);
 };
-
-} // namespace KSpread
 #endif // TABBAR_H

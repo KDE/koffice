@@ -23,9 +23,6 @@
 #include "Condition.h"
 #include "RectStorage.h"
 
-namespace KSpread
-{
-
 /**
  * \class ConditionsStorage
  * \ingroup Storage
@@ -46,7 +43,5 @@ protected Q_SLOTS:
         RectStorage<Conditions>::garbageCollection();
     }
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CONDITIONS_STORAGE

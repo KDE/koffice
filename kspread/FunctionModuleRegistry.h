@@ -27,9 +27,6 @@
 #include "kspread_export.h"
 #include "FunctionModule.h"
 
-namespace KSpread
-{
-
 /**
  * \ingroup Plugin
  * \ingroup Value
@@ -66,7 +63,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FUNCTION_MODULE_REGISTRY

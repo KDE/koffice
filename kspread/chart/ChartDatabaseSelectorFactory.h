@@ -29,8 +29,6 @@
 
 class KoShape;
 
-namespace KSpread
-{
 class Map;
 
 /// factory to create a ChartDatabaseSelector widget
@@ -56,7 +54,5 @@ public:
 private:
     Map* m_map;
 };
-
-} // namespace KSpread
 
 #endif // CHART_DATABASE_SELECTOR_FACTORY

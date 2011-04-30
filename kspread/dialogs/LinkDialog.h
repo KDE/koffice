@@ -27,8 +27,6 @@
 
 #include <kpagedialog.h>
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -57,7 +55,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namepsace KSpread
 
 #endif /* LINK_DIALOG */

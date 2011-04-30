@@ -47,8 +47,6 @@
 
 #include "commands/CSVDataCommand.h"
 
-using namespace KSpread;
-
 CSVDialog::CSVDialog(QWidget* parent, Selection* selection, Mode mode)
         : KoCsvImportDialog(parent),
         m_selection(selection),
@@ -192,7 +190,7 @@ void CSVDialog::accept()
     range.setHeight(numRows);
     // TODO Stefan: Move this damaging into the model.
     const CellDamage::Changes changes = CellDamage::Appearance | CellDamage::Value | CellDamage::Formula;
-    sheet->map()->addDamage(new CellDamage(sheet, Region(range, sheet), changes));
+    sheet->map()->addDamage(new CellDamage(sheet, KCRegion(range, sheet), changes));
     m_selection->emitModified();
     KoCsvImportDialog::accept();
 }

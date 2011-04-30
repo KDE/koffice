@@ -28,13 +28,11 @@
 #include "kspread_export.h"
 
 #include "Map.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "RTree.h"
 
 static const int g_garbageCollectionTimeOut = 100;
 
-namespace KSpread
-{
 
 /**
  * \ingroup Storage
@@ -68,9 +66,9 @@ public:
      */
     QPair<QRectF, T> containedPair(const QPoint& point) const;
 
-    QList< QPair<QRectF, T> > intersectingPairs(const Region& region) const;
+    QList< QPair<QRectF, T> > intersectingPairs(const KCRegion& region) const;
 
-    QList< QPair<QRectF, T> > undoData(const Region& region) const;
+    QList< QPair<QRectF, T> > undoData(const KCRegion& region) const;
 
     /**
      * Returns the area, which got data attached.
@@ -86,12 +84,12 @@ public:
     /**
      * Assigns \p data to \p region .
      */
-    void insert(const Region& region, const T& data);
+    void insert(const KCRegion& region, const T& data);
 
     /**
      * Removes \p data from \p region .
      */
-    void remove(const Region& region, const T& data);
+    void remove(const KCRegion& region, const T& data);
 
     /**
      * Inserts \p number rows at the position \p position .
@@ -215,21 +213,21 @@ QPair<QRectF, T> RectStorage<T>::containedPair(const QPoint& point) const
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::intersectingPairs(const Region& region) const
+QList< QPair<QRectF, T> > RectStorage<T>::intersectingPairs(const KCRegion& region) const
 {
     QList< QPair<QRectF, T> > result;
-    Region::ConstIterator end = region.constEnd();
-    for (Region::ConstIterator it = region.constBegin(); it != end; ++it)
+    KCRegion::ConstIterator end = region.constEnd();
+    for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it)
         result += m_tree.intersectingPairs((*it)->rect()).values();
     return result;
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::undoData(const Region& region) const
+QList< QPair<QRectF, T> > RectStorage<T>::undoData(const KCRegion& region) const
 {
     QList< QPair<QRectF, T> > result;
-    Region::ConstIterator end = region.constEnd();
-    for (Region::ConstIterator it = region.constBegin(); it != end; ++it) {
+    KCRegion::ConstIterator end = region.constEnd();
+    for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
         const QRect rect = (*it)->rect();
         QList< QPair<QRectF, T> > pairs = m_tree.intersectingPairs(rect).values();
         for (int i = 0; i < pairs.count(); ++i) {
@@ -274,7 +272,7 @@ void RectStorage<T>::load(const QList<QPair<QRegion, T> >& data)
 }
 
 template<typename T>
-void RectStorage<T>::insert(const Region& region, const T& _data)
+void RectStorage<T>::insert(const KCRegion& region, const T& _data)
 {
     T data;
     // lookup already used data
@@ -286,8 +284,8 @@ void RectStorage<T>::insert(const Region& region, const T& _data)
         m_storedData.append(_data);
     }
 
-    Region::ConstIterator end(region.constEnd());
-    for (Region::ConstIterator it(region.constBegin()); it != end; ++it) {
+    KCRegion::ConstIterator end(region.constEnd());
+    for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         // insert data
         m_tree.insert((*it)->rect(), data);
         regionChanged((*it)->rect());
@@ -295,13 +293,13 @@ void RectStorage<T>::insert(const Region& region, const T& _data)
 }
 
 template<typename T>
-void RectStorage<T>::remove(const Region& region, const T& data)
+void RectStorage<T>::remove(const KCRegion& region, const T& data)
 {
     if (!m_storedData.contains(data)) {
         return;
     }
-    const Region::ConstIterator end(region.constEnd());
-    for (Region::ConstIterator it(region.constBegin()); it != end; ++it) {
+    const KCRegion::ConstIterator end(region.constEnd());
+    for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         // insert data
         m_tree.remove((*it)->rect(), data);
         regionChanged((*it)->rect());
@@ -431,7 +429,7 @@ void RectStorage<T>::garbageCollection()
             currentPair.second == T() &&
             pair.second == T() &&
             pair.first == currentPair.first) {
-        kDebug(36001) << "RectStorage: removing default data at" << Region(currentPair.first.toRect()).name();
+        kDebug(36001) << "RectStorage: removing default data at" << KCRegion(currentPair.first.toRect()).name();
         m_tree.remove(currentPair.first.toRect(), currentPair.second);
         triggerGarbageCollection();
         return; // already done
@@ -459,7 +457,7 @@ void RectStorage<T>::garbageCollection()
         if (zIndex != currentZIndex &&
                 (pair.second == currentPair.second || pair.second == T()) &&
                 pair.first.toRect().contains(currentPair.first.toRect())) {
-            kDebug(36001) << "RectStorage: removing data at" << Region(currentPair.first.toRect()).name();
+            kDebug(36001) << "RectStorage: removing data at" << KCRegion(currentPair.first.toRect()).name();
             m_tree.remove(currentPair.first.toRect(), currentPair.second);
             break;
         }
@@ -547,7 +545,5 @@ protected Q_SLOTS:
         RectStorage<bool>::garbageCollection();
     }
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_RECT_STORAGE

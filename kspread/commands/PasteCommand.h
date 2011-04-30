@@ -29,9 +29,6 @@
 class QMimeData;
 class KoXmlDocument;
 
-namespace KSpread
-{
-
 /**
  * \ingroup Commands
  * \brief Command to paste cell data.
@@ -100,7 +97,5 @@ private:
     Paste::Operation    m_operation;
     bool                m_pasteFC;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_PASTE_COMMAND

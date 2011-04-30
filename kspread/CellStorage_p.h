@@ -28,9 +28,6 @@
 #include "Validity.h"
 #include "Value.h"
 
-namespace KSpread
-{
-
 class CellStorageUndoData
 {
 public:
@@ -81,7 +78,5 @@ public:
     QVector< QPair<QPoint, Value> >          values;
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CELL_STORAGE_P

@@ -26,8 +26,6 @@
 #include "Map.h"
 #include "Sheet.h"
 
-using namespace KSpread;
-
 LinkCommand::LinkCommand(const Cell& c, const QString& text, const QString& link)
 {
     cell = c;

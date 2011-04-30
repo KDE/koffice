@@ -23,8 +23,6 @@
 #include "AbstractSelectionStrategy.h"
 #include "kspread_export.h"
 
-namespace KSpread
-{
 
 /**
  * A strategy for dragging cells.
@@ -54,7 +52,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DRAG_AND_DROP_STRATEGY

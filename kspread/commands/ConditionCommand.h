@@ -25,8 +25,6 @@
 #include "AbstractRegionCommand.h"
 #include "Condition.h"
 
-namespace KSpread
-{
 
 /**
  * \class CondtionCommand
@@ -47,7 +45,5 @@ private:
     Conditions m_conditions;
     QList< QPair<QRectF, Conditions> > m_undoData;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CONDITION_COMMAND

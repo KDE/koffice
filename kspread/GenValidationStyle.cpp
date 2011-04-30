@@ -28,8 +28,6 @@
 #include "Validity.h"
 #include "ValueConverter.h"
 
-using namespace KSpread;
-
 GenValidationStyles::GenValidationStyles()
 {
 

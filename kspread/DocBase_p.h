@@ -39,7 +39,6 @@ typedef QMap<QString, QDomElement> SavedDocParts;
 
 class KoResourceManager;
 
-namespace KSpread {
 class Map;
 class SheetAccessModel;
 
@@ -57,7 +56,5 @@ public:
     SheetAccessModel *sheetAccessModel;
     KoResourceManager *resourceManager;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DOCBASE_P_H

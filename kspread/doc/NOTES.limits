@@ -9,7 +9,7 @@ Restrictions by sizeof(int); i <= 2^31-1:
     As QVector and QRect depend on (signed) int: max(col/row) = 2^15-1
         -> Global.h: KS_colMax = 2^15-1, KS_rowMax = 2^15-1
         -> Cell::Private: restriction by bit fields; 16 bits per column/row
-        -> Region.h:
+        -> KCRegion.h:
             uint qHash(QPoint); column coded in first 16 bits, row in the last
             Can be extended by just considering the last 16 bits of the col/row,
             even if bigger than 16 bits. Leads to hash collisions, but works.

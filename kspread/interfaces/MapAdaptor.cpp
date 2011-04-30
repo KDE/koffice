@@ -31,7 +31,6 @@
 #include "Map.h"
 #include "Sheet.h"
 
-using namespace KSpread;
 
 MapAdaptor::MapAdaptor(Map* map)
         : QDBusAbstractAdaptor(map)

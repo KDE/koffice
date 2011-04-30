@@ -39,8 +39,6 @@
 #include <QItemSelectionRange>
 #include <QSize>
 
-using namespace KSpread;
-
 class SheetModel::Private
 {
 public:
@@ -246,7 +244,7 @@ bool SheetModel::setData(const QModelIndex& index, const QVariant& value, int ro
 
 bool SheetModel::setData(const QItemSelectionRange &range, const QVariant &value, int role)
 {
-    const Region region(toRange(range), d->sheet);
+    const KCRegion region(toRange(range), d->sheet);
     CellStorage *const storage = d->sheet->cellStorage();
     switch (role) {
     case CommentRole:

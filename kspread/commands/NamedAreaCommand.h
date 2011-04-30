@@ -21,10 +21,8 @@
 #define KSPREAD_NAMED_AREA_COMMAND
 
 #include "AbstractRegionCommand.h"
-#include "Region.h"
+#include "KCRegion.h"
 
-namespace KSpread
-{
 
 /**
  * \ingroup Commands
@@ -54,9 +52,7 @@ protected:
 
 private:
     QString m_areaName;
-    Region m_oldArea;
+    KCRegion m_oldArea;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_NAMED_AREA_COMMAND

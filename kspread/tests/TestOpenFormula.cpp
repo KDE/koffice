@@ -27,11 +27,9 @@
 
 #include <Formula.h>
 #include <FunctionModuleRegistry.h>
-#include <Region.h>
+#include <KCRegion.h>
 #include <Util.h>
 #include <Value.h>
-
-using namespace KSpread;
 
 // because we may need to promote expected value from integer to float
 #define CHECK_EVAL(x,y) { Value z(y); QCOMPARE(evaluate(x,z),(z)); }
@@ -75,7 +73,7 @@ QString TestOpenFormula::convertToOpenFormula(const QString& expr)
     locale.setDecimalSymbol(",");
     locale.setThousandsSeparator(" ");
 
-    QString formula = Odf::encodeFormula(expr, &locale);
+    QString formula = KSpread::Odf::encodeFormula(expr, &locale);
     return formula;
 }
 
@@ -85,7 +83,7 @@ QString TestOpenFormula::convertFromOpenFormula(const QString& expr)
     locale.setDecimalSymbol(",");
     locale.setThousandsSeparator(" ");
 
-    QString formula = Odf::decodeFormula(expr, &locale);
+    QString formula = KSpread::Odf::decodeFormula(expr, &locale);
     return formula;
 }
 
@@ -200,26 +198,26 @@ void TestOpenFormula::testFormulaConversion()
 
 void TestOpenFormula::testReferenceLoading()
 {
-    QCOMPARE(Region::loadOdf(".A1"),                         QString("A1"));
-    QCOMPARE(Region::loadOdf(".A1:.A4"),                     QString("A1:A4"));
-    QCOMPARE(Region::loadOdf(".A$1:.$A4"),                   QString("A$1:$A4"));
-    QCOMPARE(Region::loadOdf("Sheet2.A1"),                   QString("Sheet2!A1"));
-    QCOMPARE(Region::loadOdf("'Sheet 2'.A1"),                QString("'Sheet 2'!A1"));
-    QCOMPARE(Region::loadOdf("Sheet2.A1:Sheet2.B4"),         QString("Sheet2!A1:B4"));
-    QCOMPARE(Region::loadOdf("'Sheet 2'.A1:'Sheet 2'.B4"),   QString("'Sheet 2'!A1:B4"));
-    QCOMPARE(Region::loadOdf("$Sheet2.A1:$Sheet2.B4"),       QString("Sheet2!A1:B4"));
-    QCOMPARE(Region::loadOdf("$'Sheet 2'.A1:$'Sheet 2'.B4"), QString("'Sheet 2'!A1:B4"));
+    QCOMPARE(KCRegion::loadOdf(".A1"),                         QString("A1"));
+    QCOMPARE(KCRegion::loadOdf(".A1:.A4"),                     QString("A1:A4"));
+    QCOMPARE(KCRegion::loadOdf(".A$1:.$A4"),                   QString("A$1:$A4"));
+    QCOMPARE(KCRegion::loadOdf("Sheet2.A1"),                   QString("Sheet2!A1"));
+    QCOMPARE(KCRegion::loadOdf("'Sheet 2'.A1"),                QString("'Sheet 2'!A1"));
+    QCOMPARE(KCRegion::loadOdf("Sheet2.A1:Sheet2.B4"),         QString("Sheet2!A1:B4"));
+    QCOMPARE(KCRegion::loadOdf("'Sheet 2'.A1:'Sheet 2'.B4"),   QString("'Sheet 2'!A1:B4"));
+    QCOMPARE(KCRegion::loadOdf("$Sheet2.A1:$Sheet2.B4"),       QString("Sheet2!A1:B4"));
+    QCOMPARE(KCRegion::loadOdf("$'Sheet 2'.A1:$'Sheet 2'.B4"), QString("'Sheet 2'!A1:B4"));
 }
 
 void TestOpenFormula::testReferenceSaving()
 {
-    QCOMPARE(Region::saveOdf("A1"),              QString(".A1"));
-    QCOMPARE(Region::saveOdf("A1:A4"),           QString(".A1:.A4"));
-    QCOMPARE(Region::saveOdf("A$1:$A4"),         QString(".A$1:.$A4"));
-    QCOMPARE(Region::saveOdf("Sheet2!A1"),       QString("Sheet2.A1"));
-    QCOMPARE(Region::saveOdf("'Sheet 2'!A1"),    QString("'Sheet 2'.A1"));
-    QCOMPARE(Region::saveOdf("Sheet2!A1:B4"),    QString("Sheet2.A1:Sheet2.B4"));
-    QCOMPARE(Region::saveOdf("'Sheet 2'!A1:B4"), QString("'Sheet 2'.A1:'Sheet 2'.B4"));
+    QCOMPARE(KCRegion::saveOdf("A1"),              QString(".A1"));
+    QCOMPARE(KCRegion::saveOdf("A1:A4"),           QString(".A1:.A4"));
+    QCOMPARE(KCRegion::saveOdf("A$1:$A4"),         QString(".A$1:.$A4"));
+    QCOMPARE(KCRegion::saveOdf("Sheet2!A1"),       QString("Sheet2.A1"));
+    QCOMPARE(KCRegion::saveOdf("'Sheet 2'!A1"),    QString("'Sheet 2'.A1"));
+    QCOMPARE(KCRegion::saveOdf("Sheet2!A1:B4"),    QString("Sheet2.A1:Sheet2.B4"));
+    QCOMPARE(KCRegion::saveOdf("'Sheet 2'!A1:B4"), QString("'Sheet 2'.A1:'Sheet 2'.B4"));
 }
 
 QTEST_KDEMAIN(TestOpenFormula, GUI)

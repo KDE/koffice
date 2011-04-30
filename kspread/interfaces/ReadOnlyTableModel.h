@@ -22,8 +22,6 @@
 
 #include <QAbstractTableModel>
 
-namespace KSpread
-{
 class Sheet;
 
 class ReadOnlyTableModel : public QAbstractTableModel
@@ -54,7 +52,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_READONLY_TABLE_MODEL

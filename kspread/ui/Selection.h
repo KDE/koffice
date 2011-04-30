@@ -28,12 +28,10 @@
 
 #include <kdebug.h>
 
-#include <kspread/Region.h>
+#include <kspread/KCRegion.h>
 
 class KoCanvasBase;
 
-namespace KSpread
-{
 class CellEditor;
 
 /**
@@ -44,7 +42,7 @@ class CellEditor;
  * \author Torben Weis <weis@kde.org>
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  */
-class KSPREAD_EXPORT Selection : public KoToolSelection, public Region
+class KSPREAD_EXPORT Selection : public KoToolSelection, public KCRegion
 {
     Q_OBJECT
 
@@ -101,10 +99,10 @@ public:
      * @param region the region's locations
      * @param sheet the sheet the region belongs to
      */
-    void initialize(const Region& region, Sheet* sheet = 0);
+    void initialize(const KCRegion& region, Sheet* sheet = 0);
 
     /**
-     * Emits signal changed(const Region&)
+     * Emits signal changed(const KCRegion&)
      */
     void update();
 
@@ -130,10 +128,10 @@ public:
     void extend(const QRect& range, Sheet* sheet = 0);
 
     /**
-     * Extends the current selection with the Region @p region
+     * Extends the current selection with the KCRegion @p region
      * @param region the region's locations
      */
-    void extend(const Region& region);
+    void extend(const KCRegion& region);
 
     /**
      * @param point the point's location
@@ -283,17 +281,17 @@ signals:
      * Emitted when the Selection was changed.
      * @param region the changed part of the Selection
      */
-    void changed(const Region& region);
+    void changed(const KCRegion& region);
 
     /**
      * An operation on the selection is about to happen.
      */
-    void aboutToModify(const Region& region);
+    void aboutToModify(const KCRegion& region);
 
     /**
      * Emitted when the content was modified.
      */
-    void modified(const Region& region);
+    void modified(const KCRegion& region);
 
     void refreshSheetViews();
     void visibleSheetRequested(Sheet* sheet);
@@ -311,43 +309,43 @@ protected:
     /**
      * @internal used to create derived Points
      */
-    virtual Region::Point* createPoint(const QPoint&) const;
+    virtual KCRegion::Point* createPoint(const QPoint&) const;
 
     /**
      * @internal used to create derived Points
      */
-    virtual Region::Point* createPoint(const QString&) const;
+    virtual KCRegion::Point* createPoint(const QString&) const;
 
     /**
      * @internal used to create derived Points
      */
-    virtual Region::Point* createPoint(const Region::Point&) const;
+    virtual KCRegion::Point* createPoint(const KCRegion::Point&) const;
 
     /**
      * @internal used to create derived Ranges
      */
-    virtual Region::Range* createRange(const QRect&) const;
+    virtual KCRegion::Range* createRange(const QRect&) const;
 
     /**
      * @internal used to create derived Ranges
      */
-    virtual Region::Range* createRange(const Region::Point&, const Region::Point&) const;
+    virtual KCRegion::Range* createRange(const KCRegion::Point&, const KCRegion::Point&) const;
 
     /**
      * @internal used to create derived Ranges
      */
-    virtual Region::Range* createRange(const QString&) const;
+    virtual KCRegion::Range* createRange(const QString&) const;
 
     /**
      * @internal used to create derived Ranges
      */
-    virtual Region::Range* createRange(const Region::Range&) const;
+    virtual KCRegion::Range* createRange(const KCRegion::Range&) const;
 
     /**
      * Dilates the region and emits the changed() signal.
      * \internal
      */
-    void emitChanged(const Region& changedRegion);
+    void emitChanged(const KCRegion& changedRegion);
 
     /**
      * @internal
@@ -369,12 +367,12 @@ private:
 /**
  * This Point is extended by an color attribute.
  */
-class Selection::Point : public Region::Point
+class Selection::Point : public KCRegion::Point
 {
 public:
     Point(const QPoint& point);
     Point(const QString& string);
-    Point(const Region::Point& point);
+    Point(const KCRegion::Point& point);
 
     void setColor(const QColor& color) {
         m_color = color;
@@ -394,13 +392,13 @@ private:
 /**
  * This Range is extended by an color attribute.
  */
-class Selection::Range : public Region::Range
+class Selection::Range : public KCRegion::Range
 {
 public:
     Range(const QRect& rect);
-    Range(const KSpread::Region::Point& tl, const KSpread::Region::Point& br);
+    Range(const KCRegion::Point& tl, const KCRegion::Point& br);
     Range(const QString& string);
-    Range(const Region::Range& range);
+    Range(const KCRegion::Range& range);
 
     void setColor(const QColor& color) {
         m_color = color;
@@ -412,7 +410,5 @@ public:
 private:
     QColor m_color;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SELECTION

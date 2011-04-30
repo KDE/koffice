@@ -22,8 +22,6 @@
 
 #include <KoPrintingDialog.h>
 
-namespace KSpread
-{
 class View;
 class SheetSelectPage;
 
@@ -53,7 +51,5 @@ private:
     class Private;
     Private * const d;
 };
-
-}  //KSPread namespace
 
 #endif

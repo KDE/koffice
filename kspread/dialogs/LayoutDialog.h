@@ -65,8 +65,6 @@ class KComboBox;
 class KComboBox;
 class KoUnitDoubleSpinBox;
 
-namespace KSpread
-{
 class Sheet;
 class CustomStyle;
 class StyleManager;
@@ -716,7 +714,5 @@ protected:
 
     void applyStyle();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_LAYOUT_DIALOG

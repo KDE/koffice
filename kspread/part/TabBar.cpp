@@ -48,8 +48,6 @@
 // - customizable button pixmaps
 // - use QStyle to paint the tabs & buttons (is it good/possible?)
 
-namespace KSpread
-{
 
 class TabBarPrivate
 {
@@ -850,8 +848,6 @@ void TabBar::wheelEvent(QWheelEvent * e)
     update();
     emit tabChanged(d->tabs[ d->activeTab-1]);
 }
-
-} // namespace KSpread
 
 #include "TabBar.moc"
 

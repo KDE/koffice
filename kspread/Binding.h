@@ -23,14 +23,11 @@
 #include <QSharedDataPointer>
 #include <QVariant>
 
-#include "Region.h"
+#include "KCRegion.h"
 
 #include "kspread_export.h"
 
 class QAbstractItemModel;
-
-namespace KSpread
-{
 
 /**
  * Abstracts read-only access to the ValueStorage.
@@ -43,7 +40,7 @@ class KSPREAD_EXPORT Binding
 {
 public:
     Binding();
-    explicit Binding(const Region& region);
+    explicit Binding(const KCRegion& region);
     Binding(const Binding& other);
     ~Binding();
 
@@ -51,10 +48,10 @@ public:
 
     QAbstractItemModel* model() const;
 
-    const Region& region() const;
-    void setRegion(const Region& region);
+    const KCRegion& region() const;
+    void setRegion(const KCRegion& region);
 
-    void update(const Region& region);
+    void update(const KCRegion& region);
 
     void operator=(const Binding& other);
     bool operator==(const Binding& other) const;
@@ -65,9 +62,7 @@ private:
     QExplicitlySharedDataPointer<Private> d;
 };
 
-} // namespace KSpread
-
-Q_DECLARE_METATYPE(KSpread::Binding)
-Q_DECLARE_TYPEINFO(KSpread::Binding, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(Binding)
+Q_DECLARE_TYPEINFO(Binding, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_BINDING

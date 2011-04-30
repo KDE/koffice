@@ -29,8 +29,6 @@
 #include "CellEditorBase.h"
 class KoViewConverter;
 
-namespace KSpread
-{
 class CellToolBase;
 class Selection;
 
@@ -109,7 +107,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CELL_EDITOR

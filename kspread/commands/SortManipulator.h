@@ -23,8 +23,6 @@
 #include "CellStorage.h"
 #include "DataManipulators.h"
 
-namespace KSpread
-{
 class CellStorage;
 
 /**
@@ -97,7 +95,5 @@ protected:
     CellStorage* m_cellStorage; // temporary
     QHash<Cell, Style> m_styles; // temporary
 };
-
-} // namespace KSpread
 
 #endif  // KSPREAD_SORT_MANIPULATOR

@@ -28,8 +28,6 @@
 #include "Cell.h"
 #include "RowColumnFormat.h"
 
-using namespace KSpread;
-
 #if 0
 /****************************************************
  *

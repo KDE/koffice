@@ -47,8 +47,6 @@
 
 #include <math.h>
 
-using namespace KSpread;
-
 class GoalSeekDialog::Private
 {
 public:
@@ -134,7 +132,7 @@ void GoalSeekDialog::accept()
     if (!d->widget.preview->isVisible()) {
         Sheet * sheet = d->selection->activeSheet();
 
-        const Region source(d->widget.selector3->textEdit()->toPlainText(), sheet->map(), sheet);
+        const KCRegion source(d->widget.selector3->textEdit()->toPlainText(), sheet->map(), sheet);
         if (!source.isValid() || !source.isSingular()) {
             KMessageBox::error(this, i18n("Cell reference is invalid."));
             d->widget.selector3->textEdit()->selectAll();
@@ -144,7 +142,7 @@ void GoalSeekDialog::accept()
             return;
         }
 
-        const Region target(d->widget.selector1->textEdit()->toPlainText(), sheet->map(), sheet);
+        const KCRegion target(d->widget.selector1->textEdit()->toPlainText(), sheet->map(), sheet);
         if (!target.isValid() || !target.isSingular()) {
             KMessageBox::error(this, i18n("Cell reference is invalid."));
             d->widget.selector1->textEdit()->selectAll();
@@ -202,7 +200,7 @@ void GoalSeekDialog::accept()
     Sheet *const sheet = d->selection->activeSheet();
     DataManipulator *const command = new DataManipulator();
     command->setSheet(sheet);
-    command->add(Region(d->sourceCell.cellPosition(), sheet));
+    command->add(KCRegion(d->sourceCell.cellPosition(), sheet));
     command->setValue(value);
     sheet->map()->addCommand(command);
 

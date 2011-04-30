@@ -27,8 +27,6 @@
 #include "AboutData.h"
 #include "Doc.h"
 
-using namespace KSpread;
-
 KComponentData* Factory::s_global = 0;
 KAboutData* Factory::s_aboutData = 0;
 

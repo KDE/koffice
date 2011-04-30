@@ -26,16 +26,13 @@
 
 #include <Value.h>
 
-namespace KSpread
-{
-
 class TestEngineeringFunctions: public QObject
 {
     Q_OBJECT
 
 private slots:
     void initTestCase();
-    
+
     void testBIN2DEC();
     void testBIN2OCT();
     void testBIN2HEX();
@@ -75,11 +72,9 @@ private slots:
     void testOCT2BIN();
     void testOCT2DEC();
     void testOCT2HEX();
-    
+
 private:
     Value evaluate(const QString&);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_ENGINEERING_FUNCTIONS

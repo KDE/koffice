@@ -28,14 +28,11 @@
 #include <QObject>
 #include <KoScriptingModule.h>
 
-namespace KSpread
-{
 class Doc;
 class View;
 class ViewAdaptor;
 //class Sheet;
 class SheetAdaptor;
-}
 
 /**
 * The ScriptingModule class enables access to the KSpread
@@ -59,38 +56,38 @@ public:
     virtual ~ScriptingModule();
 
     /**
-    * \return The \a KSpread::View instance this module provides access to or
+    * \return The \a View instance this module provides access to or
     * NULL if this module just doesn't know anything about a view. This can
     * be for example the case if the KSpread scripting functionality is used
     * without running a KSpread instance.
     */
-    KSpread::View* kspreadView();
+    View* kspreadView();
 
     /**
-    * \return The \a KSpread::Doc instance that provides access to a
-    * document. This method always returns a valid \a KSpread::Doc instance.
+    * \return The \a Doc instance that provides access to a
+    * document. This method always returns a valid \a Doc instance.
     */
-    KSpread::Doc* kspreadDoc();
+    Doc* kspreadDoc();
 
     /**
     * \return The \a KoDocument instance that provides access to a
     * document. This method is essential the same as the kspreadDoc()
-    * method above since a \a KSpread::Doc just extends a \a KoDocument .
+    * method above since a \a Doc just extends a \a KoDocument .
     *
     * This method overwrites the one from the \a KoScriptingModule class
-    * to allow us to return our \a KSpread::Doc here.
+    * to allow us to return our \a Doc here.
     */
     virtual KoDocument* doc();
 
 public slots:
 
     /**
-    * Returns the \a KSpread::MapAdaptor object.
+    * Returns the \a MapAdaptor object.
     */
     QObject* map();
 
     /**
-    * Returns the \a KSpread::ViewAdaptor object in which the document is
+    * Returns the \a ViewAdaptor object in which the document is
     * displayed. Such a ViewAdaptor is only available if the script runs
     * embedded in a running KSpread instance. If the script runs for example
     * from within the commandline by using the kross-application there is no
@@ -99,13 +96,13 @@ public slots:
     QObject* view();
 
     /**
-    * Returns the \a KSpread::SheetAdaptor object currently active in the
+    * Returns the \a SheetAdaptor object currently active in the
     * document.
     */
     QObject* currentSheet();
 
     /**
-    * Returns a \a KSpread::SheetAdaptor object by the name \p name . The name
+    * Returns a \a SheetAdaptor object by the name \p name . The name
     * should be listened in the list returned by the \a sheetNames() method.
     * If there exists no sheet with such a name NULL is returned.
     */

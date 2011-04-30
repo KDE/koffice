@@ -24,9 +24,6 @@
 #include "kspread_limits.h"
 #include "PointStorage.h"
 
-namespace KSpread
-{
-
 /**
  * \ingroup Storage
  * \ingroup Value
@@ -40,7 +37,5 @@ public:
         return *this;
     }
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FORMULA_STORAGE

@@ -23,8 +23,6 @@
 #include "RectStorage.h"
 #include "Validity.h"
 
-namespace KSpread
-{
 
 /**
  * \class ValidityStorage
@@ -47,7 +45,5 @@ protected Q_SLOTS:
         RectStorage<Validity>::garbageCollection();
     }
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_VALIDITY_STORAGE

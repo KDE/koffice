@@ -29,8 +29,6 @@
 #include "ui/Selection.h" // FIXME detach from ui
 #include "Sheet.h"
 
-using namespace KSpread;
-
 MergeCommand::MergeCommand(QUndoCommand* parent)
         : AbstractRegionCommand(parent),
         m_merge(true),
@@ -148,7 +146,7 @@ bool MergeCommand::preProcessing()
         setText(name());
 
         // reduce the region to the region occupied by merged cells
-        Region mergedCells;
+        KCRegion mergedCells;
         ConstIterator endOfList = constEnd();
         for (ConstIterator it = constBegin(); it != endOfList; ++it) {
             Element* element = *it;
@@ -199,7 +197,7 @@ bool MergeCommand::preProcessing()
     }
     // Clear the associated selection, if any. The merge/dissociate process will restore
     // selections. This ensures that the selection isn't broken after merging.
-    if (m_selection) m_selection->Region::clear();
+    if (m_selection) m_selection->KCRegion::clear();
 
     return AbstractRegionCommand::preProcessing();
 }

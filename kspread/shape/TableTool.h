@@ -24,9 +24,7 @@
 
 class KoInteractionStrategy;
 
-namespace KSpread
-{
-class Region;
+class KCRegion;
 
 class TableTool : public CellToolBase
 {
@@ -70,7 +68,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TABLE_TOOL

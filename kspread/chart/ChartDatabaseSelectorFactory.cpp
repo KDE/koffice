@@ -24,8 +24,6 @@
 
 #include "ChartDatabaseSelector.h"
 
-using namespace KSpread;
-
 KoShapeConfigWidgetBase* ChartDatabaseSelectorFactory::createConfigWidget(KoShape* shape)
 {
     ChartDatabaseSelector* widget = new ChartDatabaseSelector(m_map);

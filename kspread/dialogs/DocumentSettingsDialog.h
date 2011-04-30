@@ -46,13 +46,8 @@ class KComboBox;
 class QPushButton;
 class KColorButton;
 
-namespace Sonnet
-{
 class ConfigWidget;
-}
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -100,7 +95,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DOCUMENT_SETTINGS_DIALOG

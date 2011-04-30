@@ -26,8 +26,6 @@
 
 #define TableShapeId "TableShape"
 
-namespace KSpread
-{
 class Damage;
 class Map;
 class Sheet;
@@ -84,7 +82,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TABLE_SHAPE

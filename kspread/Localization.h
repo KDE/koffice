@@ -29,9 +29,6 @@
 class QDomElement;
 class QDomDocument;
 
-namespace KSpread
-{
-
 class KSPREAD_EXPORT Localization : public KLocale
 {
 public:
@@ -41,7 +38,5 @@ public:
     QDomElement save(QDomDocument& doc) const;
     void defaultSystemConfig();
 };
-
-} //namespace KSpread
 
 #endif // KSPREAD_LOCALIZATION

@@ -39,8 +39,6 @@ class QFont;
 class QString;
 class KoGenStyle;
 
-namespace KSpread
-{
 class Cell;
 class ValueConverter;
 class ValueParser;
@@ -213,9 +211,7 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-} // namespace KSpread
-
-Q_DECLARE_METATYPE(KSpread::Conditions)
-Q_DECLARE_TYPEINFO(KSpread::Conditions, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(Conditions)
+Q_DECLARE_TYPEINFO(Conditions, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_CONDITION_H

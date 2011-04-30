@@ -28,27 +28,23 @@
 
 #include <QAbstractItemModel>
 
-using namespace KSpread;
 
-namespace KSpread
-{
 /// \internal d-pointer class.
 class ScriptingCellListener::Private
 {
 public:
-    KSpread::Sheet* sheet;
-    KSpread::Binding* cellbinding;
+    Sheet* sheet;
+    Binding* cellbinding;
 };
-}
 
-ScriptingCellListener::ScriptingCellListener(KSpread::Sheet *sheet, const QRect& area)
+ScriptingCellListener::ScriptingCellListener(Sheet *sheet, const QRect& area)
         : QObject()
         , d(new Private())
 {
     d->sheet = sheet;
-    d->cellbinding = new KSpread::Binding(Region(area, sheet));
-    connect(d->cellbinding->model(), SIGNAL(changed(const Region&)), this, SLOT(slotChanged(const Region&)));
-    sheet->cellStorage()->setBinding(Region(area, sheet), *d->cellbinding);
+    d->cellbinding = new Binding(KCRegion(area, sheet));
+    connect(d->cellbinding->model(), SIGNAL(changed(const KCRegion&)), this, SLOT(slotChanged(const KCRegion&)));
+    sheet->cellStorage()->setBinding(KCRegion(area, sheet), *d->cellbinding);
 }
 
 ScriptingCellListener::~ScriptingCellListener()
@@ -57,16 +53,16 @@ ScriptingCellListener::~ScriptingCellListener()
     delete d;
 }
 
-void ScriptingCellListener::slotChanged(const Region& region)
+void ScriptingCellListener::slotChanged(const KCRegion& region)
 {
-    Region::ConstIterator end(region.constEnd());
+    KCRegion::ConstIterator end(region.constEnd());
 
     QVariantList ranges;
-    for (Region::ConstIterator it = region.constBegin(); it != end; ++it)
+    for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it)
         ranges << (*it)->rect();
     emit regionChanged(ranges);
 
-    for (Region::ConstIterator it = region.constBegin(); it != end; ++it) {
+    for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
         const QRect r((*it)->rect());
         for (int row = r.top(); row <= r.bottom(); ++row)
             for (int col = r.left(); col <= r.right(); ++col)

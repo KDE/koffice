@@ -24,8 +24,6 @@
 
 #include "CellTool.h"
 
-using namespace KSpread;
-
 CellToolFactory::CellToolFactory(QObject* parent, const QString& id)
         : KoToolFactoryBase(parent, id)
 {

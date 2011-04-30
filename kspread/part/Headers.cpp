@@ -79,8 +79,6 @@
 // commands
 #include "commands/RowColumnManipulators.h"
 
-using namespace KSpread;
-
 /****************************************************************
  *
  * RowHeader
@@ -251,14 +249,14 @@ void RowHeader::mouseReleaseEvent(QMouseEvent * _ev)
             ResizeRowManipulator* command = new ResizeRowManipulator();
             command->setSheet(sheet);
             command->setSize(height);
-            command->add(Region(rect, sheet));
+            command->add(KCRegion(rect, sheet));
             if (!command->execute())
                 delete command;
         } else { // hide
             HideShowManipulator* command = new HideShowManipulator();
             command->setSheet(sheet);
             command->setManipulateRows(true);
-            command->add(Region(rect, sheet));
+            command->add(KCRegion(rect, sheet));
             if (!command->execute())
                 delete command;
         }
@@ -875,14 +873,14 @@ void ColumnHeader::mouseReleaseEvent(QMouseEvent * _ev)
             ResizeColumnManipulator* command = new ResizeColumnManipulator();
             command->setSheet(sheet);
             command->setSize(width);
-            command->add(Region(rect, sheet));
+            command->add(KCRegion(rect, sheet));
             if (!command->execute())
                 delete command;
         } else { // hide
             HideShowManipulator* command = new HideShowManipulator();
             command->setSheet(sheet);
             command->setManipulateColumns(true);
-            command->add(Region(rect, sheet));
+            command->add(KCRegion(rect, sheet));
             if (!command->execute())
                 delete command;
         }

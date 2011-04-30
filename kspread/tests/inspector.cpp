@@ -33,13 +33,11 @@
 #include "Cell.h"
 #include "DependencyManager.h"
 #include "Map.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
 #include "Style.h"
 #include "Value.h"
 
-namespace KSpread
-{
 
 class Inspector::Private
 {
@@ -58,10 +56,6 @@ public:
     void handleStyle();
     void handleDep();
 };
-
-}
-
-using namespace KSpread;
 
 static QString boolAsString(bool b)
 {
@@ -157,11 +151,11 @@ void Inspector::Private::handleSheet()
 void Inspector::Private::handleDep()
 {
     DependencyManager* manager = sheet->map()->dependencyManager();
-    Region deps = manager->consumingRegion(cell);
+    KCRegion deps = manager->consumingRegion(cell);
 
     depView->clear();
-    Region::ConstIterator end(deps.constEnd());
-    for (Region::ConstIterator it(deps.constBegin()); it != end; ++it) {
+    KCRegion::ConstIterator end(deps.constEnd());
+    for (KCRegion::ConstIterator it(deps.constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
         for (int col = range.left(); col <= range.right(); ++col)
             for (int row = range.top(); row <= range.bottom(); ++row) {

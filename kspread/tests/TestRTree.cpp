@@ -4,8 +4,6 @@
 
 #include "TestRTree.h"
 
-using namespace KSpread;
-
 class TestClass : public QSharedData
 {
 public:

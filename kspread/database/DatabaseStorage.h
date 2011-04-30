@@ -23,9 +23,6 @@
 #include "Database.h"
 #include "RectStorage.h"
 
-namespace KSpread
-{
-
 /**
  * DatabaseStorage
  */
@@ -44,7 +41,5 @@ protected Q_SLOTS:
         RectStorage<Database>::garbageCollection();
     }
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DATABASE_STORAGE

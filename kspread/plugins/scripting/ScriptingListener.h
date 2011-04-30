@@ -25,11 +25,9 @@
 #include <QVariant>
 #include <QObject>
 
-namespace KSpread
-{
 
 class Sheet;
-class Region;
+class KCRegion;
 
 /**
 * The ScriptingCellListener class implements a listener to changes
@@ -54,7 +52,7 @@ class ScriptingCellListener : public QObject
 {
     Q_OBJECT
 public:
-    explicit ScriptingCellListener(KSpread::Sheet *sheet, const QRect& area);
+    explicit ScriptingCellListener(Sheet *sheet, const QRect& area);
     virtual ~ScriptingCellListener();
 
 Q_SIGNALS:
@@ -70,7 +68,7 @@ Q_SIGNALS:
     void cellChanged(int column, int row);
 
 private Q_SLOTS:
-    void slotChanged(const Region&);
+    void slotChanged(const KCRegion&);
 
 private:
     Q_DISABLE_COPY(ScriptingCellListener)
@@ -80,7 +78,5 @@ private:
     /// \internal d-pointer instance.
     Private* const d;
 };
-
-}
 
 #endif

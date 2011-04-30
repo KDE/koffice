@@ -94,8 +94,6 @@
 #include "ValueConverter.h"
 #include "ValueStorage.h"
 
-namespace KSpread
-{
 
 template<typename T> class IntervalMap
 {
@@ -220,8 +218,8 @@ Sheet::Sheet(Map* map, const QString &sheetName)
     // document size changes always trigger a visible size change
     connect(this, SIGNAL(documentSizeChanged(const QSizeF&)), SIGNAL(visibleSizeChanged()));
     // CellStorage connections
-    connect(d->cellStorage, SIGNAL(insertNamedArea(const Region&, const QString&)),
-            d->workbook->namedAreaManager(), SLOT(insert(const Region&, const QString&)));
+    connect(d->cellStorage, SIGNAL(insertNamedArea(const KCRegion&, const QString&)),
+            d->workbook->namedAreaManager(), SLOT(insert(const KCRegion&, const QString&)));
     connect(d->cellStorage, SIGNAL(namedAreaRemoved(const QString&)),
             d->workbook->namedAreaManager(), SLOT(remove(const QString&)));
 }
@@ -931,7 +929,7 @@ void Sheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeRef
                     newText.append(token.text()); // simply keep the area name
                     break;
                 }
-                const Region region(token.text(), map());
+                const KCRegion region(token.text(), map());
                 if (!region.isValid() || !region.isContiguous()) {
                     newText.append(token.text());
                     break;
@@ -942,10 +940,10 @@ void Sheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeRef
                     break;
                 }
                 // actually only one element in here, but we need extended access to the element
-                Region::ConstIterator end(region.constEnd());
-                for (Region::ConstIterator it(region.constBegin()); it != end; ++it) {
-                    Region::Element* element = (*it);
-                    if (element->type() == Region::Element::Point) {
+                KCRegion::ConstIterator end(region.constEnd());
+                for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
+                    KCRegion::Element* element = (*it);
+                    if (element->type() == KCRegion::Element::Point) {
                         if (element->sheet())
                             newText.append(element->sheet()->sheetName() + '!');
                         QString newPoint = changeNameCellRefHelper(pos, fullRowOrColumn, ref,
@@ -954,7 +952,7 @@ void Sheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeRef
                                            element->isColumnFixed(),
                                            element->isRowFixed());
                         newText.append(newPoint);
-                    } else { // (element->type() == Region::Element::Range)
+                    } else { // (element->type() == KCRegion::Element::Range)
                         if (element->sheet())
                             newText.append(element->sheet()->sheetName() + '!');
                         QString newPoint;
@@ -1013,10 +1011,10 @@ bool Sheet::cellIsEmpty(const Cell& cell, TestType _type)
 }
 
 // TODO: convert into a manipulator, similar to the Dilation one
-bool Sheet::areaIsEmpty(const Region& region, TestType _type)
+bool Sheet::areaIsEmpty(const KCRegion& region, TestType _type)
 {
-    Region::ConstIterator endOfList = region.constEnd();
-    for (Region::ConstIterator it = region.constBegin(); it != endOfList; ++it) {
+    KCRegion::ConstIterator endOfList = region.constEnd();
+    for (KCRegion::ConstIterator it = region.constBegin(); it != endOfList; ++it) {
         QRect range = (*it)->rect();
         // Complete rows selected ?
         if ((*it)->isRow()) {
@@ -1695,7 +1693,7 @@ bool Sheet::loadOdf(const KoXmlElement& sheetElement,
     if (sheetElement.hasAttributeNS(KoXmlNS::table, "print-ranges")) {
         // e.g.: Sheet4.A1:Sheet4.E28
         QString range = sheetElement.attributeNS(KoXmlNS::table, "print-ranges", QString());
-        Region region(Region::loadOdf(range));
+        KCRegion region(KCRegion::loadOdf(range));
         if (!region.firstSheet() || sheetName() == region.firstSheet()->sheetName())
             printSettings()->setPrintRegion(region);
     }
@@ -2101,11 +2099,11 @@ int Sheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
         cell.loadOdf(cellElement, tableContext, autoStyles, cellStyleName);
 
         if (!cell.comment().isEmpty())
-            cellStorage()->setComment(Region(columnIndex, rowIndex, numberColumns, number, this), cell.comment());
+            cellStorage()->setComment(KCRegion(columnIndex, rowIndex, numberColumns, number, this), cell.comment());
         if (!cell.conditions().isEmpty())
-            cellStorage()->setConditions(Region(columnIndex, rowIndex, numberColumns, number, this), cell.conditions());
+            cellStorage()->setConditions(KCRegion(columnIndex, rowIndex, numberColumns, number, this), cell.conditions());
         if (!cell.validity().isEmpty())
-            cellStorage()->setValidity(Region(columnIndex, rowIndex, numberColumns, number, this), cell.validity());
+            cellStorage()->setValidity(KCRegion(columnIndex, rowIndex, numberColumns, number, this), cell.validity());
 
         if (!cell.hasDefaultContent()) {
             // Row-wise filling of PointStorages is faster than column-wise filling.
@@ -2494,7 +2492,7 @@ bool Sheet::saveOdf(OdfSavingContext& tableContext)
     }
     QRect _printRange = printSettings()->printRegion().lastRange();
     if (_printRange != (QRect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax)))) {
-        const Region region(_printRange, this);
+        const KCRegion region(_printRange, this);
         if (region.isValid()) {
             kDebug(36003) << region;
             xmlWriter.addAttribute("table:print-ranges", region.saveOdf());
@@ -3057,7 +3055,7 @@ bool Sheet::loadXML(const KoXmlElement& sheet)
             top = 1;
             bottom = KS_rowMax;
         }
-        const Region region(QRect(QPoint(left, top), QPoint(right, bottom)), this);
+        const KCRegion region(QRect(QPoint(left, top), QPoint(right, bottom)), this);
         printSettings()->setPrintRegion(region);
     }
 
@@ -3311,7 +3309,7 @@ void Sheet::updateLocale()
         cell.parseUserInput(text);
     }
     // Affects the displayed value; rebuild the visual cache.
-    const Region region(1, 1, KS_colMax, KS_rowMax, this);
+    const KCRegion region(1, 1, KS_colMax, KS_rowMax, this);
     map()->addDamage(new CellDamage(this, region, CellDamage::Appearance));
 }
 
@@ -3396,7 +3394,5 @@ void Sheet::printDebug()
     }
 }
 #endif
-
-} // namespace KSpread
 
 #include "Sheet.moc"

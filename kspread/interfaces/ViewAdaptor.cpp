@@ -44,8 +44,6 @@
 #include <KoShapeManager.h>
 #include <KoSelection.h>
 
-using namespace KSpread;
-
 /************************************************
  *
  * ViewAdaptor
@@ -59,7 +57,7 @@ ViewAdaptor::ViewAdaptor(View* t)
     m_view = t;
 
     Q_ASSERT(t->selection());
-    connect(t->selection(), SIGNAL(changed(Region)), this, SIGNAL(selectionChanged()));
+    connect(t->selection(), SIGNAL(changed(KCRegion)), this, SIGNAL(selectionChanged()));
 }
 
 ViewAdaptor::~ViewAdaptor()

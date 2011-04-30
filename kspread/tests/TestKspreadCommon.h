@@ -26,8 +26,6 @@
 #include <float.h> // DBL_EPSILON
 #include <math.h>
 
-using namespace KSpread;
-
 
 namespace QTest
 {

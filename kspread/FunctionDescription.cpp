@@ -27,8 +27,6 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-using namespace KSpread;
-
 static ParameterType toType(const QString& type)
 {
     if (type == "Boolean")

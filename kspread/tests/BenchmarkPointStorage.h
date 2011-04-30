@@ -23,8 +23,6 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 
 class PointStorageBenchmark : public QObject
 {
@@ -45,7 +43,5 @@ private Q_SLOTS:
     void testIterationPerformance_data();
     void testIterationPerformance();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_POINT_STORAGE_BENCHMARK

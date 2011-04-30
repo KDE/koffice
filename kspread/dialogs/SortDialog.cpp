@@ -45,8 +45,6 @@
 // Qt
 #include <QStyledItemDelegate>
 
-using namespace KSpread;
-
 Q_DECLARE_METATYPE(Qt::CaseSensitivity)
 Q_DECLARE_METATYPE(Qt::SortOrder)
 
@@ -174,14 +172,14 @@ public: // data
 
 public:
     /// \return \c true if all columns/rows have text values
-    bool hasHeader(const Region &region, Qt::Orientation orientation) const;
-    void createAvailableIndices(const Region &region, Qt::Orientation orientation);
+    bool hasHeader(const KCRegion &region, Qt::Orientation orientation) const;
+    void createAvailableIndices(const KCRegion &region, Qt::Orientation orientation);
     void insertIndex(int index, Qt::Orientation orientation) const;
     QString itemText(int index, bool useHeader) const;
     void initCriteria(Qt::Orientation orientation, SortDialog *parent);
 };
 
-bool SortDialog::Private::hasHeader(const Region &region, Qt::Orientation orientation) const
+bool SortDialog::Private::hasHeader(const KCRegion &region, Qt::Orientation orientation) const
 {
     Sheet *const sheet = region.lastSheet();
     const QRect range = region.lastRange();
@@ -201,7 +199,7 @@ bool SortDialog::Private::hasHeader(const Region &region, Qt::Orientation orient
     return true;
 }
 
-void SortDialog::Private::createAvailableIndices(const Region &region, Qt::Orientation orientation)
+void SortDialog::Private::createAvailableIndices(const KCRegion &region, Qt::Orientation orientation)
 {
     const QRect range = region.lastRange();
     if (orientation == Qt::Horizontal) /* available columns */ {
@@ -394,7 +392,7 @@ void SortDialog::init()
 
     Sheet *const sheet = d->selection->lastSheet();
     const QRect range = d->selection->lastRange();
-    const Region region(range, sheet);
+    const KCRegion region(range, sheet);
 
     if (region.isColumnSelected()) /* entire columns */ {
         d->mainWidget.m_sortHorizontal->setEnabled(false);

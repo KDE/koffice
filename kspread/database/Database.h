@@ -32,12 +32,10 @@ class QWidget;
 
 class KoXmlWriter;
 
-namespace KSpread
-{
 class Cell;
 class Filter;
 class Map;
-class Region;
+class KCRegion;
 
 /**
  * OpenDocument, 8.6.1 Database Range
@@ -110,13 +108,13 @@ public:
     /**
      * \return the actual database cell range
      */
-    const Region& range() const;
+    const KCRegion& range() const;
 
     /**
      * Sets the actual database cell range.
      * \p region has to be contiguous.
      */
-    void setRange(const Region& region);
+    void setRange(const KCRegion& region);
 
     const Filter& filter() const;
     void setFilter(const Filter& filter);
@@ -135,9 +133,7 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-} // namespace KSpread
-
-Q_DECLARE_METATYPE(KSpread::Database)
-Q_DECLARE_TYPEINFO(KSpread::Database, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(Database)
+Q_DECLARE_TYPEINFO(Database, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_DATABASE

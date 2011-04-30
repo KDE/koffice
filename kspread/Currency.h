@@ -26,9 +26,6 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
-
 /**
  * \ingroup Style
  * \class Currency
@@ -86,8 +83,6 @@ static inline uint qHash(const Currency& cur) {
     return ::qHash(cur.code());
 }
 
-} // namespace KSpread
-
-Q_DECLARE_METATYPE(KSpread::Currency)
+Q_DECLARE_METATYPE(Currency)
 
 #endif

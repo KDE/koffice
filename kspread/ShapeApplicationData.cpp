@@ -19,8 +19,6 @@
 
 #include "ShapeApplicationData.h"
 
-using namespace KSpread;
-
 class ShapeApplicationData::Private
 {
 public:

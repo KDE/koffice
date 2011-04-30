@@ -30,8 +30,6 @@
 #include "Sheet.h"
 #include "Value.h"
 
-using namespace KSpread;
-
 class Binding::Private : public QSharedData
 {
 public:
@@ -46,7 +44,7 @@ Binding::Binding()
 {
 }
 
-Binding::Binding(const Region& region)
+Binding::Binding(const KCRegion& region)
     : d(new Private(this))
 {
     Q_ASSERT(region.isValid());
@@ -72,25 +70,25 @@ QAbstractItemModel* Binding::model() const
     return d->model;
 }
 
-const KSpread::Region& Binding::region() const
+const KCRegion& Binding::region() const
 {
     return d->model->region();
 }
 
-void Binding::setRegion(const Region& region)
+void Binding::setRegion(const KCRegion& region)
 {
     d->model->setRegion(region);
 }
 
-void Binding::update(const Region& region)
+void Binding::update(const KCRegion& region)
 {
     QRect rect;
-    Region changedRegion;
+    KCRegion changedRegion;
     const QPoint offset = d->model->region().firstRange().topLeft();
     const QRect range = d->model->region().firstRange();
     const Sheet* sheet = d->model->region().firstSheet();
-    Region::ConstIterator end(region.constEnd());
-    for (Region::ConstIterator it = region.constBegin(); it != end; ++it) {
+    KCRegion::ConstIterator end(region.constEnd());
+    for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
         if (sheet != (*it)->sheet())
             continue;
         rect = range & (*it)->rect();
@@ -121,8 +119,8 @@ bool Binding::operator<(const Binding& other) const
 QHash<QString, QVector<QRect> > BindingModel::cellRegion() const
 {
     QHash<QString, QVector<QRect> > answer;
-    Region::ConstIterator end = m_region.constEnd();
-    for (Region::ConstIterator it = m_region.constBegin(); it != end; ++it) {
+    KCRegion::ConstIterator end = m_region.constEnd();
+    for (KCRegion::ConstIterator it = m_region.constBegin(); it != end; ++it) {
         if (!(*it)->isValid()) {
             continue;
         }
@@ -136,28 +134,28 @@ bool BindingModel::setCellRegion(const QString& regionName)
     Q_ASSERT(m_region.isValid());
     Q_ASSERT(m_region.firstSheet());
     const Map* const map = m_region.firstSheet()->map();
-    const Region region = Region(regionName, map);
+    const KCRegion region = KCRegion(regionName, map);
     if (!region.isValid()) {
         kDebug() << qPrintable(regionName) << "is not a valid region.";
         return false;
     }
     // Clear the old binding.
-    Region::ConstIterator end = m_region.constEnd();
-    for (Region::ConstIterator it = m_region.constBegin(); it != end; ++it) {
+    KCRegion::ConstIterator end = m_region.constEnd();
+    for (KCRegion::ConstIterator it = m_region.constBegin(); it != end; ++it) {
         if (!(*it)->isValid()) {
             continue;
         }
         // FIXME Stefan: This may also clear other bindings!
-        (*it)->sheet()->cellStorage()->setBinding(Region((*it)->rect(), (*it)->sheet()), Binding());
+        (*it)->sheet()->cellStorage()->setBinding(KCRegion((*it)->rect(), (*it)->sheet()), Binding());
     }
     // Set the new region
     m_region = region;
     end = m_region.constEnd();
-    for (Region::ConstIterator it = m_region.constBegin(); it != end; ++it) {
+    for (KCRegion::ConstIterator it = m_region.constBegin(); it != end; ++it) {
         if (!(*it)->isValid()) {
             continue;
         }
-        (*it)->sheet()->cellStorage()->setBinding(Region((*it)->rect(), (*it)->sheet()), *m_binding);
+        (*it)->sheet()->cellStorage()->setBinding(KCRegion((*it)->rect(), (*it)->sheet()), *m_binding);
     }
     return true;
 }
@@ -175,10 +173,10 @@ bool BindingModel::isCellRegionValid(const QString& regionName) const
 {
     Q_CHECK_PTR(m_region.firstSheet());
     Q_CHECK_PTR(m_region.firstSheet()->map());
-    return Region(regionName, m_region.firstSheet()->map()).isValid();
+    return KCRegion(regionName, m_region.firstSheet()->map()).isValid();
 }
 
-void BindingModel::emitChanged(const Region& region)
+void BindingModel::emitChanged(const KCRegion& region)
 {
     emit changed(region);
 }
@@ -232,7 +230,7 @@ QVariant BindingModel::data(const QModelIndex& index, int role) const
     return variant;
 }
 
-const KSpread::Region& BindingModel::region() const
+const KCRegion& BindingModel::region() const
 {
     return m_region;
 }
@@ -261,7 +259,7 @@ int BindingModel::columnCount(const QModelIndex& parent) const
     return m_region.isEmpty() ? 0 : m_region.firstRange().width();
 }
 
-void BindingModel::setRegion(const Region& region)
+void BindingModel::setRegion(const KCRegion& region)
 {
     m_region = region;
 }

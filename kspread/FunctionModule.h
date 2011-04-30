@@ -30,8 +30,6 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
 class Function;
 
 /**
@@ -89,8 +87,6 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 /**
 * Register a function module when it is contained in a loadable plugin

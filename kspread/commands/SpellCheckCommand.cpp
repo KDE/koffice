@@ -23,7 +23,7 @@
 #include "CellStorage.h"
 #include "Map.h"
 #include "Sheet.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "ValueStorage.h"
 
 #include "commands/DataManipulators.h"
@@ -34,14 +34,12 @@
 #include <sonnet/dialog.h>
 #include <sonnet/speller.h>
 
-using namespace KSpread;
-
 class SpellCheckCommand::Private
 {
 public:
     KoCanvasBase* canvasBase;
     int index;
-    Region region;
+    KCRegion region;
     Cell currentCell;
     Sheet* currentSheet;
     ValueStorage storage;
@@ -50,7 +48,7 @@ public:
     QUndoCommand* command;
 };
 
-SpellCheckCommand::SpellCheckCommand(const Region &region, KoCanvasBase* canvasBase)
+SpellCheckCommand::SpellCheckCommand(const KCRegion &region, KoCanvasBase* canvasBase)
         : BackgroundChecker(canvasBase->canvasWidget())
         , d(new Private)
 {

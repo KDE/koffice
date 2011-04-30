@@ -26,10 +26,8 @@
 
 #include <qtest_kde.h>
 
-Q_DECLARE_METATYPE(KSpread::Format::Type)
-Q_DECLARE_METATYPE(KSpread::Style::FloatFormat)
-
-using namespace KSpread;
+Q_DECLARE_METATYPE(Format::Type)
+Q_DECLARE_METATYPE(Style::FloatFormat)
 
 class PublicValueFormatter : public ValueFormatter
 {

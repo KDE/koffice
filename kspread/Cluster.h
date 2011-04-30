@@ -28,8 +28,6 @@
 
 class QPoint;
 
-namespace KSpread
-{
 class Cell;
 class ColumnFormat;
 class RowFormat;
@@ -341,7 +339,5 @@ private:
     RowFormat* m_first;
     bool m_autoDelete;
 };
-
-} // namespace KSpread;
 
 #endif

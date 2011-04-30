@@ -29,8 +29,6 @@
 #include <KoSelection.h>
 #include <KoShapeManager.h>
 
-using namespace KSpread;
-
 class AbstractSelectionStrategy::Private
 {
 public:
@@ -142,8 +140,8 @@ bool AbstractSelectionStrategy::hitTestReferenceSizeGrip(KoCanvasBase *canvas,
     const QRectF gripArea(-3 * pixelX, -3 * pixelY, 6 * pixelX, 6 * pixelY);
 
     // Iterate over the referenced ranges.
-    const Region::ConstIterator end(selection->constEnd());
-    for (Region::ConstIterator it(selection->constBegin()); it != end; ++it) {
+    const KCRegion::ConstIterator end(selection->constEnd());
+    for (KCRegion::ConstIterator it(selection->constBegin()); it != end; ++it) {
         Sheet *const sheet = (*it)->sheet();
         // Only check the ranges on the active sheet.
         if (sheet != selection->activeSheet()) {

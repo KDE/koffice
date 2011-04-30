@@ -53,8 +53,6 @@
 
 #include "part/View.h" // TODO: get rid of this dependency
 
-using namespace KSpread;
-
 QList<DocBase*> DocBase::Private::s_docs;
 int DocBase::Private::s_docId = 0;
 

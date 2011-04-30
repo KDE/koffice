@@ -27,12 +27,6 @@
 #include <Cell.h>
 
 /**
- * The KSpread namespace.
- */
-namespace KSpread
-{
-
-/**
  * \ingroup Commands
  * \brief Adds/Removes a hyperlink.
  */
@@ -51,7 +45,5 @@ protected:
     QString newText;
     QString newLink;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_LINK_COMMAND

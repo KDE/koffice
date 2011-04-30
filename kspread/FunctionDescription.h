@@ -29,9 +29,6 @@
 
 class QDomElement;
 
-namespace KSpread
-{
-
 enum ParameterType { KSpread_Int, KSpread_Float, KSpread_String, KSpread_Boolean, KSpread_Any };
 
 /**
@@ -117,7 +114,5 @@ private:
     ParameterType m_type;
     QList<FunctionParameter> m_params;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FUNCTION_DESCRIPTION

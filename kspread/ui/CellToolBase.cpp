@@ -145,8 +145,6 @@
 #include "SheetModel.h"
 #endif
 
-using namespace KSpread;
-
 CellToolBase::CellToolBase(KoCanvasBase* canvas)
         : KoInteractionTool(canvas)
         , d(new Private(this))
@@ -924,8 +922,8 @@ void CellToolBase::mouseMoveEvent(KoPointerEvent* event)
 
     // Hand cursor, if the selected area was hit.
     if (!selection()->referenceSelectionMode()) {
-        const Region::ConstIterator end(selection()->constEnd());
-        for (Region::ConstIterator it(selection()->constBegin()); it != end; ++it) {
+        const KCRegion::ConstIterator end(selection()->constEnd());
+        for (KCRegion::ConstIterator it(selection()->constBegin()); it != end; ++it) {
             const QRect range = (*it)->rect();
             if (sheet->cellCoordinatesToDocument(range).contains(position)) {
                 setCursor(Qt::PointingHandCursor);
@@ -1097,11 +1095,11 @@ void CellToolBase::activate(ToolActivation toolActivation, const QSet<KoShape*> 
     static_cast<KSelectAction*>(this->action("setStyle"))->setItems(styleManager->styleNames());
 
     // Establish connections.
-    connect(selection(), SIGNAL(changed(const Region&)),
-            this, SLOT(selectionChanged(const Region&)));
+    connect(selection(), SIGNAL(changed(const KCRegion&)),
+            this, SLOT(selectionChanged(const KCRegion&)));
     connect(selection(), SIGNAL(closeEditor(bool, bool)),
             this, SLOT(deleteEditor(bool, bool)));
-    connect(selection(), SIGNAL(modified(const Region&)),
+    connect(selection(), SIGNAL(modified(const KCRegion&)),
             this, SLOT(updateEditor()));
     connect(selection(), SIGNAL(activeSheetChanged(Sheet*)),
             this, SLOT(activeSheetChanged(Sheet*)));
@@ -1160,8 +1158,8 @@ KoInteractionStrategy* CellToolBase::createStrategy(KoPointerEvent* event)
 
     // Check, if the selected area was hit.
     bool hitSelection = false;
-    Region::ConstIterator end = selection()->constEnd();
-    for (Region::ConstIterator it = selection()->constBegin(); it != end; ++it) {
+    KCRegion::ConstIterator end = selection()->constEnd();
+    for (KCRegion::ConstIterator it = selection()->constBegin(); it != end; ++it) {
         const QRect range = (*it)->rect();
         if (selection()->activeSheet()->cellCoordinatesToDocument(range).contains(position)) {
             // Context menu with the right mouse button.
@@ -1233,7 +1231,7 @@ KoInteractionStrategy* CellToolBase::createStrategy(KoPointerEvent* event)
     return new SelectionStrategy(this, event->point, event->modifiers());
 }
 
-void CellToolBase::selectionChanged(const Region& region)
+void CellToolBase::selectionChanged(const KCRegion& region)
 {
     Q_UNUSED(region);
     if (!d->optionWidget) {
@@ -1256,8 +1254,8 @@ void CellToolBase::selectionChanged(const Region& region)
     bool columnBreakEnabled = false;
     bool rowBreakChecked = false;
     bool rowBreakEnabled = false;
-    const Region::ConstIterator end(selection()->constEnd());
-    for (Region::ConstIterator it = selection()->constBegin(); it != end; ++it) {
+    const KCRegion::ConstIterator end(selection()->constEnd());
+    for (KCRegion::ConstIterator it = selection()->constBegin(); it != end; ++it) {
         const Sheet *const sheet = (*it)->sheet();
         if (!sheet) {
             continue;
@@ -1518,7 +1516,7 @@ void CellToolBase::applyUserInput(const QString &userInput, bool expandMatrix)
     command->setValue(Value(text));
     command->setParsing(true);
     command->setExpandMatrix(expandMatrix);
-    command->add(expandMatrix ? *selection() : Region(selection()->cursor(), selection()->activeSheet()));
+    command->add(expandMatrix ? *selection() : KCRegion(selection()->cursor(), selection()->activeSheet()));
     command->execute(canvas());
 
     if (expandMatrix && selection()->isSingular())
@@ -1572,7 +1570,7 @@ void CellToolBase::styleDialog()
 
     static_cast<KSelectAction*>(action("setStyle"))->setItems(styleManager->styleNames());
     if (selection()->activeSheet())
-        map->addDamage(new CellDamage(selection()->activeSheet(), Region(1, 1, maxCol(), maxRow()), CellDamage::Appearance));
+        map->addDamage(new CellDamage(selection()->activeSheet(), KCRegion(1, 1, maxCol(), maxRow()), CellDamage::Appearance));
     canvas()->canvasWidget()->update();
 }
 
@@ -2618,7 +2616,7 @@ void CellToolBase::autoSum()
                 start = end = selection()->marker().y() - 1;
                 for (start--; (start > 0) && Cell(selection()->activeSheet(), selection()->marker().x(), start).value().isNumber(); start--) ;
 
-                const Region region(QRect(QPoint(selection()->marker().x(), start + 1),
+                const KCRegion region(QRect(QPoint(selection()->marker().x(), start + 1),
                                           QPoint(selection()->marker().x(), end)), selection()->activeSheet());
                 const QString str = region.name(selection()->activeSheet());
 
@@ -2631,7 +2629,7 @@ void CellToolBase::autoSum()
                 start = end = selection()->marker().x() - 1;
                 for (start--; (start > 0) && Cell(selection()->activeSheet(), start, selection()->marker().y()).value().isNumber(); start--) ;
 
-                const Region region(QRect(QPoint(start + 1, selection()->marker().y()),
+                const KCRegion region(QRect(QPoint(start + 1, selection()->marker().y()),
                                           QPoint(end, selection()->marker().y())), selection()->activeSheet());
                 const QString str = region.name(selection()->activeSheet());
 
@@ -2648,7 +2646,7 @@ void CellToolBase::autoSum()
 
     createEditor();
 
-    const Region region(sel, selection()->activeSheet());
+    const KCRegion region(sel, selection()->activeSheet());
     if (region.isValid()) {
         editor()->setText("=SUM(" + region.name(selection()->activeSheet()) + ')');
         deleteEditor(true);
@@ -2700,7 +2698,7 @@ void CellToolBase::specialChar(QChar character, const QString& fontName)
     if (style.fontFamily() != fontName) {
         Style newStyle;
         newStyle.setFontFamily(fontName);
-        selection()->activeSheet()->cellStorage()->setStyle(Region(selection()->marker()), newStyle);
+        selection()->activeSheet()->cellStorage()->setStyle(KCRegion(selection()->marker()), newStyle);
     }
     QKeyEvent keyEvent(QEvent::KeyPress, 0, Qt::NoModifier, QString(character));
     if (!editor()) {
@@ -2767,7 +2765,7 @@ void CellToolBase::textToColumns()
 
     QRect area = selection()->lastRange();
     area.setRight(area.left()); // only use the first column
-    Region oldSelection = *selection(); // store
+    KCRegion oldSelection = *selection(); // store
     selection()->initialize(area);
 
     QPointer<CSVDialog> dialog = new CSVDialog(canvas()->canvasWidget(), selection(), CSVDialog::Column);
@@ -2859,7 +2857,7 @@ void CellToolBase::cut()
 {
     if (!editor()) {
         QDomDocument doc = CopyCommand::saveAsXml(*selection(), true);
-        doc.documentElement().setAttribute("cut", selection()->Region::name());
+        doc.documentElement().setAttribute("cut", selection()->KCRegion::name());
 
         // Save to buffer
         QBuffer buffer;
@@ -3312,12 +3310,12 @@ void CellToolBase::slotReplace(const QString &newText, int, int, int)
         command->setParsing(true);
         command->setSheet(d->searchInSheets.currentSheet);
         command->setValue(Value(newText));
-        command->add(Region(d->findPos, d->searchInSheets.currentSheet));
+        command->add(KCRegion(d->findPos, d->searchInSheets.currentSheet));
     } else if (d->typeValue == FindOption::Note) {
         CommentCommand* command = new CommentCommand(d->replaceCommand);
         command->setComment(newText);
         command->setSheet(d->searchInSheets.currentSheet);
-        command->add(Region(d->findPos, d->searchInSheets.currentSheet));
+        command->add(KCRegion(d->findPos, d->searchInSheets.currentSheet));
     }
 }
 
@@ -3339,7 +3337,7 @@ void CellToolBase::inspector()
 {
     // useful to inspect objects
     Cell cell(selection()->activeSheet(), selection()->marker());
-    QPointer<KSpread::Inspector> ins = new KSpread::Inspector(cell);
+    QPointer<Inspector> ins = new Inspector(cell);
     ins->exec();
     delete ins;
 }
@@ -3381,8 +3379,8 @@ void CellToolBase::listChoosePopupMenu()
     const CellStorage *const storage = sheet->cellStorage();
 
     QStringList itemList;
-    const Region::ConstIterator end(selection()->constEnd());
-    for (Region::ConstIterator it(selection()->constBegin()); it != end; ++it) {
+    const KCRegion::ConstIterator end(selection()->constEnd());
+    for (KCRegion::ConstIterator it(selection()->constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
         if (cursorCell.column() < range.left() || cursorCell.column() > range.right()) {
             continue; // next range

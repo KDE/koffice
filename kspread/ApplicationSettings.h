@@ -28,9 +28,6 @@
 #include "Global.h"
 #include "kspread_export.h"
 
-namespace KSpread
-{
-
 /**
  * Visual settings.
  */
@@ -161,8 +158,8 @@ public:
     /**
      * Method of calc
      */
-    void setTypeOfCalc(MethodOfCalc calc);
-    MethodOfCalc getTypeOfCalc() const;
+    void setTypeOfCalc(KSpread::MethodOfCalc calc);
+    KSpread::MethodOfCalc getTypeOfCalc() const;
 
     QColor pageBorderColor() const;
     void changePageBorderColor(const QColor& color);
@@ -174,7 +171,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREADAPPLICATIONSETTINGS

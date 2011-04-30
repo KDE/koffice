@@ -30,9 +30,7 @@
 
 class QSize;
 
-namespace KSpread
-{
-class Region;
+class KCRegion;
 class Sheet;
 
 /**
@@ -184,8 +182,8 @@ public:
     bool centerVertically() const;
     void setCenterVertically(bool center);
 
-    const Region& printRegion() const;
-    void setPrintRegion(const Region& region);
+    const KCRegion& printRegion() const;
+    void setPrintRegion(const KCRegion& region);
     void addPrintRange(const QRect& range);
     void removePrintRange(const QRect& range);
 
@@ -256,7 +254,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_PRINT_SETTINGS

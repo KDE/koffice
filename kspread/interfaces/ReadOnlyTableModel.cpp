@@ -32,8 +32,6 @@
 #include <QBrush>
 #include <QSize>
 
-using namespace KSpread;
-
 class ReadOnlyTableModel::Private
 {
 public:

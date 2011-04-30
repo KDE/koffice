@@ -28,8 +28,6 @@
 #include <kcombobox.h>
 #include <klocale.h>
 
-using namespace KSpread;
-
 FindOption::FindOption(QWidget *parent)
 {
     QVBoxLayout *layout = new QVBoxLayout(parent);

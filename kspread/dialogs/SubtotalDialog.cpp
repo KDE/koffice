@@ -43,8 +43,6 @@
 // commands
 #include "commands/DataManipulators.h"
 
-using namespace KSpread;
-
 class SubtotalDialog::Private
 {
 public:
@@ -228,7 +226,7 @@ void SubtotalDialog::removeSubtotalLines()
             manipulator->setSheet(sheet);
             manipulator->setDirection(ShiftManipulator::ShiftBottom);
             manipulator->setReverse(true);
-            manipulator->add(Region(rect));
+            manipulator->add(KCRegion(rect));
             manipulator->execute(d->selection->canvas());
             range.setHeight(range.height() - 1);
         }
@@ -300,7 +298,7 @@ bool SubtotalDialog::addSubtotal(int mainCol, int column, int row, int topRow,
         ShiftManipulator* manipulator = new ShiftManipulator();
         manipulator->setSheet(sheet);
         manipulator->setDirection(ShiftManipulator::ShiftBottom);
-        manipulator->add(Region(rect));
+        manipulator->add(KCRegion(rect));
         manipulator->execute(d->selection->canvas());
 
         range.setHeight(range.height() + 1);

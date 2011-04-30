@@ -30,8 +30,6 @@
 #include "ui_SpecialPasteWidget.h"
 
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -51,7 +49,5 @@ public slots:
 private:
     Selection* m_selection;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SPECIAL_PASTE_DIALOG

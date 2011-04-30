@@ -34,8 +34,6 @@
 
 #include <QTimer>
 
-using namespace KSpread;
-
 class HyperlinkStrategy::Private
 {
 public:
@@ -79,7 +77,7 @@ void HyperlinkStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
 
     const KUrl url(d->url);
     if (!url.isValid() || url.isRelative()) {
-        const Region region(d->url, selection()->activeSheet()->map(), selection()->activeSheet());
+        const KCRegion region(d->url, selection()->activeSheet()->map(), selection()->activeSheet());
         if (region.isValid()) {
             if (region.firstSheet() != selection()->activeSheet()) {
                 selection()->emitVisibleSheetRequested(region.firstSheet());
@@ -92,7 +90,7 @@ void HyperlinkStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
         }
     } else {
         const QString type = KMimeType::findByUrl(url, 0, url.isLocalFile())->name();
-        if (!Util::localReferenceAnchor(d->url)) {
+        if (!KSpread::localReferenceAnchor(d->url)) {
             const bool executable = KRun::isExecutableFile(url, type);
             if (executable) {
                 const QString question = i18n("This link points to the program or script '%1'.\n"

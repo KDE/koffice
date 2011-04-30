@@ -22,8 +22,6 @@
 #include "commands/AutoFillCommand.h"
 #include "Selection.h"
 
-using namespace KSpread;
-
 class AutoFillStrategy::Private
 {
 public:

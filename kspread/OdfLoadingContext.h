@@ -26,8 +26,6 @@
 
 class KoShapeLoadingContext;
 
-namespace KSpread
-{
 
 /**
  * \ingroup OpenDocument
@@ -44,7 +42,5 @@ public:
     KoShapeLoadingContext* shapeContext;
     QHash<QString, KoXmlElement> validities;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_ODF_LOADING_CONTEXT

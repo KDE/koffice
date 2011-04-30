@@ -26,7 +26,6 @@
 #include "RTree.h"
 
 using namespace std;
-using namespace KSpread;
 
 void RTreeBenchmark::init()
 {

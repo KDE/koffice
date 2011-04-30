@@ -74,8 +74,6 @@
 
 #define MIN_SIZE 10
 
-using namespace KSpread;
-
 /****************************************************************
  *
  * Canvas
@@ -422,7 +420,7 @@ void Canvas::dropEvent(QDropEvent *event)
 
     PasteCommand *const command = new PasteCommand();
     command->setSheet(sheet);
-    command->add(Region(col, row, 1, 1, sheet));
+    command->add(KCRegion(col, row, 1, 1, sheet));
     command->setMimeData(mimeData);
 /* XXX TODO
     if (event->source() == this) {
@@ -474,7 +472,7 @@ bool Canvas::isViewLoading() const
 //       return view()->sheetView(sheet);
 //   }
 
-KSpread::Selection* Canvas::selection() const
+Selection* Canvas::selection() const
 {
     return view()->selection();
 }

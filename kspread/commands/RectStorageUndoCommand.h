@@ -29,9 +29,6 @@
 #include "ModelSupport.h"
 #include "SheetModel.h"
 
-namespace KSpread
-{
-
 /**
  * \ingroup Commands
  * \brief An undo command for RectStorage data.
@@ -102,7 +99,5 @@ RectStorageUndoCommand<T>& RectStorageUndoCommand<T>::operator<<(const QList<Pai
     m_undoData << pairs;
     return *this;
 }
-
-} // namespace KSpread
 
 #endif // KSPREAD_RECT_STORAGE_UNDO_COMMAND

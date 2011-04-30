@@ -22,8 +22,6 @@
 
 #include "Value.h"
 
-namespace KSpread
-{
 class CalculationSettings;
 class ValueParser;
 
@@ -104,7 +102,5 @@ public:
 private:
     const ValueParser* m_parser;
 };
-
-}  //KSpread namespace
 
 #endif  //KSPREAD_VALUE_CONVERTER

@@ -54,8 +54,6 @@
 
 #include "commands/NamedAreaCommand.h"
 
-using namespace KSpread;
-
 NamedAreaDialog::NamedAreaDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
         , m_selection(selection)
@@ -121,7 +119,7 @@ void NamedAreaDialog::slotOk()
 {
     if (m_list->count() > 0) {
         QListWidgetItem* item = m_list->currentItem();
-        Region region = m_selection->activeSheet()->map()->namedAreaManager()->namedArea(item->text());
+        KCRegion region = m_selection->activeSheet()->map()->namedAreaManager()->namedArea(item->text());
         Sheet* sheet = m_selection->activeSheet()->map()->namedAreaManager()->sheet(item->text());
         if (!sheet || !region.isValid()) {
             return;
@@ -281,7 +279,7 @@ void EditNamedAreaDialog::setAreaName(const QString& name)
     m_cellRange->setText(tmpName);
 }
 
-void EditNamedAreaDialog::setRegion(const Region& region)
+void EditNamedAreaDialog::setRegion(const KCRegion& region)
 {
     Sheet* sheet = region.firstSheet();
     m_sheets->setCurrentIndex(m_sheets->findText(sheet->sheetName()));
@@ -293,7 +291,7 @@ void EditNamedAreaDialog::slotOk()
     if (m_areaNameEdit->text().isEmpty())
         return;
     Sheet* sheet = m_selection->activeSheet()->map()->sheet(m_sheets->currentIndex());
-    Region region(m_cellRange->text(), m_selection->activeSheet()->map(), sheet);
+    KCRegion region(m_cellRange->text(), m_selection->activeSheet()->map(), sheet);
     if (!region.isValid())
         return;
 

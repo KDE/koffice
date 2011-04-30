@@ -29,8 +29,6 @@
 
 class KoXmlWriter;
 
-namespace KSpread
-{
 class Database;
 class Map;
 
@@ -118,7 +116,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FILTER

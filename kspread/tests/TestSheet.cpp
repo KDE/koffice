@@ -24,8 +24,6 @@
 
 #include <qtest_kde.h>
 
-using namespace KSpread;
-
 void SheetTest::init()
 {
     m_doc = new Doc();

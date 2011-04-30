@@ -37,8 +37,6 @@
 #include "ui/Selection.h"
 #include "Sheet.h"
 
-using namespace KSpread;
-
 PasteInsertDialog::PasteInsertDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
 {

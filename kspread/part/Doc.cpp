@@ -112,8 +112,6 @@
 #include "ui/Selection.h"
 #include "ui/SheetView.h"
 
-using namespace std;
-using namespace KSpread;
 
 class Doc::Private
 {

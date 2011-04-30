@@ -45,8 +45,6 @@
 #include <QScrollBar>
 #include <QTimer>
 
-using namespace KSpread;
-
 class CellEditor::Private
 {
 public:
@@ -311,12 +309,12 @@ void CellEditor::triggerFunctionAutoComplete()
     int curPos = textCursor().position();
     QString subtext = toPlainText().left(curPos);
 
-    KSpread::Formula f;
-    KSpread::Tokens tokens = f.scan(subtext);
+    Formula f;
+    Tokens tokens = f.scan(subtext);
     if (!tokens.valid()) return;
     if (tokens.count() < 1) return;
 
-    KSpread::Token lastToken = tokens[ tokens.count()-1 ];
+    Token lastToken = tokens[ tokens.count()-1 ];
 
     // last token must be an identifier
     if (!lastToken.isIdentifier()) return;
@@ -324,7 +322,7 @@ void CellEditor::triggerFunctionAutoComplete()
     if (id.length() < 1) return;
 
     // find matches in function names
-    QStringList fnames = KSpread::FunctionRepository::self()->functionNames();
+    QStringList fnames = FunctionRepository::self()->functionNames();
     QStringList choices;
     for (int i = 0; i < fnames.count(); i++)
         if (fnames[i].startsWith(id, Qt::CaseInsensitive))
@@ -351,12 +349,12 @@ void CellEditor::functionAutoComplete(const QString& item)
     int curPos = textCursor.position();
     QString subtext = toPlainText().left(curPos);
 
-    KSpread::Formula f;
-    KSpread::Tokens tokens = f.scan(subtext);
+    Formula f;
+    Tokens tokens = f.scan(subtext);
     if (!tokens.valid()) return;
     if (tokens.count() < 1) return;
 
-    KSpread::Token lastToken = tokens[ tokens.count()-1 ];
+    Token lastToken = tokens[ tokens.count()-1 ];
     if (!lastToken.isIdentifier()) return;
 
     blockSignals(true);
@@ -412,7 +410,7 @@ void CellEditor::Private::rebuildSelection()
         const Token::Type type = token.type();
 
         if (type == Token::Cell || type == Token::Range) {
-            const Region region(token.text(), map, originSheet);
+            const KCRegion region(token.text(), map, originSheet);
 
             if (!region.isValid() || region.isEmpty()) {
                 continue;
@@ -748,14 +746,14 @@ void CellEditor::permuteFixation()
     Map *const map = d->selection->activeSheet()->map();
     QString regionName = token.text();
     // Filter sheet; truncates regionName; range without sheet name resides.
-    Sheet *const sheet = Region(QString(), map).filterSheetName(regionName);
-    const Region region(regionName, map, 0);
+    Sheet *const sheet = KCRegion(QString(), map).filterSheetName(regionName);
+    const KCRegion region(regionName, map, 0);
     // TODO Stefan: Skip named areas.
     if (!region.isValid()) {
         return;
     }
-    // FIXME Stefan: need access to fixation, thus to Region::Range; must use iterator
-    Region::Element *range = (*region.constBegin());
+    // FIXME Stefan: need access to fixation, thus to KCRegion::Range; must use iterator
+    KCRegion::Element *range = (*region.constBegin());
     QString result(sheet ? (sheet->sheetName() + '!') : QString());
     // Permute fixation.
     if (region.isSingular()) {

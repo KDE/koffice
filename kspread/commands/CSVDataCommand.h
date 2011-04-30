@@ -24,8 +24,6 @@
 
 #include <KoCsvImportDialog.h>
 
-namespace KSpread
-{
 
 /**
  * \ingroup Commands
@@ -63,7 +61,5 @@ private:
     QString m_documentDecimalSymbol;
     QString m_documentThousandsSeparator;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CSV_DATA_COMMAND

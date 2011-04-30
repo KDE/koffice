@@ -36,16 +36,14 @@
 # undef min
 #endif
 
-namespace KSpread
-{
 class Cell;
 class Doc;
 class ValueCalc;
 class ValueConverter;
 
 // Condition structures
-enum Comp { isEqual, isLess, isGreater, lessEqual, greaterEqual, notEqual };
-enum Type { numeric, string };
+enum Comp { IsEqual, IsLess, IsGreater, LessEqual, GreaterEqual, NotEqual };
+enum Type { Numeric, String };
 
 struct Condition {
     Comp     comp;
@@ -344,8 +342,6 @@ inline double approxFloor(double a)
         return b + 1.0;
     return b;
 }
-
-}  //namespace KSpread
 
 
 #endif // KSPREAD_VALUECALC

@@ -40,13 +40,11 @@ class KLocale;
 bool util_isPointValid(const QPoint& point);
 bool util_isRectValid(const QRect& rect);
 
-namespace KSpread
-{
 class Cell;
 class Map;
 class Sheet;
 
-namespace Util
+namespace KSpread
 {
 /**
  * Call this function to decode the text of a column label to an integer,
@@ -78,8 +76,7 @@ KSPREAD_EXPORT QString adjustFormulaReference(const QString& formula, int refere
 KSPREAD_EXPORT bool localReferenceAnchor(const QString &_ref);
 
 // TODO Stefan: used nowhere
-int         penCompare(QPen const & pen1, QPen const & pen2);
-}
+int penCompare(QPen const & pen1, QPen const & pen2);
 
 /**
  * \ingroup NativeFormat
@@ -135,7 +132,7 @@ QPen decodePen(const QString &str);
  * Converts an OpenDocument representation of a formula to a localized formula.
  * @param expr The expression to convert from OpenDocument format.
  * @param locale The locale to which the expression should be converted.
- * \note Use Region::loadOdf() for plain cell references.
+ * \note Use KCRegion::loadOdf() for plain cell references.
  */
 // TODO check visibility
 KSPREAD_EXPORT QString decodeFormula(const QString& expr, const KLocale* locale = 0, QString namespacePrefix = QString());
@@ -145,7 +142,7 @@ KSPREAD_EXPORT QString decodeFormula(const QString& expr, const KLocale* locale 
  * Converts a localized formula to an OpenDocument representation of a formula.
  * @param expr The expression to convert to OpenDocument format.
  * @param locale The locale from which the expression should be converted.
- * \note Use Region::saveOdf() for plain cell references.
+ * \note Use KCRegion::saveOdf() for plain cell references.
  */
 KSPREAD_EXPORT QString encodeFormula(const QString& expr, const KLocale* locale = 0);
 
@@ -164,7 +161,6 @@ KSPREAD_EXPORT QString convertRefToBase(const QString & sheet, const QRect & rec
  */
 KSPREAD_EXPORT QString convertRangeToRef(const QString & sheetName, const QRect & _area);
 }
-
-} // namespace KSpread
+}
 
 #endif // KSPREAD_UTIL

@@ -25,8 +25,6 @@
 #include "../RowRepeatStorage.h"
 #include "../kspread_limits.h"
 
-using namespace KSpread;
-
 void TestRowRepeatStorage::testEmptyStorage()
 {
     RowRepeatStorage s;

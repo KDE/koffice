@@ -34,7 +34,7 @@
 #include <Map.h>
 #include <Sheet.h>
 #include <Cell.h>
-#include <Region.h>
+#include <KCRegion.h>
 
 ScriptingSheetsListView::ScriptingSheetsListView(ScriptingModule* module, QWidget* parent)
         : QWidget(parent), m_module(module), m_initialized(false), m_selectiontype(SingleSelect), m_editortype(Disabled)
@@ -88,11 +88,11 @@ void ScriptingSheetsListView::initialize()
 
     QStandardItemModel* model = static_cast< QStandardItemModel* >(m_view->model());
     model->setHorizontalHeaderLabels(headers);
-    KSpread::Doc* doc = m_module->kspreadDoc();
-    KSpread::View* view = m_module->kspreadView();
-    KSpread::Sheet* activeSheet = view ? view->activeSheet() : 0;
+    Doc* doc = m_module->kspreadDoc();
+    View* view = m_module->kspreadView();
+    Sheet* activeSheet = view ? view->activeSheet() : 0;
     if (doc && doc->map()) {
-        foreach(KSpread::Sheet* sheet, doc->map()->sheetList()) {
+        foreach(Sheet* sheet, doc->map()->sheetList()) {
             if (! sheet || sheet->isHidden())
                 continue;
             QRect area = sheet->usedArea();
@@ -123,8 +123,8 @@ void ScriptingSheetsListView::initialize()
                             const QRect rect = l[i].toRect();
                             if (rect.isNull())
                                 continue;
-                            KSpread::Region region(rect, sheet);
-                            for (KSpread::Region::ConstIterator it = region.constBegin(); it != region.constEnd(); ++it) {
+                            KCRegion region(rect, sheet);
+                            for (KCRegion::ConstIterator it = region.constBegin(); it != region.constEnd(); ++it) {
                                 const QString n = (*it)->name(sheet);
                                 if (! n.isEmpty())
                                     rangelist.append(n);
@@ -135,7 +135,7 @@ void ScriptingSheetsListView::initialize()
                     break;
                 }
                 if (range.isEmpty() && area.isValid())
-                    range = KSpread::Region(area, sheet).name(sheet);
+                    range = KCRegion(area, sheet).name(sheet);
                 if (m_editortype == Cell) {
                     int p = range.indexOf(':');
                     range = p > 0 ? range.left(p) : "A1";
@@ -207,7 +207,7 @@ QVariantList ScriptingSheetsListView::sheets()
         bool enabled = nameitem->checkState() == Qt::Checked;
 
         const QString sheetname = nameitem->text();
-        KSpread::Sheet* sheet = m_module->kspreadDoc()->map()->findSheet(sheetname);
+        Sheet* sheet = m_module->kspreadDoc()->map()->findSheet(sheetname);
         if (! sheet)
             continue;
 
@@ -217,8 +217,8 @@ QVariantList ScriptingSheetsListView::sheets()
         QStandardItem* rangeitem = model->item(row, 1);
         if (rangeitem) {
             const QString range = rangeitem->text();
-            KSpread::Region region(range, m_module->kspreadDoc()->map(), sheet);
-            for (KSpread::Region::ConstIterator it = region.constBegin(); it != region.constEnd(); ++it) {
+            KCRegion region(range, m_module->kspreadDoc()->map(), sheet);
+            for (KCRegion::ConstIterator it = region.constBegin(); it != region.constEnd(); ++it) {
                 const QRect rect = (*it)->rect();
                 if (! rect.isNull())
                     l << rect;

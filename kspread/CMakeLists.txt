@@ -216,7 +216,7 @@ set (kspreadodf_LIB_SRCS
     ProtectableObject.cpp
     RecalcManager.cpp
     RectStorage.cpp
-    Region.cpp
+    KCRegion.cpp
     RowColumnFormat.cpp
     RowRepeatStorage.cpp
     ShapeApplicationData.cpp

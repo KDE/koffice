@@ -33,8 +33,6 @@
 #include <math.h>
 #include <limits.h>
 
-using namespace KSpread;
-
 class ValueArray
 {
 public:
@@ -935,8 +933,6 @@ QTextStream& operator<<(QTextStream& ts, Value value)
   QHash/QSet support
 ****************************************************************************/
 
-namespace KSpread
-{
 uint qHash(const Value& value)
 {
     switch (value.type()) {
@@ -960,13 +956,12 @@ uint qHash(const Value& value)
     }
     return 0;
 }
-} // namespace KSpread
 
 /***************************************************************************
   kDebug support
 ****************************************************************************/
 
-QDebug operator<<(QDebug str, const KSpread::Value& v)
+QDebug operator<<(QDebug str, const Value& v)
 {
     QString string;
     QTextStream stream(&string);
@@ -975,18 +970,18 @@ QDebug operator<<(QDebug str, const KSpread::Value& v)
     return str;
 }
 
-QDebug operator<<(QDebug stream, const KSpread::Value::Format& f)
+QDebug operator<<(QDebug stream, const Value::Format& f)
 {
     switch (f) {
-    case KSpread::Value::fmt_None:     stream << "None";     break;
-    case KSpread::Value::fmt_Boolean:  stream << "Boolean";  break;
-    case KSpread::Value::fmt_Number:   stream << "Number";   break;
-    case KSpread::Value::fmt_Percent:  stream << "Percent";  break;
-    case KSpread::Value::fmt_Money:    stream << "Money";    break;
-    case KSpread::Value::fmt_DateTime: stream << "DateTime"; break;
-    case KSpread::Value::fmt_Date:     stream << "Date";     break;
-    case KSpread::Value::fmt_Time:     stream << "Time";     break;
-    case KSpread::Value::fmt_String:   stream << "String";   break;
+    case Value::fmt_None:     stream << "None";     break;
+    case Value::fmt_Boolean:  stream << "Boolean";  break;
+    case Value::fmt_Number:   stream << "Number";   break;
+    case Value::fmt_Percent:  stream << "Percent";  break;
+    case Value::fmt_Money:    stream << "Money";    break;
+    case Value::fmt_DateTime: stream << "DateTime"; break;
+    case Value::fmt_Date:     stream << "Date";     break;
+    case Value::fmt_Time:     stream << "Time";     break;
+    case Value::fmt_String:   stream << "String";   break;
     }
     return stream;
 }

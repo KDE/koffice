@@ -37,8 +37,6 @@
 #include "commands/AutoFillCommand.h"
 #include "Localization.h"
 
-using namespace KSpread;
-
 class ListDialog::Private
 {
 public:

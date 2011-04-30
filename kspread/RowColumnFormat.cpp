@@ -39,14 +39,13 @@
 #include "CellStorage.h"
 #include "Global.h"
 #include "Map.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
 #include "SheetPrint.h"
 #include "Style.h"
 #include "StyleManager.h"
 
 using namespace std;
-using namespace KSpread;
 
 /*****************************************************************************
  *
@@ -192,7 +191,7 @@ bool RowFormat::load(const KoXmlElement & row, int yshift, Paste::Mode mode)
         Style style;
         if (!style.loadXML(f, mode))
             return false;
-        d->sheet->cellStorage()->setStyle(Region(QRect(1, d->row, KS_colMax, 1)), style);
+        d->sheet->cellStorage()->setStyle(KCRegion(QRect(1, d->row, KS_colMax, 1)), style);
         return true;
     }
 
@@ -442,7 +441,7 @@ bool ColumnFormat::load(const KoXmlElement & col, int xshift, Paste::Mode mode)
         Style style;
         if (!style.loadXML(f, mode))
             return false;
-        d->sheet->cellStorage()->setStyle(Region(QRect(d->column, 1, 1, KS_rowMax)), style);
+        d->sheet->cellStorage()->setStyle(KCRegion(QRect(d->column, 1, 1, KS_rowMax)), style);
         return true;
     }
 

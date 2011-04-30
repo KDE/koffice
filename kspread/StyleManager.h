@@ -32,8 +32,6 @@ class QStringList;
 class KoGenStyles;
 class KoOdfStylesReader;
 
-namespace KSpread
-{
 class Conditions;
 class Map;
 class StyleDialog;
@@ -125,7 +123,5 @@ private:
     // NOTE: Temporary! Only valid while loading or saving OpenDocument files.
     QHash<QString, QString>  m_oasisStyles;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_STYLE_MANAGER

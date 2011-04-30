@@ -34,8 +34,6 @@
 #include <float.h>
 #include <math.h>
 
-using namespace KSpread;
-
 ValueFormatter::ValueFormatter(const ValueConverter* converter)
         : m_converter(converter)
 {

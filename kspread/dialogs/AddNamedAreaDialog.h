@@ -28,8 +28,6 @@
 
 class KLineEdit;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -51,7 +49,5 @@ protected:
     Selection*  m_selection;
     KLineEdit*  m_areaName;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_ADD_NAMED_AREA_DIALOG

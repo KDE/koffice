@@ -43,8 +43,6 @@ class KTextEdit;
 class KPageWidgetItem;
 class KPushButton;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -135,7 +133,5 @@ private:
     QString exchangeWildcards(QString const & value);
     QString getWhereCondition(QString const &, QString const &, int);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DATABASE_DIALOG

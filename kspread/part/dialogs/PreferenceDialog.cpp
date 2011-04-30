@@ -62,8 +62,6 @@
 #include "ui_FileOptionsWidget.h"
 #include "ui_InterfaceOptionsWidget.h"
 
-using namespace KSpread;
-
 class PreferenceDialog::Private
 {
 public:
@@ -75,8 +73,8 @@ public:
 
     // Interface Options
     Ui::InterfaceOptionsWidget interfaceOptions;
-    MoveTo oldCursorMovement;
-    MethodOfCalc oldFunction;
+    KSpread::MoveTo oldCursorMovement;
+    KSpread::MethodOfCalc oldFunction;
     KoUnit oldUnit;
     double oldIndentationStep;
     bool oldCaptureAllArrowKeys;
@@ -117,7 +115,7 @@ void PreferenceDialog::Private::applyInterfaceOptions()
     oldUnit = view->doc()->unit();
 
     const int cursorMovementIndex = interfaceOptions.m_cursorMovement->currentIndex();
-    const MoveTo cursorMovement = (MoveTo)interfaceOptions.m_cursorMovement->itemData(cursorMovementIndex).toInt();
+    const KSpread::MoveTo cursorMovement = (KSpread::MoveTo)interfaceOptions.m_cursorMovement->itemData(cursorMovementIndex).toInt();
     if (cursorMovement != view->doc()->map()->settings()->moveToValue()) {
         view->doc()->map()->settings()->setMoveToValue(cursorMovement);
         parameterGroup.writeEntry("Move", (int)cursorMovement);
@@ -125,7 +123,7 @@ void PreferenceDialog::Private::applyInterfaceOptions()
     }
 
     const int functionIndex = interfaceOptions.m_statusBarFunction->currentIndex();
-    const MethodOfCalc function = (MethodOfCalc)interfaceOptions.m_statusBarFunction->itemData(functionIndex).toInt();
+    const KSpread::MethodOfCalc function = (KSpread::MethodOfCalc)interfaceOptions.m_statusBarFunction->itemData(functionIndex).toInt();
     if (function != view->doc()->map()->settings()->getTypeOfCalc()) {
         view->doc()->map()->settings()->setTypeOfCalc(function);
         parameterGroup.writeEntry("Method of Calc", (int)function);
@@ -316,20 +314,20 @@ PreferenceDialog::PreferenceDialog(View* view)
     addPage(page);
     d->page2 = page;
 
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("Down"), Bottom);
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("Up"), Top);
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("Right"), Right);
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("Left"), Left);
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("Down, First Column"), BottomFirst);
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("None"), NoMovement);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("Down"), KSpread::Bottom);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("Up"), KSpread::Top);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("Right"), KSpread::Right);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("Left"), KSpread::Left);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("Down, First Column"), KSpread::BottomFirst);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("None"), KSpread::NoMovement);
 
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Sum"), SumOfNumber);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Min"), Min);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Max"), Max);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Average"), Average);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Count"), Count);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("CountA"), CountA);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("None"), NoneCalc);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Sum"), KSpread::SumOfNumber);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Min"), KSpread::Min);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Max"), KSpread::Max);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Average"), KSpread::Average);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Count"), KSpread::Count);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("CountA"), KSpread::CountA);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("None"), KSpread::NoneCalc);
 
     KComboBox* unitComboBox = d->interfaceOptions.m_unit;
     unitComboBox->addItem(KoUnit::unitDescription(KoUnit(KoUnit::Millimeter)), KoUnit::Millimeter);

@@ -29,8 +29,6 @@
 
 #include <kdialog.h>
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -52,7 +50,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_AUTO_FORMAT_DIALOG

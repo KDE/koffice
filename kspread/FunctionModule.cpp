@@ -23,8 +23,6 @@
 
 #include <QList>
 
-using namespace KSpread;
-
 class FunctionModule::Private
 {
 public:

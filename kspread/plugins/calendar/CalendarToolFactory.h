@@ -24,9 +24,6 @@
 
 #define KSPREAD_CALENDAR_TOOL_ID "KSpreadCalendarToolId"
 
-namespace KSpread
-{
-
 class CalendarToolFactory : public CellToolFactory
 {
     Q_OBJECT
@@ -36,7 +33,5 @@ public:
 
     KoToolBase* createTool(KoCanvasBase* canvas);
 };
-
-} // namespace
 
 #endif // KSPREAD_CALENDAR_TOOL_FACTORY

@@ -28,12 +28,10 @@
 #include "CellStorage.h"
 #include "Database.h"
 #include "Map.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
 #include "Value.h"
 #include "ValueConverter.h"
-
-using namespace KSpread;
 
 class AbstractCondition
 {
@@ -491,9 +489,9 @@ public:
     }
 
     AbstractCondition* condition;
-    Region targetRangeAddress;
+    KCRegion targetRangeAddress;
     enum { Self, CellRange } conditionSource;
-    Region conditionSourceRangeAddress;
+    KCRegion conditionSourceRangeAddress;
     bool displayDuplicates;
 };
 
@@ -642,7 +640,7 @@ bool Filter::loadOdf(const KoXmlElement& element, const Map* map)
     if (element.hasAttributeNS(KoXmlNS::table, "target-range-address")) {
         const QString address = element.attributeNS(KoXmlNS::table, "target-range-address", QString());
         // only absolute addresses allowed; no fallback sheet needed
-        d->targetRangeAddress = Region(Region::loadOdf(address), map);
+        d->targetRangeAddress = KCRegion(KCRegion::loadOdf(address), map);
         if (!d->targetRangeAddress.isValid())
             return false;
     }
@@ -655,7 +653,7 @@ bool Filter::loadOdf(const KoXmlElement& element, const Map* map)
     if (element.hasAttributeNS(KoXmlNS::table, "condition-source-range-address")) {
         const QString address = element.attributeNS(KoXmlNS::table, "condition-source-range-address", QString());
         // only absolute addresses allowed; no fallback sheet needed
-        d->conditionSourceRangeAddress = Region(Region::loadOdf(address), map);
+        d->conditionSourceRangeAddress = KCRegion(KCRegion::loadOdf(address), map);
     }
     if (element.hasAttributeNS(KoXmlNS::table, "display-duplicates")) {
         if (element.attributeNS(KoXmlNS::table, "display-duplicates", "true") == "false")

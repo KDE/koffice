@@ -22,8 +22,6 @@
 
 #include "DatabaseSource.h"
 
-namespace KSpread
-{
 
 /**
  * OpenDocument, 8.6.4 Database Source Query
@@ -45,7 +43,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DATABASE_SOURCE_QUERY

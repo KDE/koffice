@@ -24,8 +24,6 @@
 
 class QAbstractButton;
 
-namespace KSpread
-{
 class Cell;
 class Database;
 class Filter;
@@ -58,7 +56,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FILTER_POPUP

@@ -25,8 +25,6 @@
 #include <Qt>
 #include <QRectF>
 
-namespace KSpread
-{
 
 /**
  * A strategy for visiting a hyperlink.
@@ -57,7 +55,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_HYPERLINK_STRATEGY

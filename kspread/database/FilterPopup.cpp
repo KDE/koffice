@@ -38,8 +38,6 @@
 
 #include "commands/ApplyFilterCommand.h"
 
-using namespace KSpread;
-
 class FilterPopup::Private
 {
 public:

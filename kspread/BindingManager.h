@@ -25,10 +25,8 @@
 class QAbstractItemModel;
 class QString;
 
-namespace KSpread
-{
 class Map;
-class Region;
+class KCRegion;
 
 /**
  * Manages cell ranges acting as data sources.
@@ -52,14 +50,12 @@ public:
     virtual bool removeModel(const QAbstractItemModel* model);
     virtual bool isCellRegionValid(const QString& regionName) const;
 
-    void regionChanged(const Region& region);
+    void regionChanged(const KCRegion& region);
     void updateAllBindings();
 
 private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_BINDING_MANAGER

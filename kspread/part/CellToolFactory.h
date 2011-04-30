@@ -24,8 +24,6 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
 
 /**
  * The Factory, that creates a CellTool.
@@ -43,7 +41,5 @@ public:
     void setToolTip(const QString& toolTip);
     void setIcon(const QString& icon);
 };
-
-} // namespace
 
 #endif // KSPREAD_CELL_TOOL_FACTORY

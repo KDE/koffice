@@ -36,8 +36,6 @@
 #include <QHBoxLayout>
 #include <QToolButton>
 
-using namespace KSpread;
-
 class RegionSelector::Private
 {
 public:
@@ -106,7 +104,7 @@ void RegionSelector::setSelection(Selection* selection)
 {
     d->selection = selection;
     d->highlighter = new FormulaEditorHighlighter(d->textEdit, d->selection);
-    connect(d->selection, SIGNAL(changed(const Region&)), this, SLOT(choiceChanged()));
+    connect(d->selection, SIGNAL(changed(const KCRegion&)), this, SLOT(choiceChanged()));
 }
 
 void RegionSelector::setDialog(QDialog* dialog)

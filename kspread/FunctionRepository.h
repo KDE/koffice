@@ -27,8 +27,6 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
 class Function;
 class FunctionDescription;
 
@@ -80,7 +78,5 @@ private:
     FunctionRepository(const FunctionRepository&);
     FunctionRepository& operator=(const FunctionRepository&);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FUNCTION_REPOSITORY

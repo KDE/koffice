@@ -27,8 +27,6 @@
 class KAboutData;
 class KIconLoader;
 
-namespace KSpread
-{
 
 class KSPREAD_EXPORT Factory : public KPluginFactory
 {
@@ -48,7 +46,5 @@ private:
     static KComponentData* s_global;
     static KAboutData* s_aboutData;
 };
-
-} // namespace KSpread
 
 #endif

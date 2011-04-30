@@ -58,8 +58,6 @@
 #include <QListWidget>
 #include <QTreeWidget>
 
-using namespace KSpread;
-
 #ifndef QT_NO_SQL
 
 /********************************************************
@@ -461,7 +459,7 @@ void DatabaseDialog::accept()
     int width  = -1;
     int height = -1;
     if (m_startingRegion->isChecked()) {
-        Region region(m_region->text(), sheet->map());
+        KCRegion region(m_region->text(), sheet->map());
         if (region.isValid() && region.firstSheet() != sheet) {
             KMessageBox::error(this, i18n("You cannot specify a table here."));
             m_region->setFocus();
@@ -481,7 +479,7 @@ void DatabaseDialog::accept()
         width  = region.firstRange().width();
         height = region.firstRange().height();
     } else {
-        const Region region(m_cell->text(), sheet->map(), sheet);
+        const KCRegion region(m_cell->text(), sheet->map(), sheet);
         if (region.isValid() && region.firstSheet() != sheet) {
             KMessageBox::error(this, i18n("You cannot specify a table here."));
             m_cell->setFocus();
@@ -567,7 +565,7 @@ void DatabaseDialog::accept()
                 command->setParsing(true);
                 command->setSheet(sheet);
                 command->setValue(Value(query.value(i).toString()));
-                command->add(Region(left + i, top + y, sheet));
+                command->add(KCRegion(left + i, top + y, sheet));
             }
             ++y;
         }
@@ -583,7 +581,7 @@ void DatabaseDialog::accept()
                 command->setParsing(true);
                 command->setSheet(sheet);
                 command->setValue(Value(query.value(i).toString()));
-                command->add(Region(left + i, top + y, sheet));
+                command->add(KCRegion(left + i, top + y, sheet));
             }
             ++y;
 
@@ -958,7 +956,7 @@ bool DatabaseDialog::optionsDoNext()
 
     m_sqlQuery->setText(query);
     m_cell->setText(Cell::name(m_targetRect.left(), m_targetRect.top()));
-    m_region->setText(Region(m_targetRect).name());
+    m_region->setText(KCRegion(m_targetRect).name());
 
     setValid(m_result, true);
 

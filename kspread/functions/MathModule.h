@@ -24,8 +24,6 @@
 
 #include <QVariantList>
 
-namespace KSpread
-{
 
 class MathModule : public FunctionModule
 {
@@ -35,7 +33,5 @@ public:
 
     QString descriptionFileName() const;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_MATH_MODULE

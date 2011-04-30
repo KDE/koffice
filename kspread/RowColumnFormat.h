@@ -33,8 +33,6 @@ class QDomElement;
 class QDomDocument;
 class KoGenStyle;
 
-namespace KSpread
-{
 class Sheet;
 
 /**
@@ -203,7 +201,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_ROW_COLUMN_FORMAT

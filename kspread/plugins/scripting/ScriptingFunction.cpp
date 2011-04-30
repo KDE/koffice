@@ -42,11 +42,11 @@
  */
 
 /// \internal implementation of the ScriptingFunction
-class ScriptingFunctionImpl : public KSpread::Function
+class ScriptingFunctionImpl : public Function
 {
 public:
 
-    static KSpread::Value callback(KSpread::valVector args, KSpread::ValueCalc* calc, KSpread::FuncExtra* extra) {
+    static Value callback(valVector args, ValueCalc* calc, FuncExtra* extra) {
         Q_UNUSED(calc);
         Q_ASSERT(extra && extra->function);
         ScriptingFunctionImpl* funcimpl = static_cast< ScriptingFunctionImpl* >(extra->function);
@@ -55,33 +55,33 @@ public:
 
         if (! funcimpl->m_function) {
             kDebug() << QString("ScriptingFunctionImpl::callback ScriptingFunction instance is NULL.");
-            KSpread::Value err = KSpread::Value::errorNA();
+            Value err = Value::errorNA();
             err.setError('#' + i18n("No such script."));
             return err;
         }
 
         kDebug() << QString("ScriptingFunctionImpl::callback name=%1 argcount=%2").arg(funcimpl->m_function->name()).arg(args.count());
 
-        KSpread::FunctionDescription *description = KSpread::FunctionRepository::self()->functionInfo(funcimpl->name());
+        FunctionDescription *description = FunctionRepository::self()->functionInfo(funcimpl->name());
         kDebug(36005) << "name=" << description->name() << " type=" << description->type();
 
         QVariantList list;
         for (int i = 0; i < args.size(); ++i) {
             switch (description->param(i).type()) {
-            case KSpread::KSpread_Int:
+            case KSpread_Int:
                 list << int(args[i].asInteger());
                 break;
-            case KSpread::KSpread_Float: {
+            case KSpread_Float: {
                 list << double(args[i].asFloat());
             }
             break;
-            case KSpread::KSpread_String:
+            case KSpread_String:
                 list << args[i].asString();
                 break;
-            case KSpread::KSpread_Boolean:
+            case KSpread_Boolean:
                 list << args[i].asBoolean();
                 break;
-            case KSpread::KSpread_Any:
+            case KSpread_Any:
             default:
                 list << args[i].asVariant();
                 break;
@@ -101,67 +101,67 @@ public:
         funcimpl->m_function->setResult(QVariant());
 
         if (! QMetaObject::invokeMethod(funcimpl->m_function, "called", QGenericReturnArgument(), Q_ARG(QVariantList, list))) {
-            KSpread::Value err = KSpread::Value::errorVALUE(); //errorNAME();
+            Value err = Value::errorVALUE(); //errorNAME();
             err.setError('#' + i18n("No such script function."));
             return err;
         }
 
         const QString error = funcimpl->m_function->error();
         if (! error.isEmpty()) {
-            KSpread::Value err = KSpread::Value::errorVALUE(); //errorNAME();
+            Value err = Value::errorVALUE(); //errorNAME();
             err.setError('#' + error);
             return err;
         }
 
         QVariant result = funcimpl->m_function->result();
         if (! result.isValid()) {
-            KSpread::Value err = KSpread::Value::errorVALUE(); //errorNAME();
+            Value err = Value::errorVALUE(); //errorNAME();
             err.setError('#' + i18n("No return value."));
             return err;
         }
 
-        KSpread::Value resultvalue;
+        Value resultvalue;
         switch (description->type()) {
-        case KSpread::KSpread_Int:
-            resultvalue = KSpread::Value(result.toInt());
+        case KSpread_Int:
+            resultvalue = Value(result.toInt());
             break;
-        case KSpread::KSpread_Float:
-            resultvalue = KSpread::Value((double) result.toDouble());
+        case KSpread_Float:
+            resultvalue = Value((double) result.toDouble());
             break;
-        case KSpread::KSpread_String:
-            resultvalue = KSpread::Value(result.toString());
+        case KSpread_String:
+            resultvalue = Value(result.toString());
             break;
-        case KSpread::KSpread_Boolean:
-            resultvalue = KSpread::Value(result.toBool());
+        case KSpread_Boolean:
+            resultvalue = Value(result.toBool());
             break;
-        case KSpread::KSpread_Any:
+        case KSpread_Any:
         default:
             //TODO make more generic
-            //resultvalue = KSpread::Value( result );
-            resultvalue = KSpread::Value(result.toString());
+            //resultvalue = Value( result );
+            resultvalue = Value(result.toString());
             break;
         }
 
         //kDebug() <<"result=" << result.toString();
-        //return KSpread::Value( result.toString() );
+        //return Value( result.toString() );
         return resultvalue;
     }
 
     ScriptingFunctionImpl(ScriptingFunction* function, const QDomElement& description)
-            : KSpread::Function(function->name(), ScriptingFunctionImpl::callback)
+            : Function(function->name(), ScriptingFunctionImpl::callback)
             , m_function(function) {
         setNeedsExtra(true);
 
         // if there exists no "Scripts" group yet, add it
-        KSpread::FunctionRepository* repo = KSpread::FunctionRepository::self();
+        FunctionRepository* repo = FunctionRepository::self();
         if (! repo->groups().contains(i18n("Scripts")))
             repo->addGroup(i18n("Scripts"));
 
         // register ourself at the repository
-        repo->add(QSharedPointer<KSpread::Function>(this));
+        repo->add(QSharedPointer<Function>(this));
 
         // create a new description for the function
-        KSpread::FunctionDescription* desc = new KSpread::FunctionDescription(description);
+        FunctionDescription* desc = new FunctionDescription(description);
         desc->setGroup(i18n("Scripts"));
         repo->add(desc);
     }

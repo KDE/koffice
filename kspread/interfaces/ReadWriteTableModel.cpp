@@ -26,8 +26,6 @@
 // Qt
 #include <QSize>
 
-using namespace KSpread;
-
 class ReadWriteTableModel::Private
 {
 public:

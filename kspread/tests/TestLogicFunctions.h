@@ -25,8 +25,6 @@
 
 #include <Value.h>
 
-namespace KSpread
-{
 
 class Doc;
 class Sheet;
@@ -52,7 +50,5 @@ private:
     Sheet* m_sheet;
     Value evaluate(const QString&, Value& ex);
 };
-
-} // namespace KSpread
 
 #endif

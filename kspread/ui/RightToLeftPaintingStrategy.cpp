@@ -27,8 +27,6 @@
 #include <KoShapeManager.h>
 #include <KoViewConverter.h>
 
-using namespace KSpread;
-
 class RightToLeftPaintingStrategy::Private
 {
 public:

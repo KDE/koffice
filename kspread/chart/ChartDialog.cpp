@@ -22,8 +22,6 @@
 
 #include "ChartDatabaseSelectorFactory.h"
 
-using namespace KSpread;
-
 ChartDialog::ChartDialog(const QList<KChart::ChartShape*> &charts, QWidget *parent)
         : KPageDialog(parent)
 {

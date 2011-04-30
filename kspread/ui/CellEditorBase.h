@@ -26,8 +26,6 @@ class KoViewConverter;
 class QString;
 class QWidget;
 
-namespace KSpread
-{
 
 class KSPREAD_EXPORT CellEditorBase
 {
@@ -46,7 +44,5 @@ public:
     virtual void paste() = 0;
     virtual void setActiveSubRegion(int index) = 0;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CELLEDITORBASE_H

@@ -23,8 +23,6 @@
 
 #include "Value.h"
 
-using namespace KSpread;
-
 class Function::Private
 {
 public:

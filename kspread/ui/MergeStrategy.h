@@ -23,8 +23,6 @@
 #include "AbstractSelectionStrategy.h"
 #include "kspread_export.h"
 
-namespace KSpread
-{
 
 /**
  * A strategy for merging cells.
@@ -51,7 +49,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_MERGE_STRATEGY

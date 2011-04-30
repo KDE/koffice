@@ -74,8 +74,6 @@
 #include "Value.h"
 #include "ValueFormatter.h"
 
-using namespace KSpread;
-
 const int s_borderSpace = 1;
 
 class CellView::Private : public QSharedData

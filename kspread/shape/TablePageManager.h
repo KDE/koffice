@@ -22,8 +22,6 @@
 
 #include "PageManager.h"
 
-namespace KSpread
-{
 class TableShape;
 
 class TablePageManager : public PageManager
@@ -50,7 +48,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TABLE_PAGE_MANAGER

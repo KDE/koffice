@@ -28,8 +28,6 @@
 
 class QListWidgetItem;
 
-namespace KSpread
-{
 class CellEditor;
 
 /**
@@ -82,7 +80,5 @@ private:
     FunctionCompletion(const FunctionCompletion&);
     FunctionCompletion& operator=(const FunctionCompletion&);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FUNCTION_COMPLETION

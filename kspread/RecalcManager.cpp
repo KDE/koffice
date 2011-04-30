@@ -31,11 +31,9 @@
 #include "FormulaStorage.h"
 #include "Map.h"
 #include "Sheet.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Value.h"
 #include "ValueFormatter.h"
-
-using namespace KSpread;
 
 class RecalcManager::Private
 {
@@ -45,7 +43,7 @@ public:
      *
      * \see RecalcManager::regionChanged
      */
-    void cellsToCalculate(const Region& region);
+    void cellsToCalculate(const KCRegion& region);
 
     /**
      * Finds all cells in \p sheet , that have got a formula and hence need
@@ -58,9 +56,9 @@ public:
     void cellsToCalculate(Sheet* sheet = 0);
 
     /**
-     * Helper function for cellsToCalculate(const Region&) and cellsToCalculate(Sheet*).
+     * Helper function for cellsToCalculate(const KCRegion&) and cellsToCalculate(Sheet*).
      */
-    void cellsToCalculate(const Region& region, QSet<Cell>& cells) const;
+    void cellsToCalculate(const KCRegion& region, QSet<Cell>& cells) const;
 
     /*
      * Stores cells ordered by its reference depth.
@@ -82,7 +80,7 @@ public:
     bool active;
 };
 
-void RecalcManager::Private::cellsToCalculate(const Region& region)
+void RecalcManager::Private::cellsToCalculate(const KCRegion& region)
 {
     if (region.isEmpty())
         return;
@@ -128,10 +126,10 @@ void RecalcManager::Private::cellsToCalculate(Sheet* sheet)
     }
 }
 
-void RecalcManager::Private::cellsToCalculate(const Region& region, QSet<Cell>& cells) const
+void RecalcManager::Private::cellsToCalculate(const KCRegion& region, QSet<Cell>& cells) const
 {
-    Region::ConstIterator end(region.constEnd());
-    for (Region::ConstIterator it(region.constBegin()); it != end; ++it) {
+    KCRegion::ConstIterator end(region.constEnd());
+    for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
         const Sheet* sheet = (*it)->sheet();
         for (int col = range.left(); col <= range.right(); ++col) {
@@ -168,7 +166,7 @@ RecalcManager::~RecalcManager()
     delete d;
 }
 
-void RecalcManager::regionChanged(const Region& region)
+void RecalcManager::regionChanged(const KCRegion& region)
 {
     if (d->active || region.isEmpty())
         return;

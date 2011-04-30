@@ -30,8 +30,6 @@
 
 class KoUnitDoubleSpinBox;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -75,7 +73,5 @@ protected:
     Selection* m_selection;
     KoUnitDoubleSpinBox *m_pWidth;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_RESIZE2_DIALOG

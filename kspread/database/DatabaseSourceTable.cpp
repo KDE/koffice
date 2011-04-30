@@ -21,8 +21,6 @@
 
 #include <QString>
 
-using namespace KSpread;
-
 class DatabaseSourceTable::Private
 {
 public:

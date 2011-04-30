@@ -40,8 +40,6 @@
 // - Get plain text pasting right.
 
 
-using namespace KSpread;
-
 class PasteCellCommand : public AbstractRegionCommand
 {
 public:
@@ -275,7 +273,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
 
     const KoXmlElement root = data->documentElement(); // "spreadsheet-snippet"
     if (root.hasAttribute("cut")) {
-        const Region cutRegion(root.attribute("cut"), map, sheet);
+        const KCRegion cutRegion(root.attribute("cut"), map, sheet);
         if (cutRegion.isValid()) {
             const Cell destination(sheet, pasteArea.topLeft());
             map->dependencyManager()->regionMoved(cutRegion, destination);
@@ -288,8 +286,8 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
     // Find size of rectangle that we want to paste to (either clipboard size or current selection)
     const bool noRowsInClipboard    = root.namedItem("rows").toElement().isNull();
     const bool noColumnsInClipboard = root.namedItem("columns").toElement().isNull();
-    const bool noRowsSelected       = !Region::Range(pasteArea).isRow();
-    const bool noColumnsSelected    = !Region::Range(pasteArea).isColumn();
+    const bool noRowsSelected       = !KCRegion::Range(pasteArea).isRow();
+    const bool noColumnsSelected    = !KCRegion::Range(pasteArea).isColumn();
     const bool biggerSelectedWidth  = pasteArea.width()  >= sourceWidth;
     const bool biggerSelectedHeight = pasteArea.height() >= sourceHeight;
 
@@ -388,18 +386,18 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
             // Everything or only columns present.
             DeleteCommand *const command = new DeleteCommand(this);
             command->setSheet(m_sheet);
-            command->add(Region(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
+            command->add(KCRegion(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
             command->setMode(DeleteCommand::OnlyCells);
         } else if (noColumns && !noRows) {
             // Rows present.
             InsertDeleteRowManipulator *const command = new InsertDeleteRowManipulator(this);
             command->setSheet(sheet);
-            command->add(Region(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
+            command->add(KCRegion(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
         } else {
             // Neither columns, nor rows present.
             ShiftManipulator *const command = new ShiftManipulator(this);
             command->setSheet(sheet);
-            command->add(Region(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
+            command->add(KCRegion(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
             command->setDirection(ShiftManipulator::ShiftBottom);
         }
     }
@@ -414,18 +412,18 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
             // Everything or only rows present.
             DeleteCommand *const command = new DeleteCommand(this);
             command->setSheet(m_sheet);
-            command->add(Region(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
+            command->add(KCRegion(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
             command->setMode(DeleteCommand::OnlyCells);
         } else if (!noColumns && noRows) {
             // Columns present.
             InsertDeleteColumnManipulator *const command = new InsertDeleteColumnManipulator(this);
             command->setSheet(sheet);
-            command->add(Region(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
+            command->add(KCRegion(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
         } else {
             // Neither columns, nor rows present.
             ShiftManipulator *const command = new ShiftManipulator(this);
             command->setSheet(sheet);
-            command->add(Region(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
+            command->add(KCRegion(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
             command->setDirection(ShiftManipulator::ShiftRight);
         }
     }
@@ -450,7 +448,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
                 command->setSheet(m_sheet);
                 const int col = e.attribute("column").toInt();
                 const int cols = qMax(pasteArea.width(), number);
-                const Region region(col + xOffset, 1, cols, KS_rowMax, m_sheet);
+                const KCRegion region(col + xOffset, 1, cols, KS_rowMax, m_sheet);
                 command->add(region);
                 command->setMode(DeleteCommand::OnlyCells);
             }
@@ -469,7 +467,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
                     for (int coff = 0; col - xOffset + coff <= cols; coff += number) {
                         ColumnStyleCommand *const command = new ColumnStyleCommand(this);
                         command->setSheet(m_sheet);
-                        command->add(Region(col + coff, 1, 1, 1, m_sheet));
+                        command->add(KCRegion(col + coff, 1, 1, 1, m_sheet));
                         command->setTemplate(columnFormat);
                     }
                 }
@@ -485,7 +483,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
                 command->setSheet(m_sheet);
                 const int row = e.attribute("row").toInt();
                 const int rows = qMax(pasteArea.height(), number);
-                const Region region(1, row + yOffset, KS_colMax, rows, m_sheet);
+                const KCRegion region(1, row + yOffset, KS_colMax, rows, m_sheet);
                 command->add(region);
                 command->setMode(DeleteCommand::OnlyCells);
             }
@@ -504,7 +502,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
                     for (int roff = 0; row - yOffset + roff <= rows; roff += number) {
                         RowStyleCommand *const command = new RowStyleCommand(this);
                         command->setSheet(m_sheet);
-                        command->add(Region(1, rowFormat.row(), 1, 1, m_sheet));
+                        command->add(KCRegion(1, rowFormat.row(), 1, 1, m_sheet));
                         command->setTemplate(rowFormat);
                     }
                 }
@@ -567,7 +565,7 @@ bool PasteCommand::processTextPlain(Element *element)
     }
 
     // FIXME Determine and tile the destination area.
-    Region range(mx, my, 1, list.size());
+    KCRegion range(mx, my, 1, list.size());
 
     // create a command, configure it and execute it
     DataManipulator *command = new DataManipulator(this);

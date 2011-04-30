@@ -23,8 +23,6 @@
 
 #include <klocale.h>
 
-using namespace KSpread;
-
 namespace Currency_LNS
 {
 typedef struct {

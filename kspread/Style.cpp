@@ -44,16 +44,12 @@
 #include "StyleManager.h"
 #include "Util.h"
 
-using namespace KSpread;
-
 /////////////////////////////////////////////////////////////////////////////
 //
 // SubStyles
 //
 /////////////////////////////////////////////////////////////////////////////
 
-namespace KSpread
-{
 
 static uint calculateValue(QPen const & pen)
 {
@@ -130,8 +126,6 @@ QString SubStyle::name(Style::Key key)
 }
 
 SharedSubStyle SharedSubStyle::s_defaultStyle(new SubStyle());
-
-} // namespace KSpread
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -441,7 +435,7 @@ void Style::loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const Ko
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "border")) {
         str = styleStack.property(KoXmlNS::fo, "border");
-        QPen pen = Odf::decodePen(str);
+        QPen pen = KSpread::Odf::decodePen(str);
         setLeftBorderPen(pen);
         setTopBorderPen(pen);
         setBottomBorderPen(pen);
@@ -449,27 +443,27 @@ void Style::loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const Ko
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "border-left")) {
         str = styleStack.property(KoXmlNS::fo, "border-left");
-        setLeftBorderPen(Odf::decodePen(str));
+        setLeftBorderPen(KSpread::Odf::decodePen(str));
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "border-right")) {
         str = styleStack.property(KoXmlNS::fo, "border-right");
-        setRightBorderPen(Odf::decodePen(str));
+        setRightBorderPen(KSpread::Odf::decodePen(str));
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "border-top")) {
         str = styleStack.property(KoXmlNS::fo, "border-top");
-        setTopBorderPen(Odf::decodePen(str));
+        setTopBorderPen(KSpread::Odf::decodePen(str));
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "border-bottom")) {
         str = styleStack.property(KoXmlNS::fo, "border-bottom");
-        setBottomBorderPen(Odf::decodePen(str));
+        setBottomBorderPen(KSpread::Odf::decodePen(str));
     }
     if (styleStack.hasProperty(KoXmlNS::style, "diagonal-tl-br")) {
         str = styleStack.property(KoXmlNS::style, "diagonal-tl-br");
-        setFallDiagonalPen(Odf::decodePen(str));
+        setFallDiagonalPen(KSpread::Odf::decodePen(str));
     }
     if (styleStack.hasProperty(KoXmlNS::style, "diagonal-bl-tr")) {
         str = styleStack.property(KoXmlNS::style, "diagonal-bl-tr");
-        setGoUpDiagonalPen(Odf::decodePen(str));
+        setGoUpDiagonalPen(KSpread::Odf::decodePen(str));
     }
 
     if (styleStack.hasProperty(KoXmlNS::draw, "style-name")) {
@@ -1361,25 +1355,25 @@ void Style::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
             (leftBorderPen() == rightBorderPen()) &&
             (leftBorderPen() == bottomBorderPen())) {
         if (leftBorderPen().style() != Qt::NoPen)
-            style.addProperty("fo:border", Odf::encodePen(leftBorderPen()));
+            style.addProperty("fo:border", KSpread::Odf::encodePen(leftBorderPen()));
     } else {
         if (keysToStore.contains(LeftPen) && (leftBorderPen().style() != Qt::NoPen))
-            style.addProperty("fo:border-left", Odf::encodePen(leftBorderPen()));
+            style.addProperty("fo:border-left", KSpread::Odf::encodePen(leftBorderPen()));
 
         if (keysToStore.contains(RightPen) && (rightBorderPen().style() != Qt::NoPen))
-            style.addProperty("fo:border-right", Odf::encodePen(rightBorderPen()));
+            style.addProperty("fo:border-right", KSpread::Odf::encodePen(rightBorderPen()));
 
         if (keysToStore.contains(TopPen) && (topBorderPen().style() != Qt::NoPen))
-            style.addProperty("fo:border-top", Odf::encodePen(topBorderPen()));
+            style.addProperty("fo:border-top", KSpread::Odf::encodePen(topBorderPen()));
 
         if (keysToStore.contains(BottomPen) && (bottomBorderPen().style() != Qt::NoPen))
-            style.addProperty("fo:border-bottom", Odf::encodePen(bottomBorderPen()));
+            style.addProperty("fo:border-bottom", KSpread::Odf::encodePen(bottomBorderPen()));
     }
     if (keysToStore.contains(FallDiagonalPen) && (fallDiagonalPen().style() != Qt::NoPen)) {
-        style.addProperty("style:diagonal-tl-br", Odf::encodePen(fallDiagonalPen()));
+        style.addProperty("style:diagonal-tl-br", KSpread::Odf::encodePen(fallDiagonalPen()));
     }
     if (keysToStore.contains(GoUpDiagonalPen) && (goUpDiagonalPen().style() != Qt::NoPen)) {
-        style.addProperty("style:diagonal-bl-tr", Odf::encodePen(goUpDiagonalPen()));
+        style.addProperty("style:diagonal-bl-tr", KSpread::Odf::encodePen(goUpDiagonalPen()));
     }
 
     // font
@@ -1542,7 +1536,7 @@ void Style::saveXML(QDomDocument& doc, QDomElement& format, const StyleManager* 
                 keysToStore.contains(FontItalic) ||
                 keysToStore.contains(FontStrike) ||
                 keysToStore.contains(FontUnderline)) {
-            format.appendChild(NativeFormat::createElement("font", font(), doc));
+            format.appendChild(KSpread::NativeFormat::createElement("font", font(), doc));
         }
     } else { // custom style
         if (keysToStore.contains(FontFamily))
@@ -1567,7 +1561,7 @@ void Style::saveXML(QDomDocument& doc, QDomElement& format, const StyleManager* 
     }
 
     if (keysToStore.contains(FontColor) && fontColor().isValid())
-        format.appendChild(NativeFormat::createElement("pen", fontColor(), doc));
+        format.appendChild(KSpread::NativeFormat::createElement("pen", fontColor(), doc));
 
     if (keysToStore.contains(BackgroundBrush)) {
         format.setAttribute("brushcolor", backgroundBrush().color().name());
@@ -1576,37 +1570,37 @@ void Style::saveXML(QDomDocument& doc, QDomElement& format, const StyleManager* 
 
     if (keysToStore.contains(LeftPen)) {
         QDomElement left = doc.createElement("left-border");
-        left.appendChild(NativeFormat::createElement("pen", leftBorderPen(), doc));
+        left.appendChild(KSpread::NativeFormat::createElement("pen", leftBorderPen(), doc));
         format.appendChild(left);
     }
 
     if (keysToStore.contains(TopPen)) {
         QDomElement top = doc.createElement("top-border");
-        top.appendChild(NativeFormat::createElement("pen", topBorderPen(), doc));
+        top.appendChild(KSpread::NativeFormat::createElement("pen", topBorderPen(), doc));
         format.appendChild(top);
     }
 
     if (keysToStore.contains(RightPen)) {
         QDomElement right = doc.createElement("right-border");
-        right.appendChild(NativeFormat::createElement("pen", rightBorderPen(), doc));
+        right.appendChild(KSpread::NativeFormat::createElement("pen", rightBorderPen(), doc));
         format.appendChild(right);
     }
 
     if (keysToStore.contains(BottomPen)) {
         QDomElement bottom = doc.createElement("bottom-border");
-        bottom.appendChild(NativeFormat::createElement("pen", bottomBorderPen(), doc));
+        bottom.appendChild(KSpread::NativeFormat::createElement("pen", bottomBorderPen(), doc));
         format.appendChild(bottom);
     }
 
     if (keysToStore.contains(FallDiagonalPen)) {
         QDomElement fallDiagonal  = doc.createElement("fall-diagonal");
-        fallDiagonal.appendChild(NativeFormat::createElement("pen", fallDiagonalPen(), doc));
+        fallDiagonal.appendChild(KSpread::NativeFormat::createElement("pen", fallDiagonalPen(), doc));
         format.appendChild(fallDiagonal);
     }
 
     if (keysToStore.contains(GoUpDiagonalPen)) {
         QDomElement goUpDiagonal = doc.createElement("up-diagonal");
-        goUpDiagonal.appendChild(NativeFormat::createElement("pen", goUpDiagonalPen(), doc));
+        goUpDiagonal.appendChild(KSpread::NativeFormat::createElement("pen", goUpDiagonalPen(), doc));
         format.appendChild(goUpDiagonal);
     }
 }
@@ -1737,7 +1731,7 @@ bool Style::loadXML(KoXmlElement& format, Paste::Mode mode)
     if (type() == AUTO) {
         KoXmlElement fontElement = format.namedItem("font").toElement();
         if (!fontElement.isNull()) {
-            QFont font(NativeFormat::toFont(fontElement));
+            QFont font(KSpread::NativeFormat::toFont(fontElement));
             setFontFamily(font.family());
             setFontSize(font.pointSize());
             if (font.italic())
@@ -1794,7 +1788,7 @@ bool Style::loadXML(KoXmlElement& format, Paste::Mode mode)
 
     KoXmlElement pen = format.namedItem("pen").toElement();
     if (!pen.isNull()) {
-        setFontColor(NativeFormat::toPen(pen).color());
+        setFontColor(KSpread::NativeFormat::toPen(pen).color());
     }
 
     if (mode != Paste::NoBorder) {
@@ -1802,42 +1796,42 @@ bool Style::loadXML(KoXmlElement& format, Paste::Mode mode)
         if (!left.isNull()) {
             KoXmlElement pen = left.namedItem("pen").toElement();
             if (!pen.isNull())
-                setLeftBorderPen(NativeFormat::toPen(pen));
+                setLeftBorderPen(KSpread::NativeFormat::toPen(pen));
         }
 
         KoXmlElement top = format.namedItem("top-border").toElement();
         if (!top.isNull()) {
             KoXmlElement pen = top.namedItem("pen").toElement();
             if (!pen.isNull())
-                setTopBorderPen(NativeFormat::toPen(pen));
+                setTopBorderPen(KSpread::NativeFormat::toPen(pen));
         }
 
         KoXmlElement right = format.namedItem("right-border").toElement();
         if (!right.isNull()) {
             KoXmlElement pen = right.namedItem("pen").toElement();
             if (!pen.isNull())
-                setRightBorderPen(NativeFormat::toPen(pen));
+                setRightBorderPen(KSpread::NativeFormat::toPen(pen));
         }
 
         KoXmlElement bottom = format.namedItem("bottom-border").toElement();
         if (!bottom.isNull()) {
             KoXmlElement pen = bottom.namedItem("pen").toElement();
             if (!pen.isNull())
-                setBottomBorderPen(NativeFormat::toPen(pen));
+                setBottomBorderPen(KSpread::NativeFormat::toPen(pen));
         }
 
         KoXmlElement fallDiagonal = format.namedItem("fall-diagonal").toElement();
         if (!fallDiagonal.isNull()) {
             KoXmlElement pen = fallDiagonal.namedItem("pen").toElement();
             if (!pen.isNull())
-                setFallDiagonalPen(NativeFormat::toPen(pen));
+                setFallDiagonalPen(KSpread::NativeFormat::toPen(pen));
         }
 
         KoXmlElement goUpDiagonal = format.namedItem("up-diagonal").toElement();
         if (!goUpDiagonal.isNull()) {
             KoXmlElement pen = goUpDiagonal.namedItem("pen").toElement();
             if (!pen.isNull())
-                setGoUpDiagonalPen(NativeFormat::toPen(pen));
+                setGoUpDiagonalPen(KSpread::NativeFormat::toPen(pen));
         }
     }
 
@@ -2451,7 +2445,7 @@ bool Style::operator==(const Style& other) const
     return true;
 }
 
-uint KSpread::qHash(const Style& style)
+uint qHash(const Style& style)
 {
     uint hash = 0;
     foreach (const SharedSubStyle& ss, style.subStyles()) {

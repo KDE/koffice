@@ -41,8 +41,6 @@
 #define MapResourceId 65227211
 
 
-using namespace KSpread;
-
 K_PLUGIN_FACTORY(TableShapePluginFactory, registerPlugin<TableShapePlugin>();)
 K_EXPORT_PLUGIN(TableShapePluginFactory("TableShape"))
 

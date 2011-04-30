@@ -24,9 +24,6 @@
 #include <QtTest/QtTest>
 #include <Value.h>
 
-namespace KSpread
-{
-
 class TestFormula: public QObject
 {
     Q_OBJECT
@@ -48,7 +45,5 @@ private Q_SLOTS:
 private:
     Value evaluate(const QString&, Value&);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_FORMULA

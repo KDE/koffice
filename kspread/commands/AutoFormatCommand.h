@@ -24,8 +24,6 @@
 
 #include <QList>
 
-namespace KSpread
-{
 class Style;
 
 /**
@@ -55,7 +53,5 @@ protected:
 private:
     QList<Style> m_styles;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_AUTO_FORMAT_COMMAND

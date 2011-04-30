@@ -23,8 +23,6 @@
 
 #include "Sheet.h"
 
-using namespace KSpread;
-
 // ----- PageLayoutCommand -----
 
 PageLayoutCommand::PageLayoutCommand(Sheet* sheet, const PrintSettings& settings, QUndoCommand* parent)

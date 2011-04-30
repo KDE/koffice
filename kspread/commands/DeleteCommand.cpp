@@ -20,14 +20,13 @@
 #include "DeleteCommand.h"
 
 #include "CellStorage.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "Sheet.h"
 #include "Validity.h"
 
 #include <klocale.h>
 
-using namespace KSpread;
 
 DeleteCommand::DeleteCommand(QUndoCommand *parent)
         : AbstractDataManipulator(parent)
@@ -117,12 +116,12 @@ bool DeleteCommand::process(Element* element)
     }
 
     // the rect storages
-    m_sheet->cellStorage()->setComment(Region(range, element->sheet()), QString());
-    m_sheet->cellStorage()->setConditions(Region(range, element->sheet()), Conditions());
+    m_sheet->cellStorage()->setComment(KCRegion(range, element->sheet()), QString());
+    m_sheet->cellStorage()->setConditions(KCRegion(range, element->sheet()), Conditions());
     Style style;
     style.setDefault();
-    m_sheet->cellStorage()->setStyle(Region(range, element->sheet()), style);
-    m_sheet->cellStorage()->setValidity(Region(range, element->sheet()), Validity());
+    m_sheet->cellStorage()->setStyle(KCRegion(range, element->sheet()), style);
+    m_sheet->cellStorage()->setValidity(KCRegion(range, element->sheet()), Validity());
     return true;
 }
 

@@ -24,9 +24,6 @@
 #include "AbstractRegionCommand.h"
 #include "Style.h"
 
-namespace KSpread
-{
-
 /**
  * \ingroup Commands
  * \brief Changes the indentation level.
@@ -42,7 +39,5 @@ protected:
     virtual bool mainProcessing();
     virtual bool postProcessing();
 };
-
-}  // namespace KSpread
 
 #endif // KSPREAD_INDENTATION_COMMAND

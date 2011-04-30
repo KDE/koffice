@@ -49,15 +49,13 @@ class KoCanvasController;
 class KoDocumentEntry;
 class KoZoomHandler;
 
-namespace KSpread
-{
 class Cell;
 class ColumnHeader;
 class Damage;
 class Sheet;
 class Canvas;
 class Doc;
-class Region;
+class KCRegion;
 class Selection;
 class SheetView;
 class RowHeader;
@@ -181,14 +179,14 @@ public Q_SLOTS:
     void refreshSheetViews();
 
     /** Invalidates all visual cached data for the cells in \p region. */
-    void refreshSelection(const Region& region);
+    void refreshSelection(const KCRegion& region);
 
     void finishLoading();
     /**
      * Prepares this view for a modification of \p region, e.g. closes the cell
      * editor.
      */
-    void aboutToModify(const Region& region);
+    void aboutToModify(const KCRegion& region);
 
     /** Sets the initial scrolling offset and selection after loading. */
     void initialPosition();
@@ -324,10 +322,10 @@ protected slots:
 
 public slots:
     /** Reacts on selection changes. */
-    void slotChangeSelection(const Region&);
+    void slotChangeSelection(const KCRegion&);
 
     /** Reacts on reference selection changes. */
-    void slotScrollChoice(const Region&);
+    void slotScrollChoice(const KCRegion&);
 
     /** Updates the shape anchoring action. */
     void shapeSelectionChanged();
@@ -379,7 +377,5 @@ private:
     /** Sets the column/row headers minima according to the zoom level. */
     void setHeaderMinima();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_VIEW

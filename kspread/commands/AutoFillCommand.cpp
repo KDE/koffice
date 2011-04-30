@@ -45,8 +45,6 @@
 
 #include <math.h>
 
-using namespace KSpread;
-
 QStringList *AutoFillCommand::month = 0;
 QStringList *AutoFillCommand::shortMonth = 0;
 QStringList *AutoFillCommand::day = 0;
@@ -59,8 +57,6 @@ QStringList *AutoFillCommand::other = 0;
  *
  **********************************************************************************/
 
-namespace KSpread
-{
 /**
  * A cell content for auto-filling.
  */
@@ -95,7 +91,6 @@ protected:
     int     m_otherBegin;
     int     m_otherEnd;
 };
-}
 
 AutoFillSequenceItem::AutoFillSequenceItem(const Cell& cell)
         : m_value()
@@ -442,8 +437,6 @@ Value AutoFillSequenceItem::prevValue(int _no, Value _delta) const
  *
  **********************************************************************************/
 
-namespace KSpread
-{
 /**
  * A sequence of cell contents for auto-filling.
  */
@@ -456,7 +449,6 @@ public:
 
     QList<Value> createDeltaSequence(int intervalLength) const;
 };
-}
 
 AutoFillSequence::AutoFillSequence()
 {

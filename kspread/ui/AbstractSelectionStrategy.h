@@ -26,8 +26,6 @@
 
 class KoCanvasBase;
 
-namespace KSpread
-{
 class CellToolBase;
 class Selection;
 
@@ -90,7 +88,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_ABSTRACT_SELECTION_STRATEGY

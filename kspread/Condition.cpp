@@ -28,7 +28,7 @@
 #include "Formula.h"
 #include "Map.h"
 #include "NamedAreaManager.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
 #include "Style.h"
 #include "StyleManager.h"
@@ -43,8 +43,6 @@
 #include <KoXmlNS.h>
 #include <kdebug.h>
 #include <qdom.h>
-
-using namespace KSpread;
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -200,9 +198,9 @@ bool Conditions::isTrueFormula(const Cell &cell, const QString &formula, const Q
     ValueCalc *const calc = map->calc();
     Formula f(cell.sheet(), cell);
     f.setExpression('=' + formula);
-    Region r(baseCellAddress, map, cell.sheet());
+    KCRegion r(baseCellAddress, map, cell.sheet());
     if (r.isValid() && r.isSingular()) {
-        QPoint basePoint = static_cast<Region::Point*>(*r.constBegin())->pos();
+        QPoint basePoint = static_cast<KCRegion::Point*>(*r.constBegin())->pos();
         QString newFormula('=');
         const Tokens tokens = f.tokens();
         for (int t = 0; t < tokens.count(); ++t) {
@@ -212,7 +210,7 @@ bool Conditions::isTrueFormula(const Cell &cell, const QString &formula, const Q
                     newFormula.append(token.text());
                     continue;
                 }
-                const Region region(token.text(), map, cell.sheet());
+                const KCRegion region(token.text(), map, cell.sheet());
                 if (!region.isValid() || !region.isContiguous()) {
                     newFormula.append(token.text());
                     continue;
@@ -221,9 +219,9 @@ bool Conditions::isTrueFormula(const Cell &cell, const QString &formula, const Q
                     newFormula.append(token.text());
                     continue;
                 }
-                Region::Element* element = *region.constBegin();
-                if (element->type() == Region::Element::Point) {
-                    Region::Point* point = static_cast<Region::Point*>(element);
+                KCRegion::Element* element = *region.constBegin();
+                if (element->type() == KCRegion::Element::Point) {
+                    KCRegion::Point* point = static_cast<KCRegion::Point*>(element);
                     QPoint pos = point->pos();
                     if (!point->isRowFixed()) {
                         int delta = pos.y() - basePoint.y();
@@ -233,9 +231,9 @@ bool Conditions::isTrueFormula(const Cell &cell, const QString &formula, const Q
                         int delta = pos.x() - basePoint.x();
                         pos.setX(cell.column() + delta);
                     }
-                    newFormula.append(Region(pos, cell.sheet()).name());
+                    newFormula.append(KCRegion(pos, cell.sheet()).name());
                 } else {
-                    Region::Range* range = static_cast<Region::Range*>(element);
+                    KCRegion::Range* range = static_cast<KCRegion::Range*>(element);
                     QRect r = range->rect();
                     if (!range->isTopFixed()) {
                         int delta = r.top() - basePoint.y();
@@ -253,7 +251,7 @@ bool Conditions::isTrueFormula(const Cell &cell, const QString &formula, const Q
                         int delta = r.right() - basePoint.x();
                         r.setRight(cell.column() + delta);
                     }
-                    newFormula.append(Region(r, cell.sheet()).name());
+                    newFormula.append(KCRegion(r, cell.sheet()).name());
                 }
             } else {
                 newFormula.append(token.text());
@@ -346,7 +344,7 @@ QString Conditions::saveOdfConditionValue(const Conditional &condition, ValueCon
         break;
     case Conditional::IsTrueFormula:
         value = "is-true-formula(";
-        value += Odf::encodeFormula(condition.value1.asString());
+        value += KSpread::Odf::encodeFormula(condition.value1.asString());
         value += ")";
     }
     return value;
@@ -468,7 +466,7 @@ void Conditions::loadOdfConditionValue(const QString &styleCondition, Conditiona
         val = val.mid(16);
         if (val.endsWith(")")) val = val.left(val.length() - 1);
         newCondition.cond = Conditional::IsTrueFormula;
-        newCondition.value1 = Value(Odf::decodeFormula(val));
+        newCondition.value1 = Value(KSpread::Odf::decodeFormula(val));
     }
 }
 
@@ -571,7 +569,7 @@ bool Conditions::operator==(const Conditions& other) const
     return true;
 }
 
-uint KSpread::qHash(const Conditions &c)
+uint qHash(const Conditions &c)
 {
     uint res = 0;
     foreach (const Conditional& co, c.conditionList()) {
@@ -580,7 +578,7 @@ uint KSpread::qHash(const Conditions &c)
     return res;
 }
 
-uint KSpread::qHash(const Conditional& c)
+uint qHash(const Conditional& c)
 {
     return qHash(c.value1);
 }

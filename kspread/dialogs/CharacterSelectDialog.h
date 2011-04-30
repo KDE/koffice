@@ -25,8 +25,6 @@
 
 class QWidget;
 
-namespace KSpread
-{
 
 /**
  * A dialog for selecting a character.
@@ -75,7 +73,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CHARACTER_SELECT_DIALOG

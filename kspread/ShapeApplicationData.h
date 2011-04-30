@@ -23,8 +23,6 @@
 #include <KoShapeApplicationData.h>
 #include "kspread_export.h"
 
-namespace KSpread
-{
 
 /**
  * \ingroup Embedding
@@ -50,7 +48,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHAPE_APPLICATION_DATA

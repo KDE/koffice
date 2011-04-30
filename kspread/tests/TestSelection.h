@@ -22,8 +22,6 @@
 
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 
 class TestSelection : public QObject
 {
@@ -37,7 +35,5 @@ private Q_SLOTS:
     void covering();
     void splitting();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_SELECTION

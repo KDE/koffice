@@ -19,8 +19,6 @@
 
 #include "ApplicationSettings.h"
 
-using namespace KSpread;
-
 class ApplicationSettings::Private
 {
 public:
@@ -28,7 +26,7 @@ public:
     QColor pageBorderColor;
     KGlobalSettings::Completion completionMode;
     KSpread::MoveTo moveTo;
-    MethodOfCalc calcMethod;
+    KSpread::MethodOfCalc calcMethod;
     double indentValue;
     bool verticalScrollBar      : 1;
     bool horizontalScrollBar    : 1;
@@ -45,8 +43,8 @@ ApplicationSettings::ApplicationSettings()
     d->gridColor = Qt::lightGray;
     d->pageBorderColor = Qt::red;
     d->completionMode = KGlobalSettings::CompletionAuto;
-    d->moveTo = Bottom;
-    d->calcMethod = SumOfNumber;
+    d->moveTo = KSpread::Bottom;
+    d->calcMethod = KSpread::SumOfNumber;
     d->indentValue = 10.0;
     d->verticalScrollBar = true;
     d->horizontalScrollBar = true;
@@ -170,12 +168,12 @@ void ApplicationSettings::setMoveToValue(KSpread::MoveTo moveTo)
     d->moveTo = moveTo;
 }
 
-void ApplicationSettings::setTypeOfCalc(MethodOfCalc calc)
+void ApplicationSettings::setTypeOfCalc(KSpread::MethodOfCalc calc)
 {
     d->calcMethod = calc;
 }
 
-MethodOfCalc ApplicationSettings::getTypeOfCalc() const
+KSpread::MethodOfCalc ApplicationSettings::getTypeOfCalc() const
 {
     return d->calcMethod;
 }

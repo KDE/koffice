@@ -37,8 +37,6 @@
 
 #include <kdebug.h>
 
-using namespace KSpread;
-
 class CalculationSettings::Private
 {
 public:

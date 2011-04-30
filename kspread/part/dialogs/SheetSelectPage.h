@@ -22,8 +22,6 @@
 
 #include "ui_SheetSelectWidget.h"
 
-namespace KSpread
-{
 class SheetSelectWidget;
 
 /**
@@ -102,7 +100,5 @@ protected slots:
     void moveDown();
     void moveBottom();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHEETSELECTPAGE

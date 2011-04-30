@@ -40,8 +40,6 @@
 #include "commands/StyleCommand.h"
 #include "commands/RowColumnManipulators.h"
 
-using namespace KSpread;
-
 AngleDialog::AngleDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
 {

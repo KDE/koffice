@@ -31,8 +31,6 @@
 #include <KCalendarSystem>
 #include <KMessageBox>
 
-using namespace KSpread;
-
 class CalendarTool::Private
 {
 public:
@@ -99,7 +97,7 @@ void CalendarTool::insertCalendar(const QDate &start, const QDate &end)
     //@todo improve calendar size prediction!
     int sizeY = 4 + (int)(0.5 * (float)(start.daysTo(end)));
 
-    if (!sheet->areaIsEmpty(Region(QRect(marker, QSize(sizeX, sizeY))))) {
+    if (!sheet->areaIsEmpty(KCRegion(QRect(marker, QSize(sizeX, sizeY))))) {
         if (KMessageBox::No == KMessageBox::warningYesNo(0, i18n("The area where the calendar is inserted is NOT empty, are you sure you want to continue, overwriting existing data? If you choose No the area that would be required for the desired calendar will be selected so you can see what data would be overwritten."), i18n("Warning"))) {
             //select the area so the user knows what's in the way
             selection()->initialize(QRect(marker.x(), marker.y(), sizeX, sizeY));//,sheet);

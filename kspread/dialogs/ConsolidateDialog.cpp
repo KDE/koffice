@@ -63,8 +63,6 @@
 #include "ui_ConsolidateWidget.h"
 #include "ui_ConsolidateDetailsWidget.h"
 
-using namespace KSpread;
-
 class ConsolidateDialog::Private
 {
 public:
@@ -117,7 +115,7 @@ ConsolidateDialog::ConsolidateDialog(QWidget* parent, Selection* selection)
     connect(d->mainWidget.m_sourceRange, SIGNAL(returnPressed()),
             this, SLOT(slotReturnPressed()));
 
-    connect(d->selection, SIGNAL(changed(const Region&)),
+    connect(d->selection, SIGNAL(changed(const KCRegion&)),
             this, SLOT(slotSelectionChanged()));
 }
 
@@ -144,10 +142,10 @@ void ConsolidateDialog::accept()
     const int index = d->mainWidget.m_function->currentIndex();
     const QString function = d->mainWidget.m_function->itemData(index).toString();
 
-    QList<Region> ranges;
+    QList<KCRegion> ranges;
     for (int i = 0; i < d->mainWidget.m_sourceRanges->count(); ++i) {
         const QString address = d->mainWidget.m_sourceRanges->item(i)->text();
-        const Region region(address, map, destinationSheet);
+        const KCRegion region(address, map, destinationSheet);
         if (!region.isValid()) {
             KMessageBox::error(this, i18n("%1 is not a valid cell range." , address));
             return;
@@ -492,7 +490,7 @@ void ConsolidateDialog::slotReturnPressed()
 {
     QString txt = d->mainWidget.m_sourceRange->text();
 
-    const Region r(txt, d->selection->activeSheet()->map());
+    const KCRegion r(txt, d->selection->activeSheet()->map());
     if (!r.isValid()) {
         KMessageBox::error(this, i18n("The range\n%1\n is malformed", txt));
         return;

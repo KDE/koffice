@@ -34,8 +34,6 @@ class KTextEdit;
 class KComboBox;
 class QCheckBox;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -79,7 +77,5 @@ protected:
     KTextEdit *validityList;
     QLabel *validityLabelList;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_VALIDITY_DIALOG

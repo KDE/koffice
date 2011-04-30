@@ -22,8 +22,6 @@
 
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 
 class PointStorageTest : public QObject
 {
@@ -55,7 +53,5 @@ private Q_SLOTS:
     void testDimension();
     void testSubStorage();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_POINT_STORAGE_TEST

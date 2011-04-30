@@ -25,8 +25,6 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 class Value;
 
 class TestOpenFormula: public QObject
@@ -45,7 +43,5 @@ private:
     QString convertToOpenFormula(const QString& expr);
     QString convertFromOpenFormula(const QString& expr);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_OPENFORMULA

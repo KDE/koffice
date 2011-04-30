@@ -38,8 +38,6 @@
 
 #include "commands/NamedAreaCommand.h"
 
-using namespace KSpread;
-
 AddNamedAreaDialog::AddNamedAreaDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
         , m_selection(selection)
@@ -80,7 +78,7 @@ void AddNamedAreaDialog::slotOk()
         return;
 
     const QString name = m_areaName->text();
-    const Region region(m_selection->lastRange(), m_selection->lastSheet());
+    const KCRegion region(m_selection->lastRange(), m_selection->lastSheet());
     if (m_selection->activeSheet()->map()->namedAreaManager()->namedArea(name) == region)
         return; // nothing to do
 

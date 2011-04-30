@@ -31,8 +31,6 @@
 
 #include <KDialog>
 
-namespace KSpread
-{
 class Selection;
 class Sheet;
 
@@ -70,7 +68,5 @@ private:
     class Private;
     Private *const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CONSOLIDATE_DIALOG

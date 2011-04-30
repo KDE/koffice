@@ -23,8 +23,6 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 class Map;
 
 class TestRegion : public QObject
@@ -42,7 +40,5 @@ private Q_SLOTS:
 private:
     Map* m_map;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_REGION

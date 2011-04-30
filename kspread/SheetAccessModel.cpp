@@ -24,7 +24,7 @@
 #include "Binding.h"
 #include "BindingManager.h"
 #include "Damages.h"
-#include "Region.h"
+#include "KCRegion.h"
 
 // Qt
 #include <QList>
@@ -40,8 +40,6 @@
 
 Q_DECLARE_METATYPE(QPointer<QAbstractItemModel>)
 
-namespace KSpread
-{
 
 class SheetAccessModel::Private
 {
@@ -86,7 +84,7 @@ void SheetAccessModel::slotSheetAdded(Sheet *sheet)
     col.append(item);
 
     // This region contains the entire sheet
-    const Region region(1, 1, KS_colMax, KS_rowMax, sheet);
+    const KCRegion region(1, 1, KS_colMax, KS_rowMax, sheet);
     const QPointer<QAbstractItemModel> model = const_cast<QAbstractItemModel*>( d->map->bindingManager()->createModel( region.name() ) );
 
     item->setData( QVariant::fromValue( model ), Qt::DisplayRole );
@@ -114,7 +112,7 @@ void SheetAccessModel::handleDamages(const QList<Damage*>& damages)
             continue;
         }
 
-        if (damage->type() == Damage::Sheet) {
+        if (damage->type() == Damage::DamagedSheet) {
             SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
             kDebug(36007) << "Processing\t" << *sheetDamage;
 
@@ -129,5 +127,3 @@ void SheetAccessModel::handleDamages(const QList<Damage*>& damages)
         }
     }
 }
-
-} // namespace KSpread

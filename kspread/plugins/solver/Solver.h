@@ -31,11 +31,6 @@
 class QObject;
 #include <QVariantList>
 
-namespace KSpread
-{
-namespace Plugins
-{
-
 /**
  * \class Solver Function Optimizer
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
@@ -80,8 +75,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace Plugins
-} // namespace KSpread
 
 #endif

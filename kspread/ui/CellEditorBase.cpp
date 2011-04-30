@@ -20,8 +20,6 @@
 
 #include "CellEditorBase.h"
 
-using namespace KSpread;
-
 CellEditorBase::CellEditorBase()
 {
 }

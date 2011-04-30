@@ -29,8 +29,6 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
 class CalculationSettings;
 class Value;
 
@@ -111,7 +109,5 @@ protected:
 private:
     const CalculationSettings* m_settings;
 };
-
-}  //namespace KSpread
 
 #endif  //KSPREAD_VALUE_PARSER

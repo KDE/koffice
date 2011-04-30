@@ -23,12 +23,6 @@
 
 #include <QString>
 #include <QUndoCommand>
-
-/**
- * The KSpread namespace.
- */
-namespace KSpread
-{
 class Map;
 class Sheet;
 
@@ -182,7 +176,5 @@ protected:
     bool oldLcMode, newLcMode;
     bool oldCapitalizeFirstLetter, newCapitalizeFirstLetter;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHEET_COMMANDS

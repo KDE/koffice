@@ -52,8 +52,6 @@
 #include "ui/Selection.h"
 #include "Sheet.h"
 
-using namespace KSpread;
-
 class DocumentSettingsDialog::Private
 {
 public:

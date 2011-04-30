@@ -26,11 +26,6 @@
 
 #include "commands/AbstractRegionCommand.h"
 
-/**
- * The KSpread namespace.
- */
-namespace KSpread
-{
 class Sheet;
 
 /**
@@ -46,9 +41,7 @@ public:
     virtual void undo();
 
 private:
-    Region m_oldPrintRegion;
+    KCRegion m_oldPrintRegion;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DEFINE_PRINT_RANGE_COMMAND

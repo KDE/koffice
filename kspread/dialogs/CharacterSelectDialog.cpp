@@ -30,8 +30,6 @@
 #include <kdebug.h>
 #include <KStandardGuiItem>
 
-using namespace KSpread;
-
 class CharacterSelectDialog::Private
 {
 public:

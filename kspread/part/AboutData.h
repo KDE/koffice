@@ -24,8 +24,6 @@
 #include <klocale.h>
 #include <kofficeversion.h>
 
-namespace KSpread
-{
 
 static const char* description = I18N_NOOP("KOffice Spreadsheet Application");
 
@@ -86,7 +84,5 @@ KAboutData * newAboutData()
                          "bradh@frogmouth.net");
     return aboutData;
 }
-
-} // namespace KSpread
 
 #endif

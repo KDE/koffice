@@ -32,9 +32,6 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
-
 /**
  * \ingroup Style
  * Collection of string formatting enumeration and functions.
@@ -127,6 +124,5 @@ KSPREAD_EXPORT bool isTime(Type type);
 KSPREAD_EXPORT bool isFraction(Type type);
 
 } // namespace Format
-} // namespace KSpread
 
 #endif // KSPREAD_FORMAT

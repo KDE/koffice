@@ -23,8 +23,6 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 
 class TestValue: public QObject
 {
@@ -42,7 +40,5 @@ private Q_SLOTS:
     void testCopy();
     void testAssignment();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_VALUE

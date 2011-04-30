@@ -27,8 +27,6 @@
 
 #include "Sheet.h"
 
-using namespace KSpread;
-
 SheetPropertiesDialog::SheetPropertiesDialog(QWidget* parent):
         KDialog(parent)
 {

@@ -40,8 +40,6 @@
 #include <QToolTip>
 #include <QVBoxLayout>
 
-using namespace KSpread;
-
 class FunctionCompletion::Private
 {
 public:
@@ -109,8 +107,8 @@ void FunctionCompletion::itemSelected(QListWidgetItem* listItem)
         }
     }
 
-    KSpread::FunctionDescription* desc;
-    desc = KSpread::FunctionRepository::self()->functionInfo(item);
+    FunctionDescription* desc;
+    desc = FunctionRepository::self()->functionInfo(item);
     if (!desc) {
         d->hintLabel->hide();
         return;

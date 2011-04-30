@@ -23,11 +23,9 @@
 
 #include <QObject>
 
-#include "Region.h"
+#include "KCRegion.h"
 
-namespace KSpread
-{
-class Region;
+class KCRegion;
 
 /**
  * \ingroup Value
@@ -59,7 +57,7 @@ public:
      * The caller has to take care of that, because each and every
      * cell in \p region is traversed.
      */
-    void regionChanged(const Region& region);
+    void regionChanged(const KCRegion& region);
 
     /**
      * Updates the whole \p map.
@@ -82,13 +80,13 @@ public:
      *
      * \return region consuming \p cell 's value
      */
-    Region consumingRegion(const Cell& cell) const;
+    KCRegion consumingRegion(const Cell& cell) const;
 
     /**
      * Returns the region, that is reduced to those parts of \p region, that provide values.
      * \return region providing values for others
      */
-    Region reduceToProvidingRegion(const Region& region) const;
+    KCRegion reduceToProvidingRegion(const KCRegion& region) const;
 
     /**
      * Adjusts formulas after cut & paste operations or column/row insertions/deletions.
@@ -96,7 +94,7 @@ public:
      * \param movedRegion the region, that was moved
      * \param destination the new upper left corner of the region
      */
-    void regionMoved(const Region& movedRegion, const Cell& destination);
+    void regionMoved(const KCRegion& movedRegion, const Cell& destination);
 
 public Q_SLOTS:
     void namedAreaModified(const QString&);
@@ -119,7 +117,7 @@ protected:
      *
      * \see regionMoved()
      */
-    void updateFormula(const Cell& cell, const Region::Element* oldLocation, const Region::Point& offset);
+    void updateFormula(const Cell& cell, const KCRegion::Element* oldLocation, const KCRegion::Point& offset);
 
 private:
     Q_DISABLE_COPY(DependencyManager)
@@ -127,7 +125,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DEPENDENCY_MANAGER

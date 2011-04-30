@@ -50,8 +50,6 @@
 class KoPointerEvent;
 class KoZoomHandler;
 
-namespace KSpread
-{
 class ColumnHeader;
 class Doc;
 class Sheet;
@@ -114,7 +112,7 @@ public:
      * @return a pointer to the active sheet
      */
     Sheet* activeSheet() const;
-    virtual KSpread::Selection* selection() const;
+    virtual Selection* selection() const;
     Doc *doc() const {
         return m_doc;
     }
@@ -216,7 +214,5 @@ private:
     KoShapeManager *m_shapeManager;
     KoToolProxy *m_toolProxy;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CANVAS

@@ -28,8 +28,6 @@
 
 class KTextEdit;
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -50,7 +48,5 @@ protected:
     Selection* m_selection;
     KTextEdit *multiLine;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_COMMENT_DIALOG

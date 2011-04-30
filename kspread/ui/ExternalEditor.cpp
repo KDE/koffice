@@ -36,8 +36,6 @@
 #include <QFocusEvent>
 #include <QKeyEvent>
 
-using namespace KSpread;
-
 class ExternalEditor::Private
 {
 public:

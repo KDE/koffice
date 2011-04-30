@@ -26,8 +26,6 @@
 #include <QPoint>
 #include <QPointF>
 
-namespace KSpread
-{
 class Sheet;
 
 /// Temporary information used only during loading
@@ -105,8 +103,6 @@ private:
     QMap<Sheet*, QPointF> m_scrollingOffsets;
     bool m_loadTemplate;
 };
-
-} // namespace KSpread
 
 #endif /* KPRLOADINGINFO_H */
 

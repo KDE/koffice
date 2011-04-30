@@ -26,8 +26,6 @@
 
 class QItemSelectionRange;
 
-namespace KSpread
-{
 class Sheet;
 
 /**
@@ -60,7 +58,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHEET_MODEL

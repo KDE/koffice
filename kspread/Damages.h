@@ -26,12 +26,10 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
 class Cell;
 class Map;
 class Sheet;
-class Region;
+class KCRegion;
 
 /**
  * \ingroup Damages
@@ -43,17 +41,17 @@ public:
     virtual ~Damage() {}
 
     typedef enum {
-        Nothing = 0,
-        Document,
-        Workbook,
-        Sheet,
-        Range,
-        Cell,
-        Selection
+        NoDamage = 0,
+        DamagedDocument,
+        DamagedWorkbook,
+        DamagedSheet,
+        DamagedRange,
+        DamagedCell,
+        DamagedSelection
     } Type;
 
     virtual Type type() const {
-        return Nothing;
+        return NoDamage;
     }
 };
 
@@ -83,17 +81,17 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    CellDamage(const KSpread::Cell& cell, Changes changes);
-    CellDamage(KSpread::Sheet* sheet, const Region& region, Changes changes);
+    CellDamage(const Cell& cell, Changes changes);
+    CellDamage(Sheet* sheet, const KCRegion& region, Changes changes);
 
     virtual ~CellDamage();
 
     virtual Type type() const {
-        return Damage::Cell;
+        return Damage::DamagedCell;
     }
 
-    KSpread::Sheet* sheet() const;
-    const Region& region() const;
+    Sheet* sheet() const;
+    const KCRegion& region() const;
 
     Changes changes() const;
 
@@ -126,15 +124,15 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    SheetDamage(KSpread::Sheet* sheet, Changes changes);
+    SheetDamage(Sheet* sheet, Changes changes);
 
     virtual ~SheetDamage();
 
     virtual Type type() const {
-        return Damage::Sheet;
+        return Damage::DamagedSheet;
     }
 
-    KSpread::Sheet* sheet() const;
+    Sheet* sheet() const;
 
     Changes changes() const;
 
@@ -161,13 +159,13 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    WorkbookDamage(KSpread::Map* map, Changes changes);
+    WorkbookDamage(Map* map, Changes changes);
     virtual ~WorkbookDamage();
 
     virtual Type type() const {
-        return Damage::Workbook;
+        return Damage::DamagedWorkbook;
     }
-    KSpread::Map* map() const;
+    Map* map() const;
     Changes changes() const;
 
 private:
@@ -186,14 +184,14 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(WorkbookDamage::Changes)
 class KSPREAD_EXPORT SelectionDamage : public Damage
 {
 public:
-    SelectionDamage(const Region& region);
+    SelectionDamage(const KCRegion& region);
     virtual ~SelectionDamage();
 
     virtual Type type() const {
-        return Damage::Selection;
+        return Damage::DamagedSelection;
     }
 
-    const Region& region() const;
+    const KCRegion& region() const;
 
 private:
     Q_DISABLE_COPY(SelectionDamage)
@@ -202,16 +200,14 @@ private:
     Private * const d;
 };
 
-} // namespace KSpread
-
 
 /***************************************************************************
   kDebug support
 ****************************************************************************/
 
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const KSpread::Damage& d);
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const KSpread::CellDamage& d);
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const KSpread::SheetDamage& d);
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const KSpread::SelectionDamage& d);
+KSPREAD_EXPORT QDebug operator<<(QDebug str, const Damage& d);
+KSPREAD_EXPORT QDebug operator<<(QDebug str, const CellDamage& d);
+KSPREAD_EXPORT QDebug operator<<(QDebug str, const SheetDamage& d);
+KSPREAD_EXPORT QDebug operator<<(QDebug str, const SelectionDamage& d);
 
 #endif // KSPREAD_DAMAGES

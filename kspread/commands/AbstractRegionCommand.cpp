@@ -34,8 +34,6 @@
 #include "Map.h"
 #include "Sheet.h"
 
-using namespace KSpread;
-
 //BEGIN NOTE Stefan: some words on operations
 //
 // 1. SubTotal
@@ -55,7 +53,7 @@ using namespace KSpread;
 ****************************************************************************/
 
 AbstractRegionCommand::AbstractRegionCommand(QUndoCommand* parent)
-        : Region(),
+        : KCRegion(),
         QUndoCommand(parent),
         m_sheet(0),
         m_reverse(false),

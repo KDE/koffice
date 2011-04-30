@@ -27,8 +27,6 @@
 #include "Sheet.h"
 #include "SheetPrint.h"
 
-using namespace KSpread;
-
 // ----- DefinePrintRangeCommand -----
 
 

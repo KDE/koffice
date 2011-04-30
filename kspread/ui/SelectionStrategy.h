@@ -23,8 +23,6 @@
 #include "AbstractSelectionStrategy.h"
 #include "kspread_export.h"
 
-namespace KSpread
-{
 
 /**
  * A strategy for selecting cell ranges.
@@ -55,7 +53,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SELECTION_STRATEGY

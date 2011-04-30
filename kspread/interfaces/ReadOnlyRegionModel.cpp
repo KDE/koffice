@@ -20,19 +20,17 @@
 #include "ReadOnlyRegionModel.h"
 
 // KSpread
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
-
-using namespace KSpread;
 
 class ReadOnlyRegionModel::Private
 {
 public:
-    Region region;
-    ReadOnlyRegionModel test(Region());
+    KCRegion region;
+    ReadOnlyRegionModel test(KCRegion());
 };
 
-ReadOnlyRegionModel::ReadOnlyRegionModel(const Region& region)
+ReadOnlyRegionModel::ReadOnlyRegionModel(const KCRegion& region)
         : QAbstractProxyModel(region.firstSheet())
         , d(new Private)
 {

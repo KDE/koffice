@@ -26,8 +26,6 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
 
 /**
  * \ingroup Protection
@@ -88,7 +86,5 @@ private:
 
     QByteArray m_password;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_PROTECTABLE_OBJECT

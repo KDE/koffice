@@ -25,8 +25,6 @@
 
 #include <Value.h>
 
-namespace KSpread
-{
 
 class TestTextFunctions: public QObject
 {
@@ -64,7 +62,5 @@ private slots:
 private:
     Value evaluate(const QString&, Value& ex);
 };
-
-} // namespace KSpread
 
 #endif

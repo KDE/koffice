@@ -45,8 +45,6 @@
 #include <kurlrequester.h>
 #include <kurlcompletion.h>
 
-using namespace KSpread;
-
 class LinkDialog::Private
 {
 public:

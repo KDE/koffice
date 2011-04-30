@@ -24,8 +24,6 @@
 
 #include <QSet>
 
-namespace KSpread
-{
 class ColumnFormat;
 class RowFormat;
 
@@ -54,7 +52,7 @@ public:
 
 protected:
     /**
-     * Processes \p element , a Region::Point or a Region::Range .
+     * Processes \p element , a KCRegion::Point or a KCRegion::Range .
      * Invoked by mainProcessing() .
      */
     virtual bool process(Element* element);
@@ -71,7 +69,5 @@ protected:
     QSet<RowFormat*>   m_rowFormats;
     Mode m_mode;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DELETE_COMMAND

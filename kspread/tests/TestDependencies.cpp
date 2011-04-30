@@ -26,11 +26,9 @@
 #include "DependencyManager_p.h"
 #include "Formula.h"
 #include "Map.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
 #include "Value.h"
-
-using namespace KSpread;
 
 void TestDependencies::initTestCase()
 {
@@ -55,7 +53,7 @@ void TestDependencies::testCircleRemoval()
     QList<Cell> consumers = manager->d->consumers.value(m_sheet)->contains(QRect(1, 1, 1, 1));
     QCOMPARE(consumers.count(), 1);
     QCOMPARE(consumers.first(), Cell(m_sheet, 1, 1));
-    QCOMPARE(manager->d->providers.value(Cell(m_sheet, 1, 1)), Region(QRect(1, 1, 1, 1), m_sheet));
+    QCOMPARE(manager->d->providers.value(Cell(m_sheet, 1, 1)), KCRegion(QRect(1, 1, 1, 1), m_sheet));
 
     m_storage->setFormula(1, 1, Formula()); // A1
 

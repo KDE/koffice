@@ -29,8 +29,6 @@ class QLabel;
 class KoShapeManager;
 class KoToolProxy;
 
-namespace KSpread
-{
 class View;
 
 class CanvasBase::Private
@@ -50,7 +48,5 @@ public:
     KoShapeManager* shapeManager;
     QPointer<KoToolProxy> toolProxy;
 };
-
-} //namespace KSpread
 
 #endif

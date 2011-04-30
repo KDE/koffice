@@ -46,8 +46,6 @@
 #include <QPainter>
 #include <QPrintPreviewDialog>
 
-using namespace KSpread;
-
 typedef QHash<Sheet *, SheetPrint *> PageManagerMap;
 
 class PrintJob::Private
@@ -112,7 +110,7 @@ int PrintJob::Private::setupPages(const QPrinter& printer, bool forceRecreation)
         // Temporarily! The print region is solely used for the page creation
         // of the current printout, but we are working with the permanent
         // SheetPrint object in this case.
-        const Region printRegion = settings.printRegion();
+        const KCRegion printRegion = settings.printRegion();
         if (printer.printRange() == QPrinter::Selection)
             settings.setPrintRegion(*view->selection());
         pageManager->setSettings(settings, forceRecreation);

@@ -23,7 +23,6 @@
 
 #include "BenchmarkCluster.h"
 
-using namespace KSpread;
 class Cell;
 
 void ClusterBenchmark::testInsertionPerformance()

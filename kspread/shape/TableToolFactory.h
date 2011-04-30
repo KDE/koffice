@@ -23,8 +23,6 @@
 
 #include <KoToolFactoryBase.h>
 
-namespace KSpread
-{
 
 class TableToolFactory : public KoToolFactoryBase
 {
@@ -35,7 +33,5 @@ public:
 
     KoToolBase* createTool(KoCanvasBase* canvas);
 };
-
-} // namespace
 
 #endif // KSPREAD_TABLE_TOOL_FACTORY

@@ -30,8 +30,6 @@ class QFocusEvent;
 class QKeyEvent;
 class QWidget;
 
-namespace KSpread
-{
 class CellToolBase;
 
 class ExternalEditor : public KTextEdit
@@ -68,7 +66,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_EXTERNAL_EDITOR

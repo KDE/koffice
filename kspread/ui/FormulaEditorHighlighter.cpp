@@ -33,8 +33,6 @@
 #include <QApplication>
 #include <QTextEdit>
 
-using namespace KSpread;
-
 class FormulaEditorHighlighter::Private
 {
 public:
@@ -107,7 +105,7 @@ void FormulaEditorHighlighter::highlightBlock(const QString& text)
                 d->rangeChanged = true;
             }
 
-            const Region newRange(token.text(), map, originSheet);
+            const KCRegion newRange(token.text(), map, originSheet);
             if (!newRange.isValid()) {
                 continue;
             }

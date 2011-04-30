@@ -24,8 +24,6 @@
 
 class QToolButton;
 
-namespace KSpread
-{
 class CellToolBase;
 class ExternalEditor;
 class LocationComboBox;
@@ -77,7 +75,5 @@ private:
     class Private;
     Private *const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CELL_TOOL_OPTION_WIDGET

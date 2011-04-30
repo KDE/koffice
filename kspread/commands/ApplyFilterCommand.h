@@ -24,8 +24,6 @@
 
 #include "database/Database.h"
 
-namespace KSpread
-{
 class Filter;
 
 /**
@@ -56,7 +54,5 @@ private:
     Filter* m_oldFilter;
     QHash<int, bool> m_undoData;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_APPLYFILTER_COMMAND

@@ -26,8 +26,6 @@
 #include <QtDBus/QtDBus>
 #include "kspread_export.h"
 
-namespace KSpread
-{
 class Map;
 
 /**
@@ -61,7 +59,5 @@ public Q_SLOTS: // METHODS
 private:
     Map* m_map;
 };
-
-} // namespace KSpread
 
 #endif

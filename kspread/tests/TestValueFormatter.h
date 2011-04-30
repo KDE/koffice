@@ -23,8 +23,6 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 
 class CalculationSettings;
 class ValueParser;
@@ -46,7 +44,5 @@ private:
     ValueParser* m_parser;
     ValueConverter* m_converter;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_VALUEFORMATTER

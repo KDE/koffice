@@ -38,8 +38,6 @@
 #include <QKeyEvent>
 #include <QLineEdit>
 
-using namespace KSpread;
-
 LocationComboBox::LocationComboBox(CellToolBase *cellTool, QWidget *_parent)
         : KComboBox(true, _parent)
         , m_cellTool(cellTool)
@@ -136,7 +134,7 @@ bool LocationComboBox::activateItem()
 
     const QString text = lineEdit()->text();
     // check whether an already existing named area was entered
-    Region region = selection->activeSheet()->map()->namedAreaManager()->namedArea(text);
+    KCRegion region = selection->activeSheet()->map()->namedAreaManager()->namedArea(text);
     if (region.isValid()) {
         // TODO Stefan: Merge the sheet change into Selection.
         if (region.firstSheet() != selection->activeSheet()) {
@@ -147,7 +145,7 @@ bool LocationComboBox::activateItem()
     }
 
     // check whether a valid cell region was entered
-    region = Region(text, selection->activeSheet()->map(), selection->activeSheet());
+    region = KCRegion(text, selection->activeSheet()->map(), selection->activeSheet());
     if (region.isValid()) {
         // TODO Stefan: Merge the sheet change into Selection.
         if (region.firstSheet() != selection->activeSheet()) {
@@ -170,7 +168,7 @@ bool LocationComboBox::activateItem()
         NamedAreaCommand* command = new NamedAreaCommand();
         command->setSheet(selection->activeSheet());
         command->setAreaName(text);
-        command->add(Region(selection->lastRange(), selection->activeSheet()));
+        command->add(KCRegion(selection->lastRange(), selection->activeSheet()));
         if (command->execute())
             return true;
         else

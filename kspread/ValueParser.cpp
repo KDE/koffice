@@ -27,8 +27,6 @@
 #include "Style.h"
 #include "Value.h"
 
-using namespace KSpread;
-
 ValueParser::ValueParser(const CalculationSettings* settings)
         : m_settings(settings)
 {

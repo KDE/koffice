@@ -20,9 +20,6 @@
 #ifndef KSPREAD_VALUE_STORAGE
 #define KSPREAD_VALUE_STORAGE
 
-namespace KSpread
-{
-
 /**
  * \class ValueStorage
  * \ingroup Storage
@@ -45,7 +42,5 @@ public:
         return *this;
     }
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_VALUE_STORAGE

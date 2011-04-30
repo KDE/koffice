@@ -25,8 +25,6 @@
 
 #include <Value.h>
 
-namespace KSpread
-{
 
 class TestTrigFunctions: public QObject
 {
@@ -44,7 +42,5 @@ private slots:
 private:
     Value evaluate(const QString&);
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_TEST_TRIG_FUNCTIONS

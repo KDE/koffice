@@ -49,8 +49,6 @@ class KFind;
 class KReplace;
 
 
-namespace KSpread
-{
 class CharacterSelectDialog;
 class CellEditor;
 class CellToolOptionWidget;
@@ -165,7 +163,5 @@ public:
 private:
     CellToolBase* q;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_CELL_TOOL_BASE

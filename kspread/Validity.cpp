@@ -37,8 +37,6 @@
 #include "ValueConverter.h"
 #include "ValueParser.h"
 
-using namespace KSpread;
-
 class Validity::Private : public QSharedData
 {
 public:

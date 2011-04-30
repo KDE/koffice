@@ -22,9 +22,6 @@
 
 #include "DatabaseSource.h"
 
-namespace KSpread
-{
-
 /**
  * OpenDocument, 8.6.3 Database Source Table
  */
@@ -45,7 +42,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_DATABASE_SOURCE_TABLE

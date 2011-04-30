@@ -33,15 +33,13 @@
 
 // KSpread
 #include "kspread_limits.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "ui/Selection.h"
 #include "Sheet.h"
 
 // commands
 #include "commands/RowColumnManipulators.h"
-
-using namespace KSpread;
 
 ShowColRow::ShowColRow(QWidget* parent, Selection* selection, Type _type)
         : KDialog(parent)
@@ -126,7 +124,7 @@ void ShowColRow::slotDoubleClicked(QListWidgetItem *)
 
 void ShowColRow::slotOk()
 {
-    Region region;
+    KCRegion region;
     for (unsigned int i = 0; i < (unsigned int)list->count(); i++) {
         if (list->item(i)->isSelected()) {
             if (typeShow == Column) {

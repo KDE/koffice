@@ -46,8 +46,6 @@
 
 #include <knuminput.h>
 
-using namespace KSpread;
-
 SeriesDialog::SeriesDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
 {

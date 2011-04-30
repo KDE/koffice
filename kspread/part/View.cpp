@@ -161,8 +161,6 @@
 #include "interfaces/ViewAdaptor.h"
 #include <QtDBus/QtDBus>
 
-using namespace KSpread;
-
 class ViewActions;
 
 class View::Private
@@ -691,10 +689,10 @@ void View::initView()
 
     // Setup the selection.
     d->selection = new Selection(d->canvas);
-    connect(d->selection, SIGNAL(changed(const Region&)), this, SLOT(slotChangeSelection(const Region&)));
-    connect(d->selection, SIGNAL(changed(const Region&)), this, SLOT(slotScrollChoice(const Region&)));
-    connect(d->selection, SIGNAL(aboutToModify(const Region&)), this, SLOT(aboutToModify(const Region&)));
-    connect(d->selection, SIGNAL(modified(const Region&)), this, SLOT(refreshSelection(const Region&)));
+    connect(d->selection, SIGNAL(changed(const KCRegion&)), this, SLOT(slotChangeSelection(const KCRegion&)));
+    connect(d->selection, SIGNAL(changed(const KCRegion&)), this, SLOT(slotScrollChoice(const KCRegion&)));
+    connect(d->selection, SIGNAL(aboutToModify(const KCRegion&)), this, SLOT(aboutToModify(const KCRegion&)));
+    connect(d->selection, SIGNAL(modified(const KCRegion&)), this, SLOT(refreshSelection(const KCRegion&)));
     connect(d->selection, SIGNAL(visibleSheetRequested(Sheet*)), this, SLOT(setActiveSheet(Sheet*)));
     connect(d->selection, SIGNAL(refreshSheetViews()), this, SLOT(refreshSheetViews()));
     connect(this, SIGNAL(documentReadWriteToggled(bool)),
@@ -903,12 +901,12 @@ void View::refreshSheetViews()
         sheets[i]->cellStorage()->invalidateStyleCache();
 }
 
-void View::refreshSelection(const Region& region)
+void View::refreshSelection(const KCRegion& region)
 {
     doc()->map()->addDamage(new CellDamage(activeSheet(), region, CellDamage::Appearance));
 }
 
-void View::aboutToModify(const Region& region)
+void View::aboutToModify(const KCRegion& region)
 {
     Q_UNUSED(region);
     selection()->emitCloseEditor(true); // save changes
@@ -927,9 +925,9 @@ void View::initConfig()
     doc()->map()->settings()->setShowRowHeader(parameterGroup.readEntry("Row Header", true));
     if (!configFromDoc)
         doc()->map()->settings()->setCompletionMode((KGlobalSettings::Completion)parameterGroup.readEntry("Completion Mode", (int)(KGlobalSettings::CompletionAuto)));
-    doc()->map()->settings()->setMoveToValue((KSpread::MoveTo)parameterGroup.readEntry("Move", (int)(Bottom)));
+    doc()->map()->settings()->setMoveToValue((KSpread::MoveTo)parameterGroup.readEntry("Move", (int)(KSpread::Bottom)));
     doc()->map()->settings()->setIndentValue(parameterGroup.readEntry("Indent", 10.0));
-    doc()->map()->settings()->setTypeOfCalc((MethodOfCalc)parameterGroup.readEntry("Method of Calc", (int)(SumOfNumber)));
+    doc()->map()->settings()->setTypeOfCalc((KSpread::MethodOfCalc)parameterGroup.readEntry("Method of Calc", (int)(KSpread::SumOfNumber)));
     if (!configFromDoc)
         doc()->map()->settings()->setShowTabBar(parameterGroup.readEntry("Tabbar", true));
 
@@ -959,25 +957,25 @@ void View::changeNbOfRecentFiles(int _nb)
 void View::initCalcMenu()
 {
     switch (doc()->map()->settings()->getTypeOfCalc()) {
-    case  SumOfNumber:
+    case KSpread::SumOfNumber:
         d->actions->calcSum->setChecked(true);
         break;
-    case  Min:
+    case KSpread::Min:
         d->actions->calcMin->setChecked(true);
         break;
-    case  Max:
+    case KSpread::Max:
         d->actions->calcMax->setChecked(true);
         break;
-    case  Average:
+    case KSpread::Average:
         d->actions->calcAverage->setChecked(true);
         break;
-    case  Count:
+    case KSpread::Count:
         d->actions->calcCount->setChecked(true);
         break;
-    case  CountA:
+    case KSpread::CountA:
         d->actions->calcCountA->setChecked(true);
         break;
-    case  NoneCalc:
+    case KSpread::NoneCalc:
         d->actions->calcNone->setChecked(true);
         break;
     default :
@@ -1702,7 +1700,7 @@ void View::resetPrintRange()
     DefinePrintRangeCommand* command = new DefinePrintRangeCommand();
     command->setText(i18n("Reset Print Range"));
     command->setSheet(activeSheet());
-    command->add(Region(QRect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax)), activeSheet()));
+    command->add(KCRegion(QRect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax)), activeSheet()));
     doc()->addCommand(command);
 }
 
@@ -1767,7 +1765,7 @@ void View::slotRename()
 //
 //------------------------------------------------
 
-void View::slotChangeSelection(const KSpread::Region& changedRegion)
+void View::slotChangeSelection(const KCRegion& changedRegion)
 {
     if (!changedRegion.isValid())
         return;
@@ -1796,7 +1794,7 @@ void View::slotChangeSelection(const KSpread::Region& changedRegion)
     d->canvas->validateSelection();
 }
 
-void View::slotScrollChoice(const KSpread::Region& changedRegion)
+void View::slotScrollChoice(const KCRegion& changedRegion)
 {
     if (!selection()->referenceSelectionMode() || !changedRegion.isValid()) {
         return;
@@ -1808,28 +1806,28 @@ void View::calcStatusBarOp()
     Sheet * sheet = activeSheet();
     ValueCalc* calc = doc()->map()->calc();
     Value val;
-    MethodOfCalc tmpMethod = doc()->map()->settings()->getTypeOfCalc();
-    if (sheet && tmpMethod != NoneCalc) {
+    KSpread::MethodOfCalc tmpMethod = doc()->map()->settings()->getTypeOfCalc();
+    if (sheet && tmpMethod != KSpread::NoneCalc) {
         Value range = sheet->cellStorage()->valueRegion(*d->selection);
         switch (tmpMethod) {
-        case SumOfNumber:
+        case KSpread::SumOfNumber:
             val = calc->sum(range);
             break;
-        case Average:
+        case KSpread::Average:
             val = calc->avg(range);
             break;
-        case Min:
+        case KSpread::Min:
             val = calc->min(range);
             break;
-        case Max:
+        case KSpread::Max:
             val = calc->max(range);
             break;
-        case CountA:
+        case KSpread::CountA:
             val = Value(calc->count(range));
             break;
-        case Count:
+        case KSpread::Count:
             val = Value(calc->count(range, false));
-        case NoneCalc:
+        case KSpread::NoneCalc:
             break;
         default:
             break;
@@ -1840,26 +1838,26 @@ void View::calcStatusBarOp()
     QString res = doc()->map()->converter()->asString(val).asString();
     QString tmp;
     switch (tmpMethod) {
-    case SumOfNumber:
+    case KSpread::SumOfNumber:
         tmp = i18n("Sum: ") + res;
         break;
-    case Average:
+    case KSpread::Average:
         tmp = i18n("Average: ") + res;
         break;
-    case Min:
+    case KSpread::Min:
         tmp = i18n("Min: ") + res;
         break;
-    case Max:
+    case KSpread::Max:
         tmp = i18n("Max: ") + res;
         break;
-    case Count:
+    case KSpread::Count:
         tmp = i18n("Count: ") + res;
         break;
-    case CountA:
+    case KSpread::CountA:
         tmp = i18n("CountA: ") + res;
         break;
-    case NoneCalc:
-        tmp = "";
+    case KSpread::NoneCalc:
+        tmp = QString();
         break;
     }
 
@@ -1878,19 +1876,20 @@ void View::statusBarClicked(const QPoint&)
 void View::menuCalc(bool)
 {
     if (d->actions->calcMin->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(Min);
+        doc()->map()->settings()->setTypeOfCalc(KSpread::Min);
     } else if (d->actions->calcMax->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(Max);
+        doc()->map()->settings()->setTypeOfCalc(KSpread::Max);
     } else if (d->actions->calcCount->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(Count);
+        doc()->map()->settings()->setTypeOfCalc(KSpread::Count);
     } else if (d->actions->calcAverage->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(Average);
+        doc()->map()->settings()->setTypeOfCalc(KSpread::Average);
     } else if (d->actions->calcSum->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(SumOfNumber);
+        doc()->map()->settings()->setTypeOfCalc(KSpread::SumOfNumber);
     } else if (d->actions->calcCountA->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(CountA);
-    } else if (d->actions->calcNone->isChecked())
-        doc()->map()->settings()->setTypeOfCalc(NoneCalc);
+        doc()->map()->settings()->setTypeOfCalc(KSpread::CountA);
+    } else if (d->actions->calcNone->isChecked()) {
+        doc()->map()->settings()->setTypeOfCalc(KSpread::NoneCalc);
+    }
 
     calcStatusBarOp();
 }
@@ -2052,20 +2051,20 @@ void View::handleDamages(const QList<Damage*>& damages)
         Damage* damage = *it;
         if (!damage) continue;
 
-        if (damage->type() == Damage::Cell) {
+        if (damage->type() == Damage::DamagedCell) {
             CellDamage* cellDamage = static_cast<CellDamage*>(damage);
             kDebug(36007) << "Processing\t" << *cellDamage;
             Sheet* const damagedSheet = cellDamage->sheet();
 
             if (cellDamage->changes() & CellDamage::Appearance) {
-                const Region& region = cellDamage->region();
+                const KCRegion& region = cellDamage->region();
                 sheetView(damagedSheet)->invalidateRegion(region);
                 paintMode = Everything;
             }
             continue;
         }
 
-        if (damage->type() == Damage::Sheet) {
+        if (damage->type() == Damage::DamagedSheet) {
             SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
             kDebug(36007) << *sheetDamage;
             const SheetDamage::Changes changes = sheetDamage->changes();
@@ -2096,10 +2095,10 @@ void View::handleDamages(const QList<Damage*>& damages)
             continue;
         }
 
-        if (damage->type() == Damage::Selection) {
+        if (damage->type() == Damage::DamagedSelection) {
             SelectionDamage* selectionDamage = static_cast<SelectionDamage*>(damage);
             kDebug(36007) << "Processing\t" << *selectionDamage;
-            const Region region = selectionDamage->region();
+            const KCRegion region = selectionDamage->region();
 
             if (paintMode == Clipped) {
                 const QRectF rect = canvasWidget()->cellCoordinatesToView(region.boundingRect());

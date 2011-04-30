@@ -24,8 +24,6 @@
 #include "Localization.h"
 #include "ValueParser.h"
 
-using namespace KSpread;
-
 ValueConverter::ValueConverter(const ValueParser* parser)
         : m_parser(parser)
 {

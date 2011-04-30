@@ -26,8 +26,6 @@
 
 #include <ui_SheetPropertiesWidget.h>
 
-namespace KSpread
-{
 
 class SheetPropertiesWidget : public QWidget, public ::Ui::SheetPropertiesWidget
 {
@@ -100,7 +98,5 @@ public slots:
 private:
     SheetPropertiesWidget* m_widget;
 };
-
-} // namespace
 
 #endif /* SHEET_PROPERTIES_DIALOG */

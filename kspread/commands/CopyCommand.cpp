@@ -22,14 +22,12 @@
 #include "CopyCommand.h"
 
 #include "CellStorage.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "Sheet.h"
 
-using namespace KSpread;
-
 // era: encode references absolutely
-QDomDocument CopyCommand::saveAsXml(const Region& region, bool era)
+QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
 {
     QDomDocument xmlDoc("spreadsheet-snippet");
     xmlDoc.appendChild(xmlDoc.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""));
@@ -45,8 +43,8 @@ QDomDocument CopyCommand::saveAsXml(const Region& region, bool era)
     root.setAttribute("rows", boundingRect.height());
     root.setAttribute("columns", boundingRect.width());
 
-    const Region::ConstIterator end(region.constEnd());
-    for (Region::ConstIterator it = region.constBegin(); it != end; ++it) {
+    const KCRegion::ConstIterator end(region.constEnd());
+    for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
         Sheet *const sheet = (*it)->sheet();
         const QRect range = (*it)->rect();
         CellStorage *const storage = sheet->cellStorage();
@@ -150,7 +148,7 @@ static QString cellAsText(const Cell& cell, bool addTab)
     return result;
 }
 
-QString CopyCommand::saveAsPlainText(const Region &region)
+QString CopyCommand::saveAsPlainText(const KCRegion &region)
 {
     // Only one cell selected? => copy active cell
     if (region.isSingular()) {
@@ -177,7 +175,7 @@ QString CopyCommand::saveAsPlainText(const Region &region)
     return result;
 }
 
-QDomDocument CopyCommand::saveAsHtml(const Region &region)
+QDomDocument CopyCommand::saveAsHtml(const KCRegion &region)
 {
     QDomDocument doc("spreadsheet-html");
     QDomElement html = doc.createElement("html");
@@ -187,8 +185,8 @@ QDomDocument CopyCommand::saveAsHtml(const Region &region)
     QDomElement table = doc.createElement("table");
     body.appendChild(table);
 
-    const Region::ConstIterator end(region.constEnd());
-    for (Region::ConstIterator it(region.constBegin()); it != end; ++it) {
+    const KCRegion::ConstIterator end(region.constEnd());
+    for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         Sheet *const sheet = (*it)->sheet();
         const QRect range = (*it)->rect();
 
@@ -199,7 +197,7 @@ QDomDocument CopyCommand::saveAsHtml(const Region &region)
     return doc;
 }
 
-QString CopyCommand::saveAsCSV(const Region &region)
+QString CopyCommand::saveAsCSV(const KCRegion &region)
 {
     // TODO
     Q_UNUSED(region);

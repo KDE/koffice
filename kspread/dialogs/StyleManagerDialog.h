@@ -29,8 +29,6 @@ class QTreeWidgetItem;
 
 class KComboBox;
 
-namespace KSpread
-{
 class Selection;
 class StyleManager;
 
@@ -63,7 +61,5 @@ private:
     QTreeWidget*    m_styleList;
     KComboBox*      m_displayBox;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_STYLE_MANAGER_DIALOG

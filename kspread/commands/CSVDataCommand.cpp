@@ -27,8 +27,6 @@
 #include "Value.h"
 #include "ValueConverter.h"
 
-using namespace KSpread;
-
 CSVDataCommand::CSVDataCommand()
         : AbstractDataManipulator()
 {

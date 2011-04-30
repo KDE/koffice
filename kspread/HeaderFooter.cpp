@@ -46,8 +46,6 @@
     } while(0)
 
 
-using namespace KSpread;
-
 HeaderFooter::HeaderFooter(Sheet *sheet)
         : m_pSheet(sheet)
 {

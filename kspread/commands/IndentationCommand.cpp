@@ -30,8 +30,6 @@
 #include "Sheet.h"
 #include "Style.h"
 
-using namespace KSpread;
-
 IndentationCommand::IndentationCommand()
         : AbstractRegionCommand()
 {

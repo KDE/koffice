@@ -31,8 +31,6 @@
 
 #include <QList>
 
-using namespace KSpread;
-
 class TablePageManager::Private
 {
 public:

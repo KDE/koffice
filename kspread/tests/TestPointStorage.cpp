@@ -24,8 +24,6 @@
 
 #include "TestPointStorage.h"
 
-using namespace KSpread;
-
 void PointStorageTest::testInsertion()
 {
     PointStorage<int> storage;
@@ -1154,7 +1152,7 @@ void PointStorageTest::testSubStorage()
     // (11,  ,  ,  ,12)
 
     PointStorage<int> subStorage;
-    subStorage = storage.subStorage(Region(QRect(1, 1, 5, 5)));       // all
+    subStorage = storage.subStorage(KCRegion(QRect(1, 1, 5, 5)));       // all
     // ( 1, 2,  ,  , 3)
     // ( 4, 5, 6,  ,  )
     // (  , 7, 8,  , 9)
@@ -1168,7 +1166,7 @@ void PointStorageTest::testSubStorage()
     QCOMPARE(subStorage.m_rows, rows);
     QCOMPARE(subStorage.m_cols, cols);
 
-    subStorage = storage.subStorage(Region(QRect(1, 1, 3, 3)));       // upper left
+    subStorage = storage.subStorage(KCRegion(QRect(1, 1, 3, 3)));       // upper left
     // ( 1, 2,  )
     // ( 4, 5, 6)
     // (  , 7, 8)
@@ -1180,7 +1178,7 @@ void PointStorageTest::testSubStorage()
     QCOMPARE(subStorage.m_rows, rows);
     QCOMPARE(subStorage.m_cols, cols);
 
-    subStorage = storage.subStorage(Region(QRect(4, 4, 5, 5)));       // lower right
+    subStorage = storage.subStorage(KCRegion(QRect(4, 4, 5, 5)));       // lower right
     // (  ,  ,  ,  ,  )
     // (  ,  ,  ,  ,  )
     // (  ,  ,  ,  ,  )

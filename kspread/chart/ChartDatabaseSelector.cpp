@@ -30,13 +30,11 @@
 #include "Binding.h"
 #include "CanvasResources.h"
 #include "CellStorage.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "ui/Selection.h"
 #include "Sheet.h"
 #include "DocBase.h"
 #include "SheetAccessModel.h"
-
-using namespace KSpread;
 
 class ChartDatabaseSelector::Private
 {
@@ -76,7 +74,7 @@ void ChartDatabaseSelector::open(KoShape* shape)
 void ChartDatabaseSelector::save()
 {
     Sheet *sheet = d->selection->activeSheet();
-    const Region selectedRegion(d->widget.m_cellRegion->text(), d->map, sheet);
+    const KCRegion selectedRegion(d->widget.m_cellRegion->text(), d->map, sheet);
     if(!selectedRegion.isValid())
         return;
 
@@ -97,7 +95,7 @@ void ChartDatabaseSelector::showEvent(QShowEvent* event)
     Q_UNUSED(event);
     Q_ASSERT(m_resourceManager);
     d->selection = static_cast<Selection*>(m_resourceManager->resource(CanvasResource::Selection).value<void*>());
-    d->widget.m_cellRegion->setText(d->selection->Region::name());
+    d->widget.m_cellRegion->setText(d->selection->KCRegion::name());
 }
 
 

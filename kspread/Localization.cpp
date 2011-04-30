@@ -22,8 +22,6 @@
 
 #include <qdom.h>
 
-using namespace KSpread;
-
 Localization::Localization()
         : KLocale("kspread")
 {

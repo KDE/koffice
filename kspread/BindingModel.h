@@ -21,14 +21,12 @@
 #ifndef KSPREAD_BINDING_MODEL
 #define KSPREAD_BINDING_MODEL
 
-#include "Region.h"
+#include "KCRegion.h"
 
 #include <KoChartModel.h>
 
 #include <QAbstractTableModel>
 
-namespace KSpread
-{
 class Binding;
 
 /**
@@ -52,20 +50,18 @@ public:
     virtual bool setCellRegion(const QString& regionName);
     virtual bool isCellRegionValid(const QString& regionName) const;
 
-    const Region& region() const;
-    void setRegion(const Region& region);
+    const KCRegion& region() const;
+    void setRegion(const KCRegion& region);
 
     void emitDataChanged(const QRect& range);
-    void emitChanged(const Region& region);
+    void emitChanged(const KCRegion& region);
 
 signals:
-    void changed(const Region& region);
+    void changed(const KCRegion& region);
 
 private:
-    Region m_region;
+    KCRegion m_region;
     Binding* m_binding;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_BINDING_MODEL

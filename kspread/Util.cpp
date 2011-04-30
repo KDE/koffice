@@ -31,18 +31,16 @@
 #include "Localization.h"
 #include "Map.h"
 #include "NamedAreaManager.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
 #include "Style.h"
 
 #include <QPen>
 
-using namespace KSpread;
-
 
 //used in Cell::encodeFormula and
 //  dialogs/kspread_dlg_paperlayout.cc
-int KSpread::Util::decodeColumnLabelText(const QString &labelText)
+int KSpread::decodeColumnLabelText(const QString &labelText)
 {
     int col = 0;
     const int offset = 'a' - 'A';
@@ -69,7 +67,7 @@ int KSpread::Util::decodeColumnLabelText(const QString &labelText)
     return col;
 }
 
-int KSpread::Util::decodeRowLabelText(const QString &labelText)
+int KSpread::decodeRowLabelText(const QString &labelText)
 {
     QRegExp rx("([A-Za-z]+)([0-9]+)");
     if(rx.exactMatch(labelText))
@@ -77,7 +75,7 @@ int KSpread::Util::decodeRowLabelText(const QString &labelText)
     return 0;
 }
 
-QString KSpread::Util::encodeColumnLabelText(int column)
+QString KSpread::encodeColumnLabelText(int column)
 {
     return Cell::columnName(column);
 }
@@ -191,7 +189,7 @@ bool util_isRectValid(const QRect& rect)
 
 
 //not used anywhere
-int KSpread::Util::penCompare(QPen const & pen1, QPen const & pen2)
+int KSpread::penCompare(QPen const & pen1, QPen const & pen2)
 {
     if (pen1.style() == Qt::NoPen && pen2.style() == Qt::NoPen)
         return 0;
@@ -343,7 +341,7 @@ QPen KSpread::Odf::decodePen(const QString &border)
 }
 
 //Return true when it's a reference to cell from sheet.
-bool KSpread::Util::localReferenceAnchor(const QString &_ref)
+bool KSpread::localReferenceAnchor(const QString &_ref)
 {
     bool isLocalRef = (_ref.indexOf("http://") != 0 &&
                        _ref.indexOf("https://") != 0 &&
@@ -411,12 +409,12 @@ QString KSpread::Odf::decodeFormula(const QString& expression, const KLocale* lo
                 s.append(expression[i]);
                 if (i + 1 < expression.length())
                     s.append(expression[i+1]);
-                op = matchOperator(s);
+                op = Token::matchOperator(s);
 
                 // check for one-char operator, such as '+', ';', etc
                 if (op == Token::InvalidOp) {
                     s = QString(expression[i]);
-                    op = matchOperator(s);
+                    op = Token::matchOperator(s);
                 }
 
                 // any matched operator ?
@@ -436,7 +434,7 @@ QString KSpread::Odf::decodeFormula(const QString& expression, const KLocale* lo
         }
         case InReference: {
             if (expression[i] == ']') {
-                result.append(Region::loadOdf(reference));
+                result.append(KCRegion::loadOdf(reference));
                 reference.clear();
                 state = Start;
             } else if (expression[i] == '\'') {
@@ -552,9 +550,9 @@ QString KSpread::Odf::encodeFormula(const QString& expr, const KLocale* locale)
             // FIXME Stefan: Hack to get the apostrophes right. Fix and remove!
             const int pos = tokenText.lastIndexOf('!');
             if (pos != -1 && tokenText.left(pos).contains(' '))
-                result.append(Region::saveOdf('\'' + tokenText.left(pos) + '\'' + tokenText.mid(pos)));
+                result.append(KCRegion::saveOdf('\'' + tokenText.left(pos) + '\'' + tokenText.mid(pos)));
             else
-                result.append(Region::saveOdf(tokenText));
+                result.append(KCRegion::saveOdf(tokenText));
             result.append(']');
             break;
         }
@@ -606,15 +604,15 @@ static void replaceFormulaReference(int referencedRow, int referencedColumn, int
     const QString ref = result.mid(cellReferenceStart, cellReferenceLength);
     QRegExp rx("(|\\$)[A-Za-z]+[0-9]+");
     if (rx.exactMatch(ref)) {
-        const int c = KSpread::Util::decodeColumnLabelText(ref) + thisColumn - referencedColumn;
-        const int r = KSpread::Util::decodeRowLabelText(ref) + thisRow - referencedRow;
+        const int c = KSpread::decodeColumnLabelText(ref) + thisColumn - referencedColumn;
+        const int r = KSpread::decodeRowLabelText(ref) + thisRow - referencedRow;
         result = result.replace(cellReferenceStart,
                                 cellReferenceLength,
-                                KSpread::Util::encodeColumnLabelText(c) + QString::number(r) );
+                                KSpread::encodeColumnLabelText(c) + QString::number(r) );
     }
 }
 
-QString KSpread::Util::adjustFormulaReference(const QString& formula, int referencedRow, int referencedColumn, int thisRow, int thisColumn)
+QString KSpread::adjustFormulaReference(const QString& formula, int referencedRow, int referencedColumn, int thisRow, int thisColumn)
 {
     QString result = formula;
     if (result.isEmpty())

@@ -24,11 +24,9 @@
 #include <QItemSelection>
 
 #include "Cell.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
 
-namespace KSpread
-{
 
 /**
  * Item roles representing sheet data.
@@ -107,9 +105,9 @@ static inline QRect toRange(const QItemSelectionRange &range)
  * Converts an item selection into a cell region.
  * \ingroup Model
  */
-static inline Region toRegion(const QItemSelection &selection)
+static inline KCRegion toRegion(const QItemSelection &selection)
 {
-    Region region;
+    KCRegion region;
     for (int i = 0; i < selection.count(); ++i) {
         const QItemSelectionRange range = selection[i];
         Sheet *const sheet = static_cast<Sheet*>(range.topLeft().internalPointer());
@@ -142,15 +140,13 @@ static inline QItemSelectionRange fromRange(const QRect &range, Sheet *const she
  * Converts a cell region into an item selection.
  * \ingroup Model
  */
-static inline QItemSelection fromRegion(const Region &region)
+static inline QItemSelection fromRegion(const KCRegion &region)
 {
     QItemSelection selection;
-    for (Region::ConstIterator it = region.constBegin(), end = region.constEnd(); it != end; ++it) {
+    for (KCRegion::ConstIterator it = region.constBegin(), end = region.constEnd(); it != end; ++it) {
         selection.append(fromRange((*it)->rect(), (*it)->sheet()));
     }
     return selection;
 }
-
-} // namespace KSpread
 
 #endif // KSPREAD_MODEL_SUPPORT

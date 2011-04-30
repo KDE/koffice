@@ -27,13 +27,11 @@
 #include "HeaderFooter.h"
 #include "PrintSettings.h"
 #include "kspread_limits.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
 
 #include <KDebug>
 #include <KMessageBox>
-
-using namespace KSpread;
 
 SheetPrint::SheetPrint(Sheet *sheet)
         : d(new Private(this))
@@ -317,7 +315,7 @@ void SheetPrint::insertColumn(int col, int nbCol)
         //Validity checks
         if (left > KS_colMax) left = KS_colMax;
         if (right > KS_colMax) right = KS_colMax;
-        const Region region(QRect(QPoint(left, printRange.top()),
+        const KCRegion region(QRect(QPoint(left, printRange.top()),
                                   QPoint(right, printRange.bottom())), d->m_pSheet);
         // Trigger an update by setting it indirectly.
         PrintSettings settings = *d->m_settings;
@@ -341,7 +339,7 @@ void SheetPrint::insertRow(int row, int nbRow)
         //Validity checks
         if (top > KS_rowMax) top = KS_rowMax;
         if (bottom > KS_rowMax) bottom = KS_rowMax;
-        const Region region(QRect(QPoint(printRange.left(), top),
+        const KCRegion region(QRect(QPoint(printRange.left(), top),
                                   QPoint(printRange.right(), bottom)), d->m_pSheet);
         // Trigger an update by setting it indirectly.
         PrintSettings settings = *d->m_settings;
@@ -366,7 +364,7 @@ void SheetPrint::removeColumn(int col, int nbCol)
         //Validity checks
         if (left < 1) left = 1;
         if (right < 1) right = 1;
-        const Region region(QRect(QPoint(left, printRange.top()),
+        const KCRegion region(QRect(QPoint(left, printRange.top()),
                                   QPoint(right, printRange.bottom())), d->m_pSheet);
         settings.setPrintRegion(region);
     }
@@ -406,7 +404,7 @@ void SheetPrint::removeRow(int row, int nbRow)
         //Validity checks
         if (top < 1) top = 1;
         if (bottom < 1) bottom = 1;
-        const Region region(QRect(QPoint(printRange.left(), top),
+        const KCRegion region(QRect(QPoint(printRange.left(), top),
                                   QPoint(printRange.right(), bottom)), d->m_pSheet);
         settings.setPrintRegion(region);
     }

@@ -21,8 +21,6 @@
 
 #include <QtTest/QtTest>
 
-namespace KSpread
-{
 
 class Doc;
 class Sheet;
@@ -42,7 +40,5 @@ private:
     Sheet* m_sheet;
     Doc* m_doc;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHEET_TEST

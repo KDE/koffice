@@ -50,8 +50,6 @@
 
 #include "KoXmlReaderForward.h"
 
-namespace KSpread
-{
 class OdfLoadingContext;
 class ValueConverter;
 class ValueParser;
@@ -195,9 +193,7 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-} // namespace KSpread
-
-Q_DECLARE_METATYPE(KSpread::Validity)
-Q_DECLARE_TYPEINFO(KSpread::Validity, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(Validity)
+Q_DECLARE_TYPEINFO(Validity, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_VALIDITY

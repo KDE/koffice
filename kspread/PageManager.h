@@ -25,8 +25,6 @@
 class QRect;
 class QSizeF;
 
-namespace KSpread
-{
 class PrintSettings;
 class Sheet;
 
@@ -96,7 +94,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_PAGE_MANAGER

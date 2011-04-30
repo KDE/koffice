@@ -26,8 +26,6 @@
 #include "Sheet.h"
 #include "SheetPrint.h"
 
-using namespace KSpread;
-
 RowStyleCommand::RowStyleCommand(QUndoCommand *parent)
         : AbstractRegionCommand(parent)
         , m_height(0.0)
@@ -66,8 +64,8 @@ void RowStyleCommand::setTemplate(const RowFormat &rowFormat)
 bool RowStyleCommand::mainProcessing()
 {
     double deltaHeight = 0.0;
-    const Region::ConstIterator end(constEnd());
-    for (Region::ConstIterator it(constBegin()); it != end; ++it) {
+    const KCRegion::ConstIterator end(constEnd());
+    for (KCRegion::ConstIterator it(constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
         for (int row = range.top(); row <= range.bottom(); ++row) {
             // Save the old style.
@@ -95,7 +93,7 @@ bool RowStyleCommand::mainProcessing()
             deltaHeight += m_sheet->rowFormat(row)->height();
         }
         // Possible visual cache invalidation due to dimension change; rebuild it.
-        const Region region(1, range.top(), KS_colMax, KS_rowMax - range.bottom() + 1, m_sheet);
+        const KCRegion region(1, range.top(), KS_colMax, KS_rowMax - range.bottom() + 1, m_sheet);
         m_sheet->map()->addDamage(new CellDamage(m_sheet, region, CellDamage::Appearance));
     }
     m_sheet->adjustDocumentHeight(deltaHeight);

@@ -35,8 +35,6 @@
 
 static const int g_maximumCachedStyles = 10000;
 
-using namespace KSpread;
-
 class KDE_NO_EXPORT StyleStorage::Private
 {
 public:
@@ -112,11 +110,11 @@ Style StyleStorage::intersects(const QRect& rect) const
     return composeStyle(subStyles);
 }
 
-QList< QPair<QRectF, SharedSubStyle> > StyleStorage::undoData(const Region& region) const
+QList< QPair<QRectF, SharedSubStyle> > StyleStorage::undoData(const KCRegion& region) const
 {
     QList< QPair<QRectF, SharedSubStyle> > result;
-    Region::ConstIterator end = region.constEnd();
-    for (Region::ConstIterator it = region.constBegin(); it != end; ++it) {
+    KCRegion::ConstIterator end = region.constEnd();
+    for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
         const QRect rect = (*it)->rect();
         QList< QPair<QRectF, SharedSubStyle> > pairs = d->tree.intersectingPairs(rect).values();
         for (int i = 0; i < pairs.count(); ++i) {
@@ -258,13 +256,13 @@ void StyleStorage::insert(const QRect& rect, const SharedSubStyle& subStyle)
     regionChanged(rect);
 }
 
-void StyleStorage::insert(const Region& region, const Style& style)
+void StyleStorage::insert(const KCRegion& region, const Style& style)
 {
     if (style.isEmpty())
         return;
     foreach(const SharedSubStyle& subStyle, style.subStyles()) {
-        Region::ConstIterator end(region.constEnd());
-        for (Region::ConstIterator it(region.constBegin()); it != end; ++it) {
+        KCRegion::ConstIterator end(region.constEnd());
+        for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
             // insert substyle
             insert((*it)->rect(), subStyle);
             regionChanged((*it)->rect());
@@ -557,7 +555,7 @@ void StyleStorage::garbageCollection()
     if (currentPair.second->type() == Style::NamedStyleKey &&
             !styleManager()->style(static_cast<const NamedStyle*>(currentPair.second.data())->name)) {
         kDebug(36006) << "removing" << currentPair.second->debugData()
-        << "at" << Region(currentPair.first.toRect()).name()
+        << "at" << KCRegion(currentPair.first.toRect()).name()
         << "used" << currentPair.second->ref << "times" << endl;
         d->tree.remove(currentPair.first.toRect(), currentPair.second);
         d->subStyles[currentPair.second->type()].removeAll(currentPair.second);
@@ -578,7 +576,7 @@ void StyleStorage::garbageCollection()
             pair.second->type() == Style::DefaultStyleKey &&
             pair.first == currentPair.first) {
         kDebug(36006) << "removing default style"
-        << "at" << Region(currentPair.first.toRect()).name()
+        << "at" << KCRegion(currentPair.first.toRect()).name()
         << "used" << currentPair.second->ref << "times" << endl;
         d->tree.remove(currentPair.first.toRect(), currentPair.second);
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
@@ -592,7 +590,7 @@ void StyleStorage::garbageCollection()
             static_cast<const SubStyleOne<Style::Indentation, int>*>(currentPair.second.data())->value1 == 0 &&
             pair.first == currentPair.first) {
         kDebug(36006) << "removing default indentation"
-        << "at" << Region(currentPair.first.toRect()).name()
+        << "at" << KCRegion(currentPair.first.toRect()).name()
         << "used" << currentPair.second->ref << "times" << endl;
         d->tree.remove(currentPair.first.toRect(), currentPair.second);
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
@@ -606,7 +604,7 @@ void StyleStorage::garbageCollection()
             static_cast<const SubStyleOne<Style::Precision, int>*>(currentPair.second.data())->value1 == 0 &&
             pair.first == currentPair.first) {
         kDebug(36006) << "removing default precision"
-        << "at" << Region(currentPair.first.toRect()).name()
+        << "at" << KCRegion(currentPair.first.toRect()).name()
         << "used" << currentPair.second->ref << "times" << endl;
         d->tree.remove(currentPair.first.toRect(), currentPair.second);
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
@@ -653,7 +651,7 @@ void StyleStorage::garbageCollection()
             }
 
             kDebug(36006) << "removing" << currentPair.second->debugData()
-            << "at" << Region(currentPair.first.toRect()).name()
+            << "at" << KCRegion(currentPair.first.toRect()).name()
             << "used" << currentPair.second->ref << "times" << endl;
             d->tree.remove(currentPair.first.toRect(), currentPair.second, currentZIndex);
 #if 0

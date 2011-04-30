@@ -26,8 +26,6 @@
 #include "Style.h"
 #include "Value.h"
 
-namespace KSpread
-{
 
 /**
  * \ingroup Commands
@@ -243,7 +241,5 @@ private:
     enum Mode { Insert, Delete };
     Mode m_mode;
 };
-
-} // namespace KSpread
 
 #endif  // KSPREAD_DATA_MANIPULATORS

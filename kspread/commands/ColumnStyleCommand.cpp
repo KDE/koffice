@@ -26,8 +26,6 @@
 #include "Sheet.h"
 #include "SheetPrint.h"
 
-using namespace KSpread;
-
 ColumnStyleCommand::ColumnStyleCommand(QUndoCommand *parent)
         : AbstractRegionCommand(parent)
         , m_width(0.0)
@@ -66,8 +64,8 @@ void ColumnStyleCommand::setTemplate(const ColumnFormat &columnFormat)
 bool ColumnStyleCommand::mainProcessing()
 {
     double deltaWidth = 0.0;
-    const Region::ConstIterator end(constEnd());
-    for (Region::ConstIterator it(constBegin()); it != end; ++it) {
+    const KCRegion::ConstIterator end(constEnd());
+    for (KCRegion::ConstIterator it(constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
         for (int column = range.left(); column <= range.right(); ++column) {
             // Save the old style.
@@ -95,7 +93,7 @@ bool ColumnStyleCommand::mainProcessing()
             deltaWidth += m_sheet->columnFormat(column)->width();
         }
         // Possible visual cache invalidation due to dimension change; rebuild it.
-        const Region region(range.left(), 1, KS_colMax - range.right() + 1, KS_rowMax, m_sheet);
+        const KCRegion region(range.left(), 1, KS_colMax - range.right() + 1, KS_rowMax, m_sheet);
         m_sheet->map()->addDamage(new CellDamage(m_sheet, region, CellDamage::Appearance));
     }
     m_sheet->adjustDocumentWidth(deltaWidth);

@@ -22,8 +22,6 @@
 
 #include "ui/RegionSelector.h"
 
-using namespace KSpread::Plugins;
-
 SolverDialog::SolverDialog(Selection* selection, QWidget* parent)
         : KDialog(parent)
 {

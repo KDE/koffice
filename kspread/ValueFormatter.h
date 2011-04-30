@@ -27,8 +27,6 @@
 #include "Number.h"
 #include "Style.h"
 
-namespace KSpread
-{
 class CalculationSettings;
 class Value;
 class ValueConverter;
@@ -134,7 +132,5 @@ protected:
 private:
     const ValueConverter* m_converter;
 };
-
-}  //namespace KSpread
 
 #endif  //KSPREAD_VALUE_FORMATTER

@@ -24,8 +24,6 @@
 
 #include <kdialog.h>
 
-namespace KSpread
-{
 
 /**
  * \ingroup UI
@@ -55,7 +53,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_LIST_DIALOG

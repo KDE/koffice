@@ -39,8 +39,6 @@
 #include "Sheet.h"
 #include "Util.h"
 
-using namespace KSpread;
-
 GotoDialog::GotoDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
 {
@@ -88,7 +86,7 @@ void GotoDialog::textChanged(const QString &_text)
 void GotoDialog::slotOk()
 {
     QString tmp_upper = m_nameCell->currentText();
-    Region region(tmp_upper, m_selection->activeSheet()->map(), m_selection->activeSheet());
+    KCRegion region(tmp_upper, m_selection->activeSheet()->map(), m_selection->activeSheet());
     if (region.isValid()) {
         if (region.firstSheet() != m_selection->activeSheet())
             m_selection->emitVisibleSheetRequested(region.firstSheet());

@@ -22,8 +22,6 @@
 
 #include "TestKspreadCommon.h"
 
-using namespace KSpread;
-
 static char encodeTokenType(const Token& token)
 {
     char result = '?';

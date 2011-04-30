@@ -22,8 +22,6 @@
 #include "commands/MergeCommand.h"
 #include "Selection.h"
 
-using namespace KSpread;
-
 class MergeStrategy::Private
 {
 public:

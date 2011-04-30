@@ -24,8 +24,6 @@
 
 #include <qtest_kde.h>
 
-using namespace KSpread;
-
 class MyStyleStorage : public StyleStorage
 {
 public:

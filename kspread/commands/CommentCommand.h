@@ -22,8 +22,6 @@
 
 #include "AbstractRegionCommand.h"
 
-namespace KSpread
-{
 
 /**
  * \class CommentCommand
@@ -44,7 +42,5 @@ private:
     QString m_comment;
     QList< QPair<QRectF, QString> > m_undoData;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_COMMENT_COMMAND

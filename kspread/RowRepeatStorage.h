@@ -24,8 +24,6 @@
 
 #include "kspread_export.h"
 
-namespace KSpread
-{
 
 /**
   * Class to store row-repeat values, so on saving of a file we won't have to recalculate these entirely
@@ -52,7 +50,5 @@ private:
     // m_data[i] = j means that rows [i-j+1 , i] are the same
     QMap<int, int> m_data;
 };
-
-} // namespace KSpread
 
 #endif // ROWREPEATSTORAGE_H

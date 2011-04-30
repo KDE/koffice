@@ -59,8 +59,6 @@ class KoGenStyle;
 class KoOdfLoadingContext;
 class KoShapeLoadingContext;
 
-namespace KSpread
-{
 class Doc;
 class Formula;
 class OdfLoadingContext;
@@ -635,18 +633,16 @@ inline uint qHash(const Cell& cell)
     return (static_cast<uint>(cell.column()) << 16) + static_cast<uint>(cell.row());
 }
 
-} // namespace KSpread
-
-Q_DECLARE_TYPEINFO(KSpread::Cell, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(Cell, Q_MOVABLE_TYPE);
 
 
 /***************************************************************************
   kDebug support
 ****************************************************************************/
 
-inline QDebug operator<<(QDebug str, const KSpread::Cell& cell)
+inline QDebug operator<<(QDebug str, const Cell& cell)
 {
-    return str << qPrintable(KSpread::Cell::columnName(cell.column()) + QString::number(cell.row()));
+    return str << qPrintable(Cell::columnName(cell.column()) + QString::number(cell.row()));
 }
 
 #endif  // KSPREAD_CELL

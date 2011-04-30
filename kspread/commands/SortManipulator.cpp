@@ -27,8 +27,6 @@
 
 #include <klocale.h>
 
-using namespace KSpread;
-
 SortManipulator::SortManipulator()
         : AbstractDFManipulator()
         , m_cellStorage(0)
@@ -70,8 +68,8 @@ bool SortManipulator::preProcessing()
 
     m_cellStorage = new CellStorage(m_sheet->cellStorage()->subStorage(*this));
 
-    Region::Iterator endOfList(cells().end());
-    for (Region::Iterator it = cells().begin(); it != endOfList; ++it) {
+    KCRegion::Iterator endOfList(cells().end());
+    for (KCRegion::Iterator it = cells().begin(); it != endOfList; ++it) {
         QRect range = (*it)->rect();
         for (int col = range.left(); col <= range.right(); ++col)
             for (int row = range.top(); row <= range.bottom(); ++row) {

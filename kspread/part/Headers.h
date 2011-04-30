@@ -27,8 +27,6 @@ class QRubberBand;
 
 class KoCanvasBase;
 
-namespace KSpread
-{
 class Canvas;
 class Selection;
 class View;
@@ -209,6 +207,4 @@ private:
     bool   m_mousePressed;
     bool m_cellToolIsActive;
 };
-
-} // namespace KSpread
 #endif

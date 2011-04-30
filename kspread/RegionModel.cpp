@@ -20,10 +20,8 @@
 #include "RegionModel.h"
 
 // KSpread
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
-
-using namespace KSpread;
 
 class RegionModel::Private
 {
@@ -34,7 +32,7 @@ public:
 };
 
 
-RegionModel::RegionModel(const Region& region)
+RegionModel::RegionModel(const KCRegion& region)
         : SheetModel(region.lastSheet())
         , d(new Private)
 {

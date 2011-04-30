@@ -29,8 +29,6 @@
 
 #include <QPushButton>
 
-namespace KSpread
-{
 
 CalendarToolWidget::CalendarToolWidget(QWidget* parent)
         : QDialog(parent)
@@ -132,8 +130,6 @@ QDate CalendarToolWidget::startDate() const
 QDate CalendarToolWidget::endDate() const
 {
     return this->m_endDateWidget->date();
-}
-
 }
 
 #include "CalendarToolWidget.moc"

@@ -28,8 +28,6 @@
 
 class QKeyEvent;
 
-namespace KSpread
-{
 class CellToolBase;
 
 /**
@@ -72,7 +70,5 @@ private:
     CellToolBase *m_cellTool;
     KCompletion completionList;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_LOCATION_COMBOBOX

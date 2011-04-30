@@ -26,8 +26,6 @@
 
 #include <KoCsvImportDialog.h>
 
-namespace KSpread
-{
 class Selection;
 
 /**
@@ -66,7 +64,5 @@ private:
     Mode    m_mode;
     QString m_filename;
 };
-
-} // namespace KSpread
 
 #endif // CVSDIALOG_H

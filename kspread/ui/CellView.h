@@ -44,8 +44,6 @@
 class QFontMetricsF;
 class QRectF;
 
-namespace KSpread
-{
 class Cell;
 class Sheet;
 class SheetView;
@@ -330,8 +328,6 @@ private:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(CellView::Borders)
 
-} // namespace KSpread
-
-Q_DECLARE_TYPEINFO(KSpread::CellView, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(CellView, Q_MOVABLE_TYPE);
 
 #endif

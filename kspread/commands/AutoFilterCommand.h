@@ -22,8 +22,6 @@
 
 #include "AbstractRegionCommand.h"
 
-namespace KSpread
-{
 
 /**
  * \ingroup Commands
@@ -45,7 +43,5 @@ public:
     virtual void redo();
     virtual void undo();
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_AUTOFILTER_COMMAND

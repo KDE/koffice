@@ -25,7 +25,7 @@
 
 #include <KoXmlReader.h>
 
-#include "Region.h"
+#include "KCRegion.h"
 
 #include "kspread_export.h"
 
@@ -34,10 +34,8 @@ class QString;
 
 class KoXmlWriter;
 
-namespace KSpread
-{
 class Map;
-class Region;
+class KCRegion;
 
 /**
  * Manages named cell areas.
@@ -59,7 +57,7 @@ public:
 
     void remove(Sheet* sheet);
 
-    Region namedArea(const QString& name) const;
+    KCRegion namedArea(const QString& name) const;
     Sheet* sheet(const QString& name) const;
     bool contains(const QString& name) const;
 
@@ -69,7 +67,7 @@ public:
      */
     QList<QString> areaNames() const;
 
-    void regionChanged(const Region& region);
+    void regionChanged(const KCRegion& region);
     void updateAllNamedAreas();
 
     /// \ingroup OpenDocument
@@ -89,7 +87,7 @@ public Q_SLOTS:
      * \param region the cell range to be named
      * \param name the name of the new area
      */
-    void insert(const Region& region, const QString& name);
+    void insert(const KCRegion& region, const QString& name);
 
     void remove(const QString& name);
 
@@ -102,7 +100,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_NAMED_AREA_MANAGER

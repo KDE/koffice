@@ -42,11 +42,9 @@
 #include "FormulaStorage.h"
 #include "LoadingInfo.h"
 #include "Map.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "Sheet.h"
 #include "Util.h"
-
-using namespace KSpread;
 
 struct NamedArea {
     QString name;
@@ -76,14 +74,14 @@ NamedAreaManager::~NamedAreaManager()
     delete d;
 }
 
-void NamedAreaManager::insert(const Region& region, const QString& name)
+void NamedAreaManager::insert(const KCRegion& region, const QString& name)
 {
     // NOTE Stefan: Only contiguous regions are supported (OpenDocument compatibility).
     NamedArea namedArea;
     namedArea.range = region.lastRange();
     namedArea.sheet = region.lastSheet();
     namedArea.name = name;
-    namedArea.sheet->cellStorage()->setNamedArea(Region(region.lastRange(), region.lastSheet()), name);
+    namedArea.sheet->cellStorage()->setNamedArea(KCRegion(region.lastRange(), region.lastSheet()), name);
     d->namedAreas[name] = namedArea;
     emit namedAreaAdded(name);
 }
@@ -93,7 +91,7 @@ void NamedAreaManager::remove(const QString& name)
     if (!d->namedAreas.contains(name))
         return;
     NamedArea namedArea = d->namedAreas.value(name);
-    namedArea.sheet->cellStorage()->setNamedArea(Region(namedArea.range, namedArea.sheet), QString());
+    namedArea.sheet->cellStorage()->setNamedArea(KCRegion(namedArea.range, namedArea.sheet), QString());
     d->namedAreas.remove(name);
     emit namedAreaRemoved(name);
     const QList<Sheet*> sheets = namedArea.sheet->map()->sheetList();
@@ -117,12 +115,12 @@ void NamedAreaManager::remove(Sheet* sheet)
     }
 }
 
-KSpread::Region NamedAreaManager::namedArea(const QString& name) const
+KCRegion NamedAreaManager::namedArea(const QString& name) const
 {
     if (!d->namedAreas.contains(name))
-        return Region();
+        return KCRegion();
     const NamedArea namedArea = d->namedAreas.value(name);
-    return Region(namedArea.range, namedArea.sheet);
+    return KCRegion(namedArea.range, namedArea.sheet);
 }
 
 Sheet* NamedAreaManager::sheet(const QString& name) const
@@ -142,14 +140,14 @@ QList<QString> NamedAreaManager::areaNames() const
     return d->namedAreas.keys();
 }
 
-void NamedAreaManager::regionChanged(const Region& region)
+void NamedAreaManager::regionChanged(const KCRegion& region)
 {
     Sheet* sheet;
     QList< QPair<QRectF, QString> > namedAreas;
-    Region::ConstIterator end(region.constEnd());
-    for (Region::ConstIterator it = region.constBegin(); it != end; ++it) {
+    KCRegion::ConstIterator end(region.constEnd());
+    for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
         sheet = (*it)->sheet();
-        namedAreas = sheet->cellStorage()->namedAreas(Region((*it)->rect(), sheet));
+        namedAreas = sheet->cellStorage()->namedAreas(KCRegion((*it)->rect(), sheet));
         for (int j = 0; j < namedAreas.count(); ++j) {
             d->namedAreas[namedAreas[j].second].range = namedAreas[j].first.toRect();
             emit namedAreaModified(namedAreas[j].second);
@@ -163,7 +161,7 @@ void NamedAreaManager::updateAllNamedAreas()
     const QRect rect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax));
     const QList<Sheet*> sheets = d->map->sheetList();
     for (int i = 0; i < sheets.count(); ++i) {
-        namedAreas = sheets[i]->cellStorage()->namedAreas(Region(rect, sheets[i]));
+        namedAreas = sheets[i]->cellStorage()->namedAreas(KCRegion(rect, sheets[i]));
         for (int j = 0; j < namedAreas.count(); ++j) {
             d->namedAreas[namedAreas[j].second].range = namedAreas[j].first.toRect();
             emit namedAreaModified(namedAreas[j].second);
@@ -193,7 +191,7 @@ void NamedAreaManager::loadOdf(const KoXmlElement& body)
                 // while it's missing in the table:cell-range-address. See bug #194386 for an example.
                 Sheet* fallbackSheet = 0;
                 if (!base.isEmpty()) {
-                    Region region(Region::loadOdf(base), d->map);
+                    KCRegion region(KCRegion::loadOdf(base), d->map);
                     fallbackSheet = region.lastSheet();
                 }
                 
@@ -201,7 +199,7 @@ void NamedAreaManager::loadOdf(const KoXmlElement& body)
                 const QString range = element.attributeNS(KoXmlNS::table, "cell-range-address", QString());
                 kDebug(36003) << "Named area found, name:" << name << ", area:" << range;
 
-                Region region(Region::loadOdf(range), d->map, fallbackSheet);
+                KCRegion region(KCRegion::loadOdf(range), d->map, fallbackSheet);
                 if (!region.isValid() || !region.lastSheet()) {
                     kDebug(36003) << "invalid area";
                     continue;
@@ -220,14 +218,14 @@ void NamedAreaManager::saveOdf(KoXmlWriter& xmlWriter) const
 {
     if (d->namedAreas.isEmpty())
         return;
-    Region region;
+    KCRegion region;
     xmlWriter.startElement("table:named-expressions");
     const QList<NamedArea> namedAreas = d->namedAreas.values();
     for (int i = 0; i < namedAreas.count(); ++i) {
-        region = Region(namedAreas[i].range, namedAreas[i].sheet);
+        region = KCRegion(namedAreas[i].range, namedAreas[i].sheet);
         xmlWriter.startElement("table:named-range");
         xmlWriter.addAttribute("table:name", namedAreas[i].name);
-        xmlWriter.addAttribute("table:base-cell-address", Region(1, 1, namedAreas[i].sheet).saveOdf());
+        xmlWriter.addAttribute("table:base-cell-address", KCRegion(1, 1, namedAreas[i].sheet).saveOdf());
         xmlWriter.addAttribute("table:cell-range-address", region.saveOdf());
         xmlWriter.endElement();
     }
@@ -266,7 +264,7 @@ void NamedAreaManager::loadXML(const KoXmlElement& parent)
                 if (rect.hasAttribute("bottom-rect"))
                     bottom = rect.attribute("bottom-rect").toInt(&ok);
             }
-            insert(Region(QRect(QPoint(left, top), QPoint(right, bottom)), sheet), refname);
+            insert(KCRegion(QRect(QPoint(left, top), QPoint(right, bottom)), sheet), refname);
         }
     }
 }

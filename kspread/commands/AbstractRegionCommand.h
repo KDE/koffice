@@ -22,12 +22,10 @@
 
 #include <QUndoCommand>
 
-#include "Region.h"
+#include "KCRegion.h"
 
 class KoCanvasBase;
 
-namespace KSpread
-{
 class Sheet;
 
 /**
@@ -35,7 +33,7 @@ class Sheet;
  * \ingroup Commands
  * \brief Abstract base class for all region related operations.
  */
-class KSPREAD_EXPORT AbstractRegionCommand : public Region, public QUndoCommand
+class KSPREAD_EXPORT AbstractRegionCommand : public KCRegion, public QUndoCommand
 {
 public:
     /**
@@ -99,7 +97,7 @@ public:
 
 protected:
     /**
-     * Processes \p element , a Region::Point or a Region::Range .
+     * Processes \p element , a KCRegion::Point or a KCRegion::Range .
      * Invoked by mainProcessing() .
      */
     virtual bool process(Element*) {
@@ -140,7 +138,5 @@ protected:
     bool    m_success   : 1;
     bool    m_checkLock : 1;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_ABSTRACT_REGION_COMMAND

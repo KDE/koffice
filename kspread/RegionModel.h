@@ -22,9 +22,7 @@
 
 #include "SheetModel.h"
 
-namespace KSpread
-{
-class Region;
+class KCRegion;
 
 /**
  * A model for a contiguous cell region.
@@ -33,7 +31,7 @@ class Region;
 class RegionModel : public SheetModel
 {
 public:
-    RegionModel(const Region& region);
+    RegionModel(const KCRegion& region);
     virtual ~RegionModel();
 
     /**
@@ -50,7 +48,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_REGION_MODEL

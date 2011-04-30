@@ -22,9 +22,6 @@
 
 #include "AbstractRegionCommand.h"
 
-namespace KSpread
-{
-
 /**
  * \ingroup Commands
  * \brief Sets/Unsets manual page breaks.
@@ -45,7 +42,5 @@ protected:
 private:
     Mode m_mode;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_PAGE_BREAK_COMMAND

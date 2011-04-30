@@ -25,8 +25,6 @@
 #include "Sheet.h"
 #include "SheetPrint.h"
 
-using namespace KSpread;
-
 PageBreakCommand::PageBreakCommand(QUndoCommand *parent)
         : AbstractRegionCommand(parent)
         , m_mode(BreakBeforeColumn)

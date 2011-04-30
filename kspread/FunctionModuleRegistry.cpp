@@ -28,8 +28,6 @@
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
 
-using namespace KSpread;
-
 class FunctionModuleRegistry::Private
 {
 public:

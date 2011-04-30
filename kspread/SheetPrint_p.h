@@ -24,8 +24,6 @@
 
 #include <QList>
 
-namespace KSpread
-{
 class HeaderFooter;
 class Sheet;
 class SheetPrint;
@@ -156,7 +154,5 @@ public:
      */
     int m_maxCheckedNewPageY;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_SHEET_PRINT_P

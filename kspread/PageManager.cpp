@@ -20,11 +20,9 @@
 #include "PageManager.h"
 
 #include "PrintSettings.h"
-#include "Region.h"
+#include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "Sheet.h"
-
-using namespace KSpread;
 
 class PageManager::Private
 {
@@ -59,8 +57,8 @@ void PageManager::layoutPages()
     if (settings.pageOrder() == PrintSettings::LeftToRight) {
 //         kDebug() << "processing printRanges" << settings.printRegion();
         // iterate over the print ranges
-        Region::ConstIterator end = settings.printRegion().constEnd();
-        for (Region::ConstIterator it = settings.printRegion().constBegin(); it != end; ++it) {
+        KCRegion::ConstIterator end = settings.printRegion().constEnd();
+        for (KCRegion::ConstIterator it = settings.printRegion().constBegin(); it != end; ++it) {
             if (!(*it)->isValid())
                 continue;
 
@@ -123,8 +121,8 @@ void PageManager::layoutPages()
     } else { // if (settings.pageOrder() == PrintSettings::TopToBottom)
 //         kDebug() << "processing printRanges" << settings.printRegion();
         // iterate over the print ranges
-        Region::ConstIterator end = settings.printRegion().constEnd();
-        for (Region::ConstIterator it = settings.printRegion().constBegin(); it != end; ++it) {
+        KCRegion::ConstIterator end = settings.printRegion().constEnd();
+        for (KCRegion::ConstIterator it = settings.printRegion().constBegin(); it != end; ++it) {
             if (!(*it)->isValid())
                 continue;
 

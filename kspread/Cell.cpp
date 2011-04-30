@@ -95,8 +95,6 @@
 #include <QTextDocument>
 #include <QTextCursor>
 
-using namespace KSpread;
-
 class Cell::Private : public QSharedData
 {
 public:
@@ -314,7 +312,7 @@ QString Cell::comment() const
 
 void Cell::setComment(const QString& comment)
 {
-    sheet()->cellStorage()->setComment(Region(cellPosition()), comment);
+    sheet()->cellStorage()->setComment(KCRegion(cellPosition()), comment);
 }
 
 Conditions Cell::conditions() const
@@ -324,7 +322,7 @@ Conditions Cell::conditions() const
 
 void Cell::setConditions(const Conditions& conditions)
 {
-    sheet()->cellStorage()->setConditions(Region(cellPosition()), conditions);
+    sheet()->cellStorage()->setConditions(KCRegion(cellPosition()), conditions);
 }
 
 Database Cell::database() const
@@ -360,7 +358,7 @@ Style Cell::effectiveStyle() const
 
 void Cell::setStyle(const Style& style)
 {
-    sheet()->cellStorage()->setStyle(Region(cellPosition()), style);
+    sheet()->cellStorage()->setStyle(KCRegion(cellPosition()), style);
     sheet()->cellStorage()->styleStorage()->contains(cellPosition());
 }
 
@@ -371,7 +369,7 @@ Validity Cell::validity() const
 
 void Cell::setValidity(Validity validity)
 {
-    sheet()->cellStorage()->setValidity(Region(cellPosition()), validity);
+    sheet()->cellStorage()->setValidity(KCRegion(cellPosition()), validity);
 }
 
 
@@ -568,13 +566,13 @@ QString Cell::encodeFormula(bool fixedReferences) const
                 result.append(token.text()); // simply keep the area name
                 break;
             }
-            const Region region(token.text(), sheet()->map());
+            const KCRegion region(token.text(), sheet()->map());
             // Actually, a contiguous region, but the fixation is needed
-            Region::ConstIterator end = region.constEnd();
-            for (Region::ConstIterator it = region.constBegin(); it != end; ++it) {
+            KCRegion::ConstIterator end = region.constEnd();
+            for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
                 if (!(*it)->isValid())
                     continue;
-                if ((*it)->type() == Region::Element::Point) {
+                if ((*it)->type() == KCRegion::Element::Point) {
                     if ((*it)->sheet())
                         result.append((*it)->sheet()->sheetName() + '!');
                     const QPoint pos = (*it)->rect().topLeft();
@@ -590,7 +588,7 @@ QString Cell::encodeFormula(bool fixedReferences) const
                         result.append(QChar(0xA7) + QString("%1#").arg(pos.y()));
                     else
                         result.append(QString("#%1#").arg(pos.y() - (int)d->row));
-                } else { // ((*it)->type() == Region::Range)
+                } else { // ((*it)->type() == KCRegion::Range)
                     if ((*it)->sheet())
                         result.append((*it)->sheet()->sheetName() + '!');
                     QPoint pos = (*it)->rect().topLeft();
@@ -1171,7 +1169,7 @@ bool Cell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
     }
     if (isFormula()) {
         //kDebug(36003) <<"Formula found";
-        QString formula = Odf::encodeFormula(userInput(), locale());
+        QString formula = KSpread::Odf::encodeFormula(userInput(), locale());
         xmlwriter.addAttribute("table:formula", formula);
     } else if (!link().isEmpty()) {
         //kDebug(36003)<<"Link found";
@@ -1179,7 +1177,7 @@ bool Cell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
         xmlwriter.startElement("text:a");
         const QString url = link();
         //Reference cell is started by '#'
-        if (Util::localReferenceAnchor(url))
+        if (KSpread::localReferenceAnchor(url))
             xmlwriter.addAttribute("xlink:href", ('#' + url));
         else
             xmlwriter.addAttribute("xlink:href", url);
@@ -1366,7 +1364,7 @@ bool Cell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext,
                 break;
             }
         }
-        oasisFormula = Odf::decodeFormula(oasisFormula, locale(), namespacePrefix);
+        oasisFormula = KSpread::Odf::decodeFormula(oasisFormula, locale(), namespacePrefix);
         setUserInput(oasisFormula);
     } else if (!userInput().isEmpty() && userInput().at(0) == '=')  //prepend ' to the text to avoid = to be painted
         setUserInput(userInput().prepend('\''));
@@ -1776,7 +1774,7 @@ void Cell::loadOdfObject(const KoXmlElement &element, KoShapeLoadingContext &sha
         return;
     }
 
-    Region endCell(Region::loadOdf(shape->additionalAttribute("table:end-cell-address")),
+    KCRegion endCell(KCRegion::loadOdf(shape->additionalAttribute("table:end-cell-address")),
                    d->sheet->map(), d->sheet);
     if (!endCell.isValid() || !endCell.isSingular())
         return;

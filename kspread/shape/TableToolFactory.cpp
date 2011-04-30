@@ -25,8 +25,6 @@
 #include "TableShape.h"
 #include "TableTool.h"
 
-using namespace KSpread;
-
 TableToolFactory::TableToolFactory(QObject* parent)
         : KoToolFactoryBase(parent, "TableToolFactoryId")
 {

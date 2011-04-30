@@ -44,8 +44,6 @@ class QSortFilterProxyModel;
 class KComboBox;
 class KLineEdit;
 
-namespace KSpread
-{
 class CellEditorBase;
 class FunctionDescription;
 class Selection;
@@ -186,9 +184,7 @@ private:
      */
     bool refresh_result;
 
-    KSpread::FunctionDescription* m_desc;
+    FunctionDescription* m_desc;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FORMULA_DIALOG

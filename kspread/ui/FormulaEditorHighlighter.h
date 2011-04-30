@@ -26,8 +26,6 @@
 
 class QTextEdit;
 
-namespace KSpread
-{
 class Selection;
 class Tokens;
 
@@ -90,7 +88,5 @@ private:
     class Private;
     Private * const d;
 };
-
-} // namespace KSpread
 
 #endif // KSPREAD_FORMULA_EDITOR_HIGHLIGHTER
