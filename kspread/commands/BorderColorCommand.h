@@ -23,7 +23,7 @@
 #include <QPair>
 #include <QColor>
 #include "AbstractRegionCommand.h"
-#include "Style.h"
+#include "KCStyle.h"
 
 
 /**

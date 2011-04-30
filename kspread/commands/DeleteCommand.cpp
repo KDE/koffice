@@ -118,7 +118,7 @@ bool DeleteCommand::process(Element* element)
     // the rect storages
     m_sheet->cellStorage()->setComment(KCRegion(range, element->sheet()), QString());
     m_sheet->cellStorage()->setConditions(KCRegion(range, element->sheet()), Conditions());
-    Style style;
+    KCStyle style;
     style.setDefault();
     m_sheet->cellStorage()->setStyle(KCRegion(range, element->sheet()), style);
     m_sheet->cellStorage()->setValidity(KCRegion(range, element->sheet()), Validity());

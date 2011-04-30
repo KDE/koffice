@@ -30,7 +30,7 @@
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "StyleManager.h"
 #include "Util.h"
 #include "ValueCalc.h"
@@ -78,7 +78,7 @@ class Conditions::Private : public QSharedData
 {
 public:
     QLinkedList<Conditional> conditionList;
-    Style defaultStyle;
+    KCStyle defaultStyle;
 };
 
 Conditions::Conditions()
@@ -100,12 +100,12 @@ bool Conditions::isEmpty() const
     return d->conditionList.isEmpty();
 }
 
-Style Conditions::testConditions( const Cell& cell ) const
+KCStyle Conditions::testConditions( const Cell& cell ) const
 {
     Conditional condition;
     if (currentCondition(cell, condition)) {
         StyleManager *const styleManager = cell.sheet()->map()->styleManager();
-        Style *const style = styleManager->style(condition.styleName);
+        KCStyle *const style = styleManager->style(condition.styleName);
         if (style)
             return *style;
     }
@@ -273,12 +273,12 @@ void Conditions::setConditionList(const QLinkedList<Conditional> & list)
     d->conditionList = list;
 }
 
-Style Conditions::defaultStyle() const
+KCStyle Conditions::defaultStyle() const
 {
     return d->defaultStyle;
 }
 
-void Conditions::setDefaultStyle(const Style &style)
+void Conditions::setDefaultStyle(const KCStyle &style)
 {
     d->defaultStyle = style;
 }

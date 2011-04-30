@@ -35,7 +35,7 @@
 #include "Map.h"
 #include "KCRegion.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "Value.h"
 
 
@@ -43,7 +43,7 @@ class Inspector::Private
 {
 public:
     Cell cell;
-    Style style;
+    KCStyle style;
     Sheet* sheet;
 
     QTreeWidget *cellView;
@@ -96,7 +96,7 @@ void Inspector::Private::handleCell()
     new QTreeWidgetItem(cellView, QStringList() << "Empty" << boolAsString(cell.isEmpty()));
     new QTreeWidgetItem(cellView, QStringList() << "Formula" << boolAsString(cell.isFormula()));
 //   new QTreeWidgetItem( cellView, QStringList() << "Format Properties" << longAsHexstring( static_cast<long>( cell.style()->propertiesMask() ) ) );
-//   new QTreeWidgetItem( cellView, QStringList() << "Style Properties" << longAsHexstring( static_cast<long>( cell.style()->style()->features() ) ) );
+//   new QTreeWidgetItem( cellView, QStringList() << "KCStyle Properties" << longAsHexstring( static_cast<long>( cell.style()->style()->features() ) ) );
     new QTreeWidgetItem(cellView, QStringList() << "Text" << cell.userInput());
     new QTreeWidgetItem(cellView, QStringList() << "Text (Displayed)" <<
                         cell.displayText().replace(QChar('\n'), "\\n"));
@@ -114,9 +114,9 @@ void Inspector::Private::handleCell()
 void Inspector::Private::handleStyle() // direct style access
 {
     styleView->clear();
-    const Style style = cell.style();
+    const KCStyle style = cell.style();
 
-    new QTreeWidgetItem(styleView, QStringList() << "Style Name" << style.parentName());
+    new QTreeWidgetItem(styleView, QStringList() << "KCStyle Name" << style.parentName());
 
     new QTreeWidgetItem(styleView, QStringList() << "Angle" << QString::number(style.angle()));
     new QTreeWidgetItem(styleView, QStringList() << "Multirow" << boolAsString(style.wrapText()));
@@ -128,13 +128,13 @@ void Inspector::Private::handleStyle() // direct style access
 
     QTreeWidgetItem* flags = new QTreeWidgetItem(styleView, QStringList("Flags"));
     new QTreeWidgetItem(flags, QStringList() << "Border (left)" <<
-                        boolAsString(style.hasAttribute(Style::LeftPen)));
+                        boolAsString(style.hasAttribute(KCStyle::LeftPen)));
     new QTreeWidgetItem(flags, QStringList() << "Border (right)" <<
-                        boolAsString(style.hasAttribute(Style::RightPen)));
+                        boolAsString(style.hasAttribute(KCStyle::RightPen)));
     new QTreeWidgetItem(flags, QStringList() << "Border (top)" <<
-                        boolAsString(style.hasAttribute(Style::TopPen)));
+                        boolAsString(style.hasAttribute(KCStyle::TopPen)));
     new QTreeWidgetItem(flags, QStringList() << "Border (bottom)" <<
-                        boolAsString(style.hasAttribute(Style::BottomPen)));
+                        boolAsString(style.hasAttribute(KCStyle::BottomPen)));
 
     new QTreeWidgetItem(styleView, QStringList() << "Border pen width (bottom)" <<
                         QString::number(style.bottomBorderPen().width()));
@@ -192,7 +192,7 @@ Inspector::Inspector(const Cell& cell)
     d->cellView->setHeaderLabels(QStringList() << "Key" << "Value");
 
     QFrame* stylePage = new QFrame();
-    addPage(stylePage, QString("Style"));
+    addPage(stylePage, QString("KCStyle"));
     QVBoxLayout* styleLayout = new QVBoxLayout(stylePage);
     d->styleView = new QTreeWidget(stylePage);
     styleLayout->addWidget(d->styleView);

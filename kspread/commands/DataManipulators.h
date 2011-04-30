@@ -23,7 +23,7 @@
 
 #include "AbstractRegionCommand.h"
 #include "Global.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "Value.h"
 
 
@@ -91,7 +91,7 @@ public:
     }
 protected:
     /** this method should return new format for a given cell */
-    virtual Style newFormat(Element *element, int col, int row) = 0;
+    virtual KCStyle newFormat(Element *element, int col, int row) = 0;
 
     bool m_changeformat : 1;
 };
@@ -178,7 +178,7 @@ public:
 protected:
     virtual Value newValue(Element *element, int col, int row,
                            bool *parse, Format::Type *fmtType);
-    virtual Style newFormat(Element *element, int col, int row);
+    virtual KCStyle newFormat(Element *element, int col, int row);
     Direction m_dir;
 };
 

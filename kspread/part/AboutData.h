@@ -24,17 +24,13 @@
 #include <klocale.h>
 #include <kofficeversion.h>
 
-
 static const char* description = I18N_NOOP("KOffice Spreadsheet Application");
-
-// Always the same as the KOffice version
-static const char* version = KOFFICE_VERSION_STRING;
 
 KAboutData * newAboutData()
 {
     KAboutData * aboutData = new KAboutData("kspread", 0, ki18n("KSpread"),
-                                            version, ki18n(description), KAboutData::License_LGPL,
-                                            ki18n("(c) 1998-2011, The KSpread Team"), KLocalizedString(),
+            KOFFICE_VERSION_STRING, ki18n(description), KAboutData::License_LGPL,
+            ki18n("(c) 1998-2011, The KSpread Team"), KLocalizedString(),
                                             "http://www.koffice.org/kspread/");
     aboutData->addAuthor(ki18n("Torben Weis"), ki18n("Original Author"), "weis@kde.org");
     aboutData->addAuthor(ki18n("Marijn Kruisselbrink"), ki18n("Maintainer"), "m.kruisselbrink@student.tue.nl");

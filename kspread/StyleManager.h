@@ -23,7 +23,7 @@
 #include "kspread_export.h"
 #include <KoXmlReader.h>
 
-#include <Style.h>
+#include <KCStyle.h>
 
 class QDomElement;
 class QDomDocument;
@@ -40,7 +40,7 @@ class ValueParser;
 /**
  * \class StyleManager
  * \brief Manages cell styles
- * \ingroup Style
+ * \ingroup KCStyle
  * The StyleManager takes care of named styles. It also provides some static
  * methods for the preloading of OpenDocument autostyles.
  */

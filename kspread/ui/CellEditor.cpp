@@ -30,7 +30,7 @@
 #include "Map.h"
 #include "Selection.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 
 // KOffice
 #include <KoDpi.h>

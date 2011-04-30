@@ -42,7 +42,7 @@
 #include "KCRegion.h"
 #include "Sheet.h"
 #include "SheetPrint.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "StyleManager.h"
 
 using namespace std;
@@ -140,7 +140,7 @@ QDomElement RowFormat::save(QDomDocument& doc, int yshift) const
     if (d->hide)
         row.setAttribute("hide", (int) d->hide);
 
-    const Style style = d->sheet->cellStorage()->style(QRect(1, d->row, KS_colMax, 1));
+    const KCStyle style = d->sheet->cellStorage()->style(QRect(1, d->row, KS_colMax, 1));
     if (!style.isEmpty()) {
         kDebug(36003) << "saving cell style of row" << d->row;
         QDomElement format;
@@ -188,7 +188,7 @@ bool RowFormat::load(const KoXmlElement & row, int yshift, Paste::Mode mode)
     KoXmlElement f(row.namedItem("format").toElement());
 
     if (!f.isNull() && (mode == Paste::Normal || mode == Paste::Format || mode == Paste::NoBorder)) {
-        Style style;
+        KCStyle style;
         if (!style.loadXML(f, mode))
             return false;
         d->sheet->cellStorage()->setStyle(KCRegion(QRect(1, d->row, KS_colMax, 1)), style);
@@ -390,7 +390,7 @@ QDomElement ColumnFormat::save(QDomDocument& doc, int xshift) const
     if (d->hide)
         col.setAttribute("hide", (int) d->hide);
 
-    const Style style = d->sheet->cellStorage()->style(QRect(d->column, 1, 1, KS_rowMax));
+    const KCStyle style = d->sheet->cellStorage()->style(QRect(d->column, 1, 1, KS_rowMax));
     if (!style.isEmpty()) {
         kDebug(36003) << "saving cell style of column" << d->column;
         QDomElement format(doc.createElement("format"));
@@ -438,7 +438,7 @@ bool ColumnFormat::load(const KoXmlElement & col, int xshift, Paste::Mode mode)
     KoXmlElement f(col.namedItem("format").toElement());
 
     if (!f.isNull() && (mode == Paste::Normal || mode == Paste::Format || mode == Paste::NoBorder)) {
-        Style style;
+        KCStyle style;
         if (!style.loadXML(f, mode))
             return false;
         d->sheet->cellStorage()->setStyle(KCRegion(QRect(d->column, 1, 1, KS_rowMax)), style);

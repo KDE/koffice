@@ -44,7 +44,7 @@
 #include "Localization.h"
 #include "ui/Selection.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "StyleManager.h"
 
 #include "commands/AutoFormatCommand.h"
@@ -63,7 +63,7 @@ public:
     KComboBox* combo;
     QLabel* label;
     QList<Entry> entries;
-    QList<Style> styles;
+    QList<KCStyle> styles;
 
 public:
     bool parseXML(const KoXmlDocument& doc);
@@ -73,7 +73,7 @@ AutoFormatDialog::AutoFormatDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
         , d(new Private())
 {
-    setCaption(i18n("Sheet Style"));
+    setCaption(i18n("Sheet KCStyle"));
     setObjectName("AutoAutoFormatDialog");
     setModal(true);
     setButtons(Ok | Cancel);
@@ -100,7 +100,7 @@ AutoFormatDialog::AutoFormatDialog(QWidget* parent, Selection* selection)
     QStringList::ConstIterator it = lst.begin();
     for (; it != lst.end(); ++it) {
         KConfig config(*it, KConfig::SimpleConfig);
-        const KConfigGroup sheetStyleGroup = config.group("Sheet-Style");
+        const KConfigGroup sheetStyleGroup = config.group("Sheet-KCStyle");
 
         Entry e;
         e.config = *it;
@@ -182,12 +182,12 @@ bool AutoFormatDialog::Private::parseXML(const KoXmlDocument& doc)
 {
     styles.clear();
     for (int i = 0; i < 16; ++i)
-        styles.append(Style());
+        styles.append(KCStyle());
 
     KoXmlElement e = doc.documentElement().firstChild().toElement();
     for (; !e.isNull(); e = e.nextSibling().toElement()) {
         if (e.tagName() == "cell") {
-            Style style;
+            KCStyle style;
             KoXmlElement tmpElement(e.namedItem("format").toElement());
             if (!style.loadXML(tmpElement))
                 return false;

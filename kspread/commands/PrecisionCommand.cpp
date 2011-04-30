@@ -26,7 +26,7 @@
 #include "Cell.h"
 #include "CellStorage.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 
 PrecisionCommand::PrecisionCommand()
         : AbstractRegionCommand()
@@ -36,7 +36,7 @@ PrecisionCommand::PrecisionCommand()
 
 bool PrecisionCommand::mainProcessing()
 {
-    Style style;
+    KCStyle style;
     if (!m_reverse) {
         // increase the precision
         style.setPrecision(1);

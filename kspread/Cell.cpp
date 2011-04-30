@@ -62,7 +62,7 @@
 #include "RowColumnFormat.h"
 #include "ShapeApplicationData.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "StyleManager.h"
 #include "Util.h"
 #include "Value.h"
@@ -340,23 +340,23 @@ void Cell::setFormula(const Formula& formula)
     sheet()->cellStorage()->setFormula(column(), row(), formula);
 }
 
-Style Cell::style() const
+KCStyle Cell::style() const
 {
     return sheet()->cellStorage()->style(d->column, d->row);
 }
 
-Style Cell::effectiveStyle() const
+KCStyle Cell::effectiveStyle() const
 {
-    Style style = sheet()->cellStorage()->style(d->column, d->row);
+    KCStyle style = sheet()->cellStorage()->style(d->column, d->row);
     // use conditional formatting attributes
-    const Style conditionalStyle = conditions().testConditions(*this);
+    const KCStyle conditionalStyle = conditions().testConditions(*this);
     if (!conditionalStyle.isEmpty()) {
         style.merge(conditionalStyle);
     }
     return style;
 }
 
-void Cell::setStyle(const Style& style)
+void Cell::setStyle(const KCStyle& style)
 {
     sheet()->cellStorage()->setStyle(KCRegion(cellPosition()), style);
     sheet()->cellStorage()->styleStorage()->contains(cellPosition());
@@ -422,7 +422,7 @@ QString Cell::displayText() const
         return QString();
 
     QString string;
-    const Style style = effectiveStyle();
+    const KCStyle style = effectiveStyle();
     // Display a formula if warranted.  If not, display the value instead;
     // this is the most common case.
     if (isFormula() && sheet()->getShowFormula() && !(sheet()->isProtected() && style.hideFormula())) {
@@ -515,19 +515,19 @@ bool Cell::needsPrinting() const
     if (!comment().trimmed().isEmpty())
         return true;
 
-    const Style style = effectiveStyle();
+    const KCStyle style = effectiveStyle();
 
     // Cell borders?
-    if (style.hasAttribute(Style::TopPen) ||
-            style.hasAttribute(Style::LeftPen) ||
-            style.hasAttribute(Style::RightPen) ||
-            style.hasAttribute(Style::BottomPen) ||
-            style.hasAttribute(Style::FallDiagonalPen) ||
-            style.hasAttribute(Style::GoUpDiagonalPen))
+    if (style.hasAttribute(KCStyle::TopPen) ||
+            style.hasAttribute(KCStyle::LeftPen) ||
+            style.hasAttribute(KCStyle::RightPen) ||
+            style.hasAttribute(KCStyle::BottomPen) ||
+            style.hasAttribute(KCStyle::FallDiagonalPen) ||
+            style.hasAttribute(KCStyle::GoUpDiagonalPen))
         return true;
 
     // Background color or brush?
-    if (style.hasAttribute(Style::BackgroundBrush)) {
+    if (style.hasAttribute(KCStyle::BackgroundBrush)) {
         QBrush brush = style.backgroundBrush();
 
         // Only brushes that are visible (ie. they have a brush style
@@ -537,7 +537,7 @@ bool Cell::needsPrinting() const
             return true;
     }
 
-    if (style.hasAttribute(Style::BackgroundColor)) {
+    if (style.hasAttribute(KCStyle::BackgroundColor)) {
         kDebug(36004) << "needsPrinting: Has background color";
         QColor backgroundColor = style.backgroundColor();
 
@@ -733,19 +733,19 @@ bool Cell::makeFormula()
 
 int Cell::effectiveAlignX() const
 {
-    const Style style = effectiveStyle();
+    const KCStyle style = effectiveStyle();
     int align = style.halign();
-    if (align == Style::HAlignUndefined) {
+    if (align == KCStyle::HAlignUndefined) {
         //numbers should be right-aligned by default, as well as BiDi text
         if ((style.formatType() == Format::Text) || value().isString())
-            align = (displayText().isRightToLeft()) ? Style::Right : Style::Left;
+            align = (displayText().isRightToLeft()) ? KCStyle::Right : KCStyle::Left;
         else {
             Value val = value();
             while (val.isArray()) val = val.element(0, 0);
             if (val.isBoolean() || val.isNumber())
-                align = Style::Right;
+                align = KCStyle::Right;
             else
-                align = Style::Left;
+                align = KCStyle::Left;
         }
     }
     return align;
@@ -1095,7 +1095,7 @@ bool Cell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
         font = cell.format()->textFont(i, row);
         m_styles.addFont(font);
 
-        if (cell.format()->hasProperty(Style::SComment))
+        if (cell.format()->hasProperty(KCStyle::SComment))
             hasComment = true;
     }
 #endif
@@ -1103,7 +1103,7 @@ bool Cell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
     if (link().isEmpty())
         saveOdfValue(xmlwriter);
 
-    const Style cellStyle = style();
+    const KCStyle cellStyle = style();
 
     // Either there's no column and row default and the style's not the default style,
     // or the style is different to one of them. The row default takes precedence.
@@ -1282,8 +1282,8 @@ void Cell::saveOdfValue(KoXmlWriter &xmlWriter)
     }
     case Value::fmt_Money: {
         xmlWriter.addAttribute("office:value-type", "currency");
-        const Style style = this->style();
-        if (style.hasAttribute(Style::CurrencyFormat)) {
+        const KCStyle style = this->style();
+        if (style.hasAttribute(KCStyle::CurrencyFormat)) {
             Currency currency = style.currency();
             xmlWriter.addAttribute("office:currency", currency.code());
         }
@@ -1401,7 +1401,7 @@ bool Cell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext,
                 value.setFormat(Value::fmt_Number);
                 setValue(value);
 #if 0
-                Style style;
+                KCStyle style;
                 style.setFormatType(Format::Number);
                 setStyle(style);
 #endif
@@ -1425,7 +1425,7 @@ bool Cell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext,
                 }
                 /* TODO: somehow make this work again, all setStyle calls here will be overwritten by cell styles later
                 if( style.isEmpty() ) {
-                    Style style;
+                    KCStyle style;
                     style.setCurrency(currency);
                     setStyle(style);
                 } */
@@ -1440,7 +1440,7 @@ bool Cell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext,
                     setUserInput(sheet()->map()->converter()->asString(value).asString());
 // FIXME Stefan: Should be handled by Value::Format. Verify and remove!
 #if 0
-                Style style;
+                KCStyle style;
                 style.setFormatType(Format::Percentage);
                 setStyle(style);
 #endif
@@ -1490,7 +1490,7 @@ bool Cell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext,
 // FIXME Stefan: Should be handled by Value::Format. Verify and remove!
 //Sebsauer: Fixed now. Value::Format handles it correct.
 #if 0
-                Style s;
+                KCStyle s;
                 s.setFormatType(Format::ShortDate);
                 setStyle(s);
 #endif
@@ -1528,7 +1528,7 @@ bool Cell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext,
                 setValue(Value(QTime(hours % 24, minutes, seconds), sheet()->map()->calculationSettings()));
 // FIXME Stefan: Should be handled by Value::Format. Verify and remove!
 #if 0
-                Style style;
+                KCStyle style;
                 style.setFormatType(Format::Time);
                 setStyle(style);
 #endif
@@ -1544,7 +1544,7 @@ bool Cell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext,
             }
 // FIXME Stefan: Should be handled by Value::Format. Verify and remove!
 #if 0
-            Style style;
+            KCStyle style;
             style.setFormatType(Format::Text);
             setStyle(style);
 #endif
@@ -1684,7 +1684,7 @@ void Cell::loadOdfCellText(const KoXmlElement& parent, OdfLoadingContext& tableC
             // this is because they would currently be loaded twice, once by the KoTextLoader
             // and later properly by the cell itself
 
-            Style style; style.setDefault();
+            KCStyle style; style.setDefault();
             if (!cellStyleName.isEmpty()) {
                 if (autoStyles.contains(cellStyleName))
                     style.merge(autoStyles[cellStyleName]);
@@ -1712,7 +1712,7 @@ void Cell::loadOdfCellText(const KoXmlElement& parent, OdfLoadingContext& tableC
 
     //Enable word wrapping if multiple lines of text have been found.
     if (multipleTextParagraphsFound) {
-        Style newStyle;
+        KCStyle newStyle;
         newStyle.setWrapText(true);
         setStyle(newStyle);
     }
@@ -1861,7 +1861,7 @@ bool Cell::load(const KoXmlElement & cell, int _xshift, int _yshift,
         if (mergedXCells != 0 || mergedYCells != 0)
             mergeCells(d->column, d->row, mergedXCells, mergedYCells);
 
-        Style style;
+        KCStyle style;
         if (!style.loadXML(formatElement, mode))
             return false;
         setStyle(style);

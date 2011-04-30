@@ -67,7 +67,7 @@
 #include "Map.h"
 #include "ui/Selection.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "StyleManager.h"
 #include "StyleStorage.h"
 #include "ValueFormatter.h"
@@ -162,7 +162,7 @@ GeneralTab::GeneralTab(QWidget* parent, CellFormatDialog * dlg)
     layout->setSpacing(KDialog::spacingHint());
 
     QGroupBox * groupBox = new QGroupBox(this);
-    groupBox->setTitle(i18n("Style"));
+    groupBox->setTitle(i18n("KCStyle"));
 
     QGridLayout * groupBoxLayout = new QGridLayout(groupBox);
     groupBoxLayout->setAlignment(Qt::AlignTop);
@@ -215,7 +215,7 @@ GeneralTab::GeneralTab(QWidget* parent, CellFormatDialog * dlg)
     layout->addWidget(groupBox, 0, 0);
     layout->addItem(spacer, 1, 0);
 
-    if (m_dlg->getStyle()->type() == Style::BUILTIN) {
+    if (m_dlg->getStyle()->type() == KCStyle::BUILTIN) {
         m_nameEdit->setEnabled(false);
         m_parentBox->setEnabled(false);
     }
@@ -260,7 +260,7 @@ void GeneralTab::parentChanged(const QString& parentName)
     }
 
     if (parentName.isEmpty() || parentName == i18n("Default"))
-        m_dlg->getStyle()->clearAttribute(Style::NamedStyleKey);
+        m_dlg->getStyle()->clearAttribute(KCStyle::NamedStyleKey);
     else
         m_dlg->getStyle()->setParentName(parentName);
 
@@ -271,12 +271,12 @@ void GeneralTab::parentChanged(const QString& parentName)
 bool GeneralTab::apply(CustomStyle * style)
 {
     if (m_nameEdit->isEnabled()) {
-        if (style->type() != Style::BUILTIN) {
+        if (style->type() != KCStyle::BUILTIN) {
             QString name(style->name());
             style->setName(m_nameEdit->text());
             if (m_parentBox->isEnabled()) {
                 if (m_parentBox->currentText() == i18n("Default") || m_parentBox->currentText().isEmpty())
-                    style->clearAttribute(Style::NamedStyleKey);
+                    style->clearAttribute(KCStyle::NamedStyleKey);
                 else
                     style->setParentName(m_parentBox->currentText());
             }
@@ -284,8 +284,8 @@ bool GeneralTab::apply(CustomStyle * style)
         }
     }
 
-    if (style->type() == Style::TENTATIVE)
-        style->setType(Style::CUSTOM);
+    if (style->type() == KCStyle::TENTATIVE)
+        style->setType(KCStyle::CUSTOM);
 
     return true;
 }
@@ -336,7 +336,7 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
                  top + cell.mergedYCells() >= bottom));
 
     // Initialize with the upper left object.
-    const Style styleTopLeft = cell.style();
+    const KCStyle styleTopLeft = cell.style();
     borders[BorderType_Left].style = styleTopLeft.leftBorderPen().style();
     borders[BorderType_Left].width = styleTopLeft.leftBorderPen().width();
     borders[BorderType_Left].color = styleTopLeft.leftBorderPen().color();
@@ -351,13 +351,13 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
     borders[BorderType_RisingDiagonal].color = styleTopLeft.goUpDiagonalPen().color();
 
     // Look at the upper right one for the right border.
-    const Style styleTopRight = Cell(m_sheet, right, top).style();
+    const KCStyle styleTopRight = Cell(m_sheet, right, top).style();
     borders[BorderType_Right].style = styleTopRight.rightBorderPen().style();
     borders[BorderType_Right].width = styleTopRight.rightBorderPen().width();
     borders[BorderType_Right].color = styleTopRight.rightBorderPen().color();
 
     // Look at the bottom left cell for the bottom border.
-    const Style styleBottomLeft = Cell(m_sheet, left, bottom).style();
+    const KCStyle styleBottomLeft = Cell(m_sheet, left, bottom).style();
     borders[BorderType_Bottom].style = styleBottomLeft.bottomBorderPen().style();
     borders[BorderType_Bottom].width = styleBottomLeft.bottomBorderPen().width();
     borders[BorderType_Bottom].color = styleBottomLeft.bottomBorderPen().color();
@@ -367,12 +367,12 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
 
-        const Style styleMove1 = Cell(m_sheet, cell.column(), top).style();
+        const KCStyle styleMove1 = Cell(m_sheet, cell.column(), top).style();
         borders[BorderType_Vertical].style = styleMove1.leftBorderPen().style();
         borders[BorderType_Vertical].width = styleMove1.leftBorderPen().width();
         borders[BorderType_Vertical].color = styleMove1.leftBorderPen().color();
 
-        const Style styleMove2 = Cell(m_sheet, right, cell.row()).style();
+        const KCStyle styleMove2 = Cell(m_sheet, right, cell.row()).style();
         borders[BorderType_Horizontal].style = styleMove2.topBorderPen().style();
         borders[BorderType_Horizontal].width = styleMove2.topBorderPen().width();
         borders[BorderType_Horizontal].color = styleMove2.topBorderPen().color();
@@ -380,7 +380,7 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
         borders[BorderType_Vertical].style = styleTopRight.leftBorderPen().style();
         borders[BorderType_Vertical].width = styleTopRight.leftBorderPen().width();
         borders[BorderType_Vertical].color = styleTopRight.leftBorderPen().color();
-        const Style styleBottomRight = Cell(m_sheet, right, bottom).style();
+        const KCStyle styleBottomRight = Cell(m_sheet, right, bottom).style();
         borders[BorderType_Horizontal].style = styleBottomRight.topBorderPen().style();
         borders[BorderType_Horizontal].width = styleBottomRight.topBorderPen().width();
         borders[BorderType_Horizontal].color = styleBottomRight.topBorderPen().color();
@@ -432,7 +432,7 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
     Selection::ConstIterator end(m_selection->constEnd());
     for (Selection::ConstIterator it(m_selection->constBegin()); it != end; ++it) {
         QRect range = (*it)->rect();
-        Style style = m_sheet->cellStorage()->style(range);   // FIXME merge
+        KCStyle style = m_sheet->cellStorage()->style(range);   // FIXME merge
         initParameters(style);
 
         // left border
@@ -626,7 +626,7 @@ KLocale* CellFormatDialog::locale() const
     return m_sheet->map()->calculationSettings()->locale();
 }
 
-void CellFormatDialog::checkBorderRight(const Style& style)
+void CellFormatDialog::checkBorderRight(const KCStyle& style)
 {
     if (borders[BorderType_Right].style != style.rightBorderPen().style() ||
             borders[BorderType_Right].width != style.rightBorderPen().width())
@@ -635,7 +635,7 @@ void CellFormatDialog::checkBorderRight(const Style& style)
         borders[BorderType_Right].bColor = false;
 }
 
-void CellFormatDialog::checkBorderLeft(const Style& style)
+void CellFormatDialog::checkBorderLeft(const KCStyle& style)
 {
     if (borders[BorderType_Left].style != style.leftBorderPen().style() ||
             borders[BorderType_Left].width != style.leftBorderPen().width())
@@ -644,7 +644,7 @@ void CellFormatDialog::checkBorderLeft(const Style& style)
         borders[BorderType_Left].bColor = false;
 }
 
-void CellFormatDialog::checkBorderTop(const Style& style)
+void CellFormatDialog::checkBorderTop(const KCStyle& style)
 {
     if (borders[BorderType_Top].style != style.topBorderPen().style() ||
             borders[BorderType_Top].width != style.topBorderPen().width())
@@ -653,7 +653,7 @@ void CellFormatDialog::checkBorderTop(const Style& style)
         borders[BorderType_Top].bColor = false;
 }
 
-void CellFormatDialog::checkBorderBottom(const Style& style)
+void CellFormatDialog::checkBorderBottom(const KCStyle& style)
 {
     if (borders[BorderType_Bottom].style != style.bottomBorderPen().style() ||
             borders[BorderType_Bottom].width != style.bottomBorderPen().width())
@@ -662,7 +662,7 @@ void CellFormatDialog::checkBorderBottom(const Style& style)
         borders[BorderType_Bottom].bColor = false;
 }
 
-void CellFormatDialog::checkBorderVertical(const Style& style)
+void CellFormatDialog::checkBorderVertical(const KCStyle& style)
 {
     if (borders[BorderType_Vertical].style != style.leftBorderPen().style() ||
             borders[BorderType_Vertical].width != style.leftBorderPen().width())
@@ -671,7 +671,7 @@ void CellFormatDialog::checkBorderVertical(const Style& style)
         borders[BorderType_Vertical].bColor = false;
 }
 
-void CellFormatDialog::checkBorderHorizontal(const Style& style)
+void CellFormatDialog::checkBorderHorizontal(const KCStyle& style)
 {
     if (borders[BorderType_Horizontal].style != style.topBorderPen().style() ||
             borders[BorderType_Horizontal].width != style.topBorderPen().width())
@@ -681,7 +681,7 @@ void CellFormatDialog::checkBorderHorizontal(const Style& style)
 }
 
 
-void CellFormatDialog::initParameters(const Style& style)
+void CellFormatDialog::initParameters(const KCStyle& style)
 {
     if (borders[BorderType_FallingDiagonal].style != style.fallDiagonalPen().style())
         borders[BorderType_FallingDiagonal].bStyle = false;
@@ -1035,15 +1035,15 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
 
     if (!dlg->bFloatFormat || !dlg->bFloatColor)
         format->setCurrentIndex(5);
-    else if (dlg->floatFormat == Style::OnlyNegSigned && dlg->floatColor == Style::AllBlack)
+    else if (dlg->floatFormat == KCStyle::OnlyNegSigned && dlg->floatColor == KCStyle::AllBlack)
         format->setCurrentIndex(0);
-    else if (dlg->floatFormat == Style::OnlyNegSigned && dlg->floatColor == Style::NegRed)
+    else if (dlg->floatFormat == KCStyle::OnlyNegSigned && dlg->floatColor == KCStyle::NegRed)
         format->setCurrentIndex(1);
-    else if (dlg->floatFormat == Style::AlwaysUnsigned && dlg->floatColor == Style::NegRed)
+    else if (dlg->floatFormat == KCStyle::AlwaysUnsigned && dlg->floatColor == KCStyle::NegRed)
         format->setCurrentIndex(2);
-    else if (dlg->floatFormat == Style::AlwaysSigned && dlg->floatColor == Style::AllBlack)
+    else if (dlg->floatFormat == KCStyle::AlwaysSigned && dlg->floatColor == KCStyle::AllBlack)
         format->setCurrentIndex(3);
-    else if (dlg->floatFormat == Style::AlwaysSigned && dlg->floatColor == Style::NegRed)
+    else if (dlg->floatFormat == KCStyle::AlwaysSigned && dlg->floatColor == KCStyle::NegRed)
         format->setCurrentIndex(4);
     layout->addWidget(box);
 
@@ -1505,26 +1505,26 @@ void CellFormatPageFloat::makeformat()
 
     updateFormatType();
     QColor color;
-    Style::FloatFormat floatFormat = Style::OnlyNegSigned;
+    KCStyle::FloatFormat floatFormat = KCStyle::OnlyNegSigned;
     switch (format->currentIndex()) {
     case 0:
-        floatFormat = Style::OnlyNegSigned;
+        floatFormat = KCStyle::OnlyNegSigned;
         color = Qt::black;
         break;
     case 1:
-        floatFormat =  Style::OnlyNegSigned;
+        floatFormat =  KCStyle::OnlyNegSigned;
         color = Qt::red;
         break;
     case 2:
-        floatFormat =  Style::AlwaysUnsigned;
+        floatFormat =  KCStyle::AlwaysUnsigned;
         color = Qt::red;
         break;
     case 3:
-        floatFormat =  Style::AlwaysSigned;
+        floatFormat =  KCStyle::AlwaysSigned;
         color = Qt::black;
         break;
     case 4:
-        floatFormat =  Style::AlwaysSigned;
+        floatFormat =  KCStyle::AlwaysSigned;
         color = Qt::red;
         break;
     }
@@ -1563,24 +1563,24 @@ void CellFormatPageFloat::apply(CustomStyle * style)
     if (m_bFormatColorChanged) {
         switch (format->currentIndex()) {
         case 0:
-            style->setFloatFormat(Style::OnlyNegSigned);
-            style->setFloatColor(Style::AllBlack);
+            style->setFloatFormat(KCStyle::OnlyNegSigned);
+            style->setFloatColor(KCStyle::AllBlack);
             break;
         case 1:
-            style->setFloatFormat(Style::OnlyNegSigned);
-            style->setFloatColor(Style::NegRed);
+            style->setFloatFormat(KCStyle::OnlyNegSigned);
+            style->setFloatColor(KCStyle::NegRed);
             break;
         case 2:
-            style->setFloatFormat(Style::AlwaysUnsigned);
-            style->setFloatColor(Style::NegRed);
+            style->setFloatFormat(KCStyle::AlwaysUnsigned);
+            style->setFloatColor(KCStyle::NegRed);
             break;
         case 3:
-            style->setFloatFormat(Style::AlwaysSigned);
-            style->setFloatColor(Style::AllBlack);
+            style->setFloatFormat(KCStyle::AlwaysSigned);
+            style->setFloatColor(KCStyle::AllBlack);
             break;
         case 4:
-            style->setFloatFormat(Style::AlwaysSigned);
-            style->setFloatColor(Style::NegRed);
+            style->setFloatFormat(KCStyle::AlwaysSigned);
+            style->setFloatColor(KCStyle::NegRed);
             break;
         }
     }
@@ -1625,24 +1625,24 @@ void CellFormatPageFloat::apply(StyleCommand* _obj)
     if (m_bFormatColorChanged) {
         switch (format->currentIndex()) {
         case 0:
-            _obj->setFloatFormat(Style::OnlyNegSigned);
-            _obj->setFloatColor(Style::AllBlack);
+            _obj->setFloatFormat(KCStyle::OnlyNegSigned);
+            _obj->setFloatColor(KCStyle::AllBlack);
             break;
         case 1:
-            _obj->setFloatFormat(Style::OnlyNegSigned);
-            _obj->setFloatColor(Style::NegRed);
+            _obj->setFloatFormat(KCStyle::OnlyNegSigned);
+            _obj->setFloatColor(KCStyle::NegRed);
             break;
         case 2:
-            _obj->setFloatFormat(Style::AlwaysUnsigned);
-            _obj->setFloatColor(Style::NegRed);
+            _obj->setFloatFormat(KCStyle::AlwaysUnsigned);
+            _obj->setFloatColor(KCStyle::NegRed);
             break;
         case 3:
-            _obj->setFloatFormat(Style::AlwaysSigned);
-            _obj->setFloatColor(Style::AllBlack);
+            _obj->setFloatFormat(KCStyle::AlwaysSigned);
+            _obj->setFloatColor(KCStyle::AllBlack);
             break;
         case 4:
-            _obj->setFloatFormat(Style::AlwaysSigned);
-            _obj->setFloatColor(Style::NegRed);
+            _obj->setFloatFormat(KCStyle::AlwaysSigned);
+            _obj->setFloatColor(KCStyle::NegRed);
             break;
         }
     }
@@ -1985,13 +1985,13 @@ CellFormatPagePosition::CellFormatPagePosition(QWidget* parent, CellFormatDialog
     connect(angleRotation, SIGNAL(valueChanged(int)), spinBox3, SLOT(setValue(int)));
     connect(spinBox3, SIGNAL(valueChanged(int)), angleRotation, SLOT(setValue(int)));
 
-    if (dlg->alignX == Style::Left)
+    if (dlg->alignX == KCStyle::Left)
         left->setChecked(true);
-    else if (dlg->alignX == Style::Center)
+    else if (dlg->alignX == KCStyle::Center)
         center->setChecked(true);
-    else if (dlg->alignX == Style::Right)
+    else if (dlg->alignX == KCStyle::Right)
         right->setChecked(true);
-    else if (dlg->alignX == Style::HAlignUndefined)
+    else if (dlg->alignX == KCStyle::HAlignUndefined)
         standard->setChecked(true);
 
     QButtonGroup* horizontalGroup = new QButtonGroup(this);
@@ -2001,11 +2001,11 @@ CellFormatPagePosition::CellFormatPagePosition(QWidget* parent, CellFormatDialog
     horizontalGroup->addButton(standard);
     connect(horizontalGroup, SIGNAL(buttonClicked(int)), this, SLOT(slotStateChanged(int)));
 
-    if (dlg->alignY == Style::Top)
+    if (dlg->alignY == KCStyle::Top)
         top->setChecked(true);
-    else if (dlg->alignY == Style::Middle)
+    else if (dlg->alignY == KCStyle::Middle)
         middle->setChecked(true);
-    else if (dlg->alignY == Style::Bottom)
+    else if (dlg->alignY == KCStyle::Bottom)
         bottom->setChecked(true);
 
     multi->setChecked(dlg->bMultiRow);
@@ -2164,21 +2164,21 @@ void CellFormatPagePosition::slotChangeAngle(int _angle)
 
 void CellFormatPagePosition::apply(CustomStyle * style)
 {
-    if (top->isChecked() && dlg->alignY != Style::Top)
-        style->setVAlign(Style::Top);
-    else if (bottom->isChecked() && dlg->alignY != Style::Bottom)
-        style->setVAlign(Style::Bottom);
-    else if (middle->isChecked() && dlg->alignY != Style::Middle)
-        style->setVAlign(Style::Middle);
+    if (top->isChecked() && dlg->alignY != KCStyle::Top)
+        style->setVAlign(KCStyle::Top);
+    else if (bottom->isChecked() && dlg->alignY != KCStyle::Bottom)
+        style->setVAlign(KCStyle::Bottom);
+    else if (middle->isChecked() && dlg->alignY != KCStyle::Middle)
+        style->setVAlign(KCStyle::Middle);
 
-    if (left->isChecked() && dlg->alignX != Style::Left)
-        style->setHAlign(Style::Left);
-    else if (right->isChecked() && dlg->alignX != Style::Right)
-        style->setHAlign(Style::Right);
-    else if (center->isChecked() && dlg->alignX != Style::Center)
-        style->setHAlign(Style::Center);
-    else if (standard->isChecked() && dlg->alignX != Style::HAlignUndefined)
-        style->setHAlign(Style::HAlignUndefined);
+    if (left->isChecked() && dlg->alignX != KCStyle::Left)
+        style->setHAlign(KCStyle::Left);
+    else if (right->isChecked() && dlg->alignX != KCStyle::Right)
+        style->setHAlign(KCStyle::Right);
+    else if (center->isChecked() && dlg->alignX != KCStyle::Center)
+        style->setHAlign(KCStyle::Center);
+    else if (standard->isChecked() && dlg->alignX != KCStyle::HAlignUndefined)
+        style->setHAlign(KCStyle::HAlignUndefined);
 
     if (m_bOptionText) {
         if (multi->isEnabled()) {
@@ -2200,7 +2200,7 @@ void CellFormatPagePosition::apply(CustomStyle * style)
         style->setIndentation(m_indent->value());
 
     // setting the default column width and row height
-    if (dlg->getStyle()->type() == Style::BUILTIN && dlg->getStyle()->name() == "Default") {
+    if (dlg->getStyle()->type() == KCStyle::BUILTIN && dlg->getStyle()->name() == "Default") {
         if ((int) height->value() != (int) dlg->heightSize) {
             dlg->getSheet()->map()->setDefaultRowHeight(height->value());
         }
@@ -2212,44 +2212,44 @@ void CellFormatPagePosition::apply(CustomStyle * style)
 
 void CellFormatPagePosition::apply(StyleCommand* _obj)
 {
-    Style::HAlign  ax;
-    Style::VAlign ay;
+    KCStyle::HAlign  ax;
+    KCStyle::VAlign ay;
 
     if (top->isChecked())
-        ay = Style::Top;
+        ay = KCStyle::Top;
     else if (bottom->isChecked())
-        ay = Style::Bottom;
+        ay = KCStyle::Bottom;
     else if (middle->isChecked())
-        ay = Style::Middle;
+        ay = KCStyle::Middle;
     else
-        ay = Style::Middle; // Default, just in case
+        ay = KCStyle::Middle; // Default, just in case
 
     if (left->isChecked())
-        ax = Style::Left;
+        ax = KCStyle::Left;
     else if (right->isChecked())
-        ax = Style::Right;
+        ax = KCStyle::Right;
     else if (center->isChecked())
-        ax = Style::Center;
+        ax = KCStyle::Center;
     else if (standard->isChecked())
-        ax = Style::HAlignUndefined;
+        ax = KCStyle::HAlignUndefined;
     else
-        ax = Style::HAlignUndefined; //Default, just in case
+        ax = KCStyle::HAlignUndefined; //Default, just in case
 
     if (top->isChecked() && ay != dlg->alignY)
-        _obj->setVerticalAlignment(Style::Top);
+        _obj->setVerticalAlignment(KCStyle::Top);
     else if (bottom->isChecked() && ay != dlg->alignY)
-        _obj->setVerticalAlignment(Style::Bottom);
+        _obj->setVerticalAlignment(KCStyle::Bottom);
     else if (middle->isChecked() && ay != dlg->alignY)
-        _obj->setVerticalAlignment(Style::Middle);
+        _obj->setVerticalAlignment(KCStyle::Middle);
 
     if (left->isChecked() && ax != dlg->alignX)
-        _obj->setHorizontalAlignment(Style::Left);
+        _obj->setHorizontalAlignment(KCStyle::Left);
     else if (right->isChecked() && ax != dlg->alignX)
-        _obj->setHorizontalAlignment(Style::Right);
+        _obj->setHorizontalAlignment(KCStyle::Right);
     else if (center->isChecked() && ax != dlg->alignX)
-        _obj->setHorizontalAlignment(Style::Center);
+        _obj->setHorizontalAlignment(KCStyle::Center);
     else if (standard->isChecked() && ax != dlg->alignX)
-        _obj->setHorizontalAlignment(Style::HAlignUndefined);
+        _obj->setHorizontalAlignment(KCStyle::HAlignUndefined);
 
     if (m_bOptionText) {
         if (multi->isEnabled())

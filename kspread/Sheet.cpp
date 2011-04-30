@@ -86,7 +86,7 @@
 #include "SheetPrint.h"
 #include "RectStorage.h"
 #include "SheetModel.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "StyleManager.h"
 #include "StyleStorage.h"
 #include "Util.h"
@@ -1285,7 +1285,7 @@ bool Sheet::loadSheetStyleFormat(KoXmlElement *style)
             hleft = getPart(part);
             kDebug(36003) << "Header left:" << hleft;
         } else
-            kDebug(36003) << "Style:region:left doesn't exist!";
+            kDebug(36003) << "KCStyle:region:left doesn't exist!";
         part = KoXml::namedItemNS(header, KoXmlNS::style, "region-center");
         if (!part.isNull()) {
             hmiddle = getPart(part);
@@ -1672,7 +1672,7 @@ bool Sheet::loadOdf(const KoXmlElement& sheetElement,
         if (updater && count >= 0) updater->setProgress(count);
     }
 
-    QList<QPair<QRegion, Style> > styleRegions;
+    QList<QPair<QRegion, KCStyle> > styleRegions;
     QList<QPair<QRegion, Conditions> > conditionRegions;
     // insert the styles into the storage (column defaults)
     kDebug(36003) << "Inserting column default cell styles ...";
@@ -1932,7 +1932,7 @@ void Sheet::loadOdfInsertStyles(const Styles& autoStyles,
                                 const QHash<QString, QRegion>& styleRegions,
                                 const QHash<QString, Conditions>& conditionalStyles,
                                 const QRect& usedArea,
-                                QList<QPair<QRegion, Style> >& outStyleRegions,
+                                QList<QPair<QRegion, KCStyle> >& outStyleRegions,
                                 QList<QPair<QRegion, Conditions> >& outConditionalStyles)
 {
     const QList<QString> styleNames = styleRegions.keys();
@@ -1947,14 +1947,14 @@ void Sheet::loadOdfInsertStyles(const Styles& autoStyles,
             outConditionalStyles.append(qMakePair(styleRegion, conditionalStyles[styleNames[i]]));
         if (autoStyles.contains(styleNames[i])) {
             //kDebug(36003) << "\tautomatic:" << styleNames[i] << " at" << styleRegion.rectCount() << "rects";
-            Style style;
+            KCStyle style;
             style.setDefault(); // "overwrite" existing style
             style.merge(autoStyles[styleNames[i]]);
             outStyleRegions.append(qMakePair(styleRegion, style));
         } else {
             const CustomStyle* namedStyle = map()->styleManager()->style(styleNames[i]);
             //kDebug(36003) << "\tcustom:" << namedStyle->name() << " at" << styleRegion.rectCount() << "rects";
-            Style style;
+            KCStyle style;
             style.setDefault(); // "overwrite" existing style
             style.merge(*namedStyle);
             outStyleRegions.append(qMakePair(styleRegion, style));
@@ -2593,7 +2593,7 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
 //                       << "default:" << (column ? column->isDefault() : false);
 
         //style default layout for column
-        const Style style = tableContext.columnDefaultStyles.value(i);
+        const KCStyle style = tableContext.columnDefaultStyles.value(i);
 
         int j = i;
         int count = 1;
@@ -2601,7 +2601,7 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
         while (j <= maxCols) {
             const ColumnFormat* nextColumn = d->columns.next(j);
             const int nextColumnIndex = nextColumn ? nextColumn->column() : 0;
-            const QMap<int, Style>::iterator nextColumnDefaultStyle = tableContext.columnDefaultStyles.upperBound(j);
+            const QMap<int, KCStyle>::iterator nextColumnDefaultStyle = tableContext.columnDefaultStyles.upperBound(j);
             const int nextStyleColumnIndex = nextColumnDefaultStyle == tableContext.columnDefaultStyles.end()
                                              ? 0 : nextColumnDefaultStyle.key();
             // j becomes the index of the adjacent column
@@ -2676,7 +2676,7 @@ void Sheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
         const RowFormat* row = rowFormat(i);
 
         // default cell style for row
-        const Style style = tableContext.rowDefaultStyles.value(i);
+        const KCStyle style = tableContext.rowDefaultStyles.value(i);
 
         xmlWriter.startElement("table:table-row");
 
@@ -3334,7 +3334,7 @@ void Sheet::convertObscuringBorders()
     QPen topPen, bottomPen, leftPen, rightPen;
     for (; c; c = c->nextCell()) {
         if (c->extraXCells() > 0 || c->extraYCells() > 0) {
-            const Style* style = this->style(c->column(), c->row());
+            const KCStyle* style = this->style(c->column(), c->row());
             topPen = style->topBorderPen();
             leftPen = style->leftBorderPen();
             rightPen = style->rightBorderPen();

@@ -27,7 +27,7 @@
 #include <qtest_kde.h>
 
 Q_DECLARE_METATYPE(Format::Type)
-Q_DECLARE_METATYPE(Style::FloatFormat)
+Q_DECLARE_METATYPE(KCStyle::FloatFormat)
 
 class PublicValueFormatter : public ValueFormatter
 {
@@ -194,25 +194,25 @@ void TestValueFormatter::testCreateNumberFormat_data()
     QTest::addColumn<double>("value");
     QTest::addColumn<int>("precision");
     QTest::addColumn<Format::Type>("formatType");
-    QTest::addColumn<Style::FloatFormat>("floatFormat");
+    QTest::addColumn<KCStyle::FloatFormat>("floatFormat");
     QTest::addColumn<QString>("currencySymbol");
     QTest::addColumn<QString>("formatString");
     QTest::addColumn<QString>("result");
 
     QTest::newRow("negative sign in format string") <<
-            -5.0 << 0 << Format::Number << Style::DefaultFloatFormat << "" << "(-.)" << "(-5)";
+            -5.0 << 0 << Format::Number << KCStyle::DefaultFloatFormat << "" << "(-.)" << "(-5)";
 
     QTest::newRow("unspecified precision 1") <<
-            1.0 << -1 << Format::Number << Style::DefaultFloatFormat << "" << "0" << "1";
+            1.0 << -1 << Format::Number << KCStyle::DefaultFloatFormat << "" << "0" << "1";
     QTest::newRow("unspecified precision 0.5") <<
-            0.5 << -1 << Format::Number << Style::DefaultFloatFormat << "" << "0" << "0.5";}
+            0.5 << -1 << Format::Number << KCStyle::DefaultFloatFormat << "" << "0" << "0.5";}
 
 void TestValueFormatter::testCreateNumberFormat()
 {
     QFETCH(double, value);
     QFETCH(int, precision);
     QFETCH(Format::Type, formatType);
-    QFETCH(Style::FloatFormat, floatFormat);
+    QFETCH(KCStyle::FloatFormat, floatFormat);
     QFETCH(QString, currencySymbol);
     QFETCH(QString, formatString);
     QFETCH(QString, result);

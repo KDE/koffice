@@ -458,7 +458,7 @@ class DummyWidget : public QWidget
     }
 };
 
-QSizeF AdjustColumnRowManipulator::textSize(const QString& text, const Style& style) const
+QSizeF AdjustColumnRowManipulator::textSize(const QString& text, const KCStyle& style) const
 {
     QSizeF size;
     DummyWidget dummyWiget;
@@ -471,7 +471,7 @@ QSizeF AdjustColumnRowManipulator::textSize(const QString& text, const Style& st
 
         size = fontMetrics.size(0, text);
         double offsetFont = 0.0;
-        if ((style.valign() == Style::Bottom) && style.underline())
+        if ((style.valign() == KCStyle::Bottom) && style.underline())
             offsetFont = fontMetrics.underlinePos() + 1;
 
         size.setHeight((fontMetrics.ascent() + fontMetrics.descent() + offsetFont)
@@ -502,18 +502,18 @@ QSizeF AdjustColumnRowManipulator::textSize(const QString& text, const Style& st
 double AdjustColumnRowManipulator::adjustColumnHelper(const Cell& cell)
 {
     double long_max = 0.0;
-    const Style style = cell.effectiveStyle();
+    const KCStyle style = cell.effectiveStyle();
     const QSizeF size = textSize(cell.displayText(), style);
     if (size.width() > long_max) {
         double indent = 0.0;
-        Style::HAlign alignment = style.halign();
-        if (alignment == Style::HAlignUndefined) {
+        KCStyle::HAlign alignment = style.halign();
+        if (alignment == KCStyle::HAlignUndefined) {
             if (cell.value().isNumber() || cell.isDate() || cell.isTime())
-                alignment = Style::Right;
+                alignment = KCStyle::Right;
             else
-                alignment = Style::Left;
+                alignment = KCStyle::Left;
         }
-        if (alignment == Style::Left)
+        if (alignment == KCStyle::Left)
             indent = cell.style().indentation();
         long_max = indent + size.width()
                    + style.leftBorderPen().width() + style.rightBorderPen().width();
@@ -529,7 +529,7 @@ double AdjustColumnRowManipulator::adjustColumnHelper(const Cell& cell)
 double AdjustColumnRowManipulator::adjustRowHelper(const Cell& cell)
 {
     double long_max = 0.0;
-    const Style style = cell.effectiveStyle();
+    const KCStyle style = cell.effectiveStyle();
     const QSizeF size = textSize(cell.displayText(), style);
     if (size.height() > long_max)
         long_max = size.height() + style.topBorderPen().width() + style.bottomBorderPen().width();

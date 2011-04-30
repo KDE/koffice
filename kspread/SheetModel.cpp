@@ -29,7 +29,7 @@
 #include "Map.h"
 #include "ModelSupport.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "Validity.h"
 #include "Value.h"
 #include "ValueFormatter.h"
@@ -83,7 +83,7 @@ QVariant SheetModel::data(const QModelIndex& index, int role) const
     }
     // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
     const Cell cell = Cell(d->sheet, index.column() + 1, index.row() + 1).masterCell();
-    const Style style = cell.effectiveStyle();
+    const KCStyle style = cell.effectiveStyle();
     if (role == Qt::DisplayRole) {
         // Display a formula if warranted.  If not, simply display the value.
         if (cell.isFormula() && d->sheet->getShowFormula() &&
@@ -269,7 +269,7 @@ bool SheetModel::setData(const QItemSelectionRange &range, const QVariant &value
         break;
     case StyleRole:
         // TODO
-//         storage->setStyle(region, value.value<Style>());
+//         storage->setStyle(region, value.value<KCStyle>());
         break;
     case TargetRangeRole:
         storage->setDatabase(region, value.value<Database>());

@@ -33,7 +33,7 @@
 #include "kspread_export.h"
 
 /**
- * \ingroup Style
+ * \ingroup KCStyle
  * Collection of string formatting enumeration and functions.
  */
 namespace Format

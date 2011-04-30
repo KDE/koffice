@@ -24,9 +24,9 @@
 #include <QPen>
 
 #include "AbstractRegionCommand.h"
-#include "Style.h"
+#include "KCStyle.h"
 
-class Style;
+class KCStyle;
 
 /**
  * \class StyleCommand
@@ -97,11 +97,11 @@ public:
         m_style->setGoUpDiagonalPen(pen);
     }
     // SetSelectionAlignWorker
-    void setHorizontalAlignment(Style::HAlign align) {
+    void setHorizontalAlignment(KCStyle::HAlign align) {
         m_style->setHAlign(align);
     }
     // SetSelectionAlignWorker
-    void setVerticalAlignment(Style::VAlign align) {
+    void setVerticalAlignment(KCStyle::VAlign align) {
         m_style->setVAlign(align);
     }
 
@@ -141,10 +141,10 @@ public:
     void setPrecision(int precision) {
         m_style->setPrecision(precision);
     }
-    void setFloatFormat(Style::FloatFormat floatFormat) {
+    void setFloatFormat(KCStyle::FloatFormat floatFormat) {
         m_style->setFloatFormat(floatFormat);
     }
-    void setFloatColor(Style::FloatColor floatColor) {
+    void setFloatColor(KCStyle::FloatColor floatColor) {
         m_style->setFloatColor(floatColor);
     }
     void setFormatType(Format::Type formatType) {
@@ -173,7 +173,7 @@ private:
     bool m_horizontalPenChanged;
     bool m_verticalPenChanged;
 
-    Style* m_style;
+    KCStyle* m_style;
     QList< QPair<QRectF, SharedSubStyle> > m_undoData;
 };
 

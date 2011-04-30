@@ -79,7 +79,7 @@ const int s_borderSpace = 1;
 class CellView::Private : public QSharedData
 {
 public:
-    Private(Style* defaultStyle, qreal defaultWidth, qreal defaultHeight)
+    Private(KCStyle* defaultStyle, qreal defaultWidth, qreal defaultHeight)
             : style(*defaultStyle)
             , width(defaultWidth)
             , height(defaultHeight)
@@ -101,7 +101,7 @@ public:
     ~Private() {
     }
 
-    Style style;
+    KCStyle style;
     qreal  width;
     qreal  height;
 
@@ -182,13 +182,13 @@ CellView::CellView(SheetView* sheetView, int col, int row)
         d->style = sheetView->cellView(masterCell.column(), masterCell.row()).style();
     } else {
         // lookup the 'normal' style
-        Style style = cell.style();
+        KCStyle style = cell.style();
         if (!style.isDefault())
             d->style = style;
 
         // use conditional formatting attributes
         Conditions conditions = cell.conditions();
-        const Style conditionalStyle = conditions.testConditions(cell);
+        const KCStyle conditionalStyle = conditions.testConditions(cell);
         if (!conditionalStyle.isEmpty()) {
             d->style.merge(conditionalStyle);
         }
@@ -243,20 +243,20 @@ CellView::CellView(SheetView* sheetView, int col, int row)
         return;
 
     // horizontal align
-    if (d->style.halign() == Style::HAlignUndefined) {
+    if (d->style.halign() == KCStyle::HAlignUndefined) {
         // errors are always centered
         if (cell.value().type() == Value::Error)
-            d->style.setHAlign(Style::Center);
+            d->style.setHAlign(KCStyle::Center);
         // if the format is text, align it according to the text direction
         else if (d->style.formatType() == Format::Text || value.format() == Value::fmt_String)
-            d->style.setHAlign(d->displayText.isRightToLeft() ? Style::Right : Style::Left);
+            d->style.setHAlign(d->displayText.isRightToLeft() ? KCStyle::Right : KCStyle::Left);
         // if the style does not define a specific format, align it according to the sheet layout
         else
-            d->style.setHAlign(cell.sheet()->layoutDirection() == Qt::RightToLeft ? Style::Left : Style::Right);
+            d->style.setHAlign(cell.sheet()->layoutDirection() == Qt::RightToLeft ? KCStyle::Left : KCStyle::Right);
     }
     // force left alignment, if there's a formula and it should be shown
     if (cell.isFormula() && sheet->getShowFormula() && !(sheet->isProtected() && d->style.hideFormula()))
-        d->style.setHAlign(Style::Left);
+        d->style.setHAlign(KCStyle::Left);
 
     makeLayout(sheetView, cell);
 }
@@ -270,7 +270,7 @@ CellView::~CellView()
 {
 }
 
-Style CellView::style() const
+KCStyle CellView::style() const
 {
     return d->style;
 }
@@ -1010,7 +1010,7 @@ void CellView::paintText(QPainter& painter,
             && !(cell.sheet()->getShowFormula()
                  && !(cell.sheet()->isProtected()
                       && style().hideFormula()))) {
-        if (style().floatColor() == Style::NegRed && cell.value().asFloat() < 0.0)
+        if (style().floatColor() == KCStyle::NegRed && cell.value().asFloat() < 0.0)
             tmpPen.setColor(Qt::red);
     }
 
@@ -1023,23 +1023,23 @@ void CellView::paintText(QPainter& painter,
 
     qreal indent = 0.0;
     qreal offsetCellTooShort = 0.0;
-    const Style::HAlign hAlign = d->style.halign();
-    const Style::VAlign vAlign = d->style.valign();
+    const KCStyle::HAlign hAlign = d->style.halign();
+    const KCStyle::VAlign vAlign = d->style.valign();
 
     // Apply indent if text is align to left not when text is at right or middle.
-    if (hAlign == Style::Left && !cell.isEmpty()) {
+    if (hAlign == KCStyle::Left && !cell.isEmpty()) {
         indent = d->style.indentation();
     }
 
     // Made an offset, otherwise ### is under red triangle.
-    if (hAlign == Style::Right && !cell.isEmpty() && !d->fittingWidth)
+    if (hAlign == KCStyle::Right && !cell.isEmpty() && !d->fittingWidth)
         offsetCellTooShort = 4;
 
     KoPostscriptPaintDevice device;
     const QFontMetricsF fontMetrics(font, &device);
     qreal fontOffset = 0.0;
 
-    if (style().valign() == Style::Bottom || style().valign() == Style::VAlignUndefined) {
+    if (style().valign() == KCStyle::Bottom || style().valign() == KCStyle::VAlignUndefined) {
         // The descent can be bigger then the underlinePos which seems to be the case at least
         // with thai characters. So, to be sure we are not losing the bottom characters we are
         // using either the underlinePos() (plus 1 for the underline itself) or the descent()
@@ -1054,7 +1054,7 @@ void CellView::paintText(QPainter& painter,
     const bool tmpVerticalText = d->style.verticalText();
     // force multiple rows on explicitly set line breaks
     const bool tmpMultiRow = d->style.wrapText() || d->displayText.contains('\n');
-    const bool tmpVDistributed = vAlign == Style::VJustified || vAlign == Style::VDistributed;
+    const bool tmpVDistributed = vAlign == KCStyle::VJustified || vAlign == KCStyle::VDistributed;
     const bool tmpRichText = !d->richText.isNull();
 
 
@@ -1113,11 +1113,11 @@ void CellView::paintText(QPainter& painter,
         qreal space = d->width - d->textWidth;
         if (space > 0) {
             switch (hAlign) {
-            case Style::Center:
-            case Style::HAlignUndefined:
+            case KCStyle::Center:
+            case KCStyle::HAlignUndefined:
                 dx += space / 2;
                 break;
-            case Style::Right:
+            case KCStyle::Right:
                 dx += space;
                 break;
             default:
@@ -1387,9 +1387,9 @@ void CellView::paintFilterButton(QPainter& painter, const QPointF& coordinate,
 //
 QString CellView::textDisplaying(const QFontMetricsF& fm, const Cell& cell)
 {
-    Style::HAlign hAlign = style().halign();
+    KCStyle::HAlign hAlign = style().halign();
     if (!d->fittingWidth)
-        hAlign = Style::Left; // force left alignment, if text does not fit
+        hAlign = KCStyle::Left; // force left alignment, if text does not fit
 
     const bool isNumeric = cell.value().isNumber();
 
@@ -1426,9 +1426,9 @@ QString CellView::textDisplaying(const QFontMetricsF& fm, const Cell& cell)
         for (int i = start; i >= 0; i--) {
             //Note that numbers are always treated as left-aligned since if we have to cut digits off, they should
             //always be the least significant ones at the end of the string
-            if (hAlign == Style::Left || hAlign == Style::HAlignUndefined || isNumeric)
+            if (hAlign == KCStyle::Left || hAlign == KCStyle::HAlignUndefined || isNumeric)
                 tmp = d->displayText.left(i);
-            else if (hAlign == Style::Right)
+            else if (hAlign == KCStyle::Right)
                 tmp = d->displayText.right(i);
             else
                 tmp = d->displayText.mid((d->displayText.length() - i) / 2, i);
@@ -1632,8 +1632,8 @@ void CellView::textOffset(const QFontMetricsF& fontMetrics, const Cell& cell)
 {
     Q_UNUSED(cell)
     const qreal ascent = fontMetrics.ascent();
-    const Style::HAlign hAlign = d->style.halign();
-    const Style::VAlign vAlign = d->style.valign();
+    const KCStyle::HAlign hAlign = d->style.halign();
+    const KCStyle::VAlign vAlign = d->style.valign();
     const int tmpAngle = fixAngle(d->style.angle());
     const bool tmpVerticalText = d->style.verticalText();
     const bool tmpMultiRow = d->style.wrapText() || d->displayText.contains('\n');
@@ -1649,8 +1649,8 @@ void CellView::textOffset(const QFontMetricsF& fontMetrics, const Cell& cell)
     // Calculate d->textY based on the vertical alignment and a few
     // other inputs.
     switch (vAlign) {
-    case Style::VJustified:
-    case Style::Top: {
+    case KCStyle::VJustified:
+    case KCStyle::Top: {
         if (tmpAngle == 0 && tmpRichText) {
             d->textY = effTop + d->textHeight;
         } else if (tmpAngle == 0) {
@@ -1662,8 +1662,8 @@ void CellView::textOffset(const QFontMetricsF& fontMetrics, const Cell& cell)
         }
         break;
     }
-    case Style::VAlignUndefined: // fall through
-    case Style::Bottom: {
+    case KCStyle::VAlignUndefined: // fall through
+    case KCStyle::Bottom: {
         if (!tmpVerticalText && !tmpMultiRow && !tmpAngle && !tmpRichText) {
             d->textY = effBottom;
         } else if (tmpAngle != 0) {
@@ -1689,13 +1689,13 @@ void CellView::textOffset(const QFontMetricsF& fontMetrics, const Cell& cell)
         }
         break;
     }
-    case Style::VDistributed:
+    case KCStyle::VDistributed:
         if (!tmpVerticalText && !tmpAngle && d->textLinesCount > 1) {
             d->textY = effTop + ascent;
             break;
         }
         // fall through
-    case Style::Middle: {
+    case KCStyle::Middle: {
         if (!tmpVerticalText && !tmpMultiRow && !tmpAngle && !tmpRichText) {
             d->textY = (h - d->textHeight) / 2 + ascent;
         } else if (tmpAngle != 0) {
@@ -1735,14 +1735,14 @@ void CellView::textOffset(const QFontMetricsF& fontMetrics, const Cell& cell)
 
     // Calculate d->textX based on alignment and textwidth.
     switch (hAlign) {
-    case Style::Left:
+    case KCStyle::Left:
         d->textX = 0.5 * d->style.leftBorderPen().width() + s_borderSpace;
         break;
-    case Style::Right:
+    case KCStyle::Right:
         d->textX = w - s_borderSpace - d->textWidth
                    - 0.5 * d->style.rightBorderPen().width();
         break;
-    case Style::Center:
+    case KCStyle::Center:
         d->textX = 0.5 * (w - s_borderSpace - d->textWidth -
                           0.5 * d->style.rightBorderPen().width());
         break;
@@ -1757,11 +1757,11 @@ void CellView::obscureHorizontalCells(SheetView* sheetView, const Cell& masterCe
         return;
 
     qreal extraWidth = 0.0;
-    const Style::HAlign align = d->style.halign();
+    const KCStyle::HAlign align = d->style.halign();
 
     // Get indentation.  This is only used for left aligned text.
     qreal indent = 0.0;
-    if (align == Style::Left && !masterCell.isEmpty())
+    if (align == KCStyle::Left && !masterCell.isEmpty())
         indent = style().indentation();
 
     // Set d->fittingWidth to false, if the text is vertical or angled, and too
@@ -1811,7 +1811,7 @@ void CellView::obscureHorizontalCells(SheetView* sheetView, const Cell& masterCe
         // FIXME: Shouldn't we check to see if end == -1 here before
         //        setting d->fittingWidth to false?
         //
-        if (style().halign() == Style::Left || (style().halign() == Style::HAlignUndefined
+        if (style().halign() == KCStyle::Left || (style().halign() == KCStyle::HAlignUndefined
                                                 && !masterCell.value().isNumber())) {
             if (col > effectiveCol) {
                 d->obscuredCellsX = col - effectiveCol;
@@ -1905,7 +1905,7 @@ void CellView::drawText(QPainter& painter, const QPointF& location, const QStrin
 
     const bool tmpVerticalText = d->style.verticalText();
     const bool tmpAngled = fixAngle(d->style.angle()) != 0;
-    const qreal tmpIndent = cell.isEmpty() || d->style.halign() != Style::Left ? 0.0 : style().indentation();
+    const qreal tmpIndent = cell.isEmpty() || d->style.halign() != KCStyle::Left ? 0.0 : style().indentation();
     const qreal lineWidth = tmpAngled ? 1e9 : tmpVerticalText ? fontMetrics.maxWidth() :
                             (d->width - 2 * s_borderSpace
                              - 0.5 * d->style.leftBorderPen().width()
@@ -2019,7 +2019,7 @@ void CellView::Private::calculateHorizontalTextSize(const QFont& font, const QFo
     const qreal leading = fontMetrics.leading();
     const QTextOption options = textOptions();
 
-    const qreal tmpIndent = style.halign() != Style::Left ? 0.0 : style.indentation();
+    const qreal tmpIndent = style.halign() != KCStyle::Left ? 0.0 : style.indentation();
     const qreal lineWidth = (width - 2 * s_borderSpace
                              - 0.5 * style.leftBorderPen().width()
                              - 0.5 * style.rightBorderPen().width())
@@ -2156,16 +2156,16 @@ QTextOption CellView::Private::textOptions() const
     QTextOption options;
     switch (style.halign()) {
     default:
-    case Style::Left:
+    case KCStyle::Left:
         options.setAlignment(Qt::AlignLeft);
         break;
-    case Style::Right:
+    case KCStyle::Right:
         options.setAlignment(Qt::AlignRight);
         break;
-    case Style::Center:
+    case KCStyle::Center:
         options.setAlignment(Qt::AlignHCenter);
         break;
-    case Style::Justified:
+    case KCStyle::Justified:
         options.setAlignment(Qt::AlignJustify);
         break;
     }

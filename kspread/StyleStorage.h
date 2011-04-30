@@ -27,17 +27,17 @@
 
 #include "kspread_export.h"
 #include <KCRegion.h>
-#include <Style.h>
+#include <KCStyle.h>
 
 class Map;
 class OdfSavingContext;
-class Style;
+class KCStyle;
 class StyleManager;
 class SubStyle;
 
 /**
  * \ingroup Storage
- * \ingroup Style
+ * \ingroup KCStyle
  * The style storage.
  * Acts mainly as a wrapper around the R-Tree data structure to allow a future
  * replacement of this backend. Decorated with some additional features like
@@ -54,26 +54,26 @@ public:
 
     /**
      * Composes the style for \p point. All substyles intersecting \p point are considered.
-     * \return the Style at the position \p point .
+     * \return the KCStyle at the position \p point .
      */
-    Style contains(const QPoint& point) const;
+    KCStyle contains(const QPoint& point) const;
 
     /**
      * Composes the style for \p rect. Only substyles which fill out \p rect completely are
      * considered. In contrast to intersects(const QRect&).
      * Especially useful on saving cell styles assigned to columns or rows.
-     * \return the Style for the area \p rect .
+     * \return the KCStyle for the area \p rect .
      * \see intersects
      */
-    Style contains(const QRect& rect) const;
+    KCStyle contains(const QRect& rect) const;
 
     /**
      * Composes the style for \p rect. All substyles which intersect \p rect are considered.
      * In contrast to contains(const QRect&).
-     * \return the Style for the area \p rect .
+     * \return the KCStyle for the area \p rect .
      * \see contains
      */
-    Style intersects(const QRect& rect) const;
+    KCStyle intersects(const QRect& rect) const;
 
     /**
      * Collects all substyle/range pairs, that intersect \p rect. With this data one can
@@ -130,12 +130,12 @@ public:
     /**
      * Assigns the substyles contained in \p style to the area \p region .
      */
-    void insert(const KCRegion& region, const Style& style);
+    void insert(const KCRegion& region, const KCStyle& style);
 
     /**
      * Replaces the current styles with those in \p styles
      */
-    void load(const QList<QPair<QRegion, Style> >& styles);
+    void load(const QList<QPair<QRegion, KCStyle> >& styles);
 
     /**
      * Inserts \p number rows at the position \p position .
@@ -212,7 +212,7 @@ protected:
      * Composes a style of \p substyles .
      * \return the composed style
      */
-    Style composeStyle(const QList<SharedSubStyle>& subStyles) const;
+    KCStyle composeStyle(const QList<SharedSubStyle>& subStyles) const;
 
     /**
      * Convenience method.

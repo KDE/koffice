@@ -39,7 +39,7 @@
 
 // KSpread
 #include "Global.h"
-#include "Style.h"
+#include "KCStyle.h"
 
 class QFontMetricsF;
 class QRectF;
@@ -47,7 +47,7 @@ class QRectF;
 class Cell;
 class Sheet;
 class SheetView;
-class Style;
+class KCStyle;
 
 /**
  * \ingroup Painting
@@ -77,7 +77,7 @@ public:
     /**
      * \return the style for the cell associated with this view
      */
-    Style style() const;
+    KCStyle style() const;
 
     /**
      * Paints the cell's background.

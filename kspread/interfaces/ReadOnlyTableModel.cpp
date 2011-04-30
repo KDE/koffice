@@ -24,7 +24,7 @@
 #include "kspread_limits.h"
 #include "Map.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "Value.h"
 #include "ValueFormatter.h"
 
@@ -68,7 +68,7 @@ QVariant ReadOnlyTableModel::data(const QModelIndex& index, int role) const
 {
     // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
     const Cell cell = Cell(d->sheet, index.column() + 1, index.row() + 1).masterCell();
-    const Style style = cell.effectiveStyle();
+    const KCStyle style = cell.effectiveStyle();
     if (role == Qt::DisplayRole) {
         // Display a formula if warranted.  If not, simply display the value.
         if (cell.isFormula() && d->sheet->getShowFormula() &&

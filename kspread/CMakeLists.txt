@@ -223,7 +223,7 @@ set (kspreadodf_LIB_SRCS
     Sheet.cpp
     SheetAccessModel.cpp
     SheetModel.cpp
-    Style.cpp
+    KCStyle.cpp
     StyleManager.cpp
     StyleStorage.cpp
     Util.cpp

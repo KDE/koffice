@@ -25,7 +25,7 @@
 
 #include "Global.h"
 #include "Number.h"
-#include "Style.h"
+#include "KCStyle.h"
 
 class CalculationSettings;
 class Value;
@@ -60,7 +60,7 @@ public:
      */
     Value formatText(const Value& value,
                      Format::Type formatType, int precision = -1,
-                     Style::FloatFormat floatFormat = Style::OnlyNegSigned,
+                     KCStyle::FloatFormat floatFormat = KCStyle::OnlyNegSigned,
                      const QString& prefix = QString(),
                      const QString& postfix = QString(),
                      const QString& currencySymbol = QString(), const QString& formatString = QString());
@@ -100,7 +100,7 @@ protected:
      */
     QString createNumberFormat(Number value, int precision,
                                Format::Type formatType,
-                               Style::FloatFormat floatFormat,
+                               KCStyle::FloatFormat floatFormat,
                                const QString& currencySymbol,
                                const QString& formatString);
 
@@ -119,7 +119,7 @@ protected:
      */
     QString complexFormat(const Value& value, int precision,
                           Format::Type formatType,
-                          Style::FloatFormat floatFormat,
+                          KCStyle::FloatFormat floatFormat,
                           const QString& currencySymbol);
 
     /**

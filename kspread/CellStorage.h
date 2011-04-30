@@ -161,15 +161,15 @@ public:
     void emitInsertNamedArea(const KCRegion &region, const QString &namedArea);
 
     /**
-     * \return the Style associated with the Cell at \p column , \p row .
+     * \return the KCStyle associated with the Cell at \p column , \p row .
      */
-    Style style(int column, int row) const;
+    KCStyle style(int column, int row) const;
 
     /**
-     * \return the Style associated with \p rect.
+     * \return the KCStyle associated with \p rect.
      */
-    Style style(const QRect& rect) const;
-    void setStyle(const KCRegion& region, const Style& style);
+    KCStyle style(const QRect& rect) const;
+    void setStyle(const KCRegion& region, const KCStyle& style);
     void insertSubStyle(const QRect& rect, const SharedSubStyle& subStyle);
 
     /**
@@ -380,7 +380,7 @@ public:
     const ValueStorage* valueStorage() const;
 
     void loadConditions(const QList<QPair<QRegion, Conditions> >& conditions);
-    void loadStyles(const QList<QPair<QRegion, Style> >& styles);
+    void loadStyles(const QList<QPair<QRegion, KCStyle> >& styles);
 
     void invalidateStyleCache();
 

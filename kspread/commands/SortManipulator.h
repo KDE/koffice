@@ -73,7 +73,7 @@ protected:
     virtual bool postProcessing();
     virtual Value newValue(Element *element, int col, int row,
                            bool *parse, Format::Type *fmtType);
-    virtual Style newFormat(Element *element, int col, int row);
+    virtual KCStyle newFormat(Element *element, int col, int row);
 
     /** sort the data, filling the "sorted" structure */
     void sort(Element *element);
@@ -93,7 +93,7 @@ protected:
     QMap<int, int> sorted;
 
     CellStorage* m_cellStorage; // temporary
-    QHash<Cell, Style> m_styles; // temporary
+    QHash<Cell, KCStyle> m_styles; // temporary
 };
 
 #endif  // KSPREAD_SORT_MANIPULATOR

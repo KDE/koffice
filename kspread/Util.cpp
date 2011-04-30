@@ -33,7 +33,7 @@
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 
 #include <QPen>
 
@@ -296,7 +296,7 @@ QString KSpread::Odf::encodePen(const QPen & pen)
     //kDebug() << " encodePen :" << s;
     if (pen.color().isValid()) {
         s += ' ';
-        s += Style::colorName(pen.color());
+        s += KCStyle::colorName(pen.color());
     }
     return s;
 }

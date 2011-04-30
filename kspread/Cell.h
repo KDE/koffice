@@ -239,17 +239,17 @@ public:
     void setLink(const QString& link);
 
     /**
-     * \return the Style associated with this Cell
+     * \return the KCStyle associated with this Cell
      */
-    Style style() const;
+    KCStyle style() const;
 
     /**
      * The effective style takes conditional style attributes into account.
-     * \return the effective Style associated with this Cell
+     * \return the effective KCStyle associated with this Cell
      */
-    Style effectiveStyle() const;
+    KCStyle effectiveStyle() const;
 
-    void setStyle(const Style& style);
+    void setStyle(const KCStyle& style);
 
     /**
      * \return the validity checks associated with this cell

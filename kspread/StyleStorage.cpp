@@ -29,7 +29,7 @@
 #include "Map.h"
 #include "OdfSavingContext.h"
 #include "RTree.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "StyleManager.h"
 #include "RectStorage.h"
 
@@ -43,9 +43,9 @@ public:
     QMap<int, bool> usedColumns; // FIXME Stefan: Use QList and qUpperBound() for insertion.
     QMap<int, bool> usedRows;
     QRegion usedArea;
-    QHash<Style::Key, QList<SharedSubStyle> > subStyles;
+    QHash<KCStyle::Key, QList<SharedSubStyle> > subStyles;
     QMap<int, QPair<QRectF, SharedSubStyle> > possibleGarbage;
-    QCache<QPoint, Style> cache;
+    QCache<QPoint, KCStyle> cache;
     QRegion cachedArea;
 };
 
@@ -75,7 +75,7 @@ StyleStorage::~StyleStorage()
     delete d;
 }
 
-Style StyleStorage::contains(const QPoint& point) const
+KCStyle StyleStorage::contains(const QPoint& point) const
 {
     if (!d->usedArea.contains(point) && !d->usedColumns.contains(point.x()) && !d->usedRows.contains(point.y()))
         return *styleManager()->defaultStyle();
@@ -89,7 +89,7 @@ Style StyleStorage::contains(const QPoint& point) const
 
     if (subStyles.isEmpty())
         return *styleManager()->defaultStyle();
-    Style* style = new Style();
+    KCStyle* style = new KCStyle();
     (*style) = composeStyle(subStyles);
 
     // insert style into the cache
@@ -98,13 +98,13 @@ Style StyleStorage::contains(const QPoint& point) const
     return *style;
 }
 
-Style StyleStorage::contains(const QRect& rect) const
+KCStyle StyleStorage::contains(const QRect& rect) const
 {
     QList<SharedSubStyle> subStyles = d->tree.contains(rect);
     return composeStyle(subStyles);
 }
 
-Style StyleStorage::intersects(const QRect& rect) const
+KCStyle StyleStorage::intersects(const QRect& rect) const
 {
     QList<SharedSubStyle> subStyles = d->tree.intersects(rect);
     return composeStyle(subStyles);
@@ -166,7 +166,7 @@ void StyleStorage::saveOdfCreateDefaultStyles(int& maxCols, int& maxRows, OdfSav
         // Columns have no content. Prefer them over rows for the default cell styles.
         if (rect.top() == 1 && rect.bottom() == maxRows) {
             for (int col = rect.left(); col <= rect.right(); ++col) {
-                if (pairs[i].second.data()->type() == Style::DefaultStyleKey)
+                if (pairs[i].second.data()->type() == KCStyle::DefaultStyleKey)
                     tableContext.columnDefaultStyles.remove(col);
                 else
                     tableContext.columnDefaultStyles[col].insertSubStyle(pairs[i].second);
@@ -175,7 +175,7 @@ void StyleStorage::saveOdfCreateDefaultStyles(int& maxCols, int& maxRows, OdfSav
         // row default cell styles
         else if (rect.left() == 1 && rect.right() == maxCols) {
             for (int row = rect.top(); row <= rect.bottom(); ++row) {
-                if (pairs[i].second.data()->type() == Style::DefaultStyleKey)
+                if (pairs[i].second.data()->type() == KCStyle::DefaultStyleKey)
                     tableContext.rowDefaultStyles.remove(row);
                 else
                     tableContext.rowDefaultStyles[row].insertSubStyle(pairs[i].second);
@@ -212,7 +212,7 @@ void StyleStorage::insert(const QRect& rect, const SharedSubStyle& subStyle)
 {
 //     kDebug(36006) <<"StyleStorage: inserting" << SubStyle::name(subStyle->type()) <<" into" << rect;
     // keep track of the used area
-    const bool isDefault = subStyle->type() == Style::DefaultStyleKey;
+    const bool isDefault = subStyle->type() == KCStyle::DefaultStyleKey;
     if (rect.top() == 1 && rect.bottom() >= KS_rowMax) {
         for (int i = rect.left(); i <= rect.right(); ++i) {
             if (isDefault)
@@ -243,7 +243,7 @@ void StyleStorage::insert(const QRect& rect, const SharedSubStyle& subStyle)
     StoredSubStyleList& storedSubStyles(d->subStyles.value(subStyle->type()));
     StoredSubStyleList::ConstIterator end(storedSubStyles.end());
     for (StoredSubStyleList::ConstIterator it(storedSubStyles.begin()); it != end; ++it) {
-        if (Style::compare(subStyle.data(), (*it).data())) {
+        if (KCStyle::compare(subStyle.data(), (*it).data())) {
 //             kDebug(36006) <<"[REUSING EXISTING SUBSTYLE]";
             d->tree.insert(rect, *it);
             regionChanged(rect);
@@ -256,7 +256,7 @@ void StyleStorage::insert(const QRect& rect, const SharedSubStyle& subStyle)
     regionChanged(rect);
 }
 
-void StyleStorage::insert(const KCRegion& region, const Style& style)
+void StyleStorage::insert(const KCRegion& region, const KCStyle& style)
 {
     if (style.isEmpty())
         return;
@@ -270,7 +270,7 @@ void StyleStorage::insert(const KCRegion& region, const Style& style)
     }
 }
 
-void StyleStorage::load(const QList<QPair<QRegion, Style> >& styles)
+void StyleStorage::load(const QList<QPair<QRegion, KCStyle> >& styles)
 {
     QList<QPair<QRegion, SharedSubStyle> > subStyles;
 
@@ -279,10 +279,10 @@ void StyleStorage::load(const QList<QPair<QRegion, Style> >& styles)
     d->usedRows.clear();
     d->cachedArea = QRegion();
     d->cache.clear();
-    typedef QPair<QRegion, Style> StyleRegion;
+    typedef QPair<QRegion, KCStyle> StyleRegion;
     foreach (const StyleRegion& styleArea, styles) {
         const QRegion& reg = styleArea.first;
-        const Style& style = styleArea.second;
+        const KCStyle& style = styleArea.second;
         if (style.isEmpty()) continue;
 
         // update used areas
@@ -312,7 +312,7 @@ void StyleStorage::load(const QList<QPair<QRegion, Style> >& styles)
             StoredSubStyleList& storedSubStyles(d->subStyles.value(subStyle->type()));
             StoredSubStyleList::ConstIterator end(storedSubStyles.end());
             for (StoredSubStyleList::ConstIterator it(storedSubStyles.begin()); it != end; ++it) {
-                if (Style::compare(subStyle.data(), (*it).data())) {
+                if (KCStyle::compare(subStyle.data(), (*it).data())) {
         //             kDebug(36006) <<"[REUSING EXISTING SUBSTYLE]";
                     subStyles.append(qMakePair(reg, *it));
                     foundShared = true;
@@ -552,7 +552,7 @@ void StyleStorage::garbageCollection()
     const QPair<QRectF, SharedSubStyle> currentPair = d->possibleGarbage.take(currentZIndex);
 
     // check whether the named style still exists
-    if (currentPair.second->type() == Style::NamedStyleKey &&
+    if (currentPair.second->type() == KCStyle::NamedStyleKey &&
             !styleManager()->style(static_cast<const NamedStyle*>(currentPair.second.data())->name)) {
         kDebug(36006) << "removing" << currentPair.second->debugData()
         << "at" << KCRegion(currentPair.first.toRect()).name()
@@ -572,8 +572,8 @@ void StyleStorage::garbageCollection()
 
     // check whether the default style is placed first
     if (zIndex == currentZIndex &&
-            currentPair.second->type() == Style::DefaultStyleKey &&
-            pair.second->type() == Style::DefaultStyleKey &&
+            currentPair.second->type() == KCStyle::DefaultStyleKey &&
+            pair.second->type() == KCStyle::DefaultStyleKey &&
             pair.first == currentPair.first) {
         kDebug(36006) << "removing default style"
         << "at" << KCRegion(currentPair.first.toRect()).name()
@@ -586,8 +586,8 @@ void StyleStorage::garbageCollection()
     // special handling for indentation:
     // check whether the default indentation is placed first
     if (zIndex == currentZIndex &&
-            currentPair.second->type() == Style::Indentation &&
-            static_cast<const SubStyleOne<Style::Indentation, int>*>(currentPair.second.data())->value1 == 0 &&
+            currentPair.second->type() == KCStyle::Indentation &&
+            static_cast<const SubStyleOne<KCStyle::Indentation, int>*>(currentPair.second.data())->value1 == 0 &&
             pair.first == currentPair.first) {
         kDebug(36006) << "removing default indentation"
         << "at" << KCRegion(currentPair.first.toRect()).name()
@@ -600,8 +600,8 @@ void StyleStorage::garbageCollection()
     // special handling for precision:
     // check whether the storage default precision is placed first
     if (zIndex == currentZIndex &&
-            currentPair.second->type() == Style::Precision &&
-            static_cast<const SubStyleOne<Style::Precision, int>*>(currentPair.second.data())->value1 == 0 &&
+            currentPair.second->type() == KCStyle::Precision &&
+            static_cast<const SubStyleOne<KCStyle::Precision, int>*>(currentPair.second.data())->value1 == 0 &&
             pair.first == currentPair.first) {
         kDebug(36006) << "removing default precision"
         << "at" << KCRegion(currentPair.first.toRect()).name()
@@ -621,7 +621,7 @@ void StyleStorage::garbageCollection()
         // as long as the substyle in question was not found, skip the substyle
         if (!found) {
             if (pair.first == currentPair.first &&
-                    Style::compare(pair.second.data(), currentPair.second.data()) &&
+                    KCStyle::compare(pair.second.data(), currentPair.second.data()) &&
                     zIndex == currentZIndex) {
                 found = true;
             }
@@ -633,20 +633,20 @@ void StyleStorage::garbageCollection()
         // is completely covered
         if (zIndex != currentZIndex &&
                 (pair.second->type() == currentPair.second->type() ||
-                 pair.second->type() == Style::DefaultStyleKey ||
-                 pair.second->type() == Style::NamedStyleKey) &&
+                 pair.second->type() == KCStyle::DefaultStyleKey ||
+                 pair.second->type() == KCStyle::NamedStyleKey) &&
                 pair.first.toRect().contains(currentPair.first.toRect())) {
             // special handling for indentation
             // only remove, if covered by default
-            if (pair.second->type() == Style::Indentation &&
-                    static_cast<const SubStyleOne<Style::Indentation, int>*>(pair.second.data())->value1 != 0) {
+            if (pair.second->type() == KCStyle::Indentation &&
+                    static_cast<const SubStyleOne<KCStyle::Indentation, int>*>(pair.second.data())->value1 != 0) {
                 continue;
             }
 
             // special handling for precision
             // only remove, if covered by default
-            if (pair.second->type() == Style::Precision &&
-                    static_cast<const SubStyleOne<Style::Precision, int>*>(pair.second.data())->value1 != 0) {
+            if (pair.second->type() == KCStyle::Precision &&
+                    static_cast<const SubStyleOne<KCStyle::Precision, int>*>(pair.second.data())->value1 != 0) {
                 continue;
             }
 
@@ -702,16 +702,16 @@ void StyleStorage::invalidateCache(const QRect& rect)
     }
 }
 
-Style StyleStorage::composeStyle(const QList<SharedSubStyle>& subStyles) const
+KCStyle StyleStorage::composeStyle(const QList<SharedSubStyle>& subStyles) const
 {
     if (subStyles.isEmpty())
         return *styleManager()->defaultStyle();
 
-    Style style;
+    KCStyle style;
     for (int i = 0; i < subStyles.count(); ++i) {
-        if (subStyles[i]->type() == Style::DefaultStyleKey)
+        if (subStyles[i]->type() == KCStyle::DefaultStyleKey)
             style = *styleManager()->defaultStyle();
-        else if (subStyles[i]->type() == Style::NamedStyleKey) {
+        else if (subStyles[i]->type() == KCStyle::NamedStyleKey) {
             style.clear();
             const CustomStyle* namedStyle = styleManager()->style(static_cast<const NamedStyle*>(subStyles[i].data())->name);
             if (namedStyle) {
@@ -724,7 +724,7 @@ Style StyleStorage::composeStyle(const QList<SharedSubStyle>& subStyles) const
                     parentStyles.prepend(parentStyle);
                     parentStyle = styleManager()->style(parentStyle->parentName());
                 }
-                Style tmpStyle;
+                KCStyle tmpStyle;
                 for (int i = 0; i < parentStyles.count(); ++i) {
 //                     kDebug(36006) <<"StyleStorage: merging" << parentStyles[i]->name() <<" in.";
                     tmpStyle = *parentStyles[i];
@@ -737,26 +737,26 @@ Style StyleStorage::composeStyle(const QList<SharedSubStyle>& subStyles) const
                 tmpStyle.merge(style);
                 style = tmpStyle;
                 // not the default anymore
-                style.clearAttribute(Style::DefaultStyleKey);
+                style.clearAttribute(KCStyle::DefaultStyleKey);
                 // reset the parent name
                 style.setParentName(namedStyle->name());
 //                 kDebug(36006) <<"StyleStorage: merging done";
             }
-        } else if (subStyles[i]->type() == Style::Indentation) {
+        } else if (subStyles[i]->type() == KCStyle::Indentation) {
             // special handling for indentation
-            const int indentation = static_cast<const SubStyleOne<Style::Indentation, int>*>(subStyles[i].data())->value1;
+            const int indentation = static_cast<const SubStyleOne<KCStyle::Indentation, int>*>(subStyles[i].data())->value1;
             if (indentation == 0 || (style.indentation() + indentation <= 0))
-                style.clearAttribute(Style::Indentation);   // reset
+                style.clearAttribute(KCStyle::Indentation);   // reset
             else
                 style.setIndentation(style.indentation() + indentation);   // increase/decrease
-        } else if (subStyles[i]->type() == Style::Precision) {
+        } else if (subStyles[i]->type() == KCStyle::Precision) {
             // special handling for precision
-            // The Style default (-1) and the storage default (0) differ.
-            const int precision = static_cast<const SubStyleOne<Style::Precision, int>*>(subStyles[i].data())->value1;
+            // The KCStyle default (-1) and the storage default (0) differ.
+            const int precision = static_cast<const SubStyleOne<KCStyle::Precision, int>*>(subStyles[i].data())->value1;
             if (precision == 0)   // storage default
-                style.clearAttribute(Style::Precision);   // reset
+                style.clearAttribute(KCStyle::Precision);   // reset
             else {
-                if (style.precision() == -1)   // Style default
+                if (style.precision() == -1)   // KCStyle default
                     style.setPrecision(qMax(0, precision));     // positive initial value
                 else if (style.precision() + precision <= 0)
                     style.setPrecision(0);
@@ -770,7 +770,7 @@ Style StyleStorage::composeStyle(const QList<SharedSubStyle>& subStyles) const
 //             kDebug(36006) <<"StyleStorage: inserting" << subStyles[i]->debugData();
             style.insertSubStyle(subStyles[i]);
             // not the default anymore
-            style.clearAttribute(Style::DefaultStyleKey);
+            style.clearAttribute(KCStyle::DefaultStyleKey);
         }
     }
     return style;

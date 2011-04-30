@@ -57,7 +57,7 @@ enum CellDataRole {
     // Cell range associations; SheetModel, RegionModel
     CommentRole         = 0x00002000,   ///< a comment; QString
     ConditionRole       = 0x00004000,   ///< a conditional style; Conditions
-    StyleRole           = 0x00008000,   ///< a style; Style
+    StyleRole           = 0x00008000,   ///< a style; KCStyle
     ValidityRole        = 0x00010000,   ///< a cell validition; Validity
     FusionedRangeRole   = 0x00020000,   ///< a fusioned cell range; bool
     LockedRangeRole     = 0x00040000,   ///< a locked cell range; bool

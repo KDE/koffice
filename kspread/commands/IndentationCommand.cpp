@@ -28,7 +28,7 @@
 #include "CellStorage.h"
 #include "Map.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 
 IndentationCommand::IndentationCommand()
         : AbstractRegionCommand()
@@ -38,7 +38,7 @@ IndentationCommand::IndentationCommand()
 
 bool IndentationCommand::mainProcessing()
 {
-    Style style;
+    KCStyle style;
     if (!m_reverse) {
         // increase the indentation
         style.setIndentation(m_sheet->map()->settings()->indentValue());

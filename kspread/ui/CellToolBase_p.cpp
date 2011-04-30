@@ -82,7 +82,7 @@
 void CellToolBase::Private::updateEditor(const Cell& cell)
 {
     const Cell& theCell = cell.isPartOfMerged() ? cell.masterCell() : cell;
-    const Style style = theCell.style();
+    const KCStyle style = theCell.style();
     if (q->selection()->activeSheet()->isProtected() && style.hideFormula()) {
         optionWidget->editor()->setPlainText(theCell.displayText());
     } else if (q->selection()->activeSheet()->isProtected() && style.hideAll()) {
@@ -101,7 +101,7 @@ void CellToolBase::Private::updateEditor(const Cell& cell)
 
 void CellToolBase::Private::updateActions(const Cell& cell)
 {
-    const Style style = cell.style();
+    const KCStyle style = cell.style();
 
     // -- font actions --
     ACTION_EXEC("bold", setChecked(style.bold()));
@@ -112,13 +112,13 @@ void CellToolBase::Private::updateActions(const Cell& cell)
     static_cast<KFontAction*>(q->action("font"))->setFont(style.fontFamily());
     static_cast<KFontSizeAction*>(q->action("fontSize"))->setFontSize(style.fontSize());
     // -- horizontal alignment actions --
-    ACTION_EXEC("alignLeft", setChecked(style.halign() == Style::Left));
-    ACTION_EXEC("alignCenter", setChecked(style.halign() == Style::Center));
-    ACTION_EXEC("alignRight", setChecked(style.halign() == Style::Right));
+    ACTION_EXEC("alignLeft", setChecked(style.halign() == KCStyle::Left));
+    ACTION_EXEC("alignCenter", setChecked(style.halign() == KCStyle::Center));
+    ACTION_EXEC("alignRight", setChecked(style.halign() == KCStyle::Right));
     // -- vertical alignment actions --
-    ACTION_EXEC("alignTop", setChecked(style.valign() == Style::Top));
-    ACTION_EXEC("alignMiddle", setChecked(style.valign() == Style::Middle));
-    ACTION_EXEC("alignBottom", setChecked(style.valign() == Style::Bottom));
+    ACTION_EXEC("alignTop", setChecked(style.valign() == KCStyle::Top));
+    ACTION_EXEC("alignMiddle", setChecked(style.valign() == KCStyle::Middle));
+    ACTION_EXEC("alignBottom", setChecked(style.valign() == KCStyle::Bottom));
 
     ACTION_EXEC("verticalText", setChecked(style.verticalText()));
     ACTION_EXEC("wrapText", setChecked(style.wrapText()));

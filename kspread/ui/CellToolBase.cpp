@@ -191,18 +191,18 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     connect(action, SIGNAL(triggered(bool)), this, SLOT(setDefaultStyle()));
     action->setToolTip(i18n("Resets to the default format"));
 
-    action = new KAction(i18n("Style Manager..."), this);
+    action = new KAction(i18n("KCStyle Manager..."), this);
     addAction("styleDialog", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(styleDialog()));
     action->setToolTip(i18n("Edit and organize cell styles"));
 
-    action = new KSelectAction(i18n("Style"), this);
+    action = new KSelectAction(i18n("KCStyle"), this);
     addAction("setStyle", action);
     action->setToolTip(i18n("Apply a predefined style to the selected cells"));
     connect(action, SIGNAL(triggered(const QString&)), this, SLOT(setStyle(const QString&)));
 
-    action = new KAction(i18n("Create Style From Cell..."), this);
-    action->setIconText(i18n("Style From Cell"));
+    action = new KAction(i18n("Create KCStyle From Cell..."), this);
+    action->setIconText(i18n("KCStyle From Cell"));
     addAction("createStyleFromCell", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(createStyleFromCell()));
     action->setToolTip(i18n("Create a new style based on the currently selected cell"));
@@ -1281,7 +1281,7 @@ void CellToolBase::selectionChanged(const KCRegion& region)
     d->updateActions(cell);
 
     if (selection()->activeSheet()->isProtected()) {
-        const Style style = cell.style();
+        const KCStyle style = cell.style();
         if (style.notProtected()) {
             if (selection()->isSingular()) {
                 if (!action("bold")->isEnabled()) {
@@ -1379,7 +1379,7 @@ bool CellToolBase::createEditor(bool clear, bool focus)
         ypos += canvas()->viewConverter()->viewToDocumentY(canvas()->canvasController()->canvasOffsetY());
 
         // Setup the editor's palette.
-        const Style style = cell.effectiveStyle();
+        const KCStyle style = cell.effectiveStyle();
         QPalette editorPalette(d->cellEditor->palette());
         QColor color = style.fontColor();
         if (!color.isValid())
@@ -1595,7 +1595,7 @@ void CellToolBase::createStyleFromCell()
     QString styleName("");
 
     while (true) {
-        styleName = KInputDialog::getText(i18n("Create Style From Cell"),
+        styleName = KInputDialog::getText(i18n("Create KCStyle From Cell"),
                                           i18n("Enter name:"), styleName, &ok, canvas()->canvasWidget());
 
         if (!ok) // User pushed an OK button.
@@ -1615,7 +1615,7 @@ void CellToolBase::createStyleFromCell()
         break;
     }
 
-    const Style cellStyle = cell.style();
+    const KCStyle cellStyle = cell.style();
     CustomStyle*  style = new CustomStyle(styleName);
     style->merge(cellStyle);
 
@@ -1693,7 +1693,7 @@ void CellToolBase::font(const QString& font)
     command->execute(canvas());
     // Don't leave the focus in the toolbars combo box ...
     if (editor()) {
-        const Style style = Cell(selection()->activeSheet(), selection()->marker()).style();
+        const KCStyle style = Cell(selection()->activeSheet(), selection()->marker()).style();
         editor()->setEditorFont(style.font(), true, canvas()->viewConverter());
         focusEditorRequested();
     } else {
@@ -1721,7 +1721,7 @@ void CellToolBase::fontSize(int size)
 
 void CellToolBase::increaseFontSize()
 {
-    const Style style = Cell(selection()->activeSheet(), selection()->marker()).style();
+    const KCStyle style = Cell(selection()->activeSheet(), selection()->marker()).style();
     const int size = style.fontSize();
 
     StyleCommand* command = new StyleCommand();
@@ -1734,7 +1734,7 @@ void CellToolBase::increaseFontSize()
 
 void CellToolBase::decreaseFontSize()
 {
-    const Style style = Cell(selection()->activeSheet(), selection()->marker()).style();
+    const KCStyle style = Cell(selection()->activeSheet(), selection()->marker()).style();
     const int size = style.fontSize();
 
     StyleCommand* command = new StyleCommand();
@@ -1760,7 +1760,7 @@ void CellToolBase::alignLeft(bool enable)
     StyleCommand* command = new StyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Horizontal Alignment"));
-    command->setHorizontalAlignment(enable ? Style::Left : Style::HAlignUndefined);
+    command->setHorizontalAlignment(enable ? KCStyle::Left : KCStyle::HAlignUndefined);
     command->add(*selection());
     command->execute(canvas());
 }
@@ -1770,7 +1770,7 @@ void CellToolBase::alignRight(bool enable)
     StyleCommand* command = new StyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Horizontal Alignment"));
-    command->setHorizontalAlignment(enable ? Style::Right : Style::HAlignUndefined);
+    command->setHorizontalAlignment(enable ? KCStyle::Right : KCStyle::HAlignUndefined);
     command->add(*selection());
     command->execute(canvas());
 }
@@ -1780,7 +1780,7 @@ void CellToolBase::alignCenter(bool enable)
     StyleCommand* command = new StyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Horizontal Alignment"));
-    command->setHorizontalAlignment(enable ? Style::Center : Style::HAlignUndefined);
+    command->setHorizontalAlignment(enable ? KCStyle::Center : KCStyle::HAlignUndefined);
     command->add(*selection());
     command->execute(canvas());
 }
@@ -1790,7 +1790,7 @@ void CellToolBase::alignTop(bool enable)
     StyleCommand* command = new StyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Vertical Alignment"));
-    command->setVerticalAlignment(enable ? Style::Top : Style::VAlignUndefined);
+    command->setVerticalAlignment(enable ? KCStyle::Top : KCStyle::VAlignUndefined);
     command->add(*selection());
     command->execute(canvas());
 }
@@ -1800,7 +1800,7 @@ void CellToolBase::alignBottom(bool enable)
     StyleCommand* command = new StyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Vertical Alignment"));
-    command->setVerticalAlignment(enable ? Style::Bottom : Style::VAlignUndefined);
+    command->setVerticalAlignment(enable ? KCStyle::Bottom : KCStyle::VAlignUndefined);
     command->add(*selection());
     command->execute(canvas());
 }
@@ -1810,7 +1810,7 @@ void CellToolBase::alignMiddle(bool enable)
     StyleCommand* command = new StyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Vertical Alignment"));
-    command->setVerticalAlignment(enable ? Style::Middle : Style::VAlignUndefined);
+    command->setVerticalAlignment(enable ? KCStyle::Middle : KCStyle::VAlignUndefined);
     command->add(*selection());
     command->execute(canvas());
 }
@@ -2694,9 +2694,9 @@ void CellToolBase::specialCharDialogClosed()
 
 void CellToolBase::specialChar(QChar character, const QString& fontName)
 {
-    const Style style = Cell(selection()->activeSheet(), selection()->marker()).style();
+    const KCStyle style = Cell(selection()->activeSheet(), selection()->marker()).style();
     if (style.fontFamily() != fontName) {
-        Style newStyle;
+        KCStyle newStyle;
         newStyle.setFontFamily(fontName);
         selection()->activeSheet()->cellStorage()->setStyle(KCRegion(selection()->marker()), newStyle);
     }

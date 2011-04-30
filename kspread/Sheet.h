@@ -36,7 +36,7 @@
 #include <KoXmlReader.h>
 
 #include "Cell.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "Global.h"
 #include "ProtectableObject.h"
 
@@ -75,7 +75,7 @@ class KCRegion;
 class RowFormat;
 class Sheet;
 class SheetPrint;
-class Style;
+class KCStyle;
 class StyleStorage;
 class Validity;
 class ValidityStorage;
@@ -882,7 +882,7 @@ protected:
                              const QHash<QString, QRegion>& styleRegions,
                              const QHash<QString, Conditions>& conditionalStyles,
                              const QRect& usedArea,
-                             QList<QPair<QRegion, Style> >& outStyleRegions,
+                             QList<QPair<QRegion, KCStyle> >& outStyleRegions,
                              QList<QPair<QRegion, Conditions> >& outConditionalStyles);
 
     /**

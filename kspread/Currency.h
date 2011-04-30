@@ -27,7 +27,7 @@
 #include "kspread_export.h"
 
 /**
- * \ingroup Style
+ * \ingroup KCStyle
  * \class Currency
  * Currency format information.
  */

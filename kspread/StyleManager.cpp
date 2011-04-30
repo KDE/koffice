@@ -37,7 +37,7 @@
 #include "CalculationSettings.h"
 #include "Condition.h"
 #include "Map.h"
-#include "Style.h"
+#include "KCStyle.h"
 
 StyleManager::StyleManager()
         : m_defaultStyle(new CustomStyle())
@@ -78,7 +78,7 @@ void StyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, Map* ma
         kDebug(36003) << "StyleManager: Loading default cell style";
         Conditions conditions;
         defaultStyle()->loadOdf(stylesReader, *defStyle, "Default", conditions, this, map->parser());
-        defaultStyle()->setType(Style::BUILTIN);
+        defaultStyle()->setType(KCStyle::BUILTIN);
         if (map) {
             // Load the default precision to be used, if the (default) cell style
             // is set to arbitrary precision.
@@ -117,7 +117,7 @@ void StyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, Map* ma
         kDebug(36003) << " StyleManager: Loading common cell style:" << oasisName << " (display name:" << name << ")";
 
         if (!name.isEmpty()) {
-            // The style's parent name will be set in Style::loadOdf(..).
+            // The style's parent name will be set in KCStyle::loadOdf(..).
             // After all styles are loaded the pointer to the parent is set.
             CustomStyle * style = new CustomStyle(name);
 
@@ -127,7 +127,7 @@ void StyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, Map* ma
             insertStyle(style);
             // insert it into the the map sorted the OpenDocument name
             m_oasisStyles[oasisName] = name;
-            kDebug(36003) << "Style" << name << ":" << style;
+            kDebug(36003) << "KCStyle" << name << ":" << style;
         }
     }
 
@@ -177,14 +177,14 @@ bool StyleManager::loadXML(KoXmlElement const & styles)
         QString name;
         if (e.hasAttribute("name"))
             name = e.attribute("name");
-        Style::StyleType type = (Style::StyleType)(e.attribute("type").toInt(&ok));
+        KCStyle::StyleType type = (KCStyle::StyleType)(e.attribute("type").toInt(&ok));
         if (!ok)
             return false;
 
-        if (name == "Default" && type == Style::BUILTIN) {
+        if (name == "Default" && type == KCStyle::BUILTIN) {
             if (!m_defaultStyle->loadXML(e, name))
                 return false;
-            m_defaultStyle->setType(Style::BUILTIN);
+            m_defaultStyle->setType(KCStyle::BUILTIN);
         } else if (!name.isNull()) {
             CustomStyle* style = 0;
             if (e.hasAttribute("parent") && e.attribute("parent") == "Default")
@@ -197,10 +197,10 @@ bool StyleManager::loadXML(KoXmlElement const & styles)
                 return false;
             }
 
-            if (style->type() == Style::AUTO)
-                style->setType(Style::CUSTOM);
+            if (style->type() == KCStyle::AUTO)
+                style->setType(KCStyle::CUSTOM);
             insertStyle(style);
-            kDebug(36003) << "Style" << name << ":" << style;
+            kDebug(36003) << "KCStyle" << name << ":" << style;
         }
 
         e = e.nextSibling().toElement();
@@ -234,7 +234,7 @@ void StyleManager::createBuiltinStyles()
     f.setPointSize(f.pointSize() + 2);
     f.setBold(true);
     header1->setFont(f);
-    header1->setType(Style::BUILTIN);
+    header1->setType(KCStyle::BUILTIN);
     m_styles[ header1->name()] = header1;
 
     CustomStyle * header2 = new CustomStyle(i18n("Header1"), header1);
@@ -242,7 +242,7 @@ void StyleManager::createBuiltinStyles()
     header2->setBackgroundColor(color);
     QPen pen(Qt::black, 1, Qt::SolidLine);
     header2->setBottomBorderPen(pen);
-    header2->setType(Style::BUILTIN);
+    header2->setType(KCStyle::BUILTIN);
 
     m_styles[ header2->name()] = header2;
 }
@@ -340,7 +340,7 @@ void StyleManager::insertStyle(CustomStyle *style)
 {
     const QString base = style->name();
     // do not add the default style
-    if (base == "Default" && style->type() == Style::BUILTIN)
+    if (base == "Default" && style->type() == KCStyle::BUILTIN)
         return;
     int num = 1;
     QString name = base;

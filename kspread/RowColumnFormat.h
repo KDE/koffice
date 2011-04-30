@@ -27,7 +27,7 @@
 #include <KoXmlReader.h>
 
 #include "Global.h"
-#include "Style.h"
+#include "KCStyle.h"
 
 class QDomElement;
 class QDomDocument;

@@ -62,7 +62,7 @@ class NamedAreaManager;
 class RecalcManager;
 class RowFormat;
 class Sheet;
-class Style;
+class KCStyle;
 class StyleManager;
 class ValueParser;
 class ValueConverter;

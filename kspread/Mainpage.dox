@@ -67,7 +67,7 @@
  */
 
 /**
- * \defgroup Style Style System
+ * \defgroup KCStyle KCStyle System
  * Classes and methods related to cell styles.
  */
 

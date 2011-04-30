@@ -32,7 +32,7 @@ class KComboBox;
 class KLineEdit;
 
 class Selection;
-class Style;
+class KCStyle;
 
 /**
  * \ingroup UI

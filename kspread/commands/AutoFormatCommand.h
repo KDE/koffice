@@ -24,7 +24,7 @@
 
 #include <QList>
 
-class Style;
+class KCStyle;
 
 /**
  * \ingroup Commands
@@ -43,7 +43,7 @@ public:
      */
     virtual ~AutoFormatCommand();
 
-    void setStyles(const QList<Style>& styles);
+    void setStyles(const QList<KCStyle>& styles);
 
 protected:
     virtual bool process(Element* element);
@@ -51,7 +51,7 @@ protected:
     virtual bool mainProcessing();
 
 private:
-    QList<Style> m_styles;
+    QList<KCStyle> m_styles;
 };
 
 #endif // KSPREAD_AUTO_FORMAT_COMMAND

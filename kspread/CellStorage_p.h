@@ -24,7 +24,7 @@
 #include "Binding.h"
 #include "Condition.h"
 #include "Formula.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "Validity.h"
 #include "Value.h"
 

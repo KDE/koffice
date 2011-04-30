@@ -305,7 +305,7 @@ bool SubtotalDialog::addSubtotal(int mainCol, int column, int row, int topRow,
 
         Cell cell = Cell(sheet, mainCol, row + 1);
         cell.parseUserInput(text);
-        Style style;
+        KCStyle style;
         style.setFontBold(true);
         style.setFontItalic(true);
         style.setFontUnderline(true);
@@ -329,7 +329,7 @@ bool SubtotalDialog::addSubtotal(int mainCol, int column, int row, int topRow,
 
     Cell cell = Cell(sheet, column, row + 1);
     cell.parseUserInput(formula);
-    Style style;
+    KCStyle style;
     style.setFontBold(true);
     style.setFontItalic(true);
     style.setFontUnderline(true);

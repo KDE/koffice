@@ -122,7 +122,7 @@ Value SortManipulator::newValue(Element *element, int col, int row,
     return m_cellStorage->value(colidx + range.left(), rowidx + range.top());
 }
 
-Style SortManipulator::newFormat(Element *element, int col, int row)
+KCStyle SortManipulator::newFormat(Element *element, int col, int row)
 {
     QRect range = element->rect();
     int colidx = col - range.left();

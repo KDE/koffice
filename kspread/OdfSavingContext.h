@@ -76,8 +76,8 @@ public:
 public:
     KoShapeSavingContext& shapeContext;
     GenValidationStyles valStyle;
-    QMap<int, Style> columnDefaultStyles;
-    QMap<int, Style> rowDefaultStyles;
+    QMap<int, KCStyle> columnDefaultStyles;
+    QMap<int, KCStyle> rowDefaultStyles;
 
 private:
     QHash < const Sheet*, QHash < int /*row*/, QMultiHash < int /*col*/, KoShape* > > > m_cellAnchoredShapes;

@@ -68,7 +68,7 @@ bool AbstractDataManipulator::process(Element* element)
             // we have the data - set it !
             if (parse) {
                 if (fmtType != Format::None) {
-                    Style style;
+                    KCStyle style;
                     style.setFormatType(fmtType);
                     cell.setStyle(style);
                 }
@@ -78,7 +78,7 @@ bool AbstractDataManipulator::process(Element* element)
                     cell.setValue(val);
                     cell.setUserInput(m_sheet->map()->converter()->asString(val).asString());
                     if (fmtType != Format::None) {
-                        Style style;
+                        KCStyle style;
                         style.setFormatType(fmtType);
                         cell.setStyle(style);
                     }
@@ -141,7 +141,7 @@ bool AbstractDFManipulator::process(Element* element)
             Cell cell(m_sheet, col, row);
 //       int colidx = col - range.left();
 //       int rowidx = row - range.top();
-            Style style = newFormat(element, col, row);
+            KCStyle style = newFormat(element, col, row);
             cell.setStyle(style);
         }
     }
@@ -327,7 +327,7 @@ Value FillManipulator::newValue(Element *element, int col, int row,
     return cell.value();
 }
 
-Style FillManipulator::newFormat(Element *element, int col, int row)
+KCStyle FillManipulator::newFormat(Element *element, int col, int row)
 {
     switch (m_dir) {
     case Up:    row = element->rect().bottom(); break;

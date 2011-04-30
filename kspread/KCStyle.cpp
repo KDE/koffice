@@ -20,7 +20,7 @@
 */
 
 // Local
-#include "Style.h"
+#include "KCStyle.h"
 
 #include <QBrush>
 #include <QHash>
@@ -61,19 +61,19 @@ static uint calculateValue(QPen const & pen)
 
 // specialized debug method
 template<>
-QString SubStyleOne<Style::CurrencyFormat, Currency>::debugData(bool withName) const
+QString SubStyleOne<KCStyle::CurrencyFormat, Currency>::debugData(bool withName) const
 {
-    QString out; if (withName) out = name(Style::CurrencyFormat) + ' '; QDebug qdbg(&out); qdbg << value1.symbol(); return out;
+    QString out; if (withName) out = name(KCStyle::CurrencyFormat) + ' '; QDebug qdbg(&out); qdbg << value1.symbol(); return out;
 }
 
-template<Style::Key key>
+template<KCStyle::Key key>
 class PenStyle : public SubStyleOne<key, QPen>
 {
 public:
     PenStyle(const QPen& p = Qt::NoPen) : SubStyleOne<key, QPen>(p) {}
 };
 
-template<Style::Key key>
+template<KCStyle::Key key>
 class BorderPenStyle : public PenStyle<key>
 {
 public:
@@ -81,46 +81,46 @@ public:
     int value;
 };
 
-QString SubStyle::name(Style::Key key)
+QString SubStyle::name(KCStyle::Key key)
 {
     QString name;
     switch (key) {
-    case Style::DefaultStyleKey:        name = "Default style"; break;
-    case Style::NamedStyleKey:          name = "Named style"; break;
-    case Style::LeftPen:                name = "Left pen"; break;
-    case Style::RightPen:               name = "Right pen"; break;
-    case Style::TopPen:                 name = "Top pen"; break;
-    case Style::BottomPen:              name = "Bottom pen"; break;
-    case Style::FallDiagonalPen:        name = "Fall diagonal pen"; break;
-    case Style::GoUpDiagonalPen:        name = "Go up diagonal pen"; break;
-    case Style::HorizontalAlignment:    name = "Horz. alignment"; break;
-    case Style::VerticalAlignment:      name = "Vert. alignment"; break;
-    case Style::MultiRow:               name = "Wrap text"; break;
-    case Style::VerticalText:           name = "Vertical text"; break;
-    case Style::Angle:                  name = "Angle"; break;
-    case Style::Indentation:            name = "Indentation"; break;
-    case Style::ShrinkToFit:            name = "Shrink to Fit"; break;
-    case Style::Prefix:                 name = "Prefix"; break;
-    case Style::Postfix:                name = "Postfix"; break;
-    case Style::Precision:              name = "Precision"; break;
-    case Style::FormatTypeKey:          name = "Format type"; break;
-    case Style::FloatFormatKey:         name = "Float format"; break;
-    case Style::FloatColorKey:          name = "Float color"; break;
-    case Style::CurrencyFormat:         name = "Currency"; break;
-    case Style::CustomFormat:           name = "Custom format"; break;
-    case Style::BackgroundBrush:        name = "Background brush"; break;
-    case Style::BackgroundColor:        name = "Background color"; break;
-    case Style::FontColor:              name = "Font color"; break;
-    case Style::FontFamily:             name = "Font family"; break;
-    case Style::FontSize:               name = "Font size"; break;
-    case Style::FontBold:               name = "Font bold"; break;
-    case Style::FontItalic:             name = "Font italic"; break;
-    case Style::FontStrike:             name = "Font strikeout"; break;
-    case Style::FontUnderline:          name = "Font underline"; break;
-    case Style::DontPrintText:          name = "Do not print text"; break;
-    case Style::NotProtected:           name = "Not protected"; break;
-    case Style::HideAll:                name = "Hide all"; break;
-    case Style::HideFormula:            name = "Hide formula"; break;
+    case KCStyle::DefaultStyleKey:        name = "Default style"; break;
+    case KCStyle::NamedStyleKey:          name = "Named style"; break;
+    case KCStyle::LeftPen:                name = "Left pen"; break;
+    case KCStyle::RightPen:               name = "Right pen"; break;
+    case KCStyle::TopPen:                 name = "Top pen"; break;
+    case KCStyle::BottomPen:              name = "Bottom pen"; break;
+    case KCStyle::FallDiagonalPen:        name = "Fall diagonal pen"; break;
+    case KCStyle::GoUpDiagonalPen:        name = "Go up diagonal pen"; break;
+    case KCStyle::HorizontalAlignment:    name = "Horz. alignment"; break;
+    case KCStyle::VerticalAlignment:      name = "Vert. alignment"; break;
+    case KCStyle::MultiRow:               name = "Wrap text"; break;
+    case KCStyle::VerticalText:           name = "Vertical text"; break;
+    case KCStyle::Angle:                  name = "Angle"; break;
+    case KCStyle::Indentation:            name = "Indentation"; break;
+    case KCStyle::ShrinkToFit:            name = "Shrink to Fit"; break;
+    case KCStyle::Prefix:                 name = "Prefix"; break;
+    case KCStyle::Postfix:                name = "Postfix"; break;
+    case KCStyle::Precision:              name = "Precision"; break;
+    case KCStyle::FormatTypeKey:          name = "Format type"; break;
+    case KCStyle::FloatFormatKey:         name = "Float format"; break;
+    case KCStyle::FloatColorKey:          name = "Float color"; break;
+    case KCStyle::CurrencyFormat:         name = "Currency"; break;
+    case KCStyle::CustomFormat:           name = "Custom format"; break;
+    case KCStyle::BackgroundBrush:        name = "Background brush"; break;
+    case KCStyle::BackgroundColor:        name = "Background color"; break;
+    case KCStyle::FontColor:              name = "Font color"; break;
+    case KCStyle::FontFamily:             name = "Font family"; break;
+    case KCStyle::FontSize:               name = "Font size"; break;
+    case KCStyle::FontBold:               name = "Font bold"; break;
+    case KCStyle::FontItalic:             name = "Font italic"; break;
+    case KCStyle::FontStrike:             name = "Font strikeout"; break;
+    case KCStyle::FontUnderline:          name = "Font underline"; break;
+    case KCStyle::DontPrintText:          name = "Do not print text"; break;
+    case KCStyle::NotProtected:           name = "Not protected"; break;
+    case KCStyle::HideAll:                name = "Hide all"; break;
+    case KCStyle::HideFormula:            name = "Hide formula"; break;
     }
     return name;
 }
@@ -129,11 +129,11 @@ SharedSubStyle SharedSubStyle::s_defaultStyle(new SubStyle());
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Style::Private
+// KCStyle::Private
 //
 /////////////////////////////////////////////////////////////////////////////
 
-class Style::Private : public QSharedData
+class KCStyle::Private : public QSharedData
 {
 public:
     QHash<Key, SharedSubStyle> subStyles;
@@ -142,52 +142,52 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Style
+// KCStyle
 //
 /////////////////////////////////////////////////////////////////////////////
 
-Style::Style()
+KCStyle::KCStyle()
         : d(new Private)
 {
 }
 
-Style::Style(const Style& style)
+KCStyle::KCStyle(const KCStyle& style)
         : d(style.d)
 {
 }
 
-Style::~Style()
+KCStyle::~KCStyle()
 {
 }
 
-Style::StyleType Style::type() const
+KCStyle::StyleType KCStyle::type() const
 {
     return AUTO;
 }
 
-QString Style::parentName() const
+QString KCStyle::parentName() const
 {
     if (!d->subStyles.contains(NamedStyleKey))
         return QString();
     return static_cast<const NamedStyle*>(d->subStyles[NamedStyleKey].data())->name;
 }
 
-void Style::setParentName(const QString& name)
+void KCStyle::setParentName(const QString& name)
 {
     d->subStyles.insert(NamedStyleKey, SharedSubStyle(new NamedStyle(name)));
 }
 
-void Style::clearAttribute(Key key)
+void KCStyle::clearAttribute(Key key)
 {
     d->subStyles.remove(key);
 }
 
-bool Style::hasAttribute(Key key) const
+bool KCStyle::hasAttribute(Key key) const
 {
     return d->subStyles.contains(key);
 }
 
-void Style::loadAttributes(const QList<SharedSubStyle>& subStyles)
+void KCStyle::loadAttributes(const QList<SharedSubStyle>& subStyles)
 {
     d->subStyles.clear();
     for (int i = 0; i < subStyles.count(); ++i) {
@@ -196,7 +196,7 @@ void Style::loadAttributes(const QList<SharedSubStyle>& subStyles)
     }
 }
 
-void Style::loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
+void KCStyle::loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
                          Conditions& conditions, const StyleManager* styleManager,
                          const ValueParser *parser)
 {
@@ -221,7 +221,7 @@ void Style::loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& el
 
 typedef QPair<QString,QString> StringPair;
 
-void Style::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
+void KCStyle::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
                              Conditions& conditions, const StyleManager* styleManager,
                              const ValueParser *parser)
 {
@@ -232,17 +232,17 @@ void Style::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement
     }
 }
 
-void Style::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &styleName, Conditions &conditions, const StyleManager *styleManager, const ValueParser *parser)
+void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &styleName, Conditions &conditions, const StyleManager *styleManager, const ValueParser *parser)
 {
     if (stylesReader.dataFormats().contains(styleName)) {
-        Style* theStyle = this;
+        KCStyle* theStyle = this;
 
         QPair<KoOdfNumberStyles::NumericStyleFormat, KoXmlElement*> dataStylePair = stylesReader.dataFormats()[styleName];
 
         const KoOdfNumberStyles::NumericStyleFormat& dataStyle = dataStylePair.first;
         const QList<QPair<QString,QString> > styleMaps = dataStyle.styleMaps;
         if(styleMaps.count() > 0) {
-            theStyle = new Style();
+            theStyle = new KCStyle();
             for (QList<QPair<QString,QString> >::const_iterator it = styleMaps.begin(); it != styleMaps.end(); ++it) {
                 const Conditional c = conditions.loadOdfCondition(it->first, it->second, QString(), parser);
                 if (styleManager->style(c.styleName) == 0) {
@@ -293,7 +293,7 @@ void Style::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &sty
             // formatting string
             tmp = dataStyle.formatStr;
             if (!tmp.isEmpty()) {
-                theStyle->setFormatType(Style::fractionType(tmp));
+                theStyle->setFormatType(KCStyle::fractionType(tmp));
             }
             break;
         case KoOdfNumberStyles::Date:
@@ -301,7 +301,7 @@ void Style::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &sty
             // formatting string
             tmp = dataStyle.formatStr;
             if (!tmp.isEmpty()) {
-                theStyle->setFormatType(Style::dateType(tmp));
+                theStyle->setFormatType(KCStyle::dateType(tmp));
             }
             break;
         case KoOdfNumberStyles::Time:
@@ -309,7 +309,7 @@ void Style::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &sty
             // formatting string
             tmp = dataStyle.formatStr;
             if (!tmp.isEmpty()) {
-                theStyle->setFormatType(Style::timeType(tmp));
+                theStyle->setFormatType(KCStyle::timeType(tmp));
             }
             break;
         case KoOdfNumberStyles::Boolean:
@@ -322,9 +322,9 @@ void Style::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &sty
 
         if (dataStyle.precision > -1) {
             // special handling for precision
-            // The Style default (-1) and the storage default (0) differ.
-            // The maximum is 10. Replace the Style value 0 with -11, which always results
-            // in a storage value < 0 and is interpreted as Style value 0.
+            // The KCStyle default (-1) and the storage default (0) differ.
+            // The maximum is 10. Replace the KCStyle value 0 with -11, which always results
+            // in a storage value < 0 and is interpreted as KCStyle value 0.
             int precision = dataStyle.precision;
             if (type() == AUTO && precision == 0)
                 precision = -11;
@@ -340,45 +340,45 @@ void Style::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &sty
     }
 }
 
-void Style::loadOdfParagraphProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
+void KCStyle::loadOdfParagraphProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
 {
     Q_UNUSED(stylesReader);
     kDebug(36003) << "\t paragraph-properties";
     if (styleStack.hasProperty(KoXmlNS::fo, "text-align")) {
         QString str = styleStack.property(KoXmlNS::fo, "text-align");
         if (str == "center")
-            setHAlign(Style::Center);
+            setHAlign(KCStyle::Center);
         else if (str == "end" || str=="right")
-            setHAlign(Style::Right);
+            setHAlign(KCStyle::Right);
         else if (str == "start" || str=="left")
-            setHAlign(Style::Left);
+            setHAlign(KCStyle::Left);
         else if (str == "justify")
-            setHAlign(Style::Justified);
+            setHAlign(KCStyle::Justified);
         else
-            setHAlign(Style::HAlignUndefined);
+            setHAlign(KCStyle::HAlignUndefined);
         kDebug(36003) << "\t\t text-align:" << str;
     }
 }
 
-void Style::loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
+void KCStyle::loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
 {
     QString str;
     if (styleStack.hasProperty(KoXmlNS::style, "vertical-align")) {
         str = styleStack.property(KoXmlNS::style, "vertical-align");
         if (str == "bottom")
-            setVAlign(Style::Bottom);
+            setVAlign(KCStyle::Bottom);
         else if (str == "top")
-            setVAlign(Style::Top);
+            setVAlign(KCStyle::Top);
         else if (str == "middle")
-            setVAlign(Style::Middle);
+            setVAlign(KCStyle::Middle);
         else
-            setVAlign(Style::VAlignUndefined);
+            setVAlign(KCStyle::VAlignUndefined);
     }
     if (styleStack.property(KoXmlNS::koffice, "vertical-distributed") == "distributed") {
-        if (valign() == Style::Top)
-            setVAlign(Style::VJustified);
+        if (valign() == KCStyle::Top)
+            setVAlign(KCStyle::VJustified);
         else
-            setVAlign(Style::VDistributed);
+            setVAlign(KCStyle::VDistributed);
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "background-color")) {
         QColor color(styleStack.property(KoXmlNS::fo, "background-color"));
@@ -480,7 +480,7 @@ void Style::loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const Ko
                 kDebug(36003) << " load object gradient fill type :" << fill;
 
                 if (fill == "solid" || fill == "hatch") {
-                    kDebug(36003) << " Style ******************************************************";
+                    kDebug(36003) << " KCStyle ******************************************************";
                     setBackgroundBrush(KoOdfGraphicStyles::loadOdfFillStyle(drawStyleStack, fill, stylesReader));
 
                 } else
@@ -490,7 +490,7 @@ void Style::loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const Ko
     }
 }
 
-void Style::loadOdfTextProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
+void KCStyle::loadOdfTextProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
 {
     Q_UNUSED(stylesReader);
     // fo:font-size="13pt"
@@ -574,7 +574,7 @@ static QString convertDateFormat(const QString& date)
     return result;
 }
 
-Format::Type Style::dateType(const QString &_f)
+Format::Type KCStyle::dateType(const QString &_f)
 {
     const QString dateFormatShort = convertDateFormat(KGlobal::locale()->dateFormatShort());
     const QString dateFormat = convertDateFormat(KGlobal::locale()->dateFormat());
@@ -661,7 +661,7 @@ Format::Type Style::dateType(const QString &_f)
     }
 }
 
-Format::Type Style::timeType(const QString &_format)
+Format::Type KCStyle::timeType(const QString &_format)
 {
     if (_format == "h:mm AP")
         return Format::Time1;
@@ -683,7 +683,7 @@ Format::Type Style::timeType(const QString &_format)
         return Format::Time;
 }
 
-Currency Style::numberCurrency(const QString &_format)
+Currency KCStyle::numberCurrency(const QString &_format)
 {
     // Look up if a prefix or postfix is in the currency table,
     // return the currency symbol to use for formatting purposes.
@@ -700,7 +700,7 @@ Currency Style::numberCurrency(const QString &_format)
     return Currency(QString());
 }
 
-Format::Type Style::fractionType(const QString &_format)
+Format::Type KCStyle::fractionType(const QString &_format)
 {
     if (_format.endsWith("/2"))
         return Format::fraction_half;
@@ -724,7 +724,7 @@ Format::Type Style::fractionType(const QString &_format)
         return Format::fraction_three_digits;
 }
 
-QString Style::saveOdfStyleNumeric(KoGenStyle &style, KoGenStyles &mainStyles,
+QString KCStyle::saveOdfStyleNumeric(KoGenStyle &style, KoGenStyles &mainStyles,
                                    Format::Type _style,
                                    const QString &_prefix, const QString &_postfix,
                                    int _precision, const QString& symbol)
@@ -841,7 +841,7 @@ QString Style::saveOdfStyleNumeric(KoGenStyle &style, KoGenStyles &mainStyles,
     return styleName;
 }
 
-QString Style::saveOdfStyleNumericNumber(KoGenStyles& mainStyles, Format::Type /*_style*/, int _precision,
+QString KCStyle::saveOdfStyleNumericNumber(KoGenStyles& mainStyles, Format::Type /*_style*/, int _precision,
         const QString& _prefix, const QString& _postfix)
 {
     QString format;
@@ -857,13 +857,13 @@ QString Style::saveOdfStyleNumericNumber(KoGenStyles& mainStyles, Format::Type /
     return KoOdfNumberStyles::saveOdfNumberStyle(mainStyles, format, _prefix, _postfix);
 }
 
-QString Style::saveOdfStyleNumericText(KoGenStyles& /*mainStyles*/, Format::Type /*_style*/, int /*_precision*/,
+QString KCStyle::saveOdfStyleNumericText(KoGenStyles& /*mainStyles*/, Format::Type /*_style*/, int /*_precision*/,
                                        const QString& /*_prefix*/, const QString& /*_postfix*/)
 {
     return "";
 }
 
-QString Style::saveOdfStyleNumericMoney(KoGenStyles& mainStyles, Format::Type /*_style*/,
+QString KCStyle::saveOdfStyleNumericMoney(KoGenStyles& mainStyles, Format::Type /*_style*/,
                                         const QString& symbol, int _precision,
                                         const QString& _prefix, const QString& _postfix)
 {
@@ -880,7 +880,7 @@ QString Style::saveOdfStyleNumericMoney(KoGenStyles& mainStyles, Format::Type /*
     return KoOdfNumberStyles::saveOdfCurrencyStyle(mainStyles, format, symbol, _prefix, _postfix);
 }
 
-QString Style::saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, Format::Type /*_style*/, int _precision,
+QString KCStyle::saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, Format::Type /*_style*/, int _precision,
         const QString& _prefix, const QString& _postfix)
 {
     //<number:percentage-style style:name="N106" style:family="data-style">
@@ -902,7 +902,7 @@ QString Style::saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, Format::Typ
 }
 
 
-QString Style::saveOdfStyleNumericScientific(KoGenStyles&mainStyles, Format::Type /*_style*/,
+QString KCStyle::saveOdfStyleNumericScientific(KoGenStyles&mainStyles, Format::Type /*_style*/,
         const QString &_prefix, const QString &_suffix, int _precision)
 {
     //<number:number-style style:name="N60" style:family="data-style">
@@ -921,7 +921,7 @@ QString Style::saveOdfStyleNumericScientific(KoGenStyles&mainStyles, Format::Typ
     return KoOdfNumberStyles::saveOdfScientificStyle(mainStyles, format, _prefix, _suffix);
 }
 
-QString Style::saveOdfStyleNumericDate(KoGenStyles&mainStyles, Format::Type _style,
+QString KCStyle::saveOdfStyleNumericDate(KoGenStyles&mainStyles, Format::Type _style,
                                        const QString& _prefix, const QString& _postfix)
 {
     QString format;
@@ -1048,7 +1048,7 @@ QString Style::saveOdfStyleNumericDate(KoGenStyles&mainStyles, Format::Type _sty
     return KoOdfNumberStyles::saveOdfDateStyle(mainStyles, format, locale, _prefix, _postfix);
 }
 
-QString Style::saveOdfStyleNumericCustom(KoGenStyles& /*mainStyles*/, Format::Type /*_style*/,
+QString KCStyle::saveOdfStyleNumericCustom(KoGenStyles& /*mainStyles*/, Format::Type /*_style*/,
         const QString& /*_prefix*/, const QString& /*_postfix*/)
 {
     //TODO
@@ -1068,7 +1068,7 @@ QString Style::saveOdfStyleNumericCustom(KoGenStyles& /*mainStyles*/, Format::Ty
     return "";
 }
 
-QString Style::saveOdfStyleNumericTime(KoGenStyles& mainStyles, Format::Type _style,
+QString KCStyle::saveOdfStyleNumericTime(KoGenStyles& mainStyles, Format::Type _style,
                                        const QString& _prefix, const QString& _postfix)
 {
     //<number:time-style style:name="N42" style:family="data-style">
@@ -1121,7 +1121,7 @@ QString Style::saveOdfStyleNumericTime(KoGenStyles& mainStyles, Format::Type _st
 }
 
 
-QString Style::saveOdfStyleNumericFraction(KoGenStyles &mainStyles, Format::Type formatType,
+QString KCStyle::saveOdfStyleNumericFraction(KoGenStyles &mainStyles, Format::Type formatType,
         const QString &_prefix, const QString &_suffix)
 {
     //<number:number-style style:name="N71" style:family="data-style">
@@ -1164,7 +1164,7 @@ QString Style::saveOdfStyleNumericFraction(KoGenStyles &mainStyles, Format::Type
     return KoOdfNumberStyles::saveOdfFractionStyle(mainStyles, format, _prefix, _suffix);
 }
 
-QString Style::saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
+QString KCStyle::saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
                        const StyleManager* manager) const
 {
     // list of substyles to store
@@ -1194,7 +1194,7 @@ QString Style::saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
     } else
         keysToStore = QSet<Key>::fromList(d->subStyles.keys());
 
-    // KSpread::Style is definitly an OASIS auto style,
+    // KSpread::KCStyle is definitly an OASIS auto style,
     // but don't overwrite it, if it already exists
     if (style.isEmpty())
         style = KoGenStyle(KoGenStyle::TableCellAutoStyle, "table-cell");
@@ -1204,7 +1204,7 @@ QString Style::saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
     return mainStyles.insert(style, "ce");
 }
 
-void Style::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
+void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
                          KoGenStyles &mainStyles, const StyleManager* manager) const
 {
 #ifndef NDEBUG
@@ -1435,14 +1435,14 @@ void Style::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
         style.addAttribute("style:data-style-name", numericStyle);
 }
 
-QString Style::saveOdfBackgroundStyle(KoGenStyles &mainStyles, const QBrush &brush)
+QString KCStyle::saveOdfBackgroundStyle(KoGenStyles &mainStyles, const QBrush &brush)
 {
     KoGenStyle styleobjectauto = KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic");
     KoOdfGraphicStyles::saveOdfFillStyle(styleobjectauto, mainStyles, brush);
     return mainStyles.insert(styleobjectauto, "gr");
 }
 
-void Style::saveXML(QDomDocument& doc, QDomElement& format, const StyleManager* styleManager) const
+void KCStyle::saveXML(QDomDocument& doc, QDomElement& format, const StyleManager* styleManager) const
 {
     // list of substyles to store
     QSet<Key> keysToStore;
@@ -1605,7 +1605,7 @@ void Style::saveXML(QDomDocument& doc, QDomElement& format, const StyleManager* 
     }
 }
 
-bool Style::loadXML(KoXmlElement& format, Paste::Mode mode)
+bool KCStyle::loadXML(KoXmlElement& format, Paste::Mode mode)
 {
     if (format.hasAttribute("style-name")) {
         // Simply set the style name and we are done.
@@ -1653,11 +1653,11 @@ bool Style::loadXML(KoXmlElement& format, Paste::Mode mode)
             return false;
         }
         // special handling for precision
-        // The Style default (-1) and the storage default (0) differ.
+        // The KCStyle default (-1) and the storage default (0) differ.
         if (type() == AUTO && i == -1)
             i = 0;
-        // The maximum is 10. Replace the Style value 0 with -11, which always results
-        // in a storage value < 0 and is interpreted as Style value 0.
+        // The maximum is 10. Replace the KCStyle value 0 with -11, which always results
+        // in a storage value < 0 and is interpreted as KCStyle value 0.
         else if (type() == AUTO && i == 0)
             i = -11;
         setPrecision(i);
@@ -1845,168 +1845,168 @@ bool Style::loadXML(KoXmlElement& format, Paste::Mode mode)
     return true;
 }
 
-uint Style::bottomPenValue() const
+uint KCStyle::bottomPenValue() const
 {
     if (!d->subStyles.contains(BottomPen))
         return BorderPenStyle<BottomPen>().value;
     return static_cast<const BorderPenStyle<BottomPen>*>(d->subStyles[BottomPen].data())->value;
 }
 
-uint Style::rightPenValue() const
+uint KCStyle::rightPenValue() const
 {
     if (!d->subStyles.contains(RightPen))
         return BorderPenStyle<RightPen>().value;
     return static_cast<const BorderPenStyle<RightPen>*>(d->subStyles[RightPen].data())->value;
 }
 
-uint Style::leftPenValue() const
+uint KCStyle::leftPenValue() const
 {
     if (!d->subStyles.contains(LeftPen))
         return BorderPenStyle<LeftPen>().value;
     return static_cast<const BorderPenStyle<LeftPen>*>(d->subStyles[LeftPen].data())->value;
 }
 
-uint Style::topPenValue() const
+uint KCStyle::topPenValue() const
 {
     if (!d->subStyles.contains(TopPen))
         return BorderPenStyle<TopPen>().value;
     return static_cast<const BorderPenStyle<TopPen>*>(d->subStyles[TopPen].data())->value;
 }
 
-QColor Style::fontColor() const
+QColor KCStyle::fontColor() const
 {
     if (!d->subStyles.contains(FontColor))
         return SubStyleOne<FontColor, QColor>().value1;
     return static_cast<const SubStyleOne<FontColor, QColor>*>(d->subStyles[FontColor].data())->value1;
 }
 
-QColor Style::backgroundColor() const
+QColor KCStyle::backgroundColor() const
 {
     if (!d->subStyles.contains(BackgroundColor))
         return SubStyleOne<BackgroundColor, QColor>().value1;
     return static_cast<const SubStyleOne<BackgroundColor, QColor>*>(d->subStyles[BackgroundColor].data())->value1;
 }
 
-QPen Style::rightBorderPen() const
+QPen KCStyle::rightBorderPen() const
 {
     if (!d->subStyles.contains(RightPen))
         return BorderPenStyle<RightPen>().value1;
     return static_cast<const BorderPenStyle<RightPen>*>(d->subStyles[RightPen].data())->value1;
 }
 
-QPen Style::bottomBorderPen() const
+QPen KCStyle::bottomBorderPen() const
 {
     if (!d->subStyles.contains(BottomPen))
         return BorderPenStyle<BottomPen>().value1;
     return static_cast<const BorderPenStyle<BottomPen>*>(d->subStyles[BottomPen].data())->value1;
 }
 
-QPen Style::leftBorderPen() const
+QPen KCStyle::leftBorderPen() const
 {
     if (!d->subStyles.contains(LeftPen))
         return BorderPenStyle<LeftPen>().value1;
     return static_cast<const BorderPenStyle<LeftPen>*>(d->subStyles[LeftPen].data())->value1;
 }
 
-QPen Style::topBorderPen() const
+QPen KCStyle::topBorderPen() const
 {
     if (!d->subStyles.contains(TopPen))
         return BorderPenStyle<TopPen>().value1;
     return static_cast<const BorderPenStyle<TopPen>*>(d->subStyles[TopPen].data())->value1;
 }
 
-QPen Style::fallDiagonalPen() const
+QPen KCStyle::fallDiagonalPen() const
 {
     if (!d->subStyles.contains(FallDiagonalPen))
         return PenStyle<FallDiagonalPen>().value1;
     return static_cast<const PenStyle<FallDiagonalPen>*>(d->subStyles[FallDiagonalPen].data())->value1;
 }
 
-QPen Style::goUpDiagonalPen() const
+QPen KCStyle::goUpDiagonalPen() const
 {
     if (!d->subStyles.contains(GoUpDiagonalPen))
         return PenStyle<GoUpDiagonalPen>().value1;
     return static_cast<const PenStyle<GoUpDiagonalPen>*>(d->subStyles[GoUpDiagonalPen].data())->value1;
 }
 
-QBrush Style::backgroundBrush() const
+QBrush KCStyle::backgroundBrush() const
 {
     if (!d->subStyles.contains(BackgroundBrush))
         return SubStyleOne<BackgroundBrush, QBrush>().value1;
     return static_cast<const SubStyleOne<BackgroundBrush, QBrush>*>(d->subStyles[BackgroundBrush].data())->value1;
 }
 
-QString Style::customFormat() const
+QString KCStyle::customFormat() const
 {
     if (!d->subStyles.contains(CustomFormat))
         return SubStyleOne<CustomFormat, QString>().value1;
     return static_cast<const SubStyleOne<CustomFormat, QString>*>(d->subStyles[CustomFormat].data())->value1;
 }
 
-QString Style::prefix() const
+QString KCStyle::prefix() const
 {
     if (!d->subStyles.contains(Prefix))
         return SubStyleOne<Prefix, QString>().value1;
     return static_cast<const SubStyleOne<Prefix, QString>*>(d->subStyles[Prefix].data())->value1;
 }
 
-QString Style::postfix() const
+QString KCStyle::postfix() const
 {
     if (!d->subStyles.contains(Postfix))
         return SubStyleOne<Postfix, QString>().value1;
     return static_cast<const SubStyleOne<Postfix, QString>*>(d->subStyles[Postfix].data())->value1;
 }
 
-QString Style::fontFamily() const
+QString KCStyle::fontFamily() const
 {
     if (!d->subStyles.contains(FontFamily))
         return KoGlobal::defaultFont().family(); // SubStyleOne<FontFamily, QString>().value1;
     return static_cast<const SubStyleOne<FontFamily, QString>*>(d->subStyles[FontFamily].data())->value1;
 }
 
-Style::HAlign Style::halign() const
+KCStyle::HAlign KCStyle::halign() const
 {
     if (!d->subStyles.contains(HorizontalAlignment))
-        return SubStyleOne<HorizontalAlignment, Style::HAlign>().value1;
-    return static_cast<const SubStyleOne<HorizontalAlignment, Style::HAlign>*>(d->subStyles[HorizontalAlignment].data())->value1;
+        return SubStyleOne<HorizontalAlignment, KCStyle::HAlign>().value1;
+    return static_cast<const SubStyleOne<HorizontalAlignment, KCStyle::HAlign>*>(d->subStyles[HorizontalAlignment].data())->value1;
 }
 
-Style::VAlign Style::valign() const
+KCStyle::VAlign KCStyle::valign() const
 {
     if (!d->subStyles.contains(VerticalAlignment))
-        return SubStyleOne<VerticalAlignment, Style::VAlign>().value1;
-    return static_cast<const SubStyleOne<VerticalAlignment, Style::VAlign>*>(d->subStyles[VerticalAlignment].data())->value1;
+        return SubStyleOne<VerticalAlignment, KCStyle::VAlign>().value1;
+    return static_cast<const SubStyleOne<VerticalAlignment, KCStyle::VAlign>*>(d->subStyles[VerticalAlignment].data())->value1;
 }
 
-Style::FloatFormat Style::floatFormat() const
+KCStyle::FloatFormat KCStyle::floatFormat() const
 {
     if (!d->subStyles.contains(FloatFormatKey))
         return SubStyleOne<FloatFormatKey, FloatFormat>().value1;
     return static_cast<const SubStyleOne<FloatFormatKey, FloatFormat>*>(d->subStyles[FloatFormatKey].data())->value1;
 }
 
-Style::FloatColor Style::floatColor() const
+KCStyle::FloatColor KCStyle::floatColor() const
 {
     if (!d->subStyles.contains(FloatColorKey))
         return SubStyleOne<FloatColorKey, FloatColor>().value1;
     return static_cast<const SubStyleOne<FloatColorKey, FloatColor>*>(d->subStyles[FloatColorKey].data())->value1;
 }
 
-Format::Type Style::formatType() const
+Format::Type KCStyle::formatType() const
 {
     if (!d->subStyles.contains(FormatTypeKey))
         return SubStyleOne<FormatTypeKey, Format::Type>().value1;
     return static_cast<const SubStyleOne<FormatTypeKey, Format::Type>*>(d->subStyles[FormatTypeKey].data())->value1;
 }
 
-Currency Style::currency() const
+Currency KCStyle::currency() const
 {
     if (!d->subStyles.contains(CurrencyFormat))
         return Currency();
     return static_cast<const SubStyleOne<CurrencyFormat, Currency>*>(d->subStyles[CurrencyFormat].data())->value1;
 }
 
-QFont Style::font() const
+QFont KCStyle::font() const
 {
     QFont font;
     font.setFamily(fontFamily());
@@ -2018,132 +2018,132 @@ QFont Style::font() const
     return font;
 }
 
-bool Style::bold() const
+bool KCStyle::bold() const
 {
     if (!d->subStyles.contains(FontBold))
         return SubStyleOne<FontBold, bool>().value1;
     return static_cast<const SubStyleOne<FontBold, bool>*>(d->subStyles[FontBold].data())->value1;
 }
 
-bool Style::italic() const
+bool KCStyle::italic() const
 {
     if (!d->subStyles.contains(FontItalic))
         return SubStyleOne<FontItalic, bool>().value1;
     return static_cast<const SubStyleOne<FontItalic, bool>*>(d->subStyles[FontItalic].data())->value1;
 }
 
-bool Style::underline() const
+bool KCStyle::underline() const
 {
     if (!d->subStyles.contains(FontUnderline))
         return SubStyleOne<FontUnderline, bool>().value1;
     return static_cast<const SubStyleOne<FontUnderline, bool>*>(d->subStyles[FontUnderline].data())->value1;
 }
 
-bool Style::strikeOut() const
+bool KCStyle::strikeOut() const
 {
     if (!d->subStyles.contains(FontStrike))
         return SubStyleOne<FontStrike, bool>().value1;
     return static_cast<const SubStyleOne<FontStrike, bool>*>(d->subStyles[FontStrike].data())->value1;
 }
 
-int Style::fontSize() const
+int KCStyle::fontSize() const
 {
     if (!d->subStyles.contains(FontSize))
         return KoGlobal::defaultFont().pointSize(); //SubStyleOne<FontSize, int>().value1;
     return static_cast<const SubStyleOne<FontSize, int>*>(d->subStyles[FontSize].data())->value1;
 }
 
-int Style::precision() const
+int KCStyle::precision() const
 {
     if (!d->subStyles.contains(Precision))
         return -1; //SubStyleOne<Precision, int>().value1;
     return static_cast<const SubStyleOne<Precision, int>*>(d->subStyles[Precision].data())->value1;
 }
 
-int Style::angle() const
+int KCStyle::angle() const
 {
     if (!d->subStyles.contains(Angle))
         return SubStyleOne<Angle, int>().value1;
     return static_cast<const SubStyleOne<Angle, int>*>(d->subStyles[Angle].data())->value1;
 }
 
-double Style::indentation() const
+double KCStyle::indentation() const
 {
     if (!d->subStyles.contains(Indentation))
         return SubStyleOne<Indentation, int>().value1;
     return static_cast<const SubStyleOne<Indentation, int>*>(d->subStyles[Indentation].data())->value1;
 }
 
-bool Style::shrinkToFit() const
+bool KCStyle::shrinkToFit() const
 {
     if (!d->subStyles.contains(ShrinkToFit))
         return SubStyleOne<ShrinkToFit, bool>().value1;
     return static_cast<const SubStyleOne<ShrinkToFit, bool>*>(d->subStyles[ShrinkToFit].data())->value1;
 }
 
-bool Style::verticalText() const
+bool KCStyle::verticalText() const
 {
     if (!d->subStyles.contains(VerticalText))
         return SubStyleOne<VerticalText, bool>().value1;
     return static_cast<const SubStyleOne<VerticalText, bool>*>(d->subStyles[VerticalText].data())->value1;
 }
 
-bool Style::wrapText() const
+bool KCStyle::wrapText() const
 {
     if (!d->subStyles.contains(MultiRow))
         return SubStyleOne<MultiRow, bool>().value1;
     return static_cast<const SubStyleOne<MultiRow, bool>*>(d->subStyles[MultiRow].data())->value1;
 }
 
-bool Style::printText() const
+bool KCStyle::printText() const
 {
     if (!d->subStyles.contains(DontPrintText))
         return !SubStyleOne<DontPrintText, bool>().value1;
     return !static_cast<const SubStyleOne<DontPrintText, bool>*>(d->subStyles[DontPrintText].data())->value1;
 }
 
-bool Style::hideAll() const
+bool KCStyle::hideAll() const
 {
     if (!d->subStyles.contains(HideAll))
         return SubStyleOne<HideAll, bool>().value1;
     return static_cast<const SubStyleOne<HideAll, bool>*>(d->subStyles[HideAll].data())->value1;
 }
 
-bool Style::hideFormula() const
+bool KCStyle::hideFormula() const
 {
     if (!d->subStyles.contains(HideFormula))
         return SubStyleOne<HideFormula, bool>().value1;
     return static_cast<const SubStyleOne<HideFormula, bool>*>(d->subStyles[HideFormula].data())->value1;
 }
 
-bool Style::notProtected() const
+bool KCStyle::notProtected() const
 {
     if (!d->subStyles.contains(NotProtected))
         return SubStyleOne<NotProtected, bool>().value1;
     return static_cast<const SubStyleOne<NotProtected, bool>*>(d->subStyles[NotProtected].data())->value1;
 }
 
-bool Style::isDefault() const
+bool KCStyle::isDefault() const
 {
     return isEmpty() || d->subStyles.contains(DefaultStyleKey);
 }
 
-bool Style::isEmpty() const
+bool KCStyle::isEmpty() const
 {
     return d->subStyles.isEmpty();
 }
 
-void Style::setHAlign(HAlign align)
+void KCStyle::setHAlign(HAlign align)
 {
     insertSubStyle(HorizontalAlignment, align);
 }
 
-void Style::setVAlign(VAlign align)
+void KCStyle::setVAlign(VAlign align)
 {
     insertSubStyle(VerticalAlignment, align);
 }
 
-void Style::setFont(QFont const & font)
+void KCStyle::setFont(QFont const & font)
 {
     insertSubStyle(FontFamily,     font.family());
     insertSubStyle(FontSize,       font.pointSize());
@@ -2153,179 +2153,179 @@ void Style::setFont(QFont const & font)
     insertSubStyle(FontUnderline,  font.underline());
 }
 
-void Style::setFontFamily(QString const & family)
+void KCStyle::setFontFamily(QString const & family)
 {
     insertSubStyle(FontFamily, family);
 }
 
-void Style::setFontBold(bool enabled)
+void KCStyle::setFontBold(bool enabled)
 {
     insertSubStyle(FontBold, enabled);
 }
 
-void Style::setFontItalic(bool enabled)
+void KCStyle::setFontItalic(bool enabled)
 {
     insertSubStyle(FontItalic, enabled);
 }
 
-void Style::setFontUnderline(bool enabled)
+void KCStyle::setFontUnderline(bool enabled)
 {
     insertSubStyle(FontUnderline, enabled);
 }
 
-void Style::setFontStrikeOut(bool enabled)
+void KCStyle::setFontStrikeOut(bool enabled)
 {
     insertSubStyle(FontStrike, enabled);
 }
 
-void Style::setFontSize(int size)
+void KCStyle::setFontSize(int size)
 {
     insertSubStyle(FontSize, size);
 }
 
-void Style::setFontColor(QColor const & color)
+void KCStyle::setFontColor(QColor const & color)
 {
     insertSubStyle(FontColor, color);
 }
 
-void Style::setBackgroundColor(QColor const & color)
+void KCStyle::setBackgroundColor(QColor const & color)
 {
     insertSubStyle(BackgroundColor, color);
 }
 
-void Style::setRightBorderPen(QPen const & pen)
+void KCStyle::setRightBorderPen(QPen const & pen)
 {
     insertSubStyle(RightPen, pen);
 }
 
-void Style::setBottomBorderPen(QPen const & pen)
+void KCStyle::setBottomBorderPen(QPen const & pen)
 {
     insertSubStyle(BottomPen, pen);
 }
 
-void Style::setLeftBorderPen(QPen const & pen)
+void KCStyle::setLeftBorderPen(QPen const & pen)
 {
     insertSubStyle(LeftPen, pen);
 }
 
-void Style::setTopBorderPen(QPen const & pen)
+void KCStyle::setTopBorderPen(QPen const & pen)
 {
     insertSubStyle(TopPen, pen);
 }
 
-void Style::setFallDiagonalPen(QPen const & pen)
+void KCStyle::setFallDiagonalPen(QPen const & pen)
 {
     insertSubStyle(FallDiagonalPen, pen);
 }
 
-void Style::setGoUpDiagonalPen(QPen const & pen)
+void KCStyle::setGoUpDiagonalPen(QPen const & pen)
 {
     insertSubStyle(GoUpDiagonalPen, pen);
 }
 
-void Style::setAngle(int angle)
+void KCStyle::setAngle(int angle)
 {
     insertSubStyle(Angle, angle);
 }
 
-void Style::setIndentation(double indent)
+void KCStyle::setIndentation(double indent)
 {
     insertSubStyle(Indentation, indent);
 }
 
-void Style::setBackgroundBrush(QBrush const & brush)
+void KCStyle::setBackgroundBrush(QBrush const & brush)
 {
     insertSubStyle(BackgroundBrush, brush);
 }
 
-void Style::setFloatFormat(FloatFormat format)
+void KCStyle::setFloatFormat(FloatFormat format)
 {
     insertSubStyle(FloatFormatKey, format);
 }
 
-void Style::setFloatColor(FloatColor color)
+void KCStyle::setFloatColor(FloatColor color)
 {
     insertSubStyle(FloatColorKey, color);
 }
 
-void Style::setFormatType(Format::Type format)
+void KCStyle::setFormatType(Format::Type format)
 {
     insertSubStyle(FormatTypeKey, format);
 }
 
-void Style::setCustomFormat(QString const & strFormat)
+void KCStyle::setCustomFormat(QString const & strFormat)
 {
     insertSubStyle(CustomFormat, strFormat);
 }
 
-void Style::setPrecision(int precision)
+void KCStyle::setPrecision(int precision)
 {
     insertSubStyle(Precision, precision);
 }
 
-void Style::setPrefix(QString const & prefix)
+void KCStyle::setPrefix(QString const & prefix)
 {
     insertSubStyle(Prefix, prefix);
 }
 
-void Style::setPostfix(QString const & postfix)
+void KCStyle::setPostfix(QString const & postfix)
 {
     insertSubStyle(Postfix, postfix);
 }
 
-void Style::setCurrency(Currency const & currency)
+void KCStyle::setCurrency(Currency const & currency)
 {
     QVariant variant;
     variant.setValue(currency);
     insertSubStyle(CurrencyFormat, variant);
 }
 
-void Style::setWrapText(bool enable)
+void KCStyle::setWrapText(bool enable)
 {
     insertSubStyle(MultiRow, enable);
 }
 
-void Style::setHideAll(bool enable)
+void KCStyle::setHideAll(bool enable)
 {
     insertSubStyle(HideAll, enable);
 }
 
-void Style::setHideFormula(bool enable)
+void KCStyle::setHideFormula(bool enable)
 {
     insertSubStyle(HideFormula, enable);
 }
 
-void Style::setNotProtected(bool enable)
+void KCStyle::setNotProtected(bool enable)
 {
     insertSubStyle(NotProtected, enable);
 }
 
-void Style::setDontPrintText(bool enable)
+void KCStyle::setDontPrintText(bool enable)
 {
     insertSubStyle(DontPrintText, enable);
 }
 
-void Style::setVerticalText(bool enable)
+void KCStyle::setVerticalText(bool enable)
 {
     insertSubStyle(VerticalText, enable);
 }
 
-void Style::setShrinkToFit(bool enable)
+void KCStyle::setShrinkToFit(bool enable)
 {
     insertSubStyle(ShrinkToFit, enable);
 }
 
-void Style::setDefault()
+void KCStyle::setDefault()
 {
     insertSubStyle(DefaultStyleKey, true);
 }
 
-void Style::clear()
+void KCStyle::clear()
 {
     d->subStyles.clear();
 }
 
-QString Style::colorName(const QColor& color)
+QString KCStyle::colorName(const QColor& color)
 {
     static QMap<QRgb, QString> map;
     QRgb rgb = color.rgb();
@@ -2337,7 +2337,7 @@ QString Style::colorName(const QColor& color)
     }
 }
 
-bool Style::compare(const SubStyle* one, const SubStyle* two)
+bool KCStyle::compare(const SubStyle* one, const SubStyle* two)
 {
     if (!one || !two)
         return one == two;
@@ -2432,7 +2432,7 @@ bool Style::compare(const SubStyle* one, const SubStyle* two)
     }
 }
 
-bool Style::operator==(const Style& other) const
+bool KCStyle::operator==(const KCStyle& other) const
 {
     if (other.isEmpty())
         return isEmpty() ? true : false;
@@ -2445,7 +2445,7 @@ bool Style::operator==(const Style& other) const
     return true;
 }
 
-uint qHash(const Style& style)
+uint qHash(const KCStyle& style)
 {
     uint hash = 0;
     foreach (const SharedSubStyle& ss, style.subStyles()) {
@@ -2454,14 +2454,14 @@ uint qHash(const Style& style)
     return hash;
 }
 
-void Style::operator=(const Style & other)
+void KCStyle::operator=(const KCStyle & other)
 {
     d = other.d;
 }
 
-Style Style::operator-(const Style& other) const
+KCStyle KCStyle::operator-(const KCStyle& other) const
 {
-    Style style;
+    KCStyle style;
     const QSet<Key> keys = difference(other);
     const QSet<Key>::ConstIterator end = keys.constEnd();
     for (QSet<Key>::ConstIterator it = keys.constBegin(); it != end; ++it)
@@ -2469,7 +2469,7 @@ Style Style::operator-(const Style& other) const
     return style;
 }
 
-void Style::merge(const Style& style)
+void KCStyle::merge(const KCStyle& style)
 {
     const QList<SharedSubStyle> subStyles(style.subStyles());
 //     kDebug(36006) <<"merging" << subStyles.count() <<" attributes.";
@@ -2479,7 +2479,7 @@ void Style::merge(const Style& style)
     }
 }
 
-QSet<Style::Key> Style::difference(const Style& other) const
+QSet<KCStyle::Key> KCStyle::difference(const KCStyle& other) const
 {
     QSet<Key> result;
     const QSet<Key> keys = QSet<Key>::fromList(d->subStyles.keys() + other.d->subStyles.keys());
@@ -2495,13 +2495,13 @@ QSet<Style::Key> Style::difference(const Style& other) const
     return result;
 }
 
-void Style::dump() const
+void KCStyle::dump() const
 {
     for (int i = 0; i < subStyles().count(); ++i)
         subStyles()[i]->dump();
 }
 
-QTextCharFormat Style::asCharFormat() const
+QTextCharFormat KCStyle::asCharFormat() const
 {
     QTextCharFormat format;
     format.setFont(font());
@@ -2513,12 +2513,12 @@ QTextCharFormat Style::asCharFormat() const
 }
 
 
-QList<SharedSubStyle> Style::subStyles() const
+QList<SharedSubStyle> KCStyle::subStyles() const
 {
     return d->subStyles.values();
 }
 
-SharedSubStyle Style::createSubStyle(Key key, const QVariant& value)
+SharedSubStyle KCStyle::createSubStyle(Key key, const QVariant& value)
 {
     SharedSubStyle newSubStyle;
     switch (key) {
@@ -2640,14 +2640,14 @@ SharedSubStyle Style::createSubStyle(Key key, const QVariant& value)
     return newSubStyle;
 }
 
-void Style::insertSubStyle(Key key, const QVariant& value)
+void KCStyle::insertSubStyle(Key key, const QVariant& value)
 {
     const SharedSubStyle subStyle = createSubStyle(key, value);
     Q_ASSERT(!!subStyle);
     insertSubStyle(subStyle);
 }
 
-void Style::insertSubStyle(const SharedSubStyle& subStyle)
+void KCStyle::insertSubStyle(const SharedSubStyle& subStyle)
 {
     if (!subStyle)
         return;
@@ -2655,7 +2655,7 @@ void Style::insertSubStyle(const SharedSubStyle& subStyle)
     d->subStyles.insert(subStyle->type(), subStyle);
 }
 
-bool Style::releaseSubStyle(Key key)
+bool KCStyle::releaseSubStyle(Key key)
 {
     if (!d->subStyles.contains(key))
         return false;
@@ -2685,7 +2685,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////
 
 CustomStyle::CustomStyle()
-        : Style()
+        : KCStyle()
         , d(new Private)
 {
     d->name = "Default";
@@ -2694,7 +2694,7 @@ CustomStyle::CustomStyle()
 }
 
 CustomStyle::CustomStyle(QString const & name, CustomStyle * parent)
-        : Style()
+        : KCStyle()
         , d(new Private)
 {
     d->name = name;
@@ -2707,7 +2707,7 @@ CustomStyle::~CustomStyle()
 {
 }
 
-Style::StyleType CustomStyle::type() const
+KCStyle::StyleType CustomStyle::type() const
 {
     return d->type;
 }
@@ -2762,7 +2762,7 @@ void CustomStyle::loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& s
 
     setType(CUSTOM);
 
-    Style::loadOdfStyle(stylesReader, style, conditions, styleManager, parser);
+    KCStyle::loadOdfStyle(stylesReader, style, conditions, styleManager, parser);
 }
 
 void CustomStyle::save(QDomDocument& doc, QDomElement& styles, const StyleManager* styleManager)
@@ -2800,7 +2800,7 @@ bool CustomStyle::loadXML(KoXmlElement const & style, QString const & name)
 
     KoXmlElement f(style.namedItem("format").toElement());
     if (!f.isNull())
-        if (!Style::loadXML(f))
+        if (!KCStyle::loadXML(f))
             return false;
 
     return true;

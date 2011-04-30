@@ -449,17 +449,17 @@ void CellStorage::emitInsertNamedArea(const KCRegion &region, const QString &nam
     emit insertNamedArea(region, namedArea);
 }
 
-Style CellStorage::style(int column, int row) const
+KCStyle CellStorage::style(int column, int row) const
 {
     return d->styleStorage->contains(QPoint(column, row));
 }
 
-Style CellStorage::style(const QRect& rect) const
+KCStyle CellStorage::style(const QRect& rect) const
 {
     return d->styleStorage->contains(rect);
 }
 
-void CellStorage::setStyle(const KCRegion& region, const Style& style)
+void CellStorage::setStyle(const KCRegion& region, const KCStyle& style)
 {
     // recording undo?
     if (d->undoData)
@@ -1477,7 +1477,7 @@ void CellStorage::loadConditions(const QList<QPair<QRegion, Conditions> >& condi
     d->conditionsStorage->load(conditions);
 }
 
-void CellStorage::loadStyles(const QList<QPair<QRegion, Style> > &styles)
+void CellStorage::loadStyles(const QList<QPair<QRegion, KCStyle> > &styles)
 {
     d->styleStorage->load(styles);
 }

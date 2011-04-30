@@ -45,7 +45,7 @@ const CalculationSettings* ValueFormatter::settings() const
 }
 
 Value ValueFormatter::formatText(const Value &value, Format::Type fmtType, int precision,
-                                 Style::FloatFormat floatFormat, const QString &prefix,
+                                 KCStyle::FloatFormat floatFormat, const QString &prefix,
                                  const QString &postfix, const QString &currencySymbol, const QString &formatString)
 {
     if (value.isError())
@@ -243,7 +243,7 @@ QString ValueFormatter::removeTrailingZeros(const QString& str, const QString& d
 }
 
 QString ValueFormatter::createNumberFormat(Number value, int precision,
-        Format::Type fmt, Style::FloatFormat floatFormat, const QString& currencySymbol, const QString& _formatString)
+        Format::Type fmt, KCStyle::FloatFormat floatFormat, const QString& currencySymbol, const QString& _formatString)
 {
     QString prefix, postfix;
     QString formatString(_formatString);
@@ -285,7 +285,7 @@ QString ValueFormatter::createNumberFormat(Number value, int precision,
     int pos = 0;
 
     // Always unsigned ?
-    if ((floatFormat == Style::AlwaysUnsigned) && (value < 0.0))
+    if ((floatFormat == KCStyle::AlwaysUnsigned) && (value < 0.0))
         value *= -1.0;
 
     //multiply value by 100 for percentage format
@@ -334,7 +334,7 @@ QString ValueFormatter::createNumberFormat(Number value, int precision,
     }
 
     //prepend positive sign if needed
-    if ((floatFormat == Style::AlwaysSigned) && value >= 0)
+    if ((floatFormat == KCStyle::AlwaysSigned) && value >= 0)
         if (m_converter->settings()->locale()->positiveSign().isEmpty())
             localizedNumber = '+' + localizedNumber;
 
@@ -713,7 +713,7 @@ QString ValueFormatter::dateFormat(const QDate &date, Format::Type fmtType, cons
 
 QString ValueFormatter::complexFormat(const Value& value, int precision,
                                       Format::Type formatType,
-                                      Style::FloatFormat floatFormat,
+                                      KCStyle::FloatFormat floatFormat,
                                       const QString& currencySymbol)
 {
     // FIXME Stefan: percentage, currency and scientific formats!
@@ -721,7 +721,7 @@ QString ValueFormatter::complexFormat(const Value& value, int precision,
     const Number real = value.asComplex().real();
     const Number imag = value.asComplex().imag();
     str = createNumberFormat(real, precision, formatType, floatFormat, QString(), QString());
-    str += createNumberFormat(imag, precision, formatType, Style::AlwaysSigned, currencySymbol, QString());
+    str += createNumberFormat(imag, precision, formatType, KCStyle::AlwaysSigned, currencySymbol, QString());
     str += 'i';
     return str;
 }

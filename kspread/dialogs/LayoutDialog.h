@@ -43,7 +43,7 @@
 #include <kpagedialog.h>
 
 #include "RowColumnFormat.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "Value.h"
 
 #include "ui_FontWidget.h"
@@ -534,7 +534,7 @@ class CellFormatPageProtection : public QWidget, public Ui::ProtectionWidget
 public:
     CellFormatPageProtection(QWidget * parent, CellFormatDialog * _dlg);
     ~CellFormatPageProtection();
-    ///when protection is set through Style Manager
+    ///when protection is set through KCStyle Manager
     void apply(CustomStyle * style);
     void apply(StyleCommand * _obj);
 
@@ -566,13 +566,13 @@ public:
     void initGUI();
     void initMembers();
 
-    void initParameters(const Style& _obj);
-    void checkBorderRight(const Style& obj);
-    void checkBorderLeft(const Style& obj);
-    void checkBorderTop(const Style& obj);
-    void checkBorderBottom(const Style& obj);
-    void checkBorderVertical(const Style& obj);
-    void checkBorderHorizontal(const Style& obj);
+    void initParameters(const KCStyle& _obj);
+    void checkBorderRight(const KCStyle& obj);
+    void checkBorderLeft(const KCStyle& obj);
+    void checkBorderTop(const KCStyle& obj);
+    void checkBorderBottom(const KCStyle& obj);
+    void checkBorderVertical(const KCStyle& obj);
+    void checkBorderHorizontal(const KCStyle& obj);
 
     Sheet * getSheet() const {
         return m_sheet;
@@ -615,9 +615,9 @@ public:
     QString prefix;
     QString postfix;
     int precision;
-    Style::FloatFormat floatFormat;
+    KCStyle::FloatFormat floatFormat;
     bool bFloatFormat;
-    Style::FloatColor floatColor;
+    KCStyle::FloatColor floatColor;
     Currency m_currency;
     bool bFloatColor;
     bool bCurrency;
@@ -639,8 +639,8 @@ public:
     QColor bgColor;
     bool bBgColor;
     QString actionText;
-    Style::HAlign alignX;
-    Style::VAlign alignY;
+    KCStyle::HAlign alignX;
+    KCStyle::VAlign alignY;
     QString styleName;
     QString styleParent;
 

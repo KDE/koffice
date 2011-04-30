@@ -40,24 +40,24 @@ class KoStyleStack;
 class Conditions;
 class CustomStyle;
 class SharedSubStyle;
-class Style;
+class KCStyle;
 class StyleManager;
 class StyleManipulator;
 class SubStyle;
 class ValueParser;
 
 // used for preloading OASIS auto styles
-typedef QHash<QString, Style>       Styles;
+typedef QHash<QString, KCStyle>       Styles;
 // needs to be ordered (QMap) for the style dialog
 typedef QMap<QString, CustomStyle*> CustomStyles;
 
-KSPREAD_EXPORT uint qHash(const Style& style);
+KSPREAD_EXPORT uint qHash(const KCStyle& style);
 
 /**
- * \ingroup Style
+ * \ingroup KCStyle
  * A cell style.
  */
-class KSPREAD_EXPORT Style
+class KSPREAD_EXPORT KCStyle
 {
 public:
     enum HAlign {
@@ -105,7 +105,7 @@ public:
         DefaultStyleKey,
         /**
          * The NamedStyleKey has two functions:
-         * \li In Style: On lookup the Style is composed (\see StyleStorage::composeStyle()).
+         * \li In KCStyle: On lookup the KCStyle is composed (\see StyleStorage::composeStyle()).
          *               For named styles just the style's name is stored. On lookup, these styles
          *               are looked up in the StyleManager and their attributes, including all
          *               attributes of the parents, are filled in the composed style. Additionally,
@@ -156,9 +156,9 @@ public:
         HideFormula
     };
 
-    Style();
-    Style(const Style& style);
-    virtual ~Style();
+    KCStyle();
+    KCStyle(const KCStyle& style);
+    virtual ~KCStyle();
 
     virtual StyleType type() const;
 
@@ -336,21 +336,21 @@ public:
 
 
     /** Returns true if both styles have the same properties */
-    bool operator== (const Style& style) const;
-    inline bool operator!=(const Style& other) const {
+    bool operator== (const KCStyle& style) const;
+    inline bool operator!=(const KCStyle& other) const {
         return !operator==(other);
     }
-    friend uint qHash(const Style& style);
-    void operator=(const Style& style);
-    Style operator-(const Style& style) const;
-    void merge(const Style& style);
+    friend uint qHash(const KCStyle& style);
+    void operator=(const KCStyle& style);
+    KCStyle operator-(const KCStyle& style) const;
+    void merge(const KCStyle& style);
 
     /**
      * The keys, that are contained in this style, but not in \p other and
      * the keys, that are contained in both but differ in value.
      * \return a set of keys, in which this style and \p other differ.
      */
-    QSet<Key> difference(const Style& other) const;
+    QSet<Key> difference(const KCStyle& other) const;
 
     void dump() const;
 
@@ -377,10 +377,10 @@ private:
 
 
 /**
- * \ingroup Style
+ * \ingroup KCStyle
  * A named cell style.
  */
-class KSPREAD_EXPORT CustomStyle : public Style
+class KSPREAD_EXPORT CustomStyle : public KCStyle
 {
 public:
     /**
@@ -446,7 +446,7 @@ private:
 
 
 /**
- * \ingroup Style
+ * \ingroup KCStyle
  * A single style attribute.
  */
 class KSPREAD_TEST_EXPORT SubStyle : public QSharedData
@@ -454,17 +454,17 @@ class KSPREAD_TEST_EXPORT SubStyle : public QSharedData
 public:
     SubStyle() {}
     virtual ~SubStyle() {}
-    virtual Style::Key type() const {
-        return Style::DefaultStyleKey;
+    virtual KCStyle::Key type() const {
+        return KCStyle::DefaultStyleKey;
     }
     virtual void dump() const {
         kDebug() << debugData();
     }
     virtual QString debugData(bool withName = true) const {
-        QString out; if (withName) out = name(Style::DefaultStyleKey); return out;
+        QString out; if (withName) out = name(KCStyle::DefaultStyleKey); return out;
     }
     virtual uint koHash() const { return uint(type()); }
-    static QString name(Style::Key key);
+    static QString name(KCStyle::Key key);
 };
 
 // Provides a default SubStyle for the tree.
@@ -502,14 +502,14 @@ class NamedStyle : public SubStyle
 {
 public:
     NamedStyle(const QString& n) : SubStyle(), name(n) {}
-    virtual Style::Key type() const {
-        return Style::NamedStyleKey;
+    virtual KCStyle::Key type() const {
+        return KCStyle::NamedStyleKey;
     }
     virtual void dump() const {
         kDebug() << debugData();
     }
     virtual QString debugData(bool withName = true) const {
-        QString out; if (withName) out = SubStyle::name(Style::NamedStyleKey) + ' '; out += name; return out;
+        QString out; if (withName) out = SubStyle::name(KCStyle::NamedStyleKey) + ' '; out += name; return out;
     }
     virtual uint koHash() const { return uint(type()) ^ qHash(name); }
     QString name;
@@ -525,12 +525,12 @@ static inline uint qHash(const QPen& pen)
 static inline uint qHash(const QBrush& brush)
 { return qHash(brush.color()) ^ 91 * uint(brush.style()); }
 
-template<Style::Key key, class Value1>
+template<KCStyle::Key key, class Value1>
 class SubStyleOne : public SubStyle
 {
 public:
     SubStyleOne(const Value1& v = Value1()) : SubStyle(), value1(v) {}
-    virtual Style::Key type() const {
+    virtual KCStyle::Key type() const {
         return key;
     }
     virtual void dump() const {
@@ -543,7 +543,7 @@ public:
     Value1 value1;
 };
 
-Q_DECLARE_TYPEINFO(Style, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KCStyle, Q_MOVABLE_TYPE);
 Q_DECLARE_TYPEINFO(CustomStyle, Q_MOVABLE_TYPE);
 Q_DECLARE_TYPEINFO(SharedSubStyle, Q_MOVABLE_TYPE);
 

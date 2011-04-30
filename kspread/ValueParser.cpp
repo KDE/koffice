@@ -24,7 +24,7 @@
 
 #include "CalculationSettings.h"
 #include "Localization.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "Value.h"
 
 ValueParser::ValueParser(const CalculationSettings* settings)

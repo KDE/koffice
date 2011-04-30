@@ -86,12 +86,12 @@ class OdfExporter:
             OdfExporter._OpenDocumentInterface_.__init__(self, kspread, odf.opendocument.OpenDocumentText())
 
             # Create the heading style
-            self.h1style = odf.style.Style(name="Heading 1", family="paragraph")
+            self.h1style = odf.style.KCStyle(name="Heading 1", family="paragraph")
             self.h1style.addElement(odf.style.TextProperties(attributes={'fontsize':"24pt",'fontweight':"bold" }))
             self.doc.styles.addElement(self.h1style)
 
             # Create a style for the table content
-            self.tablestyle = odf.style.Style(name="Table Contents", family="paragraph")
+            self.tablestyle = odf.style.KCStyle(name="Table Contents", family="paragraph")
             self.tablestyle.addElement(odf.style.ParagraphProperties(numberlines="false", linenumber="0"))
             self.doc.styles.addElement(self.tablestyle)
 
@@ -143,15 +143,15 @@ class OdfExporter:
             OdfExporter._OpenDocumentInterface_.__init__(self, kspread, odf.opendocument.OpenDocumentSpreadsheet())
 
             # Create a style for the table content
-            self.tablestyle = odf.style.Style(name="Table Contents", family="paragraph")
+            self.tablestyle = odf.style.KCStyle(name="Table Contents", family="paragraph")
             self.tablestyle.addElement(odf.style.ParagraphProperties(numberlines="false", linenumber="0"))
             self.doc.styles.addElement(self.tablestyle)
 
             # Create automatic styles for the column widths. We want two different widths, one in inches, the other one in metric. ODF Standard section 15.9.1
-            #widthshort = Style(name="Wshort", family="table-column")
+            #widthshort = KCStyle(name="Wshort", family="table-column")
             #widthshort.addElement(TableColumnProperties(columnwidth="1.7cm"))
             #doc.automaticstyles.addElement(widthshort)
-            #widthwide = Style(name="Wwide", family="table-column")
+            #widthwide = KCStyle(name="Wwide", family="table-column")
             #widthwide.addElement(TableColumnProperties(columnwidth="1.5in"))
             #doc.automaticstyles.addElement(widthwide)
 

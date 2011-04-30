@@ -52,7 +52,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
    <item row="1" column="0" colspan="2">
     <widget class="QCheckBox" name="m_copyLayout">
      <property name="text">
-      <string>Copy cell formatting (Borders, Colors, Text Style)</string>
+      <string>Copy cell formatting (Borders, Colors, Text KCStyle)</string>
      </property>
     </widget>
    </item>

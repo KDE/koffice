@@ -129,7 +129,7 @@
 #include "ShapeApplicationData.h"
 #include "Sheet.h"
 #include "SheetPrint.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "StyleManager.h"
 #include "StyleStorage.h"
 #include "ToolRegistry.h"

@@ -26,7 +26,7 @@
 #include "Cell.h"
 #include "CellStorage.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "StyleStorage.h"
 
 #include <QPen>
@@ -44,12 +44,12 @@ bool BorderColorCommand::preProcessing()
         ConstIterator endOfList = constEnd();
         for (ConstIterator it = constBegin(); it != endOfList; ++it) {
             for (int i = 0; i < undoData.count(); ++i) {
-                if (undoData[i].second->type() != Style::LeftPen &&
-                        undoData[i].second->type() != Style::RightPen &&
-                        undoData[i].second->type() != Style::TopPen &&
-                        undoData[i].second->type() != Style::BottomPen &&
-                        undoData[i].second->type() != Style::FallDiagonalPen &&
-                        undoData[i].second->type() != Style::GoUpDiagonalPen) {
+                if (undoData[i].second->type() != KCStyle::LeftPen &&
+                        undoData[i].second->type() != KCStyle::RightPen &&
+                        undoData[i].second->type() != KCStyle::TopPen &&
+                        undoData[i].second->type() != KCStyle::BottomPen &&
+                        undoData[i].second->type() != KCStyle::FallDiagonalPen &&
+                        undoData[i].second->type() != KCStyle::GoUpDiagonalPen) {
                     undoData.removeAt(i--);
                 }
             }
@@ -63,37 +63,37 @@ bool BorderColorCommand::mainProcessing()
 {
     if (!m_reverse) {
         // change colors
-        Style style;
+        KCStyle style;
         for (int i = 0; i < m_undoData.count(); ++i) {
             style.clear();
             style.insertSubStyle(m_undoData[i].second);
             QPen pen;
-            if (m_undoData[i].second->type() == Style::LeftPen) {
+            if (m_undoData[i].second->type() == KCStyle::LeftPen) {
                 pen = style.leftBorderPen();
                 pen.setColor(m_color);
                 style.setLeftBorderPen(pen);
             }
-            if (m_undoData[i].second->type() == Style::RightPen) {
+            if (m_undoData[i].second->type() == KCStyle::RightPen) {
                 pen = style.rightBorderPen();
                 pen.setColor(m_color);
                 style.setRightBorderPen(pen);
             }
-            if (m_undoData[i].second->type() == Style::TopPen) {
+            if (m_undoData[i].second->type() == KCStyle::TopPen) {
                 pen = style.topBorderPen();
                 pen.setColor(m_color);
                 style.setTopBorderPen(pen);
             }
-            if (m_undoData[i].second->type() == Style::BottomPen) {
+            if (m_undoData[i].second->type() == KCStyle::BottomPen) {
                 pen = style.bottomBorderPen();
                 pen.setColor(m_color);
                 style.setBottomBorderPen(pen);
             }
-            if (m_undoData[i].second->type() == Style::FallDiagonalPen) {
+            if (m_undoData[i].second->type() == KCStyle::FallDiagonalPen) {
                 pen = style.fallDiagonalPen();
                 pen.setColor(m_color);
                 style.setFallDiagonalPen(pen);
             }
-            if (m_undoData[i].second->type() == Style::GoUpDiagonalPen) {
+            if (m_undoData[i].second->type() == KCStyle::GoUpDiagonalPen) {
                 pen = style.goUpDiagonalPen();
                 pen.setColor(m_color);
                 style.setGoUpDiagonalPen(pen);
@@ -102,7 +102,7 @@ bool BorderColorCommand::mainProcessing()
         }
     } else { // m_reverse
         for (int i = 0; i < m_undoData.count(); ++i) {
-            Style style;
+            KCStyle style;
             style.insertSubStyle(m_undoData[i].second);
             m_sheet->cellStorage()->setStyle(KCRegion(m_undoData[i].first.toRect()), style);
         }

@@ -22,7 +22,7 @@
 
 #include <QSizeF>
 
-#include <Style.h>
+#include <KCStyle.h>
 
 #include "AbstractRegionCommand.h"
 
@@ -102,7 +102,7 @@ public:
 protected:
     QString name() const;
 
-    QSizeF textSize(const QString& text, const Style& style) const;
+    QSizeF textSize(const QString& text, const KCStyle& style) const;
     double adjustColumnHelper(const Cell& cell);
     double adjustRowHelper(const Cell& cell);
 

@@ -22,7 +22,7 @@
 #ifndef KSPREAD_CONDITION_H
 #define KSPREAD_CONDITION_H
 
-#include "Style.h"
+#include "KCStyle.h"
 #include "Value.h"
 
 #include <QDomElement>
@@ -45,7 +45,7 @@ class ValueParser;
 
 /**
  * \class Conditional
- * \ingroup Style
+ * \ingroup KCStyle
  * Conditional formatting.
  * Holds the actual condition and the applicable style for conditional
  * Cell formattings.
@@ -76,7 +76,7 @@ uint qHash(const Conditional& condition);
 
 /**
  * \class Conditions
- * \ingroup Style
+ * \ingroup KCStyle
  * Manages a set of conditions for a cell.
  */
 class KSPREAD_EXPORT Conditions
@@ -105,7 +105,7 @@ public:
     /**
      * \return the style that matches first (or 0 if no condition matches)
      */
-    Style testConditions(const Cell &cell) const;
+    KCStyle testConditions(const Cell &cell) const;
 
     /**
      * Retrieve the current list of conditions we're checking
@@ -121,13 +121,13 @@ public:
      * Returns an optional default style, which is returned by testConditons if none of
      * the conditions matches.
      */
-    Style defaultStyle() const;
+    KCStyle defaultStyle() const;
 
     /**
      * Set an optional default style. This style is returned by testConditions if none of
      * the conditions matches.
      */
-    void setDefaultStyle(const Style& style);
+    void setDefaultStyle(const KCStyle& style);
 
     /**
      * \ingroup NativeFormat

@@ -21,7 +21,7 @@
 
 #include "CellStorage.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "KCRegion.h"
 
 #include <klocale.h>
@@ -37,7 +37,7 @@ AutoFormatCommand::~AutoFormatCommand()
 {
 }
 
-void AutoFormatCommand::setStyles(const QList<Style>& styles)
+void AutoFormatCommand::setStyles(const QList<KCStyle>& styles)
 {
     m_styles = styles;
 }
@@ -47,7 +47,7 @@ bool AutoFormatCommand::preProcessing()
     if (m_firstrun)
         m_sheet->cellStorage()->startUndoRecording();
     // always reset the style of the processed region
-    Style defaultStyle;
+    KCStyle defaultStyle;
     defaultStyle.setDefault();
     KCRegion::ConstIterator end(constEnd());
     for (KCRegion::ConstIterator it = constBegin(); it != end; ++it)
@@ -78,11 +78,11 @@ bool AutoFormatCommand::process(Element* element)
         int pos = 1 + ((col - rect.left() - 1) % 2);
         Cell cell(m_sheet, col, rect.top());
         if (!cell.isPartOfMerged()) {
-            Style style;
+            KCStyle style;
             if (!m_styles[pos].isDefault())
                 style = m_styles[pos];
 
-            Style tmpStyle = (col == rect.left() + 1) ? m_styles[1] : m_styles[2];
+            KCStyle tmpStyle = (col == rect.left() + 1) ? m_styles[1] : m_styles[2];
             if (!tmpStyle.isDefault())
                 style.setLeftBorderPen(tmpStyle.leftBorderPen());
 
@@ -95,11 +95,11 @@ bool AutoFormatCommand::process(Element* element)
         int pos = 4 + ((row - rect.top() - 1) % 2) * 4;
         Cell cell(m_sheet, rect.left(), row);
         if (!cell.isPartOfMerged()) {
-            Style style;
+            KCStyle style;
             if (!m_styles[pos].isDefault())
                 style = m_styles[pos];
 
-            Style tmpStyle = (row == rect.top() + 1) ? m_styles[4] : m_styles[8];
+            KCStyle tmpStyle = (row == rect.top() + 1) ? m_styles[4] : m_styles[8];
             if (!tmpStyle.isDefault())
                 style.setTopBorderPen(tmpStyle.topBorderPen());
 
@@ -116,14 +116,14 @@ bool AutoFormatCommand::process(Element* element)
                 if (!m_styles[pos].isDefault())
                     m_sheet->cellStorage()->setStyle(KCRegion(col, row), m_styles[pos]);
 
-                Style style;
+                KCStyle style;
                 if (col == rect.left() + 1)
                     style = m_styles[ 5 + ((row - rect.top() - 1) % 2) * 4 ];
                 else
                     style = m_styles[ 6 + ((row - rect.top() - 1) % 2) * 4 ];
 
                 if (!style.isDefault()) {
-                    Style tmpStyle;
+                    KCStyle tmpStyle;
                     tmpStyle.setLeftBorderPen(style.leftBorderPen());
                     m_sheet->cellStorage()->setStyle(KCRegion(col, row), tmpStyle);
                 }
@@ -134,7 +134,7 @@ bool AutoFormatCommand::process(Element* element)
                     style = m_styles[ 9 + ((col - rect.left() - 1) % 2)];
 
                 if (!style.isDefault()) {
-                    Style tmpStyle;
+                    KCStyle tmpStyle;
                     tmpStyle.setTopBorderPen(style.topBorderPen());
                     m_sheet->cellStorage()->setStyle(KCRegion(col, row), tmpStyle);
                 }
@@ -148,19 +148,19 @@ bool AutoFormatCommand::process(Element* element)
         if (!cell.isPartOfMerged()) {
             if (row == rect.top()) {
                 if (!m_styles[3].isDefault()) {
-                    Style tmpStyle;
+                    KCStyle tmpStyle;
                     tmpStyle.setRightBorderPen(m_styles[3].leftBorderPen());
                     m_sheet->cellStorage()->setStyle(KCRegion(rect.right(), row), tmpStyle);
                 }
             } else if (row == rect.right()) {
                 if (!m_styles[11].isDefault()) {
-                    Style tmpStyle;
+                    KCStyle tmpStyle;
                     tmpStyle.setRightBorderPen(m_styles[11].leftBorderPen());
                     m_sheet->cellStorage()->setStyle(KCRegion(rect.right(), row), tmpStyle);
                 }
             } else {
                 if (!m_styles[7].isDefault()) {
-                    Style tmpStyle;
+                    KCStyle tmpStyle;
                     tmpStyle.setRightBorderPen(m_styles[7].leftBorderPen());
                     m_sheet->cellStorage()->setStyle(KCRegion(rect.right(), row), tmpStyle);
                 }
@@ -174,19 +174,19 @@ bool AutoFormatCommand::process(Element* element)
         if (!cell.isPartOfMerged()) {
             if (col == rect.left()) {
                 if (!m_styles[12].isDefault()) {
-                    Style tmpStyle;
+                    KCStyle tmpStyle;
                     tmpStyle.setBottomBorderPen(m_styles[12].topBorderPen());
                     m_sheet->cellStorage()->setStyle(KCRegion(col, rect.bottom()), tmpStyle);
                 }
             } else if (col == rect.right()) {
                 if (!m_styles[14].isDefault()) {
-                    Style tmpStyle;
+                    KCStyle tmpStyle;
                     tmpStyle.setBottomBorderPen(m_styles[14].topBorderPen());
                     m_sheet->cellStorage()->setStyle(KCRegion(col, rect.bottom()), tmpStyle);
                 }
             } else {
                 if (!m_styles[13].isDefault()) {
-                    Style tmpStyle;
+                    KCStyle tmpStyle;
                     tmpStyle.setBottomBorderPen(m_styles[13].topBorderPen());
                     m_sheet->cellStorage()->setStyle(KCRegion(col, rect.bottom()), tmpStyle);
                 }

@@ -33,7 +33,7 @@
 #include "LayoutDialog.h"
 #include "ui/Selection.h"
 #include "Sheet.h"
-#include "Style.h"
+#include "KCStyle.h"
 #include "StyleManager.h"
 
 #include "commands/StyleCommand.h"
@@ -48,7 +48,7 @@ StyleManagerDialog::StyleManagerDialog(QWidget* parent, Selection* selection, St
     setButtonText(User2, i18n("&Modify..."));
     setButtonText(User1, i18n("&Delete..."));
     setButtonsOrientation(Qt::Vertical);
-    setCaption(i18n("Style Manager"));
+    setCaption(i18n("KCStyle Manager"));
 
     QWidget* widget = new QWidget(this);
     setMainWidget(widget);
@@ -56,7 +56,7 @@ StyleManagerDialog::StyleManagerDialog(QWidget* parent, Selection* selection, St
     QVBoxLayout* layout = new QVBoxLayout(widget);
 
     m_styleList = new QTreeWidget(this);
-    m_styleList->setHeaderLabel(i18n("Style"));
+    m_styleList->setHeaderLabel(i18n("KCStyle"));
     layout->addWidget(m_styleList);
 
     m_displayBox = new KComboBox(false, this);
@@ -149,7 +149,7 @@ void StyleManagerDialog::slotDisplayMode(int mode)
         }
 
         if (mode == 1) { // "Custom Styles"
-            if (styleData->type() == Style::CUSTOM)
+            if (styleData->type() == KCStyle::CUSTOM)
                 new QTreeWidgetItem(m_styleList, QStringList(styleData->name()));
         } else
             new QTreeWidgetItem(m_styleList, QStringList(styleData->name()));
@@ -206,13 +206,13 @@ void StyleManagerDialog::slotNew()
     }
 
     CustomStyle* style = new CustomStyle(newName, parentStyle);
-    style->setType(Style::TENTATIVE);
+    style->setType(KCStyle::TENTATIVE);
 
     QPointer<CellFormatDialog> dialog = new CellFormatDialog(this, m_selection, style, m_styleManager);
     dialog->exec();
     delete dialog;
 
-    if (style->type() == Style::TENTATIVE) {
+    if (style->type() == KCStyle::TENTATIVE) {
         delete style;
         return;
     }
@@ -266,7 +266,7 @@ void StyleManagerDialog::slotRemove()
     if (!style)
         return;
 
-    if (style->type() != Style::CUSTOM)
+    if (style->type() != KCStyle::CUSTOM)
         return;
 
     m_styleManager->takeStyle(style);
@@ -288,7 +288,7 @@ void StyleManagerDialog::selectionChanged(QTreeWidgetItem* item)
         return;
     }
 
-    if (style->type() == Style::BUILTIN)
+    if (style->type() == KCStyle::BUILTIN)
         enableButton(KDialog::User1, false);
     else
         enableButton(KDialog::User1, true);
