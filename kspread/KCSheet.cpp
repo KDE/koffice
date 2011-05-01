@@ -82,7 +82,7 @@
 #include "KCPrintSettings.h"
 #include "KCRecalcManager.h"
 #include "RowColumnFormat.h"
-#include "ShapeApplicationData.h"
+#include "KCShapeApplicationData.h"
 #include "SheetPrint.h"
 #include "KCRectStorage.h"
 #include "KCSheetModel.h"
@@ -318,7 +318,7 @@ void KCSheet::addShape(KoShape* shape)
     if (!shape)
         return;
     d->shapes.append(shape);
-    shape->setApplicationData(new ShapeApplicationData());
+    shape->setApplicationData(new KCShapeApplicationData());
     emit shapeAdded(this, shape);
 }
 
@@ -1710,7 +1710,7 @@ void KCSheet::loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& 
     if (!shape)
         return;
     addShape(shape);
-    dynamic_cast<ShapeApplicationData*>(shape->applicationData())->setAnchoredToCell(false);
+    dynamic_cast<KCShapeApplicationData*>(shape->applicationData())->setAnchoredToCell(false);
 }
 
 void KCSheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
@@ -2502,7 +2502,7 @@ bool KCSheet::saveOdf(KCOdfSavingContext& tableContext)
     // flake
     // Create a dict of cell anchored shapes with the cell as key.
     foreach(KoShape* shape, d->shapes) {
-        if (dynamic_cast<ShapeApplicationData*>(shape->applicationData())->isAnchoredToCell()) {
+        if (dynamic_cast<KCShapeApplicationData*>(shape->applicationData())->isAnchoredToCell()) {
             double dummy;
             const QPointF position = shape->position();
             const int col = leftColumn(position.x(), dummy);
@@ -2519,7 +2519,7 @@ bool KCSheet::saveOdf(KCOdfSavingContext& tableContext)
     if (!d->shapes.isEmpty()) {
         xmlWriter.startElement("table:shapes");
         foreach(KoShape* shape, d->shapes) {
-            if (dynamic_cast<ShapeApplicationData*>(shape->applicationData())->isAnchoredToCell())
+            if (dynamic_cast<KCShapeApplicationData*>(shape->applicationData())->isAnchoredToCell())
                 continue;
             shape->saveOdf(tableContext.shapeContext);
         }

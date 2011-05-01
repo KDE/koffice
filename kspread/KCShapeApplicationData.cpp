@@ -17,36 +17,32 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_SHAPE_APPLICATION_DATA
-#define KSPREAD_SHAPE_APPLICATION_DATA
+#include "KCShapeApplicationData.h"
 
-#include <KoShapeApplicationData.h>
-#include "kspread_export.h"
-
-
-/**
- * \ingroup Embedding
- * KSpread specific data attached to each shape.
- */
-class KSPREAD_EXPORT ShapeApplicationData : public KoShapeApplicationData
+class KCShapeApplicationData::Private
 {
 public:
-    /**
-     * Constructor.
-     */
-    ShapeApplicationData();
-
-    /**
-     * Destructor.
-     */
-    virtual ~ShapeApplicationData();
-
-    void setAnchoredToCell(bool state);
-    bool isAnchoredToCell() const;
-
-private:
-    class Private;
-    Private * const d;
+    bool anchoredToCell;
 };
 
-#endif // KSPREAD_SHAPE_APPLICATION_DATA
+KCShapeApplicationData::KCShapeApplicationData()
+        : KoShapeApplicationData()
+        , d(new Private)
+{
+    d->anchoredToCell = true;
+}
+
+KCShapeApplicationData::~KCShapeApplicationData()
+{
+    delete d;
+}
+
+void KCShapeApplicationData::setAnchoredToCell(bool state)
+{
+    d->anchoredToCell = state;
+}
+
+bool KCShapeApplicationData::isAnchoredToCell() const
+{
+    return d->anchoredToCell;
+}

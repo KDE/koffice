@@ -219,7 +219,7 @@ set (kspreadodf_LIB_SRCS
     KCRegion.cpp
     RowColumnFormat.cpp
     KCRowRepeatStorage.cpp
-    ShapeApplicationData.cpp
+    KCShapeApplicationData.cpp
     KCSheet.cpp
     SheetAccessModel.cpp
     KCSheetModel.cpp

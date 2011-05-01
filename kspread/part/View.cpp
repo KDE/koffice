@@ -126,7 +126,7 @@
 #include "KCPrintSettings.h"
 #include "KCRecalcManager.h"
 #include "RowColumnFormat.h"
-#include "ShapeApplicationData.h"
+#include "KCShapeApplicationData.h"
 #include "KCSheet.h"
 #include "SheetPrint.h"
 #include "KCStyle.h"
@@ -1011,7 +1011,7 @@ void View::shapeSelectionChanged()
 
     // start with the first shape
     const KoShape* shape = shapes[0];
-    const ShapeApplicationData* data = dynamic_cast<ShapeApplicationData*>(shape->applicationData());
+    const KCShapeApplicationData* data = dynamic_cast<KCShapeApplicationData*>(shape->applicationData());
     if (!data) {
         // Container children do not have the application data set, deselect the anchoring action.
         d->actions->shapeAnchor->setCurrentAction(0);
@@ -1023,7 +1023,7 @@ void View::shapeSelectionChanged()
     // go on with the remaining shapes
     for (int i = 1; i < shapes.count(); ++i) {
         shape = shapes[i];
-        data = dynamic_cast<ShapeApplicationData*>(shape->applicationData());
+        data = dynamic_cast<KCShapeApplicationData*>(shape->applicationData());
         Q_ASSERT(data);
         if (anchoredToCell != data->isAnchoredToCell()) {
             // If the anchoring differs between shapes, deselect the anchoring action and stop here.
@@ -1446,7 +1446,7 @@ void View::setShapeAnchoring(const QString& mode)
     const QList<KoShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
     for (int i = 0; i < shapes.count(); ++i) {
         const KoShape* shape = shapes[i];
-        ShapeApplicationData* data = dynamic_cast<ShapeApplicationData*>(shape->applicationData());
+        KCShapeApplicationData* data = dynamic_cast<KCShapeApplicationData*>(shape->applicationData());
         Q_ASSERT(data);
         data->setAnchoredToCell(mode == i18n("KCCell"));
     }

@@ -66,7 +66,7 @@
 #include <StyleManager.h>
 #include <StyleStorage.h>
 #include <ValueConverter.h>
-#include <ShapeApplicationData.h>
+#include <KCShapeApplicationData.h>
 #include <Util.h>
 
 #include <Charting.h>

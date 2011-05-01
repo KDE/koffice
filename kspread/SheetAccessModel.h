@@ -45,7 +45,7 @@ class KCSheet;
  * view->setModel( firstSheet.data() );
  * @endcode
  */
-    class SheetAccessModel : public QStandardItemModel
+class SheetAccessModel : public QStandardItemModel
 {
     Q_OBJECT
 

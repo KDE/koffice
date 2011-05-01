@@ -60,7 +60,7 @@
 #include "KCOdfLoadingContext.h"
 #include "KCOdfSavingContext.h"
 #include "RowColumnFormat.h"
-#include "ShapeApplicationData.h"
+#include "KCShapeApplicationData.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
@@ -1763,7 +1763,7 @@ void KCCell::loadOdfObject(const KoXmlElement &element, KoShapeLoadingContext &s
         position += QPointF(0.0, d->sheet->rowFormat(row)->height());
     shape->setPosition(position);
 
-    dynamic_cast<ShapeApplicationData*>(shape->applicationData())->setAnchoredToCell(true);
+    dynamic_cast<KCShapeApplicationData*>(shape->applicationData())->setAnchoredToCell(true);
 
     // All three attributes are necessary for cell anchored shapes.
     // Otherwise, they are anchored in the sheet.
