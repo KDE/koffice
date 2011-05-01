@@ -74,7 +74,7 @@
 #include "Global.h"
 #include "KCHeaderFooter.h"
 #include "KCLoadingInfo.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "OdfLoadingContext.h"

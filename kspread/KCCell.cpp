@@ -53,7 +53,7 @@
 #include "KCFormula.h"
 #include "KCGenValidationStyle.h"
 #include "Global.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCLoadingInfo.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"

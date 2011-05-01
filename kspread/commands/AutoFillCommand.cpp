@@ -30,7 +30,7 @@
 
 #include "AutoFillCommand.h"
 
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "KCSheet.h"
 #include "KCValue.h"

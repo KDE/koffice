@@ -42,7 +42,7 @@
 
 // KSpread
 #include <Global.h>
-#include <Localization.h>
+#include <KCLocalization.h>
 #include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "ui/Selection.h"

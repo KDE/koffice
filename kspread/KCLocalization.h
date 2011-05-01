@@ -29,10 +29,10 @@
 class QDomElement;
 class QDomDocument;
 
-class KSPREAD_EXPORT Localization : public KLocale
+class KSPREAD_EXPORT KCLocalization : public KLocale
 {
 public:
-    Localization();
+    KCLocalization();
 
     void load(const KoXmlElement& element);
     QDomElement save(QDomDocument& doc) const;

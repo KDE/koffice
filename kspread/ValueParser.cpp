@@ -23,7 +23,7 @@
 #include "ValueParser.h"
 
 #include "KCCalculationSettings.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCStyle.h"
 #include "KCValue.h"
 

@@ -21,7 +21,7 @@
 #include "ValueConverter.h"
 
 #include "KCCalculationSettings.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "ValueParser.h"
 
 ValueConverter::ValueConverter(const ValueParser* parser)

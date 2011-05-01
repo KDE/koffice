@@ -21,7 +21,7 @@
 // Local
 #include "DefinePrintRangeCommand.h"
 
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "PrintSettings.h"
 #include "KCSheet.h"

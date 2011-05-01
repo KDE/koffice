@@ -120,7 +120,7 @@
 #include "Global.h"
 #include "Headers.h"
 #include "Headers.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "PrintSettings.h"

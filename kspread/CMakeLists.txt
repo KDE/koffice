@@ -208,7 +208,7 @@ set (kspreadodf_LIB_SRCS
     KCFormula.cpp
     KCGenValidationStyle.cpp
     KCHeaderFooter.cpp
-    Localization.cpp
+    KCLocalization.cpp
     KCMap.cpp
     NamedAreaManager.cpp
     KCNumber.cpp

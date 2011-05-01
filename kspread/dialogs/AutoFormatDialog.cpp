@@ -41,7 +41,7 @@
 
 #include "KCCell.h"
 #include "KCCellStorage.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "KCStyle.h"

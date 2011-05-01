@@ -39,7 +39,7 @@
 #include <ktextedit.h>
 
 #include "KCCalculationSettings.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"

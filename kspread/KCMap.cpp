@@ -53,7 +53,7 @@
 #include "KCDependencyManager.h"
 #include "KCDocBase.h"
 #include "KCLoadingInfo.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "NamedAreaManager.h"
 #include "OdfLoadingContext.h"
 #include "OdfSavingContext.h"
@@ -441,7 +441,7 @@ QDomElement KCMap::save(QDomDocument& doc)
 {
     QDomElement spread = doc.documentElement();
 
-    QDomElement locale = static_cast<Localization*>(d->calculationSettings->locale())->save(doc);
+    QDomElement locale = static_cast<KCLocalization*>(d->calculationSettings->locale())->save(doc);
     spread.appendChild(locale);
 
     QDomElement areaname = d->namedAreaManager->saveXML(doc);

@@ -35,7 +35,7 @@
 #include <KTextEdit>
 
 #include "commands/AutoFillCommand.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 
 class ListDialog::Private
 {

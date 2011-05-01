@@ -47,7 +47,7 @@
 #include <sonnet/configwidget.h>
 
 #include "KCCalculationSettings.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
@@ -141,7 +141,7 @@ void parameterLocale::updateDefaultSystemConfig()
 {
     m_bUpdateLocale = true;
     KLocale* const locale = m_selection->activeSheet()->map()->calculationSettings()->locale();
-    static_cast<Localization*>(locale)->defaultSystemConfig();
+    static_cast<KCLocalization*>(locale)->defaultSystemConfig();
     updateToMatchLocale(locale);
 }
 

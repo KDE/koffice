@@ -32,7 +32,7 @@
 #include <klineedit.h>
 
 #include "KCCell.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "ui/Selection.h"

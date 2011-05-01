@@ -28,7 +28,7 @@
 
 #include "KCFormula.h"
 #include "kspread_limits.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"

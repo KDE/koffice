@@ -54,7 +54,7 @@
 #include "part/Doc.h"
 #include "part/Factory.h"
 #include "KCFunctionModuleRegistry.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "KCSheet.h"
 #include "part/View.h"

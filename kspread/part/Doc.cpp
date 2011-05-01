@@ -86,7 +86,7 @@
 #include "KCFunctionModuleRegistry.h"
 #include "KCHeaderFooter.h"
 #include "KCLoadingInfo.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "PrintSettings.h"
@@ -327,7 +327,7 @@ bool Doc::loadXML(const KoXmlDocument& doc, KoStore*)
     // <locale>
     KoXmlElement loc = spread.namedItem("locale").toElement();
     if (!loc.isNull())
-        static_cast<Localization*>(map()->calculationSettings()->locale())->load(loc);
+        static_cast<KCLocalization*>(map()->calculationSettings()->locale())->load(loc);
 
     if (updater) updater->setProgress(5);
 

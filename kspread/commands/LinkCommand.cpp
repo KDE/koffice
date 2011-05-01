@@ -22,7 +22,7 @@
 #include "LinkCommand.h"
 
 #include "Damages.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "KCSheet.h"
 

@@ -30,7 +30,7 @@
 #include <klineedit.h>
 #include <kmessagebox.h>
 
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "ui/Selection.h"

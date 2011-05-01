@@ -31,7 +31,7 @@
 // Local
 #include "KCCalculationSettings.h"
 
-#include "Localization.h"
+#include "KCLocalization.h"
 
 #include <KoXmlNS.h>
 
@@ -64,7 +64,7 @@ public:
 KCCalculationSettings::KCCalculationSettings()
         : d(new Private)
 {
-    d->locale = new Localization();
+    d->locale = new KCLocalization();
     d->caseSensitiveComparisons = true;
     d->precisionAsShown         = false;
     d->wholeCellSearchCriteria  = true;

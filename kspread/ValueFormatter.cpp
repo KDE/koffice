@@ -24,7 +24,7 @@
 
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
-#include "Localization.h"
+#include "KCLocalization.h"
 #include "ValueConverter.h"
 
 #include <kcalendarsystem.h>

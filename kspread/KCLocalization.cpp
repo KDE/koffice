@@ -18,17 +18,17 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "Localization.h"
+#include "KCLocalization.h"
 
 #include <qdom.h>
 
-Localization::Localization()
+KCLocalization::KCLocalization()
         : KLocale("kspread")
 {
     insertCatalog("koffice");
 }
 
-void Localization::load(const KoXmlElement& element)
+void KCLocalization::load(const KoXmlElement& element)
 {
     if (element.hasAttribute("weekStartsMonday")) {
         QString c = element.attribute("weekStartsMonday");
@@ -72,7 +72,7 @@ void Localization::load(const KoXmlElement& element)
         setDateFormatShort(element.attribute("dateFormatShort"));
 }
 
-QDomElement Localization::save(QDomDocument& doc) const
+QDomElement KCLocalization::save(QDomDocument& doc) const
 {
     QDomElement element = doc.createElement("locale");
 
@@ -96,7 +96,7 @@ QDomElement Localization::save(QDomDocument& doc) const
     return element;
 }
 
-void Localization::defaultSystemConfig()
+void KCLocalization::defaultSystemConfig()
 {
     KLocale locale("kspread");
     setWeekStartDay(locale.weekStartDay());
