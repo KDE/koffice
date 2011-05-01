@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2002 The KSpread Team <koffice-devel@kde.org>
+   Copyright (C) 1998-2002 The KCells Team <koffice-devel@kde.org>
    Copyright (C) 2005 Tomas Mecir <mecirt@gmail.com>
    Copyright (C) 2007 Sascha Pfau <MrPeacock@gmail.com>
 
@@ -36,7 +36,7 @@
 #include <QList>
 #include <QMap>
 
-using namespace KSpread;
+using namespace KCells;
 
 // prototypes (sorted!)
 KCValue func_arrang(valVector args, KCValueCalc *calc, FuncExtra *);
@@ -122,7 +122,7 @@ KCValue func_ztest(valVector args, KCValueCalc *calc, FuncExtra *);
 typedef QList<double> List;
 
 
-KSPREAD_EXPORT_FUNCTION_MODULE("statistical", StatisticalModule)
+KCELLS_EXPORT_FUNCTION_MODULE("statistical", StatisticalModule)
 
 
 StatisticalModule::StatisticalModule(QObject* parent, const QVariantList&)
@@ -846,7 +846,7 @@ KCValue func_betainv(valVector args, KCValueCalc *calc, FuncExtra *)
 //
 // KCFunction: bino
 //
-// kspread version
+// kcells version
 //
 KCValue func_bino(valVector args, KCValueCalc *calc, FuncExtra *)
 {

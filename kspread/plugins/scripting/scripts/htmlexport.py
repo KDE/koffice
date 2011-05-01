@@ -6,17 +6,17 @@ a HTML File.
 
 The script could be used in two ways;
 
-    1. Embedded in KSpread by execution via the "Tools=>Scripts"
+    1. Embedded in KCells by execution via the "Tools=>Scripts"
        menu or from the "Tools=>Script Manager". In that case
-       the document currently loaded and displayed by KSpread
+       the document currently loaded and displayed by KCells
        will be exported to a HTML file.
 
     2. As standalone script by running;
 
             # make the script executable
-            chmod 755 `kde4-config --install data`/kspread/scripts/extensions/htmlexport.py
+            chmod 755 `kde4-config --install data`/kcells/scripts/extensions/htmlexport.py
             # run the script
-            `kde4-config --install data`/kspread/scripts/extensions/htmlexport.py
+            `kde4-config --install data`/kcells/scripts/extensions/htmlexport.py
 
        In that case the htmlexport.py-script will use the with
        Kross distributed krossrunner commandline-application
@@ -25,7 +25,7 @@ The script could be used in two ways;
 
 (C)2006 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 Dual-licensed under LGPL v2+higher and the BSD license.
 """
 
@@ -35,10 +35,10 @@ import Kross
 class Config:
     """ Some configurations for the htmlexport.py script. """
 
-    ReaderFiles = ['/home/kde4/kspreaddocument.ods',]
+    ReaderFiles = ['/home/kde4/kcellsdocument.ods',]
     """ If one of the files exist, use it per default if the htmlexport.py script
     got run from the commandline with the krossrunner application. This option is
-    ignored if the htmlexport.py script got executed embedded within KSpreadsince
+    ignored if the htmlexport.py script got executed embedded within KCellssince
     in that case always the current document will be used. """
 
     Infos = {
@@ -50,7 +50,7 @@ class Config:
         'Filename' : '',
     }
     """ The default values for the "HTML Document Informations" page. They are used
-    if the corresponding value is not defined (for KSpread see in the mainmenu the
+    if the corresponding value is not defined (for KCells see in the mainmenu the
     item "File=>Document Information". """
 
     DefaultStyle = 'Paper'
@@ -111,7 +111,7 @@ class Styles:
 
 class Reader:
     """ The Reader class provides the functionality to read content from different
-    backends like for example a OpenDocument Spreadsheet file by using KSpread. """
+    backends like for example a OpenDocument Spreadsheet file by using KCells. """
 
     class Static:
         """ The Static class implements a Reader to read static content. This class
@@ -149,23 +149,23 @@ class Reader:
             return None
 
     class File:
-        """ The File class implements a Reader that uses KSpread to read
+        """ The File class implements a Reader that uses KCells to read
         content from an OpenDocument Spreadsheet file. """
 
         def __init__(self):
-            self.embeddedInKSpread = False
+            self.embeddedInKCells = False
             try:
-                import KSpread
-                self.kspread = KSpread
-                self.embeddedInKSpread = True
+                import KCells
+                self.kcells = KCells
+                self.embeddedInKCells = True
             except ImportError:
                 try:
-                    self.kspread = Kross.module("kspread")
+                    self.kcells = Kross.module("kcells")
                 except ImportError:
                     raise "Failed to import the Kross module. Please run this script with \"kross thisscriptfile.py\""
 
-            application = self.kspread.application()
-            self.document = self.kspread.document()
+            application = self.kcells.application()
+            self.document = self.kcells.document()
 
             global Config
             self.filename = ''
@@ -174,7 +174,7 @@ class Reader:
                     self.filename = f
                     break
 
-            if self.embeddedInKSpread:
+            if self.embeddedInKCells:
                 if self.document.url():
                     self.setFile(self.document.url())
             elif self.filename and self.filename != '':
@@ -195,19 +195,19 @@ class Reader:
 
             print "Application: %s" % application
             print "Document: %s" % self.document
-            #print dir(self.kspread)
+            #print dir(self.kcells)
             #print dir(application)
             #print dir(document)
             print "Filename: %s" % self.filename
-            print "Embedded in KSpread: %s" % self.embeddedInKSpread
-            print "Sheetnames: %s" % self.kspread.sheetNames()
+            print "Embedded in KCells: %s" % self.embeddedInKCells
+            print "Sheetnames: %s" % self.kcells.sheetNames()
 
         def extractFileFromUrl(self, url):
             (scheme, netloc, path, params, query, fragment) = urlparse.urlparse(url)
             return path
 
         def hasFile(self):
-            return self.embeddedInKSpread or (self.filename and self.filename != '')
+            return self.embeddedInKCells or (self.filename and self.filename != '')
 
         def setFile(self, filename):
             path = self.extractFileFromUrl(filename)
@@ -216,19 +216,19 @@ class Reader:
             self.filename = path
 
         def openFile(self, progress = None):
-            if not self.embeddedInKSpread:
+            if not self.embeddedInKCells:
                 file = self.extractFileFromUrl( self.filename )
                 docfile = self.extractFileFromUrl( self.document.url() )
                 if file != docfile:
-                    if not self.kspread.openUrl( self.filename ):
+                    if not self.kcells.openUrl( self.filename ):
                         raise "Failed to open the file \"%s\"." % self.filename
 
-            self.sheet = self.kspread.currentSheet()
+            self.sheet = self.kcells.currentSheet()
             if self.sheet == None:
-                sheetnames = self.kspread.sheetNames()
+                sheetnames = self.kcells.sheetNames()
                 if len(sheetnames) < 1:
                     raise "No sheets which could be exported to HTML."
-                self.sheet = self.kspread.sheetByName( sheetnames[0] )
+                self.sheet = self.kcells.sheetByName( sheetnames[0] )
 
             self.rowidx = 1
             print "Reader.openFile file=%s rowidx=%i lastRow=%i lastColumn=%i" % (self.filename, self.rowidx, self.sheet.lastRow(), self.sheet.lastColumn())
@@ -363,13 +363,13 @@ class Dialog:
 
         if not self.exporter.reader.hasFile():
             openpage = self.dialog.addPage("Open","Read from OpenDocument Spreadsheet File","document-open")
-            self.openwidget = self.forms.createFileWidget(openpage, "kfiledialog:///kspreadhtmlexportopen")
+            self.openwidget = self.forms.createFileWidget(openpage, "kfiledialog:///kcellshtmlexportopen")
             self.openwidget.setMode("Opening")
             self.openwidget.setFilter("*.ods|OpenDocument Spreadsheet Files\n*|All Files")
 
         if not self.exporter.writer.hasFile():
             savepage = self.dialog.addPage("Save","Save to HTML File","document-save")
-            self.savewidget = self.forms.createFileWidget(savepage, "kfiledialog:///kspreadhtmlexportsave")
+            self.savewidget = self.forms.createFileWidget(savepage, "kfiledialog:///kcellshtmlexportsave")
             self.savewidget.setMode("Saving")
             self.savewidget.setFilter("*.html *.htm *.xhtml|HTML Documents\n*|All Files")
 

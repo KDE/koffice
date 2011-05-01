@@ -1,5 +1,5 @@
 /*
- * This file is part of KSpread
+ * This file is part of KCells
  *
  * Copyright (c) 2005 Cyrille Berger <cberger@cberger.net>
  * Copyright (c) 2006 Isaac Clerencia <isaac@warp.es>
@@ -27,7 +27,7 @@
 
 /**
 * The ScriptingPart class implements a KPart component
-* to integrate scripting into KSpread.
+* to integrate scripting into KCells.
 */
 class ScriptingPart : public KoScriptingPart
 {
@@ -36,9 +36,9 @@ public:
 
     /**
     * Constructor.
-    * \param The parent QObject. This will be the \a KSpread::KCView instance
+    * \param The parent QObject. This will be the \a KCells::KCView instance
     * this KParts plugin got loaded for. Once those view got destroyed the
-    * plugin got unloaded. Since KSpread may use multiple views, it's quit
+    * plugin got unloaded. Since KCells may use multiple views, it's quit
     * possible that multiple instances of this plugin exist the same time.
     * \param args The optional list of arguments.
     */

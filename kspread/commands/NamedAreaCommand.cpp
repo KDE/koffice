@@ -23,7 +23,7 @@
 
 #include "Damages.h"
 #include "KCFormulaStorage.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCMap.h"
 #include "KCNamedAreaManager.h"
 #include "KCSheet.h"

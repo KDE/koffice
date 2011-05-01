@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2003 The KSpread Team <koffice-devel@kde.org>
+   Copyright (C) 1998-2003 The KCells Team <koffice-devel@kde.org>
    Copyright (C) 2005 Tomas Mecir <mecirt@gmail.com>
 
    This library is free software; you can redistribute it and/or
@@ -32,7 +32,7 @@
 #include <kcalendarsystem.h>
 #include <KLocale>
 
-using namespace KSpread;
+using namespace KCells;
 
 // prototypes, sorted
 KCValue func_currentDate(valVector args, KCValueCalc *calc, FuncExtra *);
@@ -78,7 +78,7 @@ KCValue func_yearFrac(valVector args, KCValueCalc *calc, FuncExtra *);
 KCValue func_years(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
-KSPREAD_EXPORT_FUNCTION_MODULE("datetime", DateTimeModule)
+KCELLS_EXPORT_FUNCTION_MODULE("datetime", DateTimeModule)
 
 
 DateTimeModule::DateTimeModule(QObject* parent, const QVariantList&)

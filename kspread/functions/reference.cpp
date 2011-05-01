@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2002 The KSpread Team <koffice-devel@kde.org>
+   Copyright (C) 1998-2002 The KCells Team <koffice-devel@kde.org>
    Copyright (C) 2005 Tomas Mecir <mecirt@gmail.com>
 
    This library is free software; you can redistribute it and/or
@@ -36,7 +36,7 @@
 
 #include <KLocale>
 
-using namespace KSpread;
+using namespace KCells;
 
 // prototypes (sorted alphabetically)
 KCValue func_address(valVector args, KCValueCalc *calc, FuncExtra *);
@@ -55,7 +55,7 @@ KCValue func_rows(valVector args, KCValueCalc *calc, FuncExtra *);
 KCValue func_vlookup(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
-KSPREAD_EXPORT_FUNCTION_MODULE("reference", ReferenceModule)
+KCELLS_EXPORT_FUNCTION_MODULE("reference", ReferenceModule)
 
 
 ReferenceModule::ReferenceModule(QObject* parent, const QVariantList&)

@@ -9,9 +9,9 @@ action. You need to reimplement the redo() and undo() methods
 of QUndoCommand.
 
 Each command is created from the user interface.
-The commands working on cell ranges, i.e. derivatives of KSpread::AbstractRegionCommand,
+The commands working on cell ranges, i.e. derivatives of KCells::AbstractRegionCommand,
 have to check wether the operation is allowed before execution. Cells may be
-protected or locked as elements of matrices. KSpread::AbstractRegionCommand::execute
+protected or locked as elements of matrices. KCells::AbstractRegionCommand::execute
 takes care of that. If the operation is not allowed, the command will neither
 get executed nor added to the undo stack.
 All other commands can be added directly to the undo stack by using
@@ -19,12 +19,12 @@ KoDocument::addCommand or KoCanvasBase::addCommand, which executes the operation
 
 This is an example of typical use of a command NOT processing cell ranges:
 \code
-    QUndoCommand* command = new KSpread::RenameSheetCommand( sheet, name );
+    QUndoCommand* command = new KCells::RenameSheetCommand( sheet, name );
     doc->addCommand( command );
 \endcode
 This is an example of typical use of a command, which works on a cell range:
 \code
-    KSpread::CommentCommand* command = new KSpread::CommentCommand();
+    KCells::CommentCommand* command = new KCells::CommentCommand();
     command->setSheet( sheet );
     command->setName( i18n( "Add Comment" ) );
     command->setComment( comment );

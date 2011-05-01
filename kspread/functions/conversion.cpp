@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2002 The KSpread Team <koffice-devel@kde.org>
+   Copyright (C) 1998-2002 The KCells Team <koffice-devel@kde.org>
    Copyright (C) 2005 Tomas Mecir <mecirt@gmail.com>
 
    This library is free software; you can redistribute it and/or
@@ -31,7 +31,7 @@
 
 #include <QByteArray>
 
-using namespace KSpread;
+using namespace KCells;
 
 // prototypes
 KCValue func_arabic(valVector args, KCValueCalc *calc, FuncExtra *);
@@ -49,7 +49,7 @@ KCValue func_booltoint(valVector args, KCValueCalc *calc, FuncExtra *);
 KCValue func_ToString(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
-KSPREAD_EXPORT_FUNCTION_MODULE("conversion", ConversionModule)
+KCELLS_EXPORT_FUNCTION_MODULE("conversion", ConversionModule)
 
 
 ConversionModule::ConversionModule(QObject* parent, const QVariantList&)

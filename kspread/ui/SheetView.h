@@ -24,7 +24,7 @@
 #include <QPoint>
 #include <QPointF>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QPainter;
 class QRect;
@@ -43,7 +43,7 @@ class KCSheet;
  * The SheetView controls the painting of the sheets' cells.
  * It caches a set of CellViews.
  */
-class KSPREAD_EXPORT SheetView : public QObject
+class KCELLS_EXPORT SheetView : public QObject
 {
     Q_OBJECT
 

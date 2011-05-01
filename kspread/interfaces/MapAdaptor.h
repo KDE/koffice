@@ -24,14 +24,14 @@
 #include <QStringList>
 
 #include <QtDBus/QtDBus>
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class KCMap;
 
 /**
 * The MapAdaptor class provides additional functionality to deal with sheets.
 */
-class KSPREAD_EXPORT MapAdaptor : public QDBusAbstractAdaptor
+class KCELLS_EXPORT MapAdaptor : public QDBusAbstractAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.koffice.spreadsheet.map")

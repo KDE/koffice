@@ -1,5 +1,5 @@
-<!DOCTYPE KSpreadFunctions>
-<KSpreadFunctions>
+<!DOCTYPE KCellsFunctions>
+<KCellsFunctions>
 
   <Group>
     <GroupName>Financial</GroupName>
@@ -1489,4 +1489,4 @@
     </Function>
 
   </Group>
-</KSpreadFunctions>
+</KCellsFunctions>

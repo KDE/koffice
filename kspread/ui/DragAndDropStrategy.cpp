@@ -20,7 +20,7 @@
 #include "DragAndDropStrategy.h"
 
 #include "KCCell.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "Selection.h"
 #include "KCSheet.h"
 
@@ -107,7 +107,7 @@ void DragAndDropStrategy::handleMouseMove(const QPointF& documentPos, Qt::Keyboa
 
         QMimeData* mimeData = new QMimeData();
         mimeData->setText(CopyCommand::saveAsPlainText(*selection()));
-        mimeData->setData("application/x-kspread-snippet", buffer.buffer());
+        mimeData->setData("application/x-kcells-snippet", buffer.buffer());
 
         QDrag *drag = new QDrag(tool()->canvas()->canvasWidget());
         drag->setMimeData(mimeData);

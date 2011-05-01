@@ -1,11 +1,11 @@
 #!/usr/bin/env kross
 
 """
-Python script to import content from a vCard file to KSpread.
+Python script to import content from a vCard file to KCells.
 
 (C)2007 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 Dual-licensed under LGPL v2+higher and the BSD license.
 """
 
@@ -14,7 +14,7 @@ try:
 except ImportError:
     raise "Failed to import required python module: VObject - iCalendar and vCard Library"
 
-import os, Kross, KSpread
+import os, Kross, KCells
 
 class MyConfig:
     def __init__(self):
@@ -36,14 +36,14 @@ class MyDialog:
         dialog.setFaceType("List") #Auto Plain List Tree Tabbed
         
         filepage = dialog.addPage("Open", "vCard File", "document-open")
-        #deffile = "/home/kde4/vcardtest/addressbook.vcf" #"kfiledialog:///kspreadvcardimport"
-        deffile = "kfiledialog:///kspreadvcardimport"
+        #deffile = "/home/kde4/vcardtest/addressbook.vcf" #"kfiledialog:///kcellsvcardimport"
+        deffile = "kfiledialog:///kcellsvcardimport"
         self.openwidget = forms.createFileWidget(filepage, deffile)
         self.openwidget.setMode("Opening")
         self.openwidget.setFilter("*.vcf|vCard Files\n*|All Files")
         
         datapage = dialog.addPage("Import","Import to sheet beginning at cell","document-import")
-        self.sheetslistview = KSpread.createSheetsListView(datapage)
+        self.sheetslistview = KCells.createSheetsListView(datapage)
         self.sheetslistview.setEditorType("KCCell")
 
         if not dialog.exec_loop():
@@ -63,7 +63,7 @@ class MyDialog:
         self.componentDict = {}
         self.componentList = []
         
-        writer = KSpread.writer()
+        writer = KCells.writer()
         if not writer.setSheet(currentSheet):
             raise "Invalid sheet \"%s\" defined." % currentSheet
 

@@ -35,7 +35,7 @@ class KCValueConverter;
  * \ingroup KCValue
  * Generates a textual representation of a KCValue with a given formatting.
  */
-class KSPREAD_EXPORT KCValueFormatter
+class KCELLS_EXPORT KCValueFormatter
 {
 public:
     /**

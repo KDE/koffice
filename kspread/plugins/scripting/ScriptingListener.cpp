@@ -1,5 +1,5 @@
 /*
- * This file is part of KSpread
+ * This file is part of KCells
  *
  * Copyright (c) 2007 Sebastian Sauer <mail@dipe.org>
  *

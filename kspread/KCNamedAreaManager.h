@@ -27,7 +27,7 @@
 
 #include "KCRegion.h"
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QDomDocument;
 class QString;
@@ -40,7 +40,7 @@ class KCRegion;
 /**
  * Manages named cell areas.
  */
-class KSPREAD_EXPORT KCNamedAreaManager : public QObject
+class KCELLS_EXPORT KCNamedAreaManager : public QObject
 {
     Q_OBJECT
 

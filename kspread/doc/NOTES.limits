@@ -1,4 +1,4 @@
-KSpread column/row limits
+KCells column/row limits
 =========================
 
 Restrictions by sizeof(int); i <= 2^31-1:

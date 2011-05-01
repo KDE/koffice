@@ -36,7 +36,7 @@
 
 // make the plugin available
 K_PLUGIN_FACTORY(SolverFactory, registerPlugin<Solver>();)
-K_EXPORT_PLUGIN(SolverFactory("kspreadsolver"))
+K_EXPORT_PLUGIN(SolverFactory("kcellssolver"))
 
 KCView* s_view = 0;
 KCFormula* s_formula = 0;
@@ -63,7 +63,7 @@ Solver::Solver(QObject* parent, const QVariantList& args)
         return;
     }
 
-    QAction* solver = actionCollection()->addAction("kspreadsolver");
+    QAction* solver = actionCollection()->addAction("kcellssolver");
     solver->setText(i18n("KCFunction Optimizer..."));
     connect(solver, SIGNAL(triggered(bool)), this, SLOT(showDialog()));
 }

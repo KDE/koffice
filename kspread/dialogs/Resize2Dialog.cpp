@@ -40,7 +40,7 @@
 #include <KoUnit.h>
 #include <KoUnitDoubleSpinBox.h>
 
-// KSpread
+// KCells
 #include <Global.h>
 #include <KCLocalization.h>
 #include "KCMap.h"

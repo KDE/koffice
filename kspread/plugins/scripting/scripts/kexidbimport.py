@@ -2,19 +2,19 @@
 
 """
 Python script to import content from a Kexi Project stored
-within a KexiDB into KSpread.
+within a KexiDB into KCells.
 
 (C)2007 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 Dual-licensed under LGPL v2+higher and the BSD license.
 """
 
 #import os, datetime, sys, traceback, csv
-#import Kross, KSpread
+#import Kross, KCells
 
 import sys, os, traceback
-import Kross, KSpread
+import Kross, KCells
 
 class KexiImport:
 
@@ -25,7 +25,7 @@ class KexiImport:
         self.start()
 
     def start(self):
-        writer = KSpread.writer()
+        writer = KCells.writer()
 
         connection = self.showImportDialog(writer)
         if not connection:
@@ -87,12 +87,12 @@ class KexiImport:
         dialog.setFaceType("List") #Auto Plain List Tree Tabbed
 
         openpage = dialog.addPage("Open","Import from Kexi Project File","document-open")
-        openwidget = self.forms.createFileWidget(openpage, "kfiledialog:///kspreadkexidbimportopen")
+        openwidget = self.forms.createFileWidget(openpage, "kfiledialog:///kcellskexidbimportopen")
         openwidget.setMode("Opening")
         openwidget.setFilter("*.kexi *.kexis *kexic|Kexi Project Files\n*|All Files")
 
         datapage = dialog.addPage("Import","Import to sheet beginning at cell","document-import")
-        sheetslistview = KSpread.createSheetsListView(datapage)
+        sheetslistview = KCells.createSheetsListView(datapage)
         sheetslistview.setEditorType("KCCell")
 
         if dialog.exec_loop():

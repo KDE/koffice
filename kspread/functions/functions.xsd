@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--  kspread XSD v1.0 -->
+<!--  kcells XSD v1.0 -->
 <xsd:schema
            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-           xmlns="http://www.koffice.org/standards/kspread/functions/1.0"
-           xmlns:kspread="http://www.koffice.org/standards/kspread/functions/1.0"
-           targetNamespace="http://www.koffice.org/standards/kspread/functions/1.0"
+           xmlns="http://www.koffice.org/standards/kcells/functions/1.0"
+           xmlns:kcells="http://www.koffice.org/standards/kcells/functions/1.0"
+           targetNamespace="http://www.koffice.org/standards/kcells/functions/1.0"
            version="1.0"
            elementFormDefault="qualified" >
 
@@ -26,7 +26,7 @@
     <xsd:annotation>
         <xsd:documentation>
 
-            A schema for KSpread's function description XML format.
+            A schema for KCells's function description XML format.
 
             A document instance of this Schema should have a declaration
             looking like this:
@@ -34,10 +34,10 @@
             <![CDATA[
 
                 <?xml version="1.0" encoding="UTF-8" ?>
-                <functions xmlns="http://www.koffice.org/standards/kspread/1.0"
+                <functions xmlns="http://www.koffice.org/standards/kcells/1.0"
                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                           xsi:schemaLocation="http://www.koffice.org/standards/kspread/functions/1.0
-                           http://www.koffice.org/standards/kspread/functions/1.0/functions.xsd" >
+                           xsi:schemaLocation="http://www.koffice.org/standards/kcells/functions/1.0
+                           http://www.koffice.org/standards/kcells/functions/1.0/functions.xsd" >
                     <!-- the content -->
                 </functions>
 

@@ -1,7 +1,7 @@
 /* This file is part of the KDE project
    Copyright 2010 Marijn Kruisselbrink <m.kruisselbrink@student.tue.nl>
    Copyright 1998, 1999 Torben Weis <weis@kde.org>
-   Copyright 1999- 2006 The KSpread Team <koffice-devel@kde.org>
+   Copyright 1999- 2006 The KCells Team <koffice-devel@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -285,7 +285,7 @@ void KCConditions::setDefaultStyle(const KCStyle &style)
 
 void KCConditions::saveOdfConditions(KoGenStyle &currentCellStyle, KCValueConverter *converter) const
 {
-    //todo fix me with kspread old format!!!
+    //todo fix me with kcells old format!!!
     if (d->conditionList.isEmpty())
         return;
     QLinkedList<KCConditional>::const_iterator it;
@@ -344,7 +344,7 @@ QString KCConditions::saveOdfConditionValue(const KCConditional &condition, KCVa
         break;
     case KCConditional::IsTrueFormula:
         value = "is-true-formula(";
-        value += KSpread::Odf::encodeFormula(condition.value1.asString());
+        value += KCells::Odf::encodeFormula(condition.value1.asString());
         value += ")";
     }
     return value;
@@ -372,7 +372,7 @@ QDomElement KCConditions::saveConditions(QDomDocument &doc, KCValueConverter *co
         child = doc.createElement(name);
         child.setAttribute("cond", (int) condition.cond);
 
-        // TODO: saving in KSpread 1.1 | KSpread 1.2 format
+        // TODO: saving in KCells 1.1 | KCells 1.2 format
         if (condition.value1.isString()) {
             child.setAttribute("strval1", condition.value1.asString());
             if (!condition.value2.asString().isEmpty()) {
@@ -466,7 +466,7 @@ void KCConditions::loadOdfConditionValue(const QString &styleCondition, KCCondit
         val = val.mid(16);
         if (val.endsWith(")")) val = val.left(val.length() - 1);
         newCondition.cond = KCConditional::IsTrueFormula;
-        newCondition.value1 = KCValue(KSpread::Odf::decodeFormula(val));
+        newCondition.value1 = KCValue(KCells::Odf::decodeFormula(val));
     }
 }
 

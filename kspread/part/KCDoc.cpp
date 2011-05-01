@@ -149,7 +149,7 @@ KCDoc::KCDoc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
     QDBusConnection::sessionBus().registerObject('/' + objectName() + '/' + d->map->objectName(), d->map);
 
 
-    // Init chart shape factory with KSpread's specific configuration panels.
+    // Init chart shape factory with KCells's specific configuration panels.
     KoShapeFactoryBase *chartShape = KoShapeRegistry::instance()->value(ChartShapeId);
     if (chartShape) {
         QList<KoShapeConfigFactoryBase*> panels = ChartDialog::panels(d->map);
@@ -160,7 +160,7 @@ KCDoc::KCDoc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
             this, SLOT(addCommand(QUndoCommand *)));
 
     setComponentData(KCFactory::global(), false);
-    setTemplateType("kspread_template");
+    setTemplateType("kcells_template");
 
     // Load the function modules.
     KCFunctionModuleRegistry::instance()->loadFunctionModules();
@@ -209,7 +209,7 @@ void KCDoc::initConfig()
 {
     KSharedConfigPtr config = KCFactory::global().config();
 
-    const int page = config->group("KSpread Page Layout").readEntry("Default unit page", 0);
+    const int page = config->group("KCells Page Layout").readEntry("Default unit page", 0);
     setUnit(KoUnit((KoUnit::Unit) page));
 }
 
@@ -244,10 +244,10 @@ QDomDocument KCDoc::saveXML()
         static_cast<KCView *>(view)->selection()->emitCloseEditor(true);
     }
 
-    QDomDocument doc = KoDocument::createDomDocument("kspread", "spreadsheet", CURRENT_DTD_VERSION);
+    QDomDocument doc = KoDocument::createDomDocument("kcells", "spreadsheet", CURRENT_DTD_VERSION);
     QDomElement spread = doc.documentElement();
-    spread.setAttribute("editor", "KSpread");
-    spread.setAttribute("mime", "application/x-kspread");
+    spread.setAttribute("editor", "KCells");
+    spread.setAttribute("mime", "application/x-kcells");
     spread.setAttribute("syntaxVersion", CURRENT_SYNTAX_VERSION);
 
     if (!d->spellListIgnoreAll.isEmpty()) {
@@ -297,7 +297,7 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KoStore*)
 {
     QPointer<KoUpdater> updater;
     if (progressUpdater()) {
-        updater = progressUpdater()->startSubtask(1, "KSpread::KCDoc::loadXML");
+        updater = progressUpdater()->startSubtask(1, "KCells::KCDoc::loadXML");
         updater->setProgress(0);
     }
 
@@ -305,8 +305,8 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KoStore*)
     // <spreadsheet>
     KoXmlElement spread = doc.documentElement();
 
-    if (spread.attribute("mime") != "application/x-kspread" && spread.attribute("mime") != "application/vnd.kde.kspread") {
-        setErrorMessage(i18n("Invalid document. Expected mimetype application/x-kspread or application/vnd.kde.kspread, got %1" , spread.attribute("mime")));
+    if (spread.attribute("mime") != "application/x-kcells" && spread.attribute("mime") != "application/vnd.kde.kcells") {
+        setErrorMessage(i18n("Invalid document. Expected mimetype application/x-kcells or application/vnd.kde.kcells, got %1" , spread.attribute("mime")));
         return false;
     }
 
@@ -315,8 +315,8 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KoStore*)
     map()->setSyntaxVersion(ok ? version : 0);
     if (map()->syntaxVersion() > CURRENT_SYNTAX_VERSION) {
         int ret = KMessageBox::warningContinueCancel(
-                      0, i18n("This document was created with a newer version of KSpread (syntax version: %1)\n"
-                              "When you open it with this version of KSpread, some information may be lost.", map()->syntaxVersion()),
+                      0, i18n("This document was created with a newer version of KCells (syntax version: %1)\n"
+                              "When you open it with this version of KCells, some information may be lost.", map()->syntaxVersion()),
                       i18n("File KCFormat Mismatch"), KStandardGuiItem::cont());
         if (ret == KMessageBox::Cancel) {
             setErrorMessage("USER_CANCELED");

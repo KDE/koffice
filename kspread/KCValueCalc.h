@@ -27,7 +27,7 @@
 #include "KCNumber.h"
 #include "KCValue.h"
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 #ifdef max
 # undef max
@@ -67,7 +67,7 @@ the KCNumber object directly for that. This class is to be used for computations
 of more complicated and ranged functions.
 */
 
-class KSPREAD_EXPORT KCValueCalc
+class KCELLS_EXPORT KCValueCalc
 {
 public:
     explicit KCValueCalc(KCValueConverter* c);

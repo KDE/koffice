@@ -984,7 +984,7 @@ QDomElement KCCell::save(QDomDocument& doc, int xOffset, int yOffset, bool era)
             cell.appendChild(formulaResult);
 
         } else if (!link().isEmpty()) {
-            // KSpread pre 1.4 saves link as rich text, marked with first char '
+            // KCells pre 1.4 saves link as rich text, marked with first char '
             // Have to be saved in some CDATA section because of too many special charatcers.
             QDomElement txt = doc.createElement("text");
             QString qml = "!<a href=\"" + link() + "\">" + userInput() + "</a>";
@@ -1169,7 +1169,7 @@ bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
     }
     if (isFormula()) {
         //kDebug(36003) <<"KCFormula found";
-        QString formula = KSpread::Odf::encodeFormula(userInput(), locale());
+        QString formula = KCells::Odf::encodeFormula(userInput(), locale());
         xmlwriter.addAttribute("table:formula", formula);
     } else if (!link().isEmpty()) {
         //kDebug(36003)<<"Link found";
@@ -1177,7 +1177,7 @@ bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
         xmlwriter.startElement("text:a");
         const QString url = link();
         //Reference cell is started by '#'
-        if (KSpread::localReferenceAnchor(url))
+        if (KCells::localReferenceAnchor(url))
             xmlwriter.addAttribute("xlink:href", ('#' + url));
         else
             xmlwriter.addAttribute("xlink:href", url);
@@ -1364,7 +1364,7 @@ bool KCCell::loadOdf(const KoXmlElement& element, KCOdfLoadingContext& tableCont
                 break;
             }
         }
-        oasisFormula = KSpread::Odf::decodeFormula(oasisFormula, locale(), namespacePrefix);
+        oasisFormula = KCells::Odf::decodeFormula(oasisFormula, locale(), namespacePrefix);
         setUserInput(oasisFormula);
     } else if (!userInput().isEmpty() && userInput().at(0) == '=')  //prepend ' to the text to avoid = to be painted
         setUserInput(userInput().prepend('\''));
@@ -2021,9 +2021,9 @@ bool KCCell::loadCellData(const KoXmlElement & text, Paste::Operation op, const 
     }
     // rich text ?
     else if ((!t.isEmpty()) && (t[0] == '!')) {
-        // KSpread pre 1.4 stores hyperlink as rich text (first char is '!')
+        // KCells pre 1.4 stores hyperlink as rich text (first char is '!')
         // extract the link and the correspoding text
-        // This is a rather dirty hack, but enough for KSpread generated XML
+        // This is a rather dirty hack, but enough for KCells generated XML
         bool inside_tag = false;
         QString qml_text;
         QString tag;

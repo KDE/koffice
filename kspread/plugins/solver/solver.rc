@@ -1,8 +1,8 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="KSpreadSolverPlugin" library="libkspreadsolver" version="1">
+<kpartgui name="KCellsSolverPlugin" library="libkcellssolver" version="1">
 <MenuBar>
  <Menu name="tools"><text>&amp;Tools</text>
-  <Action name="kspreadsolver" />
+  <Action name="kcellssolver" />
  </Menu>
 </MenuBar>
 </kpartgui>

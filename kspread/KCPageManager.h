@@ -20,7 +20,7 @@
 #ifndef KSPREAD_PAGE_MANAGER
 #define KSPREAD_PAGE_MANAGER
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QRect;
 class QSizeF;
@@ -34,7 +34,7 @@ class KCSheet;
  * printing, and TablePageManager, which does the same for the table shape in
  * page based hosting apps.
  */
-class KSPREAD_EXPORT KCPageManager
+class KCELLS_EXPORT KCPageManager
 {
 public:
     /**

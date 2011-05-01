@@ -19,7 +19,7 @@
 
 #include <quuid.h>
 
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 
 #include "KCPointStorage.h"
 

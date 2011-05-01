@@ -1,5 +1,5 @@
-<!DOCTYPE KSpreadFunctions>
-<KSpreadFunctions>
+<!DOCTYPE KCellsFunctions>
+<KCellsFunctions>
 
   <Group>
     <GroupName>Engineering</GroupName>
@@ -840,4 +840,4 @@
 
   </Group>
 
-</KSpreadFunctions>
+</KCellsFunctions>

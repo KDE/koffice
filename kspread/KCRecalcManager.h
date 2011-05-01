@@ -46,7 +46,7 @@ class KCSheet;
  * KCCell value changes are blocked while doing this, i.e. they do not
  * trigger a new recalculation event.
  */
-class KSPREAD_EXPORT KCRecalcManager : public QObject
+class KCELLS_EXPORT KCRecalcManager : public QObject
 {
     Q_OBJECT
 public:

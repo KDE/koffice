@@ -26,12 +26,12 @@
 #include <QObject>
 
 #include "Global.h"
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 /**
  * Visual settings.
  */
-class KSPREAD_EXPORT KCApplicationSettings : public QObject
+class KCELLS_EXPORT KCApplicationSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool showVerticalScrollBar READ showVerticalScrollBar WRITE setShowVerticalScrollBar)
@@ -152,14 +152,14 @@ public:
      */
     void setCompletionMode(KGlobalSettings::Completion mode);
 
-    KSpread::MoveTo moveToValue() const;
-    void setMoveToValue(KSpread::MoveTo moveTo);
+    KCells::MoveTo moveToValue() const;
+    void setMoveToValue(KCells::MoveTo moveTo);
 
     /**
      * Method of calc
      */
-    void setTypeOfCalc(KSpread::MethodOfCalc calc);
-    KSpread::MethodOfCalc getTypeOfCalc() const;
+    void setTypeOfCalc(KCells::MethodOfCalc calc);
+    KCells::MethodOfCalc getTypeOfCalc() const;
 
     QColor pageBorderColor() const;
     void changePageBorderColor(const QColor& color);

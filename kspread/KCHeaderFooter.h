@@ -26,11 +26,11 @@
 
 #include <QString>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class KCSheet;
 
-class KSPREAD_EXPORT KCHeaderFooter
+class KCELLS_EXPORT KCHeaderFooter
 {
 public:
     explicit KCHeaderFooter(KCSheet* sheet);

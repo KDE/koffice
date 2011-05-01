@@ -30,7 +30,7 @@
 #ifndef KSPREAD_FORMAT
 #define KSPREAD_FORMAT
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 /**
  * \ingroup KCStyle
@@ -119,9 +119,9 @@ enum Type {
 };
 
 //helper functions for the formatting
-KSPREAD_EXPORT bool isDate(Type type);
-KSPREAD_EXPORT bool isTime(Type type);
-KSPREAD_EXPORT bool isFraction(Type type);
+KCELLS_EXPORT bool isDate(Type type);
+KCELLS_EXPORT bool isTime(Type type);
+KCELLS_EXPORT bool isFraction(Type type);
 
 } // namespace KCFormat
 

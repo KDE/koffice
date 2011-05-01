@@ -32,7 +32,7 @@
 #ifndef KSPREAD_CANVAS
 #define KSPREAD_CANVAS
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 #include "Global.h"
 
@@ -61,7 +61,7 @@ class KCView;
 /**
  * The scrollable area showing the cells.
  */
-class KSPREAD_EXPORT KCCanvas : public QWidget, public KoCanvasBase
+class KCELLS_EXPORT KCCanvas : public QWidget, public KoCanvasBase
 {
     friend class KCColumnHeader;
     friend class KCRowHeader;

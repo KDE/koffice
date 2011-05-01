@@ -59,7 +59,7 @@
 #include <KoPostscriptPaintDevice.h>
 #include <KoZoomHandler.h>
 
-// KSpread
+// KCells
 #include "KCApplicationSettings.h"
 #include "KCCellStorage.h"
 #include "KCCondition.h"

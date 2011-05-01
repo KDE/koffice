@@ -56,7 +56,7 @@
 #include <KoZoomHandler.h>
 #include <KoPointerEvent.h>
 
-// KSpread
+// KCells
 #include "KCDoc.h"
 #include "Headers.h"
 #include "KCMap.h"
@@ -287,7 +287,7 @@ void KCCanvas::dragEnterEvent(QDragEnterEvent* event)
 {
     const QMimeData *mimeData = event->mimeData();
     if (mimeData->hasText() ||
-            mimeData->hasFormat("application/x-kspread-snippet")) {
+            mimeData->hasFormat("application/x-kcells-snippet")) {
         event->acceptProposedAction();
     }
 }
@@ -301,7 +301,7 @@ void KCCanvas::dragMoveEvent(QDragMoveEvent* event)
         return;
     }
 
-    if (mimeData->hasText() || mimeData->hasFormat("application/x-kspread-snippet")) {
+    if (mimeData->hasText() || mimeData->hasFormat("application/x-kcells-snippet")) {
         // acceptProposedAction
         event->acceptProposedAction();
     } else {
@@ -309,13 +309,13 @@ void KCCanvas::dragMoveEvent(QDragMoveEvent* event)
     }
 #if 0 // TODO Stefan: implement drag marking rectangle
     QRect dragMarkingRect;
-    if (mimeData->hasFormat("application/x-kspread-snippet")) {
+    if (mimeData->hasFormat("application/x-kcells-snippet")) {
         if (event->source() == this) {
             kDebug(36005) << "source == this";
             dragMarkingRect = selection()->boundingRect();
         } else {
             kDebug(36005) << "source != this";
-            QByteArray data = mimeData->data("application/x-kspread-snippet");
+            QByteArray data = mimeData->data("application/x-kcells-snippet");
             QString errorMsg;
             int errorLine;
             int errorColumn;

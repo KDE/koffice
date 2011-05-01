@@ -24,7 +24,7 @@
 
 #include <QRectF>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QPainter;
 
@@ -39,7 +39,7 @@ class KCSheet;
  * zooming, page limits and column/row repetitions.
  * \ingroup Printing
  */
-class KSPREAD_EXPORT KCSheetPrint
+class KCELLS_EXPORT KCSheetPrint
 {
 public:
     explicit KCSheetPrint(KCSheet * sheet = 0);

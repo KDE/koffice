@@ -24,13 +24,13 @@
 
 #include <KoXmlReader.h>
 
-#include "../kspread_export.h"
+#include "../kcells_export.h"
 
 class KoXmlWriter;
 
 class KCMap;
 
-class KSPREAD_EXPORT DatabaseManager : public QObject
+class KCELLS_EXPORT DatabaseManager : public QObject
 {
     Q_OBJECT
 

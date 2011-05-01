@@ -19,7 +19,7 @@
 
 #include "ReadOnlyRegionModel.h"
 
-// KSpread
+// KCells
 #include "KCRegion.h"
 #include "KCSheet.h"
 

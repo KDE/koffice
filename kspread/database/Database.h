@@ -25,7 +25,7 @@
 
 #include <KoXmlReader.h>
 
-#include "../kspread_export.h"
+#include "../kcells_export.h"
 
 class QRect;
 class QWidget;
@@ -40,7 +40,7 @@ class KCRegion;
 /**
  * OpenDocument, 8.6.1 Database Range
  */
-class KSPREAD_EXPORT Database
+class KCELLS_EXPORT Database
 {
 public:
     /**

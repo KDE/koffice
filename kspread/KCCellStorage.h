@@ -25,7 +25,7 @@
 #include <QTextDocument>
 
 #include "KCCell.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCPointStorage.h"
 
 #include "database/Database.h"
@@ -65,7 +65,7 @@ class KCValueStorage;
  *
  * \note If you fill the storage, do it row-wise. That's more performant.
  */
-class KSPREAD_EXPORT KCCellStorage : public QObject
+class KCELLS_EXPORT KCCellStorage : public QObject
 {
     Q_OBJECT
 public:

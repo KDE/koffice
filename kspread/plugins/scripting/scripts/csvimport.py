@@ -2,16 +2,16 @@
 
 """
 Python script to import content from a comma-separated-value
-file to KSpread.
+file to KCells.
 
 (C)2007 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 Dual-licensed under LGPL v2+higher and the BSD license.
 """
 
 import os, datetime, sys, traceback, csv
-import Kross, KSpread
+import Kross, KCells
 
 class CsvImport:
 
@@ -25,12 +25,12 @@ class CsvImport:
         self.dialog.setFaceType("List") #Auto Plain List Tree Tabbed
 
         openpage = self.dialog.addPage("Open","Import from CSV File","document-open")
-        self.openwidget = self.forms.createFileWidget(openpage, "kfiledialog:///kspreadcsvimportopen")
+        self.openwidget = self.forms.createFileWidget(openpage, "kfiledialog:///kcellscsvimportopen")
         self.openwidget.setMode("Opening")
         self.openwidget.setFilter("*.csv *.txt|Comma-Separated-KCValue Files\n*|All Files")
 
         datapage = self.dialog.addPage("Import","Import to sheet beginning at cell","document-import")
-        self.sheetslistview = KSpread.createSheetsListView(datapage)
+        self.sheetslistview = KCells.createSheetsListView(datapage)
         self.sheetslistview.setEditorType("KCCell")
 
         optionspage = self.dialog.addPage("Options","Comma Separated KCValue Options","configure")
@@ -69,7 +69,7 @@ class CsvImport:
         if not currentSheet:
             raise "No current sheet."
 
-        writer = KSpread.writer()
+        writer = KCells.writer()
         if not writer.setSheet(currentSheet):
             raise "Invalid sheet \"%s\" defined." % currentSheet
 

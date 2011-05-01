@@ -1,5 +1,5 @@
 /*
- * This file is part of KSpread
+ * This file is part of KCells
  *
  * Copyright (c) 2007 Sebastian Sauer <mail@dipe.org>
  *
@@ -36,15 +36,15 @@
 
 /**
 * The ScriptingWriter class provides abstract high-level functionality to write
-* content to KSpread sheets and to manipulate the content of cells.
+* content to KCells sheets and to manipulate the content of cells.
 *
 * The following python sample demonstrates how to use the ScriptingWriter to
-* write content to KSpread.
+* write content to KCells.
 * \code
-* # Import the KSpread module
-* import KSpread
+* # Import the KCells module
+* import KCells
 * # Create a writer instance.
-* writer = KSpread.writer()
+* writer = KCells.writer()
 * # Set the sheet we like to write to.
 * sheetname = "Sheet2"
 * if not writer.setSheet(sheetname):
@@ -99,7 +99,7 @@ public Q_SLOTS:
     * is returned.
     */
     bool setSheet(const QString& sheetname) {
-        KCSheet* s = m_module->kspreadDoc()->map()->findSheet(sheetname);
+        KCSheet* s = m_module->kcellsDoc()->map()->findSheet(sheetname);
         if (! s) return false;
         clearAll();
         m_sheet = s;
@@ -204,7 +204,7 @@ public Q_SLOTS:
         if (parse)
             v = KCValue(value.toString());
         else {
-            const KCCalculationSettings* settings = m_module->kspreadDoc()->map()->calculationSettings();
+            const KCCalculationSettings* settings = m_module->kcellsDoc()->map()->calculationSettings();
             switch (value.type()) {
             case QVariant::Invalid:     v = KCValue(); break;
             case QVariant::Bool:        v = KCValue(value.toBool()); break;

@@ -1,5 +1,5 @@
 /*
- * This file is part of KSpread
+ * This file is part of KCells
  *
  * Copyright (c) 2007 Sebastian Sauer <mail@dipe.org>
  *
@@ -88,8 +88,8 @@ void ScriptingSheetsListView::initialize()
 
     QStandardItemModel* model = static_cast< QStandardItemModel* >(m_view->model());
     model->setHorizontalHeaderLabels(headers);
-    KCDoc* doc = m_module->kspreadDoc();
-    KCView* view = m_module->kspreadView();
+    KCDoc* doc = m_module->kcellsDoc();
+    KCView* view = m_module->kcellsView();
     KCSheet* activeSheet = view ? view->activeSheet() : 0;
     if (doc && doc->map()) {
         foreach(KCSheet* sheet, doc->map()->sheetList()) {
@@ -207,7 +207,7 @@ QVariantList ScriptingSheetsListView::sheets()
         bool enabled = nameitem->checkState() == Qt::Checked;
 
         const QString sheetname = nameitem->text();
-        KCSheet* sheet = m_module->kspreadDoc()->map()->findSheet(sheetname);
+        KCSheet* sheet = m_module->kcellsDoc()->map()->findSheet(sheetname);
         if (! sheet)
             continue;
 
@@ -217,7 +217,7 @@ QVariantList ScriptingSheetsListView::sheets()
         QStandardItem* rangeitem = model->item(row, 1);
         if (rangeitem) {
             const QString range = rangeitem->text();
-            KCRegion region(range, m_module->kspreadDoc()->map(), sheet);
+            KCRegion region(range, m_module->kcellsDoc()->map(), sheet);
             for (KCRegion::ConstIterator it = region.constBegin(); it != region.constEnd(); ++it) {
                 const QRect rect = (*it)->rect();
                 if (! rect.isNull())

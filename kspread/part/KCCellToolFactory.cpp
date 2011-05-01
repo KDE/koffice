@@ -28,8 +28,8 @@ KCCellToolFactory::KCCellToolFactory(QObject* parent, const QString& id)
         : KoToolFactoryBase(parent, id)
 {
     setToolTip(i18n("KCCell Tool"));
-    setIcon("kspread");
-    setToolType("KSpread");
+    setIcon("kcells");
+    setToolType("KCells");
     setPriority(0);
     setActivationShapeId("flake/always");
 }

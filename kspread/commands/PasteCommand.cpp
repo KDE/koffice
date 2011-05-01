@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
    Copyright 2007,2009 Stefan Nikolaus <stefan.nikolaus@kdemail.net>
-   Copyright 1999-2007 The KSpread Team <koffice-devel@kde.org>
+   Copyright 1999-2007 The KCells Team <koffice-devel@kde.org>
    Copyright 1998,1999 Torben Weis <weis@kde.org>
 
    This library is free software; you can redistribute it and/or
@@ -155,7 +155,7 @@ bool PasteCommand::isApproved() const
 // static
 bool PasteCommand::supports(const QMimeData *mimeData)
 {
-    if (mimeData->hasFormat("application/x-kspread-snippet")) {
+    if (mimeData->hasFormat("application/x-kcells-snippet")) {
         return true;
     } else if (mimeData->hasText()) {
         return true;
@@ -178,8 +178,8 @@ bool PasteCommand::unknownShiftDirection(const QMimeData *mimeData)
 
     QByteArray byteArray;
 
-    if (mimeData->hasFormat("application/x-kspread-snippet")) {
-        byteArray = mimeData->data("application/x-kspread-snippet");
+    if (mimeData->hasFormat("application/x-kcells-snippet")) {
+        byteArray = mimeData->data("application/x-kcells-snippet");
     } else {
         return false;
     }
@@ -223,9 +223,9 @@ bool PasteCommand::mainProcessing()
     if (!m_reverse) { // apply/redo
         if (m_firstrun) { // apply
             // First, prepare the data ONCE for all region elements.
-            if (m_mimeData->hasFormat("application/x-kspread-snippet")) {
+            if (m_mimeData->hasFormat("application/x-kcells-snippet")) {
                 m_xmlDocument = new KoXmlDocument();
-                const QByteArray data = m_mimeData->data("application/x-kspread-snippet");
+                const QByteArray data = m_mimeData->data("application/x-kcells-snippet");
                 kDebug(36005) << "Parsing" << data.size() << "bytes";
                 QString errorMsg;
                 int errorLine;
@@ -245,7 +245,7 @@ bool PasteCommand::mainProcessing()
             const int begin = m_reverse ? elements.count() - 1 : 0;
             const int end = m_reverse ? -1 : elements.count();
             for (int i = begin; i != end; m_reverse ? --i : ++i) {
-                if (m_mimeData->hasFormat("application/x-kspread-snippet")) {
+                if (m_mimeData->hasFormat("application/x-kcells-snippet")) {
                     processXmlData(elements[i], m_xmlDocument);
                 } else if (m_mimeData->hasText()) {
                     processTextPlain(elements[i]);

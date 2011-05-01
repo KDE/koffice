@@ -25,7 +25,7 @@
 #include <QSharedPointer>
 #include <QStringList>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class KCFunction;
 class KCFunctionDescription;
@@ -34,7 +34,7 @@ class KCFunctionDescription;
  * \ingroup KCValue
  * The function repository.
  */
-class KSPREAD_EXPORT KCFunctionRepository
+class KCELLS_EXPORT KCFunctionRepository
 {
 public:
     KCFunctionRepository();

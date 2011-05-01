@@ -22,7 +22,7 @@ SET (tableshape_LIB_SRCS
 
 kde4_add_plugin(spreadsheetshape ${tableshape_LIB_SRCS})
 
-target_link_libraries(spreadsheetshape kspreadcommon)
+target_link_libraries(spreadsheetshape kcellscommon)
 install(TARGETS spreadsheetshape DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ########### install files ###############

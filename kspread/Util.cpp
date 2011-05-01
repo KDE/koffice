@@ -27,7 +27,7 @@
 #include <kdebug.h>
 
 #include "KCFormula.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCLocalization.h"
 #include "KCMap.h"
 #include "KCNamedAreaManager.h"
@@ -39,8 +39,8 @@
 
 
 //used in KCCell::encodeFormula and
-//  dialogs/kspread_dlg_paperlayout.cc
-int KSpread::decodeColumnLabelText(const QString &labelText)
+//  dialogs/kcells_dlg_paperlayout.cc
+int KCells::decodeColumnLabelText(const QString &labelText)
 {
     int col = 0;
     const int offset = 'a' - 'A';
@@ -67,7 +67,7 @@ int KSpread::decodeColumnLabelText(const QString &labelText)
     return col;
 }
 
-int KSpread::decodeRowLabelText(const QString &labelText)
+int KCells::decodeRowLabelText(const QString &labelText)
 {
     QRegExp rx("([A-Za-z]+)([0-9]+)");
     if(rx.exactMatch(labelText))
@@ -75,12 +75,12 @@ int KSpread::decodeRowLabelText(const QString &labelText)
     return 0;
 }
 
-QString KSpread::encodeColumnLabelText(int column)
+QString KCells::encodeColumnLabelText(int column)
 {
     return KCCell::columnName(column);
 }
 
-QDomElement KSpread::NativeFormat::createElement(const QString & tagName, const QFont & font, QDomDocument & doc)
+QDomElement KCells::NativeFormat::createElement(const QString & tagName, const QFont & font, QDomDocument & doc)
 {
     QDomElement e(doc.createElement(tagName));
 
@@ -100,7 +100,7 @@ QDomElement KSpread::NativeFormat::createElement(const QString & tagName, const 
     return e;
 }
 
-QDomElement KSpread::NativeFormat::createElement(const QString & tagname, const QPen & pen, QDomDocument & doc)
+QDomElement KCells::NativeFormat::createElement(const QString & tagname, const QPen & pen, QDomDocument & doc)
 {
     QDomElement e(doc.createElement(tagname));
     e.setAttribute("color", pen.color().name());
@@ -109,7 +109,7 @@ QDomElement KSpread::NativeFormat::createElement(const QString & tagname, const 
     return e;
 }
 
-QFont KSpread::NativeFormat::toFont(KoXmlElement & element)
+QFont KCells::NativeFormat::toFont(KoXmlElement & element)
 {
     QFont f;
     f.setFamily(element.attribute("family"));
@@ -135,7 +135,7 @@ QFont KSpread::NativeFormat::toFont(KoXmlElement & element)
     if (element.hasAttribute("strikeout") && element.attribute("strikeout") == "yes")
         f.setStrikeOut(true);
 
-    /* Uncomment when charset is added to kspread_dlg_layout
+    /* Uncomment when charset is added to kcells_dlg_layout
        + save a document-global charset
        if ( element.hasAttribute( "charset" ) )
          KGlobal::charsets()->setQFont( f, element.attribute("charset") );
@@ -147,7 +147,7 @@ QFont KSpread::NativeFormat::toFont(KoXmlElement & element)
     return f;
 }
 
-QPen KSpread::NativeFormat::toPen(KoXmlElement & element)
+QPen KCells::NativeFormat::toPen(KoXmlElement & element)
 {
     bool ok;
     QPen p;
@@ -189,7 +189,7 @@ bool util_isRectValid(const QRect& rect)
 
 
 //not used anywhere
-int KSpread::penCompare(QPen const & pen1, QPen const & pen2)
+int KCells::penCompare(QPen const & pen1, QPen const & pen2)
 {
     if (pen1.style() == Qt::NoPen && pen2.style() == Qt::NoPen)
         return 0;
@@ -222,7 +222,7 @@ int KSpread::penCompare(QPen const & pen1, QPen const & pen2)
 }
 
 
-QString KSpread::Odf::convertRefToBase(const QString & sheet, const QRect & rect)
+QString KCells::Odf::convertRefToBase(const QString & sheet, const QRect & rect)
 {
     QPoint bottomRight(rect.bottomRight());
 
@@ -236,7 +236,7 @@ QString KSpread::Odf::convertRefToBase(const QString & sheet, const QRect & rect
     return s;
 }
 
-QString KSpread::Odf::convertRefToRange(const QString & sheet, const QRect & rect)
+QString KCells::Odf::convertRefToRange(const QString & sheet, const QRect & rect)
 {
     QPoint topLeft(rect.topLeft());
     QPoint bottomRight(rect.bottomRight());
@@ -260,12 +260,12 @@ QString KSpread::Odf::convertRefToRange(const QString & sheet, const QRect & rec
 
 // e.g.: Sheet4.A1:Sheet4.E28
 //used in KCSheet::saveOdf
-QString KSpread::Odf::convertRangeToRef(const QString & sheetName, const QRect & _area)
+QString KCells::Odf::convertRangeToRef(const QString & sheetName, const QRect & _area)
 {
     return sheetName + '.' + KCCell::name(_area.left(), _area.top()) + ':' + sheetName + '.' + KCCell::name(_area.right(), _area.bottom());
 }
 
-QString KSpread::Odf::encodePen(const QPen & pen)
+QString KCells::Odf::encodePen(const QPen & pen)
 {
 //     kDebug()<<"encodePen( const QPen & pen ) :"<<pen;
     // NOTE Stefan: QPen api docs:
@@ -301,7 +301,7 @@ QString KSpread::Odf::encodePen(const QPen & pen)
     return s;
 }
 
-QPen KSpread::Odf::decodePen(const QString &border)
+QPen KCells::Odf::decodePen(const QString &border)
 {
     QPen pen;
     //string like "0.088cm solid #800000"
@@ -309,7 +309,7 @@ QPen KSpread::Odf::decodePen(const QString &border)
         pen.setStyle(Qt::NoPen);
         return pen;
     }
-    //code from koborder, for the moment kspread doesn't use koborder
+    //code from koborder, for the moment kcells doesn't use koborder
     // ## isn't it faster to use QStringList::split than parse it 3 times?
     QString _width = border.section(' ', 0, 0);
     QByteArray _style = border.section(' ', 1, 1).toLatin1();
@@ -341,7 +341,7 @@ QPen KSpread::Odf::decodePen(const QString &border)
 }
 
 //Return true when it's a reference to cell from sheet.
-bool KSpread::localReferenceAnchor(const QString &_ref)
+bool KCells::localReferenceAnchor(const QString &_ref)
 {
     bool isLocalRef = (_ref.indexOf("http://") != 0 &&
                        _ref.indexOf("https://") != 0 &&
@@ -352,7 +352,7 @@ bool KSpread::localReferenceAnchor(const QString &_ref)
 }
 
 
-QString KSpread::Odf::decodeFormula(const QString& expression, const KLocale* locale, QString namespacePrefix)
+QString KCells::Odf::decodeFormula(const QString& expression, const KLocale* locale, QString namespacePrefix)
 {
     // parsing state
     enum { Start, InNumber, InString, InIdentifier, InReference, InSheetName } state = Start;
@@ -396,7 +396,7 @@ QString KSpread::Odf::decodeFormula(const QString& expression, const KLocale* lo
             else if (expression[i].unicode() == '[') {
                 ++i;
                 state = InReference;
-                // NOTE Stefan: As long as KSpread does not support fixed sheets eat the dollar sign.
+                // NOTE Stefan: As long as KCells does not support fixed sheets eat the dollar sign.
                 if (expression[i] == '$') ++i;
             }
 
@@ -526,7 +526,7 @@ QString KSpread::Odf::decodeFormula(const QString& expression, const KLocale* lo
     return result;
 }
 
-QString KSpread::Odf::encodeFormula(const QString& expr, const KLocale* locale)
+QString KCells::Odf::encodeFormula(const QString& expr, const KLocale* locale)
 {
     // use locale settings
     const QString decimal = locale ? locale->decimalSymbol() : ".";
@@ -604,15 +604,15 @@ static void replaceFormulaReference(int referencedRow, int referencedColumn, int
     const QString ref = result.mid(cellReferenceStart, cellReferenceLength);
     QRegExp rx("(|\\$)[A-Za-z]+[0-9]+");
     if (rx.exactMatch(ref)) {
-        const int c = KSpread::decodeColumnLabelText(ref) + thisColumn - referencedColumn;
-        const int r = KSpread::decodeRowLabelText(ref) + thisRow - referencedRow;
+        const int c = KCells::decodeColumnLabelText(ref) + thisColumn - referencedColumn;
+        const int r = KCells::decodeRowLabelText(ref) + thisRow - referencedRow;
         result = result.replace(cellReferenceStart,
                                 cellReferenceLength,
-                                KSpread::encodeColumnLabelText(c) + QString::number(r) );
+                                KCells::encodeColumnLabelText(c) + QString::number(r) );
     }
 }
 
-QString KSpread::adjustFormulaReference(const QString& formula, int referencedRow, int referencedColumn, int thisRow, int thisColumn)
+QString KCells::adjustFormulaReference(const QString& formula, int referencedRow, int referencedColumn, int thisRow, int thisColumn)
 {
     QString result = formula;
     if (result.isEmpty())

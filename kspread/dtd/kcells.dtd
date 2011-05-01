@@ -1,9 +1,9 @@
 <!--	$Id$
 
-		This is an XML document type definition (DTD) for the KSpread
+		This is an XML document type definition (DTD) for the KCells
 		document format.
 		Written by Kalle Dalheimer <kalle@kde.org> with (obviously) input from
-		KSpread's author Torben Weis <weis@kde.org>.
+		KCells's author Torben Weis <weis@kde.org>.
 
 		Please report all bugs to Kalle and Torben at the above addresses.
 
@@ -12,7 +12,7 @@
 
 
 
-<!--	A KSpread document consists of a paper description and a map that
+<!--	A KCells document consists of a paper description and a map that
 		contains the table data.
 
 		Attributes:
@@ -21,14 +21,14 @@
 		email:		The document's author's email address
 		editor:		The program this file was written with
                 syntaxVersion:  Integer version of the syntax. Currently 1.
-		mime:		The MIME type (must always have the value application/x-kspread)
+		mime:		The MIME type (must always have the value application/x-kcells)
 -->
 <!ELEMENT spreadsheet (paper, locale, areaname, map)>
 <!ATTLIST spreadsheet   author CDATA #IMPLIED
                         email  CDATA #IMPLIED
                         editor CDATA #IMPLIED
                         syntaxVersion NMTOKEN #IMPLIED
-                        mime   CDATA #FIXED "application/x-kspread">
+                        mime   CDATA #FIXED "application/x-kcells">
 
 <!--	Describes the page format. Can have no or one BORDERS child that
 		describes the margins.

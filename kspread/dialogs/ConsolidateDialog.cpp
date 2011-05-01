@@ -45,9 +45,9 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 
-//KSpread Includes
+//KCells Includes
 #include <Global.h>
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include <KCLocalization.h>
 #include <KCMap.h>
 #include "ui/Selection.h"

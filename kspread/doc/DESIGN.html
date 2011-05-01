@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-  <title>KSpread Development Notes</title>
+  <title>KCells Development Notes</title>
 </head>
 
 <body>
 
-<h1>KSpread Development Notes</h1>
+<h1>KCells Development Notes</h1>
 
 <p>Maintainer: Ariya Hidayat (<a href="mailto:ariya@kde.org">ariya@kde.org</a>)</p>
 <p>Some portions by Tomas Mecir (<a href="mailto: mecirt@gmail.com">mecirt@gmail.com</a>)</p>
@@ -15,7 +15,7 @@
 
 <h2>Introduction</h2>
 
-<p>This document contains information about internal structure of KSpread
+<p>This document contains information about internal structure of KCells
 as well as some notes of upcoming redesign. The sources for this document
 are mainly the discussions which take place in koffice-devel mailing-list
 and the source code itself.</p>
@@ -74,7 +74,7 @@ at minimum. Also, the number of repaints needs to be as low as possible, and rep
 should be groupped whenever possible. To achieve all this, the following approach
 can be used:</p>
 
-<p>When a cell is changed, it calls some method in KSpread::Sheet - valueChanged()
+<p>When a cell is changed, it calls some method in KCells::Sheet - valueChanged()
 or formattingChanged(). These methods then trigger everything necessary, like
 a call to the painting routine or dependency calculation.</p>
 
@@ -106,9 +106,9 @@ cell's content or formatting.</p>
 
 <p>Status: OUTDATED.</p>
 
-<p>Until lately, to implement undo and redo, KSpread creates corresponding
-KSpreadUndo classes for each action and runs them when the user undoes
-those actions. KSpreadUndo also has redo function whose job is to redo
+<p>Until lately, to implement undo and redo, KCells creates corresponding
+KCellsUndo classes for each action and runs them when the user undoes
+those actions. KCellsUndo also has redo function whose job is to redo
 again the action after being undone.</p>
 
 <p>All this needs to be converted to manipulators - these will be KCommand,

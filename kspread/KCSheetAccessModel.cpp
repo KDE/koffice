@@ -19,7 +19,7 @@
 
 // Ours
 #include "KCSheetAccessModel.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCMap.h"
 #include "KCBinding.h"
 #include "KCBindingManager.h"

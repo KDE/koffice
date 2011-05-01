@@ -20,7 +20,7 @@
 #include "RowStyleCommand.h"
 
 #include "Damages.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"

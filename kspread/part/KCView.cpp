@@ -104,7 +104,7 @@
 #include <KoZoomHandler.h>
 #include <KoToolProxy.h>
 
-// KSpread includes
+// KCells includes
 #include "KCApplicationSettings.h"
 #include "KCBindingManager.h"
 #include "KCCalculationSettings.h"
@@ -194,7 +194,7 @@ public:
     // all UI actions
     ViewActions* actions;
 
-    // if true, kspread is still loading the document
+    // if true, kcells is still loading the document
     // don't try to refresh the view
     bool loading;
 
@@ -438,7 +438,7 @@ void KCView::Private::initActions()
             view, SLOT(showTabBar(bool)));
 
     actions->preference = KStandardAction::preferences(view, SLOT(preference()), view);
-    actions->preference->setToolTip(i18n("Set various KSpread options"));
+    actions->preference->setToolTip(i18n("Set various KCells options"));
     ac->addAction("preference", actions->preference);
 
     KAction *notifyAction = KStandardAction::configureNotifications(view, SLOT(optionsNotifications()), view);
@@ -565,9 +565,9 @@ KCView::KCView(QWidget *_parent, KCDoc *_doc)
 
     setComponentData(KCFactory::global());
     if (doc()->isReadWrite())
-        setXMLFile("kspread.rc");
+        setXMLFile("kcells.rc");
     else
-        setXMLFile("kspread_readonly.rc");
+        setXMLFile("kcells_readonly.rc");
 
     // GUI Initializations
     initView();
@@ -706,7 +706,7 @@ void KCView::initView()
     d->canvas->resourceManager()->setResource(CanvasResource::Selection, variant);
     variant.setValue<QObject*>(doc()->map()->bindingManager());
 
-    // Load the KSpread Tools
+    // Load the KCells Tools
     KCToolRegistry::instance()->loadTools();
 
     if (shell())
@@ -925,9 +925,9 @@ void KCView::initConfig()
     doc()->map()->settings()->setShowRowHeader(parameterGroup.readEntry("Row Header", true));
     if (!configFromDoc)
         doc()->map()->settings()->setCompletionMode((KGlobalSettings::Completion)parameterGroup.readEntry("Completion Mode", (int)(KGlobalSettings::CompletionAuto)));
-    doc()->map()->settings()->setMoveToValue((KSpread::MoveTo)parameterGroup.readEntry("Move", (int)(KSpread::Bottom)));
+    doc()->map()->settings()->setMoveToValue((KCells::MoveTo)parameterGroup.readEntry("Move", (int)(KCells::Bottom)));
     doc()->map()->settings()->setIndentValue(parameterGroup.readEntry("Indent", 10.0));
-    doc()->map()->settings()->setTypeOfCalc((KSpread::MethodOfCalc)parameterGroup.readEntry("Method of Calc", (int)(KSpread::SumOfNumber)));
+    doc()->map()->settings()->setTypeOfCalc((KCells::MethodOfCalc)parameterGroup.readEntry("Method of Calc", (int)(KCells::SumOfNumber)));
     if (!configFromDoc)
         doc()->map()->settings()->setShowTabBar(parameterGroup.readEntry("Tabbar", true));
 
@@ -939,7 +939,7 @@ void KCView::initConfig()
     doc()->setAutoSave(parameterGroup.readEntry("AutoSave", KoDocument::defaultAutoSave() / 60)*60);
     doc()->setBackupFile(parameterGroup.readEntry("BackupFile", true));
 
-    const KConfigGroup colorGroup = config->group("KSpread Color");
+    const KConfigGroup colorGroup = config->group("KCells Color");
     doc()->map()->settings()->setGridColor(colorGroup.readEntry("GridColor", QColor(Qt::lightGray)));
     doc()->map()->settings()->changePageBorderColor(colorGroup.readEntry("PageBorderColor", QColor(Qt::red)));
     doc()->map()->settings()->setCaptureAllArrowKeys(config->group("Editor").readEntry("CaptureAllArrowKeys", true));
@@ -957,25 +957,25 @@ void KCView::changeNbOfRecentFiles(int _nb)
 void KCView::initCalcMenu()
 {
     switch (doc()->map()->settings()->getTypeOfCalc()) {
-    case KSpread::SumOfNumber:
+    case KCells::SumOfNumber:
         d->actions->calcSum->setChecked(true);
         break;
-    case KSpread::Min:
+    case KCells::Min:
         d->actions->calcMin->setChecked(true);
         break;
-    case KSpread::Max:
+    case KCells::Max:
         d->actions->calcMax->setChecked(true);
         break;
-    case KSpread::Average:
+    case KCells::Average:
         d->actions->calcAverage->setChecked(true);
         break;
-    case KSpread::Count:
+    case KCells::Count:
         d->actions->calcCount->setChecked(true);
         break;
-    case KSpread::CountA:
+    case KCells::CountA:
         d->actions->calcCountA->setChecked(true);
         break;
-    case KSpread::NoneCalc:
+    case KCells::NoneCalc:
         d->actions->calcNone->setChecked(true);
         break;
     default :
@@ -1105,7 +1105,7 @@ void KCView::finishLoading()
 
     // Activate the cell tool.
     if (shell())
-        KoToolManager::instance()->switchToolRequested("KSpreadCellToolId");
+        KoToolManager::instance()->switchToolRequested("KCellsCellToolId");
 }
 
 void KCView::updateReadWrite(bool readwrite)
@@ -1147,11 +1147,11 @@ void KCView::createTemplate()
 
     doc()->saveNativeFormat(tempFile.fileName());
 
-    KoTemplateCreateDia::createTemplate("kspread_template", KCFactory::global(),
+    KoTemplateCreateDia::createTemplate("kcells_template", KCFactory::global(),
                                         tempFile.fileName(), pix, this);
 
-    KCFactory::global().dirs()->addResourceType("kspread_template",
-            "data", "kspread/templates/");
+    KCFactory::global().dirs()->addResourceType("kcells_template",
+            "data", "kcells/templates/");
 }
 
 void KCView::setActiveSheet(KCSheet* sheet, bool updateSheet)
@@ -1806,28 +1806,28 @@ void KCView::calcStatusBarOp()
     KCSheet * sheet = activeSheet();
     KCValueCalc* calc = doc()->map()->calc();
     KCValue val;
-    KSpread::MethodOfCalc tmpMethod = doc()->map()->settings()->getTypeOfCalc();
-    if (sheet && tmpMethod != KSpread::NoneCalc) {
+    KCells::MethodOfCalc tmpMethod = doc()->map()->settings()->getTypeOfCalc();
+    if (sheet && tmpMethod != KCells::NoneCalc) {
         KCValue range = sheet->cellStorage()->valueRegion(*d->selection);
         switch (tmpMethod) {
-        case KSpread::SumOfNumber:
+        case KCells::SumOfNumber:
             val = calc->sum(range);
             break;
-        case KSpread::Average:
+        case KCells::Average:
             val = calc->avg(range);
             break;
-        case KSpread::Min:
+        case KCells::Min:
             val = calc->min(range);
             break;
-        case KSpread::Max:
+        case KCells::Max:
             val = calc->max(range);
             break;
-        case KSpread::CountA:
+        case KCells::CountA:
             val = KCValue(calc->count(range));
             break;
-        case KSpread::Count:
+        case KCells::Count:
             val = KCValue(calc->count(range, false));
-        case KSpread::NoneCalc:
+        case KCells::NoneCalc:
             break;
         default:
             break;
@@ -1838,25 +1838,25 @@ void KCView::calcStatusBarOp()
     QString res = doc()->map()->converter()->asString(val).asString();
     QString tmp;
     switch (tmpMethod) {
-    case KSpread::SumOfNumber:
+    case KCells::SumOfNumber:
         tmp = i18n("Sum: ") + res;
         break;
-    case KSpread::Average:
+    case KCells::Average:
         tmp = i18n("Average: ") + res;
         break;
-    case KSpread::Min:
+    case KCells::Min:
         tmp = i18n("Min: ") + res;
         break;
-    case KSpread::Max:
+    case KCells::Max:
         tmp = i18n("Max: ") + res;
         break;
-    case KSpread::Count:
+    case KCells::Count:
         tmp = i18n("Count: ") + res;
         break;
-    case KSpread::CountA:
+    case KCells::CountA:
         tmp = i18n("CountA: ") + res;
         break;
-    case KSpread::NoneCalc:
+    case KCells::NoneCalc:
         tmp = QString();
         break;
     }
@@ -1876,19 +1876,19 @@ void KCView::statusBarClicked(const QPoint&)
 void KCView::menuCalc(bool)
 {
     if (d->actions->calcMin->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(KSpread::Min);
+        doc()->map()->settings()->setTypeOfCalc(KCells::Min);
     } else if (d->actions->calcMax->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(KSpread::Max);
+        doc()->map()->settings()->setTypeOfCalc(KCells::Max);
     } else if (d->actions->calcCount->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(KSpread::Count);
+        doc()->map()->settings()->setTypeOfCalc(KCells::Count);
     } else if (d->actions->calcAverage->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(KSpread::Average);
+        doc()->map()->settings()->setTypeOfCalc(KCells::Average);
     } else if (d->actions->calcSum->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(KSpread::SumOfNumber);
+        doc()->map()->settings()->setTypeOfCalc(KCells::SumOfNumber);
     } else if (d->actions->calcCountA->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(KSpread::CountA);
+        doc()->map()->settings()->setTypeOfCalc(KCells::CountA);
     } else if (d->actions->calcNone->isChecked()) {
-        doc()->map()->settings()->setTypeOfCalc(KSpread::NoneCalc);
+        doc()->map()->settings()->setTypeOfCalc(KCells::NoneCalc);
     }
 
     calcStatusBarOp();

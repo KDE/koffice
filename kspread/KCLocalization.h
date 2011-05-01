@@ -24,12 +24,12 @@
 #include <klocale.h>
 #include <KoXmlReader.h>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QDomElement;
 class QDomDocument;
 
-class KSPREAD_EXPORT KCLocalization : public KLocale
+class KCELLS_EXPORT KCLocalization : public KLocale
 {
 public:
     KCLocalization();

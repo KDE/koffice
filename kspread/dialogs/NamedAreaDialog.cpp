@@ -44,7 +44,7 @@
 
 #include <KoCanvasBase.h>
 
-// KSpread
+// KCells
 #include "KCLocalization.h"
 #include "KCMap.h"
 #include "KCNamedAreaManager.h"

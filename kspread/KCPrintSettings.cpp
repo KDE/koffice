@@ -23,8 +23,8 @@
 // Local
 #include "KCPrintSettings.h"
 
-// KSpread
-#include "kspread_limits.h"
+// KCells
+#include "kcells_limits.h"
 #include "KCRegion.h"
 
 // KOffice

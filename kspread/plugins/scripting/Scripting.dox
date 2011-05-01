@@ -1,30 +1,30 @@
-/** @page KSpreadScripting KSpread Scripting Plugin
+/** @page KCellsScripting KCells Scripting Plugin
 *
-* The KSpread scripting plugin offers flexible access to the
+* The KCells scripting plugin offers flexible access to the
 * Kross scripting framework. Languages like Python or Ruby
-* could be used to script KSpread, extend the functionality
+* could be used to script KCells, extend the functionality
 * with script-packages, automate tasks or control the
 * runtime-environment.
 *
 * \li The \a ScriptingPart class implements a KPart component
-*     to integrate scripting into KSpread.
-* \li The \a ScriptingModule class enables access to the KSpread
+*     to integrate scripting into KCells.
+* \li The \a ScriptingModule class enables access to the KCells
 *     functionality from within the scripting backends.
-* \li The \a ScriptingFunction class provides access to the KSpread::KCFunction
+* \li The \a ScriptingFunction class provides access to the KCells::KCFunction
 *     functionality to deal with formula functions that are written in
 *     a scripting language like Python or Ruby.
 * \li The \a ScriptingCellListener class implements a listener to changes
       within cells of a sheet.
 * \li The \a ScriptingReader class provides abstract high-level functionality
-*     to read content from KSpread sheets.
+*     to read content from KCells sheets.
 * \li The \a ScriptingWriter class provides abstract high-level functionality
-*     to write content to KSpread sheets and to manipulate the content of cells.
+*     to write content to KCells sheets and to manipulate the content of cells.
 * \li The \a ScriptingSheetsListView provides provides a listview-widget that
 *     displays all sheets and lets the user choose 0..n of them plus specify
 *     cell-ranges for all of them.
 *
-* \see http://www.koffice.org/kspread
-* \see http://techbase.kde.org/Development/Tutorials/KSpread_Scripting
+* \see http://www.koffice.org/kcells
+* \see http://techbase.kde.org/Development/Tutorials/KCells_Scripting
 * \see http://kross.dipe.org
 *
 ***************************************************************************
@@ -36,14 +36,14 @@
 * #!/usr/bin/env kross
 * # The OpenDocument Spreadsheet file that we like to read.
 * filename = "/home/kde4/invoicetemplate.ods"
-* # Import Kross and fetch the KSpread module.
+* # Import Kross and fetch the KCells module.
 * import Kross
-* kspread = Kross.module("kspread")
+* kcells = Kross.module("kcells")
 * # Try to open the file.
-* if not kspread.openUrl(filename):
+* if not kcells.openUrl(filename):
 *     raise "Failed to open the file \"%s\"." % filename
 * # Get the sheet we like to print to stdout.
-* sheet = kspread.sheetByName( kspread.sheetNames()[0] )
+* sheet = kcells.sheetByName( kcells.sheetNames()[0] )
 * # Iterate now through all cells on the sheet.
 * for row in range(sheet.maxRow()):
 *     # Put the content of the row into the record-list.
@@ -64,20 +64,20 @@
 * templatefile = "/home/kde4/invoicetemplate.ods"
 * # The OpenDocument Spreadsheet file that we like to write to.
 * savefile = "/home/kde4/invoice.ods"
-* # Import Kross and fetch the KSpread module.
+* # Import Kross and fetch the KCells module.
 * import Kross
-* kspread = Kross.module("kspread")
+* kcells = Kross.module("kcells")
 * # Try to open the file.
-* if not kspread.openUrl(templatefile):
+* if not kcells.openUrl(templatefile):
 *     raise "Failed to open the file \"%s\"." % templatefile
 * # Get the sheet we like to manipulate.
-* sheet = kspread.sheetByName( kspread.sheetNames()[0] )
+* sheet = kcells.sheetByName( kcells.sheetNames()[0] )
 * # Set the content of some cells.
 * sheet.setText(0,7,"Joe User")
 * sheet.setText(0,8,"Userstreet. 1")
 * sheet.setText(0,9,"Testcasecity")
 * # Finally write the new OpenDocument Spreadsheet file.
-* if not kspread.saveUrl(savefile):
+* if not kcells.saveUrl(savefile):
 *     raise "Failed to save the file \"%s\"." % savefile
 * @endcode
 *

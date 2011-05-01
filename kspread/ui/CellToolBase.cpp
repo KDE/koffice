@@ -29,7 +29,7 @@
 #include "CellToolBase.h"
 #include "CellToolBase_p.h"
 
-// KSpread
+// KCells
 #include "KCApplicationSettings.h"
 #include "AutoFillStrategy.h"
 #include "KCCalculationSettings.h"
@@ -2869,7 +2869,7 @@ void CellToolBase::cut()
 
         QMimeData* mimeData = new QMimeData();
         mimeData->setText(CopyCommand::saveAsPlainText(*selection()));
-        mimeData->setData("application/x-kspread-snippet", buffer.buffer());
+        mimeData->setData("application/x-kcells-snippet", buffer.buffer());
 
         QApplication::clipboard()->setMimeData(mimeData);
 
@@ -2900,7 +2900,7 @@ void CellToolBase::copy() const
 
         QMimeData* mimeData = new QMimeData();
         mimeData->setText(CopyCommand::saveAsPlainText(*selection));
-        mimeData->setData("application/x-kspread-snippet", buffer.buffer());
+        mimeData->setData("application/x-kcells-snippet", buffer.buffer());
 
         QApplication::clipboard()->setMimeData(mimeData);
     } else {
@@ -2940,7 +2940,7 @@ bool CellToolBase::paste()
         // Also load styles from content.xml
         stylesReader.createStyleMap(doc, false);
 
-        // from KSpreadDoc::loadOdf:
+        // from KCellsDoc::loadOdf:
         KoXmlElement content = doc.documentElement();
         KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
         if (realBody.isNull()) {

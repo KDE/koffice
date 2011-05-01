@@ -1,20 +1,20 @@
 #!/usr/bin/env kross
 
 """
-Python script to export content from KSpread to a
+Python script to export content from KCells to a
 Kexi Project stored within a KexiDB.
 
 (C)2007 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 Dual-licensed under LGPL v2+higher and the BSD license.
 """
 
 #import os, datetime, sys, traceback, csv
-#import Kross, KSpread
+#import Kross, KCells
 
 import sys, os, traceback
-import Kross, KSpread
+import Kross, KCells
 
 class KexiExport:
 
@@ -25,7 +25,7 @@ class KexiExport:
         self.start()
 
     def start(self):
-        reader = KSpread.reader()
+        reader = KCells.reader()
 
         connection = self.showExportDialog(reader)
         if not connection:
@@ -91,12 +91,12 @@ class KexiExport:
         dialog.setFaceType("List") #Auto Plain List Tree Tabbed
 
         savepage = dialog.addPage("Save","Export to Kexi Project File","document-save")
-        savewidget = self.forms.createFileWidget(savepage, "kfiledialog:///kspreadkexidbexport")
+        savewidget = self.forms.createFileWidget(savepage, "kfiledialog:///kcellskexidbexport")
         savewidget.setMode("Saving")
         savewidget.setFilter("*.kexi *.kexis *kexic|Kexi Project Files\n*|All Files")
 
         datapage = dialog.addPage("Export","Export sheets and ranges","document-export")
-        sheetslistview = KSpread.createSheetsListView(datapage)
+        sheetslistview = KCells.createSheetsListView(datapage)
         sheetslistview.setSelectionType("MultiSelect")
         sheetslistview.setEditorType("Range")
 

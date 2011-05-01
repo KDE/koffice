@@ -29,7 +29,7 @@ class KCValueParser;
  * \ingroup KCValue
  * Converts between the different KCValue types.
  */
-class KSPREAD_EXPORT KCValueConverter
+class KCELLS_EXPORT KCValueConverter
 {
 public:
     /**

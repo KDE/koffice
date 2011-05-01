@@ -33,7 +33,7 @@ inline long double numToDouble(KCNumber n)
     return n;
 }
 
-namespace KSpread
+namespace KCells
 {
 
 inline KCNumber log(const KCNumber &n, KCNumber base)
@@ -65,7 +65,7 @@ inline KCNumber atgh(const KCNumber &n)
 
 #include <QSharedDataPointer>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 #include <complex>
 
@@ -80,7 +80,7 @@ The class will be able to format itself into a string, using provided locale set
 Out-of-class methods for computations are provided
 */
 
-class KSPREAD_EXPORT KCNumber
+class KCELLS_EXPORT KCNumber
 {
 public:
     enum Type {
@@ -179,7 +179,7 @@ private:
 
 // conversion to double ... when we add the option to #define the KCNumber class as double, this routine should be kept in place, and it should simply return its parameter
 // usage of this function should eventually be removed, because places that use it are not ready for high precision support
-KSPREAD_EXPORT long double numToDouble(KCNumber n);
+KCELLS_EXPORT long double numToDouble(KCNumber n);
 
 // external operators, so that we can do things like 4+a without having to create temporary objects
 // not provided for complex numbers, as we won't be using them often like that

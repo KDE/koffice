@@ -24,7 +24,7 @@
 
 #include <QByteArray>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 
 /**
@@ -33,7 +33,7 @@
  * The inheriting object decides which of its data should be protected.
  * It has to use isProtected() to check wether it's protected.
  */
-class KSPREAD_EXPORT KCProtectableObject
+class KCELLS_EXPORT KCProtectableObject
 {
 public:
     enum Mode {

@@ -2,7 +2,7 @@
    Copyright 2010 Marijn Kruisselbrink <m.kruisselbrink@student.tue.nl>
    Copyright 2007 Stefan Nikolaus <stefan.nikolaus@kdemail.net>
    Copyright 1998,1999 Torben Weis <weis@kde.org>
-   Copyright 1999-2007 The KSpread Team <koffice-devel@kde.org>
+   Copyright 1999-2007 The KCells Team <koffice-devel@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -40,7 +40,7 @@
 #include "Global.h"
 #include "KCProtectableObject.h"
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QAbstractItemModel;
 class QDomElement;
@@ -86,7 +86,7 @@ template<typename T> class IntervalMap;
 /**
  * A sheet contains several cells.
  */
-class KSPREAD_EXPORT KCSheet : public KoShapeUserData, public KoShapeControllerBase,
+class KCELLS_EXPORT KCSheet : public KoShapeUserData, public KoShapeControllerBase,
         public KCProtectableObject
 {
     Q_OBJECT
@@ -328,7 +328,7 @@ public:
     //
     //////////////////////////////////////////////////////////////////////////
     //
-    //BEGIN Methods related to KSpread's old file format
+    //BEGIN Methods related to KCells's old file format
     //
 
     /**
@@ -356,7 +356,7 @@ public:
     bool loadChildren(KoStore* _store);
 
     //
-    //END Methods related to KSpread's old file format
+    //END Methods related to KCells's old file format
     //
     //////////////////////////////////////////////////////////////////////////
     //

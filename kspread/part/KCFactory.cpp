@@ -35,7 +35,7 @@ KCFactory::KCFactory(QObject* parent)
 {
     //kDebug(36001) <<"KCFactory::KCFactory()";
     // Create our instance, so that it becomes KGlobal::instance if the
-    // main app is KSpread.
+    // main app is KCells.
     (void)global();
 }
 
@@ -74,10 +74,10 @@ const KComponentData &KCFactory::global()
     if (!s_global) {
         s_global = new KComponentData(aboutData());
 
-        s_global->dirs()->addResourceType("kspread_template", "data", "kspread/templates/");
+        s_global->dirs()->addResourceType("kcells_template", "data", "kcells/templates/");
         s_global->dirs()->addResourceType("toolbar", "data", "koffice/toolbar/");
-        s_global->dirs()->addResourceType("functions", "data", "kspread/functions/");
-        s_global->dirs()->addResourceType("sheet-styles", "data", "kspread/sheetstyles/");
+        s_global->dirs()->addResourceType("functions", "data", "kcells/functions/");
+        s_global->dirs()->addResourceType("sheet-styles", "data", "kcells/sheetstyles/");
     }
     return *s_global;
 }

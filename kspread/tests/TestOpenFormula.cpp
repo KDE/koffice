@@ -73,7 +73,7 @@ QString TestOpenFormula::convertToOpenFormula(const QString& expr)
     locale.setDecimalSymbol(",");
     locale.setThousandsSeparator(" ");
 
-    QString formula = KSpread::Odf::encodeFormula(expr, &locale);
+    QString formula = KCells::Odf::encodeFormula(expr, &locale);
     return formula;
 }
 
@@ -83,7 +83,7 @@ QString TestOpenFormula::convertFromOpenFormula(const QString& expr)
     locale.setDecimalSymbol(",");
     locale.setThousandsSeparator(" ");
 
-    QString formula = KSpread::Odf::decodeFormula(expr, &locale);
+    QString formula = KCells::Odf::decodeFormula(expr, &locale);
     return formula;
 }
 

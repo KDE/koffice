@@ -6,7 +6,7 @@ import os, sys, traceback, tempfile, zipfile
 # import the kross module.
 import Kross
 
-KOfficeAppName="KSpread"
+KOfficeAppName="KCells"
 KOfficeAppExt="ods"
 
 try:

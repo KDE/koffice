@@ -110,7 +110,7 @@ enum Operation {
 };
 } // namespace Paste
 
-namespace KSpread
+namespace KCells
 {
 
 // necessary due to QDock* enums (Werner)

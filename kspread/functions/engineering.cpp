@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2002 The KSpread Team <koffice-devel@kde.org>
+   Copyright (C) 1998-2002 The KCells Team <koffice-devel@kde.org>
    Copyright (C) 2005 Tomas Mecir <mecirt@gmail.com>
    Copyright 2007 Sascha Pfau <MrPeacock@gmail.com>
 
@@ -42,7 +42,7 @@
 #define M_LN2l 0.6931471805599453094172321214581766L
 #endif
 
-using namespace KSpread;
+using namespace KCells;
 
 // prototypes (sort alphabetically)
 KCValue func_base(valVector args, KCValueCalc *calc, FuncExtra *);
@@ -92,7 +92,7 @@ KCValue func_oct2bin(valVector args, KCValueCalc *calc, FuncExtra *);
 KCValue func_oct2hex(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
-KSPREAD_EXPORT_FUNCTION_MODULE("engineering", EngineeringModule)
+KCELLS_EXPORT_FUNCTION_MODULE("engineering", EngineeringModule)
 
 
 EngineeringModule::EngineeringModule(QObject* parent, const QVariantList&)
@@ -100,7 +100,7 @@ EngineeringModule::EngineeringModule(QObject* parent, const QVariantList&)
 {
     KCFunction *f;
 
-    f = new KCFunction("BASE",        func_base);     // KSpread-specific, like in Quattro-Pro
+    f = new KCFunction("BASE",        func_base);     // KCells-specific, like in Quattro-Pro
     f->setParamCount(1, 3);
     add(f);
     f = new KCFunction("BESSELI",     func_besseli);
@@ -573,7 +573,7 @@ KCValue func_decimal(valVector args, KCValueCalc *calc, FuncExtra *)
 // return prefix factor found in unit, or 1.0 for no prefix
 // also modify the unit, i.e stripping the prefix from it
 // example: "kPa" will return 1e3 and change unit into "Pa"
-static double kspread_convert_prefix(QMap<QString, double> map, QString& unit)
+static double kcells_convert_prefix(QMap<QString, double> map, QString& unit)
 {
     if (map.contains(unit))
         return 1.0;
@@ -632,7 +632,7 @@ static double kspread_convert_prefix(QMap<QString, double> map, QString& unit)
 //
 // convert masses
 //
-static bool kspread_convert_mass(const QString& fromUnit,
+static bool kcells_convert_mass(const QString& fromUnit,
                                  const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> massMap;
@@ -656,8 +656,8 @@ static bool kspread_convert_mass(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(massMap, fromU);
-    double toPrefix = kspread_convert_prefix(massMap, toU);
+    double fromPrefix = kcells_convert_prefix(massMap, fromU);
+    double toPrefix = kcells_convert_prefix(massMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!massMap.contains(fromU)) return false;
@@ -672,7 +672,7 @@ static bool kspread_convert_mass(const QString& fromUnit,
 //
 // convert distances
 //
-static bool kspread_convert_distance(const QString& fromUnit,
+static bool kcells_convert_distance(const QString& fromUnit,
                                      const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> distanceMap;
@@ -698,8 +698,8 @@ static bool kspread_convert_distance(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(distanceMap, fromU);
-    double toPrefix = kspread_convert_prefix(distanceMap, toU);
+    double fromPrefix = kcells_convert_prefix(distanceMap, fromU);
+    double toPrefix = kcells_convert_prefix(distanceMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!distanceMap.contains(fromU)) return false;
@@ -714,7 +714,7 @@ static bool kspread_convert_distance(const QString& fromUnit,
 //
 // convert pressures
 //
-static bool kspread_convert_pressure(const QString& fromUnit,
+static bool kcells_convert_pressure(const QString& fromUnit,
                                      const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> pressureMap;
@@ -732,8 +732,8 @@ static bool kspread_convert_pressure(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(pressureMap, fromU);
-    double toPrefix = kspread_convert_prefix(pressureMap, toU);
+    double fromPrefix = kcells_convert_prefix(pressureMap, fromU);
+    double toPrefix = kcells_convert_prefix(pressureMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!pressureMap.contains(fromU)) return false;
@@ -748,7 +748,7 @@ static bool kspread_convert_pressure(const QString& fromUnit,
 //
 // convert forces
 //
-static bool kspread_convert_force(const QString& fromUnit,
+static bool kcells_convert_force(const QString& fromUnit,
                                   const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> forceMap;
@@ -765,8 +765,8 @@ static bool kspread_convert_force(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(forceMap, fromU);
-    double toPrefix = kspread_convert_prefix(forceMap, toU);
+    double fromPrefix = kcells_convert_prefix(forceMap, fromU);
+    double toPrefix = kcells_convert_prefix(forceMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!forceMap.contains(fromU)) return false;
@@ -781,7 +781,7 @@ static bool kspread_convert_force(const QString& fromUnit,
 //
 // convert energies
 //
-static bool kspread_convert_energy(const QString& fromUnit,
+static bool kcells_convert_energy(const QString& fromUnit,
                                    const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> energyMap;
@@ -802,8 +802,8 @@ static bool kspread_convert_energy(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(energyMap, fromU);
-    double toPrefix = kspread_convert_prefix(energyMap, toU);
+    double fromPrefix = kcells_convert_prefix(energyMap, fromU);
+    double toPrefix = kcells_convert_prefix(energyMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!energyMap.contains(fromU)) return false;
@@ -818,7 +818,7 @@ static bool kspread_convert_energy(const QString& fromUnit,
 //
 // convert powers
 //
-static bool kspread_convert_power(const QString& fromUnit,
+static bool kcells_convert_power(const QString& fromUnit,
                                   const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> powerMap;
@@ -834,8 +834,8 @@ static bool kspread_convert_power(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(powerMap, fromU);
-    double toPrefix = kspread_convert_prefix(powerMap, toU);
+    double fromPrefix = kcells_convert_prefix(powerMap, fromU);
+    double toPrefix = kcells_convert_prefix(powerMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!powerMap.contains(fromU)) return false;
@@ -850,7 +850,7 @@ static bool kspread_convert_power(const QString& fromUnit,
 //
 // convert magnetism
 //
-static bool kspread_convert_magnetism(const QString& fromUnit,
+static bool kcells_convert_magnetism(const QString& fromUnit,
                                       const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> magnetismMap;
@@ -864,8 +864,8 @@ static bool kspread_convert_magnetism(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(magnetismMap, fromU);
-    double toPrefix = kspread_convert_prefix(magnetismMap, toU);
+    double fromPrefix = kcells_convert_prefix(magnetismMap, fromU);
+    double toPrefix = kcells_convert_prefix(magnetismMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!magnetismMap.contains(fromU)) return false;
@@ -880,7 +880,7 @@ static bool kspread_convert_magnetism(const QString& fromUnit,
 //
 // convert temperatures
 //
-static bool kspread_convert_temperature(const QString& fromUnit,
+static bool kcells_convert_temperature(const QString& fromUnit,
                                         const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> tempFactorMap;
@@ -908,7 +908,7 @@ static bool kspread_convert_temperature(const QString& fromUnit,
 //
 // convert volumes
 //
-static bool kspread_convert_volume(const QString& fromUnit,
+static bool kcells_convert_volume(const QString& fromUnit,
                                    const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> volumeMap;
@@ -944,8 +944,8 @@ static bool kspread_convert_volume(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(volumeMap, fromU);
-    double toPrefix = kspread_convert_prefix(volumeMap, toU);
+    double fromPrefix = kcells_convert_prefix(volumeMap, fromU);
+    double toPrefix = kcells_convert_prefix(volumeMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!volumeMap.contains(fromU)) return false;
@@ -960,7 +960,7 @@ static bool kspread_convert_volume(const QString& fromUnit,
 //
 // convert areas
 //
-static bool kspread_convert_area(const QString& fromUnit,
+static bool kcells_convert_area(const QString& fromUnit,
                                  const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> areaMap;
@@ -987,8 +987,8 @@ static bool kspread_convert_area(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(areaMap, fromU);
-    double toPrefix = kspread_convert_prefix(areaMap, toU);
+    double fromPrefix = kcells_convert_prefix(areaMap, fromU);
+    double toPrefix = kcells_convert_prefix(areaMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!areaMap.contains(fromU)) return false;
@@ -1003,7 +1003,7 @@ static bool kspread_convert_area(const QString& fromUnit,
 //
 // convert speeds
 //
-static bool kspread_convert_speed(const QString& fromUnit,
+static bool kcells_convert_speed(const QString& fromUnit,
                                   const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> speedMap;
@@ -1019,8 +1019,8 @@ static bool kspread_convert_speed(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(speedMap, fromU);
-    double toPrefix = kspread_convert_prefix(speedMap, toU);
+    double fromPrefix = kcells_convert_prefix(speedMap, fromU);
+    double toPrefix = kcells_convert_prefix(speedMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!speedMap.contains(fromU)) return false;
@@ -1035,7 +1035,7 @@ static bool kspread_convert_speed(const QString& fromUnit,
 //
 // convert times
 //
-static bool kspread_convert_time(const QString& fromUnit,
+static bool kcells_convert_time(const QString& fromUnit,
                                  const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> timeMap;
@@ -1055,8 +1055,8 @@ static bool kspread_convert_time(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(timeMap, fromU);
-    double toPrefix = kspread_convert_prefix(timeMap, toU);
+    double fromPrefix = kcells_convert_prefix(timeMap, fromU);
+    double toPrefix = kcells_convert_prefix(timeMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!timeMap.contains(fromU)) return false;
@@ -1071,7 +1071,7 @@ static bool kspread_convert_time(const QString& fromUnit,
 //
 // convert IT
 //
-static bool kspread_convert_info(const QString& fromUnit,
+static bool kcells_convert_info(const QString& fromUnit,
                                  const QString& toUnit, double value, double& result)
 {
     static QMap<QString, double> infoMap;
@@ -1084,8 +1084,8 @@ static bool kspread_convert_info(const QString& fromUnit,
 
     QString fromU = fromUnit;
     QString toU = toUnit;
-    double fromPrefix = kspread_convert_prefix(infoMap, fromU);
-    double toPrefix = kspread_convert_prefix(infoMap, toU);
+    double fromPrefix = kcells_convert_prefix(infoMap, fromU);
+    double toPrefix = kcells_convert_prefix(infoMap, toU);
     if (fromPrefix == 0.0) return false;
     if (toPrefix == 0.0) return false;
     if (!infoMap.contains(fromU)) return false;
@@ -1109,19 +1109,19 @@ KCValue func_convert(valVector args, KCValueCalc *calc, FuncExtra *)
 
     double result = value;
 
-    if (!kspread_convert_mass(fromUnit, toUnit, value, result))
-        if (!kspread_convert_distance(fromUnit, toUnit, value, result))
-            if (!kspread_convert_pressure(fromUnit, toUnit, value, result))
-                if (!kspread_convert_force(fromUnit, toUnit, value, result))
-                    if (!kspread_convert_energy(fromUnit, toUnit, value, result))
-                        if (!kspread_convert_power(fromUnit, toUnit, value, result))
-                            if (!kspread_convert_magnetism(fromUnit, toUnit, value, result))
-                                if (!kspread_convert_temperature(fromUnit, toUnit, value, result))
-                                    if (!kspread_convert_volume(fromUnit, toUnit, value, result))
-                                        if (!kspread_convert_area(fromUnit, toUnit, value, result))
-                                            if (!kspread_convert_speed(fromUnit, toUnit, value, result))
-                                                if (!kspread_convert_time(fromUnit, toUnit, value, result))
-                                                    if (!kspread_convert_info(fromUnit, toUnit, value, result))
+    if (!kcells_convert_mass(fromUnit, toUnit, value, result))
+        if (!kcells_convert_distance(fromUnit, toUnit, value, result))
+            if (!kcells_convert_pressure(fromUnit, toUnit, value, result))
+                if (!kcells_convert_force(fromUnit, toUnit, value, result))
+                    if (!kcells_convert_energy(fromUnit, toUnit, value, result))
+                        if (!kcells_convert_power(fromUnit, toUnit, value, result))
+                            if (!kcells_convert_magnetism(fromUnit, toUnit, value, result))
+                                if (!kcells_convert_temperature(fromUnit, toUnit, value, result))
+                                    if (!kcells_convert_volume(fromUnit, toUnit, value, result))
+                                        if (!kcells_convert_area(fromUnit, toUnit, value, result))
+                                            if (!kcells_convert_speed(fromUnit, toUnit, value, result))
+                                                if (!kcells_convert_time(fromUnit, toUnit, value, result))
+                                                    if (!kcells_convert_info(fromUnit, toUnit, value, result))
                                                         return KCValue::errorNA();
 
     return KCValue(result);

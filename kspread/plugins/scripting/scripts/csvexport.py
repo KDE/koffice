@@ -1,17 +1,17 @@
 #!/usr/bin/env kross
 
 """
-KSpread python script to export an ISO OpenDocument spreadsheet file to
+KCells python script to export an ISO OpenDocument spreadsheet file to
 a comma-separated-value file.
 
 (C)2007 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 Dual-licensed under LGPL v2+higher and the BSD license.
 """
 
 import os, datetime, sys, traceback, csv
-import Kross, KSpread
+import Kross, KCells
 
 class CsvExporter:
 
@@ -25,12 +25,12 @@ class CsvExporter:
         self.dialog.setFaceType("List") #Auto Plain List Tree Tabbed
 
         savepage = self.dialog.addPage("Save","Export to CSV File","document-save")
-        self.savewidget = self.forms.createFileWidget(savepage, "kfiledialog:///kspreadcsvexportsave")
+        self.savewidget = self.forms.createFileWidget(savepage, "kfiledialog:///kcellscsvexportsave")
         self.savewidget.setMode("Saving")
         self.savewidget.setFilter("*.csv *.txt|Comma-Separated-KCValue Files\n*|All Files")
 
         datapage = self.dialog.addPage("Export","Export Sheets and ranges","document-export")
-        self.sheetslistview = KSpread.createSheetsListView(datapage)
+        self.sheetslistview = KCells.createSheetsListView(datapage)
         self.sheetslistview.setSelectionType("MultiSelect")
         self.sheetslistview.setEditorType("Range")
 
@@ -66,7 +66,7 @@ class CsvExporter:
         return CustomDialect
 
     def doExport(self):
-        reader = KSpread.reader()
+        reader = KCells.reader()
         reader.setSheets( self.sheetslistview.sheets() )
 
         #if len(reader.sheetNames()) == 0:

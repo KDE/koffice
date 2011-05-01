@@ -27,7 +27,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 
-// KSpread
+// KCells
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "KCMap.h"

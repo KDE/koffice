@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2002 The KSpread Team <koffice-devel@kde.org>
+   Copyright (C) 1998-2002 The KCells Team <koffice-devel@kde.org>
    Copyright (C) 2005 Tomas Mecir <mecirt@gmail.com>
    Copyright 2007 Sascha Pfau <MrPeacock@gmail.com>
    Copyright (C) 2010 Carlos Licea <carlos@kdab.com>
@@ -45,7 +45,7 @@
 // needed by MDETERM and MINVERSE
 #include <Eigen/LU>
 
-using namespace KSpread;
+using namespace KCells;
 
 // RANDBINOM and RANDNEGBINOM won't support arbitrary precision
 
@@ -120,7 +120,7 @@ KCValue func_trunc(valVector args, KCValueCalc *calc, FuncExtra *);
 // KCValue func_multipleOP (valVector args, KCValueCalc *calc, FuncExtra *);
 
 
-KSPREAD_EXPORT_FUNCTION_MODULE("math", MathModule)
+KCELLS_EXPORT_FUNCTION_MODULE("math", MathModule)
 
 
 MathModule::MathModule(QObject* parent, const QVariantList&)
@@ -155,7 +155,7 @@ MathModule::MathModule(QObject* parent, const QVariantList&)
     f = new KCFunction("FACTDOUBLE",    func_factdouble);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETFACTDOUBLE");
     add(f);
-    f = new KCFunction("FIB",           func_fib);  // KSpread-specific, like Quattro-Pro's FIB
+    f = new KCFunction("FIB",           func_fib);  // KCells-specific, like Quattro-Pro's FIB
     add(f);
     f = new KCFunction("FLOOR",         func_floor);
     f->setParamCount(1, 3);

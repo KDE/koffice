@@ -65,11 +65,11 @@
 #include <KoZoomHandler.h>
 #include <KoDpi.h>
 
-// KSpread
+// KCells
 #include "KCCanvas.h"
 #include "KCCell.h"
 #include "KCDoc.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 #include "KCView.h"
@@ -637,7 +637,7 @@ void KCRowHeader::drawText(QPainter& painter, const QFont& font,
 
 void KCRowHeader::toolChanged(const QString& toolId)
 {
-    m_cellToolIsActive = toolId.startsWith("KSpread");
+    m_cellToolIsActive = toolId.startsWith("KCells");
     update();
 }
 
@@ -1388,7 +1388,7 @@ void KCColumnHeader::drawText(QPainter& painter, const QFont& font,
 
 void KCColumnHeader::toolChanged(const QString& toolId)
 {
-    m_cellToolIsActive = toolId.startsWith("KSpread");
+    m_cellToolIsActive = toolId.startsWith("KCells");
     update();
 }
 
@@ -1467,7 +1467,7 @@ void KCSelectAllButton::wheelEvent(QWheelEvent* event)
 
 void KCSelectAllButton::toolChanged(const QString& toolId)
 {
-    m_cellToolIsActive = toolId.startsWith("KSpread");
+    m_cellToolIsActive = toolId.startsWith("KCells");
     update();
 }
 

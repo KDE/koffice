@@ -28,7 +28,7 @@
 
 #include <kdebug.h>
 
-#include <kspread/KCRegion.h>
+#include <KCRegion.h>
 
 class KoCanvasBase;
 
@@ -42,7 +42,7 @@ class CellEditor;
  * \author Torben Weis <weis@kde.org>
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  */
-class KSPREAD_EXPORT Selection : public KoToolSelection, public KCRegion
+class KCELLS_EXPORT Selection : public KoToolSelection, public KCRegion
 {
     Q_OBJECT
 

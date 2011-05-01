@@ -22,7 +22,7 @@
 
 #include <QAbstractTableModel>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QItemSelectionRange;
 
@@ -32,7 +32,7 @@ class KCSheet;
  * A model for a sheet.
  * \ingroup Model
  */
-class KSPREAD_EXPORT KCSheetModel : public QAbstractTableModel
+class KCELLS_EXPORT KCSheetModel : public QAbstractTableModel
 {
 public:
     explicit KCSheetModel(KCSheet* sheet);

@@ -28,10 +28,10 @@ static const char* description = I18N_NOOP("KOffice Spreadsheet Application");
 
 KAboutData * newAboutData()
 {
-    KAboutData * aboutData = new KAboutData("kspread", 0, ki18n("KSpread"),
+    KAboutData * aboutData = new KAboutData("kcells", 0, ki18n("KCells"),
             KOFFICE_VERSION_STRING, ki18n(description), KAboutData::License_LGPL,
-            ki18n("(c) 1998-2011, The KSpread Team"), KLocalizedString(),
-                                            "http://www.koffice.org/kspread/");
+            ki18n("(c) 1998-2011, The KCells Team"), KLocalizedString(),
+                                            "http://www.koffice.org/kcells/");
     aboutData->addAuthor(ki18n("Torben Weis"), ki18n("Original Author"), "weis@kde.org");
     aboutData->addAuthor(ki18n("Marijn Kruisselbrink"), ki18n("Maintainer"), "m.kruisselbrink@student.tue.nl");
     aboutData->addAuthor(ki18n("Sebastian Sauer"), ki18n("ODS and Excel, functions, scripting"), "mail@dipe.org");

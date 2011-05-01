@@ -27,7 +27,7 @@
 #include "KCFormat.h"
 #include "KCNumber.h"
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class KCCalculationSettings;
 class KCValue;
@@ -37,7 +37,7 @@ class KCValue;
  * Generates a KCValue by parsing an user input text.
  * Determines the most probable KCValue type, e.g. integer or date.
  */
-class KSPREAD_EXPORT KCValueParser
+class KCELLS_EXPORT KCValueParser
 {
 public:
     /**

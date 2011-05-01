@@ -21,7 +21,7 @@
 #define KSPREAD_AUTOFILL_STRATEGY
 
 #include "AbstractSelectionStrategy.h"
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 
 /**
@@ -30,7 +30,7 @@
  * Created, when the user presses the left mouse button on the selection handle.
  * Nothing happens, if the selection did not change.
  */
-class KSPREAD_EXPORT AutoFillStrategy : public AbstractSelectionStrategy
+class KCELLS_EXPORT AutoFillStrategy : public AbstractSelectionStrategy
 {
 public:
     /**

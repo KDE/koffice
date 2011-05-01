@@ -26,7 +26,7 @@
 
 #include <QPair>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QSize;
 
@@ -36,7 +36,7 @@ class KCSheet;
 /**
  * Settings used for printing.
  */
-class KSPREAD_EXPORT KCPrintSettings
+class KCELLS_EXPORT KCPrintSettings
 {
 public:
     enum PageOrder { TopToBottom, LeftToRight };

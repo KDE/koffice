@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
 
-   Copyright 1999-2006 The KSpread Team <koffice-devel@kde.org>
+   Copyright 1999-2006 The KCells Team <koffice-devel@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -24,7 +24,7 @@
 
 #include <QWidget>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class KTextEdit;
 
@@ -38,7 +38,7 @@ class Selection;
  * A minimizable line edit for choosing cell regions.
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  */
-class KSPREAD_EXPORT RegionSelector : public QWidget
+class KCELLS_EXPORT RegionSelector : public QWidget
 {
     Q_OBJECT
 

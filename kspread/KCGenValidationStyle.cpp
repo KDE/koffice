@@ -24,7 +24,7 @@
 // KOffice
 #include <KoXmlWriter.h>
 
-// KSpread
+// KCells
 #include "KCValidity.h"
 #include "KCValueConverter.h"
 

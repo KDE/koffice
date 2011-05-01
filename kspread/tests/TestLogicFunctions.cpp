@@ -94,7 +94,7 @@ void TestLogicFunctions::testFALSE()
     CHECK_EVAL("FALSE()", KCValue(false));
     // Applications that implement logical values as 0/1 must map FALSE() to 0
     CHECK_EVAL("IF(ISNUMBER(FALSE());FALSE()=0;FALSE())", KCValue(false));
-    // note that kspread distinguishes between boolean and math
+    // note that kcells distinguishes between boolean and math
     CHECK_EVAL("FALSE()=0", KCValue(false));
     CHECK_EVAL("FALSE()=1", KCValue(false));
     // False converts to 0 in KCNumber context
@@ -169,7 +169,7 @@ void TestLogicFunctions::testTRUE()
     CHECK_EVAL("TRUE()", KCValue(true));
     // Applications that implement logical values as 0/1 must map TRUE() to 1
     CHECK_EVAL("IF(ISNUMBER(TRUE());TRUE()=0;TRUE())", KCValue(true));
-    // note that kspread distinguishes between boolean and math
+    // note that kcells distinguishes between boolean and math
     CHECK_EVAL("TRUE()=1", KCValue(false));
     CHECK_EVAL("TRUE()=0", KCValue(false));
     // False converts to 0 in KCNumber context

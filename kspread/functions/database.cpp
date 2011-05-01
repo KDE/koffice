@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2002 The KSpread Team <koffice-devel@kde.org>
+   Copyright (C) 1998-2002 The KCells Team <koffice-devel@kde.org>
    Copyright (C) 2005 Tomas Mecir <mecirt@gmail.com>
 
    This library is free software; you can redistribute it and/or
@@ -29,7 +29,7 @@
 
 #include <KLocale>
 
-using namespace KSpread;
+using namespace KCells;
 
 // prototypes
 KCValue func_daverage(valVector args, KCValueCalc *calc, FuncExtra *);
@@ -47,7 +47,7 @@ KCValue func_dvarp(valVector args, KCValueCalc *calc, FuncExtra *);
 KCValue func_getpivotdata(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
-KSPREAD_EXPORT_FUNCTION_MODULE("database", DatabaseModule)
+KCELLS_EXPORT_FUNCTION_MODULE("database", DatabaseModule)
 
 
 DatabaseModule::DatabaseModule(QObject* parent, const QVariantList&)

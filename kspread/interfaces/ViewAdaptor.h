@@ -30,14 +30,14 @@
 #include <QRect>
 #include <QString>
 #include <QtDBus/QtDBus>
-#include "kspread_export.h"
+#include "kcells_export.h"
 class KCView;
 class CellProxy;
 
 /**
-* The ViewAdaptor class provides access to a view on a KSpread document.
+* The ViewAdaptor class provides access to a view on a KCells document.
 */
-class KSPREAD_EXPORT ViewAdaptor : public QDBusAbstractAdaptor
+class KCELLS_EXPORT ViewAdaptor : public QDBusAbstractAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.koffice.spreadsheet.view")

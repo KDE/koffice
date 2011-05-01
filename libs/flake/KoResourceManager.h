@@ -63,7 +63,7 @@ enum CanvasResource {
     KarbonStart = 1000,      ///< Base number for karbon specific values.
     KivioStart = 3000,       ///< Base number for kivio specific values.
     ShowcaseStart = 5000,  ///< Base number for Showcase specific values.
-    KSpreadStart = 7000,     ///< Base number for kspread specific values.
+    KCellsStart = 7000,     ///< Base number for kspread specific values.
     KWordStart = 8000,        ///< Base number for kword specific values.
     KoPageAppStart = 9000    ///< Base number for KoPageApp specific values.
 };
@@ -89,7 +89,7 @@ enum DocumentResource {
     KarbonStart = 1000,      ///< Base number for karbon specific values.
     KivioStart = 3000,       ///< Base number for kivio specific values.
     ShowcaseStart = 5000,  ///< Base number for Showcase specific values.
-    KSpreadStart = 7000,     ///< Base number for kspread specific values.
+    KCellsStart = 7000,     ///< Base number for kspread specific values.
     KWordStart = 8000,       ///< Base number for kword specific values.
     KoPageAppStart = 9000,   ///< Base number for KoPageApp specific values.
     KoTextStart = 10000      ///< Base number for KoText specific values.

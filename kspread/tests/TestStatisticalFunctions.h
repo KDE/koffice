@@ -41,7 +41,7 @@ private slots:
     void testAVERAGEA();
     void testBETADIST();
     void testBETAINV();
-//     void testBINO(); // kspread version of BINOMDIST with 3 Parameters
+//     void testBINO(); // kcells version of BINOMDIST with 3 Parameters
     void testBINOMDIST();
     void testCHIDIST();
 //     void testCOMBIN();  // in -> TestMathFunctions

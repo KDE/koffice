@@ -1,5 +1,5 @@
-<!DOCTYPE KSpreadFunctions>
-<KSpreadFunctions>
+<!DOCTYPE KCellsFunctions>
+<KCellsFunctions>
 
   <Group>
     <GroupName>Math</GroupName>
@@ -118,7 +118,7 @@
 	<Syntax>EPS()</Syntax>
 	<Example>On most systems, this returns 2^-52=2.2204460492503131e-16</Example>
 	<Example>0.5*EPS() returns the "unit round"; this value is interesting because it is the largest number x where (1+x)-1=0 (due to roundoff errors).</Example>
-	<Example>EPS() is so small that KSpread displays 1+eps() as 1</Example>
+	<Example>EPS() is so small that KCells displays 1+eps() as 1</Example>
 	<Example>Pick a number x between 0 and EPS(). Observe that 1+x rounds x to either 0 or EPS() by using the equation (1+x)-1</Example>
       </Help>
     </Function>
@@ -295,7 +295,7 @@
       <Help>
 	<Text>This function returns the count of integer or floating arguments passed. You can count using a range: COUNT(A1:B5) or using a list of values like COUNT(12;5;12.5).</Text>
 	<Syntax>COUNT(value;value;value...)</Syntax>
-	<Example>COUNT(-5;"KSpread";2) returns 2</Example>
+	<Example>COUNT(-5;"KCells";2) returns 2</Example>
 	<Example>COUNT(5) returns 1</Example>
 	<Related>COUNTA</Related>
 	<Related>COUNTIF</Related>
@@ -313,7 +313,7 @@
       <Help>
 	<Text>This function returns the count of all non empty arguments passed. You can count using a range: COUNTA(A1:B5) or using a list of values like COUNTA(12;5;12.5).</Text>
 	<Syntax>COUNTA(value;value;value...)</Syntax>
-	<Example>COUNTA(-5;"KSpread";2) returns 3</Example>
+	<Example>COUNTA(-5;"KCells";2) returns 3</Example>
 	<Example>COUNTA(5) returns 1</Example>
 	<Related>COUNT</Related>
 	<Related>COUNTIF</Related>
@@ -1279,4 +1279,4 @@
 
   </Group>
 
-</KSpreadFunctions>
+</KCellsFunctions>

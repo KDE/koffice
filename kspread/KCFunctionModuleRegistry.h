@@ -24,7 +24,7 @@
 
 #include <KoGenericRegistry.h>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 #include "KCFunctionModule.h"
 
 /**
@@ -32,7 +32,7 @@
  * \ingroup KCValue
  * Registry for function modules.
  */
-class KSPREAD_EXPORT KCFunctionModuleRegistry : public QObject, public KoGenericRegistry<KCFunctionModule*>
+class KCELLS_EXPORT KCFunctionModuleRegistry : public QObject, public KoGenericRegistry<KCFunctionModule*>
 {
 public:
     /**

@@ -29,7 +29,7 @@
 #ifndef KSPREAD_CELL_TOOL_BASE_P
 #define KSPREAD_CELL_TOOL_BASE_P
 
-// KSpread
+// KCells
 #include "CellToolBase.h"
 
 // dialogs
@@ -117,7 +117,7 @@ public:
     /**
      * returns the rect that needs to be redrawn
      */
-    QRect moveDirection(KSpread::MoveTo direction, bool extendSelection);
+    QRect moveDirection(KCells::MoveTo direction, bool extendSelection);
 
     void paintSelection(QPainter &painter, const QRectF &viewRect);
 

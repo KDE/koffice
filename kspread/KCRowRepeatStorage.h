@@ -22,7 +22,7 @@
 #include <QMap>
 #include <QRect>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 
 /**
@@ -31,7 +31,7 @@
   * Current implementation doesn't have very optimal insertRows/removeRows functions, but the rest of
   * the methods are quite okay.
   */
-class KSPREAD_TEST_EXPORT KCRowRepeatStorage
+class KCELLS_TEST_EXPORT KCRowRepeatStorage
 {
 public:
     KCRowRepeatStorage();

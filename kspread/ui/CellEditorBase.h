@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright 1999-2006 The KSpread Team <koffice-devel@kde.org>
+   Copyright 1999-2006 The KCells Team <koffice-devel@kde.org>
    Copyright 2010 Marijn Kruisselbrink <m.kruisselbrink@student.tue.nl>
 
    This library is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@
 */
 #ifndef KSPREAD_CELLEDITORBASE_H
 #define KSPREAD_CELLEDITORBASE_H
-#include <kspread/kspread_export.h>
+#include <kcells_export.h>
 
 class QFont;
 class KoViewConverter;
@@ -27,7 +27,7 @@ class QString;
 class QWidget;
 
 
-class KSPREAD_EXPORT CellEditorBase
+class KCELLS_EXPORT CellEditorBase
 {
 public:
     CellEditorBase();

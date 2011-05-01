@@ -73,7 +73,7 @@ class KCValue;
  * storages in KCCellStorage. It provides methods to alter and retrieve this data
  * and methods related to loading and saving the contents.
  */
-class KSPREAD_EXPORT KCCell
+class KCELLS_EXPORT KCCell
 {
 public:
     /**

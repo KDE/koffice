@@ -6,17 +6,17 @@ an OpenDocument File using the ODFPY python module.
 
 The script could be used in two ways;
 
-    1. Embedded in KSpread by execution via the "Tools=>Scripts"
+    1. Embedded in KCells by execution via the "Tools=>Scripts"
        menu or from the "Tools=>Script Manager". In that case
-       the document currently loaded and displayed by KSpread
+       the document currently loaded and displayed by KCells
        will be exported.
 
     2. As standalone script by running;
 
             # make the script executable
-            chmod 755 `kde4-config --install data`/kspread/scripts/extensions/odfpyexport.py
+            chmod 755 `kde4-config --install data`/kcells/scripts/extensions/odfpyexport.py
             # run the script
-            `kde4-config --install data`/kspread/scripts/extensions/odfpyexport.py
+            `kde4-config --install data`/kcells/scripts/extensions/odfpyexport.py
 
        In that case the odfpyexport.py-script will use the with Kross
        distributed krossrunner commandline-application to execute the
@@ -26,7 +26,7 @@ The script could be used in two ways;
 
 (C)2007 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 Dual-licensed under LGPL v2+higher and the BSD license.
 """
 
@@ -43,8 +43,8 @@ except:
 class OdfExporter:
 
     class _OpenDocumentInterface_:
-        def __init__(self, kspread, doc):
-            self.kspread = kspread
+        def __init__(self, kcells, doc):
+            self.kcells = kcells
             self.doc = doc
 
         def getMaxColumn(self, ranges):
@@ -81,9 +81,9 @@ class OdfExporter:
         filtername = "OpenDocument Text"
         filtermask = "*.odt"
 
-        def __init__(self, kspread, exportSheets, writeOdfFile):
+        def __init__(self, kcells, exportSheets, writeOdfFile):
             import odf.opendocument, odf.style, odf.text
-            OdfExporter._OpenDocumentInterface_.__init__(self, kspread, odf.opendocument.OpenDocumentText())
+            OdfExporter._OpenDocumentInterface_.__init__(self, kcells, odf.opendocument.OpenDocumentText())
 
             # Create the heading style
             self.h1style = odf.style.KCStyle(name="Heading 1", family="paragraph")
@@ -98,7 +98,7 @@ class OdfExporter:
             # Process the sheets
             for sheetlist in exportSheets:
                 if sheetlist[1]: # if sheet is enabled for export
-                    sheet = kspread.sheetByName( sheetlist[0] )
+                    sheet = kcells.sheetByName( sheetlist[0] )
                     self.writeSheet(sheet, self.getRanges(sheet, sheetlist[2:]))
 
             # Finally write the document to a file
@@ -138,9 +138,9 @@ class OdfExporter:
         filtername = "OpenDocument Spreadsheet"
         filtermask = "*.ods"
 
-        def __init__(self, kspread, exportSheets, writeOdfFile):
+        def __init__(self, kcells, exportSheets, writeOdfFile):
             import odf.opendocument, odf.style, odf.table
-            OdfExporter._OpenDocumentInterface_.__init__(self, kspread, odf.opendocument.OpenDocumentSpreadsheet())
+            OdfExporter._OpenDocumentInterface_.__init__(self, kcells, odf.opendocument.OpenDocumentSpreadsheet())
 
             # Create a style for the table content
             self.tablestyle = odf.style.KCStyle(name="Table Contents", family="paragraph")
@@ -158,7 +158,7 @@ class OdfExporter:
             # Process the sheets
             for sheetlist in exportSheets:
                 if sheetlist[1]: # if sheet is enabled for export
-                    sheet = kspread.sheetByName( sheetlist[0] )
+                    sheet = kcells.sheetByName( sheetlist[0] )
                     self.writeSheet(sheet, self.getRanges(sheet, sheetlist[2:]))
 
             # Finally write the document to a file
@@ -193,30 +193,30 @@ class OdfExporter:
     #class OpenDocumentPresentation(_OpenDocumentInterface_):
         #filtername = "OpenDocument Presentation"
         #filtermask = "*.odp"
-        #def __init__(self, kspread, exportSheets, writeOdfFile):
+        #def __init__(self, kcells, exportSheets, writeOdfFile):
             #import odf.opendocument, odf.style
-            #_OpenDocumentInterface_.__init__(self, kspread, odf.opendocument.OpenDocumentPresentation())
+            #_OpenDocumentInterface_.__init__(self, kcells, odf.opendocument.OpenDocumentPresentation())
 
 class OdfPyExport:
 
     def __init__(self, scriptaction, readOdsFile = None, exportSheets = None, writeOdfFile = None, odfExporterClass = None):
         import os, sys, traceback, Kross
 
-        embeddedInKSpread = False
+        embeddedInKCells = False
         try:
-            import KSpread
-            self.kspread = KSpread
-            embeddedInKSpread = True
+            import KCells
+            self.kcells = KCells
+            embeddedInKCells = True
         except ImportError:
             try:
-                self.kspread = Kross.module("kspread")
+                self.kcells = Kross.module("kcells")
             except ImportError:
                 raise "Failed to import the Kross module. Please run this script with \"kross odtexport.py\""
 
         if readOdsFile:
-            if not self.kspread.openUrl(readOdsFile):
+            if not self.kcells.openUrl(readOdsFile):
                 raise "Failed to read OpenDocument Spreadsheet file \"%s\"." % readOdsFile
-        elif not embeddedInKSpread:
+        elif not embeddedInKCells:
             raise "No OpenDocument Spreadsheet file to read from defined."
 
         global OdfExporter
@@ -229,7 +229,7 @@ class OdfPyExport:
 
         self.scriptaction = scriptaction
 
-        if embeddedInKSpread or not exportSheets or not writeOdfFile:
+        if embeddedInKCells or not exportSheets or not writeOdfFile:
             forms = Kross.module("forms")
             dialog = forms.createDialog("OdfPy Export")
             dialog.setButtons("Ok|Cancel")
@@ -237,7 +237,7 @@ class OdfPyExport:
             try:
                 if not writeOdfFile:
                     savepage = dialog.addPage("Save","Save to OpenDocument File","document-save")
-                    self.savewidget = forms.createFileWidget(savepage, "kfiledialog:///kspreadodfpyexport")
+                    self.savewidget = forms.createFileWidget(savepage, "kfiledialog:///kcellsodfpyexport")
                     self.savewidget.setMode("Saving")
 
                     filters = []
@@ -250,7 +250,7 @@ class OdfPyExport:
 
                 if not exportSheets:
                     datapage = dialog.addPage("Sheets","Export Sheets","spreadsheet")
-                    self.sheetslistview = self.kspread.createSheetsListView(datapage)
+                    self.sheetslistview = self.kcells.createSheetsListView(datapage)
                     self.sheetslistview.setSelectionType("MultiSelect")
                     self.sheetslistview.setEditorType("Range")
 
@@ -271,7 +271,7 @@ class OdfPyExport:
 
         if exportSheets == None or len(exportSheets) < 1:
             exportSheets = []
-            for sheetname in self.kspread.sheetNames():
+            for sheetname in self.kcells.sheetNames():
                 exportSheets.append( [sheetname, True] )
 
         if not writeOdfFile:
@@ -286,11 +286,11 @@ class OdfPyExport:
                     raise "Failed to determinate the OdfExporter class for the file \"%s\"." % writeOdfFile
 
         print "OdfExporter: %s" % odfExporterClass
-        print "Read from OpenDocument File: %s" % self.kspread.document().url()
+        print "Read from OpenDocument File: %s" % self.kcells.document().url()
         print "Export Sheets: %s" % exportSheets
         print "Write to OpenDocument File: %s" % writeOdfFile
 
-        odfExporterClass(self.kspread, exportSheets, writeOdfFile)
+        odfExporterClass(self.kcells, exportSheets, writeOdfFile)
 
     def getOdfExporterClassForFile(self, filename):
         for f in self.exporterClasses:
@@ -305,7 +305,7 @@ class OdfPyExport:
 OdfPyExport(self)
 
 
-#readOdsFile = "/home/kde4/kspreaddocument.ods"
+#readOdsFile = "/home/kde4/kcellsdocument.ods"
 #exportSheets = [ ['Sheet1', 1, [1, 1, 4, 8]], ['Sheet2', 0] ]
 #writeOdfFile = "/home/kde4/testdoc2.odt"
 #odfExporterClass = OdfExporter.OpenDocumentText

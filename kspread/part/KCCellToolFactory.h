@@ -22,13 +22,13 @@
 
 #include <KoToolFactoryBase.h>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 
 /**
  * The KCFactory, that creates a KCCellTool.
  */
-class KSPREAD_EXPORT KCCellToolFactory : public KoToolFactoryBase
+class KCELLS_EXPORT KCCellToolFactory : public KoToolFactoryBase
 {
     Q_OBJECT
 public:

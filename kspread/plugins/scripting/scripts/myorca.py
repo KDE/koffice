@@ -1,6 +1,6 @@
 #!/usr/bin/env kross
 
-import urllib, Kross, KSpread
+import urllib, Kross, KCells
 
 class MyConfig:
 
@@ -27,7 +27,7 @@ class MyOrca:
     def isSpeaking(self):
         return self._send("isSpeaking")
 
-class MyKSpread:
+class MyKCells:
 
     def __init__(self, action, myorca):
         self.action = action
@@ -35,17 +35,17 @@ class MyKSpread:
         self.config = self.myorca.config
 
         def cleanUp(*args):
-            if hasattr(__main__,"_KSpreadOrca"):
-                getattr(__main__,"_KSpreadOrca").finalized()
+            if hasattr(__main__,"_KCellsOrca"):
+                getattr(__main__,"_KCellsOrca").finalized()
         self.action.connect("started(Kross::Action*)", cleanUp)
         self.action.connect("finalized(Kross::Action*)", cleanUp)
 
-        self._view = KSpread.view()
-        self._setSheet( KSpread.currentSheet() )
+        self._view = KCells.view()
+        self._setSheet( KCells.currentSheet() )
 
         def selectionChanged():
             print "Selection changed"
-            s = KSpread.currentSheet()
+            s = KCells.currentSheet()
             if s:
                 if s.sheetName() != self.sheetName:
                     self._setSheet(s)
@@ -66,8 +66,8 @@ class MyKSpread:
             print "FINALIZE!!!"
             self._listener.deleteLater()
             self._listener = None
-        if hasattr(__main__,"_KSpreadOrca"):
-            delattr(__main__,"_KSpreadOrca")
+        if hasattr(__main__,"_KCellsOrca"):
+            delattr(__main__,"_KCellsOrca")
         self.action = None
         self.myorca = None
         self.config = None
@@ -79,7 +79,7 @@ class MyKSpread:
         self.sheet = sheet
         self.sheetName = self.sheet.sheetName()
 
-        self._listener = KSpread.createListener(self.sheetName, self.config.sheetRange)
+        self._listener = KCells.createListener(self.sheetName, self.config.sheetRange)
         if not self._listener:
             raise "Failed to create listener"
         def cellChanged(column, row):
@@ -103,26 +103,26 @@ class MyKSpread:
         self.sheet.connect("hideChanged()", sheetHideChanged)
 
     def speakCellName(self):
-        sheet = KSpread.currentSheet()
-        (x1,y1,x2,y2) = KSpread.view().selection()
+        sheet = KCells.currentSheet()
+        (x1,y1,x2,y2) = KCells.view().selection()
         p1 = sheet.cellName(x1,y1)
         self.myorca.speak(p1)
 
     def speakCellValue(self):
-        sheet = KSpread.currentSheet()
-        (x1,y1,x2,y2) = KSpread.view().selection()
+        sheet = KCells.currentSheet()
+        (x1,y1,x2,y2) = KCells.view().selection()
         t = sheet.text(x1,y1)
         self.myorca.speak(t)
 
     def speakSheetName(self):
-        n = KSpread.view().sheet()
+        n = KCells.view().sheet()
         self.myorca.speak(n)
 
 class MyDialog:
-    def __init__(self, action, mykspread):
+    def __init__(self, action, mykcells):
         self.action = action
-        self.mykspread = mykspread
-        self.config = mykspread.config
+        self.mykcells = mykcells
+        self.config = mykcells.config
 
         forms = Kross.module("forms")
         self.dialog = forms.createDialog("Orca Screen Reader")
@@ -163,17 +163,17 @@ class MyDialog:
         self.sheetNameChanged.checked = self.config.sheetNameOnSheetChanged
         self.sheetNameChanged.connect("stateChanged(int)", self.optionChanged)
 
-        mykspread.__del__ = self.dialog.delayedDestruct
+        mykcells.__del__ = self.dialog.delayedDestruct
         self.dialog.show()
 
     def cellNameBtnClicked(self, *args):
-        self.mykspread.speakCellName()
+        self.mykcells.speakCellName()
 
     def cellValueBtnClicked(self, *args):
-        self.mykspread.speakCellValue()
+        self.mykcells.speakCellValue()
 
     def sheetNameBtnClicked(self, *args):
-        self.mykspread.speakSheetName()
+        self.mykcells.speakSheetName()
 
     def optionChanged(self, *args):
         self.config.cellNameOnSelectionChanged = self.cellNameCheckbox.checked
@@ -203,9 +203,9 @@ def start(action, myconfig, myorca):
                 return
             myconfig.url = urlEdit.text
 
-    mykspread = MyKSpread(action, myorca)
-    setattr(__main__,"_KSpreadOrca",mykspread)
-    MyDialog(self, mykspread)
+    mykcells = MyKCells(action, myorca)
+    setattr(__main__,"_KCellsOrca",mykcells)
+    MyDialog(self, mykcells)
 
 myconfig = MyConfig()
 myorca = MyOrca(myconfig)

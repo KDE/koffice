@@ -27,15 +27,15 @@ class KCMap;
 class KCSheet;
 
 /**
- * @brief Class that can be used by any shape embedded in KSpread to access sheet data,
- * without the need to link against KSpread. It is available through the KCDoc's data center map,
+ * @brief Class that can be used by any shape embedded in KCells to access sheet data,
+ * without the need to link against KCells. It is available through the KCDoc's data center map,
  * or KoShapeLoadingContext::dataCenterMap() in the process of loading a shape from ODF.
  *
  * Essentially, this model is a list of models to access a sheet's data. It contains a single row,
  * and has exactly one sheet model per column. In short, a model containing models.
  *
  * To allow name-based referencing of a sheet's data (e.g. in an ODF-conform cell region like "Table1.A1:B2")
- * each column's header contains the name of the sheet returned by KSpread::KCSheet::sheetName() .
+ * each column's header contains the name of the sheet returned by KCells::KCSheet::sheetName() .
  *
  * To access the QAbstractItemModel instance for a sheet's data, take the following code as example:
  * @code

@@ -21,7 +21,7 @@
 #define KSPREAD_FORMULA_STORAGE
 
 #include "KCFormula.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCPointStorage.h"
 
 /**

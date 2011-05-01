@@ -1,8 +1,8 @@
 #!/usr/bin/env kross
 
-import re, Kross, KSpread
+import re, Kross, KCells
 
-func = KSpread.function("PYREGEXP")
+func = KCells.function("PYREGEXP")
 func.minparam = 3
 func.maxparam = 3
 func.comment = "The PYREGEXP() function displays the current datetime."

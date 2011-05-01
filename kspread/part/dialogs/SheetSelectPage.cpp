@@ -26,7 +26,7 @@
 #include <kdebug.h>
 
 // KOffice includes
-// KSpread includes
+// KCells includes
 
 SheetSelectPage::SheetSelectPage(QWidget *parent)
         : QWidget(parent)

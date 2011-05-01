@@ -21,7 +21,7 @@
 #define KSPREAD_SELECTION_STRATEGY
 
 #include "AbstractSelectionStrategy.h"
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 
 /**
@@ -34,7 +34,7 @@
  *
  * \see AbstractSelectionStrategy
  */
-class KSPREAD_EXPORT SelectionStrategy : public AbstractSelectionStrategy
+class KCELLS_EXPORT SelectionStrategy : public AbstractSelectionStrategy
 {
 public:
     /**

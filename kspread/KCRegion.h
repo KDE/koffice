@@ -29,7 +29,7 @@
 
 #include <kdebug.h>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 inline uint qHash(const QPoint& point)
 {
@@ -46,7 +46,7 @@ class KCSheet;
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  * \since 1.5
  */
-class KSPREAD_EXPORT KCRegion
+class KCELLS_EXPORT KCRegion
 {
 public:
     class Element;
@@ -413,7 +413,7 @@ private:
 ****************************************************************************/
 /**
  * Base class for region elements, which can be points or ranges.
- * This class is used by KSpread::KCRegion and could not be used outside of it.
+ * This class is used by KCells::KCRegion and could not be used outside of it.
  *
  * Size:
  * m_sheet: 4 bytes
@@ -499,7 +499,7 @@ protected:
 
 /**
  * A point in a region.
- * This class is used by KSpread::KCRegion and could not be used outside of it.
+ * This class is used by KCells::KCRegion and could not be used outside of it.
  *
  * Size:
  * m_sheet: 4 bytes
@@ -582,7 +582,7 @@ private:
 
 /**
  * A range in a region.
- * This class is used by KSpread::KCRegion and could not be used outside of it.
+ * This class is used by KCells::KCRegion and could not be used outside of it.
  *
  * Size:
  * m_sheet: 4 bytes

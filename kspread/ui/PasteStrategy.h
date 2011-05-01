@@ -21,7 +21,7 @@
 #define KSPREAD_PASTE_STRATEGY
 
 #include "SelectionStrategy.h"
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 
 /**
@@ -31,7 +31,7 @@
  *
  * \see QClipboard::Selection
  */
-class KSPREAD_EXPORT PasteStrategy : public SelectionStrategy
+class KCELLS_EXPORT PasteStrategy : public SelectionStrategy
 {
 public:
     /**

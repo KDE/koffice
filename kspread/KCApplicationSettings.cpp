@@ -25,8 +25,8 @@ public:
     QColor gridColor;
     QColor pageBorderColor;
     KGlobalSettings::Completion completionMode;
-    KSpread::MoveTo moveTo;
-    KSpread::MethodOfCalc calcMethod;
+    KCells::MoveTo moveTo;
+    KCells::MethodOfCalc calcMethod;
     double indentValue;
     bool verticalScrollBar      : 1;
     bool horizontalScrollBar    : 1;
@@ -43,8 +43,8 @@ KCApplicationSettings::KCApplicationSettings()
     d->gridColor = Qt::lightGray;
     d->pageBorderColor = Qt::red;
     d->completionMode = KGlobalSettings::CompletionAuto;
-    d->moveTo = KSpread::Bottom;
-    d->calcMethod = KSpread::SumOfNumber;
+    d->moveTo = KCells::Bottom;
+    d->calcMethod = KCells::SumOfNumber;
     d->indentValue = 10.0;
     d->verticalScrollBar = true;
     d->horizontalScrollBar = true;
@@ -158,22 +158,22 @@ bool KCApplicationSettings::showTabBar()const
     return d->showTabBar;
 }
 
-KSpread::MoveTo KCApplicationSettings::moveToValue() const
+KCells::MoveTo KCApplicationSettings::moveToValue() const
 {
     return d->moveTo;
 }
 
-void KCApplicationSettings::setMoveToValue(KSpread::MoveTo moveTo)
+void KCApplicationSettings::setMoveToValue(KCells::MoveTo moveTo)
 {
     d->moveTo = moveTo;
 }
 
-void KCApplicationSettings::setTypeOfCalc(KSpread::MethodOfCalc calc)
+void KCApplicationSettings::setTypeOfCalc(KCells::MethodOfCalc calc)
 {
     d->calcMethod = calc;
 }
 
-KSpread::MethodOfCalc KCApplicationSettings::getTypeOfCalc() const
+KCells::MethodOfCalc KCApplicationSettings::getTypeOfCalc() const
 {
     return d->calcMethod;
 }

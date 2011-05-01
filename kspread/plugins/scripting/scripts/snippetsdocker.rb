@@ -1,10 +1,10 @@
-# KSpread docker script written in Ruby and using QtRuby.
+# KCells docker script written in Ruby and using QtRuby.
 #
 # (C)2007 Sebastian Sauer <mail@dipe.org>
 # Licensed under LGPLv2+
 
 require 'Kross'
-require 'KSpread'
+require 'KCells'
 require 'KoDocker'
 
 require 'Qt'

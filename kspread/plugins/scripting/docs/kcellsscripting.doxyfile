@@ -2,7 +2,7 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 
-PROJECT_NAME           = KSpread Scripting
+PROJECT_NAME           = KCells Scripting
 PROJECT_NUMBER         = 1.0.
 OUTPUT_DIRECTORY       = .
 CREATE_SUBDIRS         = NO
@@ -177,7 +177,7 @@ EXPAND_AS_DEFINED      =
 SKIP_FUNCTION_MACROS   = YES
 
 TAGFILES               =
-GENERATE_TAGFILE       = kspreadscripting.tag
+GENERATE_TAGFILE       = kcellsscripting.tag
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = NO
 PERL_PATH              = /usr/bin/perl

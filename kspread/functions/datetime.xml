@@ -1,5 +1,5 @@
-<!DOCTYPE KSpreadFunctions>
-<KSpreadFunctions>
+<!DOCTYPE KCellsFunctions>
+<KCellsFunctions>
 
   <Group>
     <GroupName>Date &amp; Time</GroupName>
@@ -741,4 +741,4 @@
 
   </Group>
 
-</KSpreadFunctions>
+</KCellsFunctions>

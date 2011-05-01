@@ -23,7 +23,7 @@
 #include <qdom.h>
 
 KCLocalization::KCLocalization()
-        : KLocale("kspread")
+        : KLocale("kcells")
 {
     insertCatalog("koffice");
 }
@@ -98,7 +98,7 @@ QDomElement KCLocalization::save(QDomDocument& doc) const
 
 void KCLocalization::defaultSystemConfig()
 {
-    KLocale locale("kspread");
+    KLocale locale("kcells");
     setWeekStartDay(locale.weekStartDay());
     setDecimalSymbol(locale.decimalSymbol());
     setThousandsSeparator(locale.thousandsSeparator());

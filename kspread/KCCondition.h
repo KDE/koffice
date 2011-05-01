@@ -1,7 +1,7 @@
 /* This file is part of the KDE project
    Copyright 2010 Marijn Kruisselbrink <m.kruisselbrink@student.tue.nl>
    Copyright 1998, 1999 Torben Weis <weis@kde.org>
-   Copyright 1999- 2006 The KSpread Team <koffice-devel@kde.org>
+   Copyright 1999- 2006 The KCells Team <koffice-devel@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -30,7 +30,7 @@
 #include <QSharedData>
 #include <QVariant>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 #include <KoXmlReader.h>
 
 class QColor;
@@ -50,7 +50,7 @@ class KCValueParser;
  * Holds the actual condition and the applicable style for conditional
  * KCCell formattings.
  */
-class KSPREAD_EXPORT KCConditional
+class KCELLS_EXPORT KCConditional
 {
 public:
     enum Type { None, Equal, Superior, Inferior, SuperiorEqual,
@@ -79,7 +79,7 @@ uint qHash(const KCConditional& condition);
  * \ingroup KCStyle
  * Manages a set of conditions for a cell.
  */
-class KSPREAD_EXPORT KCConditions
+class KCELLS_EXPORT KCConditions
 {
 public:
     /**

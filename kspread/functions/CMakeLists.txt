@@ -3,104 +3,104 @@ include_directories(${CMAKE_SOURCE_DIR}/kspread ${KOMAIN_INCLUDES} ${FLAKE_INCLU
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadbitopsmodule bitops.cpp)
-target_link_libraries(kspreadbitopsmodule kspreadcommon)
-install(TARGETS kspreadbitopsmodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadbitopsmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES bitops.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellsbitopsmodule bitops.cpp)
+target_link_libraries(kcellsbitopsmodule kcellscommon)
+install(TARGETS kcellsbitopsmodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellsbitopsmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES bitops.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadconversionmodule conversion.cpp)
-target_link_libraries(kspreadconversionmodule kspreadcommon)
-install(TARGETS kspreadconversionmodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadconversionmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES conversion.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellsconversionmodule conversion.cpp)
+target_link_libraries(kcellsconversionmodule kcellscommon)
+install(TARGETS kcellsconversionmodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellsconversionmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES conversion.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreaddatabasemodule database.cpp)
-target_link_libraries(kspreaddatabasemodule kspreadcommon)
-install(TARGETS kspreaddatabasemodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreaddatabasemodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES database.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellsdatabasemodule database.cpp)
+target_link_libraries(kcellsdatabasemodule kcellscommon)
+install(TARGETS kcellsdatabasemodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellsdatabasemodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES database.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreaddatetimemodule datetime.cpp)
-target_link_libraries(kspreaddatetimemodule kspreadcommon)
-install(TARGETS kspreaddatetimemodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreaddatetimemodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES datetime.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellsdatetimemodule datetime.cpp)
+target_link_libraries(kcellsdatetimemodule kcellscommon)
+install(TARGETS kcellsdatetimemodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellsdatetimemodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES datetime.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadengineeringmodule engineering.cpp)
-target_link_libraries(kspreadengineeringmodule kspreadcommon)
-install(TARGETS kspreadengineeringmodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadengineeringmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES engineering.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellsengineeringmodule engineering.cpp)
+target_link_libraries(kcellsengineeringmodule kcellscommon)
+install(TARGETS kcellsengineeringmodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellsengineeringmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES engineering.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadfinancialmodule financial.cpp)
-target_link_libraries(kspreadfinancialmodule kspreadcommon)
-install(TARGETS kspreadfinancialmodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadfinancialmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES financial.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellsfinancialmodule financial.cpp)
+target_link_libraries(kcellsfinancialmodule kcellscommon)
+install(TARGETS kcellsfinancialmodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellsfinancialmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES financial.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadinformationmodule information.cpp)
-target_link_libraries(kspreadinformationmodule kspreadcommon)
-install(TARGETS kspreadinformationmodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadinformationmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES information.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellsinformationmodule information.cpp)
+target_link_libraries(kcellsinformationmodule kcellscommon)
+install(TARGETS kcellsinformationmodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellsinformationmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES information.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadlogicmodule logic.cpp)
-target_link_libraries(kspreadlogicmodule kspreadcommon)
-install(TARGETS kspreadlogicmodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadlogicmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES logic.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellslogicmodule logic.cpp)
+target_link_libraries(kcellslogicmodule kcellscommon)
+install(TARGETS kcellslogicmodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellslogicmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES logic.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadmathmodule math.cpp)
-target_link_libraries(kspreadmathmodule kspreadcommon)
-install(TARGETS kspreadmathmodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadmathmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES math.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellsmathmodule math.cpp)
+target_link_libraries(kcellsmathmodule kcellscommon)
+install(TARGETS kcellsmathmodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellsmathmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES math.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadreferencemodule reference.cpp)
-target_link_libraries(kspreadreferencemodule kspreadcommon)
-install(TARGETS kspreadreferencemodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadreferencemodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES reference.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellsreferencemodule reference.cpp)
+target_link_libraries(kcellsreferencemodule kcellscommon)
+install(TARGETS kcellsreferencemodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellsreferencemodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES reference.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadstatisticalmodule statistical.cpp)
-target_link_libraries(kspreadstatisticalmodule kspreadcommon)
-install(TARGETS kspreadstatisticalmodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadstatisticalmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES statistical.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellsstatisticalmodule statistical.cpp)
+target_link_libraries(kcellsstatisticalmodule kcellscommon)
+install(TARGETS kcellsstatisticalmodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellsstatisticalmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES statistical.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadtextmodule text.cpp)
-target_link_libraries(kspreadtextmodule kspreadcommon)
-install(TARGETS kspreadtextmodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadtextmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES text.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellstextmodule text.cpp)
+target_link_libraries(kcellstextmodule kcellscommon)
+install(TARGETS kcellstextmodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellstextmodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES text.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)
 
 ########### next target ###############
 
-kde4_add_plugin(kspreadtrigonometrymodule trig.cpp)
-target_link_libraries(kspreadtrigonometrymodule kspreadcommon)
-install(TARGETS kspreadtrigonometrymodule DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES kspreadtrigonometrymodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(FILES trig.xml DESTINATION ${DATA_INSTALL_DIR}/kspread/functions)
+kde4_add_plugin(kcellstrigonometrymodule trig.cpp)
+target_link_libraries(kcellstrigonometrymodule kcellscommon)
+install(TARGETS kcellstrigonometrymodule DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES kcellstrigonometrymodule.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES trig.xml DESTINATION ${DATA_INSTALL_DIR}/kcells/functions)

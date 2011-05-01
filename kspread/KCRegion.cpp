@@ -26,7 +26,7 @@
 #include <kdebug.h>
 
 #include "KCCell.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCMap.h"
 #include "KCNamedAreaManager.h"
 #include "KCSheet.h"
@@ -785,7 +785,7 @@ QString KCRegion::loadOdf(const QString& expression)
     bool isRange = false;
     enum { Start, InQuotes } state = Start;
     int i = 0;
-    // NOTE Stefan: As long as KSpread does not support fixed sheets eat the dollar sign.
+    // NOTE Stefan: As long as KCells does not support fixed sheets eat the dollar sign.
     if (expression[i] == '$')
         ++i;
     while (i < expression.count()) {
@@ -806,7 +806,7 @@ QString KCRegion::loadOdf(const QString& expression)
                 result.append(temp);
                 result.append(':');
                 temp.clear();
-                // NOTE Stefan: As long as KSpread does not support fixed sheets eat the dollar sign.
+                // NOTE Stefan: As long as KCells does not support fixed sheets eat the dollar sign.
                 if (i + 2 < expression.count() && expression[i+1] == '$' && expression[i+2] != '.')
                     ++i;
             } else if (expression[i] == ' ') { // range separator
@@ -1059,7 +1059,7 @@ KCRegion::Point::Point(const QString& string)
 
     //get the column number for the character between actual position and the first non text charakter
     if (result != -1)
-        x = KSpread::decodeColumnLabelText(string.mid(p, result - p));     // x is defined now
+        x = KCells::decodeColumnLabelText(string.mid(p, result - p));     // x is defined now
     else  // If there isn't any, then this is not a point -> return
         return;
     p = result;

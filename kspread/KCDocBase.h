@@ -33,7 +33,7 @@
 
 #include <KoDocument.h>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class KoOasisSettings;
 class KoResourceManager;
@@ -42,7 +42,7 @@ class KCMap;
 class KCSheet;
 class KCSheetAccessModel;
 
-class KSPREAD_EXPORT KCDocBase : public KoDocument
+class KCELLS_EXPORT KCDocBase : public KoDocument
 {
     Q_OBJECT
 public:

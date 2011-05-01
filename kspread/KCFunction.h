@@ -29,7 +29,7 @@
 
 #include "KCRegion.h"
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QDomElement;
 
@@ -64,7 +64,7 @@ typedef KCValue(*FunctionPtr)(valVector, KCValueCalc *, FuncExtra *);
  * \ingroup KCValue
  * A function pointer and context.
  */
-class KSPREAD_EXPORT KCFunction
+class KCELLS_EXPORT KCFunction
 {
 public:
     KCFunction(const QString& name, FunctionPtr ptr);

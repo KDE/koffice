@@ -38,7 +38,7 @@
 #include <QPointF>
 #include <KoView.h>
 #include <KoZoomMode.h>
-#include <kspread/kspread_export.h>
+#include <kspread/kcells_export.h>
 
 class QAction;
 class QKeyEvent;
@@ -64,7 +64,7 @@ class KCTabBar;
 
 /**
  * @class KCView
- * @brief The KCView class displays a KSpread document.
+ * @brief The KCView class displays a KCells document.
  * KCView is used to display a spreadsheet document and provide
  * the interface for the user to perform editing and data analysis.
  *
@@ -77,7 +77,7 @@ class KCTabBar;
  *  \li tab bar to select active worksheet
  *  \li status bar to show status messages
  */
-class KSPREAD_EXPORT KCView : public KoView
+class KCELLS_EXPORT KCView : public KoView
 {
     Q_OBJECT
 

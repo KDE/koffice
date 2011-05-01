@@ -31,8 +31,8 @@
 // KDE
 #include <klocale.h>
 
-// KSpread
-#include "kspread_limits.h"
+// KCells
+#include "kcells_limits.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "ui/Selection.h"

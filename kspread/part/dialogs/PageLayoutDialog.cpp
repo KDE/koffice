@@ -19,7 +19,7 @@
 
 #include "PageLayoutDialog.h"
 
-// KSpread
+// KCells
 #include "part/KCDoc.h"
 #include "KCMap.h"
 #include "KCPrintSettings.h"
@@ -185,8 +185,8 @@ void PageLayoutDialog::accept()
     // Set the repeated columns.
     if (d->sheetPage.columnsCheckBox->isChecked()) {
         // TODO Stefan: Check if width of repeated columns exceeds page width.
-        const int startColumn = KSpread::decodeColumnLabelText(d->sheetPage.startColumnComboBox->currentText());
-        const int endColumn = KSpread::decodeColumnLabelText(d->sheetPage.endColumnComboBox->currentText());
+        const int startColumn = KCells::decodeColumnLabelText(d->sheetPage.startColumnComboBox->currentText());
+        const int endColumn = KCells::decodeColumnLabelText(d->sheetPage.endColumnComboBox->currentText());
         settings.setRepeatedColumns(qMakePair(qMin(startColumn, endColumn), qMax(startColumn, endColumn)));
     } else
         settings.setRepeatedColumns(QPair<int, int>());

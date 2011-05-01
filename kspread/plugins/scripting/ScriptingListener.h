@@ -1,5 +1,5 @@
 /*
- * This file is part of KSpread
+ * This file is part of KCells
  *
  * Copyright (c) 2007 Sebastian Sauer <mail@dipe.org>
  *
@@ -36,8 +36,8 @@ class KCRegion;
 * Python sample script that creates a listener for the range of cells
 * A1:F50 within the sheet Sheet1.
 * \code
-* import Kross, KSpread
-* listener = KSpread.createListener("Sheet1", "A1:F50")
+* import Kross, KCells
+* listener = KCells.createListener("Sheet1", "A1:F50")
 * if not listener:
 *     raise "Failed to create listener."
 * def regionChanged(regions):

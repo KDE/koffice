@@ -45,7 +45,7 @@
 
 #include "AutoFillStrategy.h"
 #include "KCCell.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCMap.h"
 #include "MergeStrategy.h"
 #include "Selection.h"

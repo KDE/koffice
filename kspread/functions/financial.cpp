@@ -41,7 +41,7 @@
 
 #include <math.h>
 
-using namespace KSpread;
+using namespace KCells;
 
 // prototypes (sorted)
 KCValue func_accrint(valVector args, KCValueCalc *calc, FuncExtra *);
@@ -109,7 +109,7 @@ KCValue func_yieldmat(valVector args, KCValueCalc *calc, FuncExtra *);
 KCValue func_zero_coupon(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
-KSPREAD_EXPORT_FUNCTION_MODULE("financial", FinancialModule)
+KCELLS_EXPORT_FUNCTION_MODULE("financial", FinancialModule)
 
 
 FinancialModule::FinancialModule(QObject* parent, const QVariantList&)
@@ -203,7 +203,7 @@ FinancialModule::FinancialModule(QObject* parent, const QVariantList&)
     f = new KCFunction("EFFECTIVE", func_effective);
     f->setParamCount(2);
     add(f);
-    f = new KCFunction("EURO", func_euro);   // KSpread-specific, Gnumeric-compatible
+    f = new KCFunction("EURO", func_euro);   // KCells-specific, Gnumeric-compatible
     f->setParamCount(1);
     add(f);
     f = new KCFunction("EUROCONVERT", func_euroconvert);

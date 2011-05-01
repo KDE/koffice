@@ -1,5 +1,5 @@
-<!DOCTYPE KSpreadFunctions>
-<KSpreadFunctions>
+<!DOCTYPE KCellsFunctions>
+<KCellsFunctions>
 
   <Group>
     <GroupName>Text</GroupName>
@@ -129,7 +129,7 @@
 	<Text>The TEXT() function converts a value to text.</Text>
 	<Syntax>TEXT(value)</Syntax>
 	<Example>TEXT(1234.56) returns "1234.56"</Example>
-	<Example>TEXT("KSpread") returns "KSpread"</Example>
+	<Example>TEXT("KCells") returns "KCells"</Example>
       </Help>
     </Function>
 
@@ -167,7 +167,7 @@
 	<Syntax>COMPARE(string1; string2; true|false)</Syntax>
 	<Example>COMPARE("KOffice"; "KOffice"; true) returns 0</Example>
         <Example>COMPARE("koffice"; "KOffice"; true) returns 1</Example>
-        <Example>COMPARE("kspread"; "KOffice"; false) returns 1</Example>
+        <Example>COMPARE("kcells"; "KOffice"; false) returns 1</Example>
         <Related>EXACT</Related>
       </Help>
     </Function>
@@ -187,7 +187,7 @@
 	<Text>The EXACT() function returns True if these two strings are equal. Otherwise, it returns False.</Text>
 	<Syntax>EXACT(string1;string2)</Syntax>
 	<Example>EXACT("KOffice";"KOffice") returns True</Example>
-        <Example>EXACT("KSpread";"KOffice") returns False</Example>
+        <Example>EXACT("KCells";"KOffice") returns False</Example>
         <Related>COMPARE</Related>
       </Help>
     </Function>
@@ -243,7 +243,7 @@
 	<Syntax>FIND(find_text;within_text;start_num)</Syntax>
 	<Example>FIND("KOf";"KOffice") returns 1</Example>
 	<Example>FIND("i";"KOffice") returns 5</Example>
-	<Example>FIND("K";"KSpread in KOffice";4) returns 12</Example>
+	<Example>FIND("K";"KCells in KOffice";4) returns 12</Example>
         <Related>SEARCH</Related>
         <Related>REPLACE</Related>
       </Help>
@@ -286,7 +286,7 @@
 	<Text>The LEN() function returns the length of the string.</Text>
 	<Syntax>LEN(text)</Syntax>
 	<Example>LEN("hello") returns 5</Example>
-	<Example>LEN("KSpread") returns 7</Example>
+	<Example>LEN("KCells") returns 7</Example>
       </Help>
     </Function>
 
@@ -300,7 +300,7 @@
       <Help>
 	<Text>The TRIM() function returns text with only single spaces between words.</Text>
 	<Syntax>TRIM(text)</Syntax>
-	<Example>TRIM(" hello    KSpread   ") returns "hello KSpread"</Example>
+	<Example>TRIM(" hello    KCells   ") returns "hello KCells"</Example>
       </Help>
     </Function>
 
@@ -330,7 +330,7 @@
       <Help>
 	<Text>The CONCATENATE() function returns a string which is the concatenation of the strings passed as parameters.</Text>
 	<Syntax>CONCATENATE(value;value;...)</Syntax>
-	<Example>CONCATENATE("KSpread";"KOffice";"KDE") returns "KSpreadKOfficeKDE"</Example>
+	<Example>CONCATENATE("KCells";"KOffice";"KDE") returns "KCellsKOfficeKDE"</Example>
       </Help>
     </Function>
 
@@ -349,8 +349,8 @@
 	<Text>The RIGHT() function returns a substring that contains the 'length' rightmost characters of the string. The whole string is returned if 'length' exceeds the length of the string.</Text>
 	<Syntax>RIGHT(text;length)</Syntax>
 	<Example>RIGHT("hello";2) returns "lo"</Example>
-	<Example>RIGHT("KSpread";10) returns "KSpread"</Example>
-	<Example>RIGHT("KSpread") returns "d"</Example>
+	<Example>RIGHT("KCells";10) returns "KCells"</Example>
+	<Example>RIGHT("KCells") returns "d"</Example>
         <Related>LEFT</Related>
         <Related>MID</Related>
       </Help>
@@ -371,8 +371,8 @@
 	<Text>The LEFT() function returns a substring that contains the 'length' leftmost characters of the string. The whole string is returned if 'length' exceeds the length of the string. It is an error for the number of characters to be less than 0.</Text>
 	<Syntax>LEFT(text;length)</Syntax>
 	<Example>LEFT("hello";2) returns "he"</Example>
-	<Example>LEFT("KSpread";10) returns "KSpread"</Example>
-	<Example>LEFT("KSpread") returns "K"</Example>
+	<Example>LEFT("KCells";10) returns "KCells"</Example>
+	<Example>LEFT("KCells") returns "K"</Example>
         <Related>RIGHT</Related>
         <Related>MID</Related>
       </Help>
@@ -392,8 +392,8 @@
       <Help>
 	<Text>The REPT() function repeats the first parameter as many times as by the second parameter. The second parameter must not be negative, and this function will return an empty string if the second parameter is zero (or rounds down to zero).</Text>
 	<Syntax>REPT(text;count)</Syntax>
-	<Example>REPT("KSpread";3) returns "KSpreadKSpreadKSpread"</Example>
-	<Example>REPT("KSpread";0) returns ""</Example>
+	<Example>REPT("KCells";3) returns "KCellsKCellsKCells"</Example>
+	<Example>REPT("KCells";0) returns ""</Example>
       </Help>
     </Function>
 
@@ -408,8 +408,8 @@
 	<Text>The ROT13() function encrypts text by replacing each letter with the one 13 places along in the alphabet. If the 13th position is beyond the letter Z, it begins again at A (rotation).</Text>
         <Text>By applying the encryption function again to the resulting text, you can decrypt the text.</Text>
 	<Syntax>ROT13(Text)</Syntax>
-	<Example>ROT13("KSpread") returns "XFcernq"</Example>
-	<Example>ROT13("XFcernq") returns "KSpread"</Example>
+	<Example>ROT13("KCells") returns "XFcernq"</Example>
+	<Example>ROT13("XFcernq") returns "KCells"</Example>
       </Help>
     </Function>
 
@@ -665,4 +665,4 @@
 
   </Group>
 
-</KSpreadFunctions>
+</KCellsFunctions>

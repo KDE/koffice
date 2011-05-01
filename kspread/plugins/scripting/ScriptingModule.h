@@ -1,5 +1,5 @@
 /*
- * This file is part of KSpread
+ * This file is part of KCells
  *
  * Copyright (c) 2005 Cyrille Berger <cberger@cberger.net>
  * Copyright (c) 2006 Isaac Clerencia <isaac@warp.es>
@@ -35,7 +35,7 @@ class ViewAdaptor;
 class SheetAdaptor;
 
 /**
-* The ScriptingModule class enables access to the KSpread
+* The ScriptingModule class enables access to the KCells
 * functionality from within the scripting backends.
 */
 class ScriptingModule : public KoScriptingModule
@@ -58,20 +58,20 @@ public:
     /**
     * \return The \a KCView instance this module provides access to or
     * NULL if this module just doesn't know anything about a view. This can
-    * be for example the case if the KSpread scripting functionality is used
-    * without running a KSpread instance.
+    * be for example the case if the KCells scripting functionality is used
+    * without running a KCells instance.
     */
-    KCView* kspreadView();
+    KCView* kcellsView();
 
     /**
     * \return The \a KCDoc instance that provides access to a
     * document. This method always returns a valid \a KCDoc instance.
     */
-    KCDoc* kspreadDoc();
+    KCDoc* kcellsDoc();
 
     /**
     * \return The \a KoDocument instance that provides access to a
-    * document. This method is essential the same as the kspreadDoc()
+    * document. This method is essential the same as the kcellsDoc()
     * method above since a \a KCDoc just extends a \a KoDocument .
     *
     * This method overwrites the one from the \a KoScriptingModule class
@@ -89,7 +89,7 @@ public slots:
     /**
     * Returns the \a ViewAdaptor object in which the document is
     * displayed. Such a ViewAdaptor is only available if the script runs
-    * embedded in a running KSpread instance. If the script runs for example
+    * embedded in a running KCells instance. If the script runs for example
     * from within the commandline by using the kross-application there is no
     * KCView and therefore no ViewAdaptor and this method returns NULL.
     */
@@ -122,7 +122,7 @@ public slots:
 
     /**
     * Returns the \a ScriptingFunction object with the identifier \p name . The
-    * \a ScriptingFunction provides access to the KSpread formula function
+    * \a ScriptingFunction provides access to the KCells formula function
     * functionality. If there is no \a ScriptingFunction known yet with the
     * identifier \p name then a new one is created, remembered and returned.
     */
@@ -166,13 +166,13 @@ public slots:
 
     /**
     * Create and return a new \a ScriptingReader object that provides us an
-    * abstract high-level API to read content from KSpread sheets.
+    * abstract high-level API to read content from KCells sheets.
     */
     QObject* reader();
 
     /**
     * Create and return a new \a ScriptingWriter object that provides us an
-    * abstract high-level API to write content to KSpread sheets.
+    * abstract high-level API to write content to KCells sheets.
     */
     QObject* writer();
 

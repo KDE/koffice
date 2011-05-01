@@ -43,7 +43,7 @@
 #include "CellToolBase_p.h"
 #include "CellToolBase.h"
 
-// KSpread
+// KCells
 #include "KCApplicationSettings.h"
 #include "KCCalculationSettings.h"
 #include "KCCellStorage.h"
@@ -203,28 +203,28 @@ void CellToolBase::Private::processEnterKey(QKeyEvent* event)
     /* use the configuration setting to see which direction we're supposed to move
         when enter is pressed.
     */
-    KSpread::MoveTo direction = q->selection()->activeSheet()->map()->settings()->moveToValue();
+    KCells::MoveTo direction = q->selection()->activeSheet()->map()->settings()->moveToValue();
 
 //if shift Button clicked inverse move direction
     if (event->modifiers() & Qt::ShiftModifier) {
         switch (direction) {
-        case KSpread::Bottom:
-            direction = KSpread::Top;
+        case KCells::Bottom:
+            direction = KCells::Top;
             break;
-        case KSpread::Top:
-            direction = KSpread::Bottom;
+        case KCells::Top:
+            direction = KCells::Bottom;
             break;
-        case KSpread::Left:
-            direction = KSpread::Right;
+        case KCells::Left:
+            direction = KCells::Right;
             break;
-        case KSpread::Right:
-            direction = KSpread::Left;
+        case KCells::Right:
+            direction = KCells::Left;
             break;
-        case KSpread::BottomFirst:
-            direction = KSpread::BottomFirst;
+        case KCells::BottomFirst:
+            direction = KCells::BottomFirst;
             break;
-        case KSpread::NoMovement:
-            direction = KSpread::NoMovement;
+        case KCells::NoMovement:
+            direction = KCells::NoMovement;
             break;
         }
     }
@@ -248,34 +248,34 @@ void CellToolBase::Private::processArrowKey(QKeyEvent *event)
     /* save changes to the current editor */
     q->selection()->emitCloseEditor(true);
 
-    KSpread::MoveTo direction = KSpread::Bottom;
+    KCells::MoveTo direction = KCells::Bottom;
     bool makingSelection = event->modifiers() & Qt::ShiftModifier;
 
     switch (event->key()) {
     case Qt::Key_Down:
-        direction = KSpread::Bottom;
+        direction = KCells::Bottom;
         break;
     case Qt::Key_Up:
-        direction = KSpread::Top;
+        direction = KCells::Top;
         break;
     case Qt::Key_Left:
         if (sheet->layoutDirection() == Qt::RightToLeft)
-            direction = KSpread::Right;
+            direction = KCells::Right;
         else
-            direction = KSpread::Left;
+            direction = KCells::Left;
         break;
     case Qt::Key_Right:
         if (sheet->layoutDirection() == Qt::RightToLeft)
-            direction = KSpread::Left;
+            direction = KCells::Left;
         else
-            direction = KSpread::Right;
+            direction = KCells::Right;
         break;
     case Qt::Key_Tab:
-        direction = KSpread::Right;
+        direction = KCells::Right;
         break;
     case Qt::Key_Backtab:
         //Shift+Tab moves to the left
-        direction = KSpread::Left;
+        direction = KCells::Left;
         makingSelection = false;
         break;
     default:
@@ -790,7 +790,7 @@ bool CellToolBase::Private::formatKeyPress(QKeyEvent * _ev)
     return true;
 }
 
-QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool extendSelection)
+QRect CellToolBase::Private::moveDirection(KCells::MoveTo direction, bool extendSelection)
 {
     kDebug(36005) << "KCCanvas::moveDirection";
 
@@ -822,7 +822,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
 
             NEVER use cell.column() or cell.row() -- it might be a default cell
         */
-    case KSpread::Bottom:
+    case KCells::Bottom:
         offset = cell.mergedYCells() - (cursor.y() - cellCorner.y()) + 1;
         rl = sheet->rowFormat(cursor.y() + offset);
         while (((cursor.y() + offset) <= q->maxRow()) && rl->isHiddenOrFiltered()) {
@@ -832,7 +832,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
 
         destination = QPoint(cursor.x(), qMin(cursor.y() + offset, q->maxRow()));
         break;
-    case KSpread::Top:
+    case KCells::Top:
         offset = (cellCorner.y() - cursor.y()) - 1;
         rl = sheet->rowFormat(cursor.y() + offset);
         while (((cursor.y() + offset) >= 1) && rl->isHiddenOrFiltered()) {
@@ -841,7 +841,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
         }
         destination = QPoint(cursor.x(), qMax(cursor.y() + offset, 1));
         break;
-    case KSpread::Left:
+    case KCells::Left:
         offset = (cellCorner.x() - cursor.x()) - 1;
         cl = sheet->columnFormat(cursor.x() + offset);
         while (((cursor.x() + offset) >= 1) && cl->isHiddenOrFiltered()) {
@@ -850,7 +850,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
         }
         destination = QPoint(qMax(cursor.x() + offset, 1), cursor.y());
         break;
-    case KSpread::Right:
+    case KCells::Right:
         offset = cell.mergedXCells() - (cursor.x() - cellCorner.x()) + 1;
         cl = sheet->columnFormat(cursor.x() + offset);
         while (((cursor.x() + offset) <= q->maxCol()) && cl->isHiddenOrFiltered()) {
@@ -859,7 +859,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
         }
         destination = QPoint(qMin(cursor.x() + offset, q->maxCol()), cursor.y());
         break;
-    case KSpread::BottomFirst:
+    case KCells::BottomFirst:
         offset = cell.mergedYCells() - (cursor.y() - cellCorner.y()) + 1;
         rl = sheet->rowFormat(cursor.y() + offset);
         while (((cursor.y() + offset) <= q->maxRow()) && rl->isHiddenOrFiltered()) {
@@ -869,7 +869,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
 
         destination = QPoint(1, qMin(cursor.y() + offset, q->maxRow()));
         break;
-    case KSpread::NoMovement:
+    case KCells::NoMovement:
         destination = cursor;
         break;
     }

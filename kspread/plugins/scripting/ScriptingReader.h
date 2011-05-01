@@ -1,5 +1,5 @@
 /*
- * This file is part of KSpread
+ * This file is part of KCells
  *
  * Copyright (c) 2007 Sebastian Sauer <mail@dipe.org>
  *
@@ -36,16 +36,16 @@
 
 /**
 * The ScriptingReader class provides abstract high-level functionality to read
-* content from KSpread sheets.
+* content from KCells sheets.
 *
 * The following python sample demonstrates how to use the ScriptingReader to
-* read content from KSpread.
+* read content from KCells.
 * \code
-* # Import the KSpread module
-* import KSpread
+* # Import the KCells module
+* import KCells
 *
 * # Create a ScriptingReader object
-* reader = KSpread.reader()
+* reader = KCells.reader()
 * # We like to read all of Sheet1
 * reader.setSheet("Sheet1")
 * # and from Sheet2 only the range A5:F12
@@ -205,10 +205,10 @@ public slots:
             m_ranges.remove(sheetname);
             return;
         }
-        KCSheet* sheet = m_module->kspreadDoc()->map()->findSheet(sheetname);
+        KCSheet* sheet = m_module->kcellsDoc()->map()->findSheet(sheetname);
         if (! sheet) return;
         QVariantList ranges;
-        KCRegion region(range, m_module->kspreadDoc()->map(), sheet);
+        KCRegion region(range, m_module->kcellsDoc()->map(), sheet);
         if (! region.isValid()) return;
         for (KCRegion::ConstIterator it = region.constBegin(); it != region.constEnd(); ++it) {
             const QRect rect = (*it)->rect();
@@ -312,7 +312,7 @@ private:
     }
 
     void readSheet(const QString& sheetname) {
-        m_currentSheet = m_module->kspreadDoc()->map()->findSheet(sheetname);
+        m_currentSheet = m_module->kcellsDoc()->map()->findSheet(sheetname);
         if (! m_currentSheet) return;
         emit changedSheet(sheetname);
         if (m_state != Running) return;

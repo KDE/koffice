@@ -29,7 +29,7 @@
 
 #include <kpagedialog.h>
 
-// KSpread
+// KCells
 #include "KCCell.h"
 #include "KCDependencyManager.h"
 #include "KCMap.h"

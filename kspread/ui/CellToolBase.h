@@ -31,8 +31,8 @@
 
 #include <KoInteractionTool.h>
 
-#include <kspread/KCCell.h>
-#include <kspread/kspread_export.h>
+#include <KCCell.h>
+#include <kcells_export.h>
 #include "Selection.h"
 
 class KoColor;
@@ -43,7 +43,7 @@ class CellEditorBase;
 /**
  * Abstract tool providing actions acting on cell ranges.
  */
-class KSPREAD_EXPORT CellToolBase : public KoInteractionTool
+class KCELLS_EXPORT CellToolBase : public KoInteractionTool
 {
     Q_OBJECT
 

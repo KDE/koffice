@@ -62,12 +62,12 @@ QString SheetAdaptor::cellName(int x, int y)
 {
     /* sebsauer 20061206: commented out cause if someone starts to believe that
     counting starts by 0,0 then he may very surprised why the first col/row
-    got returned twice. That happened to me and I was believing that's a KSpread
+    got returned twice. That happened to me and I was believing that's a KCells
     bug too :-(
     // if someone calls us with either x or y 0 he _most_ most likely doesn't
     // know that the cell counting starts with 1 (Simon)
     // P.S.: I did that mistake for weeks and already started looking for the
-    // "bug" in kspread ;-)
+    // "bug" in kcells ;-)
     if ( x == 0 ) x = 1;
     if ( y == 0 ) y = 1;
     */
@@ -107,8 +107,8 @@ QString SheetAdaptor::text(const QString& cellname)
 bool SheetAdaptor::setText(int x, int y, const QString& text, bool parse)
 {
     //FIXME: there is some problem with asString parameter, when it's set
-    //to true KSpread says: ASSERT: "f" in Dependencies.cpp (621)
-    //kspread: KCCell at row 6, col 1 marked as formula, but formula is NULL
+    //to true KCells says: ASSERT: "f" in Dependencies.cpp (621)
+    //kcells: KCCell at row 6, col 1 marked as formula, but formula is NULL
 
     DataManipulator *dm = new DataManipulator();
     dm->setSheet(m_sheet);

@@ -292,7 +292,7 @@ void TestKoGenStyles::testDefaultStyle()
     // The kspread case: not writing out all properties, only if they differ
     // from the default style.
     // KoGenStyles doesn't fetch info from the parent style when testing
-    // for equality, so KSpread uses isEmpty() to check for equality-to-parent.
+    // for equality, so KCells uses isEmpty() to check for equality-to-parent.
     KoGenStyle dataStyle(KoGenStyle::ParagraphStyle, "paragraph", defaultStyleName);
     QVERIFY(dataStyle.isEmpty());
     // and then it doesn't look up the auto style, but rather uses the parent style directly.

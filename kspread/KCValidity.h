@@ -43,9 +43,9 @@
 #include <QVariant>
 
 // KOffice
-#include "kspread_export.h"
+#include "kcells_export.h"
 
-// KSpread
+// KCells
 #include "KCCondition.h"
 
 #include "KoXmlReaderForward.h"
@@ -62,7 +62,7 @@ class KCValueParser;
  *
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  */
-class KSPREAD_EXPORT KCValidity
+class KCELLS_EXPORT KCValidity
 {
 public:
     /// The action invoked, if the validity check fails.

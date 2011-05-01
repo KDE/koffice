@@ -45,7 +45,7 @@
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCBindingModel.h"
 #include "KCCalculationSettings.h"
 #include "KCMap.h"
@@ -208,7 +208,7 @@ bool KCDocBase::loadOdf(KoOdfReadStore & odfStore)
 {
     QPointer<KoUpdater> updater;
     if (progressUpdater()) {
-        updater = progressUpdater()->startSubtask(1, "KSpread::KCDoc::loadOdf");
+        updater = progressUpdater()->startSubtask(1, "KCells::KCDoc::loadOdf");
         updater->setProgress(0);
     }
 

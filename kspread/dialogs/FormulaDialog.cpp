@@ -295,7 +295,7 @@ FormulaDialog::~FormulaDialog()
 void FormulaDialog::slotPressReturn()
 {
     //laurent 2001-07-07 desactivate this code
-    //because kspread crash.
+    //because kcells crash.
     //TODO fix it
     /*
     if( !functions->currentText().isEmpty() )
@@ -466,17 +466,17 @@ QString FormulaDialog::createParameter(const QString& _text, int param)
     ParameterType elementType = m_desc->param(param).type();
 
     switch (elementType) {
-    case KSpread_Any: {
+    case KCells_Any: {
         bool isNumber;
         double tmp = m_selection->activeSheet()->map()->calculationSettings()->locale()->readNumber(_text, &isNumber);
         Q_UNUSED(tmp);
 
-        //In case of number or boolean return _text, else return value as KSpread_String
+        //In case of number or boolean return _text, else return value as KCells_String
         if (isNumber || _text.toUpper() == "FALSE" || _text.toUpper() == "TRUE")
             return _text;
     }
     // fall through
-    case KSpread_String: {
+    case KCells_String: {
         // Does the text start with quotes?
         if (_text[0] == '"') {
             text = '\\'; // changed: was '"'
@@ -517,11 +517,11 @@ QString FormulaDialog::createParameter(const QString& _text, int param)
         }
     }
     return text;
-    case KSpread_Float:
+    case KCells_Float:
         return _text;
-    case KSpread_Boolean:
+    case KCells_Boolean:
         return _text;
-    case KSpread_Int:
+    case KCells_Int:
         return _text;
     }
 
@@ -538,18 +538,18 @@ static void showEntry(KLineEdit* edit, QLabel* label,
     ParameterType elementType = desc->param(param).type();
     KFloatValidator *validate = 0;
     switch (elementType) {
-    case KSpread_String:
-    case KSpread_Boolean:
-    case KSpread_Any:
+    case KCells_String:
+    case KCells_Boolean:
+    case KCells_Any:
         edit->setValidator(0);
         break;
-    case KSpread_Float:
+    case KCells_Float:
         validate = new KFloatValidator(edit);
         validate->setAcceptLocalizedNumbers(true);
         edit->setValidator(validate);
         edit->setText("0");
         break;
-    case KSpread_Int:
+    case KCells_Int:
         edit->setValidator(new QIntValidator(edit));
         edit->setText("0");
         break;

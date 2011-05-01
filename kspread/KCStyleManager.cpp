@@ -131,7 +131,7 @@ void KCStyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap
         }
     }
 
-    // replace all OpenDocument internal parent names by KSpread's style names
+    // replace all OpenDocument internal parent names by KCells's style names
     foreach(KCCustomStyle* style, m_styles) {
         if (!style->parentName().isNull()) {
             const QString parentOdfName = style->parentName();

@@ -28,7 +28,7 @@
 // KOffice
 #include <KoXmlWriter.h>
 
-// KSpread
+// KCells
 #include "KCBindingStorage.h"
 #include "KCConditionsStorage.h"
 #include "Damages.h"

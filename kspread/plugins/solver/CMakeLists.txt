@@ -1,6 +1,6 @@
 macro_optional_find_package(GSL)
 macro_log_feature(GSL_FOUND "GSL" "GNU Scientific Library" "http://www.gnu.org/software/gsl"
-                  FALSE "1.7" "Required by KSpread's solver plugin")
+                  FALSE "1.7" "Required by KCells's solver plugin")
 
 if(GSL_FOUND)
 
@@ -21,21 +21,21 @@ kde4_add_ui_files( solver_PART_SRCS
 	SolverMainWidget.ui
 )
 
-kde4_add_plugin( kspreadsolver ${solver_PART_SRCS} )
+kde4_add_plugin( kcellssolver ${solver_PART_SRCS} )
 
 
 
-target_link_libraries( kspreadsolver
+target_link_libraries( kcellssolver
 	${GSL_LIBRARIES}
 	${GSL_CBLAS_LIBRARIES}
-	kspreadcommon
+	kcellscommon
 )
 
-install(TARGETS kspreadsolver  DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS kcellssolver  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### install files ###############
 
-install( FILES solver.rc  DESTINATION ${DATA_INSTALL_DIR}/kspread/kpartplugins)
+install( FILES solver.rc  DESTINATION ${DATA_INSTALL_DIR}/kcells/kpartplugins)
 
 endif(GSL_FOUND)

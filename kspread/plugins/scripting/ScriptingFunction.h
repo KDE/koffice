@@ -1,5 +1,5 @@
 /*
- * This file is part of KSpread
+ * This file is part of KCells
  *
  * Copyright (c) 2006, 2007 Sebastian Sauer <mail@dipe.org>
  *
@@ -25,15 +25,15 @@
 #include <QVariant>
 
 /**
- * The ScriptingFunction class provides access to the KSpread::KCFunction
+ * The ScriptingFunction class provides access to the KCells::KCFunction
  * functionality to deal with formula functions that are written in
  * a scripting language like Python or Ruby.
  *
  * The following sample scripting formula function written in python
  * displays the current datetime.
  * \code
- * import time, Kross, KSpread
- * func = KSpread.function("PYTIME")
+ * import time, Kross, KCells
+ * func = KCells.function("PYTIME")
  * func.minparam = 0
  * func.maxparam = 1
  * func.comment = "The PYTIME() function displays the current datetime."

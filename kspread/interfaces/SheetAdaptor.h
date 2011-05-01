@@ -28,14 +28,14 @@
 #define KSPREAD_SHEET_ADAPTOR
 
 #include <QtDBus/QtDBus>
-#include "kspread_export.h"
+#include "kcells_export.h"
 #include <QString>
 
 class KCDamage;
 class KCSheet;
 class CellProxy;
 
-class KSPREAD_EXPORT SheetAdaptor : public QDBusAbstractAdaptor
+class KCELLS_EXPORT SheetAdaptor : public QDBusAbstractAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.koffice.spreadsheet.sheet")

@@ -19,7 +19,7 @@
 
 #include "KCSheetModel.h"
 
-// KSpread
+// KCells
 #include "KCBinding.h"
 #include "KCCell.h"
 #include "KCCellStorage.h"
@@ -81,7 +81,7 @@ QVariant KCSheetModel::data(const QModelIndex& index, int role) const
             return QVariant();
         }
     }
-    // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
+    // NOTE Model indices start from 0, while KCells column/row indices start from 1.
     const KCCell cell = KCCell(d->sheet, index.column() + 1, index.row() + 1).masterCell();
     const KCStyle style = cell.effectiveStyle();
     if (role == Qt::DisplayRole) {
@@ -161,7 +161,7 @@ Qt::ItemFlags KCSheetModel::flags(const QModelIndex& index) const
 
 QVariant KCSheetModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
+    // NOTE Model indices start from 0, while KCells column/row indices start from 1.
     if (role == Qt::DisplayRole) {
         if (orientation == Qt::Horizontal) {
             return KCCell::columnName(section + 1);
@@ -214,7 +214,7 @@ bool KCSheetModel::setData(const QModelIndex& index, const QVariant& value, int 
             return false;
         }
     }
-    // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
+    // NOTE Model indices start from 0, while KCells column/row indices start from 1.
     const int column = index.column() + 1;
     const int row = index.row() + 1;
     KCCell cell = KCCell(sheet(), index.column() + 1, index.row() + 1).masterCell();

@@ -19,7 +19,7 @@
 
 #include "ReadWriteTableModel.h"
 
-// KSpread
+// KCells
 #include "KCCell.h"
 #include "KCSheet.h"
 
@@ -52,7 +52,7 @@ Qt::ItemFlags ReadWriteTableModel::flags(const QModelIndex& index) const
 
 bool ReadWriteTableModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
-    // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
+    // NOTE Model indices start from 0, while KCells column/row indices start from 1.
     KCCell cell = KCCell(sheet(), index.column() + 1, index.row() + 1).masterCell();
     if (role == Qt::EditRole) {
         cell.parseUserInput(value.toString());

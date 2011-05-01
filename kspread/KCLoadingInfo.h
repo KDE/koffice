@@ -20,7 +20,7 @@
 #ifndef KSPLOADINGINFO_H
 #define KSPLOADINGINFO_H
 
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 
 #include <QMap>
 #include <QPoint>

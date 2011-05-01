@@ -1,7 +1,7 @@
 #!/usr/bin/env kross
 
 """
-KSpread python script that provides the Yahoo! Finance formula function.
+KCells python script that provides the Yahoo! Finance formula function.
 
 Yahoo! Terms of Use
 The feeds are provided free of charge for use by individuals and non-profit
@@ -18,19 +18,19 @@ feeds at any time for any reason.
 
 (C)2007 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 This script is licensed under the BSD license.
 """
 
 import re, urllib
-import Kross, KSpread
+import Kross, KCells
 
 class Yfinance:
     def __init__(self, scriptaction):
         self.scriptaction = scriptaction
         #self.currentpath = self.scriptaction.currentPath()
 
-        func = KSpread.function("YFINANCE")
+        func = KCells.function("YFINANCE")
         func.minparam = 3
         func.maxparam = 3
         func.comment = (
@@ -48,16 +48,16 @@ class Yfinance:
             print "Yfinance.update !"
             ticker = argument[0] #e.g. "yhoo" or "goog"
             if ticker.startswith('='):
-                ticker = KSpread.currentSheet().text(ticker[1:])
+                ticker = KCells.currentSheet().text(ticker[1:])
 
             todate = argument[1] #e.g. "20060119"
             if todate.startswith('='):
-                todate = KSpread.currentSheet().text(todate[1:])
+                todate = KCells.currentSheet().text(todate[1:])
             fromdate=todate
 
             typename = argument[2] #e.g. "Open"
             if typename.startswith('='):
-                typename = KSpread.currentSheet().text(typename[1:])
+                typename = KCells.currentSheet().text(typename[1:])
             typename = typename.lower()
 
             if not re.compile('^[a-zA-Z0-9]+$').match(ticker):

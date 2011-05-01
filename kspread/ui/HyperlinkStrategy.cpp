@@ -90,7 +90,7 @@ void HyperlinkStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
         }
     } else {
         const QString type = KMimeType::findByUrl(url, 0, url.isLocalFile())->name();
-        if (!KSpread::localReferenceAnchor(d->url)) {
+        if (!KCells::localReferenceAnchor(d->url)) {
             const bool executable = KRun::isExecutableFile(url, type);
             if (executable) {
                 const QString question = i18n("This link points to the program or script '%1'.\n"

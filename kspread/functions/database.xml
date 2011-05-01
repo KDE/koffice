@@ -1,5 +1,5 @@
-<!DOCTYPE KSpreadFunctions>
-<KSpreadFunctions>
+<!DOCTYPE KCellsFunctions>
+<KCellsFunctions>
 
   <Group>
     <GroupName>Database</GroupName>
@@ -295,4 +295,4 @@
 
   </Group>
 
-</KSpreadFunctions>
+</KCellsFunctions>

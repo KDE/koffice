@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--  XSL-T from KSpread's old XML function description format to the new one -->
+<!--  XSL-T from KCells's old XML function description format to the new one -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
-    <xsl:template match="KSpreadFunctions">
+    <xsl:template match="KCellsFunctions">
         <xsl:element name="functions">
             <xsl:attribute name="xmlns">
-                <xsl:text>http://www.koffice.org/standards/kspread/functions/1.0</xsl:text>
+                <xsl:text>http://www.koffice.org/standards/kcells/functions/1.0</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="xmlns:xsi">
                 <xsl:text>http://www.w3.org/2001/XMLSchema-instance</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="xsi:schemaLocation">
-                <xsl:text>http://www.koffice.org/standards/kspread/functions/1.0
-                http://www.koffice.org/standards/kspread/functions/1.0/functions.xsd</xsl:text>
+                <xsl:text>http://www.koffice.org/standards/kcells/functions/1.0
+                http://www.koffice.org/standards/kcells/functions/1.0/functions.xsd</xsl:text>
             </xsl:attribute>
             <xsl:for-each select="Group">
                 <xsl:element name="group">

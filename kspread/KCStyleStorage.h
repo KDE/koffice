@@ -25,7 +25,7 @@
 #include <QPoint>
 #include <QRect>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 #include <KCRegion.h>
 #include <KCStyle.h>
 
@@ -43,7 +43,7 @@ class KCSubStyle;
  * replacement of this backend. Decorated with some additional features like
  * garbage collection, caching, used area tracking, etc.
  */
-class KSPREAD_EXPORT KCStyleStorage : public QObject
+class KCELLS_EXPORT KCStyleStorage : public QObject
 {
     Q_OBJECT
 

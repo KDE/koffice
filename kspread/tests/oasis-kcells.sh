@@ -2,7 +2,7 @@
 
 # This script helps finding out problems in the OASIS loading/saving code,
 # by converting .ksp -> .ods -> .ksp and comparing the initial and final .ksp files.
-# We use the ksp format as a "dump" of the KSpread data, to check if everything is correct
+# We use the ksp format as a "dump" of the KCells data, to check if everything is correct
 # in memory, but the point is of course to ensure that the .ods has all the information.
 
 # To use this script, you need to pass the full path to an existing ksp file as argument.
@@ -12,7 +12,7 @@ input="$1"
 # Set this to 1 in order to validate the saved oasis document using oasislint
 checkoasis="1"
 
-appname=kspread
+appname=kcells
 oldextension=ksp
 oasisextension=ods
 oasismimetype=application/vnd.oasis.opendocument.spreadsheet

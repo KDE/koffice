@@ -1,7 +1,7 @@
 #!/usr/bin/env kross
 
 """
-KSpread python script that provides the Yahoo! Weather formula function.
+KCells python script that provides the Yahoo! Weather formula function.
 
 Yahoo! Terms of Use
 The feeds are provided free of charge for use by individuals and non-profit
@@ -18,20 +18,20 @@ feeds at any time for any reason.
 
 (C)2007 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 This script is licensed under the BSD license.
 """
 
 import re, urllib
 from xml.dom import minidom
-import Kross, KSpread
+import Kross, KCells
 
 class Yweather:
     def __init__(self, scriptaction):
         self.scriptaction = scriptaction
         #self.currentpath = self.scriptaction.currentPath()
 
-        func = KSpread.function("YWEATHER")
+        func = KCells.function("YWEATHER")
         func.minparam = 1
         func.maxparam = 2
         func.comment = (
@@ -48,7 +48,7 @@ class Yweather:
             print "Yweather.update !"
             location = argument[0] #e.g. "GMXX0151"
             if location.startswith('='):
-                sheet = KSpread.currentSheet()
+                sheet = KCells.currentSheet()
                 location = sheet.text(location[1:])
 
             if location == None or not re.compile('^[a-zA-Z0-9]+$').match(location):

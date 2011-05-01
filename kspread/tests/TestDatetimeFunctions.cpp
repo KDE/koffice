@@ -149,13 +149,13 @@ void TestDatetimeFunctions::testYEARFRAC()
 void TestDatetimeFunctions::testDATEDIF()
 {
     // interval y  ( years )
-    CHECK_EVAL("DATEDIF(DATE(1990;2;15); DATE(1993;9;15); \"y\")", KCValue(3));        // TODO check value; kspread says 3
+    CHECK_EVAL("DATEDIF(DATE(1990;2;15); DATE(1993;9;15); \"y\")", KCValue(3));        // TODO check value; kcells says 3
 
     // interval m  ( Months. If there is not a complete month between the dates, 0 will be returned.)
     CHECK_EVAL("DATEDIF(DATE(1990;2;15); DATE(1993;9;15); \"m\")", KCValue(43));
 
     // interval d  ( Days )
-    CHECK_EVAL("DATEDIF(DATE(1990;2;15); DATE(1993;9;15); \"d\")", KCValue(1308));     // TODO check value; kspread says 1308
+    CHECK_EVAL("DATEDIF(DATE(1990;2;15); DATE(1993;9;15); \"d\")", KCValue(1308));     // TODO check value; kcells says 1308
 
     // interval md ( Days, ignoring months and years )
     CHECK_EVAL("DATEDIF(DATE(1990;2;15); DATE(1993;9;15); \"md\")", KCValue(0));
@@ -164,7 +164,7 @@ void TestDatetimeFunctions::testDATEDIF()
     CHECK_EVAL("DATEDIF(DATE(1990;2;15); DATE(1993;9;15); \"ym\")", KCValue(7));
 
     // interval yd ( Days, ignoring years )
-    CHECK_EVAL("DATEDIF(DATE(1990;2;15); DATE(1993;9;15); \"yd\")", KCValue(212));     // TODO check value; kspread says 212
+    CHECK_EVAL("DATEDIF(DATE(1990;2;15); DATE(1993;9;15); \"yd\")", KCValue(212));     // TODO check value; kcells says 212
 }
 
 void TestDatetimeFunctions::testISLEAPYEAR()
@@ -346,7 +346,7 @@ void TestDatetimeFunctions::testDAYS360()
     // with many different options.  Without the optional parameter, it defaults to a 30/360 basis, not calendar days; thus, in Lotus 1-2-3v9.8,
     // DAYS(DATE(1993;4;16);  DATE(1993;9;25)) computes -159, not -162.
 
-    CHECK_EVAL("DAYS360(DATE(1993;4;16);DATE(1993;9;25); FALSE)", KCValue(159));     // specs. -162 but OOo and KSpread calculate 159
+    CHECK_EVAL("DAYS360(DATE(1993;4;16);DATE(1993;9;25); FALSE)", KCValue(159));     // specs. -162 but OOo and KCells calculate 159
     CHECK_EVAL("DAYS360(\"2002-02-22\"; \"2002-04-21\" ; FALSE)", KCValue(59));      // ref. docs
 }
 
@@ -493,7 +493,7 @@ void TestDatetimeFunctions::testTIME()
     CHECK_EVAL("TIME(11;-117;0)*60*60*24",    KCValue(32580));     // Negative minutes roll hours backwards, 9:03:00 AM
 
     CHECK_EVAL("TIME(11;-125;-144)*60*60*24", KCValue(31956));     // Negative seconds and minutes roll backwards transitively, 8:52:36 AM
-    // WARNING specs says -31956, but calc and kspread calculate 31956
+    // WARNING specs says -31956, but calc and kcells calculate 31956
 }
 
 void TestDatetimeFunctions::testTIMEVALUE()

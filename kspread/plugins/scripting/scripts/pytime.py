@@ -1,8 +1,8 @@
 #!/usr/bin/env kross
 
-import time, Kross, KSpread
+import time, Kross, KCells
 
-func = KSpread.function("PYTIME")
+func = KCells.function("PYTIME")
 func.minparam = 0
 func.maxparam = 1
 func.comment = "The PYTIME() function displays the current datetime."

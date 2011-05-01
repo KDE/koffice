@@ -33,7 +33,7 @@ class KCSheet;
  * \ingroup Commands
  * \brief Abstract base class for all region related operations.
  */
-class KSPREAD_EXPORT AbstractRegionCommand : public KCRegion, public QUndoCommand
+class KCELLS_EXPORT AbstractRegionCommand : public KCRegion, public QUndoCommand
 {
 public:
     /**

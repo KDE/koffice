@@ -24,7 +24,7 @@
 
 #include <kparts/plugin.h>
 
-#include <kspread_export.h>
+#include <kcells_export.h>
 
 #include <KCCell.h>
 
@@ -35,7 +35,7 @@ class QObject;
  * \class Solver KCFunction Optimizer
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  */
-class KSPREAD_EXPORT Solver : public KParts::Plugin
+class KCELLS_EXPORT Solver : public KParts::Plugin
 {
     Q_OBJECT
 

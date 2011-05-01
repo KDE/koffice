@@ -19,9 +19,9 @@
 
 #include "ReadOnlyTableModel.h"
 
-// KSpread
+// KCells
 #include "KCCell.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCMap.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
@@ -66,7 +66,7 @@ int ReadOnlyTableModel::rowCount(const QModelIndex& parent) const
 
 QVariant ReadOnlyTableModel::data(const QModelIndex& index, int role) const
 {
-    // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
+    // NOTE Model indices start from 0, while KCells column/row indices start from 1.
     const KCCell cell = KCCell(d->sheet, index.column() + 1, index.row() + 1).masterCell();
     const KCStyle style = cell.effectiveStyle();
     if (role == Qt::DisplayRole) {
@@ -108,7 +108,7 @@ QVariant ReadOnlyTableModel::data(const QModelIndex& index, int role) const
 
 QVariant ReadOnlyTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
+    // NOTE Model indices start from 0, while KCells column/row indices start from 1.
     if (role == Qt::DisplayRole) {
         if (orientation == Qt::Horizontal) {
             return KCCell::columnName(section + 1);

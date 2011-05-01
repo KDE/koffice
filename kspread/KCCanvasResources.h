@@ -23,12 +23,12 @@
 #include <KoResourceManager.h>
 
 /**
- * KSpread specific canvas resources
+ * KCells specific canvas resources
  */
 namespace CanvasResource
 {
 enum {
-    Selection = KoCanvasResource::KSpreadStart  ///< the cell selection
+    Selection = KoCanvasResource::KCellsStart  ///< the cell selection
 };
 } // namespace CanvasResource
 

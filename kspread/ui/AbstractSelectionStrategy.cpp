@@ -20,7 +20,7 @@
 #include "AbstractSelectionStrategy.h"
 
 #include "CellToolBase.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "RowColumnFormat.h"
 #include "Selection.h"
 #include "KCSheet.h"

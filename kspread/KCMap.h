@@ -28,7 +28,7 @@
 
 #include "KCProtectableObject.h"
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 #include <KoDataCenterBase.h>
 #include <KoXmlReader.h>
@@ -73,7 +73,7 @@ class KCValueCalc;
  * The "embedded document".
  * The KCMap holds all the document data.
  */
-class KSPREAD_EXPORT KCMap : public QObject, public KoDataCenterBase, public KCProtectableObject
+class KCELLS_EXPORT KCMap : public QObject, public KoDataCenterBase, public KCProtectableObject
 {
     Q_OBJECT
 public:

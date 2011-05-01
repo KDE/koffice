@@ -20,7 +20,7 @@
 #ifndef KSPREAD_STYLE_MANAGER
 #define KSPREAD_STYLE_MANAGER
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 #include <KoXmlReader.h>
 
 #include <KCStyle.h>
@@ -44,7 +44,7 @@ class KCValueParser;
  * The KCStyleManager takes care of named styles. It also provides some static
  * methods for the preloading of OpenDocument autostyles.
  */
-class KSPREAD_EXPORT KCStyleManager
+class KCELLS_EXPORT KCStyleManager
 {
     friend class StyleManagerDialog;
 

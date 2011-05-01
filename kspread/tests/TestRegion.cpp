@@ -21,7 +21,7 @@
 
 #include "qtest_kde.h"
 
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"

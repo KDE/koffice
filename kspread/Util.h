@@ -24,7 +24,7 @@
 #include <QString>
 #include <QRect>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 #include <KoXmlReader.h>
 
 #include "Global.h"
@@ -44,7 +44,7 @@ class KCCell;
 class KCMap;
 class KCSheet;
 
-namespace KSpread
+namespace KCells
 {
 /**
  * Call this function to decode the text of a column label to an integer,
@@ -52,35 +52,35 @@ namespace KSpread
  * Converted are all characters matching [A-Za-z]+ regular expresion, the rest is ignored.
  * 0 is returned if no characters match.
  */
-KSPREAD_EXPORT int decodeColumnLabelText(const QString &labelText);
+KCELLS_EXPORT int decodeColumnLabelText(const QString &labelText);
 
 /**
  * Call this function to decode the text of a row label to an integer,
  * e.g. B7 is translated to 7.
  */
-KSPREAD_EXPORT int decodeRowLabelText(const QString &labelText);
+KCELLS_EXPORT int decodeRowLabelText(const QString &labelText);
 
 /**
  * Call this function to encode an integer to the text of the column label
  * i.e. 27->AA
  */
-KSPREAD_EXPORT QString encodeColumnLabelText(int column);
+KCELLS_EXPORT QString encodeColumnLabelText(int column);
 
 /**
  * Generate and return the ODF formula for this cell (\p thisRow, \p thisColumn) based on the formula in the
  * defined cell (\p referencedRow, \p referencedColumn ).
  */
-KSPREAD_EXPORT QString adjustFormulaReference(const QString& formula, int referencedRow, int referencedColumn, int thisRow, int thisColumn);
+KCELLS_EXPORT QString adjustFormulaReference(const QString& formula, int referencedRow, int referencedColumn, int thisRow, int thisColumn);
 
 //Return true when it's a reference to cell from sheet.
-KSPREAD_EXPORT bool localReferenceAnchor(const QString &_ref);
+KCELLS_EXPORT bool localReferenceAnchor(const QString &_ref);
 
 // TODO Stefan: used nowhere
 int penCompare(QPen const & pen1, QPen const & pen2);
 
 /**
  * \ingroup NativeFormat
- * This namespace collects methods related to KSpread's old native file format
+ * This namespace collects methods related to KCells's old native file format
  * encoding/decoding.
  */
 namespace NativeFormat
@@ -135,7 +135,7 @@ QPen decodePen(const QString &str);
  * \note Use KCRegion::loadOdf() for plain cell references.
  */
 // TODO check visibility
-KSPREAD_EXPORT QString decodeFormula(const QString& expr, const KLocale* locale = 0, QString namespacePrefix = QString());
+KCELLS_EXPORT QString decodeFormula(const QString& expr, const KLocale* locale = 0, QString namespacePrefix = QString());
 
 /**
  * \ingroup OpenDocument
@@ -144,22 +144,22 @@ KSPREAD_EXPORT QString decodeFormula(const QString& expr, const KLocale* locale 
  * @param locale The locale from which the expression should be converted.
  * \note Use KCRegion::saveOdf() for plain cell references.
  */
-KSPREAD_EXPORT QString encodeFormula(const QString& expr, const KLocale* locale = 0);
+KCELLS_EXPORT QString encodeFormula(const QString& expr, const KLocale* locale = 0);
 
 /**
  * \ingroup OpenDocument
  */
-KSPREAD_EXPORT QString convertRefToRange(const QString & sheet, const QRect & rect);
+KCELLS_EXPORT QString convertRefToRange(const QString & sheet, const QRect & rect);
 
 /**
  * \ingroup OpenDocument
  */
-KSPREAD_EXPORT QString convertRefToBase(const QString & sheet, const QRect & rect);
+KCELLS_EXPORT QString convertRefToBase(const QString & sheet, const QRect & rect);
 
 /**
  * \ingroup OpenDocument
  */
-KSPREAD_EXPORT QString convertRangeToRef(const QString & sheetName, const QRect & _area);
+KCELLS_EXPORT QString convertRangeToRef(const QString & sheetName, const QRect & _area);
 }
 }
 

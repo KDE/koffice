@@ -29,7 +29,7 @@ class KCCellStorage;
  * \ingroup Commands
  * \brief Sorts the values in a cell range.
  */
-class KSPREAD_EXPORT SortManipulator : public AbstractDFManipulator
+class KCELLS_EXPORT SortManipulator : public AbstractDFManipulator
 {
 public:
     SortManipulator();

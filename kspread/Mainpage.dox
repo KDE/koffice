@@ -1,19 +1,19 @@
 /**
- * \mainpage KSpread
- * KSpread is a scriptable spreadsheet program which provides both
+ * \mainpage KCells
+ * KCells is a scriptable spreadsheet program which provides both
  * table-oriented sheets and support for complex mathematical formulas
  * and statistics.
  *
  * \section majorclasses Major classes
- * \li KSpread::KCCanvas The scrollable area showing the cells.
- * \li KSpread::KCCell Represents a cell in the spreadsheet.
- * \li KSpread::KCDoc The KPart used in KSpread itself and when embedded in non-KOffice applications.
- * \li KSpread::KCMap The actual spreadsheet document consisting of at least one sheet.
- * \li KSpread::KCSheet A sheet consists of several cells.
- * \li KSpread::KCView This class displays the KPart document.
+ * \li KCells::KCCanvas The scrollable area showing the cells.
+ * \li KCells::KCCell Represents a cell in the spreadsheet.
+ * \li KCells::KCDoc The KPart used in KCells itself and when embedded in non-KOffice applications.
+ * \li KCells::KCMap The actual spreadsheet document consisting of at least one sheet.
+ * \li KCells::KCSheet A sheet consists of several cells.
+ * \li KCells::KCView This class displays the KPart document.
  *
  * \section plugins Plugins
- * \li \ref KSpreadScripting KSpread Scripting Plugin that offers flexible access
+ * \li \ref KCellsScripting KCells Scripting Plugin that offers flexible access
  *      to the Kross scripting framework.
  * \li \ref CalendarTool Plugin for inserting a calendar into a spreadsheet.
  */
@@ -42,7 +42,7 @@
 
 /**
  * \defgroup NativeFormat Old native file format
- * Classes and methods related to the KSpread's old native file format loading/saving.
+ * Classes and methods related to the KCells's old native file format loading/saving.
  */
 
 /**

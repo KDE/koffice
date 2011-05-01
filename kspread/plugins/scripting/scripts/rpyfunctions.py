@@ -1,18 +1,18 @@
 #!/usr/bin/env kross
 
 """
-KSpread python script that provides access to the R programming environment for
+KCells python script that provides access to the R programming environment for
 data analysis and graphics ( http://www.r-project.org ) using the RPy python
 module ( http://rpy.sourceforge.net ).
 
 (C)2007 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 This script is licensed under the BSD license.
 """
 
 import types, traceback
-import Kross, KSpread
+import Kross, KCells
 
 try:
     import rpy
@@ -28,7 +28,7 @@ class Rfunctions:
 
             try:
                 self.robj = getattr(rpy.r, name)
-                self.isNewFunc = not KSpread.hasFunction(self.__name__)
+                self.isNewFunc = not KCells.hasFunction(self.__name__)
                 if self.isNewFunc:
 
                     def format2name(fchar):
@@ -55,7 +55,7 @@ class Rfunctions:
                     except ValueError:
                         req,opt = [ format, [] ]
 
-                    func = KSpread.function(self.__name__)
+                    func = KCells.function(self.__name__)
 
                     func.typeName = 'Float'
                     func.comment = comment

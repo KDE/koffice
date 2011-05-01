@@ -32,7 +32,7 @@ class KCRegion;
  * Manages the dependencies between cells caused by references in formulas.
  * This dependency information is used for the recalculation of the cells.
  */
-class KSPREAD_EXPORT KCDependencyManager : public QObject
+class KCELLS_EXPORT KCDependencyManager : public QObject
 {
     Q_OBJECT
     friend class TestDependencies;

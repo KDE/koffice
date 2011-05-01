@@ -22,14 +22,14 @@
 
 #include <QObject>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 
 /**
  * Registry for tools.
  * \ingroup Plugin
  */
-class KSPREAD_EXPORT KCToolRegistry : public QObject
+class KCELLS_EXPORT KCToolRegistry : public QObject
 {
 public:
     /**

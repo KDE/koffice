@@ -30,43 +30,43 @@
 static ParameterType toType(const QString& type)
 {
     if (type == "Boolean")
-        return KSpread_Boolean;
+        return KCells_Boolean;
     if (type == "Int")
-        return KSpread_Int;
+        return KCells_Int;
     if (type == "String")
-        return KSpread_String;
+        return KCells_String;
     if (type == "Any")
-        return KSpread_Any;
+        return KCells_Any;
 
-    return KSpread_Float;
+    return KCells_Float;
 }
 
 static QString toString(ParameterType type, bool range = false)
 {
     if (!range) {
         switch (type) {
-        case KSpread_String:
+        case KCells_String:
             return i18n("Text");
-        case KSpread_Int:
+        case KCells_Int:
             return i18n("Whole number (like 1, 132, 2344)");
-        case KSpread_Boolean:
+        case KCells_Boolean:
             return i18n("A truth value (TRUE or FALSE)");
-        case KSpread_Float:
+        case KCells_Float:
             return i18n("A floating point value (like 1.3, 0.343, 253 )");
-        case KSpread_Any:
+        case KCells_Any:
             return i18n("Any kind of value");
         }
     } else {
         switch (type) {
-        case KSpread_String:
+        case KCells_String:
             return i18n("A range of strings");
-        case KSpread_Int:
+        case KCells_Int:
             return i18n("A range of whole numbers (like 1, 132, 2344)");
-        case KSpread_Boolean:
+        case KCells_Boolean:
             return i18n("A range of truth values (TRUE or FALSE)");
-        case KSpread_Float:
+        case KCells_Float:
             return i18n("A range of floating point values (like 1.3, 0.343, 253 )");
-        case KSpread_Any:
+        case KCells_Any:
             return i18n("A range of any kind of values");
         }
     }
@@ -76,7 +76,7 @@ static QString toString(ParameterType type, bool range = false)
 
 KCFunctionParameter::KCFunctionParameter()
 {
-    m_type = KSpread_Float;
+    m_type = KCells_Float;
     m_range = false;
 }
 
@@ -89,7 +89,7 @@ KCFunctionParameter::KCFunctionParameter(const KCFunctionParameter& param)
 
 KCFunctionParameter::KCFunctionParameter(const QDomElement& element)
 {
-    m_type  = KSpread_Float;
+    m_type  = KCells_Float;
     m_range = false;
 
     QDomNode n = element.firstChild();
@@ -110,7 +110,7 @@ KCFunctionParameter::KCFunctionParameter(const QDomElement& element)
 
 KCFunctionDescription::KCFunctionDescription()
 {
-    m_type = KSpread_Float;
+    m_type = KCells_Float;
 }
 
 KCFunctionDescription::KCFunctionDescription(const QDomElement& element)

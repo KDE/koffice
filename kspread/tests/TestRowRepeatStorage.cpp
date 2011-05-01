@@ -23,7 +23,7 @@
 #include <qtest_kde.h>
 
 #include "../KCRowRepeatStorage.h"
-#include "../kspread_limits.h"
+#include "../kcells_limits.h"
 
 void TestRowRepeatStorage::testEmptyStorage()
 {

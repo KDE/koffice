@@ -31,7 +31,7 @@
 
 #include <kdebug.h>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 #include "KCNumber.h"
 
@@ -49,7 +49,7 @@ class KCValueStorage;
  *
  * KCValue uses implicit data sharing to reduce memory usage.
  */
-class KSPREAD_EXPORT KCValue
+class KCELLS_EXPORT KCValue
 {
 
 public:
@@ -513,14 +513,14 @@ Q_DECLARE_TYPEINFO(KCValue, Q_MOVABLE_TYPE);
   QTextStream support
 ****************************************************************************/
 
-KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, KCValue::Type type);
-KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, KCValue value);
+KCELLS_EXPORT QTextStream& operator<<(QTextStream& ts, KCValue::Type type);
+KCELLS_EXPORT QTextStream& operator<<(QTextStream& ts, KCValue value);
 
 /***************************************************************************
   kDebug support
 ****************************************************************************/
 
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCValue& v);
+KCELLS_EXPORT QDebug operator<<(QDebug str, const KCValue& v);
 QDebug operator<<(QDebug stream, const KCValue::KCFormat& f);
 
 #endif // KSPREAD_VALUE_H

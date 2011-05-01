@@ -25,7 +25,7 @@
 #include <QPair>
 #include <QUndoCommand>
 
-// KSpread
+// KCells
 #include "KCStyleStorage.h"
 
 

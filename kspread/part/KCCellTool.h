@@ -20,15 +20,15 @@
 #ifndef KSPREAD_CELL_TOOL
 #define KSPREAD_CELL_TOOL
 
-#include <kspread/ui/CellToolBase.h>
+#include <ui/CellToolBase.h>
 
-#include <kspread/kspread_export.h>
+#include <kcells_export.h>
 
 
 /**
  * The tool to change cell ranges.
  */
-class KSPREAD_EXPORT KCCellTool : public CellToolBase
+class KCELLS_EXPORT KCCellTool : public CellToolBase
 {
     Q_OBJECT
 

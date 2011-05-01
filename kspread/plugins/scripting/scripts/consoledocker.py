@@ -1,15 +1,15 @@
 #!/usr/bin/env kross
 
 """
-Interactive Python Console Docker for KSpread.
+Interactive Python Console Docker for KCells.
 
 (C)2007 Sebastian Sauer <mail@dipe.org>
 http://kross.dipe.org
-http://www.koffice.org/kspread
+http://www.koffice.org/kcells
 Dual-licensed under LGPL v2+higher and the BSD license.
 """
 
-import Kross, KoDocker, KSpread
+import Kross, KoDocker, KCells
 import PyQt4.Qt as Qt
 import sip #wrapinstance, unwrapinstance
 
@@ -252,7 +252,7 @@ class _ConsoleDocker(Qt.QWidget):
         
         self.edit = Qt.QComboBox(consoleWidget)
         self.edit.setEditable(True)
-        self.edit.insertItems(0, ['','print globals().keys()','print dir(Kross)','print dir(KSpread)','print KSpread.sheetNames()','print Qt.PYQT_VERSION_STR','print sip.SIP_VERSION_STR'])
+        self.edit.insertItems(0, ['','print globals().keys()','print dir(Kross)','print dir(KCells)','print KCells.sheetNames()','print Qt.PYQT_VERSION_STR','print sip.SIP_VERSION_STR'])
         self.browser.setFocusProxy(self.edit)
         Qt.QObject.connect(self.edit.lineEdit(), Qt.SIGNAL("returnPressed()"), self.returnPressed)
         consoleLayout.addWidget(self.edit)

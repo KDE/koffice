@@ -26,7 +26,7 @@
 #include <QUndoCommand>
 #include <QVector>
 
-// KSpread
+// KCells
 #include "KCFormula.h"
 
 /**

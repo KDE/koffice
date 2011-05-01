@@ -37,7 +37,7 @@
 // Qt
 #include <QSharedDataPointer>
 
-// KSpread
+// KCells
 #include "Global.h"
 #include "KCStyle.h"
 
@@ -56,7 +56,7 @@ class KCStyle;
  * corresponding SheetView. If the content of a KCCell has changed, the CellView
  * will be destroyed and a new one will be created.
  */
-class KSPREAD_EXPORT CellView
+class KCELLS_EXPORT CellView
 {
     friend class SheetView;
 

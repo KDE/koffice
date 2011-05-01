@@ -28,7 +28,7 @@
 #include <KoViewConverter.h>
 
 #include "CellView.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"

@@ -51,13 +51,13 @@ typedef QHash<QString, KCStyle>       Styles;
 // needs to be ordered (QMap) for the style dialog
 typedef QMap<QString, KCCustomStyle*> CustomStyles;
 
-KSPREAD_EXPORT uint qHash(const KCStyle& style);
+KCELLS_EXPORT uint qHash(const KCStyle& style);
 
 /**
  * \ingroup KCStyle
  * A cell style.
  */
-class KSPREAD_EXPORT KCStyle
+class KCELLS_EXPORT KCStyle
 {
 public:
     enum HAlign {
@@ -380,7 +380,7 @@ private:
  * \ingroup KCStyle
  * A named cell style.
  */
-class KSPREAD_EXPORT KCCustomStyle : public KCStyle
+class KCELLS_EXPORT KCCustomStyle : public KCStyle
 {
 public:
     /**
@@ -449,7 +449,7 @@ private:
  * \ingroup KCStyle
  * A single style attribute.
  */
-class KSPREAD_TEST_EXPORT KCSubStyle : public QSharedData
+class KCELLS_TEST_EXPORT KCSubStyle : public QSharedData
 {
 public:
     KCSubStyle() {}

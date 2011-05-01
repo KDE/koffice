@@ -231,7 +231,7 @@ bool KCMap::completeLoading(KoStore *store)
     // Initial build of all cell dependencies.
     d->dependencyManager->updateAllDependencies(this);
     // Recalc the whole workbook now, since there may be formulas other spreadsheets support,
-    // but KSpread does not.
+    // but KCells does not.
     d->recalcManager->recalcMap();
     return true;
 }

@@ -24,7 +24,7 @@
 
 #include "kdebug.h"
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class KCCell;
 class KCMap;
@@ -35,7 +35,7 @@ class KCRegion;
  * \ingroup Damages
  * An abstract damage.
  */
-class KSPREAD_EXPORT KCDamage
+class KCELLS_EXPORT KCDamage
 {
 public:
     virtual ~KCDamage() {}
@@ -59,7 +59,7 @@ public:
  * \ingroup Damages
  * A cell range damage.
  */
-class KSPREAD_EXPORT KCCellDamage : public KCDamage
+class KCELLS_EXPORT KCCellDamage : public KCDamage
 {
 public:
     enum Change {
@@ -108,7 +108,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(KCCellDamage::Changes)
  * \ingroup Damages
  * A sheet damage.
  */
-class KSPREAD_EXPORT KCSheetDamage : public KCDamage
+class KCELLS_EXPORT KCSheetDamage : public KCDamage
 {
 public:
 
@@ -181,7 +181,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(KCWorkbookDamage::Changes)
  * \ingroup Damages
  * A selection damage.
  */
-class KSPREAD_EXPORT KCSelectionDamage : public KCDamage
+class KCELLS_EXPORT KCSelectionDamage : public KCDamage
 {
 public:
     KCSelectionDamage(const KCRegion& region);
@@ -205,9 +205,9 @@ private:
   kDebug support
 ****************************************************************************/
 
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCDamage& d);
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCCellDamage& d);
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCSheetDamage& d);
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCSelectionDamage& d);
+KCELLS_EXPORT QDebug operator<<(QDebug str, const KCDamage& d);
+KCELLS_EXPORT QDebug operator<<(QDebug str, const KCCellDamage& d);
+KCELLS_EXPORT QDebug operator<<(QDebug str, const KCSheetDamage& d);
+KCELLS_EXPORT QDebug operator<<(QDebug str, const KCSelectionDamage& d);
 
 #endif // KSPREAD_DAMAGES

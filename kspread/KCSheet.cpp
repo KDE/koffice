@@ -2,7 +2,7 @@
    Copyright 2010 Marijn Kruisselbrink <m.kruisselbrink@student.tue.nl>
    Copyright 2007 Stefan Nikolaus <stefan.nikolaus@kdemail.net>
    Copyright 1998,1999 Torben Weis <weis@kde.org>
-   Copyright 1999-2007 The KSpread Team <koffice-devel@kde.org>
+   Copyright 1999-2007 The KCells Team <koffice-devel@kde.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -1299,7 +1299,7 @@ bool KCSheet::loadSheetStyleFormat(KoXmlElement *style)
         //If Header doesn't have region tag add it to Left
         hleft.append(getPart(header));
     }
-    //TODO implement it under kspread
+    //TODO implement it under kcells
     KoXmlNode headerleft = KoXml::namedItemNS(*style, KoXmlNS::style, "header-left");
     if (!headerleft.isNull()) {
         KoXmlElement e = headerleft.toElement();
@@ -1308,7 +1308,7 @@ bool KCSheet::loadSheetStyleFormat(KoXmlElement *style)
         else
             kDebug(36003) << "header left doesn't has attribute  style:display";
     }
-    //TODO implement it under kspread
+    //TODO implement it under kcells
     KoXmlNode footerleft = KoXml::namedItemNS(*style, KoXmlNS::style, "footer-left");
     if (!footerleft.isNull()) {
         KoXmlElement e = footerleft.toElement();
@@ -1387,7 +1387,7 @@ QString KCSheet::getPart(const KoXmlNode & part)
         if (!macro.isNull())
             replaceMacro(text, macro.text(), "<file>");
 
-        //add support for multi line into kspread
+        //add support for multi line into kcells
         if (!result.isEmpty())
             result += '\n';
         result += text;
@@ -1458,7 +1458,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
     QPointer<KoUpdater> updater;
     if (doc() && doc()->progressUpdater()) {
         updater = doc()->progressUpdater()->startSubtask(1,
-                                                     "KSpread::KCSheet::loadOdf");
+                                                     "KCells::KCSheet::loadOdf");
         updater->setProgress(0);
     }
 
@@ -1611,7 +1611,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
     int maxColumn = 1;
     KoXmlNode rowNode = sheetElement.firstChild();
     // Some spreadsheet programs may support more rows than
-    // KSpread so limit the number of repeated rows.
+    // KCells so limit the number of repeated rows.
     // FIXME POSSIBLE DATA LOSS!
 
     // First load all style information for rows, columns and cells
@@ -1765,7 +1765,7 @@ void KCSheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
                                  ? KoPageFormat::Landscape : KoPageFormat::Portrait;
     }
     if (styleStack.hasProperty(KoXmlNS::style, "num-format")) {
-        //not implemented into kspread
+        //not implemented into kcells
         //These attributes specify the numbering style to use.
         //If a numbering style is not specified, the numbering style is inherited from
         //the page style. See section 6.7.8 for information on these attributes
@@ -1782,7 +1782,7 @@ void KCSheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
         kDebug(36003) << " style:print :" << str;
 
         if (str.contains("headers")) {
-            //TODO implement it into kspread
+            //TODO implement it into kcells
         }
         if (str.contains("grid")) {
             print()->settings()->setPrintGrid(true);
@@ -1808,7 +1808,7 @@ void KCSheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
     }
     if (styleStack.hasProperty(KoXmlNS::style, "table-centering")) {
         QString str = styleStack.property(KoXmlNS::style, "table-centering");
-        //TODO not implemented into kspread
+        //TODO not implemented into kcells
         kDebug(36003) << " styleStack.attribute( style:table-centering ) :" << str;
 #if 0
         if (str == "horizontal") {
@@ -1836,7 +1836,7 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
         bool ok = true;
         int n = column.attributeNS(KoXmlNS::table, "number-columns-repeated", QString()).toInt(&ok);
         if (ok)
-            // Some spreadsheet programs may support more rows than KSpread so
+            // Some spreadsheet programs may support more rows than KCells so
             // limit the number of repeated rows.
             // FIXME POSSIBLE DATA LOSS!
             number = qMin(n, KS_colMax - indexCol + 1);
@@ -2001,7 +2001,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
         bool ok = true;
         int n = row.attributeNS(KoXmlNS::table, sNumberRowsRepeated, QString()).toInt(&ok);
         if (ok)
-            // Some spreadsheet programs may support more rows than KSpread so
+            // Some spreadsheet programs may support more rows than KCells so
             // limit the number of repeated rows.
             // FIXME POSSIBLE DATA LOSS!
             number = qMin(n, KS_rowMax - rowIndex + 1);
@@ -2078,7 +2078,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
         bool ok = false;
         const int n = cellElement.attributeNS(KoXmlNS::table, sNumberColumnsRepeated, QString()).toInt(&ok);
         // Some spreadsheet programs may support more columns than
-        // KSpread so limit the number of repeated columns.
+        // KCells so limit the number of repeated columns.
         // FIXME POSSIBLE DATA LOSS!
         const int numberColumns = ok ? qMin(n, KS_colMax - columnIndex + 1) : 1;
         columnMaximal = qMax(numberColumns, columnMaximal);
@@ -2893,7 +2893,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
     if (detectDirection)
         checkContentDirection(sname);
 
-    /* older versions of KSpread allowed all sorts of characters that
+    /* older versions of KCells allowed all sorts of characters that
     the parser won't actually understand.  Replace these with '_'
     Also, the initial character cannot be a space.
     */
@@ -2953,7 +2953,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
         setShowFormula((bool)sheet.attribute("showFormula").toInt(&ok));
         // we just ignore 'ok' - if it didn't work, go on
     }
-    //Compatibility with KSpread 1.1.x
+    //Compatibility with KCells 1.1.x
     if (sheet.hasAttribute("formular")) {
         setShowFormula((bool)sheet.attribute("formular").toInt(&ok));
         // we just ignore 'ok' - if it didn't work, go on
@@ -3162,7 +3162,7 @@ bool KCSheet::loadChildren(KoStore* _store)
 #if 0 // KSPREAD_KOPART_EMBEDDING
     foreach(EmbeddedObject* object, doc()->embeddedObjects()) {
         if (object->sheet() == this && (object->getType() == OBJECT_KOFFICE_PART || object->getType() == OBJECT_CHART)) {
-            kDebug() << "KSpreadSheet::loadChildren";
+            kDebug() << "KCellsSheet::loadChildren";
             if (!dynamic_cast<EmbeddedKOfficeObject*>(object)->embeddedObject()->loadDocument(_store))
                 return false;
         }
@@ -3318,7 +3318,7 @@ void KCSheet::convertObscuringBorders()
     // FIXME Stefan: Verify that this is not needed anymore.
 #if 0
     /* a word of explanation here:
-       beginning with KSpread 1.2 (actually, cvs of Mar 28, 2002), border information
+       beginning with KCells 1.2 (actually, cvs of Mar 28, 2002), border information
        is stored differently.  Previously, for a cell obscuring a region, the entire
        region's border's data would be stored in the obscuring cell.  This caused
        some data loss in certain situations.  After that date, each cell stores

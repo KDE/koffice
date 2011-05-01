@@ -73,8 +73,8 @@ public:
 
     // Interface Options
     Ui::InterfaceOptionsWidget interfaceOptions;
-    KSpread::MoveTo oldCursorMovement;
-    KSpread::MethodOfCalc oldFunction;
+    KCells::MoveTo oldCursorMovement;
+    KCells::MethodOfCalc oldFunction;
     KoUnit oldUnit;
     double oldIndentationStep;
     bool oldCaptureAllArrowKeys;
@@ -115,7 +115,7 @@ void PreferenceDialog::Private::applyInterfaceOptions()
     oldUnit = view->doc()->unit();
 
     const int cursorMovementIndex = interfaceOptions.m_cursorMovement->currentIndex();
-    const KSpread::MoveTo cursorMovement = (KSpread::MoveTo)interfaceOptions.m_cursorMovement->itemData(cursorMovementIndex).toInt();
+    const KCells::MoveTo cursorMovement = (KCells::MoveTo)interfaceOptions.m_cursorMovement->itemData(cursorMovementIndex).toInt();
     if (cursorMovement != view->doc()->map()->settings()->moveToValue()) {
         view->doc()->map()->settings()->setMoveToValue(cursorMovement);
         parameterGroup.writeEntry("Move", (int)cursorMovement);
@@ -123,7 +123,7 @@ void PreferenceDialog::Private::applyInterfaceOptions()
     }
 
     const int functionIndex = interfaceOptions.m_statusBarFunction->currentIndex();
-    const KSpread::MethodOfCalc function = (KSpread::MethodOfCalc)interfaceOptions.m_statusBarFunction->itemData(functionIndex).toInt();
+    const KCells::MethodOfCalc function = (KCells::MethodOfCalc)interfaceOptions.m_statusBarFunction->itemData(functionIndex).toInt();
     if (function != view->doc()->map()->settings()->getTypeOfCalc()) {
         view->doc()->map()->settings()->setTypeOfCalc(function);
         parameterGroup.writeEntry("Method of Calc", (int)function);
@@ -157,14 +157,14 @@ void PreferenceDialog::Private::applyInterfaceOptions()
     const QColor gridColor = interfaceOptions.m_gridColor->color();
     if (gridColor != view->doc()->map()->settings()->gridColor()) {
         view->doc()->map()->settings()->setGridColor(gridColor);
-        config->group("KSpread Color").writeEntry("GridColor", gridColor);
+        config->group("KCells Color").writeEntry("GridColor", gridColor);
         oldGridColor = gridColor;
     }
 
     const QColor pageBorderColor = interfaceOptions.m_pageBorderColor->color();
     if (pageBorderColor != view->doc()->map()->settings()->pageBorderColor()) {
         view->doc()->map()->settings()->changePageBorderColor(pageBorderColor);
-        config->group("KSpread Color").writeEntry("PageBorderColor", pageBorderColor);
+        config->group("KCells Color").writeEntry("PageBorderColor", pageBorderColor);
         oldPageBorderColor = pageBorderColor;
     }
 
@@ -221,7 +221,7 @@ void PreferenceDialog::Private::resetInterfaceOptions()
     oldIndentationStep = view->doc()->map()->settings()->indentValue();
     oldCaptureAllArrowKeys = view->doc()->map()->settings()->captureAllArrowKeys();
 
-    const KConfigGroup colorGroup = config->group("KSpread Color");
+    const KConfigGroup colorGroup = config->group("KCells Color");
     oldGridColor = colorGroup.readEntry("GridColor", QColor(Qt::lightGray));
     oldPageBorderColor = colorGroup.readEntry("PageBorderColor", QColor(Qt::red));
 
@@ -292,7 +292,7 @@ PreferenceDialog::PreferenceDialog(KCView* view)
         , d(new Private)
 {
     setObjectName("PreferenceDialog");
-    setCaption(i18n("Configure KSpread"));
+    setCaption(i18n("Configure KCells"));
     setFaceType(List);
     setButtons(Ok | Cancel | Default | Reset);
     setDefaultButton(Ok);
@@ -314,20 +314,20 @@ PreferenceDialog::PreferenceDialog(KCView* view)
     addPage(page);
     d->page2 = page;
 
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("Down"), KSpread::Bottom);
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("Up"), KSpread::Top);
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("Right"), KSpread::Right);
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("Left"), KSpread::Left);
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("Down, First Column"), KSpread::BottomFirst);
-    d->interfaceOptions.m_cursorMovement->addItem(i18n("None"), KSpread::NoMovement);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("Down"), KCells::Bottom);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("Up"), KCells::Top);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("Right"), KCells::Right);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("Left"), KCells::Left);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("Down, First Column"), KCells::BottomFirst);
+    d->interfaceOptions.m_cursorMovement->addItem(i18n("None"), KCells::NoMovement);
 
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Sum"), KSpread::SumOfNumber);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Min"), KSpread::Min);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Max"), KSpread::Max);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Average"), KSpread::Average);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Count"), KSpread::Count);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("CountA"), KSpread::CountA);
-    d->interfaceOptions.m_statusBarFunction->addItem(i18n("None"), KSpread::NoneCalc);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Sum"), KCells::SumOfNumber);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Min"), KCells::Min);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Max"), KCells::Max);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Average"), KCells::Average);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("Count"), KCells::Count);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("CountA"), KCells::CountA);
+    d->interfaceOptions.m_statusBarFunction->addItem(i18n("None"), KCells::NoneCalc);
 
     KComboBox* unitComboBox = d->interfaceOptions.m_unit;
     unitComboBox->addItem(KoUnit::unitDescription(KoUnit(KoUnit::Millimeter)), KoUnit::Millimeter);
@@ -358,8 +358,8 @@ PreferenceDialog::PreferenceDialog(KCView* view)
 
     // Plugin Options Widget
     d->pluginSelector = new KPluginSelector(this);
-    const QString serviceType = QLatin1String("KSpread/Plugin");
-    const QString query = QLatin1String("([X-KSpread-InterfaceVersion] == 0)");
+    const QString serviceType = QLatin1String("KCells/Plugin");
+    const QString query = QLatin1String("([X-KCells-InterfaceVersion] == 0)");
     const KService::List offers = KServiceTypeTrader::self()->query(serviceType, query);
     const QList<KPluginInfo> pluginInfoList = KPluginInfo::fromServices(offers);
     d->pluginSelector->addPlugins(pluginInfoList, KPluginSelector::ReadConfigFile,

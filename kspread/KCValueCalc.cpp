@@ -668,8 +668,8 @@ KCValue KCValueCalc::log(const KCValue &number,
     if (logbase <= 0.0)
         return KCValue::errorNA();
 
-    logbase = KSpread::log(logbase, 10);
-    KCValue res = KCValue(KSpread::log(converter->toFloat(number), 10) / logbase);
+    logbase = KCells::log(logbase, 10);
+    KCValue res = KCValue(KCells::log(converter->toFloat(number), 10) / logbase);
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -679,7 +679,7 @@ KCValue KCValueCalc::log(const KCValue &number,
 
 KCValue KCValueCalc::ln(const KCValue &number)
 {
-    KCValue res = KCValue(KSpread::ln(converter->toFloat(number)));
+    KCValue res = KCValue(KCells::ln(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -695,7 +695,7 @@ KCValue KCValueCalc::log(const KCValue &number, KCNumber base)
         return KCValue::errorDIV0();
 
     KCNumber num = converter->toFloat(number);
-    KCValue res = KCValue(KSpread::log(num, base));
+    KCValue res = KCValue(KCells::log(num, base));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -902,7 +902,7 @@ KCValue KCValueCalc::cos(const KCValue &number)
 
 KCValue KCValueCalc::tg(const KCValue &number)
 {
-    KCValue res = KCValue(KSpread::tg(converter->toFloat(number)));
+    KCValue res = KCValue(KCells::tg(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -912,7 +912,7 @@ KCValue KCValueCalc::tg(const KCValue &number)
 
 KCValue KCValueCalc::cotg(const KCValue &number)
 {
-    KCValue res = div(1, KCValue(KSpread::tg(converter->toFloat(number))));
+    KCValue res = div(1, KCValue(KCells::tg(converter->toFloat(number))));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -963,7 +963,7 @@ KCValue KCValueCalc::acos(const KCValue &number)
 KCValue KCValueCalc::atg(const KCValue &number)
 {
     errno = 0;
-    KCValue res = KCValue(KSpread::atg(converter->toFloat(number)));
+    KCValue res = KCValue(KCells::atg(converter->toFloat(number)));
     if (errno)
         return KCValue::errorVALUE();
 
@@ -1002,7 +1002,7 @@ KCValue KCValueCalc::cosh(const KCValue &number)
 
 KCValue KCValueCalc::tgh(const KCValue &number)
 {
-    KCValue res = KCValue(KSpread::tgh(converter->toFloat(number)));
+    KCValue res = KCValue(KCells::tgh(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -1039,7 +1039,7 @@ KCValue KCValueCalc::acosh(const KCValue &number)
 KCValue KCValueCalc::atgh(const KCValue &number)
 {
     errno = 0;
-    KCValue res = KCValue(KSpread::atgh(converter->toFloat(number)));
+    KCValue res = KCValue(KCells::atgh(converter->toFloat(number)));
     if (errno)
         return KCValue::errorVALUE();
 

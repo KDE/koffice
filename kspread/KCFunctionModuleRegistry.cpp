@@ -82,9 +82,9 @@ KCFunctionModuleRegistry* KCFunctionModuleRegistry::instance()
 
 void KCFunctionModuleRegistry::loadFunctionModules()
 {
-    const quint32 minKSpreadVersion = KOFFICE_MAKE_VERSION(2, 1, 0);
-    const QString serviceType = QLatin1String("KSpread/Plugin");
-    const QString query = QLatin1String("([X-KSpread-InterfaceVersion] == 0) and "
+    const quint32 minKCellsVersion = KOFFICE_MAKE_VERSION(2, 1, 0);
+    const QString serviceType = QLatin1String("KCells/Plugin");
+    const QString query = QLatin1String("([X-KCells-InterfaceVersion] == 0) and "
                                         "([X-KDE-PluginInfo-Category] == 'KCFunctionModule')");
     const KService::List offers = KServiceTypeTrader::self()->query(serviceType, query);
     const KConfigGroup moduleGroup = KGlobal::config()->group("Plugins");
@@ -94,10 +94,10 @@ void KCFunctionModuleRegistry::loadFunctionModules()
         pluginInfo.load(); // load activation state
         KPluginLoader loader(*pluginInfo.service());
         // Let's be paranoid: do not believe the service type.
-        if (loader.pluginVersion() < minKSpreadVersion) {
+        if (loader.pluginVersion() < minKCellsVersion) {
             kDebug(36002) << pluginInfo.name()
-            << "was built against KSpread" << loader.pluginVersion()
-            << "; required version >=" << minKSpreadVersion;
+            << "was built against KCells" << loader.pluginVersion()
+            << "; required version >=" << minKCellsVersion;
             continue;
         }
         if (pluginInfo.isPluginEnabled() && !contains(pluginInfo.pluginName())) {

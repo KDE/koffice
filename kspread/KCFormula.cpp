@@ -421,7 +421,7 @@ void TokenStack::ensureSpace()
  **********************/
 
 // helper function: return true for valid identifier character
-bool KSpread::isIdentifier(const QChar &ch)
+bool KCells::isIdentifier(const QChar &ch)
 {
     return (ch.unicode() == '_') || (ch.unicode() == '$') || (ch.unicode() == '.') || (ch.isLetter());
 }
@@ -613,7 +613,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
 
             // beginning with alphanumeric ?
             // could be identifier, cell, range, or function...
-            else if (KSpread::isIdentifier(ch)) {
+            else if (KCells::isIdentifier(ch)) {
                 state = InIdentifier;
             }
 
@@ -665,7 +665,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
         case InIdentifier:
 
             // consume as long as alpha, dollar sign, underscore, or digit
-            if (KSpread::isIdentifier(ch)  || ch.isDigit()) tokenText.append(ex[i++]);
+            if (KCells::isIdentifier(ch)  || ch.isDigit()) tokenText.append(ex[i++]);
 
             // a '!' ? then this must be sheet name, e.g "Sheet4!", unless the next character is '='
             else if (ch == '!' && ex[i+1] != '=') {
@@ -703,7 +703,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
         case InCell:
 
             // consume as long as alpha, dollar sign, underscore, or digit
-            if (KSpread::isIdentifier(ch)  || ch.isDigit()) tokenText.append(ex[i++]);
+            if (KCells::isIdentifier(ch)  || ch.isDigit()) tokenText.append(ex[i++]);
 
             // we're done with cell ref, possibly with sheet name (like "Sheet2!B2")
             // note that "Sheet2!TotalSales" is also possible, in which "TotalSales" is a named area
@@ -746,7 +746,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
         case InRange:
 
             // consume as long as alpha, dollar sign, underscore, or digit or !
-            if (KSpread::isIdentifier(ch) || ch.isDigit() || ch == '!') tokenText.append(ex[i++]);
+            if (KCells::isIdentifier(ch) || ch.isDigit() || ch == '!') tokenText.append(ex[i++]);
 
             // we're done with range reference
             else {
@@ -814,7 +814,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
             }
 
             // identifier?
-            else if (KSpread::isIdentifier(ch)) {
+            else if (KCells::isIdentifier(ch)) {
                 // has to be a sheet or area name then
                 state = InIdentifier;
             }

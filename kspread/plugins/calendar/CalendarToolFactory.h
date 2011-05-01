@@ -22,7 +22,7 @@
 
 #include <part/KCCellToolFactory.h>
 
-#define KSPREAD_CALENDAR_TOOL_ID "KSpreadCalendarToolId"
+#define KSPREAD_CALENDAR_TOOL_ID "KCellsCalendarToolId"
 
 class CalendarToolFactory : public KCCellToolFactory
 {

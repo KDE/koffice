@@ -30,7 +30,7 @@
 #ifndef KSPREAD_CALCULATION_SETTINGS
 #define KSPREAD_CALCULATION_SETTINGS
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 #include <KoXmlReader.h>
 
@@ -44,7 +44,7 @@ class KoXmlWriter;
  * Calculation settings
  * \ingroup KCValue
  */
-class KSPREAD_EXPORT KCCalculationSettings
+class KCELLS_EXPORT KCCalculationSettings
 {
 public:
     /**

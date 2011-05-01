@@ -1,5 +1,5 @@
 /*
- * This file is part of KSpread
+ * This file is part of KCells
  *
  * Copyright (c) 2006, 2007 Sebastian Sauer <mail@dipe.org>
  *
@@ -68,20 +68,20 @@ public:
         QVariantList list;
         for (int i = 0; i < args.size(); ++i) {
             switch (description->param(i).type()) {
-            case KSpread_Int:
+            case KCells_Int:
                 list << int(args[i].asInteger());
                 break;
-            case KSpread_Float: {
+            case KCells_Float: {
                 list << double(args[i].asFloat());
             }
             break;
-            case KSpread_String:
+            case KCells_String:
                 list << args[i].asString();
                 break;
-            case KSpread_Boolean:
+            case KCells_Boolean:
                 list << args[i].asBoolean();
                 break;
-            case KSpread_Any:
+            case KCells_Any:
             default:
                 list << args[i].asVariant();
                 break;
@@ -122,19 +122,19 @@ public:
 
         KCValue resultvalue;
         switch (description->type()) {
-        case KSpread_Int:
+        case KCells_Int:
             resultvalue = KCValue(result.toInt());
             break;
-        case KSpread_Float:
+        case KCells_Float:
             resultvalue = KCValue((double) result.toDouble());
             break;
-        case KSpread_String:
+        case KCells_String:
             resultvalue = KCValue(result.toString());
             break;
-        case KSpread_Boolean:
+        case KCells_Boolean:
             resultvalue = KCValue(result.toBool());
             break;
-        case KSpread_Any:
+        case KCells_Any:
         default:
             //TODO make more generic
             //resultvalue = KCValue( result );

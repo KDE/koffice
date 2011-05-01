@@ -28,7 +28,7 @@
 #include <QVector>
 #include <QPoint>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 #include "KCCell.h"
 
 #define KSPREAD_INLINE_ARRAYS
@@ -43,7 +43,7 @@ typedef QHash<KCCell, KCCell> CellIndirection;
  * \ingroup KCValue
  * A formula token.
  */
-class KSPREAD_EXPORT KCToken
+class KCELLS_EXPORT KCToken
 {
 public:
     /**
@@ -297,7 +297,7 @@ protected:
  *
  *
  */
-class KSPREAD_EXPORT KCFormula
+class KCELLS_EXPORT KCFormula
 {
 public:
     /**
@@ -425,7 +425,7 @@ QTextStream& operator<<(QTextStream& ts, KCFormula formula);
 
 
 
-namespace KSpread
+namespace KCells
 {
 /**
  * helper function: return true for valid identifier character

@@ -1,5 +1,5 @@
 /*
- * This file is part of KSpread
+ * This file is part of KCells
  *
  * Copyright (c) 2005 Cyrille Berger <cberger@cberger.net>
  * Copyright (c) 2006 Isaac Clerencia <isaac@warp.es>
@@ -32,14 +32,14 @@
 #include <kurl.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-// KSpread
+// KCells
 #include <part/KCDoc.h>
 #include <part/KCView.h>
 // Kross
 #include <kross/core/manager.h>
 
-K_PLUGIN_FACTORY(KSpreadScriptingFactory, registerPlugin< ScriptingPart >();)
-K_EXPORT_PLUGIN(KSpreadScriptingFactory("krossmodulekspread"))
+K_PLUGIN_FACTORY(KCellsScriptingFactory, registerPlugin< ScriptingPart >();)
+K_EXPORT_PLUGIN(KCellsScriptingFactory("krossmodulekcells"))
 
 /// \internal d-pointer class.
 class ScriptingPart::Private
@@ -53,7 +53,7 @@ ScriptingPart::ScriptingPart(QObject* parent, const QVariantList& argList)
 {
     Q_UNUSED(argList);
     setComponentData(ScriptingPart::componentData());
-    setXMLFile(KStandardDirs::locate("data", "kspread/kpartplugins/scripting.rc"), true);
+    setXMLFile(KStandardDirs::locate("data", "kcells/kpartplugins/scripting.rc"), true);
     kDebug() << "Scripting plugin. Class:" << metaObject()->className() << ", Parent:" << parent->metaObject()->className();
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();

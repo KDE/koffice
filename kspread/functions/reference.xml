@@ -1,5 +1,5 @@
-<!DOCTYPE KSpreadFunctions>
-<KSpreadFunctions>
+<!DOCTYPE KCellsFunctions>
+<KCellsFunctions>
 
   <Group>
     <GroupName>Lookup &amp; Reference</GroupName>
@@ -306,4 +306,4 @@
 
   </Group>
 
-</KSpreadFunctions>
+</KCellsFunctions>

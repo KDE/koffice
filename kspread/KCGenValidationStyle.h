@@ -22,7 +22,7 @@
 #ifndef KSPREAD_GENVALIDATIONSTYLE
 #define KSPREAD_GENVALIDATIONSTYLE
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 #include <QMap>
 #include <QString>
@@ -84,7 +84,7 @@ private:
  * \class KCGenValidationStyles
  * \ingroup OpenDocument
  */
-class KSPREAD_EXPORT KCGenValidationStyles
+class KCELLS_EXPORT KCGenValidationStyles
 {
 public:
     KCGenValidationStyles();

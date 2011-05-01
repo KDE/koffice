@@ -42,7 +42,7 @@ Reason:
   is not possible
 2.
 - use QVariant as data carrier/common base
-- mirror QVariant's behaviour in KSpread::Value
+- mirror QVariant's behaviour in KCells::Value
 Reason:
 - the QVariant::Type does not suffice, you need to know the type in order to use
   it

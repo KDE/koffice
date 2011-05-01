@@ -44,7 +44,7 @@
 #include "../Global.h"
 #include "../KCDocBase.h"
 
-#include "../kspread_export.h"
+#include "../kcells_export.h"
 
 class QDomDocument;
 class QPainter;
@@ -55,7 +55,7 @@ class KoResourceManager;
 class KoStore;
 class KoXmlWriter;
 
-#define MIME_TYPE "application/x-kspread"
+#define MIME_TYPE "application/x-kcells"
 
 class KCSheet;
 class KCDoc;
@@ -68,7 +68,7 @@ class KCSheetAccessModel;
 /**
  * This class holds the data that makes up a spreadsheet.
  */
-class KSPREAD_EXPORT KCDoc : public KCDocBase
+class KCELLS_EXPORT KCDoc : public KCDocBase
 {
     Q_OBJECT
     Q_PROPERTY(int syntaxVersion READ syntaxVersion)
@@ -89,7 +89,7 @@ public:
 
 
     /**
-     * @return the MIME type of KSpread document
+     * @return the MIME type of KCells document
      */
     virtual QByteArray mimeType() const {
         return MIME_TYPE;

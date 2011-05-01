@@ -116,7 +116,7 @@ public:
      *  The default implementation asks @ref KoDocument::hitTest. This
      *  will iterate over all child documents to detect a hit.
      *
-     *  If your koffice component has multiple pages, like for example KSpread, then the hittest
+     *  If your koffice component has multiple pages, like for example KCells, then the hittest
      *  may not succeed for a child that is not on the visible page. In those
      *  cases you need to reimplement this method.
      */

@@ -39,7 +39,7 @@ KCToolRegistry::KCToolRegistry()
         : d(new Private)
 {
     // Add the built-in cell tool.
-    KoToolRegistry::instance()->add(new KCCellToolFactory(this, "KSpreadCellToolId"));
+    KoToolRegistry::instance()->add(new KCCellToolFactory(this, "KCellsCellToolId"));
     // Load the tool plugins.
     loadTools();
 }
@@ -57,8 +57,8 @@ KCToolRegistry* KCToolRegistry::instance()
 
 void KCToolRegistry::loadTools()
 {
-    const QString serviceType = QLatin1String("KSpread/Plugin");
-    const QString query = QLatin1String("([X-KSpread-InterfaceVersion] == 0) and "
+    const QString serviceType = QLatin1String("KCells/Plugin");
+    const QString query = QLatin1String("([X-KCells-InterfaceVersion] == 0) and "
                                         "([X-KDE-PluginInfo-Category] == 'Tool')");
     const KService::List offers = KServiceTypeTrader::self()->query(serviceType, query);
     const KConfigGroup moduleGroup = KGlobal::config()->group("Plugins");

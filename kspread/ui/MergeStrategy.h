@@ -21,7 +21,7 @@
 #define KSPREAD_MERGE_STRATEGY
 
 #include "AbstractSelectionStrategy.h"
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 
 /**
@@ -30,7 +30,7 @@
  * Created, when the user presses the middle mouse button on the selection handle.
  * Nothing happens, if the selection did not change.
  */
-class KSPREAD_EXPORT MergeStrategy : public AbstractSelectionStrategy
+class KCELLS_EXPORT MergeStrategy : public AbstractSelectionStrategy
 {
 public:
     /**

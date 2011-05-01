@@ -1,4 +1,4 @@
-project(kspread)
+project(kcells)
 
 add_subdirectory( data )
 add_subdirectory( shape )
@@ -175,7 +175,7 @@ SET (ui_DIR_SRCS
     ui/SheetView.cpp
 )
 
-SET (kspreadcommon_LIB_SRCS
+SET (kcellscommon_LIB_SRCS
     KCMapModel.cpp
     KCPageManager.cpp
     KCRegionModel.cpp
@@ -190,7 +190,7 @@ SET (kspreadcommon_LIB_SRCS
     ${ui_DIR_SRCS}
     )
 
-set (kspreadodf_LIB_SRCS
+set (kcellsodf_LIB_SRCS
     part/Digest.cpp
     KCApplicationSettings.cpp
     KCBinding.cpp
@@ -238,7 +238,7 @@ set (kspreadodf_LIB_SRCS
     database/DatabaseManager.cpp
     database/Filter.cpp
 
-    # TODO: move the formula evaluation out of KCFormula.cpp so these files can move out of libkspreadodf
+    # TODO: move the formula evaluation out of KCFormula.cpp so these files can move out of libkcellsodf
     KCFunction.cpp
     KCFunctionDescription.cpp
     KCFunctionModule.cpp
@@ -252,73 +252,73 @@ set (kspreadodf_LIB_SRCS
     )
 
 
-kde4_add_library(kspreadodf SHARED ${kspreadodf_LIB_SRCS})
+kde4_add_library(kcellsodf SHARED ${kcellsodf_LIB_SRCS})
 
-target_link_libraries(kspreadodf komain)
-target_link_libraries(kspreadodf LINK_INTERFACE_LIBRARIES komain)
+target_link_libraries(kcellsodf komain)
+target_link_libraries(kcellsodf LINK_INTERFACE_LIBRARIES komain)
 
-set_target_properties(kspreadodf PROPERTIES
+set_target_properties(kcellsodf PROPERTIES
    VERSION ${GENERIC_KOFFICE_LIB_VERSION} SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION}
 )
-install(TARGETS kspreadodf ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kcellsodf ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 
-kde4_add_library(kspreadcommon SHARED ${kspreadcommon_LIB_SRCS})
+kde4_add_library(kcellscommon SHARED ${kcellscommon_LIB_SRCS})
 
-target_link_libraries(kspreadcommon
+target_link_libraries(kcellscommon
     komain
-    kspreadodf
+    kcellsodf
     ${QT_QTSQL_LIBRARY}
     ${KDE4_KNOTIFYCONFIG_LIBS}
     ${KDE4_KUTILS_LIBS}
 #    ${KDE4_KDE3SUPPORT_LIBS}
 )
 
-target_link_libraries(kspreadcommon LINK_INTERFACE_LIBRARIES komain kspreadodf )
+target_link_libraries(kcellscommon LINK_INTERFACE_LIBRARIES komain kcellsodf )
 
-set_target_properties(kspreadcommon PROPERTIES
+set_target_properties(kcellscommon PROPERTIES
     VERSION ${GENERIC_KOFFICE_LIB_VERSION} SOVERSION ${GENERIC_KOFFICE_LIB_SOVERSION}
 )
-install(TARGETS kspreadcommon  ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kcellscommon  ${INSTALL_TARGETS_DEFAULT_ARGS})
 ########### next target ###############
 
-SET (kspreadpart_PART_SRCS part/Factory_init.cpp )
+SET (kcellspart_PART_SRCS part/Factory_init.cpp )
 
-kde4_add_plugin(kspreadpart ${kspreadpart_PART_SRCS})
+kde4_add_plugin(kcellspart ${kcellspart_PART_SRCS})
 
 
 
-target_link_libraries(kspreadpart kspreadcommon )
+target_link_libraries(kcellspart kcellscommon )
 
-install(TARGETS kspreadpart  DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS kcellspart  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### next target ###############
 
-SET (kspread_KDEINIT_SRCS part/Main.cpp )
+SET (kcells_KDEINIT_SRCS part/Main.cpp )
 
-kde4_add_app_icon(kspread_KDEINIT_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/data/pics/hi*-app-kspread.png")
+kde4_add_app_icon(kcells_KDEINIT_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/data/pics/hi*-app-kcells.png")
 
-kde4_add_kdeinit_executable( kspread ${kspread_KDEINIT_SRCS})
+kde4_add_kdeinit_executable( kcells ${kcells_KDEINIT_SRCS})
 
 if (Q_WS_MAC)
-set_target_properties(kspread PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.template)
-set_target_properties(kspread PROPERTIES MACOSX_BUNDLE_GUI_IDENTIFIER "org.koffice.kspread")
-set_target_properties(kspread PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "KSpread 2")
+set_target_properties(kcells PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.template)
+set_target_properties(kcells PROPERTIES MACOSX_BUNDLE_GUI_IDENTIFIER "org.koffice.kcells")
+set_target_properties(kcells PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "KCells 2")
 endif (Q_WS_MAC)
 
-target_link_libraries(kdeinit_kspread komain )
+target_link_libraries(kdeinit_kcells komain )
 
-install(TARGETS kdeinit_kspread  ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kdeinit_kcells  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-target_link_libraries( kspread kdeinit_kspread )
-install(TARGETS kspread  ${INSTALL_TARGETS_DEFAULT_ARGS})
+target_link_libraries( kcells kdeinit_kcells )
+install(TARGETS kcells  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
-install( FILES  kspread.rc kspread_readonly.rc kspread.notifyrc DESTINATION ${DATA_INSTALL_DIR}/kspread)
-install( FILES  kspreadpart.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install( PROGRAMS  kspread.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install( FILES  kspread.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
-install( FILES  kspread_plugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
-install( FILES  kspreadrc DESTINATION ${CONFIG_INSTALL_DIR})
+install( FILES  kcells.rc kcells_readonly.rc kcells.notifyrc DESTINATION ${DATA_INSTALL_DIR}/kcells)
+install( FILES  kcellspart.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install( PROGRAMS  kcells.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install( FILES  kcells.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
+install( FILES  kcells_plugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+install( FILES  kcellsrc DESTINATION ${CONFIG_INSTALL_DIR})

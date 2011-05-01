@@ -26,7 +26,7 @@
 
 #include "KCHeaderFooter.h"
 #include "KCPrintSettings.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 

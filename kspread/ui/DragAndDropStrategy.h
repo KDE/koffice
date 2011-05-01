@@ -21,7 +21,7 @@
 #define KSPREAD_DRAG_AND_DROP_STRATEGY
 
 #include "AbstractSelectionStrategy.h"
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 
 /**
@@ -30,7 +30,7 @@
  * The drag starts, if the mouse leaves the cell, where the mouse press occurred.
  * If this cell is not left, the cell becomes selected.
  */
-class KSPREAD_EXPORT DragAndDropStrategy : public AbstractSelectionStrategy
+class KCELLS_EXPORT DragAndDropStrategy : public AbstractSelectionStrategy
 {
 public:
     /**

@@ -21,7 +21,7 @@
 
 #include "CellEditor.h"
 #include "CellToolBase.h"
-#include "kspread_limits.h"
+#include "kcells_limits.h"
 #include "Selection.h"
 #include "KCSheet.h"
 

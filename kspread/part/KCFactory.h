@@ -22,13 +22,13 @@
 
 #include <KPluginFactory>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class KAboutData;
 class KIconLoader;
 
 
-class KSPREAD_EXPORT KCFactory : public KPluginFactory
+class KCELLS_EXPORT KCFactory : public KPluginFactory
 {
     Q_OBJECT
 public:

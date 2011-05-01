@@ -1,10 +1,10 @@
 #!/bin/bash
 #
 # IMPORTANT: this is like the slowest thing ever. But it works. Usually.
-# Requires an open instance of KSpread, with openformula-test.ods loaded.
+# Requires an open instance of KCells, with openformula-test.ods loaded.
 #
 
-KSPREAD=`dcopfind 'kspread*'`
+KSPREAD=`dcopfind 'kcells*'`
 KSPREAD=`echo $KSPREAD | sed s/DCOPRef\(// | sed s/,\)//`
 for i in `seq 51 514`
   do

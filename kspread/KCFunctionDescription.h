@@ -25,17 +25,17 @@
 #include <QList>
 #include <QStringList>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QDomElement;
 
-enum ParameterType { KSpread_Int, KSpread_Float, KSpread_String, KSpread_Boolean, KSpread_Any };
+enum ParameterType { KCells_Int, KCells_Float, KCells_String, KCells_Boolean, KCells_Any };
 
 /**
  * \ingroup KCValue
  * A function parameter.
  */
-class KSPREAD_EXPORT KCFunctionParameter
+class KCELLS_EXPORT KCFunctionParameter
 {
 public:
     KCFunctionParameter();
@@ -62,7 +62,7 @@ private:
  * \ingroup KCValue
  * A function description.
  */
-class KSPREAD_EXPORT KCFunctionDescription
+class KCELLS_EXPORT KCFunctionDescription
 {
 public:
     KCFunctionDescription();

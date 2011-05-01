@@ -325,7 +325,7 @@ QRectF KCPrintJob::preparePage(int pageNumber)
 {
     // The printing of shapes is done by KoPrintingDialog, which needs the
     // QPainter set up properly. Otherwise, the separation into preparePage()
-    // and printPage() would not have been necessary - at least for KSpread.
+    // and printPage() would not have been necessary - at least for KCells.
     // In printPage() the painting of the sheet contents is done; some of the
     // QPainter settings from preparePage() get reverted.
 

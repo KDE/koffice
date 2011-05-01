@@ -1,4 +1,4 @@
-Changes since KSpread 2.2
+Changes since KCells 2.2
 =========================
 
 Features
@@ -58,7 +58,7 @@ Splitted Functions.{cpp,h}.
 
 
 
-Changes for KSpread 1.5 Beta 1
+Changes for KCells 1.5 Beta 1
 ==============================
 
 Features
@@ -112,8 +112,8 @@ Bug Fixes
 Developer-Visible Only
 ----------------------
 Manipulators used in commands
-KSpread::Cell is associated with KSpread::Format, no longer inherits it
-Setter and getter methods for KSpread::Point
+KCells::Cell is associated with KCells::Format, no longer inherits it
+Setter and getter methods for KCells::Point
 
 
 
@@ -129,7 +129,7 @@ since 1.4.0
 since 1.4-beta1
 ===============
 - Use General/Blank Worksheet as default template.
-- KSpread crashes on exit if there is a chart in the sheet (#101915).
+- KCells crashes on exit if there is a chart in the sheet (#101915).
 - The data editor is disabled for charts which has been loaded.
 - Don't use 600 dpi as default resolution (the chart printing is much faster now).
 - The chart/object printing is simplified and works correctly now. Unfortunately
@@ -142,14 +142,14 @@ since 1.3
 
 - fix bug #63332: Pasting into a cell that has spilled out, pastes
   into all overwritten cells
-- fix bug #101926: kspread never prints the grid
+- fix bug #101926: kcells never prints the grid
 - Implement save/load Oasis format
 - Allow to sort without respect case
 - allow editing/removing of links
 - fixed bug 76861: bad rendering of hyperlink
 - Validation: allow to display or not message
 - Add new dcop function
-- Start to port KSpread_undo to kcommand
+- Start to port KCells_undo to kcommand
 - Add combobox to search area name
 - Add Help Message as in oocalc
 - multiple steps undo and redo
@@ -177,7 +177,7 @@ changes for 1.3.2
 - fix bug #69798: SEXDEC parse error
 - fix enable/disable action into validation dialogbox
 - fix disable/enable "show table" menu item
-- fix bug #69066: crash when viewing a KSpread document in Konqueror
+- fix bug #69066: crash when viewing a KCells document in Konqueror
 
 changes for 1.3.1
 =================
@@ -210,20 +210,20 @@ since 1.3 RC1
 
 since 1.3 beta4
 ===============
-- #64794: kspread problem with calculating dates
+- #64794: kcells problem with calculating dates
 - #61570: cell border does not work with merged cells
 - fix unsorted zoom values (#64154)
 
 since 1.3 beta3
 ===============
-- KSpread is slow during text to column conversion (#59999)
+- KCells is slow during text to column conversion (#59999)
 - fix problem cycling absolute cell reference with F4 key (#46959)
 - the calculator plugin saves its configuration now (#49954)
 - fix detection of sheet direction (for rtl support)
 
 since 1.3 beta2
 ===============
-- KSpread crash when changing paper orientation (#60279)
+- KCells crash when changing paper orientation (#60279)
 
 
 since 1.3 beta1
@@ -364,8 +364,8 @@ Bugfixes:
 - Fix Embedded chart changes titles when opening again
 - Fix #44628 (Grave): 1.1 document not read with 1.2 - circular references
 - Fix #40150 (Normal): Precision problem in calculations
-- Fix #29524:  KSpread KCFormula editors tooltip should be changed
-- Fix #18083: KSpread rounding error
+- Fix #29524:  KCells KCFormula editors tooltip should be changed
+- Fix #18083: KCells rounding error
 - Fix #46530: crash on selecting validity
 - Fix #45395: Save as HTML is called "mime type"
 - Fix #34088: Precision of currency is too low or overflow is handled in a strange way
@@ -404,7 +404,7 @@ Until beta2:
     - option if you want to copy the layout or not
     - you can define a row header which gets copied but not sorted
 - auto continuation support for every direction and all types supported in
-  KSpread and for more complex series like 1,3,4,6,...
+  KCells and for more complex series like 1,3,4,6,...
 - just one "copy" instead of "copy" and "copy as text"
 - insertion of series supports now doubles and decreasing series
 - support for inserting data from SQL databases
@@ -446,7 +446,7 @@ Until beta1:
 - many new built-in functions (see detailed list below)
 - function name is now case-insensitive
 - "Related KCFunction" in formula editor
-- move functions in kspread_interpreter into several kspread_functions_*.cc
+- move functions in kcells_interpreter into several kcells_functions_*.cc
 
 New functions added:
  conversion:

@@ -25,18 +25,18 @@
 
 #include "KCRegion.h"
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 class QAbstractItemModel;
 
 /**
  * Abstracts read-only access to the KCValueStorage.
- * Useful for KChart (or other apps, that want read-only access to KSpread's data).
+ * Useful for KChart (or other apps, that want read-only access to KCells's data).
  *
  * If a cell in the region is updated, the KCBindingManager informs this KCBinding, which
  * in turn informs the model it holds.
  */
-class KSPREAD_EXPORT KCBinding
+class KCELLS_EXPORT KCBinding
 {
 public:
     KCBinding();

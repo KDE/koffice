@@ -25,7 +25,7 @@
 #include <QRegion>
 #include <QTimer>
 
-#include "kspread_export.h"
+#include "kcells_export.h"
 
 #include "KCMap.h"
 #include "KCRegion.h"
@@ -49,7 +49,7 @@ static const int g_garbageCollectionTimeOut = 100;
  * \note For data assigned to points use KCPointStorage.
  */
 template<typename T>
-class KSPREAD_EXPORT KCRectStorage
+class KCELLS_EXPORT KCRectStorage
 {
 public:
     explicit KCRectStorage(KCMap* map);
