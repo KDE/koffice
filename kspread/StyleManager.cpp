@@ -34,7 +34,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "KCCondition.h"
 #include "KCMap.h"
 #include "KCStyle.h"

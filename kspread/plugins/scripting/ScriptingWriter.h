@@ -204,7 +204,7 @@ public Q_SLOTS:
         if (parse)
             v = KCValue(value.toString());
         else {
-            const CalculationSettings* settings = m_module->kspreadDoc()->map()->calculationSettings();
+            const KCCalculationSettings* settings = m_module->kspreadDoc()->map()->calculationSettings();
             switch (value.type()) {
             case QVariant::Invalid:     v = KCValue(); break;
             case QVariant::Bool:        v = KCValue(value.toBool()); break;

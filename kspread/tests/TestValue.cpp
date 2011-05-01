@@ -21,7 +21,7 @@
 
 #include "TestKspreadCommon.h"
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 
 
 void TestValue::testEmpty()
@@ -133,7 +133,7 @@ void TestValue::testDate()
 
     // check all (valid) dates from 1900 to 2050
     // note: bail on first error immediately
-    CalculationSettings calculationSettings;
+    KCCalculationSettings calculationSettings;
     QDate refDate(1899, 12, 31);
     v1 = new KCValue();
     bool date_error = 0;
@@ -152,7 +152,7 @@ void TestValue::testDate()
 
 void TestValue::testTime()
 {
-    CalculationSettings calculationSettings;
+    KCCalculationSettings calculationSettings;
     KCValue* v1;
 
     // time value

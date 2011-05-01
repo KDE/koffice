@@ -43,7 +43,7 @@
 
 #include <kspread/part/AboutData.h> // for version
 #include <kspread/part/Canvas.h>
-#include <kspread/CalculationSettings.h>
+#include <kspread/KCCalculationSettings.h>
 #include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
 #include <kspread/HeaderFooter.h>

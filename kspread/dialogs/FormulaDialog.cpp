@@ -34,7 +34,7 @@
 #include <QGridLayout>
 #include <QVBoxLayout>
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "Function.h"
 #include "FunctionDescription.h"

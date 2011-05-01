@@ -51,7 +51,7 @@ class KoOasisSettings;
 
 class KCApplicationSettings;
 class KCBindingManager;
-class CalculationSettings;
+class KCCalculationSettings;
 class ColumnFormat;
 class Damage;
 class DatabaseManager;
@@ -169,7 +169,7 @@ public:
     /**
      * \return the calculation settings
      */
-    CalculationSettings* calculationSettings() const;
+    KCCalculationSettings* calculationSettings() const;
 
     /**
      * \return the default row format

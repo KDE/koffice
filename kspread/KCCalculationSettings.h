@@ -44,18 +44,18 @@ class KoXmlWriter;
  * Calculation settings
  * \ingroup KCValue
  */
-class KSPREAD_EXPORT CalculationSettings
+class KSPREAD_EXPORT KCCalculationSettings
 {
 public:
     /**
      * Constructor.
      */
-    CalculationSettings();
+    KCCalculationSettings();
 
     /**
      * Destructor.
      */
-    ~CalculationSettings();
+    ~KCCalculationSettings();
 
     /**
      * \ingroup OpenDocument

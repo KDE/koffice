@@ -24,7 +24,7 @@
 #include <QtTest/QtTest>
 
 
-class CalculationSettings;
+class KCCalculationSettings;
 class ValueParser;
 class ValueConverter;
 
@@ -40,7 +40,7 @@ private Q_SLOTS:
     void testCreateNumberFormat_data();
     void testCreateNumberFormat();
 private:
-    CalculationSettings* m_calcsettings;
+    KCCalculationSettings* m_calcsettings;
     ValueParser* m_parser;
     ValueConverter* m_converter;
 };

@@ -45,7 +45,7 @@
 
 // KSpread
 #include "KCApplicationSettings.h"
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "CellStorage.h"
 #include "KCMap.h"
 #include "RowColumnFormat.h"

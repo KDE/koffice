@@ -27,7 +27,7 @@
 
 #include <KTextEdit>
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "ui/RegionSelector.h"
 #include "Formula.h"

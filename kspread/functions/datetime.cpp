@@ -22,7 +22,7 @@
 
 #include "DateTimeModule.h"
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "Function.h"
 #include "FunctionModuleRegistry.h"
 #include "functions/helper.h"

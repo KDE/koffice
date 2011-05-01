@@ -29,7 +29,7 @@
 
 #include "kspread_export.h"
 
-class CalculationSettings;
+class KCCalculationSettings;
 class KCValue;
 
 /**
@@ -43,12 +43,12 @@ public:
     /**
      * Constructor.
      */
-    explicit ValueParser(const CalculationSettings* settings);
+    explicit ValueParser(const KCCalculationSettings* settings);
 
     /**
      * Returns the calculation settings this ValueFormatter uses.
      */
-    const CalculationSettings* settings() const;
+    const KCCalculationSettings* settings() const;
 
     /**
      * Parses the user input text \p str and tries to determine the correct
@@ -107,7 +107,7 @@ protected:
     int readInt(const QString& str, uint& pos) const;
 
 private:
-    const CalculationSettings* m_settings;
+    const KCCalculationSettings* m_settings;
 };
 
 #endif  //KSPREAD_VALUE_PARSER

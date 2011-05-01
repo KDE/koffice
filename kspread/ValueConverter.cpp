@@ -20,7 +20,7 @@
 // Local
 #include "ValueConverter.h"
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "Localization.h"
 #include "ValueParser.h"
 
@@ -29,7 +29,7 @@ ValueConverter::ValueConverter(const ValueParser* parser)
 {
 }
 
-const CalculationSettings* ValueConverter::settings() const
+const KCCalculationSettings* ValueConverter::settings() const
 {
     return m_parser->settings();
 }

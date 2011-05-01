@@ -107,7 +107,7 @@
 // KSpread includes
 #include "KCApplicationSettings.h"
 #include "KCBindingManager.h"
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "CanvasResources.h"
 #include "CellStorage.h"
 #include "Damages.h"

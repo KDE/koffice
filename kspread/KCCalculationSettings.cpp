@@ -29,7 +29,7 @@
 */
 
 // Local
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 
 #include "Localization.h"
 
@@ -37,7 +37,7 @@
 
 #include <kdebug.h>
 
-class CalculationSettings::Private
+class KCCalculationSettings::Private
 {
 public:
     KLocale* locale;
@@ -57,11 +57,11 @@ public:
 
 /*****************************************************************************
  *
- * CalculationSettings
+ * KCCalculationSettings
  *
  *****************************************************************************/
 
-CalculationSettings::CalculationSettings()
+KCCalculationSettings::KCCalculationSettings()
         : d(new Private)
 {
     d->locale = new Localization();
@@ -76,13 +76,13 @@ CalculationSettings::CalculationSettings()
     d->precision = -1;
 }
 
-CalculationSettings::~CalculationSettings()
+KCCalculationSettings::~KCCalculationSettings()
 {
     delete d->locale;
     delete d;
 }
 
-void CalculationSettings::loadOdf(const KoXmlElement& body)
+void KCCalculationSettings::loadOdf(const KoXmlElement& body)
 {
     KoXmlNode settings = KoXml::namedItemNS(body, KoXmlNS::table, "calculation-settings");
     kDebug() << "Calculation settings found?" << !settings.isNull();
@@ -132,7 +132,7 @@ void CalculationSettings::loadOdf(const KoXmlElement& body)
                     if (date.isValid())
                         d->refDate = date;
                 } else {
-                    kDebug() << "CalculationSettings: Error on loading null date."
+                    kDebug() << "KCCalculationSettings: Error on loading null date."
                     << "KCValue type """ << valueType << """ not handled"
                     << ", falling back to default." << endl;
                     // NOTE Stefan: I don't know why different types are possible here!
@@ -144,17 +144,17 @@ void CalculationSettings::loadOdf(const KoXmlElement& body)
     }
 }
 
-bool CalculationSettings::saveOdf(KoXmlWriter &/*settingsWriter*/) const
+bool KCCalculationSettings::saveOdf(KoXmlWriter &/*settingsWriter*/) const
 {
     return true;
 }
 
-KLocale* CalculationSettings::locale() const
+KLocale* KCCalculationSettings::locale() const
 {
     return d->locale;
 }
 
-void CalculationSettings::setReferenceYear(int year)
+void KCCalculationSettings::setReferenceYear(int year)
 {
     if (year < 100)
         d->refYear = 1900 + year;
@@ -162,48 +162,48 @@ void CalculationSettings::setReferenceYear(int year)
         d->refYear = year;
 }
 
-int CalculationSettings::referenceYear() const
+int KCCalculationSettings::referenceYear() const
 {
     return d->refYear;
 }
 
-void CalculationSettings::setReferenceDate(const QDate& date)
+void KCCalculationSettings::setReferenceDate(const QDate& date)
 {
     if (!date.isValid()) return;
     d->refDate.setDate(date.year(), date.month(), date.day());
 }
 
-QDate CalculationSettings::referenceDate() const
+QDate KCCalculationSettings::referenceDate() const
 {
     return d->refDate;
 }
 
-void CalculationSettings::setDefaultDecimalPrecision(int precision)
+void KCCalculationSettings::setDefaultDecimalPrecision(int precision)
 {
     d->precision = precision;
 }
 
-int CalculationSettings::defaultDecimalPrecision() const
+int KCCalculationSettings::defaultDecimalPrecision() const
 {
     return d->precision;
 }
 
-void CalculationSettings::setFileName(const QString& fileName)
+void KCCalculationSettings::setFileName(const QString& fileName)
 {
     d->fileName = fileName;
 }
 
-const QString& CalculationSettings::fileName() const
+const QString& KCCalculationSettings::fileName() const
 {
     return d->fileName;
 }
 
-void CalculationSettings::setAutoCalculationEnabled(bool enable)
+void KCCalculationSettings::setAutoCalculationEnabled(bool enable)
 {
     d->automaticCalculation = enable;
 }
 
-bool CalculationSettings::isAutoCalculationEnabled() const
+bool KCCalculationSettings::isAutoCalculationEnabled() const
 {
     return d->automaticCalculation;
 }

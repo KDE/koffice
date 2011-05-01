@@ -21,7 +21,7 @@
 
 #include "Formula.h"
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "CellStorage.h"
 #include "Function.h"

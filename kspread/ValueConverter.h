@@ -22,7 +22,7 @@
 
 #include "KCValue.h"
 
-class CalculationSettings;
+class KCCalculationSettings;
 class ValueParser;
 
 /**
@@ -40,7 +40,7 @@ public:
     /**
      * Returns the calculation settings this ValueFormatter uses.
      */
-    const CalculationSettings* settings() const;
+    const KCCalculationSettings* settings() const;
 
     /**
      * Converts \p value to a KCValue of boolean type.

@@ -22,17 +22,17 @@
 // Local
 #include "ValueParser.h"
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "Localization.h"
 #include "KCStyle.h"
 #include "KCValue.h"
 
-ValueParser::ValueParser(const CalculationSettings* settings)
+ValueParser::ValueParser(const KCCalculationSettings* settings)
         : m_settings(settings)
 {
 }
 
-const CalculationSettings* ValueParser::settings() const
+const KCCalculationSettings* ValueParser::settings() const
 {
     return m_settings;
 }

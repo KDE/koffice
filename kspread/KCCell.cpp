@@ -47,7 +47,7 @@
 #include <float.h>
 #include <math.h>
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "CellStorage.h"
 #include "KCCondition.h"
 #include "Formula.h"

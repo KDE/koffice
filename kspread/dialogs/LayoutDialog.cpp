@@ -60,7 +60,7 @@
 #include <KoCanvasBase.h>
 #include <KoUnitDoubleSpinBox.h>
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "CellStorage.h"
 #include "Localization.h"

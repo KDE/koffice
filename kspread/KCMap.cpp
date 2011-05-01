@@ -47,7 +47,7 @@
 
 #include "KCApplicationSettings.h"
 #include "KCBindingManager.h"
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "CellStorage.h"
 #include "Damages.h"
 #include "DependencyManager.h"
@@ -100,7 +100,7 @@ public:
     KoStyleManager* textStyleManager;
 
     KCApplicationSettings* applicationSettings;
-    CalculationSettings* calculationSettings;
+    KCCalculationSettings* calculationSettings;
     ValueCalc* calc;
     ValueConverter* converter;
     ValueFormatter* formatter;
@@ -140,7 +140,7 @@ KCMap::KCMap(DocBase* doc, int syntaxVersion)
     d->textStyleManager = new KoStyleManager(this);
 
     d->applicationSettings = new KCApplicationSettings();
-    d->calculationSettings = new CalculationSettings();
+    d->calculationSettings = new KCCalculationSettings();
 
     d->parser = new ValueParser(d->calculationSettings);
     d->converter = new ValueConverter(d->parser);
@@ -324,7 +324,7 @@ KCApplicationSettings* KCMap::settings() const
     return d->applicationSettings;
 }
 
-CalculationSettings* KCMap::calculationSettings() const
+KCCalculationSettings* KCMap::calculationSettings() const
 {
     return d->calculationSettings;
 }

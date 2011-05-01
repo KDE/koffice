@@ -46,7 +46,7 @@
 #include <KStandardDirs>
 #include <sonnet/configwidget.h>
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "Localization.h"
 #include "KCMap.h"
 #include "ui/Selection.h"

@@ -50,7 +50,7 @@
 #include <sonnet/configwidget.h>
 
 #include "KCApplicationSettings.h"
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "part/Doc.h"
 #include "part/Factory.h"
 #include "FunctionModuleRegistry.h"

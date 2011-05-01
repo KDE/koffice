@@ -76,7 +76,7 @@ public:
         return converter;
     }
 
-    const CalculationSettings* settings() const;
+    const KCCalculationSettings* settings() const;
 
     /** basic arithmetic operations */
     KCValue add(const KCValue &a, const KCValue &b);

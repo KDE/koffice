@@ -28,7 +28,7 @@
 #include <KoXmlNS.h>
 
 // KSpread
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "KCMap.h"
 #include "OdfLoadingContext.h"

@@ -53,7 +53,7 @@
 
 #include <DocBase.h>
 #include <kspread/KCSheet.h>
-#include <CalculationSettings.h>
+#include <KCCalculationSettings.h>
 #include <CellStorage.h>
 #include <HeaderFooter.h>
 #include <LoadingInfo.h>

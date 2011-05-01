@@ -77,7 +77,7 @@
 #include <KoProgressUpdater.h>
 
 #include "KCBindingManager.h"
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "Canvas.h"
 #include "DependencyManager.h"
 #include "Factory.h"

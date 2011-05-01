@@ -20,7 +20,7 @@
 
 #include <ValueFormatter.h>
 
-#include <CalculationSettings.h>
+#include <KCCalculationSettings.h>
 #include <ValueConverter.h>
 #include <ValueParser.h>
 
@@ -43,7 +43,7 @@ void TestValueFormatter::initTestCase()
 {
     qRegisterMetaType<KCFormat::Type>();
 
-    m_calcsettings = new CalculationSettings();
+    m_calcsettings = new KCCalculationSettings();
     m_parser = new ValueParser(m_calcsettings);
     m_converter = new ValueConverter(m_parser);
 }

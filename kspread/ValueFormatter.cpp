@@ -22,7 +22,7 @@
 
 #include "ValueFormatter.h"
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "Localization.h"
 #include "ValueConverter.h"
@@ -39,7 +39,7 @@ ValueFormatter::ValueFormatter(const ValueConverter* converter)
 {
 }
 
-const CalculationSettings* ValueFormatter::settings() const
+const KCCalculationSettings* ValueFormatter::settings() const
 {
     return m_converter->settings();
 }

@@ -21,7 +21,7 @@
 
 #include <klocale.h>
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "KCMap.h"
 #include "KCSheet.h"
 #include "KCValue.h"

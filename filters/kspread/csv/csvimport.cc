@@ -34,7 +34,7 @@
 #include <KoFilterChain.h>
 #include <KoFilterManager.h>
 
-#include <kspread/CalculationSettings.h>
+#include <kspread/KCCalculationSettings.h>
 #include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
 #include <kspread/Global.h>

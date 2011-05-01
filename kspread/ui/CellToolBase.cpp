@@ -32,7 +32,7 @@
 // KSpread
 #include "KCApplicationSettings.h"
 #include "AutoFillStrategy.h"
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "CellEditor.h"
 #include "CellToolOptionWidget.h"

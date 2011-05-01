@@ -212,7 +212,7 @@ ValueCalc::ValueCalc(ValueConverter* c): converter(c)
     registerAwFunc("devsqa", awDevSqA);
 }
 
-const CalculationSettings* ValueCalc::settings() const
+const KCCalculationSettings* ValueCalc::settings() const
 {
     return converter->settings();
 }

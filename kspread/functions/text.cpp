@@ -27,7 +27,7 @@
 #include <kdebug.h>
 #include <math.h>
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "Function.h"
 #include "FunctionModuleRegistry.h"
 #include "ValueCalc.h"

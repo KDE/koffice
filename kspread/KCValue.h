@@ -37,7 +37,7 @@
 
 using namespace std;
 
-class CalculationSettings;
+class KCCalculationSettings;
 class ValueStorage;
 
 /**
@@ -163,19 +163,19 @@ public:
      * Internally date/time is represented as serial-number, i.e number of
      * elapsed day since reference date. Day 61 is defined as March 1, 1900.
      */
-    KCValue(const QDateTime& dt, const CalculationSettings* settings);
+    KCValue(const QDateTime& dt, const KCCalculationSettings* settings);
 
     /**
      * Creates a floating-point value from time.
      * See also note above.
      */
-    KCValue(const QTime& time, const CalculationSettings* settings);
+    KCValue(const QTime& time, const KCCalculationSettings* settings);
 
     /**
      * Creates a floating-point value from date.
      * See also note above.
      */
-    KCValue(const QDate& date, const CalculationSettings* settings);
+    KCValue(const QDate& date, const KCCalculationSettings* settings);
 
     /**
      * Returns the type of the value.
@@ -312,17 +312,17 @@ public:
     /**
      * Returns the date/time representation of this value.
      */
-    QDateTime asDateTime(const CalculationSettings* settings) const;
+    QDateTime asDateTime(const KCCalculationSettings* settings) const;
 
     /**
      * Returns the date representation of this value.
      */
-    QDate asDate(const CalculationSettings* settings) const;
+    QDate asDate(const KCCalculationSettings* settings) const;
 
     /**
      * Returns the time representation of this value.
      */
-    QTime asTime(const CalculationSettings* settings) const;
+    QTime asTime(const KCCalculationSettings* settings) const;
 
     /**
      * Returns an element in the array value.

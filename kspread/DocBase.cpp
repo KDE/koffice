@@ -47,7 +47,7 @@
 
 #include "kspread_limits.h"
 #include "KCBindingModel.h"
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "KCMap.h"
 #include "SheetAccessModel.h"
 

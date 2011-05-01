@@ -27,7 +27,7 @@
 #include "KCNumber.h"
 #include "KCStyle.h"
 
-class CalculationSettings;
+class KCCalculationSettings;
 class KCValue;
 class ValueConverter;
 
@@ -46,7 +46,7 @@ public:
     /**
      * Returns the calculation settings this ValueFormatter uses.
      */
-    const CalculationSettings* settings() const;
+    const KCCalculationSettings* settings() const;
 
     /**
      * Creates a textual representation of \p value with the explicit given

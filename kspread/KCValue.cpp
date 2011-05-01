@@ -19,7 +19,7 @@
 */
 
 #include "KCValue.h"
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "CellStorage.h"
 #include "ValueStorage.h"
 
@@ -319,7 +319,7 @@ KCValue::KCValue(const char *s)
 }
 
 // create a floating-point value from date/time
-KCValue::KCValue(const QDateTime& dt, const CalculationSettings* settings)
+KCValue::KCValue(const QDateTime& dt, const KCCalculationSettings* settings)
         : d(Private::null())
 {
     const QDate refDate(settings->referenceDate());
@@ -331,7 +331,7 @@ KCValue::KCValue(const QDateTime& dt, const CalculationSettings* settings)
 }
 
 // create a floating-point value from time
-KCValue::KCValue(const QTime& time, const CalculationSettings* settings)
+KCValue::KCValue(const QTime& time, const KCCalculationSettings* settings)
         : d(Private::null())
 {
     Q_UNUSED(settings);
@@ -343,7 +343,7 @@ KCValue::KCValue(const QTime& time, const CalculationSettings* settings)
 }
 
 // create a floating-point value from date
-KCValue::KCValue(const QDate& date, const CalculationSettings* settings)
+KCValue::KCValue(const QDate& date, const KCCalculationSettings* settings)
         : d(Private::null())
 {
     const QDate refDate(settings->referenceDate());
@@ -492,7 +492,7 @@ QString KCValue::errorMessage() const
 }
 
 // get the value as date/time
-QDateTime KCValue::asDateTime(const CalculationSettings* settings) const
+QDateTime KCValue::asDateTime(const KCCalculationSettings* settings) const
 {
     QDateTime datetime(settings->referenceDate(), QTime(), Qt::UTC);
 
@@ -505,7 +505,7 @@ QDateTime KCValue::asDateTime(const CalculationSettings* settings) const
 }
 
 // get the value as date
-QDate KCValue::asDate(const CalculationSettings* settings) const
+QDate KCValue::asDate(const KCCalculationSettings* settings) const
 {
     QDate dt(settings->referenceDate());
 
@@ -516,7 +516,7 @@ QDate KCValue::asDate(const CalculationSettings* settings) const
 }
 
 // get the value as time
-QTime KCValue::asTime(const CalculationSettings* settings) const
+QTime KCValue::asTime(const KCCalculationSettings* settings) const
 {
     Q_UNUSED(settings);
     QTime dt;

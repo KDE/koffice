@@ -38,7 +38,7 @@
 #include <knumvalidator.h>
 #include <ktextedit.h>
 
-#include "CalculationSettings.h"
+#include "KCCalculationSettings.h"
 #include "Localization.h"
 #include "KCMap.h"
 #include "ui/Selection.h"
@@ -392,7 +392,7 @@ void ValidityDialog::changeIndexCond(int _index)
 void ValidityDialog::init()
 {
     const KCMap *const map = m_selection->activeSheet()->map();
-    const CalculationSettings *settings = map->calculationSettings();
+    const KCCalculationSettings *settings = map->calculationSettings();
     const KLocale* locale = settings->locale();
     Validity validity = KCCell(m_selection->activeSheet(), m_selection->marker()).validity();
     if (!validity.isEmpty()) {
