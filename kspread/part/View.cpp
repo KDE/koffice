@@ -111,7 +111,7 @@
 #include "KCCanvasResources.h"
 #include "KCCellStorage.h"
 #include "Damages.h"
-#include "DependencyManager.h"
+#include "KCDependencyManager.h"
 #include "Doc.h"
 #include "Factory.h"
 #include "HeaderFooter.h"

@@ -202,7 +202,7 @@ set (kspreadodf_LIB_SRCS
     KCCondition.cpp
     KCCurrency.cpp
     Damages.cpp
-    DependencyManager.cpp
+    KCDependencyManager.cpp
     DocBase.cpp
     KCFormat.cpp
     Formula.cpp

@@ -50,7 +50,7 @@
 #include "KCCalculationSettings.h"
 #include "KCCellStorage.h"
 #include "Damages.h"
-#include "DependencyManager.h"
+#include "KCDependencyManager.h"
 #include "DocBase.h"
 #include "LoadingInfo.h"
 #include "Localization.h"
@@ -93,7 +93,7 @@ public:
 
     KCBindingManager* bindingManager;
     DatabaseManager* databaseManager;
-    DependencyManager* dependencyManager;
+    KCDependencyManager* dependencyManager;
     NamedAreaManager* namedAreaManager;
     RecalcManager* recalcManager;
     StyleManager* styleManager;
@@ -133,7 +133,7 @@ KCMap::KCMap(DocBase* doc, int syntaxVersion)
 
     d->bindingManager = new KCBindingManager(this);
     d->databaseManager = new DatabaseManager(this);
-    d->dependencyManager = new DependencyManager(this);
+    d->dependencyManager = new KCDependencyManager(this);
     d->namedAreaManager = new NamedAreaManager(this);
     d->recalcManager = new RecalcManager(this);
     d->styleManager = new StyleManager();
@@ -254,7 +254,7 @@ DatabaseManager* KCMap::databaseManager() const
     return d->databaseManager;
 }
 
-DependencyManager* KCMap::dependencyManager() const
+KCDependencyManager* KCMap::dependencyManager() const
 {
     return d->dependencyManager;
 }

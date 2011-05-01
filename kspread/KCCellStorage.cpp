@@ -32,7 +32,7 @@
 #include "KCBindingStorage.h"
 #include "KCConditionsStorage.h"
 #include "Damages.h"
-#include "DependencyManager.h"
+#include "KCDependencyManager.h"
 #include "FormulaStorage.h"
 #include "KCMap.h"
 #include "ModelSupport.h"

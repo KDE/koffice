@@ -68,7 +68,7 @@
 #include "KCCluster.h"
 #include "KCCondition.h"
 #include "Damages.h"
-#include "DependencyManager.h"
+#include "KCDependencyManager.h"
 #include "DocBase.h"
 #include "FormulaStorage.h"
 #include "Global.h"

@@ -22,7 +22,7 @@
 #define KSPREAD_DEPENDENCY_MANAGER_P
 
 // Local
-#include "DependencyManager.h"
+#include "KCDependencyManager.h"
 
 #include <QHash>
 #include <QList>
@@ -35,7 +35,7 @@ class Formula;
 class KCMap;
 class KCSheet;
 
-class DependencyManager::Private
+class KCDependencyManager::Private
 {
 public:
     /**
@@ -87,7 +87,7 @@ public:
 
     /**
      * Returns the region, that consumes the value of \p cell.
-     * \see DependencyManager::consumingRegion(const KCCell&)
+     * \see KCDependencyManager::consumingRegion(const KCCell&)
      * \return region consuming \p cell 's value
      */
     KCRegion consumingRegion(const KCCell& cell) const;

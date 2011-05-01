@@ -30,7 +30,7 @@
 #include "commands/DeleteCommand.h"
 #include "commands/RowColumnManipulators.h"
 #include "commands/RowStyleCommand.h"
-#include "DependencyManager.h"
+#include "KCDependencyManager.h"
 #include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"

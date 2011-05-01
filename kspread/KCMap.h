@@ -55,7 +55,7 @@ class KCCalculationSettings;
 class ColumnFormat;
 class KCDamage;
 class DatabaseManager;
-class DependencyManager;
+class KCDependencyManager;
 class DocBase;
 class LoadingInfo;
 class NamedAreaManager;
@@ -119,7 +119,7 @@ public:
     /**
      * \return a pointer to the dependency manager
      */
-    DependencyManager* dependencyManager() const;
+    KCDependencyManager* dependencyManager() const;
 
     /**
      * \return a pointer to the named area manager

@@ -32,7 +32,7 @@ class KCRegion;
  * Manages the dependencies between cells caused by references in formulas.
  * This dependency information is used for the recalculation of the cells.
  */
-class KSPREAD_EXPORT DependencyManager : public QObject
+class KSPREAD_EXPORT KCDependencyManager : public QObject
 {
     Q_OBJECT
     friend class TestDependencies;
@@ -40,9 +40,9 @@ class KSPREAD_EXPORT DependencyManager : public QObject
 
 public:
     /** constructor */
-    DependencyManager(const KCMap* map);
+    KCDependencyManager(const KCMap* map);
     /** destructor */
-    ~DependencyManager();
+    ~KCDependencyManager();
 
     /** clear all data */
     void reset();
@@ -120,7 +120,7 @@ protected:
     void updateFormula(const KCCell& cell, const KCRegion::Element* oldLocation, const KCRegion::Point& offset);
 
 private:
-    Q_DISABLE_COPY(DependencyManager)
+    Q_DISABLE_COPY(KCDependencyManager)
 
     class Private;
     Private * const d;

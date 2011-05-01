@@ -79,7 +79,7 @@
 #include "KCBindingManager.h"
 #include "KCCalculationSettings.h"
 #include "Canvas.h"
-#include "DependencyManager.h"
+#include "KCDependencyManager.h"
 #include "Factory.h"
 #include "Formula.h"
 #include "Function.h"

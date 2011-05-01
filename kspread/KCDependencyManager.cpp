@@ -20,7 +20,7 @@
 */
 
 // Local
-#include "DependencyManager.h"
+#include "KCDependencyManager.h"
 #include "DependencyManager_p.h"
 
 #include <QHash>
@@ -39,7 +39,7 @@
 
 // This is currently not called - but it's really convenient to call it from
 // gdb or from debug output to check that everything is set up ok.
-void DependencyManager::Private::dump() const
+void KCDependencyManager::Private::dump() const
 {
     QHash<KCCell, KCRegion>::ConstIterator mend(providers.end());
     for (QHash<KCCell, KCRegion>::ConstIterator mit(providers.begin()); mit != mend; ++mit) {
@@ -75,28 +75,28 @@ void DependencyManager::Private::dump() const
     }
 }
 
-DependencyManager::DependencyManager(const KCMap* map)
+KCDependencyManager::KCDependencyManager(const KCMap* map)
         : d(new Private)
 {
     d->map = map;
 }
 
-DependencyManager::~DependencyManager()
+KCDependencyManager::~KCDependencyManager()
 {
     qDeleteAll(d->consumers);
     delete d;
 }
 
-void DependencyManager::reset()
+void KCDependencyManager::reset()
 {
     d->reset();
 }
 
-void DependencyManager::regionChanged(const KCRegion& region)
+void KCDependencyManager::regionChanged(const KCRegion& region)
 {
     if (region.isEmpty())
         return;
-    kDebug(36002) << "DependencyManager::regionChanged" << region.name();
+    kDebug(36002) << "KCDependencyManager::regionChanged" << region.name();
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
@@ -134,12 +134,12 @@ void DependencyManager::regionChanged(const KCRegion& region)
 //     d->dump();
 }
 
-void DependencyManager::namedAreaModified(const QString &name)
+void KCDependencyManager::namedAreaModified(const QString &name)
 {
     d->namedAreaModified(name);
 }
 
-void DependencyManager::addSheet(KCSheet *sheet)
+void KCDependencyManager::addSheet(KCSheet *sheet)
 {
     // Manages also the revival of a deleted sheet.
     Q_UNUSED(sheet);
@@ -174,13 +174,13 @@ void DependencyManager::addSheet(KCSheet *sheet)
 #endif
 }
 
-void DependencyManager::removeSheet(KCSheet *sheet)
+void KCDependencyManager::removeSheet(KCSheet *sheet)
 {
     Q_UNUSED(sheet);
     // TODO Stefan: Implement, if dependencies should not be tracked all the time.
 }
 
-void DependencyManager::updateAllDependencies(const KCMap* map)
+void KCDependencyManager::updateAllDependencies(const KCMap* map)
 {
     ElapsedTime et("Generating dependencies", ElapsedTime::PrintOnlyTime);
 
@@ -207,17 +207,17 @@ void DependencyManager::updateAllDependencies(const KCMap* map)
     }
 }
 
-QHash<KCCell, int> DependencyManager::depths() const
+QHash<KCCell, int> KCDependencyManager::depths() const
 {
     return d->depths;
 }
 
-KCRegion DependencyManager::consumingRegion(const KCCell& cell) const
+KCRegion KCDependencyManager::consumingRegion(const KCCell& cell) const
 {
     return d->consumingRegion(cell);
 }
 
-KCRegion DependencyManager::reduceToProvidingRegion(const KCRegion& region) const
+KCRegion KCDependencyManager::reduceToProvidingRegion(const KCRegion& region) const
 {
     KCRegion providingRegion;
     QList< QPair<QRectF, KCCell> > pairs;
@@ -232,7 +232,7 @@ KCRegion DependencyManager::reduceToProvidingRegion(const KCRegion& region) cons
     return providingRegion;
 }
 
-void DependencyManager::regionMoved(const KCRegion& movedRegion, const KCCell& destination)
+void KCDependencyManager::regionMoved(const KCRegion& movedRegion, const KCCell& destination)
 {
     KCRegion::Point locationOffset(destination.cellPosition() - movedRegion.boundingRect().topLeft());
 
@@ -252,7 +252,7 @@ void DependencyManager::regionMoved(const KCRegion& movedRegion, const KCCell& d
     }
 }
 
-void DependencyManager::updateFormula(const KCCell& cell, const KCRegion::Element* oldLocation, const KCRegion::Point& offset)
+void KCDependencyManager::updateFormula(const KCCell& cell, const KCRegion::Element* oldLocation, const KCRegion::Point& offset)
 {
     // Not a formula -> no dependencies
     if (!cell.isFormula())
@@ -298,13 +298,13 @@ void DependencyManager::updateFormula(const KCCell& cell, const KCRegion::Elemen
     KCCell(cell).parseUserInput(expression);
 }
 
-void DependencyManager::Private::reset()
+void KCDependencyManager::Private::reset()
 {
     providers.clear();
     consumers.clear();
 }
 
-KCRegion DependencyManager::Private::consumingRegion(const KCCell& cell) const
+KCRegion KCDependencyManager::Private::consumingRegion(const KCCell& cell) const
 {
     if (!consumers.contains(cell.sheet())) {
 //         kDebug(36002) << "No consumer tree found for the cell's sheet.";
@@ -319,7 +319,7 @@ KCRegion DependencyManager::Private::consumingRegion(const KCCell& cell) const
     return region;
 }
 
-void DependencyManager::Private::namedAreaModified(const QString& name)
+void KCDependencyManager::Private::namedAreaModified(const QString& name)
 {
     // since area names are something like aliases, modifying an area name
     // basically means that all cells referencing this area should be treated
@@ -337,7 +337,7 @@ void DependencyManager::Private::namedAreaModified(const QString& name)
     generateDepths(region);
 }
 
-void DependencyManager::Private::removeDependencies(const KCCell& cell)
+void KCDependencyManager::Private::removeDependencies(const KCCell& cell)
 {
     // look if the cell has any providers
     if (!providers.contains(cell))
@@ -371,7 +371,7 @@ void DependencyManager::Private::removeDependencies(const KCCell& cell)
     providers.remove(cell);
 }
 
-void DependencyManager::Private::removeDepths(const KCCell& cell)
+void KCDependencyManager::Private::removeDepths(const KCCell& cell)
 {
     if (!depths.contains(cell) || !consumers.contains(cell.sheet()))
         return;
@@ -381,7 +381,7 @@ void DependencyManager::Private::removeDepths(const KCCell& cell)
         removeDepths(consumers[i]);
 }
 
-void DependencyManager::Private::generateDependencies(const KCCell& cell, const Formula& formula)
+void KCDependencyManager::Private::generateDependencies(const KCCell& cell, const Formula& formula)
 {
     //new dependencies only need to be generated if the cell contains a formula
 //     if (cell.isNull())
@@ -396,7 +396,7 @@ void DependencyManager::Private::generateDependencies(const KCCell& cell, const 
     computeDependencies(cell, formula);
 }
 
-void DependencyManager::Private::generateDepths(const KCRegion& region)
+void KCDependencyManager::Private::generateDepths(const KCRegion& region)
 {
     QSet<KCCell> computedDepths;
 
@@ -438,7 +438,7 @@ void DependencyManager::Private::generateDepths(const KCRegion& region)
     }
 }
 
-void DependencyManager::Private::generateDepths(KCCell cell, QSet<KCCell>& computedDepths)
+void KCDependencyManager::Private::generateDepths(KCCell cell, QSet<KCCell>& computedDepths)
 {
     static QSet<KCCell> processedCells;
 
@@ -473,7 +473,7 @@ void DependencyManager::Private::generateDepths(KCCell cell, QSet<KCCell>& compu
     processedCells.remove(cell);
 }
 
-int DependencyManager::Private::computeDepth(KCCell cell) const
+int KCDependencyManager::Private::computeDepth(KCCell cell) const
 {
     // a set of cell, which depth is currently calculated
     static QSet<KCCell> processedCells;
@@ -527,7 +527,7 @@ int DependencyManager::Private::computeDepth(KCCell cell) const
     return depth;
 }
 
-void DependencyManager::Private::computeDependencies(const KCCell& cell, const Formula& formula)
+void KCDependencyManager::Private::computeDependencies(const KCCell& cell, const Formula& formula)
 {
     // Broken formula -> meaningless dependencies
     if (!formula.isValid())
@@ -599,7 +599,7 @@ void DependencyManager::Private::computeDependencies(const KCCell& cell, const F
     providers[cell].add(providingRegion);
 }
 
-void DependencyManager::Private::removeCircularDependencyFlags(const KCRegion& region, Direction direction)
+void KCDependencyManager::Private::removeCircularDependencyFlags(const KCRegion& region, Direction direction)
 {
     // a set of cells, which circular dependency flag is currently removed
     static QSet<KCCell> processedCells;
@@ -630,4 +630,4 @@ void DependencyManager::Private::removeCircularDependencyFlags(const KCRegion& r
     }
 }
 
-#include "DependencyManager.moc"
+#include "KCDependencyManager.moc"
