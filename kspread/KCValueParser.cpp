@@ -20,24 +20,24 @@
 */
 
 // Local
-#include "ValueParser.h"
+#include "KCValueParser.h"
 
 #include "KCCalculationSettings.h"
 #include "KCLocalization.h"
 #include "KCStyle.h"
 #include "KCValue.h"
 
-ValueParser::ValueParser(const KCCalculationSettings* settings)
+KCValueParser::KCValueParser(const KCCalculationSettings* settings)
         : m_settings(settings)
 {
 }
 
-const KCCalculationSettings* ValueParser::settings() const
+const KCCalculationSettings* KCValueParser::settings() const
 {
     return m_settings;
 }
 
-KCValue ValueParser::parse(const QString& str) const
+KCValue KCValueParser::parse(const QString& str) const
 {
     KCValue val;
 
@@ -89,7 +89,7 @@ KCValue ValueParser::parse(const QString& str) const
     return val;
 }
 
-KCValue ValueParser::tryParseBool(const QString& str, bool *ok) const
+KCValue KCValueParser::tryParseBool(const QString& str, bool *ok) const
 {
     KCValue val;
     if (ok) *ok = false;
@@ -108,7 +108,7 @@ KCValue ValueParser::tryParseBool(const QString& str, bool *ok) const
     return val;
 }
 
-KCValue ValueParser::readNumber(const QString& _str, bool *ok) const
+KCValue KCValueParser::readNumber(const QString& _str, bool *ok) const
 {
     bool isInt = false;
     QString str = _str.trimmed();
@@ -189,7 +189,7 @@ KCValue ValueParser::readNumber(const QString& _str, bool *ok) const
     return isInt ? KCValue(tot.toLongLong(ok)) : KCValue(tot.toDouble(ok));
 }
 
-KCNumber ValueParser::readImaginary(const QString& str, bool* ok) const
+KCNumber KCValueParser::readImaginary(const QString& str, bool* ok) const
 {
     if (str.isEmpty()) {
         if (ok) *ok = false;
@@ -218,13 +218,13 @@ KCNumber ValueParser::readImaginary(const QString& str, bool* ok) const
     return imag;
 }
 
-KCValue ValueParser::tryParseNumber(const QString& str, bool *ok) const
+KCValue KCValueParser::tryParseNumber(const QString& str, bool *ok) const
 {
     KCValue value;
     if (str.endsWith('%')) {   // percentage
         const KCNumber val = readNumber(str.left(str.length() - 1).trimmed(), ok).asFloat();
         if (*ok) {
-            //kDebug(36001) <<"ValueParser::tryParseNumber '" << str <<
+            //kDebug(36001) <<"KCValueParser::tryParseNumber '" << str <<
             //    "' successfully parsed as percentage: " << val << '%' << endl;
             value = KCValue(val / 100.0);
             value.setFormat(KCValue::fmt_Percent);
@@ -261,7 +261,7 @@ KCValue ValueParser::tryParseNumber(const QString& str, bool *ok) const
     return value;
 }
 
-KCValue ValueParser::tryParseDate(const QString& str, bool *ok) const
+KCValue KCValueParser::tryParseDate(const QString& str, bool *ok) const
 {
     bool valid = false;
     QDate tmpDate = m_settings->locale()->readDate(str, &valid);
@@ -332,7 +332,7 @@ KCValue ValueParser::tryParseDate(const QString& str, bool *ok) const
     return KCValue(tmpDate, m_settings);
 }
 
-KCValue ValueParser::tryParseTime(const QString& str, bool *ok) const
+KCValue KCValueParser::tryParseTime(const QString& str, bool *ok) const
 {
     bool valid = false;
 
@@ -379,7 +379,7 @@ KCValue ValueParser::tryParseTime(const QString& str, bool *ok) const
     return value;
 }
 
-QDateTime ValueParser::readTime(const QString& intstr, bool withSeconds, bool* ok) const
+QDateTime KCValueParser::readTime(const QString& intstr, bool withSeconds, bool* ok) const
 {
     QString str = intstr.simplified().toLower();
     QString format = m_settings->locale()->timeFormat().simplified();
@@ -517,7 +517,7 @@ error:
  * @param pos the position to start at. It will be updated when we parse it.
  * @return the integer read in the string, or -1 if no string
  */
-int ValueParser::readInt(const QString& str, uint& pos) const
+int KCValueParser::readInt(const QString& str, uint& pos) const
 {
     if (!str.at(pos).isDigit())
         return -1;

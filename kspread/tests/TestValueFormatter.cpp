@@ -22,7 +22,7 @@
 
 #include <KCCalculationSettings.h>
 #include <KCValueConverter.h>
-#include <ValueParser.h>
+#include <KCValueParser.h>
 
 #include <qtest_kde.h>
 
@@ -44,7 +44,7 @@ void TestValueFormatter::initTestCase()
     qRegisterMetaType<KCFormat::Type>();
 
     m_calcsettings = new KCCalculationSettings();
-    m_parser = new ValueParser(m_calcsettings);
+    m_parser = new KCValueParser(m_calcsettings);
     m_converter = new KCValueConverter(m_parser);
 }
 

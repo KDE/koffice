@@ -373,7 +373,7 @@ QStringList KCStyleManager::styleNames() const
 
 Styles KCStyleManager::loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
                                        QHash<QString, KCConditions>& conditionalStyles,
-                                       const ValueParser *parser)
+                                       const KCValueParser *parser)
 {
     Styles autoStyles;
     foreach(KoXmlElement* element, stylesReader.autoStyles("table-cell")) {

@@ -52,7 +52,7 @@
 #include <kspread/KCSheet.h>
 #include <kspread/Util.h>
 #include <kspread/KCValidity.h>
-#include <kspread/ValueParser.h>
+#include <kspread/KCValueParser.h>
 
 #include <math.h>
 
@@ -1038,7 +1038,7 @@ void GNUMERICFilter::convertFormula(QString & formula) const
 void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
 {
     kDebug(30521) << "SetStyleInfo entered";
-    ValueParser *const parser = table->map()->parser();
+    KCValueParser *const parser = table->map()->parser();
 
     int row, column;
     QDomNode styles =  sheet->namedItem("Styles");

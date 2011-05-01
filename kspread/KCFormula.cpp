@@ -34,7 +34,7 @@
 
 #include "KCValueCalc.h"
 #include "KCValueConverter.h"
-#include "ValueParser.h"
+#include "KCValueParser.h"
 
 #include <limits.h>
 

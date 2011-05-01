@@ -35,7 +35,7 @@
 #include "Util.h"
 #include "KCValueCalc.h"
 #include "KCValueConverter.h"
-#include "ValueParser.h"
+#include "KCValueParser.h"
 
 #include <KoGenStyles.h>
 
@@ -400,7 +400,7 @@ QDomElement KCConditions::saveConditions(QDomDocument &doc, KCValueConverter *co
 }
 
 KCConditional KCConditions::loadOdfCondition(const QString &conditionValue, const QString &applyStyleName,
-                                         const QString& baseCellAddress, const ValueParser *parser)
+                                         const QString& baseCellAddress, const KCValueParser *parser)
 {
     //kDebug(36003) << "\tcondition:" << conditionValue;
     KCConditional newCondition;
@@ -414,7 +414,7 @@ KCConditional KCConditions::loadOdfCondition(const QString &conditionValue, cons
     return newCondition;
 }
 
-void KCConditions::loadOdfConditions(const KoXmlElement &element, const ValueParser *parser, const KCStyleManager *styleManager)
+void KCConditions::loadOdfConditions(const KoXmlElement &element, const KCValueParser *parser, const KCStyleManager *styleManager)
 {
     kDebug(36003) << "Loading conditional styles";
     KoXmlNode node(element);
@@ -437,7 +437,7 @@ void KCConditions::loadOdfConditions(const KoXmlElement &element, const ValuePar
     }
 }
 
-void KCConditions::loadOdfConditionValue(const QString &styleCondition, KCConditional &newCondition, const ValueParser *parser)
+void KCConditions::loadOdfConditionValue(const QString &styleCondition, KCConditional &newCondition, const KCValueParser *parser)
 {
     QString val(styleCondition);
     if (val.contains("cell-content()")) {
@@ -470,7 +470,7 @@ void KCConditions::loadOdfConditionValue(const QString &styleCondition, KCCondit
     }
 }
 
-void KCConditions::loadOdfCondition(QString &valExpression, KCConditional &newCondition, const ValueParser *parser)
+void KCConditions::loadOdfCondition(QString &valExpression, KCConditional &newCondition, const KCValueParser *parser)
 {
     QString value;
     if (valExpression.indexOf("<=") == 0) {
@@ -503,14 +503,14 @@ void KCConditions::loadOdfCondition(QString &valExpression, KCConditional &newCo
     }
 }
 
-void KCConditions::loadOdfValidationValue(const QStringList &listVal, KCConditional &newCondition, const ValueParser *parser)
+void KCConditions::loadOdfValidationValue(const QStringList &listVal, KCConditional &newCondition, const KCValueParser *parser)
 {
     kDebug(36003) << " listVal[0] :" << listVal[0] << " listVal[1] :" << listVal[1];
     newCondition.value1 = parser->parse(listVal[0]);
     newCondition.value2 = parser->parse(listVal[1]);
 }
 
-void KCConditions::loadConditions(const KoXmlElement &element, const ValueParser *parser)
+void KCConditions::loadConditions(const KoXmlElement &element, const KCValueParser *parser)
 {
     KCConditional newCondition;
 

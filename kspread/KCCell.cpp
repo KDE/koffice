@@ -69,7 +69,7 @@
 #include "KCValidity.h"
 #include "KCValueConverter.h"
 #include "KCValueFormatter.h"
-#include "ValueParser.h"
+#include "KCValueParser.h"
 #include "KCStyleStorage.h"
 
 #include <KoShape.h>
@@ -814,7 +814,7 @@ void KCCell::parseUserInput(const QString& text)
 
 #if 0
         // Parsing as time acts like an autoformat: we even change the input text
-        // [h]:mm:ss -> might get set by ValueParser
+        // [h]:mm:ss -> might get set by KCValueParser
         if (isTime() && (formatType() != KCFormat::Time7))
             setUserInput(locale()->formatTime(value().asDateTime(sheet()->map()->calculationSettings()).time(), true));
 #endif
@@ -1874,7 +1874,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
     if (!conditionsElement.isNull()) {
         KCConditions conditions;
         KCMap *const map = sheet()->map();
-        ValueParser *const valueParser = map->parser();
+        KCValueParser *const valueParser = map->parser();
         conditions.loadConditions(conditionsElement, valueParser);
         if (!conditions.isEmpty())
             setConditions(conditions);

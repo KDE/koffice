@@ -30,7 +30,7 @@
 #include "KCSheet.h"
 #include "KCStyleManager.h"
 #include "KCValueConverter.h"
-#include "ValueParser.h"
+#include "KCValueParser.h"
 
 // commands
 #include "commands/ConditionCommand.h"
@@ -505,7 +505,7 @@ bool ConditionalDialog::getCondition(KCConditional & newCondition, const KComboB
         return false;
 
     KCMap *const map = m_selection->activeSheet()->map();
-    ValueParser *const parser = map->parser();
+    KCValueParser *const parser = map->parser();
 
     newCondition.value1 = parser->parse(edit1->text());
     newCondition.value2 = parser->parse(edit2->text());

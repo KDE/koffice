@@ -41,7 +41,7 @@ class KoGenStyle;
 
 class KCCell;
 class KCValueConverter;
-class ValueParser;
+class KCValueParser;
 
 /**
  * \class KCConditional
@@ -134,7 +134,7 @@ public:
      * Takes a parsed DOM element and recreates the conditions structure out of
      * it
      */
-    void loadConditions(const KoXmlElement &element, const ValueParser *parser);
+    void loadConditions(const KoXmlElement &element, const KCValueParser *parser);
 
     /**
      * \ingroup NativeFormat
@@ -148,13 +148,13 @@ public:
      * Loads the condtional formatting.
      */
     KCConditional loadOdfCondition(const QString &conditionValue, const QString &applyStyleName,
-                                 const QString &baseCellAddress, const ValueParser *parser);
+                                 const QString &baseCellAddress, const KCValueParser *parser);
 
     /**
      * \ingroup OpenDocument
      * Loads the condtional formattings.
      */
-    void loadOdfConditions(const KoXmlElement &element, const ValueParser *parser, const KCStyleManager* styleManager);
+    void loadOdfConditions(const KoXmlElement &element, const KCValueParser *parser, const KCStyleManager* styleManager);
 
     /**
      * \ingroup OpenDocument
@@ -190,17 +190,17 @@ private:
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfCondition(QString &valExpression, KCConditional &newCondition, const ValueParser *parser);
+    void loadOdfCondition(QString &valExpression, KCConditional &newCondition, const KCValueParser *parser);
 
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfConditionValue(const QString &styleCondition, KCConditional &newCondition, const ValueParser *parser);
+    void loadOdfConditionValue(const QString &styleCondition, KCConditional &newCondition, const KCValueParser *parser);
 
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfValidationValue(const QStringList &listVal, KCConditional &newCondition, const ValueParser *parser);
+    void loadOdfValidationValue(const QStringList &listVal, KCConditional &newCondition, const KCValueParser *parser);
 
     /**
      * \ingroup OpenDocument

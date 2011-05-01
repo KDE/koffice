@@ -43,7 +43,7 @@
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
-#include "ValueParser.h"
+#include "KCValueParser.h"
 
 // commands
 #include "commands/ValidityCommand.h"
@@ -484,7 +484,7 @@ void ValidityDialog::clearAllPressed()
 void ValidityDialog::OkPressed()
 {
     const KLocale* locale = m_selection->activeSheet()->map()->calculationSettings()->locale();
-    const ValueParser *const parser = m_selection->activeSheet()->map()->parser();
+    const KCValueParser *const parser = m_selection->activeSheet()->map()->parser();
     KCValidity validity;
     if (chooseType->currentIndex() == 1) {
         bool ok;

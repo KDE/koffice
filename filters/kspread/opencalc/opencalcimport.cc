@@ -59,7 +59,7 @@
 #include <kspread/KCStyleManager.h>
 #include <kspread/KCValidity.h>
 #include <kspread/KCValue.h>
-#include <kspread/ValueParser.h>
+#include <kspread/KCValueParser.h>
 
 #define SECSPERDAY (24 * 60 * 60)
 
@@ -319,7 +319,7 @@ void OpenCalcImport::convertFormula(QString & text, QString const & f) const
 
 bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row, int & columns)
 {
-    ValueParser *const parser = table->map()->parser();
+    KCValueParser *const parser = table->map()->parser();
 
     bool ok = true;
     int spanC = 1;
@@ -654,7 +654,7 @@ void OpenCalcImport::loadOasisCondition(const KCCell& cell, const KoXmlElement &
 {
     KoXmlElement elementItem(property);
     KCMap *const map = cell.sheet()->map();
-    ValueParser *const parser = map->parser();
+    KCValueParser *const parser = map->parser();
 
     QLinkedList<KCConditional> cond;
     while (!elementItem.isNull()) {
@@ -686,7 +686,7 @@ void OpenCalcImport::loadOasisCondition(const KCCell& cell, const KoXmlElement &
 }
 
 void OpenCalcImport::loadOasisConditionValue(const QString &styleCondition, KCConditional &newCondition,
-        const ValueParser *parser)
+        const KCValueParser *parser)
 {
     QString val(styleCondition);
     if (val.contains("cell-content()")) {
@@ -718,7 +718,7 @@ void OpenCalcImport::loadOasisConditionValue(const QString &styleCondition, KCCo
 
 
 void OpenCalcImport::loadOasisCondition(QString &valExpression, KCConditional &newCondition,
-                                        const ValueParser *parser)
+                                        const KCValueParser *parser)
 {
     QString value;
     if (valExpression.indexOf("<=") == 0) {
@@ -1391,7 +1391,7 @@ void OpenCalcImport::loadOasisAreaName(const KoXmlElement&body)
     }
 }
 
-void OpenCalcImport::loadOasisCellValidation(const KoXmlElement&body, const ValueParser *parser)
+void OpenCalcImport::loadOasisCellValidation(const KoXmlElement&body, const KCValueParser *parser)
 {
     KoXmlNode validation = KoXml::namedItemNS(body, ooNS::table, "content-validations");
     if (!validation.isNull()) {
@@ -2063,7 +2063,7 @@ bool OpenCalcImport::createStyleMap(KoXmlDocument const & styles)
     return true;
 }
 
-void OpenCalcImport::loadOasisValidation(KCValidity validity, const QString& validationName, const ValueParser *parser)
+void OpenCalcImport::loadOasisValidation(KCValidity validity, const QString& validationName, const KCValueParser *parser)
 {
     kDebug(30518) << "validationName:" << validationName;
     KoXmlElement element = m_validationList[validationName];
@@ -2196,7 +2196,7 @@ void OpenCalcImport::loadOasisValidation(KCValidity validity, const QString& val
     }
 }
 
-void OpenCalcImport::loadOasisValidationValue(KCValidity validity, const QStringList &listVal, const ValueParser *parser)
+void OpenCalcImport::loadOasisValidationValue(KCValidity validity, const QStringList &listVal, const KCValueParser *parser)
 {
     bool ok = false;
     kDebug(30518) << " listVal[0] :" << listVal[0] << " listVal[1] :" << listVal[1];
@@ -2206,7 +2206,7 @@ void OpenCalcImport::loadOasisValidationValue(KCValidity validity, const QString
 }
 
 
-void OpenCalcImport::loadOasisValidationCondition(KCValidity validity, QString &valExpression, const ValueParser *parser)
+void OpenCalcImport::loadOasisValidationCondition(KCValidity validity, QString &valExpression, const KCValueParser *parser)
 {
     QString value;
     if (valExpression.contains("<=")) {

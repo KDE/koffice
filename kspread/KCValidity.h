@@ -52,7 +52,7 @@
 
 class KCOdfLoadingContext;
 class KCValueConverter;
-class ValueParser;
+class KCValueParser;
 
 /**
  * \class KCValidity
@@ -181,13 +181,13 @@ private:
      * \ingroup OpenDocument
      * Helper method for loadOdfValidation().
      */
-    void loadOdfValidationCondition(QString &valExpression, const ValueParser *parser);
+    void loadOdfValidationCondition(QString &valExpression, const KCValueParser *parser);
 
     /**
      * \ingroup OpenDocument
      * Helper method for loadOdfValidation().
      */
-    void loadOdfValidationValue(const QStringList &listVal, const ValueParser *parser);
+    void loadOdfValidationValue(const QStringList &listVal, const KCValueParser *parser);
 
     class Private;
     QSharedDataPointer<Private> d;

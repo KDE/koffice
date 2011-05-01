@@ -232,7 +232,7 @@ set (kspreadodf_LIB_SRCS
     KCValueCalc.cpp
     KCValueConverter.cpp
     KCValueFormatter.cpp
-    ValueParser.cpp
+    KCValueParser.cpp
 
     database/Database.cpp
     database/DatabaseManager.cpp

@@ -171,7 +171,7 @@ bool TableShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &con
         QHash<QString, KCConditions> conditionalStyles;
         KCMap *const map = sheet()->map();
         KCStyleManager *const styleManager = map->styleManager();
-        ValueParser *const parser = map->parser();
+        KCValueParser *const parser = map->parser();
         Styles autoStyles = styleManager->loadOdfAutoStyles(odfContext.stylesReader(), conditionalStyles, parser);
 
         if (!element.attributeNS(KoXmlNS::table, "name", QString()).isEmpty()) {

@@ -198,7 +198,7 @@ void KCStyle::loadAttributes(const QList<KCSharedSubStyle>& subStyles)
 
 void KCStyle::loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
                          KCConditions& conditions, const KCStyleManager* styleManager,
-                         const ValueParser *parser)
+                         const KCValueParser *parser)
 {
     // NOTE Stefan: Do not fill the style stack with the parent styles!
     KoStyleStack styleStack;
@@ -223,7 +223,7 @@ typedef QPair<QString,QString> StringPair;
 
 void KCStyle::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
                              KCConditions& conditions, const KCStyleManager* styleManager,
-                             const ValueParser *parser)
+                             const KCValueParser *parser)
 {
     QString str;
     if (element.hasAttributeNS(KoXmlNS::style, "data-style-name")) {
@@ -232,7 +232,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlEleme
     }
 }
 
-void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &styleName, KCConditions &conditions, const KCStyleManager *styleManager, const ValueParser *parser)
+void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &styleName, KCConditions &conditions, const KCStyleManager *styleManager, const KCValueParser *parser)
 {
     if (stylesReader.dataFormats().contains(styleName)) {
         KCStyle* theStyle = this;
@@ -2754,7 +2754,7 @@ QString KCCustomStyle::saveOdf(KoGenStyle& style, KoGenStyles &mainStyles,
 
 void KCCustomStyle::loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& style,
                           const QString& name, KCConditions& conditions,
-                          const KCStyleManager* styleManager, const ValueParser *parser)
+                          const KCStyleManager* styleManager, const KCValueParser *parser)
 {
     setName(name);
     if (style.hasAttributeNS(KoXmlNS::style, "parent-style-name"))

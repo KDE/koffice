@@ -35,7 +35,7 @@
 #include "KCSheet.h"
 #include "KCValue.h"
 #include "KCValueConverter.h"
-#include "ValueParser.h"
+#include "KCValueParser.h"
 
 class KCValidity::Private : public QSharedData
 {
@@ -82,7 +82,7 @@ bool KCValidity::isEmpty() const
 
 bool KCValidity::loadXML(KCCell* const cell, const KoXmlElement& validityElement)
 {
-    ValueParser *const parser = cell->sheet()->map()->parser();
+    KCValueParser *const parser = cell->sheet()->map()->parser();
     bool ok = false;
     KoXmlElement param = validityElement.namedItem("param").toElement();
     if (!param.isNull()) {
@@ -377,7 +377,7 @@ void KCValidity::loadOdfValidation(KCCell* const cell, const QString& validation
     cell->setValidity(validity);
 }
 
-void KCValidity::loadOdfValidationValue(const QStringList &listVal, const ValueParser *parser)
+void KCValidity::loadOdfValidationValue(const QStringList &listVal, const KCValueParser *parser)
 {
     bool ok = false;
     kDebug(36003) << " listVal[0] :" << listVal[0] << " listVal[1] :" << listVal[1];
@@ -415,7 +415,7 @@ void KCValidity::loadOdfValidationValue(const QStringList &listVal, const ValueP
     }
 }
 
-void KCValidity::loadOdfValidationCondition(QString &valExpression, const ValueParser *parser)
+void KCValidity::loadOdfValidationCondition(QString &valExpression, const KCValueParser *parser)
 {
     if (isEmpty()) return;
     QString value;

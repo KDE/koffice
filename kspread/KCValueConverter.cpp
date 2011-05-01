@@ -22,9 +22,9 @@
 
 #include "KCCalculationSettings.h"
 #include "KCLocalization.h"
-#include "ValueParser.h"
+#include "KCValueParser.h"
 
-KCValueConverter::KCValueConverter(const ValueParser* parser)
+KCValueConverter::KCValueConverter(const KCValueParser* parser)
         : m_parser(parser)
 {
 }

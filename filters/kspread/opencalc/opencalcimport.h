@@ -40,7 +40,7 @@ class Doc;
 class KCSheet;
 class KCStyle;
 class KCValidity;
-class ValueParser;
+class KCValueParser;
 
 class OpenCalcImport : public KoFilter
 {
@@ -101,17 +101,17 @@ private:
                          KCFormat::Type & formatType,
                          QString name);
     void checkForNamedAreas(QString & formula) const;
-    void loadOasisCellValidation(const KoXmlElement&body, const ValueParser *parser);
-    void loadOasisValidation(KCValidity val, const QString& validationName, const ValueParser *parser);
-    void loadOasisValidationCondition(KCValidity val, QString &valExpression, const ValueParser *parser);
+    void loadOasisCellValidation(const KoXmlElement&body, const KCValueParser *parser);
+    void loadOasisValidation(KCValidity val, const QString& validationName, const KCValueParser *parser);
+    void loadOasisValidationCondition(KCValidity val, QString &valExpression, const KCValueParser *parser);
     void loadOasisAreaName(const KoXmlElement&body);
     void loadOasisMasterLayoutPage(KCSheet * table, KoStyleStack &styleStack);
-    void loadOasisValidationValue(KCValidity val, const QStringList &listVal, const ValueParser *parser);
+    void loadOasisValidationValue(KCValidity val, const QStringList &listVal, const KCValueParser *parser);
     QString translatePar(QString & par) const;
     void loadCondition(const KCCell& cell, const KoXmlElement &property);
     void loadOasisCondition(const KCCell& cell, const KoXmlElement &property);
-    void loadOasisConditionValue(const QString &styleCondition, KCConditional &newCondition, const ValueParser *parser);
-    void loadOasisCondition(QString &valExpression, KCConditional &newCondition, const ValueParser *parser);
+    void loadOasisConditionValue(const QString &styleCondition, KCConditional &newCondition, const KCValueParser *parser);
+    void loadOasisCondition(QString &valExpression, KCConditional &newCondition, const KCValueParser *parser);
     KoFilter::ConversionStatus loadAndParse(KoXmlDocument& doc, const QString& fileName, KoStore *m_store);
 
     KoFilter::ConversionStatus openFile();

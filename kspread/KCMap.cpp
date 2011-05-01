@@ -65,7 +65,7 @@
 #include "KCValueCalc.h"
 #include "KCValueConverter.h"
 #include "KCValueFormatter.h"
-#include "ValueParser.h"
+#include "KCValueParser.h"
 
 // database
 #include "database/DatabaseManager.h"
@@ -104,7 +104,7 @@ public:
     KCValueCalc* calc;
     KCValueConverter* converter;
     KCValueFormatter* formatter;
-    ValueParser* parser;
+    KCValueParser* parser;
 
     // default objects
     KCColumnFormat* defaultColumnFormat;
@@ -142,7 +142,7 @@ KCMap::KCMap(KCDocBase* doc, int syntaxVersion)
     d->applicationSettings = new KCApplicationSettings();
     d->calculationSettings = new KCCalculationSettings();
 
-    d->parser = new ValueParser(d->calculationSettings);
+    d->parser = new KCValueParser(d->calculationSettings);
     d->converter = new KCValueConverter(d->parser);
     d->calc = new KCValueCalc(d->converter);
     d->formatter = new KCValueFormatter(d->converter);
@@ -279,7 +279,7 @@ KoStyleManager* KCMap::textStyleManager() const
     return d->textStyleManager;
 }
 
-ValueParser* KCMap::parser() const
+KCValueParser* KCMap::parser() const
 {
     return d->parser;
 }

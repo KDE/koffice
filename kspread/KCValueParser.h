@@ -37,13 +37,13 @@ class KCValue;
  * Generates a KCValue by parsing an user input text.
  * Determines the most probable KCValue type, e.g. integer or date.
  */
-class KSPREAD_EXPORT ValueParser
+class KSPREAD_EXPORT KCValueParser
 {
 public:
     /**
      * Constructor.
      */
-    explicit ValueParser(const KCCalculationSettings* settings);
+    explicit KCValueParser(const KCCalculationSettings* settings);
 
     /**
      * Returns the calculation settings this KCValueFormatter uses.

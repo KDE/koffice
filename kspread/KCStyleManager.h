@@ -35,7 +35,7 @@ class KoOdfStylesReader;
 class KCConditions;
 class KCMap;
 class StyleDialog;
-class ValueParser;
+class KCValueParser;
 
 /**
  * \class KCStyleManager
@@ -97,7 +97,7 @@ public:
      */
     Styles loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
                              QHash<QString, KCConditions>& conditionalStyles,
-                             const ValueParser *parser);
+                             const KCValueParser *parser);
 
     /**
      * Releases unused auto styles.

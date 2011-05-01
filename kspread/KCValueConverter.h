@@ -23,7 +23,7 @@
 #include "KCValue.h"
 
 class KCCalculationSettings;
-class ValueParser;
+class KCValueParser;
 
 /**
  * \ingroup KCValue
@@ -35,7 +35,7 @@ public:
     /**
      * Constructor.
      */
-    explicit KCValueConverter(const ValueParser* parser);
+    explicit KCValueConverter(const KCValueParser* parser);
 
     /**
      * Returns the calculation settings this KCValueFormatter uses.
@@ -100,7 +100,7 @@ public:
     QTime toTime(const KCValue& value) const;
 
 private:
-    const ValueParser* m_parser;
+    const KCValueParser* m_parser;
 };
 
 #endif  //KSPREAD_VALUE_CONVERTER

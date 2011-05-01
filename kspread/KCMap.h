@@ -64,7 +64,7 @@ class KCRowFormat;
 class KCSheet;
 class KCStyle;
 class KCStyleManager;
-class ValueParser;
+class KCValueParser;
 class KCValueConverter;
 class KCValueFormatter;
 class KCValueCalc;
@@ -144,7 +144,7 @@ public:
     /**
      * @return the value parser of this Document
      */
-    ValueParser* parser() const;
+    KCValueParser* parser() const;
 
     /**
      * @return the value formatter of this Document
