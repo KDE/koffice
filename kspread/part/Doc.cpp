@@ -82,7 +82,7 @@
 #include "KCDependencyManager.h"
 #include "Factory.h"
 #include "KCFormula.h"
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionModuleRegistry.h"
 #include "HeaderFooter.h"
 #include "LoadingInfo.h"

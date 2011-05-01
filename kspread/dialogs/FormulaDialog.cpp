@@ -36,7 +36,7 @@
 
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionDescription.h"
 #include "FunctionRepository.h"
 #include "Util.h"
@@ -63,7 +63,7 @@
 FormulaDialog::FormulaDialog(QWidget* parent, Selection* selection, CellEditorBase* editor, const QString& formulaName)
         : KDialog(parent)
 {
-    setCaption(i18n("Function"));
+    setCaption(i18n("KCFunction"));
     setButtons(Ok | Cancel);
     //setWFlags( Qt::WDestructiveClose );
 
@@ -700,7 +700,7 @@ void FormulaDialog::slotSelected(const QString& afunction)
     refresh_result = true;
 }
 
-// from hyperlink in the "Related Function"
+// from hyperlink in the "Related KCFunction"
 void FormulaDialog::slotShowFunction(const QString& function)
 {
     FunctionDescription* desc =

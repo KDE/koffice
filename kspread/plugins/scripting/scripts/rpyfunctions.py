@@ -21,7 +21,7 @@ except ImportError:
 
 class Rfunctions:
 
-    class Function:
+    class KCFunction:
         def __init__(self, functions, name, comment, format, params):
             self.__name__ = "R_%s" % name.upper()
             #self.__name__ = "R.%s" % name.upper()
@@ -107,7 +107,7 @@ class Rfunctions:
         self.scriptaction = scriptaction
 
         self.functions = []
-        F = Rfunctions.Function
+        F = Rfunctions.KCFunction
 
         # the 45 functions the gnumeric plugin fn-r/functions.c provides.
 

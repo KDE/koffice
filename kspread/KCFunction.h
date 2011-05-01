@@ -36,7 +36,7 @@ class QDomElement;
 class KCSheet;
 class KCValue;
 class ValueCalc;
-class Function;
+class KCFunction;
 
 typedef QVector<KCValue> valVector;
 
@@ -51,7 +51,7 @@ struct rangeInfo {
 };
 struct FuncExtra {
     // here we'll add all the extras a function may need
-    Function* function;
+    KCFunction* function;
     QVector<rangeInfo> ranges;
     QVector<KCRegion> regions;
     KCSheet *sheet;
@@ -64,11 +64,11 @@ typedef KCValue(*FunctionPtr)(valVector, ValueCalc *, FuncExtra *);
  * \ingroup KCValue
  * A function pointer and context.
  */
-class KSPREAD_EXPORT Function
+class KSPREAD_EXPORT KCFunction
 {
 public:
-    Function(const QString& name, FunctionPtr ptr);
-    virtual ~Function();
+    KCFunction(const QString& name, FunctionPtr ptr);
+    virtual ~KCFunction();
     /**
     setParamCount sets allowed parameter count for a function.
     if max=0, it means max=min. If max=-1, there is no upper limit.
@@ -92,7 +92,7 @@ public:
     void setAlternateName(const QString &name);
 
 private:
-    Q_DISABLE_COPY(Function)
+    Q_DISABLE_COPY(KCFunction)
 
     class Private;
     Private * const d;

@@ -21,7 +21,7 @@
 
 // KSpread
 #include "CellEditor.h"
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionDescription.h"
 #include "FunctionRepository.h"
 

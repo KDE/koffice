@@ -22,7 +22,7 @@
 // built-in statistical functions
 #include "StatisticalModule.h"
 
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionModuleRegistry.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
@@ -128,300 +128,300 @@ KSPREAD_EXPORT_FUNCTION_MODULE("statistical", StatisticalModule)
 StatisticalModule::StatisticalModule(QObject* parent, const QVariantList&)
         : FunctionModule(parent)
 {
-    Function *f;
+    KCFunction *f;
 
-    f = new Function("AVEDEV", func_avedev);
+    f = new KCFunction("AVEDEV", func_avedev);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("AVERAGE", func_average);
+    f = new KCFunction("AVERAGE", func_average);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("AVERAGEA", func_averagea);
+    f = new KCFunction("AVERAGEA", func_averagea);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("BETADIST", func_betadist);
+    f = new KCFunction("BETADIST", func_betadist);
     f->setParamCount(3, 6);
     add(f);
-    f = new Function("BETAINV", func_betainv);
+    f = new KCFunction("BETAINV", func_betainv);
     f->setParamCount(3, 5);
     add(f);
-    f = new Function("BINO", func_bino);
+    f = new KCFunction("BINO", func_bino);
     f->setParamCount(3);
     add(f);
-    f = new Function("BINOMDIST", func_binomdist);
+    f = new KCFunction("BINOMDIST", func_binomdist);
     f->setParamCount(4);
     add(f);
-    f = new Function("CHIDIST", func_chidist);
+    f = new KCFunction("CHIDIST", func_chidist);
     f->setParamCount(2);
     add(f);
-    f = new Function("COMBIN", func_combin);
+    f = new KCFunction("COMBIN", func_combin);
     f->setParamCount(2);
     add(f);
-    f = new Function("COMBINA", func_combina);
+    f = new KCFunction("COMBINA", func_combina);
     f->setParamCount(2);
     add(f);
-    f = new Function("CONFIDENCE", func_confidence);
+    f = new KCFunction("CONFIDENCE", func_confidence);
     f->setParamCount(3);
     add(f);
-    f = new Function("CORREL", func_correl_pop);
+    f = new KCFunction("CORREL", func_correl_pop);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("COVAR", func_covar);
+    f = new KCFunction("COVAR", func_covar);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("DEVSQ", func_devsq);
+    f = new KCFunction("DEVSQ", func_devsq);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("DEVSQA", func_devsqa);
+    f = new KCFunction("DEVSQA", func_devsqa);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("EXPONDIST", func_expondist);
+    f = new KCFunction("EXPONDIST", func_expondist);
     f->setParamCount(3);
     add(f);
-    f = new Function("FDIST", func_fdist);
+    f = new KCFunction("FDIST", func_fdist);
     f->setParamCount(3, 4);
     add(f);
-    f = new Function("FINV", func_finv);
+    f = new KCFunction("FINV", func_finv);
     f->setParamCount(3);
     add(f);
-    f = new Function("FISHER", func_fisher);
+    f = new KCFunction("FISHER", func_fisher);
     add(f);
-    f = new Function("FISHERINV", func_fisherinv);
+    f = new KCFunction("FISHERINV", func_fisherinv);
     add(f);
-    f = new Function("FREQUENCY", func_frequency);
+    f = new KCFunction("FREQUENCY", func_frequency);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("FTEST", func_ftest);
+    f = new KCFunction("FTEST", func_ftest);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("GAMMADIST", func_gammadist);
+    f = new KCFunction("GAMMADIST", func_gammadist);
     f->setParamCount(4);
     add(f);
-    f = new Function("GAMMAINV", func_gammainv);
+    f = new KCFunction("GAMMAINV", func_gammainv);
     f->setParamCount(3);
     add(f);
-    f = new Function("GAMMALN", func_gammaln);
+    f = new KCFunction("GAMMALN", func_gammaln);
     add(f);
-    f = new Function("GAUSS", func_gauss);
+    f = new KCFunction("GAUSS", func_gauss);
     add(f);
-    f = new Function("GROWTH", func_growth);
+    f = new KCFunction("GROWTH", func_growth);
     f->setParamCount(1, 4);
     f->setAcceptArray();
     add(f);
-    f = new Function("GEOMEAN", func_geomean);
+    f = new KCFunction("GEOMEAN", func_geomean);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("HARMEAN", func_harmean);
+    f = new KCFunction("HARMEAN", func_harmean);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("HYPGEOMDIST", func_hypgeomdist);
+    f = new KCFunction("HYPGEOMDIST", func_hypgeomdist);
     f->setParamCount(4, 5);
     add(f);
-    f = new Function("INTERCEPT", func_intercept);
+    f = new KCFunction("INTERCEPT", func_intercept);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("INVBINO", func_bino);   // same as BINO, for 1.4 compat
+    f = new KCFunction("INVBINO", func_bino);   // same as BINO, for 1.4 compat
     add(f);
-    f = new Function("KURT", func_kurtosis_est);
+    f = new KCFunction("KURT", func_kurtosis_est);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("KURTP", func_kurtosis_pop);
+    f = new KCFunction("KURTP", func_kurtosis_pop);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("LARGE", func_large);
+    f = new KCFunction("LARGE", func_large);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("LEGACYCHIDIST", func_legacychidist);
+    f = new KCFunction("LEGACYCHIDIST", func_legacychidist);
     f->setParamCount(2);
     add(f);
-    f = new Function("LEGACYCHIINV", func_legacychiinv);
+    f = new KCFunction("LEGACYCHIINV", func_legacychiinv);
     f->setParamCount(2);
     add(f);
-    f = new Function("LEGACYFDIST", func_legacyfdist);
+    f = new KCFunction("LEGACYFDIST", func_legacyfdist);
     f->setParamCount(3);
     add(f);
-    f = new Function("LEGACYFINV", func_legacyfinv);
+    f = new KCFunction("LEGACYFINV", func_legacyfinv);
     f->setParamCount(3);
     add(f);
     // this is meant to be a copy of the function NORMSDIST.
     // required for OpenFormula compliance.
-    f = new Function("LEGACYNORMSDIST", func_stdnormdist);
+    f = new KCFunction("LEGACYNORMSDIST", func_stdnormdist);
     add(f);
     // this is meant to be a copy of the function NORMSINV.
     // required for OpenFormula compliance.
-    f = new Function("LEGACYNORMSINV", func_normsinv);
+    f = new KCFunction("LEGACYNORMSINV", func_normsinv);
     add(f);
-    f = new Function("LOGINV", func_loginv);
+    f = new KCFunction("LOGINV", func_loginv);
     f->setParamCount(1, 3);
     add(f);
-    f = new Function("LOGNORMDIST", func_lognormdist);
+    f = new KCFunction("LOGNORMDIST", func_lognormdist);
     f->setParamCount(1, 4);
     add(f);
-    f = new Function("MEDIAN", func_median);
+    f = new KCFunction("MEDIAN", func_median);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("MODE", func_mode);
+    f = new KCFunction("MODE", func_mode);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("NEGBINOMDIST", func_negbinomdist);
+    f = new KCFunction("NEGBINOMDIST", func_negbinomdist);
     f->setParamCount(3);
     add(f);
-    f = new Function("NORMDIST", func_normdist);
+    f = new KCFunction("NORMDIST", func_normdist);
     f->setParamCount(4);
     add(f);
-    f = new Function("NORMINV", func_norminv);
+    f = new KCFunction("NORMINV", func_norminv);
     f->setParamCount(3);
     add(f);
-    f = new Function("NORMSDIST", func_stdnormdist);
+    f = new KCFunction("NORMSDIST", func_stdnormdist);
     add(f);
-    f = new Function("NORMSINV", func_normsinv);
+    f = new KCFunction("NORMSINV", func_normsinv);
     add(f);
-    f = new Function("PEARSON", func_correl_pop);
+    f = new KCFunction("PEARSON", func_correl_pop);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("PERCENTILE", func_percentile);
+    f = new KCFunction("PERCENTILE", func_percentile);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("PERMUT", func_arrang);
+    f = new KCFunction("PERMUT", func_arrang);
     f->setParamCount(2);
     add(f);
-    f = new Function("PHI", func_phi);
+    f = new KCFunction("PHI", func_phi);
     add(f);
-    f = new Function("POISSON", func_poisson);
+    f = new KCFunction("POISSON", func_poisson);
     f->setParamCount(3);
     add(f);
-    f = new Function("RANK", func_rank);
+    f = new KCFunction("RANK", func_rank);
     f->setParamCount(2, 3);
     f->setAcceptArray();
     add(f);
-    f = new Function("RSQ", func_rsq);
+    f = new KCFunction("RSQ", func_rsq);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("QUARTILE", func_quartile);
+    f = new KCFunction("QUARTILE", func_quartile);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("SKEW", func_skew_est);
+    f = new KCFunction("SKEW", func_skew_est);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("SKEWP", func_skew_pop);
+    f = new KCFunction("SKEWP", func_skew_pop);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("SLOPE", func_slope);
+    f = new KCFunction("SLOPE", func_slope);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("SMALL", func_small);
+    f = new KCFunction("SMALL", func_small);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("STANDARDIZE", func_standardize);
+    f = new KCFunction("STANDARDIZE", func_standardize);
     f->setParamCount(3);
     add(f);
-    f = new Function("STDEV", func_stddev);
+    f = new KCFunction("STDEV", func_stddev);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("STDEVA", func_stddeva);
+    f = new KCFunction("STDEVA", func_stddeva);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("STDEVP", func_stddevp);
+    f = new KCFunction("STDEVP", func_stddevp);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("STDEVPA", func_stddevpa);
+    f = new KCFunction("STDEVPA", func_stddevpa);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("STEYX", func_steyx);
+    f = new KCFunction("STEYX", func_steyx);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("SUM2XMY", func_sumxmy2);  // deprecated, use SUMXMY2
+    f = new KCFunction("SUM2XMY", func_sumxmy2);  // deprecated, use SUMXMY2
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("SUMXMY2", func_sumxmy2);
+    f = new KCFunction("SUMXMY2", func_sumxmy2);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("SUMPRODUCT", func_sumproduct);
+    f = new KCFunction("SUMPRODUCT", func_sumproduct);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("SUMX2PY2", func_sumx2py2);
+    f = new KCFunction("SUMX2PY2", func_sumx2py2);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("SUMX2MY2", func_sumx2my2);
+    f = new KCFunction("SUMX2MY2", func_sumx2my2);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("TDIST", func_tdist);
+    f = new KCFunction("TDIST", func_tdist);
     f->setParamCount(3);
     add(f);
-    f = new Function("TINV", func_tinv);
+    f = new KCFunction("TINV", func_tinv);
     f->setParamCount(2);
     add(f);
-    f = new Function("TREND", func_trend);
+    f = new KCFunction("TREND", func_trend);
     f->setParamCount(1, 4);
     f->setAcceptArray();
     add(f);
-    f = new Function("TRIMMEAN", func_trimmean);
+    f = new KCFunction("TRIMMEAN", func_trimmean);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("TTEST", func_ttest);
+    f = new KCFunction("TTEST", func_ttest);
     f->setParamCount(4);
     f->setAcceptArray();
     add(f);
-    f = new Function("VARIANCE", func_variance);
+    f = new KCFunction("VARIANCE", func_variance);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("VAR", func_variance);
+    f = new KCFunction("VAR", func_variance);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("VARP", func_variancep);
+    f = new KCFunction("VARP", func_variancep);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("VARA", func_variancea);
+    f = new KCFunction("VARA", func_variancea);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("VARPA", func_variancepa);
+    f = new KCFunction("VARPA", func_variancepa);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("WEIBULL", func_weibull);
+    f = new KCFunction("WEIBULL", func_weibull);
     f->setParamCount(4);
     add(f);
-    f = new Function("ZTEST", func_ztest);
+    f = new KCFunction("ZTEST", func_ztest);
     f->setParamCount(2, 3);
     f->setAcceptArray();
     add(f);
@@ -716,7 +716,7 @@ void tawSumxmy(ValueCalc *c, KCValue &res, KCValue v1,
 ///////////////////////////////////////////////////////////
 
 //
-// Function: permut
+// KCFunction: permut
 //
 KCValue func_arrang(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -733,7 +733,7 @@ KCValue func_arrang(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: average
+// KCFunction: average
 //
 KCValue func_average(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -741,7 +741,7 @@ KCValue func_average(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: averagea
+// KCFunction: averagea
 //
 KCValue func_averagea(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -749,7 +749,7 @@ KCValue func_averagea(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: avedev
+// KCFunction: avedev
 //
 KCValue func_avedev(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -759,7 +759,7 @@ KCValue func_avedev(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: betadist
+// KCFunction: betadist
 //
 KCValue func_betadist(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -806,7 +806,7 @@ KCValue func_betadist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: betainv
+// KCFunction: betainv
 //
 KCValue func_betainv(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -844,7 +844,7 @@ KCValue func_betainv(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: bino
+// KCFunction: bino
 //
 // kspread version
 //
@@ -865,7 +865,7 @@ KCValue func_bino(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: binomdist
+// KCFunction: binomdist
 //
 // binomdist ( x, n, p, bool cumulative )
 //
@@ -943,7 +943,7 @@ KCValue func_binomdist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: chidist
+// KCFunction: chidist
 //
 // returns the chi-distribution
 //
@@ -965,7 +965,7 @@ KCValue func_chidist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: combin
+// KCFunction: combin
 //
 KCValue func_combin(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -976,7 +976,7 @@ KCValue func_combin(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: combina
+// KCFunction: combina
 //
 KCValue func_combina(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -987,7 +987,7 @@ KCValue func_combina(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: confidence
+// KCFunction: confidence
 //
 // returns the confidence interval for a population mean
 //
@@ -1062,7 +1062,7 @@ KCValue func_devsqa(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: expondist
+// KCFunction: expondist
 //
 // returns the exponential distribution
 //
@@ -1092,7 +1092,7 @@ KCValue func_expondist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: fdist
+// KCFunction: fdist
 //
 // returns the f-distribution
 //
@@ -1143,7 +1143,7 @@ KCValue func_fdist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: finv
+// KCFunction: finv
 //
 // returns the inverse f-distribution
 //
@@ -1174,7 +1174,7 @@ KCValue func_finv(valVector args, ValueCalc *, FuncExtra *)
 }
 
 //
-// Function: fisher
+// KCFunction: fisher
 //
 // returns the Fisher transformation for x
 //
@@ -1187,7 +1187,7 @@ KCValue func_fisher(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: fisherinv
+// KCFunction: fisherinv
 //
 // returns the inverse of the Fisher transformation for x
 //
@@ -1200,7 +1200,7 @@ KCValue func_fisherinv(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: FREQUENCY
+// KCFunction: FREQUENCY
 //
 KCValue func_frequency(valVector args, ValueCalc*, FuncExtra*)
 {
@@ -1243,7 +1243,7 @@ KCValue func_frequency(valVector args, ValueCalc*, FuncExtra*)
 }
 
 //
-// Function: FTEST
+// KCFunction: FTEST
 //
 // TODO - check if parameters are arrays
 KCValue func_ftest(valVector args, ValueCalc *calc, FuncExtra*)
@@ -1308,7 +1308,7 @@ KCValue func_ftest(valVector args, ValueCalc *calc, FuncExtra*)
 }
 
 //
-// Function: gammadist
+// KCFunction: gammadist
 //
 KCValue func_gammadist(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1337,7 +1337,7 @@ KCValue func_gammadist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: gammainv
+// KCFunction: gammainv
 //
 KCValue func_gammainv(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1367,7 +1367,7 @@ KCValue func_gammainv(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: gammaln
+// KCFunction: gammaln
 //
 // returns the natural logarithm of the gamma function
 //
@@ -1379,7 +1379,7 @@ KCValue func_gammaln(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: gauss
+// KCFunction: gauss
 //
 KCValue func_gauss(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1388,7 +1388,7 @@ KCValue func_gauss(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: growth
+// KCFunction: growth
 //
 // GROWTH ( knownY [; [knownX] [; [newX] [; allowOsset = TRUE() ] ] ] )
 //
@@ -1702,7 +1702,7 @@ KCValue func_hypgeomdist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: INTERCEPT
+// KCFunction: INTERCEPT
 //
 KCValue func_intercept(valVector args, ValueCalc* calc, FuncExtra*)
 {
@@ -1797,7 +1797,7 @@ KCValue func_large(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: legacaychidist
+// KCFunction: legacaychidist
 //
 // returns the chi-distribution
 //
@@ -1819,7 +1819,7 @@ KCValue func_legacychidist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: legacaychiinv
+// KCFunction: legacaychiinv
 //
 // returns the inverse chi-distribution
 //
@@ -1849,7 +1849,7 @@ KCValue func_legacychiinv(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: legacy.fdist
+// KCFunction: legacy.fdist
 //
 // returns the f-distribution
 //
@@ -1874,7 +1874,7 @@ KCValue func_legacyfdist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: legacyfinv
+// KCFunction: legacyfinv
 //
 // returns the inverse legacy f-distribution
 //
@@ -1939,7 +1939,7 @@ KCValue func_loginv(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: lognormdist
+// KCFunction: lognormdist
 //
 // returns the cumulative lognormal distribution
 //
@@ -1977,7 +1977,7 @@ KCValue func_lognormdist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: MEDIAN
+// KCFunction: MEDIAN
 //
 KCValue func_median(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2074,7 +2074,7 @@ KCValue func_negbinomdist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: normdist
+// KCFunction: normdist
 //
 // returns the normal cumulative distribution
 //
@@ -2097,7 +2097,7 @@ KCValue func_normdist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: norminv
+// KCFunction: norminv
 //
 // returns the inverse of the normal cumulative distribution
 //
@@ -2117,7 +2117,7 @@ KCValue func_norminv(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: normsinv
+// KCFunction: normsinv
 //
 // returns the inverse of the standard normal cumulative distribution
 //
@@ -2131,7 +2131,7 @@ KCValue func_normsinv(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: percentile
+// KCFunction: percentile
 //
 // PERCENTILE( data set; alpha )
 //
@@ -2166,7 +2166,7 @@ KCValue func_percentile(valVector args, ValueCalc *calc, FuncExtra*)
 
 
 //
-// Function: phi
+// KCFunction: phi
 //
 // distribution function for a standard normal distribution
 //
@@ -2176,7 +2176,7 @@ KCValue func_phi(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: poisson
+// KCFunction: poisson
 //
 // returns the Poisson distribution
 //
@@ -2222,7 +2222,7 @@ KCValue func_poisson(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: rank
+// KCFunction: rank
 //
 // rank(rank; ref.;sort order)
 KCValue func_rank(valVector args, ValueCalc *calc, FuncExtra*)
@@ -2271,7 +2271,7 @@ KCValue func_rank(valVector args, ValueCalc *calc, FuncExtra*)
 }
 
 //
-// Function: rsq
+// KCFunction: rsq
 //
 KCValue func_rsq(valVector args, ValueCalc *calc, FuncExtra*)
 {
@@ -2321,7 +2321,7 @@ KCValue func_rsq(valVector args, ValueCalc *calc, FuncExtra*)
 }
 
 //
-// Function: quartile
+// KCFunction: quartile
 //
 // QUARTILE( data set; flag )
 //
@@ -2454,7 +2454,7 @@ KCValue func_skew_pop(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: SLOPE
+// KCFunction: SLOPE
 //
 KCValue func_slope(valVector args, ValueCalc* calc, FuncExtra*)
 {
@@ -2512,7 +2512,7 @@ KCValue func_standardize(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: stddev
+// KCFunction: stddev
 //
 KCValue func_stddev(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2520,7 +2520,7 @@ KCValue func_stddev(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: stddeva
+// KCFunction: stddeva
 //
 KCValue func_stddeva(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2528,7 +2528,7 @@ KCValue func_stddeva(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: stddevp
+// KCFunction: stddevp
 //
 KCValue func_stddevp(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2536,7 +2536,7 @@ KCValue func_stddevp(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: stddevpa
+// KCFunction: stddevpa
 //
 KCValue func_stddevpa(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2544,7 +2544,7 @@ KCValue func_stddevpa(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: normsdist
+// KCFunction: normsdist
 //
 KCValue func_stdnormdist(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2553,7 +2553,7 @@ KCValue func_stdnormdist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: STEYX
+// KCFunction: STEYX
 //
 KCValue func_steyx(valVector args, ValueCalc* calc, FuncExtra*)
 {
@@ -2574,7 +2574,7 @@ KCValue func_steyx(valVector args, ValueCalc* calc, FuncExtra*)
 }
 
 //
-// Function: sumproduct
+// KCFunction: sumproduct
 //
 KCValue func_sumproduct(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2584,7 +2584,7 @@ KCValue func_sumproduct(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: sumx2py2
+// KCFunction: sumx2py2
 //
 KCValue func_sumx2py2(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2594,7 +2594,7 @@ KCValue func_sumx2py2(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: sumx2my2
+// KCFunction: sumx2my2
 //
 KCValue func_sumx2my2(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2604,7 +2604,7 @@ KCValue func_sumx2my2(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: SUMXMY2
+// KCFunction: SUMXMY2
 //
 KCValue func_sumxmy2(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2614,7 +2614,7 @@ KCValue func_sumxmy2(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: tdist
+// KCFunction: tdist
 //
 // returns the t-distribution
 //
@@ -2639,7 +2639,7 @@ KCValue func_tdist(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: tinv
+// KCFunction: tinv
 //
 // returns the inverse t-distribution
 //
@@ -2669,7 +2669,7 @@ KCValue func_tinv(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: trend
+// KCFunction: trend
 //
 // TREND ( knownY [; [knownX] [; [newX] [; allowOsset = TRUE() ] ] ] )
 //
@@ -2769,7 +2769,7 @@ KCValue func_trend(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: trimmean
+// KCFunction: trimmean
 //
 KCValue func_trimmean(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2805,7 +2805,7 @@ KCValue func_trimmean(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function TTEST
+// KCFunction TTEST
 //
 KCValue func_ttest(valVector args, ValueCalc* calc, FuncExtra*)
 {
@@ -2895,7 +2895,7 @@ KCValue func_ttest(valVector args, ValueCalc* calc, FuncExtra*)
 }
 
 //
-// Function: variance
+// KCFunction: variance
 //
 KCValue func_variance(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2908,7 +2908,7 @@ KCValue func_variance(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: vara
+// KCFunction: vara
 //
 KCValue func_variancea(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2921,7 +2921,7 @@ KCValue func_variancea(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: varp
+// KCFunction: varp
 //
 KCValue func_variancep(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2934,7 +2934,7 @@ KCValue func_variancep(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: varpa
+// KCFunction: varpa
 //
 KCValue func_variancepa(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2947,7 +2947,7 @@ KCValue func_variancepa(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: weibull
+// KCFunction: weibull
 //
 // returns the Weibull distribution
 //
@@ -2979,7 +2979,7 @@ KCValue func_weibull(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function ZTEST
+// KCFunction ZTEST
 //
 KCValue func_ztest(valVector args, ValueCalc* calc, FuncExtra*)
 {

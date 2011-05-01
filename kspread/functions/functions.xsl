@@ -21,7 +21,7 @@
                     <xsl:attribute name="name">
                         <xsl:value-of select="GroupName"/>
                     </xsl:attribute>
-                    <xsl:for-each select="Function">
+                    <xsl:for-each select="KCFunction">
                         <xsl:sort select="Name"/>
                         <xsl:apply-templates select="."/>
                     </xsl:for-each>
@@ -30,7 +30,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="Function">
+    <xsl:template match="KCFunction">
         <xsl:element name="function">
             <xsl:attribute name="name">
                 <xsl:value-of select="Name"/>

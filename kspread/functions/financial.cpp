@@ -30,7 +30,7 @@
 #include "FinancialModule.h"
 
 #include "KCCalculationSettings.h"
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionModuleRegistry.h"
 #include "functions/helper.h"
 #include "ValueCalc.h"
@@ -115,244 +115,244 @@ KSPREAD_EXPORT_FUNCTION_MODULE("financial", FinancialModule)
 FinancialModule::FinancialModule(QObject* parent, const QVariantList&)
         : FunctionModule(parent)
 {
-    Function *f;
+    KCFunction *f;
 
-    f = new Function("ACCRINT", func_accrint);
+    f = new KCFunction("ACCRINT", func_accrint);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETACCRINT");
     f->setParamCount(6, 7);
     add(f);
-    f = new Function("ACCRINTM", func_accrintm);
+    f = new KCFunction("ACCRINTM", func_accrintm);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETACCRINTM");
     f->setParamCount(3, 5);
     add(f);
-    f = new Function("AMORDEGRC", func_amordegrc);
+    f = new KCFunction("AMORDEGRC", func_amordegrc);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETAMORDEGRC");
     f->setParamCount(6, 7);
     add(f);
-    f = new Function("AMORLINC", func_amorlinc);
+    f = new KCFunction("AMORLINC", func_amorlinc);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETAMORLINC");
     f->setParamCount(6, 7);
     add(f);
-    f = new Function("COMPOUND", func_compound);
+    f = new KCFunction("COMPOUND", func_compound);
     f->setParamCount(4);
     add(f);
-    f = new Function("CONTINUOUS", func_continuous);
+    f = new KCFunction("CONTINUOUS", func_continuous);
     f->setParamCount(3);
     add(f);
-//   f = new Function ("COUPDAYBS", func_coupdaybs);
+//   f = new KCFunction ("COUPDAYBS", func_coupdaybs);
 //   f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCOUPDAYBS");
 //   f->setParamCount (3, 4);
 //   add(f);
-//   f = new Function ("COUPDAYS", func_coupdays);
+//   f = new KCFunction ("COUPDAYS", func_coupdays);
 //   f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCOUPDAYS");
 //   f->setParamCount (3, 4);
 //   add(f);
-//   f = new Function ("COUPDAYSNC", func_coupdaysnc);
+//   f = new KCFunction ("COUPDAYSNC", func_coupdaysnc);
 //   f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCOUPDAYSNC");
 //   f->setParamCount (3, 4);
 //   add(f);
-//   f = new Function ("COUPNCD", func_coupncd);
+//   f = new KCFunction ("COUPNCD", func_coupncd);
 //   f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCOUPNCD");
 //   f->setParamCount (3, 4);
 //   add(f);
-    f = new Function("COUPNUM", func_coupnum);
+    f = new KCFunction("COUPNUM", func_coupnum);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCOUPNUM");
     f->setParamCount(3, 5);
     add(f);
-//   f = new Function ("COUPPCD", func_couppcd);
+//   f = new KCFunction ("COUPPCD", func_couppcd);
 //   f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCOUPPCD");
 //   f->setParamCount (3, 4);
 //   add(f);
-    f = new Function("CUMIPMT", func_cumipmt);
+    f = new KCFunction("CUMIPMT", func_cumipmt);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCUMIPMT");
     f->setParamCount(6);
     add(f);
-    f = new Function("CUMPRINC", func_cumprinc);
+    f = new KCFunction("CUMPRINC", func_cumprinc);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCUMPRINC");
     f->setParamCount(6);
     add(f);
-    f = new Function("DB", func_db);
+    f = new KCFunction("DB", func_db);
     f->setParamCount(4, 5);
     add(f);
-    f = new Function("DDB", func_ddb);
+    f = new KCFunction("DDB", func_ddb);
     f->setParamCount(4, 5);
     add(f);
-    f = new Function("DISC", func_disc);
+    f = new KCFunction("DISC", func_disc);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDISC");
     f->setParamCount(4, 5);
     add(f);
-    f = new Function("DOLLARDE", func_dollarde);
+    f = new KCFunction("DOLLARDE", func_dollarde);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDOLLARDE");
     f->setParamCount(2);
     add(f);
-    f = new Function("DOLLARFR", func_dollarfr);
+    f = new KCFunction("DOLLARFR", func_dollarfr);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDOLLARFR");
     f->setParamCount(2);
     add(f);
-    f = new Function("DURATION", func_duration);
+    f = new KCFunction("DURATION", func_duration);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDURATION");
     f->setParamCount(3);
     add(f);
-    f = new Function("DURATION_ADD", func_duration_add);
+    f = new KCFunction("DURATION_ADD", func_duration_add);
     f->setParamCount(5, 6);
     add(f);
-    f = new Function("EFFECT", func_effective);
+    f = new KCFunction("EFFECT", func_effective);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETEFFECT");
     f->setParamCount(2);
     add(f);
-    f = new Function("EFFECTIVE", func_effective);
+    f = new KCFunction("EFFECTIVE", func_effective);
     f->setParamCount(2);
     add(f);
-    f = new Function("EURO", func_euro);   // KSpread-specific, Gnumeric-compatible
+    f = new KCFunction("EURO", func_euro);   // KSpread-specific, Gnumeric-compatible
     f->setParamCount(1);
     add(f);
-    f = new Function("EUROCONVERT", func_euroconvert);
+    f = new KCFunction("EUROCONVERT", func_euroconvert);
     f->setParamCount(3);
     add(f);
-    f = new Function("FV", func_fv);
+    f = new KCFunction("FV", func_fv);
     f->setParamCount(3, 5);
     add(f);
-    f = new Function("FVSCHEDULE", func_fvschedule);
+    f = new KCFunction("FVSCHEDULE", func_fvschedule);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETFVSCHEDULE");
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("FV_ANNUITY", func_fv_annuity);
+    f = new KCFunction("FV_ANNUITY", func_fv_annuity);
     f->setParamCount(3);
     add(f);
-    f = new Function("INTRATE", func_intrate);
+    f = new KCFunction("INTRATE", func_intrate);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETINTRATE");
     f->setParamCount(4, 5);
     add(f);
-    f = new Function("IPMT", func_ipmt);
+    f = new KCFunction("IPMT", func_ipmt);
     f->setParamCount(4, 6);
     add(f);
-    f = new Function ("IRR", func_irr);
+    f = new KCFunction ("IRR", func_irr);
     f->setParamCount (1, 2);
     f->setAcceptArray();
   add(f);
-    f = new Function("ISPMT", func_ispmt);
+    f = new KCFunction("ISPMT", func_ispmt);
     f->setParamCount(4);
     add(f);
-    f = new Function("LEVEL_COUPON", func_level_coupon);
+    f = new KCFunction("LEVEL_COUPON", func_level_coupon);
     f->setParamCount(5);
     add(f);
-    f = new Function("MDURATION", func_mduration);
+    f = new KCFunction("MDURATION", func_mduration);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETMDURATION");
     f->setParamCount(5, 6);
     add(f);
-    f = new Function("MIRR", func_mirr);
+    f = new KCFunction("MIRR", func_mirr);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("NOMINAL", func_nominal);
+    f = new KCFunction("NOMINAL", func_nominal);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETNOMINAL");
     f->setParamCount(2);
     add(f);
-    f = new Function("NPER", func_nper);
+    f = new KCFunction("NPER", func_nper);
     f->setParamCount(3, 5);
     add(f);
-    f = new Function("NPV", func_npv);
+    f = new KCFunction("NPV", func_npv);
     f->setParamCount(2, -1);
     f->setAcceptArray();
     add(f);
-//   f = new Function ("ODDFPRICE", func_oddfprice);
+//   f = new KCFunction ("ODDFPRICE", func_oddfprice);
 //   f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETODDFPRICE");
 //   f->setParamCount (8, 9);
 //   add(f);
-//   f = new Function ("ODDFYIELD", func_oddfyield);
+//   f = new KCFunction ("ODDFYIELD", func_oddfyield);
 //   f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETODDFYIELD");
 //   f->setParamCount (8, 9);
 //   add(f);
-    f = new Function("ODDLPRICE", func_oddlprice);
+    f = new KCFunction("ODDLPRICE", func_oddlprice);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETODDLPRICE");
     f->setParamCount(7, 8);
     add(f);
-    f = new Function("ODDLYIELD", func_oddlyield);
+    f = new KCFunction("ODDLYIELD", func_oddlyield);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETODDLYIELD");
     f->setParamCount(7, 8);
     add(f);
-    f = new Function("PDURATION", func_duration);
+    f = new KCFunction("PDURATION", func_duration);
     f->setParamCount(3);
     add(f);
-    f = new Function("PMT", func_pmt);
+    f = new KCFunction("PMT", func_pmt);
     f->setParamCount(3, 5);
     add(f);
-    f = new Function("PPMT", func_ppmt);
+    f = new KCFunction("PPMT", func_ppmt);
     f->setParamCount(4, 6);
     add(f);
-//   f = new Function ("PRICE", func_price);
+//   f = new KCFunction ("PRICE", func_price);
 //   f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETPRICE");
 //   f->setParamCount (6, 7);
 //   add(f);
-//   f = new Function ("PRICEDISC", func_pricedisc);
+//   f = new KCFunction ("PRICEDISC", func_pricedisc);
 //   f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETPRICEDISC");
 //   f->setParamCount (4, 5);
 //   add(f);
-    f = new Function("PRICEMAT", func_pricemat);
+    f = new KCFunction("PRICEMAT", func_pricemat);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETPRICEMAT");
     f->setParamCount(5, 6);
     add(f);
-    f = new Function("PV", func_pv);
+    f = new KCFunction("PV", func_pv);
     f->setParamCount(3, 5);
     add(f);
-    f = new Function("PV_ANNUITY", func_pv_annuity);
+    f = new KCFunction("PV_ANNUITY", func_pv_annuity);
     f->setParamCount(3);
     add(f);
-//   f = new Function ("RATE", func_rate);
+//   f = new KCFunction ("RATE", func_rate);
 //   f->setParamCount (3, 6);
 //   add(f);
-    f = new Function("RECEIVED", func_received);
+    f = new KCFunction("RECEIVED", func_received);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETRECEIVED");
     f->setParamCount(4, 5);
     add(f);
-    f = new Function("RRI", func_rri);
+    f = new KCFunction("RRI", func_rri);
     f->setParamCount(3);
     add(f);
-    f = new Function("SLN", func_sln);
+    f = new KCFunction("SLN", func_sln);
     f->setParamCount(3);
     add(f);
-    f = new Function("SYD", func_syd);
+    f = new KCFunction("SYD", func_syd);
     f->setParamCount(4);
     add(f);
-    f = new Function("TBILLEQ", func_tbilleq);
+    f = new KCFunction("TBILLEQ", func_tbilleq);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETTBILLEQ");
     f->setParamCount(3);
     add(f);
-    f = new Function("TBILLPRICE", func_tbillprice);
+    f = new KCFunction("TBILLPRICE", func_tbillprice);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETTBILLPRICE");
     f->setParamCount(3);
     add(f);
-    f = new Function("TBILLYIELD", func_tbillyield);
+    f = new KCFunction("TBILLYIELD", func_tbillyield);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETTBILLYIELD");
     f->setParamCount(3);
     add(f);
-    f = new Function("VDB", func_vdb);
+    f = new KCFunction("VDB", func_vdb);
     f->setParamCount(5, 7);
     add(f);
-    f = new Function("XIRR", func_xirr);
+    f = new KCFunction("XIRR", func_xirr);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETXIRR");
     f->setParamCount(2, 3);
     f->setAcceptArray();
     add(f);
-    f = new Function("XNPV", func_xnpv);
+    f = new KCFunction("XNPV", func_xnpv);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETXNPV");
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-//   f = new Function ("YIELD", func_yield);
+//   f = new KCFunction ("YIELD", func_yield);
 //   f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETYIELD");
 //   f->setParamCount (6, 7);
 //   add(f);
-    f = new Function("YIELDDISC", func_yielddisc);
+    f = new KCFunction("YIELDDISC", func_yielddisc);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETYIELDDISC");
     f->setParamCount(4, 5);
     add(f);
-    f = new Function("YIELDMAT", func_yieldmat);
+    f = new KCFunction("YIELDMAT", func_yieldmat);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETYIELDMAT");
     f->setParamCount(5, 6);
     add(f);
-    f = new Function("ZERO_COUPON", func_zero_coupon);
+    f = new KCFunction("ZERO_COUPON", func_zero_coupon);
     f->setParamCount(3);
     add(f);
 }
@@ -622,7 +622,7 @@ static double xirrResultDerive(valVector& args, ValueCalc *calc, double& rate)
 
 
 //
-// Function: ACCRINT
+// KCFunction: ACCRINT
 //
 KCValue func_accrint(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -662,7 +662,7 @@ KCValue func_accrint(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: ACCRINTM
+// KCFunction: ACCRINTM
 //
 KCValue func_accrintm(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -690,7 +690,7 @@ KCValue func_accrintm(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: AMORDEGRC
+// KCFunction: AMORDEGRC
 //
 // AMORDEGRC( Cost; purchaseDate; firstPeriodEndDate; salvage; period; basis)
 //
@@ -752,7 +752,7 @@ KCValue func_amordegrc(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: AMORLINC
+// KCFunction: AMORLINC
 //
 // AMORLINC( Cost; purchaseDate; firstPeriodEndDate; salvage; period; basis)
 //
@@ -792,7 +792,7 @@ KCValue func_amorlinc(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: compound
+// KCFunction: compound
 //
 // Returns value after compounded interest, given principal, rate, periods
 // per year and year
@@ -811,7 +811,7 @@ KCValue func_compound(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: continuous
+// KCFunction: continuous
 //
 // Returns value after continuous compounding of interest, given principal,
 // rate and years
@@ -829,7 +829,7 @@ KCValue func_continuous(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: COUPNUM - taken from GNUMERIC
+// KCFunction: COUPNUM - taken from GNUMERIC
 //
 //
 // COUPNUM ( settlement, maturity, freq, [ basis = 0 ], [ eom ] )
@@ -877,7 +877,7 @@ KCValue func_coupnum(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: CUMIPMT
+// KCFunction: CUMIPMT
 //
 KCValue func_cumipmt(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -916,7 +916,7 @@ KCValue func_cumipmt(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: CUMPRINC
+// KCFunction: CUMPRINC
 //
 KCValue func_cumprinc(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -954,7 +954,7 @@ KCValue func_cumprinc(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DB
+// KCFunction: DB
 //
 // fixed-declining depreciation
 //
@@ -996,7 +996,7 @@ KCValue func_db(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DDB
+// KCFunction: DDB
 //
 // depreciation per period
 //
@@ -1041,7 +1041,7 @@ KCValue func_ddb(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DISC
+// KCFunction: DISC
 //
 KCValue func_disc(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1078,7 +1078,7 @@ KCValue func_disc(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DOLLARDE
+// KCFunction: DOLLARDE
 //
 KCValue func_dollarde(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1100,7 +1100,7 @@ KCValue func_dollarde(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DOLLARFR
+// KCFunction: DOLLARFR
 //
 KCValue func_dollarfr(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1122,7 +1122,7 @@ KCValue func_dollarfr(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DURATION
+// KCFunction: DURATION
 //
 //
 // duration( rate, pv, fv )
@@ -1148,7 +1148,7 @@ KCValue func_duration(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DURATION
+// KCFunction: DURATION
 //
 //
 // duration( settlement, maturity, coup, yield, freq, [basis = 0] )
@@ -1189,7 +1189,7 @@ KCValue func_duration_add(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: effective
+// KCFunction: effective
 //
 KCValue func_effective(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1206,7 +1206,7 @@ KCValue func_effective(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: EURO
+// KCFunction: EURO
 //
 KCValue func_euro(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1243,7 +1243,7 @@ KCValue func_euroconvert(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: FV
+// KCFunction: FV
 //
 // Returns future value, given current value, interest rate and time
 //
@@ -1276,7 +1276,7 @@ KCValue func_fv(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: FVSCHEDULE
+// KCFunction: FVSCHEDULE
 //
 // Returns future value
 //
@@ -1301,7 +1301,7 @@ KCValue func_fvschedule(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: FV_annnuity
+// KCFunction: FV_annnuity
 //
 KCValue func_fv_annuity(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1320,7 +1320,7 @@ KCValue func_fv_annuity(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: INTRATE
+// KCFunction: INTRATE
 //
 KCValue func_intrate(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1346,7 +1346,7 @@ KCValue func_intrate(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IPMT
+// KCFunction: IPMT
 //
 KCValue func_ipmt(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1384,7 +1384,7 @@ static double irrResultDerive(KCValue sec, ValueCalc *calc, double rate)
 }
 
 //
-// Function: IRR
+// KCFunction: IRR
 //
 KCValue func_irr(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1409,7 +1409,7 @@ KCValue func_irr(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: ISPMT
+// KCFunction: ISPMT
 //
 KCValue func_ispmt(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1430,7 +1430,7 @@ KCValue func_ispmt(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: MDURATION
+// KCFunction: MDURATION
 //
 //
 // duration( settlement, maturity, coup, yield, freq, [basis = 0] )
@@ -1470,7 +1470,7 @@ KCValue func_mduration(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: MIRR
+// KCFunction: MIRR
 //
 KCValue func_mirr(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1500,7 +1500,7 @@ KCValue func_mirr(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: level_coupon
+// KCFunction: level_coupon
 //
 KCValue func_level_coupon(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1526,7 +1526,7 @@ KCValue func_level_coupon(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: nominal
+// KCFunction: nominal
 //
 KCValue func_nominal(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1552,7 +1552,7 @@ KCValue func_nominal(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: NPER
+// KCFunction: NPER
 //
 KCValue func_nper(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1692,7 +1692,7 @@ KCValue func_oddlyield(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: PMT
+// KCFunction: PMT
 //
 KCValue func_pmt(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1709,7 +1709,7 @@ KCValue func_pmt(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: PPMT
+// KCFunction: PPMT
 //
 // Uses IPMT.
 //
@@ -1785,7 +1785,7 @@ KCValue func_pricemat(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: PV
+// KCFunction: PV
 //
 // Returns present value, given future value, interest rate and years
 //
@@ -1818,7 +1818,7 @@ KCValue func_pv(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: PV_annuity
+// KCFunction: PV_annuity
 //
 KCValue func_pv_annuity(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1835,7 +1835,7 @@ KCValue func_pv_annuity(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: RECEIVED
+// KCFunction: RECEIVED
 //
 KCValue func_received(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1865,7 +1865,7 @@ KCValue func_received(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: RRI
+// KCFunction: RRI
 //
 KCValue func_rri(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1883,7 +1883,7 @@ KCValue func_rri(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: SLN
+// KCFunction: SLN
 //
 // straight-line depreciation for a single period
 //
@@ -1903,7 +1903,7 @@ KCValue func_sln(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: SYD
+// KCFunction: SYD
 //
 // sum-of-years digits depreciation
 //
@@ -1931,7 +1931,7 @@ KCValue func_syd(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: TBILLEQ
+// KCFunction: TBILLEQ
 //
 KCValue func_tbilleq(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1952,7 +1952,7 @@ KCValue func_tbilleq(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: TBILLPRICE
+// KCFunction: TBILLPRICE
 //
 KCValue func_tbillprice(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1978,7 +1978,7 @@ KCValue func_tbillprice(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: TBILLYIELD
+// KCFunction: TBILLYIELD
 //
 KCValue func_tbillyield(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -2003,7 +2003,7 @@ KCValue func_tbillyield(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: VDB
+// KCFunction: VDB
 //
 // VDB( cost; salvage; life; startPeriod; endPeriod [; depreciation-factor = 2 [; straight-line depreciation = TRUE ] )
 //
@@ -2074,7 +2074,7 @@ KCValue func_vdb(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: XIRR
+// KCFunction: XIRR
 //
 // Compute the internal rate of return for a non-periodic series of cash flows.
 //
@@ -2118,7 +2118,7 @@ KCValue func_xirr(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: xnpv
+// KCFunction: xnpv
 //
 // Compute the net present value of a series of cash flows.
 //
@@ -2226,7 +2226,7 @@ KCValue func_yieldmat(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: zero_coupon
+// KCFunction: zero_coupon
 //
 KCValue func_zero_coupon(valVector args, ValueCalc *calc, FuncExtra *)
 {

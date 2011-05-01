@@ -21,7 +21,7 @@
 // built-in logical functions
 #include "LogicModule.h"
 
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionModuleRegistry.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
@@ -48,38 +48,38 @@ KSPREAD_EXPORT_FUNCTION_MODULE("logic", LogicModule)
 LogicModule::LogicModule(QObject* parent, const QVariantList&)
         : FunctionModule(parent)
 {
-    Function *f;
+    KCFunction *f;
 
-    f = new Function("FALSE", func_false);
+    f = new KCFunction("FALSE", func_false);
     f->setParamCount(0);
     add(f);
-    f = new Function("TRUE", func_true);
+    f = new KCFunction("TRUE", func_true);
     f->setParamCount(0);
     add(f);
-    f = new Function("NOT", func_not);
+    f = new KCFunction("NOT", func_not);
     f->setParamCount(1);
     add(f);
-    f = new Function("AND", func_and);
+    f = new KCFunction("AND", func_and);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("NAND", func_nand);
+    f = new KCFunction("NAND", func_nand);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("NOR", func_nor);
+    f = new KCFunction("NOR", func_nor);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("OR", func_or);
+    f = new KCFunction("OR", func_or);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("XOR", func_xor);
+    f = new KCFunction("XOR", func_xor);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("IF", func_if);
+    f = new KCFunction("IF", func_if);
     f->setParamCount(2, 3);
     add(f);
 }
@@ -132,7 +132,7 @@ void awXor(ValueCalc *calc, KCValue &count, KCValue value, KCValue)
 
 
 //
-// Function: AND
+// KCFunction: AND
 //
 KCValue func_and(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -154,7 +154,7 @@ KCValue func_and(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: FALSE
+// KCFunction: FALSE
 //
 KCValue func_false(valVector, ValueCalc *, FuncExtra *)
 {
@@ -163,7 +163,7 @@ KCValue func_false(valVector, ValueCalc *, FuncExtra *)
 
 
 //
-// Function: IF
+// KCFunction: IF
 //
 KCValue func_if(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -190,7 +190,7 @@ KCValue func_if(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: NAND
+// KCFunction: NAND
 //
 KCValue func_nand(valVector args, ValueCalc *calc, FuncExtra *extra)
 {
@@ -200,7 +200,7 @@ KCValue func_nand(valVector args, ValueCalc *calc, FuncExtra *extra)
 
 
 //
-// Function: NOR
+// KCFunction: NOR
 //
 KCValue func_nor(valVector args, ValueCalc *calc, FuncExtra *extra)
 {
@@ -210,7 +210,7 @@ KCValue func_nor(valVector args, ValueCalc *calc, FuncExtra *extra)
 
 
 //
-// Function: NOT
+// KCFunction: NOT
 //
 KCValue func_not(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -225,7 +225,7 @@ KCValue func_not(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: OR
+// KCFunction: OR
 //
 KCValue func_or(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -247,7 +247,7 @@ KCValue func_or(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: TRUE
+// KCFunction: TRUE
 //
 KCValue func_true(valVector, ValueCalc *, FuncExtra *)
 {
@@ -256,7 +256,7 @@ KCValue func_true(valVector, ValueCalc *, FuncExtra *)
 
 
 //
-// Function: XOR
+// KCFunction: XOR
 //
 KCValue func_xor(valVector args, ValueCalc *calc, FuncExtra *)
 {

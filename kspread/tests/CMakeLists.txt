@@ -57,7 +57,7 @@ kde4_add_unit_test(TestStyleStorage TESTNAME kspread-StyleStorage ${TestStyleSto
 target_link_libraries(TestStyleStorage kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY})
 
 
-########### Function tests ###############
+########### KCFunction tests ###############
 
 set(TestBitopsFunctions_SRCS TestBitopsFunctions.cpp)
 kde4_add_unit_test(TestBitopsFunctions TESTNAME kspread-BitopsFunctions  ${TestBitopsFunctions_SRCS})

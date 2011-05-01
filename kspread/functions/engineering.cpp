@@ -23,7 +23,7 @@
 
 #include "EngineeringModule.h"
 
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionModuleRegistry.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
@@ -98,164 +98,164 @@ KSPREAD_EXPORT_FUNCTION_MODULE("engineering", EngineeringModule)
 EngineeringModule::EngineeringModule(QObject* parent, const QVariantList&)
         : FunctionModule(parent)
 {
-    Function *f;
+    KCFunction *f;
 
-    f = new Function("BASE",        func_base);     // KSpread-specific, like in Quattro-Pro
+    f = new KCFunction("BASE",        func_base);     // KSpread-specific, like in Quattro-Pro
     f->setParamCount(1, 3);
     add(f);
-    f = new Function("BESSELI",     func_besseli);
+    f = new KCFunction("BESSELI",     func_besseli);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBESSELI");
     f->setParamCount(2);
     add(f);
-    f = new Function("BESSELJ",     func_besselj);
+    f = new KCFunction("BESSELJ",     func_besselj);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBESSELJ");
     f->setParamCount(2);
     add(f);
-    f = new Function("BESSELK",     func_besselk);
+    f = new KCFunction("BESSELK",     func_besselk);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBESSELK");
     f->setParamCount(2);
     add(f);
-    f = new Function("BESSELY",     func_bessely);
+    f = new KCFunction("BESSELY",     func_bessely);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBESSELY");
     f->setParamCount(2);
     add(f);
-    f = new Function("BIN2DEC",     func_bin2dec);
+    f = new KCFunction("BIN2DEC",     func_bin2dec);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBIN2DEC");
     add(f);
-    f = new Function("BIN2OCT",     func_bin2oct);
+    f = new KCFunction("BIN2OCT",     func_bin2oct);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBIN2OCT");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("BIN2HEX",     func_bin2hex);
+    f = new KCFunction("BIN2HEX",     func_bin2hex);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBIN2HEX");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("COMPLEX",     func_complex);
+    f = new KCFunction("COMPLEX",     func_complex);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCOMPLEX");
     f->setParamCount(2);
     add(f);
-    f = new Function("CONVERT",     func_convert);
+    f = new KCFunction("CONVERT",     func_convert);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCONVERT");
     f->setParamCount(3);
     add(f);
-    f = new Function("DEC2HEX",     func_dec2hex);
+    f = new KCFunction("DEC2HEX",     func_dec2hex);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDEC2HEX");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("DEC2BIN",     func_dec2bin);
+    f = new KCFunction("DEC2BIN",     func_dec2bin);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDEC2BIN");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("DEC2OCT",     func_dec2oct);
+    f = new KCFunction("DEC2OCT",     func_dec2oct);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDEC2OCT");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("DECIMAL",     func_decimal);
+    f = new KCFunction("DECIMAL",     func_decimal);
     f->setParamCount(2);
     add(f);
-    f = new Function("DELTA",       func_delta);
+    f = new KCFunction("DELTA",       func_delta);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDELTA");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("ERF",         func_erf);
+    f = new KCFunction("ERF",         func_erf);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETERF");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("ERFC",        func_erfc);
+    f = new KCFunction("ERFC",        func_erfc);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETERFC");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("GESTEP",      func_gestep);
+    f = new KCFunction("GESTEP",      func_gestep);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETGESTEP");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("HEX2BIN",     func_hex2bin);
+    f = new KCFunction("HEX2BIN",     func_hex2bin);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETHEX2BIN");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("HEX2DEC",     func_hex2dec);
+    f = new KCFunction("HEX2DEC",     func_hex2dec);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETHEX2DEC");
     add(f);
-    f = new Function("HEX2OCT",     func_hex2oct);
+    f = new KCFunction("HEX2OCT",     func_hex2oct);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETHEX2OCT");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("IMABS",       func_imabs);
+    f = new KCFunction("IMABS",       func_imabs);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMABS");
     add(f);
-    f = new Function("IMAGINARY",   func_complex_imag);
+    f = new KCFunction("IMAGINARY",   func_complex_imag);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMAGINARY");
     add(f);
-    f = new Function("IMARGUMENT",  func_imargument);
+    f = new KCFunction("IMARGUMENT",  func_imargument);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMARGUMENT");
     add(f);
-    f = new Function("IMCONJUGATE", func_imconjugate);
+    f = new KCFunction("IMCONJUGATE", func_imconjugate);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMCONJUGATE");
     add(f);
-    f = new Function("IMCOS",       func_imcos);
+    f = new KCFunction("IMCOS",       func_imcos);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMCOS");
     add(f);
-    f = new Function("IMCOSH",      func_imcosh);
+    f = new KCFunction("IMCOSH",      func_imcosh);
     add(f);
-    f = new Function("IMDIV",       func_imdiv);
+    f = new KCFunction("IMDIV",       func_imdiv);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMDIV");
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("IMEXP",       func_imexp);
+    f = new KCFunction("IMEXP",       func_imexp);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMEXP");
     add(f);
-    f = new Function("IMLN",        func_imln);
+    f = new KCFunction("IMLN",        func_imln);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMLN");
     add(f);
-    f = new Function("IMLOG2",      func_imlog2);
+    f = new KCFunction("IMLOG2",      func_imlog2);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMLOG2");
     add(f);
-    f = new Function("IMLOG10",     func_imlog10);
+    f = new KCFunction("IMLOG10",     func_imlog10);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMLOG10");
     add(f);
-    f = new Function("IMPOWER",     func_impower);
+    f = new KCFunction("IMPOWER",     func_impower);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMPOWER");
     f->setParamCount(2);
     add(f);
-    f = new Function("IMPRODUCT",   func_improduct);
+    f = new KCFunction("IMPRODUCT",   func_improduct);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMPRODUCT");
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("IMREAL",      func_complex_real);
+    f = new KCFunction("IMREAL",      func_complex_real);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMREAL");
     add(f);
-    f = new Function("IMSIN",       func_imsin);
+    f = new KCFunction("IMSIN",       func_imsin);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMSIN");
     add(f);
-    f = new Function("IMSINH",      func_imsinh);
+    f = new KCFunction("IMSINH",      func_imsinh);
     add(f);
-    f = new Function("IMSQRT",      func_imsqrt);
+    f = new KCFunction("IMSQRT",      func_imsqrt);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMSQRT");
     add(f);
-    f = new Function("IMSUB",       func_imsub);
+    f = new KCFunction("IMSUB",       func_imsub);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMSUB");
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("IMSUM",       func_imsum);
+    f = new KCFunction("IMSUM",       func_imsum);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETIMSUM");
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("IMTAN",       func_imtan);
+    f = new KCFunction("IMTAN",       func_imtan);
     add(f);
-    f = new Function("IMTANH",      func_imtanh);
+    f = new KCFunction("IMTANH",      func_imtanh);
     add(f);
-    f = new Function("OCT2BIN",     func_oct2bin);
+    f = new KCFunction("OCT2BIN",     func_oct2bin);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETOCT2BIN");
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("OCT2DEC",     func_oct2dec);
+    f = new KCFunction("OCT2DEC",     func_oct2dec);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETOCT2DEC");
     add(f);
-    f = new Function("OCT2HEX",     func_oct2hex);
+    f = new KCFunction("OCT2HEX",     func_oct2hex);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETOCT2HEX");
     f->setParamCount(1, 2);
     add(f);
@@ -268,7 +268,7 @@ QString EngineeringModule::descriptionFileName() const
 
 
 //
-// Function: BASE
+// KCFunction: BASE
 //
 KCValue func_base(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -288,7 +288,7 @@ KCValue func_base(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: BESSELI
+// KCFunction: BESSELI
 //
 KCValue func_besseli(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -299,7 +299,7 @@ KCValue func_besseli(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: BESSELJ
+// KCFunction: BESSELJ
 //
 KCValue func_besselj(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -310,7 +310,7 @@ KCValue func_besselj(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: BESSELK
+// KCFunction: BESSELK
 //
 KCValue func_besselk(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -321,7 +321,7 @@ KCValue func_besselk(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: BESSELY
+// KCFunction: BESSELY
 //
 KCValue func_bessely(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -332,7 +332,7 @@ KCValue func_bessely(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DEC2HEX
+// KCFunction: DEC2HEX
 //
 KCValue func_dec2hex(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -352,7 +352,7 @@ KCValue func_dec2hex(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DEC2OCT
+// KCFunction: DEC2OCT
 //
 KCValue func_dec2oct(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -372,7 +372,7 @@ KCValue func_dec2oct(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DEC2BIN
+// KCFunction: DEC2BIN
 //
 KCValue func_dec2bin(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -392,7 +392,7 @@ KCValue func_dec2bin(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: BIN2DEC
+// KCFunction: BIN2DEC
 //
 KCValue func_bin2dec(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -401,7 +401,7 @@ KCValue func_bin2dec(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: BIN2OCT
+// KCFunction: BIN2OCT
 //
 KCValue func_bin2oct(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -421,7 +421,7 @@ KCValue func_bin2oct(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: BIN2HEX
+// KCFunction: BIN2HEX
 //
 KCValue func_bin2hex(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -442,7 +442,7 @@ KCValue func_bin2hex(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: OCT2DEC
+// KCFunction: OCT2DEC
 //
 KCValue func_oct2dec(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -451,7 +451,7 @@ KCValue func_oct2dec(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: OCT2BIN
+// KCFunction: OCT2BIN
 //
 KCValue func_oct2bin(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -471,7 +471,7 @@ KCValue func_oct2bin(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: OCT2HEX
+// KCFunction: OCT2HEX
 //
 KCValue func_oct2hex(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -491,7 +491,7 @@ KCValue func_oct2hex(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: HEX2DEC
+// KCFunction: HEX2DEC
 //
 KCValue func_hex2dec(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -500,7 +500,7 @@ KCValue func_hex2dec(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: HEX2BIN
+// KCFunction: HEX2BIN
 //
 KCValue func_hex2bin(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -520,7 +520,7 @@ KCValue func_hex2bin(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: HEX2OCT
+// KCFunction: HEX2OCT
 //
 KCValue func_hex2oct(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -540,7 +540,7 @@ KCValue func_hex2oct(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DECIMAL
+// KCFunction: DECIMAL
 //
 KCValue func_decimal(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1097,7 +1097,7 @@ static bool kspread_convert_info(const QString& fromUnit,
 }
 
 //
-// Function: CONVERT
+// KCFunction: CONVERT
 //
 KCValue func_convert(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1134,7 +1134,7 @@ KCValue func_convert(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: COMPLEX
+// KCFunction: COMPLEX
 //
 KCValue func_complex(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1145,7 +1145,7 @@ KCValue func_complex(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMAGINARY
+// KCFunction: IMAGINARY
 //
 KCValue func_complex_imag(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1154,7 +1154,7 @@ KCValue func_complex_imag(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMREAL
+// KCFunction: IMREAL
 //
 KCValue func_complex_real(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1206,7 +1206,7 @@ void awImDiv(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 }
 
 //
-// Function: IMSUM
+// KCFunction: IMSUM
 //
 KCValue func_imsum(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1217,7 +1217,7 @@ KCValue func_imsum(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMSUB
+// KCFunction: IMSUB
 //
 KCValue func_imsub(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1234,7 +1234,7 @@ KCValue func_imsub(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMPRODUCT
+// KCFunction: IMPRODUCT
 //
 KCValue func_improduct(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1252,7 +1252,7 @@ KCValue func_improduct(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMDIV
+// KCFunction: IMDIV
 //
 KCValue func_imdiv(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1270,7 +1270,7 @@ KCValue func_imdiv(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMCONJUGATE
+// KCFunction: IMCONJUGATE
 //
 KCValue func_imconjugate(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1279,7 +1279,7 @@ KCValue func_imconjugate(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMARGUMENT
+// KCFunction: IMARGUMENT
 //
 KCValue func_imargument(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1288,7 +1288,7 @@ KCValue func_imargument(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMABS
+// KCFunction: IMABS
 //
 KCValue func_imabs(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1297,7 +1297,7 @@ KCValue func_imabs(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMCOS
+// KCFunction: IMCOS
 //
 KCValue func_imcos(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1306,7 +1306,7 @@ KCValue func_imcos(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMSIN
+// KCFunction: IMSIN
 //
 KCValue func_imsin(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1315,7 +1315,7 @@ KCValue func_imsin(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMTAN
+// KCFunction: IMTAN
 //
 KCValue func_imtan(valVector args, ValueCalc *calc, FuncExtra*)
 {
@@ -1324,7 +1324,7 @@ KCValue func_imtan(valVector args, ValueCalc *calc, FuncExtra*)
 
 
 //
-// Function: IMCOSH
+// KCFunction: IMCOSH
 //
 KCValue func_imcosh(valVector args, ValueCalc *calc, FuncExtra*)
 {
@@ -1333,7 +1333,7 @@ KCValue func_imcosh(valVector args, ValueCalc *calc, FuncExtra*)
 
 
 //
-// Function: IMSINH
+// KCFunction: IMSINH
 //
 KCValue func_imsinh(valVector args, ValueCalc *calc, FuncExtra*)
 {
@@ -1342,7 +1342,7 @@ KCValue func_imsinh(valVector args, ValueCalc *calc, FuncExtra*)
 
 
 //
-// Function: IMTANH
+// KCFunction: IMTANH
 //
 KCValue func_imtanh(valVector args, ValueCalc *calc, FuncExtra*)
 {
@@ -1351,7 +1351,7 @@ KCValue func_imtanh(valVector args, ValueCalc *calc, FuncExtra*)
 
 
 //
-// Function: IMLN
+// KCFunction: IMLN
 //
 KCValue func_imln(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1360,7 +1360,7 @@ KCValue func_imln(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMLOG2
+// KCFunction: IMLOG2
 //
 KCValue func_imlog2(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1369,7 +1369,7 @@ KCValue func_imlog2(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMLOG10
+// KCFunction: IMLOG10
 //
 KCValue func_imlog10(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1378,7 +1378,7 @@ KCValue func_imlog10(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMEXP
+// KCFunction: IMEXP
 //
 KCValue func_imexp(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1387,7 +1387,7 @@ KCValue func_imexp(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMSQRT
+// KCFunction: IMSQRT
 //
 KCValue func_imsqrt(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1396,7 +1396,7 @@ KCValue func_imsqrt(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: IMPOWER
+// KCFunction: IMPOWER
 //
 KCValue func_impower(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1406,7 +1406,7 @@ KCValue func_impower(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: DELTA
+// KCFunction: DELTA
 //
 KCValue func_delta(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1420,7 +1420,7 @@ KCValue func_delta(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: ERF
+// KCFunction: ERF
 //
 KCValue func_erf(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1431,7 +1431,7 @@ KCValue func_erf(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: ERFC
+// KCFunction: ERFC
 //
 KCValue func_erfc(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -1442,7 +1442,7 @@ KCValue func_erfc(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: GESTEP
+// KCFunction: GESTEP
 //
 KCValue func_gestep(valVector args, ValueCalc *calc, FuncExtra *)
 {

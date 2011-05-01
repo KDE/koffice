@@ -21,7 +21,7 @@
 // Local
 #include "FunctionRepository.h"
 
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionDescription.h"
 #include "FunctionModuleRegistry.h"
 
@@ -37,8 +37,8 @@
 class FunctionRepository::Private
 {
 public:
-    QHash<QString, QSharedPointer<Function> > functions;
-    QHash<QString, QSharedPointer<Function> > alternates;
+    QHash<QString, QSharedPointer<KCFunction> > functions;
+    QHash<QString, QSharedPointer<KCFunction> > alternates;
     QHash<QString, FunctionDescription*> descriptions;
     QStringList groups;
     bool initialized;
@@ -59,7 +59,7 @@ FunctionRepository* FunctionRepository::self()
 
         // Verify, that every function has a description.
         QStringList missingDescriptions;
-        typedef QHash<QString, QSharedPointer<Function> > Functions;
+        typedef QHash<QString, QSharedPointer<KCFunction> > Functions;
         Functions::ConstIterator end = s_instance->d->functions.constEnd();
         for (Functions::ConstIterator it = s_instance->d->functions.constBegin(); it != end; ++it) {
             if (!s_instance->d->descriptions.contains(it.key()))
@@ -88,7 +88,7 @@ FunctionRepository::~FunctionRepository()
     delete d;
 }
 
-void FunctionRepository::add(const QSharedPointer<Function>& function)
+void FunctionRepository::add(const QSharedPointer<KCFunction>& function)
 {
     if (!function) return;
     d->functions.insert(function->name().toUpper(), function);
@@ -105,20 +105,20 @@ void FunctionRepository::add(FunctionDescription *desc)
     d->descriptions.insert(desc->name(), desc);
 }
 
-void FunctionRepository::remove(const QSharedPointer<Function>& function)
+void FunctionRepository::remove(const QSharedPointer<KCFunction>& function)
 {
     const QString functionName = function->name().toUpper();
     delete d->descriptions.take(functionName);
     if (d->functions.contains(functionName)) {
-        QSharedPointer<Function> function = d->functions.take(functionName);
+        QSharedPointer<KCFunction> function = d->functions.take(functionName);
         d->alternates.remove(function->alternateName().toUpper());
     }
 }
 
-QSharedPointer<Function> FunctionRepository::function(const QString& name)
+QSharedPointer<KCFunction> FunctionRepository::function(const QString& name)
 {
     const QString n = name.toUpper();
-    QSharedPointer<Function> f = d->functions.value(n);
+    QSharedPointer<KCFunction> f = d->functions.value(n);
     return !f.isNull() ? f : d->alternates.value(n);
 }
 
@@ -178,7 +178,7 @@ void FunctionRepository::loadFunctionDescriptions(const QString& filename)
                 if (!n2.isElement())
                     continue;
                 QDomElement e2 = n2.toElement();
-                if (e2.tagName() == "Function") {
+                if (e2.tagName() == "KCFunction") {
                     FunctionDescription* desc = new FunctionDescription(e2);
                     desc->setGroup(group);
                     if (d->functions.contains(desc->name()))

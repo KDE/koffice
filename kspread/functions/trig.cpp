@@ -21,7 +21,7 @@
 // built-in trigonometric functions
 #include "TrigonometryModule.h"
 
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionModuleRegistry.h"
 #include "ValueCalc.h"
 
@@ -58,48 +58,48 @@ KSPREAD_EXPORT_FUNCTION_MODULE("trigonometry", TrigonometryModule)
 TrigonometryModule::TrigonometryModule(QObject* parent, const QVariantList&)
         : FunctionModule(parent)
 {
-    Function *f;
+    KCFunction *f;
 
-    f = new Function("ACOS",   func_acos);
+    f = new KCFunction("ACOS",   func_acos);
     add(f);
-    f = new Function("ACOSH",  func_acosh);
+    f = new KCFunction("ACOSH",  func_acosh);
     add(f);
-    f = new Function("ACOT",   func_acot);
+    f = new KCFunction("ACOT",   func_acot);
     add(f);
-    f = new Function("ACOTH",  func_acoth);
+    f = new KCFunction("ACOTH",  func_acoth);
     add(f);
-    f = new Function("ASIN",   func_asin);
+    f = new KCFunction("ASIN",   func_asin);
     add(f);
-    f = new Function("ASINH",  func_asinh);
+    f = new KCFunction("ASINH",  func_asinh);
     add(f);
-    f = new Function("ATAN",   func_atan);
+    f = new KCFunction("ATAN",   func_atan);
     add(f);
-    f = new Function("ATAN2",  func_atan2);
+    f = new KCFunction("ATAN2",  func_atan2);
     f->setParamCount(2);
     add(f);
-    f = new Function("ATANH",  func_atanh);
+    f = new KCFunction("ATANH",  func_atanh);
     add(f);
-    f = new Function("COS",    func_cos);
+    f = new KCFunction("COS",    func_cos);
     add(f);
-    f = new Function("COSH",   func_cosh);
+    f = new KCFunction("COSH",   func_cosh);
     add(f);
-    f = new Function("COT",    func_cot);
+    f = new KCFunction("COT",    func_cot);
     add(f);
-    f = new Function("COTH",   func_coth);
+    f = new KCFunction("COTH",   func_coth);
     add(f);
-    f = new Function("DEGREES", func_degrees);
+    f = new KCFunction("DEGREES", func_degrees);
     add(f);
-    f = new Function("RADIANS", func_radians);
+    f = new KCFunction("RADIANS", func_radians);
     add(f);
-    f = new Function("SIN",    func_sin);
+    f = new KCFunction("SIN",    func_sin);
     add(f);
-    f = new Function("SINH",   func_sinh);
+    f = new KCFunction("SINH",   func_sinh);
     add(f);
-    f = new Function("TAN",    func_tan);
+    f = new KCFunction("TAN",    func_tan);
     add(f);
-    f = new Function("TANH",   func_tanh);
+    f = new KCFunction("TANH",   func_tanh);
     add(f);
-    f = new Function("PI",     func_pi);
+    f = new KCFunction("PI",     func_pi);
     f->setParamCount(0);
     add(f);
 }
@@ -110,37 +110,37 @@ QString TrigonometryModule::descriptionFileName() const
 }
 
 
-// Function: sin
+// KCFunction: sin
 KCValue func_sin(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->sin(args[0]);
 }
 
-// Function: cos
+// KCFunction: cos
 KCValue func_cos(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->cos(args[0]);
 }
 
-// Function: tan
+// KCFunction: tan
 KCValue func_tan(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->tg(args[0]);
 }
 
-// Function: atan
+// KCFunction: atan
 KCValue func_atan(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->atg(args[0]);
 }
 
-// Function: asin
+// KCFunction: asin
 KCValue func_asin(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->asin(args[0]);
 }
 
-// Function: acos
+// KCFunction: acos
 KCValue func_acos(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->acos(args[0]);
@@ -161,49 +161,49 @@ KCValue func_acoth(valVector args, ValueCalc *calc, FuncExtra *)
     return calc->mul(KCValue(0.5), calc->ln(calc->div(calc->add(args[0], KCValue(1.0)) , calc->sub(args[0], KCValue(1.0)))));
 }
 
-// Function: asinh
+// KCFunction: asinh
 KCValue func_asinh(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->asinh(args[0]);
 }
 
-// Function: acosh
+// KCFunction: acosh
 KCValue func_acosh(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->acosh(args[0]);
 }
 
-// Function: atanh
+// KCFunction: atanh
 KCValue func_atanh(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->atgh(args[0]);
 }
 
-// Function: tanh
+// KCFunction: tanh
 KCValue func_tanh(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->tgh(args[0]);
 }
 
-// Function: sinh
+// KCFunction: sinh
 KCValue func_sinh(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->sinh(args[0]);
 }
 
-// Function: cosh
+// KCFunction: cosh
 KCValue func_cosh(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->cosh(args[0]);
 }
 
-// Function: cot
+// KCFunction: cot
 KCValue func_cot(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->div(1, calc->tg(args[0]));
 }
 
-// Function: coth
+// KCFunction: coth
 KCValue func_coth(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (calc->isZero(args[0]))
@@ -212,27 +212,27 @@ KCValue func_coth(valVector args, ValueCalc *calc, FuncExtra *)
     return calc->div(1, calc->tgh(args[0]));
 }
 
-// Function: DEGREES
+// KCFunction: DEGREES
 KCValue func_degrees(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // val * 180 / pi
     return calc->div(calc->mul(args[0], 180.0), calc->pi());
 }
 
-// Function: RADIANS
+// KCFunction: RADIANS
 KCValue func_radians(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // val * pi / 180
     return calc->mul(calc->div(args[0], 180.0), calc->pi());
 }
 
-// Function: PI
+// KCFunction: PI
 KCValue func_pi(valVector, ValueCalc *calc, FuncExtra *)
 {
     return calc->pi();
 }
 
-// Function: atan2
+// KCFunction: atan2
 KCValue func_atan2(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->atan2(args[1], args[0]);

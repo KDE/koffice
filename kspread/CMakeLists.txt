@@ -239,7 +239,7 @@ set (kspreadodf_LIB_SRCS
     database/Filter.cpp
 
     # TODO: move the formula evaluation out of KCFormula.cpp so these files can move out of libkspreadodf
-    Function.cpp
+    KCFunction.cpp
     FunctionDescription.cpp
     FunctionModule.cpp
     FunctionModuleRegistry.cpp

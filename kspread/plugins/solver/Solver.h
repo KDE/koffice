@@ -32,7 +32,7 @@ class QObject;
 #include <QVariantList>
 
 /**
- * \class Solver Function Optimizer
+ * \class Solver KCFunction Optimizer
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  */
 class KSPREAD_EXPORT Solver : public KParts::Plugin

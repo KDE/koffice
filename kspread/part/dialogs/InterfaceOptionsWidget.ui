@@ -31,7 +31,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Function shown in status bar:</string>
+      <string>KCFunction shown in status bar:</string>
      </property>
      <property name="buddy">
       <cstring>m_statusBarFunction</cstring>

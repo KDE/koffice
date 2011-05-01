@@ -29,7 +29,7 @@
 
 #include "KCCellStorage.h"
 #include "KCFormula.h"
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionModuleRegistry.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
@@ -61,62 +61,62 @@ KSPREAD_EXPORT_FUNCTION_MODULE("reference", ReferenceModule)
 ReferenceModule::ReferenceModule(QObject* parent, const QVariantList&)
         : FunctionModule(parent)
 {
-    Function *f;
+    KCFunction *f;
 
-    f = new Function("ADDRESS",  func_address);
+    f = new KCFunction("ADDRESS",  func_address);
     f->setParamCount(2, 5);
     add(f);
-    f = new Function("AREAS",    func_areas);
+    f = new KCFunction("AREAS",    func_areas);
     f->setParamCount(1);
     f->setNeedsExtra(true);
     f->setAcceptArray();
     add(f);
-    f = new Function("CHOOSE",   func_choose);
+    f = new KCFunction("CHOOSE",   func_choose);
     f->setParamCount(2, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("COLUMN",   func_column);
+    f = new KCFunction("COLUMN",   func_column);
     f->setParamCount(0, 1);
     add(f);
-    f = new Function("COLUMNS",  func_columns);
+    f = new KCFunction("COLUMNS",  func_columns);
     f->setParamCount(1);
     f->setAcceptArray();
     f->setNeedsExtra(true);
     add(f);
-    f = new Function("HLOOKUP",  func_hlookup);
+    f = new KCFunction("HLOOKUP",  func_hlookup);
     f->setParamCount(3, 4);
     f->setAcceptArray();
     add(f);
-    f = new Function("INDEX",   func_index);
+    f = new KCFunction("INDEX",   func_index);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("INDIRECT", func_indirect);
+    f = new KCFunction("INDIRECT", func_indirect);
     f->setParamCount(1, 2);
     f->setNeedsExtra(true);
     add(f);
-    f = new Function("LOOKUP",   func_lookup);
+    f = new KCFunction("LOOKUP",   func_lookup);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("MATCH", func_match);
+    f = new KCFunction("MATCH", func_match);
     f->setParamCount(2, 3);
     f->setAcceptArray();
     f->setNeedsExtra(true);
   add(f);
-    f = new Function("MULTIPLE.OPERATIONS", func_multiple_operations);
+    f = new KCFunction("MULTIPLE.OPERATIONS", func_multiple_operations);
     f->setParamCount(3, 5);
     f->setNeedsExtra(true);
     add(f);
-    f = new Function("ROW",      func_row);
+    f = new KCFunction("ROW",      func_row);
     f->setParamCount(0, 1);
     add(f);
-    f = new Function("ROWS",     func_rows);
+    f = new KCFunction("ROWS",     func_rows);
     f->setParamCount(1);
     f->setAcceptArray();
     f->setNeedsExtra(true);
     add(f);
-    f = new Function("VLOOKUP",  func_vlookup);
+    f = new KCFunction("VLOOKUP",  func_vlookup);
     f->setParamCount(3, 4);
     f->setAcceptArray();
     add(f);
@@ -129,7 +129,7 @@ QString ReferenceModule::descriptionFileName() const
 
 
 //
-// Function: ADDRESS
+// KCFunction: ADDRESS
 //
 KCValue func_address(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -203,7 +203,7 @@ KCValue func_address(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: AREAS
+// KCFunction: AREAS
 //
 KCValue func_areas(valVector args, ValueCalc *calc, FuncExtra *e)
 {
@@ -242,7 +242,7 @@ KCValue func_areas(valVector args, ValueCalc *calc, FuncExtra *e)
 
 
 //
-// Function: CHOOSE
+// KCFunction: CHOOSE
 //
 KCValue func_choose(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -255,7 +255,7 @@ KCValue func_choose(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: COLUMN
+// KCFunction: COLUMN
 //
 KCValue func_column(valVector args, ValueCalc *, FuncExtra *e)
 {
@@ -269,7 +269,7 @@ KCValue func_column(valVector args, ValueCalc *, FuncExtra *e)
 
 
 //
-// Function: COLUMNS
+// KCFunction: COLUMNS
 //
 KCValue func_columns(valVector, ValueCalc *, FuncExtra *e)
 {
@@ -282,7 +282,7 @@ KCValue func_columns(valVector, ValueCalc *, FuncExtra *e)
 
 
 //
-// Function: HLOOKUP
+// KCFunction: HLOOKUP
 //
 KCValue func_hlookup(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -315,7 +315,7 @@ KCValue func_hlookup(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: INDEX
+// KCFunction: INDEX
 //
 KCValue func_index(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -334,7 +334,7 @@ KCValue func_index(valVector args, ValueCalc *calc, FuncExtra *)
 
 
 //
-// Function: INDIRECT
+// KCFunction: INDIRECT
 //
 KCValue func_indirect(valVector args, ValueCalc *calc, FuncExtra *e)
 {
@@ -363,7 +363,7 @@ KCValue func_indirect(valVector args, ValueCalc *calc, FuncExtra *e)
 
 
 //
-// Function: LOOKUP
+// KCFunction: LOOKUP
 //
 KCValue func_lookup(valVector args, ValueCalc *calc, FuncExtra *)
 {
@@ -392,7 +392,7 @@ KCValue func_lookup(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 //
-// Function: MATCH
+// KCFunction: MATCH
 //
 KCValue func_match(valVector args, ValueCalc *calc, FuncExtra* e)
 {
@@ -455,7 +455,7 @@ KCValue func_match(valVector args, ValueCalc *calc, FuncExtra* e)
 }
 
 //
-// Function: MULTIPLE.OPERATIONS
+// KCFunction: MULTIPLE.OPERATIONS
 //
 KCValue func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
 {
@@ -486,7 +486,7 @@ KCValue func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
 }
 
 //
-// Function: ROW
+// KCFunction: ROW
 //
 KCValue func_row(valVector args, ValueCalc *, FuncExtra *e)
 {
@@ -500,7 +500,7 @@ KCValue func_row(valVector args, ValueCalc *, FuncExtra *e)
 
 
 //
-// Function: ROWS
+// KCFunction: ROWS
 //
 KCValue func_rows(valVector, ValueCalc *, FuncExtra *e)
 {
@@ -513,7 +513,7 @@ KCValue func_rows(valVector, ValueCalc *, FuncExtra *e)
 
 
 //
-// Function: VLOOKUP
+// KCFunction: VLOOKUP
 //
 KCValue func_vlookup(valVector args, ValueCalc *calc, FuncExtra *)
 {

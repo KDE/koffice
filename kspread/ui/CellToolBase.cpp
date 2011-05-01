@@ -663,7 +663,7 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     connect(action, SIGNAL(triggered(bool)), this, SLOT(insertSeries()));
     action ->setToolTip(i18n("Insert a series"));
 
-    action = new KAction(KIcon("funct"), i18n("&Function..."), this);
+    action = new KAction(KIcon("funct"), i18n("&KCFunction..."), this);
     addAction("insertFormula", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(insertFormula()));
     action->setToolTip(i18n("Insert math expression"));

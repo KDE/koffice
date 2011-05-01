@@ -24,7 +24,7 @@
 #include "CellToolBase.h"
 #include "KCFormula.h"
 #include "FormulaEditorHighlighter.h"
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionRepository.h"
 #include "FunctionCompletion.h"
 #include "KCMap.h"

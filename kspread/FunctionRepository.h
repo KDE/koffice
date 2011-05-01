@@ -27,7 +27,7 @@
 
 #include "kspread_export.h"
 
-class Function;
+class KCFunction;
 class FunctionDescription;
 
 /**
@@ -45,16 +45,16 @@ public:
     /**
      * Adds \p function to the repository.
      */
-    void add(const QSharedPointer<Function>& function);
+    void add(const QSharedPointer<KCFunction>& function);
     void add(FunctionDescription *desc);
 
     /**
      * Removes \p function from the repository.
-     * The Function object and the appropriate description will be destroyed.
+     * The KCFunction object and the appropriate description will be destroyed.
      */
-    void remove(const QSharedPointer<Function>& function);
+    void remove(const QSharedPointer<KCFunction>& function);
 
-    QSharedPointer<Function> function(const QString& name);
+    QSharedPointer<KCFunction> function(const QString& name);
 
     FunctionDescription *functionInfo(const QString& name);
 

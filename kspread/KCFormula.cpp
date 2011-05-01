@@ -24,7 +24,7 @@
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "KCCellStorage.h"
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionRepository.h"
 #include "KCSheet.h"
 #include "KCMap.h"
@@ -82,7 +82,7 @@ class Opcode
 {
 public:
 
-    enum { Nop = 0, Load, Ref, KCCell, Range, Function, Add, Sub, Neg, Mul, Div,
+    enum { Nop = 0, Load, Ref, KCCell, Range, KCFunction, Add, Sub, Neg, Mul, Div,
            Pow, Concat, Intersect, Not, Equal, Less, Greater, Array, Union
          };
 
@@ -1075,7 +1075,7 @@ void KCFormula::compile(const Tokens& tokens) const
                                             syntaxStack.pop();
                                             syntaxStack.pop();
                                             syntaxStack.push(arg);
-                                            d->codes.append(Opcode(Opcode::Function, argCount));
+                                            d->codes.append(Opcode(Opcode::KCFunction, argCount));
                                             Q_ASSERT(!argStack.empty());
                                             argCount = argStack.empty() ? 0 : argStack.pop();
                                         }
@@ -1096,7 +1096,7 @@ void KCFormula::compile(const Tokens& tokens) const
                                         syntaxStack.pop();
                                         syntaxStack.pop();
                                         syntaxStack.push(KCToken(KCToken::Integer));
-                                        d->codes.append(Opcode(Opcode::Function, 0));
+                                        d->codes.append(Opcode(Opcode::KCFunction, 0));
                                         Q_ASSERT(!argStack.empty());
                                         argCount = argStack.empty() ? 0 : argStack.pop();
                                     }
@@ -1392,7 +1392,7 @@ KCValue KCFormula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell,
     const ValueConverter* converter = map->converter();
     ValueCalc* calc = map->calc();
 
-    QSharedPointer<Function> function;
+    QSharedPointer<KCFunction> function;
     FuncExtra fe;
     fe.mycol = fe.myrow = 0;
     if (!d->cell.isNull()) {
@@ -1682,7 +1682,7 @@ KCValue KCFormula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell,
             break;
 
             // calling function
-        case Opcode::Function:
+        case Opcode::KCFunction:
             // sanity check, this should not happen unless opcode is wrong
             // (i.e. there's a bug in the compile() function)
             if (stack.count() < index)
@@ -1803,7 +1803,7 @@ QString KCFormula::dump() const
         switch (d->codes[i].type) {
         case Opcode::Load:      ctext = QString("Load #%1").arg(d->codes[i].index); break;
         case Opcode::Ref:       ctext = QString("Ref #%1").arg(d->codes[i].index); break;
-        case Opcode::Function:  ctext = QString("Function (%1)").arg(d->codes[i].index); break;
+        case Opcode::KCFunction:  ctext = QString("KCFunction (%1)").arg(d->codes[i].index); break;
         case Opcode::Add:       ctext = "Add"; break;
         case Opcode::Sub:       ctext = "Sub"; break;
         case Opcode::Mul:       ctext = "Mul"; break;

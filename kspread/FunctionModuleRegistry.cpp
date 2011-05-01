@@ -19,7 +19,7 @@
 
 #include "FunctionModuleRegistry.h"
 
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionRepository.h"
 
 #include <KDebug>
@@ -40,7 +40,7 @@ public:
 
 void FunctionModuleRegistry::Private::registerFunctionModule(FunctionModule* module)
 {
-    const QList<QSharedPointer<Function> > functions = module->functions();
+    const QList<QSharedPointer<KCFunction> > functions = module->functions();
     for (int i = 0; i < functions.count(); ++i) {
         FunctionRepository::self()->add(functions[i]);
     }
@@ -56,7 +56,7 @@ void FunctionModuleRegistry::Private::registerFunctionModule(FunctionModule* mod
 
 void FunctionModuleRegistry::Private::removeFunctionModule(FunctionModule* module)
 {
-    const QList<QSharedPointer<Function> > functions = module->functions();
+    const QList<QSharedPointer<KCFunction> > functions = module->functions();
     for (int i = 0; i < functions.count(); ++i) {
         FunctionRepository::self()->remove(functions[i]);
     }

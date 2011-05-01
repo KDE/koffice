@@ -159,7 +159,7 @@ KoFilter::ConversionStatus XlsxXmlDocumentReader::readInternal()
  - fileRecoveryPr (File Recovery Properties) §18.2.11
  - fileSharing (File Sharing) §18.2.12
  - fileVersion (File Version) §18.2.13
- - functionGroups (Function Groups) §18.2.15
+ - functionGroups (KCFunction Groups) §18.2.15
  - oleSize (Embedded Object Size) §18.2.16
  - pivotCaches (PivotCaches) §18.2.18
  - [done] sheets (Sheets) §18.2.20

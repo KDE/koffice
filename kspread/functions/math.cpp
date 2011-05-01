@@ -32,7 +32,7 @@
 #include <KLocale>
 
 #include "FunctionModuleRegistry.h"
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionRepository.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
@@ -126,232 +126,232 @@ KSPREAD_EXPORT_FUNCTION_MODULE("math", MathModule)
 MathModule::MathModule(QObject* parent, const QVariantList&)
         : FunctionModule(parent)
 {
-    Function *f;
+    KCFunction *f;
 
     /*
-      f = new Function ("MULTIPLEOPERATIONS", func_multipleOP);
+      f = new KCFunction ("MULTIPLEOPERATIONS", func_multipleOP);
     add(f);
     */
 
     // functions that don't take array parameters
-    f = new Function("ABS",           func_abs);
+    f = new KCFunction("ABS",           func_abs);
     add(f);
-    f = new Function("CEIL",          func_ceil);
+    f = new KCFunction("CEIL",          func_ceil);
     add(f);
-    f = new Function("CEILING",       func_ceiling);
+    f = new KCFunction("CEILING",       func_ceiling);
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("CUR",           func_cur);
+    f = new KCFunction("CUR",           func_cur);
     add(f);
-    f = new Function("EPS",           func_eps);
+    f = new KCFunction("EPS",           func_eps);
     f->setParamCount(0);
     add(f);
-    f = new Function("EVEN",          func_even);
+    f = new KCFunction("EVEN",          func_even);
     add(f);
-    f = new Function("EXP",           func_exp);
+    f = new KCFunction("EXP",           func_exp);
     add(f);
-    f = new Function("FACT",          func_fact);
+    f = new KCFunction("FACT",          func_fact);
     add(f);
-    f = new Function("FACTDOUBLE",    func_factdouble);
+    f = new KCFunction("FACTDOUBLE",    func_factdouble);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETFACTDOUBLE");
     add(f);
-    f = new Function("FIB",           func_fib);  // KSpread-specific, like Quattro-Pro's FIB
+    f = new KCFunction("FIB",           func_fib);  // KSpread-specific, like Quattro-Pro's FIB
     add(f);
-    f = new Function("FLOOR",         func_floor);
+    f = new KCFunction("FLOOR",         func_floor);
     f->setParamCount(1, 3);
     add(f);
-    f = new Function("GAMMA",         func_gamma);
+    f = new KCFunction("GAMMA",         func_gamma);
     add(f);
-    f = new Function("INT",           func_int);
+    f = new KCFunction("INT",           func_int);
     add(f);
-    f = new Function("INV",           func_inv);
+    f = new KCFunction("INV",           func_inv);
     add(f);
-    f = new Function("LN",            func_ln);
+    f = new KCFunction("LN",            func_ln);
     add(f);
-    f = new Function("LOG",           func_logn);
+    f = new KCFunction("LOG",           func_logn);
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("LOG2",          func_log2);
+    f = new KCFunction("LOG2",          func_log2);
     add(f);
-    f = new Function("LOG10",         func_log10);
+    f = new KCFunction("LOG10",         func_log10);
     add(f);
-    f = new Function("LOGN",          func_logn);
+    f = new KCFunction("LOGN",          func_logn);
     f->setParamCount(2);
     add(f);
-    f = new Function("MOD",           func_mod);
+    f = new KCFunction("MOD",           func_mod);
     f->setParamCount(2);
     add(f);
-    f = new Function("MROUND",        func_mround);
+    f = new KCFunction("MROUND",        func_mround);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETMROUND");
     f->setParamCount(2);
     add(f);
-    f = new Function("MULTINOMIAL",   func_multinomial);
+    f = new KCFunction("MULTINOMIAL",   func_multinomial);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETMULTINOMIAL");
     f->setParamCount(1, -1);
     add(f);
-    f = new Function("ODD",           func_odd);
+    f = new KCFunction("ODD",           func_odd);
     add(f);
-    f = new Function("POW",         func_pow);
+    f = new KCFunction("POW",         func_pow);
     f->setParamCount(2);
     add(f);
-    f = new Function("POWER",         func_pow);
+    f = new KCFunction("POWER",         func_pow);
     f->setParamCount(2);
     add(f);
-    f = new Function("QUOTIENT",      func_quotient);
+    f = new KCFunction("QUOTIENT",      func_quotient);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETQUOTIENT");
     f->setParamCount(2);
     add(f);
-    f = new Function("RAND",          func_rand);
+    f = new KCFunction("RAND",          func_rand);
     f->setParamCount(0);
     add(f);
-    f = new Function("RANDBERNOULLI", func_randbernoulli);
+    f = new KCFunction("RANDBERNOULLI", func_randbernoulli);
     add(f);
-    f = new Function("RANDBETWEEN",   func_randbetween);
+    f = new KCFunction("RANDBETWEEN",   func_randbetween);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETRANDBETWEEN");
     f->setParamCount(2);
     add(f);
-    f = new Function("RANDBINOM",     func_randbinom);
+    f = new KCFunction("RANDBINOM",     func_randbinom);
     f->setParamCount(2);
     add(f);
-    f = new Function("RANDEXP",       func_randexp);
+    f = new KCFunction("RANDEXP",       func_randexp);
     add(f);
-    f = new Function("RANDNEGBINOM",  func_randnegbinom);
+    f = new KCFunction("RANDNEGBINOM",  func_randnegbinom);
     f->setParamCount(2);
     add(f);
-    f = new Function("RANDNORM",      func_randnorm);
+    f = new KCFunction("RANDNORM",      func_randnorm);
     f->setParamCount(2);
     add(f);
-    f = new Function("RANDPOISSON",   func_randpoisson);
+    f = new KCFunction("RANDPOISSON",   func_randpoisson);
     add(f);
-    f = new Function("ROOTN",         func_rootn);
+    f = new KCFunction("ROOTN",         func_rootn);
     f->setParamCount(2);
     add(f);
-    f = new Function("ROUND",         func_round);
+    f = new KCFunction("ROUND",         func_round);
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("ROUNDDOWN",     func_rounddown);
+    f = new KCFunction("ROUNDDOWN",     func_rounddown);
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("ROUNDUP",       func_roundup);
+    f = new KCFunction("ROUNDUP",       func_roundup);
     f->setParamCount(1, 2);
     add(f);
-    f = new Function("SIGN",          func_sign);
+    f = new KCFunction("SIGN",          func_sign);
     add(f);
-    f = new Function("SQRT",          func_sqrt);
+    f = new KCFunction("SQRT",          func_sqrt);
     add(f);
-    f = new Function("SQRTPI",        func_sqrtpi);
+    f = new KCFunction("SQRTPI",        func_sqrtpi);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETSQRTPI");
     add(f);
-    f = new Function("TRUNC",         func_trunc);
+    f = new KCFunction("TRUNC",         func_trunc);
     f->setParamCount(1, 2);
     add(f);
 
     // functions that operate over arrays
-    f = new Function("COUNT",         func_count);
+    f = new KCFunction("COUNT",         func_count);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("COUNTA",        func_counta);
+    f = new KCFunction("COUNTA",        func_counta);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("COUNTBLANK",    func_countblank);
+    f = new KCFunction("COUNTBLANK",    func_countblank);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("COUNTIF",       func_countif);
+    f = new KCFunction("COUNTIF",       func_countif);
     f->setParamCount(2);
     f->setAcceptArray();
     f->setNeedsExtra(true);
     add(f);
-    f = new Function("DIV",           func_div);
+    f = new KCFunction("DIV",           func_div);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("G_PRODUCT",     func_kproduct);  // Gnumeric compatibility
+    f = new KCFunction("G_PRODUCT",     func_kproduct);  // Gnumeric compatibility
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("GCD",           func_gcd);
+    f = new KCFunction("GCD",           func_gcd);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETGCD");
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("KPRODUCT",      func_kproduct);
+    f = new KCFunction("KPRODUCT",      func_kproduct);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("LCM",           func_lcm);
+    f = new KCFunction("LCM",           func_lcm);
     f->setAlternateName("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETLCM");
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("MAX",           func_max);
+    f = new KCFunction("MAX",           func_max);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("MAXA",          func_maxa);
+    f = new KCFunction("MAXA",          func_maxa);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("MDETERM",          func_mdeterm);
+    f = new KCFunction("MDETERM",          func_mdeterm);
     f->setParamCount(1);
     f->setAcceptArray();
     add(f);
-    f = new Function("MIN",           func_min);
+    f = new KCFunction("MIN",           func_min);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("MINA",          func_mina);
+    f = new KCFunction("MINA",          func_mina);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("MINVERSE",         func_minverse);
+    f = new KCFunction("MINVERSE",         func_minverse);
     f->setParamCount(1);
     f->setAcceptArray();
     add(f);
-    f = new Function("MMULT",          func_mmult);
+    f = new KCFunction("MMULT",          func_mmult);
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
-    f = new Function("MULTIPLY",      func_product);   // same as PRODUCT
+    f = new KCFunction("MULTIPLY",      func_product);   // same as PRODUCT
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("MUNIT",         func_munit);
+    f = new KCFunction("MUNIT",         func_munit);
     f->setParamCount(1);
     add(f);
-    f = new Function("PRODUCT",       func_product);
+    f = new KCFunction("PRODUCT",       func_product);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("SERIESSUM",     func_seriessum);
+    f = new KCFunction("SERIESSUM",     func_seriessum);
     f->setParamCount(3, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("SUM",           func_sum);
+    f = new KCFunction("SUM",           func_sum);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("SUMA",          func_suma);
+    f = new KCFunction("SUMA",          func_suma);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("SUBTOTAL",      func_subtotal);
+    f = new KCFunction("SUBTOTAL",      func_subtotal);
     f->setParamCount(2);
     f->setAcceptArray();
     f->setNeedsExtra(true);
     add(f);
-    f = new Function("SUMIF",         func_sumif);
+    f = new KCFunction("SUMIF",         func_sumif);
     f->setParamCount(2, 3);
     f->setAcceptArray();
     f->setNeedsExtra(true);
     add(f);
-    f = new Function("SUMSQ",         func_sumsq);
+    f = new KCFunction("SUMSQ",         func_sumsq);
     f->setParamCount(1, -1);
     f->setAcceptArray();
     add(f);
-    f = new Function("TRANSPOSE",     func_transpose);
+    f = new KCFunction("TRANSPOSE",     func_transpose);
     f->setParamCount(1);
     f->setAcceptArray();
     add(f);
@@ -363,7 +363,7 @@ QString MathModule::descriptionFileName() const
 }
 
 
-// Function: SQRT
+// KCFunction: SQRT
 KCValue func_sqrt(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue arg = args[0];
@@ -373,7 +373,7 @@ KCValue func_sqrt(valVector args, ValueCalc *calc, FuncExtra *)
         return KCValue::errorVALUE();
 }
 
-// Function: SQRTPI
+// KCFunction: SQRTPI
 KCValue func_sqrtpi(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // sqrt (val * PI)
@@ -384,37 +384,37 @@ KCValue func_sqrtpi(valVector args, ValueCalc *calc, FuncExtra *)
         return KCValue::errorVALUE();
 }
 
-// Function: ROOTN
+// KCFunction: ROOTN
 KCValue func_rootn(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->pow(args[0], calc->div(KCValue(1), args[1]));
 }
 
-// Function: CUR
+// KCFunction: CUR
 KCValue func_cur(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->pow(args[0], KCValue(1.0 / 3.0));
 }
 
-// Function: ABS
+// KCFunction: ABS
 KCValue func_abs(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->abs(args[0]);
 }
 
-// Function: exp
+// KCFunction: exp
 KCValue func_exp(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->exp(args[0]);
 }
 
-// Function: ceil
+// KCFunction: ceil
 KCValue func_ceil(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->roundUp(args[0], KCValue(0));
 }
 
-// Function: ceiling
+// KCFunction: ceiling
 KCValue func_ceiling(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue number = args[0];
@@ -445,7 +445,7 @@ KCValue func_ceiling(valVector args, ValueCalc *calc, FuncExtra *)
     return d;
 }
 
-// Function: FLOOR
+// KCFunction: FLOOR
 KCValue func_floor(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (calc->approxEqual(args[0], KCValue(0.0)))
@@ -478,13 +478,13 @@ KCValue func_floor(valVector args, ValueCalc *calc, FuncExtra *)
     return KCValue(result);
 }
 
-// Function: GAMMA
+// KCFunction: GAMMA
 KCValue func_gamma(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->GetGamma(args[0]);
 }
 
-// Function: ln
+// KCFunction: ln
 KCValue func_ln(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if ((args [0].isNumber() == false) || args[0].asFloat() <= 0)
@@ -492,7 +492,7 @@ KCValue func_ln(valVector args, ValueCalc *calc, FuncExtra *)
     return calc->ln(args[0]);
 }
 
-// Function: LOGn
+// KCFunction: LOGn
 KCValue func_logn(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args [0].isError())
@@ -517,13 +517,13 @@ KCValue func_logn(valVector args, ValueCalc *calc, FuncExtra *)
         return calc->log(args[0]);
 }
 
-// Function: LOG2
+// KCFunction: LOG2
 KCValue func_log2(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->log(args[0], KCValue(2.0));
 }
 
-// Function: LOG10
+// KCFunction: LOG10
 KCValue func_log10(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args [0].isError())
@@ -533,19 +533,19 @@ KCValue func_log10(valVector args, ValueCalc *calc, FuncExtra *)
     return calc->log(args[0]);
 }
 
-// Function: sum
+// KCFunction: sum
 KCValue func_sum(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->sum(args, false);
 }
 
-// Function: suma
+// KCFunction: suma
 KCValue func_suma(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->sum(args, true);
 }
 
-// Function: SUMIF
+// KCFunction: SUMIF
 KCValue func_sumif(valVector args, ValueCalc *calc, FuncExtra *e)
 {
     KCValue checkRange = args[0];
@@ -561,13 +561,13 @@ KCValue func_sumif(valVector args, ValueCalc *calc, FuncExtra *e)
     }
 }
 
-// Function: product
+// KCFunction: product
 KCValue func_product(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->product(args, KCValue(0.0));
 }
 
-// Function: seriessum
+// KCFunction: seriessum
 KCValue func_seriessum(valVector args, ValueCalc *calc, FuncExtra *)
 {
     double fX = calc->conv()->asFloat(args[0]).asFloat();
@@ -590,13 +590,13 @@ KCValue func_seriessum(valVector args, ValueCalc *calc, FuncExtra *)
     return KCValue(res);
 }
 
-// Function: kproduct
+// KCFunction: kproduct
 KCValue func_kproduct(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->product(args, KCValue(1.0));
 }
 
-// Function: DIV
+// KCFunction: DIV
 KCValue func_div(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue val = args[0];
@@ -608,7 +608,7 @@ KCValue func_div(valVector args, ValueCalc *calc, FuncExtra *)
     return val;
 }
 
-// Function: SUMSQ
+// KCFunction: SUMSQ
 KCValue func_sumsq(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue res;
@@ -616,41 +616,41 @@ KCValue func_sumsq(valVector args, ValueCalc *calc, FuncExtra *)
     return res;
 }
 
-// Function: MAX
+// KCFunction: MAX
 KCValue func_max(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue m = calc->max(args, false);
     return m.isEmpty() ? KCValue(0.0) : m;
 }
 
-// Function: MAXA
+// KCFunction: MAXA
 KCValue func_maxa(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue m = calc->max(args);
     return m.isEmpty() ? KCValue(0.0) : m;
 }
 
-// Function: MIN
+// KCFunction: MIN
 KCValue func_min(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue m = calc->min(args, false);
     return m.isEmpty() ? KCValue(0.0) : m;
 }
 
-// Function: MINA
+// KCFunction: MINA
 KCValue func_mina(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue m = calc->min(args, true);
     return m.isEmpty() ? KCValue(0.0) : m;
 }
 
-// Function: INT
+// KCFunction: INT
 KCValue func_int(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->conv()->asInteger(args[0]);
 }
 
-// Function: QUOTIENT
+// KCFunction: QUOTIENT
 KCValue func_quotient(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (calc->isZero(args[1]))
@@ -666,7 +666,7 @@ KCValue func_quotient(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 
-// Function: eps
+// KCFunction: eps
 KCValue func_eps(valVector, ValueCalc *calc, FuncExtra *)
 {
     return calc->eps();
@@ -787,13 +787,13 @@ KCValue func_randpoisson(valVector args, ValueCalc *calc, FuncExtra *)
     return KCValue(i);
 }
 
-// Function: rand
+// KCFunction: rand
 KCValue func_rand(valVector, ValueCalc *calc, FuncExtra *)
 {
     return calc->random();
 }
 
-// Function: RANDBETWEEN
+// KCFunction: RANDBETWEEN
 KCValue func_randbetween(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue v1 = args[0];
@@ -805,19 +805,19 @@ KCValue func_randbetween(valVector args, ValueCalc *calc, FuncExtra *)
     return calc->add(v1, calc->random(calc->sub(v2, v1)));
 }
 
-// Function: POW
+// KCFunction: POW
 KCValue func_pow(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->pow(args[0], args[1]);
 }
 
-// Function: MOD
+// KCFunction: MOD
 KCValue func_mod(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->mod(args[0], args[1]);
 }
 
-// Function: fact
+// KCFunction: fact
 KCValue func_fact(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args[0].isInteger() || args[0].asInteger() > 0)
@@ -826,7 +826,7 @@ KCValue func_fact(valVector args, ValueCalc *calc, FuncExtra *)
         return KCValue::errorNUM();
 }
 
-// Function: FACTDOUBLE
+// KCFunction: FACTDOUBLE
 KCValue func_factdouble(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args[0].isInteger() || args[0].asInteger() > 0)
@@ -835,7 +835,7 @@ KCValue func_factdouble(valVector args, ValueCalc *calc, FuncExtra *)
         return KCValue::errorNUM();
 }
 
-// Function: MULTINOMIAL
+// KCFunction: MULTINOMIAL
 KCValue func_multinomial(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // (a+b+c)! / a!b!c!  (any number of params possible)
@@ -848,19 +848,19 @@ KCValue func_multinomial(valVector args, ValueCalc *calc, FuncExtra *)
     return calc->div(num, den);
 }
 
-// Function: sign
+// KCFunction: sign
 KCValue func_sign(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return KCValue(calc->sign(args[0]));
 }
 
-// Function: INV
+// KCFunction: INV
 KCValue func_inv(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->mul(args[0], -1);
 }
 
-// Function: MROUND
+// KCFunction: MROUND
 KCValue func_mround(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue d = args[0];
@@ -891,7 +891,7 @@ KCValue func_mround(valVector args, ValueCalc *calc, FuncExtra *)
     return result;
 }
 
-// Function: ROUNDDOWN
+// KCFunction: ROUNDDOWN
 KCValue func_rounddown(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args.count() == 2) {
@@ -907,7 +907,7 @@ KCValue func_rounddown(valVector args, ValueCalc *calc, FuncExtra *)
         return calc->roundUp(args[0], 0);
 }
 
-// Function: ROUNDUP
+// KCFunction: ROUNDUP
 KCValue func_roundup(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args.count() == 2) {
@@ -923,7 +923,7 @@ KCValue func_roundup(valVector args, ValueCalc *calc, FuncExtra *)
         return calc->roundDown(args[0], 0);
 }
 
-// Function: ROUND
+// KCFunction: ROUND
 KCValue func_round(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args.count() == 2)
@@ -931,7 +931,7 @@ KCValue func_round(valVector args, ValueCalc *calc, FuncExtra *)
     return calc->round(args[0], 0);
 }
 
-// Function: EVEN
+// KCFunction: EVEN
 KCValue func_even(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (calc->greater(args[0], 0.0)) {
@@ -943,7 +943,7 @@ KCValue func_even(valVector args, ValueCalc *calc, FuncExtra *)
     }
 }
 
-// Function: ODD
+// KCFunction: ODD
 KCValue func_odd(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (calc->gequal(args[0], KCValue(0))) {
@@ -967,19 +967,19 @@ KCValue func_trunc(valVector args, ValueCalc *calc, FuncExtra *)
     return KCValue(result);
 }
 
-// Function: COUNT
+// KCFunction: COUNT
 KCValue func_count(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return KCValue(calc->count(args, false));
 }
 
-// Function: COUNTA
+// KCFunction: COUNTA
 KCValue func_counta(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return KCValue(calc->count(args));
 }
 
-// Function: COUNTBLANK
+// KCFunction: COUNTBLANK
 KCValue func_countblank(valVector args, ValueCalc *, FuncExtra *)
 {
     int cnt = 0;
@@ -996,7 +996,7 @@ KCValue func_countblank(valVector args, ValueCalc *, FuncExtra *)
     return KCValue(cnt);
 }
 
-// Function: COUNTIF
+// KCFunction: COUNTIF
 KCValue func_countif(valVector args, ValueCalc *calc, FuncExtra *e)
 {
     // the first parameter must be a reference
@@ -1012,7 +1012,7 @@ KCValue func_countif(valVector args, ValueCalc *calc, FuncExtra *e)
     return KCValue(calc->countIf(range, cond));
 }
 
-// Function: FIB
+// KCFunction: FIB
 KCValue func_fib(valVector args, ValueCalc *calc, FuncExtra *)
 {
     /*
@@ -1055,7 +1055,7 @@ static KCValue func_gcd_helper(const KCValue &val, ValueCalc *calc)
     return res;
 }
 
-// Function: GCD
+// KCFunction: GCD
 KCValue func_gcd(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue result = KCValue(0);
@@ -1088,7 +1088,7 @@ static KCValue func_lcm_helper(const KCValue &val, ValueCalc *calc)
     return res;
 }
 
-// Function: lcm
+// KCFunction: lcm
 KCValue func_lcm(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue result = KCValue(0);
@@ -1137,7 +1137,7 @@ static KCValue convert(const Eigen::MatrixXd& eMatrix)
     return matrix;
 }
 
-// Function: MDETERM
+// KCFunction: MDETERM
 KCValue func_mdeterm(valVector args, ValueCalc* calc, FuncExtra*)
 {
     KCValue matrix = args[0];
@@ -1149,7 +1149,7 @@ KCValue func_mdeterm(valVector args, ValueCalc* calc, FuncExtra*)
     return KCValue(eMatrix.determinant());
 }
 
-// Function: MINVERSE
+// KCFunction: MINVERSE
 KCValue func_minverse(valVector args, ValueCalc* calc, FuncExtra*)
 {
     KCValue matrix = args[0];
@@ -1166,7 +1166,7 @@ KCValue func_minverse(valVector args, ValueCalc* calc, FuncExtra*)
         return KCValue::errorDIV0();
 }
 
-// Function: mmult
+// KCFunction: mmult
 KCValue func_mmult(valVector args, ValueCalc *calc, FuncExtra *)
 {
     const Eigen::MatrixXd eMatrix1 = convert(args[0], calc);
@@ -1178,7 +1178,7 @@ KCValue func_mmult(valVector args, ValueCalc *calc, FuncExtra *)
     return convert(eMatrix1 * eMatrix2);
 }
 
-// Function: MUNIT
+// KCFunction: MUNIT
 KCValue func_munit(valVector args, ValueCalc* calc, FuncExtra*)
 {
     const int dim = calc->conv()->asInteger(args[0]).asInteger();
@@ -1191,7 +1191,7 @@ KCValue func_munit(valVector args, ValueCalc* calc, FuncExtra*)
     return result;
 }
 
-// Function: SUBTOTAL
+// KCFunction: SUBTOTAL
 // This function requires access to the KCSheet and so on, because
 // it needs to check whether cells contain the SUBTOTAL formula or not ...
 // Cells containing a SUBTOTAL formula must be ignored.
@@ -1235,7 +1235,7 @@ KCValue func_subtotal(valVector args, ValueCalc *calc, FuncExtra *e)
 
     // Good. Now we can execute the necessary function on the range.
     KCValue res;
-    QSharedPointer<Function> f;
+    QSharedPointer<KCFunction> f;
     valVector a;
     switch (function) {
     case 1: // Average
@@ -1285,7 +1285,7 @@ KCValue func_subtotal(valVector args, ValueCalc *calc, FuncExtra *e)
     return res;
 }
 
-// Function: TRANSPOSE
+// KCFunction: TRANSPOSE
 KCValue func_transpose(valVector args, ValueCalc *calc, FuncExtra *)
 {
     Q_UNUSED(calc);
@@ -1309,7 +1309,7 @@ Absolutely no idea what this thing is supposed to do.
 To anyone who would enable this code: it still uses koscript calls - you need
 to convert it to the new style prior to uncommenting.
 
-// Function: MULTIPLEOPERATIONS
+// KCFunction: MULTIPLEOPERATIONS
 KCValue func_multipleOP (valVector args, ValueCalc *calc, FuncExtra *)
 {
   if (gCell)

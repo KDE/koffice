@@ -130,8 +130,8 @@
   <table:table-cell table:style-name="ce4"/>
  </table:table-row>
  <table:table-row>
-  <table:table-cell office:value-type="string" office:string-value="Function Name" table:style-name="ce3">
-   <text:p>Function Name</text:p>
+  <table:table-cell office:value-type="string" office:string-value="KCFunction Name" table:style-name="ce3">
+   <text:p>KCFunction Name</text:p>
   </table:table-cell>
   <table:table-cell office:value-type="string" office:string-value="OpenFormula Group" table:style-name="ce3">
    <text:p>OpenFormula Group</text:p>

@@ -22,7 +22,7 @@
 
 #include "DatabaseModule.h"
 
-#include "Function.h"
+#include "KCFunction.h"
 #include "FunctionModuleRegistry.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
@@ -53,57 +53,57 @@ KSPREAD_EXPORT_FUNCTION_MODULE("database", DatabaseModule)
 DatabaseModule::DatabaseModule(QObject* parent, const QVariantList&)
         : FunctionModule(parent)
 {
-    Function *f;
+    KCFunction *f;
 
-    f = new Function("DAVERAGE",     func_daverage);
+    f = new KCFunction("DAVERAGE",     func_daverage);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DCOUNT",       func_dcount);
+    f = new KCFunction("DCOUNT",       func_dcount);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DCOUNTA",      func_dcounta);
+    f = new KCFunction("DCOUNTA",      func_dcounta);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DGET",         func_dget);
+    f = new KCFunction("DGET",         func_dget);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DMAX",         func_dmax);
+    f = new KCFunction("DMAX",         func_dmax);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DMIN",         func_dmin);
+    f = new KCFunction("DMIN",         func_dmin);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DPRODUCT",     func_dproduct);
+    f = new KCFunction("DPRODUCT",     func_dproduct);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DSTDEV",       func_dstdev);
+    f = new KCFunction("DSTDEV",       func_dstdev);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DSTDEVP",      func_dstdevp);
+    f = new KCFunction("DSTDEVP",      func_dstdevp);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DSUM",         func_dsum);
+    f = new KCFunction("DSUM",         func_dsum);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DVAR",         func_dvar);
+    f = new KCFunction("DVAR",         func_dvar);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("DVARP",        func_dvarp);
+    f = new KCFunction("DVARP",        func_dvarp);
     f->setParamCount(3);
     f->setAcceptArray();
     add(f);
-    f = new Function("GETPIVOTDATA", func_getpivotdata);  // partially Excel-compatible
+    f = new KCFunction("GETPIVOTDATA", func_getpivotdata);  // partially Excel-compatible
     f->setParamCount(2);
     f->setAcceptArray();
     add(f);
@@ -228,10 +228,10 @@ bool DBConditions::matches(unsigned row)
 
 
 // *******************************************
-// *** Function implementations start here ***
+// *** KCFunction implementations start here ***
 // *******************************************
 
-// Function: DSUM
+// KCFunction: DSUM
 KCValue func_dsum(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
@@ -255,7 +255,7 @@ KCValue func_dsum(valVector args, ValueCalc *calc, FuncExtra *)
     return res;
 }
 
-// Function: DAVERAGE
+// KCFunction: DAVERAGE
 KCValue func_daverage(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
@@ -282,7 +282,7 @@ KCValue func_daverage(valVector args, ValueCalc *calc, FuncExtra *)
     return res;
 }
 
-// Function: DCOUNT
+// KCFunction: DCOUNT
 KCValue func_dcount(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
@@ -309,7 +309,7 @@ KCValue func_dcount(valVector args, ValueCalc *calc, FuncExtra *)
     return KCValue(count);
 }
 
-// Function: DCOUNTA
+// KCFunction: DCOUNTA
 KCValue func_dcounta(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
@@ -336,7 +336,7 @@ KCValue func_dcounta(valVector args, ValueCalc *calc, FuncExtra *)
     return KCValue(count);
 }
 
-// Function: DGET
+// KCFunction: DGET
 KCValue func_dget(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
@@ -364,7 +364,7 @@ KCValue func_dget(valVector args, ValueCalc *calc, FuncExtra *)
     return result;
 }
 
-// Function: DMAX
+// KCFunction: DMAX
 KCValue func_dmax(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
@@ -394,7 +394,7 @@ KCValue func_dmax(valVector args, ValueCalc *calc, FuncExtra *)
     return res;
 }
 
-// Function: DMIN
+// KCFunction: DMIN
 KCValue func_dmin(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
@@ -424,7 +424,7 @@ KCValue func_dmin(valVector args, ValueCalc *calc, FuncExtra *)
     return res;
 }
 
-// Function: DPRODUCT
+// KCFunction: DPRODUCT
 KCValue func_dproduct(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
@@ -452,21 +452,21 @@ KCValue func_dproduct(valVector args, ValueCalc *calc, FuncExtra *)
     return KCValue::errorVALUE();
 }
 
-// Function: DSTDEV
+// KCFunction: DSTDEV
 KCValue func_dstdev(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // sqrt (dvar)
     return calc->sqrt(func_dvar(args, calc, 0));
 }
 
-// Function: DSTDEVP
+// KCFunction: DSTDEVP
 KCValue func_dstdevp(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // sqrt (dvarp)
     return calc->sqrt(func_dvarp(args, calc, 0));
 }
 
-// Function: DVAR
+// KCFunction: DVAR
 KCValue func_dvar(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
@@ -505,7 +505,7 @@ KCValue func_dvar(valVector args, ValueCalc *calc, FuncExtra *)
     return calc->div(res, count - 1);
 }
 
-// Function: DVARP
+// KCFunction: DVARP
 KCValue func_dvarp(valVector args, ValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
@@ -544,7 +544,7 @@ KCValue func_dvarp(valVector args, ValueCalc *calc, FuncExtra *)
     return calc->div(res, count);
 }
 
-// Function: GETPIVOTDATA
+// KCFunction: GETPIVOTDATA
 // FIXME implement more things with this, see Excel !
 KCValue func_getpivotdata(valVector args, ValueCalc *calc, FuncExtra *)
 {

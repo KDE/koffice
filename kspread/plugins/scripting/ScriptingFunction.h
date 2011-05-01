@@ -25,7 +25,7 @@
 #include <QVariant>
 
 /**
- * The ScriptingFunction class provides access to the KSpread::Function
+ * The ScriptingFunction class provides access to the KSpread::KCFunction
  * functionality to deal with formula functions that are written in
  * a scripting language like Python or Ruby.
  *

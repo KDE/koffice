@@ -19,11 +19,11 @@
 */
 
 // Local
-#include "Function.h"
+#include "KCFunction.h"
 
 #include "KCValue.h"
 
-class Function::Private
+class KCFunction::Private
 {
 public:
     QString name;
@@ -34,7 +34,7 @@ public:
     bool ne;   // need FunctionExtra* when called ?
 };
 
-Function::Function(const QString& name, FunctionPtr ptr)
+KCFunction::KCFunction(const QString& name, FunctionPtr ptr)
         : d(new Private)
 {
     d->name = name;
@@ -45,33 +45,33 @@ Function::Function(const QString& name, FunctionPtr ptr)
     d->ne = false;
 }
 
-Function::~Function()
+KCFunction::~KCFunction()
 {
     delete d;
 }
 
-QString Function::name() const
+QString KCFunction::name() const
 {
     return d->name;
 }
 
-QString Function::alternateName() const
+QString KCFunction::alternateName() const
 {
     return d->alternateName;
 }
 
-void Function::setAlternateName(const QString &name)
+void KCFunction::setAlternateName(const QString &name)
 {
     d->alternateName = name;
 }
 
-void Function::setParamCount(int min, int max)
+void KCFunction::setParamCount(int min, int max)
 {
     d->paramMin = min;
     d->paramMax = (max == 0) ? min : max;
 }
 
-bool Function::paramCountOkay(int count)
+bool KCFunction::paramCountOkay(int count)
 {
     // less than needed
     if (count < d->paramMin) return false;
@@ -83,21 +83,21 @@ bool Function::paramCountOkay(int count)
     return true;
 }
 
-void Function::setAcceptArray(bool accept)
+void KCFunction::setAcceptArray(bool accept)
 {
     d->acceptArray = accept;
 }
 
-bool Function::needsExtra()
+bool KCFunction::needsExtra()
 {
     return d->ne;
 }
-void Function::setNeedsExtra(bool extra)
+void KCFunction::setNeedsExtra(bool extra)
 {
     d->ne = extra;
 }
 
-KCValue Function::exec(valVector args, ValueCalc *calc, FuncExtra *extra)
+KCValue KCFunction::exec(valVector args, ValueCalc *calc, FuncExtra *extra)
 {
     // check number of parameters
     if (!paramCountOkay(args.count()))

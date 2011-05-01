@@ -138,7 +138,7 @@ public:
     void addIgnoreWordAllList(const QStringList & _lst);
     QStringList spellListIgnoreAll() const ;
 
-    /* Function specific when we load config from file */
+    /* KCFunction specific when we load config from file */
     void loadConfigFromFile();
     bool configLoadFromFile() const;
 

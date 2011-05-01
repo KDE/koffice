@@ -29,7 +29,7 @@
 //#include <View.h>
 #include <KCValue.h>
 #include <KCNumber.h>
-#include <Function.h>
+#include <KCFunction.h>
 #include <FunctionDescription.h>
 #include <FunctionRepository.h>
 
@@ -42,7 +42,7 @@
  */
 
 /// \internal implementation of the ScriptingFunction
-class ScriptingFunctionImpl : public Function
+class ScriptingFunctionImpl : public KCFunction
 {
 public:
 
@@ -148,7 +148,7 @@ public:
     }
 
     ScriptingFunctionImpl(ScriptingFunction* function, const QDomElement& description)
-            : Function(function->name(), ScriptingFunctionImpl::callback)
+            : KCFunction(function->name(), ScriptingFunctionImpl::callback)
             , m_function(function) {
         setNeedsExtra(true);
 
@@ -158,7 +158,7 @@ public:
             repo->addGroup(i18n("Scripts"));
 
         // register ourself at the repository
-        repo->add(QSharedPointer<Function>(this));
+        repo->add(QSharedPointer<KCFunction>(this));
 
         // create a new description for the function
         FunctionDescription* desc = new FunctionDescription(description);
@@ -201,7 +201,7 @@ ScriptingFunction::ScriptingFunction(QObject* parent)
 {
     kDebug() << "ScriptingFunction::ScriptingFunction";
     d->typeName = "String";
-    d->funcElement = d->document.createElement("Function");
+    d->funcElement = d->document.createElement("KCFunction");
     d->helpElement = d->document.createElement("Help");
 }
 

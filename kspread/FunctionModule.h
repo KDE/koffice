@@ -30,11 +30,11 @@
 
 #include "kspread_export.h"
 
-class Function;
+class KCFunction;
 
 /**
  * \ingroup KCValue
- * A function module provides several Function objects.
+ * A function module provides several KCFunction objects.
  */
 class KSPREAD_EXPORT FunctionModule : public QObject
 {
@@ -42,13 +42,13 @@ class KSPREAD_EXPORT FunctionModule : public QObject
 public:
     /**
      * Creates the function module.
-     * The derived class should create here the Function objects and
+     * The derived class should create here the KCFunction objects and
      * should register them via \ref add.
      */
     FunctionModule(QObject* parent);
 
     /**
-     * Destroys the module and the provided Function objects.
+     * Destroys the module and the provided KCFunction objects.
      * Check, if this module isRemovable(), before you unload the plugin.
      */
     virtual ~FunctionModule();
@@ -59,29 +59,29 @@ public:
     virtual QString descriptionFileName() const = 0;
 
     /**
-     * Returns a list of the provided Function objects.
+     * Returns a list of the provided KCFunction objects.
      */
-    QList<QSharedPointer<Function> > functions() const;
+    QList<QSharedPointer<KCFunction> > functions() const;
 
     /**
      * Checks wether this module can be removed, because none of its
-     * Function objects is in use.
+     * KCFunction objects is in use.
      * Used by the FunctionModuleRegistry to check, if the plugin can be unloaded.
      * \return \c true on success; \c false on failure
      */
     bool isRemovable();
 
     /**
-     * Returns the identifier (if defined). Function of the KoGenericRegistry
+     * Returns the identifier (if defined). KCFunction of the KoGenericRegistry
      * template, that has to be implemented.
      */
     virtual QString id() const;
 
 protected:
     /**
-     * Adds \p function to the list of provided Function objects.
+     * Adds \p function to the list of provided KCFunction objects.
      */
-    void add(Function* function);
+    void add(KCFunction* function);
 
 private:
     class Private;

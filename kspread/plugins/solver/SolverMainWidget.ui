@@ -92,7 +92,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
    <item row="0" column="0" >
     <widget class="QLabel" name="label" >
      <property name="text" >
-      <string>Function:</string>
+      <string>KCFunction:</string>
      </property>
     </widget>
    </item>

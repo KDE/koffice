@@ -25,7 +25,7 @@
 SolverDialog::SolverDialog(Selection* selection, QWidget* parent)
         : KDialog(parent)
 {
-    setCaption(i18n("Function Optimizer"));
+    setCaption(i18n("KCFunction Optimizer"));
     setButtons(Ok | Cancel | Details);
     setAttribute(Qt::WA_DeleteOnClose);
 

@@ -10,7 +10,7 @@
 *     to integrate scripting into KSpread.
 * \li The \a ScriptingModule class enables access to the KSpread
 *     functionality from within the scripting backends.
-* \li The \a ScriptingFunction class provides access to the KSpread::Function
+* \li The \a ScriptingFunction class provides access to the KSpread::KCFunction
 *     functionality to deal with formula functions that are written in
 *     a scripting language like Python or Ruby.
 * \li The \a ScriptingCellListener class implements a listener to changes

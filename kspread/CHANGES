@@ -445,7 +445,7 @@ Until beta1:
 - add support for spell-check
 - many new built-in functions (see detailed list below)
 - function name is now case-insensitive
-- "Related Function" in formula editor
+- "Related KCFunction" in formula editor
 - move functions in kspread_interpreter into several kspread_functions_*.cc
 
 New functions added:

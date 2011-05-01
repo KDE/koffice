@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Function:</string>
+      <string>KCFunction:</string>
      </property>
      <property name="buddy">
       <cstring>m_function</cstring>
