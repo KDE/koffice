@@ -51,7 +51,7 @@
 #include "KCCellStorage.h"
 #include "KCCondition.h"
 #include "KCFormula.h"
-#include "GenValidationStyle.h"
+#include "KCGenValidationStyle.h"
 #include "Global.h"
 #include "Localization.h"
 #include "LoadingInfo.h"
@@ -1164,7 +1164,7 @@ bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
 
     Validity validity = KCCell(sheet(), column, row).validity();
     if (!validity.isEmpty()) {
-        GenValidationStyle styleVal(&validity, sheet()->map()->converter());
+        KCGenValidationStyle styleVal(&validity, sheet()->map()->converter());
         xmlwriter.addAttribute("table:validation-name", tableContext.valStyle.insert(styleVal));
     }
     if (isFormula()) {

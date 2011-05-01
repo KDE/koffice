@@ -21,7 +21,7 @@
 #define KSPREAD_ODF_SAVING_CONTEXT
 
 #include "KCCell.h"
-#include "GenValidationStyle.h"
+#include "KCGenValidationStyle.h"
 #include "KCSheet.h"
 
 #include <KoShapeSavingContext.h>

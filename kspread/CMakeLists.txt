@@ -206,7 +206,7 @@ set (kspreadodf_LIB_SRCS
     KCDocBase.cpp
     KCFormat.cpp
     KCFormula.cpp
-    GenValidationStyle.cpp
+    KCGenValidationStyle.cpp
     HeaderFooter.cpp
     Localization.cpp
     KCMap.cpp

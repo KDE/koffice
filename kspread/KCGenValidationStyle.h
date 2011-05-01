@@ -34,18 +34,18 @@ class ValueConverter;
 class GenValidationStyles;
 
 /**
- * \class GenValidationStyle
+ * \class KCGenValidationStyle
  * \ingroup OpenDocument
  */
-class GenValidationStyle
+class KCGenValidationStyle
 {
 public:
-    explicit GenValidationStyle(Validity *_val = 0, const ValueConverter *converter = 0) {
+    explicit KCGenValidationStyle(Validity *_val = 0, const ValueConverter *converter = 0) {
         initVal(_val, converter);
     }
 
 
-    bool operator<(const GenValidationStyle &other) const {
+    bool operator<(const KCGenValidationStyle &other) const {
         if (allowEmptyCell != other.allowEmptyCell) return (allowEmptyCell < other.allowEmptyCell);
         if (condition != other.condition) return (condition < other.condition);
         if (titleInfo != other.titleInfo) return (titleInfo < other.titleInfo);
@@ -89,9 +89,9 @@ class KSPREAD_EXPORT GenValidationStyles
 public:
     GenValidationStyles();
     ~GenValidationStyles();
-    QString insert(const GenValidationStyle& style);
+    QString insert(const KCGenValidationStyle& style);
 
-    typedef QMap<GenValidationStyle, QString> StyleMap;
+    typedef QMap<KCGenValidationStyle, QString> StyleMap;
     void writeStyle(KoXmlWriter& writer);
 
 private:

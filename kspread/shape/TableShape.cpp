@@ -34,7 +34,7 @@
 
 #include <CellView.h>
 #include <Damages.h>
-#include <GenValidationStyle.h>
+#include <KCGenValidationStyle.h>
 #include <KCMap.h>
 #include <OdfLoadingContext.h>
 #include <OdfSavingContext.h>
