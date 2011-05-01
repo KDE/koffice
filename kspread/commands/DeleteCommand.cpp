@@ -90,9 +90,9 @@ bool DeleteCommand::process(Element* element)
                 continue;
             }
 
-            const RowFormat* rowFormat = m_sheet->rowFormat(row);
+            const KCRowFormat* rowFormat = m_sheet->rowFormat(row);
             if (m_firstrun && !rowFormat->isDefault()) {
-                RowFormat* oldRowFormat = new RowFormat(*rowFormat);
+                KCRowFormat* oldRowFormat = new KCRowFormat(*rowFormat);
                 oldRowFormat->setNext(0);
                 oldRowFormat->setPrevious(0);
                 m_rowFormats.insert(oldRowFormat);
@@ -131,8 +131,8 @@ bool DeleteCommand::mainProcessing()
         foreach(ColumnFormat* columnFormat, m_columnFormats) {
             m_sheet->insertColumnFormat(new ColumnFormat(*columnFormat));
         }
-        foreach(RowFormat* rowFormat, m_rowFormats) {
-            m_sheet->insertRowFormat(new RowFormat(*rowFormat));
+        foreach(KCRowFormat* rowFormat, m_rowFormats) {
+            m_sheet->insertRowFormat(new KCRowFormat(*rowFormat));
         }
     }
     return AbstractDataManipulator::mainProcessing();

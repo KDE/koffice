@@ -814,7 +814,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
 
     /* how many cells must we move to get to the next cell? */
     int offset = 0;
-    const RowFormat *rl = 0;
+    const KCRowFormat *rl = 0;
     const ColumnFormat *cl = 0;
     switch (direction) {
         /* for each case, figure out how far away the next cell is and then keep
@@ -1208,7 +1208,7 @@ QList<QAction*> CellToolBase::Private::popupActionList() const
             actions.append(q->action("hideRow"));
 
             q->action("showSelRows")->setEnabled(false);
-            const RowFormat* rowFormat;
+            const KCRowFormat* rowFormat;
             KCRegion::ConstIterator endOfList = q->selection()->constEnd();
             for (KCRegion::ConstIterator it = q->selection()->constBegin(); it != endOfList; ++it) {
                 QRect range = (*it)->rect();

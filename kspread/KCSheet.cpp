@@ -481,9 +481,9 @@ const ColumnFormat* KCSheet::columnFormat(int _column) const
     return map()->defaultColumnFormat();
 }
 
-const RowFormat* KCSheet::rowFormat(int _row) const
+const KCRowFormat* KCSheet::rowFormat(int _row) const
 {
-    const RowFormat *p = d->rows.lookup(_row);
+    const KCRowFormat *p = d->rows.lookup(_row);
     if (p != 0)
         return p;
 
@@ -669,7 +669,7 @@ double KCSheet::rowPosition(int _row) const
 }
 
 
-RowFormat* KCSheet::firstRow() const
+KCRowFormat* KCSheet::firstRow() const
 {
     return d->rows.first();
 }
@@ -695,14 +695,14 @@ ColumnFormat* KCSheet::nonDefaultColumnFormat(int _column, bool force_creation)
     return p;
 }
 
-RowFormat* KCSheet::nonDefaultRowFormat(int _row, bool force_creation)
+KCRowFormat* KCSheet::nonDefaultRowFormat(int _row, bool force_creation)
 {
     Q_ASSERT(_row >= 1 && _row <= KS_rowMax);
-    RowFormat *p = d->rows.lookup(_row);
+    KCRowFormat *p = d->rows.lookup(_row);
     if (p != 0 || !force_creation)
         return p;
 
-    p = new RowFormat(*map()->defaultRowFormat());
+    p = new KCRowFormat(*map()->defaultRowFormat());
     p->setSheet(this);
     p->setRow(_row);
 
@@ -1197,8 +1197,8 @@ QDomElement KCSheet::saveXML(QDomDocument& dd)
         }
     }
 
-    // Save all RowFormat objects.
-    RowFormat* rowFormat = firstRow();
+    // Save all KCRowFormat objects.
+    KCRowFormat* rowFormat = firstRow();
     int styleIndex = styleStorage()->nextRowStyleIndex(0);
     while (rowFormat || styleIndex) {
         if (rowFormat && (!styleIndex || rowFormat->row() <= styleIndex)) {
@@ -1210,7 +1210,7 @@ QDomElement KCSheet::saveXML(QDomDocument& dd)
                 styleIndex = styleStorage()->nextRowStyleIndex(styleIndex);
             rowFormat = rowFormat->next();
         } else if (styleIndex) {
-            RowFormat rowFormat(*map()->defaultRowFormat());
+            KCRowFormat rowFormat(*map()->defaultRowFormat());
             rowFormat.setSheet(this);
             rowFormat.setRow(styleIndex);
             QDomElement e = rowFormat.save(dd);
@@ -2048,7 +2048,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
 //     kDebug(36003)<<" create non defaultrow format :"<<rowIndex<<" repeate :"<<number<<" height :"<<height;
     if (isNonDefaultRow) {
         for (int r = 0; r < number; ++r) {
-            RowFormat* rowFormat = nonDefaultRowFormat(rowIndex + r);
+            KCRowFormat* rowFormat = nonDefaultRowFormat(rowIndex + r);
             if (height != -1.0)
                 rowFormat->setHeight(height);
             if (insertPageBreak) {
@@ -2136,7 +2136,7 @@ QRect KCSheet::usedArea(bool onlyContent) const
     int maxRows = d->cellStorage->rows(!onlyContent);
 
     if (!onlyContent) {
-        const RowFormat * row = firstRow();
+        const KCRowFormat * row = firstRow();
         while (row) {
             if (row->row() > maxRows)
                 maxRows = row->row();
@@ -2673,7 +2673,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
     // saving the rows and the cells
     // we have to loop through all rows of the used area
     for (i = 1; i <= maxRows; ++i) {
-        const RowFormat* row = rowFormat(i);
+        const KCRowFormat* row = rowFormat(i);
 
         // default cell style for row
         const KCStyle style = tableContext.rowDefaultStyles.value(i);
@@ -2702,7 +2702,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
             // or
             //   next row with different KCFormat
             while (j <= maxRows && !d->cellStorage->firstInRow(j) && !tableContext.rowHasCellAnchoredShapes(this, j)) {
-                const RowFormat* nextRow = rowFormat(j);
+                const KCRowFormat* nextRow = rowFormat(j);
 //               kDebug(36003) <<"KCSheet::saveOdfColRowCell: second row loop:"
 //                         << " j: " << j
 //                         << " row: " << nextRow->row();
@@ -3093,7 +3093,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
             if (tagName == "cell")
                 KCCell(this, 1, 1).load(e, 0, 0); // col, row will get overridden in all cases
             else if (tagName == "row") {
-                RowFormat *rl = new RowFormat();
+                KCRowFormat *rl = new KCRowFormat();
                 rl->setSheet(this);
                 if (rl->load(e))
                     insertRowFormat(rl);
@@ -3212,7 +3212,7 @@ void KCSheet::insertColumnFormat(ColumnFormat *l)
     }
 }
 
-void KCSheet::insertRowFormat(RowFormat *l)
+void KCSheet::insertRowFormat(KCRowFormat *l)
 {
     d->rows.insertElement(l, l->row());
     if (!map()->isLoading()) {

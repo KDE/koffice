@@ -49,11 +49,11 @@ using namespace std;
 
 /*****************************************************************************
  *
- * RowFormat
+ * KCRowFormat
  *
  *****************************************************************************/
 
-class RowFormat::Private
+class KCRowFormat::Private
 {
 public:
     KCSheet*      sheet;
@@ -62,11 +62,11 @@ public:
     bool        hide;
     bool        filtered;
     bool        pageBreak; // before row
-    RowFormat*  next;
-    RowFormat*  prev;
+    KCRowFormat*  next;
+    KCRowFormat*  prev;
 };
 
-RowFormat::RowFormat()
+KCRowFormat::KCRowFormat()
         : d(new Private)
 {
     d->sheet    = 0;
@@ -79,12 +79,12 @@ RowFormat::RowFormat()
     d->prev     = 0;
 }
 
-RowFormat::RowFormat(const RowFormat& other)
+KCRowFormat::KCRowFormat(const KCRowFormat& other)
         : d(new Private(*other.d))
 {
 }
 
-RowFormat::~RowFormat()
+KCRowFormat::~KCRowFormat()
 {
     if (d->next)
         d->next->setPrevious(d->prev);
@@ -93,18 +93,18 @@ RowFormat::~RowFormat()
     delete d;
 }
 
-void RowFormat::setSheet(KCSheet* sheet)
+void KCRowFormat::setSheet(KCSheet* sheet)
 {
     d->sheet = sheet;
 }
 
-void RowFormat::setHeight(double height)
+void KCRowFormat::setHeight(double height)
 {
     // avoid unnecessary updates
     if (qAbs(height - this->height()) < DBL_EPSILON)
         return;
 
-    // default RowFormat?
+    // default KCRowFormat?
     if (!d->sheet) {
         d->height = height;
         return;
@@ -119,19 +119,19 @@ void RowFormat::setHeight(double height)
     d->sheet->print()->updateVerticalPageParameters(row());
 }
 
-double RowFormat::height() const
+double KCRowFormat::height() const
 {
     return d->height;
 }
 
-double RowFormat::visibleHeight() const
+double KCRowFormat::visibleHeight() const
 {
     if (d->hide || d->filtered)
         return 0.0;
     return d->height;
 }
 
-QDomElement RowFormat::save(QDomDocument& doc, int yshift) const
+QDomElement KCRowFormat::save(QDomDocument& doc, int yshift) const
 {
     Q_ASSERT(d->sheet);
     QDomElement row = doc.createElement("row");
@@ -151,7 +151,7 @@ QDomElement RowFormat::save(QDomDocument& doc, int yshift) const
     return row;
 }
 
-bool RowFormat::load(const KoXmlElement & row, int yshift, Paste::Mode mode)
+bool KCRowFormat::load(const KoXmlElement & row, int yshift, Paste::Mode mode)
 {
     Q_ASSERT(d->sheet);
     bool ok;
@@ -198,37 +198,37 @@ bool RowFormat::load(const KoXmlElement & row, int yshift, Paste::Mode mode)
     return true;
 }
 
-int RowFormat::row() const
+int KCRowFormat::row() const
 {
     return d->row;
 }
 
-void RowFormat::setRow(int row)
+void KCRowFormat::setRow(int row)
 {
     d->row = row;
 }
 
-RowFormat* RowFormat::next() const
+KCRowFormat* KCRowFormat::next() const
 {
     return d->next;
 }
 
-RowFormat* RowFormat::previous() const
+KCRowFormat* KCRowFormat::previous() const
 {
     return d->prev;
 }
 
-void RowFormat::setNext(RowFormat* next)
+void KCRowFormat::setNext(KCRowFormat* next)
 {
     d->next = next;
 }
 
-void RowFormat::setPrevious(RowFormat* prev)
+void KCRowFormat::setPrevious(KCRowFormat* prev)
 {
     d->prev = prev;
 }
 
-void RowFormat::setHidden(bool _hide, bool repaint)
+void KCRowFormat::setHidden(bool _hide, bool repaint)
 {
     Q_UNUSED(repaint);
     Q_ASSERT(d->sheet);
@@ -245,42 +245,42 @@ void RowFormat::setHidden(bool _hide, bool repaint)
     }
 }
 
-bool RowFormat::isHidden() const
+bool KCRowFormat::isHidden() const
 {
     return d->hide;
 }
 
-void RowFormat::setFiltered(bool filtered)
+void KCRowFormat::setFiltered(bool filtered)
 {
     d->filtered = filtered;
 }
 
-bool RowFormat::isFiltered() const
+bool KCRowFormat::isFiltered() const
 {
     return d->filtered;
 }
 
-bool RowFormat::isHiddenOrFiltered() const
+bool KCRowFormat::isHiddenOrFiltered() const
 {
     return d->hide || d->filtered;
 }
 
-bool RowFormat::isDefault() const
+bool KCRowFormat::isDefault() const
 {
     return !d->sheet;
 }
 
-void RowFormat::setPageBreak(bool enable)
+void KCRowFormat::setPageBreak(bool enable)
 {
     d->pageBreak = enable;
 }
 
-bool RowFormat::hasPageBreak() const
+bool KCRowFormat::hasPageBreak() const
 {
     return d->pageBreak;
 }
 
-bool RowFormat::operator==(const RowFormat& other) const
+bool KCRowFormat::operator==(const KCRowFormat& other) const
 {
     // NOTE Stefan: Don't compare sheet and cell.
     if (d->height != other.d->height)

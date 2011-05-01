@@ -38,12 +38,12 @@ class KCSheet;
 /**
  * A row style.
  */
-class KSPREAD_EXPORT RowFormat
+class KSPREAD_EXPORT KCRowFormat
 {
 public:
-    RowFormat();
-    RowFormat(const RowFormat& other);
-    ~RowFormat();
+    KCRowFormat();
+    KCRowFormat(const KCRowFormat& other);
+    ~KCRowFormat();
 
     void setSheet(KCSheet* sheet);
 
@@ -76,15 +76,15 @@ public:
     bool isDefault() const;
 
     /**
-     * @return the row for this RowFormat. May be 0 if this is the default format.
+     * @return the row for this KCRowFormat. May be 0 if this is the default format.
      */
     int row() const;
     void setRow(int row);
 
-    RowFormat* next() const;
-    RowFormat* previous() const;
-    void setNext(RowFormat* c);
-    void setPrevious(RowFormat* c);
+    KCRowFormat* next() const;
+    KCRowFormat* previous() const;
+    void setNext(KCRowFormat* c);
+    void setPrevious(KCRowFormat* c);
 
     /**
      * Sets the hide flag
@@ -107,14 +107,14 @@ public:
      */
     bool hasPageBreak() const;
 
-    bool operator==(const RowFormat& other) const;
-    inline bool operator!=(const RowFormat& other) const {
+    bool operator==(const KCRowFormat& other) const;
+    inline bool operator!=(const KCRowFormat& other) const {
         return !operator==(other);
     }
 
 private:
     // do not allow assignment
-    RowFormat& operator=(const RowFormat&);
+    KCRowFormat& operator=(const KCRowFormat&);
 
     class Private;
     Private * const d;

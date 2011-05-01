@@ -535,7 +535,7 @@ void OpenCalcExport::exportSheet(QDomDocument & doc, QDomElement & tabElem,
     }
 
     for (i = 1; i <= maxRows; ++i) {
-        const RowFormat * row = sheet->rowFormat(i);
+        const KCRowFormat * row = sheet->rowFormat(i);
         RowStyle rs;
         rs.breakB = ::Style::automatic;
         rs.size   = POINT_TO_MM(row->height()) / 10;

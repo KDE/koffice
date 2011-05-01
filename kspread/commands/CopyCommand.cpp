@@ -70,7 +70,7 @@ QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
 
             // TODO Stefan: Inefficient, use cluster functionality
             // Save the row formats if there are any
-            const RowFormat* format;
+            const KCRowFormat* format;
             for (int row = range.top(); row <= range.bottom(); ++row) {
                 format = sheet->rowFormat(row);
                 if (format && !format->isDefault()) {

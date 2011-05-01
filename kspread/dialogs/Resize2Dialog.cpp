@@ -59,7 +59,7 @@ ResizeRow::ResizeRow(QWidget* parent, Selection* selection)
     setButtons(Ok | Cancel | Default);
     m_selection = selection;
 
-    const RowFormat* rl = m_selection->activeSheet()->rowFormat(selection->lastRange().top());
+    const KCRowFormat* rl = m_selection->activeSheet()->rowFormat(selection->lastRange().top());
     rowHeight = rl->height();
 
     QWidget *page = new QWidget();

@@ -54,7 +54,7 @@ void RowStyleCommand::setPageBreak(bool pageBreak)
     m_pageBreak = pageBreak;
 }
 
-void RowStyleCommand::setTemplate(const RowFormat &rowFormat)
+void RowStyleCommand::setTemplate(const KCRowFormat &rowFormat)
 {
     m_height = rowFormat.height();
     m_hidden = rowFormat.isHidden();
@@ -70,9 +70,9 @@ bool RowStyleCommand::mainProcessing()
         for (int row = range.top(); row <= range.bottom(); ++row) {
             // Save the old style.
             if (m_firstrun) {
-                const RowFormat *rowFormat = m_sheet->rowFormat(row);
+                const KCRowFormat *rowFormat = m_sheet->rowFormat(row);
                 if (!rowFormat->isDefault() && !m_rowFormats.contains(row)) {
-                    m_rowFormats.insert(row, new RowFormat(*rowFormat));
+                    m_rowFormats.insert(row, new KCRowFormat(*rowFormat));
                 }
             }
 
@@ -85,7 +85,7 @@ bool RowStyleCommand::mainProcessing()
                     m_sheet->deleteRowFormat(row);
                 }
             } else {
-                RowFormat *rowFormat = m_sheet->nonDefaultRowFormat(row);
+                KCRowFormat *rowFormat = m_sheet->nonDefaultRowFormat(row);
                 rowFormat->setHeight(m_height);
                 rowFormat->setHidden(m_hidden);
                 rowFormat->setPageBreak(m_pageBreak);

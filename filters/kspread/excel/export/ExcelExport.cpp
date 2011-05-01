@@ -380,7 +380,7 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
             if (first.isNull()) first = KCCell(sheet, 1, row);
             KCCell last = sheet->cellStorage()->lastInRow(row);
             if (last.isNull()) last = first;
-            const RowFormat* format = sheet->rowFormat(row);
+            const KCRowFormat* format = sheet->rowFormat(row);
 
             rr.setRow(row-1);
             rr.setFirstColumn(first.column()-1);

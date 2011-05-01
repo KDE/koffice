@@ -72,7 +72,7 @@ class KCOdfLoadingContext;
 class KCOdfSavingContext;
 class KCPrintSettings;
 class KCRegion;
-class RowFormat;
+class KCRowFormat;
 class KCSheet;
 class SheetPrint;
 class KCStyle;
@@ -410,21 +410,21 @@ public:
      * \return the row format of row \p _row . The default row format,
      * if no special one exists.
      */
-    const RowFormat* rowFormat(int _row) const;
+    const KCRowFormat* rowFormat(int _row) const;
 
     /**
      * \ingroup ColumnRowFormat
-     * If no special RowFormat exists for this row, then a new one is created.
+     * If no special KCRowFormat exists for this row, then a new one is created.
      *
-     * @return a non default RowFormat for this row.
+     * @return a non default KCRowFormat for this row.
      */
-    RowFormat* nonDefaultRowFormat(int _row, bool force_creation = true);
+    KCRowFormat* nonDefaultRowFormat(int _row, bool force_creation = true);
 
     /**
      * \ingroup ColumnRowFormat
      * \return the first non-default row format
      */
-    RowFormat* firstRow() const;
+    KCRowFormat* firstRow() const;
 
     /**
      * \ingroup ColumnRowFormat
@@ -727,7 +727,7 @@ public:
      * \ingroup ColumnRowFormat
      * Inserts the non-default row format \p rowFormat.
      */
-    void insertRowFormat(RowFormat* rowFormat);
+    void insertRowFormat(KCRowFormat* rowFormat);
 
     /**
      * \ingroup ColumnRowFormat

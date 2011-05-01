@@ -755,13 +755,13 @@ void ExcelImport::Private::processRow(Sheet* is, unsigned rowIndex, KCSheet* os)
 
     if (!row) {
         if (is->defaultRowHeight() != os->map()->defaultRowFormat()->height()) {
-            RowFormat* orf = os->nonDefaultRowFormat(rowIndex+1);
+            KCRowFormat* orf = os->nonDefaultRowFormat(rowIndex+1);
             orf->setHeight(is->defaultRowHeight());
         }
         return;
     }
 
-    RowFormat* orf = os->nonDefaultRowFormat(rowIndex+1);
+    KCRowFormat* orf = os->nonDefaultRowFormat(rowIndex+1);
     orf->setHeight(row->height());
     orf->setHidden(!row->visible());
     // TODO default cell style

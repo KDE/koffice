@@ -1073,7 +1073,7 @@ void ColumnCluster::operator=(const ColumnCluster & other)
 RowCluster::RowCluster()
         : m_first(0), m_autoDelete(false)
 {
-    m_cluster = (RowFormat***)malloc(KSPREAD_CLUSTER_LEVEL1 * sizeof(RowFormat**));
+    m_cluster = (KCRowFormat***)malloc(KSPREAD_CLUSTER_LEVEL1 * sizeof(KCRowFormat**));
 
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x)
         m_cluster[ x ] = 0;
@@ -1082,7 +1082,7 @@ RowCluster::RowCluster()
 RowCluster::~RowCluster()
 {
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x) {
-        RowFormat** cl = m_cluster[ x ];
+        KCRowFormat** cl = m_cluster[ x ];
         if (cl) {
             free(cl);
             m_cluster[ x ] = 0;
@@ -1090,9 +1090,9 @@ RowCluster::~RowCluster()
     }
 
     if (m_autoDelete) {
-        RowFormat* cell = m_first;
+        KCRowFormat* cell = m_first;
         while (cell) {
-            RowFormat* n = cell->next();
+            KCRowFormat* n = cell->next();
             delete cell;
             cell = n;
         }
@@ -1101,7 +1101,7 @@ RowCluster::~RowCluster()
     free(m_cluster);
 }
 
-const RowFormat* RowCluster::lookup(int row) const
+const KCRowFormat* RowCluster::lookup(int row) const
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
         kDebug(36001) << "RowCluster::lookup: invalid row value (row:"
@@ -1112,14 +1112,14 @@ const RowFormat* RowCluster::lookup(int row) const
     int cx = row / KSPREAD_CLUSTER_LEVEL2;
     int dx = row % KSPREAD_CLUSTER_LEVEL2;
 
-    RowFormat** cl = m_cluster[ cx ];
+    KCRowFormat** cl = m_cluster[ cx ];
     if (!cl)
         return 0;
 
     return cl[ dx ];
 }
 
-RowFormat* RowCluster::lookup(int row)
+KCRowFormat* RowCluster::lookup(int row)
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
         kDebug(36001) << "RowCluster::lookup: invalid row value (row:"
@@ -1130,7 +1130,7 @@ RowFormat* RowCluster::lookup(int row)
     int cx = row / KSPREAD_CLUSTER_LEVEL2;
     int dx = row % KSPREAD_CLUSTER_LEVEL2;
 
-    RowFormat** cl = m_cluster[ cx ];
+    KCRowFormat** cl = m_cluster[ cx ];
     if (!cl)
         return 0;
 
@@ -1140,7 +1140,7 @@ RowFormat* RowCluster::lookup(int row)
 void RowCluster::clear()
 {
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x) {
-        RowFormat** cl = m_cluster[ x ];
+        KCRowFormat** cl = m_cluster[ x ];
         if (cl) {
             free(cl);
             m_cluster[ x ] = 0;
@@ -1148,9 +1148,9 @@ void RowCluster::clear()
     }
 
     if (m_autoDelete) {
-        RowFormat* cell = m_first;
+        KCRowFormat* cell = m_first;
         while (cell) {
-            RowFormat* n = cell->next();
+            KCRowFormat* n = cell->next();
             delete cell;
             cell = n;
         }
@@ -1159,7 +1159,7 @@ void RowCluster::clear()
     m_first = 0;
 }
 
-void RowCluster::insertElement(RowFormat* lay, int row)
+void RowCluster::insertElement(KCRowFormat* lay, int row)
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
         kDebug(36001) << "RowCluster::insertElement: invalid row value (row:"
@@ -1170,9 +1170,9 @@ void RowCluster::insertElement(RowFormat* lay, int row)
     int cx = row / KSPREAD_CLUSTER_LEVEL2;
     int dx = row % KSPREAD_CLUSTER_LEVEL2;
 
-    RowFormat** cl = m_cluster[ cx ];
+    KCRowFormat** cl = m_cluster[ cx ];
     if (!cl) {
-        cl = (RowFormat**)malloc(KSPREAD_CLUSTER_LEVEL2 * sizeof(RowFormat*));
+        cl = (KCRowFormat**)malloc(KSPREAD_CLUSTER_LEVEL2 * sizeof(KCRowFormat*));
         m_cluster[ cx ] = cl;
 
         for (int a = 0; a < KSPREAD_CLUSTER_LEVEL2; ++a)
@@ -1202,11 +1202,11 @@ void RowCluster::removeElement(int row)
     int cx = row / KSPREAD_CLUSTER_LEVEL2;
     int dx = row % KSPREAD_CLUSTER_LEVEL2;
 
-    RowFormat** cl = m_cluster[ cx ];
+    KCRowFormat** cl = m_cluster[ cx ];
     if (!cl)
         return;
 
-    RowFormat* c = cl[ dx ];
+    KCRowFormat* c = cl[ dx ];
     if (!c)
         return;
 
@@ -1241,7 +1241,7 @@ bool RowCluster::insertRow(int row)
 
     // Is there a row layout at the bottom most position ?
     // In this case the shift is impossible.
-    RowFormat** cl = m_cluster[ KSPREAD_CLUSTER_LEVEL1 - 1 ];
+    KCRowFormat** cl = m_cluster[ KSPREAD_CLUSTER_LEVEL1 - 1 ];
     if (cl && cl[ KSPREAD_CLUSTER_LEVEL2 - 1 ])
         return false;
 
@@ -1249,7 +1249,7 @@ bool RowCluster::insertRow(int row)
     setAutoDelete(false);
 
     for (int i = KSPREAD_CLUSTER_LEVEL1 - 1; i >= cx ; --i) {
-        RowFormat** cl = m_cluster[ i ];
+        KCRowFormat** cl = m_cluster[ i ];
         if (cl) {
             int left = 0;
             if (i == cx)
@@ -1258,7 +1258,7 @@ bool RowCluster::insertRow(int row)
             if (i == KSPREAD_CLUSTER_LEVEL1 - 1)
                 right = KSPREAD_CLUSTER_LEVEL2 - 2;
             for (int k = right; k >= left; --k) {
-                RowFormat* c = cl[ k ];
+                KCRowFormat* c = cl[ k ];
                 if (c) {
                     removeElement(c->row());
                     c->setRow(c->row() + 1);
@@ -1290,14 +1290,14 @@ bool RowCluster::removeRow(int row)
     setAutoDelete(false);
 
     for (int i = cx; i < KSPREAD_CLUSTER_LEVEL1; ++i) {
-        RowFormat** cl = m_cluster[ i ];
+        KCRowFormat** cl = m_cluster[ i ];
         if (cl) {
             int left = 0;
             if (i == cx)
                 left = dx + 1;
             int right = KSPREAD_CLUSTER_LEVEL2 - 1;
             for (int k = left; k <= right; ++k) {
-                RowFormat* c = cl[ k ];
+                KCRowFormat* c = cl[ k ];
                 if (c) {
                     removeElement(c->row());
                     c->setRow(c->row() - 1);
@@ -1327,14 +1327,14 @@ void RowCluster::operator=(const RowCluster & other)
     m_first = 0;
     m_autoDelete = other.m_autoDelete;
     // TODO Stefan: Optimize!
-    m_cluster = (RowFormat***)malloc(KSPREAD_CLUSTER_LEVEL1 * sizeof(RowFormat**));
+    m_cluster = (KCRowFormat***)malloc(KSPREAD_CLUSTER_LEVEL1 * sizeof(KCRowFormat**));
     for (int i = 0; i < KSPREAD_CLUSTER_LEVEL1; ++i) {
         if (other.m_cluster[i]) {
-            m_cluster[i] = (RowFormat**)malloc(KSPREAD_CLUSTER_LEVEL2 * sizeof(RowFormat*));
+            m_cluster[i] = (KCRowFormat**)malloc(KSPREAD_CLUSTER_LEVEL2 * sizeof(KCRowFormat*));
             for (int j = 0; j < KSPREAD_CLUSTER_LEVEL2; ++j) {
                 m_cluster[i][j] = 0;
                 if (other.m_cluster[i][j]) {
-                    RowFormat* rowFormat = new RowFormat(*other.m_cluster[i][j]);
+                    KCRowFormat* rowFormat = new KCRowFormat(*other.m_cluster[i][j]);
                     rowFormat->setNext(0);
                     rowFormat->setPrevious(0);
                     insertElement(rowFormat, rowFormat->row());

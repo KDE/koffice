@@ -489,7 +489,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
             }
 
             // Set the row style.
-            RowFormat rowFormat;
+            KCRowFormat rowFormat;
             rowFormat.setSheet(sheet);
             KoXmlElement c = e.firstChild().toElement();
             for (; !c.isNull(); c = c.nextSibling().toElement()) {

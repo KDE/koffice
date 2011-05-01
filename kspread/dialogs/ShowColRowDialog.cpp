@@ -90,7 +90,7 @@ ShowColRow::ShowColRow(QWidget* parent, Selection* selection, Type _type)
         }
         list->addItems(listCol);
     } else if (_type == Row) {
-        RowFormat *row = m_selection->activeSheet()->firstRow();
+        KCRowFormat *row = m_selection->activeSheet()->firstRow();
 
         QString text;
         QStringList listRow;

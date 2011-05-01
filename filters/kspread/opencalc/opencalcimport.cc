@@ -181,7 +181,7 @@ bool OpenCalcImport::readRowFormat(KoXmlElement & rowNode, KoXmlElement * rowSty
     }
 
     for (int i = 0; i < number; ++i) {
-        RowFormat * rowL = table->nonDefaultRowFormat(row);
+        KCRowFormat * rowL = table->nonDefaultRowFormat(row);
         table->cellStorage()->setStyle(KCRegion(QRect(1, row, KS_colMax, 1)), layout);
 
         if (height != -1) {
@@ -192,7 +192,7 @@ bool OpenCalcImport::readRowFormat(KoXmlElement & rowNode, KoXmlElement * rowSty
         // if ( insertPageBreak ) TODO:
         //   rowL->setPageBreak( true )
 
-        //    kDebug(30518) <<"Added RowFormat:" << row;
+        //    kDebug(30518) <<"Added KCRowFormat:" << row;
         ++row;
     }
 
@@ -787,8 +787,8 @@ bool OpenCalcImport::readRowsAndCells(KoXmlElement & content, KCSheet * table)
         if (!readCells(r, table, backupRow, columns))
             return false;
 
-        RowFormat * srcLayout = table->nonDefaultRowFormat(backupRow);
-//     RowFormat * layout = 0;
+        KCRowFormat * srcLayout = table->nonDefaultRowFormat(backupRow);
+//     KCRowFormat * layout = 0;
 
         if (collapsed)
             srcLayout->setHidden(true);

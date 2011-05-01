@@ -22,7 +22,7 @@
 
 #include "AbstractRegionCommand.h"
 
-class RowFormat;
+class KCRowFormat;
 
 /**
  * \ingroup Commands
@@ -37,7 +37,7 @@ public:
     void setHeight(double height);
     void setHidden(bool hidden);
     void setPageBreak(bool pageBreak);
-    void setTemplate(const RowFormat &rowFormat);
+    void setTemplate(const KCRowFormat &rowFormat);
 
 protected:
     virtual bool mainProcessing();
@@ -46,7 +46,7 @@ private:
     double m_height;
     bool m_hidden;
     bool m_pageBreak;
-    QMap<int, RowFormat *> m_rowFormats;
+    QMap<int, KCRowFormat *> m_rowFormats;
 };
 
 #endif // KSPREAD_ROW_STYLE_COMMAND

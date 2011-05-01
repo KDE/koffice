@@ -30,7 +30,7 @@ class QPoint;
 
 class KCCell;
 class ColumnFormat;
-class RowFormat;
+class KCRowFormat;
 
 /**
 \ingroup Storage
@@ -311,12 +311,12 @@ public:
     RowCluster();
     ~RowCluster();
 
-    const RowFormat* lookup(int col) const;
-    RowFormat* lookup(int col);
+    const KCRowFormat* lookup(int col) const;
+    KCRowFormat* lookup(int col);
 
     void clear();
 
-    void insertElement(RowFormat*, int row);
+    void insertElement(KCRowFormat*, int row);
     void removeElement(int row);
 
     bool insertRow(int row);
@@ -325,7 +325,7 @@ public:
     void setAutoDelete(bool);
     bool autoDelete() const;
 
-    RowFormat* first()const {
+    KCRowFormat* first()const {
         return m_first;
     }
 
@@ -335,8 +335,8 @@ private:
     RowCluster(const RowCluster& other);
 
 private:
-    RowFormat*** m_cluster;
-    RowFormat* m_first;
+    KCRowFormat*** m_cluster;
+    KCRowFormat* m_first;
     bool m_autoDelete;
 };
 

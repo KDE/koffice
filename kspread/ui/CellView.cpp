@@ -1448,7 +1448,7 @@ QString CellView::textDisplaying(const QFontMetricsF& fm, const KCCell& cell)
             if (fm.width(tmp) + tmpIndent < len - 4.0 - 1.0) {
                 if (style().angle() != 0) {
                     QString tmp2;
-                    const RowFormat *rl = cell.sheet()->rowFormat(cell.row());
+                    const KCRowFormat *rl = cell.sheet()->rowFormat(cell.row());
                     if (d->textHeight > rl->height()) {
                         for (int j = d->displayText.length(); j != 0; j--) {
                             tmp2 = d->displayText.left(j);
@@ -1467,7 +1467,7 @@ QString CellView::textDisplaying(const QFontMetricsF& fm, const KCCell& cell)
     } else if (style().verticalText()) {
         // Vertical text.
 
-        const RowFormat  *rl = cell.sheet()->rowFormat(cell.row());
+        const KCRowFormat  *rl = cell.sheet()->rowFormat(cell.row());
         qreal      tmpIndent = 0.0;
 
         // Not enough space but align to left.

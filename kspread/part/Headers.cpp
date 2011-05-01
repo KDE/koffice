@@ -376,7 +376,7 @@ void RowHeader::mouseMoveEvent(QMouseEvent * _ev)
             m_pCanvas->view()->vertScrollBar()->setValue((int) ev_PosY);
         else if (_ev->pos().y() > m_pCanvas->height()) {
             if (row < KS_rowMax) {
-                const RowFormat* rowFormat = sheet->rowFormat(row + 1);
+                const KCRowFormat* rowFormat = sheet->rowFormat(row + 1);
                 y = sheet->rowPosition(row + 1);
                 m_pCanvas->view()->vertScrollBar()->setValue((int)(ev_PosY + rowFormat->height() - dHeight));
             }
@@ -547,7 +547,7 @@ void RowHeader::paintEvent(QPaintEvent* event)
         const bool selected = (selectedRows.contains(y));
         const bool highlighted = (!selected && affectedRows.contains(y));
 
-        const RowFormat* rowFormat = sheet->rowFormat(y);
+        const KCRowFormat* rowFormat = sheet->rowFormat(y);
         if (rowFormat->isHiddenOrFiltered()) {
             ++y;
             continue;

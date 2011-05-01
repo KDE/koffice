@@ -380,7 +380,7 @@ void setRowInfo(QDomNode *sheet, KCSheet *table)
         QDomElement e = rowinfo.toElement(); // try to convert the node to an element.
         int row_number;
         row_number = e.attribute("No").toInt() + 1;
-        RowFormat *rl = new RowFormat();
+        KCRowFormat *rl = new KCRowFormat();
         rl->setSheet(table);
         rl->setRow(row_number);
 

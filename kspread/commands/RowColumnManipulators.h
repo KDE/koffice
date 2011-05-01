@@ -27,7 +27,7 @@
 #include "AbstractRegionCommand.h"
 
 class ColumnFormat;
-class RowFormat;
+class KCRowFormat;
 
 /**
  * \class ResizeColumnManipulator
@@ -188,7 +188,7 @@ public:
     InsertDeleteRowManipulator(QUndoCommand *parent = 0);
     virtual ~InsertDeleteRowManipulator();
 
-    void setTemplate(const RowFormat &rowFormat);
+    void setTemplate(const KCRowFormat &rowFormat);
     virtual void setReverse(bool reverse);
 
 protected:
@@ -200,7 +200,7 @@ protected:
 private:
     enum Mode { Insert, Delete };
     Mode m_mode;
-    RowFormat *m_template;
+    KCRowFormat *m_template;
 };
 
 #endif // KSPREAD_ROW_COLUMN_MANIPULATORS

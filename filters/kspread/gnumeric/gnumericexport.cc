@@ -1247,11 +1247,11 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
 
         /* End COLS */
 
-        //  RowFormat *rl=table->m_cells.firstCell;
+        //  KCRowFormat *rl=table->m_cells.firstCell;
         //   <gmr:ColInfo No="1" Unit="96.75" MarginA="2" MarginB="2" HardSize="-1" Hidden="0"/>
 
         /* Start ROWS */
-        RowFormat *rl = table->firstRow();
+        KCRowFormat *rl = table->firstRow();
         while (rl) {
             QDomElement rowinfo = gnumeric_doc.createElement("gmr:RowInfo");
             rows.appendChild(rowinfo);

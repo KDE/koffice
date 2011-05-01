@@ -70,7 +70,7 @@ void TableShape::Private::adjustColumnDimensions(KCSheet* sheet, double factor)
 void TableShape::Private::adjustRowDimensions(KCSheet* sheet, double factor)
 {
     for (int row = 1; row <= rows; ++row) {
-        RowFormat* const rowFormat = sheet->nonDefaultRowFormat(row);
+        KCRowFormat* const rowFormat = sheet->nonDefaultRowFormat(row);
         rowFormat->setHeight(rowFormat->height() * factor);
     }
 }

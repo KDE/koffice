@@ -108,7 +108,7 @@ public:
 
     // default objects
     ColumnFormat* defaultColumnFormat;
-    RowFormat* defaultRowFormat;
+    KCRowFormat* defaultRowFormat;
 
     QList<KCDamage*> damages;
     bool isLoading;
@@ -148,7 +148,7 @@ KCMap::KCMap(KCDocBase* doc, int syntaxVersion)
     d->formatter = new ValueFormatter(d->converter);
 
     d->defaultColumnFormat = new ColumnFormat();
-    d->defaultRowFormat = new RowFormat();
+    d->defaultRowFormat = new KCRowFormat();
 
     QFont font(KoGlobal::defaultFont());
     d->defaultRowFormat->setHeight(font.pointSizeF() + 4);
@@ -304,7 +304,7 @@ const ColumnFormat* KCMap::defaultColumnFormat() const
     return d->defaultColumnFormat;
 }
 
-const RowFormat* KCMap::defaultRowFormat() const
+const KCRowFormat* KCMap::defaultRowFormat() const
 {
     return d->defaultRowFormat;
 }

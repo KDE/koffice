@@ -2294,7 +2294,7 @@ void CellToolBase::equalizeRow()
         KMessageBox::error(canvas()->canvasWidget(), i18n("Area is too large."));
     else {
         const QRect range = selection()->lastRange();
-        const RowFormat* rowFormat = selection()->activeSheet()->rowFormat(range.top());
+        const KCRowFormat* rowFormat = selection()->activeSheet()->rowFormat(range.top());
         double size = rowFormat->height();
         if (range.top() == range.bottom())
             return;

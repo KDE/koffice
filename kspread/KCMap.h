@@ -60,7 +60,7 @@ class KCDocBase;
 class KCLoadingInfo;
 class KCNamedAreaManager;
 class KCRecalcManager;
-class RowFormat;
+class KCRowFormat;
 class KCSheet;
 class KCStyle;
 class StyleManager;
@@ -179,7 +179,7 @@ public:
     /**
      * \return the default row format
      */
-    const RowFormat* defaultRowFormat() const;
+    const KCRowFormat* defaultRowFormat() const;
 
     /**
      * Sets the default column width to \p width.
