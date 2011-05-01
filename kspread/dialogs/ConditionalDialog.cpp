@@ -22,7 +22,7 @@
 
 
 #include "ConditionalDialog.h"
-#include "Condition.h"
+#include "KCCondition.h"
 
 #include "KCCell.h"
 #include "Map.h"
@@ -256,7 +256,7 @@ ConditionalDialog::ConditionalDialog(QWidget* parent, Selection* selection)
         m_dlg(new ConditionalWidget(this))
 {
     setButtons(KDialog::Ok | KDialog::Cancel);
-    setCaption(i18n("Conditional Styles"));
+    setCaption(i18n("KCConditional Styles"));
 
     QStringList list(m_selection->activeSheet()->map()->styleManager()->styleNames());
 
@@ -274,13 +274,13 @@ ConditionalDialog::ConditionalDialog(QWidget* parent, Selection* selection)
 
 void ConditionalDialog::init()
 {
-    QLinkedList<Conditional> conditionList;
-    QLinkedList<Conditional> otherList;
+    QLinkedList<KCConditional> conditionList;
+    QLinkedList<KCConditional> otherList;
     bool found;
     int numCondition;
 
-    QLinkedList<Conditional>::iterator it1;
-    QLinkedList<Conditional>::iterator it2;
+    QLinkedList<KCConditional>::iterator it1;
+    QLinkedList<KCConditional>::iterator it2;
 
     KCSheet* sheet = m_selection->activeSheet();
 
@@ -335,7 +335,7 @@ void ConditionalDialog::init()
     }
 }
 
-void ConditionalDialog::init(Conditional const & tmp, int numCondition)
+void ConditionalDialog::init(KCConditional const & tmp, int numCondition)
 {
     kDebug() << "Adding" << numCondition;
     KComboBox * cb  = 0;
@@ -375,80 +375,80 @@ void ConditionalDialog::init(Conditional const & tmp, int numCondition)
     }
 
     switch (tmp.cond) {
-    case Conditional::None :
-    case Conditional::IsTrueFormula: // was unhandled
+    case KCConditional::None :
+    case KCConditional::IsTrueFormula: // was unhandled
         break;
 
-    case Conditional::Equal :
+    case KCConditional::Equal :
         cb->setCurrentIndex(1);
         break;
 
-    case Conditional::Superior :
+    case KCConditional::Superior :
         cb->setCurrentIndex(2);
         break;
 
-    case Conditional::Inferior :
+    case KCConditional::Inferior :
         cb->setCurrentIndex(3);
         break;
 
-    case Conditional::SuperiorEqual :
+    case KCConditional::SuperiorEqual :
         cb->setCurrentIndex(4);
         break;
 
-    case Conditional::InferiorEqual :
+    case KCConditional::InferiorEqual :
         cb->setCurrentIndex(5);
         break;
 
-    case Conditional::Between :
+    case KCConditional::Between :
         cb->setCurrentIndex(6);
         kl2->setText(converter->asString(tmp.value2).asString());
         break;
 
-    case Conditional::Different :
+    case KCConditional::Different :
         cb->setCurrentIndex(7);
         kl2->setText(converter->asString(tmp.value2).asString());
         break;
-    case Conditional::DifferentTo :
+    case KCConditional::DifferentTo :
         cb->setCurrentIndex(8);
         break;
     }
 
-    if (tmp.cond != Conditional::None) {
+    if (tmp.cond != KCConditional::None) {
         kl1->setEnabled(true);
         kl1->setText(converter->asString(tmp.value1).asString());
     }
 }
 
-Conditional::Type ConditionalDialog::typeOfCondition(KComboBox const * const cb) const
+KCConditional::Type ConditionalDialog::typeOfCondition(KComboBox const * const cb) const
 {
-    Conditional::Type result = Conditional::None;
+    KCConditional::Type result = KCConditional::None;
     switch (cb->currentIndex()) {
     case 0 :
-        result = Conditional::None;
+        result = KCConditional::None;
         break;
     case 1 :
-        result = Conditional::Equal;
+        result = KCConditional::Equal;
         break;
     case 2 :
-        result = Conditional::Superior;
+        result = KCConditional::Superior;
         break;
     case 3 :
-        result = Conditional::Inferior;
+        result = KCConditional::Inferior;
         break;
     case 4 :
-        result = Conditional::SuperiorEqual;
+        result = KCConditional::SuperiorEqual;
         break;
     case 5 :
-        result = Conditional::InferiorEqual;
+        result = KCConditional::InferiorEqual;
         break;
     case 6 :
-        result = Conditional::Between;
+        result = KCConditional::Between;
         break;
     case 7 :
-        result = Conditional::Different;
+        result = KCConditional::Different;
         break;
     case 8 :
-        result = Conditional::DifferentTo;
+        result = KCConditional::DifferentTo;
         break;
     default:
         kDebug(36001) << "Error in list";
@@ -493,7 +493,7 @@ bool ConditionalDialog::checkInputData()
     return true;
 }
 
-bool ConditionalDialog::getCondition(Conditional & newCondition, const KComboBox * cb,
+bool ConditionalDialog::getCondition(KCConditional & newCondition, const KComboBox * cb,
                                      const KLineEdit * edit1, const KLineEdit * edit2,
                                      const KComboBox * sb)
 {
@@ -501,7 +501,7 @@ bool ConditionalDialog::getCondition(Conditional & newCondition, const KComboBox
         return false;
 
     newCondition.cond = typeOfCondition(cb);
-    if (newCondition.cond == Conditional::None)
+    if (newCondition.cond == KCConditional::None)
         return false;
 
     Map *const map = m_selection->activeSheet()->map();
@@ -523,9 +523,9 @@ void ConditionalDialog::slotOk()
 
     kDebug() << "Input data is valid";
 
-    QLinkedList<Conditional> newList;
+    QLinkedList<KCConditional> newList;
 
-    Conditional newCondition;
+    KCConditional newCondition;
 
     if (getCondition(newCondition, m_dlg->m_condition_1, m_dlg->m_firstValue_1,
                      m_dlg->m_secondValue_1, m_dlg->m_style_1))

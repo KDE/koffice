@@ -49,7 +49,7 @@
 
 #include "CalculationSettings.h"
 #include "CellStorage.h"
-#include "Condition.h"
+#include "KCCondition.h"
 #include "Formula.h"
 #include "GenValidationStyle.h"
 #include "Global.h"

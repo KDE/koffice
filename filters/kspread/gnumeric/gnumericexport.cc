@@ -249,31 +249,31 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
     }
 
     switch (kspread_validity.condition()) {
-    case Conditional::None:
+    case KCConditional::None:
         //Nothing
         break;
-    case Conditional::Equal:
+    case KCConditional::Equal:
         val.setAttribute("Operator", "2");
         break;
-    case Conditional::Superior:
+    case KCConditional::Superior:
         val.setAttribute("Operator", "4");
         break;
-    case Conditional::Inferior:
+    case KCConditional::Inferior:
         val.setAttribute("Operator", "5");
         break;
-    case Conditional::SuperiorEqual:
+    case KCConditional::SuperiorEqual:
         val.setAttribute("Operator", "6");
         break;
-    case Conditional::InferiorEqual:
+    case KCConditional::InferiorEqual:
         val.setAttribute("Operator", "7");
         break;
-    case Conditional::Between:
+    case KCConditional::Between:
         val.setAttribute("Operator", "0");
         break;
-    case Conditional::Different:
+    case KCConditional::Different:
         val.setAttribute("Operator", "3");
         break;
-    case Conditional::DifferentTo:
+    case KCConditional::DifferentTo:
         val.setAttribute("Operator", "1");
         break;
     }
@@ -284,22 +284,22 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
     case Validity::Number: {
         val.setAttribute("Type", "2");
         switch (kspread_validity.condition()) {
-        case Conditional::None:
+        case KCConditional::None:
             //Nothing
             break;
-        case Conditional::Equal:
-        case Conditional::Superior:
-        case Conditional::Inferior:
-        case Conditional::SuperiorEqual:
-        case Conditional::InferiorEqual:
-        case Conditional::Different: {
+        case KCConditional::Equal:
+        case KCConditional::Superior:
+        case KCConditional::Inferior:
+        case KCConditional::SuperiorEqual:
+        case KCConditional::InferiorEqual:
+        case KCConditional::Different: {
             QDomElement tmp = gnumeric_doc.createElement("gmr:Expression0");
             tmp.appendChild(gnumeric_doc.createTextNode(converter->asString(kspread_validity.minimumValue()).asString()));
             val.appendChild(tmp);
         }
         break;
-        case Conditional::Between:
-        case Conditional::DifferentTo: {
+        case KCConditional::Between:
+        case KCConditional::DifferentTo: {
             QDomElement tmp = gnumeric_doc.createElement("gmr:Expression0");
             tmp.appendChild(gnumeric_doc.createTextNode(converter->asString(kspread_validity.minimumValue()).asString()));
             val.appendChild(tmp);
@@ -319,22 +319,22 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
     case Validity::Time:
         val.setAttribute("Type", "5");
         switch (kspread_validity.condition()) {
-        case Conditional::None:
+        case KCConditional::None:
             //Nothing
             break;
-        case Conditional::Equal:
-        case Conditional::Superior:
-        case Conditional::Inferior:
-        case Conditional::SuperiorEqual:
-        case Conditional::InferiorEqual:
-        case Conditional::Different: {
+        case KCConditional::Equal:
+        case KCConditional::Superior:
+        case KCConditional::Inferior:
+        case KCConditional::SuperiorEqual:
+        case KCConditional::InferiorEqual:
+        case KCConditional::Different: {
             QDomElement tmp = gnumeric_doc.createElement("gmr:Expression0");
             tmp.appendChild(gnumeric_doc.createTextNode(converter->asString(kspread_validity.minimumValue()).asString()));
             val.appendChild(tmp);
         }
         break;
-        case Conditional::Between:
-        case Conditional::DifferentTo: {
+        case KCConditional::Between:
+        case KCConditional::DifferentTo: {
             QDomElement tmp = gnumeric_doc.createElement("gmr:Expression0");
             tmp.appendChild(gnumeric_doc.createTextNode(converter->asString(kspread_validity.minimumValue()).asString()));
             val.appendChild(tmp);
@@ -349,22 +349,22 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
     case Validity::Date:
         val.setAttribute("Type", "4");
         switch (kspread_validity.condition()) {
-        case Conditional::None:
+        case KCConditional::None:
             //Nothing
             break;
-        case Conditional::Equal:
-        case Conditional::Superior:
-        case Conditional::Inferior:
-        case Conditional::SuperiorEqual:
-        case Conditional::InferiorEqual:
-        case Conditional::Different: {
+        case KCConditional::Equal:
+        case KCConditional::Superior:
+        case KCConditional::Inferior:
+        case KCConditional::SuperiorEqual:
+        case KCConditional::InferiorEqual:
+        case KCConditional::Different: {
             QDomElement tmp = gnumeric_doc.createElement("gmr:Expression0");
             tmp.appendChild(gnumeric_doc.createTextNode(converter->asString(kspread_validity.minimumValue()).asString()));
             val.appendChild(tmp);
         }
         break;
-        case Conditional::Between:
-        case Conditional::DifferentTo: {
+        case KCConditional::Between:
+        case KCConditional::DifferentTo: {
             QDomElement tmp = gnumeric_doc.createElement("gmr:Expression0");
             tmp.appendChild(gnumeric_doc.createTextNode(converter->asString(kspread_validity.minimumValue()).asString()));
             val.appendChild(tmp);
@@ -379,22 +379,22 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
     case Validity::Integer:
         val.setAttribute("Type", "1");
         switch (kspread_validity.condition()) {
-        case Conditional::None:
+        case KCConditional::None:
             //Nothing
             break;
-        case Conditional::Equal:
-        case Conditional::Superior:
-        case Conditional::Inferior:
-        case Conditional::SuperiorEqual:
-        case Conditional::InferiorEqual:
-        case Conditional::Different: {
+        case KCConditional::Equal:
+        case KCConditional::Superior:
+        case KCConditional::Inferior:
+        case KCConditional::SuperiorEqual:
+        case KCConditional::InferiorEqual:
+        case KCConditional::Different: {
             QDomElement tmp = gnumeric_doc.createElement("gmr:Expression0");
             tmp.appendChild(gnumeric_doc.createTextNode(converter->asString(kspread_validity.minimumValue()).asString()));
             val.appendChild(tmp);
         }
         break;
-        case Conditional::Between:
-        case Conditional::DifferentTo: {
+        case KCConditional::Between:
+        case KCConditional::DifferentTo: {
             QDomElement tmp = gnumeric_doc.createElement("gmr:Expression0");
             tmp.appendChild(gnumeric_doc.createTextNode(converter->asString(kspread_validity.minimumValue()).asString()));
             val.appendChild(tmp);
@@ -408,22 +408,22 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
     case Validity::TextLength:
         val.setAttribute("Type", "6");
         switch (kspread_validity.condition()) {
-        case Conditional::None:
+        case KCConditional::None:
             //Nothing
             break;
-        case Conditional::Equal:
-        case Conditional::Superior:
-        case Conditional::Inferior:
-        case Conditional::SuperiorEqual:
-        case Conditional::InferiorEqual:
-        case Conditional::Different: {
+        case KCConditional::Equal:
+        case KCConditional::Superior:
+        case KCConditional::Inferior:
+        case KCConditional::SuperiorEqual:
+        case KCConditional::InferiorEqual:
+        case KCConditional::Different: {
             QDomElement tmp = gnumeric_doc.createElement("gmr:Expression0");
             tmp.appendChild(gnumeric_doc.createTextNode(converter->asString(kspread_validity.minimumValue()).asString()));
             val.appendChild(tmp);
         }
         break;
-        case Conditional::Between:
-        case Conditional::DifferentTo: {
+        case KCConditional::Between:
+        case KCConditional::DifferentTo: {
             QDomElement tmp = gnumeric_doc.createElement("gmr:Expression0");
             tmp.appendChild(gnumeric_doc.createTextNode(converter->asString(kspread_validity.minimumValue()).asString()));
             val.appendChild(tmp);
@@ -437,18 +437,18 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
     case Validity::List:
         val.setAttribute("Type", "3");
         switch (kspread_validity.condition()) {
-        case Conditional::None:
+        case KCConditional::None:
             //Nothing
             break;
-        case Conditional::Equal:
-        case Conditional::Superior:
-        case Conditional::Inferior:
-        case Conditional::SuperiorEqual:
-        case Conditional::InferiorEqual:
-        case Conditional::Different:
+        case KCConditional::Equal:
+        case KCConditional::Superior:
+        case KCConditional::Inferior:
+        case KCConditional::SuperiorEqual:
+        case KCConditional::InferiorEqual:
+        case KCConditional::Different:
             break;
-        case Conditional::Between:
-        case Conditional::DifferentTo:
+        case KCConditional::Between:
+        case KCConditional::DifferentTo:
             break;
         }
         break;

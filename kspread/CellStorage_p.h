@@ -22,7 +22,7 @@
 
 // KSpread
 #include "Binding.h"
-#include "Condition.h"
+#include "KCCondition.h"
 #include "Formula.h"
 #include "KCStyle.h"
 #include "Validity.h"

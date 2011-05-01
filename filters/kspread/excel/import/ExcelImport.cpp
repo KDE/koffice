@@ -615,39 +615,39 @@ void ExcelImport::Private::processSheetForConditionals(Sheet* is, KCSheet* os)
     StyleManager* styleManager = os->map()->styleManager();
     foreach (ConditionalFormat* cf, conditionals) {
         QRegion r = cf->region().translated(1, 1);
-        QLinkedList<Conditional> conds;
-        foreach (const Conditional& c, cf->conditionals()) {
-            Conditional kc;
+        QLinkedList<KCConditional> conds;
+        foreach (const Conditional &c, cf->conditionals()) {
+            KCConditional kc;
             switch (c.cond) {
             case Conditional::None:
-                kc.cond = Conditional::None;
+                kc.cond = KCConditional::None;
                 break;
             case Conditional::Formula:
-                kc.cond = Conditional::IsTrueFormula;
+                kc.cond = KCConditional::IsTrueFormula;
                 break;
             case Conditional::Between:
-                kc.cond = Conditional::Between;
+                kc.cond = KCConditional::Between;
                 break;
             case Conditional::Outside:
-                kc.cond = Conditional::Different;
+                kc.cond = KCConditional::Different;
                 break;
             case Conditional::Equal:
-                kc.cond = Conditional::Equal;
+                kc.cond = KCConditional::Equal;
                 break;
             case Conditional::NotEqual:
-                kc.cond = Conditional::DifferentTo;
+                kc.cond = KCConditional::DifferentTo;
                 break;
             case Conditional::Greater:
-                kc.cond = Conditional::Superior;
+                kc.cond = KCConditional::Superior;
                 break;
             case Conditional::Less:
-                kc.cond = Conditional::Inferior;
+                kc.cond = KCConditional::Inferior;
                 break;
             case Conditional::GreaterOrEqual:
-                kc.cond = Conditional::SuperiorEqual;
+                kc.cond = KCConditional::SuperiorEqual;
                 break;
             case Conditional::LessOrEqual:
-                kc.cond = Conditional::InferiorEqual;
+                kc.cond = KCConditional::InferiorEqual;
                 break;
             }
             qDebug() << "FRM:" << c.cond << kc.cond;
@@ -769,7 +769,7 @@ void ExcelImport::Private::processRow(Sheet* is, unsigned rowIndex, KCSheet* os)
     // find the column of the rightmost cell (if any)
     const int lastCol = row->sheet()->maxCellsInRow(rowIndex);
     for (int i = 0; i <= lastCol; ++i) {
-        KCCell* cell = is->cell(i, rowIndex, false);
+        Cell* cell = is->cell(i, rowIndex, false);
         if (!cell) continue;
         processCell(cell, KCCell(os, i+1, rowIndex+1));
     }
@@ -816,13 +816,13 @@ void ExcelImport::Private::processCell(Cell* ic, KCCell oc)
     const bool isFormula = !formula.isEmpty();
     if (isFormula) {
         const QString nsPrefix = cellFormulaNamespace(formula);
-        const QString decodedFormula = Odf::decodeFormula('=' + formula, oc.locale(), nsPrefix);
+        const QString decodedFormula = KSpread::Odf::decodeFormula('=' + formula, oc.locale(), nsPrefix);
         oc.setUserInput(decodedFormula);
     }
 
     int styleId = convertStyle(&ic->format(), formula);
 
-    KCValue value = ic->value();
+    Value value = ic->value();
     if (value.isBoolean()) {
         oc.setValue(KCValue(value.asBoolean()));
         if (!isFormula)
@@ -834,7 +834,7 @@ void ExcelImport::Private::processCell(Cell* ic, KCCell oc)
             KCValue v(value.asFloat());
             v.setFormat(KCValue::fmt_Percent);
             oc.setValue(v);
-        } else if (Format::isDate(styleList[styleId].formatType())) {
+        } else if (KCFormat::isDate(styleList[styleId].formatType())) {
             QDateTime date = convertDate(value.asFloat());
             oc.setValue(KCValue(date, outputDoc->map()->calculationSettings()));
             KLocale* locale = outputDoc->map()->calculationSettings()->locale();
@@ -843,7 +843,7 @@ void ExcelImport::Private::processCell(Cell* ic, KCCell oc)
             } else {
                 oc.setUserInput(locale->formatDateTime(date));
             }
-        } else if (Format::isTime(styleList[styleId].formatType())) {
+        } else if (KCFormat::isTime(styleList[styleId].formatType())) {
             QTime time = convertTime(value.asFloat());
             oc.setValue(KCValue(time, outputDoc->map()->calculationSettings()));
             KLocale* locale = outputDoc->map()->calculationSettings()->locale();
@@ -930,7 +930,7 @@ void ExcelImport::Private::processCellObjects(Cell* ic, KCCell oc)
             hasObjects = true;
         }
 
-        KCSheet* const sheet = ic->sheet();
+        Sheet* const sheet = ic->sheet();
         const unsigned long colL = picture->m_colL;
         const unsigned long dxL = picture->m_dxL;
         const unsigned long colR = picture->m_colR;
@@ -962,7 +962,7 @@ void ExcelImport::Private::processCellObjects(Cell* ic, KCCell oc)
 
     // handle charts
     foreach(ChartObject *chart, ic->charts()) {
-        KCSheet* const sheet = ic->sheet();
+        Sheet* const sheet = ic->sheet();
         if(chart->m_chart->m_impl==0) {
             kDebug() << "Invalid chart to be created, no implementation.";
             continue;
@@ -1044,7 +1044,7 @@ int ExcelImport::Private::convertStyle(const Format* format, const QString& form
             style.merge(dataStyleCache.value(format->valueFormat(), KCStyle()));
         } else {
             if (key.decimalCount >= 0) {
-                style.setFormatType(Format::Number);
+                style.setFormatType(KCFormat::Number);
                 style.setPrecision(key.decimalCount);
                 QString format = ".";
                 for (int i = 0; i < key.decimalCount; i++) {

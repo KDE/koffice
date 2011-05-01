@@ -44,13 +44,13 @@ class ValueConverter;
 class ValueParser;
 
 /**
- * \class Conditional
+ * \class KCConditional
  * \ingroup KCStyle
- * Conditional formatting.
+ * KCConditional formatting.
  * Holds the actual condition and the applicable style for conditional
  * KCCell formattings.
  */
-class KSPREAD_EXPORT Conditional
+class KSPREAD_EXPORT KCConditional
 {
 public:
     enum Type { None, Equal, Superior, Inferior, SuperiorEqual,
@@ -64,15 +64,15 @@ public:
     Type           cond;
     QString        baseCellAddress;
 
-    Conditional();
+    KCConditional();
 
-    bool operator==(const Conditional &other) const;
+    bool operator==(const KCConditional &other) const;
 };
 
 
 class Conditions;
 uint qHash(const Conditions& conditions);
-uint qHash(const Conditional& condition);
+uint qHash(const KCConditional& condition);
 
 /**
  * \class Conditions
@@ -110,12 +110,12 @@ public:
     /**
      * Retrieve the current list of conditions we're checking
      */
-    QLinkedList<Conditional> conditionList() const;
+    QLinkedList<KCConditional> conditionList() const;
 
     /**
      * Replace the current list of conditions with this new one
      */
-    void setConditionList(const QLinkedList<Conditional> & list);
+    void setConditionList(const QLinkedList<KCConditional> & list);
 
     /**
      * Returns an optional default style, which is returned by testConditons if none of
@@ -147,7 +147,7 @@ public:
      * \ingroup OpenDocument
      * Loads the condtional formatting.
      */
-    Conditional loadOdfCondition(const QString &conditionValue, const QString &applyStyleName,
+    KCConditional loadOdfCondition(const QString &conditionValue, const QString &applyStyleName,
                                  const QString &baseCellAddress, const ValueParser *parser);
 
     /**
@@ -183,29 +183,29 @@ private:
      *
      * \return true if one of the conditions is true, false if not.
      */
-    bool currentCondition(const KCCell& cell, Conditional & condition) const;
+    bool currentCondition(const KCCell& cell, KCConditional & condition) const;
 
     bool isTrueFormula(const KCCell& cell, const QString& formula, const QString& baseCellAddress) const;
 
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfCondition(QString &valExpression, Conditional &newCondition, const ValueParser *parser);
+    void loadOdfCondition(QString &valExpression, KCConditional &newCondition, const ValueParser *parser);
 
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfConditionValue(const QString &styleCondition, Conditional &newCondition, const ValueParser *parser);
+    void loadOdfConditionValue(const QString &styleCondition, KCConditional &newCondition, const ValueParser *parser);
 
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfValidationValue(const QStringList &listVal, Conditional &newCondition, const ValueParser *parser);
+    void loadOdfValidationValue(const QStringList &listVal, KCConditional &newCondition, const ValueParser *parser);
 
     /**
      * \ingroup OpenDocument
      */
-    QString saveOdfConditionValue(const Conditional &conditionalStyle, ValueConverter *converter) const;
+    QString saveOdfConditionValue(const KCConditional &conditionalStyle, ValueConverter *converter) const;
 
     class Private;
     QSharedDataPointer<Private> d;

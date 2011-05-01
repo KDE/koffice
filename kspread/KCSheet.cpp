@@ -66,7 +66,7 @@
 
 #include "CellStorage.h"
 #include "Cluster.h"
-#include "Condition.h"
+#include "KCCondition.h"
 #include "Damages.h"
 #include "DependencyManager.h"
 #include "DocBase.h"

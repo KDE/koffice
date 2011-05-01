@@ -199,7 +199,7 @@ set (kspreadodf_LIB_SRCS
     KCCell.cpp
     CellStorage.cpp
     Cluster.cpp
-    Condition.cpp
+    KCCondition.cpp
     Currency.cpp
     Damages.cpp
     DependencyManager.cpp

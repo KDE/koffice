@@ -38,7 +38,7 @@
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 
-#include "Condition.h"
+#include "KCCondition.h"
 #include "Currency.h"
 #include "Global.h"
 #include "StyleManager.h"
@@ -244,7 +244,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &s
         if(styleMaps.count() > 0) {
             theStyle = new KCStyle();
             for (QList<QPair<QString,QString> >::const_iterator it = styleMaps.begin(); it != styleMaps.end(); ++it) {
-                const Conditional c = conditions.loadOdfCondition(it->first, it->second, QString(), parser);
+                const KCConditional c = conditions.loadOdfCondition(it->first, it->second, QString(), parser);
                 if (styleManager->style(c.styleName) == 0) {
                     CustomStyle* const s = new CustomStyle(c.styleName);
                     s->loadOdfDataStyle(stylesReader, c.styleName, conditions, styleManager, parser);

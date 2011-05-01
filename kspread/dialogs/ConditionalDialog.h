@@ -26,7 +26,7 @@
 #include <kdialog.h>
 #include <QWidget>
 
-#include "Condition.h"
+#include "KCCondition.h"
 
 class KComboBox;
 class KLineEdit;
@@ -86,16 +86,16 @@ public slots:
 protected:
     Selection*          m_selection;
     ConditionalWidget * m_dlg;
-    Conditional::Type   m_result;
+    KCConditional::Type   m_result;
 
 private:
-    void init(Conditional const & tmp, int numCondition);
-    Conditional::Type typeOfCondition(KComboBox const * const cb) const;
+    void init(KCConditional const & tmp, int numCondition);
+    KCConditional::Type typeOfCondition(KComboBox const * const cb) const;
 
     bool checkInputData(KLineEdit const * const edit1,
                         KLineEdit const * const edit2);
     bool checkInputData();
-    bool getCondition(Conditional & newCondition, const KComboBox * cb,
+    bool getCondition(KCConditional & newCondition, const KComboBox * cb,
                       const KLineEdit * edit1, const KLineEdit * edit2,
                       const KComboBox * sb);
 

@@ -20,7 +20,7 @@
 */
 
 // Local
-#include "Condition.h"
+#include "KCCondition.h"
 
 #include <float.h>
 
@@ -46,16 +46,16 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Conditional
+// KCConditional
 //
 /////////////////////////////////////////////////////////////////////////////
 
-Conditional::Conditional()
+KCConditional::KCConditional()
     : cond(None)
 {
 }
 
-bool Conditional::operator==(const Conditional &other) const
+bool KCConditional::operator==(const KCConditional &other) const
 {
     if (cond != other.cond) {
         return false;
@@ -77,7 +77,7 @@ bool Conditional::operator==(const Conditional &other) const
 class Conditions::Private : public QSharedData
 {
 public:
-    QLinkedList<Conditional> conditionList;
+    QLinkedList<KCConditional> conditionList;
     KCStyle defaultStyle;
 };
 
@@ -102,7 +102,7 @@ bool Conditions::isEmpty() const
 
 KCStyle Conditions::testConditions( const KCCell& cell ) const
 {
-    Conditional condition;
+    KCConditional condition;
     if (currentCondition(cell, condition)) {
         StyleManager *const styleManager = cell.sheet()->map()->styleManager();
         KCStyle *const style = styleManager->style(condition.styleName);
@@ -112,14 +112,14 @@ KCStyle Conditions::testConditions( const KCCell& cell ) const
     return d->defaultStyle;
 }
 
-bool Conditions::currentCondition(const KCCell& cell, Conditional & condition) const
+bool Conditions::currentCondition(const KCCell& cell, KCConditional & condition) const
 {
     /* for now, the first condition that is true is the one that will be used */
 
     const KCValue value = cell.value();
     ValueCalc *const calc = cell.sheet()->map()->calc();
 
-    QLinkedList<Conditional>::const_iterator it;
+    QLinkedList<KCConditional>::const_iterator it;
     for (it = d->conditionList.begin(); it != d->conditionList.end(); ++it) {
         condition = *it;
 //         kDebug() << "Checking condition resulting in applying" << it->styleName;
@@ -131,32 +131,32 @@ bool Conditions::currentCondition(const KCCell& cell, Conditional & condition) c
         }
 
         switch (condition.cond) {
-        case Conditional::Equal:
+        case KCConditional::Equal:
             if (value.equal(condition.value1)) {
                 return true;
             }
             break;
-        case Conditional::Superior:
+        case KCConditional::Superior:
             if (value.greater(condition.value1)) {
                 return true;
             }
             break;
-        case Conditional::Inferior:
+        case KCConditional::Inferior:
             if (value.less(condition.value1)) {
                 return true;
             }
             break;
-        case Conditional::SuperiorEqual:
+        case KCConditional::SuperiorEqual:
             if (value.compare(condition.value1) >= 0) {
                 return true;
             }
             break;
-        case Conditional::InferiorEqual:
+        case KCConditional::InferiorEqual:
             if (value.compare(condition.value1) <= 0) {
                 return true;
             }
             break;
-        case Conditional::Between: {
+        case KCConditional::Between: {
             const QVector<KCValue> values(QVector<KCValue>() << condition.value1 << condition.value2);
             const KCValue min = calc->min(values);
             const KCValue max = calc->max(values);
@@ -165,7 +165,7 @@ bool Conditions::currentCondition(const KCCell& cell, Conditional & condition) c
             }
             break;
         }
-        case Conditional::Different: {
+        case KCConditional::Different: {
             const QVector<KCValue> values(QVector<KCValue>() << condition.value1 << condition.value2);
             const KCValue min = calc->min(values);
             const KCValue max = calc->max(values);
@@ -174,12 +174,12 @@ bool Conditions::currentCondition(const KCCell& cell, Conditional & condition) c
             }
             break;
         }
-        case Conditional::DifferentTo:
+        case KCConditional::DifferentTo:
             if (!value.equal(condition.value1)) {
                 return true;
             }
             break;
-        case Conditional::IsTrueFormula:
+        case KCConditional::IsTrueFormula:
             // TODO: do some caching
             if (isTrueFormula(cell, condition.value1.asString(), condition.baseCellAddress)) {
                 return true;
@@ -263,12 +263,12 @@ bool Conditions::isTrueFormula(const KCCell &cell, const QString &formula, const
     return calc->conv()->asBoolean(val).asBoolean();
 }
 
-QLinkedList<Conditional> Conditions::conditionList() const
+QLinkedList<KCConditional> Conditions::conditionList() const
 {
     return d->conditionList;
 }
 
-void Conditions::setConditionList(const QLinkedList<Conditional> & list)
+void Conditions::setConditionList(const QLinkedList<KCConditional> & list)
 {
     d->conditionList = list;
 }
@@ -288,10 +288,10 @@ void Conditions::saveOdfConditions(KoGenStyle &currentCellStyle, ValueConverter 
     //todo fix me with kspread old format!!!
     if (d->conditionList.isEmpty())
         return;
-    QLinkedList<Conditional>::const_iterator it;
+    QLinkedList<KCConditional>::const_iterator it;
     int i = 0;
     for (it = d->conditionList.begin(); it != d->conditionList.end(); ++it, ++i) {
-        Conditional condition = *it;
+        KCConditional condition = *it;
         //<style:map style:condition="cell-content()=45" style:apply-style-name="Default" style:base-cell-address="Sheet1.E10"/>
         QMap<QString, QString> map;
         map.insert("style:condition", saveOdfConditionValue(condition, converter));
@@ -302,47 +302,47 @@ void Conditions::saveOdfConditions(KoGenStyle &currentCellStyle, ValueConverter 
     }
 }
 
-QString Conditions::saveOdfConditionValue(const Conditional &condition, ValueConverter* converter) const
+QString Conditions::saveOdfConditionValue(const KCConditional &condition, ValueConverter* converter) const
 {
     //we can also compare text value.
     //todo adapt it.
     QString value;
     switch (condition.cond) {
-    case Conditional::None:
+    case KCConditional::None:
         break;
-    case Conditional::Equal:
+    case KCConditional::Equal:
         value = "cell-content()=" + converter->asString(condition.value1).asString();
         break;
-    case Conditional::Superior:
+    case KCConditional::Superior:
         value = "cell-content()>" + converter->asString(condition.value1).asString();
         break;
-    case Conditional::Inferior:
+    case KCConditional::Inferior:
         value = "cell-content()<" + converter->asString(condition.value1).asString();
         break;
-    case Conditional::SuperiorEqual:
+    case KCConditional::SuperiorEqual:
         value = "cell-content()>=" + converter->asString(condition.value1).asString();
         break;
-    case Conditional::InferiorEqual:
+    case KCConditional::InferiorEqual:
         value = "cell-content()<=" + converter->asString(condition.value1).asString();
         break;
-    case Conditional::Between:
+    case KCConditional::Between:
         value = "cell-content-is-between(";
         value += converter->asString(condition.value1).asString();
         value += ',';
         value += converter->asString(condition.value2).asString();
         value += ')';
         break;
-    case Conditional::DifferentTo:
+    case KCConditional::DifferentTo:
         value = "cell-content()!=" + converter->asString(condition.value1).asString();
         break;
-    case Conditional::Different:
+    case KCConditional::Different:
         value = "cell-content-is-not-between(";
         value += converter->asString(condition.value1).asString();
         value += ',';
         value += converter->asString(condition.value2).asString();
         value += ')';
         break;
-    case Conditional::IsTrueFormula:
+    case KCConditional::IsTrueFormula:
         value = "is-true-formula(";
         value += KSpread::Odf::encodeFormula(condition.value1.asString());
         value += ")";
@@ -354,13 +354,13 @@ QString Conditions::saveOdfConditionValue(const Conditional &condition, ValueCon
 QDomElement Conditions::saveConditions(QDomDocument &doc, ValueConverter *converter) const
 {
     QDomElement conditions = doc.createElement("condition");
-    QLinkedList<Conditional>::const_iterator it;
+    QLinkedList<KCConditional>::const_iterator it;
     QDomElement child;
     int num = 0;
     QString name;
 
     for (it = d->conditionList.begin(); it != d->conditionList.end(); ++it) {
-        Conditional condition = *it;
+        KCConditional condition = *it;
 
         /* the name of the element will be "condition<n>"
             * This is unimportant now but in older versions three conditions were
@@ -399,11 +399,11 @@ QDomElement Conditions::saveConditions(QDomDocument &doc, ValueConverter *conver
     }
 }
 
-Conditional Conditions::loadOdfCondition(const QString &conditionValue, const QString &applyStyleName,
+KCConditional Conditions::loadOdfCondition(const QString &conditionValue, const QString &applyStyleName,
                                          const QString& baseCellAddress, const ValueParser *parser)
 {
     //kDebug(36003) << "\tcondition:" << conditionValue;
-    Conditional newCondition;
+    KCConditional newCondition;
     loadOdfConditionValue(conditionValue, newCondition, parser);
     if (!applyStyleName.isNull()) {
         //kDebug(36003) << "\tstyle:" << applyStyleName;
@@ -437,7 +437,7 @@ void Conditions::loadOdfConditions(const KoXmlElement &element, const ValueParse
     }
 }
 
-void Conditions::loadOdfConditionValue(const QString &styleCondition, Conditional &newCondition, const ValueParser *parser)
+void Conditions::loadOdfConditionValue(const QString &styleCondition, KCConditional &newCondition, const ValueParser *parser)
 {
     QString val(styleCondition);
     if (val.contains("cell-content()")) {
@@ -455,43 +455,43 @@ void Conditions::loadOdfConditionValue(const QString &styleCondition, Conditiona
         val = val.remove(')');
         QStringList listVal = val.split(',', QString::SkipEmptyParts);
         loadOdfValidationValue(listVal, newCondition, parser);
-        newCondition.cond = Conditional::Between;
+        newCondition.cond = KCConditional::Between;
     } else if (val.contains("cell-content-is-not-between(")) {
         val = val.remove("cell-content-is-not-between(");
         val = val.remove(')');
         QStringList listVal = val.split(',', QString::SkipEmptyParts);
         loadOdfValidationValue(listVal, newCondition, parser);
-        newCondition.cond = Conditional::Different;
+        newCondition.cond = KCConditional::Different;
     } else if (val.startsWith("is-true-formula(")) {
         val = val.mid(16);
         if (val.endsWith(")")) val = val.left(val.length() - 1);
-        newCondition.cond = Conditional::IsTrueFormula;
+        newCondition.cond = KCConditional::IsTrueFormula;
         newCondition.value1 = KCValue(KSpread::Odf::decodeFormula(val));
     }
 }
 
-void Conditions::loadOdfCondition(QString &valExpression, Conditional &newCondition, const ValueParser *parser)
+void Conditions::loadOdfCondition(QString &valExpression, KCConditional &newCondition, const ValueParser *parser)
 {
     QString value;
     if (valExpression.indexOf("<=") == 0) {
         value = valExpression.remove(0, 2);
-        newCondition.cond = Conditional::InferiorEqual;
+        newCondition.cond = KCConditional::InferiorEqual;
     } else if (valExpression.indexOf(">=") == 0) {
         value = valExpression.remove(0, 2);
-        newCondition.cond = Conditional::SuperiorEqual;
+        newCondition.cond = KCConditional::SuperiorEqual;
     } else if (valExpression.indexOf("!=") == 0) {
         //add Differentto attribute
         value = valExpression.remove(0, 2);
-        newCondition.cond = Conditional::DifferentTo;
+        newCondition.cond = KCConditional::DifferentTo;
     } else if (valExpression.indexOf('<') == 0) {
         value = valExpression.remove(0, 1);
-        newCondition.cond = Conditional::Inferior;
+        newCondition.cond = KCConditional::Inferior;
     } else if (valExpression.indexOf('>') == 0) {
         value = valExpression.remove(0, 1);
-        newCondition.cond = Conditional::Superior;
+        newCondition.cond = KCConditional::Superior;
     } else if (valExpression.indexOf('=') == 0) {
         value = valExpression.remove(0, 1);
-        newCondition.cond = Conditional::Equal;
+        newCondition.cond = KCConditional::Equal;
     } else
         kDebug(36003) << " I don't know how to parse it :" << valExpression;
     //kDebug(36003) << "\tvalue:" << value;
@@ -503,7 +503,7 @@ void Conditions::loadOdfCondition(QString &valExpression, Conditional &newCondit
     }
 }
 
-void Conditions::loadOdfValidationValue(const QStringList &listVal, Conditional &newCondition, const ValueParser *parser)
+void Conditions::loadOdfValidationValue(const QStringList &listVal, KCConditional &newCondition, const ValueParser *parser)
 {
     kDebug(36003) << " listVal[0] :" << listVal[0] << " listVal[1] :" << listVal[1];
     newCondition.value1 = parser->parse(listVal[0]);
@@ -512,7 +512,7 @@ void Conditions::loadOdfValidationValue(const QStringList &listVal, Conditional 
 
 void Conditions::loadConditions(const KoXmlElement &element, const ValueParser *parser)
 {
-    Conditional newCondition;
+    KCConditional newCondition;
 
     KoXmlElement conditionElement;
     forEachElement(conditionElement, element) {
@@ -520,7 +520,7 @@ void Conditions::loadConditions(const KoXmlElement &element, const ValueParser *
             continue;
 
         bool ok = true;
-        newCondition.cond = (Conditional::Type) conditionElement.attribute("cond").toInt(&ok);
+        newCondition.cond = (KCConditional::Type) conditionElement.attribute("cond").toInt(&ok);
         if(!ok)
             continue;
 
@@ -555,11 +555,11 @@ bool Conditions::operator==(const Conditions& other) const
 {
     if (d->conditionList.count() != other.d->conditionList.count())
         return false;
-    QLinkedList<Conditional>::ConstIterator end(d->conditionList.end());
-    for (QLinkedList<Conditional>::ConstIterator it(d->conditionList.begin()); it != end; ++it) {
+    QLinkedList<KCConditional>::ConstIterator end(d->conditionList.end());
+    for (QLinkedList<KCConditional>::ConstIterator it(d->conditionList.begin()); it != end; ++it) {
         bool found = false;
-        QLinkedList<Conditional>::ConstIterator otherEnd(other.d->conditionList.end());
-        for (QLinkedList<Conditional>::ConstIterator otherIt(other.d->conditionList.begin()); otherIt != otherEnd; ++otherIt) {
+        QLinkedList<KCConditional>::ConstIterator otherEnd(other.d->conditionList.end());
+        for (QLinkedList<KCConditional>::ConstIterator otherIt(other.d->conditionList.begin()); otherIt != otherEnd; ++otherIt) {
             if ((*it) == (*otherIt))
                 found = true;
         }
@@ -572,13 +572,13 @@ bool Conditions::operator==(const Conditions& other) const
 uint qHash(const Conditions &c)
 {
     uint res = 0;
-    foreach (const Conditional& co, c.conditionList()) {
+    foreach (const KCConditional& co, c.conditionList()) {
         res ^= qHash(co);
     }
     return res;
 }
 
-uint qHash(const Conditional& c)
+uint qHash(const KCConditional& c)
 {
     return qHash(c.value1);
 }

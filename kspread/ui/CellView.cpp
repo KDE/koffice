@@ -62,7 +62,7 @@
 // KSpread
 #include "ApplicationSettings.h"
 #include "CellStorage.h"
-#include "Condition.h"
+#include "KCCondition.h"
 #include "Map.h"
 #include "PrintSettings.h"
 #include "RowColumnFormat.h"

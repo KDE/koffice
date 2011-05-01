@@ -35,7 +35,7 @@ class KoStyleStack;
 class KoStore;
 
 class KCCell;
-class Conditional;
+class KCConditional;
 class Doc;
 class KCSheet;
 class KCStyle;
@@ -110,8 +110,8 @@ private:
     QString translatePar(QString & par) const;
     void loadCondition(const KCCell& cell, const KoXmlElement &property);
     void loadOasisCondition(const KCCell& cell, const KoXmlElement &property);
-    void loadOasisConditionValue(const QString &styleCondition, Conditional &newCondition, const ValueParser *parser);
-    void loadOasisCondition(QString &valExpression, Conditional &newCondition, const ValueParser *parser);
+    void loadOasisConditionValue(const QString &styleCondition, KCConditional &newCondition, const ValueParser *parser);
+    void loadOasisCondition(QString &valExpression, KCConditional &newCondition, const ValueParser *parser);
     KoFilter::ConversionStatus loadAndParse(KoXmlDocument& doc, const QString& fileName, KoStore *m_store);
 
     KoFilter::ConversionStatus openFile();

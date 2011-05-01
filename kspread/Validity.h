@@ -46,7 +46,7 @@
 #include "kspread_export.h"
 
 // KSpread
-#include "Condition.h"
+#include "KCCondition.h"
 
 #include "KoXmlReaderForward.h"
 
@@ -132,7 +132,7 @@ public:
 
     Action action() const;
     bool allowEmptyCell() const;
-    Conditional::Type condition() const;
+    KCConditional::Type condition() const;
 
     bool displayMessage() const;
     bool displayValidationInformation() const;
@@ -149,7 +149,7 @@ public:
 
     void setAction(Action action);
     void setAllowEmptyCell(bool allow);
-    void setCondition(Conditional::Type condition);
+    void setCondition(KCConditional::Type condition);
 
     void setDisplayMessage(bool display);
     void setDisplayValidationInformation(bool display);

@@ -1307,46 +1307,46 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                         int value = validation_element.attribute("Operator").toInt();
                                         switch (value) {
                                         case 0:
-                                            kspread_validity.setCondition(Conditional::Between);
+                                            kspread_validity.setCondition(KCConditional::Between);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             if (!expression1.isNull())
                                                 kspread_validity.setMaximumValue(value2);
                                             break;
                                         case 1:
-                                            kspread_validity.setCondition(Conditional::DifferentTo);
+                                            kspread_validity.setCondition(KCConditional::DifferentTo);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             if (!expression1.isNull())
                                                 kspread_validity.setMaximumValue(value2);
                                             break;
                                         case 2:
-                                            kspread_validity.setCondition(Conditional::Equal);
+                                            kspread_validity.setCondition(KCConditional::Equal);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 3:
-                                            kspread_validity.setCondition(Conditional::Different);
+                                            kspread_validity.setCondition(KCConditional::Different);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 4:
-                                            kspread_validity.setCondition(Conditional::Superior);
+                                            kspread_validity.setCondition(KCConditional::Superior);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 5:
-                                            kspread_validity.setCondition(Conditional::Inferior);
+                                            kspread_validity.setCondition(KCConditional::Inferior);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 6:
-                                            kspread_validity.setCondition(Conditional::SuperiorEqual);
+                                            kspread_validity.setCondition(KCConditional::SuperiorEqual);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 7:
-                                            kspread_validity.setCondition(Conditional::InferiorEqual);
+                                            kspread_validity.setCondition(KCConditional::InferiorEqual);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
@@ -1365,46 +1365,46 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                         int value = validation_element.attribute("Operator").toInt();
                                         switch (value) {
                                         case 0:
-                                            kspread_validity.setCondition(Conditional::Between);
+                                            kspread_validity.setCondition(KCConditional::Between);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             if (!expression1.isNull())
                                                 kspread_validity.setMaximumValue(value2);
                                             break;
                                         case 1:
-                                            kspread_validity.setCondition(Conditional::DifferentTo);
+                                            kspread_validity.setCondition(KCConditional::DifferentTo);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             if (!expression1.isNull())
                                                 kspread_validity.setMaximumValue(value2);
                                             break;
                                         case 2:
-                                            kspread_validity.setCondition(Conditional::Equal);
+                                            kspread_validity.setCondition(KCConditional::Equal);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 3:
-                                            kspread_validity.setCondition(Conditional::Different);
+                                            kspread_validity.setCondition(KCConditional::Different);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 4:
-                                            kspread_validity.setCondition(Conditional::Superior);
+                                            kspread_validity.setCondition(KCConditional::Superior);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 5:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::Inferior);
+                                            kspread_validity.setCondition(KCConditional::Inferior);
                                             break;
                                         case 6:
-                                            kspread_validity.setCondition(Conditional::SuperiorEqual);
+                                            kspread_validity.setCondition(KCConditional::SuperiorEqual);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 7:
-                                            kspread_validity.setCondition(Conditional::InferiorEqual);
+                                            kspread_validity.setCondition(KCConditional::InferiorEqual);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
@@ -1425,7 +1425,7 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                         int value = validation_element.attribute("Operator").toInt();
                                         switch (value) {
                                         case 0:
-                                            kspread_validity.setCondition(Conditional::Between);
+                                            kspread_validity.setCondition(KCConditional::Between);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             if (!expression1.isNull())
@@ -1437,37 +1437,37 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                                 kspread_validity.setMinimumValue(value1);
                                             if (!expression1.isNull())
                                                 kspread_validity.setMaximumValue(value2);
-                                            kspread_validity.setCondition(Conditional::DifferentTo);
+                                            kspread_validity.setCondition(KCConditional::DifferentTo);
                                             break;
                                         case 2:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::Equal);
+                                            kspread_validity.setCondition(KCConditional::Equal);
                                             break;
                                         case 3:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::Different);
+                                            kspread_validity.setCondition(KCConditional::Different);
                                             break;
                                         case 4:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::Superior);
+                                            kspread_validity.setCondition(KCConditional::Superior);
                                             break;
                                         case 5:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::Inferior);
+                                            kspread_validity.setCondition(KCConditional::Inferior);
                                             break;
                                         case 6:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::SuperiorEqual);
+                                            kspread_validity.setCondition(KCConditional::SuperiorEqual);
                                             break;
                                         case 7:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::InferiorEqual);
+                                            kspread_validity.setCondition(KCConditional::InferiorEqual);
                                             break;
                                         default:
                                             kDebug() << " Error in validation Operator :" << value;
@@ -1483,7 +1483,7 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                         int value = validation_element.attribute("Operator").toInt();
                                         switch (value) {
                                         case 0:
-                                            kspread_validity.setCondition(Conditional::Between);
+                                            kspread_validity.setCondition(KCConditional::Between);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             if (!expression1.isNull())
@@ -1494,35 +1494,35 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                                 kspread_validity.setMinimumValue(value1);
                                             if (!expression1.isNull())
                                                 kspread_validity.setMaximumValue(value2);
-                                            kspread_validity.setCondition(Conditional::DifferentTo);
+                                            kspread_validity.setCondition(KCConditional::DifferentTo);
                                             break;
                                         case 2:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::Equal);
+                                            kspread_validity.setCondition(KCConditional::Equal);
                                             break;
                                         case 3:
-                                            kspread_validity.setCondition(Conditional::Different);
+                                            kspread_validity.setCondition(KCConditional::Different);
                                             break;
                                         case 4:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::Superior);
+                                            kspread_validity.setCondition(KCConditional::Superior);
                                             break;
                                         case 5:
-                                            kspread_validity.setCondition(Conditional::Inferior);
+                                            kspread_validity.setCondition(KCConditional::Inferior);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 6:
-                                            kspread_validity.setCondition(Conditional::SuperiorEqual);
+                                            kspread_validity.setCondition(KCConditional::SuperiorEqual);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 7:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::InferiorEqual);
+                                            kspread_validity.setCondition(KCConditional::InferiorEqual);
                                             break;
                                         default:
                                             kDebug() << " Error in validation Operator :" << value;
@@ -1538,48 +1538,48 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                         int value = validation_element.attribute("Operator").toInt();
                                         switch (value) {
                                         case 0:
-                                            kspread_validity.setCondition(Conditional::Between);
+                                            kspread_validity.setCondition(KCConditional::Between);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             if (!expression1.isNull())
                                                 kspread_validity.setMaximumValue(value2);
                                             break;
                                         case 1:
-                                            kspread_validity.setCondition(Conditional::DifferentTo);
+                                            kspread_validity.setCondition(KCConditional::DifferentTo);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             if (!expression1.isNull())
                                                 kspread_validity.setMaximumValue(value2);
                                             break;
                                         case 2:
-                                            kspread_validity.setCondition(Conditional::Equal);
+                                            kspread_validity.setCondition(KCConditional::Equal);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 3:
-                                            kspread_validity.setCondition(Conditional::Different);
+                                            kspread_validity.setCondition(KCConditional::Different);
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
                                             break;
                                         case 4:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::Superior);
+                                            kspread_validity.setCondition(KCConditional::Superior);
                                             break;
                                         case 5:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::Inferior);
+                                            kspread_validity.setCondition(KCConditional::Inferior);
                                             break;
                                         case 6:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::SuperiorEqual);
+                                            kspread_validity.setCondition(KCConditional::SuperiorEqual);
                                             break;
                                         case 7:
                                             if (!expression0.isNull())
                                                 kspread_validity.setMinimumValue(value1);
-                                            kspread_validity.setCondition(Conditional::InferiorEqual);
+                                            kspread_validity.setCondition(KCConditional::InferiorEqual);
                                             break;
                                         default:
                                             kDebug() << " Error in validation Operator :" << value;

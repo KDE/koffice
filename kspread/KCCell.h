@@ -40,7 +40,7 @@
 #include <QSharedPointer>
 #include <QTextDocument>
 
-#include "Condition.h"
+#include "KCCondition.h"
 #include "Global.h"
 #include "KCFormat.h"
 

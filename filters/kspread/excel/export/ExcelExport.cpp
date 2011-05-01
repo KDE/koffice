@@ -35,7 +35,7 @@
 #include <Formula.h>
 #include <Map.h>
 #include <kspread/KCSheet.h>
-#include <Region.h>
+#include <KCRegion.h>
 #include <RowColumnFormat.h>
 #include <StyleStorage.h>
 #include <ValueStorage.h>
@@ -54,23 +54,18 @@ static uint qHash(const QFont& f)
     return qHash(f.family()) ^ 37 * f.pointSize();
 }
 
-static uint qHash(const QColor& c)
-{
-    return uint(c.rgba());
-}
-
 using namespace Swinder;
 
 class ExcelExport::Private
 {
 public:
-    const KSpread::Doc* inputDoc;
+    const Doc* inputDoc;
     QString outputFile;
     XlsRecordOutputStream* out;
-    QHash<KSpread::Style, unsigned> styles;
+    QHash<KCStyle, unsigned> styles;
     QList<FontRecord> fontRecords;
 
-    void convertStyle(const KSpread::Style& style, XFRecord& xf, QHash<QPair<QFont, QColor>, unsigned>& fontMap);
+    void convertStyle(const KCStyle& style, XFRecord& xf, QHash<QPair<QFont, QColor>, unsigned>& fontMap);
     unsigned fontIndex(const QFont& font, const QColor& color, QHash<QPair<QFont, QColor>, unsigned>& fontMap);
 };
 
@@ -99,9 +94,9 @@ KoFilter::ConversionStatus ExcelExport::convert(const QByteArray& from, const QB
     if (!document)
         return KoFilter::StupidError;
 
-    d->inputDoc = qobject_cast<const KSpread::Doc*>(document);
+    d->inputDoc = qobject_cast<const Doc*>(document);
     if (!d->inputDoc) {
-        kWarning() << "document isn't a KSpread::Doc but a " << document->metaObject()->className();
+        kWarning() << "document isn't a Doc but a " << document->metaObject()->className();
         return KoFilter::WrongFormat;
     }
 
@@ -273,7 +268,7 @@ void ExcelExport::collectStyles(KCSheet* sheet, QList<XFRecord>& xfRecords, QHas
     QRect area = sheet->cellStorage()->styleStorage()->usedArea();
     for (int row = area.top(); row <= area.bottom(); row++) {
         for (int col = area.left(); col <= area.right(); col++){
-            KSpread::Style s = sheet->cellStorage()->style(col, row);
+            KCStyle s = sheet->cellStorage()->style(col, row);
             unsigned& idx = d->styles[s];
             if (!idx) {
                 XFRecord xfr(0);
@@ -288,9 +283,9 @@ void ExcelExport::collectStyles(KCSheet* sheet, QList<XFRecord>& xfRecords, QHas
 void ExcelExport::buildStringTable(KCSheet* sheet, Swinder::SSTRecord& sst, QHash<QString, unsigned>& stringTable)
 {
     unsigned useCount = 0;
-    const KSpread::ValueStorage* values = sheet->cellStorage()->valueStorage();
+    const ValueStorage* values = sheet->cellStorage()->valueStorage();
     for (int i = 0; i < values->count(); i++) {
-        KSpread::KCValue v = values->data(i);
+        KCValue v = values->data(i);
         if (v.isString()) {
             QString s = v.asString();
             if (!stringTable.contains(s)) {
@@ -346,7 +341,7 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
     {
         ColInfoRecord cir(0);
         for (int i = 1; i <= area.right(); ++i) {
-            const KSpread::ColumnFormat* column = sheet->columnFormat(i);
+            const ColumnFormat* column = sheet->columnFormat(i);
             unsigned w = convertColumnWidth(column->width());
             if (w != cir.width() || column->isHidden() != cir.isHidden() || column->isDefault() != !cir.isNonDefaultWidth()) {
                 if (i > 1) {
@@ -381,11 +376,11 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
         for (int row = firstRow; row < lastRowP1; row++) {
             RowRecord rr(0);
 
-            KSpread::KCCell first = sheet->cellStorage()->firstInRow(row);
-            if (first.isNull()) first = KSpread::KCCell(sheet, 1, row);
-            KSpread::KCCell last = sheet->cellStorage()->lastInRow(row);
+            KCCell first = sheet->cellStorage()->firstInRow(row);
+            if (first.isNull()) first = KCCell(sheet, 1, row);
+            KCCell last = sheet->cellStorage()->lastInRow(row);
             if (last.isNull()) last = first;
-            const KSpread::RowFormat* format = sheet->rowFormat(row);
+            const RowFormat* format = sheet->rowFormat(row);
 
             rr.setRow(row-1);
             rr.setFirstColumn(first.column()-1);
@@ -402,15 +397,15 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
             db.setCellOffset(row - firstRow, o.pos() - lastStart);
             lastStart = o.pos();
 
-            KSpread::KCCell first = sheet->cellStorage()->firstInRow(row);
-            if (first.isNull()) first = KSpread::KCCell(sheet, 1, row);
-            KSpread::KCCell last = sheet->cellStorage()->lastInRow(row);
+            KCCell first = sheet->cellStorage()->firstInRow(row);
+            if (first.isNull()) first = KCCell(sheet, 1, row);
+            KCCell last = sheet->cellStorage()->lastInRow(row);
             if (last.isNull()) last = first;
 
             for (int col = first.column(); col <= last.column(); col++) {
-                KSpread::KCCell cell(sheet, col, row);
-                KSpread::KCValue val = cell.value();
-                KSpread::Style style = cell.style();
+                KCCell cell(sheet, col, row);
+                KCValue val = cell.value();
+                KCStyle style = cell.style();
                 unsigned xfi = d->styles[style];
 
                 if (cell.isFormula()) {
@@ -419,37 +414,37 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
                     fr.setColumn(col-1);
                     fr.setXfIndex(xfi);
                     if (val.isNumber()) {
-                        fr.setResult(KCValue((double)numToDouble(val.asFloat())));
+                        fr.setResult(Value((double)numToDouble(val.asFloat())));
                     } else if (val.isBoolean()) {
-                        fr.setResult(KCValue(val.asBoolean()));
+                        fr.setResult(Value(val.asBoolean()));
                     } else if (val.isError()) {
-                        if (val == KSpread::KCValue::errorCIRCLE()) {
-                            fr.setResult(KCValue::errorREF());
-                        } else if (val == KSpread::KCValue::errorDEPEND()) {
-                            fr.setResult(KCValue::errorREF());
-                        } else if (val == KSpread::KCValue::errorDIV0()) {
-                            fr.setResult(KCValue::errorDIV0());
-                        } else if (val == KSpread::KCValue::errorNA()) {
-                            fr.setResult(KCValue::errorNA());
-                        } else if (val == KSpread::KCValue::errorNAME()) {
-                            fr.setResult(KCValue::errorNAME());
-                        } else if (val == KSpread::KCValue::errorNULL()) {
-                            fr.setResult(KCValue::errorNULL());
-                        } else if (val == KSpread::KCValue::errorNUM()) {
-                            fr.setResult(KCValue::errorNUM());
-                        } else if (val == KSpread::KCValue::errorPARSE()) {
-                            fr.setResult(KCValue::errorNA());
-                        } else if (val == KSpread::KCValue::errorREF()) {
-                            fr.setResult(KCValue::errorREF());
-                        } else if (val == KSpread::KCValue::errorVALUE()) {
-                            fr.setResult(KCValue::errorVALUE());
+                        if (val == KCValue::errorCIRCLE()) {
+                            fr.setResult(Value::errorREF());
+                        } else if (val == KCValue::errorDEPEND()) {
+                            fr.setResult(Value::errorREF());
+                        } else if (val == KCValue::errorDIV0()) {
+                            fr.setResult(Value::errorDIV0());
+                        } else if (val == KCValue::errorNA()) {
+                            fr.setResult(Value::errorNA());
+                        } else if (val == KCValue::errorNAME()) {
+                            fr.setResult(Value::errorNAME());
+                        } else if (val == KCValue::errorNULL()) {
+                            fr.setResult(Value::errorNULL());
+                        } else if (val == KCValue::errorNUM()) {
+                            fr.setResult(Value::errorNUM());
+                        } else if (val == KCValue::errorPARSE()) {
+                            fr.setResult(Value::errorNA());
+                        } else if (val == KCValue::errorREF()) {
+                            fr.setResult(Value::errorREF());
+                        } else if (val == KCValue::errorVALUE()) {
+                            fr.setResult(Value::errorVALUE());
                         }
                     } else if (val.isString()) {
-                        fr.setResult(KCValue(KCValue::String));
+                        fr.setResult(Value(KCValue::String));
                     } else {
-                        fr.setResult(KCValue::empty());
+                        fr.setResult(Value::empty());
                     }
-                    KSpread::Formula f = cell.formula();
+                    Formula f = cell.formula();
                     QList<FormulaToken> tokens = compileFormula(f.tokens(), sheet);
                     foreach (const FormulaToken& t, tokens) {
                         fr.addToken(t);
@@ -480,25 +475,25 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
                         br.setValue(val.asBoolean() ? 1 : 0);
                     } else {
                         br.setError(true);
-                        if (val == KSpread::KCValue::errorCIRCLE()) {
+                        if (val == KCValue::errorCIRCLE()) {
                             br.setValue(0x17);
-                        } else if (val == KSpread::KCValue::errorDEPEND()) {
+                        } else if (val == KCValue::errorDEPEND()) {
                             br.setValue(0x17);
-                        } else if (val == KSpread::KCValue::errorDIV0()) {
+                        } else if (val == KCValue::errorDIV0()) {
                             br.setValue(0x07);
-                        } else if (val == KSpread::KCValue::errorNA()) {
+                        } else if (val == KCValue::errorNA()) {
                             br.setValue(0x2A);
-                        } else if (val == KSpread::KCValue::errorNAME()) {
+                        } else if (val == KCValue::errorNAME()) {
                             br.setValue(0x1D);
-                        } else if (val == KSpread::KCValue::errorNULL()) {
+                        } else if (val == KCValue::errorNULL()) {
                             br.setValue(0x00);
-                        } else if (val == KSpread::KCValue::errorNUM()) {
+                        } else if (val == KCValue::errorNUM()) {
                             br.setValue(0x24);
-                        } else if (val == KSpread::KCValue::errorPARSE()) {
+                        } else if (val == KCValue::errorPARSE()) {
                             br.setValue(0x2A);
-                        } else if (val == KSpread::KCValue::errorREF()) {
+                        } else if (val == KCValue::errorREF()) {
                             br.setValue(0x17);
-                        } else if (val == KSpread::KCValue::errorVALUE()) {
+                        } else if (val == KCValue::errorVALUE()) {
                             br.setValue(0x0F);
                         }
                     }
@@ -535,22 +530,22 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
 /**********************
     TokenStack
  **********************/
-class TokenStack : public QVector<KSpread::Token>
+class TokenStack : public QVector<Token>
 {
 public:
     TokenStack();
     bool isEmpty() const;
     unsigned itemCount() const;
-    void push(const KSpread::Token& token);
-    KSpread::Token pop();
-    const KSpread::Token& top();
-    const KSpread::Token& top(unsigned index);
+    void push(const Token& token);
+    Token pop();
+    const Token& top();
+    const Token& top(unsigned index);
 private:
     void ensureSpace();
     unsigned topIndex;
 };
 
-TokenStack::TokenStack(): QVector<KSpread::Token>()
+TokenStack::TokenStack(): QVector<Token>()
 {
     topIndex = 0;
     ensureSpace();
@@ -566,27 +561,27 @@ unsigned TokenStack::itemCount() const
     return topIndex;
 }
 
-void TokenStack::push(const KSpread::Token& token)
+void TokenStack::push(const Token& token)
 {
     ensureSpace();
     insert(topIndex++, token);
 }
 
-KSpread::Token TokenStack::pop()
+Token TokenStack::pop()
 {
-    return (topIndex > 0) ? KSpread::Token(at(--topIndex)) : KSpread::Token();
+    return (topIndex > 0) ? Token(at(--topIndex)) : Token();
 }
 
-const KSpread::Token& TokenStack::top()
+const Token& TokenStack::top()
 {
     return top(0);
 }
 
-const KSpread::Token& TokenStack::top(unsigned index)
+const Token& TokenStack::top(unsigned index)
 {
     if (topIndex > index)
         return at(topIndex - index - 1);
-    return KSpread::Token::null;
+    return Token::null;
 }
 
 void TokenStack::ensureSpace()
@@ -597,40 +592,40 @@ void TokenStack::ensureSpace()
 
 // helper function: give operator precedence
 // e.g. '+' is 1 while '*' is 3
-static int opPrecedence(KSpread::Token::Op op)
+static int opPrecedence(Token::Op op)
 {
     int prec = -1;
     switch (op) {
-    case KSpread::Token::Percent      : prec = 8; break;
-    case KSpread::Token::Caret        : prec = 7; break;
-    case KSpread::Token::Asterisk     : prec = 5; break;
-    case KSpread::Token::Slash        : prec = 6; break;
-    case KSpread::Token::Plus         : prec = 3; break;
-    case KSpread::Token::Minus        : prec = 3; break;
-    case KSpread::Token::Union        : prec = 2; break;
-    case KSpread::Token::Ampersand    : prec = 2; break;
-    case KSpread::Token::Intersect    : prec = 2; break;
-    case KSpread::Token::Equal        : prec = 1; break;
-    case KSpread::Token::NotEqual     : prec = 1; break;
-    case KSpread::Token::Less         : prec = 1; break;
-    case KSpread::Token::Greater      : prec = 1; break;
-    case KSpread::Token::LessEqual    : prec = 1; break;
-    case KSpread::Token::GreaterEqual : prec = 1; break;
+    case Token::Percent      : prec = 8; break;
+    case Token::Caret        : prec = 7; break;
+    case Token::Asterisk     : prec = 5; break;
+    case Token::Slash        : prec = 6; break;
+    case Token::Plus         : prec = 3; break;
+    case Token::Minus        : prec = 3; break;
+    case Token::Union        : prec = 2; break;
+    case Token::Ampersand    : prec = 2; break;
+    case Token::Intersect    : prec = 2; break;
+    case Token::Equal        : prec = 1; break;
+    case Token::NotEqual     : prec = 1; break;
+    case Token::Less         : prec = 1; break;
+    case Token::Greater      : prec = 1; break;
+    case Token::LessEqual    : prec = 1; break;
+    case Token::GreaterEqual : prec = 1; break;
 #ifdef KSPREAD_INLINE_ARRAYS
         // FIXME Stefan: I don't know whether zero is right for this case. :-(
-    case KSpread::Token::CurlyBra     : prec = 0; break;
-    case KSpread::Token::CurlyKet     : prec = 0; break;
-    case KSpread::Token::Pipe         : prec = 0; break;
+    case Token::CurlyBra     : prec = 0; break;
+    case Token::CurlyKet     : prec = 0; break;
+    case Token::Pipe         : prec = 0; break;
 #endif
-    case KSpread::Token::Semicolon    : prec = 0; break;
-    case KSpread::Token::RightPar     : prec = 0; break;
-    case KSpread::Token::LeftPar      : prec = -1; break;
+    case Token::Semicolon    : prec = 0; break;
+    case Token::RightPar     : prec = 0; break;
+    case Token::LeftPar      : prec = -1; break;
     default: prec = -1; break;
     }
     return prec;
 }
 
-QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, KCSheet* sheet) const
+QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* sheet) const
 {
     QList<FormulaToken> codes;
 
@@ -641,11 +636,11 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
 
     for (int i = 0; i <= tokens.count(); i++) {
         // helper token: InvalidOp is end-of-formula
-        KSpread::Token token = (i < tokens.count()) ? tokens[i] : KSpread::Token(KSpread::Token::Operator);
-        KSpread::Token::Type tokenType = token.type();
+        Token token = (i < tokens.count()) ? tokens[i] : Token(Token::Operator);
+        Token::Type tokenType = token.type();
 
         // unknown token is invalid
-        if (tokenType == KSpread::Token::Unknown) {
+        if (tokenType == Token::Unknown) {
             // TODO
             break;
         }
@@ -653,9 +648,9 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
         // are we entering a function ?
         // if stack already has: id (
         if (syntaxStack.itemCount() >= 2) {
-            KSpread::Token par = syntaxStack.top();
-            KSpread::Token id = syntaxStack.top(1);
-            if (par.asOperator() == KSpread::Token::LeftPar)
+            Token par = syntaxStack.top();
+            Token id = syntaxStack.top(1);
+            if (par.asOperator() == Token::LeftPar)
                 if (id.isIdentifier()) {
                     argStack.push(argCount);
                     argCount = 1;
@@ -666,8 +661,8 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
         // are we entering an inline array ?
         // if stack already has: {
         if (syntaxStack.itemCount() >= 1) {
-            KSpread::Token bra = syntaxStack.top();
-            if (bra.asOperator() == KSpread::Token::CurlyBra) {
+            Token bra = syntaxStack.top();
+            if (bra.asOperator() == Token::CurlyBra) {
                 argStack.push(argCount);
                 argStack.push(1);   // row count
                 argCount = 1;
@@ -677,24 +672,24 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
 
         // for constants, push immediately to stack
         // generate code to load from a constant
-        if ((tokenType == KSpread::Token::Integer) || (tokenType == KSpread::Token::Float) ||
-                (tokenType == KSpread::Token::String) || (tokenType == KSpread::Token::Boolean) ||
-                (tokenType == KSpread::Token::Error)) {
+        if ((tokenType == Token::Integer) || (tokenType == Token::Float) ||
+                (tokenType == Token::String) || (tokenType == Token::Boolean) ||
+                (tokenType == Token::Error)) {
             syntaxStack.push(token);
             switch (tokenType) {
-            case KSpread::Token::Integer:
+            case Token::Integer:
                 codes.append(FormulaToken::createNum(token.asInteger()));
                 break;
-            case KSpread::Token::Float:
+            case Token::Float:
                 codes.append(FormulaToken::createNum(token.asFloat()));
                 break;
-            case KSpread::Token::String:
+            case Token::String:
                 codes.append(FormulaToken::createStr(token.asString()));
                 break;
-            case KSpread::Token::Boolean:
+            case Token::Boolean:
                 codes.append(FormulaToken::createBool(token.asBoolean()));
                 break;
-            case KSpread::Token::Error:
+            case Token::Error:
                 // TODO
                 codes.append(FormulaToken(FormulaToken::MissArg));
                 break;
@@ -706,24 +701,24 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
 
         // for cell, range, or identifier, push immediately to stack
         // generate code to load from reference
-        if ((tokenType == KSpread::Token::KCCell) || (tokenType == KSpread::Token::Range) ||
-                (tokenType == KSpread::Token::Identifier)) {
+        if ((tokenType == Token::KCCell) || (tokenType == Token::Range) ||
+                (tokenType == Token::Identifier)) {
             syntaxStack.push(token);
 
-            if (tokenType == KSpread::Token::KCCell) {
-                const KSpread::Region region(token.text(), d->inputDoc->map(), sheet);
+            if (tokenType == Token::KCCell) {
+                const KCRegion region(token.text(), d->inputDoc->map(), sheet);
                 if (!region.isValid() || !region.isSingular()) {
                     codes.append(FormulaToken::createRefErr());
                 } else {
-                    KSpread::Region::Element* e = *region.constBegin();
+                    KCRegion::Element* e = *region.constBegin();
                     codes.append(FormulaToken::createRef(e->rect().topLeft() - QPoint(1, 1), e->isRowFixed(), e->isColumnFixed()));
                 }
-            } else if (tokenType == KSpread::Token::Range) {
-                const KSpread::Region region(token.text(), d->inputDoc->map(), sheet);
+            } else if (tokenType == Token::Range) {
+                const KCRegion region(token.text(), d->inputDoc->map(), sheet);
                 if (!region.isValid()) {
                     codes.append(FormulaToken::createAreaErr());
                 } else {
-                    KSpread::Region::Element* e = *region.constBegin();
+                    KCRegion::Element* e = *region.constBegin();
                     codes.append(FormulaToken::createArea(e->rect().adjusted(-1, -1, -1, -1), e->isTopFixed(), e->isBottomFixed(), e->isLeftFixed(), e->isRightFixed()));
                 }
             } else {
@@ -733,16 +728,16 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
         }
 
         // special case for percentage
-        if (tokenType == KSpread::Token::Operator)
-            if (token.asOperator() == KSpread::Token::Percent)
+        if (tokenType == Token::Operator)
+            if (token.asOperator() == Token::Percent)
                 if (syntaxStack.itemCount() >= 1)
                     if (!syntaxStack.top().isOperator()) {
                         codes.append(FormulaToken(FormulaToken::Percent));
                     }
 
         // for any other operator, try to apply all parsing rules
-        if (tokenType == KSpread::Token::Operator)
-            if (token.asOperator() != KSpread::Token::Percent) {
+        if (tokenType == Token::Operator)
+            if (token.asOperator() != Token::Percent) {
                 // repeat until no more rule applies
                 for (; ;) {
                     bool ruleFound = false;
@@ -751,17 +746,17 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     // id ( arg1 ; arg2 -> id ( arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 5)
-                            if ((token.asOperator() == KSpread::Token::RightPar) ||
-                                    (token.asOperator() == KSpread::Token::Semicolon)) {
-                                KSpread::Token arg2 = syntaxStack.top();
-                                KSpread::Token sep = syntaxStack.top(1);
-                                KSpread::Token arg1 = syntaxStack.top(2);
-                                KSpread::Token par = syntaxStack.top(3);
-                                KSpread::Token id = syntaxStack.top(4);
+                            if ((token.asOperator() == Token::RightPar) ||
+                                    (token.asOperator() == Token::Semicolon)) {
+                                Token arg2 = syntaxStack.top();
+                                Token sep = syntaxStack.top(1);
+                                Token arg1 = syntaxStack.top(2);
+                                Token par = syntaxStack.top(3);
+                                Token id = syntaxStack.top(4);
                                 if (!arg2.isOperator())
-                                    if (sep.asOperator() == KSpread::Token::Semicolon)
+                                    if (sep.asOperator() == Token::Semicolon)
                                         if (!arg1.isOperator())
-                                            if (par.asOperator() == KSpread::Token::LeftPar)
+                                            if (par.asOperator() == Token::LeftPar)
                                                 if (id.isIdentifier()) {
                                                     ruleFound = true;
                                                     syntaxStack.pop();
@@ -774,15 +769,15 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     // id ( arg ; -> id ( arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3)
-                            if ((token.asOperator() == KSpread::Token::RightPar) ||
-                                    (token.asOperator() == KSpread::Token::Semicolon)) {
-                                KSpread::Token sep = syntaxStack.top();
-                                KSpread::Token arg = syntaxStack.top(1);
-                                KSpread::Token par = syntaxStack.top(2);
-                                KSpread::Token id = syntaxStack.top(3);
-                                if (sep.asOperator() == KSpread::Token::Semicolon)
+                            if ((token.asOperator() == Token::RightPar) ||
+                                    (token.asOperator() == Token::Semicolon)) {
+                                Token sep = syntaxStack.top();
+                                Token arg = syntaxStack.top(1);
+                                Token par = syntaxStack.top(2);
+                                Token id = syntaxStack.top(3);
+                                if (sep.asOperator() == Token::Semicolon)
                                     if (!arg.isOperator())
-                                        if (par.asOperator() == KSpread::Token::LeftPar)
+                                        if (par.asOperator() == Token::LeftPar)
                                             if (id.isIdentifier()) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
@@ -795,13 +790,13 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     //  id ( arg ) -> arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 4) {
-                            KSpread::Token par2 = syntaxStack.top();
-                            KSpread::Token arg = syntaxStack.top(1);
-                            KSpread::Token par1 = syntaxStack.top(2);
-                            KSpread::Token id = syntaxStack.top(3);
-                            if (par2.asOperator() == KSpread::Token::RightPar)
+                            Token par2 = syntaxStack.top();
+                            Token arg = syntaxStack.top(1);
+                            Token par1 = syntaxStack.top(2);
+                            Token id = syntaxStack.top(3);
+                            if (par2.asOperator() == Token::RightPar)
                                 if (!arg.isOperator())
-                                    if (par1.asOperator() == KSpread::Token::LeftPar)
+                                    if (par1.asOperator() == Token::LeftPar)
                                         if (id.isIdentifier()) {
                                             ruleFound = true;
                                             syntaxStack.pop();
@@ -819,17 +814,17 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     // e.g. "2*PI()"
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            KSpread::Token par2 = syntaxStack.top();
-                            KSpread::Token par1 = syntaxStack.top(1);
-                            KSpread::Token id = syntaxStack.top(2);
-                            if (par2.asOperator() == KSpread::Token::RightPar)
-                                if (par1.asOperator() == KSpread::Token::LeftPar)
+                            Token par2 = syntaxStack.top();
+                            Token par1 = syntaxStack.top(1);
+                            Token id = syntaxStack.top(2);
+                            if (par2.asOperator() == Token::RightPar)
+                                if (par1.asOperator() == Token::LeftPar)
                                     if (id.isIdentifier()) {
                                         ruleFound = true;
                                         syntaxStack.pop();
                                         syntaxStack.pop();
                                         syntaxStack.pop();
-                                        syntaxStack.push(KSpread::Token(KSpread::Token::Integer));
+                                        syntaxStack.push(Token(Token::Integer));
                                         codes.append(FormulaToken::createFunc(id.text(), 0));
                                         Q_ASSERT(!argStack.empty());
                                         argCount = argStack.empty() ? 0 : argStack.pop();
@@ -841,17 +836,17 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     // { arg1 ; arg2 -> { arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 4)
-                            if ((token.asOperator() == KSpread::Token::Semicolon) ||
-                                    (token.asOperator() == KSpread::Token::CurlyKet) ||
-                                    (token.asOperator() == KSpread::Token::Pipe)) {
-                                KSpread::Token arg2 = syntaxStack.top();
-                                KSpread::Token sep = syntaxStack.top(1);
-                                KSpread::Token arg1 = syntaxStack.top(2);
-                                KSpread::Token bra = syntaxStack.top(3);
+                            if ((token.asOperator() == Token::Semicolon) ||
+                                    (token.asOperator() == Token::CurlyKet) ||
+                                    (token.asOperator() == Token::Pipe)) {
+                                Token arg2 = syntaxStack.top();
+                                Token sep = syntaxStack.top(1);
+                                Token arg1 = syntaxStack.top(2);
+                                Token bra = syntaxStack.top(3);
                                 if (!arg2.isOperator())
-                                    if (sep.asOperator() == KSpread::Token::Semicolon)
+                                    if (sep.asOperator() == Token::Semicolon)
                                         if (!arg1.isOperator())
-                                            if (bra.asOperator() == KSpread::Token::CurlyBra) {
+                                            if (bra.asOperator() == Token::CurlyBra) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
@@ -863,17 +858,17 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     //  { arg1 | arg2 -> { arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 4)
-                            if ((token.asOperator() == KSpread::Token::Semicolon) ||
-                                    (token.asOperator() == KSpread::Token::CurlyKet) ||
-                                    (token.asOperator() == KSpread::Token::Pipe)) {
-                                KSpread::Token arg2 = syntaxStack.top();
-                                KSpread::Token sep = syntaxStack.top(1);
-                                KSpread::Token arg1 = syntaxStack.top(2);
-                                KSpread::Token bra = syntaxStack.top(3);
+                            if ((token.asOperator() == Token::Semicolon) ||
+                                    (token.asOperator() == Token::CurlyKet) ||
+                                    (token.asOperator() == Token::Pipe)) {
+                                Token arg2 = syntaxStack.top();
+                                Token sep = syntaxStack.top(1);
+                                Token arg1 = syntaxStack.top(2);
+                                Token bra = syntaxStack.top(3);
                                 if (!arg2.isOperator())
-                                    if (sep.asOperator() == KSpread::Token::Pipe)
+                                    if (sep.asOperator() == Token::Pipe)
                                         if (!arg1.isOperator())
-                                            if (bra.asOperator() == KSpread::Token::CurlyBra) {
+                                            if (bra.asOperator() == Token::CurlyBra) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
@@ -887,12 +882,12 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     //  { arg } -> arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            KSpread::Token ket = syntaxStack.top();
-                            KSpread::Token arg = syntaxStack.top(1);
-                            KSpread::Token bra = syntaxStack.top(2);
-                            if (ket.asOperator() == KSpread::Token::CurlyKet)
+                            Token ket = syntaxStack.top();
+                            Token arg = syntaxStack.top(1);
+                            Token bra = syntaxStack.top(2);
+                            if (ket.asOperator() == Token::CurlyKet)
                                 if (!arg.isOperator())
-                                    if (bra.asOperator() == KSpread::Token::CurlyBra) {
+                                    if (bra.asOperator() == Token::CurlyBra) {
                                         ruleFound = true;
                                         syntaxStack.pop();
                                         syntaxStack.pop();
@@ -912,14 +907,14 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     // rule for parenthesis:  ( Y ) -> Y
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            KSpread::Token right = syntaxStack.top();
-                            KSpread::Token y = syntaxStack.top(1);
-                            KSpread::Token left = syntaxStack.top(2);
+                            Token right = syntaxStack.top();
+                            Token y = syntaxStack.top(1);
+                            Token left = syntaxStack.top(2);
                             if (right.isOperator())
                                 if (!y.isOperator())
                                     if (left.isOperator())
-                                        if (right.asOperator() == KSpread::Token::RightPar)
-                                            if (left.asOperator() == KSpread::Token::LeftPar) {
+                                        if (right.asOperator() == Token::RightPar)
+                                            if (left.asOperator() == Token::LeftPar) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
@@ -935,13 +930,13 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     // e.g. "A * B" becomes 'A' if token is operator '+'
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            KSpread::Token b = syntaxStack.top();
-                            KSpread::Token op = syntaxStack.top(1);
-                            KSpread::Token a = syntaxStack.top(2);
+                            Token b = syntaxStack.top();
+                            Token op = syntaxStack.top(1);
+                            Token a = syntaxStack.top(2);
                             if (!a.isOperator())
                                 if (!b.isOperator())
                                     if (op.isOperator())
-                                        if (token.asOperator() != KSpread::Token::LeftPar)
+                                        if (token.asOperator() != Token::LeftPar)
                                             if (opPrecedence(op.asOperator()) >= opPrecedence(token.asOperator())) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
@@ -950,35 +945,35 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                                                 syntaxStack.push(b);
                                                 switch (op.asOperator()) {
                                                     // simple binary operations
-                                                case KSpread::Token::Plus:
+                                                case Token::Plus:
                                                     codes.append(FormulaToken(FormulaToken::Add)); break;
-                                                case KSpread::Token::Minus:
+                                                case Token::Minus:
                                                     codes.append(FormulaToken(FormulaToken::Sub)); break;
-                                                case KSpread::Token::Asterisk:
+                                                case Token::Asterisk:
                                                     codes.append(FormulaToken(FormulaToken::Mul)); break;
-                                                case KSpread::Token::Slash:
+                                                case Token::Slash:
                                                     codes.append(FormulaToken(FormulaToken::Div)); break;
-                                                case KSpread::Token::Caret:
+                                                case Token::Caret:
                                                     codes.append(FormulaToken(FormulaToken::Power)); break;
-                                                case KSpread::Token::Ampersand:
+                                                case Token::Ampersand:
                                                     codes.append(FormulaToken(FormulaToken::Concat)); break;
-                                                case KSpread::Token::Intersect:
+                                                case Token::Intersect:
                                                     codes.append(FormulaToken(FormulaToken::Intersect)); break;
-                                                case KSpread::Token::Union:
+                                                case Token::Union:
                                                     codes.append(FormulaToken(FormulaToken::Union)); break;
 
                                                     // simple value comparisons
-                                                case KSpread::Token::Equal:
+                                                case Token::Equal:
                                                     codes.append(FormulaToken(FormulaToken::EQ)); break;
-                                                case KSpread::Token::Less:
+                                                case Token::Less:
                                                     codes.append(FormulaToken(FormulaToken::LT)); break;
-                                                case KSpread::Token::Greater:
+                                                case Token::Greater:
                                                     codes.append(FormulaToken(FormulaToken::GT)); break;
-                                                case KSpread::Token::NotEqual:
+                                                case Token::NotEqual:
                                                     codes.append(FormulaToken(FormulaToken::NE)); break;
-                                                case KSpread::Token::LessEqual:
+                                                case Token::LessEqual:
                                                     codes.append(FormulaToken(FormulaToken::LE)); break;
-                                                case KSpread::Token::GreaterEqual:
+                                                case Token::GreaterEqual:
                                                     codes.append(FormulaToken(FormulaToken::GE)); break;
                                                 default: break;
                                                 };
@@ -990,21 +985,21 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     // action: push (op2) to result
                     // e.g.  "* - 2" becomes '*'
                     if (!ruleFound)
-                        if (token.asOperator() != KSpread::Token::LeftPar)
+                        if (token.asOperator() != Token::LeftPar)
                             if (syntaxStack.itemCount() >= 3) {
-                                KSpread::Token x = syntaxStack.top();
-                                KSpread::Token op2 = syntaxStack.top(1);
-                                KSpread::Token op1 = syntaxStack.top(2);
+                                Token x = syntaxStack.top();
+                                Token op2 = syntaxStack.top(1);
+                                Token op1 = syntaxStack.top(2);
                                 if (!x.isOperator())
                                     if (op1.isOperator())
                                         if (op2.isOperator())
-                                            if ((op2.asOperator() == KSpread::Token::Plus) ||
-                                                    (op2.asOperator() == KSpread::Token::Minus)) {
+                                            if ((op2.asOperator() == Token::Plus) ||
+                                                    (op2.asOperator() == Token::Minus)) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
                                                 syntaxStack.push(x);
-                                                if (op2.asOperator() == KSpread::Token::Minus)
+                                                if (op2.asOperator() == Token::Minus)
                                                     codes.append(FormulaToken(FormulaToken::UMinus));
                                                 else
                                                     codes.append(FormulaToken(FormulaToken::UPlus));
@@ -1015,19 +1010,19 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                     // conditions: op is unary, op is first in syntax stack, token is not '('
                     // action: push (op) to result
                     if (!ruleFound)
-                        if (token.asOperator() != KSpread::Token::LeftPar)
+                        if (token.asOperator() != Token::LeftPar)
                             if (syntaxStack.itemCount() == 2) {
-                                KSpread::Token x = syntaxStack.top();
-                                KSpread::Token op = syntaxStack.top(1);
+                                Token x = syntaxStack.top();
+                                Token op = syntaxStack.top(1);
                                 if (!x.isOperator())
                                     if (op.isOperator())
-                                        if ((op.asOperator() == KSpread::Token::Plus) ||
-                                                (op.asOperator() == KSpread::Token::Minus)) {
+                                        if ((op.asOperator() == Token::Plus) ||
+                                                (op.asOperator() == Token::Minus)) {
                                             ruleFound = true;
                                             syntaxStack.pop();
                                             syntaxStack.pop();
                                             syntaxStack.push(x);
-                                            if (op.asOperator() == KSpread::Token::Minus)
+                                            if (op.asOperator() == Token::Minus)
                                                 codes.append(FormulaToken(FormulaToken::UMinus));
                                             else
                                                 codes.append(FormulaToken(FormulaToken::UPlus));
@@ -1038,7 +1033,7 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                 }
 
                 // can't apply rules anymore, push the token
-                if (token.asOperator() != KSpread::Token::Percent)
+                if (token.asOperator() != Token::Percent)
                     syntaxStack.push(token);
             }
     }
@@ -1047,7 +1042,7 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
     valid = false;
     if (syntaxStack.itemCount() == 2)
         if (syntaxStack.top().isOperator())
-            if (syntaxStack.top().asOperator() == KSpread::Token::InvalidOp)
+            if (syntaxStack.top().asOperator() == Token::InvalidOp)
                 if (!syntaxStack.top(1).isOperator())
                     valid = true;
 
@@ -1060,7 +1055,7 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
 }
 
 
-void ExcelExport::Private::convertStyle(const KSpread::Style& style, XFRecord& xf, QHash<QPair<QFont, QColor>, unsigned>& fontMap)
+void ExcelExport::Private::convertStyle(const KCStyle &style, XFRecord &xf, QHash<QPair<QFont, QColor>, unsigned> &fontMap)
 {
     xf.setIsStyleXF(false);
     xf.setParentStyle(0);
@@ -1068,29 +1063,29 @@ void ExcelExport::Private::convertStyle(const KSpread::Style& style, XFRecord& x
     xf.setFontIndex(fontIdx < 4 ? fontIdx : fontIdx + 1);
     // TODO: number format
     switch (style.halign()) {
-    case KSpread::Style::Left:
+    case KCStyle::Left:
         xf.setHorizontalAlignment(XFRecord::Left); break;
-    case KSpread::Style::Center:
+    case KCStyle::Center:
         xf.setHorizontalAlignment(XFRecord::Centered); break;
-    case KSpread::Style::Right:
+    case KCStyle::Right:
         xf.setHorizontalAlignment(XFRecord::Right); break;
-    case KSpread::Style::Justified:
+    case KCStyle::Justified:
         xf.setHorizontalAlignment(XFRecord::Justified); break;
-    case KSpread::Style::HAlignUndefined:
+    case KCStyle::HAlignUndefined:
     default:
         xf.setHorizontalAlignment(XFRecord::General); break;
     }
     xf.setTextWrap(style.wrapText());
     switch (style.valign()) {
-    case KSpread::Style::Top:
+    case KCStyle::Top:
         xf.setVerticalAlignment(XFRecord::Top); break;
-    case KSpread::Style::Middle:
+    case KCStyle::Middle:
         xf.setVerticalAlignment(XFRecord::VCentered); break;
-    case KSpread::Style::Bottom:
+    case KCStyle::Bottom:
         xf.setVerticalAlignment(XFRecord::Bottom); break;
-    case KSpread::Style::VDistributed:
+    case KCStyle::VDistributed:
         xf.setVerticalAlignment(XFRecord::VDistributed); break;
-    case KSpread::Style::VJustified:
+    case KCStyle::VJustified:
         xf.setVerticalAlignment(XFRecord::VJustified); break;
     default:
         xf.setVerticalAlignment(XFRecord::Bottom); break;

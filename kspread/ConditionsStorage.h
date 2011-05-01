@@ -20,7 +20,7 @@
 #ifndef KSPREAD_CONDITIONS_STORAGE
 #define KSPREAD_CONDITIONS_STORAGE
 
-#include "Condition.h"
+#include "KCCondition.h"
 #include "RectStorage.h"
 
 /**

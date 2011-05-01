@@ -23,7 +23,7 @@
 #include "Binding.h"
 #include "KCCell.h"
 #include "CellStorage.h"
-#include "Condition.h"
+#include "KCCondition.h"
 #include "database/Database.h"
 #include "Formula.h"
 #include "Map.h"

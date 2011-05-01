@@ -46,7 +46,7 @@ public:
     QString messageInfo;
     KCValue minValue;
     KCValue maxValue;
-    Conditional::Type cond;
+    KCConditional::Type cond;
     Action action;
     Restriction restriction;
     bool displayMessage;
@@ -58,7 +58,7 @@ public:
 Validity::Validity()
         : d(new Private)
 {
-    d->cond = Conditional::None;
+    d->cond = KCConditional::None;
     d->action = Stop;
     d->restriction = None;
     d->displayMessage = true;
@@ -87,7 +87,7 @@ bool Validity::loadXML(KCCell* const cell, const KoXmlElement& validityElement)
     KoXmlElement param = validityElement.namedItem("param").toElement();
     if (!param.isNull()) {
         if (param.hasAttribute("cond")) {
-            d->cond = (Conditional::Type) param.attribute("cond").toInt(&ok);
+            d->cond = (KCConditional::Type) param.attribute("cond").toInt(&ok);
             if (!ok)
                 return false;
         }
@@ -200,7 +200,7 @@ QDomElement Validity::saveXML(QDomDocument& doc, const ValueConverter *converter
         timeMinElement.appendChild(doc.createTextNode(tmp));
         validityElement.appendChild(timeMinElement);
 
-        if (d->cond == Conditional::Between || d->cond == Conditional::Different) {
+        if (d->cond == KCConditional::Between || d->cond == KCConditional::Different) {
             QDomElement timeMaxElement = doc.createElement("timemax");
             tmp = converter->asString(d->maxValue).asString();
             timeMaxElement.appendChild(doc.createTextNode(tmp));
@@ -216,7 +216,7 @@ QDomElement Validity::saveXML(QDomDocument& doc, const ValueConverter *converter
         dateMinElement.appendChild(doc.createTextNode(tmp));
         validityElement.appendChild(dateMinElement);
 
-        if (d->cond == Conditional::Between || d->cond == Conditional::Different) {
+        if (d->cond == KCConditional::Between || d->cond == KCConditional::Different) {
             QDomElement dateMaxElement = doc.createElement("datemax");
             const QDate maxDate = d->maxValue.asDate(converter->settings());
             QString tmp("%1/%2/%3");
@@ -263,7 +263,7 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
         //cell-content-text-length-is-between(KCValue, KCValue) | cell-content-text-length-is-not-between(KCValue, KCValue) | cell-content-is-in-list( StringList )
         else if (valExpression.contains("cell-content-text-length-is-between")) {
             setRestriction(Validity::TextLength);
-            setCondition(Conditional::Between);
+            setCondition(KCConditional::Between);
             valExpression = valExpression.remove("oooc:cell-content-text-length-is-between(");
             kDebug(36003) << " valExpression :" << valExpression;
             valExpression = valExpression.remove(')');
@@ -271,7 +271,7 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
             loadOdfValidationValue(listVal, cell->sheet()->map()->parser());
         } else if (valExpression.contains("cell-content-text-length-is-not-between")) {
             setRestriction(Validity::TextLength);
-            setCondition(Conditional::Different);
+            setCondition(KCConditional::Different);
             valExpression = valExpression.remove("oooc:cell-content-text-length-is-not-between(");
             kDebug(36003) << " valExpression :" << valExpression;
             valExpression = valExpression.remove(')');
@@ -314,14 +314,14 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
                 valExpression = valExpression.remove(')');
                 QStringList listVal = valExpression.split(',', QString::SkipEmptyParts);
                 loadOdfValidationValue(listVal, cell->sheet()->map()->parser());
-                setCondition(Conditional::Between);
+                setCondition(KCConditional::Between);
             }
             if (valExpression.contains("cell-content-is-not-between(")) {
                 valExpression = valExpression.remove("cell-content-is-not-between(");
                 valExpression = valExpression.remove(')');
                 QStringList listVal = valExpression.split(',', QString::SkipEmptyParts);
                 loadOdfValidationValue(listVal, cell->sheet()->map()->parser());
-                setCondition(Conditional::Different);
+                setCondition(KCConditional::Different);
             }
         }
     }
@@ -421,23 +421,23 @@ void Validity::loadOdfValidationCondition(QString &valExpression, const ValuePar
     QString value;
     if (valExpression.indexOf("<=") == 0) {
         value = valExpression.remove(0, 2);
-        setCondition(Conditional::InferiorEqual);
+        setCondition(KCConditional::InferiorEqual);
     } else if (valExpression.indexOf(">=") == 0) {
         value = valExpression.remove(0, 2);
-        setCondition(Conditional::SuperiorEqual);
+        setCondition(KCConditional::SuperiorEqual);
     } else if (valExpression.indexOf("!=") == 0) {
         //add Differentto attribute
         value = valExpression.remove(0, 2);
-        setCondition(Conditional::DifferentTo);
+        setCondition(KCConditional::DifferentTo);
     } else if (valExpression.indexOf('<') == 0) {
         value = valExpression.remove(0, 1);
-        setCondition(Conditional::Inferior);
+        setCondition(KCConditional::Inferior);
     } else if (valExpression.indexOf('>') == 0) {
         value = valExpression.remove(0, 1);
-        setCondition(Conditional::Superior);
+        setCondition(KCConditional::Superior);
     } else if (valExpression.indexOf('=') == 0) {
         value = valExpression.remove(0, 1);
-        setCondition(Conditional::Equal);
+        setCondition(KCConditional::Equal);
     } else
         kDebug(36003) << " I don't know how to parse it :" << valExpression;
     if (restriction() == Validity::Date) {
@@ -470,7 +470,7 @@ bool Validity::allowEmptyCell() const
     return d->allowEmptyCell;
 }
 
-Conditional::Type Validity::condition() const
+KCConditional::Type Validity::condition() const
 {
     return d->cond;
 }
@@ -535,7 +535,7 @@ void Validity::setAllowEmptyCell(bool allow)
     d->allowEmptyCell = allow;
 }
 
-void Validity::setCondition(Conditional::Type condition)
+void Validity::setCondition(KCConditional::Type condition)
 {
     d->cond = condition;
 }
@@ -605,29 +605,29 @@ bool Validity::testValidity(const KCCell* cell) const
             || (d->restriction == Time && cell->isTime())
             || (d->restriction == Date && cell->isDate())) {
             switch (d->cond) {
-            case Conditional::Equal:
+            case KCConditional::Equal:
                 valid = cell->value().equal(d->minValue);
                 break;
-            case Conditional::DifferentTo:
+            case KCConditional::DifferentTo:
                 valid = !cell->value().equal(d->minValue);
                 break;
-            case Conditional::Superior:
+            case KCConditional::Superior:
                 valid = cell->value().greater(d->minValue);
                 break;
-            case Conditional::Inferior:
+            case KCConditional::Inferior:
                 valid = cell->value().less(d->minValue);
                 break;
-            case Conditional::SuperiorEqual:
+            case KCConditional::SuperiorEqual:
                 valid = (cell->value().compare(d->minValue)) >= 0;
                 break;
-            case Conditional::InferiorEqual:
+            case KCConditional::InferiorEqual:
                 valid = (cell->value().compare(d->minValue)) <= 0;
                 break;
-            case Conditional::Between:
+            case KCConditional::Between:
                 valid = (cell->value().compare(d->minValue) >= 0 &&
                          cell->value().compare(d->maxValue) <= 0);
                 break;
-            case Conditional::Different:
+            case KCConditional::Different:
                 valid = (cell->value().compare(d->minValue) < 0 ||
                          cell->value().compare(d->maxValue) > 0);
                 break;
@@ -646,35 +646,35 @@ bool Validity::testValidity(const KCCell* cell) const
                 const int min = d->minValue.asInteger();
                 const int max = d->maxValue.asInteger();
                 switch (d->cond) {
-                case Conditional::Equal:
+                case KCConditional::Equal:
                     if (len == min)
                         valid = true;
                     break;
-                case Conditional::DifferentTo:
+                case KCConditional::DifferentTo:
                     if (len != min)
                         valid = true;
                     break;
-                case Conditional::Superior:
+                case KCConditional::Superior:
                     if (len > min)
                         valid = true;
                     break;
-                case Conditional::Inferior:
+                case KCConditional::Inferior:
                     if (len < min)
                         valid = true;
                     break;
-                case Conditional::SuperiorEqual:
+                case KCConditional::SuperiorEqual:
                     if (len >= min)
                         valid = true;
                     break;
-                case Conditional::InferiorEqual:
+                case KCConditional::InferiorEqual:
                     if (len <= min)
                         valid = true;
                     break;
-                case Conditional::Between:
+                case KCConditional::Between:
                     if (len >= min && len <= max)
                         valid = true;
                     break;
-                case Conditional::Different:
+                case KCConditional::Different:
                     if (len < min || len > max)
                         valid = true;
                     break;

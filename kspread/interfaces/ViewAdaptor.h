@@ -72,7 +72,7 @@ public Q_SLOTS: // METHODS
     virtual void find();
     /** Display the replace dialog to replace something in the document. */
     virtual void replace();
-    /** Display the Conditional dialog that allows to set cell style based
+    /** Display the KCConditional dialog that allows to set cell style based
     on certain conditions. */
     virtual void conditional();
     /** Display the Validity dialog that enables to set tests to confirm cell

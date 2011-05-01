@@ -48,7 +48,7 @@
 // commands
 #include "commands/ValidityCommand.h"
 
-Q_DECLARE_METATYPE(Conditional::Type)
+Q_DECLARE_METATYPE(KCConditional::Type)
 Q_DECLARE_METATYPE(Validity::Action)
 Q_DECLARE_METATYPE(Validity::Restriction)
 
@@ -96,14 +96,14 @@ ValidityDialog::ValidityDialog(QWidget* parent, Selection* selection)
 
     choose = new KComboBox(page1);
     tmpGridLayout->addWidget(choose, 2, 1);
-    choose->addItem(i18n("equal to"), QVariant::fromValue(Conditional::Equal));
-    choose->addItem(i18n("greater than"), QVariant::fromValue(Conditional::Superior));
-    choose->addItem(i18n("less than"), QVariant::fromValue(Conditional::Inferior));
-    choose->addItem(i18n("equal to or greater than"), QVariant::fromValue(Conditional::SuperiorEqual));
-    choose->addItem(i18n("equal to or less than"), QVariant::fromValue(Conditional::InferiorEqual));
-    choose->addItem(i18n("between"), QVariant::fromValue(Conditional::Between));
-    choose->addItem(i18n("different from"), QVariant::fromValue(Conditional::Different));
-    choose->addItem(i18n("different to"), QVariant::fromValue(Conditional::DifferentTo));
+    choose->addItem(i18n("equal to"), QVariant::fromValue(KCConditional::Equal));
+    choose->addItem(i18n("greater than"), QVariant::fromValue(KCConditional::Superior));
+    choose->addItem(i18n("less than"), QVariant::fromValue(KCConditional::Inferior));
+    choose->addItem(i18n("equal to or greater than"), QVariant::fromValue(KCConditional::SuperiorEqual));
+    choose->addItem(i18n("equal to or less than"), QVariant::fromValue(KCConditional::InferiorEqual));
+    choose->addItem(i18n("between"), QVariant::fromValue(KCConditional::Between));
+    choose->addItem(i18n("different from"), QVariant::fromValue(KCConditional::Different));
+    choose->addItem(i18n("different to"), QVariant::fromValue(KCConditional::DifferentTo));
     choose->setCurrentIndex(0);
 
     edit1 = new QLabel(page1);
@@ -543,7 +543,7 @@ void ValidityDialog::OkPressed()
     if (chooseType->currentIndex() == 0) {//no validity
         validity.setRestriction(Validity::None);
         validity.setAction(Validity::Stop);
-        validity.setCondition(Conditional::Equal);
+        validity.setCondition(KCConditional::Equal);
         validity.setMessage(message->toPlainText());
         validity.setTitle(title->text());
         validity.setMinimumValue(KCValue());
@@ -551,7 +551,7 @@ void ValidityDialog::OkPressed()
     } else {
         validity.setRestriction(chooseType->itemData(chooseType->currentIndex()).value<Validity::Restriction>());
         validity.setAction(chooseAction->itemData(chooseAction->currentIndex()).value<Validity::Action>());
-        validity.setCondition(choose->itemData(choose->currentIndex()).value<Conditional::Type>());
+        validity.setCondition(choose->itemData(choose->currentIndex()).value<KCConditional::Type>());
         validity.setMessage(message->toPlainText());
         validity.setTitle(title->text());
         validity.setMinimumValue(KCValue());

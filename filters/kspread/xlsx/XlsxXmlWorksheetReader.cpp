@@ -252,7 +252,7 @@ void XlsxXmlWorksheetReader::saveAnnotation(int col, int row)
  - cellWatches (KCCell Watch Items) §18.3.1.9
  - colBreaks (Vertical Page Breaks) §18.3.1.14
  - cols (Column Information) §18.3.1.17
- - conditionalFormatting (Conditional Formatting) §18.3.1.18
+ - conditionalFormatting (KCConditional Formatting) §18.3.1.18
  - controls (Embedded Controls) §18.3.1.21
  - customProperties (Custom Properties) §18.3.1.23
  - customSheetViews (Custom Sheet Views) §18.3.1.27

@@ -578,13 +578,13 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     addAction("clearComment", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(clearComment()));
 
-    action = new KAction(i18n("Conditional Styles..."), this);
+    action = new KAction(i18n("KCConditional Styles..."), this);
     action->setToolTip(i18n("Set cell style based on certain conditions"));
     addAction("conditional", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(conditional()));
 
-    action = new KAction(i18n("Conditional Styles"), this);
-    action->setIconText(i18n("Remove Conditional Styles"));
+    action = new KAction(i18n("KCConditional Styles"), this);
+    action->setIconText(i18n("Remove KCConditional Styles"));
     action->setToolTip(i18n("Remove the conditional cell styles"));
     addAction("clearConditional", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(clearConditionalStyles()));
@@ -2413,7 +2413,7 @@ void CellToolBase::clearConditionalStyles()
 
     CondtionCommand* command = new CondtionCommand();
     command->setSheet(selection()->activeSheet());
-    command->setConditionList(QLinkedList<Conditional>());
+    command->setConditionList(QLinkedList<KCConditional>());
     command->add(*selection());
     command->execute(canvas());
 }

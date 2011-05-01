@@ -23,7 +23,7 @@
 #include <QLinkedList>
 
 #include "AbstractRegionCommand.h"
-#include "Condition.h"
+#include "KCCondition.h"
 
 
 /**
@@ -35,7 +35,7 @@ class CondtionCommand : public AbstractRegionCommand
 {
 public:
     CondtionCommand();
-    void setConditionList(const QLinkedList<Conditional>& list);
+    void setConditionList(const QLinkedList<KCConditional>& list);
 
 protected:
     virtual bool process(Element* element);

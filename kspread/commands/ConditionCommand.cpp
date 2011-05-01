@@ -52,11 +52,11 @@ bool CondtionCommand::mainProcessing()
     return AbstractRegionCommand::mainProcessing();
 }
 
-void CondtionCommand::setConditionList(const QLinkedList<Conditional>& list)
+void CondtionCommand::setConditionList(const QLinkedList<KCConditional>& list)
 {
     m_conditions.setConditionList(list);
     if (m_conditions.isEmpty())
-        setText(i18n("Remove Conditional Formatting"));
+        setText(i18n("Remove KCConditional Formatting"));
     else
-        setText(i18n("Add Conditional Formatting"));
+        setText(i18n("Add KCConditional Formatting"));
 }
