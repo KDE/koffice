@@ -22,7 +22,7 @@
 
 #include "KCMap.h"
 #include "KCSheet.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 
 #include <klocale.h>
@@ -168,10 +168,10 @@ void SortManipulator::sort(Element *element)
 
 bool SortManipulator::shouldReorder(Element *element, int first, int second)
 {
-    // we use ValueCalc::natural* to compare
+    // we use KCValueCalc::natural* to compare
     // indexes are real indexes, we don't use the sorted array here
 
-    ValueCalc *calc = m_sheet->map()->calc();
+    KCValueCalc *calc = m_sheet->map()->calc();
     ValueConverter *conv = m_sheet->map()->converter();
 
     QRect range = element->rect();

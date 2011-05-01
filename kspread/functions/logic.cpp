@@ -23,7 +23,7 @@
 
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 
 #include <KLocale>
@@ -31,15 +31,15 @@
 using namespace KSpread;
 
 // prototypes (sorted alphabetically)
-KCValue func_and(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_false(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_if(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_nand(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_nor(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_not(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_or(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_true(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_xor(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_and(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_false(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_if(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_nand(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_nor(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_not(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_or(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_true(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_xor(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("logic", LogicModule)
@@ -91,7 +91,7 @@ QString LogicModule::descriptionFileName() const
 
 
 // helper for most logical functions
-static bool asBool(KCValue val, ValueCalc *calc, bool* ok = 0)
+static bool asBool(KCValue val, KCValueCalc *calc, bool* ok = 0)
 {
     return calc->conv()->asBoolean(val, ok).asBoolean();
 }
@@ -102,7 +102,7 @@ static bool asBool(KCValue val, ValueCalc *calc, bool* ok = 0)
 //
 // ArrayWalker: AND
 //
-void awAnd(ValueCalc *calc, KCValue &res, KCValue value, KCValue)
+void awAnd(KCValueCalc *calc, KCValue &res, KCValue value, KCValue)
 {
     if (res.asBoolean())
         res = KCValue(asBool(value, calc));
@@ -112,7 +112,7 @@ void awAnd(ValueCalc *calc, KCValue &res, KCValue value, KCValue)
 //
 // ArrayWalker: OR
 //
-void awOr(ValueCalc *calc, KCValue &res, KCValue value, KCValue)
+void awOr(KCValueCalc *calc, KCValue &res, KCValue value, KCValue)
 {
     if (!res.asBoolean())
         res = KCValue(asBool(value, calc));
@@ -122,7 +122,7 @@ void awOr(ValueCalc *calc, KCValue &res, KCValue value, KCValue)
 //
 // ArrayWalker: XOR
 //
-void awXor(ValueCalc *calc, KCValue &count, KCValue value, KCValue)
+void awXor(KCValueCalc *calc, KCValue &count, KCValue value, KCValue)
 {
     if (asBool(value, calc))
         count = KCValue(count.asInteger() + 1);
@@ -134,7 +134,7 @@ void awXor(ValueCalc *calc, KCValue &count, KCValue value, KCValue)
 //
 // KCFunction: AND
 //
-KCValue func_and(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_and(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue result(true);
     int cnt = args.count();
@@ -156,7 +156,7 @@ KCValue func_and(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // KCFunction: FALSE
 //
-KCValue func_false(valVector, ValueCalc *, FuncExtra *)
+KCValue func_false(valVector, KCValueCalc *, FuncExtra *)
 {
     return KCValue(false);
 }
@@ -165,7 +165,7 @@ KCValue func_false(valVector, ValueCalc *, FuncExtra *)
 //
 // KCFunction: IF
 //
-KCValue func_if(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_if(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     if ((args[0].isError()))
         return args[0];
@@ -192,7 +192,7 @@ KCValue func_if(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // KCFunction: NAND
 //
-KCValue func_nand(valVector args, ValueCalc *calc, FuncExtra *extra)
+KCValue func_nand(valVector args, KCValueCalc *calc, FuncExtra *extra)
 {
     // AND in reverse
     return KCValue(! func_and(args, calc, extra).asBoolean());
@@ -202,7 +202,7 @@ KCValue func_nand(valVector args, ValueCalc *calc, FuncExtra *extra)
 //
 // KCFunction: NOR
 //
-KCValue func_nor(valVector args, ValueCalc *calc, FuncExtra *extra)
+KCValue func_nor(valVector args, KCValueCalc *calc, FuncExtra *extra)
 {
     // OR in reverse
     return KCValue(! func_or(args, calc, extra).asBoolean());
@@ -212,7 +212,7 @@ KCValue func_nor(valVector args, ValueCalc *calc, FuncExtra *extra)
 //
 // KCFunction: NOT
 //
-KCValue func_not(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_not(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     if (args[0].isError())
         return args[0];
@@ -227,7 +227,7 @@ KCValue func_not(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // KCFunction: OR
 //
-KCValue func_or(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_or(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue result(false);
     int cnt = args.count();
@@ -249,7 +249,7 @@ KCValue func_or(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // KCFunction: TRUE
 //
-KCValue func_true(valVector, ValueCalc *, FuncExtra *)
+KCValue func_true(valVector, KCValueCalc *, FuncExtra *)
 {
     return KCValue(true);
 }
@@ -258,7 +258,7 @@ KCValue func_true(valVector, ValueCalc *, FuncExtra *)
 //
 // KCFunction: XOR
 //
-KCValue func_xor(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_xor(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // exclusive OR - exactly one value must be true
     int cnt = args.count();

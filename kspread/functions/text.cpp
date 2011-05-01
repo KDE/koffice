@@ -30,7 +30,7 @@
 #include "KCCalculationSettings.h"
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 
 #include <KLocale>
@@ -41,40 +41,40 @@ using namespace KSpread;
 // support arbitrary precision, when it will be introduced.
 
 // prototypes
-KCValue func_asc(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_char(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_clean(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_code(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_compare(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_concatenate(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dollar(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_exact(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_find(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_fixed(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_jis(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_left(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_len(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_lower(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_mid(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_proper(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_regexp(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_regexpre(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_replace(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_rept(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_rot13(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_right(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_search(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_sleek(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_substitute(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_t (valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_text(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_toggle(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_trim(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_unichar(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_unicode(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_upper(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_value(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_bahttext(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_asc(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_char(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_clean(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_code(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_compare(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_concatenate(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dollar(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_exact(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_find(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_fixed(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_jis(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_left(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_len(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_lower(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_mid(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_proper(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_regexp(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_regexpre(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_replace(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_rept(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_rot13(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_right(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_search(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_sleek(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_substitute(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_t (valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_text(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_toggle(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_trim(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_unichar(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_unicode(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_upper(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_value(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_bahttext(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("text", TextModule)
@@ -185,14 +185,14 @@ QString TextModule::descriptionFileName() const
 
 
 // KCFunction: ASC
-KCValue func_asc(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_asc(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString s = calc->conv()->asString(args[0]).asString();
     return KCValue(QString(s));
 }
 
 // KCFunction: CHAR
-KCValue func_char(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_char(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int val = calc->conv()->asInteger(args[0]).asInteger();
     if (val >= 0)
@@ -202,7 +202,7 @@ KCValue func_char(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: CLEAN
-KCValue func_clean(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_clean(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString str(calc->conv()->asString(args[0]).asString());
     QString result;
@@ -220,7 +220,7 @@ KCValue func_clean(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: CODE
-KCValue func_code(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_code(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString str(calc->conv()->asString(args[0]).asString());
     if (str.length() <= 0)
@@ -230,7 +230,7 @@ KCValue func_code(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: COMPARE
-KCValue func_compare(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_compare(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int  result = 0;
     bool exact = calc->conv()->asBoolean(args[2]).asBoolean();
@@ -251,7 +251,7 @@ KCValue func_compare(valVector args, ValueCalc *calc, FuncExtra *)
     return KCValue(result);
 }
 
-void func_concatenate_helper(KCValue val, ValueCalc *calc,
+void func_concatenate_helper(KCValue val, KCValueCalc *calc,
                              QString& tmp)
 {
     if (val.isArray()) {
@@ -263,7 +263,7 @@ void func_concatenate_helper(KCValue val, ValueCalc *calc,
 }
 
 // KCFunction: CONCATENATE
-KCValue func_concatenate(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_concatenate(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString tmp;
     for (int i = 0; i < args.count(); ++i)
@@ -273,7 +273,7 @@ KCValue func_concatenate(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DOLLAR
-KCValue func_dollar(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dollar(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // ValueConverter doesn't support money directly, hence we need to
     // use the locale. This code has the same effect as the output
@@ -297,7 +297,7 @@ KCValue func_dollar(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: EXACT
-KCValue func_exact(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_exact(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString s1 = calc->conv()->asString(args[0]).asString();
     QString s2 = calc->conv()->asString(args[1]).asString();
@@ -306,7 +306,7 @@ KCValue func_exact(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: FIND
-KCValue func_find(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_find(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString find_text, within_text;
     int start_num = 1;
@@ -327,7 +327,7 @@ KCValue func_find(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: FIXED
-KCValue func_fixed(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_fixed(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // uses double, hence won't support big precision
 
@@ -376,7 +376,7 @@ KCValue func_fixed(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: JIS
-KCValue func_jis(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_jis(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     Q_UNUSED(args);
     Q_UNUSED(calc);
@@ -384,7 +384,7 @@ KCValue func_jis(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: LEFT
-KCValue func_left(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_left(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString str = calc->conv()->asString(args[0]).asString();
     int nb = 1;
@@ -397,20 +397,20 @@ KCValue func_left(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: LEN
-KCValue func_len(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_len(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int nb = calc->conv()->asString(args[0]).asString().length();
     return KCValue(nb);
 }
 
 // KCFunction: LOWER
-KCValue func_lower(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_lower(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return KCValue(calc->conv()->asString(args[0]).asString().toLower());
 }
 
 // KCFunction: MID
-KCValue func_mid(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_mid(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString str = calc->conv()->asString(args[0]).asString();
 
@@ -437,7 +437,7 @@ KCValue func_mid(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: PROPER
-KCValue func_proper(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_proper(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString str = calc->conv()->asString(args[0]).asString().toLower();
 
@@ -466,7 +466,7 @@ KCValue func_proper(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: REGEXP
-KCValue func_regexp(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_regexp(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // ensure that we got a valid regular expression
     QRegExp exp(calc->conv()->asString(args[1]).asString());
@@ -495,7 +495,7 @@ KCValue func_regexp(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: REGEXPRE
-KCValue func_regexpre(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_regexpre(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // ensure that we got a valid regular expression
     QRegExp exp(calc->conv()->asString(args[1]).asString());
@@ -516,7 +516,7 @@ KCValue func_regexpre(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: REPLACE
-KCValue func_replace(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_replace(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString text = calc->conv()->asString(args[0]).asString();
     int pos = calc->conv()->asInteger(args[1]).asInteger();
@@ -530,7 +530,7 @@ KCValue func_replace(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: REPT
-KCValue func_rept(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_rept(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString s = calc->conv()->asString(args[0]).asString();
     int nb = calc->conv()->asInteger(args[1]).asInteger();
@@ -544,7 +544,7 @@ KCValue func_rept(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: RIGHT
-KCValue func_right(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_right(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString str = calc->conv()->asString(args[0]).asString();
     int nb = 1;
@@ -558,7 +558,7 @@ KCValue func_right(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: ROT13
-KCValue func_rot13(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_rot13(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString text = calc->conv()->asString(args[0]).asString();
 
@@ -574,7 +574,7 @@ KCValue func_rot13(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: SEARCH
-KCValue func_search(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_search(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString find_text = calc->conv()->asString(args[0]).asString();
     QString within_text = calc->conv()->asString(args[1]).asString();
@@ -595,7 +595,7 @@ KCValue func_search(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: SLEEK
-KCValue func_sleek(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_sleek(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString str = calc->conv()->asString(args[0]).asString();
     QString result;
@@ -613,7 +613,7 @@ KCValue func_sleek(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: SUBSTITUTE
-KCValue func_substitute(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_substitute(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int occurrence = 1;
     bool all = true;
@@ -647,7 +647,7 @@ KCValue func_substitute(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: T
-KCValue func_t (valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_t (valVector args, KCValueCalc *calc, FuncExtra *)
 {
     if (args[0].isString())
         return calc->conv()->asString(args[0]);
@@ -656,14 +656,14 @@ KCValue func_t (valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: TEXT
-KCValue func_text(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_text(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     //Second parameter is format_text. It is currently ignored.
     return calc->conv()->asString(args[0]);
 }
 
 // KCFunction: TOGGLE
-KCValue func_toggle(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_toggle(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString str = calc->conv()->asString(args[0]).asString();
     int i;
@@ -684,14 +684,14 @@ KCValue func_toggle(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: TRIM
-KCValue func_trim(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_trim(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return KCValue(
                calc->conv()->asString(args[0]).asString().simplified());
 }
 
 // KCFunction: UNICHAR
-KCValue func_unichar(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_unichar(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     ushort val = calc->conv()->asInteger(args[0]).asInteger();
     if (val > 0) {
@@ -703,7 +703,7 @@ KCValue func_unichar(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: UNICODE
-KCValue func_unicode(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_unicode(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QString str(calc->conv()->asString(args[0]).asString());
     if (str.length() <= 0)
@@ -713,13 +713,13 @@ KCValue func_unicode(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: UPPER
-KCValue func_upper(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_upper(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return KCValue(calc->conv()->asString(args[0]).asString().toUpper());
 }
 
 // KCFunction: VALUE
-KCValue func_value(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_value(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // same as the N function
     return calc->conv()->asFloat(args[0]);
@@ -826,7 +826,7 @@ void lclAppendBlock(QString& rText, qint32 nValue)
 }
 
 // KCFunction: BAHTTEXT
-KCValue func_bahttext(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_bahttext(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     double value = numToDouble(calc->conv()->toFloat(args[0]));
 

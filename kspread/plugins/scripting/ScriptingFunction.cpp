@@ -46,7 +46,7 @@ class ScriptingFunctionImpl : public KCFunction
 {
 public:
 
-    static KCValue callback(valVector args, ValueCalc* calc, FuncExtra* extra) {
+    static KCValue callback(valVector args, KCValueCalc* calc, FuncExtra* extra) {
         Q_UNUSED(calc);
         Q_ASSERT(extra && extra->function);
         ScriptingFunctionImpl* funcimpl = static_cast< ScriptingFunctionImpl* >(extra->function);

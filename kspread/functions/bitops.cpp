@@ -24,7 +24,7 @@
 
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 
 #include <KLocale>
@@ -32,11 +32,11 @@
 using namespace KSpread;
 
 // prototypes (sorted alphabetically)
-KCValue func_bitand(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_bitor(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_bitxor(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_bitlshift(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_bitrshift(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_bitand(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_bitor(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_bitxor(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_bitlshift(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_bitrshift(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("bitops", BitOpsModule)
@@ -71,7 +71,7 @@ QString BitOpsModule::descriptionFileName() const
 
 
 // KCFunction: BITAND
-KCValue func_bitand(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_bitand(valVector args, KCValueCalc *, FuncExtra *)
 {
     const quint64 x = args[0].asInteger();
     const quint64 y = args[1].asInteger();
@@ -79,7 +79,7 @@ KCValue func_bitand(valVector args, ValueCalc *, FuncExtra *)
 }
 
 // KCFunction: BITOR
-KCValue func_bitor(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_bitor(valVector args, KCValueCalc *, FuncExtra *)
 {
     const quint64 x = args[0].asInteger();
     const quint64 y = args[1].asInteger();
@@ -87,7 +87,7 @@ KCValue func_bitor(valVector args, ValueCalc *, FuncExtra *)
 }
 
 // KCFunction: BITXOR
-KCValue func_bitxor(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_bitxor(valVector args, KCValueCalc *, FuncExtra *)
 {
     const quint64 x = args[0].asInteger();
     const quint64 y = args[1].asInteger();
@@ -95,7 +95,7 @@ KCValue func_bitxor(valVector args, ValueCalc *, FuncExtra *)
 }
 
 // KCFunction: BITLSHIFT
-KCValue func_bitlshift(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_bitlshift(valVector args, KCValueCalc *, FuncExtra *)
 {
     const quint64 x = args[0].asInteger();
     const int numshift = args[1].asInteger();
@@ -108,7 +108,7 @@ KCValue func_bitlshift(valVector args, ValueCalc *, FuncExtra *)
 }
 
 // KCFunction: BITRSHIFT
-KCValue func_bitrshift(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_bitrshift(valVector args, KCValueCalc *, FuncExtra *)
 {
     const quint64 x = args[0].asInteger();
     const int numshift = args[1].asInteger();

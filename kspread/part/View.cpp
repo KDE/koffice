@@ -134,7 +134,7 @@
 #include "KCStyleStorage.h"
 #include "ToolRegistry.h"
 #include "Util.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 #include "PrintJob.h"
 
@@ -1804,7 +1804,7 @@ void View::slotScrollChoice(const KCRegion& changedRegion)
 void View::calcStatusBarOp()
 {
     KCSheet * sheet = activeSheet();
-    ValueCalc* calc = doc()->map()->calc();
+    KCValueCalc* calc = doc()->map()->calc();
     KCValue val;
     KSpread::MethodOfCalc tmpMethod = doc()->map()->settings()->getTypeOfCalc();
     if (sheet && tmpMethod != KSpread::NoneCalc) {

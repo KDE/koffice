@@ -26,7 +26,7 @@
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
 #include "functions/helper.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 
 #include <kcalendarsystem.h>
@@ -35,47 +35,47 @@
 using namespace KSpread;
 
 // prototypes, sorted
-KCValue func_currentDate(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_currentDateTime(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_currentTime(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_date(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_date2unix(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dateDif(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_datevalue(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_day(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dayname(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dayOfYear(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_days(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_days360(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_daysInMonth(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_daysInYear(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_easterSunday(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_edate(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_eomonth(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_hour(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_hours(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_isLeapYear(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_isoWeekNum(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_minute(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_minutes(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_month(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_monthname(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_months(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_networkday(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_second(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_seconds(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_time(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_timevalue(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_today(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_unix2date(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_weekday(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_weekNum(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_weeks(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_weeksInYear(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_workday(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_year(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_yearFrac(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_years(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_currentDate(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_currentDateTime(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_currentTime(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_date(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_date2unix(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dateDif(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_datevalue(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_day(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dayname(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dayOfYear(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_days(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_days360(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_daysInMonth(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_daysInYear(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_easterSunday(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_edate(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_eomonth(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_hour(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_hours(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_isLeapYear(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_isoWeekNum(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_minute(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_minutes(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_month(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_monthname(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_months(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_networkday(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_second(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_seconds(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_time(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_timevalue(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_today(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_unix2date(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_weekday(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_weekNum(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_weeks(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_weeksInYear(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_workday(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_year(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_yearFrac(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_years(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("datetime", DateTimeModule)
@@ -225,7 +225,7 @@ QString DateTimeModule::descriptionFileName() const
 
 
 // KCFunction: EDATE
-KCValue func_edate(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_edate(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QDate date = calc->conv()->asDate(args[0]).asDate(calc->settings());
     int months = calc->conv()->asInteger(args[1]).asInteger();
@@ -239,7 +239,7 @@ KCValue func_edate(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: EOMONTH
-KCValue func_eomonth(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_eomonth(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // add months to date using EDATE
     KCValue modDate = func_edate(args, calc, 0);
@@ -304,7 +304,7 @@ static int func_days360_helper(const QDate& _date1, const QDate& _date2, bool eu
 
 // KCFunction: DAYS360
 // algorithm adapted from gnumeric
-KCValue func_days360(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_days360(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QDate date1 = calc->conv()->asDate(args[0]).asDate(calc->settings());
     QDate date2 = calc->conv()->asDate(args[1]).asDate(calc->settings());
@@ -316,7 +316,7 @@ KCValue func_days360(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: YEAR
-KCValue func_year(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_year(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue v = calc->conv()->asDate(args[0]);
     if (v.isError()) return v;
@@ -325,7 +325,7 @@ KCValue func_year(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: MONTH
-KCValue func_month(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_month(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue v = calc->conv()->asDate(args[0]);
     if (v.isError()) return v;
@@ -334,7 +334,7 @@ KCValue func_month(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DAY
-KCValue func_day(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_day(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue v = calc->conv()->asDate(args[0]);
     if (v.isError()) return v;
@@ -343,7 +343,7 @@ KCValue func_day(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: HOUR
-KCValue func_hour(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_hour(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QTime time;
     if (args.count() == 1) {
@@ -356,7 +356,7 @@ KCValue func_hour(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: MINUTE
-KCValue func_minute(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_minute(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QTime time;
     if (args.count() == 1) {
@@ -369,7 +369,7 @@ KCValue func_minute(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: SECOND
-KCValue func_second(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_second(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QTime time;
     if (args.count() == 1) {
@@ -382,7 +382,7 @@ KCValue func_second(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: WEEKDAY
-KCValue func_weekday(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_weekday(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue v(calc->conv()->asDate(args[0]));
     if (v.isError()) return v;
@@ -408,7 +408,7 @@ KCValue func_weekday(valVector args, ValueCalc *calc, FuncExtra *)
 
 // KCFunction: DATEVALUE
 // same result would be obtained by applying number format on a date value
-KCValue func_datevalue(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_datevalue(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     if (args[0].isString()) {
         KCValue v = calc->conv()->asDate(args[0]);
@@ -420,7 +420,7 @@ KCValue func_datevalue(valVector args, ValueCalc *calc, FuncExtra *)
 
 // KCFunction: timevalue
 // same result would be obtained by applying number format on a time value
-KCValue func_timevalue(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_timevalue(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     if (args[0].isString()) {
         KCValue v = calc->conv()->asTime(args[0]);
@@ -431,7 +431,7 @@ KCValue func_timevalue(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: YEARS
-KCValue func_years(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_years(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QDate date1 = calc->conv()->asDate(args[0]).asDate(calc->settings());
     QDate date2 = calc->conv()->asDate(args[1]).asDate(calc->settings());
@@ -464,7 +464,7 @@ KCValue func_years(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: MONTHS
-KCValue func_months(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_months(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QDate date1 = calc->conv()->asDate(args[0]).asDate(calc->settings());
     QDate date2 = calc->conv()->asDate(args[1]).asDate(calc->settings());
@@ -498,7 +498,7 @@ KCValue func_months(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: WEEKS
-KCValue func_weeks(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_weeks(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QDate date1 = calc->conv()->asDate(args[0]).asDate(calc->settings());
     QDate date2 = calc->conv()->asDate(args[1]).asDate(calc->settings());
@@ -524,7 +524,7 @@ KCValue func_weeks(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DAYS
-KCValue func_days(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_days(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QDate date1 = calc->conv()->asDate(args[0]).asDate(calc->settings());
     QDate date2 = calc->conv()->asDate(args[1]).asDate(calc->settings());
@@ -535,7 +535,7 @@ KCValue func_days(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DATE
-KCValue func_date(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_date(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int y = calc->conv()->asInteger(args[0]).asInteger();
     int m = calc->conv()->asInteger(args[1]).asInteger();
@@ -554,7 +554,7 @@ KCValue func_date(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DAY
-KCValue func_dayname(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dayname(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int number = calc->conv()->asInteger(args[0]).asInteger();
 
@@ -565,7 +565,7 @@ KCValue func_dayname(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: MONTHNAME
-KCValue func_monthname(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_monthname(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int number = calc->conv()->asInteger(args[0]).asInteger();
 
@@ -577,7 +577,7 @@ KCValue func_monthname(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: TIME
-KCValue func_time(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_time(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int h = calc->conv()->asInteger(args[0]).asInteger();
     int m = calc->conv()->asInteger(args[1]).asInteger();
@@ -592,25 +592,25 @@ KCValue func_time(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: CURRENTDATE
-KCValue func_currentDate(valVector, ValueCalc * calc, FuncExtra *)
+KCValue func_currentDate(valVector, KCValueCalc * calc, FuncExtra *)
 {
     return KCValue(QDate::currentDate(), calc->settings());
 }
 
 // KCFunction: CURRENTTIME
-KCValue func_currentTime(valVector, ValueCalc * calc, FuncExtra *)
+KCValue func_currentTime(valVector, KCValueCalc * calc, FuncExtra *)
 {
     return KCValue(QTime::currentTime(), calc->settings());
 }
 
 // KCFunction: CURRENTDATETIME
-KCValue func_currentDateTime(valVector, ValueCalc * calc, FuncExtra *)
+KCValue func_currentDateTime(valVector, KCValueCalc * calc, FuncExtra *)
 {
     return KCValue(QDateTime::currentDateTime(), calc->settings());
 }
 
 // KCFunction: DAYOFYEAR
-KCValue func_dayOfYear(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dayOfYear(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue date = func_date(args, calc, 0);
     if (date.isError()) return date;
@@ -618,7 +618,7 @@ KCValue func_dayOfYear(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DAYSINMONTH
-KCValue func_daysInMonth(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_daysInMonth(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int y = calc->conv()->asInteger(args[0]).asInteger();
     int m = calc->conv()->asInteger(args[1]).asInteger();
@@ -627,21 +627,21 @@ KCValue func_daysInMonth(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: ISLEAPYEAR
-KCValue func_isLeapYear(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_isLeapYear(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int y = calc->conv()->asInteger(args[0]).asInteger();
     return KCValue(QDate::isLeapYear(y));
 }
 
 // KCFunction: DAYSINYEAR
-KCValue func_daysInYear(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_daysInYear(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int y = calc->conv()->asInteger(args[0]).asInteger();
     return KCValue(QDate::isLeapYear(y) ? 366 : 365);
 }
 
 // KCFunction: WEEKSINYEAR
-KCValue func_weeksInYear(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_weeksInYear(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int y = calc->conv()->asInteger(args[0]).asInteger();
     QDate date(y, 12, 31);   // last day of the year
@@ -649,7 +649,7 @@ KCValue func_weeksInYear(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: EASTERSUNDAY
-KCValue func_easterSunday(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_easterSunday(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int nDay, nMonth;
     int nYear = calc->conv()->asInteger(args[0]).asInteger();
@@ -681,7 +681,7 @@ KCValue func_easterSunday(valVector args, ValueCalc *calc, FuncExtra *)
 // default:     1       1        sunday
 //              2       0        monday
 //
-KCValue func_isoWeekNum(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_isoWeekNum(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     QDate date = calc->conv()->asDate(args[0]).asDate(calc->settings());
     if (!date.isValid())
@@ -742,7 +742,7 @@ KCValue func_isoWeekNum(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // weeknum = (startday + 7 + dayOfWeek of New Year + difference in days) / 7
 //
-KCValue func_weekNum(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_weekNum(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue v(calc->conv()->asDate(args[0]));
     if (v.isError()) return v;
@@ -786,7 +786,7 @@ KCValue func_weekNum(valVector args, ValueCalc *calc, FuncExtra *)
 //              yd     |  days excluding years
 //              md     |  days excluding months and years
 //
-KCValue func_dateDif(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dateDif(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue v1(calc->conv()->asDate(args[0]));
     if (v1.isError()) return v1;
@@ -889,7 +889,7 @@ KCValue func_dateDif(valVector args, ValueCalc *calc, FuncExtra *)
 //            |   3    |  Actual/365
 //            |   4    |  European 30/360
 //
-KCValue func_yearFrac(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_yearFrac(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue v1(calc->conv()->asDate(args[0]));
     if (v1.isError()) return v1;
@@ -920,7 +920,7 @@ KCValue func_yearFrac(valVector args, ValueCalc *calc, FuncExtra *)
 // - negative days count backwards
 // - if holidays is not an array it is only added to days (neg. are not allowed)
 //
-KCValue func_workday(valVector args, ValueCalc *calc, FuncExtra *e)
+KCValue func_workday(valVector args, KCValueCalc *calc, FuncExtra *e)
 {
     KCValue v(calc->conv()->asDate(args[0]));
 
@@ -1013,7 +1013,7 @@ KCValue func_workday(valVector args, ValueCalc *calc, FuncExtra *e)
 //
 // - if holidays is not an array it is only added to days (neg. are not allowed)
 //
-KCValue func_networkday(valVector args, ValueCalc *calc, FuncExtra *e)
+KCValue func_networkday(valVector args, KCValueCalc *calc, FuncExtra *e)
 {
     KCValue v1(calc->conv()->asDate(args[0]));
 
@@ -1108,7 +1108,7 @@ KCValue func_networkday(valVector args, ValueCalc *calc, FuncExtra *e)
 // TODO:
 // - create FormatType mm/dd/yyyy hh:mm:ss
 // - add method tryParseDateTime
-KCValue func_unix2date(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_unix2date(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     const KCValue v(calc->conv()->asInteger(args[0]));
     if (v.isError())
@@ -1122,7 +1122,7 @@ KCValue func_unix2date(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: UNIX2DATE
-KCValue func_date2unix(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_date2unix(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     const KCValue v(calc->conv()->asDateTime(args[0]));
     if (v.isError())

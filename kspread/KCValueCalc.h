@@ -38,7 +38,7 @@
 
 class KCCell;
 class Doc;
-class ValueCalc;
+class KCValueCalc;
 class ValueConverter;
 
 // Condition structures
@@ -53,24 +53,24 @@ struct Condition {
     Type     type;
 };
 
-typedef void (*arrayWalkFunc)(ValueCalc *, KCValue &result,
+typedef void (*arrayWalkFunc)(KCValueCalc *, KCValue &result,
                               KCValue val, KCValue param);
 // A function that can map an array element-wise
-typedef KCValue (ValueCalc::*arrayMapFunc)(const KCValue &val, const KCValue &param);
+typedef KCValue (KCValueCalc::*arrayMapFunc)(const KCValue &val, const KCValue &param);
 
 /**
  * \ingroup KCValue
-The ValueCalc class is used to perform all sorts of calculations.
+The KCValueCalc class is used to perform all sorts of calculations.
 
 Usage of this class for simpler calculations is deprecated, as we now use
 the KCNumber object directly for that. This class is to be used for computations
 of more complicated and ranged functions.
 */
 
-class KSPREAD_EXPORT ValueCalc
+class KSPREAD_EXPORT KCValueCalc
 {
 public:
-    explicit ValueCalc(ValueConverter* c);
+    explicit KCValueCalc(ValueConverter* c);
 
     ValueConverter *conv() {
         return converter;

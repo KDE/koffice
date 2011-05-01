@@ -28,7 +28,7 @@
 #include "KCFormula.h"
 #include "KCMap.h"
 #include "KCSheet.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 
 #include <float.h>
@@ -262,7 +262,7 @@ KCValue SeriesManipulator::newValue(Element *element, int col, int row,
                                   bool *parse, KCFormat::Type *)
 {
     *parse = false;
-    ValueCalc *calc = m_sheet->map()->calc();
+    KCValueCalc *calc = m_sheet->map()->calc();
 
     // either colidx or rowidx is always zero
     QRect range = element->rect();

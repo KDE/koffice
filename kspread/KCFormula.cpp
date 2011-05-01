@@ -32,7 +32,7 @@
 #include "KCRegion.h"
 #include "KCValue.h"
 
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 #include "ValueParser.h"
 
@@ -1390,7 +1390,7 @@ KCValue KCFormula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell,
 
     const KCMap* map = d->sheet ? d->sheet->map() : new KCMap(0 /*document*/);
     const ValueConverter* converter = map->converter();
-    ValueCalc* calc = map->calc();
+    KCValueCalc* calc = map->calc();
 
     QSharedPointer<KCFunction> function;
     FuncExtra fe;

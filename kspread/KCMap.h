@@ -67,7 +67,7 @@ class KCStyleManager;
 class ValueParser;
 class ValueConverter;
 class ValueFormatter;
-class ValueCalc;
+class KCValueCalc;
 
 /**
  * The "embedded document".
@@ -159,7 +159,7 @@ public:
     /**
      * @return the value calculator of this Document
      */
-    ValueCalc* calc() const;
+    KCValueCalc* calc() const;
 
     /**
      * \return the application settings

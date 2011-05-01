@@ -31,7 +31,7 @@
 #include "KCFormula.h"
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 
 #include <KLocale>
@@ -39,20 +39,20 @@
 using namespace KSpread;
 
 // prototypes (sorted alphabetically)
-KCValue func_address(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_areas(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_choose(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_column(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_columns(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_hlookup(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_index(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_indirect(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_lookup(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_match(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_multiple_operations(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_row(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_rows(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_vlookup(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_address(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_areas(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_choose(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_column(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_columns(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_hlookup(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_index(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_indirect(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_lookup(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_match(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_multiple_operations(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_row(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_rows(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_vlookup(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("reference", ReferenceModule)
@@ -131,7 +131,7 @@ QString ReferenceModule::descriptionFileName() const
 //
 // KCFunction: ADDRESS
 //
-KCValue func_address(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_address(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     bool r1c1 = false;
     QString sheetName;
@@ -205,7 +205,7 @@ KCValue func_address(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // KCFunction: AREAS
 //
-KCValue func_areas(valVector args, ValueCalc *calc, FuncExtra *e)
+KCValue func_areas(valVector args, KCValueCalc *calc, FuncExtra *e)
 {
     if (e) {
         if (e->regions[0].isValid())
@@ -244,7 +244,7 @@ KCValue func_areas(valVector args, ValueCalc *calc, FuncExtra *e)
 //
 // KCFunction: CHOOSE
 //
-KCValue func_choose(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_choose(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     int cnt = args.count() - 1;
     int num = calc->conv()->asInteger(args[0]).asInteger();
@@ -257,7 +257,7 @@ KCValue func_choose(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // KCFunction: COLUMN
 //
-KCValue func_column(valVector args, ValueCalc *, FuncExtra *e)
+KCValue func_column(valVector args, KCValueCalc *, FuncExtra *e)
 {
     int col = e ? e->mycol : 0;
     if (e && args.count())
@@ -271,7 +271,7 @@ KCValue func_column(valVector args, ValueCalc *, FuncExtra *e)
 //
 // KCFunction: COLUMNS
 //
-KCValue func_columns(valVector, ValueCalc *, FuncExtra *e)
+KCValue func_columns(valVector, KCValueCalc *, FuncExtra *e)
 {
     int col1 = e->ranges[0].col1;
     int col2 = e->ranges[0].col2;
@@ -284,7 +284,7 @@ KCValue func_columns(valVector, ValueCalc *, FuncExtra *e)
 //
 // KCFunction: HLOOKUP
 //
-KCValue func_hlookup(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_hlookup(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     const KCValue key = args[0];
     const KCValue data = args[1];
@@ -317,7 +317,7 @@ KCValue func_hlookup(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // KCFunction: INDEX
 //
-KCValue func_index(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_index(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // first argument can be either a range, then we return a given cell's
     // value, or a single cell containing an array - then we return the array
@@ -336,7 +336,7 @@ KCValue func_index(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // KCFunction: INDIRECT
 //
-KCValue func_indirect(valVector args, ValueCalc *calc, FuncExtra *e)
+KCValue func_indirect(valVector args, KCValueCalc *calc, FuncExtra *e)
 {
     bool r1c1 = false;
     QString ref = calc->conv()->asString(args[0]).asString();
@@ -365,7 +365,7 @@ KCValue func_indirect(valVector args, ValueCalc *calc, FuncExtra *e)
 //
 // KCFunction: LOOKUP
 //
-KCValue func_lookup(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_lookup(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue num = calc->conv()->asNumeric(args[0]);
     if (num.isArray())
@@ -394,7 +394,7 @@ KCValue func_lookup(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // KCFunction: MATCH
 //
-KCValue func_match(valVector args, ValueCalc *calc, FuncExtra* e)
+KCValue func_match(valVector args, KCValueCalc *calc, FuncExtra* e)
 {
     int matchType = 1;
     if (args.count() == 3) {
@@ -457,7 +457,7 @@ KCValue func_match(valVector args, ValueCalc *calc, FuncExtra* e)
 //
 // KCFunction: MULTIPLE.OPERATIONS
 //
-KCValue func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
+KCValue func_multiple_operations(valVector args, KCValueCalc *, FuncExtra *e)
 {
     if (args.count() != 3 && args.count() != 5)
         return KCValue::errorVALUE(); // invalid number of parameters
@@ -488,7 +488,7 @@ KCValue func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
 //
 // KCFunction: ROW
 //
-KCValue func_row(valVector args, ValueCalc *, FuncExtra *e)
+KCValue func_row(valVector args, KCValueCalc *, FuncExtra *e)
 {
     int row = e ? e->myrow : 0;
     if (e && args.count())
@@ -502,7 +502,7 @@ KCValue func_row(valVector args, ValueCalc *, FuncExtra *e)
 //
 // KCFunction: ROWS
 //
-KCValue func_rows(valVector, ValueCalc *, FuncExtra *e)
+KCValue func_rows(valVector, KCValueCalc *, FuncExtra *e)
 {
     int row1 = e->ranges[0].row1;
     int row2 = e->ranges[0].row2;
@@ -515,7 +515,7 @@ KCValue func_rows(valVector, ValueCalc *, FuncExtra *e)
 //
 // KCFunction: VLOOKUP
 //
-KCValue func_vlookup(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_vlookup(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     const KCValue key = args[0];
     const KCValue data = args[1];

@@ -33,7 +33,7 @@
 #include "KCStyle.h"
 #include "KCStyleManager.h"
 #include "Util.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 #include "ValueParser.h"
 
@@ -117,7 +117,7 @@ bool KCConditions::currentCondition(const KCCell& cell, KCConditional & conditio
     /* for now, the first condition that is true is the one that will be used */
 
     const KCValue value = cell.value();
-    ValueCalc *const calc = cell.sheet()->map()->calc();
+    KCValueCalc *const calc = cell.sheet()->map()->calc();
 
     QLinkedList<KCConditional>::const_iterator it;
     for (it = d->conditionList.begin(); it != d->conditionList.end(); ++it) {
@@ -195,7 +195,7 @@ bool KCConditions::currentCondition(const KCCell& cell, KCConditional & conditio
 bool KCConditions::isTrueFormula(const KCCell &cell, const QString &formula, const QString &baseCellAddress) const
 {
     KCMap* const map = cell.sheet()->map();
-    ValueCalc *const calc = map->calc();
+    KCValueCalc *const calc = map->calc();
     KCFormula f(cell.sheet(), cell);
     f.setExpression('=' + formula);
     KCRegion r(baseCellAddress, map, cell.sheet());

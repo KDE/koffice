@@ -35,7 +35,7 @@ class QDomElement;
 
 class KCSheet;
 class KCValue;
-class ValueCalc;
+class KCValueCalc;
 class KCFunction;
 
 typedef QVector<KCValue> valVector;
@@ -58,7 +58,7 @@ struct FuncExtra {
     int myrow, mycol;
 };
 
-typedef KCValue(*FunctionPtr)(valVector, ValueCalc *, FuncExtra *);
+typedef KCValue(*FunctionPtr)(valVector, KCValueCalc *, FuncExtra *);
 
 /**
  * \ingroup KCValue
@@ -86,7 +86,7 @@ public:
     QString localizedName() const;
     QString helpText() const;
     void setHelpText(const QString& text);
-    KCValue exec(valVector args, ValueCalc *calc, FuncExtra *extra = 0);
+    KCValue exec(valVector args, KCValueCalc *calc, FuncExtra *extra = 0);
 
     QString alternateName() const;
     void setAlternateName(const QString &name);

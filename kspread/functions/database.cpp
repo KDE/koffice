@@ -24,7 +24,7 @@
 
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 #include "ValueConverter.h"
 
 #include <KLocale>
@@ -32,19 +32,19 @@
 using namespace KSpread;
 
 // prototypes
-KCValue func_daverage(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dcount(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dcounta(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dget(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dmax(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dmin(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dproduct(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dstdev(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dstdevp(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dsum(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dvar(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_dvarp(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_getpivotdata(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_daverage(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dcount(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dcounta(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dget(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dmax(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dmin(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dproduct(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dstdev(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dstdevp(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dsum(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dvar(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_dvarp(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_getpivotdata(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("database", DatabaseModule)
@@ -115,7 +115,7 @@ QString DatabaseModule::descriptionFileName() const
 }
 
 
-int getFieldIndex(ValueCalc *calc, KCValue fieldName,
+int getFieldIndex(KCValueCalc *calc, KCValue fieldName,
                   KCValue database)
 {
     if (fieldName.isNumber())
@@ -139,20 +139,20 @@ int getFieldIndex(ValueCalc *calc, KCValue fieldName,
 class DBConditions
 {
 public:
-    DBConditions(ValueCalc *vc, KCValue database, KCValue conds);
+    DBConditions(KCValueCalc *vc, KCValue database, KCValue conds);
     ~DBConditions();
     /** Does a specified row of the database match the given criteria?
     The row with column names is ignored - hence 0 specifies first data row. */
     bool matches(unsigned row);
 private:
     void parse(KCValue conds);
-    ValueCalc *calc;
+    KCValueCalc *calc;
     QList<QList<Condition*> > cond;
     int rows, cols;
     KCValue db;
 };
 
-DBConditions::DBConditions(ValueCalc *vc, KCValue database,
+DBConditions::DBConditions(KCValueCalc *vc, KCValue database,
                            KCValue conds) : calc(vc), rows(0), cols(0), db(database)
 {
     parse(conds);
@@ -232,7 +232,7 @@ bool DBConditions::matches(unsigned row)
 // *******************************************
 
 // KCFunction: DSUM
-KCValue func_dsum(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dsum(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     KCValue conditions = args[2];
@@ -256,7 +256,7 @@ KCValue func_dsum(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DAVERAGE
-KCValue func_daverage(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_daverage(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     KCValue conditions = args[2];
@@ -283,7 +283,7 @@ KCValue func_daverage(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DCOUNT
-KCValue func_dcount(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dcount(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     KCValue conditions = args[2];
@@ -310,7 +310,7 @@ KCValue func_dcount(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DCOUNTA
-KCValue func_dcounta(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dcounta(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     KCValue conditions = args[2];
@@ -337,7 +337,7 @@ KCValue func_dcounta(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DGET
-KCValue func_dget(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dget(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     KCValue conditions = args[2];
@@ -365,7 +365,7 @@ KCValue func_dget(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DMAX
-KCValue func_dmax(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dmax(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     KCValue conditions = args[2];
@@ -395,7 +395,7 @@ KCValue func_dmax(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DMIN
-KCValue func_dmin(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dmin(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     KCValue conditions = args[2];
@@ -425,7 +425,7 @@ KCValue func_dmin(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DPRODUCT
-KCValue func_dproduct(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dproduct(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     KCValue conditions = args[2];
@@ -453,21 +453,21 @@ KCValue func_dproduct(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DSTDEV
-KCValue func_dstdev(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dstdev(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // sqrt (dvar)
     return calc->sqrt(func_dvar(args, calc, 0));
 }
 
 // KCFunction: DSTDEVP
-KCValue func_dstdevp(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dstdevp(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // sqrt (dvarp)
     return calc->sqrt(func_dvarp(args, calc, 0));
 }
 
 // KCFunction: DVAR
-KCValue func_dvar(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dvar(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     KCValue conditions = args[2];
@@ -506,7 +506,7 @@ KCValue func_dvar(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DVARP
-KCValue func_dvarp(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dvarp(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     KCValue conditions = args[2];
@@ -546,7 +546,7 @@ KCValue func_dvarp(valVector args, ValueCalc *calc, FuncExtra *)
 
 // KCFunction: GETPIVOTDATA
 // FIXME implement more things with this, see Excel !
-KCValue func_getpivotdata(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_getpivotdata(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     KCValue database = args[0];
     int fieldIndex = getFieldIndex(calc, args[1], database);

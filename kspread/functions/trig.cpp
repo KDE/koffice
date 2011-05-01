@@ -23,33 +23,33 @@
 
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
-#include "ValueCalc.h"
+#include "KCValueCalc.h"
 
 #include <KLocale>
 
 using namespace KSpread;
 
 // prototypes (sort alphabetically)
-KCValue func_acos(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_acosh(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_acot(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_acoth(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_asinh(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_asin(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_atan(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_atan2(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_atanh(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_cos(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_cosh(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_cot(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_coth(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_degrees(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_radians(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_sin(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_sinh(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_tan(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_tanh(valVector args, ValueCalc *calc, FuncExtra *);
-KCValue func_pi(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_acos(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_acosh(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_acot(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_acoth(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_asinh(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_asin(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_atan(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_atan2(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_atanh(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_cos(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_cosh(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_cot(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_coth(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_degrees(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_radians(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_sin(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_sinh(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_tan(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_tanh(valVector args, KCValueCalc *calc, FuncExtra *);
+KCValue func_pi(valVector args, KCValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("trigonometry", TrigonometryModule)
@@ -111,49 +111,49 @@ QString TrigonometryModule::descriptionFileName() const
 
 
 // KCFunction: sin
-KCValue func_sin(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_sin(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->sin(args[0]);
 }
 
 // KCFunction: cos
-KCValue func_cos(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_cos(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->cos(args[0]);
 }
 
 // KCFunction: tan
-KCValue func_tan(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_tan(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->tg(args[0]);
 }
 
 // KCFunction: atan
-KCValue func_atan(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_atan(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->atg(args[0]);
 }
 
 // KCFunction: asin
-KCValue func_asin(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_asin(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->asin(args[0]);
 }
 
 // KCFunction: acos
-KCValue func_acos(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_acos(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->acos(args[0]);
 }
 
-KCValue func_acot(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_acot(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // PI/2 - atg (val)
     return calc->sub(calc->div(calc->pi(), 2), calc->atg(args[0]));
 }
 
 // function: ACOTH
-KCValue func_acoth(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_acoth(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     if (calc->lower(calc->abs(args[0]), KCValue(1.0)))
         return KCValue::errorNUM();
@@ -162,49 +162,49 @@ KCValue func_acoth(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: asinh
-KCValue func_asinh(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_asinh(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->asinh(args[0]);
 }
 
 // KCFunction: acosh
-KCValue func_acosh(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_acosh(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->acosh(args[0]);
 }
 
 // KCFunction: atanh
-KCValue func_atanh(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_atanh(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->atgh(args[0]);
 }
 
 // KCFunction: tanh
-KCValue func_tanh(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_tanh(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->tgh(args[0]);
 }
 
 // KCFunction: sinh
-KCValue func_sinh(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_sinh(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->sinh(args[0]);
 }
 
 // KCFunction: cosh
-KCValue func_cosh(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_cosh(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->cosh(args[0]);
 }
 
 // KCFunction: cot
-KCValue func_cot(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_cot(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->div(1, calc->tg(args[0]));
 }
 
 // KCFunction: coth
-KCValue func_coth(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_coth(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     if (calc->isZero(args[0]))
         return KCValue::errorNUM();
@@ -213,27 +213,27 @@ KCValue func_coth(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // KCFunction: DEGREES
-KCValue func_degrees(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_degrees(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // val * 180 / pi
     return calc->div(calc->mul(args[0], 180.0), calc->pi());
 }
 
 // KCFunction: RADIANS
-KCValue func_radians(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_radians(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // val * pi / 180
     return calc->mul(calc->div(args[0], 180.0), calc->pi());
 }
 
 // KCFunction: PI
-KCValue func_pi(valVector, ValueCalc *calc, FuncExtra *)
+KCValue func_pi(valVector, KCValueCalc *calc, FuncExtra *)
 {
     return calc->pi();
 }
 
 // KCFunction: atan2
-KCValue func_atan2(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_atan2(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     return calc->atan2(args[1], args[0]);
 }

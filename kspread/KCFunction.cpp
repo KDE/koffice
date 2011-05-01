@@ -97,7 +97,7 @@ void KCFunction::setNeedsExtra(bool extra)
     d->ne = extra;
 }
 
-KCValue KCFunction::exec(valVector args, ValueCalc *calc, FuncExtra *extra)
+KCValue KCFunction::exec(valVector args, KCValueCalc *calc, FuncExtra *extra)
 {
     // check number of parameters
     if (!paramCountOkay(args.count()))
