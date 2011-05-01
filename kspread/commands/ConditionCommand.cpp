@@ -23,7 +23,7 @@
 #include <klocale.h>
 
 #include "KCCellStorage.h"
-#include "ConditionsStorage.h"
+#include "KCConditionsStorage.h"
 #include "KCSheet.h"
 
 CondtionCommand::CondtionCommand()

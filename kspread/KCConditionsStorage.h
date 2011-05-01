@@ -24,16 +24,16 @@
 #include "RectStorage.h"
 
 /**
- * \class ConditionsStorage
+ * \class KCConditionsStorage
  * \ingroup Storage
  * Stores conditional cell styles.
  */
-class ConditionsStorage : public QObject, public RectStorage<Conditions>
+class KCConditionsStorage : public QObject, public RectStorage<Conditions>
 {
     Q_OBJECT
 public:
-    explicit ConditionsStorage(KCMap* map) : QObject(map), RectStorage<Conditions>(map) {}
-    ConditionsStorage(const ConditionsStorage& other) : QObject(other.parent()), RectStorage<Conditions>(other) {}
+    explicit KCConditionsStorage(KCMap* map) : QObject(map), RectStorage<Conditions>(map) {}
+    KCConditionsStorage(const KCConditionsStorage& other) : QObject(other.parent()), RectStorage<Conditions>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {

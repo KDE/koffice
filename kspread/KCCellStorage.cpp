@@ -30,7 +30,7 @@
 
 // KSpread
 #include "KCBindingStorage.h"
-#include "ConditionsStorage.h"
+#include "KCConditionsStorage.h"
 #include "Damages.h"
 #include "DependencyManager.h"
 #include "FormulaStorage.h"
@@ -64,7 +64,7 @@ public:
             : sheet(sheet)
             , bindingStorage(new KCBindingStorage(sheet->map()))
             , commentStorage(new CommentStorage(sheet->map()))
-            , conditionsStorage(new ConditionsStorage(sheet->map()))
+            , conditionsStorage(new KCConditionsStorage(sheet->map()))
             , databaseStorage(new DatabaseStorage(sheet->map()))
             , formulaStorage(new FormulaStorage())
             , fusionStorage(new FusionStorage(sheet->map()))
@@ -83,7 +83,7 @@ public:
             : sheet(sheet)
             , bindingStorage(new KCBindingStorage(*other.bindingStorage))
             , commentStorage(new CommentStorage(*other.commentStorage))
-            , conditionsStorage(new ConditionsStorage(*other.conditionsStorage))
+            , conditionsStorage(new KCConditionsStorage(*other.conditionsStorage))
             , databaseStorage(new DatabaseStorage(*other.databaseStorage))
             , formulaStorage(new FormulaStorage(*other.formulaStorage))
             , fusionStorage(new FusionStorage(*other.fusionStorage))
@@ -121,7 +121,7 @@ public:
     KCSheet*                  sheet;
     KCBindingStorage*         bindingStorage;
     CommentStorage*         commentStorage;
-    ConditionsStorage*      conditionsStorage;
+    KCConditionsStorage*      conditionsStorage;
     DatabaseStorage*        databaseStorage;
     FormulaStorage*         formulaStorage;
     FusionStorage*          fusionStorage;
@@ -1415,7 +1415,7 @@ const CommentStorage* KCCellStorage::commentStorage() const
     return d->commentStorage;
 }
 
-const ConditionsStorage* KCCellStorage::conditionsStorage() const
+const KCConditionsStorage* KCCellStorage::conditionsStorage() const
 {
     return d->conditionsStorage;
 }

@@ -500,7 +500,7 @@ const CommentStorage* KCSheet::commentStorage() const
     return d->cellStorage->commentStorage();
 }
 
-const ConditionsStorage* KCSheet::conditionsStorage() const
+const KCConditionsStorage* KCSheet::conditionsStorage() const
 {
     return d->cellStorage->conditionsStorage();
 }

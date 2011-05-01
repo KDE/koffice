@@ -61,7 +61,7 @@ class KCCell;
 class KCCellStorage;
 class ColumnFormat;
 class CommentStorage;
-class ConditionsStorage;
+class KCConditionsStorage;
 class FormulaStorage;
 class DocBase;
 class FusionStorage;
@@ -480,7 +480,7 @@ public:
     KCCellStorage* cellStorage() const;
 
     const CommentStorage* commentStorage() const;
-    const ConditionsStorage* conditionsStorage() const;
+    const KCConditionsStorage* conditionsStorage() const;
     const FormulaStorage* formulaStorage() const;
     const FusionStorage* fusionStorage() const;
     const LinkStorage* linkStorage() const;
