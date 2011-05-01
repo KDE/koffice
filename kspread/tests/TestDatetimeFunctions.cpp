@@ -22,7 +22,7 @@
 
 void TestDatetimeFunctions::initTestCase()
 {
-    FunctionModuleRegistry::instance()->loadFunctionModules();
+    KCFunctionModuleRegistry::instance()->loadFunctionModules();
 }
 
 #define CHECK_EVAL(x,y) { KCValue z(RoundNumber(y)); QCOMPARE(evaluate(x,z), (z)); }

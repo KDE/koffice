@@ -105,7 +105,7 @@ KCValue TestFormula::evaluate(const QString& formula, KCValue& ex)
 
 void TestFormula::initTestCase()
 {
-    FunctionModuleRegistry::instance()->loadFunctionModules();
+    KCFunctionModuleRegistry::instance()->loadFunctionModules();
 }
 
 void TestFormula::testTokenizer()

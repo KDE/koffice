@@ -95,7 +95,7 @@ KCValue TestMathFunctions::evaluate(const QString& formula)
 
 void TestMathFunctions::initTestCase()
 {
-    FunctionModuleRegistry::instance()->loadFunctionModules();
+    KCFunctionModuleRegistry::instance()->loadFunctionModules();
 
     m_map = new KCMap(0 /* no Doc */);
     m_map->addNewSheet();

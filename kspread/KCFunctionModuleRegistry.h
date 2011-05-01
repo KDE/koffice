@@ -32,19 +32,19 @@
  * \ingroup KCValue
  * Registry for function modules.
  */
-class KSPREAD_EXPORT FunctionModuleRegistry : public QObject, public KoGenericRegistry<KCFunctionModule*>
+class KSPREAD_EXPORT KCFunctionModuleRegistry : public QObject, public KoGenericRegistry<KCFunctionModule*>
 {
 public:
     /**
      * Creates the registry and loads the function modules.
      */
-    FunctionModuleRegistry();
-    ~FunctionModuleRegistry();
+    KCFunctionModuleRegistry();
+    ~KCFunctionModuleRegistry();
 
     /**
      * \return the singleton instance
      */
-    static FunctionModuleRegistry* instance();
+    static KCFunctionModuleRegistry* instance();
 
     /**
      * Loads the function modules.

@@ -38,7 +38,7 @@ void TestLogicFunctions::cleanup()
 
 void TestLogicFunctions::initTestCase()
 {
-    FunctionModuleRegistry::instance()->loadFunctionModules();
+    KCFunctionModuleRegistry::instance()->loadFunctionModules();
 }
 
 // because we may need to promote expected value from integer to float

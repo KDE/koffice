@@ -22,7 +22,7 @@
 
 void TestTextFunctions::initTestCase()
 {
-    FunctionModuleRegistry::instance()->loadFunctionModules();
+    KCFunctionModuleRegistry::instance()->loadFunctionModules();
 }
 
 #define CHECK_EVAL(x,y) { KCValue z(y); QCOMPARE(evaluate(x,z),(z)); }

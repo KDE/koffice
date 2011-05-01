@@ -26,7 +26,7 @@
 #include "qtest_kde.h"
 
 #include <KCFormula.h>
-#include <FunctionModuleRegistry.h>
+#include <KCFunctionModuleRegistry.h>
 #include <KCRegion.h>
 #include <Util.h>
 #include <KCValue.h>
@@ -89,7 +89,7 @@ QString TestOpenFormula::convertFromOpenFormula(const QString& expr)
 
 void TestOpenFormula::initTestCase()
 {
-    FunctionModuleRegistry::instance()->loadFunctionModules();
+    KCFunctionModuleRegistry::instance()->loadFunctionModules();
 }
 
 void TestOpenFormula::testEvaluation()

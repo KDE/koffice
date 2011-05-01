@@ -22,7 +22,7 @@
 
 void TestTrigFunctions::initTestCase()
 {
-    FunctionModuleRegistry::instance()->loadFunctionModules();
+    KCFunctionModuleRegistry::instance()->loadFunctionModules();
 }
 
 // NOTE: we do not compare the numbers _exactly_ because it is difficult

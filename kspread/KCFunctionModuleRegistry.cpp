@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "FunctionModuleRegistry.h"
+#include "KCFunctionModuleRegistry.h"
 
 #include "KCFunction.h"
 #include "FunctionRepository.h"
@@ -28,7 +28,7 @@
 #include <KServiceTypeTrader>
 #include <KStandardDirs>
 
-class FunctionModuleRegistry::Private
+class KCFunctionModuleRegistry::Private
 {
 public:
     void registerFunctionModule(KCFunctionModule* module);
@@ -38,7 +38,7 @@ public:
     bool repositoryInitialized;
 };
 
-void FunctionModuleRegistry::Private::registerFunctionModule(KCFunctionModule* module)
+void KCFunctionModuleRegistry::Private::registerFunctionModule(KCFunctionModule* module)
 {
     const QList<QSharedPointer<KCFunction> > functions = module->functions();
     for (int i = 0; i < functions.count(); ++i) {
@@ -54,7 +54,7 @@ void FunctionModuleRegistry::Private::registerFunctionModule(KCFunctionModule* m
     FunctionRepository::self()->loadFunctionDescriptions(fileName);
 }
 
-void FunctionModuleRegistry::Private::removeFunctionModule(KCFunctionModule* module)
+void KCFunctionModuleRegistry::Private::removeFunctionModule(KCFunctionModule* module)
 {
     const QList<QSharedPointer<KCFunction> > functions = module->functions();
     for (int i = 0; i < functions.count(); ++i) {
@@ -63,24 +63,24 @@ void FunctionModuleRegistry::Private::removeFunctionModule(KCFunctionModule* mod
 }
 
 
-FunctionModuleRegistry::FunctionModuleRegistry()
+KCFunctionModuleRegistry::KCFunctionModuleRegistry()
         : d(new Private)
 {
     d->repositoryInitialized = false;
 }
 
-FunctionModuleRegistry::~FunctionModuleRegistry()
+KCFunctionModuleRegistry::~KCFunctionModuleRegistry()
 {
     delete d;
 }
 
-FunctionModuleRegistry* FunctionModuleRegistry::instance()
+KCFunctionModuleRegistry* KCFunctionModuleRegistry::instance()
 {
-    K_GLOBAL_STATIC(FunctionModuleRegistry, s_instance)
+    K_GLOBAL_STATIC(KCFunctionModuleRegistry, s_instance)
     return s_instance;
 }
 
-void FunctionModuleRegistry::loadFunctionModules()
+void KCFunctionModuleRegistry::loadFunctionModules()
 {
     const quint32 minKSpreadVersion = KOFFICE_MAKE_VERSION(2, 1, 0);
     const QString serviceType = QLatin1String("KSpread/Plugin");
@@ -142,7 +142,7 @@ void FunctionModuleRegistry::loadFunctionModules()
     }
 }
 
-void FunctionModuleRegistry::registerFunctions()
+void KCFunctionModuleRegistry::registerFunctions()
 {
     d->repositoryInitialized = true;
     const QList<KCFunctionModule*> modules = values();

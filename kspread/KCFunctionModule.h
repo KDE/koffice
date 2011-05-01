@@ -66,7 +66,7 @@ public:
     /**
      * Checks wether this module can be removed, because none of its
      * KCFunction objects is in use.
-     * Used by the FunctionModuleRegistry to check, if the plugin can be unloaded.
+     * Used by the KCFunctionModuleRegistry to check, if the plugin can be unloaded.
      * \return \c true on success; \c false on failure
      */
     bool isRemovable();

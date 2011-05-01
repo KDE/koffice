@@ -83,7 +83,7 @@
 #include "Factory.h"
 #include "KCFormula.h"
 #include "KCFunction.h"
-#include "FunctionModuleRegistry.h"
+#include "KCFunctionModuleRegistry.h"
 #include "HeaderFooter.h"
 #include "LoadingInfo.h"
 #include "Localization.h"
@@ -163,7 +163,7 @@ Doc::Doc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
     setTemplateType("kspread_template");
 
     // Load the function modules.
-    FunctionModuleRegistry::instance()->loadFunctionModules();
+    KCFunctionModuleRegistry::instance()->loadFunctionModules();
 }
 
 Doc::~Doc()

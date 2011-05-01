@@ -23,7 +23,7 @@
 
 #include "KCFunction.h"
 #include "KCFunctionDescription.h"
-#include "FunctionModuleRegistry.h"
+#include "KCFunctionModuleRegistry.h"
 
 #include <QDomElement>
 #include <QDomNode>
@@ -51,7 +51,7 @@ FunctionRepository* FunctionRepository::self()
         *s_instance; // creates the global instance
 
         // register all existing functions
-        FunctionModuleRegistry::instance()->registerFunctions();
+        KCFunctionModuleRegistry::instance()->registerFunctions();
 
 #ifndef NDEBUG
         kDebug(36005) << "functions registered:" << s_instance->d->functions.count()

@@ -30,7 +30,7 @@
 #include "KCCellStorage.h"
 #include "KCFormula.h"
 #include "KCFunction.h"
-#include "FunctionModuleRegistry.h"
+#include "KCFunctionModuleRegistry.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
 

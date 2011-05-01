@@ -53,7 +53,7 @@
 #include "KCCalculationSettings.h"
 #include "part/Doc.h"
 #include "part/Factory.h"
-#include "FunctionModuleRegistry.h"
+#include "KCFunctionModuleRegistry.h"
 #include "Localization.h"
 #include "KCMap.h"
 #include "KCSheet.h"
@@ -406,7 +406,7 @@ void PreferenceDialog::slotApply()
 
     // Plugin Options
     d->pluginSelector->save();
-    FunctionModuleRegistry::instance()->loadFunctionModules();
+    KCFunctionModuleRegistry::instance()->loadFunctionModules();
 
     d->spellCheckPage->save();
 

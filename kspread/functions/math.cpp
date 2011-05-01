@@ -31,7 +31,7 @@
 #include <kdebug.h>
 #include <KLocale>
 
-#include "FunctionModuleRegistry.h"
+#include "KCFunctionModuleRegistry.h"
 #include "KCFunction.h"
 #include "FunctionRepository.h"
 #include "ValueCalc.h"

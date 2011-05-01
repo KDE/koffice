@@ -24,7 +24,7 @@
 
 #include "KCCalculationSettings.h"
 #include "KCFunction.h"
-#include "FunctionModuleRegistry.h"
+#include "KCFunctionModuleRegistry.h"
 #include "functions/helper.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
