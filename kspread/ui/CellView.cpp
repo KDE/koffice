@@ -64,7 +64,7 @@
 #include "KCCellStorage.h"
 #include "KCCondition.h"
 #include "KCMap.h"
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "RowColumnFormat.h"
 #include "Selection.h"
 #include "KCSheet.h"
@@ -1166,7 +1166,7 @@ void CellView::paintPageBorders(QPainter& painter, const QPointF& coordinate,
         return;
 
     SheetPrint* const print = cell.sheet()->print();
-    const PrintSettings *const settings = cell.sheet()->printSettings();
+    const KCPrintSettings *const settings = cell.sheet()->printSettings();
     const QRect printRange = settings->printRegion().lastRange();
 
     // Draw page borders

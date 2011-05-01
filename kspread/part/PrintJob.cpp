@@ -24,7 +24,7 @@
 #include "Doc.h"
 #include "KCHeaderFooter.h"
 #include "KCMap.h"
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 #include "SheetPrint.h"
@@ -105,7 +105,7 @@ int PrintJob::Private::setupPages(const QPrinter& printer, bool forceRecreation)
     const PageManagerMap::Iterator end(pageManagers.constEnd());
     for (PageManagerMap::Iterator it(pageManagers.constBegin()); it != end; ++it) {
         SheetPrint *const pageManager = *it;
-        PrintSettings settings = *pageManager->settings();
+        KCPrintSettings settings = *pageManager->settings();
         // Set the print region, if the selection should be painted.
         // Temporarily! The print region is solely used for the page creation
         // of the current printout, but we are working with the permanent
@@ -163,7 +163,7 @@ bool PrintJob::Private::pageNeedsPrinting(KCSheet * sheet, const QRect& cellRang
 void PrintJob::Private::printHeaderFooter(QPainter &painter, KCSheet *sheet, int pageNo) const
 {
     const SheetPrint *const pageManager = pageManagers[sheet];
-    const PrintSettings *const settings = pageManager->settings();
+    const KCPrintSettings *const settings = pageManager->settings();
     const KoPageLayout pageLayout = settings->pageLayout();
 
     const KCHeaderFooter *const headerFooter = pageManager->headerFooter();
@@ -257,7 +257,7 @@ PrintJob::PrintJob(View *view)
 
     //apply page layout parameters
     KCSheet *const sheet = d->view->activeSheet();
-    const PrintSettings* settings = d->pageManagers[sheet]->settings();
+    const KCPrintSettings* settings = d->pageManagers[sheet]->settings();
     const KoPageLayout pageLayout = settings->pageLayout();
     const KoPageFormat::Format pageFormat = pageLayout.format;
     printer().setPaperSize(static_cast<QPrinter::PageSize>(KoPageFormat::printerPageSize(pageFormat)));
@@ -336,7 +336,7 @@ QRectF PrintJob::preparePage(int pageNumber)
 
     // Move the painter offset according to the page layout.
     const SheetPrint *const pageManager = d->pageManagers[sheet];
-    const PrintSettings *const settings = pageManager->settings();
+    const KCPrintSettings *const settings = pageManager->settings();
     // Everything in the painting logic is done in logical, device-independent
     // coordinates. The painting logic uses KoZoomHandler/KoViewConverter. The
     // mapping between logical and physical coordinates has to be done by
@@ -430,7 +430,7 @@ void PrintJob::printPage(int pageNumber, QPainter &painter)
     painter.scale(scale, scale);
 
     const SheetPrint *const pageManager = d->pageManagers[sheet];
-    const PrintSettings *const settings = pageManager->settings();
+    const KCPrintSettings *const settings = pageManager->settings();
     const KoPageLayout pageLayout = settings->pageLayout();
     const double zoom = settings->zoom();
     kDebug() << "printing page" << sheetPageNumber << "; cell range" << cellRange;

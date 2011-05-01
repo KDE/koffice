@@ -23,7 +23,7 @@
 
 #include "KCLocalization.h"
 #include "KCMap.h"
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "KCSheet.h"
 #include "SheetPrint.h"
 

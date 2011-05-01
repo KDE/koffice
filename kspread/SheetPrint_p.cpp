@@ -23,7 +23,7 @@
 #include "SheetPrint.h"
 #include "SheetPrint_p.h"
 
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"

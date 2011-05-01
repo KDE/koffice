@@ -121,7 +121,7 @@ public:
     SheetPrint *q;
     KCSheet * m_pSheet;
 
-    PrintSettings* m_settings;
+    KCPrintSettings* m_settings;
     KCHeaderFooter *m_headerFooter;
 
     /**

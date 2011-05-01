@@ -79,7 +79,7 @@
 #include "KCNamedAreaManager.h"
 #include "KCOdfLoadingContext.h"
 #include "KCOdfSavingContext.h"
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "RecalcManager.h"
 #include "RowColumnFormat.h"
 #include "ShapeApplicationData.h"
@@ -540,12 +540,12 @@ SheetPrint* KCSheet::print() const
     return d->print;
 }
 
-PrintSettings* KCSheet::printSettings() const
+KCPrintSettings* KCSheet::printSettings() const
 {
     return d->print->settings();
 }
 
-void KCSheet::setPrintSettings(const PrintSettings &settings)
+void KCSheet::setPrintSettings(const KCPrintSettings &settings)
 {
     d->print->setSettings(settings);
     // Repaint, if page borders are shown and this is the active sheet.

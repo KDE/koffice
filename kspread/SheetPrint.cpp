@@ -25,7 +25,7 @@
 #include "SheetPrint_p.h"
 
 #include "KCHeaderFooter.h"
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "kspread_limits.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
@@ -38,7 +38,7 @@ SheetPrint::SheetPrint(KCSheet *sheet)
 {
     d->m_pSheet = sheet;
 
-    d->m_settings = new PrintSettings();
+    d->m_settings = new KCPrintSettings();
     d->m_headerFooter = new KCHeaderFooter(sheet);
 
     d->m_maxCheckedNewPageX = 0;
@@ -52,7 +52,7 @@ SheetPrint::SheetPrint(const SheetPrint &other)
 {
     d->m_pSheet = other.d->m_pSheet;
 
-    d->m_settings = new PrintSettings(*other.d->m_settings);
+    d->m_settings = new KCPrintSettings(*other.d->m_settings);
     d->m_headerFooter = new KCHeaderFooter(*other.d->m_headerFooter);
 
     d->m_maxCheckedNewPageX = other.d->m_maxCheckedNewPageX;
@@ -70,12 +70,12 @@ SheetPrint::~SheetPrint()
     delete d;
 }
 
-PrintSettings *SheetPrint::settings() const
+KCPrintSettings *SheetPrint::settings() const
 {
     return d->m_settings;
 }
 
-void SheetPrint::setSettings(const PrintSettings &settings, bool force)
+void SheetPrint::setSettings(const KCPrintSettings &settings, bool force)
 {
     // Relayout forced?
     if (force) {
@@ -318,7 +318,7 @@ void SheetPrint::insertColumn(int col, int nbCol)
         const KCRegion region(QRect(QPoint(left, printRange.top()),
                                   QPoint(right, printRange.bottom())), d->m_pSheet);
         // Trigger an update by setting it indirectly.
-        PrintSettings settings = *d->m_settings;
+        KCPrintSettings settings = *d->m_settings;
         settings.setPrintRegion(region);
         setSettings(settings);
     }
@@ -342,7 +342,7 @@ void SheetPrint::insertRow(int row, int nbRow)
         const KCRegion region(QRect(QPoint(printRange.left(), top),
                                   QPoint(printRange.right(), bottom)), d->m_pSheet);
         // Trigger an update by setting it indirectly.
-        PrintSettings settings = *d->m_settings;
+        KCPrintSettings settings = *d->m_settings;
         settings.setPrintRegion(region);
         setSettings(settings);
     }
@@ -350,7 +350,7 @@ void SheetPrint::insertRow(int row, int nbRow)
 
 void SheetPrint::removeColumn(int col, int nbCol)
 {
-    PrintSettings settings = *d->m_settings;
+    KCPrintSettings settings = *d->m_settings;
     //update print range, when it has been defined
     const QRect printRange = d->m_settings->printRegion().lastRange();
     if (printRange != QRect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax))) {
@@ -390,7 +390,7 @@ void SheetPrint::removeColumn(int col, int nbCol)
 
 void SheetPrint::removeRow(int row, int nbRow)
 {
-    PrintSettings settings = *d->m_settings;
+    KCPrintSettings settings = *d->m_settings;
     //update print range, when it has been defined
     const QRect printRange = d->m_settings->printRegion().lastRange();
     if (printRange != QRect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax))) {
@@ -445,7 +445,7 @@ QRect SheetPrint::cellRange(int page) const
 
     int horizontalIndex = 0;
     int verticalIndex = 0;
-    if (d->m_settings->pageOrder() == PrintSettings::LeftToRight) {
+    if (d->m_settings->pageOrder() == KCPrintSettings::LeftToRight) {
         horizontalIndex = (page - 1) % d->m_lnewPageListX.count();
         verticalIndex = (page - 1) / d->m_lnewPageListX.count();
     } else {
@@ -477,7 +477,7 @@ QRectF SheetPrint::documentArea(int page) const
 
     int horizontalIndex = 0;
     int verticalIndex = 0;
-    if (d->m_settings->pageOrder() == PrintSettings::LeftToRight) {
+    if (d->m_settings->pageOrder() == KCPrintSettings::LeftToRight) {
         horizontalIndex = (page - 1) % d->m_lnewPageListX.count();
         verticalIndex = (page - 1) / d->m_lnewPageListX.count();
     } else {

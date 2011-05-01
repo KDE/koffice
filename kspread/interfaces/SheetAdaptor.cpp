@@ -35,7 +35,7 @@
 
 #include "Damages.h"
 #include "KCMap.h"
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "KCSheet.h"
 #include "SheetPrint.h"
 #include "KCRegion.h"

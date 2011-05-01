@@ -21,7 +21,7 @@
 */
 
 // Local
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 
 // KSpread
 #include "kspread_limits.h"
@@ -34,7 +34,7 @@
 // Qt
 #include <QSize>
 
-class PrintSettings::Private
+class KCPrintSettings::Private
 {
 public:
     KoPageLayout pageLayout;
@@ -59,7 +59,7 @@ public:
     void calculatePageDimensions();
 };
 
-void PrintSettings::Private::calculatePageDimensions()
+void KCPrintSettings::Private::calculatePageDimensions()
 {
     if (pageLayout.format != KoPageFormat::CustomSize) {
         pageLayout.width =  MM_TO_POINT(KoPageFormat::width(pageLayout.format, pageLayout.orientation));
@@ -67,7 +67,7 @@ void PrintSettings::Private::calculatePageDimensions()
     }
 }
 
-PrintSettings::PrintSettings()
+KCPrintSettings::KCPrintSettings()
         : d(new Private)
 {
     d->printGrid = false;
@@ -85,7 +85,7 @@ PrintSettings::PrintSettings()
     d->zoom = 1.0;
 }
 
-PrintSettings::PrintSettings(const PrintSettings& other)
+KCPrintSettings::KCPrintSettings(const KCPrintSettings& other)
         : d(new Private)
 {
     d->pageLayout = other.d->pageLayout;
@@ -107,34 +107,34 @@ PrintSettings::PrintSettings(const PrintSettings& other)
     d->repeatedRows = other.d->repeatedRows;
 }
 
-PrintSettings::~PrintSettings()
+KCPrintSettings::~KCPrintSettings()
 {
     delete d;
 }
 
-const KoPageLayout& PrintSettings::pageLayout() const
+const KoPageLayout& KCPrintSettings::pageLayout() const
 {
     return d->pageLayout;
 }
 
-void PrintSettings::setPageLayout(const KoPageLayout& pageLayout)
+void KCPrintSettings::setPageLayout(const KoPageLayout& pageLayout)
 {
     d->pageLayout = pageLayout;
 }
 
-void PrintSettings::setPageFormat(KoPageFormat::Format format)
+void KCPrintSettings::setPageFormat(KoPageFormat::Format format)
 {
     d->pageLayout.format = format;
     d->calculatePageDimensions();
 }
 
-void PrintSettings::setPageOrientation(KoPageFormat::Orientation orientation)
+void KCPrintSettings::setPageOrientation(KoPageFormat::Orientation orientation)
 {
     d->pageLayout.orientation = orientation;
     d->calculatePageDimensions();
 }
 
-QString PrintSettings::paperFormatString() const
+QString KCPrintSettings::paperFormatString() const
 {
     if (d->pageLayout.format == KoPageFormat::CustomSize) {
         QString tmp;
@@ -144,7 +144,7 @@ QString PrintSettings::paperFormatString() const
     return KoPageFormat::formatString(d->pageLayout.format);
 }
 
-QString PrintSettings::orientationString() const
+QString KCPrintSettings::orientationString() const
 {
     switch (d->pageLayout.orientation) {
     case QPrinter::Portrait:
@@ -155,188 +155,188 @@ QString PrintSettings::orientationString() const
     }
 }
 
-double PrintSettings::printWidth() const
+double KCPrintSettings::printWidth() const
 {
     return d->pageLayout.width - d->pageLayout.leftMargin - d->pageLayout.rightMargin;
 }
 
-double PrintSettings::printHeight() const
+double KCPrintSettings::printHeight() const
 {
     return d->pageLayout.height - d->pageLayout.topMargin - d->pageLayout.bottomMargin;
 }
 
-PrintSettings::PageOrder PrintSettings::pageOrder() const
+KCPrintSettings::PageOrder KCPrintSettings::pageOrder() const
 {
     return d->pageOrder;
 }
 
-void PrintSettings::setPageOrder(PageOrder order)
+void KCPrintSettings::setPageOrder(PageOrder order)
 {
     d->pageOrder = order;
 }
 
-bool PrintSettings::printGrid() const
+bool KCPrintSettings::printGrid() const
 {
     return d->printGrid;
 }
 
-void PrintSettings::setPrintGrid(bool printGrid)
+void KCPrintSettings::setPrintGrid(bool printGrid)
 {
     d->printGrid = printGrid;
 }
 
-bool PrintSettings::printCharts() const
+bool KCPrintSettings::printCharts() const
 {
     return d->printCharts;
 }
 
-void PrintSettings::setPrintCharts(bool printCharts)
+void KCPrintSettings::setPrintCharts(bool printCharts)
 {
     d->printCharts = printCharts;
 }
 
-bool PrintSettings::printObjects() const
+bool KCPrintSettings::printObjects() const
 {
     return d->printObjects;
 }
 
-void PrintSettings::setPrintObjects(bool printObjects)
+void KCPrintSettings::setPrintObjects(bool printObjects)
 {
     d->printObjects = printObjects;
 }
 
-bool PrintSettings::printGraphics() const
+bool KCPrintSettings::printGraphics() const
 {
     return d->printGraphics;
 }
 
-void PrintSettings::setPrintGraphics(bool printGraphics)
+void KCPrintSettings::setPrintGraphics(bool printGraphics)
 {
     d->printGraphics = printGraphics;
 }
 
-bool PrintSettings::printCommentIndicator() const
+bool KCPrintSettings::printCommentIndicator() const
 {
     return d->printCommentIndicator;
 }
 
-void PrintSettings::setPrintCommentIndicator(bool printCommentIndicator)
+void KCPrintSettings::setPrintCommentIndicator(bool printCommentIndicator)
 {
     d->printCommentIndicator = printCommentIndicator;
 }
 
-bool PrintSettings::printFormulaIndicator() const
+bool KCPrintSettings::printFormulaIndicator() const
 {
     return d->printFormulaIndicator;
 }
 
-void PrintSettings::setPrintFormulaIndicator(bool printFormulaIndicator)
+void KCPrintSettings::setPrintFormulaIndicator(bool printFormulaIndicator)
 {
     d->printFormulaIndicator = printFormulaIndicator;
 }
 
-bool PrintSettings::printHeaders() const
+bool KCPrintSettings::printHeaders() const
 {
     return d->printHeaders;
 }
 
-void PrintSettings::setPrintHeaders(bool printHeaders)
+void KCPrintSettings::setPrintHeaders(bool printHeaders)
 {
     d->printHeaders = printHeaders;
 }
 
-bool PrintSettings::printZeroValues() const
+bool KCPrintSettings::printZeroValues() const
 {
     return d->printZeroValues;
 }
 
-void PrintSettings::setPrintZeroValues(bool printZeroValues)
+void KCPrintSettings::setPrintZeroValues(bool printZeroValues)
 {
     d->printZeroValues = printZeroValues;
 }
 
-bool PrintSettings::centerHorizontally() const
+bool KCPrintSettings::centerHorizontally() const
 {
     return d->centerHorizontally;
 }
 
-void PrintSettings::setCenterHorizontally(bool center)
+void KCPrintSettings::setCenterHorizontally(bool center)
 {
     d->centerHorizontally = center;
 }
 
-bool PrintSettings::centerVertically() const
+bool KCPrintSettings::centerVertically() const
 {
     return d->centerVertically;
 }
 
-void PrintSettings::setCenterVertically(bool center)
+void KCPrintSettings::setCenterVertically(bool center)
 {
     d->centerVertically = center;
 }
 
-const KCRegion& PrintSettings::printRegion() const
+const KCRegion& KCPrintSettings::printRegion() const
 {
     return d->printRegion;
 }
 
-void PrintSettings::setPrintRegion(const KCRegion& region)
+void KCPrintSettings::setPrintRegion(const KCRegion& region)
 {
     d->printRegion = region;
 }
 
-void PrintSettings::addPrintRange(const QRect& range)
+void KCPrintSettings::addPrintRange(const QRect& range)
 {
     d->printRegion.add(range);
 }
 
-void PrintSettings::removePrintRange(const QRect& range)
+void KCPrintSettings::removePrintRange(const QRect& range)
 {
     d->printRegion.sub(range, 0);
 }
 
-double PrintSettings::zoom() const
+double KCPrintSettings::zoom() const
 {
     return d->zoom;
 }
 
-void PrintSettings::setZoom(double zoom)
+void KCPrintSettings::setZoom(double zoom)
 {
     d->zoom = zoom;
 }
 
-const QSize& PrintSettings::pageLimits() const
+const QSize& KCPrintSettings::pageLimits() const
 {
     return d->pageLimits;
 }
 
-void PrintSettings::setPageLimits(const QSize& pageLimits)
+void KCPrintSettings::setPageLimits(const QSize& pageLimits)
 {
     d->pageLimits = pageLimits;
 }
 
-const QPair<int, int>& PrintSettings::repeatedColumns() const
+const QPair<int, int>& KCPrintSettings::repeatedColumns() const
 {
     return d->repeatedColumns;
 }
 
-void PrintSettings::setRepeatedColumns(const QPair<int, int>& repeatedColumns)
+void KCPrintSettings::setRepeatedColumns(const QPair<int, int>& repeatedColumns)
 {
     d->repeatedColumns = repeatedColumns;
     kDebug() << repeatedColumns;
 }
 
-const QPair<int, int>& PrintSettings::repeatedRows() const
+const QPair<int, int>& KCPrintSettings::repeatedRows() const
 {
     return d->repeatedRows;
 }
 
-void PrintSettings::setRepeatedRows(const QPair<int, int>& repeatedRows)
+void KCPrintSettings::setRepeatedRows(const QPair<int, int>& repeatedRows)
 {
     d->repeatedRows = repeatedRows;
 }
 
-QString PrintSettings::saveOdfPageLayout(KoGenStyles &mainStyles,
+QString KCPrintSettings::saveOdfPageLayout(KoGenStyles &mainStyles,
         bool formulas, bool zeros)
 {
     // Create a page layout style.
@@ -407,7 +407,7 @@ QString PrintSettings::saveOdfPageLayout(KoGenStyles &mainStyles,
     return mainStyles.insert(pageLayout, "pm");
 }
 
-void PrintSettings::operator=(const PrintSettings & other)
+void KCPrintSettings::operator=(const KCPrintSettings & other)
 {
     d->pageLayout = other.d->pageLayout;
     d->printGrid = other.d->printGrid;
@@ -428,7 +428,7 @@ void PrintSettings::operator=(const PrintSettings & other)
     d->repeatedRows = other.d->repeatedRows;
 }
 
-bool PrintSettings::operator==(const PrintSettings& other) const
+bool KCPrintSettings::operator==(const KCPrintSettings& other) const
 {
     if (d->pageLayout != other.d->pageLayout)
         return false;

@@ -64,7 +64,7 @@
 #include "Canvas.h"
 #include "Doc.h"
 #include "kspread_limits.h"
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "KCSheet.h"
 #include "StyleManager.h"
 #include "Util.h"

@@ -123,7 +123,7 @@
 #include "KCLocalization.h"
 #include "KCMap.h"
 #include "KCNamedAreaManager.h"
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "RecalcManager.h"
 #include "RowColumnFormat.h"
 #include "ShapeApplicationData.h"

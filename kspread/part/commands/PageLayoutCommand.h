@@ -21,7 +21,7 @@
 #ifndef KSPREAD_PAGE_LAYOUT_COMMAND
 #define KSPREAD_PAGE_LAYOUT_COMMAND
 
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 
 #include <QUndoCommand>
 
@@ -34,14 +34,14 @@ class KCSheet;
 class PageLayoutCommand : public QUndoCommand
 {
 public:
-    explicit PageLayoutCommand(KCSheet* sheet, const PrintSettings& settings, QUndoCommand* parent = 0);
+    explicit PageLayoutCommand(KCSheet* sheet, const KCPrintSettings& settings, QUndoCommand* parent = 0);
 
     virtual void redo();
     virtual void undo();
 
 private:
     KCSheet* m_sheet;
-    PrintSettings m_settings;
+    KCPrintSettings m_settings;
 };
 
 #endif // KSPREAD_PAGE_LAYOUT_COMMAND

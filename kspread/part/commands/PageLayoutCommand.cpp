@@ -25,7 +25,7 @@
 
 // ----- PageLayoutCommand -----
 
-PageLayoutCommand::PageLayoutCommand(KCSheet* sheet, const PrintSettings& settings, QUndoCommand* parent)
+PageLayoutCommand::PageLayoutCommand(KCSheet* sheet, const KCPrintSettings& settings, QUndoCommand* parent)
         : QUndoCommand(parent)
         , m_sheet(sheet)
         , m_settings(settings)
@@ -36,7 +36,7 @@ PageLayoutCommand::PageLayoutCommand(KCSheet* sheet, const PrintSettings& settin
 void PageLayoutCommand::redo()
 {
     // Store the old settings.
-    PrintSettings settings = *m_sheet->printSettings();
+    KCPrintSettings settings = *m_sheet->printSettings();
     // Set the new ones.
     m_sheet->setPrintSettings(m_settings);
     // Store the old settings permanently.

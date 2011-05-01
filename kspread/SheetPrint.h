@@ -29,7 +29,7 @@
 class QPainter;
 
 class KCHeaderFooter;
-class PrintSettings;
+class KCPrintSettings;
 class KCSheet;
 
 /**
@@ -49,13 +49,13 @@ public:
     /**
      * \return the print settings
      */
-    PrintSettings *settings() const;
+    KCPrintSettings *settings() const;
 
     /**
      * Sets the print \p settings.
      * \param force Forces a relayout of the pages, if \c true.
      */
-    void setSettings(const PrintSettings &settings, bool force = false);
+    void setSettings(const KCPrintSettings &settings, bool force = false);
 
     /**
      * \return the header & footer object

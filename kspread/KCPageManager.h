@@ -25,7 +25,7 @@
 class QRect;
 class QSizeF;
 
-class PrintSettings;
+class KCPrintSettings;
 class KCSheet;
 
 /**
@@ -59,7 +59,7 @@ public:
      * \param settings the print settings
      * \param force forces a recreation of the pages, if \c true
      */
-    void setPrintSettings(const PrintSettings& settings, bool force = false);
+    void setPrintSettings(const KCPrintSettings& settings, bool force = false);
 
     /**
      * KCNumber of pages.
@@ -82,7 +82,7 @@ public:
 
 protected:
     KCSheet* sheet() const;
-    const PrintSettings& printSettings() const;
+    const KCPrintSettings& printSettings() const;
     virtual void clearPages();
     virtual bool pageNeedsPrinting(const QRect& cellRange) const;
     virtual void insertPage(int page);

@@ -19,7 +19,7 @@
 
 #include "KCPageManager.h"
 
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
@@ -29,7 +29,7 @@ class KCPageManager::Private
 public:
     KCSheet* sheet;
     QList<QRect> pages; // page number to cell range
-    PrintSettings settings;
+    KCPrintSettings settings;
 };
 
 
@@ -48,13 +48,13 @@ KCPageManager::~KCPageManager()
 void KCPageManager::layoutPages()
 {
     const KCSheet* sheet = d->sheet;
-    const PrintSettings settings = d->settings;
+    const KCPrintSettings settings = d->settings;
     d->pages.clear();
     clearPages();
     int pageNumber = 1;
     preparePage(pageNumber);
 
-    if (settings.pageOrder() == PrintSettings::LeftToRight) {
+    if (settings.pageOrder() == KCPrintSettings::LeftToRight) {
 //         kDebug() << "processing printRanges" << settings.printRegion();
         // iterate over the print ranges
         KCRegion::ConstIterator end = settings.printRegion().constEnd();
@@ -118,7 +118,7 @@ void KCPageManager::layoutPages()
                 height = 0.0;
             }
         }
-    } else { // if (settings.pageOrder() == PrintSettings::TopToBottom)
+    } else { // if (settings.pageOrder() == KCPrintSettings::TopToBottom)
 //         kDebug() << "processing printRanges" << settings.printRegion();
         // iterate over the print ranges
         KCRegion::ConstIterator end = settings.printRegion().constEnd();
@@ -186,7 +186,7 @@ void KCPageManager::layoutPages()
     kDebug() << d->pages.count() << "page(s) created";
 }
 
-void KCPageManager::setPrintSettings(const PrintSettings& settings, bool force)
+void KCPageManager::setPrintSettings(const KCPrintSettings& settings, bool force)
 {
     if (!force && settings == d->settings)
         return;
@@ -219,7 +219,7 @@ KCSheet* KCPageManager::sheet() const
     return d->sheet;
 }
 
-const PrintSettings& KCPageManager::printSettings() const
+const KCPrintSettings& KCPageManager::printSettings() const
 {
     return d->settings;
 }

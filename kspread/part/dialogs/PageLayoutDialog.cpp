@@ -22,7 +22,7 @@
 // KSpread
 #include "part/Doc.h"
 #include "KCMap.h"
-#include "PrintSettings.h"
+#include "KCPrintSettings.h"
 #include "KCSheet.h"
 #include "ui_PageLayoutSheetPage.h"
 #include "Util.h"
@@ -45,7 +45,7 @@ public:
 
 void PageLayoutDialog::Private::setup()
 {
-    const PrintSettings* settings = sheet->printSettings();
+    const KCPrintSettings* settings = sheet->printSettings();
     sheetPage.gridCheckBox->setChecked(settings->printGrid());
     sheetPage.commentCheckBox->setChecked(settings->printCommentIndicator());
     sheetPage.formulaCheckBox->setChecked(settings->printFormulaIndicator());
@@ -54,7 +54,7 @@ void PageLayoutDialog::Private::setup()
     sheetPage.drawingsCheckBox->setChecked(settings->printGraphics());
     sheetPage.zeroValuesCheckBox->setChecked(settings->printZeroValues());
     sheetPage.headersCheckBox->setChecked(settings->printHeaders());
-    sheetPage.ltrButton->setChecked(settings->pageOrder() == PrintSettings::LeftToRight);
+    sheetPage.ltrButton->setChecked(settings->pageOrder() == KCPrintSettings::LeftToRight);
     sheetPage.horizontalCheckBox->setChecked(settings->centerHorizontally());
     sheetPage.verticalCheckBox->setChecked(settings->centerVertically());
 
@@ -168,7 +168,7 @@ PageLayoutDialog::~PageLayoutDialog()
 
 void PageLayoutDialog::accept()
 {
-    PrintSettings settings;
+    KCPrintSettings settings;
     settings.setPageLayout(pageLayout());
     settings.setPrintGrid(d->sheetPage.gridCheckBox->isChecked());
     settings.setPrintCommentIndicator(d->sheetPage.commentCheckBox->isChecked());
@@ -178,7 +178,7 @@ void PageLayoutDialog::accept()
     settings.setPrintObjects(d->sheetPage.objectsCheckBox->isChecked());
     settings.setPrintZeroValues(d->sheetPage.zeroValuesCheckBox->isChecked());
     settings.setPrintHeaders(d->sheetPage.headersCheckBox->isChecked());
-    settings.setPageOrder(d->sheetPage.ltrButton->isChecked() ? PrintSettings::LeftToRight : PrintSettings::TopToBottom);
+    settings.setPageOrder(d->sheetPage.ltrButton->isChecked() ? KCPrintSettings::LeftToRight : KCPrintSettings::TopToBottom);
     settings.setCenterHorizontally(d->sheetPage.horizontalCheckBox->isChecked());
     settings.setCenterVertically(d->sheetPage.verticalCheckBox->isChecked());
 

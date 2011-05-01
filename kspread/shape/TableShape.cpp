@@ -38,7 +38,7 @@
 #include <KCMap.h>
 #include <KCOdfLoadingContext.h>
 #include <KCOdfSavingContext.h>
-#include <PrintSettings.h>
+#include <KCPrintSettings.h>
 #include <KCRegion.h>
 #include <RowColumnFormat.h>
 #include <KCSheet.h>
@@ -121,7 +121,7 @@ void TableShape::setColumns(int columns)
     if (!d->pageManager) {
         return;
     }
-    PrintSettings settings = *sheet()->printSettings();
+    KCPrintSettings settings = *sheet()->printSettings();
     settings.setPrintRegion(KCRegion(1, 1, d->columns, d->rows, sheet()));
     d->pageManager->setPrintSettings(settings);
 }
@@ -139,7 +139,7 @@ void TableShape::setRows(int rows)
     if (!d->pageManager) {
         return;
     }
-    PrintSettings settings = *sheet()->printSettings();
+    KCPrintSettings settings = *sheet()->printSettings();
     settings.setPrintRegion(KCRegion(1, 1, d->columns, d->rows, sheet()));
     d->pageManager->setPrintSettings(settings);
 }

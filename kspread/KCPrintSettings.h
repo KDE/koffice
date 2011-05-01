@@ -36,7 +36,7 @@ class KCSheet;
 /**
  * Settings used for printing.
  */
-class KSPREAD_EXPORT PrintSettings
+class KSPREAD_EXPORT KCPrintSettings
 {
 public:
     enum PageOrder { TopToBottom, LeftToRight };
@@ -44,17 +44,17 @@ public:
     /**
      * Constructor.
      */
-    PrintSettings();
+    KCPrintSettings();
 
     /**
      * Constructor.
      */
-    PrintSettings(const PrintSettings& other);
+    KCPrintSettings(const KCPrintSettings& other);
 
     /**
      * Destructor.
      */
-    virtual ~PrintSettings();
+    virtual ~KCPrintSettings();
 
     /**
      * \return the page layout associated with this document (margins, pageSize, etc).
@@ -240,13 +240,13 @@ public:
     /**
      * Assignment operator.
      */
-    void operator=(const PrintSettings& settings);
+    void operator=(const KCPrintSettings& settings);
 
     /**
      * Equality operator.
      */
-    bool operator==(const PrintSettings& other) const;
-    inline bool operator!=(const PrintSettings& other) const {
+    bool operator==(const KCPrintSettings& other) const;
+    inline bool operator!=(const KCPrintSettings& other) const {
         return !operator==(other);
     }
 

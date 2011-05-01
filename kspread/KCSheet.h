@@ -70,7 +70,7 @@ class KCHeaderFooter;
 class KCMap;
 class KCOdfLoadingContext;
 class KCOdfSavingContext;
-class PrintSettings;
+class KCPrintSettings;
 class KCRegion;
 class RowFormat;
 class KCSheet;
@@ -767,13 +767,13 @@ public:
      * \ingroup Page
      * Print settings.
      */
-    PrintSettings* printSettings() const;
+    KCPrintSettings* printSettings() const;
 
     /**
      * \ingroup Page
      * Sets the print settings.
      */
-    void setPrintSettings(const PrintSettings& settings);
+    void setPrintSettings(const KCPrintSettings& settings);
 
     /**
      * \ingroup Page

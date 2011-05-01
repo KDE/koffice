@@ -46,7 +46,7 @@
 #include <kspread/KCLoadingInfo.h>
 #include <kspread/KCMap.h>
 #include <kspread/KCNamedAreaManager.h>
-#include <kspread/PrintSettings.h>
+#include <kspread/KCPrintSettings.h>
 #include <kspread/KCRegion.h>
 #include <kspread/RowColumnFormat.h>
 #include <kspread/KCSheet.h>

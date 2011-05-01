@@ -212,7 +212,7 @@ set (kspreadodf_LIB_SRCS
     KCMap.cpp
     KCNamedAreaManager.cpp
     KCNumber.cpp
-    PrintSettings.cpp
+    KCPrintSettings.cpp
     ProtectableObject.cpp
     RecalcManager.cpp
     RectStorage.cpp
@@ -245,7 +245,7 @@ set (kspreadodf_LIB_SRCS
     KCFunctionModuleRegistry.cpp
     KCFunctionRepository.cpp
 
-    # TODO: move KCHeaderFooter from SheetPrint to PrintSettings, and replace SheetPrint with PrintSettings in KCSheet to get rid of this dependency
+    # TODO: move KCHeaderFooter from SheetPrint to KCPrintSettings, and replace SheetPrint with KCPrintSettings in KCSheet to get rid of this dependency
     SheetPrint.cpp
     SheetPrint_p.cpp
 
