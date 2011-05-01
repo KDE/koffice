@@ -18,13 +18,13 @@
 */
 
 // Local
-#include "CellToolFactory.h"
+#include "KCCellToolFactory.h"
 
 #include <klocale.h>
 
 #include "CellTool.h"
 
-CellToolFactory::CellToolFactory(QObject* parent, const QString& id)
+KCCellToolFactory::KCCellToolFactory(QObject* parent, const QString& id)
         : KoToolFactoryBase(parent, id)
 {
     setToolTip(i18n("KCCell Tool"));
@@ -34,28 +34,28 @@ CellToolFactory::CellToolFactory(QObject* parent, const QString& id)
     setActivationShapeId("flake/always");
 }
 
-CellToolFactory::~CellToolFactory()
+KCCellToolFactory::~KCCellToolFactory()
 {
 }
 
-KoToolBase* CellToolFactory::createTool(KoCanvasBase* canvas)
+KoToolBase* KCCellToolFactory::createTool(KoCanvasBase* canvas)
 {
     return new CellTool(canvas);
 }
 
-void CellToolFactory::setPriority(int priority)
+void KCCellToolFactory::setPriority(int priority)
 {
     KoToolFactoryBase::setPriority(priority);
 }
 
-void CellToolFactory::setToolTip(const QString& toolTip)
+void KCCellToolFactory::setToolTip(const QString& toolTip)
 {
     KoToolFactoryBase::setToolTip(toolTip);
 }
 
-void CellToolFactory::setIcon(const QString& icon)
+void KCCellToolFactory::setIcon(const QString& icon)
 {
     KoToolFactoryBase::setIcon(icon);
 }
 
-#include "CellToolFactory.moc"
+#include "KCCellToolFactory.moc"

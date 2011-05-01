@@ -28,12 +28,12 @@
 /**
  * The Factory, that creates a CellTool.
  */
-class KSPREAD_EXPORT CellToolFactory : public KoToolFactoryBase
+class KSPREAD_EXPORT KCCellToolFactory : public KoToolFactoryBase
 {
     Q_OBJECT
 public:
-    explicit CellToolFactory(QObject* parent, const QString& id);
-    ~CellToolFactory();
+    explicit KCCellToolFactory(QObject* parent, const QString& id);
+    ~KCCellToolFactory();
 
     KoToolBase* createTool(KoCanvasBase* canvas);
 

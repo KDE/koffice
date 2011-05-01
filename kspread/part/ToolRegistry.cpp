@@ -20,7 +20,7 @@
 #include "ToolRegistry.h"
 
 #include "CellTool.h"
-#include "CellToolFactory.h"
+#include "KCCellToolFactory.h"
 
 #include <KGlobal>
 #include <KPluginInfo>
@@ -39,7 +39,7 @@ ToolRegistry::ToolRegistry()
         : d(new Private)
 {
     // Add the built-in cell tool.
-    KoToolRegistry::instance()->add(new CellToolFactory(this, "KSpreadCellToolId"));
+    KoToolRegistry::instance()->add(new KCCellToolFactory(this, "KSpreadCellToolId"));
     // Load the tool plugins.
     loadTools();
 }
@@ -69,7 +69,7 @@ void ToolRegistry::loadTools()
             kDebug(36002) << "Unable to create plugin factory for" << pluginInfo.name();
             continue;
         }
-        CellToolFactory* toolFactory = factory->create<CellToolFactory>(this);
+        KCCellToolFactory* toolFactory = factory->create<KCCellToolFactory>(this);
         if (!toolFactory) {
             kDebug(36002) << "Unable to create tool factory for" << pluginInfo.name();
             continue;
