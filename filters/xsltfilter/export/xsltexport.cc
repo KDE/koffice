@@ -47,7 +47,7 @@ XSLTExport::XSLTExport(QObject* parent, const QVariantList&) :
 KoFilter::ConversionStatus XSLTExport::convert(const QByteArray& from, const QByteArray&)
 {
     if (from != "application/x-kword" &&
-            from != "application/x-kontour" && from != "application/x-kspread" &&
+            from != "application/x-kontour" && from != "application/x-kcells" &&
             from != "application/x-kivio" && from != "application/x-kchart" &&
             from != "application/x-kpresenter")
         return KoFilter::NotImplemented;

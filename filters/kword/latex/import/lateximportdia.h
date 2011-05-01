@@ -23,7 +23,7 @@
  Copyright (C) 2001 Nicolas Goutte <goutte@kde.org>
 
    which was based on the old file:
-    /home/kde/koffice/filters/kspread/csv/csvfilterdia.h
+    /home/kde/koffice/filters/kcells/csv/csvfilterdia.h
 
    The old file was copyrighted by
     Copyright (C) 1999 David Faure <faure@kde.org>

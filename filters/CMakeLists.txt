@@ -51,9 +51,9 @@ if(SHOULD_BUILD_SHOWCASE)
     add_subdirectory(showcase)
 endif(SHOULD_BUILD_SHOWCASE)
 
-if(SHOULD_BUILD_KSPREAD)
-    add_subdirectory(kspread)
-endif(SHOULD_BUILD_KSPREAD)
+if(SHOULD_BUILD_KCELLS)
+    add_subdirectory(kcells)
+endif(SHOULD_BUILD_KCELLS)
 
 if(SHOULD_BUILD_KARBON)
   add_subdirectory(karbon)
