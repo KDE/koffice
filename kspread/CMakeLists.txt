@@ -194,7 +194,7 @@ set (kspreadodf_LIB_SRCS
     part/Digest.cpp
     KCApplicationSettings.cpp
     KCBinding.cpp
-    BindingManager.cpp
+    KCBindingManager.cpp
     CalculationSettings.cpp
     KCCell.cpp
     CellStorage.cpp

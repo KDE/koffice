@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "BindingManager.h"
+#include "KCBindingManager.h"
 
 #include "BindingStorage.h"
 #include "CellStorage.h"
@@ -27,24 +27,24 @@
 
 #include <QAbstractItemModel>
 
-class BindingManager::Private
+class KCBindingManager::Private
 {
 public:
     const KCMap* map;
 };
 
-BindingManager::BindingManager(const KCMap* map)
+KCBindingManager::KCBindingManager(const KCMap* map)
         : d(new Private)
 {
     d->map = map;
 }
 
-BindingManager::~BindingManager()
+KCBindingManager::~KCBindingManager()
 {
     delete d;
 }
 
-const QAbstractItemModel* BindingManager::createModel(const QString& regionName)
+const QAbstractItemModel* KCBindingManager::createModel(const QString& regionName)
 {
     const KCRegion region(regionName, d->map);
     if (!region.isValid() || !region.isContiguous() || !region.firstSheet()) {
@@ -55,7 +55,7 @@ const QAbstractItemModel* BindingManager::createModel(const QString& regionName)
     return binding.model();
 }
 
-bool BindingManager::removeModel(const QAbstractItemModel* model)
+bool KCBindingManager::removeModel(const QAbstractItemModel* model)
 {
     QList< QPair<QRectF, KCBinding> > bindings;
     const QRect rect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax));
@@ -74,13 +74,13 @@ bool BindingManager::removeModel(const QAbstractItemModel* model)
     return false;
 }
 
-bool BindingManager::isCellRegionValid(const QString& regionName) const
+bool KCBindingManager::isCellRegionValid(const QString& regionName) const
 {
     const KCRegion region(regionName, d->map);
     return (region.isValid() && region.isContiguous() && region.firstSheet());
 }
 
-void BindingManager::regionChanged(const KCRegion& region)
+void KCBindingManager::regionChanged(const KCRegion& region)
 {
     KCSheet* sheet;
     QList< QPair<QRectF, KCBinding> > bindings;
@@ -94,7 +94,7 @@ void BindingManager::regionChanged(const KCRegion& region)
     }
 }
 
-void BindingManager::updateAllBindings()
+void KCBindingManager::updateAllBindings()
 {
     QList< QPair<QRectF, KCBinding> > bindings;
     const QRect rect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax));
@@ -106,4 +106,4 @@ void BindingManager::updateAllBindings()
     }
 }
 
-#include "BindingManager.moc"
+#include "KCBindingManager.moc"

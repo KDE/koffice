@@ -50,7 +50,7 @@ class KoGenStyles;
 class KoOasisSettings;
 
 class KCApplicationSettings;
-class BindingManager;
+class KCBindingManager;
 class CalculationSettings;
 class ColumnFormat;
 class Damage;
@@ -109,7 +109,7 @@ public:
     /**
      * \return a pointer to the binding manager
      */
-    BindingManager* bindingManager() const;
+    KCBindingManager* bindingManager() const;
 
     /**
      * \return a pointer to the database manager

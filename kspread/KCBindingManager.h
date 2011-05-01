@@ -31,19 +31,19 @@ class KCRegion;
 /**
  * Manages cell ranges acting as data sources.
  */
-class BindingManager : public QObject
+class KCBindingManager : public QObject
 {
     Q_OBJECT
 public:
     /**
      * Constructor.
      */
-    BindingManager(const KCMap* map);
+    KCBindingManager(const KCMap* map);
 
     /**
      * Destructor.
      */
-    virtual ~BindingManager();
+    virtual ~KCBindingManager();
 
     // KoTable::SourceRangeManager interface
     virtual const QAbstractItemModel* createModel(const QString& regionName);

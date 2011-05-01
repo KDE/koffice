@@ -22,7 +22,7 @@
 #include "kspread_limits.h"
 #include "KCMap.h"
 #include "KCBinding.h"
-#include "BindingManager.h"
+#include "KCBindingManager.h"
 #include "Damages.h"
 #include "KCRegion.h"
 

@@ -46,7 +46,7 @@
 #include <KoShapeRegistry.h>
 
 #include "KCApplicationSettings.h"
-#include "BindingManager.h"
+#include "KCBindingManager.h"
 #include "CalculationSettings.h"
 #include "CellStorage.h"
 #include "Damages.h"
@@ -91,7 +91,7 @@ public:
     LoadingInfo* loadingInfo;
     bool readwrite;
 
-    BindingManager* bindingManager;
+    KCBindingManager* bindingManager;
     DatabaseManager* databaseManager;
     DependencyManager* dependencyManager;
     NamedAreaManager* namedAreaManager;
@@ -131,7 +131,7 @@ KCMap::KCMap(DocBase* doc, int syntaxVersion)
     d->loadingInfo = 0;
     d->readwrite = true;
 
-    d->bindingManager = new BindingManager(this);
+    d->bindingManager = new KCBindingManager(this);
     d->databaseManager = new DatabaseManager(this);
     d->dependencyManager = new DependencyManager(this);
     d->namedAreaManager = new NamedAreaManager(this);
@@ -244,7 +244,7 @@ bool KCMap::completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeS
     return true;
 }
 
-BindingManager* KCMap::bindingManager() const
+KCBindingManager* KCMap::bindingManager() const
 {
     return d->bindingManager;
 }
