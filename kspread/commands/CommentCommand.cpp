@@ -25,7 +25,7 @@
 
 #include "KCCellStorage.h"
 #include "KCSheet.h"
-#include "RectStorage.h"
+#include "KCRectStorage.h"
 
 CommentCommand::CommentCommand(QUndoCommand* parent)
         : AbstractRegionCommand(parent)

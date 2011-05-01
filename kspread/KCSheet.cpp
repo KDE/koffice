@@ -84,7 +84,7 @@
 #include "RowColumnFormat.h"
 #include "ShapeApplicationData.h"
 #include "SheetPrint.h"
-#include "RectStorage.h"
+#include "KCRectStorage.h"
 #include "KCSheetModel.h"
 #include "KCStyle.h"
 #include "StyleManager.h"

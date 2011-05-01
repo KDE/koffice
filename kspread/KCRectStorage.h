@@ -49,12 +49,12 @@ static const int g_garbageCollectionTimeOut = 100;
  * \note For data assigned to points use KCPointStorage.
  */
 template<typename T>
-class KSPREAD_EXPORT RectStorage
+class KSPREAD_EXPORT KCRectStorage
 {
 public:
-    explicit RectStorage(KCMap* map);
-    RectStorage(const RectStorage& other);
-    virtual ~RectStorage();
+    explicit KCRectStorage(KCMap* map);
+    KCRectStorage(const KCRectStorage& other);
+    virtual ~KCRectStorage();
 
     /**
      * \return the stored value at the position \p point .
@@ -168,13 +168,13 @@ private:
 };
 
 template<typename T>
-RectStorage<T>::RectStorage(KCMap* map)
+KCRectStorage<T>::KCRectStorage(KCMap* map)
         : m_map(map)
 {
 }
 
 template<typename T>
-RectStorage<T>::RectStorage(const RectStorage& other)
+KCRectStorage<T>::KCRectStorage(const KCRectStorage& other)
         : m_map(other.m_map)
         , m_usedArea(other.m_usedArea)
         , m_storedData(other.m_storedData)
@@ -183,12 +183,12 @@ RectStorage<T>::RectStorage(const RectStorage& other)
 }
 
 template<typename T>
-RectStorage<T>::~RectStorage()
+KCRectStorage<T>::~KCRectStorage()
 {
 }
 
 template<typename T>
-T RectStorage<T>::contains(const QPoint& point) const
+T KCRectStorage<T>::contains(const QPoint& point) const
 {
     if (!usedArea().contains(point))
         return T();
@@ -206,14 +206,14 @@ T RectStorage<T>::contains(const QPoint& point) const
 }
 
 template<typename T>
-QPair<QRectF, T> RectStorage<T>::containedPair(const QPoint& point) const
+QPair<QRectF, T> KCRectStorage<T>::containedPair(const QPoint& point) const
 {
     const QList< QPair<QRectF, T> > results = m_tree.intersectingPairs(QRect(point, point)).values();
     return results.isEmpty() ? qMakePair(QRectF(), T()) : results.last();
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::intersectingPairs(const KCRegion& region) const
+QList< QPair<QRectF, T> > KCRectStorage<T>::intersectingPairs(const KCRegion& region) const
 {
     QList< QPair<QRectF, T> > result;
     KCRegion::ConstIterator end = region.constEnd();
@@ -223,7 +223,7 @@ QList< QPair<QRectF, T> > RectStorage<T>::intersectingPairs(const KCRegion& regi
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::undoData(const KCRegion& region) const
+QList< QPair<QRectF, T> > KCRectStorage<T>::undoData(const KCRegion& region) const
 {
     QList< QPair<QRectF, T> > result;
     KCRegion::ConstIterator end = region.constEnd();
@@ -241,13 +241,13 @@ QList< QPair<QRectF, T> > RectStorage<T>::undoData(const KCRegion& region) const
 }
 
 template<typename T>
-QRect RectStorage<T>::usedArea() const
+QRect KCRectStorage<T>::usedArea() const
 {
     return m_tree.boundingBox().toRect();
 }
 
 template<typename T>
-void RectStorage<T>::load(const QList<QPair<QRegion, T> >& data)
+void KCRectStorage<T>::load(const QList<QPair<QRegion, T> >& data)
 {
     QList<QPair<QRegion, T> > treeData;
     typedef QPair<QRegion, T> TRegion;
@@ -272,7 +272,7 @@ void RectStorage<T>::load(const QList<QPair<QRegion, T> >& data)
 }
 
 template<typename T>
-void RectStorage<T>::insert(const KCRegion& region, const T& _data)
+void KCRectStorage<T>::insert(const KCRegion& region, const T& _data)
 {
     T data;
     // lookup already used data
@@ -293,7 +293,7 @@ void RectStorage<T>::insert(const KCRegion& region, const T& _data)
 }
 
 template<typename T>
-void RectStorage<T>::remove(const KCRegion& region, const T& data)
+void KCRectStorage<T>::remove(const KCRegion& region, const T& data)
 {
     if (!m_storedData.contains(data)) {
         return;
@@ -307,7 +307,7 @@ void RectStorage<T>::remove(const KCRegion& region, const T& data)
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::insertRows(int position, int number)
+QList< QPair<QRectF, T> > KCRectStorage<T>::insertRows(int position, int number)
 {
     const QRect invalidRect(1, position, KS_colMax, KS_rowMax);
     // invalidate the affected, cached styles
@@ -320,7 +320,7 @@ QList< QPair<QRectF, T> > RectStorage<T>::insertRows(int position, int number)
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::insertColumns(int position, int number)
+QList< QPair<QRectF, T> > KCRectStorage<T>::insertColumns(int position, int number)
 {
     const QRect invalidRect(position, 1, KS_colMax, KS_rowMax);
     // invalidate the affected, cached styles
@@ -333,7 +333,7 @@ QList< QPair<QRectF, T> > RectStorage<T>::insertColumns(int position, int number
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::removeRows(int position, int number)
+QList< QPair<QRectF, T> > KCRectStorage<T>::removeRows(int position, int number)
 {
     const QRect invalidRect(1, position, KS_colMax, KS_rowMax);
     // invalidate the affected, cached styles
@@ -346,7 +346,7 @@ QList< QPair<QRectF, T> > RectStorage<T>::removeRows(int position, int number)
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::removeColumns(int position, int number)
+QList< QPair<QRectF, T> > KCRectStorage<T>::removeColumns(int position, int number)
 {
     const QRect invalidRect(position, 1, KS_colMax, KS_rowMax);
     // invalidate the affected, cached styles
@@ -359,7 +359,7 @@ QList< QPair<QRectF, T> > RectStorage<T>::removeColumns(int position, int number
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::insertShiftRight(const QRect& rect)
+QList< QPair<QRectF, T> > KCRectStorage<T>::insertShiftRight(const QRect& rect)
 {
     const QRect invalidRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom()));
     QList< QPair<QRectF, T> > undoData;
@@ -370,7 +370,7 @@ QList< QPair<QRectF, T> > RectStorage<T>::insertShiftRight(const QRect& rect)
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::insertShiftDown(const QRect& rect)
+QList< QPair<QRectF, T> > KCRectStorage<T>::insertShiftDown(const QRect& rect)
 {
     const QRect invalidRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax));
     QList< QPair<QRectF, T> > undoData;
@@ -381,7 +381,7 @@ QList< QPair<QRectF, T> > RectStorage<T>::insertShiftDown(const QRect& rect)
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::removeShiftLeft(const QRect& rect)
+QList< QPair<QRectF, T> > KCRectStorage<T>::removeShiftLeft(const QRect& rect)
 {
     const QRect invalidRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom()));
     QList< QPair<QRectF, T> > undoData;
@@ -392,7 +392,7 @@ QList< QPair<QRectF, T> > RectStorage<T>::removeShiftLeft(const QRect& rect)
 }
 
 template<typename T>
-QList< QPair<QRectF, T> > RectStorage<T>::removeShiftUp(const QRect& rect)
+QList< QPair<QRectF, T> > KCRectStorage<T>::removeShiftUp(const QRect& rect)
 {
     const QRect invalidRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax));
     QList< QPair<QRectF, T> > undoData;
@@ -403,12 +403,12 @@ QList< QPair<QRectF, T> > RectStorage<T>::removeShiftUp(const QRect& rect)
 }
 
 template<typename T>
-void RectStorage<T>::triggerGarbageCollection()
+void KCRectStorage<T>::triggerGarbageCollection()
 {
 }
 
 template<typename T>
-void RectStorage<T>::garbageCollection()
+void KCRectStorage<T>::garbageCollection()
 {
     // any possible garbage left?
     if (m_possibleGarbage.isEmpty())
@@ -429,7 +429,7 @@ void RectStorage<T>::garbageCollection()
             currentPair.second == T() &&
             pair.second == T() &&
             pair.first == currentPair.first) {
-        kDebug(36001) << "RectStorage: removing default data at" << KCRegion(currentPair.first.toRect()).name();
+        kDebug(36001) << "KCRectStorage: removing default data at" << KCRegion(currentPair.first.toRect()).name();
         m_tree.remove(currentPair.first.toRect(), currentPair.second);
         triggerGarbageCollection();
         return; // already done
@@ -457,7 +457,7 @@ void RectStorage<T>::garbageCollection()
         if (zIndex != currentZIndex &&
                 (pair.second == currentPair.second || pair.second == T()) &&
                 pair.first.toRect().contains(currentPair.first.toRect())) {
-            kDebug(36001) << "RectStorage: removing data at" << KCRegion(currentPair.first.toRect()).name();
+            kDebug(36001) << "KCRectStorage: removing data at" << KCRegion(currentPair.first.toRect()).name();
             m_tree.remove(currentPair.first.toRect(), currentPair.second);
             break;
         }
@@ -466,7 +466,7 @@ void RectStorage<T>::garbageCollection()
 }
 
 template<typename T>
-void RectStorage<T>::regionChanged(const QRect& rect)
+void KCRectStorage<T>::regionChanged(const QRect& rect)
 {
     if (m_map->isLoading())
         return;
@@ -480,7 +480,7 @@ void RectStorage<T>::regionChanged(const QRect& rect)
 }
 
 template<typename T>
-void RectStorage<T>::invalidateCache(const QRect& invRect)
+void KCRectStorage<T>::invalidateCache(const QRect& invRect)
 {
     const QVector<QRect> rects = m_cachedArea.intersected(invRect).rects();
     m_cachedArea = m_cachedArea.subtracted(invRect);
@@ -494,55 +494,55 @@ void RectStorage<T>::invalidateCache(const QRect& invRect)
 
 
 
-class CommentStorage : public QObject, public RectStorage<QString>
+class CommentStorage : public QObject, public KCRectStorage<QString>
 {
     Q_OBJECT
 public:
-    explicit CommentStorage(KCMap* map) : QObject(map), RectStorage<QString>(map) {}
-    CommentStorage(const CommentStorage& other) : QObject(other.parent()), RectStorage<QString>(other) {}
+    explicit CommentStorage(KCMap* map) : QObject(map), KCRectStorage<QString>(map) {}
+    CommentStorage(const CommentStorage& other) : QObject(other.parent()), KCRectStorage<QString>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
     }
     virtual void garbageCollection() {
-        RectStorage<QString>::garbageCollection();
+        KCRectStorage<QString>::garbageCollection();
     }
 };
 
 
 
-class FusionStorage : public QObject, public RectStorage<bool>
+class FusionStorage : public QObject, public KCRectStorage<bool>
 {
     Q_OBJECT
 public:
-    explicit FusionStorage(KCMap* map) : QObject(map), RectStorage<bool>(map) {}
-    FusionStorage(const FusionStorage& other) : QObject(other.parent()), RectStorage<bool>(other) {}
+    explicit FusionStorage(KCMap* map) : QObject(map), KCRectStorage<bool>(map) {}
+    FusionStorage(const FusionStorage& other) : QObject(other.parent()), KCRectStorage<bool>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
     }
     virtual void garbageCollection() {
-        RectStorage<bool>::garbageCollection();
+        KCRectStorage<bool>::garbageCollection();
     }
 };
 
 
 
-class MatrixStorage : public QObject, public RectStorage<bool>
+class MatrixStorage : public QObject, public KCRectStorage<bool>
 {
     Q_OBJECT
 public:
-    explicit MatrixStorage(KCMap* map) : QObject(map), RectStorage<bool>(map) {}
-    MatrixStorage(const MatrixStorage& other) : QObject(other.parent()), RectStorage<bool>(other) {}
+    explicit MatrixStorage(KCMap* map) : QObject(map), KCRectStorage<bool>(map) {}
+    MatrixStorage(const MatrixStorage& other) : QObject(other.parent()), KCRectStorage<bool>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
     }
     virtual void garbageCollection() {
-        RectStorage<bool>::garbageCollection();
+        KCRectStorage<bool>::garbageCollection();
     }
 };
 

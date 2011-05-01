@@ -31,7 +31,7 @@
 #include "RTree.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
-#include "RectStorage.h"
+#include "KCRectStorage.h"
 
 static const int g_maximumCachedStyles = 10000;
 

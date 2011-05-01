@@ -21,26 +21,26 @@
 #define KSPREAD_BINDING_STORAGE
 
 #include "KCBinding.h"
-#include "RectStorage.h"
+#include "KCRectStorage.h"
 
 /**
  * \class KCBindingStorage
  * \ingroup Storage
  * Stores cell ranges acting as data sources.
  */
-class KCBindingStorage : public QObject, public RectStorage<KCBinding>
+class KCBindingStorage : public QObject, public KCRectStorage<KCBinding>
 {
     Q_OBJECT
 public:
-    explicit KCBindingStorage(KCMap* map) : QObject(map), RectStorage<KCBinding>(map) {}
-    KCBindingStorage(const KCBindingStorage& other) : QObject(other.parent()), RectStorage<KCBinding>(other) {}
+    explicit KCBindingStorage(KCMap* map) : QObject(map), KCRectStorage<KCBinding>(map) {}
+    KCBindingStorage(const KCBindingStorage& other) : QObject(other.parent()), KCRectStorage<KCBinding>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
     }
     virtual void garbageCollection() {
-        RectStorage<KCBinding>::garbageCollection();
+        KCRectStorage<KCBinding>::garbageCollection();
     }
 };
 

@@ -20,7 +20,7 @@
 #ifndef KSPREAD_VALIDITY_STORAGE
 #define KSPREAD_VALIDITY_STORAGE
 
-#include "RectStorage.h"
+#include "KCRectStorage.h"
 #include "Validity.h"
 
 
@@ -30,19 +30,19 @@
  * \ingroup KCValue
  * Stores cell validations.
  */
-class ValidityStorage : public QObject, public RectStorage<Validity>
+class ValidityStorage : public QObject, public KCRectStorage<Validity>
 {
     Q_OBJECT
 public:
-    explicit ValidityStorage(KCMap* map) : QObject(map), RectStorage<Validity>(map) {}
-    ValidityStorage(const ValidityStorage& other) : QObject(other.parent()), RectStorage<Validity>(other) {}
+    explicit ValidityStorage(KCMap* map) : QObject(map), KCRectStorage<Validity>(map) {}
+    ValidityStorage(const ValidityStorage& other) : QObject(other.parent()), KCRectStorage<Validity>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
     }
     virtual void garbageCollection() {
-        RectStorage<Validity>::garbageCollection();
+        KCRectStorage<Validity>::garbageCollection();
     }
 };
 

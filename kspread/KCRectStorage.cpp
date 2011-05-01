@@ -20,5 +20,5 @@
 // muahahaha!
 #include "KCBindingStorage.moc"
 #include "KCConditionsStorage.moc"
-#include "RectStorage.moc"
+#include "KCRectStorage.moc"
 #include "ValidityStorage.moc"

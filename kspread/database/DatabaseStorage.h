@@ -21,24 +21,24 @@
 #define KSPREAD_DATABASE_STORAGE
 
 #include "Database.h"
-#include "RectStorage.h"
+#include "KCRectStorage.h"
 
 /**
  * DatabaseStorage
  */
-class DatabaseStorage : public QObject, public RectStorage<Database>
+class DatabaseStorage : public QObject, public KCRectStorage<Database>
 {
     Q_OBJECT
 public:
-    explicit DatabaseStorage(KCMap* map) : QObject(map), RectStorage<Database>(map) {}
-    DatabaseStorage(const DatabaseStorage& other) : QObject(other.parent()), RectStorage<Database>(other) {}
+    explicit DatabaseStorage(KCMap* map) : QObject(map), KCRectStorage<Database>(map) {}
+    DatabaseStorage(const DatabaseStorage& other) : QObject(other.parent()), KCRectStorage<Database>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
     }
     virtual void garbageCollection() {
-        RectStorage<Database>::garbageCollection();
+        KCRectStorage<Database>::garbageCollection();
     }
 };
 

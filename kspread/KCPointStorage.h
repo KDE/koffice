@@ -54,7 +54,7 @@
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  *
  * \note If you fill the storage, do it row-wise. That's more performant.
- * \note For data assigned to rectangular regions use RectStorage.
+ * \note For data assigned to rectangular regions use KCRectStorage.
  * \note It's QVector based. To boost performance a lot, declare the stored
  *       data type as movable.
  */

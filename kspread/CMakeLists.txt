@@ -215,7 +215,7 @@ set (kspreadodf_LIB_SRCS
     KCPrintSettings.cpp
     KCProtectableObject.cpp
     KCRecalcManager.cpp
-    RectStorage.cpp
+    KCRectStorage.cpp
     KCRegion.cpp
     RowColumnFormat.cpp
     RowRepeatStorage.cpp

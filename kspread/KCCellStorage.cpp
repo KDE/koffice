@@ -37,7 +37,7 @@
 #include "KCMap.h"
 #include "ModelSupport.h"
 #include "KCRecalcManager.h"
-#include "RectStorage.h"
+#include "KCRectStorage.h"
 #include "RowRepeatStorage.h"
 #include "KCSheet.h"
 #include "StyleStorage.h"
@@ -55,7 +55,7 @@
 
 Q_DECLARE_METATYPE(QSharedPointer<QTextDocument>)
 
-typedef RectStorage<QString> NamedAreaStorage;
+typedef KCRectStorage<QString> NamedAreaStorage;
 
 class KCCellStorage::Private
 {

@@ -21,26 +21,26 @@
 #define KSPREAD_CONDITIONS_STORAGE
 
 #include "KCCondition.h"
-#include "RectStorage.h"
+#include "KCRectStorage.h"
 
 /**
  * \class KCConditionsStorage
  * \ingroup Storage
  * Stores conditional cell styles.
  */
-class KCConditionsStorage : public QObject, public RectStorage<Conditions>
+class KCConditionsStorage : public QObject, public KCRectStorage<Conditions>
 {
     Q_OBJECT
 public:
-    explicit KCConditionsStorage(KCMap* map) : QObject(map), RectStorage<Conditions>(map) {}
-    KCConditionsStorage(const KCConditionsStorage& other) : QObject(other.parent()), RectStorage<Conditions>(other) {}
+    explicit KCConditionsStorage(KCMap* map) : QObject(map), KCRectStorage<Conditions>(map) {}
+    KCConditionsStorage(const KCConditionsStorage& other) : QObject(other.parent()), KCRectStorage<Conditions>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
     }
     virtual void garbageCollection() {
-        RectStorage<Conditions>::garbageCollection();
+        KCRectStorage<Conditions>::garbageCollection();
     }
 };
 

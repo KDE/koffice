@@ -162,7 +162,7 @@ public:
      */
     void saveOdfConditions(KoGenStyle &currentCellStyle, ValueConverter *converter) const;
 
-    /// \note implementation to make QMap happy (which is needed by RectStorage)
+    /// \note implementation to make QMap happy (which is needed by KCRectStorage)
     bool operator<(const Conditions& conditions) const {
         return qHash(*this) < qHash(conditions);
     }
