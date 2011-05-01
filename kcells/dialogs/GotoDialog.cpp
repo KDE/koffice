@@ -42,7 +42,7 @@
 GotoDialog::GotoDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
 {
-    setCaption(i18n("Goto KCCell"));
+    setCaption(i18n("Goto Cell"));
     setObjectName("GotoDialog");
     setModal(true);
     setButtons(Ok | Cancel);

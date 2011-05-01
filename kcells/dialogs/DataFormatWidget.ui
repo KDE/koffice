@@ -32,7 +32,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>KCFormat</string>
+      <string>Format</string>
      </property>
      <layout class="QGridLayout">
       <item row="7" column="1" rowspan="3">
@@ -85,7 +85,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
       <item row="4" column="0">
        <widget class="QRadioButton" name="radioButton_5">
         <property name="text">
-         <string>KCCurrency</string>
+         <string>Currency</string>
         </property>
        </widget>
       </item>
@@ -113,7 +113,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
       <item row="1" column="0">
        <widget class="QRadioButton" name="radioButton_2">
         <property name="text">
-         <string>KCNumber</string>
+         <string>Number</string>
         </property>
        </widget>
       </item>
@@ -156,14 +156,14 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
       <item row="1" column="2">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>KCCurrency:</string>
+         <string>Currency:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>KCFormat:</string>
+         <string>Format:</string>
         </property>
        </widget>
       </item>

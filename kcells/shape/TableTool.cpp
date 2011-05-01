@@ -268,9 +268,9 @@ QMap<QString, QWidget*> TableTool::createOptionWidgets()
     sheetbtn->setFixedHeight(d->sheetComboBox->sizeHint().height());
     connect(sheetbtn, SIGNAL(clicked()), this, SLOT(sheetsBtnClicked()));
     sheetlayout->addWidget(sheetbtn);
-    label = new QLabel(i18n("KCSheet:"), optionWidget);
+    label = new QLabel(i18n("Sheet:"), optionWidget);
     label->setBuddy(d->sheetComboBox);
-    label->setToolTip(i18n("Selected KCSheet"));
+    label->setToolTip(i18n("Selected Sheet"));
     layout->addWidget(label, 0, 0);
 
     spinBox = new QSpinBox(optionWidget);
@@ -281,7 +281,7 @@ QMap<QString, QWidget*> TableTool::createOptionWidgets()
 
     label = new QLabel(i18n("Columns:"), optionWidget);
     label->setBuddy(spinBox);
-    label->setToolTip(i18n("KCNumber of columns"));
+    label->setToolTip(i18n("Number of columns"));
     layout->addWidget(label, 2, 0);
 
     spinBox = new QSpinBox(optionWidget);
@@ -292,7 +292,7 @@ QMap<QString, QWidget*> TableTool::createOptionWidgets()
 
     label = new QLabel(i18n("Rows:"), optionWidget);
     label->setBuddy(spinBox);
-    label->setToolTip(i18n("KCNumber of rows"));
+    label->setToolTip(i18n("Number of rows"));
     layout->addWidget(label, 3, 0);
 
 //layout->setColumnStretch( 1, 1 );

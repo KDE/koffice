@@ -179,8 +179,8 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
 
     // -- cell style actions --
 
-    action = new KAction(KIcon("cell_layout"), i18n("KCCell KCFormat..."), this);
-    action->setIconText(i18n("KCFormat"));
+    action = new KAction(KIcon("cell_layout"), i18n("Cell Format..."), this);
+    action->setIconText(i18n("Format"));
     addAction("cellStyle", action);
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_F));
     connect(action, SIGNAL(triggered(bool)), this, SLOT(cellStyle()));
@@ -191,18 +191,18 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     connect(action, SIGNAL(triggered(bool)), this, SLOT(setDefaultStyle()));
     action->setToolTip(i18n("Resets to the default format"));
 
-    action = new KAction(i18n("KCStyle Manager..."), this);
+    action = new KAction(i18n("Style Manager..."), this);
     addAction("styleDialog", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(styleDialog()));
     action->setToolTip(i18n("Edit and organize cell styles"));
 
-    action = new KSelectAction(i18n("KCStyle"), this);
+    action = new KSelectAction(i18n("Style"), this);
     addAction("setStyle", action);
     action->setToolTip(i18n("Apply a predefined style to the selected cells"));
     connect(action, SIGNAL(triggered(const QString&)), this, SLOT(setStyle(const QString&)));
 
-    action = new KAction(i18n("Create KCStyle From KCCell..."), this);
-    action->setIconText(i18n("KCStyle From KCCell"));
+    action = new KAction(i18n("Create Style From Cell..."), this);
+    action->setIconText(i18n("Style From Cell"));
     addAction("createStyleFromCell", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(createStyleFromCell()));
     action->setToolTip(i18n("Create a new style based on the currently selected cell"));
@@ -385,13 +385,13 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
 
     // -- value format actions --
 
-    action = new KToggleAction(KIcon("percent"), i18n("Percent KCFormat"), this);
+    action = new KToggleAction(KIcon("percent"), i18n("Percent Format"), this);
     action->setIconText(i18n("Percent"));
     addAction("percent", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(percent(bool)));
     action->setToolTip(i18n("Set the cell formatting to look like a percentage"));
 
-    action = new KToggleAction(KIcon("money"), i18n("Money KCFormat"), this);
+    action = new KToggleAction(KIcon("money"), i18n("Money Format"), this);
     action->setIconText(i18n("Money"));
     addAction("currency", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(currency(bool)));
@@ -578,13 +578,13 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     addAction("clearComment", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(clearComment()));
 
-    action = new KAction(i18n("KCConditional Styles..."), this);
+    action = new KAction(i18n("Conditional Styles..."), this);
     action->setToolTip(i18n("Set cell style based on certain conditions"));
     addAction("conditional", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(conditional()));
 
-    action = new KAction(i18n("KCConditional Styles"), this);
-    action->setIconText(i18n("Remove KCConditional Styles"));
+    action = new KAction(i18n("Conditional Styles"), this);
+    action->setIconText(i18n("Remove Conditional Styles"));
     action->setToolTip(i18n("Remove the conditional cell styles"));
     addAction("clearConditional", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(clearConditionalStyles()));
@@ -600,13 +600,13 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     addAction("clearHyperlink", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(clearHyperlink()));
 
-    action = new KAction(i18n("KCValidity..."), this);
+    action = new KAction(i18n("Validity..."), this);
     action->setToolTip(i18n("Set tests to confirm cell data is valid"));
     addAction("validity", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(validity()));
 
-    action = new KAction(i18n("KCValidity"), this);
-    action->setIconText(i18n("Remove KCValidity"));
+    action = new KAction(i18n("Validity"), this);
+    action->setIconText(i18n("Remove Validity"));
     action->setToolTip(i18n("Remove the validity tests on this cell"));
     addAction("clearValidity", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(clearValidity()));
@@ -663,7 +663,7 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     connect(action, SIGNAL(triggered(bool)), this, SLOT(insertSeries()));
     action ->setToolTip(i18n("Insert a series"));
 
-    action = new KAction(KIcon("funct"), i18n("&KCFunction..."), this);
+    action = new KAction(KIcon("funct"), i18n("&Function..."), this);
     addAction("insertFormula", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(insertFormula()));
     action->setToolTip(i18n("Insert math expression"));
@@ -731,7 +731,7 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     addAction("namedAreaDialog", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(namedAreaDialog()));
 
-    action = new KSelectAction(i18n("KCFormula Selection"), this);
+    action = new KSelectAction(i18n("Formula Selection"), this);
     addAction("formulaSelection", action);
     action->setToolTip(i18n("Insert a function"));
     QStringList functionList;
@@ -749,7 +749,7 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
 
     // -- general editing actions --
 
-    action = new KAction(KIcon("cell_edit"), i18n("Modify KCCell"), this);
+    action = new KAction(KIcon("cell_edit"), i18n("Modify Cell"), this);
     addAction("editCell", action);
     action->setShortcuts(QList<QKeySequence>() << Qt::Key_F2 << QKeySequence(Qt::CTRL + Qt::Key_M));
     connect(action, SIGNAL(triggered(bool)), this, SLOT(edit()));
@@ -795,7 +795,7 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
 
     // -- misc actions --
 
-    action = new KAction(KIcon("go-jump"), i18n("Goto KCCell..."), this);
+    action = new KAction(KIcon("go-jump"), i18n("Goto Cell..."), this);
     action->setIconText(i18n("Goto"));
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_G));
     addAction("gotoCell", action);
@@ -818,7 +818,7 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     connect(action, SIGNAL(triggered(bool)), this, SLOT(qTableView()));
 #endif
 
-    action = new KAction(i18n("Auto-KCFormat..."), this);
+    action = new KAction(i18n("Auto-Format..."), this);
     addAction("sheetFormat", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(sheetFormat()));
     action->setToolTip(i18n("Set the worksheet formatting"));
@@ -1595,7 +1595,7 @@ void CellToolBase::createStyleFromCell()
     QString styleName("");
 
     while (true) {
-        styleName = KInputDialog::getText(i18n("Create KCStyle From KCCell"),
+        styleName = KInputDialog::getText(i18n("Create Style From Cell"),
                                           i18n("Enter name:"), styleName, &ok, canvas()->canvasWidget());
 
         if (!ok) // User pushed an OK button.
@@ -1973,7 +1973,7 @@ void CellToolBase::percent(bool enable)
 {
     StyleCommand* command = new StyleCommand();
     command->setSheet(selection()->activeSheet());
-    command->setText(i18n("KCFormat Percent"));
+    command->setText(i18n("Format Percent"));
     command->setFormatType(enable ? KCFormat::Percentage : KCFormat::Generic);
     command->add(*selection());
     command->execute(canvas());
@@ -1983,7 +1983,7 @@ void CellToolBase::currency(bool enable)
 {
     StyleCommand* command = new StyleCommand();
     command->setSheet(selection()->activeSheet());
-    command->setText(i18n("KCFormat Money"));
+    command->setText(i18n("Format Money"));
     command->setFormatType(enable ? KCFormat::Money : KCFormat::Generic);
     command->setPrecision(enable ?  selection()->activeSheet()->map()->calculationSettings()->locale()->fracDigits() : 0);
     command->add(*selection());

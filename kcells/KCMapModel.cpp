@@ -136,7 +136,7 @@ QVariant KCMapModel::headerData(int section, Qt::Orientation orientation, int ro
 {
     Q_UNUSED(orientation)
     if (section == 0 && role == Qt::DisplayRole) {
-        return QVariant(i18n("KCSheet name"));
+        return QVariant(i18n("Sheet name"));
     }
     return QVariant();
 }

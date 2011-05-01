@@ -40,7 +40,7 @@
 CommentDialog::CommentDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
 {
-    setCaption(i18n("KCCell Comment"));
+    setCaption(i18n("Cell Comment"));
     setModal(true);
     setButtons(Ok | Cancel);
 

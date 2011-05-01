@@ -156,7 +156,7 @@ DataManipulator::DataManipulator(QUndoCommand* parent)
         , m_expandMatrix(false)
 {
     // default name for DataManipulator, can be changed using setText
-    setText(i18n("Change KCValue"));
+    setText(i18n("Change Value"));
 }
 
 DataManipulator::~DataManipulator()

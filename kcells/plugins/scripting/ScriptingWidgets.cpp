@@ -79,10 +79,10 @@ void ScriptingSheetsListView::initialize()
     kDebug() << "ScriptingSheetsListView::initialize()";
 
     QStringList headers;
-    headers << i18n("KCSheet");
+    headers << i18n("Sheet");
     switch (m_editortype) {
     case Disabled: break;
-    case KCCell: headers << i18n("KCCell"); break;
+    case KCCell: headers << i18n("Cell"); break;
     case Range: headers << i18n("Range"); break;
     }
 

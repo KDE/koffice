@@ -235,7 +235,7 @@ EditNamedAreaDialog::EditNamedAreaDialog(QWidget* parent, Selection* selection)
     gridLayout->addWidget(m_cellRange, 2, 1);
 
     QLabel * textLabel1 = new QLabel(page);
-    textLabel1->setText(i18n("KCSheet:"));
+    textLabel1->setText(i18n("Sheet:"));
     gridLayout->addWidget(textLabel1, 1, 0);
 
     m_sheets = new KComboBox(page);

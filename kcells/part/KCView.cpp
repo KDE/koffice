@@ -277,39 +277,39 @@ void KCView::Private::initActions()
     KActionCollection* ac = view->actionCollection();
 
     // -- sheet/workbook actions --
-    actions->sheetProperties  = new KAction(i18n("KCSheet Properties..."), view);
+    actions->sheetProperties  = new KAction(i18n("Sheet Properties..."), view);
     ac->addAction("sheetProperties", actions->sheetProperties);
     connect(actions->sheetProperties, SIGNAL(triggered(bool)), view, SLOT(sheetProperties()));
     actions->sheetProperties->setToolTip(i18n("Modify current sheet's properties"));
 
-    actions->insertSheet = new KAction(KIcon("insert-table"), i18n("KCSheet"), view);
-    actions->insertSheet->setIconText(i18n("Insert KCSheet"));
+    actions->insertSheet = new KAction(KIcon("insert-table"), i18n("Sheet"), view);
+    actions->insertSheet->setIconText(i18n("Insert Sheet"));
     actions->insertSheet->setToolTip(i18n("Insert a new sheet"));
     ac->addAction("insertSheet", actions->insertSheet);
     connect(actions->insertSheet, SIGNAL(triggered(bool)), view, SLOT(insertSheet()));
 
-    actions->duplicateSheet = new KAction(/*KIcon("inserttable"),*/ i18n("Duplicate KCSheet"), view);
+    actions->duplicateSheet = new KAction(/*KIcon("inserttable"),*/ i18n("Duplicate Sheet"), view);
     actions->duplicateSheet->setToolTip(i18n("Duplicate the selected sheet"));
     ac->addAction("duplicateSheet", actions->duplicateSheet);
     connect(actions->duplicateSheet, SIGNAL(triggered(bool)), view, SLOT(duplicateSheet()));
 
-    actions->deleteSheet = new KAction(KIcon("edit-delete"), i18n("KCSheet"), view);
-    actions->deleteSheet->setIconText(i18n("Remove KCSheet"));
+    actions->deleteSheet = new KAction(KIcon("edit-delete"), i18n("Sheet"), view);
+    actions->deleteSheet->setIconText(i18n("Remove Sheet"));
     actions->deleteSheet->setToolTip(i18n("Remove the active sheet"));
     ac->addAction("deleteSheet", actions->deleteSheet);
     connect(actions->deleteSheet, SIGNAL(triggered(bool)), view, SLOT(deleteSheet()));
 
-    actions->renameSheet  = new KAction(i18n("Rename KCSheet..."), view);
+    actions->renameSheet  = new KAction(i18n("Rename Sheet..."), view);
     ac->addAction("renameSheet", actions->renameSheet);
     connect(actions->renameSheet, SIGNAL(triggered(bool)), view, SLOT(slotRename()));
     actions->renameSheet->setToolTip(i18n("Rename the active sheet"));
 
-    actions->showSheet  = new KAction(i18n("Show KCSheet..."), view);
+    actions->showSheet  = new KAction(i18n("Show Sheet..."), view);
     ac->addAction("showSheet", actions->showSheet);
     connect(actions->showSheet, SIGNAL(triggered(bool)), view, SLOT(showSheet()));
     actions->showSheet->setToolTip(i18n("Show a hidden sheet"));
 
-    actions->hideSheet  = new KAction(i18n("Hide KCSheet"), view);
+    actions->hideSheet  = new KAction(i18n("Hide Sheet"), view);
     ac->addAction("hideSheet", actions->hideSheet);
     connect(actions->hideSheet, SIGNAL(triggered(bool)), view, SLOT(hideSheet()));
     actions->hideSheet->setToolTip(i18n("Hide the active sheet"));
@@ -329,7 +329,7 @@ void KCView::Private::initActions()
     ac->addAction("showPageBorders", actions->showPageBorders);
     connect(actions->showPageBorders, SIGNAL(toggled(bool)), view, SLOT(togglePageBorders(bool)));
 
-    actions->recalcWorksheet  = new KAction(i18n("Recalculate KCSheet"), view);
+    actions->recalcWorksheet  = new KAction(i18n("Recalculate Sheet"), view);
     actions->recalcWorksheet->setIcon(KIcon("view-refresh"));
     actions->recalcWorksheet->setIconText(i18n("Recalculate"));
     ac->addAction("RecalcWorkSheet", actions->recalcWorksheet);
@@ -345,7 +345,7 @@ void KCView::Private::initActions()
     connect(actions->recalcWorkbook, SIGNAL(triggered(bool)), view, SLOT(recalcWorkBook()));
     actions->recalcWorkbook->setToolTip(i18n("Recalculate the value of every cell in all worksheets"));
 
-    actions->protectSheet  = new KToggleAction(i18n("Protect &KCSheet..."), view);
+    actions->protectSheet  = new KToggleAction(i18n("Protect Sheet..."), view);
     ac->addAction("protectSheet", actions->protectSheet);
     actions->protectSheet->setToolTip(i18n("Protect the sheet from being modified"));
     connect(actions->protectSheet, SIGNAL(triggered(bool)),
@@ -363,7 +363,7 @@ void KCView::Private::initActions()
     connect(actions->createTemplate, SIGNAL(triggered(bool)), view, SLOT(createTemplate()));
 
     actions->shapeAnchor = new KSelectAction(i18n("Anchor"), view);
-    actions->shapeAnchor->addAction(i18n("KCCell"));
+    actions->shapeAnchor->addAction(i18n("Cell"));
     actions->shapeAnchor->addAction(i18n("Page"));
     actions->shapeAnchor->setEnabled(false);
     actions->shapeAnchor->setToolTip(i18n("Switch shape anchoring"));
@@ -373,27 +373,27 @@ void KCView::Private::initActions()
 
     // -- navigation actions --
 
-    actions->nextSheet  = new KAction(KIcon("go-next"), i18n("Next KCSheet"), view);
+    actions->nextSheet  = new KAction(KIcon("go-next"), i18n("Next Sheet"), view);
     actions->nextSheet->setIconText(i18n("Next"));
     actions->nextSheet->setToolTip(i18n("Move to the next sheet"));
     ac->addAction("go_next", actions->nextSheet);
     actions->nextSheet->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_PageDown));
     connect(actions->nextSheet, SIGNAL(triggered(bool)), view, SLOT(nextSheet()));
 
-    actions->prevSheet  = new KAction(KIcon("go-previous"), i18n("Previous KCSheet"), view);
+    actions->prevSheet  = new KAction(KIcon("go-previous"), i18n("Previous Sheet"), view);
     actions->prevSheet->setIconText(i18n("Previous"));
     actions->prevSheet->setToolTip(i18n("Move to the previous sheet"));
     ac->addAction("go_previous", actions->prevSheet);
     actions->prevSheet->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_PageUp));
     connect(actions->prevSheet, SIGNAL(triggered(bool)), view, SLOT(previousSheet()));
 
-    actions->firstSheet  = new KAction(KIcon("go-first"), i18n("First KCSheet"), view);
+    actions->firstSheet  = new KAction(KIcon("go-first"), i18n("First Sheet"), view);
     actions->firstSheet->setIconText(i18n("First"));
     actions->firstSheet->setToolTip(i18n("Move to the first sheet"));
     ac->addAction("go_first", actions->firstSheet);
     connect(actions->firstSheet, SIGNAL(triggered(bool)), view, SLOT(firstSheet()));
 
-    actions->lastSheet  = new KAction(KIcon("go-last"), i18n("Last KCSheet"), view);
+    actions->lastSheet  = new KAction(KIcon("go-last"), i18n("Last Sheet"), view);
     actions->lastSheet->setIconText(i18n("Last"));
     actions->lastSheet->setToolTip(i18n("Move to the last sheet"));
     ac->addAction("go_last", actions->lastSheet);
@@ -438,7 +438,7 @@ void KCView::Private::initActions()
             view, SLOT(showTabBar(bool)));
 
     actions->preference = KStandardAction::preferences(view, SLOT(preference()), view);
-    actions->preference->setToolTip(i18n("Set various KCells options"));
+    actions->preference->setToolTip(i18n("Set various ells options"));
     ac->addAction("preference", actions->preference);
 
     KAction *notifyAction = KStandardAction::configureNotifications(view, SLOT(optionsNotifications()), view);
@@ -1018,7 +1018,7 @@ void KCView::shapeSelectionChanged()
         return;
     }
     bool anchoredToCell = data->isAnchoredToCell();
-    d->actions->shapeAnchor->setCurrentAction(anchoredToCell ? i18n("KCCell") : i18n("Page"));
+    d->actions->shapeAnchor->setCurrentAction(anchoredToCell ? i18n("Cell") : i18n("Page"));
 
     // go on with the remaining shapes
     for (int i = 1; i < shapes.count(); ++i) {
@@ -1448,7 +1448,7 @@ void KCView::setShapeAnchoring(const QString& mode)
         const KoShape* shape = shapes[i];
         KCShapeApplicationData* data = dynamic_cast<KCShapeApplicationData*>(shape->applicationData());
         Q_ASSERT(data);
-        data->setAnchoredToCell(mode == i18n("KCCell"));
+        data->setAnchoredToCell(mode == i18n("Cell"));
     }
 }
 
@@ -1483,10 +1483,10 @@ void KCView::toggleProtectSheet(bool mode)
     bool success;
     if (mode) {
         success = activeSheet()->showPasswordDialog(this, KCProtectableObject::Lock,
-                  i18n("Protect KCSheet"));
+                  i18n("Protect Sheet"));
     } else {
         success = activeSheet()->showPasswordDialog(this, KCProtectableObject::Unlock,
-                  i18n("Unprotect KCSheet"));
+                  i18n("Unprotect Sheet"));
     }
     if (!success) {
         d->actions->protectSheet->setChecked(!mode);
@@ -1707,11 +1707,11 @@ void KCView::resetPrintRange()
 void KCView::deleteSheet()
 {
     if (doc()->map()->count() <= 1 || (doc()->map()->visibleSheets().count() <= 1)) {
-        KMessageBox::sorry(this, i18n("You cannot delete the only sheet."), i18n("Remove KCSheet"));
+        KMessageBox::sorry(this, i18n("You cannot delete the only sheet."), i18n("Remove Sheet"));
         return;
     }
     int ret = KMessageBox::warningContinueCancel(this, i18n("You are about to remove the active sheet.\nDo you want to continue?"),
-              i18n("Remove KCSheet"), KGuiItem(i18n("&Delete"), "edit-delete"));
+              i18n("Remove Sheet"), KGuiItem(i18n("&Delete"), "edit-delete"));
 
     if (ret == KMessageBox::Continue) {
         selection()->emitCloseEditor(false); // discard changes
@@ -1735,18 +1735,18 @@ void KCView::slotRename()
 
     bool ok;
     QString activeName = sheet->sheetName();
-    QString newName = KInputDialog::getText(i18n("Rename KCSheet"), i18n("Enter name:"), activeName, &ok, this);
+    QString newName = KInputDialog::getText(i18n("Rename Sheet"), i18n("Enter name:"), activeName, &ok, this);
 
     if (!ok) return;
 
     if ((newName.trimmed()).isEmpty()) { // KCSheet name is empty.
-        KMessageBox::information(this, i18n("KCSheet name cannot be empty."), i18n("Change KCSheet Name"));
+        KMessageBox::information(this, i18n("Sheet name cannot be empty."), i18n("Change Sheet Name"));
         // Recursion
         slotRename();
     } else if (newName != activeName) { // KCSheet name changed.
         // Is the name already used
         if (doc()->map()->findSheet(newName)) {
-            KMessageBox::information(this, i18n("This name is already used."), i18n("Change KCSheet Name"));
+            KMessageBox::information(this, i18n("This name is already used."), i18n("Change Sheet Name"));
             // Recursion
             slotRename();
             return;
@@ -1926,12 +1926,12 @@ void KCView::popupTabBarMenu(const QPoint & _point)
         if (!menu)
             return;
 
-        QAction* insertSheet = new KAction(KIcon("insert-table"), i18n("Insert KCSheet"), this);
+        QAction* insertSheet = new KAction(KIcon("insert-table"), i18n("Insert Sheet"), this);
         insertSheet->setToolTip(i18n("Remove the active sheet"));
         connect(insertSheet, SIGNAL(triggered(bool)), this, SLOT(insertSheet()));
         menu->insertAction(d->actions->duplicateSheet, insertSheet);
 
-        QAction* deleteSheet = new KAction(KIcon("delete_table"), i18n("Remove KCSheet"), this);
+        QAction* deleteSheet = new KAction(KIcon("delete_table"), i18n("Remove Sheet"), this);
         deleteSheet->setToolTip(i18n("Remove the active sheet"));
         connect(deleteSheet, SIGNAL(triggered(bool)), this, SLOT(deleteSheet()));
         menu->insertAction(d->actions->hideSheet, deleteSheet);

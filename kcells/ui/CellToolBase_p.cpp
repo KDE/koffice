@@ -739,34 +739,34 @@ bool CellToolBase::Private::formatKeyPress(QKeyEvent * _ev)
 
     switch (_ev->key()) {
     case Qt::Key_Exclam:
-        command->setText(i18n("KCNumber KCFormat"));
+        command->setText(i18n("Number Format"));
         command->setFormatType(KCFormat::KCNumber);
         command->setPrecision(2);
         break;
 
     case Qt::Key_Dollar:
-        command->setText(i18n("KCCurrency KCFormat"));
+        command->setText(i18n("Currency Format"));
         command->setFormatType(KCFormat::Money);
         command->setPrecision(q->selection()->activeSheet()->map()->calculationSettings()->locale()->fracDigits());
         break;
 
     case Qt::Key_Percent:
-        command->setText(i18n("Percentage KCFormat"));
+        command->setText(i18n("Percentage Format"));
         command->setFormatType(KCFormat::Percentage);
         break;
 
     case Qt::Key_At:
-        command->setText(i18n("Time KCFormat"));
+        command->setText(i18n("Time Format"));
         command->setFormatType(KCFormat::SecondeTime);
         break;
 
     case Qt::Key_NumberSign:
-        command->setText(i18n("Date KCFormat"));
+        command->setText(i18n("Date Format"));
         command->setFormatType(KCFormat::ShortDate);
         break;
 
     case Qt::Key_AsciiCircum:
-        command->setText(i18n("Scientific KCFormat"));
+        command->setText(i18n("Scientific Format"));
         command->setFormatType(KCFormat::Scientific);
         break;
 

@@ -363,7 +363,7 @@ PreferenceDialog::PreferenceDialog(KCView* view)
     const KService::List offers = KServiceTypeTrader::self()->query(serviceType, query);
     const QList<KPluginInfo> pluginInfoList = KPluginInfo::fromServices(offers);
     d->pluginSelector->addPlugins(pluginInfoList, KPluginSelector::ReadConfigFile,
-                                  i18n("KCFunction Modules"), "KCFunctionModule");
+                                  i18n("Function Modules"), "FunctionModule");
     d->pluginSelector->addPlugins(pluginInfoList, KPluginSelector::ReadConfigFile,
                                   i18n("Tools"), "Tool");
     d->pluginSelector->load();

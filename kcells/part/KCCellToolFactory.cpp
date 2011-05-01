@@ -27,7 +27,7 @@
 KCCellToolFactory::KCCellToolFactory(QObject* parent, const QString& id)
         : KoToolFactoryBase(parent, id)
 {
-    setToolTip(i18n("KCCell Tool"));
+    setToolTip(i18n("Cell Tool"));
     setIcon("kcells");
     setToolType("KCells");
     setPriority(0);

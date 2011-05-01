@@ -33,7 +33,7 @@ RenameSheetCommand::RenameSheetCommand(KCSheet* s, const QString &name)
     sheet = s;
     if (s) oldName = s->sheetName();
     newName = name;
-    setText(i18n("Rename KCSheet"));
+    setText(i18n("Rename Sheet"));
 }
 
 void RenameSheetCommand::redo()
@@ -54,8 +54,8 @@ HideSheetCommand::HideSheetCommand(KCSheet* sheet)
 {
     map = sheet->map();
     sheetName = sheet->sheetName();
-    QString n =  i18n("Hide KCSheet %1", sheetName);
-    if (n.length() > 64) n = i18n("Hide KCSheet");
+    QString n =  i18n("Hide Sheet %1", sheetName);
+    if (n.length() > 64) n = i18n("Hide Sheet");
     setText(n);
 }
 
@@ -82,8 +82,8 @@ ShowSheetCommand::ShowSheetCommand(KCSheet* sheet, QUndoCommand* parent)
 {
     map = sheet->map();
     sheetName = sheet->sheetName();
-    QString n =  i18n("Show KCSheet %1", sheetName);
-    if (n.length() > 64) n = i18n("Show KCSheet");
+    QString n =  i18n("Show Sheet %1", sheetName);
+    if (n.length() > 64) n = i18n("Show Sheet");
     setText(n);
 }
 
@@ -107,7 +107,7 @@ void ShowSheetCommand::undo()
 // ----- AddSheetCommand -----
 
 AddSheetCommand::AddSheetCommand(KCSheet* sheet)
-        : QUndoCommand(i18n("Add KCSheet"))
+        : QUndoCommand(i18n("Add Sheet"))
         , m_sheet(sheet)
         , m_firstrun(true)
 {
@@ -134,7 +134,7 @@ void AddSheetCommand::undo()
 // ----- DuplicateSheetCommand -----
 
 DuplicateSheetCommand::DuplicateSheetCommand()
-        : QUndoCommand(i18n("Duplicate KCSheet"))
+        : QUndoCommand(i18n("Duplicate Sheet"))
         , m_oldSheet(0)
         , m_newSheet(0)
         , m_firstrun(true)
@@ -172,7 +172,7 @@ RemoveSheetCommand::RemoveSheetCommand(KCSheet* s)
 {
     sheet = s;
     map = sheet->map();
-    setText(i18n("Remove KCSheet"));
+    setText(i18n("Remove Sheet"));
 }
 
 void RemoveSheetCommand::redo()
@@ -202,7 +202,7 @@ SheetPropertiesCommand::SheetPropertiesCommand(KCSheet* s)
     oldColumnAsNumber = newColumnAsNumber = sheet->getShowColumnNumber();
     oldLcMode = newLcMode = sheet->getLcMode();
     oldCapitalizeFirstLetter = newCapitalizeFirstLetter = sheet->getFirstLetterUpper();
-    setText(i18n("Change KCSheet Properties"));
+    setText(i18n("Change Sheet Properties"));
 }
 
 void SheetPropertiesCommand::setLayoutDirection(Qt::LayoutDirection dir)

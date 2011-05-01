@@ -180,9 +180,9 @@ bool StyleCommand::preProcessing()
 {
     if (m_firstrun) {
         if (m_style->isDefault())
-            setText(i18n("Reset KCStyle"));
+            setText(i18n("Reset Style"));
         else
-            setText(i18n("Change KCStyle"));
+            setText(i18n("Change Style"));
 
         // special handling for precision
         if (m_style->hasAttribute(KCStyle::Precision)) {

@@ -56,7 +56,7 @@ void CondtionCommand::setConditionList(const QLinkedList<KCConditional>& list)
 {
     m_conditions.setConditionList(list);
     if (m_conditions.isEmpty())
-        setText(i18n("Remove KCConditional Formatting"));
+        setText(i18n("Remove Conditional Formatting"));
     else
-        setText(i18n("Add KCConditional Formatting"));
+        setText(i18n("Add Conditional Formatting"));
 }

@@ -43,7 +43,7 @@ ShowDialog::ShowDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
         , m_selection(selection)
 {
-    setCaption(i18n("Show KCSheet"));
+    setCaption(i18n("Show Sheet"));
     setModal(true);
     setButtons(Ok | Cancel);
     setObjectName("ShowDialog");
@@ -83,7 +83,7 @@ void ShowDialog::accept()
 
     KCMap *const map = m_selection->activeSheet()->map();
     KCSheet *sheet;
-    QUndoCommand* macroCommand = new QUndoCommand(i18n("Show KCSheet"));
+    QUndoCommand* macroCommand = new QUndoCommand(i18n("Show Sheet"));
     for (int i = 0; i < items.count(); ++i) {
         sheet = map->findSheet(items[i]->text());
         if (!sheet)

@@ -59,7 +59,7 @@ CellToolOptionWidget::CellToolOptionWidget(CellToolBase *parent)
     d->locationComboBox->setMinimumWidth(100);
 
     d->formulaButton = new QToolButton(this);
-    d->formulaButton->setText(i18n("KCFormula"));
+    d->formulaButton->setText(i18n("Formula"));
     d->formulaButton->setDefaultAction(d->cellTool->action("insertFormula"));
 
     d->applyButton = new QToolButton(this);

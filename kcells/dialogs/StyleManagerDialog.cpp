@@ -48,7 +48,7 @@ StyleManagerDialog::StyleManagerDialog(QWidget* parent, Selection* selection, KC
     setButtonText(User2, i18n("&Modify..."));
     setButtonText(User1, i18n("&Delete..."));
     setButtonsOrientation(Qt::Vertical);
-    setCaption(i18n("KCStyle Manager"));
+    setCaption(i18n("Style Manager"));
 
     QWidget* widget = new QWidget(this);
     setMainWidget(widget);
@@ -56,7 +56,7 @@ StyleManagerDialog::StyleManagerDialog(QWidget* parent, Selection* selection, KC
     QVBoxLayout* layout = new QVBoxLayout(widget);
 
     m_styleList = new QTreeWidget(this);
-    m_styleList->setHeaderLabel(i18n("KCStyle"));
+    m_styleList->setHeaderLabel(i18n("Style"));
     layout->addWidget(m_styleList);
 
     m_displayBox = new KComboBox(false, this);

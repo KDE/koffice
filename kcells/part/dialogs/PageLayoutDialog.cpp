@@ -140,7 +140,7 @@ PageLayoutDialog::PageLayoutDialog(QWidget* parent, KCSheet* sheet)
 
     QWidget* page = new QWidget(this);
     d->sheetPage.setupUi(page);
-    addPage(page, i18n("KCSheet"));
+    addPage(page, i18n("Sheet"));
 
     connect(d->sheetPage.columnsCheckBox, SIGNAL(toggled(bool)),
             d->sheetPage.startColumnComboBox, SLOT(setEnabled(bool)));

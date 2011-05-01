@@ -73,7 +73,7 @@ AutoFormatDialog::AutoFormatDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
         , d(new Private())
 {
-    setCaption(i18n("KCSheet KCStyle"));
+    setCaption(i18n("Sheet Style"));
     setObjectName("AutoAutoFormatDialog");
     setModal(true);
     setButtons(Ok | Cancel);

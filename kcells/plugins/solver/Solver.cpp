@@ -64,7 +64,7 @@ Solver::Solver(QObject* parent, const QVariantList& args)
     }
 
     QAction* solver = actionCollection()->addAction("kcellssolver");
-    solver->setText(i18n("KCFunction Optimizer..."));
+    solver->setText(i18n("Function Optimizer..."));
     connect(solver, SIGNAL(triggered(bool)), this, SLOT(showDialog()));
 }
 

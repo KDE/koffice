@@ -154,7 +154,7 @@ void RegionSelector::switchDisplayMode(bool state)
         d->dialog->setModal(false);
 
         if (d->selectionMode == SingleCell) {
-            d->dialog->setCaption(i18n("Select Single KCCell"));
+            d->dialog->setCaption(i18n("Select Single Cell"));
         } else { // if ( d->selectionMode == MultipleCells )
             d->dialog->setCaption(i18n("Select Multiple Cells"));
         }

@@ -57,7 +57,7 @@ ValidityDialog::ValidityDialog(QWidget* parent, Selection* selection)
 
 {
     setFaceType(Tabbed);
-    setCaption(i18n("KCValidity"));
+    setCaption(i18n("Validity"));
     setModal(true);
     setButtons(Ok | Cancel | User1);
     setButtonGuiItem(User1, KGuiItem(i18n("Clear &All")));
@@ -78,7 +78,7 @@ ValidityDialog::ValidityDialog(QWidget* parent, Selection* selection)
     chooseType = new KComboBox(page1);
     tmpGridLayout->addWidget(chooseType, 0, 1);
     chooseType->addItem(i18n("All"), QVariant::fromValue(KCValidity::None));
-    chooseType->addItem(i18n("KCNumber"), QVariant::fromValue(KCValidity::KCNumber));
+    chooseType->addItem(i18n("Number"), QVariant::fromValue(KCValidity::KCNumber));
     chooseType->addItem(i18n("Integer"), QVariant::fromValue(KCValidity::Integer));
     chooseType->addItem(i18n("Text"), QVariant::fromValue(KCValidity::Text));
     chooseType->addItem(i18n("Date"), QVariant::fromValue(KCValidity::Date));
@@ -141,7 +141,7 @@ ValidityDialog::ValidityDialog(QWidget* parent, Selection* selection)
     tmpGridLayout->addItem(new QSpacerItem(edit2->width(), 0), 0, 0);
     edit2->setText(i18n("Maximum:"));
     tmpGridLayout->addItem(new QSpacerItem(edit2->width(), 0), 0, 0);
-    edit2->setText(i18n("KCNumber:"));
+    edit2->setText(i18n("Number:"));
     tmpGridLayout->addItem(new QSpacerItem(edit2->width(), 0), 0, 0);
 
     validityList = new KTextEdit(page1);
@@ -277,7 +277,7 @@ void ValidityDialog::changeIndexType(int _index)
         val_min->setValidator(new KFloatValidator(val_min));
         val_max->setValidator(new KFloatValidator(val_max));
         if (choose->currentIndex() <= 4) {
-            edit1->setText(i18n("KCNumber:"));
+            edit1->setText(i18n("Number:"));
             edit2->setText("");
             val_max->setEnabled(false);
         } else {
@@ -293,7 +293,7 @@ void ValidityDialog::changeIndexType(int _index)
         val_min->setValidator(new KIntValidator(val_min));
         val_max->setValidator(new KIntValidator(val_max));
         if (choose->currentIndex() <= 4) {
-            edit1->setText(i18n("KCNumber:"));
+            edit1->setText(i18n("Number:"));
             edit2->setText("");
             val_max->setEnabled(false);
         } else {
@@ -359,7 +359,7 @@ void ValidityDialog::changeIndexCond(int _index)
         val_max->setEnabled(false);
         if (chooseType->currentIndex() == 1 || chooseType->currentIndex() == 2
                 || chooseType->currentIndex() == 6)
-            edit1->setText(i18n("KCNumber:"));
+            edit1->setText(i18n("Number:"));
         else if (chooseType->currentIndex() == 3)
             edit1->setText("");
         else if (chooseType->currentIndex() == 4)

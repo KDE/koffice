@@ -162,7 +162,7 @@ GeneralTab::GeneralTab(QWidget* parent, CellFormatDialog * dlg)
     layout->setSpacing(KDialog::spacingHint());
 
     QGroupBox * groupBox = new QGroupBox(this);
-    groupBox->setTitle(i18n("KCStyle"));
+    groupBox->setTitle(i18n("Style"));
 
     QGridLayout * groupBoxLayout = new QGridLayout(groupBox);
     groupBoxLayout->setAlignment(Qt::AlignTop);
@@ -750,7 +750,7 @@ void CellFormatDialog::init()
         formatRedAlwaysSignedPixmap  = paintFormatPixmap("+123.456", Qt::black, "-123.456", Qt::red);
     }
 
-    setCaption(i18n("KCCell KCFormat"));
+    setCaption(i18n("Cell Format"));
     setButtons(KDialog::Ok | KDialog::Cancel);
     setFaceType(KPageDialog::Tabbed);
     setMinimumWidth(600);
@@ -765,7 +765,7 @@ void CellFormatDialog::init()
     }
 
     floatPage = new CellFormatPageFloat(this, this);
-    addPage(floatPage, i18n("&Data KCFormat"));
+    addPage(floatPage, i18n("&Data Format"));
 
     fontPage = new CellFormatPageFont(this, this);
     addPage(fontPage, i18n("&Font"));
@@ -783,7 +783,7 @@ void CellFormatDialog::init()
     addPage(patternPage, i18n("Back&ground"));
 
     protectPage = new CellFormatPageProtection(this, this);
-    addPage(protectPage, i18n("&KCCell Protection"));
+    addPage(protectPage, i18n("&Cell Protection"));
 
     connect(this, SIGNAL(okClicked()), this, SLOT(slotApply()));
 }
@@ -881,7 +881,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
 {
     QVBoxLayout* layout = new QVBoxLayout(this);
 
-    QGroupBox *grp = new QGroupBox(i18n("KCFormat"), this);
+    QGroupBox *grp = new QGroupBox(i18n("Format"), this);
     QGridLayout *grid = new QGridLayout(grp);
     grid->setMargin(KDialog::marginHint());
     grid->setSpacing(KDialog::spacingHint());
@@ -893,16 +893,16 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     generic->setWhatsThis(i18n("This is the default format and KCells autodetects the actual data type depending on the current cell data. By default, KCells right justifies numbers, dates and times within a cell and left justifies anything else."));
     grid->addWidget(generic, 1, 0);
 
-    number = new QRadioButton(i18n("KCNumber"), grp);
-    number->setWhatsThis(i18n("The number notation uses the notation you globally choose in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Numbers tab. Numbers are right justified by default."));
+    number = new QRadioButton(i18n("Number"), grp);
+    number->setWhatsThis(i18n("The number notation uses the notation you globally choose in System Settings -> Common Appearance and Behavior -> Locale -> Country/Region & Language -> Numbers tab. Numbers are right justified by default."));
     grid->addWidget(number, 2, 0);
 
     percent = new QRadioButton(i18n("Percent"), grp);
-    percent->setWhatsThis(i18n("When you have a number in the current cell and you switch from the dcell format from Generic to Percent, the current cell number will be multiplied by 100%.\nFor example if you enter 12 and set the cell format to Percent, the number will then be 1,200 %. Switching back to Generic cell format will bring it back to 12.\nYou can also use the Percent icon in the KCFormat Toolbar."));
+    percent->setWhatsThis(i18n("When you have a number in the current cell and you switch from the dcell format from Generic to Percent, the current cell number will be multiplied by 100%.\nFor example if you enter 12 and set the cell format to Percent, the number will then be 1,200 %. Switching back to Generic cell format will bring it back to 12.\nYou can also use the Percent icon in the Format Toolbar."));
     grid->addWidget(percent, 3, 0);
 
     money = new QRadioButton(i18n("Money"), grp);
-    money->setWhatsThis(i18n("The Money format converts your number into money notation using the settings globally fixed in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Money. The currency symbol will be displayed and the precision will be the one set in System Settings.\nYou can also use the KCCurrency icon in the KCFormat Toolbar to set the cell formatting to look like your current currency."));
+    money->setWhatsThis(i18n("The Money format converts your number into money notation using the settings globally fixed in System Settings -> Common Appearance and Behavior -> Locale -> Country/Region & Language -> Money. The currency symbol will be displayed and the precision will be the one set in System Settings.\nYou can also use the Currency icon in the Format Toolbar to set the cell formatting to look like your current currency."));
     grid->addWidget(money, 4, 0);
 
     scientific = new QRadioButton(i18n("Scientific"), grp);
@@ -914,15 +914,15 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     grid->addWidget(fraction, 6, 0);
 
     date = new QRadioButton(i18n("Date"), grp);
-    date->setWhatsThis(i18n("To enter a date, you should enter it in one of the formats set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Time & Dates. There are two formats set here: the date format and the short date format.\nJust like you can drag down numbers you can also drag down dates and the next cells will also get dates."));
+    date->setWhatsThis(i18n("To enter a date, you should enter it in one of the formats set in System Settings -> Common Appearance and Behavior -> Locale -> Country/Region & Language -> Time & Dates. There are two formats set here: the date format and the short date format.\nJust like you can drag down numbers you can also drag down dates and the next cells will also get dates."));
     grid->addWidget(date, 7, 0);
 
     time = new QRadioButton(i18n("Time"), grp);
-    time->setWhatsThis(i18n("This formats your cell content as a time. To enter a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Date & Time. In the KCCell KCFormat dialog box you can set how the time should be displayed by choosing one of the available time format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a time, KCells will display 00:00 in the global format you have in System Settings."));
+    time->setWhatsThis(i18n("This formats your cell content as a time. To enter a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/Region & Language -> Date & Time. In the Cell Format dialog box you can set how the time should be displayed by choosing one of the available time format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a time, KCells will display 00:00 in the global format you have in System Settings."));
     grid->addWidget(time, 8, 0);
 
     datetime = new QRadioButton(i18n("Date and Time"), grp);
-    datetime->setWhatsThis(i18n("This formats your cell content as date and time. To enter a date and a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Time & Dates. In the KCCell KCFormat dialog box you can set how the time should be displayed by choosing one of the available date format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a date and time, KCells will display 00:00 in the global format you have in System Settings."));
+    datetime->setWhatsThis(i18n("This formats your cell content as date and time. To enter a date and a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/Region & Language -> Time & Dates. In the Cell Format dialog box you can set how the time should be displayed by choosing one of the available date format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a date and time, KCells will display 00:00 in the global format you have in System Settings."));
     grid->addWidget(datetime, 9, 0);
 
     textFormat = new QRadioButton(i18n("Text"), grp);
@@ -970,7 +970,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     precision->setSpecialValueText(i18n("variable"));
     precision->setRange(-1, 10, 1);
     precision->setSliderEnabled(false);
-    precision->setWhatsThis(i18n("You can control how many digits are displayed after the decimal point for numeric values. This can also be changed using the Increase precision or Decrease precision icons in the KCFormat toolbar. "));
+    precision->setWhatsThis(i18n("You can control how many digits are displayed after the decimal point for numeric values. This can also be changed using the Increase precision or Decrease precision icons in the Format toolbar. "));
     grid->addWidget(precision, 1, 1);
 
     prefix = new KLineEdit(box);
@@ -1007,11 +1007,11 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
 
     tmpQLabel = new QLabel(box);
     grid->addWidget(tmpQLabel, 0, 2);
-    tmpQLabel->setText(i18n("KCFormat:"));
+    tmpQLabel->setText(i18n("Format:"));
 
     currencyLabel = new QLabel(box);
     grid->addWidget(currencyLabel, 1, 2);
-    currencyLabel->setText(i18n("KCCurrency:"));
+    currencyLabel->setText(i18n("Currency:"));
 
     currency = new KComboBox(box);
     grid->addWidget(currency, 1, 3);

@@ -16,7 +16,7 @@
    <item row="0" column="0" >
     <widget class="QLabel" name="label" >
      <property name="text" >
-      <string>KCNumber of entries in Recent Files list:</string>
+      <string>Number of entries in Recent Files list:</string>
      </property>
     </widget>
    </item>

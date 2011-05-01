@@ -134,7 +134,7 @@ void GoalSeekDialog::accept()
 
         const KCRegion source(d->widget.selector3->textEdit()->toPlainText(), sheet->map(), sheet);
         if (!source.isValid() || !source.isSingular()) {
-            KMessageBox::error(this, i18n("KCCell reference is invalid."));
+            KMessageBox::error(this, i18n("Cell reference is invalid."));
             d->widget.selector3->textEdit()->selectAll();
             d->widget.selector3->textEdit()->setFocus();
 
@@ -144,7 +144,7 @@ void GoalSeekDialog::accept()
 
         const KCRegion target(d->widget.selector1->textEdit()->toPlainText(), sheet->map(), sheet);
         if (!target.isValid() || !target.isSingular()) {
-            KMessageBox::error(this, i18n("KCCell reference is invalid."));
+            KMessageBox::error(this, i18n("Cell reference is invalid."));
             d->widget.selector1->textEdit()->selectAll();
             d->widget.selector1->textEdit()->setFocus();
 

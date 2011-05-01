@@ -93,7 +93,7 @@ int KCPrintJob::Private::setupPages(const QPrinter& printer, bool forceRecreatio
         for (int i = 0; i < sheetNames.count(); ++i) {
             KCSheet* sheet = view->doc()->map()->findSheet(sheetNames[i]);
             if (sheet == 0) {
-                kWarning(36005) << i18n("KCSheet %1 could not be found for printing", sheetNames[i]);
+                kWarning(36005) << i18n("Sheet %1 could not be found for printing", sheetNames[i]);
                 continue;
             }
             pageManagers.insert(sheet, sheet->print());

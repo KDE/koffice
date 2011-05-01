@@ -174,12 +174,12 @@ ConditionalWidget::ConditionalWidget(QWidget* parent, const char* /*name*/, Qt::
     groupBox1_1->setTitle(i18n("First Condition"));
     groupBox1_2->setTitle(i18n("Second Condition"));
     groupBox1_3->setTitle(i18n("Third Condition"));
-    textLabel1_1->setText(i18n("KCCell is"));
-    textLabel1_2->setText(i18n("KCCell is"));
-    textLabel1_3->setText(i18n("KCCell is"));
-    textLabel2_1->setText(i18n("KCCell style"));
-    textLabel2_2->setText(i18n("KCCell style"));
-    textLabel2_3->setText(i18n("KCCell style"));
+    textLabel1_1->setText(i18n("Cell is"));
+    textLabel1_2->setText(i18n("Cell is"));
+    textLabel1_3->setText(i18n("Cell is"));
+    textLabel2_1->setText(i18n("Cell style"));
+    textLabel2_2->setText(i18n("Cell style"));
+    textLabel2_3->setText(i18n("Cell style"));
 
     connect(m_condition_1, SIGNAL(highlighted(const QString &)), this, SLOT(slotTextChanged1(const QString &)));
     connect(m_condition_2, SIGNAL(highlighted(const QString &)), this, SLOT(slotTextChanged2(const QString &)));
@@ -256,7 +256,7 @@ ConditionalDialog::ConditionalDialog(QWidget* parent, Selection* selection)
         m_dlg(new ConditionalWidget(this))
 {
     setButtons(KDialog::Ok | KDialog::Cancel);
-    setCaption(i18n("KCConditional Styles"));
+    setCaption(i18n("Conditional Styles"));
 
     QStringList list(m_selection->activeSheet()->map()->styleManager()->styleNames());
 

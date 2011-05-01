@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<gui name="KCells" version="39">
+<gui name="KCells" version="40">
 <MenuBar>
 <!-- <<<<<<<<<<<<<<<<<<<<<>>>>><   File Menu   >>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
  <Menu name="file"><text>&amp;File</text>
@@ -119,7 +119,7 @@
     <Action name="hideColumn"/>
     <Action name="showColumn"/>
   </Menu>
-  <Menu name="KCSheet"><text>&amp;KCSheet</text>
+  <Menu name="Sheet"><text>&amp;Sheet</text>
   <Action name="hideSheet"/>
   <Action name="showSheet"/>
   <Separator/>

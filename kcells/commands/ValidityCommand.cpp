@@ -57,7 +57,7 @@ void ValidityCommand::setValidity(KCValidity validity)
 {
     m_validity = validity;
     if (m_validity.isEmpty())
-        setText(i18n("Remove KCValidity Check"));
+        setText(i18n("Remove Validity Check"));
     else
-        setText(i18n("Add KCValidity Check"));
+        setText(i18n("Add Validity Check"));
 }

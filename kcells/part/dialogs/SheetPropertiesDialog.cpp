@@ -30,7 +30,7 @@
 SheetPropertiesDialog::SheetPropertiesDialog(QWidget* parent):
         KDialog(parent)
 {
-    setCaption(i18n("KCSheet Properties"));
+    setCaption(i18n("Sheet Properties"));
     setObjectName("sheetPropertiesDialog");
     setModal(true);
     setButtons(Ok | Cancel | Default);

@@ -116,7 +116,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
      <item row="3" column="0" >
       <widget class="QCheckBox" name="useLCModeCheckBox" >
        <property name="whatsThis" >
-        <string>If this box is checked the cell reference shown at the left end of the KCFormula Bar will be displayed in LC mode (i.e. L2C3) rather than in its normal form B3. This does not seem to be of much use at the moment.</string>
+        <string>If this box is checked the cell reference shown at the left end of the Formula Bar will be displayed in LC mode (i.e. L2C3) rather than in its normal form B3. This does not seem to be of much use at the moment.</string>
        </property>
        <property name="text" >
         <string>Use &amp;LC mode</string>

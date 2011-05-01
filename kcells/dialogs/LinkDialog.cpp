@@ -148,14 +148,14 @@ LinkDialog::LinkDialog(QWidget* parent, Selection* selection)
 
     // link to another cell
     d->cellPage = new QWidget();
-    d->p4 = addPage(d->cellPage, i18n("KCCell"));
-    d->p4->setHeader(i18n("Link to KCCell"));
+    d->p4 = addPage(d->cellPage, i18n("Cell"));
+    d->p4->setHeader(i18n("Link to Cell"));
     d->p4->setIcon(KIcon("table"));
     QVBoxLayout* cLayout = new QVBoxLayout(d->cellPage);
     cLayout->addWidget(new QLabel(i18n("Text to display:"), d->cellPage));
     d->cellText = new KLineEdit(d->cellPage);
     cLayout->addWidget(d->cellText);
-    cLayout->addWidget(new QLabel(i18n("KCCell or Named Area:"), d->cellPage));
+    cLayout->addWidget(new QLabel(i18n("Cell or Named Area:"), d->cellPage));
     d->cellLink = new KComboBox(d->cellPage);
     d->cellLink->setEditable(true);
 

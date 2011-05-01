@@ -331,7 +331,7 @@ KCCalculationSettings* KCMap::calculationSettings() const
 
 KCSheet* KCMap::createSheet(const QString& name)
 {
-    QString sheetName(i18n("KCSheet%1", d->tableId++));
+    QString sheetName(i18n("Sheet%1", d->tableId++));
     if ( !name.isEmpty() )
         sheetName = name;
     KCSheet* sheet = new KCSheet(this, sheetName);

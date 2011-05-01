@@ -31,7 +31,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>KCFunction shown in status bar:</string>
+      <string>Function shown in status bar:</string>
      </property>
      <property name="buddy">
       <cstring>m_statusBarFunction</cstring>
@@ -59,7 +59,7 @@
     <widget class="KComboBox" name="m_unit">
      <property name="whatsThis">
       <string>Choose the default unit that will be used in your sheets.
-Note that you can overwrite the unit for the current sheet using the KCFormat -&gt; Page Layout... dialog.</string>
+Note that you can overwrite the unit for the current sheet using the Format -&gt; Page Layout... dialog.</string>
      </property>
     </widget>
    </item>
@@ -76,7 +76,7 @@ Note that you can overwrite the unit for the current sheet using the KCFormat -&
    <item row="3" column="1">
     <widget class="KoUnitDoubleSpinBox" name="m_indentationStep">
      <property name="whatsThis">
-      <string>Lets you define the amount of indenting used by the Increase Indent and Decrease Indent option in the KCFormat menu.</string>
+      <string>Lets you define the amount of indenting used by the Increase Indent and Decrease Indent option in the Format menu.</string>
      </property>
     </widget>
    </item>
@@ -219,7 +219,7 @@ Note that you can overwrite the unit for the current sheet using the KCFormat -&
       <item row="1" column="1">
        <widget class="KColorCombo" name="m_pageBorderColor">
         <property name="whatsThis">
-         <string>When the KCView -&gt;Show Page Borders menu item is checked, the page borders are displayed. Click here to choose another color for the borders than the default red.</string>
+         <string>When the View -&gt;Show Page Borders menu item is checked, the page borders are displayed. Click here to choose another color for the borders than the default red.</string>
         </property>
         <item>
          <property name="text">

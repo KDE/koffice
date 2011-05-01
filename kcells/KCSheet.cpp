@@ -2873,7 +2873,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
     if (!map()->loadingInfo()->loadTemplate()) {
         sname = sheet.attribute("name");
         if (sname.isEmpty()) {
-            doc()->setErrorMessage(i18n("Invalid document. KCSheet name is empty."));
+            doc()->setErrorMessage(i18n("Invalid document. Sheet name is empty."));
             return false;
         }
     }

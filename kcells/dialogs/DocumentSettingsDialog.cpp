@@ -152,7 +152,7 @@ void parameterLocale::updateToMatchLocale(KLocale* locale)
     m_date->setText(i18n("Long date format: %1", locale->formatDate(QDate::currentDate())));
     m_shortDate->setText(i18n("Short date format: %1", locale->formatDate(QDate::currentDate() , KLocale::ShortDate)));
     m_time->setText(i18n("Time format: %1", locale->formatTime(QTime::currentTime())));
-    m_money->setText(i18n("KCCurrency format: %1", locale->formatMoney(12.55)));
+    m_money->setText(i18n("Currency format: %1", locale->formatMoney(12.55)));
 }
 
 #include "DocumentSettingsDialog.moc"
