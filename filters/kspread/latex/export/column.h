@@ -36,7 +36,7 @@
 /**
  * This class hold a column.
  */
-class Column: public Format
+class Column: public KCFormat
 {
 
     /* USEFUL DATA */

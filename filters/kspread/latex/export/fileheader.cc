@@ -125,7 +125,7 @@ void FileHeader::generatePaper(QTextStream &out)
 {
     QString unit;
 
-    out << "% Format of paper" << endl;
+    out << "% KCFormat of paper" << endl;
     kDebug(30522) << "Generate custom size paper";
     /* paper size */
     out << "\\setlength{\\paperwidth}{"  << _width  << "pt}" << endl;

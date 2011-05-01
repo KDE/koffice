@@ -30,7 +30,7 @@
 //Added by qt3to4:
 #include <QTextStream>
 
-Format::Format()
+KCFormat::KCFormat()
 {
     _multirow = -1;
     _brushStyle = -1;
@@ -41,7 +41,7 @@ Format::Format()
     _leftBorder = NULL;
 }
 
-Format::~Format()
+KCFormat::~KCFormat()
 {
     delete _bottomBorder;
     delete _topBorder;
@@ -49,7 +49,7 @@ Format::~Format()
     delete _rightBorder;
 }
 
-bool Format::hasTopBorder() const
+bool KCFormat::hasTopBorder() const
 {
     if (_topBorder == NULL)
         return false;
@@ -57,7 +57,7 @@ bool Format::hasTopBorder() const
         return (_topBorder->getStyle() > 0);
 }
 
-bool Format::hasBottomBorder() const
+bool KCFormat::hasBottomBorder() const
 {
     if (_bottomBorder == NULL)
         return false;
@@ -65,7 +65,7 @@ bool Format::hasBottomBorder() const
         return (_bottomBorder->getStyle() > 0);
 }
 
-bool Format::hasLeftBorder() const
+bool KCFormat::hasLeftBorder() const
 {
     if (_leftBorder == NULL)
         return false;
@@ -73,7 +73,7 @@ bool Format::hasLeftBorder() const
         return (_leftBorder->getStyle() > 0);
 }
 
-bool Format::hasRightBorder() const
+bool KCFormat::hasRightBorder() const
 {
     if (_rightBorder == NULL)
         return false;
@@ -82,7 +82,7 @@ bool Format::hasRightBorder() const
 }
 
 /* Get the set of info about a text format */
-void Format::analyze(const QDomNode node)
+void KCFormat::analyze(const QDomNode node)
 {
     /* <format brushstyle="5" brushcolor="#a70bc3" bgcolor="#ffffff" alignY="2" align="4" > */
     if (!getAttr(node, "brushstyle").isEmpty()) {
@@ -122,7 +122,7 @@ void Format::analyze(const QDomNode node)
     }
 }
 
-void Format::analyzePen(const QDomNode node)
+void KCFormat::analyzePen(const QDomNode node)
 {
     /* <pen width="0" style="1" color="#000000" /> */
     _isValidFormat = true;
@@ -131,7 +131,7 @@ void Format::analyzePen(const QDomNode node)
     setPenColor(getAttr(node, "color"));
 }
 
-void Format::analyzeFont(const QDomNode node)
+void KCFormat::analyzeFont(const QDomNode node)
 {
     /* <font size="18" family="Helvetica" weight="50" /> */
     setFontSize(getAttr(node, "size").toInt());
@@ -139,7 +139,7 @@ void Format::analyzeFont(const QDomNode node)
     setFontWeight(getAttr(node, "weight").toInt());
 }
 
-void Format::generate(QTextStream& out, Column* col, Row* row)
+void KCFormat::generate(QTextStream& out, Column* col, Row* row)
 {
     if (hasLeftBorder())
         out << "|";
@@ -166,7 +166,7 @@ void Format::generate(QTextStream& out, Column* col, Row* row)
         out << "|";
 }
 
-void Format::generateTextFormat(QTextStream& out, QString text)
+void KCFormat::generateTextFormat(QTextStream& out, QString text)
 {
     if (getPenStyle() > 0) {
         float red   = ((float) getPenColor().red()) / 255;
@@ -178,7 +178,7 @@ void Format::generateTextFormat(QTextStream& out, QString text)
     }
 }
 
-void Format::generateColor(QTextStream& out)
+void KCFormat::generateColor(QTextStream& out)
 {
     if (getBrushStyle() >= 1) {
         float red   = ((float) getBrushColor().red()) / 255;

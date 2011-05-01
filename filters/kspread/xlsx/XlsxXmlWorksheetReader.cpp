@@ -277,7 +277,7 @@ void XlsxXmlWorksheetReader::saveAnnotation(int col, int row)
  - scenarios (Scenarios) §18.3.1.76
  - sheetCalcPr (Sheet Calculation Properties) §18.3.1.79
  - [done] sheetData (Sheet Data) §18.3.1.80
- - sheetFormatPr (Sheet Format Properties) §18.3.1.81
+ - sheetFormatPr (Sheet KCFormat Properties) §18.3.1.81
  - sheetPr (Sheet Properties) §18.3.1.82
  - sheetProtection (Sheet Protection Options) §18.3.1.85
  - sheetViews (Sheet Views) §18.3.1.88
@@ -486,7 +486,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_worksheet()
 
 #undef CURRENT_EL
 #define CURRENT_EL sheetFormatPr
-//! sheetFormatPr handler (Sheet Format Properties)
+//! sheetFormatPr handler (Sheet KCFormat Properties)
 /*! ECMA-376, 18.3.1.81, p. 1866.
  Sheet formatting properties.
  No child elements.

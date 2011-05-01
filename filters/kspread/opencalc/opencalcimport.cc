@@ -500,7 +500,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
                     if (type == "currency") {
                         Currency currency(e.attributeNS(ooNS::table, "currency", QString()));
                         style.setCurrency(currency);
-                        style.setFormatType(Format::Money);
+                        style.setFormatType(KCFormat::Money);
                     }
                 }
             } else if (type == "percentage") {
@@ -511,7 +511,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
                     //TODO fixme
                     //cell.setFactor( 100 );
                     // TODO: replace with custom...
-                    style.setFormatType(Format::Percentage);
+                    style.setFormatType(KCFormat::Percentage);
                 }
             } else if (type == "boolean") {
                 if (value.isEmpty())
@@ -523,7 +523,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
                 else
                     cell.setValue(Value(false));
                 ok = true;
-                style.setFormatType(Format::Custom);
+                style.setFormatType(KCFormat::Custom);
             } else if (type == "date") {
                 if (value.isEmpty())
                     value = e.attributeNS(ooNS::table, "date-value", QString());
@@ -594,7 +594,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
                     // KSpreadValue kval( timeToNum( hours, minutes, seconds ) );
                     // cell.setValue( kval );
                     cell.setValue(Value(QTime(hours % 24, minutes, seconds), cell.sheet()->map()->calculationSettings()));
-                    style.setFormatType(Format::Custom);
+                    style.setFormatType(KCFormat::Custom);
                 }
             }
 
@@ -1409,7 +1409,7 @@ void OpenCalcImport::loadOasisCellValidation(const KoXmlElement&body, const Valu
 
 
 QString * OpenCalcImport::loadFormat(KoXmlElement * element,
-                                     Format::Type & formatType,
+                                     KCFormat::Type & formatType,
                                      QString name)
 {
     if (!element)
@@ -1429,17 +1429,17 @@ QString * OpenCalcImport::loadFormat(KoXmlElement * element,
     bool negRed = false;
 
     if (element->localName() == "time-style")
-        formatType = Format::Custom;
+        formatType = KCFormat::Custom;
     else if (element->localName() == "date-style")
-        formatType = Format::Custom;
+        formatType = KCFormat::Custom;
     else if (element->localName() == "percentage-style")
-        formatType = Format::Custom;
+        formatType = KCFormat::Custom;
     else if (element->localName() == "number-style")
-        formatType = Format::Custom;
+        formatType = KCFormat::Custom;
     else if (element->localName() == "currency-style")
-        formatType = Format::Custom;
+        formatType = KCFormat::Custom;
     else if (element->localName() == "boolean-style")
-        formatType = Format::Custom;
+        formatType = KCFormat::Custom;
 
     if (!e.isNull())
         format = new QString();
@@ -1602,7 +1602,7 @@ QString * OpenCalcImport::loadFormat(KoXmlElement * element,
             for (i = 0; i < exp; ++i)
                 format->append('0');
 
-            formatType = Format::Custom;
+            formatType = KCFormat::Custom;
         } else if (e.localName() == "fraction" && e.namespaceURI() == ooNS::number) {
             int integer = 0;
             int numerator = 1;
@@ -1905,7 +1905,7 @@ void OpenCalcImport::readInStyle(KCStyle * layout, KoXmlElement const & style)
 
         if (style.hasAttributeNS(ooNS::style, "data-style-name")) {
             QString * format = m_formats[ style.attributeNS(ooNS::style, "data-style-name", QString())];
-            Format::Type formatType = Format::Generic;
+            KCFormat::Type formatType = KCFormat::Generic;
 
             if (!format) {
                 // load and convert it

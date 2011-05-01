@@ -39,7 +39,7 @@ class Column;
 /**
  * This class hold a cell.
  */
-class KCCell: public Format
+class KCCell: public KCFormat
 {
 
     /* USEFUL DATA */

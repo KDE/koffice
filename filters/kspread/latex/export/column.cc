@@ -28,7 +28,7 @@
 /*******************************************/
 /* Constructor                             */
 /*******************************************/
-Column::Column(): Format()
+Column::Column(): KCFormat()
 {
     setCol(0);
 }
@@ -44,7 +44,7 @@ void Column::analyze(const QDomNode node)
 {
     _col = getAttr(node, "column").toLong();
     _width = getAttr(node, "width").toDouble();
-    Format::analyze(getChild(node, "format"));
+    KCFormat::analyze(getChild(node, "format"));
 }
 
 /*******************************************/

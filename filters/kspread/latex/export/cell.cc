@@ -30,7 +30,7 @@
 /*******************************************/
 /* Constructor                             */
 /*******************************************/
-KCCell::KCCell(): Format()
+KCCell::KCCell(): KCFormat()
 {
     setCol(0);
     setRow(0);
@@ -51,7 +51,7 @@ void KCCell::analyze(const QDomNode node)
     _row = getAttr(node, "row").toLong();
     _col = getAttr(node, "column").toLong();
     kDebug(30522) << getRow() << "-" << getCol();
-    Format::analyze(getChild(node, "format"));
+    KCFormat::analyze(getChild(node, "format"));
     analyzeText(node);
 }
 
@@ -75,7 +75,7 @@ void KCCell::generate(QTextStream& out, Table* table)
     kDebug(30522) << "Generate cell...";
 
     out << "\\multicolumn{1}{";
-    Format::generate(out, table->searchColumn(_col));
+    KCFormat::generate(out, table->searchColumn(_col));
     out << "}{" << endl;
 
     if (getTextDataType() == "Str" || getTextDataType() == "Num") {

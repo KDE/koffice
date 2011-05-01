@@ -355,7 +355,7 @@ bool OpenCalcExport::exportContent(KoStore * store, const Doc * ksdoc)
     content.setAttribute("xmlns:text", "http://openoffice.org/2000/text");
     content.setAttribute("xmlns:table", "http://openoffice.org/2000/table");
     content.setAttribute("xmlns:draw", "http://openoffice.org/2000/drawing");
-    content.setAttribute("xmlns:fo", "http://www.w3.org/1999/XSL/Format");
+    content.setAttribute("xmlns:fo", "http://www.w3.org/1999/XSL/KCFormat");
     content.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
     content.setAttribute("xmlns:number", "http://openoffice.org/2000/datastyle");
     content.setAttribute("xmlns:svg", "http://www.w3.org/2000/svg");
@@ -603,9 +603,9 @@ void OpenCalcExport::exportCells(QDomDocument & doc, QDomElement & rowElem,
             cellElem.setAttribute("table:boolean-value", (value.asBoolean() ? "true" : "false"));
         } else if (value.isNumber()) {
             kDebug(30518) << "Type: Number";
-            Format::Type type = style.formatType();
+            KCFormat::Type type = style.formatType();
 
-            if (type == Format::Percentage)
+            if (type == KCFormat::Percentage)
                 cellElem.setAttribute("table:value-type", "percentage");
             else
                 cellElem.setAttribute("table:value-type", "float");
@@ -682,7 +682,7 @@ bool OpenCalcExport::exportStyles(KoStore * store, const Doc *ksdoc)
     content.setAttribute("xmlns:text", "http://openoffice.org/2000/text");
     content.setAttribute("xmlns:table", "http://openoffice.org/2000/table");
     content.setAttribute("xmlns:draw", "http://openoffice.org/2000/drawing");
-    content.setAttribute("xmlns:fo", "http://www.w3.org/1999/XSL/Format");
+    content.setAttribute("xmlns:fo", "http://www.w3.org/1999/XSL/KCFormat");
     content.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
     content.setAttribute("xmlns:number", "http://openoffice.org/2000/datastyle");
     content.setAttribute("xmlns:svg", "http://www.w3.org/2000/svg");

@@ -979,7 +979,7 @@ KoFilter::ConversionStatus XlsxXmlStylesReader::read_fonts()
  the numeric value of a cell.
 
  Child elements:
- - [done] numFmt (Format Definition) §18.8.30
+ - [done] numFmt (KCFormat Definition) §18.8.30
  Parent elements:
  - [done] styleSheet (§18.8.39)
 */
@@ -1355,7 +1355,7 @@ KoFilter::ConversionStatus XlsxXmlStylesReader::read_color()
  the formatting applied to cells in this workbook.
 
  Child elements:
- - [done] xf (Format) §18.8.45
+ - [done] xf (KCFormat) §18.8.45
  Parent elements:
  - [done] styleSheet (§18.8.39)
 
@@ -1391,7 +1391,7 @@ KoFilter::ConversionStatus XlsxXmlStylesReader::read_cellXfs()
 
 #undef CURRENT_EL
 #define CURRENT_EL xf
-//! xf handler (Format)
+//! xf handler (KCFormat)
 /*! ECMA-376, 18.8.45, p. 1999.
  A single xf element describes all of the formatting for a cell.
 

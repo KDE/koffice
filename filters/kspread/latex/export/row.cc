@@ -28,7 +28,7 @@
 /*******************************************/
 /* Constructor                             */
 /*******************************************/
-Row::Row(): Format()
+Row::Row(): KCFormat()
 {
     setRow(0);
 }
@@ -44,7 +44,7 @@ void Row::analyze(const QDomNode node)
 {
     _row = getAttr(node, "row").toLong();
     _height = getAttr(node, "height").toDouble();
-    Format::analyze(getChild(node, "format"));
+    KCFormat::analyze(getChild(node, "format"));
 }
 
 /*******************************************/

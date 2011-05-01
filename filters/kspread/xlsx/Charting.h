@@ -76,14 +76,14 @@ namespace Charting
         virtual ~Value() {}
     };
 
-    class Format
+    class KCFormat
     {
     public:
-        Format() {}
-        virtual ~Format() {}
+        KCFormat() {}
+        virtual ~KCFormat() {}
     };
 
-    class LineFormat : public Format
+    class LineFormat : public KCFormat
     {
     public:
         enum Style {
@@ -105,23 +105,23 @@ namespace Charting
         };
         Style m_style;
         Tickness m_tickness;
-        LineFormat(const Style& style = None, const Tickness& tickness = Hairline) : Format(), m_style(style), m_tickness(tickness) {} 
+        LineFormat(const Style& style = None, const Tickness& tickness = Hairline) : KCFormat(), m_style(style), m_tickness(tickness) {} 
     };
     
-    class PieFormat : public Format
+    class PieFormat : public KCFormat
     {
     public:
         int m_pcExplode; // from PieFormat
-        PieFormat(int pcExplode = 0) : Format(), m_pcExplode(pcExplode) {}
+        PieFormat(int pcExplode = 0) : KCFormat(), m_pcExplode(pcExplode) {}
     };
     
-    class AreaFormat : public Format
+    class AreaFormat : public KCFormat
     {
     public:
         QColor m_foreground;
         QColor m_background;
         bool m_fill;
-        AreaFormat(const QColor &foreground = QColor(), const QColor &background = QColor(), bool fill = false) : Format(), m_foreground(foreground), m_background(background), m_fill(fill) {}
+        AreaFormat(const QColor &foreground = QColor(), const QColor &background = QColor(), bool fill = false) : KCFormat(), m_foreground(foreground), m_background(background), m_fill(fill) {}
     };
     
     class Fill
@@ -347,7 +347,7 @@ namespace Charting
         /// The referenced values used in the chart
         QMap<Value::DataId, Value*> m_datasetValue;
         /// The formatting for the referenced values
-        QList<Format*> m_datasetFormat;
+        QList<KCFormat*> m_datasetFormat;
         /// List of text records attached to the series.
         QList<Text*> m_texts;
         // range that contains label

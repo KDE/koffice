@@ -66,50 +66,50 @@ static int g_dateOrigin = 0;
 
 // copied from gnumeric: src/formats.c:
 static char const * cell_date_format [] = {
-    "m/d/yy",  /* 0 KCCell::Format::Date5*/
-    "m/d/yyyy",  /* 1 KCCell::Format::Date6*/
-    "d-mmm-yy",  /* 2 KCCell::Format::Date1 18-Feb-99 */
-    "d-mmm-yyyy",  /* 3 KCCell::Format::Date2 18-Feb-1999 */
-    "d-mmm",  /* 4 KCCell::Format::Date3 18-Feb */
-    "d-mm",   /* 5 KCCell::Format::Date4 18-05 */
-    "mmm/d",  /* 6 KCCell::Format::Date11*/
-    "mm/d",   /* 7 KCCell::Format::Date12*/
-    "mm/dd/yy",  /* 8 KCCell::Format::Date19*/
-    "mm/dd/yyyy",  /* 9 KCCell::Format::Date18*/
-    "mmm/dd/yy",  /* 10 KCCell::Format::Date20*/
-    "mmm/dd/yyyy",  /* 11 KCCell::Format::Date21*/
+    "m/d/yy",  /* 0 KCCell::KCFormat::Date5*/
+    "m/d/yyyy",  /* 1 KCCell::KCFormat::Date6*/
+    "d-mmm-yy",  /* 2 KCCell::KCFormat::Date1 18-Feb-99 */
+    "d-mmm-yyyy",  /* 3 KCCell::KCFormat::Date2 18-Feb-1999 */
+    "d-mmm",  /* 4 KCCell::KCFormat::Date3 18-Feb */
+    "d-mm",   /* 5 KCCell::KCFormat::Date4 18-05 */
+    "mmm/d",  /* 6 KCCell::KCFormat::Date11*/
+    "mm/d",   /* 7 KCCell::KCFormat::Date12*/
+    "mm/dd/yy",  /* 8 KCCell::KCFormat::Date19*/
+    "mm/dd/yyyy",  /* 9 KCCell::KCFormat::Date18*/
+    "mmm/dd/yy",  /* 10 KCCell::KCFormat::Date20*/
+    "mmm/dd/yyyy",  /* 11 KCCell::KCFormat::Date21*/
     "mmm/ddd/yy",  /* 12 */
     "mmm/ddd/yyyy",  /* 13 */
     "mm/ddd/yy",  /* 14 */
     "mm/ddd/yyyy",  /* 15 */
-    "mmm-yy",  /* 16 KCCell::Format::Date7*/
-    "mmm-yyyy",  /* 17 KCCell::Format::Date22*/
-    "mmmm-yy",  /* 18 KCCell::Format::Date8*/
-    "mmmm-yyyy",  /* 19 KCCell::Format::Date9*/
+    "mmm-yy",  /* 16 KCCell::KCFormat::Date7*/
+    "mmm-yyyy",  /* 17 KCCell::KCFormat::Date22*/
+    "mmmm-yy",  /* 18 KCCell::KCFormat::Date8*/
+    "mmmm-yyyy",  /* 19 KCCell::KCFormat::Date9*/
     "m/d/yy h:mm",  /* 20 */
     "m/d/yyyy h:mm", /* 21 */
-    "yyyy/mm/d",  /* 22 KCCell::Format::Date25*/
-    "yyyy/mmm/d",  /* 23 KCCell::Format::Date14*/
-    "yyyy/mm/dd",  /* 24 KCCell::Format::Date25*/
-    "yyyy/mmm/dd",  /* 25 KCCell::Format::Date26*/
-    "yyyy-mm-d",  /* 26 KCCell::Format::Date16*/
-    "yyyy-mmm-d",  /* 27 KCCell::Format::Date15*/
-    "yyyy-mm-dd",  /* 28 KCCell::Format::Date16*/
-    "yyyy-mmm-dd",  /* 29 KCCell::Format::Date15*/
-    "yy",   /* 30 KCCell::Format::Date24*/
-    "yyyy",   /* 31 KCCell::Format::Date23*/
+    "yyyy/mm/d",  /* 22 KCCell::KCFormat::Date25*/
+    "yyyy/mmm/d",  /* 23 KCCell::KCFormat::Date14*/
+    "yyyy/mm/dd",  /* 24 KCCell::KCFormat::Date25*/
+    "yyyy/mmm/dd",  /* 25 KCCell::KCFormat::Date26*/
+    "yyyy-mm-d",  /* 26 KCCell::KCFormat::Date16*/
+    "yyyy-mmm-d",  /* 27 KCCell::KCFormat::Date15*/
+    "yyyy-mm-dd",  /* 28 KCCell::KCFormat::Date16*/
+    "yyyy-mmm-dd",  /* 29 KCCell::KCFormat::Date15*/
+    "yy",   /* 30 KCCell::KCFormat::Date24*/
+    "yyyy",   /* 31 KCCell::KCFormat::Date23*/
     NULL
 };
 
 // copied from gnumeric: src/formats.c:
 static char const * cell_time_format [] = {
-    "h:mm AM/PM",    // KCCell::Format::Time1 9 : 01 AM
-    "h:mm:ss AM/PM", // KCCell::Format::Time2 9:01:05 AM
-    "h:mm",          // KCCell::Format::Time4 9:01
-    "h:mm:ss",       // KCCell::Format::Time5 9:01:12
+    "h:mm AM/PM",    // KCCell::KCFormat::Time1 9 : 01 AM
+    "h:mm:ss AM/PM", // KCCell::KCFormat::Time2 9:01:05 AM
+    "h:mm",          // KCCell::KCFormat::Time4 9:01
+    "h:mm:ss",       // KCCell::KCFormat::Time5 9:01:12
     "m/d/yy h:mm",
-    "mm:ss",         // KCCell::Format::Time6 01:12
-    "mm:ss.0",       // KCCell::Format::Time6 01:12
+    "mm:ss",         // KCCell::KCFormat::Time6 01:12
+    "mm:ss.0",       // KCCell::KCFormat::Time6 01:12
     "[h]:mm:ss",
     "[h]:mm",
     "[mm]:ss",
@@ -647,7 +647,7 @@ bool GNUMERICFilter::setType(const KCCell& kspread_cell,
 {
     int i = 0;
     for (i = 0; cell_date_format[i] ; ++i) {
-        kDebug(30521) << "Format::KCCell:" << cell_date_format[i] << ", FormatString:" << formatString;
+        kDebug(30521) << "KCFormat::KCCell:" << cell_date_format[i] << ", FormatString:" << formatString;
         if ((formatString == "d/m/yy") || (formatString == cell_date_format[i])) {
             kDebug(30521) << "   FormatString: Date:" << formatString << ", CellContent:" << cell_content;
             QDate date;
@@ -669,36 +669,36 @@ bool GNUMERICFilter::setType(const KCCell& kspread_cell,
             } else
                 date = kspread_cell.value().asDate(kspread_cell.sheet()->map()->calculationSettings());
 
-            Format::Type type;
+            KCFormat::Type type;
             switch (i) {
-            case 0:  type = Format::Date5;  break;
-            case 1:  type = Format::Date6;  break;
-            case 2:  type = Format::Date1;  break;
-            case 3:  type = Format::Date2;  break;
-            case 4:  type = Format::Date3;  break;
-            case 5:  type = Format::Date4;  break;
-            case 6:  type = Format::Date11; break;
-            case 7:  type = Format::Date12; break;
-            case 8:  type = Format::Date19; break;
-            case 9:  type = Format::Date18; break;
-            case 10: type = Format::Date20; break;
-            case 11: type = Format::Date21; break;
-            case 16: type = Format::Date7;  break;
-            case 17: type = Format::Date22; break;
-            case 18: type = Format::Date8;  break;
-            case 19: type = Format::Date9;  break;
-            case 22: type = Format::Date25; break;
-            case 23: type = Format::Date14; break;
-            case 24: type = Format::Date25; break;
-            case 25: type = Format::Date26; break;
-            case 26: type = Format::Date16; break;
-            case 27: type = Format::Date15; break;
-            case 28: type = Format::Date16; break;
-            case 29: type = Format::Date15; break;
-            case 30: type = Format::Date24; break;
-            case 31: type = Format::Date23; break;
+            case 0:  type = KCFormat::Date5;  break;
+            case 1:  type = KCFormat::Date6;  break;
+            case 2:  type = KCFormat::Date1;  break;
+            case 3:  type = KCFormat::Date2;  break;
+            case 4:  type = KCFormat::Date3;  break;
+            case 5:  type = KCFormat::Date4;  break;
+            case 6:  type = KCFormat::Date11; break;
+            case 7:  type = KCFormat::Date12; break;
+            case 8:  type = KCFormat::Date19; break;
+            case 9:  type = KCFormat::Date18; break;
+            case 10: type = KCFormat::Date20; break;
+            case 11: type = KCFormat::Date21; break;
+            case 16: type = KCFormat::Date7;  break;
+            case 17: type = KCFormat::Date22; break;
+            case 18: type = KCFormat::Date8;  break;
+            case 19: type = KCFormat::Date9;  break;
+            case 22: type = KCFormat::Date25; break;
+            case 23: type = KCFormat::Date14; break;
+            case 24: type = KCFormat::Date25; break;
+            case 25: type = KCFormat::Date26; break;
+            case 26: type = KCFormat::Date16; break;
+            case 27: type = KCFormat::Date15; break;
+            case 28: type = KCFormat::Date16; break;
+            case 29: type = KCFormat::Date15; break;
+            case 30: type = KCFormat::Date24; break;
+            case 31: type = KCFormat::Date23; break;
             default:
-                type = Format::ShortDate;
+                type = KCFormat::ShortDate;
                 break;
                 /* 12, 13, 14, 15, 20, 21 */
             }
@@ -733,16 +733,16 @@ bool GNUMERICFilter::setType(const KCCell& kspread_cell,
             } else
                 time = kspread_cell.value().asTime(kspread_cell.sheet()->map()->calculationSettings());
 
-            Format::Type type;
+            KCFormat::Type type;
             switch (i) {
-            case 0: type = Format::Time1; break;
-            case 1: type = Format::Time2; break;
-            case 2: type = Format::Time4; break;
-            case 3: type = Format::Time5; break;
-            case 5: type = Format::Time6; break;
-            case 6: type = Format::Time6; break;
+            case 0: type = KCFormat::Time1; break;
+            case 1: type = KCFormat::Time2; break;
+            case 2: type = KCFormat::Time4; break;
+            case 3: type = KCFormat::Time5; break;
+            case 5: type = KCFormat::Time6; break;
+            case 6: type = KCFormat::Time6; break;
             default:
-                type = Format::Time1; break;
+                type = KCFormat::Time1; break;
             }
 
             kDebug(30521) << "i:" << i << ", Type:" << type;
@@ -915,26 +915,26 @@ void GNUMERICFilter::ParseFormat(QString const & formatString, const KCCell& ksp
     KCStyle style;
 
     if (l == 0 || formatString == "General") {
-        style.setFormatType(Format::Generic);
+        style.setFormatType(KCFormat::Generic);
     } else if (formatString[l - 1] == '%') {
-        style.setFormatType(Format::Percentage);
+        style.setFormatType(KCFormat::Percentage);
     } else if (formatString[0] == '$') { // dollar
-        style.setFormatType(Format::Money);
+        style.setFormatType(KCFormat::Money);
         Currency currency("$");
         style.setCurrency(currency);
         lastPos = 1;
     } else if (formatString.startsWith("£")) { // pound
-        style.setFormatType(Format::Money);
+        style.setFormatType(KCFormat::Money);
         Currency currency("£");
         style.setCurrency(currency);
         lastPos = 1;
     } else if (formatString.startsWith("¥")) { // yen
-        style.setFormatType(Format::Money);
+        style.setFormatType(KCFormat::Money);
         Currency currency("¥");
         style.setCurrency(currency);
         lastPos = 1;
     } else if (formatString.startsWith("€")) { // euro
-        style.setFormatType(Format::Money);
+        style.setFormatType(KCFormat::Money);
         Currency currency("€");
         style.setCurrency(currency);
         lastPos = 1;
@@ -942,13 +942,13 @@ void GNUMERICFilter::ParseFormat(QString const & formatString, const KCCell& ksp
         if ((formatString[0] == '[') && (formatString[1] == '$')) {
             int n = formatString.indexOf(']');
             if (n != -1) {
-                style.setFormatType(Format::Money);
+                style.setFormatType(KCFormat::Money);
                 Currency currency(formatString.mid(2, n - 2));
                 style.setCurrency(currency);
             }
             lastPos = ++n;
         } else if (formatString.indexOf("E+0") != -1) {
-            style.setFormatType(Format::Scientific);
+            style.setFormatType(KCFormat::Scientific);
         } else {
             // do pattern matching with gnumeric formats
             QString content(kspread_cell.value().asString());
@@ -958,7 +958,7 @@ void GNUMERICFilter::ParseFormat(QString const & formatString, const KCCell& ksp
 
             if (formatString.indexOf("?/?") != -1) {
                 // TODO: fixme!
-                style.setFormatType(Format::fraction_three_digits);
+                style.setFormatType(KCFormat::fraction_three_digits);
                 KCCell(kspread_cell).setStyle(style);
                 return;
             }
@@ -1243,13 +1243,13 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                             style.setWrapText(true);
                     }
 
-                    if (style_element.hasAttribute("Format")) {
-                        QString formatString = style_element.attribute("Format");
+                    if (style_element.hasAttribute("KCFormat")) {
+                        QString formatString = style_element.attribute("KCFormat");
 
-                        kDebug(30521) << "Format:" << formatString;
+                        kDebug(30521) << "KCFormat:" << formatString;
                         ParseFormat(formatString, kspread_cell);
 
-                    } // End "Format"
+                    } // End "KCFormat"
 
                     if (!gmr_styleborder.isNull()) {
                         QDomElement style_element = gmr_styleborder.toElement(); // try to convert the node to an element.
@@ -1868,10 +1868,10 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
                             // <xsd:enumeration value="80"/> <!-- array     -->
                             QString valuetype = e.attribute("ValueType");
                             if (valuetype == "40") { //percentage
-                                style.setFormatType(Format::Percentage);
+                                style.setFormatType(KCFormat::Percentage);
                                 kspread_cell.setValue(Value(cell_content));
                             } else if (valuetype == "60") { //string
-                                style.setFormatType(Format::Text);
+                                style.setFormatType(KCFormat::Text);
                                 kspread_cell.setValue(Value(cell_content));
                             }
                         }
@@ -1929,10 +1929,10 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
                         //style.setFormatType( type );
                         QString valuetype = e.attribute("ValueType");
                         if (valuetype == "40") { //percentage
-                            style.setFormatType(Format::Percentage);
+                            style.setFormatType(KCFormat::Percentage);
                             kspread_cell.setValue(Value(cell_content));
                         } else if (valuetype == "60") { //string
-                            style.setFormatType(Format::Text);
+                            style.setFormatType(KCFormat::Text);
                             kspread_cell.setValue(Value(cell_content));
                         }
 

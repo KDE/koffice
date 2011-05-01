@@ -237,7 +237,7 @@
               <item row="0" column="1" >
                 <widget class="QLabel" name="textLabel1_4" >
                   <property name="text" >
-                    <string>&amp;Format:</string>
+                    <string>&amp;KCFormat:</string>
                   </property>
                   <property name="buddy" stdset="0" >
                     <cstring>m_formatComboBox</cstring>

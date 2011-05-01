@@ -894,7 +894,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_seriesText_Tx()
 
  Child elements:
   - extLst (Chart Extensibility) §21.2.2.64
-  - formatCode (Format Code) §21.2.2.71
+  - formatCode (KCFormat Code) §21.2.2.71
   - [Done]pt (Numeric Point) §21.2.2.150
   - [Done]ptCount (Point Count) §21.2.2.152
 
@@ -945,7 +945,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_legend()
   - extLst (Chart Extensibility) §21.2.2.64
   - idx (Index) §21.2.2.84
   - layout (Layout) §21.2.2.88
-  - numFmt (Number Format) §21.2.2.121
+  - numFmt (Number KCFormat) §21.2.2.121
   - separator (Separator) §21.2.2.166
   - showBubbleSize (Show Bubble Size) §21.2.2.178
   - showCatName (Show Category Name) §21.2.2.179
@@ -1007,7 +1007,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_dLbl()
   - dLblPos (Data Label Position) §21.2.2.48
   - extLst (Chart Extensibility) §21.2.2.64
   - leaderLines (Leader Lines) §21.2.2.92
-  - numFmt (Number Format) §21.2.2.121
+  - numFmt (Number KCFormat) §21.2.2.121
   - separator (Separator) §21.2.2.166
   - showBubbleSize (Show Bubble Size) §21.2.2.178
   - showCatName (Show Category Name) §21.2.2.179
@@ -2703,7 +2703,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_bubble3D()
 
  Child elements:
   - extLst (Chart Extensibility) §21.2.2.64
-  - formatCode (Format Code) §21.2.2.71
+  - formatCode (KCFormat Code) §21.2.2.71
   - [Done]pt (Numeric Point) §21.2.2.150
   - [Done]ptCount (Point Count) §21.2.2.152
 */

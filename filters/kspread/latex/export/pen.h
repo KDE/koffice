@@ -45,7 +45,7 @@ public:
     /**
      * Constructors
      *
-     * Creates a new instance of Format.
+     * Creates a new instance of KCFormat.
      */
     Pen();
 

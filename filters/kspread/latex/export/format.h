@@ -30,7 +30,7 @@
 #include "pen.h"
 
 /***********************************************************************/
-/* Class: Format                                                       */
+/* Class: KCFormat                                                       */
 /***********************************************************************/
 
 class Column;
@@ -39,7 +39,7 @@ class Row;
 /**
  * This class describe a cell, row or column format.
  */
-class Format: public XmlParser
+class KCFormat: public XmlParser
 {
     long _align;
     long _alignY;
@@ -75,18 +75,18 @@ public:
     /**
      * Constructors
      *
-     * Creates a new instance of Format.
+     * Creates a new instance of KCFormat.
      *
      * @param Para the parent class of the format.
      */
-    Format();
+    KCFormat();
 
     /*
      * Destructor
      *
      * Nothing to do
      */
-    virtual ~Format();
+    virtual ~KCFormat();
 
     /**
      * getters

@@ -541,7 +541,7 @@ bool ChartExport::saveContent(KoStore* store, KoXmlWriter* manifestWriter)
     //see 2.4.195 PieFormat
     int maxExplode = 100;
     foreach(Charting::Series* series, chart()->m_series) {
-        foreach(Charting::Format* f, series->m_datasetFormat) {
+        foreach(Charting::KCFormat* f, series->m_datasetFormat) {
             if(Charting::PieFormat* pieformat = dynamic_cast<Charting::PieFormat*>(f)) {
                 if(pieformat->m_pcExplode > 0) {
                     maxExplode = qMax(maxExplode, pieformat->m_pcExplode);
@@ -646,7 +646,7 @@ bool ChartExport::saveContent(KoStore* store, KoXmlWriter* manifestWriter)
         //seriesstyle.addProperty("draw:stroke", "solid");
         //seriesstyle.addProperty("draw:fill-color", "#ff0000");
 
-        foreach(Charting::Format* f, series->m_datasetFormat) {
+        foreach(Charting::KCFormat* f, series->m_datasetFormat) {
             if(Charting::PieFormat* pieformat = dynamic_cast<Charting::PieFormat*>(f)) {
                 if(pieformat->m_pcExplode > 0) {
                     //Note that 100.0/maxExplode will yield 1.0 most of the time, that's why do that division first

@@ -670,16 +670,16 @@ QDomElement GNUMERICExport::GetCellStyle(QDomDocument gnumeric_doc, const KCCell
     Currency currency;
 
     switch (style.formatType()) {
-    case Format::Generic:
+    case KCFormat::Generic:
         stringFormat = "General";
         break;
-    case Format::Number:
+    case KCFormat::Number:
         stringFormat = "0.00";
         break;
-    case Format::Text:
+    case KCFormat::Text:
         stringFormat = "General";
         break;
-    case Format::Money:
+    case KCFormat::Money:
 
         if (!style.hasAttribute(KCStyle::CurrencyFormat)) {
             stringFormat = "0.00";
@@ -701,161 +701,161 @@ QDomElement GNUMERICExport::GetCellStyle(QDomDocument gnumeric_doc, const KCCell
             stringFormat = "[$" + currency.code() + "]0.00";
 
         break;
-    case Format::Percentage:
+    case KCFormat::Percentage:
         stringFormat = "0.00%";
         break;
-    case Format::Scientific:
+    case KCFormat::Scientific:
         stringFormat = "0.00E+00";
         break;
-    case Format::ShortDate:
+    case KCFormat::ShortDate:
         stringFormat = cell.locale()->dateFormatShort();
         break;
-    case Format::TextDate:
+    case KCFormat::TextDate:
         stringFormat = cell.locale()->dateFormat();
         break;
-    case Format::Date1:
+    case KCFormat::Date1:
         stringFormat = "dd-mmm-yy";
         break;
-    case Format::Date2:
+    case KCFormat::Date2:
         stringFormat = "dd-mmm-yyyy";
         break;
-    case Format::Date3:
+    case KCFormat::Date3:
         stringFormat = "dd-mmm";
         break;
-    case Format::Date4:
+    case KCFormat::Date4:
         stringFormat = "dd-mm";
         break;
-    case Format::Date5:
+    case KCFormat::Date5:
         stringFormat = "dd/mm/yy";
         break;
-    case Format::Date6:
+    case KCFormat::Date6:
         stringFormat = "dd/mm/yyyy";
         break;
-    case Format::Date7:
+    case KCFormat::Date7:
         stringFormat = "mmm-yy";
         break;
-    case Format::Date8:
+    case KCFormat::Date8:
         stringFormat = "mmmm-yy";
         break;
-    case Format::Date9:
+    case KCFormat::Date9:
         stringFormat = "mmmm-yyyy";
         break;
-    case Format::Date10:
+    case KCFormat::Date10:
         stringFormat = "m-yy";
         break;
-    case Format::Date11:
+    case KCFormat::Date11:
         stringFormat = "dd/mmm";
         break;
-    case Format::Date12:
+    case KCFormat::Date12:
         stringFormat = "dd/mm";
         break;
-    case Format::Date13:
+    case KCFormat::Date13:
         stringFormat = "dd/mmm/yyyy";
         break;
-    case Format::Date14:
+    case KCFormat::Date14:
         stringFormat = "yyyy/mmm/dd";
         break;
-    case Format::Date15:
+    case KCFormat::Date15:
         stringFormat = "yyyy-mmm-dd";
         break;
-    case Format::Date16:
+    case KCFormat::Date16:
         stringFormat = "yyyy-mm-dd";
         break;
-    case Format::Date17:
+    case KCFormat::Date17:
         stringFormat = "d mmmm yyyy";
         break;
-    case Format::Date18:
+    case KCFormat::Date18:
         stringFormat = "mm/dd/yyyy";
         break;
-    case Format::Date19:
+    case KCFormat::Date19:
         stringFormat = "mm/dd/yy";
         break;
-    case Format::Date20:
+    case KCFormat::Date20:
         stringFormat = "mmm/dd/yy";
         break;
-    case Format::Date21:
+    case KCFormat::Date21:
         stringFormat = "mmm/dd/yyyy";
         break;
-    case Format::Date22:
+    case KCFormat::Date22:
         stringFormat = "mmm-yyyy";
         break;
-    case Format::Date23:
+    case KCFormat::Date23:
         stringFormat = "yyyy";
         break;
-    case Format::Date24:
+    case KCFormat::Date24:
         stringFormat = "yy";
         break;
-    case Format::Date25:
+    case KCFormat::Date25:
         stringFormat = "yyyy/mm/dd";
         break;
-    case Format::Date26:
+    case KCFormat::Date26:
         stringFormat = "yyyy/mmm/dd";
         break;
-    case Format::Time:
-    case Format::SecondeTime:
+    case KCFormat::Time:
+    case KCFormat::SecondeTime:
         stringFormat = cell.locale()->timeFormat();
         break;
-    case Format::Time1:
+    case KCFormat::Time1:
         stringFormat = "h:mm AM/PM";
         break;
-    case Format::Time2:
+    case KCFormat::Time2:
         stringFormat = "h:mm:ss AM/PM";
         break;
-    case Format::Time3:
+    case KCFormat::Time3:
         stringFormat = "h \"h\" mm \"min\" ss \"s\"";
         break;
-    case Format::Time4:
+    case KCFormat::Time4:
         stringFormat = "h:mm";
         break;
-    case Format::Time5:
+    case KCFormat::Time5:
         stringFormat = "h:mm:ss";
         break;
-    case Format::Time6:
+    case KCFormat::Time6:
         stringFormat = "mm:ss";
         break;
-    case Format::Time7:
+    case KCFormat::Time7:
         stringFormat = "[h]:mm:ss";
         break;
-    case Format::Time8:
+    case KCFormat::Time8:
         stringFormat = "[h]:mm";
         break;
-    case Format::fraction_half:
+    case KCFormat::fraction_half:
         stringFormat = "# ?/2";
         break;
-    case Format::fraction_quarter:
+    case KCFormat::fraction_quarter:
         stringFormat = "# ?/4";
         break;
-    case Format::fraction_eighth:
+    case KCFormat::fraction_eighth:
         stringFormat = "# ?/8";
         break;
-    case Format::fraction_sixteenth:
+    case KCFormat::fraction_sixteenth:
         stringFormat = "# ?/16";
         break;
-    case Format::fraction_tenth:
+    case KCFormat::fraction_tenth:
         stringFormat = "# ?/10";
         break;
-    case Format::fraction_hundredth:
+    case KCFormat::fraction_hundredth:
         stringFormat = "# ?/100";
         break;
-    case Format::fraction_one_digit:
+    case KCFormat::fraction_one_digit:
         stringFormat = "# ?/?";
         break;
-    case Format::fraction_two_digits:
+    case KCFormat::fraction_two_digits:
         stringFormat = "# ?\?/?\?";
         break;
-    case Format::fraction_three_digits:
+    case KCFormat::fraction_three_digits:
         stringFormat = "# ?\?\?/?\?\?";
         break;
-    case Format::Custom:
+    case KCFormat::Custom:
         stringFormat = style.customFormat();
         break;
     default:
         // This is a required parameter, so let's write a sane default
-        kWarning(30521) << "Unhandled Format value, setting 'General' as default: " << style.formatType();
+        kWarning(30521) << "Unhandled KCFormat value, setting 'General' as default: " << style.formatType();
         stringFormat = "General";
         break;
     }
-    cell_style.setAttribute("Format", stringFormat);
+    cell_style.setAttribute("KCFormat", stringFormat);
 
     if (hasBorder(cell, currentcolumn, currentrow))
         cell_style.appendChild(GetBorderStyle(gnumeric_doc, cell, currentcolumn, currentrow));

@@ -36,7 +36,7 @@
 /**
  * This class hold a row.
  */
-class Row: public Format
+class Row: public KCFormat
 {
 
     /* USEFUL DATA */
