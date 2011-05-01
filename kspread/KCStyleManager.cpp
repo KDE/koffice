@@ -18,7 +18,7 @@
 */
 
 // own header
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 
 #include <QBrush>
 #include <QDomDocument>
@@ -39,20 +39,20 @@
 #include "KCMap.h"
 #include "KCStyle.h"
 
-StyleManager::StyleManager()
+KCStyleManager::KCStyleManager()
         : m_defaultStyle(new CustomStyle())
 {
 }
 
-StyleManager::~StyleManager()
+KCStyleManager::~KCStyleManager()
 {
     delete m_defaultStyle;
     qDeleteAll(m_styles);
 }
 
-void StyleManager::saveOdf(KoGenStyles &mainStyles)
+void KCStyleManager::saveOdf(KoGenStyles &mainStyles)
 {
-    kDebug(36003) << "StyleManager: Saving default cell style";
+    kDebug(36003) << "KCStyleManager: Saving default cell style";
     KoGenStyle defStyle = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
     defaultStyle()->saveOdf(defStyle, mainStyles, this);
 
@@ -60,14 +60,14 @@ void StyleManager::saveOdf(KoGenStyles &mainStyles)
 
     CustomStyles::ConstIterator end = m_styles.constEnd();
     for (CustomStyles::ConstIterator it(m_styles.constBegin()); it != end; ++it) {
-        kDebug(36003) << "StyleManager: Saving common cell style" << it.key();
+        kDebug(36003) << "KCStyleManager: Saving common cell style" << it.key();
         KoGenStyle customStyle = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
         const QString oasisName = (*it)->saveOdf(customStyle, mainStyles, this);
         m_oasisStyles[(*it)->name()] = oasisName;
     }
 }
 
-void StyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* map)
+void KCStyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* map)
 {
     // reset the map of OpenDocument Styles
     m_oasisStyles.clear();
@@ -75,7 +75,7 @@ void StyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* 
     // loading default style first
     const KoXmlElement* defStyle = stylesReader.defaultStyle("table-cell");
     if (defStyle) {
-        kDebug(36003) << "StyleManager: Loading default cell style";
+        kDebug(36003) << "KCStyleManager: Loading default cell style";
         Conditions conditions;
         defaultStyle()->loadOdf(stylesReader, *defStyle, "Default", conditions, this, map->parser());
         defaultStyle()->setType(KCStyle::BUILTIN);
@@ -114,7 +114,7 @@ void StyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* 
 
         // then replace by user-visible one (if any)
         const QString name = styleElem->attributeNS(KoXmlNS::style, "display-name", oasisName);
-        kDebug(36003) << " StyleManager: Loading common cell style:" << oasisName << " (display name:" << name << ")";
+        kDebug(36003) << " KCStyleManager: Loading common cell style:" << oasisName << " (display name:" << name << ")";
 
         if (!name.isEmpty()) {
             // The style's parent name will be set in KCStyle::loadOdf(..).
@@ -149,7 +149,7 @@ void StyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* 
     }
 }
 
-QDomElement StyleManager::save(QDomDocument & doc)
+QDomElement KCStyleManager::save(QDomDocument & doc)
 {
     QDomElement styles = doc.createElement("styles");
 
@@ -169,7 +169,7 @@ QDomElement StyleManager::save(QDomDocument & doc)
     return styles;
 }
 
-bool StyleManager::loadXML(KoXmlElement const & styles)
+bool KCStyleManager::loadXML(KoXmlElement const & styles)
 {
     bool ok = true;
     KoXmlElement e = styles.firstChild().toElement();
@@ -220,13 +220,13 @@ bool StyleManager::loadXML(KoXmlElement const & styles)
     return true;
 }
 
-void StyleManager::resetDefaultStyle()
+void KCStyleManager::resetDefaultStyle()
 {
     delete m_defaultStyle;
     m_defaultStyle = new CustomStyle;
 }
 
-void StyleManager::createBuiltinStyles()
+void KCStyleManager::createBuiltinStyles()
 {
     CustomStyle * header1 = new CustomStyle(i18n("Header"), m_defaultStyle);
     QFont f(header1->font());
@@ -247,7 +247,7 @@ void StyleManager::createBuiltinStyles()
     m_styles[ header2->name()] = header2;
 }
 
-CustomStyle * StyleManager::style(QString const & name) const
+CustomStyle * KCStyleManager::style(QString const & name) const
 {
     if (name.isEmpty())
         return 0;
@@ -265,7 +265,7 @@ CustomStyle * StyleManager::style(QString const & name) const
     return 0;
 }
 
-void StyleManager::takeStyle(CustomStyle * style)
+void KCStyleManager::takeStyle(CustomStyle * style)
 {
     const QString parentName = style->parentName();
 
@@ -287,7 +287,7 @@ void StyleManager::takeStyle(CustomStyle * style)
     }
 }
 
-bool StyleManager::checkCircle(QString const & name, QString const & parent)
+bool KCStyleManager::checkCircle(QString const & name, QString const & parent)
 {
     CustomStyle* style = this->style(parent);
     if (!style || style->parentName().isNull())
@@ -298,7 +298,7 @@ bool StyleManager::checkCircle(QString const & name, QString const & parent)
         return checkCircle(name, style->parentName());
 }
 
-bool StyleManager::validateStyleName(QString const & name, CustomStyle * style)
+bool KCStyleManager::validateStyleName(QString const & name, CustomStyle * style)
 {
     if (m_defaultStyle->name() == name || name == "Default")
         return false;
@@ -316,7 +316,7 @@ bool StyleManager::validateStyleName(QString const & name, CustomStyle * style)
     return true;
 }
 
-void StyleManager::changeName(QString const & oldName, QString const & newName)
+void KCStyleManager::changeName(QString const & oldName, QString const & newName)
 {
     CustomStyles::iterator iter = m_styles.begin();
     CustomStyles::iterator end  = m_styles.end();
@@ -336,7 +336,7 @@ void StyleManager::changeName(QString const & oldName, QString const & newName)
     }
 }
 
-void StyleManager::insertStyle(CustomStyle *style)
+void KCStyleManager::insertStyle(CustomStyle *style)
 {
     const QString base = style->name();
     // do not add the default style
@@ -353,7 +353,7 @@ void StyleManager::insertStyle(CustomStyle *style)
     m_styles[name] = style;
 }
 
-QStringList StyleManager::styleNames() const
+QStringList KCStyleManager::styleNames() const
 {
     QStringList list;
 
@@ -371,7 +371,7 @@ QStringList StyleManager::styleNames() const
     return list;
 }
 
-Styles StyleManager::loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
+Styles KCStyleManager::loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
                                        QHash<QString, Conditions>& conditionalStyles,
                                        const ValueParser *parser)
 {
@@ -379,7 +379,7 @@ Styles StyleManager::loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
     foreach(KoXmlElement* element, stylesReader.autoStyles("table-cell")) {
         if (element->hasAttributeNS(KoXmlNS::style , "name")) {
             QString name = element->attributeNS(KoXmlNS::style , "name" , QString());
-            kDebug(36003) << "StyleManager: Preloading automatic cell style:" << name;
+            kDebug(36003) << "KCStyleManager: Preloading automatic cell style:" << name;
             autoStyles.remove(name);
             Conditions conditions;
             autoStyles[name].loadOdfStyle(stylesReader, *(element), conditions, this, parser);
@@ -405,7 +405,7 @@ Styles StyleManager::loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
     return autoStyles;
 }
 
-void StyleManager::releaseUnusedAutoStyles(Styles autoStyles)
+void KCStyleManager::releaseUnusedAutoStyles(Styles autoStyles)
 {
     // Just clear the list. The styles are released, if not used.
     autoStyles.clear();
@@ -414,12 +414,12 @@ void StyleManager::releaseUnusedAutoStyles(Styles autoStyles)
     m_oasisStyles.clear();
 }
 
-QString StyleManager::openDocumentName(const QString& name) const
+QString KCStyleManager::openDocumentName(const QString& name) const
 {
     return m_oasisStyles.value(name);
 }
 
-void StyleManager::dump() const
+void KCStyleManager::dump() const
 {
     kDebug(36006) << "Custom styles:";
     foreach(QString name, m_styles.keys()) {

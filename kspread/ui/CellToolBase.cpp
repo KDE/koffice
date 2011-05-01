@@ -52,7 +52,7 @@
 #include "SelectionStrategy.h"
 #include "KCSheet.h"
 #include "SheetView.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 
 // commands
 #include "commands/AutoFilterCommand.h"
@@ -1091,7 +1091,7 @@ void CellToolBase::activate(ToolActivation toolActivation, const QSet<KoShape*> 
     selection()->update();
 
     // Initialize cell style selection action.
-    const StyleManager* styleManager = selection()->activeSheet()->map()->styleManager();
+    const KCStyleManager* styleManager = selection()->activeSheet()->map()->styleManager();
     static_cast<KSelectAction*>(this->action("setStyle"))->setItems(styleManager->styleNames());
 
     // Establish connections.
@@ -1563,7 +1563,7 @@ void CellToolBase::setDefaultStyle()
 void CellToolBase::styleDialog()
 {
     KCMap* const map = selection()->activeSheet()->map();
-    StyleManager* const styleManager = map->styleManager();
+    KCStyleManager* const styleManager = map->styleManager();
     QPointer<StyleManagerDialog> dialog = new StyleManagerDialog(canvas()->canvasWidget(), selection(), styleManager);
     dialog->exec();
     delete dialog;

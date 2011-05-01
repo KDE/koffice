@@ -63,7 +63,7 @@
 #include <KCSheet.h>
 #include <KCSheetPrint.h>
 #include <KCStyle.h>
-#include <StyleManager.h>
+#include <KCStyleManager.h>
 #include <StyleStorage.h>
 #include <ValueConverter.h>
 #include <KCShapeApplicationData.h>
@@ -612,7 +612,7 @@ void ExcelImport::Private::processSheetForConditionals(Sheet* is, KCSheet* os)
 {
     static int styleNameId = 0;
     const QList<ConditionalFormat*> conditionals = is->conditionalFormats();
-    StyleManager* styleManager = os->map()->styleManager();
+    KCStyleManager* styleManager = os->map()->styleManager();
     foreach (ConditionalFormat* cf, conditionals) {
         QRegion r = cf->region().translated(1, 1);
         QLinkedList<KCConditional> conds;

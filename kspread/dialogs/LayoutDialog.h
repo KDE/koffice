@@ -67,7 +67,7 @@ class KoUnitDoubleSpinBox;
 
 class KCSheet;
 class CustomStyle;
-class StyleManager;
+class KCStyleManager;
 class CellFormatDialog;
 class Selection;
 class StyleCommand;
@@ -558,7 +558,7 @@ public:
      * Create a format dlg for the rectangular area in '_sheet'.
      */
     CellFormatDialog(QWidget* parent, Selection* selection);
-    CellFormatDialog(QWidget* parent, Selection* selection, CustomStyle* style, StyleManager* manager);
+    CellFormatDialog(QWidget* parent, Selection* selection, CustomStyle* style, KCStyleManager* manager);
 
     ~CellFormatDialog();
 
@@ -583,7 +583,7 @@ public:
     CustomStyle * getStyle() const {
         return m_style;
     }
-    StyleManager * getStyleManager() const {
+    KCStyleManager * getStyleManager() const {
         return m_styleManager;
     }
 
@@ -710,7 +710,7 @@ protected:
     KCSheet * m_sheet;
     Selection  * m_selection;
     CustomStyle * m_style;
-    StyleManager * m_styleManager;
+    KCStyleManager * m_styleManager;
 
     void applyStyle();
 };

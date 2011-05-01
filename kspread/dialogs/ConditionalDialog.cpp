@@ -28,7 +28,7 @@
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "ValueConverter.h"
 #include "ValueParser.h"
 

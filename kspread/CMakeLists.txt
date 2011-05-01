@@ -224,7 +224,7 @@ set (kspreadodf_LIB_SRCS
     KCSheetAccessModel.cpp
     KCSheetModel.cpp
     KCStyle.cpp
-    StyleManager.cpp
+    KCStyleManager.cpp
     StyleStorage.cpp
     Util.cpp
     Validity.cpp

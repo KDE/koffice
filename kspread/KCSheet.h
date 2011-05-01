@@ -875,7 +875,7 @@ protected:
      * \ingroup OpenDocument
      * Inserts the styles contained in \p styleRegions into the style storage.
      * Looks automatic styles up in the map of preloaded automatic styles,
-     * \p autoStyles , and custom styles in the StyleManager.
+     * \p autoStyles , and custom styles in the KCStyleManager.
      * The region is restricted to \p usedArea .
      */
     void loadOdfInsertStyles(const Styles& autoStyles,

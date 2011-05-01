@@ -30,7 +30,7 @@ class QTreeWidgetItem;
 class KComboBox;
 
 class Selection;
-class StyleManager;
+class KCStyleManager;
 
 /**
  * \ingroup UI
@@ -41,7 +41,7 @@ class StyleManagerDialog : public KDialog
     Q_OBJECT
 
 public:
-    StyleManagerDialog(QWidget* parent, Selection* selection, StyleManager* manager);
+    StyleManagerDialog(QWidget* parent, Selection* selection, KCStyleManager* manager);
     ~StyleManagerDialog();
 
 protected Q_SLOTS:
@@ -57,7 +57,7 @@ private:
 
 private:
     Selection*      m_selection;
-    StyleManager*   m_styleManager;
+    KCStyleManager*   m_styleManager;
     QTreeWidget*    m_styleList;
     KComboBox*      m_displayBox;
 };

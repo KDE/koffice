@@ -63,7 +63,7 @@ class KCRecalcManager;
 class KCRowFormat;
 class KCSheet;
 class KCStyle;
-class StyleManager;
+class KCStyleManager;
 class ValueParser;
 class ValueConverter;
 class ValueFormatter;
@@ -132,9 +132,9 @@ public:
     KCRecalcManager* recalcManager() const;
 
     /**
-     * @return the StyleManager of this Document
+     * @return the KCStyleManager of this Document
      */
-    StyleManager* styleManager() const;
+    KCStyleManager* styleManager() const;
 
     /**
      * @return the KoStyleManager of this Document

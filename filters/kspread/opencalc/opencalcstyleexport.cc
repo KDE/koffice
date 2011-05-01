@@ -26,7 +26,7 @@
 #include <kspread/KCMap.h>
 #include <kspread/KCSheet.h>
 #include <kspread/KCStyle.h>
-#include <kspread/StyleManager.h>
+#include <kspread/KCStyleManager.h>
 
 #include <qdom.h>
 

@@ -66,7 +66,7 @@
 #include "kspread_limits.h"
 #include "KCPrintSettings.h"
 #include "KCSheet.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "Util.h"
 #include "View.h"
 

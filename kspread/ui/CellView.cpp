@@ -70,7 +70,7 @@
 #include "KCSheet.h"
 #include "KCSheetPrint.h"
 #include "SheetView.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "KCValue.h"
 #include "ValueFormatter.h"
 

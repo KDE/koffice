@@ -63,7 +63,7 @@
 #include "KCShapeApplicationData.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "Util.h"
 #include "KCValue.h"
 #include "Validity.h"

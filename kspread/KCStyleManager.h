@@ -38,19 +38,19 @@ class StyleDialog;
 class ValueParser;
 
 /**
- * \class StyleManager
+ * \class KCStyleManager
  * \brief Manages cell styles
  * \ingroup KCStyle
- * The StyleManager takes care of named styles. It also provides some static
+ * The KCStyleManager takes care of named styles. It also provides some static
  * methods for the preloading of OpenDocument autostyles.
  */
-class KSPREAD_EXPORT StyleManager
+class KSPREAD_EXPORT KCStyleManager
 {
     friend class StyleManagerDialog;
 
 public:
-    StyleManager();
-    ~StyleManager();
+    KCStyleManager();
+    ~KCStyleManager();
 
     QDomElement save(QDomDocument & doc);
     bool loadXML(KoXmlElement const & styles);

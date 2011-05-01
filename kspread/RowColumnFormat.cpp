@@ -43,7 +43,7 @@
 #include "KCSheet.h"
 #include "KCSheetPrint.h"
 #include "KCStyle.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 
 using namespace std;
 

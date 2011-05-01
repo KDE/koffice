@@ -30,7 +30,7 @@
 #include "KCOdfSavingContext.h"
 #include "RTree.h"
 #include "KCStyle.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "KCRectStorage.h"
 
 static const int g_maximumCachedStyles = 10000;
@@ -776,7 +776,7 @@ KCStyle StyleStorage::composeStyle(const QList<SharedSubStyle>& subStyles) const
     return style;
 }
 
-StyleManager* StyleStorage::styleManager() const
+KCStyleManager* StyleStorage::styleManager() const
 {
     return d->map->styleManager();
 }

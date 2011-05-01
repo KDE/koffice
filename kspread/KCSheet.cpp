@@ -87,7 +87,7 @@
 #include "KCRectStorage.h"
 #include "KCSheetModel.h"
 #include "KCStyle.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "StyleStorage.h"
 #include "Util.h"
 #include "Validity.h"

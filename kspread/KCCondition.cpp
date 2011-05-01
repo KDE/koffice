@@ -31,7 +31,7 @@
 #include "KCRegion.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "Util.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
@@ -104,7 +104,7 @@ KCStyle Conditions::testConditions( const KCCell& cell ) const
 {
     KCConditional condition;
     if (currentCondition(cell, condition)) {
-        StyleManager *const styleManager = cell.sheet()->map()->styleManager();
+        KCStyleManager *const styleManager = cell.sheet()->map()->styleManager();
         KCStyle *const style = styleManager->style(condition.styleName);
         if (style)
             return *style;
@@ -414,7 +414,7 @@ KCConditional Conditions::loadOdfCondition(const QString &conditionValue, const 
     return newCondition;
 }
 
-void Conditions::loadOdfConditions(const KoXmlElement &element, const ValueParser *parser, const StyleManager *styleManager)
+void Conditions::loadOdfConditions(const KoXmlElement &element, const ValueParser *parser, const KCStyleManager *styleManager)
 {
     kDebug(36003) << "Loading conditional styles";
     KoXmlNode node(element);

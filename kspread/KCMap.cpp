@@ -60,7 +60,7 @@
 #include "KCRecalcManager.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "Validity.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
@@ -96,7 +96,7 @@ public:
     KCDependencyManager* dependencyManager;
     KCNamedAreaManager* namedAreaManager;
     KCRecalcManager* recalcManager;
-    StyleManager* styleManager;
+    KCStyleManager* styleManager;
     KoStyleManager* textStyleManager;
 
     KCApplicationSettings* applicationSettings;
@@ -136,7 +136,7 @@ KCMap::KCMap(KCDocBase* doc, int syntaxVersion)
     d->dependencyManager = new KCDependencyManager(this);
     d->namedAreaManager = new KCNamedAreaManager(this);
     d->recalcManager = new KCRecalcManager(this);
-    d->styleManager = new StyleManager();
+    d->styleManager = new KCStyleManager();
     d->textStyleManager = new KoStyleManager(this);
 
     d->applicationSettings = new KCApplicationSettings();
@@ -269,7 +269,7 @@ KCRecalcManager* KCMap::recalcManager() const
     return d->recalcManager;
 }
 
-StyleManager* KCMap::styleManager() const
+KCStyleManager* KCMap::styleManager() const
 {
     return d->styleManager;
 }

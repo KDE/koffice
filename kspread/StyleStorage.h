@@ -32,7 +32,7 @@
 class KCMap;
 class KCOdfSavingContext;
 class KCStyle;
-class StyleManager;
+class KCStyleManager;
 class SubStyle;
 
 /**
@@ -216,9 +216,9 @@ protected:
 
     /**
      * Convenience method.
-     * \return the StyleManager
+     * \return the KCStyleManager
      */
-    StyleManager* styleManager() const;
+    KCStyleManager* styleManager() const;
 
 private:
     // disable assignment

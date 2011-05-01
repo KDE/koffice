@@ -41,7 +41,7 @@ class Conditions;
 class CustomStyle;
 class SharedSubStyle;
 class KCStyle;
-class StyleManager;
+class KCStyleManager;
 class StyleManipulator;
 class SubStyle;
 class ValueParser;
@@ -95,7 +95,7 @@ public:
     /// The style type
     enum StyleType {
         BUILTIN,   ///< built-in style (the default style)
-        CUSTOM,    ///< custom style (defined in the StyleManager dialog)
+        CUSTOM,    ///< custom style (defined in the KCStyleManager dialog)
         AUTO,      ///< automatically generated on cell format changes
         TENTATIVE  ///< @internal temporary state
     };
@@ -107,7 +107,7 @@ public:
          * The NamedStyleKey has two functions:
          * \li In KCStyle: On lookup the KCStyle is composed (\see StyleStorage::composeStyle()).
          *               For named styles just the style's name is stored. On lookup, these styles
-         *               are looked up in the StyleManager and their attributes, including all
+         *               are looked up in the KCStyleManager and their attributes, including all
          *               attributes of the parents, are filled in the composed style. Additionally,
          *               the name of the named style is stored in the NamedStyleKey attribute.
          *               This is especially useful while saving the styles.
@@ -167,12 +167,12 @@ public:
 
 
     bool loadXML(KoXmlElement& format, Paste::Mode pm = Paste::Normal);
-    void saveXML(QDomDocument& doc, QDomElement& format, const StyleManager* styleManager) const;
+    void saveXML(QDomDocument& doc, QDomElement& format, const KCStyleManager* styleManager) const;
     void loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
-                      Conditions& conditions, const StyleManager* styleManager,
+                      Conditions& conditions, const KCStyleManager* styleManager,
                       const ValueParser *parser);
     void loadOdfDataStyle(KoOdfStylesReader& stylesReader, const QString& dataStyleName,
-                          Conditions& conditions, const StyleManager* styleManager,
+                          Conditions& conditions, const KCStyleManager* styleManager,
                           const ValueParser *parser);
 
     /**
@@ -181,7 +181,7 @@ public:
      * \return the OASIS style's name
      */
     virtual QString saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
-                            const StyleManager* manager) const;
+                            const KCStyleManager* manager) const;
 
 
     void clearAttribute(Key key);
@@ -242,10 +242,10 @@ protected:
      * Does the real work by determining the used attributes.
      */
     void saveOdfStyle(const QSet<Key>& subStyles, KoGenStyle &style,
-                      KoGenStyles &mainStyles, const StyleManager* manager) const;
+                      KoGenStyles &mainStyles, const KCStyleManager* manager) const;
 
     void loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
-                          Conditions& conditions, const StyleManager* styleManager,
+                          Conditions& conditions, const KCStyleManager* styleManager,
                           const ValueParser *parser);
     void loadOdfParagraphProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& element);
     void loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& element);
@@ -399,7 +399,7 @@ public:
     QString const & name() const;
 
     bool loadXML(KoXmlElement const & style, QString const & name);
-    void save(QDomDocument & doc, QDomElement & styles, const StyleManager* styleManager);
+    void save(QDomDocument & doc, QDomElement & styles, const KCStyleManager* styleManager);
 
     /**
      * Loads the style properties from @p style .
@@ -410,7 +410,7 @@ public:
      */
     void loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& style,
                  const QString& name, Conditions& conditions,
-                 const StyleManager* styleManager, const ValueParser *parser);
+                 const KCStyleManager* styleManager, const ValueParser *parser);
 
     /**
      * @reimp
@@ -418,7 +418,7 @@ public:
      * @return the OASIS style's name
      */
     virtual QString saveOdf(KoGenStyle& style, KoGenStyles &mainStyles,
-                            const StyleManager* manager) const;
+                            const KCStyleManager* manager) const;
 
 
     bool operator==(const CustomStyle& other) const;
@@ -432,7 +432,7 @@ public:
     int usage() const;
 
 private:
-    friend class StyleManager;
+    friend class KCStyleManager;
 
     /**
      * Constructor.

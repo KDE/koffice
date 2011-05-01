@@ -34,11 +34,11 @@
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 
 #include "commands/StyleCommand.h"
 
-StyleManagerDialog::StyleManagerDialog(QWidget* parent, Selection* selection, StyleManager* manager)
+StyleManagerDialog::StyleManagerDialog(QWidget* parent, Selection* selection, KCStyleManager* manager)
         : KDialog(parent)
         , m_selection(selection)
         , m_styleManager(manager)

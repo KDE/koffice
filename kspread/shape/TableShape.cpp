@@ -43,7 +43,7 @@
 #include <RowColumnFormat.h>
 #include <KCSheet.h>
 #include <SheetView.h>
-#include <StyleManager.h>
+#include <KCStyleManager.h>
 
 class TableShape::Private
 {
@@ -170,7 +170,7 @@ bool TableShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &con
         KCOdfLoadingContext tableContext(odfContext);
         QHash<QString, Conditions> conditionalStyles;
         KCMap *const map = sheet()->map();
-        StyleManager *const styleManager = map->styleManager();
+        KCStyleManager *const styleManager = map->styleManager();
         ValueParser *const parser = map->parser();
         Styles autoStyles = styleManager->loadOdfAutoStyles(odfContext.stylesReader(), conditionalStyles, parser);
 

@@ -68,7 +68,7 @@
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "StyleStorage.h"
 #include "ValueFormatter.h"
 
@@ -481,7 +481,7 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
 }
 
 CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection,
-                                   CustomStyle* style, StyleManager* manager)
+                                   CustomStyle* style, KCStyleManager* manager)
         : KPageDialog(parent)
         , m_sheet(selection->activeSheet())
         , m_selection(selection)

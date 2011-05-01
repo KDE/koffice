@@ -41,7 +41,7 @@
 #include "KCCondition.h"
 #include "KCCurrency.h"
 #include "Global.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "Util.h"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -197,7 +197,7 @@ void KCStyle::loadAttributes(const QList<SharedSubStyle>& subStyles)
 }
 
 void KCStyle::loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
-                         Conditions& conditions, const StyleManager* styleManager,
+                         Conditions& conditions, const KCStyleManager* styleManager,
                          const ValueParser *parser)
 {
     // NOTE Stefan: Do not fill the style stack with the parent styles!
@@ -222,7 +222,7 @@ void KCStyle::loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& 
 typedef QPair<QString,QString> StringPair;
 
 void KCStyle::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
-                             Conditions& conditions, const StyleManager* styleManager,
+                             Conditions& conditions, const KCStyleManager* styleManager,
                              const ValueParser *parser)
 {
     QString str;
@@ -232,7 +232,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlEleme
     }
 }
 
-void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &styleName, Conditions &conditions, const StyleManager *styleManager, const ValueParser *parser)
+void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &styleName, Conditions &conditions, const KCStyleManager *styleManager, const ValueParser *parser)
 {
     if (stylesReader.dataFormats().contains(styleName)) {
         KCStyle* theStyle = this;
@@ -248,7 +248,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &s
                 if (styleManager->style(c.styleName) == 0) {
                     CustomStyle* const s = new CustomStyle(c.styleName);
                     s->loadOdfDataStyle(stylesReader, c.styleName, conditions, styleManager, parser);
-                    const_cast<StyleManager*>(styleManager)->insertStyle(s);
+                    const_cast<KCStyleManager*>(styleManager)->insertStyle(s);
                 }
             }
         }
@@ -1165,7 +1165,7 @@ QString KCStyle::saveOdfStyleNumericFraction(KoGenStyles &mainStyles, KCFormat::
 }
 
 QString KCStyle::saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
-                       const StyleManager* manager) const
+                       const KCStyleManager* manager) const
 {
     // list of substyles to store
     QSet<Key> keysToStore;
@@ -1205,7 +1205,7 @@ QString KCStyle::saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
 }
 
 void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
-                         KoGenStyles &mainStyles, const StyleManager* manager) const
+                         KoGenStyles &mainStyles, const KCStyleManager* manager) const
 {
 #ifndef NDEBUG
     //if (type() == BUILTIN )
@@ -1442,7 +1442,7 @@ QString KCStyle::saveOdfBackgroundStyle(KoGenStyles &mainStyles, const QBrush &b
     return mainStyles.insert(styleobjectauto, "gr");
 }
 
-void KCStyle::saveXML(QDomDocument& doc, QDomElement& format, const StyleManager* styleManager) const
+void KCStyle::saveXML(QDomDocument& doc, QDomElement& format, const KCStyleManager* styleManager) const
 {
     // list of substyles to store
     QSet<Key> keysToStore;
@@ -2729,7 +2729,7 @@ void CustomStyle::setName(QString const & name)
 }
 
 QString CustomStyle::saveOdf(KoGenStyle& style, KoGenStyles &mainStyles,
-                             const StyleManager* manager) const
+                             const KCStyleManager* manager) const
 {
     Q_ASSERT(!name().isEmpty());
     // default style does not need display name
@@ -2754,7 +2754,7 @@ QString CustomStyle::saveOdf(KoGenStyle& style, KoGenStyles &mainStyles,
 
 void CustomStyle::loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& style,
                           const QString& name, Conditions& conditions,
-                          const StyleManager* styleManager, const ValueParser *parser)
+                          const KCStyleManager* styleManager, const ValueParser *parser)
 {
     setName(name);
     if (style.hasAttributeNS(KoXmlNS::style, "parent-style-name"))
@@ -2765,7 +2765,7 @@ void CustomStyle::loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& s
     KCStyle::loadOdfStyle(stylesReader, style, conditions, styleManager, parser);
 }
 
-void CustomStyle::save(QDomDocument& doc, QDomElement& styles, const StyleManager* styleManager)
+void CustomStyle::save(QDomDocument& doc, QDomElement& styles, const KCStyleManager* styleManager)
 {
     if (name().isEmpty())
         return;

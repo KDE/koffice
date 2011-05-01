@@ -93,7 +93,7 @@
 #include "KCRecalcManager.h"
 #include "KCSheet.h"
 #include "KCSheetPrint.h"
-#include "StyleManager.h"
+#include "KCStyleManager.h"
 #include "Util.h"
 #include "View.h"
 #include "KCSheetAccessModel.h"

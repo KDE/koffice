@@ -56,7 +56,7 @@
 #include <kspread/RowColumnFormat.h>
 #include <kspread/KCSheet.h>
 #include <kspread/KCStyle.h>
-#include <kspread/StyleManager.h>
+#include <kspread/KCStyleManager.h>
 #include <kspread/Validity.h>
 #include <kspread/KCValue.h>
 #include <kspread/ValueParser.h>

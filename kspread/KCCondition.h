@@ -154,7 +154,7 @@ public:
      * \ingroup OpenDocument
      * Loads the condtional formattings.
      */
-    void loadOdfConditions(const KoXmlElement &element, const ValueParser *parser, const StyleManager* styleManager);
+    void loadOdfConditions(const KoXmlElement &element, const ValueParser *parser, const KCStyleManager* styleManager);
 
     /**
      * \ingroup OpenDocument
