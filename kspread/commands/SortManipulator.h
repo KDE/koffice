@@ -20,10 +20,10 @@
 #ifndef KSPREAD_SORT_MANIPULATOR
 #define KSPREAD_SORT_MANIPULATOR
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "DataManipulators.h"
 
-class CellStorage;
+class KCCellStorage;
 
 /**
  * \ingroup Commands
@@ -92,7 +92,7 @@ protected:
     /** sorted order - which row/column will move to where */
     QMap<int, int> sorted;
 
-    CellStorage* m_cellStorage; // temporary
+    KCCellStorage* m_cellStorage; // temporary
     QHash<KCCell, KCStyle> m_styles; // temporary
 };
 

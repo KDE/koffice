@@ -28,7 +28,7 @@
 
 #include <klocale.h>
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Damages.h"
 #include "KCMap.h"
 #include "RowColumnFormat.h"
@@ -605,7 +605,7 @@ bool InsertDeleteColumnManipulator::process(Element* element)
 
         // undo deletion
         if (m_mode == Delete) {
-            QUndoCommand::undo(); // process child commands (from CellStorage)
+            QUndoCommand::undo(); // process child commands (from KCCellStorage)
         }
     } else {
         // delete rows
@@ -614,7 +614,7 @@ bool InsertDeleteColumnManipulator::process(Element* element)
 
         // undo insertion
         if (m_mode == Insert) {
-            QUndoCommand::undo(); // process child commands (from CellStorage)
+            QUndoCommand::undo(); // process child commands (from KCCellStorage)
         }
     }
     return true;
@@ -728,7 +728,7 @@ bool InsertDeleteRowManipulator::process(Element* element)
 
         // undo deletion
         if (m_mode == Delete) {
-            QUndoCommand::undo(); // process child commands (from CellStorage)
+            QUndoCommand::undo(); // process child commands (from KCCellStorage)
         }
     } else {
         // delete rows
@@ -737,7 +737,7 @@ bool InsertDeleteRowManipulator::process(Element* element)
 
         // undo insertion
         if (m_mode == Insert) {
-            QUndoCommand::undo(); // process child commands (from CellStorage)
+            QUndoCommand::undo(); // process child commands (from KCCellStorage)
         }
     }
     return true;

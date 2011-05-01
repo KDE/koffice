@@ -20,7 +20,7 @@
 #include "SpellCheckCommand.h"
 
 #include "KCCell.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCMap.h"
 #include "KCSheet.h"
 #include "KCRegion.h"
@@ -124,7 +124,7 @@ void SpellCheckCommand::finishedCurrentFeed()
     if (d->dialog->originalBuffer() == d->dialog->buffer()) {
         return;
     }
-    // TODO Stefan: QUndoCommand-based undo recording for CellStorage.
+    // TODO Stefan: QUndoCommand-based undo recording for KCCellStorage.
     if (!d->command) {
         d->command = new QUndoCommand(i18n("Correct Misspelled Words"));
     }

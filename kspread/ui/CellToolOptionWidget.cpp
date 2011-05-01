@@ -19,7 +19,7 @@
 
 #include "CellToolOptionWidget.h"
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "CellToolBase.h"
 #include "ExternalEditor.h"
 #include "LocationComboBox.h"

@@ -22,7 +22,7 @@
 
 #include <klocale.h>
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "ConditionsStorage.h"
 #include "KCSheet.h"
 

@@ -64,7 +64,7 @@
 #include <KoUpdater.h>
 #include <KoProgressUpdater.h>
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Cluster.h"
 #include "KCCondition.h"
 #include "Damages.h"
@@ -152,7 +152,7 @@ public:
     bool firstLetterUpper;
 
     // clusters to hold objects
-    CellStorage* cellStorage;
+    KCCellStorage* cellStorage;
     RowCluster rows;
     ColumnCluster columns;
     QList<KoShape*> shapes;
@@ -194,7 +194,7 @@ KCSheet::KCSheet(KCMap* map, const QString &sheetName)
     // Set a valid object name, so that we can offer scripting.
     setObjectName(createObjectName(d->name));
 
-    d->cellStorage = new CellStorage(this);
+    d->cellStorage = new KCCellStorage(this);
     d->rows.setAutoDelete(true);
     d->columns.setAutoDelete(true);
 
@@ -217,7 +217,7 @@ KCSheet::KCSheet(KCMap* map, const QString &sheetName)
 
     // document size changes always trigger a visible size change
     connect(this, SIGNAL(documentSizeChanged(const QSizeF&)), SIGNAL(visibleSizeChanged()));
-    // CellStorage connections
+    // KCCellStorage connections
     connect(d->cellStorage, SIGNAL(insertNamedArea(const KCRegion&, const QString&)),
             d->workbook->namedAreaManager(), SLOT(insert(const KCRegion&, const QString&)));
     connect(d->cellStorage, SIGNAL(namedAreaRemoved(const QString&)),
@@ -254,7 +254,7 @@ KCSheet::KCSheet(const KCSheet &other)
     d->hideZero = other.d->hideZero;
     d->firstLetterUpper = other.d->firstLetterUpper;
 
-    d->cellStorage = new CellStorage(*other.d->cellStorage, this);
+    d->cellStorage = new KCCellStorage(*other.d->cellStorage, this);
     d->rows = other.d->rows;
     d->columns = other.d->columns;
 
@@ -490,7 +490,7 @@ const RowFormat* KCSheet::rowFormat(int _row) const
     return map()->defaultRowFormat();
 }
 
-CellStorage* KCSheet::cellStorage() const
+KCCellStorage* KCSheet::cellStorage() const
 {
     return d->cellStorage;
 }

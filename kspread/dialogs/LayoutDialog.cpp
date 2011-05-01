@@ -62,7 +62,7 @@
 
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Localization.h"
 #include "KCMap.h"
 #include "ui/Selection.h"

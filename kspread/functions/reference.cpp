@@ -27,7 +27,7 @@
 #include "Util.h"
 #include "KCValue.h"
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Formula.h"
 #include "Function.h"
 #include "FunctionModuleRegistry.h"
@@ -467,7 +467,7 @@ KCValue func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
             return KCValue::errorVALUE();
     }
 
-    CellStorage *s = e->sheet->cellStorage();
+    KCCellStorage *s = e->sheet->cellStorage();
 
     // get formula to evaluate
     int formulaCol = e->ranges[0].col1;

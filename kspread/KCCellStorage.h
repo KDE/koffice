@@ -65,7 +65,7 @@ class ValueStorage;
  *
  * \note If you fill the storage, do it row-wise. That's more performant.
  */
-class KSPREAD_EXPORT CellStorage : public QObject
+class KSPREAD_EXPORT KCCellStorage : public QObject
 {
     Q_OBJECT
 public:
@@ -85,27 +85,27 @@ public:
      * Constructor.
      * Creates an empty storage for \p sheet.
      */
-    CellStorage(KCSheet* sheet);
+    KCCellStorage(KCSheet* sheet);
 
     /**
      * Copy constructor.
      * \note Take care: does not perform a deep copy!
      */
-    CellStorage(const CellStorage& other);
+    KCCellStorage(const KCCellStorage& other);
 
     /**
      * Copy constructor.
-     * Creates a CellStorage for \p sheet and copies the data from \p other.
+     * Creates a KCCellStorage for \p sheet and copies the data from \p other.
      */
-    CellStorage(const CellStorage& other, KCSheet* sheet);
+    KCCellStorage(const KCCellStorage& other, KCSheet* sheet);
 
     /**
      * Destructor.
      */
-    ~CellStorage();
+    ~KCCellStorage();
 
     /**
-     * \return the sheet this CellStorage is for.
+     * \return the sheet this KCCellStorage is for.
      */
     KCSheet* sheet() const;
 
@@ -367,7 +367,7 @@ public:
      * Creates a substorage consisting of the values in \p region.
      * \return a subset of the storage stripped down to the values in \p region
      */
-    CellStorage subStorage(const KCRegion& region) const;
+    KCCellStorage subStorage(const KCRegion& region) const;
 
     const KCBindingStorage* bindingStorage() const;
     const CommentStorage* commentStorage() const;
@@ -406,7 +406,7 @@ Q_SIGNALS:
 
 private:
     // do not allow assignment
-    CellStorage& operator=(const CellStorage&);
+    KCCellStorage& operator=(const KCCellStorage&);
 
     class Private;
     Private * const d;

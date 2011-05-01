@@ -44,7 +44,7 @@
 #include <ooutils.h>
 
 #include <kspread/KCCell.h>
-#include <kspread/CellStorage.h>
+#include <kspread/KCCellStorage.h>
 #include <kspread/KCCondition.h>
 #include <kspread/part/Doc.h>
 #include <kspread/Global.h>

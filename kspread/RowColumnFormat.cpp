@@ -36,7 +36,7 @@
 #include <KoOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Global.h"
 #include "KCMap.h"
 #include "KCRegion.h"

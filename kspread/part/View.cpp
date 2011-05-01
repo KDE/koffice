@@ -109,7 +109,7 @@
 #include "KCBindingManager.h"
 #include "KCCalculationSettings.h"
 #include "KCCanvasResources.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Damages.h"
 #include "DependencyManager.h"
 #include "Doc.h"

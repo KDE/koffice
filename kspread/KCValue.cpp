@@ -20,7 +20,7 @@
 
 #include "KCValue.h"
 #include "KCCalculationSettings.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "ValueStorage.h"
 
 #include <kdebug.h>

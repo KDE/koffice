@@ -3376,7 +3376,7 @@ void CellToolBase::listChoosePopupMenu()
     const KCSheet *const sheet = selection()->activeSheet();
     const KCCell cursorCell(sheet, selection()->cursor());
     const QString text = cursorCell.userInput();
-    const CellStorage *const storage = sheet->cellStorage();
+    const KCCellStorage *const storage = sheet->cellStorage();
 
     QStringList itemList;
     const KCRegion::ConstIterator end(selection()->constEnd());
@@ -3387,9 +3387,9 @@ void CellToolBase::listChoosePopupMenu()
         }
         KCCell cell;
         if (range.top() == 1) {
-            cell = storage->firstInColumn(cursorCell.column(), CellStorage::Values);
+            cell = storage->firstInColumn(cursorCell.column(), KCCellStorage::Values);
         } else {
-            cell = storage->nextInColumn(cursorCell.column(), range.top() - 1, CellStorage::Values);
+            cell = storage->nextInColumn(cursorCell.column(), range.top() - 1, KCCellStorage::Values);
         }
         while (!cell.isNull() && cell.row() <= range.bottom()) {
             if (!cell.isPartOfMerged() && !(cell == cursorCell)) {
@@ -3400,7 +3400,7 @@ void CellToolBase::listChoosePopupMenu()
                     }
                 }
             }
-            cell = storage->nextInColumn(cell.column(), cell.row(), CellStorage::Values);
+            cell = storage->nextInColumn(cell.column(), cell.row(), KCCellStorage::Values);
         }
     }
 

@@ -48,7 +48,7 @@
 #include "KCApplicationSettings.h"
 #include "KCBindingManager.h"
 #include "KCCalculationSettings.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Damages.h"
 #include "DependencyManager.h"
 #include "DocBase.h"

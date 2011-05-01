@@ -38,7 +38,7 @@
 #include <KoXmlWriter.h>
 
 // KSpread
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "FormulaStorage.h"
 #include "LoadingInfo.h"
 #include "KCMap.h"

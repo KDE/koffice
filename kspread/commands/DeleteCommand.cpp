@@ -19,7 +19,7 @@
 
 #include "DeleteCommand.h"
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"

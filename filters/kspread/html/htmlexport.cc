@@ -34,7 +34,7 @@
 #include <KoDocumentInfo.h>
 #include <kofficeversion.h>
 
-#include <kspread/CellStorage.h>
+#include <kspread/KCCellStorage.h>
 #include <kspread/KCMap.h>
 #include <kspread/KCSheet.h>
 #include <kspread/part/Doc.h>

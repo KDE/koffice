@@ -24,7 +24,7 @@
 #include <klocale.h>
 
 #include "KCCell.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
 

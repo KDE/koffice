@@ -27,7 +27,7 @@
 #include <QList>
 
 #include "KCCell.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Formula.h"
 #include "FormulaStorage.h"
 #include "KCMap.h"
@@ -404,7 +404,7 @@ void DependencyManager::Private::generateDepths(const KCRegion& region)
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         const QRect range = (*it)->rect();
         const KCSheet* sheet = (*it)->sheet();
-        const CellStorage *cells = sheet->cellStorage();
+        const KCCellStorage *cells = sheet->cellStorage();
 
         int bottom = range.bottom();
         if (bottom > cells->rows()) bottom = cells->rows();

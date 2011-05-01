@@ -40,7 +40,7 @@
 #include <KoXmlReader.h>
 
 #include "KCCell.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Localization.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"

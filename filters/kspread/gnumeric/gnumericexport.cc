@@ -41,7 +41,7 @@
 // KSpread
 #include <kspread/KCApplicationSettings.h>
 #include <kspread/part/Canvas.h>
-#include <kspread/CellStorage.h>
+#include <kspread/KCCellStorage.h>
 #include <kspread/KCCurrency.h>
 #include <kspread/part/Doc.h>
 #include <kspread/HeaderFooter.h>

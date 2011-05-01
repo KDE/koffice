@@ -20,7 +20,7 @@
 #include "LocationComboBox.h"
 
 // KSpread
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "CellToolBase.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"

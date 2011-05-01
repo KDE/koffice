@@ -23,7 +23,7 @@
 
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Function.h"
 #include "FunctionRepository.h"
 #include "KCSheet.h"

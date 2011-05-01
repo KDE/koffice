@@ -18,7 +18,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <CellStorage.h>
+#include <KCCellStorage.h>
 #include <Formula.h>
 #include <KCMap.h>
 #include <KCSheet.h>
@@ -55,7 +55,7 @@ void TestInformationFunctions::initTestCase()
     m_map->addNewSheet();
     KCSheet* sheet = m_map->sheet(0);
     sheet->setSheetName("Sheet1");
-    CellStorage* storage = sheet->cellStorage();
+    KCCellStorage* storage = sheet->cellStorage();
 
     //
     // Test case data set

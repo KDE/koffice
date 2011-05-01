@@ -54,7 +54,7 @@
 #include <DocBase.h>
 #include <kspread/KCSheet.h>
 #include <KCCalculationSettings.h>
-#include <CellStorage.h>
+#include <KCCellStorage.h>
 #include <HeaderFooter.h>
 #include <LoadingInfo.h>
 #include <KCMap.h>

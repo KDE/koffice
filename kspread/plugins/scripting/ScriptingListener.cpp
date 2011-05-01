@@ -23,7 +23,7 @@
 #include <klocale.h>
 
 #include <KCBinding.h>
-#include <CellStorage.h>
+#include <KCCellStorage.h>
 #include <KCSheet.h>
 
 #include <QAbstractItemModel>

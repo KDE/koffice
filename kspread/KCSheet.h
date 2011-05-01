@@ -58,7 +58,7 @@ class KoShapeSavingContext;
 class KoXmlWriter;
 
 class KCCell;
-class CellStorage;
+class KCCellStorage;
 class ColumnFormat;
 class CommentStorage;
 class ConditionsStorage;
@@ -477,7 +477,7 @@ public:
      * \ingroup Storage
      * \return the cell storage
      */
-    CellStorage* cellStorage() const;
+    KCCellStorage* cellStorage() const;
 
     const CommentStorage* commentStorage() const;
     const ConditionsStorage* conditionsStorage() const;

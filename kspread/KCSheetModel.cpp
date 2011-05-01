@@ -22,7 +22,7 @@
 // KSpread
 #include "KCBinding.h"
 #include "KCCell.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCCondition.h"
 #include "database/Database.h"
 #include "Formula.h"
@@ -120,7 +120,7 @@ QVariant KCSheetModel::data(const QModelIndex& index, int role) const
     }
     const int column = index.column() + 1;
     const int row = index.row() + 1;
-    CellStorage *const storage = d->sheet->cellStorage();
+    KCCellStorage *const storage = d->sheet->cellStorage();
     switch (role) {
     case UserInputRole:
         return storage->userInput(column, row);
@@ -218,7 +218,7 @@ bool KCSheetModel::setData(const QModelIndex& index, const QVariant& value, int 
     const int column = index.column() + 1;
     const int row = index.row() + 1;
     KCCell cell = KCCell(sheet(), index.column() + 1, index.row() + 1).masterCell();
-    CellStorage *const storage = d->sheet->cellStorage();
+    KCCellStorage *const storage = d->sheet->cellStorage();
     switch (role) {
     case Qt::EditRole:
         cell.parseUserInput(value.toString());
@@ -245,7 +245,7 @@ bool KCSheetModel::setData(const QModelIndex& index, const QVariant& value, int 
 bool KCSheetModel::setData(const QItemSelectionRange &range, const QVariant &value, int role)
 {
     const KCRegion region(toRange(range), d->sheet);
-    CellStorage *const storage = d->sheet->cellStorage();
+    KCCellStorage *const storage = d->sheet->cellStorage();
     switch (role) {
     case CommentRole:
         storage->setComment(region, value.toString());

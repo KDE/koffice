@@ -19,7 +19,7 @@
 */
 
 // Local
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "CellStorage_p.h"
 
 // KDE
@@ -57,7 +57,7 @@ Q_DECLARE_METATYPE(QSharedPointer<QTextDocument>)
 
 typedef RectStorage<QString> NamedAreaStorage;
 
-class CellStorage::Private
+class KCCellStorage::Private
 {
 public:
     Private(KCSheet* sheet)
@@ -137,7 +137,7 @@ public:
     CellStorageUndoData*    undoData;
 };
 
-void CellStorage::Private::createCommand(QUndoCommand *parent) const
+void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
 {
     if (!undoData->bindings.isEmpty()) {
         RectStorageUndoCommand<KCBinding> *const command
@@ -212,35 +212,35 @@ void CellStorage::Private::createCommand(QUndoCommand *parent) const
 }
 
 
-CellStorage::CellStorage(KCSheet* sheet)
+KCCellStorage::KCCellStorage(KCSheet* sheet)
         : QObject(sheet)
         , d(new Private(sheet))
 {
 }
 
-CellStorage::CellStorage(const CellStorage& other)
+KCCellStorage::KCCellStorage(const KCCellStorage& other)
         : QObject(other.d->sheet)
         , d(new Private(*other.d))
 {
 }
 
-CellStorage::CellStorage(const CellStorage& other, KCSheet* sheet)
+KCCellStorage::KCCellStorage(const KCCellStorage& other, KCSheet* sheet)
         : QObject(sheet)
         , d(new Private(*other.d, sheet))
 {
 }
 
-CellStorage::~CellStorage()
+KCCellStorage::~KCCellStorage()
 {
     delete d;
 }
 
-KCSheet* CellStorage::sheet() const
+KCSheet* KCCellStorage::sheet() const
 {
     return d->sheet;
 }
 
-void CellStorage::take(int col, int row)
+void KCCellStorage::take(int col, int row)
 {
     Formula oldFormula;
     QString oldLink;
@@ -278,12 +278,12 @@ void CellStorage::take(int col, int row)
     }
 }
 
-KCBinding CellStorage::binding(int column, int row) const
+KCBinding KCCellStorage::binding(int column, int row) const
 {
     return d->bindingStorage->contains(QPoint(column, row));
 }
 
-void CellStorage::setBinding(const KCRegion& region, const KCBinding& binding)
+void KCCellStorage::setBinding(const KCRegion& region, const KCBinding& binding)
 {
     // recording undo?
     if (d->undoData)
@@ -292,7 +292,7 @@ void CellStorage::setBinding(const KCRegion& region, const KCBinding& binding)
     d->bindingStorage->insert(region, binding);
 }
 
-void CellStorage::removeBinding(const KCRegion& region, const KCBinding& binding)
+void KCCellStorage::removeBinding(const KCRegion& region, const KCBinding& binding)
 {
     // recording undo?
     if (d->undoData) {
@@ -301,12 +301,12 @@ void CellStorage::removeBinding(const KCRegion& region, const KCBinding& binding
     d->bindingStorage->remove(region, binding);
 }
 
-QString CellStorage::comment(int column, int row) const
+QString KCCellStorage::comment(int column, int row) const
 {
     return d->commentStorage->contains(QPoint(column, row));
 }
 
-void CellStorage::setComment(const KCRegion& region, const QString& comment)
+void KCCellStorage::setComment(const KCRegion& region, const QString& comment)
 {
     // recording undo?
     if (d->undoData)
@@ -321,12 +321,12 @@ void CellStorage::setComment(const KCRegion& region, const QString& comment)
     }
 }
 
-Conditions CellStorage::conditions(int column, int row) const
+Conditions KCCellStorage::conditions(int column, int row) const
 {
     return d->conditionsStorage->contains(QPoint(column, row));
 }
 
-void CellStorage::setConditions(const KCRegion& region, Conditions conditions)
+void KCCellStorage::setConditions(const KCRegion& region, Conditions conditions)
 {
     // recording undo?
     if (d->undoData)
@@ -341,7 +341,7 @@ void CellStorage::setConditions(const KCRegion& region, Conditions conditions)
     }
 }
 
-Database CellStorage::database(int column, int row) const
+Database KCCellStorage::database(int column, int row) const
 {
     QPair<QRectF, Database> pair = d->databaseStorage->containedPair(QPoint(column, row));
     if (pair.first.isEmpty())
@@ -354,12 +354,12 @@ Database CellStorage::database(int column, int row) const
     return database;
 }
 
-QList< QPair<QRectF, Database> > CellStorage::databases(const KCRegion& region) const
+QList< QPair<QRectF, Database> > KCCellStorage::databases(const KCRegion& region) const
 {
     return d->databaseStorage->intersectingPairs(region);
 }
 
-void CellStorage::setDatabase(const KCRegion& region, const Database& database)
+void KCCellStorage::setDatabase(const KCRegion& region, const Database& database)
 {
     // recording undo?
     if (d->undoData)
@@ -368,12 +368,12 @@ void CellStorage::setDatabase(const KCRegion& region, const Database& database)
     d->databaseStorage->insert(region, database);
 }
 
-Formula CellStorage::formula(int column, int row) const
+Formula KCCellStorage::formula(int column, int row) const
 {
     return d->formulaStorage->lookup(column, row, Formula::empty());
 }
 
-void CellStorage::setFormula(int column, int row, const Formula& formula)
+void KCCellStorage::setFormula(int column, int row, const Formula& formula)
 {
     Formula old = Formula::empty();
     if (formula.expression().isEmpty())
@@ -400,12 +400,12 @@ void CellStorage::setFormula(int column, int row, const Formula& formula)
     }
 }
 
-QString CellStorage::link(int column, int row) const
+QString KCCellStorage::link(int column, int row) const
 {
     return d->linkStorage->lookup(column, row);
 }
 
-void CellStorage::setLink(int column, int row, const QString& link)
+void KCCellStorage::setLink(int column, int row, const QString& link)
 {
     QString old;
     if (link.isEmpty())
@@ -420,7 +420,7 @@ void CellStorage::setLink(int column, int row, const QString& link)
         d->rowRepeatStorage->setRowRepeat(row, 1);
 }
 
-QString CellStorage::namedArea(int column, int row) const
+QString KCCellStorage::namedArea(int column, int row) const
 {
     QPair<QRectF, QString> pair = d->namedAreaStorage->containedPair(QPoint(column, row));
     if (pair.first.isEmpty())
@@ -430,12 +430,12 @@ QString CellStorage::namedArea(int column, int row) const
     return pair.second;
 }
 
-QList< QPair<QRectF, QString> > CellStorage::namedAreas(const KCRegion& region) const
+QList< QPair<QRectF, QString> > KCCellStorage::namedAreas(const KCRegion& region) const
 {
     return d->namedAreaStorage->intersectingPairs(region);
 }
 
-void CellStorage::setNamedArea(const KCRegion& region, const QString& namedArea)
+void KCCellStorage::setNamedArea(const KCRegion& region, const QString& namedArea)
 {
     // recording undo?
     if (d->undoData)
@@ -444,22 +444,22 @@ void CellStorage::setNamedArea(const KCRegion& region, const QString& namedArea)
     d->namedAreaStorage->insert(region, namedArea);
 }
 
-void CellStorage::emitInsertNamedArea(const KCRegion &region, const QString &namedArea)
+void KCCellStorage::emitInsertNamedArea(const KCRegion &region, const QString &namedArea)
 {
     emit insertNamedArea(region, namedArea);
 }
 
-KCStyle CellStorage::style(int column, int row) const
+KCStyle KCCellStorage::style(int column, int row) const
 {
     return d->styleStorage->contains(QPoint(column, row));
 }
 
-KCStyle CellStorage::style(const QRect& rect) const
+KCStyle KCCellStorage::style(const QRect& rect) const
 {
     return d->styleStorage->contains(rect);
 }
 
-void CellStorage::setStyle(const KCRegion& region, const KCStyle& style)
+void KCCellStorage::setStyle(const KCRegion& region, const KCStyle& style)
 {
     // recording undo?
     if (d->undoData)
@@ -474,7 +474,7 @@ void CellStorage::setStyle(const KCRegion& region, const KCStyle& style)
     }
 }
 
-void CellStorage::insertSubStyle(const QRect &rect, const SharedSubStyle &subStyle)
+void KCCellStorage::insertSubStyle(const QRect &rect, const SharedSubStyle &subStyle)
 {
     d->styleStorage->insert(rect, subStyle);
     if (!d->sheet->map()->isLoading()) {
@@ -483,12 +483,12 @@ void CellStorage::insertSubStyle(const QRect &rect, const SharedSubStyle &subSty
     }
 }
 
-QString CellStorage::userInput(int column, int row) const
+QString KCCellStorage::userInput(int column, int row) const
 {
     return d->userInputStorage->lookup(column, row);
 }
 
-void CellStorage::setUserInput(int column, int row, const QString& userInput)
+void KCCellStorage::setUserInput(int column, int row, const QString& userInput)
 {
     QString old;
     if (userInput.isEmpty())
@@ -503,12 +503,12 @@ void CellStorage::setUserInput(int column, int row, const QString& userInput)
         d->rowRepeatStorage->setRowRepeat(row, 1);
 }
 
-QSharedPointer<QTextDocument> CellStorage::richText(int column, int row) const
+QSharedPointer<QTextDocument> KCCellStorage::richText(int column, int row) const
 {
     return d->richTextStorage->lookup(column, row);
 }
 
-void CellStorage::setRichText(int column, int row, QSharedPointer<QTextDocument> text)
+void KCCellStorage::setRichText(int column, int row, QSharedPointer<QTextDocument> text)
 {
     QSharedPointer<QTextDocument> old;
     if (text.isNull())
@@ -521,12 +521,12 @@ void CellStorage::setRichText(int column, int row, QSharedPointer<QTextDocument>
         d->undoData->richTexts << qMakePair(QPoint(column, row), old);
 }
 
-Validity CellStorage::validity(int column, int row) const
+Validity KCCellStorage::validity(int column, int row) const
 {
     return d->validityStorage->contains(QPoint(column, row));
 }
 
-void CellStorage::setValidity(const KCRegion& region, Validity validity)
+void KCCellStorage::setValidity(const KCRegion& region, Validity validity)
 {
     // recording undo?
     if (d->undoData)
@@ -541,18 +541,18 @@ void CellStorage::setValidity(const KCRegion& region, Validity validity)
     }
 }
 
-KCValue CellStorage::value(int column, int row) const
+KCValue KCCellStorage::value(int column, int row) const
 {
     return d->valueStorage->lookup(column, row);
 }
 
-KCValue CellStorage::valueRegion(const KCRegion& region) const
+KCValue KCCellStorage::valueRegion(const KCRegion& region) const
 {
     // create a subStorage with adjusted origin
     return KCValue(d->valueStorage->subStorage(region, false), region.boundingRect().size());
 }
 
-void CellStorage::setValue(int column, int row, const KCValue& value)
+void KCCellStorage::setValue(int column, int row, const KCValue& value)
 {
     // release any lock
     unlockCells(column, row);
@@ -586,7 +586,7 @@ void CellStorage::setValue(int column, int row, const KCValue& value)
     }
 }
 
-bool CellStorage::doesMergeCells(int column, int row) const
+bool KCCellStorage::doesMergeCells(int column, int row) const
 {
     const QPair<QRectF, bool> pair = d->fusionStorage->containedPair(QPoint(column, row));
     if (pair.first.isNull())
@@ -599,7 +599,7 @@ bool CellStorage::doesMergeCells(int column, int row) const
     return true;
 }
 
-bool CellStorage::isPartOfMerged(int column, int row) const
+bool KCCellStorage::isPartOfMerged(int column, int row) const
 {
     const QPair<QRectF, bool> pair = d->fusionStorage->containedPair(QPoint(column, row));
     if (pair.first.isNull())
@@ -612,7 +612,7 @@ bool CellStorage::isPartOfMerged(int column, int row) const
     return true;
 }
 
-void CellStorage::mergeCells(int column, int row, int numXCells, int numYCells)
+void KCCellStorage::mergeCells(int column, int row, int numXCells, int numYCells)
 {
     // Start by unmerging the cells that we merge right now
     const QPair<QRectF, bool> pair = d->fusionStorage->containedPair(QPoint(column, row));
@@ -625,7 +625,7 @@ void CellStorage::mergeCells(int column, int row, int numXCells, int numYCells)
         d->rowRepeatStorage->setRowRepeat(row, 1);
 }
 
-KCCell CellStorage::masterCell(int column, int row) const
+KCCell KCCellStorage::masterCell(int column, int row) const
 {
     const QPair<QRectF, bool> pair = d->fusionStorage->containedPair(QPoint(column, row));
     if (pair.first.isNull())
@@ -635,7 +635,7 @@ KCCell CellStorage::masterCell(int column, int row) const
     return KCCell(d->sheet, pair.first.toRect().topLeft());
 }
 
-int CellStorage::mergedXCells(int column, int row) const
+int KCCellStorage::mergedXCells(int column, int row) const
 {
     const QPair<QRectF, bool> pair = d->fusionStorage->containedPair(QPoint(column, row));
     if (pair.first.isNull())
@@ -646,7 +646,7 @@ int CellStorage::mergedXCells(int column, int row) const
     return pair.first.toRect().width() - 1;
 }
 
-int CellStorage::mergedYCells(int column, int row) const
+int KCCellStorage::mergedYCells(int column, int row) const
 {
     const QPair<QRectF, bool> pair = d->fusionStorage->containedPair(QPoint(column, row));
     if (pair.first.isNull())
@@ -657,7 +657,7 @@ int CellStorage::mergedYCells(int column, int row) const
     return pair.first.toRect().height() - 1;
 }
 
-QList<KCCell> CellStorage::masterCells(const KCRegion& region) const
+QList<KCCell> KCCellStorage::masterCells(const KCRegion& region) const
 {
     const QList<QPair<QRectF, bool> > pairs = d->fusionStorage->intersectingPairs(region);
     if (pairs.isEmpty())
@@ -673,7 +673,7 @@ QList<KCCell> CellStorage::masterCells(const KCRegion& region) const
     return masterCells;
 }
 
-bool CellStorage::locksCells(int column, int row) const
+bool KCCellStorage::locksCells(int column, int row) const
 {
     const QPair<QRectF, bool> pair = d->matrixStorage->containedPair(QPoint(column, row));
     if (pair.first.isNull())
@@ -686,7 +686,7 @@ bool CellStorage::locksCells(int column, int row) const
     return true;
 }
 
-bool CellStorage::isLocked(int column, int row) const
+bool KCCellStorage::isLocked(int column, int row) const
 {
     const QPair<QRectF, bool> pair = d->matrixStorage->containedPair(QPoint(column, row));
     if (pair.first.isNull())
@@ -699,7 +699,7 @@ bool CellStorage::isLocked(int column, int row) const
     return true;
 }
 
-bool CellStorage::hasLockedCells(const KCRegion& region) const
+bool KCCellStorage::hasLockedCells(const KCRegion& region) const
 {
     typedef QPair<QRectF, bool> RectBoolPair;
     QList<QPair<QRectF, bool> > pairs = d->matrixStorage->intersectingPairs(region);
@@ -722,7 +722,7 @@ bool CellStorage::hasLockedCells(const KCRegion& region) const
     return false;
 }
 
-void CellStorage::lockCells(const QRect& rect)
+void KCCellStorage::lockCells(const QRect& rect)
 {
     // Start by unlocking the cells that we lock right now
     const QPair<QRectF, bool> pair = d->matrixStorage->containedPair(rect.topLeft());  // FIXME
@@ -733,7 +733,7 @@ void CellStorage::lockCells(const QRect& rect)
         d->matrixStorage->insert(KCRegion(rect), true);
 }
 
-void CellStorage::unlockCells(int column, int row)
+void KCCellStorage::unlockCells(int column, int row)
 {
     const QPair<QRectF, bool> pair = d->matrixStorage->containedPair(QPoint(column, row));
     if (pair.first.isNull())
@@ -756,7 +756,7 @@ void CellStorage::unlockCells(int column, int row)
         d->undoData->matrices << pair;
 }
 
-QRect CellStorage::lockedCells(int column, int row) const
+QRect KCCellStorage::lockedCells(int column, int row) const
 {
     const QPair<QRectF, bool> pair = d->matrixStorage->containedPair(QPoint(column, row));
     if (pair.first.isNull())
@@ -768,7 +768,7 @@ QRect CellStorage::lockedCells(int column, int row) const
     return pair.first.toRect();
 }
 
-void CellStorage::insertColumns(int position, int number)
+void KCCellStorage::insertColumns(int position, int number)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     // FIXME Stefan: Would it be better to directly alter the dependency tree?
@@ -827,7 +827,7 @@ void CellStorage::insertColumns(int position, int number)
     d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::KCValue));
 }
 
-void CellStorage::removeColumns(int position, int number)
+void KCCellStorage::removeColumns(int position, int number)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(position, 1), QPoint(KS_colMax, KS_rowMax)), d->sheet);
@@ -884,7 +884,7 @@ void CellStorage::removeColumns(int position, int number)
     d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::KCValue));
 }
 
-void CellStorage::insertRows(int position, int number)
+void KCCellStorage::insertRows(int position, int number)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(1, position), QPoint(KS_colMax, KS_rowMax)), d->sheet);
@@ -942,7 +942,7 @@ void CellStorage::insertRows(int position, int number)
     d->rowRepeatStorage->insertRows(position, number);
 }
 
-void CellStorage::removeRows(int position, int number)
+void KCCellStorage::removeRows(int position, int number)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(1, position), QPoint(KS_colMax, KS_rowMax)), d->sheet);
@@ -1001,7 +1001,7 @@ void CellStorage::removeRows(int position, int number)
     d->rowRepeatStorage->removeRows(position, number);
 }
 
-void CellStorage::removeShiftLeft(const QRect& rect)
+void KCCellStorage::removeShiftLeft(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom())), d->sheet);
@@ -1060,7 +1060,7 @@ void CellStorage::removeShiftLeft(const QRect& rect)
     d->rowRepeatStorage->removeShiftLeft(rect);
 }
 
-void CellStorage::insertShiftRight(const QRect& rect)
+void KCCellStorage::insertShiftRight(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom())), d->sheet);
@@ -1118,7 +1118,7 @@ void CellStorage::insertShiftRight(const QRect& rect)
     d->rowRepeatStorage->insertShiftRight(rect);
 }
 
-void CellStorage::removeShiftUp(const QRect& rect)
+void KCCellStorage::removeShiftUp(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax)), d->sheet);
@@ -1177,7 +1177,7 @@ void CellStorage::removeShiftUp(const QRect& rect)
     d->rowRepeatStorage->removeShiftUp(rect);
 }
 
-void CellStorage::insertShiftDown(const QRect& rect)
+void KCCellStorage::insertShiftDown(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax)), d->sheet);
@@ -1235,7 +1235,7 @@ void CellStorage::insertShiftDown(const QRect& rect)
     d->rowRepeatStorage->insertShiftDown(rect);
 }
 
-KCCell CellStorage::firstInColumn(int col, Visiting visiting) const
+KCCell KCCellStorage::firstInColumn(int col, Visiting visiting) const
 {
     Q_UNUSED(visiting);
 
@@ -1251,7 +1251,7 @@ KCCell CellStorage::firstInColumn(int col, Visiting visiting) const
     return KCCell(d->sheet, col, newRow);
 }
 
-KCCell CellStorage::firstInRow(int row, Visiting visiting) const
+KCCell KCCellStorage::firstInRow(int row, Visiting visiting) const
 {
     int newCol = 0;
     int tmpCol = 0;
@@ -1270,7 +1270,7 @@ KCCell CellStorage::firstInRow(int row, Visiting visiting) const
     return KCCell(d->sheet, newCol, row);
 }
 
-KCCell CellStorage::lastInColumn(int col, Visiting visiting) const
+KCCell KCCellStorage::lastInColumn(int col, Visiting visiting) const
 {
     Q_UNUSED(visiting);
     int newRow = 0;
@@ -1284,7 +1284,7 @@ KCCell CellStorage::lastInColumn(int col, Visiting visiting) const
     return KCCell(d->sheet, col, newRow);
 }
 
-KCCell CellStorage::lastInRow(int row, Visiting visiting) const
+KCCell KCCellStorage::lastInRow(int row, Visiting visiting) const
 {
     Q_UNUSED(visiting);
     int newCol = 0;
@@ -1298,7 +1298,7 @@ KCCell CellStorage::lastInRow(int row, Visiting visiting) const
     return KCCell(d->sheet, newCol, row);
 }
 
-KCCell CellStorage::nextInColumn(int col, int row, Visiting visiting) const
+KCCell KCCellStorage::nextInColumn(int col, int row, Visiting visiting) const
 {
     Q_UNUSED(visiting);
     int newRow = 0;
@@ -1313,7 +1313,7 @@ KCCell CellStorage::nextInColumn(int col, int row, Visiting visiting) const
     return KCCell(d->sheet, col, newRow);
 }
 
-KCCell CellStorage::nextInRow(int col, int row, Visiting visiting) const
+KCCell KCCellStorage::nextInRow(int col, int row, Visiting visiting) const
 {
     int newCol = 0;
     int tmpCol = 0;
@@ -1332,7 +1332,7 @@ KCCell CellStorage::nextInRow(int col, int row, Visiting visiting) const
     return KCCell(d->sheet, newCol, row);
 }
 
-KCCell CellStorage::prevInColumn(int col, int row, Visiting visiting) const
+KCCell KCCellStorage::prevInColumn(int col, int row, Visiting visiting) const
 {
     Q_UNUSED(visiting);
     int newRow = 0;
@@ -1346,7 +1346,7 @@ KCCell CellStorage::prevInColumn(int col, int row, Visiting visiting) const
     return KCCell(d->sheet, col, newRow);
 }
 
-KCCell CellStorage::prevInRow(int col, int row, Visiting visiting) const
+KCCell KCCellStorage::prevInRow(int col, int row, Visiting visiting) const
 {
     Q_UNUSED(visiting);
     int newCol = 0;
@@ -1360,7 +1360,7 @@ KCCell CellStorage::prevInRow(int col, int row, Visiting visiting) const
     return KCCell(d->sheet, newCol, row);
 }
 
-int CellStorage::columns(bool includeStyles) const
+int KCCellStorage::columns(bool includeStyles) const
 {
     int max = 0;
     max = qMax(max, d->commentStorage->usedArea().right());
@@ -1378,7 +1378,7 @@ int CellStorage::columns(bool includeStyles) const
     return max;
 }
 
-int CellStorage::rows(bool includeStyles) const
+int KCCellStorage::rows(bool includeStyles) const
 {
     int max = 0;
     max = qMax(max, d->commentStorage->usedArea().bottom());
@@ -1396,61 +1396,61 @@ int CellStorage::rows(bool includeStyles) const
     return max;
 }
 
-CellStorage CellStorage::subStorage(const KCRegion& region) const
+KCCellStorage KCCellStorage::subStorage(const KCRegion& region) const
 {
-    CellStorage subStorage(d->sheet);
+    KCCellStorage subStorage(d->sheet);
     *subStorage.d->formulaStorage = d->formulaStorage->subStorage(region);
     *subStorage.d->linkStorage = d->linkStorage->subStorage(region);
     *subStorage.d->valueStorage = d->valueStorage->subStorage(region);
     return subStorage;
 }
 
-const KCBindingStorage* CellStorage::bindingStorage() const
+const KCBindingStorage* KCCellStorage::bindingStorage() const
 {
     return d->bindingStorage;
 }
 
-const CommentStorage* CellStorage::commentStorage() const
+const CommentStorage* KCCellStorage::commentStorage() const
 {
     return d->commentStorage;
 }
 
-const ConditionsStorage* CellStorage::conditionsStorage() const
+const ConditionsStorage* KCCellStorage::conditionsStorage() const
 {
     return d->conditionsStorage;
 }
 
-const FormulaStorage* CellStorage::formulaStorage() const
+const FormulaStorage* KCCellStorage::formulaStorage() const
 {
     return d->formulaStorage;
 }
 
-const FusionStorage* CellStorage::fusionStorage() const
+const FusionStorage* KCCellStorage::fusionStorage() const
 {
     return d->fusionStorage;
 }
 
-const LinkStorage* CellStorage::linkStorage() const
+const LinkStorage* KCCellStorage::linkStorage() const
 {
     return d->linkStorage;
 }
 
-const StyleStorage* CellStorage::styleStorage() const
+const StyleStorage* KCCellStorage::styleStorage() const
 {
     return d->styleStorage;
 }
 
-const ValidityStorage* CellStorage::validityStorage() const
+const ValidityStorage* KCCellStorage::validityStorage() const
 {
     return d->validityStorage;
 }
 
-const ValueStorage* CellStorage::valueStorage() const
+const ValueStorage* KCCellStorage::valueStorage() const
 {
     return d->valueStorage;
 }
 
-void CellStorage::startUndoRecording()
+void KCCellStorage::startUndoRecording()
 {
     // If undoData is not null, the recording wasn't stopped.
     // Should not happen, hence this assertion.
@@ -1458,7 +1458,7 @@ void CellStorage::startUndoRecording()
     d->undoData = new CellStorageUndoData();
 }
 
-void CellStorage::stopUndoRecording(QUndoCommand *parent)
+void KCCellStorage::stopUndoRecording(QUndoCommand *parent)
 {
     // If undoData is null, the recording wasn't started.
     // Should not happen, hence this assertion.
@@ -1472,34 +1472,34 @@ void CellStorage::stopUndoRecording(QUndoCommand *parent)
     d->undoData = 0;
 }
 
-void CellStorage::loadConditions(const QList<QPair<QRegion, Conditions> >& conditions)
+void KCCellStorage::loadConditions(const QList<QPair<QRegion, Conditions> >& conditions)
 {
     d->conditionsStorage->load(conditions);
 }
 
-void CellStorage::loadStyles(const QList<QPair<QRegion, KCStyle> > &styles)
+void KCCellStorage::loadStyles(const QList<QPair<QRegion, KCStyle> > &styles)
 {
     d->styleStorage->load(styles);
 }
 
-void CellStorage::invalidateStyleCache()
+void KCCellStorage::invalidateStyleCache()
 {
     d->styleStorage->invalidateCache();
 }
 
-int CellStorage::rowRepeat(int row) const
+int KCCellStorage::rowRepeat(int row) const
 {
     return d->rowRepeatStorage->rowRepeat(row);
 }
 
-int CellStorage::firstIdenticalRow(int row) const
+int KCCellStorage::firstIdenticalRow(int row) const
 {
     return d->rowRepeatStorage->firstIdenticalRow(row);
 }
 
-void CellStorage::setRowsRepeated(int row, int count)
+void KCCellStorage::setRowsRepeated(int row, int count)
 {
     d->rowRepeatStorage->setRowRepeat(row, count);
 }
 
-#include "CellStorage.moc"
+#include "KCCellStorage.moc"

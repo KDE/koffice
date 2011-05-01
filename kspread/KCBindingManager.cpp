@@ -20,7 +20,7 @@
 #include "KCBindingManager.h"
 
 #include "KCBindingStorage.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"

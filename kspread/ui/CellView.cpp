@@ -61,7 +61,7 @@
 
 // KSpread
 #include "KCApplicationSettings.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCCondition.h"
 #include "KCMap.h"
 #include "PrintSettings.h"

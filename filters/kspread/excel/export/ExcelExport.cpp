@@ -31,7 +31,7 @@
 #include <KoPostscriptPaintDevice.h>
 
 #include <part/Doc.h>
-#include <CellStorage.h>
+#include <KCCellStorage.h>
 #include <Formula.h>
 #include <KCMap.h>
 #include <kspread/KCSheet.h>

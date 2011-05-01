@@ -39,7 +39,7 @@
 #include <kpushbutton.h>
 
 #include "KCCell.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Damages.h"
 #include "KCMap.h"
 #include "ui/Selection.h"

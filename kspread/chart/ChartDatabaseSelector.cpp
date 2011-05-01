@@ -29,7 +29,7 @@
 
 #include "KCBinding.h"
 #include "KCCanvasResources.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCRegion.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"

@@ -19,7 +19,7 @@
 
 #include "TestDatabaseFunctions.h"
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCSheet.h"
@@ -64,7 +64,7 @@ void TestDatabaseFunctions::initTestCase()
     m_map = new KCMap(0 /* no Doc */);
     m_map->addNewSheet();
     KCSheet* sheet = m_map->sheet(0);
-    CellStorage* storage = sheet->cellStorage();
+    KCCellStorage* storage = sheet->cellStorage();
 
     // TESTDB = A18:I31
     m_map->namedAreaManager()->insert(KCRegion(QRect(QPoint(1, 18), QPoint(9, 31)), sheet), "TESTDB");

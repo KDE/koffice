@@ -70,7 +70,7 @@ class KCValue;
 /**
  * An accessor to the actual cell data.
  * The KCCell object acts as accessor to the actual data stored in the separate
- * storages in CellStorage. It provides methods to alter and retrieve this data
+ * storages in KCCellStorage. It provides methods to alter and retrieve this data
  * and methods related to loading and saving the contents.
  */
 class KSPREAD_EXPORT KCCell

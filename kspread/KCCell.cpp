@@ -48,7 +48,7 @@
 #include <math.h>
 
 #include "KCCalculationSettings.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCCondition.h"
 #include "Formula.h"
 #include "GenValidationStyle.h"

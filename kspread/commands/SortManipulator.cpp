@@ -66,7 +66,7 @@ bool SortManipulator::preProcessing()
     if (m_reverse)
         return AbstractDFManipulator::preProcessing();
 
-    m_cellStorage = new CellStorage(m_sheet->cellStorage()->subStorage(*this));
+    m_cellStorage = new KCCellStorage(m_sheet->cellStorage()->subStorage(*this));
 
     KCRegion::Iterator endOfList(cells().end());
     for (KCRegion::Iterator it = cells().begin(); it != endOfList; ++it) {

@@ -23,7 +23,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-class CellStorage;
+class KCCellStorage;
 class KCMap;
 class KCSheet;
 
@@ -38,7 +38,7 @@ private Q_SLOTS:
     void cleanupTestCase();
 
 private:
-    CellStorage* m_storage;
+    KCCellStorage* m_storage;
     KCMap* m_map;
     KCSheet* m_sheet;
 };

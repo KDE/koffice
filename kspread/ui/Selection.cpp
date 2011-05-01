@@ -26,7 +26,7 @@
 #include <KoCanvasBase.h>
 
 #include "KCCell.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 

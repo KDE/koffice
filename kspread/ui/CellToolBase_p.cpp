@@ -46,7 +46,7 @@
 // KSpread
 #include "KCApplicationSettings.h"
 #include "KCCalculationSettings.h"
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "Selection.h"
@@ -323,9 +323,9 @@ bool CellToolBase::Private::processHomeKey(QKeyEvent* event)
         } else {
             QPoint marker = q->selection()->marker();
 
-            KCCell cell = sheet->cellStorage()->firstInRow(marker.y(), CellStorage::VisitContent);
+            KCCell cell = sheet->cellStorage()->firstInRow(marker.y(), KCCellStorage::VisitContent);
             while (!cell.isNull() && cell.column() < marker.x() && cell.isEmpty()) {
-                cell = sheet->cellStorage()->nextInRow(cell.column(), cell.row(), CellStorage::VisitContent);
+                cell = sheet->cellStorage()->nextInRow(cell.column(), cell.row(), KCCellStorage::VisitContent);
             }
 
             int col = (!cell.isNull() ? cell.column() : 1);
@@ -366,9 +366,9 @@ bool CellToolBase::Private::processEndKey(QKeyEvent *event)
         // move to the last used cell in the row
         int col = 1;
 
-        cell = sheet->cellStorage()->lastInRow(marker.y(), CellStorage::VisitContent);
+        cell = sheet->cellStorage()->lastInRow(marker.y(), KCCellStorage::VisitContent);
         while (!cell.isNull() && cell.column() > q->selection()->marker().x() && cell.isEmpty()) {
-            cell = sheet->cellStorage()->prevInRow(cell.column(), cell.row(), CellStorage::VisitContent);
+            cell = sheet->cellStorage()->prevInRow(cell.column(), cell.row(), KCCellStorage::VisitContent);
         }
 
         col = (cell.isNull()) ? q->maxCol() : cell.column();
@@ -489,11 +489,11 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
             cell = lastCell;
         }
         if (searchThroughEmpty) {
-            cell = sheet->cellStorage()->prevInColumn(marker.x(), marker.y(), CellStorage::VisitContent);
+            cell = sheet->cellStorage()->prevInColumn(marker.x(), marker.y(), KCCellStorage::VisitContent);
 
             while ((!cell.isNull()) &&
                     (cell.isEmpty() || (sheet->rowFormat(cell.row())->isHiddenOrFiltered()))) {
-                cell = sheet->cellStorage()->prevInColumn(cell.column(), cell.row(), CellStorage::VisitContent);
+                cell = sheet->cellStorage()->prevInColumn(cell.column(), cell.row(), KCCellStorage::VisitContent);
             }
         }
 
@@ -529,11 +529,11 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
             cell = lastCell;
         }
         if (searchThroughEmpty) {
-            cell = sheet->cellStorage()->nextInColumn(marker.x(), marker.y(), CellStorage::VisitContent);
+            cell = sheet->cellStorage()->nextInColumn(marker.x(), marker.y(), KCCellStorage::VisitContent);
 
             while ((!cell.isNull()) &&
                     (cell.isEmpty() || (sheet->rowFormat(cell.row())->isHiddenOrFiltered()))) {
-                cell = sheet->cellStorage()->nextInColumn(cell.column(), cell.row(), CellStorage::VisitContent);
+                cell = sheet->cellStorage()->nextInColumn(cell.column(), cell.row(), KCCellStorage::VisitContent);
             }
         }
 
@@ -570,11 +570,11 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
                 cell = lastCell;
             }
             if (searchThroughEmpty) {
-                cell = sheet->cellStorage()->nextInRow(marker.x(), marker.y(), CellStorage::VisitContent);
+                cell = sheet->cellStorage()->nextInRow(marker.x(), marker.y(), KCCellStorage::VisitContent);
 
                 while ((!cell.isNull()) &&
                         (cell.isEmpty() || (sheet->columnFormat(cell.column())->isHiddenOrFiltered()))) {
-                    cell = sheet->cellStorage()->nextInRow(cell.column(), cell.row(), CellStorage::VisitContent);
+                    cell = sheet->cellStorage()->nextInRow(cell.column(), cell.row(), KCCellStorage::VisitContent);
                 }
             }
 
@@ -607,11 +607,11 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
                 cell = lastCell;
             }
             if (searchThroughEmpty) {
-                cell = sheet->cellStorage()->prevInRow(marker.x(), marker.y(), CellStorage::VisitContent);
+                cell = sheet->cellStorage()->prevInRow(marker.x(), marker.y(), KCCellStorage::VisitContent);
 
                 while ((!cell.isNull()) &&
                         (cell.isEmpty() || (sheet->columnFormat(cell.column())->isHiddenOrFiltered()))) {
-                    cell = sheet->cellStorage()->prevInRow(cell.column(), cell.row(), CellStorage::VisitContent);
+                    cell = sheet->cellStorage()->prevInRow(cell.column(), cell.row(), KCCellStorage::VisitContent);
                 }
             }
 
@@ -650,11 +650,11 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
                 cell = lastCell;
             }
             if (searchThroughEmpty) {
-                cell = sheet->cellStorage()->prevInRow(marker.x(), marker.y(), CellStorage::VisitContent);
+                cell = sheet->cellStorage()->prevInRow(marker.x(), marker.y(), KCCellStorage::VisitContent);
 
                 while ((!cell.isNull()) &&
                         (cell.isEmpty() || (sheet->columnFormat(cell.column())->isHiddenOrFiltered()))) {
-                    cell = sheet->cellStorage()->prevInRow(cell.column(), cell.row(), CellStorage::VisitContent);
+                    cell = sheet->cellStorage()->prevInRow(cell.column(), cell.row(), KCCellStorage::VisitContent);
                 }
             }
 
@@ -686,11 +686,11 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
                 cell = lastCell;
             }
             if (searchThroughEmpty) {
-                cell = sheet->cellStorage()->nextInRow(marker.x(), marker.y(), CellStorage::VisitContent);
+                cell = sheet->cellStorage()->nextInRow(marker.x(), marker.y(), KCCellStorage::VisitContent);
 
                 while ((!cell.isNull()) &&
                         (cell.isEmpty() || (sheet->columnFormat(cell.column())->isHiddenOrFiltered()))) {
-                    cell = sheet->cellStorage()->nextInRow(cell.column(), cell.row(), CellStorage::VisitContent);
+                    cell = sheet->cellStorage()->nextInRow(cell.column(), cell.row(), KCCellStorage::VisitContent);
                 }
             }
 
@@ -1302,7 +1302,7 @@ bool CellToolBase::Private::testListChoose(Selection *selection) const
 {
     const KCSheet *const sheet = selection->activeSheet();
     const KCCell cursorCell(sheet, selection->cursor());
-    const CellStorage *const storage = sheet->cellStorage();
+    const KCCellStorage *const storage = sheet->cellStorage();
 
     const KCRegion::ConstIterator end(selection->constEnd());
     for (KCRegion::ConstIterator it(selection->constBegin()); it != end; ++it) {
@@ -1312,22 +1312,22 @@ bool CellToolBase::Private::testListChoose(Selection *selection) const
         }
         KCCell cell;
         if (range.top() == 1) {
-            cell = storage->firstInColumn(cursorCell.column(), CellStorage::Values);
+            cell = storage->firstInColumn(cursorCell.column(), KCCellStorage::Values);
         } else {
-            cell = storage->nextInColumn(cursorCell.column(), range.top() - 1, CellStorage::Values);
+            cell = storage->nextInColumn(cursorCell.column(), range.top() - 1, KCCellStorage::Values);
         }
         while (!cell.isNull() && cell.row() <= range.bottom()) {
             if (cell.isDefault() || cell.isPartOfMerged()
                     || cell.isFormula() || cell.isTime() || cell.isDate()
                     || cell.value().isNumber() || cell.value().asString().isEmpty()
                     || (cell == cursorCell)) {
-                cell = storage->nextInColumn(cell.column(), cell.row(), CellStorage::Values);
+                cell = storage->nextInColumn(cell.column(), cell.row(), KCCellStorage::Values);
                 continue;
             }
             if (cell.userInput() != cursorCell.userInput()) {
                 return true;
             }
-            cell = storage->nextInColumn(cell.column(), cell.row(), CellStorage::Values);
+            cell = storage->nextInColumn(cell.column(), cell.row(), KCCellStorage::Values);
         }
     }
     return false;

@@ -25,7 +25,7 @@
 
 #include "qtest_kde.h"
 
-#include <CellStorage.h>
+#include <KCCellStorage.h>
 #include <Formula.h>
 #include <KCMap.h>
 #include <KCSheet.h>
@@ -131,7 +131,7 @@ void TestStatisticalFunctions::initTestCase()
     m_map = new KCMap(0 /*no Doc*/);
     m_map->addNewSheet();
     KCSheet* sheet = m_map->sheet(0);
-    CellStorage* storage = sheet->cellStorage();
+    KCCellStorage* storage = sheet->cellStorage();
 
     //
     // Test case data set

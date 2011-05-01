@@ -25,7 +25,7 @@
 
 #include <kdebug.h>
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCMap.h"
 #include "KCSheet.h"
 #include "KCValue.h"

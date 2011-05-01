@@ -28,7 +28,7 @@
 
 #include <klocale.h>
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Database.h"
 #include "Filter.h"
 #include "KCMap.h"

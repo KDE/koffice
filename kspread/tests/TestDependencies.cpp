@@ -21,7 +21,7 @@
 
 #include "qtest_kde.h"
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "DependencyManager.h"
 #include "DependencyManager_p.h"
 #include "Formula.h"

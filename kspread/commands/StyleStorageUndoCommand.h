@@ -36,7 +36,7 @@
  * Implements undo functionality only. Glue it to another command,
  * that provides the appropriate applying (redoing).
  *
- * Used for recording undo data in CellStorage.
+ * Used for recording undo data in KCCellStorage.
  */
 class StyleStorageUndoCommand : public QUndoCommand
 {

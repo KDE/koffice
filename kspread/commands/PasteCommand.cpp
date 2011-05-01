@@ -24,7 +24,7 @@
 #include <QApplication>
 #include <QMimeData>
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "commands/ColumnStyleCommand.h"
 #include "commands/DataManipulators.h"
 #include "commands/DeleteCommand.h"

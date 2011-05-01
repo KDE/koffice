@@ -24,7 +24,7 @@
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "Database.h"
 #include "KCMap.h"
 #include "KCRegion.h"

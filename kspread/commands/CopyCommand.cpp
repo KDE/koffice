@@ -21,7 +21,7 @@
 
 #include "CopyCommand.h"
 
-#include "CellStorage.h"
+#include "KCCellStorage.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
@@ -47,7 +47,7 @@ QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
     for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
         KCSheet *const sheet = (*it)->sheet();
         const QRect range = (*it)->rect();
-        CellStorage *const storage = sheet->cellStorage();
+        KCCellStorage *const storage = sheet->cellStorage();
 
         //
         // Entire rows selected?
