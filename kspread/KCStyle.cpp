@@ -169,12 +169,12 @@ QString KCStyle::parentName() const
 {
     if (!d->subStyles.contains(NamedStyleKey))
         return QString();
-    return static_cast<const NamedStyle*>(d->subStyles[NamedStyleKey].data())->name;
+    return static_cast<const KCNamedStyle*>(d->subStyles[NamedStyleKey].data())->name;
 }
 
 void KCStyle::setParentName(const QString& name)
 {
-    d->subStyles.insert(NamedStyleKey, KCSharedSubStyle(new NamedStyle(name)));
+    d->subStyles.insert(NamedStyleKey, KCSharedSubStyle(new KCNamedStyle(name)));
 }
 
 void KCStyle::clearAttribute(Key key)
@@ -2347,7 +2347,7 @@ bool KCStyle::compare(const KCSubStyle* one, const KCSubStyle* two)
     case DefaultStyleKey:
         return true;
     case NamedStyleKey:
-        return static_cast<const NamedStyle*>(one)->name == static_cast<const NamedStyle*>(two)->name;
+        return static_cast<const KCNamedStyle*>(one)->name == static_cast<const KCNamedStyle*>(two)->name;
         // borders
     case LeftPen:
         return static_cast<const SubStyleOne<LeftPen, QPen>*>(one)->value1 == static_cast<const SubStyleOne<LeftPen, QPen>*>(two)->value1;
@@ -2527,7 +2527,7 @@ KCSharedSubStyle KCStyle::createSubStyle(Key key, const QVariant& value)
         newSubStyle = new KCSubStyle();
         break;
     case NamedStyleKey:
-        newSubStyle = new NamedStyle(value.value<QString>());
+        newSubStyle = new KCNamedStyle(value.value<QString>());
         break;
     case LeftPen:
         newSubStyle = new BorderPenStyle<LeftPen>(value.value<QPen>());

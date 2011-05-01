@@ -498,10 +498,10 @@ private:
     static KCSharedSubStyle s_defaultStyle;
 };
 
-class NamedStyle : public KCSubStyle
+class KCNamedStyle : public KCSubStyle
 {
 public:
-    NamedStyle(const QString& n) : KCSubStyle(), name(n) {}
+    KCNamedStyle(const QString& n) : KCSubStyle(), name(n) {}
     virtual KCStyle::Key type() const {
         return KCStyle::NamedStyleKey;
     }

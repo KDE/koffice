@@ -553,7 +553,7 @@ void KCStyleStorage::garbageCollection()
 
     // check whether the named style still exists
     if (currentPair.second->type() == KCStyle::NamedStyleKey &&
-            !styleManager()->style(static_cast<const NamedStyle*>(currentPair.second.data())->name)) {
+            !styleManager()->style(static_cast<const KCNamedStyle*>(currentPair.second.data())->name)) {
         kDebug(36006) << "removing" << currentPair.second->debugData()
         << "at" << KCRegion(currentPair.first.toRect()).name()
         << "used" << currentPair.second->ref << "times" << endl;
@@ -713,7 +713,7 @@ KCStyle KCStyleStorage::composeStyle(const QList<KCSharedSubStyle>& subStyles) c
             style = *styleManager()->defaultStyle();
         else if (subStyles[i]->type() == KCStyle::NamedStyleKey) {
             style.clear();
-            const KCCustomStyle* namedStyle = styleManager()->style(static_cast<const NamedStyle*>(subStyles[i].data())->name);
+            const KCCustomStyle* namedStyle = styleManager()->style(static_cast<const KCNamedStyle*>(subStyles[i].data())->name);
             if (namedStyle) {
                 // first, load the attributes of the parent style(s)
                 QList<KCCustomStyle*> parentStyles;
