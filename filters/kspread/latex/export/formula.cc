@@ -33,7 +33,7 @@
 /*******************************************/
 /* Constructor                             */
 /*******************************************/
-Formula::Formula()
+KCFormula::KCFormula()
 {
     _left              = 0;
     _right             = 0;
@@ -49,7 +49,7 @@ Formula::Formula()
 /*******************************************/
 /* analyze                                 */
 /*******************************************/
-void Formula::analyze(const QDomNode node)
+void KCFormula::analyze(const QDomNode node)
 {
 
     /* Markup type: Frameset info = text, heading known */
@@ -57,7 +57,7 @@ void Formula::analyze(const QDomNode node)
     /* Parameter analysis */
     Element::analyze(node);
 
-    kDebug(30522) << "FRAME ANALYSIS (Formula)";
+    kDebug(30522) << "FRAME ANALYSIS (KCFormula)";
 
     /* Child markup analysis */
     for (int index = 0; index < getNbChild(node); index++) {
@@ -77,7 +77,7 @@ void Formula::analyze(const QDomNode node)
 /*******************************************/
 /* Get back the xml markup tree.           */
 /*******************************************/
-void Formula::getFormula(QDomNode p, int indent)
+void KCFormula::getFormula(QDomNode p, int indent)
 {
     /* while( p.)
      {*/
@@ -122,7 +122,7 @@ void Formula::getFormula(QDomNode p, int indent)
 /*******************************************/
 /* analyzeParamFrame                       */
 /*******************************************/
-void Formula::analyzeParamFrame(const QDomNode node)
+void KCFormula::analyzeParamFrame(const QDomNode node)
 {
     /*<FRAME left="28" top="42" right="566" bottom="798" runaround="1" />*/
 
@@ -140,7 +140,7 @@ void Formula::analyzeParamFrame(const QDomNode node)
 /*******************************************/
 /* generate                                */
 /*******************************************/
-void Formula::generate(QTextStream &out)
+void KCFormula::generate(QTextStream &out)
 {
     kDebug(30522) << "FORMULA GENERATION";
     QDomDocument doc;

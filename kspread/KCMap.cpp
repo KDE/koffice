@@ -917,12 +917,12 @@ void KCMap::handleDamages(const QList<KCDamage*>& damages)
                     !workbookChanges.testFlag(WorkbookDamage::KCValue)) {
                 bindingChangedRegion.add(region, damagedSheet);
             }
-            if ((cellDamage->changes() & CellDamage::Formula) &&
-                    !workbookChanges.testFlag(WorkbookDamage::Formula)) {
+            if ((cellDamage->changes() & CellDamage::KCFormula) &&
+                    !workbookChanges.testFlag(WorkbookDamage::KCFormula)) {
                 formulaChangedRegion.add(region, damagedSheet);
             }
             if ((cellDamage->changes() & CellDamage::NamedArea) &&
-                    !workbookChanges.testFlag(WorkbookDamage::Formula)) {
+                    !workbookChanges.testFlag(WorkbookDamage::KCFormula)) {
                 namedAreaChangedRegion.add(region, damagedSheet);
             }
             if ((cellDamage->changes() & CellDamage::KCValue) &&
@@ -947,7 +947,7 @@ void KCMap::handleDamages(const QList<KCDamage*>& damages)
             kDebug(36007) << "Processing\t" << *damage;
 
             workbookChanges |= workbookDamage->changes();
-            if (workbookDamage->changes() & WorkbookDamage::Formula) {
+            if (workbookDamage->changes() & WorkbookDamage::KCFormula) {
                 formulaChangedRegion.clear();
             }
             if (workbookDamage->changes() & WorkbookDamage::KCValue) {
@@ -970,7 +970,7 @@ void KCMap::handleDamages(const QList<KCDamage*>& damages)
     if (!valueChangedRegion.isEmpty()) {
         d->recalcManager->regionChanged(valueChangedRegion);
     }
-    if (workbookChanges.testFlag(WorkbookDamage::Formula)) {
+    if (workbookChanges.testFlag(WorkbookDamage::KCFormula)) {
         d->namedAreaManager->updateAllNamedAreas();
         d->dependencyManager->updateAllDependencies(this);
     }

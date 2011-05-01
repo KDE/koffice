@@ -1336,9 +1336,9 @@ void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
         if (isNotProtected && !hideFormula)
             style.addProperty("style:cell-protect", "none");
         else if (isNotProtected && hideFormula)
-            style.addProperty("style:cell-protect", "Formula.hidden");
+            style.addProperty("style:cell-protect", "KCFormula.hidden");
         else if (hideFormula)
-            style.addProperty("style:cell-protect", "protected Formula.hidden");
+            style.addProperty("style:cell-protect", "protected KCFormula.hidden");
         else if (keysToStore.contains(NotProtected) && !isNotProtected)
             // write out, only if it is explicitly set
             style.addProperty("style:cell-protect", "protected");

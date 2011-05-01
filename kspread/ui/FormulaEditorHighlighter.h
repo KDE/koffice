@@ -59,7 +59,7 @@ public:
      */
     uint rangeCount() const;
     /**
-     * Returns true if any of the ranges or cells in the Formula.have changed since the
+     * Returns true if any of the ranges or cells in the KCFormula.have changed since the
      * last call to @ref FormulaEditorHighlighter::rangeChanged()
      */
     bool rangeChanged() const;

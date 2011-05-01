@@ -160,8 +160,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->databases);
     }
     if (!undoData->formulas.isEmpty()) {
-        PointStorageUndoCommand<Formula> *const command
-        = new PointStorageUndoCommand<Formula>(sheet->model(), FormulaRole, parent);
+        PointStorageUndoCommand<KCFormula> *const command
+        = new PointStorageUndoCommand<KCFormula>(sheet->model(), FormulaRole, parent);
         command->add(undoData->formulas);
     }
     if (!undoData->fusions.isEmpty()) {
@@ -242,7 +242,7 @@ KCSheet* KCCellStorage::sheet() const
 
 void KCCellStorage::take(int col, int row)
 {
-    Formula oldFormula;
+    KCFormula oldFormula;
     QString oldLink;
     QString oldUserInput;
     KCValue oldValue;
@@ -256,7 +256,7 @@ void KCCellStorage::take(int col, int row)
 
     if (!d->sheet->map()->isLoading()) {
         // Trigger a recalculation of the consuming cells.
-        CellDamage::Changes changes = CellDamage:: KCBinding | CellDamage::Formula | CellDamage::KCValue;
+        CellDamage::Changes changes = CellDamage:: KCBinding | CellDamage::KCFormula | CellDamage::KCValue;
         d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, col, row), changes));
 
         d->rowRepeatStorage->setRowRepeat(row, 1);
@@ -368,16 +368,16 @@ void KCCellStorage::setDatabase(const KCRegion& region, const Database& database
     d->databaseStorage->insert(region, database);
 }
 
-Formula KCCellStorage::formula(int column, int row) const
+KCFormula KCCellStorage::formula(int column, int row) const
 {
-    return d->formulaStorage->lookup(column, row, Formula::empty());
+    return d->formulaStorage->lookup(column, row, KCFormula::empty());
 }
 
-void KCCellStorage::setFormula(int column, int row, const Formula& formula)
+void KCCellStorage::setFormula(int column, int row, const KCFormula& formula)
 {
-    Formula old = Formula::empty();
+    KCFormula old = KCFormula::empty();
     if (formula.expression().isEmpty())
-        old = d->formulaStorage->take(column, row, Formula::empty());
+        old = d->formulaStorage->take(column, row, KCFormula::empty());
     else
         old = d->formulaStorage->insert(column, row, formula);
 
@@ -385,7 +385,7 @@ void KCCellStorage::setFormula(int column, int row, const Formula& formula)
     if (formula != old) {
         if (!d->sheet->map()->isLoading()) {
             // trigger an update of the dependencies and a recalculation
-            d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, column, row), CellDamage::Formula | CellDamage::KCValue));
+            d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, column, row), CellDamage::KCFormula | CellDamage::KCValue));
             d->rowRepeatStorage->setRowRepeat(row, 1);
         }
         // recording undo?
@@ -394,7 +394,7 @@ void KCCellStorage::setFormula(int column, int row, const Formula& formula)
             // Also store the old value, if there wasn't a formula before,
             // because the new value is calculated later by the damage
             // processing and is not recorded for undoing.
-            if (old == Formula())
+            if (old == KCFormula())
                 d->undoData->values << qMakePair(QPoint(column, row), value(column, row));
         }
     }
@@ -775,11 +775,11 @@ void KCCellStorage::insertColumns(int position, int number)
     // TODO Stefan: Optimize: Avoid the double creation of the sub-storages, but don't process
     //              formulas, that will get out of bounds after the operation.
     const KCRegion invalidRegion(QRect(QPoint(position, 1), QPoint(KS_colMax, KS_rowMax)), d->sheet);
-    PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger an update of the bindings and the named areas.
     d->sheet->map()->addDamage(new CellDamage(d->sheet, invalidRegion, CellDamage::KCBinding | CellDamage::NamedArea));
@@ -788,7 +788,7 @@ void KCCellStorage::insertColumns(int position, int number)
     QList< QPair<QRectF, QString> > comments = d->commentStorage->insertColumns(position, number);
     QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->insertColumns(position, number);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->insertColumns(position, number);
-    QVector< QPair<QPoint, Formula> > formulas = d->formulaStorage->insertColumns(position, number);
+    QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->insertColumns(position, number);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->insertColumns(position, number);
     QVector< QPair<QPoint, QString> > links = d->linkStorage->insertColumns(position, number);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->insertColumns(position, number);
@@ -820,7 +820,7 @@ void KCCellStorage::insertColumns(int position, int number)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
@@ -831,11 +831,11 @@ void KCCellStorage::removeColumns(int position, int number)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(position, 1), QPoint(KS_colMax, KS_rowMax)), d->sheet);
-    PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger an update of the bindings and the named areas.
     const KCRegion region(QRect(QPoint(position - 1, 1), QPoint(KS_colMax, KS_rowMax)), d->sheet);
@@ -845,7 +845,7 @@ void KCCellStorage::removeColumns(int position, int number)
     QList< QPair<QRectF, QString> > comments = d->commentStorage->removeColumns(position, number);
     QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->removeColumns(position, number);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->removeColumns(position, number);
-    QVector< QPair<QPoint, Formula> > formulas = d->formulaStorage->removeColumns(position, number);
+    QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->removeColumns(position, number);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->removeColumns(position, number);
     QVector< QPair<QPoint, QString> > links = d->linkStorage->removeColumns(position, number);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->removeColumns(position, number);
@@ -877,7 +877,7 @@ void KCCellStorage::removeColumns(int position, int number)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
@@ -888,11 +888,11 @@ void KCCellStorage::insertRows(int position, int number)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(1, position), QPoint(KS_colMax, KS_rowMax)), d->sheet);
-    PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger an update of the bindings and the named areas.
     d->sheet->map()->addDamage(new CellDamage(d->sheet, invalidRegion, CellDamage::KCBinding | CellDamage::NamedArea));
@@ -901,7 +901,7 @@ void KCCellStorage::insertRows(int position, int number)
     QList< QPair<QRectF, QString> > comments = d->commentStorage->insertRows(position, number);
     QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->insertRows(position, number);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->insertRows(position, number);
-    QVector< QPair<QPoint, Formula> > formulas = d->formulaStorage->insertRows(position, number);
+    QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->insertRows(position, number);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->insertRows(position, number);
     QVector< QPair<QPoint, QString> > links = d->linkStorage->insertRows(position, number);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->insertRows(position, number);
@@ -933,7 +933,7 @@ void KCCellStorage::insertRows(int position, int number)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
@@ -946,11 +946,11 @@ void KCCellStorage::removeRows(int position, int number)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(1, position), QPoint(KS_colMax, KS_rowMax)), d->sheet);
-    PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger an update of the bindings and the named areas.
     const KCRegion region(QRect(QPoint(1, position - 1), QPoint(KS_colMax, KS_rowMax)), d->sheet);
@@ -960,7 +960,7 @@ void KCCellStorage::removeRows(int position, int number)
     QList< QPair<QRectF, QString> > comments = d->commentStorage->removeRows(position, number);
     QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->removeRows(position, number);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->removeRows(position, number);
-    QVector< QPair<QPoint, Formula> > formulas = d->formulaStorage->removeRows(position, number);
+    QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->removeRows(position, number);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->removeRows(position, number);
     QVector< QPair<QPoint, QString> > links = d->linkStorage->removeRows(position, number);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->removeRows(position, number);
@@ -992,7 +992,7 @@ void KCCellStorage::removeRows(int position, int number)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
@@ -1005,11 +1005,11 @@ void KCCellStorage::removeShiftLeft(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom())), d->sheet);
-    PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger an update of the bindings and the named areas.
     const KCRegion region(QRect(rect.topLeft() - QPoint(1, 0), QPoint(KS_colMax, rect.bottom())), d->sheet);
@@ -1019,7 +1019,7 @@ void KCCellStorage::removeShiftLeft(const QRect& rect)
     QList< QPair<QRectF, QString> > comments = d->commentStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->removeShiftLeft(rect);
-    QVector< QPair<QPoint, Formula> > formulas = d->formulaStorage->removeShiftLeft(rect);
+    QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->removeShiftLeft(rect);
     QVector< QPair<QPoint, QString> > links = d->linkStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->removeShiftLeft(rect);
@@ -1051,7 +1051,7 @@ void KCCellStorage::removeShiftLeft(const QRect& rect)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
@@ -1064,11 +1064,11 @@ void KCCellStorage::insertShiftRight(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom())), d->sheet);
-    PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger an update of the bindings and the named areas.
     d->sheet->map()->addDamage(new CellDamage(d->sheet, invalidRegion, CellDamage::KCBinding | CellDamage::NamedArea));
@@ -1077,7 +1077,7 @@ void KCCellStorage::insertShiftRight(const QRect& rect)
     QList< QPair<QRectF, QString> > comments = d->commentStorage->insertShiftRight(rect);
     QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->insertShiftRight(rect);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->insertShiftRight(rect);
-    QVector< QPair<QPoint, Formula> > formulas = d->formulaStorage->insertShiftRight(rect);
+    QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->insertShiftRight(rect);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->insertShiftRight(rect);
     QVector< QPair<QPoint, QString> > links = d->linkStorage->insertShiftRight(rect);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->insertShiftRight(rect);
@@ -1109,7 +1109,7 @@ void KCCellStorage::insertShiftRight(const QRect& rect)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
@@ -1122,11 +1122,11 @@ void KCCellStorage::removeShiftUp(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax)), d->sheet);
-    PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger an update of the bindings and the named areas.
     const KCRegion region(QRect(rect.topLeft() - QPoint(0, 1), QPoint(rect.right(), KS_rowMax)), d->sheet);
@@ -1136,7 +1136,7 @@ void KCCellStorage::removeShiftUp(const QRect& rect)
     QList< QPair<QRectF, QString> > comments = d->commentStorage->removeShiftUp(rect);
     QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->removeShiftUp(rect);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->removeShiftUp(rect);
-    QVector< QPair<QPoint, Formula> > formulas = d->formulaStorage->removeShiftUp(rect);
+    QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->removeShiftUp(rect);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->removeShiftUp(rect);
     QVector< QPair<QPoint, QString> > links = d->linkStorage->removeShiftUp(rect);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->removeShiftUp(rect);
@@ -1168,7 +1168,7 @@ void KCCellStorage::removeShiftUp(const QRect& rect)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
@@ -1181,11 +1181,11 @@ void KCCellStorage::insertShiftDown(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax)), d->sheet);
-    PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger an update of the bindings and the named areas.
     d->sheet->map()->addDamage(new CellDamage(d->sheet, invalidRegion, CellDamage::KCBinding | CellDamage::NamedArea));
@@ -1194,7 +1194,7 @@ void KCCellStorage::insertShiftDown(const QRect& rect)
     QList< QPair<QRectF, QString> > comments = d->commentStorage->insertShiftDown(rect);
     QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->insertShiftDown(rect);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->insertShiftDown(rect);
-    QVector< QPair<QPoint, Formula> > formulas = d->formulaStorage->insertShiftDown(rect);
+    QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->insertShiftDown(rect);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->insertShiftDown(rect);
     QVector< QPair<QPoint, QString> > links = d->linkStorage->insertShiftDown(rect);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->insertShiftDown(rect);
@@ -1226,7 +1226,7 @@ void KCCellStorage::insertShiftDown(const QRect& rect)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
-        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
+        d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::KCFormula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);

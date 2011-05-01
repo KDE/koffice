@@ -44,7 +44,7 @@ static QpFormulaConv gOverride[] = {
     {0,   0,                        0}
 };
 
-QuattroPro::Formula::Formula(QpRecFormulaCell& pCell, QpTableNames& pTable)
+QuattroPro::KCFormula::KCFormula(QpRecFormulaCell& pCell, QpTableNames& pTable)
         : QpFormula(pCell, pTable)
 {
     formulaStart("=");   // quattro pro starts formulas with "+"
@@ -58,6 +58,6 @@ QuattroPro::Formula::Formula(QpRecFormulaCell& pCell, QpTableNames& pTable)
     replaceFunc(gOverride);
 }
 
-QuattroPro::Formula::~Formula()
+QuattroPro::KCFormula::~KCFormula()
 {
 }

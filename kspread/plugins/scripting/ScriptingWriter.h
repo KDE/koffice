@@ -166,7 +166,7 @@ public Q_SLOTS:
     //int rowCount() {}
     //int columnCount() {}
 
-    //enum Filter { Any, NotEmpty, Numeric, Date, Time, String, Formula, Comment };
+    //enum Filter { Any, NotEmpty, Numeric, Date, Time, String, KCFormula, Comment };
     //QString filter() {}
     //void setFilter(const QString& filter) {}
 

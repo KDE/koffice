@@ -31,7 +31,7 @@
 #include "KCRegion.h"
 #include "RTree.h"
 
-class Formula;
+class KCFormula;
 class KCMap;
 class KCSheet;
 
@@ -51,7 +51,7 @@ public:
      * \see removeDependencies
      * \see computeDependencies
      */
-    void generateDependencies(const KCCell& cell, const Formula& formula);
+    void generateDependencies(const KCCell& cell, const KCFormula& formula);
 
     /**
      * Computes the reference depth.
@@ -118,7 +118,7 @@ public:
      * for performance reasons.
      * Do not call this method for a \p cell not containing a \p formula.
      */
-    void computeDependencies(const KCCell& cell, const Formula& formula);
+    void computeDependencies(const KCCell& cell, const KCFormula& formula);
 
     enum Direction { Forward, Backward };
     /**

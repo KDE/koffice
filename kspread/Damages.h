@@ -64,7 +64,7 @@ class KSPREAD_EXPORT CellDamage : public KCDamage
 public:
     enum Change {
         KCBinding    = 0x02, ///< on value changes; always triggered; for binding updates
-        Formula    = 0x04, ///< triggers a dependency update
+        KCFormula    = 0x04, ///< triggers a dependency update
         NamedArea  = 0x10, ///< triggers a named area update
         /// This indicates a value change. It is not triggered while a recalculation is in progress.
         /// RecalcManager takes over in this case. Otherwise, circular dependencies would cause
@@ -154,7 +154,7 @@ class WorkbookDamage : public KCDamage
 public:
     enum Change {
         None       = 0x00,
-        Formula    = 0x01,
+        KCFormula    = 0x01,
         KCValue      = 0x02
     };
     Q_DECLARE_FLAGS(Changes, Change)

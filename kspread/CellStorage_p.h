@@ -23,7 +23,7 @@
 // KSpread
 #include "KCBinding.h"
 #include "KCCondition.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "KCStyle.h"
 #include "Validity.h"
 #include "KCValue.h"
@@ -67,7 +67,7 @@ public:
     QList< QPair<QRectF, QString> >          comments;
     QList< QPair<QRectF, Conditions> >       conditions;
     QList< QPair<QRectF, Database> >         databases;
-    QVector< QPair<QPoint, Formula> >        formulas;
+    QVector< QPair<QPoint, KCFormula> >        formulas;
     QList< QPair<QRectF, bool> >             fusions;
     QVector< QPair<QPoint, QString> >        links;
     QList< QPair<QRectF, bool> >             matrices;

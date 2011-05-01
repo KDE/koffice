@@ -292,44 +292,44 @@ protected:
  * \ingroup KCValue
  * A formula for a cell.
  *
- * A Formula is a equations which perform calculations on values in the cells
+ * A KCFormula is a equations which perform calculations on values in the cells
  * and sheets. Every formula must start with an equal sign (=).
  *
  *
  */
-class KSPREAD_EXPORT Formula
+class KSPREAD_EXPORT KCFormula
 {
 public:
     /**
      * Creates a formula. It must be owned by a sheet.
      */
-    Formula(KCSheet *sheet, const KCCell& cell);
+    KCFormula(KCSheet *sheet, const KCCell& cell);
 
     /**
      * Creates a formula. It must be owned by a sheet.
      */
-    explicit Formula(KCSheet *sheet);
+    explicit KCFormula(KCSheet *sheet);
 
     /**
      * Creates a formula that is not owned by any sheet.
      * This might be useful in some cases.
      */
-    Formula();
+    KCFormula();
 
     /**
      * Returns a null formula object, this is quicker than creating a new one.
      */
-    static Formula empty();
+    static KCFormula empty();
 
     /**
      * Copy constructor.
      */
-    Formula(const Formula&);
+    KCFormula(const KCFormula&);
 
     /**
      * Destroys the formula.
      */
-    ~Formula();
+    ~KCFormula();
 
     /**
      * Returns the cell which owns this formula.
@@ -389,10 +389,10 @@ public:
     /**
      * Assignment operator.
      */
-    Formula& operator=(const Formula&);
+    KCFormula& operator=(const KCFormula&);
 
-    bool operator==(const Formula&) const;
-    inline bool operator!=(const Formula& o) const {
+    bool operator==(const KCFormula&) const;
+    inline bool operator!=(const KCFormula& o) const {
         return !operator==(o);
     }
 
@@ -421,7 +421,7 @@ private:
 /**
  * Dumps the formula, should be used only to assist debugging.
  */
-QTextStream& operator<<(QTextStream& ts, Formula formula);
+QTextStream& operator<<(QTextStream& ts, KCFormula formula);
 
 
 
@@ -437,12 +437,12 @@ bool isIdentifier(const QChar &ch);
   QHash/QSet support
 ****************************************************************************/
 
-inline uint qHash(const Formula& formula)
+inline uint qHash(const KCFormula& formula)
 {
     return qHash(formula.expression());
 }
 
-Q_DECLARE_METATYPE(Formula)
-Q_DECLARE_TYPEINFO(Formula, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(KCFormula)
+Q_DECLARE_TYPEINFO(KCFormula, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_FORMULA

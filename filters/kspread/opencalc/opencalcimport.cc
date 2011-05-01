@@ -224,7 +224,7 @@ void OpenCalcImport::checkForNamedAreas(QString & formula) const
                 formula = formula.replace(start, word.length(), '\'' + word + '\'');
                 l = formula.length();
                 ++i;
-                kDebug(30518) << "Formula:" << formula << ", L:" << l << ", i:" << i + 1;
+                kDebug(30518) << "KCFormula:" << formula << ", L:" << l << ", i:" << i + 1;
             }
         }
 
@@ -237,7 +237,7 @@ void OpenCalcImport::checkForNamedAreas(QString & formula) const
             formula = formula.replace(start, word.length(), '\'' + word + '\'');
             l = formula.length();
             ++i;
-            kDebug(30518) << "Formula:" << formula << ", L:" << l << ", i:" << i + 1;
+            kDebug(30518) << "KCFormula:" << formula << ", L:" << l << ", i:" << i + 1;
         }
     }
 }
@@ -266,7 +266,7 @@ void OpenCalcImport::convertFormula(QString & text, QString const & f) const
         checkForNamedAreas(formula);
     }
 
-    kDebug(30518) << "Formula:" << formula << ", Parameter:" << parameter << ", P:" << p;
+    kDebug(30518) << "KCFormula:" << formula << ", Parameter:" << parameter << ", P:" << p;
 
 
     // replace formula names here
@@ -2077,8 +2077,8 @@ void OpenCalcImport::loadOasisValidation(Validity validity, const QString& valid
         //GetFunction ::= cell-content-is-between(KCValue, KCValue) | cell-content-is-not-between(KCValue, KCValue)
         //ExtendedGetFunction ::= cell-content-text-length-is-between(KCValue, KCValue) | cell-content-text-length-is-not-between(KCValue, KCValue)
         //Operator ::= '<' | '>' | '<=' | '>=' | '=' | '!='
-        //KCValue ::= NumberValue | String | Formula
-        //A Formula is a formula without an equals (=) sign at the beginning. See section 8.1.3 for more information.
+        //KCValue ::= NumberValue | String | KCFormula
+        //A KCFormula is a formula without an equals (=) sign at the beginning. See section 8.1.3 for more information.
         //A String comprises one or more characters surrounded by quotation marks.
         //A NumberValue is a whole or decimal number. It must not contain comma separators for numbers of 1000 or greater.
 

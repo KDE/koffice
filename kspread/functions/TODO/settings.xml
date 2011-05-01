@@ -6,9 +6,9 @@
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">View1</config:config-item>
-     <config:config-item config:name="ActiveTable" config:type="string">Formula Status</config:config-item>
+     <config:config-item config:name="ActiveTable" config:type="string">KCFormula Status</config:config-item>
      <config:config-item-map-named config:name="Tables">
-      <config:config-item-map-entry config:name="Formula Status">
+      <config:config-item-map-entry config:name="KCFormula Status">
        <config:config-item config:name="CursorPositionX" config:type="int">1</config:config-item>
        <config:config-item config:name="CursorPositionY" config:type="int">2</config:config-item>
        <config:config-item config:name="xOffset" config:type="double">0</config:config-item>

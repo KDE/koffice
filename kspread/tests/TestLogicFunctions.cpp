@@ -46,7 +46,7 @@ void TestLogicFunctions::initTestCase()
 
 KCValue TestLogicFunctions::evaluate(const QString& formula, KCValue& ex)
 {
-    Formula f(m_sheet);
+    KCFormula f(m_sheet);
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

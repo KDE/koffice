@@ -27,7 +27,7 @@
 #include "KCCell.h"
 #include "KCCellStorage.h"
 #include "KCDependencyManager.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "FormulaStorage.h"
 #include "KCMap.h"
 #include "KCSheet.h"

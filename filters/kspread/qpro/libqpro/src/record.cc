@@ -520,7 +520,7 @@ QpRecFormulaCell::QpRecFormulaCell(QP_INT16 pLen, QpIStream& pIn)
         : QpRecCell(QpFormulaCell)
         , cFormula(0)
 {
-    QP_DEBUG("Formula Cell - ");
+    QP_DEBUG("KCFormula Cell - ");
 
     int lFormulaLen = pLen - loadCellInfo(pIn);
 
@@ -541,7 +541,7 @@ QpRecFormulaCell::QpRecFormulaCell(QP_INT16 pLen, QpIStream& pIn)
     pIn.read(cFormula, lFormulaLen);
 
     QP_DEBUG(", LastValue " << cLastValue << ", State " << cState << endl);
-    QP_DEBUG("   FormulaLen " << cLen << ", CellRef " << cCellRef << ", Formula" << endl);
+    QP_DEBUG("   FormulaLen " << cLen << ", CellRef " << cCellRef << ", KCFormula" << endl);
 #ifdef QP_TRACE
     Hexout(cFormula, lFormulaLen);
 #endif

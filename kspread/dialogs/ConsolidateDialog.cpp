@@ -54,7 +54,7 @@
 #include <KCSheet.h>
 #include <Util.h>
 
-#include <Formula.h>
+#include <KCFormula.h>
 #include <ValueConverter.h>
 #include <KCCell.h>
 
@@ -508,7 +508,7 @@ void ConsolidateDialog::Private::setContent(KCSheet *sheet, int row, int column,
     KCValue value;
     // Directly evaluate the formula, i.e. copy data, i.e. do not link to data?
     if (detailsWidget.m_copyData->isChecked()) {
-        Formula formula(sheet);
+        KCFormula formula(sheet);
         formula.setExpression(text);
         if (!formula.isValid()) {
             kDebug() << "Invalid formula:" << text;

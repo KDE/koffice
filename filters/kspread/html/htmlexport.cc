@@ -271,7 +271,7 @@ void HTMLExport::convertSheet(KCSheet *sheet, QString &str, int iMaxUsedRow, int
             case KCCell::VisualFormula:
                 text = cell.userInput(); // untested
                 break;
-            case KCCell::Formula:
+            case KCCell::KCFormula:
                 cell.calc(true);   // Incredible, cells are not calculated if the document was just opened
                 text = cell.valueString();
                 break;

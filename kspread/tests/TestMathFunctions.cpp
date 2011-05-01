@@ -22,7 +22,7 @@
 #include "TestKspreadCommon.h"
 
 #include <KCCellStorage.h>
-#include <Formula.h>
+#include <KCFormula.h>
 #include <KCMap.h>
 #include <KCSheet.h>
 
@@ -39,7 +39,7 @@ KCValue TestMathFunctions::TestDouble(const QString& formula, const KCValue& v2,
 {
     double epsilon = DBL_EPSILON * pow(10.0, (double)(accuracy));
 
-    Formula f(m_map->sheet(0));
+    KCFormula f(m_map->sheet(0));
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');
@@ -78,7 +78,7 @@ inline static KCValue RoundNumber(const KCValue& v)
 
 KCValue TestMathFunctions::evaluate(const QString& formula)
 {
-    Formula f(m_map->sheet(0));
+    KCFormula f(m_map->sheet(0));
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

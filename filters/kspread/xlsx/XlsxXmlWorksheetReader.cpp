@@ -799,7 +799,7 @@ static bool valueIsNumeric(const QString& v)
 
  Child elements:
  - extLst (Future Feature Data Storage Area) §18.2.10
- - [done] f (Formula) §18.3.1.40
+ - [done] f (KCFormula) §18.3.1.40
  - is (Rich Text Inline) §18.3.1.53
  - [done] v (KCCell Value) §18.3.1.96
  Parent elements:
@@ -993,9 +993,9 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
 #undef CURRENT_EL
 #define CURRENT_EL f
 
-//! f handler (Formula)
+//! f handler (KCFormula)
 /*! ECMA-376, 18.3.1.40, p. 1813.
- Formula for the cell. The formula expression is contained in the character node of this element.
+ KCFormula for the cell. The formula expression is contained in the character node of this element.
 
  No child elements.
  Parent elements:

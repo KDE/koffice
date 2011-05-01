@@ -28,14 +28,14 @@
 #include <QTextStream>
 
 /***********************************************************************/
-/* Class: Formula                                                      */
+/* Class: KCFormula                                                      */
 /***********************************************************************/
 
 /**
  * This class hold a formula. The formula must be generated not for this
  * filter but from the kformula lib. So I keep only a string of the formula.
  */
-class Formula: public Element
+class KCFormula: public Element
 {
     /* DATA MARKUP */
     int      _left,
@@ -55,16 +55,16 @@ public:
     /**
      * Constructors
      *
-     * Creates a new instance of Formula.
+     * Creates a new instance of KCFormula.
      */
-    Formula();
+    KCFormula();
 
     /*
      * Destructor
      *
      * Nothing to do.
      */
-    virtual ~Formula() {
+    virtual ~KCFormula() {
         kDebug(30522) << "Destruction of a formula";
     }
 

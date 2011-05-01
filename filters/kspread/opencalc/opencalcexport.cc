@@ -616,7 +616,7 @@ void OpenCalcExport::exportCells(QDomDocument & doc, QDomElement & rowElem,
         }
 
         if (cell.isFormula()) {
-            kDebug(30518) << "Formula found";
+            kDebug(30518) << "KCFormula found";
 
             QString formula(convertFormula(cell.userInput()));
             cellElem.setAttribute("table:formula", formula);

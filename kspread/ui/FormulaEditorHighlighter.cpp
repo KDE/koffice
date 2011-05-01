@@ -20,7 +20,7 @@
 #include "FormulaEditorHighlighter.h"
 
 // KSpread
-#include "Formula.h"
+#include "KCFormula.h"
 #include "Selection.h"
 #include "KCSheet.h"
 
@@ -78,7 +78,7 @@ void FormulaEditorHighlighter::highlightBlock(const QString& text)
 
     // interpret the text as formula
     // we accept invalid/incomplete formulas
-    Formula f;
+    KCFormula f;
     d->tokens = f.scan(text);
 
     QFont editorFont = document()->defaultFont();

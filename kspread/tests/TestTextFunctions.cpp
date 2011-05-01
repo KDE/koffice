@@ -29,7 +29,7 @@ void TestTextFunctions::initTestCase()
 
 KCValue TestTextFunctions::evaluate(const QString& formula, KCValue& ex)
 {
-    Formula f;
+    KCFormula f;
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

@@ -25,7 +25,7 @@
 #include "KCCell.h"
 #include "KCCellStorage.h"
 #include "Damages.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "KCMap.h"
 #include "KCSheet.h"
 #include "ValueCalc.h"
@@ -169,7 +169,7 @@ bool DataManipulator::preProcessing()
     if (m_firstrun && m_parsing && m_expandMatrix && KCRegion::isSingular()) {
         const QString expression = m_data.asString();
         if (!expression.isEmpty() && expression[0] == '=') {
-            Formula formula(m_sheet);
+            KCFormula formula(m_sheet);
             formula.setExpression(expression);
             if (formula.isValid()) {
                 const KCValue result = formula.eval();

@@ -11,7 +11,7 @@ target_link_libraries(TestDependencies kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_Q
 ########### next target ###############
 
 set(TestFormula_SRCS TestFormula.cpp)
-kde4_add_unit_test(TestFormula TESTNAME kspread-Formula  ${TestFormula_SRCS})
+kde4_add_unit_test(TestFormula TESTNAME kspread-KCFormula  ${TestFormula_SRCS})
 target_link_libraries(TestFormula kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY})
 
 ########### next target ###############

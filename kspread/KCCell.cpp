@@ -50,7 +50,7 @@
 #include "KCCalculationSettings.h"
 #include "KCCellStorage.h"
 #include "KCCondition.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "GenValidationStyle.h"
 #include "Global.h"
 #include "Localization.h"
@@ -160,7 +160,7 @@ bool KCCell::isDefault() const
     // check each stored attribute
     if (value() != KCValue())
         return false;
-    if (formula() != Formula())
+    if (formula() != KCFormula())
         return false;
     if (!link().isEmpty())
         return false;
@@ -183,7 +183,7 @@ bool KCCell::hasDefaultContent() const
     // check each stored attribute
     if (value() != KCValue())
         return false;
-    if (formula() != Formula::empty())
+    if (formula() != KCFormula::empty())
         return false;
     if (!link().isEmpty())
         return false;
@@ -203,7 +203,7 @@ bool KCCell::isEmpty() const
     // empty = no value or formula
     if (value() != KCValue())
         return false;
-    if (formula() != Formula())
+    if (formula() != KCFormula())
         return false;
     return true;
 }
@@ -330,12 +330,12 @@ Database KCCell::database() const
     return sheet()->cellStorage()->database(d->column, d->row);
 }
 
-Formula KCCell::formula() const
+KCFormula KCCell::formula() const
 {
     return sheet()->cellStorage()->formula(d->column, d->row);
 }
 
-void KCCell::setFormula(const Formula& formula)
+void KCCell::setFormula(const KCFormula& formula)
 {
     sheet()->cellStorage()->setFormula(column(), row(), formula);
 }
@@ -381,7 +381,7 @@ void KCCell::setValidity(Validity validity)
 //
 QString KCCell::userInput() const
 {
-    const Formula formula = this->formula();
+    const KCFormula formula = this->formula();
     if (!formula.expression().isEmpty())
         return formula.expression();
     return sheet()->cellStorage()->userInput(d->column, d->row);
@@ -393,14 +393,14 @@ void KCCell::setUserInput(const QString& string)
 
     if (!string.isEmpty() && string[0] == '=') {
         // set the formula
-        Formula formula(sheet(), *this);
+        KCFormula formula(sheet(), *this);
         formula.setExpression(string);
         setFormula(formula);
         // remove an existing user input (the non-formula one)
         sheet()->cellStorage()->setUserInput(d->column, d->row, QString());
     } else {
         // remove an existing formula
-        setFormula(Formula::empty());
+        setFormula(KCFormula::empty());
         // set the value
         sheet()->cellStorage()->setUserInput(d->column, d->row, string);
     }
@@ -497,7 +497,7 @@ void KCCell::copyContent(const KCCell& cell)
     if (cell.isFormula()) {
         // change all the references, e.g. from A1 to A3 if copying
         // from e.g. B2 to B4
-        Formula formula(sheet(), *this);
+        KCFormula formula(sheet(), *this);
         formula.setExpression(decodeFormula(cell.encodeFormula()));
         setFormula(formula);
     } else {
@@ -711,7 +711,7 @@ QString KCCell::decodeFormula(const QString &_text) const
 
 
 // ----------------------------------------------------------------
-//                          Formula handling
+//                          KCFormula handling
 
 
 bool KCCell::makeFormula()
@@ -778,13 +778,13 @@ void KCCell::parseUserInput(const QString& text)
     if (text.isEmpty()) {
         setValue(KCValue::empty());
         setUserInput(text);
-        setFormula(Formula::empty());
+        setFormula(KCFormula::empty());
         return;
     }
 
     // a formula?
     if (text[0] == '=') {
-        Formula formula(sheet(), *this);
+        KCFormula formula(sheet(), *this);
         formula.setExpression(text);
         setFormula(formula);
 
@@ -798,12 +798,12 @@ void KCCell::parseUserInput(const QString& text)
     }
 
     // keep the old formula and value for the case, that validation fails
-    const Formula oldFormula = formula();
+    const KCFormula oldFormula = formula();
     const QString oldUserInput = userInput();
     const KCValue oldValue = value();
 
     // here, the new value is not a formula anymore; clear an existing one
-    setFormula(Formula());
+    setFormula(KCFormula());
 
     KCValue value;
     if (style().formatType() == KCFormat::Text)
@@ -1168,7 +1168,7 @@ bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
         xmlwriter.addAttribute("table:validation-name", tableContext.valStyle.insert(styleVal));
     }
     if (isFormula()) {
-        //kDebug(36003) <<"Formula found";
+        //kDebug(36003) <<"KCFormula found";
         QString formula = KSpread::Odf::encodeFormula(userInput(), locale());
         xmlwriter.addAttribute("table:formula", formula);
     } else if (!link().isEmpty()) {

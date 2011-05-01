@@ -19,7 +19,7 @@
 
 #include "qtest_kde.h"
 
-#include <Formula.h>
+#include <KCFormula.h>
 #include <FunctionModuleRegistry.h>
 #include <KCValue.h>
 

@@ -25,7 +25,7 @@
 #include "KCCellStorage.h"
 #include "KCCondition.h"
 #include "database/Database.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "KCMap.h"
 #include "ModelSupport.h"
 #include "KCSheet.h"
@@ -227,7 +227,7 @@ bool KCSheetModel::setData(const QModelIndex& index, const QVariant& value, int 
         storage->setUserInput(column, row, value.toString());
         break;
     case FormulaRole:
-        storage->setFormula(column, row, value.value<Formula>());
+        storage->setFormula(column, row, value.value<KCFormula>());
         break;
     case ValueRole:
         storage->setValue(column, row, value.value<KCValue>());

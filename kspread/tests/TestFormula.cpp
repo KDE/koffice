@@ -68,7 +68,7 @@ static QString describeTokenCodes(const QString& tokenCodes)
 
 static QString tokenizeFormula(const QString& formula)
 {
-    Formula f;
+    KCFormula f;
     QString expr = formula;
     expr.prepend('=');
     f.setExpression(expr);
@@ -88,7 +88,7 @@ static QString tokenizeFormula(const QString& formula)
 
 KCValue TestFormula::evaluate(const QString& formula, KCValue& ex)
 {
-    Formula f;
+    KCFormula f;
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

@@ -19,7 +19,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "Formula.h"
+#include "KCFormula.h"
 
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
@@ -107,7 +107,7 @@ struct stackEntry {
     int row1, col1, row2, col2;
 };
 
-class Formula::Private : public QSharedData
+class KCFormula::Private : public QSharedData
 {
 public:
     KCCell cell;
@@ -430,12 +430,12 @@ bool KSpread::isIdentifier(const QChar &ch)
 
 
 /**********************
-    Formula
+    KCFormula
  **********************/
 
 // Constructor
 
-Formula::Formula(KCSheet *sheet, const KCCell& cell)
+KCFormula::KCFormula(KCSheet *sheet, const KCCell& cell)
         : d(new Private)
 {
     d->cell = cell;
@@ -443,7 +443,7 @@ Formula::Formula(KCSheet *sheet, const KCCell& cell)
     clear();
 }
 
-Formula::Formula(KCSheet *sheet)
+KCFormula::KCFormula(KCSheet *sheet)
         : d(new Private)
 {
     d->cell = KCCell();
@@ -451,7 +451,7 @@ Formula::Formula(KCSheet *sheet)
     clear();
 }
 
-Formula::Formula()
+KCFormula::KCFormula()
         : d(new Private)
 {
     d->cell = KCCell();
@@ -459,29 +459,29 @@ Formula::Formula()
     clear();
 }
 
-Formula Formula::empty()
+KCFormula KCFormula::empty()
 {
-    static Formula f;
+    static KCFormula f;
     return f;
 }
 
-Formula::Formula(const Formula& other)
+KCFormula::KCFormula(const KCFormula& other)
         : d(other.d)
 {
 }
 
 // Destructor
 
-Formula::~Formula()
+KCFormula::~KCFormula()
 {
 }
 
-const KCCell& Formula::cell() const
+const KCCell& KCFormula::cell() const
 {
     return d->cell;
 }
 
-KCSheet* Formula::sheet() const
+KCSheet* KCFormula::sheet() const
 {
     return d->sheet;
 }
@@ -490,7 +490,7 @@ KCSheet* Formula::sheet() const
 // note that both the real lex and parse processes will happen later on
 // when needed (i.e. "lazy parse"), for example during formula evaluation.
 
-void Formula::setExpression(const QString& expr)
+void KCFormula::setExpression(const QString& expr)
 {
     d->expression = expr;
     d->dirty = true;
@@ -499,7 +499,7 @@ void Formula::setExpression(const QString& expr)
 
 // Returns the expression associated with this formula.
 
-QString Formula::expression() const
+QString KCFormula::expression() const
 {
     return d->expression;
 }
@@ -507,7 +507,7 @@ QString Formula::expression() const
 // Returns the validity of the formula.
 // note: empty formula is always invalid.
 
-bool Formula::isValid() const
+bool KCFormula::isValid() const
 {
     if (d->dirty) {
         KLocale* locale = !d->cell.isNull() ? d->cell.locale() : 0;
@@ -524,7 +524,7 @@ bool Formula::isValid() const
 
 // Clears everything, also mark the formula as invalid.
 
-void Formula::clear()
+void KCFormula::clear()
 {
     d->expression.clear();
     d->dirty = true;
@@ -538,7 +538,7 @@ void Formula::clear()
 // (even when there's small performance penalty) because otherwise we need to
 // store parsed tokens all the time which serves no good purpose.
 
-Tokens Formula::tokens() const
+Tokens KCFormula::tokens() const
 {
     KLocale* locale = !d->cell.isNull() ? d->cell.locale() : 0;
     if ((!locale) && d->sheet)
@@ -546,7 +546,7 @@ Tokens Formula::tokens() const
     return scan(d->expression, locale);
 }
 
-Tokens Formula::scan(const QString& expr, const KLocale* locale) const
+Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
 {
     // to hold the result
     Tokens tokens;
@@ -923,7 +923,7 @@ Tokens Formula::scan(const QString& expr, const KLocale* locale) const
 }
 
 // will affect: dirty, valid, codes, constants
-void Formula::compile(const Tokens& tokens) const
+void KCFormula::compile(const Tokens& tokens) const
 {
     // initialize variables
     d->dirty = false;
@@ -1318,7 +1318,7 @@ void Formula::compile(const Tokens& tokens) const
     }
 }
 
-bool Formula::isNamedArea(const QString& expr) const
+bool KCFormula::isNamedArea(const QString& expr) const
 {
     return d->sheet ? d->sheet->map()->namedAreaManager()->contains(expr) : false;
 }
@@ -1327,14 +1327,14 @@ bool Formula::isNamedArea(const QString& expr) const
 // Evaluates the formula, returns the result.
 
 // evaluate the cellIndirections
-KCValue Formula::eval(CellIndirection cellIndirections) const
+KCValue KCFormula::eval(CellIndirection cellIndirections) const
 {
     QHash<KCCell, KCValue> values;
     return evalRecursive(cellIndirections, values);
 }
 
 // We need to unroll arrays. Do use the same logic to unroll like OpenOffice.org and Excel are using.
-KCValue Formula::Private::valueOrElement(FuncExtra &fe, const stackEntry& entry) const
+KCValue KCFormula::Private::valueOrElement(FuncExtra &fe, const stackEntry& entry) const
 {
     const KCValue& v = entry.val;
     const KCRegion& region = entry.reg;
@@ -1379,7 +1379,7 @@ KCValue numericOrError(const ValueConverter* converter, const KCValue &v)
     return KCValue::errorVALUE();
 }
 
-KCValue Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, KCValue>& values) const
+KCValue KCFormula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, KCValue>& values) const
 {
     QStack<stackEntry> stack;
     stackEntry entry;
@@ -1755,20 +1755,20 @@ KCValue Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, K
     return stack.pop().val;
 }
 
-Formula& Formula::operator=(const Formula & other)
+KCFormula& KCFormula::operator=(const KCFormula & other)
 {
     d = other.d;
     return *this;
 }
 
-bool Formula::operator==(const Formula& other) const
+bool KCFormula::operator==(const KCFormula& other) const
 {
     return (d->expression == other.d->expression);
 }
 
 // Debugging aid
 
-QString Formula::dump() const
+QString KCFormula::dump() const
 {
     QString result;
 
@@ -1828,7 +1828,7 @@ QString Formula::dump() const
     return result;
 }
 
-QTextStream& operator<<(QTextStream& ts, Formula formula)
+QTextStream& operator<<(QTextStream& ts, KCFormula formula)
 {
     ts << formula.dump();
     return ts;

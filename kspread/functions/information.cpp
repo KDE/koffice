@@ -37,7 +37,7 @@
 #include "KCSheet.h"
 #include "KCRegion.h"
 #include "KCCell.h"
-#include "Formula.h"
+#include "KCFormula.h"
 
 #include <KoDocument.h>
 

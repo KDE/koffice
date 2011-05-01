@@ -1351,7 +1351,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
                         isLink = false;
                         text = cell.userInput(); // untested
                         break;
-                    case KCCell::Formula:
+                    case KCCell::KCFormula:
                         isLink = false;
                         QString tmp = cell.userInput();
                         if (tmp == "==")

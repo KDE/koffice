@@ -26,7 +26,7 @@
 #include "qtest_kde.h"
 
 #include <KCCellStorage.h>
-#include <Formula.h>
+#include <KCFormula.h>
 #include <KCMap.h>
 #include <KCSheet.h>
 
@@ -77,7 +77,7 @@ KCValue TestStatisticalFunctions::TestDouble(const QString& formula, const KCVal
 {
     double epsilon = DBL_EPSILON * pow(10.0, (double)(accuracy));
 
-    Formula f(m_map->sheet(0)); // bind to test case data set
+    KCFormula f(m_map->sheet(0)); // bind to test case data set
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');
@@ -110,7 +110,7 @@ static KCValue RoundNumber(const KCValue& v)
 
 KCValue TestStatisticalFunctions::evaluate(const QString& formula)
 {
-    Formula f(m_map->sheet(0));
+    KCFormula f(m_map->sheet(0));
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

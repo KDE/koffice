@@ -32,7 +32,7 @@
 
 #include <part/Doc.h>
 #include <KCCellStorage.h>
-#include <Formula.h>
+#include <KCFormula.h>
 #include <KCMap.h>
 #include <kspread/KCSheet.h>
 #include <KCRegion.h>
@@ -444,7 +444,7 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
                     } else {
                         fr.setResult(Value::empty());
                     }
-                    Formula f = cell.formula();
+                    KCFormula f = cell.formula();
                     QList<FormulaToken> tokens = compileFormula(f.tokens(), sheet);
                     foreach (const FormulaToken& t, tokens) {
                         fr.addToken(t);

@@ -43,7 +43,7 @@ static KCValue RoundNumber(const KCValue& v)
 
 KCValue TestDatabaseFunctions::evaluate(const QString& formula, KCValue& ex)
 {
-    Formula f(m_map->sheet(0));
+    KCFormula f(m_map->sheet(0));
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

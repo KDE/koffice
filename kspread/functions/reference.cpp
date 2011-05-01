@@ -28,7 +28,7 @@
 #include "KCValue.h"
 
 #include "KCCellStorage.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "Function.h"
 #include "FunctionModuleRegistry.h"
 #include "ValueCalc.h"
@@ -472,7 +472,7 @@ KCValue func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
     // get formula to evaluate
     int formulaCol = e->ranges[0].col1;
     int formulaRow = e->ranges[0].row1;
-    Formula formula = s->formula(formulaCol, formulaRow);
+    KCFormula formula = s->formula(formulaCol, formulaRow);
     if (!formula.isValid())
         return KCValue::errorVALUE();
 

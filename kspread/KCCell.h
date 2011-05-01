@@ -60,7 +60,7 @@ class KoOdfLoadingContext;
 class KoShapeLoadingContext;
 
 class Doc;
-class Formula;
+class KCFormula;
 class OdfLoadingContext;
 class OdfSavingContext;
 class KCSheet;
@@ -217,12 +217,12 @@ public:
      * The cell's formula. Usable to analyze the formula's tokens.
      * \return pointer to the cell's formula object
      */
-    Formula formula() const;
+    KCFormula formula() const;
 
     /**
      * Sets \p formula as associated formula of this cell.
      */
-    void setFormula(const Formula& formula);
+    void setFormula(const KCFormula& formula);
 
     /**
      * Returns the link associated with cell. It is empty if this cell

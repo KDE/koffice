@@ -160,16 +160,16 @@
       <!-- /usr/local/src/kde/3.5/koffice/kspread/dialogs/kspread_dlg_preference.cc:712 -->
       <!--         config->writeEntry( "Msg error" ,(int)active); -->
     </entry>
-    <entry key="Formula bar" type="Bool">
+    <entry key="KCFormula bar" type="Bool">
       <default></default>
       <label></label>
       <whatsthis></whatsthis>
       <!-- kspread_view.cc:2107 -->
-      <!--   doc()->setShowFormulaBar(config->readBoolEntry("Formula bar",true)); -->
+      <!--   doc()->setShowFormulaBar(config->readBoolEntry("KCFormula bar",true)); -->
       <!-- /usr/local/src/kde/3.5/koffice/kspread/dialogs/kspread_dlg_preference.cc:233 -->
-      <!-- 	formulaBar=config->readBoolEntry("Formula bar",true); -->
+      <!-- 	formulaBar=config->readBoolEntry("KCFormula bar",true); -->
       <!-- /usr/local/src/kde/3.5/koffice/kspread/dialogs/kspread_dlg_preference.cc:369 -->
-      <!--         config->writeEntry( "Formula bar",active); -->
+      <!--         config->writeEntry( "KCFormula bar",active); -->
     </entry>
     <entry key="Status bar" type="Bool">
       <default></default>

@@ -19,7 +19,7 @@
 */
 
 #include <KCCellStorage.h>
-#include <Formula.h>
+#include <KCFormula.h>
 #include <KCMap.h>
 #include <KCSheet.h>
 
@@ -33,7 +33,7 @@
 KCValue TestInformationFunctions::evaluate(const QString& formula, KCValue& ex)
 {
     KCSheet* sheet = m_map->sheet(0);
-    Formula f(sheet);
+    KCFormula f(sheet);
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

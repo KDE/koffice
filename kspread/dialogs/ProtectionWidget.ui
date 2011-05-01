@@ -126,7 +126,7 @@ Note that you can print it even if the cell is protected</string>
           <item>
            <widget class="QCheckBox" name="m_bHideFormula" >
             <property name="whatsThis" >
-             <string>When this is checked, the cell is still visible. However, its contents do not appear in the Formula bar. Hiding formula is only working for cells that contain formulae so the user cannot view the formula. And the sheet must be protected for this to work.</string>
+             <string>When this is checked, the cell is still visible. However, its contents do not appear in the KCFormula bar. Hiding formula is only working for cells that contain formulae so the user cannot view the formula. And the sheet must be protected for this to work.</string>
             </property>
             <property name="text" >
              <string>&amp;Hide formula</string>

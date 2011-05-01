@@ -189,7 +189,7 @@ void CSVDialog::accept()
     range.setWidth(numCols);
     range.setHeight(numRows);
     // TODO Stefan: Move this damaging into the model.
-    const CellDamage::Changes changes = CellDamage::Appearance | CellDamage::KCValue | CellDamage::Formula;
+    const CellDamage::Changes changes = CellDamage::Appearance | CellDamage::KCValue | CellDamage::KCFormula;
     sheet->map()->addDamage(new CellDamage(sheet, KCRegion(range, sheet), changes));
     m_selection->emitModified();
     KoCsvImportDialog::accept();

@@ -725,7 +725,7 @@ void KCSheet::changeCellTabName(QString const & old_name, QString const & new_na
                 tmp.replace(pos, len, new_name + '!');
             }
             KCCell cell(this, formulaStorage()->col(c), formulaStorage()->row(c));
-            Formula formula(this, cell);
+            KCFormula formula(this, cell);
             formula.setExpression(tmp);
             cell.setFormula(formula);
             cell.makeFormula();
@@ -978,7 +978,7 @@ void KCSheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeR
         }
 
         KCCell cell(this, formulaStorage()->col(c), formulaStorage()->row(c));
-        Formula formula(this, cell);
+        KCFormula formula(this, cell);
         formula.setExpression(newText);
         cell.setFormula(formula);
     }

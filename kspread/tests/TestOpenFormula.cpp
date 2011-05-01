@@ -25,7 +25,7 @@
 
 #include "qtest_kde.h"
 
-#include <Formula.h>
+#include <KCFormula.h>
 #include <FunctionModuleRegistry.h>
 #include <KCRegion.h>
 #include <Util.h>
@@ -36,7 +36,7 @@
 
 KCValue TestOpenFormula::evaluate(const QString& formula, KCValue& ex)
 {
-    Formula f;
+    KCFormula f;
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

@@ -71,7 +71,7 @@ static KCValue RoundNumber(const KCValue& v)
 
 KCValue TestDatetimeFunctions::evaluate(const QString& formula, KCValue& ex)
 {
-    Formula f;
+    KCFormula f;
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

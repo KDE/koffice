@@ -81,7 +81,7 @@
 #include "Canvas.h"
 #include "KCDependencyManager.h"
 #include "Factory.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "Function.h"
 #include "FunctionModuleRegistry.h"
 #include "HeaderFooter.h"

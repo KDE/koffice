@@ -22,7 +22,7 @@
 // KSpread
 #include "KCApplicationSettings.h"
 #include "CellToolBase.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "FormulaEditorHighlighter.h"
 #include "Function.h"
 #include "FunctionRepository.h"
@@ -309,7 +309,7 @@ void CellEditor::triggerFunctionAutoComplete()
     int curPos = textCursor().position();
     QString subtext = toPlainText().left(curPos);
 
-    Formula f;
+    KCFormula f;
     Tokens tokens = f.scan(subtext);
     if (!tokens.valid()) return;
     if (tokens.count() < 1) return;
@@ -349,7 +349,7 @@ void CellEditor::functionAutoComplete(const QString& item)
     int curPos = textCursor.position();
     QString subtext = toPlainText().left(curPos);
 
-    Formula f;
+    KCFormula f;
     Tokens tokens = f.scan(subtext);
     if (!tokens.valid()) return;
     if (tokens.count() < 1) return;

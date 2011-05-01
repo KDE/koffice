@@ -24,7 +24,7 @@
 #include "KCCellStorage.h"
 #include "KCDependencyManager.h"
 #include "DependencyManager_p.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
@@ -40,7 +40,7 @@ void TestDependencies::initTestCase()
 
 void TestDependencies::testCircleRemoval()
 {
-    Formula formula(m_sheet);
+    KCFormula formula(m_sheet);
     formula.setExpression("=A1");
     m_storage->setFormula(1, 1, formula); // A1
 
@@ -55,7 +55,7 @@ void TestDependencies::testCircleRemoval()
     QCOMPARE(consumers.first(), KCCell(m_sheet, 1, 1));
     QCOMPARE(manager->d->providers.value(KCCell(m_sheet, 1, 1)), KCRegion(QRect(1, 1, 1, 1), m_sheet));
 
-    m_storage->setFormula(1, 1, Formula()); // A1
+    m_storage->setFormula(1, 1, KCFormula()); // A1
 
     QApplication::processEvents(); // handle Damages
 
@@ -66,7 +66,7 @@ void TestDependencies::testCircleRemoval()
 
 void TestDependencies::testCircles()
 {
-    Formula formula(m_sheet);
+    KCFormula formula(m_sheet);
     formula.setExpression("=A3");
     m_storage->setFormula(1, 1, formula); // A1
     formula.setExpression("=A1");

@@ -27,7 +27,7 @@
 #include <QVector>
 
 // KSpread
-#include "Formula.h"
+#include "KCFormula.h"
 
 /**
  * \ingroup Commands

@@ -30,7 +30,7 @@
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "ui/RegionSelector.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
@@ -244,7 +244,7 @@ void GoalSeekDialog::startCalc(double _start, double _goal)
     double x = startB + 0.5;
 
     int iterations = d->maxIter;
-    const Formula formula = d->targetCell.formula();
+    const KCFormula formula = d->targetCell.formula();
 
     // while the result is not close enough to zero
     // or while the max number of iterations is not reached...

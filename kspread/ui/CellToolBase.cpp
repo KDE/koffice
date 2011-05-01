@@ -731,7 +731,7 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     addAction("namedAreaDialog", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(namedAreaDialog()));
 
-    action = new KSelectAction(i18n("Formula Selection"), this);
+    action = new KSelectAction(i18n("KCFormula Selection"), this);
     addAction("formulaSelection", action);
     action->setToolTip(i18n("Insert a function"));
     QStringList functionList;

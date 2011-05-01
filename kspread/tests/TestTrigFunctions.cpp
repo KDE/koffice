@@ -53,7 +53,7 @@ static KCValue RoundNumber(const KCValue& v)
 
 KCValue TestTrigFunctions::evaluate(const QString& formula)
 {
-    Formula f;
+    KCFormula f;
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

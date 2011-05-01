@@ -24,7 +24,7 @@
 #include <kpluginfactory.h>
 #include <ktextedit.h>
 #include <kactioncollection.h>
-#include <Formula.h>
+#include <KCFormula.h>
 #include <KCCell.h>
 #include <part/Doc.h>
 #include <KCSheet.h>
@@ -39,7 +39,7 @@ K_PLUGIN_FACTORY(SolverFactory, registerPlugin<Solver>();)
 K_EXPORT_PLUGIN(SolverFactory("kspreadsolver"))
 
 View* s_view = 0;
-Formula* s_formula = 0;
+KCFormula* s_formula = 0;
 double function(const gsl_vector* vector, void *params);
 
 
@@ -102,7 +102,7 @@ void Solver::optimize()
         return;
 
     kDebug() << formulaCell.userInput();
-    s_formula = new Formula(sheet);
+    s_formula = new KCFormula(sheet);
     if (d->dialog->minimizeButton->isChecked()) {
         s_formula->setExpression(formulaCell.userInput());
     } else if (d->dialog->maximizeButton->isChecked()) {

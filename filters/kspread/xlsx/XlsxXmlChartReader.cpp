@@ -2856,7 +2856,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_explosion()
 
  Attributes:
   - extLst (Chart Extensibility) §21.2.2.64
-  - [Done]f (Formula) §21.2.2.65
+  - [Done]f (KCFormula) §21.2.2.65
   - [Done]strCache (String Cache) §21.2.2.199
 */
 KoFilter::ConversionStatus XlsxXmlChartReader::read_strRef()
@@ -2893,7 +2893,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_strRef()
 
  Child elements:
   - extLst (Chart Extensibility) §21.2.2.64
-  - [Done]f (Formula) §21.2.2.65
+  - [Done]f (KCFormula) §21.2.2.65
   - [Done]numCache (KCNumber Cache) §21.2.2.120
 */
 KoFilter::ConversionStatus XlsxXmlChartReader::read_numRef()
@@ -2916,7 +2916,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_numRef()
 
 #undef CURRENT_EL
 #define CURRENT_EL f
-//! f (Formula)
+//! f (KCFormula)
 /*! ECMA-376, 21.2.2.65, p.3789.
 
  Parent elements:

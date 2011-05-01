@@ -27,7 +27,7 @@
 #include "ValueCalc.h"
 #include "ValueConverter.h"
 
-#include <Formula.h>
+#include <KCFormula.h>
 
 #include <kdebug.h>
 #include <KLocale>
@@ -505,7 +505,7 @@ KCValue func_covar_helper(KCValue range1, KCValue range2,
 //
 static double GetValue(const QString& formula, const double x)
 {
-    Formula f;
+    KCFormula f;
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

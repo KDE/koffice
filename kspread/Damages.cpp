@@ -179,7 +179,7 @@ QDebug operator<<(QDebug str, const CellDamage& d)
     str << "CellDamage: " << d.region().name(d.sheet());
     if (d.changes() & CellDamage::Appearance) str << " Appearance";
     if (d.changes() & CellDamage::KCBinding)    str << " KCBinding";
-    if (d.changes() & CellDamage::Formula)    str << " Formula";
+    if (d.changes() & CellDamage::KCFormula)    str << " KCFormula";
     if (d.changes() & CellDamage::KCValue)      str << " KCValue";
     return str;
 }

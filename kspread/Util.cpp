@@ -26,7 +26,7 @@
 
 #include <kdebug.h>
 
-#include "Formula.h"
+#include "KCFormula.h"
 #include "kspread_limits.h"
 #include "Localization.h"
 #include "KCMap.h"
@@ -533,7 +533,7 @@ QString KSpread::Odf::encodeFormula(const QString& expr, const KLocale* locale)
 
     QString result('=');
 
-    Formula formula;
+    KCFormula formula;
     Tokens tokens = formula.scan(expr, locale);
 
     if (!tokens.valid() || tokens.count() == 0)

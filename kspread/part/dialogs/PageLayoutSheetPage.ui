@@ -88,7 +88,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
       <item row="1" column="1">
        <widget class="QCheckBox" name="formulaCheckBox">
         <property name="text">
-         <string>Formula indicator</string>
+         <string>KCFormula indicator</string>
         </property>
        </widget>
       </item>

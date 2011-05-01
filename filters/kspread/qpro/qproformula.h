@@ -24,11 +24,11 @@
 namespace QuattroPro
 {
 
-class Formula : public QpFormula
+class KCFormula : public QpFormula
 {
 public:
-    Formula(QpRecFormulaCell& pCell, QpTableNames& pTable);
-    ~Formula();
+    KCFormula(QpRecFormulaCell& pCell, QpTableNames& pTable);
+    ~KCFormula();
 };
 
 }

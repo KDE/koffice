@@ -20,7 +20,7 @@
 #ifndef KSPREAD_FORMULA_STORAGE
 #define KSPREAD_FORMULA_STORAGE
 
-#include "Formula.h"
+#include "KCFormula.h"
 #include "kspread_limits.h"
 #include "PointStorage.h"
 
@@ -29,11 +29,11 @@
  * \ingroup KCValue
  * Stores formulas.
  */
-class FormulaStorage : public PointStorage<Formula>
+class FormulaStorage : public PointStorage<KCFormula>
 {
 public:
-    FormulaStorage& operator=(const PointStorage<Formula>& o) {
-        PointStorage<Formula>::operator=(o);
+    FormulaStorage& operator=(const PointStorage<KCFormula>& o) {
+        PointStorage<KCFormula>::operator=(o);
         return *this;
     }
 };

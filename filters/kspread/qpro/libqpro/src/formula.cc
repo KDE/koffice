@@ -379,7 +379,7 @@ QpFormula::formula()
 
     cStack.join(2, "");
 
-    QP_DEBUG("Formula = " << cStack.top() << endl);
+    QP_DEBUG("KCFormula = " << cStack.top() << endl);
     return strcpy(new char[strlen(cStack.top())+1], cStack.top());
 }
 

@@ -40,7 +40,7 @@ class KCCell;
 class CommentStorage;
 class Conditions;
 class KCConditionsStorage;
-class Formula;
+class KCFormula;
 class FormulaStorage;
 class FusionStorage;
 class LinkStorage;
@@ -143,8 +143,8 @@ public:
     /**
      * \return the formula associated with the KCCell at \p column , \p row .
      */
-    Formula formula(int column, int row) const;
-    void setFormula(int column, int row, const Formula& formula);
+    KCFormula formula(int column, int row) const;
+    void setFormula(int column, int row, const KCFormula& formula);
 
     /**
      * \return the hyperlink associated with the KCCell at \p column , \p row .

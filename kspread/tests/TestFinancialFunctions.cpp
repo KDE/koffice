@@ -39,7 +39,7 @@ static KCValue TestDouble(const QString& formula, const KCValue& v2, int accurac
 {
     double epsilon = DBL_EPSILON * pow(10.0, (double)(accuracy));
 
-    Formula f;
+    KCFormula f;
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');

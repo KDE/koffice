@@ -25,7 +25,7 @@
 #include <float.h>
 
 #include "KCCell.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
@@ -196,7 +196,7 @@ bool Conditions::isTrueFormula(const KCCell &cell, const QString &formula, const
 {
     KCMap* const map = cell.sheet()->map();
     ValueCalc *const calc = map->calc();
-    Formula f(cell.sheet(), cell);
+    KCFormula f(cell.sheet(), cell);
     f.setExpression('=' + formula);
     KCRegion r(baseCellAddress, map, cell.sheet());
     if (r.isValid() && r.isSingular()) {

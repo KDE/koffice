@@ -28,7 +28,7 @@
 
 #include "KCCell.h"
 #include "KCCellStorage.h"
-#include "Formula.h"
+#include "KCFormula.h"
 #include "FormulaStorage.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
@@ -112,7 +112,7 @@ void KCDependencyManager::regionChanged(const KCRegion& region)
                 } else {
                     cell = sheet->cellStorage()->nextInRow(col, row);
                 }
-                const Formula formula = cell.formula();
+                const KCFormula formula = cell.formula();
 
                 // remove it and all its consumers from the reference depth list
                 d->removeDepths(cell);
@@ -258,7 +258,7 @@ void KCDependencyManager::updateFormula(const KCCell& cell, const KCRegion::Elem
     if (!cell.isFormula())
         return;
 
-    const Formula formula = cell.formula();
+    const KCFormula formula = cell.formula();
 
     // Broken formula -> meaningless dependencies
     if (!formula.isValid())
@@ -381,7 +381,7 @@ void KCDependencyManager::Private::removeDepths(const KCCell& cell)
         removeDepths(consumers[i]);
 }
 
-void KCDependencyManager::Private::generateDependencies(const KCCell& cell, const Formula& formula)
+void KCDependencyManager::Private::generateDependencies(const KCCell& cell, const KCFormula& formula)
 {
     //new dependencies only need to be generated if the cell contains a formula
 //     if (cell.isNull())
@@ -411,7 +411,7 @@ void KCDependencyManager::Private::generateDepths(const KCRegion& region)
 
         for (int row = range.top(); row <= bottom; ++row) {
             int col = 0;
-            Formula formula = sheet->formulaStorage()->firstInRow(row, &col);
+            KCFormula formula = sheet->formulaStorage()->firstInRow(row, &col);
             if (col > 0 && col < range.left())
                 formula = sheet->formulaStorage()->nextInRow(col, row, &col);
             while (col != 0 && col <= range.right()) {
@@ -527,7 +527,7 @@ int KCDependencyManager::Private::computeDepth(KCCell cell) const
     return depth;
 }
 
-void KCDependencyManager::Private::computeDependencies(const KCCell& cell, const Formula& formula)
+void KCDependencyManager::Private::computeDependencies(const KCCell& cell, const KCFormula& formula)
 {
     // Broken formula -> meaningless dependencies
     if (!formula.isValid())
@@ -570,7 +570,7 @@ void KCDependencyManager::Private::computeDependencies(const KCCell& cell, const
                         if ((i > 0 && tokens[i-1].isOperator()) || (i < tokens.count()-1 && tokens[i+1].isOperator())) {
                             // TODO: this check is not quite correct, to really properly determine if the entire range is referenced
                             // or just a single cell we would need to actually have the compile formula, not just the tokenized one
-                            // basically this is the same logic as Formula::Private::valueOrElement
+                            // basically this is the same logic as KCFormula::Private::valueOrElement
 
                             KCRegion realRegion = region.intersectedWithRow(cell.row());
                             if (!realRegion.isEmpty()) {

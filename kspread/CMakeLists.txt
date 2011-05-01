@@ -205,7 +205,7 @@ set (kspreadodf_LIB_SRCS
     KCDependencyManager.cpp
     KCDocBase.cpp
     KCFormat.cpp
-    Formula.cpp
+    KCFormula.cpp
     GenValidationStyle.cpp
     HeaderFooter.cpp
     Localization.cpp
@@ -238,7 +238,7 @@ set (kspreadodf_LIB_SRCS
     database/DatabaseManager.cpp
     database/Filter.cpp
 
-    # TODO: move the formula evaluation out of Formula.cpp so these files can move out of libkspreadodf
+    # TODO: move the formula evaluation out of KCFormula.cpp so these files can move out of libkspreadodf
     Function.cpp
     FunctionDescription.cpp
     FunctionModule.cpp
