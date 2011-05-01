@@ -110,7 +110,7 @@ private slots:
      */
     void slotChangeText(const QString& text);
     /**
-     * Connected to @ref View to get notified if the selection in the
+     * Connected to @ref KCView to get notified if the selection in the
      * sheet changes.
      */
     void slotSelectionChanged();

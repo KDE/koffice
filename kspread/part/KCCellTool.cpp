@@ -68,7 +68,7 @@
 #include "KCSheet.h"
 #include "KCStyleManager.h"
 #include "Util.h"
-#include "View.h"
+#include "KCView.h"
 
 #include "commands/AutoFillCommand.h"
 #include "commands/DefinePrintRangeCommand.h"

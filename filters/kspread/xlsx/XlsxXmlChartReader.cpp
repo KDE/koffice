@@ -411,7 +411,7 @@ XlsxXmlChartReader::~XlsxXmlChartReader()
   - showDLblsOverMax (Show Data Labels over Maximum) §21.2.2.180
   - sideWall (Side Wall) §21.2.2.191
   - [Done]title (Title) §21.2.2.210
-  - view3D (View In 3D) §21.2.2.228
+  - view3D (KCView In 3D) §21.2.2.228
 */
 KoFilter::ConversionStatus XlsxXmlChartReader::read(MSOOXML::MsooXmlReaderContext* context)
 {

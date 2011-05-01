@@ -59,7 +59,7 @@ class KoXmlWriter;
 
 class KCSheet;
 class KCDoc;
-class View;
+class KCView;
 class KCMap;
 class KCRegion;
 class UndoAction;

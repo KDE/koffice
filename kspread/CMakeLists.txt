@@ -133,7 +133,7 @@ SET (part_DIR_SRCS
     part/KCPrintJob.cpp
     part/KCToolRegistry.cpp
     part/KCTabBar.cpp
-    part/View.cpp
+    part/KCView.cpp
     part/commands/DefinePrintRangeCommand.cpp
     part/commands/PageLayoutCommand.cpp
     part/dialogs/PageLayoutDialog.cpp

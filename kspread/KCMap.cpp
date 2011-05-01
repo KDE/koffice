@@ -393,7 +393,7 @@ void KCMap::loadOdfSettings(KoOasisSettings &settings)
     kDebug() << " loadOdfSettings( KoOasisSettings &settings ) activeSheet :" << activeSheet;
 
     if (!activeSheet.isEmpty()) {
-        // Used by View's constructor
+        // Used by KCView's constructor
         loadingInfo()->setInitialActiveSheet(findSheet(activeSheet));
     }
 }
@@ -683,7 +683,7 @@ bool KCMap::loadXML(const KoXmlElement& mymap)
     loadXmlProtection(mymap);
 
     if (!activeSheet.isEmpty()) {
-        // Used by View's constructor
+        // Used by KCView's constructor
         loadingInfo()->setInitialActiveSheet(findSheet(activeSheet));
     }
 

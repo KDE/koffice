@@ -29,7 +29,7 @@
 #include <part/KCDoc.h>
 #include <KCSheet.h>
 #include <KCValue.h>
-#include <part/View.h>
+#include <part/KCView.h>
 #include <KCRegion.h>
 
 #include "SolverDialog.h"
@@ -38,7 +38,7 @@
 K_PLUGIN_FACTORY(SolverFactory, registerPlugin<Solver>();)
 K_EXPORT_PLUGIN(SolverFactory("kspreadsolver"))
 
-View* s_view = 0;
+KCView* s_view = 0;
 KCFormula* s_formula = 0;
 double function(const gsl_vector* vector, void *params);
 
@@ -47,7 +47,7 @@ class Solver::Private
 {
 public:
     SolverDialog* dialog;
-    View* view;
+    KCView* view;
 };
 
 Solver::Solver(QObject* parent, const QVariantList& args)
@@ -57,9 +57,9 @@ Solver::Solver(QObject* parent, const QVariantList& args)
     Q_UNUSED(args)
 
     d->dialog = 0;
-    d->view = qobject_cast<View*>(parent);
+    d->view = qobject_cast<KCView*>(parent);
     if (!d->view) {
-        kError() << "Solver: Parent object is not a View! Quitting." << endl;
+        kError() << "Solver: Parent object is not a KCView! Quitting." << endl;
         return;
     }
 

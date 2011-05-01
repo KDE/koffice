@@ -22,7 +22,7 @@
 
 #include <KoPrintingDialog.h>
 
-class View;
+class KCView;
 class SheetSelectPage;
 
 /**
@@ -31,7 +31,7 @@ class SheetSelectPage;
 class KCPrintJob : public KoPrintingDialog
 {
 public:
-    KCPrintJob(View *view);
+    KCPrintJob(KCView *view);
     virtual ~KCPrintJob();
 
     virtual int documentFirstPage() const;

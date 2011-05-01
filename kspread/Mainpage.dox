@@ -10,7 +10,7 @@
  * \li KSpread::KCDoc The KPart used in KSpread itself and when embedded in non-KOffice applications.
  * \li KSpread::KCMap The actual spreadsheet document consisting of at least one sheet.
  * \li KSpread::KCSheet A sheet consists of several cells.
- * \li KSpread::View This class displays the KPart document.
+ * \li KSpread::KCView This class displays the KPart document.
  *
  * \section plugins Plugins
  * \li \ref KSpreadScripting KSpread Scripting Plugin that offers flexible access

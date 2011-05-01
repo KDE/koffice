@@ -29,7 +29,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-#include <part/View.h>
+#include <part/KCView.h>
 #include <part/KCDoc.h>
 #include <KCMap.h>
 #include <KCSheet.h>
@@ -89,7 +89,7 @@ void ScriptingSheetsListView::initialize()
     QStandardItemModel* model = static_cast< QStandardItemModel* >(m_view->model());
     model->setHorizontalHeaderLabels(headers);
     KCDoc* doc = m_module->kspreadDoc();
-    View* view = m_module->kspreadView();
+    KCView* view = m_module->kspreadView();
     KCSheet* activeSheet = view ? view->activeSheet() : 0;
     if (doc && doc->map()) {
         foreach(KCSheet* sheet, doc->map()->sheetList()) {

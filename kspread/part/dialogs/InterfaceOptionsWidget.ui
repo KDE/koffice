@@ -219,7 +219,7 @@ Note that you can overwrite the unit for the current sheet using the KCFormat -&
       <item row="1" column="1">
        <widget class="KColorCombo" name="m_pageBorderColor">
         <property name="whatsThis">
-         <string>When the View -&gt;Show Page Borders menu item is checked, the page borders are displayed. Click here to choose another color for the borders than the default red.</string>
+         <string>When the KCView -&gt;Show Page Borders menu item is checked, the page borders are displayed. Click here to choose another color for the borders than the default red.</string>
         </property>
         <item>
          <property name="text">

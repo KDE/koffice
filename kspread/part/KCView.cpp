@@ -27,7 +27,7 @@
 */
 
 // Local
-#include "View.h"
+#include "KCView.h"
 #include "KCTabBar.h"
 
 // standard C/C++ includes
@@ -163,10 +163,10 @@
 
 class ViewActions;
 
-class View::Private
+class KCView::Private
 {
 public:
-    View* view;
+    KCView* view;
     KCDoc* doc;
 
     // the active sheet, may be 0
@@ -270,7 +270,7 @@ public:
 };
 
 
-void View::Private::initActions()
+void KCView::Private::initActions()
 {
     actions = new ViewActions;
 
@@ -512,7 +512,7 @@ void View::Private::initActions()
     }
 }
 
-void View::Private::adjustActions(bool mode)
+void KCView::Private::adjustActions(bool mode)
 {
     actions->recalcWorkbook->setEnabled(mode);
     actions->recalcWorksheet->setEnabled(mode);
@@ -546,15 +546,15 @@ void View::Private::adjustActions(bool mode)
 
 /*****************************************************************************
  *
- * View
+ * KCView
  *
  *****************************************************************************/
 
-View::View(QWidget *_parent, KCDoc *_doc)
+KCView::KCView(QWidget *_parent, KCDoc *_doc)
         : KoView(_doc, _parent)
         , d(new Private)
 {
-    KCElapsedTime et("View constructor");
+    KCElapsedTime et("KCView constructor");
 
     d->view = this;
     d->doc = _doc;
@@ -574,7 +574,7 @@ View::View(QWidget *_parent, KCDoc *_doc)
 
     d->initActions();
 
-    // Connect updateView() signal to View::update() in order to repaint its
+    // Connect updateView() signal to KCView::update() in order to repaint its
     // child widgets: the column/row headers and the select all button.
     // Connect to KCCanvas::update() explicitly as it lives in the viewport
     // of the KoCanvasController.
@@ -599,8 +599,8 @@ View::View(QWidget *_parent, KCDoc *_doc)
 
     // Delay the setting of the initial position, because we need to have
     // a sensible widget size, which is not always the case from the beginning
-    // of the View's lifetime.
-    // Therefore, initialPosition(), the last operation in the "View loading"
+    // of the KCView's lifetime.
+    // Therefore, initialPosition(), the last operation in the "KCView loading"
     // process, is called from resizeEvent(). The loading flag will be unset
     // at the end of initialPosition().
 
@@ -608,7 +608,7 @@ View::View(QWidget *_parent, KCDoc *_doc)
     d->canvas->setFocus();
 }
 
-View::~View()
+KCView::~KCView()
 {
     if (doc()->isReadWrite())   // make sure we're not embedded in Konq
         selection()->emitCloseEditor(true); // save changes
@@ -645,13 +645,13 @@ View::~View()
     KoToolManager::instance()->removeCanvasController(d->canvasController);
     // NOTE Stefan: Delete the KCCanvas explicitly, even if it has this view as
     //              parent. Otherwise, it leads to crashes, because it tries to
-    //              access this View in some events (Bug #126492).
+    //              access this KCView in some events (Bug #126492).
     //              The KoCanvasController takes ownership of the KCCanvas and does the deletion.
     delete d->canvasController;
     delete d;
 }
 
-KCDoc* View::doc() const
+KCDoc* KCView::doc() const
 {
     return d->doc;
 }
@@ -665,7 +665,7 @@ KCDoc* View::doc() const
  * widgets might depend on it.
  */
 
-void View::initView()
+void KCView::initView()
 {
     d->viewLayout = new QGridLayout(this);
     d->viewLayout->setMargin(0);
@@ -807,70 +807,70 @@ void View::initView()
             this, SLOT(shapeSelectionChanged()));
 }
 
-KCCanvas* View::canvasWidget() const
+KCCanvas* KCView::canvasWidget() const
 {
     return d->canvas;
 }
 
-KoZoomController *View::zoomController() const
+KoZoomController *KCView::zoomController() const
 {
     return d->zoomController;
 }
 
-KoCanvasController* View::canvasController() const
+KoCanvasController* KCView::canvasController() const
 {
     return d->canvasController;
 }
 
-KCColumnHeader* View::columnHeader()const
+KCColumnHeader* KCView::columnHeader()const
 {
     return d->columnHeader;
 }
 
-KCRowHeader* View::rowHeader()const
+KCRowHeader* KCView::rowHeader()const
 {
     return d->rowHeader;
 }
 
-QScrollBar* View::horzScrollBar()const
+QScrollBar* KCView::horzScrollBar()const
 {
     return d->horzScrollBar;
 }
 
-QScrollBar* View::vertScrollBar()const
+QScrollBar* KCView::vertScrollBar()const
 {
     return d->vertScrollBar;
 }
 
-KCTabBar* View::tabBar() const
+KCTabBar* KCView::tabBar() const
 {
     return d->tabBar;
 }
 
-KoZoomHandler* View::zoomHandler() const
+KoZoomHandler* KCView::zoomHandler() const
 {
     return d->zoomHandler;
 }
 
-bool View::isLoading() const
+bool KCView::isLoading() const
 {
     return d->loading;
 }
 
-Selection* View::selection() const
+Selection* KCView::selection() const
 {
     return d->selection;
 }
 
-KCSheet* View::activeSheet() const
+KCSheet* KCView::activeSheet() const
 {
     return d->activeSheet;
 }
 
-SheetView* View::sheetView(const KCSheet* sheet) const
+SheetView* KCView::sheetView(const KCSheet* sheet) const
 {
     if (!d->sheetViews.contains(sheet)) {
-        kDebug(36004) << "View: Creating SheetView for" << sheet->sheetName();
+        kDebug(36004) << "KCView: Creating SheetView for" << sheet->sheetName();
         d->sheetViews.insert(sheet, new SheetView(sheet));
         d->sheetViews[ sheet ]->setViewConverter(zoomHandler());
         connect(d->sheetViews[ sheet ], SIGNAL(visibleSizeChanged(const QSizeF&)),
@@ -883,7 +883,7 @@ SheetView* View::sheetView(const KCSheet* sheet) const
     return d->sheetViews[ sheet ];
 }
 
-void View::refreshSheetViews()
+void KCView::refreshSheetViews()
 {
     const QList<SheetView*> sheetViews = d->sheetViews.values();
     for (int i = 0; i < sheetViews.count(); ++i) {
@@ -901,18 +901,18 @@ void View::refreshSheetViews()
         sheets[i]->cellStorage()->invalidateStyleCache();
 }
 
-void View::refreshSelection(const KCRegion& region)
+void KCView::refreshSelection(const KCRegion& region)
 {
     doc()->map()->addDamage(new KCCellDamage(activeSheet(), region, KCCellDamage::Appearance));
 }
 
-void View::aboutToModify(const KCRegion& region)
+void KCView::aboutToModify(const KCRegion& region)
 {
     Q_UNUSED(region);
     selection()->emitCloseEditor(true); // save changes
 }
 
-void View::initConfig()
+void KCView::initConfig()
 {
     KSharedConfigPtr config = KCFactory::global().config();
     const KConfigGroup parameterGroup = config->group("Parameters");
@@ -948,13 +948,13 @@ void View::initConfig()
     calcStatusBarOp();
 }
 
-void View::changeNbOfRecentFiles(int _nb)
+void KCView::changeNbOfRecentFiles(int _nb)
 {
     if (shell())
         shell()->setMaxRecentItems(_nb);
 }
 
-void View::initCalcMenu()
+void KCView::initCalcMenu()
 {
     switch (doc()->map()->settings()->getTypeOfCalc()) {
     case KSpread::SumOfNumber:
@@ -986,19 +986,19 @@ void View::initCalcMenu()
 }
 
 
-void View::recalcWorkBook()
+void KCView::recalcWorkBook()
 {
     doc()->map()->recalcManager()->recalcMap();
 }
 
-void View::recalcWorkSheet()
+void KCView::recalcWorkSheet()
 {
     if (!activeSheet())
         return;
     doc()->map()->recalcManager()->recalcSheet(activeSheet());
 }
 
-void View::shapeSelectionChanged()
+void KCView::shapeSelectionChanged()
 {
     const KoSelection* selection = d->canvas->shapeManager()->selection();
     const QList<KoShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
@@ -1034,12 +1034,12 @@ void View::shapeSelectionChanged()
 }
 
 
-void View::editDeleteSelection()
+void KCView::editDeleteSelection()
 {
     d->canvas->toolProxy()->deleteSelection();
 }
 
-void View::initialPosition()
+void KCView::initialPosition()
 {
     // Loading completed, pick initial worksheet
     foreach(KCSheet* sheet, doc()->map()->sheetList()) {
@@ -1095,9 +1095,9 @@ void View::initialPosition()
     QTimer::singleShot(50, this, SLOT(finishLoading()));
 }
 
-void View::finishLoading()
+void KCView::finishLoading()
 {
-    // finish the "View Loading" process
+    // finish the "KCView Loading" process
     d->loading = false;
     doc()->map()->deleteLoadingInfo();
 
@@ -1108,7 +1108,7 @@ void View::finishLoading()
         KoToolManager::instance()->switchToolRequested("KSpreadCellToolId");
 }
 
-void View::updateReadWrite(bool readwrite)
+void KCView::updateReadWrite(bool readwrite)
 {
     // inform the cell tool
     emit documentReadWriteToggled(readwrite);
@@ -1131,7 +1131,7 @@ void View::updateReadWrite(bool readwrite)
     d->tabBar->setReadOnly(!doc()->isReadWrite() || doc()->map()->isProtected());
 }
 
-void View::createTemplate()
+void KCView::createTemplate()
 {
     int width = 60;
     int height = 60;
@@ -1154,7 +1154,7 @@ void View::createTemplate()
             "data", "kspread/templates/");
 }
 
-void View::setActiveSheet(KCSheet* sheet, bool updateSheet)
+void KCView::setActiveSheet(KCSheet* sheet, bool updateSheet)
 {
     if (sheet == d->activeSheet)
         return;
@@ -1264,7 +1264,7 @@ void View::setActiveSheet(KCSheet* sheet, bool updateSheet)
     calcStatusBarOp();
 }
 
-void View::changeSheet(const QString& _name)
+void KCView::changeSheet(const QString& _name)
 {
     if (activeSheet()->sheetName() == _name)
         return;
@@ -1278,7 +1278,7 @@ void View::changeSheet(const QString& _name)
     d->mapViewModel->setActiveSheet(t);
 }
 
-void View::moveSheet(unsigned sheet, unsigned target)
+void KCView::moveSheet(unsigned sheet, unsigned target)
 {
     if (doc()->map()->isProtected()) return;
 
@@ -1292,7 +1292,7 @@ void View::moveSheet(unsigned sheet, unsigned target)
     d->tabBar->moveTab(sheet, target);
 }
 
-void View::sheetProperties()
+void KCView::sheetProperties()
 {
     // sanity check, shouldn't happen
     if (doc()->map()->isProtected()) return;
@@ -1362,7 +1362,7 @@ void View::sheetProperties()
     }
 }
 
-void View::insertSheet()
+void KCView::insertSheet()
 {
     if (doc()->map()->isProtected()) {
         KMessageBox::error(0, i18n("You cannot change a protected sheet."));
@@ -1381,7 +1381,7 @@ void View::insertSheet()
     }
 }
 
-void View::duplicateSheet()
+void KCView::duplicateSheet()
 {
     if (doc()->map()->isProtected()) {
         KMessageBox::error(this, i18n("You cannot change a protected sheet."));
@@ -1398,7 +1398,7 @@ void View::duplicateSheet()
     }
 }
 
-void View::hideSheet()
+void KCView::hideSheet()
 {
     if (!d->activeSheet)
         return;
@@ -1420,7 +1420,7 @@ void View::hideSheet()
     d->tabBar->setActiveTab(sn);
 }
 
-void View::showSheet()
+void KCView::showSheet()
 {
     if (!d->activeSheet)
         return;
@@ -1429,7 +1429,7 @@ void View::showSheet()
     dialog.exec();
 }
 
-void View::copyAsText()
+void KCView::copyAsText()
 {
     if (!d->activeSheet)
         return;
@@ -1440,7 +1440,7 @@ void View::copyAsText()
 }
 
 
-void View::setShapeAnchoring(const QString& mode)
+void KCView::setShapeAnchoring(const QString& mode)
 {
     const KoSelection* selection = d->canvas->shapeManager()->selection();
     const QList<KoShape*> shapes = selection->selectedShapes(KoFlake::StrippedSelection);
@@ -1452,7 +1452,7 @@ void View::setShapeAnchoring(const QString& mode)
     }
 }
 
-void View::toggleProtectDoc(bool mode)
+void KCView::toggleProtectDoc(bool mode)
 {
     if (!doc() || !doc()->map())
         return;
@@ -1475,7 +1475,7 @@ void View::toggleProtectDoc(bool mode)
     d->tabBar->setReadOnly(!doc()->isReadWrite() || doc()->map()->isProtected());
 }
 
-void View::toggleProtectSheet(bool mode)
+void KCView::toggleProtectSheet(bool mode)
 {
     if (!d->activeSheet)
         return;
@@ -1505,7 +1505,7 @@ void View::toggleProtectSheet(bool mode)
     emit sheetProtectionToggled(mode);
 }
 
-void View::togglePageBorders(bool mode)
+void KCView::togglePageBorders(bool mode)
 {
     if (!d->activeSheet)
         return;
@@ -1513,7 +1513,7 @@ void View::togglePageBorders(bool mode)
     d->activeSheet->setShowPageBorders(mode);
 }
 
-void View::viewZoom(KoZoomMode::Mode mode, qreal zoom)
+void KCView::viewZoom(KoZoomMode::Mode mode, qreal zoom)
 {
     Q_UNUSED(zoom)
 #ifdef NDEBUG
@@ -1524,33 +1524,33 @@ void View::viewZoom(KoZoomMode::Mode mode, qreal zoom)
     setHeaderMinima();
 }
 
-void View::showColumnHeader(bool enable)
+void KCView::showColumnHeader(bool enable)
 {
     doc()->map()->settings()->setShowColumnHeader(enable);
     d->columnHeader->setVisible(enable);
     d->selectAllButton->setVisible(enable && d->rowHeader->isVisible());
 }
 
-void View::showRowHeader(bool enable)
+void KCView::showRowHeader(bool enable)
 {
     doc()->map()->settings()->setShowRowHeader(enable);
     d->rowHeader->setVisible(enable);
     d->selectAllButton->setVisible(enable && d->columnHeader->isVisible());
 }
 
-void View::showHorizontalScrollBar(bool enable)
+void KCView::showHorizontalScrollBar(bool enable)
 {
     doc()->map()->settings()->setShowHorizontalScrollBar(enable);
     d->horzScrollBar->setVisible(enable);
 }
 
-void View::showVerticalScrollBar(bool enable)
+void KCView::showVerticalScrollBar(bool enable)
 {
     doc()->map()->settings()->setShowVerticalScrollBar(enable);
     d->vertScrollBar->setVisible(enable);
 }
 
-void View::showStatusBar(bool enable)
+void KCView::showStatusBar(bool enable)
 {
     doc()->map()->settings()->setShowStatusBar(enable);
     if (statusBar()) {
@@ -1558,24 +1558,24 @@ void View::showStatusBar(bool enable)
     }
 }
 
-void View::showTabBar(bool enable)
+void KCView::showTabBar(bool enable)
 {
     doc()->map()->settings()->setShowTabBar(enable);
     d->tabBar->setVisible(enable);
 }
 
-void View::optionsNotifications()
+void KCView::optionsNotifications()
 {
     KNotifyConfigWidget::configure(this);
 }
 
-void View::preference()
+void KCView::preference()
 {
     PreferenceDialog dialog(this);
     dialog.exec();
 }
 
-void View::nextSheet()
+void KCView::nextSheet()
 {
     KCSheet * t = doc()->map()->nextSheet(activeSheet());
     if (!t) {
@@ -1588,7 +1588,7 @@ void View::nextSheet()
     d->tabBar->ensureVisible(t->sheetName());
 }
 
-void View::previousSheet()
+void KCView::previousSheet()
 {
     KCSheet * t = doc()->map()->previousSheet(activeSheet());
     if (!t) {
@@ -1601,7 +1601,7 @@ void View::previousSheet()
     d->tabBar->ensureVisible(t->sheetName());
 }
 
-void View::firstSheet()
+void KCView::firstSheet()
 {
     KCSheet *t = doc()->map()->sheet(0);
     if (!t) {
@@ -1614,7 +1614,7 @@ void View::firstSheet()
     d->tabBar->ensureVisible(t->sheetName());
 }
 
-void View::lastSheet()
+void KCView::lastSheet()
 {
     KCSheet *t = doc()->map()->sheet(doc()->map()->count() - 1);
     if (!t) {
@@ -1627,7 +1627,7 @@ void View::lastSheet()
     d->tabBar->ensureVisible(t->sheetName());
 }
 
-void View::keyPressEvent(QKeyEvent *event)
+void KCView::keyPressEvent(QKeyEvent *event)
 {
 #ifndef NDEBUG
     if ((event->modifiers() & Qt::ControlModifier) && (event->modifiers() & Qt::ShiftModifier)) {
@@ -1639,29 +1639,29 @@ void View::keyPressEvent(QKeyEvent *event)
     QWidget::keyPressEvent(event);
 }
 
-int View::leftBorder() const
+int KCView::leftBorder() const
 {
     return (int)(((KCRowHeader*)d->rowHeader)->width());
 }
 
-int View::rightBorder() const
+int KCView::rightBorder() const
 {
     return d->vertScrollBar->width();
 }
 
-int View::topBorder() const
+int KCView::topBorder() const
 {
     return (int)(((KCColumnHeader*)d->columnHeader)->height());
 }
 
-int View::bottomBorder() const
+int KCView::bottomBorder() const
 {
     return d->horzScrollBar->height();
 }
 
-void View::setHeaderMinima()
+void KCView::setHeaderMinima()
 {
-    if (d->loading)   // "View Loading" not finished yet
+    if (d->loading)   // "KCView Loading" not finished yet
         return;
     QFont font(KoGlobal::defaultFont());
     QFontMetricsF fm(font);
@@ -1671,7 +1671,7 @@ void View::setHeaderMinima()
     d->selectAllButton->setMinimumWidth(qRound(zoomHandler()->zoomItX(YBORDER_WIDTH)));
 }
 
-void View::paperLayoutDlg()
+void KCView::paperLayoutDlg()
 {
     selection()->emitCloseEditor(true); // save changes
     KCSheetPrint* print = d->activeSheet->print();
@@ -1695,7 +1695,7 @@ void View::paperLayoutDlg()
     dialog.exec();
 }
 
-void View::resetPrintRange()
+void KCView::resetPrintRange()
 {
     DefinePrintRangeCommand* command = new DefinePrintRangeCommand();
     command->setText(i18n("Reset Print Range"));
@@ -1704,7 +1704,7 @@ void View::resetPrintRange()
     doc()->addCommand(command);
 }
 
-void View::deleteSheet()
+void KCView::deleteSheet()
 {
     if (doc()->map()->count() <= 1 || (doc()->map()->visibleSheets().count() <= 1)) {
         KMessageBox::sorry(this, i18n("You cannot delete the only sheet."), i18n("Remove KCSheet"));
@@ -1723,7 +1723,7 @@ void View::deleteSheet()
 }
 
 
-void View::slotRename()
+void KCView::slotRename()
 {
 
     KCSheet * sheet = activeSheet();
@@ -1765,7 +1765,7 @@ void View::slotRename()
 //
 //------------------------------------------------
 
-void View::slotChangeSelection(const KCRegion& changedRegion)
+void KCView::slotChangeSelection(const KCRegion& changedRegion)
 {
     if (!changedRegion.isValid())
         return;
@@ -1794,14 +1794,14 @@ void View::slotChangeSelection(const KCRegion& changedRegion)
     d->canvas->validateSelection();
 }
 
-void View::slotScrollChoice(const KCRegion& changedRegion)
+void KCView::slotScrollChoice(const KCRegion& changedRegion)
 {
     if (!selection()->referenceSelectionMode() || !changedRegion.isValid()) {
         return;
     }
 }
 
-void View::calcStatusBarOp()
+void KCView::calcStatusBarOp()
 {
     KCSheet * sheet = activeSheet();
     KCValueCalc* calc = doc()->map()->calc();
@@ -1865,7 +1865,7 @@ void View::calcStatusBarOp()
         d->calcLabel->setText(QString(' ') + tmp + ' ');
 }
 
-void View::statusBarClicked(const QPoint&)
+void KCView::statusBarClicked(const QPoint&)
 {
     QPoint mousepos = QCursor::pos();
     if (koDocument()->isReadWrite() && factory())
@@ -1873,7 +1873,7 @@ void View::statusBarClicked(const QPoint&)
             menu->popup(mousepos);
 }
 
-void View::menuCalc(bool)
+void KCView::menuCalc(bool)
 {
     if (d->actions->calcMin->isChecked()) {
         doc()->map()->settings()->setTypeOfCalc(KSpread::Min);
@@ -1894,15 +1894,15 @@ void View::menuCalc(bool)
     calcStatusBarOp();
 }
 
-QWidget* View::canvas() const
+QWidget* KCView::canvas() const
 {
     return d->canvas;
 }
 
-void View::guiActivateEvent(KParts::GUIActivateEvent *ev)
+void KCView::guiActivateEvent(KParts::GUIActivateEvent *ev)
 {
     // We need a width/height > 0 for setting the initial position properly.
-    // This is not always the case from the beginning of the View's lifetime.
+    // This is not always the case from the beginning of the KCView's lifetime.
     if (ev->activated()) {
         initialPosition();
     }
@@ -1917,7 +1917,7 @@ void View::guiActivateEvent(KParts::GUIActivateEvent *ev)
     KoView::guiActivateEvent(ev);
 }
 
-void View::popupTabBarMenu(const QPoint & _point)
+void KCView::popupTabBarMenu(const QPoint & _point)
 {
     if (!koDocument()->isReadWrite() || !factory())
         return;
@@ -1961,13 +1961,13 @@ void View::popupTabBarMenu(const QPoint & _point)
     }
 }
 
-void View::updateBorderButton()
+void KCView::updateBorderButton()
 {
     if (d->activeSheet)
         d->actions->showPageBorders->setChecked(d->activeSheet->isShowPageBorders());
 }
 
-void View::addSheet(KCSheet *sheet)
+void KCView::addSheet(KCSheet *sheet)
 {
     if (!sheet->isHidden()) {
         d->tabBar->addTab(sheet->sheetName());
@@ -1983,7 +1983,7 @@ void View::addSheet(KCSheet *sheet)
             d->mapViewModel, SLOT(removeShape(KCSheet *, KoShape *)));
 }
 
-void View::removeSheet(KCSheet *sheet)
+void KCView::removeSheet(KCSheet *sheet)
 {
     d->tabBar->removeTab(sheet->sheetName());
     setActiveSheet(doc()->map()->sheet(0));
@@ -1996,12 +1996,12 @@ void View::removeSheet(KCSheet *sheet)
     disconnect(sheet, 0, d->mapViewModel, 0);
 }
 
-QColor View::borderColor() const
+QColor KCView::borderColor() const
 {
     return d->canvas->resourceManager()->foregroundColor();
 }
 
-void View::updateShowSheetMenu()
+void KCView::updateShowSheetMenu()
 {
     if (d->activeSheet) {
         if (d->activeSheet->map()->isProtected())
@@ -2011,21 +2011,21 @@ void View::updateShowSheetMenu()
     }
 }
 
-QPoint View::markerFromSheet(KCSheet* sheet) const
+QPoint KCView::markerFromSheet(KCSheet* sheet) const
 {
     QMap<KCSheet*, QPoint>::Iterator it = d->savedMarkers.find(sheet);
     QPoint newMarker = (it == d->savedMarkers.end()) ? QPoint(1, 1) : *it;
     return newMarker;
 }
 
-QPointF View::offsetFromSheet(KCSheet* sheet) const
+QPointF KCView::offsetFromSheet(KCSheet* sheet) const
 {
     QMap<KCSheet*, QPointF>::Iterator it = d->savedOffsets.find(sheet);
     QPointF offset = (it == d->savedOffsets.end()) ? QPointF() : *it;
     return offset;
 }
 
-void View::saveCurrentSheetSelection()
+void KCView::saveCurrentSheetSelection()
 {
     /* save the current selection on this sheet */
     if (d->activeSheet != 0) {
@@ -2041,7 +2041,7 @@ void View::saveCurrentSheetSelection()
     }
 }
 
-void View::handleDamages(const QList<KCDamage*>& damages)
+void KCView::handleDamages(const QList<KCDamage*>& damages)
 {
     QRegion paintRegion;
     enum { Nothing, Everything, Clipped } paintMode = Nothing;
@@ -2120,7 +2120,7 @@ void View::handleDamages(const QList<KCDamage*>& damages)
     }
 }
 
-KoPrintJob * View::createPrintJob()
+KoPrintJob * KCView::createPrintJob()
 {
     if (!activeSheet())
         return 0;
@@ -2129,4 +2129,4 @@ KoPrintJob * View::createPrintJob()
     return new KCPrintJob(this);
 }
 
-#include "View.moc"
+#include "KCView.moc"

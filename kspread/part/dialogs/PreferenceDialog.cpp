@@ -57,7 +57,7 @@
 #include "KCLocalization.h"
 #include "KCMap.h"
 #include "KCSheet.h"
-#include "part/View.h"
+#include "part/KCView.h"
 
 #include "ui_FileOptionsWidget.h"
 #include "ui_InterfaceOptionsWidget.h"
@@ -65,7 +65,7 @@
 class PreferenceDialog::Private
 {
 public:
-    View* view;
+    KCView* view;
     KPageWidgetItem* page2;
     KPageWidgetItem* page3;
     KPageWidgetItem* page4;
@@ -287,7 +287,7 @@ void PreferenceDialog::Private::resetOpenSaveOptions()
 
 
 
-PreferenceDialog::PreferenceDialog(View* view)
+PreferenceDialog::PreferenceDialog(KCView* view)
         : KPageDialog(view)
         , d(new Private)
 {

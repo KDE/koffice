@@ -80,7 +80,7 @@ class KCStyleStorage;
 class KCValidity;
 class KCValidityStorage;
 class KCValueStorage;
-class View;
+class KCView;
 template<typename T> class IntervalMap;
 
 /**
@@ -814,14 +814,14 @@ signals:
     /**
      * \ingroup Embedding
      * Emitted, if a \p shape was added.
-     * \param sheet this sheet (for the View to determine, if it's the active one)
+     * \param sheet this sheet (for the KCView to determine, if it's the active one)
      */
     void shapeAdded(KCSheet *sheet, KoShape *shape);
 
     /**
      * \ingroup Embedding
      * Emitted, if a \p shape was removed.
-     * \param sheet this sheet (for the View to determine, if it's the active one)
+     * \param sheet this sheet (for the KCView to determine, if it's the active one)
      */
     void shapeRemoved(KCSheet *sheet, KoShape *shape);
 

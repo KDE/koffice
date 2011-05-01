@@ -62,7 +62,7 @@
 #include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
-#include "View.h"
+#include "KCView.h"
 
 // commands
 #include "commands/PasteCommand.h"
@@ -80,7 +80,7 @@
  *
  ****************************************************************/
 
-KCCanvas::KCCanvas(View *view)
+KCCanvas::KCCanvas(KCView *view)
         : QWidget(view),
         KoCanvasBase(0),
         m_view(view),
@@ -107,7 +107,7 @@ KCCanvas::~KCCanvas()
     }
 }
 
-View* KCCanvas::view() const
+KCView* KCCanvas::view() const
 {
     return m_view;
 }

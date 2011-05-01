@@ -36,7 +36,7 @@ public:
 
     /**
     * Constructor.
-    * \param The parent QObject. This will be the \a KSpread::View instance
+    * \param The parent QObject. This will be the \a KSpread::KCView instance
     * this KParts plugin got loaded for. Once those view got destroyed the
     * plugin got unloaded. Since KSpread may use multiple views, it's quit
     * possible that multiple instances of this plugin exist the same time.

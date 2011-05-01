@@ -51,7 +51,7 @@
 #include "KCMap.h"
 #include "KCSheetAccessModel.h"
 
-#include "part/View.h" // TODO: get rid of this dependency
+#include "part/KCView.h" // TODO: get rid of this dependency
 
 QList<KCDocBase*> KCDocBase::Private::s_docs;
 int KCDocBase::Private::s_docId = 0;

@@ -52,7 +52,7 @@
 #include <kspread/RowColumnFormat.h>
 #include <kspread/KCValidity.h>
 #include <kspread/KCValueConverter.h>
-#include <kspread/part/View.h>
+#include <kspread/part/KCView.h>
 
 K_PLUGIN_FACTORY(GNUMERICExportFactory, registerPlugin<GNUMERICExport>();)
 K_EXPORT_PLUGIN(GNUMERICExportFactory("kofficefilters"))
@@ -1043,7 +1043,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
 
     QString str;
 
-    View * view = ksdoc->views().isEmpty() ? 0 : static_cast<View*>(ksdoc->views().first());
+    KCView * view = ksdoc->views().isEmpty() ? 0 : static_cast<KCView*>(ksdoc->views().first());
     KCCanvas * canvas = 0L;
     QString activeTableName;
     if (view) {

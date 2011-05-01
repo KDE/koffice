@@ -34,7 +34,7 @@
 #include <kmessagebox.h>
 // KSpread
 #include <part/KCDoc.h>
-#include <part/View.h>
+#include <part/KCView.h>
 // Kross
 #include <kross/core/manager.h>
 

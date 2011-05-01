@@ -5,7 +5,7 @@
   <Separator/>
   <Action name="edit_find"/>
  </Menu>
- <Menu name="view"><text>&amp;View</text>
+ <Menu name="view"><text>&amp;KCView</text>
   <Separator/>
   <Action name="gotoCell"/>
   <Action name="showPageBorders"/>

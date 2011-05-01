@@ -28,7 +28,7 @@
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 #include "KCSheetPrint.h"
-#include "View.h"
+#include "KCView.h"
 
 #include "part/dialogs/SheetSelectPage.h"
 
@@ -51,7 +51,7 @@ typedef QHash<KCSheet *, KCSheetPrint *> PageManagerMap;
 class KCPrintJob::Private
 {
 public:
-    View* view;
+    KCView* view;
     SheetSelectPage* sheetSelectPage;
     PageManagerMap pageManagers;
 
@@ -241,7 +241,7 @@ void KCPrintJob::Private::printHeaderFooter(QPainter &painter, KCSheet *sheet, i
 }
 
 
-KCPrintJob::KCPrintJob(View *view)
+KCPrintJob::KCPrintJob(KCView *view)
         : KoPrintingDialog(view)
         , d(new Private)
 {

@@ -34,7 +34,7 @@ namespace Sonnet
 class ConfigWidget;
 }
 
-class View;
+class KCView;
 
 /**
  * \ingroup UI
@@ -52,7 +52,7 @@ public:
         PluginPage = 16
     };
 
-    explicit PreferenceDialog(View* view);
+    explicit PreferenceDialog(KCView* view);
     ~PreferenceDialog();
 
     void openPage(int flags);

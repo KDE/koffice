@@ -31,7 +31,7 @@
 #include <QString>
 #include <QtDBus/QtDBus>
 #include "kspread_export.h"
-class View;
+class KCView;
 class CellProxy;
 
 /**
@@ -42,7 +42,7 @@ class KSPREAD_EXPORT ViewAdaptor : public QDBusAbstractAdaptor
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.koffice.spreadsheet.view")
 public:
-    explicit ViewAdaptor(View*);
+    explicit ViewAdaptor(KCView*);
     ~ViewAdaptor();
 
 public Q_SLOTS: // METHODS
@@ -248,7 +248,7 @@ Q_SIGNALS:
     void selectionChanged();
 
 private:
-    View* m_view;
+    KCView* m_view;
     CellProxy* m_proxy;
 };
 

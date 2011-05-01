@@ -72,7 +72,7 @@
 #include "kspread_limits.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
-#include "View.h"
+#include "KCView.h"
 
 #include "ui/Selection.h"
 
@@ -85,7 +85,7 @@
  *
  ****************************************************************/
 
-KCRowHeader::KCRowHeader(QWidget *_parent, KCCanvas *_canvas, View *_view)
+KCRowHeader::KCRowHeader(QWidget *_parent, KCCanvas *_canvas, KCView *_view)
         : QWidget(_parent)
 {
     m_pView = _view;
@@ -648,7 +648,7 @@ void KCRowHeader::toolChanged(const QString& toolId)
  *
  ****************************************************************/
 
-KCColumnHeader::KCColumnHeader(QWidget *_parent, KCCanvas *_canvas, View *_view)
+KCColumnHeader::KCColumnHeader(QWidget *_parent, KCCanvas *_canvas, KCView *_view)
         : QWidget(_parent)
 {
     m_pView = _view;

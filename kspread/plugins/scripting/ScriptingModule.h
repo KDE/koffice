@@ -29,7 +29,7 @@
 #include <KoScriptingModule.h>
 
 class KCDoc;
-class View;
+class KCView;
 class ViewAdaptor;
 //class KCSheet;
 class SheetAdaptor;
@@ -56,12 +56,12 @@ public:
     virtual ~ScriptingModule();
 
     /**
-    * \return The \a View instance this module provides access to or
+    * \return The \a KCView instance this module provides access to or
     * NULL if this module just doesn't know anything about a view. This can
     * be for example the case if the KSpread scripting functionality is used
     * without running a KSpread instance.
     */
-    View* kspreadView();
+    KCView* kspreadView();
 
     /**
     * \return The \a KCDoc instance that provides access to a
@@ -91,7 +91,7 @@ public slots:
     * displayed. Such a ViewAdaptor is only available if the script runs
     * embedded in a running KSpread instance. If the script runs for example
     * from within the commandline by using the kross-application there is no
-    * View and therefore no ViewAdaptor and this method returns NULL.
+    * KCView and therefore no ViewAdaptor and this method returns NULL.
     */
     QObject* view();
 

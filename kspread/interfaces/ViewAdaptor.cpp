@@ -32,7 +32,7 @@
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
-#include "part/View.h"
+#include "part/KCView.h"
 #include "part/KCCanvas.h"
 #include "MapAdaptor.h"
 
@@ -50,7 +50,7 @@
  *
  ************************************************/
 
-ViewAdaptor::ViewAdaptor(View* t)
+ViewAdaptor::ViewAdaptor(KCView* t)
         : QDBusAbstractAdaptor(t)
 {
     setAutoRelaySignals(true);

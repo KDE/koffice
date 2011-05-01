@@ -59,13 +59,13 @@ class KCRegion;
 class Selection;
 class SheetView;
 class KCRowHeader;
-class View;
+class KCView;
 class KCTabBar;
 
 /**
- * @class View
- * @brief The View class displays a KSpread document.
- * View is used to display a spreadsheet document and provide
+ * @class KCView
+ * @brief The KCView class displays a KSpread document.
+ * KCView is used to display a spreadsheet document and provide
  * the interface for the user to perform editing and data analysis.
  *
  * A view consists of several parts:
@@ -77,16 +77,16 @@ class KCTabBar;
  *  \li tab bar to select active worksheet
  *  \li status bar to show status messages
  */
-class KSPREAD_EXPORT View : public KoView
+class KSPREAD_EXPORT KCView : public KoView
 {
     Q_OBJECT
 
 public:
     /** Creates a new view displaying \p document and with \p parent as parent. */
-    View(QWidget *parent, KCDoc *document);
+    KCView(QWidget *parent, KCDoc *document);
 
     /** Destroys the view */
-    ~View();
+    ~KCView();
 
     /** \return the document this view displays. */
     KCDoc* doc() const;
@@ -167,9 +167,9 @@ public:
     void saveCurrentSheetSelection();
 
     /**
-     * The state of the 'View loading' process.
+     * The state of the 'KCView loading' process.
      * Useful to suppress the painting of the canvas and setting the initial
-     * scrolling and selection positions, which need a fully built View.
+     * scrolling and selection positions, which need a fully built KCView.
      * \return \c true if the view is not being fully created yet.
      */
     bool isLoading() const;
@@ -366,7 +366,7 @@ private Q_SLOTS:
     void removeSheet(KCSheet* sheet);
 
 private:
-    Q_DISABLE_COPY(View)
+    Q_DISABLE_COPY(KCView)
 
     class Private;
     Private * const d;

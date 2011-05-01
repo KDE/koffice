@@ -95,7 +95,7 @@
 #include "KCSheetPrint.h"
 #include "KCStyleManager.h"
 #include "Util.h"
-#include "View.h"
+#include "KCView.h"
 #include "KCSheetAccessModel.h"
 #include "KCBindingModel.h"
 
@@ -215,7 +215,7 @@ void KCDoc::initConfig()
 
 KoView* KCDoc::createViewInstance(QWidget* parent)
 {
-    return new View(parent, this);
+    return new KCView(parent, this);
 }
 
 bool KCDoc::saveChildren(KoStore* _store)
@@ -241,7 +241,7 @@ QDomDocument KCDoc::saveXML()
        autosave */
     if (!isAutosaving()) {
         foreach(KoView* view, views())
-        static_cast<View *>(view)->selection()->emitCloseEditor(true);
+        static_cast<KCView *>(view)->selection()->emitCloseEditor(true);
     }
 
     QDomDocument doc = KoDocument::createDomDocument("kspread", "spreadsheet", CURRENT_DTD_VERSION);
@@ -272,7 +272,7 @@ QDomDocument KCDoc::saveXML()
     if (!views().isEmpty()) { // no view if embedded document
         // Save visual info for the first view, such as active sheet and active cell
         // It looks like a hack, but reopening a document creates only one view anyway (David)
-        View *const view = static_cast<View*>(views().first());
+        KCView *const view = static_cast<KCView*>(views().first());
         KCCanvas *const canvas = view->canvasWidget();
         e.setAttribute("activeTable",  canvas->activeSheet()->sheetName());
         e.setAttribute("markerColumn", view->selection()->marker().x());
@@ -554,7 +554,7 @@ void KCDoc::updateAllViews()
 void KCDoc::updateBorderButton()
 {
     foreach(KoView* view, views())
-    static_cast<View*>(view)->updateBorderButton();
+    static_cast<KCView*>(view)->updateBorderButton();
 }
 
 void KCDoc::addIgnoreWordAll(const QString & word)
@@ -572,7 +572,7 @@ void KCDoc::addView(KoView *_view)
 {
     KoDocument::addView(_view);
     foreach(KoView* view, views())
-    static_cast<View*>(view)->selection()->emitCloseEditor(true);
+    static_cast<KCView*>(view)->selection()->emitCloseEditor(true);
 }
 
 void KCDoc::loadConfigFromFile()
@@ -601,7 +601,7 @@ void KCDoc::saveOdfViewSettings(KoXmlWriter& settingsWriter)
     if (!views().isEmpty()) { // no view if embedded document
         // Save visual info for the first view, such as active sheet and active cell
         // It looks like a hack, but reopening a document creates only one view anyway (David)
-        View *const view = static_cast<View*>(views().first());
+        KCView *const view = static_cast<KCView*>(views().first());
         // save current sheet selection before to save marker, otherwise current pos is not saved
         view->saveCurrentSheetSelection();
         //<config:config-item config:name="ActiveTable" config:type="string">Feuille1</config:config-item>
@@ -614,7 +614,7 @@ void KCDoc::saveOdfViewSettings(KoXmlWriter& settingsWriter)
 void KCDoc::saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter &settingsWriter)
 {
     if (!views().isEmpty()) {
-        View *const view = static_cast<View*>(views().first());
+        KCView *const view = static_cast<KCView*>(views().first());
         QPoint marker = view->markerFromSheet(sheet);
         QPointF offset = view->offsetFromSheet(sheet);
         settingsWriter.addConfigItem("CursorPositionX", marker.x() - 1);
@@ -630,7 +630,7 @@ bool KCDoc::saveOdfHelper(SavingContext &documentContext, SaveFlag saveFlag, QSt
        autosave */
     if (!isAutosaving()) {
         foreach(KoView* view, views())
-            static_cast<View *>(view)->selection()->emitCloseEditor(true);
+            static_cast<KCView *>(view)->selection()->emitCloseEditor(true);
     }
 
     return KCDocBase::saveOdfHelper(documentContext, saveFlag, plainText);

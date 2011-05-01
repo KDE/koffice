@@ -56,7 +56,7 @@
 #include <kspread/KCStyle.h>
 #include <kspread/KCStyleManager.h>
 #include <kspread/Util.h>
-#include <kspread/part/View.h>
+#include <kspread/part/KCView.h>
 
 using namespace KSpread;
 
@@ -280,7 +280,7 @@ bool OpenCalcExport::exportSettings(KoStore * store, const KCDoc * ksdoc)
     attribute.setAttribute("config:name", "ActiveTable");
     attribute.setAttribute("config:type", "string");
 
-    View * view = ksdoc->views().isEmpty() ? 0 : static_cast<View*>(ksdoc->views().first());
+    KCView * view = ksdoc->views().isEmpty() ? 0 : static_cast<KCView*>(ksdoc->views().first());
     QString activeTable;
     if (view) { // no view if embedded document
         KCCanvas * canvas = view->canvasWidget();

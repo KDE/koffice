@@ -29,7 +29,7 @@ class KoCanvasBase;
 
 class KCCanvas;
 class Selection;
-class View;
+class KCView;
 
 /**
  * The widget above the cells showing the column headers.
@@ -38,7 +38,7 @@ class KCColumnHeader : public QWidget
 {
     Q_OBJECT
 public:
-    KCColumnHeader(QWidget *_parent, KCCanvas *_canvas, View *_view);
+    KCColumnHeader(QWidget *_parent, KCCanvas *_canvas, KCView *_view);
     virtual ~KCColumnHeader();
 
     int markerColumn() const {
@@ -69,7 +69,7 @@ private Q_SLOTS:
 
 private:
     KCCanvas *m_pCanvas;
-    View *m_pView;
+    KCView *m_pView;
 
     /**
      * Flag that inidicates whether the user wants to mark columns.
@@ -129,7 +129,7 @@ class KCRowHeader : public QWidget
 {
     Q_OBJECT
 public:
-    KCRowHeader(QWidget *_parent, KCCanvas *_canvas, View *_view);
+    KCRowHeader(QWidget *_parent, KCCanvas *_canvas, KCView *_view);
     virtual ~KCRowHeader();
 
     int markerRow() const {
@@ -158,7 +158,7 @@ private Q_SLOTS:
 
 private:
     KCCanvas *m_pCanvas;
-    View *m_pView;
+    KCView *m_pView;
 
     bool m_bSelection;
     int m_iSelectionAnchor;

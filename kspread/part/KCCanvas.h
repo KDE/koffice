@@ -55,7 +55,7 @@ class KCDoc;
 class KCSheet;
 class KCRowHeader;
 class Selection;
-class View;
+class KCView;
 
 
 /**
@@ -65,16 +65,16 @@ class KSPREAD_EXPORT KCCanvas : public QWidget, public KoCanvasBase
 {
     friend class KCColumnHeader;
     friend class KCRowHeader;
-    friend class View;
+    friend class KCView;
     friend class KCCellTool;
 
     Q_OBJECT
 
 public:
-    explicit KCCanvas(View* view);
+    explicit KCCanvas(KCView* view);
     ~KCCanvas();
 
-    View* view() const;
+    KCView* view() const;
 
     /// reimplemented method from KoCanvasBase
     virtual QWidget* canvasWidget() {
@@ -201,7 +201,7 @@ private:
 private:
     Q_DISABLE_COPY(KCCanvas)
 
-    View *m_view;
+    KCView *m_view;
     KCDoc *m_doc;
     // Non-visible range top-left from current screen
     // Example: If the first visible column is 'E', then offset stores

@@ -36,7 +36,7 @@
 #include <kspread/KCSheet.h>
 #include <kspread/part/KCDoc.h>
 #include <kspread/KCValue.h>
-#include <kspread/part/View.h>
+#include <kspread/part/KCView.h>
 #include <kspread/ui/Selection.h>
 
 #include <csvexportdialog.h>
@@ -171,7 +171,7 @@ KoFilter::ConversionStatus CSVExport::convert(const QByteArray & from, const QBy
 
     if (expDialog && expDialog->exportSelectionOnly()) {
         kDebug(30501) << "Export as selection mode";
-        View const * const view = ksdoc->views().isEmpty() ? 0 : static_cast<View*>(ksdoc->views().first());
+        KCView const * const view = ksdoc->views().isEmpty() ? 0 : static_cast<KCView*>(ksdoc->views().first());
 
         if (!view) { // no view if embedded document
             delete expDialog;

@@ -32,7 +32,7 @@
 #include <kdebug.h>
 
 #include <part/KCDoc.h>
-#include <part/View.h>
+#include <part/KCView.h>
 #include <interfaces/ViewAdaptor.h>
 #include <KCSheet.h>
 #include <interfaces/SheetAdaptor.h>
@@ -69,15 +69,15 @@ ScriptingModule::~ScriptingModule()
     delete d;
 }
 
-View* ScriptingModule::kspreadView()
+KCView* ScriptingModule::kspreadView()
 {
-    return dynamic_cast<View* >(KoScriptingModule::view());
+    return dynamic_cast<KCView* >(KoScriptingModule::view());
 }
 
 KCDoc* ScriptingModule::kspreadDoc()
 {
     if (! d->doc) {
-        if (View* v = kspreadView())
+        if (KCView* v = kspreadView())
             d->doc = v->doc();
         if (! d->doc)
             d->doc = new KCDoc(0, this);
@@ -97,13 +97,13 @@ QObject* ScriptingModule::map()
 
 QObject* ScriptingModule::view()
 {
-    View* v = kspreadView();
+    KCView* v = kspreadView();
     return v ? v->findChild<ViewAdaptor* >() : 0;
 }
 
 QObject* ScriptingModule::currentSheet()
 {
-    View* v = kspreadView();
+    KCView* v = kspreadView();
     KCSheet* s = v ? v->activeSheet() : 0;
     return s ? s->findChild<SheetAdaptor* >() : 0;
 }

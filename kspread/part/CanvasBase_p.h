@@ -29,7 +29,7 @@ class QLabel;
 class KoShapeManager;
 class KoToolProxy;
 
-class View;
+class KCView;
 
 class CanvasBase::Private
 {
