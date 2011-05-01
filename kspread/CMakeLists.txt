@@ -196,7 +196,7 @@ set (kspreadodf_LIB_SRCS
     Binding.cpp
     BindingManager.cpp
     CalculationSettings.cpp
-    Cell.cpp
+    KCCell.cpp
     CellStorage.cpp
     Cluster.cpp
     Condition.cpp

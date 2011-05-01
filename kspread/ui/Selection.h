@@ -193,7 +193,7 @@ public:
      * right cell. If more than one occurence would fit, the first one is taken.
      * \return the index of the activated range or \c -1, if nothing fits
      */
-    int setActiveElement(const Cell &cell);
+    int setActiveElement(const KCCell &cell);
 
     /**
      * Sets the element, which has @p point as anchor, as active

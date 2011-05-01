@@ -33,7 +33,7 @@
 #include <part/Doc.h>
 #include <Map.h>
 #include <KCSheet.h>
-#include <Cell.h>
+#include <KCCell.h>
 #include <KCRegion.h>
 
 ScriptingSheetsListView::ScriptingSheetsListView(ScriptingModule* module, QWidget* parent)
@@ -82,7 +82,7 @@ void ScriptingSheetsListView::initialize()
     headers << i18n("KCSheet");
     switch (m_editortype) {
     case Disabled: break;
-    case Cell: headers << i18n("Cell"); break;
+    case KCCell: headers << i18n("KCCell"); break;
     case Range: headers << i18n("Range"); break;
     }
 
@@ -136,7 +136,7 @@ void ScriptingSheetsListView::initialize()
                 }
                 if (range.isEmpty() && area.isValid())
                     range = KCRegion(area, sheet).name(sheet);
-                if (m_editortype == Cell) {
+                if (m_editortype == KCCell) {
                     int p = range.indexOf(':');
                     range = p > 0 ? range.left(p) : "A1";
                 }

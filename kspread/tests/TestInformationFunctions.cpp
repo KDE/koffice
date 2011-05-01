@@ -196,8 +196,8 @@ void TestInformationFunctions::testAREAS()
     CHECK_EVAL("AREAS(B3)",          Value(1));     // A reference to a single cell has one area
     CHECK_EVAL("AREAS(B3:C4)",       Value(1));     // A reference to a single range has one area
 // concatenation is not supported yet
-//    CHECK_EVAL( "AREAS(B3:C4~D5:D6)", Value( 2 ) ); // Cell concatenation creates multiple areas
-//    CHECK_EVAL( "AREAS(B3:C4~B3)",    Value( 2 ) ); // Cell concatenation counts, even if the cells are duplicated
+//    CHECK_EVAL( "AREAS(B3:C4~D5:D6)", Value( 2 ) ); // KCCell concatenation creates multiple areas
+//    CHECK_EVAL( "AREAS(B3:C4~B3)",    Value( 2 ) ); // KCCell concatenation counts, even if the cells are duplicated
 }
 
 /*
@@ -356,8 +356,8 @@ void TestInformationFunctions::testISFORMULA()
 {
     CHECK_EVAL( "ISFORMULA(B5)", Value( true  ) ); // Simple formulas that produce Number are still formulas
     CHECK_EVAL( "ISFORMULA(B3)", Value( true  ) ); // Simple formulas that produce Text are still formulas
-    CHECK_EVAL( "ISFORMULA(C5)", Value( false ) ); // Cell constants are not formulas
-    CHECK_EVAL( "ISFORMULA(C7)", Value( false ) ); // Cell constants are not formulas, even if they are dates
+    CHECK_EVAL( "ISFORMULA(C5)", Value( false ) ); // KCCell constants are not formulas
+    CHECK_EVAL( "ISFORMULA(C7)", Value( false ) ); // KCCell constants are not formulas, even if they are dates
     CHECK_EVAL( "ISFORMULA(B9)", Value( true  ) ); // Formulas that return an error are still formulas
 }
 */

@@ -110,7 +110,7 @@ void SubtotalDialog::accept()
     int bottom = range.bottom();
     int top    = range.top();
     left       = range.left();
-    QString oldText = Cell(sheet, mainCol, top).displayText();
+    QString oldText = KCCell(sheet, mainCol, top).displayText();
     QString newText;
     QString result(' ' + i18n("Result"));
     int lastChangedRow = top;
@@ -122,7 +122,7 @@ void SubtotalDialog::accept()
         kDebug() << "Starting in row" << y;
         while (y <= bottom) {
             addRow = true;
-            newText = Cell(sheet, mainCol, y).displayText();
+            newText = KCCell(sheet, mainCol, y).displayText();
 
             if (ignoreEmptyCells && (newText.length() == 0)) {
                 ++y;
@@ -200,14 +200,14 @@ void SubtotalDialog::removeSubtotalLines()
     int l = range.left();
     int t = range.top();
 
-    Cell cell;
+    KCCell cell;
     QString text;
 
     for (int y = range.bottom(); y >= t; --y) {
         kDebug() << "Checking row:" << y;
         bool containsSubtotal = false;
         for (int x = l; x <= r; ++x) {
-            cell = Cell(sheet, x, y);
+            cell = KCCell(sheet, x, y);
             if (!cell.isFormula())
                 continue;
 
@@ -244,19 +244,19 @@ void SubtotalDialog::fillColumnBoxes()
     int r = range.right();
     int row = range.top();
 
-    Cell cell;
+    KCCell cell;
     QListWidgetItem * item;
 
     QString text;
 
     int index = 0;
     for (int i = range.left(); i <= r; ++i) {
-        cell = Cell(sheet, i, row);
+        cell = KCCell(sheet, i, row);
         text = cell.displayText();
 
         //if ( text.length() > 0 )
         {
-            text = i18n("Column '%1' ", Cell::columnName(i));
+            text = i18n("Column '%1' ", KCCell::columnName(i));
         }
 
         d->mainWidget.m_columnBox->insertItem(index++, text);
@@ -303,7 +303,7 @@ bool SubtotalDialog::addSubtotal(int mainCol, int column, int row, int topRow,
 
         range.setHeight(range.height() + 1);
 
-        Cell cell = Cell(sheet, mainCol, row + 1);
+        KCCell cell = KCCell(sheet, mainCol, row + 1);
         cell.parseUserInput(text);
         KCStyle style;
         style.setFontBold(true);
@@ -312,7 +312,7 @@ bool SubtotalDialog::addSubtotal(int mainCol, int column, int row, int topRow,
         cell.setStyle(style);
     }
 
-    QString colName = Cell::columnName(column);
+    QString colName = KCCell::columnName(column);
 
     QString formula("=SUBTOTAL(");
     formula += QString::number(d->mainWidget.m_functionBox->currentIndex() + 1);
@@ -327,7 +327,7 @@ bool SubtotalDialog::addSubtotal(int mainCol, int column, int row, int topRow,
     }
     formula += ')';
 
-    Cell cell = Cell(sheet, column, row + 1);
+    KCCell cell = KCCell(sheet, column, row + 1);
     cell.parseUserInput(formula);
     KCStyle style;
     style.setFontBold(true);

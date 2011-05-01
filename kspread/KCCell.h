@@ -69,11 +69,11 @@ class Value;
 
 /**
  * An accessor to the actual cell data.
- * The Cell object acts as accessor to the actual data stored in the separate
+ * The KCCell object acts as accessor to the actual data stored in the separate
  * storages in CellStorage. It provides methods to alter and retrieve this data
  * and methods related to loading and saving the contents.
  */
-class KSPREAD_EXPORT Cell
+class KSPREAD_EXPORT KCCell
 {
 public:
     /**
@@ -82,29 +82,29 @@ public:
      * \note Accessing the sheet(), column() or row() methods or any related method, that makes use
      * of the former, will fail.
      */
-    Cell();
+    KCCell();
 
     /**
      * Constructor.
-     * Creates a Cell for accessing the data in \p sheet at position \p col , \p row .
+     * Creates a KCCell for accessing the data in \p sheet at position \p col , \p row .
      */
-    Cell(const KCSheet* sheet, int column, int row);
+    KCCell(const KCSheet* sheet, int column, int row);
 
     /**
      * Constructor.
-     * Creates a Cell for accessing the data in \p sheet at position \p pos .
+     * Creates a KCCell for accessing the data in \p sheet at position \p pos .
      */
-    Cell(const KCSheet* sheet, const QPoint& pos);
+    KCCell(const KCSheet* sheet, const QPoint& pos);
 
     /**
      * Copy constructor.
      */
-    Cell(const Cell& other);
+    KCCell(const KCCell& other);
 
     /**
      * Destructor.
      */
-    ~Cell();
+    ~KCCell();
 
     /**
      * \return the sheet this cell belongs to
@@ -239,13 +239,13 @@ public:
     void setLink(const QString& link);
 
     /**
-     * \return the KCStyle associated with this Cell
+     * \return the KCStyle associated with this KCCell
      */
     KCStyle style() const;
 
     /**
      * The effective style takes conditional style attributes into account.
-     * \return the effective KCStyle associated with this Cell
+     * \return the effective KCStyle associated with this KCCell
      */
     KCStyle effectiveStyle() const;
 
@@ -365,24 +365,24 @@ public:
     /**
      * Copies the format from \p cell .
      *
-     * @see copyAll(Cell *cell)
+     * @see copyAll(KCCell *cell)
      */
-    void copyFormat(const Cell& cell);
+    void copyFormat(const KCCell& cell);
 
     /**
      * Copies the content from \p cell .
      *
-     * @see copyAll(Cell *cell)
+     * @see copyAll(KCCell *cell)
      */
-    void copyContent(const Cell& cell);
+    void copyContent(const KCCell& cell);
 
     /**
      * Copies the format and the content from \p cell .
      *
-     * @see copyContent( const Cell& cell )
-     * @see copyFormat( const Cell& cell )
+     * @see copyContent( const KCCell& cell )
+     * @see copyFormat( const KCCell& cell )
      */
-    void copyAll(const Cell& cell);
+    void copyAll(const KCCell& cell);
 
     /**
      * @return the width of this cell as double
@@ -427,7 +427,7 @@ public:
     /**
      * \return the merging cell (might be this cell)
      */
-    Cell masterCell() const;
+    KCCell masterCell() const;
 
     /**
      * Merge a number of cells, i.e. force the cell to occupy other
@@ -548,21 +548,21 @@ public:
     /**
      * Assignment.
      */
-    Cell& operator=(const Cell& other);
+    KCCell& operator=(const KCCell& other);
 
     /**
      * Tests whether this cell's location is less than the \p other 's.
      * (QMap support)
      * \note Does not compare the cell attributes/data.
      */
-    bool operator<(const Cell& other) const;
+    bool operator<(const KCCell& other) const;
 
     /**
      * Tests for equality with \p other 's location only.
      * (QHash support)
      * \note Does not compare the cell attributes/data.
      */
-    bool operator==(const Cell& other) const;
+    bool operator==(const KCCell& other) const;
 
     /**
      * Is null.
@@ -580,7 +580,7 @@ public:
     /**
      * Tests for equality of all cell attributes/data to those in \p other .
      */
-    bool compareData(const Cell& other) const;
+    bool compareData(const KCCell& other) const;
 
 protected:
     /**
@@ -628,21 +628,21 @@ private:
     QString saveOdfCellStyle(KoGenStyle &currentCellStyle, KoGenStyles &mainStyles);
 };
 
-inline uint qHash(const Cell& cell)
+inline uint qHash(const KCCell& cell)
 {
     return (static_cast<uint>(cell.column()) << 16) + static_cast<uint>(cell.row());
 }
 
-Q_DECLARE_TYPEINFO(Cell, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KCCell, Q_MOVABLE_TYPE);
 
 
 /***************************************************************************
   kDebug support
 ****************************************************************************/
 
-inline QDebug operator<<(QDebug str, const Cell& cell)
+inline QDebug operator<<(QDebug str, const KCCell& cell)
 {
-    return str << qPrintable(Cell::columnName(cell.column()) + QString::number(cell.row()));
+    return str << qPrintable(KCCell::columnName(cell.column()) + QString::number(cell.row()));
 }
 
 #endif  // KSPREAD_CELL

@@ -256,7 +256,7 @@ bool AdjustColumnRowManipulator::process(Element* element)
     if (m_adjustColumn) {
         if (element->isRow()) {
             for (int row = range.top(); row <= range.bottom(); ++row) {
-                Cell cell = sheet->cellStorage()->firstInRow(row);
+                KCCell cell = sheet->cellStorage()->firstInRow(row);
                 while (!cell.isNull()) {
                     int col = cell.column();
                     if (!cell.isEmpty() && !cell.isPartOfMerged()) {
@@ -284,7 +284,7 @@ bool AdjustColumnRowManipulator::process(Element* element)
     if (m_adjustRow) {
         if (element->isColumn()) {
             for (int col = range.left(); col <= range.right(); ++col) {
-                Cell cell = sheet->cellStorage()->firstInColumn(col);
+                KCCell cell = sheet->cellStorage()->firstInColumn(col);
                 while (!cell.isNull()) {
                     int row = cell.row();
                     if (!cell.isEmpty() && !cell.isPartOfMerged()) {
@@ -335,7 +335,7 @@ bool AdjustColumnRowManipulator::preProcessing()
             QRect range = element->rect();
             if (element->isColumn()) {
                 for (int col = range.left(); col <= range.right(); ++col) {
-                    Cell cell = m_sheet->cellStorage()->firstInColumn(col);
+                    KCCell cell = m_sheet->cellStorage()->firstInColumn(col);
                     while (!cell.isNull()) {
                         int row = cell.row();
                         if (m_adjustColumn) {
@@ -364,7 +364,7 @@ bool AdjustColumnRowManipulator::preProcessing()
                 }
             } else if (element->isRow()) {
                 for (int row = range.top(); row <= range.bottom(); ++row) {
-                    Cell cell = m_sheet->cellStorage()->firstInRow(row);
+                    KCCell cell = m_sheet->cellStorage()->firstInRow(row);
                     while (!cell.isNull()) {
                         int col = cell.column();
                         if (m_adjustColumn) {
@@ -392,10 +392,10 @@ bool AdjustColumnRowManipulator::preProcessing()
                     }
                 }
             } else {
-                Cell cell;
+                KCCell cell;
                 for (int col = range.left(); col <= range.right(); ++col) {
                     for (int row = range.top(); row <= range.bottom(); ++row) {
-                        cell = Cell(m_sheet,  col, row);
+                        cell = KCCell(m_sheet,  col, row);
                         if (m_adjustColumn) {
                             if (!m_newWidths.contains(col)) {
                                 m_newWidths[col] = -1.0;
@@ -499,7 +499,7 @@ QSizeF AdjustColumnRowManipulator::textSize(const QString& text, const KCStyle& 
     return size;
 }
 
-double AdjustColumnRowManipulator::adjustColumnHelper(const Cell& cell)
+double AdjustColumnRowManipulator::adjustColumnHelper(const KCCell& cell)
 {
     double long_max = 0.0;
     const KCStyle style = cell.effectiveStyle();
@@ -526,7 +526,7 @@ double AdjustColumnRowManipulator::adjustColumnHelper(const Cell& cell)
         return long_max + 4.0;
 }
 
-double AdjustColumnRowManipulator::adjustRowHelper(const Cell& cell)
+double AdjustColumnRowManipulator::adjustRowHelper(const KCCell& cell)
 {
     double long_max = 0.0;
     const KCStyle style = cell.effectiveStyle();

@@ -36,7 +36,7 @@
 #include "ValueConverter.h"
 #include "KCSheet.h"
 #include "KCRegion.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "Formula.h"
 
 #include <KoDocument.h>
@@ -346,7 +346,7 @@ Value func_formula(valVector, ValueCalc *, FuncExtra *e)
 {
     if(e->ranges[0].col1 < 1 || e->ranges[0].row1 < 1)
         return Value::errorVALUE();
-    const Cell c(e->sheet, e->ranges[0].col1, e->ranges[0].row1);
+    const KCCell c(e->sheet, e->ranges[0].col1, e->ranges[0].row1);
     if (c.isNull())
         return Value::errorVALUE();
     if (!c.isFormula())

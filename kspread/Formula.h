@@ -29,7 +29,7 @@
 #include <QPoint>
 
 #include "kspread_export.h"
-#include "Cell.h"
+#include "KCCell.h"
 
 #define KSPREAD_INLINE_ARRAYS
 
@@ -37,7 +37,7 @@ class KLocale;
 
 class KCSheet;
 class Value;
-typedef QHash<Cell, Cell> CellIndirection;
+typedef QHash<KCCell, KCCell> CellIndirection;
 
 /**
  * \ingroup Value
@@ -56,7 +56,7 @@ public:
         Float,       ///< 3.141592, 1e10, 5.9e-7
         String,      ///< "KOffice", "The quick brown fox..."
         Operator,    ///< +, *, /, -
-        Cell,        ///< $A$1, F4, Sheet2!B5, 'Sales Forecast'!Sum
+        KCCell,        ///< $A$1, F4, Sheet2!B5, 'Sales Forecast'!Sum
         Range,       ///< C1:C100
         Identifier,  ///< function name or named area
         Error        ///< error, like #REF!, #VALUE!, ...
@@ -169,7 +169,7 @@ public:
      * Returns true if token is a cell reference token.
      */
     bool isCell() const {
-        return m_type == Cell;
+        return m_type == KCCell;
     }
 
     /**
@@ -303,7 +303,7 @@ public:
     /**
      * Creates a formula. It must be owned by a sheet.
      */
-    Formula(KCSheet *sheet, const Cell& cell);
+    Formula(KCSheet *sheet, const KCCell& cell);
 
     /**
      * Creates a formula. It must be owned by a sheet.
@@ -338,7 +338,7 @@ public:
     /**
      * Returns the cell which owns this formula.
      */
-    const Cell& cell() const;
+    const KCCell& cell() const;
 
     /**
      * Sets the expression for this formula.
@@ -411,7 +411,7 @@ protected:
      * helper function for recursive evaluations; makes sure one cell
      * is not evaluated more than once resulting in infinite loops
      */
-    Value evalRecursive(CellIndirection cellIndirections, QHash<Cell, Value>& values) const;
+    Value evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Value>& values) const;
 
 private:
     class Private;

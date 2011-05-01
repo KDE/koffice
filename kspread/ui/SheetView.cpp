@@ -46,26 +46,26 @@ public:
     QSize accessedCellRange;
 
 public:
-    Cell cellToProcess(int col, int row, QPointF& coordinate, QSet<Cell>& processedMergedCells);
-    CellView cellViewToProcess(Cell& cell, QPointF& coordinate, QSet<Cell>& processedObscuredCells,
+    KCCell cellToProcess(int col, int row, QPointF& coordinate, QSet<KCCell>& processedMergedCells);
+    CellView cellViewToProcess(KCCell& cell, QPointF& coordinate, QSet<KCCell>& processedObscuredCells,
                                SheetView* sheetView);
 };
 
-Cell SheetView::Private::cellToProcess(int col, int row, QPointF& coordinate,
-                                       QSet<Cell>& processedMergedCells)
+KCCell SheetView::Private::cellToProcess(int col, int row, QPointF& coordinate,
+                                       QSet<KCCell>& processedMergedCells)
 {
-    Cell cell(sheet, col, row);
+    KCCell cell(sheet, col, row);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
         // if the rect of visible cells contains this master cell, it was already painted
         if (visibleRect.contains(cell.cellPosition())) {
             coordinate.setY(coordinate.y() + sheet->rowFormat(row)->height());
-            return Cell(); // next row
+            return KCCell(); // next row
         }
         // if the out of bounds master cell was already painted, there's nothing more to do
         if (processedMergedCells.contains(cell)) {
             coordinate.setY(coordinate.y() + sheet->rowFormat(row)->height());
-            return Cell(); // next row
+            return KCCell(); // next row
         }
         processedMergedCells.insert(cell);
         // take the coordinate of the master cell
@@ -77,8 +77,8 @@ Cell SheetView::Private::cellToProcess(int col, int row, QPointF& coordinate,
     return cell;
 }
 
-CellView SheetView::Private::cellViewToProcess(Cell& cell, QPointF& coordinate,
-        QSet<Cell>& processedObscuredCells, SheetView* sheetView)
+CellView SheetView::Private::cellViewToProcess(KCCell& cell, QPointF& coordinate,
+        QSet<KCCell>& processedObscuredCells, SheetView* sheetView)
 {
     const int col = cell.column();
     const int row = cell.row();
@@ -87,13 +87,13 @@ CellView SheetView::Private::cellViewToProcess(Cell& cell, QPointF& coordinate,
         // if the rect of visible cells contains the obscuring cell, it was already painted
         if (visibleRect.contains(cellView.obscuringCell())) {
             coordinate.setY(coordinate.y() + sheet->rowFormat(row)->height());
-            cell = Cell();
+            cell = KCCell();
             return cellView; // next row
         }
-        cell = Cell(sheet, cellView.obscuringCell());
+        cell = KCCell(sheet, cellView.obscuringCell());
         if (processedObscuredCells.contains(cell)) {
             coordinate.setY(coordinate.y() + sheet->rowFormat(row)->height());
-            cell = Cell();
+            cell = KCCell();
             return cellView; // next row
         }
         processedObscuredCells.insert(cell);
@@ -243,8 +243,8 @@ void SheetView::paintCells(QPainter& painter, const QRectF& paintRect, const QPo
     const QPointF startCoordinate(rightToLeft ? paintRect.width() - topLeft.x() : topLeft.x(), topLeft.y());
     QPointF coordinate(startCoordinate);
 // kDebug() << "start coordinate:" << coordinate;
-    QSet<Cell> processedMergedCells;
-    QSet<Cell> processedObscuredCells;
+    QSet<KCCell> processedMergedCells;
+    QSet<KCCell> processedObscuredCells;
     for (int col = d->visibleRect.left(); col <= d->visibleRect.right(); ++col) {
         if (d->sheet->columnFormat(col)->isHiddenOrFiltered())
             continue;
@@ -257,7 +257,7 @@ void SheetView::paintCells(QPainter& painter, const QRectF& paintRect, const QPo
             // save the coordinate
             const QPointF savedCoordinate = coordinate;
             // figure out, if any and which cell has to be painted (may be a master cell)
-            Cell cell = d->cellToProcess(col, row, coordinate, processedMergedCells);
+            KCCell cell = d->cellToProcess(col, row, coordinate, processedMergedCells);
             if (!cell)
                 continue;
             // figure out, which CellView to use (may be one for an obscuring cell)
@@ -289,7 +289,7 @@ void SheetView::paintCells(QPainter& painter, const QRectF& paintRect, const QPo
             // save the coordinate
             const QPointF savedCoordinate = coordinate;
             // figure out, if any and which cell has to be painted (may be a master cell)
-            Cell cell = d->cellToProcess(col, row, coordinate, processedMergedCells);
+            KCCell cell = d->cellToProcess(col, row, coordinate, processedMergedCells);
             if (!cell)
                 continue;
             // figure out, which CellView to use (may be one for an obscuring cell)
@@ -322,7 +322,7 @@ void SheetView::paintCells(QPainter& painter, const QRectF& paintRect, const QPo
             cellView.paintDefaultBorders(painter, paintRect, coordinate,
                                          CellView::LeftBorder | CellView::RightBorder |
                                          CellView::TopBorder | CellView::BottomBorder,
-                                         d->visibleRect, Cell(d->sheet, col, row), this);
+                                         d->visibleRect, KCCell(d->sheet, col, row), this);
             coordinate.setY(coordinate.y() + d->sheet->rowFormat(row)->height());
         }
         coordinate.setY(topLeft.y());
@@ -345,7 +345,7 @@ void SheetView::paintCells(QPainter& painter, const QRectF& paintRect, const QPo
             CellView cellView = this->cellView(col, row);
             cellView.paintCellBorders(paintRect, painter, coordinate,
                                       d->visibleRect,
-                                      Cell(sheet(), col, row), this);
+                                      KCCell(sheet(), col, row), this);
             coordinate.setY(coordinate.y() + d->sheet->rowFormat(row)->height());
         }
         coordinate.setY(topLeft.y());

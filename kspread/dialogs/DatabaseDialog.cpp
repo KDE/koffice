@@ -22,7 +22,7 @@
 // Local
 #include "DatabaseDialog.h"
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "Util.h"
@@ -507,7 +507,7 @@ void DatabaseDialog::accept()
             queryStr += ' ';
     }
 
-    Cell cell;
+    KCCell cell;
     QSqlQuery query(m_dbConnection);
 
     // Check the whole query for SQL that might modify database.
@@ -955,7 +955,7 @@ bool DatabaseDialog::optionsDoNext()
     }
 
     m_sqlQuery->setText(query);
-    m_cell->setText(Cell::name(m_targetRect.left(), m_targetRect.top()));
+    m_cell->setText(KCCell::name(m_targetRect.left(), m_targetRect.top()));
     m_region->setText(KCRegion(m_targetRect).name());
 
     setValid(m_result, true);

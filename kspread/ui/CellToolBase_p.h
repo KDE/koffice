@@ -99,8 +99,8 @@ public:
     } searchInSheets;
 
 public:
-    void updateEditor(const Cell& cell);
-    void updateActions(const Cell& cell);
+    void updateEditor(const KCCell& cell);
+    void updateActions(const KCCell& cell);
     void setProtectedActionsEnabled(bool enable);
 
     void processEnterKey(QKeyEvent *event);

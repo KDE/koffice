@@ -38,7 +38,7 @@
 #include <QPen>
 
 
-//used in Cell::encodeFormula and
+//used in KCCell::encodeFormula and
 //  dialogs/kspread_dlg_paperlayout.cc
 int KSpread::decodeColumnLabelText(const QString &labelText)
 {
@@ -77,7 +77,7 @@ int KSpread::decodeRowLabelText(const QString &labelText)
 
 QString KSpread::encodeColumnLabelText(int column)
 {
-    return Cell::columnName(column);
+    return KCCell::columnName(column);
 }
 
 QDomElement KSpread::NativeFormat::createElement(const QString & tagName, const QFont & font, QDomDocument & doc)
@@ -229,7 +229,7 @@ QString KSpread::Odf::convertRefToBase(const QString & sheet, const QRect & rect
     QString s('$');
     s += sheet;
     s += ".$";
-    s += Cell::columnName(bottomRight.x());
+    s += KCCell::columnName(bottomRight.x());
     s += '$';
     s += QString::number(bottomRight.y());
 
@@ -247,11 +247,11 @@ QString KSpread::Odf::convertRefToRange(const QString & sheet, const QRect & rec
     QString s('$');
     s += sheet;
     s += ".$";
-    s += /*Util::encodeColumnLabelText*/Cell::columnName(topLeft.x());
+    s += /*Util::encodeColumnLabelText*/KCCell::columnName(topLeft.x());
     s += '$';
     s += QString::number(topLeft.y());
     s += ":.$";
-    s += /*Util::encodeColumnLabelText*/Cell::columnName(bottomRight.x());
+    s += /*Util::encodeColumnLabelText*/KCCell::columnName(bottomRight.x());
     s += '$';
     s += QString::number(bottomRight.y());
 
@@ -262,7 +262,7 @@ QString KSpread::Odf::convertRefToRange(const QString & sheet, const QRect & rec
 //used in KCSheet::saveOdf
 QString KSpread::Odf::convertRangeToRef(const QString & sheetName, const QRect & _area)
 {
-    return sheetName + '.' + Cell::name(_area.left(), _area.top()) + ':' + sheetName + '.' + Cell::name(_area.right(), _area.bottom());
+    return sheetName + '.' + KCCell::name(_area.left(), _area.top()) + ':' + sheetName + '.' + KCCell::name(_area.right(), _area.bottom());
 }
 
 QString KSpread::Odf::encodePen(const QPen & pen)
@@ -544,7 +544,7 @@ QString KSpread::Odf::encodeFormula(const QString& expr, const KLocale* locale)
         const Token::Type type = tokens[i].type();
 
         switch (type) {
-        case Token::Cell:
+        case Token::KCCell:
         case Token::Range: {
             result.append('[');
             // FIXME Stefan: Hack to get the apostrophes right. Fix and remove!

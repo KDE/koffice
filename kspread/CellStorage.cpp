@@ -257,7 +257,7 @@ void CellStorage::take(int col, int row)
     if (!d->sheet->map()->isLoading()) {
         // Trigger a recalculation of the consuming cells.
         CellDamage::Changes changes = CellDamage:: Binding | CellDamage::Formula | CellDamage::Value;
-        d->sheet->map()->addDamage(new CellDamage(Cell(d->sheet, col, row), changes));
+        d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, col, row), changes));
 
         d->rowRepeatStorage->setRowRepeat(row, 1);
     }
@@ -265,7 +265,7 @@ void CellStorage::take(int col, int row)
     int prevCol;
     Value v = d->valueStorage->prevInRow(col, row, &prevCol);
     if (!v.isEmpty())
-        d->sheet->map()->addDamage(new CellDamage(Cell(d->sheet, prevCol, row), CellDamage::Appearance));
+        d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, prevCol, row), CellDamage::Appearance));
 
 
     // recording undo?
@@ -385,7 +385,7 @@ void CellStorage::setFormula(int column, int row, const Formula& formula)
     if (formula != old) {
         if (!d->sheet->map()->isLoading()) {
             // trigger an update of the dependencies and a recalculation
-            d->sheet->map()->addDamage(new CellDamage(Cell(d->sheet, column, row), CellDamage::Formula | CellDamage::Value));
+            d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, column, row), CellDamage::Formula | CellDamage::Value));
             d->rowRepeatStorage->setRowRepeat(row, 1);
         }
         // recording undo?
@@ -572,12 +572,12 @@ void CellStorage::setValue(int column, int row, const Value& value)
             // already in a recalculation process.
             if (!d->sheet->map()->recalcManager()->isActive())
                 changes |= CellDamage::Value;
-            d->sheet->map()->addDamage(new CellDamage(Cell(d->sheet, column, row), changes));
+            d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, column, row), changes));
             // Also trigger a relayouting of the first non-empty cell to the left of this one
             int prevCol;
             Value v = d->valueStorage->prevInRow(column, row, &prevCol);
             if (!v.isEmpty())
-                d->sheet->map()->addDamage(new CellDamage(Cell(d->sheet, prevCol, row), CellDamage::Appearance));
+                d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, prevCol, row), CellDamage::Appearance));
             d->rowRepeatStorage->setRowRepeat(row, 1);
         }
         // recording undo?
@@ -625,14 +625,14 @@ void CellStorage::mergeCells(int column, int row, int numXCells, int numYCells)
         d->rowRepeatStorage->setRowRepeat(row, 1);
 }
 
-Cell CellStorage::masterCell(int column, int row) const
+KCCell CellStorage::masterCell(int column, int row) const
 {
     const QPair<QRectF, bool> pair = d->fusionStorage->containedPair(QPoint(column, row));
     if (pair.first.isNull())
-        return Cell(d->sheet, column, row);
+        return KCCell(d->sheet, column, row);
     if (pair.second == false)
-        return Cell(d->sheet, column, row);
-    return Cell(d->sheet, pair.first.toRect().topLeft());
+        return KCCell(d->sheet, column, row);
+    return KCCell(d->sheet, pair.first.toRect().topLeft());
 }
 
 int CellStorage::mergedXCells(int column, int row) const
@@ -657,18 +657,18 @@ int CellStorage::mergedYCells(int column, int row) const
     return pair.first.toRect().height() - 1;
 }
 
-QList<Cell> CellStorage::masterCells(const KCRegion& region) const
+QList<KCCell> CellStorage::masterCells(const KCRegion& region) const
 {
     const QList<QPair<QRectF, bool> > pairs = d->fusionStorage->intersectingPairs(region);
     if (pairs.isEmpty())
-        return QList<Cell>();
-    QList<Cell> masterCells;
+        return QList<KCCell>();
+    QList<KCCell> masterCells;
     for (int i = 0; i < pairs.count(); ++i) {
         if (pairs[i].first.isNull())
             continue;
         if (pairs[i].second == false)
             continue;
-        masterCells.append(Cell(d->sheet, pairs[i].first.toRect().topLeft()));
+        masterCells.append(KCCell(d->sheet, pairs[i].first.toRect().topLeft()));
     }
     return masterCells;
 }
@@ -776,9 +776,9 @@ void CellStorage::insertColumns(int position, int number)
     //              formulas, that will get out of bounds after the operation.
     const KCRegion invalidRegion(QRect(QPoint(position, 1), QPoint(KS_colMax, KS_rowMax)), d->sheet);
     PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
-    Cell cell;
+    KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger an update of the bindings and the named areas.
@@ -819,7 +819,7 @@ void CellStorage::insertColumns(int position, int number)
     // Trigger a dependency update of the cells, which have a formula. (new positions)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
@@ -832,9 +832,9 @@ void CellStorage::removeColumns(int position, int number)
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(position, 1), QPoint(KS_colMax, KS_rowMax)), d->sheet);
     PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
-    Cell cell;
+    KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger an update of the bindings and the named areas.
@@ -876,7 +876,7 @@ void CellStorage::removeColumns(int position, int number)
     // Trigger a dependency update of the cells, which have a formula. (new positions)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
@@ -889,9 +889,9 @@ void CellStorage::insertRows(int position, int number)
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(1, position), QPoint(KS_colMax, KS_rowMax)), d->sheet);
     PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
-    Cell cell;
+    KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger an update of the bindings and the named areas.
@@ -932,7 +932,7 @@ void CellStorage::insertRows(int position, int number)
     // Trigger a dependency update of the cells, which have a formula. (new positions)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
@@ -947,9 +947,9 @@ void CellStorage::removeRows(int position, int number)
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(1, position), QPoint(KS_colMax, KS_rowMax)), d->sheet);
     PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
-    Cell cell;
+    KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger an update of the bindings and the named areas.
@@ -991,7 +991,7 @@ void CellStorage::removeRows(int position, int number)
     // Trigger a dependency update of the cells, which have a formula. (new positions)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
@@ -1006,9 +1006,9 @@ void CellStorage::removeShiftLeft(const QRect& rect)
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom())), d->sheet);
     PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
-    Cell cell;
+    KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger an update of the bindings and the named areas.
@@ -1050,7 +1050,7 @@ void CellStorage::removeShiftLeft(const QRect& rect)
     // Trigger a dependency update of the cells, which have a formula. (new positions)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
@@ -1065,9 +1065,9 @@ void CellStorage::insertShiftRight(const QRect& rect)
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom())), d->sheet);
     PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
-    Cell cell;
+    KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger an update of the bindings and the named areas.
@@ -1108,7 +1108,7 @@ void CellStorage::insertShiftRight(const QRect& rect)
     // Trigger a dependency update of the cells, which have a formula. (new positions)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
@@ -1123,9 +1123,9 @@ void CellStorage::removeShiftUp(const QRect& rect)
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax)), d->sheet);
     PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
-    Cell cell;
+    KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger an update of the bindings and the named areas.
@@ -1167,7 +1167,7 @@ void CellStorage::removeShiftUp(const QRect& rect)
     // Trigger a dependency update of the cells, which have a formula. (new positions)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
@@ -1182,9 +1182,9 @@ void CellStorage::insertShiftDown(const QRect& rect)
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax)), d->sheet);
     PointStorage<Formula> subStorage = d->formulaStorage->subStorage(invalidRegion);
-    Cell cell;
+    KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger an update of the bindings and the named areas.
@@ -1225,7 +1225,7 @@ void CellStorage::insertShiftDown(const QRect& rect)
     // Trigger a dependency update of the cells, which have a formula. (new positions)
     subStorage = d->formulaStorage->subStorage(invalidRegion);
     for (int i = 0; i < subStorage.count(); ++i) {
-        cell = Cell(d->sheet, subStorage.col(i), subStorage.row(i));
+        cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
         d->sheet->map()->addDamage(new CellDamage(cell, CellDamage::Formula));
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
@@ -1235,7 +1235,7 @@ void CellStorage::insertShiftDown(const QRect& rect)
     d->rowRepeatStorage->insertShiftDown(rect);
 }
 
-Cell CellStorage::firstInColumn(int col, Visiting visiting) const
+KCCell CellStorage::firstInColumn(int col, Visiting visiting) const
 {
     Q_UNUSED(visiting);
 
@@ -1247,11 +1247,11 @@ Cell CellStorage::firstInColumn(int col, Visiting visiting) const
     if (tmpRow)
         newRow = newRow ? qMin(newRow, tmpRow) : tmpRow;
     if (!newRow)
-        return Cell();
-    return Cell(d->sheet, col, newRow);
+        return KCCell();
+    return KCCell(d->sheet, col, newRow);
 }
 
-Cell CellStorage::firstInRow(int row, Visiting visiting) const
+KCCell CellStorage::firstInRow(int row, Visiting visiting) const
 {
     int newCol = 0;
     int tmpCol = 0;
@@ -1266,11 +1266,11 @@ Cell CellStorage::firstInRow(int row, Visiting visiting) const
             newCol = newCol ? qMin(newCol, tmpCol) : tmpCol;
     }
     if (!newCol)
-        return Cell();
-    return Cell(d->sheet, newCol, row);
+        return KCCell();
+    return KCCell(d->sheet, newCol, row);
 }
 
-Cell CellStorage::lastInColumn(int col, Visiting visiting) const
+KCCell CellStorage::lastInColumn(int col, Visiting visiting) const
 {
     Q_UNUSED(visiting);
     int newRow = 0;
@@ -1280,11 +1280,11 @@ Cell CellStorage::lastInColumn(int col, Visiting visiting) const
     d->valueStorage->lastInColumn(col, &tmpRow);
     newRow = qMax(newRow, tmpRow);
     if (!newRow)
-        return Cell();
-    return Cell(d->sheet, col, newRow);
+        return KCCell();
+    return KCCell(d->sheet, col, newRow);
 }
 
-Cell CellStorage::lastInRow(int row, Visiting visiting) const
+KCCell CellStorage::lastInRow(int row, Visiting visiting) const
 {
     Q_UNUSED(visiting);
     int newCol = 0;
@@ -1294,11 +1294,11 @@ Cell CellStorage::lastInRow(int row, Visiting visiting) const
     d->valueStorage->lastInRow(row, &tmpCol);
     newCol = qMax(newCol, tmpCol);
     if (!newCol)
-        return Cell();
-    return Cell(d->sheet, newCol, row);
+        return KCCell();
+    return KCCell(d->sheet, newCol, row);
 }
 
-Cell CellStorage::nextInColumn(int col, int row, Visiting visiting) const
+KCCell CellStorage::nextInColumn(int col, int row, Visiting visiting) const
 {
     Q_UNUSED(visiting);
     int newRow = 0;
@@ -1309,11 +1309,11 @@ Cell CellStorage::nextInColumn(int col, int row, Visiting visiting) const
     if (tmpRow)
         newRow = newRow ? qMin(newRow, tmpRow) : tmpRow;
     if (!newRow)
-        return Cell();
-    return Cell(d->sheet, col, newRow);
+        return KCCell();
+    return KCCell(d->sheet, col, newRow);
 }
 
-Cell CellStorage::nextInRow(int col, int row, Visiting visiting) const
+KCCell CellStorage::nextInRow(int col, int row, Visiting visiting) const
 {
     int newCol = 0;
     int tmpCol = 0;
@@ -1328,11 +1328,11 @@ Cell CellStorage::nextInRow(int col, int row, Visiting visiting) const
             newCol = newCol ? qMin(newCol, tmpCol) : tmpCol;
     }
     if (!newCol)
-        return Cell();
-    return Cell(d->sheet, newCol, row);
+        return KCCell();
+    return KCCell(d->sheet, newCol, row);
 }
 
-Cell CellStorage::prevInColumn(int col, int row, Visiting visiting) const
+KCCell CellStorage::prevInColumn(int col, int row, Visiting visiting) const
 {
     Q_UNUSED(visiting);
     int newRow = 0;
@@ -1342,11 +1342,11 @@ Cell CellStorage::prevInColumn(int col, int row, Visiting visiting) const
     d->valueStorage->prevInColumn(col, row, &tmpRow);
     newRow = qMax(newRow, tmpRow);
     if (!newRow)
-        return Cell();
-    return Cell(d->sheet, col, newRow);
+        return KCCell();
+    return KCCell(d->sheet, col, newRow);
 }
 
-Cell CellStorage::prevInRow(int col, int row, Visiting visiting) const
+KCCell CellStorage::prevInRow(int col, int row, Visiting visiting) const
 {
     Q_UNUSED(visiting);
     int newCol = 0;
@@ -1356,8 +1356,8 @@ Cell CellStorage::prevInRow(int col, int row, Visiting visiting) const
     d->valueStorage->prevInRow(col, row, &tmpCol);
     newCol = qMax(newCol, tmpCol);
     if (!newCol)
-        return Cell();
-    return Cell(d->sheet, newCol, row);
+        return KCCell();
+    return KCCell(d->sheet, newCol, row);
 }
 
 int CellStorage::columns(bool includeStyles) const

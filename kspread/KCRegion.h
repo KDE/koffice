@@ -36,7 +36,7 @@ inline uint qHash(const QPoint& point)
     return (static_cast<uint>(point.x()) << 16) + static_cast<uint>(point.y());
 }
 
-class Cell;
+class KCCell;
 class Map;
 class KCSheet;
 
@@ -563,7 +563,7 @@ public:
     QPoint pos() const {
         return m_point;
     }
-    Cell cell() const;
+    KCCell cell() const;
 
     bool operator==(const Point& other) const {
         return ((m_point == other.m_point) && (m_sheet == other.m_sheet));

@@ -695,7 +695,7 @@ void StyleStorage::invalidateCache(const QRect& rect)
     foreach(const QRect& rect, region.rects()) {
         for (int col = rect.left(); col <= rect.right(); ++col) {
             for (int row = rect.top(); row <= rect.bottom(); ++row) {
-//                 kDebug(36006) <<"StyleStorage: Removing cached style for" << Cell::name( col, row );
+//                 kDebug(36006) <<"StyleStorage: Removing cached style for" << KCCell::name( col, row );
                 d->cache.remove(QPoint(col, row));     // also deletes it
             }
         }

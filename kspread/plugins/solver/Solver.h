@@ -26,7 +26,7 @@
 
 #include <kspread_export.h>
 
-#include <Cell.h>
+#include <KCCell.h>
 
 class QObject;
 #include <QVariantList>
@@ -41,7 +41,7 @@ class KSPREAD_EXPORT Solver : public KParts::Plugin
 
 public:
     struct Parameters {
-        QList<Cell> cells;
+        QList<KCCell> cells;
     };
 
     /**

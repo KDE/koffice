@@ -385,7 +385,7 @@ void TestStatisticalFunctions::testCONFIDENCE()
 
 void TestStatisticalFunctions::testCORREL()
 {
-    //  Cell | Value      Cell | Value
+    //  KCCell | Value      KCCell | Value
     // ------+------     ------+------
     //   B14 |  1          C14 |  4
     //   B15 |  2          C15 |  3
@@ -401,7 +401,7 @@ void TestStatisticalFunctions::testCORREL()
 
 void TestStatisticalFunctions::testCOVAR()
 {
-    //  Cell | Value      Cell | Value
+    //  KCCell | Value      KCCell | Value
     // ------+------     ------+------
     //   B14 |  1          C14 |  4
     //   B15 |  2          C15 |  3
@@ -647,7 +647,7 @@ void TestStatisticalFunctions::testKURT()
 
 void TestStatisticalFunctions::testLARGE()
 {
-    //  Cell | Value | N'th
+    //  KCCell | Value | N'th
     // ------+-------+------
     //   B14 |   1   |   3
     //   B15 |   2   |   2
@@ -750,7 +750,7 @@ void TestStatisticalFunctions::testLOGNORMDIST()
 
 void TestStatisticalFunctions::testMAX()
 {
-    //  Cell | Value      Cell | Value
+    //  KCCell | Value      KCCell | Value
     // ------+------     ------+------
     //   B3  |  "7"        C14 |  4
     //   B4  |  2          C15 |  3
@@ -778,9 +778,9 @@ void TestStatisticalFunctions::testMAXA()
 //     CHECK_EVAL("ISNA(MAXA(NA())", Value(true)); // Inline errors are propagated.
 
 // TODO check function - inline Text must be converted, but not Text in Cells
-//     CHECK_EVAL("MAXA(B3:B5)",    Value(          3 ) ); // Cell text is converted to 0.
+//     CHECK_EVAL("MAXA(B3:B5)",    Value(          3 ) ); // KCCell text is converted to 0.
 
-    CHECK_EVAL("MAXA(-1;B7)",    Value(0));             // Cell text is converted to 0.
+    CHECK_EVAL("MAXA(-1;B7)",    Value(0));             // KCCell text is converted to 0.
     CHECK_EVAL("MAXA(\"a\")",    Value::errorVALUE());  // Text inline is NOT ignored.
     CHECK_EVAL("MAXA(B3:B9)",    Value::errorVALUE());  // TODO check function - Errors inside ranges are NOT ignored.
     CHECK_EVAL("MAXA(B6:B7)",    Value(1));             // Logicals are considered numbers.
@@ -806,7 +806,7 @@ void TestStatisticalFunctions::testMIN()
     CHECK_EVAL("MIN(B4:B5)",    Value(2));           // The minimum of (2,3) is 2.
     CHECK_EVAL("MIN(B3)",       Value(0));           // If no numbers are provided in all ranges, MIN returns 0
     CHECK_EVAL("MIN(\"a\")",    Value::errorNUM());  // Non-numbers inline are NOT ignored.
-    CHECK_EVAL("MIN(B3:B5)",    Value(2));           // Cell text is not converted to numbers and is ignored.
+    CHECK_EVAL("MIN(B3:B5)",    Value(2));           // KCCell text is not converted to numbers and is ignored.
 }
 
 void TestStatisticalFunctions::testMINA()
@@ -814,11 +814,11 @@ void TestStatisticalFunctions::testMINA()
     // ODF-tests
     CHECK_EVAL("MINA(2;4;1;-8)", Value(-8));          // Negative numbers are smaller than positive numbers.
     CHECK_EVAL("MINA(B4:B5)",    Value(2));           // The minimum of (2,3) is 2.
-    CHECK_EVAL("MINA(1;B7)",     Value(0));           // Cell text is converted to 0.
-    CHECK_EVAL("MINA(\"a\")",    Value::errorNUM());  // Cell text inline is NOT ignored.
+    CHECK_EVAL("MINA(1;B7)",     Value(0));           // KCCell text is converted to 0.
+    CHECK_EVAL("MINA(\"a\")",    Value::errorNUM());  // KCCell text inline is NOT ignored.
 
 // TODO check function - inline Text must be converted, but not Text in Cells
-//     CHECK_EVAL("MINA(B3:B5)",    Value(        0 ) ); // Cell text is converted to 0.
+//     CHECK_EVAL("MINA(B3:B5)",    Value(        0 ) ); // KCCell text is converted to 0.
 
     CHECK_EVAL("MINA(B6:C6)",    Value(1));           // The value "True" is considered equivalent to 1.
 }
@@ -878,7 +878,7 @@ void TestStatisticalFunctions::testNORMINV()
 
 void TestStatisticalFunctions::testPEARSON()
 {
-    //  Cell | Value       Cell | Value       Cell | Value       Cell | Value
+    //  KCCell | Value       KCCell | Value       KCCell | Value       KCCell | Value
     // ------+-------     ------+-------     ------+-------     ------+-------
     //  A19  |    1        C19  |  0           C51 |   7          D51 |  100
     //  A20  |    2        C20  |  5           C51 |   9          D52 |  105
@@ -925,7 +925,7 @@ void TestStatisticalFunctions::testPERMUT()
 
 void TestStatisticalFunctions::testPHI()
 {
-    //  Cell | Value
+    //  KCCell | Value
     // ------+-------
     //   C23 |   3
     //       |
@@ -945,7 +945,7 @@ void TestStatisticalFunctions::testPOISSON()
 
 void TestStatisticalFunctions::testRANK()
 {
-    //  Cell | Value
+    //  KCCell | Value
     // ------+------
     //  A19  |   1
     //  A20  |   2
@@ -1117,7 +1117,7 @@ void TestStatisticalFunctions::testTINV()
 
 void TestStatisticalFunctions::testTREND()
 {
-    //  Cell | Value      Cell | Value
+    //  KCCell | Value      KCCell | Value
     // ------+------     ------+------
     //  A19  |   1        C19  |  0
     //  A20  |   2        C20  |  5
@@ -1182,7 +1182,7 @@ void TestStatisticalFunctions::testVARIANCE()
 
 void TestStatisticalFunctions::testVARP()
 {
-    //  Cell | Value
+    //  KCCell | Value
     // ------+-------
     //   B3  |  "7"
     //   B4  |   2
@@ -1196,7 +1196,7 @@ void TestStatisticalFunctions::testVARP()
 
 void TestStatisticalFunctions::testVARPA()
 {
-    //  Cell | Value      Cell | Value
+    //  KCCell | Value      KCCell | Value
     // ------+------     ------+------
     //   B5  |   3         C5  |  5
     //   B6  | true        C6  |  7

@@ -24,7 +24,7 @@
 
 #include <QObject>
 
-class Cell;
+class KCCell;
 class Map;
 class KCSheet;
 
@@ -43,7 +43,7 @@ class KCSheet;
  * refer to the ones in the last step follow and so on until all cells
  * have been updated.
  *
- * Cell value changes are blocked while doing this, i.e. they do not
+ * KCCell value changes are blocked while doing this, i.e. they do not
  * trigger a new recalculation event.
  */
 class KSPREAD_EXPORT RecalcManager : public QObject

@@ -35,7 +35,7 @@
 #include <QVBoxLayout>
 
 #include "CalculationSettings.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "Function.h"
 #include "FunctionDescription.h"
 #include "FunctionRepository.h"
@@ -72,7 +72,7 @@ FormulaDialog::FormulaDialog(QWidget* parent, Selection* selection, CellEditorBa
     m_focus = 0;
     m_desc = 0;
 
-    Cell cell(m_selection->activeSheet(), m_selection->marker());
+    KCCell cell(m_selection->activeSheet(), m_selection->marker());
     m_oldText = cell.userInput();
     // Make sure that there is a cell editor running.
     if (cell.userInput().isEmpty())

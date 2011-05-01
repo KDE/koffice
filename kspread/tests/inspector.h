@@ -22,13 +22,13 @@
 
 #include <kpagedialog.h>
 
-class Cell;
+class KCCell;
 
 class Inspector : public KPageDialog
 {
     Q_OBJECT
 public:
-    Inspector(const Cell& cell);
+    Inspector(const KCCell& cell);
     ~Inspector();
 
 private:

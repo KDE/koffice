@@ -30,7 +30,7 @@
 #include <kpagedialog.h>
 
 // KSpread
-#include "Cell.h"
+#include "KCCell.h"
 #include "DependencyManager.h"
 #include "Map.h"
 #include "KCRegion.h"
@@ -42,7 +42,7 @@
 class Inspector::Private
 {
 public:
-    Cell cell;
+    KCCell cell;
     KCStyle style;
     KCSheet* sheet;
 
@@ -161,7 +161,7 @@ void Inspector::Private::handleDep()
             for (int row = range.top(); row <= range.bottom(); ++row) {
                 QString k1, k2;
 
-                k1 = Cell::fullName((*it)->sheet(), col, row);
+                k1 = KCCell::fullName((*it)->sheet(), col, row);
 
                 new QTreeWidgetItem(depView, QStringList() << k1 << k2);
             }
@@ -169,7 +169,7 @@ void Inspector::Private::handleDep()
 
 }
 
-Inspector::Inspector(const Cell& cell)
+Inspector::Inspector(const KCCell& cell)
         : KPageDialog()
         , d(new Private)
 {
@@ -183,7 +183,7 @@ Inspector::Inspector(const Cell& cell)
     d->sheet = cell.sheet();
 
     QFrame* cellPage = new QFrame();
-    addPage(cellPage, QString("Cell"));
+    addPage(cellPage, QString("KCCell"));
     QVBoxLayout* cellLayout = new QVBoxLayout(cellPage);
     cellLayout->setMargin(KDialog::marginHint());
     cellLayout->setSpacing(KDialog::spacingHint());
@@ -214,7 +214,7 @@ Inspector::Inspector(const Cell& cell)
     depLayout->setSpacing(KDialog::spacingHint());
     d->depView = new QTreeWidget(depPage);
     depLayout->addWidget(d->depView);
-    d->depView->setHeaderLabels(QStringList() << "Cell" << "Content");
+    d->depView->setHeaderLabels(QStringList() << "KCCell" << "Content");
 
     d->handleCell();
     d->handleSheet();

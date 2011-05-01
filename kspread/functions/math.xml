@@ -324,7 +324,7 @@
       <Name>COUNTBLANK</Name>
       <Type>Float</Type>
       <Parameter optional="true">
-	<Comment>Cell range</Comment>
+	<Comment>KCCell range</Comment>
 	<Type range="true">Range</Type>
       </Parameter>
       <Help>

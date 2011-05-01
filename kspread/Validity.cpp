@@ -29,7 +29,7 @@
 
 // KSpread
 #include "CalculationSettings.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "Map.h"
 #include "OdfLoadingContext.h"
 #include "KCSheet.h"
@@ -80,7 +80,7 @@ bool Validity::isEmpty() const
     return d->restriction == None;
 }
 
-bool Validity::loadXML(Cell* const cell, const KoXmlElement& validityElement)
+bool Validity::loadXML(KCCell* const cell, const KoXmlElement& validityElement)
 {
     ValueParser *const parser = cell->sheet()->map()->parser();
     bool ok = false;
@@ -229,7 +229,7 @@ QDomElement Validity::saveXML(QDomDocument& doc, const ValueConverter *converter
 }
 
 
-void Validity::loadOdfValidation(Cell* const cell, const QString& validationName,
+void Validity::loadOdfValidation(KCCell* const cell, const QString& validationName,
                                  OdfLoadingContext& tableContext)
 {
     KoXmlElement element = tableContext.validities.value(validationName);
@@ -590,7 +590,7 @@ void Validity::setValidityList(const QStringList& list)
     d->listValidity = list;
 }
 
-bool Validity::testValidity(const Cell* cell) const
+bool Validity::testValidity(const KCCell* cell) const
 {
     bool valid = false;
     if (d->restriction != None) {

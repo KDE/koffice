@@ -28,7 +28,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
    </rect>
   </property>
   <property name="whatsThis" >
-   <string>This tab enables you to set Cell Protection. All cells are protected by default (that means cell content cannot be changed) and for the cell protection to be active you also need to protect the sheet using the Tools -> Protect Document -> Protect KCSheet... menu and to provide a password.
+   <string>This tab enables you to set KCCell Protection. All cells are protected by default (that means cell content cannot be changed) and for the cell protection to be active you also need to protect the sheet using the Tools -> Protect Document -> Protect KCSheet... menu and to provide a password.
 You can also hide the cell formula in order to protect the way you calculate the formula. This also needs to enable sheet protection to work.
 You can hide the cell content with Hide all and again this needs sheet protection.
 You can learn more about all these settings in the User Manual in the Advanced KSpread chapter.</string>

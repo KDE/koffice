@@ -28,7 +28,7 @@
 
 class QPoint;
 
-class Cell;
+class KCCell;
 class ColumnFormat;
 class RowFormat;
 
@@ -76,7 +76,7 @@ public:
     Cluster();
     ~Cluster();
 
-    Cell* lookup(int x, int y) const;
+    KCCell* lookup(int x, int y) const;
 
     /**
      * Removes all cells from the sheet and frees memory that
@@ -88,7 +88,7 @@ public:
      * Inserts a cell at the requested position. If there is already
      * a cell, then @ref #remove is called on it.
      */
-    void insert(Cell* cell, int x, int y);
+    void insert(KCCell* cell, int x, int y);
     /**
      * Removes the cell at the given position, if there is any.
      */
@@ -97,7 +97,7 @@ public:
     void setAutoDelete(bool);
     bool autoDelete() const;
 
-    Cell* firstCell() const;
+    KCCell* firstCell() const;
 
     bool insertShiftRight(const QPoint& marker);
     /**
@@ -158,7 +158,7 @@ public:
      * @return Returns a pointer to the cell, or 0 if there are no used cells
      *         in this column
      */
-    Cell* getFirstCellColumn(int col) const;
+    KCCell* getFirstCellColumn(int col) const;
 
     /**
      * Retrieve the last used cell in a given column.  Can be used in conjunction
@@ -169,7 +169,7 @@ public:
      * @return Returns a pointer to the cell, or 0 if there are no used cells
      *         in this column
      */
-    Cell* getLastCellColumn(int col) const;
+    KCCell* getLastCellColumn(int col) const;
 
     /**
      * Retrieve the first used cell in a given row.  Can be used in conjunction
@@ -180,7 +180,7 @@ public:
      * @return Returns a pointer to the cell, or 0 if there are no used cells
      *         in this row
      */
-    Cell* getFirstCellRow(int row) const;
+    KCCell* getFirstCellRow(int row) const;
 
     /**
      * Retrieve the last used cell in a given row.  Can be used in conjunction
@@ -191,7 +191,7 @@ public:
      * @return Returns a pointer to the cell, or 0 if there are no used cells
      *         in this row
      */
-    Cell* getLastCellRow(int row) const;
+    KCCell* getLastCellRow(int row) const;
 
     /**
      * Retrieves the next used cell above the given col/row pair.  The given
@@ -202,7 +202,7 @@ public:
      *
      * @return Returns the next used cell above this one, or 0 if there are none
      */
-    Cell* getNextCellUp(int col, int row) const;
+    KCCell* getNextCellUp(int col, int row) const;
 
     /**
      * Retrieves the next used cell below the given col/row pair.  The given
@@ -213,7 +213,7 @@ public:
      *
      * @return Returns the next used cell below this one, or 0 if there are none
      */
-    Cell* getNextCellDown(int col, int row) const;
+    KCCell* getNextCellDown(int col, int row) const;
 
     /**
      * Retrieves the next used cell to the right of the given col/row pair.
@@ -225,7 +225,7 @@ public:
      * @return Returns the next used cell to the right of this one, or 0 if
      * there are none
      */
-    Cell* getNextCellRight(int col, int row) const;
+    KCCell* getNextCellRight(int col, int row) const;
 
     /**
      * Retrieves the next used cell to the left of the given col/row pair.
@@ -237,7 +237,7 @@ public:
      * @return Returns the next used cell to the left of this one, or 0 if
      * there are none
      */
-    Cell* getNextCellLeft(int col, int row) const;
+    KCCell* getNextCellLeft(int col, int row) const;
 
 private:
     /**
@@ -253,8 +253,8 @@ private:
     /** helper method used by valueRange */
     Value makeArray(int col1, int row1, int col2, int row2) const;
 
-    Cell*** m_cluster;
-    Cell* m_first;
+    KCCell*** m_cluster;
+    KCCell* m_first;
     bool m_autoDelete;
     int m_biggestX, m_biggestY;
 };

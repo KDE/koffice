@@ -20,7 +20,7 @@
 
 #include "ValueCalc.h"
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "Number.h"
 #include "ValueConverter.h"
 
@@ -1978,7 +1978,7 @@ Value ValueCalc::sumIf(const Value &range, const Condition &cond)
     return res;
 }
 
-Value ValueCalc::sumIf(const Cell &sumRangeStart, const Value &range, const Condition &cond)
+Value ValueCalc::sumIf(const KCCell &sumRangeStart, const Value &range, const Condition &cond)
 {
     if(range.isError())
         return range;
@@ -2005,7 +2005,7 @@ Value ValueCalc::sumIf(const Cell &sumRangeStart, const Value &range, const Cond
                 return Value::errorVALUE();
 
             if (matches(cond, v)) {
-                Value val = Cell(sumRangeStart.sheet(), sumRangeStart.column() + c, sumRangeStart.row() + r).value();
+                Value val = KCCell(sumRangeStart.sheet(), sumRangeStart.column() + c, sumRangeStart.row() + r).value();
                 if (val.isNumber()) {// only add numbers, no conversion from string allowed
                     //kDebug()<<"add "<<val;
                     res = add(res, val);

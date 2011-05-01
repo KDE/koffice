@@ -23,7 +23,7 @@
 #include <QAbstractItemModel>
 #include <QItemSelection>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 
@@ -48,13 +48,13 @@ enum SheetDataRole {
 enum CellDataRole {
     // Qt::UserRole     = 0x00000020 = 32
     NoCellDataRole      = Qt::UserRole, ///< used for iterating over all data, default and non-default
-    // Cell contents; SheetModel, RegionModel
+    // KCCell contents; SheetModel, RegionModel
     UserInputRole       = 0x00000100,   ///< cell's user input; QString
     FormulaRole         = 0x00000200,   ///< cell's formula; Formula
     ValueRole           = 0x00000400,   ///< cell's value; Value
     LinkRole            = 0x00000800,   ///< cell's hyperlink; QString
     RichTextRole        = 0x00001000,   ///< cell's rich text; QSharedPointer<QTextDocument>
-    // Cell range associations; SheetModel, RegionModel
+    // KCCell range associations; SheetModel, RegionModel
     CommentRole         = 0x00002000,   ///< a comment; QString
     ConditionRole       = 0x00004000,   ///< a conditional style; Conditions
     StyleRole           = 0x00008000,   ///< a style; KCStyle
@@ -70,15 +70,15 @@ Q_DECLARE_FLAGS(CellDataRoles, CellDataRole)
 
 
 /**
- * Converts a model index into a Cell.
+ * Converts a model index into a KCCell.
  * \ingroup Model
  */
-static inline Cell toCell(const QModelIndex &index)
+static inline KCCell toCell(const QModelIndex &index)
 {
     const int column = index.column() + 1;
     const int row = index.row() + 1;
     KCSheet *const sheet = static_cast<KCSheet*>(index.internalPointer());
-    return Cell(sheet, column, row);
+    return KCCell(sheet, column, row);
 }
 
 /**

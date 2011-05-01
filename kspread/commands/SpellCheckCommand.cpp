@@ -19,7 +19,7 @@
 
 #include "SpellCheckCommand.h"
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "Map.h"
 #include "KCSheet.h"
@@ -40,7 +40,7 @@ public:
     KoCanvasBase* canvasBase;
     int index;
     KCRegion region;
-    Cell currentCell;
+    KCCell currentCell;
     KCSheet* currentSheet;
     ValueStorage storage;
     Sonnet::Speller speller;
@@ -87,7 +87,7 @@ QString SpellCheckCommand::fetchMoreText()
         const Value value = d->storage.data(d->index);
         if (value.isString()) {
             text = value.asString();
-            d->currentCell = Cell(d->currentSheet, d->storage.col(d->index), d->storage.row(d->index));
+            d->currentCell = KCCell(d->currentSheet, d->storage.col(d->index), d->storage.row(d->index));
         }
         d->index++;
     }

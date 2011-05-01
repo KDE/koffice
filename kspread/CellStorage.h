@@ -24,7 +24,7 @@
 #include <QRect>
 #include <QTextDocument>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "kspread_limits.h"
 #include "PointStorage.h"
 
@@ -36,7 +36,7 @@ class QUndoCommand;
 
 class Binding;
 class BindingStorage;
-class Cell;
+class KCCell;
 class CommentStorage;
 class Conditions;
 class ConditionsStorage;
@@ -115,45 +115,45 @@ public:
     void take(int col, int row);
 
     /**
-     * \return the binding associated with the Cell at \p column , \p row .
+     * \return the binding associated with the KCCell at \p column , \p row .
      */
     Binding binding(int column, int row) const;
     void setBinding(const KCRegion& region, const Binding& binding);
     void removeBinding(const KCRegion& region, const Binding& binding);
 
     /**
-     * \return the comment associated with the Cell at \p column , \p row .
+     * \return the comment associated with the KCCell at \p column , \p row .
      */
     QString comment(int column, int row) const;
     void setComment(const KCRegion& region, const QString& comment);
 
     /**
-     * \return the conditional formattings associated with the Cell at \p column , \p row .
+     * \return the conditional formattings associated with the KCCell at \p column , \p row .
      */
     Conditions conditions(int column, int row) const;
     void setConditions(const KCRegion& region, Conditions conditions);
 
     /**
-     * \return the database associated with the Cell at \p column , \p row .
+     * \return the database associated with the KCCell at \p column , \p row .
      */
     Database database(int column, int row) const;
     QList< QPair<QRectF, Database> > databases(const KCRegion& region) const;
     void setDatabase(const KCRegion& region, const Database& database);
 
     /**
-     * \return the formula associated with the Cell at \p column , \p row .
+     * \return the formula associated with the KCCell at \p column , \p row .
      */
     Formula formula(int column, int row) const;
     void setFormula(int column, int row, const Formula& formula);
 
     /**
-     * \return the hyperlink associated with the Cell at \p column , \p row .
+     * \return the hyperlink associated with the KCCell at \p column , \p row .
      */
     QString link(int column, int row) const;
     void setLink(int column, int row, const QString& link);
 
     /**
-     * \return the named area's name associated with the Cell at \p column , \p row .
+     * \return the named area's name associated with the KCCell at \p column , \p row .
      */
     QString namedArea(int column, int row) const;
     QList< QPair<QRectF, QString> > namedAreas(const KCRegion& region) const;
@@ -161,7 +161,7 @@ public:
     void emitInsertNamedArea(const KCRegion &region, const QString &namedArea);
 
     /**
-     * \return the KCStyle associated with the Cell at \p column , \p row .
+     * \return the KCStyle associated with the KCCell at \p column , \p row .
      */
     KCStyle style(int column, int row) const;
 
@@ -173,19 +173,19 @@ public:
     void insertSubStyle(const QRect& rect, const SharedSubStyle& subStyle);
 
     /**
-     * \return the user input associated with the Cell at \p column , \p row .
+     * \return the user input associated with the KCCell at \p column , \p row .
      */
     QString userInput(int column, int row) const;
     void setUserInput(int column, int row, const QString& input);
 
     /**
-     * \return the validity checks associated with the Cell at \p column , \p row .
+     * \return the validity checks associated with the KCCell at \p column , \p row .
      */
     Validity validity(int column, int row) const;
     void setValidity(const KCRegion& region, Validity validity);
 
     /**
-     * \return the value associated with the Cell at \p column , \p row .
+     * \return the value associated with the KCCell at \p column , \p row .
      */
     Value value(int column, int row) const;
 
@@ -216,10 +216,10 @@ public:
      *
      */
     void mergeCells(int column, int row, int numXCells, int numYCells);
-    Cell masterCell(int column, int row) const;
+    KCCell masterCell(int column, int row) const;
     int mergedXCells(int column, int row) const;
     int mergedYCells(int column, int row) const;
-    QList<Cell> masterCells(const KCRegion& region) const;
+    QList<KCCell> masterCells(const KCRegion& region) const;
 
     /**
      * \return \c true, if the cell's value is a matrix and obscures other cells
@@ -282,56 +282,56 @@ public:
      * Can be used in conjunction with nextInColumn() to loop through a column.
      * \return the first used data in \p col or the default data, if the column is empty.
      */
-    Cell firstInColumn(int col, Visiting visiting = VisitAll) const;
+    KCCell firstInColumn(int col, Visiting visiting = VisitAll) const;
 
     /**
      * Retrieve the first used data in \p row .
      * Can be used in conjunction with nextInRow() to loop through a row.
      * \return the first used data in \p row or the default data, if the row is empty.
      */
-    Cell firstInRow(int row, Visiting visiting = VisitAll) const;
+    KCCell firstInRow(int row, Visiting visiting = VisitAll) const;
 
     /**
      * Retrieve the last used data in \p col .
      * Can be used in conjunction with prevInColumn() to loop through a column.
      * \return the last used data in \p col or the default data, if the column is empty.
      */
-    Cell lastInColumn(int col, Visiting visiting = VisitAll) const;
+    KCCell lastInColumn(int col, Visiting visiting = VisitAll) const;
 
     /**
      * Retrieve the last used data in \p row .
      * Can be used in conjunction with prevInRow() to loop through a row.
      * \return the last used data in \p row or the default data, if the row is empty.
      */
-    Cell lastInRow(int row, Visiting visiting = VisitAll) const;
+    KCCell lastInRow(int row, Visiting visiting = VisitAll) const;
 
     /**
      * Retrieve the next used data in \p col after \p row .
      * Can be used in conjunction with firstInColumn() to loop through a column.
      * \return the next used data in \p col or the default data, there is no further data.
      */
-    Cell nextInColumn(int col, int row, Visiting visiting = VisitAll) const;
+    KCCell nextInColumn(int col, int row, Visiting visiting = VisitAll) const;
 
     /**
      * Retrieve the next used data in \p row after \p col .
      * Can be used in conjunction with firstInRow() to loop through a row.
      * \return the next used data in \p row or the default data, if there is no further data.
      */
-    Cell nextInRow(int col, int row, Visiting visiting = VisitAll) const;
+    KCCell nextInRow(int col, int row, Visiting visiting = VisitAll) const;
 
     /**
      * Retrieve the previous used data in \p col after \p row .
      * Can be used in conjunction with lastInColumn() to loop through a column.
      * \return the previous used data in \p col or the default data, there is no further data.
      */
-    Cell prevInColumn(int col, int row, Visiting visiting = VisitAll) const;
+    KCCell prevInColumn(int col, int row, Visiting visiting = VisitAll) const;
 
     /**
      * Retrieve the previous used data in \p row after \p col .
      * Can be used in conjunction with lastInRow() to loop through a row.
      * \return the previous used data in \p row or the default data, if there is no further data.
      */
-    Cell prevInRow(int col, int row, Visiting visiting = VisitAll) const;
+    KCCell prevInRow(int col, int row, Visiting visiting = VisitAll) const;
 
     /**
      * The maximum occupied column, i.e. the horizontal storage dimension.

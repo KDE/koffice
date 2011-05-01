@@ -20,7 +20,7 @@
 #ifndef KSPREAD_ODF_SAVING_CONTEXT
 #define KSPREAD_ODF_SAVING_CONTEXT
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "GenValidationStyle.h"
 #include "KCSheet.h"
 

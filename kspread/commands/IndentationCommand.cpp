@@ -24,7 +24,7 @@
 #include <klocale.h>
 
 #include "ApplicationSettings.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "Map.h"
 #include "KCSheet.h"

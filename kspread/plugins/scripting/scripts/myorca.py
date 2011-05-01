@@ -134,12 +134,12 @@ class MyDialog:
         page = self.dialog.addPage("Action","")
 
         self.cellNameBtn = forms.createWidget(page, "QPushButton")
-        self.cellNameBtn.text = "Cell Name"
+        self.cellNameBtn.text = "KCCell Name"
         #self.cellNameBtn.shortcut = "Ctrl+S"
         self.cellNameBtn.connect("clicked()", self.cellNameBtnClicked)
 
         self.cellValueBtn = forms.createWidget(page, "QPushButton")
-        self.cellValueBtn.text = "Cell Value"
+        self.cellValueBtn.text = "KCCell Value"
         self.cellValueBtn.connect("clicked()", self.cellValueBtnClicked)
 
         self.sheetNameBtn = forms.createWidget(page, "QPushButton")
@@ -149,12 +149,12 @@ class MyDialog:
         page = self.dialog.addPage("Option","")
 
         self.cellNameCheckbox = forms.createWidget(page, "QCheckBox")
-        self.cellNameCheckbox.text = "Cell Name if selection changed"
+        self.cellNameCheckbox.text = "KCCell Name if selection changed"
         self.cellNameCheckbox.checked = self.config.cellNameOnSelectionChanged
         self.cellNameCheckbox.connect("stateChanged(int)", self.optionChanged)
 
         self.cellValueCheckbox = forms.createWidget(page, "QCheckBox")
-        self.cellValueCheckbox.text = "Cell Value if selection changed"
+        self.cellValueCheckbox.text = "KCCell Value if selection changed"
         self.cellValueCheckbox.checked = self.config.cellValueOnSelectionChanged
         self.cellValueCheckbox.connect("stateChanged(int)", self.optionChanged)
 

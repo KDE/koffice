@@ -31,7 +31,7 @@
 #include <KCSheet.h>
 #include <Map.h>
 #include <KCRegion.h>
-#include <Cell.h>
+#include <KCCell.h>
 #include <Value.h>
 
 /**
@@ -113,7 +113,7 @@ public Q_SLOTS:
     * explicit cell.
     */
     QString cell() {
-        return Cell::name(m_column, m_row);
+        return KCCell::name(m_column, m_row);
     }
 
     /**
@@ -170,7 +170,7 @@ public Q_SLOTS:
     //QString filter() {}
     //void setFilter(const QString& filter) {}
 
-    //enum Direction { Cell, Row, Column };
+    //enum Direction { KCCell, Row, Column };
     //QString direction() {}
     //void setDirection(const QString& direction) {}
 
@@ -218,9 +218,9 @@ public Q_SLOTS:
             default: return false;
             }
         }
-        //Cell* c = getCell();
+        //KCCell* c = getCell();
         //c->setValue(v);
-        Cell cell(m_sheet, m_column, m_row);
+        KCCell cell(m_sheet, m_column, m_row);
         if (!parse) {
             cell.setUserInput(value.toString());
             cell.setValue(v);
@@ -262,12 +262,12 @@ private:
     ScriptingModule* const m_module;
     KCSheet* m_sheet;
     int m_column, m_row;
-    Cell* m_cell;
+    KCCell* m_cell;
 
-    Cell* getCell() {
+    KCCell* getCell() {
         Q_ASSERT(m_sheet);
         if (m_cell) return m_cell;
-        m_cell = new Cell(m_sheet, m_column, m_row);
+        m_cell = new KCCell(m_sheet, m_column, m_row);
         return m_cell;
     }
 

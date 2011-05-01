@@ -44,7 +44,7 @@
 #include <KoShapeManager.h>
 
 #include "AutoFillStrategy.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "kspread_limits.h"
 #include "Map.h"
 #include "MergeStrategy.h"

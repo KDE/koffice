@@ -35,7 +35,7 @@
 #include <QStringList>
 
 class AutoFillSequence;
-class Cell;
+class KCCell;
 
 /**
  * \ingroup Commands
@@ -70,8 +70,8 @@ public:
     static QStringList *shortDay;
 
 private:
-    void fillSequence(const QList<Cell>& _srcList,
-                      const QList<Cell>& _destList,
+    void fillSequence(const QList<KCCell>& _srcList,
+                      const QList<KCCell>& _destList,
                       const AutoFillSequence& _seqList,
                       bool down = true);
     // dummy

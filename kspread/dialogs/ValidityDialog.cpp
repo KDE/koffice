@@ -394,7 +394,7 @@ void ValidityDialog::init()
     const Map *const map = m_selection->activeSheet()->map();
     const CalculationSettings *settings = map->calculationSettings();
     const KLocale* locale = settings->locale();
-    Validity validity = Cell(m_selection->activeSheet(), m_selection->marker()).validity();
+    Validity validity = KCCell(m_selection->activeSheet(), m_selection->marker()).validity();
     if (!validity.isEmpty()) {
         message->setPlainText(validity.message());
         title->setText(validity.title());

@@ -31,7 +31,7 @@
 #include <kcombobox.h>
 #include <klineedit.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "Localization.h"
 #include "Map.h"
 #include "NamedAreaManager.h"
@@ -42,7 +42,7 @@
 GotoDialog::GotoDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
 {
-    setCaption(i18n("Goto Cell"));
+    setCaption(i18n("Goto KCCell"));
     setObjectName("GotoDialog");
     setModal(true);
     setButtons(Ok | Cancel);
@@ -63,7 +63,7 @@ GotoDialog::GotoDialog(QWidget* parent, Selection* selection)
 
     const KCSheet* sheet = m_selection->activeSheet();
     if (sheet && selection) {
-        Cell cell(sheet, selection->cursor());
+        KCCell cell(sheet, selection->cursor());
         m_nameCell->addItem(cell.name());
         m_nameCell->addItem(cell.fullName());
     }

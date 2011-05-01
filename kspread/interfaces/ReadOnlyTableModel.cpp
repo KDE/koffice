@@ -20,7 +20,7 @@
 #include "ReadOnlyTableModel.h"
 
 // KSpread
-#include "Cell.h"
+#include "KCCell.h"
 #include "kspread_limits.h"
 #include "Map.h"
 #include "KCSheet.h"
@@ -67,7 +67,7 @@ int ReadOnlyTableModel::rowCount(const QModelIndex& parent) const
 QVariant ReadOnlyTableModel::data(const QModelIndex& index, int role) const
 {
     // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
-    const Cell cell = Cell(d->sheet, index.column() + 1, index.row() + 1).masterCell();
+    const KCCell cell = KCCell(d->sheet, index.column() + 1, index.row() + 1).masterCell();
     const KCStyle style = cell.effectiveStyle();
     if (role == Qt::DisplayRole) {
         // Display a formula if warranted.  If not, simply display the value.
@@ -111,7 +111,7 @@ QVariant ReadOnlyTableModel::headerData(int section, Qt::Orientation orientation
     // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
     if (role == Qt::DisplayRole) {
         if (orientation == Qt::Horizontal) {
-            return Cell::columnName(section + 1);
+            return KCCell::columnName(section + 1);
         } else {
             return QString::number(section + 1);
         }

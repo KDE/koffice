@@ -103,8 +103,8 @@ protected:
     QString name() const;
 
     QSizeF textSize(const QString& text, const KCStyle& style) const;
-    double adjustColumnHelper(const Cell& cell);
-    double adjustRowHelper(const Cell& cell);
+    double adjustColumnHelper(const KCCell& cell);
+    double adjustRowHelper(const KCCell& cell);
 
 private:
     bool m_adjustColumn : 1;

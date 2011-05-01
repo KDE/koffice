@@ -31,7 +31,7 @@
 #include <KCSheet.h>
 #include <Map.h>
 #include <KCRegion.h>
-#include <Cell.h>
+#include <KCCell.h>
 #include <Value.h>
 
 /**
@@ -256,7 +256,7 @@ public slots:
         QVariantList values;
         if (m_currentSheet && m_currentRow >= 0) {
             for (int col = m_currentLeft; col <= m_currentRight; ++col) {
-                Cell cell(m_currentSheet, col, m_currentRow);
+                KCCell cell(m_currentSheet, col, m_currentRow);
                 Value value = cell.value();
 
                 //TODO add toVariant() method to Value and use it here and in SheetAdaptor::valueToVariant

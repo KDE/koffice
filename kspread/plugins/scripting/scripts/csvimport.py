@@ -31,7 +31,7 @@ class CsvImport:
 
         datapage = self.dialog.addPage("Import","Import to sheet beginning at cell","document-import")
         self.sheetslistview = KSpread.createSheetsListView(datapage)
-        self.sheetslistview.setEditorType("Cell")
+        self.sheetslistview.setEditorType("KCCell")
 
         optionspage = self.dialog.addPage("Options","Comma Separated Value Options","configure")
         self.optionswidget = self.forms.createWidgetFromUIFile(optionspage, os.path.join(self.currentpath, "csvoptions.ui"))

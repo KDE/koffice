@@ -24,7 +24,7 @@
 #include "ConditionalDialog.h"
 #include "Condition.h"
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "Map.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
@@ -174,12 +174,12 @@ ConditionalWidget::ConditionalWidget(QWidget* parent, const char* /*name*/, Qt::
     groupBox1_1->setTitle(i18n("First Condition"));
     groupBox1_2->setTitle(i18n("Second Condition"));
     groupBox1_3->setTitle(i18n("Third Condition"));
-    textLabel1_1->setText(i18n("Cell is"));
-    textLabel1_2->setText(i18n("Cell is"));
-    textLabel1_3->setText(i18n("Cell is"));
-    textLabel2_1->setText(i18n("Cell style"));
-    textLabel2_2->setText(i18n("Cell style"));
-    textLabel2_3->setText(i18n("Cell style"));
+    textLabel1_1->setText(i18n("KCCell is"));
+    textLabel1_2->setText(i18n("KCCell is"));
+    textLabel1_3->setText(i18n("KCCell is"));
+    textLabel2_1->setText(i18n("KCCell style"));
+    textLabel2_2->setText(i18n("KCCell style"));
+    textLabel2_3->setText(i18n("KCCell style"));
 
     connect(m_condition_1, SIGNAL(highlighted(const QString &)), this, SLOT(slotTextChanged1(const QString &)));
     connect(m_condition_2, SIGNAL(highlighted(const QString &)), this, SLOT(slotTextChanged2(const QString &)));
@@ -284,13 +284,13 @@ void ConditionalDialog::init()
 
     KCSheet* sheet = m_selection->activeSheet();
 
-    conditionList = Cell(sheet, m_selection->marker()).conditions().conditionList();
+    conditionList = KCCell(sheet, m_selection->marker()).conditions().conditionList();
     /* this is the list, but only display the conditions common to all selected
        cells*/
 
     for (int x = m_selection->lastRange().left(); x <= m_selection->lastRange().right(); x++) {
         for (int y = m_selection->lastRange().top(); y <= m_selection->lastRange().bottom(); y++) {
-            otherList = Cell(sheet, x, y).conditions().conditionList();
+            otherList = KCCell(sheet, x, y).conditions().conditionList();
 
             it1 = conditionList.begin();
             while (it1 != conditionList.end()) {

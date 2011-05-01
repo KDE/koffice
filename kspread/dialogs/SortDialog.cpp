@@ -94,8 +94,8 @@ public:
             const QList<int> indices = columns;
             for (int i = 0; i < indices.count(); ++i) {
                 const int col = indices[i];
-                const QString columnName = i18n("Column %1", Cell::columnName(col));
-                const Value value = Cell(sheet, col, row).value();
+                const QString columnName = i18n("Column %1", KCCell::columnName(col));
+                const Value value = KCCell(sheet, col, row).value();
                 const QString header = converter->asString(value).asString();
                 if (hasHeader) {
                     if (header.isEmpty()) {
@@ -120,7 +120,7 @@ public:
             for (int i = 0; i < indices.count(); ++i) {
                 const int row = indices[i];
                 const QString rowName = i18n("Row %1", row);
-                const Value value = Cell(sheet, col, row).value();
+                const Value value = KCCell(sheet, col, row).value();
                 const QString header = converter->asString(value).asString();
                 if (hasHeader) {
                     if (header.isEmpty()) {
@@ -185,13 +185,13 @@ bool SortDialog::Private::hasHeader(const KCRegion &region, Qt::Orientation orie
     const QRect range = region.lastRange();
     if (orientation == Qt::Horizontal) /* check for column headers */ {
         for (int col = range.left(); col <= range.right(); ++col) {
-            if (!Cell(sheet, col, range.top()).value().isString())  {
+            if (!KCCell(sheet, col, range.top()).value().isString())  {
                 return false;
             }
         }
     } else /* check for row headers */ {
         for (int row = range.top(); row <= range.bottom(); ++row) {
-            if (!Cell(sheet, range.left(), row).value().isString()) {
+            if (!KCCell(sheet, range.left(), row).value().isString()) {
                 return false;
             }
         }
@@ -242,7 +242,7 @@ QString SortDialog::Private::itemText(int index, bool useHeader) const
         const int row = index;
         const QString rowName = i18n("Row %1", row);
         if (useHeader) {
-            const Value value = Cell(sheet, col, row).value();
+            const Value value = KCCell(sheet, col, row).value();
             const QString header = converter->asString(value).asString();
             if (header.isEmpty()) {
                 return QString('(' + rowName + ')');
@@ -255,9 +255,9 @@ QString SortDialog::Private::itemText(int index, bool useHeader) const
     } else /* data grouped in rows; criteria/header per column */ {
         const int col = index;
         const int row = selection->lastRange().top();
-        const QString columnName = i18n("Column %1", Cell::columnName(col));
+        const QString columnName = i18n("Column %1", KCCell::columnName(col));
         if (useHeader) {
-            const Value value = Cell(sheet, col, row).value();
+            const Value value = KCCell(sheet, col, row).value();
             const QString header = converter->asString(value).asString();
             if (header.isEmpty()) {
                 return QString('(' + columnName + ')');

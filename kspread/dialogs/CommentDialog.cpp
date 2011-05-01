@@ -31,7 +31,7 @@
 #include <KTextEdit>
 
 //KSpread includes
-#include "Cell.h"
+#include "KCCell.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 
@@ -40,7 +40,7 @@
 CommentDialog::CommentDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
 {
-    setCaption(i18n("Cell Comment"));
+    setCaption(i18n("KCCell Comment"));
     setModal(true);
     setButtons(Ok | Cancel);
 
@@ -57,7 +57,7 @@ CommentDialog::CommentDialog(QWidget* parent, Selection* selection)
 
     multiLine->setFocus();
 
-    const QString comment = Cell(m_selection->activeSheet(), m_selection->marker()).comment();
+    const QString comment = KCCell(m_selection->activeSheet(), m_selection->marker()).comment();
     if (!comment.isEmpty())
         multiLine->setText(comment);
 

@@ -30,7 +30,7 @@ static char encodeTokenType(const Token& token)
     case Token::Integer:    result = 'i'; break;
     case Token::Float:      result = 'f'; break;
     case Token::Operator:   result = 'o'; break;
-    case Token::Cell:       result = 'c'; break;
+    case Token::KCCell:       result = 'c'; break;
     case Token::Range:      result = 'r'; break;
     case Token::Identifier: result = 'x'; break;
     default: break;

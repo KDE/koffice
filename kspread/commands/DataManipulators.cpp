@@ -22,7 +22,7 @@
 
 #include <klocale.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "Damages.h"
 #include "Formula.h"
@@ -62,7 +62,7 @@ bool AbstractDataManipulator::process(Element* element)
 
             val = newValue(element, col, row, &parse, &fmtType);
 
-            Cell cell = Cell(m_sheet, col, row);
+            KCCell cell = KCCell(m_sheet, col, row);
             if (cell.isPartOfMerged()) cell = cell.masterCell();
 
             // we have the data - set it !
@@ -138,7 +138,7 @@ bool AbstractDFManipulator::process(Element* element)
     QRect range = element->rect();
     for (int col = range.left(); col <= range.right(); ++col) {
         for (int row = range.top(); row <= range.bottom(); ++row) {
-            Cell cell(m_sheet, col, row);
+            KCCell cell(m_sheet, col, row);
 //       int colidx = col - range.left();
 //       int rowidx = row - range.top();
             KCStyle style = newFormat(element, col, row);
@@ -213,7 +213,7 @@ Value DataManipulator::newValue(Element *element, int col, int row,
             *parsing = false;
             if (m_data.asString().isEmpty() || m_data.asString().at(0) == '=')
                 m_sheet->cellStorage()->setValue(col, row, Value()); // for proper undo
-            return Cell(m_sheet, range.topLeft()).value().element(colidx, rowidx);
+            return KCCell(m_sheet, range.topLeft()).value().element(colidx, rowidx);
         }
     }
     return m_data.element(colidx, rowidx);
@@ -319,10 +319,10 @@ Value FillManipulator::newValue(Element *element, int col, int row,
     case Left:  col = element->rect().right();  break;
     case Right: col = element->rect().left();   break;
     };
-    Cell cell(m_sheet, col, row); // the reference cell
+    KCCell cell(m_sheet, col, row); // the reference cell
     if (cell.isFormula()) {
         *parse = true;
-        return Value(Cell(m_sheet, targetCol, targetRow).decodeFormula(cell.encodeFormula()));
+        return Value(KCCell(m_sheet, targetCol, targetRow).decodeFormula(cell.encodeFormula()));
     }
     return cell.value();
 }
@@ -335,7 +335,7 @@ KCStyle FillManipulator::newFormat(Element *element, int col, int row)
     case Left:  col = element->rect().right();  break;
     case Right: col = element->rect().left();   break;
     };
-    return Cell(m_sheet, col, row).style();
+    return KCCell(m_sheet, col, row).style();
 }
 
 CaseManipulator::CaseManipulator()
@@ -354,7 +354,7 @@ Value CaseManipulator::newValue(Element *element, int col, int row,
     Q_UNUSED(element)
     // if we are here, we know that we want the change
     *parse = false;
-    QString str = Cell(m_sheet, col, row).value().asString();
+    QString str = KCCell(m_sheet, col, row).value().asString();
     switch (m_mode) {
     case Upper: str = str.toUpper();
         break;
@@ -371,7 +371,7 @@ Value CaseManipulator::newValue(Element *element, int col, int row,
 bool CaseManipulator::wantChange(Element *element, int col, int row)
 {
     Q_UNUSED(element)
-    Cell cell(m_sheet, col, row);
+    KCCell cell(m_sheet, col, row);
     // don't change cells with a formula
     if (cell.isFormula())
         return false;

@@ -85,7 +85,7 @@ void HyperlinkStrategy::finishInteraction(Qt::KeyboardModifiers modifiers)
             selection()->initialize(region);
 
             if (!region.firstRange().isNull()) {
-                const Cell cell = Cell(region.firstSheet(), region.firstRange().topLeft());
+                const KCCell cell = KCCell(region.firstSheet(), region.firstRange().topLeft());
             }
         }
     } else {

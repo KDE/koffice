@@ -25,7 +25,7 @@
 #include <ktextedit.h>
 #include <kactioncollection.h>
 #include <Formula.h>
-#include <Cell.h>
+#include <KCCell.h>
 #include <part/Doc.h>
 #include <KCSheet.h>
 #include <Value.h>
@@ -97,7 +97,7 @@ void Solver::optimize()
         return;
 
     const QPoint point = (*region.constBegin())->rect().topLeft();
-    const Cell formulaCell = Cell(sheet, point.x(), point.y());
+    const KCCell formulaCell = KCCell(sheet, point.x(), point.y());
     if (!formulaCell.isFormula())
         return;
 
@@ -123,7 +123,7 @@ void Solver::optimize()
         QRect range = (*it)->rect();
         for (int col = range.left(); col <= range.right(); ++col) {
             for (int row = range.top(); row <= range.bottom(); ++row) {
-                parameters->cells.append(Cell(sheet, col, row));
+                parameters->cells.append(KCCell(sheet, col, row));
                 ++dimension;
             }
         }
@@ -136,7 +136,7 @@ void Solver::optimize()
     /* Initialize starting point */
     int index = 0;
     gsl_vector* x = gsl_vector_alloc(dimension);
-    foreach(Cell cell, parameters->cells) {
+    foreach(KCCell cell, parameters->cells) {
         gsl_vector_set(x, index++, numToDouble(cell.value().asFloat()));
     }
 

@@ -23,7 +23,7 @@
 #include "ValueFormatter.h"
 
 #include "CalculationSettings.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "Localization.h"
 #include "ValueConverter.h"
 

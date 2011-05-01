@@ -84,7 +84,7 @@ ShowColRow::ShowColRow(QWidget* parent, Selection* selection, Type _type)
         QList<int>::Iterator it;
         for (it = listInt.begin(); it != listInt.end(); ++it) {
             if (!showColNumber)
-                listCol += i18n("Column: %1", Cell::columnName(*it));
+                listCol += i18n("Column: %1", KCCell::columnName(*it));
             else
                 listCol += i18n("Column: %1", text.setNum(*it));
         }

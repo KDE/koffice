@@ -71,7 +71,7 @@ QString SheetAdaptor::cellName(int x, int y)
     if ( x == 0 ) x = 1;
     if ( y == 0 ) y = 1;
     */
-    return Cell::name(x, y);
+    return KCCell::name(x, y);
 }
 
 int SheetAdaptor::cellRow(const QString& cellname)
@@ -94,7 +94,7 @@ QPoint SheetAdaptor::cellLocation(const QString& cellname)
 
 QString SheetAdaptor::text(int x, int y)
 {
-    Cell cell = Cell(m_sheet, x, y);
+    KCCell cell = KCCell(m_sheet, x, y);
     return cell.userInput();
 }
 
@@ -108,7 +108,7 @@ bool SheetAdaptor::setText(int x, int y, const QString& text, bool parse)
 {
     //FIXME: there is some problem with asString parameter, when it's set
     //to true KSpread says: ASSERT: "f" in Dependencies.cpp (621)
-    //kspread: Cell at row 6, col 1 marked as formula, but formula is NULL
+    //kspread: KCCell at row 6, col 1 marked as formula, but formula is NULL
 
     DataManipulator *dm = new DataManipulator();
     dm->setSheet(m_sheet);
@@ -165,7 +165,7 @@ QVariant valueToVariant(const Value& value, KCSheet* sheet)
 
 QVariant SheetAdaptor::value(int x, int y)
 {
-    Cell cell = Cell(m_sheet, x, y);
+    KCCell cell = KCCell(m_sheet, x, y);
     return valueToVariant(cell.value(), m_sheet);
 }
 
@@ -177,7 +177,7 @@ QVariant SheetAdaptor::value(const QString& cellname)
 
 bool SheetAdaptor::setValue(int x, int y, const QVariant& value)
 {
-    Cell cell = Cell(m_sheet, x, y);
+    KCCell cell = KCCell(m_sheet, x, y);
     if (! cell) return false;
     Value v = cell.value();
     switch (value.type()) {

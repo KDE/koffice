@@ -32,7 +32,7 @@ class QWidget;
 
 class KoXmlWriter;
 
-class Cell;
+class KCCell;
 class Filter;
 class Map;
 class KCRegion;

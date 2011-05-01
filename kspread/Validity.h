@@ -109,13 +109,13 @@ public:
      * Tests whether the content of \p cell is allowed.
      * \return \c true if the content is valid
      */
-    bool testValidity(const Cell* cell) const;
+    bool testValidity(const KCCell* cell) const;
 
     /**
      * \ingroup NativeFormat
      * Loads validity checks.
      */
-    bool loadXML(Cell* const cell, const KoXmlElement& validityElement);
+    bool loadXML(KCCell* const cell, const KoXmlElement& validityElement);
 
     /**
      * \ingroup NativeFormat
@@ -127,7 +127,7 @@ public:
      * \ingroup OpenDocument
      * Loads validity checks.
      */
-    void loadOdfValidation(Cell* const cell, const QString& validationName,
+    void loadOdfValidation(KCCell* const cell, const QString& validationName,
                            OdfLoadingContext& tableContext);
 
     Action action() const;

@@ -19,7 +19,7 @@
 
 #include "DragAndDropStrategy.h"
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "kspread_limits.h"
 #include "Selection.h"
 #include "KCSheet.h"
@@ -43,7 +43,7 @@ class DragAndDropStrategy::Private
 public:
     Private() : started(false) { }
 
-    Cell cell;
+    KCCell cell;
     QPointF lastPoint;
     bool started;
 };
@@ -67,7 +67,7 @@ DragAndDropStrategy::DragAndDropStrategy(CellToolBase *cellTool,
     if (col > KS_colMax || row > KS_rowMax) {
         kDebug(36005) << "col or row is out of range:" << "col:" << col << " row:" << row;
     } else {
-        d->cell = Cell(selection->activeSheet(), col, row);
+        d->cell = KCCell(selection->activeSheet(), col, row);
     }
 }
 
@@ -93,7 +93,7 @@ void DragAndDropStrategy::handleMouseMove(const QPointF& documentPos, Qt::Keyboa
     // Check boundaries.
     if (col > KS_colMax || row > KS_rowMax) {
         kDebug(36005) << "col or row is out of range:" << "col:" << col << " row:" << row;
-    } else if (d->cell == Cell(selection()->activeSheet(), col, row)) {
+    } else if (d->cell == KCCell(selection()->activeSheet(), col, row)) {
     } else {
         QDomDocument doc = CopyCommand::saveAsXml(*selection(), true);
 
@@ -129,7 +129,7 @@ QUndoCommand* DragAndDropStrategy::createCommand(QUndoCommand *)
     // Check boundaries.
     if (col > KS_colMax || row > KS_rowMax) {
         kDebug(36005) << "col or row is out of range:" << "col:" << col << " row:" << row;
-    } else if (d->cell == Cell(selection()->activeSheet(), col, row)) {
+    } else if (d->cell == KCCell(selection()->activeSheet(), col, row)) {
         selection()->initialize(QPoint(col, row), selection()->activeSheet());
     }
     return 0;

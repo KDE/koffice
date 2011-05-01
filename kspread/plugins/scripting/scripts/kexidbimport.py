@@ -93,7 +93,7 @@ class KexiImport:
 
         datapage = dialog.addPage("Import","Import to sheet beginning at cell","document-import")
         sheetslistview = KSpread.createSheetsListView(datapage)
-        sheetslistview.setEditorType("Cell")
+        sheetslistview.setEditorType("KCCell")
 
         if dialog.exec_loop():
             projectfile = openwidget.selectedFile()

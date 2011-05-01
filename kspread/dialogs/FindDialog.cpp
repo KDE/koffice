@@ -51,7 +51,7 @@ FindOption::FindOption(QWidget *parent)
     layout1->addLayout(comboLayout);
 
     QStringList lst;
-    lst << i18n("Cell Values");
+    lst << i18n("KCCell Values");
     lst << i18n("Comments");
     m_searchIn->insertItems(0, lst);
 

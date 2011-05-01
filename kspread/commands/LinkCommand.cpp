@@ -26,7 +26,7 @@
 #include "Map.h"
 #include "KCSheet.h"
 
-LinkCommand::LinkCommand(const Cell& c, const QString& text, const QString& link)
+LinkCommand::LinkCommand(const KCCell& c, const QString& text, const QString& link)
 {
     cell = c;
     oldText = cell.userInput();

@@ -24,7 +24,7 @@
 #include <QHash>
 #include <QMap>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "DependencyManager.h"
 #include "Formula.h"
@@ -58,7 +58,7 @@ public:
     /**
      * Helper function for cellsToCalculate(const KCRegion&) and cellsToCalculate(KCSheet*).
      */
-    void cellsToCalculate(const KCRegion& region, QSet<Cell>& cells) const;
+    void cellsToCalculate(const KCRegion& region, QSet<KCCell>& cells) const;
 
     /*
      * Stores cells ordered by its reference depth.
@@ -75,7 +75,7 @@ public:
      * \li depth(A2) = 1
      * \li depth(A3) = 2
      */
-    QMap<int, Cell> cells;
+    QMap<int, KCCell> cells;
     const Map* map;
     bool active;
 };
@@ -86,13 +86,13 @@ void RecalcManager::Private::cellsToCalculate(const KCRegion& region)
         return;
 
     // retrieve the cell depths
-    QHash<Cell, int> depths = map->dependencyManager()->depths();
+    QHash<KCCell, int> depths = map->dependencyManager()->depths();
 
     // create the cell map ordered by depth
-    QSet<Cell> cells;
+    QSet<KCCell> cells;
     cellsToCalculate(region, cells);
-    const QSet<Cell>::ConstIterator end(cells.end());
-    for (QSet<Cell>::ConstIterator it(cells.begin()); it != end; ++it) {
+    const QSet<KCCell>::ConstIterator end(cells.end());
+    for (QSet<KCCell>::ConstIterator it(cells.begin()); it != end; ++it) {
         if ((*it).sheet()->isAutoCalculationEnabled())
             this->cells.insertMulti(depths[*it], *it);
     }
@@ -101,7 +101,7 @@ void RecalcManager::Private::cellsToCalculate(const KCRegion& region)
 void RecalcManager::Private::cellsToCalculate(KCSheet* sheet)
 {
     // retrieve the cell depths
-    QHash<Cell, int> depths = map->dependencyManager()->depths();
+    QHash<KCCell, int> depths = map->dependencyManager()->depths();
 
     // NOTE Stefan: It's necessary, that the cells are filled in row-wise;
     //              beginning with the top left; ending with the bottom right.
@@ -109,24 +109,24 @@ void RecalcManager::Private::cellsToCalculate(KCSheet* sheet)
     //              way, which boosts performance (using PointStorage) for an
     //              empty storage (on loading). For an already filled value
     //              storage, the speed gain is not that sensible.
-    Cell cell;
+    KCCell cell;
     if (!sheet) { // map recalculation
         for (int s = 0; s < map->count(); ++s) {
             sheet = map->sheet(s);
             for (int c = 0; c < sheet->formulaStorage()->count(); ++c) {
-                cell = Cell(sheet, sheet->formulaStorage()->col(c), sheet->formulaStorage()->row(c));
+                cell = KCCell(sheet, sheet->formulaStorage()->col(c), sheet->formulaStorage()->row(c));
                 cells.insertMulti(depths[cell], cell);
             }
         }
     } else { // sheet recalculation
         for (int c = 0; c < sheet->formulaStorage()->count(); ++c) {
-            cell = Cell(sheet, sheet->formulaStorage()->col(c), sheet->formulaStorage()->row(c));
+            cell = KCCell(sheet, sheet->formulaStorage()->col(c), sheet->formulaStorage()->row(c));
             cells.insertMulti(depths[cell], cell);
         }
     }
 }
 
-void RecalcManager::Private::cellsToCalculate(const KCRegion& region, QSet<Cell>& cells) const
+void RecalcManager::Private::cellsToCalculate(const KCRegion& region, QSet<KCCell>& cells) const
 {
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
@@ -134,7 +134,7 @@ void RecalcManager::Private::cellsToCalculate(const KCRegion& region, QSet<Cell>
         const KCSheet* sheet = (*it)->sheet();
         for (int col = range.left(); col <= range.right(); ++col) {
             for (int row = range.top(); row <= range.bottom(); ++row) {
-                Cell cell(sheet, col, row);
+                KCCell cell(sheet, col, row);
                 // Even empty cells may act as value
                 // providers and need to be processed.
 
@@ -222,7 +222,7 @@ void RecalcManager::recalc()
 {
     kDebug(36002) << "Recalculating" << d->cells.count() << " cell(s)..";
     ElapsedTime et("Recalculating cells", ElapsedTime::PrintOnlyTime);
-    const QList<Cell> cells = d->cells.values();
+    const QList<KCCell> cells = d->cells.values();
     for (int c = 0; c < cells.count(); ++c) {
         // only recalculate, if no circular dependency occurred
         if (cells.value(c).value() == Value::errorCIRCLE())
@@ -241,13 +241,13 @@ void RecalcManager::recalc()
             sheet->cellStorage()->unlockCells(rect.left(), rect.top());
             for (int row = rect.top(); row <= rect.bottom(); ++row) {
                 for (int col = rect.left(); col <= rect.right(); ++col) {
-                    Cell(sheet, col, row).setValue(result.element(col - rect.left(), row - rect.top()));
+                    KCCell(sheet, col, row).setValue(result.element(col - rect.left(), row - rect.top()));
                 }
             }
             // relock
             sheet->cellStorage()->lockCells(rect);
         } else
-            Cell(cells.value(c)).setValue(result);
+            KCCell(cells.value(c)).setValue(result);
     }
 //     dump();
     d->cells.clear();
@@ -255,9 +255,9 @@ void RecalcManager::recalc()
 
 void RecalcManager::dump() const
 {
-    QMap<int, Cell>::ConstIterator end(d->cells.constEnd());
-    for (QMap<int, Cell>::ConstIterator it(d->cells.constBegin()); it != end; ++it) {
-        Cell cell = it.value();
+    QMap<int, KCCell>::ConstIterator end(d->cells.constEnd());
+    for (QMap<int, KCCell>::ConstIterator it(d->cells.constBegin()); it != end; ++it) {
+        KCCell cell = it.value();
         QString cellName = cell.name();
         while (cellName.count() < 4) cellName.prepend(' ');
         kDebug(36002) << "depth(" << cellName << " ) =" << it.key();

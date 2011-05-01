@@ -76,7 +76,7 @@ bool AutoFormatCommand::process(Element* element)
     // Top row
     for (int col = rect.left() + 1; col <= rect.right(); ++col) {
         int pos = 1 + ((col - rect.left() - 1) % 2);
-        Cell cell(m_sheet, col, rect.top());
+        KCCell cell(m_sheet, col, rect.top());
         if (!cell.isPartOfMerged()) {
             KCStyle style;
             if (!m_styles[pos].isDefault())
@@ -93,7 +93,7 @@ bool AutoFormatCommand::process(Element* element)
     // Left column
     for (int row = rect.top() + 1; row <= rect.bottom(); ++row) {
         int pos = 4 + ((row - rect.top() - 1) % 2) * 4;
-        Cell cell(m_sheet, rect.left(), row);
+        KCCell cell(m_sheet, rect.left(), row);
         if (!cell.isPartOfMerged()) {
             KCStyle style;
             if (!m_styles[pos].isDefault())
@@ -111,7 +111,7 @@ bool AutoFormatCommand::process(Element* element)
     for (int col = rect.left() + 1; col <= rect.right(); ++col) {
         for (int row = rect.top() + 1; row <= rect.bottom(); ++row) {
             int pos = 5 + ((row - rect.top() - 1) % 2) * 4 + ((col - rect.left() - 1) % 2);
-            Cell cell(m_sheet, col, row);
+            KCCell cell(m_sheet, col, row);
             if (!cell.isPartOfMerged()) {
                 if (!m_styles[pos].isDefault())
                     m_sheet->cellStorage()->setStyle(KCRegion(col, row), m_styles[pos]);
@@ -144,7 +144,7 @@ bool AutoFormatCommand::process(Element* element)
 
     // Outer right border
     for (int row = rect.top(); row <= rect.bottom(); ++row) {
-        Cell cell(m_sheet, rect.right(), row);
+        KCCell cell(m_sheet, rect.right(), row);
         if (!cell.isPartOfMerged()) {
             if (row == rect.top()) {
                 if (!m_styles[3].isDefault()) {
@@ -170,7 +170,7 @@ bool AutoFormatCommand::process(Element* element)
 
     // Outer bottom border
     for (int col = rect.left(); col <= rect.right(); ++col) {
-        Cell cell(m_sheet, col, rect.bottom());
+        KCCell cell(m_sheet, col, rect.bottom());
         if (!cell.isPartOfMerged()) {
             if (col == rect.left()) {
                 if (!m_styles[12].isDefault()) {

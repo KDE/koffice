@@ -23,7 +23,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "Damages.h"
 #include "Map.h"
 #include "ui/Selection.h" // FIXME detach from ui
@@ -72,13 +72,13 @@ bool MergeCommand::process(Element* element)
             for (int row = top; row <= bottom; ++row) {
                 int rows = 0;
                 for (int col = left; col <= right; ++col) {
-                    Cell cell = Cell(m_sheet, col, row);
+                    KCCell cell = KCCell(m_sheet, col, row);
                     if (cell.doesMergeCells()) {
                         rows = qMax(rows, cell.mergedYCells());
                         cell.mergeCells(col, row, 0, 0);
                     }
                 }
-                Cell cell = Cell(m_sheet,  left, row);
+                KCCell cell = KCCell(m_sheet,  left, row);
                 if (!cell.isPartOfMerged()) {
                     cell.mergeCells(left, row, width - 1, rows);
                 }
@@ -87,25 +87,25 @@ bool MergeCommand::process(Element* element)
             for (int col = left; col <= right; ++col) {
                 int cols = 0;
                 for (int row = top; row <= bottom; ++row) {
-                    Cell cell = Cell(m_sheet, col, row);
+                    KCCell cell = KCCell(m_sheet, col, row);
                     if (cell.doesMergeCells()) {
                         cols = qMax(cols, cell.mergedXCells());
                         cell.mergeCells(col, row, 0, 0);
                     }
                 }
-                Cell cell = Cell(m_sheet, col, top);
+                KCCell cell = KCCell(m_sheet, col, top);
                 if (!cell.isPartOfMerged()) {
                     cell.mergeCells(col, top, cols, height - 1);
                 }
             }
         } else {
-            Cell cell = Cell(m_sheet,  left, top);
+            KCCell cell = KCCell(m_sheet,  left, top);
             cell.mergeCells(left, top, width - 1, height - 1);
         }
     } else { // dissociate
         for (int col = left; col <= right; ++col) {
             for (int row = top; row <= bottom; ++row) {
-                Cell cell = Cell(m_sheet, col, row);
+                KCCell cell = KCCell(m_sheet, col, row);
                 if (!cell.doesMergeCells()) {
                     continue;
                 }
@@ -155,7 +155,7 @@ bool MergeCommand::preProcessing()
             int bottom = range.bottom();
             for (int row = range.top(); row <= bottom; ++row) {
                 for (int col = range.left(); col <= right; ++col) {
-                    Cell cell = Cell(m_sheet, col, row);
+                    KCCell cell = KCCell(m_sheet, col, row);
                     if (cell.doesMergeCells()) {
                         QRect rect(col, row, cell.mergedXCells() + 1, cell.mergedYCells() + 1);
                         mergedCells.add(rect);

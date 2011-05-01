@@ -145,7 +145,7 @@ bool PrintJob::Private::pageNeedsPrinting(KCSheet * sheet, const QRect& cellRang
     // TODO Stefan: Is there a better, faster approach?
     for (int row = cellRange.top(); row <= cellRange.bottom() ; ++row) {
         for (int col = cellRange.left(); col <= cellRange.right(); ++col) {
-            if (Cell(sheet, col, row).needsPrinting()) {
+            if (KCCell(sheet, col, row).needsPrinting()) {
                 return true;
             }
         }

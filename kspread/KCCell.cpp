@@ -40,7 +40,7 @@
 */
 
 // Local
-#include "Cell.h"
+#include "KCCell.h"
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -95,7 +95,7 @@
 #include <QTextDocument>
 #include <QTextCursor>
 
-class Cell::Private : public QSharedData
+class KCCell::Private : public QSharedData
 {
 public:
     Private() : sheet(0), column(0), row(0) {}
@@ -106,12 +106,12 @@ public:
 };
 
 
-Cell::Cell()
+KCCell::KCCell()
         : d(0)
 {
 }
 
-Cell::Cell(const KCSheet* sheet, int col, int row)
+KCCell::KCCell(const KCSheet* sheet, int col, int row)
         : d(new Private)
 {
     Q_ASSERT(sheet != 0);
@@ -122,7 +122,7 @@ Cell::Cell(const KCSheet* sheet, int col, int row)
     d->row = row;
 }
 
-Cell::Cell(const KCSheet* sheet, const QPoint& pos)
+KCCell::KCCell(const KCSheet* sheet, const QPoint& pos)
         : d(new Private)
 {
     Q_ASSERT(sheet != 0);
@@ -133,29 +133,29 @@ Cell::Cell(const KCSheet* sheet, const QPoint& pos)
     d->row = pos.y();
 }
 
-Cell::Cell(const Cell& other)
+KCCell::KCCell(const KCCell& other)
         : d(other.d)
 {
 }
 
-Cell::~Cell()
+KCCell::~KCCell()
 {
 }
 
 // Return the sheet that this cell belongs to.
-KCSheet* Cell::sheet() const
+KCSheet* KCCell::sheet() const
 {
     Q_ASSERT(!isNull());
     return d->sheet;
 }
 
-KLocale* Cell::locale() const
+KLocale* KCCell::locale() const
 {
     return sheet()->map()->calculationSettings()->locale();
 }
 
 // Return true if this is the default cell.
-bool Cell::isDefault() const
+bool KCCell::isDefault() const
 {
     // check each stored attribute
     if (value() != Value())
@@ -178,7 +178,7 @@ bool Cell::isDefault() const
 }
 
 // Return true if this is the default cell (apart from maybe a custom style).
-bool Cell::hasDefaultContent() const
+bool KCCell::hasDefaultContent() const
 {
     // check each stored attribute
     if (value() != Value())
@@ -198,7 +198,7 @@ bool Cell::hasDefaultContent() const
     return true;
 }
 
-bool Cell::isEmpty() const
+bool KCCell::isEmpty() const
 {
     // empty = no value or formula
     if (value() != Value())
@@ -208,21 +208,21 @@ bool Cell::isEmpty() const
     return true;
 }
 
-bool Cell::isNull() const
+bool KCCell::isNull() const
 {
     return (!d);
 }
 
 // Return true if this cell is a formula.
 //
-bool Cell::isFormula() const
+bool KCCell::isFormula() const
 {
     return !formula().expression().isEmpty();
 }
 
 // Return the column number of this cell.
 //
-int Cell::column() const
+int KCCell::column() const
 {
     // Make sure this isn't called for the null cell.  This assert
     // can save you (could have saved me!) the hassle of some very
@@ -233,7 +233,7 @@ int Cell::column() const
 }
 
 // Return the row number of this cell.
-int Cell::row() const
+int KCCell::row() const
 {
     // Make sure this isn't called for the null cell.  This assert
     // can save you (could have saved me!) the hassle of some very
@@ -246,7 +246,7 @@ int Cell::row() const
 // Return the name of this cell, i.e. the string that the user would
 // use to reference it.  Example: A1, BZ16
 //
-QString Cell::name() const
+QString KCCell::name() const
 {
     return name(column(), row());
 }
@@ -254,7 +254,7 @@ QString Cell::name() const
 // Return the name of any cell given by (col, row).
 //
 // static
-QString Cell::name(int col, int row)
+QString KCCell::name(int col, int row)
 {
     return columnName(col) + QString::number(row);
 }
@@ -262,7 +262,7 @@ QString Cell::name(int col, int row)
 // Return the name of this cell, including the sheet name.
 // Example: sheet1!A5
 //
-QString Cell::fullName() const
+QString KCCell::fullName() const
 {
     return fullName(sheet(), column(), row());
 }
@@ -270,14 +270,14 @@ QString Cell::fullName() const
 // Return the full name of any cell given a sheet and (col, row).
 //
 // static
-QString Cell::fullName(const KCSheet* s, int col, int row)
+QString KCCell::fullName(const KCSheet* s, int col, int row)
 {
     return s->sheetName() + '!' + name(col, row);
 }
 
 // Return the symbolic name of the column of this cell.  Examples: A, BB.
 //
-QString Cell::columnName() const
+QString KCCell::columnName() const
 {
     return columnName(column());
 }
@@ -285,7 +285,7 @@ QString Cell::columnName() const
 // Return the symbolic name of any column.
 //
 // static
-QString Cell::columnName(uint column)
+QString KCCell::columnName(uint column)
 {
     if (column < 1)     //|| column > KS_colMax)
         return QString("@@@");
@@ -305,47 +305,47 @@ QString Cell::columnName(uint column)
     return str;
 }
 
-QString Cell::comment() const
+QString KCCell::comment() const
 {
     return sheet()->cellStorage()->comment(d->column, d->row);
 }
 
-void Cell::setComment(const QString& comment)
+void KCCell::setComment(const QString& comment)
 {
     sheet()->cellStorage()->setComment(KCRegion(cellPosition()), comment);
 }
 
-Conditions Cell::conditions() const
+Conditions KCCell::conditions() const
 {
     return sheet()->cellStorage()->conditions(d->column, d->row);
 }
 
-void Cell::setConditions(const Conditions& conditions)
+void KCCell::setConditions(const Conditions& conditions)
 {
     sheet()->cellStorage()->setConditions(KCRegion(cellPosition()), conditions);
 }
 
-Database Cell::database() const
+Database KCCell::database() const
 {
     return sheet()->cellStorage()->database(d->column, d->row);
 }
 
-Formula Cell::formula() const
+Formula KCCell::formula() const
 {
     return sheet()->cellStorage()->formula(d->column, d->row);
 }
 
-void Cell::setFormula(const Formula& formula)
+void KCCell::setFormula(const Formula& formula)
 {
     sheet()->cellStorage()->setFormula(column(), row(), formula);
 }
 
-KCStyle Cell::style() const
+KCStyle KCCell::style() const
 {
     return sheet()->cellStorage()->style(d->column, d->row);
 }
 
-KCStyle Cell::effectiveStyle() const
+KCStyle KCCell::effectiveStyle() const
 {
     KCStyle style = sheet()->cellStorage()->style(d->column, d->row);
     // use conditional formatting attributes
@@ -356,18 +356,18 @@ KCStyle Cell::effectiveStyle() const
     return style;
 }
 
-void Cell::setStyle(const KCStyle& style)
+void KCCell::setStyle(const KCStyle& style)
 {
     sheet()->cellStorage()->setStyle(KCRegion(cellPosition()), style);
     sheet()->cellStorage()->styleStorage()->contains(cellPosition());
 }
 
-Validity Cell::validity() const
+Validity KCCell::validity() const
 {
     return sheet()->cellStorage()->validity(d->column, d->row);
 }
 
-void Cell::setValidity(Validity validity)
+void KCCell::setValidity(Validity validity)
 {
     sheet()->cellStorage()->setValidity(KCRegion(cellPosition()), validity);
 }
@@ -379,7 +379,7 @@ void Cell::setValidity(Validity validity)
 // Return the user input of this cell.  This could, for instance, be a
 // formula.
 //
-QString Cell::userInput() const
+QString KCCell::userInput() const
 {
     const Formula formula = this->formula();
     if (!formula.expression().isEmpty())
@@ -387,7 +387,7 @@ QString Cell::userInput() const
     return sheet()->cellStorage()->userInput(d->column, d->row);
 }
 
-void Cell::setUserInput(const QString& string)
+void KCCell::setUserInput(const QString& string)
 {
     QString old = userInput();
 
@@ -416,7 +416,7 @@ void Cell::setUserInput(const QString& string)
 // square when shown.  This could, for instance, be the calculated
 // result of a formula.
 //
-QString Cell::displayText() const
+QString KCCell::displayText() const
 {
     if (isNull())
         return QString();
@@ -438,7 +438,7 @@ QString Cell::displayText() const
 
 // Return the value of this cell.
 //
-const Value Cell::value() const
+const Value KCCell::value() const
 {
     return sheet()->cellStorage()->value(d->column, d->row);
 }
@@ -446,18 +446,18 @@ const Value Cell::value() const
 
 // Set the value of this cell.
 //
-void Cell::setValue(const Value& value)
+void KCCell::setValue(const Value& value)
 {
     sheet()->cellStorage()->setValue(d->column, d->row, value);
 }
 
 
-QSharedPointer<QTextDocument> Cell::richText() const
+QSharedPointer<QTextDocument> KCCell::richText() const
 {
     return sheet()->cellStorage()->richText(d->column, d->row);
 }
 
-void Cell::setRichText(QSharedPointer<QTextDocument> text)
+void KCCell::setRichText(QSharedPointer<QTextDocument> text)
 {
     sheet()->cellStorage()->setRichText(d->column, d->row, text);
 }
@@ -465,7 +465,7 @@ void Cell::setRichText(QSharedPointer<QTextDocument> text)
 // FIXME: Continue commenting and cleaning here (ingwa)
 
 
-void Cell::copyFormat(const Cell& cell)
+void KCCell::copyFormat(const KCCell& cell)
 {
     Q_ASSERT(!isNull());   // trouble ahead...
     Q_ASSERT(!cell.isNull());
@@ -478,7 +478,7 @@ void Cell::copyFormat(const Cell& cell)
         setConditions(cell.conditions());
 }
 
-void Cell::copyAll(const Cell& cell)
+void KCCell::copyAll(const KCCell& cell)
 {
     Q_ASSERT(!isNull());   // trouble ahead...
     Q_ASSERT(!cell.isNull());
@@ -490,7 +490,7 @@ void Cell::copyAll(const Cell& cell)
         setValidity(cell.validity());
 }
 
-void Cell::copyContent(const Cell& cell)
+void KCCell::copyContent(const KCCell& cell)
 {
     Q_ASSERT(!isNull());   // trouble ahead...
     Q_ASSERT(!cell.isNull());
@@ -508,7 +508,7 @@ void Cell::copyContent(const Cell& cell)
     sheet()->cellStorage()->setValue(d->column, d->row, cell.value());
 }
 
-bool Cell::needsPrinting() const
+bool KCCell::needsPrinting() const
 {
     if (!userInput().trimmed().isEmpty())
         return true;
@@ -517,7 +517,7 @@ bool Cell::needsPrinting() const
 
     const KCStyle style = effectiveStyle();
 
-    // Cell borders?
+    // KCCell borders?
     if (style.hasAttribute(KCStyle::TopPen) ||
             style.hasAttribute(KCStyle::LeftPen) ||
             style.hasAttribute(KCStyle::RightPen) ||
@@ -550,7 +550,7 @@ bool Cell::needsPrinting() const
 }
 
 
-QString Cell::encodeFormula(bool fixedReferences) const
+QString KCCell::encodeFormula(bool fixedReferences) const
 {
     if (!isFormula())
         return QString();
@@ -560,7 +560,7 @@ QString Cell::encodeFormula(bool fixedReferences) const
     for (int i = 0; i < tokens.count(); ++i) {
         const Token token = tokens[i];
         switch (token.type()) {
-        case Token::Cell:
+        case Token::KCCell:
         case Token::Range: {
             if (sheet()->map()->namedAreaManager()->contains(token.text())) {
                 result.append(token.text()); // simply keep the area name
@@ -632,7 +632,7 @@ QString Cell::encodeFormula(bool fixedReferences) const
     return result;
 }
 
-QString Cell::decodeFormula(const QString &_text) const
+QString KCCell::decodeFormula(const QString &_text) const
 {
     QString erg;
     unsigned int pos = 0;
@@ -691,12 +691,12 @@ QString Cell::decodeFormula(const QString &_text) const
             // Skip '#' or '$'
             ++pos;
             if (row < 1 || col < 1 || row > KS_rowMax || col > KS_colMax) {
-                kDebug(36003) << "Cell::decodeFormula: row or column out of range (col:" << col << " | row:" << row << ')';
+                kDebug(36003) << "KCCell::decodeFormula: row or column out of range (col:" << col << " | row:" << row << ')';
                 erg += Value::errorREF().errorMessage();
             } else {
                 if (abs1)
                     erg += '$';
-                erg += Cell::columnName(col); //Get column text
+                erg += KCCell::columnName(col); //Get column text
 
                 if (abs2)
                     erg += '$';
@@ -714,7 +714,7 @@ QString Cell::decodeFormula(const QString &_text) const
 //                          Formula handling
 
 
-bool Cell::makeFormula()
+bool KCCell::makeFormula()
 {
 //   kDebug(36002) ;
 
@@ -731,7 +731,7 @@ bool Cell::makeFormula()
     return true;
 }
 
-int Cell::effectiveAlignX() const
+int KCCell::effectiveAlignX() const
 {
     const KCStyle style = effectiveStyle();
     int align = style.halign();
@@ -751,7 +751,7 @@ int Cell::effectiveAlignX() const
     return align;
 }
 
-double Cell::width() const
+double KCCell::width() const
 {
     const int rightCol = d->column + mergedXCells();
     double width = 0.0;
@@ -760,7 +760,7 @@ double Cell::width() const
     return width;
 }
 
-double Cell::height() const
+double KCCell::height() const
 {
     const int bottomRow = d->row + mergedYCells();
     double height = 0.0;
@@ -770,7 +770,7 @@ double Cell::height() const
 }
 
 // parses the text
-void Cell::parseUserInput(const QString& text)
+void KCCell::parseUserInput(const QString& text)
 {
 //   kDebug() ;
 
@@ -842,12 +842,12 @@ void Cell::parseUserInput(const QString& text)
     }
 }
 
-QString Cell::link() const
+QString KCCell::link() const
 {
     return sheet()->cellStorage()->link(d->column, d->row);
 }
 
-void Cell::setLink(const QString& link)
+void KCCell::setLink(const QString& link)
 {
     sheet()->cellStorage()->setLink(d->column, d->row, link);
 
@@ -855,19 +855,19 @@ void Cell::setLink(const QString& link)
         parseUserInput(link);
 }
 
-bool Cell::isDate() const
+bool KCCell::isDate() const
 {
     const Format::Type t = style().formatType();
     return (Format::isDate(t) || ((t == Format::Generic) && (value().format() == Value::fmt_Date)));
 }
 
-bool Cell::isTime() const
+bool KCCell::isTime() const
 {
     const Format::Type t = style().formatType();
     return (Format::isTime(t) || ((t == Format::Generic) && (value().format() == Value::fmt_Time)));
 }
 
-bool Cell::isText() const
+bool KCCell::isText() const
 {
     const Format::Type t = style().formatType();
     return t == Format::Text;
@@ -876,44 +876,44 @@ bool Cell::isText() const
 // Return true if this cell is part of a merged cell, but not the
 // master cell.
 
-bool Cell::isPartOfMerged() const
+bool KCCell::isPartOfMerged() const
 {
     return sheet()->cellStorage()->isPartOfMerged(d->column, d->row);
 }
 
-Cell Cell::masterCell() const
+KCCell KCCell::masterCell() const
 {
     return sheet()->cellStorage()->masterCell(d->column, d->row);
 }
 
 // Merge a number of cells, i.e. make this cell obscure a number of
 // other cells.  If _x and _y == 0, then the merging is removed.
-void Cell::mergeCells(int _col, int _row, int _x, int _y)
+void KCCell::mergeCells(int _col, int _row, int _x, int _y)
 {
     sheet()->cellStorage()->mergeCells(_col, _row, _x, _y);
 }
 
-bool Cell::doesMergeCells() const
+bool KCCell::doesMergeCells() const
 {
     return sheet()->cellStorage()->doesMergeCells(d->column, d->row);
 }
 
-int Cell::mergedXCells() const
+int KCCell::mergedXCells() const
 {
     return sheet()->cellStorage()->mergedXCells(d->column, d->row);
 }
 
-int Cell::mergedYCells() const
+int KCCell::mergedYCells() const
 {
     return sheet()->cellStorage()->mergedYCells(d->column, d->row);
 }
 
-bool Cell::isLocked() const
+bool KCCell::isLocked() const
 {
     return sheet()->cellStorage()->isLocked(d->column, d->row);
 }
 
-QRect Cell::lockedCells() const
+QRect KCCell::lockedCells() const
 {
     return sheet()->cellStorage()->lockedCells(d->column, d->row);
 }
@@ -923,7 +923,7 @@ QRect Cell::lockedCells() const
 //                       Saving and loading
 
 
-QDomElement Cell::save(QDomDocument& doc, int xOffset, int yOffset, bool era)
+QDomElement KCCell::save(QDomDocument& doc, int xOffset, int yOffset, bool era)
 {
     // Save the position of this cell
     QDomElement cell = doc.createElement("cell");
@@ -1004,7 +1004,7 @@ QDomElement Cell::save(QDomDocument& doc, int xOffset, int yOffset, bool era)
         return QDomElement();
 }
 
-bool Cell::saveCellResult(QDomDocument& doc, QDomElement& result,
+bool KCCell::saveCellResult(QDomDocument& doc, QDomElement& result,
                           QString str)
 {
     QString dataType = "Other"; // fallback
@@ -1050,7 +1050,7 @@ bool Cell::saveCellResult(QDomDocument& doc, QDomElement& result,
     return true; /* really isn't much of a way for this function to fail */
 }
 
-void Cell::saveOdfAnnotation(KoXmlWriter &xmlwriter)
+void KCCell::saveOdfAnnotation(KoXmlWriter &xmlwriter)
 {
     const QString comment = this->comment();
     if (!comment.isEmpty()) {
@@ -1066,7 +1066,7 @@ void Cell::saveOdfAnnotation(KoXmlWriter &xmlwriter)
     }
 }
 
-QString Cell::saveOdfCellStyle(KoGenStyle &currentCellStyle, KoGenStyles &mainStyles)
+QString KCCell::saveOdfCellStyle(KoGenStyle &currentCellStyle, KoGenStyles &mainStyles)
 {
     const Conditions conditions = this->conditions();
     if (!conditions.isEmpty()) {
@@ -1078,11 +1078,11 @@ QString Cell::saveOdfCellStyle(KoGenStyle &currentCellStyle, KoGenStyles &mainSt
 }
 
 
-bool Cell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
+bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
                    int row, int column, int &repeated,
                    OdfSavingContext& tableContext)
 {
-    // see: OpenDocument, 8.1.3 Table Cell
+    // see: OpenDocument, 8.1.3 Table KCCell
     if (!isPartOfMerged())
         xmlwriter.startElement("table:table-cell");
     else
@@ -1128,7 +1128,7 @@ bool Cell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
             !tableContext.cellHasAnchoredShapes(sheet(), row, column)) {
         bool refCellIsDefault = isDefault();
         int j = column + 1;
-        Cell nextCell = sheet()->cellStorage()->nextInRow(column, row);
+        KCCell nextCell = sheet()->cellStorage()->nextInRow(column, row);
         while (!nextCell.isNull()) {
             // if
             //   the next cell is not the adjacent one
@@ -1155,14 +1155,14 @@ bool Cell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
             // get the next cell and set the index to the adjacent cell
             nextCell = sheet()->cellStorage()->nextInRow(j++, row);
         }
-        //kDebug(36003) << "Cell::saveOdf: empty cell in column" << column
+        //kDebug(36003) << "KCCell::saveOdf: empty cell in column" << column
         //<< "repeated" << repeated << "time(s)" << endl;
 
         if (repeated > 1)
             xmlwriter.addAttribute("table:number-columns-repeated", QString::number(repeated));
     }
 
-    Validity validity = Cell(sheet(), column, row).validity();
+    Validity validity = KCCell(sheet(), column, row).validity();
     if (!validity.isEmpty()) {
         GenValidationStyle styleVal(&validity, sheet()->map()->converter());
         xmlwriter.addAttribute("table:validation-name", tableContext.valStyle.insert(styleVal));
@@ -1228,7 +1228,7 @@ bool Cell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
             double endY = 0.0;
             const int col = sheet()->leftColumn(bottomRight.x(), endX);
             const int row = sheet()->topRow(bottomRight.y(), endY);
-            shape->setAdditionalAttribute("table:end-cell-address", Cell(sheet(), col, row).name());
+            shape->setAdditionalAttribute("table:end-cell-address", KCCell(sheet(), col, row).name());
             shape->setAdditionalAttribute("table:end-x", QString::number(bottomRight.x() - endX));
             shape->setAdditionalAttribute("table:end-y", QString::number(bottomRight.y() - endY));
             shapes[i]->saveOdf(tableContext.shapeContext);
@@ -1244,7 +1244,7 @@ bool Cell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
     return true;
 }
 
-void Cell::saveOdfValue(KoXmlWriter &xmlWriter)
+void KCCell::saveOdfValue(KoXmlWriter &xmlWriter)
 {
     switch (value().format()) {
     case Value::fmt_None: break;  //NOTHING HERE
@@ -1317,7 +1317,7 @@ void Cell::saveOdfValue(KoXmlWriter &xmlWriter)
     };
 }
 
-bool Cell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
+bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
 {
     static const QString sFormula           = QString::fromLatin1("formula");
     static const QString sValidationName    = QString::fromLatin1("validation-name");
@@ -1637,7 +1637,7 @@ static bool findDrawElements(const KoXmlElement& parent)
     return false;
 }
 
-void Cell::loadOdfCellText(const KoXmlElement& parent, OdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
+void KCCell::loadOdfCellText(const KoXmlElement& parent, OdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
 {
     //Search and load each paragraph of text. Each paragraph is separated by a line break
     KoXmlElement textParagraphElement;
@@ -1718,7 +1718,7 @@ void Cell::loadOdfCellText(const KoXmlElement& parent, OdfLoadingContext& tableC
     }
 }
 
-void Cell::loadOdfObjects(const KoXmlElement &parent, OdfLoadingContext& tableContext)
+void KCCell::loadOdfObjects(const KoXmlElement &parent, OdfLoadingContext& tableContext)
 {
     // Register additional attributes, that identify shapes anchored in cells.
     // Their dimensions need adjustment after all rows are loaded,
@@ -1742,7 +1742,7 @@ void Cell::loadOdfObjects(const KoXmlElement &parent, OdfLoadingContext& tableCo
     }
 }
 
-void Cell::loadOdfObject(const KoXmlElement &element, KoShapeLoadingContext &shapeContext)
+void KCCell::loadOdfObject(const KoXmlElement &element, KoShapeLoadingContext &shapeContext)
 {
     KoShape* shape = KoShapeRegistry::instance()->createShapeFromOdf(element, shapeContext);
     if (!shape) {
@@ -1802,7 +1802,7 @@ void Cell::loadOdfObject(const KoXmlElement &element, KoShapeLoadingContext &sha
     shape->setSize(size);
 }
 
-bool Cell::load(const KoXmlElement & cell, int _xshift, int _yshift,
+bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
                 Paste::Mode mode, Paste::Operation op, bool paste)
 {
     bool ok;
@@ -1818,11 +1818,11 @@ bool Cell::load(const KoXmlElement & cell, int _xshift, int _yshift,
 
     // Validation
     if (d->row < 1 || d->row > KS_rowMax) {
-        kDebug(36001) << "Cell::load: Value out of range Cell:row=" << d->row;
+        kDebug(36001) << "KCCell::load: Value out of range KCCell:row=" << d->row;
         return false;
     }
     if (d->column < 1 || d->column > KS_colMax) {
-        kDebug(36001) << "Cell::load: Value out of range Cell:column=" << d->column;
+        kDebug(36001) << "KCCell::load: Value out of range KCCell:column=" << d->column;
         return false;
     }
 
@@ -1839,7 +1839,7 @@ bool Cell::load(const KoXmlElement & cell, int _xshift, int _yshift,
             if (!ok) return false;
             // Validation
             if (i < 0 || i > KS_spanMax) {
-                kDebug(36001) << "Value out of range Cell::colspan=" << i;
+                kDebug(36001) << "Value out of range KCCell::colspan=" << i;
                 return false;
             }
             if (i)
@@ -1851,7 +1851,7 @@ bool Cell::load(const KoXmlElement & cell, int _xshift, int _yshift,
             if (!ok) return false;
             // Validation
             if (i < 0 || i > KS_spanMax) {
-                kDebug(36001) << "Value out of range Cell::rowspan=" << i;
+                kDebug(36001) << "Value out of range KCCell::rowspan=" << i;
                 return false;
             }
             if (i)
@@ -2005,7 +2005,7 @@ bool Cell::load(const KoXmlElement & cell, int _xshift, int _yshift,
     return true;
 }
 
-bool Cell::loadCellData(const KoXmlElement & text, Paste::Operation op, const QString &_dataType)
+bool KCCell::loadCellData(const KoXmlElement & text, Paste::Operation op, const QString &_dataType)
 {
     //TODO: use converter()->asString() to generate userInput()
 
@@ -2162,7 +2162,7 @@ bool Cell::loadCellData(const KoXmlElement & text, Paste::Operation op, const QS
     return true;
 }
 
-QTime Cell::toTime(const KoXmlElement &element)
+QTime KCCell::toTime(const KoXmlElement &element)
 {
     //TODO: can't we use tryParseTime (after modification) instead?
     QString t = element.text();
@@ -2180,7 +2180,7 @@ QTime Cell::toTime(const KoXmlElement &element)
     return value().asTime(sheet()->map()->calculationSettings());
 }
 
-QDate Cell::toDate(const KoXmlElement &element)
+QDate KCCell::toDate(const KoXmlElement &element)
 {
     QString t = element.text();
     int pos;
@@ -2197,7 +2197,7 @@ QDate Cell::toDate(const KoXmlElement &element)
     return value().asDate(sheet()->map()->calculationSettings());
 }
 
-QString Cell::pasteOperation(const QString &new_text, const QString &old_text, Paste::Operation op)
+QString KCCell::pasteOperation(const QString &new_text, const QString &old_text, Paste::Operation op)
 {
     if (op == Paste::OverWrite)
         return new_text;
@@ -2277,13 +2277,13 @@ QString Cell::pasteOperation(const QString &new_text, const QString &old_text, P
     return tmp;
 }
 
-Cell& Cell::operator=(const Cell & other)
+KCCell& KCCell::operator=(const KCCell & other)
 {
     d = other.d;
     return *this;
 }
 
-bool Cell::operator<(const Cell& other) const
+bool KCCell::operator<(const KCCell& other) const
 {
     if (sheet() != other.sheet())
         return sheet() < other.sheet(); // pointers!
@@ -2292,17 +2292,17 @@ bool Cell::operator<(const Cell& other) const
     return ((row() == other.row()) && (column() < other.column()));
 }
 
-bool Cell::operator==(const Cell& other) const
+bool KCCell::operator==(const KCCell& other) const
 {
     return (row() == other.row() && column() == other.column() && sheet() == other.sheet());
 }
 
-bool Cell::operator!() const
+bool KCCell::operator!() const
 {
     return (!d);   // isNull()
 }
 
-bool Cell::compareData(const Cell& other) const
+bool KCCell::compareData(const KCCell& other) const
 {
     if (value() != other.value())
         return false;
@@ -2325,7 +2325,7 @@ bool Cell::compareData(const Cell& other) const
     return true;
 }
 
-QPoint Cell::cellPosition() const
+QPoint KCCell::cellPosition() const
 {
     Q_ASSERT(!isNull());
     return QPoint(column(), row());

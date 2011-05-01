@@ -24,7 +24,7 @@
 #include <QString>
 #include <QUndoCommand>
 
-#include <Cell.h>
+#include <KCCell.h>
 
 /**
  * \ingroup Commands
@@ -33,13 +33,13 @@
 class LinkCommand : public QUndoCommand
 {
 public:
-    LinkCommand(const Cell& cell, const QString& text, const QString& link);
+    LinkCommand(const KCCell& cell, const QString& text, const QString& link);
 
     virtual void redo();
     virtual void undo();
 
 protected:
-    Cell cell;
+    KCCell cell;
     QString oldText;
     QString oldLink;
     QString newText;

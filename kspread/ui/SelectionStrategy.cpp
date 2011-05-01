@@ -32,7 +32,7 @@
 class SelectionStrategy::Private
 {
 public:
-    Cell startCell;
+    KCCell startCell;
 };
 
 SelectionStrategy::SelectionStrategy(CellToolBase *cellTool,
@@ -40,7 +40,7 @@ SelectionStrategy::SelectionStrategy(CellToolBase *cellTool,
         : AbstractSelectionStrategy(cellTool, documentPos, modifiers)
         , d(new Private)
 {
-    d->startCell = Cell();
+    d->startCell = KCCell();
 
     const KoShape* shape = tool()->canvas()->shapeManager()->selection()->firstSelectedShape();
     const QPointF position = documentPos - (shape ? shape->position() : QPointF(0.0, 0.0));
@@ -73,7 +73,7 @@ SelectionStrategy::SelectionStrategy(CellToolBase *cellTool,
     if (col > KS_colMax || row > KS_rowMax) {
         kDebug(36005) << "col or row is out of range:" << "col:" << col << " row:" << row;
     } else {
-        d->startCell = Cell(sheet, col, row);
+        d->startCell = KCCell(sheet, col, row);
         if (selection->referenceSelectionMode()) {
             selection->emitRequestFocusEditor();
             const bool sizeGripHit = hitTestReferenceSizeGrip(tool()->canvas(), selection, position);
@@ -138,7 +138,7 @@ void SelectionStrategy::handleMouseMove(const QPointF &documentPos,
         // Check boundaries.
         if (col > KS_colMax || row > KS_rowMax) {
             kDebug(36005) << "col or row is out of range:" << "col:" << col << " row:" << row;
-        } else if (!(d->startCell == Cell(sheet, col, row))) {
+        } else if (!(d->startCell == KCCell(sheet, col, row))) {
             const QRect range = selection()->activeElement()->rect();
             const QPoint offset = d->startCell.cellPosition() - range.topLeft();
             const QPoint topLeft = QPoint(col, row) + offset;

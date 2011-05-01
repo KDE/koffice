@@ -61,7 +61,7 @@
 #include <KoUnitDoubleSpinBox.h>
 
 #include "CalculationSettings.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "Localization.h"
 #include "Map.h"
@@ -327,7 +327,7 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
     else
         oneRow = false;
 
-    Cell cell = Cell(m_sheet, left, top);
+    KCCell cell = KCCell(m_sheet, left, top);
     oneCell = (left == right && top == bottom &&
                !cell.doesMergeCells());
 
@@ -351,28 +351,28 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
     borders[BorderType_RisingDiagonal].color = styleTopLeft.goUpDiagonalPen().color();
 
     // Look at the upper right one for the right border.
-    const KCStyle styleTopRight = Cell(m_sheet, right, top).style();
+    const KCStyle styleTopRight = KCCell(m_sheet, right, top).style();
     borders[BorderType_Right].style = styleTopRight.rightBorderPen().style();
     borders[BorderType_Right].width = styleTopRight.rightBorderPen().width();
     borders[BorderType_Right].color = styleTopRight.rightBorderPen().color();
 
     // Look at the bottom left cell for the bottom border.
-    const KCStyle styleBottomLeft = Cell(m_sheet, left, bottom).style();
+    const KCStyle styleBottomLeft = KCCell(m_sheet, left, bottom).style();
     borders[BorderType_Bottom].style = styleBottomLeft.bottomBorderPen().style();
     borders[BorderType_Bottom].width = styleBottomLeft.bottomBorderPen().width();
     borders[BorderType_Bottom].color = styleBottomLeft.bottomBorderPen().color();
 
     // Just an assumption
-    cell = Cell(m_sheet, right, top);
+    cell = KCCell(m_sheet, right, top);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
 
-        const KCStyle styleMove1 = Cell(m_sheet, cell.column(), top).style();
+        const KCStyle styleMove1 = KCCell(m_sheet, cell.column(), top).style();
         borders[BorderType_Vertical].style = styleMove1.leftBorderPen().style();
         borders[BorderType_Vertical].width = styleMove1.leftBorderPen().width();
         borders[BorderType_Vertical].color = styleMove1.leftBorderPen().color();
 
-        const KCStyle styleMove2 = Cell(m_sheet, right, cell.row()).style();
+        const KCStyle styleMove2 = KCCell(m_sheet, right, cell.row()).style();
         borders[BorderType_Horizontal].style = styleMove2.topBorderPen().style();
         borders[BorderType_Horizontal].width = styleMove2.topBorderPen().width();
         borders[BorderType_Horizontal].color = styleMove2.topBorderPen().color();
@@ -380,13 +380,13 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
         borders[BorderType_Vertical].style = styleTopRight.leftBorderPen().style();
         borders[BorderType_Vertical].width = styleTopRight.leftBorderPen().width();
         borders[BorderType_Vertical].color = styleTopRight.leftBorderPen().color();
-        const KCStyle styleBottomRight = Cell(m_sheet, right, bottom).style();
+        const KCStyle styleBottomRight = KCCell(m_sheet, right, bottom).style();
         borders[BorderType_Horizontal].style = styleBottomRight.topBorderPen().style();
         borders[BorderType_Horizontal].width = styleBottomRight.topBorderPen().width();
         borders[BorderType_Horizontal].color = styleBottomRight.topBorderPen().color();
     }
 
-    cell = Cell(m_sheet, left, top);
+    cell = KCCell(m_sheet, left, top);
     prefix = styleTopLeft.prefix();
     postfix = styleTopLeft.postfix();
     precision = styleTopLeft.precision();
@@ -750,7 +750,7 @@ void CellFormatDialog::init()
         formatRedAlwaysSignedPixmap  = paintFormatPixmap("+123.456", Qt::black, "-123.456", Qt::red);
     }
 
-    setCaption(i18n("Cell Format"));
+    setCaption(i18n("KCCell Format"));
     setButtons(KDialog::Ok | KDialog::Cancel);
     setFaceType(KPageDialog::Tabbed);
     setMinimumWidth(600);
@@ -783,7 +783,7 @@ void CellFormatDialog::init()
     addPage(patternPage, i18n("Back&ground"));
 
     protectPage = new CellFormatPageProtection(this, this);
-    addPage(protectPage, i18n("&Cell Protection"));
+    addPage(protectPage, i18n("&KCCell Protection"));
 
     connect(this, SIGNAL(okClicked()), this, SLOT(slotApply()));
 }
@@ -918,11 +918,11 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     grid->addWidget(date, 7, 0);
 
     time = new QRadioButton(i18n("Time"), grp);
-    time->setWhatsThis(i18n("This formats your cell content as a time. To enter a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Date & Time. In the Cell Format dialog box you can set how the time should be displayed by choosing one of the available time format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a time, KSpread will display 00:00 in the global format you have in System Settings."));
+    time->setWhatsThis(i18n("This formats your cell content as a time. To enter a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Date & Time. In the KCCell Format dialog box you can set how the time should be displayed by choosing one of the available time format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a time, KSpread will display 00:00 in the global format you have in System Settings."));
     grid->addWidget(time, 8, 0);
 
     datetime = new QRadioButton(i18n("Date and Time"), grp);
-    datetime->setWhatsThis(i18n("This formats your cell content as date and time. To enter a date and a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Time & Dates. In the Cell Format dialog box you can set how the time should be displayed by choosing one of the available date format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a date and time, KSpread will display 00:00 in the global format you have in System Settings."));
+    datetime->setWhatsThis(i18n("This formats your cell content as date and time. To enter a date and a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Time & Dates. In the KCCell Format dialog box you can set how the time should be displayed by choosing one of the available date format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a date and time, KSpread will display 00:00 in the global format you have in System Settings."));
     grid->addWidget(datetime, 9, 0);
 
     textFormat = new QRadioButton(i18n("Text"), grp);

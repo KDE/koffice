@@ -60,7 +60,7 @@ QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
 
             // Save all cells.
             for (int row = range.top(); row <= range.bottom(); ++row) {
-                Cell cell = storage->firstInRow(row);
+                KCCell cell = storage->firstInRow(row);
                 for (; !cell.isNull(); cell = storage->nextInRow(cell.column(), cell.row())) {
                     if (!cell.isPartOfMerged()) {
                         root.appendChild(cell.save(xmlDoc, 0, top - 1, era));
@@ -94,7 +94,7 @@ QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
 
             // Save all cells.
             for (int col = range.left(); col <= range.right(); ++col) {
-                Cell cell = storage->firstInColumn(col);
+                KCCell cell = storage->firstInColumn(col);
                 for (; !cell.isNull(); cell = storage->nextInColumn(cell.column(), cell.row())) {
                     if (!cell.isPartOfMerged()) {
                         root.appendChild(cell.save(xmlDoc, left - 1, 0, era));
@@ -118,7 +118,7 @@ QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
         }
 
         // Save all cells.
-        Cell cell;
+        KCCell cell;
         for (int row = range.top(); row <= range.bottom(); ++row) {
             if (range.left() == 1) {
                 cell = storage->firstInRow(row);
@@ -136,7 +136,7 @@ QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
     return xmlDoc;
 }
 
-static QString cellAsText(const Cell& cell, bool addTab)
+static QString cellAsText(const KCCell& cell, bool addTab)
 {
     QString result;
     if (!cell.isDefault()) {
@@ -152,7 +152,7 @@ QString CopyCommand::saveAsPlainText(const KCRegion &region)
 {
     // Only one cell selected? => copy active cell
     if (region.isSingular()) {
-        const Cell cell(region.firstSheet(), region.firstRange().topLeft());
+        const KCCell cell(region.firstSheet(), region.firstRange().topLeft());
         return cell.displayText();
     }
 
@@ -167,7 +167,7 @@ QString CopyCommand::saveAsPlainText(const KCRegion &region)
     QString result;
     for (int row = top; row <= bottom; ++row) {
         for (int col = left; col <= right; ++col) {
-            Cell cell(region.lastSheet(), col, row);
+            KCCell cell(region.lastSheet(), col, row);
             result += cellAsText(cell, col != right);
         }
         result += '\n';

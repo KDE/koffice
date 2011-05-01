@@ -133,11 +133,11 @@ public:
     };
 
     // This is the text we want to display. Not necessarily the same
-    // as the user input, e.g. Cell::userInput()="1" and displayText="1.00".
+    // as the user input, e.g. KCCell::userInput()="1" and displayText="1.00".
     QString displayText;
     QSharedPointer<QTextDocument> richText;
 public:
-    void checkForFilterButton(const Cell&);
+    void checkForFilterButton(const KCCell&);
     void calculateTextSize(const QFont& font, const QFontMetricsF& fontMetrics);
     void calculateHorizontalTextSize(const QFont& font, const QFontMetricsF& fontMetrics);
     void calculateVerticalTextSize(const QFont& font, const QFontMetricsF& fontMetrics);
@@ -173,12 +173,12 @@ CellView::CellView(SheetView* sheetView, int col, int row)
     Q_ASSERT(1 <= row && row <= KS_rowMax);
 
     const KCSheet* sheet = sheetView->sheet();
-    Cell cell(sheet, col, row);
+    KCCell cell(sheet, col, row);
 
     // create the effective style
     if (cell.isPartOfMerged()) {
         d->merged = true;
-        Cell masterCell = cell.masterCell();
+        KCCell masterCell = cell.masterCell();
         d->style = sheetView->cellView(masterCell.column(), masterCell.row()).style();
     } else {
         // lookup the 'normal' style
@@ -290,11 +290,11 @@ QRectF CellView::textRect() const
     return QRectF(d->textX, d->textY, d->textWidth, d->textWidth);
 }
 
-QString CellView::testAnchor(SheetView* sheetView, const Cell& cell, qreal x, qreal y) const
+QString CellView::testAnchor(SheetView* sheetView, const KCCell& cell, qreal x, qreal y) const
 {
     if (isObscured()) {
         KCSheet* sheet = cell.sheet();
-        Cell otherCell = Cell(sheet, d->obscuringCellX, d->obscuringCellY);
+        KCCell otherCell = KCCell(sheet, d->obscuringCellX, d->obscuringCellY);
         const CellView& otherView = sheetView->cellView(otherCell.column(), otherCell.row());
         if (cell.column() != otherCell.column()) x += sheet->columnPosition(cell.column()) - sheet->columnPosition(otherCell.column());
         if (cell.row() != otherCell.row()) y += sheet->rowPosition(cell.row()) - sheet->rowPosition(otherCell.row());
@@ -310,7 +310,7 @@ QString CellView::testAnchor(SheetView* sheetView, const Cell& cell, qreal x, qr
     return QString();
 }
 
-bool CellView::hitTestFilterButton(const Cell& cell, const QRect& cellRect, const QPoint& position) const
+bool CellView::hitTestFilterButton(const KCCell& cell, const QRect& cellRect, const QPoint& position) const
 {
     if (!d->filterButton)
         return false;
@@ -340,7 +340,7 @@ bool CellView::hitTestFilterButton(const Cell& cell, const QRect& cellRect, cons
 //
 void CellView::paintCellContents(const QRectF& paintRect, QPainter& painter,
                                  const QPointF& coordinate,
-                                 const Cell& cell, SheetView* sheetView)
+                                 const KCCell& cell, SheetView* sheetView)
 {
     if (d->hidden)
         return;
@@ -395,7 +395,7 @@ void CellView::paintCellContents(const QRectF& paintRect, QPainter& painter,
 void CellView::paintCellBorders(const QRectF& paintRegion, QPainter& painter,
                                 const QPointF& coordinate,
                                 const QRect& cellRegion,
-                                const Cell& cell, SheetView* sheetView)
+                                const KCCell& cell, SheetView* sheetView)
 {
     // If the rect of this cell doesn't intersect the rect that should
     // be painted, we can skip the rest and return. (Note that we need
@@ -520,7 +520,7 @@ void CellView::paintCellBackground(QPainter& painter, const QPointF& coordinate)
 void CellView::paintDefaultBorders(QPainter& painter, const QRectF& paintRect,
                                    const QPointF &coordinate,
                                    Borders paintBorder, const QRect& cellRegion,
-                                   const Cell& cell, SheetView* sheetView)
+                                   const KCCell& cell, SheetView* sheetView)
 {
     // Should the default borders be shown?
     if (!cell.sheet()->getShowGrid())
@@ -668,7 +668,7 @@ void CellView::paintDefaultBorders(QPainter& painter, const QRectF& paintRect,
 
 #if 0 // KSPREAD_WIP_STYLE_BORDER
         if (cellRef.x() > 1) {
-            Cell  *cell_west = Cell(cell.sheet(), cellRef.x() - 1,
+            KCCell  *cell_west = KCCell(cell.sheet(), cellRef.x() - 1,
                                     cellRef.y());
             QPen t = cell_west->effTopBorderPen(cellRef.x() - 1, cellRef.y());
             QPen b = cell_west->effBottomBorderPen(cellRef.x() - 1, cellRef.y());
@@ -704,7 +704,7 @@ void CellView::paintDefaultBorders(QPainter& painter, const QRectF& paintRect,
 
 #if 0 // KSPREAD_WIP_STYLE_BORDER
         if (cellRef.y() > 1) {
-            Cell  *cell_north = Cell(cell.sheet(), cellRef.x(),
+            KCCell  *cell_north = KCCell(cell.sheet(), cellRef.x(),
                                      cellRef.y() - 1);
 
             QPen l = cell_north->effLeftBorderPen(cellRef.x(), cellRef.y() - 1);
@@ -741,7 +741,7 @@ void CellView::paintDefaultBorders(QPainter& painter, const QRectF& paintRect,
 
 #if 0 // KSPREAD_WIP_STYLE_BORDER
         if (cellRef.x() < KS_colMax) {
-            Cell  *cell_east = Cell(cell.sheet(), cellRef.x() + 1,
+            KCCell  *cell_east = KCCell(cell.sheet(), cellRef.x() + 1,
                                     cellRef.y());
 
             QPen t = cell_east->effTopBorderPen(cellRef.x() + 1, cellRef.y());
@@ -778,7 +778,7 @@ void CellView::paintDefaultBorders(QPainter& painter, const QRectF& paintRect,
         int dr = 0;
 #if 0 // KSPREAD_WIP_STYLE_BORDER
         if (cellRef.y() < KS_rowMax) {
-            Cell  *cell_south = Cell(cell.sheet(), cellRef.x(),
+            KCCell  *cell_south = KCCell(cell.sheet(), cellRef.x(),
                                      cellRef.y() + 1);
 
             QPen l = cell_south->effLeftBorderPen(cellRef.x(), cellRef.y() + 1);
@@ -816,7 +816,7 @@ void CellView::paintDefaultBorders(QPainter& painter, const QRectF& paintRect,
 //
 void CellView::paintCommentIndicator(QPainter& painter,
                                      const QPointF& coordinate,
-                                     const Cell& cell)
+                                     const KCCell& cell)
 {
     // Point the little corner if there is a comment attached
     // to this cell.
@@ -859,7 +859,7 @@ void CellView::paintCommentIndicator(QPainter& painter,
 //
 void CellView::paintFormulaIndicator(QPainter& painter,
                                      const QPointF& coordinate,
-                                     const Cell& cell)
+                                     const KCCell& cell)
 {
     if (cell.isFormula() &&
             cell.sheet()->getShowFormulaIndicator() &&
@@ -898,7 +898,7 @@ void CellView::paintFormulaIndicator(QPainter& painter,
 //
 void CellView::paintMatrixElementIndicator(QPainter& painter,
         const QPointF& coordinate,
-        const Cell& cell)
+        const KCCell& cell)
 {
     if (cell.isLocked() &&
             cell.sheet()->getShowFormulaIndicator() &&
@@ -984,7 +984,7 @@ static int fixAngle(int angle) {
 //
 void CellView::paintText(QPainter& painter,
                          const QPointF& coordinate,
-                         const Cell& cell)
+                         const KCCell& cell)
 {
     QColor textColorPrint = d->style.fontColor();
     // Resolve the text color if invalid (=default).
@@ -1156,7 +1156,7 @@ void CellView::paintText(QPainter& painter,
 // Paint page borders on the page.  Only do this on the screen.
 //
 void CellView::paintPageBorders(QPainter& painter, const QPointF& coordinate,
-                                Borders paintBorder, const Cell& cell)
+                                Borders paintBorder, const KCCell& cell)
 {
     // Not screen?  Return immediately.
     if (dynamic_cast<QPrinter*>(painter.device()))
@@ -1362,7 +1362,7 @@ void CellView::paintCellDiagonalLines(QPainter& painter, const QPointF& coordina
 }
 
 void CellView::paintFilterButton(QPainter& painter, const QPointF& coordinate,
-                                 const Cell& cell, SheetView* sheetView)
+                                 const KCCell& cell, SheetView* sheetView)
 {
     Q_UNUSED(cell);
     QStyleOptionComboBox options;
@@ -1385,7 +1385,7 @@ void CellView::paintFilterButton(QPainter& painter, const QPointF& coordinate,
 //
 // Used in paintText().
 //
-QString CellView::textDisplaying(const QFontMetricsF& fm, const Cell& cell)
+QString CellView::textDisplaying(const QFontMetricsF& fm, const KCCell& cell)
 {
     KCStyle::HAlign hAlign = style().halign();
     if (!d->fittingWidth)
@@ -1528,7 +1528,7 @@ QString CellView::textDisplaying(const QFontMetricsF& fm, const Cell& cell)
 //
 //   d->displayText
 //
-void CellView::makeLayout(SheetView* sheetView, const Cell& cell)
+void CellView::makeLayout(SheetView* sheetView, const KCCell& cell)
 {
     // Up to here, we have just cared about the contents, not the
     // painting of it.  Now it is time to see if the contents fits into
@@ -1594,7 +1594,7 @@ void CellView::makeLayout(SheetView* sheetView, const Cell& cell)
 }
 
 
-void CellView::calculateCellDimension(const Cell& cell)
+void CellView::calculateCellDimension(const KCCell& cell)
 {
     Q_UNUSED(cell);
 #if 0
@@ -1602,7 +1602,7 @@ void CellView::calculateCellDimension(const Cell& cell)
     qreal height = cell.sheet()->rowFormat(cell.row())->height();
 
     // Calculate extraWidth and extraHeight if we have a merged cell.
-    if (cell.testFlag(Cell::Flag_Merged)) {
+    if (cell.testFlag(KCCell::Flag_Merged)) {
         // FIXME: Introduce qreal extraWidth/Height here and use them
         //        instead (see FIXME about this in paintCell()).
 
@@ -1628,7 +1628,7 @@ void CellView::calculateCellDimension(const Cell& cell)
 //
 // Used in makeLayout().
 //
-void CellView::textOffset(const QFontMetricsF& fontMetrics, const Cell& cell)
+void CellView::textOffset(const QFontMetricsF& fontMetrics, const KCCell& cell)
 {
     Q_UNUSED(cell)
     const qreal ascent = fontMetrics.ascent();
@@ -1751,7 +1751,7 @@ void CellView::textOffset(const QFontMetricsF& fontMetrics, const Cell& cell)
     }
 }
 
-void CellView::obscureHorizontalCells(SheetView* sheetView, const Cell& masterCell)
+void CellView::obscureHorizontalCells(SheetView* sheetView, const KCCell& masterCell)
 {
     if (d->hidden)
         return;
@@ -1785,7 +1785,7 @@ void CellView::obscureHorizontalCells(SheetView* sheetView, const Cell& masterCe
         // Find free cells to the right of this one.
         enum { Undefined, EnoughSpace, NotEnoughSpace } status = Undefined;
         while (status == Undefined) {
-            Cell nextCell = Cell(masterCell.sheet(), col + 1, masterCell.row()).masterCell();
+            KCCell nextCell = KCCell(masterCell.sheet(), col + 1, masterCell.row()).masterCell();
 
             if (nextCell.isEmpty()) {
                 extraWidth += nextCell.width();
@@ -1830,7 +1830,7 @@ void CellView::obscureHorizontalCells(SheetView* sheetView, const Cell& masterCe
     }
 }
 
-void CellView::obscureVerticalCells(SheetView* sheetView, const Cell& masterCell)
+void CellView::obscureVerticalCells(SheetView* sheetView, const KCCell& masterCell)
 {
     if (d->hidden)
         return;
@@ -1850,12 +1850,12 @@ void CellView::obscureVerticalCells(SheetView* sheetView, const Cell& masterCell
         // Find free cells bottom to this one
         enum { Undefined, EnoughSpace, NotEnoughSpace } status = Undefined;
         while (status == Undefined) {
-            Cell nextCell = Cell(masterCell.sheet(), masterCell.column(), row + 1).masterCell();
+            KCCell nextCell = KCCell(masterCell.sheet(), masterCell.column(), row + 1).masterCell();
 
             bool isEmpty = true;
             
             for (int col = 0; col < masterCell.mergedXCells() + d->obscuredCellsX+1; col++) {
-                Cell cellNext = Cell(masterCell.sheet(), masterCell.column() + col, row + 1).masterCell();
+                KCCell cellNext = KCCell(masterCell.sheet(), masterCell.column() + col, row + 1).masterCell();
                 if (!cellNext.isEmpty()) {
                     isEmpty = false;
                     break;
@@ -1891,7 +1891,7 @@ void CellView::obscureVerticalCells(SheetView* sheetView, const Cell& masterCell
 }
 
 void CellView::drawText(QPainter& painter, const QPointF& location, const QStringList& textLines,
-                        const Cell& cell, qreal lineSpacing) const
+                        const KCCell& cell, qreal lineSpacing) const
 {
     Q_UNUSED(cell)
 
@@ -1988,7 +1988,7 @@ CellView& CellView::operator=(const CellView & other)
 }
 
 
-void CellView::Private::checkForFilterButton(const Cell& cell)
+void CellView::Private::checkForFilterButton(const KCCell& cell)
 {
     const Database database = cell.database();
     if (database.isEmpty() || !database.displayFilterButtons()) {

@@ -42,7 +42,7 @@ public:
 protected:
     /** Return new value. row/col are relative to sheet, not element.
     If the function sets *parse to true, the value will be treated as an
-    user-entered string and parsed by Cell. */
+    user-entered string and parsed by KCCell. */
     virtual Value newValue(Element *element, int col, int row,
                            bool *parse, Format::Type *fmtType) = 0;
 

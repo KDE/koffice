@@ -28,7 +28,7 @@
 #include <KTextEdit>
 
 #include "CalculationSettings.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "ui/RegionSelector.h"
 #include "Formula.h"
 #include "Map.h"
@@ -51,8 +51,8 @@ class GoalSeekDialog::Private
 {
 public:
     Selection   * selection;
-    Cell          sourceCell;
-    Cell          targetCell;
+    KCCell          sourceCell;
+    KCCell          targetCell;
     double        result;
     int           maxIter;
     double        oldSource;
@@ -134,7 +134,7 @@ void GoalSeekDialog::accept()
 
         const KCRegion source(d->widget.selector3->textEdit()->toPlainText(), sheet->map(), sheet);
         if (!source.isValid() || !source.isSingular()) {
-            KMessageBox::error(this, i18n("Cell reference is invalid."));
+            KMessageBox::error(this, i18n("KCCell reference is invalid."));
             d->widget.selector3->textEdit()->selectAll();
             d->widget.selector3->textEdit()->setFocus();
 
@@ -144,7 +144,7 @@ void GoalSeekDialog::accept()
 
         const KCRegion target(d->widget.selector1->textEdit()->toPlainText(), sheet->map(), sheet);
         if (!target.isValid() || !target.isSingular()) {
-            KMessageBox::error(this, i18n("Cell reference is invalid."));
+            KMessageBox::error(this, i18n("KCCell reference is invalid."));
             d->widget.selector1->textEdit()->selectAll();
             d->widget.selector1->textEdit()->setFocus();
 
@@ -163,8 +163,8 @@ void GoalSeekDialog::accept()
             return;
         }
 
-        d->sourceCell = Cell(source.firstSheet(), source.firstRange().topLeft());
-        d->targetCell = Cell(target.firstSheet(), target.firstRange().topLeft());
+        d->sourceCell = KCCell(source.firstSheet(), source.firstRange().topLeft());
+        d->targetCell = KCCell(target.firstSheet(), target.firstRange().topLeft());
 
         if (!d->sourceCell.value().isNumber()) {
             KMessageBox::error(this, i18n("Source cell must contain a numeric value."));

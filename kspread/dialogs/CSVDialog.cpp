@@ -38,7 +38,7 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "Damages.h"
 #include "Map.h"
@@ -55,7 +55,7 @@ CSVDialog::CSVDialog(QWidget* parent, Selection* selection, Mode mode)
 {
     // Limit the range
     int column = m_selection->lastRange().left();
-    Cell lastCell = m_selection->activeSheet()->cellStorage()->lastInColumn(column);
+    KCCell lastCell = m_selection->activeSheet()->cellStorage()->lastInColumn(column);
     if (!lastCell.isNull())
         if (m_selection->lastRange().bottom() > lastCell.row())
             m_selection->lastRange().setBottom(lastCell.row());
@@ -119,12 +119,12 @@ void CSVDialog::init()
         in.close();
     } else { // if ( m_mode == Column )
         setData(QByteArray());
-        Cell cell;
+        KCCell cell;
         KCSheet * sheet = m_selection->activeSheet();
         QByteArray data;
         int col = m_selection->lastRange().left();
         for (int i = m_selection->lastRange().top(); i <= m_selection->lastRange().bottom(); ++i) {
-            cell = Cell(sheet, col, i);
+            cell = KCCell(sheet, col, i);
             if (!cell.isEmpty()) {
                 data.append(cell.displayText().toUtf8() /* FIXME */);
             }

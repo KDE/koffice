@@ -56,7 +56,7 @@
 
 #include <Formula.h>
 #include <ValueConverter.h>
-#include <Cell.h>
+#include <KCCell.h>
 
 #include "commands/DataManipulators.h"
 
@@ -232,7 +232,7 @@ void ConsolidateDialog::accept()
                     KCSheet *const sheet = ranges[i].firstSheet();
                     Q_ASSERT(sheet);
                     const QRect range = ranges[i].firstRange();
-                    const Cell cell(sheet, col + range.left(), row + range.top());
+                    const KCCell cell(sheet, col + range.left(), row + range.top());
                     if (!cell.value().isEmpty())
                         novalue = false;
                     if (i != 0) {
@@ -249,13 +249,13 @@ void ConsolidateDialog::accept()
         }
     } else if (desc == D_COL) {
         // Get list of all descriptions in the columns
-        QHash<QString, QList<Cell> > columnHeaderCells;
+        QHash<QString, QList<KCCell> > columnHeaderCells;
         for (int i = 0; i < ranges.count(); ++i) {
             KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int col = range.left(); col <= range.right() ; ++col) {
-                const Cell cell(sheet, col, range.top());
+                const KCCell cell(sheet, col, range.top());
                 const Value value = cell.value();
                 const QString columnHeader = converter->asString(value).asString();
                 columnHeaderCells[columnHeader].append(cell);
@@ -283,7 +283,7 @@ void ConsolidateDialog::accept()
             const QString columnHeader = columnHeaders[col];
             d->setContent(destinationSheet, dy, dx + col, columnHeader, command);
 
-            const QList<Cell> cells = columnHeaderCells[columnHeader];
+            const QList<KCCell> cells = columnHeaderCells[columnHeader];
             for (int row = 1; row < rows; ++row) {
                 QString formula = '=' + function + '(';
                 for (int i = 0; i < cells.count(); ++i) {
@@ -293,7 +293,7 @@ void ConsolidateDialog::accept()
                     KCSheet *const sheet = cells[i].sheet();
                     const int headerColumn = cells[i].column();
                     const int headerRow = cells[i].row();
-                    const Cell cell(sheet, headerColumn, headerRow + row);
+                    const KCCell cell(sheet, headerColumn, headerRow + row);
                     const bool fullName = sheet != destinationSheet;
                     formula += fullName ? cell.fullName() : cell.name();
                 }
@@ -304,13 +304,13 @@ void ConsolidateDialog::accept()
         }
     } else if (desc == D_ROW) {
         // Get list of all descriptions in the rows
-        QHash<QString, QList<Cell> > rowHeaderCells;
+        QHash<QString, QList<KCCell> > rowHeaderCells;
         for (int i = 0; i < ranges.count(); ++i) {
             KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int row = range.top(); row <= range.bottom() ; ++row) {
-                const Cell cell(sheet, range.left(), row);
+                const KCCell cell(sheet, range.left(), row);
                 const Value value = cell.value();
                 const QString rowHeader = converter->asString(value).asString();
                 rowHeaderCells[rowHeader].append(cell);
@@ -338,7 +338,7 @@ void ConsolidateDialog::accept()
             const QString rowHeader = rowHeaders[row];
             d->setContent(destinationSheet, dy + row, dx, rowHeader, command);
 
-            const QList<Cell> cells = rowHeaderCells[rowHeader];
+            const QList<KCCell> cells = rowHeaderCells[rowHeader];
             for (int col = 1; col < columns; ++col) {
                 QString formula = '=' + function + '(';
                 for (int i = 0; i < cells.count(); ++i) {
@@ -348,7 +348,7 @@ void ConsolidateDialog::accept()
                     KCSheet *const sheet = cells[i].sheet();
                     const int headerColumn = cells[i].column();
                     const int headerRow = cells[i].row();
-                    const Cell cell(sheet, headerColumn + col, headerRow);
+                    const KCCell cell(sheet, headerColumn + col, headerRow);
                     const bool fullName = sheet != destinationSheet;
                     formula += fullName ? cell.fullName() : cell.name();
                 }
@@ -365,7 +365,7 @@ void ConsolidateDialog::accept()
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int row = range.top() + 1; row <= range.bottom() ; ++row) {
-                const Value value = Cell(sheet, range.left(), row).value();
+                const Value value = KCCell(sheet, range.left(), row).value();
                 const QString rowHeader = converter->asString(value).asString();
                 if (!rowHeaders.contains(rowHeader)) {
                     rowHeaders.append(rowHeader);
@@ -381,7 +381,7 @@ void ConsolidateDialog::accept()
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int col = range.left() + 1; col <= range.right() ; ++col) {
-                const Value value = Cell(sheet, col, range.top()).value();
+                const Value value = KCCell(sheet, col, range.top()).value();
                 const QString columnHeader = converter->asString(value).asString();
                 if (!columnHeaders.contains(columnHeader)) {
                     columnHeaders.append(columnHeader);
@@ -404,18 +404,18 @@ void ConsolidateDialog::accept()
         }
 
         // Fill the list with all interesting cells
-        QHash<QString /* row */, QHash<QString /* col */, QList<Cell> > > list;
+        QHash<QString /* row */, QHash<QString /* col */, QList<KCCell> > > list;
         for (int i = 0; i < ranges.count(); ++i) {
             KCSheet *const sheet = ranges[i].firstSheet();
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int col = range.left() + 1; col <= range.right() ; ++col) {
-                const Value columnValue = Cell(sheet, col, range.top()).value();
+                const Value columnValue = KCCell(sheet, col, range.top()).value();
                 const QString columnHeader = converter->asString(columnValue).asString();
                 for (int row = range.top() + 1; row <= range.bottom() ; ++row) {
-                    const Value rowValue = Cell(sheet, range.left(), row).value();
+                    const Value rowValue = KCCell(sheet, range.left(), row).value();
                     const QString rowHeader = converter->asString(rowValue).asString();
-                    list[rowHeader][columnHeader].append(Cell(sheet, col, row));
+                    list[rowHeader][columnHeader].append(KCCell(sheet, col, row));
                 }
             }
         }
@@ -436,7 +436,7 @@ void ConsolidateDialog::accept()
                 QString formula = '=' + function + '(';
                 const QString rowHeader = rowHeaders[row];
                 const QString columnHeader = columnHeaders[col];
-                const QList<Cell> lst = list[rowHeader][columnHeader];
+                const QList<KCCell> lst = list[rowHeader][columnHeader];
                 for (int i = 0; i < lst.count(); ++i) {
                     if (i != 0) {
                         formula += ';';

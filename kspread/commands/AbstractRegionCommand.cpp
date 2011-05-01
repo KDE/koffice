@@ -28,7 +28,7 @@
 
 #include <KoCanvasBase.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "Damages.h"
 #include "Map.h"
@@ -142,7 +142,7 @@ bool AbstractRegionCommand::isApproved() const
 
             for (int col = range.left(); col <= range.right(); ++col) {
                 for (int row = range.top(); row <= range.bottom(); ++row) {
-                    Cell cell(m_sheet, col, row);
+                    KCCell cell(m_sheet, col, row);
                     if (!cell.style().notProtected()) {
                         KPassivePopup::message(i18n("Processing is not possible, "
                                                     "because some cells are protected."),

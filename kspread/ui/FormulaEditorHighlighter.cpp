@@ -98,7 +98,7 @@ void FormulaEditorHighlighter::highlightBlock(const QString& text)
         Token::Type type = token.type();
 
         switch (type) {
-        case Token::Cell:
+        case Token::KCCell:
         case Token::Range: {
             // don't compare, if we have already found a change
             if (!d->rangeChanged && i < oldTokens.count() && token.text() != oldTokens[i].text()) {

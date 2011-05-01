@@ -35,7 +35,7 @@
 #include <KoShapeUserData.h>
 #include <KoXmlReader.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "KCStyle.h"
 #include "Global.h"
 #include "ProtectableObject.h"
@@ -57,7 +57,7 @@ class KoShape;
 class KoShapeSavingContext;
 class KoXmlWriter;
 
-class Cell;
+class KCCell;
 class CellStorage;
 class ColumnFormat;
 class CommentStorage;
@@ -947,7 +947,7 @@ protected:
      * \ingroup Commands
      * \see areaIsEmpty()
      */
-    bool cellIsEmpty(const Cell& cell, TestType _type);
+    bool cellIsEmpty(const KCCell& cell, TestType _type);
 
     /**
      * \ingroup Value

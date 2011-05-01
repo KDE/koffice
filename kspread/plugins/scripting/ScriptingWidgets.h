@@ -62,7 +62,7 @@ public:
     virtual ~ScriptingSheetsListView();
 
     enum SelectionType { SingleSelect, MultiSelect };
-    enum EditorType { Disabled, Cell, Range };
+    enum EditorType { Disabled, KCCell, Range };
 
 public slots:
 
@@ -74,7 +74,7 @@ public slots:
 
     /**
     * Set the editor type to \p editortype. This could be either
-    * "Disabled", "Cell" or "Range".
+    * "Disabled", "KCCell" or "Range".
     */
     void setEditorType(const QString& editortype);
 

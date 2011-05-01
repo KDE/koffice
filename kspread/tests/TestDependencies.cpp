@@ -50,10 +50,10 @@ void TestDependencies::testCircleRemoval()
     DependencyManager* manager = m_map->dependencyManager();
     QVERIFY(manager->d->consumers.count() == 1);
     QVERIFY(manager->d->providers.count() == 1);
-    QList<Cell> consumers = manager->d->consumers.value(m_sheet)->contains(QRect(1, 1, 1, 1));
+    QList<KCCell> consumers = manager->d->consumers.value(m_sheet)->contains(QRect(1, 1, 1, 1));
     QCOMPARE(consumers.count(), 1);
-    QCOMPARE(consumers.first(), Cell(m_sheet, 1, 1));
-    QCOMPARE(manager->d->providers.value(Cell(m_sheet, 1, 1)), KCRegion(QRect(1, 1, 1, 1), m_sheet));
+    QCOMPARE(consumers.first(), KCCell(m_sheet, 1, 1));
+    QCOMPARE(manager->d->providers.value(KCCell(m_sheet, 1, 1)), KCRegion(QRect(1, 1, 1, 1), m_sheet));
 
     m_storage->setFormula(1, 1, Formula()); // A1
 

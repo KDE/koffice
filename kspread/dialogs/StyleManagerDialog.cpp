@@ -29,7 +29,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "LayoutDialog.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"

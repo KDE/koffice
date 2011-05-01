@@ -68,7 +68,7 @@ public:
      * Returns the cell depths.
      * \return the cell depths
      */
-    QHash<Cell, int> depths() const;
+    QHash<KCCell, int> depths() const;
 
     /**
      * Returns the region, that consumes the value of \p cell.
@@ -80,7 +80,7 @@ public:
      *
      * \return region consuming \p cell 's value
      */
-    KCRegion consumingRegion(const Cell& cell) const;
+    KCRegion consumingRegion(const KCCell& cell) const;
 
     /**
      * Returns the region, that is reduced to those parts of \p region, that provide values.
@@ -94,7 +94,7 @@ public:
      * \param movedRegion the region, that was moved
      * \param destination the new upper left corner of the region
      */
-    void regionMoved(const KCRegion& movedRegion, const Cell& destination);
+    void regionMoved(const KCRegion& movedRegion, const KCCell& destination);
 
 public Q_SLOTS:
     void namedAreaModified(const QString&);
@@ -117,7 +117,7 @@ protected:
      *
      * \see regionMoved()
      */
-    void updateFormula(const Cell& cell, const KCRegion::Element* oldLocation, const KCRegion::Point& offset);
+    void updateFormula(const KCCell& cell, const KCRegion::Element* oldLocation, const KCRegion::Point& offset);
 
 private:
     Q_DISABLE_COPY(DependencyManager)

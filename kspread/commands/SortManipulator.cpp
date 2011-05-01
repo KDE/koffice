@@ -73,7 +73,7 @@ bool SortManipulator::preProcessing()
         QRect range = (*it)->rect();
         for (int col = range.left(); col <= range.right(); ++col)
             for (int row = range.top(); row <= range.bottom(); ++row) {
-                Cell cell = Cell(m_sheet, col, row);
+                KCCell cell = KCCell(m_sheet, col, row);
                 m_styles.insert(cell, cell.style());
             }
     }
@@ -135,7 +135,7 @@ KCStyle SortManipulator::newFormat(Element *element, int col, int row)
     }
 
     // have to return stored format, to avoid earlier calls disrupting latter ones
-    return m_styles.value(Cell(m_sheet, colidx + range.left(), rowidx + range.top()));
+    return m_styles.value(KCCell(m_sheet, colidx + range.left(), rowidx + range.top()));
 }
 
 void SortManipulator::sort(Element *element)
@@ -188,8 +188,8 @@ bool SortManipulator::shouldReorder(Element *element, int first, int second)
         int row2 = firstrow + (m_rows ? second : which);
         int col1 = firstcol + (m_rows ? which : first);
         int col2 = firstcol + (m_rows ? which : second);
-        Value val1 = Cell(m_sheet, col1, row1).value();
-        Value val2 = Cell(m_sheet, col2, row2).value();
+        Value val1 = KCCell(m_sheet, col1, row1).value();
+        Value val2 = KCCell(m_sheet, col2, row2).value();
         // empty values always go to the end, so if second value is empty and
         // first one is not, we don't need to reorder
         if ((!val1.isEmpty()) && val2.isEmpty())

@@ -25,7 +25,7 @@
 
 #include <kdebug.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "RowColumnFormat.h"
 
 #if 0
@@ -39,7 +39,7 @@
 Cluster::Cluster()
         : m_first(0), m_autoDelete(false), m_biggestX(0), m_biggestY(0)
 {
-    m_cluster = (Cell***)malloc(KSPREAD_CLUSTER_LEVEL1 * KSPREAD_CLUSTER_LEVEL1 * sizeof(Cell**));
+    m_cluster = (KCCell***)malloc(KSPREAD_CLUSTER_LEVEL1 * KSPREAD_CLUSTER_LEVEL1 * sizeof(KCCell**));
 
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x)
         for (int y = 0; y < KSPREAD_CLUSTER_LEVEL1; ++y)
@@ -52,7 +52,7 @@ Cluster::~Cluster()
 // Can't we use clear(), to remove double code - Philipp?
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x)
         for (int y = 0; y < KSPREAD_CLUSTER_LEVEL1; ++y) {
-            Cell** cl = m_cluster[ y * KSPREAD_CLUSTER_LEVEL1 + x ];
+            KCCell** cl = m_cluster[ y * KSPREAD_CLUSTER_LEVEL1 + x ];
             if (cl) {
                 free(cl);
                 m_cluster[ y * KSPREAD_CLUSTER_LEVEL1 + x ] = 0;
@@ -60,9 +60,9 @@ Cluster::~Cluster()
         }
 
     if (m_autoDelete) {
-        Cell* cell = m_first;
+        KCCell* cell = m_first;
         while (cell) {
-            Cell* n = cell->nextCell();
+            KCCell* n = cell->nextCell();
             delete cell;
             cell = n;
         }
@@ -75,7 +75,7 @@ void Cluster::clear()
 {
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x)
         for (int y = 0; y < KSPREAD_CLUSTER_LEVEL1; ++y) {
-            Cell** cl = m_cluster[ y * KSPREAD_CLUSTER_LEVEL1 + x ];
+            KCCell** cl = m_cluster[ y * KSPREAD_CLUSTER_LEVEL1 + x ];
             if (cl) {
                 free(cl);
                 m_cluster[ y * KSPREAD_CLUSTER_LEVEL1 + x ] = 0;
@@ -83,9 +83,9 @@ void Cluster::clear()
         }
 
     if (m_autoDelete) {
-        Cell* cell = m_first;
+        KCCell* cell = m_first;
         while (cell) {
-            Cell* n = cell->nextCell();
+            KCCell* n = cell->nextCell();
             delete cell;
             cell = n;
         }
@@ -95,7 +95,7 @@ void Cluster::clear()
     m_biggestX = m_biggestY = 0;
 }
 
-Cell* Cluster::lookup(int x, int y) const
+KCCell* Cluster::lookup(int x, int y) const
 {
     if (x >= KSPREAD_CLUSTER_MAX || x < 0 || y >= KSPREAD_CLUSTER_MAX || y < 0) {
         kDebug(36001) << "Cluster::lookup: invalid column or row value (col:"
@@ -107,7 +107,7 @@ Cell* Cluster::lookup(int x, int y) const
     int dx = x % KSPREAD_CLUSTER_LEVEL2;
     int dy = y % KSPREAD_CLUSTER_LEVEL2;
 
-    Cell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + cx ];
+    KCCell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + cx ];
     if (!cl)
         return 0;
 
@@ -115,7 +115,7 @@ Cell* Cluster::lookup(int x, int y) const
 }
 
 /* Paste a cell in LEVEL2 (it's more paste than insert) */
-void Cluster::insert(Cell* cell, int x, int y)
+void Cluster::insert(KCCell* cell, int x, int y)
 {
     if (x >= KSPREAD_CLUSTER_MAX || x < 0 || y >= KSPREAD_CLUSTER_MAX || y < 0) {
         kDebug(36001) << "Cluster::insert: invalid column or row value (col:"
@@ -128,9 +128,9 @@ void Cluster::insert(Cell* cell, int x, int y)
     int dx = x % KSPREAD_CLUSTER_LEVEL2;
     int dy = y % KSPREAD_CLUSTER_LEVEL2;
 
-    Cell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + cx ];
+    KCCell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + cx ];
     if (!cl) {
-        cl = (Cell**)malloc(KSPREAD_CLUSTER_LEVEL2 * KSPREAD_CLUSTER_LEVEL2 * sizeof(Cell*));
+        cl = (KCCell**)malloc(KSPREAD_CLUSTER_LEVEL2 * KSPREAD_CLUSTER_LEVEL2 * sizeof(KCCell*));
         m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + cx ] = cl;
 
         for (int a = 0; a < KSPREAD_CLUSTER_LEVEL2; ++a)
@@ -167,11 +167,11 @@ void Cluster::remove(int x, int y)
     int dx = x % KSPREAD_CLUSTER_LEVEL2;
     int dy = y % KSPREAD_CLUSTER_LEVEL2;
 
-    Cell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + cx ];
+    KCCell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + cx ];
     if (!cl)
         return;
 
-    Cell* c = cl[ dy * KSPREAD_CLUSTER_LEVEL2 + dx ];
+    KCCell* c = cl[ dy * KSPREAD_CLUSTER_LEVEL2 + dx ];
     if (!c)
         return;
 
@@ -230,7 +230,7 @@ bool Cluster::autoDelete() const
     return m_autoDelete;
 }
 
-Cell* Cluster::firstCell() const
+KCCell* Cluster::firstCell() const
 {
     return m_first;
 }
@@ -253,7 +253,7 @@ bool Cluster::insertShiftRight(const QPoint& marker, bool& work)
 
     // Is there a cell at the bottom most position ?
     // In this case the shift is impossible.
-    Cell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + KSPREAD_CLUSTER_LEVEL1 - 1 ];
+    KCCell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + KSPREAD_CLUSTER_LEVEL1 - 1 ];
     if (cl && cl[ dy * KSPREAD_CLUSTER_LEVEL2 + KSPREAD_CLUSTER_LEVEL2 - 1 ])
         return false;
 
@@ -262,7 +262,7 @@ bool Cluster::insertShiftRight(const QPoint& marker, bool& work)
 
     // Move cells in this row one down.
     for (int i = KSPREAD_CLUSTER_LEVEL1 - 1; i >= cx ; --i) {
-        Cell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + i ];
+        KCCell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + i ];
         if (cl) {
             work = true;
             int left = 0;
@@ -272,7 +272,7 @@ bool Cluster::insertShiftRight(const QPoint& marker, bool& work)
             if (i == KSPREAD_CLUSTER_LEVEL1 - 1)
                 right = KSPREAD_CLUSTER_LEVEL2 - 2;
             for (int k = right; k >= left; --k) {
-                Cell* c = cl[ dy * KSPREAD_CLUSTER_LEVEL2 + k ];
+                KCCell* c = cl[ dy * KSPREAD_CLUSTER_LEVEL2 + k ];
                 if (c) {
                     remove(c->column(), c->row());
                     c->move(c->column() + 1, c->row());
@@ -305,7 +305,7 @@ bool Cluster::insertShiftDown(const QPoint& marker, bool& work)
 
     // Is there a cell at the right most position ?
     // In this case the shift is impossible.
-    Cell** cl = m_cluster[ KSPREAD_CLUSTER_LEVEL1 * (KSPREAD_CLUSTER_LEVEL1 - 1) + cx ];
+    KCCell** cl = m_cluster[ KSPREAD_CLUSTER_LEVEL1 * (KSPREAD_CLUSTER_LEVEL1 - 1) + cx ];
     if (cl && cl[ KSPREAD_CLUSTER_LEVEL2 *(KSPREAD_CLUSTER_LEVEL2 - 1) + dx ])
         return false;
 
@@ -314,7 +314,7 @@ bool Cluster::insertShiftDown(const QPoint& marker, bool& work)
 
     // Move cells in this column one right.
     for (int i = KSPREAD_CLUSTER_LEVEL1 - 1; i >= cy ; --i) {
-        Cell** cl = m_cluster[ i * KSPREAD_CLUSTER_LEVEL1 + cx ];
+        KCCell** cl = m_cluster[ i * KSPREAD_CLUSTER_LEVEL1 + cx ];
         if (cl) {
             work = true;
 
@@ -325,7 +325,7 @@ bool Cluster::insertShiftDown(const QPoint& marker, bool& work)
             if (i == KSPREAD_CLUSTER_LEVEL1 - 1)
                 bottom = KSPREAD_CLUSTER_LEVEL2 - 2;
             for (int k = bottom; k >= top; --k) {
-                Cell* c = cl[ k * KSPREAD_CLUSTER_LEVEL2 + dx ];
+                KCCell* c = cl[ k * KSPREAD_CLUSTER_LEVEL2 + dx ];
                 if (c) {
                     remove(c->column(), c->row());
                     c->move(c->column(), c->row() + 1);
@@ -351,7 +351,7 @@ bool Cluster::insertColumn(int col)
     // Is there a cell at the right most position ?
     // In this case the shift is impossible.
     for (int t1 = 0; t1 < KSPREAD_CLUSTER_LEVEL1; ++t1) {
-        Cell** cl = m_cluster[ t1 * KSPREAD_CLUSTER_LEVEL1 + KSPREAD_CLUSTER_LEVEL1 - 1 ];
+        KCCell** cl = m_cluster[ t1 * KSPREAD_CLUSTER_LEVEL1 + KSPREAD_CLUSTER_LEVEL1 - 1 ];
         if (cl)
             for (int t2 = 0; t2 < KSPREAD_CLUSTER_LEVEL2; ++t2)
                 if (cl[ t2 * KSPREAD_CLUSTER_LEVEL2 + KSPREAD_CLUSTER_LEVEL2 - 1 ])
@@ -378,7 +378,7 @@ bool Cluster::insertRow(int row)
     // Is there a cell at the bottom most position ?
     // In this case the shift is impossible.
     for (int t1 = 0; t1 < KSPREAD_CLUSTER_LEVEL1; ++t1) {
-        Cell** cl = m_cluster[ KSPREAD_CLUSTER_LEVEL1 * (KSPREAD_CLUSTER_LEVEL1 - 1) + t1 ];
+        KCCell** cl = m_cluster[ KSPREAD_CLUSTER_LEVEL1 * (KSPREAD_CLUSTER_LEVEL1 - 1) + t1 ];
         if (cl)
             for (int t2 = 0; t2 < KSPREAD_CLUSTER_LEVEL2; ++t2)
                 if (cl[ KSPREAD_CLUSTER_LEVEL2 *(KSPREAD_CLUSTER_LEVEL2 - 1) + t2 ])
@@ -415,7 +415,7 @@ void Cluster::removeShiftUp(const QPoint& marker, bool& work)
 
     // Move cells in this column one column to the left.
     for (int i = cy; i < KSPREAD_CLUSTER_LEVEL1; ++i) {
-        Cell** cl = m_cluster[ i * KSPREAD_CLUSTER_LEVEL1 + cx ];
+        KCCell** cl = m_cluster[ i * KSPREAD_CLUSTER_LEVEL1 + cx ];
         if (cl) {
             work = true;
 
@@ -424,7 +424,7 @@ void Cluster::removeShiftUp(const QPoint& marker, bool& work)
                 top = dy + 1;
             int bottom = KSPREAD_CLUSTER_LEVEL2 - 1;
             for (int k = top; k <= bottom; ++k) {
-                Cell* c = cl[ k * KSPREAD_CLUSTER_LEVEL2 + dx ];
+                KCCell* c = cl[ k * KSPREAD_CLUSTER_LEVEL2 + dx ];
                 if (c) {
                     remove(c->column(), c->row());
                     c->move(c->column(), c->row() - 1);
@@ -458,7 +458,7 @@ void Cluster::removeShiftLeft(const QPoint& marker, bool& work)
 
     // Move cells in this row one row up.
     for (int i = cx; i < KSPREAD_CLUSTER_LEVEL1; ++i) {
-        Cell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + i ];
+        KCCell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + i ];
         if (cl) {
             work = true;
 
@@ -467,7 +467,7 @@ void Cluster::removeShiftLeft(const QPoint& marker, bool& work)
                 left = dx + 1;
             int right = KSPREAD_CLUSTER_LEVEL2 - 1;
             for (int k = left; k <= right; ++k) {
-                Cell* c = cl[ dy * KSPREAD_CLUSTER_LEVEL2 + k ];
+                KCCell* c = cl[ dy * KSPREAD_CLUSTER_LEVEL2 + k ];
                 if (c) {
                     remove(c->column(), c->row());
                     c->move(c->column() - 1, c->row());
@@ -492,7 +492,7 @@ void Cluster::removeColumn(int col)
     int dx = col % KSPREAD_CLUSTER_LEVEL2;
 
     for (int y1 = 0; y1 < KSPREAD_CLUSTER_LEVEL1; ++y1) {
-        Cell** cl = m_cluster[ y1 * KSPREAD_CLUSTER_LEVEL1 + cx ];
+        KCCell** cl = m_cluster[ y1 * KSPREAD_CLUSTER_LEVEL1 + cx ];
         if (cl)
             for (int y2 = 0; y2 < KSPREAD_CLUSTER_LEVEL2; ++y2)
                 if (cl[ y2 * KSPREAD_CLUSTER_LEVEL2 + dx ])
@@ -518,7 +518,7 @@ void Cluster::removeRow(int row)
     int dy = row % KSPREAD_CLUSTER_LEVEL2;
 
     for (int x1 = 0; x1 < KSPREAD_CLUSTER_LEVEL1; ++x1) {
-        Cell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + x1 ];
+        KCCell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + x1 ];
         if (cl)
             for (int x2 = 0; x2 < KSPREAD_CLUSTER_LEVEL2; ++x2)
                 if (cl[ dy * KSPREAD_CLUSTER_LEVEL2 + x2 ])
@@ -544,7 +544,7 @@ void Cluster::clearColumn(int col)
     int dx = col % KSPREAD_CLUSTER_LEVEL2;
 
     for (int cy = 0; cy < KSPREAD_CLUSTER_LEVEL1; ++cy) {
-        Cell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + cx ];
+        KCCell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL1 + cx ];
         if (cl)
             for (int dy = 0; dy < KSPREAD_CLUSTER_LEVEL2; ++dy)
                 if (cl[ dy * KSPREAD_CLUSTER_LEVEL2 + dx ]) {
@@ -566,7 +566,7 @@ void Cluster::clearRow(int row)
     int dy = row % KSPREAD_CLUSTER_LEVEL2;
 
     for (int cx = 0; cx < KSPREAD_CLUSTER_LEVEL1; ++cx) {
-        Cell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL2 + cx ];
+        KCCell** cl = m_cluster[ cy * KSPREAD_CLUSTER_LEVEL2 + cx ];
         if (cl)
             for (int dx = 0; dx < KSPREAD_CLUSTER_LEVEL2; ++dx)
                 if (cl[ dy * KSPREAD_CLUSTER_LEVEL2 + dx ]) {
@@ -605,7 +605,7 @@ Value Cluster::makeArray(int col1, int row1, int col2, int row2) const
     // this generates an array of values
     Value array(Value::Array);
     for (int row = row1; row <= row2; ++row) {
-        for (Cell* cell = getFirstCellRow(row); cell; cell = getNextCellRight(cell->column(), row)) {
+        for (KCCell* cell = getFirstCellRow(row); cell; cell = getNextCellRight(cell->column(), row)) {
             if (cell->column() >= col1 && cell->column() <= col2)
                 array.setElement(cell->column() - col1, row - row1, cell->value());
         }
@@ -614,9 +614,9 @@ Value Cluster::makeArray(int col1, int row1, int col2, int row2) const
     return array;
 }
 
-Cell* Cluster::getFirstCellColumn(int col) const
+KCCell* Cluster::getFirstCellColumn(int col) const
 {
-    Cell* cell = lookup(col, 1);
+    KCCell* cell = lookup(col, 1);
 
     if (cell == 0) {
         cell = getNextCellDown(col, 1);
@@ -624,9 +624,9 @@ Cell* Cluster::getFirstCellColumn(int col) const
     return cell;
 }
 
-Cell* Cluster::getLastCellColumn(int col) const
+KCCell* Cluster::getLastCellColumn(int col) const
 {
-    Cell* cell = lookup(col, KS_rowMax);
+    KCCell* cell = lookup(col, KS_rowMax);
 
     if (cell == 0) {
         cell = getNextCellUp(col, KS_rowMax);
@@ -634,9 +634,9 @@ Cell* Cluster::getLastCellColumn(int col) const
     return cell;
 }
 
-Cell* Cluster::getFirstCellRow(int row) const
+KCCell* Cluster::getFirstCellRow(int row) const
 {
-    Cell* cell = lookup(1, row);
+    KCCell* cell = lookup(1, row);
 
     if (cell == 0) {
         cell = getNextCellRight(1, row);
@@ -644,9 +644,9 @@ Cell* Cluster::getFirstCellRow(int row) const
     return cell;
 }
 
-Cell* Cluster::getLastCellRow(int row) const
+KCCell* Cluster::getLastCellRow(int row) const
 {
-    Cell* cell = lookup(KS_colMax, row);
+    KCCell* cell = lookup(KS_colMax, row);
 
     if (cell == 0) {
         cell = getNextCellLeft(KS_colMax, row);
@@ -654,7 +654,7 @@ Cell* Cluster::getLastCellRow(int row) const
     return cell;
 }
 
-Cell* Cluster::getNextCellUp(int col, int row) const
+KCCell* Cluster::getNextCellUp(int col, int row) const
 {
     int cx = col / KSPREAD_CLUSTER_LEVEL2;
     int cy = (row - 1) / KSPREAD_CLUSTER_LEVEL2;
@@ -679,7 +679,7 @@ Cell* Cluster::getNextCellUp(int col, int row) const
     return 0;
 }
 
-Cell* Cluster::getNextCellDown(int col, int row) const
+KCCell* Cluster::getNextCellDown(int col, int row) const
 {
     int cx = col / KSPREAD_CLUSTER_LEVEL2;
     int cy = (row + 1) / KSPREAD_CLUSTER_LEVEL2;
@@ -704,7 +704,7 @@ Cell* Cluster::getNextCellDown(int col, int row) const
     return 0;
 }
 
-Cell* Cluster::getNextCellLeft(int col, int row) const
+KCCell* Cluster::getNextCellLeft(int col, int row) const
 {
     int cx = (col - 1) / KSPREAD_CLUSTER_LEVEL2;
     int cy = row / KSPREAD_CLUSTER_LEVEL2;
@@ -729,7 +729,7 @@ Cell* Cluster::getNextCellLeft(int col, int row) const
     return 0;
 }
 
-Cell* Cluster::getNextCellRight(int col, int row) const
+KCCell* Cluster::getNextCellRight(int col, int row) const
 {
     int cx = (col + 1) / KSPREAD_CLUSTER_LEVEL2;
     int cy = row / KSPREAD_CLUSTER_LEVEL2;

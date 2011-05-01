@@ -195,7 +195,7 @@ When a merged cell is selected and when you uncheck this, then all cells come ba
       <string>The unit used here is the one set in Format -&gt; Page Layout.. dialog.</string>
      </property>
      <property name="title">
-      <string>Size of Cell</string>
+      <string>Size of KCCell</string>
      </property>
      <layout class="QGridLayout">
       <item row="0" column="1">

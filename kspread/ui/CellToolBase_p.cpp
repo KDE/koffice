@@ -79,9 +79,9 @@
 #include <QPainter>
 #include <QToolButton>
 
-void CellToolBase::Private::updateEditor(const Cell& cell)
+void CellToolBase::Private::updateEditor(const KCCell& cell)
 {
-    const Cell& theCell = cell.isPartOfMerged() ? cell.masterCell() : cell;
+    const KCCell& theCell = cell.isPartOfMerged() ? cell.masterCell() : cell;
     const KCStyle style = theCell.style();
     if (q->selection()->activeSheet()->isProtected() && style.hideFormula()) {
         optionWidget->editor()->setPlainText(theCell.displayText());
@@ -99,7 +99,7 @@ void CellToolBase::Private::updateEditor(const Cell& cell)
         a->blockSignals(blocked); \
     }
 
-void CellToolBase::Private::updateActions(const Cell& cell)
+void CellToolBase::Private::updateActions(const KCCell& cell)
 {
     const KCStyle style = cell.style();
 
@@ -323,7 +323,7 @@ bool CellToolBase::Private::processHomeKey(QKeyEvent* event)
         } else {
             QPoint marker = q->selection()->marker();
 
-            Cell cell = sheet->cellStorage()->firstInRow(marker.y(), CellStorage::VisitContent);
+            KCCell cell = sheet->cellStorage()->firstInRow(marker.y(), CellStorage::VisitContent);
             while (!cell.isNull() && cell.column() < marker.x() && cell.isEmpty()) {
                 cell = sheet->cellStorage()->nextInRow(cell.column(), cell.row(), CellStorage::VisitContent);
             }
@@ -355,7 +355,7 @@ bool CellToolBase::Private::processEndKey(QKeyEvent *event)
         return false;
 
     bool makingSelection = event->modifiers() & Qt::ShiftModifier;
-    Cell cell;
+    KCCell cell;
     QPoint marker = q->selection()->marker();
 
     if (q->editor()) {
@@ -457,8 +457,8 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
 
     bool makingSelection = event->modifiers() & Qt::ShiftModifier;
 
-    Cell cell;
-    Cell lastCell;
+    KCCell cell;
+    KCCell lastCell;
     QPoint destination;
     bool searchThroughEmpty = true;
     int row;
@@ -472,11 +472,11 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
         //Ctrl+Qt::Key_Up
     case Qt::Key_Up:
 
-        cell = Cell(sheet, marker.x(), marker.y());
+        cell = KCCell(sheet, marker.x(), marker.y());
         if ((!cell.isNull()) && (!cell.isEmpty()) && (marker.y() != 1)) {
             lastCell = cell;
             row = marker.y() - 1;
-            cell = Cell(sheet, cell.column(), row);
+            cell = KCCell(sheet, cell.column(), row);
             while ((!cell.isNull()) && (row > 0) && (!cell.isEmpty())) {
                 if (!sheet->rowFormat(cell.row())->isHiddenOrFiltered()) {
                     lastCell = cell;
@@ -484,7 +484,7 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
                 }
                 row--;
                 if (row > 0)
-                    cell = Cell(sheet, cell.column(), row);
+                    cell = KCCell(sheet, cell.column(), row);
             }
             cell = lastCell;
         }
@@ -513,18 +513,18 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
         //Ctrl+Qt::Key_Down
     case Qt::Key_Down:
 
-        cell = Cell(sheet, marker.x(), marker.y());
+        cell = KCCell(sheet, marker.x(), marker.y());
         if ((!cell.isNull()) && (!cell.isEmpty()) && (marker.y() != q->maxRow())) {
             lastCell = cell;
             row = marker.y() + 1;
-            cell = Cell(sheet, cell.column(), row);
+            cell = KCCell(sheet, cell.column(), row);
             while ((!cell.isNull()) && (row < q->maxRow()) && (!cell.isEmpty())) {
                 if (!(sheet->rowFormat(cell.row())->isHiddenOrFiltered())) {
                     lastCell = cell;
                     searchThroughEmpty = false;
                 }
                 row++;
-                cell = Cell(sheet, cell.column(), row);
+                cell = KCCell(sheet, cell.column(), row);
             }
             cell = lastCell;
         }
@@ -554,18 +554,18 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
     case Qt::Key_Left:
 
         if (sheet->layoutDirection() == Qt::RightToLeft) {
-            cell = Cell(sheet, marker.x(), marker.y());
+            cell = KCCell(sheet, marker.x(), marker.y());
             if ((!cell.isNull()) && (!cell.isEmpty()) && (marker.x() != q->maxCol())) {
                 lastCell = cell;
                 col = marker.x() + 1;
-                cell = Cell(sheet, col, cell.row());
+                cell = KCCell(sheet, col, cell.row());
                 while ((!cell.isNull()) && (col < q->maxCol()) && (!cell.isEmpty())) {
                     if (!(sheet->columnFormat(cell.column())->isHiddenOrFiltered())) {
                         lastCell = cell;
                         searchThroughEmpty = false;
                     }
                     col++;
-                    cell = Cell(sheet, col, cell.row());
+                    cell = KCCell(sheet, col, cell.row());
                 }
                 cell = lastCell;
             }
@@ -590,11 +590,11 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
             destination.setX(qBound(1, col, q->maxCol()));
             destination.setY(qBound(1, marker.y(), q->maxRow()));
         } else {
-            cell = Cell(sheet, marker.x(), marker.y());
+            cell = KCCell(sheet, marker.x(), marker.y());
             if ((!cell.isNull()) && (!cell.isEmpty()) && (marker.x() != 1)) {
                 lastCell = cell;
                 col = marker.x() - 1;
-                cell = Cell(sheet, col, cell.row());
+                cell = KCCell(sheet, col, cell.row());
                 while ((!cell.isNull()) && (col > 0) && (!cell.isEmpty())) {
                     if (!(sheet->columnFormat(cell.column())->isHiddenOrFiltered())) {
                         lastCell = cell;
@@ -602,7 +602,7 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
                     }
                     col--;
                     if (col > 0)
-                        cell = Cell(sheet, col, cell.row());
+                        cell = KCCell(sheet, col, cell.row());
                 }
                 cell = lastCell;
             }
@@ -633,11 +633,11 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
     case Qt::Key_Right:
 
         if (sheet->layoutDirection() == Qt::RightToLeft) {
-            cell = Cell(sheet, marker.x(), marker.y());
+            cell = KCCell(sheet, marker.x(), marker.y());
             if ((!cell.isNull()) && (!cell.isEmpty()) && (marker.x() != 1)) {
                 lastCell = cell;
                 col = marker.x() - 1;
-                cell = Cell(sheet, col, cell.row());
+                cell = KCCell(sheet, col, cell.row());
                 while ((!cell.isNull()) && (col > 0) && (!cell.isEmpty())) {
                     if (!(sheet->columnFormat(cell.column())->isHiddenOrFiltered())) {
                         lastCell = cell;
@@ -645,7 +645,7 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
                     }
                     col--;
                     if (col > 0)
-                        cell = Cell(sheet, col, cell.row());
+                        cell = KCCell(sheet, col, cell.row());
                 }
                 cell = lastCell;
             }
@@ -670,18 +670,18 @@ bool CellToolBase::Private::processControlArrowKey(QKeyEvent *event)
             destination.setX(qBound(1, col, q->maxCol()));
             destination.setY(qBound(1, marker.y(), q->maxRow()));
         } else {
-            cell = Cell(sheet, marker.x(), marker.y());
+            cell = KCCell(sheet, marker.x(), marker.y());
             if ((!cell.isNull()) && (!cell.isEmpty()) && (marker.x() != q->maxCol())) {
                 lastCell = cell;
                 col = marker.x() + 1;
-                cell = Cell(sheet, col, cell.row());
+                cell = KCCell(sheet, col, cell.row());
                 while ((!cell.isNull()) && (col < q->maxCol()) && (!cell.isEmpty())) {
                     if (!(sheet->columnFormat(cell.column())->isHiddenOrFiltered())) {
                         lastCell = cell;
                         searchThroughEmpty = false;
                     }
                     col++;
-                    cell = Cell(sheet, col, cell.row());
+                    cell = KCCell(sheet, col, cell.row());
                 }
                 cell = lastCell;
             }
@@ -802,7 +802,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
     QPoint cursor = q->selection()->cursor();
 
     QPoint cellCorner = cursor;
-    Cell cell(sheet, cursor.x(), cursor.y());
+    KCCell cell(sheet, cursor.x(), cursor.y());
 
     /* cell is either the same as the marker, or the cell that is forced obscuring
         the marker cell
@@ -880,7 +880,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
         q->selection()->initialize(destination, sheet);
     }
     q->scrollToCell(destination);
-    updateEditor(Cell(q->selection()->activeSheet(), q->selection()->cursor()));
+    updateEditor(KCCell(q->selection()->activeSheet(), q->selection()->cursor()));
 
     return QRect(cursor, destination);
 }
@@ -1138,7 +1138,7 @@ void CellToolBase::Private::retrieveMarkerInfo(const QRect &cellRange, const QRe
 QList<QAction*> CellToolBase::Private::popupActionList() const
 {
     QList<QAction*> actions;
-    const Cell cell = Cell(q->selection()->activeSheet(), q->selection()->marker());
+    const KCCell cell = KCCell(q->selection()->activeSheet(), q->selection()->marker());
     const bool isProtected = !q->selection()->activeSheet()->map()->isReadWrite() ||
                              (q->selection()->activeSheet()->isProtected() &&
                               !(cell.style().notProtected() && q->selection()->isSingular()));
@@ -1301,7 +1301,7 @@ void CellToolBase::Private::createPopupMenuActions()
 bool CellToolBase::Private::testListChoose(Selection *selection) const
 {
     const KCSheet *const sheet = selection->activeSheet();
-    const Cell cursorCell(sheet, selection->cursor());
+    const KCCell cursorCell(sheet, selection->cursor());
     const CellStorage *const storage = sheet->cellStorage();
 
     const KCRegion::ConstIterator end(selection->constEnd());
@@ -1310,7 +1310,7 @@ bool CellToolBase::Private::testListChoose(Selection *selection) const
         if (cursorCell.column() < range.left() || cursorCell.column() > range.right()) {
             continue; // next range
         }
-        Cell cell;
+        KCCell cell;
         if (range.top() == 1) {
             cell = storage->firstInColumn(cursorCell.column(), CellStorage::Values);
         } else {

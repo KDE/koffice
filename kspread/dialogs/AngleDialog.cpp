@@ -33,7 +33,7 @@
 
 #include <KoCanvasBase.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 
@@ -69,7 +69,7 @@ AngleDialog::AngleDialog(QWidget* parent, Selection* selection)
 
     connect(this, SIGNAL(okClicked()), this, SLOT(slotOk()));
     connect(this, SIGNAL(defaultClicked()), this, SLOT(slotDefault()));
-    int angle = - Cell(m_selection->activeSheet(), m_selection->marker()).style().angle();
+    int angle = - KCCell(m_selection->activeSheet(), m_selection->marker()).style().angle();
     m_pAngle->setValue(angle);
 }
 

@@ -93,7 +93,7 @@ bool NamedAreaCommand::postProcessing()
         const FormulaStorage* const storage = sheet->formulaStorage();
         for (int c = 0; c < storage->count(); ++c) {
             if (storage->data(c).expression().contains(tmp)) {
-                Cell cell(sheet, storage->col(c), storage->row(c));
+                KCCell cell(sheet, storage->col(c), storage->row(c));
                 if (cell.makeFormula()) {
                     // recalculate cells
                     map->addDamage(new CellDamage(cell, CellDamage::Appearance | CellDamage::Binding |

@@ -49,7 +49,7 @@ class KoCanvasController;
 class KoDocumentEntry;
 class KoZoomHandler;
 
-class Cell;
+class KCCell;
 class ColumnHeader;
 class Damage;
 class KCSheet;

@@ -38,7 +38,7 @@
 #include "ValueConverter.h"
 
 // needed for SUBTOTAL:
-#include "Cell.h"
+#include "KCCell.h"
 #include "KCSheet.h"
 #include "RowColumnFormat.h"
 
@@ -554,7 +554,7 @@ Value func_sumif(valVector args, ValueCalc *calc, FuncExtra *e)
     calc->getCond(cond, Value(condition));
 
     if (args.count() == 3) {
-        Cell sumRangeStart(e->sheet, e->ranges[2].col1, e->ranges[2].row1);
+        KCCell sumRangeStart(e->sheet, e->ranges[2].col1, e->ranges[2].row1);
         return calc->sumIf(sumRangeStart, checkRange, cond);
     } else {
         return calc->sumIf(checkRange, cond);
@@ -1225,7 +1225,7 @@ Value func_subtotal(valVector args, ValueCalc *calc, FuncExtra *e)
                     range.setElement(c - c1, r - r1, empty);
                     continue;
                 }
-                Cell cell(e->sheet, c, r);
+                KCCell cell(e->sheet, c, r);
                 // put an empty value to the place of all occurrences of the SUBTOTAL function
                 if (!cell.isDefault() && cell.isFormula() && cell.userInput().indexOf("SUBTOTAL", 0, Qt::CaseInsensitive) != -1)
                     range.setElement(c - c1, r - r1, empty);
@@ -1346,7 +1346,7 @@ Value func_multipleOP (valVector args, ValueCalc *calc, FuncExtra *)
   double oldRow = args[3]->doubleValue();
   kDebug() <<"Old values: Col:" << oldCol <<", Row:" << oldRow;
 
-  Cell * cell;
+  KCCell * cell;
   KCSheet * sheet = ((Interpreter *) context.interpreter() )->sheet();
 
   Point point( extra[1]->stringValue() );
@@ -1356,30 +1356,30 @@ Value func_multipleOP (valVector args, ValueCalc *calc, FuncExtra *)
   if ( ( args[1]->doubleValue() != args[2]->doubleValue() )
        || ( args[3]->doubleValue() != args[4]->doubleValue() ) )
   {
-    cell = Cell( sheet, point.pos.x(), point.pos.y() );
+    cell = KCCell( sheet, point.pos.x(), point.pos.y() );
     cell->setValue( args[2]->doubleValue() );
     kDebug() <<"Setting value" << args[2]->doubleValue() <<" on cell" << point.pos.x()
               << ", " << point.pos.y() << endl;
 
-    cell = Cell( sheet, point2.pos.x(), point.pos.y() );
+    cell = KCCell( sheet, point2.pos.x(), point.pos.y() );
     cell->setValue( args[4]->doubleValue() );
     kDebug() <<"Setting value" << args[4]->doubleValue() <<" on cell" << point2.pos.x()
               << ", " << point2.pos.y() << endl;
   }
 
-  Cell * cell1 = Cell( sheet, point3.pos.x(), point3.pos.y() );
+  KCCell * cell1 = KCCell( sheet, point3.pos.x(), point3.pos.y() );
   cell1->calc( false );
 
   double d = cell1->value().asFloat();
-  kDebug() <<"Cell:" << point3.pos.x() <<";" << point3.pos.y() <<" with value"
+  kDebug() <<"KCCell:" << point3.pos.x() <<";" << point3.pos.y() <<" with value"
             << d << endl;
 
   kDebug() <<"Resetting old values";
 
-  cell = Cell( sheet, point.pos.x(), point.pos.y() );
+  cell = KCCell( sheet, point.pos.x(), point.pos.y() );
   cell->setValue( oldCol );
 
-  cell = Cell( sheet, point2.pos.x(), point2.pos.y() );
+  cell = KCCell( sheet, point2.pos.x(), point2.pos.y() );
   cell->setValue( oldRow );
 
   cell1->calc( false );

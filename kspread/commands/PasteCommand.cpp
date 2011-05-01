@@ -36,7 +36,7 @@
 #include "KCSheet.h"
 
 // TODO
-// - Extract the pasting code from Cell.
+// - Extract the pasting code from KCCell.
 // - Get plain text pasting right.
 
 
@@ -51,7 +51,7 @@ public:
     }
     virtual ~PasteCellCommand() {}
 
-    void addXmlElement(const Cell &cell, const KoXmlElement &element) {
+    void addXmlElement(const KCCell &cell, const KoXmlElement &element) {
         add(cell.cellPosition(), m_sheet);
         m_elements.insert(cell, element);
     }
@@ -63,7 +63,7 @@ public:
 protected:
     bool process(Element *element) {
         // Destination cell:
-        Cell cell(m_sheet, element->rect().topLeft());
+        KCCell cell(m_sheet, element->rect().topLeft());
         const int xOffset = cell.column() - m_elements[cell].attribute("column").toInt();
         const int yOffset = cell.row() - m_elements[cell].attribute("row").toInt();
         return cell.load(m_elements[cell], xOffset, yOffset,
@@ -93,7 +93,7 @@ protected:
     }
 
 private:
-    QHash<Cell, KoXmlElement> m_elements;
+    QHash<KCCell, KoXmlElement> m_elements;
 };
 
 
@@ -275,7 +275,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
     if (root.hasAttribute("cut")) {
         const KCRegion cutRegion(root.attribute("cut"), map, sheet);
         if (cutRegion.isValid()) {
-            const Cell destination(sheet, pasteArea.topLeft());
+            const KCCell destination(sheet, pasteArea.topLeft());
             map->dependencyManager()->regionMoved(cutRegion, destination);
         }
     }
@@ -531,7 +531,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
                     << ", xOffset:" << xOffset << ", yOffset:" << yOffset << endl;
 
                     // Destination cell:
-                    const Cell cell(sheet, col + xOffset + coff, row + yOffset + roff);
+                    const KCCell cell(sheet, col + xOffset + coff, row + yOffset + roff);
                     // Do nothing, if the sheet and the cell are protected.
                     if (sheet->isProtected() && !cell.style().notProtected()) {
                         continue;

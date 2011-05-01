@@ -363,7 +363,7 @@ void View::Private::initActions()
     connect(actions->createTemplate, SIGNAL(triggered(bool)), view, SLOT(createTemplate()));
 
     actions->shapeAnchor = new KSelectAction(i18n("Anchor"), view);
-    actions->shapeAnchor->addAction(i18n("Cell"));
+    actions->shapeAnchor->addAction(i18n("KCCell"));
     actions->shapeAnchor->addAction(i18n("Page"));
     actions->shapeAnchor->setEnabled(false);
     actions->shapeAnchor->setToolTip(i18n("Switch shape anchoring"));
@@ -1018,7 +1018,7 @@ void View::shapeSelectionChanged()
         return;
     }
     bool anchoredToCell = data->isAnchoredToCell();
-    d->actions->shapeAnchor->setCurrentAction(anchoredToCell ? i18n("Cell") : i18n("Page"));
+    d->actions->shapeAnchor->setCurrentAction(anchoredToCell ? i18n("KCCell") : i18n("Page"));
 
     // go on with the remaining shapes
     for (int i = 1; i < shapes.count(); ++i) {
@@ -1448,7 +1448,7 @@ void View::setShapeAnchoring(const QString& mode)
         const KoShape* shape = shapes[i];
         ShapeApplicationData* data = dynamic_cast<ShapeApplicationData*>(shape->applicationData());
         Q_ASSERT(data);
-        data->setAnchoredToCell(mode == i18n("Cell"));
+        data->setAnchoredToCell(mode == i18n("KCCell"));
     }
 }
 

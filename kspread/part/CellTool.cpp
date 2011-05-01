@@ -60,7 +60,7 @@
 #include <KoShapeManager.h>
 #include <KoViewConverter.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "Canvas.h"
 #include "Doc.h"
 #include "kspread_limits.h"

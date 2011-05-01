@@ -104,7 +104,7 @@ void CellEditor::Private::updateActiveSubRegion(const Tokens &tokens)
             }
         } else if (state == InRegion) {
             // Loop to the end of the subregion.
-            if (type == Token::Cell || type == Token::Range) {
+            if (type == Token::KCCell || type == Token::Range) {
                 regionEnd = rangeCounter++;
                 continue; // keep going until the referenced region ends
             }
@@ -119,7 +119,7 @@ void CellEditor::Private::updateActiveSubRegion(const Tokens &tokens)
 
         // Can the token be replaced by a reference?
         switch (type) {
-        case Token::Cell:
+        case Token::KCCell:
         case Token::Range:
             if (state == Anywhere) {
                 currentToken = i;
@@ -210,7 +210,7 @@ void CellEditor::Private::updateActiveSubRegion(const Tokens &tokens)
             regionEnd = rangeCounter - 1; // length = 0
             currentRange = rangeCounter;
             break;
-        case Token::Cell:
+        case Token::KCCell:
         case Token::Range:
             // currentToken = tokens.count() - 1; // already set
             // Set the last range as active one. It is not a sub-region,
@@ -259,7 +259,7 @@ CellEditor::CellEditor(CellToolBase *cellTool, QWidget* parent)
     connect(d->functionCompletionTimer, SIGNAL(timeout()),
             SLOT(triggerFunctionAutoComplete()));
 
-    const Cell cell(d->selection->activeSheet(), d->selection->marker());
+    const KCCell cell(d->selection->activeSheet(), d->selection->marker());
     const bool wrapText = cell.style().wrapText();
     d->textEdit->setWordWrapMode(wrapText ? QTextOption::WordWrap : QTextOption::NoWrap);
 
@@ -409,7 +409,7 @@ void CellEditor::Private::rebuildSelection()
         const Token token = tokens[i];
         const Token::Type type = token.type();
 
-        if (type == Token::Cell || type == Token::Range) {
+        if (type == Token::KCCell || type == Token::Range) {
             const KCRegion region(token.text(), map, originSheet);
 
             if (!region.isValid() || region.isEmpty()) {
@@ -492,7 +492,7 @@ void CellEditor::slotTextChanged()
     // the user input is still indicating a percent value. If the digit gets
     // deleted while editing the percent char also stays. Disabling for now.
 #if 0 // KSPREAD_WIP_EDITOR_OVERHAUL
-    const Cell cell(d->selection->activeSheet(), d->selection->marker());
+    const KCCell cell(d->selection->activeSheet(), d->selection->marker());
     if ((cell.style().formatType()) == Format::Percentage) {
         if ((text.length() == 1) && text[0].isDigit()) {
             setPlainText(text + " %");
@@ -549,7 +549,7 @@ void CellEditor::selectionChanged()
         if (d->currentToken < tokens.count()) {
             Token token = tokens[d->currentToken];
             Token::Type type = token.type();
-            if (type == Token::Cell || type == Token::Range) {
+            if (type == Token::KCCell || type == Token::Range) {
                 start = token.pos() + 1; // don't forget the '='!
                 length = token.text().length();
                 // Iterate to the end of the sub-region.
@@ -557,7 +557,7 @@ void CellEditor::selectionChanged()
                     token = tokens[i];
                     type = token.type();
                     switch (type) {
-                    case Token::Cell:
+                    case Token::KCCell:
                     case Token::Range:
                         length += token.text().length();
                         continue;
@@ -733,7 +733,7 @@ void CellEditor::permuteFixation()
         if (token.pos() > cursorPosition) {
             break; // for loop
         }
-        if (token.type() == Token::Cell || token.type() == Token::Range) {
+        if (token.type() == Token::KCCell || token.type() == Token::Range) {
             index = i;
         }
     }
@@ -824,7 +824,7 @@ void CellEditor::setActiveSubRegion(int index)
     for (int i = 0; i < tokens.count(); ++i) {
         const Token token = tokens[i];
         switch (token.type()) {
-        case Token::Cell:
+        case Token::KCCell:
         case Token::Range:
             if (!subRegion) {
                 d->currentToken = i;

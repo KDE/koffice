@@ -283,7 +283,7 @@ Value ValueParser::tryParseDate(const QString& str, bool *ok) const
                 for (; yearPos > 0 && fmt[yearPos-1] != '%'; --yearPos)
                     fmt.remove(yearPos, 1);
             }
-            //kDebug(36001) <<"Cell::tryParseDate short format w/o date:" << fmt;
+            //kDebug(36001) <<"KCCell::tryParseDate short format w/o date:" << fmt;
             tmpDate = m_settings->locale()->readDate(str, fmt, &valid);
         }
     }

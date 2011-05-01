@@ -25,7 +25,7 @@
 
 #include <KoCanvasBase.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
@@ -161,7 +161,7 @@ void Selection::initialize(const QPoint& point, KCSheet* sheet)
 
     // for the case of a merged cell
     QPoint topLeft(point);
-    Cell cell(d->activeSheet, point);
+    KCCell cell(d->activeSheet, point);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
         topLeft = QPoint(cell.column(), cell.row());
@@ -228,7 +228,7 @@ void Selection::initialize(const QRect& range, KCSheet* sheet)
 
     // for the case of a merged cell
     QPoint topLeft(range.topLeft());
-    Cell cell(d->activeSheet, topLeft);
+    KCCell cell(d->activeSheet, topLeft);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
         topLeft = QPoint(cell.column(), cell.row());
@@ -236,7 +236,7 @@ void Selection::initialize(const QRect& range, KCSheet* sheet)
 
     // for the case of a merged cell
     QPoint bottomRight(range.bottomRight());
-    cell = Cell(d->activeSheet, bottomRight);
+    cell = KCCell(d->activeSheet, bottomRight);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
         bottomRight = QPoint(cell.column(), cell.row());
@@ -312,7 +312,7 @@ void Selection::initialize(const KCRegion& region, KCSheet* sheet)
 
     // for the case of a merged cell
     QPoint topLeft(cells().last()->rect().topLeft());
-    Cell cell(d->activeSheet, topLeft);
+    KCCell cell(d->activeSheet, topLeft);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
         topLeft = QPoint(cell.column(), cell.row());
@@ -320,7 +320,7 @@ void Selection::initialize(const KCRegion& region, KCSheet* sheet)
 
     // for the case of a merged cell
     QPoint bottomRight(cells().last()->rect().bottomRight());
-    cell = Cell(d->activeSheet, bottomRight);
+    cell = KCCell(d->activeSheet, bottomRight);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
         bottomRight = QPoint(cell.column(), cell.row());
@@ -390,7 +390,7 @@ void Selection::update(const QPoint& point)
 
     // for the case of a merged cell
     QPoint topLeft(point);
-    Cell cell(d->activeSheet, point);
+    KCCell cell(d->activeSheet, point);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
         topLeft = QPoint(cell.column(), cell.row());
@@ -506,7 +506,7 @@ void Selection::extend(const QPoint& point, KCSheet* sheet)
 
     // for the case of a merged cell
     QPoint topLeft(point);
-    Cell cell(d->activeSheet, point);
+    KCCell cell(d->activeSheet, point);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
         topLeft = QPoint(cell.column(), cell.row());
@@ -562,7 +562,7 @@ void Selection::extend(const QRect& range, KCSheet* sheet)
 
     // for the case of a merged cell
     QPoint topLeft(range.topLeft());
-    Cell cell(d->activeSheet, topLeft);
+    KCCell cell(d->activeSheet, topLeft);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
         topLeft = QPoint(cell.column(), cell.row());
@@ -570,7 +570,7 @@ void Selection::extend(const QRect& range, KCSheet* sheet)
 
     // for the case of a merged cell
     QPoint bottomRight(range.bottomRight());
-    cell = Cell(d->activeSheet, bottomRight);
+    cell = KCCell(d->activeSheet, bottomRight);
     if (cell.isPartOfMerged()) {
         cell = cell.masterCell();
         bottomRight = QPoint(cell.column(), cell.row());
@@ -692,7 +692,7 @@ KCSheet* Selection::originSheet() const
     return d->originSheet;
 }
 
-int Selection::setActiveElement(const Cell &cell)
+int Selection::setActiveElement(const KCCell &cell)
 {
     for (int index = 0; index < cells().count(); ++index) {
         if (cells()[index]->sheet() != cell.sheet()) {
@@ -919,7 +919,7 @@ QRect Selection::extendToMergedAreas(const QRect& _area) const
         return _area;
 
     QRect area = normalized(_area);
-    Cell cell(d->activeSheet, area.left(), area.top());
+    KCCell cell(d->activeSheet, area.left(), area.top());
 
     if (KCRegion::Range(area).isColumn() || KCRegion::Range(area).isRow()) {
         return area;
@@ -940,7 +940,7 @@ QRect Selection::extendToMergedAreas(const QRect& _area) const
         int right = area.right();
         for (int x = area.left(); x <= area.right(); x++)
             for (int y = area.top(); y <= area.bottom(); y++) {
-                cell = Cell(d->activeSheet, x, y);
+                cell = KCCell(d->activeSheet, x, y);
                 if (cell.doesMergeCells()) {
                     right = qMax(right, cell.mergedXCells() + x);
                     bottom = qMax(bottom, cell.mergedYCells() + y);
@@ -1015,7 +1015,7 @@ void Selection::emitChanged(const KCRegion& region)
 
         // a merged cells is selected
         if (element->type() == KCRegion::Element::Point) {
-            Cell cell(sheet, left, top);
+            KCCell cell(sheet, left, top);
             if (cell.doesMergeCells()) {
                 // extend to the merged region
                 // prevents artefacts of the selection rectangle
@@ -1059,7 +1059,7 @@ void Selection::emitChanged(const KCRegion& region)
         extendedRegion.add(area, element->sheet());
     }
 
-    const QList<Cell> masterCells = sheet->cellStorage()->masterCells(extendedRegion);
+    const QList<KCCell> masterCells = sheet->cellStorage()->masterCells(extendedRegion);
     for (int i = 0; i < masterCells.count(); ++i)
         extendedRegion.add(masterCells[i].cellPosition(), sheet);
 

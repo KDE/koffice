@@ -44,7 +44,7 @@ class MyDialog:
         
         datapage = dialog.addPage("Import","Import to sheet beginning at cell","document-import")
         self.sheetslistview = KSpread.createSheetsListView(datapage)
-        self.sheetslistview.setEditorType("Cell")
+        self.sheetslistview.setEditorType("KCCell")
 
         if not dialog.exec_loop():
             return

@@ -40,7 +40,7 @@ class KLocale;
 bool util_isPointValid(const QPoint& point);
 bool util_isRectValid(const QRect& rect);
 
-class Cell;
+class KCCell;
 class Map;
 class KCSheet;
 

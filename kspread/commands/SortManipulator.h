@@ -93,7 +93,7 @@ protected:
     QMap<int, int> sorted;
 
     CellStorage* m_cellStorage; // temporary
-    QHash<Cell, KCStyle> m_styles; // temporary
+    QHash<KCCell, KCStyle> m_styles; // temporary
 };
 
 #endif  // KSPREAD_SORT_MANIPULATOR

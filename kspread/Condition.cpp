@@ -24,7 +24,7 @@
 
 #include <float.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "Formula.h"
 #include "Map.h"
 #include "NamedAreaManager.h"
@@ -100,7 +100,7 @@ bool Conditions::isEmpty() const
     return d->conditionList.isEmpty();
 }
 
-KCStyle Conditions::testConditions( const Cell& cell ) const
+KCStyle Conditions::testConditions( const KCCell& cell ) const
 {
     Conditional condition;
     if (currentCondition(cell, condition)) {
@@ -112,7 +112,7 @@ KCStyle Conditions::testConditions( const Cell& cell ) const
     return d->defaultStyle;
 }
 
-bool Conditions::currentCondition(const Cell& cell, Conditional & condition) const
+bool Conditions::currentCondition(const KCCell& cell, Conditional & condition) const
 {
     /* for now, the first condition that is true is the one that will be used */
 
@@ -192,7 +192,7 @@ bool Conditions::currentCondition(const Cell& cell, Conditional & condition) con
     return false;
 }
 
-bool Conditions::isTrueFormula(const Cell &cell, const QString &formula, const QString &baseCellAddress) const
+bool Conditions::isTrueFormula(const KCCell &cell, const QString &formula, const QString &baseCellAddress) const
 {
     Map* const map = cell.sheet()->map();
     ValueCalc *const calc = map->calc();
@@ -205,7 +205,7 @@ bool Conditions::isTrueFormula(const Cell &cell, const QString &formula, const Q
         const Tokens tokens = f.tokens();
         for (int t = 0; t < tokens.count(); ++t) {
             const Token token = tokens[t];
-            if (token.type() == Token::Cell || token.type() == Token::Range) {
+            if (token.type() == Token::KCCell || token.type() == Token::Range) {
                 if (map->namedAreaManager()->contains(token.text())) {
                     newFormula.append(token.text());
                     continue;

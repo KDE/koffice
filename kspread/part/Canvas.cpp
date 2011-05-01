@@ -571,7 +571,7 @@ void Canvas::validateSelection()
 #if 0
 XXX TODO
     if (selection()->isSingular()) {
-        const Cell cell = Cell(sheet, selection()->marker()).masterCell();
+        const KCCell cell = KCCell(sheet, selection()->marker()).masterCell();
         Validity validity = cell.validity();
         if (validity.displayValidationInformation()) {
             const QString title = validity.titleInfo();
@@ -667,10 +667,10 @@ void Canvas::showToolTip(const QPoint &p)
     int row = sheet->topRow((viewConverter()->viewToDocumentY(p.y()) +
                              yOffset()), ypos);
 
-    Cell cell = Cell(sheet, col, row).masterCell();
+    KCCell cell = KCCell(sheet, col, row).masterCell();
     CellView cellView = view()->sheetView(sheet)->cellView(cell.column(), cell.row());
     if (cellView.isObscured()) {
-        cell = Cell(sheet, cellView.obscuringCell());
+        cell = KCCell(sheet, cellView.obscuringCell());
         cellView = view()->sheetView(sheet)->cellView(cellView.obscuringCell().x(), cellView.obscuringCell().y());
     }
 

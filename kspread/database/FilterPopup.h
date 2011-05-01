@@ -24,7 +24,7 @@
 
 class QAbstractButton;
 
-class Cell;
+class KCCell;
 class Database;
 class Filter;
 
@@ -35,9 +35,9 @@ public:
     /**
      * Constructor.
      */
-    FilterPopup(QWidget* parent, const Cell& cell, Database* database);
+    FilterPopup(QWidget* parent, const KCCell& cell, Database* database);
 
-    static void showPopup(QWidget* parent, const Cell& cell, const QRect& cellRect, Database* database);
+    static void showPopup(QWidget* parent, const KCCell& cell, const QRect& cellRect, Database* database);
 
     /**
      * Destructor.

@@ -197,7 +197,7 @@ QWidget* CalendarTool::createOptionWidget()
 
 void CalendarTool::setText(KCSheet* sheet, int _row, int _column, const QString& _text, bool asString)
 {
-    Cell cell(sheet, _column, _row);
+    KCCell cell(sheet, _column, _row);
     if (asString) {
         cell.setUserInput(_text);
         cell.setValue(Value(_text));

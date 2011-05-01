@@ -21,7 +21,7 @@
 // built-in reference functions
 #include "ReferenceModule.h"
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 #include "Util.h"
@@ -186,7 +186,7 @@ Value func_address(valVector args, ValueCalc *calc, FuncExtra *)
         if (abs)
             result += '$';
 
-        result += Cell::columnName(col);
+        result += KCCell::columnName(col);
 
         abs = false;
         if (absNum == 1 || absNum == 2)
@@ -355,7 +355,7 @@ Value func_indirect(valVector args, ValueCalc *calc, FuncExtra *e)
     if (!region.isValid() || !region.isSingular())
         return Value::errorVALUE();
 
-    const Cell cell(region.firstSheet(), region.firstRange().topLeft());
+    const KCCell cell(region.firstSheet(), region.firstRange().topLeft());
     if (!cell.isNull())
         return cell.value();
     return Value::errorVALUE();
@@ -477,9 +477,9 @@ Value func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
         return Value::errorVALUE();
 
     CellIndirection cellIndirections;
-    cellIndirections.insert(Cell(e->sheet, e->ranges[1].col1, e->ranges[1].row1), Cell(e->sheet, e->ranges[2].col1, e->ranges[2].row1));
+    cellIndirections.insert(KCCell(e->sheet, e->ranges[1].col1, e->ranges[1].row1), KCCell(e->sheet, e->ranges[2].col1, e->ranges[2].row1));
     if (args.count() > 3) {
-        cellIndirections.insert(Cell(e->sheet, e->ranges[3].col1, e->ranges[3].row1), Cell(e->sheet, e->ranges[4].col1, e->ranges[4].row1));
+        cellIndirections.insert(KCCell(e->sheet, e->ranges[3].col1, e->ranges[3].row1), KCCell(e->sheet, e->ranges[4].col1, e->ranges[4].row1));
     }
 
     return formula.eval(cellIndirections);

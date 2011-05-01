@@ -39,7 +39,7 @@ class QFont;
 class QString;
 class KoGenStyle;
 
-class Cell;
+class KCCell;
 class ValueConverter;
 class ValueParser;
 
@@ -48,7 +48,7 @@ class ValueParser;
  * \ingroup KCStyle
  * Conditional formatting.
  * Holds the actual condition and the applicable style for conditional
- * Cell formattings.
+ * KCCell formattings.
  */
 class KSPREAD_EXPORT Conditional
 {
@@ -105,7 +105,7 @@ public:
     /**
      * \return the style that matches first (or 0 if no condition matches)
      */
-    KCStyle testConditions(const Cell &cell) const;
+    KCStyle testConditions(const KCCell &cell) const;
 
     /**
      * Retrieve the current list of conditions we're checking
@@ -183,9 +183,9 @@ private:
      *
      * \return true if one of the conditions is true, false if not.
      */
-    bool currentCondition(const Cell& cell, Conditional & condition) const;
+    bool currentCondition(const KCCell& cell, Conditional & condition) const;
 
-    bool isTrueFormula(const Cell& cell, const QString& formula, const QString& baseCellAddress) const;
+    bool isTrueFormula(const KCCell& cell, const QString& formula, const QString& baseCellAddress) const;
 
     /**
      * \ingroup OpenDocument

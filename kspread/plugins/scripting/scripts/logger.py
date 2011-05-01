@@ -62,7 +62,7 @@ class Logger:
             self.lastCount -= 1
         else:
             flush = True
-        print "Logger: Cell changed column=%i row=%i text=%s" % (column,row,text)
+        print "Logger: KCCell changed column=%i row=%i text=%s" % (column,row,text)
         self.addLog( "column=%i row=%i text=%s" % (column,row,text), flush )
 
 Logger( self )

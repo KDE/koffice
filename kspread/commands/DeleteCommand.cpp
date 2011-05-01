@@ -60,7 +60,7 @@ bool DeleteCommand::process(Element* element)
     if (element->isColumn()) {
         // column-wise processing
         for (int col = range.left(); col <= range.right(); ++col) {
-            Cell cell = m_sheet->cellStorage()->firstInColumn(col);
+            KCCell cell = m_sheet->cellStorage()->firstInColumn(col);
             while (!cell.isNull()) {
                 m_sheet->cellStorage()->take(col, cell.row());
                 cell = m_sheet->cellStorage()->nextInColumn(col, cell.row());
@@ -81,7 +81,7 @@ bool DeleteCommand::process(Element* element)
     } else if (element->isRow()) {
         // row-wise processing
         for (int row = range.top(); row <= range.bottom(); ++row) {
-            Cell cell = m_sheet->cellStorage()->firstInRow(row);
+            KCCell cell = m_sheet->cellStorage()->firstInRow(row);
             while (!cell.isNull()) {
                 m_sheet->cellStorage()->take(cell.column(), row);
                 cell = m_sheet->cellStorage()->nextInRow(cell.column(), row);
@@ -102,7 +102,7 @@ bool DeleteCommand::process(Element* element)
     } else {
         // row-wise processing
         for (int row = range.top(); row <= range.bottom(); ++row) {
-            Cell cell = m_sheet->cellStorage()->firstInRow(row);
+            KCCell cell = m_sheet->cellStorage()->firstInRow(row);
             if (!cell.isNull() && cell.column() < range.left())
                 cell = m_sheet->cellStorage()->nextInRow(range.left() - 1, row);
             while (!cell.isNull()) {

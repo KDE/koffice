@@ -66,7 +66,7 @@ void SheetTest::testRemoveRows()
     QFETCH(int, rowToRemove);
     QFETCH(QString, result);
 
-    Cell cell(m_sheet, 1, 1);
+    KCCell cell(m_sheet, 1, 1);
     cell.setUserInput(formula);
     m_sheet->removeRows(rowToRemove, 1);
 
@@ -103,7 +103,7 @@ void SheetTest::testRemoveColumns()
     QFETCH(int, columnToRemove);
     QFETCH(QString, result);
 
-    Cell cell(m_sheet, 1, 1);
+    KCCell cell(m_sheet, 1, 1);
     cell.setUserInput(formula);
     m_sheet->removeColumns(columnToRemove, 1);
 

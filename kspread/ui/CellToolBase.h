@@ -31,7 +31,7 @@
 
 #include <KoInteractionTool.h>
 
-#include <kspread/Cell.h>
+#include <kspread/KCCell.h>
 #include <kspread/kspread_export.h>
 #include "Selection.h"
 
@@ -255,7 +255,7 @@ protected Q_SLOTS:
     void findPrevious();
     void replace();
     void initFindReplace();
-    Cell findNextCell();
+    KCCell findNextCell();
     /**
      * Called by find/replace (findNext) when it found a match
      */
@@ -264,7 +264,7 @@ protected Q_SLOTS:
      * Called when replacing text in a cell
      */
     void slotReplace(const QString &newText, int, int, int);
-    Cell nextFindValidCell(int col, int row);
+    KCCell nextFindValidCell(int col, int row);
     // -- misc actions --
     void gotoCell();
     void spellCheck();

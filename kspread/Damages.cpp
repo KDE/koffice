@@ -23,7 +23,7 @@
 
 #include <QPoint>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "KCSheet.h"
 #include "KCRegion.h"
 
@@ -55,7 +55,7 @@ public:
     KCRegion region;
 };
 
-CellDamage::CellDamage(const Cell& cell, Changes changes)
+CellDamage::CellDamage(const KCCell& cell, Changes changes)
         : d(new Private)
 {
     d->sheet = cell.sheet();
@@ -168,7 +168,7 @@ QDebug operator<<(QDebug str, const Damage& d)
     case Damage::DamagedWorkbook: return str << "Workbook";
     case Damage::DamagedSheet: return str << "KCSheet";
     case Damage::DamagedRange: return str << "Range";
-    case Damage::DamagedCell: return str << "Cell";
+    case Damage::DamagedCell: return str << "KCCell";
     case Damage::DamagedSelection: return str << "Selection";
     }
     return str;

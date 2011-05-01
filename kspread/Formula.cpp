@@ -22,7 +22,7 @@
 #include "Formula.h"
 
 #include "CalculationSettings.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "Function.h"
 #include "FunctionRepository.h"
@@ -82,7 +82,7 @@ class Opcode
 {
 public:
 
-    enum { Nop = 0, Load, Ref, Cell, Range, Function, Add, Sub, Neg, Mul, Div,
+    enum { Nop = 0, Load, Ref, KCCell, Range, Function, Add, Sub, Neg, Mul, Div,
            Pow, Concat, Intersect, Not, Equal, Less, Greater, Array, Union
          };
 
@@ -110,7 +110,7 @@ struct stackEntry {
 class Formula::Private : public QSharedData
 {
 public:
-    Cell cell;
+    KCCell cell;
     KCSheet *sheet;
     mutable bool dirty;
     mutable bool valid;
@@ -351,7 +351,7 @@ QString Token::description() const
     case  Float:      desc = "Float"; break;
     case  String:     desc = "String"; break;
     case  Identifier: desc = "Identifier"; break;
-    case  Cell:       desc = "Cell"; break;
+    case  KCCell:       desc = "KCCell"; break;
     case  Range:      desc = "Range"; break;
     case  Operator:   desc = "Operator"; break;
     case  Error:      desc = "Error"; break;
@@ -435,7 +435,7 @@ bool KSpread::isIdentifier(const QChar &ch)
 
 // Constructor
 
-Formula::Formula(KCSheet *sheet, const Cell& cell)
+Formula::Formula(KCSheet *sheet, const KCCell& cell)
         : d(new Private)
 {
     d->cell = cell;
@@ -446,7 +446,7 @@ Formula::Formula(KCSheet *sheet, const Cell& cell)
 Formula::Formula(KCSheet *sheet)
         : d(new Private)
 {
-    d->cell = Cell();
+    d->cell = KCCell();
     d->sheet = sheet;
     clear();
 }
@@ -454,7 +454,7 @@ Formula::Formula(KCSheet *sheet)
 Formula::Formula()
         : d(new Private)
 {
-    d->cell = Cell();
+    d->cell = KCCell();
     d->sheet = 0;
     clear();
 }
@@ -476,7 +476,7 @@ Formula::~Formula()
 {
 }
 
-const Cell& Formula::cell() const
+const KCCell& Formula::cell() const
 {
     return d->cell;
 }
@@ -735,7 +735,7 @@ Tokens Formula::scan(const QString& expr, const KLocale* locale) const
                         state = InRange;
                     } else {
                         // we're done with cell reference
-                        tokens.append(Token(Token::Cell, tokenText, tokenStart));
+                        tokens.append(Token(Token::KCCell, tokenText, tokenStart));
                         tokenText.clear();
                         state = Start;
                     }
@@ -983,12 +983,12 @@ void Formula::compile(const Tokens& tokens) const
 
         // for cell, range, or identifier, push immediately to stack
         // generate code to load from reference
-        if ((tokenType == Token::Cell) || (tokenType == Token::Range) ||
+        if ((tokenType == Token::KCCell) || (tokenType == Token::Range) ||
                 (tokenType == Token::Identifier)) {
             syntaxStack.push(token);
             d->constants.append(Value(token.text()));
-            if (tokenType == Token::Cell)
-                d->codes.append(Opcode(Opcode::Cell, d->constants.count() - 1));
+            if (tokenType == Token::KCCell)
+                d->codes.append(Opcode(Opcode::KCCell, d->constants.count() - 1));
             else if (tokenType == Token::Range)
                 d->codes.append(Opcode(Opcode::Range, d->constants.count() - 1));
             else
@@ -1329,7 +1329,7 @@ bool Formula::isNamedArea(const QString& expr) const
 // evaluate the cellIndirections
 Value Formula::eval(CellIndirection cellIndirections) const
 {
-    QHash<Cell, Value> values;
+    QHash<KCCell, Value> values;
     return evalRecursive(cellIndirections, values);
 }
 
@@ -1379,7 +1379,7 @@ Value numericOrError(const ValueConverter* converter, const Value &v)
     return Value::errorVALUE();
 }
 
-Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<Cell, Value>& values) const
+Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Value>& values) const
 {
     QStack<stackEntry> stack;
     stackEntry entry;
@@ -1507,11 +1507,11 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<Cell, Value
             } else {
                 KCRegion r = r1.intersected(r2);
                 QRect rect = r.boundingRect();
-                Cell cell;
+                KCCell cell;
                 if(rect.top() == rect.bottom())
-                    cell = Cell(r.firstSheet(), fe.mycol, rect.top());
+                    cell = KCCell(r.firstSheet(), fe.mycol, rect.top());
                 else if(rect.left() == rect.right())
-                    cell = Cell(r.firstSheet(), rect.left(), fe.mycol);
+                    cell = KCCell(r.firstSheet(), rect.left(), fe.mycol);
                 if(cell.isNull())
                     val1 = Value::errorNULL();
                 else if(cell.isEmpty())
@@ -1611,7 +1611,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<Cell, Value
         break;
 
         // cell in a sheet
-        case Opcode::Cell: {
+        case Opcode::KCCell: {
             c = d->constants[index].asString();
             val1 = Value::empty();
             entry.reset();
@@ -1622,9 +1622,9 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<Cell, Value
             } else if (region.isSingular()) {
                 const QPoint position = region.firstRange().topLeft();
                 if (cellIndirections.isEmpty())
-                    val1 = Cell(region.firstSheet(), position).value();
+                    val1 = KCCell(region.firstSheet(), position).value();
                 else {
-                    Cell cell(region.firstSheet(), position);
+                    KCCell cell(region.firstSheet(), position);
                     cell = cellIndirections.value(cell, cell);
                     if (values.contains(cell))
                         val1 = values.value(cell);
@@ -1643,7 +1643,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<Cell, Value
                 entry.reg = region;
                 entry.regIsNamedOrLabeled = map->namedAreaManager()->contains(c);
             } else {
-                kWarning() << "Unhandled non singular region in Opcode::Cell with rects=" << region.rects();
+                kWarning() << "Unhandled non singular region in Opcode::KCCell with rects=" << region.rects();
             }
             entry.val = val1;
             stack.push(entry);
@@ -1818,7 +1818,7 @@ QString Formula::dump() const
         case Opcode::Greater:   ctext = "Greater"; break;
         case Opcode::Array:     ctext = QString("Array (%1x%2)").arg(d->constants[d->codes[i].index].asInteger()).arg(d->constants[d->codes[i].index+1].asInteger()); break;
         case Opcode::Nop:       ctext = "Nop"; break;
-        case Opcode::Cell:      ctext = "Cell"; break;
+        case Opcode::KCCell:      ctext = "KCCell"; break;
         case Opcode::Range:     ctext = "Range"; break;
         default: ctext = "Unknown"; break;
         }

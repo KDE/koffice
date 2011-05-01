@@ -64,15 +64,15 @@ void PageLayoutDialog::Private::setup()
     sheetPage.columnsCheckBox->setChecked(repeatedColumns.first && repeatedColumns.second);
     const int maxColumn = qMax(usedArea.width(), repeatedColumns.second);
     for (int col = 1; col <= maxColumn; ++col) {
-        const QString number = Cell::columnName(col);
+        const QString number = KCCell::columnName(col);
         sheetPage.startColumnComboBox->addItem(number);
         sheetPage.endColumnComboBox->addItem(number, col);
     }
-    int index = sheetPage.startColumnComboBox->findText(Cell::columnName(repeatedColumns.first));
+    int index = sheetPage.startColumnComboBox->findText(KCCell::columnName(repeatedColumns.first));
     if (index == -1)
         index = 0;
     sheetPage.startColumnComboBox->setCurrentIndex(index);
-    index = sheetPage.endColumnComboBox->findText(Cell::columnName(repeatedColumns.second));
+    index = sheetPage.endColumnComboBox->findText(KCCell::columnName(repeatedColumns.second));
     if (index == -1)
         index = 0;
     sheetPage.endColumnComboBox->setCurrentIndex(index);

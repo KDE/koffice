@@ -25,7 +25,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "Damages.h"
 #include "Map.h"

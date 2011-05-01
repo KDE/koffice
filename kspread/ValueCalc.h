@@ -36,7 +36,7 @@
 # undef min
 #endif
 
-class Cell;
+class KCCell;
 class Doc;
 class ValueCalc;
 class ValueConverter;
@@ -271,7 +271,7 @@ public:
     Value sum(const Value &range, bool full = true);
     Value sumsq(const Value &range, bool full = true);
     Value sumIf(const Value &range, const Condition &cond);
-    Value sumIf(const Cell &sumRangeStart,
+    Value sumIf(const KCCell &sumRangeStart,
                 const Value &checkRange, const Condition &cond);
     int count(const Value &range, bool full = true);
     int countIf(const Value &range, const Condition &cond);

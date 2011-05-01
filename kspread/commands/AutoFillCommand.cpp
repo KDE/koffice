@@ -65,7 +65,7 @@ class AutoFillSequenceItem
 public:
     enum Type { VALUE, FORMULA, DAY, SHORTDAY, MONTH, SHORTMONTH, OTHER };
 
-    explicit AutoFillSequenceItem(const Cell& cell);
+    explicit AutoFillSequenceItem(const KCCell& cell);
 
     Value delta(AutoFillSequenceItem *_seq, bool *ok) const;
 
@@ -92,7 +92,7 @@ protected:
     int     m_otherEnd;
 };
 
-AutoFillSequenceItem::AutoFillSequenceItem(const Cell& cell)
+AutoFillSequenceItem::AutoFillSequenceItem(const KCCell& cell)
         : m_value()
         , m_type(VALUE)
         , m_otherBegin(0)
@@ -572,8 +572,8 @@ static QList<Value> findInterval(const AutoFillSequence& _seqList)
     return deltaSequence;
 }
 
-static void fillSequence(const QList<Cell>& _srcList,
-                         const QList<Cell>& _destList,
+static void fillSequence(const QList<KCCell>& _srcList,
+                         const QList<KCCell>& _destList,
                          const AutoFillSequence& _seqList,
                          const QList<Value>& deltaSequence,
                          bool down)
@@ -586,7 +586,7 @@ static void fillSequence(const QList<Cell>& _srcList,
     kDebug() << "Valid interval, number of intervals:" << block;
 
     // Start iterating with the first cell
-    Cell cell;
+    KCCell cell;
     int destIndex = 0;
     if (down)
         cell = _destList.first();
@@ -612,7 +612,7 @@ static void fillSequence(const QList<Cell>& _srcList,
             }
         }
 
-        kDebug() << "Cell:" << cell.name() << ", position:" << s << ", block:" << block;
+        kDebug() << "KCCell:" << cell.name() << ", position:" << s << ", block:" << block;
 
         // Calculate the new value of 'cell' by adding 'block' times the delta to the
         // value of cell 's'.
@@ -713,15 +713,15 @@ bool AutoFillCommand::mainProcessing()
     if (m_sourceRange.left() == m_targetRange.left() && m_sourceRange.right() < m_targetRange.right()) {
         for (int y = m_sourceRange.top(); y <= m_sourceRange.bottom(); y++) {
             int x;
-            QList<Cell> destList;
+            QList<KCCell> destList;
             for (x = m_sourceRange.right() + 1; x <= m_targetRange.right(); x++)
-                destList.append(Cell(m_sheet, x, y));
-            QList<Cell> srcList;
+                destList.append(KCCell(m_sheet, x, y));
+            QList<KCCell> srcList;
             for (x = m_sourceRange.left(); x <= m_sourceRange.right(); x++)
-                srcList.append(Cell(m_sheet, x, y));
+                srcList.append(KCCell(m_sheet, x, y));
             AutoFillSequence seqList;
             for (x = m_sourceRange.left(); x <= m_sourceRange.right(); x++)
-                seqList.append(new AutoFillSequenceItem(Cell(m_sheet, x, y)));
+                seqList.append(new AutoFillSequenceItem(KCCell(m_sheet, x, y)));
             fillSequence(srcList, destList, seqList);
             qDeleteAll(seqList);
         }
@@ -731,15 +731,15 @@ bool AutoFillCommand::mainProcessing()
     if (m_sourceRange.top() == m_targetRange.top() && m_sourceRange.bottom() < m_targetRange.bottom()) {
         for (int x = m_sourceRange.left(); x <= m_targetRange.right(); x++) {
             int y;
-            QList<Cell> destList;
+            QList<KCCell> destList;
             for (y = m_sourceRange.bottom() + 1; y <= m_targetRange.bottom(); y++)
-                destList.append(Cell(m_sheet, x, y));
-            QList<Cell> srcList;
+                destList.append(KCCell(m_sheet, x, y));
+            QList<KCCell> srcList;
             for (y = m_sourceRange.top(); y <= m_sourceRange.bottom(); y++)
-                srcList.append(Cell(m_sheet, x, y));
+                srcList.append(KCCell(m_sheet, x, y));
             AutoFillSequence seqList;
             for (y = m_sourceRange.top(); y <= m_sourceRange.bottom(); y++)
-                seqList.append(new AutoFillSequenceItem(Cell(m_sheet, x, y)));
+                seqList.append(new AutoFillSequenceItem(KCCell(m_sheet, x, y)));
             fillSequence(srcList, destList, seqList);
             qDeleteAll(seqList);
         }
@@ -749,15 +749,15 @@ bool AutoFillCommand::mainProcessing()
     if (m_sourceRange.left() == m_targetRange.right() && m_sourceRange.right() >= m_targetRange.right()) {
         for (int y = m_targetRange.top(); y <= m_targetRange.bottom(); y++) {
             int x;
-            QList<Cell> destList;
+            QList<KCCell> destList;
             for (x = m_targetRange.left(); x < m_sourceRange.left(); x++)
-                destList.append(Cell(m_sheet, x, y));
-            QList<Cell> srcList;
+                destList.append(KCCell(m_sheet, x, y));
+            QList<KCCell> srcList;
             for (x = m_sourceRange.left(); x <= m_sourceRange.right(); x++)
-                srcList.append(Cell(m_sheet, x, y));
+                srcList.append(KCCell(m_sheet, x, y));
             AutoFillSequence seqList;
             for (x = m_sourceRange.left(); x <= m_sourceRange.right(); x++)
-                seqList.append(new AutoFillSequenceItem(Cell(m_sheet, x, y)));
+                seqList.append(new AutoFillSequenceItem(KCCell(m_sheet, x, y)));
             fillSequence(srcList, destList, seqList, false);
             qDeleteAll(seqList);
         }
@@ -769,15 +769,15 @@ bool AutoFillCommand::mainProcessing()
         const int endVal = qMax(m_sourceRange.right(), m_targetRange.right());
         for (int x = startVal; x <= endVal; x++) {
             int y;
-            QList<Cell> destList;
+            QList<KCCell> destList;
             for (y = m_targetRange.top(); y < m_sourceRange.top(); y++)
-                destList.append(Cell(m_sheet, x, y));
-            QList<Cell> srcList;
+                destList.append(KCCell(m_sheet, x, y));
+            QList<KCCell> srcList;
             for (y = m_sourceRange.top(); y <= m_sourceRange.bottom(); ++y)
-                srcList.append(Cell(m_sheet, x, y));
+                srcList.append(KCCell(m_sheet, x, y));
             AutoFillSequence seqList;
             for (y = m_sourceRange.top(); y <= m_sourceRange.bottom(); y++)
-                seqList.append(new AutoFillSequenceItem(Cell(m_sheet, x, y)));
+                seqList.append(new AutoFillSequenceItem(KCCell(m_sheet, x, y)));
             fillSequence(srcList, destList, seqList, false);
             qDeleteAll(seqList);
         }
@@ -785,8 +785,8 @@ bool AutoFillCommand::mainProcessing()
     return true;
 }
 
-void AutoFillCommand::fillSequence(const QList<Cell>& _srcList,
-                                   const QList<Cell>& _destList,
+void AutoFillCommand::fillSequence(const QList<KCCell>& _srcList,
+                                   const QList<KCCell>& _destList,
                                    const AutoFillSequence& _seqList,
                                    bool down)
 {
@@ -805,7 +805,7 @@ void AutoFillCommand::fillSequence(const QList<Cell>& _srcList,
     //the interval to 0 for all types, OpenOffice.org (2.00) uses increments of 1.00, 1 hour and 1 day
     //respectively
     if (_srcList.count() == 1) {
-        const Cell cell = _srcList.value(0);
+        const KCCell cell = _srcList.value(0);
         if (cell.isTime() || cell.value().format() == Value::fmt_DateTime) {
             // TODO Stefan: delta depending on minimum unit of format
             deltaSequence.append(Value(QTime(1, 0), m_sheet->map()->calculationSettings()));

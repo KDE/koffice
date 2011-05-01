@@ -724,7 +724,7 @@ void KCSheet::changeCellTabName(QString const & old_name, QString const & new_na
                 int pos = tmp.indexOf(old_name + '!');
                 tmp.replace(pos, len, new_name + '!');
             }
-            Cell cell(this, formulaStorage()->col(c), formulaStorage()->row(c));
+            KCCell cell(this, formulaStorage()->col(c), formulaStorage()->row(c));
             Formula formula(this, cell);
             formula.setExpression(tmp);
             cell.setFormula(formula);
@@ -872,13 +872,13 @@ QString KCSheet::changeNameCellRefHelper(const QPoint& pos, bool fullRowOrColumn
             col + nbCol <= KS_colMax &&
             col >= pos.x() &&    // Column after the new one : +1
             (fullRowOrColumn || row == pos.y())) {  // All rows or just one
-        newPoint += Cell::columnName(col + nbCol);
+        newPoint += KCCell::columnName(col + nbCol);
     } else if (ref == ColumnRemove &&
                col > pos.x() &&    // Column after the deleted one : -1
                (fullRowOrColumn || row == pos.y())) {  // All rows or just one
-        newPoint += Cell::columnName(col - nbCol);
+        newPoint += KCCell::columnName(col - nbCol);
     } else
-        newPoint += Cell::columnName(col);
+        newPoint += KCCell::columnName(col);
 
     // Update row
     if (isRowFixed)
@@ -923,7 +923,7 @@ void KCSheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeR
         for (int t = 0; t < tokens.count(); ++t) {
             const Token token = tokens[t];
             switch (token.type()) {
-            case Token::Cell:
+            case Token::KCCell:
             case Token::Range: {
                 if (map()->namedAreaManager()->contains(token.text())) {
                     newText.append(token.text()); // simply keep the area name
@@ -977,7 +977,7 @@ void KCSheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeR
             }
         }
 
-        Cell cell(this, formulaStorage()->col(c), formulaStorage()->row(c));
+        KCCell cell(this, formulaStorage()->col(c), formulaStorage()->row(c));
         Formula formula(this, cell);
         formula.setExpression(newText);
         cell.setFormula(formula);
@@ -985,7 +985,7 @@ void KCSheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeR
 }
 
 // helper function for KCSheet::areaIsEmpty
-bool KCSheet::cellIsEmpty(const Cell& cell, TestType _type)
+bool KCSheet::cellIsEmpty(const KCCell& cell, TestType _type)
 {
     if (!cell.isPartOfMerged()) {
         switch (_type) {
@@ -1019,7 +1019,7 @@ bool KCSheet::areaIsEmpty(const KCRegion& region, TestType _type)
         // Complete rows selected ?
         if ((*it)->isRow()) {
             for (int row = range.top(); row <= range.bottom(); ++row) {
-                Cell cell = d->cellStorage->firstInRow(row);
+                KCCell cell = d->cellStorage->firstInRow(row);
                 while (!cell.isNull()) {
                     if (!cellIsEmpty(cell, _type))
                         return false;
@@ -1030,7 +1030,7 @@ bool KCSheet::areaIsEmpty(const KCRegion& region, TestType _type)
         // Complete columns selected ?
         else if ((*it)->isColumn()) {
             for (int col = range.left(); col <= range.right(); ++col) {
-                Cell cell = d->cellStorage->firstInColumn(col);
+                KCCell cell = d->cellStorage->firstInColumn(col);
                 while (!cell.isNull()) {
                     if (!cellIsEmpty(cell, _type))
                         return false;
@@ -1038,12 +1038,12 @@ bool KCSheet::areaIsEmpty(const KCRegion& region, TestType _type)
                 }
             }
         } else {
-            Cell cell;
+            KCCell cell;
             int right  = range.right();
             int bottom = range.bottom();
             for (int x = range.left(); x <= right; ++x)
                 for (int y = range.top(); y <= bottom; ++y) {
-                    cell = Cell(this, x, y);
+                    cell = KCCell(this, x, y);
                     if (!cellIsEmpty(cell, _type))
                         return false;
                 }
@@ -1188,7 +1188,7 @@ QDomElement KCSheet::saveXML(QDomDocument& dd)
     // Save all cells.
     const QRect usedArea = this->usedArea();
     for (int row = 1; row <= usedArea.height(); ++row) {
-        Cell cell = d->cellStorage->firstInRow(row);
+        KCCell cell = d->cellStorage->firstInRow(row);
         while (!cell.isNull()) {
             QDomElement e = cell.save(dd);
             if (!e.isNull())
@@ -1598,11 +1598,11 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
         }
     }
 
-    // Cell style regions
+    // KCCell style regions
     QHash<QString, QRegion> cellStyleRegions;
-    // Cell style regions (row defaults)
+    // KCCell style regions (row defaults)
     QHash<QString, QRegion> rowStyleRegions;
-    // Cell style regions (column defaults)
+    // KCCell style regions (column defaults)
     QHash<QString, QRegion> columnStyleRegions;
     IntervalMap<QString> columnStyles;
 
@@ -2095,7 +2095,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
         if (cellStyleName.isEmpty())
             cellStyleName = columnStyles.get(columnIndex);
 
-        Cell cell(this, columnIndex, rowIndex);
+        KCCell cell(this, columnIndex, rowIndex);
         cell.loadOdf(cellElement, tableContext, autoStyles, cellStyleName);
 
         if (!cell.comment().isEmpty())
@@ -2110,7 +2110,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
             QSharedPointer<QTextDocument> richText = cell.richText();
             for (int r = rowIndex; r <= endRow; ++r) {
                 for (int c = 0; c < numberColumns; ++c) {
-                    Cell target(this, columnIndex + c, r);
+                    KCCell target(this, columnIndex + c, r);
                     target.setFormula(cell.formula());
                     target.setUserInput(cell.userInput());
                     target.setRichText(richText);
@@ -2173,8 +2173,8 @@ bool KCSheet::compareRows(int row1, int row2, int& maxCols, OdfSavingContext& ta
     if (tableContext.rowHasCellAnchoredShapes(this, row1) != tableContext.rowHasCellAnchoredShapes(this, row2)) {
         return false;
     }
-    Cell cell1 = cellStorage()->firstInRow(row1);
-    Cell cell2 = cellStorage()->firstInRow(row2);
+    KCCell cell1 = cellStorage()->firstInRow(row1);
+    KCCell cell2 = cellStorage()->firstInRow(row2);
     if (cell1.isNull() != cell2.isNull())
         return false;
     while (!cell1.isNull()) {
@@ -2183,7 +2183,7 @@ bool KCSheet::compareRows(int row1, int row2, int& maxCols, OdfSavingContext& ta
         if (cell1.column() > maxCols)
             break;
         if (!cell1.compareData(cell2)) {
-//             kDebug(36003) <<"\t Cell at column" << col <<" in row" << row2 <<" differs from the one in row" << row1;
+//             kDebug(36003) <<"\t KCCell at column" << col <<" in row" << row2 <<" differs from the one in row" << row1;
             return false;
         }
         cell1 = cellStorage()->nextInRow(cell1.column(), cell1.row());
@@ -2809,13 +2809,13 @@ void KCSheet::saveOdfCells(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles, int 
                          OdfSavingContext& tableContext)
 {
     int i = 1;
-    Cell cell(this, i, row);
-    Cell nextCell = d->cellStorage->nextInRow(i, row);
+    KCCell cell(this, i, row);
+    KCCell nextCell = d->cellStorage->nextInRow(i, row);
     // handle situations where the row contains shapes and nothing else
     if (cell.isDefault() && nextCell.isNull()) {
         int nextShape = tableContext.nextAnchoredShape(this, row, i);
         if (nextShape)
-            nextCell = Cell(this, nextShape, row);
+            nextCell = KCCell(this, nextShape, row);
     }
     // while
     //   the current cell is not a default one
@@ -2834,11 +2834,11 @@ void KCSheet::saveOdfCells(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles, int 
         if (i > maxCols || nextCell.isNull())
             break;
 
-        cell = Cell(this, i, row);
+        cell = KCCell(this, i, row);
         // if we have a shape anchored to an empty cell, ensure that the cell gets also processed
         int nextShape = tableContext.nextAnchoredShape(this, row, column);
         if (nextShape && ((nextShape < i) || cell.isDefault())) {
-            cell = Cell(this, nextShape, row);
+            cell = KCCell(this, nextShape, row);
             i = nextShape;
         }
 
@@ -3091,7 +3091,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
         if (!e.isNull()) {
             QString tagName = e.tagName();
             if (tagName == "cell")
-                Cell(this, 1, 1).load(e, 0, 0); // col, row will get overridden in all cases
+                KCCell(this, 1, 1).load(e, 0, 0); // col, row will get overridden in all cases
             else if (tagName == "row") {
                 RowFormat *rl = new RowFormat();
                 rl->setSheet(this);
@@ -3304,7 +3304,7 @@ bool KCSheet::setSheetName(const QString& name, bool init)
 void KCSheet::updateLocale()
 {
     for (int c = 0; c < valueStorage()->count(); ++c) {
-        Cell cell(this, valueStorage()->col(c), valueStorage()->row(c));
+        KCCell cell(this, valueStorage()->col(c), valueStorage()->row(c));
         QString text = cell.userInput();
         cell.parseUserInput(text);
     }
@@ -3330,7 +3330,7 @@ void KCSheet::convertObscuringBorders()
        It's a bit of a hack but I can't think of a better way and it's not *that*
        bad of a hack.:-)
     */
-    Cell c = d->cellStorage->firstCell();
+    KCCell c = d->cellStorage->firstCell();
     QPen topPen, bottomPen, leftPen, rightPen;
     for (; c; c = c->nextCell()) {
         if (c->extraXCells() > 0 || c->extraYCells() > 0) {
@@ -3346,13 +3346,13 @@ void KCSheet::convertObscuringBorders()
             c->format()->setBottomBorderStyle(Qt::NoPen);
 
             for (int x = c->column(); x < c->column() + c->extraXCells(); x++) {
-                Cell(this, x, c->row())->setTopBorderPen(topPen);
-                Cell(this, x, c->row() + c->extraYCells())->
+                KCCell(this, x, c->row())->setTopBorderPen(topPen);
+                KCCell(this, x, c->row() + c->extraYCells())->
                 setBottomBorderPen(bottomPen);
             }
             for (int y = c->row(); y < c->row() + c->extraYCells(); y++) {
-                Cell(this, c->column(), y)->setLeftBorderPen(leftPen);
-                Cell(this, c->column() + c->extraXCells(), y)->
+                KCCell(this, c->column(), y)->setLeftBorderPen(leftPen);
+                KCCell(this, c->column() + c->extraXCells(), y)->
                 setRightBorderPen(rightPen);
             }
         }
@@ -3370,14 +3370,14 @@ void KCSheet::printDebug()
     int iMaxColumn = d->cellStorage->columns();
     int iMaxRow = d->cellStorage->rows();
 
-    kDebug(36001) << "Cell | Content | Value  [UserInput]";
-    Cell cell;
+    kDebug(36001) << "KCCell | Content | Value  [UserInput]";
+    KCCell cell;
     for (int currentrow = 1 ; currentrow <= iMaxRow ; ++currentrow) {
         for (int currentcolumn = 1 ; currentcolumn <= iMaxColumn ; currentcolumn++) {
-            cell = Cell(this, currentcolumn, currentrow);
+            cell = KCCell(this, currentcolumn, currentrow);
             if (!cell.isEmpty()) {
-                QString cellDescr = Cell::name(currentcolumn, currentrow).rightJustified(4);
-                //QString cellDescr = "Cell ";
+                QString cellDescr = KCCell::name(currentcolumn, currentrow).rightJustified(4);
+                //QString cellDescr = "KCCell ";
                 //cellDescr += QString::number(currentrow).rightJustified(3,'0') + ',';
                 //cellDescr += QString::number(currentcolumn).rightJustified(3,'0') + ' ';
                 cellDescr += " | ";

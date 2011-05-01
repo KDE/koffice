@@ -67,7 +67,7 @@
 
 // KSpread
 #include "Canvas.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "Doc.h"
 #include "kspread_limits.h"
 #include "RowColumnFormat.h"
@@ -1273,7 +1273,7 @@ void ColumnHeader::paintEvent(QPaintEvent* event)
             else if (highlighted)
                 painter.setFont(boldFont);
 
-            QString colText = sheet->getShowColumnNumber() ? QString::number(x) : Cell::columnName(x);
+            QString colText = sheet->getShowColumnNumber() ? QString::number(x) : KCCell::columnName(x);
             double len = painter.fontMetrics().width(colText);
             if (width >= len) {
                 drawText(painter,
@@ -1325,7 +1325,7 @@ void ColumnHeader::paintEvent(QPaintEvent* event)
             else if (highlighted)
                 painter.setFont(boldFont);
 
-            QString colText = sheet->getShowColumnNumber() ? QString::number(x) : Cell::columnName(x);
+            QString colText = sheet->getShowColumnNumber() ? QString::number(x) : KCCell::columnName(x);
             int len = painter.fontMetrics().width(colText);
             if (width >= len) {
 #if 0

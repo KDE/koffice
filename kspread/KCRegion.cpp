@@ -25,7 +25,7 @@
 
 #include <kdebug.h>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "kspread_limits.h"
 #include "Map.h"
 #include "NamedAreaManager.h"
@@ -1119,7 +1119,7 @@ QString KCRegion::Point::name(KCSheet* originSheet) const
     }
     if (m_fixedColumn)
         name.append('$');
-    name.append(Cell::columnName(m_point.x()));
+    name.append(KCCell::columnName(m_point.x()));
     if (m_fixedRow)
         name.append('$');
     name.append(QString::number(m_point.y()));
@@ -1136,9 +1136,9 @@ bool KCRegion::Point::contains(const QRect& range) const
     return (range.width() == 1) && (range.height() == 1) && (range.topLeft() == m_point);
 }
 
-Cell KCRegion::Point::cell() const
+KCCell KCRegion::Point::cell() const
 {
-    return Cell(m_sheet, m_point);
+    return KCCell(m_sheet, m_point);
 }
 
 /***************************************************************************
@@ -1239,14 +1239,14 @@ QString KCRegion::Range::name(KCSheet* originSheet) const
     }
     if (m_fixedLeft)
         name.append('$');
-    name.append(Cell::columnName(m_range.left()));
+    name.append(KCCell::columnName(m_range.left()));
     if (m_fixedTop)
         name.append('$');
     name.append(QString::number(m_range.top()));
     name.append(':');
     if (m_fixedRight)
         name.append('$');
-    name.append(Cell::columnName(m_range.right()));
+    name.append(KCCell::columnName(m_range.right()));
     if (m_fixedBottom)
         name.append('$');
     name.append(QString::number(m_range.bottom()));

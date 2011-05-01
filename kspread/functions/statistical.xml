@@ -237,7 +237,7 @@
       <Name>CORREL</Name>
       <Type>Float</Type>
       <Parameter>
-        <Comment>Cell range of values</Comment>
+        <Comment>KCCell range of values</Comment>
         <Type range="true">Double</Type>
       </Parameter>
       <Parameter>
@@ -256,7 +256,7 @@
       <Name>COVAR</Name>
       <Type>Float</Type>
       <Parameter>
-        <Comment>Cell range of values</Comment>
+        <Comment>KCCell range of values</Comment>
         <Type range="true">Double</Type>
       </Parameter>
       <Parameter>
@@ -664,7 +664,7 @@
       <Name>LARGE</Name>
       <Type>Float</Type>
       <Parameter>
-        <Comment>Cell range of values</Comment>
+        <Comment>KCCell range of values</Comment>
         <Type range="true">Double</Type>
       </Parameter>
       <Parameter>
@@ -909,7 +909,7 @@
       <Name>PEARSON</Name>
       <Type>Float</Type>
       <Parameter>
-        <Comment>Cell range of values</Comment>
+        <Comment>KCCell range of values</Comment>
         <Type range="true">Double</Type>
       </Parameter>
       <Parameter>
@@ -1121,7 +1121,7 @@
       <Name>SMALL</Name>
       <Type>Float</Type>
       <Parameter>
-        <Comment>Cell range of values</Comment>
+        <Comment>KCCell range of values</Comment>
         <Type range="true">Double</Type>
       </Parameter>
       <Parameter>

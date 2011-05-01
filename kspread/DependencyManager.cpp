@@ -26,7 +26,7 @@
 #include <QHash>
 #include <QList>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "Formula.h"
 #include "FormulaStorage.h"
@@ -41,9 +41,9 @@
 // gdb or from debug output to check that everything is set up ok.
 void DependencyManager::Private::dump() const
 {
-    QHash<Cell, KCRegion>::ConstIterator mend(providers.end());
-    for (QHash<Cell, KCRegion>::ConstIterator mit(providers.begin()); mit != mend; ++mit) {
-        Cell cell = mit.key();
+    QHash<KCCell, KCRegion>::ConstIterator mend(providers.end());
+    for (QHash<KCCell, KCRegion>::ConstIterator mit(providers.begin()); mit != mend; ++mit) {
+        KCCell cell = mit.key();
 
         QStringList debugStr;
         KCRegion::ConstIterator rend((*mit).constEnd());
@@ -56,7 +56,7 @@ void DependencyManager::Private::dump() const
 
     foreach(KCSheet* sheet, consumers.keys()) {
         QList<QRectF> keys = consumers[sheet]->keys();
-        QList<Cell> values = consumers[sheet]->values();
+        QList<KCCell> values = consumers[sheet]->values();
         QHash<QString, QString> table;
         for (int i = 0; i < keys.count(); ++i) {
             KCRegion tmpRange(keys[i].toRect(), sheet);
@@ -68,7 +68,7 @@ void DependencyManager::Private::dump() const
         }
     }
 
-    foreach(Cell cell, depths.keys()) {
+    foreach(KCCell cell, depths.keys()) {
         QString cellName = cell.name();
         while (cellName.count() < 4) cellName.prepend(' ');
         kDebug(36002) << "depth(" << cellName << " ) =" << depths[cell];
@@ -104,10 +104,10 @@ void DependencyManager::regionChanged(const KCRegion& region)
 
         for (int col = range.left(); col <= range.right(); ++col) {
             for (int row = range.top(); row <= range.bottom(); ++row) {
-                Cell cell(sheet, col, row);
+                KCCell cell(sheet, col, row);
             bool first = true;
                 if (first) {
-                    cell = Cell(sheet, col, row);
+                    cell = KCCell(sheet, col, row);
                     first = false;
                 } else {
                     cell = sheet->cellStorage()->nextInRow(col, row);
@@ -149,9 +149,9 @@ void DependencyManager::addSheet(KCSheet *sheet)
     // Clear orphaned dependencies (i.e. cells formerly containing formulas)
     // FIXME Stefan: Iterate only over the consumers in sheet. Needs adjustment
     //               of the way the providers are stored. Now: only by cell.
-    //               Future: QHash<KCSheet*, QHash<Cell, KCRegion> >
-    const QList<Cell> consumers = d->providers.keys();
-    foreach(const Cell& cell, consumers) {
+    //               Future: QHash<KCSheet*, QHash<KCCell, KCRegion> >
+    const QList<KCCell> consumers = d->providers.keys();
+    foreach(const KCCell& cell, consumers) {
         if (cell.sheet() == sheet) {
             // Those cells may had got providing regions. Clear them first.
             // TODO
@@ -161,9 +161,9 @@ void DependencyManager::addSheet(KCSheet *sheet)
         }
     }
 
-    Cell cell;
+    KCCell cell;
     for (int c = 0; c < sheet->formulaStorage()->count(); ++c) {
-        cell = Cell(sheet, sheet->formulaStorage()->col(c), sheet->formulaStorage()->row(c));
+        cell = KCCell(sheet, sheet->formulaStorage()->col(c), sheet->formulaStorage()->row(c));
 
         d->generateDependencies(cell, sheet->formulaStorage()->data(c));
         if (!d->depths.contains(cell)) {
@@ -191,10 +191,10 @@ void DependencyManager::updateAllDependencies(const Map* map)
     d->namedAreaConsumers.clear();
     d->depths.clear();
 
-    Cell cell;
+    KCCell cell;
     foreach(const KCSheet* sheet, map->sheetList()) {
         for (int c = 0; c < sheet->formulaStorage()->count(); ++c) {
-            cell = Cell(sheet, sheet->formulaStorage()->col(c), sheet->formulaStorage()->row(c));
+            cell = KCCell(sheet, sheet->formulaStorage()->col(c), sheet->formulaStorage()->row(c));
 
             d->generateDependencies(cell, sheet->formulaStorage()->data(c));
             if (!d->depths.contains(cell)) {
@@ -207,12 +207,12 @@ void DependencyManager::updateAllDependencies(const Map* map)
     }
 }
 
-QHash<Cell, int> DependencyManager::depths() const
+QHash<KCCell, int> DependencyManager::depths() const
 {
     return d->depths;
 }
 
-KCRegion DependencyManager::consumingRegion(const Cell& cell) const
+KCRegion DependencyManager::consumingRegion(const KCCell& cell) const
 {
     return d->consumingRegion(cell);
 }
@@ -220,7 +220,7 @@ KCRegion DependencyManager::consumingRegion(const Cell& cell) const
 KCRegion DependencyManager::reduceToProvidingRegion(const KCRegion& region) const
 {
     KCRegion providingRegion;
-    QList< QPair<QRectF, Cell> > pairs;
+    QList< QPair<QRectF, KCCell> > pairs;
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
         if (!d->consumers.contains((*it)->sheet()))
@@ -232,7 +232,7 @@ KCRegion DependencyManager::reduceToProvidingRegion(const KCRegion& region) cons
     return providingRegion;
 }
 
-void DependencyManager::regionMoved(const KCRegion& movedRegion, const Cell& destination)
+void DependencyManager::regionMoved(const KCRegion& movedRegion, const KCCell& destination)
 {
     KCRegion::Point locationOffset(destination.cellPosition() - movedRegion.boundingRect().topLeft());
 
@@ -242,17 +242,17 @@ void DependencyManager::regionMoved(const KCRegion& movedRegion, const Cell& des
         locationOffset.setSheet((sheet == destination.sheet()) ? 0 : destination.sheet());
 
         if (d->consumers.contains(sheet)) {
-            QList<Cell> dependentLocations = d->consumers[sheet]->intersects((*it)->rect());
+            QList<KCCell> dependentLocations = d->consumers[sheet]->intersects((*it)->rect());
 
             for (int i = 0; i < dependentLocations.count(); ++i) {
-                const Cell cell = dependentLocations[i];
+                const KCCell cell = dependentLocations[i];
                 updateFormula(cell, (*it), locationOffset);
             }
         }
     }
 }
 
-void DependencyManager::updateFormula(const Cell& cell, const KCRegion::Element* oldLocation, const KCRegion::Point& offset)
+void DependencyManager::updateFormula(const KCCell& cell, const KCRegion::Element* oldLocation, const KCRegion::Point& offset)
 {
     // Not a formula -> no dependencies
     if (!cell.isFormula())
@@ -277,7 +277,7 @@ void DependencyManager::updateFormula(const Cell& cell, const KCRegion::Element*
         Token::Type tokenType = token.type();
 
         //parse each cell/range and put it to our expression
-        if (tokenType == Token::Cell || tokenType == Token::Range) {
+        if (tokenType == Token::KCCell || tokenType == Token::Range) {
             // FIXME Stefan: Special handling for named areas
             const KCRegion region(token.text(), sheet->map(), sheet);
 
@@ -295,7 +295,7 @@ void DependencyManager::updateFormula(const Cell& cell, const KCRegion::Element*
             expression.append(token.text());
         }
     }
-    Cell(cell).parseUserInput(expression);
+    KCCell(cell).parseUserInput(expression);
 }
 
 void DependencyManager::Private::reset()
@@ -304,14 +304,14 @@ void DependencyManager::Private::reset()
     consumers.clear();
 }
 
-KCRegion DependencyManager::Private::consumingRegion(const Cell& cell) const
+KCRegion DependencyManager::Private::consumingRegion(const KCCell& cell) const
 {
     if (!consumers.contains(cell.sheet())) {
 //         kDebug(36002) << "No consumer tree found for the cell's sheet.";
         return KCRegion();
     }
 
-    const QList<Cell> consumers = this->consumers.value(cell.sheet())->contains(cell.cellPosition());
+    const QList<KCCell> consumers = this->consumers.value(cell.sheet())->contains(cell.cellPosition());
 
     KCRegion region;
     for (int i = 0; i < consumers.count(); ++i)
@@ -329,7 +329,7 @@ void DependencyManager::Private::namedAreaModified(const QString& name)
         return;
 
     KCRegion region;
-    const QList<Cell> namedAreaConsumers = this->namedAreaConsumers[name];
+    const QList<KCCell> namedAreaConsumers = this->namedAreaConsumers[name];
     for (int i = 0; i < namedAreaConsumers.count(); ++i) {
         generateDependencies(namedAreaConsumers[i], namedAreaConsumers[i].formula());
         region.add(namedAreaConsumers[i].cellPosition(), namedAreaConsumers[i].sheet());
@@ -337,7 +337,7 @@ void DependencyManager::Private::namedAreaModified(const QString& name)
     generateDepths(region);
 }
 
-void DependencyManager::Private::removeDependencies(const Cell& cell)
+void DependencyManager::Private::removeDependencies(const KCCell& cell)
 {
     // look if the cell has any providers
     if (!providers.contains(cell))
@@ -371,17 +371,17 @@ void DependencyManager::Private::removeDependencies(const Cell& cell)
     providers.remove(cell);
 }
 
-void DependencyManager::Private::removeDepths(const Cell& cell)
+void DependencyManager::Private::removeDepths(const KCCell& cell)
 {
     if (!depths.contains(cell) || !consumers.contains(cell.sheet()))
         return;
     depths.remove(cell);
-    const QList<Cell> consumers = this->consumers.value(cell.sheet())->contains(cell.cellPosition());
+    const QList<KCCell> consumers = this->consumers.value(cell.sheet())->contains(cell.cellPosition());
     for (int i = 0; i < consumers.count(); ++i)
         removeDepths(consumers[i]);
 }
 
-void DependencyManager::Private::generateDependencies(const Cell& cell, const Formula& formula)
+void DependencyManager::Private::generateDependencies(const KCCell& cell, const Formula& formula)
 {
     //new dependencies only need to be generated if the cell contains a formula
 //     if (cell.isNull())
@@ -398,7 +398,7 @@ void DependencyManager::Private::generateDependencies(const Cell& cell, const Fo
 
 void DependencyManager::Private::generateDepths(const KCRegion& region)
 {
-    QSet<Cell> computedDepths;
+    QSet<KCCell> computedDepths;
 
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
@@ -415,7 +415,7 @@ void DependencyManager::Private::generateDepths(const KCRegion& region)
             if (col > 0 && col < range.left())
                 formula = sheet->formulaStorage()->nextInRow(col, row, &col);
             while (col != 0 && col <= range.right()) {
-                Cell cell(sheet, col, row);
+                KCCell cell(sheet, col, row);
 
                 // compute the cell depth and automatically the depths of its providers
                 int depth = computeDepth(cell);
@@ -426,7 +426,7 @@ void DependencyManager::Private::generateDepths(const KCRegion& region)
                     formula = sheet->formulaStorage()->nextInRow(col, row, &col);
                     continue;
                 }
-                const QList<Cell> consumers = this->consumers.value(cell.sheet())->contains(cell.cellPosition());
+                const QList<KCCell> consumers = this->consumers.value(cell.sheet())->contains(cell.cellPosition());
                 for (int i = 0; i < consumers.count(); ++i) {
                     if (!region.contains(consumers[i].cellPosition(), consumers[i].sheet()))
                         generateDepths(consumers[i], computedDepths);
@@ -438,9 +438,9 @@ void DependencyManager::Private::generateDepths(const KCRegion& region)
     }
 }
 
-void DependencyManager::Private::generateDepths(Cell cell, QSet<Cell>& computedDepths)
+void DependencyManager::Private::generateDepths(KCCell cell, QSet<KCCell>& computedDepths)
 {
-    static QSet<Cell> processedCells;
+    static QSet<KCCell> processedCells;
 
     //prevent infinite recursion (circular dependencies)
     if (processedCells.contains(cell) || cell.value() == Value::errorCIRCLE()) {
@@ -465,7 +465,7 @@ void DependencyManager::Private::generateDepths(Cell cell, QSet<Cell>& computedD
     // An infinite loop is prevented by the check above.
     if (!consumers.contains(cell.sheet()))
         return;
-    const QList<Cell> consumers = this->consumers.value(cell.sheet())->contains(cell.cellPosition());
+    const QList<KCCell> consumers = this->consumers.value(cell.sheet())->contains(cell.cellPosition());
     for (int i = 0; i < consumers.count(); ++i)
         generateDepths(consumers[i], computedDepths);
 
@@ -473,10 +473,10 @@ void DependencyManager::Private::generateDepths(Cell cell, QSet<Cell>& computedD
     processedCells.remove(cell);
 }
 
-int DependencyManager::Private::computeDepth(Cell cell) const
+int DependencyManager::Private::computeDepth(KCCell cell) const
 {
     // a set of cell, which depth is currently calculated
-    static QSet<Cell> processedCells;
+    static QSet<KCCell> processedCells;
 
     //prevent infinite recursion (circular dependencies)
     if (processedCells.contains(cell) || cell.value() == Value::errorCIRCLE()) {
@@ -500,7 +500,7 @@ int DependencyManager::Private::computeDepth(Cell cell) const
         const int bottom = range.bottom();
         for (int col = range.left(); col <= right; ++col) {
             for (int row = range.top(); row <= bottom; ++row) {
-                Cell referencedCell = Cell(sheet, col, row);
+                KCCell referencedCell = KCCell(sheet, col, row);
                 if (!providers.contains(referencedCell)) {
                     // no further references
                     // depth is one at least
@@ -527,7 +527,7 @@ int DependencyManager::Private::computeDepth(Cell cell) const
     return depth;
 }
 
-void DependencyManager::Private::computeDependencies(const Cell& cell, const Formula& formula)
+void DependencyManager::Private::computeDependencies(const KCCell& cell, const Formula& formula)
 {
     // Broken formula -> meaningless dependencies
     if (!formula.isValid())
@@ -555,7 +555,7 @@ void DependencyManager::Private::computeDependencies(const Cell& cell, const For
                 inAreasCall = 1;
 
             //parse each cell/range and put it to our KCRegion
-            if (token.type() == Token::Cell || token.type() == Token::Range) {
+            if (token.type() == Token::KCCell || token.type() == Token::Range) {
                 // check for named area
                 const bool isNamedArea = sheet->map()->namedAreaManager()->contains(token.text());
                 if (isNamedArea) {
@@ -584,7 +584,7 @@ void DependencyManager::Private::computeDependencies(const Cell& cell, const For
                     KCSheet* sheet = region.firstSheet();
 
                     // create consumer tree, if not existing yet
-                    if (!consumers.contains(sheet)) consumers.insert(sheet, new RTree<Cell>());
+                    if (!consumers.contains(sheet)) consumers.insert(sheet, new RTree<KCCell>());
                     // add cell as consumer of the range
                     consumers[sheet]->insert(region.firstRange(), cell);
                 }
@@ -602,7 +602,7 @@ void DependencyManager::Private::computeDependencies(const Cell& cell, const For
 void DependencyManager::Private::removeCircularDependencyFlags(const KCRegion& region, Direction direction)
 {
     // a set of cells, which circular dependency flag is currently removed
-    static QSet<Cell> processedCells;
+    static QSet<KCCell> processedCells;
 
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
@@ -610,7 +610,7 @@ void DependencyManager::Private::removeCircularDependencyFlags(const KCRegion& r
         const KCSheet* sheet = (*it)->sheet();
         for (int col = range.left(); col <= range.right(); ++col) {
             for (int row = range.top(); row <= range.bottom(); ++row) {
-                Cell cell(sheet, col, row);
+                KCCell cell(sheet, col, row);
 
                 if (processedCells.contains(cell))
                     continue;

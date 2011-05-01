@@ -26,7 +26,7 @@
 
 #include "kspread_export.h"
 
-class Cell;
+class KCCell;
 class Map;
 class KCSheet;
 class KCRegion;
@@ -81,7 +81,7 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    CellDamage(const Cell& cell, Changes changes);
+    CellDamage(const KCCell& cell, Changes changes);
     CellDamage(KCSheet* sheet, const KCRegion& region, Changes changes);
 
     virtual ~CellDamage();

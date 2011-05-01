@@ -44,16 +44,16 @@
 class QFontMetricsF;
 class QRectF;
 
-class Cell;
+class KCCell;
 class KCSheet;
 class SheetView;
 class KCStyle;
 
 /**
  * \ingroup Painting
- * Responsible for the painting of Cell.
- * For each visible Cell exists a CellView, which is cached in the
- * corresponding SheetView. If the content of a Cell has changed, the CellView
+ * Responsible for the painting of KCCell.
+ * For each visible KCCell exists a CellView, which is cached in the
+ * corresponding SheetView. If the content of a KCCell has changed, the CellView
  * will be destroyed and a new one will be created.
  */
 class KSPREAD_EXPORT CellView
@@ -91,11 +91,11 @@ public:
      * \param paintRegion the portion of the canvas that is actually in view
      * \param painter the used painter
      * \param coordinate the top left coordinate (scroll offset dependent)
-     * \param cell the Cell
+     * \param cell the KCCell
      */
     void paintCellContents(const QRectF& paintRegion, QPainter& painter,
                            const QPointF& coordinate,
-                           const Cell& cell, SheetView* sheetView);
+                           const KCCell& cell, SheetView* sheetView);
 
     /**
      * Paints the cell custom borders, the page borders, diagonal lines.
@@ -103,13 +103,13 @@ public:
      * \param painter the used painter
      * \param coordinate the top left coordinate (scroll offset dependent)
      * \param cellRange the cell range, that is painted
-     * \param cell the Cell
+     * \param cell the KCCell
      * \param sheetView the SheetView
      */
     void paintCellBorders(const QRectF& paintRegion, QPainter& painter,
                           const QPointF& coordinate,
                           const QRect& cellRange,
-                          const Cell& cell, SheetView* sheetView);
+                          const KCCell& cell, SheetView* sheetView);
 
     /**
      * Paints the default cell borders.
@@ -118,13 +118,13 @@ public:
      * \param coordinate the painting coordinate
      * \param paintBorder the borders, that should be painted (should be removed???)
      * \param cellRange the cell range, that is painted
-     * \param cell the Cell
+     * \param cell the KCCell
      * \param sheetView the SheetView
      */
     void paintDefaultBorders(QPainter& painter, const QRectF &paintRegion,
                              const QPointF& coordinate,
                              Borders paintBorder, const QRect& cellRange,
-                             const Cell& cell, SheetView* sheetView);
+                             const KCCell& cell, SheetView* sheetView);
 
     /**
      * \return width of the text
@@ -141,9 +141,9 @@ public:
      */
     QRectF textRect() const;
 
-    QString testAnchor(SheetView* sheetView, const Cell& cell, qreal x, qreal y) const;
+    QString testAnchor(SheetView* sheetView, const KCCell& cell, qreal x, qreal y) const;
 
-    bool hitTestFilterButton(const Cell& cell, const QRect& cellRect, const QPoint& position) const;
+    bool hitTestFilterButton(const KCCell& cell, const QRect& cellRect, const QPoint& position) const;
 
     /**
      * \return the size of the obscured cell range
@@ -175,7 +175,7 @@ private:
      * breaks lines of the text to fit it into the cell, obscures neighbouring
      * cells, if necessary.
      */
-    void makeLayout(SheetView* sheetView, const Cell& cell);
+    void makeLayout(SheetView* sheetView, const KCCell& cell);
 
     /**
      * \ingroup Layout
@@ -193,7 +193,7 @@ private:
      *
      * \internal Called from makeLayout().
      */
-    void textOffset(const QFontMetricsF& fontMetrics, const Cell& cell);
+    void textOffset(const QFontMetricsF& fontMetrics, const KCCell& cell);
 
     /**
      * \ingroup Layout
@@ -203,7 +203,7 @@ private:
      *
      * \internal Called from makeLayout().
      */
-    void calculateCellDimension(const Cell& cell);
+    void calculateCellDimension(const KCCell& cell);
 
     /**
      * \ingroup Layout
@@ -212,7 +212,7 @@ private:
      *
      * \internal Called from makeLayout().
      */
-    void obscureHorizontalCells(SheetView* sheetView, const Cell& cell);
+    void obscureHorizontalCells(SheetView* sheetView, const KCCell& cell);
 
     /**
      * \ingroup Layout
@@ -221,7 +221,7 @@ private:
      *
      * \internal Called from makeLayout().
      */
-    void obscureVerticalCells(SheetView* sheetView, const Cell& cell);
+    void obscureVerticalCells(SheetView* sheetView, const KCCell& cell);
 
     /**
      * Adjust the output text, so that it only holds the part that can be
@@ -236,7 +236,7 @@ private:
      *
      * \internal Called from paintText().
      */
-    QString textDisplaying(const QFontMetricsF& fontMetrics, const Cell& cell);
+    QString textDisplaying(const QFontMetricsF& fontMetrics, const KCCell& cell);
 
     /**
      * helper function for paintCell() function
@@ -252,14 +252,14 @@ private:
      * @internal
      */
     void paintPageBorders(QPainter& painter, const QPointF &coordinate,
-                          Borders paintBorder, const Cell& cell);
+                          Borders paintBorder, const KCCell& cell);
 
     /**
      * helper function for paintCell() function
      * @see paintCell()
      * @internal
      */
-    void paintText(QPainter& painter, const QPointF& coordinate, const Cell& cell);
+    void paintText(QPainter& painter, const QPointF& coordinate, const KCCell& cell);
 
     /**
      * helper function for paintCell() function
@@ -274,21 +274,21 @@ private:
      * @internal
      */
     void paintCommentIndicator(QPainter& painter, const QPointF& coordinate,
-                               const Cell& cell);
+                               const KCCell& cell);
 
     /**
      * helper function for paintCell() function
      * @see paintCell()
      * @internal
      */
-    void paintFormulaIndicator(QPainter& painter, const QPointF& coordinate, const Cell& cell);
+    void paintFormulaIndicator(QPainter& painter, const QPointF& coordinate, const KCCell& cell);
 
     /**
      * helper function for paintCell() function
      * @see paintCell()
      * @internal
      */
-    void paintMatrixElementIndicator(QPainter& painter, const QPointF& coordinate, const Cell& cell);
+    void paintMatrixElementIndicator(QPainter& painter, const QPointF& coordinate, const KCCell& cell);
 
     /**
      * helper function for paintCell() function
@@ -303,10 +303,10 @@ private:
      * @internal
      */
     void paintFilterButton(QPainter& painter, const QPointF& coordinate,
-                           const Cell& cell, SheetView* sheetView);
+                           const KCCell& cell, SheetView* sheetView);
 
     /**
-     * Tells this view that the Cell at \p col , \p row obscures this one.
+     * Tells this view that the KCCell at \p col , \p row obscures this one.
      * If this view is destructed, the SheetView deletes the obscuring CellView.
      * If the obscuring CellView is destructed, the SheetView deletes this view.
      * \note obscuring is not the same as merging
@@ -315,7 +315,7 @@ private:
     void obscure(int col, int row);
 
     void drawText(QPainter& painter, const QPointF& location, const QStringList& textLines,
-                  const Cell& cell, qreal lineSpacing = 0) const;
+                  const KCCell& cell, qreal lineSpacing = 0) const;
 
     /**
      * Default CellView used by SheetView.

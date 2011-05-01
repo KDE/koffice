@@ -50,10 +50,10 @@ public:
     bool dirty;
 
 public:
-    void initGUI(FilterPopup* parent, const Cell& cell, const Database* database);
+    void initGUI(FilterPopup* parent, const KCCell& cell, const Database* database);
 };
 
-void FilterPopup::Private::initGUI(FilterPopup* parent, const Cell& cell, const Database* database)
+void FilterPopup::Private::initGUI(FilterPopup* parent, const KCCell& cell, const Database* database)
 {
     QButtonGroup* buttonGroup = new QButtonGroup(parent);
     buttonGroup->setExclusive(false);
@@ -125,7 +125,7 @@ void FilterPopup::Private::initGUI(FilterPopup* parent, const Cell& cell, const 
 }
 
 
-FilterPopup::FilterPopup(QWidget* parent, const Cell& cell, Database* database)
+FilterPopup::FilterPopup(QWidget* parent, const KCCell& cell, Database* database)
         : QFrame(parent, Qt::Popup)
         , d(new Private)
 {
@@ -244,7 +244,7 @@ void FilterPopup::buttonClicked(QAbstractButton* button)
     }
 }
 
-void FilterPopup::showPopup(QWidget *parent, const Cell &cell, const QRect &cellRect, Database *database)
+void FilterPopup::showPopup(QWidget *parent, const KCCell &cell, const QRect &cellRect, Database *database)
 {
     FilterPopup* popup = new FilterPopup(parent, cell, database);
     const QPoint position(database->orientation() == Qt::Vertical ? cellRect.bottomLeft() : cellRect.topRight());

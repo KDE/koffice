@@ -27,7 +27,7 @@
 #include <QHash>
 #include <QList>
 
-#include "Cell.h"
+#include "KCCell.h"
 #include "KCRegion.h"
 #include "RTree.h"
 
@@ -51,7 +51,7 @@ public:
      * \see removeDependencies
      * \see computeDependencies
      */
-    void generateDependencies(const Cell& cell, const Formula& formula);
+    void generateDependencies(const KCCell& cell, const Formula& formula);
 
     /**
      * Computes the reference depth.
@@ -68,14 +68,14 @@ public:
      * \li depth(A2) = 1
      * \li depth(A3) = 2
      */
-    int computeDepth(Cell cell) const;
+    int computeDepth(KCCell cell) const;
 
     /**
      * Used in the recalculation events for changed regions.
      * Determines the reference depth for each position in \p region .
      *
      * \see computeDepth
-     * \see generateDepths(Cell cell)
+     * \see generateDepths(KCCell cell)
      */
     void generateDepths(const KCRegion& region);
 
@@ -83,26 +83,26 @@ public:
      * Generates the depth of cell and all of its consumers.
      * Calls itself recursively for the cell's consuming cells.
      */
-    void generateDepths(Cell cell, QSet<Cell>& computedDepths);
+    void generateDepths(KCCell cell, QSet<KCCell>& computedDepths);
 
     /**
      * Returns the region, that consumes the value of \p cell.
-     * \see DependencyManager::consumingRegion(const Cell&)
+     * \see DependencyManager::consumingRegion(const KCCell&)
      * \return region consuming \p cell 's value
      */
-    KCRegion consumingRegion(const Cell& cell) const;
+    KCRegion consumingRegion(const KCCell& cell) const;
 
     void namedAreaModified(const QString& name);
 
     /**
      * Removes all dependencies of \p cell .
      */
-    void removeDependencies(const Cell& cell);
+    void removeDependencies(const KCCell& cell);
 
     /**
      * Removes the depths of \p cell and all its consumers.
      */
-    void removeDepths(const Cell& cell);
+    void removeDepths(const KCCell& cell);
 
     /**
      * Computes and stores the dependencies.
@@ -118,7 +118,7 @@ public:
      * for performance reasons.
      * Do not call this method for a \p cell not containing a \p formula.
      */
-    void computeDependencies(const Cell& cell, const Formula& formula);
+    void computeDependencies(const KCCell& cell, const Formula& formula);
 
     enum Direction { Forward, Backward };
     /**
@@ -133,12 +133,12 @@ public:
 
     const Map* map;
     // stores providing regions ordered by their consuming cell locations
-    QHash<Cell, KCRegion> providers;
+    QHash<KCCell, KCRegion> providers;
     // stores consuming cell locations ordered by their providing regions
-    QHash<KCSheet*, RTree<Cell>*> consumers;
+    QHash<KCSheet*, RTree<KCCell>*> consumers;
     // stores consuming cell locations ordered by their providing named area
     // (in addition to the general storage of the consuming cell locations)
-    QHash<QString, QList<Cell> > namedAreaConsumers;
+    QHash<QString, QList<KCCell> > namedAreaConsumers;
     /*
      * Stores cells with its reference depth.
      * Depth means the maximum depth of all cells this cell depends on plus one,
@@ -154,7 +154,7 @@ public:
      * \li depth(A2) = 1
      * \li depth(A3) = 2
      */
-    QHash<Cell, int> depths;
+    QHash<KCCell, int> depths;
 };
 
 #endif // KSPREAD_DEPENDENCY_MANAGER_P

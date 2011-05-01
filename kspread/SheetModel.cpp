@@ -21,7 +21,7 @@
 
 // KSpread
 #include "Binding.h"
-#include "Cell.h"
+#include "KCCell.h"
 #include "CellStorage.h"
 #include "Condition.h"
 #include "database/Database.h"
@@ -82,7 +82,7 @@ QVariant SheetModel::data(const QModelIndex& index, int role) const
         }
     }
     // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
-    const Cell cell = Cell(d->sheet, index.column() + 1, index.row() + 1).masterCell();
+    const KCCell cell = KCCell(d->sheet, index.column() + 1, index.row() + 1).masterCell();
     const KCStyle style = cell.effectiveStyle();
     if (role == Qt::DisplayRole) {
         // Display a formula if warranted.  If not, simply display the value.
@@ -164,7 +164,7 @@ QVariant SheetModel::headerData(int section, Qt::Orientation orientation, int ro
     // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
     if (role == Qt::DisplayRole) {
         if (orientation == Qt::Horizontal) {
-            return Cell::columnName(section + 1);
+            return KCCell::columnName(section + 1);
         } else {
             return QString::number(section + 1);
         }
@@ -217,7 +217,7 @@ bool SheetModel::setData(const QModelIndex& index, const QVariant& value, int ro
     // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
     const int column = index.column() + 1;
     const int row = index.row() + 1;
-    Cell cell = Cell(sheet(), index.column() + 1, index.row() + 1).masterCell();
+    KCCell cell = KCCell(sheet(), index.column() + 1, index.row() + 1).masterCell();
     CellStorage *const storage = d->sheet->cellStorage();
     switch (role) {
     case Qt::EditRole:
