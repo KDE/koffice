@@ -35,12 +35,12 @@ enum ParameterType { KSpread_Int, KSpread_Float, KSpread_String, KSpread_Boolean
  * \ingroup KCValue
  * A function parameter.
  */
-class KSPREAD_EXPORT FunctionParameter
+class KSPREAD_EXPORT KCFunctionParameter
 {
 public:
-    FunctionParameter();
-    FunctionParameter(const FunctionParameter& param);
-    FunctionParameter(const QDomElement& element);
+    KCFunctionParameter();
+    KCFunctionParameter(const KCFunctionParameter& param);
+    KCFunctionParameter(const QDomElement& element);
 
     QString helpText() const {
         return m_help;
@@ -91,7 +91,7 @@ public:
     int params() const {
         return m_params.count();
     }
-    FunctionParameter& param(int i) {
+    KCFunctionParameter& param(int i) {
         return m_params[ i ];
     }
 
@@ -112,7 +112,7 @@ private:
     QStringList m_help;
     QString m_name;
     ParameterType m_type;
-    QList<FunctionParameter> m_params;
+    QList<KCFunctionParameter> m_params;
 };
 
 #endif // KSPREAD_FUNCTION_DESCRIPTION

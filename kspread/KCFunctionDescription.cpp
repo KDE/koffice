@@ -74,20 +74,20 @@ static QString toString(ParameterType type, bool range = false)
     return QString();
 }
 
-FunctionParameter::FunctionParameter()
+KCFunctionParameter::KCFunctionParameter()
 {
     m_type = KSpread_Float;
     m_range = false;
 }
 
-FunctionParameter::FunctionParameter(const FunctionParameter& param)
+KCFunctionParameter::KCFunctionParameter(const KCFunctionParameter& param)
 {
     m_help = param.m_help;
     m_type = param.m_type;
     m_range = param.m_range;
 }
 
-FunctionParameter::FunctionParameter(const QDomElement& element)
+KCFunctionParameter::KCFunctionParameter(const QDomElement& element)
 {
     m_type  = KSpread_Float;
     m_range = false;
@@ -125,7 +125,7 @@ KCFunctionDescription::KCFunctionDescription(const QDomElement& element)
         else if (e.tagName() == "Type")
             m_type = toType(e.text());
         else if (e.tagName() == "Parameter")
-            m_params.append(FunctionParameter(e));
+            m_params.append(KCFunctionParameter(e));
         else if (e.tagName() == "Help") {
             QDomNode n2 = e.firstChild();
             for (; !n2.isNull(); n2 = n2.nextSibling()) {
@@ -185,7 +185,7 @@ QString KCFunctionDescription::toQML() const
 
     if (!m_params.isEmpty()) {
         text += "<h2>" + i18n("Parameters") + "</h2><ul>";
-        QList<FunctionParameter>::ConstIterator it = m_params.begin();
+        QList<KCFunctionParameter>::ConstIterator it = m_params.begin();
         for (; it != m_params.end(); ++it) {
             text += i18n("<li><b>Comment:</b> %1", (*it).helpText());
             text += i18n("<br><b>Type:</b> %1", toString((*it).type(), (*it).hasRange()));
