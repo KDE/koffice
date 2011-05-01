@@ -38,7 +38,7 @@
 #include <QPointF>
 #include <KoView.h>
 #include <KoZoomMode.h>
-#include <kspread/kcells_export.h>
+#include "../kcells_export.h"
 
 class QAction;
 class QKeyEvent;

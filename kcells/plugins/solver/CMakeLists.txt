@@ -4,8 +4,8 @@ macro_log_feature(GSL_FOUND "GSL" "GNU Scientific Library" "http://www.gnu.org/s
 
 if(GSL_FOUND)
 
-include_directories( ${CMAKE_SOURCE_DIR}/kspread
-                     ${CMAKE_SOURCE_DIR}/kspread/ui
+include_directories( ${CMAKE_SOURCE_DIR}/kcells
+                     ${CMAKE_SOURCE_DIR}/kcells/ui
                      ${KOMAIN_INCLUDES} 
                      ${GSL_INCLUDE_DIR} )
 

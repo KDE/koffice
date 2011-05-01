@@ -1,6 +1,6 @@
 include_directories(
-	${CMAKE_SOURCE_DIR}/kspread
-	${CMAKE_SOURCE_DIR}/kspread/ui
+	${CMAKE_SOURCE_DIR}/kcells
+	${CMAKE_SOURCE_DIR}/kcells/ui
     ${KOMAIN_INCLUDES}
 	${KOTEXT_INCLUDES}
 	)

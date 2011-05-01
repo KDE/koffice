@@ -1,6 +1,6 @@
 install(FILES
     scripts.rc
-    DESTINATION ${DATA_INSTALL_DIR}/kspread/scripts)
+    DESTINATION ${DATA_INSTALL_DIR}/kcells/scripts)
 
 install(FILES
     csvimport.py csvexport.py csvoptions.ui

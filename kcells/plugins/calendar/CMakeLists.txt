@@ -1,4 +1,4 @@
-include_directories(${CMAKE_SOURCE_DIR}/kspread ${KOMAIN_INCLUDES})
+include_directories(${CMAKE_SOURCE_DIR}/kcells ${KOMAIN_INCLUDES})
 
 set(kcells_plugin_tool_calendar_SRCS CalendarTool.cpp CalendarToolFactory.cpp CalendarToolWidget.cpp)
 kde4_add_ui_files(kcells_plugin_tool_calendar_SRCS CalendarToolWidget.ui)

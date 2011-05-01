@@ -36,11 +36,11 @@ else (DEFINED BUILD_kword )
     set(SHOULD_BUILD_KWORD TRUE)
 endif (DEFINED BUILD_kword )
 
-if (DEFINED BUILD_kspread )
-    set(SHOULD_BUILD_KSPREAD ${BUILD_kspread})
-else (DEFINED BUILD_kspread )
-    set(SHOULD_BUILD_KSPREAD TRUE)
-endif (DEFINED BUILD_kspread )
+if (DEFINED BUILD_kcells )
+    set(SHOULD_BUILD_KCELLS ${BUILD_kcells})
+else (DEFINED BUILD_kcells )
+    set(SHOULD_BUILD_KCELLS TRUE)
+endif (DEFINED BUILD_kcells )
 
 if (DEFINED BUILD_karbon )
     set(SHOULD_BUILD_KARBON ${BUILD_karbon})
@@ -322,7 +322,7 @@ set(KOPROPERTY_INCLUDES ${KOODF_INCLUDES}
 
 ### KSpread: eigen2
 if(NOT EIGEN2_FOUND)
-    set(SHOULD_BUILD_KSPREAD FALSE)
+    set(SHOULD_BUILD_KCELLS FALSE)
 endif(NOT EIGEN2_FOUND)
 
 ### showcase: boost
@@ -352,9 +352,9 @@ if(SHOULD_BUILD_SHOWCASE)
   add_subdirectory(showcase)
 endif(SHOULD_BUILD_SHOWCASE)
 
-if(SHOULD_BUILD_KSPREAD)
-    add_subdirectory(kspread)
-endif(SHOULD_BUILD_KSPREAD)
+if(SHOULD_BUILD_KCELLS)
+    add_subdirectory(kcells)
+endif(SHOULD_BUILD_KCELLS)
 
 if(SHOULD_BUILD_KARBON)
   add_subdirectory(karbon)
@@ -383,7 +383,7 @@ endmacro(macro_display_application_enabled)
 message(STATUS "---------------- The following applications will be built ----------------" )
 
 macro_display_application_enabled(kword ${SHOULD_BUILD_KWORD})
-macro_display_application_enabled(kspread ${SHOULD_BUILD_KSPREAD})
+macro_display_application_enabled(kcells ${SHOULD_BUILD_KCELLS})
 macro_display_application_enabled(showcase ${SHOULD_BUILD_SHOWCASE})
 macro_display_application_enabled(kivio ${SHOULD_BUILD_KIVIO})
 macro_display_application_enabled(karbon ${SHOULD_BUILD_KARBON})
