@@ -59,7 +59,7 @@ class KCDependencyManager;
 class KCDocBase;
 class KCLoadingInfo;
 class KCNamedAreaManager;
-class RecalcManager;
+class KCRecalcManager;
 class RowFormat;
 class KCSheet;
 class KCStyle;
@@ -129,7 +129,7 @@ public:
     /**
      * \return a pointer to the recalculation manager
      */
-    RecalcManager* recalcManager() const;
+    KCRecalcManager* recalcManager() const;
 
     /**
      * @return the StyleManager of this Document

@@ -36,7 +36,7 @@
 #include "KCFormulaStorage.h"
 #include "KCMap.h"
 #include "ModelSupport.h"
-#include "RecalcManager.h"
+#include "KCRecalcManager.h"
 #include "RectStorage.h"
 #include "RowRepeatStorage.h"
 #include "KCSheet.h"

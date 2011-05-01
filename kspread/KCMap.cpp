@@ -57,7 +57,7 @@
 #include "KCNamedAreaManager.h"
 #include "KCOdfLoadingContext.h"
 #include "KCOdfSavingContext.h"
-#include "RecalcManager.h"
+#include "KCRecalcManager.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 #include "StyleManager.h"
@@ -95,7 +95,7 @@ public:
     DatabaseManager* databaseManager;
     KCDependencyManager* dependencyManager;
     KCNamedAreaManager* namedAreaManager;
-    RecalcManager* recalcManager;
+    KCRecalcManager* recalcManager;
     StyleManager* styleManager;
     KoStyleManager* textStyleManager;
 
@@ -135,7 +135,7 @@ KCMap::KCMap(KCDocBase* doc, int syntaxVersion)
     d->databaseManager = new DatabaseManager(this);
     d->dependencyManager = new KCDependencyManager(this);
     d->namedAreaManager = new KCNamedAreaManager(this);
-    d->recalcManager = new RecalcManager(this);
+    d->recalcManager = new KCRecalcManager(this);
     d->styleManager = new StyleManager();
     d->textStyleManager = new KoStyleManager(this);
 
@@ -264,7 +264,7 @@ KCNamedAreaManager* KCMap::namedAreaManager() const
     return d->namedAreaManager;
 }
 
-RecalcManager* KCMap::recalcManager() const
+KCRecalcManager* KCMap::recalcManager() const
 {
     return d->recalcManager;
 }
@@ -966,7 +966,7 @@ void KCMap::handleDamages(const QList<KCDamage*>& damages)
     if (!formulaChangedRegion.isEmpty()) {
         d->dependencyManager->regionChanged(formulaChangedRegion);
     }
-    // Tell the RecalcManager which cells have had a value change.
+    // Tell the KCRecalcManager which cells have had a value change.
     if (!valueChangedRegion.isEmpty()) {
         d->recalcManager->regionChanged(valueChangedRegion);
     }

@@ -124,7 +124,7 @@
 #include "KCMap.h"
 #include "KCNamedAreaManager.h"
 #include "KCPrintSettings.h"
-#include "RecalcManager.h"
+#include "KCRecalcManager.h"
 #include "RowColumnFormat.h"
 #include "ShapeApplicationData.h"
 #include "KCSheet.h"

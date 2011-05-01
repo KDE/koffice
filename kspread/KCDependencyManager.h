@@ -36,7 +36,7 @@ class KSPREAD_EXPORT KCDependencyManager : public QObject
 {
     Q_OBJECT
     friend class TestDependencies;
-    friend class RecalcManager;
+    friend class KCRecalcManager;
 
 public:
     /** constructor */

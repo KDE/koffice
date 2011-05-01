@@ -29,7 +29,7 @@ class KCMap;
 class KCSheet;
 
 /**
- * \class RecalcManager
+ * \class KCRecalcManager
  * \brief Manages the recalculations of cells containing a formula.
  * \ingroup KCValue
  *
@@ -46,21 +46,21 @@ class KCSheet;
  * KCCell value changes are blocked while doing this, i.e. they do not
  * trigger a new recalculation event.
  */
-class KSPREAD_EXPORT RecalcManager : public QObject
+class KSPREAD_EXPORT KCRecalcManager : public QObject
 {
     Q_OBJECT
 public:
     /**
-     * Creates a RecalcManager. It is used for a whole map.
+     * Creates a KCRecalcManager. It is used for a whole map.
      *
-     * \param map The KCMap which this RecalcManager belongs to.
+     * \param map The KCMap which this KCRecalcManager belongs to.
      */
-    explicit RecalcManager(KCMap *const map);
+    explicit KCRecalcManager(KCMap *const map);
 
     /**
      * Destructor.
      */
-    ~RecalcManager();
+    ~KCRecalcManager();
 
     /**
      * Recalculates the cells referring to cells in \p region .
@@ -118,7 +118,7 @@ protected:
     void recalc();
 
 private:
-    Q_DISABLE_COPY(RecalcManager)
+    Q_DISABLE_COPY(KCRecalcManager)
 
     class Private;
     Private * const d;

@@ -19,7 +19,7 @@
 */
 
 // Local
-#include "RecalcManager.h"
+#include "KCRecalcManager.h"
 
 #include <QHash>
 #include <QMap>
@@ -35,13 +35,13 @@
 #include "KCValue.h"
 #include "ValueFormatter.h"
 
-class RecalcManager::Private
+class KCRecalcManager::Private
 {
 public:
     /**
      * Finds all cells in region and their dependents, that need recalculation.
      *
-     * \see RecalcManager::regionChanged
+     * \see KCRecalcManager::regionChanged
      */
     void cellsToCalculate(const KCRegion& region);
 
@@ -50,8 +50,8 @@ public:
      * recalculation.
      * If \p sheet is zero, all cells in the KCMap a returned.
      *
-     * \see RecalcManager::recalcMap
-     * \see RecalcManager::recalcSheet
+     * \see KCRecalcManager::recalcMap
+     * \see KCRecalcManager::recalcSheet
      */
     void cellsToCalculate(KCSheet* sheet = 0);
 
@@ -80,7 +80,7 @@ public:
     bool active;
 };
 
-void RecalcManager::Private::cellsToCalculate(const KCRegion& region)
+void KCRecalcManager::Private::cellsToCalculate(const KCRegion& region)
 {
     if (region.isEmpty())
         return;
@@ -98,7 +98,7 @@ void RecalcManager::Private::cellsToCalculate(const KCRegion& region)
     }
 }
 
-void RecalcManager::Private::cellsToCalculate(KCSheet* sheet)
+void KCRecalcManager::Private::cellsToCalculate(KCSheet* sheet)
 {
     // retrieve the cell depths
     QHash<KCCell, int> depths = map->dependencyManager()->depths();
@@ -126,7 +126,7 @@ void RecalcManager::Private::cellsToCalculate(KCSheet* sheet)
     }
 }
 
-void RecalcManager::Private::cellsToCalculate(const KCRegion& region, QSet<KCCell>& cells) const
+void KCRecalcManager::Private::cellsToCalculate(const KCRegion& region, QSet<KCCell>& cells) const
 {
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
@@ -153,7 +153,7 @@ void RecalcManager::Private::cellsToCalculate(const KCRegion& region, QSet<KCCel
     }
 }
 
-RecalcManager::RecalcManager(KCMap *const map)
+KCRecalcManager::KCRecalcManager(KCMap *const map)
         : QObject(map)
         , d(new Private)
 {
@@ -161,24 +161,24 @@ RecalcManager::RecalcManager(KCMap *const map)
     d->active = false;
 }
 
-RecalcManager::~RecalcManager()
+KCRecalcManager::~KCRecalcManager()
 {
     delete d;
 }
 
-void RecalcManager::regionChanged(const KCRegion& region)
+void KCRecalcManager::regionChanged(const KCRegion& region)
 {
     if (d->active || region.isEmpty())
         return;
     d->active = true;
-    kDebug(36002) << "RecalcManager::regionChanged" << region.name();
+    kDebug(36002) << "KCRecalcManager::regionChanged" << region.name();
     ElapsedTime et("Overall region recalculation", ElapsedTime::PrintOnlyTime);
     d->cellsToCalculate(region);
     recalc();
     d->active = false;
 }
 
-void RecalcManager::recalcSheet(KCSheet* const sheet)
+void KCRecalcManager::recalcSheet(KCSheet* const sheet)
 {
     if (d->active)
         return;
@@ -189,7 +189,7 @@ void RecalcManager::recalcSheet(KCSheet* const sheet)
     d->active = false;
 }
 
-void RecalcManager::recalcMap()
+void KCRecalcManager::recalcMap()
 {
     if (d->active)
         return;
@@ -200,25 +200,25 @@ void RecalcManager::recalcMap()
     d->active = false;
 }
 
-bool RecalcManager::isActive() const
+bool KCRecalcManager::isActive() const
 {
     return d->active;
 }
 
-void RecalcManager::addSheet(KCSheet *sheet)
+void KCRecalcManager::addSheet(KCSheet *sheet)
 {
     // Manages also the revival of a deleted sheet.
     Q_UNUSED(sheet);
     recalcMap(); // FIXME Stefan: Implement a more elegant solution.
 }
 
-void RecalcManager::removeSheet(KCSheet *sheet)
+void KCRecalcManager::removeSheet(KCSheet *sheet)
 {
     Q_UNUSED(sheet);
     recalcMap(); // FIXME Stefan: Implement a more elegant solution.
 }
 
-void RecalcManager::recalc()
+void KCRecalcManager::recalc()
 {
     kDebug(36002) << "Recalculating" << d->cells.count() << " cell(s)..";
     ElapsedTime et("Recalculating cells", ElapsedTime::PrintOnlyTime);
@@ -253,7 +253,7 @@ void RecalcManager::recalc()
     d->cells.clear();
 }
 
-void RecalcManager::dump() const
+void KCRecalcManager::dump() const
 {
     QMap<int, KCCell>::ConstIterator end(d->cells.constEnd());
     for (QMap<int, KCCell>::ConstIterator it(d->cells.constBegin()); it != end; ++it) {

@@ -67,7 +67,7 @@ public:
         KCFormula    = 0x04, ///< triggers a dependency update
         NamedArea  = 0x10, ///< triggers a named area update
         /// This indicates a value change. It is not triggered while a recalculation is in progress.
-        /// RecalcManager takes over in this case. Otherwise, circular dependencies would cause
+        /// KCRecalcManager takes over in this case. Otherwise, circular dependencies would cause
         /// infinite loops and the cells would be recalculated in arbitrary order.
         KCValue      = 0x20,
         /// On style changes; invalidates the style storage cache.

@@ -90,7 +90,7 @@
 #include "KCMap.h"
 #include "KCNamedAreaManager.h"
 #include "KCPrintSettings.h"
-#include "RecalcManager.h"
+#include "KCRecalcManager.h"
 #include "KCSheet.h"
 #include "SheetPrint.h"
 #include "StyleManager.h"

@@ -80,7 +80,7 @@
 #include "KCOdfLoadingContext.h"
 #include "KCOdfSavingContext.h"
 #include "KCPrintSettings.h"
-#include "RecalcManager.h"
+#include "KCRecalcManager.h"
 #include "RowColumnFormat.h"
 #include "ShapeApplicationData.h"
 #include "SheetPrint.h"

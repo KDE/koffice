@@ -51,7 +51,7 @@ bool DeleteCommand::process(Element* element)
 {
     Q_ASSERT(!m_reverse);
 
-    // The RecalcManager needs a valid sheet.
+    // The KCRecalcManager needs a valid sheet.
     if (!element->sheet())
         element->setSheet(m_sheet);
 
