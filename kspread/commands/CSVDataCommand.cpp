@@ -73,6 +73,7 @@ KCValue CSVDataCommand::newValue(Element* element, int col, int row, bool* parse
         break;
     case KoCsvImportDialog::Date:
         value = m_sheet->map()->converter()->asDate(m_value.element(colidx, rowidx));
+        break;
     case KoCsvImportDialog::Currency:
         value = m_sheet->map()->converter()->asFloat(m_value.element(colidx, rowidx));
         value.setFormat(KCValue::fmt_Money);
