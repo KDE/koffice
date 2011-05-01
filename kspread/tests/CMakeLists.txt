@@ -53,7 +53,7 @@ target_link_libraries(TestValue kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_L
 ########### next target ###############
 
 set(TestStyleStorage_SRCS TestStyleStorage.cpp)
-kde4_add_unit_test(TestStyleStorage TESTNAME kspread-StyleStorage ${TestStyleStorage_SRCS})
+kde4_add_unit_test(TestStyleStorage TESTNAME kspread-KCStyleStorage ${TestStyleStorage_SRCS})
 target_link_libraries(TestStyleStorage kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY})
 
 

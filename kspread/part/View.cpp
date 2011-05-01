@@ -131,7 +131,7 @@
 #include "KCSheetPrint.h"
 #include "KCStyle.h"
 #include "KCStyleManager.h"
-#include "StyleStorage.h"
+#include "KCStyleStorage.h"
 #include "ToolRegistry.h"
 #include "Util.h"
 #include "ValueCalc.h"

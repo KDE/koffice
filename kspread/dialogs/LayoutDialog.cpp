@@ -69,7 +69,7 @@
 #include "KCSheet.h"
 #include "KCStyle.h"
 #include "KCStyleManager.h"
-#include "StyleStorage.h"
+#include "KCStyleStorage.h"
 #include "ValueFormatter.h"
 
 #include "commands/MergeCommand.h"

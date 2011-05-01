@@ -88,7 +88,7 @@
 #include "KCSheetModel.h"
 #include "KCStyle.h"
 #include "KCStyleManager.h"
-#include "StyleStorage.h"
+#include "KCStyleStorage.h"
 #include "Util.h"
 #include "Validity.h"
 #include "ValueConverter.h"
@@ -520,7 +520,7 @@ const LinkStorage* KCSheet::linkStorage() const
     return d->cellStorage->linkStorage();
 }
 
-const StyleStorage* KCSheet::styleStorage() const
+const KCStyleStorage* KCSheet::styleStorage() const
 {
     return d->cellStorage->styleStorage();
 }

@@ -27,7 +27,7 @@
 #include "KCCellStorage.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
-#include "StyleStorage.h"
+#include "KCStyleStorage.h"
 
 #include <QPen>
 

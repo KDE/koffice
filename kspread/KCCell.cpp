@@ -70,7 +70,7 @@
 #include "ValueConverter.h"
 #include "ValueFormatter.h"
 #include "ValueParser.h"
-#include "StyleStorage.h"
+#include "KCStyleStorage.h"
 
 #include <KoShape.h>
 #include <KoShapeLoadingContext.h>

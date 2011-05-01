@@ -19,16 +19,16 @@
 
 #include "TestStyleStorage.h"
 
-#include <StyleStorage.h>
+#include <KCStyleStorage.h>
 #include <KCMap.h>
 
 #include <qtest_kde.h>
 
-class MyStyleStorage : public StyleStorage
+class MyStyleStorage : public KCStyleStorage
 {
 public:
-    MyStyleStorage(KCMap* map) : StyleStorage(map) {}
-    using StyleStorage::garbageCollection;
+    MyStyleStorage(KCMap* map) : KCStyleStorage(map) {}
+    using KCStyleStorage::garbageCollection;
 };
 
 void TestStyleStorage::testGarbageCollection()

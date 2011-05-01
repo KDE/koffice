@@ -105,7 +105,7 @@ public:
         DefaultStyleKey,
         /**
          * The NamedStyleKey has two functions:
-         * \li In KCStyle: On lookup the KCStyle is composed (\see StyleStorage::composeStyle()).
+         * \li In KCStyle: On lookup the KCStyle is composed (\see KCStyleStorage::composeStyle()).
          *               For named styles just the style's name is stored. On lookup, these styles
          *               are looked up in the KCStyleManager and their attributes, including all
          *               attributes of the parents, are filled in the composed style. Additionally,
@@ -367,7 +367,7 @@ protected:
     bool releaseSubStyle(Key key);
 
 private:
-    friend class StyleStorage;
+    friend class KCStyleStorage;
     friend class BorderColorCommand;
 
     class Private;

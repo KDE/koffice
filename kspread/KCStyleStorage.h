@@ -43,14 +43,14 @@ class SubStyle;
  * replacement of this backend. Decorated with some additional features like
  * garbage collection, caching, used area tracking, etc.
  */
-class KSPREAD_EXPORT StyleStorage : public QObject
+class KSPREAD_EXPORT KCStyleStorage : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit StyleStorage(KCMap* map);
-    StyleStorage(const StyleStorage& other);
-    virtual ~StyleStorage();
+    explicit KCStyleStorage(KCMap* map);
+    KCStyleStorage(const KCStyleStorage& other);
+    virtual ~KCStyleStorage();
 
     /**
      * Composes the style for \p point. All substyles intersecting \p point are considered.
@@ -222,7 +222,7 @@ protected:
 
 private:
     // disable assignment
-    void operator=(const StyleStorage& other);
+    void operator=(const KCStyleStorage& other);
 
     class Private;
     Private * const d;

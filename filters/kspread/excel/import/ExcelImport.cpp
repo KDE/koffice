@@ -64,7 +64,7 @@
 #include <KCSheetPrint.h>
 #include <KCStyle.h>
 #include <KCStyleManager.h>
-#include <StyleStorage.h>
+#include <KCStyleStorage.h>
 #include <ValueConverter.h>
 #include <KCShapeApplicationData.h>
 #include <Util.h>

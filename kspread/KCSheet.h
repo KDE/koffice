@@ -76,7 +76,7 @@ class KCRowFormat;
 class KCSheet;
 class KCSheetPrint;
 class KCStyle;
-class StyleStorage;
+class KCStyleStorage;
 class Validity;
 class ValidityStorage;
 class ValueStorage;
@@ -484,7 +484,7 @@ public:
     const KCFormulaStorage* formulaStorage() const;
     const FusionStorage* fusionStorage() const;
     const LinkStorage* linkStorage() const;
-    const StyleStorage* styleStorage() const;
+    const KCStyleStorage* styleStorage() const;
     const ValidityStorage* validityStorage() const;
     const ValueStorage* valueStorage() const;
 

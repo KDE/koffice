@@ -40,7 +40,7 @@
 #include "KCRectStorage.h"
 #include "KCRowRepeatStorage.h"
 #include "KCSheet.h"
-#include "StyleStorage.h"
+#include "KCStyleStorage.h"
 #include "ValidityStorage.h"
 #include "ValueStorage.h"
 
@@ -71,7 +71,7 @@ public:
             , linkStorage(new LinkStorage())
             , matrixStorage(new MatrixStorage(sheet->map()))
             , namedAreaStorage(new NamedAreaStorage(sheet->map()))
-            , styleStorage(new StyleStorage(sheet->map()))
+            , styleStorage(new KCStyleStorage(sheet->map()))
             , userInputStorage(new UserInputStorage())
             , validityStorage(new ValidityStorage(sheet->map()))
             , valueStorage(new ValueStorage())
@@ -90,7 +90,7 @@ public:
             , linkStorage(new LinkStorage(*other.linkStorage))
             , matrixStorage(new MatrixStorage(*other.matrixStorage))
             , namedAreaStorage(new NamedAreaStorage(*other.namedAreaStorage))
-            , styleStorage(new StyleStorage(*other.styleStorage))
+            , styleStorage(new KCStyleStorage(*other.styleStorage))
             , userInputStorage(new UserInputStorage(*other.userInputStorage))
             , validityStorage(new ValidityStorage(*other.validityStorage))
             , valueStorage(new ValueStorage(*other.valueStorage))
@@ -128,7 +128,7 @@ public:
     LinkStorage*            linkStorage;
     MatrixStorage*          matrixStorage;
     NamedAreaStorage*       namedAreaStorage;
-    StyleStorage*           styleStorage;
+    KCStyleStorage*           styleStorage;
     UserInputStorage*       userInputStorage;
     ValidityStorage*        validityStorage;
     ValueStorage*           valueStorage;
@@ -1435,7 +1435,7 @@ const LinkStorage* KCCellStorage::linkStorage() const
     return d->linkStorage;
 }
 
-const StyleStorage* KCCellStorage::styleStorage() const
+const KCStyleStorage* KCCellStorage::styleStorage() const
 {
     return d->styleStorage;
 }

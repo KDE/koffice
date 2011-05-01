@@ -26,12 +26,12 @@
 #include <QUndoCommand>
 
 // KSpread
-#include "StyleStorage.h"
+#include "KCStyleStorage.h"
 
 
 /**
  * \ingroup Commands
- * \brief An undo command for StyleStorage data.
+ * \brief An undo command for KCStyleStorage data.
  *
  * Implements undo functionality only. Glue it to another command,
  * that provides the appropriate applying (redoing).
@@ -43,7 +43,7 @@ class StyleStorageUndoCommand : public QUndoCommand
 public:
     typedef QPair<QRectF, SharedSubStyle> Pair;
 
-    explicit StyleStorageUndoCommand(StyleStorage *storage, QUndoCommand *parent = 0);
+    explicit StyleStorageUndoCommand(KCStyleStorage *storage, QUndoCommand *parent = 0);
 
     virtual void undo();
 
@@ -53,11 +53,11 @@ public:
     StyleStorageUndoCommand& operator<<(const QList<Pair> &pairs);
 
 private:
-    StyleStorage *const m_storage;
+    KCStyleStorage *const m_storage;
     QList<Pair> m_undoData;
 };
 
-StyleStorageUndoCommand::StyleStorageUndoCommand(StyleStorage *storage, QUndoCommand *parent)
+StyleStorageUndoCommand::StyleStorageUndoCommand(KCStyleStorage *storage, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_storage(storage)
 {

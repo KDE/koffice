@@ -37,7 +37,7 @@
 #include <kspread/KCSheet.h>
 #include <KCRegion.h>
 #include <RowColumnFormat.h>
-#include <StyleStorage.h>
+#include <KCStyleStorage.h>
 #include <ValueStorage.h>
 #include <kspread_limits.h>
 
