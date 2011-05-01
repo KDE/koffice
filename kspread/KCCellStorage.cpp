@@ -42,7 +42,7 @@
 #include "KCSheet.h"
 #include "KCStyleStorage.h"
 #include "KCValidityStorage.h"
-#include "ValueStorage.h"
+#include "KCValueStorage.h"
 
 // commands
 #include "commands/PointStorageUndoCommand.h"
@@ -74,7 +74,7 @@ public:
             , styleStorage(new KCStyleStorage(sheet->map()))
             , userInputStorage(new UserInputStorage())
             , validityStorage(new KCValidityStorage(sheet->map()))
-            , valueStorage(new ValueStorage())
+            , valueStorage(new KCValueStorage())
             , richTextStorage(new RichTextStorage())
             , rowRepeatStorage(new KCRowRepeatStorage())
             , undoData(0) {}
@@ -93,7 +93,7 @@ public:
             , styleStorage(new KCStyleStorage(*other.styleStorage))
             , userInputStorage(new UserInputStorage(*other.userInputStorage))
             , validityStorage(new KCValidityStorage(*other.validityStorage))
-            , valueStorage(new ValueStorage(*other.valueStorage))
+            , valueStorage(new KCValueStorage(*other.valueStorage))
             , richTextStorage(new RichTextStorage(*other.richTextStorage))
             , rowRepeatStorage(new KCRowRepeatStorage(*other.rowRepeatStorage))
             , undoData(0) {}
@@ -131,7 +131,7 @@ public:
     KCStyleStorage*           styleStorage;
     UserInputStorage*       userInputStorage;
     KCValidityStorage*        validityStorage;
-    ValueStorage*           valueStorage;
+    KCValueStorage*           valueStorage;
     RichTextStorage*        richTextStorage;
     KCRowRepeatStorage*       rowRepeatStorage;
     KCCellStorageUndoData*    undoData;
@@ -1445,7 +1445,7 @@ const KCValidityStorage* KCCellStorage::validityStorage() const
     return d->validityStorage;
 }
 
-const ValueStorage* KCCellStorage::valueStorage() const
+const KCValueStorage* KCCellStorage::valueStorage() const
 {
     return d->valueStorage;
 }

@@ -38,7 +38,7 @@
 using namespace std;
 
 class KCCalculationSettings;
-class ValueStorage;
+class KCValueStorage;
 
 /**
  * \ingroup KCValue
@@ -155,7 +155,7 @@ public:
     /**
      * Creates an array value using the data from \p array.
      */
-    explicit KCValue(const ValueStorage& array, const QSize& size);
+    explicit KCValue(const KCValueStorage& array, const QSize& size);
 
     /**
      * Creates a floating-point value from date/time.

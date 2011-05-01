@@ -30,7 +30,7 @@
 class QAbstractItemModel;
 
 /**
- * Abstracts read-only access to the ValueStorage.
+ * Abstracts read-only access to the KCValueStorage.
  * Useful for KChart (or other apps, that want read-only access to KSpread's data).
  *
  * If a cell in the region is updated, the KCBindingManager informs this KCBinding, which

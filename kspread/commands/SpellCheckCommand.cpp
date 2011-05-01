@@ -24,7 +24,7 @@
 #include "KCMap.h"
 #include "KCSheet.h"
 #include "KCRegion.h"
-#include "ValueStorage.h"
+#include "KCValueStorage.h"
 
 #include "commands/DataManipulators.h"
 
@@ -42,7 +42,7 @@ public:
     KCRegion region;
     KCCell currentCell;
     KCSheet* currentSheet;
-    ValueStorage storage;
+    KCValueStorage storage;
     Sonnet::Speller speller;
     Sonnet::Dialog* dialog;
     QUndoCommand* command;

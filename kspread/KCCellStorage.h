@@ -51,7 +51,7 @@ class KCStyleStorage;
 class KCValidity;
 class KCValidityStorage;
 class KCValue;
-class ValueStorage;
+class KCValueStorage;
 
 /**
  * \ingroup Storage
@@ -377,7 +377,7 @@ public:
     const LinkStorage* linkStorage() const;
     const KCStyleStorage* styleStorage() const;
     const KCValidityStorage* validityStorage() const;
-    const ValueStorage* valueStorage() const;
+    const KCValueStorage* valueStorage() const;
 
     void loadConditions(const QList<QPair<QRegion, KCConditions> >& conditions);
     void loadStyles(const QList<QPair<QRegion, KCStyle> >& styles);

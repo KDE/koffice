@@ -38,7 +38,7 @@
 #include <KCRegion.h>
 #include <RowColumnFormat.h>
 #include <KCStyleStorage.h>
-#include <ValueStorage.h>
+#include <KCValueStorage.h>
 #include <kspread_limits.h>
 
 #include <swinder.h>
@@ -283,7 +283,7 @@ void ExcelExport::collectStyles(KCSheet* sheet, QList<XFRecord>& xfRecords, QHas
 void ExcelExport::buildStringTable(KCSheet* sheet, Swinder::SSTRecord& sst, QHash<QString, unsigned>& stringTable)
 {
     unsigned useCount = 0;
-    const ValueStorage* values = sheet->cellStorage()->valueStorage();
+    const KCValueStorage* values = sheet->cellStorage()->valueStorage();
     for (int i = 0; i < values->count(); i++) {
         KCValue v = values->data(i);
         if (v.isString()) {

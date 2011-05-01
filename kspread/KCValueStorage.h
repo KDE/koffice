@@ -21,23 +21,23 @@
 #define KSPREAD_VALUE_STORAGE
 
 /**
- * \class ValueStorage
+ * \class KCValueStorage
  * \ingroup Storage
  * \ingroup KCValue
  * Stores cell values.
  */
-class ValueStorage : public KCPointStorage<KCValue>
+class KCValueStorage : public KCPointStorage<KCValue>
 {
 public:
-    ValueStorage()
+    KCValueStorage()
             : KCPointStorage<KCValue>() {
     }
 
-    ValueStorage(const KCPointStorage<KCValue>& o)
+    KCValueStorage(const KCPointStorage<KCValue>& o)
             : KCPointStorage<KCValue>(o) {
     }
 
-    ValueStorage& operator=(const KCPointStorage<KCValue>& o) {
+    KCValueStorage& operator=(const KCPointStorage<KCValue>& o) {
         KCPointStorage<KCValue>::operator=(o);
         return *this;
     }

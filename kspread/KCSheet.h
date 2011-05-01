@@ -79,7 +79,7 @@ class KCStyle;
 class KCStyleStorage;
 class KCValidity;
 class KCValidityStorage;
-class ValueStorage;
+class KCValueStorage;
 class View;
 template<typename T> class IntervalMap;
 
@@ -486,7 +486,7 @@ public:
     const LinkStorage* linkStorage() const;
     const KCStyleStorage* styleStorage() const;
     const KCValidityStorage* validityStorage() const;
-    const ValueStorage* valueStorage() const;
+    const KCValueStorage* valueStorage() const;
 
     /**
      * \ingroup Coordinates

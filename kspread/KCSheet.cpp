@@ -92,7 +92,7 @@
 #include "Util.h"
 #include "KCValidity.h"
 #include "KCValueConverter.h"
-#include "ValueStorage.h"
+#include "KCValueStorage.h"
 
 
 template<typename T> class IntervalMap
@@ -530,7 +530,7 @@ const KCValidityStorage* KCSheet::validityStorage() const
     return d->cellStorage->validityStorage();
 }
 
-const ValueStorage* KCSheet::valueStorage() const
+const KCValueStorage* KCSheet::valueStorage() const
 {
     return d->cellStorage->valueStorage();
 }
