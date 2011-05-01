@@ -123,12 +123,12 @@ private:
 /**
  * A column style.
  */
-class KSPREAD_EXPORT ColumnFormat
+class KSPREAD_EXPORT KCColumnFormat
 {
 public:
-    ColumnFormat();
-    ColumnFormat(const ColumnFormat& other);
-    ~ColumnFormat();
+    KCColumnFormat();
+    KCColumnFormat(const KCColumnFormat& other);
+    ~KCColumnFormat();
 
     void setSheet(KCSheet* sheet);
 
@@ -161,15 +161,15 @@ public:
     bool isDefault() const;
 
     /**
-     * @return the column of this ColumnFormat. May be 0 if this is the default format.
+     * @return the column of this KCColumnFormat. May be 0 if this is the default format.
      */
     int column() const;
     void setColumn(int column);
 
-    ColumnFormat* next() const;
-    ColumnFormat* previous() const;
-    void setNext(ColumnFormat* c);
-    void setPrevious(ColumnFormat* c);
+    KCColumnFormat* next() const;
+    KCColumnFormat* previous() const;
+    void setNext(KCColumnFormat* c);
+    void setPrevious(KCColumnFormat* c);
 
     void setHidden(bool _hide);
     bool isHidden() const;
@@ -189,14 +189,14 @@ public:
      */
     bool hasPageBreak() const;
 
-    bool operator==(const ColumnFormat& other) const;
-    inline bool operator!=(const ColumnFormat& other) const {
+    bool operator==(const KCColumnFormat& other) const;
+    inline bool operator!=(const KCColumnFormat& other) const {
         return !operator==(other);
     }
 
 private:
     // do not allow assignment
-    ColumnFormat& operator=(const ColumnFormat&);
+    KCColumnFormat& operator=(const KCColumnFormat&);
 
     class Private;
     Private * const d;

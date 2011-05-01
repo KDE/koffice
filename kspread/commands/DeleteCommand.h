@@ -24,7 +24,7 @@
 
 #include <QSet>
 
-class ColumnFormat;
+class KCColumnFormat;
 class KCRowFormat;
 
 /**
@@ -65,7 +65,7 @@ protected:
     }
 
 protected:
-    QSet<ColumnFormat*> m_columnFormats;
+    QSet<KCColumnFormat*> m_columnFormats;
     QSet<KCRowFormat*>   m_rowFormats;
     Mode m_mode;
 };

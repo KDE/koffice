@@ -500,7 +500,7 @@ void OpenCalcExport::exportSheet(QDomDocument & doc, QDomElement & tabElem,
     int i = 1;
 
     while (i <= maxCols) {
-        const ColumnFormat * column = sheet->columnFormat(i);
+        const KCColumnFormat * column = sheet->columnFormat(i);
         ColumnStyle cs;
         cs.breakB = ::Style::automatic;
         cs.size   = POINT_TO_MM(column->width()) / 10;
@@ -509,7 +509,7 @@ void OpenCalcExport::exportSheet(QDomDocument & doc, QDomElement & tabElem,
         int j        = i + 1;
         int repeated = 1;
         while (j <= maxCols) {
-            const ColumnFormat *c = sheet->columnFormat(j);
+            const KCColumnFormat *c = sheet->columnFormat(j);
             ColumnStyle cs1;
             cs1.breakB = ::Style::automatic;
             cs1.size   = POINT_TO_MM(c->width()) / 10;

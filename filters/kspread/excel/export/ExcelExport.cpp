@@ -341,7 +341,7 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
     {
         ColInfoRecord cir(0);
         for (int i = 1; i <= area.right(); ++i) {
-            const ColumnFormat* column = sheet->columnFormat(i);
+            const KCColumnFormat* column = sheet->columnFormat(i);
             unsigned w = convertColumnWidth(column->width());
             if (w != cir.width() || column->isHidden() != cir.isHidden() || column->isDefault() != !cir.isNonDefaultWidth()) {
                 if (i > 1) {

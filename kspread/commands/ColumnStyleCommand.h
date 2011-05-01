@@ -22,7 +22,7 @@
 
 #include "AbstractRegionCommand.h"
 
-class ColumnFormat;
+class KCColumnFormat;
 
 /**
  * \ingroup Commands
@@ -37,7 +37,7 @@ public:
     void setWidth(double width);
     void setHidden(bool hidden);
     void setPageBreak(bool pageBreak);
-    void setTemplate(const ColumnFormat &columnFormat);
+    void setTemplate(const KCColumnFormat &columnFormat);
 
 protected:
     virtual bool mainProcessing();
@@ -46,7 +46,7 @@ private:
     double m_width;
     bool m_hidden;
     bool m_pageBreak;
-    QMap<int, ColumnFormat *> m_columnFormats;
+    QMap<int, KCColumnFormat *> m_columnFormats;
 };
 
 #endif // KSPREAD_COLUMN_STYLE_COMMAND

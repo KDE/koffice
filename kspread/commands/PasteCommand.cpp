@@ -454,7 +454,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
             }
 
             // Set the column style.
-            ColumnFormat columnFormat;
+            KCColumnFormat columnFormat;
             columnFormat.setSheet(sheet);
             KoXmlElement c = e.firstChild().toElement();
             for (; !c.isNull(); c = c.nextSibling().toElement()) {

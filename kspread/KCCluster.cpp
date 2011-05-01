@@ -764,7 +764,7 @@ KCCell* KCCluster::getNextCellRight(int col, int row) const
 ColumnCluster::ColumnCluster()
         : m_first(0), m_autoDelete(false)
 {
-    m_cluster = (ColumnFormat***)malloc(KSPREAD_CLUSTER_LEVEL1 * sizeof(ColumnFormat**));
+    m_cluster = (KCColumnFormat***)malloc(KSPREAD_CLUSTER_LEVEL1 * sizeof(KCColumnFormat**));
 
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x)
         m_cluster[ x ] = 0;
@@ -773,7 +773,7 @@ ColumnCluster::ColumnCluster()
 ColumnCluster::~ColumnCluster()
 {
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x) {
-        ColumnFormat** cl = m_cluster[ x ];
+        KCColumnFormat** cl = m_cluster[ x ];
         if (cl) {
             free(cl);
             m_cluster[ x ] = 0;
@@ -781,9 +781,9 @@ ColumnCluster::~ColumnCluster()
     }
 
     if (m_autoDelete) {
-        ColumnFormat* cell = m_first;
+        KCColumnFormat* cell = m_first;
         while (cell) {
-            ColumnFormat* n = cell->next();
+            KCColumnFormat* n = cell->next();
             delete cell;
             cell = n;
         }
@@ -793,7 +793,7 @@ ColumnCluster::~ColumnCluster()
     free(m_cluster);
 }
 
-ColumnFormat* ColumnCluster::lookup(int col)
+KCColumnFormat* ColumnCluster::lookup(int col)
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
         kDebug(36001) << "ColumnCluster::lookup: invalid column value (col:"
@@ -804,14 +804,14 @@ ColumnFormat* ColumnCluster::lookup(int col)
     int cx = col / KSPREAD_CLUSTER_LEVEL2;
     int dx = col % KSPREAD_CLUSTER_LEVEL2;
 
-    ColumnFormat** cl = m_cluster[ cx ];
+    KCColumnFormat** cl = m_cluster[ cx ];
     if (!cl)
         return 0;
 
     return cl[ dx ];
 }
 
-const ColumnFormat* ColumnCluster::lookup(int col) const
+const KCColumnFormat* ColumnCluster::lookup(int col) const
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
         kDebug(36001) << "ColumnCluster::lookup: invalid column value (col:"
@@ -822,7 +822,7 @@ const ColumnFormat* ColumnCluster::lookup(int col) const
     int cx = col / KSPREAD_CLUSTER_LEVEL2;
     int dx = col % KSPREAD_CLUSTER_LEVEL2;
 
-    ColumnFormat** cl = m_cluster[ cx ];
+    KCColumnFormat** cl = m_cluster[ cx ];
     if (!cl)
         return 0;
 
@@ -832,7 +832,7 @@ const ColumnFormat* ColumnCluster::lookup(int col) const
 void ColumnCluster::clear()
 {
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x) {
-        ColumnFormat** cl = m_cluster[ x ];
+        KCColumnFormat** cl = m_cluster[ x ];
         if (cl) {
             free(cl);
             m_cluster[ x ] = 0;
@@ -840,9 +840,9 @@ void ColumnCluster::clear()
     }
 
     if (m_autoDelete) {
-        ColumnFormat* cell = m_first;
+        KCColumnFormat* cell = m_first;
         while (cell) {
-            ColumnFormat* n = cell->next();
+            KCColumnFormat* n = cell->next();
             delete cell;
             cell = n;
         }
@@ -851,7 +851,7 @@ void ColumnCluster::clear()
     m_first = 0;
 }
 
-void ColumnCluster::insertElement(ColumnFormat* lay, int col)
+void ColumnCluster::insertElement(KCColumnFormat* lay, int col)
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
         kDebug(36001) << "ColumnCluster::insertElement: invalid column value (col:"
@@ -862,9 +862,9 @@ void ColumnCluster::insertElement(ColumnFormat* lay, int col)
     int cx = col / KSPREAD_CLUSTER_LEVEL2;
     int dx = col % KSPREAD_CLUSTER_LEVEL2;
 
-    ColumnFormat** cl = m_cluster[ cx ];
+    KCColumnFormat** cl = m_cluster[ cx ];
     if (!cl) {
-        cl = (ColumnFormat**)malloc(KSPREAD_CLUSTER_LEVEL2 * sizeof(ColumnFormat*));
+        cl = (KCColumnFormat**)malloc(KSPREAD_CLUSTER_LEVEL2 * sizeof(KCColumnFormat*));
         m_cluster[ cx ] = cl;
 
         for (int a = 0; a < KSPREAD_CLUSTER_LEVEL2; ++a)
@@ -894,11 +894,11 @@ void ColumnCluster::removeElement(int col)
     int cx = col / KSPREAD_CLUSTER_LEVEL2;
     int dx = col % KSPREAD_CLUSTER_LEVEL2;
 
-    ColumnFormat** cl = m_cluster[ cx ];
+    KCColumnFormat** cl = m_cluster[ cx ];
     if (!cl)
         return;
 
-    ColumnFormat* c = cl[ dx ];
+    KCColumnFormat* c = cl[ dx ];
     if (!c)
         return;
 
@@ -933,7 +933,7 @@ bool ColumnCluster::insertColumn(int col)
 
     // Is there a column layout at the right most position ?
     // In this case the shift is impossible.
-    ColumnFormat** cl = m_cluster[ KSPREAD_CLUSTER_LEVEL1 - 1 ];
+    KCColumnFormat** cl = m_cluster[ KSPREAD_CLUSTER_LEVEL1 - 1 ];
     if (cl && cl[ KSPREAD_CLUSTER_LEVEL2 - 1 ])
         return false;
 
@@ -941,7 +941,7 @@ bool ColumnCluster::insertColumn(int col)
     setAutoDelete(false);
 
     for (int i = KSPREAD_CLUSTER_LEVEL1 - 1; i >= cx ; --i) {
-        ColumnFormat** cl = m_cluster[ i ];
+        KCColumnFormat** cl = m_cluster[ i ];
         if (cl) {
             int left = 0;
             if (i == cx)
@@ -950,7 +950,7 @@ bool ColumnCluster::insertColumn(int col)
             if (i == KSPREAD_CLUSTER_LEVEL1 - 1)
                 right = KSPREAD_CLUSTER_LEVEL2 - 2;
             for (int k = right; k >= left; --k) {
-                ColumnFormat* c = cl[ k ];
+                KCColumnFormat* c = cl[ k ];
                 if (c) {
                     removeElement(c->column());
                     c->setColumn(c->column() + 1);
@@ -982,14 +982,14 @@ bool ColumnCluster::removeColumn(int column)
     setAutoDelete(false);
 
     for (int i = cx; i < KSPREAD_CLUSTER_LEVEL1; ++i) {
-        ColumnFormat** cl = m_cluster[ i ];
+        KCColumnFormat** cl = m_cluster[ i ];
         if (cl) {
             int left = 0;
             if (i == cx)
                 left = dx + 1;
             int right = KSPREAD_CLUSTER_LEVEL2 - 1;
             for (int k = left; k <= right; ++k) {
-                ColumnFormat* c = cl[ k ];
+                KCColumnFormat* c = cl[ k ];
                 if (c) {
                     removeElement(c->column());
                     c->setColumn(c->column() - 1);
@@ -1014,7 +1014,7 @@ bool ColumnCluster::autoDelete() const
     return m_autoDelete;
 }
 
-ColumnFormat* ColumnCluster::next(int col) const
+KCColumnFormat* ColumnCluster::next(int col) const
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
         kDebug(36001) << "ColumnCluster::next: invalid column value (col:"
@@ -1046,14 +1046,14 @@ void ColumnCluster::operator=(const ColumnCluster & other)
     m_first = 0;
     m_autoDelete = other.m_autoDelete;
     // TODO Stefan: Optimize!
-    m_cluster = (ColumnFormat***)malloc(KSPREAD_CLUSTER_LEVEL1 * sizeof(ColumnFormat**));
+    m_cluster = (KCColumnFormat***)malloc(KSPREAD_CLUSTER_LEVEL1 * sizeof(KCColumnFormat**));
     for (int i = 0; i < KSPREAD_CLUSTER_LEVEL1; ++i) {
         if (other.m_cluster[i]) {
-            m_cluster[i] = (ColumnFormat**)malloc(KSPREAD_CLUSTER_LEVEL2 * sizeof(ColumnFormat*));
+            m_cluster[i] = (KCColumnFormat**)malloc(KSPREAD_CLUSTER_LEVEL2 * sizeof(KCColumnFormat*));
             for (int j = 0; j < KSPREAD_CLUSTER_LEVEL2; ++j) {
                 m_cluster[i][j] = 0;
                 if (other.m_cluster[i][j]) {
-                    ColumnFormat* columnFormat = new ColumnFormat(*other.m_cluster[i][j]);
+                    KCColumnFormat* columnFormat = new KCColumnFormat(*other.m_cluster[i][j]);
                     columnFormat->setNext(0);
                     columnFormat->setPrevious(0);
                     insertElement(columnFormat, columnFormat->column());

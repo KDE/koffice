@@ -62,7 +62,7 @@ public:
 void TableShape::Private::adjustColumnDimensions(KCSheet* sheet, double factor)
 {
     for (int col = 1; col <= columns; ++col) {
-        ColumnFormat* const columnFormat = sheet->nonDefaultColumnFormat(col);
+        KCColumnFormat* const columnFormat = sheet->nonDefaultColumnFormat(col);
         columnFormat->setWidth(columnFormat->width() * factor);
     }
 }

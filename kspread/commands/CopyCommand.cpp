@@ -104,7 +104,7 @@ QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
 
             // TODO Stefan: Inefficient, use the cluster functionality
             // Save the column formats if there are any
-            const ColumnFormat* format;
+            const KCColumnFormat* format;
             for (int col = range.left(); col <= range.right(); ++col) {
                 format = sheet->columnFormat(col);
                 if (format && !format->isDefault()) {

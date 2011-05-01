@@ -2190,7 +2190,7 @@ void CellToolBase::equalizeColumn()
         KMessageBox::error(canvas()->canvasWidget(), i18n("Area is too large."));
     else {
         const QRect range = selection()->lastRange();
-        const ColumnFormat* columnFormat = selection()->activeSheet()->columnFormat(range.left());
+        const KCColumnFormat* columnFormat = selection()->activeSheet()->columnFormat(range.left());
         double size = columnFormat->width();
         if (range.left() == range.right())
             return;

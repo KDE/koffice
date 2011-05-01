@@ -107,7 +107,7 @@ public:
     ValueParser* parser;
 
     // default objects
-    ColumnFormat* defaultColumnFormat;
+    KCColumnFormat* defaultColumnFormat;
     KCRowFormat* defaultRowFormat;
 
     QList<KCDamage*> damages;
@@ -147,7 +147,7 @@ KCMap::KCMap(KCDocBase* doc, int syntaxVersion)
     d->calc = new ValueCalc(d->converter);
     d->formatter = new ValueFormatter(d->converter);
 
-    d->defaultColumnFormat = new ColumnFormat();
+    d->defaultColumnFormat = new KCColumnFormat();
     d->defaultRowFormat = new KCRowFormat();
 
     QFont font(KoGlobal::defaultFont());
@@ -299,7 +299,7 @@ ValueCalc* KCMap::calc() const
     return d->calc;
 }
 
-const ColumnFormat* KCMap::defaultColumnFormat() const
+const KCColumnFormat* KCMap::defaultColumnFormat() const
 {
     return d->defaultColumnFormat;
 }

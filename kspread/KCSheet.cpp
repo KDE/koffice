@@ -472,9 +472,9 @@ bool KCSheet::isShowPageBorders() const
     return d->showPageBorders;
 }
 
-const ColumnFormat* KCSheet::columnFormat(int _column) const
+const KCColumnFormat* KCSheet::columnFormat(int _column) const
 {
-    const ColumnFormat *p = d->columns.lookup(_column);
+    const KCColumnFormat *p = d->columns.lookup(_column);
     if (p != 0)
         return p;
 
@@ -674,19 +674,19 @@ KCRowFormat* KCSheet::firstRow() const
     return d->rows.first();
 }
 
-ColumnFormat* KCSheet::firstCol() const
+KCColumnFormat* KCSheet::firstCol() const
 {
     return d->columns.first();
 }
 
-ColumnFormat* KCSheet::nonDefaultColumnFormat(int _column, bool force_creation)
+KCColumnFormat* KCSheet::nonDefaultColumnFormat(int _column, bool force_creation)
 {
     Q_ASSERT(_column >= 1 && _column <= KS_colMax);
-    ColumnFormat *p = d->columns.lookup(_column);
+    KCColumnFormat *p = d->columns.lookup(_column);
     if (p != 0 || !force_creation)
         return p;
 
-    p = new ColumnFormat(*map()->defaultColumnFormat());
+    p = new KCColumnFormat(*map()->defaultColumnFormat());
     p->setSheet(this);
     p->setColumn(_column);
 
@@ -1221,8 +1221,8 @@ QDomElement KCSheet::saveXML(QDomDocument& dd)
         }
     }
 
-    // Save all ColumnFormat objects.
-    ColumnFormat* columnFormat = firstCol();
+    // Save all KCColumnFormat objects.
+    KCColumnFormat* columnFormat = firstCol();
     styleIndex = styleStorage()->nextColumnStyleIndex(0);
     while (columnFormat || styleIndex) {
         if (columnFormat && (!styleIndex || columnFormat->column() <= styleIndex)) {
@@ -1234,7 +1234,7 @@ QDomElement KCSheet::saveXML(QDomDocument& dd)
                 styleIndex = styleStorage()->nextColumnStyleIndex(styleIndex);
             columnFormat = columnFormat->next();
         } else if (styleIndex) {
-            ColumnFormat columnFormat(*map()->defaultColumnFormat());
+            KCColumnFormat columnFormat(*map()->defaultColumnFormat());
             columnFormat.setSheet(this);
             columnFormat.setColumn(styleIndex);
             QDomElement e = columnFormat.save(dd);
@@ -1903,9 +1903,9 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
     for (int i = 0; i < number; ++i) {
         //kDebug(36003) << " insert new column: pos :" << indexCol << " width :" << width << " hidden ?" << visibility;
 
-        const ColumnFormat* columnFormat;
+        const KCColumnFormat* columnFormat;
         if (isNonDefaultColumn) {
-            ColumnFormat* cf = nonDefaultColumnFormat(indexCol);
+            KCColumnFormat* cf = nonDefaultColumnFormat(indexCol);
             columnFormat = cf;
 
             if (width != -1.0)   //safe
@@ -2144,7 +2144,7 @@ QRect KCSheet::usedArea(bool onlyContent) const
             row = row->next();
         }
 
-        const ColumnFormat* col = firstCol();
+        const KCColumnFormat* col = firstCol();
         while (col) {
             if (col->column() > maxCols)
                 maxCols = col->column();
@@ -2586,7 +2586,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
     //
     int i = 1;
     while (i <= maxCols) {
-        const ColumnFormat* column = columnFormat(i);
+        const KCColumnFormat* column = columnFormat(i);
 //         kDebug(36003) << "KCSheet::saveOdfColRowCell: first col loop:"
 //                       << "i:" << i
 //                       << "column:" << (column ? column->column() : 0)
@@ -2599,7 +2599,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
         int count = 1;
 
         while (j <= maxCols) {
-            const ColumnFormat* nextColumn = d->columns.next(j);
+            const KCColumnFormat* nextColumn = d->columns.next(j);
             const int nextColumnIndex = nextColumn ? nextColumn->column() : 0;
             const QMap<int, KCStyle>::iterator nextColumnDefaultStyle = tableContext.columnDefaultStyles.upperBound(j);
             const int nextStyleColumnIndex = nextColumnDefaultStyle == tableContext.columnDefaultStyles.end()
@@ -3100,7 +3100,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
                 else
                     delete rl;
             } else if (tagName == "column") {
-                ColumnFormat *cl = new ColumnFormat();
+                KCColumnFormat *cl = new KCColumnFormat();
                 cl->setSheet(this);
                 if (cl->load(e))
                     insertColumnFormat(cl);
@@ -3204,7 +3204,7 @@ void KCSheet::setBackgroundImageProperties(const KCSheet::BackgroundImagePropert
     d->backgroundProperties = properties;
 }
 
-void KCSheet::insertColumnFormat(ColumnFormat *l)
+void KCSheet::insertColumnFormat(KCColumnFormat *l)
 {
     d->columns.insertElement(l, l->column());
     if (!map()->isLoading()) {

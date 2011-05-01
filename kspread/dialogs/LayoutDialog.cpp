@@ -425,7 +425,7 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
     value = cell.value();
 
     const KCRowFormat *rl;
-    const ColumnFormat *cl;
+    const KCColumnFormat *cl;
     widthSize = 0.0;
     heightSize = 0.0;
 

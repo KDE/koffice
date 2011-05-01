@@ -72,7 +72,7 @@ ShowColRow::ShowColRow(QWidget* parent, Selection* selection, Type _type)
 
     bool showColNumber = m_selection->activeSheet()->getShowColumnNumber();
     if (_type == Column) {
-        ColumnFormat *col = m_selection->activeSheet()->firstCol();
+        KCColumnFormat *col = m_selection->activeSheet()->firstCol();
 
         QString text;
         QStringList listCol;

@@ -69,9 +69,9 @@ bool DeleteCommand::process(Element* element)
                 continue;
             }
 
-            const ColumnFormat* columnFormat = m_sheet->columnFormat(col);
+            const KCColumnFormat* columnFormat = m_sheet->columnFormat(col);
             if (m_firstrun && !columnFormat->isDefault()) {
-                ColumnFormat* oldColumnFormat = new ColumnFormat(*columnFormat);
+                KCColumnFormat* oldColumnFormat = new KCColumnFormat(*columnFormat);
                 oldColumnFormat->setNext(0);
                 oldColumnFormat->setPrevious(0);
                 m_columnFormats.insert(oldColumnFormat);
@@ -128,8 +128,8 @@ bool DeleteCommand::process(Element* element)
 bool DeleteCommand::mainProcessing()
 {
     if (m_reverse) {
-        foreach(ColumnFormat* columnFormat, m_columnFormats) {
-            m_sheet->insertColumnFormat(new ColumnFormat(*columnFormat));
+        foreach(KCColumnFormat* columnFormat, m_columnFormats) {
+            m_sheet->insertColumnFormat(new KCColumnFormat(*columnFormat));
         }
         foreach(KCRowFormat* rowFormat, m_rowFormats) {
             m_sheet->insertRowFormat(new KCRowFormat(*rowFormat));

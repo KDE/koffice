@@ -930,7 +930,7 @@ bool OpenCalcImport::readColLayouts(KoXmlElement & content, KCSheet * table)
         for (int i = 0; i < number; ++i) {
             kDebug(30518) << "Inserting colLayout:" << column;
 
-            ColumnFormat * col = new ColumnFormat();
+            KCColumnFormat * col = new KCColumnFormat();
             col->setSheet(table);
             col->setColumn(column);
             table->cellStorage()->setStyle(KCRegion(QRect(column, 1, 1, KS_rowMax)), styleLayout);

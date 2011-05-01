@@ -1234,7 +1234,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
 
 
         /* Start COLS */
-        ColumnFormat *cl = table->firstCol();
+        KCColumnFormat *cl = table->firstCol();
         while (cl) {
             QDomElement colinfo = gnumeric_doc.createElement("gmr:ColInfo");
             cols.appendChild(colinfo);

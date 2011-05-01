@@ -1001,7 +1001,7 @@ void ColumnHeader::mouseMoveEvent(QMouseEvent * _ev)
 
         if (sheet->layoutDirection() == Qt::RightToLeft) {
             if (_ev->pos().x() < width() - m_pCanvas->width()) {
-                const ColumnFormat *cl = sheet->columnFormat(col + 1);
+                const KCColumnFormat *cl = sheet->columnFormat(col + 1);
                 x = sheet->columnPosition(col + 1);
                 m_pCanvas->view()->horzScrollBar()->setValue(m_pCanvas->view()->horzScrollBar()->maximum()
                                                      - (int)((ev_PosX + cl->width()) - dWidth));
@@ -1012,7 +1012,7 @@ void ColumnHeader::mouseMoveEvent(QMouseEvent * _ev)
                 m_pCanvas->view()->horzScrollBar()->setValue((int) ev_PosX);
             else if (_ev->pos().x() > m_pCanvas->width()) {
                 if (col < KS_colMax) {
-                    const ColumnFormat *cl = sheet->columnFormat(col + 1);
+                    const KCColumnFormat *cl = sheet->columnFormat(col + 1);
                     x = sheet->columnPosition(col + 1);
                     m_pCanvas->view()->horzScrollBar()->setValue((int)(ev_PosX + cl->width() - dWidth));
                 }
@@ -1248,7 +1248,7 @@ void ColumnHeader::paintEvent(QPaintEvent* event)
             bool selected = (selectedColumns.contains(x));
             bool highlighted = (!selected && affectedColumns.contains(x));
 
-            const ColumnFormat* columnFormat = sheet->columnFormat(x);
+            const KCColumnFormat* columnFormat = sheet->columnFormat(x);
             if (columnFormat->isHiddenOrFiltered()) {
                 ++x;
                 continue;
@@ -1298,7 +1298,7 @@ void ColumnHeader::paintEvent(QPaintEvent* event)
             bool selected = (selectedColumns.contains(x));
             bool highlighted = (!selected && affectedColumns.contains(x));
 
-            const ColumnFormat *columnFormat = sheet->columnFormat(x);
+            const KCColumnFormat *columnFormat = sheet->columnFormat(x);
             if (columnFormat->isHiddenOrFiltered()) {
                 ++x;
                 continue;

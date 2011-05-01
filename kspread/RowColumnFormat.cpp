@@ -298,11 +298,11 @@ bool KCRowFormat::operator==(const KCRowFormat& other) const
 
 /*****************************************************************************
  *
- * ColumnFormat
+ * KCColumnFormat
  *
  *****************************************************************************/
 
-class ColumnFormat::Private
+class KCColumnFormat::Private
 {
 public:
     KCSheet*          sheet;
@@ -311,11 +311,11 @@ public:
     bool            hide;
     bool            filtered;
     bool            pageBreak; // before column
-    ColumnFormat*   next;
-    ColumnFormat*   prev;
+    KCColumnFormat*   next;
+    KCColumnFormat*   prev;
 };
 
-ColumnFormat::ColumnFormat()
+KCColumnFormat::KCColumnFormat()
         : d(new Private)
 {
     d->sheet    = 0;
@@ -328,12 +328,12 @@ ColumnFormat::ColumnFormat()
     d->prev     = 0;
 }
 
-ColumnFormat::ColumnFormat(const ColumnFormat& other)
+KCColumnFormat::KCColumnFormat(const KCColumnFormat& other)
         : d(new Private(*other.d))
 {
 }
 
-ColumnFormat::~ColumnFormat()
+KCColumnFormat::~KCColumnFormat()
 {
     if (d->next)
         d->next->setPrevious(d->prev);
@@ -342,18 +342,18 @@ ColumnFormat::~ColumnFormat()
     delete d;
 }
 
-void ColumnFormat::setSheet(KCSheet* sheet)
+void KCColumnFormat::setSheet(KCSheet* sheet)
 {
     d->sheet = sheet;
 }
 
-void ColumnFormat::setWidth(double width)
+void KCColumnFormat::setWidth(double width)
 {
     // avoid unnecessary updates
     if (qAbs(width - this->width()) < DBL_EPSILON)
         return;
 
-    // default ColumnFormat?
+    // default KCColumnFormat?
     if (!d->sheet) {
         d->width = width;
         return;
@@ -368,19 +368,19 @@ void ColumnFormat::setWidth(double width)
     d->sheet->print()->updateHorizontalPageParameters(column());
 }
 
-double ColumnFormat::width() const
+double KCColumnFormat::width() const
 {
     return d->width;
 }
 
-double ColumnFormat::visibleWidth() const
+double KCColumnFormat::visibleWidth() const
 {
     if (d->hide || d->filtered)
         return 0.0;
     return d->width;
 }
 
-QDomElement ColumnFormat::save(QDomDocument& doc, int xshift) const
+QDomElement KCColumnFormat::save(QDomDocument& doc, int xshift) const
 {
     Q_ASSERT(d->sheet);
     QDomElement col(doc.createElement("column"));
@@ -401,7 +401,7 @@ QDomElement ColumnFormat::save(QDomDocument& doc, int xshift) const
     return col;
 }
 
-bool ColumnFormat::load(const KoXmlElement & col, int xshift, Paste::Mode mode)
+bool KCColumnFormat::load(const KoXmlElement & col, int xshift, Paste::Mode mode)
 {
     Q_ASSERT(d->sheet);
     bool ok;
@@ -448,37 +448,37 @@ bool ColumnFormat::load(const KoXmlElement & col, int xshift, Paste::Mode mode)
     return true;
 }
 
-int ColumnFormat::column() const
+int KCColumnFormat::column() const
 {
     return d->column;
 }
 
-void ColumnFormat::setColumn(int column)
+void KCColumnFormat::setColumn(int column)
 {
     d->column = column;
 }
 
-ColumnFormat* ColumnFormat::next() const
+KCColumnFormat* KCColumnFormat::next() const
 {
     return d->next;
 }
 
-ColumnFormat* ColumnFormat::previous() const
+KCColumnFormat* KCColumnFormat::previous() const
 {
     return d->prev;
 }
 
-void ColumnFormat::setNext(ColumnFormat* next)
+void KCColumnFormat::setNext(KCColumnFormat* next)
 {
     d->next = next;
 }
 
-void ColumnFormat::setPrevious(ColumnFormat* prev)
+void KCColumnFormat::setPrevious(KCColumnFormat* prev)
 {
     d->prev = prev;
 }
 
-void ColumnFormat::setHidden(bool _hide)
+void KCColumnFormat::setHidden(bool _hide)
 {
     Q_ASSERT(d->sheet);
     if (_hide != d->hide) { // only if we change the status
@@ -494,42 +494,42 @@ void ColumnFormat::setHidden(bool _hide)
     }
 }
 
-bool ColumnFormat::isHidden() const
+bool KCColumnFormat::isHidden() const
 {
     return d->hide;
 }
 
-void ColumnFormat::setFiltered(bool filtered)
+void KCColumnFormat::setFiltered(bool filtered)
 {
     d->filtered = filtered;
 }
 
-bool ColumnFormat::isFiltered() const
+bool KCColumnFormat::isFiltered() const
 {
     return d->filtered;
 }
 
-bool ColumnFormat::isHiddenOrFiltered() const
+bool KCColumnFormat::isHiddenOrFiltered() const
 {
     return d->hide || d->filtered;
 }
 
-bool ColumnFormat::isDefault() const
+bool KCColumnFormat::isDefault() const
 {
     return !d->sheet;
 }
 
-void ColumnFormat::setPageBreak(bool enable)
+void KCColumnFormat::setPageBreak(bool enable)
 {
     d->pageBreak = enable;
 }
 
-bool ColumnFormat::hasPageBreak() const
+bool KCColumnFormat::hasPageBreak() const
 {
     return d->pageBreak;
 }
 
-bool ColumnFormat::operator==(const ColumnFormat& other) const
+bool KCColumnFormat::operator==(const KCColumnFormat& other) const
 {
     // NOTE Stefan: Don't compare sheet and cell.
     if (d->width != other.d->width)

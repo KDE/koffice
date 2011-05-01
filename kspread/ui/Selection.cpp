@@ -1004,7 +1004,7 @@ void Selection::emitChanged(const KCRegion& region)
         Element* element = *it;
         QRect area = element->rect();
 
-        const ColumnFormat *col;
+        const KCColumnFormat *col;
         const KCRowFormat *rl;
         //look at if column is hiding.
         //if it's hiding refreshing column+1 (or column -1 )

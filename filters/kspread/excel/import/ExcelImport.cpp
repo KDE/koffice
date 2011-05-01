@@ -741,7 +741,7 @@ void ExcelImport::Private::processColumn(Sheet* is, unsigned columnIndex, KCShee
 
     if (!column) return;
 
-    ColumnFormat* oc = os->nonDefaultColumnFormat(columnIndex+1);
+    KCColumnFormat* oc = os->nonDefaultColumnFormat(columnIndex+1);
     oc->setWidth(column->width());
     oc->setHidden(!column->visible());
 

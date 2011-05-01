@@ -52,7 +52,7 @@ class KoOasisSettings;
 class KCApplicationSettings;
 class KCBindingManager;
 class KCCalculationSettings;
-class ColumnFormat;
+class KCColumnFormat;
 class KCDamage;
 class DatabaseManager;
 class KCDependencyManager;
@@ -174,7 +174,7 @@ public:
     /**
      * \return the default row format
      */
-    const ColumnFormat* defaultColumnFormat() const;
+    const KCColumnFormat* defaultColumnFormat() const;
 
     /**
      * \return the default row format

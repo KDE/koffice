@@ -59,7 +59,7 @@ class KoXmlWriter;
 
 class KCCell;
 class KCCellStorage;
-class ColumnFormat;
+class KCColumnFormat;
 class CommentStorage;
 class KCConditionsStorage;
 class KCFormulaStorage;
@@ -444,21 +444,21 @@ public:
      * \return the column format of column \p _column . The default column format,
      * if no special one exists.
      */
-    const ColumnFormat* columnFormat(int _column) const;
+    const KCColumnFormat* columnFormat(int _column) const;
 
     /**
      * \ingroup ColumnRowFormat
-     * If no special ColumnFormat exists for this column, then a new one is created.
+     * If no special KCColumnFormat exists for this column, then a new one is created.
      *
-     * @return a non default ColumnFormat for this column.
+     * @return a non default KCColumnFormat for this column.
      */
-    ColumnFormat* nonDefaultColumnFormat(int _column, bool force_creation = true);
+    KCColumnFormat* nonDefaultColumnFormat(int _column, bool force_creation = true);
 
     /**
      * \ingroup ColumnRowFormat
      * \return the first non-default row format
      */
-    ColumnFormat* firstCol() const;
+    KCColumnFormat* firstCol() const;
 
     /**
      * \ingroup ColumnRowFormat
@@ -721,7 +721,7 @@ public:
      * \ingroup ColumnRowFormat
      * Insert the non-default column format \p columnFormat.
      */
-    void insertColumnFormat(ColumnFormat* columnFormat);
+    void insertColumnFormat(KCColumnFormat* columnFormat);
 
     /**
      * \ingroup ColumnRowFormat

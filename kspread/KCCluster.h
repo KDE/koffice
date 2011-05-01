@@ -29,7 +29,7 @@
 class QPoint;
 
 class KCCell;
-class ColumnFormat;
+class KCColumnFormat;
 class KCRowFormat;
 
 /**
@@ -270,12 +270,12 @@ public:
     ColumnCluster();
     ~ColumnCluster();
 
-    const ColumnFormat* lookup(int col) const;
-    ColumnFormat* lookup(int col);
+    const KCColumnFormat* lookup(int col) const;
+    KCColumnFormat* lookup(int col);
 
     void clear();
 
-    void insertElement(ColumnFormat*, int col);
+    void insertElement(KCColumnFormat*, int col);
     void removeElement(int col);
 
     bool insertColumn(int col);
@@ -284,10 +284,10 @@ public:
     void setAutoDelete(bool);
     bool autoDelete() const;
 
-    ColumnFormat* first() const {
+    KCColumnFormat* first() const {
         return m_first;
     }
-    ColumnFormat* next(int col) const;
+    KCColumnFormat* next(int col) const;
 
     void operator=(const ColumnCluster& other);
 
@@ -295,8 +295,8 @@ private:
     ColumnCluster(const ColumnCluster& other);
 
 private:
-    ColumnFormat*** m_cluster;
-    ColumnFormat* m_first;
+    KCColumnFormat*** m_cluster;
+    KCColumnFormat* m_first;
     bool m_autoDelete;
 };
 

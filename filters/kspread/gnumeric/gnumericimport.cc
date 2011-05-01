@@ -341,7 +341,7 @@ void setColInfo(QDomNode * sheet, KCSheet * table)
         int column_number;
 
         column_number = e.attribute("No").toInt() + 1;
-        ColumnFormat *cl = new ColumnFormat();
+        KCColumnFormat *cl = new KCColumnFormat();
         cl->setSheet(table);
         cl->setColumn(column_number);
         if (e.hasAttribute("Hidden")) {

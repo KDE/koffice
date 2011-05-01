@@ -26,7 +26,7 @@
 
 #include "AbstractRegionCommand.h"
 
-class ColumnFormat;
+class KCColumnFormat;
 class KCRowFormat;
 
 /**
@@ -160,7 +160,7 @@ public:
     InsertDeleteColumnManipulator(QUndoCommand *parent = 0);
     virtual ~InsertDeleteColumnManipulator();
 
-    void setTemplate(const ColumnFormat &columnFormat);
+    void setTemplate(const KCColumnFormat &columnFormat);
     virtual void setReverse(bool reverse);
 
 protected:
@@ -172,7 +172,7 @@ protected:
 private:
     enum Mode { Insert, Delete };
     Mode m_mode;
-    ColumnFormat *m_template;
+    KCColumnFormat *m_template;
 };
 
 

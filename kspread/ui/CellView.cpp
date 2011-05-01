@@ -1408,7 +1408,7 @@ QString CellView::textDisplaying(const QFontMetricsF& fm, const KCCell& cell)
         len = d->width;
 #if 0
         for (int i = cell.column(); i <= cell.column() + d->obscuredCellsX; i++) {
-            ColumnFormat *cl2 = cell.sheet()->columnFormat(i);
+            KCColumnFormat *cl2 = cell.sheet()->columnFormat(i);
             len += cl2->width() - 1.0; //-1.0 because the pixel in between 2 cells is shared between both cells
         }
 #endif
@@ -1476,7 +1476,7 @@ QString CellView::textDisplaying(const QFontMetricsF& fm, const KCCell& cell)
         len = d->width;
 #if 0
         for (int i = cell.column(); i <= cell.column() + d->obscuredCellsX; i++) {
-            ColumnFormat  *cl2 = cell.sheet()->columnFormat(i);
+            KCColumnFormat  *cl2 = cell.sheet()->columnFormat(i);
 
             // -1.0 because the pixel in between 2 cells is shared between both cells
             len += cl2->width() - 1.0;

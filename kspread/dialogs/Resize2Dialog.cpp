@@ -117,7 +117,7 @@ ResizeColumn::ResizeColumn(QWidget* parent, Selection* selection)
     setButtons(Ok | Cancel | Default);
     m_selection = selection;
 
-    const ColumnFormat* cl = m_selection->activeSheet()->columnFormat(selection->lastRange().left());
+    const KCColumnFormat* cl = m_selection->activeSheet()->columnFormat(selection->lastRange().left());
     columnWidth = cl->width();
 
     QWidget *page = new QWidget();

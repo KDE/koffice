@@ -815,7 +815,7 @@ QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool exten
     /* how many cells must we move to get to the next cell? */
     int offset = 0;
     const KCRowFormat *rl = 0;
-    const ColumnFormat *cl = 0;
+    const KCColumnFormat *cl = 0;
     switch (direction) {
         /* for each case, figure out how far away the next cell is and then keep
             going one row/col at a time after that until a visible row/col is found
@@ -1171,7 +1171,7 @@ QList<QAction*> CellToolBase::Private::popupActionList() const
             actions.append(q->action("hideColumn"));
 
             q->action("showSelColumns")->setEnabled(false);
-            const ColumnFormat* columnFormat;
+            const KCColumnFormat* columnFormat;
             KCRegion::ConstIterator endOfList = q->selection()->constEnd();
             for (KCRegion::ConstIterator it = q->selection()->constBegin(); it != endOfList; ++it) {
                 QRect range = (*it)->rect();

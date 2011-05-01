@@ -54,7 +54,7 @@ void ColumnStyleCommand::setPageBreak(bool pageBreak)
     m_pageBreak = pageBreak;
 }
 
-void ColumnStyleCommand::setTemplate(const ColumnFormat &columnFormat)
+void ColumnStyleCommand::setTemplate(const KCColumnFormat &columnFormat)
 {
     m_width = columnFormat.width();
     m_hidden = columnFormat.isHidden();
@@ -70,9 +70,9 @@ bool ColumnStyleCommand::mainProcessing()
         for (int column = range.left(); column <= range.right(); ++column) {
             // Save the old style.
             if (m_firstrun) {
-                const ColumnFormat *columnFormat = m_sheet->columnFormat(column);
+                const KCColumnFormat *columnFormat = m_sheet->columnFormat(column);
                 if (!columnFormat->isDefault() && !m_columnFormats.contains(column)) {
-                    m_columnFormats.insert(column, new ColumnFormat(*columnFormat));
+                    m_columnFormats.insert(column, new KCColumnFormat(*columnFormat));
                 }
             }
 
@@ -85,7 +85,7 @@ bool ColumnStyleCommand::mainProcessing()
                     m_sheet->deleteColumnFormat(column);
                 }
             } else {
-                ColumnFormat *columnFormat = m_sheet->nonDefaultColumnFormat(column);
+                KCColumnFormat *columnFormat = m_sheet->nonDefaultColumnFormat(column);
                 columnFormat->setWidth(m_width);
                 columnFormat->setHidden(m_hidden);
                 columnFormat->setPageBreak(m_pageBreak);

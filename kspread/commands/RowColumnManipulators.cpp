@@ -53,7 +53,7 @@ bool ResizeColumnManipulator::process(Element* element)
 {
     QRect range = element->rect();
     for (int col = range.right(); col >= range.left(); --col) {
-        ColumnFormat *format = m_sheet->nonDefaultColumnFormat(col);
+        KCColumnFormat *format = m_sheet->nonDefaultColumnFormat(col);
         if (m_firstrun)
             m_oldSizes[col] = format->width();
         format->setWidth(qMax(2.0, m_reverse ? m_oldSizes[col] : m_newSize));
@@ -117,7 +117,7 @@ bool HideShowManipulator::process(Element* element)
     QRect range = element->rect();
     if (m_manipulateColumns) {
         for (int col = range.left(); col <= range.right(); ++col) {
-            ColumnFormat* format = m_sheet->nonDefaultColumnFormat(col);
+            KCColumnFormat* format = m_sheet->nonDefaultColumnFormat(col);
             format->setHidden(!m_reverse);
         }
     }
@@ -261,7 +261,7 @@ bool AdjustColumnRowManipulator::process(Element* element)
                     int col = cell.column();
                     if (!cell.isEmpty() && !cell.isPartOfMerged()) {
                         if (widths.contains(col) && widths[col] != -1.0) {
-                            ColumnFormat* format = sheet->nonDefaultColumnFormat(col);
+                            KCColumnFormat* format = sheet->nonDefaultColumnFormat(col);
                             if (qAbs(format->width() - widths[col]) > DBL_EPSILON) {
                                 format->setWidth(qMax(2.0, widths[col]));
                             }
@@ -273,7 +273,7 @@ bool AdjustColumnRowManipulator::process(Element* element)
         } else {
             for (int col = range.left(); col <= range.right(); ++col) {
                 if (widths.contains(col) && widths[col] != -1.0) {
-                    ColumnFormat* format = sheet->nonDefaultColumnFormat(col);
+                    KCColumnFormat* format = sheet->nonDefaultColumnFormat(col);
                     if (qAbs(format->width() - widths[col]) > DBL_EPSILON) {
                         format->setWidth(qMax(2.0, widths[col]));
                     }
@@ -569,10 +569,10 @@ InsertDeleteColumnManipulator::~InsertDeleteColumnManipulator()
     delete m_template;
 }
 
-void InsertDeleteColumnManipulator::setTemplate(const ColumnFormat &columnFormat)
+void InsertDeleteColumnManipulator::setTemplate(const KCColumnFormat &columnFormat)
 {
     delete m_template;
-    m_template = new ColumnFormat(columnFormat);
+    m_template = new KCColumnFormat(columnFormat);
 }
 
 void InsertDeleteColumnManipulator::setReverse(bool reverse)
