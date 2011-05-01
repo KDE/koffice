@@ -19,7 +19,7 @@
 */
 
 // Local
-#include "Cluster.h"
+#include "KCCluster.h"
 
 #include <stdlib.h>
 
@@ -31,12 +31,12 @@
 #if 0
 /****************************************************
  *
- * Cluster
+ * KCCluster
  *
  ****************************************************/
 
 /* Generate a matrix LEVEL1 with the size LEVEL1*LEVEL1 */
-Cluster::Cluster()
+KCCluster::KCCluster()
         : m_first(0), m_autoDelete(false), m_biggestX(0), m_biggestY(0)
 {
     m_cluster = (KCCell***)malloc(KSPREAD_CLUSTER_LEVEL1 * KSPREAD_CLUSTER_LEVEL1 * sizeof(KCCell**));
@@ -47,7 +47,7 @@ Cluster::Cluster()
 }
 
 /* Delete the matrix LEVEL1 and all existing LEVEL2 matrizes */
-Cluster::~Cluster()
+KCCluster::~KCCluster()
 {
 // Can't we use clear(), to remove double code - Philipp?
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x)
@@ -71,7 +71,7 @@ Cluster::~Cluster()
     free(m_cluster);
 }
 
-void Cluster::clear()
+void KCCluster::clear()
 {
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x)
         for (int y = 0; y < KSPREAD_CLUSTER_LEVEL1; ++y) {
@@ -95,10 +95,10 @@ void Cluster::clear()
     m_biggestX = m_biggestY = 0;
 }
 
-KCCell* Cluster::lookup(int x, int y) const
+KCCell* KCCluster::lookup(int x, int y) const
 {
     if (x >= KSPREAD_CLUSTER_MAX || x < 0 || y >= KSPREAD_CLUSTER_MAX || y < 0) {
-        kDebug(36001) << "Cluster::lookup: invalid column or row value (col:"
+        kDebug(36001) << "KCCluster::lookup: invalid column or row value (col:"
         << x << "  | row: " << y << ")" << endl;
         return 0;
     }
@@ -115,10 +115,10 @@ KCCell* Cluster::lookup(int x, int y) const
 }
 
 /* Paste a cell in LEVEL2 (it's more paste than insert) */
-void Cluster::insert(KCCell* cell, int x, int y)
+void KCCluster::insert(KCCell* cell, int x, int y)
 {
     if (x >= KSPREAD_CLUSTER_MAX || x < 0 || y >= KSPREAD_CLUSTER_MAX || y < 0) {
-        kDebug(36001) << "Cluster::insert: invalid column or row value (col:"
+        kDebug(36001) << "KCCluster::insert: invalid column or row value (col:"
         << x << "  | row: " << y << ")" << endl;
         return;
     }
@@ -154,10 +154,10 @@ void Cluster::insert(KCCell* cell, int x, int y)
 }
 
 /* Removes the cell of a matrix, the matrix itself keeps unchanged */
-void Cluster::remove(int x, int y)
+void KCCluster::remove(int x, int y)
 {
     if (x >= KSPREAD_CLUSTER_MAX || x < 0 || y >= KSPREAD_CLUSTER_MAX || y < 0) {
-        kDebug(36001) << "Cluster::remove: invalid column or row value (col:"
+        kDebug(36001) << "KCCluster::remove: invalid column or row value (col:"
         << x << "  | row: " << y << ")" << endl;
         return;
     }
@@ -196,52 +196,52 @@ void Cluster::remove(int x, int y)
     }
 }
 
-bool Cluster::insertShiftRight(const QPoint& marker)
+bool KCCluster::insertShiftRight(const QPoint& marker)
 {
     bool dummy;
     return insertShiftRight(marker, dummy);
 }
 
-bool Cluster::insertShiftDown(const QPoint& marker)
+bool KCCluster::insertShiftDown(const QPoint& marker)
 {
     bool dummy;
     return insertShiftDown(marker, dummy);
 }
 
-void Cluster::removeShiftUp(const QPoint& marker)
+void KCCluster::removeShiftUp(const QPoint& marker)
 {
     bool dummy;
     removeShiftUp(marker, dummy);
 }
 
-void Cluster::removeShiftLeft(const QPoint& marker)
+void KCCluster::removeShiftLeft(const QPoint& marker)
 {
     bool dummy;
     removeShiftLeft(marker, dummy);
 }
 
-void Cluster::setAutoDelete(bool b)
+void KCCluster::setAutoDelete(bool b)
 {
     m_autoDelete = b;
 }
 
-bool Cluster::autoDelete() const
+bool KCCluster::autoDelete() const
 {
     return m_autoDelete;
 }
 
-KCCell* Cluster::firstCell() const
+KCCell* KCCluster::firstCell() const
 {
     return m_first;
 }
 
-bool Cluster::insertShiftRight(const QPoint& marker, bool& work)
+bool KCCluster::insertShiftRight(const QPoint& marker, bool& work)
 {
     work = false;
 
     if (marker.x() >= KSPREAD_CLUSTER_MAX || marker.x() < 0 ||
             marker.y() >= KSPREAD_CLUSTER_MAX || marker.y() < 0) {
-        kDebug(36001) << "Cluster::insertShiftRight: invalid column or row value (col:"
+        kDebug(36001) << "KCCluster::insertShiftRight: invalid column or row value (col:"
         << marker.x() << "  | row: " << marker.y() << ")" << endl;
         return false;
     }
@@ -287,13 +287,13 @@ bool Cluster::insertShiftRight(const QPoint& marker, bool& work)
     return true;
 }
 
-bool Cluster::insertShiftDown(const QPoint& marker, bool& work)
+bool KCCluster::insertShiftDown(const QPoint& marker, bool& work)
 {
     work = false;
 
     if (marker.x() >= KSPREAD_CLUSTER_MAX || marker.x() < 0 ||
             marker.y() >= KSPREAD_CLUSTER_MAX || marker.y() < 0) {
-        kDebug(36001) << "Cluster::insertShiftDown: invalid column or row value (col:"
+        kDebug(36001) << "KCCluster::insertShiftDown: invalid column or row value (col:"
         << marker.x() << "  | row: " << marker.y() << ")" << endl;
         return false;
     }
@@ -340,10 +340,10 @@ bool Cluster::insertShiftDown(const QPoint& marker, bool& work)
     return true;
 }
 
-bool Cluster::insertColumn(int col)
+bool KCCluster::insertColumn(int col)
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
-        kDebug(36001) << "Cluster::insertColumn: invalid column value (col:"
+        kDebug(36001) << "KCCluster::insertColumn: invalid column value (col:"
         << col << ")" << endl;
         return false;
     }
@@ -367,10 +367,10 @@ bool Cluster::insertColumn(int col)
     return true;
 }
 
-bool Cluster::insertRow(int row)
+bool KCCluster::insertRow(int row)
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
-        kDebug(36001) << "Cluster::insertRow: invalid row value (row:"
+        kDebug(36001) << "KCCluster::insertRow: invalid row value (row:"
         << row << ")" << endl;
         return false;
     }
@@ -394,13 +394,13 @@ bool Cluster::insertRow(int row)
     return true;
 }
 
-void Cluster::removeShiftUp(const QPoint& marker, bool& work)
+void KCCluster::removeShiftUp(const QPoint& marker, bool& work)
 {
     work = false;
 
     if (marker.x() >= KSPREAD_CLUSTER_MAX || marker.x() < 0 ||
             marker.y() >= KSPREAD_CLUSTER_MAX || marker.y() < 0) {
-        kDebug(36001) << "Cluster::removeShiftUp: invalid column or row value (col:"
+        kDebug(36001) << "KCCluster::removeShiftUp: invalid column or row value (col:"
         << marker.x() << "  | row: " << marker.y() << ")" << endl;
         return;
     }
@@ -437,13 +437,13 @@ void Cluster::removeShiftUp(const QPoint& marker, bool& work)
     setAutoDelete(a);
 }
 
-void Cluster::removeShiftLeft(const QPoint& marker, bool& work)
+void KCCluster::removeShiftLeft(const QPoint& marker, bool& work)
 {
     work = false;
 
     if (marker.x() >= KSPREAD_CLUSTER_MAX || marker.x() < 0 ||
             marker.y() >= KSPREAD_CLUSTER_MAX || marker.y() < 0) {
-        kDebug(36001) << "Cluster::removeShiftLeft: invalid column or row value (col:"
+        kDebug(36001) << "KCCluster::removeShiftLeft: invalid column or row value (col:"
         << marker.x() << "  | row: " << marker.y() << ")" << endl;
         return;
     }
@@ -480,10 +480,10 @@ void Cluster::removeShiftLeft(const QPoint& marker, bool& work)
     setAutoDelete(a);
 }
 
-void Cluster::removeColumn(int col)
+void KCCluster::removeColumn(int col)
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
-        kDebug(36001) << "Cluster::removeColumn: invalid column value (col:"
+        kDebug(36001) << "KCCluster::removeColumn: invalid column value (col:"
         << col << ")" << endl;
         return;
     }
@@ -506,10 +506,10 @@ void Cluster::removeColumn(int col)
     }
 }
 
-void Cluster::removeRow(int row)
+void KCCluster::removeRow(int row)
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
-        kDebug(36001) << "Cluster::removeRow: invalid row value (row:"
+        kDebug(36001) << "KCCluster::removeRow: invalid row value (row:"
         << row << ")" << endl;
         return;
     }
@@ -532,10 +532,10 @@ void Cluster::removeRow(int row)
     }
 }
 
-void Cluster::clearColumn(int col)
+void KCCluster::clearColumn(int col)
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
-        kDebug(36001) << "Cluster::clearColumn: invalid column value (col:"
+        kDebug(36001) << "KCCluster::clearColumn: invalid column value (col:"
         << col << ")" << endl;
         return;
     }
@@ -554,10 +554,10 @@ void Cluster::clearColumn(int col)
     }
 }
 
-void Cluster::clearRow(int row)
+void KCCluster::clearRow(int row)
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
-        kDebug(36001) << "Cluster::clearRow: invalid row value (row:"
+        kDebug(36001) << "KCCluster::clearRow: invalid row value (row:"
         << row << ")" << endl;
         return;
     }
@@ -576,7 +576,7 @@ void Cluster::clearRow(int row)
     }
 }
 
-KCValue Cluster::valueRange(int col1, int row1,
+KCValue KCCluster::valueRange(int col1, int row1,
                           int col2, int row2) const
 {
     KCValue empty;
@@ -600,7 +600,7 @@ KCValue Cluster::valueRange(int col1, int row1,
     return makeArray(col1, row1, col2, row2);
 }
 
-KCValue Cluster::makeArray(int col1, int row1, int col2, int row2) const
+KCValue KCCluster::makeArray(int col1, int row1, int col2, int row2) const
 {
     // this generates an array of values
     KCValue array(KCValue::Array);
@@ -614,7 +614,7 @@ KCValue Cluster::makeArray(int col1, int row1, int col2, int row2) const
     return array;
 }
 
-KCCell* Cluster::getFirstCellColumn(int col) const
+KCCell* KCCluster::getFirstCellColumn(int col) const
 {
     KCCell* cell = lookup(col, 1);
 
@@ -624,7 +624,7 @@ KCCell* Cluster::getFirstCellColumn(int col) const
     return cell;
 }
 
-KCCell* Cluster::getLastCellColumn(int col) const
+KCCell* KCCluster::getLastCellColumn(int col) const
 {
     KCCell* cell = lookup(col, KS_rowMax);
 
@@ -634,7 +634,7 @@ KCCell* Cluster::getLastCellColumn(int col) const
     return cell;
 }
 
-KCCell* Cluster::getFirstCellRow(int row) const
+KCCell* KCCluster::getFirstCellRow(int row) const
 {
     KCCell* cell = lookup(1, row);
 
@@ -644,7 +644,7 @@ KCCell* Cluster::getFirstCellRow(int row) const
     return cell;
 }
 
-KCCell* Cluster::getLastCellRow(int row) const
+KCCell* KCCluster::getLastCellRow(int row) const
 {
     KCCell* cell = lookup(KS_colMax, row);
 
@@ -654,7 +654,7 @@ KCCell* Cluster::getLastCellRow(int row) const
     return cell;
 }
 
-KCCell* Cluster::getNextCellUp(int col, int row) const
+KCCell* KCCluster::getNextCellUp(int col, int row) const
 {
     int cx = col / KSPREAD_CLUSTER_LEVEL2;
     int cy = (row - 1) / KSPREAD_CLUSTER_LEVEL2;
@@ -679,7 +679,7 @@ KCCell* Cluster::getNextCellUp(int col, int row) const
     return 0;
 }
 
-KCCell* Cluster::getNextCellDown(int col, int row) const
+KCCell* KCCluster::getNextCellDown(int col, int row) const
 {
     int cx = col / KSPREAD_CLUSTER_LEVEL2;
     int cy = (row + 1) / KSPREAD_CLUSTER_LEVEL2;
@@ -704,7 +704,7 @@ KCCell* Cluster::getNextCellDown(int col, int row) const
     return 0;
 }
 
-KCCell* Cluster::getNextCellLeft(int col, int row) const
+KCCell* KCCluster::getNextCellLeft(int col, int row) const
 {
     int cx = (col - 1) / KSPREAD_CLUSTER_LEVEL2;
     int cy = row / KSPREAD_CLUSTER_LEVEL2;
@@ -729,7 +729,7 @@ KCCell* Cluster::getNextCellLeft(int col, int row) const
     return 0;
 }
 
-KCCell* Cluster::getNextCellRight(int col, int row) const
+KCCell* KCCluster::getNextCellRight(int col, int row) const
 {
     int cx = (col + 1) / KSPREAD_CLUSTER_LEVEL2;
     int cy = row / KSPREAD_CLUSTER_LEVEL2;

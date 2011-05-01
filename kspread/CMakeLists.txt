@@ -198,7 +198,7 @@ set (kspreadodf_LIB_SRCS
     KCCalculationSettings.cpp
     KCCell.cpp
     KCCellStorage.cpp
-    Cluster.cpp
+    KCCluster.cpp
     KCCondition.cpp
     KCCurrency.cpp
     Damages.cpp

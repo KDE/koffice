@@ -68,13 +68,13 @@ are equal in both matrizes, but normally it will be the regular case, that you h
 a lot of rows than columns. Maybe something like LEVEL1=128/256 and LEVEL2=256/128 (x/y), still keeping
 2^15 values/cells in each direction (benefit: you won't loose memory in empty columns).
 */
-class Cluster
+class KCCluster
 {
     friend class ClusterTest;
 
 public:
-    Cluster();
-    ~Cluster();
+    KCCluster();
+    ~KCCluster();
 
     KCCell* lookup(int x, int y) const;
 
@@ -262,7 +262,7 @@ private:
 /**
  * \ingroup Storage
  * A pointer map to all column formats.
- * \see Cluster
+ * \see KCCluster
  */
 class ColumnCluster
 {
@@ -303,7 +303,7 @@ private:
 /**
  * \ingroup Storage
  * A pointer map to all row formats.
- * \see Cluster
+ * \see KCCluster
  */
 class RowCluster
 {

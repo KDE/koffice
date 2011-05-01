@@ -65,7 +65,7 @@
 #include <KoProgressUpdater.h>
 
 #include "KCCellStorage.h"
-#include "Cluster.h"
+#include "KCCluster.h"
 #include "KCCondition.h"
 #include "Damages.h"
 #include "DependencyManager.h"

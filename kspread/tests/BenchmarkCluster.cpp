@@ -18,7 +18,7 @@
 */
 
 #include "BenchmarkHelper.h"
-#include "Cluster.h"
+#include "KCCluster.h"
 #include "Global.h"
 
 #include "BenchmarkCluster.h"
@@ -27,7 +27,7 @@ class KCCell;
 
 void ClusterBenchmark::testInsertionPerformance()
 {
-    Cluster storage;
+    KCCluster storage;
     KCCell* cell = 0;
     qDebug() << "measuring loading-like insertion...";
     Time::tval start = 0;
@@ -85,7 +85,7 @@ void ClusterBenchmark::testLookupPerformance()
 #endif
     };
 
-    Cluster storage;
+    KCCluster storage;
     KCCell* cell = 0;
 
     for (uint sc = 0; sc < sizeof(scenarios) / sizeof(scenarios[0]) / 2; sc++) {
@@ -137,7 +137,7 @@ void ClusterBenchmark::testLookupPerformance()
 
 void ClusterBenchmark::testInsertColumnsPerformance()
 {
-    Cluster storage;
+    KCCluster storage;
     KCCell* cell = 0;
     for (int c = 1; c <= KS_colMax; ++c)
         storage.insert(cell, c, 1);
@@ -151,7 +151,7 @@ void ClusterBenchmark::testInsertColumnsPerformance()
 
 void ClusterBenchmark::testDeleteColumnsPerformance()
 {
-    Cluster storage;
+    KCCluster storage;
     KCCell* cell = 0;
     for (int c = 1; c <= KS_colMax; ++c)
         storage.insert(cell, c, 1);
@@ -165,7 +165,7 @@ void ClusterBenchmark::testDeleteColumnsPerformance()
 
 void ClusterBenchmark::testInsertRowsPerformance()
 {
-    Cluster storage;
+    KCCluster storage;
     KCCell* cell = 0;
     for (int r = 1; r <= KS_rowMax; ++r)
         storage.insert(cell, 1, r);
@@ -179,7 +179,7 @@ void ClusterBenchmark::testInsertRowsPerformance()
 
 void ClusterBenchmark::testDeleteRowsPerformance()
 {
-    Cluster storage;
+    KCCluster storage;
     KCCell* cell = 0;
     for (int r = 1; r <= KS_rowMax; ++r)
         storage.insert(cell, 1, r);
@@ -193,7 +193,7 @@ void ClusterBenchmark::testDeleteRowsPerformance()
 
 void ClusterBenchmark::testShiftLeftPerformance()
 {
-    Cluster storage;
+    KCCluster storage;
     KCCell* cell = 0;
     for (int c = 1; c <= KS_colMax; ++c)
         storage.insert(cell, c, 1);
@@ -207,7 +207,7 @@ void ClusterBenchmark::testShiftLeftPerformance()
 
 void ClusterBenchmark::testShiftRightPerformance()
 {
-    Cluster storage;
+    KCCluster storage;
     KCCell* cell = 0;
     for (int c = 1; c <= KS_colMax; ++c)
         storage.insert(cell, c, 1);
@@ -221,7 +221,7 @@ void ClusterBenchmark::testShiftRightPerformance()
 
 void ClusterBenchmark::testShiftUpPerformance()
 {
-    Cluster storage;
+    KCCluster storage;
     KCCell* cell = 0;
     for (int r = 1; r <= KS_rowMax; ++r)
         storage.insert(cell, 1, r);
@@ -235,7 +235,7 @@ void ClusterBenchmark::testShiftUpPerformance()
 
 void ClusterBenchmark::testShiftDownPerformance()
 {
-    Cluster storage;
+    KCCluster storage;
     KCCell* cell = 0;
     for (int r = 1; r <= KS_rowMax; ++r)
         storage.insert(cell, 1, r);
