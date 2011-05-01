@@ -39,7 +39,7 @@
 
 // KSpread
 #include "KCCellStorage.h"
-#include "FormulaStorage.h"
+#include "KCFormulaStorage.h"
 #include "LoadingInfo.h"
 #include "KCMap.h"
 #include "KCRegion.h"
@@ -97,7 +97,7 @@ void NamedAreaManager::remove(const QString& name)
     const QList<KCSheet*> sheets = namedArea.sheet->map()->sheetList();
     foreach(KCSheet* sheet, sheets) {
         const QString tmp = '\'' + name + '\'';
-        const FormulaStorage* const storage = sheet->formulaStorage();
+        const KCFormulaStorage* const storage = sheet->formulaStorage();
         for (int c = 0; c < storage->count(); ++c) {
             if (storage->data(c).expression().contains(tmp)) {
                 KCCell(sheet, storage->col(c), storage->row(c)).makeFormula();

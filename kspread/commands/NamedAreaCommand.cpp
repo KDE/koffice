@@ -22,7 +22,7 @@
 #include "klocale.h"
 
 #include "Damages.h"
-#include "FormulaStorage.h"
+#include "KCFormulaStorage.h"
 #include "kspread_limits.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
@@ -90,7 +90,7 @@ bool NamedAreaCommand::postProcessing()
     KCMap* const map = m_sheet->map();
     foreach(KCSheet* sheet, map->sheetList()) {
         const QString tmp = '\'' + m_areaName + '\'';
-        const FormulaStorage* const storage = sheet->formulaStorage();
+        const KCFormulaStorage* const storage = sheet->formulaStorage();
         for (int c = 0; c < storage->count(); ++c) {
             if (storage->data(c).expression().contains(tmp)) {
                 KCCell cell(sheet, storage->col(c), storage->row(c));

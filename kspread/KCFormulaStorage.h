@@ -29,10 +29,10 @@
  * \ingroup KCValue
  * Stores formulas.
  */
-class FormulaStorage : public PointStorage<KCFormula>
+class KCFormulaStorage : public PointStorage<KCFormula>
 {
 public:
-    FormulaStorage& operator=(const PointStorage<KCFormula>& o) {
+    KCFormulaStorage& operator=(const PointStorage<KCFormula>& o) {
         PointStorage<KCFormula>::operator=(o);
         return *this;
     }

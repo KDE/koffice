@@ -33,7 +33,7 @@
 #include "KCConditionsStorage.h"
 #include "Damages.h"
 #include "KCDependencyManager.h"
-#include "FormulaStorage.h"
+#include "KCFormulaStorage.h"
 #include "KCMap.h"
 #include "ModelSupport.h"
 #include "RecalcManager.h"
@@ -66,7 +66,7 @@ public:
             , commentStorage(new CommentStorage(sheet->map()))
             , conditionsStorage(new KCConditionsStorage(sheet->map()))
             , databaseStorage(new DatabaseStorage(sheet->map()))
-            , formulaStorage(new FormulaStorage())
+            , formulaStorage(new KCFormulaStorage())
             , fusionStorage(new FusionStorage(sheet->map()))
             , linkStorage(new LinkStorage())
             , matrixStorage(new MatrixStorage(sheet->map()))
@@ -85,7 +85,7 @@ public:
             , commentStorage(new CommentStorage(*other.commentStorage))
             , conditionsStorage(new KCConditionsStorage(*other.conditionsStorage))
             , databaseStorage(new DatabaseStorage(*other.databaseStorage))
-            , formulaStorage(new FormulaStorage(*other.formulaStorage))
+            , formulaStorage(new KCFormulaStorage(*other.formulaStorage))
             , fusionStorage(new FusionStorage(*other.fusionStorage))
             , linkStorage(new LinkStorage(*other.linkStorage))
             , matrixStorage(new MatrixStorage(*other.matrixStorage))
@@ -123,7 +123,7 @@ public:
     CommentStorage*         commentStorage;
     KCConditionsStorage*      conditionsStorage;
     DatabaseStorage*        databaseStorage;
-    FormulaStorage*         formulaStorage;
+    KCFormulaStorage*         formulaStorage;
     FusionStorage*          fusionStorage;
     LinkStorage*            linkStorage;
     MatrixStorage*          matrixStorage;
@@ -1420,7 +1420,7 @@ const KCConditionsStorage* KCCellStorage::conditionsStorage() const
     return d->conditionsStorage;
 }
 
-const FormulaStorage* KCCellStorage::formulaStorage() const
+const KCFormulaStorage* KCCellStorage::formulaStorage() const
 {
     return d->formulaStorage;
 }

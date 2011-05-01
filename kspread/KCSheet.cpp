@@ -70,7 +70,7 @@
 #include "Damages.h"
 #include "KCDependencyManager.h"
 #include "KCDocBase.h"
-#include "FormulaStorage.h"
+#include "KCFormulaStorage.h"
 #include "Global.h"
 #include "HeaderFooter.h"
 #include "LoadingInfo.h"
@@ -505,7 +505,7 @@ const KCConditionsStorage* KCSheet::conditionsStorage() const
     return d->cellStorage->conditionsStorage();
 }
 
-const FormulaStorage* KCSheet::formulaStorage() const
+const KCFormulaStorage* KCSheet::formulaStorage() const
 {
     return d->cellStorage->formulaStorage();
 }

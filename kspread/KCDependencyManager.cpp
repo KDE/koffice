@@ -29,7 +29,7 @@
 #include "KCCell.h"
 #include "KCCellStorage.h"
 #include "KCFormula.h"
-#include "FormulaStorage.h"
+#include "KCFormulaStorage.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"

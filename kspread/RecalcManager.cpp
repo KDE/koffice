@@ -28,7 +28,7 @@
 #include "KCCellStorage.h"
 #include "KCDependencyManager.h"
 #include "KCFormula.h"
-#include "FormulaStorage.h"
+#include "KCFormulaStorage.h"
 #include "KCMap.h"
 #include "KCSheet.h"
 #include "KCRegion.h"

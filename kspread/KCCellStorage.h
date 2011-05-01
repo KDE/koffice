@@ -41,7 +41,7 @@ class CommentStorage;
 class Conditions;
 class KCConditionsStorage;
 class KCFormula;
-class FormulaStorage;
+class KCFormulaStorage;
 class FusionStorage;
 class LinkStorage;
 class KCRegion;
@@ -372,7 +372,7 @@ public:
     const KCBindingStorage* bindingStorage() const;
     const CommentStorage* commentStorage() const;
     const KCConditionsStorage* conditionsStorage() const;
-    const FormulaStorage* formulaStorage() const;
+    const KCFormulaStorage* formulaStorage() const;
     const FusionStorage* fusionStorage() const;
     const LinkStorage* linkStorage() const;
     const StyleStorage* styleStorage() const;
