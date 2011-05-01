@@ -34,7 +34,7 @@
 #include "KCStyleManager.h"
 #include "Util.h"
 #include "KCValueCalc.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 #include "ValueParser.h"
 
 #include <KoGenStyles.h>
@@ -283,7 +283,7 @@ void KCConditions::setDefaultStyle(const KCStyle &style)
     d->defaultStyle = style;
 }
 
-void KCConditions::saveOdfConditions(KoGenStyle &currentCellStyle, ValueConverter *converter) const
+void KCConditions::saveOdfConditions(KoGenStyle &currentCellStyle, KCValueConverter *converter) const
 {
     //todo fix me with kspread old format!!!
     if (d->conditionList.isEmpty())
@@ -302,7 +302,7 @@ void KCConditions::saveOdfConditions(KoGenStyle &currentCellStyle, ValueConverte
     }
 }
 
-QString KCConditions::saveOdfConditionValue(const KCConditional &condition, ValueConverter* converter) const
+QString KCConditions::saveOdfConditionValue(const KCConditional &condition, KCValueConverter* converter) const
 {
     //we can also compare text value.
     //todo adapt it.
@@ -351,7 +351,7 @@ QString KCConditions::saveOdfConditionValue(const KCConditional &condition, Valu
 }
 
 
-QDomElement KCConditions::saveConditions(QDomDocument &doc, ValueConverter *converter) const
+QDomElement KCConditions::saveConditions(QDomDocument &doc, KCValueConverter *converter) const
 {
     QDomElement conditions = doc.createElement("condition");
     QLinkedList<KCConditional>::const_iterator it;

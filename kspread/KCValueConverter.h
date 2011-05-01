@@ -29,13 +29,13 @@ class ValueParser;
  * \ingroup KCValue
  * Converts between the different KCValue types.
  */
-class KSPREAD_EXPORT ValueConverter
+class KSPREAD_EXPORT KCValueConverter
 {
 public:
     /**
      * Constructor.
      */
-    explicit ValueConverter(const ValueParser* parser);
+    explicit KCValueConverter(const ValueParser* parser);
 
     /**
      * Returns the calculation settings this ValueFormatter uses.

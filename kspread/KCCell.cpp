@@ -67,7 +67,7 @@
 #include "Util.h"
 #include "KCValue.h"
 #include "KCValidity.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 #include "ValueFormatter.h"
 #include "ValueParser.h"
 #include "KCStyleStorage.h"

@@ -29,7 +29,7 @@
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "KCStyleManager.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 #include "ValueParser.h"
 
 // commands
@@ -344,7 +344,7 @@ void ConditionalDialog::init(KCConditional const & tmp, int numCondition)
     KLineEdit * kl2 = 0;
     QString value;
     KCMap *const map = m_selection->activeSheet()->map();
-    ValueConverter *const converter = map->converter();
+    KCValueConverter *const converter = map->converter();
 
     switch (numCondition) {
     case 0:

@@ -29,7 +29,7 @@
 #include "KCMap.h"
 #include "KCSheet.h"
 #include "KCValueCalc.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 #include <float.h>
 #include <math.h>

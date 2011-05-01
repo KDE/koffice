@@ -65,7 +65,7 @@ class KCSheet;
 class KCStyle;
 class KCStyleManager;
 class ValueParser;
-class ValueConverter;
+class KCValueConverter;
 class ValueFormatter;
 class KCValueCalc;
 
@@ -154,7 +154,7 @@ public:
     /**
      * @return the value converter of this Document
      */
-    ValueConverter* converter() const;
+    KCValueConverter* converter() const;
 
     /**
      * @return the value calculator of this Document

@@ -25,7 +25,7 @@
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "KCLocalization.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 #include <kcalendarsystem.h>
 #include <kdebug.h>
@@ -34,7 +34,7 @@
 #include <float.h>
 #include <math.h>
 
-ValueFormatter::ValueFormatter(const ValueConverter* converter)
+ValueFormatter::ValueFormatter(const KCValueConverter* converter)
         : m_converter(converter)
 {
 }

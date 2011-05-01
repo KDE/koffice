@@ -30,7 +30,7 @@
 class KoXmlWriter;
 
 class KCValidity;
-class ValueConverter;
+class KCValueConverter;
 class KCGenValidationStyles;
 
 /**
@@ -40,7 +40,7 @@ class KCGenValidationStyles;
 class KCGenValidationStyle
 {
 public:
-    explicit KCGenValidationStyle(KCValidity *_val = 0, const ValueConverter *converter = 0) {
+    explicit KCGenValidationStyle(KCValidity *_val = 0, const KCValueConverter *converter = 0) {
         initVal(_val, converter);
     }
 
@@ -59,14 +59,14 @@ public:
         return false;
     }
 private:
-    QString createValidationCondition(KCValidity* _val, const ValueConverter *converter);
+    QString createValidationCondition(KCValidity* _val, const KCValueConverter *converter);
     QString createTextValidationCondition(KCValidity* _val);
-    QString createTimeValidationCondition(KCValidity* _val, const ValueConverter *converter);
-    QString createDateValidationCondition(KCValidity* _val, const ValueConverter *converter);
+    QString createTimeValidationCondition(KCValidity* _val, const KCValueConverter *converter);
+    QString createDateValidationCondition(KCValidity* _val, const KCValueConverter *converter);
     QString createNumberValidationCondition(KCValidity* _val);
     QString createListValidationCondition(KCValidity* _val);
 
-    void initVal(KCValidity *_val, const ValueConverter *converter);
+    void initVal(KCValidity *_val, const KCValueConverter *converter);
 
     QString allowEmptyCell;
     QString condition;

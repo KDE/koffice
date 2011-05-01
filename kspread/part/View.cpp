@@ -135,7 +135,7 @@
 #include "ToolRegistry.h"
 #include "Util.h"
 #include "KCValueCalc.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 #include "PrintJob.h"
 
 // commands

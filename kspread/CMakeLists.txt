@@ -230,7 +230,7 @@ set (kspreadodf_LIB_SRCS
     KCValidity.cpp
     KCValue.cpp
     KCValueCalc.cpp
-    ValueConverter.cpp
+    KCValueConverter.cpp
     ValueFormatter.cpp
     ValueParser.cpp
 

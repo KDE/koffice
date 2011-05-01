@@ -33,7 +33,7 @@
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 // commands
 #include "commands/SortManipulator.h"
@@ -84,7 +84,7 @@ public:
         const int itemIndex = model->data(index, Qt::UserRole).toInt();
         const bool hasHeader = mainWidget.m_useHeader->isChecked();
         KCSheet *const sheet = selection->lastSheet();
-        ValueConverter *const converter = sheet->map()->converter();
+        KCValueConverter *const converter = sheet->map()->converter();
 
         if (mainWidget.m_sortVertical->isChecked()) /* data grouped in rows; criteria/header per column */ {
             // Put the old item back into the map of available items.
@@ -235,7 +235,7 @@ void SortDialog::Private::insertIndex(int index, Qt::Orientation orientation) co
 QString SortDialog::Private::itemText(int index, bool useHeader) const
 {
     KCSheet *const sheet = selection->lastSheet();
-    ValueConverter *const converter = sheet->map()->converter();
+    KCValueConverter *const converter = sheet->map()->converter();
 
     if (mainWidget.m_sortHorizontal->isChecked()) /* data grouped in columns; criteria/header per row */ {
         const int col = selection->lastRange().left();

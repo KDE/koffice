@@ -39,7 +39,7 @@
 #include "KCSheet.h"
 #include "KCSheetPrint.h"
 #include "KCRegion.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 // commands
 #include "commands/DataManipulators.h"

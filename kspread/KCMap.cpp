@@ -63,7 +63,7 @@
 #include "KCStyleManager.h"
 #include "KCValidity.h"
 #include "KCValueCalc.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 #include "ValueFormatter.h"
 #include "ValueParser.h"
 
@@ -102,7 +102,7 @@ public:
     KCApplicationSettings* applicationSettings;
     KCCalculationSettings* calculationSettings;
     KCValueCalc* calc;
-    ValueConverter* converter;
+    KCValueConverter* converter;
     ValueFormatter* formatter;
     ValueParser* parser;
 
@@ -143,7 +143,7 @@ KCMap::KCMap(KCDocBase* doc, int syntaxVersion)
     d->calculationSettings = new KCCalculationSettings();
 
     d->parser = new ValueParser(d->calculationSettings);
-    d->converter = new ValueConverter(d->parser);
+    d->converter = new KCValueConverter(d->parser);
     d->calc = new KCValueCalc(d->converter);
     d->formatter = new ValueFormatter(d->converter);
 
@@ -289,7 +289,7 @@ ValueFormatter* KCMap::formatter() const
     return d->formatter;
 }
 
-ValueConverter* KCMap::converter() const
+KCValueConverter* KCMap::converter() const
 {
     return d->converter;
 }

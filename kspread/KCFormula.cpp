@@ -33,7 +33,7 @@
 #include "KCValue.h"
 
 #include "KCValueCalc.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 #include "ValueParser.h"
 
 #include <limits.h>
@@ -1354,7 +1354,7 @@ KCValue KCFormula::Private::valueOrElement(FuncExtra &fe, const stackEntry& entr
 
 // On OO.org Calc and MS Excel operations done with +, -, * and / do fail if one of the values is
 // non-numeric. This differs from formulas like SUM which just ignores non numeric values.
-KCValue numericOrError(const ValueConverter* converter, const KCValue &v)
+KCValue numericOrError(const KCValueConverter* converter, const KCValue &v)
 {
     switch (v.type()) {
     case KCValue::Empty:
@@ -1389,7 +1389,7 @@ KCValue KCFormula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell,
     QVector<KCValue> args;
 
     const KCMap* map = d->sheet ? d->sheet->map() : new KCMap(0 /*document*/);
-    const ValueConverter* converter = map->converter();
+    const KCValueConverter* converter = map->converter();
     KCValueCalc* calc = map->calc();
 
     QSharedPointer<KCFunction> function;

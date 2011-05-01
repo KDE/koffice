@@ -24,7 +24,7 @@
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
 #include "KCValueCalc.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 #include <KLocale>
 

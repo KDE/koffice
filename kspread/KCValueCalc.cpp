@@ -22,7 +22,7 @@
 
 #include "KCCell.h"
 #include "KCNumber.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 #include <kdebug.h>
 #include <errno.h>
@@ -190,7 +190,7 @@ void awDevSqA(KCValueCalc *c, KCValue &res, KCValue val,
 // ****** KCValueCalc ******
 // ***********************
 
-KCValueCalc::KCValueCalc(ValueConverter* c): converter(c)
+KCValueCalc::KCValueCalc(KCValueConverter* c): converter(c)
 {
     // initialize the random number generator
     srand(time(0));
@@ -1753,7 +1753,7 @@ static double ccmath_nbes(double v, double x)
 template <typename func_ptr>
 KCValue CalcBessel(
     func_ptr       *func,
-    ValueConverter *converter,
+    KCValueConverter *converter,
     KCValue v, KCValue x)
 {
     double vv = numToDouble(converter->toFloat(v));

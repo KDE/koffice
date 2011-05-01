@@ -35,7 +35,7 @@
 #include "KCFunction.h"
 #include "KCFunctionRepository.h"
 #include "KCValueCalc.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 // needed for SUBTOTAL:
 #include "KCCell.h"

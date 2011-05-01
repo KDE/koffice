@@ -40,7 +40,7 @@ class QString;
 class KoGenStyle;
 
 class KCCell;
-class ValueConverter;
+class KCValueConverter;
 class ValueParser;
 
 /**
@@ -141,7 +141,7 @@ public:
      * Saves the conditions to a DOM tree structure.
      * \return the DOM element for the conditions.
      */
-    QDomElement saveConditions(QDomDocument &doc, ValueConverter *converter) const;
+    QDomElement saveConditions(QDomDocument &doc, KCValueConverter *converter) const;
 
     /**
      * \ingroup OpenDocument
@@ -160,7 +160,7 @@ public:
      * \ingroup OpenDocument
      * Saves the condtional formattings.
      */
-    void saveOdfConditions(KoGenStyle &currentCellStyle, ValueConverter *converter) const;
+    void saveOdfConditions(KoGenStyle &currentCellStyle, KCValueConverter *converter) const;
 
     /// \note implementation to make QMap happy (which is needed by KCRectStorage)
     bool operator<(const KCConditions& conditions) const {
@@ -205,7 +205,7 @@ private:
     /**
      * \ingroup OpenDocument
      */
-    QString saveOdfConditionValue(const KCConditional &conditionalStyle, ValueConverter *converter) const;
+    QString saveOdfConditionValue(const KCConditional &conditionalStyle, KCValueConverter *converter) const;
 
     class Private;
     QSharedDataPointer<Private> d;

@@ -51,7 +51,7 @@
 #include "KoXmlReaderForward.h"
 
 class KCOdfLoadingContext;
-class ValueConverter;
+class KCValueConverter;
 class ValueParser;
 
 /**
@@ -121,7 +121,7 @@ public:
      * \ingroup NativeFormat
      * Saves validity checks.
      */
-    QDomElement saveXML(QDomDocument& doc, const ValueConverter *converter) const;
+    QDomElement saveXML(QDomDocument& doc, const KCValueConverter *converter) const;
 
     /**
      * \ingroup OpenDocument

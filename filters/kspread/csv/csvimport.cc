@@ -43,7 +43,7 @@
 #include <kspread/KCSheet.h>
 #include <kspread/KCStyle.h>
 #include <kspread/KCValue.h>
-#include <kspread/ValueConverter.h>
+#include <kspread/KCValueConverter.h>
 
 // hehe >:->
 

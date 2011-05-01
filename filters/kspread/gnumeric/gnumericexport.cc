@@ -51,7 +51,7 @@
 #include <kspread/KCSheet.h>
 #include <kspread/RowColumnFormat.h>
 #include <kspread/KCValidity.h>
-#include <kspread/ValueConverter.h>
+#include <kspread/KCValueConverter.h>
 #include <kspread/part/View.h>
 
 K_PLUGIN_FACTORY(GNUMERICExportFactory, registerPlugin<GNUMERICExport>();)
@@ -222,7 +222,7 @@ QDomElement GNUMERICExport::GetBorderStyle(QDomDocument gnumeric_doc, const KCCe
 
 QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell& cell)
 {
-    ValueConverter *const converter = cell.sheet()->map()->converter();
+    KCValueConverter *const converter = cell.sheet()->map()->converter();
 
     //<gmr:Validation Style="1" Type="1" Operator="7" AllowBlank="true" UseDropdown="false" Title="ghhg" Message="ghghhhjfhfghjfghj&#10;fg&#10;hjgf&#10;hj">
     //        <gmr:Expression0>45</gmr:Expression0>

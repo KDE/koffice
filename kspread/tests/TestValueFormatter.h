@@ -26,7 +26,7 @@
 
 class KCCalculationSettings;
 class ValueParser;
-class ValueConverter;
+class KCValueConverter;
 
 class TestValueFormatter: public QObject
 {
@@ -42,7 +42,7 @@ private Q_SLOTS:
 private:
     KCCalculationSettings* m_calcsettings;
     ValueParser* m_parser;
-    ValueConverter* m_converter;
+    KCValueConverter* m_converter;
 };
 
 #endif // KSPREAD_TEST_VALUEFORMATTER

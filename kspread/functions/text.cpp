@@ -31,7 +31,7 @@
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
 #include "KCValueCalc.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 #include <KLocale>
 
@@ -275,7 +275,7 @@ KCValue func_concatenate(valVector args, KCValueCalc *calc, FuncExtra *)
 // KCFunction: DOLLAR
 KCValue func_dollar(valVector args, KCValueCalc *calc, FuncExtra *)
 {
-    // ValueConverter doesn't support money directly, hence we need to
+    // KCValueConverter doesn't support money directly, hence we need to
     // use the locale. This code has the same effect as the output
     // of ValueFormatter for money format.
 

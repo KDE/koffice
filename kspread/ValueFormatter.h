@@ -29,7 +29,7 @@
 
 class KCCalculationSettings;
 class KCValue;
-class ValueConverter;
+class KCValueConverter;
 
 /**
  * \ingroup KCValue
@@ -41,7 +41,7 @@ public:
     /**
      * Constructor.
      */
-    explicit ValueFormatter(const ValueConverter* converter);
+    explicit ValueFormatter(const KCValueConverter* converter);
 
     /**
      * Returns the calculation settings this ValueFormatter uses.
@@ -130,7 +130,7 @@ protected:
     QString removeTrailingZeros(const QString& string, const QString& decimalSymbol);
 
 private:
-    const ValueConverter* m_converter;
+    const KCValueConverter* m_converter;
 };
 
 #endif  //KSPREAD_VALUE_FORMATTER

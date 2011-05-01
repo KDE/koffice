@@ -34,7 +34,7 @@
 #include "KCFunctionModuleRegistry.h"
 #include "functions/helper.h"
 #include "KCValueCalc.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 #include <kcalendarsystem.h>
 #include <KLocale>

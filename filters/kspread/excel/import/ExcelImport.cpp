@@ -65,7 +65,7 @@
 #include <KCStyle.h>
 #include <KCStyleManager.h>
 #include <KCStyleStorage.h>
-#include <ValueConverter.h>
+#include <KCValueConverter.h>
 #include <KCShapeApplicationData.h>
 #include <Util.h>
 

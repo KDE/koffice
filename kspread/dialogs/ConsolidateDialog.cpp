@@ -55,7 +55,7 @@
 #include <Util.h>
 
 #include <KCFormula.h>
-#include <ValueConverter.h>
+#include <KCValueConverter.h>
 #include <KCCell.h>
 
 #include "commands/DataManipulators.h"
@@ -133,7 +133,7 @@ void ConsolidateDialog::accept()
     }
 
     KCMap *const map = d->selection->activeSheet()->map();
-    ValueConverter *const converter = map->converter();
+    KCValueConverter *const converter = map->converter();
 
     KCSheet *const destinationSheet = d->selection->activeSheet();
     int dx = d->selection->lastRange().left();

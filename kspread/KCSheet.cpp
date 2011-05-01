@@ -91,7 +91,7 @@
 #include "KCStyleStorage.h"
 #include "Util.h"
 #include "KCValidity.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 #include "ValueStorage.h"
 
 

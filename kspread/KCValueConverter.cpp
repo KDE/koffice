@@ -18,23 +18,23 @@
 */
 
 // Local
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 #include "KCCalculationSettings.h"
 #include "KCLocalization.h"
 #include "ValueParser.h"
 
-ValueConverter::ValueConverter(const ValueParser* parser)
+KCValueConverter::KCValueConverter(const ValueParser* parser)
         : m_parser(parser)
 {
 }
 
-const KCCalculationSettings* ValueConverter::settings() const
+const KCCalculationSettings* KCValueConverter::settings() const
 {
     return m_parser->settings();
 }
 
-KCValue ValueConverter::asBoolean(const KCValue &value, bool* ok) const
+KCValue KCValueConverter::asBoolean(const KCValue &value, bool* ok) const
 {
     KCValue val;
 
@@ -79,7 +79,7 @@ KCValue ValueConverter::asBoolean(const KCValue &value, bool* ok) const
     return val;
 }
 
-KCValue ValueConverter::asInteger(const KCValue &value, bool* ok) const
+KCValue KCValueConverter::asInteger(const KCValue &value, bool* ok) const
 {
     KCValue val;
 
@@ -125,7 +125,7 @@ KCValue ValueConverter::asInteger(const KCValue &value, bool* ok) const
     return val;
 }
 
-KCValue ValueConverter::asFloat(const KCValue &value, bool* ok) const
+KCValue KCValueConverter::asFloat(const KCValue &value, bool* ok) const
 {
     KCValue val;
 
@@ -171,7 +171,7 @@ KCValue ValueConverter::asFloat(const KCValue &value, bool* ok) const
     return val;
 }
 
-KCValue ValueConverter::asComplex(const KCValue &value, bool* ok) const
+KCValue KCValueConverter::asComplex(const KCValue &value, bool* ok) const
 {
     KCValue val;
 
@@ -215,7 +215,7 @@ KCValue ValueConverter::asComplex(const KCValue &value, bool* ok) const
     return val;
 }
 
-KCValue ValueConverter::asNumeric(const KCValue &value, bool* ok) const
+KCValue KCValueConverter::asNumeric(const KCValue &value, bool* ok) const
 {
     KCValue val;
 
@@ -256,7 +256,7 @@ KCValue ValueConverter::asNumeric(const KCValue &value, bool* ok) const
     return val;
 }
 
-KCValue ValueConverter::asString(const KCValue &value) const
+KCValue KCValueConverter::asString(const KCValue &value) const
 {
     // This is a simpler version of ValueFormatter... We cannot use that one,
     // as we sometimes want to generate the string differently ...
@@ -351,7 +351,7 @@ KCValue ValueConverter::asString(const KCValue &value) const
     return val;
 }
 
-KCValue ValueConverter::asDateTime(const KCValue &value, bool* ok) const
+KCValue KCValueConverter::asDateTime(const KCValue &value, bool* ok) const
 {
     KCValue val;
 
@@ -395,7 +395,7 @@ KCValue ValueConverter::asDateTime(const KCValue &value, bool* ok) const
     return val;
 }
 
-KCValue ValueConverter::asDate(const KCValue &value, bool* ok) const
+KCValue KCValueConverter::asDate(const KCValue &value, bool* ok) const
 {
     KCValue val;
 
@@ -437,7 +437,7 @@ KCValue ValueConverter::asDate(const KCValue &value, bool* ok) const
     return val;
 }
 
-KCValue ValueConverter::asTime(const KCValue &value, bool* ok) const
+KCValue KCValueConverter::asTime(const KCValue &value, bool* ok) const
 {
     KCValue val;
 
@@ -479,42 +479,42 @@ KCValue ValueConverter::asTime(const KCValue &value, bool* ok) const
     return val;
 }
 
-bool ValueConverter::toBoolean(const KCValue& value) const
+bool KCValueConverter::toBoolean(const KCValue& value) const
 {
     return asBoolean(value).asBoolean();
 }
 
-int ValueConverter::toInteger(const KCValue& value) const
+int KCValueConverter::toInteger(const KCValue& value) const
 {
     return asInteger(value).asInteger();
 }
 
-KCNumber ValueConverter::toFloat(const KCValue& value) const
+KCNumber KCValueConverter::toFloat(const KCValue& value) const
 {
     return asFloat(value).asFloat();
 }
 
-complex<KCNumber> ValueConverter::toComplex(const KCValue& value) const
+complex<KCNumber> KCValueConverter::toComplex(const KCValue& value) const
 {
     return asComplex(value).asComplex();
 }
 
-QString ValueConverter::toString(const KCValue& value) const
+QString KCValueConverter::toString(const KCValue& value) const
 {
     return asString(value).asString();
 }
 
-QDateTime ValueConverter::toDateTime(const KCValue& value) const
+QDateTime KCValueConverter::toDateTime(const KCValue& value) const
 {
     return asDateTime(value).asDateTime(settings());
 }
 
-QDate ValueConverter::toDate(const KCValue& value) const
+QDate KCValueConverter::toDate(const KCValue& value) const
 {
     return asDate(value).asDate(settings());
 }
 
-QTime ValueConverter::toTime(const KCValue& value) const
+QTime KCValueConverter::toTime(const KCValue& value) const
 {
     return asTime(value).asTime(settings());
 }

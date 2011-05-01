@@ -34,7 +34,7 @@
 #include "KCOdfLoadingContext.h"
 #include "KCSheet.h"
 #include "KCValue.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 #include "ValueParser.h"
 
 class KCValidity::Private : public QSharedData
@@ -160,7 +160,7 @@ bool KCValidity::loadXML(KCCell* const cell, const KoXmlElement& validityElement
     return true;
 }
 
-QDomElement KCValidity::saveXML(QDomDocument& doc, const ValueConverter *converter) const
+QDomElement KCValidity::saveXML(QDomDocument& doc, const KCValueConverter *converter) const
 {
     QDomElement validityElement = doc.createElement("validity");
 

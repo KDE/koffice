@@ -34,7 +34,7 @@
 #include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
-#include "ValueConverter.h"
+#include "KCValueConverter.h"
 
 #include "commands/ApplyFilterCommand.h"
 

@@ -39,7 +39,7 @@
 class KCCell;
 class Doc;
 class KCValueCalc;
-class ValueConverter;
+class KCValueConverter;
 
 // Condition structures
 enum Comp { IsEqual, IsLess, IsGreater, LessEqual, GreaterEqual, NotEqual };
@@ -70,9 +70,9 @@ of more complicated and ranged functions.
 class KSPREAD_EXPORT KCValueCalc
 {
 public:
-    explicit KCValueCalc(ValueConverter* c);
+    explicit KCValueCalc(KCValueConverter* c);
 
-    ValueConverter *conv() {
+    KCValueConverter *conv() {
         return converter;
     }
 
@@ -318,7 +318,7 @@ public:
     KCValue::KCFormat format(KCValue a, KCValue b);
 
 protected:
-    ValueConverter* converter;
+    KCValueConverter* converter;
 
     /** registered array-walk functions */
     std::map<QString, arrayWalkFunc> awFuncs;
