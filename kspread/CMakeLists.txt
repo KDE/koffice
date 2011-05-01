@@ -203,7 +203,7 @@ set (kspreadodf_LIB_SRCS
     KCCurrency.cpp
     Damages.cpp
     KCDependencyManager.cpp
-    DocBase.cpp
+    KCDocBase.cpp
     KCFormat.cpp
     Formula.cpp
     GenValidationStyle.cpp

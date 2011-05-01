@@ -56,7 +56,7 @@ class ColumnFormat;
 class KCDamage;
 class DatabaseManager;
 class KCDependencyManager;
-class DocBase;
+class KCDocBase;
 class LoadingInfo;
 class NamedAreaManager;
 class RecalcManager;
@@ -80,7 +80,7 @@ public:
     /**
      * Created an empty map.
      */
-    explicit KCMap(DocBase* doc = 0, int syntaxVersion = 1);
+    explicit KCMap(KCDocBase* doc = 0, int syntaxVersion = 1);
 
     /**
      * This deletes all sheets contained in this map.
@@ -90,7 +90,7 @@ public:
     /**
      * \return the document this map belongs to
      */
-    DocBase* doc() const;
+    KCDocBase* doc() const;
 
     /**
      * \brief Sets whether the document can be edited or is read only.

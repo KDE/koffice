@@ -42,7 +42,7 @@
 #include <KoGenStyle.h>
 
 #include "../Global.h"
-#include "../DocBase.h"
+#include "../KCDocBase.h"
 
 #include "../kspread_export.h"
 
@@ -68,7 +68,7 @@ class SheetAccessModel;
 /**
  * This class holds the data that makes up a spreadsheet.
  */
-class KSPREAD_EXPORT Doc : public DocBase
+class KSPREAD_EXPORT Doc : public KCDocBase
 {
     Q_OBJECT
     Q_PROPERTY(int syntaxVersion READ syntaxVersion)

@@ -28,8 +28,8 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#include "DocBase.h"
-#include "DocBase.moc"
+#include "KCDocBase.h"
+#include "KCDocBase.moc"
 #include "DocBase_p.h"
 
 #include <KoOasisSettings.h>
@@ -53,12 +53,12 @@
 
 #include "part/View.h" // TODO: get rid of this dependency
 
-QList<DocBase*> DocBase::Private::s_docs;
-int DocBase::Private::s_docId = 0;
+QList<KCDocBase*> KCDocBase::Private::s_docs;
+int KCDocBase::Private::s_docId = 0;
 
 Q_DECLARE_METATYPE(QPointer<QAbstractItemModel>)
 
-DocBase::DocBase(QWidget *parentWidget, QObject* parent, bool singleViewMode)
+KCDocBase::KCDocBase(QWidget *parentWidget, QObject* parent, bool singleViewMode)
     : KoDocument(parentWidget, parent, singleViewMode)
     , d(new Private)
 {
@@ -81,7 +81,7 @@ DocBase::DocBase(QWidget *parentWidget, QObject* parent, bool singleViewMode)
     d->sheetAccessModel = new SheetAccessModel(d->map);
 }
 
-DocBase::~DocBase()
+KCDocBase::~KCDocBase()
 {
     delete d->map;
     delete d->sheetAccessModel;
@@ -89,48 +89,48 @@ DocBase::~DocBase()
     delete d;
 }
 
-QList<DocBase*> DocBase::documents()
+QList<KCDocBase*> KCDocBase::documents()
 {
     return Private::s_docs;
 }
 
-void DocBase::setReadWrite(bool readwrite)
+void KCDocBase::setReadWrite(bool readwrite)
 {
     map()->setReadWrite(readwrite);
     KoDocument::setReadWrite(readwrite);
 }
 
-KCMap *DocBase::map() const
+KCMap *KCDocBase::map() const
 {
     return d->map;
 }
 
-int DocBase::syntaxVersion() const
+int KCDocBase::syntaxVersion() const
 {
     return d->map->syntaxVersion();
 }
 
-KoResourceManager* DocBase::resourceManager() const
+KoResourceManager* KCDocBase::resourceManager() const
 {
     return d->resourceManager;
 }
 
-SheetAccessModel *DocBase::sheetAccessModel() const
+SheetAccessModel *KCDocBase::sheetAccessModel() const
 {
     return d->sheetAccessModel;
 }
 
-void DocBase::initConfig()
+void KCDocBase::initConfig()
 {
 }
 
-bool DocBase::saveOdf(SavingContext &documentContext)
+bool KCDocBase::saveOdf(SavingContext &documentContext)
 {
     ElapsedTime et("OpenDocument Saving", ElapsedTime::PrintOnlyTime);
     return saveOdfHelper(documentContext, SaveAll);
 }
 
-bool DocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag,
+bool KCDocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag,
                         QString* /*plainText*/)
 {
     Q_UNUSED(saveFlag);
@@ -204,7 +204,7 @@ bool DocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag,
     return true;
 }
 
-bool DocBase::loadOdf(KoOdfReadStore & odfStore)
+bool KCDocBase::loadOdf(KoOdfReadStore & odfStore)
 {
     QPointer<KoUpdater> updater;
     if (progressUpdater()) {
@@ -272,7 +272,7 @@ bool DocBase::loadOdf(KoOdfReadStore & odfStore)
     return true;
 }
 
-void DocBase::loadOdfSettings(const KoXmlDocument&settingsDoc)
+void KCDocBase::loadOdfSettings(const KoXmlDocument&settingsDoc)
 {
     KoOasisSettings settings(settingsDoc);
     KoOasisSettings::Items viewSettings = settings.itemSet("view-settings");
@@ -283,7 +283,7 @@ void DocBase::loadOdfSettings(const KoXmlDocument&settingsDoc)
     loadOdfIgnoreList(settings);
 }
 
-void DocBase::saveOdfSettings(KoXmlWriter &settingsWriter)
+void KCDocBase::saveOdfSettings(KoXmlWriter &settingsWriter)
 {
     settingsWriter.startElement("config:config-item-map-indexed");
     settingsWriter.addAttribute("config:name", "Views");
@@ -305,7 +305,7 @@ void DocBase::saveOdfSettings(KoXmlWriter &settingsWriter)
     settingsWriter.endElement();
 }
 
-void DocBase::loadOdfIgnoreList(const KoOasisSettings& settings)
+void KCDocBase::loadOdfIgnoreList(const KoOasisSettings& settings)
 {
     KoOasisSettings::Items configurationSettings = settings.itemSet("configuration-settings");
     if (!configurationSettings.isNull()) {
@@ -315,24 +315,24 @@ void DocBase::loadOdfIgnoreList(const KoOasisSettings& settings)
     }
 }
 
-void DocBase::paintContent(QPainter &, const QRect &)
+void KCDocBase::paintContent(QPainter &, const QRect &)
 {
 }
 
-bool DocBase::loadXML(const KoXmlDocument &, KoStore *)
+bool KCDocBase::loadXML(const KoXmlDocument &, KoStore *)
 {
     return false;
 }
 
-KoView* DocBase::createViewInstance(QWidget *)
+KoView* KCDocBase::createViewInstance(QWidget *)
 {
     return 0;
 }
 
-void DocBase::saveOdfViewSettings(KoXmlWriter&)
+void KCDocBase::saveOdfViewSettings(KoXmlWriter&)
 {
 }
 
-void DocBase::saveOdfViewSheetSettings(KCSheet *, KoXmlWriter&)
+void KCDocBase::saveOdfViewSheetSettings(KCSheet *, KoXmlWriter&)
 {
 }

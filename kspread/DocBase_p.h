@@ -31,7 +31,7 @@
 #ifndef KSPREAD_DOCBASE_P_H
 #define KSPREAD_DOCBASE_P_H
 
-#include "DocBase.h"
+#include "KCDocBase.h"
 
 static const int CURRENT_SYNTAX_VERSION = 1;
 
@@ -42,11 +42,11 @@ class KoResourceManager;
 class KCMap;
 class SheetAccessModel;
 
-class DocBase::Private
+class KCDocBase::Private
 {
 public:
     KCMap *map;
-    static QList<DocBase*> s_docs;
+    static QList<KCDocBase*> s_docs;
     static int s_docId;
 
     // document properties

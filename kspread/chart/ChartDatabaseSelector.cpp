@@ -33,7 +33,7 @@
 #include "KCRegion.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
-#include "DocBase.h"
+#include "KCDocBase.h"
 #include "SheetAccessModel.h"
 
 class ChartDatabaseSelector::Private

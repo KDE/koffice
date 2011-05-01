@@ -69,7 +69,7 @@
 #include "KCCondition.h"
 #include "Damages.h"
 #include "KCDependencyManager.h"
-#include "DocBase.h"
+#include "KCDocBase.h"
 #include "FormulaStorage.h"
 #include "Global.h"
 #include "HeaderFooter.h"
@@ -308,7 +308,7 @@ KCMap* KCSheet::map() const
     return d->workbook;
 }
 
-DocBase* KCSheet::doc() const
+KCDocBase* KCSheet::doc() const
 {
     return d->workbook->doc();
 }
@@ -2335,20 +2335,20 @@ void KCSheet::convertPart(const QString & part, KoXmlWriter & xmlWriter) const
                     xmlWriter.addTextNode("???");
                     xmlWriter.endElement();
                 } else if (var == "<author>") {
-                    DocBase* sdoc = doc();
+                    KCDocBase* sdoc = doc();
                     KoDocumentInfo* docInfo = sdoc->documentInfo();
 
                     text += docInfo->authorInfo("creator");
                     addText(text, xmlWriter);
                 } else if (var == "<email>") {
-                    DocBase* sdoc = doc();
+                    KCDocBase* sdoc = doc();
                     KoDocumentInfo* docInfo = sdoc->documentInfo();
 
                     text += docInfo->authorInfo("email");
                     addText(text, xmlWriter);
 
                 } else if (var == "<org>") {
-                    DocBase* sdoc = doc();
+                    KCDocBase* sdoc = doc();
                     KoDocumentInfo* docInfo    = sdoc->documentInfo();
 
                     text += docInfo->authorInfo("company");

@@ -63,7 +63,7 @@ class ColumnFormat;
 class CommentStorage;
 class KCConditionsStorage;
 class FormulaStorage;
-class DocBase;
+class KCDocBase;
 class FusionStorage;
 class LinkStorage;
 class HeaderFooter;
@@ -127,7 +127,7 @@ public:
     /**
      * \return the document this sheet belongs to
      */
-    DocBase* doc() const;
+    KCDocBase* doc() const;
 
     // KoShapeControllerBase interface
     virtual void addShape(KoShape* shape);

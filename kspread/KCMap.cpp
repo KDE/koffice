@@ -51,7 +51,7 @@
 #include "KCCellStorage.h"
 #include "Damages.h"
 #include "KCDependencyManager.h"
-#include "DocBase.h"
+#include "KCDocBase.h"
 #include "LoadingInfo.h"
 #include "Localization.h"
 #include "NamedAreaManager.h"
@@ -73,7 +73,7 @@
 class KCMap::Private
 {
 public:
-    DocBase* doc;
+    KCDocBase* doc;
 
     /**
      * List of all sheets in this map.
@@ -119,7 +119,7 @@ public:
 };
 
 
-KCMap::KCMap(DocBase* doc, int syntaxVersion)
+KCMap::KCMap(KCDocBase* doc, int syntaxVersion)
         : QObject(doc),
         d(new Private)
 {
@@ -210,7 +210,7 @@ KCMap::~KCMap()
     delete d;
 }
 
-DocBase* KCMap::doc() const
+KCDocBase* KCMap::doc() const
 {
     return d->doc;
 }

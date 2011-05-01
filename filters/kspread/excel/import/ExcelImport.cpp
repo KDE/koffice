@@ -51,7 +51,7 @@
 #include <KoDocumentInfo.h>
 #include <KoTextDocument.h>
 
-#include <DocBase.h>
+#include <KCDocBase.h>
 #include <kspread/KCSheet.h>
 #include <KCCalculationSettings.h>
 #include <KCCellStorage.h>
@@ -141,7 +141,7 @@ class ExcelImport::Private
 {
 public:
     QString inputFile;
-    DocBase* outputDoc;
+    KCDocBase* outputDoc;
 
     Workbook *workbook;
 
@@ -220,13 +220,13 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
     if (!document)
         return KoFilter::StupidError;
 
-    d->outputDoc = qobject_cast<DocBase*>(document);
+    d->outputDoc = qobject_cast<KCDocBase*>(document);
     if (!d->outputDoc) {
         kWarning() << "document isn't a Doc but a " << document->metaObject()->className();
         return KoFilter::WrongFormat;
     }
 #else
-    d->outputDoc = new DocBase();
+    d->outputDoc = new KCDocBase();
 #endif
     d->outputDoc->setOutputMimeType(to);
 

@@ -141,7 +141,7 @@ QList<Doc*> Doc::Private::s_docs;
 int Doc::Private::s_docId = 0;
 
 Doc::Doc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
-        : DocBase(parentWidget, parent, singleViewMode)
+        : KCDocBase(parentWidget, parent, singleViewMode)
         , dd(new Private)
 {
     connect(d->map, SIGNAL(sheetAdded(KCSheet*)), this, SLOT(sheetAdded(KCSheet*)));
@@ -633,7 +633,7 @@ bool Doc::saveOdfHelper(SavingContext &documentContext, SaveFlag saveFlag, QStri
             static_cast<View *>(view)->selection()->emitCloseEditor(true);
     }
 
-    return DocBase::saveOdfHelper(documentContext, saveFlag, plainText);
+    return KCDocBase::saveOdfHelper(documentContext, saveFlag, plainText);
 }
 
 #include "Doc.moc"

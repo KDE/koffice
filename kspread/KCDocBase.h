@@ -42,7 +42,7 @@ class KCMap;
 class KCSheet;
 class SheetAccessModel;
 
-class KSPREAD_EXPORT DocBase : public KoDocument
+class KSPREAD_EXPORT KCDocBase : public KoDocument
 {
     Q_OBJECT
 public:
@@ -57,13 +57,13 @@ public:
      * @param parent the parent object
      * @param singleViewMode enables single view mode, if @c true
      */
-    explicit DocBase(QWidget* parentWidget = 0, QObject* parent = 0, bool singleViewMode = false);
-    ~DocBase();
+    explicit KCDocBase(QWidget* parentWidget = 0, QObject* parent = 0, bool singleViewMode = false);
+    ~KCDocBase();
 
     /**
      * @return list of all documents
      */
-    static QList<DocBase*> documents();
+    static QList<KCDocBase*> documents();
 
     virtual void setReadWrite(bool readwrite = true);
 
@@ -131,7 +131,7 @@ protected:
     virtual void saveOdfViewSettings(KoXmlWriter& settingsWriter);
     virtual void saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter& settingsWriter);
 private:
-    Q_DISABLE_COPY(DocBase)
+    Q_DISABLE_COPY(KCDocBase)
 
     /**
      * \ingroup OpenDocument
