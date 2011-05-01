@@ -23,15 +23,15 @@
 #include <kdebug.h>
 
 // #include "rtree.h"
-#include "RTree.h"
+#include "KCRTree.h"
 
 using namespace std;
 
 void RTreeBenchmark::init()
 {
-    RTree<double> tree;
+    KCRTree<double> tree;
     m_tree = tree;
-    // insert some data in the RTree
+    // insert some data in the KCRTree
     const int max_x = 100;
     const int step_x = 1;
     const int max_y = 1000;
@@ -50,7 +50,7 @@ void RTreeBenchmark::cleanup()
 void RTreeBenchmark::testInsertionPerformance()
 {
     // reset tree for this test
-    RTree<double> tree;
+    KCRTree<double> tree;
     m_tree = tree;
 
     const int max_x = 100;

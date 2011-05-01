@@ -1,6 +1,6 @@
 #include <QSharedData>
 
-#include "RTree.h"
+#include "KCRTree.h"
 
 #include "TestRTree.h"
 
@@ -53,7 +53,7 @@ public:
 
 void TestRTree::testIntersectingPairs()
 {
-    RTree<SharedTestClass> tree;
+    KCRTree<SharedTestClass> tree;
     tree.insert(QRect(1, 1, 1, 1), new DerivedClass(QString("foo")));
     QList< QPair<QRectF, SharedTestClass> > pairs = tree.intersectingPairs(QRect(1, 1, 10, 10)).values();
     QVERIFY(pairs.count() == 1);
@@ -64,7 +64,7 @@ void TestRTree::testIntersectingPairs()
 
 void TestRTree::testInsertShiftRight()
 {
-    RTree<SharedTestClass> tree;
+    KCRTree<SharedTestClass> tree;
     tree.insert(QRect(2, 2, 2, 1), new DerivedClass(QString("foo")));
     tree.insertShiftRight(QRect(2, 1, 3, 4));
     QList< QPair<QRectF, SharedTestClass> > pairs = tree.intersectingPairs(QRect(1, 1, 10, 10)).values();
@@ -79,7 +79,7 @@ void TestRTree::testInsertShiftRight()
 
 void TestRTree::testInsertShiftDown()
 {
-    RTree<SharedTestClass> tree;
+    KCRTree<SharedTestClass> tree;
     tree.insert(QRect(2, 2, 1, 2), new DerivedClass(QString("foo")));
     tree.insertShiftDown(QRect(2, 1, 4, 3));
     QList< QPair<QRectF, SharedTestClass> > pairs = tree.intersectingPairs(QRect(1, 1, 10, 10)).values();
@@ -94,7 +94,7 @@ void TestRTree::testInsertShiftDown()
 
 void TestRTree::testRemoveShiftLeft()
 {
-    RTree<SharedTestClass> tree;
+    KCRTree<SharedTestClass> tree;
     tree.insert(QRect(5, 2, 2, 1), new DerivedClass(QString("foo")));
     tree.removeShiftLeft(QRect(2, 1, 3, 4));
     QList< QPair<QRectF, SharedTestClass> > pairs = tree.intersectingPairs(QRect(1, 1, 10, 10)).values();
@@ -109,7 +109,7 @@ void TestRTree::testRemoveShiftLeft()
 
 void TestRTree::testRemoveShiftUp()
 {
-    RTree<SharedTestClass> tree;
+    KCRTree<SharedTestClass> tree;
     tree.insert(QRect(2, 5, 1, 2), new DerivedClass(QString("foo")));
     tree.removeShiftUp(QRect(2, 1, 4, 3));
     QList< QPair<QRectF, SharedTestClass> > pairs = tree.intersectingPairs(QRect(1, 1, 10, 10)).values();
@@ -124,8 +124,8 @@ void TestRTree::testRemoveShiftUp()
 
 void TestRTree::testInsertColumns()
 {
-    // RTree::InsertMode = RTree::CopyPrevious
-    RTree<QString> tree;
+    // KCRTree::InsertMode = KCRTree::CopyPrevious
+    KCRTree<QString> tree;
     tree.insert(QRect(1, 1, 2, 1), QString("1"));
     tree.insert(QRect(1, 2, 3, 1), QString("2"));
     tree.insert(QRect(2, 3, 4, 1), QString("3"));
@@ -158,22 +158,22 @@ void TestRTree::testInsertColumns()
     QCOMPARE(pairs[8].second, QString("9"));
     QCOMPARE(undo.count(), 0);
 #if 0
-    // RTree::InsertMode = RTree::CopyCurrent
+    // KCRTree::InsertMode = KCRTree::CopyCurrent
     tree.clear();
     tree.insert(QRect(1, 1, 2, 1), QString("1"));
     tree.insert(QRect(1, 2, 3, 1), QString("2"));
-    undo = tree.insertColumns(3, 3, RTree<QString>::CopyCurrent);
+    undo = tree.insertColumns(3, 3, KCRTree<QString>::CopyCurrent);
     pairs = tree.intersectingPairs(QRect(1, 1, 10, 10));
     QCOMPARE(pairs.count(), 2);
     QCOMPARE(pairs[0].first, QRectF(1, 1, 2, 1));
     QCOMPARE(pairs[1].first, QRectF(1, 2, 6, 1));
     QCOMPARE(undo.count(), 0);
 
-    // RTree::InsertMode = RTree::CopyNone
+    // KCRTree::InsertMode = KCRTree::CopyNone
     tree.clear();
     tree.insert(QRect(1, 1, 2, 1), QString("1"));
     tree.insert(QRect(1, 2, 3, 1), QString("2"));
-    undo = tree.insertColumns(3, 3, RTree<QString>::CopyNone);
+    undo = tree.insertColumns(3, 3, KCRTree<QString>::CopyNone);
     pairs = tree.intersectingPairs(QRect(1, 1, 10, 10));
     QCOMPARE(pairs.count(), 3);
     QCOMPARE(pairs[0].first, QRectF(1, 1, 2, 1));
@@ -185,8 +185,8 @@ void TestRTree::testInsertColumns()
 
 void TestRTree::testInsertRows()
 {
-    // RTree::InsertMode = RTree::CopyPrevious
-    RTree<QString> tree;
+    // KCRTree::InsertMode = KCRTree::CopyPrevious
+    KCRTree<QString> tree;
     tree.insert(QRect(1, 1, 1, 2), QString("1"));
     tree.insert(QRect(2, 1, 1, 3), QString("2"));
     tree.insert(QRect(3, 2, 1, 4), QString("3"));
@@ -219,11 +219,11 @@ void TestRTree::testInsertRows()
     QCOMPARE(pairs[8].second, QString("9"));
     QCOMPARE(undo.count(), 0);
 #if 0
-    // RTree::InsertMode = RTree::CopyCurrent
+    // KCRTree::InsertMode = KCRTree::CopyCurrent
     tree.clear();
     tree.insert(QRect(1, 1, 1, 2), QString("1"));
     tree.insert(QRect(2, 1, 1, 3), QString("2"));
-    undo = tree.insertColumns(3, 3, RTree<QString>::CopyCurrent);
+    undo = tree.insertColumns(3, 3, KCRTree<QString>::CopyCurrent);
     pairs = tree.intersectingPairs(QRect(1, 1, 10, 10));
     QCOMPARE(pairs.count(), 2);
     QCOMPARE(pairs[0].first, QRectF(1, 1, 1, 2));
@@ -234,7 +234,7 @@ void TestRTree::testInsertRows()
 
 void TestRTree::testRemoveColumns()
 {
-    RTree<QString> tree;
+    KCRTree<QString> tree;
     tree.insert(QRect(1, 1, 2, 1), QString("1"));
     tree.insert(QRect(1, 2, 3, 1), QString("2"));
     tree.insert(QRect(2, 3, 4, 1), QString("3"));
@@ -270,7 +270,7 @@ void TestRTree::testRemoveColumns()
 
 void TestRTree::testRemoveRows()
 {
-    RTree<QString> tree;
+    KCRTree<QString> tree;
     tree.insert(QRect(1, 1, 1, 2), QString("1"));
     tree.insert(QRect(2, 1, 1, 3), QString("2"));
     tree.insert(QRect(3, 2, 1, 4), QString("3"));
@@ -306,7 +306,7 @@ void TestRTree::testRemoveRows()
 
 void TestRTree::testPrimitive()
 {
-    RTree<bool> tree;
+    KCRTree<bool> tree;
     tree.insert(QRect(2, 5, 1, 2), true);
     QCOMPARE(tree.contains(QPoint(2, 2)).isEmpty(), true);
     QCOMPARE(tree.contains(QPoint(2, 5)).first(), true);

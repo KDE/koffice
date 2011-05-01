@@ -29,7 +29,7 @@
 
 #include "KCMap.h"
 #include "KCRegion.h"
-#include "RTree.h"
+#include "KCRTree.h"
 
 static const int g_garbageCollectionTimeOut = 100;
 
@@ -159,7 +159,7 @@ protected:
 
 private:
     KCMap* m_map;
-    RTree<T> m_tree;
+    KCRTree<T> m_tree;
     QRegion m_usedArea;
     QMap<int, QPair<QRectF, T> > m_possibleGarbage;
     QList<T> m_storedData;

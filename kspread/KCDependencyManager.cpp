@@ -33,7 +33,7 @@
 #include "KCMap.h"
 #include "KCNamedAreaManager.h"
 #include "KCRegion.h"
-#include "RTree.h"
+#include "KCRTree.h"
 #include "KCSheet.h"
 #include "KCValue.h"
 
@@ -584,7 +584,7 @@ void KCDependencyManager::Private::computeDependencies(const KCCell& cell, const
                     KCSheet* sheet = region.firstSheet();
 
                     // create consumer tree, if not existing yet
-                    if (!consumers.contains(sheet)) consumers.insert(sheet, new RTree<KCCell>());
+                    if (!consumers.contains(sheet)) consumers.insert(sheet, new KCRTree<KCCell>());
                     // add cell as consumer of the range
                     consumers[sheet]->insert(region.firstRange(), cell);
                 }

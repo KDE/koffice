@@ -29,7 +29,7 @@
 
 #include "KCCell.h"
 #include "KCRegion.h"
-#include "RTree.h"
+#include "KCRTree.h"
 
 class KCFormula;
 class KCMap;
@@ -135,7 +135,7 @@ public:
     // stores providing regions ordered by their consuming cell locations
     QHash<KCCell, KCRegion> providers;
     // stores consuming cell locations ordered by their providing regions
-    QHash<KCSheet*, RTree<KCCell>*> consumers;
+    QHash<KCSheet*, KCRTree<KCCell>*> consumers;
     // stores consuming cell locations ordered by their providing named area
     // (in addition to the general storage of the consuming cell locations)
     QHash<QString, QList<KCCell> > namedAreaConsumers;

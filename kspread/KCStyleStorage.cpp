@@ -28,7 +28,7 @@
 #include "Global.h"
 #include "KCMap.h"
 #include "KCOdfSavingContext.h"
-#include "RTree.h"
+#include "KCRTree.h"
 #include "KCStyle.h"
 #include "KCStyleManager.h"
 #include "KCRectStorage.h"
@@ -39,7 +39,7 @@ class KDE_NO_EXPORT KCStyleStorage::Private
 {
 public:
     KCMap* map;
-    RTree<KCSharedSubStyle> tree;
+    KCRTree<KCSharedSubStyle> tree;
     QMap<int, bool> usedColumns; // FIXME Stefan: Use QList and qUpperBound() for insertion.
     QMap<int, bool> usedRows;
     QRegion usedArea;

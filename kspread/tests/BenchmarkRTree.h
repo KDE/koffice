@@ -21,7 +21,7 @@
 #define KSPREAD_RTREE_BENCHMARK_H
 
 #include <QObject>
-#include "RTree.h"
+#include "KCRTree.h"
 
 
 class RTreeBenchmark : public QObject
@@ -38,7 +38,7 @@ private Q_SLOTS:
     void testColumnDeletionPerformance();
     void testLookupPerformance();
 private:
-    RTree<double> m_tree;
+    KCRTree<double> m_tree;
 };
 
 #endif // KSPREAD_RTREE_BENCHMARK_H
