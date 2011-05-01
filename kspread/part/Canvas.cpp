@@ -242,7 +242,7 @@ void Canvas::paintEvent(QPaintEvent *event)
     if (!sheet)
         return;
 
-//     ElapsedTime et("Painting cells", ElapsedTime::PrintOnlyTime);
+//     KCElapsedTime et("Painting cells", KCElapsedTime::PrintOnlyTime);
 
     painter.setClipRect(painterRect);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);

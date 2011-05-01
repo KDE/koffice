@@ -554,7 +554,7 @@ View::View(QWidget *_parent, Doc *_doc)
         : KoView(_doc, _parent)
         , d(new Private)
 {
-    ElapsedTime et("View constructor");
+    KCElapsedTime et("View constructor");
 
     d->view = this;
     d->doc = _doc;

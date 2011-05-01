@@ -126,7 +126,7 @@ void KCDocBase::initConfig()
 
 bool KCDocBase::saveOdf(SavingContext &documentContext)
 {
-    ElapsedTime et("OpenDocument Saving", ElapsedTime::PrintOnlyTime);
+    KCElapsedTime et("OpenDocument Saving", KCElapsedTime::PrintOnlyTime);
     return saveOdfHelper(documentContext, SaveAll);
 }
 

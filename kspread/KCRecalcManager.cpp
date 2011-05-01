@@ -172,7 +172,7 @@ void KCRecalcManager::regionChanged(const KCRegion& region)
         return;
     d->active = true;
     kDebug(36002) << "KCRecalcManager::regionChanged" << region.name();
-    ElapsedTime et("Overall region recalculation", ElapsedTime::PrintOnlyTime);
+    KCElapsedTime et("Overall region recalculation", KCElapsedTime::PrintOnlyTime);
     d->cellsToCalculate(region);
     recalc();
     d->active = false;
@@ -183,7 +183,7 @@ void KCRecalcManager::recalcSheet(KCSheet* const sheet)
     if (d->active)
         return;
     d->active = true;
-    ElapsedTime et("Overall sheet recalculation", ElapsedTime::PrintOnlyTime);
+    KCElapsedTime et("Overall sheet recalculation", KCElapsedTime::PrintOnlyTime);
     d->cellsToCalculate(sheet);
     recalc();
     d->active = false;
@@ -194,7 +194,7 @@ void KCRecalcManager::recalcMap()
     if (d->active)
         return;
     d->active = true;
-    ElapsedTime et("Overall map recalculation", ElapsedTime::PrintOnlyTime);
+    KCElapsedTime et("Overall map recalculation", KCElapsedTime::PrintOnlyTime);
     d->cellsToCalculate();
     recalc();
     d->active = false;
@@ -221,7 +221,7 @@ void KCRecalcManager::removeSheet(KCSheet *sheet)
 void KCRecalcManager::recalc()
 {
     kDebug(36002) << "Recalculating" << d->cells.count() << " cell(s)..";
-    ElapsedTime et("Recalculating cells", ElapsedTime::PrintOnlyTime);
+    KCElapsedTime et("Recalculating cells", KCElapsedTime::PrintOnlyTime);
     const QList<KCCell> cells = d->cells.values();
     for (int c = 0; c < cells.count(); ++c) {
         // only recalculate, if no circular dependency occurred

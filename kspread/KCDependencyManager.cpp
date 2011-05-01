@@ -128,7 +128,7 @@ void KCDependencyManager::regionChanged(const KCRegion& region)
         }
     }
     {
-        ElapsedTime et("Computing reference depths", ElapsedTime::PrintOnlyTime);
+        KCElapsedTime et("Computing reference depths", KCElapsedTime::PrintOnlyTime);
         d->generateDepths(region);
     }
 //     d->dump();
@@ -144,7 +144,7 @@ void KCDependencyManager::addSheet(KCSheet *sheet)
     // Manages also the revival of a deleted sheet.
     Q_UNUSED(sheet);
 #if 0 // TODO Stefan: Enable, if dependencies should not be tracked all the time.
-    ElapsedTime et("Generating dependencies", ElapsedTime::PrintOnlyTime);
+    KCElapsedTime et("Generating dependencies", KCElapsedTime::PrintOnlyTime);
 
     // Clear orphaned dependencies (i.e. cells formerly containing formulas)
     // FIXME Stefan: Iterate only over the consumers in sheet. Needs adjustment
@@ -182,7 +182,7 @@ void KCDependencyManager::removeSheet(KCSheet *sheet)
 
 void KCDependencyManager::updateAllDependencies(const KCMap* map)
 {
-    ElapsedTime et("Generating dependencies", ElapsedTime::PrintOnlyTime);
+    KCElapsedTime et("Generating dependencies", KCElapsedTime::PrintOnlyTime);
 
     // clear everything
     d->providers.clear();

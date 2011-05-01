@@ -498,7 +498,7 @@ void RowHeader::paintEvent(QPaintEvent* event)
     if (!sheet)
         return;
 
-//     ElapsedTime et( "Painting vertical header", ElapsedTime::PrintOnlyTime );
+//     KCElapsedTime et( "Painting vertical header", KCElapsedTime::PrintOnlyTime );
 
     // FIXME Stefan: Make use of clipping. Find the repaint call after the scrolling.
     // kDebug(36004) << event->rect();
@@ -1184,7 +1184,7 @@ void ColumnHeader::paintEvent(QPaintEvent* event)
     if (!sheet)
         return;
 
-//     ElapsedTime et( "Painting horizontal header", ElapsedTime::PrintOnlyTime );
+//     KCElapsedTime et( "Painting horizontal header", KCElapsedTime::PrintOnlyTime );
 
     // FIXME Stefan: Make use of clipping. Find the repaint call after the scrolling.
     // kDebug(36004) << event->rect();

@@ -108,7 +108,7 @@ KoFilter::ConversionStatus CSVFilter::convert(const QByteArray& from, const QByt
         return KoFilter::UserCancelled;
     inputFile.resize(0);   // Release memory (input file content)
 
-    ElapsedTime t("Filling data into document");
+    KCElapsedTime t("Filling data into document");
 
     KCSheet *sheet = ksdoc->map()->addNewSheet();
 

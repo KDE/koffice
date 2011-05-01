@@ -34,30 +34,30 @@
 #include <kiconloader.h>
 #include <QTime>
 
-class ElapsedTime
+class KCElapsedTime
 {
 public:
     enum OutputMode { Default, PrintOnlyTime };
 
 #ifdef NDEBUG
 
-    ElapsedTime() {}
-    explicit ElapsedTime(QString const& , OutputMode = Default) {}
+    KCElapsedTime() {}
+    explicit KCElapsedTime(QString const& , OutputMode = Default) {}
 
 #else // NDEBUG
 
-    ElapsedTime() {
+    KCElapsedTime() {
         m_time.start();
     }
 
-    explicit ElapsedTime(QString const & name, OutputMode mode = Default)
+    explicit KCElapsedTime(QString const & name, OutputMode mode = Default)
             : m_name(name) {
         m_time.start();
         if (mode != PrintOnlyTime)
             kDebug(36001) << QString("*** (" + name + ")... Starting measuring...").toLatin1().data();
     }
 
-    ~ElapsedTime() {
+    ~KCElapsedTime() {
         uint milliSec = m_time.elapsed();
         uint min = (uint)(milliSec / (1000 * 60));
         milliSec -= (min * 60 * 1000);
