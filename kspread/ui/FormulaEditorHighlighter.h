@@ -77,7 +77,7 @@ protected:
     */
     int findMatchingBrace(int pos);
     /**
-    * Examines the brace (Token::LeftPar or Token::RightPar) operator token at the given index in the token vector
+    * Examines the brace (KCToken::LeftPar or KCToken::RightPar) operator token at the given index in the token vector
     * ( as returned by formulaTokens() ) and if the cursor is next to it, the token plus any matching brace will be highlighted
     */
     void handleBrace(uint index);

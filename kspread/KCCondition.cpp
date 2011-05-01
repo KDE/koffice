@@ -204,8 +204,8 @@ bool Conditions::isTrueFormula(const KCCell &cell, const QString &formula, const
         QString newFormula('=');
         const Tokens tokens = f.tokens();
         for (int t = 0; t < tokens.count(); ++t) {
-            const Token token = tokens[t];
-            if (token.type() == Token::KCCell || token.type() == Token::Range) {
+            const KCToken token = tokens[t];
+            if (token.type() == KCToken::KCCell || token.type() == KCToken::Range) {
                 if (map->namedAreaManager()->contains(token.text())) {
                     newFormula.append(token.text());
                     continue;

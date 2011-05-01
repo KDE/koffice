@@ -530,22 +530,22 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
 /**********************
     TokenStack
  **********************/
-class TokenStack : public QVector<Token>
+class TokenStack : public QVector<KCToken>
 {
 public:
     TokenStack();
     bool isEmpty() const;
     unsigned itemCount() const;
-    void push(const Token& token);
-    Token pop();
-    const Token& top();
-    const Token& top(unsigned index);
+    void push(const KCToken& token);
+    KCToken pop();
+    const KCToken& top();
+    const KCToken& top(unsigned index);
 private:
     void ensureSpace();
     unsigned topIndex;
 };
 
-TokenStack::TokenStack(): QVector<Token>()
+TokenStack::TokenStack(): QVector<KCToken>()
 {
     topIndex = 0;
     ensureSpace();
@@ -561,27 +561,27 @@ unsigned TokenStack::itemCount() const
     return topIndex;
 }
 
-void TokenStack::push(const Token& token)
+void TokenStack::push(const KCToken& token)
 {
     ensureSpace();
     insert(topIndex++, token);
 }
 
-Token TokenStack::pop()
+KCToken TokenStack::pop()
 {
-    return (topIndex > 0) ? Token(at(--topIndex)) : Token();
+    return (topIndex > 0) ? KCToken(at(--topIndex)) : KCToken();
 }
 
-const Token& TokenStack::top()
+const KCToken& TokenStack::top()
 {
     return top(0);
 }
 
-const Token& TokenStack::top(unsigned index)
+const KCToken& TokenStack::top(unsigned index)
 {
     if (topIndex > index)
         return at(topIndex - index - 1);
-    return Token::null;
+    return KCToken::null;
 }
 
 void TokenStack::ensureSpace()
@@ -592,34 +592,34 @@ void TokenStack::ensureSpace()
 
 // helper function: give operator precedence
 // e.g. '+' is 1 while '*' is 3
-static int opPrecedence(Token::Op op)
+static int opPrecedence(KCToken::Op op)
 {
     int prec = -1;
     switch (op) {
-    case Token::Percent      : prec = 8; break;
-    case Token::Caret        : prec = 7; break;
-    case Token::Asterisk     : prec = 5; break;
-    case Token::Slash        : prec = 6; break;
-    case Token::Plus         : prec = 3; break;
-    case Token::Minus        : prec = 3; break;
-    case Token::Union        : prec = 2; break;
-    case Token::Ampersand    : prec = 2; break;
-    case Token::Intersect    : prec = 2; break;
-    case Token::Equal        : prec = 1; break;
-    case Token::NotEqual     : prec = 1; break;
-    case Token::Less         : prec = 1; break;
-    case Token::Greater      : prec = 1; break;
-    case Token::LessEqual    : prec = 1; break;
-    case Token::GreaterEqual : prec = 1; break;
+    case KCToken::Percent      : prec = 8; break;
+    case KCToken::Caret        : prec = 7; break;
+    case KCToken::Asterisk     : prec = 5; break;
+    case KCToken::Slash        : prec = 6; break;
+    case KCToken::Plus         : prec = 3; break;
+    case KCToken::Minus        : prec = 3; break;
+    case KCToken::Union        : prec = 2; break;
+    case KCToken::Ampersand    : prec = 2; break;
+    case KCToken::Intersect    : prec = 2; break;
+    case KCToken::Equal        : prec = 1; break;
+    case KCToken::NotEqual     : prec = 1; break;
+    case KCToken::Less         : prec = 1; break;
+    case KCToken::Greater      : prec = 1; break;
+    case KCToken::LessEqual    : prec = 1; break;
+    case KCToken::GreaterEqual : prec = 1; break;
 #ifdef KSPREAD_INLINE_ARRAYS
         // FIXME Stefan: I don't know whether zero is right for this case. :-(
-    case Token::CurlyBra     : prec = 0; break;
-    case Token::CurlyKet     : prec = 0; break;
-    case Token::Pipe         : prec = 0; break;
+    case KCToken::CurlyBra     : prec = 0; break;
+    case KCToken::CurlyKet     : prec = 0; break;
+    case KCToken::Pipe         : prec = 0; break;
 #endif
-    case Token::Semicolon    : prec = 0; break;
-    case Token::RightPar     : prec = 0; break;
-    case Token::LeftPar      : prec = -1; break;
+    case KCToken::Semicolon    : prec = 0; break;
+    case KCToken::RightPar     : prec = 0; break;
+    case KCToken::LeftPar      : prec = -1; break;
     default: prec = -1; break;
     }
     return prec;
@@ -636,11 +636,11 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
 
     for (int i = 0; i <= tokens.count(); i++) {
         // helper token: InvalidOp is end-of-formula
-        Token token = (i < tokens.count()) ? tokens[i] : Token(Token::Operator);
-        Token::Type tokenType = token.type();
+        KCToken token = (i < tokens.count()) ? tokens[i] : KCToken(KCToken::Operator);
+        KCToken::Type tokenType = token.type();
 
         // unknown token is invalid
-        if (tokenType == Token::Unknown) {
+        if (tokenType == KCToken::Unknown) {
             // TODO
             break;
         }
@@ -648,9 +648,9 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
         // are we entering a function ?
         // if stack already has: id (
         if (syntaxStack.itemCount() >= 2) {
-            Token par = syntaxStack.top();
-            Token id = syntaxStack.top(1);
-            if (par.asOperator() == Token::LeftPar)
+            KCToken par = syntaxStack.top();
+            KCToken id = syntaxStack.top(1);
+            if (par.asOperator() == KCToken::LeftPar)
                 if (id.isIdentifier()) {
                     argStack.push(argCount);
                     argCount = 1;
@@ -661,8 +661,8 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
         // are we entering an inline array ?
         // if stack already has: {
         if (syntaxStack.itemCount() >= 1) {
-            Token bra = syntaxStack.top();
-            if (bra.asOperator() == Token::CurlyBra) {
+            KCToken bra = syntaxStack.top();
+            if (bra.asOperator() == KCToken::CurlyBra) {
                 argStack.push(argCount);
                 argStack.push(1);   // row count
                 argCount = 1;
@@ -672,24 +672,24 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
 
         // for constants, push immediately to stack
         // generate code to load from a constant
-        if ((tokenType == Token::Integer) || (tokenType == Token::Float) ||
-                (tokenType == Token::String) || (tokenType == Token::Boolean) ||
-                (tokenType == Token::Error)) {
+        if ((tokenType == KCToken::Integer) || (tokenType == KCToken::Float) ||
+                (tokenType == KCToken::String) || (tokenType == KCToken::Boolean) ||
+                (tokenType == KCToken::Error)) {
             syntaxStack.push(token);
             switch (tokenType) {
-            case Token::Integer:
+            case KCToken::Integer:
                 codes.append(FormulaToken::createNum(token.asInteger()));
                 break;
-            case Token::Float:
+            case KCToken::Float:
                 codes.append(FormulaToken::createNum(token.asFloat()));
                 break;
-            case Token::String:
+            case KCToken::String:
                 codes.append(FormulaToken::createStr(token.asString()));
                 break;
-            case Token::Boolean:
+            case KCToken::Boolean:
                 codes.append(FormulaToken::createBool(token.asBoolean()));
                 break;
-            case Token::Error:
+            case KCToken::Error:
                 // TODO
                 codes.append(FormulaToken(FormulaToken::MissArg));
                 break;
@@ -701,11 +701,11 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
 
         // for cell, range, or identifier, push immediately to stack
         // generate code to load from reference
-        if ((tokenType == Token::KCCell) || (tokenType == Token::Range) ||
-                (tokenType == Token::Identifier)) {
+        if ((tokenType == KCToken::KCCell) || (tokenType == KCToken::Range) ||
+                (tokenType == KCToken::Identifier)) {
             syntaxStack.push(token);
 
-            if (tokenType == Token::KCCell) {
+            if (tokenType == KCToken::KCCell) {
                 const KCRegion region(token.text(), d->inputDoc->map(), sheet);
                 if (!region.isValid() || !region.isSingular()) {
                     codes.append(FormulaToken::createRefErr());
@@ -713,7 +713,7 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     KCRegion::Element* e = *region.constBegin();
                     codes.append(FormulaToken::createRef(e->rect().topLeft() - QPoint(1, 1), e->isRowFixed(), e->isColumnFixed()));
                 }
-            } else if (tokenType == Token::Range) {
+            } else if (tokenType == KCToken::Range) {
                 const KCRegion region(token.text(), d->inputDoc->map(), sheet);
                 if (!region.isValid()) {
                     codes.append(FormulaToken::createAreaErr());
@@ -728,16 +728,16 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
         }
 
         // special case for percentage
-        if (tokenType == Token::Operator)
-            if (token.asOperator() == Token::Percent)
+        if (tokenType == KCToken::Operator)
+            if (token.asOperator() == KCToken::Percent)
                 if (syntaxStack.itemCount() >= 1)
                     if (!syntaxStack.top().isOperator()) {
                         codes.append(FormulaToken(FormulaToken::Percent));
                     }
 
         // for any other operator, try to apply all parsing rules
-        if (tokenType == Token::Operator)
-            if (token.asOperator() != Token::Percent) {
+        if (tokenType == KCToken::Operator)
+            if (token.asOperator() != KCToken::Percent) {
                 // repeat until no more rule applies
                 for (; ;) {
                     bool ruleFound = false;
@@ -746,17 +746,17 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     // id ( arg1 ; arg2 -> id ( arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 5)
-                            if ((token.asOperator() == Token::RightPar) ||
-                                    (token.asOperator() == Token::Semicolon)) {
-                                Token arg2 = syntaxStack.top();
-                                Token sep = syntaxStack.top(1);
-                                Token arg1 = syntaxStack.top(2);
-                                Token par = syntaxStack.top(3);
-                                Token id = syntaxStack.top(4);
+                            if ((token.asOperator() == KCToken::RightPar) ||
+                                    (token.asOperator() == KCToken::Semicolon)) {
+                                KCToken arg2 = syntaxStack.top();
+                                KCToken sep = syntaxStack.top(1);
+                                KCToken arg1 = syntaxStack.top(2);
+                                KCToken par = syntaxStack.top(3);
+                                KCToken id = syntaxStack.top(4);
                                 if (!arg2.isOperator())
-                                    if (sep.asOperator() == Token::Semicolon)
+                                    if (sep.asOperator() == KCToken::Semicolon)
                                         if (!arg1.isOperator())
-                                            if (par.asOperator() == Token::LeftPar)
+                                            if (par.asOperator() == KCToken::LeftPar)
                                                 if (id.isIdentifier()) {
                                                     ruleFound = true;
                                                     syntaxStack.pop();
@@ -769,15 +769,15 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     // id ( arg ; -> id ( arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3)
-                            if ((token.asOperator() == Token::RightPar) ||
-                                    (token.asOperator() == Token::Semicolon)) {
-                                Token sep = syntaxStack.top();
-                                Token arg = syntaxStack.top(1);
-                                Token par = syntaxStack.top(2);
-                                Token id = syntaxStack.top(3);
-                                if (sep.asOperator() == Token::Semicolon)
+                            if ((token.asOperator() == KCToken::RightPar) ||
+                                    (token.asOperator() == KCToken::Semicolon)) {
+                                KCToken sep = syntaxStack.top();
+                                KCToken arg = syntaxStack.top(1);
+                                KCToken par = syntaxStack.top(2);
+                                KCToken id = syntaxStack.top(3);
+                                if (sep.asOperator() == KCToken::Semicolon)
                                     if (!arg.isOperator())
-                                        if (par.asOperator() == Token::LeftPar)
+                                        if (par.asOperator() == KCToken::LeftPar)
                                             if (id.isIdentifier()) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
@@ -790,13 +790,13 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     //  id ( arg ) -> arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 4) {
-                            Token par2 = syntaxStack.top();
-                            Token arg = syntaxStack.top(1);
-                            Token par1 = syntaxStack.top(2);
-                            Token id = syntaxStack.top(3);
-                            if (par2.asOperator() == Token::RightPar)
+                            KCToken par2 = syntaxStack.top();
+                            KCToken arg = syntaxStack.top(1);
+                            KCToken par1 = syntaxStack.top(2);
+                            KCToken id = syntaxStack.top(3);
+                            if (par2.asOperator() == KCToken::RightPar)
                                 if (!arg.isOperator())
-                                    if (par1.asOperator() == Token::LeftPar)
+                                    if (par1.asOperator() == KCToken::LeftPar)
                                         if (id.isIdentifier()) {
                                             ruleFound = true;
                                             syntaxStack.pop();
@@ -814,17 +814,17 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     // e.g. "2*PI()"
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            Token par2 = syntaxStack.top();
-                            Token par1 = syntaxStack.top(1);
-                            Token id = syntaxStack.top(2);
-                            if (par2.asOperator() == Token::RightPar)
-                                if (par1.asOperator() == Token::LeftPar)
+                            KCToken par2 = syntaxStack.top();
+                            KCToken par1 = syntaxStack.top(1);
+                            KCToken id = syntaxStack.top(2);
+                            if (par2.asOperator() == KCToken::RightPar)
+                                if (par1.asOperator() == KCToken::LeftPar)
                                     if (id.isIdentifier()) {
                                         ruleFound = true;
                                         syntaxStack.pop();
                                         syntaxStack.pop();
                                         syntaxStack.pop();
-                                        syntaxStack.push(Token(Token::Integer));
+                                        syntaxStack.push(KCToken(KCToken::Integer));
                                         codes.append(FormulaToken::createFunc(id.text(), 0));
                                         Q_ASSERT(!argStack.empty());
                                         argCount = argStack.empty() ? 0 : argStack.pop();
@@ -836,17 +836,17 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     // { arg1 ; arg2 -> { arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 4)
-                            if ((token.asOperator() == Token::Semicolon) ||
-                                    (token.asOperator() == Token::CurlyKet) ||
-                                    (token.asOperator() == Token::Pipe)) {
-                                Token arg2 = syntaxStack.top();
-                                Token sep = syntaxStack.top(1);
-                                Token arg1 = syntaxStack.top(2);
-                                Token bra = syntaxStack.top(3);
+                            if ((token.asOperator() == KCToken::Semicolon) ||
+                                    (token.asOperator() == KCToken::CurlyKet) ||
+                                    (token.asOperator() == KCToken::Pipe)) {
+                                KCToken arg2 = syntaxStack.top();
+                                KCToken sep = syntaxStack.top(1);
+                                KCToken arg1 = syntaxStack.top(2);
+                                KCToken bra = syntaxStack.top(3);
                                 if (!arg2.isOperator())
-                                    if (sep.asOperator() == Token::Semicolon)
+                                    if (sep.asOperator() == KCToken::Semicolon)
                                         if (!arg1.isOperator())
-                                            if (bra.asOperator() == Token::CurlyBra) {
+                                            if (bra.asOperator() == KCToken::CurlyBra) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
@@ -858,17 +858,17 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     //  { arg1 | arg2 -> { arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 4)
-                            if ((token.asOperator() == Token::Semicolon) ||
-                                    (token.asOperator() == Token::CurlyKet) ||
-                                    (token.asOperator() == Token::Pipe)) {
-                                Token arg2 = syntaxStack.top();
-                                Token sep = syntaxStack.top(1);
-                                Token arg1 = syntaxStack.top(2);
-                                Token bra = syntaxStack.top(3);
+                            if ((token.asOperator() == KCToken::Semicolon) ||
+                                    (token.asOperator() == KCToken::CurlyKet) ||
+                                    (token.asOperator() == KCToken::Pipe)) {
+                                KCToken arg2 = syntaxStack.top();
+                                KCToken sep = syntaxStack.top(1);
+                                KCToken arg1 = syntaxStack.top(2);
+                                KCToken bra = syntaxStack.top(3);
                                 if (!arg2.isOperator())
-                                    if (sep.asOperator() == Token::Pipe)
+                                    if (sep.asOperator() == KCToken::Pipe)
                                         if (!arg1.isOperator())
-                                            if (bra.asOperator() == Token::CurlyBra) {
+                                            if (bra.asOperator() == KCToken::CurlyBra) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
@@ -882,12 +882,12 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     //  { arg } -> arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            Token ket = syntaxStack.top();
-                            Token arg = syntaxStack.top(1);
-                            Token bra = syntaxStack.top(2);
-                            if (ket.asOperator() == Token::CurlyKet)
+                            KCToken ket = syntaxStack.top();
+                            KCToken arg = syntaxStack.top(1);
+                            KCToken bra = syntaxStack.top(2);
+                            if (ket.asOperator() == KCToken::CurlyKet)
                                 if (!arg.isOperator())
-                                    if (bra.asOperator() == Token::CurlyBra) {
+                                    if (bra.asOperator() == KCToken::CurlyBra) {
                                         ruleFound = true;
                                         syntaxStack.pop();
                                         syntaxStack.pop();
@@ -907,14 +907,14 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     // rule for parenthesis:  ( Y ) -> Y
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            Token right = syntaxStack.top();
-                            Token y = syntaxStack.top(1);
-                            Token left = syntaxStack.top(2);
+                            KCToken right = syntaxStack.top();
+                            KCToken y = syntaxStack.top(1);
+                            KCToken left = syntaxStack.top(2);
                             if (right.isOperator())
                                 if (!y.isOperator())
                                     if (left.isOperator())
-                                        if (right.asOperator() == Token::RightPar)
-                                            if (left.asOperator() == Token::LeftPar) {
+                                        if (right.asOperator() == KCToken::RightPar)
+                                            if (left.asOperator() == KCToken::LeftPar) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
@@ -930,13 +930,13 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     // e.g. "A * B" becomes 'A' if token is operator '+'
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            Token b = syntaxStack.top();
-                            Token op = syntaxStack.top(1);
-                            Token a = syntaxStack.top(2);
+                            KCToken b = syntaxStack.top();
+                            KCToken op = syntaxStack.top(1);
+                            KCToken a = syntaxStack.top(2);
                             if (!a.isOperator())
                                 if (!b.isOperator())
                                     if (op.isOperator())
-                                        if (token.asOperator() != Token::LeftPar)
+                                        if (token.asOperator() != KCToken::LeftPar)
                                             if (opPrecedence(op.asOperator()) >= opPrecedence(token.asOperator())) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
@@ -945,35 +945,35 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                                                 syntaxStack.push(b);
                                                 switch (op.asOperator()) {
                                                     // simple binary operations
-                                                case Token::Plus:
+                                                case KCToken::Plus:
                                                     codes.append(FormulaToken(FormulaToken::Add)); break;
-                                                case Token::Minus:
+                                                case KCToken::Minus:
                                                     codes.append(FormulaToken(FormulaToken::Sub)); break;
-                                                case Token::Asterisk:
+                                                case KCToken::Asterisk:
                                                     codes.append(FormulaToken(FormulaToken::Mul)); break;
-                                                case Token::Slash:
+                                                case KCToken::Slash:
                                                     codes.append(FormulaToken(FormulaToken::Div)); break;
-                                                case Token::Caret:
+                                                case KCToken::Caret:
                                                     codes.append(FormulaToken(FormulaToken::Power)); break;
-                                                case Token::Ampersand:
+                                                case KCToken::Ampersand:
                                                     codes.append(FormulaToken(FormulaToken::Concat)); break;
-                                                case Token::Intersect:
+                                                case KCToken::Intersect:
                                                     codes.append(FormulaToken(FormulaToken::Intersect)); break;
-                                                case Token::Union:
+                                                case KCToken::Union:
                                                     codes.append(FormulaToken(FormulaToken::Union)); break;
 
                                                     // simple value comparisons
-                                                case Token::Equal:
+                                                case KCToken::Equal:
                                                     codes.append(FormulaToken(FormulaToken::EQ)); break;
-                                                case Token::Less:
+                                                case KCToken::Less:
                                                     codes.append(FormulaToken(FormulaToken::LT)); break;
-                                                case Token::Greater:
+                                                case KCToken::Greater:
                                                     codes.append(FormulaToken(FormulaToken::GT)); break;
-                                                case Token::NotEqual:
+                                                case KCToken::NotEqual:
                                                     codes.append(FormulaToken(FormulaToken::NE)); break;
-                                                case Token::LessEqual:
+                                                case KCToken::LessEqual:
                                                     codes.append(FormulaToken(FormulaToken::LE)); break;
-                                                case Token::GreaterEqual:
+                                                case KCToken::GreaterEqual:
                                                     codes.append(FormulaToken(FormulaToken::GE)); break;
                                                 default: break;
                                                 };
@@ -985,21 +985,21 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     // action: push (op2) to result
                     // e.g.  "* - 2" becomes '*'
                     if (!ruleFound)
-                        if (token.asOperator() != Token::LeftPar)
+                        if (token.asOperator() != KCToken::LeftPar)
                             if (syntaxStack.itemCount() >= 3) {
-                                Token x = syntaxStack.top();
-                                Token op2 = syntaxStack.top(1);
-                                Token op1 = syntaxStack.top(2);
+                                KCToken x = syntaxStack.top();
+                                KCToken op2 = syntaxStack.top(1);
+                                KCToken op1 = syntaxStack.top(2);
                                 if (!x.isOperator())
                                     if (op1.isOperator())
                                         if (op2.isOperator())
-                                            if ((op2.asOperator() == Token::Plus) ||
-                                                    (op2.asOperator() == Token::Minus)) {
+                                            if ((op2.asOperator() == KCToken::Plus) ||
+                                                    (op2.asOperator() == KCToken::Minus)) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
                                                 syntaxStack.push(x);
-                                                if (op2.asOperator() == Token::Minus)
+                                                if (op2.asOperator() == KCToken::Minus)
                                                     codes.append(FormulaToken(FormulaToken::UMinus));
                                                 else
                                                     codes.append(FormulaToken(FormulaToken::UPlus));
@@ -1010,19 +1010,19 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                     // conditions: op is unary, op is first in syntax stack, token is not '('
                     // action: push (op) to result
                     if (!ruleFound)
-                        if (token.asOperator() != Token::LeftPar)
+                        if (token.asOperator() != KCToken::LeftPar)
                             if (syntaxStack.itemCount() == 2) {
-                                Token x = syntaxStack.top();
-                                Token op = syntaxStack.top(1);
+                                KCToken x = syntaxStack.top();
+                                KCToken op = syntaxStack.top(1);
                                 if (!x.isOperator())
                                     if (op.isOperator())
-                                        if ((op.asOperator() == Token::Plus) ||
-                                                (op.asOperator() == Token::Minus)) {
+                                        if ((op.asOperator() == KCToken::Plus) ||
+                                                (op.asOperator() == KCToken::Minus)) {
                                             ruleFound = true;
                                             syntaxStack.pop();
                                             syntaxStack.pop();
                                             syntaxStack.push(x);
-                                            if (op.asOperator() == Token::Minus)
+                                            if (op.asOperator() == KCToken::Minus)
                                                 codes.append(FormulaToken(FormulaToken::UMinus));
                                             else
                                                 codes.append(FormulaToken(FormulaToken::UPlus));
@@ -1033,7 +1033,7 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
                 }
 
                 // can't apply rules anymore, push the token
-                if (token.asOperator() != Token::Percent)
+                if (token.asOperator() != KCToken::Percent)
                     syntaxStack.push(token);
             }
     }
@@ -1042,7 +1042,7 @@ QList<FormulaToken> ExcelExport::compileFormula(const Tokens &tokens, KCSheet* s
     valid = false;
     if (syntaxStack.itemCount() == 2)
         if (syntaxStack.top().isOperator())
-            if (syntaxStack.top().asOperator() == Token::InvalidOp)
+            if (syntaxStack.top().asOperator() == KCToken::InvalidOp)
                 if (!syntaxStack.top(1).isOperator())
                     valid = true;
 

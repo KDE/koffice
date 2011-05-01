@@ -43,7 +43,7 @@ typedef QHash<KCCell, KCCell> CellIndirection;
  * \ingroup KCValue
  * A formula token.
  */
-class KSPREAD_EXPORT Token
+class KSPREAD_EXPORT KCToken
 {
 public:
     /**
@@ -94,12 +94,12 @@ public:
     /**
      * Creates a token.
      */
-    explicit Token(Type type = Unknown, const QString& text = QString(), int pos = -1);
+    explicit KCToken(Type type = Unknown, const QString& text = QString(), int pos = -1);
 
-    static const Token null;
+    static const KCToken null;
 
-    Token(const Token&);
-    Token& operator=(const Token&);
+    KCToken(const KCToken&);
+    KCToken& operator=(const KCToken&);
 
     /**
      * Returns type of the token.
@@ -224,7 +224,7 @@ public:
 
     /**
      * Returns operator value for an operator token.
-     * For any other type of token, returns Token::InvalidOp.
+     * For any other type of token, returns KCToken::InvalidOp.
      */
     Op asOperator() const;
 
@@ -273,10 +273,10 @@ protected:
  * An array of formula tokens.
  *
  */
-class Tokens: public QVector<Token>
+class Tokens: public QVector<KCToken>
 {
 public:
-    Tokens(): QVector<Token>(), m_valid(true) {}
+    Tokens(): QVector<KCToken>(), m_valid(true) {}
     bool valid() const {
         return m_valid;
     }

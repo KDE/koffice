@@ -273,11 +273,11 @@ void KCDependencyManager::updateFormula(const KCCell& cell, const KCRegion::Elem
     QString expression('=');
     KCSheet* sheet = cell.sheet();
     for (int i = 0; i < tokens.count(); ++i) {
-        Token token = tokens[i];
-        Token::Type tokenType = token.type();
+        KCToken token = tokens[i];
+        KCToken::Type tokenType = token.type();
 
         //parse each cell/range and put it to our expression
-        if (tokenType == Token::KCCell || tokenType == Token::Range) {
+        if (tokenType == KCToken::KCCell || tokenType == KCToken::Range) {
             // FIXME Stefan: Special handling for named areas
             const KCRegion region(token.text(), sheet->map(), sheet);
 
@@ -543,19 +543,19 @@ void KCDependencyManager::Private::computeDependencies(const KCCell& cell, const
     int inAreasCall = 0;
     KCRegion providingRegion;
     for (int i = 0; i < tokens.count(); i++) {
-        const Token token = tokens[i];
+        const KCToken token = tokens[i];
 
         if (inAreasCall) {
-            if (token.isOperator() && token.asOperator() == Token::LeftPar)
+            if (token.isOperator() && token.asOperator() == KCToken::LeftPar)
                 inAreasCall++;
-            else if (token.isOperator() && token.asOperator() == Token::RightPar)
+            else if (token.isOperator() && token.asOperator() == KCToken::RightPar)
                 inAreasCall--;
         } else {
-            if (i > 0 && token.isOperator() && token.asOperator() == Token::LeftPar && tokens[i-1].isIdentifier() && QString::compare(tokens[i-1].text(), "AREAS", Qt::CaseInsensitive) == 0)
+            if (i > 0 && token.isOperator() && token.asOperator() == KCToken::LeftPar && tokens[i-1].isIdentifier() && QString::compare(tokens[i-1].text(), "AREAS", Qt::CaseInsensitive) == 0)
                 inAreasCall = 1;
 
             //parse each cell/range and put it to our KCRegion
-            if (token.type() == Token::KCCell || token.type() == Token::Range) {
+            if (token.type() == KCToken::KCCell || token.type() == KCToken::Range) {
                 // check for named area
                 const bool isNamedArea = sheet->map()->namedAreaManager()->contains(token.text());
                 if (isNamedArea) {

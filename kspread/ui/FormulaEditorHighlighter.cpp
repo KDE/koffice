@@ -94,12 +94,12 @@ void FormulaEditorHighlighter::highlightBlock(const QString& text)
     KCMap *const map = originSheet->map();
 
     for (int i = 0; i < d->tokens.count(); ++i) {
-        Token token = d->tokens[i];
-        Token::Type type = token.type();
+        KCToken token = d->tokens[i];
+        KCToken::Type type = token.type();
 
         switch (type) {
-        case Token::KCCell:
-        case Token::Range: {
+        case KCToken::KCCell:
+        case KCToken::Range: {
             // don't compare, if we have already found a change
             if (!d->rangeChanged && i < oldTokens.count() && token.text() != oldTokens[i].text()) {
                 d->rangeChanged = true;
@@ -120,27 +120,27 @@ void FormulaEditorHighlighter::highlightBlock(const QString& text)
             ++d->rangeCount;
         }
         break;
-        case Token::Boolean:     // True, False (also i18n-ized)
+        case KCToken::Boolean:     // True, False (also i18n-ized)
             /*        font = QFont(editorFont);
                     font.setBold(true);
                     setFormat(token.pos() + 1, token.text().length(), font);*/
             break;
-        case Token::Identifier:   // function name or named area*/
+        case KCToken::Identifier:   // function name or named area*/
             /*        font = QFont(editorFont);
                     font.setBold(true);
                     setFormat(token.pos() + 1, token.text().length(), font);*/
             break;
 
-        case Token::Unknown:
-        case Token::Integer:     // 14, 3, 1977
-        case Token::Float:       // 3.141592, 1e10, 5.9e-7
-        case Token::String:      // "KOffice", "The quick brown fox..."
-        case Token::Error:
+        case KCToken::Unknown:
+        case KCToken::Integer:     // 14, 3, 1977
+        case KCToken::Float:       // 3.141592, 1e10, 5.9e-7
+        case KCToken::String:      // "KOffice", "The quick brown fox..."
+        case KCToken::Error:
             break;
-        case Token::Operator: {  // +, *, /, -
+        case KCToken::Operator: {  // +, *, /, -
             switch (token.asOperator()) {
-            case Token::LeftPar:
-            case Token::RightPar:
+            case KCToken::LeftPar:
+            case KCToken::RightPar:
                 //Check where this brace is in relation to the cursor and highlight it if necessary.
                 handleBrace(i);
                 break;
@@ -158,7 +158,7 @@ void FormulaEditorHighlighter::highlightBlock(const QString& text)
 
 void FormulaEditorHighlighter::handleBrace(uint index)
 {
-    const Token& token = d->tokens.at(index);
+    const KCToken& token = d->tokens.at(index);
 
     QTextEdit* textEdit = qobject_cast<QTextEdit*>(parent());
     Q_ASSERT(textEdit);
@@ -171,7 +171,7 @@ void FormulaEditorHighlighter::handleBrace(uint index)
     //Only one pair of braces should be highlighted at a time, and if the cursor
     //is between two braces, the inner-most pair should be highlighted.
 
-    if (opType == Token::LeftPar) {
+    if (opType == KCToken::LeftPar) {
         //If cursor is directly to the left of this left brace, highlight it
         if (distance == 1)
             highlightBrace = true;
@@ -180,7 +180,7 @@ void FormulaEditorHighlighter::handleBrace(uint index)
             //there is another left brace to the right (in which case that should be highlighted instead as it
             //is the inner-most brace)
             if (distance == 2)
-                if ((index == (uint)d->tokens.count() - 1) || (d->tokens.at(index + 1).asOperator() != Token::LeftPar))
+                if ((index == (uint)d->tokens.count() - 1) || (d->tokens.at(index + 1).asOperator() != KCToken::LeftPar))
                     highlightBrace = true;
 
     } else {
@@ -192,7 +192,7 @@ void FormulaEditorHighlighter::handleBrace(uint index)
             //there is another right brace to the left (in which case that should be highlighted instead as it
             //is the inner-most brace)
             if (distance == 1)
-                if ((index == 0) || (d->tokens.at(index - 1).asOperator() != Token::RightPar))
+                if ((index == 0) || (d->tokens.at(index - 1).asOperator() != KCToken::RightPar))
                     highlightBrace = true;
     }
 
@@ -204,7 +204,7 @@ void FormulaEditorHighlighter::handleBrace(uint index)
         int matching = findMatchingBrace(index);
 
         if (matching != -1) {
-            Token matchingBrace = d->tokens.at(matching);
+            KCToken matchingBrace = d->tokens.at(matching);
             setFormat(matchingBrace.pos() + 1 , matchingBrace.text().length() , font);
         }
     }
@@ -220,15 +220,15 @@ int FormulaEditorHighlighter::findMatchingBrace(int pos)
     //If this is a left brace we need to step forwards through the text to find the matching right brace,
     //otherwise, it is a right brace so we need to step backwards through the text to find the matching left
     //brace.
-    if (tokens.at(pos).asOperator() == Token::LeftPar)
+    if (tokens.at(pos).asOperator() == KCToken::LeftPar)
         step = 1;
     else
         step = -1;
 
     for (int index = pos ; (index >= 0) && (index < (int) tokens.count()) ; index += step) {
-        if (tokens.at(index).asOperator() == Token::LeftPar)
+        if (tokens.at(index).asOperator() == KCToken::LeftPar)
             depth++;
-        if (tokens.at(index).asOperator() == Token::RightPar)
+        if (tokens.at(index).asOperator() == KCToken::RightPar)
             depth--;
 
         if (depth == 0) {

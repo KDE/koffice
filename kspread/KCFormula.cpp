@@ -121,71 +121,71 @@ public:
     KCValue valueOrElement(FuncExtra &fe, const stackEntry& entry) const;
 };
 
-class TokenStack : public QVector<Token>
+class TokenStack : public QVector<KCToken>
 {
 public:
     TokenStack();
     bool isEmpty() const;
     unsigned itemCount() const;
-    void push(const Token& token);
-    Token pop();
-    const Token& top();
-    const Token& top(unsigned index);
+    void push(const KCToken& token);
+    KCToken pop();
+    const KCToken& top();
+    const KCToken& top(unsigned index);
 private:
     void ensureSpace();
     unsigned topIndex;
 };
 
 // for null token
-const Token Token::null;
+const KCToken KCToken::null;
 
 // static
 // helper function: return operator of given token text
 // e.g. '*' yields Operator::Asterisk, and so on
-Token::Op Token::matchOperator(const QString& text)
+KCToken::Op KCToken::matchOperator(const QString& text)
 {
-    Token::Op result = Token::InvalidOp;
+    KCToken::Op result = KCToken::InvalidOp;
 
     if (text.length() == 1) {
         QChar p = text[0];
         switch (p.unicode()) {
-        case '+': result = Token::Plus; break;
-        case '-': result = Token::Minus; break;
-        case '*': result = Token::Asterisk; break;
-        case '/': result = Token::Slash; break;
-        case '^': result = Token::Caret; break;
-        case ',': result = Token::Comma; break;
-        case ';': result = Token::Semicolon; break;
-        case ' ': result = Token::Intersect; break;
-        case '(': result = Token::LeftPar; break;
-        case ')': result = Token::RightPar; break;
-        case '&': result = Token::Ampersand; break;
-        case '=': result = Token::Equal; break;
-        case '<': result = Token::Less; break;
-        case '>': result = Token::Greater; break;
-        case '%': result = Token::Percent; break;
-        case '~': result = Token::Union; break;
+        case '+': result = KCToken::Plus; break;
+        case '-': result = KCToken::Minus; break;
+        case '*': result = KCToken::Asterisk; break;
+        case '/': result = KCToken::Slash; break;
+        case '^': result = KCToken::Caret; break;
+        case ',': result = KCToken::Comma; break;
+        case ';': result = KCToken::Semicolon; break;
+        case ' ': result = KCToken::Intersect; break;
+        case '(': result = KCToken::LeftPar; break;
+        case ')': result = KCToken::RightPar; break;
+        case '&': result = KCToken::Ampersand; break;
+        case '=': result = KCToken::Equal; break;
+        case '<': result = KCToken::Less; break;
+        case '>': result = KCToken::Greater; break;
+        case '%': result = KCToken::Percent; break;
+        case '~': result = KCToken::Union; break;
 #ifdef KSPREAD_INLINE_ARRAYS
-        case '{': result = Token::CurlyBra; break;
-        case '}': result = Token::CurlyKet; break;
-        case '|': result = Token::Pipe; break;
+        case '{': result = KCToken::CurlyBra; break;
+        case '}': result = KCToken::CurlyKet; break;
+        case '|': result = KCToken::Pipe; break;
 #endif
 #ifdef KSPREAD_UNICODE_OPERATORS
-        case 0x2212: result = Token::Minus; break;
-        case 0x00D7: result = Token::Asterisk; break;
-        case 0x00F7: result = Token::Slash; break;
-        case 0x2215: result = Token::Slash; break;
+        case 0x2212: result = KCToken::Minus; break;
+        case 0x00D7: result = KCToken::Asterisk; break;
+        case 0x00F7: result = KCToken::Slash; break;
+        case 0x2215: result = KCToken::Slash; break;
 #endif
-        default : result = Token::InvalidOp; break;
+        default : result = KCToken::InvalidOp; break;
         }
     }
 
     if (text.length() == 2) {
-        if (text == "<>") result = Token::NotEqual;
-        if (text == "!=") result = Token::NotEqual;
-        if (text == "<=") result = Token::LessEqual;
-        if (text == ">=") result = Token::GreaterEqual;
-        if (text == "==") result = Token::Equal;
+        if (text == "<>") result = KCToken::NotEqual;
+        if (text == "!=") result = KCToken::NotEqual;
+        if (text == "<=") result = KCToken::LessEqual;
+        if (text == ">=") result = KCToken::GreaterEqual;
+        if (text == "==") result = KCToken::Equal;
     }
 
     return result;
@@ -193,41 +193,41 @@ Token::Op Token::matchOperator(const QString& text)
 
 // helper function: give operator precedence
 // e.g. '+' is 1 while '*' is 3
-static int opPrecedence(Token::Op op)
+static int opPrecedence(KCToken::Op op)
 {
     int prec = -1;
     switch (op) {
-    case Token::Percent      : prec = 8; break;
-    case Token::Caret        : prec = 7; break;
-    case Token::Asterisk     : prec = 5; break;
-    case Token::Slash        : prec = 6; break;
-    case Token::Plus         : prec = 3; break;
-    case Token::Minus        : prec = 3; break;
-    case Token::Union        : prec = 2; break;
-    case Token::Ampersand    : prec = 2; break;
-    case Token::Intersect    : prec = 2; break;
-    case Token::Equal        : prec = 1; break;
-    case Token::NotEqual     : prec = 1; break;
-    case Token::Less         : prec = 1; break;
-    case Token::Greater      : prec = 1; break;
-    case Token::LessEqual    : prec = 1; break;
-    case Token::GreaterEqual : prec = 1; break;
+    case KCToken::Percent      : prec = 8; break;
+    case KCToken::Caret        : prec = 7; break;
+    case KCToken::Asterisk     : prec = 5; break;
+    case KCToken::Slash        : prec = 6; break;
+    case KCToken::Plus         : prec = 3; break;
+    case KCToken::Minus        : prec = 3; break;
+    case KCToken::Union        : prec = 2; break;
+    case KCToken::Ampersand    : prec = 2; break;
+    case KCToken::Intersect    : prec = 2; break;
+    case KCToken::Equal        : prec = 1; break;
+    case KCToken::NotEqual     : prec = 1; break;
+    case KCToken::Less         : prec = 1; break;
+    case KCToken::Greater      : prec = 1; break;
+    case KCToken::LessEqual    : prec = 1; break;
+    case KCToken::GreaterEqual : prec = 1; break;
 #ifdef KSPREAD_INLINE_ARRAYS
         // FIXME Stefan: I don't know whether zero is right for this case. :-(
-    case Token::CurlyBra     : prec = 0; break;
-    case Token::CurlyKet     : prec = 0; break;
-    case Token::Pipe         : prec = 0; break;
+    case KCToken::CurlyBra     : prec = 0; break;
+    case KCToken::CurlyKet     : prec = 0; break;
+    case KCToken::Pipe         : prec = 0; break;
 #endif
-    case Token::Semicolon    : prec = 0; break;
-    case Token::RightPar     : prec = 0; break;
-    case Token::LeftPar      : prec = -1; break;
+    case KCToken::Semicolon    : prec = 0; break;
+    case KCToken::RightPar     : prec = 0; break;
+    case KCToken::LeftPar      : prec = -1; break;
     default: prec = -1; break;
     }
     return prec;
 }
 
 // helper function
-static KCValue tokenAsValue(const Token& token)
+static KCValue tokenAsValue(const KCToken& token)
 {
     KCValue value;
     if (token.isBoolean()) value = KCValue(token.asBoolean());
@@ -265,11 +265,11 @@ static KCValue tokenAsValue(const Token& token)
 }
 
 /**********************
-    Token
+    KCToken
  **********************/
 
 // creates a token
-Token::Token(Type type, const QString& text, int pos)
+KCToken::KCToken(Type type, const QString& text, int pos)
 {
     m_type = type;
     m_text = text;
@@ -277,7 +277,7 @@ Token::Token(Type type, const QString& text, int pos)
 }
 
 // copy constructor
-Token::Token(const Token& token)
+KCToken::KCToken(const KCToken& token)
 {
     m_type = token.m_type;
     m_text = token.m_text;
@@ -285,7 +285,7 @@ Token::Token(const Token& token)
 }
 
 // assignment operator
-Token& Token::operator=(const Token & token)
+KCToken& KCToken::operator=(const KCToken & token)
 {
     m_type = token.m_type;
     m_text = token.m_text;
@@ -293,32 +293,32 @@ Token& Token::operator=(const Token & token)
     return *this;
 }
 
-bool Token::asBoolean() const
+bool KCToken::asBoolean() const
 {
     if (!isBoolean()) return false;
     return m_text.toLower() == "true";
     // FIXME check also for i18n version
 }
 
-qint64 Token::asInteger() const
+qint64 KCToken::asInteger() const
 {
     if (isInteger()) return m_text.toLongLong();
     else return 0;
 }
 
-double Token::asFloat() const
+double KCToken::asFloat() const
 {
     if (isFloat()) return m_text.toDouble();
     else return 0.0;
 }
 
-QString Token::asString() const
+QString KCToken::asString() const
 {
     if (isString()) return m_text.mid(1, m_text.length() - 2);
     else return QString();
 }
 
-QString Token::asError() const
+QString KCToken::asError() const
 {
     if (isError())
         return m_text;
@@ -326,13 +326,13 @@ QString Token::asError() const
         return QString();
 }
 
-Token::Op Token::asOperator() const
+KCToken::Op KCToken::asOperator() const
 {
-    if (isOperator()) return Token::matchOperator(m_text);
+    if (isOperator()) return KCToken::matchOperator(m_text);
     else return InvalidOp;
 }
 
-QString Token::sheetName() const
+QString KCToken::sheetName() const
 {
     if (!isCell() && !isRange()) return QString();
     int i = m_text.indexOf('!');
@@ -341,7 +341,7 @@ QString Token::sheetName() const
     return sheet;
 }
 
-QString Token::description() const
+QString KCToken::description() const
 {
     QString desc;
 
@@ -371,7 +371,7 @@ QString Token::description() const
     TokenStack
  **********************/
 
-TokenStack::TokenStack(): QVector<Token>()
+TokenStack::TokenStack(): QVector<KCToken>()
 {
     topIndex = 0;
     ensureSpace();
@@ -387,27 +387,27 @@ unsigned TokenStack::itemCount() const
     return topIndex;
 }
 
-void TokenStack::push(const Token& token)
+void TokenStack::push(const KCToken& token)
 {
     ensureSpace();
     insert(topIndex++, token);
 }
 
-Token TokenStack::pop()
+KCToken TokenStack::pop()
 {
-    return (topIndex > 0) ? Token(at(--topIndex)) : Token();
+    return (topIndex > 0) ? KCToken(at(--topIndex)) : KCToken();
 }
 
-const Token& TokenStack::top()
+const KCToken& TokenStack::top()
 {
     return top(0);
 }
 
-const Token& TokenStack::top(unsigned index)
+const KCToken& TokenStack::top(unsigned index)
 {
     if (topIndex > index)
         return at(topIndex - index - 1);
-    return Token::null;
+    return KCToken::null;
 }
 
 void TokenStack::ensureSpace()
@@ -640,23 +640,23 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
 
                 // check for two-chars operator, such as '<=', '>=', etc
                 s.append(ch).append(ex[i+1]);
-                op = Token::matchOperator(s);
+                op = KCToken::matchOperator(s);
 
                 // check for one-char operator, such as '+', ';', etc
-                if (op == Token::InvalidOp) {
+                if (op == KCToken::InvalidOp) {
                     s = QString(ch);
-                    op = Token::matchOperator(s);
+                    op = KCToken::matchOperator(s);
                 }
 
                 // any matched operator ?
-                if (op != Token::InvalidOp) {
+                if (op != KCToken::InvalidOp) {
                     int len = s.length();
                     i += len;
-                    tokens.append(Token(Token::Operator, s.left(len), tokenStart));
+                    tokens.append(KCToken(KCToken::Operator, s.left(len), tokenStart));
                 } else {
                     // not matched an operator, add an Unknown token and remember whe had a parse error
                     parseError = true;
-                    tokens.append(Token(Token::Unknown, s.left(1), tokenStart));
+                    tokens.append(KCToken(KCToken::Unknown, s.left(1), tokenStart));
                     i++;
                 }
             }
@@ -675,7 +675,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
 
             // a '(' ? then this must be a function identifier
             else if (ch == '(') {
-                tokens.append(Token(Token::Identifier, tokenText, tokenStart));
+                tokens.append(KCToken(KCToken::Identifier, tokenText, tokenStart));
                 tokenStart = i;
                 tokenText.clear();
                 state = Start;
@@ -690,9 +690,9 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
                     state = InCell;
                 else {
                     if (isNamedArea(tokenText))
-                        tokens.append(Token(Token::Range, tokenText, tokenStart));
+                        tokens.append(KCToken(KCToken::Range, tokenText, tokenStart));
                     else
-                        tokens.append(Token(Token::Identifier, tokenText, tokenStart));
+                        tokens.append(KCToken(KCToken::Identifier, tokenText, tokenStart));
                     tokenStart = i;
                     tokenText.clear();
                     state = Start;
@@ -721,7 +721,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
                     // regexp failed, means we have something like "Sheet2!TotalSales"
                     // and not "Sheet2!A2"
                     // thus, assume so far that it's a named area
-                    tokens.append(Token(Token::Range, tokenText, tokenStart));
+                    tokens.append(KCToken(KCToken::Range, tokenText, tokenStart));
                     tokenText.clear();
                     state = Start;
                 }
@@ -735,7 +735,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
                         state = InRange;
                     } else {
                         // we're done with cell reference
-                        tokens.append(Token(Token::KCCell, tokenText, tokenStart));
+                        tokens.append(KCToken(KCToken::KCCell, tokenText, tokenStart));
                         tokenText.clear();
                         state = Start;
                     }
@@ -750,7 +750,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
 
             // we're done with range reference
             else {
-                tokens.append(Token(Token::Range, tokenText, tokenStart));
+                tokens.append(KCToken(KCToken::Range, tokenText, tokenStart));
                 tokenText.clear();
                 state = Start;
             }
@@ -770,12 +770,12 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
                     state = InCell;
                 } else {
                     if (isNamedArea(tokenText))
-                        tokens.append(Token(Token::Range, tokenText, tokenStart));
+                        tokens.append(KCToken(KCToken::Range, tokenText, tokenStart));
                     else {
                         // for compatibility with oocalc (and the openformula spec), don't parse single-quoted
                         // text as an identifier, instead add an Unknown token and remember we had an error
                         parseError = true;
-                        tokens.append(Token(Token::Unknown, '\'' + tokenText + '\'', tokenStart));
+                        tokens.append(KCToken(KCToken::Unknown, '\'' + tokenText + '\'', tokenStart));
                     }
                     tokenStart = i;
                     tokenText.clear();
@@ -821,7 +821,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
 
             // we're done with integer number
             else {
-                tokens.append(Token(Token::Integer, tokenText, tokenStart));
+                tokens.append(KCToken(KCToken::Integer, tokenText, tokenStart));
                 tokenText.clear();
                 state = Start;
             };
@@ -841,7 +841,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
 
             // we're done with floating-point number
             else {
-                tokens.append(Token(Token::Float, tokenText, tokenStart));
+                tokens.append(KCToken(KCToken::Float, tokenText, tokenStart));
                 tokenText.clear();
                 state = Start;
             };
@@ -859,7 +859,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
             else {
                 parseError = true;
                 tokenText.append(ex[i++]);
-                tokens.append(Token(Token::Unknown, tokenText, tokenStart));
+                tokens.append(KCToken(KCToken::Unknown, tokenText, tokenStart));
                 tokenText.clear();
                 state = Start;
             }
@@ -873,7 +873,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
 
             // we're done with floating-point number
             else {
-                tokens.append(Token(Token::Float, tokenText, tokenStart));
+                tokens.append(KCToken(KCToken::Float, tokenText, tokenStart));
                 tokenText.clear();
                 state = Start;
             };
@@ -886,7 +886,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
 
             else {
                 tokenText.append(ch); i++;
-                tokens.append(Token(Token::String, tokenText, tokenStart));
+                tokens.append(KCToken(KCToken::String, tokenText, tokenStart));
                 tokenText.clear();
                 state = Start;
             }
@@ -899,7 +899,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
                 tokenText.append(ex[i++]);
             else {
                 tokenText.append(ex[i++]);
-                tokens.append(Token(Token::Error, tokenText, tokenStart));
+                tokens.append(KCToken(KCToken::Error, tokenText, tokenStart));
                 tokenText.clear();
                 state = Start;
             }
@@ -912,7 +912,7 @@ Tokens KCFormula::scan(const QString& expr, const KLocale* locale) const
 
     // parse error if any text remains
     if (state != Finish) {
-        tokens.append(Token(Token::Unknown, ex.mid(tokenStart, ex.length() - tokenStart - 1), tokenStart));
+        tokens.append(KCToken(KCToken::Unknown, ex.mid(tokenStart, ex.length() - tokenStart - 1), tokenStart));
         parseError = true;
     }
 
@@ -940,18 +940,18 @@ void KCFormula::compile(const Tokens& tokens) const
 
     for (int i = 0; i <= tokens.count(); i++) {
         // helper token: InvalidOp is end-of-formula
-        Token token = (i < tokens.count()) ? tokens[i] : Token(Token::Operator);
-        Token::Type tokenType = token.type();
+        KCToken token = (i < tokens.count()) ? tokens[i] : KCToken(KCToken::Operator);
+        KCToken::Type tokenType = token.type();
 
         // unknown token is invalid
-        if (tokenType == Token::Unknown) break;
+        if (tokenType == KCToken::Unknown) break;
 
         // are we entering a function ?
         // if stack already has: id (
         if (syntaxStack.itemCount() >= 2) {
-            Token par = syntaxStack.top();
-            Token id = syntaxStack.top(1);
-            if (par.asOperator() == Token::LeftPar)
+            KCToken par = syntaxStack.top();
+            KCToken id = syntaxStack.top(1);
+            if (par.asOperator() == KCToken::LeftPar)
                 if (id.isIdentifier()) {
                     argStack.push(argCount);
                     argCount = 1;
@@ -962,8 +962,8 @@ void KCFormula::compile(const Tokens& tokens) const
         // are we entering an inline array ?
         // if stack already has: {
         if (syntaxStack.itemCount() >= 1) {
-            Token bra = syntaxStack.top();
-            if (bra.asOperator() == Token::CurlyBra) {
+            KCToken bra = syntaxStack.top();
+            if (bra.asOperator() == KCToken::CurlyBra) {
                 argStack.push(argCount);
                 argStack.push(1);   // row count
                 argCount = 1;
@@ -973,9 +973,9 @@ void KCFormula::compile(const Tokens& tokens) const
 
         // for constants, push immediately to stack
         // generate code to load from a constant
-        if ((tokenType == Token::Integer) || (tokenType == Token::Float) ||
-                (tokenType == Token::String) || (tokenType == Token::Boolean) ||
-                (tokenType == Token::Error)) {
+        if ((tokenType == KCToken::Integer) || (tokenType == KCToken::Float) ||
+                (tokenType == KCToken::String) || (tokenType == KCToken::Boolean) ||
+                (tokenType == KCToken::Error)) {
             syntaxStack.push(token);
             d->constants.append(tokenAsValue(token));
             d->codes.append(Opcode(Opcode::Load, d->constants.count() - 1));
@@ -983,21 +983,21 @@ void KCFormula::compile(const Tokens& tokens) const
 
         // for cell, range, or identifier, push immediately to stack
         // generate code to load from reference
-        if ((tokenType == Token::KCCell) || (tokenType == Token::Range) ||
-                (tokenType == Token::Identifier)) {
+        if ((tokenType == KCToken::KCCell) || (tokenType == KCToken::Range) ||
+                (tokenType == KCToken::Identifier)) {
             syntaxStack.push(token);
             d->constants.append(KCValue(token.text()));
-            if (tokenType == Token::KCCell)
+            if (tokenType == KCToken::KCCell)
                 d->codes.append(Opcode(Opcode::KCCell, d->constants.count() - 1));
-            else if (tokenType == Token::Range)
+            else if (tokenType == KCToken::Range)
                 d->codes.append(Opcode(Opcode::Range, d->constants.count() - 1));
             else
                 d->codes.append(Opcode(Opcode::Ref, d->constants.count() - 1));
         }
 
         // special case for percentage
-        if (tokenType == Token::Operator)
-            if (token.asOperator() == Token::Percent)
+        if (tokenType == KCToken::Operator)
+            if (token.asOperator() == KCToken::Percent)
                 if (syntaxStack.itemCount() >= 1)
                     if (!syntaxStack.top().isOperator()) {
                         d->constants.append(KCValue(0.01));
@@ -1006,8 +1006,8 @@ void KCFormula::compile(const Tokens& tokens) const
                     }
 
         // for any other operator, try to apply all parsing rules
-        if (tokenType == Token::Operator)
-            if (token.asOperator() != Token::Percent) {
+        if (tokenType == KCToken::Operator)
+            if (token.asOperator() != KCToken::Percent) {
                 // repeat until no more rule applies
                 for (; ;) {
                     bool ruleFound = false;
@@ -1016,17 +1016,17 @@ void KCFormula::compile(const Tokens& tokens) const
                     // id ( arg1 ; arg2 -> id ( arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 5)
-                            if ((token.asOperator() == Token::RightPar) ||
-                                    (token.asOperator() == Token::Semicolon)) {
-                                Token arg2 = syntaxStack.top();
-                                Token sep = syntaxStack.top(1);
-                                Token arg1 = syntaxStack.top(2);
-                                Token par = syntaxStack.top(3);
-                                Token id = syntaxStack.top(4);
+                            if ((token.asOperator() == KCToken::RightPar) ||
+                                    (token.asOperator() == KCToken::Semicolon)) {
+                                KCToken arg2 = syntaxStack.top();
+                                KCToken sep = syntaxStack.top(1);
+                                KCToken arg1 = syntaxStack.top(2);
+                                KCToken par = syntaxStack.top(3);
+                                KCToken id = syntaxStack.top(4);
                                 if (!arg2.isOperator())
-                                    if (sep.asOperator() == Token::Semicolon)
+                                    if (sep.asOperator() == KCToken::Semicolon)
                                         if (!arg1.isOperator())
-                                            if (par.asOperator() == Token::LeftPar)
+                                            if (par.asOperator() == KCToken::LeftPar)
                                                 if (id.isIdentifier()) {
                                                     ruleFound = true;
                                                     syntaxStack.pop();
@@ -1039,15 +1039,15 @@ void KCFormula::compile(const Tokens& tokens) const
                     // id ( arg ; -> id ( arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3)
-                            if ((token.asOperator() == Token::RightPar) ||
-                                    (token.asOperator() == Token::Semicolon)) {
-                                Token sep = syntaxStack.top();
-                                Token arg = syntaxStack.top(1);
-                                Token par = syntaxStack.top(2);
-                                Token id = syntaxStack.top(3);
-                                if (sep.asOperator() == Token::Semicolon)
+                            if ((token.asOperator() == KCToken::RightPar) ||
+                                    (token.asOperator() == KCToken::Semicolon)) {
+                                KCToken sep = syntaxStack.top();
+                                KCToken arg = syntaxStack.top(1);
+                                KCToken par = syntaxStack.top(2);
+                                KCToken id = syntaxStack.top(3);
+                                if (sep.asOperator() == KCToken::Semicolon)
                                     if (!arg.isOperator())
-                                        if (par.asOperator() == Token::LeftPar)
+                                        if (par.asOperator() == KCToken::LeftPar)
                                             if (id.isIdentifier()) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
@@ -1061,13 +1061,13 @@ void KCFormula::compile(const Tokens& tokens) const
                     //  id ( arg ) -> arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 4) {
-                            Token par2 = syntaxStack.top();
-                            Token arg = syntaxStack.top(1);
-                            Token par1 = syntaxStack.top(2);
-                            Token id = syntaxStack.top(3);
-                            if (par2.asOperator() == Token::RightPar)
+                            KCToken par2 = syntaxStack.top();
+                            KCToken arg = syntaxStack.top(1);
+                            KCToken par1 = syntaxStack.top(2);
+                            KCToken id = syntaxStack.top(3);
+                            if (par2.asOperator() == KCToken::RightPar)
                                 if (!arg.isOperator())
-                                    if (par1.asOperator() == Token::LeftPar)
+                                    if (par1.asOperator() == KCToken::LeftPar)
                                         if (id.isIdentifier()) {
                                             ruleFound = true;
                                             syntaxStack.pop();
@@ -1085,17 +1085,17 @@ void KCFormula::compile(const Tokens& tokens) const
                     // e.g. "2*PI()"
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            Token par2 = syntaxStack.top();
-                            Token par1 = syntaxStack.top(1);
-                            Token id = syntaxStack.top(2);
-                            if (par2.asOperator() == Token::RightPar)
-                                if (par1.asOperator() == Token::LeftPar)
+                            KCToken par2 = syntaxStack.top();
+                            KCToken par1 = syntaxStack.top(1);
+                            KCToken id = syntaxStack.top(2);
+                            if (par2.asOperator() == KCToken::RightPar)
+                                if (par1.asOperator() == KCToken::LeftPar)
                                     if (id.isIdentifier()) {
                                         ruleFound = true;
                                         syntaxStack.pop();
                                         syntaxStack.pop();
                                         syntaxStack.pop();
-                                        syntaxStack.push(Token(Token::Integer));
+                                        syntaxStack.push(KCToken(KCToken::Integer));
                                         d->codes.append(Opcode(Opcode::Function, 0));
                                         Q_ASSERT(!argStack.empty());
                                         argCount = argStack.empty() ? 0 : argStack.pop();
@@ -1107,17 +1107,17 @@ void KCFormula::compile(const Tokens& tokens) const
                     // { arg1 ; arg2 -> { arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 4)
-                            if ((token.asOperator() == Token::Semicolon) ||
-                                    (token.asOperator() == Token::CurlyKet) ||
-                                    (token.asOperator() == Token::Pipe)) {
-                                Token arg2 = syntaxStack.top();
-                                Token sep = syntaxStack.top(1);
-                                Token arg1 = syntaxStack.top(2);
-                                Token bra = syntaxStack.top(3);
+                            if ((token.asOperator() == KCToken::Semicolon) ||
+                                    (token.asOperator() == KCToken::CurlyKet) ||
+                                    (token.asOperator() == KCToken::Pipe)) {
+                                KCToken arg2 = syntaxStack.top();
+                                KCToken sep = syntaxStack.top(1);
+                                KCToken arg1 = syntaxStack.top(2);
+                                KCToken bra = syntaxStack.top(3);
                                 if (!arg2.isOperator())
-                                    if (sep.asOperator() == Token::Semicolon)
+                                    if (sep.asOperator() == KCToken::Semicolon)
                                         if (!arg1.isOperator())
-                                            if (bra.asOperator() == Token::CurlyBra) {
+                                            if (bra.asOperator() == KCToken::CurlyBra) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
@@ -1129,17 +1129,17 @@ void KCFormula::compile(const Tokens& tokens) const
                     //  { arg1 | arg2 -> { arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 4)
-                            if ((token.asOperator() == Token::Semicolon) ||
-                                    (token.asOperator() == Token::CurlyKet) ||
-                                    (token.asOperator() == Token::Pipe)) {
-                                Token arg2 = syntaxStack.top();
-                                Token sep = syntaxStack.top(1);
-                                Token arg1 = syntaxStack.top(2);
-                                Token bra = syntaxStack.top(3);
+                            if ((token.asOperator() == KCToken::Semicolon) ||
+                                    (token.asOperator() == KCToken::CurlyKet) ||
+                                    (token.asOperator() == KCToken::Pipe)) {
+                                KCToken arg2 = syntaxStack.top();
+                                KCToken sep = syntaxStack.top(1);
+                                KCToken arg1 = syntaxStack.top(2);
+                                KCToken bra = syntaxStack.top(3);
                                 if (!arg2.isOperator())
-                                    if (sep.asOperator() == Token::Pipe)
+                                    if (sep.asOperator() == KCToken::Pipe)
                                         if (!arg1.isOperator())
-                                            if (bra.asOperator() == Token::CurlyBra) {
+                                            if (bra.asOperator() == KCToken::CurlyBra) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
@@ -1153,12 +1153,12 @@ void KCFormula::compile(const Tokens& tokens) const
                     //  { arg } -> arg
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            Token ket = syntaxStack.top();
-                            Token arg = syntaxStack.top(1);
-                            Token bra = syntaxStack.top(2);
-                            if (ket.asOperator() == Token::CurlyKet)
+                            KCToken ket = syntaxStack.top();
+                            KCToken arg = syntaxStack.top(1);
+                            KCToken bra = syntaxStack.top(2);
+                            if (ket.asOperator() == KCToken::CurlyKet)
                                 if (!arg.isOperator())
-                                    if (bra.asOperator() == Token::CurlyBra) {
+                                    if (bra.asOperator() == KCToken::CurlyBra) {
                                         ruleFound = true;
                                         syntaxStack.pop();
                                         syntaxStack.pop();
@@ -1176,14 +1176,14 @@ void KCFormula::compile(const Tokens& tokens) const
                     // rule for parenthesis:  ( Y ) -> Y
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            Token right = syntaxStack.top();
-                            Token y = syntaxStack.top(1);
-                            Token left = syntaxStack.top(2);
+                            KCToken right = syntaxStack.top();
+                            KCToken y = syntaxStack.top(1);
+                            KCToken left = syntaxStack.top(2);
                             if (right.isOperator())
                                 if (!y.isOperator())
                                     if (left.isOperator())
-                                        if (right.asOperator() == Token::RightPar)
-                                            if (left.asOperator() == Token::LeftPar) {
+                                        if (right.asOperator() == KCToken::RightPar)
+                                            if (left.asOperator() == KCToken::LeftPar) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
@@ -1198,13 +1198,13 @@ void KCFormula::compile(const Tokens& tokens) const
                     // e.g. "A * B" becomes 'A' if token is operator '+'
                     if (!ruleFound)
                         if (syntaxStack.itemCount() >= 3) {
-                            Token b = syntaxStack.top();
-                            Token op = syntaxStack.top(1);
-                            Token a = syntaxStack.top(2);
+                            KCToken b = syntaxStack.top();
+                            KCToken op = syntaxStack.top(1);
+                            KCToken a = syntaxStack.top(2);
                             if (!a.isOperator())
                                 if (!b.isOperator())
                                     if (op.isOperator())
-                                        if (token.asOperator() != Token::LeftPar)
+                                        if (token.asOperator() != KCToken::LeftPar)
                                             if (opPrecedence(op.asOperator()) >= opPrecedence(token.asOperator())) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
@@ -1213,34 +1213,34 @@ void KCFormula::compile(const Tokens& tokens) const
                                                 syntaxStack.push(b);
                                                 switch (op.asOperator()) {
                                                     // simple binary operations
-                                                case Token::Plus:         d->codes.append(Opcode::Add); break;
-                                                case Token::Minus:        d->codes.append(Opcode::Sub); break;
-                                                case Token::Asterisk:     d->codes.append(Opcode::Mul); break;
-                                                case Token::Slash:        d->codes.append(Opcode::Div); break;
-                                                case Token::Caret:        d->codes.append(Opcode::Pow); break;
-                                                case Token::Ampersand:    d->codes.append(Opcode::Concat); break;
-                                                case Token::Intersect:    d->codes.append(Opcode::Intersect); break;
-                                                case Token::Union:        d->codes.append(Opcode::Union); break;
+                                                case KCToken::Plus:         d->codes.append(Opcode::Add); break;
+                                                case KCToken::Minus:        d->codes.append(Opcode::Sub); break;
+                                                case KCToken::Asterisk:     d->codes.append(Opcode::Mul); break;
+                                                case KCToken::Slash:        d->codes.append(Opcode::Div); break;
+                                                case KCToken::Caret:        d->codes.append(Opcode::Pow); break;
+                                                case KCToken::Ampersand:    d->codes.append(Opcode::Concat); break;
+                                                case KCToken::Intersect:    d->codes.append(Opcode::Intersect); break;
+                                                case KCToken::Union:        d->codes.append(Opcode::Union); break;
 
                                                     // simple value comparisons
-                                                case Token::Equal:        d->codes.append(Opcode::Equal); break;
-                                                case Token::Less:         d->codes.append(Opcode::Less); break;
-                                                case Token::Greater:      d->codes.append(Opcode::Greater); break;
+                                                case KCToken::Equal:        d->codes.append(Opcode::Equal); break;
+                                                case KCToken::Less:         d->codes.append(Opcode::Less); break;
+                                                case KCToken::Greater:      d->codes.append(Opcode::Greater); break;
 
                                                     // NotEqual is Equal, followed by Not
-                                                case Token::NotEqual:
+                                                case KCToken::NotEqual:
                                                     d->codes.append(Opcode::Equal);
                                                     d->codes.append(Opcode::Not);
                                                     break;
 
                                                     // LessOrEqual is Greater, followed by Not
-                                                case Token::LessEqual:
+                                                case KCToken::LessEqual:
                                                     d->codes.append(Opcode::Greater);
                                                     d->codes.append(Opcode::Not);
                                                     break;
 
                                                     // GreaterOrEqual is Less, followed by Not
-                                                case Token::GreaterEqual:
+                                                case KCToken::GreaterEqual:
                                                     d->codes.append(Opcode::Less);
                                                     d->codes.append(Opcode::Not);
                                                     break;
@@ -1254,21 +1254,21 @@ void KCFormula::compile(const Tokens& tokens) const
                     // action: push (op2) to result
                     // e.g.  "* - 2" becomes '*'
                     if (!ruleFound)
-                        if (token.asOperator() != Token::LeftPar)
+                        if (token.asOperator() != KCToken::LeftPar)
                             if (syntaxStack.itemCount() >= 3) {
-                                Token x = syntaxStack.top();
-                                Token op2 = syntaxStack.top(1);
-                                Token op1 = syntaxStack.top(2);
+                                KCToken x = syntaxStack.top();
+                                KCToken op2 = syntaxStack.top(1);
+                                KCToken op1 = syntaxStack.top(2);
                                 if (!x.isOperator())
                                     if (op1.isOperator())
                                         if (op2.isOperator())
-                                            if ((op2.asOperator() == Token::Plus) ||
-                                                    (op2.asOperator() == Token::Minus)) {
+                                            if ((op2.asOperator() == KCToken::Plus) ||
+                                                    (op2.asOperator() == KCToken::Minus)) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
                                                 syntaxStack.pop();
                                                 syntaxStack.push(x);
-                                                if (op2.asOperator() == Token::Minus)
+                                                if (op2.asOperator() == KCToken::Minus)
                                                     d->codes.append(Opcode(Opcode::Neg));
                                             }
                             }
@@ -1277,19 +1277,19 @@ void KCFormula::compile(const Tokens& tokens) const
                     // conditions: op is unary, op is first in syntax stack, token is not '('
                     // action: push (op) to result
                     if (!ruleFound)
-                        if (token.asOperator() != Token::LeftPar)
+                        if (token.asOperator() != KCToken::LeftPar)
                             if (syntaxStack.itemCount() == 2) {
-                                Token x = syntaxStack.top();
-                                Token op = syntaxStack.top(1);
+                                KCToken x = syntaxStack.top();
+                                KCToken op = syntaxStack.top(1);
                                 if (!x.isOperator())
                                     if (op.isOperator())
-                                        if ((op.asOperator() == Token::Plus) ||
-                                                (op.asOperator() == Token::Minus)) {
+                                        if ((op.asOperator() == KCToken::Plus) ||
+                                                (op.asOperator() == KCToken::Minus)) {
                                             ruleFound = true;
                                             syntaxStack.pop();
                                             syntaxStack.pop();
                                             syntaxStack.push(x);
-                                            if (op.asOperator() == Token::Minus)
+                                            if (op.asOperator() == KCToken::Minus)
                                                 d->codes.append(Opcode(Opcode::Neg));
                                         }
                             }
@@ -1298,7 +1298,7 @@ void KCFormula::compile(const Tokens& tokens) const
                 }
 
                 // can't apply rules anymore, push the token
-                if (token.asOperator() != Token::Percent)
+                if (token.asOperator() != KCToken::Percent)
                     syntaxStack.push(token);
             }
     }
@@ -1307,7 +1307,7 @@ void KCFormula::compile(const Tokens& tokens) const
     d->valid = false;
     if (syntaxStack.itemCount() == 2)
         if (syntaxStack.top().isOperator())
-            if (syntaxStack.top().asOperator() == Token::InvalidOp)
+            if (syntaxStack.top().asOperator() == KCToken::InvalidOp)
                 if (!syntaxStack.top(1).isOperator())
                     d->valid = true;
 

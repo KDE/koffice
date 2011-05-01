@@ -558,10 +558,10 @@ QString KCCell::encodeFormula(bool fixedReferences) const
     QString result('=');
     const Tokens tokens = formula().tokens();
     for (int i = 0; i < tokens.count(); ++i) {
-        const Token token = tokens[i];
+        const KCToken token = tokens[i];
         switch (token.type()) {
-        case Token::KCCell:
-        case Token::Range: {
+        case KCToken::KCCell:
+        case KCToken::Range: {
             if (sheet()->map()->namedAreaManager()->contains(token.text())) {
                 result.append(token.text()); // simply keep the area name
                 break;

@@ -22,17 +22,17 @@
 
 #include "TestKspreadCommon.h"
 
-static char encodeTokenType(const Token& token)
+static char encodeTokenType(const KCToken& token)
 {
     char result = '?';
     switch (token.type()) {
-    case Token::Boolean:    result = 'b'; break;
-    case Token::Integer:    result = 'i'; break;
-    case Token::Float:      result = 'f'; break;
-    case Token::Operator:   result = 'o'; break;
-    case Token::KCCell:       result = 'c'; break;
-    case Token::Range:      result = 'r'; break;
-    case Token::Identifier: result = 'x'; break;
+    case KCToken::Boolean:    result = 'b'; break;
+    case KCToken::Integer:    result = 'i'; break;
+    case KCToken::Float:      result = 'f'; break;
+    case KCToken::Operator:   result = 'o'; break;
+    case KCToken::KCCell:       result = 'c'; break;
+    case KCToken::Range:      result = 'r'; break;
+    case KCToken::Identifier: result = 'x'; break;
     default: break;
     }
     return result;

@@ -921,10 +921,10 @@ void KCSheet::changeNameCellRef(const QPoint& pos, bool fullRowOrColumn, ChangeR
         QString newText('=');
         const Tokens tokens = formulaStorage()->data(c).tokens();
         for (int t = 0; t < tokens.count(); ++t) {
-            const Token token = tokens[t];
+            const KCToken token = tokens[t];
             switch (token.type()) {
-            case Token::KCCell:
-            case Token::Range: {
+            case KCToken::KCCell:
+            case KCToken::Range: {
                 if (map()->namedAreaManager()->contains(token.text())) {
                     newText.append(token.text()); // simply keep the area name
                     break;

@@ -409,20 +409,20 @@ QString KSpread::Odf::decodeFormula(const QString& expression, const KLocale* lo
                 s.append(expression[i]);
                 if (i + 1 < expression.length())
                     s.append(expression[i+1]);
-                op = Token::matchOperator(s);
+                op = KCToken::matchOperator(s);
 
                 // check for one-char operator, such as '+', ';', etc
-                if (op == Token::InvalidOp) {
+                if (op == KCToken::InvalidOp) {
                     s = QString(expression[i]);
-                    op = Token::matchOperator(s);
+                    op = KCToken::matchOperator(s);
                 }
 
                 // any matched operator ?
-                if (op == Token::Equal)
+                if (op == KCToken::Equal)
                     result.append("==");
                 else
                     result.append(s);
-                if (op != Token::InvalidOp) {
+                if (op != KCToken::InvalidOp) {
                     int len = s.length();
                     i += len;
                 } else {
@@ -541,11 +541,11 @@ QString KSpread::Odf::encodeFormula(const QString& expr, const KLocale* locale)
 
     for (int i = 0; i < tokens.count(); ++i) {
         const QString tokenText = tokens[i].text();
-        const Token::Type type = tokens[i].type();
+        const KCToken::Type type = tokens[i].type();
 
         switch (type) {
-        case Token::KCCell:
-        case Token::Range: {
+        case KCToken::KCCell:
+        case KCToken::Range: {
             result.append('[');
             // FIXME Stefan: Hack to get the apostrophes right. Fix and remove!
             const int pos = tokenText.lastIndexOf('!');
@@ -556,19 +556,19 @@ QString KSpread::Odf::encodeFormula(const QString& expr, const KLocale* locale)
             result.append(']');
             break;
         }
-        case Token::Float: {
+        case KCToken::Float: {
             QString tmp(tokenText);
             result.append(tmp.replace(decimal, "."));
             break;
         }
-        case Token::Operator: {
-            if (tokens[i].asOperator() == Token::Equal)
+        case KCToken::Operator: {
+            if (tokens[i].asOperator() == KCToken::Equal)
                 result.append('=');
             else
                 result.append(tokenText);
             break;
         }
-        case Token::Identifier: {
+        case KCToken::Identifier: {
             if (tokenText == "ERRORTYPE") {
                 // need to replace this
                 result.append("ERROR.TYPE");
@@ -583,9 +583,9 @@ QString KSpread::Odf::encodeFormula(const QString& expr, const KLocale* locale)
             break;
 
         }
-        case Token::Boolean:
-        case Token::Integer:
-        case Token::String:
+        case KCToken::Boolean:
+        case KCToken::Integer:
+        case KCToken::String:
         default:
             result.append(tokenText);
             break;

@@ -87,8 +87,8 @@ void CellEditor::Private::updateActiveSubRegion(const Tokens &tokens)
     uint regionEnd = 0; // range index denoting the sub-region end
     enum { Anywhere, InRegion, BeyondCursor } state = Anywhere;
 
-    Token token;
-    Token::Type type;
+    KCToken token;
+    KCToken::Type type;
     // Search the current range the text cursor is positioned to.
     // Determine the subregion start and end, in which the range is located.
     for (int i = 0; i < tokens.count(); ++i) {
@@ -104,12 +104,12 @@ void CellEditor::Private::updateActiveSubRegion(const Tokens &tokens)
             }
         } else if (state == InRegion) {
             // Loop to the end of the subregion.
-            if (type == Token::KCCell || type == Token::Range) {
+            if (type == KCToken::KCCell || type == KCToken::Range) {
                 regionEnd = rangeCounter++;
                 continue; // keep going until the referenced region ends
             }
-            if (type == Token::Operator) {
-                if (tokens[i].asOperator() == Token::Semicolon) {
+            if (type == KCToken::Operator) {
+                if (tokens[i].asOperator() == KCToken::Semicolon) {
                     continue; // keep going until the referenced region ends
                 }
             }
@@ -119,8 +119,8 @@ void CellEditor::Private::updateActiveSubRegion(const Tokens &tokens)
 
         // Can the token be replaced by a reference?
         switch (type) {
-        case Token::KCCell:
-        case Token::Range:
+        case KCToken::KCCell:
+        case KCToken::Range:
             if (state == Anywhere) {
                 currentToken = i;
                 regionStart = rangeCounter;
@@ -129,12 +129,12 @@ void CellEditor::Private::updateActiveSubRegion(const Tokens &tokens)
             regionEnd = rangeCounter; // length = 1
             currentRange = ++rangeCounter; // point behind the last
             continue;
-        case Token::Unknown:
-        case Token::Boolean:
-        case Token::Integer:
-        case Token::Float:
-        case Token::String:
-        case Token::Error:
+        case KCToken::Unknown:
+        case KCToken::Boolean:
+        case KCToken::Integer:
+        case KCToken::Float:
+        case KCToken::String:
+        case KCToken::Error:
             // Set the active sub-region start to the next range but
             // with a length of 0, which results in inserting a new range
             // to the selection on calling Selection::initialize() or
@@ -144,8 +144,8 @@ void CellEditor::Private::updateActiveSubRegion(const Tokens &tokens)
             regionEnd = rangeCounter - 1; // length = 0
             currentRange = rangeCounter;
             continue;
-        case Token::Operator:
-        case Token::Identifier:
+        case KCToken::Operator:
+        case KCToken::Identifier:
             continue;
         }
     }
@@ -158,49 +158,49 @@ void CellEditor::Private::updateActiveSubRegion(const Tokens &tokens)
         // It was processed, but maybe a reference can be placed behind it.
         // Check, if the token can be replaced by a reference.
         switch (type) {
-        case Token::Operator:
+        case KCToken::Operator:
             // Possible to place a reference behind the operator?
             switch (token.asOperator()) {
-            case Token::Plus:
-            case Token::Minus:
-            case Token::Asterisk:
-            case Token::Slash:
-            case Token::Caret:
-            case Token::LeftPar:
-            case Token::Semicolon:
-            case Token::Equal:
-            case Token::NotEqual:
-            case Token::Less:
-            case Token::Greater:
-            case Token::LessEqual:
-            case Token::GreaterEqual:
-            case Token::Intersect:
-            case Token::Union:
+            case KCToken::Plus:
+            case KCToken::Minus:
+            case KCToken::Asterisk:
+            case KCToken::Slash:
+            case KCToken::Caret:
+            case KCToken::LeftPar:
+            case KCToken::Semicolon:
+            case KCToken::Equal:
+            case KCToken::NotEqual:
+            case KCToken::Less:
+            case KCToken::Greater:
+            case KCToken::LessEqual:
+            case KCToken::GreaterEqual:
+            case KCToken::Intersect:
+            case KCToken::Union:
                 // Append new references by pointing behind the last.
                 currentToken = tokens.count();
                 regionStart = rangeCounter;
                 regionEnd = rangeCounter - 1; // length = 0
                 currentRange = rangeCounter;
                 break;
-            case Token::InvalidOp:
-            case Token::RightPar:
-            case Token::Comma:
-            case Token::Ampersand:
-            case Token::Percent:
-            case Token::CurlyBra:
-            case Token::CurlyKet:
-            case Token::Pipe:
+            case KCToken::InvalidOp:
+            case KCToken::RightPar:
+            case KCToken::Comma:
+            case KCToken::Ampersand:
+            case KCToken::Percent:
+            case KCToken::CurlyBra:
+            case KCToken::CurlyKet:
+            case KCToken::Pipe:
                 // reference cannot be placed behind
                 break;
             }
             break;
-        case Token::Unknown:
-        case Token::Boolean:
-        case Token::Integer:
-        case Token::Float:
-        case Token::String:
-        case Token::Identifier:
-        case Token::Error:
+        case KCToken::Unknown:
+        case KCToken::Boolean:
+        case KCToken::Integer:
+        case KCToken::Float:
+        case KCToken::String:
+        case KCToken::Identifier:
+        case KCToken::Error:
             // currentToken = tokens.count() - 1; // already set
             // Set the active sub-region start to the end of the selection
             // with a length of 0, which results in appending a new range
@@ -210,8 +210,8 @@ void CellEditor::Private::updateActiveSubRegion(const Tokens &tokens)
             regionEnd = rangeCounter - 1; // length = 0
             currentRange = rangeCounter;
             break;
-        case Token::KCCell:
-        case Token::Range:
+        case KCToken::KCCell:
+        case KCToken::Range:
             // currentToken = tokens.count() - 1; // already set
             // Set the last range as active one. It is not a sub-region,
             // otherwise the state would have been InRegion.
@@ -314,7 +314,7 @@ void CellEditor::triggerFunctionAutoComplete()
     if (!tokens.valid()) return;
     if (tokens.count() < 1) return;
 
-    Token lastToken = tokens[ tokens.count()-1 ];
+    KCToken lastToken = tokens[ tokens.count()-1 ];
 
     // last token must be an identifier
     if (!lastToken.isIdentifier()) return;
@@ -354,7 +354,7 @@ void CellEditor::functionAutoComplete(const QString& item)
     if (!tokens.valid()) return;
     if (tokens.count() < 1) return;
 
-    Token lastToken = tokens[ tokens.count()-1 ];
+    KCToken lastToken = tokens[ tokens.count()-1 ];
     if (!lastToken.isIdentifier()) return;
 
     blockSignals(true);
@@ -406,10 +406,10 @@ void CellEditor::Private::rebuildSelection()
 
     int counter = 0;
     for (int i = 0; i < tokens.count(); ++i) {
-        const Token token = tokens[i];
-        const Token::Type type = token.type();
+        const KCToken token = tokens[i];
+        const KCToken::Type type = token.type();
 
-        if (type == Token::KCCell || type == Token::Range) {
+        if (type == KCToken::KCCell || type == KCToken::Range) {
             const KCRegion region(token.text(), map, originSheet);
 
             if (!region.isValid() || region.isEmpty()) {
@@ -547,9 +547,9 @@ void CellEditor::selectionChanged()
     uint length = 0;
     if (!tokens.empty()) {
         if (d->currentToken < tokens.count()) {
-            Token token = tokens[d->currentToken];
-            Token::Type type = token.type();
-            if (type == Token::KCCell || type == Token::Range) {
+            KCToken token = tokens[d->currentToken];
+            KCToken::Type type = token.type();
+            if (type == KCToken::KCCell || type == KCToken::Range) {
                 start = token.pos() + 1; // don't forget the '='!
                 length = token.text().length();
                 // Iterate to the end of the sub-region.
@@ -557,12 +557,12 @@ void CellEditor::selectionChanged()
                     token = tokens[i];
                     type = token.type();
                     switch (type) {
-                    case Token::KCCell:
-                    case Token::Range:
+                    case KCToken::KCCell:
+                    case KCToken::Range:
                         length += token.text().length();
                         continue;
-                    case Token::Operator:
-                        if (token.asOperator() == Token::Semicolon) {
+                    case KCToken::Operator:
+                        if (token.asOperator() == KCToken::Semicolon) {
                             ++length;
                             continue;
                         }
@@ -729,11 +729,11 @@ void CellEditor::permuteFixation()
     const int cursorPosition = textCursor().position() - 1; // - '='
     const Tokens tokens = d->highlighter->formulaTokens();
     for (int i = 0; i < tokens.count(); ++i) {
-        const Token token = tokens[i];
+        const KCToken token = tokens[i];
         if (token.pos() > cursorPosition) {
             break; // for loop
         }
-        if (token.type() == Token::KCCell || token.type() == Token::Range) {
+        if (token.type() == KCToken::KCCell || token.type() == KCToken::Range) {
             index = i;
         }
     }
@@ -742,7 +742,7 @@ void CellEditor::permuteFixation()
         return;
     }
 
-    const Token token = tokens[index];
+    const KCToken token = tokens[index];
     KCMap *const map = d->selection->activeSheet()->map();
     QString regionName = token.text();
     // Filter sheet; truncates regionName; range without sheet name resides.
@@ -822,10 +822,10 @@ void CellEditor::setActiveSubRegion(int index)
     bool subRegion = false;
     const Tokens tokens = d->highlighter->formulaTokens();
     for (int i = 0; i < tokens.count(); ++i) {
-        const Token token = tokens[i];
+        const KCToken token = tokens[i];
         switch (token.type()) {
-        case Token::KCCell:
-        case Token::Range:
+        case KCToken::KCCell:
+        case KCToken::Range:
             if (!subRegion) {
                 d->currentToken = i;
                 subRegion = true;
@@ -836,8 +836,8 @@ void CellEditor::setActiveSubRegion(int index)
             }
             ++counter;
             continue;
-        case Token::Operator:
-            if (token.asOperator() == Token::Semicolon) {
+        case KCToken::Operator:
+            if (token.asOperator() == KCToken::Semicolon) {
                 if (subRegion) {
                     continue;
                 }
