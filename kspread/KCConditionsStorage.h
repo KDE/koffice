@@ -28,19 +28,19 @@
  * \ingroup Storage
  * Stores conditional cell styles.
  */
-class KCConditionsStorage : public QObject, public KCRectStorage<Conditions>
+class KCConditionsStorage : public QObject, public KCRectStorage<KCConditions>
 {
     Q_OBJECT
 public:
-    explicit KCConditionsStorage(KCMap* map) : QObject(map), KCRectStorage<Conditions>(map) {}
-    KCConditionsStorage(const KCConditionsStorage& other) : QObject(other.parent()), KCRectStorage<Conditions>(other) {}
+    explicit KCConditionsStorage(KCMap* map) : QObject(map), KCRectStorage<KCConditions>(map) {}
+    KCConditionsStorage(const KCConditionsStorage& other) : QObject(other.parent()), KCRectStorage<KCConditions>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
     }
     virtual void garbageCollection() {
-        KCRectStorage<Conditions>::garbageCollection();
+        KCRectStorage<KCConditions>::garbageCollection();
     }
 };
 

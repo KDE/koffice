@@ -37,7 +37,7 @@ class KoGenStyles;
 class KoOdfStylesReader;
 class KoStyleStack;
 
-class Conditions;
+class KCConditions;
 class CustomStyle;
 class SharedSubStyle;
 class KCStyle;
@@ -169,10 +169,10 @@ public:
     bool loadXML(KoXmlElement& format, Paste::Mode pm = Paste::Normal);
     void saveXML(QDomDocument& doc, QDomElement& format, const KCStyleManager* styleManager) const;
     void loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
-                      Conditions& conditions, const KCStyleManager* styleManager,
+                      KCConditions& conditions, const KCStyleManager* styleManager,
                       const ValueParser *parser);
     void loadOdfDataStyle(KoOdfStylesReader& stylesReader, const QString& dataStyleName,
-                          Conditions& conditions, const KCStyleManager* styleManager,
+                          KCConditions& conditions, const KCStyleManager* styleManager,
                           const ValueParser *parser);
 
     /**
@@ -245,7 +245,7 @@ protected:
                       KoGenStyles &mainStyles, const KCStyleManager* manager) const;
 
     void loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
-                          Conditions& conditions, const KCStyleManager* styleManager,
+                          KCConditions& conditions, const KCStyleManager* styleManager,
                           const ValueParser *parser);
     void loadOdfParagraphProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& element);
     void loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& element);
@@ -409,7 +409,7 @@ public:
      * @param name the style's new name
      */
     void loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& style,
-                 const QString& name, Conditions& conditions,
+                 const QString& name, KCConditions& conditions,
                  const KCStyleManager* styleManager, const ValueParser *parser);
 
     /**

@@ -318,7 +318,7 @@ void ConditionalDialog::init()
         }
     }
 
-    kDebug() << "Conditions:" << conditionList.size();
+    kDebug() << "KCConditions:" << conditionList.size();
 
     m_dlg->m_condition_2->setEnabled(false);
     m_dlg->m_condition_3->setEnabled(false);

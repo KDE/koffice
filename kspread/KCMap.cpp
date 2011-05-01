@@ -605,7 +605,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
     }
 
     //pre-load auto styles
-    QHash<QString, Conditions> conditionalStyles;
+    QHash<QString, KCConditions> conditionalStyles;
     Styles autoStyles = d->styleManager->loadOdfAutoStyles(odfContext.stylesReader(),
                         conditionalStyles, parser());
 

@@ -1452,7 +1452,7 @@ void KCSheet::loadRowNodes(const KoXmlElement& parent,
 bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
                     KCOdfLoadingContext& tableContext,
                     const Styles& autoStyles,
-                    const QHash<QString, Conditions>& conditionalStyles)
+                    const QHash<QString, KCConditions>& conditionalStyles)
 {
 
     QPointer<KoUpdater> updater;
@@ -1673,7 +1673,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
     }
 
     QList<QPair<QRegion, KCStyle> > styleRegions;
-    QList<QPair<QRegion, Conditions> > conditionRegions;
+    QList<QPair<QRegion, KCConditions> > conditionRegions;
     // insert the styles into the storage (column defaults)
     kDebug(36003) << "Inserting column default cell styles ...";
     loadOdfInsertStyles(autoStyles, columnStyleRegions, conditionalStyles,
@@ -1930,10 +1930,10 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
 
 void KCSheet::loadOdfInsertStyles(const Styles& autoStyles,
                                 const QHash<QString, QRegion>& styleRegions,
-                                const QHash<QString, Conditions>& conditionalStyles,
+                                const QHash<QString, KCConditions>& conditionalStyles,
                                 const QRect& usedArea,
                                 QList<QPair<QRegion, KCStyle> >& outStyleRegions,
-                                QList<QPair<QRegion, Conditions> >& outConditionalStyles)
+                                QList<QPair<QRegion, KCConditions> >& outConditionalStyles)
 {
     const QList<QString> styleNames = styleRegions.keys();
     for (int i = 0; i < styleNames.count(); ++i) {

@@ -197,7 +197,7 @@ void KCStyle::loadAttributes(const QList<SharedSubStyle>& subStyles)
 }
 
 void KCStyle::loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
-                         Conditions& conditions, const KCStyleManager* styleManager,
+                         KCConditions& conditions, const KCStyleManager* styleManager,
                          const ValueParser *parser)
 {
     // NOTE Stefan: Do not fill the style stack with the parent styles!
@@ -222,7 +222,7 @@ void KCStyle::loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& 
 typedef QPair<QString,QString> StringPair;
 
 void KCStyle::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
-                             Conditions& conditions, const KCStyleManager* styleManager,
+                             KCConditions& conditions, const KCStyleManager* styleManager,
                              const ValueParser *parser)
 {
     QString str;
@@ -232,7 +232,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlEleme
     }
 }
 
-void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &styleName, Conditions &conditions, const KCStyleManager *styleManager, const ValueParser *parser)
+void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &styleName, KCConditions &conditions, const KCStyleManager *styleManager, const ValueParser *parser)
 {
     if (stylesReader.dataFormats().contains(styleName)) {
         KCStyle* theStyle = this;
@@ -2753,7 +2753,7 @@ QString CustomStyle::saveOdf(KoGenStyle& style, KoGenStyles &mainStyles,
 }
 
 void CustomStyle::loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& style,
-                          const QString& name, Conditions& conditions,
+                          const QString& name, KCConditions& conditions,
                           const KCStyleManager* styleManager, const ValueParser *parser)
 {
     setName(name);

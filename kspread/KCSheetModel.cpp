@@ -251,7 +251,7 @@ bool KCSheetModel::setData(const QItemSelectionRange &range, const QVariant &val
         storage->setComment(region, value.toString());
         break;
     case ConditionRole:
-        storage->setConditions(region, value.value<Conditions>());
+        storage->setConditions(region, value.value<KCConditions>());
         break;
     case FusionedRangeRole:
         // TODO

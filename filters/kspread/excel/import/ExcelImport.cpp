@@ -169,7 +169,7 @@ public:
     QHash<CellFormatKey, int> styleCache;
     QList<KCStyle> styleList;
     QHash<QString, KCStyle> dataStyleCache;
-    QHash<QString, Conditions> dataStyleConditions;
+    QHash<QString, KCConditions> dataStyleConditions;
 
     void processFontFormat(const FormatFont& font, KCStyle& style);
     QTextCharFormat convertFontToCharFormat(const FormatFont& font);
@@ -181,7 +181,7 @@ public:
     QHash<int, QRegion> cellStyles;
     QHash<int, QRegion> rowStyles;
     QHash<int, QRegion> columnStyles;
-    QList<QPair<QRegion, Conditions> > cellConditions;
+    QList<QPair<QRegion, KCConditions> > cellConditions;
 
     QList<ChartExport*> charts;
     void processCharts(KoXmlWriter* manifestWriter);
@@ -680,7 +680,7 @@ void ExcelImport::Private::processSheetForConditionals(Sheet* is, KCSheet* os)
             styleManager->insertStyle(style);
             conds.append(kc);
         }
-        Conditions kcs;
+        KCConditions kcs;
         kcs.setConditionList(conds);
         cellConditions.append(qMakePair(r, kcs));
     }
@@ -909,7 +909,7 @@ void ExcelImport::Private::processCell(Cell* ic, KCCell oc)
         oc.setComment(note);
 
     cellStyles[styleId] += QRect(oc.column(), oc.row(), 1, 1);
-    QHash<QString, Conditions>::iterator conds = dataStyleConditions.find(ic->format().valueFormat());
+    QHash<QString, KCConditions>::iterator conds = dataStyleConditions.find(ic->format().valueFormat());
     if (conds != dataStyleConditions.end()) {
         cellConditions.append(qMakePair(QRegion(oc.column(), oc.row(), 1, 1), conds.value()));
     }
@@ -1386,7 +1386,7 @@ void ExcelImport::Private::processNumberFormats()
         if (styleName != sNoStyle) {
             KCStyle& style = dataStyleCache[f->valueFormat()];
             if (style.isEmpty()) {
-                Conditions conditions;
+                KCConditions conditions;
                 style.loadOdfDataStyle(odfStyles, styleName, conditions, outputDoc->map()->styleManager(), outputDoc->map()->parser());
 
                 if (!conditions.isEmpty())

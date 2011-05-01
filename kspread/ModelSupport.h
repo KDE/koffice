@@ -56,7 +56,7 @@ enum CellDataRole {
     RichTextRole        = 0x00001000,   ///< cell's rich text; QSharedPointer<QTextDocument>
     // KCCell range associations; KCSheetModel, KCRegionModel
     CommentRole         = 0x00002000,   ///< a comment; QString
-    ConditionRole       = 0x00004000,   ///< a conditional style; Conditions
+    ConditionRole       = 0x00004000,   ///< a conditional style; KCConditions
     StyleRole           = 0x00008000,   ///< a style; KCStyle
     ValidityRole        = 0x00010000,   ///< a cell validition; KCValidity
     FusionedRangeRole   = 0x00020000,   ///< a fusioned cell range; bool

@@ -76,7 +76,7 @@ void KCStyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap
     const KoXmlElement* defStyle = stylesReader.defaultStyle("table-cell");
     if (defStyle) {
         kDebug(36003) << "KCStyleManager: Loading default cell style";
-        Conditions conditions;
+        KCConditions conditions;
         defaultStyle()->loadOdf(stylesReader, *defStyle, "Default", conditions, this, map->parser());
         defaultStyle()->setType(KCStyle::BUILTIN);
         if (map) {
@@ -121,7 +121,7 @@ void KCStyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap
             // After all styles are loaded the pointer to the parent is set.
             CustomStyle * style = new CustomStyle(name);
 
-            Conditions conditions;
+            KCConditions conditions;
             style->loadOdf(stylesReader, *styleElem, name, conditions, this, map->parser());
             // TODO Stefan: conditions
             insertStyle(style);
@@ -372,7 +372,7 @@ QStringList KCStyleManager::styleNames() const
 }
 
 Styles KCStyleManager::loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
-                                       QHash<QString, Conditions>& conditionalStyles,
+                                       QHash<QString, KCConditions>& conditionalStyles,
                                        const ValueParser *parser)
 {
     Styles autoStyles;
@@ -381,7 +381,7 @@ Styles KCStyleManager::loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
             QString name = element->attributeNS(KoXmlNS::style , "name" , QString());
             kDebug(36003) << "KCStyleManager: Preloading automatic cell style:" << name;
             autoStyles.remove(name);
-            Conditions conditions;
+            KCConditions conditions;
             autoStyles[name].loadOdfStyle(stylesReader, *(element), conditions, this, parser);
             if (!conditions.isEmpty()) {
                 kDebug() << "\t\tCONDITIONS";

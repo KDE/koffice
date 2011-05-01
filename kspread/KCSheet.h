@@ -369,7 +369,7 @@ public:
     bool loadOdf(const KoXmlElement& sheet,
                  KCOdfLoadingContext& odfContext,
                  const Styles& autoStyles,
-                 const QHash<QString, Conditions>& conditionalStyles);
+                 const QHash<QString, KCConditions>& conditionalStyles);
 
     /**
      * \ingroup OpenDocument
@@ -880,10 +880,10 @@ protected:
      */
     void loadOdfInsertStyles(const Styles& autoStyles,
                              const QHash<QString, QRegion>& styleRegions,
-                             const QHash<QString, Conditions>& conditionalStyles,
+                             const QHash<QString, KCConditions>& conditionalStyles,
                              const QRect& usedArea,
                              QList<QPair<QRegion, KCStyle> >& outStyleRegions,
-                             QList<QPair<QRegion, Conditions> >& outConditionalStyles);
+                             QList<QPair<QRegion, KCConditions> >& outConditionalStyles);
 
     /**
      * \ingroup OpenDocument

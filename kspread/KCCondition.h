@@ -70,32 +70,32 @@ public:
 };
 
 
-class Conditions;
-uint qHash(const Conditions& conditions);
+class KCConditions;
+uint qHash(const KCConditions& conditions);
 uint qHash(const KCConditional& condition);
 
 /**
- * \class Conditions
+ * \class KCConditions
  * \ingroup KCStyle
  * Manages a set of conditions for a cell.
  */
-class KSPREAD_EXPORT Conditions
+class KSPREAD_EXPORT KCConditions
 {
 public:
     /**
      * Constructor.
      */
-    Conditions();
+    KCConditions();
 
     /**
      * Copy Constructor.
      */
-    Conditions(const Conditions& other);
+    KCConditions(const KCConditions& other);
 
     /**
      * Destructor..
      */
-    ~Conditions();
+    ~KCConditions();
 
     /**
      * \return \c true if there are no conditions defined
@@ -163,12 +163,12 @@ public:
     void saveOdfConditions(KoGenStyle &currentCellStyle, ValueConverter *converter) const;
 
     /// \note implementation to make QMap happy (which is needed by KCRectStorage)
-    bool operator<(const Conditions& conditions) const {
+    bool operator<(const KCConditions& conditions) const {
         return qHash(*this) < qHash(conditions);
     }
-    void operator=(const Conditions& other);
-    bool operator==(const Conditions& other) const;
-    inline bool operator!=(const Conditions& other) const {
+    void operator=(const KCConditions& other);
+    bool operator==(const KCConditions& other) const;
+    inline bool operator!=(const KCConditions& other) const {
         return !operator==(other);
     }
 
@@ -211,7 +211,7 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-Q_DECLARE_METATYPE(Conditions)
-Q_DECLARE_TYPEINFO(Conditions, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(KCConditions)
+Q_DECLARE_TYPEINFO(KCConditions, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_CONDITION_H

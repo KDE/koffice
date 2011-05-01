@@ -45,7 +45,7 @@ bool CondtionCommand::process(Element* element)
 bool CondtionCommand::mainProcessing()
 {
     if (m_reverse) {
-        m_sheet->cellStorage()->setConditions(*this, Conditions());
+        m_sheet->cellStorage()->setConditions(*this, KCConditions());
         for (int i = 0; i < m_undoData.count(); ++i)
             m_sheet->cellStorage()->setConditions(KCRegion(m_undoData[i].first.toRect()), m_undoData[i].second);
     }

@@ -679,7 +679,7 @@ void OpenCalcImport::loadOasisCondition(const KCCell& cell, const KoXmlElement &
         elementItem = elementItem.nextSibling().toElement();
     }
     if (!cond.isEmpty()) {
-        Conditions conditions;
+        KCConditions conditions;
         conditions.setConditionList(cond);
         KCCell(cell).setConditions(conditions);
     }

@@ -204,9 +204,9 @@ public:
     /**
      * \return the conditions associated with this cell
      */
-    Conditions conditions() const;
+    KCConditions conditions() const;
 
-    void setConditions(const Conditions& conditions);
+    void setConditions(const KCConditions& conditions);
 
     /**
      * \return the database associated with this cell

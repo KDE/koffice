@@ -42,8 +42,8 @@ protected:
     virtual bool mainProcessing();
 
 private:
-    Conditions m_conditions;
-    QList< QPair<QRectF, Conditions> > m_undoData;
+    KCConditions m_conditions;
+    QList< QPair<QRectF, KCConditions> > m_undoData;
 };
 
 #endif // KSPREAD_CONDITION_COMMAND

@@ -65,7 +65,7 @@ public:
 
     QList< QPair<QRectF, KCBinding> >          bindings;
     QList< QPair<QRectF, QString> >          comments;
-    QList< QPair<QRectF, Conditions> >       conditions;
+    QList< QPair<QRectF, KCConditions> >       conditions;
     QList< QPair<QRectF, Database> >         databases;
     QVector< QPair<QPoint, KCFormula> >        formulas;
     QList< QPair<QRectF, bool> >             fusions;

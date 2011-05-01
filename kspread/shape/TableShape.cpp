@@ -168,7 +168,7 @@ bool TableShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &con
         // pre-load auto styles
         KoOdfLoadingContext& odfContext = context.odfLoadingContext();
         KCOdfLoadingContext tableContext(odfContext);
-        QHash<QString, Conditions> conditionalStyles;
+        QHash<QString, KCConditions> conditionalStyles;
         KCMap *const map = sheet()->map();
         KCStyleManager *const styleManager = map->styleManager();
         ValueParser *const parser = map->parser();

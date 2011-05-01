@@ -315,12 +315,12 @@ void KCCell::setComment(const QString& comment)
     sheet()->cellStorage()->setComment(KCRegion(cellPosition()), comment);
 }
 
-Conditions KCCell::conditions() const
+KCConditions KCCell::conditions() const
 {
     return sheet()->cellStorage()->conditions(d->column, d->row);
 }
 
-void KCCell::setConditions(const Conditions& conditions)
+void KCCell::setConditions(const KCConditions& conditions)
 {
     sheet()->cellStorage()->setConditions(KCRegion(cellPosition()), conditions);
 }
@@ -945,7 +945,7 @@ QDomElement KCCell::save(QDomDocument& doc, int xOffset, int yOffset, bool era)
             formatElement.setAttribute("rowspan", mergedYCells());
     }
 
-    Conditions conditions = this->conditions();
+    KCConditions conditions = this->conditions();
     if (!conditions.isEmpty()) {
         QDomElement conditionElement = conditions.saveConditions(doc, sheet()->map()->converter());
         if (!conditionElement.isNull())
@@ -1068,7 +1068,7 @@ void KCCell::saveOdfAnnotation(KoXmlWriter &xmlwriter)
 
 QString KCCell::saveOdfCellStyle(KoGenStyle &currentCellStyle, KoGenStyles &mainStyles)
 {
-    const Conditions conditions = this->conditions();
+    const KCConditions conditions = this->conditions();
     if (!conditions.isEmpty()) {
         // this has to be an automatic style
         currentCellStyle = KoGenStyle(KoGenStyle::TableCellAutoStyle, "table-cell");
@@ -1872,7 +1872,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
     //
     KoXmlElement conditionsElement = cell.namedItem("condition").toElement();
     if (!conditionsElement.isNull()) {
-        Conditions conditions;
+        KCConditions conditions;
         KCMap *const map = sheet()->map();
         ValueParser *const valueParser = map->parser();
         conditions.loadConditions(conditionsElement, valueParser);
@@ -1880,7 +1880,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
             setConditions(conditions);
     } else if (paste && (mode == Paste::Normal || mode == Paste::NoBorder)) {
         //clear the conditional formatting
-        setConditions(Conditions());
+        setConditions(KCConditions());
     }
 
     KoXmlElement validityElement = cell.namedItem("validity").toElement();

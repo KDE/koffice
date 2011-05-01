@@ -150,8 +150,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->comments);
     }
     if (!undoData->conditions.isEmpty()) {
-        RectStorageUndoCommand<Conditions> *const command
-        = new RectStorageUndoCommand<Conditions>(sheet->model(), ConditionRole, parent);
+        RectStorageUndoCommand<KCConditions> *const command
+        = new RectStorageUndoCommand<KCConditions>(sheet->model(), ConditionRole, parent);
         command->add(undoData->conditions);
     }
     if (!undoData->databases.isEmpty()) {
@@ -321,12 +321,12 @@ void KCCellStorage::setComment(const KCRegion& region, const QString& comment)
     }
 }
 
-Conditions KCCellStorage::conditions(int column, int row) const
+KCConditions KCCellStorage::conditions(int column, int row) const
 {
     return d->conditionsStorage->contains(QPoint(column, row));
 }
 
-void KCCellStorage::setConditions(const KCRegion& region, Conditions conditions)
+void KCCellStorage::setConditions(const KCRegion& region, KCConditions conditions)
 {
     // recording undo?
     if (d->undoData)
@@ -786,7 +786,7 @@ void KCCellStorage::insertColumns(int position, int number)
 
     QList< QPair<QRectF, KCBinding> > bindings = d->bindingStorage->insertColumns(position, number);
     QList< QPair<QRectF, QString> > comments = d->commentStorage->insertColumns(position, number);
-    QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->insertColumns(position, number);
+    QList< QPair<QRectF, KCConditions> > conditions = d->conditionsStorage->insertColumns(position, number);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->insertColumns(position, number);
     QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->insertColumns(position, number);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->insertColumns(position, number);
@@ -843,7 +843,7 @@ void KCCellStorage::removeColumns(int position, int number)
 
     QList< QPair<QRectF, KCBinding> > bindings = d->bindingStorage->removeColumns(position, number);
     QList< QPair<QRectF, QString> > comments = d->commentStorage->removeColumns(position, number);
-    QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->removeColumns(position, number);
+    QList< QPair<QRectF, KCConditions> > conditions = d->conditionsStorage->removeColumns(position, number);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->removeColumns(position, number);
     QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->removeColumns(position, number);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->removeColumns(position, number);
@@ -899,7 +899,7 @@ void KCCellStorage::insertRows(int position, int number)
 
     QList< QPair<QRectF, KCBinding> > bindings = d->bindingStorage->insertRows(position, number);
     QList< QPair<QRectF, QString> > comments = d->commentStorage->insertRows(position, number);
-    QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->insertRows(position, number);
+    QList< QPair<QRectF, KCConditions> > conditions = d->conditionsStorage->insertRows(position, number);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->insertRows(position, number);
     QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->insertRows(position, number);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->insertRows(position, number);
@@ -958,7 +958,7 @@ void KCCellStorage::removeRows(int position, int number)
 
     QList< QPair<QRectF, KCBinding> > bindings = d->bindingStorage->removeRows(position, number);
     QList< QPair<QRectF, QString> > comments = d->commentStorage->removeRows(position, number);
-    QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->removeRows(position, number);
+    QList< QPair<QRectF, KCConditions> > conditions = d->conditionsStorage->removeRows(position, number);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->removeRows(position, number);
     QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->removeRows(position, number);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->removeRows(position, number);
@@ -1017,7 +1017,7 @@ void KCCellStorage::removeShiftLeft(const QRect& rect)
 
     QList< QPair<QRectF, KCBinding> > bindings = d->bindingStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, QString> > comments = d->commentStorage->removeShiftLeft(rect);
-    QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->removeShiftLeft(rect);
+    QList< QPair<QRectF, KCConditions> > conditions = d->conditionsStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->removeShiftLeft(rect);
     QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->removeShiftLeft(rect);
@@ -1075,7 +1075,7 @@ void KCCellStorage::insertShiftRight(const QRect& rect)
 
     QList< QPair<QRectF, KCBinding> > bindings = d->bindingStorage->insertShiftRight(rect);
     QList< QPair<QRectF, QString> > comments = d->commentStorage->insertShiftRight(rect);
-    QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->insertShiftRight(rect);
+    QList< QPair<QRectF, KCConditions> > conditions = d->conditionsStorage->insertShiftRight(rect);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->insertShiftRight(rect);
     QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->insertShiftRight(rect);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->insertShiftRight(rect);
@@ -1134,7 +1134,7 @@ void KCCellStorage::removeShiftUp(const QRect& rect)
 
     QList< QPair<QRectF, KCBinding> > bindings = d->bindingStorage->removeShiftUp(rect);
     QList< QPair<QRectF, QString> > comments = d->commentStorage->removeShiftUp(rect);
-    QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->removeShiftUp(rect);
+    QList< QPair<QRectF, KCConditions> > conditions = d->conditionsStorage->removeShiftUp(rect);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->removeShiftUp(rect);
     QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->removeShiftUp(rect);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->removeShiftUp(rect);
@@ -1192,7 +1192,7 @@ void KCCellStorage::insertShiftDown(const QRect& rect)
 
     QList< QPair<QRectF, KCBinding> > bindings = d->bindingStorage->insertShiftDown(rect);
     QList< QPair<QRectF, QString> > comments = d->commentStorage->insertShiftDown(rect);
-    QList< QPair<QRectF, Conditions> > conditions = d->conditionsStorage->insertShiftDown(rect);
+    QList< QPair<QRectF, KCConditions> > conditions = d->conditionsStorage->insertShiftDown(rect);
     QList< QPair<QRectF, Database> > databases = d->databaseStorage->insertShiftDown(rect);
     QVector< QPair<QPoint, KCFormula> > formulas = d->formulaStorage->insertShiftDown(rect);
     QList< QPair<QRectF, bool> > fusions = d->fusionStorage->insertShiftDown(rect);
@@ -1472,7 +1472,7 @@ void KCCellStorage::stopUndoRecording(QUndoCommand *parent)
     d->undoData = 0;
 }
 
-void KCCellStorage::loadConditions(const QList<QPair<QRegion, Conditions> >& conditions)
+void KCCellStorage::loadConditions(const QList<QPair<QRegion, KCConditions> >& conditions)
 {
     d->conditionsStorage->load(conditions);
 }

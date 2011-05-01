@@ -32,7 +32,7 @@ class QStringList;
 class KoGenStyles;
 class KoOdfStylesReader;
 
-class Conditions;
+class KCConditions;
 class KCMap;
 class StyleDialog;
 class ValueParser;
@@ -96,7 +96,7 @@ public:
      * @return a hash of styles with the OpenDocument internal name as key
      */
     Styles loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
-                             QHash<QString, Conditions>& conditionalStyles,
+                             QHash<QString, KCConditions>& conditionalStyles,
                              const ValueParser *parser);
 
     /**

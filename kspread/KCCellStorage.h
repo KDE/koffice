@@ -38,7 +38,7 @@ class KCBinding;
 class KCBindingStorage;
 class KCCell;
 class CommentStorage;
-class Conditions;
+class KCConditions;
 class KCConditionsStorage;
 class KCFormula;
 class KCFormulaStorage;
@@ -130,8 +130,8 @@ public:
     /**
      * \return the conditional formattings associated with the KCCell at \p column , \p row .
      */
-    Conditions conditions(int column, int row) const;
-    void setConditions(const KCRegion& region, Conditions conditions);
+    KCConditions conditions(int column, int row) const;
+    void setConditions(const KCRegion& region, KCConditions conditions);
 
     /**
      * \return the database associated with the KCCell at \p column , \p row .
@@ -379,7 +379,7 @@ public:
     const ValidityStorage* validityStorage() const;
     const ValueStorage* valueStorage() const;
 
-    void loadConditions(const QList<QPair<QRegion, Conditions> >& conditions);
+    void loadConditions(const QList<QPair<QRegion, KCConditions> >& conditions);
     void loadStyles(const QList<QPair<QRegion, KCStyle> >& styles);
 
     void invalidateStyleCache();

@@ -187,7 +187,7 @@ CellView::CellView(SheetView* sheetView, int col, int row)
             d->style = style;
 
         // use conditional formatting attributes
-        Conditions conditions = cell.conditions();
+        KCConditions conditions = cell.conditions();
         const KCStyle conditionalStyle = conditions.testConditions(cell);
         if (!conditionalStyle.isEmpty()) {
             d->style.merge(conditionalStyle);
