@@ -1395,11 +1395,11 @@ void ColumnHeader::toolChanged(const QString& toolId)
 
 /****************************************************************
  *
- * SelectAllButton
+ * KCSelectAllButton
  *
  ****************************************************************/
 
-SelectAllButton::SelectAllButton(KoCanvasBase* canvasBase, Selection* selection)
+KCSelectAllButton::KCSelectAllButton(KoCanvasBase* canvasBase, Selection* selection)
         : QWidget(canvasBase->canvasWidget())
         , m_canvasBase(canvasBase)
         , m_selection(selection)
@@ -1410,11 +1410,11 @@ SelectAllButton::SelectAllButton(KoCanvasBase* canvasBase, Selection* selection)
             this, SLOT(toolChanged(const QString&)));
 }
 
-SelectAllButton::~SelectAllButton()
+KCSelectAllButton::~KCSelectAllButton()
 {
 }
 
-void SelectAllButton::paintEvent(QPaintEvent* event)
+void KCSelectAllButton::paintEvent(QPaintEvent* event)
 {
     // the painter
     QPainter painter(this);
@@ -1441,7 +1441,7 @@ void SelectAllButton::paintEvent(QPaintEvent* event)
     painter.drawRect(rect().adjusted(0, 0, -1, -1));
 }
 
-void SelectAllButton::mousePressEvent(QMouseEvent* event)
+void KCSelectAllButton::mousePressEvent(QMouseEvent* event)
 {
     if (!m_cellToolIsActive)
         return;
@@ -1449,7 +1449,7 @@ void SelectAllButton::mousePressEvent(QMouseEvent* event)
         m_mousePressed = true;
 }
 
-void SelectAllButton::mouseReleaseEvent(QMouseEvent* event)
+void KCSelectAllButton::mouseReleaseEvent(QMouseEvent* event)
 {
     if (!m_cellToolIsActive)
         return;
@@ -1460,12 +1460,12 @@ void SelectAllButton::mouseReleaseEvent(QMouseEvent* event)
     m_selection->selectAll();
 }
 
-void SelectAllButton::wheelEvent(QWheelEvent* event)
+void KCSelectAllButton::wheelEvent(QWheelEvent* event)
 {
     QApplication::sendEvent(m_canvasBase->canvasWidget(), event);
 }
 
-void SelectAllButton::toolChanged(const QString& toolId)
+void KCSelectAllButton::toolChanged(const QString& toolId)
 {
     m_cellToolIsActive = toolId.startsWith("KSpread");
     update();

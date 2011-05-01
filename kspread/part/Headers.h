@@ -185,12 +185,12 @@ private:
  * The widget in the top left corner of the canvas,
  * responsible for selecting all cells in a sheet.
  */
-class SelectAllButton : public QWidget
+class KCSelectAllButton : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SelectAllButton(KoCanvasBase* canvasBase, Selection* selection);
-    virtual ~SelectAllButton();
+    explicit KCSelectAllButton(KoCanvasBase* canvasBase, Selection* selection);
+    virtual ~KCSelectAllButton();
 
 protected:
     virtual void paintEvent(QPaintEvent* event);

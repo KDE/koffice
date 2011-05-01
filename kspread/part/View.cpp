@@ -183,7 +183,7 @@ public:
     KoZoomHandler* zoomHandler;
     KCRowHeader *rowHeader;
     ColumnHeader *columnHeader;
-    SelectAllButton *selectAllButton;
+    KCSelectAllButton *selectAllButton;
     QScrollBar *horzScrollBar;
     QScrollBar *vertScrollBar;
     TabBar *tabBar;
@@ -733,7 +733,7 @@ void View::initView()
     d->rowHeader = new KCRowHeader(this, d->canvas , this);
     d->columnHeader->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     d->rowHeader->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
-    d->selectAllButton = new SelectAllButton(d->canvas, selection());
+    d->selectAllButton = new KCSelectAllButton(d->canvas, selection());
     d->selectAllButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
     d->canvas->setFocusPolicy(Qt::StrongFocus);
