@@ -410,7 +410,7 @@ void KCRowHeader::mouseMoveEvent(QMouseEvent * _ev)
 void KCRowHeader::slotAutoScroll(const QPoint& scrollDistance)
 {
     // NOTE Stefan: This slot is triggered by the same signal as
-    //              KCCanvas::slotAutoScroll and ColumnHeader::slotAutoScroll.
+    //              KCCanvas::slotAutoScroll and KCColumnHeader::slotAutoScroll.
     //              Therefore, nothing has to be done except the scrolling was
     //              initiated in this header.
     if (!m_bMousePressed)
@@ -644,11 +644,11 @@ void KCRowHeader::toolChanged(const QString& toolId)
 
 /****************************************************************
  *
- * ColumnHeader
+ * KCColumnHeader
  *
  ****************************************************************/
 
-ColumnHeader::ColumnHeader(QWidget *_parent, KCCanvas *_canvas, View *_view)
+KCColumnHeader::KCColumnHeader(QWidget *_parent, KCCanvas *_canvas, View *_view)
         : QWidget(_parent)
 {
     m_pView = _view;
@@ -672,11 +672,11 @@ ColumnHeader::ColumnHeader(QWidget *_parent, KCCanvas *_canvas, View *_view)
 }
 
 
-ColumnHeader::~ColumnHeader()
+KCColumnHeader::~KCColumnHeader()
 {
 }
 
-void ColumnHeader::mousePressEvent(QMouseEvent * _ev)
+void KCColumnHeader::mousePressEvent(QMouseEvent * _ev)
 {
     if (!m_cellToolIsActive)
         return;
@@ -815,7 +815,7 @@ void ColumnHeader::mousePressEvent(QMouseEvent * _ev)
     }
 }
 
-void ColumnHeader::mouseReleaseEvent(QMouseEvent * _ev)
+void KCColumnHeader::mouseReleaseEvent(QMouseEvent * _ev)
 {
     if (!m_cellToolIsActive)
         return;
@@ -924,7 +924,7 @@ void ColumnHeader::mouseReleaseEvent(QMouseEvent * _ev)
     m_bResize = false;
 }
 
-void ColumnHeader::equalizeColumn(double resize)
+void KCColumnHeader::equalizeColumn(double resize)
 {
     if (resize != 0.0) {
         ResizeColumnManipulator* command = new ResizeColumnManipulator();
@@ -943,7 +943,7 @@ void ColumnHeader::equalizeColumn(double resize)
     }
 }
 
-void ColumnHeader::mouseDoubleClickEvent(QMouseEvent*)
+void KCColumnHeader::mouseDoubleClickEvent(QMouseEvent*)
 {
     if (!m_cellToolIsActive)
         return;
@@ -961,7 +961,7 @@ void ColumnHeader::mouseDoubleClickEvent(QMouseEvent*)
     command->execute();
 }
 
-void ColumnHeader::mouseMoveEvent(QMouseEvent * _ev)
+void KCColumnHeader::mouseMoveEvent(QMouseEvent * _ev)
 {
     if (!m_cellToolIsActive)
         return;
@@ -1065,7 +1065,7 @@ void ColumnHeader::mouseMoveEvent(QMouseEvent * _ev)
     }
 }
 
-void ColumnHeader::slotAutoScroll(const QPoint& scrollDistance)
+void KCColumnHeader::slotAutoScroll(const QPoint& scrollDistance)
 {
     // NOTE Stefan: This slot is triggered by the same signal as
     //              KCCanvas::slotAutoScroll and KCRowHeader::slotAutoScroll.
@@ -1085,12 +1085,12 @@ void ColumnHeader::slotAutoScroll(const QPoint& scrollDistance)
     m_pCanvas->update();
 }
 
-void ColumnHeader::wheelEvent(QWheelEvent* _ev)
+void KCColumnHeader::wheelEvent(QWheelEvent* _ev)
 {
     QApplication::sendEvent(m_pCanvas, _ev);
 }
 
-void ColumnHeader::resizeEvent(QResizeEvent* _ev)
+void KCColumnHeader::resizeEvent(QResizeEvent* _ev)
 {
     register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
@@ -1108,7 +1108,7 @@ void ColumnHeader::resizeEvent(QResizeEvent* _ev)
     }
 }
 
-void ColumnHeader::paintSizeIndicator(int mouseX)
+void KCColumnHeader::paintSizeIndicator(int mouseX)
 {
     register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
@@ -1167,7 +1167,7 @@ void ColumnHeader::paintSizeIndicator(int mouseX)
     m_lSize->show();
 }
 
-void ColumnHeader::updateColumns(int from, int to)
+void KCColumnHeader::updateColumns(int from, int to)
 {
     register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
@@ -1178,7 +1178,7 @@ void ColumnHeader::updateColumns(int from, int to)
     update((int) x0, 0, (int)(x1 - x0), height());
 }
 
-void ColumnHeader::paintEvent(QPaintEvent* event)
+void KCColumnHeader::paintEvent(QPaintEvent* event)
 {
     register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
@@ -1350,13 +1350,13 @@ void ColumnHeader::paintEvent(QPaintEvent* event)
 }
 
 
-void ColumnHeader::focusOutEvent(QFocusEvent*)
+void KCColumnHeader::focusOutEvent(QFocusEvent*)
 {
     m_pView->disableAutoScroll();
     m_bMousePressed = false;
 }
 
-void ColumnHeader::drawText(QPainter& painter, const QFont& font,
+void KCColumnHeader::drawText(QPainter& painter, const QFont& font,
                             const QPointF& location, const QString& text,
                             double width) const
 {
@@ -1386,7 +1386,7 @@ void ColumnHeader::drawText(QPainter& painter, const QFont& font,
     painter.restore();
 }
 
-void ColumnHeader::toolChanged(const QString& toolId)
+void KCColumnHeader::toolChanged(const QString& toolId)
 {
     m_cellToolIsActive = toolId.startsWith("KSpread");
     update();

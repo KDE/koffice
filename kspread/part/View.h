@@ -50,7 +50,7 @@ class KoDocumentEntry;
 class KoZoomHandler;
 
 class KCCell;
-class ColumnHeader;
+class KCColumnHeader;
 class KCDamage;
 class KCSheet;
 class KCCanvas;
@@ -98,7 +98,7 @@ public:
     KoCanvasController* canvasController() const;
 
     /** \return the column header */
-    ColumnHeader* columnHeader() const;
+    KCColumnHeader* columnHeader() const;
 
     /** \return the row header */
     KCRowHeader* rowHeader() const;

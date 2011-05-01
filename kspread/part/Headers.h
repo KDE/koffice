@@ -34,12 +34,12 @@ class View;
 /**
  * The widget above the cells showing the column headers.
  */
-class ColumnHeader : public QWidget
+class KCColumnHeader : public QWidget
 {
     Q_OBJECT
 public:
-    ColumnHeader(QWidget *_parent, KCCanvas *_canvas, View *_view);
-    virtual ~ColumnHeader();
+    KCColumnHeader(QWidget *_parent, KCCanvas *_canvas, View *_view);
+    virtual ~KCColumnHeader();
 
     int markerColumn() const {
         return  m_iSelectionAnchor;
@@ -88,7 +88,7 @@ private:
 
     /**
      * Flag that indicates whether the user resizes a column
-     * The user may resize columns by dragging the mouse around in the ColumnHeader widget.
+     * The user may resize columns by dragging the mouse around in the KCColumnHeader widget.
      * If he is doing that right now, this flag is true.
      */
     bool m_bResize;

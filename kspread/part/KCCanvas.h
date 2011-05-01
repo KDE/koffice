@@ -50,7 +50,7 @@
 class KoPointerEvent;
 class KoZoomHandler;
 
-class ColumnHeader;
+class KCColumnHeader;
 class KCDoc;
 class KCSheet;
 class KCRowHeader;
@@ -63,7 +63,7 @@ class View;
  */
 class KSPREAD_EXPORT KCCanvas : public QWidget, public KoCanvasBase
 {
-    friend class ColumnHeader;
+    friend class KCColumnHeader;
     friend class KCRowHeader;
     friend class View;
     friend class KCCellTool;
@@ -149,7 +149,7 @@ public:
     void enableAutoScroll();
     void disableAutoScroll();
     void showContextMenu(const QPoint& globalPos);
-    ColumnHeader* columnHeader() const;
+    KCColumnHeader* columnHeader() const;
     KCRowHeader* rowHeader() const;
 
 public slots:

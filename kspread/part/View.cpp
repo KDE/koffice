@@ -182,7 +182,7 @@ public:
     KoZoomController* zoomController;
     KoZoomHandler* zoomHandler;
     KCRowHeader *rowHeader;
-    ColumnHeader *columnHeader;
+    KCColumnHeader *columnHeader;
     KCSelectAllButton *selectAllButton;
     QScrollBar *horzScrollBar;
     QScrollBar *vertScrollBar;
@@ -729,7 +729,7 @@ void View::initView()
     connect(d->zoomController, SIGNAL(zoomChanged(KoZoomMode::Mode, qreal)),
             this, SLOT(viewZoom(KoZoomMode::Mode, qreal)));
 
-    d->columnHeader = new ColumnHeader(this, d->canvas, this);
+    d->columnHeader = new KCColumnHeader(this, d->canvas, this);
     d->rowHeader = new KCRowHeader(this, d->canvas , this);
     d->columnHeader->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     d->rowHeader->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -822,7 +822,7 @@ KoCanvasController* View::canvasController() const
     return d->canvasController;
 }
 
-ColumnHeader* View::columnHeader()const
+KCColumnHeader* View::columnHeader()const
 {
     return d->columnHeader;
 }
@@ -1651,7 +1651,7 @@ int View::rightBorder() const
 
 int View::topBorder() const
 {
-    return (int)(((ColumnHeader*)d->columnHeader)->height());
+    return (int)(((KCColumnHeader*)d->columnHeader)->height());
 }
 
 int View::bottomBorder() const
