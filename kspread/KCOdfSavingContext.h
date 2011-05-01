@@ -36,10 +36,10 @@ class KoShape;
  * \ingroup OpenDocument
  * Data used while saving.
  */
-class OdfSavingContext
+class KCOdfSavingContext
 {
 public:
-    OdfSavingContext(KoShapeSavingContext& shapeContext)
+    KCOdfSavingContext(KoShapeSavingContext& shapeContext)
             : shapeContext(shapeContext) {}
 
     void insertCellAnchoredShape(const KCSheet *sheet, int row, int column, KoShape* shape) {

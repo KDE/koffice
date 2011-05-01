@@ -27,7 +27,7 @@
 
 #include "Global.h"
 #include "KCMap.h"
-#include "OdfSavingContext.h"
+#include "KCOdfSavingContext.h"
 #include "RTree.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
@@ -134,7 +134,7 @@ QRect StyleStorage::usedArea() const
     return QRect(QPoint(1, 1), d->usedArea.boundingRect().bottomRight());
 }
 
-void StyleStorage::saveOdfCreateDefaultStyles(int& maxCols, int& maxRows, OdfSavingContext& tableContext) const
+void StyleStorage::saveOdfCreateDefaultStyles(int& maxCols, int& maxRows, KCOdfSavingContext& tableContext) const
 {
 #if 0 // TODO
     // If we have both, column and row styles, we can take the short route.

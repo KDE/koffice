@@ -30,7 +30,7 @@
 #include <KCStyle.h>
 
 class KCMap;
-class OdfSavingContext;
+class KCOdfSavingContext;
 class KCStyle;
 class StyleManager;
 class SubStyle;
@@ -92,7 +92,7 @@ public:
      * \return the OpenDocument column/row default cell styles
      * \ingroup OpenDocument
      */
-    void saveOdfCreateDefaultStyles(int& maxCols, int& maxRows, OdfSavingContext& tableContext) const;
+    void saveOdfCreateDefaultStyles(int& maxCols, int& maxRows, KCOdfSavingContext& tableContext) const;
 
     /**
      * Returns the index of the next column-wide cell style after \p column or zero

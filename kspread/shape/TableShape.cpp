@@ -37,7 +37,7 @@
 #include <KCGenValidationStyle.h>
 #include <KCMap.h>
 #include <KCOdfLoadingContext.h>
-#include <OdfSavingContext.h>
+#include <KCOdfSavingContext.h>
 #include <PrintSettings.h>
 #include <KCRegion.h>
 #include <RowColumnFormat.h>
@@ -223,7 +223,7 @@ void TableShape::saveOdf(KoShapeSavingContext & context) const
     defaultRowStyle.setDefaultStyle(true);
     context.mainStyles().insert(defaultRowStyle, "Default", KoGenStyles::DontAddNumberToName);
 
-    OdfSavingContext tableContext(context);
+    KCOdfSavingContext tableContext(context);
     sheet()->saveOdf(tableContext);
     tableContext.valStyle.writeStyle(context.xmlWriter());
 }

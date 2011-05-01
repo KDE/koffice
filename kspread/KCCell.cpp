@@ -58,7 +58,7 @@
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCOdfLoadingContext.h"
-#include "OdfSavingContext.h"
+#include "KCOdfSavingContext.h"
 #include "RowColumnFormat.h"
 #include "ShapeApplicationData.h"
 #include "KCSheet.h"
@@ -1080,7 +1080,7 @@ QString KCCell::saveOdfCellStyle(KoGenStyle &currentCellStyle, KoGenStyles &main
 
 bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
                    int row, int column, int &repeated,
-                   OdfSavingContext& tableContext)
+                   KCOdfSavingContext& tableContext)
 {
     // see: OpenDocument, 8.1.3 Table KCCell
     if (!isPartOfMerged())

@@ -56,7 +56,7 @@
 #include "KCLocalization.h"
 #include "NamedAreaManager.h"
 #include "KCOdfLoadingContext.h"
-#include "OdfSavingContext.h"
+#include "KCOdfSavingContext.h"
 #include "RecalcManager.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
@@ -424,7 +424,7 @@ bool KCMap::saveOdf(KoXmlWriter & xmlWriter, KoShapeSavingContext & savingContex
         xmlWriter.addAttribute("table:protection-key", QString(str.data()));
     }
 
-    OdfSavingContext tableContext(savingContext);
+    KCOdfSavingContext tableContext(savingContext);
 
     foreach(KCSheet* sheet, d->lstSheets) {
         sheet->saveOdf(tableContext);

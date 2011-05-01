@@ -62,7 +62,7 @@ class KoShapeLoadingContext;
 class Doc;
 class KCFormula;
 class KCOdfLoadingContext;
-class OdfSavingContext;
+class KCOdfSavingContext;
 class KCSheet;
 class Validity;
 class KCValue;
@@ -360,7 +360,7 @@ public:
      */
     bool saveOdf(KoXmlWriter& xmlwriter, KoGenStyles& mainStyles,
                  int row, int column, int &repeated,
-                 OdfSavingContext& savingContext);
+                 KCOdfSavingContext& savingContext);
 
     /**
      * Copies the format from \p cell .

@@ -78,7 +78,7 @@
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCOdfLoadingContext.h"
-#include "OdfSavingContext.h"
+#include "KCOdfSavingContext.h"
 #include "PrintSettings.h"
 #include "RecalcManager.h"
 #include "RowColumnFormat.h"
@@ -2164,7 +2164,7 @@ QRect KCSheet::usedArea(bool onlyContent) const
     return QRect(1, 1, maxCols, maxRows);
 }
 
-bool KCSheet::compareRows(int row1, int row2, int& maxCols, OdfSavingContext& tableContext) const
+bool KCSheet::compareRows(int row1, int row2, int& maxCols, KCOdfSavingContext& tableContext) const
 {
     if (*rowFormat(row1) != *rowFormat(row2)) {
 //         kDebug(36003) <<"\t Formats of" << row1 <<" and" << row2 <<" are different";
@@ -2475,7 +2475,7 @@ void KCSheet::saveOdfSettings(KoXmlWriter &settingsWriter) const
     settingsWriter.addConfigItem("ShowColumnNumber", getShowColumnNumber());
 }
 
-bool KCSheet::saveOdf(OdfSavingContext& tableContext)
+bool KCSheet::saveOdf(KCOdfSavingContext& tableContext)
 {
     KoXmlWriter & xmlWriter = tableContext.shapeContext.xmlWriter();
     KoGenStyles & mainStyles = tableContext.shapeContext.mainStyles();
@@ -2566,7 +2566,7 @@ QString KCSheet::saveOdfSheetStyleName(KoGenStyles &mainStyles)
 
 
 void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
-                              int maxCols, int maxRows, OdfSavingContext& tableContext)
+                              int maxCols, int maxRows, KCOdfSavingContext& tableContext)
 {
     kDebug(36003) << "KCSheet::saveOdfColRowCell:" << d->name;
 
@@ -2806,7 +2806,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
 }
 
 void KCSheet::saveOdfCells(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles, int row, int maxCols,
-                         OdfSavingContext& tableContext)
+                         KCOdfSavingContext& tableContext)
 {
     int i = 1;
     KCCell cell(this, i, row);

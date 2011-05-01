@@ -69,7 +69,7 @@ class LinkStorage;
 class KCHeaderFooter;
 class KCMap;
 class KCOdfLoadingContext;
-class OdfSavingContext;
+class KCOdfSavingContext;
 class PrintSettings;
 class KCRegion;
 class RowFormat;
@@ -374,7 +374,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    bool saveOdf(OdfSavingContext& tableContext);
+    bool saveOdf(KCOdfSavingContext& tableContext);
 
     /**
      * \ingroup OpenDocument
@@ -904,13 +904,13 @@ protected:
      * \ingroup OpenDocument
      */
     void saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
-                           int maxCols, int maxRows, OdfSavingContext& tableContext);
+                           int maxCols, int maxRows, KCOdfSavingContext& tableContext);
 
     /**
      * \ingroup OpenDocument
      */
     void saveOdfCells(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles, int row, int maxCols,
-                      OdfSavingContext& tableContext);
+                      KCOdfSavingContext& tableContext);
 
     /**
      * \ingroup OpenDocument
@@ -925,7 +925,7 @@ protected:
     /**
      * \ingroup OpenDocument
      */
-    bool compareRows(int row1, int row2, int & maxCols, OdfSavingContext& tableContext) const;
+    bool compareRows(int row1, int row2, int & maxCols, KCOdfSavingContext& tableContext) const;
 
     /**
      * \ingroup OpenDocument
