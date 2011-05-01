@@ -177,7 +177,7 @@ SET (ui_DIR_SRCS
 
 SET (kspreadcommon_LIB_SRCS
     KCMapModel.cpp
-    PageManager.cpp
+    KCPageManager.cpp
     RegionModel.cpp
     tests/inspector.cpp
     ${chart_DIR_SRCS}

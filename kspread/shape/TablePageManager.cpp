@@ -39,7 +39,7 @@ public:
 };
 
 TablePageManager::TablePageManager(TableShape* master)
-        : PageManager(master->sheet())
+        : KCPageManager(master->sheet())
         , d(new Private)
 {
     d->master = master;

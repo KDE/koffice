@@ -20,11 +20,11 @@
 #ifndef KSPREAD_TABLE_PAGE_MANAGER
 #define KSPREAD_TABLE_PAGE_MANAGER
 
-#include "PageManager.h"
+#include "KCPageManager.h"
 
 class TableShape;
 
-class TablePageManager : public PageManager
+class TablePageManager : public KCPageManager
 {
 public:
     /**

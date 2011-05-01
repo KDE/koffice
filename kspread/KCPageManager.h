@@ -34,18 +34,18 @@ class KCSheet;
  * printing, and TablePageManager, which does the same for the table shape in
  * page based hosting apps.
  */
-class KSPREAD_EXPORT PageManager
+class KSPREAD_EXPORT KCPageManager
 {
 public:
     /**
      * Constructor.
      */
-    PageManager(KCSheet* sheet);
+    KCPageManager(KCSheet* sheet);
 
     /**
      * Destructor.
      */
-    virtual ~PageManager();
+    virtual ~KCPageManager();
 
     /**
      * Layouts the pages.
@@ -89,7 +89,7 @@ protected:
     virtual void preparePage(int page);
 
 private:
-    Q_DISABLE_COPY(PageManager)
+    Q_DISABLE_COPY(KCPageManager)
 
     class Private;
     Private * const d;

@@ -17,14 +17,14 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "PageManager.h"
+#include "KCPageManager.h"
 
 #include "PrintSettings.h"
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 
-class PageManager::Private
+class KCPageManager::Private
 {
 public:
     KCSheet* sheet;
@@ -33,19 +33,19 @@ public:
 };
 
 
-PageManager::PageManager(KCSheet* sheet)
+KCPageManager::KCPageManager(KCSheet* sheet)
         : d(new Private)
 {
     d->sheet = sheet;
     d->settings = *sheet->printSettings();
 }
 
-PageManager::~PageManager()
+KCPageManager::~KCPageManager()
 {
     delete d;
 }
 
-void PageManager::layoutPages()
+void KCPageManager::layoutPages()
 {
     const KCSheet* sheet = d->sheet;
     const PrintSettings settings = d->settings;
@@ -186,7 +186,7 @@ void PageManager::layoutPages()
     kDebug() << d->pages.count() << "page(s) created";
 }
 
-void PageManager::setPrintSettings(const PrintSettings& settings, bool force)
+void KCPageManager::setPrintSettings(const PrintSettings& settings, bool force)
 {
     if (!force && settings == d->settings)
         return;
@@ -195,51 +195,51 @@ void PageManager::setPrintSettings(const PrintSettings& settings, bool force)
     layoutPages();
 }
 
-int PageManager::pageCount() const
+int KCPageManager::pageCount() const
 {
     return d->pages.count();
 }
 
-QRect PageManager::cellRange(int page) const
+QRect KCPageManager::cellRange(int page) const
 {
     if (page < 1 || page > d->pages.count())
         return QRect();
     return d->pages[page - 1];
 }
 
-QSizeF PageManager::size(int page) const
+QSizeF KCPageManager::size(int page) const
 {
     if (page < 1 || page > d->pages.count())
         return QSizeF();
     return QSizeF(d->settings.printWidth() + 0.5, d->settings.printHeight() + 0.5); // FIXME
 }
 
-KCSheet* PageManager::sheet() const
+KCSheet* KCPageManager::sheet() const
 {
     return d->sheet;
 }
 
-const PrintSettings& PageManager::printSettings() const
+const PrintSettings& KCPageManager::printSettings() const
 {
     return d->settings;
 }
 
-void PageManager::clearPages()
+void KCPageManager::clearPages()
 {
 }
 
-bool PageManager::pageNeedsPrinting(const QRect& cellRange) const
+bool KCPageManager::pageNeedsPrinting(const QRect& cellRange) const
 {
     Q_UNUSED(cellRange);
     return true;
 }
 
-void PageManager::insertPage(int page)
+void KCPageManager::insertPage(int page)
 {
     Q_UNUSED(page);
 }
 
-void PageManager::preparePage(int page)
+void KCPageManager::preparePage(int page)
 {
     Q_UNUSED(page);
 }
