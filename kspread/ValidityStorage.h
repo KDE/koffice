@@ -27,7 +27,7 @@
 /**
  * \class ValidityStorage
  * \ingroup Storage
- * \ingroup Value
+ * \ingroup KCValue
  * Stores cell validations.
  */
 class ValidityStorage : public QObject, public RectStorage<Validity>

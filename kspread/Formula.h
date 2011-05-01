@@ -36,11 +36,11 @@
 class KLocale;
 
 class KCSheet;
-class Value;
+class KCValue;
 typedef QHash<KCCell, KCCell> CellIndirection;
 
 /**
- * \ingroup Value
+ * \ingroup KCValue
  * A formula token.
  */
 class KSPREAD_EXPORT Token
@@ -269,7 +269,7 @@ protected:
 };
 
 /**
- * \ingroup Value
+ * \ingroup KCValue
  * An array of formula tokens.
  *
  */
@@ -289,7 +289,7 @@ protected:
 
 
 /**
- * \ingroup Value
+ * \ingroup KCValue
  * A formula for a cell.
  *
  * A Formula is a equations which perform calculations on values in the cells
@@ -377,7 +377,7 @@ public:
      * different cells. If this mapping is non-empty this does mean
      * that intermediate results can't be cached.
      */
-    Value eval(CellIndirection cellIndirections = CellIndirection()) const;
+    KCValue eval(CellIndirection cellIndirections = CellIndirection()) const;
 
     /**
      * Given an expression, this function separates it into tokens.
@@ -411,7 +411,7 @@ protected:
      * helper function for recursive evaluations; makes sure one cell
      * is not evaluated more than once resulting in infinite loops
      */
-    Value evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Value>& values) const;
+    KCValue evalRecursive(CellIndirection cellIndirections, QHash<KCCell, KCValue>& values) const;
 
 private:
     class Private;

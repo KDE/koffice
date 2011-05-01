@@ -44,7 +44,7 @@
 
 #include "RowColumnFormat.h"
 #include "KCStyle.h"
-#include "Value.h"
+#include "KCValue.h"
 
 #include "ui_FontWidget.h"
 #include "ui_PositionWidget.h"
@@ -672,7 +672,7 @@ public:
     KCFormat::Type formatType;
     bool bFormatType;
 
-    Value value;
+    KCValue value;
 
     bool isMerged;
     bool oneCell;

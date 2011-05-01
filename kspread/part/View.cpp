@@ -1805,10 +1805,10 @@ void View::calcStatusBarOp()
 {
     KCSheet * sheet = activeSheet();
     ValueCalc* calc = doc()->map()->calc();
-    Value val;
+    KCValue val;
     KSpread::MethodOfCalc tmpMethod = doc()->map()->settings()->getTypeOfCalc();
     if (sheet && tmpMethod != KSpread::NoneCalc) {
-        Value range = sheet->cellStorage()->valueRegion(*d->selection);
+        KCValue range = sheet->cellStorage()->valueRegion(*d->selection);
         switch (tmpMethod) {
         case KSpread::SumOfNumber:
             val = calc->sum(range);
@@ -1823,10 +1823,10 @@ void View::calcStatusBarOp()
             val = calc->max(range);
             break;
         case KSpread::CountA:
-            val = Value(calc->count(range));
+            val = KCValue(calc->count(range));
             break;
         case KSpread::Count:
-            val = Value(calc->count(range, false));
+            val = KCValue(calc->count(range, false));
         case KSpread::NoneCalc:
             break;
         default:

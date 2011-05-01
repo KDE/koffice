@@ -34,11 +34,11 @@
 class QDomElement;
 
 class KCSheet;
-class Value;
+class KCValue;
 class ValueCalc;
 class Function;
 
-typedef QVector<Value> valVector;
+typedef QVector<KCValue> valVector;
 
 struct rangeInfo {
     int col1, col2, row1, row2;
@@ -58,10 +58,10 @@ struct FuncExtra {
     int myrow, mycol;
 };
 
-typedef Value(*FunctionPtr)(valVector, ValueCalc *, FuncExtra *);
+typedef KCValue(*FunctionPtr)(valVector, ValueCalc *, FuncExtra *);
 
 /**
- * \ingroup Value
+ * \ingroup KCValue
  * A function pointer and context.
  */
 class KSPREAD_EXPORT Function
@@ -86,7 +86,7 @@ public:
     QString localizedName() const;
     QString helpText() const;
     void setHelpText(const QString& text);
-    Value exec(valVector args, ValueCalc *calc, FuncExtra *extra = 0);
+    KCValue exec(valVector args, ValueCalc *calc, FuncExtra *extra = 0);
 
     QString alternateName() const;
     void setAlternateName(const QString &name);

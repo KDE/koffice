@@ -31,7 +31,7 @@
 #include "KCSheet.h"
 #include "KCStyle.h"
 #include "Validity.h"
-#include "Value.h"
+#include "KCValue.h"
 #include "ValueFormatter.h"
 
 // Qt
@@ -95,7 +95,7 @@ QVariant SheetModel::data(const QModelIndex& index, int role) const
         } else if (!cell.isEmpty()) {
             // KCFormat the value appropriately and set the display text.
             // The format of the resulting value is used below to determine the alignment.
-            Value value = d->sheet->map()->formatter()->formatText(cell.value(), style.formatType(),
+            KCValue value = d->sheet->map()->formatter()->formatText(cell.value(), style.formatType(),
                           style.precision(), style.floatFormat(),
                           style.prefix(), style.postfix(),
                           style.currency().symbol());
@@ -230,7 +230,7 @@ bool SheetModel::setData(const QModelIndex& index, const QVariant& value, int ro
         storage->setFormula(column, row, value.value<Formula>());
         break;
     case ValueRole:
-        storage->setValue(column, row, value.value<Value>());
+        storage->setValue(column, row, value.value<KCValue>());
         break;
     case LinkRole:
         storage->setLink(column, row, value.toString());

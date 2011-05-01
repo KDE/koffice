@@ -25,7 +25,7 @@
 #include "CalculationSettings.h"
 #include "Localization.h"
 #include "KCStyle.h"
-#include "Value.h"
+#include "KCValue.h"
 
 ValueParser::ValueParser(const CalculationSettings* settings)
         : m_settings(settings)
@@ -37,16 +37,16 @@ const CalculationSettings* ValueParser::settings() const
     return m_settings;
 }
 
-Value ValueParser::parse(const QString& str) const
+KCValue ValueParser::parse(const QString& str) const
 {
-    Value val;
+    KCValue val;
 
     // If the text is empty, we don't have a value
     // If the user stated explicitly that he wanted text
     // (using the format or using a quote),
     // then we don't parse as a value, but as string.
     if (str.isEmpty() || str.at(0) == '\'') {
-        val = Value(str);
+        val = KCValue(str);
         return val;
     }
 
@@ -71,8 +71,8 @@ Value ValueParser::parse(const QString& str) const
     // Test for money number
     Number money = m_settings->locale()->readMoney(strStripped, &ok);
     if (ok) {
-        val = Value(money);
-        val.setFormat(Value::fmt_Money);
+        val = KCValue(money);
+        val.setFormat(KCValue::fmt_Money);
         return val;
     }
 
@@ -85,30 +85,30 @@ Value ValueParser::parse(const QString& str) const
         return val;
 
     // Nothing particular found, then this is simply a string
-    val = Value(str);
+    val = KCValue(str);
     return val;
 }
 
-Value ValueParser::tryParseBool(const QString& str, bool *ok) const
+KCValue ValueParser::tryParseBool(const QString& str, bool *ok) const
 {
-    Value val;
+    KCValue val;
     if (ok) *ok = false;
 
     const QString& lowerStr = str.toLower();
 
     if ((lowerStr == "true") ||
             (lowerStr == ki18n("true").toString(m_settings->locale()).toLower())) {
-        val = Value(true);
+        val = KCValue(true);
         if (ok) *ok = true;
     } else if ((lowerStr == "false") ||
                (lowerStr == ki18n("false").toString(m_settings->locale()).toLower())) {
-        val = Value(false);
+        val = KCValue(false);
         if (ok) *ok = true;
     }
     return val;
 }
 
-Value ValueParser::readNumber(const QString& _str, bool *ok) const
+KCValue ValueParser::readNumber(const QString& _str, bool *ok) const
 {
     bool isInt = false;
     QString str = _str.trimmed();
@@ -167,7 +167,7 @@ Value ValueParser::readNumber(const QString& _str, bool *ok) const
                 || pos == 0          // Can't start with a separator
                 || (lastpos > 0 && pos - lastpos != 3)) { // Must have exactly 3 digits between two separators
             if (ok) *ok = false;
-            return Value();
+            return KCValue();
         }
 
         lastpos = pos;
@@ -175,7 +175,7 @@ Value ValueParser::readNumber(const QString& _str, bool *ok) const
     }
     if (lastpos > 0 && major.length() - lastpos != 3) { // Must have exactly 3 digits after the last separator
         if (ok) *ok = false;
-        return Value();
+        return KCValue();
     }
 
     // log10(2^63) ~= 18
@@ -186,7 +186,7 @@ Value ValueParser::readNumber(const QString& _str, bool *ok) const
     tot += major;
     if (!isInt) tot += '.' + minor + exponentialPart;
 
-    return isInt ? Value(tot.toLongLong(ok)) : Value(tot.toDouble(ok));
+    return isInt ? KCValue(tot.toLongLong(ok)) : KCValue(tot.toDouble(ok));
 }
 
 Number ValueParser::readImaginary(const QString& str, bool* ok) const
@@ -218,16 +218,16 @@ Number ValueParser::readImaginary(const QString& str, bool* ok) const
     return imag;
 }
 
-Value ValueParser::tryParseNumber(const QString& str, bool *ok) const
+KCValue ValueParser::tryParseNumber(const QString& str, bool *ok) const
 {
-    Value value;
+    KCValue value;
     if (str.endsWith('%')) {   // percentage
         const Number val = readNumber(str.left(str.length() - 1).trimmed(), ok).asFloat();
         if (*ok) {
             //kDebug(36001) <<"ValueParser::tryParseNumber '" << str <<
             //    "' successfully parsed as percentage: " << val << '%' << endl;
-            value = Value(val / 100.0);
-            value.setFormat(Value::fmt_Percent);
+            value = KCValue(val / 100.0);
+            value.setFormat(KCValue::fmt_Percent);
         }
     } else if (str.count('i') == 1 || str.count('j') == 1) {    // complex number
         Number real = 0.0;
@@ -255,13 +255,13 @@ Value ValueParser::tryParseNumber(const QString& str, bool *ok) const
                 real = 0.0;
         }
         if (*ok)
-            value = Value(complex<Number>(real, imag));
+            value = KCValue(complex<Number>(real, imag));
     } else // real number
         value = readNumber(str, ok);
     return value;
 }
 
-Value ValueParser::tryParseDate(const QString& str, bool *ok) const
+KCValue ValueParser::tryParseDate(const QString& str, bool *ok) const
 {
     bool valid = false;
     QDate tmpDate = m_settings->locale()->readDate(str, &valid);
@@ -329,10 +329,10 @@ Value ValueParser::tryParseDate(const QString& str, bool *ok) const
     if (ok)
         *ok = valid;
 
-    return Value(tmpDate, m_settings);
+    return KCValue(tmpDate, m_settings);
 }
 
-Value ValueParser::tryParseTime(const QString& str, bool *ok) const
+KCValue ValueParser::tryParseTime(const QString& str, bool *ok) const
 {
     bool valid = false;
 
@@ -371,10 +371,10 @@ Value ValueParser::tryParseTime(const QString& str, bool *ok) const
 
     if (ok)
         *ok = valid;
-    Value value;
+    KCValue value;
     if (valid) {
-        value = Value(tmpTime, m_settings);
-        value.setFormat(Value::fmt_Time);
+        value = KCValue(tmpTime, m_settings);
+        value.setFormat(KCValue::fmt_Time);
     }
     return value;
 }

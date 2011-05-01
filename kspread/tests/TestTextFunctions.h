@@ -23,7 +23,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-#include <Value.h>
+#include <KCValue.h>
 
 
 class TestTextFunctions: public QObject
@@ -60,7 +60,7 @@ private slots:
     void testBAHTTEXT();
 
 private:
-    Value evaluate(const QString&, Value& ex);
+    KCValue evaluate(const QString&, KCValue& ex);
 };
 
 #endif

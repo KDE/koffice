@@ -21,7 +21,7 @@
 // Local
 #include "Function.h"
 
-#include "Value.h"
+#include "KCValue.h"
 
 class Function::Private
 {
@@ -97,11 +97,11 @@ void Function::setNeedsExtra(bool extra)
     d->ne = extra;
 }
 
-Value Function::exec(valVector args, ValueCalc *calc, FuncExtra *extra)
+KCValue Function::exec(valVector args, ValueCalc *calc, FuncExtra *extra)
 {
     // check number of parameters
     if (!paramCountOkay(args.count()))
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     if (extra)
         extra->function = this;
@@ -114,7 +114,7 @@ Value Function::exec(valVector args, ValueCalc *calc, FuncExtra *extra)
                 mustExpandArray = true;
         }
 
-    if (!d->ptr) return Value::errorVALUE();
+    if (!d->ptr) return KCValue::errorVALUE();
 
     // perform the actual array expansion if need be
 
@@ -130,7 +130,7 @@ Value Function::exec(valVector args, ValueCalc *calc, FuncExtra *extra)
             if (x > cols) cols = x;
         }
         // allocate the resulting array
-        Value res(Value::Array);
+        KCValue res(KCValue::Array);
         // perform the actual computation for each element of the array
         for (int row = 0; row < rows; ++row)
             for (int col = 0; col < cols; ++col) {

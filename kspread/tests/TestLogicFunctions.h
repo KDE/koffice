@@ -23,7 +23,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-#include <Value.h>
+#include <KCValue.h>
 
 
 class Doc;
@@ -48,7 +48,7 @@ private slots:
 private:
     Doc* m_doc;
     KCSheet* m_sheet;
-    Value evaluate(const QString&, Value& ex);
+    KCValue evaluate(const QString&, KCValue& ex);
 };
 
 #endif

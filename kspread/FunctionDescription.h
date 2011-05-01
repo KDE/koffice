@@ -32,7 +32,7 @@ class QDomElement;
 enum ParameterType { KSpread_Int, KSpread_Float, KSpread_String, KSpread_Boolean, KSpread_Any };
 
 /**
- * \ingroup Value
+ * \ingroup KCValue
  * A function parameter.
  */
 class KSPREAD_EXPORT FunctionParameter
@@ -59,7 +59,7 @@ private:
 };
 
 /**
- * \ingroup Value
+ * \ingroup KCValue
  * A function description.
  */
 class KSPREAD_EXPORT FunctionDescription

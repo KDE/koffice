@@ -49,7 +49,7 @@ bool AbstractDataManipulator::process(Element* element)
     QRect range = element->rect();
     for (int col = range.left(); col <= range.right(); ++col)
         for (int row = range.top(); row <= range.bottom(); ++row) {
-            Value val;
+            KCValue val;
             QString text;
 //       int colidx = col - range.left();
 //       int rowidx = row - range.top();
@@ -156,7 +156,7 @@ DataManipulator::DataManipulator(QUndoCommand* parent)
         , m_expandMatrix(false)
 {
     // default name for DataManipulator, can be changed using setText
-    setText(i18n("Change Value"));
+    setText(i18n("Change KCValue"));
 }
 
 DataManipulator::~DataManipulator()
@@ -172,7 +172,7 @@ bool DataManipulator::preProcessing()
             Formula formula(m_sheet);
             formula.setExpression(expression);
             if (formula.isValid()) {
-                const Value result = formula.eval();
+                const KCValue result = formula.eval();
                 if (result.columns() > 1 || result.rows() > 1) {
                     const QPoint point = cells()[0]->rect().topLeft();
                     KCRegion::add(QRect(point.x(), point.y(), result.columns(), result.rows()), m_sheet);
@@ -199,7 +199,7 @@ bool DataManipulator::process(Element* element)
     return true;
 }
 
-Value DataManipulator::newValue(Element *element, int col, int row,
+KCValue DataManipulator::newValue(Element *element, int col, int row,
                                 bool *parsing, KCFormat::Type *formatType)
 {
     *parsing = m_parsing;
@@ -212,7 +212,7 @@ Value DataManipulator::newValue(Element *element, int col, int row,
         if (colidx || rowidx) {
             *parsing = false;
             if (m_data.asString().isEmpty() || m_data.asString().at(0) == '=')
-                m_sheet->cellStorage()->setValue(col, row, Value()); // for proper undo
+                m_sheet->cellStorage()->setValue(col, row, KCValue()); // for proper undo
             return KCCell(m_sheet, range.topLeft()).value().element(colidx, rowidx);
         }
     }
@@ -236,8 +236,8 @@ void SeriesManipulator::setupSeries(const QPoint &_marker, double start,
                                     double end, double step, Series mode, Series type)
 {
     m_type = type;
-    m_start = Value(start);
-    m_step = Value(step);
+    m_start = KCValue(start);
+    m_step = KCValue(step);
     // compute cell count
     int numberOfCells = 1;
     if (type == Linear)
@@ -258,7 +258,7 @@ void SeriesManipulator::setupSeries(const QPoint &_marker, double start,
     add(range);
 }
 
-Value SeriesManipulator::newValue(Element *element, int col, int row,
+KCValue SeriesManipulator::newValue(Element *element, int col, int row,
                                   bool *parse, KCFormat::Type *)
 {
     *parse = false;
@@ -269,7 +269,7 @@ Value SeriesManipulator::newValue(Element *element, int col, int row,
     int colidx = col - range.left();
     int rowidx = row - range.top();
     int which = (colidx > 0) ? colidx : rowidx;
-    Value val;
+    KCValue val;
     if (which == m_last + 1) {
         // if we are requesting next item in the series, which should almost always
         // be the case, we can use the pre-computed value to speed up the process
@@ -307,7 +307,7 @@ FillManipulator::~FillManipulator()
 {
 }
 
-Value FillManipulator::newValue(Element *element, int col, int row,
+KCValue FillManipulator::newValue(Element *element, int col, int row,
                                 bool *parse, KCFormat::Type *fmtType)
 {
     Q_UNUSED(fmtType);
@@ -322,7 +322,7 @@ Value FillManipulator::newValue(Element *element, int col, int row,
     KCCell cell(m_sheet, col, row); // the reference cell
     if (cell.isFormula()) {
         *parse = true;
-        return Value(KCCell(m_sheet, targetCol, targetRow).decodeFormula(cell.encodeFormula()));
+        return KCValue(KCCell(m_sheet, targetCol, targetRow).decodeFormula(cell.encodeFormula()));
     }
     return cell.value();
 }
@@ -348,7 +348,7 @@ CaseManipulator::~CaseManipulator()
 {
 }
 
-Value CaseManipulator::newValue(Element *element, int col, int row,
+KCValue CaseManipulator::newValue(Element *element, int col, int row,
                                 bool *parse, KCFormat::Type *)
 {
     Q_UNUSED(element)
@@ -365,7 +365,7 @@ Value CaseManipulator::newValue(Element *element, int col, int row,
             str = str.at(0).toUpper() + str.right(str.length() - 1);
         break;
     };
-    return Value(str);
+    return KCValue(str);
 }
 
 bool CaseManipulator::wantChange(Element *element, int col, int row)

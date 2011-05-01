@@ -42,7 +42,7 @@ class KoXmlWriter;
 
 /**
  * Calculation settings
- * \ingroup Value
+ * \ingroup KCValue
  */
 class KSPREAD_EXPORT CalculationSettings
 {

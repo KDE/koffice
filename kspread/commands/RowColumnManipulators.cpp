@@ -33,7 +33,7 @@
 #include "Map.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
-#include "Value.h"
+#include "KCValue.h"
 
 /***************************************************************************
   class ResizeColumnManipulator

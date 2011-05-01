@@ -65,7 +65,7 @@ class OdfLoadingContext;
 class OdfSavingContext;
 class KCSheet;
 class Validity;
-class Value;
+class KCValue;
 
 /**
  * An accessor to the actual cell data.
@@ -262,7 +262,7 @@ public:
      * Returns the value that this cell holds. It could be from the user
      * (i.e. when s/he enters a value) or a result of formula.
      */
-    const Value value() const;
+    const KCValue value() const;
 
     /**
      * Sets the value for this cell.
@@ -273,7 +273,7 @@ public:
      *
      * \see setUserInput, parseUserInput
      */
-    void setValue(const Value& value);
+    void setValue(const KCValue& value);
 
     /**
      * Returns the richtext that this cell holds.

@@ -35,7 +35,7 @@ for i in `seq 51 514`
 	result=`echo $result | sed s/,/./`
         VAL=$result
       fi;fi;fi
-      echo "CHECK_EVAL(\"=${formula}\", Value($VAL));  // row $i"
+      echo "CHECK_EVAL(\"=${formula}\", KCValue($VAL));  // row $i"
     fi
   else echo // Not passed for line $i.
   fi

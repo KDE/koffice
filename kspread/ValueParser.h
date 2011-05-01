@@ -30,12 +30,12 @@
 #include "kspread_export.h"
 
 class CalculationSettings;
-class Value;
+class KCValue;
 
 /**
- * \ingroup Value
- * Generates a Value by parsing an user input text.
- * Determines the most probable Value type, e.g. integer or date.
+ * \ingroup KCValue
+ * Generates a KCValue by parsing an user input text.
+ * Determines the most probable KCValue type, e.g. integer or date.
  */
 class KSPREAD_EXPORT ValueParser
 {
@@ -54,35 +54,35 @@ public:
      * Parses the user input text \p str and tries to determine the correct
      * value type for it.
      */
-    Value parse(const QString& str) const;
+    KCValue parse(const QString& str) const;
 
     /**
      * Tries for boolean type. If \p str can be interpreted as this
      * type, \p ok is set to \c true and the corresponding value will
      * be returned.
      */
-    Value tryParseBool(const QString& str, bool *ok = 0) const;
+    KCValue tryParseBool(const QString& str, bool *ok = 0) const;
 
     /**
      * Tries for floating point, integer, complex (and percentage) type.
      * If \p str can be interpreted as one of these types, \p ok is set to
      * \c true and the corresponding value will be returned.
      */
-    Value tryParseNumber(const QString& str, bool *ok = 0) const;
+    KCValue tryParseNumber(const QString& str, bool *ok = 0) const;
 
     /**
      * Tries for date type. If \p str can be interpreted as this
      * type, \p ok is set to \c true and the corresponding value will
      * be returned.
      */
-    Value tryParseDate(const QString& str, bool *ok = 0) const;
+    KCValue tryParseDate(const QString& str, bool *ok = 0) const;
 
     /**
      * Tries for time type. If \p str can be interpreted as this
      * type, \p ok is set to \c true and the corresponding value will
      * be returned.
      */
-    Value tryParseTime(const QString& str, bool *ok = 0) const;
+    KCValue tryParseTime(const QString& str, bool *ok = 0) const;
 
 protected:
     /**
@@ -93,7 +93,7 @@ protected:
     /**
      * A helper function to read numbers and distinguish integers and FPs.
      */
-    Value readNumber(const QString &_str, bool* ok) const;
+    KCValue readNumber(const QString &_str, bool* ok) const;
 
     /**
      * A helper function to read the imaginary part of a complex number.

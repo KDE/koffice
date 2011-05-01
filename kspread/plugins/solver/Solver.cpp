@@ -28,7 +28,7 @@
 #include <KCCell.h>
 #include <part/Doc.h>
 #include <KCSheet.h>
-#include <Value.h>
+#include <KCValue.h>
 #include <part/View.h>
 #include <KCRegion.h>
 
@@ -197,7 +197,7 @@ double function(const gsl_vector* vector, void *params)
     Solver::Parameters* parameters = static_cast<Solver::Parameters*>(params);
 
     for (int i = 0; i < parameters->cells.count(); ++i) {
-        parameters->cells[i].setValue(Value(gsl_vector_get(vector, i)));
+        parameters->cells[i].setValue(KCValue(gsl_vector_get(vector, i)));
     }
 
     // TODO check for errors/correct type

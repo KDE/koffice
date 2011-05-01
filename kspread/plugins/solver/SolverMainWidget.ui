@@ -69,7 +69,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
       <item>
        <widget class="QRadioButton" name="valueButton" >
         <property name="text" >
-         <string>Value:</string>
+         <string>KCValue:</string>
         </property>
        </widget>
       </item>

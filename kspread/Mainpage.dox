@@ -72,7 +72,7 @@
  */
 
 /**
- * \defgroup Value Value System
+ * \defgroup KCValue KCValue System
  * Classes and methods related to cell values.
  */
 

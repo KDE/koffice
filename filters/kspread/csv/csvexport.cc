@@ -35,7 +35,7 @@
 #include <kspread/Map.h>
 #include <kspread/KCSheet.h>
 #include <kspread/part/Doc.h>
-#include <kspread/Value.h>
+#include <kspread/KCValue.h>
 #include <kspread/part/View.h>
 #include <kspread/ui/Selection.h>
 

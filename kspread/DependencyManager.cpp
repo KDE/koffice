@@ -35,7 +35,7 @@
 #include "KCRegion.h"
 #include "RTree.h"
 #include "KCSheet.h"
-#include "Value.h"
+#include "KCValue.h"
 
 // This is currently not called - but it's really convenient to call it from
 // gdb or from debug output to check that everything is set up ok.
@@ -202,7 +202,7 @@ void DependencyManager::updateAllDependencies(const Map* map)
                 d->depths.insert(cell , depth);
             }
             if (!sheet->formulaStorage()->data(c).isValid())
-                cell.setValue(Value::errorPARSE());
+                cell.setValue(KCValue::errorPARSE());
         }
     }
 }
@@ -443,9 +443,9 @@ void DependencyManager::Private::generateDepths(KCCell cell, QSet<KCCell>& compu
     static QSet<KCCell> processedCells;
 
     //prevent infinite recursion (circular dependencies)
-    if (processedCells.contains(cell) || cell.value() == Value::errorCIRCLE()) {
+    if (processedCells.contains(cell) || cell.value() == KCValue::errorCIRCLE()) {
         kDebug(36002) << "Circular dependency at" << cell.fullName();
-        cell.setValue(Value::errorCIRCLE());
+        cell.setValue(KCValue::errorCIRCLE());
         depths.insert(cell, 0);
         return;
     }
@@ -479,9 +479,9 @@ int DependencyManager::Private::computeDepth(KCCell cell) const
     static QSet<KCCell> processedCells;
 
     //prevent infinite recursion (circular dependencies)
-    if (processedCells.contains(cell) || cell.value() == Value::errorCIRCLE()) {
+    if (processedCells.contains(cell) || cell.value() == KCValue::errorCIRCLE()) {
         kDebug(36002) << "Circular dependency at" << cell.fullName();
-        cell.setValue(Value::errorCIRCLE());
+        cell.setValue(KCValue::errorCIRCLE());
         return 0;
     }
 
@@ -616,8 +616,8 @@ void DependencyManager::Private::removeCircularDependencyFlags(const KCRegion& r
                     continue;
                 processedCells.insert(cell);
 
-                if (cell.value() == Value::errorCIRCLE())
-                    cell.setValue(Value::empty());
+                if (cell.value() == KCValue::errorCIRCLE())
+                    cell.setValue(KCValue::empty());
 
                 if (direction == Backward)
                     removeCircularDependencyFlags(providers.value(cell), Backward);

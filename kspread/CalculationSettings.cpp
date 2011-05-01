@@ -133,7 +133,7 @@ void CalculationSettings::loadOdf(const KoXmlElement& body)
                         d->refDate = date;
                 } else {
                     kDebug() << "CalculationSettings: Error on loading null date."
-                    << "Value type """ << valueType << """ not handled"
+                    << "KCValue type """ << valueType << """ not handled"
                     << ", falling back to default." << endl;
                     // NOTE Stefan: I don't know why different types are possible here!
                 }

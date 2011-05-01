@@ -195,8 +195,8 @@ void GoalSeekDialog::accept()
     }
 
     // Reset the value for a proper undo value.
-    const Value value = d->sourceCell.value();
-    d->sourceCell.setValue(Value(d->oldSource));
+    const KCValue value = d->sourceCell.value();
+    d->sourceCell.setValue(KCValue(d->oldSource));
     KCSheet *const sheet = d->selection->activeSheet();
     DataManipulator *const command = new DataManipulator();
     command->setSheet(sheet);
@@ -212,7 +212,7 @@ void GoalSeekDialog::accept()
 void GoalSeekDialog::reject()
 {
     if (d->widget.preview->isVisible()) {
-        d->sourceCell.setValue(Value(d->oldSource));
+        d->sourceCell.setValue(KCValue(d->oldSource));
     }
 
     deleteLater();
@@ -252,12 +252,12 @@ void GoalSeekDialog::startCalc(double _start, double _goal)
         startA = startB;
         startB = x;
 
-        d->sourceCell.setValue(Value(startA));
+        d->sourceCell.setValue(KCValue(startA));
         const double targetValueA = numToDouble(formula.eval().asFloat());
         resultA = targetValueA - _goal;
 //         kDebug() << "Target A:" << targetValueA << "," << d->targetCell.userInput() << "Calc:" << resultA;
 
-        d->sourceCell.setValue(Value(startB));
+        d->sourceCell.setValue(KCValue(startB));
         const double targetValueB = numToDouble(formula.eval().asFloat());
         resultB = targetValueB - _goal;
 //         kDebug() << "Target B:" << targetValueB << "," << d->targetCell.userInput() << "Calc:" << resultB;
@@ -300,7 +300,7 @@ void GoalSeekDialog::startCalc(double _start, double _goal)
 
     d->widget.label5->setText(i18n("New value:"));
     if (ok) {
-        d->sourceCell.setValue(Value(startA));
+        d->sourceCell.setValue(KCValue(startA));
 
         d->widget.label4->setText(i18n("Goal seeking with cell %1 found a solution:",
                                        d->widget.selector3->textEdit()->toPlainText()));
@@ -308,7 +308,7 @@ void GoalSeekDialog::startCalc(double _start, double _goal)
         d->widget.currentValue->setText(d->selection->activeSheet()->map()->calculationSettings()->locale()->formatNumber(d->oldSource));
     } else {
         // restore the old value
-        d->sourceCell.setValue(Value(d->oldSource));
+        d->sourceCell.setValue(KCValue(d->oldSource));
         d->widget.label4->setText(i18n("Goal seeking with cell %1 has found NO solution.",
                                        d->widget.selector3->textEdit()->toPlainText()));
         d->widget.newValue->setText("");

@@ -546,34 +546,34 @@ void ValidityDialog::OkPressed()
         validity.setCondition(Conditional::Equal);
         validity.setMessage(message->toPlainText());
         validity.setTitle(title->text());
-        validity.setMinimumValue(Value());
-        validity.setMaximumValue(Value());
+        validity.setMinimumValue(KCValue());
+        validity.setMaximumValue(KCValue());
     } else {
         validity.setRestriction(chooseType->itemData(chooseType->currentIndex()).value<Validity::Restriction>());
         validity.setAction(chooseAction->itemData(chooseAction->currentIndex()).value<Validity::Action>());
         validity.setCondition(choose->itemData(choose->currentIndex()).value<Conditional::Type>());
         validity.setMessage(message->toPlainText());
         validity.setTitle(title->text());
-        validity.setMinimumValue(Value());
-        validity.setMaximumValue(Value());
+        validity.setMinimumValue(KCValue());
+        validity.setMaximumValue(KCValue());
 
         if (chooseType->currentIndex() == 1) {
             if (choose->currentIndex()  < 5) {
-                validity.setMinimumValue(Value(val_min->text().toDouble()));
+                validity.setMinimumValue(KCValue(val_min->text().toDouble()));
             } else {
-                validity.setMinimumValue(Value(qMin(val_min->text().toDouble(), val_max->text().toDouble())));
-                validity.setMaximumValue(Value(qMax(val_max->text().toDouble(), val_min->text().toDouble())));
+                validity.setMinimumValue(KCValue(qMin(val_min->text().toDouble(), val_max->text().toDouble())));
+                validity.setMaximumValue(KCValue(qMax(val_max->text().toDouble(), val_min->text().toDouble())));
             }
         } else if (chooseType->currentIndex() == 2 || chooseType->currentIndex() == 6) {
             if (choose->currentIndex()  < 5) {
-                validity.setMinimumValue(Value(val_min->text().toInt()));
+                validity.setMinimumValue(KCValue(val_min->text().toInt()));
             } else {
-                validity.setMinimumValue(Value(qMin(val_min->text().toInt(), val_max->text().toInt())));
-                validity.setMaximumValue(Value(qMax(val_max->text().toInt(), val_min->text().toInt())));
+                validity.setMinimumValue(KCValue(qMin(val_min->text().toInt(), val_max->text().toInt())));
+                validity.setMaximumValue(KCValue(qMax(val_max->text().toInt(), val_min->text().toInt())));
             }
         } else  if (chooseType->currentIndex() == 4) {
-            const Value minValue = parser->tryParseDate(val_min->text());
-            const Value maxValue = parser->tryParseDate(val_max->text());
+            const KCValue minValue = parser->tryParseDate(val_min->text());
+            const KCValue maxValue = parser->tryParseDate(val_max->text());
             if (choose->currentIndex()  < 5) {
                 validity.setMinimumValue(minValue);
             } else {
@@ -586,8 +586,8 @@ void ValidityDialog::OkPressed()
                 }
             }
         } else  if (chooseType->currentIndex() == 5) {
-            const Value minValue = parser->tryParseTime(val_min->text());
-            const Value maxValue = parser->tryParseTime(val_max->text());
+            const KCValue minValue = parser->tryParseTime(val_min->text());
+            const KCValue maxValue = parser->tryParseTime(val_max->text());
             if (choose->currentIndex()  < 5) {
                 validity.setMinimumValue(minValue);
             } else {

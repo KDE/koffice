@@ -171,11 +171,11 @@ bool RowFormat::load(const KoXmlElement & row, int yshift, Paste::Mode mode)
 
     // Validation
     if (d->height < 0) {
-        kDebug(36001) << "Value height=" << d->height << " out of range";
+        kDebug(36001) << "KCValue height=" << d->height << " out of range";
         return false;
     }
     if (d->row < 1 || d->row > KS_rowMax) {
-        kDebug(36001) << "Value row=" << d->row << " out of range";
+        kDebug(36001) << "KCValue row=" << d->row << " out of range";
         return false;
     }
 
@@ -422,11 +422,11 @@ bool ColumnFormat::load(const KoXmlElement & col, int xshift, Paste::Mode mode)
 
     // Validation
     if (d->width < 0) {
-        kDebug(36001) << "Value width=" << d->width << " out of range";
+        kDebug(36001) << "KCValue width=" << d->width << " out of range";
         return false;
     }
     if (d->column < 1 || d->column > KS_colMax) {
-        kDebug(36001) << "Value col=" << d->column << " out of range";
+        kDebug(36001) << "KCValue col=" << d->column << " out of range";
         return false;
     }
     if (col.hasAttribute("hide")) {

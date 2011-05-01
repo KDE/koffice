@@ -27,7 +27,7 @@
 
 //#include <Doc.h>
 //#include <View.h>
-#include <Value.h>
+#include <KCValue.h>
 #include <Number.h>
 #include <Function.h>
 #include <FunctionDescription.h>
@@ -46,7 +46,7 @@ class ScriptingFunctionImpl : public Function
 {
 public:
 
-    static Value callback(valVector args, ValueCalc* calc, FuncExtra* extra) {
+    static KCValue callback(valVector args, ValueCalc* calc, FuncExtra* extra) {
         Q_UNUSED(calc);
         Q_ASSERT(extra && extra->function);
         ScriptingFunctionImpl* funcimpl = static_cast< ScriptingFunctionImpl* >(extra->function);
@@ -55,7 +55,7 @@ public:
 
         if (! funcimpl->m_function) {
             kDebug() << QString("ScriptingFunctionImpl::callback ScriptingFunction instance is NULL.");
-            Value err = Value::errorNA();
+            KCValue err = KCValue::errorNA();
             err.setError('#' + i18n("No such script."));
             return err;
         }
@@ -101,49 +101,49 @@ public:
         funcimpl->m_function->setResult(QVariant());
 
         if (! QMetaObject::invokeMethod(funcimpl->m_function, "called", QGenericReturnArgument(), Q_ARG(QVariantList, list))) {
-            Value err = Value::errorVALUE(); //errorNAME();
+            KCValue err = KCValue::errorVALUE(); //errorNAME();
             err.setError('#' + i18n("No such script function."));
             return err;
         }
 
         const QString error = funcimpl->m_function->error();
         if (! error.isEmpty()) {
-            Value err = Value::errorVALUE(); //errorNAME();
+            KCValue err = KCValue::errorVALUE(); //errorNAME();
             err.setError('#' + error);
             return err;
         }
 
         QVariant result = funcimpl->m_function->result();
         if (! result.isValid()) {
-            Value err = Value::errorVALUE(); //errorNAME();
+            KCValue err = KCValue::errorVALUE(); //errorNAME();
             err.setError('#' + i18n("No return value."));
             return err;
         }
 
-        Value resultvalue;
+        KCValue resultvalue;
         switch (description->type()) {
         case KSpread_Int:
-            resultvalue = Value(result.toInt());
+            resultvalue = KCValue(result.toInt());
             break;
         case KSpread_Float:
-            resultvalue = Value((double) result.toDouble());
+            resultvalue = KCValue((double) result.toDouble());
             break;
         case KSpread_String:
-            resultvalue = Value(result.toString());
+            resultvalue = KCValue(result.toString());
             break;
         case KSpread_Boolean:
-            resultvalue = Value(result.toBool());
+            resultvalue = KCValue(result.toBool());
             break;
         case KSpread_Any:
         default:
             //TODO make more generic
-            //resultvalue = Value( result );
-            resultvalue = Value(result.toString());
+            //resultvalue = KCValue( result );
+            resultvalue = KCValue(result.toString());
             break;
         }
 
         //kDebug() <<"result=" << result.toString();
-        //return Value( result.toString() );
+        //return KCValue( result.toString() );
         return resultvalue;
     }
 

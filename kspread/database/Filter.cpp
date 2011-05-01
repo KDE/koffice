@@ -30,7 +30,7 @@
 #include "Map.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
-#include "Value.h"
+#include "KCValue.h"
 #include "ValueConverter.h"
 
 class AbstractCondition
@@ -336,7 +336,7 @@ public:
         const QRect range = database.range().lastRange();
         const int start = database.orientation() == Qt::Vertical ? range.left() : range.top();
 //         kDebug() <<"index:" << index <<" start:" << start <<" fieldNumber:" << fieldNumber;
-        const Value value = database.orientation() == Qt::Vertical
+        const KCValue value = database.orientation() == Qt::Vertical
                             ? sheet->cellStorage()->value(start + fieldNumber, index)
                             : sheet->cellStorage()->value(index, start + fieldNumber);
         const QString testString = sheet->map()->converter()->asString(value).asString();
@@ -400,7 +400,7 @@ public:
 
 public:
     int fieldNumber;
-    QString value; // Value?
+    QString value; // KCValue?
     Comparison operation;
     Qt::CaseSensitivity caseSensitivity;
     Mode dataType;

@@ -44,27 +44,27 @@
 using namespace KSpread;
 
 // prototypes (sorted alphabetically)
-Value func_errortype(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_filename(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_formula(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_info(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_isblank(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_isdate(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_iserr(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_iserror(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_iseven(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_islogical(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_isna(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_isnottext(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_isnum(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_isodd(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_isref(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_istext(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_istime(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_n(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_na(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_type(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_version(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_errortype(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_filename(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_formula(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_info(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_isblank(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_isdate(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_iserr(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_iserror(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_iseven(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_islogical(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_isna(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_isnottext(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_isnum(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_isodd(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_isref(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_istext(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_istime(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_n(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_na(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_type(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_version(valVector args, ValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("information", InformationModule)
@@ -137,55 +137,55 @@ QString InformationModule::descriptionFileName() const
 
 
 // Function: ERROR.TYPE
-Value func_errortype(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_errortype(valVector args, ValueCalc *, FuncExtra *)
 {
     if (! args[0].isError()) {
         // its an error if the argument isn't an error...
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     }
 
-    if (args[0] == Value::errorNULL()) {
-        return Value(1);
-    } else if (args[0] == Value::errorDIV0()) {
-        return Value(2);
-    } else if (args[0] == Value::errorVALUE()) {
-        return Value(3);
-    } else if (args[0] == Value::errorREF()) {
-        return Value(4);
-    } else if (args[0] == Value::errorNAME()) {
-        return Value(5);
-    } else if (args[0] == Value::errorNUM()) {
-        return Value(6);
-    } else if (args[0] == Value::errorNA()) {
-        return Value(7);
-    } else if (args[0] == Value::errorCIRCLE()) {
+    if (args[0] == KCValue::errorNULL()) {
+        return KCValue(1);
+    } else if (args[0] == KCValue::errorDIV0()) {
+        return KCValue(2);
+    } else if (args[0] == KCValue::errorVALUE()) {
+        return KCValue(3);
+    } else if (args[0] == KCValue::errorREF()) {
+        return KCValue(4);
+    } else if (args[0] == KCValue::errorNAME()) {
+        return KCValue(5);
+    } else if (args[0] == KCValue::errorNUM()) {
+        return KCValue(6);
+    } else if (args[0] == KCValue::errorNA()) {
+        return KCValue(7);
+    } else if (args[0] == KCValue::errorCIRCLE()) {
         // non-standard error type
-        return Value(101);
-    } else if (args[0] == Value::errorDEPEND()) {
+        return KCValue(101);
+    } else if (args[0] == KCValue::errorDEPEND()) {
         // non-standard error type
-        return Value(102);
-    } else if (args[0] == Value::errorPARSE()) {
+        return KCValue(102);
+    } else if (args[0] == KCValue::errorPARSE()) {
         // non-standard error type
-        return Value(103);
+        return KCValue(103);
     } else {
         // something I didn't think of...
         kDebug() << "Unexpected error type";
-        return Value(0);
+        return KCValue(0);
     }
 }
 // Function: INFO
-Value func_info(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_info(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QString type = calc->conv()->asString(args[0]).asString().toLower();
 
     if (type == "directory")
-        return Value(QDir::currentPath());
+        return KCValue(QDir::currentPath());
 
     if (type == "release")
-        return Value(QString(KOFFICE_VERSION_STRING));
+        return KCValue(QString(KOFFICE_VERSION_STRING));
 
     if (type == "numfile")
-        return Value(KoDocument::documentList() ? KoDocument::documentList()->count() : 0);
+        return KCValue(KoDocument::documentList() ? KoDocument::documentList()->count() : 0);
 
     if (type == "recalc") {
         QString result;
@@ -193,177 +193,177 @@ Value func_info(valVector args, ValueCalc *calc, FuncExtra *)
             result = i18n("Manual");
         else
             result = i18n("Automatic");
-        return Value(result);
+        return KCValue(result);
     }
 
     if (type == "memavail")
         // not supported
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     if (type == "memused")
         // not supported
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     if (type == "origin")
         // not supported
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     if (type == "system") {
         struct utsname name;
         if (uname(&name) >= 0)
-            return Value(QString(name.sysname));
+            return KCValue(QString(name.sysname));
     }
 
     if (type == "totmem")
         // not supported
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     if (type == "osversion") {
         struct utsname name;
         if (uname(&name) >= 0) {
             QString os = QString("%1 %2 (%3)").arg(name.sysname).
                          arg(name.release).arg(name.machine);
-            return Value(os);
+            return KCValue(os);
         }
     }
 
-    return Value::errorVALUE();
+    return KCValue::errorVALUE();
 }
 
 // Function: ISBLANK
-Value func_isblank(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_isblank(valVector args, ValueCalc *, FuncExtra *)
 {
-    return Value(args[0].isEmpty());
+    return KCValue(args[0].isEmpty());
 }
 
 // Function: ISLOGICAL
-Value func_islogical(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_islogical(valVector args, ValueCalc *, FuncExtra *)
 {
-    return Value(args[0].isBoolean());
+    return KCValue(args[0].isBoolean());
 }
 
 // Function: ISTEXT
-Value func_istext(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_istext(valVector args, ValueCalc *, FuncExtra *)
 {
-    return Value(args[0].isString());
+    return KCValue(args[0].isString());
 }
 
 // Function: ISREF
-Value func_isref(valVector args, ValueCalc * /*calc*/, FuncExtra *e)
+KCValue func_isref(valVector args, ValueCalc * /*calc*/, FuncExtra *e)
 {
     if (args[0].isError()) return args[0];  // errors pass through
     // no reference ?
     if ((e == 0) || (e->ranges[0].col1 == -1) || (e->ranges[0].row1 == -1))
-        return Value(false);
+        return KCValue(false);
     // if we are here, it is a reference (cell/range)
-    return Value(true);
+    return KCValue(true);
 }
 
 // Function: ISNOTTEXT
-Value func_isnottext(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_isnottext(valVector args, ValueCalc *, FuncExtra *)
 {
-    return Value(args[0].isString() ? false : true);
+    return KCValue(args[0].isString() ? false : true);
 }
 
 // Function: ISNUM
-Value func_isnum(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_isnum(valVector args, ValueCalc *, FuncExtra *)
 {
-    return Value(args[0].isNumber());
+    return KCValue(args[0].isNumber());
 }
 
 // Function: ISTIME
-Value func_istime(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_istime(valVector args, ValueCalc *, FuncExtra *)
 {
-    return Value((args[0].format() == Value::fmt_Time)
-                 || (args[0].format() == Value::fmt_DateTime));
+    return KCValue((args[0].format() == KCValue::fmt_Time)
+                 || (args[0].format() == KCValue::fmt_DateTime));
 }
 
 // Function: ISDATE
-Value func_isdate(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_isdate(valVector args, ValueCalc *, FuncExtra *)
 {
-    return Value((args[0].format() == Value::fmt_Date)
-                 || (args[0].format() == Value::fmt_DateTime));
+    return KCValue((args[0].format() == KCValue::fmt_Date)
+                 || (args[0].format() == KCValue::fmt_DateTime));
 }
 
 // Function: ISODD
-Value func_isodd(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_isodd(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(calc->isEven(args[0]) ? false : true);
+    return KCValue(calc->isEven(args[0]) ? false : true);
 }
 
 // Function: ISEVEN
-Value func_iseven(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_iseven(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args[0].isError())
         return args[0];
-    return Value(calc->isEven(args[0]));
+    return KCValue(calc->isEven(args[0]));
 }
 
 // Function: ISERR
-Value func_iserr(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_iserr(valVector args, ValueCalc *, FuncExtra *)
 {
-    return Value((args[0].isError() &&
-                  (args[0].errorMessage() != Value::errorNA().errorMessage())));
+    return KCValue((args[0].isError() &&
+                  (args[0].errorMessage() != KCValue::errorNA().errorMessage())));
 }
 
 // Function: ISERROR
-Value func_iserror(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_iserror(valVector args, ValueCalc *, FuncExtra *)
 {
-    return Value(args[0].isError());
+    return KCValue(args[0].isError());
 }
 
 // Function: ISNA
-Value func_isna(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_isna(valVector args, ValueCalc *, FuncExtra *)
 {
-    return Value((args[0].isError() &&
-                  (args[0].errorMessage() == Value::errorNA().errorMessage())));
+    return KCValue((args[0].isError() &&
+                  (args[0].errorMessage() == KCValue::errorNA().errorMessage())));
 }
 
 // Function: TYPE
-Value func_type(valVector args, ValueCalc *, FuncExtra *)
+KCValue func_type(valVector args, ValueCalc *, FuncExtra *)
 {
     // Returns 1 for numbers, 2 for text, 4 for boolean, 16 for error,
     // 64 for arrays
     if (args[0].isArray())
-        return Value(64);
+        return KCValue(64);
     if (args[0].isNumber())
-        return Value(1);
+        return KCValue(1);
     if (args[0].isString())
-        return Value(2);
+        return KCValue(2);
     if (args[0].isBoolean())
-        return Value(4);
+        return KCValue(4);
     if (args[0].isError())
-        return Value(16);
+        return KCValue(16);
 
     // something else ?
-    return Value(0);
+    return KCValue(0);
 }
 
-Value func_filename(valVector, ValueCalc *calc, FuncExtra *)
+KCValue func_filename(valVector, ValueCalc *calc, FuncExtra *)
 {
-    return Value(calc->settings()->fileName());
+    return KCValue(calc->settings()->fileName());
 }
 
-Value func_formula(valVector, ValueCalc *, FuncExtra *e)
+KCValue func_formula(valVector, ValueCalc *, FuncExtra *e)
 {
     if(e->ranges[0].col1 < 1 || e->ranges[0].row1 < 1)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     const KCCell c(e->sheet, e->ranges[0].col1, e->ranges[0].row1);
     if (c.isNull())
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     if (!c.isFormula())
-        return Value::errorNA();
-    return Value(c.formula().expression());
+        return KCValue::errorNA();
+    return KCValue(c.formula().expression());
 }
 
 // Function: N
-Value func_n(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_n(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->conv()->asFloat(args[0]);
 }
 
 // Function: NA
-Value func_na(valVector, ValueCalc *, FuncExtra *)
+KCValue func_na(valVector, ValueCalc *, FuncExtra *)
 {
-    return Value::errorNA();
+    return KCValue::errorNA();
 }
 
 #include "InformationModule.moc"

@@ -31,7 +31,7 @@ class KCSheet;
 /**
  * \class RecalcManager
  * \brief Manages the recalculations of cells containing a formula.
- * \ingroup Value
+ * \ingroup KCValue
  *
  * The recalculations of a cell region, a sheet or the map are based
  * on the following principle:

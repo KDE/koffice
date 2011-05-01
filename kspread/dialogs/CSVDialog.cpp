@@ -160,10 +160,10 @@ void CSVDialog::accept()
         m_selection->lastRange().setBottom(m_selection->lastRange().top() + numRows - 1);
 
     QList<KoCsvImportDialog::DataType> dataTypes;
-    Value value(Value::Array);
+    KCValue value(KCValue::Array);
     for (int row = 0; row < numRows; ++row) {
         for (int col = 0; col < numCols; ++col) {
-            value.setElement(col, row, Value(text(row, col)));
+            value.setElement(col, row, KCValue(text(row, col)));
             if (row == 0)
                 dataTypes.insert(col, dataType(col));
         }
@@ -189,7 +189,7 @@ void CSVDialog::accept()
     range.setWidth(numCols);
     range.setHeight(numRows);
     // TODO Stefan: Move this damaging into the model.
-    const CellDamage::Changes changes = CellDamage::Appearance | CellDamage::Value | CellDamage::Formula;
+    const CellDamage::Changes changes = CellDamage::Appearance | CellDamage::KCValue | CellDamage::Formula;
     sheet->map()->addDamage(new CellDamage(sheet, KCRegion(range, sheet), changes));
     m_selection->emitModified();
     KoCsvImportDialog::accept();

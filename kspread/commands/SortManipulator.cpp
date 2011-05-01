@@ -106,7 +106,7 @@ void SortManipulator::clearCriteria()
     m_criteria.clear();
 }
 
-Value SortManipulator::newValue(Element *element, int col, int row,
+KCValue SortManipulator::newValue(Element *element, int col, int row,
                                 bool *parse, KCFormat::Type *)
 {
     Q_UNUSED(parse);
@@ -188,8 +188,8 @@ bool SortManipulator::shouldReorder(Element *element, int first, int second)
         int row2 = firstrow + (m_rows ? second : which);
         int col1 = firstcol + (m_rows ? which : first);
         int col2 = firstcol + (m_rows ? which : second);
-        Value val1 = KCCell(m_sheet, col1, row1).value();
-        Value val2 = KCCell(m_sheet, col2, row2).value();
+        KCValue val1 = KCCell(m_sheet, col1, row1).value();
+        KCValue val2 = KCCell(m_sheet, col2, row2).value();
         // empty values always go to the end, so if second value is empty and
         // first one is not, we don't need to reorder
         if ((!val1.isEmpty()) && val2.isEmpty())

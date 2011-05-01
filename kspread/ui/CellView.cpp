@@ -71,7 +71,7 @@
 #include "SheetPrint.h"
 #include "SheetView.h"
 #include "StyleManager.h"
-#include "Value.h"
+#include "KCValue.h"
 #include "ValueFormatter.h"
 
 const int s_borderSpace = 1;
@@ -214,12 +214,12 @@ CellView::CellView(SheetView* sheetView, int col, int row)
     // do not touch the other Private members, just return here.
     if (cell.isDefault()) return;
 
-    Value value;
+    KCValue value;
     // Display a formula if warranted.  If not, simply display the value.
     if (cell.isFormula() && cell.sheet()->getShowFormula() &&
             !(cell.sheet()->isProtected() && d->style.hideFormula())) {
         d->displayText = cell.userInput();
-        value.setFormat(Value::fmt_String);
+        value.setFormat(KCValue::fmt_String);
     } else if (!cell.isEmpty()) {
         // KCFormat the value appropriately and set the display text.
         // The format of the resulting value is used below to determine the alignment.
@@ -245,10 +245,10 @@ CellView::CellView(SheetView* sheetView, int col, int row)
     // horizontal align
     if (d->style.halign() == KCStyle::HAlignUndefined) {
         // errors are always centered
-        if (cell.value().type() == Value::Error)
+        if (cell.value().type() == KCValue::Error)
             d->style.setHAlign(KCStyle::Center);
         // if the format is text, align it according to the text direction
-        else if (d->style.formatType() == KCFormat::Text || value.format() == Value::fmt_String)
+        else if (d->style.formatType() == KCFormat::Text || value.format() == KCValue::fmt_String)
             d->style.setHAlign(d->displayText.isRightToLeft() ? KCStyle::Right : KCStyle::Left);
         // if the style does not define a specific format, align it according to the sheet layout
         else

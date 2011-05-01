@@ -31,7 +31,7 @@ class Function;
 class FunctionDescription;
 
 /**
- * \ingroup Value
+ * \ingroup KCValue
  * The function repository.
  */
 class KSPREAD_EXPORT FunctionRepository

@@ -23,7 +23,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-#include <Value.h>
+#include <KCValue.h>
 
 
 class TestTrigFunctions: public QObject
@@ -40,7 +40,7 @@ private slots:
     void testTAN();
 
 private:
-    Value evaluate(const QString&);
+    KCValue evaluate(const QString&);
 };
 
 #endif // KSPREAD_TEST_TRIG_FUNCTIONS

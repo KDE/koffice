@@ -23,7 +23,7 @@
 #define KSPREAD_CONDITION_H
 
 #include "KCStyle.h"
-#include "Value.h"
+#include "KCValue.h"
 
 #include <QDomElement>
 #include <QLinkedList>
@@ -58,8 +58,8 @@ public:
                 IsTrueFormula
               };
 
-    Value          value1;
-    Value          value2;
+    KCValue          value1;
+    KCValue          value2;
     QString        styleName;
     Type           cond;
     QString        baseCellAddress;

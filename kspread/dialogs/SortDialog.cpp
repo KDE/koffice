@@ -95,7 +95,7 @@ public:
             for (int i = 0; i < indices.count(); ++i) {
                 const int col = indices[i];
                 const QString columnName = i18n("Column %1", KCCell::columnName(col));
-                const Value value = KCCell(sheet, col, row).value();
+                const KCValue value = KCCell(sheet, col, row).value();
                 const QString header = converter->asString(value).asString();
                 if (hasHeader) {
                     if (header.isEmpty()) {
@@ -120,7 +120,7 @@ public:
             for (int i = 0; i < indices.count(); ++i) {
                 const int row = indices[i];
                 const QString rowName = i18n("Row %1", row);
-                const Value value = KCCell(sheet, col, row).value();
+                const KCValue value = KCCell(sheet, col, row).value();
                 const QString header = converter->asString(value).asString();
                 if (hasHeader) {
                     if (header.isEmpty()) {
@@ -242,7 +242,7 @@ QString SortDialog::Private::itemText(int index, bool useHeader) const
         const int row = index;
         const QString rowName = i18n("Row %1", row);
         if (useHeader) {
-            const Value value = KCCell(sheet, col, row).value();
+            const KCValue value = KCCell(sheet, col, row).value();
             const QString header = converter->asString(value).asString();
             if (header.isEmpty()) {
                 return QString('(' + rowName + ')');
@@ -257,7 +257,7 @@ QString SortDialog::Private::itemText(int index, bool useHeader) const
         const int row = selection->lastRange().top();
         const QString columnName = i18n("Column %1", KCCell::columnName(col));
         if (useHeader) {
-            const Value value = KCCell(sheet, col, row).value();
+            const KCValue value = KCCell(sheet, col, row).value();
             const QString header = converter->asString(value).asString();
             if (header.isEmpty()) {
                 return QString('(' + columnName + ')');

@@ -24,7 +24,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-#include <Value.h>
+#include <KCValue.h>
 
 class Map;
 
@@ -136,8 +136,8 @@ private slots:
 
 private:
     bool  TestArray(const QString& formula, const QString& Array, int accuracy, bool checkSize);
-    Value evaluate(const QString&);
-    Value TestDouble(const QString& formula, const Value& v2, int accuracy);
+    KCValue evaluate(const QString&);
+    KCValue TestDouble(const QString& formula, const KCValue& v2, int accuracy);
 
     Map* m_map;
 };

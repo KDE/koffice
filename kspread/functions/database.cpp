@@ -32,19 +32,19 @@
 using namespace KSpread;
 
 // prototypes
-Value func_daverage(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dcount(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dcounta(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dget(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dmax(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dmin(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dproduct(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dstdev(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dstdevp(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dsum(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dvar(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dvarp(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_getpivotdata(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_daverage(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dcount(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dcounta(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dget(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dmax(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dmin(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dproduct(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dstdev(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dstdevp(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dsum(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dvar(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dvarp(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_getpivotdata(valVector args, ValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("database", DatabaseModule)
@@ -115,8 +115,8 @@ QString DatabaseModule::descriptionFileName() const
 }
 
 
-int getFieldIndex(ValueCalc *calc, Value fieldName,
-                  Value database)
+int getFieldIndex(ValueCalc *calc, KCValue fieldName,
+                  KCValue database)
 {
     if (fieldName.isNumber())
         return fieldName.asInteger() - 1;
@@ -139,21 +139,21 @@ int getFieldIndex(ValueCalc *calc, Value fieldName,
 class DBConditions
 {
 public:
-    DBConditions(ValueCalc *vc, Value database, Value conds);
+    DBConditions(ValueCalc *vc, KCValue database, KCValue conds);
     ~DBConditions();
     /** Does a specified row of the database match the given criteria?
     The row with column names is ignored - hence 0 specifies first data row. */
     bool matches(unsigned row);
 private:
-    void parse(Value conds);
+    void parse(KCValue conds);
     ValueCalc *calc;
     QList<QList<Condition*> > cond;
     int rows, cols;
-    Value db;
+    KCValue db;
 };
 
-DBConditions::DBConditions(ValueCalc *vc, Value database,
-                           Value conds) : calc(vc), rows(0), cols(0), db(database)
+DBConditions::DBConditions(ValueCalc *vc, KCValue database,
+                           KCValue conds) : calc(vc), rows(0), cols(0), db(database)
 {
     parse(conds);
 }
@@ -165,7 +165,7 @@ DBConditions::~DBConditions()
         qDeleteAll(cond[r]);
 }
 
-void DBConditions::parse(Value conds)
+void DBConditions::parse(KCValue conds)
 {
     // initialize the array
     rows = conds.rows() - 1;
@@ -188,7 +188,7 @@ void DBConditions::parse(Value conds)
 
         // fill in the conditions for a given column name
         for (int r = 0; r < rows; ++r) {
-            Value cnd = conds.element(c, r + 1);
+            KCValue cnd = conds.element(c, r + 1);
             if (cnd.isEmpty()) continue;
             int idx = r * cols + col;
             //if (cond[idx]) delete cond[idx];
@@ -232,21 +232,21 @@ bool DBConditions::matches(unsigned row)
 // *******************************************
 
 // Function: DSUM
-Value func_dsum(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dsum(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
-    Value conditions = args[2];
+    KCValue database = args[0];
+    KCValue conditions = args[2];
     int fieldIndex = getFieldIndex(calc, args[1], database);
     if (fieldIndex < 0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     DBConditions conds(calc, database, conditions);
 
     int rows = database.rows() - 1;  // first row contains column names
-    Value res(0.0);
+    KCValue res(0.0);
     for (int r = 0; r < rows; ++r)
         if (conds.matches(r)) {
-            Value val = database.element(fieldIndex, r + 1);
+            KCValue val = database.element(fieldIndex, r + 1);
             // include this value in the result
             if (!val.isEmpty())
                 res = calc->add(res, val);
@@ -256,22 +256,22 @@ Value func_dsum(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // Function: DAVERAGE
-Value func_daverage(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_daverage(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
-    Value conditions = args[2];
+    KCValue database = args[0];
+    KCValue conditions = args[2];
     int fieldIndex = getFieldIndex(calc, args[1], database);
     if (fieldIndex < 0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     DBConditions conds(calc, database, conditions);
 
     int rows = database.rows() - 1;  // first row contains column names
-    Value res;
+    KCValue res;
     int count = 0;
     for (int r = 0; r < rows; ++r)
         if (conds.matches(r)) {
-            Value val = database.element(fieldIndex, r + 1);
+            KCValue val = database.element(fieldIndex, r + 1);
             // include this value in the result
             if (!val.isEmpty()) {
                 res = calc->add(res, val);
@@ -283,10 +283,10 @@ Value func_daverage(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // Function: DCOUNT
-Value func_dcount(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dcount(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
-    Value conditions = args[2];
+    KCValue database = args[0];
+    KCValue conditions = args[2];
     int fieldIndex = getFieldIndex(calc, args[1], database);
 
     DBConditions conds(calc, database, conditions);
@@ -299,21 +299,21 @@ Value func_dcount(valVector args, ValueCalc *calc, FuncExtra *)
             if (fieldIndex < 0)
                 count++;
             else {
-                Value val = database.element(fieldIndex, r + 1);
+                KCValue val = database.element(fieldIndex, r + 1);
                 // include this value in the result
                 if ((!val.isEmpty()) && (!val.isBoolean()) && (!val.isString()))
                     count++;
             }
         }
 
-    return Value(count);
+    return KCValue(count);
 }
 
 // Function: DCOUNTA
-Value func_dcounta(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dcounta(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
-    Value conditions = args[2];
+    KCValue database = args[0];
+    KCValue conditions = args[2];
     int fieldIndex = getFieldIndex(calc, args[1], database);
 
     DBConditions conds(calc, database, conditions);
@@ -326,35 +326,35 @@ Value func_dcounta(valVector args, ValueCalc *calc, FuncExtra *)
             if (fieldIndex < 0)
                 count++;
             else {
-                Value val = database.element(fieldIndex, r + 1);
+                KCValue val = database.element(fieldIndex, r + 1);
                 // include this value in the result
                 if (!val.isEmpty())
                     count++;
             }
         }
 
-    return Value(count);
+    return KCValue(count);
 }
 
 // Function: DGET
-Value func_dget(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dget(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
-    Value conditions = args[2];
+    KCValue database = args[0];
+    KCValue conditions = args[2];
     int fieldIndex = getFieldIndex(calc, args[1], database);
     if (fieldIndex < 0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     DBConditions conds(calc, database, conditions);
 
     bool match = false;
-    Value result = Value::errorVALUE();
+    KCValue result = KCValue::errorVALUE();
     int rows = database.rows() - 1;  // first row contains column names
     for (int r = 0; r < rows; ++r)
         if (conds.matches(r)) {
             if (match) {
                 // error on multiple matches
-                result = Value::errorVALUE();
+                result = KCValue::errorVALUE();
                 break;
             }
             result = database.element(fieldIndex, r + 1);
@@ -365,22 +365,22 @@ Value func_dget(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // Function: DMAX
-Value func_dmax(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dmax(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
-    Value conditions = args[2];
+    KCValue database = args[0];
+    KCValue conditions = args[2];
     int fieldIndex = getFieldIndex(calc, args[1], database);
     if (fieldIndex < 0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     DBConditions conds(calc, database, conditions);
 
     int rows = database.rows() - 1;  // first row contains column names
-    Value res;
+    KCValue res;
     bool got = false;
     for (int r = 0; r < rows; ++r)
         if (conds.matches(r)) {
-            Value val = database.element(fieldIndex, r + 1);
+            KCValue val = database.element(fieldIndex, r + 1);
             // include this value in the result
             if (!val.isEmpty()) {
                 if (!got) {
@@ -395,22 +395,22 @@ Value func_dmax(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // Function: DMIN
-Value func_dmin(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dmin(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
-    Value conditions = args[2];
+    KCValue database = args[0];
+    KCValue conditions = args[2];
     int fieldIndex = getFieldIndex(calc, args[1], database);
     if (fieldIndex < 0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     DBConditions conds(calc, database, conditions);
 
     int rows = database.rows() - 1;  // first row contains column names
-    Value res;
+    KCValue res;
     bool got = false;
     for (int r = 0; r < rows; ++r)
         if (conds.matches(r)) {
-            Value val = database.element(fieldIndex, r + 1);
+            KCValue val = database.element(fieldIndex, r + 1);
             // include this value in the result
             if (!val.isEmpty()) {
                 if (!got) {
@@ -425,22 +425,22 @@ Value func_dmin(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // Function: DPRODUCT
-Value func_dproduct(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dproduct(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
-    Value conditions = args[2];
+    KCValue database = args[0];
+    KCValue conditions = args[2];
     int fieldIndex = getFieldIndex(calc, args[1], database);
     if (fieldIndex < 0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     DBConditions conds(calc, database, conditions);
 
     int rows = database.rows() - 1;  // first row contains column names
-    Value res = Value((double)1.0);
+    KCValue res = KCValue((double)1.0);
     bool got = false;
     for (int r = 0; r < rows; ++r)
         if (conds.matches(r)) {
-            Value val = database.element(fieldIndex, r + 1);
+            KCValue val = database.element(fieldIndex, r + 1);
             // include this value in the result
             if (!val.isEmpty()) {
                 got = true;
@@ -449,53 +449,53 @@ Value func_dproduct(valVector args, ValueCalc *calc, FuncExtra *)
         }
     if (got)
         return res;
-    return Value::errorVALUE();
+    return KCValue::errorVALUE();
 }
 
 // Function: DSTDEV
-Value func_dstdev(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dstdev(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // sqrt (dvar)
     return calc->sqrt(func_dvar(args, calc, 0));
 }
 
 // Function: DSTDEVP
-Value func_dstdevp(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dstdevp(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // sqrt (dvarp)
     return calc->sqrt(func_dvarp(args, calc, 0));
 }
 
 // Function: DVAR
-Value func_dvar(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dvar(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
-    Value conditions = args[2];
+    KCValue database = args[0];
+    KCValue conditions = args[2];
     int fieldIndex = getFieldIndex(calc, args[1], database);
     if (fieldIndex < 0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     DBConditions conds(calc, database, conditions);
 
     int rows = database.rows() - 1;  // first row contains column names
-    Value avg;
+    KCValue avg;
     int count = 0;
     for (int r = 0; r < rows; ++r)
         if (conds.matches(r)) {
-            Value val = database.element(fieldIndex, r + 1);
+            KCValue val = database.element(fieldIndex, r + 1);
             // include this value in the result
             if (!val.isEmpty()) {
                 avg = calc->add(avg, val);
                 count++;
             }
         }
-    if (count < 2) return Value::errorDIV0();
+    if (count < 2) return KCValue::errorDIV0();
     avg = calc->div(avg, count);
 
-    Value res;
+    KCValue res;
     for (int r = 0; r < rows; ++r)
         if (conds.matches(r)) {
-            Value val = database.element(fieldIndex, r + 1);
+            KCValue val = database.element(fieldIndex, r + 1);
             // include this value in the result
             if (!val.isEmpty())
                 res = calc->add(res, calc->sqr(calc->sub(val, avg)));
@@ -506,35 +506,35 @@ Value func_dvar(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // Function: DVARP
-Value func_dvarp(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dvarp(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
-    Value conditions = args[2];
+    KCValue database = args[0];
+    KCValue conditions = args[2];
     int fieldIndex = getFieldIndex(calc, args[1], database);
     if (fieldIndex < 0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     DBConditions conds(calc, database, conditions);
 
     int rows = database.rows() - 1;  // first row contains column names
-    Value avg;
+    KCValue avg;
     int count = 0;
     for (int r = 0; r < rows; ++r)
         if (conds.matches(r)) {
-            Value val = database.element(fieldIndex, r + 1);
+            KCValue val = database.element(fieldIndex, r + 1);
             // include this value in the result
             if (!val.isEmpty()) {
                 avg = calc->add(avg, val);
                 count++;
             }
         }
-    if (count == 0) return Value::errorDIV0();
+    if (count == 0) return KCValue::errorDIV0();
     avg = calc->div(avg, count);
 
-    Value res;
+    KCValue res;
     for (int r = 0; r < rows; ++r)
         if (conds.matches(r)) {
-            Value val = database.element(fieldIndex, r + 1);
+            KCValue val = database.element(fieldIndex, r + 1);
             // include this value in the result
             if (!val.isEmpty())
                 res = calc->add(res, calc->sqr(calc->sub(val, avg)));
@@ -546,12 +546,12 @@ Value func_dvarp(valVector args, ValueCalc *calc, FuncExtra *)
 
 // Function: GETPIVOTDATA
 // FIXME implement more things with this, see Excel !
-Value func_getpivotdata(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_getpivotdata(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value database = args[0];
+    KCValue database = args[0];
     int fieldIndex = getFieldIndex(calc, args[1], database);
     if (fieldIndex < 0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     // the row at the bottom
     int row = database.rows() - 1;
 

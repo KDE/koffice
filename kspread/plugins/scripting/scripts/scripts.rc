@@ -2,7 +2,7 @@
 <KrossScripting>
 
     <collection name="import" text="Import" comment="Import content">
-        <script text="CSV File" comment="Import from a Comma-Separated-Value File"
+        <script text="CSV File" comment="Import from a Comma-Separated-KCValue File"
             name="pycsvimport"
             interpreter="python"
             file="extensions/csvimport.py" />
@@ -17,7 +17,7 @@
     </collection>
 
     <collection name="export" text="Export" comment="Export content">
-        <script text="CSV File" comment="Export to a Comma-Separated-Value File"
+        <script text="CSV File" comment="Export to a Comma-Separated-KCValue File"
             name="pycsvexport"
             interpreter="python"
             file="extensions/csvexport.py" />

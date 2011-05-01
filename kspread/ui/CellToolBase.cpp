@@ -162,7 +162,7 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     d->findRightColumn = 0;
     d->findTopRow = 0;
     d->findBottomRow = 0;
-    d->typeValue = FindOption::Value;
+    d->typeValue = FindOption::KCValue;
     d->directionValue = FindOption::Row;
     d->find = 0;
     d->replace = 0;
@@ -1513,7 +1513,7 @@ void CellToolBase::applyUserInput(const QString &userInput, bool expandMatrix)
     }
     DataManipulator* command = new DataManipulator();
     command->setSheet(selection()->activeSheet());
-    command->setValue(Value(text));
+    command->setValue(KCValue(text));
     command->setParsing(true);
     command->setExpandMatrix(expandMatrix);
     command->add(expandMatrix ? *selection() : KCRegion(selection()->cursor(), selection()->activeSheet()));
@@ -2372,7 +2372,7 @@ void CellToolBase::clearContents()
     // parsing gets set only so that parseUserInput is called as it should be,
     // no actual parsing shall be done
     command->setParsing(true);
-    command->setValue(Value(""));
+    command->setValue(KCValue(""));
     command->add(*selection());
     command->execute(canvas());
 }
@@ -3305,11 +3305,11 @@ void CellToolBase::slotHighlight(const QString &/*text*/, int /*matchingIndex*/,
 
 void CellToolBase::slotReplace(const QString &newText, int, int, int)
 {
-    if (d->typeValue == FindOption::Value) {
+    if (d->typeValue == FindOption::KCValue) {
         DataManipulator* command = new DataManipulator(d->replaceCommand);
         command->setParsing(true);
         command->setSheet(d->searchInSheets.currentSheet);
-        command->setValue(Value(newText));
+        command->setValue(KCValue(newText));
         command->add(KCRegion(d->findPos, d->searchInSheets.currentSheet));
     } else if (d->typeValue == FindOption::Note) {
         CommentCommand* command = new CommentCommand(d->replaceCommand);
@@ -3445,7 +3445,7 @@ void CellToolBase::listChooseItemSelected(QAction* action)
 
     DataManipulator *command = new DataManipulator;
     command->setSheet(selection()->activeSheet());
-    command->setValue(Value(action->text()));
+    command->setValue(KCValue(action->text()));
     command->setParsing(true);
     command->add(selection()->marker());
     command->execute(canvas());

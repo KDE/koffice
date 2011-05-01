@@ -700,7 +700,7 @@ public:
     void hideSheet(bool _hide);
 
     /**
-     * \ingroup Value
+     * \ingroup KCValue
      * Change name of reference when the user inserts or removes a column,
      * a row or a cell (= insertion of a row [or column] on a single column [or row]).
      * For example the formula =Sheet1!A1 is changed into =Sheet1!B1 if a Column
@@ -827,7 +827,7 @@ signals:
 
 protected:
     /**
-     * \ingroup Value
+     * \ingroup KCValue
      * Change the name of a sheet in all formulas.
      * When you change name sheet Sheet1 -> Price
      * for all cell which refere to Sheet1, this function changes the name.
@@ -950,7 +950,7 @@ protected:
     bool cellIsEmpty(const KCCell& cell, TestType _type);
 
     /**
-     * \ingroup Value
+     * \ingroup KCValue
      * \see changeNameCellRef()
      */
     QString changeNameCellRefHelper(const QPoint& pos, bool fullRowOrColumn, ChangeRef ref,

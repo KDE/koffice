@@ -41,7 +41,7 @@ public:
     explicit FindOption(QWidget *parent);
     bool searchInAllSheet() const;
 
-    enum searchTypeValue { Value, Note};
+    enum searchTypeValue { KCValue, Note};
     enum searchDirectionValue { Row, Column};
 
     searchTypeValue searchType() const;

@@ -24,7 +24,7 @@
 #include "AbstractRegionCommand.h"
 #include "Global.h"
 #include "KCStyle.h"
-#include "Value.h"
+#include "KCValue.h"
 
 
 /**
@@ -43,7 +43,7 @@ protected:
     /** Return new value. row/col are relative to sheet, not element.
     If the function sets *parse to true, the value will be treated as an
     user-entered string and parsed by KCCell. */
-    virtual Value newValue(Element *element, int col, int row,
+    virtual KCValue newValue(Element *element, int col, int row,
                            bool *parse, KCFormat::Type *fmtType) = 0;
 
     /** do we want to change this cell ? */
@@ -114,7 +114,7 @@ public:
     }
     /** set the values for the range. Can be either a single value, or
     a value array */
-    void setValue(Value val) {
+    void setValue(KCValue val) {
         m_data = val;
     }
     /** If set, all cells shall be switched to this format. If parsing is
@@ -125,9 +125,9 @@ public:
 protected:
     virtual bool preProcessing();
     virtual bool process(Element* element);
-    virtual Value newValue(Element *element, int col, int row, bool *, KCFormat::Type *);
+    virtual KCValue newValue(Element *element, int col, int row, bool *, KCFormat::Type *);
 
-    Value m_data;
+    KCValue m_data;
     KCFormat::Type m_format;
     bool m_parsing : 1;
     bool m_expandMatrix : 1;
@@ -151,11 +151,11 @@ public:
     void setupSeries(const QPoint &_marker, double start, double end,
                      double step, Series mode, Series type);
 protected:
-    virtual Value newValue(Element *element, int col, int row, bool *,
+    virtual KCValue newValue(Element *element, int col, int row, bool *,
                            KCFormat::Type *);
 
     Series m_type;
-    Value m_start, m_step, m_prev;
+    KCValue m_start, m_step, m_prev;
     int m_last;
 };
 
@@ -176,7 +176,7 @@ public:
         m_dir = d;
     }
 protected:
-    virtual Value newValue(Element *element, int col, int row,
+    virtual KCValue newValue(Element *element, int col, int row,
                            bool *parse, KCFormat::Type *fmtType);
     virtual KCStyle newFormat(Element *element, int col, int row);
     Direction m_dir;
@@ -204,7 +204,7 @@ public:
     void changeLowerCase();
     void changeFirstUpper();
 protected:
-    virtual Value newValue(Element *element, int col, int row,
+    virtual KCValue newValue(Element *element, int col, int row,
                            bool *parse, KCFormat::Type *fmtType);
 
     /** do we want to change this cell ? */

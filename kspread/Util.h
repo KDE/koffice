@@ -28,7 +28,7 @@
 #include <KoXmlReader.h>
 
 #include "Global.h"
-#include "Value.h"
+#include "KCValue.h"
 
 class QFont;
 class QPen;

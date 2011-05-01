@@ -290,7 +290,7 @@ void ExcelExport::buildStringTable(KCSheet* sheet, Swinder::SSTRecord& sst, QHas
     unsigned useCount = 0;
     const KSpread::ValueStorage* values = sheet->cellStorage()->valueStorage();
     for (int i = 0; i < values->count(); i++) {
-        KSpread::Value v = values->data(i);
+        KSpread::KCValue v = values->data(i);
         if (v.isString()) {
             QString s = v.asString();
             if (!stringTable.contains(s)) {
@@ -409,7 +409,7 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
 
             for (int col = first.column(); col <= last.column(); col++) {
                 KSpread::KCCell cell(sheet, col, row);
-                KSpread::Value val = cell.value();
+                KSpread::KCValue val = cell.value();
                 KSpread::Style style = cell.style();
                 unsigned xfi = d->styles[style];
 
@@ -419,35 +419,35 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
                     fr.setColumn(col-1);
                     fr.setXfIndex(xfi);
                     if (val.isNumber()) {
-                        fr.setResult(Value((double)numToDouble(val.asFloat())));
+                        fr.setResult(KCValue((double)numToDouble(val.asFloat())));
                     } else if (val.isBoolean()) {
-                        fr.setResult(Value(val.asBoolean()));
+                        fr.setResult(KCValue(val.asBoolean()));
                     } else if (val.isError()) {
-                        if (val == KSpread::Value::errorCIRCLE()) {
-                            fr.setResult(Value::errorREF());
-                        } else if (val == KSpread::Value::errorDEPEND()) {
-                            fr.setResult(Value::errorREF());
-                        } else if (val == KSpread::Value::errorDIV0()) {
-                            fr.setResult(Value::errorDIV0());
-                        } else if (val == KSpread::Value::errorNA()) {
-                            fr.setResult(Value::errorNA());
-                        } else if (val == KSpread::Value::errorNAME()) {
-                            fr.setResult(Value::errorNAME());
-                        } else if (val == KSpread::Value::errorNULL()) {
-                            fr.setResult(Value::errorNULL());
-                        } else if (val == KSpread::Value::errorNUM()) {
-                            fr.setResult(Value::errorNUM());
-                        } else if (val == KSpread::Value::errorPARSE()) {
-                            fr.setResult(Value::errorNA());
-                        } else if (val == KSpread::Value::errorREF()) {
-                            fr.setResult(Value::errorREF());
-                        } else if (val == KSpread::Value::errorVALUE()) {
-                            fr.setResult(Value::errorVALUE());
+                        if (val == KSpread::KCValue::errorCIRCLE()) {
+                            fr.setResult(KCValue::errorREF());
+                        } else if (val == KSpread::KCValue::errorDEPEND()) {
+                            fr.setResult(KCValue::errorREF());
+                        } else if (val == KSpread::KCValue::errorDIV0()) {
+                            fr.setResult(KCValue::errorDIV0());
+                        } else if (val == KSpread::KCValue::errorNA()) {
+                            fr.setResult(KCValue::errorNA());
+                        } else if (val == KSpread::KCValue::errorNAME()) {
+                            fr.setResult(KCValue::errorNAME());
+                        } else if (val == KSpread::KCValue::errorNULL()) {
+                            fr.setResult(KCValue::errorNULL());
+                        } else if (val == KSpread::KCValue::errorNUM()) {
+                            fr.setResult(KCValue::errorNUM());
+                        } else if (val == KSpread::KCValue::errorPARSE()) {
+                            fr.setResult(KCValue::errorNA());
+                        } else if (val == KSpread::KCValue::errorREF()) {
+                            fr.setResult(KCValue::errorREF());
+                        } else if (val == KSpread::KCValue::errorVALUE()) {
+                            fr.setResult(KCValue::errorVALUE());
                         }
                     } else if (val.isString()) {
-                        fr.setResult(Value(Value::String));
+                        fr.setResult(KCValue(KCValue::String));
                     } else {
-                        fr.setResult(Value::empty());
+                        fr.setResult(KCValue::empty());
                     }
                     KSpread::Formula f = cell.formula();
                     QList<FormulaToken> tokens = compileFormula(f.tokens(), sheet);
@@ -480,25 +480,25 @@ void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& s
                         br.setValue(val.asBoolean() ? 1 : 0);
                     } else {
                         br.setError(true);
-                        if (val == KSpread::Value::errorCIRCLE()) {
+                        if (val == KSpread::KCValue::errorCIRCLE()) {
                             br.setValue(0x17);
-                        } else if (val == KSpread::Value::errorDEPEND()) {
+                        } else if (val == KSpread::KCValue::errorDEPEND()) {
                             br.setValue(0x17);
-                        } else if (val == KSpread::Value::errorDIV0()) {
+                        } else if (val == KSpread::KCValue::errorDIV0()) {
                             br.setValue(0x07);
-                        } else if (val == KSpread::Value::errorNA()) {
+                        } else if (val == KSpread::KCValue::errorNA()) {
                             br.setValue(0x2A);
-                        } else if (val == KSpread::Value::errorNAME()) {
+                        } else if (val == KSpread::KCValue::errorNAME()) {
                             br.setValue(0x1D);
-                        } else if (val == KSpread::Value::errorNULL()) {
+                        } else if (val == KSpread::KCValue::errorNULL()) {
                             br.setValue(0x00);
-                        } else if (val == KSpread::Value::errorNUM()) {
+                        } else if (val == KSpread::KCValue::errorNUM()) {
                             br.setValue(0x24);
-                        } else if (val == KSpread::Value::errorPARSE()) {
+                        } else if (val == KSpread::KCValue::errorPARSE()) {
                             br.setValue(0x2A);
-                        } else if (val == KSpread::Value::errorREF()) {
+                        } else if (val == KSpread::KCValue::errorREF()) {
                             br.setValue(0x17);
-                        } else if (val == KSpread::Value::errorVALUE()) {
+                        } else if (val == KSpread::KCValue::errorVALUE()) {
                             br.setValue(0x0F);
                         }
                     }
@@ -901,8 +901,8 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
                                         const int rowCount = argStack.pop();
                                         // TODO:
                                         codes.append(FormulaToken(FormulaToken::MissArg));
-                                        //d->constants.append(Value((int)argCount));     // cols
-                                        //d->constants.append(Value(rowCount));
+                                        //d->constants.append(KCValue((int)argCount));     // cols
+                                        //d->constants.append(KCValue(rowCount));
                                         //d->codes.append(Opcode(Opcode::Array, d->constants.count() - 2));
                                         Q_ASSERT(!argStack.empty());
                                         argCount = argStack.empty() ? 0 : argStack.pop();

@@ -32,7 +32,7 @@
 #include <Map.h>
 #include <KCRegion.h>
 #include <KCCell.h>
-#include <Value.h>
+#include <KCValue.h>
 
 /**
 * The ScriptingWriter class provides abstract high-level functionality to write
@@ -200,21 +200,21 @@ public Q_SLOTS:
     * false is returned.
     */
     bool setValue(const QVariant& value, bool parse = true) {
-        Value v;
+        KCValue v;
         if (parse)
-            v = Value(value.toString());
+            v = KCValue(value.toString());
         else {
             const CalculationSettings* settings = m_module->kspreadDoc()->map()->calculationSettings();
             switch (value.type()) {
-            case QVariant::Invalid:     v = Value(); break;
-            case QVariant::Bool:        v = Value(value.toBool()); break;
-            case QVariant::Int:         v = Value(value.toInt()); break;
-            case QVariant::ULongLong:   v = Value(value.toLongLong()); break;
-            case QVariant::Double:      v = Value(value.toDouble()); break;
-            case QVariant::String:      v = Value(value.toString()); break;
-            case QVariant::Date:        v = Value(value.toDate(), settings); break;
-            case QVariant::Time:        v = Value(value.toTime(), settings); break;
-            case QVariant::DateTime:    v = Value(value.toDateTime(), settings); break;
+            case QVariant::Invalid:     v = KCValue(); break;
+            case QVariant::Bool:        v = KCValue(value.toBool()); break;
+            case QVariant::Int:         v = KCValue(value.toInt()); break;
+            case QVariant::ULongLong:   v = KCValue(value.toLongLong()); break;
+            case QVariant::Double:      v = KCValue(value.toDouble()); break;
+            case QVariant::String:      v = KCValue(value.toString()); break;
+            case QVariant::Date:        v = KCValue(value.toDate(), settings); break;
+            case QVariant::Time:        v = KCValue(value.toTime(), settings); break;
+            case QVariant::DateTime:    v = KCValue(value.toDateTime(), settings); break;
             default: return false;
             }
         }

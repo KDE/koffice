@@ -44,19 +44,19 @@ const CalculationSettings* ValueFormatter::settings() const
     return m_converter->settings();
 }
 
-Value ValueFormatter::formatText(const Value &value, KCFormat::Type fmtType, int precision,
+KCValue ValueFormatter::formatText(const KCValue &value, KCFormat::Type fmtType, int precision,
                                  KCStyle::FloatFormat floatFormat, const QString &prefix,
                                  const QString &postfix, const QString &currencySymbol, const QString &formatString)
 {
     if (value.isError())
-        return Value(value.errorMessage());
+        return KCValue(value.errorMessage());
 
     //if we have an array, use its first element
     if (value.isArray())
         return formatText(value.element(0, 0), fmtType, precision,
                           floatFormat, prefix, postfix, currencySymbol, formatString);
 
-    Value result;
+    KCValue result;
 
     //step 1: determine formatting that will be used
     fmtType = determineFormatting(value, fmtType);
@@ -69,43 +69,43 @@ Value ValueFormatter::formatText(const Value &value, KCFormat::Type fmtType, int
         QString str = m_converter->asString(value).asString();
         if (!str.isEmpty() && str[0] == '\'')
             str = str.mid(1);
-        result = Value(str);
+        result = KCValue(str);
         ok = true;
     }
 
     //datetime
     else if (fmtType == KCFormat::DateTime || (KCFormat::isDate(fmtType) && !formatString.isEmpty()) ) {
-        Value dateValue = m_converter->asDateTime(value, &ok);
+        KCValue dateValue = m_converter->asDateTime(value, &ok);
         if (ok) {
-            result = Value(dateTimeFormat(dateValue.asDateTime(settings()), fmtType, formatString));
-            result.setFormat(Value::fmt_DateTime);
+            result = KCValue(dateTimeFormat(dateValue.asDateTime(settings()), fmtType, formatString));
+            result.setFormat(KCValue::fmt_DateTime);
         }
     }
 
     //
     else if (KCFormat::isDate(fmtType)) {
-        Value dateValue = m_converter->asDate(value, &ok);
+        KCValue dateValue = m_converter->asDate(value, &ok);
         if (ok) {
-            result = Value(dateFormat(dateValue.asDate(settings()), fmtType, formatString));
-            result.setFormat(Value::fmt_Date);
+            result = KCValue(dateFormat(dateValue.asDate(settings()), fmtType, formatString));
+            result.setFormat(KCValue::fmt_Date);
         }
     }
 
     //time
     else if (KCFormat::isTime(fmtType)) {
-        Value timeValue = m_converter->asDateTime(value, &ok);
+        KCValue timeValue = m_converter->asDateTime(value, &ok);
         if (ok) {
-            result = Value(timeFormat(timeValue.asDateTime(settings()), fmtType, formatString));
-            result.setFormat(Value::fmt_Time);
+            result = KCValue(timeFormat(timeValue.asDateTime(settings()), fmtType, formatString));
+            result.setFormat(KCValue::fmt_Time);
         }
     }
 
     //fraction
     else if (KCFormat::isFraction(fmtType)) {
-        Value fractionValue = m_converter->asFloat(value, &ok);
+        KCValue fractionValue = m_converter->asFloat(value, &ok);
         if (ok) {
-            result = Value(fractionFormat(fractionValue.asFloat(), fmtType));
-            result.setFormat(Value::fmt_Number);
+            result = KCValue(fractionFormat(fractionValue.asFloat(), fmtType));
+            result.setFormat(KCValue::fmt_Number);
         }
     }
 
@@ -113,10 +113,10 @@ Value ValueFormatter::formatText(const Value &value, KCFormat::Type fmtType, int
     else {
         // complex
         if (value.isComplex()) {
-            Value complexValue = m_converter->asComplex(value, &ok);
+            KCValue complexValue = m_converter->asComplex(value, &ok);
             if (ok) {
-                result = Value(complexFormat(complexValue, precision, fmtType, floatFormat, currencySymbol));
-                result.setFormat(Value::fmt_Number);
+                result = KCValue(complexFormat(complexValue, precision, fmtType, floatFormat, currencySymbol));
+                result.setFormat(KCValue::fmt_Number);
             }
         }
 
@@ -124,8 +124,8 @@ Value ValueFormatter::formatText(const Value &value, KCFormat::Type fmtType, int
         else {
             Number number = m_converter->asFloat(value, &ok).asFloat();
             if (ok) {
-                result = Value(createNumberFormat(number, precision, fmtType, floatFormat, currencySymbol, formatString));
-                result.setFormat(Value::fmt_Number);
+                result = KCValue(createNumberFormat(number, precision, fmtType, floatFormat, currencySymbol, formatString));
+                result.setFormat(KCValue::fmt_Number);
             }
         }
     }
@@ -135,34 +135,34 @@ Value ValueFormatter::formatText(const Value &value, KCFormat::Type fmtType, int
         QString str = m_converter->asString(value).asString();
         if (!str.isEmpty() && str[0] == '\'')
             str = str.mid(1);
-        result = Value(str);
+        result = KCValue(str);
     }
 
     if (!prefix.isEmpty())
-        result = Value(prefix + ' ' + result.asString());
+        result = KCValue(prefix + ' ' + result.asString());
 
     if (!postfix.isEmpty())
-        result = Value(result.asString() + ' ' + postfix);
+        result = KCValue(result.asString() + ' ' + postfix);
 
     //kDebug() <<"ValueFormatter says:" << str;
     return result;
 }
 
-KCFormat::Type ValueFormatter::determineFormatting(const Value &value,
+KCFormat::Type ValueFormatter::determineFormatting(const KCValue &value,
         KCFormat::Type fmtType)
 {
     //now, everything depends on whether the formatting is Generic or not
     if (fmtType == KCFormat::Generic) {
         //here we decide based on value's format...
-        Value::KCFormat fmt = value.format();
+        KCValue::KCFormat fmt = value.format();
         switch (fmt) {
-        case Value::fmt_None:
+        case KCValue::fmt_None:
             fmtType = KCFormat::Text;
             break;
-        case Value::fmt_Boolean:
+        case KCValue::fmt_Boolean:
             fmtType = KCFormat::Text;
             break;
-        case Value::fmt_Number: {
+        case KCValue::fmt_Number: {
             Number val = fabs(value.asFloat());
             if (((val > 10000e+10) || (val < 10000e-10)) && (val != 0.0))
                 fmtType = KCFormat::Scientific;
@@ -170,22 +170,22 @@ KCFormat::Type ValueFormatter::determineFormatting(const Value &value,
                 fmtType = KCFormat::Number;
             }
             break;
-        case Value::fmt_Percent:
+        case KCValue::fmt_Percent:
             fmtType = KCFormat::Percentage;
             break;
-        case Value::fmt_Money:
+        case KCValue::fmt_Money:
             fmtType = KCFormat::Money;
             break;
-        case Value::fmt_DateTime:
+        case KCValue::fmt_DateTime:
             fmtType = KCFormat::DateTime;
             break;
-        case Value::fmt_Date:
+        case KCValue::fmt_Date:
             fmtType = KCFormat::ShortDate;
             break;
-        case Value::fmt_Time:
+        case KCValue::fmt_Time:
             fmtType = KCFormat::Time8; // [h]:mm
             break;
-        case Value::fmt_String:
+        case KCValue::fmt_String:
             //this should never happen
             fmtType = KCFormat::Text;
             break;
@@ -711,7 +711,7 @@ QString ValueFormatter::dateFormat(const QDate &date, KCFormat::Type fmtType, co
     return tmp;
 }
 
-QString ValueFormatter::complexFormat(const Value& value, int precision,
+QString ValueFormatter::complexFormat(const KCValue& value, int precision,
                                       KCFormat::Type formatType,
                                       KCStyle::FloatFormat floatFormat,
                                       const QString& currencySymbol)

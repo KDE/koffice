@@ -26,7 +26,7 @@
 
 /**
  * \ingroup Storage
- * \ingroup Value
+ * \ingroup KCValue
  * Stores formulas.
  */
 class FormulaStorage : public PointStorage<Formula>

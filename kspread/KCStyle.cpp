@@ -1649,7 +1649,7 @@ bool KCStyle::loadXML(KoXmlElement& format, Paste::Mode mode)
     if (format.hasAttribute("precision")) {
         int i = format.attribute("precision").toInt(&ok);
         if (i < -1) {
-            kDebug(36003) << "Value out of range Cell::precision=" << i;
+            kDebug(36003) << "KCValue out of range Cell::precision=" << i;
             return false;
         }
         // special handling for precision

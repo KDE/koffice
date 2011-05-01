@@ -20,14 +20,14 @@
 #ifndef KSPREAD_VALUE_CONVERTER
 #define KSPREAD_VALUE_CONVERTER
 
-#include "Value.h"
+#include "KCValue.h"
 
 class CalculationSettings;
 class ValueParser;
 
 /**
- * \ingroup Value
- * Converts between the different Value types.
+ * \ingroup KCValue
+ * Converts between the different KCValue types.
  */
 class KSPREAD_EXPORT ValueConverter
 {
@@ -43,61 +43,61 @@ public:
     const CalculationSettings* settings() const;
 
     /**
-     * Converts \p value to a Value of boolean type.
+     * Converts \p value to a KCValue of boolean type.
      */
-    Value asBoolean(const Value& value, bool *ok = 0) const;
+    KCValue asBoolean(const KCValue& value, bool *ok = 0) const;
 
     /**
-     * Converts \p value to a Value of integer type.
+     * Converts \p value to a KCValue of integer type.
      */
-    Value asInteger(const Value& value, bool *ok = 0) const;
+    KCValue asInteger(const KCValue& value, bool *ok = 0) const;
 
     /**
-     * Converts \p value to a Value of floating point type.
+     * Converts \p value to a KCValue of floating point type.
      */
-    Value asFloat(const Value& value, bool* ok = 0) const;
+    KCValue asFloat(const KCValue& value, bool* ok = 0) const;
 
     /**
-     * Converts \p value to a Value of complex number type.
+     * Converts \p value to a KCValue of complex number type.
      */
-    Value asComplex(const Value& value, bool *ok = 0) const;
+    KCValue asComplex(const KCValue& value, bool *ok = 0) const;
 
     /**
-     * Converts \p value to a Value of number type, i.e. Values of integer and
+     * Converts \p value to a KCValue of number type, i.e. Values of integer and
      * complex number type stay as they are; all others are converted to the
      * floating point type.
      */
-    Value asNumeric(const Value& value, bool *ok = 0) const;
+    KCValue asNumeric(const KCValue& value, bool *ok = 0) const;
 
     /**
-     * Converts \p value to a Value of string type.
+     * Converts \p value to a KCValue of string type.
      */
-    Value asString(const Value& value) const;
+    KCValue asString(const KCValue& value) const;
 
     /**
-     * Converts \p value to a Value of date/time type.
+     * Converts \p value to a KCValue of date/time type.
      */
-    Value asDateTime(const Value& value, bool *ok = 0) const;
+    KCValue asDateTime(const KCValue& value, bool *ok = 0) const;
 
     /**
-     * Converts \p value to a Value of date type.
+     * Converts \p value to a KCValue of date type.
      */
-    Value asDate(const Value& value, bool *ok = 0) const;
+    KCValue asDate(const KCValue& value, bool *ok = 0) const;
 
     /**
-     * Converts \p value to a Value of time type.
+     * Converts \p value to a KCValue of time type.
      */
-    Value asTime(const Value& value, bool *ok = 0) const;
+    KCValue asTime(const KCValue& value, bool *ok = 0) const;
 
 
-    bool toBoolean(const Value& value) const;
-    int toInteger(const Value& value) const;
-    Number toFloat(const Value& value) const;
-    complex<Number> toComplex(const Value& value) const;
-    QString toString(const Value& value) const;
-    QDateTime toDateTime(const Value& value) const;
-    QDate toDate(const Value& value) const;
-    QTime toTime(const Value& value) const;
+    bool toBoolean(const KCValue& value) const;
+    int toInteger(const KCValue& value) const;
+    Number toFloat(const KCValue& value) const;
+    complex<Number> toComplex(const KCValue& value) const;
+    QString toString(const KCValue& value) const;
+    QDateTime toDateTime(const KCValue& value) const;
+    QDate toDate(const KCValue& value) const;
+    QTime toTime(const KCValue& value) const;
 
 private:
     const ValueParser* m_parser;

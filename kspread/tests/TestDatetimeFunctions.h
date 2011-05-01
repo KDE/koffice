@@ -23,7 +23,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-#include <Value.h>
+#include <KCValue.h>
 
 class TestDatetimeFunctions: public QObject
 {
@@ -65,7 +65,7 @@ private slots:
     void testWEEKS();
 
 private:
-    Value evaluate(const QString&, Value& ex);
+    KCValue evaluate(const QString&, KCValue& ex);
 };
 
 #endif // KSPREAD_TEST_DATETIME_FUNCTIONS

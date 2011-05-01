@@ -576,10 +576,10 @@ void Cluster::clearRow(int row)
     }
 }
 
-Value Cluster::valueRange(int col1, int row1,
+KCValue Cluster::valueRange(int col1, int row1,
                           int col2, int row2) const
 {
-    Value empty;
+    KCValue empty;
 
     //swap first/second values if needed
     if (col1 > col2) {
@@ -595,15 +595,15 @@ Value Cluster::valueRange(int col1, int row1,
     // if we are out of range occupied by cells, we return an empty
     // array of the requested size
     if ((row1 > m_biggestY) || (col1 > m_biggestX))
-        return Value(Value::Array);
+        return KCValue(KCValue::Array);
 
     return makeArray(col1, row1, col2, row2);
 }
 
-Value Cluster::makeArray(int col1, int row1, int col2, int row2) const
+KCValue Cluster::makeArray(int col1, int row1, int col2, int row2) const
 {
     // this generates an array of values
-    Value array(Value::Array);
+    KCValue array(KCValue::Array);
     for (int row = row1; row <= row2; ++row) {
         for (KCCell* cell = getFirstCellRow(row); cell; cell = getNextCellRight(cell->column(), row)) {
             if (cell->column() >= col1 && cell->column() <= col2)

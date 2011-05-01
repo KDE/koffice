@@ -28,7 +28,7 @@
 #include "CellStorage.h"
 #include "Map.h"
 #include "KCSheet.h"
-#include "Value.h"
+#include "KCValue.h"
 
 class Binding::Private : public QSharedData
 {
@@ -195,34 +195,34 @@ QVariant BindingModel::data(const QModelIndex& index, int role) const
         return QVariant();
     const QPoint offset = m_region.firstRange().topLeft();
     const KCSheet* sheet = m_region.firstSheet();
-    const Value value = sheet->cellStorage()->value(offset.x() + index.column(),
+    const KCValue value = sheet->cellStorage()->value(offset.x() + index.column(),
                         offset.y() + index.row());
-    // KoChart::Value is either:
+    // KoChart::KCValue is either:
     //  - a double (interpreted as a value)
     //  - a QString (interpreted as a label)
     //  - a QDateTime (interpreted as a date/time value)
     //  - Invalid (interpreted as empty)
     QVariant variant;
     switch (value.type()) {
-    case Value::Float:
-    case Value::Integer:
-        if (value.format() == Value::fmt_DateTime ||
-                value.format() == Value::fmt_Date ||
-                value.format() == Value::fmt_Time) {
+    case KCValue::Float:
+    case KCValue::Integer:
+        if (value.format() == KCValue::fmt_DateTime ||
+                value.format() == KCValue::fmt_Date ||
+                value.format() == KCValue::fmt_Time) {
             variant.setValue<QDateTime>(value.asDateTime(sheet->map()->calculationSettings()));
             break;
         }
-    case Value::Boolean:
-    case Value::Complex:
-    case Value::Array:
+    case KCValue::Boolean:
+    case KCValue::Complex:
+    case KCValue::Array:
         variant.setValue<double>(numToDouble(value.asFloat()));
         break;
-    case Value::String:
-    case Value::Error:
+    case KCValue::String:
+    case KCValue::Error:
         variant.setValue<QString>(value.asString());
         break;
-    case Value::Empty:
-    case Value::CellRange:
+    case KCValue::Empty:
+    case KCValue::CellRange:
     default:
         break;
     }
@@ -243,7 +243,7 @@ QVariant BindingModel::headerData(int section, Qt::Orientation orientation, int 
     const int col = (orientation == Qt::Vertical) ? offset.x() : offset.x() + section;
     const int row = (orientation == Qt::Vertical) ? offset.y() + section : offset.y();
     const KCSheet* sheet = m_region.firstSheet();
-    const Value value = sheet->cellStorage()->value(col, row);
+    const KCValue value = sheet->cellStorage()->value(col, row);
     return value.asVariant();
 }
 

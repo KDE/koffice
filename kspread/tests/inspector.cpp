@@ -36,7 +36,7 @@
 #include "KCRegion.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
-#include "Value.h"
+#include "KCValue.h"
 
 
 class Inspector::Private
@@ -103,7 +103,7 @@ void Inspector::Private::handleCell()
 
     QTextStream ts(&str, QIODevice::WriteOnly);
     ts << cell.value();
-    new QTreeWidgetItem(cellView, QStringList() << "Value" << str);
+    new QTreeWidgetItem(cellView, QStringList() << "KCValue" << str);
 
     new QTreeWidgetItem(cellView, QStringList() << "Link" << cell.link());
 
@@ -189,14 +189,14 @@ Inspector::Inspector(const KCCell& cell)
     cellLayout->setSpacing(KDialog::spacingHint());
     d->cellView = new QTreeWidget(cellPage);
     cellLayout->addWidget(d->cellView);
-    d->cellView->setHeaderLabels(QStringList() << "Key" << "Value");
+    d->cellView->setHeaderLabels(QStringList() << "Key" << "KCValue");
 
     QFrame* stylePage = new QFrame();
     addPage(stylePage, QString("KCStyle"));
     QVBoxLayout* styleLayout = new QVBoxLayout(stylePage);
     d->styleView = new QTreeWidget(stylePage);
     styleLayout->addWidget(d->styleView);
-    d->styleView->setHeaderLabels(QStringList() << "Key" << "Value");
+    d->styleView->setHeaderLabels(QStringList() << "Key" << "KCValue");
 
     QFrame* sheetPage = new QFrame();
     addPage(sheetPage,  QString("KCSheet"));
@@ -205,7 +205,7 @@ Inspector::Inspector(const KCCell& cell)
     sheetLayout->setSpacing(KDialog::spacingHint());
     d->sheetView = new QTreeWidget(sheetPage);
     sheetLayout->addWidget(d->sheetView);
-    d->sheetView->setHeaderLabels(QStringList() << "Key" << "Value");
+    d->sheetView->setHeaderLabels(QStringList() << "Key" << "KCValue");
 
     QFrame* depPage = new QFrame();
     addPage(depPage,  QString("Dependencies"));

@@ -112,7 +112,7 @@ bool SheetAdaptor::setText(int x, int y, const QString& text, bool parse)
 
     DataManipulator *dm = new DataManipulator();
     dm->setSheet(m_sheet);
-    dm->setValue(Value(text));
+    dm->setValue(KCValue(text));
     dm->setParsing(parse);
     dm->add(QPoint(x, y));
     return dm->execute();
@@ -124,29 +124,29 @@ bool SheetAdaptor::setText(const QString& cellname, const QString& text, bool pa
     return setText(location.x(), location.y(), text, parse);
 }
 
-QVariant valueToVariant(const Value& value, KCSheet* sheet)
+QVariant valueToVariant(const KCValue& value, KCSheet* sheet)
 {
     //Should we use following value-format enums here?
     //fmt_None, fmt_Boolean, fmt_Number, fmt_Percent, fmt_Money, fmt_DateTime, fmt_Date, fmt_Time, fmt_String
     switch (value.type()) {
-    case Value::Empty:
+    case KCValue::Empty:
         return QVariant();
-    case Value::Boolean:
+    case KCValue::Boolean:
         return QVariant(value.asBoolean());
-    case Value::Integer:
+    case KCValue::Integer:
         return static_cast<qint64>(value.asInteger());
-    case Value::Float:
+    case KCValue::Float:
         return (double) numToDouble(value.asFloat());
-    case Value::Complex:
+    case KCValue::Complex:
         return sheet->map()->converter()->asString(value).asString();
-    case Value::String:
+    case KCValue::String:
         return value.asString();
-    case Value::Array: {
+    case KCValue::Array: {
         QVariantList colarray;
         for (uint j = 0; j < value.rows(); j++) {
             QVariantList rowarray;
             for (uint i = 0; i < value.columns(); i++) {
-                Value v = value.element(i, j);
+                KCValue v = value.element(i, j);
                 rowarray.append(valueToVariant(v, sheet));
             }
             colarray.append(rowarray);
@@ -154,10 +154,10 @@ QVariant valueToVariant(const Value& value, KCSheet* sheet)
         return colarray;
     }
     break;
-    case Value::CellRange:
+    case KCValue::CellRange:
         //FIXME: not yet used
         return QVariant();
-    case Value::Error:
+    case KCValue::Error:
         return QVariant();
     }
     return QVariant();
@@ -179,16 +179,16 @@ bool SheetAdaptor::setValue(int x, int y, const QVariant& value)
 {
     KCCell cell = KCCell(m_sheet, x, y);
     if (! cell) return false;
-    Value v = cell.value();
+    KCValue v = cell.value();
     switch (value.type()) {
-    case QVariant::Bool: v = Value(value.toBool()); break;
-    case QVariant::ULongLong: v = Value(value.toLongLong()); break;
-    case QVariant::Int: v = Value(value.toInt()); break;
-    case QVariant::Double: v = Value(value.toDouble()); break;
-    case QVariant::String: v = Value(value.toString()); break;
-        //case QVariant::Date: v = Value( value.toDate() ); break;
-        //case QVariant::Time: v = Value( value.toTime() ); break;
-        //case QVariant::DateTime: v = Value( value.toDateTime() ); break;
+    case QVariant::Bool: v = KCValue(value.toBool()); break;
+    case QVariant::ULongLong: v = KCValue(value.toLongLong()); break;
+    case QVariant::Int: v = KCValue(value.toInt()); break;
+    case QVariant::Double: v = KCValue(value.toDouble()); break;
+    case QVariant::String: v = KCValue(value.toString()); break;
+        //case QVariant::Date: v = KCValue( value.toDate() ); break;
+        //case QVariant::Time: v = KCValue( value.toTime() ); break;
+        //case QVariant::DateTime: v = KCValue( value.toDateTime() ); break;
     default: return false;
     }
     return true;

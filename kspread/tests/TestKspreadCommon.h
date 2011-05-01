@@ -21,7 +21,7 @@
 
 #include <Formula.h>
 #include <FunctionModuleRegistry.h>
-#include <Value.h>
+#include <KCValue.h>
 
 #include <float.h> // DBL_EPSILON
 #include <math.h>
@@ -30,7 +30,7 @@
 namespace QTest
 {
 template<>
-char *toString(const Value& value)
+char *toString(const KCValue& value)
 {
     QString message;
     QTextStream ts(&message, QIODevice::WriteOnly);

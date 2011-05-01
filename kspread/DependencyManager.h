@@ -28,7 +28,7 @@
 class KCRegion;
 
 /**
- * \ingroup Value
+ * \ingroup KCValue
  * Manages the dependencies between cells caused by references in formulas.
  * This dependency information is used for the recalculation of the cells.
  */

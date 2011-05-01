@@ -25,7 +25,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-class Value;
+class KCValue;
 
 class TestOpenFormula: public QObject
 {
@@ -39,7 +39,7 @@ private Q_SLOTS:
     void testReferenceSaving();
 
 private:
-    Value evaluate(const QString&, Value&);
+    KCValue evaluate(const QString&, KCValue&);
     QString convertToOpenFormula(const QString& expr);
     QString convertFromOpenFormula(const QString& expr);
 };

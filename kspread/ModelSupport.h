@@ -51,7 +51,7 @@ enum CellDataRole {
     // KCCell contents; SheetModel, RegionModel
     UserInputRole       = 0x00000100,   ///< cell's user input; QString
     FormulaRole         = 0x00000200,   ///< cell's formula; Formula
-    ValueRole           = 0x00000400,   ///< cell's value; Value
+    ValueRole           = 0x00000400,   ///< cell's value; KCValue
     LinkRole            = 0x00000800,   ///< cell's hyperlink; QString
     RichTextRole        = 0x00001000,   ///< cell's rich text; QSharedPointer<QTextDocument>
     // KCCell range associations; SheetModel, RegionModel

@@ -25,7 +25,7 @@
 #include "KCRegion.h"
 #include "KCSheet.h"
 #include "Util.h"
-#include "Value.h"
+#include "KCValue.h"
 
 #include "CellStorage.h"
 #include "Formula.h"
@@ -39,20 +39,20 @@
 using namespace KSpread;
 
 // prototypes (sorted alphabetically)
-Value func_address(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_areas(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_choose(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_column(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_columns(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_hlookup(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_index(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_indirect(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_lookup(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_match(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_multiple_operations(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_row(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_rows(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_vlookup(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_address(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_areas(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_choose(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_column(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_columns(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_hlookup(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_index(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_indirect(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_lookup(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_match(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_multiple_operations(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_row(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_rows(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_vlookup(valVector args, ValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("reference", ReferenceModule)
@@ -131,7 +131,7 @@ QString ReferenceModule::descriptionFileName() const
 //
 // Function: ADDRESS
 //
-Value func_address(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_address(valVector args, ValueCalc *calc, FuncExtra *)
 {
     bool r1c1 = false;
     QString sheetName;
@@ -198,28 +198,28 @@ Value func_address(valVector args, ValueCalc *calc, FuncExtra *)
         result += QString::number(row);
     }
 
-    return Value(result);
+    return KCValue(result);
 }
 
 
 //
 // Function: AREAS
 //
-Value func_areas(valVector args, ValueCalc *calc, FuncExtra *e)
+KCValue func_areas(valVector args, ValueCalc *calc, FuncExtra *e)
 {
     if (e) {
         if (e->regions[0].isValid())
-            return Value(e->regions[0].rects().size());
+            return KCValue(e->regions[0].rects().size());
 
         if ((e->ranges[0].col1 != -1) && (e->ranges[0].row1 != -1) &&
                 (e->ranges[0].col2 != -1) && (e->ranges[0].row2 != -1))
             // we have a range reference - return 1
-            return Value(1);
+            return KCValue(1);
     }
 
     QString s = calc->conv()->asString(args[0]).asString();
     if (s[0] != '(' || s[s.length() - 1] != ')')
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     int l = s.length();
 
@@ -228,7 +228,7 @@ Value func_areas(valVector args, ValueCalc *calc, FuncExtra *e)
     for (int i = 1; i < l; ++i) {
         if (s[i] == ',' || s[i] == ')') {
             if (!KCRegion(ref).isValid())
-                return Value::errorVALUE();
+                return KCValue::errorVALUE();
             else {
                 ++num;
                 ref = "";
@@ -237,19 +237,19 @@ Value func_areas(valVector args, ValueCalc *calc, FuncExtra *e)
             ref += s[i];
     }
 
-    return Value(num);
+    return KCValue(num);
 }
 
 
 //
 // Function: CHOOSE
 //
-Value func_choose(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_choose(valVector args, ValueCalc *calc, FuncExtra *)
 {
     int cnt = args.count() - 1;
     int num = calc->conv()->asInteger(args[0]).asInteger();
     if ((num <= 0) || (num > cnt))
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     return args[num];
 }
 
@@ -257,50 +257,50 @@ Value func_choose(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: COLUMN
 //
-Value func_column(valVector args, ValueCalc *, FuncExtra *e)
+KCValue func_column(valVector args, ValueCalc *, FuncExtra *e)
 {
     int col = e ? e->mycol : 0;
     if (e && args.count())
         col = e->ranges[0].col1;
     if (col > 0)
-        return Value(col);
-    return Value::errorVALUE();
+        return KCValue(col);
+    return KCValue::errorVALUE();
 }
 
 
 //
 // Function: COLUMNS
 //
-Value func_columns(valVector, ValueCalc *, FuncExtra *e)
+KCValue func_columns(valVector, ValueCalc *, FuncExtra *e)
 {
     int col1 = e->ranges[0].col1;
     int col2 = e->ranges[0].col2;
     if ((col1 == -1) || (col2 == -1))
-        return Value::errorVALUE();
-    return Value(col2 - col1 + 1);
+        return KCValue::errorVALUE();
+    return KCValue(col2 - col1 + 1);
 }
 
 
 //
 // Function: HLOOKUP
 //
-Value func_hlookup(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_hlookup(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    const Value key = args[0];
-    const Value data = args[1];
+    const KCValue key = args[0];
+    const KCValue data = args[1];
     const int row = calc->conv()->asInteger(args[2]).asInteger();
     const int cols = data.columns();
     const int rows = data.rows();
     if (row < 1 || row > rows)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     const bool rangeLookup = (args.count() > 3) ? calc->conv()->asBoolean(args[3]).asBoolean() : true;
 
     // now traverse the array and perform comparison
-    Value r;
-    Value v = Value::errorNA();
+    KCValue r;
+    KCValue v = KCValue::errorNA();
     for (int col = 0; col < cols; ++col) {
         // search in the first row
-        const Value le = data.element(col, 0);
+        const KCValue le = data.element(col, 0);
         if (calc->naturalEqual(key, le)) {
             return data.element(col, row - 1);
         }
@@ -317,18 +317,18 @@ Value func_hlookup(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: INDEX
 //
-Value func_index(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_index(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // first argument can be either a range, then we return a given cell's
     // value, or a single cell containing an array - then we return the array
     // element. In any case, this function can assume that the given value
     // is the same. Because it is.
 
-    Value val = args[0];
+    KCValue val = args[0];
     unsigned row = calc->conv()->asInteger(args[1]).asInteger() - 1;
     unsigned col = calc->conv()->asInteger(args[2]).asInteger() - 1;
     if ((row >= val.rows()) || (col >= val.columns()))
-        return Value::errorREF();
+        return KCValue::errorREF();
     return val.element(col, row);
 }
 
@@ -336,7 +336,7 @@ Value func_index(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: INDIRECT
 //
-Value func_indirect(valVector args, ValueCalc *calc, FuncExtra *e)
+KCValue func_indirect(valVector args, ValueCalc *calc, FuncExtra *e)
 {
     bool r1c1 = false;
     QString ref = calc->conv()->asString(args[0]).asString();
@@ -344,7 +344,7 @@ Value func_indirect(valVector args, ValueCalc *calc, FuncExtra *e)
         r1c1 = !(calc->conv()->asBoolean(args[1]).asBoolean());
 
     if (ref.isEmpty())
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     if (r1c1) {
         // TODO: translate the r1c1 style to a1 style
@@ -353,36 +353,36 @@ Value func_indirect(valVector args, ValueCalc *calc, FuncExtra *e)
 
     const KCRegion region(ref, e->sheet->map(), e->sheet);
     if (!region.isValid() || !region.isSingular())
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     const KCCell cell(region.firstSheet(), region.firstRange().topLeft());
     if (!cell.isNull())
         return cell.value();
-    return Value::errorVALUE();
+    return KCValue::errorVALUE();
 }
 
 
 //
 // Function: LOOKUP
 //
-Value func_lookup(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_lookup(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value num = calc->conv()->asNumeric(args[0]);
+    KCValue num = calc->conv()->asNumeric(args[0]);
     if (num.isArray())
-        return Value::errorVALUE();
-    Value lookup = args[1];
-    Value rr = args[2];
+        return KCValue::errorVALUE();
+    KCValue lookup = args[1];
+    KCValue rr = args[2];
     unsigned cols = lookup.columns();
     unsigned rows = lookup.rows();
     if ((cols != rr.columns()) || (rows != rr.rows()))
-        return Value::errorVALUE();
-    Value res = Value::errorNA();
+        return KCValue::errorVALUE();
+    KCValue res = KCValue::errorNA();
 
     // now traverse the array and perform comparison
     for (unsigned r = 0; r < rows; ++r)
         for (unsigned c = 0; c < cols; ++c) {
             // update the result, return if we cross the line
-            Value le = lookup.element(c, r);
+            KCValue le = lookup.element(c, r);
             if (calc->lower(le, num) || calc->equal(num, le))
                 res = rr.element(c, r);
             else
@@ -394,21 +394,21 @@ Value func_lookup(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: MATCH
 //
-Value func_match(valVector args, ValueCalc *calc, FuncExtra* e)
+KCValue func_match(valVector args, ValueCalc *calc, FuncExtra* e)
 {
     int matchType = 1;
     if (args.count() == 3) {
         bool ok = true;
         matchType = calc->conv()->asInteger(args[2], &ok).asInteger();
         if (!ok)
-            return Value::errorVALUE(); // invalid matchtype
+            return KCValue::errorVALUE(); // invalid matchtype
     }
 
-    const Value& searchValue = args[0];
-    const Value& searchArray = args[1];
+    const KCValue& searchValue = args[0];
+    const KCValue& searchArray = args[1];
 
     if (e->ranges[1].rows() != 1 && e->ranges[1].columns() != 1)
-        return Value::errorNA();
+        return KCValue::errorNA();
     int dr = 1, dc = 0;
     if (searchArray.columns() != 1) {
         dr = 0; dc = 1;
@@ -419,10 +419,10 @@ Value func_match(valVector args, ValueCalc *calc, FuncExtra* e)
         // linear search
         for (int r = 0, c = 0; r < n && c < n; r += dr, c += dc) {
             if (calc->naturalEqual(searchValue, searchArray.element(c, r), false)) {
-                return Value(qMax(r, c) + 1);
+                return KCValue(qMax(r, c) + 1);
             }
         }
-        return Value::errorNA();
+        return KCValue::errorNA();
     } else if (matchType > 0) {
         // binary search
         int l = -1;
@@ -435,8 +435,8 @@ Value func_match(valVector args, ValueCalc *calc, FuncExtra* e)
                 h = m;
             }
         }
-        if (l == -1) return Value::errorNA();
-        return Value(l+1);
+        if (l == -1) return KCValue::errorNA();
+        return KCValue(l+1);
     } else /* matchType < 0 */ {
         // binary search
         int l = -1;
@@ -449,22 +449,22 @@ Value func_match(valVector args, ValueCalc *calc, FuncExtra* e)
                 h = m;
             }
         }
-        if (l == -1) return Value::errorNA();
-        return Value(l+1);
+        if (l == -1) return KCValue::errorNA();
+        return KCValue(l+1);
     }
 }
 
 //
 // Function: MULTIPLE.OPERATIONS
 //
-Value func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
+KCValue func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
 {
     if (args.count() != 3 && args.count() != 5)
-        return Value::errorVALUE(); // invalid number of parameters
+        return KCValue::errorVALUE(); // invalid number of parameters
 
     for (int i = 0; i < args.count(); i++) {
         if (e->ranges[i].col1 == -1 || e->ranges[i].row1 == -1)
-            return Value::errorVALUE();
+            return KCValue::errorVALUE();
     }
 
     CellStorage *s = e->sheet->cellStorage();
@@ -474,7 +474,7 @@ Value func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
     int formulaRow = e->ranges[0].row1;
     Formula formula = s->formula(formulaCol, formulaRow);
     if (!formula.isValid())
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     CellIndirection cellIndirections;
     cellIndirections.insert(KCCell(e->sheet, e->ranges[1].col1, e->ranges[1].row1), KCCell(e->sheet, e->ranges[2].col1, e->ranges[2].row1));
@@ -488,50 +488,50 @@ Value func_multiple_operations(valVector args, ValueCalc *, FuncExtra *e)
 //
 // Function: ROW
 //
-Value func_row(valVector args, ValueCalc *, FuncExtra *e)
+KCValue func_row(valVector args, ValueCalc *, FuncExtra *e)
 {
     int row = e ? e->myrow : 0;
     if (e && args.count())
         row = e->ranges[0].row1;
     if (row > 0)
-        return Value(row);
-    return Value::errorVALUE();
+        return KCValue(row);
+    return KCValue::errorVALUE();
 }
 
 
 //
 // Function: ROWS
 //
-Value func_rows(valVector, ValueCalc *, FuncExtra *e)
+KCValue func_rows(valVector, ValueCalc *, FuncExtra *e)
 {
     int row1 = e->ranges[0].row1;
     int row2 = e->ranges[0].row2;
     if ((row1 == -1) || (row2 == -1))
-        return Value::errorVALUE();
-    return Value(row2 - row1 + 1);
+        return KCValue::errorVALUE();
+    return KCValue(row2 - row1 + 1);
 }
 
 
 //
 // Function: VLOOKUP
 //
-Value func_vlookup(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_vlookup(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    const Value key = args[0];
-    const Value data = args[1];
+    const KCValue key = args[0];
+    const KCValue data = args[1];
     const int col = calc->conv()->asInteger(args[2]).asInteger();
     const int cols = data.columns();
     const int rows = data.rows();
     if (col < 1 || col > cols)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     const bool rangeLookup = (args.count() > 3) ? calc->conv()->asBoolean(args[3]).asBoolean() : true;
 
     // now traverse the array and perform comparison
-    Value r;
-    Value v = Value::errorNA();
+    KCValue r;
+    KCValue v = KCValue::errorNA();
     for (int row = 0; row < rows; ++row) {
         // search in the first column
-        const Value le = data.element(0, row);
+        const KCValue le = data.element(0, row);
         if (calc->naturalEqual(key, le)) {
             return data.element(col - 1, row);
         }

@@ -58,7 +58,7 @@
 #include <kspread/KCStyle.h>
 #include <kspread/StyleManager.h>
 #include <kspread/Validity.h>
-#include <kspread/Value.h>
+#include <kspread/KCValue.h>
 #include <kspread/ValueParser.h>
 
 #define SECSPERDAY (24 * 60 * 60)
@@ -486,7 +486,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
             QString value = e.attributeNS(ooNS::table, "value", QString());
             QString type  = e.attributeNS(ooNS::table, "value-type", QString());
 
-            kDebug(30518) << "Value:" << value << ", type:" << type;
+            kDebug(30518) << "KCValue:" << value << ", type:" << type;
 
             bool ok = false;
             double dv = 0.0;
@@ -495,7 +495,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
                 dv = value.toDouble(&ok);
                 if (ok) {
                     if (!isFormula)
-                        cell.setValue(Value(dv));
+                        cell.setValue(KCValue(dv));
 
                     if (type == "currency") {
                         Currency currency(e.attributeNS(ooNS::table, "currency", QString()));
@@ -507,7 +507,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
                 dv = value.toDouble(&ok);
                 if (ok) {
                     if (!isFormula)
-                        cell.setValue(Value(dv));
+                        cell.setValue(KCValue(dv));
                     //TODO fixme
                     //cell.setFactor( 100 );
                     // TODO: replace with custom...
@@ -519,9 +519,9 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
 
                 kDebug(30518) << "Type: boolean";
                 if (value == "true")
-                    cell.setValue(Value(true));
+                    cell.setValue(KCValue(true));
                 else
-                    cell.setValue(Value(false));
+                    cell.setValue(KCValue(false));
                 ok = true;
                 style.setFormatType(KCFormat::Custom);
             } else if (type == "date") {
@@ -555,7 +555,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
                     QDateTime dt(QDate(year, month, day));
                     //            KSpreadValue kval( dt );
                     // cell.setValue( kval );
-                    cell.setValue(Value(QDate(year, month, day), cell.sheet()->map()->calculationSettings()));
+                    cell.setValue(KCValue(QDate(year, month, day), cell.sheet()->map()->calculationSettings()));
                     kDebug(30518) << "Set QDate:" << year << " -" << month << " -" << day;
                 }
             } else if (type == "time") {
@@ -593,7 +593,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
                 if (ok) {
                     // KSpreadValue kval( timeToNum( hours, minutes, seconds ) );
                     // cell.setValue( kval );
-                    cell.setValue(Value(QTime(hours % 24, minutes, seconds), cell.sheet()->map()->calculationSettings()));
+                    cell.setValue(KCValue(QTime(hours % 24, minutes, seconds), cell.sheet()->map()->calculationSettings()));
                     style.setFormatType(KCFormat::Custom);
                 }
             }
@@ -693,7 +693,7 @@ void OpenCalcImport::loadOasisConditionValue(const QString &styleCondition, Cond
         val = val.remove("cell-content()");
         loadOasisCondition(val, newCondition, parser);
     }
-    //GetFunction ::= cell-content-is-between(Value, Value) | cell-content-is-not-between(Value, Value)
+    //GetFunction ::= cell-content-is-between(KCValue, KCValue) | cell-content-is-not-between(KCValue, KCValue)
     //for the moment we support just int/double value, not text/date/time :(
     if (val.contains("cell-content-is-between(")) {
         val = val.remove("cell-content-is-between(");
@@ -2072,12 +2072,12 @@ void OpenCalcImport::loadOasisValidation(Validity validity, const QString& valid
         kDebug(30518) << " element.attribute( table:condition )" << valExpression;
         //Condition ::= ExtendedTrueCondition | TrueFunction 'and' TrueCondition
         //TrueFunction ::= cell-content-is-whole-number() | cell-content-is-decimal-number() | cell-content-is-date() | cell-content-is-time()
-        //ExtendedTrueCondition ::= ExtendedGetFunction | cell-content-text-length() Operator Value
-        //TrueCondition ::= GetFunction | cell-content() Operator Value
-        //GetFunction ::= cell-content-is-between(Value, Value) | cell-content-is-not-between(Value, Value)
-        //ExtendedGetFunction ::= cell-content-text-length-is-between(Value, Value) | cell-content-text-length-is-not-between(Value, Value)
+        //ExtendedTrueCondition ::= ExtendedGetFunction | cell-content-text-length() Operator KCValue
+        //TrueCondition ::= GetFunction | cell-content() Operator KCValue
+        //GetFunction ::= cell-content-is-between(KCValue, KCValue) | cell-content-is-not-between(KCValue, KCValue)
+        //ExtendedGetFunction ::= cell-content-text-length-is-between(KCValue, KCValue) | cell-content-text-length-is-not-between(KCValue, KCValue)
         //Operator ::= '<' | '>' | '<=' | '>=' | '=' | '!='
-        //Value ::= NumberValue | String | Formula
+        //KCValue ::= NumberValue | String | Formula
         //A Formula is a formula without an equals (=) sign at the beginning. See section 8.1.3 for more information.
         //A String comprises one or more characters surrounded by quotation marks.
         //A NumberValue is a whole or decimal number. It must not contain comma separators for numbers of 1000 or greater.
@@ -2091,7 +2091,7 @@ void OpenCalcImport::loadOasisValidation(Validity validity, const QString& valid
 
             loadOasisValidationCondition(validity, valExpression, parser);
         }
-        //cell-content-text-length-is-between(Value, Value) | cell-content-text-length-is-not-between(Value, Value)
+        //cell-content-text-length-is-between(KCValue, KCValue) | cell-content-text-length-is-not-between(KCValue, KCValue)
         else if (valExpression.contains("cell-content-text-length-is-between")) {
             validity.setRestriction(Validity::TextLength);
             validity.setCondition(Conditional::Between);
@@ -2132,7 +2132,7 @@ void OpenCalcImport::loadOasisValidation(Validity validity, const QString& valid
                 valExpression = valExpression.remove("cell-content()");
                 loadOasisValidationCondition(validity, valExpression, parser);
             }
-            //GetFunction ::= cell-content-is-between(Value, Value) | cell-content-is-not-between(Value, Value)
+            //GetFunction ::= cell-content-is-between(KCValue, KCValue) | cell-content-is-not-between(KCValue, KCValue)
             //for the moment we support just int/double value, not text/date/time :(
             if (valExpression.contains("cell-content-is-between(")) {
                 valExpression = valExpression.remove("cell-content-is-between(");

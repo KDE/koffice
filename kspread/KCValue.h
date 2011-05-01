@@ -41,15 +41,15 @@ class CalculationSettings;
 class ValueStorage;
 
 /**
- * \ingroup Value
+ * \ingroup KCValue
  * Provides a wrapper for cell value.
  *
  * Each cell in a worksheet must hold a value, either as enterred by user
  * or as a result of formula evaluation. Default cell holds empty value.
  *
- * Value uses implicit data sharing to reduce memory usage.
+ * KCValue uses implicit data sharing to reduce memory usage.
  */
-class KSPREAD_EXPORT Value
+class KSPREAD_EXPORT KCValue
 {
 
 public:
@@ -80,22 +80,22 @@ public:
     /**
      * Creates an empty value, i.e holds nothing.
      */
-    Value();
+    KCValue();
 
     /**
      * Creates a value of certain type.
      */
-    explicit Value(Type _type);
+    explicit KCValue(Type _type);
 
     /**
      * Destroys the value.
      */
-    virtual ~Value();
+    virtual ~KCValue();
 
     /**
      * Creates a copy from another value.
      */
-    Value(const Value& _value);
+    KCValue(const KCValue& _value);
 
     /**
      * Assigns from another value.
@@ -103,59 +103,59 @@ public:
      * Because the data is implicitly shared, such assignment is very fast and
      * doesn't consume additional memory.
      */
-    Value& operator= (const Value& _value);
+    KCValue& operator= (const KCValue& _value);
 
     /**
      * Creates a boolean value.
      */
-    explicit Value(bool b);
+    explicit KCValue(bool b);
 
     /**
      * Creates an integer value.
      */
-    explicit Value(qint64 i);
+    explicit KCValue(qint64 i);
 
     /**
      * Creates an integer value.
      */
-    explicit Value(int i);
+    explicit KCValue(int i);
 
     /**
      * Creates a floating-point value.
      */
-    explicit Value(double f);
+    explicit KCValue(double f);
 
     /**
      * Creates a floating-point value.
      */
-    explicit Value(long double f);
+    explicit KCValue(long double f);
 
 #ifdef KSPREAD_HIGH_PRECISION_SUPPORT
     /**
      * Creates a floating-point value.
      */
-    explicit Value(Number f);
+    explicit KCValue(Number f);
 #endif // KSPREAD_HIGH_PRECISION_SUPPORT
 
     /**
      * Creates a complex number value.
      */
-    explicit Value(const complex<Number>& c);
+    explicit KCValue(const complex<Number>& c);
 
     /**
      * Creates a string value.
      */
-    explicit Value(const QString& s);
+    explicit KCValue(const QString& s);
 
     /**
      * Creates a string value.
      */
-    explicit Value(const char *s);
+    explicit KCValue(const char *s);
 
     /**
      * Creates an array value using the data from \p array.
      */
-    explicit Value(const ValueStorage& array, const QSize& size);
+    explicit KCValue(const ValueStorage& array, const QSize& size);
 
     /**
      * Creates a floating-point value from date/time.
@@ -163,19 +163,19 @@ public:
      * Internally date/time is represented as serial-number, i.e number of
      * elapsed day since reference date. Day 61 is defined as March 1, 1900.
      */
-    Value(const QDateTime& dt, const CalculationSettings* settings);
+    KCValue(const QDateTime& dt, const CalculationSettings* settings);
 
     /**
      * Creates a floating-point value from time.
      * See also note above.
      */
-    Value(const QTime& time, const CalculationSettings* settings);
+    KCValue(const QTime& time, const CalculationSettings* settings);
 
     /**
      * Creates a floating-point value from date.
      * See also note above.
      */
-    Value(const QDate& date, const CalculationSettings* settings);
+    KCValue(const QDate& date, const CalculationSettings* settings);
 
     /**
      * Returns the type of the value.
@@ -327,7 +327,7 @@ public:
     /**
      * Returns an element in the array value.
      */
-    Value element(unsigned column, unsigned row) const;
+    KCValue element(unsigned column, unsigned row) const;
 
     /**
      * Returns an array element given by its index denoting its position in the
@@ -335,12 +335,12 @@ public:
      * Usable to iterate over the array.
      * \see count()
      */
-    Value element(unsigned index) const;
+    KCValue element(unsigned index) const;
 
     /**
      * Sets an element in the array value. Do not use if isArray() is false.
      */
-    void setElement(unsigned column, unsigned row, const Value& value);
+    void setElement(unsigned column, unsigned row, const KCValue& value);
 
     /**
      * If this value is an array, return the number of columns.
@@ -372,7 +372,7 @@ public:
     /**
      * Returns constant reference to empty value.
      */
-    static const Value& empty();
+    static const KCValue& empty();
 
     /*
      * Returns a constant reference to a null value.
@@ -380,35 +380,35 @@ public:
      * A null value is equal to an empty value (and the other way around) in
      * every way, except for what isNull() returns.
      */
-    static const Value& null();
+    static const KCValue& null();
 
     /**
      * Returns constant reference to '\#CIRCLE!' error.
      *
      * This is used to indicate circular cell references.
      */
-    static const Value& errorCIRCLE();
+    static const KCValue& errorCIRCLE();
 
     /**
      * Returns constant reference to '\#DEPEND!' error.
      *
      * This is used to indicate broken cell references.
      */
-    static const Value& errorDEPEND();
+    static const KCValue& errorDEPEND();
 
     /**
      * Returns constant reference to '\#DIV/0!' error.
      *
      * This is used to indicate that a formula divides by 0 (zero).
      */
-    static const Value& errorDIV0();
+    static const KCValue& errorDIV0();
 
     /**
      * Returns constant reference to '\#N/A' error.
      *
      * This is to indicate that  a value is not available to a function.
      */
-    static const Value& errorNA();
+    static const KCValue& errorNA();
 
     /**
      * Returns constant reference to '\#NAME?' error.
@@ -417,35 +417,35 @@ public:
      * recognized, possibly a misspelled name or name that
      * does not exist.
      */
-    static const Value& errorNAME();
+    static const KCValue& errorNAME();
 
     /**
      * Returns constant reference to '\#NUM!' error.
      *
      * This is to indicate a problem with a number in a formula.
      */
-    static const Value& errorNUM();
+    static const KCValue& errorNUM();
 
     /**
      * Returns constant reference to '\#NULL!' error.
      *
      * This is to indicate that two area do not intersect.
      */
-    static const Value& errorNULL();
+    static const KCValue& errorNULL();
 
     /**
      * Returns constant reference to '\#PARSE!' error.
      *
      * This is used to indicate that a formula could not be parsed correctly.
      */
-    static const Value& errorPARSE();
+    static const KCValue& errorPARSE();
 
     /**
      * Returns constant reference to '\#REF!' error.
      *
      * This is used to indicate an invalid cell reference.
      */
-    static const Value& errorREF();
+    static const KCValue& errorREF();
 
     /**
      * Returns constant reference to '\#VALUE!' error.
@@ -453,38 +453,38 @@ public:
      * This is to indicate that wrong type of argument or operand
      * is used, usually within a function call, e.g SIN("some text").
      */
-    static const Value& errorVALUE();
+    static const KCValue& errorVALUE();
 
     /**
      * Returns true if it is OK to compare this value with v.
      * If this function returns false, then return value of compare is undefined.
      */
-    bool allowComparison(const Value& v) const;
+    bool allowComparison(const KCValue& v) const;
 
     /**
      * Returns -1, 0, 1, depends whether this value is less than, equal to, or
      * greater than v.
      */
-    int compare(const Value& v) const;
+    int compare(const KCValue& v) const;
 
     /**
      * Returns true if this value is equal to v.
      */
-    bool equal(const Value& v) const;
+    bool equal(const KCValue& v) const;
 
     /**
      * Returns true if this value is less than v.
      */
-    bool less(const Value& v) const;
+    bool less(const KCValue& v) const;
 
     /**
      * Returns true if this value is greater than v.
      */
-    bool greater(const Value& v) const;
+    bool greater(const KCValue& v) const;
 
     // comparison operator - returns true only if strictly identical, unlike equal()/compare()
-    bool operator==(const Value& v) const;
-    inline bool operator!=(const Value& other) const {
+    bool operator==(const KCValue& v) const;
+    inline bool operator!=(const KCValue& other) const {
         return !operator==(other);
     }
 
@@ -503,24 +503,24 @@ private:
   QHash/QSet support
 ****************************************************************************/
 
-uint qHash(const Value& value);
+uint qHash(const KCValue& value);
 
-Q_DECLARE_METATYPE(Value)
-Q_DECLARE_TYPEINFO(Value, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(KCValue)
+Q_DECLARE_TYPEINFO(KCValue, Q_MOVABLE_TYPE);
 
 
 /***************************************************************************
   QTextStream support
 ****************************************************************************/
 
-KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, Value::Type type);
-KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, Value value);
+KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, KCValue::Type type);
+KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, KCValue value);
 
 /***************************************************************************
   kDebug support
 ****************************************************************************/
 
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const Value& v);
-QDebug operator<<(QDebug stream, const Value::KCFormat& f);
+KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCValue& v);
+QDebug operator<<(QDebug stream, const KCValue::KCFormat& f);
 
 #endif // KSPREAD_VALUE_H

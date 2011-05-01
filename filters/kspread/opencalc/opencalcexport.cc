@@ -567,7 +567,7 @@ void OpenCalcExport::exportCells(QDomDocument & doc, QDomElement & rowElem,
             cellElem = doc.createElement("table:covered-table-cell");
 
         QFont font;
-        Value const value(cell.value());
+        KCValue const value(cell.value());
         font = style.font();
         m_styles.addFont(font);
         QString comment = cell.comment();

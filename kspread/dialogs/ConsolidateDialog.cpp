@@ -256,7 +256,7 @@ void ConsolidateDialog::accept()
             const QRect range = ranges[i].firstRange();
             for (int col = range.left(); col <= range.right() ; ++col) {
                 const KCCell cell(sheet, col, range.top());
-                const Value value = cell.value();
+                const KCValue value = cell.value();
                 const QString columnHeader = converter->asString(value).asString();
                 columnHeaderCells[columnHeader].append(cell);
             }
@@ -311,7 +311,7 @@ void ConsolidateDialog::accept()
             const QRect range = ranges[i].firstRange();
             for (int row = range.top(); row <= range.bottom() ; ++row) {
                 const KCCell cell(sheet, range.left(), row);
-                const Value value = cell.value();
+                const KCValue value = cell.value();
                 const QString rowHeader = converter->asString(value).asString();
                 rowHeaderCells[rowHeader].append(cell);
             }
@@ -365,7 +365,7 @@ void ConsolidateDialog::accept()
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int row = range.top() + 1; row <= range.bottom() ; ++row) {
-                const Value value = KCCell(sheet, range.left(), row).value();
+                const KCValue value = KCCell(sheet, range.left(), row).value();
                 const QString rowHeader = converter->asString(value).asString();
                 if (!rowHeaders.contains(rowHeader)) {
                     rowHeaders.append(rowHeader);
@@ -381,7 +381,7 @@ void ConsolidateDialog::accept()
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int col = range.left() + 1; col <= range.right() ; ++col) {
-                const Value value = KCCell(sheet, col, range.top()).value();
+                const KCValue value = KCCell(sheet, col, range.top()).value();
                 const QString columnHeader = converter->asString(value).asString();
                 if (!columnHeaders.contains(columnHeader)) {
                     columnHeaders.append(columnHeader);
@@ -410,10 +410,10 @@ void ConsolidateDialog::accept()
             Q_ASSERT(sheet);
             const QRect range = ranges[i].firstRange();
             for (int col = range.left() + 1; col <= range.right() ; ++col) {
-                const Value columnValue = KCCell(sheet, col, range.top()).value();
+                const KCValue columnValue = KCCell(sheet, col, range.top()).value();
                 const QString columnHeader = converter->asString(columnValue).asString();
                 for (int row = range.top() + 1; row <= range.bottom() ; ++row) {
-                    const Value rowValue = KCCell(sheet, range.left(), row).value();
+                    const KCValue rowValue = KCCell(sheet, range.left(), row).value();
                     const QString rowHeader = converter->asString(rowValue).asString();
                     list[rowHeader][columnHeader].append(KCCell(sheet, col, row));
                 }
@@ -505,7 +505,7 @@ void ConsolidateDialog::slotReturnPressed()
 void ConsolidateDialog::Private::setContent(KCSheet *sheet, int row, int column,
                                             const QString &text, QUndoCommand *parent)
 {
-    Value value;
+    KCValue value;
     // Directly evaluate the formula, i.e. copy data, i.e. do not link to data?
     if (detailsWidget.m_copyData->isChecked()) {
         Formula formula(sheet);
@@ -516,7 +516,7 @@ void ConsolidateDialog::Private::setContent(KCSheet *sheet, int row, int column,
         }
         value = formula.eval();
     } else {
-        value = Value(text);
+        value = KCValue(text);
     }
 
     DataManipulator *const command = new DataManipulator(parent);

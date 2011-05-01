@@ -42,20 +42,20 @@ public:
      */
     virtual ~CSVDataCommand();
 
-    void setValue(const Value& value);
+    void setValue(const KCValue& value);
     void setColumnDataTypes(const QList<KoCsvImportDialog::DataType>& dataTypes);
     void setDecimalSymbol(const QString& symbol);
     void setThousandsSeparator(const QString& separator);
 
 protected:
-    virtual Value newValue(Element* element, int col, int row, bool* parse, KCFormat::Type* fmtType);
+    virtual KCValue newValue(Element* element, int col, int row, bool* parse, KCFormat::Type* fmtType);
     virtual bool wantChange(Element* element, int col, int row);
     virtual bool preProcessing();
     virtual bool postProcessing();
 
 private:
     QList<KoCsvImportDialog::DataType> m_dataTypes;
-    Value m_value;
+    KCValue m_value;
     QString m_decimalSymbol;
     QString m_thousandsSeparator;
     QString m_documentDecimalSymbol;

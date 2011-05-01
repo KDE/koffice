@@ -34,31 +34,31 @@ void TestTrigFunctions::initTestCase()
 #define ROUND(x) (roundf(1e10 * x) / 1e10)
 
 // round to get at most 10-digits number
-static Value RoundNumber(double f)
+static KCValue RoundNumber(double f)
 {
-    return Value(ROUND(f));
+    return KCValue(ROUND(f));
 }
 
 // round to get at most 10-digits number
-static Value RoundNumber(const Value& v)
+static KCValue RoundNumber(const KCValue& v)
 {
     if (v.isNumber()) {
         double d = numToDouble(v.asFloat());
         if (fabs(d) < DBL_EPSILON)
             d = 0.0;
-        return Value(ROUND(d));
+        return KCValue(ROUND(d));
     } else
         return v;
 }
 
-Value TestTrigFunctions::evaluate(const QString& formula)
+KCValue TestTrigFunctions::evaluate(const QString& formula)
 {
     Formula f;
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');
     f.setExpression(expr);
-    Value result = f.eval();
+    KCValue result = f.eval();
 
 #if 0
     // this magically generates the CHECKs
@@ -207,10 +207,10 @@ void TestTrigFunctions::testCOS()
     CHECK_EVAL("COS( 127*2*PI()/128 )", 0.998795456205172);
 
     // Cosinus needs to be a numeric value
-    CHECK_EVAL("COS(raghu)", Value::errorVALUE());
-    CHECK_EVAL("COS()", Value::errorVALUE());
+    CHECK_EVAL("COS(raghu)", KCValue::errorVALUE());
+    CHECK_EVAL("COS()", KCValue::errorVALUE());
 
-    CHECK_EVAL("1+COS(0.2)", Value(1.980066578));
+    CHECK_EVAL("1+COS(0.2)", KCValue(1.980066578));
 }
 
 // hyperbolic cosine

@@ -64,7 +64,7 @@ static double GammaHelp(double& x, bool& reflect)
 
 // Array-walk functions registered on ValueCalc object
 
-void awSum(ValueCalc *c, Value &res, Value val, Value)
+void awSum(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     if (val.isError())
         res = val;
@@ -72,38 +72,38 @@ void awSum(ValueCalc *c, Value &res, Value val, Value)
         res = c->add(res, val);
 }
 
-void awSumA(ValueCalc *c, Value &res, Value val, Value)
+void awSumA(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     if (!val.isEmpty())
         res = c->add(res, val);
 }
 
-void awSumSq(ValueCalc *c, Value &res, Value val, Value)
+void awSumSq(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     // removed (!val.isBoolean()) to allow conversion from BOOL to int
     if ((!val.isEmpty()) && (!val.isString()) && (!val.isError()))
         res = c->add(res, c->sqr(val));
 }
 
-void awSumSqA(ValueCalc *c, Value &res, Value val, Value)
+void awSumSqA(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     if (!val.isEmpty())
         res = c->add(res, c->sqr(val));
 }
 
-void awCount(ValueCalc *c, Value &res, Value val, Value)
+void awCount(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     if ((!val.isEmpty()) && (!val.isBoolean()) && (!val.isString()) && (!val.isError()))
         res = c->add(res, 1);
 }
 
-void awCountA(ValueCalc *c, Value &res, Value val, Value)
+void awCountA(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     if (!val.isEmpty())
         res = c->add(res, 1);
 }
 
-void awMax(ValueCalc *c, Value &res, Value val, Value)
+void awMax(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     // propagate error values
     if (res.isError())
@@ -119,7 +119,7 @@ void awMax(ValueCalc *c, Value &res, Value val, Value)
     }
 }
 
-void awMaxA(ValueCalc *c, Value &res, Value val, Value)
+void awMaxA(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     // propagate error values
     if (res.isError())
@@ -136,7 +136,7 @@ void awMaxA(ValueCalc *c, Value &res, Value val, Value)
     }
 }
 
-void awMin(ValueCalc *c, Value &res, Value val, Value)
+void awMin(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     if ((!val.isEmpty()) && (!val.isBoolean()) && (!val.isString())) {
         if (res.isEmpty())
@@ -145,7 +145,7 @@ void awMin(ValueCalc *c, Value &res, Value val, Value)
     }
 }
 
-void awMinA(ValueCalc *c, Value &res, Value val, Value)
+void awMinA(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     if (!val.isEmpty()) {
         if (res.isEmpty())
@@ -157,29 +157,29 @@ void awMinA(ValueCalc *c, Value &res, Value val, Value)
     }
 }
 
-void awProd(ValueCalc *c, Value &res, Value val, Value)
+void awProd(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     if ((!val.isEmpty()) && (!val.isBoolean()) && (!val.isString()) && (!val.isError()))
         res = c->mul(res, val);
 }
 
-void awProdA(ValueCalc *c, Value &res, Value val, Value)
+void awProdA(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     if (!val.isEmpty())
         res = c->mul(res, val);
 }
 
 // sum of squares of deviations, used to compute standard deviation
-void awDevSq(ValueCalc *c, Value &res, Value val,
-             Value avg)
+void awDevSq(ValueCalc *c, KCValue &res, KCValue val,
+             KCValue avg)
 {
     if ((!val.isEmpty()) && (!val.isBoolean()) && (!val.isString()) && (!val.isError()))
         res = c->add(res, c->sqr(c->sub(val, avg)));
 }
 
 // sum of squares of deviations, used to compute standard deviation
-void awDevSqA(ValueCalc *c, Value &res, Value val,
-              Value avg)
+void awDevSqA(ValueCalc *c, KCValue &res, KCValue val,
+              KCValue avg)
 {
     if (!val.isEmpty())
         res = c->add(res, c->sqr(c->sub(val, avg)));
@@ -217,7 +217,7 @@ const CalculationSettings* ValueCalc::settings() const
     return converter->settings();
 }
 
-Value ValueCalc::add(const Value &a, const Value &b)
+KCValue ValueCalc::add(const KCValue &a, const KCValue &b)
 {
     if (a.isError()) return a;
     if (b.isError()) return b;
@@ -227,7 +227,7 @@ Value ValueCalc::add(const Value &a, const Value &b)
     Number aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
-    Value res = Value(aa + bb);
+    KCValue res = KCValue(aa + bb);
 
     if (a.isNumber() || a.isEmpty())
         res.setFormat(format(a, b));
@@ -235,7 +235,7 @@ Value ValueCalc::add(const Value &a, const Value &b)
     return res;
 }
 
-Value ValueCalc::sub(const Value &a, const Value &b)
+KCValue ValueCalc::sub(const KCValue &a, const KCValue &b)
 {
     if (a.isError()) return a;
     if (b.isError()) return b;
@@ -245,7 +245,7 @@ Value ValueCalc::sub(const Value &a, const Value &b)
     Number aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
-    Value res = Value(aa - bb);
+    KCValue res = KCValue(aa - bb);
 
     if (a.isNumber() || a.isEmpty())
         res.setFormat(format(a, b));
@@ -253,7 +253,7 @@ Value ValueCalc::sub(const Value &a, const Value &b)
     return res;
 }
 
-Value ValueCalc::mul(const Value &a, const Value &b)
+KCValue ValueCalc::mul(const KCValue &a, const KCValue &b)
 {
     if (a.isError()) return a;
     if (b.isError()) return b;
@@ -268,7 +268,7 @@ Value ValueCalc::mul(const Value &a, const Value &b)
     Number aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
-    Value res = Value(aa * bb);
+    KCValue res = KCValue(aa * bb);
 
     if (a.isNumber() || a.isEmpty())
         res.setFormat(format(a, b));
@@ -276,7 +276,7 @@ Value ValueCalc::mul(const Value &a, const Value &b)
     return res;
 }
 
-Value ValueCalc::div(const Value &a, const Value &b)
+KCValue ValueCalc::div(const KCValue &a, const KCValue &b)
 {
     if (a.isError()) return a;
     if (b.isError()) return b;
@@ -286,11 +286,11 @@ Value ValueCalc::div(const Value &a, const Value &b)
     Number aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
-    Value res;
+    KCValue res;
     if (bb == 0.0)
-        return Value::errorDIV0();
+        return KCValue::errorDIV0();
     else
-        res = Value(aa / bb);
+        res = KCValue(aa / bb);
 
     if (a.isNumber() || a.isEmpty())
         res.setFormat(format(a, b));
@@ -298,7 +298,7 @@ Value ValueCalc::div(const Value &a, const Value &b)
     return res;
 }
 
-Value ValueCalc::mod(const Value &a, const Value &b)
+KCValue ValueCalc::mod(const KCValue &a, const KCValue &b)
 {
     if (a.isError()) return a;
     if (b.isError()) return b;
@@ -308,9 +308,9 @@ Value ValueCalc::mod(const Value &a, const Value &b)
     Number aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
-    Value res;
+    KCValue res;
     if (bb == 0.0)
-        return Value::errorDIV0();
+        return KCValue::errorDIV0();
     else {
         Number m = fmod(aa, bb);
         // the following adjustments are needed by OpenFormula:
@@ -325,7 +325,7 @@ Value ValueCalc::mod(const Value &a, const Value &b)
             while (m > 0) m += bb;   // same as m-=fabs(bb)
         }
 
-        res = Value(m);
+        res = KCValue(m);
     }
 
     if (a.isNumber() || a.isEmpty())
@@ -334,7 +334,7 @@ Value ValueCalc::mod(const Value &a, const Value &b)
     return res;
 }
 
-Value ValueCalc::pow(const Value &a, const Value &b)
+KCValue ValueCalc::pow(const KCValue &a, const KCValue &b)
 {
     if (a.isError()) return a;
     if (b.isError()) return b;
@@ -344,7 +344,7 @@ Value ValueCalc::pow(const Value &a, const Value &b)
     Number aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
-    Value res(::pow(aa, bb));
+    KCValue res(::pow(aa, bb));
 
     if (a.isNumber() || a.isEmpty())
         res.setFormat(format(a, b));
@@ -352,37 +352,26 @@ Value ValueCalc::pow(const Value &a, const Value &b)
     return res;
 }
 
-Value ValueCalc::sqr(const Value &a)
+KCValue ValueCalc::sqr(const KCValue &a)
 {
     if (a.isError()) return a;
     return mul(a, a);
 }
 
-Value ValueCalc::sqrt(const Value &a)
+KCValue ValueCalc::sqrt(const KCValue &a)
 {
     if (a.isError()) return a;
-    Value res = Value(::pow((qreal)converter->toFloat(a), 0.5));
+    KCValue res = KCValue(::pow((qreal)converter->toFloat(a), 0.5));
     if (a.isNumber() || a.isEmpty())
         res.setFormat(a.format());
 
     return res;
 }
 
-Value ValueCalc::add(const Value &a, Number b)
+KCValue ValueCalc::add(const KCValue &a, Number b)
 {
     if (a.isError()) return a;
-    Value res = Value(converter->toFloat(a) + b);
-
-    if (a.isNumber() || a.isEmpty())
-        res.setFormat(a.format());
-
-    return res;
-}
-
-Value ValueCalc::sub(const Value &a, Number b)
-{
-    if (a.isError()) return a;
-    Value res = Value(converter->toFloat(a) - b);
+    KCValue res = KCValue(converter->toFloat(a) + b);
 
     if (a.isNumber() || a.isEmpty())
         res.setFormat(a.format());
@@ -390,10 +379,10 @@ Value ValueCalc::sub(const Value &a, Number b)
     return res;
 }
 
-Value ValueCalc::mul(const Value &a, Number b)
+KCValue ValueCalc::sub(const KCValue &a, Number b)
 {
     if (a.isError()) return a;
-    Value res = Value(converter->toFloat(a) * b);
+    KCValue res = KCValue(converter->toFloat(a) - b);
 
     if (a.isNumber() || a.isEmpty())
         res.setFormat(a.format());
@@ -401,25 +390,25 @@ Value ValueCalc::mul(const Value &a, Number b)
     return res;
 }
 
-Value ValueCalc::div(const Value &a, Number b)
+KCValue ValueCalc::mul(const KCValue &a, Number b)
 {
     if (a.isError()) return a;
-    Value res;
+    KCValue res = KCValue(converter->toFloat(a) * b);
+
+    if (a.isNumber() || a.isEmpty())
+        res.setFormat(a.format());
+
+    return res;
+}
+
+KCValue ValueCalc::div(const KCValue &a, Number b)
+{
+    if (a.isError()) return a;
+    KCValue res;
     if (b == 0.0)
-        return Value::errorDIV0();
+        return KCValue::errorDIV0();
 
-    res = Value(converter->toFloat(a) / b);
-
-    if (a.isNumber() || a.isEmpty())
-        res.setFormat(a.format());
-
-    return res;
-}
-
-Value ValueCalc::pow(const Value &a, Number b)
-{
-    if (a.isError()) return a;
-    Value res = Value(::pow(converter->toFloat(a), b));
+    res = KCValue(converter->toFloat(a) / b);
 
     if (a.isNumber() || a.isEmpty())
         res.setFormat(a.format());
@@ -427,29 +416,40 @@ Value ValueCalc::pow(const Value &a, Number b)
     return res;
 }
 
-Value ValueCalc::abs(const Value &a)
+KCValue ValueCalc::pow(const KCValue &a, Number b)
 {
     if (a.isError()) return a;
-    return Value(fabs(converter->toFloat(a)));
+    KCValue res = KCValue(::pow(converter->toFloat(a), b));
+
+    if (a.isNumber() || a.isEmpty())
+        res.setFormat(a.format());
+
+    return res;
 }
 
-bool ValueCalc::isZero(const Value &a)
+KCValue ValueCalc::abs(const KCValue &a)
+{
+    if (a.isError()) return a;
+    return KCValue(fabs(converter->toFloat(a)));
+}
+
+bool ValueCalc::isZero(const KCValue &a)
 {
     if (a.isError()) return false;
     return (converter->toFloat(a) == 0.0);
 }
 
-bool ValueCalc::isEven(const Value &a)
+bool ValueCalc::isEven(const KCValue &a)
 {
     if (a.isError()) return false;
-    if (gequal(a, Value(0))) {
+    if (gequal(a, KCValue(0))) {
         return ((converter->toInteger(roundDown(a)) % 2) == 0);
     } else {
         return ((converter->toInteger(roundUp(a)) % 2) == 0);
     }
 }
 
-bool ValueCalc::equal(const Value &a, const Value &b)
+bool ValueCalc::equal(const KCValue &a, const KCValue &b)
 {
     return (converter->toFloat(a) == converter->toFloat(b));
 }
@@ -460,7 +460,7 @@ bool ValueCalc::equal(const Value &a, const Value &b)
  * values. Idea for this kind of solution taken from Openoffice.
  *
  *********************************************************************/
-bool ValueCalc::approxEqual(const Value &a, const Value &b)
+bool ValueCalc::approxEqual(const KCValue &a, const KCValue &b)
 {
     Number aa = converter->toFloat(a);
     Number bb = converter->toFloat(b);
@@ -470,24 +470,24 @@ bool ValueCalc::approxEqual(const Value &a, const Value &b)
     return (x < 0.0 ? -x : x)  < ((aa < 0.0 ? -aa : aa) * DBL_EPSILON);
 }
 
-bool ValueCalc::greater(const Value &a, const Value &b)
+bool ValueCalc::greater(const KCValue &a, const KCValue &b)
 {
     Number aa = converter->toFloat(a);
     Number bb = converter->toFloat(b);
     return (aa > bb);
 }
 
-bool ValueCalc::gequal(const Value &a, const Value &b)
+bool ValueCalc::gequal(const KCValue &a, const KCValue &b)
 {
     return (greater(a, b) || approxEqual(a, b));
 }
 
-bool ValueCalc::lower(const Value &a, const Value &b)
+bool ValueCalc::lower(const KCValue &a, const KCValue &b)
 {
     return greater(b, a);
 }
 
-bool ValueCalc::strEqual(const Value &a, const Value &b, bool CS)
+bool ValueCalc::strEqual(const KCValue &a, const KCValue &b, bool CS)
 {
     QString aa = converter->asString(a).asString();
     QString bb = converter->asString(b).asString();
@@ -498,7 +498,7 @@ bool ValueCalc::strEqual(const Value &a, const Value &b, bool CS)
     return (aa == bb);
 }
 
-bool ValueCalc::strGreater(const Value &a, const Value &b, bool CS)
+bool ValueCalc::strGreater(const KCValue &a, const KCValue &b, bool CS)
 {
     QString aa = converter->asString(a).asString();
     QString bb = converter->asString(b).asString();
@@ -509,7 +509,7 @@ bool ValueCalc::strGreater(const Value &a, const Value &b, bool CS)
     return (aa > bb);
 }
 
-bool ValueCalc::strGequal(const Value &a, const Value &b, bool CS)
+bool ValueCalc::strGequal(const KCValue &a, const KCValue &b, bool CS)
 {
     QString aa = converter->asString(a).asString();
     QString bb = converter->asString(b).asString();
@@ -520,74 +520,74 @@ bool ValueCalc::strGequal(const Value &a, const Value &b, bool CS)
     return (aa >= bb);
 }
 
-bool ValueCalc::strLower(const Value &a, const Value &b, bool CS)
+bool ValueCalc::strLower(const KCValue &a, const KCValue &b, bool CS)
 {
     return strGreater(b, a, CS);
 }
 
-bool ValueCalc::naturalEqual(const Value &a, const Value &b, bool CS)
+bool ValueCalc::naturalEqual(const KCValue &a, const KCValue &b, bool CS)
 {
-    Value aa = a;
-    Value bb = b;
+    KCValue aa = a;
+    KCValue bb = b;
     if (!CS) {
         // not case sensitive -> convert strings to lowercase
-        if (aa.isString()) aa = Value(aa.asString().toLower());
-        if (bb.isString()) bb = Value(bb.asString().toLower());
+        if (aa.isString()) aa = KCValue(aa.asString().toLower());
+        if (bb.isString()) bb = KCValue(bb.asString().toLower());
     }
     if (aa.allowComparison(bb)) return aa.equal(bb);
     return strEqual(aa, bb, CS);
 }
 
-bool ValueCalc::naturalGreater(const Value &a, const Value &b, bool CS)
+bool ValueCalc::naturalGreater(const KCValue &a, const KCValue &b, bool CS)
 {
-    Value aa = a;
-    Value bb = b;
+    KCValue aa = a;
+    KCValue bb = b;
     if (!CS) {
         // not case sensitive -> convert strings to lowercase
-        if (aa.isString()) aa = Value(aa.asString().toLower());
-        if (bb.isString()) bb = Value(bb.asString().toLower());
+        if (aa.isString()) aa = KCValue(aa.asString().toLower());
+        if (bb.isString()) bb = KCValue(bb.asString().toLower());
     }
     if (aa.allowComparison(bb)) return aa.greater(bb);
     return strEqual(aa, bb, CS);
 }
 
-bool ValueCalc::naturalGequal(const Value &a, const Value &b, bool CS)
+bool ValueCalc::naturalGequal(const KCValue &a, const KCValue &b, bool CS)
 {
     return (naturalGreater(a, b, CS) || naturalEqual(a, b, CS));
 }
 
-bool ValueCalc::naturalLower(const Value &a, const Value &b, bool CS)
+bool ValueCalc::naturalLower(const KCValue &a, const KCValue &b, bool CS)
 {
     return naturalGreater(b, a, CS);
 }
 
-bool ValueCalc::naturalLequal(const Value &a, const Value &b, bool CS)
+bool ValueCalc::naturalLequal(const KCValue &a, const KCValue &b, bool CS)
 {
     return (naturalLower(a, b, CS) || naturalEqual(a, b, CS));
 }
 
-Value ValueCalc::roundDown(const Value &a,
-                           const Value &digits)
+KCValue ValueCalc::roundDown(const KCValue &a,
+                           const KCValue &digits)
 {
     return roundDown(a, converter->asInteger(digits).asInteger());
 }
 
-Value ValueCalc::roundUp(const Value &a,
-                         const Value &digits)
+KCValue ValueCalc::roundUp(const KCValue &a,
+                         const KCValue &digits)
 {
     return roundUp(a, converter->asInteger(digits).asInteger());
 }
 
-Value ValueCalc::round(const Value &a,
-                       const Value &digits)
+KCValue ValueCalc::round(const KCValue &a,
+                       const KCValue &digits)
 {
     return round(a, converter->asInteger(digits).asInteger());
 }
 
-Value ValueCalc::roundDown(const Value &a, int digits)
+KCValue ValueCalc::roundDown(const KCValue &a, int digits)
 {
     // shift in one direction, round, shift back
-    Value val = a;
+    KCValue val = a;
     if (digits > 0)
         for (int i = 0; i < digits; ++i)
             val = mul(val, 10);
@@ -595,7 +595,7 @@ Value ValueCalc::roundDown(const Value &a, int digits)
         for (int i = 0; i > digits; --i)
             val = div(val, 10);
 
-    val = Value(floor(numToDouble(converter->toFloat(val))));
+    val = KCValue(floor(numToDouble(converter->toFloat(val))));
 
     if (digits > 0)
         for (int i = 0; i < digits; ++i)
@@ -606,10 +606,10 @@ Value ValueCalc::roundDown(const Value &a, int digits)
     return val;
 }
 
-Value ValueCalc::roundUp(const Value &a, int digits)
+KCValue ValueCalc::roundUp(const KCValue &a, int digits)
 {
     // shift in one direction, round, shift back
-    Value val = a;
+    KCValue val = a;
     if (digits > 0)
         for (int i = 0; i < digits; ++i)
             val = mul(val, 10);
@@ -617,7 +617,7 @@ Value ValueCalc::roundUp(const Value &a, int digits)
         for (int i = 0; i > digits; --i)
             val = div(val, 10);
 
-    val = Value(ceil(numToDouble(converter->toFloat(val))));
+    val = KCValue(ceil(numToDouble(converter->toFloat(val))));
 
     if (digits > 0)
         for (int i = 0; i < digits; ++i)
@@ -628,10 +628,10 @@ Value ValueCalc::roundUp(const Value &a, int digits)
     return val;
 }
 
-Value ValueCalc::round(const Value &a, int digits)
+KCValue ValueCalc::round(const KCValue &a, int digits)
 {
     // shift in one direction, round, shift back
-    Value val = a;
+    KCValue val = a;
     if (digits > 0)
         for (int i = 0; i < digits; ++i)
             val = mul(val, 10);
@@ -639,7 +639,7 @@ Value ValueCalc::round(const Value &a, int digits)
         for (int i = 0; i > digits; --i)
             val = div(val, 10);
 
-    val = Value((lower(val, 0) ? -1 : 1) * qRound(qAbs(converter->toFloat(val))));
+    val = KCValue((lower(val, 0) ? -1 : 1) * qRound(qAbs(converter->toFloat(val))));
 
     if (digits > 0)
         for (int i = 0; i < digits; ++i)
@@ -650,7 +650,7 @@ Value ValueCalc::round(const Value &a, int digits)
     return val;
 }
 
-int ValueCalc::sign(const Value &a)
+int ValueCalc::sign(const KCValue &a)
 {
     Number val = converter->toFloat(a);
     if (val == 0) return 0;
@@ -659,17 +659,17 @@ int ValueCalc::sign(const Value &a)
 }
 
 
-Value ValueCalc::log(const Value &number,
-                     const Value &base)
+KCValue ValueCalc::log(const KCValue &number,
+                     const KCValue &base)
 {
     Number logbase = converter->toFloat(base);
     if (logbase == 1.0)
-        return Value::errorDIV0();
+        return KCValue::errorDIV0();
     if (logbase <= 0.0)
-        return Value::errorNA();
+        return KCValue::errorNA();
 
     logbase = KSpread::log(logbase, 10);
-    Value res = Value(KSpread::log(converter->toFloat(number), 10) / logbase);
+    KCValue res = KCValue(KSpread::log(converter->toFloat(number), 10) / logbase);
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -677,9 +677,9 @@ Value ValueCalc::log(const Value &number,
     return res;
 }
 
-Value ValueCalc::ln(const Value &number)
+KCValue ValueCalc::ln(const KCValue &number)
 {
-    Value res = Value(KSpread::ln(converter->toFloat(number)));
+    KCValue res = KCValue(KSpread::ln(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -687,15 +687,15 @@ Value ValueCalc::ln(const Value &number)
     return res;
 }
 
-Value ValueCalc::log(const Value &number, Number base)
+KCValue ValueCalc::log(const KCValue &number, Number base)
 {
     if (base <= 0.0)
-        return Value::errorNA();
+        return KCValue::errorNA();
     if (base == 1.0)
-        return Value::errorDIV0();
+        return KCValue::errorDIV0();
 
     Number num = converter->toFloat(number);
-    Value res = Value(KSpread::log(num, base));
+    KCValue res = KCValue(KSpread::log(num, base));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -703,45 +703,45 @@ Value ValueCalc::log(const Value &number, Number base)
     return res;
 }
 
-Value ValueCalc::exp(const Value &number)
+KCValue ValueCalc::exp(const KCValue &number)
 {
-    return Value(::exp(converter->toFloat(number)));
+    return KCValue(::exp(converter->toFloat(number)));
 }
 
-Value ValueCalc::pi()
+KCValue ValueCalc::pi()
 {
     // retun PI in double-precision
     // if arbitrary precision gets in, this should be extended to return
     // more if need be
-    return Value(M_PI);
+    return KCValue(M_PI);
 }
 
-Value ValueCalc::eps()
+KCValue ValueCalc::eps()
 {
     // #### This should adjust according to the actual number system used
     // (float, double, long double, ...)
-    return Value(DBL_EPSILON);
+    return KCValue(DBL_EPSILON);
 }
 
-Value ValueCalc::random(Number range)
+KCValue ValueCalc::random(Number range)
 {
-    return Value(range *(double) rand() / (RAND_MAX + 1.0));
+    return KCValue(range *(double) rand() / (RAND_MAX + 1.0));
 }
 
-Value ValueCalc::random(Value range)
+KCValue ValueCalc::random(KCValue range)
 {
     return random(converter->toFloat(range));
 }
 
-Value ValueCalc::fact(const Value &which)
+KCValue ValueCalc::fact(const KCValue &which)
 {
     // we can simply use integers - no one is going to compute factorial of
     // anything bigger than 2^64
     return fact(converter->asInteger(which).asInteger());
 }
 
-Value ValueCalc::fact(const Value &which,
-                      const Value &end)
+KCValue ValueCalc::fact(const KCValue &which,
+                      const KCValue &end)
 {
     // we can simply use integers - no one is going to compute factorial of
     // anything bigger than 2^64
@@ -749,13 +749,13 @@ Value ValueCalc::fact(const Value &which,
                 converter->asInteger(end).asInteger());
 }
 
-Value ValueCalc::fact(int which, int end)
+KCValue ValueCalc::fact(int which, int end)
 {
     if (which < 0)
-        return Value(-1);
+        return KCValue(-1);
     if (which == 0)
-        return Value(1);
-    Value res = Value(1);
+        return KCValue(1);
+    KCValue res = KCValue(1);
     while (which > end) {
         res = mul(res, which);
         which--;
@@ -763,14 +763,14 @@ Value ValueCalc::fact(int which, int end)
     return res;
 }
 
-Value ValueCalc::factDouble(int which)
+KCValue ValueCalc::factDouble(int which)
 {
     if (which < 0)
-        return Value(-1);
+        return KCValue(-1);
     if ((which == 0) || (which == 1))
-        return Value(1);
+        return KCValue(1);
 
-    Value res = Value(1);
+    KCValue res = KCValue(1);
     while (which > 1) {
         res = mul(res, which);
         which -= 2;
@@ -778,32 +778,32 @@ Value ValueCalc::factDouble(int which)
     return res;
 }
 
-Value ValueCalc::factDouble(Value which)
+KCValue ValueCalc::factDouble(KCValue which)
 {
     return factDouble(converter->asInteger(which).asInteger());
 }
 
-Value ValueCalc::combin(int n, int k)
+KCValue ValueCalc::combin(int n, int k)
 {
     if (n >= 15) {
         Number result = ::exp(Number(lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1)));
-        return Value(floor(numToDouble(result + 0.5)));
+        return KCValue(floor(numToDouble(result + 0.5)));
     } else
         return div(div(fact(n), fact(k)), fact(n - k));
 }
 
-Value ValueCalc::combin(Value n, Value k)
+KCValue ValueCalc::combin(KCValue n, KCValue k)
 {
     int nn = converter->toInteger(n);
     int kk = converter->toInteger(k);
     return combin(nn, kk);
 }
 
-Value ValueCalc::gcd(const Value &a, const Value &b)
+KCValue ValueCalc::gcd(const KCValue &a, const KCValue &b)
 {
     // Euler's GCD algorithm
-    Value aa = round(a);
-    Value bb = round(b);
+    KCValue aa = round(a);
+    KCValue bb = round(b);
 
     if (approxEqual(aa, bb)) return aa;
 
@@ -817,28 +817,28 @@ Value ValueCalc::gcd(const Value &a, const Value &b)
         return gcd(aa, mod(bb, aa));
 }
 
-Value ValueCalc::lcm(const Value &a, const Value &b)
+KCValue ValueCalc::lcm(const KCValue &a, const KCValue &b)
 {
-    Value aa = round(a);
-    Value bb = round(b);
+    KCValue aa = round(a);
+    KCValue bb = round(b);
 
     if (approxEqual(aa, bb)) return aa;
 
     if (aa.isZero()) return bb;
     if (bb.isZero()) return aa;
 
-    Value g = gcd(aa, bb);
+    KCValue g = gcd(aa, bb);
     if (g.isZero())  // GCD is zero for some weird reason
         return mul(aa, bb);
 
     return div(mul(aa, bb), g);
 }
 
-Value ValueCalc::base(const Value &val, int base, int prec, int minLength)
+KCValue ValueCalc::base(const KCValue &val, int base, int prec, int minLength)
 {
     if (prec < 0) prec = 2;
     if ((base < 2) || (base > 36))
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     Number value = converter->toFloat(val);
     QString result = QString::number((int)numToDouble(value), base);
@@ -856,28 +856,28 @@ Value ValueCalc::base(const Value &val, int base, int prec, int minLength)
         }
     }
 
-    return Value(result.toUpper());
+    return KCValue(result.toUpper());
 }
 
-Value ValueCalc::fromBase(const Value &val, int base)
+KCValue ValueCalc::fromBase(const KCValue &val, int base)
 {
     QString str = converter->asString(val).asString();
     bool ok;
     qint64 num = str.toLongLong(&ok, base);
     if (ok)
-        return Value(num);
-    return Value::errorVALUE();
+        return KCValue(num);
+    return KCValue::errorVALUE();
 }
 
 
-Value ValueCalc::sin(const Value &number)
+KCValue ValueCalc::sin(const KCValue &number)
 {
     bool ok = true;
     Number n = converter->asFloat(number, &ok).asFloat();
     if (!ok)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
-    Value res = Value(::sin(n));
+    KCValue res = KCValue(::sin(n));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -885,14 +885,14 @@ Value ValueCalc::sin(const Value &number)
     return res;
 }
 
-Value ValueCalc::cos(const Value &number)
+KCValue ValueCalc::cos(const KCValue &number)
 {
     bool ok = true;
     Number n = converter->asFloat(number, &ok).asFloat();
     if (!ok)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
-    Value res = Value(::cos(n));
+    KCValue res = KCValue(::cos(n));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -900,9 +900,9 @@ Value ValueCalc::cos(const Value &number)
     return res;
 }
 
-Value ValueCalc::tg(const Value &number)
+KCValue ValueCalc::tg(const KCValue &number)
 {
-    Value res = Value(KSpread::tg(converter->toFloat(number)));
+    KCValue res = KCValue(KSpread::tg(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -910,9 +910,9 @@ Value ValueCalc::tg(const Value &number)
     return res;
 }
 
-Value ValueCalc::cotg(const Value &number)
+KCValue ValueCalc::cotg(const KCValue &number)
 {
-    Value res = div(1, Value(KSpread::tg(converter->toFloat(number))));
+    KCValue res = div(1, KCValue(KSpread::tg(converter->toFloat(number))));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -920,52 +920,52 @@ Value ValueCalc::cotg(const Value &number)
     return res;
 }
 
-Value ValueCalc::asin(const Value &number)
+KCValue ValueCalc::asin(const KCValue &number)
 {
     bool ok = true;
     Number n = converter->asFloat(number, &ok).asFloat();
     if (!ok)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     const double d = numToDouble(n);
     if (d < -1.0 || d > 1.0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     errno = 0;
-    Value res = Value(::asin(n));
+    KCValue res = KCValue(::asin(n));
     if (errno)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
     return res;
 }
 
-Value ValueCalc::acos(const Value &number)
+KCValue ValueCalc::acos(const KCValue &number)
 {
     bool ok = true;
     Number n = converter->asFloat(number, &ok).asFloat();
     if (!ok)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     const double d = numToDouble(n);
     if (d < -1.0 || d > 1.0)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     errno = 0;
-    Value res = Value(::acos(n));
+    KCValue res = KCValue(::acos(n));
     if (errno)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
     return res;
 }
 
-Value ValueCalc::atg(const Value &number)
+KCValue ValueCalc::atg(const KCValue &number)
 {
     errno = 0;
-    Value res = Value(KSpread::atg(converter->toFloat(number)));
+    KCValue res = KCValue(KSpread::atg(converter->toFloat(number)));
     if (errno)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -973,16 +973,16 @@ Value ValueCalc::atg(const Value &number)
     return res;
 }
 
-Value ValueCalc::atan2(const Value &y, const Value &x)
+KCValue ValueCalc::atan2(const KCValue &y, const KCValue &x)
 {
     Number yy = converter->toFloat(y);
     Number xx = converter->toFloat(x);
-    return Value(::atan2(yy, xx));
+    return KCValue(::atan2(yy, xx));
 }
 
-Value ValueCalc::sinh(const Value &number)
+KCValue ValueCalc::sinh(const KCValue &number)
 {
-    Value res = Value(::sinh(converter->toFloat(number)));
+    KCValue res = KCValue(::sinh(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -990,9 +990,9 @@ Value ValueCalc::sinh(const Value &number)
     return res;
 }
 
-Value ValueCalc::cosh(const Value &number)
+KCValue ValueCalc::cosh(const KCValue &number)
 {
-    Value res = Value(::cosh(converter->toFloat(number)));
+    KCValue res = KCValue(::cosh(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -1000,9 +1000,9 @@ Value ValueCalc::cosh(const Value &number)
     return res;
 }
 
-Value ValueCalc::tgh(const Value &number)
+KCValue ValueCalc::tgh(const KCValue &number)
 {
-    Value res = Value(KSpread::tgh(converter->toFloat(number)));
+    KCValue res = KCValue(KSpread::tgh(converter->toFloat(number)));
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -1010,12 +1010,12 @@ Value ValueCalc::tgh(const Value &number)
     return res;
 }
 
-Value ValueCalc::asinh(const Value &number)
+KCValue ValueCalc::asinh(const KCValue &number)
 {
     errno = 0;
-    Value res = Value(::asinh(converter->toFloat(number)));
+    KCValue res = KCValue(::asinh(converter->toFloat(number)));
     if (errno)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -1023,12 +1023,12 @@ Value ValueCalc::asinh(const Value &number)
     return res;
 }
 
-Value ValueCalc::acosh(const Value &number)
+KCValue ValueCalc::acosh(const KCValue &number)
 {
     errno = 0;
-    Value res = Value(::acosh(converter->toFloat(number)));
+    KCValue res = KCValue(::acosh(converter->toFloat(number)));
     if (errno)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -1036,12 +1036,12 @@ Value ValueCalc::acosh(const Value &number)
     return res;
 }
 
-Value ValueCalc::atgh(const Value &number)
+KCValue ValueCalc::atgh(const KCValue &number)
 {
     errno = 0;
-    Value res = Value(KSpread::atgh(converter->toFloat(number)));
+    KCValue res = KCValue(KSpread::atgh(converter->toFloat(number)));
     if (errno)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     if (number.isNumber() || number.isEmpty())
         res.setFormat(number.format());
@@ -1049,12 +1049,12 @@ Value ValueCalc::atgh(const Value &number)
     return res;
 }
 
-Value ValueCalc::phi(Value x)
+KCValue ValueCalc::phi(KCValue x)
 {
-    Value constant(0.39894228040143268);
+    KCValue constant(0.39894228040143268);
 
     // constant * exp(-(x * x) / 2.0);
-    Value x2neg = mul(sqr(x), -1);
+    KCValue x2neg = mul(sqr(x), -1);
     return mul(constant, exp(div(x2neg, 2.0)));
 }
 
@@ -1067,7 +1067,7 @@ static double taylor_helper(double* pPolynom, uint nMax, double x)
     return nVal;
 }
 
-Value ValueCalc::gauss(Value xx)
+KCValue ValueCalc::gauss(KCValue xx)
 // this is a weird function
 {
     double x = converter->toFloat(xx);
@@ -1106,17 +1106,17 @@ Value ValueCalc::gauss(Value xx)
     else if ((xShort >= 3) && (xShort <= 4))
         nVal = taylor_helper(t4, 20, (xAbs - 4.0));
     else {
-        double phiAbs = numToDouble(converter->toFloat(phi(Value(xAbs))));
+        double phiAbs = numToDouble(converter->toFloat(phi(KCValue(xAbs))));
         nVal = 0.5 + phiAbs * taylor_helper(asympt, 4, 1.0 / (xAbs * xAbs)) / xAbs;
     }
 
     if (x < 0.0)
-        return Value(-nVal);
+        return KCValue(-nVal);
     else
-        return Value(nVal);
+        return KCValue(nVal);
 }
 
-Value ValueCalc::gaussinv(Value xx)
+KCValue ValueCalc::gaussinv(KCValue xx)
 // this is a weird function
 {
     double x = numToDouble(converter->toFloat(xx));
@@ -1281,13 +1281,13 @@ Value ValueCalc::gaussinv(Value xx)
         if (q < 0.0) z = -z;
     }
 
-    return Value(z);
+    return KCValue(z);
 }
 
 //
 // GetGamma
 //
-Value ValueCalc::GetGamma(Value value)
+KCValue ValueCalc::GetGamma(KCValue value)
 {
     double val = conv()->asFloat(value).asFloat();
 
@@ -1300,10 +1300,10 @@ Value ValueCalc::GetGamma(Value value)
     if (reflect)
         gamma = M_PI * val / (gamma*::sin(M_PI * val));
 
-    return Value(gamma);
+    return KCValue(gamma);
 }
 
-Value ValueCalc::GetLogGamma(Value _x)
+KCValue ValueCalc::GetLogGamma(KCValue _x)
 {
     double x = numToDouble(converter->toFloat(_x));
 
@@ -1312,18 +1312,18 @@ Value ValueCalc::GetLogGamma(Value _x)
     G = (x + 0.5)*::log(x + 5.5) +::log(G) - (x + 5.5);
     if (bReflect)
         G = ::log(M_PI * x) - G -::log(::sin(M_PI * x));
-    return Value(G);
+    return KCValue(G);
 }
 
-// Value ValueCalc::GetGammaDist (Value _x, Value _alpha,
-//     Value _beta)
+// KCValue ValueCalc::GetGammaDist (KCValue _x, KCValue _alpha,
+//     KCValue _beta)
 // {
 //   double x = numToDouble (converter->toFloat (_x));
 //   double alpha = numToDouble (converter->toFloat (_alpha));
 //   double beta = numToDouble (converter->toFloat (_beta));
 //
 //   if (x == 0.0)
-//     return Value (0.0);
+//     return KCValue (0.0);
 //
 //   x /= beta;
 //   double gamma = alpha;
@@ -1375,14 +1375,14 @@ Value ValueCalc::GetLogGamma(Value _x)
 //     if ( ai > cutoff ) {
 //       double t = sum;
 //       // return pow( dx, dgamma ) * exp( -dx ) * t / g;
-//       return Value (::exp( dgamma * ::log(dx) - dx - a - b ) * t * den);
+//       return KCValue (::exp( dgamma * ::log(dx) - dx - a - b ) * t * den);
 //     }
 //   }
 //
-//   return Value (1.0);             // should not happen ...
+//   return KCValue (1.0);             // should not happen ...
 // }
 
-Value ValueCalc::GetGammaDist(Value _x, Value _alpha, Value _beta)
+KCValue ValueCalc::GetGammaDist(KCValue _x, KCValue _alpha, KCValue _beta)
 {
     // Algorithm adopted from StatLib (http://lib.stat.cmu.edu/apstat/239):
     // Algorithm AS 239: Chi-Squared and Incomplete Gamma Integral
@@ -1412,7 +1412,7 @@ Value ValueCalc::GetGammaDist(Value _x, Value _alpha, Value _beta)
 
     // check constraints
     if (x <= 0.0)
-        return Value(0.0);
+        return KCValue(0.0);
 
     if (x <= 1.0 || x < alpha) {
         //
@@ -1420,7 +1420,7 @@ Value ValueCalc::GetGammaDist(Value _x, Value _alpha, Value _beta)
         //
 
         pearson = 1; // set flag -> use pearson's series expansion.
-        res = alpha * ::log(x) - x - ::log(GetGamma(Value(alpha + 1.0)).asFloat());
+        res = alpha * ::log(x) - x - ::log(GetGamma(KCValue(alpha + 1.0)).asFloat());
 //     kDebug()<<"Pearson  res="<<res;
 
         //                 x           x           x
@@ -1439,7 +1439,7 @@ Value ValueCalc::GetGammaDist(Value _x, Value _alpha, Value _beta)
         pearson = 0; // clear flag -> use a continued fraction expansion
 
 // TODO use GetLogGamma?
-        res = alpha * ::log(x) - x - ::log(GetGamma(Value(alpha)).asFloat());
+        res = alpha * ::log(x) - x - ::log(GetGamma(KCValue(alpha)).asFloat());
 
 //     kDebug()<<"Continued fraction expression res="<<res;
 
@@ -1488,20 +1488,20 @@ Value ValueCalc::GetGammaDist(Value _x, Value _alpha, Value _beta)
     lower_tail = (lower_tail == pearson);
 
     if (lower_tail)
-        return Value(::exp(res));
+        return KCValue(::exp(res));
     else
-        return Value(-1 * ::expm1(res));
+        return KCValue(-1 * ::expm1(res));
 }
 
-Value ValueCalc::GetBeta(Value _x, Value _alpha,
-                         Value _beta)
+KCValue ValueCalc::GetBeta(KCValue _x, KCValue _alpha,
+                         KCValue _beta)
 {
 //   kDebug()<<"GetBeta: x= " << _x << " alpha= " << _alpha << " beta=" << _beta;
-    if (equal(_beta, Value(1.0)))
+    if (equal(_beta, KCValue(1.0)))
         return pow(_x, _alpha);
-    else if (equal(_alpha, Value(1.0)))
+    else if (equal(_alpha, KCValue(1.0)))
         // 1.0 - pow (1.0-_x, _beta)
-        return sub(Value(1.0), pow(sub(Value(1.0), _x), _beta));
+        return sub(KCValue(1.0), pow(sub(KCValue(1.0), _x), _beta));
 
     double x = numToDouble(converter->toFloat(_x));
     double alpha = numToDouble(converter->toFloat(_alpha));
@@ -1558,15 +1558,15 @@ Value ValueCalc::GetBeta(Value _x, Value _alpha,
         if (fB < fEps)
             b1 = 1.0E30;
         else
-            b1 = ::exp(numToDouble(GetLogGamma(Value(fA)).asFloat() + GetLogGamma(Value(fB)).asFloat() -
-                                   GetLogGamma(Value(fA + fB)).asFloat()));
+            b1 = ::exp(numToDouble(GetLogGamma(KCValue(fA)).asFloat() + GetLogGamma(KCValue(fB)).asFloat() -
+                                   GetLogGamma(KCValue(fA + fB)).asFloat()));
 
         cf *= ::pow(x, fA)*::pow(1.0 - x, fB) / (fA * b1);
     }
     if (bReflect)
-        return Value(1.0 - cf);
+        return KCValue(1.0 - cf);
     else
-        return Value(cf);
+        return KCValue(cf);
 }
 
 // ------------------------------------------------------
@@ -1751,36 +1751,36 @@ static double ccmath_nbes(double v, double x)
 /* ---------- end of CCMATH code ---------- */
 
 template <typename func_ptr>
-Value CalcBessel(
+KCValue CalcBessel(
     func_ptr       *func,
     ValueConverter *converter,
-    Value v, Value x)
+    KCValue v, KCValue x)
 {
     double vv = numToDouble(converter->toFloat(v));
     double xx = numToDouble(converter->toFloat(x));
     // vv must be a non-negative integer and <29 for implementation reasons
     // xx must be non-negative
     if (xx >= 0 && vv >= 0 && vv < 29 && vv == floor(vv))
-        return Value(func(vv, xx));
-    return Value::errorVALUE();
+        return KCValue(func(vv, xx));
+    return KCValue::errorVALUE();
 }
 
-Value ValueCalc::besseli(Value v, Value x)
+KCValue ValueCalc::besseli(KCValue v, KCValue x)
 {
     return CalcBessel(ccmath_ibes, converter, v, x);
 }
 
-Value ValueCalc::besselj(Value v, Value x)
+KCValue ValueCalc::besselj(KCValue v, KCValue x)
 {
     return CalcBessel(ccmath_jbes, converter, v, x);
 }
 
-Value ValueCalc::besselk(Value v, Value x)
+KCValue ValueCalc::besselk(KCValue v, KCValue x)
 {
     return CalcBessel(ccmath_kbes, converter, v, x);
 }
 
-Value ValueCalc::besseln(Value v, Value x)
+KCValue ValueCalc::besseln(KCValue v, KCValue x)
 {
     return CalcBessel(ccmath_nbes, converter, v, x);
 }
@@ -1788,20 +1788,20 @@ Value ValueCalc::besseln(Value v, Value x)
 
 // ------------------------------------------------------
 
-Value ValueCalc::erf(Value x)
+KCValue ValueCalc::erf(KCValue x)
 {
-    return Value(::erf(numToDouble(converter->toFloat(x))));
+    return KCValue(::erf(numToDouble(converter->toFloat(x))));
 }
 
-Value ValueCalc::erfc(Value x)
+KCValue ValueCalc::erfc(KCValue x)
 {
-    return Value(::erfc(numToDouble(converter->toFloat(x))));
+    return KCValue(::erfc(numToDouble(converter->toFloat(x))));
 }
 
 // ------------------------------------------------------
 
-void ValueCalc::arrayWalk(const Value &range,
-                          Value &res, arrayWalkFunc func, Value param)
+void ValueCalc::arrayWalk(const KCValue &range,
+                          KCValue &res, arrayWalkFunc func, KCValue param)
 {
     if (res.isError()) return;
     if (!range.isArray()) {
@@ -1811,58 +1811,58 @@ void ValueCalc::arrayWalk(const Value &range,
 
     // iterate over the non-empty entries
     for (uint i = 0; i < range.count(); ++i) {
-        Value v = range.element(i);
+        KCValue v = range.element(i);
         if (v.isArray())
             arrayWalk(v, res, func, param);
         else {
             func(this, res, v, param);
-            if (res.format() == Value::fmt_None)
+            if (res.format() == KCValue::fmt_None)
                 res.setFormat(v.format());
         }
     }
 }
 
-void ValueCalc::arrayWalk(QVector<Value> &range,
-                          Value &res, arrayWalkFunc func, Value param)
+void ValueCalc::arrayWalk(QVector<KCValue> &range,
+                          KCValue &res, arrayWalkFunc func, KCValue param)
 {
     if (res.isError()) return;
     for (int i = 0; i < range.count(); ++i)
         arrayWalk(range[i], res, func, param);
 }
 
-Value ValueCalc::arrayMap(const Value &array, arrayMapFunc func, const Value &param)
+KCValue ValueCalc::arrayMap(const KCValue &array, arrayMapFunc func, const KCValue &param)
 {
-    Value res( Value::Array );
+    KCValue res( KCValue::Array );
     for (unsigned row = 0; row < array.rows(); ++row) {
         for (unsigned col = 0; col < array.columns(); ++col) {
-            Value element = array.element( col, row );
-            Value _res = (this->*func)( element, param );
+            KCValue element = array.element( col, row );
+            KCValue _res = (this->*func)( element, param );
             res.setElement( col, row, _res );
         }
     }
     return res;
 }
 
-Value ValueCalc::twoArrayMap(const Value &array1, arrayMapFunc func, const Value &array2)
+KCValue ValueCalc::twoArrayMap(const KCValue &array1, arrayMapFunc func, const KCValue &array2)
 {
-    Value res( Value::Array );
+    KCValue res( KCValue::Array );
     // Map each element in one array with the respective element in the other array
     unsigned rows = qMax(array1.rows(), array2.rows());
     unsigned columns = qMax(array1.columns(), array2.columns());
     for (unsigned row = 0; row < rows; ++row) {
         for (unsigned col = 0; col < columns; ++col) {
-            // Value::element() will return an empty value if element(col, row) does not exist.
-            Value element1 = array1.element( col, row );
-            Value element2 = array2.element( col, row );
-            Value _res = (this->*func)( element1, element2 );
+            // KCValue::element() will return an empty value if element(col, row) does not exist.
+            KCValue element1 = array1.element( col, row );
+            KCValue element2 = array2.element( col, row );
+            KCValue _res = (this->*func)( element1, element2 );
             res.setElement( col, row, _res );
         }
     }
     return res;
 }
 
-void ValueCalc::twoArrayWalk(const Value &a1, const Value &a2,
-                             Value &res, arrayWalkFunc func)
+void ValueCalc::twoArrayWalk(const KCValue &a1, const KCValue &a2,
+                             KCValue &res, arrayWalkFunc func)
 {
     if (res.isError()) return;
     if (!a1.isArray()) {
@@ -1875,29 +1875,29 @@ void ValueCalc::twoArrayWalk(const Value &a1, const Value &a2,
     int rows2 = a2.rows();
     int cols2 = a2.columns();
     if ((rows != rows2) || (cols != cols2)) {
-        res = Value::errorVALUE();
+        res = KCValue::errorVALUE();
         return;
     }
     for (int r = 0; r < rows; r++)
         for (int c = 0; c < cols; c++) {
-            Value v1 = a1.element(c, r);
-            Value v2 = a2.element(c, r);
+            KCValue v1 = a1.element(c, r);
+            KCValue v2 = a2.element(c, r);
             if (v1.isArray() && v2.isArray())
                 twoArrayWalk(v1, v2, res, func);
             else {
                 func(this, res, v1, v2);
-                if (res.format() == Value::fmt_None)
+                if (res.format() == KCValue::fmt_None)
                     res.setFormat(format(v1, v2));
             }
         }
 }
 
-void ValueCalc::twoArrayWalk(QVector<Value> &a1,
-                             QVector<Value> &a2, Value &res, arrayWalkFunc func)
+void ValueCalc::twoArrayWalk(QVector<KCValue> &a1,
+                             QVector<KCValue> &a2, KCValue &res, arrayWalkFunc func)
 {
     if (res.isError()) return;
     if (a1.count() != a2.count()) {
-        res = Value::errorVALUE();
+        res = KCValue::errorVALUE();
         return;
     }
     for (int i = 0; i < a1.count(); ++i)
@@ -1918,29 +1918,29 @@ void ValueCalc::registerAwFunc(const QString &name, arrayWalkFunc func)
 
 // ------------------------------------------------------
 
-Value ValueCalc::sum(const Value &range, bool full)
+KCValue ValueCalc::sum(const KCValue &range, bool full)
 {
-    Value res(0);
-    arrayWalk(range, res, awFunc(full ? "suma" : "sum"), Value(0));
+    KCValue res(0);
+    arrayWalk(range, res, awFunc(full ? "suma" : "sum"), KCValue(0));
     return res;
 }
 
-Value ValueCalc::sum(QVector<Value> range, bool full)
+KCValue ValueCalc::sum(QVector<KCValue> range, bool full)
 {
-    Value res(0);
-    arrayWalk(range, res, awFunc(full ? "suma" : "sum"), Value(0));
+    KCValue res(0);
+    arrayWalk(range, res, awFunc(full ? "suma" : "sum"), KCValue(0));
     return res;
 }
 
 // sum of squares
-Value ValueCalc::sumsq(const Value &range, bool full)
+KCValue ValueCalc::sumsq(const KCValue &range, bool full)
 {
-    Value res(0);
-    arrayWalk(range, res, awFunc(full ? "sumsqa" : "sumsq"), Value(0));
+    KCValue res(0);
+    arrayWalk(range, res, awFunc(full ? "sumsqa" : "sumsq"), KCValue(0));
     return res;
 }
 
-Value ValueCalc::sumIf(const Value &range, const Condition &cond)
+KCValue ValueCalc::sumIf(const KCValue &range, const Condition &cond)
 {
     if(range.isError())
         return range;
@@ -1950,18 +1950,18 @@ Value ValueCalc::sumIf(const Value &range, const Condition &cond)
             //kDebug()<<"return non array value "<<range;
             return range;
         }
-        return Value(0.0);
+        return KCValue(0.0);
     }
 
     //if we are here, we have an array
-    Value res(0);
-    Value tmp;
+    KCValue res(0);
+    KCValue tmp;
 
     unsigned int rows = range.rows();
     unsigned int cols = range.columns();
     for (unsigned int r = 0; r < rows; r++)
         for (unsigned int c = 0; c < cols; c++) {
-            Value v = range.element(c, r);
+            KCValue v = range.element(c, r);
 
             if (v.isArray())
                 tmp = sumIf(v, cond);
@@ -1978,7 +1978,7 @@ Value ValueCalc::sumIf(const Value &range, const Condition &cond)
     return res;
 }
 
-Value ValueCalc::sumIf(const KCCell &sumRangeStart, const Value &range, const Condition &cond)
+KCValue ValueCalc::sumIf(const KCCell &sumRangeStart, const KCValue &range, const Condition &cond)
 {
     if(range.isError())
         return range;
@@ -1988,24 +1988,24 @@ Value ValueCalc::sumIf(const KCCell &sumRangeStart, const Value &range, const Co
             //kDebug()<<"return non array value "<<range;
             return sumRangeStart.value();
         }
-        return Value(0.0);
+        return KCValue(0.0);
     }
 
     //if we are here, we have an array
-    Value res(0);
-    Value tmp;
+    KCValue res(0);
+    KCValue tmp;
 
     unsigned int rows = range.rows();
     unsigned int cols = range.columns();
     for (unsigned int r = 0; r < rows; r++)
         for (unsigned int c = 0; c < cols; c++) {
-            Value v = range.element(c, r);
+            KCValue v = range.element(c, r);
 
             if (v.isArray())
-                return Value::errorVALUE();
+                return KCValue::errorVALUE();
 
             if (matches(cond, v)) {
-                Value val = KCCell(sumRangeStart.sheet(), sumRangeStart.column() + c, sumRangeStart.row() + r).value();
+                KCValue val = KCCell(sumRangeStart.sheet(), sumRangeStart.column() + c, sumRangeStart.row() + r).value();
                 if (val.isNumber()) {// only add numbers, no conversion from string allowed
                     //kDebug()<<"add "<<val;
                     res = add(res, val);
@@ -2016,21 +2016,21 @@ Value ValueCalc::sumIf(const KCCell &sumRangeStart, const Value &range, const Co
     return res;
 }
 
-int ValueCalc::count(const Value &range, bool full)
+int ValueCalc::count(const KCValue &range, bool full)
 {
-    Value res(0);
-    arrayWalk(range, res, awFunc(full ? "counta" : "count"), Value(0));
+    KCValue res(0);
+    arrayWalk(range, res, awFunc(full ? "counta" : "count"), KCValue(0));
     return converter->asInteger(res).asInteger();
 }
 
-int ValueCalc::count(QVector<Value> range, bool full)
+int ValueCalc::count(QVector<KCValue> range, bool full)
 {
-    Value res(0);
-    arrayWalk(range, res, awFunc(full ? "counta" : "count"), Value(0));
+    KCValue res(0);
+    arrayWalk(range, res, awFunc(full ? "counta" : "count"), KCValue(0));
     return converter->asInteger(res).asInteger();
 }
 
-int ValueCalc::countIf(const Value &range, const Condition &cond)
+int ValueCalc::countIf(const KCValue &range, const Condition &cond)
 {
     if (!range.isArray()) {
         if (matches(cond, range))
@@ -2042,7 +2042,7 @@ int ValueCalc::countIf(const Value &range, const Condition &cond)
 
     // iterate over the non-empty entries
     for (uint i = 0; i < range.count(); ++i) {
-        Value v = range.element(i);
+        KCValue v = range.element(i);
 
         if (v.isArray())
             res += countIf(v, cond);
@@ -2053,149 +2053,149 @@ int ValueCalc::countIf(const Value &range, const Condition &cond)
     return res;
 }
 
-Value ValueCalc::avg(const Value &range, bool full)
+KCValue ValueCalc::avg(const KCValue &range, bool full)
 {
     int cnt = count(range, full);
     if (cnt)
         return div(sum(range, full), cnt);
-    return Value(0.0);
+    return KCValue(0.0);
 }
 
-Value ValueCalc::avg(QVector<Value> range, bool full)
+KCValue ValueCalc::avg(QVector<KCValue> range, bool full)
 {
     int cnt = count(range, full);
     if (cnt)
         return div(sum(range, full), cnt);
-    return Value(0.0);
+    return KCValue(0.0);
 }
 
-Value ValueCalc::max(const Value &range, bool full)
+KCValue ValueCalc::max(const KCValue &range, bool full)
 {
-    Value res;
-    arrayWalk(range, res, awFunc(full ? "maxa" : "max"), Value(0));
+    KCValue res;
+    arrayWalk(range, res, awFunc(full ? "maxa" : "max"), KCValue(0));
     return res;
 }
 
-Value ValueCalc::max(QVector<Value> range, bool full)
+KCValue ValueCalc::max(QVector<KCValue> range, bool full)
 {
-    Value res;
-    arrayWalk(range, res, awFunc(full ? "maxa" : "max"), Value(0));
+    KCValue res;
+    arrayWalk(range, res, awFunc(full ? "maxa" : "max"), KCValue(0));
     return res;
 }
 
-Value ValueCalc::min(const Value &range, bool full)
+KCValue ValueCalc::min(const KCValue &range, bool full)
 {
-    Value res;
-    arrayWalk(range, res, awFunc(full ? "mina" : "min"), Value(0));
+    KCValue res;
+    arrayWalk(range, res, awFunc(full ? "mina" : "min"), KCValue(0));
     return res;
 }
 
-Value ValueCalc::min(QVector<Value> range, bool full)
+KCValue ValueCalc::min(QVector<KCValue> range, bool full)
 {
-    Value res;
-    arrayWalk(range, res, awFunc(full ? "mina" : "min"), Value(0));
+    KCValue res;
+    arrayWalk(range, res, awFunc(full ? "mina" : "min"), KCValue(0));
     return res;
 }
 
-Value ValueCalc::product(const Value &range, Value init,
+KCValue ValueCalc::product(const KCValue &range, KCValue init,
                          bool full)
 {
-    Value res = init;
+    KCValue res = init;
     if (isZero(init)) { // special handling of a zero, due to excel-compat
         if (count(range, full) == 0)
             return init;
-        res = Value(1.0);
+        res = KCValue(1.0);
     }
-    arrayWalk(range, res, awFunc(full ? "proda" : "prod"), Value(0));
+    arrayWalk(range, res, awFunc(full ? "proda" : "prod"), KCValue(0));
     return res;
 }
 
-Value ValueCalc::product(QVector<Value> range,
-                         Value init, bool full)
+KCValue ValueCalc::product(QVector<KCValue> range,
+                         KCValue init, bool full)
 {
-    Value res = init;
+    KCValue res = init;
     if (isZero(init)) { // special handling of a zero, due to excel-compat
         if (count(range, full) == 0)
             return init;
-        res = Value(1.0);
+        res = KCValue(1.0);
     }
-    arrayWalk(range, res, awFunc(full ? "proda" : "prod"), Value(0));
+    arrayWalk(range, res, awFunc(full ? "proda" : "prod"), KCValue(0));
     return res;
 }
 
-Value ValueCalc::stddev(const Value &range, bool full)
+KCValue ValueCalc::stddev(const KCValue &range, bool full)
 {
     return stddev(range, avg(range, full), full);
 }
 
-Value ValueCalc::stddev(const Value &range, Value avg,
+KCValue ValueCalc::stddev(const KCValue &range, KCValue avg,
                         bool full)
 {
-    Value res;
+    KCValue res;
     int cnt = count(range, full);
     arrayWalk(range, res, awFunc(full ? "devsqa" : "devsq"), avg);
     return sqrt(div(res, cnt - 1));
 }
 
-Value ValueCalc::stddev(QVector<Value> range, bool full)
+KCValue ValueCalc::stddev(QVector<KCValue> range, bool full)
 {
     return stddev(range, avg(range, full), full);
 }
 
-Value ValueCalc::stddev(QVector<Value> range,
-                        Value avg, bool full)
+KCValue ValueCalc::stddev(QVector<KCValue> range,
+                        KCValue avg, bool full)
 {
-    Value res;
+    KCValue res;
     int cnt = count(range, full);
     arrayWalk(range, res, awFunc(full ? "devsqa" : "devsq"), avg);
     return sqrt(div(res, cnt - 1));
 }
 
-Value ValueCalc::stddevP(const Value &range, bool full)
+KCValue ValueCalc::stddevP(const KCValue &range, bool full)
 {
     return stddevP(range, avg(range, full), full);
 }
 
-Value ValueCalc::stddevP(const Value &range, Value avg,
+KCValue ValueCalc::stddevP(const KCValue &range, KCValue avg,
                          bool full)
 {
-    Value res;
+    KCValue res;
     int cnt = count(range, full);
     arrayWalk(range, res, awFunc(full ? "devsqa" : "devsq"), avg);
     return sqrt(div(res, cnt));
 }
 
-Value ValueCalc::stddevP(QVector<Value> range, bool full)
+KCValue ValueCalc::stddevP(QVector<KCValue> range, bool full)
 {
     return stddevP(range, avg(range, full), full);
 }
 
-Value ValueCalc::stddevP(QVector<Value> range,
-                         Value avg, bool full)
+KCValue ValueCalc::stddevP(QVector<KCValue> range,
+                         KCValue avg, bool full)
 {
-    Value res;
+    KCValue res;
     int cnt = count(range, full);
     arrayWalk(range, res, awFunc(full ? "devsqa" : "devsq"), avg);
     return sqrt(div(res, cnt));
 }
 
-bool isDate(Value::KCFormat fmt)
+bool isDate(KCValue::KCFormat fmt)
 {
-    if ((fmt == Value::fmt_Date) || (fmt == Value::fmt_DateTime))
+    if ((fmt == KCValue::fmt_Date) || (fmt == KCValue::fmt_DateTime))
         return true;
     return false;
 }
 
-Value::KCFormat ValueCalc::format(Value a, Value b)
+KCValue::KCFormat ValueCalc::format(KCValue a, KCValue b)
 {
-    Value::KCFormat af = a.format();
-    Value::KCFormat bf = b.format();
+    KCValue::KCFormat af = a.format();
+    KCValue::KCFormat bf = b.format();
 
     // operation on two dates should produce a number
     if (isDate(af) && isDate(bf))
-        return Value::fmt_Number;
+        return KCValue::fmt_Number;
 
-    if ((af == Value::fmt_None) || (af == Value::fmt_Boolean))
+    if ((af == KCValue::fmt_None) || (af == KCValue::fmt_Boolean))
         return bf;
     return af;
 }
@@ -2203,7 +2203,7 @@ Value::KCFormat ValueCalc::format(Value a, Value b)
 
 // ------------------------------------------------------
 
-void ValueCalc::getCond(Condition &cond, Value val)
+void ValueCalc::getCond(Condition &cond, KCValue val)
 {
     // not a string - we simply take it as a numeric value
     // that also handles floats, logical values, date/time and such
@@ -2254,7 +2254,7 @@ void ValueCalc::getCond(Condition &cond, Value val)
     //TODO: date values
 }
 
-bool ValueCalc::matches(const Condition &cond, Value val)
+bool ValueCalc::matches(const Condition &cond, KCValue val)
 {
     if (val.isEmpty())
         return false;
@@ -2262,7 +2262,7 @@ bool ValueCalc::matches(const Condition &cond, Value val)
         Number d = converter->toFloat(val);
         switch (cond.comp) {
         case IsEqual:
-            if (approxEqual(Value(d), Value(cond.value))) return true;
+            if (approxEqual(KCValue(d), KCValue(cond.value))) return true;
             break;
 
         case IsLess:

@@ -75,8 +75,8 @@ private:
                       const AutoFillSequence& _seqList,
                       bool down = true);
     // dummy
-    virtual Value newValue(Element*, int, int, bool*, KCFormat::Type*) {
-        return Value();
+    virtual KCValue newValue(Element*, int, int, bool*, KCFormat::Type*) {
+        return KCValue();
     }
 
 private:

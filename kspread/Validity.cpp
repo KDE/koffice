@@ -33,7 +33,7 @@
 #include "Map.h"
 #include "OdfLoadingContext.h"
 #include "KCSheet.h"
-#include "Value.h"
+#include "KCValue.h"
 #include "ValueConverter.h"
 #include "ValueParser.h"
 
@@ -44,8 +44,8 @@ public:
     QString title;
     QString titleInfo;
     QString messageInfo;
-    Value minValue;
-    Value maxValue;
+    KCValue minValue;
+    KCValue maxValue;
     Conditional::Type cond;
     Action action;
     Restriction restriction;
@@ -239,12 +239,12 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
         kDebug(36003) << " element.attribute( table:condition )" << valExpression;
         //Condition ::= ExtendedTrueCondition | TrueFunction 'and' TrueCondition
         //TrueFunction ::= cell-content-is-whole-number() | cell-content-is-decimal-number() | cell-content-is-date() | cell-content-is-time()
-        //ExtendedTrueCondition ::= ExtendedGetFunction | cell-content-text-length() Operator Value
-        //TrueCondition ::= GetFunction | cell-content() Operator Value
-        //GetFunction ::= cell-content-is-between(Value, Value) | cell-content-is-not-between(Value, Value)
-        //ExtendedGetFunction ::= cell-content-text-length-is-between(Value, Value) | cell-content-text-length-is-not-between(Value, Value)
+        //ExtendedTrueCondition ::= ExtendedGetFunction | cell-content-text-length() Operator KCValue
+        //TrueCondition ::= GetFunction | cell-content() Operator KCValue
+        //GetFunction ::= cell-content-is-between(KCValue, KCValue) | cell-content-is-not-between(KCValue, KCValue)
+        //ExtendedGetFunction ::= cell-content-text-length-is-between(KCValue, KCValue) | cell-content-text-length-is-not-between(KCValue, KCValue)
         //Operator ::= '<' | '>' | '<=' | '>=' | '=' | '!='
-        //Value ::= NumberValue | String | Formula
+        //KCValue ::= NumberValue | String | Formula
         //A Formula is a formula without an equals (=) sign at the beginning. See section 8.1.3 for more information.
         //A String comprises one or more characters surrounded by quotation marks.
         //A NumberValue is a whole or decimal number. It must not contain comma separators for numbers of 1000 or greater.
@@ -260,7 +260,7 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
         } else if (valExpression.contains("cell-content-is-text()")) {
             setRestriction(Validity::Text);
         }
-        //cell-content-text-length-is-between(Value, Value) | cell-content-text-length-is-not-between(Value, Value) | cell-content-is-in-list( StringList )
+        //cell-content-text-length-is-between(KCValue, KCValue) | cell-content-text-length-is-not-between(KCValue, KCValue) | cell-content-is-in-list( StringList )
         else if (valExpression.contains("cell-content-text-length-is-between")) {
             setRestriction(Validity::TextLength);
             setCondition(Conditional::Between);
@@ -307,7 +307,7 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
                 valExpression = valExpression.remove("cell-content()");
                 loadOdfValidationCondition(valExpression, cell->sheet()->map()->parser());
             }
-            //GetFunction ::= cell-content-is-between(Value, Value) | cell-content-is-not-between(Value, Value)
+            //GetFunction ::= cell-content-is-between(KCValue, KCValue) | cell-content-is-not-between(KCValue, KCValue)
             //for the moment we support just int/double value, not text/date/time :(
             if (valExpression.contains("cell-content-is-between(")) {
                 valExpression = valExpression.remove("cell-content-is-between(");
@@ -389,9 +389,9 @@ void Validity::loadOdfValidationValue(const QStringList &listVal, const ValuePar
         setMinimumValue(parser->tryParseTime(listVal[0]));
         setMaximumValue(parser->tryParseTime(listVal[1]));
     } else {
-        setMinimumValue(Value(listVal[0].toDouble(&ok)));
+        setMinimumValue(KCValue(listVal[0].toDouble(&ok)));
         if (!ok) {
-            setMinimumValue(Value(listVal[0].toInt(&ok)));
+            setMinimumValue(KCValue(listVal[0].toInt(&ok)));
             if (!ok)
                 kDebug(36003) << " Try to parse this value :" << listVal[0];
 
@@ -401,9 +401,9 @@ void Validity::loadOdfValidationValue(const QStringList &listVal, const ValuePar
 #endif
         }
         ok = false;
-        setMaximumValue(Value(listVal[1].toDouble(&ok)));
+        setMaximumValue(KCValue(listVal[1].toDouble(&ok)));
         if (!ok) {
-            setMaximumValue(Value(listVal[1].toInt(&ok)));
+            setMaximumValue(KCValue(listVal[1].toInt(&ok)));
             if (!ok)
                 kDebug(36003) << " Try to parse this value :" << listVal[1];
 
@@ -446,9 +446,9 @@ void Validity::loadOdfValidationCondition(QString &valExpression, const ValuePar
         setMinimumValue(parser->tryParseTime(value));
     } else {
         bool ok = false;
-        setMinimumValue(Value(value.toDouble(&ok)));
+        setMinimumValue(KCValue(value.toDouble(&ok)));
         if (!ok) {
-            setMinimumValue(Value(value.toInt(&ok)));
+            setMinimumValue(KCValue(value.toInt(&ok)));
             if (!ok)
                 kDebug(36003) << " Try to parse this value :" << value;
 
@@ -490,7 +490,7 @@ const QString& Validity::messageInfo() const
     return d->messageInfo;
 }
 
-const Value &Validity::maximumValue() const
+const KCValue &Validity::maximumValue() const
 {
     return d->maxValue;
 }
@@ -500,7 +500,7 @@ const QString& Validity::message() const
     return d->message;
 }
 
-const Value &Validity::minimumValue() const
+const KCValue &Validity::minimumValue() const
 {
     return d->minValue;
 }
@@ -550,7 +550,7 @@ void Validity::setDisplayValidationInformation(bool display)
     d->displayValidationInformation = display;
 }
 
-void Validity::setMaximumValue(const Value &value)
+void Validity::setMaximumValue(const KCValue &value)
 {
     d->maxValue = value;
 }
@@ -565,7 +565,7 @@ void Validity::setMessageInfo(const QString& info)
     d->messageInfo = info;
 }
 
-void Validity::setMinimumValue(const Value &value)
+void Validity::setMinimumValue(const KCValue &value)
 {
     d->minValue = value;
 }

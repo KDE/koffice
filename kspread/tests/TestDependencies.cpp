@@ -28,7 +28,7 @@
 #include "Map.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
-#include "Value.h"
+#include "KCValue.h"
 
 void TestDependencies::initTestCase()
 {
@@ -46,7 +46,7 @@ void TestDependencies::testCircleRemoval()
 
     QApplication::processEvents(); // handle Damages
 
-    QCOMPARE(m_storage->value(1, 1), Value::errorCIRCLE());
+    QCOMPARE(m_storage->value(1, 1), KCValue::errorCIRCLE());
     DependencyManager* manager = m_map->dependencyManager();
     QVERIFY(manager->d->consumers.count() == 1);
     QVERIFY(manager->d->providers.count() == 1);
@@ -59,7 +59,7 @@ void TestDependencies::testCircleRemoval()
 
     QApplication::processEvents(); // handle Damages
 
-    QCOMPARE(m_storage->value(1, 1), Value());
+    QCOMPARE(m_storage->value(1, 1), KCValue());
     QVERIFY(manager->d->consumers.value(m_sheet)->contains(QRect(1, 1, 1, 1)).count() == 0);
     QVERIFY(manager->d->providers.count() == 0);
 }
@@ -76,9 +76,9 @@ void TestDependencies::testCircles()
 
     QApplication::processEvents(); // handle Damages
 
-    QCOMPARE(m_storage->value(1, 1), Value::errorCIRCLE());
-    QCOMPARE(m_storage->value(1, 2), Value::errorCIRCLE());
-    QCOMPARE(m_storage->value(1, 3), Value::errorCIRCLE());
+    QCOMPARE(m_storage->value(1, 1), KCValue::errorCIRCLE());
+    QCOMPARE(m_storage->value(1, 2), KCValue::errorCIRCLE());
+    QCOMPARE(m_storage->value(1, 3), KCValue::errorCIRCLE());
 }
 
 void TestDependencies::cleanupTestCase()

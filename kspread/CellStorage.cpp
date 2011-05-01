@@ -205,8 +205,8 @@ void CellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->validities);
     }
     if (!undoData->values.isEmpty()) {
-        PointStorageUndoCommand<Value> *const command
-        = new PointStorageUndoCommand<Value>(sheet->model(), ValueRole, parent);
+        PointStorageUndoCommand<KCValue> *const command
+        = new PointStorageUndoCommand<KCValue>(sheet->model(), ValueRole, parent);
         command->add(undoData->values);
     }
 }
@@ -245,7 +245,7 @@ void CellStorage::take(int col, int row)
     Formula oldFormula;
     QString oldLink;
     QString oldUserInput;
-    Value oldValue;
+    KCValue oldValue;
     QSharedPointer<QTextDocument> oldRichText;
 
     oldFormula = d->formulaStorage->take(col, row);
@@ -256,14 +256,14 @@ void CellStorage::take(int col, int row)
 
     if (!d->sheet->map()->isLoading()) {
         // Trigger a recalculation of the consuming cells.
-        CellDamage::Changes changes = CellDamage:: Binding | CellDamage::Formula | CellDamage::Value;
+        CellDamage::Changes changes = CellDamage:: Binding | CellDamage::Formula | CellDamage::KCValue;
         d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, col, row), changes));
 
         d->rowRepeatStorage->setRowRepeat(row, 1);
     }
     // also trigger a relayout of the first non-empty cell to the left of this cell
     int prevCol;
-    Value v = d->valueStorage->prevInRow(col, row, &prevCol);
+    KCValue v = d->valueStorage->prevInRow(col, row, &prevCol);
     if (!v.isEmpty())
         d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, prevCol, row), CellDamage::Appearance));
 
@@ -385,7 +385,7 @@ void CellStorage::setFormula(int column, int row, const Formula& formula)
     if (formula != old) {
         if (!d->sheet->map()->isLoading()) {
             // trigger an update of the dependencies and a recalculation
-            d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, column, row), CellDamage::Formula | CellDamage::Value));
+            d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, column, row), CellDamage::Formula | CellDamage::KCValue));
             d->rowRepeatStorage->setRowRepeat(row, 1);
         }
         // recording undo?
@@ -541,23 +541,23 @@ void CellStorage::setValidity(const KCRegion& region, Validity validity)
     }
 }
 
-Value CellStorage::value(int column, int row) const
+KCValue CellStorage::value(int column, int row) const
 {
     return d->valueStorage->lookup(column, row);
 }
 
-Value CellStorage::valueRegion(const KCRegion& region) const
+KCValue CellStorage::valueRegion(const KCRegion& region) const
 {
     // create a subStorage with adjusted origin
-    return Value(d->valueStorage->subStorage(region, false), region.boundingRect().size());
+    return KCValue(d->valueStorage->subStorage(region, false), region.boundingRect().size());
 }
 
-void CellStorage::setValue(int column, int row, const Value& value)
+void CellStorage::setValue(int column, int row, const KCValue& value)
 {
     // release any lock
     unlockCells(column, row);
 
-    Value old;
+    KCValue old;
     if (value.isEmpty())
         old = d->valueStorage->take(column, row);
     else
@@ -571,11 +571,11 @@ void CellStorage::setValue(int column, int row, const Value& value)
             // Trigger a recalculation of the consuming cells, only if we are not
             // already in a recalculation process.
             if (!d->sheet->map()->recalcManager()->isActive())
-                changes |= CellDamage::Value;
+                changes |= CellDamage::KCValue;
             d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, column, row), changes));
             // Also trigger a relayouting of the first non-empty cell to the left of this one
             int prevCol;
-            Value v = d->valueStorage->prevInRow(column, row, &prevCol);
+            KCValue v = d->valueStorage->prevInRow(column, row, &prevCol);
             if (!v.isEmpty())
                 d->sheet->map()->addDamage(new CellDamage(KCCell(d->sheet, prevCol, row), CellDamage::Appearance));
             d->rowRepeatStorage->setRowRepeat(row, 1);
@@ -748,7 +748,7 @@ void CellStorage::unlockCells(int column, int row)
     for (int r = rect.top(); r <= rect.bottom(); ++r) {
         for (int c = rect.left(); c <= rect.right(); ++c) {
             if (r != rect.top() || c != rect.left())
-                setValue(c, r, Value());
+                setValue(c, r, KCValue());
         }
     }
     // recording undo?
@@ -797,7 +797,7 @@ void CellStorage::insertColumns(int position, int number)
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertColumns(position, number);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->insertColumns(position, number);
     QList< QPair<QRectF, Validity> > validities = d->validityStorage->insertColumns(position, number);
-    QVector< QPair<QPoint, Value> > values = d->valueStorage->insertColumns(position, number);
+    QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertColumns(position, number);
     // recording undo?
     if (d->undoData) {
         d->undoData->bindings   << bindings;
@@ -824,7 +824,7 @@ void CellStorage::insertColumns(int position, int number)
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
-    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::Value));
+    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::KCValue));
 }
 
 void CellStorage::removeColumns(int position, int number)
@@ -853,7 +853,7 @@ void CellStorage::removeColumns(int position, int number)
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeColumns(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeColumns(position, number);
     QList< QPair<QRectF, Validity> > validities = d->validityStorage->removeColumns(position, number);
-    QVector< QPair<QPoint, Value> > values = d->valueStorage->removeColumns(position, number);
+    QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeColumns(position, number);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->removeColumns(position, number);
     // recording undo?
     if (d->undoData) {
@@ -881,7 +881,7 @@ void CellStorage::removeColumns(int position, int number)
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
-    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::Value));
+    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::KCValue));
 }
 
 void CellStorage::insertRows(int position, int number)
@@ -909,7 +909,7 @@ void CellStorage::insertRows(int position, int number)
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertRows(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertRows(position, number);
     QList< QPair<QRectF, Validity> > validities = d->validityStorage->insertRows(position, number);
-    QVector< QPair<QPoint, Value> > values = d->valueStorage->insertRows(position, number);
+    QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertRows(position, number);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->insertRows(position, number);
     // recording undo?
     if (d->undoData) {
@@ -937,7 +937,7 @@ void CellStorage::insertRows(int position, int number)
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
-    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::Value));
+    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::KCValue));
 
     d->rowRepeatStorage->insertRows(position, number);
 }
@@ -968,7 +968,7 @@ void CellStorage::removeRows(int position, int number)
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeRows(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeRows(position, number);
     QList< QPair<QRectF, Validity> > validities = d->validityStorage->removeRows(position, number);
-    QVector< QPair<QPoint, Value> > values = d->valueStorage->removeRows(position, number);
+    QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeRows(position, number);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->removeRows(position, number);
     // recording undo?
     if (d->undoData) {
@@ -996,7 +996,7 @@ void CellStorage::removeRows(int position, int number)
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
-    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::Value));
+    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::KCValue));
 
     d->rowRepeatStorage->removeRows(position, number);
 }
@@ -1027,7 +1027,7 @@ void CellStorage::removeShiftLeft(const QRect& rect)
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeShiftLeft(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, Validity> > validities = d->validityStorage->removeShiftLeft(rect);
-    QVector< QPair<QPoint, Value> > values = d->valueStorage->removeShiftLeft(rect);
+    QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeShiftLeft(rect);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->removeShiftLeft(rect);
     // recording undo?
     if (d->undoData) {
@@ -1055,7 +1055,7 @@ void CellStorage::removeShiftLeft(const QRect& rect)
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
-    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::Value));
+    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::KCValue));
 
     d->rowRepeatStorage->removeShiftLeft(rect);
 }
@@ -1085,7 +1085,7 @@ void CellStorage::insertShiftRight(const QRect& rect)
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertShiftRight(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertShiftRight(rect);
     QList< QPair<QRectF, Validity> > validities = d->validityStorage->insertShiftRight(rect);
-    QVector< QPair<QPoint, Value> > values = d->valueStorage->insertShiftRight(rect);
+    QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertShiftRight(rect);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->insertShiftRight(rect);
     // recording undo?
     if (d->undoData) {
@@ -1113,7 +1113,7 @@ void CellStorage::insertShiftRight(const QRect& rect)
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
-    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::Value));
+    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::KCValue));
 
     d->rowRepeatStorage->insertShiftRight(rect);
 }
@@ -1144,7 +1144,7 @@ void CellStorage::removeShiftUp(const QRect& rect)
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeShiftUp(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeShiftUp(rect);
     QList< QPair<QRectF, Validity> > validities = d->validityStorage->removeShiftUp(rect);
-    QVector< QPair<QPoint, Value> > values = d->valueStorage->removeShiftUp(rect);
+    QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeShiftUp(rect);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->removeShiftUp(rect);
     // recording undo?
     if (d->undoData) {
@@ -1172,7 +1172,7 @@ void CellStorage::removeShiftUp(const QRect& rect)
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
-    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::Value));
+    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::KCValue));
 
     d->rowRepeatStorage->removeShiftUp(rect);
 }
@@ -1202,7 +1202,7 @@ void CellStorage::insertShiftDown(const QRect& rect)
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertShiftDown(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertShiftDown(rect);
     QList< QPair<QRectF, Validity> > validities = d->validityStorage->insertShiftDown(rect);
-    QVector< QPair<QPoint, Value> > values = d->valueStorage->insertShiftDown(rect);
+    QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertShiftDown(rect);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->insertShiftDown(rect);
     // recording undo?
     if (d->undoData) {
@@ -1230,7 +1230,7 @@ void CellStorage::insertShiftDown(const QRect& rect)
     }
     // Trigger a recalculation only for the cells, that depend on values in the changed region.
     KCRegion providers = d->sheet->map()->dependencyManager()->reduceToProvidingRegion(invalidRegion);
-    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::Value));
+    d->sheet->map()->addDamage(new CellDamage(d->sheet, providers, CellDamage::KCValue));
 
     d->rowRepeatStorage->insertShiftDown(rect);
 }

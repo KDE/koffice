@@ -35,13 +35,13 @@ void TestEngineeringFunctions::initTestCase()
 #define ROUND(x) (roundf(1e10 * x) / 1e10)
 
 // round to get at most 10-digits number
-static Value RoundNumber(double f)
+static KCValue RoundNumber(double f)
 {
-    return Value(ROUND(f));
+    return KCValue(ROUND(f));
 }
 
 // round to get at most 10-digits number
-static Value RoundNumber(const Value& v)
+static KCValue RoundNumber(const KCValue& v)
 {
     if (v.isComplex()) {
         const double imag = numToDouble(v.asComplex().imag());
@@ -50,21 +50,21 @@ static Value RoundNumber(const Value& v)
             complex += '+';
         complex += QString::number(ROUND(imag), 'g', 10);
         complex += 'i';
-        return Value(complex);
+        return KCValue(complex);
     } else if (v.isNumber())
-        return Value(ROUND(numToDouble(v.asFloat())));
+        return KCValue(ROUND(numToDouble(v.asFloat())));
     else
         return v;
 }
 
-Value TestEngineeringFunctions::evaluate(const QString& formula)
+KCValue TestEngineeringFunctions::evaluate(const QString& formula)
 {
     Formula f;
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');
     f.setExpression(expr);
-    Value result = f.eval();
+    KCValue result = f.eval();
 
 #if 0
     // this magically generates the CHECKs
@@ -77,28 +77,28 @@ Value TestEngineeringFunctions::evaluate(const QString& formula)
 void TestEngineeringFunctions::testBIN2DEC()
 {
     // ODF-tests
-    CHECK_EVAL("BIN2DEC(1010)", Value(10));
-    CHECK_EVAL("BIN2DEC(11111)", Value(31));
+    CHECK_EVAL("BIN2DEC(1010)", KCValue(10));
+    CHECK_EVAL("BIN2DEC(11111)", KCValue(31));
     // alternate function name
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBIN2DEC(1010)", Value(10));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBIN2DEC(1010)", KCValue(10));
 }
 
 void TestEngineeringFunctions::testBIN2OCT()
 {
     // ODF-tests
-    CHECK_EVAL("BIN2OCT(1010)", Value("12"));
-    CHECK_EVAL("BIN2OCT(11111)", Value("37"));
+    CHECK_EVAL("BIN2OCT(1010)", KCValue("12"));
+    CHECK_EVAL("BIN2OCT(11111)", KCValue("37"));
     // alternate function name
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBIN2OCT(1010)", Value("12"));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBIN2OCT(1010)", KCValue("12"));
 }
 
 void TestEngineeringFunctions::testBIN2HEX()
 {
     // ODF-tests
-    CHECK_EVAL("BIN2HEX(1010)", Value("A"));
-    CHECK_EVAL("BIN2HEX(11111)", Value("1F"));
+    CHECK_EVAL("BIN2HEX(1010)", KCValue("A"));
+    CHECK_EVAL("BIN2HEX(11111)", KCValue("1F"));
     // alternate function name
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBIN2HEX(1010)", Value("A"));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETBIN2HEX(1010)", KCValue("A"));
 }
 
 void TestEngineeringFunctions::testCOMPLEX()
@@ -111,86 +111,86 @@ void TestEngineeringFunctions::testCOMPLEX()
 
 void TestEngineeringFunctions::testCONVERT()
 {
-    CHECK_EVAL("=CONVERT(32;\"C\";\"F\")", Value(89.6));
-//     CHECK_EVAL("=CONVERT(3;\"lbm\";\"kg\")", Value(1.3608));
-//     CHECK_EVAL("=CONVERT(7.9;\"cal\";\"J\")", Value(33.0757));
-    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCONVERT(32;\"C\";\"F\")", Value(89.6));
+    CHECK_EVAL("=CONVERT(32;\"C\";\"F\")", KCValue(89.6));
+//     CHECK_EVAL("=CONVERT(3;\"lbm\";\"kg\")", KCValue(1.3608));
+//     CHECK_EVAL("=CONVERT(7.9;\"cal\";\"J\")", KCValue(33.0757));
+    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETCONVERT(32;\"C\";\"F\")", KCValue(89.6));
 }
 
 void TestEngineeringFunctions::testDEC2HEX()
 {
-    CHECK_EVAL("DEC2HEX(12)", Value("C"));
-    CHECK_EVAL("DEC2HEX(55)", Value("37"));
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDEC2HEX(12)", Value("C"));
+    CHECK_EVAL("DEC2HEX(12)", KCValue("C"));
+    CHECK_EVAL("DEC2HEX(55)", KCValue("37"));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDEC2HEX(12)", KCValue("C"));
 }
 
 void TestEngineeringFunctions::testDEC2BIN()
 {
-    CHECK_EVAL("DEC2BIN(12)", Value("1100"));
-    CHECK_EVAL("DEC2BIN(55)", Value("110111"));
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDEC2BIN(12)", Value("1100"));
+    CHECK_EVAL("DEC2BIN(12)", KCValue("1100"));
+    CHECK_EVAL("DEC2BIN(55)", KCValue("110111"));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDEC2BIN(12)", KCValue("1100"));
 }
 
 void TestEngineeringFunctions::testDEC2OCT()
 {
-    CHECK_EVAL("DEC2OCT(12)", Value("14"));
-    CHECK_EVAL("DEC2OCT(55)", Value("67"));
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDEC2OCT(12)", Value("14"));
+    CHECK_EVAL("DEC2OCT(12)", KCValue("14"));
+    CHECK_EVAL("DEC2OCT(55)", KCValue("67"));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDEC2OCT(12)", KCValue("14"));
 }
 
 void TestEngineeringFunctions::testDELTA()
 {
-    CHECK_EVAL("DELTA(1.2; 3.4)", Value(0));
-    CHECK_EVAL("DELTA(3;3)", Value(1));
-//     CHECK_EVAL("DELTA(1;TRUE)", Value(1));
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDELTA(1.2; 3.4)", Value(0));
+    CHECK_EVAL("DELTA(1.2; 3.4)", KCValue(0));
+    CHECK_EVAL("DELTA(3;3)", KCValue(1));
+//     CHECK_EVAL("DELTA(1;TRUE)", KCValue(1));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETDELTA(1.2; 3.4)", KCValue(0));
 }
 
 void TestEngineeringFunctions::testERF()
 {
-    CHECK_EVAL("ERF(0.5)", Value(0.52049987781));
-    CHECK_EVAL("ERF(0.1)", Value(0.1124629160));
-    CHECK_EVAL("ABS(ERF(0.1; 0.5) - 0.40803696174) < 1e-6", Value(true));
-    CHECK_EVAL("ABS(ERF(0.1) - ERF(0.5) + 0.40803696174) < 1e-6", Value(true));
-    CHECK_EVAL("ABS(ERF(0.5; 0.1) + 0.40803696174) < 1e-6", Value(true));
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETERF(0.5)", Value(0.52049987781));
+    CHECK_EVAL("ERF(0.5)", KCValue(0.52049987781));
+    CHECK_EVAL("ERF(0.1)", KCValue(0.1124629160));
+    CHECK_EVAL("ABS(ERF(0.1; 0.5) - 0.40803696174) < 1e-6", KCValue(true));
+    CHECK_EVAL("ABS(ERF(0.1) - ERF(0.5) + 0.40803696174) < 1e-6", KCValue(true));
+    CHECK_EVAL("ABS(ERF(0.5; 0.1) + 0.40803696174) < 1e-6", KCValue(true));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETERF(0.5)", KCValue(0.52049987781));
 }
 
 void TestEngineeringFunctions::testERFC()
 {
-    CHECK_EVAL("ERFC(3)", Value(0.000022090497));
-    CHECK_EVAL("ABS(ERFC(0.1)-(1-ERF(0.1))) < 1e-6", Value(true));
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETERFC(3)", Value(0.000022090497));
+    CHECK_EVAL("ERFC(3)", KCValue(0.000022090497));
+    CHECK_EVAL("ABS(ERFC(0.1)-(1-ERF(0.1))) < 1e-6", KCValue(true));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETERFC(3)", KCValue(0.000022090497));
 }
 
 void TestEngineeringFunctions::testGESTEP()
 {
-    CHECK_EVAL("=GESTEP(1.2; 3.4)", Value(0));
-    CHECK_EVAL("=GESTEP(3; 3)", Value(1));
-//     CHECK_EVAL("=GESTEP(0.4; TRUE)", Value(0));
-    CHECK_EVAL("=GESTEP(4; 3)", Value(1));
-    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETGESTEP(1.2; 3.4)", Value(0));
+    CHECK_EVAL("=GESTEP(1.2; 3.4)", KCValue(0));
+    CHECK_EVAL("=GESTEP(3; 3)", KCValue(1));
+//     CHECK_EVAL("=GESTEP(0.4; TRUE)", KCValue(0));
+    CHECK_EVAL("=GESTEP(4; 3)", KCValue(1));
+    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETGESTEP(1.2; 3.4)", KCValue(0));
 }
 
 void TestEngineeringFunctions::testHEX2BIN()
 {
-    CHECK_EVAL("=HEX2BIN(\"a\")", Value("1010"));
-    CHECK_EVAL("=HEX2BIN(37)", Value("110111"));
-    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETHEX2BIN(\"a\")", Value("1010"));
+    CHECK_EVAL("=HEX2BIN(\"a\")", KCValue("1010"));
+    CHECK_EVAL("=HEX2BIN(37)", KCValue("110111"));
+    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETHEX2BIN(\"a\")", KCValue("1010"));
 }
 
 void TestEngineeringFunctions::testHEX2DEC()
 {
-    CHECK_EVAL("=HEX2DEC(\"a\")", Value(10));
-    CHECK_EVAL("=HEX2DEC(37)", Value(55));
-    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETHEX2DEC(\"a\")", Value(10));
+    CHECK_EVAL("=HEX2DEC(\"a\")", KCValue(10));
+    CHECK_EVAL("=HEX2DEC(37)", KCValue(55));
+    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETHEX2DEC(\"a\")", KCValue(10));
 }
 
 void TestEngineeringFunctions::testHEX2OCT()
 {
-    CHECK_EVAL("=HEX2OCT(\"a\")", Value("12"));
-    CHECK_EVAL("=HEX2OCT(37)", Value("67"));
-    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETHEX2OCT(\"a\")", Value("12"));
+    CHECK_EVAL("=HEX2OCT(\"a\")", KCValue("12"));
+    CHECK_EVAL("=HEX2OCT(37)", KCValue("67"));
+    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETHEX2OCT(\"a\")", KCValue("12"));
 }
     
 void TestEngineeringFunctions::testIMABS()
@@ -344,23 +344,23 @@ void TestEngineeringFunctions::testIMTANH()
 
 void TestEngineeringFunctions::testOCT2BIN()
 {
-    CHECK_EVAL("=OCT2BIN(\"12\")", Value("1010"));
-    CHECK_EVAL("=OCT2BIN(\"55\")", Value("101101"));
-    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETOCT2BIN(\"12\")", Value("1010"));
+    CHECK_EVAL("=OCT2BIN(\"12\")", KCValue("1010"));
+    CHECK_EVAL("=OCT2BIN(\"55\")", KCValue("101101"));
+    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETOCT2BIN(\"12\")", KCValue("1010"));
 }
 
 void TestEngineeringFunctions::testOCT2DEC()
 {
-    CHECK_EVAL("=OCT2DEC(\"12\")", Value(10));
-    CHECK_EVAL("=OCT2DEC(\"55\")", Value(45));
-    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETOCT2DEC(\"12\")", Value(10));
+    CHECK_EVAL("=OCT2DEC(\"12\")", KCValue(10));
+    CHECK_EVAL("=OCT2DEC(\"55\")", KCValue(45));
+    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETOCT2DEC(\"12\")", KCValue(10));
 }
 
 void TestEngineeringFunctions::testOCT2HEX()
 {
-    CHECK_EVAL("=OCT2HEX(\"12\")", Value("A"));
-    CHECK_EVAL("=OCT2HEX(\"55\")", Value("2D"));
-    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETOCT2HEX(\"12\")", Value("A"));
+    CHECK_EVAL("=OCT2HEX(\"12\")", KCValue("A"));
+    CHECK_EVAL("=OCT2HEX(\"55\")", KCValue("2D"));
+    CHECK_EVAL("=COM.SUN.STAR.SHEET.ADDIN.ANALYSIS.GETOCT2HEX(\"12\")", KCValue("A"));
 }
     
 QTEST_KDEMAIN(TestEngineeringFunctions, GUI)

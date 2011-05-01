@@ -3370,7 +3370,7 @@ void KCSheet::printDebug()
     int iMaxColumn = d->cellStorage->columns();
     int iMaxRow = d->cellStorage->rows();
 
-    kDebug(36001) << "KCCell | Content | Value  [UserInput]";
+    kDebug(36001) << "KCCell | Content | KCValue  [UserInput]";
     KCCell cell;
     for (int currentrow = 1 ; currentrow <= iMaxRow ; ++currentrow) {
         for (int currentcolumn = 1 ; currentcolumn <= iMaxColumn ; currentcolumn++) {

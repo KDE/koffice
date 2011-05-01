@@ -97,7 +97,7 @@ bool NamedAreaCommand::postProcessing()
                 if (cell.makeFormula()) {
                     // recalculate cells
                     map->addDamage(new CellDamage(cell, CellDamage::Appearance | CellDamage::Binding |
-                                                  CellDamage::Value));
+                                                  CellDamage::KCValue));
                 }
             }
         }

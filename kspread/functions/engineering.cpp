@@ -45,51 +45,51 @@
 using namespace KSpread;
 
 // prototypes (sort alphabetically)
-Value func_base(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_besseli(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_besselj(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_besselk(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_bessely(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_bin2dec(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_bin2oct(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_bin2hex(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_complex(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_complex_imag(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_complex_real(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_convert(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dec2hex(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dec2oct(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_dec2bin(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_decimal(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_delta(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_erf(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_erfc(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_gestep(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_hex2dec(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_hex2bin(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_hex2oct(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imabs(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imargument(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imconjugate(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imcos(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imcosh(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imdiv(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imexp(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imln(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imlog2(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imlog10(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_impower(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_improduct(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imsin(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imsinh(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imsqrt(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imsub(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imsum(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imtan(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_imtanh(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_oct2dec(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_oct2bin(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_oct2hex(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_base(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_besseli(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_besselj(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_besselk(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_bessely(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_bin2dec(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_bin2oct(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_bin2hex(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_complex(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_complex_imag(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_complex_real(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_convert(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dec2hex(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dec2oct(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_dec2bin(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_decimal(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_delta(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_erf(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_erfc(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_gestep(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_hex2dec(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_hex2bin(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_hex2oct(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imabs(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imargument(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imconjugate(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imcos(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imcosh(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imdiv(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imexp(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imln(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imlog2(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imlog10(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_impower(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_improduct(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imsin(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imsinh(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imsqrt(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imsub(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imsum(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imtan(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_imtanh(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_oct2dec(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_oct2bin(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_oct2hex(valVector args, ValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("engineering", EngineeringModule)
@@ -270,7 +270,7 @@ QString EngineeringModule::descriptionFileName() const
 //
 // Function: BASE
 //
-Value func_base(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_base(valVector args, ValueCalc *calc, FuncExtra *)
 {
     int base = 10;
     int minLength = 0;
@@ -280,7 +280,7 @@ Value func_base(valVector args, ValueCalc *calc, FuncExtra *)
         minLength = calc->conv()->asInteger(args[2]).asInteger();
 
     if ((base < 2) || (base > 36))
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     if (minLength < 0) minLength = 2;
 
     return calc->base(args[0], base, 0, minLength);
@@ -290,10 +290,10 @@ Value func_base(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: BESSELI
 //
-Value func_besseli(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_besseli(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value x = args[0];
-    Value y = args[1];
+    KCValue x = args[0];
+    KCValue y = args[1];
     return calc->besseli(y, x);
 }
 
@@ -301,10 +301,10 @@ Value func_besseli(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: BESSELJ
 //
-Value func_besselj(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_besselj(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value x = args[0];
-    Value y = args[1];
+    KCValue x = args[0];
+    KCValue y = args[1];
     return calc->besselj(y, x);
 }
 
@@ -312,10 +312,10 @@ Value func_besselj(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: BESSELK
 //
-Value func_besselk(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_besselk(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value x = args[0];
-    Value y = args[1];
+    KCValue x = args[0];
+    KCValue y = args[1];
     return calc->besselk(y, x);
 }
 
@@ -323,10 +323,10 @@ Value func_besselk(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: BESSELY
 //
-Value func_bessely(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_bessely(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value x = args[0];
-    Value y = args[1];
+    KCValue x = args[0];
+    KCValue y = args[1];
     return calc->besseln(y, x);
 }
 
@@ -334,7 +334,7 @@ Value func_bessely(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: DEC2HEX
 //
-Value func_dec2hex(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dec2hex(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QRegExp rx("[0-9]+");
     int minLength = 0;
@@ -346,7 +346,7 @@ Value func_dec2hex(valVector args, ValueCalc *calc, FuncExtra *)
         // this only contains decimal digits.
         return calc->base(args[0], 16, 0, minLength);
     } else {
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     }
 }
 
@@ -354,7 +354,7 @@ Value func_dec2hex(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: DEC2OCT
 //
-Value func_dec2oct(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dec2oct(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QRegExp rx("[0-9]+");
     int minLength = 0;
@@ -366,7 +366,7 @@ Value func_dec2oct(valVector args, ValueCalc *calc, FuncExtra *)
         // this only contains decimal digits.
         return calc->base(args[0], 8, 0, minLength);
     } else {
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     }
 }
 
@@ -374,7 +374,7 @@ Value func_dec2oct(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: DEC2BIN
 //
-Value func_dec2bin(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_dec2bin(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QRegExp rx("[0-9]+");
     int minLength = 0;
@@ -386,7 +386,7 @@ Value func_dec2bin(valVector args, ValueCalc *calc, FuncExtra *)
         // this only contains decimal digits.
         return calc->base(args[0], 2, 0, minLength);
     } else {
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     }
 }
 
@@ -394,7 +394,7 @@ Value func_dec2bin(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: BIN2DEC
 //
-Value func_bin2dec(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_bin2dec(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->fromBase(args[0], 2);
 }
@@ -403,7 +403,7 @@ Value func_bin2dec(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: BIN2OCT
 //
-Value func_bin2oct(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_bin2oct(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QRegExp rx("[01]+");
     int minLength = 0;
@@ -415,7 +415,7 @@ Value func_bin2oct(valVector args, ValueCalc *calc, FuncExtra *)
         // this only contains 0s and 1s.
         return calc->base(calc->fromBase(args[0], 2), 8, 0, minLength);
     } else {
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     }
 }
 
@@ -423,7 +423,7 @@ Value func_bin2oct(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: BIN2HEX
 //
-Value func_bin2hex(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_bin2hex(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QRegExp rx("[01]+");
     int minLength = 0;
@@ -435,7 +435,7 @@ Value func_bin2hex(valVector args, ValueCalc *calc, FuncExtra *)
         // this only contains 0s and 1s.
         return calc->base(calc->fromBase(args[0], 2), 16, 0, minLength);
     } else {
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     }
 
 }
@@ -444,7 +444,7 @@ Value func_bin2hex(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: OCT2DEC
 //
-Value func_oct2dec(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_oct2dec(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->fromBase(args[0], 8);
 }
@@ -453,7 +453,7 @@ Value func_oct2dec(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: OCT2BIN
 //
-Value func_oct2bin(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_oct2bin(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QRegExp rx("[01234567]+");
     int minLength = 0;
@@ -465,7 +465,7 @@ Value func_oct2bin(valVector args, ValueCalc *calc, FuncExtra *)
         // this only contains decimal digits.
         return calc->base(calc->fromBase(args[0], 8), 2, 0, minLength);
     } else {
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     }
 }
 
@@ -473,7 +473,7 @@ Value func_oct2bin(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: OCT2HEX
 //
-Value func_oct2hex(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_oct2hex(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QRegExp rx("[01234567]+");
     int minLength = 0;
@@ -485,7 +485,7 @@ Value func_oct2hex(valVector args, ValueCalc *calc, FuncExtra *)
         // this only contains decimal digits.
         return calc->base(calc->fromBase(args[0], 8), 16, 0, minLength);
     } else {
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     }
 }
 
@@ -493,7 +493,7 @@ Value func_oct2hex(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: HEX2DEC
 //
-Value func_hex2dec(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_hex2dec(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->fromBase(args[0], 16);
 }
@@ -502,7 +502,7 @@ Value func_hex2dec(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: HEX2BIN
 //
-Value func_hex2bin(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_hex2bin(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QRegExp rx("[0123456789ABCDEFabcdef]+");
     int minLength = 0;
@@ -514,7 +514,7 @@ Value func_hex2bin(valVector args, ValueCalc *calc, FuncExtra *)
         // this only contains decimal digits.
         return calc->base(calc->fromBase(args[0], 16), 2, 0, minLength);
     } else {
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     }
 }
 
@@ -522,7 +522,7 @@ Value func_hex2bin(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: HEX2OCT
 //
-Value func_hex2oct(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_hex2oct(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QRegExp rx("[0123456789ABCDEFabcdef]+");
     int minLength = 0;
@@ -534,7 +534,7 @@ Value func_hex2oct(valVector args, ValueCalc *calc, FuncExtra *)
         // this only contains decimal digits.
         return calc->base(calc->fromBase(args[0], 16), 8, 0, minLength);
     } else {
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
     }
 }
 
@@ -542,7 +542,7 @@ Value func_hex2oct(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: DECIMAL
 //
-Value func_decimal(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_decimal(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QString text = calc->conv()->asString(args[0]).asString();
     text.remove(QChar(' '));
@@ -562,7 +562,7 @@ Value func_decimal(valVector args, ValueCalc *calc, FuncExtra *)
         }
     }
 
-    return calc->fromBase(Value(text), radix);
+    return calc->fromBase(KCValue(text), radix);
 }
 
 //
@@ -1099,7 +1099,7 @@ static bool kspread_convert_info(const QString& fromUnit,
 //
 // Function: CONVERT
 //
-Value func_convert(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_convert(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // This function won't support arbitrary precision.
 
@@ -1122,9 +1122,9 @@ Value func_convert(valVector args, ValueCalc *calc, FuncExtra *)
                                             if (!kspread_convert_speed(fromUnit, toUnit, value, result))
                                                 if (!kspread_convert_time(fromUnit, toUnit, value, result))
                                                     if (!kspread_convert_info(fromUnit, toUnit, value, result))
-                                                        return Value::errorNA();
+                                                        return KCValue::errorNA();
 
-    return Value(result);
+    return KCValue(result);
 }
 
 
@@ -1136,82 +1136,82 @@ Value func_convert(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: COMPLEX
 //
-Value func_complex(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_complex(valVector args, ValueCalc *calc, FuncExtra *)
 {
     const double real = numToDouble(calc->conv()->toFloat(args[0]));
     const double imag = numToDouble(calc->conv()->toFloat(args[1]));
-    return Value(complex<Number>(real, imag));
+    return KCValue(complex<Number>(real, imag));
 }
 
 
 //
 // Function: IMAGINARY
 //
-Value func_complex_imag(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_complex_imag(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(calc->conv()->toComplex(args[0]).imag());
+    return KCValue(calc->conv()->toComplex(args[0]).imag());
 }
 
 
 //
 // Function: IMREAL
 //
-Value func_complex_real(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_complex_real(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(calc->conv()->toComplex(args[0]).real());
+    return KCValue(calc->conv()->toComplex(args[0]).real());
 }
 
 
 //
 //
 //
-void awImSum(ValueCalc *c, Value &res, Value val, Value)
+void awImSum(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     const complex<Number> c1 = c->conv()->toComplex(res);
     const complex<Number> c2 = c->conv()->toComplex(val);
-    res = Value(c1 + c2);
+    res = KCValue(c1 + c2);
 }
 
 
 //
 //
 //
-void awImSub(ValueCalc *c, Value &res, Value val, Value)
+void awImSub(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     const complex<Number> c1 = c->conv()->toComplex(res);
     const complex<Number> c2 = c->conv()->toComplex(val);
-    res = Value(c1 - c2);
+    res = KCValue(c1 - c2);
 }
 
 
 //
 //
 //
-void awImMul(ValueCalc *c, Value &res, Value val, Value)
+void awImMul(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     const complex<Number> c1 = c->conv()->toComplex(res);
     const complex<Number> c2 = c->conv()->toComplex(val);
-    res = Value(c1 * c2);
+    res = KCValue(c1 * c2);
 }
 
 
 //
 //
 //
-void awImDiv(ValueCalc *c, Value &res, Value val, Value)
+void awImDiv(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
     const complex<Number> c1 = c->conv()->toComplex(res);
     const complex<Number> c2 = c->conv()->toComplex(val);
-    res = Value(c1 / c2);
+    res = KCValue(c1 / c2);
 }
 
 //
 // Function: IMSUM
 //
-Value func_imsum(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imsum(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value result;
-    calc->arrayWalk(args, result, awImSum, Value(0));
+    KCValue result;
+    calc->arrayWalk(args, result, awImSum, KCValue(0));
     return result;
 }
 
@@ -1219,15 +1219,15 @@ Value func_imsum(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: IMSUB
 //
-Value func_imsub(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imsub(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value result;
+    KCValue result;
     if (args.count() == 1)
-        awImSub(calc, result, args[0], Value(0));
+        awImSub(calc, result, args[0], KCValue(0));
     else {
         result = args[0];
         valVector vector = args.mid(1);
-        calc->arrayWalk(vector, result, awImSub, Value(0));
+        calc->arrayWalk(vector, result, awImSub, KCValue(0));
     }
     return result;
 }
@@ -1236,16 +1236,16 @@ Value func_imsub(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: IMPRODUCT
 //
-Value func_improduct(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_improduct(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value result;
+    KCValue result;
     if (args.count() == 1) {
-        result = Value(complex<double>(1.0, 0.0));
-        awImMul(calc, result, args[0], Value(0));
+        result = KCValue(complex<double>(1.0, 0.0));
+        awImMul(calc, result, args[0], KCValue(0));
     } else {
         result = args[0];
         valVector vector = args.mid(1);
-        calc->arrayWalk(vector, result, awImMul, Value(0));
+        calc->arrayWalk(vector, result, awImMul, KCValue(0));
     }
     return result;
 }
@@ -1254,16 +1254,16 @@ Value func_improduct(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: IMDIV
 //
-Value func_imdiv(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imdiv(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value result;
+    KCValue result;
     if (args.count() == 1) {
-        result = Value(complex<double>(1.0, 0.0));
-        awImDiv(calc, result, args[0], Value(0));
+        result = KCValue(complex<double>(1.0, 0.0));
+        awImDiv(calc, result, args[0], KCValue(0));
     } else {
         result = args[0];
         valVector vector = args.mid(1);
-        calc->arrayWalk(vector, result, awImDiv, Value(0));
+        calc->arrayWalk(vector, result, awImDiv, KCValue(0));
     }
     return result;
 }
@@ -1272,135 +1272,135 @@ Value func_imdiv(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: IMCONJUGATE
 //
-Value func_imconjugate(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imconjugate(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::conj(calc->conv()->asComplex(args[0]).asComplex()));
+    return KCValue(std::conj(calc->conv()->asComplex(args[0]).asComplex()));
 }
 
 
 //
 // Function: IMARGUMENT
 //
-Value func_imargument(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imargument(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::arg(calc->conv()->asComplex(args[0]).asComplex()));
+    return KCValue(std::arg(calc->conv()->asComplex(args[0]).asComplex()));
 }
 
 
 //
 // Function: IMABS
 //
-Value func_imabs(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imabs(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::abs(calc->conv()->asComplex(args[0]).asComplex()));
+    return KCValue(std::abs(calc->conv()->asComplex(args[0]).asComplex()));
 }
 
 
 //
 // Function: IMCOS
 //
-Value func_imcos(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imcos(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::cos(calc->conv()->asComplex(args[0]).asComplex()));
+    return KCValue(std::cos(calc->conv()->asComplex(args[0]).asComplex()));
 }
 
 
 //
 // Function: IMSIN
 //
-Value func_imsin(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imsin(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::sin(calc->conv()->asComplex(args[0]).asComplex()));
+    return KCValue(std::sin(calc->conv()->asComplex(args[0]).asComplex()));
 }
 
 
 //
 // Function: IMTAN
 //
-Value func_imtan(valVector args, ValueCalc *calc, FuncExtra*)
+KCValue func_imtan(valVector args, ValueCalc *calc, FuncExtra*)
 {
-    return Value(std::tan(calc->conv()->asComplex(args[0]).asComplex()));
+    return KCValue(std::tan(calc->conv()->asComplex(args[0]).asComplex()));
 }
 
 
 //
 // Function: IMCOSH
 //
-Value func_imcosh(valVector args, ValueCalc *calc, FuncExtra*)
+KCValue func_imcosh(valVector args, ValueCalc *calc, FuncExtra*)
 {
-    return Value(std::cosh(calc->conv()->asComplex(args[0]).asComplex()));
+    return KCValue(std::cosh(calc->conv()->asComplex(args[0]).asComplex()));
 }
 
 
 //
 // Function: IMSINH
 //
-Value func_imsinh(valVector args, ValueCalc *calc, FuncExtra*)
+KCValue func_imsinh(valVector args, ValueCalc *calc, FuncExtra*)
 {
-    return Value(std::sinh(calc->conv()->asComplex(args[0]).asComplex()));
+    return KCValue(std::sinh(calc->conv()->asComplex(args[0]).asComplex()));
 }
 
 
 //
 // Function: IMTANH
 //
-Value func_imtanh(valVector args, ValueCalc *calc, FuncExtra*)
+KCValue func_imtanh(valVector args, ValueCalc *calc, FuncExtra*)
 {
-    return Value(std::tanh(calc->conv()->asComplex(args[0]).asComplex()));
+    return KCValue(std::tanh(calc->conv()->asComplex(args[0]).asComplex()));
 }
 
 
 //
 // Function: IMLN
 //
-Value func_imln(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imln(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::log(calc->conv()->asComplex(args[0]).asComplex()));
+    return KCValue(std::log(calc->conv()->asComplex(args[0]).asComplex()));
 }
 
 
 //
 // Function: IMLOG2
 //
-Value func_imlog2(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imlog2(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::log(calc->conv()->toComplex(args[0])) / static_cast<Number>(double(M_LN2l)));
+    return KCValue(std::log(calc->conv()->toComplex(args[0])) / static_cast<Number>(double(M_LN2l)));
 }
 
 
 //
 // Function: IMLOG10
 //
-Value func_imlog10(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imlog10(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::log10(calc->conv()->toComplex(args[0])));
+    return KCValue(std::log10(calc->conv()->toComplex(args[0])));
 }
 
 
 //
 // Function: IMEXP
 //
-Value func_imexp(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imexp(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::exp(calc->conv()->toComplex(args[0])));
+    return KCValue(std::exp(calc->conv()->toComplex(args[0])));
 }
 
 
 //
 // Function: IMSQRT
 //
-Value func_imsqrt(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_imsqrt(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::sqrt(calc->conv()->toComplex(args[0])));
+    return KCValue(std::sqrt(calc->conv()->toComplex(args[0])));
 }
 
 
 //
 // Function: IMPOWER
 //
-Value func_impower(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_impower(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return Value(std::pow(calc->conv()->toComplex(args[0]),
+    return KCValue(std::pow(calc->conv()->toComplex(args[0]),
                           calc->conv()->toComplex(args[1])));
 }
 
@@ -1408,21 +1408,21 @@ Value func_impower(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: DELTA
 //
-Value func_delta(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_delta(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value val1 = args[0];
-    Value val2 = Value(0.0);
+    KCValue val1 = args[0];
+    KCValue val2 = KCValue(0.0);
     if (args.count() == 2)
         val2 = args[1];
 
-    return Value(calc->approxEqual(val1, val2) ? 1 : 0);
+    return KCValue(calc->approxEqual(val1, val2) ? 1 : 0);
 }
 
 
 //
 // Function: ERF
 //
-Value func_erf(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_erf(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args.count() == 2)
         return calc->sub(calc->erf(args[1]), calc->erf(args[0]));
@@ -1433,7 +1433,7 @@ Value func_erf(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: ERFC
 //
-Value func_erfc(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_erfc(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args.count() == 2)
         return calc->sub(calc->erfc(args[1]), calc->erfc(args[0]));
@@ -1444,21 +1444,21 @@ Value func_erfc(valVector args, ValueCalc *calc, FuncExtra *)
 //
 // Function: GESTEP
 //
-Value func_gestep(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_gestep(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    Value x = args[0];
-    Value y = Value(0.0);
+    KCValue x = args[0];
+    KCValue y = KCValue(0.0);
     if (args.count() == 2)
         y = args[1];
 
     if (x.isString() || y.isString())
-        return Value::errorNUM();
+        return KCValue::errorNUM();
 
     int result = 0;
     if (calc->greater(x, y) || calc->approxEqual(x, y))
         result = 1;
 
-    return Value(result);
+    return KCValue(result);
 }
 
 #include "EngineeringModule.moc"

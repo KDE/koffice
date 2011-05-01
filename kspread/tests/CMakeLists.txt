@@ -47,7 +47,7 @@ target_link_libraries(TestSelection kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTE
 ########### next target ###############
 
 set(TestValue_SRCS TestValue.cpp)
-kde4_add_unit_test(TestValue TESTNAME kspread-Value  ${TestValue_SRCS})
+kde4_add_unit_test(TestValue TESTNAME kspread-KCValue  ${TestValue_SRCS})
 target_link_libraries(TestValue kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY})
 
 ########### next target ###############

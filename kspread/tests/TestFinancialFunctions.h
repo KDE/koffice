@@ -24,7 +24,7 @@
 #include <QtGui>
 #include <qtest_kde.h>
 
-#include <Value.h>
+#include <KCValue.h>
 
 class TestFinancialFunctions: public QObject
 {
@@ -98,8 +98,8 @@ private slots:
     void testZEROCOUPON();
 
 // private:
-//   Value evaluate(const QString&);
-//   Value evaluateShort(const QString&);
+//   KCValue evaluate(const QString&);
+//   KCValue evaluateShort(const QString&);
 };
 
 #endif // KSPREAD_TEST_FINANCIAL_FUNCTIONS

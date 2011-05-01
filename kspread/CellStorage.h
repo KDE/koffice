@@ -50,7 +50,7 @@ class KCSheet;
 class StyleStorage;
 class Validity;
 class ValidityStorage;
-class Value;
+class KCValue;
 class ValueStorage;
 
 /**
@@ -187,13 +187,13 @@ public:
     /**
      * \return the value associated with the KCCell at \p column , \p row .
      */
-    Value value(int column, int row) const;
+    KCValue value(int column, int row) const;
 
     /**
      * Creates a value array containing the values in \p region.
      */
-    Value valueRegion(const KCRegion& region) const;
-    void setValue(int column, int row, const Value& value);
+    KCValue valueRegion(const KCRegion& region) const;
+    void setValue(int column, int row, const KCValue& value);
 
     QSharedPointer<QTextDocument> richText(int column, int row) const;
     void setRichText(int column, int row, QSharedPointer<QTextDocument> text);

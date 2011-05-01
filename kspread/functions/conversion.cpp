@@ -34,19 +34,19 @@
 using namespace KSpread;
 
 // prototypes
-Value func_arabic(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_carx(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_cary(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_decsex(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_polr(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_pola(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_roman(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_sexdec(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_AsciiToChar(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_CharToAscii(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_inttobool(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_booltoint(valVector args, ValueCalc *calc, FuncExtra *);
-Value func_ToString(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_arabic(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_carx(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_cary(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_decsex(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_polr(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_pola(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_roman(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_sexdec(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_AsciiToChar(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_CharToAscii(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_inttobool(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_booltoint(valVector args, ValueCalc *calc, FuncExtra *);
+KCValue func_ToString(valVector args, ValueCalc *calc, FuncExtra *);
 
 
 KSPREAD_EXPORT_FUNCTION_MODULE("conversion", ConversionModule)
@@ -104,44 +104,44 @@ QString ConversionModule::descriptionFileName() const
 
 
 // Function: POLR
-Value func_polr(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_polr(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // sqrt (a^2 + b^2)
-    Value a = args[0];
-    Value b = args[1];
-    Value res = calc->sqrt(calc->add(calc->sqr(a), calc->sqr(b)));
+    KCValue a = args[0];
+    KCValue b = args[1];
+    KCValue res = calc->sqrt(calc->add(calc->sqr(a), calc->sqr(b)));
     return res;
 }
 
 // Function: POLA
-Value func_pola(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_pola(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // acos (a / polr(a,b))
-    Value polr = func_polr(args, calc, 0);
+    KCValue polr = func_polr(args, calc, 0);
     if (calc->isZero(polr))
-        return Value::errorDIV0();
-    Value res = calc->acos(calc->div(args[0], polr));
+        return KCValue::errorDIV0();
+    KCValue res = calc->acos(calc->div(args[0], polr));
     return res;
 }
 
 // Function: CARX
-Value func_carx(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_carx(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // a * cos(b)
-    Value res = calc->mul(args[0], calc->cos(args[1]));
+    KCValue res = calc->mul(args[0], calc->cos(args[1]));
     return res;
 }
 
 // Function: CARY
-Value func_cary(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_cary(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // a * sin(b)
-    Value res = calc->mul(args[0], calc->sin(args[1]));
+    KCValue res = calc->mul(args[0], calc->sin(args[1]));
     return res;
 }
 
 // Function: DECSEX
-Value func_decsex(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_decsex(valVector args, ValueCalc *calc, FuncExtra *)
 {
     // original function was very compicated, but I see no reason for that,
     // when it can be done as simply as this ...
@@ -150,28 +150,28 @@ Value func_decsex(valVector args, ValueCalc *calc, FuncExtra *)
 }
 
 // Function: SEXDEC
-Value func_sexdec(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_sexdec(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (args.count() == 1) {
         // convert given value to number
-        Value time = calc->conv()->asTime(args[0]);
+        KCValue time = calc->conv()->asTime(args[0]);
         return calc->mul(calc->conv()->asFloat(time), 24);
     }
 
     // convert h/m/s to number of hours
-    Value h = args[0];
-    Value m = args[1];
+    KCValue h = args[0];
+    KCValue m = args[1];
 
-    Value res = calc->add(h, calc->div(m, 60));
+    KCValue res = calc->add(h, calc->div(m, 60));
     if (args.count() == 3) {
-        Value s = args[2];
+        KCValue s = args[2];
         res = calc->add(res, calc->div(s, 3600));
     }
     return res;
 }
 
 // Function: ROMAN
-Value func_roman(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_roman(valVector args, ValueCalc *calc, FuncExtra *)
 {
     const QByteArray RNUnits[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
     const QByteArray RNTens[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
@@ -181,7 +181,7 @@ Value func_roman(valVector args, ValueCalc *calc, FuncExtra *)
     // precision loss is not a problem here, as we only use the 0-3999 range
     qint64 value = calc->conv()->asInteger(args[0]).asInteger();
     if ((value < 0) || (value > 3999))
-        return Value::errorNA();
+        return KCValue::errorNA();
     QString result;
     // There is an optional argument, but the specification only covers the case
     // where it is zero for conciseness, and zero is the default. So we just
@@ -190,7 +190,7 @@ Value func_roman(valVector args, ValueCalc *calc, FuncExtra *)
                                  RNHundreds[(value / 100) % 10] +
                                  RNTens[(value / 10) % 10] +
                                  RNUnits[(value) % 10]);
-    return Value(result);
+    return KCValue(result);
 }
 
 // convert single roman character to decimal
@@ -210,16 +210,16 @@ int func_arabic_helper(QChar c)
 }
 
 // Function: ARABIC
-Value func_arabic(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_arabic(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QString roman = calc->conv()->asString(args[0]).asString();
-    if (roman.isEmpty()) return Value::errorVALUE();
+    if (roman.isEmpty()) return KCValue::errorVALUE();
 
     int val = 0, lastd = 0, d = 0;
 
     for (int i = 0; i < roman.length(); i++) {
         d = func_arabic_helper(roman[i]);
-        if (d < 0) return Value::errorVALUE();
+        if (d < 0) return KCValue::errorVALUE();
 
         if (lastd < d) val -= lastd;
         else val += lastd;
@@ -228,11 +228,11 @@ Value func_arabic(valVector args, ValueCalc *calc, FuncExtra *)
     if (lastd < d) val -= lastd;
     else val += lastd;
 
-    return Value(val);
+    return KCValue(val);
 }
 
 // helper for AsciiToChar
-void func_a2c_helper(ValueCalc *calc, QString &s, Value val)
+void func_a2c_helper(ValueCalc *calc, QString &s, KCValue val)
 {
     if (val.isArray()) {
         for (uint row = 0; row < val.rows(); ++row)
@@ -247,37 +247,37 @@ void func_a2c_helper(ValueCalc *calc, QString &s, Value val)
 }
 
 // Function: AsciiToChar
-Value func_AsciiToChar(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_AsciiToChar(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QString str;
     for (int i = 0; i < args.count(); i++)
         func_a2c_helper(calc, str, args[i]);
-    return Value(str);
+    return KCValue(str);
 }
 
 // Function: CharToAscii
-Value func_CharToAscii(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_CharToAscii(valVector args, ValueCalc *calc, FuncExtra *)
 {
     QString val = calc->conv()->asString(args[0]).asString();
     if (val.length() == 1)
-        return Value(QString(val[0]));
-    return Value::errorVALUE();
+        return KCValue(QString(val[0]));
+    return KCValue::errorVALUE();
 }
 
 // Function: inttobool
-Value func_inttobool(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_inttobool(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->conv()->asBoolean(args[0]);
 }
 
 // Function: booltoint
-Value func_booltoint(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_booltoint(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->conv()->asInteger(args[0]);
 }
 
 // Function: BoolToString, NumberToString, String
-Value func_ToString(valVector args, ValueCalc *calc, FuncExtra *)
+KCValue func_ToString(valVector args, ValueCalc *calc, FuncExtra *)
 {
     return calc->conv()->asString(args[0]);
 }

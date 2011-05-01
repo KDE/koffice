@@ -85,7 +85,7 @@ void FilterPopup::Private::initGUI(FilterPopup* parent, const KCCell& cell, cons
     const int j = isRowFilter ? cell.column() : cell.row();
     QSet<QString> items;
     for (int i = start + (database->containsHeader() ? 1 : 0); i <= end; ++i) {
-        const Value value = isRowFilter ? sheet->cellStorage()->value(j, i)
+        const KCValue value = isRowFilter ? sheet->cellStorage()->value(j, i)
                             : sheet->cellStorage()->value(i, j);
         const QString string = sheet->map()->converter()->asString(value).asString();
         if (!string.isEmpty())

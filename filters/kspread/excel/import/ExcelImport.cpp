@@ -589,22 +589,22 @@ void ExcelImport::Private::processSheetForFilters(Sheet* is, KCSheet* os)
     }
 }
 
-static Value convertValue(const Value& v)
+static KCValue convertValue(const Value& v)
 {
     if (v.isBoolean()) {
-        return Value(v.asBoolean());
+        return KCValue(v.asBoolean());
     } else if (v.isFloat()) {
-        return Value(v.asFloat());
+        return KCValue(v.asFloat());
     } else if (v.isInteger()) {
-        return Value(v.asInteger());
+        return KCValue(v.asInteger());
     } else if (v.isText()) {
-        return Value(v.asString());
+        return KCValue(v.asString());
     } else if (v.isError()) {
-        Value kv(Value::Error);
+        KCValue kv(KCValue::Error);
         kv.setError(v.asString());
         return kv;
     } else {
-        return Value();
+        return KCValue();
     }
 }
 
@@ -822,21 +822,21 @@ void ExcelImport::Private::processCell(Cell* ic, KCCell oc)
 
     int styleId = convertStyle(&ic->format(), formula);
 
-    Value value = ic->value();
+    KCValue value = ic->value();
     if (value.isBoolean()) {
-        oc.setValue(Value(value.asBoolean()));
+        oc.setValue(KCValue(value.asBoolean()));
         if (!isFormula)
             oc.setUserInput(oc.sheet()->map()->converter()->asString(oc.value()).asString());
     } else if (value.isNumber()) {
         const QString valueFormat = ic->format().valueFormat();
 
         if (isPercentageFormat(valueFormat)) {
-            Value v(value.asFloat());
-            v.setFormat(Value::fmt_Percent);
+            KCValue v(value.asFloat());
+            v.setFormat(KCValue::fmt_Percent);
             oc.setValue(v);
         } else if (Format::isDate(styleList[styleId].formatType())) {
             QDateTime date = convertDate(value.asFloat());
-            oc.setValue(Value(date, outputDoc->map()->calculationSettings()));
+            oc.setValue(KCValue(date, outputDoc->map()->calculationSettings()));
             KLocale* locale = outputDoc->map()->calculationSettings()->locale();
             if (true /* TODO somehow determine if time should be included */) {
                 oc.setUserInput(locale->formatDate(date.date()));
@@ -845,11 +845,11 @@ void ExcelImport::Private::processCell(Cell* ic, KCCell oc)
             }
         } else if (Format::isTime(styleList[styleId].formatType())) {
             QTime time = convertTime(value.asFloat());
-            oc.setValue(Value(time, outputDoc->map()->calculationSettings()));
+            oc.setValue(KCValue(time, outputDoc->map()->calculationSettings()));
             KLocale* locale = outputDoc->map()->calculationSettings()->locale();
             oc.setUserInput(locale->formatTime(time, true));
         } else /* fraction or normal */ {
-            oc.setValue(Value(value.asFloat()));
+            oc.setValue(KCValue(value.asFloat()));
             if (!isFormula)
                 oc.setUserInput(oc.sheet()->map()->converter()->asString(oc.value()).asString());
         }
@@ -870,7 +870,7 @@ void ExcelImport::Private::processCell(Cell* ic, KCCell oc)
             }
         }
 
-        oc.setValue(Value(txt));
+        oc.setValue(KCValue(txt));
         if (!isFormula) {
             if (txt.startsWith('='))
                 oc.setUserInput('\'' + txt);
@@ -899,7 +899,7 @@ void ExcelImport::Private::processCell(Cell* ic, KCCell oc)
             oc.setRichText(doc);
         }
     } else if (value.isError()) {
-        Value v(Value::Error);
+        KCValue v(KCValue::Error);
         v.setError(value.asString());
         oc.setValue(v);
     }

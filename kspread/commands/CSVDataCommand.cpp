@@ -24,7 +24,7 @@
 #include "CalculationSettings.h"
 #include "Map.h"
 #include "KCSheet.h"
-#include "Value.h"
+#include "KCValue.h"
 #include "ValueConverter.h"
 
 CSVDataCommand::CSVDataCommand()
@@ -36,7 +36,7 @@ CSVDataCommand::~CSVDataCommand()
 {
 }
 
-void CSVDataCommand::setValue(const Value& value)
+void CSVDataCommand::setValue(const KCValue& value)
 {
     m_value = value;
 }
@@ -56,13 +56,13 @@ void CSVDataCommand::setThousandsSeparator(const QString& separator)
     m_thousandsSeparator = separator;
 }
 
-Value CSVDataCommand::newValue(Element* element, int col, int row, bool* parse, KCFormat::Type* fmtType)
+KCValue CSVDataCommand::newValue(Element* element, int col, int row, bool* parse, KCFormat::Type* fmtType)
 {
     Q_UNUSED(fmtType)
     const int colidx = col - element->rect().left();
     const int rowidx = row - element->rect().top();
 
-    Value value;
+    KCValue value;
     switch (m_dataTypes.value(colidx)) {
     case KoCsvImportDialog::Generic:
         value = m_value.element(colidx, rowidx);
@@ -75,7 +75,7 @@ Value CSVDataCommand::newValue(Element* element, int col, int row, bool* parse, 
         value = m_sheet->map()->converter()->asDate(m_value.element(colidx, rowidx));
     case KoCsvImportDialog::Currency:
         value = m_sheet->map()->converter()->asFloat(m_value.element(colidx, rowidx));
-        value.setFormat(Value::fmt_Money);
+        value.setFormat(KCValue::fmt_Money);
         break;
     case KoCsvImportDialog::None:
         break;

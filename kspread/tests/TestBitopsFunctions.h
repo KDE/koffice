@@ -23,7 +23,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-#include <Value.h>
+#include <KCValue.h>
 
 class TestBitopsFunctions: public QObject
 {
@@ -37,7 +37,7 @@ private slots:
     void testBITLSHIFT();
     void testBITRSHIFT();
 private:
-    Value evaluate(const QString&, Value& ex);
+    KCValue evaluate(const QString&, KCValue& ex);
 };
 
 #endif

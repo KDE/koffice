@@ -33,7 +33,7 @@
 class Function;
 
 /**
- * \ingroup Value
+ * \ingroup KCValue
  * A function module provides several Function objects.
  */
 class KSPREAD_EXPORT FunctionModule : public QObject

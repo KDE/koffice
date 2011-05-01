@@ -56,7 +56,7 @@ class ValueParser;
 
 /**
  * \class Validity
- * \ingroup Value
+ * \ingroup KCValue
  *
  * Validates cell contents.
  *
@@ -139,8 +139,8 @@ public:
     const QString& messageInfo() const;
     const QString& message() const;
 
-    const Value &maximumValue() const;
-    const Value &minimumValue() const;
+    const KCValue &maximumValue() const;
+    const KCValue &minimumValue() const;
 
     Restriction restriction() const;
     const QString& title() const;
@@ -156,8 +156,8 @@ public:
     void setMessage(const QString& message);
     void setMessageInfo(const QString& info);
 
-    void setMaximumValue(const Value &value);
-    void setMinimumValue(const Value &value);
+    void setMaximumValue(const KCValue &value);
+    void setMinimumValue(const KCValue &value);
 
     void setRestriction(Restriction restriction);
     void setTitle(const QString& title);

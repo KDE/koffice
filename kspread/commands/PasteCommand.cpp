@@ -559,9 +559,9 @@ bool PasteCommand::processTextPlain(Element *element)
     const int my = list.count();
 
     // Put the lines into an array value.
-    Value value(Value::Array);
+    KCValue value(KCValue::Array);
     for (int i = 0; i < list.count(); ++i) {
-        value.setElement(0, i, Value(list[i]));
+        value.setElement(0, i, KCValue(list[i]));
     }
 
     // FIXME Determine and tile the destination area.

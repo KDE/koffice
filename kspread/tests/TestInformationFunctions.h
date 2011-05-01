@@ -24,7 +24,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-#include <Value.h>
+#include <KCValue.h>
 
 class Map;
 
@@ -73,7 +73,7 @@ private slots:
     void cleanupTestCase();
 
 private:
-    Value evaluate(const QString&, Value& ex);
+    KCValue evaluate(const QString&, KCValue& ex);
 
     Map* m_map;
 };

@@ -914,7 +914,7 @@ void Map::handleDamages(const QList<Damage*>& damages)
                 damagedSheet->cellStorage()->invalidateStyleCache(); // FIXME more fine-grained
             }
             if ((cellDamage->changes() & CellDamage::Binding) &&
-                    !workbookChanges.testFlag(WorkbookDamage::Value)) {
+                    !workbookChanges.testFlag(WorkbookDamage::KCValue)) {
                 bindingChangedRegion.add(region, damagedSheet);
             }
             if ((cellDamage->changes() & CellDamage::Formula) &&
@@ -925,8 +925,8 @@ void Map::handleDamages(const QList<Damage*>& damages)
                     !workbookChanges.testFlag(WorkbookDamage::Formula)) {
                 namedAreaChangedRegion.add(region, damagedSheet);
             }
-            if ((cellDamage->changes() & CellDamage::Value) &&
-                    !workbookChanges.testFlag(WorkbookDamage::Value)) {
+            if ((cellDamage->changes() & CellDamage::KCValue) &&
+                    !workbookChanges.testFlag(WorkbookDamage::KCValue)) {
                 valueChangedRegion.add(region, damagedSheet);
             }
             continue;
@@ -950,7 +950,7 @@ void Map::handleDamages(const QList<Damage*>& damages)
             if (workbookDamage->changes() & WorkbookDamage::Formula) {
                 formulaChangedRegion.clear();
             }
-            if (workbookDamage->changes() & WorkbookDamage::Value) {
+            if (workbookDamage->changes() & WorkbookDamage::KCValue) {
                 valueChangedRegion.clear();
             }
             continue;
@@ -974,7 +974,7 @@ void Map::handleDamages(const QList<Damage*>& damages)
         d->namedAreaManager->updateAllNamedAreas();
         d->dependencyManager->updateAllDependencies(this);
     }
-    if (workbookChanges.testFlag(WorkbookDamage::Value)) {
+    if (workbookChanges.testFlag(WorkbookDamage::KCValue)) {
         d->recalcManager->recalcMap();
         d->bindingManager->updateAllBindings();
     }

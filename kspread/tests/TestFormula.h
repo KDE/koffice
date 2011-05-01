@@ -22,7 +22,7 @@
 
 #include <QtGui>
 #include <QtTest/QtTest>
-#include <Value.h>
+#include <KCValue.h>
 
 class TestFormula: public QObject
 {
@@ -43,7 +43,7 @@ private Q_SLOTS:
     void testInlineArrays();
 
 private:
-    Value evaluate(const QString&, Value&);
+    KCValue evaluate(const QString&, KCValue&);
 };
 
 #endif // KSPREAD_TEST_FORMULA

@@ -30,7 +30,7 @@
 #include "Map.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
-#include "Value.h"
+#include "KCValue.h"
 
 #include "ValueCalc.h"
 #include "ValueConverter.h"
@@ -101,7 +101,7 @@ struct stackEntry {
         reg = KCRegion();
         regIsNamedOrLabeled = false;
     }
-    Value val;
+    KCValue val;
     KCRegion reg;
     bool regIsNamedOrLabeled;
     int row1, col1, row2, col2;
@@ -116,9 +116,9 @@ public:
     mutable bool valid;
     QString expression;
     mutable QVector<Opcode> codes;
-    mutable QVector<Value> constants;
+    mutable QVector<KCValue> constants;
 
-    Value valueOrElement(FuncExtra &fe, const stackEntry& entry) const;
+    KCValue valueOrElement(FuncExtra &fe, const stackEntry& entry) const;
 };
 
 class TokenStack : public QVector<Token>
@@ -227,37 +227,37 @@ static int opPrecedence(Token::Op op)
 }
 
 // helper function
-static Value tokenAsValue(const Token& token)
+static KCValue tokenAsValue(const Token& token)
 {
-    Value value;
-    if (token.isBoolean()) value = Value(token.asBoolean());
-    else if (token.isInteger()) value = Value(token.asInteger());
-    else if (token.isFloat()) value = Value(token.asFloat());
-    else if (token.isString()) value = Value(token.asString());
+    KCValue value;
+    if (token.isBoolean()) value = KCValue(token.asBoolean());
+    else if (token.isInteger()) value = KCValue(token.asInteger());
+    else if (token.isFloat()) value = KCValue(token.asFloat());
+    else if (token.isString()) value = KCValue(token.asString());
     else if (token.isError()) {
         const QString error = token.asError();
-        if (error == Value::errorCIRCLE().errorMessage())
-            value = Value::errorCIRCLE();
-        else if (error == Value::errorDEPEND().errorMessage())
-            value = Value::errorDEPEND();
-        else if (error == Value::errorDIV0().errorMessage())
-            value = Value::errorDIV0();
-        else if (error == Value::errorNA().errorMessage())
-            value = Value::errorNA();
-        else if (error == Value::errorNAME().errorMessage())
-            value = Value::errorNAME();
-        else if (error == Value::errorNUM().errorMessage())
-            value = Value::errorNUM();
-        else if (error == Value::errorNULL().errorMessage())
-            value = Value::errorNULL();
-        else if (error == Value::errorPARSE().errorMessage())
-            value = Value::errorPARSE();
-        else if (error == Value::errorREF().errorMessage())
-            value = Value::errorREF();
-        else if (error == Value::errorVALUE().errorMessage())
-            value = Value::errorVALUE();
+        if (error == KCValue::errorCIRCLE().errorMessage())
+            value = KCValue::errorCIRCLE();
+        else if (error == KCValue::errorDEPEND().errorMessage())
+            value = KCValue::errorDEPEND();
+        else if (error == KCValue::errorDIV0().errorMessage())
+            value = KCValue::errorDIV0();
+        else if (error == KCValue::errorNA().errorMessage())
+            value = KCValue::errorNA();
+        else if (error == KCValue::errorNAME().errorMessage())
+            value = KCValue::errorNAME();
+        else if (error == KCValue::errorNUM().errorMessage())
+            value = KCValue::errorNUM();
+        else if (error == KCValue::errorNULL().errorMessage())
+            value = KCValue::errorNULL();
+        else if (error == KCValue::errorPARSE().errorMessage())
+            value = KCValue::errorPARSE();
+        else if (error == KCValue::errorREF().errorMessage())
+            value = KCValue::errorREF();
+        else if (error == KCValue::errorVALUE().errorMessage())
+            value = KCValue::errorVALUE();
         else {
-            value = Value(Value::Error);
+            value = KCValue(KCValue::Error);
             value.setError(error);
         }
     }
@@ -986,7 +986,7 @@ void Formula::compile(const Tokens& tokens) const
         if ((tokenType == Token::KCCell) || (tokenType == Token::Range) ||
                 (tokenType == Token::Identifier)) {
             syntaxStack.push(token);
-            d->constants.append(Value(token.text()));
+            d->constants.append(KCValue(token.text()));
             if (tokenType == Token::KCCell)
                 d->codes.append(Opcode(Opcode::KCCell, d->constants.count() - 1));
             else if (tokenType == Token::Range)
@@ -1000,7 +1000,7 @@ void Formula::compile(const Tokens& tokens) const
             if (token.asOperator() == Token::Percent)
                 if (syntaxStack.itemCount() >= 1)
                     if (!syntaxStack.top().isOperator()) {
-                        d->constants.append(Value(0.01));
+                        d->constants.append(KCValue(0.01));
                         d->codes.append(Opcode(Opcode::Load, d->constants.count() - 1));
                         d->codes.append(Opcode(Opcode::Mul));
                     }
@@ -1051,7 +1051,7 @@ void Formula::compile(const Tokens& tokens) const
                                             if (id.isIdentifier()) {
                                                 ruleFound = true;
                                                 syntaxStack.pop();
-                                                d->constants.append(Value::null());
+                                                d->constants.append(KCValue::null());
                                                 d->codes.append(Opcode(Opcode::Load, d->constants.count() - 1));
                                                 argCount++;
                                             }
@@ -1165,8 +1165,8 @@ void Formula::compile(const Tokens& tokens) const
                                         syntaxStack.pop();
                                         syntaxStack.push(arg);
                                         const int rowCount = argStack.pop();
-                                        d->constants.append(Value((int)argCount));     // cols
-                                        d->constants.append(Value(rowCount));
+                                        d->constants.append(KCValue((int)argCount));     // cols
+                                        d->constants.append(KCValue(rowCount));
                                         d->codes.append(Opcode(Opcode::Array, d->constants.count() - 2));
                                         Q_ASSERT(!argStack.empty());
                                         argCount = argStack.empty() ? 0 : argStack.pop();
@@ -1327,16 +1327,16 @@ bool Formula::isNamedArea(const QString& expr) const
 // Evaluates the formula, returns the result.
 
 // evaluate the cellIndirections
-Value Formula::eval(CellIndirection cellIndirections) const
+KCValue Formula::eval(CellIndirection cellIndirections) const
 {
-    QHash<KCCell, Value> values;
+    QHash<KCCell, KCValue> values;
     return evalRecursive(cellIndirections, values);
 }
 
 // We need to unroll arrays. Do use the same logic to unroll like OpenOffice.org and Excel are using.
-Value Formula::Private::valueOrElement(FuncExtra &fe, const stackEntry& entry) const
+KCValue Formula::Private::valueOrElement(FuncExtra &fe, const stackEntry& entry) const
 {
-    const Value& v = entry.val;
+    const KCValue& v = entry.val;
     const KCRegion& region = entry.reg;
     if(v.isArray()) {
         if(v.count() == 1) // if there is only one item, use that one
@@ -1354,17 +1354,17 @@ Value Formula::Private::valueOrElement(FuncExtra &fe, const stackEntry& entry) c
 
 // On OO.org Calc and MS Excel operations done with +, -, * and / do fail if one of the values is
 // non-numeric. This differs from formulas like SUM which just ignores non numeric values.
-Value numericOrError(const ValueConverter* converter, const Value &v)
+KCValue numericOrError(const ValueConverter* converter, const KCValue &v)
 {
     switch (v.type()) {
-    case Value::Empty:
-    case Value::Boolean:
-    case Value::Integer:
-    case Value::Float:
-    case Value::Complex:
-    case Value::Error:
+    case KCValue::Empty:
+    case KCValue::Boolean:
+    case KCValue::Integer:
+    case KCValue::Float:
+    case KCValue::Complex:
+    case KCValue::Error:
         return v;
-    case Value::String: {
+    case KCValue::String: {
         if (v.asString().isEmpty())
             return v;
         bool ok;
@@ -1372,21 +1372,21 @@ Value numericOrError(const ValueConverter* converter, const Value &v)
         if (ok)
             return v;
     } break;
-    case Value::Array:
-    case Value::CellRange:
+    case KCValue::Array:
+    case KCValue::CellRange:
         return v;
     }
-    return Value::errorVALUE();
+    return KCValue::errorVALUE();
 }
 
-Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Value>& values) const
+KCValue Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, KCValue>& values) const
 {
     QStack<stackEntry> stack;
     stackEntry entry;
     int index;
-    Value val1, val2;
+    KCValue val1, val2;
     QString c;
-    QVector<Value> args;
+    QVector<KCValue> args;
 
     const Map* map = d->sheet ? d->sheet->map() : new Map(0 /*document*/);
     const ValueConverter* converter = map->converter();
@@ -1408,10 +1408,10 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
     }
 
     if (!d->valid)
-        return Value::errorPARSE();
+        return KCValue::errorPARSE();
 
     for (int pc = 0; pc < d->codes.count(); pc++) {
-        Value ret;   // for the function caller
+        KCValue ret;   // for the function caller
         Opcode& opcode = d->codes[pc];
         index = opcode.index;
         switch (opcode.type) {
@@ -1488,9 +1488,9 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
             val1 = converter->asString(stack.pop().val);
             val2 = converter->asString(stack.pop().val);
             if (val1.isError() || val2.isError())
-                val1 = Value::errorVALUE();
+                val1 = KCValue::errorVALUE();
             else
-                val1 = Value(val2.asString().append(val1.asString()));
+                val1 = KCValue(val2.asString().append(val1.asString()));
             entry.reset();
             entry.val = val1;
             stack.push(entry);
@@ -1503,7 +1503,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
             KCRegion r1(d->constants[index].asString(), map, d->sheet);
             KCRegion r2(d->constants[index+1].asString(), map, d->sheet);
             if(!r1.isValid() || !r2.isValid()) {
-                val1 = Value::errorNULL();
+                val1 = KCValue::errorNULL();
             } else {
                 KCRegion r = r1.intersected(r2);
                 QRect rect = r.boundingRect();
@@ -1513,9 +1513,9 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
                 else if(rect.left() == rect.right())
                     cell = KCCell(r.firstSheet(), rect.left(), fe.mycol);
                 if(cell.isNull())
-                    val1 = Value::errorNULL();
+                    val1 = KCValue::errorNULL();
                 else if(cell.isEmpty())
-                    val1 = Value::errorNULL();
+                    val1 = KCValue::errorNULL();
                 else
                     val1 = cell.value();
             }
@@ -1530,7 +1530,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
             KCRegion r2 = stack.pop().reg;
             entry.reset();
             if (!r.isValid() || !r2.isValid()) {
-                val1 = Value::errorVALUE();
+                val1 = KCValue::errorVALUE();
                 r = KCRegion();
             } else {
                 r.add(r2);
@@ -1550,9 +1550,9 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
         case Opcode::Not:
             val1 = converter->asBoolean(d->valueOrElement(fe, stack.pop()));
             if (val1.isError())
-                val1 = Value::errorVALUE();
+                val1 = KCValue::errorVALUE();
             else
-                val1 = Value(!val1.asBoolean());
+                val1 = KCValue(!val1.asBoolean());
             entry.reset();
             entry.val = val1;
             stack.push(entry);
@@ -1567,9 +1567,9 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
             else if (val2.isError())
                 val1 = val2;
             else if (val2.compare(val1) == 0)
-                val1 = Value(true);
+                val1 = KCValue(true);
             else
-                val1 = Value(false);
+                val1 = KCValue(false);
             entry.reset();
             entry.val = val1;
             stack.push(entry);
@@ -1584,9 +1584,9 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
             else if (val2.isError())
                 val1 = val2;
             else if (val2.compare(val1) < 0)
-                val1 = Value(true);
+                val1 = KCValue(true);
             else
-                val1 = Value(false);
+                val1 = KCValue(false);
             entry.reset();
             entry.val = val1;
             stack.push(entry);
@@ -1601,9 +1601,9 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
             else if (val2.isError())
                 val1 = val2;
             else if (val2.compare(val1) > 0)
-                val1 = Value(true);
+                val1 = KCValue(true);
             else
-                val1 = Value(false);
+                val1 = KCValue(false);
             entry.reset();
             entry.val = val1;
             stack.push(entry);
@@ -1613,12 +1613,12 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
         // cell in a sheet
         case Opcode::KCCell: {
             c = d->constants[index].asString();
-            val1 = Value::empty();
+            val1 = KCValue::empty();
             entry.reset();
 
             const KCRegion region(c, map, d->sheet);
             if (!region.isValid()) {
-                val1 = Value::errorREF();
+                val1 = KCValue::errorREF();
             } else if (region.isSingular()) {
                 const QPoint position = region.firstRange().topLeft();
                 if (cellIndirections.isEmpty())
@@ -1629,7 +1629,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
                     if (values.contains(cell))
                         val1 = values.value(cell);
                     else {
-                        values[cell] = Value::errorCIRCLE();
+                        values[cell] = KCValue::errorCIRCLE();
                         if (cell.isFormula())
                             val1 = cell.formula().evalRecursive(cellIndirections, values);
                         else
@@ -1653,7 +1653,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
         // selected range in a sheet
         case Opcode::Range: {
             c = d->constants[index].asString();
-            val1 = Value::empty();
+            val1 = KCValue::empty();
             entry.reset();
 
             const KCRegion region(c, map, d->sheet);
@@ -1686,7 +1686,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
             // sanity check, this should not happen unless opcode is wrong
             // (i.e. there's a bug in the compile() function)
             if (stack.count() < index)
-                return Value::errorVALUE(); // not enough arguments
+                return KCValue::errorVALUE(); // not enough arguments
 
             args.clear();
             fe.ranges.clear();
@@ -1711,7 +1711,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
                 return val1;
             function = FunctionRepository::self()->function(val1.asString());
             if (!function)
-                return Value::errorNAME(); // no such function
+                return KCValue::errorNAME(); // no such function
 
             ret = function->exec(args, calc, &fe);
             entry.reset();
@@ -1727,8 +1727,8 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
             const int rows = d->constants[index+1].asInteger();
             // check if enough array elements are available
             if (stack.count() < cols * rows)
-                return Value::errorVALUE();
-            Value array(Value::Array);
+                return KCValue::errorVALUE();
+            KCValue array(KCValue::Array);
             for (int row = rows - 1; row >= 0; --row) {
                 for (int col = cols - 1; col >= 0; --col) {
                     array.setElement(col, row, stack.pop().val);
@@ -1750,7 +1750,7 @@ Value Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, Val
 
     // more than one value in stack ? unsuccessful execution...
     if (stack.count() != 1)
-        return Value::errorVALUE();
+        return KCValue::errorVALUE();
 
     return stack.pop().val;
 }
@@ -1779,7 +1779,7 @@ QString Formula::dump() const
 
     result = QString("Expression: [%1]\n").arg(d->expression);
 #if 0
-    Value value = eval();
+    KCValue value = eval();
     result.append(QString("Result: %1\n").arg(
                       converter->asString(value).asString()));
 #endif
@@ -1787,7 +1787,7 @@ QString Formula::dump() const
     result.append("  Constants:\n");
     for (int c = 0; c < d->constants.count(); c++) {
         QString vtext;
-        Value val = d->constants[c];
+        KCValue val = d->constants[c];
         if (val.isString()) vtext = QString("[%1]").arg(val.asString());
         else if (val.isNumber()) vtext = QString("%1").arg((double) numToDouble(val.asFloat()));
         else if (val.isBoolean()) vtext = QString("%1").arg(val.asBoolean() ? "True" : "False");

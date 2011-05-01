@@ -42,7 +42,7 @@
 #include <kspread/RowColumnFormat.h>
 #include <kspread/KCSheet.h>
 #include <kspread/KCStyle.h>
-#include <kspread/Value.h>
+#include <kspread/KCValue.h>
 #include <kspread/ValueConverter.h>
 
 // hehe >:->
@@ -158,20 +158,20 @@ KoFilter::ConversionStatus CSVFilter::convert(const QByteArray& from, const QByt
                 break;
             }
             case KoCsvImportDialog::Text: {
-                Value value(text);
+                KCValue value(text);
                 cell.setValue(value);
                 cell.setUserInput(ksdoc->map()->converter()->asString(value).asString());
                 break;
             }
             case KoCsvImportDialog::Date: {
-                Value value(text);
+                KCValue value(text);
                 cell.setValue(ksdoc->map()->converter()->asDate(value));
                 cell.setUserInput(ksdoc->map()->converter()->asString(value).asString());
                 break;
             }
             case KoCsvImportDialog::Currency: {
-                Value value(text);
-                value.setFormat(Value::fmt_Money);
+                KCValue value(text);
+                value.setFormat(KCValue::fmt_Money);
                 cell.setValue(value);
                 cell.setUserInput(ksdoc->map()->converter()->asString(value).asString());
                 break;

@@ -24,7 +24,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-#include <Value.h>
+#include <KCValue.h>
 
 class TestEngineeringFunctions: public QObject
 {
@@ -74,7 +74,7 @@ private slots:
     void testOCT2HEX();
 
 private:
-    Value evaluate(const QString&);
+    KCValue evaluate(const QString&);
 };
 
 #endif // KSPREAD_TEST_ENGINEERING_FUNCTIONS

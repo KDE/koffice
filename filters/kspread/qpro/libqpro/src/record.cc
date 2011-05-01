@@ -466,7 +466,7 @@ QpRecFloatingPointCell::QpRecFloatingPointCell(QP_INT16, QpIStream& pIn)
 
     pIn >> cValue;
 
-    QP_DEBUG(", Value " << cValue << endl);
+    QP_DEBUG(", KCValue " << cValue << endl);
 }
 
 QpRecFloatingPointCell::~QpRecFloatingPointCell()

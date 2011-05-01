@@ -228,7 +228,7 @@ set (kspreadodf_LIB_SRCS
     StyleStorage.cpp
     Util.cpp
     Validity.cpp
-    Value.cpp
+    KCValue.cpp
     ValueCalc.cpp
     ValueConverter.cpp
     ValueFormatter.cpp

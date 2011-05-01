@@ -29,7 +29,7 @@
 
 /**
  * \ingroup Plugin
- * \ingroup Value
+ * \ingroup KCValue
  * Registry for function modules.
  */
 class KSPREAD_EXPORT FunctionModuleRegistry : public QObject, public KoGenericRegistry<FunctionModule*>

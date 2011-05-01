@@ -84,7 +84,7 @@ QString SpellCheckCommand::fetchMoreText()
     QString text;
     // Take the next string value.
     while (d->index < d->storage.count() && text.isEmpty()) {
-        const Value value = d->storage.data(d->index);
+        const KCValue value = d->storage.data(d->index);
         if (value.isString()) {
             text = value.asString();
             d->currentCell = KCCell(d->currentSheet, d->storage.col(d->index), d->storage.row(d->index));
@@ -130,7 +130,7 @@ void SpellCheckCommand::finishedCurrentFeed()
     }
     DataManipulator* command = new DataManipulator(d->command);
     command->setSheet(d->currentSheet);
-    command->setValue(Value(d->dialog->buffer()));
+    command->setValue(KCValue(d->dialog->buffer()));
     command->setParsing(false);
     command->add(QPoint(d->currentCell.column(), d->currentCell.row()));
     command->setRegisterUndo(false);

@@ -116,7 +116,7 @@ bool Conditions::currentCondition(const KCCell& cell, Conditional & condition) c
 {
     /* for now, the first condition that is true is the one that will be used */
 
-    const Value value = cell.value();
+    const KCValue value = cell.value();
     ValueCalc *const calc = cell.sheet()->map()->calc();
 
     QLinkedList<Conditional>::const_iterator it;
@@ -157,18 +157,18 @@ bool Conditions::currentCondition(const KCCell& cell, Conditional & condition) c
             }
             break;
         case Conditional::Between: {
-            const QVector<Value> values(QVector<Value>() << condition.value1 << condition.value2);
-            const Value min = calc->min(values);
-            const Value max = calc->max(values);
+            const QVector<KCValue> values(QVector<KCValue>() << condition.value1 << condition.value2);
+            const KCValue min = calc->min(values);
+            const KCValue max = calc->max(values);
             if (value.compare(min) >= 0 && value.compare(max) <= 0) {
                 return true;
             }
             break;
         }
         case Conditional::Different: {
-            const QVector<Value> values(QVector<Value>() << condition.value1 << condition.value2);
-            const Value min = calc->min(values);
-            const Value max = calc->max(values);
+            const QVector<KCValue> values(QVector<KCValue>() << condition.value1 << condition.value2);
+            const KCValue min = calc->min(values);
+            const KCValue max = calc->max(values);
             if (value.greater(max) || value.less(min)) {
                 return true;
             }
@@ -259,7 +259,7 @@ bool Conditions::isTrueFormula(const KCCell &cell, const QString &formula, const
         }
         f.setExpression(newFormula);
     }
-    Value val = f.eval();
+    KCValue val = f.eval();
     return calc->conv()->asBoolean(val).asBoolean();
 }
 
@@ -448,7 +448,7 @@ void Conditions::loadOdfConditionValue(const QString &styleCondition, Conditiona
         loadOdfCondition(val, newCondition, parser);
     }
 
-    //GetFunction ::= cell-content-is-between(Value, Value) | cell-content-is-not-between(Value, Value)
+    //GetFunction ::= cell-content-is-between(KCValue, KCValue) | cell-content-is-not-between(KCValue, KCValue)
     //for the moment we support just int/double value, not text/date/time :(
     if (val.contains("cell-content-is-between(")) {
         val = val.remove("cell-content-is-between(");
@@ -466,7 +466,7 @@ void Conditions::loadOdfConditionValue(const QString &styleCondition, Conditiona
         val = val.mid(16);
         if (val.endsWith(")")) val = val.left(val.length() - 1);
         newCondition.cond = Conditional::IsTrueFormula;
-        newCondition.value1 = Value(KSpread::Odf::decodeFormula(val));
+        newCondition.value1 = KCValue(KSpread::Odf::decodeFormula(val));
     }
 }
 
@@ -497,7 +497,7 @@ void Conditions::loadOdfCondition(QString &valExpression, Conditional &newCondit
     //kDebug(36003) << "\tvalue:" << value;
 
     if (value.length() > 1 && value[0] == '"' && value[value.length()-1] == '"') {
-        newCondition.value1 = Value(value.mid(1, value.length()-2));
+        newCondition.value1 = KCValue(value.mid(1, value.length()-2));
     } else {
         newCondition.value1 = parser->parse(value);
     }
@@ -532,10 +532,10 @@ void Conditions::loadConditions(const KoXmlElement &element, const ValueParser *
         }
 
         if (conditionElement.hasAttribute("strval1")) {
-            newCondition.value1 = Value(conditionElement.attribute("strval1"));
+            newCondition.value1 = KCValue(conditionElement.attribute("strval1"));
 
             if (conditionElement.hasAttribute("strval2"))
-                newCondition.value2 = Value(conditionElement.attribute("strval2"));
+                newCondition.value2 = KCValue(conditionElement.attribute("strval2"));
         }
 
         if (conditionElement.hasAttribute("style")) {

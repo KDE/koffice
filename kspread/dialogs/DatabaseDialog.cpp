@@ -564,7 +564,7 @@ void DatabaseDialog::accept()
                 DataManipulator* command = new DataManipulator(macroCommand);
                 command->setParsing(true);
                 command->setSheet(sheet);
-                command->setValue(Value(query.value(i).toString()));
+                command->setValue(KCValue(query.value(i).toString()));
                 command->add(KCRegion(left + i, top + y, sheet));
             }
             ++y;
@@ -580,7 +580,7 @@ void DatabaseDialog::accept()
                 DataManipulator* command = new DataManipulator(macroCommand);
                 command->setParsing(true);
                 command->setSheet(sheet);
-                command->setValue(Value(query.value(i).toString()));
+                command->setValue(KCValue(query.value(i).toString()));
                 command->add(KCRegion(left + i, top + y, sheet));
             }
             ++y;

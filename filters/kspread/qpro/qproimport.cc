@@ -28,7 +28,7 @@
 #include <kspread/part/Doc.h>
 #include <kspread/KCSheet.h>
 #include <kspread/KCCell.h>
-#include <kspread/Value.h>
+#include <kspread/KCValue.h>
 #include <kspread/Map.h>
 
 #include <qproimport.h>
@@ -259,7 +259,7 @@ void QpImport::setText(KCSheet* sheet, int _row, int _column, const QString& _te
     KCCell cell(sheet, _column, _row);
     if (asString) {
         cell.setUserInput(_text);
-        cell.setValue(Value(_text));
+        cell.setValue(KCValue(_text));
     } else {
         cell.parseUserInput(_text);
     }

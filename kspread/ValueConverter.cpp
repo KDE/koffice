@@ -34,286 +34,286 @@ const CalculationSettings* ValueConverter::settings() const
     return m_parser->settings();
 }
 
-Value ValueConverter::asBoolean(const Value &value, bool* ok) const
+KCValue ValueConverter::asBoolean(const KCValue &value, bool* ok) const
 {
-    Value val;
+    KCValue val;
 
     if (ok)
         *ok = true;
     bool okay = true;
 
     switch (value.type()) {
-    case Value::Empty:
-        val = Value(false);
+    case KCValue::Empty:
+        val = KCValue(false);
         break;
-    case Value::Boolean:
+    case KCValue::Boolean:
         val = value;
         break;
-    case Value::Integer:
-        val = Value(value.asInteger() ? true : false);
+    case KCValue::Integer:
+        val = KCValue(value.asInteger() ? true : false);
         break;
-    case Value::Float:
-        val = Value((value.asFloat() == 0.0) ? false : true);
+    case KCValue::Float:
+        val = KCValue((value.asFloat() == 0.0) ? false : true);
         break;
-    case Value::Complex:
-        val = Value((value.asComplex().real() == complex<Number>(0.0, 0.0)) ? false : true);
+    case KCValue::Complex:
+        val = KCValue((value.asComplex().real() == complex<Number>(0.0, 0.0)) ? false : true);
         break;
-    case Value::String:
+    case KCValue::String:
         val = m_parser->tryParseBool(value.asString(), &okay);
         if (!okay)
-            val = Value(false);
+            val = KCValue(false);
         if (ok)
             *ok = okay;
         break;
-    case Value::Array:
+    case KCValue::Array:
         val = asBoolean(value.element(0, 0));
         break;
-    case Value::CellRange:
+    case KCValue::CellRange:
         /* NOTHING */
         break;
-    case Value::Error:
-        val = Value(false);
+    case KCValue::Error:
+        val = KCValue(false);
         break;
     };
 
     return val;
 }
 
-Value ValueConverter::asInteger(const Value &value, bool* ok) const
+KCValue ValueConverter::asInteger(const KCValue &value, bool* ok) const
 {
-    Value val;
+    KCValue val;
 
     if (ok)
         *ok = true;
 
     switch (value.type()) {
-    case Value::Empty:
-        val = Value(0);
+    case KCValue::Empty:
+        val = KCValue(0);
         break;
-    case Value::Boolean:
-        val = Value(value.asBoolean() ? 1 : 0);
+    case KCValue::Boolean:
+        val = KCValue(value.asBoolean() ? 1 : 0);
         break;
-    case Value::Integer:
+    case KCValue::Integer:
         val = value;
         break;
-    case Value::Float:
-        val = Value(value.asInteger());
+    case KCValue::Float:
+        val = KCValue(value.asInteger());
         break;
-    case Value::Complex:
-        val = Value(value.asInteger());
+    case KCValue::Complex:
+        val = KCValue(value.asInteger());
         break;
-    case Value::String:
+    case KCValue::String:
         val = m_parser->parse(value.asString());
         if (!val.isNumber()) {
-            val = Value(0);
+            val = KCValue(0);
             if (ok)
                 *ok = false;
         }
-        val = Value(val.asInteger());
+        val = KCValue(val.asInteger());
         break;
-    case Value::Array:
+    case KCValue::Array:
         val = asInteger(value.element(0, 0));
         break;
-    case Value::CellRange:
+    case KCValue::CellRange:
         /* NOTHING */
         break;
-    case Value::Error:
-        val = Value(0);
+    case KCValue::Error:
+        val = KCValue(0);
         break;
     };
 
     return val;
 }
 
-Value ValueConverter::asFloat(const Value &value, bool* ok) const
+KCValue ValueConverter::asFloat(const KCValue &value, bool* ok) const
 {
-    Value val;
+    KCValue val;
 
     if (ok)
         *ok = true;
 
     switch (value.type()) {
-    case Value::Empty:
-        val = Value(0.0);
+    case KCValue::Empty:
+        val = KCValue(0.0);
         break;
-    case Value::Boolean:
-        val = Value(value.asBoolean() ? 1.0 : 0.0);
+    case KCValue::Boolean:
+        val = KCValue(value.asBoolean() ? 1.0 : 0.0);
         break;
-    case Value::Integer:
-        val = Value(value.asFloat());
+    case KCValue::Integer:
+        val = KCValue(value.asFloat());
         break;
-    case Value::Float:
+    case KCValue::Float:
         val = value;
         break;
-    case Value::Complex:
-        val = Value(value.asFloat());
+    case KCValue::Complex:
+        val = KCValue(value.asFloat());
         break;
-    case Value::String:
+    case KCValue::String:
         val = m_parser->parse(value.asString());
         if (!val.isNumber()) {
-            val = Value(0.0);
+            val = KCValue(0.0);
             if (ok)
                 *ok = false;
         }
-        val = Value(val.asFloat());
+        val = KCValue(val.asFloat());
         break;
-    case Value::Array:
+    case KCValue::Array:
         val = asFloat(value.element(0, 0));
         break;
-    case Value::CellRange:
+    case KCValue::CellRange:
         /* NOTHING */
         break;
-    case Value::Error:
-        val = Value(0.0);
+    case KCValue::Error:
+        val = KCValue(0.0);
         break;
     };
 
     return val;
 }
 
-Value ValueConverter::asComplex(const Value &value, bool* ok) const
+KCValue ValueConverter::asComplex(const KCValue &value, bool* ok) const
 {
-    Value val;
+    KCValue val;
 
     if (ok)
         *ok = true;
 
     switch (value.type()) {
-    case Value::Empty:
-        val = Value(complex<Number>(0.0, 0.0));
+    case KCValue::Empty:
+        val = KCValue(complex<Number>(0.0, 0.0));
         break;
-    case Value::Boolean:
-        val = Value(complex<Number>(value.asBoolean() ? 1.0 : 0.0, 0.0));
+    case KCValue::Boolean:
+        val = KCValue(complex<Number>(value.asBoolean() ? 1.0 : 0.0, 0.0));
         break;
-    case Value::Integer:
-    case Value::Float:
-        val = Value(complex<Number>(value.asFloat(), 0.0));
+    case KCValue::Integer:
+    case KCValue::Float:
+        val = KCValue(complex<Number>(value.asFloat(), 0.0));
         break;
-    case Value::Complex:
+    case KCValue::Complex:
         val = value;
         break;
-    case Value::String:
+    case KCValue::String:
         val = m_parser->parse(value.asString());
         if (!val.isNumber()) {
-            val = Value(complex<Number>(0.0, 0.0));
+            val = KCValue(complex<Number>(0.0, 0.0));
             if (ok)
                 *ok = false;
         }
-        val = Value(val.asComplex());
+        val = KCValue(val.asComplex());
         break;
-    case Value::Array:
+    case KCValue::Array:
         val = asComplex(value.element(0, 0));
         break;
-    case Value::CellRange:
+    case KCValue::CellRange:
         /* NOTHING */
         break;
-    case Value::Error:
-        val = Value(complex<Number>(0.0, 0.0));
+    case KCValue::Error:
+        val = KCValue(complex<Number>(0.0, 0.0));
         break;
     };
 
     return val;
 }
 
-Value ValueConverter::asNumeric(const Value &value, bool* ok) const
+KCValue ValueConverter::asNumeric(const KCValue &value, bool* ok) const
 {
-    Value val;
+    KCValue val;
 
     if (ok)
         *ok = true;
 
     switch (value.type()) {
-    case Value::Empty:
-        val = Value(0.0);
+    case KCValue::Empty:
+        val = KCValue(0.0);
         break;
-    case Value::Boolean:
-        val = Value(value.asBoolean() ? 1.0 : 0.0);
+    case KCValue::Boolean:
+        val = KCValue(value.asBoolean() ? 1.0 : 0.0);
         break;
-    case Value::Integer:
-    case Value::Float:
-    case Value::Complex:
+    case KCValue::Integer:
+    case KCValue::Float:
+    case KCValue::Complex:
         val = value;
         break;
-    case Value::String:
+    case KCValue::String:
         val = m_parser->parse(value.asString());
         if (!val.isNumber()) {
-            val = Value(0.0);
+            val = KCValue(0.0);
             if (ok)
                 *ok = false;
         }
         break;
-    case Value::Array:
+    case KCValue::Array:
         val = asNumeric(value.element(0, 0));
         break;
-    case Value::CellRange:
+    case KCValue::CellRange:
         /* NOTHING */
         break;
-    case Value::Error:
-        val = Value(0.0);
+    case KCValue::Error:
+        val = KCValue(0.0);
         break;
     };
 
     return val;
 }
 
-Value ValueConverter::asString(const Value &value) const
+KCValue ValueConverter::asString(const KCValue &value) const
 {
     // This is a simpler version of ValueFormatter... We cannot use that one,
     // as we sometimes want to generate the string differently ...
 
-    Value val;
+    KCValue val;
     QString s;
-    Value::KCFormat fmt;
+    KCValue::KCFormat fmt;
     int pos;
     switch (value.type()) {
-    case Value::Empty:
-        val = Value(QString());
+    case KCValue::Empty:
+        val = KCValue(QString());
         break;
-    case Value::Boolean:
-        val = Value(value.asBoolean() ? ki18n("True").toString(m_parser->settings()->locale()) :
+    case KCValue::Boolean:
+        val = KCValue(value.asBoolean() ? ki18n("True").toString(m_parser->settings()->locale()) :
                     ki18n("False").toString(m_parser->settings()->locale()));
         break;
-    case Value::Integer: {
+    case KCValue::Integer: {
         fmt = value.format();
-        if (fmt == Value::fmt_Percent)
-            val = Value(QString::number(value.asInteger() * 100) + " %");
-        else if (fmt == Value::fmt_DateTime)
-            val = Value(m_parser->settings()->locale()->formatDateTime(value.asDateTime(settings())));
-        else if (fmt == Value::fmt_Date)
-            val = Value(m_parser->settings()->locale()->formatDate(value.asDate(settings())));
-        else if (fmt == Value::fmt_Time)
-            val = Value(m_parser->settings()->locale()->formatTime(value.asTime(settings())));
+        if (fmt == KCValue::fmt_Percent)
+            val = KCValue(QString::number(value.asInteger() * 100) + " %");
+        else if (fmt == KCValue::fmt_DateTime)
+            val = KCValue(m_parser->settings()->locale()->formatDateTime(value.asDateTime(settings())));
+        else if (fmt == KCValue::fmt_Date)
+            val = KCValue(m_parser->settings()->locale()->formatDate(value.asDate(settings())));
+        else if (fmt == KCValue::fmt_Time)
+            val = KCValue(m_parser->settings()->locale()->formatTime(value.asTime(settings())));
         else
-            val = Value(QString::number(value.asInteger()));
+            val = KCValue(QString::number(value.asInteger()));
     }
     break;
-    case Value::Float:
+    case KCValue::Float:
         fmt = value.format();
-        if (fmt == Value::fmt_DateTime)
-            val = Value(m_parser->settings()->locale()->formatDateTime(value.asDateTime(settings())));
-        else if (fmt == Value::fmt_Date)
-            val = Value(m_parser->settings()->locale()->formatDate(value.asDate(settings()), KLocale::ShortDate));
-        else if (fmt == Value::fmt_Time)
-            val = Value(m_parser->settings()->locale()->formatTime(value.asTime(settings())));
+        if (fmt == KCValue::fmt_DateTime)
+            val = KCValue(m_parser->settings()->locale()->formatDateTime(value.asDateTime(settings())));
+        else if (fmt == KCValue::fmt_Date)
+            val = KCValue(m_parser->settings()->locale()->formatDate(value.asDate(settings()), KLocale::ShortDate));
+        else if (fmt == KCValue::fmt_Time)
+            val = KCValue(m_parser->settings()->locale()->formatTime(value.asTime(settings())));
         else {
             //convert the number, change decimal point from English to local
             s = QString::number(numToDouble(value.asFloat()), 'g', 10);
             const QString decimalSymbol = m_parser->settings()->locale()->decimalSymbol();
             if (!decimalSymbol.isNull() && ((pos = s.indexOf('.')) != -1))
                 s = s.replace(pos, 1, decimalSymbol);
-            if (fmt == Value::fmt_Percent)
+            if (fmt == KCValue::fmt_Percent)
                 s += " %";
-            val = Value(s);
+            val = KCValue(s);
         }
         break;
-    case Value::Complex:
+    case KCValue::Complex:
         fmt = value.format();
-        if (fmt == Value::fmt_DateTime)
-            val = Value(m_parser->settings()->locale()->formatDateTime(value.asDateTime(settings())));
-        else if (fmt == Value::fmt_Date)
-            val = Value(m_parser->settings()->locale()->formatDate(value.asDate(settings()), KLocale::ShortDate));
-        else if (fmt == Value::fmt_Time)
-            val = Value(m_parser->settings()->locale()->formatTime(value.asTime(settings())));
+        if (fmt == KCValue::fmt_DateTime)
+            val = KCValue(m_parser->settings()->locale()->formatDateTime(value.asDateTime(settings())));
+        else if (fmt == KCValue::fmt_Date)
+            val = KCValue(m_parser->settings()->locale()->formatDate(value.asDate(settings()), KLocale::ShortDate));
+        else if (fmt == KCValue::fmt_Time)
+            val = KCValue(m_parser->settings()->locale()->formatTime(value.asTime(settings())));
         else {
             //convert the number, change decimal point from English to local
             const QString decimalSymbol = m_parser->settings()->locale()->decimalSymbol();
@@ -329,192 +329,192 @@ Value ValueConverter::asString(const Value &value) const
             // TODO Stefan: Some prefer 'j'. Configure option? Spec?
             s += imag + 'i';
             // NOTE Stefan: Never recognized a complex percentage anywhere. ;-)
-//         if (fmt == Value::fmt_Percent)
+//         if (fmt == KCValue::fmt_Percent)
 //           s += " %";
-            val = Value(s);
+            val = KCValue(s);
         }
         break;
-    case Value::String:
+    case KCValue::String:
         val = value;
         break;
-    case Value::Array:
-        val = Value(asString(value.element(0, 0)));
+    case KCValue::Array:
+        val = KCValue(asString(value.element(0, 0)));
         break;
-    case Value::CellRange:
+    case KCValue::CellRange:
         /* NOTHING */
         break;
-    case Value::Error:
-        val = Value(value.errorMessage());
+    case KCValue::Error:
+        val = KCValue(value.errorMessage());
         break;
     };
 
     return val;
 }
 
-Value ValueConverter::asDateTime(const Value &value, bool* ok) const
+KCValue ValueConverter::asDateTime(const KCValue &value, bool* ok) const
 {
-    Value val;
+    KCValue val;
 
     if (ok)
         *ok = true;
     bool okay = true;
 
     switch (value.type()) {
-    case Value::Empty:
-        val = Value(QDateTime::currentDateTime(), settings());
+    case KCValue::Empty:
+        val = KCValue(QDateTime::currentDateTime(), settings());
         break;
-    case Value::Boolean:
+    case KCValue::Boolean:
         //ignore the bool value... any better idea? ;)
-        val = Value(QDateTime::currentDateTime(), settings());
+        val = KCValue(QDateTime::currentDateTime(), settings());
         break;
-    case Value::Integer:
-    case Value::Float:
-    case Value::Complex:
-        val = Value(value.asFloat());
-        val.setFormat(Value::fmt_DateTime);
+    case KCValue::Integer:
+    case KCValue::Float:
+    case KCValue::Complex:
+        val = KCValue(value.asFloat());
+        val.setFormat(KCValue::fmt_DateTime);
         break;
-    case Value::String:
+    case KCValue::String:
         //no DateTime m_parser, so we parse as Date, hoping for the best ...
         val = m_parser->tryParseDate(value.asString(), &okay);
         if (!okay)
-            val = Value::errorVALUE();
+            val = KCValue::errorVALUE();
         if (ok)
             *ok = okay;
-        val.setFormat(Value::fmt_DateTime);
+        val.setFormat(KCValue::fmt_DateTime);
         break;
-    case Value::Array:
+    case KCValue::Array:
         val = asDateTime(value.element(0, 0));
         break;
-    case Value::CellRange:
+    case KCValue::CellRange:
         /* NOTHING */
         break;
-    case Value::Error:
+    case KCValue::Error:
         break;
     };
 
     return val;
 }
 
-Value ValueConverter::asDate(const Value &value, bool* ok) const
+KCValue ValueConverter::asDate(const KCValue &value, bool* ok) const
 {
-    Value val;
+    KCValue val;
 
     if (ok)
         *ok = true;
     bool okay = true;
 
     switch (value.type()) {
-    case Value::Empty:
-        val = Value(QDate::currentDate(), settings());
+    case KCValue::Empty:
+        val = KCValue(QDate::currentDate(), settings());
         break;
-    case Value::Boolean:
+    case KCValue::Boolean:
         //ignore the bool value... any better idea? ;)
-        val = Value(QDate::currentDate(), settings());
+        val = KCValue(QDate::currentDate(), settings());
         break;
-    case Value::Integer:
-    case Value::Float:
-    case Value::Complex:
-        val = Value(value.asFloat());
-        val.setFormat(Value::fmt_Date);
+    case KCValue::Integer:
+    case KCValue::Float:
+    case KCValue::Complex:
+        val = KCValue(value.asFloat());
+        val.setFormat(KCValue::fmt_Date);
         break;
-    case Value::String:
+    case KCValue::String:
         val = m_parser->tryParseDate(value.asString(), &okay);
         if (!okay)
-            val = Value::errorVALUE();
+            val = KCValue::errorVALUE();
         if (ok)
             *ok = okay;
         break;
-    case Value::Array:
+    case KCValue::Array:
         val = asDate(value.element(0, 0));
         break;
-    case Value::CellRange:
+    case KCValue::CellRange:
         /* NOTHING */
         break;
-    case Value::Error:
+    case KCValue::Error:
         break;
     };
 
     return val;
 }
 
-Value ValueConverter::asTime(const Value &value, bool* ok) const
+KCValue ValueConverter::asTime(const KCValue &value, bool* ok) const
 {
-    Value val;
+    KCValue val;
 
     if (ok)
         *ok = true;
     bool okay = true;
 
     switch (value.type()) {
-    case Value::Empty:
-        val = Value(QTime::currentTime(), settings());
+    case KCValue::Empty:
+        val = KCValue(QTime::currentTime(), settings());
         break;
-    case Value::Boolean:
+    case KCValue::Boolean:
         //ignore the bool value... any better idea? ;)
-        val = Value(QTime::currentTime(), settings());
+        val = KCValue(QTime::currentTime(), settings());
         break;
-    case Value::Integer:
-    case Value::Float:
-    case Value::Complex:
-        val = Value(value.asFloat());
-        val.setFormat(Value::fmt_Time);
+    case KCValue::Integer:
+    case KCValue::Float:
+    case KCValue::Complex:
+        val = KCValue(value.asFloat());
+        val.setFormat(KCValue::fmt_Time);
         break;
-    case Value::String:
+    case KCValue::String:
         val = m_parser->tryParseTime(value.asString(), &okay);
         if (!okay)
-            val = Value::errorVALUE();
+            val = KCValue::errorVALUE();
         if (ok)
             *ok = okay;
         break;
-    case Value::Array:
+    case KCValue::Array:
         val = asTime(value.element(0, 0));
         break;
-    case Value::CellRange:
+    case KCValue::CellRange:
         /* NOTHING */
         break;
-    case Value::Error:
+    case KCValue::Error:
         break;
     };
 
     return val;
 }
 
-bool ValueConverter::toBoolean(const Value& value) const
+bool ValueConverter::toBoolean(const KCValue& value) const
 {
     return asBoolean(value).asBoolean();
 }
 
-int ValueConverter::toInteger(const Value& value) const
+int ValueConverter::toInteger(const KCValue& value) const
 {
     return asInteger(value).asInteger();
 }
 
-Number ValueConverter::toFloat(const Value& value) const
+Number ValueConverter::toFloat(const KCValue& value) const
 {
     return asFloat(value).asFloat();
 }
 
-complex<Number> ValueConverter::toComplex(const Value& value) const
+complex<Number> ValueConverter::toComplex(const KCValue& value) const
 {
     return asComplex(value).asComplex();
 }
 
-QString ValueConverter::toString(const Value& value) const
+QString ValueConverter::toString(const KCValue& value) const
 {
     return asString(value).asString();
 }
 
-QDateTime ValueConverter::toDateTime(const Value& value) const
+QDateTime ValueConverter::toDateTime(const KCValue& value) const
 {
     return asDateTime(value).asDateTime(settings());
 }
 
-QDate ValueConverter::toDate(const Value& value) const
+QDate ValueConverter::toDate(const KCValue& value) const
 {
     return asDate(value).asDate(settings());
 }
 
-QTime ValueConverter::toTime(const Value& value) const
+QTime ValueConverter::toTime(const KCValue& value) const
 {
     return asTime(value).asTime(settings());
 }

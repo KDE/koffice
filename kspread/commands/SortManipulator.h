@@ -71,7 +71,7 @@ public:
 protected:
     virtual bool preProcessing();
     virtual bool postProcessing();
-    virtual Value newValue(Element *element, int col, int row,
+    virtual KCValue newValue(Element *element, int col, int row,
                            bool *parse, KCFormat::Type *fmtType);
     virtual KCStyle newFormat(Element *element, int col, int row);
 

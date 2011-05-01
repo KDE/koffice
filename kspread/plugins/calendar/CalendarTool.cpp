@@ -24,7 +24,7 @@
 
 #include <KCSheet.h>
 #include <part/Doc.h>
-#include <Value.h>
+#include <KCValue.h>
 
 #include <KoCanvasBase.h>
 
@@ -200,7 +200,7 @@ void CalendarTool::setText(KCSheet* sheet, int _row, int _column, const QString&
     KCCell cell(sheet, _column, _row);
     if (asString) {
         cell.setUserInput(_text);
-        cell.setValue(Value(_text));
+        cell.setValue(KCValue(_text));
     } else {
         cell.parseUserInput(_text);
     }

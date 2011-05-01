@@ -32,7 +32,7 @@
 #include <Map.h>
 #include <KCRegion.h>
 #include <KCCell.h>
-#include <Value.h>
+#include <KCValue.h>
 
 /**
 * The ScriptingReader class provides abstract high-level functionality to read
@@ -257,18 +257,18 @@ public slots:
         if (m_currentSheet && m_currentRow >= 0) {
             for (int col = m_currentLeft; col <= m_currentRight; ++col) {
                 KCCell cell(m_currentSheet, col, m_currentRow);
-                Value value = cell.value();
+                KCValue value = cell.value();
 
-                //TODO add toVariant() method to Value and use it here and in SheetAdaptor::valueToVariant
+                //TODO add toVariant() method to KCValue and use it here and in SheetAdaptor::valueToVariant
                 //values << value.toVariant();
 
                 QVariant v;
                 switch (value.type()) {
-                case Value::Empty: break;
-                case Value::Boolean: v = value.asBoolean(); break;
-                case Value::Integer: v = value.asInteger(); break;
-                case Value::Float: v = (double) numToDouble(value.asFloat()); break;
-                case Value::String: //fall through
+                case KCValue::Empty: break;
+                case KCValue::Boolean: v = value.asBoolean(); break;
+                case KCValue::Integer: v = value.asInteger(); break;
+                case KCValue::Float: v = (double) numToDouble(value.asFloat()); break;
+                case KCValue::String: //fall through
                 default: v = value.asString(); break;
                 }
                 values << v;

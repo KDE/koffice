@@ -27,13 +27,13 @@ class CsvImport:
         openpage = self.dialog.addPage("Open","Import from CSV File","document-open")
         self.openwidget = self.forms.createFileWidget(openpage, "kfiledialog:///kspreadcsvimportopen")
         self.openwidget.setMode("Opening")
-        self.openwidget.setFilter("*.csv *.txt|Comma-Separated-Value Files\n*|All Files")
+        self.openwidget.setFilter("*.csv *.txt|Comma-Separated-KCValue Files\n*|All Files")
 
         datapage = self.dialog.addPage("Import","Import to sheet beginning at cell","document-import")
         self.sheetslistview = KSpread.createSheetsListView(datapage)
         self.sheetslistview.setEditorType("KCCell")
 
-        optionspage = self.dialog.addPage("Options","Comma Separated Value Options","configure")
+        optionspage = self.dialog.addPage("Options","Comma Separated KCValue Options","configure")
         self.optionswidget = self.forms.createWidgetFromUIFile(optionspage, os.path.join(self.currentpath, "csvoptions.ui"))
 
         if self.dialog.exec_loop():

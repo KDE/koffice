@@ -32,7 +32,7 @@
 #include "Map.h"
 #include "KCSheet.h"
 #include "KCRegion.h"
-#include "Value.h"
+#include "KCValue.h"
 #include "ValueFormatter.h"
 
 class RecalcManager::Private
@@ -225,7 +225,7 @@ void RecalcManager::recalc()
     const QList<KCCell> cells = d->cells.values();
     for (int c = 0; c < cells.count(); ++c) {
         // only recalculate, if no circular dependency occurred
-        if (cells.value(c).value() == Value::errorCIRCLE())
+        if (cells.value(c).value() == KCValue::errorCIRCLE())
             continue;
         // Check for valid formula; parses the expression, if not done already.
         if (!cells.value(c).formula().isValid())
@@ -234,7 +234,7 @@ void RecalcManager::recalc()
         const KCSheet* sheet = cells.value(c).sheet();
 
         // evaluate the formula and set the result
-        Value result = cells.value(c).formula().eval();
+        KCValue result = cells.value(c).formula().eval();
         if (result.isArray() && (result.columns() > 1 || result.rows() > 1)) {
             const QRect rect = cells.value(c).lockedCells();
             // unlock

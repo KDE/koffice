@@ -84,21 +84,21 @@ static QString tokenizeFormula(const QString& formula)
 
 
 // because we may need to promote expected value from integer to float
-#define CHECK_EVAL(x,y) { Value z(y); QCOMPARE(evaluate(x,z),(z)); }
+#define CHECK_EVAL(x,y) { KCValue z(y); QCOMPARE(evaluate(x,z),(z)); }
 
-Value TestFormula::evaluate(const QString& formula, Value& ex)
+KCValue TestFormula::evaluate(const QString& formula, KCValue& ex)
 {
     Formula f;
     QString expr = formula;
     if (expr[0] != '=')
         expr.prepend('=');
     f.setExpression(expr);
-    Value result = f.eval();
+    KCValue result = f.eval();
 
     if (result.isFloat() && ex.isInteger())
-        ex = Value(ex.asFloat());
+        ex = KCValue(ex.asFloat());
     if (result.isInteger() && ex.isFloat())
-        result = Value(result.asFloat());
+        result = KCValue(result.asFloat());
 
     return result;
 }
@@ -185,161 +185,161 @@ void TestFormula::testTokenizer()
 void TestFormula::testConstant()
 {
     // simple constants
-    CHECK_EVAL("0", Value(0));
-    CHECK_EVAL("1", Value(1));
-    CHECK_EVAL("-1", Value(-1));
-    CHECK_EVAL("3.14e7", Value(3.14e7));
-    CHECK_EVAL("3.14e-7", Value(3.14e-7));
+    CHECK_EVAL("0", KCValue(0));
+    CHECK_EVAL("1", KCValue(1));
+    CHECK_EVAL("-1", KCValue(-1));
+    CHECK_EVAL("3.14e7", KCValue(3.14e7));
+    CHECK_EVAL("3.14e-7", KCValue(3.14e-7));
 
     // String constants (from Odf 1.2 spec)
-    CHECK_EVAL("\"Hi\"", Value("Hi"));
-    CHECK_EVAL("\"Hi\"\"t\"", Value("Hi\"t"));
-    CHECK_EVAL("\"\\n\"", Value("\\n"));
+    CHECK_EVAL("\"Hi\"", KCValue("Hi"));
+    CHECK_EVAL("\"Hi\"\"t\"", KCValue("Hi\"t"));
+    CHECK_EVAL("\"\\n\"", KCValue("\\n"));
 
     // Constant errors
-    CHECK_EVAL("#N/A", Value::errorNA());
-    CHECK_EVAL("#DIV/0!", Value::errorDIV0());
-    CHECK_EVAL("#NAME?", Value::errorNAME());
-    CHECK_EVAL("#NULL!", Value::errorNULL());
-    CHECK_EVAL("#NUM!", Value::errorNUM());
-    CHECK_EVAL("#REF!", Value::errorREF());
-    CHECK_EVAL("#VALUE!", Value::errorVALUE());
+    CHECK_EVAL("#N/A", KCValue::errorNA());
+    CHECK_EVAL("#DIV/0!", KCValue::errorDIV0());
+    CHECK_EVAL("#NAME?", KCValue::errorNAME());
+    CHECK_EVAL("#NULL!", KCValue::errorNULL());
+    CHECK_EVAL("#NUM!", KCValue::errorNUM());
+    CHECK_EVAL("#REF!", KCValue::errorREF());
+    CHECK_EVAL("#VALUE!", KCValue::errorVALUE());
 
 }
 
 void TestFormula::testWhitespace()
 {
-    CHECK_EVAL("=ROUND(  10.1  ;  0  )", Value(10));
-    CHECK_EVAL("= ROUND(10.1;0)", Value(10));
-    CHECK_EVAL(" =ROUND(10.1;0)", Value::errorPARSE());
-    CHECK_EVAL("= ( ROUND( 9.8 ; 0 )  +  ROUND( 9.8 ; 0 ) ) ", Value(20));
-    CHECK_EVAL("=(ROUND(9.8;0) ROUND(9.8;0))", Value::errorPARSE());
+    CHECK_EVAL("=ROUND(  10.1  ;  0  )", KCValue(10));
+    CHECK_EVAL("= ROUND(10.1;0)", KCValue(10));
+    CHECK_EVAL(" =ROUND(10.1;0)", KCValue::errorPARSE());
+    CHECK_EVAL("= ( ROUND( 9.8 ; 0 )  +  ROUND( 9.8 ; 0 ) ) ", KCValue(20));
+    CHECK_EVAL("=(ROUND(9.8;0) ROUND(9.8;0))", KCValue::errorPARSE());
 }
 
 void TestFormula::testInvalid()
 {
     // Basic operations always throw errors if one of the values
     // is invalid. This is the difference to SUM and co.
-    CHECK_EVAL("a+0", Value::errorVALUE());
-    CHECK_EVAL("0-z", Value::errorVALUE());
-    CHECK_EVAL("a*b", Value::errorVALUE());
-    CHECK_EVAL("u/2", Value::errorVALUE());
+    CHECK_EVAL("a+0", KCValue::errorVALUE());
+    CHECK_EVAL("0-z", KCValue::errorVALUE());
+    CHECK_EVAL("a*b", KCValue::errorVALUE());
+    CHECK_EVAL("u/2", KCValue::errorVALUE());
 }
 
 void TestFormula::testUnary()
 {
     // unary minus
-    CHECK_EVAL("-1", Value(-1));
-    CHECK_EVAL("--1", Value(1));
-    CHECK_EVAL("---1", Value(-1));
-    CHECK_EVAL("----1", Value(1));
-    CHECK_EVAL("-----1", Value(-1));
-    CHECK_EVAL("5-1", Value(4));
-    CHECK_EVAL("5--1", Value(6));
-    CHECK_EVAL("5---1", Value(4));
-    CHECK_EVAL("5----1", Value(6));
-    CHECK_EVAL("5-----1", Value(4));
-    CHECK_EVAL("5-----1*2.5", Value(2.5));
-    CHECK_EVAL("5------1*2.5", Value(7.5));
-    CHECK_EVAL("-SIN(0)", Value(0));
-    CHECK_EVAL("1.1-SIN(0)", Value(1.1));
-    CHECK_EVAL("1.2--SIN(0)", Value(1.2));
-    CHECK_EVAL("1.3---SIN(0)", Value(1.3));
-    CHECK_EVAL("-COS(0)", Value(-1));
-    CHECK_EVAL("1.1-COS(0)", Value(0.1));
-    CHECK_EVAL("1.2--COS(0)", Value(2.2));
-    CHECK_EVAL("1.3---COS(0)", Value(0.3));
+    CHECK_EVAL("-1", KCValue(-1));
+    CHECK_EVAL("--1", KCValue(1));
+    CHECK_EVAL("---1", KCValue(-1));
+    CHECK_EVAL("----1", KCValue(1));
+    CHECK_EVAL("-----1", KCValue(-1));
+    CHECK_EVAL("5-1", KCValue(4));
+    CHECK_EVAL("5--1", KCValue(6));
+    CHECK_EVAL("5---1", KCValue(4));
+    CHECK_EVAL("5----1", KCValue(6));
+    CHECK_EVAL("5-----1", KCValue(4));
+    CHECK_EVAL("5-----1*2.5", KCValue(2.5));
+    CHECK_EVAL("5------1*2.5", KCValue(7.5));
+    CHECK_EVAL("-SIN(0)", KCValue(0));
+    CHECK_EVAL("1.1-SIN(0)", KCValue(1.1));
+    CHECK_EVAL("1.2--SIN(0)", KCValue(1.2));
+    CHECK_EVAL("1.3---SIN(0)", KCValue(1.3));
+    CHECK_EVAL("-COS(0)", KCValue(-1));
+    CHECK_EVAL("1.1-COS(0)", KCValue(0.1));
+    CHECK_EVAL("1.2--COS(0)", KCValue(2.2));
+    CHECK_EVAL("1.3---COS(0)", KCValue(0.3));
 }
 
 void TestFormula::testBinary()
 {
     // simple binary operation
-    CHECK_EVAL("0+0", Value(0));
-    CHECK_EVAL("1+1", Value(2));
+    CHECK_EVAL("0+0", KCValue(0));
+    CHECK_EVAL("1+1", KCValue(2));
 
     // power operator is left associative
-    CHECK_EVAL("2^3", Value(8));
-    CHECK_EVAL("2^3^2", Value(64));
+    CHECK_EVAL("2^3", KCValue(8));
+    CHECK_EVAL("2^3^2", KCValue(64));
 
     // lead to division by zero
-    CHECK_EVAL("0/0", Value::errorDIV0());
-    CHECK_EVAL("1/0", Value::errorDIV0());
-    CHECK_EVAL("-4/0", Value::errorDIV0());
-    CHECK_EVAL("(2*3)/(6-2*3)", Value::errorDIV0());
-    CHECK_EVAL("1e3+7/0", Value::errorDIV0());
-    CHECK_EVAL("2^(99/0)", Value::errorDIV0());
+    CHECK_EVAL("0/0", KCValue::errorDIV0());
+    CHECK_EVAL("1/0", KCValue::errorDIV0());
+    CHECK_EVAL("-4/0", KCValue::errorDIV0());
+    CHECK_EVAL("(2*3)/(6-2*3)", KCValue::errorDIV0());
+    CHECK_EVAL("1e3+7/0", KCValue::errorDIV0());
+    CHECK_EVAL("2^(99/0)", KCValue::errorDIV0());
 
 }
 
 void TestFormula::testOperators()
 {
     // no parentheses, checking operator precendences
-    CHECK_EVAL("14+3*77", Value(245));
-    CHECK_EVAL("14-3*77", Value(-217));
-    CHECK_EVAL("26*4+81", Value(185));
-    CHECK_EVAL("26*4-81", Value(23));
-    CHECK_EVAL("30-45/3", Value(15));
-    CHECK_EVAL("45+45/3", Value(60));
-    CHECK_EVAL("4+3*2-1", Value(9));
+    CHECK_EVAL("14+3*77", KCValue(245));
+    CHECK_EVAL("14-3*77", KCValue(-217));
+    CHECK_EVAL("26*4+81", KCValue(185));
+    CHECK_EVAL("26*4-81", KCValue(23));
+    CHECK_EVAL("30-45/3", KCValue(15));
+    CHECK_EVAL("45+45/3", KCValue(60));
+    CHECK_EVAL("4+3*2-1", KCValue(9));
 }
 
 void TestFormula::testComparison()
 {
     // compare numbers
-    CHECK_EVAL("6>5", Value(true));
-    CHECK_EVAL("6<5", Value(false));
-    CHECK_EVAL("2=2", Value(true));
-    CHECK_EVAL("2=22", Value(false));
-    CHECK_EVAL("=3=3.0001", Value(false));
+    CHECK_EVAL("6>5", KCValue(true));
+    CHECK_EVAL("6<5", KCValue(false));
+    CHECK_EVAL("2=2", KCValue(true));
+    CHECK_EVAL("2=22", KCValue(false));
+    CHECK_EVAL("=3=3.0001", KCValue(false));
     // compare booleans
-    CHECK_EVAL("=TRUE()=FALSE()", Value(false));
-    CHECK_EVAL("=TRUE()=TRUE()", Value(true));
-    CHECK_EVAL("=FALSE()=FALSE()", Value(true));
+    CHECK_EVAL("=TRUE()=FALSE()", KCValue(false));
+    CHECK_EVAL("=TRUE()=TRUE()", KCValue(true));
+    CHECK_EVAL("=FALSE()=FALSE()", KCValue(true));
     // compare strings
-    CHECK_EVAL("=\"Hi\"=\"Bye\"", Value(false));
-    CHECK_EVAL("=\"5\"=5", Value(false));
-    CHECK_EVAL("=\"Hi\"=\"HI\"", Value(false));
-    CHECK_EVAL("b>a", Value(true));
-    CHECK_EVAL("b<aa", Value(false));
-    CHECK_EVAL("c<d", Value(true));
-    CHECK_EVAL("cc>d", Value(false));
+    CHECK_EVAL("=\"Hi\"=\"Bye\"", KCValue(false));
+    CHECK_EVAL("=\"5\"=5", KCValue(false));
+    CHECK_EVAL("=\"Hi\"=\"HI\"", KCValue(false));
+    CHECK_EVAL("b>a", KCValue(true));
+    CHECK_EVAL("b<aa", KCValue(false));
+    CHECK_EVAL("c<d", KCValue(true));
+    CHECK_EVAL("cc>d", KCValue(false));
     // compare dates
-    CHECK_EVAL("=DATE(2001;12;12)>DATE(2001;12;11)", Value(true));
-    CHECK_EVAL("=DATE(2001;12;12)<DATE(2001;12;11)", Value(false));
-    CHECK_EVAL("=DATE(1999;01;01)=DATE(1999;01;01)", Value(true));
-    CHECK_EVAL("=DATE(1998;01;01)=DATE(1999;01;01)", Value(false));
+    CHECK_EVAL("=DATE(2001;12;12)>DATE(2001;12;11)", KCValue(true));
+    CHECK_EVAL("=DATE(2001;12;12)<DATE(2001;12;11)", KCValue(false));
+    CHECK_EVAL("=DATE(1999;01;01)=DATE(1999;01;01)", KCValue(true));
+    CHECK_EVAL("=DATE(1998;01;01)=DATE(1999;01;01)", KCValue(false));
     // errors cannot be compared
-    CHECK_EVAL("=NA()=NA()", Value::errorNA());
-    CHECK_EVAL("=NA()>NA()", Value::errorNA());
-    CHECK_EVAL("#DIV/0!>0", Value::errorDIV0());
-    CHECK_EVAL("5<#VALUE!", Value::errorVALUE());
-    CHECK_EVAL("#DIV/0!=#DIV/0!", Value::errorDIV0());
+    CHECK_EVAL("=NA()=NA()", KCValue::errorNA());
+    CHECK_EVAL("=NA()>NA()", KCValue::errorNA());
+    CHECK_EVAL("#DIV/0!>0", KCValue::errorDIV0());
+    CHECK_EVAL("5<#VALUE!", KCValue::errorVALUE());
+    CHECK_EVAL("#DIV/0!=#DIV/0!", KCValue::errorDIV0());
 }
 
 void TestFormula::testString()
 {
     // string expansion ...
-    CHECK_EVAL("\"2\"+5", Value(7));
-    CHECK_EVAL("2+\"5\"", Value(7));
-    CHECK_EVAL("\"2\"+\"5\"", Value(7));
+    CHECK_EVAL("\"2\"+5", KCValue(7));
+    CHECK_EVAL("2+\"5\"", KCValue(7));
+    CHECK_EVAL("\"2\"+\"5\"", KCValue(7));
 }
 
 void TestFormula::testFunction()
 {
     // function with no arguments
-    CHECK_EVAL("TRUE()", Value(true));
+    CHECK_EVAL("TRUE()", KCValue(true));
 
     //the built-in sine function
-    CHECK_EVAL("SIN(0)", Value(0));
-    CHECK_EVAL("2+sin(\"2\"-\"2\")", Value(2));
-    CHECK_EVAL("\"1\"+sin(\"0\")", Value(1));
+    CHECK_EVAL("SIN(0)", KCValue(0));
+    CHECK_EVAL("2+sin(\"2\"-\"2\")", KCValue(2));
+    CHECK_EVAL("\"1\"+sin(\"0\")", KCValue(1));
 
     // function cascades
-    CHECK_EVAL("SUM(ABS( 1);ABS( 1))", Value(2));
-    CHECK_EVAL("SUM(ABS( 1);ABS(-1))", Value(2));
-    CHECK_EVAL("SUM(ABS(-1);ABS( 1))", Value(2));
-    CHECK_EVAL("SUM(ABS(-1);ABS(-1))", Value(2));
-    CHECK_EVAL("SUM(SUM(-2;-2;-2);SUM(-2;-2;-2;-2);SUM(-2;-2;-2;-2;-2))", Value(-24));
+    CHECK_EVAL("SUM(ABS( 1);ABS( 1))", KCValue(2));
+    CHECK_EVAL("SUM(ABS( 1);ABS(-1))", KCValue(2));
+    CHECK_EVAL("SUM(ABS(-1);ABS( 1))", KCValue(2));
+    CHECK_EVAL("SUM(ABS(-1);ABS(-1))", KCValue(2));
+    CHECK_EVAL("SUM(SUM(-2;-2;-2);SUM(-2;-2;-2;-2);SUM(-2;-2;-2;-2;-2))", KCValue(-24));
 }
 
 void TestFormula::testInlineArrays()
@@ -348,16 +348,16 @@ void TestFormula::testInlineArrays()
     // inline arrays
     CHECK_TOKENIZE("{1;2|3;4}", "oioioioio");
 
-    Value array(Value::Array);
-    array.setElement(0, 0, Value((int)1));
-    array.setElement(1, 0, Value((int)2));
-    array.setElement(0, 1, Value((int)3));
-    array.setElement(1, 1, Value((int)4));
+    KCValue array(KCValue::Array);
+    array.setElement(0, 0, KCValue((int)1));
+    array.setElement(1, 0, KCValue((int)2));
+    array.setElement(0, 1, KCValue((int)3));
+    array.setElement(1, 1, KCValue((int)4));
     CHECK_EVAL("={1;2|3;4}", array);
 
-    array.setElement(1, 0, Value(0.0));
+    array.setElement(1, 0, KCValue(0.0));
     CHECK_EVAL("={1;SIN(0)|3;4}", array);   // "dynamic"
-    CHECK_EVAL("=SUM({1;2|3;4})", Value(10));
+    CHECK_EVAL("=SUM({1;2|3;4})", KCValue(10));
 #endif
 }
 

@@ -18,7 +18,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "Value.h"
+#include "KCValue.h"
 #include "CalculationSettings.h"
 #include "CellStorage.h"
 #include "ValueStorage.h"
@@ -49,12 +49,12 @@ private:
     ValueStorage m_storage;
 };
 
-class Value::Private : public QSharedData
+class KCValue::Private : public QSharedData
 {
 public:
 
-    Value::Type type: 4;
-    Value::KCFormat format: 4;
+    KCValue::Type type: 4;
+    KCValue::KCFormat format: 4;
 
     union { // 64 bits at max!
         // b is also secondarily used to indicate a null value if type == Empty,
@@ -68,34 +68,34 @@ public:
     };
 
     // create empty data
-    Private() : type(Value::Empty), format(Value::fmt_None), ps(0) {}
+    Private() : type(KCValue::Empty), format(KCValue::fmt_None), ps(0) {}
 
     Private(const Private& o)
             : QSharedData(o)
             , type(o.type)
             , format(o.format) {
         switch (type) {
-        case Value::Empty:
+        case KCValue::Empty:
         default:
             ps = 0;
             break;
-        case Value::Boolean:
+        case KCValue::Boolean:
             b = o.b;
             break;
-        case Value::Integer:
+        case KCValue::Integer:
             i = o.i;
             break;
-        case Value::Float:
+        case KCValue::Float:
             f = o.f;
             break;
-        case Value::Complex:
+        case KCValue::Complex:
             pc = new complex<Number>(*o.pc);
             break;
-        case Value::String:
-        case Value::Error:
+        case KCValue::String:
+        case KCValue::Error:
             ps = new QString(*o.ps);
             break;
-        case Value::Array:
+        case KCValue::Array:
             pa = new ValueArray(*o.pa);
             break;
         }
@@ -120,80 +120,80 @@ public:
 
     /** Deletes all data. */
     void clear() {
-        if (type == Value::Array)   delete pa;
-        if (type == Value::Complex) delete pc;
-        if (type == Value::Error)   delete ps;
-        if (type == Value::String)  delete ps;
+        if (type == KCValue::Array)   delete pa;
+        if (type == KCValue::Complex) delete pc;
+        if (type == KCValue::Error)   delete ps;
+        if (type == KCValue::String)  delete ps;
     }
 
     /** set most probable formatting based on the type */
     void setFormatByType();
 
 private:
-    void operator=(const Value::Private& o);
+    void operator=(const KCValue::Private& o);
 
     static Private* s_null;
 };
 
-void Value::Private::setFormatByType()
+void KCValue::Private::setFormatByType()
 {
     switch (type) {
-    case Value::Empty:
-        format = Value::fmt_None;
+    case KCValue::Empty:
+        format = KCValue::fmt_None;
         break;
-    case Value::Boolean:
-        format = Value::fmt_Boolean;
+    case KCValue::Boolean:
+        format = KCValue::fmt_Boolean;
         break;
-    case Value::Integer:
-    case Value::Float:
-    case Value::Complex:
-        format = Value::fmt_Number;
+    case KCValue::Integer:
+    case KCValue::Float:
+    case KCValue::Complex:
+        format = KCValue::fmt_Number;
         break;
-    case Value::String:
-        format = Value::fmt_String;
+    case KCValue::String:
+        format = KCValue::fmt_String;
         break;
-    case Value::Array:
-        format = Value::fmt_None;
+    case KCValue::Array:
+        format = KCValue::fmt_None;
         break;
-    case Value::CellRange:
-        format = Value::fmt_None;
+    case KCValue::CellRange:
+        format = KCValue::fmt_None;
         break;
-    case Value::Error:
-        format = Value::fmt_String;
+    case KCValue::Error:
+        format = KCValue::fmt_String;
         break;
     };
 }
 
 // to be shared between all empty value
-Value::Private* Value::Private::s_null = 0;
+KCValue::Private* KCValue::Private::s_null = 0;
 
 // static things
-Value ks_value_empty;
-Value ks_value_null;
-Value ks_error_circle;
-Value ks_error_depend;
-Value ks_error_div0;
-Value ks_error_na;
-Value ks_error_name;
-Value ks_error_null;
-Value ks_error_num;
-Value ks_error_parse;
-Value ks_error_ref;
-Value ks_error_value;
+KCValue ks_value_empty;
+KCValue ks_value_null;
+KCValue ks_error_circle;
+KCValue ks_error_depend;
+KCValue ks_error_div0;
+KCValue ks_error_na;
+KCValue ks_error_name;
+KCValue ks_error_null;
+KCValue ks_error_num;
+KCValue ks_error_parse;
+KCValue ks_error_ref;
+KCValue ks_error_value;
 
 // create an empty value
-Value::Value()
+KCValue::KCValue()
         : d(Private::null())
 {
 }
 
 // destructor
-Value::~Value()
+KCValue::~KCValue()
 {
 }
 
 // create value of certain type
-Value::Value(Value::Type _type)
+KCValue::KCValue(KCValue::Type _type)
         : d(Private::null())
 {
     d->type = _type;
@@ -201,20 +201,20 @@ Value::Value(Value::Type _type)
 }
 
 // copy constructor
-Value::Value(const Value& _value)
+KCValue::KCValue(const KCValue& _value)
         : d(_value.d)
 {
 }
 
 // assignment operator
-Value& Value::operator=(const Value & _value)
+KCValue& KCValue::operator=(const KCValue & _value)
 {
     d = _value.d;
     return *this;
 }
 
 // comparison operator - returns true only if strictly identical, unlike equal()/compare()
-bool Value::operator==(const Value& o) const
+bool KCValue::operator==(const KCValue& o) const
 {
     if (d->type != o.d->type)
         return false;
@@ -230,12 +230,12 @@ bool Value::operator==(const Value& o) const
     case Error:   return (!d->ps && !o.d->ps) || ((d->ps && o.d->ps) && (*o.d->ps == *d->ps));
     default: break;
     }
-    kWarning() << "Unhandled type in Value::operator==: " << d->type;
+    kWarning() << "Unhandled type in KCValue::operator==: " << d->type;
     return false;
 }
 
 // create a boolean value
-Value::Value(bool b)
+KCValue::KCValue(bool b)
         : d(Private::null())
 {
     d->type = Boolean;
@@ -244,7 +244,7 @@ Value::Value(bool b)
 }
 
 // create an integer value
-Value::Value(qint64 i)
+KCValue::KCValue(qint64 i)
         : d(Private::null())
 {
     d->type = Integer;
@@ -253,7 +253,7 @@ Value::Value(qint64 i)
 }
 
 // create an integer value
-Value::Value(int i)
+KCValue::KCValue(int i)
         : d(Private::null())
 {
     d->type = Integer;
@@ -262,7 +262,7 @@ Value::Value(int i)
 }
 
 // create a floating-point value
-Value::Value(double f)
+KCValue::KCValue(double f)
         : d(Private::null())
 {
     d->type = Float;
@@ -271,7 +271,7 @@ Value::Value(double f)
 }
 
 // create a floating-point value
-Value::Value(long double f)
+KCValue::KCValue(long double f)
         : d(Private::null())
 {
     d->type = Float;
@@ -282,7 +282,7 @@ Value::Value(long double f)
 
 #ifdef KSPREAD_HIGH_PRECISION_SUPPORT
 // create a floating-point value
-Value::Value(Number f)
+KCValue::KCValue(Number f)
         : d(Private::null())
 {
     d->type = Float;
@@ -292,7 +292,7 @@ Value::Value(Number f)
 #endif // KSPREAD_HIGH_PRECISION_SUPPORT
 
 // create a complex number value
-Value::Value(const complex<Number>& c)
+KCValue::KCValue(const complex<Number>& c)
         : d(Private::null())
 {
     d->type = Complex;
@@ -301,7 +301,7 @@ Value::Value(const complex<Number>& c)
 }
 
 // create a string value
-Value::Value(const QString& s)
+KCValue::KCValue(const QString& s)
         : d(Private::null())
 {
     d->type = String;
@@ -310,7 +310,7 @@ Value::Value(const QString& s)
 }
 
 // create a string value
-Value::Value(const char *s)
+KCValue::KCValue(const char *s)
         : d(Private::null())
 {
     d->type = String;
@@ -319,7 +319,7 @@ Value::Value(const char *s)
 }
 
 // create a floating-point value from date/time
-Value::Value(const QDateTime& dt, const CalculationSettings* settings)
+KCValue::KCValue(const QDateTime& dt, const CalculationSettings* settings)
         : d(Private::null())
 {
     const QDate refDate(settings->referenceDate());
@@ -331,7 +331,7 @@ Value::Value(const QDateTime& dt, const CalculationSettings* settings)
 }
 
 // create a floating-point value from time
-Value::Value(const QTime& time, const CalculationSettings* settings)
+KCValue::KCValue(const QTime& time, const CalculationSettings* settings)
         : d(Private::null())
 {
     Q_UNUSED(settings);
@@ -343,7 +343,7 @@ Value::Value(const QTime& time, const CalculationSettings* settings)
 }
 
 // create a floating-point value from date
-Value::Value(const QDate& date, const CalculationSettings* settings)
+KCValue::KCValue(const QDate& date, const CalculationSettings* settings)
         : d(Private::null())
 {
     const QDate refDate(settings->referenceDate());
@@ -354,7 +354,7 @@ Value::Value(const QDate& date, const CalculationSettings* settings)
 }
 
 // create an array value
-Value::Value(const ValueStorage& array, const QSize& size)
+KCValue::KCValue(const ValueStorage& array, const QSize& size)
         : d(Private::null())
 {
     d->type = Array;
@@ -363,29 +363,29 @@ Value::Value(const ValueStorage& array, const QSize& size)
 }
 
 // return type of the value
-Value::Type Value::type() const
+KCValue::Type KCValue::type() const
 {
     return d ? d->type : Empty;
 }
 
-bool Value::isNull() const
+bool KCValue::isNull() const
 {
     return d ? d->type == Empty && d->b : false;
 }
 
 // get the value as boolean
-bool Value::asBoolean() const
+bool KCValue::asBoolean() const
 {
     bool result = false;
 
-    if (type() == Value::Boolean)
+    if (type() == KCValue::Boolean)
         result = d->b;
 
     return result;
 }
 
 // get the value as integer
-qint64 Value::asInteger() const
+qint64 KCValue::asInteger() const
 {
     qint64 result = 0;
     if (type() == Integer)
@@ -398,7 +398,7 @@ qint64 Value::asInteger() const
 }
 
 // get the value as floating-point
-Number Value::asFloat() const
+Number KCValue::asFloat() const
 {
     Number result = 0.0;
     if (type() == Float)
@@ -411,7 +411,7 @@ Number Value::asFloat() const
 }
 
 // get the value as complex number
-complex<Number> Value::asComplex() const
+complex<Number> KCValue::asComplex() const
 {
     complex<Number> result(0.0, 0.0);
     if (type() == Complex)
@@ -424,11 +424,11 @@ complex<Number> Value::asComplex() const
 }
 
 // get the value as string
-QString Value::asString() const
+QString KCValue::asString() const
 {
     QString result;
 
-    if (type() == Value::String)
+    if (type() == KCValue::String)
         if (d->ps)
             result = QString(*d->ps);
 
@@ -436,33 +436,33 @@ QString Value::asString() const
 }
 
 // get the value as QVariant
-QVariant Value::asVariant() const
+QVariant KCValue::asVariant() const
 {
     QVariant result;
 
     switch (d->type) {
-    case Value::Empty:
+    case KCValue::Empty:
     default:
         result = 0;
         break;
-    case Value::Boolean:
+    case KCValue::Boolean:
         result = d->b;
         break;
-    case Value::Integer:
+    case KCValue::Integer:
         result = d->i;
         break;
-    case Value::Float:
+    case KCValue::Float:
         result = (double) numToDouble(d->f);
         break;
-    case Value::Complex:
+    case KCValue::Complex:
         // FIXME: add support for complex numbers
         // pc = new complex<Number>( *o.pc );
         break;
-    case Value::String:
-    case Value::Error:
+    case KCValue::String:
+    case KCValue::Error:
         result = *d->ps;
         break;
-    case Value::Array:
+    case KCValue::Array:
         // FIXME: not supported yet
         //result = ValueArray( d->pa );
         break;
@@ -472,7 +472,7 @@ QVariant Value::asVariant() const
 }
 
 // set error message
-void Value::setError(const QString& msg)
+void KCValue::setError(const QString& msg)
 {
     d->clear();
     d->type = Error;
@@ -480,11 +480,11 @@ void Value::setError(const QString& msg)
 }
 
 // get error message
-QString Value::errorMessage() const
+QString KCValue::errorMessage() const
 {
     QString result;
 
-    if (type() == Value::Error)
+    if (type() == KCValue::Error)
         if (d->ps)
             result = QString(*d->ps);
 
@@ -492,7 +492,7 @@ QString Value::errorMessage() const
 }
 
 // get the value as date/time
-QDateTime Value::asDateTime(const CalculationSettings* settings) const
+QDateTime KCValue::asDateTime(const CalculationSettings* settings) const
 {
     QDateTime datetime(settings->referenceDate(), QTime(), Qt::UTC);
 
@@ -505,7 +505,7 @@ QDateTime Value::asDateTime(const CalculationSettings* settings) const
 }
 
 // get the value as date
-QDate Value::asDate(const CalculationSettings* settings) const
+QDate KCValue::asDate(const CalculationSettings* settings) const
 {
     QDate dt(settings->referenceDate());
 
@@ -516,7 +516,7 @@ QDate Value::asDate(const CalculationSettings* settings) const
 }
 
 // get the value as time
-QTime Value::asTime(const CalculationSettings* settings) const
+QTime KCValue::asTime(const CalculationSettings* settings) const
 {
     Q_UNUSED(settings);
     QTime dt;
@@ -528,52 +528,52 @@ QTime Value::asTime(const CalculationSettings* settings) const
     return dt;
 }
 
-Value::KCFormat Value::format() const
+KCValue::KCFormat KCValue::format() const
 {
     return d ? d->format : fmt_None;
 }
 
-void Value::setFormat(Value::KCFormat fmt)
+void KCValue::setFormat(KCValue::KCFormat fmt)
 {
     d->format = fmt;
 }
 
-Value Value::element(unsigned column, unsigned row) const
+KCValue KCValue::element(unsigned column, unsigned row) const
 {
     if (d->type != Array) return *this;
     if (!d->pa) return empty();
     return d->pa->storage().lookup(column + 1, row + 1);
 }
 
-Value Value::element(unsigned index) const
+KCValue KCValue::element(unsigned index) const
 {
     if (d->type != Array) return *this;
     if (!d->pa) return empty();
     return d->pa->storage().data(index);
 }
 
-void Value::setElement(unsigned column, unsigned row, const Value& v)
+void KCValue::setElement(unsigned column, unsigned row, const KCValue& v)
 {
     if (d->type != Array) return;
     if (!d->pa) d->pa = new ValueArray();
     d->pa->storage().insert(column + 1, row + 1, v);
 }
 
-unsigned Value::columns() const
+unsigned KCValue::columns() const
 {
     if (d->type != Array) return 1;
     if (!d->pa) return 1;
     return d->pa->columns();
 }
 
-unsigned Value::rows() const
+unsigned KCValue::rows() const
 {
     if (d->type != Array) return 1;
     if (!d->pa) return 1;
     return d->pa->rows();
 }
 
-unsigned Value::count() const
+unsigned KCValue::count() const
 {
     if (d->type != Array) return 1;
     if (!d->pa) return 1;
@@ -581,13 +581,13 @@ unsigned Value::count() const
 }
 
 // reference to empty value
-const Value& Value::empty()
+const KCValue& KCValue::empty()
 {
     return ks_value_empty;
 }
 
 // reference to null value
-const Value& Value::null()
+const KCValue& KCValue::null()
 {
     if (!ks_value_null.isNull())
         ks_value_null.d->b = true;
@@ -595,7 +595,7 @@ const Value& Value::null()
 }
 
 // reference to #CIRCLE! error
-const Value& Value::errorCIRCLE()
+const KCValue& KCValue::errorCIRCLE()
 {
     if (!ks_error_circle.isError())
         ks_error_circle.setError(i18nc("Error: circular formula dependency", "#CIRCLE!"));
@@ -603,7 +603,7 @@ const Value& Value::errorCIRCLE()
 }
 
 // reference to #DEPEND! error
-const Value& Value::errorDEPEND()
+const KCValue& KCValue::errorDEPEND()
 {
     if (!ks_error_depend.isError())
         ks_error_depend.setError(i18nc("Error: broken cell reference", "#DEPEND!"));
@@ -611,7 +611,7 @@ const Value& Value::errorDEPEND()
 }
 
 // reference to #DIV/0! error
-const Value& Value::errorDIV0()
+const KCValue& KCValue::errorDIV0()
 {
     if (!ks_error_div0.isError())
         ks_error_div0.setError(i18nc("Error: division by zero", "#DIV/0!"));
@@ -619,7 +619,7 @@ const Value& Value::errorDIV0()
 }
 
 // reference to #N/A error
-const Value& Value::errorNA()
+const KCValue& KCValue::errorNA()
 {
     if (!ks_error_na.isError())
         ks_error_na.setError(i18nc("Error: not available", "#N/A"));
@@ -627,7 +627,7 @@ const Value& Value::errorNA()
 }
 
 // reference to #NAME? error
-const Value& Value::errorNAME()
+const KCValue& KCValue::errorNAME()
 {
     if (!ks_error_name.isError())
         ks_error_name.setError(i18nc("Error: unknown function name", "#NAME?"));
@@ -635,7 +635,7 @@ const Value& Value::errorNAME()
 }
 
 // reference to #NUM! error
-const Value& Value::errorNUM()
+const KCValue& KCValue::errorNUM()
 {
     if (!ks_error_num.isError())
         ks_error_num.setError(i18nc("Error: number out of range", "#NUM!"));
@@ -643,7 +643,7 @@ const Value& Value::errorNUM()
 }
 
 // reference to #NULL! error
-const Value& Value::errorNULL()
+const KCValue& KCValue::errorNULL()
 {
     if (!ks_error_null.isError())
         ks_error_null.setError(i18nc("Error: empty intersecting area", "#NULL!"));
@@ -651,7 +651,7 @@ const Value& Value::errorNULL()
 }
 
 // reference to #PARSE! error
-const Value& Value::errorPARSE()
+const KCValue& KCValue::errorPARSE()
 {
     if (!ks_error_parse.isError())
         ks_error_parse.setError(i18nc("Error: formula not parseable", "#PARSE!"));
@@ -659,7 +659,7 @@ const Value& Value::errorPARSE()
 }
 
 // reference to #REF! error
-const Value& Value::errorREF()
+const KCValue& KCValue::errorREF()
 {
     if (!ks_error_ref.isError())
         ks_error_ref.setError(i18nc("Error: invalid cell/array reference", "#REF!"));
@@ -667,14 +667,14 @@ const Value& Value::errorREF()
 }
 
 // reference to #VALUE! error
-const Value& Value::errorVALUE()
+const KCValue& KCValue::errorVALUE()
 {
     if (!ks_error_value.isError())
         ks_error_value.setError(i18nc("Error: wrong (number of) function argument(s)", "#VALUE!"));
     return ks_error_value;
 }
 
-int Value::compare(Number v1, Number v2)
+int KCValue::compare(Number v1, Number v2)
 {
     Number v3 = v1 - v2;
     if (v3 > DBL_EPSILON) return 1;
@@ -682,21 +682,21 @@ int Value::compare(Number v1, Number v2)
     return 0;
 }
 
-bool Value::isZero(Number v)
+bool KCValue::isZero(Number v)
 {
     return abs(v) < DBL_EPSILON;
 }
 
-bool Value::isZero() const
+bool KCValue::isZero() const
 {
     if (!isNumber()) return false;
     return isZero(asFloat());
 }
 
-bool Value::allowComparison(const Value& v) const
+bool KCValue::allowComparison(const KCValue& v) const
 {
-    Value::Type t1 = d->type;
-    Value::Type t2 = v.type();
+    KCValue::Type t1 = d->type;
+    KCValue::Type t2 = v.type();
 
     if ((t1 == Empty) && (t2 == Empty)) return true;
     if ((t1 == Empty) && (t2 == String)) return true;
@@ -735,10 +735,10 @@ bool Value::allowComparison(const Value& v) const
 }
 
 // compare values. looks strange in order to be compatible with Excel
-int Value::compare(const Value& v) const
+int KCValue::compare(const KCValue& v) const
 {
-    Value::Type t1 = d->type;
-    Value::Type t2 = v.type();
+    KCValue::Type t1 = d->type;
+    KCValue::Type t2 = v.type();
 
     // errors always less than everything else
     if ((t1 == Error) && (t2 != Error))
@@ -841,58 +841,58 @@ int Value::compare(const Value& v) const
     return 0;
 }
 
-bool Value::equal(const Value& v) const
+bool KCValue::equal(const KCValue& v) const
 {
     if (!allowComparison(v)) return false;
     return compare(v) == 0;
 }
 
-bool Value::less(const Value& v) const
+bool KCValue::less(const KCValue& v) const
 {
     if (!allowComparison(v)) return false;
     return compare(v) < 0;
 }
 
-bool Value::greater(const Value& v) const
+bool KCValue::greater(const KCValue& v) const
 {
     if (!allowComparison(v)) return false;
     return compare(v) > 0;
 }
 
-QTextStream& operator<<(QTextStream& ts, Value::Type type)
+QTextStream& operator<<(QTextStream& ts, KCValue::Type type)
 {
     switch (type) {
-    case Value::Empty:   ts << "Empty"; break;
-    case Value::Boolean: ts << "Boolean"; break;
-    case Value::Integer: ts << "Integer"; break;
-    case Value::Float:   ts << "Float"; break;
-    case Value::Complex: ts << "Complex"; break;
-    case Value::String:  ts << "String"; break;
-    case Value::Array:   ts << "Array"; break;
-    case Value::Error:   ts << "Error"; break;
+    case KCValue::Empty:   ts << "Empty"; break;
+    case KCValue::Boolean: ts << "Boolean"; break;
+    case KCValue::Integer: ts << "Integer"; break;
+    case KCValue::Float:   ts << "Float"; break;
+    case KCValue::Complex: ts << "Complex"; break;
+    case KCValue::String:  ts << "String"; break;
+    case KCValue::Array:   ts << "Array"; break;
+    case KCValue::Error:   ts << "Error"; break;
     default: ts << "Unknown!"; break;
     };
     return ts;
 }
 
-QTextStream& operator<<(QTextStream& ts, Value value)
+QTextStream& operator<<(QTextStream& ts, KCValue value)
 {
     ts << value.type();
     switch (value.type()) {
-    case Value::Empty:   break;
+    case KCValue::Empty:   break;
 
-    case Value::Boolean:
+    case KCValue::Boolean:
         ts << ": ";
         if (value.asBoolean()) ts << "TRUE";
         else ts << "FALSE"; break;
 
-    case Value::Integer:
+    case KCValue::Integer:
         ts << ": " << value.asInteger(); break;
 
-    case Value::Float:
+    case KCValue::Float:
         ts << ": " << (double) numToDouble(value.asFloat()); break;
 
-    case Value::Complex: {
+    case KCValue::Complex: {
         const complex<Number> complex(value.asComplex());
         ts << ": " << (double) numToDouble(complex.real());
         if (complex.imag() >= 0.0)
@@ -901,10 +901,10 @@ QTextStream& operator<<(QTextStream& ts, Value value)
         break;
     }
 
-    case Value::String:
+    case KCValue::String:
         ts << ": " << value.asString(); break;
 
-    case Value::Array: {
+    case KCValue::Array: {
         ts << ": {" << value.asString();
         const int cols = value.columns();
         const int rows = value.rows();
@@ -921,7 +921,7 @@ QTextStream& operator<<(QTextStream& ts, Value value)
         break;
     }
 
-    case Value::Error:
+    case KCValue::Error:
         ts << '(' << value.errorMessage() << ')'; break;
 
     default: break;
@@ -933,25 +933,25 @@ QTextStream& operator<<(QTextStream& ts, Value value)
   QHash/QSet support
 ****************************************************************************/
 
-uint qHash(const Value& value)
+uint qHash(const KCValue& value)
 {
     switch (value.type()) {
-    case Value::Empty:
-    case Value::CellRange:
+    case KCValue::Empty:
+    case KCValue::CellRange:
         return 0;
-    case Value::Boolean:
+    case KCValue::Boolean:
         return ::qHash(value.asBoolean());
-    case Value::Integer:
+    case KCValue::Integer:
         return ::qHash(value.asInteger());
-    case Value::Float:
+    case KCValue::Float:
         return ::qHash((qint64)numToDouble(value.asFloat()));
-    case Value::Complex:
+    case KCValue::Complex:
         return ::qHash((qint64)value.asComplex().real());
-    case Value::String:
+    case KCValue::String:
         return ::qHash(value.asString());
-    case Value::Array:
+    case KCValue::Array:
         return qHash(value.element(0, 0));
-    case Value::Error:
+    case KCValue::Error:
         return ::qHash(value.errorMessage());
     }
     return 0;
@@ -961,7 +961,7 @@ uint qHash(const Value& value)
   kDebug support
 ****************************************************************************/
 
-QDebug operator<<(QDebug str, const Value& v)
+QDebug operator<<(QDebug str, const KCValue& v)
 {
     QString string;
     QTextStream stream(&string);
@@ -970,18 +970,18 @@ QDebug operator<<(QDebug str, const Value& v)
     return str;
 }
 
-QDebug operator<<(QDebug stream, const Value::KCFormat& f)
+QDebug operator<<(QDebug stream, const KCValue::KCFormat& f)
 {
     switch (f) {
-    case Value::fmt_None:     stream << "None";     break;
-    case Value::fmt_Boolean:  stream << "Boolean";  break;
-    case Value::fmt_Number:   stream << "Number";   break;
-    case Value::fmt_Percent:  stream << "Percent";  break;
-    case Value::fmt_Money:    stream << "Money";    break;
-    case Value::fmt_DateTime: stream << "DateTime"; break;
-    case Value::fmt_Date:     stream << "Date";     break;
-    case Value::fmt_Time:     stream << "Time";     break;
-    case Value::fmt_String:   stream << "String";   break;
+    case KCValue::fmt_None:     stream << "None";     break;
+    case KCValue::fmt_Boolean:  stream << "Boolean";  break;
+    case KCValue::fmt_Number:   stream << "Number";   break;
+    case KCValue::fmt_Percent:  stream << "Percent";  break;
+    case KCValue::fmt_Money:    stream << "Money";    break;
+    case KCValue::fmt_DateTime: stream << "DateTime"; break;
+    case KCValue::fmt_Date:     stream << "Date";     break;
+    case KCValue::fmt_Time:     stream << "Time";     break;
+    case KCValue::fmt_String:   stream << "String";   break;
     }
     return stream;
 }

@@ -65,7 +65,7 @@
 #include "KCStyle.h"
 #include "StyleManager.h"
 #include "Util.h"
-#include "Value.h"
+#include "KCValue.h"
 #include "Validity.h"
 #include "ValueConverter.h"
 #include "ValueFormatter.h"
@@ -158,7 +158,7 @@ KLocale* KCCell::locale() const
 bool KCCell::isDefault() const
 {
     // check each stored attribute
-    if (value() != Value())
+    if (value() != KCValue())
         return false;
     if (formula() != Formula())
         return false;
@@ -181,7 +181,7 @@ bool KCCell::isDefault() const
 bool KCCell::hasDefaultContent() const
 {
     // check each stored attribute
-    if (value() != Value())
+    if (value() != KCValue())
         return false;
     if (formula() != Formula::empty())
         return false;
@@ -201,7 +201,7 @@ bool KCCell::hasDefaultContent() const
 bool KCCell::isEmpty() const
 {
     // empty = no value or formula
-    if (value() != Value())
+    if (value() != KCValue())
         return false;
     if (formula() != Formula())
         return false;
@@ -438,7 +438,7 @@ QString KCCell::displayText() const
 
 // Return the value of this cell.
 //
-const Value KCCell::value() const
+const KCValue KCCell::value() const
 {
     return sheet()->cellStorage()->value(d->column, d->row);
 }
@@ -446,7 +446,7 @@ const Value KCCell::value() const
 
 // Set the value of this cell.
 //
-void KCCell::setValue(const Value& value)
+void KCCell::setValue(const KCValue& value)
 {
     sheet()->cellStorage()->setValue(d->column, d->row, value);
 }
@@ -469,7 +469,7 @@ void KCCell::copyFormat(const KCCell& cell)
 {
     Q_ASSERT(!isNull());   // trouble ahead...
     Q_ASSERT(!cell.isNull());
-    Value value = this->value();
+    KCValue value = this->value();
     value.setFormat(cell.value().format());
     sheet()->cellStorage()->setValue(d->column, d->row, value);
     if (!style().isDefault() || !cell.style().isDefault())
@@ -692,7 +692,7 @@ QString KCCell::decodeFormula(const QString &_text) const
             ++pos;
             if (row < 1 || col < 1 || row > KS_rowMax || col > KS_colMax) {
                 kDebug(36003) << "KCCell::decodeFormula: row or column out of range (col:" << col << " | row:" << row << ')';
-                erg += Value::errorREF().errorMessage();
+                erg += KCValue::errorREF().errorMessage();
             } else {
                 if (abs1)
                     erg += '$';
@@ -725,7 +725,7 @@ bool KCCell::makeFormula()
     // parse the formula and check for errors
     if (!formula().isValid()) {
         sheet()->showStatusMessage(i18n("Parsing of formula in cell %1 failed.", fullName()));
-        setValue(Value::errorPARSE());
+        setValue(KCValue::errorPARSE());
         return false;
     }
     return true;
@@ -740,7 +740,7 @@ int KCCell::effectiveAlignX() const
         if ((style.formatType() == KCFormat::Text) || value().isString())
             align = (displayText().isRightToLeft()) ? KCStyle::Right : KCStyle::Left;
         else {
-            Value val = value();
+            KCValue val = value();
             while (val.isArray()) val = val.element(0, 0);
             if (val.isBoolean() || val.isNumber())
                 align = KCStyle::Right;
@@ -776,7 +776,7 @@ void KCCell::parseUserInput(const QString& text)
 
     // empty string?
     if (text.isEmpty()) {
-        setValue(Value::empty());
+        setValue(KCValue::empty());
         setUserInput(text);
         setFormula(Formula::empty());
         return;
@@ -791,7 +791,7 @@ void KCCell::parseUserInput(const QString& text)
         // parse the formula and check for errors
         if (!formula.isValid()) {
             sheet()->showStatusMessage(i18n("Parsing of formula in cell %1 failed.", fullName()));
-            setValue(Value::errorPARSE());
+            setValue(KCValue::errorPARSE());
             return;
         }
         return;
@@ -800,14 +800,14 @@ void KCCell::parseUserInput(const QString& text)
     // keep the old formula and value for the case, that validation fails
     const Formula oldFormula = formula();
     const QString oldUserInput = userInput();
-    const Value oldValue = value();
+    const KCValue oldValue = value();
 
     // here, the new value is not a formula anymore; clear an existing one
     setFormula(Formula());
 
-    Value value;
+    KCValue value;
     if (style().formatType() == KCFormat::Text)
-        value = Value(QString(text));
+        value = KCValue(QString(text));
     else {
         // Parses the text and return the appropriate value.
         value = sheet()->map()->parser()->parse(text);
@@ -822,7 +822,7 @@ void KCCell::parseUserInput(const QString& text)
         // convert first letter to uppercase ?
         if (sheet()->getFirstLetterUpper() && value.isString() && !text.isEmpty()) {
             QString str = value.asString();
-            value = Value(str[0].toUpper() + str.right(str.length() - 1));
+            value = KCValue(str[0].toUpper() + str.right(str.length() - 1));
         }
     }
     // set the new value
@@ -858,13 +858,13 @@ void KCCell::setLink(const QString& link)
 bool KCCell::isDate() const
 {
     const KCFormat::Type t = style().formatType();
-    return (KCFormat::isDate(t) || ((t == KCFormat::Generic) && (value().format() == Value::fmt_Date)));
+    return (KCFormat::isDate(t) || ((t == KCFormat::Generic) && (value().format() == KCValue::fmt_Date)));
 }
 
 bool KCCell::isTime() const
 {
     const KCFormat::Type t = style().formatType();
-    return (KCFormat::isTime(t) || ((t == KCFormat::Generic) && (value().format() == Value::fmt_Time)));
+    return (KCFormat::isTime(t) || ((t == KCFormat::Generic) && (value().format() == KCValue::fmt_Time)));
 }
 
 bool KCCell::isText() const
@@ -1090,7 +1090,7 @@ bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
 #if 0
     //add font style
     QFont font;
-    Value const value(cell.value());
+    KCValue const value(cell.value());
     if (!cell.isDefault()) {
         font = cell.format()->textFont(i, row);
         m_styles.addFont(font);
@@ -1247,14 +1247,14 @@ bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
 void KCCell::saveOdfValue(KoXmlWriter &xmlWriter)
 {
     switch (value().format()) {
-    case Value::fmt_None: break;  //NOTHING HERE
-    case Value::fmt_Boolean: {
+    case KCValue::fmt_None: break;  //NOTHING HERE
+    case KCValue::fmt_Boolean: {
         xmlWriter.addAttribute("office:value-type", "boolean");
         xmlWriter.addAttribute("office:boolean-value", (value().asBoolean() ?
                                "true" : "false"));
         break;
     }
-    case Value::fmt_Number: {
+    case KCValue::fmt_Number: {
         if (isDate()) {
             xmlWriter.addAttribute("office:value-type", "date");
             xmlWriter.addAttribute("office:date-value",
@@ -1274,13 +1274,13 @@ void KCCell::saveOdfValue(KoXmlWriter &xmlWriter)
         }
         break;
     }
-    case Value::fmt_Percent: {
+    case KCValue::fmt_Percent: {
         xmlWriter.addAttribute("office:value-type", "percentage");
         xmlWriter.addAttribute("office:value",
                                QString::number((double) numToDouble(value().asFloat())));
         break;
     }
-    case Value::fmt_Money: {
+    case KCValue::fmt_Money: {
         xmlWriter.addAttribute("office:value-type", "currency");
         const KCStyle style = this->style();
         if (style.hasAttribute(KCStyle::CurrencyFormat)) {
@@ -1290,8 +1290,8 @@ void KCCell::saveOdfValue(KoXmlWriter &xmlWriter)
         xmlWriter.addAttribute("office:value", QString::number((double) numToDouble(value().asFloat())));
         break;
     }
-    case Value::fmt_DateTime: break;  //NOTHING HERE
-    case Value::fmt_Date: {
+    case KCValue::fmt_DateTime: break;  //NOTHING HERE
+    case KCValue::fmt_Date: {
         if (isTime()) {
             xmlWriter.addAttribute("office:value-type", "time");
             xmlWriter.addAttribute("office:time-value",
@@ -1303,13 +1303,13 @@ void KCCell::saveOdfValue(KoXmlWriter &xmlWriter)
         }
         break;
     }
-    case Value::fmt_Time: {
+    case KCValue::fmt_Time: {
         xmlWriter.addAttribute("office:value-type", "time");
         xmlWriter.addAttribute("office:time-value",
                                value().asTime(sheet()->map()->calculationSettings()).toString("'PT'hh'H'mm'M'ss'S'"));
         break;
     }
-    case Value::fmt_String: {
+    case KCValue::fmt_String: {
         xmlWriter.addAttribute("office:value-type", "string");
         xmlWriter.addAttribute("office:string-value", value().asString());
         break;
@@ -1390,15 +1390,15 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
         if (valuetype == sBoolean) {
             const QString val = element.attributeNS(KoXmlNS::office, sBooleanValue, QString()).toLower();
             if ((val == sTrue) || (val == sFalse))
-                setValue(Value(val == sTrue));
+                setValue(KCValue(val == sTrue));
         }
 
         // integer and floating-point value
         else if (valuetype == sFloat) {
             bool ok = false;
-            Value value(element.attributeNS(KoXmlNS::office, sValue, QString()).toDouble(&ok));
+            KCValue value(element.attributeNS(KoXmlNS::office, sValue, QString()).toDouble(&ok));
             if (ok) {
-                value.setFormat(Value::fmt_Number);
+                value.setFormat(KCValue::fmt_Number);
                 setValue(value);
 #if 0
                 KCStyle style;
@@ -1414,9 +1414,9 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
         // currency value
         else if (valuetype == sCurrency) {
             bool ok = false;
-            Value value(element.attributeNS(KoXmlNS::office, sValue, QString()).toDouble(&ok));
+            KCValue value(element.attributeNS(KoXmlNS::office, sValue, QString()).toDouble(&ok));
             if (ok) {
-                value.setFormat(Value::fmt_Money);
+                value.setFormat(KCValue::fmt_Money);
                 setValue(value);
 
                 Currency currency;
@@ -1432,13 +1432,13 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
             }
         } else if (valuetype == sPercentage) {
             bool ok = false;
-            Value value(element.attributeNS(KoXmlNS::office, sValue, QString()).toDouble(&ok));
+            KCValue value(element.attributeNS(KoXmlNS::office, sValue, QString()).toDouble(&ok));
             if (ok) {
-                value.setFormat(Value::fmt_Percent);
+                value.setFormat(KCValue::fmt_Percent);
                 setValue(value);
                 if (!isFormula && userInput().isEmpty())
                     setUserInput(sheet()->map()->converter()->asString(value).asString());
-// FIXME Stefan: Should be handled by Value::KCFormat. Verify and remove!
+// FIXME Stefan: Should be handled by KCValue::KCFormat. Verify and remove!
 #if 0
                 KCStyle style;
                 style.setFormatType(KCFormat::Percentage);
@@ -1484,11 +1484,11 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
 
             if (ok) {
                 if (hasTime)
-                    setValue(Value(QDateTime(QDate(year, month, day), QTime(hours, minutes, seconds)), sheet()->map()->calculationSettings()));
+                    setValue(KCValue(QDateTime(QDate(year, month, day), QTime(hours, minutes, seconds)), sheet()->map()->calculationSettings()));
                 else
-                    setValue(Value(QDate(year, month, day), sheet()->map()->calculationSettings()));
-// FIXME Stefan: Should be handled by Value::KCFormat. Verify and remove!
-//Sebsauer: Fixed now. Value::KCFormat handles it correct.
+                    setValue(KCValue(QDate(year, month, day), sheet()->map()->calculationSettings()));
+// FIXME Stefan: Should be handled by KCValue::KCFormat. Verify and remove!
+//Sebsauer: Fixed now. KCValue::KCFormat handles it correct.
 #if 0
                 KCStyle s;
                 s.setFormatType(KCFormat::ShortDate);
@@ -1523,10 +1523,10 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
             }
 
             if (ok) {
-                // Value kval( timeToNum( hours, minutes, seconds ) );
+                // KCValue kval( timeToNum( hours, minutes, seconds ) );
                 // cell.setValue( kval );
-                setValue(Value(QTime(hours % 24, minutes, seconds), sheet()->map()->calculationSettings()));
-// FIXME Stefan: Should be handled by Value::KCFormat. Verify and remove!
+                setValue(KCValue(QTime(hours % 24, minutes, seconds), sheet()->map()->calculationSettings()));
+// FIXME Stefan: Should be handled by KCValue::KCFormat. Verify and remove!
 #if 0
                 KCStyle style;
                 style.setFormatType(KCFormat::Time);
@@ -1537,12 +1537,12 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
         } else if (valuetype == sString) {
             if (element.hasAttributeNS(KoXmlNS::office, sStringValue)) {
                 QString value = element.attributeNS(KoXmlNS::office, sStringValue, QString());
-                setValue(Value(value));
+                setValue(KCValue(value));
             } else {
                 // use the paragraph(s) read in before
-                setValue(Value(userInput()));
+                setValue(KCValue(userInput()));
             }
-// FIXME Stefan: Should be handled by Value::KCFormat. Verify and remove!
+// FIXME Stefan: Should be handled by KCValue::KCFormat. Verify and remove!
 #if 0
             KCStyle style;
             style.setFormatType(KCFormat::Text);
@@ -1818,11 +1818,11 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
 
     // Validation
     if (d->row < 1 || d->row > KS_rowMax) {
-        kDebug(36001) << "KCCell::load: Value out of range KCCell:row=" << d->row;
+        kDebug(36001) << "KCCell::load: KCValue out of range KCCell:row=" << d->row;
         return false;
     }
     if (d->column < 1 || d->column > KS_colMax) {
-        kDebug(36001) << "KCCell::load: Value out of range KCCell:column=" << d->column;
+        kDebug(36001) << "KCCell::load: KCValue out of range KCCell:column=" << d->column;
         return false;
     }
 
@@ -1839,7 +1839,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
             if (!ok) return false;
             // Validation
             if (i < 0 || i > KS_spanMax) {
-                kDebug(36001) << "Value out of range KCCell::colspan=" << i;
+                kDebug(36001) << "KCValue out of range KCCell::colspan=" << i;
                 return false;
             }
             if (i)
@@ -1851,7 +1851,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
             if (!ok) return false;
             // Validation
             if (i < 0 || i > KS_spanMax) {
-                kDebug(36001) << "Value out of range KCCell::rowspan=" << i;
+                kDebug(36001) << "KCValue out of range KCCell::rowspan=" << i;
                 return false;
             }
             if (i)
@@ -1942,24 +1942,24 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
             // boolean ?
             if (dataType == "Bool") {
                 if (t == "false")
-                    setValue(Value(false));
+                    setValue(KCValue(false));
                 else if (t == "true")
-                    setValue(Value(true));
+                    setValue(KCValue(true));
                 else
                     clear = false;
             } else if (dataType == "Num") {
                 bool ok = false;
                 double dd = t.toDouble(&ok);
                 if (ok)
-                    setValue(Value(dd));
+                    setValue(KCValue(dd));
                 else
                     clear = false;
             } else if (dataType == "Date") {
                 bool ok = false;
                 double dd = t.toDouble(&ok);
                 if (ok) {
-                    Value value(dd);
-                    value.setFormat(Value::fmt_Date);
+                    KCValue value(dd);
+                    value.setFormat(KCValue::fmt_Date);
                     setValue(value);
                 } else {
                     int pos   = t.indexOf('/');
@@ -1969,7 +1969,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
                     int day   = t.right(t.length() - pos1 - 1).toInt();
                     QDate date(year, month, day);
                     if (date.isValid())
-                        setValue(Value(date, sheet()->map()->calculationSettings()));
+                        setValue(KCValue(date, sheet()->map()->calculationSettings()));
                     else
                         clear = false;
                 }
@@ -1977,8 +1977,8 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
                 bool ok = false;
                 double dd = t.toDouble(&ok);
                 if (ok) {
-                    Value value(dd);
-                    value.setFormat(Value::fmt_Time);
+                    KCValue value(dd);
+                    value.setFormat(KCValue::fmt_Time);
                     setValue(value);
                 } else {
                     int hours   = -1;
@@ -1992,12 +1992,12 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
                     second  = t.right(t.length() - pos1 - 1).toInt();
                     QTime time(hours, minutes, second);
                     if (time.isValid())
-                        setValue(Value(time, sheet()->map()->calculationSettings()));
+                        setValue(KCValue(time, sheet()->map()->calculationSettings()));
                     else
                         clear = false;
                 }
             } else {
-                setValue(Value(t));
+                setValue(KCValue(t));
             }
         }
     }
@@ -2055,7 +2055,7 @@ bool KCCell::loadCellData(const KoXmlElement & text, Paste::Operation op, const 
         if (!qml_link.isEmpty())
             setLink(qml_link);
         setUserInput(qml_text);
-        setValue(Value(qml_text));
+        setValue(KCValue(qml_text));
     } else {
         bool newStyleLoading = true;
         QString dataType = _dataType;
@@ -2079,15 +2079,15 @@ bool KCCell::loadCellData(const KoXmlElement & text, Paste::Operation op, const 
         if (newStyleLoading) {
             // boolean ?
             if (dataType == "Bool")
-                setValue(Value(t.toLower() == "true"));
+                setValue(KCValue(t.toLower() == "true"));
 
             // number ?
             else if (dataType == "Num") {
                 bool ok = false;
                 if (t.contains('.'))
-                    setValue(Value(t.toDouble(&ok)));      // We save in non-localized format
+                    setValue(KCValue(t.toDouble(&ok)));      // We save in non-localized format
                 else
-                    setValue(Value(t.toLongLong(&ok)));
+                    setValue(KCValue(t.toLongLong(&ok)));
                 if (!ok) {
                     kWarning(36001) << "Couldn't parse '" << t << "' as number.";
                 }
@@ -2121,7 +2121,7 @@ bool KCCell::loadCellData(const KoXmlElement & text, Paste::Operation op, const 
                 int pos1 = t.indexOf('/', pos + 1);
                 int month = t.mid(pos + 1, ((pos1 - 1) - pos)).toInt();
                 int day = t.right(t.length() - pos1 - 1).toInt();
-                setValue(Value(QDate(year, month, day), sheet()->map()->calculationSettings()));
+                setValue(KCValue(QDate(year, month, day), sheet()->map()->calculationSettings()));
                 if (value().asDate(sheet()->map()->calculationSettings()).isValid())   // Should always be the case for new docs
                     setUserInput(locale()->formatDate(value().asDate(sheet()->map()->calculationSettings()), KLocale::ShortDate));
                 else { // This happens with old docs, when format is set wrongly to date
@@ -2140,7 +2140,7 @@ bool KCCell::loadCellData(const KoXmlElement & text, Paste::Operation op, const 
                 pos1 = t.indexOf(':', pos + 1);
                 minutes = t.mid(pos + 1, ((pos1 - 1) - pos)).toInt();
                 second = t.right(t.length() - pos1 - 1).toInt();
-                setValue(Value(QTime(hours, minutes, second), sheet()->map()->calculationSettings()));
+                setValue(KCValue(QTime(hours, minutes, second), sheet()->map()->calculationSettings()));
                 if (value().asTime(sheet()->map()->calculationSettings()).isValid())    // Should always be the case for new docs
                     setUserInput(locale()->formatTime(value().asTime(sheet()->map()->calculationSettings()), true));
                 else { // This happens with old docs, when format is set wrongly to time
@@ -2151,7 +2151,7 @@ bool KCCell::loadCellData(const KoXmlElement & text, Paste::Operation op, const 
             else {
                 // Set the cell's text
                 setUserInput(pasteOperation(t, userInput(), op));
-                setValue(Value(userInput()));
+                setValue(KCValue(userInput()));
             }
         }
     }
@@ -2176,7 +2176,7 @@ QTime KCCell::toTime(const KoXmlElement &element)
     pos1 = t.indexOf(':', pos + 1);
     minutes = t.mid(pos + 1, ((pos1 - 1) - pos)).toInt();
     second = t.right(t.length() - pos1 - 1).toInt();
-    setValue(Value(QTime(hours, minutes, second), sheet()->map()->calculationSettings()));
+    setValue(KCValue(QTime(hours, minutes, second), sheet()->map()->calculationSettings()));
     return value().asTime(sheet()->map()->calculationSettings());
 }
 
@@ -2193,7 +2193,7 @@ QDate KCCell::toDate(const KoXmlElement &element)
     pos1 = t.indexOf('/', pos + 1);
     month = t.mid(pos + 1, ((pos1 - 1) - pos)).toInt();
     day = t.right(t.length() - pos1 - 1).toInt();
-    setValue(Value(QDate(year, month, day), sheet()->map()->calculationSettings()));
+    setValue(KCValue(QDate(year, month, day), sheet()->map()->calculationSettings()));
     return value().asDate(sheet()->map()->calculationSettings());
 }
 

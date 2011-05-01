@@ -76,11 +76,11 @@ FindOption::searchTypeValue FindOption::searchType() const
 {
     int pos = m_searchIn->currentIndex();
     if (pos == 0)
-        return Value;
+        return KCValue;
     else if (pos == 1)
         return Note;
     else
-        return Value;
+        return KCValue;
 }
 
 FindOption::searchDirectionValue FindOption::searchDirection() const

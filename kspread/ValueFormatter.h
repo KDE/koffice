@@ -28,12 +28,12 @@
 #include "KCStyle.h"
 
 class CalculationSettings;
-class Value;
+class KCValue;
 class ValueConverter;
 
 /**
- * \ingroup Value
- * Generates a textual representation of a Value with a given formatting.
+ * \ingroup KCValue
+ * Generates a textual representation of a KCValue with a given formatting.
  */
 class KSPREAD_EXPORT ValueFormatter
 {
@@ -58,7 +58,7 @@ public:
      * \param postfix the subsequent text
      * \param currencySymbol the currency symbol
      */
-    Value formatText(const Value& value,
+    KCValue formatText(const KCValue& value,
                      KCFormat::Type formatType, int precision = -1,
                      KCStyle::FloatFormat floatFormat = KCStyle::OnlyNegSigned,
                      const QString& prefix = QString(),
@@ -89,7 +89,7 @@ protected:
      * in a cell with a given format type
      * \param formatType the value format, e.g. number, date
      */
-    KCFormat::Type determineFormatting(const Value& value, KCFormat::Type formatType);
+    KCFormat::Type determineFormatting(const KCValue& value, KCFormat::Type formatType);
 
     /**
      * Creates a number format.
@@ -117,7 +117,7 @@ protected:
      * \param floatFormat the number format, i.e. signed/unsigned information
      * \param currencySymbol the currency symbol
      */
-    QString complexFormat(const Value& value, int precision,
+    QString complexFormat(const KCValue& value, int precision,
                           KCFormat::Type formatType,
                           KCStyle::FloatFormat floatFormat,
                           const QString& currencySymbol);

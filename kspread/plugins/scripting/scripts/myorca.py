@@ -139,7 +139,7 @@ class MyDialog:
         self.cellNameBtn.connect("clicked()", self.cellNameBtnClicked)
 
         self.cellValueBtn = forms.createWidget(page, "QPushButton")
-        self.cellValueBtn.text = "KCCell Value"
+        self.cellValueBtn.text = "KCCell KCValue"
         self.cellValueBtn.connect("clicked()", self.cellValueBtnClicked)
 
         self.sheetNameBtn = forms.createWidget(page, "QPushButton")
@@ -154,7 +154,7 @@ class MyDialog:
         self.cellNameCheckbox.connect("stateChanged(int)", self.optionChanged)
 
         self.cellValueCheckbox = forms.createWidget(page, "QCheckBox")
-        self.cellValueCheckbox.text = "KCCell Value if selection changed"
+        self.cellValueCheckbox.text = "KCCell KCValue if selection changed"
         self.cellValueCheckbox.checked = self.config.cellValueOnSelectionChanged
         self.cellValueCheckbox.connect("stateChanged(int)", self.optionChanged)
 

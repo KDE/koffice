@@ -706,7 +706,7 @@ bool GNUMERICFilter::setType(const KCCell& kspread_cell,
             kDebug(30521) << "i:" << i << ", Type:" << type << ", Date:" << date.toString();
 
             KCCell cell(kspread_cell);
-            cell.setValue(Value(date, kspread_cell.sheet()->map()->calculationSettings()));
+            cell.setValue(KCValue(date, kspread_cell.sheet()->map()->calculationSettings()));
             KCStyle style;
             style.setFormatType(type);
             cell.setStyle(style);
@@ -747,7 +747,7 @@ bool GNUMERICFilter::setType(const KCCell& kspread_cell,
 
             kDebug(30521) << "i:" << i << ", Type:" << type;
             KCCell cell(kspread_cell);
-            cell.setValue(Value(time, kspread_cell.sheet()->map()->calculationSettings()));
+            cell.setValue(KCValue(time, kspread_cell.sheet()->map()->calculationSettings()));
             KCStyle style;
             style.setFormatType(type);
             cell.setStyle(style);
@@ -1302,8 +1302,8 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                 case 1: {
                                     kspread_validity.setRestriction(Validity::Integer);
                                     if (validation_element.hasAttribute("Operator")) {
-                                        const Value value1(expression0.toElement().text().toInt());
-                                        const Value value2(expression1.toElement().text().toInt());
+                                        const KCValue value1(expression0.toElement().text().toInt());
+                                        const KCValue value2(expression1.toElement().text().toInt());
                                         int value = validation_element.attribute("Operator").toInt();
                                         switch (value) {
                                         case 0:
@@ -1360,8 +1360,8 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                 case 2:
                                     kspread_validity.setRestriction(Validity::Number);
                                     if (validation_element.hasAttribute("Operator")) {
-                                        const Value value1(expression0.toElement().text().toInt());
-                                        const Value value2(expression1.toElement().text().toInt());
+                                        const KCValue value1(expression0.toElement().text().toInt());
+                                        const KCValue value2(expression1.toElement().text().toInt());
                                         int value = validation_element.attribute("Operator").toInt();
                                         switch (value) {
                                         case 0:
@@ -1420,8 +1420,8 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                 case 4:
                                     kspread_validity.setRestriction(Validity::Date);
                                     if (validation_element.hasAttribute("Operator")) {
-                                        const Value value1 = parser->tryParseDate(expression0.toElement().text());
-                                        const Value value2 = parser->tryParseDate(expression1.toElement().text());
+                                        const KCValue value1 = parser->tryParseDate(expression0.toElement().text());
+                                        const KCValue value2 = parser->tryParseDate(expression1.toElement().text());
                                         int value = validation_element.attribute("Operator").toInt();
                                         switch (value) {
                                         case 0:
@@ -1478,8 +1478,8 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                 case 5:
                                     kspread_validity.setRestriction(Validity::Time);
                                     if (validation_element.hasAttribute("Operator")) {
-                                        const Value value1 = parser->tryParseTime(expression0.toElement().text());
-                                        const Value value2 = parser->tryParseTime(expression1.toElement().text());
+                                        const KCValue value1 = parser->tryParseTime(expression0.toElement().text());
+                                        const KCValue value2 = parser->tryParseTime(expression1.toElement().text());
                                         int value = validation_element.attribute("Operator").toInt();
                                         switch (value) {
                                         case 0:
@@ -1533,8 +1533,8 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                 case 6:
                                     kspread_validity.setRestriction(Validity::TextLength);
                                     if (validation_element.hasAttribute("Operator")) {
-                                        const Value value1(expression0.toElement().text().toInt());
-                                        const Value value2(expression1.toElement().text().toInt());
+                                        const KCValue value1(expression0.toElement().text().toInt());
+                                        const KCValue value2(expression1.toElement().text().toInt());
                                         int value = validation_element.attribute("Operator").toInt();
                                         switch (value) {
                                         case 0:
@@ -1632,7 +1632,7 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                 QString tip = hyperlink.toElement().attribute("tip");
                                 if (!tip.isEmpty()) {
                                     kspread_cell.setUserInput(tip);
-                                    kspread_cell.setValue(Value(tip));
+                                    kspread_cell.setValue(KCValue(tip));
                                 }
                                 if (linkType == "GnmHLinkURL") {
                                     if (!target.startsWith("http://"))
@@ -1869,10 +1869,10 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
                             QString valuetype = e.attribute("ValueType");
                             if (valuetype == "40") { //percentage
                                 style.setFormatType(KCFormat::Percentage);
-                                kspread_cell.setValue(Value(cell_content));
+                                kspread_cell.setValue(KCValue(cell_content));
                             } else if (valuetype == "60") { //string
                                 style.setFormatType(KCFormat::Text);
-                                kspread_cell.setValue(Value(cell_content));
+                                kspread_cell.setValue(KCValue(cell_content));
                             }
                         }
 
@@ -1930,10 +1930,10 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
                         QString valuetype = e.attribute("ValueType");
                         if (valuetype == "40") { //percentage
                             style.setFormatType(KCFormat::Percentage);
-                            kspread_cell.setValue(Value(cell_content));
+                            kspread_cell.setValue(KCValue(cell_content));
                         } else if (valuetype == "60") { //string
                             style.setFormatType(KCFormat::Text);
-                            kspread_cell.setValue(Value(cell_content));
+                            kspread_cell.setValue(KCValue(cell_content));
                         }
 
                     }
@@ -2020,7 +2020,7 @@ void GNUMERICFilter::setText(KCSheet* sheet, int _row, int _column, const QStrin
     KCCell cell(sheet, _column, _row);
     if (asString) {
         cell.setUserInput(_text);
-        cell.setValue(Value(_text));
+        cell.setValue(KCValue(_text));
     } else {
         cell.parseUserInput(_text);
     }

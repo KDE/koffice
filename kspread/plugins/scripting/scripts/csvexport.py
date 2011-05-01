@@ -27,14 +27,14 @@ class CsvExporter:
         savepage = self.dialog.addPage("Save","Export to CSV File","document-save")
         self.savewidget = self.forms.createFileWidget(savepage, "kfiledialog:///kspreadcsvexportsave")
         self.savewidget.setMode("Saving")
-        self.savewidget.setFilter("*.csv *.txt|Comma-Separated-Value Files\n*|All Files")
+        self.savewidget.setFilter("*.csv *.txt|Comma-Separated-KCValue Files\n*|All Files")
 
         datapage = self.dialog.addPage("Export","Export Sheets and ranges","document-export")
         self.sheetslistview = KSpread.createSheetsListView(datapage)
         self.sheetslistview.setSelectionType("MultiSelect")
         self.sheetslistview.setEditorType("Range")
 
-        optionspage = self.dialog.addPage("Options","Comma Separated Value Options","configure")
+        optionspage = self.dialog.addPage("Options","Comma Separated KCValue Options","configure")
         self.optionswidget = self.forms.createWidgetFromUIFile(optionspage, os.path.join(self.currentpath, "csvoptions.ui"))
 
         if self.dialog.exec_loop():

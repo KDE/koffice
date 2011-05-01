@@ -26,7 +26,7 @@
 #include "Formula.h"
 #include "KCStyle.h"
 #include "Validity.h"
-#include "Value.h"
+#include "KCValue.h"
 
 class CellStorageUndoData
 {
@@ -75,7 +75,7 @@ public:
     QList< QPair<QRectF, SharedSubStyle> >   styles;
     QVector< QPair<QPoint, QString> >        userInputs;
     QList< QPair<QRectF, Validity> >         validities;
-    QVector< QPair<QPoint, Value> >          values;
+    QVector< QPair<QPoint, KCValue> >          values;
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts;
 };
 
