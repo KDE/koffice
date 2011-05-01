@@ -25,7 +25,7 @@
 #include <KoXmlWriter.h>
 
 // KSpread
-#include "Validity.h"
+#include "KCValidity.h"
 #include "ValueConverter.h"
 
 GenValidationStyles::GenValidationStyles()
@@ -104,7 +104,7 @@ void GenValidationStyles::writeStyle(KoXmlWriter& writer)
     }
 }
 
-void KCGenValidationStyle::initVal(Validity *validity, const ValueConverter *converter)
+void KCGenValidationStyle::initVal(KCValidity *validity, const ValueConverter *converter)
 {
     if (validity) {
         allowEmptyCell = (validity->allowEmptyCell() ? "true" : "false");
@@ -114,13 +114,13 @@ void KCGenValidationStyle::initVal(Validity *validity, const ValueConverter *con
         messageInfo = validity->messageInfo();
 
         switch (validity->action()) {
-        case Validity::Warning:
+        case KCValidity::Warning:
             messageType = "warning";
             break;
-        case Validity::Information:
+        case KCValidity::Information:
             messageType = "information";
             break;
-        case Validity::Stop:
+        case KCValidity::Stop:
             messageType = "stop";
             break;
         }
@@ -131,38 +131,38 @@ void KCGenValidationStyle::initVal(Validity *validity, const ValueConverter *con
     }
 }
 
-QString KCGenValidationStyle::createValidationCondition(Validity* validity, const ValueConverter *converter)
+QString KCGenValidationStyle::createValidationCondition(KCValidity* validity, const ValueConverter *converter)
 {
     QString result;
     switch (validity->restriction()) {
-    case Validity::None:
+    case KCValidity::None:
         //nothing
         break;
-    case Validity::Text:
+    case KCValidity::Text:
         //doesn't exist into oo spec
         result = "cell-content-is-text()";
         break;
-    case Validity::Time:
+    case KCValidity::Time:
         result = createTimeValidationCondition(validity, converter);
         break;
-    case Validity::Date:
+    case KCValidity::Date:
         result = createDateValidationCondition(validity, converter);
         break;
-    case Validity::Integer:
-    case Validity::KCNumber:
+    case KCValidity::Integer:
+    case KCValidity::KCNumber:
         result = createNumberValidationCondition(validity);
         break;
-    case Validity::TextLength:
+    case KCValidity::TextLength:
         result = createTextValidationCondition(validity);
         break;
-    case Validity::List:
+    case KCValidity::List:
         result = createListValidationCondition(validity);
         break;
     }
     return result;
 }
 
-QString KCGenValidationStyle::createListValidationCondition(Validity* validity)
+QString KCGenValidationStyle::createListValidationCondition(KCValidity* validity)
 {
     QString result = "oooc:cell-content-is-in-list(";
     result = validity->validityList().join(";");
@@ -170,12 +170,12 @@ QString KCGenValidationStyle::createListValidationCondition(Validity* validity)
     return result;
 }
 
-QString KCGenValidationStyle::createNumberValidationCondition(Validity* validity)
+QString KCGenValidationStyle::createNumberValidationCondition(KCValidity* validity)
 {
     QString result;
-    if (validity->restriction() == Validity::KCNumber)
+    if (validity->restriction() == KCValidity::KCNumber)
         result = "oooc:cell-content-is-whole-number() and ";
-    else if (validity->restriction() == Validity::Integer)
+    else if (validity->restriction() == KCValidity::Integer)
         result = "oooc:cell-content-is-decimal-number() and ";
     switch (validity->condition()) {
     case KCConditional::None:
@@ -231,7 +231,7 @@ QString KCGenValidationStyle::createNumberValidationCondition(Validity* validity
 }
 
 
-QString KCGenValidationStyle::createTimeValidationCondition(Validity* validity, const ValueConverter *converter)
+QString KCGenValidationStyle::createTimeValidationCondition(KCValidity* validity, const ValueConverter *converter)
 {
     QString result("oooc:cell-content-is-time() and ");
     switch (validity->condition()) {
@@ -287,7 +287,7 @@ QString KCGenValidationStyle::createTimeValidationCondition(Validity* validity, 
     return result;
 }
 
-QString KCGenValidationStyle::createDateValidationCondition(Validity* validity, const ValueConverter *converter)
+QString KCGenValidationStyle::createDateValidationCondition(KCValidity* validity, const ValueConverter *converter)
 {
     QString result("oooc:cell-content-is-date() and ");
     switch (validity->condition()) {
@@ -343,7 +343,7 @@ QString KCGenValidationStyle::createDateValidationCondition(Validity* validity, 
     return result;
 }
 
-QString KCGenValidationStyle::createTextValidationCondition(Validity* validity)
+QString KCGenValidationStyle::createTextValidationCondition(KCValidity* validity)
 {
     QString result;
     switch (validity->condition()) {

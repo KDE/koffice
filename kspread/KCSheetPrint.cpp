@@ -312,7 +312,7 @@ void KCSheetPrint::insertColumn(int col, int nbCol)
             if (left >= col) left++;
             if (right >= col) right++;
         }
-        //Validity checks
+        //KCValidity checks
         if (left > KS_colMax) left = KS_colMax;
         if (right > KS_colMax) right = KS_colMax;
         const KCRegion region(QRect(QPoint(left, printRange.top()),
@@ -336,7 +336,7 @@ void KCSheetPrint::insertRow(int row, int nbRow)
             if (top >= row) top++;
             if (bottom >= row) bottom++;
         }
-        //Validity checks
+        //KCValidity checks
         if (top > KS_rowMax) top = KS_rowMax;
         if (bottom > KS_rowMax) bottom = KS_rowMax;
         const KCRegion region(QRect(QPoint(printRange.left(), top),
@@ -361,7 +361,7 @@ void KCSheetPrint::removeColumn(int col, int nbCol)
             if (left > col) left--;
             if (right >= col) right--;
         }
-        //Validity checks
+        //KCValidity checks
         if (left < 1) left = 1;
         if (right < 1) right = 1;
         const KCRegion region(QRect(QPoint(left, printRange.top()),
@@ -379,7 +379,7 @@ void KCSheetPrint::removeColumn(int col, int nbCol)
             if (left > col) left--;
             if (right >= col) right--;
         }
-        //Validity checks
+        //KCValidity checks
         if (left < 1) left = 1;
         if (right < 1) right = 1;
         settings.setRepeatedColumns(qMakePair(left, right));
@@ -401,7 +401,7 @@ void KCSheetPrint::removeRow(int row, int nbRow)
             if (top > row) top--;
             if (bottom >= row) bottom--;
         }
-        //Validity checks
+        //KCValidity checks
         if (top < 1) top = 1;
         if (bottom < 1) bottom = 1;
         const KCRegion region(QRect(QPoint(printRange.left(), top),
@@ -419,7 +419,7 @@ void KCSheetPrint::removeRow(int row, int nbRow)
             if (top > row) top--;
             if (bottom >= row) bottom--;
         }
-        //Validity checks
+        //KCValidity checks
         if (top < 1) top = 1;
         if (bottom < 1) bottom = 1;
         settings.setRepeatedRows(qMakePair(top, bottom));

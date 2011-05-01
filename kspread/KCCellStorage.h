@@ -48,7 +48,7 @@ class KCRegion;
 class RichTextStorage;
 class KCSheet;
 class KCStyleStorage;
-class Validity;
+class KCValidity;
 class ValidityStorage;
 class KCValue;
 class ValueStorage;
@@ -181,8 +181,8 @@ public:
     /**
      * \return the validity checks associated with the KCCell at \p column , \p row .
      */
-    Validity validity(int column, int row) const;
-    void setValidity(const KCRegion& region, Validity validity);
+    KCValidity validity(int column, int row) const;
+    void setValidity(const KCRegion& region, KCValidity validity);
 
     /**
      * \return the value associated with the KCCell at \p column , \p row .

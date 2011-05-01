@@ -58,7 +58,7 @@ enum CellDataRole {
     CommentRole         = 0x00002000,   ///< a comment; QString
     ConditionRole       = 0x00004000,   ///< a conditional style; Conditions
     StyleRole           = 0x00008000,   ///< a style; KCStyle
-    ValidityRole        = 0x00010000,   ///< a cell validition; Validity
+    ValidityRole        = 0x00010000,   ///< a cell validition; KCValidity
     FusionedRangeRole   = 0x00020000,   ///< a fusioned cell range; bool
     LockedRangeRole     = 0x00040000,   ///< a locked cell range; bool
     NamedAreaRole       = 0x00080000,   ///< a named area; QString

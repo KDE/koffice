@@ -30,7 +30,7 @@
 #include "ModelSupport.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
-#include "Validity.h"
+#include "KCValidity.h"
 #include "KCValue.h"
 #include "ValueFormatter.h"
 
@@ -275,7 +275,7 @@ bool KCSheetModel::setData(const QItemSelectionRange &range, const QVariant &val
         storage->setDatabase(region, value.value<Database>());
         break;
     case ValidityRole:
-        storage->setValidity(region, value.value<Validity>());
+        storage->setValidity(region, value.value<KCValidity>());
         break;
     default:
         return false;

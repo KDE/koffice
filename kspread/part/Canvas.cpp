@@ -572,7 +572,7 @@ void Canvas::validateSelection()
 XXX TODO
     if (selection()->isSingular()) {
         const KCCell cell = KCCell(sheet, selection()->marker()).masterCell();
-        Validity validity = cell.validity();
+        KCValidity validity = cell.validity();
         if (validity.displayValidationInformation()) {
             const QString title = validity.titleInfo();
             QString message = validity.messageInfo();

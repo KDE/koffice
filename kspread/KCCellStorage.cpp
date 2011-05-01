@@ -200,8 +200,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->userInputs);
     }
     if (!undoData->validities.isEmpty()) {
-        RectStorageUndoCommand<Validity> *const command
-        = new RectStorageUndoCommand<Validity>(sheet->model(), ValidityRole, parent);
+        RectStorageUndoCommand<KCValidity> *const command
+        = new RectStorageUndoCommand<KCValidity>(sheet->model(), ValidityRole, parent);
         command->add(undoData->validities);
     }
     if (!undoData->values.isEmpty()) {
@@ -521,12 +521,12 @@ void KCCellStorage::setRichText(int column, int row, QSharedPointer<QTextDocumen
         d->undoData->richTexts << qMakePair(QPoint(column, row), old);
 }
 
-Validity KCCellStorage::validity(int column, int row) const
+KCValidity KCCellStorage::validity(int column, int row) const
 {
     return d->validityStorage->contains(QPoint(column, row));
 }
 
-void KCCellStorage::setValidity(const KCRegion& region, Validity validity)
+void KCCellStorage::setValidity(const KCRegion& region, KCValidity validity)
 {
     // recording undo?
     if (d->undoData)
@@ -796,7 +796,7 @@ void KCCellStorage::insertColumns(int position, int number)
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertColumns(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertColumns(position, number);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->insertColumns(position, number);
-    QList< QPair<QRectF, Validity> > validities = d->validityStorage->insertColumns(position, number);
+    QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->insertColumns(position, number);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertColumns(position, number);
     // recording undo?
     if (d->undoData) {
@@ -852,7 +852,7 @@ void KCCellStorage::removeColumns(int position, int number)
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->removeColumns(position, number);
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeColumns(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeColumns(position, number);
-    QList< QPair<QRectF, Validity> > validities = d->validityStorage->removeColumns(position, number);
+    QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->removeColumns(position, number);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeColumns(position, number);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->removeColumns(position, number);
     // recording undo?
@@ -908,7 +908,7 @@ void KCCellStorage::insertRows(int position, int number)
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->insertRows(position, number);
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertRows(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertRows(position, number);
-    QList< QPair<QRectF, Validity> > validities = d->validityStorage->insertRows(position, number);
+    QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->insertRows(position, number);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertRows(position, number);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->insertRows(position, number);
     // recording undo?
@@ -967,7 +967,7 @@ void KCCellStorage::removeRows(int position, int number)
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->removeRows(position, number);
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeRows(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeRows(position, number);
-    QList< QPair<QRectF, Validity> > validities = d->validityStorage->removeRows(position, number);
+    QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->removeRows(position, number);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeRows(position, number);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->removeRows(position, number);
     // recording undo?
@@ -1026,7 +1026,7 @@ void KCCellStorage::removeShiftLeft(const QRect& rect)
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeShiftLeft(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeShiftLeft(rect);
-    QList< QPair<QRectF, Validity> > validities = d->validityStorage->removeShiftLeft(rect);
+    QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->removeShiftLeft(rect);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeShiftLeft(rect);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->removeShiftLeft(rect);
     // recording undo?
@@ -1084,7 +1084,7 @@ void KCCellStorage::insertShiftRight(const QRect& rect)
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->insertShiftRight(rect);
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertShiftRight(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertShiftRight(rect);
-    QList< QPair<QRectF, Validity> > validities = d->validityStorage->insertShiftRight(rect);
+    QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->insertShiftRight(rect);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertShiftRight(rect);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->insertShiftRight(rect);
     // recording undo?
@@ -1143,7 +1143,7 @@ void KCCellStorage::removeShiftUp(const QRect& rect)
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->removeShiftUp(rect);
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeShiftUp(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeShiftUp(rect);
-    QList< QPair<QRectF, Validity> > validities = d->validityStorage->removeShiftUp(rect);
+    QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->removeShiftUp(rect);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeShiftUp(rect);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->removeShiftUp(rect);
     // recording undo?
@@ -1201,7 +1201,7 @@ void KCCellStorage::insertShiftDown(const QRect& rect)
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->insertShiftDown(rect);
     QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertShiftDown(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertShiftDown(rect);
-    QList< QPair<QRectF, Validity> > validities = d->validityStorage->insertShiftDown(rect);
+    QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->insertShiftDown(rect);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertShiftDown(rect);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->insertShiftDown(rect);
     // recording undo?

@@ -77,7 +77,7 @@ class KCSheet;
 class KCSheetPrint;
 class KCStyle;
 class KCStyleStorage;
-class Validity;
+class KCValidity;
 class ValidityStorage;
 class ValueStorage;
 class View;
@@ -96,7 +96,7 @@ class KSPREAD_EXPORT KCSheet : public KoShapeUserData, public KoShapeControllerB
 
 public:
     enum ChangeRef       { ColumnInsert, ColumnRemove, RowInsert, RowRemove };
-    enum TestType        { Text, Validity, Comment, ConditionalCellAttribute };
+    enum TestType        { Text, KCValidity, Comment, ConditionalCellAttribute };
 
     /**
      * Creates a sheet in \p map with the name \p sheetName.

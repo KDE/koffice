@@ -46,18 +46,18 @@ bool ValidityCommand::process(Element* element)
 bool ValidityCommand::mainProcessing()
 {
     if (m_reverse) {
-        m_sheet->cellStorage()->setValidity(*this, Validity());
+        m_sheet->cellStorage()->setValidity(*this, KCValidity());
         for (int i = 0; i < m_undoData.count(); ++i)
             m_sheet->cellStorage()->setValidity(KCRegion(m_undoData[i].first.toRect()), m_undoData[i].second);
     }
     return AbstractRegionCommand::mainProcessing();
 }
 
-void ValidityCommand::setValidity(Validity validity)
+void ValidityCommand::setValidity(KCValidity validity)
 {
     m_validity = validity;
     if (m_validity.isEmpty())
-        setText(i18n("Remove Validity Check"));
+        setText(i18n("Remove KCValidity Check"));
     else
-        setText(i18n("Add Validity Check"));
+        setText(i18n("Add KCValidity Check"));
 }

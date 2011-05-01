@@ -61,7 +61,7 @@
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 #include "KCStyleManager.h"
-#include "Validity.h"
+#include "KCValidity.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
 #include "ValueFormatter.h"
@@ -511,7 +511,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
     d->styleManager->loadOdfStyleTemplate(odfContext.stylesReader(), this);
 
     KCOdfLoadingContext tableContext(odfContext);
-    tableContext.validities = Validity::preloadValidities(body); // table:content-validations
+    tableContext.validities = KCValidity::preloadValidities(body); // table:content-validations
 
     // load text styles for rich-text content and TOS
     KoShapeLoadingContext shapeContext(tableContext.odfContext, resourceManager());

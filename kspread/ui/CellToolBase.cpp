@@ -600,13 +600,13 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     addAction("clearHyperlink", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(clearHyperlink()));
 
-    action = new KAction(i18n("Validity..."), this);
+    action = new KAction(i18n("KCValidity..."), this);
     action->setToolTip(i18n("Set tests to confirm cell data is valid"));
     addAction("validity", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(validity()));
 
-    action = new KAction(i18n("Validity"), this);
-    action->setIconText(i18n("Remove Validity"));
+    action = new KAction(i18n("KCValidity"), this);
+    action->setIconText(i18n("Remove KCValidity"));
     action->setToolTip(i18n("Remove the validity tests on this cell"));
     addAction("clearValidity", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(clearValidity()));
@@ -2472,12 +2472,12 @@ void CellToolBase::validity()
 void CellToolBase::clearValidity()
 {
     // TODO Stefan: Actually this check belongs into the command!
-    if (selection()->activeSheet()->areaIsEmpty(*selection(), KCSheet::Validity))
+    if (selection()->activeSheet()->areaIsEmpty(*selection(), KCSheet::KCValidity))
         return;
 
     ValidityCommand* command = new ValidityCommand();
     command->setSheet(selection()->activeSheet());
-    command->setValidity(Validity()); // empty object removes validity
+    command->setValidity(KCValidity()); // empty object removes validity
     command->add(*selection());
     command->execute(canvas());
 }

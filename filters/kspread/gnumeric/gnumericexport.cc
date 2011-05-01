@@ -50,7 +50,7 @@
 #include <kspread/KCPrintSettings.h>
 #include <kspread/KCSheet.h>
 #include <kspread/RowColumnFormat.h>
-#include <kspread/Validity.h>
+#include <kspread/KCValidity.h>
 #include <kspread/ValueConverter.h>
 #include <kspread/part/View.h>
 
@@ -227,7 +227,7 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
     //<gmr:Validation Style="1" Type="1" Operator="7" AllowBlank="true" UseDropdown="false" Title="ghhg" Message="ghghhhjfhfghjfghj&#10;fg&#10;hjgf&#10;hj">
     //        <gmr:Expression0>45</gmr:Expression0>
     //      </gmr:Validation>
-    Validity kspread_validity = cell.validity();
+    KCValidity kspread_validity = cell.validity();
     QDomElement val = gnumeric_doc.createElement("gmr:Validation");
     val.setAttribute("Title", kspread_validity.title());
     val.setAttribute("Message", kspread_validity.message());
@@ -236,13 +236,13 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
         val.setAttribute("Style", "0");
     } else {
         switch (kspread_validity.action()) {
-        case Validity::Stop:
+        case KCValidity::Stop:
             val.setAttribute("Style", "1");
             break;
-        case Validity::Warning:
+        case KCValidity::Warning:
             val.setAttribute("Style", "2");
             break;
-        case Validity::Information:
+        case KCValidity::Information:
             val.setAttribute("Style", "3");
             break;
         }
@@ -278,10 +278,10 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
         break;
     }
     switch (kspread_validity.restriction()) {
-    case Validity::None:
+    case KCValidity::None:
         val.setAttribute("Type", "0");
         break;
-    case Validity::KCNumber: {
+    case KCValidity::KCNumber: {
         val.setAttribute("Type", "2");
         switch (kspread_validity.condition()) {
         case KCConditional::None:
@@ -312,11 +312,11 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
 
         break;
     }
-    case Validity::Text:
+    case KCValidity::Text:
         //Not supported into gnumeric
         //val.setAttribute("Type", "1" );
         break;
-    case Validity::Time:
+    case KCValidity::Time:
         val.setAttribute("Type", "5");
         switch (kspread_validity.condition()) {
         case KCConditional::None:
@@ -346,7 +346,7 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
         }
 
         break;
-    case Validity::Date:
+    case KCValidity::Date:
         val.setAttribute("Type", "4");
         switch (kspread_validity.condition()) {
         case KCConditional::None:
@@ -376,7 +376,7 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
         }
 
         break;
-    case Validity::Integer:
+    case KCValidity::Integer:
         val.setAttribute("Type", "1");
         switch (kspread_validity.condition()) {
         case KCConditional::None:
@@ -405,7 +405,7 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
         break;
         }
         break;
-    case Validity::TextLength:
+    case KCValidity::TextLength:
         val.setAttribute("Type", "6");
         switch (kspread_validity.condition()) {
         case KCConditional::None:
@@ -434,7 +434,7 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
         break;
         }
         break;
-    case Validity::List:
+    case KCValidity::List:
         val.setAttribute("Type", "3");
         switch (kspread_validity.condition()) {
         case KCConditional::None:

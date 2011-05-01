@@ -75,7 +75,7 @@ public Q_SLOTS: // METHODS
     /** Display the KCConditional dialog that allows to set cell style based
     on certain conditions. */
     virtual void conditional();
-    /** Display the Validity dialog that enables to set tests to confirm cell
+    /** Display the KCValidity dialog that enables to set tests to confirm cell
     data is valid. */
     virtual void validity();
     /** Display the "Series" dialog that allows to insert series into cells. */

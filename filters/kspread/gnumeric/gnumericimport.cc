@@ -51,7 +51,7 @@
 #include <kspread/RowColumnFormat.h>
 #include <kspread/KCSheet.h>
 #include <kspread/Util.h>
-#include <kspread/Validity.h>
+#include <kspread/KCValidity.h>
 #include <kspread/ValueParser.h>
 
 #include <math.h>
@@ -1259,7 +1259,7 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                         QDomElement validation_element = validation.toElement();
                         if (!validation_element.isNull()) {
                             kDebug(30521) << " Cell validation";
-                            Validity kspread_validity = kspread_cell.validity();
+                            KCValidity kspread_validity = kspread_cell.validity();
                             if (validation_element.hasAttribute("AllowBlank") && validation_element.attribute("AllowBlank") == "true") {
                                 kspread_validity.setAllowEmptyCell(true);
                             }
@@ -1276,13 +1276,13 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                     kspread_validity.setDisplayMessage(false);
                                     break;
                                 case 1:
-                                    kspread_validity.setAction(Validity::Stop);
+                                    kspread_validity.setAction(KCValidity::Stop);
                                     break;
                                 case 2:
-                                    kspread_validity.setAction(Validity::Warning);
+                                    kspread_validity.setAction(KCValidity::Warning);
                                     break;
                                 case 3:
-                                    kspread_validity.setAction(Validity::Information);
+                                    kspread_validity.setAction(KCValidity::Information);
                                     break;
                                 default:
                                     kDebug() << " Error in validation style :" << value;
@@ -1297,10 +1297,10 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                 int valueOp = validation_element.attribute("Type").toInt();
                                 switch (valueOp) {
                                 case 0:
-                                    kspread_validity.setRestriction(Validity::None);
+                                    kspread_validity.setRestriction(KCValidity::None);
                                     break;
                                 case 1: {
-                                    kspread_validity.setRestriction(Validity::Integer);
+                                    kspread_validity.setRestriction(KCValidity::Integer);
                                     if (validation_element.hasAttribute("Operator")) {
                                         const KCValue value1(expression0.toElement().text().toInt());
                                         const KCValue value2(expression1.toElement().text().toInt());
@@ -1358,7 +1358,7 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                 }
                                 break;
                                 case 2:
-                                    kspread_validity.setRestriction(Validity::KCNumber);
+                                    kspread_validity.setRestriction(KCValidity::KCNumber);
                                     if (validation_element.hasAttribute("Operator")) {
                                         const KCValue value1(expression0.toElement().text().toInt());
                                         const KCValue value2(expression1.toElement().text().toInt());
@@ -1415,10 +1415,10 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                     }
                                     break;
                                 case 3:
-                                    kspread_validity.setRestriction(Validity::List);
+                                    kspread_validity.setRestriction(KCValidity::List);
                                     break;
                                 case 4:
-                                    kspread_validity.setRestriction(Validity::Date);
+                                    kspread_validity.setRestriction(KCValidity::Date);
                                     if (validation_element.hasAttribute("Operator")) {
                                         const KCValue value1 = parser->tryParseDate(expression0.toElement().text());
                                         const KCValue value2 = parser->tryParseDate(expression1.toElement().text());
@@ -1476,7 +1476,7 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                     }
                                     break;
                                 case 5:
-                                    kspread_validity.setRestriction(Validity::Time);
+                                    kspread_validity.setRestriction(KCValidity::Time);
                                     if (validation_element.hasAttribute("Operator")) {
                                         const KCValue value1 = parser->tryParseTime(expression0.toElement().text());
                                         const KCValue value2 = parser->tryParseTime(expression1.toElement().text());
@@ -1531,7 +1531,7 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                     }
                                     break;
                                 case 6:
-                                    kspread_validity.setRestriction(Validity::TextLength);
+                                    kspread_validity.setRestriction(KCValidity::TextLength);
                                     if (validation_element.hasAttribute("Operator")) {
                                         const KCValue value1(expression0.toElement().text().toInt());
                                         const KCValue value2(expression1.toElement().text().toInt());

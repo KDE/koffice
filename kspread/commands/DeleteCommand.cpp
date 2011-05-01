@@ -23,7 +23,7 @@
 #include "KCRegion.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
-#include "Validity.h"
+#include "KCValidity.h"
 
 #include <klocale.h>
 
@@ -121,7 +121,7 @@ bool DeleteCommand::process(Element* element)
     KCStyle style;
     style.setDefault();
     m_sheet->cellStorage()->setStyle(KCRegion(range, element->sheet()), style);
-    m_sheet->cellStorage()->setValidity(KCRegion(range, element->sheet()), Validity());
+    m_sheet->cellStorage()->setValidity(KCRegion(range, element->sheet()), KCValidity());
     return true;
 }
 

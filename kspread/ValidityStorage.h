@@ -21,7 +21,7 @@
 #define KSPREAD_VALIDITY_STORAGE
 
 #include "KCRectStorage.h"
-#include "Validity.h"
+#include "KCValidity.h"
 
 
 /**
@@ -30,19 +30,19 @@
  * \ingroup KCValue
  * Stores cell validations.
  */
-class ValidityStorage : public QObject, public KCRectStorage<Validity>
+class ValidityStorage : public QObject, public KCRectStorage<KCValidity>
 {
     Q_OBJECT
 public:
-    explicit ValidityStorage(KCMap* map) : QObject(map), KCRectStorage<Validity>(map) {}
-    ValidityStorage(const ValidityStorage& other) : QObject(other.parent()), KCRectStorage<Validity>(other) {}
+    explicit ValidityStorage(KCMap* map) : QObject(map), KCRectStorage<KCValidity>(map) {}
+    ValidityStorage(const ValidityStorage& other) : QObject(other.parent()), KCRectStorage<KCValidity>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {
         QTimer::singleShot(g_garbageCollectionTimeOut, this, SLOT(garbageCollection()));
     }
     virtual void garbageCollection() {
-        KCRectStorage<Validity>::garbageCollection();
+        KCRectStorage<KCValidity>::garbageCollection();
     }
 };
 

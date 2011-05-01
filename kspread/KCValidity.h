@@ -55,14 +55,14 @@ class ValueConverter;
 class ValueParser;
 
 /**
- * \class Validity
+ * \class KCValidity
  * \ingroup KCValue
  *
  * Validates cell contents.
  *
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  */
-class KSPREAD_EXPORT Validity
+class KSPREAD_EXPORT KCValidity
 {
 public:
     /// The action invoked, if the validity check fails.
@@ -87,18 +87,18 @@ public:
      * Constructor.
      * Creates a validity check, that allows any content.
      */
-    Validity();
+    KCValidity();
 
     /**
      * Copy Constructor.
      * Copies the validity \p other .
      */
-    Validity(const Validity& other);
+    KCValidity(const KCValidity& other);
 
     /**
      * Destructor.
      */
-    ~Validity();
+    ~KCValidity();
 
     /**
      * \return \c true if this validity check allows any content
@@ -165,12 +165,12 @@ public:
     void setValidityList(const QStringList& list);
 
     /// \note fake implementation to make QMap happy
-    bool operator<(const Validity&) const {
+    bool operator<(const KCValidity&) const {
         return true;
     }
-    void operator=(const Validity&);
-    bool operator==(const Validity& other) const;
-    inline bool operator!=(const Validity& other) const {
+    void operator=(const KCValidity&);
+    bool operator==(const KCValidity& other) const;
+    inline bool operator!=(const KCValidity& other) const {
         return !operator==(other);
     }
 
@@ -193,7 +193,7 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-Q_DECLARE_METATYPE(Validity)
-Q_DECLARE_TYPEINFO(Validity, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(KCValidity)
+Q_DECLARE_TYPEINFO(KCValidity, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_VALIDITY

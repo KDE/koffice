@@ -26,7 +26,7 @@
 
 #include <kpagedialog.h>
 
-#include "Validity.h"
+#include "KCValidity.h"
 
 class QLabel;
 class KLineEdit;

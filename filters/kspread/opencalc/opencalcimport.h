@@ -39,7 +39,7 @@ class KCConditional;
 class Doc;
 class KCSheet;
 class KCStyle;
-class Validity;
+class KCValidity;
 class ValueParser;
 
 class OpenCalcImport : public KoFilter
@@ -102,11 +102,11 @@ private:
                          QString name);
     void checkForNamedAreas(QString & formula) const;
     void loadOasisCellValidation(const KoXmlElement&body, const ValueParser *parser);
-    void loadOasisValidation(Validity val, const QString& validationName, const ValueParser *parser);
-    void loadOasisValidationCondition(Validity val, QString &valExpression, const ValueParser *parser);
+    void loadOasisValidation(KCValidity val, const QString& validationName, const ValueParser *parser);
+    void loadOasisValidationCondition(KCValidity val, QString &valExpression, const ValueParser *parser);
     void loadOasisAreaName(const KoXmlElement&body);
     void loadOasisMasterLayoutPage(KCSheet * table, KoStyleStack &styleStack);
-    void loadOasisValidationValue(Validity val, const QStringList &listVal, const ValueParser *parser);
+    void loadOasisValidationValue(KCValidity val, const QStringList &listVal, const ValueParser *parser);
     QString translatePar(QString & par) const;
     void loadCondition(const KCCell& cell, const KoXmlElement &property);
     void loadOasisCondition(const KCCell& cell, const KoXmlElement &property);

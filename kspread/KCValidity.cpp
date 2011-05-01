@@ -18,7 +18,7 @@
 */
 
 // Local
-#include "Validity.h"
+#include "KCValidity.h"
 
 // KDE
 #include <kmessagebox.h>
@@ -37,7 +37,7 @@
 #include "ValueConverter.h"
 #include "ValueParser.h"
 
-class Validity::Private : public QSharedData
+class KCValidity::Private : public QSharedData
 {
 public:
     QString message;
@@ -55,7 +55,7 @@ public:
     QStringList listValidity;
 };
 
-Validity::Validity()
+KCValidity::KCValidity()
         : d(new Private)
 {
     d->cond = KCConditional::None;
@@ -66,21 +66,21 @@ Validity::Validity()
     d->displayValidationInformation = false;
 }
 
-Validity::Validity(const Validity& other)
+KCValidity::KCValidity(const KCValidity& other)
         : d(other.d)
 {
 }
 
-Validity::~Validity()
+KCValidity::~KCValidity()
 {
 }
 
-bool Validity::isEmpty() const
+bool KCValidity::isEmpty() const
 {
     return d->restriction == None;
 }
 
-bool Validity::loadXML(KCCell* const cell, const KoXmlElement& validityElement)
+bool KCValidity::loadXML(KCCell* const cell, const KoXmlElement& validityElement)
 {
     ValueParser *const parser = cell->sheet()->map()->parser();
     bool ok = false;
@@ -160,7 +160,7 @@ bool Validity::loadXML(KCCell* const cell, const KoXmlElement& validityElement)
     return true;
 }
 
-QDomElement Validity::saveXML(QDomDocument& doc, const ValueConverter *converter) const
+QDomElement KCValidity::saveXML(QDomDocument& doc, const ValueConverter *converter) const
 {
     QDomElement validityElement = doc.createElement("validity");
 
@@ -229,11 +229,11 @@ QDomElement Validity::saveXML(QDomDocument& doc, const ValueConverter *converter
 }
 
 
-void Validity::loadOdfValidation(KCCell* const cell, const QString& validationName,
+void KCValidity::loadOdfValidation(KCCell* const cell, const QString& validationName,
                                  KCOdfLoadingContext& tableContext)
 {
     KoXmlElement element = tableContext.validities.value(validationName);
-    Validity validity;
+    KCValidity validity;
     if (element.hasAttributeNS(KoXmlNS::table, "condition")) {
         QString valExpression = element.attributeNS(KoXmlNS::table, "condition", QString());
         kDebug(36003) << " element.attribute( table:condition )" << valExpression;
@@ -254,15 +254,15 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
             //"cell-content-text-length()>45"
             valExpression = valExpression.remove("oooc:cell-content-text-length()");
             kDebug(36003) << " valExpression = :" << valExpression;
-            setRestriction(Validity::TextLength);
+            setRestriction(KCValidity::TextLength);
 
             loadOdfValidationCondition(valExpression, cell->sheet()->map()->parser());
         } else if (valExpression.contains("cell-content-is-text()")) {
-            setRestriction(Validity::Text);
+            setRestriction(KCValidity::Text);
         }
         //cell-content-text-length-is-between(KCValue, KCValue) | cell-content-text-length-is-not-between(KCValue, KCValue) | cell-content-is-in-list( StringList )
         else if (valExpression.contains("cell-content-text-length-is-between")) {
-            setRestriction(Validity::TextLength);
+            setRestriction(KCValidity::TextLength);
             setCondition(KCConditional::Between);
             valExpression = valExpression.remove("oooc:cell-content-text-length-is-between(");
             kDebug(36003) << " valExpression :" << valExpression;
@@ -270,7 +270,7 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
             QStringList listVal = valExpression.split(',', QString::SkipEmptyParts);
             loadOdfValidationValue(listVal, cell->sheet()->map()->parser());
         } else if (valExpression.contains("cell-content-text-length-is-not-between")) {
-            setRestriction(Validity::TextLength);
+            setRestriction(KCValidity::TextLength);
             setCondition(KCConditional::Different);
             valExpression = valExpression.remove("oooc:cell-content-text-length-is-not-between(");
             kDebug(36003) << " valExpression :" << valExpression;
@@ -279,7 +279,7 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
             QStringList listVal = valExpression.split(',', QString::SkipEmptyParts);
             loadOdfValidationValue(listVal, cell->sheet()->map()->parser());
         } else if (valExpression.contains("cell-content-is-in-list(")) {
-            setRestriction(Validity::List);
+            setRestriction(KCValidity::List);
             valExpression = valExpression.remove("oooc:cell-content-is-in-list(");
             kDebug(36003) << " valExpression :" << valExpression;
             valExpression = valExpression.remove(')');
@@ -289,16 +289,16 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
         //TrueFunction ::= cell-content-is-whole-number() | cell-content-is-decimal-number() | cell-content-is-date() | cell-content-is-time()
         else {
             if (valExpression.contains("cell-content-is-whole-number()")) {
-                setRestriction(Validity::KCNumber);
+                setRestriction(KCValidity::KCNumber);
                 valExpression = valExpression.remove("oooc:cell-content-is-whole-number() and ");
             } else if (valExpression.contains("cell-content-is-decimal-number()")) {
-                setRestriction(Validity::Integer);
+                setRestriction(KCValidity::Integer);
                 valExpression = valExpression.remove("oooc:cell-content-is-decimal-number() and ");
             } else if (valExpression.contains("cell-content-is-date()")) {
-                setRestriction(Validity::Date);
+                setRestriction(KCValidity::Date);
                 valExpression = valExpression.remove("oooc:cell-content-is-date() and ");
             } else if (valExpression.contains("cell-content-is-time()")) {
-                setRestriction(Validity::Time);
+                setRestriction(KCValidity::Time);
                 valExpression = valExpression.remove("oooc:cell-content-is-time() and ");
             }
             kDebug(36003) << "valExpression :" << valExpression;
@@ -357,11 +357,11 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
         if (error.hasAttributeNS(KoXmlNS::table, "message-type")) {
             QString str = error.attributeNS(KoXmlNS::table, "message-type", QString());
             if (str == "warning")
-                setAction(Validity::Warning);
+                setAction(KCValidity::Warning);
             else if (str == "information")
-                setAction(Validity::Information);
+                setAction(KCValidity::Information);
             else if (str == "stop")
-                setAction(Validity::Stop);
+                setAction(KCValidity::Stop);
             else
                 kDebug(36003) << "validation : message type unknown  :" << str;
         }
@@ -377,15 +377,15 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
     cell->setValidity(validity);
 }
 
-void Validity::loadOdfValidationValue(const QStringList &listVal, const ValueParser *parser)
+void KCValidity::loadOdfValidationValue(const QStringList &listVal, const ValueParser *parser)
 {
     bool ok = false;
     kDebug(36003) << " listVal[0] :" << listVal[0] << " listVal[1] :" << listVal[1];
 
-    if (restriction() == Validity::Date) {
+    if (restriction() == KCValidity::Date) {
         setMinimumValue(parser->tryParseDate(listVal[0]));
         setMaximumValue(parser->tryParseDate(listVal[1]));
-    } else if (restriction() == Validity::Time) {
+    } else if (restriction() == KCValidity::Time) {
         setMinimumValue(parser->tryParseTime(listVal[0]));
         setMaximumValue(parser->tryParseTime(listVal[1]));
     } else {
@@ -415,7 +415,7 @@ void Validity::loadOdfValidationValue(const QStringList &listVal, const ValuePar
     }
 }
 
-void Validity::loadOdfValidationCondition(QString &valExpression, const ValueParser *parser)
+void KCValidity::loadOdfValidationCondition(QString &valExpression, const ValueParser *parser)
 {
     if (isEmpty()) return;
     QString value;
@@ -440,9 +440,9 @@ void Validity::loadOdfValidationCondition(QString &valExpression, const ValuePar
         setCondition(KCConditional::Equal);
     } else
         kDebug(36003) << " I don't know how to parse it :" << valExpression;
-    if (restriction() == Validity::Date) {
+    if (restriction() == KCValidity::Date) {
         setMinimumValue(parser->tryParseDate(value));
-    } else if (restriction() == Validity::Date) {
+    } else if (restriction() == KCValidity::Date) {
         setMinimumValue(parser->tryParseTime(value));
     } else {
         bool ok = false;
@@ -460,137 +460,137 @@ void Validity::loadOdfValidationCondition(QString &valExpression, const ValuePar
     }
 }
 
-Validity::Action Validity::action() const
+KCValidity::Action KCValidity::action() const
 {
     return d->action;
 }
 
-bool Validity::allowEmptyCell() const
+bool KCValidity::allowEmptyCell() const
 {
     return d->allowEmptyCell;
 }
 
-KCConditional::Type Validity::condition() const
+KCConditional::Type KCValidity::condition() const
 {
     return d->cond;
 }
 
-bool Validity::displayMessage() const
+bool KCValidity::displayMessage() const
 {
     return d->displayMessage;
 }
 
-bool Validity::displayValidationInformation() const
+bool KCValidity::displayValidationInformation() const
 {
     return d->displayValidationInformation;
 }
 
-const QString& Validity::messageInfo() const
+const QString& KCValidity::messageInfo() const
 {
     return d->messageInfo;
 }
 
-const KCValue &Validity::maximumValue() const
+const KCValue &KCValidity::maximumValue() const
 {
     return d->maxValue;
 }
 
-const QString& Validity::message() const
+const QString& KCValidity::message() const
 {
     return d->message;
 }
 
-const KCValue &Validity::minimumValue() const
+const KCValue &KCValidity::minimumValue() const
 {
     return d->minValue;
 }
 
-Validity::Restriction Validity::restriction() const
+KCValidity::Restriction KCValidity::restriction() const
 {
     return d->restriction;
 }
 
-const QString& Validity::title() const
+const QString& KCValidity::title() const
 {
     return d->title;
 }
 
-const QString& Validity::titleInfo() const
+const QString& KCValidity::titleInfo() const
 {
     return d->titleInfo;
 }
 
-const QStringList& Validity::validityList() const
+const QStringList& KCValidity::validityList() const
 {
     return d->listValidity;
 }
 
-void Validity::setAction(Action action)
+void KCValidity::setAction(Action action)
 {
     d->action = action;
 }
 
-void Validity::setAllowEmptyCell(bool allow)
+void KCValidity::setAllowEmptyCell(bool allow)
 {
     d->allowEmptyCell = allow;
 }
 
-void Validity::setCondition(KCConditional::Type condition)
+void KCValidity::setCondition(KCConditional::Type condition)
 {
     d->cond = condition;
 }
 
-void Validity::setDisplayMessage(bool display)
+void KCValidity::setDisplayMessage(bool display)
 {
     d->displayMessage = display;
 }
 
-void Validity::setDisplayValidationInformation(bool display)
+void KCValidity::setDisplayValidationInformation(bool display)
 {
     d->displayValidationInformation = display;
 }
 
-void Validity::setMaximumValue(const KCValue &value)
+void KCValidity::setMaximumValue(const KCValue &value)
 {
     d->maxValue = value;
 }
 
-void Validity::setMessage(const QString& msg)
+void KCValidity::setMessage(const QString& msg)
 {
     d->message = msg;
 }
 
-void Validity::setMessageInfo(const QString& info)
+void KCValidity::setMessageInfo(const QString& info)
 {
     d->messageInfo = info;
 }
 
-void Validity::setMinimumValue(const KCValue &value)
+void KCValidity::setMinimumValue(const KCValue &value)
 {
     d->minValue = value;
 }
 
-void Validity::setRestriction(Restriction restriction)
+void KCValidity::setRestriction(Restriction restriction)
 {
     d->restriction = restriction;
 }
 
-void Validity::setTitle(const QString& t)
+void KCValidity::setTitle(const QString& t)
 {
     d->title = t;
 }
 
-void Validity::setTitleInfo(const QString& info)
+void KCValidity::setTitleInfo(const QString& info)
 {
     d->titleInfo = info;
 }
 
-void Validity::setValidityList(const QStringList& list)
+void KCValidity::setValidityList(const QStringList& list)
 {
     d->listValidity = list;
 }
 
-bool Validity::testValidity(const KCCell* cell) const
+bool KCValidity::testValidity(const KCCell* cell) const
 {
     bool valid = false;
     if (d->restriction != None) {
@@ -710,12 +710,12 @@ bool Validity::testValidity(const KCCell* cell) const
     return valid;
 }
 
-void Validity::operator=(const Validity & other)
+void KCValidity::operator=(const KCValidity & other)
 {
     d = other.d;
 }
 
-bool Validity::operator==(const Validity& other) const
+bool KCValidity::operator==(const KCValidity& other) const
 {
     if (d->message == other.d->message &&
             d->title == other.d->title &&
@@ -736,7 +736,7 @@ bool Validity::operator==(const Validity& other) const
 }
 
 // static
-QHash<QString, KoXmlElement> Validity::preloadValidities(const KoXmlElement& body)
+QHash<QString, KoXmlElement> KCValidity::preloadValidities(const KoXmlElement& body)
 {
     QHash<QString, KoXmlElement> validities;
     KoXmlNode validation = KoXml::namedItemNS(body, KoXmlNS::table, "content-validations");

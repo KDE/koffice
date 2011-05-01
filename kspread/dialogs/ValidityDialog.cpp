@@ -49,15 +49,15 @@
 #include "commands/ValidityCommand.h"
 
 Q_DECLARE_METATYPE(KCConditional::Type)
-Q_DECLARE_METATYPE(Validity::Action)
-Q_DECLARE_METATYPE(Validity::Restriction)
+Q_DECLARE_METATYPE(KCValidity::Action)
+Q_DECLARE_METATYPE(KCValidity::Restriction)
 
 ValidityDialog::ValidityDialog(QWidget* parent, Selection* selection)
         : KPageDialog(parent)
 
 {
     setFaceType(Tabbed);
-    setCaption(i18n("Validity"));
+    setCaption(i18n("KCValidity"));
     setModal(true);
     setButtons(Ok | Cancel | User1);
     setButtonGuiItem(User1, KGuiItem(i18n("Clear &All")));
@@ -77,14 +77,14 @@ ValidityDialog::ValidityDialog(QWidget* parent, Selection* selection)
 
     chooseType = new KComboBox(page1);
     tmpGridLayout->addWidget(chooseType, 0, 1);
-    chooseType->addItem(i18n("All"), QVariant::fromValue(Validity::None));
-    chooseType->addItem(i18n("KCNumber"), QVariant::fromValue(Validity::KCNumber));
-    chooseType->addItem(i18n("Integer"), QVariant::fromValue(Validity::Integer));
-    chooseType->addItem(i18n("Text"), QVariant::fromValue(Validity::Text));
-    chooseType->addItem(i18n("Date"), QVariant::fromValue(Validity::Date));
-    chooseType->addItem(i18n("Time"), QVariant::fromValue(Validity::Time));
-    chooseType->addItem(i18n("Text Length"), QVariant::fromValue(Validity::TextLength));
-    chooseType->addItem(i18n("List"), QVariant::fromValue(Validity::List));
+    chooseType->addItem(i18n("All"), QVariant::fromValue(KCValidity::None));
+    chooseType->addItem(i18n("KCNumber"), QVariant::fromValue(KCValidity::KCNumber));
+    chooseType->addItem(i18n("Integer"), QVariant::fromValue(KCValidity::Integer));
+    chooseType->addItem(i18n("Text"), QVariant::fromValue(KCValidity::Text));
+    chooseType->addItem(i18n("Date"), QVariant::fromValue(KCValidity::Date));
+    chooseType->addItem(i18n("Time"), QVariant::fromValue(KCValidity::Time));
+    chooseType->addItem(i18n("Text Length"), QVariant::fromValue(KCValidity::TextLength));
+    chooseType->addItem(i18n("List"), QVariant::fromValue(KCValidity::List));
     chooseType->setCurrentIndex(0);
 
     allowEmptyCell = new QCheckBox(i18n("Allow blanks"), page1);
@@ -170,9 +170,9 @@ ValidityDialog::ValidityDialog(QWidget* parent, Selection* selection)
 
     chooseAction = new KComboBox(page2);
     tmpGridLayout->addWidget(chooseAction, 1, 1);
-    chooseAction->addItem(i18n("Stop"), QVariant::fromValue(Validity::Stop));
-    chooseAction->addItem(i18n("Warning"), QVariant::fromValue(Validity::Warning));
-    chooseAction->addItem(i18n("Information"), QVariant::fromValue(Validity::Information));
+    chooseAction->addItem(i18n("Stop"), QVariant::fromValue(KCValidity::Stop));
+    chooseAction->addItem(i18n("Warning"), QVariant::fromValue(KCValidity::Warning));
+    chooseAction->addItem(i18n("Information"), QVariant::fromValue(KCValidity::Information));
     chooseAction->setCurrentIndex(0);
 
     tmpQLabel = new QLabel(page2);
@@ -394,49 +394,49 @@ void ValidityDialog::init()
     const KCMap *const map = m_selection->activeSheet()->map();
     const KCCalculationSettings *settings = map->calculationSettings();
     const KLocale* locale = settings->locale();
-    Validity validity = KCCell(m_selection->activeSheet(), m_selection->marker()).validity();
+    KCValidity validity = KCCell(m_selection->activeSheet(), m_selection->marker()).validity();
     if (!validity.isEmpty()) {
         message->setPlainText(validity.message());
         title->setText(validity.title());
         QString tmp;
         switch (validity.restriction()) {
-        case Validity::None:
+        case KCValidity::None:
             chooseType->setCurrentIndex(0);
             break;
-        case Validity::KCNumber:
+        case KCValidity::KCNumber:
             chooseType->setCurrentIndex(1);
             if (validity.condition() >= 5)
                 val_max->setText(tmp.setNum((double)numToDouble(validity.maximumValue().asFloat())));
             val_min->setText(tmp.setNum((double)numToDouble(validity.minimumValue().asFloat())));
             break;
-        case Validity::Integer:
+        case KCValidity::Integer:
             chooseType->setCurrentIndex(2);
             if (validity.condition() >= 5)
                 val_max->setText(tmp.setNum((double)numToDouble(validity.maximumValue().asFloat())));
             val_min->setText(tmp.setNum((double)numToDouble(validity.minimumValue().asFloat())));
             break;
-        case Validity::TextLength:
+        case KCValidity::TextLength:
             chooseType->setCurrentIndex(6);
             if (validity.condition() >= 5)
                 val_max->setText(tmp.setNum((double)numToDouble(validity.maximumValue().asFloat())));
             val_min->setText(tmp.setNum((double)numToDouble(validity.minimumValue().asFloat())));
             break;
-        case Validity::Text:
+        case KCValidity::Text:
             chooseType->setCurrentIndex(3);
             break;
-        case Validity::Date:
+        case KCValidity::Date:
             chooseType->setCurrentIndex(4);
             val_min->setText(locale->formatDate(validity.minimumValue().asDate(settings), KLocale::ShortDate));
             if (validity.condition() >= 5)
                 val_max->setText(locale->formatDate(validity.maximumValue().asDate(settings), KLocale::ShortDate));
             break;
-        case Validity::Time:
+        case KCValidity::Time:
             chooseType->setCurrentIndex(5);
             val_min->setText(locale->formatTime(validity.minimumValue().asTime(settings), true));
             if (validity.condition() >= 5)
                 val_max->setText(locale->formatTime(validity.maximumValue().asTime(settings), true));
             break;
-        case Validity::List: {
+        case KCValidity::List: {
             chooseType->setCurrentIndex(7);
             const QStringList lst = validity.validityList();
             QString tmp;
@@ -485,7 +485,7 @@ void ValidityDialog::OkPressed()
 {
     const KLocale* locale = m_selection->activeSheet()->map()->calculationSettings()->locale();
     const ValueParser *const parser = m_selection->activeSheet()->map()->parser();
-    Validity validity;
+    KCValidity validity;
     if (chooseType->currentIndex() == 1) {
         bool ok;
         val_min->text().toDouble(&ok);
@@ -541,16 +541,16 @@ void ValidityDialog::OkPressed()
     }
 
     if (chooseType->currentIndex() == 0) {//no validity
-        validity.setRestriction(Validity::None);
-        validity.setAction(Validity::Stop);
+        validity.setRestriction(KCValidity::None);
+        validity.setAction(KCValidity::Stop);
         validity.setCondition(KCConditional::Equal);
         validity.setMessage(message->toPlainText());
         validity.setTitle(title->text());
         validity.setMinimumValue(KCValue());
         validity.setMaximumValue(KCValue());
     } else {
-        validity.setRestriction(chooseType->itemData(chooseType->currentIndex()).value<Validity::Restriction>());
-        validity.setAction(chooseAction->itemData(chooseAction->currentIndex()).value<Validity::Action>());
+        validity.setRestriction(chooseType->itemData(chooseType->currentIndex()).value<KCValidity::Restriction>());
+        validity.setAction(chooseAction->itemData(chooseAction->currentIndex()).value<KCValidity::Action>());
         validity.setCondition(choose->itemData(choose->currentIndex()).value<KCConditional::Type>());
         validity.setMessage(message->toPlainText());
         validity.setTitle(title->text());

@@ -90,7 +90,7 @@
 #include "KCStyleManager.h"
 #include "KCStyleStorage.h"
 #include "Util.h"
-#include "Validity.h"
+#include "KCValidity.h"
 #include "ValueConverter.h"
 #include "ValueStorage.h"
 
@@ -993,7 +993,7 @@ bool KCSheet::cellIsEmpty(const KCCell& cell, TestType _type)
             if (!cell.userInput().isEmpty())
                 return false;
             break;
-        case Validity:
+        case KCValidity:
             if (!cell.validity().isEmpty())
                 return false;
             break;

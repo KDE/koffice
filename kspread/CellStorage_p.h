@@ -25,7 +25,7 @@
 #include "KCCondition.h"
 #include "KCFormula.h"
 #include "KCStyle.h"
-#include "Validity.h"
+#include "KCValidity.h"
 #include "KCValue.h"
 
 class KCCellStorageUndoData
@@ -74,7 +74,7 @@ public:
     QList< QPair<QRectF, QString> >          namedAreas;
     QList< QPair<QRectF, SharedSubStyle> >   styles;
     QVector< QPair<QPoint, QString> >        userInputs;
-    QList< QPair<QRectF, Validity> >         validities;
+    QList< QPair<QRectF, KCValidity> >         validities;
     QVector< QPair<QPoint, KCValue> >          values;
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts;
 };

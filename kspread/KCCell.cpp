@@ -66,7 +66,7 @@
 #include "KCStyleManager.h"
 #include "Util.h"
 #include "KCValue.h"
-#include "Validity.h"
+#include "KCValidity.h"
 #include "ValueConverter.h"
 #include "ValueFormatter.h"
 #include "ValueParser.h"
@@ -362,12 +362,12 @@ void KCCell::setStyle(const KCStyle& style)
     sheet()->cellStorage()->styleStorage()->contains(cellPosition());
 }
 
-Validity KCCell::validity() const
+KCValidity KCCell::validity() const
 {
     return sheet()->cellStorage()->validity(d->column, d->row);
 }
 
-void KCCell::setValidity(Validity validity)
+void KCCell::setValidity(KCValidity validity)
 {
     sheet()->cellStorage()->setValidity(KCRegion(cellPosition()), validity);
 }
@@ -831,7 +831,7 @@ void KCCell::parseUserInput(const QString& text)
 
     // validation
     if (!sheet()->isLoading()) {
-        Validity validity = this->validity();
+        KCValidity validity = this->validity();
         if (!validity.testValidity(this)) {
             kDebug() << "Validation failed";
             //reapply old value if action == stop
@@ -952,7 +952,7 @@ QDomElement KCCell::save(QDomDocument& doc, int xOffset, int yOffset, bool era)
             cell.appendChild(conditionElement);
     }
 
-    Validity validity = this->validity();
+    KCValidity validity = this->validity();
     if (!validity.isEmpty()) {
         QDomElement validityElement = validity.saveXML(doc, sheet()->map()->converter());
         if (!validityElement.isNull())
@@ -1162,7 +1162,7 @@ bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
             xmlwriter.addAttribute("table:number-columns-repeated", QString::number(repeated));
     }
 
-    Validity validity = KCCell(sheet(), column, row).validity();
+    KCValidity validity = KCCell(sheet(), column, row).validity();
     if (!validity.isEmpty()) {
         KCGenValidationStyle styleVal(&validity, sheet()->map()->converter());
         xmlwriter.addAttribute("table:validation-name", tableContext.valStyle.insert(styleVal));
@@ -1375,7 +1375,7 @@ bool KCCell::loadOdf(const KoXmlElement& element, KCOdfLoadingContext& tableCont
     if (element.hasAttributeNS(KoXmlNS::table, sValidationName)) {
         const QString validationName = element.attributeNS(KoXmlNS::table, sValidationName, QString());
         kDebug(36003) << "cell:" << name() << sValidationName << validationName;
-        Validity validity;
+        KCValidity validity;
         validity.loadOdfValidation(this, validationName, tableContext);
         if (!validity.isEmpty())
             setValidity(validity);
@@ -1885,12 +1885,12 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
 
     KoXmlElement validityElement = cell.namedItem("validity").toElement();
     if (!validityElement.isNull()) {
-        Validity validity;
+        KCValidity validity;
         if (validity.loadXML(this, validityElement))
             setValidity(validity);
     } else if (paste && (mode == Paste::Normal || mode == Paste::NoBorder)) {
         // clear the validity
-        setValidity(Validity());
+        setValidity(KCValidity());
     }
 
     //

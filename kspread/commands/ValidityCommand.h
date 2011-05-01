@@ -20,7 +20,7 @@
 #ifndef KSPREAD_VALIDITY_COMMAND
 #define KSPREAD_VALIDITY_COMMAND
 
-#include "Validity.h"
+#include "KCValidity.h"
 
 #include "AbstractRegionCommand.h"
 
@@ -34,15 +34,15 @@ class ValidityCommand : public AbstractRegionCommand
 {
 public:
     ValidityCommand();
-    void setValidity(Validity validity);
+    void setValidity(KCValidity validity);
 
 protected:
     virtual bool process(Element* element);
     virtual bool mainProcessing();
 
 private:
-    Validity m_validity;
-    QList< QPair<QRectF, Validity> > m_undoData;
+    KCValidity m_validity;
+    QList< QPair<QRectF, KCValidity> > m_undoData;
 };
 
 #endif // KSPREAD_VALIDITY_COMMAND

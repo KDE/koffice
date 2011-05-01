@@ -64,7 +64,7 @@ class KCFormula;
 class KCOdfLoadingContext;
 class KCOdfSavingContext;
 class KCSheet;
-class Validity;
+class KCValidity;
 class KCValue;
 
 /**
@@ -254,9 +254,9 @@ public:
     /**
      * \return the validity checks associated with this cell
      */
-    Validity validity() const;
+    KCValidity validity() const;
 
-    void setValidity(Validity validity);
+    void setValidity(KCValidity validity);
 
     /**
      * Returns the value that this cell holds. It could be from the user

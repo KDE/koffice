@@ -57,7 +57,7 @@
 #include <kspread/KCSheet.h>
 #include <kspread/KCStyle.h>
 #include <kspread/KCStyleManager.h>
-#include <kspread/Validity.h>
+#include <kspread/KCValidity.h>
 #include <kspread/KCValue.h>
 #include <kspread/ValueParser.h>
 
@@ -2063,7 +2063,7 @@ bool OpenCalcImport::createStyleMap(KoXmlDocument const & styles)
     return true;
 }
 
-void OpenCalcImport::loadOasisValidation(Validity validity, const QString& validationName, const ValueParser *parser)
+void OpenCalcImport::loadOasisValidation(KCValidity validity, const QString& validationName, const ValueParser *parser)
 {
     kDebug(30518) << "validationName:" << validationName;
     KoXmlElement element = m_validationList[validationName];
@@ -2087,13 +2087,13 @@ void OpenCalcImport::loadOasisValidation(Validity validity, const QString& valid
             //"cell-content-text-length()>45"
             valExpression = valExpression.remove("cell-content-text-length()");
             kDebug(30518) << " valExpression = :" << valExpression;
-            validity.setRestriction(Validity::TextLength);
+            validity.setRestriction(KCValidity::TextLength);
 
             loadOasisValidationCondition(validity, valExpression, parser);
         }
         //cell-content-text-length-is-between(KCValue, KCValue) | cell-content-text-length-is-not-between(KCValue, KCValue)
         else if (valExpression.contains("cell-content-text-length-is-between")) {
-            validity.setRestriction(Validity::TextLength);
+            validity.setRestriction(KCValidity::TextLength);
             validity.setCondition(KCConditional::Between);
             valExpression = valExpression.remove("cell-content-text-length-is-between(");
             kDebug(30518) << " valExpression :" << valExpression;
@@ -2101,7 +2101,7 @@ void OpenCalcImport::loadOasisValidation(Validity validity, const QString& valid
             QStringList listVal = valExpression.split(',');
             loadOasisValidationValue(validity, listVal, parser);
         } else if (valExpression.contains("cell-content-text-length-is-not-between")) {
-            validity.setRestriction(Validity::TextLength);
+            validity.setRestriction(KCValidity::TextLength);
             validity.setCondition(KCConditional::Different);
             valExpression = valExpression.remove("cell-content-text-length-is-not-between(");
             kDebug(30518) << " valExpression :" << valExpression;
@@ -2114,16 +2114,16 @@ void OpenCalcImport::loadOasisValidation(Validity validity, const QString& valid
         //TrueFunction ::= cell-content-is-whole-number() | cell-content-is-decimal-number() | cell-content-is-date() | cell-content-is-time()
         else {
             if (valExpression.contains("cell-content-is-whole-number()")) {
-                validity.setRestriction(Validity::KCNumber);
+                validity.setRestriction(KCValidity::KCNumber);
                 valExpression = valExpression.remove("cell-content-is-whole-number() and ");
             } else if (valExpression.contains("cell-content-is-decimal-number()")) {
-                validity.setRestriction(Validity::Integer);
+                validity.setRestriction(KCValidity::Integer);
                 valExpression = valExpression.remove("cell-content-is-decimal-number() and ");
             } else if (valExpression.contains("cell-content-is-date()")) {
-                validity.setRestriction(Validity::Date);
+                validity.setRestriction(KCValidity::Date);
                 valExpression = valExpression.remove("cell-content-is-date() and ");
             } else if (valExpression.contains("cell-content-is-time()")) {
-                validity.setRestriction(Validity::Time);
+                validity.setRestriction(KCValidity::Time);
                 valExpression = valExpression.remove("cell-content-is-time() and ");
             }
             kDebug(30518) << "valExpression :" << valExpression;
@@ -2177,11 +2177,11 @@ void OpenCalcImport::loadOasisValidation(Validity validity, const QString& valid
         if (error.hasAttributeNS(ooNS::table, "message-type")) {
             QString str = error.attributeNS(ooNS::table, "message-type", QString());
             if (str == "warning")
-                validity.setAction(Validity::Warning);
+                validity.setAction(KCValidity::Warning);
             else if (str == "information")
-                validity.setAction(Validity::Information);
+                validity.setAction(KCValidity::Information);
             else if (str == "stop")
-                validity.setAction(Validity::Stop);
+                validity.setAction(KCValidity::Stop);
             else
                 kDebug(30518) << "validation : message type unknown  :" << str;
         }
@@ -2196,7 +2196,7 @@ void OpenCalcImport::loadOasisValidation(Validity validity, const QString& valid
     }
 }
 
-void OpenCalcImport::loadOasisValidationValue(Validity validity, const QStringList &listVal, const ValueParser *parser)
+void OpenCalcImport::loadOasisValidationValue(KCValidity validity, const QStringList &listVal, const ValueParser *parser)
 {
     bool ok = false;
     kDebug(30518) << " listVal[0] :" << listVal[0] << " listVal[1] :" << listVal[1];
@@ -2206,7 +2206,7 @@ void OpenCalcImport::loadOasisValidationValue(Validity validity, const QStringLi
 }
 
 
-void OpenCalcImport::loadOasisValidationCondition(Validity validity, QString &valExpression, const ValueParser *parser)
+void OpenCalcImport::loadOasisValidationCondition(KCValidity validity, QString &valExpression, const ValueParser *parser)
 {
     QString value;
     if (valExpression.contains("<=")) {
