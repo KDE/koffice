@@ -149,7 +149,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(KCSheetDamage::Changes)
  * \ingroup Damages
  * A workbook damage.
  */
-class WorkbookDamage : public KCDamage
+class KCWorkbookDamage : public KCDamage
 {
 public:
     enum Change {
@@ -159,8 +159,8 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    WorkbookDamage(KCMap* map, Changes changes);
-    virtual ~WorkbookDamage();
+    KCWorkbookDamage(KCMap* map, Changes changes);
+    virtual ~KCWorkbookDamage();
 
     virtual Type type() const {
         return KCDamage::DamagedWorkbook;
@@ -169,12 +169,12 @@ public:
     Changes changes() const;
 
 private:
-    Q_DISABLE_COPY(WorkbookDamage)
+    Q_DISABLE_COPY(KCWorkbookDamage)
 
     class Private;
     Private * const d;
 };
-Q_DECLARE_OPERATORS_FOR_FLAGS(WorkbookDamage::Changes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KCWorkbookDamage::Changes)
 
 
 /**

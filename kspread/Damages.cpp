@@ -27,7 +27,7 @@
 #include "KCSheet.h"
 #include "KCRegion.h"
 
-class WorkbookDamage::Private
+class KCWorkbookDamage::Private
 {
 public:
     KCMap* map;
@@ -116,24 +116,24 @@ KCSheetDamage::Changes KCSheetDamage::changes() const
 }
 
 
-WorkbookDamage::WorkbookDamage(KCMap* map, Changes changes)
+KCWorkbookDamage::KCWorkbookDamage(KCMap* map, Changes changes)
         : d(new Private)
 {
     d->map = map;
     d->changes = changes;
 }
 
-WorkbookDamage::~WorkbookDamage()
+KCWorkbookDamage::~KCWorkbookDamage()
 {
     delete d;
 }
 
-KCMap* WorkbookDamage::map() const
+KCMap* KCWorkbookDamage::map() const
 {
     return d->map;
 }
 
-WorkbookDamage::Changes WorkbookDamage::changes() const
+KCWorkbookDamage::Changes KCWorkbookDamage::changes() const
 {
     return d->changes;
 }
