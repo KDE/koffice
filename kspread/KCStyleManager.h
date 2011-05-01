@@ -58,7 +58,7 @@ public:
     void saveOdf(KoGenStyles &mainStyles);
     void loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* map = 0);
 
-    CustomStyle * defaultStyle() const {
+    KCCustomStyle * defaultStyle() const {
         return m_defaultStyle;
     }
 
@@ -68,17 +68,17 @@ public:
      * by the OpenDocument internal name .
      * \return the custom style named \p name
      */
-    CustomStyle * style(QString const & name) const;
+    KCCustomStyle * style(QString const & name) const;
 
     void resetDefaultStyle();
 
     bool checkCircle(QString const & name, QString const & parent);
-    bool validateStyleName(QString const & name, CustomStyle * style);
+    bool validateStyleName(QString const & name, KCCustomStyle * style);
     void changeName(QString const & oldName, QString const & newName);
 
-    void insertStyle(CustomStyle *style);
+    void insertStyle(KCCustomStyle *style);
 
-    void takeStyle(CustomStyle * style);
+    void takeStyle(KCCustomStyle * style);
     void createBuiltinStyles();
 
     QStringList styleNames() const;
@@ -116,7 +116,7 @@ public:
 private:
     void dump() const;
 
-    CustomStyle * m_defaultStyle;
+    KCCustomStyle * m_defaultStyle;
     CustomStyles  m_styles; // builtin and custom made styles
 
     // OpenDocument name to internal name (on loading) or vice versa (on saving)

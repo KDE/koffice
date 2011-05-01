@@ -38,7 +38,7 @@ class KoOdfStylesReader;
 class KoStyleStack;
 
 class KCConditions;
-class CustomStyle;
+class KCCustomStyle;
 class SharedSubStyle;
 class KCStyle;
 class KCStyleManager;
@@ -49,7 +49,7 @@ class ValueParser;
 // used for preloading OASIS auto styles
 typedef QHash<QString, KCStyle>       Styles;
 // needs to be ordered (QMap) for the style dialog
-typedef QMap<QString, CustomStyle*> CustomStyles;
+typedef QMap<QString, KCCustomStyle*> CustomStyles;
 
 KSPREAD_EXPORT uint qHash(const KCStyle& style);
 
@@ -111,7 +111,7 @@ public:
          *               attributes of the parents, are filled in the composed style. Additionally,
          *               the name of the named style is stored in the NamedStyleKey attribute.
          *               This is especially useful while saving the styles.
-         * \li In CustomStyle: It simply refers to the parent style.
+         * \li In KCCustomStyle: It simply refers to the parent style.
          */
         NamedStyleKey,
         // borders
@@ -177,7 +177,7 @@ public:
 
     /**
      * Saves an OASIS automatic style.
-     * Reimplemented by CustomStyle for OASIS user styles.
+     * Reimplemented by KCCustomStyle for OASIS user styles.
      * \return the OASIS style's name
      */
     virtual QString saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
@@ -380,7 +380,7 @@ private:
  * \ingroup KCStyle
  * A named cell style.
  */
-class KSPREAD_EXPORT CustomStyle : public KCStyle
+class KSPREAD_EXPORT KCCustomStyle : public KCStyle
 {
 public:
     /**
@@ -389,8 +389,8 @@ public:
      * \param name The name of this style.
      * \param parent The style whose attributes are inherited - the parent style.
      */
-    explicit CustomStyle(const QString& name, CustomStyle* parent = 0);
-    virtual ~CustomStyle();
+    explicit KCCustomStyle(const QString& name, KCCustomStyle* parent = 0);
+    virtual ~KCCustomStyle();
 
     virtual StyleType type() const;
     void setType(StyleType type);
@@ -421,8 +421,8 @@ public:
                             const KCStyleManager* manager) const;
 
 
-    bool operator==(const CustomStyle& other) const;
-    inline bool operator!=(const CustomStyle& other) const {
+    bool operator==(const KCCustomStyle& other) const;
+    inline bool operator!=(const KCCustomStyle& other) const {
         return !operator==(other);
     }
 
@@ -438,7 +438,7 @@ private:
      * Constructor.
      * Constructs the default cell style.
      */
-    CustomStyle();
+    KCCustomStyle();
 
     class Private;
     QSharedDataPointer<Private> d;
@@ -544,7 +544,7 @@ public:
 };
 
 Q_DECLARE_TYPEINFO(KCStyle, Q_MOVABLE_TYPE);
-Q_DECLARE_TYPEINFO(CustomStyle, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KCCustomStyle, Q_MOVABLE_TYPE);
 Q_DECLARE_TYPEINFO(SharedSubStyle, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_STYLE

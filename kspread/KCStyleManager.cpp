@@ -40,7 +40,7 @@
 #include "KCStyle.h"
 
 KCStyleManager::KCStyleManager()
-        : m_defaultStyle(new CustomStyle())
+        : m_defaultStyle(new KCCustomStyle())
 {
 }
 
@@ -119,7 +119,7 @@ void KCStyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap
         if (!name.isEmpty()) {
             // The style's parent name will be set in KCStyle::loadOdf(..).
             // After all styles are loaded the pointer to the parent is set.
-            CustomStyle * style = new CustomStyle(name);
+            KCCustomStyle * style = new KCCustomStyle(name);
 
             KCConditions conditions;
             style->loadOdf(stylesReader, *styleElem, name, conditions, this, map->parser());
@@ -132,10 +132,10 @@ void KCStyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap
     }
 
     // replace all OpenDocument internal parent names by KSpread's style names
-    foreach(CustomStyle* style, m_styles) {
+    foreach(KCCustomStyle* style, m_styles) {
         if (!style->parentName().isNull()) {
             const QString parentOdfName = style->parentName();
-            const CustomStyle* parentStyle = this->style(m_oasisStyles.value(parentOdfName));
+            const KCCustomStyle* parentStyle = this->style(m_oasisStyles.value(parentOdfName));
             if (!parentStyle) {
                 kWarning(36003) << parentOdfName << " not found.";
                 continue;
@@ -159,7 +159,7 @@ QDomElement KCStyleManager::save(QDomDocument & doc)
     CustomStyles::iterator end  = m_styles.end();
 
     while (iter != end) {
-        CustomStyle * styleData = iter.value();
+        KCCustomStyle * styleData = iter.value();
 
         styleData->save(doc, styles, this);
 
@@ -186,11 +186,11 @@ bool KCStyleManager::loadXML(KoXmlElement const & styles)
                 return false;
             m_defaultStyle->setType(KCStyle::BUILTIN);
         } else if (!name.isNull()) {
-            CustomStyle* style = 0;
+            KCCustomStyle* style = 0;
             if (e.hasAttribute("parent") && e.attribute("parent") == "Default")
-                style = new CustomStyle(name, m_defaultStyle);
+                style = new KCCustomStyle(name, m_defaultStyle);
             else
-                style = new CustomStyle(name);
+                style = new KCCustomStyle(name);
 
             if (!style->loadXML(e, name)) {
                 delete style;
@@ -211,7 +211,7 @@ bool KCStyleManager::loadXML(KoXmlElement const & styles)
     QStringList::iterator it;
     for (it = names.begin(); it != names.end(); ++it) {
         if (*it != "Default") {
-            CustomStyle * styleData = style(*it);
+            KCCustomStyle * styleData = style(*it);
             if (styleData && !styleData->parentName().isNull() && m_styles.value(styleData->parentName()))
                 styleData->setParentName(m_styles.value(styleData->parentName())->name());
         }
@@ -223,12 +223,12 @@ bool KCStyleManager::loadXML(KoXmlElement const & styles)
 void KCStyleManager::resetDefaultStyle()
 {
     delete m_defaultStyle;
-    m_defaultStyle = new CustomStyle;
+    m_defaultStyle = new KCCustomStyle;
 }
 
 void KCStyleManager::createBuiltinStyles()
 {
-    CustomStyle * header1 = new CustomStyle(i18n("Header"), m_defaultStyle);
+    KCCustomStyle * header1 = new KCCustomStyle(i18n("Header"), m_defaultStyle);
     QFont f(header1->font());
     f.setItalic(true);
     f.setPointSize(f.pointSize() + 2);
@@ -237,7 +237,7 @@ void KCStyleManager::createBuiltinStyles()
     header1->setType(KCStyle::BUILTIN);
     m_styles[ header1->name()] = header1;
 
-    CustomStyle * header2 = new CustomStyle(i18n("Header1"), header1);
+    KCCustomStyle * header2 = new KCCustomStyle(i18n("Header1"), header1);
     QColor color("#F0F0FF");
     header2->setBackgroundColor(color);
     QPen pen(Qt::black, 1, Qt::SolidLine);
@@ -247,7 +247,7 @@ void KCStyleManager::createBuiltinStyles()
     m_styles[ header2->name()] = header2;
 }
 
-CustomStyle * KCStyleManager::style(QString const & name) const
+KCCustomStyle * KCStyleManager::style(QString const & name) const
 {
     if (name.isEmpty())
         return 0;
@@ -265,7 +265,7 @@ CustomStyle * KCStyleManager::style(QString const & name) const
     return 0;
 }
 
-void KCStyleManager::takeStyle(CustomStyle * style)
+void KCStyleManager::takeStyle(KCCustomStyle * style)
 {
     const QString parentName = style->parentName();
 
@@ -289,7 +289,7 @@ void KCStyleManager::takeStyle(CustomStyle * style)
 
 bool KCStyleManager::checkCircle(QString const & name, QString const & parent)
 {
-    CustomStyle* style = this->style(parent);
+    KCCustomStyle* style = this->style(parent);
     if (!style || style->parentName().isNull())
         return true;
     if (style->parentName() == name)
@@ -298,7 +298,7 @@ bool KCStyleManager::checkCircle(QString const & name, QString const & parent)
         return checkCircle(name, style->parentName());
 }
 
-bool KCStyleManager::validateStyleName(QString const & name, CustomStyle * style)
+bool KCStyleManager::validateStyleName(QString const & name, KCCustomStyle * style)
 {
     if (m_defaultStyle->name() == name || name == "Default")
         return false;
@@ -330,13 +330,13 @@ void KCStyleManager::changeName(QString const & oldName, QString const & newName
 
     iter = m_styles.find(oldName);
     if (iter != end) {
-        CustomStyle * s = iter.value();
+        KCCustomStyle * s = iter.value();
         m_styles.erase(iter);
         m_styles[newName] = s;
     }
 }
 
-void KCStyleManager::insertStyle(CustomStyle *style)
+void KCStyleManager::insertStyle(KCCustomStyle *style)
 {
     const QString base = style->name();
     // do not add the default style
@@ -392,7 +392,7 @@ Styles KCStyleManager::loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
                 const QString parentOdfName = element->attributeNS(KoXmlNS::style, "parent-style-name", QString());
                 if (parentOdfName == "Default")
                     continue;
-                const CustomStyle* parentStyle = style(m_oasisStyles.value(parentOdfName));
+                const KCCustomStyle* parentStyle = style(m_oasisStyles.value(parentOdfName));
                 if (!parentStyle) {
                     kWarning(36003) << parentOdfName << " not found.";
                     continue;

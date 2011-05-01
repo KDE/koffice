@@ -1616,7 +1616,7 @@ void CellToolBase::createStyleFromCell()
     }
 
     const KCStyle cellStyle = cell.style();
-    CustomStyle*  style = new CustomStyle(styleName);
+    KCCustomStyle*  style = new KCCustomStyle(styleName);
     style->merge(cellStyle);
 
     selection()->activeSheet()->map()->styleManager()->insertStyle(style);

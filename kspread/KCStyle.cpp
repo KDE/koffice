@@ -246,7 +246,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &s
             for (QList<QPair<QString,QString> >::const_iterator it = styleMaps.begin(); it != styleMaps.end(); ++it) {
                 const KCConditional c = conditions.loadOdfCondition(it->first, it->second, QString(), parser);
                 if (styleManager->style(c.styleName) == 0) {
-                    CustomStyle* const s = new CustomStyle(c.styleName);
+                    KCCustomStyle* const s = new KCCustomStyle(c.styleName);
                     s->loadOdfDataStyle(stylesReader, c.styleName, conditions, styleManager, parser);
                     const_cast<KCStyleManager*>(styleManager)->insertStyle(s);
                 }
@@ -1181,7 +1181,7 @@ QString KCStyle::saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
         return mainStyles.insert(style, "ce");
     } else if (hasAttribute(NamedStyleKey)) {
         // it's not really the parent name in this case
-        CustomStyle* namedStyle = manager->style(parentName());
+        KCCustomStyle* namedStyle = manager->style(parentName());
         // remove substyles already present in named style
         if (namedStyle)
             keysToStore = difference(*namedStyle);
@@ -1448,7 +1448,7 @@ void KCStyle::saveXML(QDomDocument& doc, QDomElement& format, const KCStyleManag
     QSet<Key> keysToStore;
 
     if (d->subStyles.contains(NamedStyleKey)) {
-        const CustomStyle* namedStyle = styleManager->style(parentName());
+        const KCCustomStyle* namedStyle = styleManager->style(parentName());
         // check, if it's an unmodified named style
         keysToStore = difference(*namedStyle);
         if (type() == AUTO) {
@@ -2666,11 +2666,11 @@ bool KCStyle::releaseSubStyle(Key key)
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// CustomStyle::Private
+// KCCustomStyle::Private
 //
 /////////////////////////////////////////////////////////////////////////////
 
-class CustomStyle::Private : public QSharedData
+class KCCustomStyle::Private : public QSharedData
 {
 public:
     QString name;
@@ -2680,11 +2680,11 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// CustomStyle
+// KCCustomStyle
 //
 /////////////////////////////////////////////////////////////////////////////
 
-CustomStyle::CustomStyle()
+KCCustomStyle::KCCustomStyle()
         : KCStyle()
         , d(new Private)
 {
@@ -2693,7 +2693,7 @@ CustomStyle::CustomStyle()
     setDefault();
 }
 
-CustomStyle::CustomStyle(QString const & name, CustomStyle * parent)
+KCCustomStyle::KCCustomStyle(QString const & name, KCCustomStyle * parent)
         : KCStyle()
         , d(new Private)
 {
@@ -2703,32 +2703,32 @@ CustomStyle::CustomStyle(QString const & name, CustomStyle * parent)
         setParentName(parent->name());
 }
 
-CustomStyle::~CustomStyle()
+KCCustomStyle::~KCCustomStyle()
 {
 }
 
-KCStyle::StyleType CustomStyle::type() const
+KCStyle::StyleType KCCustomStyle::type() const
 {
     return d->type;
 }
 
-void CustomStyle::setType(StyleType type)
+void KCCustomStyle::setType(StyleType type)
 {
     Q_ASSERT(type != AUTO);
     d->type = type;
 }
 
-const QString& CustomStyle::name() const
+const QString& KCCustomStyle::name() const
 {
     return d->name;
 }
 
-void CustomStyle::setName(QString const & name)
+void KCCustomStyle::setName(QString const & name)
 {
     d->name = name;
 }
 
-QString CustomStyle::saveOdf(KoGenStyle& style, KoGenStyles &mainStyles,
+QString KCCustomStyle::saveOdf(KoGenStyle& style, KoGenStyles &mainStyles,
                              const KCStyleManager* manager) const
 {
     Q_ASSERT(!name().isEmpty());
@@ -2752,7 +2752,7 @@ QString CustomStyle::saveOdf(KoGenStyle& style, KoGenStyles &mainStyles,
     return mainStyles.insert(style, "custom-style");
 }
 
-void CustomStyle::loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& style,
+void KCCustomStyle::loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& style,
                           const QString& name, KCConditions& conditions,
                           const KCStyleManager* styleManager, const ValueParser *parser)
 {
@@ -2765,7 +2765,7 @@ void CustomStyle::loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& s
     KCStyle::loadOdfStyle(stylesReader, style, conditions, styleManager, parser);
 }
 
-void CustomStyle::save(QDomDocument& doc, QDomElement& styles, const KCStyleManager* styleManager)
+void KCCustomStyle::save(QDomDocument& doc, QDomElement& styles, const KCStyleManager* styleManager)
 {
     if (name().isEmpty())
         return;
@@ -2783,7 +2783,7 @@ void CustomStyle::save(QDomDocument& doc, QDomElement& styles, const KCStyleMana
     styles.appendChild(style);
 }
 
-bool CustomStyle::loadXML(KoXmlElement const & style, QString const & name)
+bool KCCustomStyle::loadXML(KoXmlElement const & style, QString const & name)
 {
     setName(name);
 
@@ -2806,7 +2806,7 @@ bool CustomStyle::loadXML(KoXmlElement const & style, QString const & name)
     return true;
 }
 
-int CustomStyle::usage() const
+int KCCustomStyle::usage() const
 {
     return d->ref;
 }

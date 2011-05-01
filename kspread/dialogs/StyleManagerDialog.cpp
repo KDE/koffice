@@ -92,7 +92,7 @@ StyleManagerDialog::~StyleManagerDialog()
 
 void StyleManagerDialog::fillComboBox()
 {
-    typedef QMap<CustomStyle*, QTreeWidgetItem*> KCMap;
+    typedef QMap<KCCustomStyle*, QTreeWidgetItem*> KCMap;
     KCMap entries;
 
     entries.clear();
@@ -107,7 +107,7 @@ void StyleManagerDialog::fillComboBox()
                 entries[iter.value()] = new QTreeWidgetItem(entries[m_styleManager->defaultStyle()],
                         QStringList(iter.value()->name()));
             else {
-                CustomStyle* parentStyle = m_styleManager->style(iter.value()->parentName());
+                KCCustomStyle* parentStyle = m_styleManager->style(iter.value()->parentName());
                 if (parentStyle) {
                     KCMap::const_iterator i = entries.constFind(parentStyle);
                     if (i != entries.constEnd())
@@ -142,7 +142,7 @@ void StyleManagerDialog::slotDisplayMode(int mode)
     CustomStyles::iterator end  = m_styleManager->m_styles.end();
 
     while (iter != end) {
-        CustomStyle* styleData = iter.value();
+        KCCustomStyle* styleData = iter.value();
         if (!styleData || styleData->name().isEmpty()) {
             ++iter;
             continue;
@@ -187,7 +187,7 @@ void StyleManagerDialog::slotOk()
 
 void StyleManagerDialog::slotNew()
 {
-    CustomStyle* parentStyle = 0;
+    KCCustomStyle* parentStyle = 0;
     QTreeWidgetItem* item = m_styleList->currentItem();
     if (item) {
         const QString name = item->text(0);
@@ -205,7 +205,7 @@ void StyleManagerDialog::slotNew()
         newName = i18n("style%1" , m_styleManager->count() + i);
     }
 
-    CustomStyle* style = new CustomStyle(newName, parentStyle);
+    KCCustomStyle* style = new KCCustomStyle(newName, parentStyle);
     style->setType(KCStyle::TENTATIVE);
 
     QPointer<CellFormatDialog> dialog = new CellFormatDialog(this, m_selection, style, m_styleManager);
@@ -229,7 +229,7 @@ void StyleManagerDialog::slotEdit()
     if (!item)
         return;
 
-    CustomStyle* style = 0;
+    KCCustomStyle* style = 0;
 
     QString name(item->text(0));
     if (name == i18n("Default"))
@@ -257,7 +257,7 @@ void StyleManagerDialog::slotRemove()
         return;
 
     const QString name = item->text(0);
-    CustomStyle* style = 0;
+    KCCustomStyle* style = 0;
     if (name == i18n("Default"))
         style = m_styleManager->defaultStyle();
     else
@@ -278,7 +278,7 @@ void StyleManagerDialog::selectionChanged(QTreeWidgetItem* item)
     if (!item)
         return;
     const QString name = item->text(0);
-    CustomStyle* style = 0;
+    KCCustomStyle* style = 0;
     if (name == i18n("Default"))
         style = m_styleManager->defaultStyle();
     else

@@ -66,7 +66,7 @@ class KComboBox;
 class KoUnitDoubleSpinBox;
 
 class KCSheet;
-class CustomStyle;
+class KCCustomStyle;
 class KCStyleManager;
 class CellFormatDialog;
 class Selection;
@@ -162,7 +162,7 @@ public:
     GeneralTab(QWidget * parent, CellFormatDialog * _dlg);
     ~GeneralTab();
 
-    bool apply(CustomStyle * style);
+    bool apply(KCCustomStyle * style);
 
 protected slots:
     void parentChanged(const QString&);
@@ -192,7 +192,7 @@ class CellFormatPageFont : public QWidget, public Ui::FontWidget
 public:
     CellFormatPageFont(QWidget* parent, CellFormatDialog *_dlg);
 
-    void apply(CustomStyle * style);
+    void apply(KCCustomStyle * style);
     void apply(StyleCommand *_obj);
 
 signals:
@@ -232,7 +232,7 @@ class CellFormatPageFloat : public QWidget
     Q_OBJECT
 public:
     CellFormatPageFloat(QWidget *parent, CellFormatDialog *_dlg);
-    void apply(CustomStyle * style);
+    void apply(KCCustomStyle * style);
     void apply(StyleCommand *_obj);
 
 public slots:
@@ -282,7 +282,7 @@ class CellFormatPagePosition : public QWidget, public Ui::PositionWidget
 public:
     CellFormatPagePosition(QWidget *parent, CellFormatDialog *_dlg);
 
-    void apply(CustomStyle * style);
+    void apply(KCCustomStyle * style);
     void apply(StyleCommand *_obj);
 
     double getSizeHeight() const;
@@ -485,7 +485,7 @@ class CellFormatPagePattern : public QWidget
 public:
     CellFormatPagePattern(QWidget *parent, CellFormatDialog *_dlg);
 
-    void apply(CustomStyle * style);
+    void apply(KCCustomStyle * style);
     void apply(StyleCommand *_obj);
 
     void init();
@@ -535,7 +535,7 @@ public:
     CellFormatPageProtection(QWidget * parent, CellFormatDialog * _dlg);
     ~CellFormatPageProtection();
     ///when protection is set through KCStyle Manager
-    void apply(CustomStyle * style);
+    void apply(KCCustomStyle * style);
     void apply(StyleCommand * _obj);
 
 protected:
@@ -558,7 +558,7 @@ public:
      * Create a format dlg for the rectangular area in '_sheet'.
      */
     CellFormatDialog(QWidget* parent, Selection* selection);
-    CellFormatDialog(QWidget* parent, Selection* selection, CustomStyle* style, KCStyleManager* manager);
+    CellFormatDialog(QWidget* parent, Selection* selection, KCCustomStyle* style, KCStyleManager* manager);
 
     ~CellFormatDialog();
 
@@ -580,7 +580,7 @@ public:
     Selection* selection() const {
         return m_selection;
     }
-    CustomStyle * getStyle() const {
+    KCCustomStyle * getStyle() const {
         return m_style;
     }
     KCStyleManager * getStyleManager() const {
@@ -709,7 +709,7 @@ protected:
 
     KCSheet * m_sheet;
     Selection  * m_selection;
-    CustomStyle * m_style;
+    KCCustomStyle * m_style;
     KCStyleManager * m_styleManager;
 
     void applyStyle();

@@ -1952,7 +1952,7 @@ void KCSheet::loadOdfInsertStyles(const Styles& autoStyles,
             style.merge(autoStyles[styleNames[i]]);
             outStyleRegions.append(qMakePair(styleRegion, style));
         } else {
-            const CustomStyle* namedStyle = map()->styleManager()->style(styleNames[i]);
+            const KCCustomStyle* namedStyle = map()->styleManager()->style(styleNames[i]);
             //kDebug(36003) << "\tcustom:" << namedStyle->name() << " at" << styleRegion.rectCount() << "rects";
             KCStyle style;
             style.setDefault(); // "overwrite" existing style

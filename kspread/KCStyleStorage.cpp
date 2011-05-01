@@ -713,11 +713,11 @@ KCStyle KCStyleStorage::composeStyle(const QList<SharedSubStyle>& subStyles) con
             style = *styleManager()->defaultStyle();
         else if (subStyles[i]->type() == KCStyle::NamedStyleKey) {
             style.clear();
-            const CustomStyle* namedStyle = styleManager()->style(static_cast<const NamedStyle*>(subStyles[i].data())->name);
+            const KCCustomStyle* namedStyle = styleManager()->style(static_cast<const NamedStyle*>(subStyles[i].data())->name);
             if (namedStyle) {
                 // first, load the attributes of the parent style(s)
-                QList<CustomStyle*> parentStyles;
-                CustomStyle* parentStyle = styleManager()->style(namedStyle->parentName());
+                QList<KCCustomStyle*> parentStyles;
+                KCCustomStyle* parentStyle = styleManager()->style(namedStyle->parentName());
 //                 kDebug(36006) <<"KCStyleStorage:" << namedStyle->name() <<"'s parent =" << namedStyle->parentName();
                 while (parentStyle) {
 //                     kDebug(36006) <<"KCStyleStorage:" << parentStyle->name() <<"'s parent =" << parentStyle->parentName();

@@ -1689,7 +1689,7 @@ void KCCell::loadOdfCellText(const KoXmlElement& parent, KCOdfLoadingContext& ta
                 if (autoStyles.contains(cellStyleName))
                     style.merge(autoStyles[cellStyleName]);
                 else {
-                    const CustomStyle* namedStyle = sheet()->map()->styleManager()->style(cellStyleName);
+                    const KCCustomStyle* namedStyle = sheet()->map()->styleManager()->style(cellStyleName);
                     if (namedStyle)
                         style.merge(*namedStyle);
                 }

@@ -655,7 +655,7 @@ void ExcelImport::Private::processSheetForConditionals(Sheet* is, KCSheet* os)
             kc.value2 = convertValue(c.value2);
             kc.baseCellAddress = encodeAddress(is->name(), cf->region().boundingRect().left(), cf->region().boundingRect().top());
 
-            CustomStyle* style = new CustomStyle(QString("Excel-Condition-KCStyle-%1").arg(styleNameId++));
+            KCCustomStyle* style = new KCCustomStyle(QString("Excel-Condition-KCStyle-%1").arg(styleNameId++));
             kc.styleName = style->name();
 
             // TODO: valueFormat

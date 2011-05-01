@@ -268,7 +268,7 @@ void GeneralTab::parentChanged(const QString& parentName)
     //  m_dlg->initGUI();
 }
 
-bool GeneralTab::apply(CustomStyle * style)
+bool GeneralTab::apply(KCCustomStyle * style)
 {
     if (m_nameEdit->isEnabled()) {
         if (style->type() != KCStyle::BUILTIN) {
@@ -481,7 +481,7 @@ CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection)
 }
 
 CellFormatDialog::CellFormatDialog(QWidget* parent, Selection* selection,
-                                   CustomStyle* style, KCStyleManager* manager)
+                                   KCCustomStyle* style, KCStyleManager* manager)
         : KPageDialog(parent)
         , m_sheet(selection->activeSheet())
         , m_selection(selection)
@@ -1542,7 +1542,7 @@ void CellFormatPageFloat::makeformat()
     exampleLabel->setText(tmp.prepend("<font color=" + color.name() + '>').append("</font>"));
 }
 
-void CellFormatPageFloat::apply(CustomStyle * style)
+void CellFormatPageFloat::apply(KCCustomStyle * style)
 {
     if (postfix->text() != dlg->postfix) {
         if (postfix->isEnabled())
@@ -1690,7 +1690,7 @@ CellFormatPageProtection::~CellFormatPageProtection()
 {
 }
 
-void CellFormatPageProtection::apply(CustomStyle * style)
+void CellFormatPageProtection::apply(KCCustomStyle * style)
 {
     if (m_dlg->bDontPrintText != m_bDontPrint->isChecked()) {
         style->setDontPrintText(m_bDontPrint->isChecked());
@@ -1816,7 +1816,7 @@ void CellFormatPageFont::slotSetTextColor(const QColor &_color)
     bTextColorUndefined = false;
 }
 
-void CellFormatPageFont::apply(CustomStyle * style)
+void CellFormatPageFont::apply(KCCustomStyle * style)
 {
     if (!bTextColorUndefined && textColor != dlg->textColor)
         style->setFontColor(textColor);
@@ -2162,7 +2162,7 @@ void CellFormatPagePosition::slotChangeAngle(int _angle)
     }
 }
 
-void CellFormatPagePosition::apply(CustomStyle * style)
+void CellFormatPagePosition::apply(KCCustomStyle * style)
 {
     if (top->isChecked() && dlg->alignY != KCStyle::Top)
         style->setVAlign(KCStyle::Top);
@@ -3551,7 +3551,7 @@ void CellFormatPagePattern::slotUnselect2(BrushSelect *_p)
     current->setBrushStyle(selectedBrush->getBrushStyle());
 }
 
-void CellFormatPagePattern::apply(CustomStyle * style)
+void CellFormatPagePattern::apply(KCCustomStyle * style)
 {
     if (selectedBrush != 0
             && (dlg->brushStyle != selectedBrush->getBrushStyle()
