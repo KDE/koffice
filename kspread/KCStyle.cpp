@@ -81,7 +81,7 @@ public:
     int value;
 };
 
-QString SubStyle::name(KCStyle::Key key)
+QString KCSubStyle::name(KCStyle::Key key)
 {
     QString name;
     switch (key) {
@@ -125,7 +125,7 @@ QString SubStyle::name(KCStyle::Key key)
     return name;
 }
 
-SharedSubStyle SharedSubStyle::s_defaultStyle(new SubStyle());
+SharedSubStyle SharedSubStyle::s_defaultStyle(new KCSubStyle());
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -2337,7 +2337,7 @@ QString KCStyle::colorName(const QColor& color)
     }
 }
 
-bool KCStyle::compare(const SubStyle* one, const SubStyle* two)
+bool KCStyle::compare(const KCSubStyle* one, const KCSubStyle* two)
 {
     if (!one || !two)
         return one == two;
@@ -2524,7 +2524,7 @@ SharedSubStyle KCStyle::createSubStyle(Key key, const QVariant& value)
     switch (key) {
         // special cases
     case DefaultStyleKey:
-        newSubStyle = new SubStyle();
+        newSubStyle = new KCSubStyle();
         break;
     case NamedStyleKey:
         newSubStyle = new NamedStyle(value.value<QString>());

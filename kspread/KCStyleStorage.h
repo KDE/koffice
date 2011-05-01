@@ -33,7 +33,7 @@ class KCMap;
 class KCOdfSavingContext;
 class KCStyle;
 class KCStyleManager;
-class SubStyle;
+class KCSubStyle;
 
 /**
  * \ingroup Storage

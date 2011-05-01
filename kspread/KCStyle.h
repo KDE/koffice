@@ -43,7 +43,7 @@ class SharedSubStyle;
 class KCStyle;
 class KCStyleManager;
 class StyleManipulator;
-class SubStyle;
+class KCSubStyle;
 class ValueParser;
 
 // used for preloading OASIS auto styles
@@ -332,7 +332,7 @@ public:
      */
     static QString colorName(const QColor& color);
 
-    static bool compare(const SubStyle* one, const SubStyle* two);
+    static bool compare(const KCSubStyle* one, const KCSubStyle* two);
 
 
     /** Returns true if both styles have the same properties */
@@ -449,11 +449,11 @@ private:
  * \ingroup KCStyle
  * A single style attribute.
  */
-class KSPREAD_TEST_EXPORT SubStyle : public QSharedData
+class KSPREAD_TEST_EXPORT KCSubStyle : public QSharedData
 {
 public:
-    SubStyle() {}
-    virtual ~SubStyle() {}
+    KCSubStyle() {}
+    virtual ~KCSubStyle() {}
     virtual KCStyle::Key type() const {
         return KCStyle::DefaultStyleKey;
     }
@@ -467,20 +467,20 @@ public:
     static QString name(KCStyle::Key key);
 };
 
-// Provides a default SubStyle for the tree.
-// Otherwise, we would have QSharedDataPointer<SubStyle>() as default,
+// Provides a default KCSubStyle for the tree.
+// Otherwise, we would have QSharedDataPointer<KCSubStyle>() as default,
 // which has a null pointer and crashes.
 // Also, this makes the code more readable:
-// QSharedDataPointer<SubStyle> vs. SharedSubStyle
+// QSharedDataPointer<KCSubStyle> vs. SharedSubStyle
 class SharedSubStyle
 {
 public:
     inline SharedSubStyle() : d(s_defaultStyle.d){}
-    inline SharedSubStyle(SubStyle* subStyle) : d(subStyle) {}
-    inline const SubStyle *operator->() const {
+    inline SharedSubStyle(KCSubStyle* subStyle) : d(subStyle) {}
+    inline const KCSubStyle *operator->() const {
         return d.data();
     }
-    inline const SubStyle *data() const {
+    inline const KCSubStyle *data() const {
         return d.data();
     }
     inline bool operator<(const SharedSubStyle& o) const {
@@ -494,14 +494,14 @@ public:
     }
 
 private:
-    QSharedDataPointer<SubStyle> d;
+    QSharedDataPointer<KCSubStyle> d;
     static SharedSubStyle s_defaultStyle;
 };
 
-class NamedStyle : public SubStyle
+class NamedStyle : public KCSubStyle
 {
 public:
-    NamedStyle(const QString& n) : SubStyle(), name(n) {}
+    NamedStyle(const QString& n) : KCSubStyle(), name(n) {}
     virtual KCStyle::Key type() const {
         return KCStyle::NamedStyleKey;
     }
@@ -509,7 +509,7 @@ public:
         kDebug() << debugData();
     }
     virtual QString debugData(bool withName = true) const {
-        QString out; if (withName) out = SubStyle::name(KCStyle::NamedStyleKey) + ' '; out += name; return out;
+        QString out; if (withName) out = KCSubStyle::name(KCStyle::NamedStyleKey) + ' '; out += name; return out;
     }
     virtual uint koHash() const { return uint(type()) ^ qHash(name); }
     QString name;
@@ -526,10 +526,10 @@ static inline uint qHash(const QBrush& brush)
 { return qHash(brush.color()) ^ 91 * uint(brush.style()); }
 
 template<KCStyle::Key key, class Value1>
-class SubStyleOne : public SubStyle
+class SubStyleOne : public KCSubStyle
 {
 public:
-    SubStyleOne(const Value1& v = Value1()) : SubStyle(), value1(v) {}
+    SubStyleOne(const Value1& v = Value1()) : KCSubStyle(), value1(v) {}
     virtual KCStyle::Key type() const {
         return key;
     }
