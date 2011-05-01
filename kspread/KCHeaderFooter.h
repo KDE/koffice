@@ -30,11 +30,11 @@
 
 class KCSheet;
 
-class KSPREAD_EXPORT HeaderFooter
+class KSPREAD_EXPORT KCHeaderFooter
 {
 public:
-    explicit HeaderFooter(KCSheet* sheet);
-    ~HeaderFooter();
+    explicit KCHeaderFooter(KCSheet* sheet);
+    ~KCHeaderFooter();
 
     QString headLeft(int _p, const QString &_t)const {
         if (m_headLeft.isNull()) return "";

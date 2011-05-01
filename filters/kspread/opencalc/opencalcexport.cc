@@ -46,7 +46,7 @@
 #include <kspread/KCCalculationSettings.h>
 #include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
-#include <kspread/HeaderFooter.h>
+#include <kspread/KCHeaderFooter.h>
 #include <kspread/kspread_limits.h>
 #include <kspread/KCMap.h>
 #include <kspread/NamedAreaManager.h>
@@ -843,7 +843,7 @@ void OpenCalcExport::exportMasterStyles(QDomDocument & doc, QDomElement & master
     QString footerRight;
 
     if (sheet) {
-        const HeaderFooter *const headerFooter = sheet->headerFooter();
+        const KCHeaderFooter *const headerFooter = sheet->headerFooter();
         headerLeft   = headerFooter->headLeft();
         headerCenter = headerFooter->headMid();
         headerRight  = headerFooter->headRight();

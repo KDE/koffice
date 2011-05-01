@@ -84,7 +84,7 @@
 #include "KCFormula.h"
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
-#include "HeaderFooter.h"
+#include "KCHeaderFooter.h"
 #include "LoadingInfo.h"
 #include "Localization.h"
 #include "KCMap.h"

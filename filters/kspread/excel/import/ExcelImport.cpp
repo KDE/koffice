@@ -55,7 +55,7 @@
 #include <kspread/KCSheet.h>
 #include <KCCalculationSettings.h>
 #include <KCCellStorage.h>
-#include <HeaderFooter.h>
+#include <KCHeaderFooter.h>
 #include <LoadingInfo.h>
 #include <KCMap.h>
 #include <NamedAreaManager.h>

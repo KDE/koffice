@@ -48,7 +48,7 @@
 #include <kspread/KCCondition.h>
 #include <kspread/part/Doc.h>
 #include <kspread/Global.h>
-#include <kspread/HeaderFooter.h>
+#include <kspread/KCHeaderFooter.h>
 #include <kspread/KCMap.h>
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>

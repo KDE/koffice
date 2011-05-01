@@ -28,7 +28,7 @@
 
 class QPainter;
 
-class HeaderFooter;
+class KCHeaderFooter;
 class PrintSettings;
 class KCSheet;
 
@@ -60,7 +60,7 @@ public:
     /**
      * \return the header & footer object
      */
-    HeaderFooter *headerFooter() const;
+    KCHeaderFooter *headerFooter() const;
 
     /**
      * Tests whether @p column is the first column of a new page. In this

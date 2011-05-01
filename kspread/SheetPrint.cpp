@@ -24,7 +24,7 @@
 #include "SheetPrint.h"
 #include "SheetPrint_p.h"
 
-#include "HeaderFooter.h"
+#include "KCHeaderFooter.h"
 #include "PrintSettings.h"
 #include "kspread_limits.h"
 #include "KCRegion.h"
@@ -39,7 +39,7 @@ SheetPrint::SheetPrint(KCSheet *sheet)
     d->m_pSheet = sheet;
 
     d->m_settings = new PrintSettings();
-    d->m_headerFooter = new HeaderFooter(sheet);
+    d->m_headerFooter = new KCHeaderFooter(sheet);
 
     d->m_maxCheckedNewPageX = 0;
     d->m_maxCheckedNewPageY = 0;
@@ -53,7 +53,7 @@ SheetPrint::SheetPrint(const SheetPrint &other)
     d->m_pSheet = other.d->m_pSheet;
 
     d->m_settings = new PrintSettings(*other.d->m_settings);
-    d->m_headerFooter = new HeaderFooter(*other.d->m_headerFooter);
+    d->m_headerFooter = new KCHeaderFooter(*other.d->m_headerFooter);
 
     d->m_maxCheckedNewPageX = other.d->m_maxCheckedNewPageX;
     d->m_maxCheckedNewPageY = other.d->m_maxCheckedNewPageY;
@@ -180,7 +180,7 @@ void SheetPrint::setSettings(const PrintSettings &settings, bool force)
     }
 }
 
-HeaderFooter *SheetPrint::headerFooter() const
+KCHeaderFooter *SheetPrint::headerFooter() const
 {
     return d->m_headerFooter;
 }

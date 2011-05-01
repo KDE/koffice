@@ -42,7 +42,7 @@
 #include <kspread/KCApplicationSettings.h>
 #include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
-#include <kspread/HeaderFooter.h>
+#include <kspread/KCHeaderFooter.h>
 #include <kspread/LoadingInfo.h>
 #include <kspread/KCMap.h>
 #include <kspread/NamedAreaManager.h>

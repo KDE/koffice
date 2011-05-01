@@ -207,7 +207,7 @@ set (kspreadodf_LIB_SRCS
     KCFormat.cpp
     KCFormula.cpp
     KCGenValidationStyle.cpp
-    HeaderFooter.cpp
+    KCHeaderFooter.cpp
     Localization.cpp
     KCMap.cpp
     NamedAreaManager.cpp
@@ -245,7 +245,7 @@ set (kspreadodf_LIB_SRCS
     KCFunctionModuleRegistry.cpp
     KCFunctionRepository.cpp
 
-    # TODO: move HeaderFooter from SheetPrint to PrintSettings, and replace SheetPrint with PrintSettings in KCSheet to get rid of this dependency
+    # TODO: move KCHeaderFooter from SheetPrint to PrintSettings, and replace SheetPrint with PrintSettings in KCSheet to get rid of this dependency
     SheetPrint.cpp
     SheetPrint_p.cpp
 

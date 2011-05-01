@@ -22,7 +22,7 @@
 
 #include "Canvas.h"
 #include "Doc.h"
-#include "HeaderFooter.h"
+#include "KCHeaderFooter.h"
 #include "KCMap.h"
 #include "PrintSettings.h"
 #include "RowColumnFormat.h"
@@ -166,7 +166,7 @@ void PrintJob::Private::printHeaderFooter(QPainter &painter, KCSheet *sheet, int
     const PrintSettings *const settings = pageManager->settings();
     const KoPageLayout pageLayout = settings->pageLayout();
 
-    const HeaderFooter *const headerFooter = pageManager->headerFooter();
+    const KCHeaderFooter *const headerFooter = pageManager->headerFooter();
 #if 1 // debug header/footer
     const QString headLeft = headerFooter->headLeft(pageNo, sheet->sheetName());
     const QString headMid = headerFooter->headMid(pageNo, sheet->sheetName());

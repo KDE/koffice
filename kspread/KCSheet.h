@@ -66,7 +66,7 @@ class KCFormulaStorage;
 class KCDocBase;
 class FusionStorage;
 class LinkStorage;
-class HeaderFooter;
+class KCHeaderFooter;
 class KCMap;
 class OdfLoadingContext;
 class OdfSavingContext;
@@ -779,7 +779,7 @@ public:
      * \ingroup Page
      * \return the header & footer object
      */
-    HeaderFooter *headerFooter() const;
+    KCHeaderFooter *headerFooter() const;
 
 #ifndef NDEBUG
     void printDebug();

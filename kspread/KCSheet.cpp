@@ -72,7 +72,7 @@
 #include "KCDocBase.h"
 #include "KCFormulaStorage.h"
 #include "Global.h"
-#include "HeaderFooter.h"
+#include "KCHeaderFooter.h"
 #include "LoadingInfo.h"
 #include "Localization.h"
 #include "KCMap.h"
@@ -555,7 +555,7 @@ void KCSheet::setPrintSettings(const PrintSettings &settings)
     }
 }
 
-HeaderFooter *KCSheet::headerFooter() const
+KCHeaderFooter *KCSheet::headerFooter() const
 {
     return d->print->headerFooter();
 }

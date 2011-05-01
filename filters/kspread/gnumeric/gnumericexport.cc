@@ -44,7 +44,7 @@
 #include <kspread/KCCellStorage.h>
 #include <kspread/KCCurrency.h>
 #include <kspread/part/Doc.h>
-#include <kspread/HeaderFooter.h>
+#include <kspread/KCHeaderFooter.h>
 #include <kspread/KCMap.h>
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>
@@ -1156,7 +1156,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
             tmp.appendChild(repeatRows);
         }
 
-        const HeaderFooter *const headerFooter = table->headerFooter();
+        const KCHeaderFooter *const headerFooter = table->headerFooter();
         header = gnumeric_doc.createElement("gmr:Header");
         header.setAttribute("Left", convertVariable(headerFooter->headLeft()));
         header.setAttribute("Middle", convertVariable(headerFooter->headMid()));

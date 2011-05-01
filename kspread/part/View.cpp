@@ -114,7 +114,7 @@
 #include "KCDependencyManager.h"
 #include "Doc.h"
 #include "Factory.h"
-#include "HeaderFooter.h"
+#include "KCHeaderFooter.h"
 #include "LoadingInfo.h"
 #include "Canvas.h"
 #include "Global.h"
@@ -1680,7 +1680,7 @@ void View::paperLayoutDlg()
 
 
 /*
-    const HeaderFooter *const headerFooter = print->headerFooter();
+    const KCHeaderFooter *const headerFooter = print->headerFooter();
     HeadFoot hf;
     hf.headLeft  = headerFooter->localizeHeadFootLine(headerFooter->headLeft());
     hf.headRight = headerFooter->localizeHeadFootLine(headerFooter->headRight());

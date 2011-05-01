@@ -24,7 +24,7 @@
 
 #include <QList>
 
-class HeaderFooter;
+class KCHeaderFooter;
 class KCSheet;
 class SheetPrint;
 
@@ -122,7 +122,7 @@ public:
     KCSheet * m_pSheet;
 
     PrintSettings* m_settings;
-    HeaderFooter *m_headerFooter;
+    KCHeaderFooter *m_headerFooter;
 
     /**
      * Width of repeated columns in points, stored for performance reasons

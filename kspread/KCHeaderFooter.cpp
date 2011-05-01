@@ -20,7 +20,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "HeaderFooter.h"
+#include "KCHeaderFooter.h"
 
 #include "part/Doc.h" // FIXME detach from part
 #include "KCSheet.h"
@@ -46,22 +46,22 @@
     } while(0)
 
 
-HeaderFooter::HeaderFooter(KCSheet *sheet)
+KCHeaderFooter::KCHeaderFooter(KCSheet *sheet)
         : m_pSheet(sheet)
 {
 }
 
-HeaderFooter::~HeaderFooter()
+KCHeaderFooter::~KCHeaderFooter()
 {
 }
 
-void HeaderFooter::replaceHeadFootLineMacro(QString &_text, const QString &_search, const QString &_replace) const
+void KCHeaderFooter::replaceHeadFootLineMacro(QString &_text, const QString &_search, const QString &_replace) const
 {
     if (_search != _replace)
         _text.replace(QString('<' + _search + '>'), '<' + _replace + '>');
 }
 
-QString HeaderFooter::localizeHeadFootLine(const QString &_text) const
+QString KCHeaderFooter::localizeHeadFootLine(const QString &_text) const
 {
     QString tmp = _text;
 
@@ -84,7 +84,7 @@ QString HeaderFooter::localizeHeadFootLine(const QString &_text) const
     return tmp;
 }
 
-QString HeaderFooter::delocalizeHeadFootLine(const QString &_text) const
+QString KCHeaderFooter::delocalizeHeadFootLine(const QString &_text) const
 {
     QString tmp = _text;
 
@@ -107,7 +107,7 @@ QString HeaderFooter::delocalizeHeadFootLine(const QString &_text) const
     return tmp;
 }
 
-void HeaderFooter::setHeadFootLine(const QString &_headl, const QString &_headm, const QString &_headr,
+void KCHeaderFooter::setHeadFootLine(const QString &_headl, const QString &_headm, const QString &_headr,
                                    const QString &_footl, const QString &_footm, const QString &_footr)
 {
     if (m_pSheet->isProtected())
@@ -122,7 +122,7 @@ void HeaderFooter::setHeadFootLine(const QString &_headl, const QString &_headm,
     if (m_pSheet->doc()) m_pSheet->doc()->setModified(true);
 }
 
-QString HeaderFooter::completeHeading(const QString &_data, int _page, const QString &_sheet) const
+QString KCHeaderFooter::completeHeading(const QString &_data, int _page, const QString &_sheet) const
 {
     QString page(QString::number(_page));
     QString pages(QString::number(m_pSheet->print()->pageCount()));
