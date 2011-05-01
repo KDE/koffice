@@ -61,7 +61,7 @@ class KoShapeLoadingContext;
 
 class Doc;
 class KCFormula;
-class OdfLoadingContext;
+class KCOdfLoadingContext;
 class OdfSavingContext;
 class KCSheet;
 class Validity;
@@ -353,7 +353,7 @@ public:
      * @param element An OASIS XML element
      * @param tableContext The loading context assoiated with the XML element
      */
-    bool loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName);
+    bool loadOdf(const KoXmlElement& element, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName);
 
     /**
      * \ingroup OpenDocument
@@ -588,12 +588,12 @@ protected:
      * Load the text paragraphs from an OASIS XML cell description.
      * @param parent The DOM element representing the cell.
      */
-    void loadOdfCellText(const KoXmlElement& parent, OdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName);
+    void loadOdfCellText(const KoXmlElement& parent, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName);
 
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfObjects(const KoXmlElement& e, OdfLoadingContext& tableContext);
+    void loadOdfObjects(const KoXmlElement& e, KCOdfLoadingContext& tableContext);
 
 
     /**

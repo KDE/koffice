@@ -50,7 +50,7 @@
 
 #include "KoXmlReaderForward.h"
 
-class OdfLoadingContext;
+class KCOdfLoadingContext;
 class ValueConverter;
 class ValueParser;
 
@@ -128,7 +128,7 @@ public:
      * Loads validity checks.
      */
     void loadOdfValidation(KCCell* const cell, const QString& validationName,
-                           OdfLoadingContext& tableContext);
+                           KCOdfLoadingContext& tableContext);
 
     Action action() const;
     bool allowEmptyCell() const;

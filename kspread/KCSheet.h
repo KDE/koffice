@@ -68,7 +68,7 @@ class FusionStorage;
 class LinkStorage;
 class KCHeaderFooter;
 class KCMap;
-class OdfLoadingContext;
+class KCOdfLoadingContext;
 class OdfSavingContext;
 class PrintSettings;
 class KCRegion;
@@ -367,7 +367,7 @@ public:
      * \ingroup OpenDocument
      */
     bool loadOdf(const KoXmlElement& sheet,
-                 OdfLoadingContext& odfContext,
+                 KCOdfLoadingContext& odfContext,
                  const Styles& autoStyles,
                  const QHash<QString, Conditions>& conditionalStyles);
 
@@ -845,7 +845,7 @@ protected:
                             QHash<QString, QRegion>& columnStyleRegions,
                             IntervalMap<QString>& columnStyles);
     void loadRowNodes(const KoXmlElement& parent, int& rowIndex,
-                            int& maxColumn, OdfLoadingContext& tableContext,
+                            int& maxColumn, KCOdfLoadingContext& tableContext,
                             QHash<QString, QRegion>& rowStyleRegions,
                             QHash<QString, QRegion>& cellStyleRegions,
                             const IntervalMap<QString>& columnStyles,
@@ -855,7 +855,7 @@ protected:
      * \ingroup OpenDocument
      */
     int loadRowFormat(const KoXmlElement& row, int &rowIndex,
-                       OdfLoadingContext& odfContext,
+                       KCOdfLoadingContext& odfContext,
                        QHash<QString, QRegion>& rowStyleRegions,
                        QHash<QString, QRegion>& cellStyleRegions,
                        const IntervalMap<QString>& columnStyles,

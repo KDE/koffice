@@ -31,7 +31,7 @@
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "KCMap.h"
-#include "OdfLoadingContext.h"
+#include "KCOdfLoadingContext.h"
 #include "KCSheet.h"
 #include "KCValue.h"
 #include "ValueConverter.h"
@@ -230,7 +230,7 @@ QDomElement Validity::saveXML(QDomDocument& doc, const ValueConverter *converter
 
 
 void Validity::loadOdfValidation(KCCell* const cell, const QString& validationName,
-                                 OdfLoadingContext& tableContext)
+                                 KCOdfLoadingContext& tableContext)
 {
     KoXmlElement element = tableContext.validities.value(validationName);
     Validity validity;

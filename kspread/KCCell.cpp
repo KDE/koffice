@@ -57,7 +57,7 @@
 #include "KCLoadingInfo.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
-#include "OdfLoadingContext.h"
+#include "KCOdfLoadingContext.h"
 #include "OdfSavingContext.h"
 #include "RowColumnFormat.h"
 #include "ShapeApplicationData.h"
@@ -1317,7 +1317,7 @@ void KCCell::saveOdfValue(KoXmlWriter &xmlWriter)
     };
 }
 
-bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
+bool KCCell::loadOdf(const KoXmlElement& element, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
 {
     static const QString sFormula           = QString::fromLatin1("formula");
     static const QString sValidationName    = QString::fromLatin1("validation-name");
@@ -1637,7 +1637,7 @@ static bool findDrawElements(const KoXmlElement& parent)
     return false;
 }
 
-void KCCell::loadOdfCellText(const KoXmlElement& parent, OdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
+void KCCell::loadOdfCellText(const KoXmlElement& parent, KCOdfLoadingContext& tableContext, const Styles& autoStyles, const QString& cellStyleName)
 {
     //Search and load each paragraph of text. Each paragraph is separated by a line break
     KoXmlElement textParagraphElement;
@@ -1718,7 +1718,7 @@ void KCCell::loadOdfCellText(const KoXmlElement& parent, OdfLoadingContext& tabl
     }
 }
 
-void KCCell::loadOdfObjects(const KoXmlElement &parent, OdfLoadingContext& tableContext)
+void KCCell::loadOdfObjects(const KoXmlElement &parent, KCOdfLoadingContext& tableContext)
 {
     // Register additional attributes, that identify shapes anchored in cells.
     // Their dimensions need adjustment after all rows are loaded,

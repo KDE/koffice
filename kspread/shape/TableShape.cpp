@@ -36,7 +36,7 @@
 #include <Damages.h>
 #include <KCGenValidationStyle.h>
 #include <KCMap.h>
-#include <OdfLoadingContext.h>
+#include <KCOdfLoadingContext.h>
 #include <OdfSavingContext.h>
 #include <PrintSettings.h>
 #include <KCRegion.h>
@@ -167,7 +167,7 @@ bool TableShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &con
     if (sheet() && element.namespaceURI() == KoXmlNS::table && element.localName() == "table") {
         // pre-load auto styles
         KoOdfLoadingContext& odfContext = context.odfLoadingContext();
-        OdfLoadingContext tableContext(odfContext);
+        KCOdfLoadingContext tableContext(odfContext);
         QHash<QString, Conditions> conditionalStyles;
         KCMap *const map = sheet()->map();
         StyleManager *const styleManager = map->styleManager();

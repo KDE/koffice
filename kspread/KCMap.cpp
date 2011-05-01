@@ -55,7 +55,7 @@
 #include "KCLoadingInfo.h"
 #include "KCLocalization.h"
 #include "NamedAreaManager.h"
-#include "OdfLoadingContext.h"
+#include "KCOdfLoadingContext.h"
 #include "OdfSavingContext.h"
 #include "RecalcManager.h"
 #include "RowColumnFormat.h"
@@ -510,7 +510,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
     //load in first
     d->styleManager->loadOdfStyleTemplate(odfContext.stylesReader(), this);
 
-    OdfLoadingContext tableContext(odfContext);
+    KCOdfLoadingContext tableContext(odfContext);
     tableContext.validities = Validity::preloadValidities(body); // table:content-validations
 
     // load text styles for rich-text content and TOS

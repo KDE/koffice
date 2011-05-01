@@ -31,10 +31,10 @@ class KoShapeLoadingContext;
  * \ingroup OpenDocument
  * Data used while loading.
  */
-class OdfLoadingContext
+class KCOdfLoadingContext
 {
 public:
-    OdfLoadingContext(KoOdfLoadingContext& odfContext)
+    KCOdfLoadingContext(KoOdfLoadingContext& odfContext)
             : odfContext(odfContext), shapeContext(0) {}
 
 public:

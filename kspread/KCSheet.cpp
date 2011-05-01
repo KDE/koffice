@@ -77,7 +77,7 @@
 #include "KCLocalization.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
-#include "OdfLoadingContext.h"
+#include "KCOdfLoadingContext.h"
 #include "OdfSavingContext.h"
 #include "PrintSettings.h"
 #include "RecalcManager.h"
@@ -1423,7 +1423,7 @@ void KCSheet::loadColumnNodes(const KoXmlElement& parent,
 void KCSheet::loadRowNodes(const KoXmlElement& parent,
                             int& rowIndex,
                             int& maxColumn,
-                            OdfLoadingContext& tableContext,
+                            KCOdfLoadingContext& tableContext,
                             QHash<QString, QRegion>& rowStyleRegions,
                             QHash<QString, QRegion>& cellStyleRegions,
                             const IntervalMap<QString>& columnStyles,
@@ -1450,7 +1450,7 @@ void KCSheet::loadRowNodes(const KoXmlElement& parent,
 
 
 bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
-                    OdfLoadingContext& tableContext,
+                    KCOdfLoadingContext& tableContext,
                     const Styles& autoStyles,
                     const QHash<QString, Conditions>& conditionalStyles)
 {
@@ -1963,7 +1963,7 @@ void KCSheet::loadOdfInsertStyles(const Styles& autoStyles,
 }
 
 int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
-                          OdfLoadingContext& tableContext,
+                          KCOdfLoadingContext& tableContext,
                           QHash<QString, QRegion>& rowStyleRegions,
                           QHash<QString, QRegion>& cellStyleRegions,
                           const IntervalMap<QString>& columnStyles,
