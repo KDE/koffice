@@ -757,11 +757,11 @@ KCCell* KCCluster::getNextCellRight(int col, int row) const
 
 /****************************************************
  *
- * ColumnCluster
+ * KCColumnCluster
  *
  ****************************************************/
 
-ColumnCluster::ColumnCluster()
+KCColumnCluster::KCColumnCluster()
         : m_first(0), m_autoDelete(false)
 {
     m_cluster = (KCColumnFormat***)malloc(KSPREAD_CLUSTER_LEVEL1 * sizeof(KCColumnFormat**));
@@ -770,7 +770,7 @@ ColumnCluster::ColumnCluster()
         m_cluster[ x ] = 0;
 }
 
-ColumnCluster::~ColumnCluster()
+KCColumnCluster::~KCColumnCluster()
 {
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x) {
         KCColumnFormat** cl = m_cluster[ x ];
@@ -793,10 +793,10 @@ ColumnCluster::~ColumnCluster()
     free(m_cluster);
 }
 
-KCColumnFormat* ColumnCluster::lookup(int col)
+KCColumnFormat* KCColumnCluster::lookup(int col)
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
-        kDebug(36001) << "ColumnCluster::lookup: invalid column value (col:"
+        kDebug(36001) << "KCColumnCluster::lookup: invalid column value (col:"
         << col << ")" << endl;
         return 0;
     }
@@ -811,10 +811,10 @@ KCColumnFormat* ColumnCluster::lookup(int col)
     return cl[ dx ];
 }
 
-const KCColumnFormat* ColumnCluster::lookup(int col) const
+const KCColumnFormat* KCColumnCluster::lookup(int col) const
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
-        kDebug(36001) << "ColumnCluster::lookup: invalid column value (col:"
+        kDebug(36001) << "KCColumnCluster::lookup: invalid column value (col:"
         << col << ")" << endl;
         return 0;
     }
@@ -829,7 +829,7 @@ const KCColumnFormat* ColumnCluster::lookup(int col) const
     return cl[ dx ];
 }
 
-void ColumnCluster::clear()
+void KCColumnCluster::clear()
 {
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x) {
         KCColumnFormat** cl = m_cluster[ x ];
@@ -851,10 +851,10 @@ void ColumnCluster::clear()
     m_first = 0;
 }
 
-void ColumnCluster::insertElement(KCColumnFormat* lay, int col)
+void KCColumnCluster::insertElement(KCColumnFormat* lay, int col)
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
-        kDebug(36001) << "ColumnCluster::insertElement: invalid column value (col:"
+        kDebug(36001) << "KCColumnCluster::insertElement: invalid column value (col:"
         << col << ")" << endl;
         return;
     }
@@ -883,10 +883,10 @@ void ColumnCluster::insertElement(KCColumnFormat* lay, int col)
     m_first = lay;
 }
 
-void ColumnCluster::removeElement(int col)
+void KCColumnCluster::removeElement(int col)
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
-        kDebug(36001) << "ColumnCluster::removeElement: invalid column value (col:"
+        kDebug(36001) << "KCColumnCluster::removeElement: invalid column value (col:"
         << col << ")" << endl;
         return;
     }
@@ -920,10 +920,10 @@ void ColumnCluster::removeElement(int col)
     }
 }
 
-bool ColumnCluster::insertColumn(int col)
+bool KCColumnCluster::insertColumn(int col)
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
-        kDebug(36001) << "ColumnCluster::insertColumn: invalid column value (col:"
+        kDebug(36001) << "KCColumnCluster::insertColumn: invalid column value (col:"
         << col << ")" << endl;
         return false;
     }
@@ -965,10 +965,10 @@ bool ColumnCluster::insertColumn(int col)
     return true;
 }
 
-bool ColumnCluster::removeColumn(int column)
+bool KCColumnCluster::removeColumn(int column)
 {
     if (column >= KSPREAD_CLUSTER_MAX || column < 0) {
-        kDebug(36001) << "ColumnCluster::removeColumn: invalid column value (col:"
+        kDebug(36001) << "KCColumnCluster::removeColumn: invalid column value (col:"
         << column << ")" << endl;
         return false;
     }
@@ -1004,20 +1004,20 @@ bool ColumnCluster::removeColumn(int column)
     return true;
 }
 
-void ColumnCluster::setAutoDelete(bool a)
+void KCColumnCluster::setAutoDelete(bool a)
 {
     m_autoDelete = a;
 }
 
-bool ColumnCluster::autoDelete() const
+bool KCColumnCluster::autoDelete() const
 {
     return m_autoDelete;
 }
 
-KCColumnFormat* ColumnCluster::next(int col) const
+KCColumnFormat* KCColumnCluster::next(int col) const
 {
     if (col >= KSPREAD_CLUSTER_MAX || col < 0) {
-        kDebug(36001) << "ColumnCluster::next: invalid column value (col:"
+        kDebug(36001) << "KCColumnCluster::next: invalid column value (col:"
         << col << ")" << endl;
         return 0;
     }
@@ -1041,7 +1041,7 @@ KCColumnFormat* ColumnCluster::next(int col) const
     return 0;
 }
 
-void ColumnCluster::operator=(const ColumnCluster & other)
+void KCColumnCluster::operator=(const KCColumnCluster & other)
 {
     m_first = 0;
     m_autoDelete = other.m_autoDelete;

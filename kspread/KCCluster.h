@@ -264,11 +264,11 @@ private:
  * A pointer map to all column formats.
  * \see KCCluster
  */
-class ColumnCluster
+class KCColumnCluster
 {
 public:
-    ColumnCluster();
-    ~ColumnCluster();
+    KCColumnCluster();
+    ~KCColumnCluster();
 
     const KCColumnFormat* lookup(int col) const;
     KCColumnFormat* lookup(int col);
@@ -289,10 +289,10 @@ public:
     }
     KCColumnFormat* next(int col) const;
 
-    void operator=(const ColumnCluster& other);
+    void operator=(const KCColumnCluster& other);
 
 private:
-    ColumnCluster(const ColumnCluster& other);
+    KCColumnCluster(const KCColumnCluster& other);
 
 private:
     KCColumnFormat*** m_cluster;

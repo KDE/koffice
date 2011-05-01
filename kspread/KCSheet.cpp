@@ -154,7 +154,7 @@ public:
     // clusters to hold objects
     KCCellStorage* cellStorage;
     RowCluster rows;
-    ColumnCluster columns;
+    KCColumnCluster columns;
     QList<KoShape*> shapes;
 
     // hold the print object
