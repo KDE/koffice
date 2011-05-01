@@ -54,7 +54,7 @@
 #include "KCGenValidationStyle.h"
 #include "Global.h"
 #include "Localization.h"
-#include "LoadingInfo.h"
+#include "KCLoadingInfo.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "OdfLoadingContext.h"

@@ -29,7 +29,7 @@
 class KCSheet;
 
 /// Temporary information used only during loading
-class LoadingInfo
+class KCLoadingInfo
 {
 public:
     enum FileFormat {
@@ -39,11 +39,11 @@ public:
         Unknown
     };
 
-    LoadingInfo()
+    KCLoadingInfo()
             : m_fileFormat(Unknown)
             , m_initialActiveSheet(0)
             , m_loadTemplate(false) {}
-    ~LoadingInfo() {}
+    ~KCLoadingInfo() {}
 
     FileFormat fileFormat() const {
         return m_fileFormat;

@@ -40,7 +40,7 @@
 // KSpread
 #include "KCCellStorage.h"
 #include "KCFormulaStorage.h"
-#include "LoadingInfo.h"
+#include "KCLoadingInfo.h"
 #include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"

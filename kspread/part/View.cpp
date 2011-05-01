@@ -115,7 +115,7 @@
 #include "Doc.h"
 #include "Factory.h"
 #include "KCHeaderFooter.h"
-#include "LoadingInfo.h"
+#include "KCLoadingInfo.h"
 #include "Canvas.h"
 #include "Global.h"
 #include "Headers.h"
@@ -1047,8 +1047,8 @@ void View::initialPosition()
     }
 
     // Set the initial X and Y offsets for the view (OpenDocument loading)
-    const LoadingInfo* loadingInfo = doc()->map()->loadingInfo();
-    if (loadingInfo->fileFormat() == LoadingInfo::OpenDocument) {
+    const KCLoadingInfo* loadingInfo = doc()->map()->loadingInfo();
+    if (loadingInfo->fileFormat() == KCLoadingInfo::OpenDocument) {
         d->savedAnchors = loadingInfo->cursorPositions();
         d->savedMarkers = loadingInfo->cursorPositions();
         d->savedOffsets = loadingInfo->scrollingOffsets();
@@ -1071,7 +1071,7 @@ void View::initialPosition()
     d->mapViewModel->setActiveSheet(sheet);
 
     // Set the initial X and Y offsets for the view (Native format loading)
-    if (loadingInfo->fileFormat() == LoadingInfo::NativeFormat) {
+    if (loadingInfo->fileFormat() == KCLoadingInfo::NativeFormat) {
         const QPoint offset = zoomHandler()->documentToView(loadingInfo->scrollingOffsets()[sheet]).toPoint();
         d->canvas->setDocumentOffset(offset);
         d->horzScrollBar->setValue(offset.x());

@@ -52,7 +52,7 @@
 #include "Damages.h"
 #include "KCDependencyManager.h"
 #include "KCDocBase.h"
-#include "LoadingInfo.h"
+#include "KCLoadingInfo.h"
 #include "Localization.h"
 #include "NamedAreaManager.h"
 #include "OdfLoadingContext.h"
@@ -88,7 +88,7 @@ public:
     int overallRowCount;
     int loadedRowsCounter;
 
-    LoadingInfo* loadingInfo;
+    KCLoadingInfo* loadingInfo;
     bool readwrite;
 
     KCBindingManager* bindingManager;
@@ -505,7 +505,7 @@ static void fixupStyle(KoCharacterStyle* style)
 bool KCMap::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
 {
     d->isLoading = true;
-    loadingInfo()->setFileFormat(LoadingInfo::OpenDocument);
+    loadingInfo()->setFileFormat(KCLoadingInfo::OpenDocument);
 
     //load in first
     d->styleManager->loadOdfStyleTemplate(odfContext.stylesReader(), this);
@@ -654,7 +654,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
 bool KCMap::loadXML(const KoXmlElement& mymap)
 {
     d->isLoading = true;
-    loadingInfo()->setFileFormat(LoadingInfo::NativeFormat);
+    loadingInfo()->setFileFormat(KCLoadingInfo::NativeFormat);
     const QString activeSheet = mymap.attribute("activeTable");
     const QPoint marker(mymap.attribute("markerColumn").toInt(), mymap.attribute("markerRow").toInt());
     loadingInfo()->setCursorPosition(findSheet(activeSheet), marker);
@@ -827,10 +827,10 @@ void KCMap::setSyntaxVersion(int version)
     d->syntaxVersion = version;
 }
 
-LoadingInfo* KCMap::loadingInfo() const
+KCLoadingInfo* KCMap::loadingInfo() const
 {
     if (!d->loadingInfo) {
-        d->loadingInfo = new LoadingInfo();
+        d->loadingInfo = new KCLoadingInfo();
     }
     return d->loadingInfo;
 }

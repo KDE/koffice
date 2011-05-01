@@ -56,7 +56,7 @@
 #include <KCCalculationSettings.h>
 #include <KCCellStorage.h>
 #include <KCHeaderFooter.h>
-#include <LoadingInfo.h>
+#include <KCLoadingInfo.h>
 #include <KCMap.h>
 #include <NamedAreaManager.h>
 #include <RowColumnFormat.h>

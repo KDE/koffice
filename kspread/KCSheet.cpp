@@ -73,7 +73,7 @@
 #include "KCFormulaStorage.h"
 #include "Global.h"
 #include "KCHeaderFooter.h"
-#include "LoadingInfo.h"
+#include "KCLoadingInfo.h"
 #include "Localization.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"

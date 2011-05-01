@@ -43,7 +43,7 @@
 #include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
 #include <kspread/KCHeaderFooter.h>
-#include <kspread/LoadingInfo.h>
+#include <kspread/KCLoadingInfo.h>
 #include <kspread/KCMap.h>
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>
@@ -2003,7 +2003,7 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
     }
 
     if (selTable) {
-        ksdoc->map()->loadingInfo()->setFileFormat(LoadingInfo::Gnumeric);
+        ksdoc->map()->loadingInfo()->setFileFormat(KCLoadingInfo::Gnumeric);
         ksdoc->map()->loadingInfo()->setInitialActiveSheet(selTable);
     }
 

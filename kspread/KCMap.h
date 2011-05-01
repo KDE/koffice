@@ -57,7 +57,7 @@ class KCDamage;
 class DatabaseManager;
 class KCDependencyManager;
 class KCDocBase;
-class LoadingInfo;
+class KCLoadingInfo;
 class NamedAreaManager;
 class RecalcManager;
 class RowFormat;
@@ -319,7 +319,7 @@ public:
      * Creates the loading info, if it does not exist yet.
      * \return the loading info
      */
-    LoadingInfo* loadingInfo() const;
+    KCLoadingInfo* loadingInfo() const;
 
     /**
      * \ingroup OpenDocument
