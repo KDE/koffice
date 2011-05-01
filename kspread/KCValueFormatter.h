@@ -35,16 +35,16 @@ class KCValueConverter;
  * \ingroup KCValue
  * Generates a textual representation of a KCValue with a given formatting.
  */
-class KSPREAD_EXPORT ValueFormatter
+class KSPREAD_EXPORT KCValueFormatter
 {
 public:
     /**
      * Constructor.
      */
-    explicit ValueFormatter(const KCValueConverter* converter);
+    explicit KCValueFormatter(const KCValueConverter* converter);
 
     /**
-     * Returns the calculation settings this ValueFormatter uses.
+     * Returns the calculation settings this KCValueFormatter uses.
      */
     const KCCalculationSettings* settings() const;
 

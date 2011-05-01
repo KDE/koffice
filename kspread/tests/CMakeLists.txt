@@ -126,7 +126,7 @@ target_link_libraries(TestTrigFunctions kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_
 ########### next target ###############
 
 set(TestValueFormatter_SRCS TestValueFormatter.cpp)
-kde4_add_unit_test(TestValueFormatter TESTNAME kspread-ValueFormatter  ${TestValueFormatter_SRCS})
+kde4_add_unit_test(TestValueFormatter TESTNAME kspread-KCValueFormatter  ${TestValueFormatter_SRCS})
 macro_add_compile_flags(TestValueFormatter "-DKSPREAD_UNIT_TEST")
 target_link_libraries(TestValueFormatter kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY})
 

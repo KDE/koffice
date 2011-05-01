@@ -258,7 +258,7 @@ KCValue KCValueConverter::asNumeric(const KCValue &value, bool* ok) const
 
 KCValue KCValueConverter::asString(const KCValue &value) const
 {
-    // This is a simpler version of ValueFormatter... We cannot use that one,
+    // This is a simpler version of KCValueFormatter... We cannot use that one,
     // as we sometimes want to generate the string differently ...
 
     KCValue val;

@@ -66,7 +66,7 @@ class KCStyle;
 class KCStyleManager;
 class ValueParser;
 class KCValueConverter;
-class ValueFormatter;
+class KCValueFormatter;
 class KCValueCalc;
 
 /**
@@ -149,7 +149,7 @@ public:
     /**
      * @return the value formatter of this Document
      */
-    ValueFormatter* formatter() const;
+    KCValueFormatter* formatter() const;
 
     /**
      * @return the value converter of this Document

@@ -26,7 +26,7 @@
 #include "KCSheet.h"
 #include "KCStyle.h"
 #include "KCValue.h"
-#include "ValueFormatter.h"
+#include "KCValueFormatter.h"
 
 // Qt
 #include <QBrush>

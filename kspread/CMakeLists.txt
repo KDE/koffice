@@ -231,7 +231,7 @@ set (kspreadodf_LIB_SRCS
     KCValue.cpp
     KCValueCalc.cpp
     KCValueConverter.cpp
-    ValueFormatter.cpp
+    KCValueFormatter.cpp
     ValueParser.cpp
 
     database/Database.cpp

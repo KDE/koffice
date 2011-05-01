@@ -33,7 +33,7 @@
 #include "KCSheet.h"
 #include "KCRegion.h"
 #include "KCValue.h"
-#include "ValueFormatter.h"
+#include "KCValueFormatter.h"
 
 class KCRecalcManager::Private
 {

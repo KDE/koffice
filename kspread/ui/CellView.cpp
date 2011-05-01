@@ -72,7 +72,7 @@
 #include "SheetView.h"
 #include "KCStyleManager.h"
 #include "KCValue.h"
-#include "ValueFormatter.h"
+#include "KCValueFormatter.h"
 
 const int s_borderSpace = 1;
 

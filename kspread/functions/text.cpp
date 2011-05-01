@@ -277,7 +277,7 @@ KCValue func_dollar(valVector args, KCValueCalc *calc, FuncExtra *)
 {
     // KCValueConverter doesn't support money directly, hence we need to
     // use the locale. This code has the same effect as the output
-    // of ValueFormatter for money format.
+    // of KCValueFormatter for money format.
 
     // This function converts data to double/int, hence it won't support
     // larger precision.

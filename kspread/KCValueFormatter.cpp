@@ -20,7 +20,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "ValueFormatter.h"
+#include "KCValueFormatter.h"
 
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
@@ -34,17 +34,17 @@
 #include <float.h>
 #include <math.h>
 
-ValueFormatter::ValueFormatter(const KCValueConverter* converter)
+KCValueFormatter::KCValueFormatter(const KCValueConverter* converter)
         : m_converter(converter)
 {
 }
 
-const KCCalculationSettings* ValueFormatter::settings() const
+const KCCalculationSettings* KCValueFormatter::settings() const
 {
     return m_converter->settings();
 }
 
-KCValue ValueFormatter::formatText(const KCValue &value, KCFormat::Type fmtType, int precision,
+KCValue KCValueFormatter::formatText(const KCValue &value, KCFormat::Type fmtType, int precision,
                                  KCStyle::FloatFormat floatFormat, const QString &prefix,
                                  const QString &postfix, const QString &currencySymbol, const QString &formatString)
 {
@@ -144,11 +144,11 @@ KCValue ValueFormatter::formatText(const KCValue &value, KCFormat::Type fmtType,
     if (!postfix.isEmpty())
         result = KCValue(result.asString() + ' ' + postfix);
 
-    //kDebug() <<"ValueFormatter says:" << str;
+    //kDebug() <<"KCValueFormatter says:" << str;
     return result;
 }
 
-KCFormat::Type ValueFormatter::determineFormatting(const KCValue &value,
+KCFormat::Type KCValueFormatter::determineFormatting(const KCValue &value,
         KCFormat::Type fmtType)
 {
     //now, everything depends on whether the formatting is Generic or not
@@ -208,7 +208,7 @@ KCFormat::Type ValueFormatter::determineFormatting(const KCValue &value,
 }
 
 
-QString ValueFormatter::removeTrailingZeros(const QString& str, const QString& decimalSymbol)
+QString KCValueFormatter::removeTrailingZeros(const QString& str, const QString& decimalSymbol)
 {
     if (!str.contains(decimalSymbol))
         //no decimal symbol -> nothing to do
@@ -242,7 +242,7 @@ QString ValueFormatter::removeTrailingZeros(const QString& str, const QString& d
     return result;
 }
 
-QString ValueFormatter::createNumberFormat(KCNumber value, int precision,
+QString KCValueFormatter::createNumberFormat(KCNumber value, int precision,
         KCFormat::Type fmt, KCStyle::FloatFormat floatFormat, const QString& currencySymbol, const QString& _formatString)
 {
     QString prefix, postfix;
@@ -329,7 +329,7 @@ QString ValueFormatter::createNumberFormat(KCNumber value, int precision,
     default :
         //other formatting?
         // This happens with KCFormat::Custom...
-        kDebug(36001) << "Wrong usage of ValueFormatter::createNumberFormat fmt=" << fmt << "";
+        kDebug(36001) << "Wrong usage of KCValueFormatter::createNumberFormat fmt=" << fmt << "";
         break;
     }
 
@@ -356,7 +356,7 @@ QString ValueFormatter::createNumberFormat(KCNumber value, int precision,
     return prefix + localizedNumber + postfix;
 }
 
-QString ValueFormatter::fractionFormat(KCNumber value, KCFormat::Type fmtType)
+QString KCValueFormatter::fractionFormat(KCNumber value, KCFormat::Type fmtType)
 {
     bool isNegative = value < 0;
     QString prefix = isNegative ? "-" : "";
@@ -471,7 +471,7 @@ QString ValueFormatter::fractionFormat(KCNumber value, KCFormat::Type fmtType)
     }
 }
 
-QString ValueFormatter::timeFormat(const QDateTime &_dt, KCFormat::Type fmtType, const QString& formatString)
+QString KCValueFormatter::timeFormat(const QDateTime &_dt, KCFormat::Type fmtType, const QString& formatString)
 {
     if (!formatString.isEmpty()) {
         return _dt.toString( formatString );
@@ -548,7 +548,7 @@ QString ValueFormatter::timeFormat(const QDateTime &_dt, KCFormat::Type fmtType,
     return result;
 }
 
-QString ValueFormatter::dateTimeFormat(const QDateTime &_dt, KCFormat::Type fmtType, const QString& formatString )
+QString KCValueFormatter::dateTimeFormat(const QDateTime &_dt, KCFormat::Type fmtType, const QString& formatString )
 {
     if( !formatString.isEmpty() ) {
         if (formatString.contains("X")) {               // if we have the special extra-short month in the format string
@@ -570,7 +570,7 @@ QString ValueFormatter::dateTimeFormat(const QDateTime &_dt, KCFormat::Type fmtT
     return result;
 }
 
-QString ValueFormatter::dateFormat(const QDate &date, KCFormat::Type fmtType, const QString& formatString )
+QString KCValueFormatter::dateFormat(const QDate &date, KCFormat::Type fmtType, const QString& formatString )
 {
     if( !formatString.isEmpty() ) {
         return date.toString( formatString );
@@ -711,7 +711,7 @@ QString ValueFormatter::dateFormat(const QDate &date, KCFormat::Type fmtType, co
     return tmp;
 }
 
-QString ValueFormatter::complexFormat(const KCValue& value, int precision,
+QString KCValueFormatter::complexFormat(const KCValue& value, int precision,
                                       KCFormat::Type formatType,
                                       KCStyle::FloatFormat floatFormat,
                                       const QString& currencySymbol)

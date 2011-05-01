@@ -32,7 +32,7 @@
 #include "KCStyle.h"
 #include "KCValidity.h"
 #include "KCValue.h"
-#include "ValueFormatter.h"
+#include "KCValueFormatter.h"
 
 // Qt
 #include <QBrush>

@@ -18,7 +18,7 @@
 */
 #include "TestValueFormatter.h"
 
-#include <ValueFormatter.h>
+#include <KCValueFormatter.h>
 
 #include <KCCalculationSettings.h>
 #include <KCValueConverter.h>
@@ -29,14 +29,14 @@
 Q_DECLARE_METATYPE(KCFormat::Type)
 Q_DECLARE_METATYPE(KCStyle::FloatFormat)
 
-class PublicValueFormatter : public ValueFormatter
+class PublicValueFormatter : public KCValueFormatter
 {
 public:
     explicit PublicValueFormatter(const KCValueConverter* converter)
-            : ValueFormatter(converter) {}
+            : KCValueFormatter(converter) {}
 
-    using ValueFormatter::fractionFormat;
-    using ValueFormatter::createNumberFormat;
+    using KCValueFormatter::fractionFormat;
+    using KCValueFormatter::createNumberFormat;
 };
 
 void TestValueFormatter::initTestCase()

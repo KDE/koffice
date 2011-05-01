@@ -70,7 +70,7 @@
 #include "KCStyle.h"
 #include "KCStyleManager.h"
 #include "KCStyleStorage.h"
-#include "ValueFormatter.h"
+#include "KCValueFormatter.h"
 
 #include "commands/MergeCommand.h"
 #include "commands/StyleCommand.h"
@@ -1201,7 +1201,7 @@ void CellFormatPageFloat::slotChangeState()
         QDateTime tmpTime(QDate(1, 1, 1900), QTime(10, 35, 25), Qt::UTC);
 
 
-        ValueFormatter *fmt = dlg->getSheet()->map()->formatter();
+        KCValueFormatter *fmt = dlg->getSheet()->map()->formatter();
         list += fmt->timeFormat(tmpTime, KCFormat::Time1);
         list += fmt->timeFormat(tmpTime, KCFormat::Time2);
         list += fmt->timeFormat(tmpTime, KCFormat::Time3);
@@ -1260,7 +1260,7 @@ void CellFormatPageFloat::init()
     list += i18n("System: ") + dlg->locale()->formatDate(QDate::currentDate(), KLocale::ShortDate);
     list += i18n("System: ") + dlg->locale()->formatDate(QDate::currentDate(), KLocale::LongDate);
 
-    ValueFormatter *fmt = dlg->getSheet()->map()->formatter();
+    KCValueFormatter *fmt = dlg->getSheet()->map()->formatter();
 
     /*18-Feb-00*/
     list += fmt->dateFormat(tmpDate, KCFormat::Date1);
@@ -1531,7 +1531,7 @@ void CellFormatPageFloat::makeformat()
     if (!dlg->value.isNumber() || dlg->value.asFloat() >= 0 || !format->isEnabled()) {
         color = Qt::black;
     }
-    ValueFormatter *fmt = dlg->getSheet()->map()->formatter();
+    KCValueFormatter *fmt = dlg->getSheet()->map()->formatter();
     tmp = fmt->formatText(dlg->value, newFormatType, precision->value(),
                           floatFormat,
                           prefix->isEnabled() ? prefix->text() : QString(),

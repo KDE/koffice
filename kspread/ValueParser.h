@@ -46,7 +46,7 @@ public:
     explicit ValueParser(const KCCalculationSettings* settings);
 
     /**
-     * Returns the calculation settings this ValueFormatter uses.
+     * Returns the calculation settings this KCValueFormatter uses.
      */
     const KCCalculationSettings* settings() const;
 
