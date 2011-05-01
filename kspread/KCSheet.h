@@ -74,7 +74,7 @@ class KCPrintSettings;
 class KCRegion;
 class KCRowFormat;
 class KCSheet;
-class SheetPrint;
+class KCSheetPrint;
 class KCStyle;
 class StyleStorage;
 class Validity;
@@ -761,7 +761,7 @@ public:
      * \ingroup Page
      * The page layout manager.
      */
-    SheetPrint *print() const;
+    KCSheetPrint *print() const;
 
     /**
      * \ingroup Page

@@ -33,18 +33,18 @@ class KCPrintSettings;
 class KCSheet;
 
 /**
- * \class SheetPrint
+ * \class KCSheetPrint
  * Manages the layout of pages for printing.
  * Supports next to the obligatory page dimensions
  * zooming, page limits and column/row repetitions.
  * \ingroup Printing
  */
-class KSPREAD_EXPORT SheetPrint
+class KSPREAD_EXPORT KCSheetPrint
 {
 public:
-    explicit SheetPrint(KCSheet * sheet = 0);
-    SheetPrint(const SheetPrint &other);
-    ~SheetPrint();
+    explicit KCSheetPrint(KCSheet * sheet = 0);
+    KCSheetPrint(const KCSheetPrint &other);
+    ~KCSheetPrint();
 
     /**
      * \return the print settings
@@ -144,7 +144,7 @@ public:
     /**
      * Assignment operator.
      */
-    void operator=(const SheetPrint &);
+    void operator=(const KCSheetPrint &);
 
 
 private:

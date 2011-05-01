@@ -41,7 +41,7 @@
 #include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
-#include "SheetPrint.h"
+#include "KCSheetPrint.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
 

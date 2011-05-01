@@ -24,7 +24,7 @@
 
 #include "part/Doc.h" // FIXME detach from part
 #include "KCSheet.h"
-#include "SheetPrint.h"
+#include "KCSheetPrint.h"
 
 #include <KDebug>
 #include <KLocale>

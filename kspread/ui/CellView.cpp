@@ -68,7 +68,7 @@
 #include "RowColumnFormat.h"
 #include "Selection.h"
 #include "KCSheet.h"
-#include "SheetPrint.h"
+#include "KCSheetPrint.h"
 #include "SheetView.h"
 #include "StyleManager.h"
 #include "KCValue.h"
@@ -1165,7 +1165,7 @@ void CellView::paintPageBorders(QPainter& painter, const QPointF& coordinate,
     if (! cell.sheet()->isShowPageBorders())
         return;
 
-    SheetPrint* const print = cell.sheet()->print();
+    KCSheetPrint* const print = cell.sheet()->print();
     const KCPrintSettings *const settings = cell.sheet()->printSettings();
     const QRect printRange = settings->printRegion().lastRange();
 

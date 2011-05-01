@@ -20,7 +20,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "SheetPrint.h"
+#include "KCSheetPrint.h"
 #include "SheetPrint_p.h"
 
 #include "KCPrintSettings.h"
@@ -28,7 +28,7 @@
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 
-void SheetPrint::Private::calculateHorizontalPageParameters(int _column)
+void KCSheetPrint::Private::calculateHorizontalPageParameters(int _column)
 {
     // Zoom the print width ONCE here, instead for each column width.
     const double printWidth = m_settings->printWidth() / m_settings->zoom();
@@ -138,7 +138,7 @@ void SheetPrint::Private::calculateHorizontalPageParameters(int _column)
     }
 }
 
-void SheetPrint::Private::calculateVerticalPageParameters(int _row)
+void KCSheetPrint::Private::calculateVerticalPageParameters(int _row)
 {
     // Zoom the print height ONCE here, instead for each row height.
     const double printHeight = m_settings->printHeight() / m_settings->zoom();
@@ -240,7 +240,7 @@ void SheetPrint::Private::calculateVerticalPageParameters(int _row)
     }
 }
 
-void SheetPrint::Private::calculateZoomForPageLimitX()
+void KCSheetPrint::Private::calculateZoomForPageLimitX()
 {
     kDebug() << "Calculating zoom for X limit";
     const int horizontalPageLimit = m_settings->pageLimits().width();
@@ -300,7 +300,7 @@ void SheetPrint::Private::calculateZoomForPageLimitX()
         m_settings->setZoom(origZoom);
 }
 
-void SheetPrint::Private::calculateZoomForPageLimitY()
+void KCSheetPrint::Private::calculateZoomForPageLimitY()
 {
     kDebug() << "Calculating zoom for Y limit";
     const int verticalPageLimit = m_settings->pageLimits().height();
@@ -359,7 +359,7 @@ void SheetPrint::Private::calculateZoomForPageLimitY()
         m_settings->setZoom(origZoom);
 }
 
-void SheetPrint::Private::updateRepeatedColumnsWidth()
+void KCSheetPrint::Private::updateRepeatedColumnsWidth()
 {
     m_dPrintRepeatColumnsWidth = 0.0;
     const QPair<int, int> repeatedColumns = m_settings->repeatedColumns();
@@ -370,7 +370,7 @@ void SheetPrint::Private::updateRepeatedColumnsWidth()
     }
 }
 
-void SheetPrint::Private::updateRepeatedRowsHeight()
+void KCSheetPrint::Private::updateRepeatedRowsHeight()
 {
     m_dPrintRepeatRowsHeight = 0.0;
     const QPair<int, int> repeatedRows = m_settings->repeatedRows();

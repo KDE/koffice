@@ -24,7 +24,7 @@
 #include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
-#include "SheetPrint.h"
+#include "KCSheetPrint.h"
 
 ColumnStyleCommand::ColumnStyleCommand(QUndoCommand *parent)
         : AbstractRegionCommand(parent)

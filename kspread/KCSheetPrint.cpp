@@ -21,7 +21,7 @@
 */
 
 // Local
-#include "SheetPrint.h"
+#include "KCSheetPrint.h"
 #include "SheetPrint_p.h"
 
 #include "KCHeaderFooter.h"
@@ -33,7 +33,7 @@
 #include <KDebug>
 #include <KMessageBox>
 
-SheetPrint::SheetPrint(KCSheet *sheet)
+KCSheetPrint::KCSheetPrint(KCSheet *sheet)
         : d(new Private(this))
 {
     d->m_pSheet = sheet;
@@ -47,7 +47,7 @@ SheetPrint::SheetPrint(KCSheet *sheet)
     d->m_dPrintRepeatRowsHeight = 0.0;
 }
 
-SheetPrint::SheetPrint(const SheetPrint &other)
+KCSheetPrint::KCSheetPrint(const KCSheetPrint &other)
         : d(new Private(this))
 {
     d->m_pSheet = other.d->m_pSheet;
@@ -63,19 +63,19 @@ SheetPrint::SheetPrint(const SheetPrint &other)
     d->m_lnewPageListY = other.d->m_lnewPageListY;
 }
 
-SheetPrint::~SheetPrint()
+KCSheetPrint::~KCSheetPrint()
 {
     delete d->m_headerFooter;
     delete d->m_settings;
     delete d;
 }
 
-KCPrintSettings *SheetPrint::settings() const
+KCPrintSettings *KCSheetPrint::settings() const
 {
     return d->m_settings;
 }
 
-void SheetPrint::setSettings(const KCPrintSettings &settings, bool force)
+void KCSheetPrint::setSettings(const KCPrintSettings &settings, bool force)
 {
     // Relayout forced?
     if (force) {
@@ -180,12 +180,12 @@ void SheetPrint::setSettings(const KCPrintSettings &settings, bool force)
     }
 }
 
-KCHeaderFooter *SheetPrint::headerFooter() const
+KCHeaderFooter *KCSheetPrint::headerFooter() const
 {
     return d->m_headerFooter;
 }
 
-bool SheetPrint::isColumnOnNewPage(int _column)
+bool KCSheetPrint::isColumnOnNewPage(int _column)
 {
     if (_column > d->m_maxCheckedNewPageX)
         d->calculateHorizontalPageParameters(_column);
@@ -212,7 +212,7 @@ bool SheetPrint::isColumnOnNewPage(int _column)
 
 
 
-bool SheetPrint::isRowOnNewPage(int _row)
+bool KCSheetPrint::isRowOnNewPage(int _row)
 {
     if (_row > d->m_maxCheckedNewPageY)
         d->calculateVerticalPageParameters(_row);
@@ -238,7 +238,7 @@ bool SheetPrint::isRowOnNewPage(int _row)
     return false;
 }
 
-void SheetPrint::updateHorizontalPageParameters(int _col)
+void KCSheetPrint::updateHorizontalPageParameters(int _col)
 {
     //If the new range is after the first entry, we need to delete the whole list
     const QRect printRange = d->m_settings->printRegion().lastRange();
@@ -269,7 +269,7 @@ void SheetPrint::updateHorizontalPageParameters(int _col)
     }
 }
 
-void SheetPrint::updateVerticalPageParameters(int _row)
+void KCSheetPrint::updateVerticalPageParameters(int _row)
 {
     //If the new range is after the first entry, we need to delete the whole list
     const QRect printRange = d->m_settings->printRegion().lastRange();
@@ -300,7 +300,7 @@ void SheetPrint::updateVerticalPageParameters(int _row)
     }
 }
 
-void SheetPrint::insertColumn(int col, int nbCol)
+void KCSheetPrint::insertColumn(int col, int nbCol)
 {
     //update print range, when it has been defined
     const QRect printRange = d->m_settings->printRegion().lastRange();
@@ -324,7 +324,7 @@ void SheetPrint::insertColumn(int col, int nbCol)
     }
 }
 
-void SheetPrint::insertRow(int row, int nbRow)
+void KCSheetPrint::insertRow(int row, int nbRow)
 {
     //update print range, when it has been defined
     const QRect printRange = d->m_settings->printRegion().lastRange();
@@ -348,7 +348,7 @@ void SheetPrint::insertRow(int row, int nbRow)
     }
 }
 
-void SheetPrint::removeColumn(int col, int nbCol)
+void KCSheetPrint::removeColumn(int col, int nbCol)
 {
     KCPrintSettings settings = *d->m_settings;
     //update print range, when it has been defined
@@ -388,7 +388,7 @@ void SheetPrint::removeColumn(int col, int nbCol)
     setSettings(settings);
 }
 
-void SheetPrint::removeRow(int row, int nbRow)
+void KCSheetPrint::removeRow(int row, int nbRow)
 {
     KCPrintSettings settings = *d->m_settings;
     //update print range, when it has been defined
@@ -428,12 +428,12 @@ void SheetPrint::removeRow(int row, int nbRow)
     setSettings(settings);
 }
 
-int SheetPrint::pageCount() const
+int KCSheetPrint::pageCount() const
 {
     return d->m_lnewPageListX.count() * d->m_lnewPageListY.count();
 }
 
-QRect SheetPrint::cellRange(int page) const
+QRect KCSheetPrint::cellRange(int page) const
 {
     if (d->m_lnewPageListX.isEmpty() || d->m_lnewPageListY.isEmpty()) {
         return QRect();
@@ -466,7 +466,7 @@ QRect SheetPrint::cellRange(int page) const
     return cellRange;
 }
 
-QRectF SheetPrint::documentArea(int page) const
+QRectF KCSheetPrint::documentArea(int page) const
 {
     if (d->m_lnewPageListX.isEmpty() || d->m_lnewPageListY.isEmpty()) {
         return QRectF();
@@ -496,7 +496,7 @@ QRectF SheetPrint::documentArea(int page) const
     return documentArea;
 }
 
-void SheetPrint::operator=(const SheetPrint & other)
+void KCSheetPrint::operator=(const KCSheetPrint & other)
 {
     d->m_pSheet = other.d->m_pSheet;
 

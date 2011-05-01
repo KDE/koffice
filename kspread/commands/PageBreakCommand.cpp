@@ -23,7 +23,7 @@
 #include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
-#include "SheetPrint.h"
+#include "KCSheetPrint.h"
 
 PageBreakCommand::PageBreakCommand(QUndoCommand *parent)
         : AbstractRegionCommand(parent)

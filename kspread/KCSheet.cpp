@@ -83,7 +83,7 @@
 #include "KCRecalcManager.h"
 #include "RowColumnFormat.h"
 #include "KCShapeApplicationData.h"
-#include "SheetPrint.h"
+#include "KCSheetPrint.h"
 #include "KCRectStorage.h"
 #include "KCSheetModel.h"
 #include "KCStyle.h"
@@ -158,7 +158,7 @@ public:
     QList<KoShape*> shapes;
 
     // hold the print object
-    SheetPrint* print;
+    KCSheetPrint* print;
 
     // Indicates whether the sheet should paint the page breaks.
     // Doing so costs some time, so by default it should be turned off.
@@ -213,7 +213,7 @@ KCSheet::KCSheet(KCMap* map, const QString &sheetName)
     d->hideZero = false;
     d->firstLetterUpper = false;
     d->autoCalc = true;
-    d->print = new SheetPrint(this);
+    d->print = new KCSheetPrint(this);
 
     // document size changes always trigger a visible size change
     connect(this, SIGNAL(documentSizeChanged(const QSizeF&)), SIGNAL(visibleSizeChanged()));
@@ -271,7 +271,7 @@ KCSheet::KCSheet(const KCSheet &other)
     }
 #endif // KSPREAD_WIP_COPY_SHEET_(SHAPES)
 
-    d->print = new SheetPrint(this); // FIXME = new SheetPrint(*other.d->print);
+    d->print = new KCSheetPrint(this); // FIXME = new KCSheetPrint(*other.d->print);
 
     d->showPageBorders = other.d->showPageBorders;
     d->documentSize = other.d->documentSize;
@@ -535,7 +535,7 @@ const ValueStorage* KCSheet::valueStorage() const
     return d->cellStorage->valueStorage();
 }
 
-SheetPrint* KCSheet::print() const
+KCSheetPrint* KCSheet::print() const
 {
     return d->print;
 }

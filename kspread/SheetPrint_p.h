@@ -26,7 +26,7 @@
 
 class KCHeaderFooter;
 class KCSheet;
-class SheetPrint;
+class KCSheetPrint;
 
 /**
  * Page parameters for both directions, horizontal and vertical
@@ -82,10 +82,10 @@ private:
 };
 
 
-class SheetPrint::Private
+class KCSheetPrint::Private
 {
 public:
-    Private(SheetPrint *parent) : q(parent) {}
+    Private(KCSheetPrint *parent) : q(parent) {}
 
     /**
      * Calculates the zoom factor, so that the printout fits on pages in X direction.
@@ -118,7 +118,7 @@ public:
     void updateRepeatedRowsHeight();
 
 public:
-    SheetPrint *q;
+    KCSheetPrint *q;
     KCSheet * m_pSheet;
 
     KCPrintSettings* m_settings;

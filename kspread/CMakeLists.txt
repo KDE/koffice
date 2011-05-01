@@ -245,8 +245,8 @@ set (kspreadodf_LIB_SRCS
     KCFunctionModuleRegistry.cpp
     KCFunctionRepository.cpp
 
-    # TODO: move KCHeaderFooter from SheetPrint to KCPrintSettings, and replace SheetPrint with KCPrintSettings in KCSheet to get rid of this dependency
-    SheetPrint.cpp
+    # TODO: move KCHeaderFooter from KCSheetPrint to KCPrintSettings, and replace KCSheetPrint with KCPrintSettings in KCSheet to get rid of this dependency
+    KCSheetPrint.cpp
     SheetPrint_p.cpp
 
     )

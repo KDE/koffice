@@ -128,7 +128,7 @@
 #include "RowColumnFormat.h"
 #include "KCShapeApplicationData.h"
 #include "KCSheet.h"
-#include "SheetPrint.h"
+#include "KCSheetPrint.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
 #include "StyleStorage.h"
@@ -1674,7 +1674,7 @@ void View::setHeaderMinima()
 void View::paperLayoutDlg()
 {
     selection()->emitCloseEditor(true); // save changes
-    SheetPrint* print = d->activeSheet->print();
+    KCSheetPrint* print = d->activeSheet->print();
 
     KoPageLayout pl = print->settings()->pageLayout();
 

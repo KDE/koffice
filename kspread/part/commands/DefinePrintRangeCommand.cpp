@@ -25,7 +25,7 @@
 #include "KCMap.h"
 #include "KCPrintSettings.h"
 #include "KCSheet.h"
-#include "SheetPrint.h"
+#include "KCSheetPrint.h"
 
 // ----- DefinePrintRangeCommand -----
 
