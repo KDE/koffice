@@ -22,12 +22,12 @@
 
 #include <qtest_kde.h>
 
-#include "../RowRepeatStorage.h"
+#include "../KCRowRepeatStorage.h"
 #include "../kspread_limits.h"
 
 void TestRowRepeatStorage::testEmptyStorage()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     for (int i = 1; i <= KS_rowMax; i++) {
         QCOMPARE(s.rowRepeat(i), 1);
         QCOMPARE(s.firstIdenticalRow(i), i);
@@ -37,7 +37,7 @@ void TestRowRepeatStorage::testEmptyStorage()
 void TestRowRepeatStorage::testSimpleSetRowRepeat()
 {
     // test simple non-overlapping ranges
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(10, 5);
     for (int i = 1; i <= KS_rowMax; i++) {
         if (i >= 10 && i < 15) {
@@ -97,7 +97,7 @@ void TestRowRepeatStorage::testOverlappingRanges_data()
 
 void TestRowRepeatStorage::testOverlappingRanges()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
 
     QFETCH(int, firststart);
     QFETCH(int, firstcount);
@@ -128,7 +128,7 @@ void TestRowRepeatStorage::testOverlappingRanges()
 
 void TestRowRepeatStorage::testComplexSetRowRepeat()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
 
     s.setRowRepeat(1, 1000);
     s.setRowRepeat(5, 100);
@@ -164,7 +164,7 @@ void TestRowRepeatStorage::testComplexSetRowRepeat()
 
 void TestRowRepeatStorage::testInsertRowsEmpty()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.insertRows(10, 5);
 
     for (int i = 1; i <= KS_rowMax; i++) {
@@ -180,7 +180,7 @@ void TestRowRepeatStorage::testInsertRowsEmpty()
 
 void TestRowRepeatStorage::testInsertRowsBetween()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
 
     s.setRowRepeat(5, 10);
     s.setRowRepeat(40, 10);
@@ -211,7 +211,7 @@ void TestRowRepeatStorage::testInsertRowsBetween()
 
 void TestRowRepeatStorage::testInsertRowsMiddle()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(10, 20);
     s.insertRows(20, 7);
 
@@ -234,7 +234,7 @@ void TestRowRepeatStorage::testInsertRowsMiddle()
 
 void TestRowRepeatStorage::testRemoveRowsEmpty()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.removeRows(10, 20);
 
     for (int i = 1; i <= KS_rowMax; i++) {
@@ -245,7 +245,7 @@ void TestRowRepeatStorage::testRemoveRowsEmpty()
 
 void TestRowRepeatStorage::testRemoveRowsBetween()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(5, 10);
     s.setRowRepeat(50, 20);
     s.removeRows(25, 5);
@@ -269,7 +269,7 @@ void TestRowRepeatStorage::testRemoveRowsBetween()
 
 void TestRowRepeatStorage::testRemoveRowsOverlap()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(5, 15);
     s.setRowRepeat(30, 10);
     s.setRowRepeat(12, 4);
@@ -292,7 +292,7 @@ void TestRowRepeatStorage::testRemoveRowsOverlap()
 void TestRowRepeatStorage::testInsertShiftDown1()
 {
     // entire rect inside one row-repeat, with a smaller and a larger row repeat after it
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(10, 20);
     s.setRowRepeat(100, 5);
     s.setRowRepeat(200, 50);
@@ -327,7 +327,7 @@ void TestRowRepeatStorage::testInsertShiftDown1()
 void TestRowRepeatStorage::testInsertShiftDown2()
 {
     // rect overlapping the end of a row-repeat, with a smaller and a larger row repeat after it
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(10, 20);
     s.setRowRepeat(100, 5);
     s.setRowRepeat(200, 50);
@@ -359,7 +359,7 @@ void TestRowRepeatStorage::testInsertShiftDown2()
 void TestRowRepeatStorage::testInsertShiftDown3()
 {
     // rect overlapping the start of a row-repeat, with a smaller and a larger row repeat after it
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(10, 20);
     s.setRowRepeat(100, 5);
     s.setRowRepeat(200, 50);
@@ -394,7 +394,7 @@ void TestRowRepeatStorage::testInsertShiftDown3()
 void TestRowRepeatStorage::testInsertShiftDown4()
 {
     // rect overlapping the start and end of a row-repeat, with a smaller and a larger row repeat after it
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(10, 20);
     s.setRowRepeat(35, 30);
     s.setRowRepeat(100, 5);
@@ -442,7 +442,7 @@ void TestRowRepeatStorage::testInsertShiftDown4()
 void TestRowRepeatStorage::testRemoveShiftUp1()
 {
     // entire rect inside one row-repeat, with a smaller and a larger row repeat after it
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(10, 20);
     s.setRowRepeat(100, 5);
     s.setRowRepeat(200, 50);
@@ -474,7 +474,7 @@ void TestRowRepeatStorage::testRemoveShiftUp1()
 void TestRowRepeatStorage::testRemoveShiftUp2()
 {
     // rect overlapping the end of a row-repeat, with a smaller and a larger row repeat after it
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(10, 20);
     s.setRowRepeat(100, 5);
     s.setRowRepeat(200, 50);
@@ -503,7 +503,7 @@ void TestRowRepeatStorage::testRemoveShiftUp2()
 void TestRowRepeatStorage::testRemoveShiftUp3()
 {
     // rect overlapping the start of a row-repeat, with a smaller and a larger row repeat after it
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(10, 20);
     s.setRowRepeat(100, 5);
     s.setRowRepeat(200, 50);
@@ -532,7 +532,7 @@ void TestRowRepeatStorage::testRemoveShiftUp3()
 void TestRowRepeatStorage::testRemoveShiftUp4()
 {
     // rect overlapping the start and end of a row-repeat, with a smaller and a larger row repeat after it
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(10, 20);
     s.setRowRepeat(35, 30);
     s.setRowRepeat(100, 5);
@@ -570,7 +570,7 @@ void TestRowRepeatStorage::testRemoveShiftUp4()
 
 void TestRowRepeatStorage::testInsertShiftRight()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(5, 10);
     s.setRowRepeat(20, 10);
     s.setRowRepeat(35, 10);
@@ -610,7 +610,7 @@ void TestRowRepeatStorage::testInsertShiftRight()
 
 void TestRowRepeatStorage::testRemoveShiftLeft()
 {
-    RowRepeatStorage s;
+    KCRowRepeatStorage s;
     s.setRowRepeat(5, 10);
     s.setRowRepeat(20, 10);
     s.setRowRepeat(35, 10);

@@ -218,7 +218,7 @@ set (kspreadodf_LIB_SRCS
     KCRectStorage.cpp
     KCRegion.cpp
     RowColumnFormat.cpp
-    RowRepeatStorage.cpp
+    KCRowRepeatStorage.cpp
     ShapeApplicationData.cpp
     KCSheet.cpp
     SheetAccessModel.cpp

@@ -140,7 +140,7 @@ target_link_libraries(TestSheet kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_L
 ########### next target ###############
 
 set(TestRowRepeatStorage_SRCS TestRowRepeatStorage.cpp)
-kde4_add_unit_test(TestRowRepeatStorage TESTNAME kspread-RowRepeatStorage ${TestRowRepeatStorage_SRCS})
+kde4_add_unit_test(TestRowRepeatStorage TESTNAME kspread-KCRowRepeatStorage ${TestRowRepeatStorage_SRCS})
 target_link_libraries(TestRowRepeatStorage kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY})
 
 ########### Benchmarks ###############

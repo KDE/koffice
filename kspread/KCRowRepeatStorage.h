@@ -31,10 +31,10 @@
   * Current implementation doesn't have very optimal insertRows/removeRows functions, but the rest of
   * the methods are quite okay.
   */
-class KSPREAD_TEST_EXPORT RowRepeatStorage
+class KSPREAD_TEST_EXPORT KCRowRepeatStorage
 {
 public:
-    RowRepeatStorage();
+    KCRowRepeatStorage();
     void setRowRepeat(int firstRow, int rowRepeat);
     int rowRepeat(int row) const;
     int firstIdenticalRow(int row) const;

@@ -38,7 +38,7 @@
 #include "ModelSupport.h"
 #include "KCRecalcManager.h"
 #include "KCRectStorage.h"
-#include "RowRepeatStorage.h"
+#include "KCRowRepeatStorage.h"
 #include "KCSheet.h"
 #include "StyleStorage.h"
 #include "ValidityStorage.h"
@@ -76,7 +76,7 @@ public:
             , validityStorage(new ValidityStorage(sheet->map()))
             , valueStorage(new ValueStorage())
             , richTextStorage(new RichTextStorage())
-            , rowRepeatStorage(new RowRepeatStorage())
+            , rowRepeatStorage(new KCRowRepeatStorage())
             , undoData(0) {}
 
     Private(const Private& other, KCSheet* sheet)
@@ -95,7 +95,7 @@ public:
             , validityStorage(new ValidityStorage(*other.validityStorage))
             , valueStorage(new ValueStorage(*other.valueStorage))
             , richTextStorage(new RichTextStorage(*other.richTextStorage))
-            , rowRepeatStorage(new RowRepeatStorage(*other.rowRepeatStorage))
+            , rowRepeatStorage(new KCRowRepeatStorage(*other.rowRepeatStorage))
             , undoData(0) {}
 
     ~Private() {
@@ -133,7 +133,7 @@ public:
     ValidityStorage*        validityStorage;
     ValueStorage*           valueStorage;
     RichTextStorage*        richTextStorage;
-    RowRepeatStorage*       rowRepeatStorage;
+    KCRowRepeatStorage*       rowRepeatStorage;
     KCCellStorageUndoData*    undoData;
 };
 

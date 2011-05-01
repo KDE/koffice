@@ -16,7 +16,7 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#include "RowRepeatStorage.h"
+#include "KCRowRepeatStorage.h"
 
 #include <QList>
 #include <QPair>
@@ -24,18 +24,18 @@
 
 #include "kspread_limits.h"
 
-RowRepeatStorage::RowRepeatStorage()
+KCRowRepeatStorage::KCRowRepeatStorage()
 {
 }
 
-void RowRepeatStorage::dump() const
+void KCRowRepeatStorage::dump() const
 {
     for (QMap<int, int>::const_iterator it = m_data.begin(); it != m_data.end(); ++it) {
         qDebug() << "[" << (it.key() - it.value() + 1) << it.key() << "] =" << it.value();
     }
 }
 
-void RowRepeatStorage::setRowRepeat(int firstRow, int rowRepeat)
+void KCRowRepeatStorage::setRowRepeat(int firstRow, int rowRepeat)
 {
    const int lastRow = firstRow + rowRepeat - 1;
    // see if m_data contains a range that includes firstRow
@@ -79,7 +79,7 @@ void RowRepeatStorage::setRowRepeat(int firstRow, int rowRepeat)
    }
 }
 
-int RowRepeatStorage::rowRepeat(int row) const
+int KCRowRepeatStorage::rowRepeat(int row) const
 {
     // first range that ends at or after row
     QMap<int, int>::const_iterator it = m_data.lowerBound(row);
@@ -92,7 +92,7 @@ int RowRepeatStorage::rowRepeat(int row) const
     return 1;
 }
 
-int RowRepeatStorage::firstIdenticalRow(int row) const
+int KCRowRepeatStorage::firstIdenticalRow(int row) const
 {
     // first range that ends at or after row
     QMap<int, int>::const_iterator it = m_data.lowerBound(row);
@@ -105,7 +105,7 @@ int RowRepeatStorage::firstIdenticalRow(int row) const
     return row;
 }
 
-void RowRepeatStorage::insertRows(int row, int count)
+void KCRowRepeatStorage::insertRows(int row, int count)
 {
     typedef QPair<int, int> intPair;
     QList<intPair> newRanges;
@@ -129,7 +129,7 @@ void RowRepeatStorage::insertRows(int row, int count)
     }
 }
 
-void RowRepeatStorage::removeRows(int row, int count)
+void KCRowRepeatStorage::removeRows(int row, int count)
 {
     typedef QPair<int, int> intPair;
     QList<intPair> newRanges;
@@ -153,9 +153,9 @@ void RowRepeatStorage::removeRows(int row, int count)
     }
 }
 
-void RowRepeatStorage::insertShiftDown(const QRect &rect)
+void KCRowRepeatStorage::insertShiftDown(const QRect &rect)
 {
-    RowRepeatStorage s2 = *this;
+    KCRowRepeatStorage s2 = *this;
     s2.insertRows(rect.top(), rect.height());
 
     typedef QPair<int, int> intPair;
@@ -179,9 +179,9 @@ void RowRepeatStorage::insertShiftDown(const QRect &rect)
     }
 }
 
-void RowRepeatStorage::removeShiftUp(const QRect &rect)
+void KCRowRepeatStorage::removeShiftUp(const QRect &rect)
 {
-    RowRepeatStorage s2 = *this;
+    KCRowRepeatStorage s2 = *this;
     s2.removeRows(rect.top(), rect.height());
 
     typedef QPair<int, int> intPair;
@@ -205,19 +205,19 @@ void RowRepeatStorage::removeShiftUp(const QRect &rect)
     }
 }
 
-void RowRepeatStorage::insertShiftRight(const QRect &rect)
+void KCRowRepeatStorage::insertShiftRight(const QRect &rect)
 {
     splitRowRepeat(rect.top());
     splitRowRepeat(rect.bottom()+1);
 }
 
-void RowRepeatStorage::removeShiftLeft(const QRect &rect)
+void KCRowRepeatStorage::removeShiftLeft(const QRect &rect)
 {
     // identical to insert
     insertShiftRight(rect);
 }
 
-void RowRepeatStorage::splitRowRepeat(int row)
+void KCRowRepeatStorage::splitRowRepeat(int row)
 {
     // first range that ends at or after row
     QMap<int, int>::iterator it = m_data.lowerBound(row);
