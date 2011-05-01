@@ -153,7 +153,7 @@ public:
 
     // clusters to hold objects
     KCCellStorage* cellStorage;
-    RowCluster rows;
+    KCRowCluster rows;
     KCColumnCluster columns;
     QList<KoShape*> shapes;
 

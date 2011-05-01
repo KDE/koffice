@@ -1066,11 +1066,11 @@ void KCColumnCluster::operator=(const KCColumnCluster & other)
 
 /****************************************************
  *
- * RowCluster
+ * KCRowCluster
  *
  ****************************************************/
 
-RowCluster::RowCluster()
+KCRowCluster::KCRowCluster()
         : m_first(0), m_autoDelete(false)
 {
     m_cluster = (KCRowFormat***)malloc(KSPREAD_CLUSTER_LEVEL1 * sizeof(KCRowFormat**));
@@ -1079,7 +1079,7 @@ RowCluster::RowCluster()
         m_cluster[ x ] = 0;
 }
 
-RowCluster::~RowCluster()
+KCRowCluster::~KCRowCluster()
 {
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x) {
         KCRowFormat** cl = m_cluster[ x ];
@@ -1101,10 +1101,10 @@ RowCluster::~RowCluster()
     free(m_cluster);
 }
 
-const KCRowFormat* RowCluster::lookup(int row) const
+const KCRowFormat* KCRowCluster::lookup(int row) const
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
-        kDebug(36001) << "RowCluster::lookup: invalid row value (row:"
+        kDebug(36001) << "KCRowCluster::lookup: invalid row value (row:"
         << row << ")" << endl;
         return 0;
     }
@@ -1119,10 +1119,10 @@ const KCRowFormat* RowCluster::lookup(int row) const
     return cl[ dx ];
 }
 
-KCRowFormat* RowCluster::lookup(int row)
+KCRowFormat* KCRowCluster::lookup(int row)
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
-        kDebug(36001) << "RowCluster::lookup: invalid row value (row:"
+        kDebug(36001) << "KCRowCluster::lookup: invalid row value (row:"
         << row << ")" << endl;
         return 0;
     }
@@ -1137,7 +1137,7 @@ KCRowFormat* RowCluster::lookup(int row)
     return cl[ dx ];
 }
 
-void RowCluster::clear()
+void KCRowCluster::clear()
 {
     for (int x = 0; x < KSPREAD_CLUSTER_LEVEL1; ++x) {
         KCRowFormat** cl = m_cluster[ x ];
@@ -1159,10 +1159,10 @@ void RowCluster::clear()
     m_first = 0;
 }
 
-void RowCluster::insertElement(KCRowFormat* lay, int row)
+void KCRowCluster::insertElement(KCRowFormat* lay, int row)
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
-        kDebug(36001) << "RowCluster::insertElement: invalid row value (row:"
+        kDebug(36001) << "KCRowCluster::insertElement: invalid row value (row:"
         << row << ")" << endl;
         return;
     }
@@ -1191,10 +1191,10 @@ void RowCluster::insertElement(KCRowFormat* lay, int row)
     m_first = lay;
 }
 
-void RowCluster::removeElement(int row)
+void KCRowCluster::removeElement(int row)
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
-        kDebug(36001) << "RowCluster::removeElement: invalid row value (row:"
+        kDebug(36001) << "KCRowCluster::removeElement: invalid row value (row:"
         << row << ")" << endl;
         return;
     }
@@ -1228,10 +1228,10 @@ void RowCluster::removeElement(int row)
     }
 }
 
-bool RowCluster::insertRow(int row)
+bool KCRowCluster::insertRow(int row)
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
-        kDebug(36001) << "RowCluster::insertRow: invalid row value (row:"
+        kDebug(36001) << "KCRowCluster::insertRow: invalid row value (row:"
         << row << ")" << endl;
         return false;
     }
@@ -1273,10 +1273,10 @@ bool RowCluster::insertRow(int row)
     return true;
 }
 
-bool RowCluster::removeRow(int row)
+bool KCRowCluster::removeRow(int row)
 {
     if (row >= KSPREAD_CLUSTER_MAX || row < 0) {
-        kDebug(36001) << "RowCluster::removeRow: invalid row value (row:"
+        kDebug(36001) << "KCRowCluster::removeRow: invalid row value (row:"
         << row << ")" << endl;
         return false;
     }
@@ -1312,17 +1312,17 @@ bool RowCluster::removeRow(int row)
     return true;
 }
 
-void RowCluster::setAutoDelete(bool a)
+void KCRowCluster::setAutoDelete(bool a)
 {
     m_autoDelete = a;
 }
 
-bool RowCluster::autoDelete() const
+bool KCRowCluster::autoDelete() const
 {
     return m_autoDelete;
 }
 
-void RowCluster::operator=(const RowCluster & other)
+void KCRowCluster::operator=(const KCRowCluster & other)
 {
     m_first = 0;
     m_autoDelete = other.m_autoDelete;

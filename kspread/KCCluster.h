@@ -305,11 +305,11 @@ private:
  * A pointer map to all row formats.
  * \see KCCluster
  */
-class RowCluster
+class KCRowCluster
 {
 public:
-    RowCluster();
-    ~RowCluster();
+    KCRowCluster();
+    ~KCRowCluster();
 
     const KCRowFormat* lookup(int col) const;
     KCRowFormat* lookup(int col);
@@ -329,10 +329,10 @@ public:
         return m_first;
     }
 
-    void operator=(const RowCluster& other);
+    void operator=(const KCRowCluster& other);
 
 private:
-    RowCluster(const RowCluster& other);
+    KCRowCluster(const KCRowCluster& other);
 
 private:
     KCRowFormat*** m_cluster;
