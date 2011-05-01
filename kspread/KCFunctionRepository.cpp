@@ -19,7 +19,7 @@
 */
 
 // Local
-#include "FunctionRepository.h"
+#include "KCFunctionRepository.h"
 
 #include "KCFunction.h"
 #include "KCFunctionDescription.h"
@@ -34,7 +34,7 @@
 #include <KGlobal>
 #include <klocale.h>
 
-class FunctionRepository::Private
+class KCFunctionRepository::Private
 {
 public:
     QHash<QString, QSharedPointer<KCFunction> > functions;
@@ -44,9 +44,9 @@ public:
     bool initialized;
 };
 
-FunctionRepository* FunctionRepository::self()
+KCFunctionRepository* KCFunctionRepository::self()
 {
-    K_GLOBAL_STATIC(FunctionRepository, s_instance)
+    K_GLOBAL_STATIC(KCFunctionRepository, s_instance)
     if (!s_instance.exists()) {
         *s_instance; // creates the global instance
 
@@ -76,19 +76,19 @@ FunctionRepository* FunctionRepository::self()
     return s_instance;
 }
 
-FunctionRepository::FunctionRepository()
+KCFunctionRepository::KCFunctionRepository()
         : d(new Private)
 {
     d->initialized = false;
 }
 
-FunctionRepository::~FunctionRepository()
+KCFunctionRepository::~KCFunctionRepository()
 {
     qDeleteAll(d->descriptions);
     delete d;
 }
 
-void FunctionRepository::add(const QSharedPointer<KCFunction>& function)
+void KCFunctionRepository::add(const QSharedPointer<KCFunction>& function)
 {
     if (!function) return;
     d->functions.insert(function->name().toUpper(), function);
@@ -98,14 +98,14 @@ void FunctionRepository::add(const QSharedPointer<KCFunction>& function)
     }
 }
 
-void FunctionRepository::add(KCFunctionDescription *desc)
+void KCFunctionRepository::add(KCFunctionDescription *desc)
 {
     if (!desc) return;
     if (!d->functions.contains(desc->name())) return;
     d->descriptions.insert(desc->name(), desc);
 }
 
-void FunctionRepository::remove(const QSharedPointer<KCFunction>& function)
+void KCFunctionRepository::remove(const QSharedPointer<KCFunction>& function)
 {
     const QString functionName = function->name().toUpper();
     delete d->descriptions.take(functionName);
@@ -115,20 +115,20 @@ void FunctionRepository::remove(const QSharedPointer<KCFunction>& function)
     }
 }
 
-QSharedPointer<KCFunction> FunctionRepository::function(const QString& name)
+QSharedPointer<KCFunction> KCFunctionRepository::function(const QString& name)
 {
     const QString n = name.toUpper();
     QSharedPointer<KCFunction> f = d->functions.value(n);
     return !f.isNull() ? f : d->alternates.value(n);
 }
 
-KCFunctionDescription *FunctionRepository::functionInfo(const QString& name)
+KCFunctionDescription *KCFunctionRepository::functionInfo(const QString& name)
 {
     return d->descriptions.value(name.toUpper());
 }
 
 // returns names of function in certain group
-QStringList FunctionRepository::functionNames(const QString& group)
+QStringList KCFunctionRepository::functionNames(const QString& group)
 {
     QStringList lst;
 
@@ -141,18 +141,18 @@ QStringList FunctionRepository::functionNames(const QString& group)
     return lst;
 }
 
-const QStringList& FunctionRepository::groups() const
+const QStringList& KCFunctionRepository::groups() const
 {
     return d->groups;
 }
 
-void FunctionRepository::addGroup(const QString& groupname)
+void KCFunctionRepository::addGroup(const QString& groupname)
 {
     d->groups.append(groupname);
     d->groups.sort();
 }
 
-void FunctionRepository::loadFunctionDescriptions(const QString& filename)
+void KCFunctionRepository::loadFunctionDescriptions(const QString& filename)
 {
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly))

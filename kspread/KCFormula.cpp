@@ -25,7 +25,7 @@
 #include "KCCell.h"
 #include "KCCellStorage.h"
 #include "KCFunction.h"
-#include "FunctionRepository.h"
+#include "KCFunctionRepository.h"
 #include "KCSheet.h"
 #include "KCMap.h"
 #include "NamedAreaManager.h"
@@ -1709,7 +1709,7 @@ KCValue KCFormula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell,
             val1 = converter->asString(stack.pop().val);
             if (val1.isError())
                 return val1;
-            function = FunctionRepository::self()->function(val1.asString());
+            function = KCFunctionRepository::self()->function(val1.asString());
             if (!function)
                 return KCValue::errorNAME(); // no such function
 

@@ -38,7 +38,7 @@
 #include "KCCell.h"
 #include "KCFunction.h"
 #include "KCFunctionDescription.h"
-#include "FunctionRepository.h"
+#include "KCFunctionRepository.h"
 #include "Util.h"
 #include "ui/CellEditor.h"
 #include "Localization.h"
@@ -96,7 +96,7 @@ FormulaDialog::FormulaDialog(QWidget* parent, Selection* selection, CellEditorBa
     grid1->addWidget(searchFunct, 0, 0);
 
     typeFunction = new KComboBox(page);
-    QStringList cats = FunctionRepository::self()->groups();
+    QStringList cats = KCFunctionRepository::self()->groups();
     cats.prepend(i18n("All"));
     typeFunction->setMaxVisibleItems(15);
     typeFunction->insertItems(0, cats);
@@ -672,7 +672,7 @@ void FormulaDialog::slotSelected(const QString& afunction)
     if (function.isNull())
         function = proxyModel->data(functions->currentIndex()).toString();
 
-    KCFunctionDescription* desc = FunctionRepository::self()->functionInfo(function);
+    KCFunctionDescription* desc = KCFunctionRepository::self()->functionInfo(function);
     if (!desc) {
         m_browser->setText(i18n("Description is not available."));
         return;
@@ -704,7 +704,7 @@ void FormulaDialog::slotSelected(const QString& afunction)
 void FormulaDialog::slotShowFunction(const QString& function)
 {
     KCFunctionDescription* desc =
-        FunctionRepository::self()->functionInfo(function);
+        KCFunctionRepository::self()->functionInfo(function);
     if (!desc) return;
 
     // select the category
@@ -739,9 +739,9 @@ void FormulaDialog::slotActivated(const QString& category)
 {
     QStringList lst;
     if (category == i18n("All"))
-        lst = FunctionRepository::self()->functionNames();
+        lst = KCFunctionRepository::self()->functionNames();
     else
-        lst = FunctionRepository::self()->functionNames(category);
+        lst = KCFunctionRepository::self()->functionNames(category);
 
     kDebug(36001) << "category:" << category << " (" << lst.count() << "functions)";
 

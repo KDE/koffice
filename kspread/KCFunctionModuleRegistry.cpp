@@ -20,7 +20,7 @@
 #include "KCFunctionModuleRegistry.h"
 
 #include "KCFunction.h"
-#include "FunctionRepository.h"
+#include "KCFunctionRepository.h"
 
 #include <KDebug>
 #include <KGlobal>
@@ -42,7 +42,7 @@ void KCFunctionModuleRegistry::Private::registerFunctionModule(KCFunctionModule*
 {
     const QList<QSharedPointer<KCFunction> > functions = module->functions();
     for (int i = 0; i < functions.count(); ++i) {
-        FunctionRepository::self()->add(functions[i]);
+        KCFunctionRepository::self()->add(functions[i]);
     }
     Q_ASSERT(!module->descriptionFileName().isEmpty());
     const KStandardDirs* dirs = KGlobal::activeComponent().dirs();
@@ -51,14 +51,14 @@ void KCFunctionModuleRegistry::Private::registerFunctionModule(KCFunctionModule*
         kDebug(36002) << module->descriptionFileName() << "not found.";
         return;
     }
-    FunctionRepository::self()->loadFunctionDescriptions(fileName);
+    KCFunctionRepository::self()->loadFunctionDescriptions(fileName);
 }
 
 void KCFunctionModuleRegistry::Private::removeFunctionModule(KCFunctionModule* module)
 {
     const QList<QSharedPointer<KCFunction> > functions = module->functions();
     for (int i = 0; i < functions.count(); ++i) {
-        FunctionRepository::self()->remove(functions[i]);
+        KCFunctionRepository::self()->remove(functions[i]);
     }
 }
 

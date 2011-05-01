@@ -25,7 +25,7 @@
 #include "KCFormula.h"
 #include "FormulaEditorHighlighter.h"
 #include "KCFunction.h"
-#include "FunctionRepository.h"
+#include "KCFunctionRepository.h"
 #include "FunctionCompletion.h"
 #include "KCMap.h"
 #include "Selection.h"
@@ -322,7 +322,7 @@ void CellEditor::triggerFunctionAutoComplete()
     if (id.length() < 1) return;
 
     // find matches in function names
-    QStringList fnames = FunctionRepository::self()->functionNames();
+    QStringList fnames = KCFunctionRepository::self()->functionNames();
     QStringList choices;
     for (int i = 0; i < fnames.count(); i++)
         if (fnames[i].startsWith(id, Qt::CaseInsensitive))

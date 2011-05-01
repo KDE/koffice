@@ -34,13 +34,13 @@ class KCFunctionDescription;
  * \ingroup KCValue
  * The function repository.
  */
-class KSPREAD_EXPORT FunctionRepository
+class KSPREAD_EXPORT KCFunctionRepository
 {
 public:
-    FunctionRepository();
-    ~FunctionRepository();
+    KCFunctionRepository();
+    ~KCFunctionRepository();
 
-    static FunctionRepository *self();
+    static KCFunctionRepository *self();
 
     /**
      * Adds \p function to the repository.
@@ -75,8 +75,8 @@ private:
     Private * const d;
 
     // no copy or assign
-    FunctionRepository(const FunctionRepository&);
-    FunctionRepository& operator=(const FunctionRepository&);
+    KCFunctionRepository(const KCFunctionRepository&);
+    KCFunctionRepository& operator=(const KCFunctionRepository&);
 };
 
 #endif // KSPREAD_FUNCTION_REPOSITORY

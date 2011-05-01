@@ -33,7 +33,7 @@
 
 #include "KCFunctionModuleRegistry.h"
 #include "KCFunction.h"
-#include "FunctionRepository.h"
+#include "KCFunctionRepository.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"
 
@@ -1266,14 +1266,14 @@ KCValue func_subtotal(valVector args, ValueCalc *calc, FuncExtra *e)
         res = calc->sum(range, false);
         break;
     case 10: // Var
-        f = FunctionRepository::self()->function("VAR");
+        f = KCFunctionRepository::self()->function("VAR");
         if (!f) return KCValue::errorVALUE();
         a.resize(1);
         a[0] = range;
         res = f->exec(a, calc, 0);
         break;
     case 11: // VarP
-        f = FunctionRepository::self()->function("VARP");
+        f = KCFunctionRepository::self()->function("VARP");
         if (!f) return KCValue::errorVALUE();
         a.resize(1);
         a[0] = range;

@@ -243,7 +243,7 @@ set (kspreadodf_LIB_SRCS
     KCFunctionDescription.cpp
     KCFunctionModule.cpp
     KCFunctionModuleRegistry.cpp
-    FunctionRepository.cpp
+    KCFunctionRepository.cpp
 
     # TODO: move HeaderFooter from SheetPrint to PrintSettings, and replace SheetPrint with PrintSettings in KCSheet to get rid of this dependency
     SheetPrint.cpp

@@ -23,7 +23,7 @@
 #include "CellEditor.h"
 #include "KCFunction.h"
 #include "KCFunctionDescription.h"
-#include "FunctionRepository.h"
+#include "KCFunctionRepository.h"
 
 // KOffice
 
@@ -108,7 +108,7 @@ void FunctionCompletion::itemSelected(QListWidgetItem* listItem)
     }
 
     KCFunctionDescription* desc;
-    desc = FunctionRepository::self()->functionInfo(item);
+    desc = KCFunctionRepository::self()->functionInfo(item);
     if (!desc) {
         d->hintLabel->hide();
         return;

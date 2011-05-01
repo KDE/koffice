@@ -31,7 +31,7 @@
 #include <KCNumber.h>
 #include <KCFunction.h>
 #include <KCFunctionDescription.h>
-#include <FunctionRepository.h>
+#include <KCFunctionRepository.h>
 
 //#define KROSS_MAIN_EXPORT KDE_EXPORT
 #include <kross/core/manager.h>
@@ -62,7 +62,7 @@ public:
 
         kDebug() << QString("ScriptingFunctionImpl::callback name=%1 argcount=%2").arg(funcimpl->m_function->name()).arg(args.count());
 
-        KCFunctionDescription *description = FunctionRepository::self()->functionInfo(funcimpl->name());
+        KCFunctionDescription *description = KCFunctionRepository::self()->functionInfo(funcimpl->name());
         kDebug(36005) << "name=" << description->name() << " type=" << description->type();
 
         QVariantList list;
@@ -153,7 +153,7 @@ public:
         setNeedsExtra(true);
 
         // if there exists no "Scripts" group yet, add it
-        FunctionRepository* repo = FunctionRepository::self();
+        KCFunctionRepository* repo = KCFunctionRepository::self();
         if (! repo->groups().contains(i18n("Scripts")))
             repo->addGroup(i18n("Scripts"));
 
@@ -323,7 +323,7 @@ bool ScriptingFunction::registerFunction()
     d->funcElement.appendChild(d->helpElement);
 
     // Create a new ScriptingFunctionImpl instance which will publish itself to the
-    // FunctionRepository. The FunctionRepository takes ownership of the instance
+    // KCFunctionRepository. The KCFunctionRepository takes ownership of the instance
     // which may live longer then this ScriptingFunction instance.
     ScriptingFunctionImpl* funcimpl = new ScriptingFunctionImpl(this, d->funcElement);
     funcimpl->setParamCount(d->minparam, d->maxparam);
