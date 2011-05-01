@@ -68,7 +68,7 @@
 // KSpread
 #include "KCCanvas.h"
 #include "KCCell.h"
-#include "Doc.h"
+#include "KCDoc.h"
 #include "kspread_limits.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"

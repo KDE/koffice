@@ -7,7 +7,7 @@
  * \section majorclasses Major classes
  * \li KSpread::KCCanvas The scrollable area showing the cells.
  * \li KSpread::KCCell Represents a cell in the spreadsheet.
- * \li KSpread::Doc The KPart used in KSpread itself and when embedded in non-KOffice applications.
+ * \li KSpread::KCDoc The KPart used in KSpread itself and when embedded in non-KOffice applications.
  * \li KSpread::KCMap The actual spreadsheet document consisting of at least one sheet.
  * \li KSpread::KCSheet A sheet consists of several cells.
  * \li KSpread::View This class displays the KPart document.

@@ -32,7 +32,7 @@ class QDomElement;
 class KLocale;
 class KoStore;
 
-class Doc;
+class KCDoc;
 class KCSheet;
 
 class OpenCalcExport : public KoFilter
@@ -50,28 +50,28 @@ private:
     enum files { metaXML = 0x01, contentXML = 0x02, stylesXML = 0x04, settingsXML = 0x08 };
     OpenCalcStyles m_styles;
 
-    bool writeFile(const Doc * ksdoc);
+    bool writeFile(const KCDoc * ksdoc);
 
-    bool exportDocInfo(KoStore * store, const Doc * ksdoc);
-    bool exportStyles(KoStore * store, const Doc * ksdoc);
-    bool exportContent(KoStore * store, const Doc * ksdoc);
-    bool exportSettings(KoStore * store, const Doc * ksdoc);
+    bool exportDocInfo(KoStore * store, const KCDoc * ksdoc);
+    bool exportStyles(KoStore * store, const KCDoc * ksdoc);
+    bool exportContent(KoStore * store, const KCDoc * ksdoc);
+    bool exportSettings(KoStore * store, const KCDoc * ksdoc);
 
-    bool exportBody(QDomDocument & doc, QDomElement & content, const Doc * ksdoc);
+    bool exportBody(QDomDocument & doc, QDomElement & content, const KCDoc * ksdoc);
     void exportSheet(QDomDocument & doc, QDomElement & tabElem,
                      const KCSheet *sheet, int maxCols, int maxRows);
     void exportCells(QDomDocument & doc, QDomElement & rowElem,
                      const KCSheet *sheet, int row, int maxCols);
     void exportDefaultCellStyle(QDomDocument & doc, QDomElement & officeStyles);
     void exportPageAutoStyles(QDomDocument & doc, QDomElement & autoStyles,
-                              const Doc * ksdoc);
+                              const KCDoc * ksdoc);
     void exportMasterStyles(QDomDocument & doc, QDomElement & masterStyles,
-                            const Doc *ksdoc);
+                            const KCDoc *ksdoc);
 
     bool writeMetaFile(KoStore * store, uint filesWritten);
 
     void convertPart(QString const & part, QDomDocument & doc,
-                     QDomElement & parent, const Doc * ksdoc);
+                     QDomElement & parent, const KCDoc * ksdoc);
     void addText(QString const & text, QDomDocument & doc,
                  QDomElement & parent);
 

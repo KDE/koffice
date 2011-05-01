@@ -112,7 +112,7 @@
 #include "KCCellStorage.h"
 #include "Damages.h"
 #include "KCDependencyManager.h"
-#include "Doc.h"
+#include "KCDoc.h"
 #include "Factory.h"
 #include "KCHeaderFooter.h"
 #include "KCLoadingInfo.h"
@@ -167,7 +167,7 @@ class View::Private
 {
 public:
     View* view;
-    Doc* doc;
+    KCDoc* doc;
 
     // the active sheet, may be 0
     // this is the sheet which has the input focus
@@ -550,7 +550,7 @@ void View::Private::adjustActions(bool mode)
  *
  *****************************************************************************/
 
-View::View(QWidget *_parent, Doc *_doc)
+View::View(QWidget *_parent, KCDoc *_doc)
         : KoView(_doc, _parent)
         , d(new Private)
 {
@@ -651,7 +651,7 @@ View::~View()
     delete d;
 }
 
-Doc* View::doc() const
+KCDoc* View::doc() const
 {
     return d->doc;
 }

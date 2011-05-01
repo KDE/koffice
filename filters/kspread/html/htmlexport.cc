@@ -37,7 +37,7 @@
 #include <kspread/KCCellStorage.h>
 #include <kspread/KCMap.h>
 #include <kspread/KCSheet.h>
-#include <kspread/part/Doc.h>
+#include <kspread/part/KCDoc.h>
 #include <kspread/Util.h>
 
 K_PLUGIN_FACTORY(HTMLExportFactory, registerPlugin<HTMLExport>();)
@@ -90,12 +90,12 @@ KoFilter::ConversionStatus HTMLExport::convert(const QByteArray& from, const QBy
     if (!document)
         return KoFilter::StupidError;
 
-    if (!::qobject_cast<const Doc *>(document)) {   // it's safer that way :)
-        kWarning(30501) << "document isn't a Doc but a " << document->metaObject()->className();
+    if (!::qobject_cast<const KCDoc *>(document)) {   // it's safer that way :)
+        kWarning(30501) << "document isn't a KCDoc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
 
-    const Doc * ksdoc = static_cast<const Doc *>(document);
+    const KCDoc * ksdoc = static_cast<const KCDoc *>(document);
 
     if (ksdoc->mimeType() != "application/x-kspread") {
         kWarning(30501) << "Invalid document mimetype " << ksdoc->mimeType();

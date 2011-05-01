@@ -31,7 +31,7 @@
 #include <QLayout>
 #include <kdebug.h>
 
-#include <part/Doc.h>
+#include <part/KCDoc.h>
 #include <part/View.h>
 #include <interfaces/ViewAdaptor.h>
 #include <KCSheet.h>
@@ -51,7 +51,7 @@ extern "C" {
 class ScriptingModule::Private
 {
 public:
-    QPointer<Doc> doc;
+    QPointer<KCDoc> doc;
     QHash<QString, ScriptingFunction* > functions;
     QStringList functionnames;
 };
@@ -74,13 +74,13 @@ View* ScriptingModule::kspreadView()
     return dynamic_cast<View* >(KoScriptingModule::view());
 }
 
-Doc* ScriptingModule::kspreadDoc()
+KCDoc* ScriptingModule::kspreadDoc()
 {
     if (! d->doc) {
         if (View* v = kspreadView())
             d->doc = v->doc();
         if (! d->doc)
-            d->doc = new Doc(0, this);
+            d->doc = new KCDoc(0, this);
     }
     return d->doc;
 }

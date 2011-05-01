@@ -33,7 +33,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 // KSpread
-#include <part/Doc.h>
+#include <part/KCDoc.h>
 #include <part/View.h>
 // Kross
 #include <kross/core/manager.h>

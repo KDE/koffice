@@ -29,7 +29,7 @@
 */
 
 // Local
-#include "Doc.h"
+#include "KCDoc.h"
 #include "../DocBase_p.h"
 
 #include <unistd.h>
@@ -113,11 +113,11 @@
 #include "ui/SheetView.h"
 
 
-class Doc::Private
+class KCDoc::Private
 {
 public:
     KCMap *map;
-    static QList<Doc*> s_docs;
+    static QList<KCDoc*> s_docs;
     static int s_docId;
 
     // document properties
@@ -133,14 +133,14 @@ static const char * CURRENT_DTD_VERSION = "1.2";
 
 /*****************************************************************************
  *
- * Doc
+ * KCDoc
  *
  *****************************************************************************/
 
-QList<Doc*> Doc::Private::s_docs;
-int Doc::Private::s_docId = 0;
+QList<KCDoc*> KCDoc::Private::s_docs;
+int KCDoc::Private::s_docId = 0;
 
-Doc::Doc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
+KCDoc::KCDoc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
         : KCDocBase(parentWidget, parent, singleViewMode)
         , dd(new Private)
 {
@@ -166,7 +166,7 @@ Doc::Doc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
     KCFunctionModuleRegistry::instance()->loadFunctionModules();
 }
 
-Doc::~Doc()
+KCDoc::~KCDoc()
 {
     //don't save config when kword is embedded into konqueror
     if (isReadWrite())
@@ -175,7 +175,7 @@ Doc::~Doc()
     delete dd;
 }
 
-void Doc::openTemplate(const KUrl& url)
+void KCDoc::openTemplate(const KUrl& url)
 {
     map()->loadingInfo()->setLoadTemplate(true);
     KoDocument::openTemplate(url);
@@ -183,7 +183,7 @@ void Doc::openTemplate(const KUrl& url)
     initConfig();
 }
 
-void Doc::initEmpty()
+void KCDoc::initEmpty()
 {
     KSharedConfigPtr config = Factory::global().config();
     const int page = config->group("Parameters").readEntry("NbPage", 1);
@@ -198,14 +198,14 @@ void Doc::initEmpty()
     KoDocument::initEmpty();
 }
 
-void Doc::saveConfig()
+void KCDoc::saveConfig()
 {
     if (isEmbedded() || !isReadWrite())
         return;
     KSharedConfigPtr config = Factory::global().config();
 }
 
-void Doc::initConfig()
+void KCDoc::initConfig()
 {
     KSharedConfigPtr config = Factory::global().config();
 
@@ -213,29 +213,29 @@ void Doc::initConfig()
     setUnit(KoUnit((KoUnit::Unit) page));
 }
 
-KoView* Doc::createViewInstance(QWidget* parent)
+KoView* KCDoc::createViewInstance(QWidget* parent)
 {
     return new View(parent, this);
 }
 
-bool Doc::saveChildren(KoStore* _store)
+bool KCDoc::saveChildren(KoStore* _store)
 {
     return map()->saveChildren(_store);
 }
 
-int Doc::supportedSpecialFormats() const
+int KCDoc::supportedSpecialFormats() const
 {
     return KoDocument::supportedSpecialFormats();
 }
 
-bool Doc::completeSaving(KoStore* _store)
+bool KCDoc::completeSaving(KoStore* _store)
 {
     Q_UNUSED(_store);
     return true;
 }
 
 
-QDomDocument Doc::saveXML()
+QDomDocument KCDoc::saveXML()
 {
     /* don't pull focus away from the editor if this is just a background
        autosave */
@@ -287,17 +287,17 @@ QDomDocument Doc::saveXML()
     return doc;
 }
 
-bool Doc::loadChildren(KoStore* _store)
+bool KCDoc::loadChildren(KoStore* _store)
 {
     return map()->loadChildren(_store);
 }
 
 
-bool Doc::loadXML(const KoXmlDocument& doc, KoStore*)
+bool KCDoc::loadXML(const KoXmlDocument& doc, KoStore*)
 {
     QPointer<KoUpdater> updater;
     if (progressUpdater()) {
-        updater = progressUpdater()->startSubtask(1, "KSpread::Doc::loadXML");
+        updater = progressUpdater()->startSubtask(1, "KSpread::KCDoc::loadXML");
         updater->setProgress(0);
     }
 
@@ -418,7 +418,7 @@ bool Doc::loadXML(const KoXmlDocument& doc, KoStore*)
     return true;
 }
 
-void Doc::loadPaper(KoXmlElement const & paper)
+void KCDoc::loadPaper(KoXmlElement const & paper)
 {
     KoPageLayout pageLayout;
     pageLayout.format = KoPageFormat::formatFromString(paper.attribute("format"));
@@ -481,7 +481,7 @@ void Doc::loadPaper(KoXmlElement const & paper)
     }
 }
 
-bool Doc::completeLoading(KoStore* store)
+bool KCDoc::completeLoading(KoStore* store)
 {
     kDebug(36001) << "------------------------ COMPLETING --------------------";
 
@@ -493,7 +493,7 @@ bool Doc::completeLoading(KoStore* store)
 }
 
 
-bool Doc::docData(QString const & xmlTag, QDomElement & data)
+bool KCDoc::docData(QString const & xmlTag, QDomElement & data)
 {
     SavedDocParts::iterator iter = d->savedDocParts.find(xmlTag);
     if (iter == d->savedDocParts.end())
@@ -503,22 +503,22 @@ bool Doc::docData(QString const & xmlTag, QDomElement & data)
     return true;
 }
 
-void Doc::addIgnoreWordAllList(const QStringList & _lst)
+void KCDoc::addIgnoreWordAllList(const QStringList & _lst)
 {
     d->spellListIgnoreAll = _lst;
 }
 
-QStringList Doc::spellListIgnoreAll() const
+QStringList KCDoc::spellListIgnoreAll() const
 {
     return d->spellListIgnoreAll;
 }
 
-void Doc::paintContent(QPainter& painter, const QRect& rect)
+void KCDoc::paintContent(QPainter& painter, const QRect& rect)
 {
     paintContent(painter, rect, 0);
 }
 
-void Doc::paintContent(QPainter& painter, const QRect& rect, KCSheet* _sheet)
+void KCDoc::paintContent(QPainter& painter, const QRect& rect, KCSheet* _sheet)
 {
     if (rect.isEmpty()) {
         return;
@@ -546,46 +546,46 @@ void Doc::paintContent(QPainter& painter, const QRect& rect, KCSheet* _sheet)
     painter.drawPixmap(rect & QRect(0, 0, 100, 100), thumbnail);
 }
 
-void Doc::updateAllViews()
+void KCDoc::updateAllViews()
 {
     emit updateView();
 }
 
-void Doc::updateBorderButton()
+void KCDoc::updateBorderButton()
 {
     foreach(KoView* view, views())
     static_cast<View*>(view)->updateBorderButton();
 }
 
-void Doc::addIgnoreWordAll(const QString & word)
+void KCDoc::addIgnoreWordAll(const QString & word)
 {
     if (d->spellListIgnoreAll.indexOf(word) == -1)
         d->spellListIgnoreAll.append(word);
 }
 
-void Doc::clearIgnoreWordAll()
+void KCDoc::clearIgnoreWordAll()
 {
     d->spellListIgnoreAll.clear();
 }
 
-void Doc::addView(KoView *_view)
+void KCDoc::addView(KoView *_view)
 {
     KoDocument::addView(_view);
     foreach(KoView* view, views())
     static_cast<View*>(view)->selection()->emitCloseEditor(true);
 }
 
-void Doc::loadConfigFromFile()
+void KCDoc::loadConfigFromFile()
 {
     d->configLoadFromFile = true;
 }
 
-bool Doc::configLoadFromFile() const
+bool KCDoc::configLoadFromFile() const
 {
     return d->configLoadFromFile;
 }
 
-void Doc::sheetAdded(KCSheet* sheet)
+void KCDoc::sheetAdded(KCSheet* sheet)
 {
     new SheetAdaptor(sheet);
     QString dbusPath('/' + sheet->map()->objectName() + '/' + objectName());
@@ -596,7 +596,7 @@ void Doc::sheetAdded(KCSheet* sheet)
 
 }
 
-void Doc::saveOdfViewSettings(KoXmlWriter& settingsWriter)
+void KCDoc::saveOdfViewSettings(KoXmlWriter& settingsWriter)
 {
     if (!views().isEmpty()) { // no view if embedded document
         // Save visual info for the first view, such as active sheet and active cell
@@ -611,7 +611,7 @@ void Doc::saveOdfViewSettings(KoXmlWriter& settingsWriter)
     }
 }
 
-void Doc::saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter &settingsWriter)
+void KCDoc::saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter &settingsWriter)
 {
     if (!views().isEmpty()) {
         View *const view = static_cast<View*>(views().first());
@@ -624,7 +624,7 @@ void Doc::saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter &settingsWriter)
     }
 }
 
-bool Doc::saveOdfHelper(SavingContext &documentContext, SaveFlag saveFlag, QString *plainText)
+bool KCDoc::saveOdfHelper(SavingContext &documentContext, SaveFlag saveFlag, QString *plainText)
 {
     /* don't pull focus away from the editor if this is just a background
        autosave */
@@ -636,4 +636,4 @@ bool Doc::saveOdfHelper(SavingContext &documentContext, SaveFlag saveFlag, QStri
     return KCDocBase::saveOdfHelper(documentContext, saveFlag, plainText);
 }
 
-#include "Doc.moc"
+#include "KCDoc.moc"

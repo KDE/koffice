@@ -127,7 +127,7 @@ SET (part_DIR_SRCS
     part/KCCellTool.cpp
     part/KCCellToolFactory.cpp
     #part/Digest.cpp
-    part/Doc.cpp
+    part/KCDoc.cpp
     part/Factory.cpp
     part/Headers.cpp
     part/PrintJob.cpp

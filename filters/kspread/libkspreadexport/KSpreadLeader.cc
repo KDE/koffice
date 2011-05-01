@@ -80,7 +80,7 @@ KoFilter::ConversionStatus Leader::convert()
         kWarning(30508) << "the KSpreadDoc is NULL!";
         return KoFilter::StupidError;
     }
-    if (!::qt_cast<const KSpread::Doc *>(document)) {
+    if (!::qt_cast<const KSpread::KCDoc *>(document)) {
         kWarning(30508) << "the document is not a KSpreadDoc!";
         return KoFilter::StupidError;
     }

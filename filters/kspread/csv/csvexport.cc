@@ -34,7 +34,7 @@
 #include <kspread/KCCellStorage.h>
 #include <kspread/KCMap.h>
 #include <kspread/KCSheet.h>
-#include <kspread/part/Doc.h>
+#include <kspread/part/KCDoc.h>
 #include <kspread/KCValue.h>
 #include <kspread/part/View.h>
 #include <kspread/ui/Selection.h>
@@ -49,7 +49,7 @@ CSVExport::CSVExport(QObject* parent, const QVariantList &)
 {
 }
 
-QString CSVExport::exportCSVCell(const Doc* doc, KCSheet const * const sheet,
+QString CSVExport::exportCSVCell(const KCDoc* doc, KCSheet const * const sheet,
                                  int col, int row, QChar const & textQuote, QChar csvDelimiter)
 {
     // This function, given a cell, returns a string corresponding to its export in CSV format
@@ -108,8 +108,8 @@ KoFilter::ConversionStatus CSVExport::convert(const QByteArray & from, const QBy
     if (!document)
         return KoFilter::StupidError;
 
-    if (!qobject_cast<const Doc *>(document)) {
-        kWarning(30501) << "document isn't a Doc but a " << document->metaObject()->className();
+    if (!qobject_cast<const KCDoc *>(document)) {
+        kWarning(30501) << "document isn't a KCDoc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
     if ((to != "text/csv" && to != "text/plain") || from != "application/x-kspread") {
@@ -117,7 +117,7 @@ KoFilter::ConversionStatus CSVExport::convert(const QByteArray & from, const QBy
         return KoFilter::NotImplemented;
     }
 
-    Doc const * const ksdoc = static_cast<const Doc *>(document);
+    KCDoc const * const ksdoc = static_cast<const KCDoc *>(document);
 
     if (ksdoc->mimeType() != "application/x-kspread") {
         kWarning(30501) << "Invalid document mimetype " << ksdoc->mimeType();

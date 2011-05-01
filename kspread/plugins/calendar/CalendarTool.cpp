@@ -23,7 +23,7 @@
 #include "CalendarToolWidget.h"
 
 #include <KCSheet.h>
-#include <part/Doc.h>
+#include <part/KCDoc.h>
 #include <KCValue.h>
 
 #include <KoCanvasBase.h>

@@ -26,7 +26,7 @@
 #include <kactioncollection.h>
 #include <KCFormula.h>
 #include <KCCell.h>
-#include <part/Doc.h>
+#include <part/KCDoc.h>
 #include <KCSheet.h>
 #include <KCValue.h>
 #include <part/View.h>

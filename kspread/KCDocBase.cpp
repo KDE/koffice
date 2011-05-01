@@ -208,7 +208,7 @@ bool KCDocBase::loadOdf(KoOdfReadStore & odfStore)
 {
     QPointer<KoUpdater> updater;
     if (progressUpdater()) {
-        updater = progressUpdater()->startSubtask(1, "KSpread::Doc::loadOdf");
+        updater = progressUpdater()->startSubtask(1, "KSpread::KCDoc::loadOdf");
         updater->setProgress(0);
     }
 

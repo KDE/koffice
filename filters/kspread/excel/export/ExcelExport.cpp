@@ -30,7 +30,7 @@
 #include <KoFilterChain.h>
 #include <KoPostscriptPaintDevice.h>
 
-#include <part/Doc.h>
+#include <part/KCDoc.h>
 #include <KCCellStorage.h>
 #include <KCFormula.h>
 #include <KCMap.h>
@@ -59,7 +59,7 @@ using namespace Swinder;
 class ExcelExport::Private
 {
 public:
-    const Doc* inputDoc;
+    const KCDoc* inputDoc;
     QString outputFile;
     XlsRecordOutputStream* out;
     QHash<KCStyle, unsigned> styles;
@@ -94,9 +94,9 @@ KoFilter::ConversionStatus ExcelExport::convert(const QByteArray& from, const QB
     if (!document)
         return KoFilter::StupidError;
 
-    d->inputDoc = qobject_cast<const Doc*>(document);
+    d->inputDoc = qobject_cast<const KCDoc*>(document);
     if (!d->inputDoc) {
-        kWarning() << "document isn't a Doc but a " << document->metaObject()->className();
+        kWarning() << "document isn't a KCDoc but a " << document->metaObject()->className();
         return KoFilter::WrongFormat;
     }
 

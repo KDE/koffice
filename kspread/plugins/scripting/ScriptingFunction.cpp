@@ -25,7 +25,7 @@
 
 #include <klocale.h>
 
-//#include <Doc.h>
+//#include <KCDoc.h>
 //#include <View.h>
 #include <KCValue.h>
 #include <KCNumber.h>

@@ -45,7 +45,7 @@
 #include <kspread/part/KCCanvas.h>
 #include <kspread/KCCalculationSettings.h>
 #include <kspread/KCCell.h>
-#include <kspread/part/Doc.h>
+#include <kspread/part/KCDoc.h>
 #include <kspread/KCHeaderFooter.h>
 #include <kspread/kspread_limits.h>
 #include <kspread/KCMap.h>
@@ -98,8 +98,8 @@ KoFilter::ConversionStatus OpenCalcExport::convert(const QByteArray & from,
     if (!document)
         return KoFilter::StupidError;
 
-    if (!qobject_cast<const Doc *>(document)) {
-        kWarning(30518) << "document isn't a Doc but a "
+    if (!qobject_cast<const KCDoc *>(document)) {
+        kWarning(30518) << "document isn't a KCDoc but a "
         << document->metaObject()->className() << endl;
         return KoFilter::NotImplemented;
     }
@@ -109,14 +109,14 @@ KoFilter::ConversionStatus OpenCalcExport::convert(const QByteArray & from,
         return KoFilter::NotImplemented;
     }
 
-    const Doc * ksdoc = static_cast<const Doc *>(document);
+    const KCDoc * ksdoc = static_cast<const KCDoc *>(document);
 
     if (ksdoc->mimeType() != "application/x-kspread") {
         kWarning(30518) << "Invalid document mimetype " << ksdoc->mimeType();
         return KoFilter::NotImplemented;
     }
 
-    m_locale = static_cast<Doc*>(document)->map()->calculationSettings()->locale();
+    m_locale = static_cast<KCDoc*>(document)->map()->calculationSettings()->locale();
     if (!writeFile(ksdoc))
         return KoFilter::CreationError;
 
@@ -125,7 +125,7 @@ KoFilter::ConversionStatus OpenCalcExport::convert(const QByteArray & from,
     return KoFilter::OK;
 }
 
-bool OpenCalcExport::writeFile(const Doc * ksdoc)
+bool OpenCalcExport::writeFile(const KCDoc * ksdoc)
 {
     KoStore * store = KoStore::createStore(m_chain->outputFile(), KoStore::Write, "", KoStore::Zip);
 
@@ -165,7 +165,7 @@ bool OpenCalcExport::writeFile(const Doc * ksdoc)
     return true;
 }
 
-bool OpenCalcExport::exportDocInfo(KoStore * store, const Doc* ksdoc)
+bool OpenCalcExport::exportDocInfo(KoStore * store, const KCDoc* ksdoc)
 {
     if (!store->open("meta.xml"))
         return false;
@@ -251,7 +251,7 @@ bool OpenCalcExport::exportDocInfo(KoStore * store, const Doc* ksdoc)
     return true;
 }
 
-bool OpenCalcExport::exportSettings(KoStore * store, const Doc * ksdoc)
+bool OpenCalcExport::exportSettings(KoStore * store, const KCDoc * ksdoc)
 {
     if (!store->open("settings.xml"))
         return false;
@@ -339,7 +339,7 @@ bool OpenCalcExport::exportSettings(KoStore * store, const Doc * ksdoc)
     return true;
 }
 
-bool OpenCalcExport::exportContent(KoStore * store, const Doc * ksdoc)
+bool OpenCalcExport::exportContent(KoStore * store, const KCDoc * ksdoc)
 {
     if (!store->open("content.xml"))
         return false;
@@ -386,7 +386,7 @@ bool OpenCalcExport::exportContent(KoStore * store, const Doc * ksdoc)
     return true;
 }
 
-void exportNamedExpr(Doc* kspreadDoc, QDomDocument & doc, QDomElement & parent,
+void exportNamedExpr(KCDoc* kspreadDoc, QDomDocument & doc, QDomElement & parent,
                      AreaList const & namedAreas)
 {
     KCSheet* sheet = 0;
@@ -407,7 +407,7 @@ void exportNamedExpr(Doc* kspreadDoc, QDomDocument & doc, QDomElement & parent,
     }
 }
 
-bool OpenCalcExport::exportBody(QDomDocument & doc, QDomElement & content, const Doc * ksdoc)
+bool OpenCalcExport::exportBody(QDomDocument & doc, QDomElement & content, const KCDoc * ksdoc)
 {
     QDomElement fontDecls  = doc.createElement("office:font-decls");
     QDomElement autoStyles = doc.createElement("office:automatic-styles");
@@ -473,7 +473,7 @@ bool OpenCalcExport::exportBody(QDomDocument & doc, QDomElement & content, const
     }
 
     KoDocument * document   = m_chain->inputDocument();
-    Doc * kspreadDoc = static_cast<Doc *>(document);
+    KCDoc * kspreadDoc = static_cast<KCDoc *>(document);
 
     AreaList namedAreas = kspreadDoc->map()->namedAreaManager()->areaNames();
     if (namedAreas.count() > 0) {
@@ -668,7 +668,7 @@ void OpenCalcExport::exportCells(QDomDocument & doc, QDomElement & rowElem,
     }
 }
 
-bool OpenCalcExport::exportStyles(KoStore * store, const Doc *ksdoc)
+bool OpenCalcExport::exportStyles(KoStore * store, const KCDoc *ksdoc)
 {
     if (!store->open("styles.xml"))
         return false;
@@ -738,7 +738,7 @@ void OpenCalcExport::exportDefaultCellStyle(QDomDocument & doc, QDomElement & of
     defStyle.setAttribute("style:family", "table-cell");
 
     KoDocument * document = m_chain->inputDocument();
-    Doc * ksdoc    = static_cast<Doc *>(document);
+    KCDoc * ksdoc    = static_cast<KCDoc *>(document);
 
     const KLocale *locale = ksdoc->map()->calculationSettings()->locale();
     QString language;
@@ -775,7 +775,7 @@ void OpenCalcExport::createDefaultStyles()
 }
 
 void OpenCalcExport::exportPageAutoStyles(QDomDocument & doc, QDomElement & autoStyles,
-        const Doc *ksdoc)
+        const KCDoc *ksdoc)
 {
     const KCSheet * sheet = ksdoc->map()->sheetList().first();
 
@@ -827,7 +827,7 @@ void OpenCalcExport::exportPageAutoStyles(QDomDocument & doc, QDomElement & auto
 }
 
 void OpenCalcExport::exportMasterStyles(QDomDocument & doc, QDomElement & masterStyles,
-                                        const Doc * ksdoc)
+                                        const KCDoc * ksdoc)
 {
     QDomElement masterPage = doc.createElement("style:master-page");
     masterPage.setAttribute("style:name", "Default");
@@ -932,7 +932,7 @@ void OpenCalcExport::addText(QString const & text, QDomDocument & doc,
 }
 
 void OpenCalcExport::convertPart(QString const & part, QDomDocument & doc,
-                                 QDomElement & parent, const Doc * ksdoc)
+                                 QDomElement & parent, const KCDoc * ksdoc)
 {
     QString text;
     QString var;

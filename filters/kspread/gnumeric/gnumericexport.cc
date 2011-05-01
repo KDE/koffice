@@ -43,7 +43,7 @@
 #include <kspread/part/KCCanvas.h>
 #include <kspread/KCCellStorage.h>
 #include <kspread/KCCurrency.h>
-#include <kspread/part/Doc.h>
+#include <kspread/part/KCDoc.h>
 #include <kspread/KCHeaderFooter.h>
 #include <kspread/KCMap.h>
 #include <kspread/KCNamedAreaManager.h>
@@ -921,8 +921,8 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
     if (!document)
         return KoFilter::StupidError;
 
-    if (!qobject_cast<const Doc *>(document)) {    // it's safer that way :)
-        kWarning(30521) << "document isn't a Doc but a " << document->metaObject()->className();
+    if (!qobject_cast<const KCDoc *>(document)) {    // it's safer that way :)
+        kWarning(30521) << "document isn't a KCDoc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
     if (to != "application/x-gnumeric" || from != "application/x-kspread") {
@@ -930,7 +930,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
         return KoFilter::NotImplemented;
     }
 
-    Doc* ksdoc = (Doc*)document;
+    KCDoc* ksdoc = (KCDoc*)document;
 
     if (ksdoc->mimeType() != "application/x-kspread") {
         kWarning(30521) << "Invalid document mimetype " << ksdoc->mimeType();

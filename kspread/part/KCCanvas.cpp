@@ -57,7 +57,7 @@
 #include <KoPointerEvent.h>
 
 // KSpread
-#include "Doc.h"
+#include "KCDoc.h"
 #include "Headers.h"
 #include "KCMap.h"
 #include "RowColumnFormat.h"

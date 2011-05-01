@@ -22,7 +22,7 @@
 #include <KoGlobal.h>
 
 #include <kspread/KCCell.h>
-#include <kspread/part/Doc.h>
+#include <kspread/part/KCDoc.h>
 #include <kspread/KCMap.h>
 #include <kspread/KCSheet.h>
 #include <kspread/KCStyle.h>

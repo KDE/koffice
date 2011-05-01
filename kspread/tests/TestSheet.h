@@ -22,7 +22,7 @@
 #include <QtTest/QtTest>
 
 
-class Doc;
+class KCDoc;
 class KCSheet;
 
 class SheetTest : public QObject
@@ -38,7 +38,7 @@ private Q_SLOTS:
     void testRemoveColumns();
 private:
     KCSheet* m_sheet;
-    Doc* m_doc;
+    KCDoc* m_doc;
 };
 
 #endif // KSPREAD_SHEET_TEST

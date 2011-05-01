@@ -25,7 +25,7 @@
 #include <kstandarddirs.h>
 
 #include "AboutData.h"
-#include "Doc.h"
+#include "KCDoc.h"
 
 KComponentData* Factory::s_global = 0;
 KAboutData* Factory::s_aboutData = 0;
@@ -54,7 +54,7 @@ QObject* Factory::create(const char* iface, QWidget* parentWidget, QObject *pare
     Q_UNUSED(keyword);
     bool bWantKoDocument = (strcmp(iface, "KoDocument") == 0);
 
-    Doc *doc = new Doc(parentWidget, parent, !bWantKoDocument);
+    KCDoc *doc = new KCDoc(parentWidget, parent, !bWantKoDocument);
 
     if (!bWantKoDocument)
         doc->setReadWrite(false);

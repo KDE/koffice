@@ -97,7 +97,7 @@ void TestMathFunctions::initTestCase()
 {
     KCFunctionModuleRegistry::instance()->loadFunctionModules();
 
-    m_map = new KCMap(0 /* no Doc */);
+    m_map = new KCMap(0 /* no KCDoc */);
     m_map->addNewSheet();
     KCSheet* sheet = m_map->sheet(0);
     KCCellStorage* storage = sheet->cellStorage();

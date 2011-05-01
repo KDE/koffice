@@ -28,7 +28,7 @@
 
 void TestRegion::initTestCase()
 {
-    m_map = new KCMap(0 /* no Doc*/);
+    m_map = new KCMap(0 /* no KCDoc*/);
     KCSheet* sheet = m_map->addNewSheet();
     sheet->setSheetName("Sheet1");
     sheet = m_map->addNewSheet();

@@ -46,7 +46,7 @@
 #include <kspread/KCCell.h>
 #include <kspread/KCCellStorage.h>
 #include <kspread/KCCondition.h>
-#include <kspread/part/Doc.h>
+#include <kspread/part/KCDoc.h>
 #include <kspread/Global.h>
 #include <kspread/KCHeaderFooter.h>
 #include <kspread/KCMap.h>
@@ -2291,8 +2291,8 @@ KoFilter::ConversionStatus OpenCalcImport::convert(QByteArray const & from, QByt
     if (!document)
         return KoFilter::StupidError;
 
-    if (!qobject_cast<const Doc *>(document)) {     // it's safer that way :)
-        kWarning(30518) << "document isn't a Doc but a " << document->metaObject()->className();
+    if (!qobject_cast<const KCDoc *>(document)) {     // it's safer that way :)
+        kWarning(30518) << "document isn't a KCDoc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
 
@@ -2301,7 +2301,7 @@ KoFilter::ConversionStatus OpenCalcImport::convert(QByteArray const & from, QByt
         return KoFilter::NotImplemented;
     }
 
-    m_doc = (Doc *) document;
+    m_doc = (KCDoc *) document;
 
     if (m_doc->mimeType() != "application/x-kspread") {
         kWarning(30518) << "Invalid document mimetype " << m_doc->mimeType();

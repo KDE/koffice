@@ -62,7 +62,7 @@
 
 #include "KCCell.h"
 #include "KCCanvas.h"
-#include "Doc.h"
+#include "KCDoc.h"
 #include "kspread_limits.h"
 #include "KCPrintSettings.h"
 #include "KCSheet.h"

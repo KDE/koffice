@@ -41,7 +41,7 @@
 // KSpread
 #include <kspread/KCApplicationSettings.h>
 #include <kspread/KCCell.h>
-#include <kspread/part/Doc.h>
+#include <kspread/part/KCDoc.h>
 #include <kspread/KCHeaderFooter.h>
 #include <kspread/KCLoadingInfo.h>
 #include <kspread/KCMap.h>
@@ -201,7 +201,7 @@ void  convert_string_to_qcolor(QString color_string, QColor * color)
     color->setRgb(red, green, blue);
 }
 
-void areaNames(Doc * ksdoc, const QString &_name, QString _zone)
+void areaNames(KCDoc * ksdoc, const QString &_name, QString _zone)
 {
 //Sheet2!$A$2:$D$8
     QString tableName;
@@ -238,7 +238,7 @@ void areaNames(Doc * ksdoc, const QString &_name, QString _zone)
 }
 
 
-void set_document_area_names(Doc * ksdoc, QDomElement * docElem)
+void set_document_area_names(KCDoc * ksdoc, QDomElement * docElem)
 {
     QDomNode areaNamesElement = docElem->namedItem("Names");
     if (areaNamesElement.isNull())
@@ -255,7 +255,7 @@ void set_document_area_names(Doc * ksdoc, QDomElement * docElem)
 
 
 
-void set_document_attributes(Doc * ksdoc, QDomElement * docElem)
+void set_document_attributes(KCDoc * ksdoc, QDomElement * docElem)
 {
     ksdoc->loadConfigFromFile();
     QDomNode attributes  = docElem->namedItem("Attributes");
@@ -1684,8 +1684,8 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
 
     kDebug(30521) << "here we go..." << document->metaObject()->className();
 
-    if (!qobject_cast<const Doc *>(document)) {    // it's safer that way :)
-        kWarning(30521) << "document isn't a Doc but a " << document->metaObject()->className();
+    if (!qobject_cast<const KCDoc *>(document)) {    // it's safer that way :)
+        kWarning(30521) << "document isn't a KCDoc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
     if (from != "application/x-gnumeric" || to != "application/x-kspread") {
@@ -1696,7 +1696,7 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
     kDebug(30521) << "...still here...";
 
     // No need for a dynamic cast here, since we use Qt's moc magic
-    Doc * ksdoc = (Doc *) document;
+    KCDoc * ksdoc = (KCDoc *) document;
 
     if (ksdoc->mimeType() != "application/x-kspread") {
         kWarning(30521) << "Invalid document mimetype " << ksdoc->mimeType();

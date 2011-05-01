@@ -36,7 +36,7 @@ class KoStore;
 
 class KCCell;
 class KCConditional;
-class Doc;
+class KCDoc;
 class KCSheet;
 class KCStyle;
 class KCValidity;
@@ -68,7 +68,7 @@ private:
 
     enum bPos { Left, Top, Right, Bottom, Fall, GoUp, Border };
 
-    Doc *    m_doc;
+    KCDoc *    m_doc;
     KCStyle *  m_defaultStyle;
 
     KoXmlDocument   m_content;

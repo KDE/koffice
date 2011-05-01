@@ -32,7 +32,7 @@
 
 void TestDependencies::initTestCase()
 {
-    m_map = new KCMap(0 /* no Doc */);
+    m_map = new KCMap(0 /* no KCDoc */);
     m_sheet = m_map->addNewSheet();
     m_sheet->setSheetName("Sheet1");
     m_storage = m_sheet->cellStorage();

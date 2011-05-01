@@ -36,7 +36,7 @@
 
 #include <kspread/KCCalculationSettings.h>
 #include <kspread/KCCell.h>
-#include <kspread/part/Doc.h>
+#include <kspread/part/KCDoc.h>
 #include <kspread/Global.h>
 #include <kspread/KCMap.h>
 #include <kspread/RowColumnFormat.h>
@@ -69,8 +69,8 @@ KoFilter::ConversionStatus CSVFilter::convert(const QByteArray& from, const QByt
     if (!document)
         return KoFilter::StupidError;
 
-    if (!qobject_cast<const Doc *>(document)) {
-        kWarning(30501) << "document isn't a Doc but a " << document->metaObject()->className();
+    if (!qobject_cast<const KCDoc *>(document)) {
+        kWarning(30501) << "document isn't a KCDoc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
     if ((from != "text/csv" && from != "text/plain") || to != "application/x-kspread") {
@@ -78,7 +78,7 @@ KoFilter::ConversionStatus CSVFilter::convert(const QByteArray& from, const QByt
         return KoFilter::NotImplemented;
     }
 
-    Doc *ksdoc = static_cast<Doc *>(document);   // type checked above
+    KCDoc *ksdoc = static_cast<KCDoc *>(document);   // type checked above
 
     if (ksdoc->mimeType() != "application/x-kspread") {
         kWarning(30501) << "Invalid document mimetype " << ksdoc->mimeType();

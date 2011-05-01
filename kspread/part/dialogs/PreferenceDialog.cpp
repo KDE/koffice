@@ -51,7 +51,7 @@
 
 #include "KCApplicationSettings.h"
 #include "KCCalculationSettings.h"
-#include "part/Doc.h"
+#include "part/KCDoc.h"
 #include "part/Factory.h"
 #include "KCFunctionModuleRegistry.h"
 #include "KCLocalization.h"
@@ -240,7 +240,7 @@ void PreferenceDialog::Private::applyOpenSaveOptions()
 {
     KSharedConfigPtr config = Factory::global().config();
     KConfigGroup parameterGroup = config->group("Parameters");
-    Doc* doc = view->doc();
+    KCDoc* doc = view->doc();
 
     int value = fileOptions.m_recentFilesEntries->value();
     if (value != oldRecentFilesEntries) {

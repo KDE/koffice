@@ -34,7 +34,7 @@ class View;
 class CanvasBase::Private
 {
 public:
-    Doc *doc;
+    KCDoc *doc;
     // Non-visible range top-left from current screen
     // Example: If the first visible column is 'E', then offset stores
     // the width of the invisible columns 'A' to 'D'.

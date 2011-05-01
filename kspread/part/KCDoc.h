@@ -58,7 +58,7 @@ class KoXmlWriter;
 #define MIME_TYPE "application/x-kspread"
 
 class KCSheet;
-class Doc;
+class KCDoc;
 class View;
 class KCMap;
 class KCRegion;
@@ -68,7 +68,7 @@ class KCSheetAccessModel;
 /**
  * This class holds the data that makes up a spreadsheet.
  */
-class KSPREAD_EXPORT Doc : public KCDocBase
+class KSPREAD_EXPORT KCDoc : public KCDocBase
 {
     Q_OBJECT
     Q_PROPERTY(int syntaxVersion READ syntaxVersion)
@@ -80,12 +80,12 @@ public:
      * @param parent the parent object
      * @param singleViewMode enables single view mode, if @c true
      */
-    explicit Doc(QWidget* parentWidget = 0, QObject* parent = 0, bool singleViewMode = false);
+    explicit KCDoc(QWidget* parentWidget = 0, QObject* parent = 0, bool singleViewMode = false);
 
     /**
      * Destroys the document.
      */
-    ~Doc();
+    ~KCDoc();
 
 
     /**
@@ -182,7 +182,7 @@ protected:
     virtual void saveOdfViewSettings(KoXmlWriter& settingsWriter);
     virtual void saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter &settingsWriter);
 private:
-    Q_DISABLE_COPY(Doc)
+    Q_DISABLE_COPY(KCDoc)
 
     class Private;
     Private * const dd;

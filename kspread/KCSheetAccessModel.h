@@ -28,7 +28,7 @@ class KCSheet;
 
 /**
  * @brief Class that can be used by any shape embedded in KSpread to access sheet data,
- * without the need to link against KSpread. It is available through the Doc's data center map,
+ * without the need to link against KSpread. It is available through the KCDoc's data center map,
  * or KoShapeLoadingContext::dataCenterMap() in the process of loading a shape from ODF.
  *
  * Essentially, this model is a list of models to access a sheet's data. It contains a single row,

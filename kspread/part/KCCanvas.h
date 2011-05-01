@@ -51,7 +51,7 @@ class KoPointerEvent;
 class KoZoomHandler;
 
 class ColumnHeader;
-class Doc;
+class KCDoc;
 class KCSheet;
 class RowHeader;
 class Selection;
@@ -113,7 +113,7 @@ public:
      */
     KCSheet* activeSheet() const;
     virtual Selection* selection() const;
-    Doc *doc() const {
+    KCDoc *doc() const {
         return m_doc;
     }
 
@@ -202,7 +202,7 @@ private:
     Q_DISABLE_COPY(KCCanvas)
 
     View *m_view;
-    Doc *m_doc;
+    KCDoc *m_doc;
     // Non-visible range top-left from current screen
     // Example: If the first visible column is 'E', then offset stores
     // the width of the invisible columns 'A' to 'D'.

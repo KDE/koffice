@@ -222,7 +222,7 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
 
     d->outputDoc = qobject_cast<KCDocBase*>(document);
     if (!d->outputDoc) {
-        kWarning() << "document isn't a Doc but a " << document->metaObject()->className();
+        kWarning() << "document isn't a KCDoc but a " << document->metaObject()->className();
         return KoFilter::WrongFormat;
     }
 #else

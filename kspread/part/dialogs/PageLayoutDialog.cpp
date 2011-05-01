@@ -20,7 +20,7 @@
 #include "PageLayoutDialog.h"
 
 // KSpread
-#include "part/Doc.h"
+#include "part/KCDoc.h"
 #include "KCMap.h"
 #include "KCPrintSettings.h"
 #include "KCSheet.h"

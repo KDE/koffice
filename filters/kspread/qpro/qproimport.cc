@@ -25,7 +25,7 @@
 #include <kpluginfactory.h>
 #include <KoFilterChain.h>
 
-#include <kspread/part/Doc.h>
+#include <kspread/part/KCDoc.h>
 #include <kspread/KCSheet.h>
 #include <kspread/KCCell.h>
 #include <kspread/KCValue.h>
@@ -103,8 +103,8 @@ KoFilter::ConversionStatus QpImport::convert(const QByteArray& from, const QByte
 
     kDebug(30523) << "here we go..." << document->metaObject()->className();
 
-    if (!::qobject_cast<const Doc *>(document)) {   // it's safer that way :)
-        kWarning(30501) << "document isn't a Doc but a " << document->metaObject()->className();
+    if (!::qobject_cast<const KCDoc *>(document)) {   // it's safer that way :)
+        kWarning(30501) << "document isn't a KCDoc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
     if (from != "application/x-quattropro" || to != "application/x-kspread") {
@@ -115,7 +115,7 @@ KoFilter::ConversionStatus QpImport::convert(const QByteArray& from, const QByte
     kDebug(30523) << "...still here...";
 
     // No need for a dynamic cast here, since we use Qt's moc magic
-    Doc *ksdoc = (Doc*)document;
+    KCDoc *ksdoc = (KCDoc*)document;
 
     if (ksdoc->mimeType() != "application/x-kspread") {
         kWarning(30501) << "Invalid document mimetype " << ksdoc->mimeType();

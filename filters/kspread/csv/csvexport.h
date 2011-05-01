@@ -27,7 +27,7 @@
 #include <QVariantList>
 
 class KCSheet;
-class Doc;
+class KCDoc;
 
 class CSVExport : public KoFilter
 {
@@ -40,7 +40,7 @@ public:
     virtual KoFilter::ConversionStatus convert(const QByteArray & from, const QByteArray & to);
 
 private:
-    QString exportCSVCell(const Doc* doc, KCSheet const * const sheet,
+    QString exportCSVCell(const KCDoc* doc, KCSheet const * const sheet,
                           int col, int row, QChar const & textQuote, QChar csvDelimiter);
 
 private:

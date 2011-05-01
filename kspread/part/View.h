@@ -54,7 +54,7 @@ class ColumnHeader;
 class KCDamage;
 class KCSheet;
 class KCCanvas;
-class Doc;
+class KCDoc;
 class KCRegion;
 class Selection;
 class SheetView;
@@ -83,13 +83,13 @@ class KSPREAD_EXPORT View : public KoView
 
 public:
     /** Creates a new view displaying \p document and with \p parent as parent. */
-    View(QWidget *parent, Doc *document);
+    View(QWidget *parent, KCDoc *document);
 
     /** Destroys the view */
     ~View();
 
     /** \return the document this view displays. */
-    Doc* doc() const;
+    KCDoc* doc() const;
 
     /** \return the canvas of the view */
     KCCanvas* canvasWidget() const;

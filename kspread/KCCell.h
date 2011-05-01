@@ -59,7 +59,7 @@ class KoGenStyle;
 class KoOdfLoadingContext;
 class KoShapeLoadingContext;
 
-class Doc;
+class KCDoc;
 class KCFormula;
 class KCOdfLoadingContext;
 class KCOdfSavingContext;

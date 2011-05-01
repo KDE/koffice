@@ -21,7 +21,7 @@
 #include "PrintJob.h"
 
 #include "KCCanvas.h"
-#include "Doc.h"
+#include "KCDoc.h"
 #include "KCHeaderFooter.h"
 #include "KCMap.h"
 #include "KCPrintSettings.h"

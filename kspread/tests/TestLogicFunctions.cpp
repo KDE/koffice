@@ -20,13 +20,13 @@
 
 #include "TestKspreadCommon.h"
 
-#include <part/Doc.h>
+#include <part/KCDoc.h>
 #include <KCMap.h>
 #include <KCSheet.h>
 
 void TestLogicFunctions::init()
 {
-    m_doc = new Doc();
+    m_doc = new KCDoc();
     m_doc->map()->addNewSheet();
     m_sheet = m_doc->map()->sheet(0);
 }

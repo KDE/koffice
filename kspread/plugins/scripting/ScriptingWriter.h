@@ -27,7 +27,7 @@
 #include <QObject>
 #include <klocale.h>
 
-#include <part/Doc.h>
+#include <part/KCDoc.h>
 #include <KCSheet.h>
 #include <KCMap.h>
 #include <KCRegion.h>

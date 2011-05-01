@@ -106,7 +106,7 @@ public:
     qreal  height;
 
     // Position and dimension of displayed text.
-    // Doc coordinate system; points; no zoom
+    // KCDoc coordinate system; points; no zoom
     qreal  textX;
     qreal  textY;
     qreal  textWidth;

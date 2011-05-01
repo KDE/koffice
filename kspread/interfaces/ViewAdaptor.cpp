@@ -28,7 +28,7 @@
 // Local
 #include "ViewAdaptor.h"
 
-#include "part/Doc.h"
+#include "part/KCDoc.h"
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"

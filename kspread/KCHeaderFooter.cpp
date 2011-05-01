@@ -22,7 +22,7 @@
 
 #include "KCHeaderFooter.h"
 
-#include "part/Doc.h" // FIXME detach from part
+#include "part/KCDoc.h" // FIXME detach from part
 #include "KCSheet.h"
 #include "KCSheetPrint.h"
 

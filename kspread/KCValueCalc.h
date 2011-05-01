@@ -37,7 +37,7 @@
 #endif
 
 class KCCell;
-class Doc;
+class KCDoc;
 class KCValueCalc;
 class KCValueConverter;
 

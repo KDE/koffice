@@ -26,7 +26,7 @@
 #include <KCValue.h>
 
 
-class Doc;
+class KCDoc;
 class KCSheet;
 
 class TestLogicFunctions: public QObject
@@ -46,7 +46,7 @@ private slots:
     void testTRUE();
     void testXOR();
 private:
-    Doc* m_doc;
+    KCDoc* m_doc;
     KCSheet* m_sheet;
     KCValue evaluate(const QString&, KCValue& ex);
 };

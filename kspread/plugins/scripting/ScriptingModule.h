@@ -28,7 +28,7 @@
 #include <QObject>
 #include <KoScriptingModule.h>
 
-class Doc;
+class KCDoc;
 class View;
 class ViewAdaptor;
 //class KCSheet;
@@ -64,18 +64,18 @@ public:
     View* kspreadView();
 
     /**
-    * \return The \a Doc instance that provides access to a
-    * document. This method always returns a valid \a Doc instance.
+    * \return The \a KCDoc instance that provides access to a
+    * document. This method always returns a valid \a KCDoc instance.
     */
-    Doc* kspreadDoc();
+    KCDoc* kspreadDoc();
 
     /**
     * \return The \a KoDocument instance that provides access to a
     * document. This method is essential the same as the kspreadDoc()
-    * method above since a \a Doc just extends a \a KoDocument .
+    * method above since a \a KCDoc just extends a \a KoDocument .
     *
     * This method overwrites the one from the \a KoScriptingModule class
-    * to allow us to return our \a Doc here.
+    * to allow us to return our \a KCDoc here.
     */
     virtual KoDocument* doc();
 
