@@ -132,7 +132,7 @@
 #include "KCStyle.h"
 #include "KCStyleManager.h"
 #include "KCStyleStorage.h"
-#include "ToolRegistry.h"
+#include "KCToolRegistry.h"
 #include "Util.h"
 #include "KCValueCalc.h"
 #include "KCValueConverter.h"
@@ -707,7 +707,7 @@ void View::initView()
     variant.setValue<QObject*>(doc()->map()->bindingManager());
 
     // Load the KSpread Tools
-    ToolRegistry::instance()->loadTools();
+    KCToolRegistry::instance()->loadTools();
 
     if (shell())
     {

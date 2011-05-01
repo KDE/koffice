@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "ToolRegistry.h"
+#include "KCToolRegistry.h"
 
 #include "KCCellTool.h"
 #include "KCCellToolFactory.h"
@@ -29,13 +29,13 @@
 #include <KoToolRegistry.h>
 
 
-class ToolRegistry::Private
+class KCToolRegistry::Private
 {
 public:
 };
 
 
-ToolRegistry::ToolRegistry()
+KCToolRegistry::KCToolRegistry()
         : d(new Private)
 {
     // Add the built-in cell tool.
@@ -44,18 +44,18 @@ ToolRegistry::ToolRegistry()
     loadTools();
 }
 
-ToolRegistry::~ToolRegistry()
+KCToolRegistry::~KCToolRegistry()
 {
     delete d;
 }
 
-ToolRegistry* ToolRegistry::instance()
+KCToolRegistry* KCToolRegistry::instance()
 {
-    K_GLOBAL_STATIC(ToolRegistry, s_instance)
+    K_GLOBAL_STATIC(KCToolRegistry, s_instance)
     return s_instance;
 }
 
-void ToolRegistry::loadTools()
+void KCToolRegistry::loadTools()
 {
     const QString serviceType = QLatin1String("KSpread/Plugin");
     const QString query = QLatin1String("([X-KSpread-InterfaceVersion] == 0) and "

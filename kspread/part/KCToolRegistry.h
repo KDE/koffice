@@ -29,19 +29,19 @@
  * Registry for tools.
  * \ingroup Plugin
  */
-class KSPREAD_EXPORT ToolRegistry : public QObject
+class KSPREAD_EXPORT KCToolRegistry : public QObject
 {
 public:
     /**
      * Creates the registry.
      */
-    ToolRegistry();
-    ~ToolRegistry();
+    KCToolRegistry();
+    ~KCToolRegistry();
 
     /**
      * \return the singleton instance
      */
-    static ToolRegistry* instance();
+    static KCToolRegistry* instance();
 
     /**
      * Loads the tools.
