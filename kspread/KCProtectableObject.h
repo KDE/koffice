@@ -33,7 +33,7 @@
  * The inheriting object decides which of its data should be protected.
  * It has to use isProtected() to check wether it's protected.
  */
-class KSPREAD_EXPORT ProtectableObject
+class KSPREAD_EXPORT KCProtectableObject
 {
 public:
     enum Mode {
@@ -82,7 +82,7 @@ public:
 
 private:
     // disable assignment operator
-    void operator=(const ProtectableObject&);
+    void operator=(const KCProtectableObject&);
 
     QByteArray m_password;
 };

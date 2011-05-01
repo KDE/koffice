@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "ProtectableObject.h"
+#include "KCProtectableObject.h"
 
 #include "part/Digest.h" // FIXME detach from part
 
@@ -32,27 +32,27 @@
 
 #include <QPointer>
 
-void ProtectableObject::password(QByteArray & password) const
+void KCProtectableObject::password(QByteArray & password) const
 {
     password = m_password;
 }
 
-bool ProtectableObject::isProtected() const
+bool KCProtectableObject::isProtected() const
 {
     return !m_password.isNull();
 }
 
-void ProtectableObject::setProtected(QByteArray const & password)
+void KCProtectableObject::setProtected(QByteArray const & password)
 {
     m_password = password;
 }
 
-bool ProtectableObject::checkPassword(QByteArray const & password) const
+bool KCProtectableObject::checkPassword(QByteArray const & password) const
 {
     return (password == m_password);
 }
 
-bool ProtectableObject::showPasswordDialog(QWidget* parent, Mode mode, const QString& title)
+bool KCProtectableObject::showPasswordDialog(QWidget* parent, Mode mode, const QString& title)
 {
     if (mode == Lock) {
         QPointer<KNewPasswordDialog> dlg = new KNewPasswordDialog(parent);
@@ -92,7 +92,7 @@ bool ProtectableObject::showPasswordDialog(QWidget* parent, Mode mode, const QSt
     return true;
 }
 
-void ProtectableObject::loadXmlProtection(const KoXmlElement& element)
+void KCProtectableObject::loadXmlProtection(const KoXmlElement& element)
 {
     if (element.hasAttribute("protected")) {
         const QString passwd = element.attribute("protected");
@@ -101,7 +101,7 @@ void ProtectableObject::loadXmlProtection(const KoXmlElement& element)
     }
 }
 
-void ProtectableObject::loadOdfProtection(const KoXmlElement& element)
+void KCProtectableObject::loadOdfProtection(const KoXmlElement& element)
 {
     if (element.hasAttributeNS(KoXmlNS::table, "protection-key")) {
         QString p = element.attributeNS(KoXmlNS::table, "protection-key", QString());

@@ -26,7 +26,7 @@
 #include <QString>
 #include <QStringList>
 
-#include "ProtectableObject.h"
+#include "KCProtectableObject.h"
 
 #include "kspread_export.h"
 
@@ -73,7 +73,7 @@ class ValueCalc;
  * The "embedded document".
  * The KCMap holds all the document data.
  */
-class KSPREAD_EXPORT KCMap : public QObject, public KoDataCenterBase, public ProtectableObject
+class KSPREAD_EXPORT KCMap : public QObject, public KoDataCenterBase, public KCProtectableObject
 {
     Q_OBJECT
 public:

@@ -213,7 +213,7 @@ set (kspreadodf_LIB_SRCS
     KCNamedAreaManager.cpp
     KCNumber.cpp
     KCPrintSettings.cpp
-    ProtectableObject.cpp
+    KCProtectableObject.cpp
     RecalcManager.cpp
     RectStorage.cpp
     KCRegion.cpp

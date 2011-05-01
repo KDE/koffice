@@ -38,7 +38,7 @@
 #include "KCCell.h"
 #include "KCStyle.h"
 #include "Global.h"
-#include "ProtectableObject.h"
+#include "KCProtectableObject.h"
 
 #include "kspread_export.h"
 
@@ -87,7 +87,7 @@ template<typename T> class IntervalMap;
  * A sheet contains several cells.
  */
 class KSPREAD_EXPORT KCSheet : public KoShapeUserData, public KoShapeControllerBase,
-        public ProtectableObject
+        public KCProtectableObject
 {
     Q_OBJECT
     Q_PROPERTY(QString sheetName READ sheetName)

@@ -227,7 +227,7 @@ KCSheet::KCSheet(KCMap* map, const QString &sheetName)
 KCSheet::KCSheet(const KCSheet &other)
         : KoShapeUserData(other.d->workbook)
         , KoShapeControllerBase()
-        , ProtectableObject(other)
+        , KCProtectableObject(other)
         , d(new Private)
 {
     d->workbook = other.d->workbook;

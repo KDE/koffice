@@ -1459,10 +1459,10 @@ void View::toggleProtectDoc(bool mode)
 
     bool success;
     if (mode) {
-        success = doc()->map()->showPasswordDialog(this, ProtectableObject::Lock,
+        success = doc()->map()->showPasswordDialog(this, KCProtectableObject::Lock,
                   i18n("Protect Document"));
     } else {
-        success = doc()->map()->showPasswordDialog(this, ProtectableObject::Unlock,
+        success = doc()->map()->showPasswordDialog(this, KCProtectableObject::Unlock,
                   i18n("Unprotect Document"));
     }
     if (!success) {
@@ -1482,10 +1482,10 @@ void View::toggleProtectSheet(bool mode)
 
     bool success;
     if (mode) {
-        success = activeSheet()->showPasswordDialog(this, ProtectableObject::Lock,
+        success = activeSheet()->showPasswordDialog(this, KCProtectableObject::Lock,
                   i18n("Protect KCSheet"));
     } else {
-        success = activeSheet()->showPasswordDialog(this, ProtectableObject::Unlock,
+        success = activeSheet()->showPasswordDialog(this, KCProtectableObject::Unlock,
                   i18n("Unprotect KCSheet"));
     }
     if (!success) {
