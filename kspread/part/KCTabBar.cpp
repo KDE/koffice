@@ -22,7 +22,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "TabBar.h"
+#include "KCTabBar.h"
 
 #include <QList>
 #include <QMouseEvent>
@@ -52,7 +52,7 @@
 class TabBarPrivate
 {
 public:
-    TabBar* tabbar;
+    KCTabBar* tabbar;
 
     // scroll buttons
     QToolButton* scrollFirstButton;
@@ -350,7 +350,7 @@ QFont TabBarPrivate::font(bool selected)
 }
 
 // creates a new tabbar
-TabBar::TabBar(QWidget* parent, const char* /*name*/)
+KCTabBar::KCTabBar(QWidget* parent, const char* /*name*/)
         : QWidget(parent)
         , d(new TabBarPrivate)
 {
@@ -382,13 +382,13 @@ TabBar::TabBar(QWidget* parent, const char* /*name*/)
 }
 
 // destroys the tabbar
-TabBar::~TabBar()
+KCTabBar::~KCTabBar()
 {
     delete d;
 }
 
 // adds a new visible tab
-void TabBar::addTab(const QString& text)
+void KCTabBar::addTab(const QString& text)
 {
     d->tabs.append(text);
 
@@ -396,7 +396,7 @@ void TabBar::addTab(const QString& text)
 }
 
 // removes a tab
-void TabBar::removeTab(const QString& text)
+void KCTabBar::removeTab(const QString& text)
 {
     int i = d->tabs.indexOf(text);
     if (i == -1) return;
@@ -410,7 +410,7 @@ void TabBar::removeTab(const QString& text)
 }
 
 // removes all tabs
-void TabBar::clear()
+void KCTabBar::clear()
 {
     d->tabs.clear();
     d->activeTab = 0;
@@ -419,17 +419,17 @@ void TabBar::clear()
     update();
 }
 
-bool TabBar::readOnly() const
+bool KCTabBar::readOnly() const
 {
     return d->readOnly;
 }
 
-void TabBar::setReadOnly(bool ro)
+void KCTabBar::setReadOnly(bool ro)
 {
     d->readOnly = ro;
 }
 
-void TabBar::setTabs(const QStringList& list)
+void KCTabBar::setTabs(const QStringList& list)
 {
     QString left, active;
 
@@ -455,17 +455,17 @@ void TabBar::setTabs(const QStringList& list)
     update();
 }
 
-QStringList TabBar::tabs() const
+QStringList KCTabBar::tabs() const
 {
     return d->tabs;
 }
 
-unsigned TabBar::count() const
+unsigned KCTabBar::count() const
 {
     return d->tabs.count();
 }
 
-bool TabBar::canScrollBack() const
+bool KCTabBar::canScrollBack() const
 {
     if (d->tabs.count() == 0)
         return false;
@@ -473,7 +473,7 @@ bool TabBar::canScrollBack() const
     return d->firstTab > 1;
 }
 
-bool TabBar::canScrollForward() const
+bool KCTabBar::canScrollForward() const
 {
     if (d->tabs.count() == 0)
         return false;
@@ -481,7 +481,7 @@ bool TabBar::canScrollForward() const
     return d->lastTab < (int)d->tabs.count();
 }
 
-void TabBar::scrollBack()
+void KCTabBar::scrollBack()
 {
     if (!canScrollBack())
         return;
@@ -494,7 +494,7 @@ void TabBar::scrollBack()
     update();
 }
 
-void TabBar::scrollForward()
+void KCTabBar::scrollForward()
 {
     if (!canScrollForward())
         return;
@@ -508,7 +508,7 @@ void TabBar::scrollForward()
     update();
 }
 
-void TabBar::scrollFirst()
+void KCTabBar::scrollFirst()
 {
     if (!canScrollBack())
         return;
@@ -519,7 +519,7 @@ void TabBar::scrollFirst()
     update();
 }
 
-void TabBar::scrollLast()
+void KCTabBar::scrollLast()
 {
     if (!canScrollForward())
         return;
@@ -549,7 +549,7 @@ void TabBar::scrollLast()
     update();
 }
 
-void TabBar::ensureVisible(const QString& tab)
+void KCTabBar::ensureVisible(const QString& tab)
 {
     int i = d->tabs.indexOf(tab);
     if (i == -1)
@@ -569,7 +569,7 @@ void TabBar::ensureVisible(const QString& tab)
             scrollForward();
 }
 
-void TabBar::moveTab(int tab, int target)
+void KCTabBar::moveTab(int tab, int target)
 {
     QString tabName = d->tabs.takeAt(tab);
 
@@ -587,7 +587,7 @@ void TabBar::moveTab(int tab, int target)
     update();
 }
 
-void TabBar::setActiveTab(const QString& text)
+void KCTabBar::setActiveTab(const QString& text)
 {
     int i = d->tabs.indexOf(text);
     if (i == -1)
@@ -603,7 +603,7 @@ void TabBar::setActiveTab(const QString& text)
     emit tabChanged(text);
 }
 
-void TabBar::autoScrollBack()
+void KCTabBar::autoScrollBack()
 {
     if (!d->autoScroll) return;
 
@@ -615,7 +615,7 @@ void TabBar::autoScrollBack()
         QTimer::singleShot(400, this, SLOT(autoScrollBack()));
 }
 
-void TabBar::autoScrollForward()
+void KCTabBar::autoScrollForward()
 {
     if (!d->autoScroll) return;
 
@@ -627,7 +627,7 @@ void TabBar::autoScrollForward()
         QTimer::singleShot(400, this, SLOT(autoScrollForward()));
 }
 
-void TabBar::paintEvent(QPaintEvent*)
+void KCTabBar::paintEvent(QPaintEvent*)
 {
     if (d->tabs.count() == 0) {
         update();
@@ -674,26 +674,26 @@ void TabBar::paintEvent(QPaintEvent*)
     }
 }
 
-void TabBar::resizeEvent(QResizeEvent*)
+void KCTabBar::resizeEvent(QResizeEvent*)
 {
     d->layoutButtons();
     d->updateButtons();
     update();
 }
 
-QSize TabBar::sizeHint() const
+QSize KCTabBar::sizeHint() const
 {
     return QSize(40, style()->pixelMetric(QStyle::PM_ScrollBarExtent));
 }
 
-void TabBar::renameTab(const QString& old_name, const QString& new_name)
+void KCTabBar::renameTab(const QString& old_name, const QString& new_name)
 {
     d->tabs.replace(d->tabs.indexOf(old_name), new_name);
 
     update();
 }
 
-QString TabBar::activeTab() const
+QString KCTabBar::activeTab() const
 {
     if (d->activeTab == 0)
         return QString();
@@ -701,7 +701,7 @@ QString TabBar::activeTab() const
         return d->tabs[ d->activeTab ];
 }
 
-void TabBar::mousePressEvent(QMouseEvent* ev)
+void KCTabBar::mousePressEvent(QMouseEvent* ev)
 {
     if (d->tabs.count() == 0) {
         update();
@@ -730,7 +730,7 @@ void TabBar::mousePressEvent(QMouseEvent* ev)
             emit contextMenu(ev->globalPos());
 }
 
-void TabBar::mouseReleaseEvent(QMouseEvent* ev)
+void KCTabBar::mouseReleaseEvent(QMouseEvent* ev)
 {
     if (d->readOnly) return;
 
@@ -742,7 +742,7 @@ void TabBar::mouseReleaseEvent(QMouseEvent* ev)
     }
 }
 
-void TabBar::mouseMoveEvent(QMouseEvent* ev)
+void KCTabBar::mouseMoveEvent(QMouseEvent* ev)
 {
     if (d->readOnly) return;
 
@@ -797,7 +797,7 @@ void TabBar::mouseMoveEvent(QMouseEvent* ev)
     }
 }
 
-void TabBar::mouseDoubleClickEvent(QMouseEvent* ev)
+void KCTabBar::mouseDoubleClickEvent(QMouseEvent* ev)
 {
     int offset = isRightToLeft() ? 0 : d->offset;
     if (ev->pos().x() > offset)
@@ -805,7 +805,7 @@ void TabBar::mouseDoubleClickEvent(QMouseEvent* ev)
             emit doubleClicked();
 }
 
-void TabBar::wheelEvent(QWheelEvent * e)
+void KCTabBar::wheelEvent(QWheelEvent * e)
 {
     if (d->tabs.count() == 0) {
         update();
@@ -849,5 +849,5 @@ void TabBar::wheelEvent(QWheelEvent * e)
     emit tabChanged(d->tabs[ d->activeTab-1]);
 }
 
-#include "TabBar.moc"
+#include "KCTabBar.moc"
 

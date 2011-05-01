@@ -35,7 +35,7 @@
 class TabBarPrivate;
 
 /**
- * The TabBar class provides a tab bar, for use to switch active
+ * The KCTabBar class provides a tab bar, for use to switch active
  * page/sheet in a document.
  *
  * The tab bar is typically used in the main view.
@@ -62,7 +62,7 @@ class TabBarPrivate;
  *
  * @short A bar with tabs and scroll buttons.
  */
-class TabBar : public QWidget
+class KCTabBar : public QWidget
 {
     Q_OBJECT
 
@@ -76,12 +76,12 @@ public:
     /**
      * Creates a new tabbar.
      */
-    explicit TabBar(QWidget* parent = 0, const char *name = 0);
+    explicit KCTabBar(QWidget* parent = 0, const char *name = 0);
 
     /**
      * Destroy the tabbar.
      */
-    virtual ~TabBar();
+    virtual ~KCTabBar();
 
     /**
      * Returns true if the tab bar is read only.
@@ -95,7 +95,7 @@ public:
 
     /**
      * Returns number of tabs.
-     * This is the same as TabBar::tabs().count()
+     * This is the same as KCTabBar::tabs().count()
      */
     unsigned count() const;
 
@@ -259,7 +259,7 @@ private:
     TabBarPrivate * const d;
 
     // don't allow copy or assignment
-    TabBar(const TabBar&);
-    TabBar& operator=(const TabBar&);
+    KCTabBar(const KCTabBar&);
+    KCTabBar& operator=(const KCTabBar&);
 };
 #endif // TABBAR_H

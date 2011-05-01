@@ -132,7 +132,7 @@ SET (part_DIR_SRCS
     part/Headers.cpp
     part/KCPrintJob.cpp
     part/ToolRegistry.cpp
-    part/TabBar.cpp
+    part/KCTabBar.cpp
     part/View.cpp
     part/commands/DefinePrintRangeCommand.cpp
     part/commands/PageLayoutCommand.cpp

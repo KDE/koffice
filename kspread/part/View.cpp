@@ -28,7 +28,7 @@
 
 // Local
 #include "View.h"
-#include "TabBar.h"
+#include "KCTabBar.h"
 
 // standard C/C++ includes
 #include <assert.h>
@@ -186,7 +186,7 @@ public:
     KCSelectAllButton *selectAllButton;
     QScrollBar *horzScrollBar;
     QScrollBar *vertScrollBar;
-    TabBar *tabBar;
+    KCTabBar *tabBar;
     QLabel* calcLabel;
     QGridLayout* viewLayout;
     QGridLayout* tabScrollBarLayout;
@@ -755,7 +755,7 @@ void View::initView()
     d->tabScrollBarLayout = new QGridLayout(bottomPart);
     d->tabScrollBarLayout->setMargin(0);
     d->tabScrollBarLayout->setSpacing(0);
-    d->tabBar = new TabBar(0);
+    d->tabBar = new KCTabBar(0);
     d->tabScrollBarLayout->addWidget(d->tabBar, 0, 0);
     d->horzScrollBar = new QScrollBar(0);
     d->canvasController->setHorizontalScrollBar(d->horzScrollBar);
@@ -842,7 +842,7 @@ QScrollBar* View::vertScrollBar()const
     return d->vertScrollBar;
 }
 
-TabBar* View::tabBar() const
+KCTabBar* View::tabBar() const
 {
     return d->tabBar;
 }
@@ -1218,7 +1218,7 @@ void View::setActiveSheet(KCSheet* sheet, bool updateSheet)
     d->columnHeader->update();
     d->selectAllButton->update();
 
-    // Prevents an endless loop, if called by the TabBar.
+    // Prevents an endless loop, if called by the KCTabBar.
     if (updateSheet) {
         d->tabBar->setActiveTab(d->activeSheet->sheetName());
     }

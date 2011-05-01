@@ -60,7 +60,7 @@ class Selection;
 class SheetView;
 class KCRowHeader;
 class View;
-class TabBar;
+class KCTabBar;
 
 /**
  * @class View
@@ -110,7 +110,7 @@ public:
     QScrollBar* vertScrollBar() const;
 
     /** \return the tab bar */
-    TabBar* tabBar() const;
+    KCTabBar* tabBar() const;
 
     /** \return the zoom handler */
     KoZoomHandler* zoomHandler() const;

@@ -173,7 +173,7 @@ public:
      * that this name is already used.
      *
      * @see changeCellTabName
-     * @see TabBar::renameTab
+     * @see KCTabBar::renameTab
      * @see sheetName
      */
     bool setSheetName(const QString& name, bool init = false);
