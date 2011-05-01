@@ -41,7 +41,7 @@
 */
 
 // Local
-#include "CellTool.h"
+#include "KCCellTool.h"
 
 #include <QPainter>
 
@@ -77,13 +77,13 @@
 #include "ui/Selection.h"
 #include "ui/SheetView.h"
 
-class CellTool::Private
+class KCCellTool::Private
 {
 public:
     KCCanvas* canvas;
 };
 
-CellTool::CellTool(KoCanvasBase* canvas)
+KCCellTool::KCCellTool(KoCanvasBase* canvas)
         : CellToolBase(canvas)
         , d(new Private)
 {
@@ -99,12 +99,12 @@ CellTool::CellTool(KoCanvasBase* canvas)
     action->setToolTip(i18n("Define the print range in the current sheet"));
 }
 
-CellTool::~CellTool()
+KCCellTool::~KCCellTool()
 {
     delete d;
 }
 
-void CellTool::paint(QPainter &painter, const KoViewConverter &viewConverter)
+void KCCellTool::paint(QPainter &painter, const KoViewConverter &viewConverter)
 {
     KoShape::applyConversion(painter, viewConverter);
     const double xOffset = viewConverter.viewToDocumentX(canvas()->canvasController()->canvasOffsetX());
@@ -117,48 +117,48 @@ void CellTool::paint(QPainter &painter, const KoViewConverter &viewConverter)
     paintSelection(painter, paintRect);
 }
 
-void CellTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
+void KCCellTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
 {
     canvas()->shapeManager()->selection()->deselectAll();
     CellToolBase::activate(toolActivation, shapes);
 }
 
-Selection* CellTool::selection()
+Selection* KCCellTool::selection()
 {
     return d->canvas->selection();
 }
 
-QPointF CellTool::offset() const
+QPointF KCCellTool::offset() const
 {
     return QPointF(0.0, 0.0);
 }
 
-QSizeF CellTool::size() const
+QSizeF KCCellTool::size() const
 {
     return canvas()->viewConverter()->viewToDocument(d->canvas->size());
 }
 
-QPointF CellTool::canvasOffset() const
+QPointF KCCellTool::canvasOffset() const
 {
     return d->canvas->offset();
 }
 
-int CellTool::maxCol() const
+int KCCellTool::maxCol() const
 {
     return KS_colMax;
 }
 
-int CellTool::maxRow() const
+int KCCellTool::maxRow() const
 {
     return KS_rowMax;
 }
 
-SheetView* CellTool::sheetView(const KCSheet* sheet) const
+SheetView* KCCellTool::sheetView(const KCSheet* sheet) const
 {
     return d->canvas->view()->sheetView(sheet);
 }
 
-void CellTool::definePrintRange()
+void KCCellTool::definePrintRange()
 {
     DefinePrintRangeCommand* command = new DefinePrintRangeCommand();
     command->setSheet(selection()->activeSheet());
@@ -166,4 +166,4 @@ void CellTool::definePrintRange()
     d->canvas->doc()->addCommand(command);
 }
 
-#include "CellTool.moc"
+#include "KCCellTool.moc"

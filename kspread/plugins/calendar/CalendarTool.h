@@ -20,9 +20,9 @@
 #ifndef KSPREAD_CALENDAR_TOOL
 #define KSPREAD_CALENDAR_TOOL
 
-#include <part/CellTool.h>
+#include <part/KCCellTool.h>
 
-class CalendarTool : public CellTool
+class CalendarTool : public KCCellTool
 {
     Q_OBJECT
 public:

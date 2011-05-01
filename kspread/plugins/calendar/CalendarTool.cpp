@@ -38,7 +38,7 @@ public:
 
 
 CalendarTool::CalendarTool(KoCanvasBase* canvas)
-        : CellTool(canvas)
+        : KCCellTool(canvas)
         , d(new Private)
 {
     setObjectName("CalendarTool");
@@ -56,12 +56,12 @@ CalendarTool::~CalendarTool()
 
 void CalendarTool::activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes)
 {
-    CellTool::activate(toolActivation, shapes);
+    KCCellTool::activate(toolActivation, shapes);
 }
 
 void CalendarTool::deactivate()
 {
-    CellTool::deactivate();
+    KCCellTool::deactivate();
 }
 
 void CalendarTool::insertCalendar(const QDate &start, const QDate &end)
@@ -185,9 +185,9 @@ void CalendarTool::insertCalendar(const QDate &start, const QDate &end)
 
 QWidget* CalendarTool::createOptionWidget()
 {
-    // Create the main cell tool widget. It is not visible, but the CellTool makes heavy use
+    // Create the main cell tool widget. It is not visible, but the KCCellTool makes heavy use
     // of it, and it refuses to work correctly if it does not exist
-    CellTool::createOptionWidget();
+    KCCellTool::createOptionWidget();
 
     CalendarToolWidget* widget =  new CalendarToolWidget(canvas()->canvasWidget());
     connect(widget, SIGNAL(insertCalendar(const QDate&, const QDate&)),

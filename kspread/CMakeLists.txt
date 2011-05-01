@@ -124,7 +124,7 @@ SET (interfaces_DIR_SRCS
 
 SET (part_DIR_SRCS
     part/KCCanvas.cpp
-    part/CellTool.cpp
+    part/KCCellTool.cpp
     part/KCCellToolFactory.cpp
     #part/Digest.cpp
     part/Doc.cpp

@@ -19,7 +19,7 @@
 
 #include "ToolRegistry.h"
 
-#include "CellTool.h"
+#include "KCCellTool.h"
 #include "KCCellToolFactory.h"
 
 #include <KGlobal>

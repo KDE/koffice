@@ -22,7 +22,7 @@
 
 #include <klocale.h>
 
-#include "CellTool.h"
+#include "KCCellTool.h"
 
 KCCellToolFactory::KCCellToolFactory(QObject* parent, const QString& id)
         : KoToolFactoryBase(parent, id)
@@ -40,7 +40,7 @@ KCCellToolFactory::~KCCellToolFactory()
 
 KoToolBase* KCCellToolFactory::createTool(KoCanvasBase* canvas)
 {
-    return new CellTool(canvas);
+    return new KCCellTool(canvas);
 }
 
 void KCCellToolFactory::setPriority(int priority)

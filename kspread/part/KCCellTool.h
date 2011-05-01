@@ -28,13 +28,13 @@
 /**
  * The tool to change cell ranges.
  */
-class KSPREAD_EXPORT CellTool : public CellToolBase
+class KSPREAD_EXPORT KCCellTool : public CellToolBase
 {
     Q_OBJECT
 
 public:
-    explicit CellTool(KoCanvasBase* canvas);
-    ~CellTool();
+    explicit KCCellTool(KoCanvasBase* canvas);
+    ~KCCellTool();
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
 
@@ -55,7 +55,7 @@ protected Q_SLOTS:
     void definePrintRange();
 
 private:
-    Q_DISABLE_COPY(CellTool)
+    Q_DISABLE_COPY(KCCellTool)
 
     class Private;
     Private * const d;

@@ -26,7 +26,7 @@
 
 
 /**
- * The Factory, that creates a CellTool.
+ * The Factory, that creates a KCCellTool.
  */
 class KSPREAD_EXPORT KCCellToolFactory : public KoToolFactoryBase
 {
