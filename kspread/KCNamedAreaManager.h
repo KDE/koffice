@@ -40,7 +40,7 @@ class KCRegion;
 /**
  * Manages named cell areas.
  */
-class KSPREAD_EXPORT NamedAreaManager : public QObject
+class KSPREAD_EXPORT KCNamedAreaManager : public QObject
 {
     Q_OBJECT
 
@@ -48,12 +48,12 @@ public:
     /**
      * Constructor.
      */
-    NamedAreaManager(const KCMap* map);
+    KCNamedAreaManager(const KCMap* map);
 
     /**
      * Destructor.
      */
-    virtual ~NamedAreaManager();
+    virtual ~KCNamedAreaManager();
 
     void remove(KCSheet* sheet);
 

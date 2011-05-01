@@ -28,7 +28,7 @@
 #include "KCFunctionRepository.h"
 #include "KCSheet.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "KCRegion.h"
 #include "KCValue.h"
 

@@ -34,7 +34,7 @@
 #include "KCCell.h"
 #include "KCLocalization.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "Util.h"
@@ -67,7 +67,7 @@ GotoDialog::GotoDialog(QWidget* parent, Selection* selection)
         m_nameCell->addItem(cell.name());
         m_nameCell->addItem(cell.fullName());
     }
-    NamedAreaManager *manager = m_selection->activeSheet()->map()->namedAreaManager();
+    KCNamedAreaManager *manager = m_selection->activeSheet()->map()->namedAreaManager();
     m_nameCell->addItems(manager->areaNames());
     m_nameCell->setFocus();
 

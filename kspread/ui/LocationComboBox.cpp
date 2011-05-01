@@ -23,7 +23,7 @@
 #include "KCCellStorage.h"
 #include "CellToolBase.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "Selection.h"
 #include "KCSheet.h"
 

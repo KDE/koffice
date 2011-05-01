@@ -28,7 +28,7 @@
 */
 
 // Local
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 
 // Qt
 #include <QHash>
@@ -52,14 +52,14 @@ struct NamedArea {
     QRect range;
 };
 
-class NamedAreaManager::Private
+class KCNamedAreaManager::Private
 {
 public:
     const KCMap* map;
     QHash<QString, NamedArea> namedAreas;
 };
 
-NamedAreaManager::NamedAreaManager(const KCMap* map)
+KCNamedAreaManager::KCNamedAreaManager(const KCMap* map)
         : d(new Private)
 {
     d->map = map;
@@ -69,12 +69,12 @@ NamedAreaManager::NamedAreaManager(const KCMap* map)
             this, SIGNAL(namedAreaModified(const QString&)));
 }
 
-NamedAreaManager::~NamedAreaManager()
+KCNamedAreaManager::~KCNamedAreaManager()
 {
     delete d;
 }
 
-void NamedAreaManager::insert(const KCRegion& region, const QString& name)
+void KCNamedAreaManager::insert(const KCRegion& region, const QString& name)
 {
     // NOTE Stefan: Only contiguous regions are supported (OpenDocument compatibility).
     NamedArea namedArea;
@@ -86,7 +86,7 @@ void NamedAreaManager::insert(const KCRegion& region, const QString& name)
     emit namedAreaAdded(name);
 }
 
-void NamedAreaManager::remove(const QString& name)
+void KCNamedAreaManager::remove(const QString& name)
 {
     if (!d->namedAreas.contains(name))
         return;
@@ -106,7 +106,7 @@ void NamedAreaManager::remove(const QString& name)
     }
 }
 
-void NamedAreaManager::remove(KCSheet* sheet)
+void KCNamedAreaManager::remove(KCSheet* sheet)
 {
     const QList<NamedArea> namedAreas = d->namedAreas.values();
     for (int i = 0; i < namedAreas.count(); ++i) {
@@ -115,7 +115,7 @@ void NamedAreaManager::remove(KCSheet* sheet)
     }
 }
 
-KCRegion NamedAreaManager::namedArea(const QString& name) const
+KCRegion KCNamedAreaManager::namedArea(const QString& name) const
 {
     if (!d->namedAreas.contains(name))
         return KCRegion();
@@ -123,24 +123,24 @@ KCRegion NamedAreaManager::namedArea(const QString& name) const
     return KCRegion(namedArea.range, namedArea.sheet);
 }
 
-KCSheet* NamedAreaManager::sheet(const QString& name) const
+KCSheet* KCNamedAreaManager::sheet(const QString& name) const
 {
     if (!d->namedAreas.contains(name))
         return 0;
     return d->namedAreas.value(name).sheet;
 }
 
-bool NamedAreaManager::contains(const QString& name) const
+bool KCNamedAreaManager::contains(const QString& name) const
 {
     return d->namedAreas.contains(name);
 }
 
-QList<QString> NamedAreaManager::areaNames() const
+QList<QString> KCNamedAreaManager::areaNames() const
 {
     return d->namedAreas.keys();
 }
 
-void NamedAreaManager::regionChanged(const KCRegion& region)
+void KCNamedAreaManager::regionChanged(const KCRegion& region)
 {
     KCSheet* sheet;
     QList< QPair<QRectF, QString> > namedAreas;
@@ -155,7 +155,7 @@ void NamedAreaManager::regionChanged(const KCRegion& region)
     }
 }
 
-void NamedAreaManager::updateAllNamedAreas()
+void KCNamedAreaManager::updateAllNamedAreas()
 {
     QList< QPair<QRectF, QString> > namedAreas;
     const QRect rect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax));
@@ -169,7 +169,7 @@ void NamedAreaManager::updateAllNamedAreas()
     }
 }
 
-void NamedAreaManager::loadOdf(const KoXmlElement& body)
+void KCNamedAreaManager::loadOdf(const KoXmlElement& body)
 {
     KoXmlNode namedAreas = KoXml::namedItemNS(body, KoXmlNS::table, "named-expressions");
     if (!namedAreas.isNull()) {
@@ -214,7 +214,7 @@ void NamedAreaManager::loadOdf(const KoXmlElement& body)
     }
 }
 
-void NamedAreaManager::saveOdf(KoXmlWriter& xmlWriter) const
+void KCNamedAreaManager::saveOdf(KoXmlWriter& xmlWriter) const
 {
     if (d->namedAreas.isEmpty())
         return;
@@ -232,7 +232,7 @@ void NamedAreaManager::saveOdf(KoXmlWriter& xmlWriter) const
     xmlWriter.endElement();
 }
 
-void NamedAreaManager::loadXML(const KoXmlElement& parent)
+void KCNamedAreaManager::loadXML(const KoXmlElement& parent)
 {
     KoXmlElement element;
     forEachElement(element, parent) {
@@ -269,7 +269,7 @@ void NamedAreaManager::loadXML(const KoXmlElement& parent)
     }
 }
 
-QDomElement NamedAreaManager::saveXML(QDomDocument& doc) const
+QDomElement KCNamedAreaManager::saveXML(QDomDocument& doc) const
 {
     QDomElement element = doc.createElement("areaname");
     const QList<NamedArea> namedAreas = d->namedAreas.values();
@@ -294,4 +294,4 @@ QDomElement NamedAreaManager::saveXML(QDomDocument& doc) const
     return element;
 }
 
-#include "NamedAreaManager.moc"
+#include "KCNamedAreaManager.moc"

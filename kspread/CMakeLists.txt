@@ -210,7 +210,7 @@ set (kspreadodf_LIB_SRCS
     KCHeaderFooter.cpp
     KCLocalization.cpp
     KCMap.cpp
-    NamedAreaManager.cpp
+    KCNamedAreaManager.cpp
     KCNumber.cpp
     PrintSettings.cpp
     ProtectableObject.cpp

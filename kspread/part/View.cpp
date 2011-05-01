@@ -122,7 +122,7 @@
 #include "Headers.h"
 #include "KCLocalization.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "PrintSettings.h"
 #include "RecalcManager.h"
 #include "RowColumnFormat.h"

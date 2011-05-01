@@ -47,7 +47,7 @@
 #include "LocationComboBox.h"
 #include "KCMap.h"
 #include "MergeStrategy.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "PasteStrategy.h"
 #include "SelectionStrategy.h"
 #include "KCSheet.h"

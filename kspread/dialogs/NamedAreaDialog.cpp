@@ -47,7 +47,7 @@
 // KSpread
 #include "KCLocalization.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "Util.h"

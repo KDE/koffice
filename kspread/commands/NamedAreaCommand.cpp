@@ -25,7 +25,7 @@
 #include "KCFormulaStorage.h"
 #include "kspread_limits.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "KCSheet.h"
 
 NamedAreaCommand::NamedAreaCommand(QUndoCommand* parent)

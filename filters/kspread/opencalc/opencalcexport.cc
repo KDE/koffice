@@ -49,7 +49,7 @@
 #include <kspread/KCHeaderFooter.h>
 #include <kspread/kspread_limits.h>
 #include <kspread/KCMap.h>
-#include <kspread/NamedAreaManager.h>
+#include <kspread/KCNamedAreaManager.h>
 #include <kspread/PrintSettings.h>
 #include <kspread/RowColumnFormat.h>
 #include <kspread/KCSheet.h>

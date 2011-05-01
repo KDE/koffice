@@ -30,7 +30,7 @@
 #include "kspread_limits.h"
 #include "KCLocalization.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 #include "KCStyle.h"

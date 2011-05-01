@@ -45,7 +45,7 @@
 #include <kspread/KCHeaderFooter.h>
 #include <kspread/KCLoadingInfo.h>
 #include <kspread/KCMap.h>
-#include <kspread/NamedAreaManager.h>
+#include <kspread/KCNamedAreaManager.h>
 #include <kspread/PrintSettings.h>
 #include <kspread/KCRegion.h>
 #include <kspread/RowColumnFormat.h>

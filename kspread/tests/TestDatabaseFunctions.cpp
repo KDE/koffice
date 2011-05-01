@@ -21,7 +21,7 @@
 
 #include "KCCellStorage.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "KCSheet.h"
 
 #include "TestKspreadCommon.h"

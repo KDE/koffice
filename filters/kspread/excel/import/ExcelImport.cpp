@@ -58,7 +58,7 @@
 #include <KCHeaderFooter.h>
 #include <KCLoadingInfo.h>
 #include <KCMap.h>
-#include <NamedAreaManager.h>
+#include <KCNamedAreaManager.h>
 #include <RowColumnFormat.h>
 #include <KCSheet.h>
 #include <SheetPrint.h>

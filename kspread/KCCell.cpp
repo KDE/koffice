@@ -56,7 +56,7 @@
 #include "KCLocalization.h"
 #include "KCLoadingInfo.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "KCOdfLoadingContext.h"
 #include "KCOdfSavingContext.h"
 #include "RowColumnFormat.h"

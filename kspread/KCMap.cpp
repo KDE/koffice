@@ -54,7 +54,7 @@
 #include "KCDocBase.h"
 #include "KCLoadingInfo.h"
 #include "KCLocalization.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "KCOdfLoadingContext.h"
 #include "KCOdfSavingContext.h"
 #include "RecalcManager.h"
@@ -94,7 +94,7 @@ public:
     KCBindingManager* bindingManager;
     DatabaseManager* databaseManager;
     KCDependencyManager* dependencyManager;
-    NamedAreaManager* namedAreaManager;
+    KCNamedAreaManager* namedAreaManager;
     RecalcManager* recalcManager;
     StyleManager* styleManager;
     KoStyleManager* textStyleManager;
@@ -134,7 +134,7 @@ KCMap::KCMap(KCDocBase* doc, int syntaxVersion)
     d->bindingManager = new KCBindingManager(this);
     d->databaseManager = new DatabaseManager(this);
     d->dependencyManager = new KCDependencyManager(this);
-    d->namedAreaManager = new NamedAreaManager(this);
+    d->namedAreaManager = new KCNamedAreaManager(this);
     d->recalcManager = new RecalcManager(this);
     d->styleManager = new StyleManager();
     d->textStyleManager = new KoStyleManager(this);
@@ -259,7 +259,7 @@ KCDependencyManager* KCMap::dependencyManager() const
     return d->dependencyManager;
 }
 
-NamedAreaManager* KCMap::namedAreaManager() const
+KCNamedAreaManager* KCMap::namedAreaManager() const
 {
     return d->namedAreaManager;
 }

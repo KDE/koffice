@@ -28,7 +28,7 @@
 #include "KCCell.h"
 #include "kspread_limits.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "KCSheet.h"
 #include "Util.h"
 

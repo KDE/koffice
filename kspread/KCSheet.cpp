@@ -76,7 +76,7 @@
 #include "KCLoadingInfo.h"
 #include "KCLocalization.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "KCOdfLoadingContext.h"
 #include "KCOdfSavingContext.h"
 #include "PrintSettings.h"

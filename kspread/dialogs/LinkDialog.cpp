@@ -26,7 +26,7 @@
 
 #include "KCCell.h"
 #include "KCMap.h"
-#include "NamedAreaManager.h"
+#include "KCNamedAreaManager.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 
@@ -165,7 +165,7 @@ LinkDialog::LinkDialog(QWidget* parent, Selection* selection)
         d->cellLink->addItem(cell.fullName());
     }
 
-    const NamedAreaManager *manager = selection->activeSheet()->map()->namedAreaManager();
+    const KCNamedAreaManager *manager = selection->activeSheet()->map()->namedAreaManager();
     d->cellLink->addItems(manager->areaNames());
 
     d->cellLink->setItemText(d->cellLink->currentIndex(), "");

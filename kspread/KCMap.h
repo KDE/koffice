@@ -58,7 +58,7 @@ class DatabaseManager;
 class KCDependencyManager;
 class KCDocBase;
 class KCLoadingInfo;
-class NamedAreaManager;
+class KCNamedAreaManager;
 class RecalcManager;
 class RowFormat;
 class KCSheet;
@@ -124,7 +124,7 @@ public:
     /**
      * \return a pointer to the named area manager
      */
-    NamedAreaManager* namedAreaManager() const;
+    KCNamedAreaManager* namedAreaManager() const;
 
     /**
      * \return a pointer to the recalculation manager
