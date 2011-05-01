@@ -920,22 +920,22 @@ void GNUMERICFilter::ParseFormat(QString const & formatString, const KCCell& ksp
         style.setFormatType(KCFormat::Percentage);
     } else if (formatString[0] == '$') { // dollar
         style.setFormatType(KCFormat::Money);
-        Currency currency("$");
+        KCCurrency currency("$");
         style.setCurrency(currency);
         lastPos = 1;
     } else if (formatString.startsWith("£")) { // pound
         style.setFormatType(KCFormat::Money);
-        Currency currency("£");
+        KCCurrency currency("£");
         style.setCurrency(currency);
         lastPos = 1;
     } else if (formatString.startsWith("¥")) { // yen
         style.setFormatType(KCFormat::Money);
-        Currency currency("¥");
+        KCCurrency currency("¥");
         style.setCurrency(currency);
         lastPos = 1;
     } else if (formatString.startsWith("€")) { // euro
         style.setFormatType(KCFormat::Money);
-        Currency currency("€");
+        KCCurrency currency("€");
         style.setCurrency(currency);
         lastPos = 1;
     } else if (l > 1) {
@@ -943,7 +943,7 @@ void GNUMERICFilter::ParseFormat(QString const & formatString, const KCCell& ksp
             int n = formatString.indexOf(']');
             if (n != -1) {
                 style.setFormatType(KCFormat::Money);
-                Currency currency(formatString.mid(2, n - 2));
+                KCCurrency currency(formatString.mid(2, n - 2));
                 style.setCurrency(currency);
             }
             lastPos = ++n;

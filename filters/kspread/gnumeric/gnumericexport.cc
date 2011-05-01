@@ -42,7 +42,7 @@
 #include <kspread/KCApplicationSettings.h>
 #include <kspread/part/Canvas.h>
 #include <kspread/CellStorage.h>
-#include <kspread/Currency.h>
+#include <kspread/KCCurrency.h>
 #include <kspread/part/Doc.h>
 #include <kspread/HeaderFooter.h>
 #include <kspread/KCMap.h>
@@ -667,7 +667,7 @@ QDomElement GNUMERICExport::GetCellStyle(QDomDocument gnumeric_doc, const KCCell
 
     QString stringFormat;
 
-    Currency currency;
+    KCCurrency currency;
 
     switch (style.formatType()) {
     case KCFormat::Generic:

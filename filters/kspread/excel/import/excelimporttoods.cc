@@ -1139,7 +1139,7 @@ QString extractConditional(const QString &_text)
     return text;
 }
 
-// Currency or accounting format.
+// KCCurrency or accounting format.
 // "$"* #,##0.0000_
 // [$EUR]\ #,##0.00"
 // [$₩-412]* #,##0.0000

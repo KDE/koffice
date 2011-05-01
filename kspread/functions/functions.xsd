@@ -120,7 +120,7 @@
             <xsd:enumeration value="Time"/>
             <xsd:enumeration value="Boolean"/>
             <xsd:enumeration value="Percentage"/>
-            <xsd:enumeration value="Currency"/>
+            <xsd:enumeration value="KCCurrency"/>
             <xsd:enumeration value="Complex"/>
             <xsd:enumeration value="Array"/>
         </xsd:restriction>

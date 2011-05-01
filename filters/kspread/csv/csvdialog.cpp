@@ -74,7 +74,7 @@ CSVDialog::CSVDialog(QWidget* parent, QByteArray& fileArray, const QString /*sep
 
     m_formatList << i18n("Text");
     m_formatList << i18n("KCNumber");
-    m_formatList << i18n("Currency");
+    m_formatList << i18n("KCCurrency");
     m_formatList << i18n("Date");
     m_formatList << i18n("Decimal Comma KCNumber");
     m_formatList << i18n("Decimal Point KCNumber");
@@ -335,7 +335,7 @@ int CSVDialog::getHeader(int col)
         return TEXT;
     else if (header == i18n("KCNumber"))
         return NUMBER;
-    else if (header == i18n("Currency"))
+    else if (header == i18n("KCCurrency"))
         return CURRENCY;
     else if (header == i18n("Date"))
         return DATE;

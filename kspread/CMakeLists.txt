@@ -200,7 +200,7 @@ set (kspreadodf_LIB_SRCS
     CellStorage.cpp
     Cluster.cpp
     KCCondition.cpp
-    Currency.cpp
+    KCCurrency.cpp
     Damages.cpp
     DependencyManager.cpp
     DocBase.cpp

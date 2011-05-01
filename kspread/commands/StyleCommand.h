@@ -150,7 +150,7 @@ public:
     void setFormatType(KCFormat::Type formatType) {
         m_style->setFormatType(formatType);
     }
-    void setCurrency(const Currency& currency) {
+    void setCurrency(const KCCurrency& currency) {
         m_style->setCurrency(currency);
     }
     void setParentName(const QString& name) {

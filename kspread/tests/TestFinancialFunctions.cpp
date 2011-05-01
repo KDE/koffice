@@ -428,7 +428,7 @@ void TestFinancialFunctions::testEURO()
     CHECK_EVAL("EURO(\"NOMANSLAND\")", KCValue::errorNUM());
 }
 
-// Currency conversion using Euro
+// KCCurrency conversion using Euro
 // EUROCONVERT(number,source,target)
 void TestFinancialFunctions::testEUROCONVERT()
 {

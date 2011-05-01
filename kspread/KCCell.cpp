@@ -1284,7 +1284,7 @@ void KCCell::saveOdfValue(KoXmlWriter &xmlWriter)
         xmlWriter.addAttribute("office:value-type", "currency");
         const KCStyle style = this->style();
         if (style.hasAttribute(KCStyle::CurrencyFormat)) {
-            Currency currency = style.currency();
+            KCCurrency currency = style.currency();
             xmlWriter.addAttribute("office:currency", currency.code());
         }
         xmlWriter.addAttribute("office:value", QString::number((double) numToDouble(value().asFloat())));
@@ -1419,9 +1419,9 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
                 value.setFormat(KCValue::fmt_Money);
                 setValue(value);
 
-                Currency currency;
+                KCCurrency currency;
                 if (element.hasAttributeNS(KoXmlNS::office, sCurrency)) {
-                    currency = Currency(element.attributeNS(KoXmlNS::office, sCurrency, QString()));
+                    currency = KCCurrency(element.attributeNS(KoXmlNS::office, sCurrency, QString()));
                 }
                 /* TODO: somehow make this work again, all setStyle calls here will be overwritten by cell styles later
                 if( style.isEmpty() ) {

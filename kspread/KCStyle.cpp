@@ -39,7 +39,7 @@
 #include <KoXmlWriter.h>
 
 #include "KCCondition.h"
-#include "Currency.h"
+#include "KCCurrency.h"
 #include "Global.h"
 #include "StyleManager.h"
 #include "Util.h"
@@ -61,7 +61,7 @@ static uint calculateValue(QPen const & pen)
 
 // specialized debug method
 template<>
-QString SubStyleOne<KCStyle::CurrencyFormat, Currency>::debugData(bool withName) const
+QString SubStyleOne<KCStyle::CurrencyFormat, KCCurrency>::debugData(bool withName) const
 {
     QString out; if (withName) out = name(KCStyle::CurrencyFormat) + ' '; QDebug qdbg(&out); qdbg << value1.symbol(); return out;
 }
@@ -106,7 +106,7 @@ QString SubStyle::name(KCStyle::Key key)
     case KCStyle::FormatTypeKey:          name = "KCFormat type"; break;
     case KCStyle::FloatFormatKey:         name = "Float format"; break;
     case KCStyle::FloatColorKey:          name = "Float color"; break;
-    case KCStyle::CurrencyFormat:         name = "Currency"; break;
+    case KCStyle::CurrencyFormat:         name = "KCCurrency"; break;
     case KCStyle::CustomFormat:           name = "Custom format"; break;
     case KCStyle::BackgroundBrush:        name = "Background brush"; break;
     case KCStyle::BackgroundColor:        name = "Background color"; break;
@@ -683,21 +683,21 @@ KCFormat::Type KCStyle::timeType(const QString &_format)
         return KCFormat::Time;
 }
 
-Currency KCStyle::numberCurrency(const QString &_format)
+KCCurrency KCStyle::numberCurrency(const QString &_format)
 {
     // Look up if a prefix or postfix is in the currency table,
     // return the currency symbol to use for formatting purposes.
     if(!_format.isEmpty()) {
         QString f = QString(_format.at(0));
-        Currency currStart = Currency(f);
+        KCCurrency currStart = KCCurrency(f);
         if (currStart.index() > 1)
             return currStart;
         f = QString(_format.at(_format.size()-1));
-        Currency currEnd = Currency(f);
+        KCCurrency currEnd = KCCurrency(f);
         if (currEnd.index() > 1)
             return currEnd;
     }
-    return Currency(QString());
+    return KCCurrency(QString());
 }
 
 KCFormat::Type KCStyle::fractionType(const QString &_format)
@@ -1691,15 +1691,15 @@ bool KCStyle::loadXML(KoXmlElement& format, Paste::Mode mode)
     }
     if (formatType() == KCFormat::Money) {
         ok = true;
-        Currency currency;
+        KCCurrency currency;
         if (format.hasAttribute("type")) {
-            currency = Currency(format.attribute("type").toInt(&ok));
+            currency = KCCurrency(format.attribute("type").toInt(&ok));
             if (!ok) {
                 if (format.hasAttribute("symbol"))
-                    currency = Currency(format.attribute("symbol"));
+                    currency = KCCurrency(format.attribute("symbol"));
             }
         } else if (format.hasAttribute("symbol"))
-            currency = Currency(format.attribute("symbol"));
+            currency = KCCurrency(format.attribute("symbol"));
         setCurrency(currency);
     }
     if (format.hasAttribute("angle")) {
@@ -1999,11 +1999,11 @@ KCFormat::Type KCStyle::formatType() const
     return static_cast<const SubStyleOne<FormatTypeKey, KCFormat::Type>*>(d->subStyles[FormatTypeKey].data())->value1;
 }
 
-Currency KCStyle::currency() const
+KCCurrency KCStyle::currency() const
 {
     if (!d->subStyles.contains(CurrencyFormat))
-        return Currency();
-    return static_cast<const SubStyleOne<CurrencyFormat, Currency>*>(d->subStyles[CurrencyFormat].data())->value1;
+        return KCCurrency();
+    return static_cast<const SubStyleOne<CurrencyFormat, KCCurrency>*>(d->subStyles[CurrencyFormat].data())->value1;
 }
 
 QFont KCStyle::font() const
@@ -2273,7 +2273,7 @@ void KCStyle::setPostfix(QString const & postfix)
     insertSubStyle(Postfix, postfix);
 }
 
-void KCStyle::setCurrency(Currency const & currency)
+void KCStyle::setCurrency(KCCurrency const & currency)
 {
     QVariant variant;
     variant.setValue(currency);
@@ -2390,8 +2390,8 @@ bool KCStyle::compare(const SubStyle* one, const SubStyle* two)
     case FloatColorKey:
         return static_cast<const SubStyleOne<FloatColorKey, FloatColor>*>(one)->value1 == static_cast<const SubStyleOne<FloatColorKey, FloatColor>*>(two)->value1;
     case CurrencyFormat: {
-        Currency currencyOne = static_cast<const SubStyleOne<CurrencyFormat, Currency>*>(one)->value1;
-        Currency currencyTwo = static_cast<const SubStyleOne<CurrencyFormat, Currency>*>(two)->value1;
+        KCCurrency currencyOne = static_cast<const SubStyleOne<CurrencyFormat, KCCurrency>*>(one)->value1;
+        KCCurrency currencyTwo = static_cast<const SubStyleOne<CurrencyFormat, KCCurrency>*>(two)->value1;
         if (currencyOne != currencyTwo)
             return false;
         return true;
@@ -2589,7 +2589,7 @@ SharedSubStyle KCStyle::createSubStyle(Key key, const QVariant& value)
         newSubStyle = new SubStyleOne<FloatColorKey, FloatColor>((FloatColor)value.value<int>());
         break;
     case CurrencyFormat:
-        newSubStyle = new SubStyleOne<CurrencyFormat, Currency>(value.value<Currency>());
+        newSubStyle = new SubStyleOne<CurrencyFormat, KCCurrency>(value.value<KCCurrency>());
         break;
     case CustomFormat:
         newSubStyle = new SubStyleOne<CustomFormat, QString>(value.value<QString>());

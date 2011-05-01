@@ -498,7 +498,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row
                         cell.setValue(KCValue(dv));
 
                     if (type == "currency") {
-                        Currency currency(e.attributeNS(ooNS::table, "currency", QString()));
+                        KCCurrency currency(e.attributeNS(ooNS::table, "currency", QString()));
                         style.setCurrency(currency);
                         style.setFormatType(KCFormat::Money);
                     }
@@ -1460,7 +1460,7 @@ QString * OpenCalcImport::loadFormat(KoXmlElement * element,
                 format->append(e.text());
         } else if (e.localName() == "currency-symbol" && e.namespaceURI() == ooNS::number) {
             QString sym(e.text());
-            kDebug(30518) << "Currency:" << sym;
+            kDebug(30518) << "KCCurrency:" << sym;
             format->append(sym);
             // number:language="de" number:country="DE">€</number:currency-symbol>
         } else if (e.localName() == "day-of-week" && e.namespaceURI() == ooNS::number) {

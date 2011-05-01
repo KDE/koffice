@@ -123,8 +123,8 @@ void Inspector::Private::handleStyle() // direct style access
     new QTreeWidgetItem(styleView, QStringList() << "Protected" << boolAsString(!style.notProtected()));
     new QTreeWidgetItem(styleView, QStringList() << "Vertical Text" << boolAsString(style.verticalText()));
 
-    new QTreeWidgetItem(styleView, QStringList() << "Currency symbol" << style.currency().symbol());
-    new QTreeWidgetItem(styleView, QStringList() << "Currency code" << style.currency().code());
+    new QTreeWidgetItem(styleView, QStringList() << "KCCurrency symbol" << style.currency().symbol());
+    new QTreeWidgetItem(styleView, QStringList() << "KCCurrency code" << style.currency().code());
 
     QTreeWidgetItem* flags = new QTreeWidgetItem(styleView, QStringList("Flags"));
     new QTreeWidgetItem(flags, QStringList() << "Border (left)" <<

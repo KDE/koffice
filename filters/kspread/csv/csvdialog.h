@@ -44,7 +44,7 @@ public:
         TEXT,       ///< Normal text
         NUMBER,     ///< KCNumber (either like locale or like C)
         DATE,       ///< Date \todo What type exactly?
-        CURRENCY,   ///< Currency
+        CURRENCY,   ///< KCCurrency
         COMMANUMBER,///< KCNumber, which decimal symbol is a comma
         POINTNUMBER ///< KCNumber, which decimal symbol is a point/dot
     };

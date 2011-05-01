@@ -28,10 +28,10 @@
 
 /**
  * \ingroup KCStyle
- * \class Currency
- * Currency format information.
+ * \class KCCurrency
+ * KCCurrency format information.
  */
-class KSPREAD_EXPORT Currency
+class KSPREAD_EXPORT KCCurrency
 {
 public:
     enum KCFormat { Native, Gnumeric, OpenCalc, ApplixSpread, GobeProductiveSpread, HancomSheet };
@@ -42,7 +42,7 @@ public:
      * If \p index is omitted or zero, a currency with the locale default
      * currency unit is created.
      */
-    explicit Currency(int index = 0);
+    explicit KCCurrency(int index = 0);
 
     /**
      * Constructor.
@@ -53,16 +53,16 @@ public:
      * \p code e.g. EUR, USD,..
      * \param format in Gnumeric the code is: [$EUR]
      */
-    explicit Currency(QString const & code, KCFormat format = Native);
+    explicit KCCurrency(QString const & code, KCFormat format = Native);
 
     /**
      * Destructor.
      */
-    ~Currency();
+    ~KCCurrency();
 
 
-    bool operator==(Currency const & other) const;
-    inline bool operator!=(Currency const & other) const {
+    bool operator==(KCCurrency const & other) const;
+    inline bool operator!=(KCCurrency const & other) const {
         return !operator==(other);
     }
 
@@ -79,10 +79,10 @@ private:
     QString m_code;
 };
 
-static inline uint qHash(const Currency& cur) {
+static inline uint qHash(const KCCurrency& cur) {
     return ::qHash(cur.code());
 }
 
-Q_DECLARE_METATYPE(Currency)
+Q_DECLARE_METATYPE(KCCurrency)
 
 #endif

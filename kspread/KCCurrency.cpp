@@ -19,7 +19,7 @@
 */
 
 // Locale
-#include "Currency.h"
+#include "KCCurrency.h"
 
 #include <klocale.h>
 
@@ -384,13 +384,13 @@ const Money * gMoneyList(lMoney);
 
 using namespace Currency_LNS;
 
-Currency::Currency(int index)
+KCCurrency::KCCurrency(int index)
         : m_index(index)
         , m_code(gCurrencyMap.code(index))
 {
 }
 
-Currency::Currency(QString const & code, KCFormat format)
+KCCurrency::KCCurrency(QString const & code, KCFormat format)
         : m_index(1)   // unspecified first, searched at the end of this ctor
         , m_code(code)
 {
@@ -415,11 +415,11 @@ Currency::Currency(QString const & code, KCFormat format)
     m_index = gCurrencyMap.index(m_code);
 }
 
-Currency::~Currency()
+KCCurrency::~KCCurrency()
 {
 }
 
-bool Currency::operator==(Currency const & cur) const
+bool KCCurrency::operator==(KCCurrency const & cur) const
 {
     if (m_index != cur.m_index)
         return false;
@@ -428,7 +428,7 @@ bool Currency::operator==(Currency const & cur) const
     return true;
 }
 
-QString Currency::code(KCFormat format) const
+QString KCCurrency::code(KCFormat format) const
 {
     if (format == Gnumeric) {
         if (m_code.length() == 1)   // symbol
@@ -438,29 +438,29 @@ QString Currency::code(KCFormat format) const
     return m_code;
 }
 
-QString Currency::country() const
+QString KCCurrency::country() const
 {
     return gCurrencyMap.country(m_index);
 }
 
-QString Currency::name() const
+QString KCCurrency::name() const
 {
     return gCurrencyMap.name(m_index);
 }
 
-QString Currency::symbol() const
+QString KCCurrency::symbol() const
 {
     if (m_index == 1)   // undefined
         return m_code;
     return gMoneyList[m_index].display;
 }
 
-int Currency::index() const
+int KCCurrency::index() const
 {
     return m_index;
 }
 
-QString Currency::chooseString(int type, bool & ok)
+QString KCCurrency::chooseString(int type, bool & ok)
 {
     if (!gMoneyList[type].country) {
         ok = false;

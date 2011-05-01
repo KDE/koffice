@@ -618,7 +618,7 @@ public:
     KCStyle::FloatFormat floatFormat;
     bool bFloatFormat;
     KCStyle::FloatColor floatColor;
-    Currency m_currency;
+    KCCurrency m_currency;
     bool bFloatColor;
     bool bCurrency;
     QColor textColor;

@@ -85,7 +85,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
       <item row="4" column="0">
        <widget class="QRadioButton" name="radioButton_5">
         <property name="text">
-         <string>Currency</string>
+         <string>KCCurrency</string>
         </property>
        </widget>
       </item>
@@ -156,7 +156,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
       <item row="1" column="2">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>Currency:</string>
+         <string>KCCurrency:</string>
         </property>
        </widget>
       </item>

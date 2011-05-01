@@ -609,7 +609,7 @@ void CellFormatDialog::initMembers()
     bHideAll        = false;
     bIsProtected    = true;
 
-    m_currency      = Currency(); // locale default
+    m_currency      = KCCurrency(); // locale default
 
     KCSheet* sheet = m_sheet;
     defaultWidthSize  = sheet ? sheet->map()->defaultColumnFormat()->width() : 0;
@@ -733,7 +733,7 @@ void CellFormatDialog::initParameters(const KCStyle& style)
     if (!bDontPrintText != style.printText())
         bDontPrintText = false;
 
-    Currency currency = style.currency();
+    KCCurrency currency = style.currency();
     if (currency != m_currency)
         bCurrency = false;
 }
@@ -902,7 +902,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     grid->addWidget(percent, 3, 0);
 
     money = new QRadioButton(i18n("Money"), grp);
-    money->setWhatsThis(i18n("The Money format converts your number into money notation using the settings globally fixed in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Money. The currency symbol will be displayed and the precision will be the one set in System Settings.\nYou can also use the Currency icon in the KCFormat Toolbar to set the cell formatting to look like your current currency."));
+    money->setWhatsThis(i18n("The Money format converts your number into money notation using the settings globally fixed in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Money. The currency symbol will be displayed and the precision will be the one set in System Settings.\nYou can also use the KCCurrency icon in the KCFormat Toolbar to set the cell formatting to look like your current currency."));
     grid->addWidget(money, 4, 0);
 
     scientific = new QRadioButton(i18n("Scientific"), grp);
@@ -1011,7 +1011,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
 
     currencyLabel = new QLabel(box);
     grid->addWidget(currencyLabel, 1, 2);
-    currencyLabel->setText(i18n("Currency:"));
+    currencyLabel->setText(i18n("KCCurrency:"));
 
     currency = new KComboBox(box);
     grid->addWidget(currency, 1, 3);
@@ -1022,7 +1022,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     bool ok = true;
     QString text;
     while (ok) {
-        text = Currency::chooseString(index, ok);
+        text = KCCurrency::chooseString(index, ok);
         if (ok)
             currency->insertItem(index - 1, text);
         else
@@ -1067,7 +1067,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
                     tmp = dlg->m_currency.symbol();
                 else {
                     bool ok = true;
-                    tmp = Currency::chooseString(dlg->m_currency.index(), ok);
+                    tmp = KCCurrency::chooseString(dlg->m_currency.index(), ok);
                     if (!ok)
                         tmp = dlg->m_currency.symbol();
                 }
@@ -1407,7 +1407,7 @@ void CellFormatPageFloat::currencyChanged(const QString &)
     int index = currency->currentIndex();
     if (index > 0)
         ++index;
-    dlg->m_currency = Currency(index);
+    dlg->m_currency = KCCurrency(index);
 
     makeformat();
 }
@@ -1587,15 +1587,15 @@ void CellFormatPageFloat::apply(CustomStyle * style)
     if (m_bFormatTypeChanged) {
         style->setFormatType(newFormatType);
         if (money->isChecked()) {
-            Currency currency;
+            KCCurrency currency;
             int index = this->currency->currentIndex();
             if (index == 0) {
                 if (this->currency->currentText() == i18n("Automatic"))
-                    currency = Currency();
+                    currency = KCCurrency();
                 else
-                    currency = Currency(this->currency->currentText());
+                    currency = KCCurrency(this->currency->currentText());
             } else {
-                currency = Currency(++index);
+                currency = KCCurrency(++index);
             }
             style->setCurrency(currency);
         }
@@ -1649,15 +1649,15 @@ void CellFormatPageFloat::apply(StyleCommand* _obj)
     if (m_bFormatTypeChanged) {
         _obj->setFormatType(newFormatType);
         if (money->isChecked()) {
-            Currency currency;
+            KCCurrency currency;
             int index = this->currency->currentIndex();
             if (index == 0) {
                 if (this->currency->currentText() == i18n("Automatic"))
-                    currency = Currency();
+                    currency = KCCurrency();
                 else
-                    currency = Currency(this->currency->currentText());
+                    currency = KCCurrency(this->currency->currentText());
             } else {
-                currency = Currency(++index);
+                currency = KCCurrency(++index);
             }
             _obj->setCurrency(currency);
         }

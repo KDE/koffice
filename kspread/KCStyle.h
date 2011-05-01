@@ -28,7 +28,7 @@
 
 #include <KoXmlReader.h>
 
-#include "Currency.h"
+#include "KCCurrency.h"
 #include "KCFormat.h"
 #include "Global.h"
 
@@ -214,7 +214,7 @@ public:
     FloatColor  floatColor()  const;
     KCFormat::Type  formatType()  const;
 
-    Currency currency() const;
+    KCCurrency currency() const;
 
     QFont  font()         const;
     bool   bold()         const;
@@ -278,7 +278,7 @@ public:
     void setPrecision(int precision);
     void setPrefix(QString const & prefix);
     void setPostfix(QString const & postfix);
-    void setCurrency(Currency const & currency);
+    void setCurrency(KCCurrency const & currency);
     void setWrapText(bool enable);
     void setHideAll(bool enable);
     void setHideFormula(bool enable);
@@ -297,7 +297,7 @@ public:
     static KCFormat::Type timeType(const QString&);
     static KCFormat::Type fractionType(const QString&);
     static KCFormat::Type numberType(const QString&);
-    static Currency numberCurrency(const QString&);
+    static KCCurrency numberCurrency(const QString&);
 
     /**
      * @return the name of the data style (number, currency, percentage, date,

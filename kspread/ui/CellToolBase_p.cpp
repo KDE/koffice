@@ -745,7 +745,7 @@ bool CellToolBase::Private::formatKeyPress(QKeyEvent * _ev)
         break;
 
     case Qt::Key_Dollar:
-        command->setText(i18n("Currency KCFormat"));
+        command->setText(i18n("KCCurrency KCFormat"));
         command->setFormatType(KCFormat::Money);
         command->setPrecision(q->selection()->activeSheet()->map()->calculationSettings()->locale()->fracDigits());
         break;
