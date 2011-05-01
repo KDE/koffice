@@ -181,11 +181,11 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(KCWorkbookDamage::Changes)
  * \ingroup Damages
  * A selection damage.
  */
-class KSPREAD_EXPORT SelectionDamage : public KCDamage
+class KSPREAD_EXPORT KCSelectionDamage : public KCDamage
 {
 public:
-    SelectionDamage(const KCRegion& region);
-    virtual ~SelectionDamage();
+    KCSelectionDamage(const KCRegion& region);
+    virtual ~KCSelectionDamage();
 
     virtual Type type() const {
         return KCDamage::DamagedSelection;
@@ -194,7 +194,7 @@ public:
     const KCRegion& region() const;
 
 private:
-    Q_DISABLE_COPY(SelectionDamage)
+    Q_DISABLE_COPY(KCSelectionDamage)
 
     class Private;
     Private * const d;
@@ -208,6 +208,6 @@ private:
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCDamage& d);
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCCellDamage& d);
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCSheetDamage& d);
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const SelectionDamage& d);
+KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCSelectionDamage& d);
 
 #endif // KSPREAD_DAMAGES

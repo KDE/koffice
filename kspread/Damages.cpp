@@ -49,7 +49,7 @@ public:
     Changes changes;
 };
 
-class SelectionDamage::Private
+class KCSelectionDamage::Private
 {
 public:
     KCRegion region;
@@ -139,18 +139,18 @@ KCWorkbookDamage::Changes KCWorkbookDamage::changes() const
 }
 
 
-SelectionDamage::SelectionDamage(const KCRegion& region)
+KCSelectionDamage::KCSelectionDamage(const KCRegion& region)
         : d(new Private)
 {
     d->region = region;
 }
 
-SelectionDamage::~SelectionDamage()
+KCSelectionDamage::~KCSelectionDamage()
 {
     delete d;
 }
 
-const KCRegion& SelectionDamage::region() const
+const KCRegion& KCSelectionDamage::region() const
 {
     return d->region;
 }
@@ -200,8 +200,8 @@ QDebug operator<<(QDebug str, const KCSheetDamage& d)
     return str;
 }
 
-QDebug operator<<(QDebug str, const SelectionDamage& d)
+QDebug operator<<(QDebug str, const KCSelectionDamage& d)
 {
-    str << "SelectionDamage: " << d.region().name();
+    str << "KCSelectionDamage: " << d.region().name();
     return str;
 }

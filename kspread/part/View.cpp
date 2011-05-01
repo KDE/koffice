@@ -1771,7 +1771,7 @@ void View::slotChangeSelection(const KCRegion& changedRegion)
         return;
 
     if (d->selection->referenceSelectionMode()) {
-        doc()->map()->addDamage(new SelectionDamage(changedRegion));
+        doc()->map()->addDamage(new KCSelectionDamage(changedRegion));
         kDebug(36002) << "Choice:" << *selection();
         return;
     }
@@ -1781,7 +1781,7 @@ void View::slotChangeSelection(const KCRegion& changedRegion)
     d->statusBarOpTimer.start(250);
 
     if (!d->loading && !doc()->map()->isLoading()) {
-        doc()->map()->addDamage(new SelectionDamage(changedRegion));
+        doc()->map()->addDamage(new KCSelectionDamage(changedRegion));
     }
     d->rowHeader->update();
     d->columnHeader->update();
@@ -2096,7 +2096,7 @@ void View::handleDamages(const QList<KCDamage*>& damages)
         }
 
         if (damage->type() == KCDamage::DamagedSelection) {
-            SelectionDamage* selectionDamage = static_cast<SelectionDamage*>(damage);
+            KCSelectionDamage* selectionDamage = static_cast<KCSelectionDamage*>(damage);
             kDebug(36007) << "Processing\t" << *selectionDamage;
             const KCRegion region = selectionDamage->region();
 

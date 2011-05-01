@@ -867,7 +867,7 @@ void KCMap::addDamage(KCDamage* damage)
     } else if (damage->type() == KCDamage::DamagedSheet) {
         kDebug(36007) << "Adding\t" << *static_cast<KCSheetDamage*>(damage);
     } else if (damage->type() == KCDamage::DamagedSelection) {
-        kDebug(36007) << "Adding\t" << *static_cast<SelectionDamage*>(damage);
+        kDebug(36007) << "Adding\t" << *static_cast<KCSelectionDamage*>(damage);
     } else {
         kDebug(36007) << "Adding\t" << *damage;
     }
