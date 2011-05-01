@@ -18,7 +18,7 @@
 */
 
 // Local
-#include "Factory.h"
+#include "KCFactory.h"
 
 #include <kdebug.h>
 #include <kcomponentdata.h>
@@ -27,28 +27,28 @@
 #include "AboutData.h"
 #include "KCDoc.h"
 
-KComponentData* Factory::s_global = 0;
-KAboutData* Factory::s_aboutData = 0;
+KComponentData* KCFactory::s_global = 0;
+KAboutData* KCFactory::s_aboutData = 0;
 
-Factory::Factory(QObject* parent)
+KCFactory::KCFactory(QObject* parent)
         : KPluginFactory(*aboutData(), parent)
 {
-    //kDebug(36001) <<"Factory::Factory()";
+    //kDebug(36001) <<"KCFactory::KCFactory()";
     // Create our instance, so that it becomes KGlobal::instance if the
     // main app is KSpread.
     (void)global();
 }
 
-Factory::~Factory()
+KCFactory::~KCFactory()
 {
-    //kDebug(36001) <<"Factory::~Factory()";
+    //kDebug(36001) <<"KCFactory::~KCFactory()";
     delete s_aboutData;
     s_aboutData = 0;
     delete s_global;
     s_global = 0;
 }
 
-QObject* Factory::create(const char* iface, QWidget* parentWidget, QObject *parent, const QVariantList& args, const QString& keyword)
+QObject* KCFactory::create(const char* iface, QWidget* parentWidget, QObject *parent, const QVariantList& args, const QString& keyword)
 {
     Q_UNUSED(args);
     Q_UNUSED(keyword);
@@ -62,14 +62,14 @@ QObject* Factory::create(const char* iface, QWidget* parentWidget, QObject *pare
     return doc;
 }
 
-KAboutData* Factory::aboutData()
+KAboutData* KCFactory::aboutData()
 {
     if (!s_aboutData)
         s_aboutData = newAboutData();
     return s_aboutData;
 }
 
-const KComponentData &Factory::global()
+const KComponentData &KCFactory::global()
 {
     if (!s_global) {
         s_global = new KComponentData(aboutData());
@@ -82,4 +82,4 @@ const KComponentData &Factory::global()
     return *s_global;
 }
 
-#include "Factory.moc"
+#include "KCFactory.moc"

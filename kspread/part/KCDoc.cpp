@@ -80,7 +80,7 @@
 #include "KCCalculationSettings.h"
 #include "KCCanvas.h"
 #include "KCDependencyManager.h"
-#include "Factory.h"
+#include "KCFactory.h"
 #include "KCFormula.h"
 #include "KCFunction.h"
 #include "KCFunctionModuleRegistry.h"
@@ -159,7 +159,7 @@ KCDoc::KCDoc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
     connect(d->map, SIGNAL(commandAdded(QUndoCommand *)),
             this, SLOT(addCommand(QUndoCommand *)));
 
-    setComponentData(Factory::global(), false);
+    setComponentData(KCFactory::global(), false);
     setTemplateType("kspread_template");
 
     // Load the function modules.
@@ -185,7 +185,7 @@ void KCDoc::openTemplate(const KUrl& url)
 
 void KCDoc::initEmpty()
 {
-    KSharedConfigPtr config = Factory::global().config();
+    KSharedConfigPtr config = KCFactory::global().config();
     const int page = config->group("Parameters").readEntry("NbPage", 1);
 
     for (int i = 0; i < page; ++i)
@@ -202,12 +202,12 @@ void KCDoc::saveConfig()
 {
     if (isEmbedded() || !isReadWrite())
         return;
-    KSharedConfigPtr config = Factory::global().config();
+    KSharedConfigPtr config = KCFactory::global().config();
 }
 
 void KCDoc::initConfig()
 {
-    KSharedConfigPtr config = Factory::global().config();
+    KSharedConfigPtr config = KCFactory::global().config();
 
     const int page = config->group("KSpread Page Layout").readEntry("Default unit page", 0);
     setUnit(KoUnit((KoUnit::Unit) page));

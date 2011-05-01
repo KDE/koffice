@@ -113,7 +113,7 @@
 #include "Damages.h"
 #include "KCDependencyManager.h"
 #include "KCDoc.h"
-#include "Factory.h"
+#include "KCFactory.h"
 #include "KCHeaderFooter.h"
 #include "KCLoadingInfo.h"
 #include "KCCanvas.h"
@@ -563,7 +563,7 @@ View::View(QWidget *_parent, KCDoc *_doc)
 
     d->loading = true;
 
-    setComponentData(Factory::global());
+    setComponentData(KCFactory::global());
     if (doc()->isReadWrite())
         setXMLFile("kspread.rc");
     else
@@ -914,7 +914,7 @@ void View::aboutToModify(const KCRegion& region)
 
 void View::initConfig()
 {
-    KSharedConfigPtr config = Factory::global().config();
+    KSharedConfigPtr config = KCFactory::global().config();
     const KConfigGroup parameterGroup = config->group("Parameters");
     const bool configFromDoc = doc()->configLoadFromFile();
     if (!configFromDoc) {
@@ -1147,10 +1147,10 @@ void View::createTemplate()
 
     doc()->saveNativeFormat(tempFile.fileName());
 
-    KoTemplateCreateDia::createTemplate("kspread_template", Factory::global(),
+    KoTemplateCreateDia::createTemplate("kspread_template", KCFactory::global(),
                                         tempFile.fileName(), pix, this);
 
-    Factory::global().dirs()->addResourceType("kspread_template",
+    KCFactory::global().dirs()->addResourceType("kspread_template",
             "data", "kspread/templates/");
 }
 

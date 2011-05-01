@@ -52,7 +52,7 @@
 #include "KCApplicationSettings.h"
 #include "KCCalculationSettings.h"
 #include "part/KCDoc.h"
-#include "part/Factory.h"
+#include "part/KCFactory.h"
 #include "KCFunctionModuleRegistry.h"
 #include "KCLocalization.h"
 #include "KCMap.h"
@@ -107,7 +107,7 @@ public:
 
 void PreferenceDialog::Private::applyInterfaceOptions()
 {
-    KSharedConfigPtr config = Factory::global().config();
+    KSharedConfigPtr config = KCFactory::global().config();
     KConfigGroup parameterGroup = config->group("Parameters");
 
     oldCursorMovement = view->doc()->map()->settings()->moveToValue();
@@ -212,7 +212,7 @@ void PreferenceDialog::Private::defaultInterfaceOptions()
 
 void PreferenceDialog::Private::resetInterfaceOptions()
 {
-    KSharedConfigPtr config = Factory::global().config();
+    KSharedConfigPtr config = KCFactory::global().config();
     const KConfigGroup parameterGroup = config->group("Parameters");
 
     oldCursorMovement = view->doc()->map()->settings()->moveToValue();
@@ -238,7 +238,7 @@ void PreferenceDialog::Private::resetInterfaceOptions()
 
 void PreferenceDialog::Private::applyOpenSaveOptions()
 {
-    KSharedConfigPtr config = Factory::global().config();
+    KSharedConfigPtr config = KCFactory::global().config();
     KConfigGroup parameterGroup = config->group("Parameters");
     KCDoc* doc = view->doc();
 
@@ -273,7 +273,7 @@ void PreferenceDialog::Private::defaultOpenSaveOptions()
 
 void PreferenceDialog::Private::resetOpenSaveOptions()
 {
-    KSharedConfigPtr config = Factory::global().config();
+    KSharedConfigPtr config = KCFactory::global().config();
     const KConfigGroup parameterGroup = config->group("Parameters");
 
     oldCreateBackupFile = parameterGroup.readEntry("BackupFile", true);
@@ -373,7 +373,7 @@ PreferenceDialog::PreferenceDialog(View* view)
     d->pluginPage = page;
 
     // Spell Checker Options
-    KSharedConfig::Ptr sharedConfigPtr = Factory::global().config();
+    KSharedConfig::Ptr sharedConfigPtr = KCFactory::global().config();
     d->spellCheckPage = new Sonnet::ConfigWidget(sharedConfigPtr.data(), this);
     page = new KPageWidgetItem(d->spellCheckPage, i18n("Spelling"));
     page->setIcon(KIcon("tools-check-spelling"));
