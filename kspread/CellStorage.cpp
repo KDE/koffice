@@ -29,7 +29,7 @@
 #include <KoXmlWriter.h>
 
 // KSpread
-#include "BindingStorage.h"
+#include "KCBindingStorage.h"
 #include "ConditionsStorage.h"
 #include "Damages.h"
 #include "DependencyManager.h"
@@ -62,7 +62,7 @@ class CellStorage::Private
 public:
     Private(KCSheet* sheet)
             : sheet(sheet)
-            , bindingStorage(new BindingStorage(sheet->map()))
+            , bindingStorage(new KCBindingStorage(sheet->map()))
             , commentStorage(new CommentStorage(sheet->map()))
             , conditionsStorage(new ConditionsStorage(sheet->map()))
             , databaseStorage(new DatabaseStorage(sheet->map()))
@@ -81,7 +81,7 @@ public:
 
     Private(const Private& other, KCSheet* sheet)
             : sheet(sheet)
-            , bindingStorage(new BindingStorage(*other.bindingStorage))
+            , bindingStorage(new KCBindingStorage(*other.bindingStorage))
             , commentStorage(new CommentStorage(*other.commentStorage))
             , conditionsStorage(new ConditionsStorage(*other.conditionsStorage))
             , databaseStorage(new DatabaseStorage(*other.databaseStorage))
@@ -119,7 +119,7 @@ public:
     void createCommand(QUndoCommand *parent) const;
 
     KCSheet*                  sheet;
-    BindingStorage*         bindingStorage;
+    KCBindingStorage*         bindingStorage;
     CommentStorage*         commentStorage;
     ConditionsStorage*      conditionsStorage;
     DatabaseStorage*        databaseStorage;
@@ -1405,7 +1405,7 @@ CellStorage CellStorage::subStorage(const KCRegion& region) const
     return subStorage;
 }
 
-const BindingStorage* CellStorage::bindingStorage() const
+const KCBindingStorage* CellStorage::bindingStorage() const
 {
     return d->bindingStorage;
 }

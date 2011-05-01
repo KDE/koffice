@@ -24,16 +24,16 @@
 #include "RectStorage.h"
 
 /**
- * \class BindingStorage
+ * \class KCBindingStorage
  * \ingroup Storage
  * Stores cell ranges acting as data sources.
  */
-class BindingStorage : public QObject, public RectStorage<KCBinding>
+class KCBindingStorage : public QObject, public RectStorage<KCBinding>
 {
     Q_OBJECT
 public:
-    explicit BindingStorage(KCMap* map) : QObject(map), RectStorage<KCBinding>(map) {}
-    BindingStorage(const BindingStorage& other) : QObject(other.parent()), RectStorage<KCBinding>(other) {}
+    explicit KCBindingStorage(KCMap* map) : QObject(map), RectStorage<KCBinding>(map) {}
+    KCBindingStorage(const KCBindingStorage& other) : QObject(other.parent()), RectStorage<KCBinding>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {

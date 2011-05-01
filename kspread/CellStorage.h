@@ -35,7 +35,7 @@ class KoXmlWriter;
 class QUndoCommand;
 
 class KCBinding;
-class BindingStorage;
+class KCBindingStorage;
 class KCCell;
 class CommentStorage;
 class Conditions;
@@ -369,7 +369,7 @@ public:
      */
     CellStorage subStorage(const KCRegion& region) const;
 
-    const BindingStorage* bindingStorage() const;
+    const KCBindingStorage* bindingStorage() const;
     const CommentStorage* commentStorage() const;
     const ConditionsStorage* conditionsStorage() const;
     const FormulaStorage* formulaStorage() const;

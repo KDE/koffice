@@ -18,7 +18,7 @@
 */
 
 // muahahaha!
-#include "BindingStorage.moc"
+#include "KCBindingStorage.moc"
 #include "ConditionsStorage.moc"
 #include "RectStorage.moc"
 #include "ValidityStorage.moc"

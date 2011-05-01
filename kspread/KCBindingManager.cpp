@@ -19,7 +19,7 @@
 
 #include "KCBindingManager.h"
 
-#include "BindingStorage.h"
+#include "KCBindingStorage.h"
 #include "CellStorage.h"
 #include "KCMap.h"
 #include "KCRegion.h"
