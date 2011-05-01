@@ -46,7 +46,7 @@ static const int g_garbageCollectionTimeOut = 100;
  *
  * \author Stefan Nikolaus <stefan.nikolaus@kdemail.net>
  *
- * \note For data assigned to points use PointStorage.
+ * \note For data assigned to points use KCPointStorage.
  */
 template<typename T>
 class KSPREAD_EXPORT RectStorage

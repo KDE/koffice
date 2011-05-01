@@ -24,7 +24,7 @@
 #include "utils.h"
 #include "objects.h"
 
-#include <PointStorage.h>
+#include <KCPointStorage.h>
 
 #include <iostream>
 #include <map>
@@ -51,10 +51,10 @@ public:
     QHash<unsigned, unsigned> maxCellsInRow;
     QHash<unsigned, Column*> columns;
     QHash<unsigned, Row*> rows;
-    PointStorage<Hyperlink> hyperlinks;
-    PointStorage<QList<PictureObject*> > pictures;
-    PointStorage<QList<ChartObject*> > charts;
-    PointStorage<QList<OfficeArtObject*> > drawObjects;
+    KCPointStorage<Hyperlink> hyperlinks;
+    KCPointStorage<QList<PictureObject*> > pictures;
+    KCPointStorage<QList<ChartObject*> > charts;
+    KCPointStorage<QList<OfficeArtObject*> > drawObjects;
 
     bool visible;
     bool protect;

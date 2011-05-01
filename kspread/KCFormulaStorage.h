@@ -22,18 +22,18 @@
 
 #include "KCFormula.h"
 #include "kspread_limits.h"
-#include "PointStorage.h"
+#include "KCPointStorage.h"
 
 /**
  * \ingroup Storage
  * \ingroup KCValue
  * Stores formulas.
  */
-class KCFormulaStorage : public PointStorage<KCFormula>
+class KCFormulaStorage : public KCPointStorage<KCFormula>
 {
 public:
-    KCFormulaStorage& operator=(const PointStorage<KCFormula>& o) {
-        PointStorage<KCFormula>::operator=(o);
+    KCFormulaStorage& operator=(const KCPointStorage<KCFormula>& o) {
+        KCPointStorage<KCFormula>::operator=(o);
         return *this;
     }
 };

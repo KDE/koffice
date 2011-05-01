@@ -106,7 +106,7 @@ void RecalcManager::Private::cellsToCalculate(KCSheet* sheet)
     // NOTE Stefan: It's necessary, that the cells are filled in row-wise;
     //              beginning with the top left; ending with the bottom right.
     //              This ensures, that the value storage is processed the same
-    //              way, which boosts performance (using PointStorage) for an
+    //              way, which boosts performance (using KCPointStorage) for an
     //              empty storage (on loading). For an already filled value
     //              storage, the speed gain is not that sensible.
     KCCell cell;

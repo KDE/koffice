@@ -775,7 +775,7 @@ void KCCellStorage::insertColumns(int position, int number)
     // TODO Stefan: Optimize: Avoid the double creation of the sub-storages, but don't process
     //              formulas, that will get out of bounds after the operation.
     const KCRegion invalidRegion(QRect(QPoint(position, 1), QPoint(KS_colMax, KS_rowMax)), d->sheet);
-    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    KCPointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
@@ -831,7 +831,7 @@ void KCCellStorage::removeColumns(int position, int number)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(position, 1), QPoint(KS_colMax, KS_rowMax)), d->sheet);
-    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    KCPointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
@@ -888,7 +888,7 @@ void KCCellStorage::insertRows(int position, int number)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(1, position), QPoint(KS_colMax, KS_rowMax)), d->sheet);
-    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    KCPointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
@@ -946,7 +946,7 @@ void KCCellStorage::removeRows(int position, int number)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(QPoint(1, position), QPoint(KS_colMax, KS_rowMax)), d->sheet);
-    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    KCPointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
@@ -1005,7 +1005,7 @@ void KCCellStorage::removeShiftLeft(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom())), d->sheet);
-    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    KCPointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
@@ -1064,7 +1064,7 @@ void KCCellStorage::insertShiftRight(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom())), d->sheet);
-    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    KCPointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
@@ -1122,7 +1122,7 @@ void KCCellStorage::removeShiftUp(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax)), d->sheet);
-    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    KCPointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));
@@ -1181,7 +1181,7 @@ void KCCellStorage::insertShiftDown(const QRect& rect)
 {
     // Trigger a dependency update of the cells, which have a formula. (old positions)
     const KCRegion invalidRegion(QRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax)), d->sheet);
-    PointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
+    KCPointStorage<KCFormula> subStorage = d->formulaStorage->subStorage(invalidRegion);
     KCCell cell;
     for (int i = 0; i < subStorage.count(); ++i) {
         cell = KCCell(d->sheet, subStorage.col(i), subStorage.row(i));

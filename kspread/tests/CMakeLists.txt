@@ -23,7 +23,7 @@ target_link_libraries(TestOpenFormula kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QT
 ########### next target ###############
 
 set(TestPointStorage_SRCS TestPointStorage.cpp)
-kde4_add_unit_test(TestPointStorage TESTNAME kspread-PointStorage  ${TestPointStorage_SRCS})
+kde4_add_unit_test(TestPointStorage TESTNAME kspread-KCPointStorage  ${TestPointStorage_SRCS})
 target_link_libraries(TestPointStorage kspreadcommon ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY})
 
 ########### next target ###############

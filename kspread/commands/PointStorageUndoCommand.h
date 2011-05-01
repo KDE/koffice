@@ -31,7 +31,7 @@
 
 /**
  * \ingroup Commands
- * \brief An undo command for PointStorage data.
+ * \brief An undo command for KCPointStorage data.
  *
  * Implements undo functionality only. Glue it to another command,
  * that provides the appropriate applying (redoing).

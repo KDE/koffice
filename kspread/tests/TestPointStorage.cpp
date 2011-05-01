@@ -20,13 +20,13 @@
 #define KS_colMax 10
 #define KS_rowMax 10
 
-#include "PointStorage.h"
+#include "KCPointStorage.h"
 
 #include "TestPointStorage.h"
 
 void PointStorageTest::testInsertion()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
 //     int counter = 1;
 //     for ( int col = 1; col <= 5; ++col )
 //     for ( int row = 1; row <= 5; ++row )
@@ -107,7 +107,7 @@ void PointStorageTest::testInsertion()
 
 void PointStorageTest::testLookup()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -157,7 +157,7 @@ void PointStorageTest::testLookup()
 
 void PointStorageTest::testDeletion()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -207,7 +207,7 @@ void PointStorageTest::testDeletion()
 
 void PointStorageTest::testInsertColumns()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -274,7 +274,7 @@ void PointStorageTest::testInsertColumns()
 
 void PointStorageTest::testDeleteColumns()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -315,7 +315,7 @@ void PointStorageTest::testDeleteColumns()
 
 void PointStorageTest::testInsertRows()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -391,7 +391,7 @@ void PointStorageTest::testInsertRows()
 
 void PointStorageTest::testDeleteRows()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -428,7 +428,7 @@ void PointStorageTest::testDeleteRows()
 
 void PointStorageTest::testShiftLeft()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -465,7 +465,7 @@ void PointStorageTest::testShiftLeft()
 
 void PointStorageTest::testShiftRight()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -514,7 +514,7 @@ void PointStorageTest::testShiftRight()
 
 void PointStorageTest::testShiftUp()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -573,7 +573,7 @@ void PointStorageTest::testShiftUp()
 
 void PointStorageTest::testShiftDown()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -654,7 +654,7 @@ void PointStorageTest::testShiftDown()
 
 void PointStorageTest::testShiftDownUp()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     for (int row = 1; row < 6; ++row) {
         for (int col = 1; col < 6; ++col) {
             storage.m_data << (row * col);
@@ -709,7 +709,7 @@ void PointStorageTest::testShiftDownUp()
 
 void PointStorageTest::testFirstInColumn()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -749,7 +749,7 @@ void PointStorageTest::testFirstInColumn()
 
 void PointStorageTest::testFirstInRow()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -802,7 +802,7 @@ void PointStorageTest::testFirstInRow()
 
 void PointStorageTest::testLastInColumn()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -829,7 +829,7 @@ void PointStorageTest::testLastInColumn()
 
 void PointStorageTest::testLastInRow()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -856,7 +856,7 @@ void PointStorageTest::testLastInRow()
 
 void PointStorageTest::testNextInColumn()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -904,7 +904,7 @@ void PointStorageTest::testNextInColumn()
 
 void PointStorageTest::testNextInRow()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -931,7 +931,7 @@ void PointStorageTest::testNextInRow()
 
 void PointStorageTest::testPrevInColumn()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -960,7 +960,7 @@ void PointStorageTest::testPrevInColumn()
 
 void PointStorageTest::testPrevInRow()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -987,7 +987,7 @@ void PointStorageTest::testPrevInRow()
 
 void PointStorageTest::testIteration()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -1039,7 +1039,7 @@ void PointStorageTest::testIteration()
 
 void PointStorageTest::testColumnIteration()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.insert(1, 1, 27);
 
     int row = -1;
@@ -1077,7 +1077,7 @@ void PointStorageTest::testColumnIteration()
 
 void PointStorageTest::testRowIteration()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.insert(1, 1, 27);
 
     int col = -1;
@@ -1115,7 +1115,7 @@ void PointStorageTest::testRowIteration()
 
 void PointStorageTest::testDimension()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     QCOMPARE(storage.rows(), 0);
     QCOMPARE(storage.columns(), 0);
     storage.insert(1, 1, 27);
@@ -1141,7 +1141,7 @@ void PointStorageTest::testDimension()
 void PointStorageTest::testSubStorage()
 {
 // #if 0
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     storage.m_data << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12;
     storage.m_rows << 0 << 3 << 6 << 9 << 10;
     storage.m_cols << 1 << 2 << 5 << 1 << 2 << 3 << 2 << 3 << 5 << 4 << 1 << 5;
@@ -1151,7 +1151,7 @@ void PointStorageTest::testSubStorage()
     // (  ,  ,  ,10,  )
     // (11,  ,  ,  ,12)
 
-    PointStorage<int> subStorage;
+    KCPointStorage<int> subStorage;
     subStorage = storage.subStorage(KCRegion(QRect(1, 1, 5, 5)));       // all
     // ( 1, 2,  ,  , 3)
     // ( 4, 5, 6,  ,  )

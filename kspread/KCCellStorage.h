@@ -26,7 +26,7 @@
 
 #include "KCCell.h"
 #include "kspread_limits.h"
-#include "PointStorage.h"
+#include "KCPointStorage.h"
 
 #include "database/Database.h"
 
@@ -412,29 +412,29 @@ private:
     Private * const d;
 };
 
-class UserInputStorage : public PointStorage<QString>
+class UserInputStorage : public KCPointStorage<QString>
 {
 public:
-    UserInputStorage& operator=(const PointStorage<QString>& o) {
-        PointStorage<QString>::operator=(o);
+    UserInputStorage& operator=(const KCPointStorage<QString>& o) {
+        KCPointStorage<QString>::operator=(o);
         return *this;
     }
 };
 
-class LinkStorage : public PointStorage<QString>
+class LinkStorage : public KCPointStorage<QString>
 {
 public:
-    LinkStorage& operator=(const PointStorage<QString>& o) {
-        PointStorage<QString>::operator=(o);
+    LinkStorage& operator=(const KCPointStorage<QString>& o) {
+        KCPointStorage<QString>::operator=(o);
         return *this;
     }
 };
 
-class RichTextStorage : public PointStorage<QSharedPointer<QTextDocument> >
+class RichTextStorage : public KCPointStorage<QSharedPointer<QTextDocument> >
 {
 public:
-    RichTextStorage& operator=(const PointStorage<QSharedPointer<QTextDocument> >& o) {
-        PointStorage<QSharedPointer<QTextDocument> >::operator=(o);
+    RichTextStorage& operator=(const KCPointStorage<QSharedPointer<QTextDocument> >& o) {
+        KCPointStorage<QSharedPointer<QTextDocument> >::operator=(o);
         return *this;
     }
 };

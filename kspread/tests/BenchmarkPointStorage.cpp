@@ -21,13 +21,13 @@
 
 #include "kspread_limits.h"
 
-#include "PointStorage.h"
+#include "KCPointStorage.h"
 
 #include "BenchmarkPointStorage.h"
 
 void PointStorageBenchmark::testInsertionPerformance_loadingLike()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     int col = 1;
     int row = 1;
     int cols = 100;
@@ -43,7 +43,7 @@ void PointStorageBenchmark::testInsertionPerformance_loadingLike()
 
 void PointStorageBenchmark::testInsertionPerformance_singular()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     QBENCHMARK {
         int col = 1 + rand() % 1000;
         int row = 1 + rand() % 1000;
@@ -76,7 +76,7 @@ void PointStorageBenchmark::testLookupPerformance_data()
 
 void PointStorageBenchmark::testLookupPerformance()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     QFETCH(int, maxrow);
     QFETCH(int, maxcol);
 
@@ -110,7 +110,7 @@ void PointStorageBenchmark::testLookupPerformance()
 
 void PointStorageBenchmark::testInsertColumnsPerformance()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     for (int c = 0; c < KS_colMax; ++c) {
         storage.m_data << 1;
         storage.m_cols << 1;
@@ -123,7 +123,7 @@ void PointStorageBenchmark::testInsertColumnsPerformance()
 
 void PointStorageBenchmark::testDeleteColumnsPerformance()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     for (int c = 0; c < KS_colMax; ++c) {
         storage.m_data << 1;
         storage.m_cols << 1;
@@ -136,7 +136,7 @@ void PointStorageBenchmark::testDeleteColumnsPerformance()
 
 void PointStorageBenchmark::testInsertRowsPerformance()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     for (int r = 0; r < KS_rowMax; ++r) {
         storage.m_data << 1;
         storage.m_cols << 1;
@@ -149,7 +149,7 @@ void PointStorageBenchmark::testInsertRowsPerformance()
 
 void PointStorageBenchmark::testDeleteRowsPerformance()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     for (int r = 0; r < KS_rowMax; ++r) {
         storage.m_data << 1;
         storage.m_cols << 1;
@@ -162,7 +162,7 @@ void PointStorageBenchmark::testDeleteRowsPerformance()
 
 void PointStorageBenchmark::testShiftLeftPerformance()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     for (int c = 0; c < KS_colMax; ++c) {
         storage.m_data << 1;
         storage.m_cols << 1;
@@ -175,7 +175,7 @@ void PointStorageBenchmark::testShiftLeftPerformance()
 
 void PointStorageBenchmark::testShiftRightPerformance()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     for (int c = 0; c < KS_colMax; ++c) {
         storage.m_data << 1;
         storage.m_cols << 1;
@@ -188,7 +188,7 @@ void PointStorageBenchmark::testShiftRightPerformance()
 
 void PointStorageBenchmark::testShiftUpPerformance()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     for (int r = 0; r < KS_rowMax; ++r) {
         storage.m_data << 1;
         storage.m_cols << 1;
@@ -201,7 +201,7 @@ void PointStorageBenchmark::testShiftUpPerformance()
 
 void PointStorageBenchmark::testShiftDownPerformance()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
     for (int r = 0; r < KS_rowMax; ++r) {
         storage.m_data << 1;
         storage.m_cols << 1;
@@ -234,7 +234,7 @@ void PointStorageBenchmark::testIterationPerformance_data()
 
 void PointStorageBenchmark::testIterationPerformance()
 {
-    PointStorage<int> storage;
+    KCPointStorage<int> storage;
 
     QFETCH(int, maxrow);
     QFETCH(int, maxcol);

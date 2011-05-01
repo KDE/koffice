@@ -59,7 +59,7 @@
  *       data type as movable.
  */
 template<typename T>
-class PointStorage
+class KCPointStorage
 {
     friend class PointStorageBenchmark;
     friend class PointStorageTest;
@@ -69,12 +69,12 @@ public:
      * Constructor.
      * Creates an empty storage. Actually, does nothing.
      */
-    PointStorage() {}
+    KCPointStorage() {}
 
     /**
      * Destructor.
      */
-    ~PointStorage() {}
+    ~KCPointStorage() {}
 
     /**
      * Clears the storage.
@@ -822,11 +822,11 @@ public:
      * and all positions are adjusted.
      * \return a subset of the storage stripped down to the values in \p region
      */
-    PointStorage<T> subStorage(const KCRegion& region, bool keepOffset = true) const {
+    KCPointStorage<T> subStorage(const KCRegion& region, bool keepOffset = true) const {
         // Determine the offset.
         const QPoint offset = keepOffset ? QPoint(0, 0) : region.boundingRect().topLeft() - QPoint(1, 1);
         // this generates an array of values
-        PointStorage<T> subStorage;
+        KCPointStorage<T> subStorage;
         KCRegion::ConstIterator end(region.constEnd());
         for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
             const QRect rect = (*it)->rect();
@@ -849,7 +849,7 @@ public:
     /**
      * Equality operator.
      */
-    bool operator==(const PointStorage<T>& o) const {
+    bool operator==(const KCPointStorage<T>& o) const {
         return (m_rows == o.m_rows && m_cols == o.m_cols && m_data == o.m_data);
     }
 

@@ -26,19 +26,19 @@
  * \ingroup KCValue
  * Stores cell values.
  */
-class ValueStorage : public PointStorage<KCValue>
+class ValueStorage : public KCPointStorage<KCValue>
 {
 public:
     ValueStorage()
-            : PointStorage<KCValue>() {
+            : KCPointStorage<KCValue>() {
     }
 
-    ValueStorage(const PointStorage<KCValue>& o)
-            : PointStorage<KCValue>(o) {
+    ValueStorage(const KCPointStorage<KCValue>& o)
+            : KCPointStorage<KCValue>(o) {
     }
 
-    ValueStorage& operator=(const PointStorage<KCValue>& o) {
-        PointStorage<KCValue>::operator=(o);
+    ValueStorage& operator=(const KCPointStorage<KCValue>& o) {
+        KCPointStorage<KCValue>::operator=(o);
         return *this;
     }
 };
