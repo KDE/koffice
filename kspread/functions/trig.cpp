@@ -56,7 +56,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("trigonometry", TrigonometryModule)
 
 
 TrigonometryModule::TrigonometryModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

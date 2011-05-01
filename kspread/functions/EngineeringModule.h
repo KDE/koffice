@@ -20,12 +20,12 @@
 #ifndef KSPREAD_ENGINEERING_MODULE
 #define KSPREAD_ENGINEERING_MODULE
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include <QVariantList>
 
 
-class EngineeringModule : public FunctionModule
+class EngineeringModule : public KCFunctionModule
 {
     Q_OBJECT
 public:

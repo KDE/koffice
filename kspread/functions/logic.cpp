@@ -46,7 +46,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("logic", LogicModule)
 
 
 LogicModule::LogicModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

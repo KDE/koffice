@@ -20,12 +20,12 @@
 #ifndef KSPREAD_LOGIC_MODULE
 #define KSPREAD_LOGIC_MODULE
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include <QVariantList>
 
 
-class LogicModule : public FunctionModule
+class LogicModule : public KCFunctionModule
 {
     Q_OBJECT
 public:

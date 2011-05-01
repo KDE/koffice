@@ -51,7 +51,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("database", DatabaseModule)
 
 
 DatabaseModule::DatabaseModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

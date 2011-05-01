@@ -59,7 +59,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("reference", ReferenceModule)
 
 
 ReferenceModule::ReferenceModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

@@ -20,12 +20,12 @@
 #ifndef KSPREAD_REFERENCE_MODULE
 #define KSPREAD_REFERENCE_MODULE
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include <QVariantList>
 
 
-class ReferenceModule : public FunctionModule
+class ReferenceModule : public KCFunctionModule
 {
     Q_OBJECT
 public:

@@ -36,7 +36,7 @@ class KCFunction;
  * \ingroup KCValue
  * A function module provides several KCFunction objects.
  */
-class KSPREAD_EXPORT FunctionModule : public QObject
+class KSPREAD_EXPORT KCFunctionModule : public QObject
 {
     Q_OBJECT
 public:
@@ -45,13 +45,13 @@ public:
      * The derived class should create here the KCFunction objects and
      * should register them via \ref add.
      */
-    FunctionModule(QObject* parent);
+    KCFunctionModule(QObject* parent);
 
     /**
      * Destroys the module and the provided KCFunction objects.
      * Check, if this module isRemovable(), before you unload the plugin.
      */
-    virtual ~FunctionModule();
+    virtual ~KCFunctionModule();
 
     /**
      * Returns the file name of the XML description for the functions.

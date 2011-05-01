@@ -20,12 +20,12 @@
 #ifndef KSPREAD_DATABASE_MODULE
 #define KSPREAD_DATABASE_MODULE
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include <QVariantList>
 
 
-class DatabaseModule : public FunctionModule
+class DatabaseModule : public KCFunctionModule
 {
     Q_OBJECT
 public:

@@ -20,12 +20,12 @@
 #ifndef KSPREAD_BITOPS_MODULE
 #define KSPREAD_BITOPS_MODULE
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include <QVariantList>
 
 
-class BitOpsModule : public FunctionModule
+class BitOpsModule : public KCFunctionModule
 {
     Q_OBJECT
 public:

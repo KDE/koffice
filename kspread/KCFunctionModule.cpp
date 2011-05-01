@@ -17,36 +17,36 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include "KCFunction.h"
 
 #include <QList>
 
-class FunctionModule::Private
+class KCFunctionModule::Private
 {
 public:
     QList<QSharedPointer<KCFunction> > functions;
 };
 
 
-FunctionModule::FunctionModule(QObject* parent)
+KCFunctionModule::KCFunctionModule(QObject* parent)
         : QObject(parent)
         , d(new Private)
 {
 }
 
-FunctionModule::~FunctionModule()
+KCFunctionModule::~KCFunctionModule()
 {
     delete d;
 }
 
-QList<QSharedPointer<KCFunction> > FunctionModule::functions() const
+QList<QSharedPointer<KCFunction> > KCFunctionModule::functions() const
 {
     return d->functions;
 }
 
-bool FunctionModule::isRemovable()
+bool KCFunctionModule::isRemovable()
 {
     QList<KCFunction*> checkedFunctions;
     QWeakPointer<KCFunction> weakPointer;
@@ -68,12 +68,12 @@ bool FunctionModule::isRemovable()
     return true;
 }
 
-QString FunctionModule::id() const
+QString KCFunctionModule::id() const
 {
     return descriptionFileName();
 }
 
-void FunctionModule::add(KCFunction* function)
+void KCFunctionModule::add(KCFunction* function)
 {
     if (!function) {
         return;
@@ -81,4 +81,4 @@ void FunctionModule::add(KCFunction* function)
     d->functions.append(QSharedPointer<KCFunction>(function));
 }
 
-#include "FunctionModule.moc"
+#include "KCFunctionModule.moc"

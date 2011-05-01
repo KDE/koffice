@@ -81,7 +81,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("text", TextModule)
 
 
 TextModule::TextModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

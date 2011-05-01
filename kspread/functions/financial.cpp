@@ -113,7 +113,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("financial", FinancialModule)
 
 
 FinancialModule::FinancialModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

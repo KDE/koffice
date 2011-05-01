@@ -20,12 +20,12 @@
 #ifndef KSPREAD_CONVERSION_MODULE
 #define KSPREAD_CONVERSION_MODULE
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include <QVariantList>
 
 
-class ConversionModule : public FunctionModule
+class ConversionModule : public KCFunctionModule
 {
     Q_OBJECT
 public:

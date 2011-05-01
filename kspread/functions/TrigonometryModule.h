@@ -20,12 +20,12 @@
 #ifndef KSPREAD_TRIGONOMETRY_MODULE
 #define KSPREAD_TRIGONOMETRY_MODULE
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include <QVariantList>
 
 
-class TrigonometryModule : public FunctionModule
+class TrigonometryModule : public KCFunctionModule
 {
     Q_OBJECT
 public:

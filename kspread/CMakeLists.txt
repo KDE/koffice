@@ -241,7 +241,7 @@ set (kspreadodf_LIB_SRCS
     # TODO: move the formula evaluation out of KCFormula.cpp so these files can move out of libkspreadodf
     KCFunction.cpp
     KCFunctionDescription.cpp
-    FunctionModule.cpp
+    KCFunctionModule.cpp
     FunctionModuleRegistry.cpp
     FunctionRepository.cpp
 

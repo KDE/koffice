@@ -126,7 +126,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("statistical", StatisticalModule)
 
 
 StatisticalModule::StatisticalModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

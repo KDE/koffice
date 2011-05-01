@@ -43,7 +43,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("bitops", BitOpsModule)
 
 
 BitOpsModule::BitOpsModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

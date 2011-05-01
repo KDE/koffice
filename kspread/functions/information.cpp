@@ -71,7 +71,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("information", InformationModule)
 
 
 InformationModule::InformationModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

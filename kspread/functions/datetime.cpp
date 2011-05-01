@@ -82,7 +82,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("datetime", DateTimeModule)
 
 
 DateTimeModule::DateTimeModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

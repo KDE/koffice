@@ -20,12 +20,12 @@
 #ifndef KSPREAD_FINANCIAL_MODULE
 #define KSPREAD_FINANCIAL_MODULE
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include <QVariantList>
 
 
-class FinancialModule : public FunctionModule
+class FinancialModule : public KCFunctionModule
 {
     Q_OBJECT
 public:

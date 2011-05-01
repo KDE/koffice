@@ -20,12 +20,12 @@
 #ifndef KSPREAD_DATETIME_MODULE
 #define KSPREAD_DATETIME_MODULE
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include <QVariantList>
 
 
-class DateTimeModule : public FunctionModule
+class DateTimeModule : public KCFunctionModule
 {
     Q_OBJECT
 public:

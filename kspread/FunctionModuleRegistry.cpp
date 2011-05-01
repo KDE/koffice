@@ -31,14 +31,14 @@
 class FunctionModuleRegistry::Private
 {
 public:
-    void registerFunctionModule(FunctionModule* module);
-    void removeFunctionModule(FunctionModule* module);
+    void registerFunctionModule(KCFunctionModule* module);
+    void removeFunctionModule(KCFunctionModule* module);
 
 public:
     bool repositoryInitialized;
 };
 
-void FunctionModuleRegistry::Private::registerFunctionModule(FunctionModule* module)
+void FunctionModuleRegistry::Private::registerFunctionModule(KCFunctionModule* module)
 {
     const QList<QSharedPointer<KCFunction> > functions = module->functions();
     for (int i = 0; i < functions.count(); ++i) {
@@ -54,7 +54,7 @@ void FunctionModuleRegistry::Private::registerFunctionModule(FunctionModule* mod
     FunctionRepository::self()->loadFunctionDescriptions(fileName);
 }
 
-void FunctionModuleRegistry::Private::removeFunctionModule(FunctionModule* module)
+void FunctionModuleRegistry::Private::removeFunctionModule(KCFunctionModule* module)
 {
     const QList<QSharedPointer<KCFunction> > functions = module->functions();
     for (int i = 0; i < functions.count(); ++i) {
@@ -85,7 +85,7 @@ void FunctionModuleRegistry::loadFunctionModules()
     const quint32 minKSpreadVersion = KOFFICE_MAKE_VERSION(2, 1, 0);
     const QString serviceType = QLatin1String("KSpread/Plugin");
     const QString query = QLatin1String("([X-KSpread-InterfaceVersion] == 0) and "
-                                        "([X-KDE-PluginInfo-Category] == 'FunctionModule')");
+                                        "([X-KDE-PluginInfo-Category] == 'KCFunctionModule')");
     const KService::List offers = KServiceTypeTrader::self()->query(serviceType, query);
     const KConfigGroup moduleGroup = KGlobal::config()->group("Plugins");
     const KPluginInfo::List pluginInfos = KPluginInfo::fromServices(offers, moduleGroup);
@@ -107,7 +107,7 @@ void FunctionModuleRegistry::loadFunctionModules()
                 kDebug(36002) << "Unable to create plugin factory for" << pluginInfo.name();
                 continue;
             }
-            FunctionModule* const module = factory->create<FunctionModule>(this);
+            KCFunctionModule* const module = factory->create<KCFunctionModule>(this);
             if (!module) {
                 kDebug(36002) << "Unable to create function module for" << pluginInfo.name();
                 continue;
@@ -120,7 +120,7 @@ void FunctionModuleRegistry::loadFunctionModules()
             }
         } else if (!pluginInfo.isPluginEnabled() && contains(pluginInfo.pluginName())) {
             // Plugin disabled, but registered. Remove it.
-            FunctionModule* const module = get(pluginInfo.pluginName());
+            KCFunctionModule* const module = get(pluginInfo.pluginName());
             // Delay the function registration until the user needs one.
             if (d->repositoryInitialized) {
                 d->removeFunctionModule(module);
@@ -145,7 +145,7 @@ void FunctionModuleRegistry::loadFunctionModules()
 void FunctionModuleRegistry::registerFunctions()
 {
     d->repositoryInitialized = true;
-    const QList<FunctionModule*> modules = values();
+    const QList<KCFunctionModule*> modules = values();
     for (int i = 0; i < modules.count(); ++i) {
         d->registerFunctionModule(modules[i]);
     }

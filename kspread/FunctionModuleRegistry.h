@@ -25,14 +25,14 @@
 #include <KoGenericRegistry.h>
 
 #include "kspread_export.h"
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 /**
  * \ingroup Plugin
  * \ingroup KCValue
  * Registry for function modules.
  */
-class KSPREAD_EXPORT FunctionModuleRegistry : public QObject, public KoGenericRegistry<FunctionModule*>
+class KSPREAD_EXPORT FunctionModuleRegistry : public QObject, public KoGenericRegistry<KCFunctionModule*>
 {
 public:
     /**

@@ -53,7 +53,7 @@ KSPREAD_EXPORT_FUNCTION_MODULE("conversion", ConversionModule)
 
 
 ConversionModule::ConversionModule(QObject* parent, const QVariantList&)
-        : FunctionModule(parent)
+        : KCFunctionModule(parent)
 {
     KCFunction *f;
 

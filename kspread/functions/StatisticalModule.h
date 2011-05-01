@@ -20,12 +20,12 @@
 #ifndef KSPREAD_STATISTICAL_MODULE
 #define KSPREAD_STATISTICAL_MODULE
 
-#include "FunctionModule.h"
+#include "KCFunctionModule.h"
 
 #include <QVariantList>
 
 
-class StatisticalModule : public FunctionModule
+class StatisticalModule : public KCFunctionModule
 {
     Q_OBJECT
 public:
