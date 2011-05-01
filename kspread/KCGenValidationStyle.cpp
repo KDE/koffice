@@ -28,17 +28,17 @@
 #include "KCValidity.h"
 #include "ValueConverter.h"
 
-GenValidationStyles::GenValidationStyles()
+KCGenValidationStyles::KCGenValidationStyles()
 {
 
 }
 
-GenValidationStyles::~GenValidationStyles()
+KCGenValidationStyles::~KCGenValidationStyles()
 {
 
 }
 
-QString GenValidationStyles::insert(const KCGenValidationStyle& style)
+QString KCGenValidationStyles::insert(const KCGenValidationStyle& style)
 {
     StyleMap::iterator it = m_styles.find(style);
     if (it == m_styles.end()) {
@@ -51,7 +51,7 @@ QString GenValidationStyles::insert(const KCGenValidationStyle& style)
     return it.value();
 }
 
-QString GenValidationStyles::makeUniqueName(const QString& base) const
+QString KCGenValidationStyles::makeUniqueName(const QString& base) const
 {
     int num = 1;
     QString name;
@@ -62,7 +62,7 @@ QString GenValidationStyles::makeUniqueName(const QString& base) const
     return name;
 }
 
-void GenValidationStyles::writeStyle(KoXmlWriter& writer)
+void KCGenValidationStyles::writeStyle(KoXmlWriter& writer)
 {
     if (m_styles.count() > 0) {
         writer.startElement("table:content-validations");

@@ -75,7 +75,7 @@ public:
 
 public:
     KoShapeSavingContext& shapeContext;
-    GenValidationStyles valStyle;
+    KCGenValidationStyles valStyle;
     QMap<int, KCStyle> columnDefaultStyles;
     QMap<int, KCStyle> rowDefaultStyles;
 

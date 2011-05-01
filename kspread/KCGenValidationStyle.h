@@ -31,7 +31,7 @@ class KoXmlWriter;
 
 class KCValidity;
 class ValueConverter;
-class GenValidationStyles;
+class KCGenValidationStyles;
 
 /**
  * \class KCGenValidationStyle
@@ -77,18 +77,18 @@ private:
     QString displayMessage;
     QString message;
     QString title;
-    friend class GenValidationStyles;
+    friend class KCGenValidationStyles;
 };
 
 /**
- * \class GenValidationStyles
+ * \class KCGenValidationStyles
  * \ingroup OpenDocument
  */
-class KSPREAD_EXPORT GenValidationStyles
+class KSPREAD_EXPORT KCGenValidationStyles
 {
 public:
-    GenValidationStyles();
-    ~GenValidationStyles();
+    KCGenValidationStyles();
+    ~KCGenValidationStyles();
     QString insert(const KCGenValidationStyle& style);
 
     typedef QMap<KCGenValidationStyle, QString> StyleMap;
