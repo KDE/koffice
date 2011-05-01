@@ -50,8 +50,8 @@ SheetAdaptor::SheetAdaptor(KCSheet* t)
 {
     setAutoRelaySignals(false);
     m_sheet = t;
-    connect(m_sheet->map(), SIGNAL(damagesFlushed(const QList<Damage*> &)),
-            this, SLOT(handleDamages(const QList<Damage*> &)));
+    connect(m_sheet->map(), SIGNAL(damagesFlushed(const QList<KCDamage*> &)),
+            this, SLOT(handleDamages(const QList<KCDamage*> &)));
 }
 
 SheetAdaptor::~SheetAdaptor()
@@ -507,15 +507,15 @@ void SheetAdaptor::setProtected(const QByteArray& passwd)
     m_sheet->setProtected(passwd);
 }
 
-void SheetAdaptor::handleDamages(const QList<Damage*>& damages)
+void SheetAdaptor::handleDamages(const QList<KCDamage*>& damages)
 {
-    const QList<Damage*>::ConstIterator end(damages.end());
-    for (QList<Damage*>::ConstIterator it = damages.begin(); it != end; ++it) {
-        const Damage *const damage = *it;
+    const QList<KCDamage*>::ConstIterator end(damages.end());
+    for (QList<KCDamage*>::ConstIterator it = damages.begin(); it != end; ++it) {
+        const KCDamage *const damage = *it;
         if (!damage) {
             continue;
         }
-        if (damage->type() == Damage::DamagedSheet) {
+        if (damage->type() == KCDamage::DamagedSheet) {
             const SheetDamage *const sheetDamage = static_cast<const SheetDamage *>(damage);
             // Only process the sheet this adaptor works for.
             if (sheetDamage->sheet() != m_sheet) {

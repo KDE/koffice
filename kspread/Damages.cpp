@@ -160,16 +160,16 @@ const KCRegion& SelectionDamage::region() const
   kDebug support
 ****************************************************************************/
 
-QDebug operator<<(QDebug str, const Damage& d)
+QDebug operator<<(QDebug str, const KCDamage& d)
 {
     switch (d.type()) {
-    case Damage::NoDamage: return str << "NoDamage";
-    case Damage::DamagedDocument:  return str << "Document";
-    case Damage::DamagedWorkbook: return str << "Workbook";
-    case Damage::DamagedSheet: return str << "KCSheet";
-    case Damage::DamagedRange: return str << "Range";
-    case Damage::DamagedCell: return str << "KCCell";
-    case Damage::DamagedSelection: return str << "Selection";
+    case KCDamage::NoDamage: return str << "NoDamage";
+    case KCDamage::DamagedDocument:  return str << "Document";
+    case KCDamage::DamagedWorkbook: return str << "Workbook";
+    case KCDamage::DamagedSheet: return str << "KCSheet";
+    case KCDamage::DamagedRange: return str << "Range";
+    case KCDamage::DamagedCell: return str << "KCCell";
+    case KCDamage::DamagedSelection: return str << "Selection";
     }
     return str;
 }

@@ -588,8 +588,8 @@ View::View(QWidget *_parent, Doc *_doc)
             this, SLOT(removeSheet(KCSheet*)));
     connect(doc()->map(), SIGNAL(sheetRevived(KCSheet*)),
             this, SLOT(addSheet(KCSheet*)));
-    connect(doc()->map(), SIGNAL(damagesFlushed(const QList<Damage*>&)),
-            this, SLOT(handleDamages(const QList<Damage*>&)));
+    connect(doc()->map(), SIGNAL(damagesFlushed(const QList<KCDamage*>&)),
+            this, SLOT(handleDamages(const QList<KCDamage*>&)));
     if (statusBar()) {
         connect(doc()->map(), SIGNAL(statusMessage(const QString&, int)),
                 statusBar(), SLOT(showMessage(const QString&, int)));
@@ -2041,17 +2041,17 @@ void View::saveCurrentSheetSelection()
     }
 }
 
-void View::handleDamages(const QList<Damage*>& damages)
+void View::handleDamages(const QList<KCDamage*>& damages)
 {
     QRegion paintRegion;
     enum { Nothing, Everything, Clipped } paintMode = Nothing;
 
-    QList<Damage*>::ConstIterator end(damages.end());
-    for (QList<Damage*>::ConstIterator it = damages.begin(); it != end; ++it) {
-        Damage* damage = *it;
+    QList<KCDamage*>::ConstIterator end(damages.end());
+    for (QList<KCDamage*>::ConstIterator it = damages.begin(); it != end; ++it) {
+        KCDamage* damage = *it;
         if (!damage) continue;
 
-        if (damage->type() == Damage::DamagedCell) {
+        if (damage->type() == KCDamage::DamagedCell) {
             CellDamage* cellDamage = static_cast<CellDamage*>(damage);
             kDebug(36007) << "Processing\t" << *cellDamage;
             KCSheet* const damagedSheet = cellDamage->sheet();
@@ -2064,7 +2064,7 @@ void View::handleDamages(const QList<Damage*>& damages)
             continue;
         }
 
-        if (damage->type() == Damage::DamagedSheet) {
+        if (damage->type() == KCDamage::DamagedSheet) {
             SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
             kDebug(36007) << *sheetDamage;
             const SheetDamage::Changes changes = sheetDamage->changes();
@@ -2095,7 +2095,7 @@ void View::handleDamages(const QList<Damage*>& damages)
             continue;
         }
 
-        if (damage->type() == Damage::DamagedSelection) {
+        if (damage->type() == KCDamage::DamagedSelection) {
             SelectionDamage* selectionDamage = static_cast<SelectionDamage*>(damage);
             kDebug(36007) << "Processing\t" << *selectionDamage;
             const KCRegion region = selectionDamage->region();

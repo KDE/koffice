@@ -53,7 +53,7 @@ class KCApplicationSettings;
 class KCBindingManager;
 class KCCalculationSettings;
 class ColumnFormat;
-class Damage;
+class KCDamage;
 class DatabaseManager;
 class DependencyManager;
 class DocBase;
@@ -342,7 +342,7 @@ public:
     /**
      * \ingroup Damages
      */
-    void addDamage(Damage* damage);
+    void addDamage(KCDamage* damage);
 
     /**
      * Return a pointer to the resource manager associated with the
@@ -361,7 +361,7 @@ public Q_SLOTS:
     /**
      * \ingroup Damages
      */
-    void handleDamages(const QList<Damage*>& damages);
+    void handleDamages(const QList<KCDamage*>& damages);
 
     /**
      * Emits the signal commandAdded(QUndoCommand *).
@@ -374,7 +374,7 @@ Q_SIGNALS:
     /**
      * \ingroup Damages
      */
-    void damagesFlushed(const QList<Damage*>& damages);
+    void damagesFlushed(const QList<KCDamage*>& damages);
 
     /**
      * Emitted, if a command was added by addCommand(QUndoCommand *).

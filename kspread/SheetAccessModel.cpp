@@ -63,8 +63,8 @@ SheetAccessModel::SheetAccessModel(KCMap *map)
             this, SLOT(slotSheetAdded(KCSheet*)));
     connect(map, SIGNAL(sheetRemoved(KCSheet*)),
             this, SLOT(slotSheetRemoved(KCSheet*)));
-    connect(map, SIGNAL(damagesFlushed(const QList<Damage*>&)),
-            this, SLOT(handleDamages(const QList<Damage*>&)));
+    connect(map, SIGNAL(damagesFlushed(const QList<KCDamage*>&)),
+            this, SLOT(handleDamages(const QList<KCDamage*>&)));
 
     setRowCount(1);
     setColumnCount(0);
@@ -103,16 +103,16 @@ void SheetAccessModel::slotSheetRemoved(KCSheet *sheet)
     d->cols.remove(sheet);
 }
 
-void SheetAccessModel::handleDamages(const QList<Damage*>& damages)
+void SheetAccessModel::handleDamages(const QList<KCDamage*>& damages)
 {
-    QList<Damage*>::ConstIterator end(damages.end());
-    for (QList<Damage*>::ConstIterator it = damages.begin(); it != end; ++it) {
-        Damage* damage = *it;
+    QList<KCDamage*>::ConstIterator end(damages.end());
+    for (QList<KCDamage*>::ConstIterator it = damages.begin(); it != end; ++it) {
+        KCDamage* damage = *it;
         if (!damage) {
             continue;
         }
 
-        if (damage->type() == Damage::DamagedSheet) {
+        if (damage->type() == KCDamage::DamagedSheet) {
             SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
             kDebug(36007) << "Processing\t" << *sheetDamage;
 

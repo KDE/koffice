@@ -26,7 +26,7 @@
 
 #define TableShapeId "TableShape"
 
-class Damage;
+class KCDamage;
 class KCMap;
 class KCSheet;
 class SheetView;
@@ -74,7 +74,7 @@ protected:
     virtual void shapeChanged(ChangeType type, KoShape *shape);
 
 private Q_SLOTS:
-    void handleDamages(const QList<Damage*>& damages);
+    void handleDamages(const QList<KCDamage*>& damages);
 
 private:
     Q_DISABLE_COPY(TableShape)

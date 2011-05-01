@@ -22,7 +22,7 @@
 #include "KCSheet.h"
 
 
-class Damage;
+class KCDamage;
 class KCMap;
 class KCSheet;
 
@@ -56,7 +56,7 @@ public:
 public Q_SLOTS:
     void slotSheetAdded(KCSheet *sheet);
     void slotSheetRemoved(KCSheet *sheet);
-        void handleDamages(const QList<Damage*> &damages);
+        void handleDamages(const QList<KCDamage*> &damages);
 
 private:
     class Private;

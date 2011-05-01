@@ -35,10 +35,10 @@ class KCRegion;
  * \ingroup Damages
  * An abstract damage.
  */
-class KSPREAD_EXPORT Damage
+class KSPREAD_EXPORT KCDamage
 {
 public:
-    virtual ~Damage() {}
+    virtual ~KCDamage() {}
 
     typedef enum {
         NoDamage = 0,
@@ -59,7 +59,7 @@ public:
  * \ingroup Damages
  * A cell range damage.
  */
-class KSPREAD_EXPORT CellDamage : public Damage
+class KSPREAD_EXPORT CellDamage : public KCDamage
 {
 public:
     enum Change {
@@ -87,7 +87,7 @@ public:
     virtual ~CellDamage();
 
     virtual Type type() const {
-        return Damage::DamagedCell;
+        return KCDamage::DamagedCell;
     }
 
     KCSheet* sheet() const;
@@ -108,7 +108,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(CellDamage::Changes)
  * \ingroup Damages
  * A sheet damage.
  */
-class KSPREAD_EXPORT SheetDamage : public Damage
+class KSPREAD_EXPORT SheetDamage : public KCDamage
 {
 public:
 
@@ -129,7 +129,7 @@ public:
     virtual ~SheetDamage();
 
     virtual Type type() const {
-        return Damage::DamagedSheet;
+        return KCDamage::DamagedSheet;
     }
 
     KCSheet* sheet() const;
@@ -149,7 +149,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(SheetDamage::Changes)
  * \ingroup Damages
  * A workbook damage.
  */
-class WorkbookDamage : public Damage
+class WorkbookDamage : public KCDamage
 {
 public:
     enum Change {
@@ -163,7 +163,7 @@ public:
     virtual ~WorkbookDamage();
 
     virtual Type type() const {
-        return Damage::DamagedWorkbook;
+        return KCDamage::DamagedWorkbook;
     }
     KCMap* map() const;
     Changes changes() const;
@@ -181,14 +181,14 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(WorkbookDamage::Changes)
  * \ingroup Damages
  * A selection damage.
  */
-class KSPREAD_EXPORT SelectionDamage : public Damage
+class KSPREAD_EXPORT SelectionDamage : public KCDamage
 {
 public:
     SelectionDamage(const KCRegion& region);
     virtual ~SelectionDamage();
 
     virtual Type type() const {
-        return Damage::DamagedSelection;
+        return KCDamage::DamagedSelection;
     }
 
     const KCRegion& region() const;
@@ -205,7 +205,7 @@ private:
   kDebug support
 ****************************************************************************/
 
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const Damage& d);
+KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCDamage& d);
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const CellDamage& d);
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const SheetDamage& d);
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const SelectionDamage& d);

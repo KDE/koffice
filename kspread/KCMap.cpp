@@ -110,7 +110,7 @@ public:
     ColumnFormat* defaultColumnFormat;
     RowFormat* defaultRowFormat;
 
-    QList<Damage*> damages;
+    QList<KCDamage*> damages;
     bool isLoading;
 
     int syntaxVersion;
@@ -173,8 +173,8 @@ KCMap::KCMap(DocBase* doc, int syntaxVersion)
             d->recalcManager, SLOT(addSheet(KCSheet*)));
     connect(d->namedAreaManager, SIGNAL(namedAreaModified(const QString&)),
             d->dependencyManager, SLOT(namedAreaModified(const QString&)));
-    connect(this, SIGNAL(damagesFlushed(const QList<Damage*>&)),
-            this, SLOT(handleDamages(const QList<Damage*>&)));
+    connect(this, SIGNAL(damagesFlushed(const QList<KCDamage*>&)),
+            this, SLOT(handleDamages(const QList<KCDamage*>&)));
 }
 
 KCMap::~KCMap()
@@ -853,20 +853,20 @@ void KCMap::addStringCompletion(const QString &stringCompletion)
     }
 }
 
-void KCMap::addDamage(Damage* damage)
+void KCMap::addDamage(KCDamage* damage)
 {
-    // Do not create a new Damage, if we are in loading process. Check for it before
+    // Do not create a new KCDamage, if we are in loading process. Check for it before
     // calling this function. This prevents unnecessary memory allocations (new).
     // see FIXME in KCSheet::setSheetName().
 //     Q_ASSERT(!isLoading());
     Q_CHECK_PTR(damage);
 
 #ifndef NDEBUG
-    if (damage->type() == Damage::DamagedCell) {
+    if (damage->type() == KCDamage::DamagedCell) {
         kDebug(36007) << "Adding\t" << *static_cast<CellDamage*>(damage);
-    } else if (damage->type() == Damage::DamagedSheet) {
+    } else if (damage->type() == KCDamage::DamagedSheet) {
         kDebug(36007) << "Adding\t" << *static_cast<SheetDamage*>(damage);
-    } else if (damage->type() == Damage::DamagedSelection) {
+    } else if (damage->type() == KCDamage::DamagedSelection) {
         kDebug(36007) << "Adding\t" << *static_cast<SelectionDamage*>(damage);
     } else {
         kDebug(36007) << "Adding\t" << *damage;
@@ -883,13 +883,13 @@ void KCMap::addDamage(Damage* damage)
 void KCMap::flushDamages()
 {
     // Copy the damages to process. This allows new damages while processing.
-    QList<Damage*> damages = d->damages;
+    QList<KCDamage*> damages = d->damages;
     d->damages.clear();
     emit damagesFlushed(damages);
     qDeleteAll(damages);
 }
 
-void KCMap::handleDamages(const QList<Damage*>& damages)
+void KCMap::handleDamages(const QList<KCDamage*>& damages)
 {
     KCRegion bindingChangedRegion;
     KCRegion formulaChangedRegion;
@@ -897,11 +897,11 @@ void KCMap::handleDamages(const QList<Damage*>& damages)
     KCRegion valueChangedRegion;
     WorkbookDamage::Changes workbookChanges = WorkbookDamage::None;
 
-    QList<Damage*>::ConstIterator end(damages.end());
-    for (QList<Damage*>::ConstIterator it = damages.begin(); it != end; ++it) {
-        Damage* damage = *it;
+    QList<KCDamage*>::ConstIterator end(damages.end());
+    for (QList<KCDamage*>::ConstIterator it = damages.begin(); it != end; ++it) {
+        KCDamage* damage = *it;
 
-        if (damage->type() == Damage::DamagedCell) {
+        if (damage->type() == KCDamage::DamagedCell) {
             CellDamage* cellDamage = static_cast<CellDamage*>(damage);
             kDebug(36007) << "Processing\t" << *cellDamage;
             KCSheet* const damagedSheet = cellDamage->sheet();
@@ -932,7 +932,7 @@ void KCMap::handleDamages(const QList<Damage*>& damages)
             continue;
         }
 
-        if (damage->type() == Damage::DamagedSheet) {
+        if (damage->type() == KCDamage::DamagedSheet) {
             SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
             kDebug(36007) << "Processing\t" << *sheetDamage;
 //             KCSheet* damagedSheet = sheetDamage->sheet();
@@ -942,7 +942,7 @@ void KCMap::handleDamages(const QList<Damage*>& damages)
             continue;
         }
 
-        if (damage->type() == Damage::DamagedWorkbook) {
+        if (damage->type() == KCDamage::DamagedWorkbook) {
             WorkbookDamage* workbookDamage = static_cast<WorkbookDamage*>(damage);
             kDebug(36007) << "Processing\t" << *damage;
 

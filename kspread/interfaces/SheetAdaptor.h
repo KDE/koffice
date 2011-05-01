@@ -31,7 +31,7 @@
 #include "kspread_export.h"
 #include <QString>
 
-class Damage;
+class KCDamage;
 class KCSheet;
 class CellProxy;
 
@@ -176,7 +176,7 @@ private Q_SLOTS:
      * \ingroup Damages
      * Handles changes of the sheet name and visibility.
      */
-    void handleDamages(const QList<Damage*>& damages);
+    void handleDamages(const QList<KCDamage*>& damages);
 
 private:
     KCSheet* m_sheet;

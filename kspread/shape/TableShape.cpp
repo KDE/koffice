@@ -238,8 +238,8 @@ void TableShape::setMap(KCMap *map)
     d->isMaster = true;
     setVisibleCellRange(QRect(1, 1, d->columns, d->rows));
 
-    connect(map, SIGNAL(damagesFlushed(const QList<Damage*>&)),
-            this, SLOT(handleDamages(const QList<Damage*>&)));
+    connect(map, SIGNAL(damagesFlushed(const QList<KCDamage*>&)),
+            this, SLOT(handleDamages(const QList<KCDamage*>&)));
 
     // Initialize the size using the default column/row dimensions.
     QSize size;
@@ -342,14 +342,14 @@ void TableShape::shapeChanged(ChangeType type, KoShape *shape)
     d->pageManager->layoutPages();
 }
 
-void TableShape::handleDamages(const QList<Damage*>& damages)
+void TableShape::handleDamages(const QList<KCDamage*>& damages)
 {
-    QList<Damage*>::ConstIterator end(damages.end());
-    for (QList<Damage*>::ConstIterator it = damages.begin(); it != end; ++it) {
-        Damage* damage = *it;
+    QList<KCDamage*>::ConstIterator end(damages.end());
+    for (QList<KCDamage*>::ConstIterator it = damages.begin(); it != end; ++it) {
+        KCDamage* damage = *it;
         if (!damage) continue;
 
-        if (damage->type() == Damage::DamagedCell) {
+        if (damage->type() == KCDamage::DamagedCell) {
             CellDamage* cellDamage = static_cast<CellDamage*>(damage);
             const KCRegion region = cellDamage->region();
 
@@ -358,7 +358,7 @@ void TableShape::handleDamages(const QList<Damage*>& damages)
             continue;
         }
 
-        if (damage->type() == Damage::DamagedSheet) {
+        if (damage->type() == KCDamage::DamagedSheet) {
             SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
 
             if (sheetDamage->changes() & SheetDamage::PropertiesChanged)

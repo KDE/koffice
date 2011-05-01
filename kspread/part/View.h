@@ -51,7 +51,7 @@ class KoZoomHandler;
 
 class KCCell;
 class ColumnHeader;
-class Damage;
+class KCDamage;
 class KCSheet;
 class Canvas;
 class Doc;
@@ -309,7 +309,7 @@ public Q_SLOTS:
      * \ingroup Damages
      * Handles damages that need visual updates.
      */
-    void handleDamages(const QList<Damage*>& damages);
+    void handleDamages(const QList<KCDamage*>& damages);
 
     /**
      * write in statusBar result of calc (Min, or Max, average, sum, count)
