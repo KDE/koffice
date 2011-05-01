@@ -30,7 +30,7 @@
 #include <KCValue.h>
 #include <KCNumber.h>
 #include <KCFunction.h>
-#include <FunctionDescription.h>
+#include <KCFunctionDescription.h>
 #include <FunctionRepository.h>
 
 //#define KROSS_MAIN_EXPORT KDE_EXPORT
@@ -62,7 +62,7 @@ public:
 
         kDebug() << QString("ScriptingFunctionImpl::callback name=%1 argcount=%2").arg(funcimpl->m_function->name()).arg(args.count());
 
-        FunctionDescription *description = FunctionRepository::self()->functionInfo(funcimpl->name());
+        KCFunctionDescription *description = FunctionRepository::self()->functionInfo(funcimpl->name());
         kDebug(36005) << "name=" << description->name() << " type=" << description->type();
 
         QVariantList list;
@@ -161,7 +161,7 @@ public:
         repo->add(QSharedPointer<KCFunction>(this));
 
         // create a new description for the function
-        FunctionDescription* desc = new FunctionDescription(description);
+        KCFunctionDescription* desc = new KCFunctionDescription(description);
         desc->setGroup(i18n("Scripts"));
         repo->add(desc);
     }

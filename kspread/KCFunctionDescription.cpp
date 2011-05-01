@@ -19,7 +19,7 @@
 */
 
 // Local
-#include "FunctionDescription.h"
+#include "KCFunctionDescription.h"
 
 #include <QDomElement>
 #include <QDomNode>
@@ -108,12 +108,12 @@ FunctionParameter::FunctionParameter(const QDomElement& element)
         }
 }
 
-FunctionDescription::FunctionDescription()
+KCFunctionDescription::KCFunctionDescription()
 {
     m_type = KSpread_Float;
 }
 
-FunctionDescription::FunctionDescription(const QDomElement& element)
+KCFunctionDescription::KCFunctionDescription(const QDomElement& element)
 {
     QDomNode n = element.firstChild();
     for (; !n.isNull(); n = n.nextSibling()) {
@@ -145,7 +145,7 @@ FunctionDescription::FunctionDescription(const QDomElement& element)
     }
 }
 
-FunctionDescription::FunctionDescription(const FunctionDescription& desc)
+KCFunctionDescription::KCFunctionDescription(const KCFunctionDescription& desc)
 {
     m_examples = desc.m_examples;
     m_related = desc.m_related;
@@ -155,7 +155,7 @@ FunctionDescription::FunctionDescription(const FunctionDescription& desc)
     m_type = desc.m_type;
 }
 
-QString FunctionDescription::toQML() const
+QString KCFunctionDescription::toQML() const
 {
     QString text("<qt><h1>");
     text += name();

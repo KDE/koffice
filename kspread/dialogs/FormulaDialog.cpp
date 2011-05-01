@@ -37,7 +37,7 @@
 #include "KCCalculationSettings.h"
 #include "KCCell.h"
 #include "KCFunction.h"
-#include "FunctionDescription.h"
+#include "KCFunctionDescription.h"
 #include "FunctionRepository.h"
 #include "Util.h"
 #include "ui/CellEditor.h"
@@ -530,7 +530,7 @@ QString FormulaDialog::createParameter(const QString& _text, int param)
 }
 
 static void showEntry(KLineEdit* edit, QLabel* label,
-                      FunctionDescription* desc, int param)
+                      KCFunctionDescription* desc, int param)
 {
     edit->show();
     label->setText(desc->param(param).helpText() + ':');
@@ -672,7 +672,7 @@ void FormulaDialog::slotSelected(const QString& afunction)
     if (function.isNull())
         function = proxyModel->data(functions->currentIndex()).toString();
 
-    FunctionDescription* desc = FunctionRepository::self()->functionInfo(function);
+    KCFunctionDescription* desc = FunctionRepository::self()->functionInfo(function);
     if (!desc) {
         m_browser->setText(i18n("Description is not available."));
         return;
@@ -703,7 +703,7 @@ void FormulaDialog::slotSelected(const QString& afunction)
 // from hyperlink in the "Related KCFunction"
 void FormulaDialog::slotShowFunction(const QString& function)
 {
-    FunctionDescription* desc =
+    KCFunctionDescription* desc =
         FunctionRepository::self()->functionInfo(function);
     if (!desc) return;
 

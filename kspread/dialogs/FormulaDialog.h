@@ -45,7 +45,7 @@ class KComboBox;
 class KLineEdit;
 
 class CellEditorBase;
-class FunctionDescription;
+class KCFunctionDescription;
 class Selection;
 
 /**
@@ -184,7 +184,7 @@ private:
      */
     bool refresh_result;
 
-    FunctionDescription* m_desc;
+    KCFunctionDescription* m_desc;
 };
 
 #endif // KSPREAD_FORMULA_DIALOG

@@ -22,7 +22,7 @@
 #include "FunctionRepository.h"
 
 #include "KCFunction.h"
-#include "FunctionDescription.h"
+#include "KCFunctionDescription.h"
 #include "FunctionModuleRegistry.h"
 
 #include <QDomElement>
@@ -39,7 +39,7 @@ class FunctionRepository::Private
 public:
     QHash<QString, QSharedPointer<KCFunction> > functions;
     QHash<QString, QSharedPointer<KCFunction> > alternates;
-    QHash<QString, FunctionDescription*> descriptions;
+    QHash<QString, KCFunctionDescription*> descriptions;
     QStringList groups;
     bool initialized;
 };
@@ -98,7 +98,7 @@ void FunctionRepository::add(const QSharedPointer<KCFunction>& function)
     }
 }
 
-void FunctionRepository::add(FunctionDescription *desc)
+void FunctionRepository::add(KCFunctionDescription *desc)
 {
     if (!desc) return;
     if (!d->functions.contains(desc->name())) return;
@@ -122,7 +122,7 @@ QSharedPointer<KCFunction> FunctionRepository::function(const QString& name)
     return !f.isNull() ? f : d->alternates.value(n);
 }
 
-FunctionDescription *FunctionRepository::functionInfo(const QString& name)
+KCFunctionDescription *FunctionRepository::functionInfo(const QString& name)
 {
     return d->descriptions.value(name.toUpper());
 }
@@ -132,7 +132,7 @@ QStringList FunctionRepository::functionNames(const QString& group)
 {
     QStringList lst;
 
-    foreach(FunctionDescription* description, d->descriptions) {
+    foreach(KCFunctionDescription* description, d->descriptions) {
         if (group.isNull() || (description->group() == group))
             lst.append(description->name());
     }
@@ -179,7 +179,7 @@ void FunctionRepository::loadFunctionDescriptions(const QString& filename)
                     continue;
                 QDomElement e2 = n2.toElement();
                 if (e2.tagName() == "KCFunction") {
-                    FunctionDescription* desc = new FunctionDescription(e2);
+                    KCFunctionDescription* desc = new KCFunctionDescription(e2);
                     desc->setGroup(group);
                     if (d->functions.contains(desc->name()))
                         d->descriptions.insert(desc->name(), desc);

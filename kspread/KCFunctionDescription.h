@@ -62,12 +62,12 @@ private:
  * \ingroup KCValue
  * A function description.
  */
-class KSPREAD_EXPORT FunctionDescription
+class KSPREAD_EXPORT KCFunctionDescription
 {
 public:
-    FunctionDescription();
-    FunctionDescription(const QDomElement& element);
-    FunctionDescription(const FunctionDescription& desc);
+    KCFunctionDescription();
+    KCFunctionDescription(const QDomElement& element);
+    KCFunctionDescription(const KCFunctionDescription& desc);
 
     const QStringList& examples() {
         return m_examples;

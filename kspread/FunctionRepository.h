@@ -28,7 +28,7 @@
 #include "kspread_export.h"
 
 class KCFunction;
-class FunctionDescription;
+class KCFunctionDescription;
 
 /**
  * \ingroup KCValue
@@ -46,7 +46,7 @@ public:
      * Adds \p function to the repository.
      */
     void add(const QSharedPointer<KCFunction>& function);
-    void add(FunctionDescription *desc);
+    void add(KCFunctionDescription *desc);
 
     /**
      * Removes \p function from the repository.
@@ -56,7 +56,7 @@ public:
 
     QSharedPointer<KCFunction> function(const QString& name);
 
-    FunctionDescription *functionInfo(const QString& name);
+    KCFunctionDescription *functionInfo(const QString& name);
 
     /** return functions within a group, or all if no group given */
     QStringList functionNames(const QString& group = QString());
