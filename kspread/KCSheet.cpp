@@ -525,7 +525,7 @@ const KCStyleStorage* KCSheet::styleStorage() const
     return d->cellStorage->styleStorage();
 }
 
-const ValidityStorage* KCSheet::validityStorage() const
+const KCValidityStorage* KCSheet::validityStorage() const
 {
     return d->cellStorage->validityStorage();
 }

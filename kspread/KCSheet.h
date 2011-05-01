@@ -78,7 +78,7 @@ class KCSheetPrint;
 class KCStyle;
 class KCStyleStorage;
 class KCValidity;
-class ValidityStorage;
+class KCValidityStorage;
 class ValueStorage;
 class View;
 template<typename T> class IntervalMap;
@@ -485,7 +485,7 @@ public:
     const FusionStorage* fusionStorage() const;
     const LinkStorage* linkStorage() const;
     const KCStyleStorage* styleStorage() const;
-    const ValidityStorage* validityStorage() const;
+    const KCValidityStorage* validityStorage() const;
     const ValueStorage* valueStorage() const;
 
     /**

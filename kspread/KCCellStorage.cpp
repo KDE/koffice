@@ -41,7 +41,7 @@
 #include "KCRowRepeatStorage.h"
 #include "KCSheet.h"
 #include "KCStyleStorage.h"
-#include "ValidityStorage.h"
+#include "KCValidityStorage.h"
 #include "ValueStorage.h"
 
 // commands
@@ -73,7 +73,7 @@ public:
             , namedAreaStorage(new NamedAreaStorage(sheet->map()))
             , styleStorage(new KCStyleStorage(sheet->map()))
             , userInputStorage(new UserInputStorage())
-            , validityStorage(new ValidityStorage(sheet->map()))
+            , validityStorage(new KCValidityStorage(sheet->map()))
             , valueStorage(new ValueStorage())
             , richTextStorage(new RichTextStorage())
             , rowRepeatStorage(new KCRowRepeatStorage())
@@ -92,7 +92,7 @@ public:
             , namedAreaStorage(new NamedAreaStorage(*other.namedAreaStorage))
             , styleStorage(new KCStyleStorage(*other.styleStorage))
             , userInputStorage(new UserInputStorage(*other.userInputStorage))
-            , validityStorage(new ValidityStorage(*other.validityStorage))
+            , validityStorage(new KCValidityStorage(*other.validityStorage))
             , valueStorage(new ValueStorage(*other.valueStorage))
             , richTextStorage(new RichTextStorage(*other.richTextStorage))
             , rowRepeatStorage(new KCRowRepeatStorage(*other.rowRepeatStorage))
@@ -130,7 +130,7 @@ public:
     NamedAreaStorage*       namedAreaStorage;
     KCStyleStorage*           styleStorage;
     UserInputStorage*       userInputStorage;
-    ValidityStorage*        validityStorage;
+    KCValidityStorage*        validityStorage;
     ValueStorage*           valueStorage;
     RichTextStorage*        richTextStorage;
     KCRowRepeatStorage*       rowRepeatStorage;
@@ -1440,7 +1440,7 @@ const KCStyleStorage* KCCellStorage::styleStorage() const
     return d->styleStorage;
 }
 
-const ValidityStorage* KCCellStorage::validityStorage() const
+const KCValidityStorage* KCCellStorage::validityStorage() const
 {
     return d->validityStorage;
 }

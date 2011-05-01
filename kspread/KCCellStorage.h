@@ -49,7 +49,7 @@ class RichTextStorage;
 class KCSheet;
 class KCStyleStorage;
 class KCValidity;
-class ValidityStorage;
+class KCValidityStorage;
 class KCValue;
 class ValueStorage;
 
@@ -376,7 +376,7 @@ public:
     const FusionStorage* fusionStorage() const;
     const LinkStorage* linkStorage() const;
     const KCStyleStorage* styleStorage() const;
-    const ValidityStorage* validityStorage() const;
+    const KCValidityStorage* validityStorage() const;
     const ValueStorage* valueStorage() const;
 
     void loadConditions(const QList<QPair<QRegion, KCConditions> >& conditions);

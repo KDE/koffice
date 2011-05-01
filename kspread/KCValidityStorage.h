@@ -25,17 +25,17 @@
 
 
 /**
- * \class ValidityStorage
+ * \class KCValidityStorage
  * \ingroup Storage
  * \ingroup KCValue
  * Stores cell validations.
  */
-class ValidityStorage : public QObject, public KCRectStorage<KCValidity>
+class KCValidityStorage : public QObject, public KCRectStorage<KCValidity>
 {
     Q_OBJECT
 public:
-    explicit ValidityStorage(KCMap* map) : QObject(map), KCRectStorage<KCValidity>(map) {}
-    ValidityStorage(const ValidityStorage& other) : QObject(other.parent()), KCRectStorage<KCValidity>(other) {}
+    explicit KCValidityStorage(KCMap* map) : QObject(map), KCRectStorage<KCValidity>(map) {}
+    KCValidityStorage(const KCValidityStorage& other) : QObject(other.parent()), KCRectStorage<KCValidity>(other) {}
 
 protected Q_SLOTS:
     virtual void triggerGarbageCollection() {

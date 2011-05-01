@@ -21,4 +21,4 @@
 #include "KCBindingStorage.moc"
 #include "KCConditionsStorage.moc"
 #include "KCRectStorage.moc"
-#include "ValidityStorage.moc"
+#include "KCValidityStorage.moc"

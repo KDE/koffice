@@ -25,7 +25,7 @@
 
 #include "KCCellStorage.h"
 #include "KCSheet.h"
-#include "ValidityStorage.h"
+#include "KCValidityStorage.h"
 
 ValidityCommand::ValidityCommand()
         : AbstractRegionCommand()
