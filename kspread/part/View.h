@@ -58,7 +58,7 @@ class KCDoc;
 class KCRegion;
 class Selection;
 class SheetView;
-class RowHeader;
+class KCRowHeader;
 class View;
 class TabBar;
 
@@ -101,7 +101,7 @@ public:
     ColumnHeader* columnHeader() const;
 
     /** \return the row header */
-    RowHeader* rowHeader() const;
+    KCRowHeader* rowHeader() const;
 
     /** \return the horizontal scrollbar */
     QScrollBar* horzScrollBar() const;

@@ -125,12 +125,12 @@ private:
 /**
  * The widget left to the cells showing the row headers.
  */
-class RowHeader : public QWidget
+class KCRowHeader : public QWidget
 {
     Q_OBJECT
 public:
-    RowHeader(QWidget *_parent, KCCanvas *_canvas, View *_view);
-    virtual ~RowHeader();
+    KCRowHeader(QWidget *_parent, KCCanvas *_canvas, View *_view);
+    virtual ~KCRowHeader();
 
     int markerRow() const {
         return  m_iSelectionAnchor;

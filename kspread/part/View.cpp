@@ -181,7 +181,7 @@ public:
     KoCanvasController* canvasController;
     KoZoomController* zoomController;
     KoZoomHandler* zoomHandler;
-    RowHeader *rowHeader;
+    KCRowHeader *rowHeader;
     ColumnHeader *columnHeader;
     SelectAllButton *selectAllButton;
     QScrollBar *horzScrollBar;
@@ -730,7 +730,7 @@ void View::initView()
             this, SLOT(viewZoom(KoZoomMode::Mode, qreal)));
 
     d->columnHeader = new ColumnHeader(this, d->canvas, this);
-    d->rowHeader = new RowHeader(this, d->canvas , this);
+    d->rowHeader = new KCRowHeader(this, d->canvas , this);
     d->columnHeader->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     d->rowHeader->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
     d->selectAllButton = new SelectAllButton(d->canvas, selection());
@@ -827,7 +827,7 @@ ColumnHeader* View::columnHeader()const
     return d->columnHeader;
 }
 
-RowHeader* View::rowHeader()const
+KCRowHeader* View::rowHeader()const
 {
     return d->rowHeader;
 }
@@ -1641,7 +1641,7 @@ void View::keyPressEvent(QKeyEvent *event)
 
 int View::leftBorder() const
 {
-    return (int)(((RowHeader*)d->rowHeader)->width());
+    return (int)(((KCRowHeader*)d->rowHeader)->width());
 }
 
 int View::rightBorder() const

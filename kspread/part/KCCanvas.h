@@ -53,7 +53,7 @@ class KoZoomHandler;
 class ColumnHeader;
 class KCDoc;
 class KCSheet;
-class RowHeader;
+class KCRowHeader;
 class Selection;
 class View;
 
@@ -64,7 +64,7 @@ class View;
 class KSPREAD_EXPORT KCCanvas : public QWidget, public KoCanvasBase
 {
     friend class ColumnHeader;
-    friend class RowHeader;
+    friend class KCRowHeader;
     friend class View;
     friend class KCCellTool;
 
@@ -150,7 +150,7 @@ public:
     void disableAutoScroll();
     void showContextMenu(const QPoint& globalPos);
     ColumnHeader* columnHeader() const;
-    RowHeader* rowHeader() const;
+    KCRowHeader* rowHeader() const;
 
 public slots:
     void setDocumentOffset(const QPoint &offset);

@@ -482,7 +482,7 @@ ColumnHeader* KCCanvas::columnHeader() const
     return view()->columnHeader();
 }
 
-RowHeader* KCCanvas::rowHeader() const
+KCRowHeader* KCCanvas::rowHeader() const
 {
     return view()->rowHeader();
 }
@@ -771,7 +771,7 @@ void KCCanvas::setDocumentOffset(const QPoint &offset)
 
     ColumnHeader* ch = columnHeader();
     if (ch) ch->scroll(-delta.x(), 0);
-    RowHeader* rh = rowHeader();
+    KCRowHeader* rh = rowHeader();
     if (rh) rh->scroll(0, -delta.y());
 }
 

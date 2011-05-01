@@ -81,11 +81,11 @@
 
 /****************************************************************
  *
- * RowHeader
+ * KCRowHeader
  *
  ****************************************************************/
 
-RowHeader::RowHeader(QWidget *_parent, KCCanvas *_canvas, View *_view)
+KCRowHeader::KCRowHeader(QWidget *_parent, KCCanvas *_canvas, View *_view)
         : QWidget(_parent)
 {
     m_pView = _view;
@@ -109,11 +109,11 @@ RowHeader::RowHeader(QWidget *_parent, KCCanvas *_canvas, View *_view)
 }
 
 
-RowHeader::~RowHeader()
+KCRowHeader::~KCRowHeader()
 {
 }
 
-void RowHeader::mousePressEvent(QMouseEvent * _ev)
+void KCRowHeader::mousePressEvent(QMouseEvent * _ev)
 {
     if (!m_cellToolIsActive)
         return;
@@ -200,7 +200,7 @@ void RowHeader::mousePressEvent(QMouseEvent * _ev)
     }
 }
 
-void RowHeader::mouseReleaseEvent(QMouseEvent * _ev)
+void KCRowHeader::mouseReleaseEvent(QMouseEvent * _ev)
 {
     if (!m_cellToolIsActive)
         return;
@@ -300,7 +300,7 @@ void RowHeader::mouseReleaseEvent(QMouseEvent * _ev)
     m_bResize = false;
 }
 
-void RowHeader::equalizeRow(double resize)
+void KCRowHeader::equalizeRow(double resize)
 {
     if (resize != 0.0) {
         ResizeRowManipulator* command = new ResizeRowManipulator();
@@ -319,7 +319,7 @@ void RowHeader::equalizeRow(double resize)
     }
 }
 
-void RowHeader::mouseDoubleClickEvent(QMouseEvent*)
+void KCRowHeader::mouseDoubleClickEvent(QMouseEvent*)
 {
     if (!m_cellToolIsActive)
         return;
@@ -338,7 +338,7 @@ void RowHeader::mouseDoubleClickEvent(QMouseEvent*)
 }
 
 
-void RowHeader::mouseMoveEvent(QMouseEvent * _ev)
+void KCRowHeader::mouseMoveEvent(QMouseEvent * _ev)
 {
     if (!m_cellToolIsActive) {
         setCursor(Qt::ArrowCursor);
@@ -407,7 +407,7 @@ void RowHeader::mouseMoveEvent(QMouseEvent * _ev)
     }
 }
 
-void RowHeader::slotAutoScroll(const QPoint& scrollDistance)
+void KCRowHeader::slotAutoScroll(const QPoint& scrollDistance)
 {
     // NOTE Stefan: This slot is triggered by the same signal as
     //              KCCanvas::slotAutoScroll and ColumnHeader::slotAutoScroll.
@@ -427,13 +427,13 @@ void RowHeader::slotAutoScroll(const QPoint& scrollDistance)
     m_pCanvas->update();
 }
 
-void RowHeader::wheelEvent(QWheelEvent* _ev)
+void KCRowHeader::wheelEvent(QWheelEvent* _ev)
 {
     QApplication::sendEvent(m_pCanvas, _ev);
 }
 
 
-void RowHeader::paintSizeIndicator(int mouseY)
+void KCRowHeader::paintSizeIndicator(int mouseY)
 {
     register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
@@ -481,7 +481,7 @@ void RowHeader::paintSizeIndicator(int mouseY)
     m_lSize->show();
 }
 
-void RowHeader::updateRows(int from, int to)
+void KCRowHeader::updateRows(int from, int to)
 {
     register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
@@ -492,7 +492,7 @@ void RowHeader::updateRows(int from, int to)
     update(0, (int) y0, width(), (int)(y1 - y0));
 }
 
-void RowHeader::paintEvent(QPaintEvent* event)
+void KCRowHeader::paintEvent(QPaintEvent* event)
 {
     register KCSheet * const sheet = m_pView->activeSheet();
     if (!sheet)
@@ -600,13 +600,13 @@ void RowHeader::paintEvent(QPaintEvent* event)
 }
 
 
-void RowHeader::focusOutEvent(QFocusEvent*)
+void KCRowHeader::focusOutEvent(QFocusEvent*)
 {
     m_pView->disableAutoScroll();
     m_bMousePressed = false;
 }
 
-void RowHeader::drawText(QPainter& painter, const QFont& font,
+void KCRowHeader::drawText(QPainter& painter, const QFont& font,
                          const QPointF& location, const QString& text) const
 {
     register KCSheet * const sheet = m_pView->activeSheet();
@@ -635,7 +635,7 @@ void RowHeader::drawText(QPainter& painter, const QFont& font,
     painter.restore();
 }
 
-void RowHeader::toolChanged(const QString& toolId)
+void KCRowHeader::toolChanged(const QString& toolId)
 {
     m_cellToolIsActive = toolId.startsWith("KSpread");
     update();
@@ -1068,7 +1068,7 @@ void ColumnHeader::mouseMoveEvent(QMouseEvent * _ev)
 void ColumnHeader::slotAutoScroll(const QPoint& scrollDistance)
 {
     // NOTE Stefan: This slot is triggered by the same signal as
-    //              KCCanvas::slotAutoScroll and RowHeader::slotAutoScroll.
+    //              KCCanvas::slotAutoScroll and KCRowHeader::slotAutoScroll.
     //              Therefore, nothing has to be done except the scrolling was
     //              initiated in this header.
     if (!m_bMousePressed)
