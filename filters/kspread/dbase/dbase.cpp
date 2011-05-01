@@ -43,7 +43,7 @@ DBase::~DBase()
 //
 //  unsigned char version           0      dBASE-Version (3)
 //  unsigned char last_update[3]    1-3    Date of last update
-//  unsigned long records           4-7    Number of records
+//  unsigned long records           4-7    KCNumber of records
 //  unsigned short header_length    8-9    headerlength
 //  unsigned short record_length    10-11  recordlength
 //  unsigned char reserved[20]      12-31  reserverd info from dBase

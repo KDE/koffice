@@ -8,18 +8,18 @@ KSPREAD=`dcopfind 'kspread*'`
 KSPREAD=`echo $KSPREAD | sed s/DCOPRef\(// | sed s/,\)//`
 for i in `seq 51 514`
   do
-  CELLREF=`dcop $KSPREAD Document/Map/List1 cell 7 $i`
+  CELLREF=`dcop $KSPREAD Document/KCMap/List1 cell 7 $i`
   PASS=`dcop $CELLREF value`
   if test $PASS = 1.000000
     then
-    CELLREF=`dcop $KSPREAD Document/Map/List1 cell 2 $i`
+    CELLREF=`dcop $KSPREAD Document/KCMap/List1 cell 2 $i`
     formula=`dcop $CELLREF text`
     formula=`echo $formula | sed s/\"/\\\\\\\\\"/g`
     
 #nothing if formula contains a cellref ...
     if test -z "`echo $formula | grep B[1-9]`"
       then
-      CELLREF=`dcop $KSPREAD Document/Map/List1 cell 3 $i`
+      CELLREF=`dcop $KSPREAD Document/KCMap/List1 cell 3 $i`
       result=`dcop $CELLREF text`
 #test whether we have a number
       if test $result = True

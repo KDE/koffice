@@ -26,7 +26,7 @@
 #include <QtDBus/QtDBus>
 #include "kspread_export.h"
 
-class Map;
+class KCMap;
 
 /**
 * The MapAdaptor class provides additional functionality to deal with sheets.
@@ -36,7 +36,7 @@ class KSPREAD_EXPORT MapAdaptor : public QDBusAbstractAdaptor
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.koffice.spreadsheet.map")
 public:
-    explicit MapAdaptor(Map*);
+    explicit MapAdaptor(KCMap*);
 
 //     virtual bool processDynamic(const DCOPCString &fun, const QByteArray &data,
 //     DCOPCString& replyType, QByteArray &replyData);
@@ -57,7 +57,7 @@ public Q_SLOTS: // METHODS
     virtual QString insertSheet(const QString& name);
 
 private:
-    Map* m_map;
+    KCMap* m_map;
 };
 
 #endif

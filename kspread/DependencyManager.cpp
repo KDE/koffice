@@ -30,7 +30,7 @@
 #include "CellStorage.h"
 #include "Formula.h"
 #include "FormulaStorage.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
 #include "RTree.h"
@@ -75,7 +75,7 @@ void DependencyManager::Private::dump() const
     }
 }
 
-DependencyManager::DependencyManager(const Map* map)
+DependencyManager::DependencyManager(const KCMap* map)
         : d(new Private)
 {
     d->map = map;
@@ -180,7 +180,7 @@ void DependencyManager::removeSheet(KCSheet *sheet)
     // TODO Stefan: Implement, if dependencies should not be tracked all the time.
 }
 
-void DependencyManager::updateAllDependencies(const Map* map)
+void DependencyManager::updateAllDependencies(const KCMap* map)
 {
     ElapsedTime et("Generating dependencies", ElapsedTime::PrintOnlyTime);
 

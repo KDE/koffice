@@ -21,7 +21,7 @@
 
 #include "Damages.h"
 #include "kspread_limits.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 #include "SheetPrint.h"

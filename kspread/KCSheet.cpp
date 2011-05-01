@@ -75,7 +75,7 @@
 #include "HeaderFooter.h"
 #include "LoadingInfo.h"
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "OdfLoadingContext.h"
 #include "OdfSavingContext.h"
@@ -85,7 +85,7 @@
 #include "ShapeApplicationData.h"
 #include "SheetPrint.h"
 #include "RectStorage.h"
-#include "SheetModel.h"
+#include "KCSheetModel.h"
 #include "KCStyle.h"
 #include "StyleManager.h"
 #include "StyleStorage.h"
@@ -131,8 +131,8 @@ static QString createObjectName(const QString &sheetName)
 class KCSheet::Private
 {
 public:
-    Map* workbook;
-    SheetModel *model;
+    KCMap* workbook;
+    KCSheetModel *model;
 
     QString name;
 
@@ -173,7 +173,7 @@ public:
 };
 
 
-KCSheet::KCSheet(Map* map, const QString &sheetName)
+KCSheet::KCSheet(KCMap* map, const QString &sheetName)
         : KoShapeUserData(map)
         , KoShapeControllerBase()
         , d(new Private)
@@ -185,7 +185,7 @@ KCSheet::KCSheet(Map* map, const QString &sheetName)
         variant.setValue<void*>(map->doc()->sheetAccessModel());
         resourceManager()->setResource(75751149, variant); // duplicated in kchart.
     }
-    d->model = new SheetModel(this);
+    d->model = new KCSheetModel(this);
 
     d->layoutDirection = QApplication::layoutDirection();
 
@@ -231,7 +231,7 @@ KCSheet::KCSheet(const KCSheet &other)
         , d(new Private)
 {
     d->workbook = other.d->workbook;
-    d->model = new SheetModel(this);
+    d->model = new KCSheetModel(this);
 
     // create a unique name
     int i = 1;
@@ -303,7 +303,7 @@ QString KCSheet::sheetName() const
     return d->name;
 }
 
-Map* KCSheet::map() const
+KCMap* KCSheet::map() const
 {
     return d->workbook;
 }

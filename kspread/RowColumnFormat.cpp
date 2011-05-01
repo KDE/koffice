@@ -38,7 +38,7 @@
 
 #include "CellStorage.h"
 #include "Global.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 #include "SheetPrint.h"

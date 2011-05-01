@@ -37,7 +37,7 @@ inline uint qHash(const QPoint& point)
 }
 
 class KCCell;
-class Map;
+class KCMap;
 class KCSheet;
 
 /**
@@ -82,7 +82,7 @@ public:
      * @param map used to determine the sheet, if it's named in the string
      * @param sheet the fallback sheet, if \p expression does not contain one
      */
-    explicit KCRegion(const QString& expression, const Map* map = 0, KCSheet* sheet = 0);
+    explicit KCRegion(const QString& expression, const KCMap* map = 0, KCSheet* sheet = 0);
 
     /**
      * Copy Constructor.
@@ -317,12 +317,12 @@ public:
     /**
      * @return the map to which this region belongs.
      */
-    const Map* map() const;
+    const KCMap* map() const;
 
     /**
      * Sets the map to which this region belongs.
      */
-    void setMap(const Map*);
+    void setMap(const KCMap*);
 
 
     typedef QList<Element*>::Iterator      Iterator;

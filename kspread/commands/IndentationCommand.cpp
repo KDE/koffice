@@ -26,7 +26,7 @@
 #include "ApplicationSettings.h"
 #include "KCCell.h"
 #include "CellStorage.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
 

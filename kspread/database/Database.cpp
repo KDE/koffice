@@ -27,7 +27,7 @@
 #include "DatabaseSource.h"
 #include "Filter.h"
 #include "FilterPopup.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCRegion.h"
 
 class Sort;
@@ -179,7 +179,7 @@ void Database::setFilter(const Filter& filter)
     d->filter = new Filter(filter);
 }
 
-bool Database::loadOdf(const KoXmlElement& element, const Map* map)
+bool Database::loadOdf(const KoXmlElement& element, const KCMap* map)
 {
     if (element.hasAttributeNS(KoXmlNS::table, "name"))
         d->name = element.attributeNS(KoXmlNS::table, "name", QString());

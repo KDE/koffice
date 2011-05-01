@@ -38,7 +38,7 @@
 class KoOasisSettings;
 class KoResourceManager;
 
-class Map;
+class KCMap;
 class KCSheet;
 class SheetAccessModel;
 
@@ -68,9 +68,9 @@ public:
     virtual void setReadWrite(bool readwrite = true);
 
     /**
-     * @return the Map that belongs to this Document
+     * @return the KCMap that belongs to this Document
      */
-    Map *map() const;
+    KCMap *map() const;
 
     /**
      * Returns the syntax version of the currently opened file
@@ -116,7 +116,7 @@ public:
     /**
      * \ingroup OpenDocument
      * Main loading method.
-     * @see Map::loadOdf
+     * @see KCMap::loadOdf
      */
     virtual bool loadOdf(KoOdfReadStore & odfStore);
 
@@ -136,16 +136,16 @@ private:
     /**
      * \ingroup OpenDocument
      * Saves the Document related settings.
-     * The actual saving takes place in Map::saveOdfSettings.
-     * @see Map::saveOdfSettings
+     * The actual saving takes place in KCMap::saveOdfSettings.
+     * @see KCMap::saveOdfSettings
      */
     void saveOdfSettings(KoXmlWriter &settingsWriter);
 
     /**
      * \ingroup OpenDocument
      * Loads the Document related settings.
-     * The actual loading takes place in Map::loadOdfSettings.
-     * @see Map::loadOdfSettings
+     * The actual loading takes place in KCMap::loadOdfSettings.
+     * @see KCMap::loadOdfSettings
      */
     void loadOdfSettings(const KoXmlDocument&settingsDoc);
 

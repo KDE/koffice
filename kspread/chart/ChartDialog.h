@@ -33,7 +33,7 @@ namespace KChart
 class ChartShape;
 }
 
-class Map;
+class KCMap;
 
 /// A dialog for showing and altering frame properties
 class ChartDialog : public KPageDialog
@@ -52,7 +52,7 @@ public:
      * Create a list of factories that will be able to create widgets to configure shapes.
      * @param map the parent document these panels will work for.
      */
-    static QList<KoShapeConfigFactoryBase*> panels(Map *map);
+    static QList<KoShapeConfigFactoryBase*> panels(KCMap *map);
 
 private slots:
     void okClicked();

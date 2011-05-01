@@ -48,7 +48,7 @@
 
 #include "CalculationSettings.h"
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 

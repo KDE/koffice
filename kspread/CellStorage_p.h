@@ -21,7 +21,7 @@
 #define KSPREAD_CELL_STORAGE_P
 
 // KSpread
-#include "Binding.h"
+#include "KCBinding.h"
 #include "KCCondition.h"
 #include "Formula.h"
 #include "KCStyle.h"
@@ -63,7 +63,7 @@ public:
         return true;
     }
 
-    QList< QPair<QRectF, Binding> >          bindings;
+    QList< QPair<QRectF, KCBinding> >          bindings;
     QList< QPair<QRectF, QString> >          comments;
     QList< QPair<QRectF, Conditions> >       conditions;
     QList< QPair<QRectF, Database> >         databases;

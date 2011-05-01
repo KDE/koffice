@@ -24,7 +24,7 @@
 #include <QtTest/QtTest>
 
 class CellStorage;
-class Map;
+class KCMap;
 class KCSheet;
 
 class TestDependencies : public QObject
@@ -39,7 +39,7 @@ private Q_SLOTS:
 
 private:
     CellStorage* m_storage;
-    Map* m_map;
+    KCMap* m_map;
     KCSheet* m_sheet;
 };
 

@@ -41,7 +41,7 @@
 #include "CellStorage.h"
 #include "FormulaStorage.h"
 #include "LoadingInfo.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 #include "Util.h"
@@ -55,11 +55,11 @@ struct NamedArea {
 class NamedAreaManager::Private
 {
 public:
-    const Map* map;
+    const KCMap* map;
     QHash<QString, NamedArea> namedAreas;
 };
 
-NamedAreaManager::NamedAreaManager(const Map* map)
+NamedAreaManager::NamedAreaManager(const KCMap* map)
         : d(new Private)
 {
     d->map = map;

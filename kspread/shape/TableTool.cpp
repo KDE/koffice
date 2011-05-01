@@ -46,7 +46,7 @@
 #include "AutoFillStrategy.h"
 #include "KCCell.h"
 #include "kspread_limits.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "MergeStrategy.h"
 #include "Selection.h"
 #include "SelectionStrategy.h"
@@ -207,7 +207,7 @@ void TableTool::updateSheetsList()
 {
     d->sheetComboBox->blockSignals(true);
     d->sheetComboBox->clear();
-    Map *map = d->tableShape->map();
+    KCMap *map = d->tableShape->map();
     foreach(KCSheet* sheet, map->sheetList()) {
         if (sheet->isHidden())
             continue;
@@ -257,7 +257,7 @@ QMap<QString, QWidget*> TableTool::createOptionWidgets()
     layout->addLayout(sheetlayout, 0, 1);
     d->sheetComboBox = new KComboBox(optionWidget);
     sheetlayout->addWidget(d->sheetComboBox, 1);
-    Map *map = d->tableShape->map();
+    KCMap *map = d->tableShape->map();
     foreach(KCSheet* s, map->sheetList()) {
         d->sheetComboBox->addItem(s->sheetName());
         //d->sheetComboBox->setCurrentIndex( d->sheetComboBox->count()-1 );
@@ -281,7 +281,7 @@ QMap<QString, QWidget*> TableTool::createOptionWidgets()
 
     label = new QLabel(i18n("Columns:"), optionWidget);
     label->setBuddy(spinBox);
-    label->setToolTip(i18n("Number of columns"));
+    label->setToolTip(i18n("KCNumber of columns"));
     layout->addWidget(label, 2, 0);
 
     spinBox = new QSpinBox(optionWidget);
@@ -292,7 +292,7 @@ QMap<QString, QWidget*> TableTool::createOptionWidgets()
 
     label = new QLabel(i18n("Rows:"), optionWidget);
     label->setBuddy(spinBox);
-    label->setToolTip(i18n("Number of rows"));
+    label->setToolTip(i18n("KCNumber of rows"));
     layout->addWidget(label, 3, 0);
 
 //layout->setColumnStretch( 1, 1 );

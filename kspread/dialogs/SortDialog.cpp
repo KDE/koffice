@@ -30,7 +30,7 @@
 #include "SortDialog.h"
 
 // KSpread
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "ValueConverter.h"

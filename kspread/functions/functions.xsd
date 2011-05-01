@@ -114,7 +114,7 @@
     <xsd:simpleType name="type">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="String"/>
-            <xsd:enumeration value="Number"/>
+            <xsd:enumeration value="KCNumber"/>
             <xsd:enumeration value="Integer"/>
             <xsd:enumeration value="Date"/>
             <xsd:enumeration value="Time"/>

@@ -42,11 +42,11 @@ class CSVDialog : public KDialog
 public:
     enum Header {
         TEXT,       ///< Normal text
-        NUMBER,     ///< Number (either like locale or like C)
+        NUMBER,     ///< KCNumber (either like locale or like C)
         DATE,       ///< Date \todo What type exactly?
         CURRENCY,   ///< Currency
-        COMMANUMBER,///< Number, which decimal symbol is a comma
-        POINTNUMBER ///< Number, which decimal symbol is a point/dot
+        COMMANUMBER,///< KCNumber, which decimal symbol is a comma
+        POINTNUMBER ///< KCNumber, which decimal symbol is a point/dot
     };
 
     CSVDialog(QWidget* parent, QByteArray& fileArray, const QString separator);

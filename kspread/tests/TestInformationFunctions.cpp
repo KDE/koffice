@@ -20,7 +20,7 @@
 
 #include <CellStorage.h>
 #include <Formula.h>
-#include <Map.h>
+#include <KCMap.h>
 #include <KCSheet.h>
 
 #include "TestKspreadCommon.h"
@@ -51,7 +51,7 @@ KCValue TestInformationFunctions::evaluate(const QString& formula, KCValue& ex)
 void TestInformationFunctions::initTestCase()
 {
     FunctionModuleRegistry::instance()->loadFunctionModules();
-    m_map = new Map(0 /* no Doc */);
+    m_map = new KCMap(0 /* no Doc */);
     m_map->addNewSheet();
     KCSheet* sheet = m_map->sheet(0);
     sheet->setSheetName("Sheet1");
@@ -233,7 +233,7 @@ void TestInformationFunctions::testCOLUMNS()
 {
     CHECK_EVAL("COLUMNS(C1)",      KCValue(1));     // Single cell range contains one column.
     CHECK_EVAL("COLUMNS(C1:C4)",   KCValue(1));     // Range with only one column.
-    CHECK_EVAL("COLUMNS(A4:D100)", KCValue(4));     // Number of columns in range.
+    CHECK_EVAL("COLUMNS(A4:D100)", KCValue(4));     // KCNumber of columns in range.
 }
 
 void TestInformationFunctions::testCOUNT()
@@ -354,7 +354,7 @@ void TestInformationFunctions::testISEVEN()
 /*
 void TestInformationFunctions::testISFORMULA()
 {
-    CHECK_EVAL( "ISFORMULA(B5)", KCValue( true  ) ); // Simple formulas that produce Number are still formulas
+    CHECK_EVAL( "ISFORMULA(B5)", KCValue( true  ) ); // Simple formulas that produce KCNumber are still formulas
     CHECK_EVAL( "ISFORMULA(B3)", KCValue( true  ) ); // Simple formulas that produce Text are still formulas
     CHECK_EVAL( "ISFORMULA(C5)", KCValue( false ) ); // KCCell constants are not formulas
     CHECK_EVAL( "ISFORMULA(C7)", KCValue( false ) ); // KCCell constants are not formulas, even if they are dates
@@ -470,7 +470,7 @@ void TestInformationFunctions::testROWS()
 {
     CHECK_EVAL("ROWS(C1)",      KCValue(1));      // Single cell range contains one row.
     CHECK_EVAL("ROWS(C1:C4)",   KCValue(4));      // Range with four rows.
-    CHECK_EVAL("ROWS(A4:D100)", KCValue(97));     // Number of rows in range.
+    CHECK_EVAL("ROWS(A4:D100)", KCValue(97));     // KCNumber of rows in range.
 }
 
 /*
@@ -491,13 +491,13 @@ void TestInformationFunctions::testTYPE()
 {
     //  KCValue's Type | Type return
     // --------------+-------------
-    //     Number    |     1
+    //     KCNumber    |     1
     //     Text      |     2
     //     Logical   |     4
     //     Error     |    16
     //     Array     |    64
 
-    CHECK_EVAL("TYPE(1+2)",              KCValue(1));      // Number has TYPE code of 1
+    CHECK_EVAL("TYPE(1+2)",              KCValue(1));      // KCNumber has TYPE code of 1
     CHECK_EVAL("TYPE(\"Hi\"&\"there\")", KCValue(2));      // Text has TYPE 2
     CHECK_EVAL("TYPE(NA())",             KCValue(16));     // Errors have TYPE 16.
 }

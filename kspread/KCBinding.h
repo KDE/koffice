@@ -33,16 +33,16 @@ class QAbstractItemModel;
  * Abstracts read-only access to the ValueStorage.
  * Useful for KChart (or other apps, that want read-only access to KSpread's data).
  *
- * If a cell in the region is updated, the BindingManager informs this Binding, which
+ * If a cell in the region is updated, the BindingManager informs this KCBinding, which
  * in turn informs the model it holds.
  */
-class KSPREAD_EXPORT Binding
+class KSPREAD_EXPORT KCBinding
 {
 public:
-    Binding();
-    explicit Binding(const KCRegion& region);
-    Binding(const Binding& other);
-    ~Binding();
+    KCBinding();
+    explicit KCBinding(const KCRegion& region);
+    KCBinding(const KCBinding& other);
+    ~KCBinding();
 
     bool isEmpty() const;
 
@@ -53,16 +53,16 @@ public:
 
     void update(const KCRegion& region);
 
-    void operator=(const Binding& other);
-    bool operator==(const Binding& other) const;
-    bool operator<(const Binding& other) const;
+    void operator=(const KCBinding& other);
+    bool operator==(const KCBinding& other) const;
+    bool operator<(const KCBinding& other) const;
 
 private:
     class Private;
     QExplicitlySharedDataPointer<Private> d;
 };
 
-Q_DECLARE_METATYPE(Binding)
-Q_DECLARE_TYPEINFO(Binding, Q_MOVABLE_TYPE);
+Q_DECLARE_METATYPE(KCBinding)
+Q_DECLARE_TYPEINFO(KCBinding, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_BINDING

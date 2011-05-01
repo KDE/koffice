@@ -63,7 +63,7 @@
 #include "ApplicationSettings.h"
 #include "CellStorage.h"
 #include "KCCondition.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "PrintSettings.h"
 #include "RowColumnFormat.h"
 #include "Selection.h"

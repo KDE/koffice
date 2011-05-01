@@ -20,7 +20,7 @@
 #include "PageBreakCommand.h"
 
 #include "Damages.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 #include "SheetPrint.h"

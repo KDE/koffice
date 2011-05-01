@@ -39,13 +39,13 @@ typedef QMap<QString, QDomElement> SavedDocParts;
 
 class KoResourceManager;
 
-class Map;
+class KCMap;
 class SheetAccessModel;
 
 class DocBase::Private
 {
 public:
-    Map *map;
+    KCMap *map;
     static QList<DocBase*> s_docs;
     static int s_docId;
 

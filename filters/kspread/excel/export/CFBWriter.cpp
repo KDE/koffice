@@ -486,7 +486,7 @@ void CFBWriter::writeHeader()
     ds << quint32(m_sectorSize == 4096 ? m_directorySectorCount : 0);
     ds << quint32(fatSectorCount());
     ds << quint32(m_firstDirectorySector);
-    ds << quint32(0);              // Transaction Signature Number
+    ds << quint32(0);              // Transaction Signature KCNumber
     ds << quint32(0x1000);         // Mini Stream Cutoff size
     ds << quint32(m_firstMiniFatSector);
     ds << quint32(m_miniFatSectorCount);

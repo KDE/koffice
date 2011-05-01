@@ -27,7 +27,7 @@
 
 #include "KoChartInterface.h"
 
-#include "Binding.h"
+#include "KCBinding.h"
 #include "CanvasResources.h"
 #include "CellStorage.h"
 #include "KCRegion.h"
@@ -39,13 +39,13 @@
 class ChartDatabaseSelector::Private
 {
 public:
-    Map* map;
+    KCMap* map;
     Selection* selection;
     KoChart::ChartInterface* shape;
     Ui::ChartDatabaseSelector widget;
 };
 
-ChartDatabaseSelector::ChartDatabaseSelector(Map *map)
+ChartDatabaseSelector::ChartDatabaseSelector(KCMap *map)
         : KoShapeConfigWidgetBase()
         , d(new Private)
 {

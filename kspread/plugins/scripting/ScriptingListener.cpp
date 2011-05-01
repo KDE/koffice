@@ -22,7 +22,7 @@
 
 #include <klocale.h>
 
-#include <Binding.h>
+#include <KCBinding.h>
 #include <CellStorage.h>
 #include <KCSheet.h>
 
@@ -34,7 +34,7 @@ class ScriptingCellListener::Private
 {
 public:
     KCSheet* sheet;
-    Binding* cellbinding;
+    KCBinding* cellbinding;
 };
 
 ScriptingCellListener::ScriptingCellListener(KCSheet *sheet, const QRect& area)
@@ -42,7 +42,7 @@ ScriptingCellListener::ScriptingCellListener(KCSheet *sheet, const QRect& area)
         , d(new Private())
 {
     d->sheet = sheet;
-    d->cellbinding = new Binding(KCRegion(area, sheet));
+    d->cellbinding = new KCBinding(KCRegion(area, sheet));
     connect(d->cellbinding->model(), SIGNAL(changed(const KCRegion&)), this, SLOT(slotChanged(const KCRegion&)));
     sheet->cellStorage()->setBinding(KCRegion(area, sheet), *d->cellbinding);
 }

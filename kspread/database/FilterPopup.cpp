@@ -31,7 +31,7 @@
 #include "CellStorage.h"
 #include "Database.h"
 #include "Filter.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 #include "ValueConverter.h"

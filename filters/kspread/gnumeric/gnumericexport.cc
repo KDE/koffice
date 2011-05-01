@@ -45,7 +45,7 @@
 #include <kspread/Currency.h>
 #include <kspread/part/Doc.h>
 #include <kspread/HeaderFooter.h>
-#include <kspread/Map.h>
+#include <kspread/KCMap.h>
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>
 #include <kspread/KCSheet.h>
@@ -281,7 +281,7 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell&
     case Validity::None:
         val.setAttribute("Type", "0");
         break;
-    case Validity::Number: {
+    case Validity::KCNumber: {
         val.setAttribute("Type", "2");
         switch (kspread_validity.condition()) {
         case KCConditional::None:
@@ -673,7 +673,7 @@ QDomElement GNUMERICExport::GetCellStyle(QDomDocument gnumeric_doc, const KCCell
     case KCFormat::Generic:
         stringFormat = "General";
         break;
-    case KCFormat::Number:
+    case KCFormat::KCNumber:
         stringFormat = "0.00";
         break;
     case KCFormat::Text:

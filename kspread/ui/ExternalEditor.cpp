@@ -23,7 +23,7 @@
 #include "CellEditor.h"
 #include "CellToolBase.h"
 #include "FormulaEditorHighlighter.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCSheet.h"
 
 // KOffice

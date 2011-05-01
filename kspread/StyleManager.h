@@ -33,7 +33,7 @@ class KoGenStyles;
 class KoOdfStylesReader;
 
 class Conditions;
-class Map;
+class KCMap;
 class StyleDialog;
 class ValueParser;
 
@@ -56,7 +56,7 @@ public:
     bool loadXML(KoXmlElement const & styles);
 
     void saveOdf(KoGenStyles &mainStyles);
-    void loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, Map* map = 0);
+    void loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* map = 0);
 
     CustomStyle * defaultStyle() const {
         return m_defaultStyle;

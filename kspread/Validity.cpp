@@ -30,7 +30,7 @@
 // KSpread
 #include "CalculationSettings.h"
 #include "KCCell.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "OdfLoadingContext.h"
 #include "KCSheet.h"
 #include "KCValue.h"
@@ -289,7 +289,7 @@ void Validity::loadOdfValidation(KCCell* const cell, const QString& validationNa
         //TrueFunction ::= cell-content-is-whole-number() | cell-content-is-decimal-number() | cell-content-is-date() | cell-content-is-time()
         else {
             if (valExpression.contains("cell-content-is-whole-number()")) {
-                setRestriction(Validity::Number);
+                setRestriction(Validity::KCNumber);
                 valExpression = valExpression.remove("oooc:cell-content-is-whole-number() and ");
             } else if (valExpression.contains("cell-content-is-decimal-number()")) {
                 setRestriction(Validity::Integer);
@@ -599,7 +599,7 @@ bool Validity::testValidity(const KCCell* cell) const
             return true;
 
         if ((cell->value().isNumber() &&
-                (d->restriction == Number ||
+                (d->restriction == KCNumber ||
                  (d->restriction == Integer &&
                   numToDouble(cell->value().asFloat()) == ceil(numToDouble(cell->value().asFloat())))))
             || (d->restriction == Time && cell->isTime())

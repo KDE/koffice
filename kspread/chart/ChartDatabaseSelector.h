@@ -23,7 +23,7 @@
 
 #include <KoShapeConfigWidgetBase.h>
 
-class Map;
+class KCMap;
 
 /// A widget that is shown for selecting the cell region providding the chart data
 class ChartDatabaseSelector : public KoShapeConfigWidgetBase
@@ -31,7 +31,7 @@ class ChartDatabaseSelector : public KoShapeConfigWidgetBase
     Q_OBJECT
 public:
     /// constructor
-    explicit ChartDatabaseSelector(Map *map);
+    explicit ChartDatabaseSelector(KCMap *map);
     ~ChartDatabaseSelector();
 
     /// reimplemented

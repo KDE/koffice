@@ -27,7 +27,7 @@
 #include "Function.h"
 #include "FunctionRepository.h"
 #include "FunctionCompletion.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "Selection.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
@@ -392,7 +392,7 @@ void CellEditor::Private::rebuildSelection()
     selectionChangedLocked = true;
 
     KCSheet *const originSheet = selection->originSheet();
-    Map *const map = originSheet->map();
+    KCMap *const map = originSheet->map();
 
     // Rebuild the reference selection by using the formula tokens.
     Tokens tokens = highlighter->formulaTokens();
@@ -743,7 +743,7 @@ void CellEditor::permuteFixation()
     }
 
     const Token token = tokens[index];
-    Map *const map = d->selection->activeSheet()->map();
+    KCMap *const map = d->selection->activeSheet()->map();
     QString regionName = token.text();
     // Filter sheet; truncates regionName; range without sheet name resides.
     KCSheet *const sheet = KCRegion(QString(), map).filterSheetName(regionName);

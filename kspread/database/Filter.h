@@ -30,7 +30,7 @@
 class KoXmlWriter;
 
 class Database;
-class Map;
+class KCMap;
 
 /**
  * OpenDocument, 8.7.1 Table Filter
@@ -62,7 +62,7 @@ public:
 
     enum Mode {
         Text,
-        Number
+        KCNumber
     };
 
     /**
@@ -96,7 +96,7 @@ public:
      */
     bool evaluate(const Database& database, int index) const;
 
-    bool loadOdf(const KoXmlElement& element, const Map* map);
+    bool loadOdf(const KoXmlElement& element, const KCMap* map);
     void saveOdf(KoXmlWriter& xmlWriter) const;
 
     bool operator==(const Filter& other) const;

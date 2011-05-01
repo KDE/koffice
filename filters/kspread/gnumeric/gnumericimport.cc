@@ -44,7 +44,7 @@
 #include <kspread/part/Doc.h>
 #include <kspread/HeaderFooter.h>
 #include <kspread/LoadingInfo.h>
-#include <kspread/Map.h>
+#include <kspread/KCMap.h>
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>
 #include <kspread/KCRegion.h>
@@ -1358,7 +1358,7 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
                                 }
                                 break;
                                 case 2:
-                                    kspread_validity.setRestriction(Validity::Number);
+                                    kspread_validity.setRestriction(Validity::KCNumber);
                                     if (validation_element.hasAttribute("Operator")) {
                                         const KCValue value1(expression0.toElement().text().toInt());
                                         const KCValue value2(expression1.toElement().text().toInt());

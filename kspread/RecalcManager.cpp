@@ -29,7 +29,7 @@
 #include "DependencyManager.h"
 #include "Formula.h"
 #include "FormulaStorage.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCSheet.h"
 #include "KCRegion.h"
 #include "KCValue.h"
@@ -48,7 +48,7 @@ public:
     /**
      * Finds all cells in \p sheet , that have got a formula and hence need
      * recalculation.
-     * If \p sheet is zero, all cells in the Map a returned.
+     * If \p sheet is zero, all cells in the KCMap a returned.
      *
      * \see RecalcManager::recalcMap
      * \see RecalcManager::recalcSheet
@@ -76,7 +76,7 @@ public:
      * \li depth(A3) = 2
      */
     QMap<int, KCCell> cells;
-    const Map* map;
+    const KCMap* map;
     bool active;
 };
 
@@ -153,7 +153,7 @@ void RecalcManager::Private::cellsToCalculate(const KCRegion& region, QSet<KCCel
     }
 }
 
-RecalcManager::RecalcManager(Map *const map)
+RecalcManager::RecalcManager(KCMap *const map)
         : QObject(map)
         , d(new Private)
 {

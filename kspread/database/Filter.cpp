@@ -27,7 +27,7 @@
 
 #include "CellStorage.h"
 #include "Database.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 #include "KCValue.h"
@@ -269,7 +269,7 @@ public:
         }
         if (element.hasAttributeNS(KoXmlNS::table, "data-type")) {
             if (element.attributeNS(KoXmlNS::table, "data-type", "text") == "number")
-                dataType = Number;
+                dataType = KCNumber;
             else
                 dataType = Text;
         }
@@ -327,7 +327,7 @@ public:
         }
         if (caseSensitivity == Qt::CaseSensitive)
             xmlWriter.addAttribute("table:case-sensitive", true);
-        if (dataType == Number)
+        if (dataType == KCNumber)
             xmlWriter.addAttribute("table:data-type", "number");
         xmlWriter.endElement();
     }
@@ -635,7 +635,7 @@ bool Filter::evaluate(const Database& database, int index) const
     return d->condition ? d->condition->evaluate(database, index) : true;
 }
 
-bool Filter::loadOdf(const KoXmlElement& element, const Map* map)
+bool Filter::loadOdf(const KoXmlElement& element, const KCMap* map)
 {
     if (element.hasAttributeNS(KoXmlNS::table, "target-range-address")) {
         const QString address = element.attributeNS(KoXmlNS::table, "target-range-address", QString());

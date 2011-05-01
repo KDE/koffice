@@ -32,11 +32,11 @@ class KCSheet;
  * A model for a sheet.
  * \ingroup Model
  */
-class KSPREAD_EXPORT SheetModel : public QAbstractTableModel
+class KSPREAD_EXPORT KCSheetModel : public QAbstractTableModel
 {
 public:
-    explicit SheetModel(KCSheet* sheet);
-    virtual ~SheetModel();
+    explicit KCSheetModel(KCSheet* sheet);
+    virtual ~KCSheetModel();
 
     // QAbstractTableModel interface
     virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;

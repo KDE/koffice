@@ -27,7 +27,7 @@
 #include "Function.h"
 #include "FunctionRepository.h"
 #include "KCSheet.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
 #include "KCValue.h"
@@ -1388,7 +1388,7 @@ KCValue Formula::evalRecursive(CellIndirection cellIndirections, QHash<KCCell, K
     QString c;
     QVector<KCValue> args;
 
-    const Map* map = d->sheet ? d->sheet->map() : new Map(0 /*document*/);
+    const KCMap* map = d->sheet ? d->sheet->map() : new KCMap(0 /*document*/);
     const ValueConverter* converter = map->converter();
     ValueCalc* calc = map->calc();
 

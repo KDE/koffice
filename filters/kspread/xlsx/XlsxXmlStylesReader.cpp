@@ -911,7 +911,7 @@ KoFilter::ConversionStatus XlsxXmlStylesReader::readInternal()
  - extLst (Future Feature Data Storage Area) §18.2.10
  - [done] fills (Fills) §18.8.21
  - [done] fonts (Fonts) §18.8.23
- - [done] numFmts (Number Formats) §18.8.31
+ - [done] numFmts (KCNumber Formats) §18.8.31
  - tableStyles (Table Styles) §18.8.42
 */
 KoFilter::ConversionStatus XlsxXmlStylesReader::read_styleSheet()
@@ -972,7 +972,7 @@ KoFilter::ConversionStatus XlsxXmlStylesReader::read_fonts()
 
 #undef CURRENT_EL
 #define CURRENT_EL numFmts
-//! numFmts handler (Number formats)
+//! numFmts handler (KCNumber formats)
 /*! ECMA-376, 18.8.31, p. 1981.
  This element defines the number formats in this workbook, consisting of a sequence of numFmt records,
  where each numFmt record defines a particular number format, indicating how to format and render
@@ -1007,7 +1007,7 @@ KoFilter::ConversionStatus XlsxXmlStylesReader::read_numFmts()
 
 #undef CURRENT_EL
 #define CURRENT_EL numFmt
-//! numFmt handler (Number format)
+//! numFmt handler (KCNumber format)
 /*! ECMA-376, 18.8.30, p. 1973.
  This element specifies number format properties which indicate how to format and render
  the numeric value of a cell.

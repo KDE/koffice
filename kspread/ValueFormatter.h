@@ -24,7 +24,7 @@
 #include <QDateTime>
 
 #include "Global.h"
-#include "Number.h"
+#include "KCNumber.h"
 #include "KCStyle.h"
 
 class CalculationSettings;
@@ -98,7 +98,7 @@ protected:
      * \param floatFormat the number format, i.e. signed/unsigned information
      * \param currencySymbol the currency symbol
      */
-    QString createNumberFormat(Number value, int precision,
+    QString createNumberFormat(KCNumber value, int precision,
                                KCFormat::Type formatType,
                                KCStyle::FloatFormat floatFormat,
                                const QString& currencySymbol,
@@ -108,7 +108,7 @@ protected:
      * Creates a fraction format.
      * \param formatType the value format, e.g. number, date
      */
-    QString fractionFormat(Number value, KCFormat::Type formatType);
+    QString fractionFormat(KCNumber value, KCFormat::Type formatType);
 
     /**
      * Creates a complex number format.

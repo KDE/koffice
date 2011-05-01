@@ -36,7 +36,7 @@
 
 #include "CalculationSettings.h"
 #include "KCCondition.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCStyle.h"
 
 StyleManager::StyleManager()
@@ -67,7 +67,7 @@ void StyleManager::saveOdf(KoGenStyles &mainStyles)
     }
 }
 
-void StyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, Map* map)
+void StyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* map)
 {
     // reset the map of OpenDocument Styles
     m_oasisStyles.clear();

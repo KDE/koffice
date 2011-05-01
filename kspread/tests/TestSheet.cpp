@@ -19,7 +19,7 @@
 #include "TestSheet.h"
 
 #include <part/Doc.h> // FIXME detach from part
-#include <Map.h>
+#include <KCMap.h>
 #include <KCSheet.h>
 
 #include <qtest_kde.h>

@@ -33,7 +33,7 @@
 
 #include "kspread_export.h"
 
-#include "Number.h"
+#include "KCNumber.h"
 
 using namespace std;
 
@@ -134,13 +134,13 @@ public:
     /**
      * Creates a floating-point value.
      */
-    explicit KCValue(Number f);
+    explicit KCValue(KCNumber f);
 #endif // KSPREAD_HIGH_PRECISION_SUPPORT
 
     /**
      * Creates a complex number value.
      */
-    explicit KCValue(const complex<Number>& c);
+    explicit KCValue(const complex<KCNumber>& c);
 
     /**
      * Creates a string value.
@@ -288,14 +288,14 @@ public:
      *
      * Call this function only if isNumber() returns true.
      */
-    Number asFloat() const;
+    KCNumber asFloat() const;
 
     /**
      * Returns the complex number value of this value.
      *
      * Call this function only if isNumber() returns true.
      */
-    complex<Number> asComplex() const;
+    complex<KCNumber> asComplex() const;
 
     /**
      * Returns the string value of this value.
@@ -488,11 +488,11 @@ public:
         return !operator==(other);
     }
 
-    static int compare(Number v1, Number v2);
+    static int compare(KCNumber v1, KCNumber v2);
 
     bool isZero() const;
 
-    static bool isZero(Number v);
+    static bool isZero(KCNumber v);
 
 private:
     class Private;

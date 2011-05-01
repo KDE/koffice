@@ -20,8 +20,8 @@
 // Ours
 #include "SheetAccessModel.h"
 #include "kspread_limits.h"
-#include "Map.h"
-#include "Binding.h"
+#include "KCMap.h"
+#include "KCBinding.h"
 #include "BindingManager.h"
 #include "Damages.h"
 #include "KCRegion.h"
@@ -44,14 +44,14 @@ Q_DECLARE_METATYPE(QPointer<QAbstractItemModel>)
 class SheetAccessModel::Private
 {
 public:
-    Map *map;
+    KCMap *map;
     /// Stores in what column each KCSheet is. We need this because
-    /// a KCSheet is removed from its Map before the sheetRemoved() signal
-    /// is emitted, thus we can't ask the Map what index it had.
+    /// a KCSheet is removed from its KCMap before the sheetRemoved() signal
+    /// is emitted, thus we can't ask the KCMap what index it had.
     QMap<KCSheet*, int> cols;
 };
 
-SheetAccessModel::SheetAccessModel(Map *map)
+SheetAccessModel::SheetAccessModel(KCMap *map)
         : d(new Private)
 {
     d->map = map;

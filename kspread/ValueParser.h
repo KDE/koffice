@@ -25,7 +25,7 @@
 #include <QDateTime>
 
 #include "KCFormat.h"
-#include "Number.h"
+#include "KCNumber.h"
 
 #include "kspread_export.h"
 
@@ -98,7 +98,7 @@ protected:
     /**
      * A helper function to read the imaginary part of a complex number.
      */
-    Number readImaginary(const QString& str, bool* ok) const;
+    KCNumber readImaginary(const QString& str, bool* ok) const;
 
     /**
      * A helper function to read integers.

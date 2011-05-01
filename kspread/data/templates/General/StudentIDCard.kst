@@ -206,7 +206,7 @@
       <pen width="1" style="0" color="#000000" />
      </up-diagonal>
     </format>
-    <text dataType="Str" >School Phone Number</text>
+    <text dataType="Str" >School Phone KCNumber</text>
    </cell>
    <cell row="15" column="3" >
     <format brushstyle="0" brushcolor="#ff0000" bgcolor="#ffffff" float="3" alignY="2" format="0" floatcolor="2" faktor="1" indent="0" precision="-1" angle="0" align="4" >

@@ -26,7 +26,7 @@
 #include <QTimer>
 
 #include "Global.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "OdfSavingContext.h"
 #include "RTree.h"
 #include "KCStyle.h"
@@ -38,7 +38,7 @@ static const int g_maximumCachedStyles = 10000;
 class KDE_NO_EXPORT StyleStorage::Private
 {
 public:
-    Map* map;
+    KCMap* map;
     RTree<SharedSubStyle> tree;
     QMap<int, bool> usedColumns; // FIXME Stefan: Use QList and qUpperBound() for insertion.
     QMap<int, bool> usedRows;
@@ -49,7 +49,7 @@ public:
     QRegion cachedArea;
 };
 
-StyleStorage::StyleStorage(Map* map)
+StyleStorage::StyleStorage(KCMap* map)
         : QObject(map)
         , d(new Private)
 {

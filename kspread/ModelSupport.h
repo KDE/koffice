@@ -34,7 +34,7 @@
  */
 enum SheetDataRole {
     // Qt::UserRole = 32
-    // KCSheet properties; MapModel, MapViewModel
+    // KCSheet properties; KCMapModel, MapViewModel
     VisibilityRole      = Qt::UserRole, ///< sheet visibility; bool
     ProtectionRole,                     ///< sheet protection; bool
     ActivityRole                        ///< active sheet; bool
@@ -48,13 +48,13 @@ enum SheetDataRole {
 enum CellDataRole {
     // Qt::UserRole     = 0x00000020 = 32
     NoCellDataRole      = Qt::UserRole, ///< used for iterating over all data, default and non-default
-    // KCCell contents; SheetModel, RegionModel
+    // KCCell contents; KCSheetModel, RegionModel
     UserInputRole       = 0x00000100,   ///< cell's user input; QString
     FormulaRole         = 0x00000200,   ///< cell's formula; Formula
     ValueRole           = 0x00000400,   ///< cell's value; KCValue
     LinkRole            = 0x00000800,   ///< cell's hyperlink; QString
     RichTextRole        = 0x00001000,   ///< cell's rich text; QSharedPointer<QTextDocument>
-    // KCCell range associations; SheetModel, RegionModel
+    // KCCell range associations; KCSheetModel, RegionModel
     CommentRole         = 0x00002000,   ///< a comment; QString
     ConditionRole       = 0x00004000,   ///< a conditional style; Conditions
     StyleRole           = 0x00008000,   ///< a style; KCStyle
@@ -62,7 +62,7 @@ enum CellDataRole {
     FusionedRangeRole   = 0x00020000,   ///< a fusioned cell range; bool
     LockedRangeRole     = 0x00040000,   ///< a locked cell range; bool
     NamedAreaRole       = 0x00080000,   ///< a named area; QString
-    SourceRangeRole     = 0x00100000,   ///< a source cell range; Binding
+    SourceRangeRole     = 0x00100000,   ///< a source cell range; KCBinding
     TargetRangeRole     = 0x00200000,   ///< a target cell range; Database
     AllCellDataRoles    = 0x00FFFF00    ///< used for iterating over the non-default data only
 };

@@ -25,7 +25,7 @@
 #include <QObject>
 
 class KCCell;
-class Map;
+class KCMap;
 class KCSheet;
 
 /**
@@ -53,9 +53,9 @@ public:
     /**
      * Creates a RecalcManager. It is used for a whole map.
      *
-     * \param map The Map which this RecalcManager belongs to.
+     * \param map The KCMap which this RecalcManager belongs to.
      */
-    explicit RecalcManager(Map *const map);
+    explicit RecalcManager(KCMap *const map);
 
     /**
      * Destructor.

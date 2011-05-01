@@ -1140,7 +1140,7 @@ KCValue func_complex(valVector args, ValueCalc *calc, FuncExtra *)
 {
     const double real = numToDouble(calc->conv()->toFloat(args[0]));
     const double imag = numToDouble(calc->conv()->toFloat(args[1]));
-    return KCValue(complex<Number>(real, imag));
+    return KCValue(complex<KCNumber>(real, imag));
 }
 
 
@@ -1167,8 +1167,8 @@ KCValue func_complex_real(valVector args, ValueCalc *calc, FuncExtra *)
 //
 void awImSum(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
-    const complex<Number> c1 = c->conv()->toComplex(res);
-    const complex<Number> c2 = c->conv()->toComplex(val);
+    const complex<KCNumber> c1 = c->conv()->toComplex(res);
+    const complex<KCNumber> c2 = c->conv()->toComplex(val);
     res = KCValue(c1 + c2);
 }
 
@@ -1178,8 +1178,8 @@ void awImSum(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 //
 void awImSub(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
-    const complex<Number> c1 = c->conv()->toComplex(res);
-    const complex<Number> c2 = c->conv()->toComplex(val);
+    const complex<KCNumber> c1 = c->conv()->toComplex(res);
+    const complex<KCNumber> c2 = c->conv()->toComplex(val);
     res = KCValue(c1 - c2);
 }
 
@@ -1189,8 +1189,8 @@ void awImSub(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 //
 void awImMul(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
-    const complex<Number> c1 = c->conv()->toComplex(res);
-    const complex<Number> c2 = c->conv()->toComplex(val);
+    const complex<KCNumber> c1 = c->conv()->toComplex(res);
+    const complex<KCNumber> c2 = c->conv()->toComplex(val);
     res = KCValue(c1 * c2);
 }
 
@@ -1200,8 +1200,8 @@ void awImMul(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 //
 void awImDiv(ValueCalc *c, KCValue &res, KCValue val, KCValue)
 {
-    const complex<Number> c1 = c->conv()->toComplex(res);
-    const complex<Number> c2 = c->conv()->toComplex(val);
+    const complex<KCNumber> c1 = c->conv()->toComplex(res);
+    const complex<KCNumber> c2 = c->conv()->toComplex(val);
     res = KCValue(c1 / c2);
 }
 
@@ -1364,7 +1364,7 @@ KCValue func_imln(valVector args, ValueCalc *calc, FuncExtra *)
 //
 KCValue func_imlog2(valVector args, ValueCalc *calc, FuncExtra *)
 {
-    return KCValue(std::log(calc->conv()->toComplex(args[0])) / static_cast<Number>(double(M_LN2l)));
+    return KCValue(std::log(calc->conv()->toComplex(args[0])) / static_cast<KCNumber>(double(M_LN2l)));
 }
 
 

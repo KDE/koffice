@@ -28,11 +28,11 @@
 
 #include <kdebug.h>
 
-#include "Map.h"
+#include "KCMap.h"
 #include "KCSheet.h"
 
 
-MapAdaptor::MapAdaptor(Map* map)
+MapAdaptor::MapAdaptor(KCMap* map)
         : QDBusAbstractAdaptor(map)
 {
     setAutoRelaySignals(true);

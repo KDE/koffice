@@ -33,7 +33,7 @@
 
 #include "KCCell.h"
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"

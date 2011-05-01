@@ -282,7 +282,7 @@ void SheetPrint::Private::calculateZoomForPageLimitX()
     calculateHorizontalPageParameters(printRange.right());
     currentPages = m_lnewPageListX.count();
 
-    kDebug() << "Number of pages with this zoom:" << currentPages;
+    kDebug() << "KCNumber of pages with this zoom:" << currentPages;
 
     while ((currentPages > horizontalPageLimit) && (m_settings->zoom() > 0.01)) {
         m_settings->setZoom(m_settings->zoom() - 0.01);
@@ -341,7 +341,7 @@ void SheetPrint::Private::calculateZoomForPageLimitY()
     calculateVerticalPageParameters(printRange.bottom());
     currentPages = m_lnewPageListY.count();
 
-    kDebug() << "Number of pages with this zoom:" << currentPages;
+    kDebug() << "KCNumber of pages with this zoom:" << currentPages;
 
     while ((currentPages > verticalPageLimit) && (m_settings->zoom() > 0.01)) {
         m_settings->setZoom(m_settings->zoom() - 0.01);

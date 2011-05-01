@@ -23,7 +23,7 @@
 
 #include "CellStorage.h"
 #include "Damages.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCSheet.h"
 
 #include "database/Database.h"

@@ -17,27 +17,27 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "MapModel.h"
+#include "KCMapModel.h"
 
-#include "Map.h"
+#include "KCMap.h"
 #include "ModelSupport.h"
 #include "KCSheet.h"
-#include "SheetModel.h"
+#include "KCSheetModel.h"
 
 #include "commands/SheetCommands.h"
 
 #include <KIcon>
 
-class MapModel::Private
+class KCMapModel::Private
 {
 public:
-    Map* map;
+    KCMap* map;
 
 public:
-    bool isSheetIndex(const QModelIndex& index, const MapModel* mapModel) const;
+    bool isSheetIndex(const QModelIndex& index, const KCMapModel* mapModel) const;
 };
 
-bool MapModel::Private::isSheetIndex(const QModelIndex& index, const MapModel* mapModel) const
+bool KCMapModel::Private::isSheetIndex(const QModelIndex& index, const KCMapModel* mapModel) const
 {
     if (!index.parent().isValid()) {
         return false;
@@ -62,7 +62,7 @@ bool MapModel::Private::isSheetIndex(const QModelIndex& index, const MapModel* m
 }
 
 
-MapModel::MapModel(Map* map)
+KCMapModel::KCMapModel(KCMap* map)
         : QAbstractListModel(map)
         , d(new Private)
 {
@@ -73,12 +73,12 @@ MapModel::MapModel(Map* map)
             this, SLOT(removeSheet(KCSheet *)));
 }
 
-MapModel::~MapModel()
+KCMapModel::~KCMapModel()
 {
     delete d;
 }
 
-QVariant MapModel::data(const QModelIndex &index, int role) const
+QVariant KCMapModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
         return QVariant();
@@ -108,7 +108,7 @@ QVariant MapModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-Qt::ItemFlags MapModel::flags(const QModelIndex &index) const
+Qt::ItemFlags KCMapModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid()) {
         return Qt::NoItemFlags;
@@ -132,7 +132,7 @@ Qt::ItemFlags MapModel::flags(const QModelIndex &index) const
     return flags;
 }
 
-QVariant MapModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant KCMapModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     Q_UNUSED(orientation)
     if (section == 0 && role == Qt::DisplayRole) {
@@ -141,7 +141,7 @@ QVariant MapModel::headerData(int section, Qt::Orientation orientation, int role
     return QVariant();
 }
 
-QModelIndex MapModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex KCMapModel::index(int row, int column, const QModelIndex &parent) const
 {
     QModelIndex index;
     if (parent.isValid()) {
@@ -165,7 +165,7 @@ QModelIndex MapModel::index(int row, int column, const QModelIndex &parent) cons
     return index;
 }
 
-int MapModel::rowCount(const QModelIndex &parent) const
+int KCMapModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
         return 0;
@@ -173,7 +173,7 @@ int MapModel::rowCount(const QModelIndex &parent) const
     return d->map->count();
 }
 
-bool MapModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool KCMapModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     // Propagation to sheet model
     if (d->isSheetIndex(index, this)) {
@@ -205,7 +205,7 @@ bool MapModel::setData(const QModelIndex &index, const QVariant &value, int role
     return false;
 }
 
-bool MapModel::setHidden(KCSheet* sheet, bool hidden)
+bool KCMapModel::setHidden(KCSheet* sheet, bool hidden)
 {
     QUndoCommand* command;
     if (hidden && !sheet->isHidden()) {
@@ -219,21 +219,21 @@ bool MapModel::setHidden(KCSheet* sheet, bool hidden)
     return true;
 }
 
-Map* MapModel::map() const
+KCMap* KCMapModel::map() const
 {
     return d->map;
 }
 
-void MapModel::addSheet(KCSheet* sheet)
+void KCMapModel::addSheet(KCSheet* sheet)
 {
     kDebug() << "Added sheet:" << sheet->sheetName();
     emit layoutChanged();
 }
 
-void MapModel::removeSheet(KCSheet *sheet)
+void KCMapModel::removeSheet(KCSheet *sheet)
 {
     kDebug() << "Removed sheet:" << sheet->sheetName();
     emit layoutChanged();
 }
 
-#include "MapModel.moc"
+#include "KCMapModel.moc"

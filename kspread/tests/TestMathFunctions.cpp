@@ -23,7 +23,7 @@
 
 #include <CellStorage.h>
 #include <Formula.h>
-#include <Map.h>
+#include <KCMap.h>
 #include <KCSheet.h>
 
 // NOTE: we do not compare the numbers _exactly_ because it is difficult
@@ -97,7 +97,7 @@ void TestMathFunctions::initTestCase()
 {
     FunctionModuleRegistry::instance()->loadFunctionModules();
 
-    m_map = new Map(0 /* no Doc */);
+    m_map = new KCMap(0 /* no Doc */);
     m_map->addNewSheet();
     KCSheet* sheet = m_map->sheet(0);
     CellStorage* storage = sheet->cellStorage();
@@ -535,7 +535,7 @@ void TestMathFunctions::testGESTEP()
     CHECK_EVAL("GESTEP(-1;-2)",    KCValue(1));     // Negative arguments are valid
     CHECK_EVAL("GESTEP(1)",        KCValue(1));     // Second parameter assumed 0 if omitted
     CHECK_EVAL("GESTEP(-2;1)",     KCValue(0));     //
-    CHECK_EVAL("GESTEP(3;3)",      KCValue(1));     // Number identical to step value.
+    CHECK_EVAL("GESTEP(3;3)",      KCValue(1));     // KCNumber identical to step value.
     CHECK_EVAL("GESTEP(1.3;1.2)",  KCValue(1));     // Floating point values where X is greater than Step.
     CHECK_EVAL("GESTEP(-2;\"xxx\")", KCValue::errorNUM());   //
     CHECK_EVAL("GESTEP(\"xxx\";-2)", KCValue::errorNUM());   //

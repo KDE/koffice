@@ -22,13 +22,13 @@
 #include "qtest_kde.h"
 
 #include "kspread_limits.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 
 void TestRegion::initTestCase()
 {
-    m_map = new Map(0 /* no Doc*/);
+    m_map = new KCMap(0 /* no Doc*/);
     KCSheet* sheet = m_map->addNewSheet();
     sheet->setSheetName("Sheet1");
     sheet = m_map->addNewSheet();

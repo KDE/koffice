@@ -35,7 +35,7 @@
 #include <CellView.h>
 #include <Damages.h>
 #include <GenValidationStyle.h>
-#include <Map.h>
+#include <KCMap.h>
 #include <OdfLoadingContext.h>
 #include <OdfSavingContext.h>
 #include <PrintSettings.h>
@@ -169,7 +169,7 @@ bool TableShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &con
         KoOdfLoadingContext& odfContext = context.odfLoadingContext();
         OdfLoadingContext tableContext(odfContext);
         QHash<QString, Conditions> conditionalStyles;
-        Map *const map = sheet()->map();
+        KCMap *const map = sheet()->map();
         StyleManager *const styleManager = map->styleManager();
         ValueParser *const parser = map->parser();
         Styles autoStyles = styleManager->loadOdfAutoStyles(odfContext.stylesReader(), conditionalStyles, parser);
@@ -207,7 +207,7 @@ void TableShape::saveOdf(KoShapeSavingContext & context) const
 {
     if (!sheet())
         return;
-    const Map* map = sheet()->map();
+    const KCMap* map = sheet()->map();
     // Saving the custom cell styles including the default cell style.
     map->styleManager()->saveOdf(context.mainStyles());
 
@@ -228,7 +228,7 @@ void TableShape::saveOdf(KoShapeSavingContext & context) const
     tableContext.valStyle.writeStyle(context.xmlWriter());
 }
 
-void TableShape::setMap(Map *map)
+void TableShape::setMap(KCMap *map)
 {
     if (map == 0)
         return;
@@ -285,7 +285,7 @@ void TableShape::setSize(const QSizeF& newSize)
     }
 }
 
-Map* TableShape::map() const
+KCMap* TableShape::map() const
 {
     return qobject_cast<KCSheet*>(KoShape::userData())->map();
 }

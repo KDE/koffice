@@ -40,7 +40,7 @@ class KSPREAD_EXPORT DependencyManager : public QObject
 
 public:
     /** constructor */
-    DependencyManager(const Map* map);
+    DependencyManager(const KCMap* map);
     /** destructor */
     ~DependencyManager();
 
@@ -62,7 +62,7 @@ public:
     /**
      * Updates the whole \p map.
      */
-    void updateAllDependencies(const Map* map);
+    void updateAllDependencies(const KCMap* map);
 
     /**
      * Returns the cell depths.

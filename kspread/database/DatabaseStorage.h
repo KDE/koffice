@@ -30,7 +30,7 @@ class DatabaseStorage : public QObject, public RectStorage<Database>
 {
     Q_OBJECT
 public:
-    explicit DatabaseStorage(Map* map) : QObject(map), RectStorage<Database>(map) {}
+    explicit DatabaseStorage(KCMap* map) : QObject(map), RectStorage<Database>(map) {}
     DatabaseStorage(const DatabaseStorage& other) : QObject(other.parent()), RectStorage<Database>(other) {}
 
 protected Q_SLOTS:

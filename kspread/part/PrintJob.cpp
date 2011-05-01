@@ -23,7 +23,7 @@
 #include "Canvas.h"
 #include "Doc.h"
 #include "HeaderFooter.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "PrintSettings.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"

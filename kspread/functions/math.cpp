@@ -450,9 +450,9 @@ KCValue func_floor(valVector args, ValueCalc *calc, FuncExtra *)
 {
     if (calc->approxEqual(args[0], KCValue(0.0)))
         return KCValue(0);
-    Number number = args[0].asFloat();
+    KCNumber number = args[0].asFloat();
 
-    Number significance;
+    KCNumber significance;
     if (args.count() >= 2) { // we have the optional "significance" argument
         significance = args[1].asFloat();
         // Sign of number and significance must match.
@@ -465,7 +465,7 @@ KCValue func_floor(valVector args, ValueCalc *calc, FuncExtra *)
 
     const bool mode = (args.count() == 3) ? (args[2].asFloat() != 0.0) : false;
 
-    Number result;
+    KCNumber result;
     if (mode) // round towards zero
         result = ((int)(number / significance)) * significance;
     else { // round towards negative infinity
@@ -958,7 +958,7 @@ KCValue func_odd(valVector args, ValueCalc *calc, FuncExtra *)
 KCValue func_trunc(valVector args, ValueCalc *calc, FuncExtra *)
 {
     Q_UNUSED(calc)
-    Number result = args[0].asFloat();
+    KCNumber result = args[0].asFloat();
     if (args.count() == 2)
         result = result * ::pow(10, (int)args[1].asInteger());
     result = (args[0].asFloat() < 0) ? -(qint64)(-result) : (qint64)result;

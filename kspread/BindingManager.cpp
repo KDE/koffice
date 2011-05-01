@@ -21,7 +21,7 @@
 
 #include "BindingStorage.h"
 #include "CellStorage.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 
@@ -30,10 +30,10 @@
 class BindingManager::Private
 {
 public:
-    const Map* map;
+    const KCMap* map;
 };
 
-BindingManager::BindingManager(const Map* map)
+BindingManager::BindingManager(const KCMap* map)
         : d(new Private)
 {
     d->map = map;
@@ -50,14 +50,14 @@ const QAbstractItemModel* BindingManager::createModel(const QString& regionName)
     if (!region.isValid() || !region.isContiguous() || !region.firstSheet()) {
         return 0;
     }
-    Binding binding(region);
+    KCBinding binding(region);
     region.firstSheet()->cellStorage()->setBinding(region, binding);
     return binding.model();
 }
 
 bool BindingManager::removeModel(const QAbstractItemModel* model)
 {
-    QList< QPair<QRectF, Binding> > bindings;
+    QList< QPair<QRectF, KCBinding> > bindings;
     const QRect rect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax));
     const QList<KCSheet*> sheets = d->map->sheetList();
     for (int i = 0; i < sheets.count(); ++i) {
@@ -83,7 +83,7 @@ bool BindingManager::isCellRegionValid(const QString& regionName) const
 void BindingManager::regionChanged(const KCRegion& region)
 {
     KCSheet* sheet;
-    QList< QPair<QRectF, Binding> > bindings;
+    QList< QPair<QRectF, KCBinding> > bindings;
     KCRegion::ConstIterator end(region.constEnd());
     for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
         sheet = (*it)->sheet();
@@ -96,7 +96,7 @@ void BindingManager::regionChanged(const KCRegion& region)
 
 void BindingManager::updateAllBindings()
 {
-    QList< QPair<QRectF, Binding> > bindings;
+    QList< QPair<QRectF, KCBinding> > bindings;
     const QRect rect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax));
     const QList<KCSheet*> sheets = d->map->sheetList();
     for (int i = 0; i < sheets.count(); ++i) {

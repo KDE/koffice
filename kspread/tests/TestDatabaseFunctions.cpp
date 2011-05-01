@@ -20,7 +20,7 @@
 #include "TestDatabaseFunctions.h"
 
 #include "CellStorage.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCSheet.h"
 
@@ -61,7 +61,7 @@ KCValue TestDatabaseFunctions::evaluate(const QString& formula, KCValue& ex)
 void TestDatabaseFunctions::initTestCase()
 {
     FunctionModuleRegistry::instance()->loadFunctionModules();
-    m_map = new Map(0 /* no Doc */);
+    m_map = new KCMap(0 /* no Doc */);
     m_map->addNewSheet();
     KCSheet* sheet = m_map->sheet(0);
     CellStorage* storage = sheet->cellStorage();

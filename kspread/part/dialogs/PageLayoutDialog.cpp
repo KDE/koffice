@@ -21,7 +21,7 @@
 
 // KSpread
 #include "part/Doc.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "PrintSettings.h"
 #include "KCSheet.h"
 #include "ui_PageLayoutSheetPage.h"

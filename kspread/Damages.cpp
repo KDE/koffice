@@ -30,7 +30,7 @@
 class WorkbookDamage::Private
 {
 public:
-    Map* map;
+    KCMap* map;
     Changes changes;
 };
 
@@ -116,7 +116,7 @@ SheetDamage::Changes SheetDamage::changes() const
 }
 
 
-WorkbookDamage::WorkbookDamage(Map* map, Changes changes)
+WorkbookDamage::WorkbookDamage(KCMap* map, Changes changes)
         : d(new Private)
 {
     d->map = map;
@@ -128,7 +128,7 @@ WorkbookDamage::~WorkbookDamage()
     delete d;
 }
 
-Map* WorkbookDamage::map() const
+KCMap* WorkbookDamage::map() const
 {
     return d->map;
 }
@@ -178,7 +178,7 @@ QDebug operator<<(QDebug str, const CellDamage& d)
 {
     str << "CellDamage: " << d.region().name(d.sheet());
     if (d.changes() & CellDamage::Appearance) str << " Appearance";
-    if (d.changes() & CellDamage::Binding)    str << " Binding";
+    if (d.changes() & CellDamage::KCBinding)    str << " KCBinding";
     if (d.changes() & CellDamage::Formula)    str << " Formula";
     if (d.changes() & CellDamage::KCValue)      str << " KCValue";
     return str;

@@ -46,7 +46,7 @@ class Spreadsheet: public XmlParser, Config
 {
 
     //Paper _paper;
-    Map _map;
+    KCMap _map;
     //Locale _locale;
     //AreaName _areaname;
 

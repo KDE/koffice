@@ -49,7 +49,7 @@
 #include <Global.h>
 #include "kspread_limits.h"
 #include <Localization.h>
-#include <Map.h>
+#include <KCMap.h>
 #include "ui/Selection.h"
 #include <KCSheet.h>
 #include <Util.h>
@@ -132,7 +132,7 @@ void ConsolidateDialog::accept()
         return;
     }
 
-    Map *const map = d->selection->activeSheet()->map();
+    KCMap *const map = d->selection->activeSheet()->map();
     ValueConverter *const converter = map->converter();
 
     KCSheet *const destinationSheet = d->selection->activeSheet();

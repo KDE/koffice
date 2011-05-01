@@ -55,7 +55,7 @@
 #include "Global.h"
 #include "Localization.h"
 #include "LoadingInfo.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "OdfLoadingContext.h"
 #include "OdfSavingContext.h"
@@ -1402,7 +1402,7 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
                 setValue(value);
 #if 0
                 KCStyle style;
-                style.setFormatType(KCFormat::Number);
+                style.setFormatType(KCFormat::KCNumber);
                 setStyle(style);
 #endif
             }
@@ -1873,7 +1873,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
     KoXmlElement conditionsElement = cell.namedItem("condition").toElement();
     if (!conditionsElement.isNull()) {
         Conditions conditions;
-        Map *const map = sheet()->map();
+        KCMap *const map = sheet()->map();
         ValueParser *const valueParser = map->parser();
         conditions.loadConditions(conditionsElement, valueParser);
         if (!conditions.isEmpty())

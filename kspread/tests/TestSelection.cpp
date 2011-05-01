@@ -22,13 +22,13 @@
 #include <qtest_kde.h>
 
 #include "part/Canvas.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 
 void TestSelection::initialize()
 {
-    Map map;
+    KCMap map;
     KCSheet* sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
     KCSheet* sheet2 = new KCSheet(&map, "Sheet2");
@@ -106,7 +106,7 @@ void TestSelection::initialize()
 
 void TestSelection::update()
 {
-    Map map;
+    KCMap map;
     KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
@@ -176,7 +176,7 @@ void TestSelection::update()
 
 void TestSelection::extend()
 {
-    Map map;
+    KCMap map;
     KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
@@ -281,7 +281,7 @@ void TestSelection::extend()
 
 void TestSelection::activeElement()
 {
-    Map map;
+    KCMap map;
     KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
@@ -328,7 +328,7 @@ void TestSelection::activeElement()
 
 void TestSelection::referenceSelectionMode()
 {
-    Map map;
+    KCMap map;
     KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
@@ -384,7 +384,7 @@ void TestSelection::referenceSelectionMode()
 
 void TestSelection::covering()
 {
-    Map map;
+    KCMap map;
     KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
@@ -425,7 +425,7 @@ void TestSelection::covering()
 
 void TestSelection::splitting()
 {
-    Map map;
+    KCMap map;
     KCSheet *sheet1 = new KCSheet(&map, "Sheet1");
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");

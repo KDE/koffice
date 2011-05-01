@@ -29,7 +29,7 @@
 #include <KCRegion.h>
 #include <KCStyle.h>
 
-class Map;
+class KCMap;
 class OdfSavingContext;
 class KCStyle;
 class StyleManager;
@@ -48,7 +48,7 @@ class KSPREAD_EXPORT StyleStorage : public QObject
     Q_OBJECT
 
 public:
-    explicit StyleStorage(Map* map);
+    explicit StyleStorage(KCMap* map);
     StyleStorage(const StyleStorage& other);
     virtual ~StyleStorage();
 

@@ -149,7 +149,7 @@ QString GenValidationStyle::createValidationCondition(Validity* validity, const 
         result = createDateValidationCondition(validity, converter);
         break;
     case Validity::Integer:
-    case Validity::Number:
+    case Validity::KCNumber:
         result = createNumberValidationCondition(validity);
         break;
     case Validity::TextLength:
@@ -173,7 +173,7 @@ QString GenValidationStyle::createListValidationCondition(Validity* validity)
 QString GenValidationStyle::createNumberValidationCondition(Validity* validity)
 {
     QString result;
-    if (validity->restriction() == Validity::Number)
+    if (validity->restriction() == Validity::KCNumber)
         result = "oooc:cell-content-is-whole-number() and ";
     else if (validity->restriction() == Validity::Integer)
         result = "oooc:cell-content-is-decimal-number() and ";

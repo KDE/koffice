@@ -25,7 +25,7 @@
 
 #include <KCValue.h>
 
-class Map;
+class KCMap;
 
 class TestDatabaseFunctions: public QObject
 {
@@ -50,7 +50,7 @@ private Q_SLOTS:
 private:
     KCValue evaluate(const QString&, KCValue& ex);
 
-    Map* m_map;
+    KCMap* m_map;
 };
 
 #endif // KSPREAD_TEST_DATABASE_FUNCTIONS

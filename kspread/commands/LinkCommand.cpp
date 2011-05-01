@@ -23,7 +23,7 @@
 
 #include "Damages.h"
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCSheet.h"
 
 LinkCommand::LinkCommand(const KCCell& c, const QString& text, const QString& link)

@@ -32,7 +32,7 @@ class ConditionsStorage : public QObject, public RectStorage<Conditions>
 {
     Q_OBJECT
 public:
-    explicit ConditionsStorage(Map* map) : QObject(map), RectStorage<Conditions>(map) {}
+    explicit ConditionsStorage(KCMap* map) : QObject(map), RectStorage<Conditions>(map) {}
     ConditionsStorage(const ConditionsStorage& other) : QObject(other.parent()), RectStorage<Conditions>(other) {}
 
 protected Q_SLOTS:

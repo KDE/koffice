@@ -33,7 +33,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KoXmlNS.h>
 
-#include <Map.h>
+#include <KCMap.h>
 
 #include "TableShape.h"
 #include "TableToolFactory.h"
@@ -74,7 +74,7 @@ KoShape *TableShapeFactory::createDefaultShape(KoResourceManager *documentResour
     TableShape *shape = new TableShape();
     shape->setShapeId(TableShapeId);
     if (documentResources) {
-        Map *map = static_cast<Map*>(documentResources->resource(MapResourceId).value<void*>());
+        KCMap *map = static_cast<KCMap*>(documentResources->resource(MapResourceId).value<void*>());
         shape->setMap(map);
     }
     return shape;
@@ -89,8 +89,8 @@ void TableShapeFactory::createMap(KoResourceManager *manager)
 {
     // One spreadsheet map for all inserted tables to allow referencing cells among them.
     QVariant variant;
-    Map *map = new Map();
-    // Make the KoResourceManager manage this Map, since we cannot delete it ourselves
+    KCMap *map = new KCMap();
+    // Make the KoResourceManager manage this KCMap, since we cannot delete it ourselves
     map->setParent(manager);
     variant.setValue<void*>(map);
     manager->setResource(MapResourceId, variant);

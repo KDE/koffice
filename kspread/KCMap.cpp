@@ -19,7 +19,7 @@
 */
 
 // Local
-#include "Map.h"
+#include "KCMap.h"
 
 #include <stdlib.h>
 #include <time.h>
@@ -70,7 +70,7 @@
 // database
 #include "database/DatabaseManager.h"
 
-class Map::Private
+class KCMap::Private
 {
 public:
     DocBase* doc;
@@ -119,11 +119,11 @@ public:
 };
 
 
-Map::Map(DocBase* doc, int syntaxVersion)
+KCMap::KCMap(DocBase* doc, int syntaxVersion)
         : QObject(doc),
         d(new Private)
 {
-    setObjectName("Map"); // necessary for D-Bus
+    setObjectName("KCMap"); // necessary for D-Bus
     d->doc = doc;
     d->tableId = 1;
     d->overallRowCount = 0;
@@ -177,14 +177,14 @@ Map::Map(DocBase* doc, int syntaxVersion)
             this, SLOT(handleDamages(const QList<Damage*>&)));
 }
 
-Map::~Map()
+KCMap::~KCMap()
 {
     // Because some of the shapes might be using a sheet in this map, delete
     // all shapes in each sheet before all sheets are deleted together.
     foreach(KCSheet *sheet, d->lstSheets)
         sheet->deleteShapes();
     // we have to explicitly delete the Sheets, not let QObject take care of that
-    // as the sheet in its destructor expects the Map to still exist
+    // as the sheet in its destructor expects the KCMap to still exist
     qDeleteAll(d->lstSheets);
     d->lstSheets.clear();
 
@@ -210,22 +210,22 @@ Map::~Map()
     delete d;
 }
 
-DocBase* Map::doc() const
+DocBase* KCMap::doc() const
 {
     return d->doc;
 }
 
-void Map::setReadWrite(bool readwrite)
+void KCMap::setReadWrite(bool readwrite)
 {
     d->readwrite = readwrite;
 }
 
-bool Map::isReadWrite() const
+bool KCMap::isReadWrite() const
 {
     return d->readwrite;
 }
 
-bool Map::completeLoading(KoStore *store)
+bool KCMap::completeLoading(KoStore *store)
 {
     Q_UNUSED(store);
     // Initial build of all cell dependencies.
@@ -236,7 +236,7 @@ bool Map::completeLoading(KoStore *store)
     return true;
 }
 
-bool Map::completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext * context)
+bool KCMap::completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext * context)
 {
     Q_UNUSED(store);
     Q_UNUSED(manifestWriter);
@@ -244,92 +244,92 @@ bool Map::completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSav
     return true;
 }
 
-BindingManager* Map::bindingManager() const
+BindingManager* KCMap::bindingManager() const
 {
     return d->bindingManager;
 }
 
-DatabaseManager* Map::databaseManager() const
+DatabaseManager* KCMap::databaseManager() const
 {
     return d->databaseManager;
 }
 
-DependencyManager* Map::dependencyManager() const
+DependencyManager* KCMap::dependencyManager() const
 {
     return d->dependencyManager;
 }
 
-NamedAreaManager* Map::namedAreaManager() const
+NamedAreaManager* KCMap::namedAreaManager() const
 {
     return d->namedAreaManager;
 }
 
-RecalcManager* Map::recalcManager() const
+RecalcManager* KCMap::recalcManager() const
 {
     return d->recalcManager;
 }
 
-StyleManager* Map::styleManager() const
+StyleManager* KCMap::styleManager() const
 {
     return d->styleManager;
 }
 
-KoStyleManager* Map::textStyleManager() const
+KoStyleManager* KCMap::textStyleManager() const
 {
     return d->textStyleManager;
 }
 
-ValueParser* Map::parser() const
+ValueParser* KCMap::parser() const
 {
     return d->parser;
 }
 
-ValueFormatter* Map::formatter() const
+ValueFormatter* KCMap::formatter() const
 {
     return d->formatter;
 }
 
-ValueConverter* Map::converter() const
+ValueConverter* KCMap::converter() const
 {
     return d->converter;
 }
 
-ValueCalc* Map::calc() const
+ValueCalc* KCMap::calc() const
 {
     return d->calc;
 }
 
-const ColumnFormat* Map::defaultColumnFormat() const
+const ColumnFormat* KCMap::defaultColumnFormat() const
 {
     return d->defaultColumnFormat;
 }
 
-const RowFormat* Map::defaultRowFormat() const
+const RowFormat* KCMap::defaultRowFormat() const
 {
     return d->defaultRowFormat;
 }
 
-void Map::setDefaultColumnWidth(double width)
+void KCMap::setDefaultColumnWidth(double width)
 {
     d->defaultColumnFormat->setWidth(width);
 }
 
-void Map::setDefaultRowHeight(double height)
+void KCMap::setDefaultRowHeight(double height)
 {
     d->defaultRowFormat->setHeight(height);
 }
 
-ApplicationSettings* Map::settings() const
+ApplicationSettings* KCMap::settings() const
 {
     return d->applicationSettings;
 }
 
-CalculationSettings* Map::calculationSettings() const
+CalculationSettings* KCMap::calculationSettings() const
 {
     return d->calculationSettings;
 }
 
-KCSheet* Map::createSheet(const QString& name)
+KCSheet* KCMap::createSheet(const QString& name)
 {
     QString sheetName(i18n("KCSheet%1", d->tableId++));
     if ( !name.isEmpty() )
@@ -340,20 +340,20 @@ KCSheet* Map::createSheet(const QString& name)
     return sheet;
 }
 
-void Map::addSheet(KCSheet *_sheet)
+void KCMap::addSheet(KCSheet *_sheet)
 {
     d->lstSheets.append(_sheet);
     emit sheetAdded(_sheet);
 }
 
-KCSheet *Map::addNewSheet(const QString& name)
+KCSheet *KCMap::addNewSheet(const QString& name)
 {
     KCSheet *t = createSheet(name);
     addSheet(t);
     return t;
 }
 
-void Map::moveSheet(const QString & _from, const QString & _to, bool _before)
+void KCMap::moveSheet(const QString & _from, const QString & _to, bool _before)
 {
     KCSheet* sheetfrom = findSheet(_from);
     KCSheet* sheetto = findSheet(_to);
@@ -375,7 +375,7 @@ void Map::moveSheet(const QString & _from, const QString & _to, bool _before)
     }
 }
 
-void Map::loadOdfSettings(KoOasisSettings &settings)
+void KCMap::loadOdfSettings(KoOasisSettings &settings)
 {
     KoOasisSettings::Items viewSettings = settings.itemSet("view-settings");
     KoOasisSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
@@ -398,7 +398,7 @@ void Map::loadOdfSettings(KoOasisSettings &settings)
     }
 }
 
-bool Map::saveOdf(KoXmlWriter & xmlWriter, KoShapeSavingContext & savingContext)
+bool KCMap::saveOdf(KoXmlWriter & xmlWriter, KoShapeSavingContext & savingContext)
 {
     // Saving the custom cell styles including the default cell style.
     d->styleManager->saveOdf(savingContext.mainStyles());
@@ -437,7 +437,7 @@ bool Map::saveOdf(KoXmlWriter & xmlWriter, KoShapeSavingContext & savingContext)
     return true;
 }
 
-QDomElement Map::save(QDomDocument& doc)
+QDomElement KCMap::save(QDomDocument& doc)
 {
     QDomElement spread = doc.documentElement();
 
@@ -502,7 +502,7 @@ static void fixupStyle(KoCharacterStyle* style)
     style->copyProperties(format);
 }
 
-bool Map::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
+bool KCMap::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
 {
     d->isLoading = true;
     loadingInfo()->setFileFormat(LoadingInfo::OpenDocument);
@@ -583,7 +583,7 @@ bool Map::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
     while (!sheetNode.isNull()) {
         KoXmlElement sheetElement = sheetNode.toElement();
         if (!sheetElement.isNull()) {
-            //kDebug()<<"  Map::loadOdf tableElement is not null";
+            //kDebug()<<"  KCMap::loadOdf tableElement is not null";
             //kDebug()<<"tableElement.nodeName() :"<<sheetElement.nodeName();
 
             // make it slightly faster
@@ -651,7 +651,7 @@ bool Map::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
 }
 
 
-bool Map::loadXML(const KoXmlElement& mymap)
+bool KCMap::loadXML(const KoXmlElement& mymap)
 {
     d->isLoading = true;
     loadingInfo()->setFileFormat(LoadingInfo::NativeFormat);
@@ -691,7 +691,7 @@ bool Map::loadXML(const KoXmlElement& mymap)
     return true;
 }
 
-KCSheet* Map::findSheet(const QString & _name) const
+KCSheet* KCMap::findSheet(const QString & _name) const
 {
     foreach(KCSheet* sheet, d->lstSheets) {
         if (_name.toLower() == sheet->sheetName().toLower())
@@ -700,7 +700,7 @@ KCSheet* Map::findSheet(const QString & _name) const
     return 0;
 }
 
-KCSheet * Map::nextSheet(KCSheet * currentSheet) const
+KCSheet * KCMap::nextSheet(KCSheet * currentSheet) const
 {
     if (currentSheet == d->lstSheets.last())
         return currentSheet;
@@ -713,7 +713,7 @@ KCSheet * Map::nextSheet(KCSheet * currentSheet) const
     return 0;
 }
 
-KCSheet * Map::previousSheet(KCSheet * currentSheet) const
+KCSheet * KCMap::previousSheet(KCSheet * currentSheet) const
 {
     if (currentSheet == d->lstSheets.first())
         return currentSheet;
@@ -726,7 +726,7 @@ KCSheet * Map::previousSheet(KCSheet * currentSheet) const
     return 0;
 }
 
-bool Map::saveChildren(KoStore * _store)
+bool KCMap::saveChildren(KoStore * _store)
 {
     foreach(KCSheet* sheet, d->lstSheets) {
         // set the child document's url to an internal url (ex: "tar:/0/1")
@@ -736,7 +736,7 @@ bool Map::saveChildren(KoStore * _store)
     return true;
 }
 
-bool Map::loadChildren(KoStore * _store)
+bool KCMap::loadChildren(KoStore * _store)
 {
     foreach(KCSheet* sheet, d->lstSheets) {
         if (!sheet->loadChildren(_store))
@@ -745,7 +745,7 @@ bool Map::loadChildren(KoStore * _store)
     return true;
 }
 
-void Map::removeSheet(KCSheet* sheet)
+void KCMap::removeSheet(KCSheet* sheet)
 {
     d->lstSheets.removeAll(sheet);
     d->lstDeletedSheets.append(sheet);
@@ -753,7 +753,7 @@ void Map::removeSheet(KCSheet* sheet)
     emit sheetRemoved(sheet);
 }
 
-void Map::reviveSheet(KCSheet* sheet)
+void KCMap::reviveSheet(KCSheet* sheet)
 {
     d->lstDeletedSheets.removeAll(sheet);
     d->lstSheets.append(sheet);
@@ -761,7 +761,7 @@ void Map::reviveSheet(KCSheet* sheet)
 }
 
 // FIXME cache this for faster operation
-QStringList Map::visibleSheets() const
+QStringList KCMap::visibleSheets() const
 {
     QStringList result;
     foreach(KCSheet* sheet, d->lstSheets) {
@@ -772,7 +772,7 @@ QStringList Map::visibleSheets() const
 }
 
 // FIXME cache this for faster operation
-QStringList Map::hiddenSheets() const
+QStringList KCMap::hiddenSheets() const
 {
     QStringList result;
     foreach(KCSheet* sheet, d->lstSheets) {
@@ -782,27 +782,27 @@ QStringList Map::hiddenSheets() const
     return result;
 }
 
-KCSheet* Map::sheet(int index) const
+KCSheet* KCMap::sheet(int index) const
 {
     return d->lstSheets.value(index);
 }
 
-int Map::indexOf(KCSheet* sheet) const
+int KCMap::indexOf(KCSheet* sheet) const
 {
     return d->lstSheets.indexOf(sheet);
 }
 
-QList<KCSheet*>& Map::sheetList() const
+QList<KCSheet*>& KCMap::sheetList() const
 {
     return d->lstSheets;
 }
 
-int Map::count() const
+int KCMap::count() const
 {
     return d->lstSheets.count();
 }
 
-int Map::increaseLoadedRowsCounter(int number)
+int KCMap::increaseLoadedRowsCounter(int number)
 {
     d->loadedRowsCounter += number;
     if (d->overallRowCount) {
@@ -811,23 +811,23 @@ int Map::increaseLoadedRowsCounter(int number)
     return -1;
 }
 
-bool Map::isLoading() const
+bool KCMap::isLoading() const
 {
     // The KoDocument state is necessary to avoid damages while importing a file (through a filter).
     return d->isLoading || (d->doc && d->doc->isLoading());
 }
 
-int Map::syntaxVersion() const
+int KCMap::syntaxVersion() const
 {
     return d->syntaxVersion;
 }
 
-void Map::setSyntaxVersion(int version)
+void KCMap::setSyntaxVersion(int version)
 {
     d->syntaxVersion = version;
 }
 
-LoadingInfo* Map::loadingInfo() const
+LoadingInfo* KCMap::loadingInfo() const
 {
     if (!d->loadingInfo) {
         d->loadingInfo = new LoadingInfo();
@@ -835,25 +835,25 @@ LoadingInfo* Map::loadingInfo() const
     return d->loadingInfo;
 }
 
-void Map::deleteLoadingInfo()
+void KCMap::deleteLoadingInfo()
 {
     delete d->loadingInfo;
     d->loadingInfo = 0;
 }
 
-KCompletion& Map::stringCompletion()
+KCompletion& KCMap::stringCompletion()
 {
     return d->listCompletion;
 }
 
-void Map::addStringCompletion(const QString &stringCompletion)
+void KCMap::addStringCompletion(const QString &stringCompletion)
 {
     if (d->listCompletion.items().contains(stringCompletion) == 0) {
         d->listCompletion.addItem(stringCompletion);
     }
 }
 
-void Map::addDamage(Damage* damage)
+void KCMap::addDamage(Damage* damage)
 {
     // Do not create a new Damage, if we are in loading process. Check for it before
     // calling this function. This prevents unnecessary memory allocations (new).
@@ -880,7 +880,7 @@ void Map::addDamage(Damage* damage)
     }
 }
 
-void Map::flushDamages()
+void KCMap::flushDamages()
 {
     // Copy the damages to process. This allows new damages while processing.
     QList<Damage*> damages = d->damages;
@@ -889,7 +889,7 @@ void Map::flushDamages()
     qDeleteAll(damages);
 }
 
-void Map::handleDamages(const QList<Damage*>& damages)
+void KCMap::handleDamages(const QList<Damage*>& damages)
 {
     KCRegion bindingChangedRegion;
     KCRegion formulaChangedRegion;
@@ -913,7 +913,7 @@ void Map::handleDamages(const QList<Damage*>& damages)
                 // Rebuild the style storage cache.
                 damagedSheet->cellStorage()->invalidateStyleCache(); // FIXME more fine-grained
             }
-            if ((cellDamage->changes() & CellDamage::Binding) &&
+            if ((cellDamage->changes() & CellDamage::KCBinding) &&
                     !workbookChanges.testFlag(WorkbookDamage::KCValue)) {
                 bindingChangedRegion.add(region, damagedSheet);
             }
@@ -984,15 +984,15 @@ void Map::handleDamages(const QList<Damage*>& damages)
     }
 }
 
-void Map::addCommand(QUndoCommand *command)
+void KCMap::addCommand(QUndoCommand *command)
 {
     emit commandAdded(command);
 }
 
-KoResourceManager* Map::resourceManager() const
+KoResourceManager* KCMap::resourceManager() const
 {
     if (!doc()) return 0;
     return doc()->resourceManager();
 }
 
-#include "Map.moc"
+#include "KCMap.moc"

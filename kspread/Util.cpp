@@ -29,7 +29,7 @@
 #include "Formula.h"
 #include "kspread_limits.h"
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
 #include "KCSheet.h"

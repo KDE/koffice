@@ -17,16 +17,16 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "SheetModel.h"
+#include "KCSheetModel.h"
 
 // KSpread
-#include "Binding.h"
+#include "KCBinding.h"
 #include "KCCell.h"
 #include "CellStorage.h"
 #include "KCCondition.h"
 #include "database/Database.h"
 #include "Formula.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ModelSupport.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
@@ -39,25 +39,25 @@
 #include <QItemSelectionRange>
 #include <QSize>
 
-class SheetModel::Private
+class KCSheetModel::Private
 {
 public:
     KCSheet* sheet;
 };
 
-SheetModel::SheetModel(KCSheet* sheet)
+KCSheetModel::KCSheetModel(KCSheet* sheet)
         : QAbstractTableModel(sheet)
         , d(new Private)
 {
     d->sheet = sheet;
 }
 
-SheetModel::~SheetModel()
+KCSheetModel::~KCSheetModel()
 {
     delete d;
 }
 
-int SheetModel::columnCount(const QModelIndex& parent) const
+int KCSheetModel::columnCount(const QModelIndex& parent) const
 {
     if (parent.isValid() && parent.internalPointer() != d->sheet->map()) {
         return 0;
@@ -65,7 +65,7 @@ int SheetModel::columnCount(const QModelIndex& parent) const
     return KS_colMax;
 }
 
-QVariant SheetModel::data(const QModelIndex& index, int role) const
+QVariant KCSheetModel::data(const QModelIndex& index, int role) const
 {
     if (!index.isValid()) {
         return QVariant();
@@ -140,7 +140,7 @@ QVariant SheetModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
-Qt::ItemFlags SheetModel::flags(const QModelIndex& index) const
+Qt::ItemFlags KCSheetModel::flags(const QModelIndex& index) const
 {
     if (!index.isValid()) {
         return Qt::NoItemFlags;
@@ -159,7 +159,7 @@ Qt::ItemFlags SheetModel::flags(const QModelIndex& index) const
     return Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled;
 }
 
-QVariant SheetModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant KCSheetModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     // NOTE Model indices start from 0, while KSpread column/row indices start from 1.
     if (role == Qt::DisplayRole) {
@@ -172,7 +172,7 @@ QVariant SheetModel::headerData(int section, Qt::Orientation orientation, int ro
     return QVariant();
 }
 
-QModelIndex SheetModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex KCSheetModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (parent.isValid() && parent.internalPointer() != d->sheet->map()) {
         return QModelIndex();
@@ -180,7 +180,7 @@ QModelIndex SheetModel::index(int row, int column, const QModelIndex &parent) co
     // A cell in our sheet?
     if (!parent.isValid()) {
         return createIndex(row, column, d->sheet);
-        // Embedded in a MapModel?
+        // Embedded in a KCMapModel?
     } else if (parent.internalPointer() == d->sheet->map()) {
         return createIndex(row, column, d->sheet);
         // A sub-table?
@@ -190,7 +190,7 @@ QModelIndex SheetModel::index(int row, int column, const QModelIndex &parent) co
     return QModelIndex();
 }
 
-int SheetModel::rowCount(const QModelIndex& parent) const
+int KCSheetModel::rowCount(const QModelIndex& parent) const
 {
     if (parent.isValid() && parent.internalPointer() != d->sheet->map()) {
         return 0;
@@ -198,7 +198,7 @@ int SheetModel::rowCount(const QModelIndex& parent) const
     return KS_rowMax;
 }
 
-bool SheetModel::setData(const QModelIndex& index, const QVariant& value, int role)
+bool KCSheetModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     if (!index.isValid()) {
         return false;
@@ -242,7 +242,7 @@ bool SheetModel::setData(const QModelIndex& index, const QVariant& value, int ro
     return true;
 }
 
-bool SheetModel::setData(const QItemSelectionRange &range, const QVariant &value, int role)
+bool KCSheetModel::setData(const QItemSelectionRange &range, const QVariant &value, int role)
 {
     const KCRegion region(toRange(range), d->sheet);
     CellStorage *const storage = d->sheet->cellStorage();
@@ -265,7 +265,7 @@ bool SheetModel::setData(const QItemSelectionRange &range, const QVariant &value
         storage->emitInsertNamedArea(region, value.toString());
             break;
     case SourceRangeRole:
-        storage->setBinding(region, value.value<Binding>());
+        storage->setBinding(region, value.value<KCBinding>());
         break;
     case StyleRole:
         // TODO
@@ -284,13 +284,13 @@ bool SheetModel::setData(const QItemSelectionRange &range, const QVariant &value
     return true;
 }
 
-bool SheetModel::setData(const QModelIndex &topLeft, const QModelIndex &bottomRight,
+bool KCSheetModel::setData(const QModelIndex &topLeft, const QModelIndex &bottomRight,
                          const QVariant &value, int role)
 {
     return setData(QItemSelectionRange(topLeft, bottomRight), value, role);
 }
 
-KCSheet* SheetModel::sheet() const
+KCSheet* KCSheetModel::sheet() const
 {
     return d->sheet;
 }

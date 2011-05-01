@@ -32,7 +32,7 @@
 // KSpread
 #include "KCCell.h"
 #include "DependencyManager.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 #include "KCStyle.h"

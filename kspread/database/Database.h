@@ -34,7 +34,7 @@ class KoXmlWriter;
 
 class KCCell;
 class Filter;
-class Map;
+class KCMap;
 class KCRegion;
 
 /**
@@ -119,7 +119,7 @@ public:
     const Filter& filter() const;
     void setFilter(const Filter& filter);
 
-    bool loadOdf(const KoXmlElement& element, const Map* map);
+    bool loadOdf(const KoXmlElement& element, const KCMap* map);
     void saveOdf(KoXmlWriter& xmlWriter) const;
 
     void operator=(const Database& other);

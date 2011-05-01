@@ -22,7 +22,7 @@
 // KSpread
 #include "KCCell.h"
 #include "kspread_limits.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
 #include "KCValue.h"
@@ -125,7 +125,7 @@ QModelIndex ReadOnlyTableModel::index(int row, int column, const QModelIndex &pa
     // A cell in our sheet?
     if (!parent.isValid()) {
         index = createIndex(row, column, d->sheet);
-        // Embedded in a MapModel?
+        // Embedded in a KCMapModel?
     } else if (parent.internalPointer() == d->sheet->map()) {
         index = createIndex(row, column, d->sheet);
         // A sub-table?

@@ -32,7 +32,7 @@
 #include <KoFilterManager.h>
 
 #include <kspread/CellStorage.h>
-#include <kspread/Map.h>
+#include <kspread/KCMap.h>
 #include <kspread/KCSheet.h>
 #include <kspread/part/Doc.h>
 #include <kspread/KCValue.h>

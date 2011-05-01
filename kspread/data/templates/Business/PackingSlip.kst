@@ -113,7 +113,7 @@
    </cell>
    <cell row="7" column="1" >
     <format style-name="Default" />
-    <text outStr="Order Number" dataType="Str" >Order Number</text>
+    <text outStr="Order KCNumber" dataType="Str" >Order KCNumber</text>
    </cell>
    <cell row="7" column="2" >
     <format bgcolor="#ffffff" parent="Default" >

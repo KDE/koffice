@@ -20,7 +20,7 @@
 #ifndef KSPREAD_MAP_VIEW_MODEL
 #define KSPREAD_MAP_VIEW_MODEL
 
-#include "MapModel.h"
+#include "KCMapModel.h"
 
 class KoCanvasBase;
 class KoShape;
@@ -33,11 +33,11 @@ class QAction;
 /**
  * Extends the map model by active sheet tracking.
  */
-class MapViewModel : public MapModel
+class MapViewModel : public KCMapModel
 {
     Q_OBJECT
 public:
-    MapViewModel(Map *map, KoCanvasBase *canvas, KXMLGUIClient *xmlGuiClient);
+    MapViewModel(KCMap *map, KoCanvasBase *canvas, KXMLGUIClient *xmlGuiClient);
     virtual ~MapViewModel();
 
     // QAbstractItemModel interface

@@ -91,7 +91,7 @@ void FormulaEditorHighlighter::highlightBlock(const QString& text)
     QList<QString> alreadyFoundRanges;
 
     KCSheet *const originSheet = d->selection->originSheet();
-    Map *const map = originSheet->map();
+    KCMap *const map = originSheet->map();
 
     for (int i = 0; i < d->tokens.count(); ++i) {
         Token token = d->tokens[i];

@@ -26,21 +26,21 @@
 
 #include "CellStorage.h"
 #include "Database.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 
 class DatabaseManager::Private
 {
 public:
-    const Map* map;
+    const KCMap* map;
     static int s_id;
 };
 
 int DatabaseManager::Private::s_id = 1;
 
 
-DatabaseManager::DatabaseManager(const Map* map)
+DatabaseManager::DatabaseManager(const KCMap* map)
         : d(new Private)
 {
     d->map = map;

@@ -23,7 +23,7 @@
 
 
 class Damage;
-class Map;
+class KCMap;
 class KCSheet;
 
 /**
@@ -50,7 +50,7 @@ class KCSheet;
     Q_OBJECT
 
 public:
-    SheetAccessModel(Map *map);
+    SheetAccessModel(KCMap *map);
     virtual ~SheetAccessModel();
 
 public Q_SLOTS:

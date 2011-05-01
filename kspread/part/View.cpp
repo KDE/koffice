@@ -121,7 +121,7 @@
 #include "Headers.h"
 #include "Headers.h"
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "PrintSettings.h"
 #include "RecalcManager.h"

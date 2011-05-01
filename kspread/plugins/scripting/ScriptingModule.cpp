@@ -36,7 +36,7 @@
 #include <interfaces/ViewAdaptor.h>
 #include <KCSheet.h>
 #include <interfaces/SheetAdaptor.h>
-#include <Map.h>
+#include <KCMap.h>
 #include <interfaces/MapAdaptor.h>
 #include <KoDocumentAdaptor.h>
 #include <KoApplicationAdaptor.h>

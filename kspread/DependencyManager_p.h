@@ -32,7 +32,7 @@
 #include "RTree.h"
 
 class Formula;
-class Map;
+class KCMap;
 class KCSheet;
 
 class DependencyManager::Private
@@ -131,7 +131,7 @@ public:
      */
     void dump() const;
 
-    const Map* map;
+    const KCMap* map;
     // stores providing regions ordered by their consuming cell locations
     QHash<KCCell, KCRegion> providers;
     // stores consuming cell locations ordered by their providing regions

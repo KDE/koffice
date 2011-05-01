@@ -873,7 +873,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
                          one not in the shared string table. If this cell type is used,
                          then the cell value is in the is element rather than the v
                          element in the cell (c element).
-            n (Number)   KCCell containing a number.
+            n (KCNumber)   KCCell containing a number.
             s (Shared String) KCCell containing a shared string.
             str (String) KCCell containing a formula string.
 

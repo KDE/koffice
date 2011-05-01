@@ -122,7 +122,7 @@ KCValue ValueFormatter::formatText(const KCValue &value, KCFormat::Type fmtType,
 
         // real number
         else {
-            Number number = m_converter->asFloat(value, &ok).asFloat();
+            KCNumber number = m_converter->asFloat(value, &ok).asFloat();
             if (ok) {
                 result = KCValue(createNumberFormat(number, precision, fmtType, floatFormat, currencySymbol, formatString));
                 result.setFormat(KCValue::fmt_Number);
@@ -163,11 +163,11 @@ KCFormat::Type ValueFormatter::determineFormatting(const KCValue &value,
             fmtType = KCFormat::Text;
             break;
         case KCValue::fmt_Number: {
-            Number val = fabs(value.asFloat());
+            KCNumber val = fabs(value.asFloat());
             if (((val > 10000e+10) || (val < 10000e-10)) && (val != 0.0))
                 fmtType = KCFormat::Scientific;
             else
-                fmtType = KCFormat::Number;
+                fmtType = KCFormat::KCNumber;
             }
             break;
         case KCValue::fmt_Percent:
@@ -242,7 +242,7 @@ QString ValueFormatter::removeTrailingZeros(const QString& str, const QString& d
     return result;
 }
 
-QString ValueFormatter::createNumberFormat(Number value, int precision,
+QString ValueFormatter::createNumberFormat(KCNumber value, int precision,
         KCFormat::Type fmt, KCStyle::FloatFormat floatFormat, const QString& currencySymbol, const QString& _formatString)
 {
     QString prefix, postfix;
@@ -271,7 +271,7 @@ QString ValueFormatter::createNumberFormat(Number value, int precision,
         // and if that value is -1 too then use either automatic decimal place adjustment or a hardcoded default.
         p = settings()->defaultDecimalPrecision();
         if (p == -1) {
-            if (fmt == KCFormat::Number) {
+            if (fmt == KCFormat::KCNumber) {
                 QString s = QString::number(double(numToDouble(value)));
                 int _p = s.indexOf('.');
                 p = _p >= 0 ? qMax(0, 10 - _p) : 0;
@@ -308,7 +308,7 @@ QString ValueFormatter::createNumberFormat(Number value, int precision,
 
     double val = numToDouble(value);
     switch (fmt) {
-    case KCFormat::Number:
+    case KCFormat::KCNumber:
         localizedNumber = m_converter->settings()->locale()->formatNumber(val, p);
         break;
     case KCFormat::Percentage:
@@ -356,12 +356,12 @@ QString ValueFormatter::createNumberFormat(Number value, int precision,
     return prefix + localizedNumber + postfix;
 }
 
-QString ValueFormatter::fractionFormat(Number value, KCFormat::Type fmtType)
+QString ValueFormatter::fractionFormat(KCNumber value, KCFormat::Type fmtType)
 {
     bool isNegative = value < 0;
     QString prefix = isNegative ? "-" : "";
     value = abs(value);
-    Number result = value - floor(numToDouble(value));
+    KCNumber result = value - floor(numToDouble(value));
     int index;
     int limit = 0;
 
@@ -411,9 +411,9 @@ QString ValueFormatter::fractionFormat(Number value, KCFormat::Type fmtType)
     if (fmtType != KCFormat::fraction_three_digits
             && fmtType != KCFormat::fraction_two_digits
             && fmtType != KCFormat::fraction_one_digit) {
-        Number calc = 0;
+        KCNumber calc = 0;
         int index1 = 0;
-        Number diff = result;
+        KCNumber diff = result;
         for (int i = 1; i <= index; i++) {
             calc = i * 1.0 / index;
             if (fabs(result - calc) < diff) {
@@ -718,8 +718,8 @@ QString ValueFormatter::complexFormat(const KCValue& value, int precision,
 {
     // FIXME Stefan: percentage, currency and scientific formats!
     QString str;
-    const Number real = value.asComplex().real();
-    const Number imag = value.asComplex().imag();
+    const KCNumber real = value.asComplex().real();
+    const KCNumber imag = value.asComplex().imag();
     str = createNumberFormat(real, precision, formatType, floatFormat, QString(), QString());
     str += createNumberFormat(imag, precision, formatType, KCStyle::AlwaysSigned, currencySymbol, QString());
     str += 'i';

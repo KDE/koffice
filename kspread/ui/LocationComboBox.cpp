@@ -22,7 +22,7 @@
 // KSpread
 #include "CellStorage.h"
 #include "CellToolBase.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "Selection.h"
 #include "KCSheet.h"
@@ -47,7 +47,7 @@ LocationComboBox::LocationComboBox(CellToolBase *cellTool, QWidget *_parent)
 
     insertItem(0, QString());
     updateAddress();
-    Map *const map = cellTool->selection()->activeSheet()->map();
+    KCMap *const map = cellTool->selection()->activeSheet()->map();
     const QList<QString> areaNames = map->namedAreaManager()->areaNames();
     for (int i = 0; i < areaNames.count(); ++i)
         slotAddAreaName(areaNames[i]);

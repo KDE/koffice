@@ -27,7 +27,7 @@
 #include "kspread_export.h"
 
 class KCCell;
-class Map;
+class KCMap;
 class KCSheet;
 class KCRegion;
 
@@ -63,7 +63,7 @@ class KSPREAD_EXPORT CellDamage : public Damage
 {
 public:
     enum Change {
-        Binding    = 0x02, ///< on value changes; always triggered; for binding updates
+        KCBinding    = 0x02, ///< on value changes; always triggered; for binding updates
         Formula    = 0x04, ///< triggers a dependency update
         NamedArea  = 0x10, ///< triggers a named area update
         /// This indicates a value change. It is not triggered while a recalculation is in progress.
@@ -159,13 +159,13 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    WorkbookDamage(Map* map, Changes changes);
+    WorkbookDamage(KCMap* map, Changes changes);
     virtual ~WorkbookDamage();
 
     virtual Type type() const {
         return Damage::DamagedWorkbook;
     }
-    Map* map() const;
+    KCMap* map() const;
     Changes changes() const;
 
 private:

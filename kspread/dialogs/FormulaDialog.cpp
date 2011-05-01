@@ -42,7 +42,7 @@
 #include "Util.h"
 #include "ui/CellEditor.h"
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 

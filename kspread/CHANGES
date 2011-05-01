@@ -51,7 +51,7 @@ Fix the "Consolidate..." action.
 Developer-Visible Only
 ----------------------
 Improved the function module loading/unloading. (@PACKAGERS: plugin interface changed!)
-Implement models for Map/KCSheet/Region.
+Implement models for KCMap/KCSheet/Region.
 Splitted Editors.{cpp,h}.
 Splitted Functions.{cpp,h}.
 

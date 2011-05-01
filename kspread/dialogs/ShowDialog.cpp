@@ -32,7 +32,7 @@
 #include <klocale.h>
 
 #include "Damages.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 
@@ -81,7 +81,7 @@ void ShowDialog::accept()
         return;
     }
 
-    Map *const map = m_selection->activeSheet()->map();
+    KCMap *const map = m_selection->activeSheet()->map();
     KCSheet *sheet;
     QUndoCommand* macroCommand = new QUndoCommand(i18n("Show KCSheet"));
     for (int i = 0; i < items.count(); ++i) {

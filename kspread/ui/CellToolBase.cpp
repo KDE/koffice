@@ -45,7 +45,7 @@
 #include "HyperlinkStrategy.h"
 #include "tests/inspector.h"
 #include "LocationComboBox.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "MergeStrategy.h"
 #include "NamedAreaManager.h"
 #include "PasteStrategy.h"
@@ -142,7 +142,7 @@
 
 #ifndef NDEBUG
 #include <QTableView>
-#include "SheetModel.h"
+#include "KCSheetModel.h"
 #endif
 
 CellToolBase::CellToolBase(KoCanvasBase* canvas)
@@ -1562,7 +1562,7 @@ void CellToolBase::setDefaultStyle()
 
 void CellToolBase::styleDialog()
 {
-    Map* const map = selection()->activeSheet()->map();
+    KCMap* const map = selection()->activeSheet()->map();
     StyleManager* const styleManager = map->styleManager();
     QPointer<StyleManagerDialog> dialog = new StyleManagerDialog(canvas()->canvasWidget(), selection(), styleManager);
     dialog->exec();
@@ -3347,7 +3347,7 @@ void CellToolBase::qTableView()
 #ifndef NDEBUG
     QPointer<KDialog> dialog = new KDialog(canvas()->canvasWidget());
     QTableView* const view = new QTableView(dialog);
-    SheetModel* const model = new SheetModel(selection()->activeSheet());
+    KCSheetModel* const model = new KCSheetModel(selection()->activeSheet());
     view->setModel(model);
     dialog->setCaption("Read{Only,Write}TableModel Test");
     dialog->setMainWidget(view);

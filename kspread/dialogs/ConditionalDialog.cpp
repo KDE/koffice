@@ -25,7 +25,7 @@
 #include "KCCondition.h"
 
 #include "KCCell.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "StyleManager.h"
@@ -343,7 +343,7 @@ void ConditionalDialog::init(KCConditional const & tmp, int numCondition)
     KLineEdit * kl1 = 0;
     KLineEdit * kl2 = 0;
     QString value;
-    Map *const map = m_selection->activeSheet()->map();
+    KCMap *const map = m_selection->activeSheet()->map();
     ValueConverter *const converter = map->converter();
 
     switch (numCondition) {
@@ -504,7 +504,7 @@ bool ConditionalDialog::getCondition(KCConditional & newCondition, const KComboB
     if (newCondition.cond == KCConditional::None)
         return false;
 
-    Map *const map = m_selection->activeSheet()->map();
+    KCMap *const map = m_selection->activeSheet()->map();
     ValueParser *const parser = map->parser();
 
     newCondition.value1 = parser->parse(edit1->text());

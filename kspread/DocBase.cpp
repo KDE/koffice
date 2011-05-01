@@ -48,7 +48,7 @@
 #include "kspread_limits.h"
 #include "BindingModel.h"
 #include "CalculationSettings.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "SheetAccessModel.h"
 
 #include "part/View.h" // TODO: get rid of this dependency
@@ -63,7 +63,7 @@ DocBase::DocBase(QWidget *parentWidget, QObject* parent, bool singleViewMode)
     , d(new Private)
 {
     d->resourceManager = new KoResourceManager();
-    d->map = new Map(this, CURRENT_SYNTAX_VERSION);
+    d->map = new KCMap(this, CURRENT_SYNTAX_VERSION);
 
     // Document Url for FILENAME function and page header/footer.
     d->map->calculationSettings()->setFileName(url().prettyUrl());
@@ -100,7 +100,7 @@ void DocBase::setReadWrite(bool readwrite)
     KoDocument::setReadWrite(readwrite);
 }
 
-Map *DocBase::map() const
+KCMap *DocBase::map() const
 {
     return d->map;
 }

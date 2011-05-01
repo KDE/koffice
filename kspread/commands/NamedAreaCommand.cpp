@@ -24,7 +24,7 @@
 #include "Damages.h"
 #include "FormulaStorage.h"
 #include "kspread_limits.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCSheet.h"
 
@@ -87,7 +87,7 @@ bool NamedAreaCommand::mainProcessing()
 bool NamedAreaCommand::postProcessing()
 {
     // update formulas containing either the new or the old name
-    Map* const map = m_sheet->map();
+    KCMap* const map = m_sheet->map();
     foreach(KCSheet* sheet, map->sheetList()) {
         const QString tmp = '\'' + m_areaName + '\'';
         const FormulaStorage* const storage = sheet->formulaStorage();
@@ -96,7 +96,7 @@ bool NamedAreaCommand::postProcessing()
                 KCCell cell(sheet, storage->col(c), storage->row(c));
                 if (cell.makeFormula()) {
                     // recalculate cells
-                    map->addDamage(new CellDamage(cell, CellDamage::Appearance | CellDamage::Binding |
+                    map->addDamage(new CellDamage(cell, CellDamage::Appearance | CellDamage::KCBinding |
                                                   CellDamage::KCValue));
                 }
             }

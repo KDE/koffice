@@ -21,7 +21,7 @@
 
 #include "KCCell.h"
 #include "CellStorage.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCSheet.h"
 #include "KCRegion.h"
 #include "ValueStorage.h"
@@ -99,7 +99,7 @@ QString SpellCheckCommand::fetchMoreText()
         // Ask whether we should continue on the next sheet.
         const QString question = i18n("Do you want to check the spelling in the next sheet?");
         if (KMessageBox::questionYesNo(d->canvasBase->canvasWidget(), question) == KMessageBox::Yes) {
-            const Map* map = d->currentSheet->map();
+            const KCMap* map = d->currentSheet->map();
             if (d->currentSheet == map->sheet(map->count() - 1)) {
                 // Switch from the last to the first sheet.
                 d->currentSheet = map->sheet(0);

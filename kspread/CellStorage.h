@@ -34,7 +34,7 @@ class KoXmlWriter;
 
 class QUndoCommand;
 
-class Binding;
+class KCBinding;
 class BindingStorage;
 class KCCell;
 class CommentStorage;
@@ -117,9 +117,9 @@ public:
     /**
      * \return the binding associated with the KCCell at \p column , \p row .
      */
-    Binding binding(int column, int row) const;
-    void setBinding(const KCRegion& region, const Binding& binding);
-    void removeBinding(const KCRegion& region, const Binding& binding);
+    KCBinding binding(int column, int row) const;
+    void setBinding(const KCRegion& region, const KCBinding& binding);
+    void removeBinding(const KCRegion& region, const KCBinding& binding);
 
     /**
      * \return the comment associated with the KCCell at \p column , \p row .

@@ -27,7 +27,7 @@
 
 #include "kspread_export.h"
 
-#include "Map.h"
+#include "KCMap.h"
 #include "KCRegion.h"
 #include "RTree.h"
 
@@ -52,7 +52,7 @@ template<typename T>
 class KSPREAD_EXPORT RectStorage
 {
 public:
-    explicit RectStorage(Map* map);
+    explicit RectStorage(KCMap* map);
     RectStorage(const RectStorage& other);
     virtual ~RectStorage();
 
@@ -158,7 +158,7 @@ protected:
     void invalidateCache(const QRect& rect);
 
 private:
-    Map* m_map;
+    KCMap* m_map;
     RTree<T> m_tree;
     QRegion m_usedArea;
     QMap<int, QPair<QRectF, T> > m_possibleGarbage;
@@ -168,7 +168,7 @@ private:
 };
 
 template<typename T>
-RectStorage<T>::RectStorage(Map* map)
+RectStorage<T>::RectStorage(KCMap* map)
         : m_map(map)
 {
 }
@@ -498,7 +498,7 @@ class CommentStorage : public QObject, public RectStorage<QString>
 {
     Q_OBJECT
 public:
-    explicit CommentStorage(Map* map) : QObject(map), RectStorage<QString>(map) {}
+    explicit CommentStorage(KCMap* map) : QObject(map), RectStorage<QString>(map) {}
     CommentStorage(const CommentStorage& other) : QObject(other.parent()), RectStorage<QString>(other) {}
 
 protected Q_SLOTS:
@@ -516,7 +516,7 @@ class FusionStorage : public QObject, public RectStorage<bool>
 {
     Q_OBJECT
 public:
-    explicit FusionStorage(Map* map) : QObject(map), RectStorage<bool>(map) {}
+    explicit FusionStorage(KCMap* map) : QObject(map), RectStorage<bool>(map) {}
     FusionStorage(const FusionStorage& other) : QObject(other.parent()), RectStorage<bool>(other) {}
 
 protected Q_SLOTS:
@@ -534,7 +534,7 @@ class MatrixStorage : public QObject, public RectStorage<bool>
 {
     Q_OBJECT
 public:
-    explicit MatrixStorage(Map* map) : QObject(map), RectStorage<bool>(map) {}
+    explicit MatrixStorage(KCMap* map) : QObject(map), RectStorage<bool>(map) {}
     MatrixStorage(const MatrixStorage& other) : QObject(other.parent()), RectStorage<bool>(other) {}
 
 protected Q_SLOTS:

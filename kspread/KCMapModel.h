@@ -24,7 +24,7 @@
 
 class QUndoCommand;
 
-class Map;
+class KCMap;
 class KCSheet;
 
 /**
@@ -32,12 +32,12 @@ class KCSheet;
  * Actually, a model for a sheet list.
  * \ingroup Model
  */
-class MapModel : public QAbstractListModel
+class KCMapModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    MapModel(Map* map);
-    virtual ~MapModel();
+    KCMapModel(KCMap* map);
+    virtual ~KCMapModel();
 
     // QAbstractItemModel interface
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -59,7 +59,7 @@ Q_SIGNALS:
     void addCommandRequested(QUndoCommand* command);
 
 protected:
-    Map* map() const;
+    KCMap* map() const;
 
 protected Q_SLOTS:
     virtual void addSheet(KCSheet *sheet);

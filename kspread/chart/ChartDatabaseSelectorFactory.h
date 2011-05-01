@@ -25,18 +25,18 @@
 
 #include <QObject>
 #include <KoShapeConfigFactoryBase.h>
-#include "../Map.h"
+#include "../KCMap.h"
 
 class KoShape;
 
-class Map;
+class KCMap;
 
 /// factory to create a ChartDatabaseSelector widget
 class ChartDatabaseSelectorFactory : public QObject, public KoShapeConfigFactoryBase
 {
 public:
     /// constructor
-    ChartDatabaseSelectorFactory(Map *map) : QObject(map), m_map(map) {}
+    ChartDatabaseSelectorFactory(KCMap *map) : QObject(map), m_map(map) {}
     ~ChartDatabaseSelectorFactory() {}
 
     /// reimplemented method from superclass
@@ -52,7 +52,7 @@ public:
     }
 
 private:
-    Map* m_map;
+    KCMap* m_map;
 };
 
 #endif // CHART_DATABASE_SELECTOR_FACTORY

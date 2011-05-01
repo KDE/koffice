@@ -31,7 +31,7 @@
 #include "KCCell.h"
 #include "ui/RegionSelector.h"
 #include "Formula.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "Util.h"

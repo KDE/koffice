@@ -41,7 +41,7 @@ namespace KCFormat
 
 enum Type {
     Generic = 0,
-    Number = 1,
+    KCNumber = 1,
     Text = 5,
     Money = 10,
     Percentage = 25,

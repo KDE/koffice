@@ -27,7 +27,7 @@
 
 // KSpread
 #include "ModelSupport.h"
-#include "SheetModel.h"
+#include "KCSheetModel.h"
 
 /**
  * \ingroup Commands
@@ -71,7 +71,7 @@ RectStorageUndoCommand<T>::RectStorageUndoCommand(QAbstractItemModel *const mode
 template<typename T>
 void RectStorageUndoCommand<T>::undo()
 {
-    SheetModel *const model = static_cast<SheetModel*>(m_model);
+    KCSheetModel *const model = static_cast<KCSheetModel*>(m_model);
     for (int i = 0; i < m_undoData.count(); ++i) {
         QVariant data;
         data.setValue(m_undoData[i].second);

@@ -21,7 +21,7 @@
 #include "ValueCalc.h"
 
 #include "KCCell.h"
-#include "Number.h"
+#include "KCNumber.h"
 #include "ValueConverter.h"
 
 #include <kdebug.h>
@@ -224,7 +224,7 @@ KCValue ValueCalc::add(const KCValue &a, const KCValue &b)
     if (a.isArray() || b.isArray())
         return twoArrayMap(a, &ValueCalc::add, b);
 
-    Number aa, bb;
+    KCNumber aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
     KCValue res = KCValue(aa + bb);
@@ -242,7 +242,7 @@ KCValue ValueCalc::sub(const KCValue &a, const KCValue &b)
     if (a.isArray() || b.isArray())
         return twoArrayMap(a, &ValueCalc::sub, b);
 
-    Number aa, bb;
+    KCNumber aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
     KCValue res = KCValue(aa - bb);
@@ -265,7 +265,7 @@ KCValue ValueCalc::mul(const KCValue &a, const KCValue &b)
     if (b.isArray() && !a.isArray())
        return arrayMap(b, &ValueCalc::mul, a);
 
-    Number aa, bb;
+    KCNumber aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
     KCValue res = KCValue(aa * bb);
@@ -283,7 +283,7 @@ KCValue ValueCalc::div(const KCValue &a, const KCValue &b)
     if (a.isArray() && !b.isArray())
        return arrayMap(a, &ValueCalc::div, b);
 
-    Number aa, bb;
+    KCNumber aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
     KCValue res;
@@ -305,14 +305,14 @@ KCValue ValueCalc::mod(const KCValue &a, const KCValue &b)
     if (a.isArray() && !b.isArray())
        return arrayMap(a, &ValueCalc::mod, b);
 
-    Number aa, bb;
+    KCNumber aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
     KCValue res;
     if (bb == 0.0)
         return KCValue::errorDIV0();
     else {
-        Number m = fmod(aa, bb);
+        KCNumber m = fmod(aa, bb);
         // the following adjustments are needed by OpenFormula:
         // can't simply use fixed increases/decreases, because the implementation
         // of fmod may differ on various platforms, and we should always return
@@ -341,7 +341,7 @@ KCValue ValueCalc::pow(const KCValue &a, const KCValue &b)
     if (a.isArray() && !b.isArray())
        return arrayMap(a, &ValueCalc::pow, b);
 
-    Number aa, bb;
+    KCNumber aa, bb;
     aa = converter->toFloat(a);
     bb = converter->toFloat(b);
     KCValue res(::pow(aa, bb));
@@ -368,7 +368,7 @@ KCValue ValueCalc::sqrt(const KCValue &a)
     return res;
 }
 
-KCValue ValueCalc::add(const KCValue &a, Number b)
+KCValue ValueCalc::add(const KCValue &a, KCNumber b)
 {
     if (a.isError()) return a;
     KCValue res = KCValue(converter->toFloat(a) + b);
@@ -379,7 +379,7 @@ KCValue ValueCalc::add(const KCValue &a, Number b)
     return res;
 }
 
-KCValue ValueCalc::sub(const KCValue &a, Number b)
+KCValue ValueCalc::sub(const KCValue &a, KCNumber b)
 {
     if (a.isError()) return a;
     KCValue res = KCValue(converter->toFloat(a) - b);
@@ -390,7 +390,7 @@ KCValue ValueCalc::sub(const KCValue &a, Number b)
     return res;
 }
 
-KCValue ValueCalc::mul(const KCValue &a, Number b)
+KCValue ValueCalc::mul(const KCValue &a, KCNumber b)
 {
     if (a.isError()) return a;
     KCValue res = KCValue(converter->toFloat(a) * b);
@@ -401,7 +401,7 @@ KCValue ValueCalc::mul(const KCValue &a, Number b)
     return res;
 }
 
-KCValue ValueCalc::div(const KCValue &a, Number b)
+KCValue ValueCalc::div(const KCValue &a, KCNumber b)
 {
     if (a.isError()) return a;
     KCValue res;
@@ -416,7 +416,7 @@ KCValue ValueCalc::div(const KCValue &a, Number b)
     return res;
 }
 
-KCValue ValueCalc::pow(const KCValue &a, Number b)
+KCValue ValueCalc::pow(const KCValue &a, KCNumber b)
 {
     if (a.isError()) return a;
     KCValue res = KCValue(::pow(converter->toFloat(a), b));
@@ -462,18 +462,18 @@ bool ValueCalc::equal(const KCValue &a, const KCValue &b)
  *********************************************************************/
 bool ValueCalc::approxEqual(const KCValue &a, const KCValue &b)
 {
-    Number aa = converter->toFloat(a);
-    Number bb = converter->toFloat(b);
+    KCNumber aa = converter->toFloat(a);
+    KCNumber bb = converter->toFloat(b);
     if (aa == bb)
         return true;
-    Number x = aa - bb;
+    KCNumber x = aa - bb;
     return (x < 0.0 ? -x : x)  < ((aa < 0.0 ? -aa : aa) * DBL_EPSILON);
 }
 
 bool ValueCalc::greater(const KCValue &a, const KCValue &b)
 {
-    Number aa = converter->toFloat(a);
-    Number bb = converter->toFloat(b);
+    KCNumber aa = converter->toFloat(a);
+    KCNumber bb = converter->toFloat(b);
     return (aa > bb);
 }
 
@@ -652,7 +652,7 @@ KCValue ValueCalc::round(const KCValue &a, int digits)
 
 int ValueCalc::sign(const KCValue &a)
 {
-    Number val = converter->toFloat(a);
+    KCNumber val = converter->toFloat(a);
     if (val == 0) return 0;
     if (val > 0) return 1;
     return -1;
@@ -662,7 +662,7 @@ int ValueCalc::sign(const KCValue &a)
 KCValue ValueCalc::log(const KCValue &number,
                      const KCValue &base)
 {
-    Number logbase = converter->toFloat(base);
+    KCNumber logbase = converter->toFloat(base);
     if (logbase == 1.0)
         return KCValue::errorDIV0();
     if (logbase <= 0.0)
@@ -687,14 +687,14 @@ KCValue ValueCalc::ln(const KCValue &number)
     return res;
 }
 
-KCValue ValueCalc::log(const KCValue &number, Number base)
+KCValue ValueCalc::log(const KCValue &number, KCNumber base)
 {
     if (base <= 0.0)
         return KCValue::errorNA();
     if (base == 1.0)
         return KCValue::errorDIV0();
 
-    Number num = converter->toFloat(number);
+    KCNumber num = converter->toFloat(number);
     KCValue res = KCValue(KSpread::log(num, base));
 
     if (number.isNumber() || number.isEmpty())
@@ -723,7 +723,7 @@ KCValue ValueCalc::eps()
     return KCValue(DBL_EPSILON);
 }
 
-KCValue ValueCalc::random(Number range)
+KCValue ValueCalc::random(KCNumber range)
 {
     return KCValue(range *(double) rand() / (RAND_MAX + 1.0));
 }
@@ -786,7 +786,7 @@ KCValue ValueCalc::factDouble(KCValue which)
 KCValue ValueCalc::combin(int n, int k)
 {
     if (n >= 15) {
-        Number result = ::exp(Number(lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1)));
+        KCNumber result = ::exp(KCNumber(lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1)));
         return KCValue(floor(numToDouble(result + 0.5)));
     } else
         return div(div(fact(n), fact(k)), fact(n - k));
@@ -840,7 +840,7 @@ KCValue ValueCalc::base(const KCValue &val, int base, int prec, int minLength)
     if ((base < 2) || (base > 36))
         return KCValue::errorVALUE();
 
-    Number value = converter->toFloat(val);
+    KCNumber value = converter->toFloat(val);
     QString result = QString::number((int)numToDouble(value), base);
     if (result.length() < minLength)
         result = result.rightJustified(minLength, QChar('0'));
@@ -873,7 +873,7 @@ KCValue ValueCalc::fromBase(const KCValue &val, int base)
 KCValue ValueCalc::sin(const KCValue &number)
 {
     bool ok = true;
-    Number n = converter->asFloat(number, &ok).asFloat();
+    KCNumber n = converter->asFloat(number, &ok).asFloat();
     if (!ok)
         return KCValue::errorVALUE();
 
@@ -888,7 +888,7 @@ KCValue ValueCalc::sin(const KCValue &number)
 KCValue ValueCalc::cos(const KCValue &number)
 {
     bool ok = true;
-    Number n = converter->asFloat(number, &ok).asFloat();
+    KCNumber n = converter->asFloat(number, &ok).asFloat();
     if (!ok)
         return KCValue::errorVALUE();
 
@@ -923,7 +923,7 @@ KCValue ValueCalc::cotg(const KCValue &number)
 KCValue ValueCalc::asin(const KCValue &number)
 {
     bool ok = true;
-    Number n = converter->asFloat(number, &ok).asFloat();
+    KCNumber n = converter->asFloat(number, &ok).asFloat();
     if (!ok)
         return KCValue::errorVALUE();
     const double d = numToDouble(n);
@@ -943,7 +943,7 @@ KCValue ValueCalc::asin(const KCValue &number)
 KCValue ValueCalc::acos(const KCValue &number)
 {
     bool ok = true;
-    Number n = converter->asFloat(number, &ok).asFloat();
+    KCNumber n = converter->asFloat(number, &ok).asFloat();
     if (!ok)
         return KCValue::errorVALUE();
     const double d = numToDouble(n);
@@ -975,8 +975,8 @@ KCValue ValueCalc::atg(const KCValue &number)
 
 KCValue ValueCalc::atan2(const KCValue &y, const KCValue &x)
 {
-    Number yy = converter->toFloat(y);
-    Number xx = converter->toFloat(x);
+    KCNumber yy = converter->toFloat(y);
+    KCNumber xx = converter->toFloat(x);
     return KCValue(::atan2(yy, xx));
 }
 
@@ -1846,7 +1846,7 @@ KCValue ValueCalc::arrayMap(const KCValue &array, arrayMapFunc func, const KCVal
 KCValue ValueCalc::twoArrayMap(const KCValue &array1, arrayMapFunc func, const KCValue &array2)
 {
     KCValue res( KCValue::Array );
-    // Map each element in one array with the respective element in the other array
+    // KCMap each element in one array with the respective element in the other array
     unsigned rows = qMax(array1.rows(), array2.rows());
     unsigned columns = qMax(array1.columns(), array2.columns());
     for (unsigned row = 0; row < rows; ++row) {
@@ -2259,7 +2259,7 @@ bool ValueCalc::matches(const Condition &cond, KCValue val)
     if (val.isEmpty())
         return false;
     if (cond.type == Numeric) {
-        Number d = converter->toFloat(val);
+        KCNumber d = converter->toFloat(val);
         switch (cond.comp) {
         case IsEqual:
             if (approxEqual(KCValue(d), KCValue(cond.value))) return true;

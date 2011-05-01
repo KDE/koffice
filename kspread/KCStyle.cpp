@@ -269,7 +269,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &s
         // determine data formatting
         switch (dataStyle.type) {
         case KoOdfNumberStyles::Number:
-            theStyle->setFormatType(KCFormat::Number);
+            theStyle->setFormatType(KCFormat::KCNumber);
             if (!dataStyle.currencySymbol.isEmpty())
                 theStyle->setCurrency(numberCurrency(dataStyle.currencySymbol));
             else
@@ -313,7 +313,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &s
             }
             break;
         case KoOdfNumberStyles::Boolean:
-            theStyle->setFormatType(KCFormat::Number);
+            theStyle->setFormatType(KCFormat::KCNumber);
             break;
         case KoOdfNumberStyles::Text:
             theStyle->setFormatType(KCFormat::Text);
@@ -733,7 +733,7 @@ QString KCStyle::saveOdfStyleNumeric(KoGenStyle &style, KoGenStyles &mainStyles,
     QString styleName;
     QString valueType;
     switch (_style) {
-    case KCFormat::Number:
+    case KCFormat::KCNumber:
         styleName = saveOdfStyleNumericNumber(mainStyles, _style, _precision, _prefix, _postfix);
         valueType = "float";
         break;

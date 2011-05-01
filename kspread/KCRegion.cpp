@@ -27,7 +27,7 @@
 
 #include "KCCell.h"
 #include "kspread_limits.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCSheet.h"
 #include "Util.h"
@@ -41,7 +41,7 @@ public:
             cells(QList<Element*>()) {
     }
 
-    const Map* map;
+    const KCMap* map;
     mutable QList<Element*> cells;
 };
 
@@ -55,7 +55,7 @@ KCRegion::KCRegion()
     d = new Private();
 }
 
-KCRegion::KCRegion(const QString& string, const Map* map, KCSheet* fallbackSheet)
+KCRegion::KCRegion(const QString& string, const KCMap* map, KCSheet* fallbackSheet)
 {
     d = new Private();
     d->map = map;
@@ -218,13 +218,13 @@ QVector<QRect> KCRegion::rects() const
     return cellRects;
 }
 
-const Map* KCRegion::map() const
+const KCMap* KCRegion::map() const
 {
     Q_ASSERT(d->map);
     return d->map;
 }
 
-void KCRegion::setMap(const Map* map)
+void KCRegion::setMap(const KCMap* map)
 {
     d->map = map;
 }

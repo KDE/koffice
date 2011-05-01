@@ -62,7 +62,7 @@ public:
     void setPrintSettings(const PrintSettings& settings, bool force = false);
 
     /**
-     * Number of pages.
+     * KCNumber of pages.
      */
     int pageCount() const;
 

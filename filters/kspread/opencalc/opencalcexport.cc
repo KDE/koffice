@@ -48,7 +48,7 @@
 #include <kspread/part/Doc.h>
 #include <kspread/HeaderFooter.h>
 #include <kspread/kspread_limits.h>
-#include <kspread/Map.h>
+#include <kspread/KCMap.h>
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>
 #include <kspread/RowColumnFormat.h>
@@ -602,7 +602,7 @@ void OpenCalcExport::exportCells(QDomDocument & doc, QDomElement & rowElem,
             cellElem.setAttribute("table:value-type", "boolean");
             cellElem.setAttribute("table:boolean-value", (value.asBoolean() ? "true" : "false"));
         } else if (value.isNumber()) {
-            kDebug(30518) << "Type: Number";
+            kDebug(30518) << "Type: KCNumber";
             KCFormat::Type type = style.formatType();
 
             if (type == KCFormat::Percentage)

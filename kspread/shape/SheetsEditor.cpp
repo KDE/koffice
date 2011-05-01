@@ -29,7 +29,7 @@
 
 #include "TableShape.h"
 #include "KCSheet.h"
-#include "Map.h"
+#include "KCMap.h"
 
 class SheetsEditor::Private
 {
@@ -55,7 +55,7 @@ SheetsEditor::SheetsEditor(TableShape* tableShape, QWidget* parent)
     connect(d->list, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(itemChanged(QListWidgetItem*)));
     layout->addWidget(d->list);
 
-    Map *map = d->tableShape->map();
+    KCMap *map = d->tableShape->map();
     foreach(KCSheet* sheet, map->sheetList()) {
         sheetAdded(sheet);
     }
@@ -111,7 +111,7 @@ void SheetsEditor::selectionChanged()
 void SheetsEditor::itemChanged(QListWidgetItem* item)
 {
     Q_ASSERT(item);
-    Map *map = d->tableShape->map();
+    KCMap *map = d->tableShape->map();
     KCSheet* sheet = map->findSheet(item->text());
     if (sheet)
         sheet->setHidden(item->checkState() != Qt::Checked);
@@ -122,7 +122,7 @@ void SheetsEditor::renameClicked()
     QListWidgetItem* item = d->list->currentItem();
     if (! item)
         return;
-    Map *map = d->tableShape->map();
+    KCMap *map = d->tableShape->map();
     KCSheet* sheet = map->findSheet(item->text());
     if (! sheet)
         return;
@@ -142,7 +142,7 @@ void SheetsEditor::removeClicked()
     QListWidgetItem* item = d->list->currentItem();
     if (! item)
         return;
-    Map *map = d->tableShape->map();
+    KCMap *map = d->tableShape->map();
     KCSheet* sheet = map->findSheet(item->text());
     if (! sheet)
         return;

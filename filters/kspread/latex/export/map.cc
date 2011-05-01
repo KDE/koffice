@@ -27,14 +27,14 @@
 /*******************************************/
 /* Constructor                             */
 /*******************************************/
-Map::Map()
+KCMap::KCMap()
 {
 }
 
 /*******************************************/
 /* Destructor                              */
 /*******************************************/
-Map::~Map()
+KCMap::~KCMap()
 {
     kDebug(30522) << "Destruction of a map.";
 }
@@ -42,7 +42,7 @@ Map::~Map()
 /*******************************************/
 /* Analyze                                 */
 /*******************************************/
-void Map::analyze(const QDomNode node)
+void KCMap::analyze(const QDomNode node)
 {
     /* Analysis of the parameters */
     kDebug(30522) << "ANALYZE A MAP";
@@ -63,7 +63,7 @@ void Map::analyze(const QDomNode node)
 /* Generate each text zone with the parag. */
 /* markup.                                 */
 /*******************************************/
-void Map::generate(QTextStream &out)
+void KCMap::generate(QTextStream &out)
 {
     Table *table = NULL;
     kDebug(30522) << "  MAP GENERATION";

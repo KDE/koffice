@@ -20,20 +20,20 @@
 #include "TestStyleStorage.h"
 
 #include <StyleStorage.h>
-#include <Map.h>
+#include <KCMap.h>
 
 #include <qtest_kde.h>
 
 class MyStyleStorage : public StyleStorage
 {
 public:
-    MyStyleStorage(Map* map) : StyleStorage(map) {}
+    MyStyleStorage(KCMap* map) : StyleStorage(map) {}
     using StyleStorage::garbageCollection;
 };
 
 void TestStyleStorage::testGarbageCollection()
 {
-    Map map;
+    KCMap map;
     MyStyleStorage storage(&map);
 
     QRect rect(5, 5, 1, 1);

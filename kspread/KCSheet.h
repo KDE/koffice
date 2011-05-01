@@ -67,7 +67,7 @@ class DocBase;
 class FusionStorage;
 class LinkStorage;
 class HeaderFooter;
-class Map;
+class KCMap;
 class OdfLoadingContext;
 class OdfSavingContext;
 class PrintSettings;
@@ -101,7 +101,7 @@ public:
     /**
      * Creates a sheet in \p map with the name \p sheetName.
      */
-    KCSheet(Map* map, const QString& sheetName);
+    KCSheet(KCMap* map, const QString& sheetName);
 
     /**
      * Copy constructor.
@@ -122,7 +122,7 @@ public:
     /**
      * \return the map this sheet belongs to
      */
-    Map* map() const;
+    KCMap* map() const;
 
     /**
      * \return the document this sheet belongs to

@@ -59,7 +59,7 @@
 // KSpread
 #include "Doc.h"
 #include "Headers.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 #include "View.h"

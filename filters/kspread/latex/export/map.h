@@ -32,15 +32,15 @@
 #include "table.h"
 
 /***********************************************************************/
-/* Class: Map                                                         */
+/* Class: KCMap                                                         */
 /***********************************************************************/
 
 /**
  * This class hold a real paragraph. It tells about the text in this
- * paragraph, its format, etc. The complete text is a list of Map instances.
+ * paragraph, its format, etc. The complete text is a list of KCMap instances.
  * A footnote is a list of paragraph instances (now but not in the "futur").
  */
-class Map: public XmlParser, Config
+class KCMap: public XmlParser, Config
 {
     QList<Table*> _tables;
 
@@ -48,16 +48,16 @@ public:
     /**
      * Constructors
      *
-     * Creates a new instance of Map.
+     * Creates a new instance of KCMap.
      */
-    Map();
+    KCMap();
 
     /*
      * Destructor
      *
      * The destructor must remove the list of little zones.
      */
-    virtual ~Map();
+    virtual ~KCMap();
 
     /**
      * Accessors

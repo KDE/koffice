@@ -26,7 +26,7 @@
 
 #include <KCValue.h>
 
-class Map;
+class KCMap;
 
 class TestInformationFunctions: public QObject
 {
@@ -75,7 +75,7 @@ private slots:
 private:
     KCValue evaluate(const QString&, KCValue& ex);
 
-    Map* m_map;
+    KCMap* m_map;
 };
 
 #endif

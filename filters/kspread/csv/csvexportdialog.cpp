@@ -20,7 +20,7 @@
 
 #include "csvexportdialog.h"
 
-#include "kspread/Map.h"
+#include "kspread/KCMap.h"
 #include "kspread/KCSheet.h"
 
 #include <KApplication>
@@ -138,7 +138,7 @@ void CSVExportDialog::saveSettings()
     configGroup.sync();
 }
 
-void CSVExportDialog::fillSheet(Map * map)
+void CSVExportDialog::fillSheet(KCMap * map)
 {
     m_dialog->m_sheetList->clear();
     QListWidgetItem *item;

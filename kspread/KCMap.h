@@ -71,21 +71,21 @@ class ValueCalc;
 
 /**
  * The "embedded document".
- * The Map holds all the document data.
+ * The KCMap holds all the document data.
  */
-class KSPREAD_EXPORT Map : public QObject, public KoDataCenterBase, public ProtectableObject
+class KSPREAD_EXPORT KCMap : public QObject, public KoDataCenterBase, public ProtectableObject
 {
     Q_OBJECT
 public:
     /**
      * Created an empty map.
      */
-    explicit Map(DocBase* doc = 0, int syntaxVersion = 1);
+    explicit KCMap(DocBase* doc = 0, int syntaxVersion = 1);
 
     /**
      * This deletes all sheets contained in this map.
      */
-    virtual ~Map();
+    virtual ~KCMap();
 
     /**
      * \return the document this map belongs to
@@ -403,7 +403,7 @@ Q_SIGNALS:
     void statusMessage(const QString &message, int timeout);
 
 private:
-    Q_DISABLE_COPY(Map)
+    Q_DISABLE_COPY(KCMap)
 
     class Private;
     Private * const d;

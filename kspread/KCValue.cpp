@@ -61,8 +61,8 @@ public:
         // without using up space for an explicit member variable.
         bool b;
         qint64 i;
-        Number f;
-        complex<Number>* pc;
+        KCNumber f;
+        complex<KCNumber>* pc;
         QString* ps;
         ValueArray* pa;
     };
@@ -89,7 +89,7 @@ public:
             f = o.f;
             break;
         case KCValue::Complex:
-            pc = new complex<Number>(*o.pc);
+            pc = new complex<KCNumber>(*o.pc);
             break;
         case KCValue::String:
         case KCValue::Error:
@@ -266,7 +266,7 @@ KCValue::KCValue(double f)
         : d(Private::null())
 {
     d->type = Float;
-    d->f = Number(f);
+    d->f = KCNumber(f);
     d->format = fmt_Number;
 }
 
@@ -275,14 +275,14 @@ KCValue::KCValue(long double f)
         : d(Private::null())
 {
     d->type = Float;
-    d->f = Number(f);
+    d->f = KCNumber(f);
     d->format = fmt_Number;
 }
 
 
 #ifdef KSPREAD_HIGH_PRECISION_SUPPORT
 // create a floating-point value
-KCValue::KCValue(Number f)
+KCValue::KCValue(KCNumber f)
         : d(Private::null())
 {
     d->type = Float;
@@ -292,11 +292,11 @@ KCValue::KCValue(Number f)
 #endif // KSPREAD_HIGH_PRECISION_SUPPORT
 
 // create a complex number value
-KCValue::KCValue(const complex<Number>& c)
+KCValue::KCValue(const complex<KCNumber>& c)
         : d(Private::null())
 {
     d->type = Complex;
-    d->pc = new complex<Number>(c);
+    d->pc = new complex<KCNumber>(c);
     d->format = fmt_Number;
 }
 
@@ -325,7 +325,7 @@ KCValue::KCValue(const QDateTime& dt, const CalculationSettings* settings)
     const QDate refDate(settings->referenceDate());
     const QTime refTime(0, 0);    // reference time is midnight
     d->type = Float;
-    d->f = Number(refDate.daysTo(dt.date()));
+    d->f = KCNumber(refDate.daysTo(dt.date()));
     d->f += static_cast<double>(refTime.msecsTo(dt.time())) / 86400000.0;     // 24*60*60*1000
     d->format = fmt_DateTime;
 }
@@ -338,7 +338,7 @@ KCValue::KCValue(const QTime& time, const CalculationSettings* settings)
     const QTime refTime(0, 0);    // reference time is midnight
 
     d->type = Float;
-    d->f = Number(static_cast<double>(refTime.msecsTo(time)) / 86400000.0);      // 24*60*60*1000
+    d->f = KCNumber(static_cast<double>(refTime.msecsTo(time)) / 86400000.0);      // 24*60*60*1000
     d->format = fmt_Time;
 }
 
@@ -398,28 +398,28 @@ qint64 KCValue::asInteger() const
 }
 
 // get the value as floating-point
-Number KCValue::asFloat() const
+KCNumber KCValue::asFloat() const
 {
-    Number result = 0.0;
+    KCNumber result = 0.0;
     if (type() == Float)
         result = d->f;
     else if (type() == Integer)
-        result = static_cast<Number>(d->i);
+        result = static_cast<KCNumber>(d->i);
     else if (type() == Complex)
         result = d->pc->real();
     return result;
 }
 
 // get the value as complex number
-complex<Number> KCValue::asComplex() const
+complex<KCNumber> KCValue::asComplex() const
 {
-    complex<Number> result(0.0, 0.0);
+    complex<KCNumber> result(0.0, 0.0);
     if (type() == Complex)
         result = *d->pc;
     else if (type() == Float)
         result = d->f;
     else if (type() == Integer)
-        result = static_cast<Number>(d->i);
+        result = static_cast<KCNumber>(d->i);
     return result;
 }
 
@@ -456,7 +456,7 @@ QVariant KCValue::asVariant() const
         break;
     case KCValue::Complex:
         // FIXME: add support for complex numbers
-        // pc = new complex<Number>( *o.pc );
+        // pc = new complex<KCNumber>( *o.pc );
         break;
     case KCValue::String:
     case KCValue::Error:
@@ -674,15 +674,15 @@ const KCValue& KCValue::errorVALUE()
     return ks_error_value;
 }
 
-int KCValue::compare(Number v1, Number v2)
+int KCValue::compare(KCNumber v1, KCNumber v2)
 {
-    Number v3 = v1 - v2;
+    KCNumber v3 = v1 - v2;
     if (v3 > DBL_EPSILON) return 1;
     if (v3 < -DBL_EPSILON) return -1;
     return 0;
 }
 
-bool KCValue::isZero(Number v)
+bool KCValue::isZero(KCNumber v)
 {
     return abs(v) < DBL_EPSILON;
 }
@@ -893,7 +893,7 @@ QTextStream& operator<<(QTextStream& ts, KCValue value)
         ts << ": " << (double) numToDouble(value.asFloat()); break;
 
     case KCValue::Complex: {
-        const complex<Number> complex(value.asComplex());
+        const complex<KCNumber> complex(value.asComplex());
         ts << ": " << (double) numToDouble(complex.real());
         if (complex.imag() >= 0.0)
             ts << '+';
@@ -975,7 +975,7 @@ QDebug operator<<(QDebug stream, const KCValue::KCFormat& f)
     switch (f) {
     case KCValue::fmt_None:     stream << "None";     break;
     case KCValue::fmt_Boolean:  stream << "Boolean";  break;
-    case KCValue::fmt_Number:   stream << "Number";   break;
+    case KCValue::fmt_Number:   stream << "KCNumber";   break;
     case KCValue::fmt_Percent:  stream << "Percent";  break;
     case KCValue::fmt_Money:    stream << "Money";    break;
     case KCValue::fmt_DateTime: stream << "DateTime"; break;

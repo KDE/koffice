@@ -27,7 +27,7 @@
 #define TableShapeId "TableShape"
 
 class Damage;
-class Map;
+class KCMap;
 class KCSheet;
 class SheetView;
 
@@ -53,8 +53,8 @@ public:
     /**
      * \return the map containing the data for this shape
      */
-    Map* map() const;
-    void setMap(Map *map);
+    KCMap* map() const;
+    void setMap(KCMap *map);
 
     /**
      * \return the sheet containing the data for this shape

@@ -69,7 +69,7 @@ KCValue ValueParser::parse(const QString& str) const
         return val;
 
     // Test for money number
-    Number money = m_settings->locale()->readMoney(strStripped, &ok);
+    KCNumber money = m_settings->locale()->readMoney(strStripped, &ok);
     if (ok) {
         val = KCValue(money);
         val.setFormat(KCValue::fmt_Money);
@@ -189,14 +189,14 @@ KCValue ValueParser::readNumber(const QString& _str, bool *ok) const
     return isInt ? KCValue(tot.toLongLong(ok)) : KCValue(tot.toDouble(ok));
 }
 
-Number ValueParser::readImaginary(const QString& str, bool* ok) const
+KCNumber ValueParser::readImaginary(const QString& str, bool* ok) const
 {
     if (str.isEmpty()) {
         if (ok) *ok = false;
         return 0.0;
     }
 
-    Number imag = 0.0;
+    KCNumber imag = 0.0;
     if (str[0] == 'i' || str[0] == 'j') {
         if (str.length() == 1) {
             if (ok) *ok = true;
@@ -222,7 +222,7 @@ KCValue ValueParser::tryParseNumber(const QString& str, bool *ok) const
 {
     KCValue value;
     if (str.endsWith('%')) {   // percentage
-        const Number val = readNumber(str.left(str.length() - 1).trimmed(), ok).asFloat();
+        const KCNumber val = readNumber(str.left(str.length() - 1).trimmed(), ok).asFloat();
         if (*ok) {
             //kDebug(36001) <<"ValueParser::tryParseNumber '" << str <<
             //    "' successfully parsed as percentage: " << val << '%' << endl;
@@ -230,8 +230,8 @@ KCValue ValueParser::tryParseNumber(const QString& str, bool *ok) const
             value.setFormat(KCValue::fmt_Percent);
         }
     } else if (str.count('i') == 1 || str.count('j') == 1) {    // complex number
-        Number real = 0.0;
-        Number imag = 0.0;
+        KCNumber real = 0.0;
+        KCNumber imag = 0.0;
         const QString minus(m_settings->locale()->negativeSign());
         // both parts, real and imaginary, present?
         int sepPos;
@@ -255,7 +255,7 @@ KCValue ValueParser::tryParseNumber(const QString& str, bool *ok) const
                 real = 0.0;
         }
         if (*ok)
-            value = KCValue(complex<Number>(real, imag));
+            value = KCValue(complex<KCNumber>(real, imag));
     } else // real number
         value = readNumber(str, ok);
     return value;

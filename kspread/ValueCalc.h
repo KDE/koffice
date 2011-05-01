@@ -24,7 +24,7 @@
 
 #include <QVector>
 
-#include "Number.h"
+#include "KCNumber.h"
 #include "KCValue.h"
 
 #include "kspread_export.h"
@@ -48,7 +48,7 @@ enum Type { Numeric, String };
 struct Condition {
     Comp     comp;
     int      index;
-    Number   value;
+    KCNumber   value;
     QString  stringValue;
     Type     type;
 };
@@ -63,7 +63,7 @@ typedef KCValue (ValueCalc::*arrayMapFunc)(const KCValue &val, const KCValue &pa
 The ValueCalc class is used to perform all sorts of calculations.
 
 Usage of this class for simpler calculations is deprecated, as we now use
-the Number object directly for that. This class is to be used for computations
+the KCNumber object directly for that. This class is to be used for computations
 of more complicated and ranged functions.
 */
 
@@ -87,11 +87,11 @@ public:
     KCValue pow(const KCValue &a, const KCValue &b);
     KCValue sqr(const KCValue &a);
     KCValue sqrt(const KCValue &a);
-    KCValue add(const KCValue &a, Number b);
-    KCValue sub(const KCValue &a, Number b);
-    KCValue mul(const KCValue &a, Number b);
-    KCValue div(const KCValue &a, Number b);
-    KCValue pow(const KCValue &a, Number b);
+    KCValue add(const KCValue &a, KCNumber b);
+    KCValue sub(const KCValue &a, KCNumber b);
+    KCValue mul(const KCValue &a, KCNumber b);
+    KCValue div(const KCValue &a, KCNumber b);
+    KCValue pow(const KCValue &a, KCNumber b);
     KCValue abs(const KCValue &a);
 
     /** comparison and related */
@@ -129,38 +129,38 @@ public:
     int sign(const KCValue &a);
 
     // just a quick workaround
-    KCValue add(Number a, const KCValue& b) {
+    KCValue add(KCNumber a, const KCValue& b) {
         return add(KCValue(a), b);
     }
-    KCValue sub(Number a, const KCValue& b) {
+    KCValue sub(KCNumber a, const KCValue& b) {
         return sub(KCValue(a), b);
     }
-    KCValue mul(Number a, const KCValue& b) {
+    KCValue mul(KCNumber a, const KCValue& b) {
         return mul(KCValue(a), b);
     }
-    KCValue div(Number a, const KCValue& b) {
+    KCValue div(KCNumber a, const KCValue& b) {
         return div(KCValue(a), b);
     }
-    KCValue pow(Number a, const KCValue& b) {
+    KCValue pow(KCNumber a, const KCValue& b) {
         return pow(KCValue(a), b);
     }
 
-    bool equal(const KCValue &a, Number b)   {
+    bool equal(const KCValue &a, KCNumber b)   {
         return equal(a, KCValue(b));
     }
-    bool greater(const KCValue &a, Number b) {
+    bool greater(const KCValue &a, KCNumber b) {
         return greater(a, KCValue(b));
     }
-    bool lower(const KCValue &a, Number b)   {
+    bool lower(const KCValue &a, KCNumber b)   {
         return lower(a, KCValue(b));
     }
-    bool equal(Number a, const KCValue &b)   {
+    bool equal(KCNumber a, const KCValue &b)   {
         return equal(KCValue(a), b);
     }
-    bool greater(Number a, const KCValue &b) {
+    bool greater(KCNumber a, const KCValue &b) {
         return greater(KCValue(a), b);
     }
-    bool lower(Number a, const KCValue &b)   {
+    bool lower(KCNumber a, const KCValue &b)   {
         return lower(KCValue(a), b);
     }
 
@@ -175,7 +175,7 @@ public:
 
     /** logarithms and exponentials */
     KCValue log(const KCValue &number, const KCValue &base);
-    KCValue log(const KCValue &number, Number base = 10);
+    KCValue log(const KCValue &number, KCNumber base = 10);
     KCValue ln(const KCValue &number);
     KCValue exp(const KCValue &number);
 
@@ -184,14 +184,14 @@ public:
     KCValue eps();
 
     /** random number from <0.0, range) */
-    KCValue random(Number range = 1.0);
+    KCValue random(KCNumber range = 1.0);
     KCValue random(KCValue range);
 
     /** some computational functions */
     KCValue fact(const KCValue &which);
     KCValue fact(const KCValue &which, const KCValue &end);
     KCValue fact(int which, int end = 0);
-    /** Number factorial (every other number multiplied) */
+    /** KCNumber factorial (every other number multiplied) */
     KCValue factDouble(int which);
     KCValue factDouble(KCValue which);
 

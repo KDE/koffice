@@ -26,7 +26,7 @@
 
 #include <KCValue.h>
 
-class Map;
+class KCMap;
 
 class TestMathFunctions: public QObject
 {
@@ -109,7 +109,7 @@ private:
     KCValue TestDouble(const QString& formula, const KCValue& v2, int accuracy);
     KCValue evaluate(const QString&);
 
-    Map* m_map;
+    KCMap* m_map;
 };
 
 #endif // KSPREAD_TEST_MATH_FUNCTIONS

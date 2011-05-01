@@ -34,7 +34,7 @@ class ValidityStorage : public QObject, public RectStorage<Validity>
 {
     Q_OBJECT
 public:
-    explicit ValidityStorage(Map* map) : QObject(map), RectStorage<Validity>(map) {}
+    explicit ValidityStorage(KCMap* map) : QObject(map), RectStorage<Validity>(map) {}
     ValidityStorage(const ValidityStorage& other) : QObject(other.parent()), RectStorage<Validity>(other) {}
 
 protected Q_SLOTS:

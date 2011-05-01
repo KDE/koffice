@@ -26,7 +26,7 @@
 
 class ExportDialogUI;
 class QValidator;
-class Map;
+class KCMap;
 
 class ExportDialogUI : public QWidget, public Ui::ExportDialogUI
 {
@@ -51,7 +51,7 @@ public:
     QString getSheetDelimiter() const;
     bool    exportSelectionOnly() const;
 
-    void  fillSheet(Map * map);
+    void  fillSheet(KCMap * map);
     QString getEndOfLine(void) const;
     QTextCodec* getCodec(void) const;
 

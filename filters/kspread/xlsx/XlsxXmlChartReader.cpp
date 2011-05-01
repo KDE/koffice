@@ -653,8 +653,8 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_title()
   - ser §21.2.2.173
 
  Child elements:
-  - numLit (Number Literal) §21.2.2.122
-  - [Done]numRef (Number Reference) §21.2.2.123
+  - numLit (KCNumber Literal) §21.2.2.122
+  - [Done]numRef (KCNumber Reference) §21.2.2.123
 */
 KoFilter::ConversionStatus XlsxXmlChartReader::read_val()
 {
@@ -681,8 +681,8 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_val()
 
  Child elements:
   - multiLvlStrRef (Multi Level String Reference) §21.2.2.115
-  - numLit (Number Literal) §21.2.2.122
-  - [Done]numRef (Number Reference) §21.2.2.123
+  - numLit (KCNumber Literal) §21.2.2.122
+  - [Done]numRef (KCNumber Reference) §21.2.2.123
   - strLit (String Literal) §21.2.2.200
   - [Done]strRef (String Reference) §21.2.2.201
 */
@@ -712,8 +712,8 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_xVal()
   - ser §21.2.2.167
 
  Child elements:
-  - numLit (Number Literal) §21.2.2.122
-  - numRef (Number Reference) §21.2.2.123
+  - numLit (KCNumber Literal) §21.2.2.122
+  - numRef (KCNumber Reference) §21.2.2.123
 */
 KoFilter::ConversionStatus XlsxXmlChartReader::read_yVal()
 {
@@ -746,8 +746,8 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_yVal()
 
  Child elements:
   - multiLvlStrRef (Multi Level String Reference) §21.2.2.115
-  - numLit (Number Literal) §21.2.2.122
-  - [Done]numRef (Number Reference) §21.2.2.123
+  - numLit (KCNumber Literal) §21.2.2.122
+  - [Done]numRef (KCNumber Reference) §21.2.2.123
   - strLit (String Literal) §21.2.2.200
   - strRef (String Reference) §21.2.2.201
 */
@@ -886,7 +886,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_seriesText_Tx()
 
 #undef CURRENT_EL
 #define CURRENT_EL numCache
-//! numCache (Number Cache)
+//! numCache (KCNumber Cache)
 /*! ECMA-376, 21.2.2.120, p.3813.
 
  Parent elements:
@@ -945,7 +945,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_legend()
   - extLst (Chart Extensibility) §21.2.2.64
   - idx (Index) §21.2.2.84
   - layout (Layout) §21.2.2.88
-  - numFmt (Number KCFormat) §21.2.2.121
+  - numFmt (KCNumber KCFormat) §21.2.2.121
   - separator (Separator) §21.2.2.166
   - showBubbleSize (Show Bubble Size) §21.2.2.178
   - showCatName (Show Category Name) §21.2.2.179
@@ -1007,7 +1007,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_dLbl()
   - dLblPos (Data Label Position) §21.2.2.48
   - extLst (Chart Extensibility) §21.2.2.64
   - leaderLines (Leader Lines) §21.2.2.92
-  - numFmt (Number KCFormat) §21.2.2.121
+  - numFmt (KCNumber KCFormat) §21.2.2.121
   - separator (Separator) §21.2.2.166
   - showBubbleSize (Show Bubble Size) §21.2.2.178
   - showCatName (Show Category Name) §21.2.2.179
@@ -2614,8 +2614,8 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_holeSize()
   - ser §21.2.2.174
 
  Child elements:
-  - numLit (Number Literal) §21.2.2.122
-  - [done]numRef (Number Reference) §21.2.2.123
+  - numLit (KCNumber Literal) §21.2.2.122
+  - [done]numRef (KCNumber Reference) §21.2.2.123
 */
 KoFilter::ConversionStatus XlsxXmlChartReader::read_bubbleSize()
 {
@@ -2689,7 +2689,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_bubble3D()
 
 #undef CURRENT_EL
 #define CURRENT_EL numLit
-//! numLit (Number Literal)
+//! numLit (KCNumber Literal)
 /*! ECMA-376, 21.2.2.122, p.3815.
 
  Parent elements:
@@ -2894,7 +2894,7 @@ KoFilter::ConversionStatus XlsxXmlChartReader::read_strRef()
  Child elements:
   - extLst (Chart Extensibility) §21.2.2.64
   - [Done]f (Formula) §21.2.2.65
-  - [Done]numCache (Number Cache) §21.2.2.120
+  - [Done]numCache (KCNumber Cache) §21.2.2.120
 */
 KoFilter::ConversionStatus XlsxXmlChartReader::read_numRef()
 {

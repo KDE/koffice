@@ -33,7 +33,7 @@
 #include <part/Doc.h>
 #include <CellStorage.h>
 #include <Formula.h>
-#include <Map.h>
+#include <KCMap.h>
 #include <kspread/KCSheet.h>
 #include <KCRegion.h>
 #include <RowColumnFormat.h>

@@ -21,7 +21,7 @@
 #include "TestKspreadCommon.h"
 
 #include <part/Doc.h>
-#include <Map.h>
+#include <KCMap.h>
 #include <KCSheet.h>
 
 void TestLogicFunctions::init()
@@ -97,7 +97,7 @@ void TestLogicFunctions::testFALSE()
     // note that kspread distinguishes between boolean and math
     CHECK_EVAL("FALSE()=0", KCValue(false));
     CHECK_EVAL("FALSE()=1", KCValue(false));
-    // False converts to 0 in Number context
+    // False converts to 0 in KCNumber context
     CHECK_EVAL("2+FALSE()", KCValue(2));
 }
 
@@ -172,7 +172,7 @@ void TestLogicFunctions::testTRUE()
     // note that kspread distinguishes between boolean and math
     CHECK_EVAL("TRUE()=1", KCValue(false));
     CHECK_EVAL("TRUE()=0", KCValue(false));
-    // False converts to 0 in Number context
+    // False converts to 0 in KCNumber context
     CHECK_EVAL("2+TRUE()", KCValue(3));
 }
 

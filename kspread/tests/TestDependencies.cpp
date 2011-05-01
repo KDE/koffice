@@ -25,14 +25,14 @@
 #include "DependencyManager.h"
 #include "DependencyManager_p.h"
 #include "Formula.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
 #include "KCValue.h"
 
 void TestDependencies::initTestCase()
 {
-    m_map = new Map(0 /* no Doc */);
+    m_map = new KCMap(0 /* no Doc */);
     m_sheet = m_map->addNewSheet();
     m_sheet->setSheetName("Sheet1");
     m_storage = m_sheet->cellStorage();

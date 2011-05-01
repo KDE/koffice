@@ -49,7 +49,7 @@
 #include <kspread/part/Doc.h>
 #include <kspread/Global.h>
 #include <kspread/HeaderFooter.h>
-#include <kspread/Map.h>
+#include <kspread/KCMap.h>
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>
 #include <kspread/KCRegion.h>
@@ -653,7 +653,7 @@ void OpenCalcImport::loadCondition(const KCCell& cell, const KoXmlElement &prope
 void OpenCalcImport::loadOasisCondition(const KCCell& cell, const KoXmlElement &property)
 {
     KoXmlElement elementItem(property);
-    Map *const map = cell.sheet()->map();
+    KCMap *const map = cell.sheet()->map();
     ValueParser *const parser = map->parser();
 
     QLinkedList<KCConditional> cond;
@@ -2114,7 +2114,7 @@ void OpenCalcImport::loadOasisValidation(Validity validity, const QString& valid
         //TrueFunction ::= cell-content-is-whole-number() | cell-content-is-decimal-number() | cell-content-is-date() | cell-content-is-time()
         else {
             if (valExpression.contains("cell-content-is-whole-number()")) {
-                validity.setRestriction(Validity::Number);
+                validity.setRestriction(Validity::KCNumber);
                 valExpression = valExpression.remove("cell-content-is-whole-number() and ");
             } else if (valExpression.contains("cell-content-is-decimal-number()")) {
                 validity.setRestriction(Validity::Integer);

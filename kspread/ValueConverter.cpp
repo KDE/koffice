@@ -56,7 +56,7 @@ KCValue ValueConverter::asBoolean(const KCValue &value, bool* ok) const
         val = KCValue((value.asFloat() == 0.0) ? false : true);
         break;
     case KCValue::Complex:
-        val = KCValue((value.asComplex().real() == complex<Number>(0.0, 0.0)) ? false : true);
+        val = KCValue((value.asComplex().real() == complex<KCNumber>(0.0, 0.0)) ? false : true);
         break;
     case KCValue::String:
         val = m_parser->tryParseBool(value.asString(), &okay);
@@ -180,14 +180,14 @@ KCValue ValueConverter::asComplex(const KCValue &value, bool* ok) const
 
     switch (value.type()) {
     case KCValue::Empty:
-        val = KCValue(complex<Number>(0.0, 0.0));
+        val = KCValue(complex<KCNumber>(0.0, 0.0));
         break;
     case KCValue::Boolean:
-        val = KCValue(complex<Number>(value.asBoolean() ? 1.0 : 0.0, 0.0));
+        val = KCValue(complex<KCNumber>(value.asBoolean() ? 1.0 : 0.0, 0.0));
         break;
     case KCValue::Integer:
     case KCValue::Float:
-        val = KCValue(complex<Number>(value.asFloat(), 0.0));
+        val = KCValue(complex<KCNumber>(value.asFloat(), 0.0));
         break;
     case KCValue::Complex:
         val = value;
@@ -195,7 +195,7 @@ KCValue ValueConverter::asComplex(const KCValue &value, bool* ok) const
     case KCValue::String:
         val = m_parser->parse(value.asString());
         if (!val.isNumber()) {
-            val = KCValue(complex<Number>(0.0, 0.0));
+            val = KCValue(complex<KCNumber>(0.0, 0.0));
             if (ok)
                 *ok = false;
         }
@@ -208,7 +208,7 @@ KCValue ValueConverter::asComplex(const KCValue &value, bool* ok) const
         /* NOTHING */
         break;
     case KCValue::Error:
-        val = KCValue(complex<Number>(0.0, 0.0));
+        val = KCValue(complex<KCNumber>(0.0, 0.0));
         break;
     };
 
@@ -489,12 +489,12 @@ int ValueConverter::toInteger(const KCValue& value) const
     return asInteger(value).asInteger();
 }
 
-Number ValueConverter::toFloat(const KCValue& value) const
+KCNumber ValueConverter::toFloat(const KCValue& value) const
 {
     return asFloat(value).asFloat();
 }
 
-complex<Number> ValueConverter::toComplex(const KCValue& value) const
+complex<KCNumber> ValueConverter::toComplex(const KCValue& value) const
 {
     return asComplex(value).asComplex();
 }

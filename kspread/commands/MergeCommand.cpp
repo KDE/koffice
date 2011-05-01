@@ -25,7 +25,7 @@
 
 #include "KCCell.h"
 #include "Damages.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h" // FIXME detach from ui
 #include "KCSheet.h"
 

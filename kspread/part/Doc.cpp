@@ -87,7 +87,7 @@
 #include "HeaderFooter.h"
 #include "LoadingInfo.h"
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "PrintSettings.h"
 #include "RecalcManager.h"
@@ -116,7 +116,7 @@
 class Doc::Private
 {
 public:
-    Map *map;
+    KCMap *map;
     static QList<Doc*> s_docs;
     static int s_docId;
 

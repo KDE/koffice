@@ -33,7 +33,7 @@ public:
 
 
 RegionModel::RegionModel(const KCRegion& region)
-        : SheetModel(region.lastSheet())
+        : KCSheetModel(region.lastSheet())
         , d(new Private)
 {
     Q_ASSERT(region.isContiguous());
@@ -55,14 +55,14 @@ int RegionModel::columnCount(const QModelIndex &parent) const
         return false;
     }
     if (d->overwriteMode) {
-        return SheetModel::columnCount(parent) - d->range.left() + 1;
+        return KCSheetModel::columnCount(parent) - d->range.left() + 1;
     }
     return d->range.width();
 }
 
 QModelIndex RegionModel::index(int row, int column, const QModelIndex &parent) const
 {
-    return SheetModel::index(row + d->range.top() - 1, column + d->range.left() - 1, parent);
+    return KCSheetModel::index(row + d->range.top() - 1, column + d->range.left() - 1, parent);
 }
 
 int RegionModel::rowCount(const QModelIndex &parent) const
@@ -71,7 +71,7 @@ int RegionModel::rowCount(const QModelIndex &parent) const
         return false;
     }
     if (d->overwriteMode) {
-        return SheetModel::rowCount(parent) - d->range.top() + 1;
+        return KCSheetModel::rowCount(parent) - d->range.top() + 1;
     }
     return d->range.height();
 }

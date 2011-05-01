@@ -29,7 +29,7 @@
 
 #include <part/Doc.h>
 #include <KCSheet.h>
-#include <Map.h>
+#include <KCMap.h>
 #include <KCRegion.h>
 #include <KCCell.h>
 #include <KCValue.h>

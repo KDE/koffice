@@ -74,7 +74,7 @@ public:
     /// The type of the restriction.
     enum Restriction {
         None,       ///< No restriction
-        Number,     ///< Restrict to numbers
+        KCNumber,     ///< Restrict to numbers
         Text,       ///< Restrict to texts
         Time,       ///< Restrict to times
         Date,       ///< Restrict to dates

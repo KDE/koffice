@@ -31,7 +31,7 @@
 #include "commands/RowColumnManipulators.h"
 #include "commands/RowStyleCommand.h"
 #include "DependencyManager.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "KCSheet.h"
 
@@ -269,7 +269,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
     const QRect pasteArea = element->rect();
     KCSheet *const sheet = element->sheet();
     Q_ASSERT(sheet == m_sheet);
-    Map *const map = sheet->map();
+    KCMap *const map = sheet->map();
 
     const KoXmlElement root = data->documentElement(); // "spreadsheet-snippet"
     if (root.hasAttribute("cut")) {

@@ -26,7 +26,7 @@
 
 #include "KCCell.h"
 #include "Formula.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "NamedAreaManager.h"
 #include "KCRegion.h"
 #include "KCSheet.h"
@@ -194,7 +194,7 @@ bool Conditions::currentCondition(const KCCell& cell, KCConditional & condition)
 
 bool Conditions::isTrueFormula(const KCCell &cell, const QString &formula, const QString &baseCellAddress) const
 {
-    Map* const map = cell.sheet()->map();
+    KCMap* const map = cell.sheet()->map();
     ValueCalc *const calc = map->calc();
     Formula f(cell.sheet(), cell);
     f.setExpression('=' + formula);

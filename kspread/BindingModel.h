@@ -27,7 +27,7 @@
 
 #include <QAbstractTableModel>
 
-class Binding;
+class KCBinding;
 
 /**
  * A model for a cell range acting as data source.
@@ -37,7 +37,7 @@ class BindingModel : public QAbstractTableModel, public KoChart::ChartModel
     Q_OBJECT
     Q_INTERFACES(KoChart::ChartModel)
 public:
-    explicit BindingModel(Binding* binding, QObject *parent = 0);
+    explicit BindingModel(KCBinding* binding, QObject *parent = 0);
 
     // QAbstractTableModel interface
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
@@ -61,7 +61,7 @@ signals:
 
 private:
     KCRegion m_region;
-    Binding* m_binding;
+    KCBinding* m_binding;
 };
 
 #endif // KSPREAD_BINDING_MODEL

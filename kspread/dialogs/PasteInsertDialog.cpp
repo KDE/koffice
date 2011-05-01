@@ -33,7 +33,7 @@
 #include <QCheckBox>
 
 #include "commands/PasteCommand.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 

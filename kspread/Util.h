@@ -41,7 +41,7 @@ bool util_isPointValid(const QPoint& point);
 bool util_isRectValid(const QRect& rect);
 
 class KCCell;
-class Map;
+class KCMap;
 class KCSheet;
 
 namespace KSpread

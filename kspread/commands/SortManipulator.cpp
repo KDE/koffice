@@ -20,7 +20,7 @@
 
 #include "SortManipulator.h"
 
-#include "Map.h"
+#include "KCMap.h"
 #include "KCSheet.h"
 #include "ValueCalc.h"
 #include "ValueConverter.h"

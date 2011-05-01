@@ -27,7 +27,7 @@
 
 #include <CellStorage.h>
 #include <Formula.h>
-#include <Map.h>
+#include <KCMap.h>
 #include <KCSheet.h>
 
 #include "TestKspreadCommon.h"
@@ -128,7 +128,7 @@ KCValue TestStatisticalFunctions::evaluate(const QString& formula)
 void TestStatisticalFunctions::initTestCase()
 {
     FunctionModuleRegistry::instance()->loadFunctionModules();
-    m_map = new Map(0 /*no Doc*/);
+    m_map = new KCMap(0 /*no Doc*/);
     m_map->addNewSheet();
     KCSheet* sheet = m_map->sheet(0);
     CellStorage* storage = sheet->cellStorage();

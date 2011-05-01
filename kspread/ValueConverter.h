@@ -92,8 +92,8 @@ public:
 
     bool toBoolean(const KCValue& value) const;
     int toInteger(const KCValue& value) const;
-    Number toFloat(const KCValue& value) const;
-    complex<Number> toComplex(const KCValue& value) const;
+    KCNumber toFloat(const KCValue& value) const;
+    complex<KCNumber> toComplex(const KCValue& value) const;
     QString toString(const KCValue& value) const;
     QDateTime toDateTime(const KCValue& value) const;
     QDate toDate(const KCValue& value) const;

@@ -22,7 +22,7 @@
 #include "DefinePrintRangeCommand.h"
 
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "PrintSettings.h"
 #include "KCSheet.h"
 #include "SheetPrint.h"

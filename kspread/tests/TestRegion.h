@@ -23,7 +23,7 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
-class Map;
+class KCMap;
 
 class TestRegion : public QObject
 {
@@ -38,7 +38,7 @@ private Q_SLOTS:
     void cleanupTestCase();
 
 private:
-    Map* m_map;
+    KCMap* m_map;
 };
 
 #endif // KSPREAD_TEST_REGION

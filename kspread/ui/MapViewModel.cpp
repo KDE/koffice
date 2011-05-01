@@ -19,7 +19,7 @@
 
 #include "MapViewModel.h"
 
-#include "Map.h"
+#include "KCMap.h"
 #include "ModelSupport.h"
 #include "KCSheet.h"
 
@@ -45,8 +45,8 @@ public:
 };
 
 
-MapViewModel::MapViewModel(Map *map, KoCanvasBase *canvas, KXMLGUIClient *xmlGuiClient)
-        : MapModel(map)
+MapViewModel::MapViewModel(KCMap *map, KoCanvasBase *canvas, KXMLGUIClient *xmlGuiClient)
+        : KCMapModel(map)
         , d(new Private)
 {
     d->activeSheet = 0;
@@ -71,15 +71,15 @@ MapViewModel::~MapViewModel()
 
 QVariant MapViewModel::data(const QModelIndex &index, int role) const
 {
-    // We handle only this role; the remaining ones go to the MapModel.
+    // We handle only this role; the remaining ones go to the KCMapModel.
     if (role != ActivityRole && role != Qt::CheckStateRole) {
-        return MapModel::data(index, role);
+        return KCMapModel::data(index, role);
     }
     if (!index.isValid()) {
         return QVariant();
     }
     if (index.parent().isValid()) {
-        return MapModel::data(index, role);
+        return KCMapModel::data(index, role);
     }
     if (index.row() >= map()->count()) {
         return QVariant();
@@ -95,25 +95,25 @@ Qt::ItemFlags MapViewModel::flags(const QModelIndex &index) const
     }
     // Propagation to sheet model
     if (index.parent().isValid()) {
-        return MapModel::flags(index); // The MapModel takes care of cell indices.
+        return KCMapModel::flags(index); // The KCMapModel takes care of cell indices.
     }
     if (index.row() >= map()->count()) {
         return Qt::NoItemFlags;
     }
-    return MapModel::flags(index) | Qt::ItemIsUserCheckable;
+    return KCMapModel::flags(index) | Qt::ItemIsUserCheckable;
 }
 
 bool MapViewModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    // We handle only this role; the remaining ones go to the MapModel.
+    // We handle only this role; the remaining ones go to the KCMapModel.
     if (role != ActivityRole && role != Qt::CheckStateRole) {
-        return MapModel::setData(index, value, role);
+        return KCMapModel::setData(index, value, role);
     }
     if (!index.isValid()) {
         return false;
     }
     if (index.parent().isValid()) {
-        return MapModel::setData(index, value, role);
+        return KCMapModel::setData(index, value, role);
     }
     if (index.row() >= map()->count()) {
         return false;
@@ -184,7 +184,7 @@ bool MapViewModel::eventFilter(QObject *object, QEvent *event)
 
 void MapViewModel::addSheet(KCSheet *sheet)
 {
-    MapModel::addSheet(sheet);
+    KCMapModel::addSheet(sheet);
 
     connect(sheet, SIGNAL(shapeAdded(KCSheet *, KoShape *)),
             this, SLOT(addShape(KCSheet *, KoShape *)));
@@ -210,7 +210,7 @@ void MapViewModel::addSheet(KCSheet *sheet)
 
 void MapViewModel::removeSheet(KCSheet *sheet)
 {
-    MapModel::removeSheet(sheet);
+    KCMapModel::removeSheet(sheet);
 
     disconnect(sheet, SIGNAL(shapeAdded(KCSheet *, KoShape *)),
                this, SLOT(addShape(KCSheet *, KoShape *)));

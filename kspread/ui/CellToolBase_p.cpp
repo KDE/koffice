@@ -47,7 +47,7 @@
 #include "ApplicationSettings.h"
 #include "CalculationSettings.h"
 #include "CellStorage.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "RowColumnFormat.h"
 #include "Selection.h"
 #include "KCSheet.h"
@@ -739,8 +739,8 @@ bool CellToolBase::Private::formatKeyPress(QKeyEvent * _ev)
 
     switch (_ev->key()) {
     case Qt::Key_Exclam:
-        command->setText(i18n("Number KCFormat"));
-        command->setFormatType(KCFormat::Number);
+        command->setText(i18n("KCNumber KCFormat"));
+        command->setFormatType(KCFormat::KCNumber);
         command->setPrecision(2);
         break;
 

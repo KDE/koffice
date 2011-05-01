@@ -29,7 +29,7 @@
 #include "ViewAdaptor.h"
 
 #include "part/Doc.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "part/View.h"

@@ -176,7 +176,7 @@ SET (ui_DIR_SRCS
 )
 
 SET (kspreadcommon_LIB_SRCS
-    MapModel.cpp
+    KCMapModel.cpp
     PageManager.cpp
     RegionModel.cpp
     tests/inspector.cpp
@@ -193,7 +193,7 @@ SET (kspreadcommon_LIB_SRCS
 set (kspreadodf_LIB_SRCS
     part/Digest.cpp
     ApplicationSettings.cpp
-    Binding.cpp
+    KCBinding.cpp
     BindingManager.cpp
     CalculationSettings.cpp
     KCCell.cpp
@@ -209,9 +209,9 @@ set (kspreadodf_LIB_SRCS
     GenValidationStyle.cpp
     HeaderFooter.cpp
     Localization.cpp
-    Map.cpp
+    KCMap.cpp
     NamedAreaManager.cpp
-    Number.cpp
+    KCNumber.cpp
     PrintSettings.cpp
     ProtectableObject.cpp
     RecalcManager.cpp
@@ -222,7 +222,7 @@ set (kspreadodf_LIB_SRCS
     ShapeApplicationData.cpp
     KCSheet.cpp
     SheetAccessModel.cpp
-    SheetModel.cpp
+    KCSheetModel.cpp
     KCStyle.cpp
     StyleManager.cpp
     StyleStorage.cpp

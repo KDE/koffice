@@ -34,7 +34,7 @@ class QString;
 
 class KoXmlWriter;
 
-class Map;
+class KCMap;
 class KCRegion;
 
 /**
@@ -48,7 +48,7 @@ public:
     /**
      * Constructor.
      */
-    NamedAreaManager(const Map* map);
+    NamedAreaManager(const KCMap* map);
 
     /**
      * Destructor.

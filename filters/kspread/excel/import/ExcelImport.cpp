@@ -57,7 +57,7 @@
 #include <CellStorage.h>
 #include <HeaderFooter.h>
 #include <LoadingInfo.h>
-#include <Map.h>
+#include <KCMap.h>
 #include <NamedAreaManager.h>
 #include <RowColumnFormat.h>
 #include <KCSheet.h>
@@ -275,7 +275,7 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
 
     d->shapesXml = d->beginMemoryXmlWriter("table:shapes");
 
-    Map* map = d->outputDoc->map();
+    KCMap* map = d->outputDoc->map();
     for (unsigned i = 0; i < d->workbook->sheetCount(); i++) {
         d->shapesXml->startElement("table:table");
         d->shapesXml->addAttribute("table:id", i);
@@ -1044,7 +1044,7 @@ int ExcelImport::Private::convertStyle(const Format* format, const QString& form
             style.merge(dataStyleCache.value(format->valueFormat(), KCStyle()));
         } else {
             if (key.decimalCount >= 0) {
-                style.setFormatType(KCFormat::Number);
+                style.setFormatType(KCFormat::KCNumber);
                 style.setPrecision(key.decimalCount);
                 QString format = ".";
                 for (int i = 0; i < key.decimalCount; i++) {

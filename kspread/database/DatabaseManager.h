@@ -28,7 +28,7 @@
 
 class KoXmlWriter;
 
-class Map;
+class KCMap;
 
 class KSPREAD_EXPORT DatabaseManager : public QObject
 {
@@ -38,7 +38,7 @@ public:
     /**
      * Constructor.
      */
-    DatabaseManager(const Map* map);
+    DatabaseManager(const KCMap* map);
 
     /**
      * Destructor.

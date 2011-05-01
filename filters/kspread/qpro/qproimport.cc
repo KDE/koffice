@@ -29,7 +29,7 @@
 #include <kspread/KCSheet.h>
 #include <kspread/KCCell.h>
 #include <kspread/KCValue.h>
-#include <kspread/Map.h>
+#include <kspread/KCMap.h>
 
 #include <qproimport.h>
 

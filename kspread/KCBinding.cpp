@@ -18,7 +18,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "Binding.h"
+#include "KCBinding.h"
 #include "BindingModel.h"
 
 #include <QRect>
@@ -26,61 +26,61 @@
 #include <kdebug.h>
 
 #include "CellStorage.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "KCSheet.h"
 #include "KCValue.h"
 
-class Binding::Private : public QSharedData
+class KCBinding::Private : public QSharedData
 {
 public:
     BindingModel* model;
-    Private(Binding *q) : model(new BindingModel(q)) {}
+    Private(KCBinding *q) : model(new BindingModel(q)) {}
     ~Private() { delete model; }
 };
 
 
-Binding::Binding()
+KCBinding::KCBinding()
     : d(new Private(this))
 {
 }
 
-Binding::Binding(const KCRegion& region)
+KCBinding::KCBinding(const KCRegion& region)
     : d(new Private(this))
 {
     Q_ASSERT(region.isValid());
     d->model->setRegion(region);
 }
 
-Binding::Binding(const Binding& other)
+KCBinding::KCBinding(const KCBinding& other)
     : d(other.d)
 {
 }
 
-Binding::~Binding()
+KCBinding::~KCBinding()
 {
 }
 
-bool Binding::isEmpty() const
+bool KCBinding::isEmpty() const
 {
     return d->model->region().isEmpty();
 }
 
-QAbstractItemModel* Binding::model() const
+QAbstractItemModel* KCBinding::model() const
 {
     return d->model;
 }
 
-const KCRegion& Binding::region() const
+const KCRegion& KCBinding::region() const
 {
     return d->model->region();
 }
 
-void Binding::setRegion(const KCRegion& region)
+void KCBinding::setRegion(const KCRegion& region)
 {
     d->model->setRegion(region);
 }
 
-void Binding::update(const KCRegion& region)
+void KCBinding::update(const KCRegion& region)
 {
     QRect rect;
     KCRegion changedRegion;
@@ -101,17 +101,17 @@ void Binding::update(const KCRegion& region)
     d->model->emitChanged(changedRegion);
 }
 
-void Binding::operator=(const Binding & other)
+void KCBinding::operator=(const KCBinding & other)
 {
     d = other.d;
 }
 
-bool Binding::operator==(const Binding& other) const
+bool KCBinding::operator==(const KCBinding& other) const
 {
     return d == other.d;
 }
 
-bool Binding::operator<(const Binding& other) const
+bool KCBinding::operator<(const KCBinding& other) const
 {
     return d < other.d;
 }
@@ -133,7 +133,7 @@ bool BindingModel::setCellRegion(const QString& regionName)
 {
     Q_ASSERT(m_region.isValid());
     Q_ASSERT(m_region.firstSheet());
-    const Map* const map = m_region.firstSheet()->map();
+    const KCMap* const map = m_region.firstSheet()->map();
     const KCRegion region = KCRegion(regionName, map);
     if (!region.isValid()) {
         kDebug() << qPrintable(regionName) << "is not a valid region.";
@@ -146,7 +146,7 @@ bool BindingModel::setCellRegion(const QString& regionName)
             continue;
         }
         // FIXME Stefan: This may also clear other bindings!
-        (*it)->sheet()->cellStorage()->setBinding(KCRegion((*it)->rect(), (*it)->sheet()), Binding());
+        (*it)->sheet()->cellStorage()->setBinding(KCRegion((*it)->rect(), (*it)->sheet()), KCBinding());
     }
     // Set the new region
     m_region = region;
@@ -163,7 +163,7 @@ bool BindingModel::setCellRegion(const QString& regionName)
 
 /////// BindingModel
 
-BindingModel::BindingModel(Binding* binding, QObject *parent)
+BindingModel::BindingModel(KCBinding* binding, QObject *parent)
         : QAbstractTableModel(parent)
         , m_binding(binding)
 {

@@ -31,7 +31,7 @@
 
 #include <part/View.h>
 #include <part/Doc.h>
-#include <Map.h>
+#include <KCMap.h>
 #include <KCSheet.h>
 #include <KCCell.h>
 #include <KCRegion.h>

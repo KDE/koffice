@@ -525,8 +525,8 @@
   <table:table-cell table:number-columns-repeated="7"/>
  </table:table-row>
  <table:table-row table:style-name="ro2">
-  <table:table-cell office:value-type="string" office:string-value="Complex Number Functions" table:style-name="ce2">
-   <text:p>Complex Number Functions</text:p>
+  <table:table-cell office:value-type="string" office:string-value="Complex KCNumber Functions" table:style-name="ce2">
+   <text:p>Complex KCNumber Functions</text:p>
   </table:table-cell>
   <table:table-cell table:style-name="ce6" table:number-columns-repeated="5"/>
   <table:table-cell table:style-name="ce2"/>
@@ -6207,8 +6207,8 @@
   <table:table-cell table:number-columns-repeated="7"/>
  </table:table-row>
  <table:table-row table:style-name="ro2">
-  <table:table-cell office:value-type="string" office:string-value="Number Representation Conversion Functions" table:style-name="ce2">
-   <text:p>Number Representation Conversion Functions</text:p>
+  <table:table-cell office:value-type="string" office:string-value="KCNumber Representation Conversion Functions" table:style-name="ce2">
+   <text:p>KCNumber Representation Conversion Functions</text:p>
   </table:table-cell>
   <table:table-cell table:style-name="ce6" table:number-columns-repeated="5"/>
   <table:table-cell table:style-name="ce2"/>

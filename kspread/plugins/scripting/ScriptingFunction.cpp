@@ -28,7 +28,7 @@
 //#include <Doc.h>
 //#include <View.h>
 #include <KCValue.h>
-#include <Number.h>
+#include <KCNumber.h>
 #include <Function.h>
 #include <FunctionDescription.h>
 #include <FunctionRepository.h>

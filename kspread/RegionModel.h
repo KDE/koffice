@@ -20,7 +20,7 @@
 #ifndef KSPREAD_REGION_MODEL
 #define KSPREAD_REGION_MODEL
 
-#include "SheetModel.h"
+#include "KCSheetModel.h"
 
 class KCRegion;
 
@@ -28,7 +28,7 @@ class KCRegion;
  * A model for a contiguous cell region.
  * \ingroup Model
  */
-class RegionModel : public SheetModel
+class RegionModel : public KCSheetModel
 {
 public:
     RegionModel(const KCRegion& region);

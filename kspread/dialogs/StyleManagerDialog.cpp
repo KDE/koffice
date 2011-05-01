@@ -92,8 +92,8 @@ StyleManagerDialog::~StyleManagerDialog()
 
 void StyleManagerDialog::fillComboBox()
 {
-    typedef QMap<CustomStyle*, QTreeWidgetItem*> Map;
-    Map entries;
+    typedef QMap<CustomStyle*, QTreeWidgetItem*> KCMap;
+    KCMap entries;
 
     entries.clear();
     entries[m_styleManager->defaultStyle()] = new QTreeWidgetItem(m_styleList, QStringList(i18n("Default")));
@@ -109,7 +109,7 @@ void StyleManagerDialog::fillComboBox()
             else {
                 CustomStyle* parentStyle = m_styleManager->style(iter.value()->parentName());
                 if (parentStyle) {
-                    Map::const_iterator i = entries.constFind(parentStyle);
+                    KCMap::const_iterator i = entries.constFind(parentStyle);
                     if (i != entries.constEnd())
                         entries[iter.value()] = new QTreeWidgetItem(i.value(), QStringList(iter.value()->name()));
                 }

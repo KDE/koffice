@@ -25,7 +25,7 @@
 class QAbstractItemModel;
 class QString;
 
-class Map;
+class KCMap;
 class KCRegion;
 
 /**
@@ -38,7 +38,7 @@ public:
     /**
      * Constructor.
      */
-    BindingManager(const Map* map);
+    BindingManager(const KCMap* map);
 
     /**
      * Destructor.

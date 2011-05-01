@@ -73,11 +73,11 @@ CSVDialog::CSVDialog(QWidget* parent, QByteArray& fileArray, const QString /*sep
     m_dialog->comboBoxEncoding->addItems(encodings);
 
     m_formatList << i18n("Text");
-    m_formatList << i18n("Number");
+    m_formatList << i18n("KCNumber");
     m_formatList << i18n("Currency");
     m_formatList << i18n("Date");
-    m_formatList << i18n("Decimal Comma Number");
-    m_formatList << i18n("Decimal Point Number");
+    m_formatList << i18n("Decimal Comma KCNumber");
+    m_formatList << i18n("Decimal Point KCNumber");
     m_dialog->m_formatComboBox->addItems(m_formatList);
 
     m_dialog->m_sheet->setReadOnly(true);
@@ -333,15 +333,15 @@ int CSVDialog::getHeader(int col)
 
     if (header == i18n("Text"))
         return TEXT;
-    else if (header == i18n("Number"))
+    else if (header == i18n("KCNumber"))
         return NUMBER;
     else if (header == i18n("Currency"))
         return CURRENCY;
     else if (header == i18n("Date"))
         return DATE;
-    else if (header == i18n("Decimal Comma Number"))
+    else if (header == i18n("Decimal Comma KCNumber"))
         return COMMANUMBER;
-    else if (header == i18n("Decimal Point Number"))
+    else if (header == i18n("Decimal Point KCNumber"))
         return POINTNUMBER;
     else
         return TEXT; // Should not happen

@@ -23,7 +23,7 @@
 
 #include <QString>
 #include <QUndoCommand>
-class Map;
+class KCMap;
 class KCSheet;
 
 /**
@@ -58,7 +58,7 @@ public:
     virtual void undo();
 
 protected:
-    Map* map;
+    KCMap* map;
     QString sheetName;
 };
 
@@ -76,7 +76,7 @@ public:
     virtual void undo();
 
 protected:
-    Map* map;
+    KCMap* map;
     QString sheetName;
 };
 
@@ -134,7 +134,7 @@ public:
 
 protected:
     KCSheet* sheet;
-    Map* map;
+    KCMap* map;
 };
 
 
@@ -163,7 +163,7 @@ public:
 
 protected:
     KCSheet* sheet;
-    Map* map;
+    KCMap* map;
     Qt::LayoutDirection oldDirection, newDirection;
     bool oldAutoCalc, newAutoCalc;
     bool oldShowGrid, newShowGrid;

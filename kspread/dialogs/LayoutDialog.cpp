@@ -64,7 +64,7 @@
 #include "KCCell.h"
 #include "CellStorage.h"
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "KCStyle.h"
@@ -893,7 +893,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     generic->setWhatsThis(i18n("This is the default format and KSpread autodetects the actual data type depending on the current cell data. By default, KSpread right justifies numbers, dates and times within a cell and left justifies anything else."));
     grid->addWidget(generic, 1, 0);
 
-    number = new QRadioButton(i18n("Number"), grp);
+    number = new QRadioButton(i18n("KCNumber"), grp);
     number->setWhatsThis(i18n("The number notation uses the notation you globally choose in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Numbers tab. Numbers are right justified by default."));
     grid->addWidget(number, 2, 0);
 
@@ -1053,7 +1053,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     if (!cellFormatType)
         generic->setChecked(true);
     else {
-        if (cellFormatType == KCFormat::Number)
+        if (cellFormatType == KCFormat::KCNumber)
             number->setChecked(true);
         else if (cellFormatType == KCFormat::Percentage)
             percent->setChecked(true);
@@ -1417,7 +1417,7 @@ void CellFormatPageFloat::updateFormatType()
     if (generic->isChecked())
         newFormatType = KCFormat::Generic;
     else if (number->isChecked())
-        newFormatType = KCFormat::Number;
+        newFormatType = KCFormat::KCNumber;
     else if (percent->isChecked())
         newFormatType = KCFormat::Percentage;
     else if (date->isChecked()) {

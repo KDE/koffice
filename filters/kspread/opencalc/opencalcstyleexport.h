@@ -65,7 +65,7 @@ class NumberStyle
 public:
     NumberStyle() {}
 
-    enum NumberType { Boolean, Date, Number, Percentage, Time };
+    enum NumberType { Boolean, Date, KCNumber, Percentage, Time };
 
     void copyData(NumberStyle const & ts) {
         type = ts.type;

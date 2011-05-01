@@ -40,7 +40,7 @@
 
 #include "CalculationSettings.h"
 #include "Localization.h"
-#include "Map.h"
+#include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "ValueParser.h"
@@ -78,7 +78,7 @@ ValidityDialog::ValidityDialog(QWidget* parent, Selection* selection)
     chooseType = new KComboBox(page1);
     tmpGridLayout->addWidget(chooseType, 0, 1);
     chooseType->addItem(i18n("All"), QVariant::fromValue(Validity::None));
-    chooseType->addItem(i18n("Number"), QVariant::fromValue(Validity::Number));
+    chooseType->addItem(i18n("KCNumber"), QVariant::fromValue(Validity::KCNumber));
     chooseType->addItem(i18n("Integer"), QVariant::fromValue(Validity::Integer));
     chooseType->addItem(i18n("Text"), QVariant::fromValue(Validity::Text));
     chooseType->addItem(i18n("Date"), QVariant::fromValue(Validity::Date));
@@ -141,7 +141,7 @@ ValidityDialog::ValidityDialog(QWidget* parent, Selection* selection)
     tmpGridLayout->addItem(new QSpacerItem(edit2->width(), 0), 0, 0);
     edit2->setText(i18n("Maximum:"));
     tmpGridLayout->addItem(new QSpacerItem(edit2->width(), 0), 0, 0);
-    edit2->setText(i18n("Number:"));
+    edit2->setText(i18n("KCNumber:"));
     tmpGridLayout->addItem(new QSpacerItem(edit2->width(), 0), 0, 0);
 
     validityList = new KTextEdit(page1);
@@ -277,7 +277,7 @@ void ValidityDialog::changeIndexType(int _index)
         val_min->setValidator(new KFloatValidator(val_min));
         val_max->setValidator(new KFloatValidator(val_max));
         if (choose->currentIndex() <= 4) {
-            edit1->setText(i18n("Number:"));
+            edit1->setText(i18n("KCNumber:"));
             edit2->setText("");
             val_max->setEnabled(false);
         } else {
@@ -293,7 +293,7 @@ void ValidityDialog::changeIndexType(int _index)
         val_min->setValidator(new KIntValidator(val_min));
         val_max->setValidator(new KIntValidator(val_max));
         if (choose->currentIndex() <= 4) {
-            edit1->setText(i18n("Number:"));
+            edit1->setText(i18n("KCNumber:"));
             edit2->setText("");
             val_max->setEnabled(false);
         } else {
@@ -359,7 +359,7 @@ void ValidityDialog::changeIndexCond(int _index)
         val_max->setEnabled(false);
         if (chooseType->currentIndex() == 1 || chooseType->currentIndex() == 2
                 || chooseType->currentIndex() == 6)
-            edit1->setText(i18n("Number:"));
+            edit1->setText(i18n("KCNumber:"));
         else if (chooseType->currentIndex() == 3)
             edit1->setText("");
         else if (chooseType->currentIndex() == 4)
@@ -391,7 +391,7 @@ void ValidityDialog::changeIndexCond(int _index)
 
 void ValidityDialog::init()
 {
-    const Map *const map = m_selection->activeSheet()->map();
+    const KCMap *const map = m_selection->activeSheet()->map();
     const CalculationSettings *settings = map->calculationSettings();
     const KLocale* locale = settings->locale();
     Validity validity = KCCell(m_selection->activeSheet(), m_selection->marker()).validity();
@@ -403,7 +403,7 @@ void ValidityDialog::init()
         case Validity::None:
             chooseType->setCurrentIndex(0);
             break;
-        case Validity::Number:
+        case Validity::KCNumber:
             chooseType->setCurrentIndex(1);
             if (validity.condition() >= 5)
                 val_max->setText(tmp.setNum((double)numToDouble(validity.maximumValue().asFloat())));
