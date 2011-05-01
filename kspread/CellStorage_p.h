@@ -28,7 +28,7 @@
 #include "Validity.h"
 #include "KCValue.h"
 
-class CellStorageUndoData
+class KCCellStorageUndoData
 {
 public:
     bool isEmpty() const {

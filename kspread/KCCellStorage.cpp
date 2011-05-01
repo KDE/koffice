@@ -134,7 +134,7 @@ public:
     ValueStorage*           valueStorage;
     RichTextStorage*        richTextStorage;
     RowRepeatStorage*       rowRepeatStorage;
-    CellStorageUndoData*    undoData;
+    KCCellStorageUndoData*    undoData;
 };
 
 void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
@@ -1455,7 +1455,7 @@ void KCCellStorage::startUndoRecording()
     // If undoData is not null, the recording wasn't stopped.
     // Should not happen, hence this assertion.
     Q_ASSERT(d->undoData == 0);
-    d->undoData = new CellStorageUndoData();
+    d->undoData = new KCCellStorageUndoData();
 }
 
 void KCCellStorage::stopUndoRecording(QUndoCommand *parent)
