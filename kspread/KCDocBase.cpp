@@ -49,7 +49,7 @@
 #include "KCBindingModel.h"
 #include "KCCalculationSettings.h"
 #include "KCMap.h"
-#include "SheetAccessModel.h"
+#include "KCSheetAccessModel.h"
 
 #include "part/View.h" // TODO: get rid of this dependency
 
@@ -78,7 +78,7 @@ KCDocBase::KCDocBase(QWidget *parentWidget, QObject* parent, bool singleViewMode
 
     documents().append(this);
 
-    d->sheetAccessModel = new SheetAccessModel(d->map);
+    d->sheetAccessModel = new KCSheetAccessModel(d->map);
 }
 
 KCDocBase::~KCDocBase()
@@ -115,7 +115,7 @@ KoResourceManager* KCDocBase::resourceManager() const
     return d->resourceManager;
 }
 
-SheetAccessModel *KCDocBase::sheetAccessModel() const
+KCSheetAccessModel *KCDocBase::sheetAccessModel() const
 {
     return d->sheetAccessModel;
 }
@@ -254,7 +254,7 @@ bool KCDocBase::loadOdf(KoOdfReadStore & odfStore)
     initConfig();
 
     //update plugins that rely on bindings, as loading order can mess up the data of the plugins
-    SheetAccessModel* sheetModel = sheetAccessModel();
+    KCSheetAccessModel* sheetModel = sheetAccessModel();
     QList< KCSheet* > sheets = map()->sheetList();
     Q_FOREACH( KCSheet* sheet, sheets ){
         // This region contains the entire sheet

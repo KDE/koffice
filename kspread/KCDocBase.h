@@ -40,7 +40,7 @@ class KoResourceManager;
 
 class KCMap;
 class KCSheet;
-class SheetAccessModel;
+class KCSheetAccessModel;
 
 class KSPREAD_EXPORT KCDocBase : public KoDocument
 {
@@ -86,7 +86,7 @@ public:
      */
     KoResourceManager *resourceManager() const;
 
-    SheetAccessModel *sheetAccessModel() const;
+    KCSheetAccessModel *sheetAccessModel() const;
 
     virtual void initConfig();
 

@@ -40,7 +40,7 @@ typedef QMap<QString, QDomElement> SavedDocParts;
 class KoResourceManager;
 
 class KCMap;
-class SheetAccessModel;
+class KCSheetAccessModel;
 
 class KCDocBase::Private
 {
@@ -53,7 +53,7 @@ public:
     bool configLoadFromFile       : 1;
     QStringList spellListIgnoreAll;
     SavedDocParts savedDocParts;
-    SheetAccessModel *sheetAccessModel;
+    KCSheetAccessModel *sheetAccessModel;
     KoResourceManager *resourceManager;
 };
 

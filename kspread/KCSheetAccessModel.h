@@ -39,19 +39,19 @@ class KCSheet;
  *
  * To access the QAbstractItemModel instance for a sheet's data, take the following code as example:
  * @code
- * QAbstractItemModel *sheetAccessModel = dynamic_cast<QAbstractItemModel*>( dataCenterMap["SheetAccessModel"] );
+ * QAbstractItemModel *sheetAccessModel = dynamic_cast<QAbstractItemModel*>( dataCenterMap["KCSheetAccessModel"] );
  * QModelIndex firstSheetIndex = sheetAccessModel->index( 0, 0 );
  * QPointer<QAbstractItemModel> firstSheet = sheetAccessModel->data( firstSheetIndex ).value< QPointer<QAbstractItemModel> >();
  * view->setModel( firstSheet.data() );
  * @endcode
  */
-class SheetAccessModel : public QStandardItemModel
+class KCSheetAccessModel : public QStandardItemModel
 {
     Q_OBJECT
 
 public:
-    SheetAccessModel(KCMap *map);
-    virtual ~SheetAccessModel();
+    KCSheetAccessModel(KCMap *map);
+    virtual ~KCSheetAccessModel();
 
 public Q_SLOTS:
     void slotSheetAdded(KCSheet *sheet);

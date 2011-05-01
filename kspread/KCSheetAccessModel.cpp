@@ -18,7 +18,7 @@
 */
 
 // Ours
-#include "SheetAccessModel.h"
+#include "KCSheetAccessModel.h"
 #include "kspread_limits.h"
 #include "KCMap.h"
 #include "KCBinding.h"
@@ -41,7 +41,7 @@
 Q_DECLARE_METATYPE(QPointer<QAbstractItemModel>)
 
 
-class SheetAccessModel::Private
+class KCSheetAccessModel::Private
 {
 public:
     KCMap *map;
@@ -51,7 +51,7 @@ public:
     QMap<KCSheet*, int> cols;
 };
 
-SheetAccessModel::SheetAccessModel(KCMap *map)
+KCSheetAccessModel::KCSheetAccessModel(KCMap *map)
         : d(new Private)
 {
     d->map = map;
@@ -70,12 +70,12 @@ SheetAccessModel::SheetAccessModel(KCMap *map)
     setColumnCount(0);
 }
 
-SheetAccessModel::~SheetAccessModel()
+KCSheetAccessModel::~KCSheetAccessModel()
 {
     delete d;
 }
 
-void SheetAccessModel::slotSheetAdded(KCSheet *sheet)
+void KCSheetAccessModel::slotSheetAdded(KCSheet *sheet)
 {
     Q_ASSERT(!d->cols.contains(sheet));
 
@@ -96,14 +96,14 @@ void SheetAccessModel::slotSheetAdded(KCSheet *sheet)
     setHeaderData( sheetIndex, Qt::Horizontal, sheet->sheetName() );
 }
 
-void SheetAccessModel::slotSheetRemoved(KCSheet *sheet)
+void KCSheetAccessModel::slotSheetRemoved(KCSheet *sheet)
 {
     Q_ASSERT(d->cols.contains(sheet));
     removeColumn(d->cols[sheet]);
     d->cols.remove(sheet);
 }
 
-void SheetAccessModel::handleDamages(const QList<KCDamage*>& damages)
+void KCSheetAccessModel::handleDamages(const QList<KCDamage*>& damages)
 {
     QList<KCDamage*>::ConstIterator end(damages.end());
     for (QList<KCDamage*>::ConstIterator it = damages.begin(); it != end; ++it) {

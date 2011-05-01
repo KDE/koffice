@@ -63,7 +63,7 @@ class View;
 class KCMap;
 class KCRegion;
 class UndoAction;
-class SheetAccessModel;
+class KCSheetAccessModel;
 
 /**
  * This class holds the data that makes up a spreadsheet.

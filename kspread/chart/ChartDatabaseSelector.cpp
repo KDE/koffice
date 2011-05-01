@@ -34,7 +34,7 @@
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "KCDocBase.h"
-#include "SheetAccessModel.h"
+#include "KCSheetAccessModel.h"
 
 class ChartDatabaseSelector::Private
 {

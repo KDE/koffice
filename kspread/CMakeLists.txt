@@ -221,7 +221,7 @@ set (kspreadodf_LIB_SRCS
     KCRowRepeatStorage.cpp
     KCShapeApplicationData.cpp
     KCSheet.cpp
-    SheetAccessModel.cpp
+    KCSheetAccessModel.cpp
     KCSheetModel.cpp
     KCStyle.cpp
     StyleManager.cpp

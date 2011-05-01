@@ -3284,7 +3284,7 @@ bool KCSheet::setSheetName(const QString& name, bool init)
 
     // FIXME: Why is the change of a sheet's name not supposed to be propagated here?
     // If it is not, we have to manually do so in the loading process, e.g. for the
-    // SheetAccessModel in the document's data center map.
+    // KCSheetAccessModel in the document's data center map.
     //if (init)
     //    return true;
 

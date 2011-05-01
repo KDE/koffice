@@ -96,7 +96,7 @@
 #include "StyleManager.h"
 #include "Util.h"
 #include "View.h"
-#include "SheetAccessModel.h"
+#include "KCSheetAccessModel.h"
 #include "KCBindingModel.h"
 
 // D-Bus
@@ -124,7 +124,7 @@ public:
     bool configLoadFromFile       : 1;
     QStringList spellListIgnoreAll;
     SavedDocParts savedDocParts;
-    SheetAccessModel *sheetAccessModel;
+    KCSheetAccessModel *sheetAccessModel;
     KoResourceManager *resourceManager;
 };
 
