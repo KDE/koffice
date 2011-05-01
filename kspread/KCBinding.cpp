@@ -19,7 +19,7 @@
 */
 
 #include "KCBinding.h"
-#include "BindingModel.h"
+#include "KCBindingModel.h"
 
 #include <QRect>
 
@@ -33,8 +33,8 @@
 class KCBinding::Private : public QSharedData
 {
 public:
-    BindingModel* model;
-    Private(KCBinding *q) : model(new BindingModel(q)) {}
+    KCBindingModel* model;
+    Private(KCBinding *q) : model(new KCBindingModel(q)) {}
     ~Private() { delete model; }
 };
 
@@ -116,7 +116,7 @@ bool KCBinding::operator<(const KCBinding& other) const
     return d < other.d;
 }
 
-QHash<QString, QVector<QRect> > BindingModel::cellRegion() const
+QHash<QString, QVector<QRect> > KCBindingModel::cellRegion() const
 {
     QHash<QString, QVector<QRect> > answer;
     KCRegion::ConstIterator end = m_region.constEnd();
@@ -129,7 +129,7 @@ QHash<QString, QVector<QRect> > BindingModel::cellRegion() const
     return answer;
 }
 
-bool BindingModel::setCellRegion(const QString& regionName)
+bool KCBindingModel::setCellRegion(const QString& regionName)
 {
     Q_ASSERT(m_region.isValid());
     Q_ASSERT(m_region.firstSheet());
@@ -161,27 +161,27 @@ bool BindingModel::setCellRegion(const QString& regionName)
 }
 
 
-/////// BindingModel
+/////// KCBindingModel
 
-BindingModel::BindingModel(KCBinding* binding, QObject *parent)
+KCBindingModel::KCBindingModel(KCBinding* binding, QObject *parent)
         : QAbstractTableModel(parent)
         , m_binding(binding)
 {
 }
 
-bool BindingModel::isCellRegionValid(const QString& regionName) const
+bool KCBindingModel::isCellRegionValid(const QString& regionName) const
 {
     Q_CHECK_PTR(m_region.firstSheet());
     Q_CHECK_PTR(m_region.firstSheet()->map());
     return KCRegion(regionName, m_region.firstSheet()->map()).isValid();
 }
 
-void BindingModel::emitChanged(const KCRegion& region)
+void KCBindingModel::emitChanged(const KCRegion& region)
 {
     emit changed(region);
 }
 
-void BindingModel::emitDataChanged(const QRect& rect)
+void KCBindingModel::emitDataChanged(const QRect& rect)
 {
     const QPoint tl = rect.topLeft();
     const QPoint br = rect.bottomRight();
@@ -189,7 +189,7 @@ void BindingModel::emitDataChanged(const QRect& rect)
     emit dataChanged(index(tl.y(), tl.x()), index(br.y(), br.x()));
 }
 
-QVariant BindingModel::data(const QModelIndex& index, int role) const
+QVariant KCBindingModel::data(const QModelIndex& index, int role) const
 {
     if ((m_region.isEmpty()) || (role != Qt::EditRole && role != Qt::DisplayRole))
         return QVariant();
@@ -230,12 +230,12 @@ QVariant BindingModel::data(const QModelIndex& index, int role) const
     return variant;
 }
 
-const KCRegion& BindingModel::region() const
+const KCRegion& KCBindingModel::region() const
 {
     return m_region;
 }
 
-QVariant BindingModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant KCBindingModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if ((m_region.isEmpty()) || (role != Qt::EditRole && role != Qt::DisplayRole))
         return QVariant();
@@ -247,21 +247,21 @@ QVariant BindingModel::headerData(int section, Qt::Orientation orientation, int 
     return value.asVariant();
 }
 
-int BindingModel::rowCount(const QModelIndex& parent) const
+int KCBindingModel::rowCount(const QModelIndex& parent) const
 {
     Q_UNUSED(parent);
     return m_region.isEmpty() ? 0 : m_region.firstRange().height();
 }
 
-int BindingModel::columnCount(const QModelIndex& parent) const
+int KCBindingModel::columnCount(const QModelIndex& parent) const
 {
     Q_UNUSED(parent);
     return m_region.isEmpty() ? 0 : m_region.firstRange().width();
 }
 
-void BindingModel::setRegion(const KCRegion& region)
+void KCBindingModel::setRegion(const KCRegion& region)
 {
     m_region = region;
 }
 
-#include "BindingModel.moc"
+#include "KCBindingModel.moc"

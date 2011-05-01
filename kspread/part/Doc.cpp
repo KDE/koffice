@@ -97,7 +97,7 @@
 #include "Util.h"
 #include "View.h"
 #include "SheetAccessModel.h"
-#include "BindingModel.h"
+#include "KCBindingModel.h"
 
 // D-Bus
 #include "interfaces/MapAdaptor.h"

@@ -32,12 +32,12 @@ class KCBinding;
 /**
  * A model for a cell range acting as data source.
  */
-class BindingModel : public QAbstractTableModel, public KoChart::ChartModel
+class KCBindingModel : public QAbstractTableModel, public KoChart::ChartModel
 {
     Q_OBJECT
     Q_INTERFACES(KoChart::ChartModel)
 public:
-    explicit BindingModel(KCBinding* binding, QObject *parent = 0);
+    explicit KCBindingModel(KCBinding* binding, QObject *parent = 0);
 
     // QAbstractTableModel interface
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;

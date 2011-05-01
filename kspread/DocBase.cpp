@@ -46,7 +46,7 @@
 #include <KoXmlWriter.h>
 
 #include "kspread_limits.h"
-#include "BindingModel.h"
+#include "KCBindingModel.h"
 #include "CalculationSettings.h"
 #include "KCMap.h"
 #include "SheetAccessModel.h"
@@ -261,7 +261,7 @@ bool DocBase::loadOdf(KoOdfReadStore & odfStore)
         const QRect region (0, 0, KS_colMax - 1, KS_rowMax - 1);
         QModelIndex index = sheetModel->index( 0, map()->indexOf( sheet ) );
           QVariant bindingModelValue = sheetModel->data( index , Qt::DisplayRole );
-          BindingModel *curBindingModel = dynamic_cast< BindingModel* >( qvariant_cast< QPointer< QAbstractItemModel > >( bindingModelValue ).data() );
+          KCBindingModel *curBindingModel = dynamic_cast< KCBindingModel* >( qvariant_cast< QPointer< QAbstractItemModel > >( bindingModelValue ).data() );
           if ( curBindingModel ){
               curBindingModel->emitDataChanged( region );
           }
