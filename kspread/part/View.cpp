@@ -108,7 +108,7 @@
 #include "KCApplicationSettings.h"
 #include "KCBindingManager.h"
 #include "KCCalculationSettings.h"
-#include "CanvasResources.h"
+#include "KCCanvasResources.h"
 #include "CellStorage.h"
 #include "Damages.h"
 #include "DependencyManager.h"

@@ -28,7 +28,7 @@
 #include "KoChartInterface.h"
 
 #include "KCBinding.h"
-#include "CanvasResources.h"
+#include "KCCanvasResources.h"
 #include "CellStorage.h"
 #include "KCRegion.h"
 #include "ui/Selection.h"
