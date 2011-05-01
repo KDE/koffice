@@ -127,7 +127,7 @@ bool StyleCommand::process(Element* element)
                 tmpStyle.setRightBorderPen(QPen(Qt::NoPen));
                 const KCRegion region(QRect(range.left() - 1, range.top(), 1, range.height()));
                 m_sheet->cellStorage()->setStyle(region, tmpStyle);
-                m_sheet->map()->addDamage(new CellDamage(m_sheet, region, CellDamage::Appearance));
+                m_sheet->map()->addDamage(new KCCellDamage(m_sheet, region, KCCellDamage::Appearance));
             }
         }
         if (hasRightPen) {
@@ -141,7 +141,7 @@ bool StyleCommand::process(Element* element)
                 tmpStyle.setLeftBorderPen(QPen(Qt::NoPen));
                 const KCRegion region(QRect(range.right() + 1, range.top(), 1, range.height()));
                 m_sheet->cellStorage()->setStyle(region, tmpStyle);
-                m_sheet->map()->addDamage(new CellDamage(m_sheet, region, CellDamage::Appearance));
+                m_sheet->map()->addDamage(new KCCellDamage(m_sheet, region, KCCellDamage::Appearance));
             }
         }
         if (hasTopPen) {
@@ -155,7 +155,7 @@ bool StyleCommand::process(Element* element)
                 tmpStyle.setBottomBorderPen(QPen(Qt::NoPen));
                 const KCRegion region(QRect(range.left(), range.top() - 1, range.width(), 1));
                 m_sheet->cellStorage()->setStyle(region, tmpStyle);
-                m_sheet->map()->addDamage(new CellDamage(m_sheet, region, CellDamage::Appearance));
+                m_sheet->map()->addDamage(new KCCellDamage(m_sheet, region, KCCellDamage::Appearance));
             }
         }
         if (hasBottomPen) {
@@ -169,7 +169,7 @@ bool StyleCommand::process(Element* element)
                 tmpStyle.setTopBorderPen(QPen(Qt::NoPen));
                 const KCRegion region(QRect(range.left(), range.bottom() + 1, range.width(), 1));
                 m_sheet->cellStorage()->setStyle(region, tmpStyle);
-                m_sheet->map()->addDamage(new CellDamage(m_sheet, region, CellDamage::Appearance));
+                m_sheet->map()->addDamage(new KCCellDamage(m_sheet, region, KCCellDamage::Appearance));
             }
         }
     }

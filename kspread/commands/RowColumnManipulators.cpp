@@ -61,7 +61,7 @@ bool ResizeColumnManipulator::process(Element* element)
     // Just repaint everything visible; no need to invalidate the visual cache.
     m_sheet->map()->addDamage(new SheetDamage(m_sheet, SheetDamage::ContentChanged));
     // TODO: only invalidate the cells that are actually effected by this resize (so everythin in this column, and everything that covers something in this column)
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, KCRegion(1, 1, KS_colMax, KS_rowMax, m_sheet), CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, KCRegion(1, 1, KS_colMax, KS_rowMax, m_sheet), KCCellDamage::Appearance));
     return true;
 }
 
@@ -93,7 +93,7 @@ bool ResizeRowManipulator::process(Element* element)
     // Just repaint everything visible; no need to invalidate the visual cache.
     m_sheet->map()->addDamage(new SheetDamage(m_sheet, SheetDamage::ContentChanged));
     // TODO: only invalidate the cells that are actually effected by this resize (so everythin in this row, and everything that covers something in this row)
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, KCRegion(1, 1, KS_colMax, KS_rowMax, m_sheet), CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, KCRegion(1, 1, KS_colMax, KS_rowMax, m_sheet), KCCellDamage::Appearance));
     return true;
 }
 
@@ -314,7 +314,7 @@ bool AdjustColumnRowManipulator::process(Element* element)
                         m_adjustColumn ? 1 : range.top(),
                         m_adjustRow ? KS_colMax : range.width(),
                         m_adjustColumn ? KS_rowMax : range.height());
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, region, CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, region, KCCellDamage::Appearance));
     return true;
 }
 
@@ -671,7 +671,7 @@ bool InsertDeleteColumnManipulator::postProcessing()
         m_sheet->cellStorage()->stopUndoRecording(this);
     }
     const QRect rect(QPoint(boundingRect().left(), 1), QPoint(KS_colMax, KS_rowMax));
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, KCRegion(rect, m_sheet), CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, KCRegion(rect, m_sheet), KCCellDamage::Appearance));
     return true;
 }
 
@@ -794,6 +794,6 @@ bool InsertDeleteRowManipulator::postProcessing()
         m_sheet->cellStorage()->stopUndoRecording(this);
     }
     const QRect rect(QPoint(1, boundingRect().top()), QPoint(KS_colMax, KS_rowMax));
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, KCRegion(rect, m_sheet), CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, KCRegion(rect, m_sheet), KCCellDamage::Appearance));
     return true;
 }

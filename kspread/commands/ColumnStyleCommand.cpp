@@ -94,7 +94,7 @@ bool ColumnStyleCommand::mainProcessing()
         }
         // Possible visual cache invalidation due to dimension change; rebuild it.
         const KCRegion region(range.left(), 1, KS_colMax - range.right() + 1, KS_rowMax, m_sheet);
-        m_sheet->map()->addDamage(new CellDamage(m_sheet, region, CellDamage::Appearance));
+        m_sheet->map()->addDamage(new KCCellDamage(m_sheet, region, KCCellDamage::Appearance));
     }
     m_sheet->adjustDocumentWidth(deltaWidth);
     m_sheet->print()->updateHorizontalPageParameters(0);

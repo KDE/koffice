@@ -903,7 +903,7 @@ void View::refreshSheetViews()
 
 void View::refreshSelection(const KCRegion& region)
 {
-    doc()->map()->addDamage(new CellDamage(activeSheet(), region, CellDamage::Appearance));
+    doc()->map()->addDamage(new KCCellDamage(activeSheet(), region, KCCellDamage::Appearance));
 }
 
 void View::aboutToModify(const KCRegion& region)
@@ -2052,11 +2052,11 @@ void View::handleDamages(const QList<KCDamage*>& damages)
         if (!damage) continue;
 
         if (damage->type() == KCDamage::DamagedCell) {
-            CellDamage* cellDamage = static_cast<CellDamage*>(damage);
+            KCCellDamage* cellDamage = static_cast<KCCellDamage*>(damage);
             kDebug(36007) << "Processing\t" << *cellDamage;
             KCSheet* const damagedSheet = cellDamage->sheet();
 
-            if (cellDamage->changes() & CellDamage::Appearance) {
+            if (cellDamage->changes() & KCCellDamage::Appearance) {
                 const KCRegion& region = cellDamage->region();
                 sheetView(damagedSheet)->invalidateRegion(region);
                 paintMode = Everything;

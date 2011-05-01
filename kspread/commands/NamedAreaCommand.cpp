@@ -96,8 +96,8 @@ bool NamedAreaCommand::postProcessing()
                 KCCell cell(sheet, storage->col(c), storage->row(c));
                 if (cell.makeFormula()) {
                     // recalculate cells
-                    map->addDamage(new CellDamage(cell, CellDamage::Appearance | CellDamage::KCBinding |
-                                                  CellDamage::KCValue));
+                    map->addDamage(new KCCellDamage(cell, KCCellDamage::Appearance | KCCellDamage::KCBinding |
+                                                  KCCellDamage::KCValue));
                 }
             }
         }

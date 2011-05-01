@@ -98,7 +98,7 @@ void AbstractRegionCommand::redo()
 
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     // FIXME Stefan: Does every derived command damage the visual cache? No!
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, *this, CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, *this, KCCellDamage::Appearance));
 
     successfully = mainProcessing();
     if (!successfully) {

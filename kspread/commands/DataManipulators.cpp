@@ -500,15 +500,15 @@ bool ShiftManipulator::postProcessing()
     if (m_firstrun) {
         m_sheet->cellStorage()->stopUndoRecording(this);
     }
-    CellDamage *damage = 0;
+    KCCellDamage *damage = 0;
     if (m_direction == ShiftBottom) {
         const QPoint bottomRight(lastRange().right(), KS_rowMax);
         const KCRegion region(QRect(lastRange().topLeft(), bottomRight), m_sheet);
-        damage = new CellDamage(m_sheet, region, CellDamage::Appearance);
+        damage = new KCCellDamage(m_sheet, region, KCCellDamage::Appearance);
     } else { // ShiftRight
         const QPoint bottomRight(KS_colMax, lastRange().bottom());
         const KCRegion region(QRect(lastRange().topLeft(), bottomRight), m_sheet);
-        damage = new CellDamage(m_sheet, region, CellDamage::Appearance);
+        damage = new KCCellDamage(m_sheet, region, KCCellDamage::Appearance);
     }
     m_sheet->map()->addDamage(damage);
     return true;

@@ -45,7 +45,7 @@ void LinkCommand::redo()
         cell.parseUserInput(newText);
     cell.setLink(newLink);
 
-    cell.sheet()->map()->addDamage(new CellDamage(cell, CellDamage::Appearance));
+    cell.sheet()->map()->addDamage(new KCCellDamage(cell, KCCellDamage::Appearance));
 }
 
 void LinkCommand::undo()
@@ -55,5 +55,5 @@ void LinkCommand::undo()
     cell.parseUserInput(oldText);
     cell.setLink(oldLink);
 
-    cell.sheet()->map()->addDamage(new CellDamage(cell, CellDamage::Appearance));
+    cell.sheet()->map()->addDamage(new KCCellDamage(cell, KCCellDamage::Appearance));
 }

@@ -863,7 +863,7 @@ void KCMap::addDamage(KCDamage* damage)
 
 #ifndef NDEBUG
     if (damage->type() == KCDamage::DamagedCell) {
-        kDebug(36007) << "Adding\t" << *static_cast<CellDamage*>(damage);
+        kDebug(36007) << "Adding\t" << *static_cast<KCCellDamage*>(damage);
     } else if (damage->type() == KCDamage::DamagedSheet) {
         kDebug(36007) << "Adding\t" << *static_cast<SheetDamage*>(damage);
     } else if (damage->type() == KCDamage::DamagedSelection) {
@@ -902,30 +902,30 @@ void KCMap::handleDamages(const QList<KCDamage*>& damages)
         KCDamage* damage = *it;
 
         if (damage->type() == KCDamage::DamagedCell) {
-            CellDamage* cellDamage = static_cast<CellDamage*>(damage);
+            KCCellDamage* cellDamage = static_cast<KCCellDamage*>(damage);
             kDebug(36007) << "Processing\t" << *cellDamage;
             KCSheet* const damagedSheet = cellDamage->sheet();
             const KCRegion& region = cellDamage->region();
-            const CellDamage::Changes changes = cellDamage->changes();
+            const KCCellDamage::Changes changes = cellDamage->changes();
 
             // TODO Stefan: Detach the style cache from the CellView cache.
-            if ((changes.testFlag(CellDamage::Appearance))) {
+            if ((changes.testFlag(KCCellDamage::Appearance))) {
                 // Rebuild the style storage cache.
                 damagedSheet->cellStorage()->invalidateStyleCache(); // FIXME more fine-grained
             }
-            if ((cellDamage->changes() & CellDamage::KCBinding) &&
+            if ((cellDamage->changes() & KCCellDamage::KCBinding) &&
                     !workbookChanges.testFlag(WorkbookDamage::KCValue)) {
                 bindingChangedRegion.add(region, damagedSheet);
             }
-            if ((cellDamage->changes() & CellDamage::KCFormula) &&
+            if ((cellDamage->changes() & KCCellDamage::KCFormula) &&
                     !workbookChanges.testFlag(WorkbookDamage::KCFormula)) {
                 formulaChangedRegion.add(region, damagedSheet);
             }
-            if ((cellDamage->changes() & CellDamage::NamedArea) &&
+            if ((cellDamage->changes() & KCCellDamage::NamedArea) &&
                     !workbookChanges.testFlag(WorkbookDamage::KCFormula)) {
                 namedAreaChangedRegion.add(region, damagedSheet);
             }
-            if ((cellDamage->changes() & CellDamage::KCValue) &&
+            if ((cellDamage->changes() & KCCellDamage::KCValue) &&
                     !workbookChanges.testFlag(WorkbookDamage::KCValue)) {
                 valueChangedRegion.add(region, damagedSheet);
             }

@@ -1570,7 +1570,7 @@ void CellToolBase::styleDialog()
 
     static_cast<KSelectAction*>(action("setStyle"))->setItems(styleManager->styleNames());
     if (selection()->activeSheet())
-        map->addDamage(new CellDamage(selection()->activeSheet(), KCRegion(1, 1, maxCol(), maxRow()), CellDamage::Appearance));
+        map->addDamage(new KCCellDamage(selection()->activeSheet(), KCRegion(1, 1, maxCol(), maxRow()), KCCellDamage::Appearance));
     canvas()->canvasWidget()->update();
 }
 

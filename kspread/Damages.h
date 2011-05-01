@@ -59,7 +59,7 @@ public:
  * \ingroup Damages
  * A cell range damage.
  */
-class KSPREAD_EXPORT CellDamage : public KCDamage
+class KSPREAD_EXPORT KCCellDamage : public KCDamage
 {
 public:
     enum Change {
@@ -81,10 +81,10 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    CellDamage(const KCCell& cell, Changes changes);
-    CellDamage(KCSheet* sheet, const KCRegion& region, Changes changes);
+    KCCellDamage(const KCCell& cell, Changes changes);
+    KCCellDamage(KCSheet* sheet, const KCRegion& region, Changes changes);
 
-    virtual ~CellDamage();
+    virtual ~KCCellDamage();
 
     virtual Type type() const {
         return KCDamage::DamagedCell;
@@ -96,12 +96,12 @@ public:
     Changes changes() const;
 
 private:
-    Q_DISABLE_COPY(CellDamage)
+    Q_DISABLE_COPY(KCCellDamage)
 
     class Private;
     Private * const d;
 };
-Q_DECLARE_OPERATORS_FOR_FLAGS(CellDamage::Changes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KCCellDamage::Changes)
 
 
 /**
@@ -206,7 +206,7 @@ private:
 ****************************************************************************/
 
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCDamage& d);
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const CellDamage& d);
+KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCCellDamage& d);
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const SheetDamage& d);
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const SelectionDamage& d);
 

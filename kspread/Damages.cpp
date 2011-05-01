@@ -41,7 +41,7 @@ public:
     Changes changes;
 };
 
-class CellDamage::Private
+class KCCellDamage::Private
 {
 public:
     KCSheet* sheet;
@@ -55,7 +55,7 @@ public:
     KCRegion region;
 };
 
-CellDamage::CellDamage(const KCCell& cell, Changes changes)
+KCCellDamage::KCCellDamage(const KCCell& cell, Changes changes)
         : d(new Private)
 {
     d->sheet = cell.sheet();
@@ -64,7 +64,7 @@ CellDamage::CellDamage(const KCCell& cell, Changes changes)
     d->changes = changes;
 }
 
-CellDamage::CellDamage(KCSheet* sheet, const KCRegion& region, Changes changes)
+KCCellDamage::KCCellDamage(KCSheet* sheet, const KCRegion& region, Changes changes)
         : d(new Private)
 {
     d->sheet = sheet;
@@ -72,22 +72,22 @@ CellDamage::CellDamage(KCSheet* sheet, const KCRegion& region, Changes changes)
     d->changes = changes;
 }
 
-CellDamage::~CellDamage()
+KCCellDamage::~KCCellDamage()
 {
     delete d;
 }
 
-KCSheet* CellDamage::sheet() const
+KCSheet* KCCellDamage::sheet() const
 {
     return d->sheet;
 }
 
-const KCRegion& CellDamage::region() const
+const KCRegion& KCCellDamage::region() const
 {
     return d->region;
 }
 
-CellDamage::Changes CellDamage::changes() const
+KCCellDamage::Changes KCCellDamage::changes() const
 {
     return d->changes;
 }
@@ -174,13 +174,13 @@ QDebug operator<<(QDebug str, const KCDamage& d)
     return str;
 }
 
-QDebug operator<<(QDebug str, const CellDamage& d)
+QDebug operator<<(QDebug str, const KCCellDamage& d)
 {
-    str << "CellDamage: " << d.region().name(d.sheet());
-    if (d.changes() & CellDamage::Appearance) str << " Appearance";
-    if (d.changes() & CellDamage::KCBinding)    str << " KCBinding";
-    if (d.changes() & CellDamage::KCFormula)    str << " KCFormula";
-    if (d.changes() & CellDamage::KCValue)      str << " KCValue";
+    str << "KCCellDamage: " << d.region().name(d.sheet());
+    if (d.changes() & KCCellDamage::Appearance) str << " Appearance";
+    if (d.changes() & KCCellDamage::KCBinding)    str << " KCBinding";
+    if (d.changes() & KCCellDamage::KCFormula)    str << " KCFormula";
+    if (d.changes() & KCCellDamage::KCValue)      str << " KCValue";
     return str;
 }
 

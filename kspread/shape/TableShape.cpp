@@ -350,10 +350,10 @@ void TableShape::handleDamages(const QList<KCDamage*>& damages)
         if (!damage) continue;
 
         if (damage->type() == KCDamage::DamagedCell) {
-            CellDamage* cellDamage = static_cast<CellDamage*>(damage);
+            KCCellDamage* cellDamage = static_cast<KCCellDamage*>(damage);
             const KCRegion region = cellDamage->region();
 
-            if (cellDamage->changes() & CellDamage::Appearance)
+            if (cellDamage->changes() & KCCellDamage::Appearance)
                 d->sheetView->invalidateRegion(region);
             continue;
         }

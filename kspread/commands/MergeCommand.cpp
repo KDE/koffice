@@ -214,6 +214,6 @@ bool MergeCommand::postProcessing()
             }
         }
     }
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, *this, CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, *this, KCCellDamage::Appearance));
     return true;
 }

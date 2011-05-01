@@ -3310,7 +3310,7 @@ void KCSheet::updateLocale()
     }
     // Affects the displayed value; rebuild the visual cache.
     const KCRegion region(1, 1, KS_colMax, KS_rowMax, this);
-    map()->addDamage(new CellDamage(this, region, CellDamage::Appearance));
+    map()->addDamage(new KCCellDamage(this, region, KCCellDamage::Appearance));
 }
 
 void KCSheet::convertObscuringBorders()

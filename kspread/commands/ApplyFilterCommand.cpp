@@ -67,7 +67,7 @@ void ApplyFilterCommand::redo()
 
     m_sheet->cellStorage()->setDatabase(*this, Database());
     m_sheet->cellStorage()->setDatabase(*this, database);
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, *this, CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, *this, KCCellDamage::Appearance));
 }
 
 void ApplyFilterCommand::undo()
@@ -92,7 +92,7 @@ void ApplyFilterCommand::undo()
 
     m_sheet->cellStorage()->setDatabase(*this, Database());
     m_sheet->cellStorage()->setDatabase(*this, database);
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, *this, CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, *this, KCCellDamage::Appearance));
 }
 
 void ApplyFilterCommand::setDatabase(const Database& database)

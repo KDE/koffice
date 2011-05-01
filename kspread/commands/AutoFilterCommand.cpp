@@ -45,11 +45,11 @@ void AutoFilterCommand::redo()
     database.setDisplayFilterButtons(true);
     database.setRange(*this);
     m_sheet->cellStorage()->setDatabase(*this, database);
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, *this, CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, *this, KCCellDamage::Appearance));
 }
 
 void AutoFilterCommand::undo()
 {
     m_sheet->cellStorage()->setDatabase(*this, Database());
-    m_sheet->map()->addDamage(new CellDamage(m_sheet, *this, CellDamage::Appearance));
+    m_sheet->map()->addDamage(new KCCellDamage(m_sheet, *this, KCCellDamage::Appearance));
 }
