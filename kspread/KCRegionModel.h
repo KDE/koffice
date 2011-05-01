@@ -28,11 +28,11 @@ class KCRegion;
  * A model for a contiguous cell region.
  * \ingroup Model
  */
-class RegionModel : public KCSheetModel
+class KCRegionModel : public KCSheetModel
 {
 public:
-    RegionModel(const KCRegion& region);
-    virtual ~RegionModel();
+    KCRegionModel(const KCRegion& region);
+    virtual ~KCRegionModel();
 
     /**
      * Existing data gets overwritten.

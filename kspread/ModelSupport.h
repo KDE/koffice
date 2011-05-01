@@ -48,13 +48,13 @@ enum SheetDataRole {
 enum CellDataRole {
     // Qt::UserRole     = 0x00000020 = 32
     NoCellDataRole      = Qt::UserRole, ///< used for iterating over all data, default and non-default
-    // KCCell contents; KCSheetModel, RegionModel
+    // KCCell contents; KCSheetModel, KCRegionModel
     UserInputRole       = 0x00000100,   ///< cell's user input; QString
     FormulaRole         = 0x00000200,   ///< cell's formula; KCFormula
     ValueRole           = 0x00000400,   ///< cell's value; KCValue
     LinkRole            = 0x00000800,   ///< cell's hyperlink; QString
     RichTextRole        = 0x00001000,   ///< cell's rich text; QSharedPointer<QTextDocument>
-    // KCCell range associations; KCSheetModel, RegionModel
+    // KCCell range associations; KCSheetModel, KCRegionModel
     CommentRole         = 0x00002000,   ///< a comment; QString
     ConditionRole       = 0x00004000,   ///< a conditional style; Conditions
     StyleRole           = 0x00008000,   ///< a style; KCStyle

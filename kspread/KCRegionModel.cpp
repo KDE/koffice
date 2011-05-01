@@ -17,13 +17,13 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "RegionModel.h"
+#include "KCRegionModel.h"
 
 // KSpread
 #include "KCRegion.h"
 #include "KCSheet.h"
 
-class RegionModel::Private
+class KCRegionModel::Private
 {
 public:
     KCSheet* sheet;
@@ -32,7 +32,7 @@ public:
 };
 
 
-RegionModel::RegionModel(const KCRegion& region)
+KCRegionModel::KCRegionModel(const KCRegion& region)
         : KCSheetModel(region.lastSheet())
         , d(new Private)
 {
@@ -44,12 +44,12 @@ RegionModel::RegionModel(const KCRegion& region)
     d->overwriteMode = true;
 }
 
-RegionModel::~RegionModel()
+KCRegionModel::~KCRegionModel()
 {
     delete d;
 }
 
-int RegionModel::columnCount(const QModelIndex &parent) const
+int KCRegionModel::columnCount(const QModelIndex &parent) const
 {
     if (parent.isValid() && parent.internalPointer() != d->sheet->map()) {
         return false;
@@ -60,12 +60,12 @@ int RegionModel::columnCount(const QModelIndex &parent) const
     return d->range.width();
 }
 
-QModelIndex RegionModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex KCRegionModel::index(int row, int column, const QModelIndex &parent) const
 {
     return KCSheetModel::index(row + d->range.top() - 1, column + d->range.left() - 1, parent);
 }
 
-int RegionModel::rowCount(const QModelIndex &parent) const
+int KCRegionModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid() && parent.internalPointer() != d->sheet->map()) {
         return false;
