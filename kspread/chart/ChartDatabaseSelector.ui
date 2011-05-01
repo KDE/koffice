@@ -55,7 +55,7 @@
    <item>
     <widget class="QGroupBox" name="m_formatBox" >
      <property name="title" >
-      <string>Data Format</string>
+      <string>Data KCFormat</string>
      </property>
      <layout class="QVBoxLayout" >
       <item>

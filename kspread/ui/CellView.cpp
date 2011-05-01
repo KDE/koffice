@@ -221,7 +221,7 @@ CellView::CellView(SheetView* sheetView, int col, int row)
         d->displayText = cell.userInput();
         value.setFormat(Value::fmt_String);
     } else if (!cell.isEmpty()) {
-        // Format the value appropriately and set the display text.
+        // KCFormat the value appropriately and set the display text.
         // The format of the resulting value is used below to determine the alignment.
         value = sheet->map()->formatter()->formatText(cell.value(), d->style.formatType(),
                 d->style.precision(), d->style.floatFormat(),
@@ -248,7 +248,7 @@ CellView::CellView(SheetView* sheetView, int col, int row)
         if (cell.value().type() == Value::Error)
             d->style.setHAlign(KCStyle::Center);
         // if the format is text, align it according to the text direction
-        else if (d->style.formatType() == Format::Text || value.format() == Value::fmt_String)
+        else if (d->style.formatType() == KCFormat::Text || value.format() == Value::fmt_String)
             d->style.setHAlign(d->displayText.isRightToLeft() ? KCStyle::Right : KCStyle::Left);
         // if the style does not define a specific format, align it according to the sheet layout
         else

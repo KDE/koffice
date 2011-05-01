@@ -32,7 +32,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Format</string>
+      <string>KCFormat</string>
      </property>
      <layout class="QGridLayout">
       <item row="7" column="1" rowspan="3">
@@ -163,7 +163,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
       <item row="0" column="2">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Format:</string>
+         <string>KCFormat:</string>
         </property>
        </widget>
       </item>

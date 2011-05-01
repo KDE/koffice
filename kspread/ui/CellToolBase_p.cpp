@@ -123,9 +123,9 @@ void CellToolBase::Private::updateActions(const KCCell& cell)
     ACTION_EXEC("verticalText", setChecked(style.verticalText()));
     ACTION_EXEC("wrapText", setChecked(style.wrapText()));
 
-    Format::Type ft = style.formatType();
-    ACTION_EXEC("percent", setChecked(ft == Format::Percentage));
-    ACTION_EXEC("currency", setChecked(ft == Format::Money));
+    KCFormat::Type ft = style.formatType();
+    ACTION_EXEC("percent", setChecked(ft == KCFormat::Percentage));
+    ACTION_EXEC("currency", setChecked(ft == KCFormat::Money));
 
     const bool showFormulas = q->selection()->activeSheet()->getShowFormula();
     q->action("alignLeft")->setEnabled(!showFormulas);
@@ -739,35 +739,35 @@ bool CellToolBase::Private::formatKeyPress(QKeyEvent * _ev)
 
     switch (_ev->key()) {
     case Qt::Key_Exclam:
-        command->setText(i18n("Number Format"));
-        command->setFormatType(Format::Number);
+        command->setText(i18n("Number KCFormat"));
+        command->setFormatType(KCFormat::Number);
         command->setPrecision(2);
         break;
 
     case Qt::Key_Dollar:
-        command->setText(i18n("Currency Format"));
-        command->setFormatType(Format::Money);
+        command->setText(i18n("Currency KCFormat"));
+        command->setFormatType(KCFormat::Money);
         command->setPrecision(q->selection()->activeSheet()->map()->calculationSettings()->locale()->fracDigits());
         break;
 
     case Qt::Key_Percent:
-        command->setText(i18n("Percentage Format"));
-        command->setFormatType(Format::Percentage);
+        command->setText(i18n("Percentage KCFormat"));
+        command->setFormatType(KCFormat::Percentage);
         break;
 
     case Qt::Key_At:
-        command->setText(i18n("Time Format"));
-        command->setFormatType(Format::SecondeTime);
+        command->setText(i18n("Time KCFormat"));
+        command->setFormatType(KCFormat::SecondeTime);
         break;
 
     case Qt::Key_NumberSign:
-        command->setText(i18n("Date Format"));
-        command->setFormatType(Format::ShortDate);
+        command->setText(i18n("Date KCFormat"));
+        command->setFormatType(KCFormat::ShortDate);
         break;
 
     case Qt::Key_AsciiCircum:
-        command->setText(i18n("Scientific Format"));
-        command->setFormatType(Format::Scientific);
+        command->setText(i18n("Scientific KCFormat"));
+        command->setFormatType(KCFormat::Scientific);
         break;
 
     case Qt::Key_Ampersand:

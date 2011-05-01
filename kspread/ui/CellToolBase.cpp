@@ -179,8 +179,8 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
 
     // -- cell style actions --
 
-    action = new KAction(KIcon("cell_layout"), i18n("KCCell Format..."), this);
-    action->setIconText(i18n("Format"));
+    action = new KAction(KIcon("cell_layout"), i18n("KCCell KCFormat..."), this);
+    action->setIconText(i18n("KCFormat"));
     addAction("cellStyle", action);
     action->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_F));
     connect(action, SIGNAL(triggered(bool)), this, SLOT(cellStyle()));
@@ -385,13 +385,13 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
 
     // -- value format actions --
 
-    action = new KToggleAction(KIcon("percent"), i18n("Percent Format"), this);
+    action = new KToggleAction(KIcon("percent"), i18n("Percent KCFormat"), this);
     action->setIconText(i18n("Percent"));
     addAction("percent", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(percent(bool)));
     action->setToolTip(i18n("Set the cell formatting to look like a percentage"));
 
-    action = new KToggleAction(KIcon("money"), i18n("Money Format"), this);
+    action = new KToggleAction(KIcon("money"), i18n("Money KCFormat"), this);
     action->setIconText(i18n("Money"));
     addAction("currency", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(currency(bool)));
@@ -818,7 +818,7 @@ CellToolBase::CellToolBase(KoCanvasBase* canvas)
     connect(action, SIGNAL(triggered(bool)), this, SLOT(qTableView()));
 #endif
 
-    action = new KAction(i18n("Auto-Format..."), this);
+    action = new KAction(i18n("Auto-KCFormat..."), this);
     addAction("sheetFormat", action);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(sheetFormat()));
     action->setToolTip(i18n("Set the worksheet formatting"));
@@ -1973,8 +1973,8 @@ void CellToolBase::percent(bool enable)
 {
     StyleCommand* command = new StyleCommand();
     command->setSheet(selection()->activeSheet());
-    command->setText(i18n("Format Percent"));
-    command->setFormatType(enable ? Format::Percentage : Format::Generic);
+    command->setText(i18n("KCFormat Percent"));
+    command->setFormatType(enable ? KCFormat::Percentage : KCFormat::Generic);
     command->add(*selection());
     command->execute(canvas());
 }
@@ -1983,8 +1983,8 @@ void CellToolBase::currency(bool enable)
 {
     StyleCommand* command = new StyleCommand();
     command->setSheet(selection()->activeSheet());
-    command->setText(i18n("Format Money"));
-    command->setFormatType(enable ? Format::Money : Format::Generic);
+    command->setText(i18n("KCFormat Money"));
+    command->setFormatType(enable ? KCFormat::Money : KCFormat::Generic);
     command->setPrecision(enable ?  selection()->activeSheet()->map()->calculationSettings()->locale()->fracDigits() : 0);
     command->add(*selection());
     command->execute(canvas());

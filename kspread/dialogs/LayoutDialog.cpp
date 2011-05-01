@@ -750,7 +750,7 @@ void CellFormatDialog::init()
         formatRedAlwaysSignedPixmap  = paintFormatPixmap("+123.456", Qt::black, "-123.456", Qt::red);
     }
 
-    setCaption(i18n("KCCell Format"));
+    setCaption(i18n("KCCell KCFormat"));
     setButtons(KDialog::Ok | KDialog::Cancel);
     setFaceType(KPageDialog::Tabbed);
     setMinimumWidth(600);
@@ -765,7 +765,7 @@ void CellFormatDialog::init()
     }
 
     floatPage = new CellFormatPageFloat(this, this);
-    addPage(floatPage, i18n("&Data Format"));
+    addPage(floatPage, i18n("&Data KCFormat"));
 
     fontPage = new CellFormatPageFont(this, this);
     addPage(fontPage, i18n("&Font"));
@@ -829,7 +829,7 @@ void CellFormatDialog::slotApply()
     // We need to create a command that would act as macro,
     // but which would also ensure that updates are not painted until everything
     // is updated properly ...
-    QUndoCommand* macroCommand = new QUndoCommand("Change Format");
+    QUndoCommand* macroCommand = new QUndoCommand("Change KCFormat");
 
     if (isMerged != positionPage->getMergedCellState()) {
         MergeCommand* command = new MergeCommand(macroCommand);
@@ -881,7 +881,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
 {
     QVBoxLayout* layout = new QVBoxLayout(this);
 
-    QGroupBox *grp = new QGroupBox(i18n("Format"), this);
+    QGroupBox *grp = new QGroupBox(i18n("KCFormat"), this);
     QGridLayout *grid = new QGridLayout(grp);
     grid->setMargin(KDialog::marginHint());
     grid->setSpacing(KDialog::spacingHint());
@@ -898,11 +898,11 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     grid->addWidget(number, 2, 0);
 
     percent = new QRadioButton(i18n("Percent"), grp);
-    percent->setWhatsThis(i18n("When you have a number in the current cell and you switch from the dcell format from Generic to Percent, the current cell number will be multiplied by 100%.\nFor example if you enter 12 and set the cell format to Percent, the number will then be 1,200 %. Switching back to Generic cell format will bring it back to 12.\nYou can also use the Percent icon in the Format Toolbar."));
+    percent->setWhatsThis(i18n("When you have a number in the current cell and you switch from the dcell format from Generic to Percent, the current cell number will be multiplied by 100%.\nFor example if you enter 12 and set the cell format to Percent, the number will then be 1,200 %. Switching back to Generic cell format will bring it back to 12.\nYou can also use the Percent icon in the KCFormat Toolbar."));
     grid->addWidget(percent, 3, 0);
 
     money = new QRadioButton(i18n("Money"), grp);
-    money->setWhatsThis(i18n("The Money format converts your number into money notation using the settings globally fixed in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Money. The currency symbol will be displayed and the precision will be the one set in System Settings.\nYou can also use the Currency icon in the Format Toolbar to set the cell formatting to look like your current currency."));
+    money->setWhatsThis(i18n("The Money format converts your number into money notation using the settings globally fixed in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Money. The currency symbol will be displayed and the precision will be the one set in System Settings.\nYou can also use the Currency icon in the KCFormat Toolbar to set the cell formatting to look like your current currency."));
     grid->addWidget(money, 4, 0);
 
     scientific = new QRadioButton(i18n("Scientific"), grp);
@@ -918,11 +918,11 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     grid->addWidget(date, 7, 0);
 
     time = new QRadioButton(i18n("Time"), grp);
-    time->setWhatsThis(i18n("This formats your cell content as a time. To enter a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Date & Time. In the KCCell Format dialog box you can set how the time should be displayed by choosing one of the available time format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a time, KSpread will display 00:00 in the global format you have in System Settings."));
+    time->setWhatsThis(i18n("This formats your cell content as a time. To enter a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Date & Time. In the KCCell KCFormat dialog box you can set how the time should be displayed by choosing one of the available time format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a time, KSpread will display 00:00 in the global format you have in System Settings."));
     grid->addWidget(time, 8, 0);
 
     datetime = new QRadioButton(i18n("Date and Time"), grp);
-    datetime->setWhatsThis(i18n("This formats your cell content as date and time. To enter a date and a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Time & Dates. In the KCCell Format dialog box you can set how the time should be displayed by choosing one of the available date format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a date and time, KSpread will display 00:00 in the global format you have in System Settings."));
+    datetime->setWhatsThis(i18n("This formats your cell content as date and time. To enter a date and a time, you should enter it in the Time format set in System Settings -> Common Appearance and Behavior -> Locale -> Country/KCRegion & Language -> Time & Dates. In the KCCell KCFormat dialog box you can set how the time should be displayed by choosing one of the available date format options. The default format is the system format set in System Settings. When the number in the cell does not make sense as a date and time, KSpread will display 00:00 in the global format you have in System Settings."));
     grid->addWidget(datetime, 9, 0);
 
     textFormat = new QRadioButton(i18n("Text"), grp);
@@ -970,7 +970,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     precision->setSpecialValueText(i18n("variable"));
     precision->setRange(-1, 10, 1);
     precision->setSliderEnabled(false);
-    precision->setWhatsThis(i18n("You can control how many digits are displayed after the decimal point for numeric values. This can also be changed using the Increase precision or Decrease precision icons in the Format toolbar. "));
+    precision->setWhatsThis(i18n("You can control how many digits are displayed after the decimal point for numeric values. This can also be changed using the Increase precision or Decrease precision icons in the KCFormat toolbar. "));
     grid->addWidget(precision, 1, 1);
 
     prefix = new KLineEdit(box);
@@ -1007,7 +1007,7 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
 
     tmpQLabel = new QLabel(box);
     grid->addWidget(tmpQLabel, 0, 2);
-    tmpQLabel->setText(i18n("Format:"));
+    tmpQLabel->setText(i18n("KCFormat:"));
 
     currencyLabel = new QLabel(box);
     grid->addWidget(currencyLabel, 1, 2);
@@ -1053,11 +1053,11 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
     if (!cellFormatType)
         generic->setChecked(true);
     else {
-        if (cellFormatType == Format::Number)
+        if (cellFormatType == KCFormat::Number)
             number->setChecked(true);
-        else if (cellFormatType == Format::Percentage)
+        else if (cellFormatType == KCFormat::Percentage)
             percent->setChecked(true);
-        else if (cellFormatType == Format::Money) {
+        else if (cellFormatType == KCFormat::Money) {
             money->setChecked(true);
             currencyLabel->show();
             currency->show();
@@ -1073,17 +1073,17 @@ CellFormatPageFloat::CellFormatPageFloat(QWidget* parent, CellFormatDialog *_dlg
                 }
                 currency->setCurrentIndex(currency->findText(tmp));
             }
-        } else if (cellFormatType == Format::Scientific)
+        } else if (cellFormatType == KCFormat::Scientific)
             scientific->setChecked(true);
-        else if (Format::isDate(cellFormatType))
+        else if (KCFormat::isDate(cellFormatType))
             date->setChecked(true);
-        else if (Format::isTime(cellFormatType))
+        else if (KCFormat::isTime(cellFormatType))
             time->setChecked(true);
-        else if (Format::isFraction(cellFormatType))
+        else if (KCFormat::isFraction(cellFormatType))
             fraction->setChecked(true);
-        else if (cellFormatType == Format::Text)
+        else if (cellFormatType == KCFormat::Text)
             textFormat->setChecked(true);
-        else if (cellFormatType == Format::Custom)
+        else if (cellFormatType == KCFormat::Custom)
             customFormat->setChecked(true);
     }
 
@@ -1168,23 +1168,23 @@ void CellFormatPageFloat::slotChangeState()
         list += i18n("Two digits 15/22");
         list += i18n("Three digits 153/652");
         listFormat->addItems(list);
-        if (cellFormatType == Format::fraction_half)
+        if (cellFormatType == KCFormat::fraction_half)
             listFormat->setCurrentRow(0);
-        else if (cellFormatType == Format::fraction_quarter)
+        else if (cellFormatType == KCFormat::fraction_quarter)
             listFormat->setCurrentRow(1);
-        else if (cellFormatType == Format::fraction_eighth)
+        else if (cellFormatType == KCFormat::fraction_eighth)
             listFormat->setCurrentRow(2);
-        else if (cellFormatType == Format::fraction_sixteenth)
+        else if (cellFormatType == KCFormat::fraction_sixteenth)
             listFormat->setCurrentRow(3);
-        else if (cellFormatType == Format::fraction_tenth)
+        else if (cellFormatType == KCFormat::fraction_tenth)
             listFormat->setCurrentRow(4);
-        else if (cellFormatType == Format::fraction_hundredth)
+        else if (cellFormatType == KCFormat::fraction_hundredth)
             listFormat->setCurrentRow(5);
-        else if (cellFormatType == Format::fraction_one_digit)
+        else if (cellFormatType == KCFormat::fraction_one_digit)
             listFormat->setCurrentRow(6);
-        else if (cellFormatType == Format::fraction_two_digits)
+        else if (cellFormatType == KCFormat::fraction_two_digits)
             listFormat->setCurrentRow(7);
-        else if (cellFormatType == Format::fraction_three_digits)
+        else if (cellFormatType == KCFormat::fraction_three_digits)
             listFormat->setCurrentRow(8);
         else
             listFormat->setCurrentRow(0);
@@ -1202,35 +1202,35 @@ void CellFormatPageFloat::slotChangeState()
 
 
         ValueFormatter *fmt = dlg->getSheet()->map()->formatter();
-        list += fmt->timeFormat(tmpTime, Format::Time1);
-        list += fmt->timeFormat(tmpTime, Format::Time2);
-        list += fmt->timeFormat(tmpTime, Format::Time3);
-        list += fmt->timeFormat(tmpTime, Format::Time4);
-        list += fmt->timeFormat(tmpTime, Format::Time5);
-        list += (fmt->timeFormat(tmpTime, Format::Time6) + i18n(" (=[mm]:ss)"));
-        list += (fmt->timeFormat(tmpTime, Format::Time7) + i18n(" (=[hh]:mm:ss)"));
-        list += (fmt->timeFormat(tmpTime, Format::Time8) + i18n(" (=[hh]:mm)"));
+        list += fmt->timeFormat(tmpTime, KCFormat::Time1);
+        list += fmt->timeFormat(tmpTime, KCFormat::Time2);
+        list += fmt->timeFormat(tmpTime, KCFormat::Time3);
+        list += fmt->timeFormat(tmpTime, KCFormat::Time4);
+        list += fmt->timeFormat(tmpTime, KCFormat::Time5);
+        list += (fmt->timeFormat(tmpTime, KCFormat::Time6) + i18n(" (=[mm]:ss)"));
+        list += (fmt->timeFormat(tmpTime, KCFormat::Time7) + i18n(" (=[hh]:mm:ss)"));
+        list += (fmt->timeFormat(tmpTime, KCFormat::Time8) + i18n(" (=[hh]:mm)"));
         listFormat->addItems(list);
 
-        if (cellFormatType == Format::Time)
+        if (cellFormatType == KCFormat::Time)
             listFormat->setCurrentRow(0);
-        else if (cellFormatType == Format::SecondeTime)
+        else if (cellFormatType == KCFormat::SecondeTime)
             listFormat->setCurrentRow(1);
-        else if (cellFormatType == Format::Time1)
+        else if (cellFormatType == KCFormat::Time1)
             listFormat->setCurrentRow(2);
-        else if (cellFormatType == Format::Time2)
+        else if (cellFormatType == KCFormat::Time2)
             listFormat->setCurrentRow(3);
-        else if (cellFormatType == Format::Time3)
+        else if (cellFormatType == KCFormat::Time3)
             listFormat->setCurrentRow(4);
-        else if (cellFormatType == Format::Time4)
+        else if (cellFormatType == KCFormat::Time4)
             listFormat->setCurrentRow(5);
-        else if (cellFormatType == Format::Time5)
+        else if (cellFormatType == KCFormat::Time5)
             listFormat->setCurrentRow(6);
-        else if (cellFormatType == Format::Time6)
+        else if (cellFormatType == KCFormat::Time6)
             listFormat->setCurrentRow(7);
-        else if (cellFormatType == Format::Time7)
+        else if (cellFormatType == KCFormat::Time7)
             listFormat->setCurrentRow(8);
-        else if (cellFormatType == Format::Time8)
+        else if (cellFormatType == KCFormat::Time8)
             listFormat->setCurrentRow(9);
         else
             listFormat->setCurrentRow(0);
@@ -1263,132 +1263,132 @@ void CellFormatPageFloat::init()
     ValueFormatter *fmt = dlg->getSheet()->map()->formatter();
 
     /*18-Feb-00*/
-    list += fmt->dateFormat(tmpDate, Format::Date1);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date1);
     /*18-Feb-1999*/
-    list += fmt->dateFormat(tmpDate, Format::Date2);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date2);
     /*18-Feb*/
-    list += fmt->dateFormat(tmpDate, Format::Date3);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date3);
     /*18-2*/
-    list += fmt->dateFormat(tmpDate, Format::Date4);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date4);
     /*18/2/00*/
-    list += fmt->dateFormat(tmpDate, Format::Date5);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date5);
     /*18/5/1999*/
-    list += fmt->dateFormat(tmpDate, Format::Date6);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date6);
     /*Feb-99*/
-    list += fmt->dateFormat(tmpDate, Format::Date7);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date7);
     /*February-99*/
-    list += fmt->dateFormat(tmpDate, Format::Date8);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date8);
     /*February-1999*/
-    list += fmt->dateFormat(tmpDate, Format::Date9);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date9);
     /*F-99*/
-    list += fmt->dateFormat(tmpDate, Format::Date10);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date10);
     /*18/Feb*/
-    list += fmt->dateFormat(tmpDate, Format::Date11);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date11);
     /*18/2*/
-    list += fmt->dateFormat(tmpDate, Format::Date12);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date12);
     /*18/Feb/1999*/
-    list += fmt->dateFormat(tmpDate, Format::Date13);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date13);
     /*2000/Feb/18*/
-    list += fmt->dateFormat(tmpDate, Format::Date14);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date14);
     /*2000-Feb-18*/
-    list += fmt->dateFormat(tmpDate, Format::Date15);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date15);
     /*2000-2-18*/
-    list += fmt->dateFormat(tmpDate, Format::Date16);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date16);
     /*2 february 2000*/
-    list += fmt->dateFormat(tmpDate, Format::Date17);
-    list += fmt->dateFormat(tmpDate, Format::Date18);
-    list += fmt->dateFormat(tmpDate, Format::Date19);
-    list += fmt->dateFormat(tmpDate, Format::Date20);
-    list += fmt->dateFormat(tmpDate, Format::Date21);
-    list += fmt->dateFormat(tmpDate, Format::Date22);
-    list += fmt->dateFormat(tmpDate, Format::Date23);
-    list += fmt->dateFormat(tmpDate, Format::Date24);
-    list += fmt->dateFormat(tmpDate, Format::Date25);
-    list += fmt->dateFormat(tmpDate, Format::Date26);
-    list += fmt->dateFormat(tmpDate, Format::Date27);
-    list += fmt->dateFormat(tmpDate, Format::Date28);
-    list += fmt->dateFormat(tmpDate, Format::Date29);
-    list += fmt->dateFormat(tmpDate, Format::Date30);
-    list += fmt->dateFormat(tmpDate, Format::Date31);
-    list += fmt->dateFormat(tmpDate, Format::Date32);
-    list += fmt->dateFormat(tmpDate, Format::Date33);
-    list += fmt->dateFormat(tmpDate, Format::Date34);
-    list += fmt->dateFormat(tmpDate, Format::Date35);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date17);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date18);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date19);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date20);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date21);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date22);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date23);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date24);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date25);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date26);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date27);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date28);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date29);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date30);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date31);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date32);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date33);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date34);
+    list += fmt->dateFormat(tmpDate, KCFormat::Date35);
 
     listFormat->addItems(list);
-    if (cellFormatType == Format::ShortDate)
+    if (cellFormatType == KCFormat::ShortDate)
         listFormat->setCurrentRow(0);
-    else if (cellFormatType == Format::TextDate)
+    else if (cellFormatType == KCFormat::TextDate)
         listFormat->setCurrentRow(1);
-    else if (cellFormatType == Format::Date1)
+    else if (cellFormatType == KCFormat::Date1)
         listFormat->setCurrentRow(2);
-    else if (cellFormatType == Format::Date2)
+    else if (cellFormatType == KCFormat::Date2)
         listFormat->setCurrentRow(3);
-    else if (cellFormatType == Format::Date3)
+    else if (cellFormatType == KCFormat::Date3)
         listFormat->setCurrentRow(4);
-    else if (cellFormatType == Format::Date4)
+    else if (cellFormatType == KCFormat::Date4)
         listFormat->setCurrentRow(5);
-    else if (cellFormatType == Format::Date5)
+    else if (cellFormatType == KCFormat::Date5)
         listFormat->setCurrentRow(6);
-    else if (cellFormatType == Format::Date6)
+    else if (cellFormatType == KCFormat::Date6)
         listFormat->setCurrentRow(7);
-    else if (cellFormatType == Format::Date7)
+    else if (cellFormatType == KCFormat::Date7)
         listFormat->setCurrentRow(8);
-    else if (cellFormatType == Format::Date8)
+    else if (cellFormatType == KCFormat::Date8)
         listFormat->setCurrentRow(9);
-    else if (cellFormatType == Format::Date9)
+    else if (cellFormatType == KCFormat::Date9)
         listFormat->setCurrentRow(10);
-    else if (cellFormatType == Format::Date10)
+    else if (cellFormatType == KCFormat::Date10)
         listFormat->setCurrentRow(11);
-    else if (cellFormatType == Format::Date11)
+    else if (cellFormatType == KCFormat::Date11)
         listFormat->setCurrentRow(12);
-    else if (cellFormatType == Format::Date12)
+    else if (cellFormatType == KCFormat::Date12)
         listFormat->setCurrentRow(13);
-    else if (cellFormatType == Format::Date13)
+    else if (cellFormatType == KCFormat::Date13)
         listFormat->setCurrentRow(14);
-    else if (cellFormatType == Format::Date14)
+    else if (cellFormatType == KCFormat::Date14)
         listFormat->setCurrentRow(15);
-    else if (cellFormatType == Format::Date15)
+    else if (cellFormatType == KCFormat::Date15)
         listFormat->setCurrentRow(16);
-    else if (cellFormatType == Format::Date16)
+    else if (cellFormatType == KCFormat::Date16)
         listFormat->setCurrentRow(17);
-    else if (cellFormatType == Format::Date17)
+    else if (cellFormatType == KCFormat::Date17)
         listFormat->setCurrentRow(18);
-    else if (cellFormatType == Format::Date18)
+    else if (cellFormatType == KCFormat::Date18)
         listFormat->setCurrentRow(19);
-    else if (cellFormatType == Format::Date19)
+    else if (cellFormatType == KCFormat::Date19)
         listFormat->setCurrentRow(20);
-    else if (cellFormatType == Format::Date20)
+    else if (cellFormatType == KCFormat::Date20)
         listFormat->setCurrentRow(21);
-    else if (cellFormatType == Format::Date21)
+    else if (cellFormatType == KCFormat::Date21)
         listFormat->setCurrentRow(22);
-    else if (cellFormatType == Format::Date22)
+    else if (cellFormatType == KCFormat::Date22)
         listFormat->setCurrentRow(23);
-    else if (cellFormatType == Format::Date23)
+    else if (cellFormatType == KCFormat::Date23)
         listFormat->setCurrentRow(24);
-    else if (cellFormatType == Format::Date24)
+    else if (cellFormatType == KCFormat::Date24)
         listFormat->setCurrentRow(25);
-    else if (cellFormatType == Format::Date25)
+    else if (cellFormatType == KCFormat::Date25)
         listFormat->setCurrentRow(26);
-    else if (cellFormatType == Format::Date26)
+    else if (cellFormatType == KCFormat::Date26)
         listFormat->setCurrentRow(27);
-    else if (cellFormatType == Format::Date27)
+    else if (cellFormatType == KCFormat::Date27)
         listFormat->setCurrentRow(28);
-    else if (cellFormatType == Format::Date28)
+    else if (cellFormatType == KCFormat::Date28)
         listFormat->setCurrentRow(29);
-    else if (cellFormatType == Format::Date29)
+    else if (cellFormatType == KCFormat::Date29)
         listFormat->setCurrentRow(30);
-    else if (cellFormatType == Format::Date30)
+    else if (cellFormatType == KCFormat::Date30)
         listFormat->setCurrentRow(31);
-    else if (cellFormatType == Format::Date31)
+    else if (cellFormatType == KCFormat::Date31)
         listFormat->setCurrentRow(32);
-    else if (cellFormatType == Format::Date32)
+    else if (cellFormatType == KCFormat::Date32)
         listFormat->setCurrentRow(33);
-    else if (cellFormatType == Format::Date33)
+    else if (cellFormatType == KCFormat::Date33)
         listFormat->setCurrentRow(34);
-    else if (cellFormatType == Format::Date34)
+    else if (cellFormatType == KCFormat::Date34)
         listFormat->setCurrentRow(35);
-    else if (cellFormatType == Format::Date35)
+    else if (cellFormatType == KCFormat::Date35)
         listFormat->setCurrentRow(36);
     else
         listFormat->setCurrentRow(0);
@@ -1415,87 +1415,87 @@ void CellFormatPageFloat::currencyChanged(const QString &)
 void CellFormatPageFloat::updateFormatType()
 {
     if (generic->isChecked())
-        newFormatType = Format::Generic;
+        newFormatType = KCFormat::Generic;
     else if (number->isChecked())
-        newFormatType = Format::Number;
+        newFormatType = KCFormat::Number;
     else if (percent->isChecked())
-        newFormatType = Format::Percentage;
+        newFormatType = KCFormat::Percentage;
     else if (date->isChecked()) {
-        newFormatType = Format::ShortDate;
+        newFormatType = KCFormat::ShortDate;
         switch (listFormat->currentRow()) {
-        case 0: newFormatType = Format::ShortDate; break;
-        case 1: newFormatType = Format::TextDate; break;
-        case 2: newFormatType = Format::Date1; break; /*18-Feb-99*/
-        case 3: newFormatType = Format::Date2; break; /*18-Feb-1999*/
-        case 4: newFormatType = Format::Date3; break; /*18-Feb*/
-        case 5: newFormatType = Format::Date4; break; /*18-05*/
-        case 6: newFormatType = Format::Date5; break; /*18/05/00*/
-        case 7: newFormatType = Format::Date6; break; /*18/05/1999*/
-        case 8: newFormatType = Format::Date7; break;/*Feb-99*/
-        case 9: newFormatType = Format::Date8; break; /*February-99*/
-        case 10: newFormatType = Format::Date9; break; /*February-1999*/
-        case 11: newFormatType = Format::Date10; break; /*F-99*/
-        case 12: newFormatType = Format::Date11; break; /*18/Feb*/
-        case 13: newFormatType = Format::Date12; break; /*18/02*/
-        case 14: newFormatType = Format::Date13; break; /*18/Feb/1999*/
-        case 15: newFormatType = Format::Date14; break; /*2000/Feb/18*/
-        case 16: newFormatType = Format::Date15; break;/*2000-Feb-18*/
-        case 17: newFormatType = Format::Date16; break;/*2000-02-18*/
-        case 18: newFormatType = Format::Date17; break; /*2000-02-18*/
-        case 19: newFormatType = Format::Date18; break;
-        case 20: newFormatType = Format::Date19; break;
-        case 21: newFormatType = Format::Date20; break;
-        case 22: newFormatType = Format::Date21; break;
-        case 23: newFormatType = Format::Date22; break;
-        case 24: newFormatType = Format::Date23; break;
-        case 25: newFormatType = Format::Date24; break;
-        case 26: newFormatType = Format::Date25; break;
-        case 27: newFormatType = Format::Date26; break;
-        case 28: newFormatType = Format::Date27; break;
-        case 29: newFormatType = Format::Date28; break;
-        case 30: newFormatType = Format::Date29; break;
-        case 31: newFormatType = Format::Date30; break;
-        case 32: newFormatType = Format::Date31; break;
-        case 33: newFormatType = Format::Date32; break;
-        case 34: newFormatType = Format::Date33; break;
-        case 35: newFormatType = Format::Date34; break;
-        case 36: newFormatType = Format::Date35; break;
+        case 0: newFormatType = KCFormat::ShortDate; break;
+        case 1: newFormatType = KCFormat::TextDate; break;
+        case 2: newFormatType = KCFormat::Date1; break; /*18-Feb-99*/
+        case 3: newFormatType = KCFormat::Date2; break; /*18-Feb-1999*/
+        case 4: newFormatType = KCFormat::Date3; break; /*18-Feb*/
+        case 5: newFormatType = KCFormat::Date4; break; /*18-05*/
+        case 6: newFormatType = KCFormat::Date5; break; /*18/05/00*/
+        case 7: newFormatType = KCFormat::Date6; break; /*18/05/1999*/
+        case 8: newFormatType = KCFormat::Date7; break;/*Feb-99*/
+        case 9: newFormatType = KCFormat::Date8; break; /*February-99*/
+        case 10: newFormatType = KCFormat::Date9; break; /*February-1999*/
+        case 11: newFormatType = KCFormat::Date10; break; /*F-99*/
+        case 12: newFormatType = KCFormat::Date11; break; /*18/Feb*/
+        case 13: newFormatType = KCFormat::Date12; break; /*18/02*/
+        case 14: newFormatType = KCFormat::Date13; break; /*18/Feb/1999*/
+        case 15: newFormatType = KCFormat::Date14; break; /*2000/Feb/18*/
+        case 16: newFormatType = KCFormat::Date15; break;/*2000-Feb-18*/
+        case 17: newFormatType = KCFormat::Date16; break;/*2000-02-18*/
+        case 18: newFormatType = KCFormat::Date17; break; /*2000-02-18*/
+        case 19: newFormatType = KCFormat::Date18; break;
+        case 20: newFormatType = KCFormat::Date19; break;
+        case 21: newFormatType = KCFormat::Date20; break;
+        case 22: newFormatType = KCFormat::Date21; break;
+        case 23: newFormatType = KCFormat::Date22; break;
+        case 24: newFormatType = KCFormat::Date23; break;
+        case 25: newFormatType = KCFormat::Date24; break;
+        case 26: newFormatType = KCFormat::Date25; break;
+        case 27: newFormatType = KCFormat::Date26; break;
+        case 28: newFormatType = KCFormat::Date27; break;
+        case 29: newFormatType = KCFormat::Date28; break;
+        case 30: newFormatType = KCFormat::Date29; break;
+        case 31: newFormatType = KCFormat::Date30; break;
+        case 32: newFormatType = KCFormat::Date31; break;
+        case 33: newFormatType = KCFormat::Date32; break;
+        case 34: newFormatType = KCFormat::Date33; break;
+        case 35: newFormatType = KCFormat::Date34; break;
+        case 36: newFormatType = KCFormat::Date35; break;
         }
     } else if (money->isChecked())
-        newFormatType = Format::Money;
+        newFormatType = KCFormat::Money;
     else if (scientific->isChecked())
-        newFormatType = Format::Scientific;
+        newFormatType = KCFormat::Scientific;
     else if (fraction->isChecked()) {
-        newFormatType = Format::fraction_half;
+        newFormatType = KCFormat::fraction_half;
         switch (listFormat->currentRow()) {
-        case 0: newFormatType = Format::fraction_half; break;
-        case 1: newFormatType = Format::fraction_quarter; break;
-        case 2: newFormatType = Format::fraction_eighth; break;
-        case 3: newFormatType = Format::fraction_sixteenth; break;
-        case 4: newFormatType = Format::fraction_tenth; break;
-        case 5: newFormatType = Format::fraction_hundredth; break;
-        case 6: newFormatType = Format::fraction_one_digit; break;
-        case 7: newFormatType = Format::fraction_two_digits; break;
-        case 8: newFormatType = Format::fraction_three_digits; break;
+        case 0: newFormatType = KCFormat::fraction_half; break;
+        case 1: newFormatType = KCFormat::fraction_quarter; break;
+        case 2: newFormatType = KCFormat::fraction_eighth; break;
+        case 3: newFormatType = KCFormat::fraction_sixteenth; break;
+        case 4: newFormatType = KCFormat::fraction_tenth; break;
+        case 5: newFormatType = KCFormat::fraction_hundredth; break;
+        case 6: newFormatType = KCFormat::fraction_one_digit; break;
+        case 7: newFormatType = KCFormat::fraction_two_digits; break;
+        case 8: newFormatType = KCFormat::fraction_three_digits; break;
         }
     } else if (time->isChecked()) {
-        newFormatType = Format::Time;
+        newFormatType = KCFormat::Time;
         switch (listFormat->currentRow()) {
-        case 0: newFormatType = Format::Time; break;
-        case 1: newFormatType = Format::SecondeTime; break;
-        case 2: newFormatType = Format::Time1; break;
-        case 3: newFormatType = Format::Time2; break;
-        case 4: newFormatType = Format::Time3; break;
-        case 5: newFormatType = Format::Time4; break;
-        case 6: newFormatType = Format::Time5; break;
-        case 7: newFormatType = Format::Time6; break;
-        case 8: newFormatType = Format::Time7; break;
-        case 9: newFormatType = Format::Time8; break;
+        case 0: newFormatType = KCFormat::Time; break;
+        case 1: newFormatType = KCFormat::SecondeTime; break;
+        case 2: newFormatType = KCFormat::Time1; break;
+        case 3: newFormatType = KCFormat::Time2; break;
+        case 4: newFormatType = KCFormat::Time3; break;
+        case 5: newFormatType = KCFormat::Time4; break;
+        case 6: newFormatType = KCFormat::Time5; break;
+        case 7: newFormatType = KCFormat::Time6; break;
+        case 8: newFormatType = KCFormat::Time7; break;
+        case 9: newFormatType = KCFormat::Time8; break;
         }
     } else if (textFormat->isChecked())
-        newFormatType = Format::Text;
+        newFormatType = KCFormat::Text;
     else if (customFormat->isChecked())
-        newFormatType = Format::Custom;
+        newFormatType = KCFormat::Custom;
 }
 
 void CellFormatPageFloat::makeformat()
@@ -1536,7 +1536,7 @@ void CellFormatPageFloat::makeformat()
                           floatFormat,
                           prefix->isEnabled() ? prefix->text() : QString(),
                           postfix->isEnabled() ? postfix->text() : QString(),
-                          newFormatType == Format::Money ? dlg->m_currency.symbol() : QString()).asString();
+                          newFormatType == KCFormat::Money ? dlg->m_currency.symbol() : QString()).asString();
     if (tmp.length() > 50)
         tmp = tmp.left(50);
     exampleLabel->setText(tmp.prepend("<font color=" + color.name() + '>').append("</font>"));

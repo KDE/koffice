@@ -29,7 +29,7 @@
 #include <KoXmlReader.h>
 
 #include "Currency.h"
-#include "Format.h"
+#include "KCFormat.h"
 #include "Global.h"
 
 class KoGenStyle;
@@ -212,7 +212,7 @@ public:
     VAlign      valign()      const;
     FloatFormat floatFormat() const;
     FloatColor  floatColor()  const;
-    Format::Type  formatType()  const;
+    KCFormat::Type  formatType()  const;
 
     Currency currency() const;
 
@@ -273,7 +273,7 @@ public:
     void setBackgroundBrush(QBrush const & brush);
     void setFloatFormat(FloatFormat format);
     void setFloatColor(FloatColor color);
-    void setFormatType(Format::Type format);
+    void setFormatType(KCFormat::Type format);
     void setCustomFormat(QString const & strFormat);
     void setPrecision(int precision);
     void setPrefix(QString const & prefix);
@@ -293,36 +293,36 @@ public:
 
     // static functions
     //
-    static Format::Type dateType(const QString&);
-    static Format::Type timeType(const QString&);
-    static Format::Type fractionType(const QString&);
-    static Format::Type numberType(const QString&);
+    static KCFormat::Type dateType(const QString&);
+    static KCFormat::Type timeType(const QString&);
+    static KCFormat::Type fractionType(const QString&);
+    static KCFormat::Type numberType(const QString&);
     static Currency numberCurrency(const QString&);
 
     /**
      * @return the name of the data style (number, currency, percentage, date,
      * boolean, text)
      */
-    static QString saveOdfStyleNumeric(KoGenStyle &style, KoGenStyles &mainStyles, Format::Type _style,
+    static QString saveOdfStyleNumeric(KoGenStyle &style, KoGenStyles &mainStyles, KCFormat::Type _style,
                                        const QString &_prefix, const QString &_postfix, int _precision, const QString& symbol);
-    static QString saveOdfStyleNumericDate(KoGenStyles &mainStyles, Format::Type _style,
+    static QString saveOdfStyleNumericDate(KoGenStyles &mainStyles, KCFormat::Type _style,
                                            const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericFraction(KoGenStyles &mainStyles, Format::Type _style,
+    static QString saveOdfStyleNumericFraction(KoGenStyles &mainStyles, KCFormat::Type _style,
             const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericTime(KoGenStyles& mainStyles, Format::Type _style,
+    static QString saveOdfStyleNumericTime(KoGenStyles& mainStyles, KCFormat::Type _style,
                                            const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericCustom(KoGenStyles&mainStyles, Format::Type _style,
+    static QString saveOdfStyleNumericCustom(KoGenStyles&mainStyles, KCFormat::Type _style,
             const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericScientific(KoGenStyles&mainStyles, Format::Type _style,
+    static QString saveOdfStyleNumericScientific(KoGenStyles&mainStyles, KCFormat::Type _style,
             const QString &_prefix, const QString &_suffix, int _precision);
-    static QString saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, Format::Type _style, int _precision,
+    static QString saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, KCFormat::Type _style, int _precision,
             const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericMoney(KoGenStyles&mainStyles, Format::Type _style,
+    static QString saveOdfStyleNumericMoney(KoGenStyles&mainStyles, KCFormat::Type _style,
                                             const QString& symbol, int _precision,
                                             const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericText(KoGenStyles&mainStyles, Format::Type _style, int _precision,
+    static QString saveOdfStyleNumericText(KoGenStyles&mainStyles, KCFormat::Type _style, int _precision,
                                            const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericNumber(KoGenStyles&mainStyles, Format::Type _style, int _precision,
+    static QString saveOdfStyleNumericNumber(KoGenStyles&mainStyles, KCFormat::Type _style, int _precision,
             const QString &_prefix, const QString &_suffix);
     static QString saveOdfBackgroundStyle(KoGenStyles &mainStyles, const QBrush &brush);
 

@@ -147,7 +147,7 @@ public:
     void setFloatColor(KCStyle::FloatColor floatColor) {
         m_style->setFloatColor(floatColor);
     }
-    void setFormatType(Format::Type formatType) {
+    void setFormatType(KCFormat::Type formatType) {
         m_style->setFormatType(formatType);
     }
     void setCurrency(const Currency& currency) {

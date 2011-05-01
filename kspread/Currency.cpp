@@ -390,7 +390,7 @@ Currency::Currency(int index)
 {
 }
 
-Currency::Currency(QString const & code, Format format)
+Currency::Currency(QString const & code, KCFormat format)
         : m_index(1)   // unspecified first, searched at the end of this ctor
         , m_code(code)
 {
@@ -428,7 +428,7 @@ bool Currency::operator==(Currency const & cur) const
     return true;
 }
 
-QString Currency::code(Format format) const
+QString Currency::code(KCFormat format) const
 {
     if (format == Gnumeric) {
         if (m_code.length() == 1)   // symbol

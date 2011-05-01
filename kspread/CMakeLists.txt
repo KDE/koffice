@@ -204,7 +204,7 @@ set (kspreadodf_LIB_SRCS
     Damages.cpp
     DependencyManager.cpp
     DocBase.cpp
-    Format.cpp
+    KCFormat.cpp
     Formula.cpp
     GenValidationStyle.cpp
     HeaderFooter.cpp

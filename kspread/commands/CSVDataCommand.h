@@ -48,7 +48,7 @@ public:
     void setThousandsSeparator(const QString& separator);
 
 protected:
-    virtual Value newValue(Element* element, int col, int row, bool* parse, Format::Type* fmtType);
+    virtual Value newValue(Element* element, int col, int row, bool* parse, KCFormat::Type* fmtType);
     virtual bool wantChange(Element* element, int col, int row);
     virtual bool preProcessing();
     virtual bool postProcessing();

@@ -72,7 +72,7 @@ protected:
     virtual bool preProcessing();
     virtual bool postProcessing();
     virtual Value newValue(Element *element, int col, int row,
-                           bool *parse, Format::Type *fmtType);
+                           bool *parse, KCFormat::Type *fmtType);
     virtual KCStyle newFormat(Element *element, int col, int row);
 
     /** sort the data, filling the "sorted" structure */

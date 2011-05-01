@@ -30,7 +30,7 @@
 
 AutoFormatCommand::AutoFormatCommand()
 {
-    setText(i18n("Auto-Format"));
+    setText(i18n("Auto-KCFormat"));
 }
 
 AutoFormatCommand::~AutoFormatCommand()

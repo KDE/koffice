@@ -187,7 +187,7 @@ bool RowFormat::load(const KoXmlElement & row, int yshift, Paste::Mode mode)
 
     KoXmlElement f(row.namedItem("format").toElement());
 
-    if (!f.isNull() && (mode == Paste::Normal || mode == Paste::Format || mode == Paste::NoBorder)) {
+    if (!f.isNull() && (mode == Paste::Normal || mode == Paste::KCFormat || mode == Paste::NoBorder)) {
         KCStyle style;
         if (!style.loadXML(f, mode))
             return false;
@@ -437,7 +437,7 @@ bool ColumnFormat::load(const KoXmlElement & col, int xshift, Paste::Mode mode)
 
     KoXmlElement f(col.namedItem("format").toElement());
 
-    if (!f.isNull() && (mode == Paste::Normal || mode == Paste::Format || mode == Paste::NoBorder)) {
+    if (!f.isNull() && (mode == Paste::Normal || mode == Paste::KCFormat || mode == Paste::NoBorder)) {
         KCStyle style;
         if (!style.loadXML(f, mode))
             return false;

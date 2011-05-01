@@ -2179,17 +2179,17 @@ Value ValueCalc::stddevP(QVector<Value> range,
     return sqrt(div(res, cnt));
 }
 
-bool isDate(Value::Format fmt)
+bool isDate(Value::KCFormat fmt)
 {
     if ((fmt == Value::fmt_Date) || (fmt == Value::fmt_DateTime))
         return true;
     return false;
 }
 
-Value::Format ValueCalc::format(Value a, Value b)
+Value::KCFormat ValueCalc::format(Value a, Value b)
 {
-    Value::Format af = a.format();
-    Value::Format bf = b.format();
+    Value::KCFormat af = a.format();
+    Value::KCFormat bf = b.format();
 
     // operation on two dates should produce a number
     if (isDate(af) && isDate(bf))

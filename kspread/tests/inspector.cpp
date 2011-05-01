@@ -95,7 +95,7 @@ void Inspector::Private::handleCell()
     new QTreeWidgetItem(cellView, QStringList() << "Default" << boolAsString(cell.isDefault()));
     new QTreeWidgetItem(cellView, QStringList() << "Empty" << boolAsString(cell.isEmpty()));
     new QTreeWidgetItem(cellView, QStringList() << "Formula" << boolAsString(cell.isFormula()));
-//   new QTreeWidgetItem( cellView, QStringList() << "Format Properties" << longAsHexstring( static_cast<long>( cell.style()->propertiesMask() ) ) );
+//   new QTreeWidgetItem( cellView, QStringList() << "KCFormat Properties" << longAsHexstring( static_cast<long>( cell.style()->propertiesMask() ) ) );
 //   new QTreeWidgetItem( cellView, QStringList() << "KCStyle Properties" << longAsHexstring( static_cast<long>( cell.style()->style()->features() ) ) );
     new QTreeWidgetItem(cellView, QStringList() << "Text" << cell.userInput());
     new QTreeWidgetItem(cellView, QStringList() << "Text (Displayed)" <<

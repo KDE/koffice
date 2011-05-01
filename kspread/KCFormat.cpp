@@ -18,20 +18,20 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "Format.h"
+#include "KCFormat.h"
 
-bool Format::isDate(Type fmt)
+bool KCFormat::isDate(Type fmt)
 {
-    return ((fmt == Format::ShortDate) || (fmt == Format::TextDate) ||
-            ((fmt >= Format::DatesBegin) && (fmt <= DatesEnd)));
+    return ((fmt == KCFormat::ShortDate) || (fmt == KCFormat::TextDate) ||
+            ((fmt >= KCFormat::DatesBegin) && (fmt <= DatesEnd)));
 }
 
-bool Format::isTime(Type fmt)
+bool KCFormat::isTime(Type fmt)
 {
     return ((fmt >= TimesBegin) && (fmt <= TimesEnd));
 }
 
-bool Format::isFraction(Type fmt)
+bool KCFormat::isFraction(Type fmt)
 {
     return ((fmt >= FractionsBegin) && (fmt <= FractionsEnd));
 }

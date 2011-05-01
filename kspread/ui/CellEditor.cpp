@@ -493,7 +493,7 @@ void CellEditor::slotTextChanged()
     // deleted while editing the percent char also stays. Disabling for now.
 #if 0 // KSPREAD_WIP_EDITOR_OVERHAUL
     const KCCell cell(d->selection->activeSheet(), d->selection->marker());
-    if ((cell.style().formatType()) == Format::Percentage) {
+    if ((cell.style().formatType()) == KCFormat::Percentage) {
         if ((text.length() == 1) && text[0].isDigit()) {
             setPlainText(text + " %");
             setCursorPosition(1);

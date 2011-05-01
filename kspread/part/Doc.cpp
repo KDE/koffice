@@ -317,7 +317,7 @@ bool Doc::loadXML(const KoXmlDocument& doc, KoStore*)
         int ret = KMessageBox::warningContinueCancel(
                       0, i18n("This document was created with a newer version of KSpread (syntax version: %1)\n"
                               "When you open it with this version of KSpread, some information may be lost.", map()->syntaxVersion()),
-                      i18n("File Format Mismatch"), KStandardGuiItem::cont());
+                      i18n("File KCFormat Mismatch"), KStandardGuiItem::cont());
         if (ret == KMessageBox::Cancel) {
             setErrorMessage("USER_CANCELED");
             return false;

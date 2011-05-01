@@ -33,7 +33,7 @@ class Selection;
 
 /**
  * \ingroup UI
- * Dialog for the "Auto-Format..." action.
+ * Dialog for the "Auto-KCFormat..." action.
  */
 class AutoFormatDialog : public KDialog
 {

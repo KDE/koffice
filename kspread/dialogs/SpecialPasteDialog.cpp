@@ -60,7 +60,7 @@ void SpecialPasteDialog::slotOk()
     else if( textButton->isChecked() )
     sp = cb->isChecked() ? TextAndTranspose : Text;
     else if( formatButton->isChecked() )
-    sp = cb->isChecked() ? FormatAndTranspose : Format;
+    sp = cb->isChecked() ? FormatAndTranspose : KCFormat;
     else if( noBorderButton->isChecked() )
     sp = cb->isChecked() ? NoBorderAndTranspose : NoBorder; */
 
@@ -69,7 +69,7 @@ void SpecialPasteDialog::slotOk()
     else if (textButton->isChecked())
         sp = Paste::Text;
     else if (formatButton->isChecked())
-        sp = Paste::Format;
+        sp = Paste::KCFormat;
     else if (noBorderButton->isChecked())
         sp = Paste::NoBorder;
     else if (commentButton->isChecked())

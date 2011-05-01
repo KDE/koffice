@@ -89,7 +89,7 @@ namespace Paste
 enum Mode {
     Normal /** Everything */,
     Text /** Text only */,
-    Format /** Format only */,
+    KCFormat /** KCFormat only */,
     NoBorder /** not the borders */,
     Comment /** Comment only */,
     Result /** Result only, no formula */,

@@ -737,7 +737,7 @@ int KCCell::effectiveAlignX() const
     int align = style.halign();
     if (align == KCStyle::HAlignUndefined) {
         //numbers should be right-aligned by default, as well as BiDi text
-        if ((style.formatType() == Format::Text) || value().isString())
+        if ((style.formatType() == KCFormat::Text) || value().isString())
             align = (displayText().isRightToLeft()) ? KCStyle::Right : KCStyle::Left;
         else {
             Value val = value();
@@ -806,7 +806,7 @@ void KCCell::parseUserInput(const QString& text)
     setFormula(Formula());
 
     Value value;
-    if (style().formatType() == Format::Text)
+    if (style().formatType() == KCFormat::Text)
         value = Value(QString(text));
     else {
         // Parses the text and return the appropriate value.
@@ -815,7 +815,7 @@ void KCCell::parseUserInput(const QString& text)
 #if 0
         // Parsing as time acts like an autoformat: we even change the input text
         // [h]:mm:ss -> might get set by ValueParser
-        if (isTime() && (formatType() != Format::Time7))
+        if (isTime() && (formatType() != KCFormat::Time7))
             setUserInput(locale()->formatTime(value().asDateTime(sheet()->map()->calculationSettings()).time(), true));
 #endif
 
@@ -857,20 +857,20 @@ void KCCell::setLink(const QString& link)
 
 bool KCCell::isDate() const
 {
-    const Format::Type t = style().formatType();
-    return (Format::isDate(t) || ((t == Format::Generic) && (value().format() == Value::fmt_Date)));
+    const KCFormat::Type t = style().formatType();
+    return (KCFormat::isDate(t) || ((t == KCFormat::Generic) && (value().format() == Value::fmt_Date)));
 }
 
 bool KCCell::isTime() const
 {
-    const Format::Type t = style().formatType();
-    return (Format::isTime(t) || ((t == Format::Generic) && (value().format() == Value::fmt_Time)));
+    const KCFormat::Type t = style().formatType();
+    return (KCFormat::isTime(t) || ((t == KCFormat::Generic) && (value().format() == Value::fmt_Time)));
 }
 
 bool KCCell::isText() const
 {
-    const Format::Type t = style().formatType();
-    return t == Format::Text;
+    const KCFormat::Type t = style().formatType();
+    return t == KCFormat::Text;
 }
 
 // Return true if this cell is part of a merged cell, but not the
@@ -1402,7 +1402,7 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
                 setValue(value);
 #if 0
                 KCStyle style;
-                style.setFormatType(Format::Number);
+                style.setFormatType(KCFormat::Number);
                 setStyle(style);
 #endif
             }
@@ -1438,10 +1438,10 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
                 setValue(value);
                 if (!isFormula && userInput().isEmpty())
                     setUserInput(sheet()->map()->converter()->asString(value).asString());
-// FIXME Stefan: Should be handled by Value::Format. Verify and remove!
+// FIXME Stefan: Should be handled by Value::KCFormat. Verify and remove!
 #if 0
                 KCStyle style;
-                style.setFormatType(Format::Percentage);
+                style.setFormatType(KCFormat::Percentage);
                 setStyle(style);
 #endif
             }
@@ -1487,11 +1487,11 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
                     setValue(Value(QDateTime(QDate(year, month, day), QTime(hours, minutes, seconds)), sheet()->map()->calculationSettings()));
                 else
                     setValue(Value(QDate(year, month, day), sheet()->map()->calculationSettings()));
-// FIXME Stefan: Should be handled by Value::Format. Verify and remove!
-//Sebsauer: Fixed now. Value::Format handles it correct.
+// FIXME Stefan: Should be handled by Value::KCFormat. Verify and remove!
+//Sebsauer: Fixed now. Value::KCFormat handles it correct.
 #if 0
                 KCStyle s;
-                s.setFormatType(Format::ShortDate);
+                s.setFormatType(KCFormat::ShortDate);
                 setStyle(s);
 #endif
                 // kDebug(36003) << "cell:" << name() << "Type: date, value:" << value << "Date:" << year << " -" << month << " -" << day;
@@ -1526,10 +1526,10 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
                 // Value kval( timeToNum( hours, minutes, seconds ) );
                 // cell.setValue( kval );
                 setValue(Value(QTime(hours % 24, minutes, seconds), sheet()->map()->calculationSettings()));
-// FIXME Stefan: Should be handled by Value::Format. Verify and remove!
+// FIXME Stefan: Should be handled by Value::KCFormat. Verify and remove!
 #if 0
                 KCStyle style;
-                style.setFormatType(Format::Time);
+                style.setFormatType(KCFormat::Time);
                 setStyle(style);
 #endif
                 // kDebug(36003) << "cell:" << name() << "Type: time:" << value << "Hours:" << hours << "," << minutes << "," << seconds;
@@ -1542,10 +1542,10 @@ bool KCCell::loadOdf(const KoXmlElement& element, OdfLoadingContext& tableContex
                 // use the paragraph(s) read in before
                 setValue(Value(userInput()));
             }
-// FIXME Stefan: Should be handled by Value::Format. Verify and remove!
+// FIXME Stefan: Should be handled by Value::KCFormat. Verify and remove!
 #if 0
             KCStyle style;
-            style.setFormatType(Format::Text);
+            style.setFormatType(KCFormat::Text);
             setStyle(style);
 #endif
         } else {
@@ -1831,7 +1831,7 @@ bool KCCell::load(const KoXmlElement & cell, int _xshift, int _yshift,
     //
     KoXmlElement formatElement = cell.namedItem("format").toElement();
     if (!formatElement.isNull() &&
-            ((mode == Paste::Normal) || (mode == Paste::Format) || (mode == Paste::NoBorder))) {
+            ((mode == Paste::Normal) || (mode == Paste::KCFormat) || (mode == Paste::NoBorder))) {
         int mergedXCells = 0;
         int mergedYCells = 0;
         if (formatElement.hasAttribute("colspan")) {
@@ -2098,7 +2098,7 @@ bool KCCell::loadCellData(const KoXmlElement & text, Paste::Operation op, const 
                 */
                 int precision = t.length() - t.indexOf('.') - 1;
 
-                if (style().formatType() == Format::Percentage) {
+                if (style().formatType() == KCFormat::Percentage) {
                     if (value().isInteger())
                         t = locale->formatNumber(value().asInteger() * 100);
                     else

@@ -162,7 +162,7 @@ Fifth Floor, Boston, MA 02110-1301, USA.</comment>
    <item row="2" column="1">
     <widget class="QGroupBox" name="indentGroup">
      <property name="whatsThis">
-      <string>Set the amount of indent that will be used in the cell when you choose the Format -&gt; Increase Indent or Format -&gt; Decrease Indent menus.</string>
+      <string>Set the amount of indent that will be used in the cell when you choose the KCFormat -&gt; Increase Indent or KCFormat -&gt; Decrease Indent menus.</string>
      </property>
      <property name="title">
       <string>Indent</string>
@@ -192,7 +192,7 @@ When a merged cell is selected and when you uncheck this, then all cells come ba
    <item row="3" column="0" colspan="2">
     <widget class="QGroupBox" name="sizeCellGroup">
      <property name="whatsThis">
-      <string>The unit used here is the one set in Format -&gt; Page Layout.. dialog.</string>
+      <string>The unit used here is the one set in KCFormat -&gt; Page Layout.. dialog.</string>
      </property>
      <property name="title">
       <string>Size of KCCell</string>

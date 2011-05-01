@@ -263,7 +263,7 @@ Value ValueConverter::asString(const Value &value) const
 
     Value val;
     QString s;
-    Value::Format fmt;
+    Value::KCFormat fmt;
     int pos;
     switch (value.type()) {
     case Value::Empty:

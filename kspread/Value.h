@@ -66,7 +66,7 @@ public:
         Error
     };
 
-    enum Format {
+    enum KCFormat {
         fmt_None,
         fmt_Boolean,
         fmt_Number,
@@ -193,12 +193,12 @@ public:
     /**
      * Returns the format of the value, i.e. how should it be interpreted.
      */
-    Format format() const;
+    KCFormat format() const;
 
     /**
      * Sets format information for this value.
      */
-    void setFormat(Format fmt);
+    void setFormat(KCFormat fmt);
 
     /**
      * Returns true if empty.
@@ -521,6 +521,6 @@ KSPREAD_EXPORT QTextStream& operator<<(QTextStream& ts, Value value);
 ****************************************************************************/
 
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const Value& v);
-QDebug operator<<(QDebug stream, const Value::Format& f);
+QDebug operator<<(QDebug stream, const Value::KCFormat& f);
 
 #endif // KSPREAD_VALUE_H

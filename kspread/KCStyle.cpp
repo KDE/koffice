@@ -103,7 +103,7 @@ QString SubStyle::name(KCStyle::Key key)
     case KCStyle::Prefix:                 name = "Prefix"; break;
     case KCStyle::Postfix:                name = "Postfix"; break;
     case KCStyle::Precision:              name = "Precision"; break;
-    case KCStyle::FormatTypeKey:          name = "Format type"; break;
+    case KCStyle::FormatTypeKey:          name = "KCFormat type"; break;
     case KCStyle::FloatFormatKey:         name = "Float format"; break;
     case KCStyle::FloatColorKey:          name = "Float color"; break;
     case KCStyle::CurrencyFormat:         name = "Currency"; break;
@@ -269,14 +269,14 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &s
         // determine data formatting
         switch (dataStyle.type) {
         case KoOdfNumberStyles::Number:
-            theStyle->setFormatType(Format::Number);
+            theStyle->setFormatType(KCFormat::Number);
             if (!dataStyle.currencySymbol.isEmpty())
                 theStyle->setCurrency(numberCurrency(dataStyle.currencySymbol));
             else
                 theStyle->setCurrency(numberCurrency(dataStyle.formatStr));
             break;
         case KoOdfNumberStyles::Scientific:
-            theStyle->setFormatType(Format::Scientific);
+            theStyle->setFormatType(KCFormat::Scientific);
             break;
         case KoOdfNumberStyles::Currency:
             kDebug(36003) << " currency-symbol:" << dataStyle.currencySymbol;
@@ -286,7 +286,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &s
                 theStyle->setCurrency(numberCurrency(dataStyle.formatStr));
             break;
         case KoOdfNumberStyles::Percentage:
-            theStyle->setFormatType(Format::Percentage);
+            theStyle->setFormatType(KCFormat::Percentage);
             break;
         case KoOdfNumberStyles::Fraction:
             // determine format of fractions, dates and times by using the
@@ -313,10 +313,10 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &s
             }
             break;
         case KoOdfNumberStyles::Boolean:
-            theStyle->setFormatType(Format::Number);
+            theStyle->setFormatType(KCFormat::Number);
             break;
         case KoOdfNumberStyles::Text:
-            theStyle->setFormatType(Format::Text);
+            theStyle->setFormatType(KCFormat::Text);
             break;
         }
 
@@ -574,7 +574,7 @@ static QString convertDateFormat(const QString& date)
     return result;
 }
 
-Format::Type KCStyle::dateType(const QString &_f)
+KCFormat::Type KCStyle::dateType(const QString &_f)
 {
     const QString dateFormatShort = convertDateFormat(KGlobal::locale()->dateFormatShort());
     const QString dateFormat = convertDateFormat(KGlobal::locale()->dateFormat());
@@ -582,105 +582,105 @@ Format::Type KCStyle::dateType(const QString &_f)
     _format.replace(' ', '-');
 
     if (_format == "d-MMM-yy" || _format == "dd-MMM-yy")
-        return Format::Date1;
+        return KCFormat::Date1;
     else if (_format == "dd-MMM-yyyy")
-        return Format::Date2;
+        return KCFormat::Date2;
     else if (_format == "d-MM")
-        return Format::Date3;
+        return KCFormat::Date3;
     else if (_format == "dd-MM")   //TODO ???????
-        return Format::Date4;
+        return KCFormat::Date4;
     else if (_format == "dd/MM/yy")
-        return Format::Date5;
+        return KCFormat::Date5;
     else if (_format == "dd/MM/yyyy")
-        return Format::Date6;
+        return KCFormat::Date6;
     else if (_format == "MMM-yy")
-        return Format::Date7;
+        return KCFormat::Date7;
     else if (_format == "MMMM-yy")
-        return Format::Date8;
+        return KCFormat::Date8;
     else if (_format == "MMMM-yyyy")
-        return Format::Date9;
+        return KCFormat::Date9;
     else if (_format == "MMMMM-yy" || _format == "X-yy")
-        return Format::Date10;
+        return KCFormat::Date10;
     else if (_format == "dd/MMM")
-        return Format::Date11;
+        return KCFormat::Date11;
     else if (_format == "dd/MM")
-        return Format::Date12;
+        return KCFormat::Date12;
     else if (_format == "dd/MMM/yyyy")
-        return Format::Date13;
+        return KCFormat::Date13;
     else if (_format == "yyyy/MMM/dd")
-        return Format::Date14;
+        return KCFormat::Date14;
     else if (_format == "yyyy-MMM-dd")
-        return Format::Date15;
+        return KCFormat::Date15;
     else if (_format == "yyyy-MM-dd")
-        return Format::Date16;
+        return KCFormat::Date16;
     else if (_format == "d MMMM yyyy")
-        return Format::Date17;
+        return KCFormat::Date17;
     else if (_format == "MM/dd/yyyy")
-        return Format::Date18;
+        return KCFormat::Date18;
     else if (_format == "MM/dd/yy")
-        return Format::Date19;
+        return KCFormat::Date19;
     else if (_format == "MMM/dd/yy")
-        return Format::Date20;
+        return KCFormat::Date20;
     else if (_format == "MMM/dd/yyyy")
-        return Format::Date21;
+        return KCFormat::Date21;
     else if (_format == "MMM-yyyy")
-        return Format::Date22;
+        return KCFormat::Date22;
     else if (_format == "yyyy")
-        return Format::Date23;
+        return KCFormat::Date23;
     else if (_format == "yy")
-        return Format::Date24;
+        return KCFormat::Date24;
     else if (_format == "yyyy/MM/dd")
-        return Format::Date25;
+        return KCFormat::Date25;
     else if (_format == "yyyy/MMM/dd")
-        return Format::Date26;
+        return KCFormat::Date26;
     else if (_format == "MMM/yy")
-        return Format::Date27;
+        return KCFormat::Date27;
     else if (_format == "MMM/yyyy")
-        return Format::Date28;
+        return KCFormat::Date28;
     else if (_format == "MMMM/yy")
-        return Format::Date29;
+        return KCFormat::Date29;
     else if (_format == "MMMM/yyyy")
-        return Format::Date30;
+        return KCFormat::Date30;
     else if (_format == "dd-MM")
-        return Format::Date31;
+        return KCFormat::Date31;
     else if (_format == "MM/yy")
-        return Format::Date32;
+        return KCFormat::Date32;
     else if (_format == "MM-yy")
-        return Format::Date33;
+        return KCFormat::Date33;
     else if (QRegExp("^[d]+[\\s]*[d]{1,2}[\\s]+[M]{1,4}[\\s]+[y]{2,2}$").indexIn(_f) >= 0)
-        return Format::Date34;
+        return KCFormat::Date34;
     else if (QRegExp("^[d]+[\\s]*[d]{1,2}[\\s]+[M]{1,}[\\s]+[y]{2,4}$").indexIn(_f) >= 0)
-        return Format::Date35;
+        return KCFormat::Date35;
     else if (_format == dateFormatShort)
-        return Format::ShortDate;
+        return KCFormat::ShortDate;
     else if (_format == dateFormat)
-        return Format::TextDate;
+        return KCFormat::TextDate;
     else {
         kDebug() << "Unhandled date format=" << _format;
-        return Format::ShortDate;
+        return KCFormat::ShortDate;
     }
 }
 
-Format::Type KCStyle::timeType(const QString &_format)
+KCFormat::Type KCStyle::timeType(const QString &_format)
 {
     if (_format == "h:mm AP")
-        return Format::Time1;
+        return KCFormat::Time1;
     else if (_format == "h:mm:ss AP")
-        return Format::Time2;
+        return KCFormat::Time2;
     else if (_format == "hh \\h mm \\m\\i\\n ss \\s")
-        return Format::Time3;
+        return KCFormat::Time3;
     else if (_format == "hh:mm")
-        return Format::Time4;
+        return KCFormat::Time4;
     else if (_format == "hh:mm:ss")
-        return Format::Time5;
+        return KCFormat::Time5;
     else if (_format == "m:ss")
-        return Format::Time6;
+        return KCFormat::Time6;
     else if (_format == "h:mm:ss")
-        return Format::Time7;
+        return KCFormat::Time7;
     else if (_format == "h:mm")
-        return Format::Time8;
+        return KCFormat::Time8;
     else
-        return Format::Time;
+        return KCFormat::Time;
 }
 
 Currency KCStyle::numberCurrency(const QString &_format)
@@ -700,32 +700,32 @@ Currency KCStyle::numberCurrency(const QString &_format)
     return Currency(QString());
 }
 
-Format::Type KCStyle::fractionType(const QString &_format)
+KCFormat::Type KCStyle::fractionType(const QString &_format)
 {
     if (_format.endsWith("/2"))
-        return Format::fraction_half;
+        return KCFormat::fraction_half;
     else if (_format.endsWith("/4"))
-        return Format::fraction_quarter;
+        return KCFormat::fraction_quarter;
     else if (_format.endsWith("/8"))
-        return Format::fraction_eighth;
+        return KCFormat::fraction_eighth;
     else if (_format.endsWith("/16"))
-        return Format::fraction_sixteenth;
+        return KCFormat::fraction_sixteenth;
     else if (_format.endsWith("/10"))
-        return Format::fraction_tenth;
+        return KCFormat::fraction_tenth;
     else if (_format.endsWith("/100"))
-        return Format::fraction_hundredth;
+        return KCFormat::fraction_hundredth;
     else if (_format.endsWith("/?"))
-        return Format::fraction_one_digit;
+        return KCFormat::fraction_one_digit;
     else if (_format.endsWith("/??"))
-        return Format::fraction_two_digits;
+        return KCFormat::fraction_two_digits;
     else if (_format.endsWith("/???"))
-        return Format::fraction_three_digits;
+        return KCFormat::fraction_three_digits;
     else
-        return Format::fraction_three_digits;
+        return KCFormat::fraction_three_digits;
 }
 
 QString KCStyle::saveOdfStyleNumeric(KoGenStyle &style, KoGenStyles &mainStyles,
-                                   Format::Type _style,
+                                   KCFormat::Type _style,
                                    const QString &_prefix, const QString &_postfix,
                                    int _precision, const QString& symbol)
 {
@@ -733,105 +733,105 @@ QString KCStyle::saveOdfStyleNumeric(KoGenStyle &style, KoGenStyles &mainStyles,
     QString styleName;
     QString valueType;
     switch (_style) {
-    case Format::Number:
+    case KCFormat::Number:
         styleName = saveOdfStyleNumericNumber(mainStyles, _style, _precision, _prefix, _postfix);
         valueType = "float";
         break;
-    case Format::Text:
+    case KCFormat::Text:
         styleName = saveOdfStyleNumericText(mainStyles, _style, _precision, _prefix, _postfix);
         valueType = "string";
         break;
-    case Format::Money:
+    case KCFormat::Money:
         styleName = saveOdfStyleNumericMoney(mainStyles, _style, symbol, _precision, _prefix, _postfix);
         valueType = "currency";
         break;
-    case Format::Percentage:
+    case KCFormat::Percentage:
         styleName = saveOdfStyleNumericPercentage(mainStyles, _style, _precision, _prefix, _postfix);
         valueType = "percentage";
         break;
-    case Format::Scientific:
+    case KCFormat::Scientific:
         styleName = saveOdfStyleNumericScientific(mainStyles, _style, _prefix, _postfix, _precision);
         valueType = "float";
         break;
-    case Format::ShortDate:
-    case Format::TextDate:
+    case KCFormat::ShortDate:
+    case KCFormat::TextDate:
         styleName = saveOdfStyleNumericDate(mainStyles, _style, _prefix, _postfix);
         valueType = "date";
         break;
-    case Format::Time:
-    case Format::SecondeTime:
-    case Format::Time1:
-    case Format::Time2:
-    case Format::Time3:
-    case Format::Time4:
-    case Format::Time5:
-    case Format::Time6:
-    case Format::Time7:
-    case Format::Time8:
+    case KCFormat::Time:
+    case KCFormat::SecondeTime:
+    case KCFormat::Time1:
+    case KCFormat::Time2:
+    case KCFormat::Time3:
+    case KCFormat::Time4:
+    case KCFormat::Time5:
+    case KCFormat::Time6:
+    case KCFormat::Time7:
+    case KCFormat::Time8:
         styleName = saveOdfStyleNumericTime(mainStyles, _style, _prefix, _postfix);
         valueType = "time";
         break;
-    case Format::fraction_half:
-    case Format::fraction_quarter:
-    case Format::fraction_eighth:
-    case Format::fraction_sixteenth:
-    case Format::fraction_tenth:
-    case Format::fraction_hundredth:
-    case Format::fraction_one_digit:
-    case Format::fraction_two_digits:
-    case Format::fraction_three_digits:
+    case KCFormat::fraction_half:
+    case KCFormat::fraction_quarter:
+    case KCFormat::fraction_eighth:
+    case KCFormat::fraction_sixteenth:
+    case KCFormat::fraction_tenth:
+    case KCFormat::fraction_hundredth:
+    case KCFormat::fraction_one_digit:
+    case KCFormat::fraction_two_digits:
+    case KCFormat::fraction_three_digits:
         styleName = saveOdfStyleNumericFraction(mainStyles, _style, _prefix, _postfix);
         valueType = "float";
         break;
-    case Format::Date1:
-    case Format::Date2:
-    case Format::Date3:
-    case Format::Date4:
-    case Format::Date5:
-    case Format::Date6:
-    case Format::Date7:
-    case Format::Date8:
-    case Format::Date9:
-    case Format::Date10:
-    case Format::Date11:
-    case Format::Date12:
-    case Format::Date13:
-    case Format::Date14:
-    case Format::Date15:
-    case Format::Date16:
-    case Format::Date17:
-    case Format::Date18:
-    case Format::Date19:
-    case Format::Date20:
-    case Format::Date21:
-    case Format::Date22:
-    case Format::Date23:
-    case Format::Date24:
-    case Format::Date25:
-    case Format::Date26:
-    case Format::Date27:
-    case Format::Date28:
-    case Format::Date29:
-    case Format::Date30:
-    case Format::Date31:
-    case Format::Date32:
-    case Format::Date33:
-    case Format::Date34:
-    case Format::Date35:
+    case KCFormat::Date1:
+    case KCFormat::Date2:
+    case KCFormat::Date3:
+    case KCFormat::Date4:
+    case KCFormat::Date5:
+    case KCFormat::Date6:
+    case KCFormat::Date7:
+    case KCFormat::Date8:
+    case KCFormat::Date9:
+    case KCFormat::Date10:
+    case KCFormat::Date11:
+    case KCFormat::Date12:
+    case KCFormat::Date13:
+    case KCFormat::Date14:
+    case KCFormat::Date15:
+    case KCFormat::Date16:
+    case KCFormat::Date17:
+    case KCFormat::Date18:
+    case KCFormat::Date19:
+    case KCFormat::Date20:
+    case KCFormat::Date21:
+    case KCFormat::Date22:
+    case KCFormat::Date23:
+    case KCFormat::Date24:
+    case KCFormat::Date25:
+    case KCFormat::Date26:
+    case KCFormat::Date27:
+    case KCFormat::Date28:
+    case KCFormat::Date29:
+    case KCFormat::Date30:
+    case KCFormat::Date31:
+    case KCFormat::Date32:
+    case KCFormat::Date33:
+    case KCFormat::Date34:
+    case KCFormat::Date35:
         styleName = saveOdfStyleNumericDate(mainStyles, _style, _prefix, _postfix);
         valueType = "date";
         break;
-    case Format::Custom:
+    case KCFormat::Custom:
         styleName = saveOdfStyleNumericCustom(mainStyles, _style, _prefix, _postfix);
         break;
-    case Format::Generic:
-    case Format::None:
+    case KCFormat::Generic:
+    case KCFormat::None:
         if (_precision > -1 || !_prefix.isEmpty() || !_postfix.isEmpty()) {
             styleName = saveOdfStyleNumericNumber(mainStyles, _style, _precision, _prefix, _postfix);
             valueType = "float";
         }
         break;
-    case Format::DateTime:
+    case KCFormat::DateTime:
     default:
         ;
     }
@@ -841,7 +841,7 @@ QString KCStyle::saveOdfStyleNumeric(KoGenStyle &style, KoGenStyles &mainStyles,
     return styleName;
 }
 
-QString KCStyle::saveOdfStyleNumericNumber(KoGenStyles& mainStyles, Format::Type /*_style*/, int _precision,
+QString KCStyle::saveOdfStyleNumericNumber(KoGenStyles& mainStyles, KCFormat::Type /*_style*/, int _precision,
         const QString& _prefix, const QString& _postfix)
 {
     QString format;
@@ -857,13 +857,13 @@ QString KCStyle::saveOdfStyleNumericNumber(KoGenStyles& mainStyles, Format::Type
     return KoOdfNumberStyles::saveOdfNumberStyle(mainStyles, format, _prefix, _postfix);
 }
 
-QString KCStyle::saveOdfStyleNumericText(KoGenStyles& /*mainStyles*/, Format::Type /*_style*/, int /*_precision*/,
+QString KCStyle::saveOdfStyleNumericText(KoGenStyles& /*mainStyles*/, KCFormat::Type /*_style*/, int /*_precision*/,
                                        const QString& /*_prefix*/, const QString& /*_postfix*/)
 {
     return "";
 }
 
-QString KCStyle::saveOdfStyleNumericMoney(KoGenStyles& mainStyles, Format::Type /*_style*/,
+QString KCStyle::saveOdfStyleNumericMoney(KoGenStyles& mainStyles, KCFormat::Type /*_style*/,
                                         const QString& symbol, int _precision,
                                         const QString& _prefix, const QString& _postfix)
 {
@@ -880,7 +880,7 @@ QString KCStyle::saveOdfStyleNumericMoney(KoGenStyles& mainStyles, Format::Type 
     return KoOdfNumberStyles::saveOdfCurrencyStyle(mainStyles, format, symbol, _prefix, _postfix);
 }
 
-QString KCStyle::saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, Format::Type /*_style*/, int _precision,
+QString KCStyle::saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, KCFormat::Type /*_style*/, int _precision,
         const QString& _prefix, const QString& _postfix)
 {
     //<number:percentage-style style:name="N106" style:family="data-style">
@@ -902,7 +902,7 @@ QString KCStyle::saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, Format::T
 }
 
 
-QString KCStyle::saveOdfStyleNumericScientific(KoGenStyles&mainStyles, Format::Type /*_style*/,
+QString KCStyle::saveOdfStyleNumericScientific(KoGenStyles&mainStyles, KCFormat::Type /*_style*/,
         const QString &_prefix, const QString &_suffix, int _precision)
 {
     //<number:number-style style:name="N60" style:family="data-style">
@@ -921,124 +921,124 @@ QString KCStyle::saveOdfStyleNumericScientific(KoGenStyles&mainStyles, Format::T
     return KoOdfNumberStyles::saveOdfScientificStyle(mainStyles, format, _prefix, _suffix);
 }
 
-QString KCStyle::saveOdfStyleNumericDate(KoGenStyles&mainStyles, Format::Type _style,
+QString KCStyle::saveOdfStyleNumericDate(KoGenStyles&mainStyles, KCFormat::Type _style,
                                        const QString& _prefix, const QString& _postfix)
 {
     QString format;
     bool locale = false;
     switch (_style) {
         //TODO fixme use locale of kspread and not kglobal
-    case Format::ShortDate:
+    case KCFormat::ShortDate:
         format = KGlobal::locale()->dateFormatShort();
         locale = true;
         break;
-    case Format::TextDate:
+    case KCFormat::TextDate:
         format = KGlobal::locale()->dateFormat();
         locale = true;
         break;
-    case Format::Date1:
+    case KCFormat::Date1:
         format = "dd-MMM-yy";
         break;
-    case Format::Date2:
+    case KCFormat::Date2:
         format = "dd-MMM-yyyy";
         break;
-    case Format::Date3:
+    case KCFormat::Date3:
         format = "dd-M";
         break;
-    case Format::Date4:
+    case KCFormat::Date4:
         format = "dd-MM";
         break;
-    case Format::Date5:
+    case KCFormat::Date5:
         format = "dd/MM/yy";
         break;
-    case Format::Date6:
+    case KCFormat::Date6:
         format = "dd/MM/yyyy";
         break;
-    case Format::Date7:
+    case KCFormat::Date7:
         format = "MMM-yy";
         break;
-    case Format::Date8:
+    case KCFormat::Date8:
         format = "MMMM-yy";
         break;
-    case Format::Date9:
+    case KCFormat::Date9:
         format = "MMMM-yyyy";
         break;
-    case Format::Date10:
+    case KCFormat::Date10:
         format = "MMMMM-yy";
         break;
-    case Format::Date11:
+    case KCFormat::Date11:
         format = "dd/MMM";
         break;
-    case Format::Date12:
+    case KCFormat::Date12:
         format = "dd/MM";
         break;
-    case Format::Date13:
+    case KCFormat::Date13:
         format = "dd/MMM/yyyy";
         break;
-    case Format::Date14:
+    case KCFormat::Date14:
         format = "yyyy/MMM/dd";
         break;
-    case Format::Date15:
+    case KCFormat::Date15:
         format = "yyyy-MMM-dd";
         break;
-    case Format::Date16:
+    case KCFormat::Date16:
         format = "yyyy/MM/dd";
         break;
-    case Format::Date17:
+    case KCFormat::Date17:
         format = "d MMMM yyyy";
         break;
-    case Format::Date18:
+    case KCFormat::Date18:
         format = "MM/dd/yyyy";
         break;
-    case Format::Date19:
+    case KCFormat::Date19:
         format = "MM/dd/yy";
         break;
-    case Format::Date20:
+    case KCFormat::Date20:
         format = "MMM/dd/yy";
         break;
-    case Format::Date21:
+    case KCFormat::Date21:
         format = "MMM/dd/yyyy";
         break;
-    case Format::Date22:
+    case KCFormat::Date22:
         format = "MMM-yyyy";
         break;
-    case Format::Date23:
+    case KCFormat::Date23:
         format = "yyyy";
         break;
-    case Format::Date24:
+    case KCFormat::Date24:
         format = "yy";
         break;
-    case Format::Date25:
+    case KCFormat::Date25:
         format = "yyyy/MM/dd";
         break;
-    case Format::Date26:
+    case KCFormat::Date26:
         format = "yyyy/MMM/dd";
         break;
-    case Format::Date27:
+    case KCFormat::Date27:
         format = "MMM/yy";
         break;
-    case Format::Date28:
+    case KCFormat::Date28:
         format = "MMM/yyyy";
         break;
-    case Format::Date29:
+    case KCFormat::Date29:
         format = "MMMM/yy";
         break;
-    case Format::Date30:
+    case KCFormat::Date30:
         format = "MMMM/yyyy";
         break;
-    case Format::Date31:
+    case KCFormat::Date31:
         format = "dd-MM";
         break;
-    case Format::Date32:
+    case KCFormat::Date32:
         format = "MM/yy";
         break;
-    case Format::Date33:
+    case KCFormat::Date33:
         format = "MM-yy";
         break;
-    case Format::Date34:
+    case KCFormat::Date34:
         format = "ddd d MMM yyyy";
         break;
-    case Format::Date35:
+    case KCFormat::Date35:
         format = "dddd d MMM yyyy";
         break;
     default:
@@ -1048,7 +1048,7 @@ QString KCStyle::saveOdfStyleNumericDate(KoGenStyles&mainStyles, Format::Type _s
     return KoOdfNumberStyles::saveOdfDateStyle(mainStyles, format, locale, _prefix, _postfix);
 }
 
-QString KCStyle::saveOdfStyleNumericCustom(KoGenStyles& /*mainStyles*/, Format::Type /*_style*/,
+QString KCStyle::saveOdfStyleNumericCustom(KoGenStyles& /*mainStyles*/, KCFormat::Type /*_style*/,
         const QString& /*_prefix*/, const QString& /*_postfix*/)
 {
     //TODO
@@ -1068,7 +1068,7 @@ QString KCStyle::saveOdfStyleNumericCustom(KoGenStyles& /*mainStyles*/, Format::
     return "";
 }
 
-QString KCStyle::saveOdfStyleNumericTime(KoGenStyles& mainStyles, Format::Type _style,
+QString KCStyle::saveOdfStyleNumericTime(KoGenStyles& mainStyles, KCFormat::Type _style,
                                        const QString& _prefix, const QString& _postfix)
 {
     //<number:time-style style:name="N42" style:family="data-style">
@@ -1083,34 +1083,34 @@ QString KCStyle::saveOdfStyleNumericTime(KoGenStyles& mainStyles, Format::Type _
     bool locale = false;
     //TODO use format
     switch (_style) {
-    case Format::Time: //TODO FIXME
+    case KCFormat::Time: //TODO FIXME
         format = "hh:mm:ss";
         break;
-    case Format::SecondeTime: //TODO FIXME
+    case KCFormat::SecondeTime: //TODO FIXME
         format = "hh:mm";
         break;
-    case Format::Time1:
+    case KCFormat::Time1:
         format = "h:mm AP";
         break;
-    case Format::Time2:
+    case KCFormat::Time2:
         format = "h:mm:ss AP";
         break;
-    case Format::Time3: // 9 h 01 min 28 s
+    case KCFormat::Time3: // 9 h 01 min 28 s
         format = "hh \\h mm \\m\\i\\n ss \\s";
         break;
-    case Format::Time4:
+    case KCFormat::Time4:
         format = "hh:mm";
         break;
-    case Format::Time5:
+    case KCFormat::Time5:
         format = "hh:mm:ss";
         break;
-    case Format::Time6:
+    case KCFormat::Time6:
         format = "m:ss";
         break;
-    case Format::Time7:
+    case KCFormat::Time7:
         format = "h:mm:ss";
         break;
-    case Format::Time8:
+    case KCFormat::Time8:
         format = "h:mm";
         break;
     default:
@@ -1121,7 +1121,7 @@ QString KCStyle::saveOdfStyleNumericTime(KoGenStyles& mainStyles, Format::Type _
 }
 
 
-QString KCStyle::saveOdfStyleNumericFraction(KoGenStyles &mainStyles, Format::Type formatType,
+QString KCStyle::saveOdfStyleNumericFraction(KoGenStyles &mainStyles, KCFormat::Type formatType,
         const QString &_prefix, const QString &_suffix)
 {
     //<number:number-style style:name="N71" style:family="data-style">
@@ -1129,31 +1129,31 @@ QString KCStyle::saveOdfStyleNumericFraction(KoGenStyles &mainStyles, Format::Ty
     //</number:number-style>
     QString format;
     switch (formatType) {
-    case Format::fraction_half:
+    case KCFormat::fraction_half:
         format = "# ?/2";
         break;
-    case Format::fraction_quarter:
+    case KCFormat::fraction_quarter:
         format = "# ?/4";
         break;
-    case Format::fraction_eighth:
+    case KCFormat::fraction_eighth:
         format = "# ?/8";
         break;
-    case Format::fraction_sixteenth:
+    case KCFormat::fraction_sixteenth:
         format = "# ?/16";
         break;
-    case Format::fraction_tenth:
+    case KCFormat::fraction_tenth:
         format = "# ?/10";
         break;
-    case Format::fraction_hundredth:
+    case KCFormat::fraction_hundredth:
         format = "# ?/100";
         break;
-    case Format::fraction_one_digit:
+    case KCFormat::fraction_one_digit:
         format = "# ?/?";
         break;
-    case Format::fraction_two_digits:
+    case KCFormat::fraction_two_digits:
         format = "# \?\?/\?\?";
         break;
-    case Format::fraction_three_digits:
+    case KCFormat::fraction_three_digits:
         format = "# \?\?\?/\?\?\?";
         break;
     default:
@@ -1296,7 +1296,7 @@ void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
     if (keysToStore.contains(CustomFormat) && !customFormat().isEmpty())
         format.setAttribute("custom", customFormat());
 
-    if (keysToStore.contains(Format::Type) && formatType() == Money) {
+    if (keysToStore.contains(KCFormat::Type) && formatType() == Money) {
         format.setAttribute("type", (int) currency().type);
         format.setAttribute("symbol", currency().symbol);
     }
@@ -1424,7 +1424,7 @@ void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
         _precision = precision();
 
     QString currencyCode;
-    if (keysToStore.contains(FormatTypeKey) && formatType() == Format::Money) {
+    if (keysToStore.contains(FormatTypeKey) && formatType() == KCFormat::Money) {
         currencyCode = currency().code();
     }
 
@@ -1506,7 +1506,7 @@ void KCStyle::saveXML(QDomDocument& doc, QDomElement& format, const StyleManager
     if (keysToStore.contains(CustomFormat) && !customFormat().isEmpty())
         format.setAttribute("custom", customFormat());
 
-    if (keysToStore.contains(FormatTypeKey) && formatType() == Format::Money) {
+    if (keysToStore.contains(FormatTypeKey) && formatType() == KCFormat::Money) {
         format.setAttribute("type", (int) currency().index());
         format.setAttribute("symbol", currency().symbol());
     }
@@ -1684,12 +1684,12 @@ bool KCStyle::loadXML(KoXmlElement& format, Paste::Mode mode)
         int fo = format.attribute("format").toInt(&ok);
         if (! ok)
             return false;
-        setFormatType(static_cast<Format::Type>(fo));
+        setFormatType(static_cast<KCFormat::Type>(fo));
     }
     if (format.hasAttribute("custom")) {
         setCustomFormat(format.attribute("custom"));
     }
-    if (formatType() == Format::Money) {
+    if (formatType() == KCFormat::Money) {
         ok = true;
         Currency currency;
         if (format.hasAttribute("type")) {
@@ -1992,11 +1992,11 @@ KCStyle::FloatColor KCStyle::floatColor() const
     return static_cast<const SubStyleOne<FloatColorKey, FloatColor>*>(d->subStyles[FloatColorKey].data())->value1;
 }
 
-Format::Type KCStyle::formatType() const
+KCFormat::Type KCStyle::formatType() const
 {
     if (!d->subStyles.contains(FormatTypeKey))
-        return SubStyleOne<FormatTypeKey, Format::Type>().value1;
-    return static_cast<const SubStyleOne<FormatTypeKey, Format::Type>*>(d->subStyles[FormatTypeKey].data())->value1;
+        return SubStyleOne<FormatTypeKey, KCFormat::Type>().value1;
+    return static_cast<const SubStyleOne<FormatTypeKey, KCFormat::Type>*>(d->subStyles[FormatTypeKey].data())->value1;
 }
 
 Currency KCStyle::currency() const
@@ -2248,7 +2248,7 @@ void KCStyle::setFloatColor(FloatColor color)
     insertSubStyle(FloatColorKey, color);
 }
 
-void KCStyle::setFormatType(Format::Type format)
+void KCStyle::setFormatType(KCFormat::Type format)
 {
     insertSubStyle(FormatTypeKey, format);
 }
@@ -2384,7 +2384,7 @@ bool KCStyle::compare(const SubStyle* one, const SubStyle* two)
     case Precision:
         return static_cast<const SubStyleOne<Precision, int>*>(one)->value1 == static_cast<const SubStyleOne<Precision, int>*>(two)->value1;
     case FormatTypeKey:
-        return static_cast<const SubStyleOne<FormatTypeKey, Format::Type>*>(one)->value1 == static_cast<const SubStyleOne<FormatTypeKey, Format::Type>*>(two)->value1;
+        return static_cast<const SubStyleOne<FormatTypeKey, KCFormat::Type>*>(one)->value1 == static_cast<const SubStyleOne<FormatTypeKey, KCFormat::Type>*>(two)->value1;
     case FloatFormatKey:
         return static_cast<const SubStyleOne<FloatFormatKey, FloatFormat>*>(one)->value1 == static_cast<const SubStyleOne<FloatFormatKey, FloatFormat>*>(two)->value1;
     case FloatColorKey:
@@ -2580,7 +2580,7 @@ SharedSubStyle KCStyle::createSubStyle(Key key, const QVariant& value)
         newSubStyle = new SubStyleOne<Precision, int>(value.value<int>());
         break;
     case FormatTypeKey:
-        newSubStyle = new SubStyleOne<FormatTypeKey, Format::Type>((Format::Type)value.value<int>());
+        newSubStyle = new SubStyleOne<FormatTypeKey, KCFormat::Type>((KCFormat::Type)value.value<int>());
         break;
     case FloatFormatKey:
         newSubStyle = new SubStyleOne<FloatFormatKey, FloatFormat>((FloatFormat)value.value<int>());

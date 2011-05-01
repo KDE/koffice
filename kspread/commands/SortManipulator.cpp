@@ -107,7 +107,7 @@ void SortManipulator::clearCriteria()
 }
 
 Value SortManipulator::newValue(Element *element, int col, int row,
-                                bool *parse, Format::Type *)
+                                bool *parse, KCFormat::Type *)
 {
     Q_UNUSED(parse);
     QRect range = element->rect();

@@ -34,7 +34,7 @@
 class KSPREAD_EXPORT Currency
 {
 public:
-    enum Format { Native, Gnumeric, OpenCalc, ApplixSpread, GobeProductiveSpread, HancomSheet };
+    enum KCFormat { Native, Gnumeric, OpenCalc, ApplixSpread, GobeProductiveSpread, HancomSheet };
 
     /**
      * Constructor.
@@ -53,7 +53,7 @@ public:
      * \p code e.g. EUR, USD,..
      * \param format in Gnumeric the code is: [$EUR]
      */
-    explicit Currency(QString const & code, Format format = Native);
+    explicit Currency(QString const & code, KCFormat format = Native);
 
     /**
      * Destructor.
@@ -66,7 +66,7 @@ public:
         return !operator==(other);
     }
 
-    QString code(Format format = Native) const;
+    QString code(KCFormat format = Native) const;
     QString country() const;
     QString name() const;
     QString symbol() const;

@@ -67,7 +67,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
       <item>
        <widget class="QRadioButton" name="formatButton" >
         <property name="text" >
-         <string>Format</string>
+         <string>KCFormat</string>
         </property>
        </widget>
       </item>

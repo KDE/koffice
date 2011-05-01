@@ -56,7 +56,7 @@ void CSVDataCommand::setThousandsSeparator(const QString& separator)
     m_thousandsSeparator = separator;
 }
 
-Value CSVDataCommand::newValue(Element* element, int col, int row, bool* parse, Format::Type* fmtType)
+Value CSVDataCommand::newValue(Element* element, int col, int row, bool* parse, KCFormat::Type* fmtType)
 {
     Q_UNUSED(fmtType)
     const int colidx = col - element->rect().left();

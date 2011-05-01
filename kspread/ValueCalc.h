@@ -315,7 +315,7 @@ public:
     bool matches(const Condition &cond, Value d);
 
     /** return formatting for the result, based on formattings of input values */
-    Value::Format format(Value a, Value b);
+    Value::KCFormat format(Value a, Value b);
 
 protected:
     ValueConverter* converter;

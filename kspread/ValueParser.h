@@ -24,7 +24,7 @@
 
 #include <QDateTime>
 
-#include "Format.h"
+#include "KCFormat.h"
 #include "Number.h"
 
 #include "kspread_export.h"

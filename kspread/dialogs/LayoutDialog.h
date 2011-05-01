@@ -266,7 +266,7 @@ protected:
     KLineEdit* customFormatEdit;
     QLabel *exampleLabel;
     CellFormatDialog *dlg;
-    Format::Type cellFormatType, newFormatType;
+    KCFormat::Type cellFormatType, newFormatType;
     //test if value changed
     bool m_bFormatTypeChanged;
     bool m_bFormatColorChanged;
@@ -669,7 +669,7 @@ public:
     int textRotation;
     bool bTextRotation;
 
-    Format::Type formatType;
+    KCFormat::Type formatType;
     bool bFormatType;
 
     Value value;

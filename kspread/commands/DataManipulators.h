@@ -44,7 +44,7 @@ protected:
     If the function sets *parse to true, the value will be treated as an
     user-entered string and parsed by KCCell. */
     virtual Value newValue(Element *element, int col, int row,
-                           bool *parse, Format::Type *fmtType) = 0;
+                           bool *parse, KCFormat::Type *fmtType) = 0;
 
     /** do we want to change this cell ? */
     virtual bool wantChange(Element *element, int col, int row) {
@@ -119,16 +119,16 @@ public:
     }
     /** If set, all cells shall be switched to this format. If parsing is
     true, the resulting value may end up being different. */
-    void setFormat(Format::Type fmtType) {
+    void setFormat(KCFormat::Type fmtType) {
         m_format = fmtType;
     }
 protected:
     virtual bool preProcessing();
     virtual bool process(Element* element);
-    virtual Value newValue(Element *element, int col, int row, bool *, Format::Type *);
+    virtual Value newValue(Element *element, int col, int row, bool *, KCFormat::Type *);
 
     Value m_data;
-    Format::Type m_format;
+    KCFormat::Type m_format;
     bool m_parsing : 1;
     bool m_expandMatrix : 1;
 };
@@ -152,7 +152,7 @@ public:
                      double step, Series mode, Series type);
 protected:
     virtual Value newValue(Element *element, int col, int row, bool *,
-                           Format::Type *);
+                           KCFormat::Type *);
 
     Series m_type;
     Value m_start, m_step, m_prev;
@@ -177,7 +177,7 @@ public:
     }
 protected:
     virtual Value newValue(Element *element, int col, int row,
-                           bool *parse, Format::Type *fmtType);
+                           bool *parse, KCFormat::Type *fmtType);
     virtual KCStyle newFormat(Element *element, int col, int row);
     Direction m_dir;
 };
@@ -205,7 +205,7 @@ public:
     void changeFirstUpper();
 protected:
     virtual Value newValue(Element *element, int col, int row,
-                           bool *parse, Format::Type *fmtType);
+                           bool *parse, KCFormat::Type *fmtType);
 
     /** do we want to change this cell ? */
     virtual bool wantChange(Element *element, int col, int row);

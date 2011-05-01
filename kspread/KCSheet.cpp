@@ -2700,7 +2700,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
             // search for
             //   next non-empty row
             // or
-            //   next row with different Format
+            //   next row with different KCFormat
             while (j <= maxRows && !d->cellStorage->firstInRow(j) && !tableContext.rowHasCellAnchoredShapes(this, j)) {
                 const RowFormat* nextRow = rowFormat(j);
 //               kDebug(36003) <<"KCSheet::saveOdfColRowCell: second row loop:"

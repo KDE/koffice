@@ -54,7 +54,7 @@ bool AbstractDataManipulator::process(Element* element)
 //       int colidx = col - range.left();
 //       int rowidx = row - range.top();
             bool parse = false;
-            Format::Type fmtType = Format::None;
+            KCFormat::Type fmtType = KCFormat::None;
 
             // do nothing if we don't want a change here
             if (!wantChange(element, col, row))
@@ -67,7 +67,7 @@ bool AbstractDataManipulator::process(Element* element)
 
             // we have the data - set it !
             if (parse) {
-                if (fmtType != Format::None) {
+                if (fmtType != KCFormat::None) {
                     KCStyle style;
                     style.setFormatType(fmtType);
                     cell.setStyle(style);
@@ -77,7 +77,7 @@ bool AbstractDataManipulator::process(Element* element)
                 if (!val.isEmpty()) {
                     cell.setValue(val);
                     cell.setUserInput(m_sheet->map()->converter()->asString(val).asString());
-                    if (fmtType != Format::None) {
+                    if (fmtType != KCFormat::None) {
                         KCStyle style;
                         style.setFormatType(fmtType);
                         cell.setStyle(style);
@@ -151,7 +151,7 @@ bool AbstractDFManipulator::process(Element* element)
 
 DataManipulator::DataManipulator(QUndoCommand* parent)
         : AbstractDataManipulator(parent)
-        , m_format(Format::None)
+        , m_format(KCFormat::None)
         , m_parsing(false)
         , m_expandMatrix(false)
 {
@@ -200,10 +200,10 @@ bool DataManipulator::process(Element* element)
 }
 
 Value DataManipulator::newValue(Element *element, int col, int row,
-                                bool *parsing, Format::Type *formatType)
+                                bool *parsing, KCFormat::Type *formatType)
 {
     *parsing = m_parsing;
-    if (m_format != Format::None)
+    if (m_format != KCFormat::None)
         *formatType = m_format;
     QRect range = element->rect();
     int colidx = col - range.left();
@@ -259,7 +259,7 @@ void SeriesManipulator::setupSeries(const QPoint &_marker, double start,
 }
 
 Value SeriesManipulator::newValue(Element *element, int col, int row,
-                                  bool *parse, Format::Type *)
+                                  bool *parse, KCFormat::Type *)
 {
     *parse = false;
     ValueCalc *calc = m_sheet->map()->calc();
@@ -308,7 +308,7 @@ FillManipulator::~FillManipulator()
 }
 
 Value FillManipulator::newValue(Element *element, int col, int row,
-                                bool *parse, Format::Type *fmtType)
+                                bool *parse, KCFormat::Type *fmtType)
 {
     Q_UNUSED(fmtType);
     const int targetRow = row;
@@ -349,7 +349,7 @@ CaseManipulator::~CaseManipulator()
 }
 
 Value CaseManipulator::newValue(Element *element, int col, int row,
-                                bool *parse, Format::Type *)
+                                bool *parse, KCFormat::Type *)
 {
     Q_UNUSED(element)
     // if we are here, we know that we want the change

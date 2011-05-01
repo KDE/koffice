@@ -60,7 +60,7 @@ protected:
     virtual bool mainProcessing();
 
     // dummy
-    virtual Value newValue(Element*, int, int, bool*, Format::Type*) {
+    virtual Value newValue(Element*, int, int, bool*, KCFormat::Type*) {
         return Value();
     }
 

@@ -36,7 +36,7 @@
  * \ingroup KCStyle
  * Collection of string formatting enumeration and functions.
  */
-namespace Format
+namespace KCFormat
 {
 
 enum Type {
@@ -123,6 +123,6 @@ KSPREAD_EXPORT bool isDate(Type type);
 KSPREAD_EXPORT bool isTime(Type type);
 KSPREAD_EXPORT bool isFraction(Type type);
 
-} // namespace Format
+} // namespace KCFormat
 
 #endif // KSPREAD_FORMAT

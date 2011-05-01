@@ -78,7 +78,7 @@ QVariant ReadOnlyTableModel::data(const QModelIndex& index, int role) const
             // Hide zero.
             return QVariant();
         } else if (!cell.isEmpty()) {
-            // Format the value appropriately and set the display text.
+            // KCFormat the value appropriately and set the display text.
             // The format of the resulting value is used below to determine the alignment.
             Value value = d->sheet->map()->formatter()->formatText(cell.value(), style.formatType(),
                           style.precision(), style.floatFormat(),

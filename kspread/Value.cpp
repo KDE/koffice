@@ -54,7 +54,7 @@ class Value::Private : public QSharedData
 public:
 
     Value::Type type: 4;
-    Value::Format format: 4;
+    Value::KCFormat format: 4;
 
     union { // 64 bits at max!
         // b is also secondarily used to indicate a null value if type == Empty,
@@ -528,12 +528,12 @@ QTime Value::asTime(const CalculationSettings* settings) const
     return dt;
 }
 
-Value::Format Value::format() const
+Value::KCFormat Value::format() const
 {
     return d ? d->format : fmt_None;
 }
 
-void Value::setFormat(Value::Format fmt)
+void Value::setFormat(Value::KCFormat fmt)
 {
     d->format = fmt;
 }
@@ -970,7 +970,7 @@ QDebug operator<<(QDebug str, const Value& v)
     return str;
 }
 
-QDebug operator<<(QDebug stream, const Value::Format& f)
+QDebug operator<<(QDebug stream, const Value::KCFormat& f)
 {
     switch (f) {
     case Value::fmt_None:     stream << "None";     break;
