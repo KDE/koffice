@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "PrintJob.h"
+#include "KCPrintJob.h"
 
 #include "KCCanvas.h"
 #include "KCDoc.h"
@@ -48,7 +48,7 @@
 
 typedef QHash<KCSheet *, KCSheetPrint *> PageManagerMap;
 
-class PrintJob::Private
+class KCPrintJob::Private
 {
 public:
     View* view;
@@ -75,7 +75,7 @@ public:
     void printHeaderFooter(QPainter &painter, KCSheet *sheet, int page) const;
 };
 
-int PrintJob::Private::setupPages(const QPrinter& printer, bool forceRecreation)
+int KCPrintJob::Private::setupPages(const QPrinter& printer, bool forceRecreation)
 {
     // Create the list of sheet, that should be printed.
     pageManagers.clear();
@@ -124,7 +124,7 @@ int PrintJob::Private::setupPages(const QPrinter& printer, bool forceRecreation)
     return pageCount;
 }
 
-KCSheet* PrintJob::Private::getSheetPageNumber(int* sheetPageNumber) const
+KCSheet* KCPrintJob::Private::getSheetPageNumber(int* sheetPageNumber) const
 {
     Q_ASSERT(sheetPageNumber);
     // Find the sheet specific page number.
@@ -140,7 +140,7 @@ KCSheet* PrintJob::Private::getSheetPageNumber(int* sheetPageNumber) const
     return sheet;
 }
 
-bool PrintJob::Private::pageNeedsPrinting(KCSheet * sheet, const QRect& cellRange) const
+bool KCPrintJob::Private::pageNeedsPrinting(KCSheet * sheet, const QRect& cellRange) const
 {
     // TODO Stefan: Is there a better, faster approach?
     for (int row = cellRange.top(); row <= cellRange.bottom() ; ++row) {
@@ -160,7 +160,7 @@ bool PrintJob::Private::pageNeedsPrinting(KCSheet * sheet, const QRect& cellRang
     return !(cellRange & shapesCellRange).isEmpty();
 }
 
-void PrintJob::Private::printHeaderFooter(QPainter &painter, KCSheet *sheet, int pageNo) const
+void KCPrintJob::Private::printHeaderFooter(QPainter &painter, KCSheet *sheet, int pageNo) const
 {
     const KCSheetPrint *const pageManager = pageManagers[sheet];
     const KCPrintSettings *const settings = pageManager->settings();
@@ -241,7 +241,7 @@ void PrintJob::Private::printHeaderFooter(QPainter &painter, KCSheet *sheet, int
 }
 
 
-PrintJob::PrintJob(View *view)
+KCPrintJob::KCPrintJob(View *view)
         : KoPrintingDialog(view)
         , d(new Private)
 {
@@ -279,18 +279,18 @@ PrintJob::PrintJob(View *view)
     }
 }
 
-PrintJob::~PrintJob()
+KCPrintJob::~KCPrintJob()
 {
 //     delete d->sheetSelectPage; // QPrintDialog takes ownership
     delete d;
 }
 
-int PrintJob::documentFirstPage() const
+int KCPrintJob::documentFirstPage() const
 {
     return d->pageManagers.isEmpty() ? 0 : 1;
 }
 
-int PrintJob::documentLastPage() const
+int KCPrintJob::documentLastPage() const
 {
     int pageCount = 0;
     const PageManagerMap::ConstIterator end(d->pageManagers.constEnd());
@@ -300,7 +300,7 @@ int PrintJob::documentLastPage() const
     return pageCount;
 }
 
-void PrintJob::startPrinting(RemovePolicy removePolicy)
+void KCPrintJob::startPrinting(RemovePolicy removePolicy)
 {
     // Setup the pages.
     // No recreation forced, because the sheet contents remained the same since the dialog was created.
@@ -321,7 +321,7 @@ void PrintJob::startPrinting(RemovePolicy removePolicy)
     KoPrintingDialog::startPrinting(removePolicy);
 }
 
-QRectF PrintJob::preparePage(int pageNumber)
+QRectF KCPrintJob::preparePage(int pageNumber)
 {
     // The printing of shapes is done by KoPrintingDialog, which needs the
     // QPainter set up properly. Otherwise, the separation into preparePage()
@@ -406,7 +406,7 @@ QRectF PrintJob::preparePage(int pageNumber)
                   pageRect.width() * scale, pageRect.height() * scale);
 }
 
-void PrintJob::printPage(int pageNumber, QPainter &painter)
+void KCPrintJob::printPage(int pageNumber, QPainter &painter)
 {
     // See first comment in preparePage() about the distinction between the
     // printing of the sheet contents and shapes.
@@ -524,7 +524,7 @@ void PrintJob::printPage(int pageNumber, QPainter &painter)
     painter.restore();
 }
 
-QList<KoShape*> PrintJob::shapesOnPage(int pageNumber)
+QList<KoShape*> KCPrintJob::shapesOnPage(int pageNumber)
 {
     // This method is called only for page preparation; to determine the shapes to wait for.
     int sheetPageNumber = pageNumber;
@@ -536,12 +536,12 @@ QList<KoShape*> PrintJob::shapesOnPage(int pageNumber)
     return shapeManager()->shapesAt(documentArea);
 }
 
-QList<QWidget*> PrintJob::createOptionWidgets() const
+QList<QWidget*> KCPrintJob::createOptionWidgets() const
 {
     return QList<QWidget*>() << d->sheetSelectPage;
 }
 
-QAbstractPrintDialog::PrintDialogOptions PrintJob::printDialogOptions() const
+QAbstractPrintDialog::PrintDialogOptions KCPrintJob::printDialogOptions() const
 {
     return QAbstractPrintDialog::PrintToFile |
            QAbstractPrintDialog::PrintSelection |

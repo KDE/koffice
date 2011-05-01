@@ -130,7 +130,7 @@ SET (part_DIR_SRCS
     part/KCDoc.cpp
     part/KCFactory.cpp
     part/Headers.cpp
-    part/PrintJob.cpp
+    part/KCPrintJob.cpp
     part/ToolRegistry.cpp
     part/TabBar.cpp
     part/View.cpp

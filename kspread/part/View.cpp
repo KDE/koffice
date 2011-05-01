@@ -136,7 +136,7 @@
 #include "Util.h"
 #include "KCValueCalc.h"
 #include "KCValueConverter.h"
-#include "PrintJob.h"
+#include "KCPrintJob.h"
 
 // commands
 #include "commands/CopyCommand.h"
@@ -2126,7 +2126,7 @@ KoPrintJob * View::createPrintJob()
         return 0;
     // About to print; close the editor.
     selection()->emitCloseEditor(true); // save changes
-    return new PrintJob(this);
+    return new KCPrintJob(this);
 }
 
 #include "View.moc"

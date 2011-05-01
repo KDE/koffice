@@ -28,11 +28,11 @@ class SheetSelectPage;
 /**
  * Manages printing on the document level.
  */
-class PrintJob : public KoPrintingDialog
+class KCPrintJob : public KoPrintingDialog
 {
 public:
-    PrintJob(View *view);
-    virtual ~PrintJob();
+    KCPrintJob(View *view);
+    virtual ~KCPrintJob();
 
     virtual int documentFirstPage() const;
     virtual int documentLastPage() const;
