@@ -61,7 +61,7 @@ class View;
 /**
  * The scrollable area showing the cells.
  */
-class KSPREAD_EXPORT Canvas : public QWidget, public KoCanvasBase
+class KSPREAD_EXPORT KCCanvas : public QWidget, public KoCanvasBase
 {
     friend class ColumnHeader;
     friend class RowHeader;
@@ -71,8 +71,8 @@ class KSPREAD_EXPORT Canvas : public QWidget, public KoCanvasBase
     Q_OBJECT
 
 public:
-    explicit Canvas(View* view);
-    ~Canvas();
+    explicit KCCanvas(View* view);
+    ~KCCanvas();
 
     View* view() const;
 
@@ -191,15 +191,15 @@ private:
     void showToolTip(const QPoint& point);
 
     /**
-     * Returns the range of cells which appear in the specified area of the Canvas widget
+     * Returns the range of cells which appear in the specified area of the KCCanvas widget
      * For example, viewToCellCoordinates( QRect(0,0,width(),height()) ) returns a range containing all visible cells
      *
-     * @param area The area (in pixels) on the Canvas widget
+     * @param area The area (in pixels) on the KCCanvas widget
      */
     QRect viewToCellCoordinates(const QRectF& area) const;
 
 private:
-    Q_DISABLE_COPY(Canvas)
+    Q_DISABLE_COPY(KCCanvas)
 
     View *m_view;
     Doc *m_doc;

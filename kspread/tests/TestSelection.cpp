@@ -21,7 +21,7 @@
 
 #include <qtest_kde.h>
 
-#include "part/Canvas.h"
+#include "part/KCCanvas.h"
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
@@ -33,7 +33,7 @@ void TestSelection::initialize()
     map.addSheet(sheet1);
     KCSheet* sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
-    Canvas canvas(0);
+    KCCanvas canvas(0);
     Selection selection(&canvas);
     selection.setActiveSheet(sheet1);
 
@@ -111,7 +111,7 @@ void TestSelection::update()
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
-    Canvas canvas(0);
+    KCCanvas canvas(0);
     Selection selection(&canvas);
     selection.setActiveSheet(sheet1);
 
@@ -181,7 +181,7 @@ void TestSelection::extend()
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
-    Canvas canvas(0);
+    KCCanvas canvas(0);
     Selection selection(&canvas);
     selection.setActiveSheet(sheet1);
 
@@ -286,7 +286,7 @@ void TestSelection::activeElement()
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
-    Canvas canvas(0);
+    KCCanvas canvas(0);
     Selection selection(&canvas);
     selection.setActiveSheet(sheet1);
 
@@ -333,7 +333,7 @@ void TestSelection::referenceSelectionMode()
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
-    Canvas canvas(0);
+    KCCanvas canvas(0);
     Selection selection(&canvas);
     selection.setActiveSheet(sheet1);
 
@@ -389,7 +389,7 @@ void TestSelection::covering()
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
-    Canvas canvas(0);
+    KCCanvas canvas(0);
     Selection selection(&canvas);
     selection.setActiveSheet(sheet1);
 
@@ -430,7 +430,7 @@ void TestSelection::splitting()
     map.addSheet(sheet1);
     KCSheet *sheet2 = new KCSheet(&map, "Sheet2");
     map.addSheet(sheet2);
-    Canvas canvas(0);
+    KCCanvas canvas(0);
     Selection selection(&canvas);
     selection.setActiveSheet(sheet1);
 

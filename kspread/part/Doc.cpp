@@ -78,7 +78,7 @@
 
 #include "KCBindingManager.h"
 #include "KCCalculationSettings.h"
-#include "Canvas.h"
+#include "KCCanvas.h"
 #include "KCDependencyManager.h"
 #include "Factory.h"
 #include "KCFormula.h"
@@ -273,7 +273,7 @@ QDomDocument Doc::saveXML()
         // Save visual info for the first view, such as active sheet and active cell
         // It looks like a hack, but reopening a document creates only one view anyway (David)
         View *const view = static_cast<View*>(views().first());
-        Canvas *const canvas = view->canvasWidget();
+        KCCanvas *const canvas = view->canvasWidget();
         e.setAttribute("activeTable",  canvas->activeSheet()->sheetName());
         e.setAttribute("markerColumn", view->selection()->marker().x());
         e.setAttribute("markerRow",    view->selection()->marker().y());

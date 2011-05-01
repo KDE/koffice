@@ -33,7 +33,7 @@
 #include "ui/Selection.h"
 #include "KCSheet.h"
 #include "part/View.h"
-#include "part/Canvas.h"
+#include "part/KCCanvas.h"
 #include "MapAdaptor.h"
 
 // commands

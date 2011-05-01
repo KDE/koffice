@@ -42,7 +42,7 @@
 #include <KoGlobal.h>
 
 #include <kspread/part/AboutData.h> // for version
-#include <kspread/part/Canvas.h>
+#include <kspread/part/KCCanvas.h>
 #include <kspread/KCCalculationSettings.h>
 #include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
@@ -283,7 +283,7 @@ bool OpenCalcExport::exportSettings(KoStore * store, const Doc * ksdoc)
     View * view = ksdoc->views().isEmpty() ? 0 : static_cast<View*>(ksdoc->views().first());
     QString activeTable;
     if (view) { // no view if embedded document
-        Canvas * canvas = view->canvasWidget();
+        KCCanvas * canvas = view->canvasWidget();
         activeTable = canvas->activeSheet()->sheetName();
         // save current sheet selection before to save marker, otherwise current pos is not saved
         view->saveCurrentSheetSelection();

@@ -42,7 +42,7 @@
 */
 
 // Local
-#include "Canvas.h"
+#include "KCCanvas.h"
 
 #include <QMenu>
 #include <QMouseEvent>
@@ -76,11 +76,11 @@
 
 /****************************************************************
  *
- * Canvas
+ * KCCanvas
  *
  ****************************************************************/
 
-Canvas::Canvas(View *view)
+KCCanvas::KCCanvas(View *view)
         : QWidget(view),
         KoCanvasBase(0),
         m_view(view),
@@ -100,19 +100,19 @@ Canvas::Canvas(View *view)
     setAttribute(Qt::WA_InputMethodEnabled, true); // ensure using the InputMethod
 }
 
-Canvas::~Canvas()
+KCCanvas::~KCCanvas()
 {
     foreach (QAction* action, actions()) {
         removeAction(action);
     }
 }
 
-View* Canvas::view() const
+View* KCCanvas::view() const
 {
     return m_view;
 }
 
-void Canvas::mousePressEvent(QMouseEvent* event)
+void KCCanvas::mousePressEvent(QMouseEvent* event)
 {
     QMouseEvent *const origEvent = event;
     QPointF documentPosition;
@@ -144,7 +144,7 @@ void Canvas::mousePressEvent(QMouseEvent* event)
     }
 }
 
-void Canvas::showContextMenu(const QPoint& globalPos)
+void KCCanvas::showContextMenu(const QPoint& globalPos)
 {
     view()->unplugActionList("toolproxy_action_list");
     view()->plugActionList("toolproxy_action_list", toolProxy()->popupActionList());
@@ -157,7 +157,7 @@ void Canvas::showContextMenu(const QPoint& globalPos)
     }
 }
 
-void Canvas::mouseReleaseEvent(QMouseEvent* event)
+void KCCanvas::mouseReleaseEvent(QMouseEvent* event)
 {
 //    KoPointerEvent pev(event, QPointF());
 //    mouseReleased(&pev);
@@ -179,7 +179,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* event)
     }
 }
 
-void Canvas::mouseMoveEvent(QMouseEvent* event)
+void KCCanvas::mouseMoveEvent(QMouseEvent* event)
 {
 //    KoPointerEvent pev(event, QPointF());
 //    mouseMoved(&pev);
@@ -201,7 +201,7 @@ void Canvas::mouseMoveEvent(QMouseEvent* event)
     }
 }
 
-void Canvas::mouseDoubleClickEvent(QMouseEvent* event)
+void KCCanvas::mouseDoubleClickEvent(QMouseEvent* event)
 {
 //    KoPointerEvent pev(event, QPointF());
 //    mouseDoubleClicked(&pev);
@@ -223,7 +223,7 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* event)
     }
 }
 
-bool Canvas::event(QEvent *e)
+bool KCCanvas::event(QEvent *e)
 {
     if(toolProxy()) {
         toolProxy()->processEvent(e);
@@ -231,7 +231,7 @@ bool Canvas::event(QEvent *e)
     return QWidget::event(e);
 }
 
-void Canvas::paintEvent(QPaintEvent *event)
+void KCCanvas::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     const QRectF painterRect = event->rect();
@@ -283,7 +283,7 @@ void Canvas::paintEvent(QPaintEvent *event)
     event->accept();
 }
 
-void Canvas::dragEnterEvent(QDragEnterEvent* event)
+void KCCanvas::dragEnterEvent(QDragEnterEvent* event)
 {
     const QMimeData *mimeData = event->mimeData();
     if (mimeData->hasText() ||
@@ -292,7 +292,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
     }
 }
 
-void Canvas::dragMoveEvent(QDragMoveEvent* event)
+void KCCanvas::dragMoveEvent(QDragMoveEvent* event)
 {
     const QMimeData *mimeData = event->mimeData();
     QPointF eventPos = event->pos();
@@ -374,11 +374,11 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
 
 }
 
-void Canvas::dragLeaveEvent(QDragLeaveEvent*)
+void KCCanvas::dragLeaveEvent(QDragLeaveEvent*)
 {
 }
 
-void Canvas::dropEvent(QDropEvent *event)
+void KCCanvas::dropEvent(QDropEvent *event)
 {
     const QMimeData *mimeData = event->mimeData();
     QPointF eventPos = event->pos();
@@ -440,64 +440,64 @@ void Canvas::dropEvent(QDropEvent *event)
     event->setAccepted(true);
 }
 
-void Canvas::setVertScrollBarPos(qreal pos)
+void KCCanvas::setVertScrollBarPos(qreal pos)
 {
     if (pos < 0) pos = view()->vertScrollBar()->maximum() - pos;
     view()->vertScrollBar()->setValue((int)pos);
 }
 
-void Canvas::setHorizScrollBarPos(qreal pos)
+void KCCanvas::setHorizScrollBarPos(qreal pos)
 {
     if (pos < 0) pos = view()->horzScrollBar()->maximum() - pos;
     view()->horzScrollBar()->setValue((int)pos);
 }
 
-KoZoomHandler* Canvas::zoomHandler() const
+KoZoomHandler* KCCanvas::zoomHandler() const
 {
     return view()->zoomHandler();
 }
 
-KCSheet* Canvas::activeSheet() const
+KCSheet* KCCanvas::activeSheet() const
 {
     return view()->activeSheet();
 }
 
-bool Canvas::isViewLoading() const
+bool KCCanvas::isViewLoading() const
 {
     return view()->isLoading();
 }
 
-//   SheetView* Canvas::sheetView(const KCSheet* sheet) const
+//   SheetView* KCCanvas::sheetView(const KCSheet* sheet) const
 //   {
 //       return view()->sheetView(sheet);
 //   }
 
-Selection* Canvas::selection() const
+Selection* KCCanvas::selection() const
 {
     return view()->selection();
 }
 
-ColumnHeader* Canvas::columnHeader() const
+ColumnHeader* KCCanvas::columnHeader() const
 {
     return view()->columnHeader();
 }
 
-RowHeader* Canvas::rowHeader() const
+RowHeader* KCCanvas::rowHeader() const
 {
     return view()->rowHeader();
 }
 
-void Canvas::enableAutoScroll()
+void KCCanvas::enableAutoScroll()
 {
     view()->enableAutoScroll();
 }
 
-void Canvas::disableAutoScroll()
+void KCCanvas::disableAutoScroll()
 {
     view()->disableAutoScroll();
 }
 
-QRect Canvas::viewToCellCoordinates(const QRectF &viewRect) const
+QRect KCCanvas::viewToCellCoordinates(const QRectF &viewRect) const
 {
     register KCSheet * const sheet = activeSheet();
     if (!sheet)
@@ -515,55 +515,55 @@ QRect Canvas::viewToCellCoordinates(const QRectF &viewRect) const
     return QRect(left, top, right - left + 1, bottom - top + 1);
 }
 
-void Canvas::gridSize(qreal* horizontal, qreal* vertical) const
+void KCCanvas::gridSize(qreal* horizontal, qreal* vertical) const
 {
     *horizontal = doc()->map()->defaultColumnFormat()->width();
     *vertical = doc()->map()->defaultRowFormat()->height();
 }
 
-bool Canvas::snapToGrid() const
+bool KCCanvas::snapToGrid() const
 {
     return false; // FIXME
 }
 
-void Canvas::addCommand(QUndoCommand* command)
+void KCCanvas::addCommand(QUndoCommand* command)
 {
     doc()->addCommand(command);
 }
 
-KoShapeManager* Canvas::shapeManager() const
+KoShapeManager* KCCanvas::shapeManager() const
 {
     return m_shapeManager;
 }
 
-void Canvas::updateCanvas(const QRectF& rc)
+void KCCanvas::updateCanvas(const QRectF& rc)
 {
     QRect clipRect(viewConverter()->documentToView(rc.translated(-offset())).toRect());
     clipRect.adjust(-2, -2, 2, 2);   // Resize to fit anti-aliasing
     update(clipRect);
 }
 
-KoUnit Canvas::unit() const
+KoUnit KCCanvas::unit() const
 {
     return doc()->unit();
 }
 
-KoToolProxy *Canvas::toolProxy() const
+KoToolProxy *KCCanvas::toolProxy() const
 {
     return m_toolProxy;
 }
 
-const KoViewConverter* Canvas::viewConverter() const
+const KoViewConverter* KCCanvas::viewConverter() const
 {
     return zoomHandler();
 }
 
-void Canvas::updateInputMethodInfo()
+void KCCanvas::updateInputMethodInfo()
 {
     updateMicroFocus();
 }
 
-void Canvas::validateSelection()
+void KCCanvas::validateSelection()
 {
     register KCSheet * const sheet = activeSheet();
     if (!sheet)
@@ -619,7 +619,7 @@ XXX TODO
 #endif
 }
 
-QRectF Canvas::cellCoordinatesToView(const QRect &cellRange) const
+QRectF KCCanvas::cellCoordinatesToView(const QRect &cellRange) const
 {
     register KCSheet * const sheet = activeSheet();
     if (!sheet)
@@ -640,13 +640,13 @@ QRectF Canvas::cellCoordinatesToView(const QRect &cellRange) const
     return rect;
 }
 
-void Canvas::keyPressed(QKeyEvent* event)
+void KCCanvas::keyPressed(QKeyEvent* event)
 {
     // flake
     m_toolProxy->keyPressEvent(event);
 }
 
-void Canvas::showToolTip(const QPoint &p)
+void KCCanvas::showToolTip(const QPoint &p)
 {
     register KCSheet * const sheet = activeSheet();
     if (!sheet)
@@ -732,7 +732,7 @@ void Canvas::showToolTip(const QPoint &p)
 }
 
 
-bool Canvas::eventFilter(QObject *o, QEvent *e)
+bool KCCanvas::eventFilter(QObject *o, QEvent *e)
 {
     /* this canvas event filter acts on events sent to the line edit as well
        as events to this filter itself.
@@ -764,7 +764,7 @@ bool Canvas::eventFilter(QObject *o, QEvent *e)
 }
 
 
-void Canvas::setDocumentOffset(const QPoint &offset)
+void KCCanvas::setDocumentOffset(const QPoint &offset)
 {
     const QPoint delta = offset - viewConverter()->documentToView(m_offset).toPoint();
     m_offset = viewConverter()->viewToDocument(offset);
@@ -775,31 +775,31 @@ void Canvas::setDocumentOffset(const QPoint &offset)
     if (rh) rh->scroll(0, -delta.y());
 }
 
-void Canvas::tabletEvent(QTabletEvent *e)
+void KCCanvas::tabletEvent(QTabletEvent *e)
 {
     // flake
     m_toolProxy->tabletEvent(e, viewConverter()->viewToDocument(e->pos() + m_offset));
 }
 
-void Canvas::inputMethodEvent(QInputMethodEvent *event)
+void KCCanvas::inputMethodEvent(QInputMethodEvent *event)
 {
     // flake
     m_toolProxy->inputMethodEvent(event);
 }
 
-QVariant Canvas::inputMethodQuery(Qt::InputMethodQuery query) const
+QVariant KCCanvas::inputMethodQuery(Qt::InputMethodQuery query) const
 {
     // flake
     return m_toolProxy->inputMethodQuery(query, *(viewConverter()));
 }
 
-void Canvas::setDocumentSize(const QSizeF &size)
+void KCCanvas::setDocumentSize(const QSizeF &size)
 {
     const QSize s = viewConverter()->documentToView(size).toSize();
     emit documentSizeChanged(s);
 }
 
-void Canvas::focusInEvent(QFocusEvent *ev)
+void KCCanvas::focusInEvent(QFocusEvent *ev)
 {
     // If we are in editing mode, we redirect the
     // focus to the CellEditor or ExternalEditor.
@@ -814,4 +814,4 @@ void Canvas::focusInEvent(QFocusEvent *ev)
     QWidget::focusInEvent(ev);
 }
 
-#include "Canvas.moc"
+#include "KCCanvas.moc"

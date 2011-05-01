@@ -27,7 +27,7 @@ class QRubberBand;
 
 class KoCanvasBase;
 
-class Canvas;
+class KCCanvas;
 class Selection;
 class View;
 
@@ -38,7 +38,7 @@ class ColumnHeader : public QWidget
 {
     Q_OBJECT
 public:
-    ColumnHeader(QWidget *_parent, Canvas *_canvas, View *_view);
+    ColumnHeader(QWidget *_parent, KCCanvas *_canvas, View *_view);
     virtual ~ColumnHeader();
 
     int markerColumn() const {
@@ -68,7 +68,7 @@ private Q_SLOTS:
     void toolChanged(const QString& toolId);
 
 private:
-    Canvas *m_pCanvas;
+    KCCanvas *m_pCanvas;
     View *m_pView;
 
     /**
@@ -129,7 +129,7 @@ class RowHeader : public QWidget
 {
     Q_OBJECT
 public:
-    RowHeader(QWidget *_parent, Canvas *_canvas, View *_view);
+    RowHeader(QWidget *_parent, KCCanvas *_canvas, View *_view);
     virtual ~RowHeader();
 
     int markerRow() const {
@@ -157,7 +157,7 @@ private Q_SLOTS:
     void toolChanged(const QString& toolId);
 
 private:
-    Canvas *m_pCanvas;
+    KCCanvas *m_pCanvas;
     View *m_pView;
 
     bool m_bSelection;

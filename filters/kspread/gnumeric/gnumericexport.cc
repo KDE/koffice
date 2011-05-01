@@ -40,7 +40,7 @@
 
 // KSpread
 #include <kspread/KCApplicationSettings.h>
-#include <kspread/part/Canvas.h>
+#include <kspread/part/KCCanvas.h>
 #include <kspread/KCCellStorage.h>
 #include <kspread/KCCurrency.h>
 #include <kspread/part/Doc.h>
@@ -1044,7 +1044,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
     QString str;
 
     View * view = ksdoc->views().isEmpty() ? 0 : static_cast<View*>(ksdoc->views().first());
-    Canvas * canvas = 0L;
+    KCCanvas * canvas = 0L;
     QString activeTableName;
     if (view) {
         canvas = view->canvasWidget();

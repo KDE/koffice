@@ -53,7 +53,7 @@ class KCCell;
 class ColumnHeader;
 class KCDamage;
 class KCSheet;
-class Canvas;
+class KCCanvas;
 class Doc;
 class KCRegion;
 class Selection;
@@ -92,7 +92,7 @@ public:
     Doc* doc() const;
 
     /** \return the canvas of the view */
-    Canvas* canvasWidget() const;
+    KCCanvas* canvasWidget() const;
 
     /** \return the canvas controller of the view */
     KoCanvasController* canvasController() const;

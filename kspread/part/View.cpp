@@ -116,7 +116,7 @@
 #include "Factory.h"
 #include "KCHeaderFooter.h"
 #include "KCLoadingInfo.h"
-#include "Canvas.h"
+#include "KCCanvas.h"
 #include "Global.h"
 #include "Headers.h"
 #include "Headers.h"
@@ -177,7 +177,7 @@ public:
 
     // GUI elements
     QWidget *frame;
-    Canvas *canvas;
+    KCCanvas *canvas;
     KoCanvasController* canvasController;
     KoZoomController* zoomController;
     KoZoomHandler* zoomHandler;
@@ -576,7 +576,7 @@ View::View(QWidget *_parent, Doc *_doc)
 
     // Connect updateView() signal to View::update() in order to repaint its
     // child widgets: the column/row headers and the select all button.
-    // Connect to Canvas::update() explicitly as it lives in the viewport
+    // Connect to KCCanvas::update() explicitly as it lives in the viewport
     // of the KoCanvasController.
     connect(doc(), SIGNAL(updateView()),
             this, SLOT(update()));
@@ -624,7 +624,7 @@ View::~View()
     // repaint, etc.etc. :-) (Simon)
 
     // delete the sheetView's after calling d->selection->emitCloseEditor cause the
-    // emitCloseEditor may trigger over the Selection::emitChanged a Canvas::scrollToCell
+    // emitCloseEditor may trigger over the Selection::emitChanged a KCCanvas::scrollToCell
     // which in turn needs the sheetview's to access the sheet itself.
     qDeleteAll(d->sheetViews);
 
@@ -643,10 +643,10 @@ View::~View()
     // while the canvasController is destroyed. That means, that we will have a dangling
     // pointer in the KoToolProxy that points to the KoToolBase the time in between.
     KoToolManager::instance()->removeCanvasController(d->canvasController);
-    // NOTE Stefan: Delete the Canvas explicitly, even if it has this view as
+    // NOTE Stefan: Delete the KCCanvas explicitly, even if it has this view as
     //              parent. Otherwise, it leads to crashes, because it tries to
     //              access this View in some events (Bug #126492).
-    //              The KoCanvasController takes ownership of the Canvas and does the deletion.
+    //              The KoCanvasController takes ownership of the KCCanvas and does the deletion.
     delete d->canvasController;
     delete d;
 }
@@ -671,8 +671,8 @@ void View::initView()
     d->viewLayout->setMargin(0);
     d->viewLayout->setSpacing(0);
 
-    // Setup the Canvas and its controller.
-    d->canvas = new Canvas(this);
+    // Setup the KCCanvas and its controller.
+    d->canvas = new KCCanvas(this);
     d->canvasController = new KoCanvasController(this);
     d->canvasController->setCanvas(d->canvas);
     d->canvasController->setCanvasMode(KoCanvasController::Spreadsheet);
@@ -807,7 +807,7 @@ void View::initView()
             this, SLOT(shapeSelectionChanged()));
 }
 
-Canvas* View::canvasWidget() const
+KCCanvas* View::canvasWidget() const
 {
     return d->canvas;
 }
@@ -1175,7 +1175,7 @@ void View::setActiveSheet(KCSheet* sheet, bool updateSheet)
     // Change the active shape controller and its shapes.
     d->canvas->shapeController()->setShapeControllerBase(d->activeSheet);
     d->canvas->shapeManager()->setShapes(d->activeSheet->shapes());
-    // Tell the Canvas about the new visible sheet size.
+    // Tell the KCCanvas about the new visible sheet size.
     sheetView(d->activeSheet)->updateAccessedCellRange();
 
     // If there was no sheet before or the layout directions differ.

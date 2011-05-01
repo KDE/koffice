@@ -61,7 +61,7 @@
 #include <KoViewConverter.h>
 
 #include "KCCell.h"
-#include "Canvas.h"
+#include "KCCanvas.h"
 #include "Doc.h"
 #include "kspread_limits.h"
 #include "KCPrintSettings.h"
@@ -80,14 +80,14 @@
 class CellTool::Private
 {
 public:
-    Canvas* canvas;
+    KCCanvas* canvas;
 };
 
 CellTool::CellTool(KoCanvasBase* canvas)
         : CellToolBase(canvas)
         , d(new Private)
 {
-    d->canvas = static_cast<Canvas*>(canvas);
+    d->canvas = static_cast<KCCanvas*>(canvas);
 
     KAction* action = 0;
 

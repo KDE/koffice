@@ -792,7 +792,7 @@ bool CellToolBase::Private::formatKeyPress(QKeyEvent * _ev)
 
 QRect CellToolBase::Private::moveDirection(KSpread::MoveTo direction, bool extendSelection)
 {
-    kDebug(36005) << "Canvas::moveDirection";
+    kDebug(36005) << "KCCanvas::moveDirection";
 
     register KCSheet * const sheet = q->selection()->activeSheet();
     if (!sheet)

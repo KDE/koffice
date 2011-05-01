@@ -66,7 +66,7 @@
 #include <KoDpi.h>
 
 // KSpread
-#include "Canvas.h"
+#include "KCCanvas.h"
 #include "KCCell.h"
 #include "Doc.h"
 #include "kspread_limits.h"
@@ -85,7 +85,7 @@
  *
  ****************************************************************/
 
-RowHeader::RowHeader(QWidget *_parent, Canvas *_canvas, View *_view)
+RowHeader::RowHeader(QWidget *_parent, KCCanvas *_canvas, View *_view)
         : QWidget(_parent)
 {
     m_pView = _view;
@@ -410,7 +410,7 @@ void RowHeader::mouseMoveEvent(QMouseEvent * _ev)
 void RowHeader::slotAutoScroll(const QPoint& scrollDistance)
 {
     // NOTE Stefan: This slot is triggered by the same signal as
-    //              Canvas::slotAutoScroll and ColumnHeader::slotAutoScroll.
+    //              KCCanvas::slotAutoScroll and ColumnHeader::slotAutoScroll.
     //              Therefore, nothing has to be done except the scrolling was
     //              initiated in this header.
     if (!m_bMousePressed)
@@ -648,7 +648,7 @@ void RowHeader::toolChanged(const QString& toolId)
  *
  ****************************************************************/
 
-ColumnHeader::ColumnHeader(QWidget *_parent, Canvas *_canvas, View *_view)
+ColumnHeader::ColumnHeader(QWidget *_parent, KCCanvas *_canvas, View *_view)
         : QWidget(_parent)
 {
     m_pView = _view;
@@ -1068,7 +1068,7 @@ void ColumnHeader::mouseMoveEvent(QMouseEvent * _ev)
 void ColumnHeader::slotAutoScroll(const QPoint& scrollDistance)
 {
     // NOTE Stefan: This slot is triggered by the same signal as
-    //              Canvas::slotAutoScroll and RowHeader::slotAutoScroll.
+    //              KCCanvas::slotAutoScroll and RowHeader::slotAutoScroll.
     //              Therefore, nothing has to be done except the scrolling was
     //              initiated in this header.
     if (!m_bMousePressed)

@@ -20,7 +20,7 @@
 
 #include "PrintJob.h"
 
-#include "Canvas.h"
+#include "KCCanvas.h"
 #include "Doc.h"
 #include "KCHeaderFooter.h"
 #include "KCMap.h"
@@ -248,7 +248,7 @@ PrintJob::PrintJob(View *view)
     d->view = view;
     d->sheetSelectPage = new SheetSelectPage();
 
-    setShapeManager(static_cast<Canvas*>(d->view->canvas())->shapeManager());
+    setShapeManager(static_cast<KCCanvas*>(d->view->canvas())->shapeManager());
 
     // Setup the pages.
     // Force the creation of pages.
