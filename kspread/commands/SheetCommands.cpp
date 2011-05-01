@@ -273,7 +273,7 @@ void SheetPropertiesCommand::redo()
     sheet->setShowColumnNumber(newColumnAsNumber);
     sheet->setLcMode(newLcMode);
     sheet->setFirstLetterUpper(newCapitalizeFirstLetter);
-    sheet->map()->addDamage(new SheetDamage(sheet, SheetDamage::PropertiesChanged));
+    sheet->map()->addDamage(new KCSheetDamage(sheet, KCSheetDamage::PropertiesChanged));
 }
 
 void SheetPropertiesCommand::undo()
@@ -289,5 +289,5 @@ void SheetPropertiesCommand::undo()
     sheet->setShowColumnNumber(oldColumnAsNumber);
     sheet->setLcMode(oldLcMode);
     sheet->setFirstLetterUpper(oldCapitalizeFirstLetter);
-    sheet->map()->addDamage(new SheetDamage(sheet, SheetDamage::PropertiesChanged));
+    sheet->map()->addDamage(new KCSheetDamage(sheet, KCSheetDamage::PropertiesChanged));
 }

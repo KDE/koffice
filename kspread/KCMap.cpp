@@ -865,7 +865,7 @@ void KCMap::addDamage(KCDamage* damage)
     if (damage->type() == KCDamage::DamagedCell) {
         kDebug(36007) << "Adding\t" << *static_cast<KCCellDamage*>(damage);
     } else if (damage->type() == KCDamage::DamagedSheet) {
-        kDebug(36007) << "Adding\t" << *static_cast<SheetDamage*>(damage);
+        kDebug(36007) << "Adding\t" << *static_cast<KCSheetDamage*>(damage);
     } else if (damage->type() == KCDamage::DamagedSelection) {
         kDebug(36007) << "Adding\t" << *static_cast<SelectionDamage*>(damage);
     } else {
@@ -933,11 +933,11 @@ void KCMap::handleDamages(const QList<KCDamage*>& damages)
         }
 
         if (damage->type() == KCDamage::DamagedSheet) {
-            SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
+            KCSheetDamage* sheetDamage = static_cast<KCSheetDamage*>(damage);
             kDebug(36007) << "Processing\t" << *sheetDamage;
 //             KCSheet* damagedSheet = sheetDamage->sheet();
 
-            if (sheetDamage->changes() & SheetDamage::PropertiesChanged) {
+            if (sheetDamage->changes() & KCSheetDamage::PropertiesChanged) {
             }
             continue;
         }

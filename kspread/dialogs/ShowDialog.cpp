@@ -92,7 +92,7 @@ void ShowDialog::accept()
     }
     map->addCommand(macroCommand);
     // Just repaint everything visible; no need to invalidate the visual cache.
-    map->addDamage(new SheetDamage(m_selection->activeSheet(), SheetDamage::ContentChanged));
+    map->addDamage(new KCSheetDamage(m_selection->activeSheet(), KCSheetDamage::ContentChanged));
     KDialog::accept();
 }
 

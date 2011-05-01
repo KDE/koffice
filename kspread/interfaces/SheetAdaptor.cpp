@@ -516,20 +516,20 @@ void SheetAdaptor::handleDamages(const QList<KCDamage*>& damages)
             continue;
         }
         if (damage->type() == KCDamage::DamagedSheet) {
-            const SheetDamage *const sheetDamage = static_cast<const SheetDamage *>(damage);
+            const KCSheetDamage *const sheetDamage = static_cast<const KCSheetDamage *>(damage);
             // Only process the sheet this adaptor works for.
             if (sheetDamage->sheet() != m_sheet) {
                 continue;
             }
             kDebug(36007) << *sheetDamage;
-            const SheetDamage::Changes changes = sheetDamage->changes();
-            if (changes & SheetDamage::Name) {
+            const KCSheetDamage::Changes changes = sheetDamage->changes();
+            if (changes & KCSheetDamage::Name) {
                 emit nameChanged();
             }
-            if (changes & SheetDamage::Shown) {
+            if (changes & KCSheetDamage::Shown) {
                 emit showChanged();
             }
-            if (changes & SheetDamage::Hidden) {
+            if (changes & KCSheetDamage::Hidden) {
                 emit hideChanged();
             }
             continue;

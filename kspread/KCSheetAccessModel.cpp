@@ -113,10 +113,10 @@ void KCSheetAccessModel::handleDamages(const QList<KCDamage*>& damages)
         }
 
         if (damage->type() == KCDamage::DamagedSheet) {
-            SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
+            KCSheetDamage* sheetDamage = static_cast<KCSheetDamage*>(damage);
             kDebug(36007) << "Processing\t" << *sheetDamage;
 
-            if (sheetDamage->changes() & SheetDamage::Name) {
+            if (sheetDamage->changes() & KCSheetDamage::Name) {
                 KCSheet *sheet = sheetDamage->sheet();
                 // We should never receive signals from sheets that are not in our model
                 Q_ASSERT(d->cols.contains(sheet));

@@ -59,7 +59,7 @@ bool ResizeColumnManipulator::process(Element* element)
         format->setWidth(qMax(2.0, m_reverse ? m_oldSizes[col] : m_newSize));
     }
     // Just repaint everything visible; no need to invalidate the visual cache.
-    m_sheet->map()->addDamage(new SheetDamage(m_sheet, SheetDamage::ContentChanged));
+    m_sheet->map()->addDamage(new KCSheetDamage(m_sheet, KCSheetDamage::ContentChanged));
     // TODO: only invalidate the cells that are actually effected by this resize (so everythin in this column, and everything that covers something in this column)
     m_sheet->map()->addDamage(new KCCellDamage(m_sheet, KCRegion(1, 1, KS_colMax, KS_rowMax, m_sheet), KCCellDamage::Appearance));
     return true;
@@ -91,7 +91,7 @@ bool ResizeRowManipulator::process(Element* element)
         rl->setHeight(qMax(2.0, m_reverse ? m_oldSizes[row] : m_newSize));
     }
     // Just repaint everything visible; no need to invalidate the visual cache.
-    m_sheet->map()->addDamage(new SheetDamage(m_sheet, SheetDamage::ContentChanged));
+    m_sheet->map()->addDamage(new KCSheetDamage(m_sheet, KCSheetDamage::ContentChanged));
     // TODO: only invalidate the cells that are actually effected by this resize (so everythin in this row, and everything that covers something in this row)
     m_sheet->map()->addDamage(new KCCellDamage(m_sheet, KCRegion(1, 1, KS_colMax, KS_rowMax, m_sheet), KCCellDamage::Appearance));
     return true;
@@ -196,7 +196,7 @@ bool HideShowManipulator::preProcessing()
 bool HideShowManipulator::postProcessing()
 {
     // Just repaint everything visible; no need to invalidate the visual cache.
-    m_sheet->map()->addDamage(new SheetDamage(m_sheet, SheetDamage::ContentChanged));
+    m_sheet->map()->addDamage(new KCSheetDamage(m_sheet, KCSheetDamage::ContentChanged));
     return true;
 }
 
@@ -431,14 +431,14 @@ bool AdjustColumnRowManipulator::postProcessing()
         return false;
     }
     // Update the column/row header, if necessary.
-    SheetDamage::Changes changes = SheetDamage::None;
+    KCSheetDamage::Changes changes = KCSheetDamage::None;
     if (m_adjustColumn) {
-        changes |= SheetDamage::ColumnsChanged;
+        changes |= KCSheetDamage::ColumnsChanged;
     }
     if (m_adjustRow) {
-        changes |= SheetDamage::RowsChanged;
+        changes |= KCSheetDamage::RowsChanged;
     }
-    m_sheet->map()->addDamage(new SheetDamage(m_sheet, changes));
+    m_sheet->map()->addDamage(new KCSheetDamage(m_sheet, changes));
     return AbstractRegionCommand::postProcessing();
 }
 

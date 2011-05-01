@@ -2065,14 +2065,14 @@ void View::handleDamages(const QList<KCDamage*>& damages)
         }
 
         if (damage->type() == KCDamage::DamagedSheet) {
-            SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
+            KCSheetDamage* sheetDamage = static_cast<KCSheetDamage*>(damage);
             kDebug(36007) << *sheetDamage;
-            const SheetDamage::Changes changes = sheetDamage->changes();
-            if (changes & (SheetDamage::Name | SheetDamage::Shown)) {
+            const KCSheetDamage::Changes changes = sheetDamage->changes();
+            if (changes & (KCSheetDamage::Name | KCSheetDamage::Shown)) {
                 d->tabBar->setTabs(doc()->map()->visibleSheets());
                 paintMode = Everything;
             }
-            if (changes & (SheetDamage::Shown | SheetDamage::Hidden)) {
+            if (changes & (KCSheetDamage::Shown | KCSheetDamage::Hidden)) {
                 updateShowSheetMenu();
                 paintMode = Everything;
             }
@@ -2080,17 +2080,17 @@ void View::handleDamages(const QList<KCDamage*>& damages)
             if (sheetDamage->sheet() != d->activeSheet) {
                 continue;
             }
-            if (changes.testFlag(SheetDamage::ContentChanged)) {
+            if (changes.testFlag(KCSheetDamage::ContentChanged)) {
                 update();
                 paintMode = Everything;
             }
-            if (changes.testFlag(SheetDamage::PropertiesChanged)) {
+            if (changes.testFlag(KCSheetDamage::PropertiesChanged)) {
                 sheetView(d->activeSheet)->invalidate();
                 paintMode = Everything;
             }
-            if (sheetDamage->changes() & SheetDamage::ColumnsChanged)
+            if (sheetDamage->changes() & KCSheetDamage::ColumnsChanged)
                 columnHeader()->update();
-            if (sheetDamage->changes() & SheetDamage::RowsChanged)
+            if (sheetDamage->changes() & KCSheetDamage::RowsChanged)
                 rowHeader()->update();
             continue;
         }

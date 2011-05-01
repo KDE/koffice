@@ -34,7 +34,7 @@ public:
     Changes changes;
 };
 
-class SheetDamage::Private
+class KCSheetDamage::Private
 {
 public:
     KCSheet* sheet;
@@ -93,24 +93,24 @@ KCCellDamage::Changes KCCellDamage::changes() const
 }
 
 
-SheetDamage::SheetDamage(KCSheet* sheet, Changes changes)
+KCSheetDamage::KCSheetDamage(KCSheet* sheet, Changes changes)
         : d(new Private)
 {
     d->sheet = sheet;
     d->changes = changes;
 }
 
-SheetDamage::~SheetDamage()
+KCSheetDamage::~KCSheetDamage()
 {
     delete d;
 }
 
-KCSheet* SheetDamage::sheet() const
+KCSheet* KCSheetDamage::sheet() const
 {
     return d->sheet;
 }
 
-SheetDamage::Changes SheetDamage::changes() const
+KCSheetDamage::Changes KCSheetDamage::changes() const
 {
     return d->changes;
 }
@@ -184,18 +184,18 @@ QDebug operator<<(QDebug str, const KCCellDamage& d)
     return str;
 }
 
-QDebug operator<<(QDebug str, const SheetDamage& d)
+QDebug operator<<(QDebug str, const KCSheetDamage& d)
 {
-    str << "SheetDamage: " << (d.sheet() ? d.sheet()->sheetName() : "NULL POINTER!");
+    str << "KCSheetDamage: " << (d.sheet() ? d.sheet()->sheetName() : "NULL POINTER!");
     switch (d.changes()) {
-    case SheetDamage::None:               return str << " None";
-    case SheetDamage::ContentChanged:     return str << " Content";
-    case SheetDamage::PropertiesChanged:  return str << " Properties";
-    case SheetDamage::Hidden:             return str << " Hidden";
-    case SheetDamage::Shown:              return str << " Shown";
-    case SheetDamage::Name:               return str << "Name";
-    case SheetDamage::ColumnsChanged:     return str << "Columns";
-    case SheetDamage::RowsChanged:        return str << "Rows";
+    case KCSheetDamage::None:               return str << " None";
+    case KCSheetDamage::ContentChanged:     return str << " Content";
+    case KCSheetDamage::PropertiesChanged:  return str << " Properties";
+    case KCSheetDamage::Hidden:             return str << " Hidden";
+    case KCSheetDamage::Shown:              return str << " Shown";
+    case KCSheetDamage::Name:               return str << "Name";
+    case KCSheetDamage::ColumnsChanged:     return str << "Columns";
+    case KCSheetDamage::RowsChanged:        return str << "Rows";
     }
     return str;
 }

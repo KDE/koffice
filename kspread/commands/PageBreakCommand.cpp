@@ -63,7 +63,7 @@ bool PageBreakCommand::postProcessing()
         m_sheet->print()->updateVerticalPageParameters(range.top() - 1);
     }
     if (m_sheet->isShowPageBorders()) {
-        m_sheet->map()->addDamage(new SheetDamage(m_sheet, SheetDamage::ContentChanged));
+        m_sheet->map()->addDamage(new KCSheetDamage(m_sheet, KCSheetDamage::ContentChanged));
     }
     return AbstractRegionCommand::postProcessing();
 }

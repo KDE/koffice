@@ -551,7 +551,7 @@ void KCSheet::setPrintSettings(const KCPrintSettings &settings)
     // Repaint, if page borders are shown and this is the active sheet.
     if (isShowPageBorders()) {
         // Just repaint everything visible; no need to invalidate the visual cache.
-        map()->addDamage(new SheetDamage(this, SheetDamage::ContentChanged));
+        map()->addDamage(new KCSheetDamage(this, KCSheetDamage::ContentChanged));
     }
 }
 
@@ -3180,7 +3180,7 @@ void KCSheet::setShowPageBorders(bool b)
     d->showPageBorders = b;
     // Just repaint everything visible; no need to invalidate the visual cache.
     if (!map()->isLoading()) {
-        map()->addDamage(new SheetDamage(this, SheetDamage::ContentChanged));
+        map()->addDamage(new KCSheetDamage(this, KCSheetDamage::ContentChanged));
     }
 }
 
@@ -3208,7 +3208,7 @@ void KCSheet::insertColumnFormat(KCColumnFormat *l)
 {
     d->columns.insertElement(l, l->column());
     if (!map()->isLoading()) {
-        map()->addDamage(new SheetDamage(this, SheetDamage::ColumnsChanged));
+        map()->addDamage(new KCSheetDamage(this, KCSheetDamage::ColumnsChanged));
     }
 }
 
@@ -3216,7 +3216,7 @@ void KCSheet::insertRowFormat(KCRowFormat *l)
 {
     d->rows.insertElement(l, l->row());
     if (!map()->isLoading()) {
-        map()->addDamage(new SheetDamage(this, SheetDamage::RowsChanged));
+        map()->addDamage(new KCSheetDamage(this, KCSheetDamage::RowsChanged));
     }
 }
 
@@ -3224,7 +3224,7 @@ void KCSheet::deleteColumnFormat(int column)
 {
     d->columns.removeElement(column);
     if (!map()->isLoading()) {
-        map()->addDamage(new SheetDamage(this, SheetDamage::ColumnsChanged));
+        map()->addDamage(new KCSheetDamage(this, KCSheetDamage::ColumnsChanged));
     }
 }
 
@@ -3232,7 +3232,7 @@ void KCSheet::deleteRowFormat(int row)
 {
     d->rows.removeElement(row);
     if (!map()->isLoading()) {
-        map()->addDamage(new SheetDamage(this, SheetDamage::RowsChanged));
+        map()->addDamage(new KCSheetDamage(this, KCSheetDamage::RowsChanged));
     }
 }
 
@@ -3262,9 +3262,9 @@ void KCSheet::hideSheet(bool _hide)
 {
     setHidden(_hide);
     if (_hide)
-        map()->addDamage(new SheetDamage(this, SheetDamage::Hidden));
+        map()->addDamage(new KCSheetDamage(this, KCSheetDamage::Hidden));
     else
-        map()->addDamage(new SheetDamage(this, SheetDamage::Shown));
+        map()->addDamage(new KCSheetDamage(this, KCSheetDamage::Shown));
 }
 
 bool KCSheet::setSheetName(const QString& name, bool init)
@@ -3292,7 +3292,7 @@ bool KCSheet::setSheetName(const QString& name, bool init)
         sheet->changeCellTabName(old_name, name);
     }
 
-    map()->addDamage(new SheetDamage(this, SheetDamage::Name));
+    map()->addDamage(new KCSheetDamage(this, KCSheetDamage::Name));
 
     setObjectName(name.toUtf8());
 //     (dynamic_cast<SheetIface*>(dcopObject()))->sheetNameHasChanged();

@@ -108,7 +108,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(KCCellDamage::Changes)
  * \ingroup Damages
  * A sheet damage.
  */
-class KSPREAD_EXPORT SheetDamage : public KCDamage
+class KSPREAD_EXPORT KCSheetDamage : public KCDamage
 {
 public:
 
@@ -124,9 +124,9 @@ public:
     };
     Q_DECLARE_FLAGS(Changes, Change)
 
-    SheetDamage(KCSheet* sheet, Changes changes);
+    KCSheetDamage(KCSheet* sheet, Changes changes);
 
-    virtual ~SheetDamage();
+    virtual ~KCSheetDamage();
 
     virtual Type type() const {
         return KCDamage::DamagedSheet;
@@ -137,12 +137,12 @@ public:
     Changes changes() const;
 
 private:
-    Q_DISABLE_COPY(SheetDamage)
+    Q_DISABLE_COPY(KCSheetDamage)
 
     class Private;
     Private * const d;
 };
-Q_DECLARE_OPERATORS_FOR_FLAGS(SheetDamage::Changes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KCSheetDamage::Changes)
 
 
 /**
@@ -207,7 +207,7 @@ private:
 
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCDamage& d);
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCCellDamage& d);
-KSPREAD_EXPORT QDebug operator<<(QDebug str, const SheetDamage& d);
+KSPREAD_EXPORT QDebug operator<<(QDebug str, const KCSheetDamage& d);
 KSPREAD_EXPORT QDebug operator<<(QDebug str, const SelectionDamage& d);
 
 #endif // KSPREAD_DAMAGES

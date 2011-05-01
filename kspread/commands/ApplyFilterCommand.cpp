@@ -61,9 +61,9 @@ void ApplyFilterCommand::redo()
         }
     }
     if (database.orientation() == Qt::Vertical)
-        sheet->map()->addDamage(new SheetDamage(sheet, SheetDamage::RowsChanged));
+        sheet->map()->addDamage(new KCSheetDamage(sheet, KCSheetDamage::RowsChanged));
     else // database.orientation() == Qt::Horizontal
-        sheet->map()->addDamage(new SheetDamage(sheet, SheetDamage::ColumnsChanged));
+        sheet->map()->addDamage(new KCSheetDamage(sheet, KCSheetDamage::ColumnsChanged));
 
     m_sheet->cellStorage()->setDatabase(*this, Database());
     m_sheet->cellStorage()->setDatabase(*this, database);
@@ -86,9 +86,9 @@ void ApplyFilterCommand::undo()
             sheet->nonDefaultColumnFormat(i)->setFiltered(m_undoData[i]);
     }
     if (database.orientation() == Qt::Vertical)
-        sheet->map()->addDamage(new SheetDamage(sheet, SheetDamage::RowsChanged));
+        sheet->map()->addDamage(new KCSheetDamage(sheet, KCSheetDamage::RowsChanged));
     else // database.orientation() == Qt::Horizontal
-        sheet->map()->addDamage(new SheetDamage(sheet, SheetDamage::ColumnsChanged));
+        sheet->map()->addDamage(new KCSheetDamage(sheet, KCSheetDamage::ColumnsChanged));
 
     m_sheet->cellStorage()->setDatabase(*this, Database());
     m_sheet->cellStorage()->setDatabase(*this, database);

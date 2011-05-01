@@ -359,9 +359,9 @@ void TableShape::handleDamages(const QList<KCDamage*>& damages)
         }
 
         if (damage->type() == KCDamage::DamagedSheet) {
-            SheetDamage* sheetDamage = static_cast<SheetDamage*>(damage);
+            KCSheetDamage* sheetDamage = static_cast<KCSheetDamage*>(damage);
 
-            if (sheetDamage->changes() & SheetDamage::PropertiesChanged)
+            if (sheetDamage->changes() & KCSheetDamage::PropertiesChanged)
                 d->sheetView->invalidate();
             continue;
         }
