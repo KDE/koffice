@@ -41,7 +41,7 @@
 class StyleStorageUndoCommand : public QUndoCommand
 {
 public:
-    typedef QPair<QRectF, SharedSubStyle> Pair;
+    typedef QPair<QRectF, KCSharedSubStyle> Pair;
 
     explicit StyleStorageUndoCommand(KCStyleStorage *storage, QUndoCommand *parent = 0);
 

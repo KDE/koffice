@@ -45,7 +45,7 @@ protected:
 
 private:
     QColor m_color;
-    QList< QPair<QRectF, SharedSubStyle> > m_undoData;
+    QList< QPair<QRectF, KCSharedSubStyle> > m_undoData;
 };
 
 #endif // KSPREAD_BORDER_COLOR_COMMAND

@@ -174,7 +174,7 @@ private:
     bool m_verticalPenChanged;
 
     KCStyle* m_style;
-    QList< QPair<QRectF, SharedSubStyle> > m_undoData;
+    QList< QPair<QRectF, KCSharedSubStyle> > m_undoData;
 };
 
 #endif // KSPREAD_STYLE_COMMAND

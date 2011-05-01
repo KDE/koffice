@@ -474,7 +474,7 @@ void KCCellStorage::setStyle(const KCRegion& region, const KCStyle& style)
     }
 }
 
-void KCCellStorage::insertSubStyle(const QRect &rect, const SharedSubStyle &subStyle)
+void KCCellStorage::insertSubStyle(const QRect &rect, const KCSharedSubStyle &subStyle)
 {
     d->styleStorage->insert(rect, subStyle);
     if (!d->sheet->map()->isLoading()) {
@@ -793,7 +793,7 @@ void KCCellStorage::insertColumns(int position, int number)
     QVector< QPair<QPoint, QString> > links = d->linkStorage->insertColumns(position, number);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->insertColumns(position, number);
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->insertColumns(position, number);
-    QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertColumns(position, number);
+    QList< QPair<QRectF, KCSharedSubStyle> > styles = d->styleStorage->insertColumns(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertColumns(position, number);
     QVector< QPair<QPoint, QSharedPointer<QTextDocument> > > richTexts = d->richTextStorage->insertColumns(position, number);
     QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->insertColumns(position, number);
@@ -850,7 +850,7 @@ void KCCellStorage::removeColumns(int position, int number)
     QVector< QPair<QPoint, QString> > links = d->linkStorage->removeColumns(position, number);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->removeColumns(position, number);
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->removeColumns(position, number);
-    QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeColumns(position, number);
+    QList< QPair<QRectF, KCSharedSubStyle> > styles = d->styleStorage->removeColumns(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeColumns(position, number);
     QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->removeColumns(position, number);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeColumns(position, number);
@@ -906,7 +906,7 @@ void KCCellStorage::insertRows(int position, int number)
     QVector< QPair<QPoint, QString> > links = d->linkStorage->insertRows(position, number);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->insertRows(position, number);
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->insertRows(position, number);
-    QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertRows(position, number);
+    QList< QPair<QRectF, KCSharedSubStyle> > styles = d->styleStorage->insertRows(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertRows(position, number);
     QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->insertRows(position, number);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertRows(position, number);
@@ -965,7 +965,7 @@ void KCCellStorage::removeRows(int position, int number)
     QVector< QPair<QPoint, QString> > links = d->linkStorage->removeRows(position, number);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->removeRows(position, number);
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->removeRows(position, number);
-    QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeRows(position, number);
+    QList< QPair<QRectF, KCSharedSubStyle> > styles = d->styleStorage->removeRows(position, number);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeRows(position, number);
     QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->removeRows(position, number);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeRows(position, number);
@@ -1024,7 +1024,7 @@ void KCCellStorage::removeShiftLeft(const QRect& rect)
     QVector< QPair<QPoint, QString> > links = d->linkStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->removeShiftLeft(rect);
-    QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeShiftLeft(rect);
+    QList< QPair<QRectF, KCSharedSubStyle> > styles = d->styleStorage->removeShiftLeft(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeShiftLeft(rect);
     QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->removeShiftLeft(rect);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeShiftLeft(rect);
@@ -1082,7 +1082,7 @@ void KCCellStorage::insertShiftRight(const QRect& rect)
     QVector< QPair<QPoint, QString> > links = d->linkStorage->insertShiftRight(rect);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->insertShiftRight(rect);
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->insertShiftRight(rect);
-    QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertShiftRight(rect);
+    QList< QPair<QRectF, KCSharedSubStyle> > styles = d->styleStorage->insertShiftRight(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertShiftRight(rect);
     QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->insertShiftRight(rect);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertShiftRight(rect);
@@ -1141,7 +1141,7 @@ void KCCellStorage::removeShiftUp(const QRect& rect)
     QVector< QPair<QPoint, QString> > links = d->linkStorage->removeShiftUp(rect);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->removeShiftUp(rect);
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->removeShiftUp(rect);
-    QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->removeShiftUp(rect);
+    QList< QPair<QRectF, KCSharedSubStyle> > styles = d->styleStorage->removeShiftUp(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->removeShiftUp(rect);
     QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->removeShiftUp(rect);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->removeShiftUp(rect);
@@ -1199,7 +1199,7 @@ void KCCellStorage::insertShiftDown(const QRect& rect)
     QVector< QPair<QPoint, QString> > links = d->linkStorage->insertShiftDown(rect);
     QList< QPair<QRectF, bool> > matrices = d->matrixStorage->insertShiftDown(rect);
     QList< QPair<QRectF, QString> > namedAreas = d->namedAreaStorage->insertShiftDown(rect);
-    QList< QPair<QRectF, SharedSubStyle> > styles = d->styleStorage->insertShiftDown(rect);
+    QList< QPair<QRectF, KCSharedSubStyle> > styles = d->styleStorage->insertShiftDown(rect);
     QVector< QPair<QPoint, QString> > userInputs = d->userInputStorage->insertShiftDown(rect);
     QList< QPair<QRectF, KCValidity> > validities = d->validityStorage->insertShiftDown(rect);
     QVector< QPair<QPoint, KCValue> > values = d->valueStorage->insertShiftDown(rect);

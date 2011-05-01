@@ -39,12 +39,12 @@ class KDE_NO_EXPORT KCStyleStorage::Private
 {
 public:
     KCMap* map;
-    RTree<SharedSubStyle> tree;
+    RTree<KCSharedSubStyle> tree;
     QMap<int, bool> usedColumns; // FIXME Stefan: Use QList and qUpperBound() for insertion.
     QMap<int, bool> usedRows;
     QRegion usedArea;
-    QHash<KCStyle::Key, QList<SharedSubStyle> > subStyles;
-    QMap<int, QPair<QRectF, SharedSubStyle> > possibleGarbage;
+    QHash<KCStyle::Key, QList<KCSharedSubStyle> > subStyles;
+    QMap<int, QPair<QRectF, KCSharedSubStyle> > possibleGarbage;
     QCache<QPoint, KCStyle> cache;
     QRegion cachedArea;
 };
@@ -85,7 +85,7 @@ KCStyle KCStyleStorage::contains(const QPoint& point) const
         return *d->cache.object(point);
     }
     // not found, lookup in the tree
-    QList<SharedSubStyle> subStyles = d->tree.contains(point);
+    QList<KCSharedSubStyle> subStyles = d->tree.contains(point);
 
     if (subStyles.isEmpty())
         return *styleManager()->defaultStyle();
@@ -100,29 +100,29 @@ KCStyle KCStyleStorage::contains(const QPoint& point) const
 
 KCStyle KCStyleStorage::contains(const QRect& rect) const
 {
-    QList<SharedSubStyle> subStyles = d->tree.contains(rect);
+    QList<KCSharedSubStyle> subStyles = d->tree.contains(rect);
     return composeStyle(subStyles);
 }
 
 KCStyle KCStyleStorage::intersects(const QRect& rect) const
 {
-    QList<SharedSubStyle> subStyles = d->tree.intersects(rect);
+    QList<KCSharedSubStyle> subStyles = d->tree.intersects(rect);
     return composeStyle(subStyles);
 }
 
-QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::undoData(const KCRegion& region) const
+QList< QPair<QRectF, KCSharedSubStyle> > KCStyleStorage::undoData(const KCRegion& region) const
 {
-    QList< QPair<QRectF, SharedSubStyle> > result;
+    QList< QPair<QRectF, KCSharedSubStyle> > result;
     KCRegion::ConstIterator end = region.constEnd();
     for (KCRegion::ConstIterator it = region.constBegin(); it != end; ++it) {
         const QRect rect = (*it)->rect();
-        QList< QPair<QRectF, SharedSubStyle> > pairs = d->tree.intersectingPairs(rect).values();
+        QList< QPair<QRectF, KCSharedSubStyle> > pairs = d->tree.intersectingPairs(rect).values();
         for (int i = 0; i < pairs.count(); ++i) {
             // trim the rects
             pairs[i].first = pairs[i].first.intersected(rect);
         }
         // Always a default subStyle first, even if there are no pairs.
-        result << qMakePair(QRectF(rect), SharedSubStyle()) << pairs;
+        result << qMakePair(QRectF(rect), KCSharedSubStyle()) << pairs;
     }
     return result;
 }
@@ -159,7 +159,7 @@ void KCStyleStorage::saveOdfCreateDefaultStyles(int& maxCols, int& maxRows, KCOd
         maxCols = KS_colMax;
         maxRows = qMax(maxRows, (--d->usedRows.constEnd()).key());
     }
-    const QList< QPair<QRectF, SharedSubStyle> > pairs = d->tree.intersectingPairs(sheetRect).values();
+    const QList< QPair<QRectF, KCSharedSubStyle> > pairs = d->tree.intersectingPairs(sheetRect).values();
     for (int i = 0; i < pairs.count(); ++i) {
         const QRect rect = pairs[i].first.toRect();
         // column default cell styles
@@ -208,7 +208,7 @@ int KCStyleStorage::nextColumnIndexInRow(int column, int row) const
     return rect.isNull() ? 0 : rect.left();
 }
 
-void KCStyleStorage::insert(const QRect& rect, const SharedSubStyle& subStyle)
+void KCStyleStorage::insert(const QRect& rect, const KCSharedSubStyle& subStyle)
 {
 //     kDebug(36006) <<"KCStyleStorage: inserting" << KCSubStyle::name(subStyle->type()) <<" into" << rect;
     // keep track of the used area
@@ -239,7 +239,7 @@ void KCStyleStorage::insert(const QRect& rect, const SharedSubStyle& subStyle)
     }
 
     // lookup already used substyles
-    typedef const QList< SharedSubStyle> StoredSubStyleList;
+    typedef const QList< KCSharedSubStyle> StoredSubStyleList;
     StoredSubStyleList& storedSubStyles(d->subStyles.value(subStyle->type()));
     StoredSubStyleList::ConstIterator end(storedSubStyles.end());
     for (StoredSubStyleList::ConstIterator it(storedSubStyles.begin()); it != end; ++it) {
@@ -260,7 +260,7 @@ void KCStyleStorage::insert(const KCRegion& region, const KCStyle& style)
 {
     if (style.isEmpty())
         return;
-    foreach(const SharedSubStyle& subStyle, style.subStyles()) {
+    foreach(const KCSharedSubStyle& subStyle, style.subStyles()) {
         KCRegion::ConstIterator end(region.constEnd());
         for (KCRegion::ConstIterator it(region.constBegin()); it != end; ++it) {
             // insert substyle
@@ -272,7 +272,7 @@ void KCStyleStorage::insert(const KCRegion& region, const KCStyle& style)
 
 void KCStyleStorage::load(const QList<QPair<QRegion, KCStyle> >& styles)
 {
-    QList<QPair<QRegion, SharedSubStyle> > subStyles;
+    QList<QPair<QRegion, KCSharedSubStyle> > subStyles;
 
     d->usedArea = QRegion();
     d->usedColumns.clear();
@@ -306,9 +306,9 @@ void KCStyleStorage::load(const QList<QPair<QRegion, KCStyle> >& styles)
         }
 
         // find substyles
-        foreach(const SharedSubStyle& subStyle, style.subStyles()) {
+        foreach(const KCSharedSubStyle& subStyle, style.subStyles()) {
             bool foundShared = false;
-            typedef const QList< SharedSubStyle> StoredSubStyleList;
+            typedef const QList< KCSharedSubStyle> StoredSubStyleList;
             StoredSubStyleList& storedSubStyles(d->subStyles.value(subStyle->type()));
             StoredSubStyleList::ConstIterator end(storedSubStyles.end());
             for (StoredSubStyleList::ConstIterator it(storedSubStyles.begin()); it != end; ++it) {
@@ -328,7 +328,7 @@ void KCStyleStorage::load(const QList<QPair<QRegion, KCStyle> >& styles)
     d->tree.load(subStyles);
 }
 
-QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::insertRows(int position, int number)
+QList< QPair<QRectF, KCSharedSubStyle> > KCStyleStorage::insertRows(int position, int number)
 {
     const QRect invalidRect(1, position, KS_colMax, KS_rowMax);
     // invalidate the affected, cached styles
@@ -352,13 +352,13 @@ QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::insertRows(int position, 
         d->usedRows.remove(it.key());
     d->usedRows.unite(map);
     // process the tree
-    QList< QPair<QRectF, SharedSubStyle> > undoData;
-    undoData << qMakePair(QRectF(1, KS_rowMax - number + 1, KS_colMax, number), SharedSubStyle());
+    QList< QPair<QRectF, KCSharedSubStyle> > undoData;
+    undoData << qMakePair(QRectF(1, KS_rowMax - number + 1, KS_colMax, number), KCSharedSubStyle());
     undoData << d->tree.insertRows(position, number);
     return undoData;
 }
 
-QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::insertColumns(int position, int number)
+QList< QPair<QRectF, KCSharedSubStyle> > KCStyleStorage::insertColumns(int position, int number)
 {
     const QRect invalidRect(position, 1, KS_colMax, KS_rowMax);
     // invalidate the affected, cached styles
@@ -382,13 +382,13 @@ QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::insertColumns(int positio
         d->usedColumns.remove(it.key());
     d->usedColumns.unite(map);
     // process the tree
-    QList< QPair<QRectF, SharedSubStyle> > undoData;
-    undoData << qMakePair(QRectF(KS_colMax - number + 1, 1, number, KS_rowMax), SharedSubStyle());
+    QList< QPair<QRectF, KCSharedSubStyle> > undoData;
+    undoData << qMakePair(QRectF(KS_colMax - number + 1, 1, number, KS_rowMax), KCSharedSubStyle());
     undoData << d->tree.insertColumns(position, number);
     return undoData;
 }
 
-QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::removeRows(int position, int number)
+QList< QPair<QRectF, KCSharedSubStyle> > KCStyleStorage::removeRows(int position, int number)
 {
     const QRect invalidRect(1, position, KS_colMax, KS_rowMax);
     // invalidate the affected, cached styles
@@ -409,13 +409,13 @@ QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::removeRows(int position, 
         d->usedRows.remove(it.key());
     d->usedRows.unite(map);
     // process the tree
-    QList< QPair<QRectF, SharedSubStyle> > undoData;
-    undoData << qMakePair(QRectF(1, position, KS_colMax, number), SharedSubStyle());
+    QList< QPair<QRectF, KCSharedSubStyle> > undoData;
+    undoData << qMakePair(QRectF(1, position, KS_colMax, number), KCSharedSubStyle());
     undoData << d->tree.removeRows(position, number);
     return undoData;
 }
 
-QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::removeColumns(int position, int number)
+QList< QPair<QRectF, KCSharedSubStyle> > KCStyleStorage::removeColumns(int position, int number)
 {
     const QRect invalidRect(position, 1, KS_colMax, KS_rowMax);
     // invalidate the affected, cached styles
@@ -436,17 +436,17 @@ QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::removeColumns(int positio
         d->usedColumns.remove(it.key());
     d->usedColumns.unite(map);
     // process the tree
-    QList< QPair<QRectF, SharedSubStyle> > undoData;
-    undoData << qMakePair(QRectF(position, 1, number, KS_rowMax), SharedSubStyle());
+    QList< QPair<QRectF, KCSharedSubStyle> > undoData;
+    undoData << qMakePair(QRectF(position, 1, number, KS_rowMax), KCSharedSubStyle());
     undoData << d->tree.removeColumns(position, number);
     return undoData;
 }
 
-QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::insertShiftRight(const QRect& rect)
+QList< QPair<QRectF, KCSharedSubStyle> > KCStyleStorage::insertShiftRight(const QRect& rect)
 {
     const QRect invalidRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom()));
-    QList< QPair<QRectF, SharedSubStyle> > undoData;
-    undoData << qMakePair(QRectF(rect), SharedSubStyle());
+    QList< QPair<QRectF, KCSharedSubStyle> > undoData;
+    undoData << qMakePair(QRectF(rect), KCSharedSubStyle());
     undoData << d->tree.insertShiftRight(rect);
     regionChanged(invalidRect);
     // update the used area
@@ -468,11 +468,11 @@ QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::insertShiftRight(const QR
     return undoData;
 }
 
-QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::insertShiftDown(const QRect& rect)
+QList< QPair<QRectF, KCSharedSubStyle> > KCStyleStorage::insertShiftDown(const QRect& rect)
 {
     const QRect invalidRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax));
-    QList< QPair<QRectF, SharedSubStyle> > undoData;
-    undoData << qMakePair(QRectF(rect), SharedSubStyle());
+    QList< QPair<QRectF, KCSharedSubStyle> > undoData;
+    undoData << qMakePair(QRectF(rect), KCSharedSubStyle());
     undoData << d->tree.insertShiftDown(rect);
     regionChanged(invalidRect);
     // update the used area
@@ -494,11 +494,11 @@ QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::insertShiftDown(const QRe
     return undoData;
 }
 
-QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::removeShiftLeft(const QRect& rect)
+QList< QPair<QRectF, KCSharedSubStyle> > KCStyleStorage::removeShiftLeft(const QRect& rect)
 {
     const QRect invalidRect(rect.topLeft(), QPoint(KS_colMax, rect.bottom()));
-    QList< QPair<QRectF, SharedSubStyle> > undoData;
-    undoData << qMakePair(QRectF(rect), SharedSubStyle());
+    QList< QPair<QRectF, KCSharedSubStyle> > undoData;
+    undoData << qMakePair(QRectF(rect), KCSharedSubStyle());
     undoData << d->tree.removeShiftLeft(rect);
     regionChanged(invalidRect);
     // update the used area
@@ -515,11 +515,11 @@ QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::removeShiftLeft(const QRe
     return undoData;
 }
 
-QList< QPair<QRectF, SharedSubStyle> > KCStyleStorage::removeShiftUp(const QRect& rect)
+QList< QPair<QRectF, KCSharedSubStyle> > KCStyleStorage::removeShiftUp(const QRect& rect)
 {
     const QRect invalidRect(rect.topLeft(), QPoint(rect.right(), KS_rowMax));
-    QList< QPair<QRectF, SharedSubStyle> > undoData;
-    undoData << qMakePair(QRectF(rect), SharedSubStyle());
+    QList< QPair<QRectF, KCSharedSubStyle> > undoData;
+    undoData << qMakePair(QRectF(rect), KCSharedSubStyle());
     undoData << d->tree.removeShiftUp(rect);
     regionChanged(invalidRect);
     // update the used area
@@ -549,7 +549,7 @@ void KCStyleStorage::garbageCollection()
         return;
 
     const int currentZIndex = d->possibleGarbage.constBegin().key();
-    const QPair<QRectF, SharedSubStyle> currentPair = d->possibleGarbage.take(currentZIndex);
+    const QPair<QRectF, KCSharedSubStyle> currentPair = d->possibleGarbage.take(currentZIndex);
 
     // check whether the named style still exists
     if (currentPair.second->type() == KCStyle::NamedStyleKey &&
@@ -563,7 +563,7 @@ void KCStyleStorage::garbageCollection()
         return; // already done
     }
 
-    typedef QPair<QRectF, SharedSubStyle> SharedSubStylePair;
+    typedef QPair<QRectF, KCSharedSubStyle> SharedSubStylePair;
     QMap<int, SharedSubStylePair> pairs = d->tree.intersectingPairs(currentPair.first.toRect());
     if (pairs.isEmpty())   // actually never true, just for sanity
         return;
@@ -702,7 +702,7 @@ void KCStyleStorage::invalidateCache(const QRect& rect)
     }
 }
 
-KCStyle KCStyleStorage::composeStyle(const QList<SharedSubStyle>& subStyles) const
+KCStyle KCStyleStorage::composeStyle(const QList<KCSharedSubStyle>& subStyles) const
 {
     if (subStyles.isEmpty())
         return *styleManager()->defaultStyle();

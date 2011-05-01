@@ -125,7 +125,7 @@ QString KCSubStyle::name(KCStyle::Key key)
     return name;
 }
 
-SharedSubStyle SharedSubStyle::s_defaultStyle(new KCSubStyle());
+KCSharedSubStyle KCSharedSubStyle::s_defaultStyle(new KCSubStyle());
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -136,7 +136,7 @@ SharedSubStyle SharedSubStyle::s_defaultStyle(new KCSubStyle());
 class KCStyle::Private : public QSharedData
 {
 public:
-    QHash<Key, SharedSubStyle> subStyles;
+    QHash<Key, KCSharedSubStyle> subStyles;
 };
 
 
@@ -174,7 +174,7 @@ QString KCStyle::parentName() const
 
 void KCStyle::setParentName(const QString& name)
 {
-    d->subStyles.insert(NamedStyleKey, SharedSubStyle(new NamedStyle(name)));
+    d->subStyles.insert(NamedStyleKey, KCSharedSubStyle(new NamedStyle(name)));
 }
 
 void KCStyle::clearAttribute(Key key)
@@ -187,7 +187,7 @@ bool KCStyle::hasAttribute(Key key) const
     return d->subStyles.contains(key);
 }
 
-void KCStyle::loadAttributes(const QList<SharedSubStyle>& subStyles)
+void KCStyle::loadAttributes(const QList<KCSharedSubStyle>& subStyles)
 {
     d->subStyles.clear();
     for (int i = 0; i < subStyles.count(); ++i) {
@@ -2448,7 +2448,7 @@ bool KCStyle::operator==(const KCStyle& other) const
 uint qHash(const KCStyle& style)
 {
     uint hash = 0;
-    foreach (const SharedSubStyle& ss, style.subStyles()) {
+    foreach (const KCSharedSubStyle& ss, style.subStyles()) {
         hash ^= ss->koHash();
     }
     return hash;
@@ -2471,7 +2471,7 @@ KCStyle KCStyle::operator-(const KCStyle& other) const
 
 void KCStyle::merge(const KCStyle& style)
 {
-    const QList<SharedSubStyle> subStyles(style.subStyles());
+    const QList<KCSharedSubStyle> subStyles(style.subStyles());
 //     kDebug(36006) <<"merging" << subStyles.count() <<" attributes.";
     for (int i = 0; i < subStyles.count(); ++i) {
 //         kDebug(36006) << subStyles[i]->debugData();
@@ -2513,14 +2513,14 @@ QTextCharFormat KCStyle::asCharFormat() const
 }
 
 
-QList<SharedSubStyle> KCStyle::subStyles() const
+QList<KCSharedSubStyle> KCStyle::subStyles() const
 {
     return d->subStyles.values();
 }
 
-SharedSubStyle KCStyle::createSubStyle(Key key, const QVariant& value)
+KCSharedSubStyle KCStyle::createSubStyle(Key key, const QVariant& value)
 {
-    SharedSubStyle newSubStyle;
+    KCSharedSubStyle newSubStyle;
     switch (key) {
         // special cases
     case DefaultStyleKey:
@@ -2642,12 +2642,12 @@ SharedSubStyle KCStyle::createSubStyle(Key key, const QVariant& value)
 
 void KCStyle::insertSubStyle(Key key, const QVariant& value)
 {
-    const SharedSubStyle subStyle = createSubStyle(key, value);
+    const KCSharedSubStyle subStyle = createSubStyle(key, value);
     Q_ASSERT(!!subStyle);
     insertSubStyle(subStyle);
 }
 
-void KCStyle::insertSubStyle(const SharedSubStyle& subStyle)
+void KCStyle::insertSubStyle(const KCSharedSubStyle& subStyle)
 {
     if (!subStyle)
         return;

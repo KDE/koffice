@@ -40,7 +40,7 @@ BorderColorCommand::BorderColorCommand()
 bool BorderColorCommand::preProcessing()
 {
     if (m_firstrun) {
-        QList< QPair<QRectF, SharedSubStyle> > undoData = m_sheet->styleStorage()->undoData(*this);
+        QList< QPair<QRectF, KCSharedSubStyle> > undoData = m_sheet->styleStorage()->undoData(*this);
         ConstIterator endOfList = constEnd();
         for (ConstIterator it = constBegin(); it != endOfList; ++it) {
             for (int i = 0; i < undoData.count(); ++i) {

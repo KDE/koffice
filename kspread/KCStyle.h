@@ -39,7 +39,7 @@ class KoStyleStack;
 
 class KCConditions;
 class KCCustomStyle;
-class SharedSubStyle;
+class KCSharedSubStyle;
 class KCStyle;
 class KCStyleManager;
 class StyleManipulator;
@@ -186,7 +186,7 @@ public:
 
     void clearAttribute(Key key);
     bool hasAttribute(Key key) const;
-    void loadAttributes(const QList<SharedSubStyle>& subStyles);
+    void loadAttributes(const QList<KCSharedSubStyle>& subStyles);
 
 
     uint bottomPenValue() const;
@@ -359,11 +359,11 @@ public:
      */
     QTextCharFormat asCharFormat() const;
 protected:
-    QList<SharedSubStyle> subStyles() const;
+    QList<KCSharedSubStyle> subStyles() const;
 
-    SharedSubStyle createSubStyle(Key key, const QVariant& value);
+    KCSharedSubStyle createSubStyle(Key key, const QVariant& value);
     virtual void insertSubStyle(Key key, const QVariant& value);
-    void insertSubStyle(const SharedSubStyle& subStyle);
+    void insertSubStyle(const KCSharedSubStyle& subStyle);
     bool releaseSubStyle(Key key);
 
 private:
@@ -471,22 +471,22 @@ public:
 // Otherwise, we would have QSharedDataPointer<KCSubStyle>() as default,
 // which has a null pointer and crashes.
 // Also, this makes the code more readable:
-// QSharedDataPointer<KCSubStyle> vs. SharedSubStyle
-class SharedSubStyle
+// QSharedDataPointer<KCSubStyle> vs. KCSharedSubStyle
+class KCSharedSubStyle
 {
 public:
-    inline SharedSubStyle() : d(s_defaultStyle.d){}
-    inline SharedSubStyle(KCSubStyle* subStyle) : d(subStyle) {}
+    inline KCSharedSubStyle() : d(s_defaultStyle.d){}
+    inline KCSharedSubStyle(KCSubStyle* subStyle) : d(subStyle) {}
     inline const KCSubStyle *operator->() const {
         return d.data();
     }
     inline const KCSubStyle *data() const {
         return d.data();
     }
-    inline bool operator<(const SharedSubStyle& o) const {
+    inline bool operator<(const KCSharedSubStyle& o) const {
         return d.data() < o.d.data();
     }
-    inline bool operator==(const SharedSubStyle& o) const {
+    inline bool operator==(const KCSharedSubStyle& o) const {
         return d.data() == o.d.data();
     }
     inline bool operator!() const {
@@ -495,7 +495,7 @@ public:
 
 private:
     QSharedDataPointer<KCSubStyle> d;
-    static SharedSubStyle s_defaultStyle;
+    static KCSharedSubStyle s_defaultStyle;
 };
 
 class NamedStyle : public KCSubStyle
@@ -545,6 +545,6 @@ public:
 
 Q_DECLARE_TYPEINFO(KCStyle, Q_MOVABLE_TYPE);
 Q_DECLARE_TYPEINFO(KCCustomStyle, Q_MOVABLE_TYPE);
-Q_DECLARE_TYPEINFO(SharedSubStyle, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KCSharedSubStyle, Q_MOVABLE_TYPE);
 
 #endif // KSPREAD_STYLE

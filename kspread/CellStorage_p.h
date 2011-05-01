@@ -72,7 +72,7 @@ public:
     QVector< QPair<QPoint, QString> >        links;
     QList< QPair<QRectF, bool> >             matrices;
     QList< QPair<QRectF, QString> >          namedAreas;
-    QList< QPair<QRectF, SharedSubStyle> >   styles;
+    QList< QPair<QRectF, KCSharedSubStyle> >   styles;
     QVector< QPair<QPoint, QString> >        userInputs;
     QList< QPair<QRectF, KCValidity> >         validities;
     QVector< QPair<QPoint, KCValue> >          values;

@@ -57,7 +57,7 @@ bool StyleCommand::process(Element* element)
                                               m_style->hasAttribute(KCStyle::TopPen) ? -1 : 0,
                                               m_style->hasAttribute(KCStyle::RightPen) ? 1 : 0,
                                               m_style->hasAttribute(KCStyle::BottomPen) ? 1 : 0);
-            const QList< QPair<QRectF, SharedSubStyle> > rawUndoData
+            const QList< QPair<QRectF, KCSharedSubStyle> > rawUndoData
             = m_sheet->styleStorage()->undoData(KCRegion(rect));
             for (int i = 0; i < rawUndoData.count(); ++i) {
 //                 if ( m_style->hasAttribute( rawUndoData[i].second->type() ) ||

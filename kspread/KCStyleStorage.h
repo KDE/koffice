@@ -80,7 +80,7 @@ public:
      * reconstruct the former state of the storage after modification.
      * \return all substyle/range pairs intersecting \p rect
      */
-    QList< QPair<QRectF, SharedSubStyle> > undoData(const KCRegion& rect) const;
+    QList< QPair<QRectF, KCSharedSubStyle> > undoData(const KCRegion& rect) const;
 
     /**
      * Returns the area, which got a style attached.
@@ -125,7 +125,7 @@ public:
     /**
      * Assigns \p subStyle to the area \p rect .
      */
-    void insert(const QRect& rect, const SharedSubStyle& subStyle);
+    void insert(const QRect& rect, const KCSharedSubStyle& subStyle);
 
     /**
      * Assigns the substyles contained in \p style to the area \p region .
@@ -141,51 +141,51 @@ public:
      * Inserts \p number rows at the position \p position .
      * It extends or shifts rectangles, respectively.
      */
-    QList< QPair<QRectF, SharedSubStyle> > insertRows(int position, int number = 1);
+    QList< QPair<QRectF, KCSharedSubStyle> > insertRows(int position, int number = 1);
 
     /**
      * Inserts \p number columns at the position \p position .
      * It extends or shifts rectangles, respectively.
      */
-    QList< QPair<QRectF, SharedSubStyle> > insertColumns(int position, int number = 1);
+    QList< QPair<QRectF, KCSharedSubStyle> > insertColumns(int position, int number = 1);
 
     /**
      * Deletes \p number rows at the position \p position .
      * It shrinks or shifts rectangles, respectively.
      */
-    QList< QPair<QRectF, SharedSubStyle> > removeRows(int position, int number = 1);
+    QList< QPair<QRectF, KCSharedSubStyle> > removeRows(int position, int number = 1);
 
     /**
      * Deletes \p number columns at the position \p position .
      * It shrinks or shifts rectangles, respectively.
      */
-    QList< QPair<QRectF, SharedSubStyle> > removeColumns(int position, int number = 1);
+    QList< QPair<QRectF, KCSharedSubStyle> > removeColumns(int position, int number = 1);
 
     /**
      * Shifts the rows right of \p rect to the right by the width of \p rect .
      * It extends or shifts rectangles, respectively.
      */
-    QList< QPair<QRectF, SharedSubStyle> > insertShiftRight(const QRect& rect);
+    QList< QPair<QRectF, KCSharedSubStyle> > insertShiftRight(const QRect& rect);
 
     /**
      * Shifts the columns at the bottom of \p rect to the bottom by the height of \p rect .
      * It extends or shifts rectangles, respectively.
      */
-    QList< QPair<QRectF, SharedSubStyle> > insertShiftDown(const QRect& rect);
+    QList< QPair<QRectF, KCSharedSubStyle> > insertShiftDown(const QRect& rect);
 
     /**
      * Shifts the rows left of \p rect to the left by the width of \p rect .
      * It shrinks or shifts rectangles, respectively.
      * \return the former rectangle/data pairs
      */
-    QList< QPair<QRectF, SharedSubStyle> > removeShiftLeft(const QRect& rect);
+    QList< QPair<QRectF, KCSharedSubStyle> > removeShiftLeft(const QRect& rect);
 
     /**
      * Shifts the columns on top of \p rect to the top by the height of \p rect .
      * It shrinks or shifts rectangles, respectively.
      * \return the former rectangle/data pairs
      */
-    QList< QPair<QRectF, SharedSubStyle> > removeShiftUp(const QRect& rect);
+    QList< QPair<QRectF, KCSharedSubStyle> > removeShiftUp(const QRect& rect);
 
     /**
      * Invalidates all cached styles.
@@ -212,7 +212,7 @@ protected:
      * Composes a style of \p substyles .
      * \return the composed style
      */
-    KCStyle composeStyle(const QList<SharedSubStyle>& subStyles) const;
+    KCStyle composeStyle(const QList<KCSharedSubStyle>& subStyles) const;
 
     /**
      * Convenience method.

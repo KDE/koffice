@@ -170,7 +170,7 @@ public:
      */
     KCStyle style(const QRect& rect) const;
     void setStyle(const KCRegion& region, const KCStyle& style);
-    void insertSubStyle(const QRect& rect, const SharedSubStyle& subStyle);
+    void insertSubStyle(const QRect& rect, const KCSharedSubStyle& subStyle);
 
     /**
      * \return the user input associated with the KCCell at \p column , \p row .
