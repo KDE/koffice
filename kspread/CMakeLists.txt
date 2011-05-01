@@ -192,7 +192,7 @@ SET (kspreadcommon_LIB_SRCS
 
 set (kspreadodf_LIB_SRCS
     part/Digest.cpp
-    ApplicationSettings.cpp
+    KCApplicationSettings.cpp
     KCBinding.cpp
     BindingManager.cpp
     CalculationSettings.cpp

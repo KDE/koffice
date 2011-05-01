@@ -49,7 +49,7 @@
 #include <KStandardDirs>
 #include <sonnet/configwidget.h>
 
-#include "ApplicationSettings.h"
+#include "KCApplicationSettings.h"
 #include "CalculationSettings.h"
 #include "part/Doc.h"
 #include "part/Factory.h"

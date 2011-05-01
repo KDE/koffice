@@ -45,7 +45,7 @@
 #include <KoParagraphStyle.h>
 #include <KoShapeRegistry.h>
 
-#include "ApplicationSettings.h"
+#include "KCApplicationSettings.h"
 #include "BindingManager.h"
 #include "CalculationSettings.h"
 #include "CellStorage.h"
@@ -99,7 +99,7 @@ public:
     StyleManager* styleManager;
     KoStyleManager* textStyleManager;
 
-    ApplicationSettings* applicationSettings;
+    KCApplicationSettings* applicationSettings;
     CalculationSettings* calculationSettings;
     ValueCalc* calc;
     ValueConverter* converter;
@@ -139,7 +139,7 @@ KCMap::KCMap(DocBase* doc, int syntaxVersion)
     d->styleManager = new StyleManager();
     d->textStyleManager = new KoStyleManager(this);
 
-    d->applicationSettings = new ApplicationSettings();
+    d->applicationSettings = new KCApplicationSettings();
     d->calculationSettings = new CalculationSettings();
 
     d->parser = new ValueParser(d->calculationSettings);
@@ -319,7 +319,7 @@ void KCMap::setDefaultRowHeight(double height)
     d->defaultRowFormat->setHeight(height);
 }
 
-ApplicationSettings* KCMap::settings() const
+KCApplicationSettings* KCMap::settings() const
 {
     return d->applicationSettings;
 }

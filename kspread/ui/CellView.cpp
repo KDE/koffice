@@ -60,7 +60,7 @@
 #include <KoZoomHandler.h>
 
 // KSpread
-#include "ApplicationSettings.h"
+#include "KCApplicationSettings.h"
 #include "CellStorage.h"
 #include "KCCondition.h"
 #include "KCMap.h"

@@ -39,7 +39,7 @@
 #include <KoDocumentInfo.h>
 
 // KSpread
-#include <kspread/ApplicationSettings.h>
+#include <kspread/KCApplicationSettings.h>
 #include <kspread/part/Canvas.h>
 #include <kspread/CellStorage.h>
 #include <kspread/Currency.h>

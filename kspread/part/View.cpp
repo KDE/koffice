@@ -105,7 +105,7 @@
 #include <KoToolProxy.h>
 
 // KSpread includes
-#include "ApplicationSettings.h"
+#include "KCApplicationSettings.h"
 #include "BindingManager.h"
 #include "CalculationSettings.h"
 #include "CanvasResources.h"

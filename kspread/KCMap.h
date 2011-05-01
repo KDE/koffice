@@ -49,7 +49,7 @@ class KoXmlWriter;
 class KoGenStyles;
 class KoOasisSettings;
 
-class ApplicationSettings;
+class KCApplicationSettings;
 class BindingManager;
 class CalculationSettings;
 class ColumnFormat;
@@ -164,7 +164,7 @@ public:
     /**
      * \return the application settings
      */
-    ApplicationSettings* settings() const;
+    KCApplicationSettings* settings() const;
 
     /**
      * \return the calculation settings

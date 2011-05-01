@@ -23,7 +23,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include "ApplicationSettings.h"
+#include "KCApplicationSettings.h"
 #include "KCCell.h"
 #include "CellStorage.h"
 #include "KCMap.h"

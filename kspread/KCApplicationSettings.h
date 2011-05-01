@@ -31,7 +31,7 @@
 /**
  * Visual settings.
  */
-class KSPREAD_EXPORT ApplicationSettings : public QObject
+class KSPREAD_EXPORT KCApplicationSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool showVerticalScrollBar READ showVerticalScrollBar WRITE setShowVerticalScrollBar)
@@ -45,12 +45,12 @@ public:
     /**
      * Constructor.
      */
-    ApplicationSettings();
+    KCApplicationSettings();
 
     /**
      * Destructor.
      */
-    ~ApplicationSettings();
+    ~KCApplicationSettings();
 
     void load();
     void save() const;

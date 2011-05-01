@@ -44,7 +44,7 @@
 #include "CellToolBase.h"
 
 // KSpread
-#include "ApplicationSettings.h"
+#include "KCApplicationSettings.h"
 #include "CalculationSettings.h"
 #include "CellStorage.h"
 #include "KCMap.h"

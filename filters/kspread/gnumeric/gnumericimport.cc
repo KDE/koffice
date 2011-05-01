@@ -39,7 +39,7 @@
 #include <KoDocumentInfo.h>
 
 // KSpread
-#include <kspread/ApplicationSettings.h>
+#include <kspread/KCApplicationSettings.h>
 #include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
 #include <kspread/HeaderFooter.h>

@@ -30,7 +30,7 @@
 #include "CellToolBase_p.h"
 
 // KSpread
-#include "ApplicationSettings.h"
+#include "KCApplicationSettings.h"
 #include "AutoFillStrategy.h"
 #include "CalculationSettings.h"
 #include "KCCell.h"

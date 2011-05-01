@@ -17,9 +17,9 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "ApplicationSettings.h"
+#include "KCApplicationSettings.h"
 
-class ApplicationSettings::Private
+class KCApplicationSettings::Private
 {
 public:
     QColor gridColor;
@@ -37,7 +37,7 @@ public:
     bool captureAllArrowKeys    : 1;
 };
 
-ApplicationSettings::ApplicationSettings()
+KCApplicationSettings::KCApplicationSettings()
         : d(new Private)
 {
     d->gridColor = Qt::lightGray;
@@ -55,145 +55,145 @@ ApplicationSettings::ApplicationSettings()
     d->captureAllArrowKeys = true;
 }
 
-ApplicationSettings::~ApplicationSettings()
+KCApplicationSettings::~KCApplicationSettings()
 {
     delete d;
 }
 
-void ApplicationSettings::load()
+void KCApplicationSettings::load()
 {
 }
 
-void ApplicationSettings::save() const
+void KCApplicationSettings::save() const
 {
 }
 
-void ApplicationSettings::setShowVerticalScrollBar(bool show)
+void KCApplicationSettings::setShowVerticalScrollBar(bool show)
 {
     d->verticalScrollBar = show;
 }
 
-bool ApplicationSettings::showVerticalScrollBar()const
+bool KCApplicationSettings::showVerticalScrollBar()const
 {
     return d->verticalScrollBar;
 }
 
-void ApplicationSettings::setShowHorizontalScrollBar(bool show)
+void KCApplicationSettings::setShowHorizontalScrollBar(bool show)
 {
     d->horizontalScrollBar = show;
 }
 
-bool ApplicationSettings::showHorizontalScrollBar()const
+bool KCApplicationSettings::showHorizontalScrollBar()const
 {
     return d->horizontalScrollBar;
 }
 
-KGlobalSettings::Completion ApplicationSettings::completionMode() const
+KGlobalSettings::Completion KCApplicationSettings::completionMode() const
 {
     return d->completionMode;
 }
 
-void ApplicationSettings::setShowColumnHeader(bool show)
+void KCApplicationSettings::setShowColumnHeader(bool show)
 {
     d->columnHeader = show;
 }
 
-bool ApplicationSettings::showColumnHeader() const
+bool KCApplicationSettings::showColumnHeader() const
 {
     return d->columnHeader;
 }
 
-void ApplicationSettings::setShowRowHeader(bool show)
+void KCApplicationSettings::setShowRowHeader(bool show)
 {
     d->rowHeader = show;
 }
 
-bool ApplicationSettings::showRowHeader() const
+bool KCApplicationSettings::showRowHeader() const
 {
     return d->rowHeader;
 }
 
-void ApplicationSettings::setGridColor(const QColor& color)
+void KCApplicationSettings::setGridColor(const QColor& color)
 {
     d->gridColor = color;
 }
 
-QColor ApplicationSettings::gridColor() const
+QColor KCApplicationSettings::gridColor() const
 {
     return d->gridColor;
 }
 
-void ApplicationSettings::setCompletionMode(KGlobalSettings::Completion complMode)
+void KCApplicationSettings::setCompletionMode(KGlobalSettings::Completion complMode)
 {
     d->completionMode = complMode;
 }
 
-double ApplicationSettings::indentValue() const
+double KCApplicationSettings::indentValue() const
 {
     return d->indentValue;
 }
 
-void ApplicationSettings::setIndentValue(double val)
+void KCApplicationSettings::setIndentValue(double val)
 {
     d->indentValue = val;
 }
 
-void ApplicationSettings::setShowStatusBar(bool statusBar)
+void KCApplicationSettings::setShowStatusBar(bool statusBar)
 {
     d->showStatusBar = statusBar;
 }
 
-bool ApplicationSettings::showStatusBar() const
+bool KCApplicationSettings::showStatusBar() const
 {
     return d->showStatusBar;
 }
 
-void ApplicationSettings::setShowTabBar(bool tabbar)
+void KCApplicationSettings::setShowTabBar(bool tabbar)
 {
     d->showTabBar = tabbar;
 }
 
-bool ApplicationSettings::showTabBar()const
+bool KCApplicationSettings::showTabBar()const
 {
     return d->showTabBar;
 }
 
-KSpread::MoveTo ApplicationSettings::moveToValue() const
+KSpread::MoveTo KCApplicationSettings::moveToValue() const
 {
     return d->moveTo;
 }
 
-void ApplicationSettings::setMoveToValue(KSpread::MoveTo moveTo)
+void KCApplicationSettings::setMoveToValue(KSpread::MoveTo moveTo)
 {
     d->moveTo = moveTo;
 }
 
-void ApplicationSettings::setTypeOfCalc(KSpread::MethodOfCalc calc)
+void KCApplicationSettings::setTypeOfCalc(KSpread::MethodOfCalc calc)
 {
     d->calcMethod = calc;
 }
 
-KSpread::MethodOfCalc ApplicationSettings::getTypeOfCalc() const
+KSpread::MethodOfCalc KCApplicationSettings::getTypeOfCalc() const
 {
     return d->calcMethod;
 }
 
-QColor ApplicationSettings::pageBorderColor() const
+QColor KCApplicationSettings::pageBorderColor() const
 {
     return d->pageBorderColor;
 }
 
-void ApplicationSettings::changePageBorderColor(const QColor& color)
+void KCApplicationSettings::changePageBorderColor(const QColor& color)
 {
     d->pageBorderColor = color;
 }
 
-void ApplicationSettings::setCaptureAllArrowKeys(bool capture)
+void KCApplicationSettings::setCaptureAllArrowKeys(bool capture)
 {
     d->captureAllArrowKeys = capture;
 }
 
-bool ApplicationSettings::captureAllArrowKeys() const
+bool KCApplicationSettings::captureAllArrowKeys() const
 {
     return d->captureAllArrowKeys;
 }
