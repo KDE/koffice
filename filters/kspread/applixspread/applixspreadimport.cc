@@ -337,7 +337,7 @@ KoFilter::ConversionStatus APPLIXSPREADImport::convert(const QByteArray& from, c
 
                 // adjust the formula: if it came from C1, with =A1+B1,
                 // and we're now in C3, then it needs to become =A3+B3, just like copy/paste would do.
-                mystr = KSpread::Util::adjustFormulaReference(sf.formula, sf.origRow, sf.origColumn, irow, icol);
+                mystr = KSpread::adjustFormulaReference(sf.formula, sf.origRow, sf.origColumn, irow, icol);
             }
 
             /********************************************************************

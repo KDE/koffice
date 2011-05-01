@@ -40,16 +40,16 @@
 
 // KSpread
 #include <kspread/ApplicationSettings.h>
-#include <kspread/Cell.h>
+#include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
 #include <kspread/HeaderFooter.h>
 #include <kspread/LoadingInfo.h>
 #include <kspread/Map.h>
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>
-#include <kspread/Region.h>
+#include <kspread/KCRegion.h>
 #include <kspread/RowColumnFormat.h>
-#include <kspread/Sheet.h>
+#include <kspread/KCSheet.h>
 #include <kspread/Util.h>
 #include <kspread/Validity.h>
 #include <kspread/ValueParser.h>
@@ -59,8 +59,6 @@
 #define SECS_PER_DAY 86400
 #define HALF_SEC (0.5 / SECS_PER_DAY)
 
-using namespace KSpread;
-
 // copied from gnumeric: src/format.c:
 static const int g_dateSerial_19000228 = 59;
 /* One less that the Julian day number of 19000101.  */
@@ -68,50 +66,50 @@ static int g_dateOrigin = 0;
 
 // copied from gnumeric: src/formats.c:
 static char const * cell_date_format [] = {
-    "m/d/yy",  /* 0 Cell::Format::Date5*/
-    "m/d/yyyy",  /* 1 Cell::Format::Date6*/
-    "d-mmm-yy",  /* 2 Cell::Format::Date1 18-Feb-99 */
-    "d-mmm-yyyy",  /* 3 Cell::Format::Date2 18-Feb-1999 */
-    "d-mmm",  /* 4 Cell::Format::Date3 18-Feb */
-    "d-mm",   /* 5 Cell::Format::Date4 18-05 */
-    "mmm/d",  /* 6 Cell::Format::Date11*/
-    "mm/d",   /* 7 Cell::Format::Date12*/
-    "mm/dd/yy",  /* 8 Cell::Format::Date19*/
-    "mm/dd/yyyy",  /* 9 Cell::Format::Date18*/
-    "mmm/dd/yy",  /* 10 Cell::Format::Date20*/
-    "mmm/dd/yyyy",  /* 11 Cell::Format::Date21*/
+    "m/d/yy",  /* 0 KCCell::Format::Date5*/
+    "m/d/yyyy",  /* 1 KCCell::Format::Date6*/
+    "d-mmm-yy",  /* 2 KCCell::Format::Date1 18-Feb-99 */
+    "d-mmm-yyyy",  /* 3 KCCell::Format::Date2 18-Feb-1999 */
+    "d-mmm",  /* 4 KCCell::Format::Date3 18-Feb */
+    "d-mm",   /* 5 KCCell::Format::Date4 18-05 */
+    "mmm/d",  /* 6 KCCell::Format::Date11*/
+    "mm/d",   /* 7 KCCell::Format::Date12*/
+    "mm/dd/yy",  /* 8 KCCell::Format::Date19*/
+    "mm/dd/yyyy",  /* 9 KCCell::Format::Date18*/
+    "mmm/dd/yy",  /* 10 KCCell::Format::Date20*/
+    "mmm/dd/yyyy",  /* 11 KCCell::Format::Date21*/
     "mmm/ddd/yy",  /* 12 */
     "mmm/ddd/yyyy",  /* 13 */
     "mm/ddd/yy",  /* 14 */
     "mm/ddd/yyyy",  /* 15 */
-    "mmm-yy",  /* 16 Cell::Format::Date7*/
-    "mmm-yyyy",  /* 17 Cell::Format::Date22*/
-    "mmmm-yy",  /* 18 Cell::Format::Date8*/
-    "mmmm-yyyy",  /* 19 Cell::Format::Date9*/
+    "mmm-yy",  /* 16 KCCell::Format::Date7*/
+    "mmm-yyyy",  /* 17 KCCell::Format::Date22*/
+    "mmmm-yy",  /* 18 KCCell::Format::Date8*/
+    "mmmm-yyyy",  /* 19 KCCell::Format::Date9*/
     "m/d/yy h:mm",  /* 20 */
     "m/d/yyyy h:mm", /* 21 */
-    "yyyy/mm/d",  /* 22 Cell::Format::Date25*/
-    "yyyy/mmm/d",  /* 23 Cell::Format::Date14*/
-    "yyyy/mm/dd",  /* 24 Cell::Format::Date25*/
-    "yyyy/mmm/dd",  /* 25 Cell::Format::Date26*/
-    "yyyy-mm-d",  /* 26 Cell::Format::Date16*/
-    "yyyy-mmm-d",  /* 27 Cell::Format::Date15*/
-    "yyyy-mm-dd",  /* 28 Cell::Format::Date16*/
-    "yyyy-mmm-dd",  /* 29 Cell::Format::Date15*/
-    "yy",   /* 30 Cell::Format::Date24*/
-    "yyyy",   /* 31 Cell::Format::Date23*/
+    "yyyy/mm/d",  /* 22 KCCell::Format::Date25*/
+    "yyyy/mmm/d",  /* 23 KCCell::Format::Date14*/
+    "yyyy/mm/dd",  /* 24 KCCell::Format::Date25*/
+    "yyyy/mmm/dd",  /* 25 KCCell::Format::Date26*/
+    "yyyy-mm-d",  /* 26 KCCell::Format::Date16*/
+    "yyyy-mmm-d",  /* 27 KCCell::Format::Date15*/
+    "yyyy-mm-dd",  /* 28 KCCell::Format::Date16*/
+    "yyyy-mmm-dd",  /* 29 KCCell::Format::Date15*/
+    "yy",   /* 30 KCCell::Format::Date24*/
+    "yyyy",   /* 31 KCCell::Format::Date23*/
     NULL
 };
 
 // copied from gnumeric: src/formats.c:
 static char const * cell_time_format [] = {
-    "h:mm AM/PM",    // Cell::Format::Time1 9 : 01 AM
-    "h:mm:ss AM/PM", // Cell::Format::Time2 9:01:05 AM
-    "h:mm",          // Cell::Format::Time4 9:01
-    "h:mm:ss",       // Cell::Format::Time5 9:01:12
+    "h:mm AM/PM",    // KCCell::Format::Time1 9 : 01 AM
+    "h:mm:ss AM/PM", // KCCell::Format::Time2 9:01:05 AM
+    "h:mm",          // KCCell::Format::Time4 9:01
+    "h:mm:ss",       // KCCell::Format::Time5 9:01:12
     "m/d/yy h:mm",
-    "mm:ss",         // Cell::Format::Time6 01:12
-    "mm:ss.0",       // Cell::Format::Time6 01:12
+    "mm:ss",         // KCCell::Format::Time6 01:12
+    "mm:ss.0",       // KCCell::Format::Time6 01:12
     "[h]:mm:ss",
     "[h]:mm",
     "[mm]:ss",
@@ -218,16 +216,16 @@ void areaNames(Doc * ksdoc, const QString &_name, QString _zone)
             QString right = _zone.mid(pos + 2, _zone.length() - pos - 2);
             int pos = left.indexOf('$');
 
-            rect.setLeft(Util::decodeColumnLabelText(left.left(pos)));
+            rect.setLeft(KSpread::decodeColumnLabelText(left.left(pos)));
             rect.setTop(left.right(left.length() - pos - 1).toInt());
 
             pos = right.indexOf('$');
-            rect.setRight(Util::decodeColumnLabelText(right.left(pos)));
+            rect.setRight(KSpread::decodeColumnLabelText(right.left(pos)));
             rect.setBottom(right.right(right.length() - pos - 1).toInt());
         } else {
             QString left = _zone;
             int pos = left.indexOf('$');
-            int leftPos = Util::decodeColumnLabelText(left.left(pos));
+            int leftPos = KSpread::decodeColumnLabelText(left.left(pos));
             rect.setLeft(leftPos);
             rect.setRight(leftPos);
 
@@ -235,7 +233,7 @@ void areaNames(Doc * ksdoc, const QString &_name, QString _zone)
             rect.setTop(top);
             rect.setBottom(top);
         }
-        ksdoc->map()->namedAreaManager()->insert(KSpread::Region(rect, ksdoc->map()->findSheet(tableName)), _name);
+        ksdoc->map()->namedAreaManager()->insert(KCRegion(rect, ksdoc->map()->findSheet(tableName)), _name);
     }
 }
 
@@ -325,7 +323,7 @@ void set_document_info(KoDocument * document, QDomElement * docElem)
 }
 
 
-void setColInfo(QDomNode * sheet, Sheet * table)
+void setColInfo(QDomNode * sheet, KCSheet * table)
 {
     QDomNode columns =  sheet->namedItem("Cols");
     QDomNode columninfo = columns.namedItem("ColInfo");
@@ -365,7 +363,7 @@ void setColInfo(QDomNode * sheet, Sheet * table)
     }
 }
 
-void setRowInfo(QDomNode *sheet, Sheet *table)
+void setRowInfo(QDomNode *sheet, KCSheet *table)
 {
     QDomNode rows =  sheet->namedItem("Rows");
     QDomNode rowinfo = rows.namedItem("RowInfo");
@@ -404,7 +402,7 @@ void setRowInfo(QDomNode *sheet, Sheet *table)
     }
 }
 
-void setSelectionInfo(QDomNode * sheet, Sheet * /* table */)
+void setSelectionInfo(QDomNode * sheet, KCSheet * /* table */)
 {
     QDomNode selections =  sheet->namedItem("Selections");
     QDomNode selection = selections.namedItem("Selection");
@@ -429,7 +427,7 @@ void setSelectionInfo(QDomNode * sheet, Sheet * /* table */)
 }
 
 
-void setObjectInfo(QDomNode * sheet, Sheet * table)
+void setObjectInfo(QDomNode * sheet, KCSheet * table)
 {
     QDomNode gmr_objects =  sheet->namedItem("Objects");
     QDomNode gmr_cellcomment = gmr_objects.namedItem("CellComment");
@@ -437,8 +435,8 @@ void setObjectInfo(QDomNode * sheet, Sheet * table)
         QDomElement e = gmr_cellcomment.toElement(); // try to convert the node to an element.
         if (e.hasAttribute("Text")) {
             if (e.hasAttribute("ObjectBound")) {
-                const KSpread::Region region(e.attribute("ObjectBound"));
-                Cell cell = Cell(table, region.firstRange().topLeft());
+                const KCRegion region(e.attribute("ObjectBound"));
+                KCCell cell = KCCell(table, region.firstRange().topLeft());
                 cell.setComment(e.attribute("Text"));
             }
         }
@@ -514,7 +512,7 @@ void convertToPen(QPen & pen, int style)
     }
 }
 
-void GNUMERICFilter::ParseBorder(QDomElement & gmr_styleborder, const Cell& kspread_cell)
+void GNUMERICFilter::ParseBorder(QDomElement & gmr_styleborder, const KCCell& kspread_cell)
 {
     QDomNode gmr_diagonal = gmr_styleborder.namedItem("Diagonal");
     QDomNode gmr_rev_diagonal = gmr_styleborder.namedItem("Rev-Diagonal");
@@ -566,12 +564,12 @@ void GNUMERICFilter::ParseBorder(QDomElement & gmr_styleborder, const Cell& kspr
 }
 
 
-void GNUMERICFilter::importBorder(QDomElement border, borderStyle _style, const KSpread::Cell& cell)
+void GNUMERICFilter::importBorder(QDomElement border, borderStyle _style, const KCCell& cell)
 {
     if (!border.isNull()) {
         QDomElement e = border.toElement(); // try to convert the node to an element.
         if (e.hasAttribute("Style")) {
-            Style style;
+            KCStyle style;
             int penStyle = e.attribute("Style").toInt();
 
             QPen pen;
@@ -638,18 +636,18 @@ void GNUMERICFilter::importBorder(QDomElement border, borderStyle _style, const 
             if (bottomPen.style() != Qt::NoPen) style.setBottomBorderPen(bottomPen);
             if (fallPen.style() != Qt::NoPen) style.setFallDiagonalPen(fallPen);
             if (goUpPen.style() != Qt::NoPen) style.setGoUpDiagonalPen(goUpPen);
-            Cell(cell).setStyle(style);
+            KCCell(cell).setStyle(style);
         }
     }
 }
 
-bool GNUMERICFilter::setType(const Cell& kspread_cell,
+bool GNUMERICFilter::setType(const KCCell& kspread_cell,
                              QString const & formatString,
                              QString & cell_content)
 {
     int i = 0;
     for (i = 0; cell_date_format[i] ; ++i) {
-        kDebug(30521) << "Format::Cell:" << cell_date_format[i] << ", FormatString:" << formatString;
+        kDebug(30521) << "Format::KCCell:" << cell_date_format[i] << ", FormatString:" << formatString;
         if ((formatString == "d/m/yy") || (formatString == cell_date_format[i])) {
             kDebug(30521) << "   FormatString: Date:" << formatString << ", CellContent:" << cell_content;
             QDate date;
@@ -707,9 +705,9 @@ bool GNUMERICFilter::setType(const Cell& kspread_cell,
 
             kDebug(30521) << "i:" << i << ", Type:" << type << ", Date:" << date.toString();
 
-            Cell cell(kspread_cell);
+            KCCell cell(kspread_cell);
             cell.setValue(Value(date, kspread_cell.sheet()->map()->calculationSettings()));
-            Style style;
+            KCStyle style;
             style.setFormatType(type);
             cell.setStyle(style);
 
@@ -748,9 +746,9 @@ bool GNUMERICFilter::setType(const Cell& kspread_cell,
             }
 
             kDebug(30521) << "i:" << i << ", Type:" << type;
-            Cell cell(kspread_cell);
+            KCCell cell(kspread_cell);
             cell.setValue(Value(time, kspread_cell.sheet()->map()->calculationSettings()));
-            Style style;
+            KCStyle style;
             style.setFormatType(type);
             cell.setStyle(style);
 
@@ -761,7 +759,7 @@ bool GNUMERICFilter::setType(const Cell& kspread_cell,
     return false; // no date or time
 }
 
-QString GNUMERICFilter::convertVars(QString const & str, Sheet * table) const
+QString GNUMERICFilter::convertVars(QString const & str, KCSheet * table) const
 {
     QString result(str);
     uint count = list1.count();
@@ -807,7 +805,7 @@ double GNUMERICFilter::parseAttribute(const QDomElement &_element)
         return value;
 }
 
-void GNUMERICFilter::ParsePrintInfo(QDomNode const & printInfo, Sheet * table)
+void GNUMERICFilter::ParsePrintInfo(QDomNode const & printInfo, KCSheet * table)
 {
     kDebug(30521) << "Parsing print info";
 
@@ -867,7 +865,7 @@ void GNUMERICFilter::ParsePrintInfo(QDomNode const & printInfo, Sheet * table)
     if (!repeateColumn.isNull()) {
         QString repeate = repeateColumn.attribute("value");
         if (!repeate.isEmpty()) {
-            const KSpread::Region region(repeate);
+            const KCRegion region(repeate);
             //kDebug()<<" repeate :"<<repeate<<"range. ::start row :"<<range.startRow ()<<" start col :"<<range.startCol ()<<" end row :"<<range.endRow ()<<" end col :"<<range.endCol ();
             table->printSettings()->setRepeatedRows(qMakePair(region.firstRange().top(), region.firstRange().bottom()));
         }
@@ -879,7 +877,7 @@ void GNUMERICFilter::ParsePrintInfo(QDomNode const & printInfo, Sheet * table)
         if (!repeate.isEmpty()) {
             //fix row too high
             repeate = repeate.replace("65536", "32500");
-            const KSpread::Region region(repeate);
+            const KCRegion region(repeate);
             //kDebug()<<" repeate :"<<repeate<<"range. ::start row :"<<range.startRow ()<<" start col :"<<range.startCol ()<<" end row :"<<range.endRow ()<<" end col :"<<range.endCol ();
             table->printSettings()->setRepeatedColumns(qMakePair(region.firstRange().left(), region.firstRange().right()));
         }
@@ -907,14 +905,14 @@ void GNUMERICFilter::ParsePrintInfo(QDomNode const & printInfo, Sheet * table)
                                            footLeft, footMiddle, footRight);
 }
 
-void GNUMERICFilter::ParseFormat(QString const & formatString, const Cell& kspread_cell)
+void GNUMERICFilter::ParseFormat(QString const & formatString, const KCCell& kspread_cell)
 {
     int l = formatString.length();
     int lastPos = 0;
 
     if (l == 0) return;
 
-    Style style;
+    KCStyle style;
 
     if (l == 0 || formatString == "General") {
         style.setFormatType(Format::Generic);
@@ -961,7 +959,7 @@ void GNUMERICFilter::ParseFormat(QString const & formatString, const Cell& kspre
             if (formatString.indexOf("?/?") != -1) {
                 // TODO: fixme!
                 style.setFormatType(Format::fraction_three_digits);
-                Cell(kspread_cell).setStyle(style);
+                KCCell(kspread_cell).setStyle(style);
                 return;
             }
             // so it's nothing we want to understand:-)
@@ -1005,15 +1003,15 @@ void GNUMERICFilter::ParseFormat(QString const & formatString, const Cell& kspre
     bool red = false;
     if (formatString.indexOf("[RED]", lastPos) != -1) {
         red = true;
-        style.setFloatColor(Style::NegRed);
+        style.setFloatColor(KCStyle::NegRed);
     }
     if (formatString.indexOf('(', lastPos) != -1) {
         if (red)
-            style.setFloatColor(Style::NegRedBrackets);
+            style.setFloatColor(KCStyle::NegRedBrackets);
         else
-            style.setFloatColor(Style::NegBrackets);
+            style.setFloatColor(KCStyle::NegBrackets);
     }
-    Cell(kspread_cell).setStyle(style);
+    KCCell(kspread_cell).setStyle(style);
 }
 
 void GNUMERICFilter::convertFormula(QString & formula) const
@@ -1037,7 +1035,7 @@ void GNUMERICFilter::convertFormula(QString & formula) const
     }
 }
 
-void GNUMERICFilter::setStyleInfo(QDomNode * sheet, Sheet * table)
+void GNUMERICFilter::setStyleInfo(QDomNode * sheet, KCSheet * table)
 {
     kDebug(30521) << "SetStyleInfo entered";
     ValueParser *const parser = table->map()->parser();
@@ -1071,9 +1069,9 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, Sheet * table)
 
             for (column = startCol; column <= endCol; ++column) {
                 for (row = startRow; row <= endRow; ++row) {
-                    kDebug(30521) << "Cell:" << column << "," << row;
-                    Cell kspread_cell(table, column, row);
-                    Style style;
+                    kDebug(30521) << "KCCell:" << column << "," << row;
+                    KCCell kspread_cell(table, column, row);
+                    KCStyle style;
 
                     // don't create new cells -> don't apply format on empty cells, if bigger region
                     if ((kspread_cell.isDefault() || kspread_cell.isEmpty())
@@ -1085,7 +1083,7 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, Sheet * table)
                     QDomElement style_element = gnumericStyle.toElement(); // try to convert the node to an element.
 
                     kDebug(30521) << "Style valid for kspread";
-                    kspread_cell = Cell(table, column, row);
+                    kspread_cell = KCCell(table, column, row);
 
                     if (style_element.hasAttribute("Fore")) {
                         QString color_string = style_element.attribute("Fore");
@@ -1208,11 +1206,11 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, Sheet * table)
                         if (halign_string == "1") {
                             /* General: No equivalent in Kspread. */
                         } else if (halign_string == "2") {
-                            style.setHAlign(Style::Left);
+                            style.setHAlign(KCStyle::Left);
                         } else if (halign_string == "4") {
-                            style.setHAlign(Style::Right);
+                            style.setHAlign(KCStyle::Right);
                         } else if (halign_string == "8") {
-                            style.setHAlign(Style::Center);
+                            style.setHAlign(KCStyle::Center);
                         } else if (halign_string == "16") {
                             /* Fill: No equivalent in Kspread. */
                         } else if (halign_string == "32") {
@@ -1228,11 +1226,11 @@ void GNUMERICFilter::setStyleInfo(QDomNode * sheet, Sheet * table)
 
                         if (valign_string == "1") {
                             /* General: No equivalent in Kspread. */
-                            style.setVAlign(Style::Top);
+                            style.setVAlign(KCStyle::Top);
                         } else if (valign_string == "2") {
-                            style.setVAlign(Style::Bottom);
+                            style.setVAlign(KCStyle::Bottom);
                         } else if (valign_string == "4") {
-                            style.setVAlign(Style::Middle);
+                            style.setVAlign(KCStyle::Middle);
                         } else if (valign_string == "8") {
                             /* Justify: No equivalent in Kspread */
                         }
@@ -1686,8 +1684,8 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
 
     kDebug(30521) << "here we go..." << document->metaObject()->className();
 
-    if (!qobject_cast<const KSpread::Doc *>(document)) {    // it's safer that way :)
-        kWarning(30521) << "document isn't a KSpread::Doc but a " << document->metaObject()->className();
+    if (!qobject_cast<const Doc *>(document)) {    // it's safer that way :)
+        kWarning(30521) << "document isn't a Doc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
     if (from != "application/x-gnumeric" || to != "application/x-kspread") {
@@ -1737,7 +1735,7 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
     int value = 0;
     int currentTab = -1;
     int selectedTab = 0;
-    Sheet * selTable = 0;
+    KCSheet * selTable = 0;
 
     QDomElement docElem = doc.documentElement();
     QDomElement uiData  = docElem.namedItem("UIData").toElement();
@@ -1767,7 +1765,7 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
     /* This sets the Area Names */
     set_document_area_names(ksdoc, &docElem);
 
-    Sheet * table;
+    KCSheet * table;
 
     // This is a mapping of exprID to expressions.
 
@@ -1840,7 +1838,7 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
 
             QDomElement e = cell.toElement(); // try to convert the node to an element.
             if (!e.isNull()) { // the node was really an element.
-                kDebug(30521) << "New Cell";
+                kDebug(30521) << "New KCCell";
                 QDomNode content_node = cell.namedItem("Content");
 
                 if (!content_node.isNull()) {
@@ -1855,8 +1853,8 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
                         if (cell_content[0] == '=')
                             convertFormula(cell_content);
 
-                        Cell kspread_cell = Cell(table, column, row);
-                        Style style;
+                        KCCell kspread_cell = KCCell(table, column, row);
+                        KCStyle style;
 
                         if (e.hasAttribute("ValueType")) {
                             // TODO: what is this for?
@@ -1886,8 +1884,8 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
                             setText(table, row, column, cell_content, false);
 
                         if (e.hasAttribute("ExprID")) {
-                            // QString encoded_string( Cell( table, column, row ).encodeFormula( row, column ).utf8());
-                            QString encoded_string(Cell(table, column, row).encodeFormula().toLatin1());
+                            // QString encoded_string( KCCell( table, column, row ).encodeFormula( row, column ).utf8());
+                            QString encoded_string(KCCell(table, column, row).encodeFormula().toLatin1());
 
 
                             char * tmp_string = (char *) malloc(strlen(encoded_string.toLatin1()));
@@ -1914,8 +1912,8 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
                     if (cell_content[0] == '=')
                         convertFormula(cell_content);
 
-                    Cell kspread_cell = Cell(table, column, row);
-                    Style style;
+                    KCCell kspread_cell = KCCell(table, column, row);
+                    KCStyle style;
 
                     if (e.hasAttribute("ValueType")) {
                         // TODO: Defined type of cell
@@ -1957,10 +1955,10 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
 
                         kDebug(30521) << "FOO:" << column << row;
                         kDebug(30521) <<
-                        Cell(table, column, row).decodeFormula(expr).toLatin1() << endl;
+                        KCCell(table, column, row).decodeFormula(expr).toLatin1() << endl;
                         kDebug(30521) << expr;
 
-                        setText(table, row, column, Cell(table, column, row).decodeFormula(expr), false);
+                        setText(table, row, column, KCCell(table, column, row).decodeFormula(expr), false);
                     }
                     kspread_cell.setStyle(style);
                 }
@@ -1976,9 +1974,9 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
         while (!mergedRegion.isNull()) {
             QDomElement e = mergedRegion.toElement(); // try to convert the node to an element.
             QString cell_merge_area(e.text());
-            const KSpread::Region region(cell_merge_area);
+            const KCRegion region(cell_merge_area);
             //kDebug()<<"text !!! :"<<cell_merge_area<<"range :start row :"<<range.startRow ()<<" start col :"<<range.startCol ()<<" end row :"<<range.endRow ()<<" end col :"<<range.endCol ();
-            Cell cell = Cell(table, region.firstRange().left(), region.firstRange().top());
+            KCCell cell = KCCell(table, region.firstRange().left(), region.firstRange().top());
             cell.mergeCells(region.firstRange().left(), region.firstRange().top(),
                             region.firstRange().width() - 1, region.firstRange().height() - 1);
             mergedRegion = mergedRegion.nextSibling();
@@ -2016,10 +2014,10 @@ KoFilter::ConversionStatus GNUMERICFilter::convert(const QByteArray & from, cons
         return KoFilter::StupidError;
 }
 
-void GNUMERICFilter::setText(KSpread::Sheet* sheet, int _row, int _column, const QString& _text,
+void GNUMERICFilter::setText(KCSheet* sheet, int _row, int _column, const QString& _text,
                              bool asString)
 {
-    Cell cell(sheet, _column, _row);
+    KCCell cell(sheet, _column, _row);
     if (asString) {
         cell.setUserInput(_text);
         cell.setValue(Value(_text));

@@ -34,7 +34,7 @@
 
 class Sheet;
 
-class Cell
+class KCCell
 {
 public:
     Sheet* sheet;
@@ -55,8 +55,8 @@ public:
     QList< QPair<QString,QString> > oleObjects;
     QList<QString> oleFrameBegins;
 
-    Cell(Sheet* s, int columnIndex, int rowIndex) : sheet(s), column(columnIndex), row(rowIndex), rowsMerged(1), columnsMerged(1), isPlainText(true) {}
-    ~Cell() { qDeleteAll(drawings); }
+    KCCell(Sheet* s, int columnIndex, int rowIndex) : sheet(s), column(columnIndex), row(rowIndex), rowsMerged(1), columnsMerged(1), isPlainText(true) {}
+    ~KCCell() { qDeleteAll(drawings); }
 };
 
 class Row
@@ -112,12 +112,12 @@ public:
         return c;
     }
 
-    Cell* cell(int columnIndex, int rowIndex, bool autoCreate)
+    KCCell* cell(int columnIndex, int rowIndex, bool autoCreate)
     {
         const unsigned hashed = (rowIndex + 1) * MSOOXML::maximumSpreadsheetColumns() + columnIndex + 1;
-        Cell* c = m_cells[ hashed ];
+        KCCell* c = m_cells[ hashed ];
         if (!c && autoCreate) {
-            c = new Cell(this, columnIndex, rowIndex);
+            c = new KCCell(this, columnIndex, rowIndex);
             m_cells[ hashed ] = c;
             this->column(columnIndex, true);
             this->row(rowIndex, true);
@@ -142,7 +142,7 @@ public:
 private:
     QHash<int, Row*> m_rows;
     QHash<int, Column*> m_columns;
-    QHash<unsigned, Cell*> m_cells;
+    QHash<unsigned, KCCell*> m_cells;
     int m_maxRow;
     int m_maxColumn;
     QHash<int, int> m_maxCellsInRow;

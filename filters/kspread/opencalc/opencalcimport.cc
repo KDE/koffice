@@ -43,7 +43,7 @@
 #include <KoStyleStack.h>
 #include <ooutils.h>
 
-#include <kspread/Cell.h>
+#include <kspread/KCCell.h>
 #include <kspread/CellStorage.h>
 #include <kspread/Condition.h>
 #include <kspread/part/Doc.h>
@@ -52,10 +52,10 @@
 #include <kspread/Map.h>
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>
-#include <kspread/Region.h>
+#include <kspread/KCRegion.h>
 #include <kspread/RowColumnFormat.h>
-#include <kspread/Sheet.h>
-#include <kspread/Style.h>
+#include <kspread/KCSheet.h>
+#include <kspread/KCStyle.h>
 #include <kspread/StyleManager.h>
 #include <kspread/Validity.h>
 #include <kspread/Value.h>
@@ -101,7 +101,7 @@ OpenCalcImport::OpenCalcPoint::OpenCalcPoint(QString const & str)
 
     translation = range;
 
-    const KSpread::Region region(range);
+    const KCRegion region(range);
     table = region.firstSheet()->sheetName();
     topLeft = region.firstRange().topLeft();
     botRight = region.firstRange().bottomRight();
@@ -116,7 +116,7 @@ OpenCalcImport::OpenCalcImport(QObject* parent, const QVariantList &)
 OpenCalcImport::~OpenCalcImport()
 {
     foreach(KoXmlElement* style, m_styles) delete style;
-    foreach(KSpread::Style* style, m_defaultStyles) delete style;
+    foreach(KCStyle* style, m_defaultStyles) delete style;
     foreach(QString* format, m_formats) delete format;
 }
 
@@ -127,7 +127,7 @@ double timeToNum(int h, int m, int s)
 }
 
 bool OpenCalcImport::readRowFormat(KoXmlElement & rowNode, KoXmlElement * rowStyle,
-                                   Sheet * table, int & row, int & number,
+                                   KCSheet * table, int & row, int & number,
                                    bool isLast)
 {
     if (rowNode.isNull())
@@ -141,7 +141,7 @@ bool OpenCalcImport::readRowFormat(KoXmlElement & rowNode, KoXmlElement * rowSty
 
     double height = -1.0;
     bool insertPageBreak = false;
-    Style layout;
+    KCStyle layout;
 
     while (!node.isNull()) {
         KoXmlElement property = node.toElement();
@@ -182,7 +182,7 @@ bool OpenCalcImport::readRowFormat(KoXmlElement & rowNode, KoXmlElement * rowSty
 
     for (int i = 0; i < number; ++i) {
         RowFormat * rowL = table->nonDefaultRowFormat(row);
-        table->cellStorage()->setStyle(KSpread::Region(QRect(1, row, KS_colMax, 1)), layout);
+        table->cellStorage()->setStyle(KCRegion(QRect(1, row, KS_colMax, 1)), layout);
 
         if (height != -1) {
             kDebug(30518) << "Setting row height to" << height;
@@ -317,14 +317,14 @@ void OpenCalcImport::convertFormula(QString & text, QString const & f) const
     kDebug(30518) << "New formula:" << text;
 }
 
-bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, int & columns)
+bool OpenCalcImport::readCells(KoXmlElement & rowNode, KCSheet  * table, int row, int & columns)
 {
     ValueParser *const parser = table->map()->parser();
 
     bool ok = true;
     int spanC = 1;
     int spanR = 1;
-    //Cell* defCell = table->defaultCell();
+    //KCCell* defCell = table->defaultCell();
 
     KoXmlNode cellNode = KoXml::namedItemNS(rowNode, ooNS::table, "table-cell");
 
@@ -339,7 +339,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, 
             continue;
         }
 
-        Cell cell;
+        KCCell cell;
 
         kDebug(30518) << " Cell:" << columns << "," << row;
 
@@ -368,7 +368,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, 
                     if (link[0] == '#')
                         link = link.remove(0, 1);
                     if (!cell)
-                        cell = Cell(table, columns, row);
+                        cell = KCCell(table, columns, row);
                     cell.setLink(link);
                 }
             } else
@@ -391,7 +391,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, 
 
             if (!comment.isEmpty()) {
                 kDebug(30518) << " columns :" << columns << " row :" << row;
-                Cell(table, columns, row).setComment(comment);
+                KCCell(table, columns, row).setComment(comment);
             }
         }
 
@@ -400,15 +400,15 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, 
 
         if (e.hasAttributeNS(ooNS::table, "style-name")) {
             if (!cell)
-                cell = Cell(table, columns, row);
-            Style style = cell.style();
+                cell = KCCell(table, columns, row);
+            KCStyle style = cell.style();
 
             QString psName("Default");
             if (e.hasAttributeNS(ooNS::style, "parent-style-name"))
                 psName = e.attributeNS(ooNS::style, "parent-style-name", QString());
 
             kDebug(30518) << "Default style:" << psName;
-            Style * layout = m_defaultStyles[psName];
+            KCStyle * layout = m_defaultStyles[psName];
 
             if (layout)
                 style = *layout;
@@ -458,10 +458,10 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, 
         } else {
             QString psName("Default");
             kDebug(30518) << "Default style:" << psName;
-            Style * layout = m_defaultStyles[psName];
+            KCStyle * layout = m_defaultStyles[psName];
 
             if (layout)
-                table->cellStorage()->setStyle(KSpread::Region(QPoint(columns, row)), *layout);
+                table->cellStorage()->setStyle(KCRegion(QPoint(columns, row)), *layout);
         }
         if (e.hasAttributeNS(ooNS::table, "formula")) {
             isFormula = true;
@@ -469,17 +469,17 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, 
             convertFormula(formula, e.attributeNS(ooNS::table, "formula", QString()));
 
             if (!cell)
-                cell = Cell(table, columns, row);
+                cell = KCCell(table, columns, row);
             cell.setUserInput(formula);
         }
         if (e.hasAttributeNS(ooNS::table, "validation-name")) {
             kDebug(30518) << " Celle has a validation :" << e.attributeNS(ooNS::table, "validation-name", QString());
-            loadOasisValidation(Cell(table, columns, row).validity(), e.attributeNS(ooNS::table, "validation-name", QString()), parser);
+            loadOasisValidation(KCCell(table, columns, row).validity(), e.attributeNS(ooNS::table, "validation-name", QString()), parser);
         }
         if (e.hasAttributeNS(ooNS::table, "value-type")) {
             if (!cell)
-                cell = Cell(table, columns, row);
-            Style style;
+                cell = KCCell(table, columns, row);
+            KCStyle style;
 
             cell.setUserInput(text);
 
@@ -603,13 +603,13 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, 
                 cell.parseUserInput(text);
         } else if (!text.isEmpty()) {
             if (!cell)
-                cell = Cell(table, columns, row);
+                cell = KCCell(table, columns, row);
             cell.parseUserInput(text);
         }
 
         if (spanR > 1 || spanC > 1) {
             if (!cell)
-                cell = Cell(table, columns, row);
+                cell = KCCell(table, columns, row);
             cell.mergeCells(columns, row, spanC - 1, spanR - 1);
         }
 
@@ -619,7 +619,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, 
             // copy cell from left
             bool ok = false;
             int number = e.attributeNS(ooNS::table, "number-columns-repeated", QString()).toInt(&ok);
-            Cell cellDest;
+            KCCell cellDest;
 
             // don't repeat more than 10 if it is the last cell and empty
             if (!ok || cellNode.isNull()) {
@@ -631,7 +631,7 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, 
                 ++columns;
 
                 if (!cell.isNull()) {
-                    cellDest = Cell(table, columns, row);
+                    cellDest = KCCell(table, columns, row);
                     cellDest.copyAll(cell);
                 }
             }
@@ -644,13 +644,13 @@ bool OpenCalcImport::readCells(KoXmlElement & rowNode, Sheet  * table, int row, 
 }
 
 
-void OpenCalcImport::loadCondition(const Cell& cell, const KoXmlElement &property)
+void OpenCalcImport::loadCondition(const KCCell& cell, const KoXmlElement &property)
 {
-    kDebug(30518) << "void OpenCalcImport::loadCondition( Cell*cell,const KoXmlElement &property )*******";
+    kDebug(30518) << "void OpenCalcImport::loadCondition( KCCell*cell,const KoXmlElement &property )*******";
     loadOasisCondition(cell, property);
 }
 
-void OpenCalcImport::loadOasisCondition(const Cell& cell, const KoXmlElement &property)
+void OpenCalcImport::loadOasisCondition(const KCCell& cell, const KoXmlElement &property)
 {
     KoXmlElement elementItem(property);
     Map *const map = cell.sheet()->map();
@@ -681,7 +681,7 @@ void OpenCalcImport::loadOasisCondition(const Cell& cell, const KoXmlElement &pr
     if (!cond.isEmpty()) {
         Conditions conditions;
         conditions.setConditionList(cond);
-        Cell(cell).setConditions(conditions);
+        KCCell(cell).setConditions(conditions);
     }
 }
 
@@ -746,7 +746,7 @@ void OpenCalcImport::loadOasisCondition(QString &valExpression, Conditional &new
     newCondition.value1 = parser->parse(value);
 }
 
-bool OpenCalcImport::readRowsAndCells(KoXmlElement & content, Sheet * table)
+bool OpenCalcImport::readRowsAndCells(KoXmlElement & content, KCSheet * table)
 {
     kDebug(30518) << "Reading in rows";
 
@@ -755,9 +755,9 @@ bool OpenCalcImport::readRowsAndCells(KoXmlElement & content, Sheet * table)
     int columns = 1;
     int backupRow = 1;
     KoXmlElement * rowStyle = 0;
-    //Cell cell;
-    //Cell cellDest;
-    //Cell defCell = table->defaultCell();
+    //KCCell cell;
+    //KCCell cellDest;
+    //KCCell defCell = table->defaultCell();
     KoXmlNode rowNode = KoXml::namedItemNS(content, ooNS::table, "table-row");
 
     while (!rowNode.isNull()) {
@@ -797,19 +797,19 @@ bool OpenCalcImport::readRowsAndCells(KoXmlElement & content, Sheet * table)
             // FIXME KSPREAD_NEW_STYLE_STORAGE
 //       layout = table->nonDefaultRowFormat( backupRow + i );
 //
-//       table->setStyle( KSpread::Region(QRect(1,backupRow + i,KS_colMax,1)), srcLayout );
+//       table->setStyle( KCRegion(QRect(1,backupRow + i,KS_colMax,1)), srcLayout );
 
             /*
              * TODO: Test: do we need to copy the cells, too?
              *       if so we will probably also need to copy them for repeated col layouts.
             for ( j = 1; j <= columns; ++j )
             {
-              Cell cell( table, j, backupRow );
+              KCCell cell( table, j, backupRow );
 
-              kDebug(30518) <<"Cell:" << cell <<"DefCell:" << defCell;
+              kDebug(30518) <<"KCCell:" << cell <<"DefCell:" << defCell;
               if ( cell && (cell != defCell) )
               {
-                cellDest = Cell( table, j, backupRow + i );
+                cellDest = KCCell( table, j, backupRow + i );
                 cellDest->copyAll( cell );
               }
             }
@@ -825,7 +825,7 @@ bool OpenCalcImport::readRowsAndCells(KoXmlElement & content, Sheet * table)
     return true;
 }
 
-bool OpenCalcImport::readColLayouts(KoXmlElement & content, Sheet * table)
+bool OpenCalcImport::readColLayouts(KoXmlElement & content, KCSheet * table)
 {
     kDebug(30518) << "Reading in columns...";
 
@@ -847,7 +847,7 @@ bool OpenCalcImport::readColLayouts(KoXmlElement & content, Sheet * table)
         double width   = -1.0;
         bool collapsed = (e.attributeNS(ooNS::table, "visibility", QString()) == "collapse");
         bool insertPageBreak = false;
-        Style styleLayout;
+        KCStyle styleLayout;
 
         kDebug(30518) << "Check table:number-columns-repeated";
         if (e.hasAttributeNS(ooNS::table, "number-columns-repeated")) {
@@ -863,7 +863,7 @@ bool OpenCalcImport::readColLayouts(KoXmlElement & content, Sheet * table)
         if (e.hasAttributeNS(ooNS::table, "default-cell-style-name")) {
             QString n(e.attributeNS(ooNS::table, "default-cell-style-name", QString()));
             kDebug(30518) << "Has attribute default-cell-style-name:" << n;
-            Style * defaultStyle = m_defaultStyles[ n ];
+            KCStyle * defaultStyle = m_defaultStyles[ n ];
             if (!defaultStyle) {
                 QString name = e.attributeNS(ooNS::table, "default-cell-style-name", QString());
                 KoXmlElement * st = m_styles[ name ];
@@ -871,7 +871,7 @@ bool OpenCalcImport::readColLayouts(KoXmlElement & content, Sheet * table)
                 kDebug(30518) << "Default cell style:" << name;
 
                 if (st && !st->isNull()) {
-                    Style * layout = new Style();
+                    KCStyle * layout = new KCStyle();
 
                     readInStyle(layout, *st);
 
@@ -933,7 +933,7 @@ bool OpenCalcImport::readColLayouts(KoXmlElement & content, Sheet * table)
             ColumnFormat * col = new ColumnFormat();
             col->setSheet(table);
             col->setColumn(column);
-            table->cellStorage()->setStyle(KSpread::Region(QRect(column, 1, 1, KS_rowMax)), styleLayout);
+            table->cellStorage()->setStyle(KCRegion(QRect(column, 1, 1, KS_rowMax)), styleLayout);
             if (width != -1.0)
                 col->setWidth(width);
 
@@ -1003,7 +1003,7 @@ QString getPart(KoXmlNode const & part)
     return result;
 }
 
-void OpenCalcImport::loadTableMasterStyle(Sheet * table,
+void OpenCalcImport::loadTableMasterStyle(KCSheet * table,
         QString const & stylename)
 {
     kDebug(30518) << "Loading table master style:" << stylename;
@@ -1076,7 +1076,7 @@ void OpenCalcImport::loadTableMasterStyle(Sheet * table,
     }
 }
 
-void OpenCalcImport::loadOasisMasterLayoutPage(Sheet * table, KoStyleStack &styleStack)
+void OpenCalcImport::loadOasisMasterLayoutPage(KCSheet * table, KoStyleStack &styleStack)
 {
     float leftMargin = 0.0;
     float rightMargin = 0.0;
@@ -1196,7 +1196,7 @@ bool OpenCalcImport::parseBody(int numOfTables)
     loadOasisAreaName(body.toElement());
     loadOasisCellValidation(body.toElement(), m_doc->map()->parser());
 
-    Sheet * table;
+    KCSheet * table;
     KoXmlNode sheet = KoXml::namedItemNS(body, ooNS::table, "table");
 
     kDebug() << " sheet :" << sheet.isNull();
@@ -1249,7 +1249,7 @@ bool OpenCalcImport::parseBody(int numOfTables)
             continue;
         }
 
-        Style * defaultStyle = m_defaultStyles[ "Default" ];
+        KCStyle * defaultStyle = m_defaultStyles[ "Default" ];
         if (defaultStyle) {
             kDebug(30518) << "Copy default style to default cell";
             table->map()->styleManager()->defaultStyle()->merge(*defaultStyle);
@@ -1294,7 +1294,7 @@ bool OpenCalcImport::parseBody(int numOfTables)
             OpenCalcPoint point(range);
 
             kDebug(30518) << "Print range:" << point.translation;
-            const KSpread::Region region(point.translation);
+            const KCRegion region(point.translation);
 
             kDebug(30518) << "Print table:" << region.firstSheet()->sheetName();
 
@@ -1383,7 +1383,7 @@ void OpenCalcImport::loadOasisAreaName(const KoXmlElement&body)
             OpenCalcPoint point(areaPoint);
             kDebug(30518) << "Area:" << point.translation;
 
-            const KSpread::Region region(point.translation);
+            const KCRegion region(point.translation);
 
             m_doc->map()->namedAreaManager()->insert(region, name);
             kDebug(30518) << "Area range:" << region.name();
@@ -1657,7 +1657,7 @@ QString * OpenCalcImport::loadFormat(KoXmlElement * element,
     return format;
 }
 
-void OpenCalcImport::loadFontStyle(Style * layout, KoXmlElement const * font) const
+void OpenCalcImport::loadFontStyle(KCStyle * layout, KoXmlElement const * font) const
 {
     if (!font || !layout)
         return;
@@ -1689,7 +1689,7 @@ void OpenCalcImport::loadFontStyle(Style * layout, KoXmlElement const * font) co
     // text-underline-color
 }
 
-void OpenCalcImport::loadBorder(Style * layout, QString const & borderDef, bPos pos) const
+void OpenCalcImport::loadBorder(KCStyle * layout, QString const & borderDef, bPos pos) const
 {
     if (borderDef == "none")
         return;
@@ -1746,7 +1746,7 @@ void OpenCalcImport::loadBorder(Style * layout, QString const & borderDef, bPos 
     // TODO Diagonals not supported by oocalc
 }
 
-void OpenCalcImport::loadStyleProperties(Style * layout, KoXmlElement const & property) const
+void OpenCalcImport::loadStyleProperties(KCStyle * layout, KoXmlElement const & property) const
 {
     kDebug(30518) << "*** Loading style properties *****";
 
@@ -1787,13 +1787,13 @@ void OpenCalcImport::loadStyleProperties(Style * layout, KoXmlElement const & pr
     if (property.hasAttributeNS(ooNS::fo, "text-align")) {
         QString s = property.attributeNS(ooNS::fo, "text-align", QString());
         if (s == "center")
-            layout->setHAlign(Style::Center);
+            layout->setHAlign(KCStyle::Center);
         else if (s == "end")
-            layout->setHAlign(Style::Right);
+            layout->setHAlign(KCStyle::Right);
         else if (s == "start")
-            layout->setHAlign(Style::Left);
+            layout->setHAlign(KCStyle::Left);
         else if (s == "justify")   // TODO in KSpread!
-            layout->setHAlign(Style::Center);
+            layout->setHAlign(KCStyle::Center);
     }
     if (property.hasAttributeNS(ooNS::fo, "margin-left")) {
         kDebug(30518) << "margin-left :" << KoUnit::parseValue(property.attributeNS(ooNS::fo, "margin-left", QString()), 0.0);
@@ -1838,13 +1838,13 @@ void OpenCalcImport::loadStyleProperties(Style * layout, KoXmlElement const & pr
     if (property.hasAttributeNS(ooNS::fo, "vertical-align")) {
         QString s = property.attributeNS(ooNS::fo, "vertical-align", QString());
         if (s == "middle")
-            layout->setVAlign(Style::Middle);
+            layout->setVAlign(KCStyle::Middle);
         else if (s == "bottom")
-            layout->setVAlign(Style::Bottom);
+            layout->setVAlign(KCStyle::Bottom);
         else
-            layout->setVAlign(Style::Top);
+            layout->setVAlign(KCStyle::Top);
     } else
-        layout->setVAlign(Style::Bottom);
+        layout->setVAlign(KCStyle::Bottom);
 
     if (property.hasAttributeNS(ooNS::fo, "wrap-option")) {
         layout->setWrapText(true);
@@ -1882,12 +1882,12 @@ void OpenCalcImport::loadStyleProperties(Style * layout, KoXmlElement const & pr
     }
 }
 
-void OpenCalcImport::readInStyle(Style * layout, KoXmlElement const & style)
+void OpenCalcImport::readInStyle(KCStyle * layout, KoXmlElement const & style)
 {
     kDebug(30518) << "** Reading Style:" << style.tagName() << ";" << style.attributeNS(ooNS::style, "name", QString());
     if (style.localName() == "style" && style.namespaceURI() == ooNS::style) {
         if (style.hasAttributeNS(ooNS::style, "parent-style-name")) {
-            Style * cp
+            KCStyle * cp
             = m_defaultStyles.value(style.attributeNS(ooNS::style, "parent-style-name", QString()));
             kDebug(30518) << "Copying layout from" << style.attributeNS(ooNS::style, "parent-style-name", QString());
 
@@ -1895,7 +1895,7 @@ void OpenCalcImport::readInStyle(Style * layout, KoXmlElement const & style)
                 layout = cp;
         } else if (style.hasAttributeNS(ooNS::style, "family")) {
             QString name = style.attribute("style-family") + "default";
-            Style * cp = m_defaultStyles.value(name);
+            KCStyle * cp = m_defaultStyles.value(name);
 
             kDebug(30518) << "Copying layout from" << name << "," << !cp;
 
@@ -2005,7 +2005,7 @@ bool OpenCalcImport::createStyleMap(KoXmlDocument const & styles)
         }
 
         if (!e.isNull()) {
-            Style * layout = new Style();
+            KCStyle * layout = new KCStyle();
 
             readInStyle(layout, e);
             kDebug(30518) << "Default style" << e.attributeNS(ooNS::style, "family", QString()) << "default" << " loaded";
@@ -2029,7 +2029,7 @@ bool OpenCalcImport::createStyleMap(KoXmlDocument const & styles)
             continue;
         }
 
-        Style * layout = new Style();
+        KCStyle * layout = new KCStyle();
         readInStyle(layout, defs);
         kDebug(30518) << "Default style" << defs.attributeNS(ooNS::style, "name", QString()) << " loaded";
 
@@ -2291,8 +2291,8 @@ KoFilter::ConversionStatus OpenCalcImport::convert(QByteArray const & from, QByt
     if (!document)
         return KoFilter::StupidError;
 
-    if (!qobject_cast<const KSpread::Doc *>(document)) {     // it's safer that way :)
-        kWarning(30518) << "document isn't a KSpread::Doc but a " << document->metaObject()->className();
+    if (!qobject_cast<const Doc *>(document)) {     // it's safer that way :)
+        kWarning(30518) << "document isn't a Doc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
 

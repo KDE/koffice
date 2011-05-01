@@ -31,7 +31,7 @@
 #include "config.h"
 //#include "cell.h"
 
-class Cell;
+class KCCell;
 class Column;
 class Row;
 
@@ -48,7 +48,7 @@ class Table: public XmlParser, Config
 {
     QList<Row*> _rows;
     QList<Column*> _columns;
-    QList<Cell*> _cells;
+    QList<KCCell*> _cells;
 
     /* USEFUL DATA */
     int _maxRow, _maxCol; /* Size of the table (nb of cell) */
@@ -233,10 +233,10 @@ public:
     /**
      * Return one specific cell.
      *
-     * @param col Cell column.
+     * @param col KCCell column.
      * @param row Row cell.
      */
-    Cell* searchCell(int col, int row);
+    KCCell* searchCell(int col, int row);
 
     /**
      * Return one specific column which describes the format of the column.

@@ -34,16 +34,13 @@
 class KoStyleStack;
 class KoStore;
 
-namespace KSpread
-{
-class Cell;
+class KCCell;
 class Conditional;
 class Doc;
-class Sheet;
-class Style;
+class KCSheet;
+class KCStyle;
 class Validity;
 class ValueParser;
-}
 
 class OpenCalcImport : public KoFilter
 {
@@ -71,15 +68,15 @@ private:
 
     enum bPos { Left, Top, Right, Bottom, Fall, GoUp, Border };
 
-    KSpread::Doc *    m_doc;
-    KSpread::Style *  m_defaultStyle;
+    Doc *    m_doc;
+    KCStyle *  m_defaultStyle;
 
     KoXmlDocument   m_content;
     KoXmlDocument   m_meta;
     KoXmlDocument   m_settings;
 
     QHash<QString, KoXmlElement*>   m_styles;
-    QHash<QString, KSpread::Style*> m_defaultStyles;
+    QHash<QString, KCStyle*> m_defaultStyles;
     QHash<QString, QString*>        m_formats;
     QMap<QString, KoXmlElement> m_validationList;
 
@@ -90,31 +87,31 @@ private:
     void insertStyles(KoXmlElement const & element);
     bool createStyleMap(KoXmlDocument const & styles);
     bool readRowFormat(KoXmlElement & rowNode, KoXmlElement * rowStyle,
-                       KSpread::Sheet * table, int & row, int & number, bool last);
-    bool readColLayouts(KoXmlElement & content, KSpread::Sheet * table);
-    bool readRowsAndCells(KoXmlElement & content, KSpread::Sheet * table);
-    bool readCells(KoXmlElement & rowNode, KSpread::Sheet  * table, int row, int & columns);
+                       KCSheet * table, int & row, int & number, bool last);
+    bool readColLayouts(KoXmlElement & content, KCSheet * table);
+    bool readRowsAndCells(KoXmlElement & content, KCSheet * table);
+    bool readCells(KoXmlElement & rowNode, KCSheet  * table, int row, int & columns);
     void convertFormula(QString & text, QString const & f) const;
-    void loadFontStyle(KSpread::Style * layout, KoXmlElement const * font) const;
-    void readInStyle(KSpread::Style * layout, KoXmlElement const & style);
-    void loadStyleProperties(KSpread::Style * layout, KoXmlElement const & property) const;
-    void loadBorder(KSpread::Style * layout, QString const & borderDef, bPos pos) const;
-    void loadTableMasterStyle(KSpread::Sheet * table, QString const & stylename);
+    void loadFontStyle(KCStyle * layout, KoXmlElement const * font) const;
+    void readInStyle(KCStyle * layout, KoXmlElement const & style);
+    void loadStyleProperties(KCStyle * layout, KoXmlElement const & property) const;
+    void loadBorder(KCStyle * layout, QString const & borderDef, bPos pos) const;
+    void loadTableMasterStyle(KCSheet * table, QString const & stylename);
     QString * loadFormat(KoXmlElement * element,
-                         KSpread::Format::Type & formatType,
+                         Format::Type & formatType,
                          QString name);
     void checkForNamedAreas(QString & formula) const;
-    void loadOasisCellValidation(const KoXmlElement&body, const KSpread::ValueParser *parser);
-    void loadOasisValidation(KSpread::Validity val, const QString& validationName, const KSpread::ValueParser *parser);
-    void loadOasisValidationCondition(KSpread::Validity val, QString &valExpression, const KSpread::ValueParser *parser);
+    void loadOasisCellValidation(const KoXmlElement&body, const ValueParser *parser);
+    void loadOasisValidation(Validity val, const QString& validationName, const ValueParser *parser);
+    void loadOasisValidationCondition(Validity val, QString &valExpression, const ValueParser *parser);
     void loadOasisAreaName(const KoXmlElement&body);
-    void loadOasisMasterLayoutPage(KSpread::Sheet * table, KoStyleStack &styleStack);
-    void loadOasisValidationValue(KSpread::Validity val, const QStringList &listVal, const KSpread::ValueParser *parser);
+    void loadOasisMasterLayoutPage(KCSheet * table, KoStyleStack &styleStack);
+    void loadOasisValidationValue(Validity val, const QStringList &listVal, const ValueParser *parser);
     QString translatePar(QString & par) const;
-    void loadCondition(const KSpread::Cell& cell, const KoXmlElement &property);
-    void loadOasisCondition(const KSpread::Cell& cell, const KoXmlElement &property);
-    void loadOasisConditionValue(const QString &styleCondition, KSpread::Conditional &newCondition, const KSpread::ValueParser *parser);
-    void loadOasisCondition(QString &valExpression, KSpread::Conditional &newCondition, const KSpread::ValueParser *parser);
+    void loadCondition(const KCCell& cell, const KoXmlElement &property);
+    void loadOasisCondition(const KCCell& cell, const KoXmlElement &property);
+    void loadOasisConditionValue(const QString &styleCondition, Conditional &newCondition, const ValueParser *parser);
+    void loadOasisCondition(QString &valExpression, Conditional &newCondition, const ValueParser *parser);
     KoFilter::ConversionStatus loadAndParse(KoXmlDocument& doc, const QString& fileName, KoStore *m_store);
 
     KoFilter::ConversionStatus openFile();

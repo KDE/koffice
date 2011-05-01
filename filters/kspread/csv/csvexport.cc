@@ -22,7 +22,6 @@
 
 #include <QFile>
 #include <QTextCodec>
-//Added by qt3to4:
 #include <QTextStream>
 #include <QByteArray>
 
@@ -34,7 +33,7 @@
 
 #include <kspread/CellStorage.h>
 #include <kspread/Map.h>
-#include <kspread/Sheet.h>
+#include <kspread/KCSheet.h>
 #include <kspread/part/Doc.h>
 #include <kspread/Value.h>
 #include <kspread/part/View.h>
@@ -42,32 +41,15 @@
 
 #include <csvexportdialog.h>
 
-using namespace KSpread;
-
 K_PLUGIN_FACTORY(CSVExportFactory, registerPlugin<CSVExport>();)
 K_EXPORT_PLUGIN(CSVExportFactory("kofficefilters"))
-
-class Cell
-{
-public:
-    int row, col;
-    QString text;
-
-    bool operator < (const Cell & c) const {
-        return row < c.row || (row == c.row && col < c.col);
-    }
-    bool operator == (const Cell & c) const {
-        return row == c.row && col == c.col;
-    }
-};
-
 
 CSVExport::CSVExport(QObject* parent, const QVariantList &)
         : KoFilter(parent), m_eol("\n")
 {
 }
 
-QString CSVExport::exportCSVCell(const KSpread::Doc* doc, Sheet const * const sheet,
+QString CSVExport::exportCSVCell(const Doc* doc, KCSheet const * const sheet,
                                  int col, int row, QChar const & textQuote, QChar csvDelimiter)
 {
     // This function, given a cell, returns a string corresponding to its export in CSV format
@@ -77,7 +59,7 @@ QString CSVExport::exportCSVCell(const KSpread::Doc* doc, Sheet const * const sh
     //  - enclosing the cell in quotes if the cell is non empty
 
     Q_UNUSED(doc);
-    const KSpread::Cell cell(sheet, col, row);
+    const KCCell cell(sheet, col, row);
     QString text;
 
     if (!cell.isDefault() && !cell.isEmpty()) {
@@ -126,8 +108,8 @@ KoFilter::ConversionStatus CSVExport::convert(const QByteArray & from, const QBy
     if (!document)
         return KoFilter::StupidError;
 
-    if (!qobject_cast<const KSpread::Doc *>(document)) {
-        kWarning(30501) << "document isn't a KSpread::Doc but a " << document->metaObject()->className();
+    if (!qobject_cast<const Doc *>(document)) {
+        kWarning(30501) << "document isn't a Doc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
     if ((to != "text/csv" && to != "text/plain") || from != "application/x-kspread") {
@@ -196,7 +178,7 @@ KoFilter::ConversionStatus CSVExport::convert(const QByteArray & from, const QBy
             return KoFilter::StupidError;
         }
 
-        Sheet const * const sheet = view->activeSheet();
+        KCSheet const * const sheet = view->activeSheet();
 
         QRect selection = view->selection()->lastRange();
         // Compute the highest row and column indexes (within the selection)
@@ -209,7 +191,7 @@ KoFilter::ConversionStatus CSVExport::convert(const QByteArray & from, const QBy
 
         for (int idxRow = 1, row = selection.top(); row <= bottom; ++row, ++idxRow) {
             for (int idxCol = 1, col = selection.left(); col <= right; ++col, ++idxCol) {
-                if (!KSpread::Cell(sheet, col, row).isEmpty()) {
+                if (!KCCell(sheet, col, row).isEmpty()) {
                     if (idxRow > CSVMaxRow)
                         CSVMaxRow = idxRow;
 
@@ -238,7 +220,7 @@ KoFilter::ConversionStatus CSVExport::convert(const QByteArray & from, const QBy
         }
     } else {
         kDebug(30501) << "Export as full mode";
-        foreach(Sheet const * const sheet, ksdoc->map()->sheetList()) {
+        foreach(KCSheet const * const sheet, ksdoc->map()->sheetList()) {
             if (expDialog && !expDialog->exportSheet(sheet->sheetName())) {
                 continue;
             }
@@ -253,7 +235,7 @@ KoFilter::ConversionStatus CSVExport::convert(const QByteArray & from, const QBy
 
             for (int row = 1 ; row <= sheetMaxRow ; ++row) {
                 for (int col = 1 ; col <= sheetMaxCol ; col++) {
-                    if (!KSpread::Cell(sheet, col, row).isEmpty()) {
+                    if (!KCCell(sheet, col, row).isEmpty()) {
                         if (row > CSVMaxRow)
                             CSVMaxRow = row;
 

@@ -21,8 +21,6 @@
 
 #include <qpro/formula.h>
 
-namespace KSpread
-{
 namespace QuattroPro
 {
 
@@ -33,7 +31,6 @@ public:
     ~Formula();
 };
 
-}
 }
 
 #endif // QPROFORMULA_H

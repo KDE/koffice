@@ -32,11 +32,8 @@ class QDomElement;
 class KLocale;
 class KoStore;
 
-namespace KSpread
-{
 class Doc;
-class Sheet;
-}
+class KCSheet;
 
 class OpenCalcExport : public KoFilter
 {
@@ -53,28 +50,28 @@ private:
     enum files { metaXML = 0x01, contentXML = 0x02, stylesXML = 0x04, settingsXML = 0x08 };
     OpenCalcStyles m_styles;
 
-    bool writeFile(const KSpread::Doc * ksdoc);
+    bool writeFile(const Doc * ksdoc);
 
-    bool exportDocInfo(KoStore * store, const KSpread::Doc * ksdoc);
-    bool exportStyles(KoStore * store, const KSpread::Doc * ksdoc);
-    bool exportContent(KoStore * store, const KSpread::Doc * ksdoc);
-    bool exportSettings(KoStore * store, const KSpread::Doc * ksdoc);
+    bool exportDocInfo(KoStore * store, const Doc * ksdoc);
+    bool exportStyles(KoStore * store, const Doc * ksdoc);
+    bool exportContent(KoStore * store, const Doc * ksdoc);
+    bool exportSettings(KoStore * store, const Doc * ksdoc);
 
-    bool exportBody(QDomDocument & doc, QDomElement & content, const KSpread::Doc * ksdoc);
+    bool exportBody(QDomDocument & doc, QDomElement & content, const Doc * ksdoc);
     void exportSheet(QDomDocument & doc, QDomElement & tabElem,
-                     const KSpread::Sheet * sheet, int maxCols, int maxRows);
+                     const KCSheet *sheet, int maxCols, int maxRows);
     void exportCells(QDomDocument & doc, QDomElement & rowElem,
-                     const KSpread::Sheet * sheet, int row, int maxCols);
+                     const KCSheet *sheet, int row, int maxCols);
     void exportDefaultCellStyle(QDomDocument & doc, QDomElement & officeStyles);
     void exportPageAutoStyles(QDomDocument & doc, QDomElement & autoStyles,
-                              const KSpread::Doc * ksdoc);
+                              const Doc * ksdoc);
     void exportMasterStyles(QDomDocument & doc, QDomElement & masterStyles,
-                            const KSpread::Doc *ksdoc);
+                            const Doc *ksdoc);
 
     bool writeMetaFile(KoStore * store, uint filesWritten);
 
     void convertPart(QString const & part, QDomDocument & doc,
-                     QDomElement & parent, const KSpread::Doc * ksdoc);
+                     QDomElement & parent, const Doc * ksdoc);
     void addText(QString const & text, QDomDocument & doc,
                  QDomElement & parent);
 

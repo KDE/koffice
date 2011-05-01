@@ -114,7 +114,7 @@ KoFilter::ConversionStatus Leader::convert()
         // Gather data about the cell
         for (int row = 1; row <= m_maxCellRow; ++row) {
             for (int column = 1; column <= m_maxCellColumn; ++column) {
-                Cell spreadCell(spreadSheet, column, row);
+                KCCell spreadCell(spreadSheet, column, row);
                 status = doSpreadCell(spreadCell, column, row);
                 if (status != KoFilter::OK)
                     return status;
@@ -266,7 +266,7 @@ KoFilter::ConversionStatus Leader::doSpreadSheet(KSpreadSheet *spreadSheet)
 }
 
 
-KoFilter::ConversionStatus Leader::doSpreadCell(const Cell& spreadCell, int column, int row)
+KoFilter::ConversionStatus Leader::doSpreadCell(const KCCell& spreadCell, int column, int row)
 {
     KSpreadFilterProperty docSpreadCellProperty;
     docSpreadCellProperty["column"] = QString::number(column);
@@ -355,7 +355,7 @@ void Leader::updateMaxCells(KSpreadSheet *spreadSheet)
     for (int row = 1; row < maxRow; ++row) {
         bool usedColumn = false;
         for (int column = 1; column < maxColumn; ++column) {
-            Cell cell(spreadSheet, column, row);
+            KCCell cell(spreadSheet, column, row);
             if (!cell.isDefault() && !cell.isEmpty()) {
                 if (column > m_maxCellColumn) {
                     m_maxCellColumn = column;

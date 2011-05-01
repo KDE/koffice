@@ -26,6 +26,8 @@
 #include <QtGui/QImage>
 #include <generated/simpleParser.h>
 
+#include "conditionals.h"
+
 class QPoint;
 
 namespace Swinder
@@ -37,7 +39,6 @@ class Column;
 class Row;
 struct VerticalPageBreak;
 struct HorizontalPageBreak;
-class ConditionalFormat;
 
 class Sheet
 {

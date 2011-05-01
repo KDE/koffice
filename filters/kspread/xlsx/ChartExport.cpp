@@ -945,7 +945,7 @@ void ChartExport::writeInternalTable ( KoXmlWriter* bodyWriter )
             const int columnCount = chart()->m_internalTable.maxCellsInRow(r);
             for(int c = 1; c <= columnCount; ++c) {
                 bodyWriter->startElement("table:table-cell");
-                if (Cell* cell = chart()->m_internalTable.cell(c, r, false)) {
+                if (KCCell* cell = chart()->m_internalTable.cell(c, r, false)) {
                     //kDebug() << "cell->m_value " << cell->m_value;
                     if (!cell->m_value.isEmpty()) {
                         if (!cell->m_valueType.isEmpty()) {

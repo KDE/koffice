@@ -48,13 +48,11 @@
 #include <kspread/Map.h>
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>
-#include <kspread/Sheet.h>
+#include <kspread/KCSheet.h>
 #include <kspread/RowColumnFormat.h>
 #include <kspread/Validity.h>
 #include <kspread/ValueConverter.h>
 #include <kspread/part/View.h>
-
-using namespace KSpread;
 
 K_PLUGIN_FACTORY(GNUMERICExportFactory, registerPlugin<GNUMERICExport>();)
 K_EXPORT_PLUGIN(GNUMERICExportFactory("kofficefilters"))
@@ -70,11 +68,11 @@ GNUMERICExport::GNUMERICExport(QObject* parent, const QVariantList&)
 /**
  * This function will check if a cell has any type of border.
  */
-bool GNUMERICExport::hasBorder(const Cell& cell, int currentcolumn, int currentrow)
+bool GNUMERICExport::hasBorder(const KCCell& cell, int currentcolumn, int currentrow)
 {
     Q_UNUSED(currentcolumn);
     Q_UNUSED(currentrow);
-    const Style style = cell.style();
+    const KCStyle style = cell.style();
     if (((style.leftBorderPen().width() != 0) &&
             (style.leftBorderPen().style() != Qt::NoPen)) ||
             ((style.rightBorderPen().width() != 0) &&
@@ -97,7 +95,7 @@ const QString GNUMERICExport::ColorToString(int red, int green, int blue)
     return QString::number(red, 16) + ':' + QString::number(green, 16) + ':' + QString::number(blue, 16);
 }
 
-QDomElement GNUMERICExport::GetBorderStyle(QDomDocument gnumeric_doc, const Cell& cell, int currentcolumn, int currentrow)
+QDomElement GNUMERICExport::GetBorderStyle(QDomDocument gnumeric_doc, const KCCell& cell, int currentcolumn, int currentrow)
 {
     Q_UNUSED(currentcolumn);
     Q_UNUSED(currentrow);
@@ -109,7 +107,7 @@ QDomElement GNUMERICExport::GetBorderStyle(QDomDocument gnumeric_doc, const Cell
     QColor color;
 
     border_style = gnumeric_doc.createElement("gmr:StyleBorder");
-    const Style style = cell.style();
+    const KCStyle style = cell.style();
 
     if ((style.leftBorderPen().width() != 0) &&
             (style.leftBorderPen().style() != Qt::NoPen)) {
@@ -222,7 +220,7 @@ QDomElement GNUMERICExport::GetBorderStyle(QDomDocument gnumeric_doc, const Cell
     return border_style;
 }
 
-QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const Cell& cell)
+QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const KCCell& cell)
 {
     ValueConverter *const converter = cell.sheet()->map()->converter();
 
@@ -459,10 +457,10 @@ QDomElement GNUMERICExport::GetValidity(QDomDocument gnumeric_doc, const Cell& c
     return val;
 }
 
-QDomElement GNUMERICExport::GetFontStyle(QDomDocument gnumeric_doc, const Cell& cell, int currentcolumn, int currentrow)
+QDomElement GNUMERICExport::GetFontStyle(QDomDocument gnumeric_doc, const KCCell& cell, int currentcolumn, int currentrow)
 {
     QDomElement font_style;
-    const Style style = cell.style();
+    const KCStyle style = cell.style();
     kDebug(30521) << " currentcolumn :" << currentcolumn << " currentrow :" << currentrow;
     font_style = gnumeric_doc.createElement("gmr:Font");
     font_style.appendChild(gnumeric_doc.createTextNode(style.fontFamily()));
@@ -515,7 +513,7 @@ QDomElement GNUMERICExport::GetLinkStyle(QDomDocument gnumeric_doc)
     return link_style;
 }
 
-QDomElement GNUMERICExport::GetCellStyle(QDomDocument gnumeric_doc, const Cell& cell, int currentcolumn, int currentrow)
+QDomElement GNUMERICExport::GetCellStyle(QDomDocument gnumeric_doc, const KCCell& cell, int currentcolumn, int currentrow)
 {
     QDomElement cell_style;
 
@@ -523,7 +521,7 @@ QDomElement GNUMERICExport::GetCellStyle(QDomDocument gnumeric_doc, const Cell& 
 
     int red, green, blue;
 
-    const Style style = cell.style();
+    const KCStyle style = cell.style();
     QColor bgColor =  style.backgroundColor();
     if (bgColor.isValid()) {
         red = bgColor.red() << 8;
@@ -609,21 +607,21 @@ QDomElement GNUMERICExport::GetCellStyle(QDomDocument gnumeric_doc, const Cell& 
 
     cell_style.setAttribute("Fore", QString::number(red, 16) + ':' + QString::number(green, 16) + ':' + QString::number(blue, 16));
 
-    if (style.halign() ==  Style::HAlignUndefined) {
+    if (style.halign() ==  KCStyle::HAlignUndefined) {
         cell_style.setAttribute("HAlign", "1");
-    } else if (style.halign() ==  Style::Left) {
+    } else if (style.halign() ==  KCStyle::Left) {
         cell_style.setAttribute("HAlign", "2");
-    } else if (style.halign() ==  Style::Right) {
+    } else if (style.halign() ==  KCStyle::Right) {
         cell_style.setAttribute("HAlign", "4");
-    } else if (style.halign() ==  Style::Center) {
+    } else if (style.halign() ==  KCStyle::Center) {
         cell_style.setAttribute("HAlign", "8");
     }
 
-    if (style.valign() ==  Style::Top) {
+    if (style.valign() ==  KCStyle::Top) {
         cell_style.setAttribute("VAlign", "1");
-    } else if (style.valign() ==  Style::Bottom) {
+    } else if (style.valign() ==  KCStyle::Bottom) {
         cell_style.setAttribute("VAlign", "2");
-    } else if (style.valign() ==  Style::Middle) {
+    } else if (style.valign() ==  KCStyle::Middle) {
         cell_style.setAttribute("VAlign", "4");
     }
 
@@ -683,7 +681,7 @@ QDomElement GNUMERICExport::GetCellStyle(QDomDocument gnumeric_doc, const Cell& 
         break;
     case Format::Money:
 
-        if (!style.hasAttribute(Style::CurrencyFormat)) {
+        if (!style.hasAttribute(KCStyle::CurrencyFormat)) {
             stringFormat = "0.00";
             break;
         }
@@ -923,8 +921,8 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
     if (!document)
         return KoFilter::StupidError;
 
-    if (!qobject_cast<const KSpread::Doc *>(document)) {    // it's safer that way :)
-        kWarning(30521) << "document isn't a KSpread::Doc but a " << document->metaObject()->className();
+    if (!qobject_cast<const Doc *>(document)) {    // it's safer that way :)
+        kWarning(30521) << "document isn't a Doc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
     if (to != "application/x-gnumeric" || from != "application/x-kspread") {
@@ -990,7 +988,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
     QDomElement sheetNameIndex = gnumeric_doc.createElement("gmr:SheetNameIndex");
     workbook.appendChild(sheetNameIndex);
 
-    foreach(Sheet* table, ksdoc->map()->sheetList()) {
+    foreach(KCSheet* table, ksdoc->map()->sheetList()) {
         QDomElement sheetName = gnumeric_doc.createElement("gmr:SheetName");
         sheetName.appendChild(gnumeric_doc.createTextNode(table->sheetName()));
         sheetNameIndex.appendChild(sheetName);
@@ -1015,7 +1013,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
     */
     const QList<QString> namedAreas = ksdoc->map()->namedAreaManager()->areaNames();
     if (namedAreas.count() > 0) {
-        Sheet* sheet = 0;
+        KCSheet* sheet = 0;
         QRect range;
         QDomElement areaNames = gnumeric_doc.createElement("gmr:Names");
         for (int i = 0; i < namedAreas.count(); ++i) {
@@ -1054,7 +1052,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
     }
     int i = 0;
     int indexActiveTable = 0;
-    foreach(Sheet* table, ksdoc->map()->sheetList()) {
+    foreach(KCSheet* table, ksdoc->map()->sheetList()) {
         if (table->printSettings()->pageLayout().format == KoPageFormat::CustomSize) {
             customSize = gnumeric_doc.createElement("gmr:Geometry");
             customSize.setAttribute("Width", POINT_TO_MM(table->printSettings()->pageLayout().width));
@@ -1145,7 +1143,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
         int _tmpRepeatColumnEnd = table->printSettings()->repeatedColumns().second;
         if (_tmpRepeatColumnStart != 0) {
             repeatColumns = gnumeric_doc.createElement("gmr:repeat_left");
-            QString value = Cell::columnName(_tmpRepeatColumnStart) + "1:" + Cell::columnName(_tmpRepeatColumnEnd) + "65536";
+            QString value = KCCell::columnName(_tmpRepeatColumnStart) + "1:" + KCCell::columnName(_tmpRepeatColumnEnd) + "65536";
             repeatColumns.setAttribute("value", value);
             tmp.appendChild(repeatColumns);
         }
@@ -1286,7 +1284,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
             QString line;
             for (int currentcolumn = 1; currentcolumn <= iMaxColumn; currentcolumn++) {
                 QDomElement cell_contents;
-                Cell cell(table, currentcolumn, currentrow);
+                KCCell cell(table, currentcolumn, currentrow);
 
                 QString text, style;
                 QDomDocument domLink;
@@ -1315,11 +1313,11 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
                     }
 #if 0
                     switch (cell.content()) {
-                    case Cell::Text:
+                    case KCCell::Text:
                         text = cell.userInput();
                         isLink = false;
                         break;
-                    case Cell::RichText:
+                    case KCCell::RichText:
                         // hyperlinks
                         // Extract the cell text
                         isLink = true;
@@ -1349,11 +1347,11 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
                         linkText = text;
 
                         break;
-                    case Cell::VisualFormula:
+                    case KCCell::VisualFormula:
                         isLink = false;
                         text = cell.userInput(); // untested
                         break;
-                    case Cell::Formula:
+                    case KCCell::Formula:
                         isLink = false;
                         QString tmp = cell.userInput();
                         if (tmp == "==")
@@ -1391,7 +1389,7 @@ KoFilter::ConversionStatus GNUMERICExport::convert(const QByteArray& from, const
                         //<gmr:CellComment Author="" Text="cvbcvbxcvb&#10;cb&#10;xc&#10;vbxcv&#10;" ObjectBound="A1" ObjectOffset="0 0 0 0" ObjectAnchorType="17 16 17 16" Direction="17"/>
                         cellComment = gnumeric_doc.createElement("gmr:CellComment");
                         cellComment.setAttribute("Text", cell.comment());
-                        QString sCell = QString("%1%2").arg(Cell::columnName(currentcolumn)).arg(currentrow);
+                        QString sCell = QString("%1%2").arg(KCCell::columnName(currentcolumn)).arg(currentrow);
 
                         cellComment.setAttribute("ObjectBound", sCell);
                         objects.appendChild(cellComment);
@@ -1480,11 +1478,11 @@ QString GNUMERICExport::convertRefToRange(const QString & table, const QRect & r
     QString s;
     s += table;
     s += "!$";
-    s += Cell::columnName(topLeft.x());
+    s += KCCell::columnName(topLeft.x());
     s += '$';
     s += QString::number(topLeft.y());
     s += ":$";
-    s += Cell::columnName(bottomRight.x());
+    s += KCCell::columnName(bottomRight.x());
     s += '$';
     s += QString::number(bottomRight.y());
 
@@ -1499,7 +1497,7 @@ QString GNUMERICExport::convertRefToBase(const QString & table, const QRect & re
     QString s;
     s = table;
     s += "!$";
-    s += Cell::columnName(bottomRight.x());
+    s += KCCell::columnName(bottomRight.x());
     s += '$';
     s += QString::number(bottomRight.y());
 

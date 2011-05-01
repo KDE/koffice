@@ -24,15 +24,11 @@
 
 #include <QDateTime>
 #include <qdom.h>
-//Added by qt3to4:
 #include <QByteArray>
 #include <QVariantList>
 
-namespace KSpread
-{
-class Cell;
-class Sheet;
-}
+class KCCell;
+class KCSheet;
 
 class GNUMERICFilter : public KoFilter
 {
@@ -55,16 +51,16 @@ private:
     };
 
     void dateInit();
-    QString convertVars(QString const & str, KSpread::Sheet * table) const;
-    void ParsePrintInfo(QDomNode const & printInfo, KSpread::Sheet * table);
-    void ParseFormat(QString const & formatString, const KSpread::Cell& kspread_cell);
-    void setStyleInfo(QDomNode * sheet, KSpread::Sheet * table);
-    bool setType(const KSpread::Cell& kspread_cell, QString const & formatString, QString & cell_content);
+    QString convertVars(QString const & str, KCSheet * table) const;
+    void ParsePrintInfo(QDomNode const & printInfo, KCSheet * table);
+    void ParseFormat(QString const & formatString, const KCCell& kspread_cell);
+    void setStyleInfo(QDomNode * sheet, KCSheet * table);
+    bool setType(const KCCell& kspread_cell, QString const & formatString, QString & cell_content);
     void convertFormula(QString & formula) const;
-    void importBorder(QDomElement  border, borderStyle _style, const KSpread::Cell&cell);
-    void ParseBorder(QDomElement & gmr_styleborder, const KSpread::Cell& kspread_cell);
+    void importBorder(QDomElement  border, borderStyle _style, const KCCell&cell);
+    void ParseBorder(QDomElement & gmr_styleborder, const KCCell& kspread_cell);
     double parseAttribute(const QDomElement &_element);
 
-    void setText(KSpread::Sheet* sheet, int row, int column, const QString& text, bool asString = false);
+    void setText(KCSheet* sheet, int row, int column, const QString& text, bool asString = false);
 };
 #endif // GNUMERICFILTER_H

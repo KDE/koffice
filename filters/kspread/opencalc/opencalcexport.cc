@@ -44,7 +44,7 @@
 #include <kspread/part/AboutData.h> // for version
 #include <kspread/part/Canvas.h>
 #include <kspread/CalculationSettings.h>
-#include <kspread/Cell.h>
+#include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
 #include <kspread/HeaderFooter.h>
 #include <kspread/kspread_limits.h>
@@ -52,8 +52,8 @@
 #include <kspread/NamedAreaManager.h>
 #include <kspread/PrintSettings.h>
 #include <kspread/RowColumnFormat.h>
-#include <kspread/Sheet.h>
-#include <kspread/Style.h>
+#include <kspread/KCSheet.h>
+#include <kspread/KCStyle.h>
 #include <kspread/StyleManager.h>
 #include <kspread/Util.h>
 #include <kspread/part/View.h>
@@ -98,8 +98,8 @@ KoFilter::ConversionStatus OpenCalcExport::convert(const QByteArray & from,
     if (!document)
         return KoFilter::StupidError;
 
-    if (!qobject_cast<const KSpread::Doc *>(document)) {
-        kWarning(30518) << "document isn't a KSpread::Doc but a "
+    if (!qobject_cast<const Doc *>(document)) {
+        kWarning(30518) << "document isn't a Doc but a "
         << document->metaObject()->className() << endl;
         return KoFilter::NotImplemented;
     }
@@ -186,7 +186,7 @@ bool OpenCalcExport::exportDocInfo(KoStore * store, const Doc* ksdoc)
 
     QDomElement data = meta.createElement("meta:generator");
     QString app("KSpread ");
-    app += KSpread::version;
+    app += KOFFICE_VERSION_STRING;
     data.appendChild(meta.createTextNode(app));
     officeMeta.appendChild(data);
 
@@ -294,7 +294,7 @@ bool OpenCalcExport::exportSettings(KoStore * store, const Doc * ksdoc)
     QDomElement configmaped = doc.createElement("config:config-item-map-named");
     configmaped.setAttribute("config:name", "Tables");
 
-    foreach(Sheet* sheet, ksdoc->map()->sheetList()) {
+    foreach(KCSheet* sheet, ksdoc->map()->sheetList()) {
         QPoint marker;
         if (view) {
             marker = view->markerFromSheet(sheet);
@@ -389,7 +389,7 @@ bool OpenCalcExport::exportContent(KoStore * store, const Doc * ksdoc)
 void exportNamedExpr(Doc* kspreadDoc, QDomDocument & doc, QDomElement & parent,
                      AreaList const & namedAreas)
 {
-    Sheet* sheet = 0;
+    KCSheet* sheet = 0;
     QRect range;
     for (int i = 0; i < namedAreas.count(); ++i) {
         QDomElement namedRange = doc.createElement("table:named-range");
@@ -424,7 +424,7 @@ bool OpenCalcExport::exportBody(QDomDocument & doc, QDomElement & content, const
         }
     }
 
-    foreach(Sheet* sheet, ksdoc->map()->sheetList()) {
+    foreach(KCSheet* sheet, ksdoc->map()->sheetList()) {
         SheetStyle ts;
         //int maxCols         = 1;
         //int maxRows         = 1;
@@ -494,7 +494,7 @@ bool OpenCalcExport::exportBody(QDomDocument & doc, QDomElement & content, const
 }
 
 void OpenCalcExport::exportSheet(QDomDocument & doc, QDomElement & tabElem,
-                                 const Sheet * sheet, int maxCols, int maxRows)
+                                 const KCSheet * sheet, int maxCols, int maxRows)
 {
     kDebug(30518) << "exportSheet:" << sheet->sheetName();
     int i = 1;
@@ -552,13 +552,13 @@ void OpenCalcExport::exportSheet(QDomDocument & doc, QDomElement & tabElem,
 }
 
 void OpenCalcExport::exportCells(QDomDocument & doc, QDomElement & rowElem,
-                                 const Sheet *sheet, int row, int maxCols)
+                                 const KCSheet *sheet, int row, int maxCols)
 {
     int i = 1;
     while (i <= maxCols) {
         int  repeated = 1;
-        const Cell cell(sheet, i, row);
-        const KSpread::Style style = cell.style();
+        const KCCell cell(sheet, i, row);
+        const KCStyle style = cell.style();
         QDomElement cellElem;
 
         if (!cell.isPartOfMerged())
@@ -581,7 +581,7 @@ void OpenCalcExport::exportCells(QDomDocument & doc, QDomElement & rowElem,
         if (cell.isEmpty() && !comment.isEmpty() && !cell.isPartOfMerged() && !cell.doesMergeCells()) {
             int j = i + 1;
             while (j <= maxCols) {
-                const Cell cell1(sheet, j, row);
+                const KCCell cell1(sheet, j, row);
 
                 CellStyle c1;
                 CellStyle::loadData(c1, cell1);   // TODO: number style
@@ -625,7 +625,7 @@ void OpenCalcExport::exportCells(QDomDocument & doc, QDomElement & rowElem,
             QDomElement linkref = doc.createElement("text:a");
 
             QString tmp = cell.link();
-            if (Util::localReferenceAnchor(tmp))
+            if (KSpread::localReferenceAnchor(tmp))
                 linkref.setAttribute("xlink:href", ('#' + tmp));
             else
                 linkref.setAttribute("xlink:href", tmp);
@@ -639,7 +639,7 @@ void OpenCalcExport::exportCells(QDomDocument & doc, QDomElement & rowElem,
             textElem.appendChild(doc.createTextNode(cell.displayText()));
 
             cellElem.appendChild(textElem);
-            kDebug(30518) << "Cell StrOut:" << cell.displayText();
+            kDebug(30518) << "KCCell StrOut:" << cell.displayText();
         }
 
         if (cell.doesMergeCells()) {
@@ -777,7 +777,7 @@ void OpenCalcExport::createDefaultStyles()
 void OpenCalcExport::exportPageAutoStyles(QDomDocument & doc, QDomElement & autoStyles,
         const Doc *ksdoc)
 {
-    const Sheet * sheet = ksdoc->map()->sheetList().first();
+    const KCSheet * sheet = ksdoc->map()->sheetList().first();
 
     float width  = 20.999;
     float height = 29.699;
@@ -833,7 +833,7 @@ void OpenCalcExport::exportMasterStyles(QDomDocument & doc, QDomElement & master
     masterPage.setAttribute("style:name", "Default");
     masterPage.setAttribute("style:page-master-name", "pm1");
 
-    const Sheet * sheet = ksdoc->map()->sheetList().first();
+    const KCSheet * sheet = ksdoc->map()->sheetList().first();
 
     QString headerLeft;
     QString headerCenter;

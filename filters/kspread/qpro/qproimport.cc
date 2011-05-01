@@ -26,8 +26,8 @@
 #include <KoFilterChain.h>
 
 #include <kspread/part/Doc.h>
-#include <kspread/Sheet.h>
-#include <kspread/Cell.h>
+#include <kspread/KCSheet.h>
+#include <kspread/KCCell.h>
 #include <kspread/Value.h>
 #include <kspread/Map.h>
 
@@ -61,14 +61,14 @@ QpTableList::~QpTableList()
 
 
 void
-QpTableList::table(unsigned pIdx, Sheet* pTable)
+QpTableList::table(unsigned pIdx, KCSheet* pTable)
 {
     if (pIdx < cNameCnt) {
         cTable[pIdx] = pTable;
     }
 }
 
-Sheet*
+KCSheet*
 QpTableList::table(unsigned pIdx)
 {
     return (pIdx < cNameCnt ? cTable[pIdx] : 0);
@@ -103,8 +103,8 @@ KoFilter::ConversionStatus QpImport::convert(const QByteArray& from, const QByte
 
     kDebug(30523) << "here we go..." << document->metaObject()->className();
 
-    if (!::qobject_cast<const KSpread::Doc *>(document)) {   // it's safer that way :)
-        kWarning(30501) << "document isn't a KSpread::Doc but a " << document->metaObject()->className();
+    if (!::qobject_cast<const Doc *>(document)) {   // it's safer that way :)
+        kWarning(30501) << "document isn't a Doc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
     if (from != "application/x-quattropro" || to != "application/x-kspread") {
@@ -129,7 +129,7 @@ KoFilter::ConversionStatus QpImport::convert(const QByteArray& from, const QByte
         return KoFilter::FileNotFound;
     }
 
-    Sheet *table = 0;
+    KCSheet *table = 0;
 
     QString field;
     int value = 0;
@@ -195,7 +195,7 @@ KoFilter::ConversionStatus QpImport::convert(const QByteArray& from, const QByte
                     // we're about to reference a table that hasn't been created yet.
                     // setText gets upset about this, so create a blank table
 
-                    Sheet* lNewTable = ksdoc->map()->addNewSheet();
+                    KCSheet* lNewTable = ksdoc->map()->addNewSheet();
 
                     // set up a default name for the table
                     lNewTable->setSheetName(lTableNames.name(lIdx)
@@ -254,9 +254,9 @@ KoFilter::ConversionStatus QpImport::convert(const QByteArray& from, const QByte
         return KoFilter::StupidError;
 }
 
-void QpImport::setText(Sheet* sheet, int _row, int _column, const QString& _text, bool asString)
+void QpImport::setText(KCSheet* sheet, int _row, int _column, const QString& _text, bool asString)
 {
-    Cell cell(sheet, _column, _row);
+    KCCell cell(sheet, _column, _row);
     if (asString) {
         cell.setUserInput(_text);
         cell.setValue(Value(_text));

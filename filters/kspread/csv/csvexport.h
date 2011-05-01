@@ -22,16 +22,12 @@
 #define CSVEXPORT_H
 
 #include <QString>
-//Added by qt3to4:
 #include <QByteArray>
 #include <KoFilter.h>
 #include <QVariantList>
 
-namespace KSpread
-{
-class Sheet;
+class KCSheet;
 class Doc;
-}
 
 class CSVExport : public KoFilter
 {
@@ -44,7 +40,7 @@ public:
     virtual KoFilter::ConversionStatus convert(const QByteArray & from, const QByteArray & to);
 
 private:
-    QString exportCSVCell(const KSpread::Doc* doc, KSpread::Sheet const * const sheet,
+    QString exportCSVCell(const Doc* doc, KCSheet const * const sheet,
                           int col, int row, QChar const & textQuote, QChar csvDelimiter);
 
 private:

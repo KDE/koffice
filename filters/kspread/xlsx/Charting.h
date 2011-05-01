@@ -282,14 +282,14 @@ namespace Charting
         virtual ~Axis() {}
     };
 
-    class Cell
+    class KCCell
     {
     public:
         int m_column;
         int m_row;
         QString m_value;
         QString m_valueType;
-        Cell(int columnIndex, int rowIndex) : m_column(columnIndex), m_row(rowIndex), m_valueType("string"){};
+        KCCell(int columnIndex, int rowIndex) : m_column(columnIndex), m_row(rowIndex), m_valueType("string"){};
     };
 
     // cell data represetation of internal table
@@ -299,12 +299,12 @@ namespace Charting
         InternalTable():m_maxRow(0),m_maxColumn(0) {  }
         ~InternalTable() { qDeleteAll(m_cells); }
 
-        Cell* cell(int columnIndex, int rowIndex, bool autoCreate)
+        KCCell* cell(int columnIndex, int rowIndex, bool autoCreate)
         {
             const unsigned hashed = (rowIndex + 1) * MSOOXML::maximumSpreadsheetColumns() + columnIndex + 1;
-            Cell* c = m_cells[ hashed ];
+            KCCell* c = m_cells[ hashed ];
             if (!c && autoCreate) {
-                c = new Cell(columnIndex, rowIndex);
+                c = new KCCell(columnIndex, rowIndex);
                 m_cells[ hashed ] = c;
                 if (rowIndex > m_maxRow) m_maxRow = rowIndex;
                 if (columnIndex > m_maxColumn) m_maxColumn = columnIndex;
@@ -321,7 +321,7 @@ namespace Charting
     private:
         int m_maxRow;
         int m_maxColumn;
-        QHash<unsigned, Cell*> m_cells;
+        QHash<unsigned, KCCell*> m_cells;
         QHash<int, int> m_maxCellsInRow;
     };
 

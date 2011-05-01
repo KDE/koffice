@@ -3079,7 +3079,7 @@ void XlsxXmlChartReader::WriteIntoInternalTable(QString &range, QVector< QString
 
             int bufferIndex = 0;
             for(int i = startColumn; i <=endColumn; i++,bufferIndex++) {
-                Charting::Cell *cell = internalTable->cell(i,startRow,true);
+                Charting::KCCell *cell = internalTable->cell(i,startRow,true);
                 cell->m_valueType = format;
                 cell->m_value = buffer[bufferIndex];
 //                kDebug()<<"m_value " << format;
@@ -3093,7 +3093,7 @@ void XlsxXmlChartReader::WriteIntoInternalTable(QString &range, QVector< QString
 
             int bufferIndex = 0;
             for(int i = startRow; i <=endRow; i++,bufferIndex++) {
-                Charting::Cell *cell = internalTable->cell(startColumn,i,true);
+                Charting::KCCell *cell = internalTable->cell(startColumn,i,true);
                 cell->m_valueType = format;
                 cell->m_value = buffer[bufferIndex];
 //                kDebug()<<"m_value " << format;
@@ -3104,7 +3104,7 @@ void XlsxXmlChartReader::WriteIntoInternalTable(QString &range, QVector< QString
         }
     } else {
         if (buffer.size() != 0) {
-            Charting::Cell *cell = internalTable->cell(startColumn,startRow,true);
+            Charting::KCCell *cell = internalTable->cell(startColumn,startRow,true);
             cell->m_valueType = format;
             cell->m_value = buffer[0];
 //            kDebug()<<"m_value " << format;

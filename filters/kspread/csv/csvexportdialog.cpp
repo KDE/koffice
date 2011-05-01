@@ -21,7 +21,7 @@
 #include "csvexportdialog.h"
 
 #include "kspread/Map.h"
-#include "kspread/Sheet.h"
+#include "kspread/KCSheet.h"
 
 #include <KApplication>
 #include <KCharsets>
@@ -29,8 +29,6 @@
 
 #include <QTextCodec>
 #include <QValidator>
-
-using namespace KSpread;
 
 CSVExportDialog::CSVExportDialog(QWidget * parent)
         : KDialog(parent),
@@ -145,7 +143,7 @@ void CSVExportDialog::fillSheet(Map * map)
     m_dialog->m_sheetList->clear();
     QListWidgetItem *item;
 
-    foreach(Sheet* sheet, map->sheetList()) {
+    foreach(KCSheet* sheet, map->sheetList()) {
         item = new QListWidgetItem(sheet->sheetName() ,m_dialog->m_sheetList);
         item->setCheckState(Qt::Checked);
         m_dialog->m_sheetList->addItem(item);

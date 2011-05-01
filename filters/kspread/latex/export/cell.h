@@ -30,7 +30,7 @@
 #include "xmlparser.h"
 
 /***********************************************************************/
-/* Class: Cell                                                        */
+/* Class: KCCell                                                        */
 /***********************************************************************/
 
 class Table;
@@ -39,7 +39,7 @@ class Column;
 /**
  * This class hold a cell.
  */
-class Cell: public Format
+class KCCell: public Format
 {
 
     /* USEFUL DATA */
@@ -58,11 +58,11 @@ public:
      */
 
     /**
-     * Creates a new instance of Cell.
+     * Creates a new instance of KCCell.
      */
-    Cell();
+    KCCell();
 
-    Cell(long row, long col) {
+    KCCell(long row, long col) {
         _row = row;
         _col = col;
     }
@@ -73,7 +73,7 @@ public:
      * The destructor must remove the list of frames.
      */
 
-    virtual ~Cell();
+    virtual ~KCCell();
 
     /* ==== getters ==== */
 

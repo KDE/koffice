@@ -34,7 +34,7 @@
 #include <CellStorage.h>
 #include <Formula.h>
 #include <Map.h>
-#include <kspread/Sheet.h>
+#include <kspread/KCSheet.h>
 #include <Region.h>
 #include <RowColumnFormat.h>
 #include <StyleStorage.h>
@@ -268,7 +268,7 @@ static unsigned convertColumnWidth(qreal width)
     return width / factor * 256;
 }
 
-void ExcelExport::collectStyles(KSpread::Sheet* sheet, QList<XFRecord>& xfRecords, QHash<QPair<QFont, QColor>, unsigned>& fontMap)
+void ExcelExport::collectStyles(KCSheet* sheet, QList<XFRecord>& xfRecords, QHash<QPair<QFont, QColor>, unsigned>& fontMap)
 {
     QRect area = sheet->cellStorage()->styleStorage()->usedArea();
     for (int row = area.top(); row <= area.bottom(); row++) {
@@ -285,7 +285,7 @@ void ExcelExport::collectStyles(KSpread::Sheet* sheet, QList<XFRecord>& xfRecord
     }
 }
 
-void ExcelExport::buildStringTable(KSpread::Sheet* sheet, Swinder::SSTRecord& sst, QHash<QString, unsigned>& stringTable)
+void ExcelExport::buildStringTable(KCSheet* sheet, Swinder::SSTRecord& sst, QHash<QString, unsigned>& stringTable)
 {
     unsigned useCount = 0;
     const KSpread::ValueStorage* values = sheet->cellStorage()->valueStorage();
@@ -302,7 +302,7 @@ void ExcelExport::buildStringTable(KSpread::Sheet* sheet, Swinder::SSTRecord& ss
     sst.setUseCount(sst.useCount() + useCount);
 }
 
-void ExcelExport::convertSheet(KSpread::Sheet* sheet, const QHash<QString, unsigned>& sst)
+void ExcelExport::convertSheet(KCSheet* sheet, const QHash<QString, unsigned>& sst)
 {
     XlsRecordOutputStream& o = *d->out;
     {
@@ -381,9 +381,9 @@ void ExcelExport::convertSheet(KSpread::Sheet* sheet, const QHash<QString, unsig
         for (int row = firstRow; row < lastRowP1; row++) {
             RowRecord rr(0);
 
-            KSpread::Cell first = sheet->cellStorage()->firstInRow(row);
-            if (first.isNull()) first = KSpread::Cell(sheet, 1, row);
-            KSpread::Cell last = sheet->cellStorage()->lastInRow(row);
+            KSpread::KCCell first = sheet->cellStorage()->firstInRow(row);
+            if (first.isNull()) first = KSpread::KCCell(sheet, 1, row);
+            KSpread::KCCell last = sheet->cellStorage()->lastInRow(row);
             if (last.isNull()) last = first;
             const KSpread::RowFormat* format = sheet->rowFormat(row);
 
@@ -402,13 +402,13 @@ void ExcelExport::convertSheet(KSpread::Sheet* sheet, const QHash<QString, unsig
             db.setCellOffset(row - firstRow, o.pos() - lastStart);
             lastStart = o.pos();
 
-            KSpread::Cell first = sheet->cellStorage()->firstInRow(row);
-            if (first.isNull()) first = KSpread::Cell(sheet, 1, row);
-            KSpread::Cell last = sheet->cellStorage()->lastInRow(row);
+            KSpread::KCCell first = sheet->cellStorage()->firstInRow(row);
+            if (first.isNull()) first = KSpread::KCCell(sheet, 1, row);
+            KSpread::KCCell last = sheet->cellStorage()->lastInRow(row);
             if (last.isNull()) last = first;
 
             for (int col = first.column(); col <= last.column(); col++) {
-                KSpread::Cell cell(sheet, col, row);
+                KSpread::KCCell cell(sheet, col, row);
                 KSpread::Value val = cell.value();
                 KSpread::Style style = cell.style();
                 unsigned xfi = d->styles[style];
@@ -630,7 +630,7 @@ static int opPrecedence(KSpread::Token::Op op)
     return prec;
 }
 
-QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, KSpread::Sheet* sheet) const
+QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, KCSheet* sheet) const
 {
     QList<FormulaToken> codes;
 
@@ -706,11 +706,11 @@ QList<FormulaToken> ExcelExport::compileFormula(const KSpread::Tokens &tokens, K
 
         // for cell, range, or identifier, push immediately to stack
         // generate code to load from reference
-        if ((tokenType == KSpread::Token::Cell) || (tokenType == KSpread::Token::Range) ||
+        if ((tokenType == KSpread::Token::KCCell) || (tokenType == KSpread::Token::Range) ||
                 (tokenType == KSpread::Token::Identifier)) {
             syntaxStack.push(token);
 
-            if (tokenType == KSpread::Token::Cell) {
+            if (tokenType == KSpread::Token::KCCell) {
                 const KSpread::Region region(token.text(), d->inputDoc->map(), sheet);
                 if (!region.isValid() || !region.isSingular()) {
                     codes.append(FormulaToken::createRefErr());

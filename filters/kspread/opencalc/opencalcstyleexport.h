@@ -21,8 +21,8 @@
 #ifndef OPENCALCSTYLEEXPORT_H
 #define OPENCALCSTYLEEXPORT_H
 
-#include "kspread/Global.h"
-#include "kspread/Style.h"
+#include <kspread/Global.h>
+#include <kspread/KCStyle.h>
 
 #include <QColor>
 #include <QFont>
@@ -30,11 +30,7 @@
 #include <QString>
 #include <QList>
 
-namespace KSpread
-{
-class Cell;
-}
-
+class KCCell;
 class QDomDocument;
 class QDomElement;
 
@@ -91,7 +87,7 @@ public:
     static bool isEqual(CellStyle const * const t1, CellStyle const & t2);
 
     // all except the number style
-    static void loadData(CellStyle & cs, const KSpread::Cell& cell);
+    static void loadData(CellStyle & cs, const KCCell& cell);
 
     QString     name;
 
@@ -112,8 +108,8 @@ public:
     bool        hideFormula;
     bool        notProtected;
 
-    KSpread::Style::HAlign  alignX;
-    KSpread::Style::VAlign  alignY;
+    KCStyle::HAlign  alignX;
+    KCStyle::VAlign  alignY;
 };
 
 class ColumnStyle : public Style

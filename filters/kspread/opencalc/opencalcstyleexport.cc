@@ -21,11 +21,11 @@
 
 #include <KoGlobal.h>
 
-#include <kspread/Cell.h>
+#include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
 #include <kspread/Map.h>
-#include <kspread/Sheet.h>
-#include <kspread/Style.h>
+#include <kspread/KCSheet.h>
+#include <kspread/KCStyle.h>
 #include <kspread/StyleManager.h>
 
 #include <qdom.h>
@@ -212,23 +212,23 @@ void OpenCalcStyles::addCellStyles(QDomDocument & doc, QDomElement & autoStyles)
         if (t->bgColor.name() != "#ffffff")
             prop.setAttribute("fo:background-color", t->bgColor.name());
 
-        if (t->alignX != KSpread::Style::HAlignUndefined) {
+        if (t->alignX != KCStyle::HAlignUndefined) {
             QString value;
-            if (t->alignX == KSpread::Style::Center)
+            if (t->alignX == KCStyle::Center)
                 value = "center";
-            else if (t->alignX == KSpread::Style::Right)
+            else if (t->alignX == KCStyle::Right)
                 value = "end";
-            else if (t->alignX == KSpread::Style::Left)
+            else if (t->alignX == KCStyle::Left)
                 value = "start";
             prop.setAttribute("fo:text-align", value);
         }
 
-        if (t->alignY != KSpread::Style::Bottom)   // default in OpenCalc
-            prop.setAttribute("fo:vertical-align", (t->alignY == KSpread::Style::Middle ? "middle" : "top"));
+        if (t->alignY != KCStyle::Bottom)   // default in OpenCalc
+            prop.setAttribute("fo:vertical-align", (t->alignY == KCStyle::Middle ? "middle" : "top"));
 
         if (t->indent > 0.0) {
             prop.setAttribute("fo:margin-left", QString("%1pt").arg(t->indent));
-            if (t->alignX == KSpread::Style::HAlignUndefined)
+            if (t->alignX == KCStyle::HAlignUndefined)
                 prop.setAttribute("fo:text-align", "start");
         }
 
@@ -361,8 +361,8 @@ CellStyle::CellStyle()
         hideAll(false),
         hideFormula(false),
         notProtected(false),
-        alignX(KSpread::Style::HAlignUndefined),
-        alignY(KSpread::Style::Middle)
+        alignX(KCStyle::HAlignUndefined),
+        alignY(KCStyle::Middle)
 {
 }
 
@@ -406,10 +406,10 @@ bool CellStyle::isEqual(CellStyle const * const t1, CellStyle const & t2)
 }
 
 // all except the number style
-void CellStyle::loadData(CellStyle & cs, const Cell& cell)
+void CellStyle::loadData(CellStyle & cs, const KCCell& cell)
 {
-    const KSpread::Style style = cell.style();
-    const KSpread::Style* defaultStyle = cell.sheet()->map()->styleManager()->defaultStyle();
+    const KCStyle style = cell.style();
+    const KCStyle* defaultStyle = cell.sheet()->map()->styleManager()->defaultStyle();
 
     QFont font = style.font();
     if (font != defaultStyle->font())
@@ -423,46 +423,46 @@ void CellStyle::loadData(CellStyle & cs, const Cell& cell)
     if (bgColor != defaultStyle->backgroundColor())
         cs.bgColor = bgColor;
 
-    if (style.hasAttribute(KSpread::Style::HorizontalAlignment))
+    if (style.hasAttribute(KCStyle::HorizontalAlignment))
         cs.alignX = style.halign();
 
-    if (style.hasAttribute(KSpread::Style::VerticalAlignment))
+    if (style.hasAttribute(KCStyle::VerticalAlignment))
         cs.alignY = style.valign();
 
-    if (style.hasAttribute(KSpread::Style::Indentation))
+    if (style.hasAttribute(KCStyle::Indentation))
         cs.indent = style.indentation();
 
-    if (style.hasAttribute(KSpread::Style::Angle))
+    if (style.hasAttribute(KCStyle::Angle))
         cs.angle  = -style.angle();
 
-    if (style.hasAttribute(KSpread::Style::MultiRow))
+    if (style.hasAttribute(KCStyle::MultiRow))
         cs.wrap   = style.wrapText();
 
-    if (style.hasAttribute(KSpread::Style::VerticalText))
+    if (style.hasAttribute(KCStyle::VerticalText))
         cs.vertical = style.verticalText();
 
-    if (style.hasAttribute(KSpread::Style::DontPrintText))
+    if (style.hasAttribute(KCStyle::DontPrintText))
         cs.print = style.printText();
 
-    if (style.hasAttribute(KSpread::Style::LeftPen))
+    if (style.hasAttribute(KCStyle::LeftPen))
         cs.left  = style.leftBorderPen();
 
-    if (style.hasAttribute(KSpread::Style::RightPen))
+    if (style.hasAttribute(KCStyle::RightPen))
         cs.right = style.rightBorderPen();
 
-    if (style.hasAttribute(KSpread::Style::TopPen))
+    if (style.hasAttribute(KCStyle::TopPen))
         cs.top  = style.topBorderPen();
 
-    if (style.hasAttribute(KSpread::Style::BottomPen))
+    if (style.hasAttribute(KCStyle::BottomPen))
         cs.bottom  = style.bottomBorderPen();
 
-    if (style.hasAttribute(KSpread::Style::NotProtected))
+    if (style.hasAttribute(KCStyle::NotProtected))
         cs.notProtected = style.notProtected();
 
-    if (style.hasAttribute(KSpread::Style::HideAll))
+    if (style.hasAttribute(KCStyle::HideAll))
         cs.hideAll = style.hideAll();
 
-    if (style.hasAttribute(KSpread::Style::HideFormula))
+    if (style.hasAttribute(KCStyle::HideFormula))
         cs.hideFormula = style.hideFormula();
 }
 

@@ -903,9 +903,9 @@ KoFilter::ConversionStatus XlsxXmlStylesReader::readInternal()
 
  Child elements:
  - [done] borders (Borders) §18.8.5
- - cellStyles (Cell Styles) §18.8.8
+ - cellStyles (KCCell Styles) §18.8.8
  - cellStyleXfs (Formatting Records) §18.8.9
- - [done] cellXfs (Cell Formats) §18.8.10
+ - [done] cellXfs (KCCell Formats) §18.8.10
  - colors (Colors) §18.8.11
  - dxfs (Formats) §18.8.15
  - extLst (Future Feature Data Storage Area) §18.2.10
@@ -1349,7 +1349,7 @@ KoFilter::ConversionStatus XlsxXmlStylesReader::read_color()
 
 #undef CURRENT_EL
 #define CURRENT_EL cellXfs
-//! cellXfs handler (Cell Formats)
+//! cellXfs handler (KCCell Formats)
 /*! ECMA-376, 18.8.10, p. 1956.
  This element contains the master formatting records (xf) which define
  the formatting applied to cells in this workbook.
@@ -1715,7 +1715,7 @@ KoFilter::ConversionStatus XlsxXmlStylesReader::read_patternFill()
 #define CURRENT_EL bgColor
 //! bgColor handler (Background Color)
 /*! ECMA-376, 18.8.3, p. 1948.
- Background color of the cell fill pattern. Cell fill patterns operate with two colors:
+ Background color of the cell fill pattern. KCCell fill patterns operate with two colors:
  a background color and a foreground color. These combine together to make a patterned cell fill.
 
  No child elements.
@@ -1740,7 +1740,7 @@ KoFilter::ConversionStatus XlsxXmlStylesReader::read_bgColor()
 #define CURRENT_EL fgColor
 //! fgColor handler (Foreground  Color)
 /*! ECMA-376, 18.8.19, p. 1961.
- Foreground color of the cell fill pattern. Cell fill patterns operate with two colors:
+ Foreground color of the cell fill pattern. KCCell fill patterns operate with two colors:
  a background color and a foreground color. These combine together to make a patterned cell fill.
 
  No child elements.

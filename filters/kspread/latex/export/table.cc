@@ -89,7 +89,7 @@ void Table::analyze(const QDomNode node)
         QString name = getChildName(node, index);
         if (name == "cell") {
             kDebug(30522) << "----- cell -----";
-            Cell* cell = new Cell();
+            KCCell* cell = new KCCell();
             cell->analyze(getChild(node, index));
             _cells.append(cell);
             setMaxColumn(cell->getCol());
@@ -122,10 +122,10 @@ void Table::analyzePaper(const QDomNode node)
     setBorderTop(getAttr(node, "top").toLong());
 }
 
-Cell* Table::searchCell(int col, int row)
+KCCell* Table::searchCell(int col, int row)
 {
     kDebug(30522) << "search in list of" << _cells.count() << " cells";
-    foreach(Cell* cell, _cells) {
+    foreach(KCCell* cell, _cells) {
         kDebug(30522) << "cell:" << cell->getRow() << "-" << cell->getCol();
         if (cell->getCol() == col && cell->getRow() == row)
             return cell;
@@ -245,7 +245,7 @@ void Table::generate(QTextStream& out)
 void Table::generateTopLineBorder(QTextStream& out, int row)
 {
 
-    Cell* cell = 0;
+    KCCell* cell = 0;
     QBitArray border(getMaxColumn());
     bool fullLine = true;
     for (int index = 1; index <= getMaxColumn(); index++) {
@@ -254,7 +254,7 @@ void Table::generateTopLineBorder(QTextStream& out, int row)
         cell = searchCell(index, row);
 
         if (cell == NULL) {
-            cell = new Cell(row, index);
+            cell = new KCCell(row, index);
             _cells.append(cell);
         }
 
@@ -296,7 +296,7 @@ void Table::generateTopLineBorder(QTextStream& out, int row)
 /*******************************************/
 void Table::generateBottomLineBorder(QTextStream& out, int row)
 {
-    Cell* cell = 0;
+    KCCell* cell = 0;
     QBitArray border(getMaxColumn());
     bool fullLine = true;
 
@@ -305,7 +305,7 @@ void Table::generateBottomLineBorder(QTextStream& out, int row)
         cell = searchCell(index, row);
 
         if (cell == NULL) {
-            cell = new Cell(row, index);
+            cell = new KCCell(row, index);
             _cells.append(cell);
         }
 
@@ -345,7 +345,7 @@ void Table::generateCell(QTextStream& out, int row, int col)
     kDebug(30522) << "GENERATE CELL :" << row << "," << col;
 
     /* Search the cell in the list */
-    Cell *cell = searchCell(col, row);
+    KCCell *cell = searchCell(col, row);
     if (cell != NULL) {
         kDebug(30522) << "generate cell with text:" << cell->getText();
         cell->generate(out, this);

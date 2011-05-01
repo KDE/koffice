@@ -22,14 +22,10 @@
 
 #include <KoFilter.h>
 #include <qpro/tablenames.h>
-//Added by qt3to4:
 #include <QByteArray>
 #include <QVariantList>
 
-namespace KSpread
-{
-class Sheet;
-}
+class KCSheet;
 
 class QpImport : public KoFilter
 {
@@ -44,7 +40,7 @@ public:
     void InitTableName(int pIdx, QString& pResult);
 
 protected:
-    void setText(KSpread::Sheet* sheet, int row, int column, const QString& text, bool asString = false);
+    void setText(KCSheet* sheet, int row, int column, const QString& text, bool asString = false);
 };
 
 class QpTableList : public QpTableNames
@@ -53,10 +49,10 @@ public:
     QpTableList();
     ~QpTableList();
 
-    void          table(unsigned pIdx, KSpread::Sheet* pTable);
-    KSpread::Sheet* table(unsigned pIdx);
+    void          table(unsigned pIdx, KCSheet* pTable);
+    KCSheet* table(unsigned pIdx);
 protected:
-    KSpread::Sheet* cTable[cNameCnt];
+    KCSheet* cTable[cNameCnt];
 };
 
 #endif // QPROIMPORT_H

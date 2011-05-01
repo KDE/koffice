@@ -35,17 +35,15 @@
 #include <KoFilterManager.h>
 
 #include <kspread/CalculationSettings.h>
-#include <kspread/Cell.h>
+#include <kspread/KCCell.h>
 #include <kspread/part/Doc.h>
 #include <kspread/Global.h>
 #include <kspread/Map.h>
 #include <kspread/RowColumnFormat.h>
-#include <kspread/Sheet.h>
-#include <kspread/Style.h>
+#include <kspread/KCSheet.h>
+#include <kspread/KCStyle.h>
 #include <kspread/Value.h>
 #include <kspread/ValueConverter.h>
-
-using namespace KSpread;
 
 // hehe >:->
 
@@ -71,8 +69,8 @@ KoFilter::ConversionStatus CSVFilter::convert(const QByteArray& from, const QByt
     if (!document)
         return KoFilter::StupidError;
 
-    if (!qobject_cast<const KSpread::Doc *>(document)) {
-        kWarning(30501) << "document isn't a KSpread::Doc but a " << document->metaObject()->className();
+    if (!qobject_cast<const Doc *>(document)) {
+        kWarning(30501) << "document isn't a Doc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
     if ((from != "text/csv" && from != "text/plain") || to != "application/x-kspread") {
@@ -112,7 +110,7 @@ KoFilter::ConversionStatus CSVFilter::convert(const QByteArray& from, const QByt
 
     ElapsedTime t("Filling data into document");
 
-    Sheet *sheet = ksdoc->map()->addNewSheet();
+    KCSheet *sheet = ksdoc->map()->addNewSheet();
 
     int numRows = dialog->rows();
     int numCols = dialog->cols();
@@ -137,7 +135,7 @@ KoFilter::ConversionStatus CSVFilter::convert(const QByteArray& from, const QByt
     for (int i = 0; i < numCols; ++i)
         widths[i] = defaultWidth;
 
-    Cell cell(sheet, 1, 1);
+    KCCell cell(sheet, 1, 1);
     QFontMetrics fm(cell.style().font());
 
     for (int row = 0; row < numRows; ++row) {
@@ -151,7 +149,7 @@ KoFilter::ConversionStatus CSVFilter::convert(const QByteArray& from, const QByt
             if (len > widths[col])
                 widths[col] = len;
 
-            cell = Cell(sheet, col + 1, row + 1);
+            cell = KCCell(sheet, col + 1, row + 1);
 
             switch (dialog->dataType(col)) {
             case KoCsvImportDialog::Generic:

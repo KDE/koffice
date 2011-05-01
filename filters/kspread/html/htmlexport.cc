@@ -36,11 +36,9 @@
 
 #include <kspread/CellStorage.h>
 #include <kspread/Map.h>
-#include <kspread/Sheet.h>
+#include <kspread/KCSheet.h>
 #include <kspread/part/Doc.h>
 #include <kspread/Util.h>
-
-using namespace KSpread;
 
 K_PLUGIN_FACTORY(HTMLExportFactory, registerPlugin<HTMLExport>();)
 K_EXPORT_PLUGIN(HTMLExportFactory("kofficefilters"))
@@ -92,8 +90,8 @@ KoFilter::ConversionStatus HTMLExport::convert(const QByteArray& from, const QBy
     if (!document)
         return KoFilter::StupidError;
 
-    if (!::qobject_cast<const KSpread::Doc *>(document)) {   // it's safer that way :)
-        kWarning(30501) << "document isn't a KSpread::Doc but a " << document->metaObject()->className();
+    if (!::qobject_cast<const Doc *>(document)) {   // it's safer that way :)
+        kWarning(30501) << "document isn't a Doc but a " << document->metaObject()->className();
         return KoFilter::NotImplemented;
     }
 
@@ -108,7 +106,7 @@ KoFilter::ConversionStatus HTMLExport::convert(const QByteArray& from, const QBy
     filenameBase = filenameBase.left(filenameBase.lastIndexOf('.'));
 
     QStringList sheets;
-    foreach(Sheet* sheet, ksdoc->map()->sheetList()) {
+    foreach(KCSheet* sheet, ksdoc->map()->sheetList()) {
         int rows = 0;
         int columns = 0;
         detectFilledCells(sheet, rows, columns);
@@ -124,7 +122,7 @@ KoFilter::ConversionStatus HTMLExport::convert(const QByteArray& from, const QBy
     if (m_dialog->exec() == QDialog::Rejected)
         return KoFilter::UserCancelled;
 
-    Sheet* sheet = 0;
+    KCSheet* sheet = 0;
     sheets = m_dialog->sheets();
     QString str;
     for (int i = 0; i < sheets.count() ; ++i) {
@@ -166,7 +164,7 @@ KoFilter::ConversionStatus HTMLExport::convert(const QByteArray& from, const QBy
     return KoFilter::OK;
 }
 
-void HTMLExport::openPage(Sheet *sheet, KoDocument *document, QString &str)
+void HTMLExport::openPage(KCSheet *sheet, KoDocument *document, QString &str)
 {
     QString title;
     KoDocumentInfo *info = document->documentInfo();
@@ -208,7 +206,7 @@ void HTMLExport::closePage(QString &str)
     str += "</html>\n\n";
 }
 
-void HTMLExport::convertSheet(Sheet *sheet, QString &str, int iMaxUsedRow, int iMaxUsedColumn)
+void HTMLExport::convertSheet(KCSheet *sheet, QString &str, int iMaxUsedRow, int iMaxUsedColumn)
 {
     QString emptyLines;
 
@@ -245,8 +243,8 @@ void HTMLExport::convertSheet(Sheet *sheet, QString &str, int iMaxUsedRow, int i
         unsigned int colspan_cells = 0;
 
         for (int currentcolumn = 1 ; currentcolumn <= iMaxUsedColumn ; currentcolumn++) {
-            Cell cell(sheet, currentcolumn, currentrow);
-            const Style style = cell.effectiveStyle();
+            KCCell cell(sheet, currentcolumn, currentrow);
+            const KCStyle style = cell.effectiveStyle();
             colspan_cells = cell.mergedXCells();
             if (cell.needsPrinting())
                 nonempty_cells++;
@@ -256,7 +254,7 @@ void HTMLExport::convertSheet(Sheet *sheet, QString &str, int iMaxUsedRow, int i
             bool link = false;
 
             if (!cell.link().isEmpty()) {
-                if (Util::localReferenceAnchor(cell.link())) {
+                if (KSpread::localReferenceAnchor(cell.link())) {
                     text = cell.userInput();
                 } else {
                     text = " <A href=\"" + cell.link() + "\">" + cell.userInput() + "</A>";
@@ -266,14 +264,14 @@ void HTMLExport::convertSheet(Sheet *sheet, QString &str, int iMaxUsedRow, int i
                 text = cell.displayText();
 #if 0
             switch (cell.content()) {
-            case Cell::Text:
+            case KCCell::Text:
                 text = cell.userInput();
                 break;
-            case Cell::RichText:
-            case Cell::VisualFormula:
+            case KCCell::RichText:
+            case KCCell::VisualFormula:
                 text = cell.userInput(); // untested
                 break;
-            case Cell::Formula:
+            case KCCell::Formula:
                 cell.calc(true);   // Incredible, cells are not calculated if the document was just opened
                 text = cell.valueString();
                 break;
@@ -288,30 +286,30 @@ void HTMLExport::convertSheet(Sheet *sheet, QString &str, int iMaxUsedRow, int i
             if (bgcolor.isValid() && bgcolor.name() != "#ffffff") // change color only for non-white cells
                 line += " bgcolor=\"" + bgcolor.name() + "\"";
 
-            switch ((Style::HAlign)cell.effectiveAlignX()) {
-            case Style::Left:
+            switch ((KCStyle::HAlign)cell.effectiveAlignX()) {
+            case KCStyle::Left:
                 line += " align=\"" + html_left + "\"";
                 break;
-            case Style::Right:
+            case KCStyle::Right:
                 line += " align=\"" + html_right + "\"";
                 break;
-            case Style::Center:
+            case KCStyle::Center:
                 line += " align=\"" + html_center + "\"";
                 break;
-            case Style::HAlignUndefined:
+            case KCStyle::HAlignUndefined:
                 break;
             }
-            switch ((Style::VAlign) style.valign()) {
-            case Style::Top:
+            switch ((KCStyle::VAlign) style.valign()) {
+            case KCStyle::Top:
                 line += " valign=\"" + html_top + "\"";
                 break;
-            case Style::Middle:
+            case KCStyle::Middle:
                 line += " valign=\"" + html_middle + "\"";
                 break;
-            case Style::Bottom:
+            case KCStyle::Bottom:
                 line += " valign=\"" + html_bottom + "\"";
                 break;
-            case Style::VAlignUndefined:
+            case KCStyle::VAlignUndefined:
                 break;
             }
             line += " width=\"" + QString::number(cell.width()) + "\"";
@@ -418,7 +416,7 @@ QString HTMLExport::fileName(const QString &base, const QString &sheetName, bool
     return fileName;
 }
 
-void HTMLExport::detectFilledCells(Sheet *sheet, int &rows, int &columns)
+void HTMLExport::detectFilledCells(KCSheet *sheet, int &rows, int &columns)
 {
     int iMaxColumn = sheet->cellStorage()->columns();
     int iMaxRow = sheet->cellStorage()->rows();
@@ -427,10 +425,10 @@ void HTMLExport::detectFilledCells(Sheet *sheet, int &rows, int &columns)
     columns = 0;
 
     for (int currentrow = 1 ; currentrow <= iMaxRow ; ++currentrow) {
-        Cell cell;
+        KCCell cell;
         int iUsedColumn = 0;
         for (int currentcolumn = 1 ; currentcolumn <= iMaxColumn ; currentcolumn++) {
-            cell = Cell(sheet, currentcolumn, currentrow);
+            cell = KCCell(sheet, currentcolumn, currentrow);
             QString text;
             if (!cell.isDefault() && !cell.isEmpty()) {
                 iUsedColumn = currentcolumn;

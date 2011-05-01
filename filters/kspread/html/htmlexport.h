@@ -23,17 +23,13 @@
 #define HTMLEXPORT_TEST_H
 
 #include <KoFilter.h>
-//Added by qt3to4:
 #include <QByteArray>
 #include <QVariantList>
 
 class ExportDialog;
 class KoDocument;
 
-namespace KSpread
-{
-class Sheet;
-}
+class KCSheet;
 
 class HTMLExport : public KoFilter
 {
@@ -45,7 +41,7 @@ public:
     virtual KoFilter::ConversionStatus convert(const QByteArray& from, const QByteArray& to);
 private:
     /** Writes the top of the page in HTML to @par str */
-    void openPage(KSpread::Sheet *sheet, KoDocument *document, QString &str);
+    void openPage(KCSheet *sheet, KoDocument *document, QString &str);
 
     /** Closes a page in HTML */
     void closePage(QString &);
@@ -53,7 +49,7 @@ private:
     /**
       Converts @par sheet to HTML and writes to @par str.
      */
-    void convertSheet(KSpread::Sheet *sheet, QString &str, int, int);
+    void convertSheet(KCSheet *sheet, QString &str, int, int);
 
     /** Writes a bar and a link to the top to @par str. */
     void createSheetSeparator(QString &);
@@ -71,7 +67,7 @@ private:
       Detects which rows and columns of the given @par sheet are used and
       writes the number of them to @par row and @par column.
      */
-    void detectFilledCells(KSpread::Sheet *sheet, int &rows, int &columns);
+    void detectFilledCells(KCSheet *sheet, int &rows, int &columns);
 private:
     ExportDialog *m_dialog;
 

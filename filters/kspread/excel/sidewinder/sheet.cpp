@@ -51,10 +51,10 @@ public:
     QHash<unsigned, unsigned> maxCellsInRow;
     QHash<unsigned, Column*> columns;
     QHash<unsigned, Row*> rows;
-    KSpread::PointStorage<Hyperlink> hyperlinks;
-    KSpread::PointStorage<QList<PictureObject*> > pictures;
-    KSpread::PointStorage<QList<ChartObject*> > charts;
-    KSpread::PointStorage<QList<OfficeArtObject*> > drawObjects;
+    PointStorage<Hyperlink> hyperlinks;
+    PointStorage<QList<PictureObject*> > pictures;
+    PointStorage<QList<ChartObject*> > charts;
+    PointStorage<QList<OfficeArtObject*> > drawObjects;
 
     bool visible;
     bool protect;
@@ -95,7 +95,7 @@ public:
 
 }
 
-using namespace Swinder;
+namespace Swinder {
 
 Sheet::Sheet(Workbook* wb)
 {
@@ -870,3 +870,6 @@ bool Row::operator!=(const Row &other) const
 {
     return ! (*this == other);
 }
+
+}
+

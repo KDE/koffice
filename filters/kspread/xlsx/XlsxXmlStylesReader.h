@@ -245,7 +245,7 @@ public:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(XlsxBorderStyles::DiagonalDirections)
 
-//! Single XLSX cell format definition as specified in ECMA-376, 18.8.10 (Cell Formats), p. 1956.
+//! Single XLSX cell format definition as specified in ECMA-376, 18.8.10 (KCCell Formats), p. 1956.
 /*! @see XlsxXmlStylesReader::read_cellXfs() */
 class XlsxCellFormat
 {
@@ -255,7 +255,7 @@ public:
     ~XlsxCellFormat();
 
     //! 18.18.40 ST_HorizontalAlignment (Horizontal Alignment Type), p. 2698
-    /*! The enumeration value indicating the portion of Cell Alignment in a cell format (XF)
+    /*! The enumeration value indicating the portion of KCCell Alignment in a cell format (XF)
         that is horizontal alignment, i.e., whether it is aligned general, left, right,
         horizontally centered, filled (replicated), justified, centered across multiple cells,
         or distributed. */

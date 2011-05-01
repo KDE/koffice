@@ -130,7 +130,7 @@ public:
     QString processValueFormat( const QString& valueFormat );
     bool warningAboutWorksheetSizeDisplayed;
     int drawingNumber;
-    QHash<int, Cell*> sharedFormulas;
+    QHash<int, KCCell*> sharedFormulas;
 };
 
 XlsxXmlWorksheetReader::XlsxXmlWorksheetReader(KoOdfWriters *writers)
@@ -217,7 +217,7 @@ void XlsxXmlWorksheetReader::showWarningAboutWorksheetSize()
 
 inline static QString encodeLabelText(int col, int row)
 {
-    return KSpread::Util::encodeColumnLabelText(col) + QString::number(row);
+    return KSpread::encodeColumnLabelText(col) + QString::number(row);
 }
 
 void XlsxXmlWorksheetReader::saveAnnotation(int col, int row)
@@ -249,7 +249,7 @@ void XlsxXmlWorksheetReader::saveAnnotation(int col, int row)
  Root element of Worksheet parts within a SpreadsheetML document.
  Child elements:
  - autoFilter (AutoFilter Settings) §18.3.1.2
- - cellWatches (Cell Watch Items) §18.3.1.9
+ - cellWatches (KCCell Watch Items) §18.3.1.9
  - colBreaks (Vertical Page Breaks) §18.3.1.14
  - cols (Column Information) §18.3.1.17
  - conditionalFormatting (Conditional Formatting) §18.3.1.18
@@ -381,7 +381,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_worksheet()
             const int columnCount = m_context->sheet->maxCellsInRow(r);
             for(int c = 0; c <= columnCount; ++c) {
                 body->startElement("table:table-cell");
-                if (Cell* cell = m_context->sheet->cell(c, r, false)) {
+                if (KCCell* cell = m_context->sheet->cell(c, r, false)) {
                     const bool hasHyperlink = ! cell->hyperlink.isEmpty();
 
                     if (!cell->styleName.isEmpty()) {
@@ -731,7 +731,7 @@ void XlsxXmlWorksheetReader::appendTableCells(int cells)
  and contains all cell definitions for a particular row in the worksheet.
 
  Child elements:
- - [done] c (Cell) §18.3.1.4
+ - [done] c (KCCell) §18.3.1.4
  - extLst (Future Feature Data Storage Area) §18.2.10
  Parent elements:
  - [done] sheetData (§18.3.1.80)
@@ -791,7 +791,7 @@ static bool valueIsNumeric(const QString& v)
 
 #undef CURRENT_EL
 #define CURRENT_EL c
-//! c handler (Cell)
+//! c handler (KCCell)
 /*! ECMA-376, 18.3.1.4, p. 1767.
  This collection represents a cell in the worksheet.
  Information about the cell's location (reference), value, data
@@ -801,7 +801,7 @@ static bool valueIsNumeric(const QString& v)
  - extLst (Future Feature Data Storage Area) §18.2.10
  - [done] f (Formula) §18.3.1.40
  - is (Rich Text Inline) §18.3.1.53
- - [done] v (Cell Value) §18.3.1.96
+ - [done] v (KCCell Value) §18.3.1.96
  Parent elements:
  - [done] row (§18.3.1.73)
 
@@ -816,7 +816,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
     const QXmlStreamAttributes attrs(attributes());
     TRY_READ_ATTR_WITHOUT_NS(r)
     if (!r.isEmpty()) {
-        m_currentColumn = KSpread::Util::decodeColumnLabelText(r) - 1;
+        m_currentColumn = KSpread::decodeColumnLabelText(r) - 1;
         if (m_currentColumn < 0)
             return KoFilter::WrongFormat;
     }
@@ -826,7 +826,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
 
     m_value.clear();
 
-    Cell* cell = m_context->sheet->cell(m_currentColumn, m_currentRow, true);
+    KCCell* cell = m_context->sheet->cell(m_currentColumn, m_currentRow, true);
 
     while (!atEnd()) {
         readNext();
@@ -865,17 +865,17 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
             cell->charStyleName = charStyleName;
         }
 
-        /* depending on type: 18.18.11 ST_CellType (Cell Type), p. 2679:
-            b (Boolean)  Cell containing a boolean.
-            d (Date)     Cell contains a date in the ISO 8601 format.
-            e (Error)    Cell containing an error.
-            inlineStr    (Inline String) Cell containing an (inline) rich string, i.e. 
+        /* depending on type: 18.18.11 ST_CellType (KCCell Type), p. 2679:
+            b (Boolean)  KCCell containing a boolean.
+            d (Date)     KCCell contains a date in the ISO 8601 format.
+            e (Error)    KCCell containing an error.
+            inlineStr    (Inline String) KCCell containing an (inline) rich string, i.e. 
                          one not in the shared string table. If this cell type is used,
                          then the cell value is in the is element rather than the v
                          element in the cell (c element).
-            n (Number)   Cell containing a number.
-            s (Shared String) Cell containing a shared string.
-            str (String) Cell containing a formula string.
+            n (Number)   KCCell containing a number.
+            s (Shared String) KCCell containing a shared string.
+            str (String) KCCell containing a formula string.
 
             Converting into values described in ODF1.1: "6.7.1. Variable Value Types and Values".
         */
@@ -1007,7 +1007,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
 */
 KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_f()
 {
-    Cell* cell = m_context->sheet->cell(m_currentColumn, m_currentRow, false);
+    KCCell* cell = m_context->sheet->cell(m_currentColumn, m_currentRow, false);
     Q_ASSERT(cell);
 
     READ_PROLOGUE
@@ -1064,15 +1064,15 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_f()
         if (pos > 0) {
             const QString fromCell = ref.left(pos);
             const QString toCell = ref.mid(pos + 1);
-            const int c1 = KSpread::Util::decodeColumnLabelText(fromCell) - 1;
-            const int r1 = KSpread::Util::decodeRowLabelText(fromCell) - 1;
-            const int c2 = KSpread::Util::decodeColumnLabelText(toCell) - 1;
-            const int r2 = KSpread::Util::decodeRowLabelText(toCell) - 1;
+            const int c1 = KSpread::decodeColumnLabelText(fromCell) - 1;
+            const int r1 = KSpread::decodeRowLabelText(fromCell) - 1;
+            const int c2 = KSpread::decodeColumnLabelText(toCell) - 1;
+            const int r2 = KSpread::decodeRowLabelText(toCell) - 1;
             if (c1 >= 0 && r1 >= 0 && c2 >= c1 && r2 >= r1) {
                 for (int col = c1; col <= c2; ++col) {
                     for (int row = r1; row <= r2; ++row) {
                         if (col != m_currentColumn || row != m_currentRow) {
-                            if (Cell* c = m_context->sheet->cell(col, row, true))
+                            if (KCCell* c = m_context->sheet->cell(col, row, true))
                                 c->formula = convertFormulaReference(cell, c);
                         }
                     }
@@ -1087,7 +1087,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_f()
 
 #undef CURRENT_EL
 #define CURRENT_EL v
-//! v handler (Cell Value)
+//! v handler (KCCell Value)
 /*! ECMA-376, 18.3.1.96, p. 1891.
  This element expresses the value contained in a cell.
 
@@ -1141,11 +1141,11 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_mergeCell()
         QRegExp rx("([A-Za-z]+)([0-9]+)");
         if(rx.exactMatch(fromCell)) {
             const int fromRow = rx.cap(2).toInt() - 1;
-            const int fromCol = KSpread::Util::decodeColumnLabelText(fromCell) - 1;
+            const int fromCol = KSpread::decodeColumnLabelText(fromCell) - 1;
             if(rx.exactMatch(toCell)) {
-                Cell* cell = m_context->sheet->cell(fromCol, fromRow, true);
+                KCCell* cell = m_context->sheet->cell(fromCol, fromRow, true);
                 cell->rowsMerged = rx.cap(2).toInt() - fromRow;
-                cell->columnsMerged = KSpread::Util::decodeColumnLabelText(toCell) - fromCol;
+                cell->columnsMerged = KSpread::decodeColumnLabelText(toCell) - fromCol;
 
                 // correctly take right/bottom borders from the cells that are merged into this one
                 const KoGenStyle* origCellStyle = mainStyles->style(cell->styleName);
@@ -1155,7 +1155,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_mergeCell()
                 }
                 kDebug() << cell->rowsMerged << cell->columnsMerged << cell->styleName;
                 if (cell->rowsMerged > 1) {
-                    Cell* lastCell = m_context->sheet->cell(fromCol, fromRow + cell->rowsMerged - 1, false);
+                    KCCell* lastCell = m_context->sheet->cell(fromCol, fromRow + cell->rowsMerged - 1, false);
                     kDebug() << lastCell;
                     if (lastCell) {
                         const KoGenStyle* style = mainStyles->style(lastCell->styleName);
@@ -1170,7 +1170,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_mergeCell()
                     }
                 }
                 if (cell->columnsMerged > 1) {
-                    Cell* lastCell = m_context->sheet->cell(fromCol + cell->columnsMerged - 1, fromRow, false);
+                    KCCell* lastCell = m_context->sheet->cell(fromCol + cell->columnsMerged - 1, fromRow, false);
                     if (lastCell) {
                         const KoGenStyle* style = mainStyles->style(lastCell->styleName);
                         if (style) {
@@ -1248,7 +1248,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_drawing()
 #if 0 //TODO
         if (context->m_positions.contains(XlsxDrawingObject::FromAnchor)) {
             XlsxDrawingObject::Position pos = context->m_positions[XlsxDrawingObject::FromAnchor];
-            Cell* cell = m_context->sheet->cell(pos.m_col, pos.m_row, true);
+            KCCell* cell = m_context->sheet->cell(pos.m_col, pos.m_row, true);
             cell->drawings << context;
         } else {
             delete context;
@@ -1273,8 +1273,8 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_hyperlink()
     TRY_READ_ATTR_WITHOUT_NS(location)
     TRY_READ_ATTR_WITH_NS(r, id)
     if (!ref.isEmpty() && (!r_id.isEmpty() || !location.isEmpty())) {
-        const int col = KSpread::Util::decodeColumnLabelText(ref) - 1;
-        const int row = KSpread::Util::decodeRowLabelText(ref) - 1;
+        const int col = KSpread::decodeColumnLabelText(ref) - 1;
+        const int row = KSpread::decodeRowLabelText(ref) - 1;
         if(col >= 0 && row >= 0) {
             QString link = m_context->relationships->target(m_context->path, m_context->file, r_id);
             // it follows a hack to get right of the prepended m_context->path...
@@ -1284,7 +1284,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_hyperlink()
             // append location
             if (!location.isEmpty()) link += '#' + location;
 
-            Cell* cell = m_context->sheet->cell(col, row, true);
+            KCCell* cell = m_context->sheet->cell(col, row, true);
             cell->hyperlink = link;
         }
     }
@@ -1370,7 +1370,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_oleObject()
     RETURN_IF_ERROR( copyFile(link, "", fileName) )
 
     //TODO find out which cell to pick
-    Cell* cell = m_context->sheet->cell(0, 0, true);
+    KCCell* cell = m_context->sheet->cell(0, 0, true);
 
     cell->oleObjects << qMakePair<QString,QString>(fileName, m_context->oleReplacements.value(shapeId));
     cell->oleFrameBegins << m_context->oleFrameBegins.value(shapeId);

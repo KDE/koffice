@@ -70,7 +70,7 @@ QString MSOOXML::convertFormula(const QString& formula)
     return result;
 }
 
-QString MSOOXML::convertFormulaReference(Cell* referencedCell, Cell* thisCell)
+QString MSOOXML::convertFormulaReference(KCCell* referencedCell, KCCell* thisCell)
 {
-    return KSpread::Util::adjustFormulaReference(referencedCell->formula, referencedCell->row, referencedCell->column, thisCell->row, thisCell->column);
+    return KSpread::adjustFormulaReference(referencedCell->formula, referencedCell->row, referencedCell->column, thisCell->row, thisCell->column);
 }

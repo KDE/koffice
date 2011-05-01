@@ -68,9 +68,9 @@ void TestFormulaParser::testConvertFormula()
 void TestFormulaParser::testSharedFormulaReferences()
 {
     Sheet s1("Sheet1");
-    Cell* c1 = s1.cell(2, 5, true);
+    KCCell* c1 = s1.cell(2, 5, true);
     c1->formula = "=D6-E7";
-    Cell* c2 = s1.cell(12, 43, true);
+    KCCell* c2 = s1.cell(12, 43, true);
     QCOMPARE(MSOOXML::convertFormulaReference(c1, c2), QString("=N44-O45"));
 
     c1->formula = "=SUM(D6-E7)";

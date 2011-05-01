@@ -26,11 +26,7 @@
 
 class ExportDialogUI;
 class QValidator;
-
-namespace KSpread
-{
 class Map;
-}
 
 class ExportDialogUI : public QWidget, public Ui::ExportDialogUI
 {
@@ -55,7 +51,7 @@ public:
     QString getSheetDelimiter() const;
     bool    exportSelectionOnly() const;
 
-    void  fillSheet(KSpread::Map * map);
+    void  fillSheet(Map * map);
     QString getEndOfLine(void) const;
     QTextCodec* getCodec(void) const;
 

@@ -30,7 +30,7 @@
 /*******************************************/
 /* Constructor                             */
 /*******************************************/
-Cell::Cell(): Format()
+KCCell::KCCell(): Format()
 {
     setCol(0);
     setRow(0);
@@ -42,11 +42,11 @@ Cell::Cell(): Format()
 /*******************************************/
 /* Destructor                              */
 /*******************************************/
-Cell::~Cell()
+KCCell::~KCCell()
 {
 }
 
-void Cell::analyze(const QDomNode node)
+void KCCell::analyze(const QDomNode node)
 {
     _row = getAttr(node, "row").toLong();
     _col = getAttr(node, "column").toLong();
@@ -55,7 +55,7 @@ void Cell::analyze(const QDomNode node)
     analyzeText(node);
 }
 
-void Cell::analyzeText(const QDomNode node)
+void KCCell::analyzeText(const QDomNode node)
 {
     setTextDataType(getAttr(getChild(node, "text"), "dataType"));
     setText(getAttr(getChild(node, "text"), "outStr"));
@@ -65,7 +65,7 @@ void Cell::analyzeText(const QDomNode node)
 /*******************************************/
 /* generate                                */
 /*******************************************/
-void Cell::generate(QTextStream& out, Table* table)
+void KCCell::generate(QTextStream& out, Table* table)
 {
     /*if(getMulticol() > 0)
      out << "\\multicol{" << getMulticol() << "}{";
