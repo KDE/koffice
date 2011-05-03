@@ -1,3 +1,3 @@
-if(BUILD_kspread)
-    add_subdirectory(kspread)
-endif(BUILD_kspread)
+if(BUILD_kcells)
+    add_subdirectory(kcells)
+endif(BUILD_kcells)

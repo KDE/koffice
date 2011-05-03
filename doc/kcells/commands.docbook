@@ -110,7 +110,7 @@ The document does not become the exported file.
 <guimenu>File</guimenu>
 <guimenuitem>Create Template From Document...</guimenuitem>
 </menuchoice></term>
-<listitem><para>Create a &kspread; <link linkend="templates">template</link>
+<listitem><para>Create a &kcells; <link linkend="templates">template</link>
 based on this document.
 </para></listitem>
 </varlistentry>
@@ -153,7 +153,7 @@ author.</action></para>
 <guimenu>File</guimenu>
 <guimenuitem>Close</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Close the current document but leave &kspread; running.
+<listitem><para><action>Close the current document but leave &kcells; running.
 </action></para></listitem>
 </varlistentry>
 <varlistentry>
@@ -165,7 +165,7 @@ author.</action></para>
 <guimenu>File</guimenu>
 <guimenuitem>Quit</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Quit</action> &kspread;.</para></listitem>
+<listitem><para><action>Quit</action> &kcells;.</para></listitem>
 </varlistentry>
 </variablelist>
 </para>
@@ -408,7 +408,7 @@ Validity Checking</link> for more details.
 <guimenu>View</guimenu>
 <guimenuitem>New View</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Open a new instance of &kspread;
+<listitem><para><action>Open a new instance of &kcells;
 with the same document.</action>
 </para></listitem>
 </varlistentry>
@@ -421,7 +421,7 @@ with the same document.</action>
 <guimenu>View</guimenu>
 <guimenuitem>Close All Views</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Close all open instances of &kspread;</action>
+<listitem><para><action>Close all open instances of &kcells;</action>
 </para></listitem>
 </varlistentry>
 
@@ -458,7 +458,7 @@ contains two or more views)
 <guimenu>View</guimenu>
 <guimenuitem>Goto Cell...</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Change &kspread;'s focus to show defined cell.</action>
+<listitem><para><action>Change &kcells;'s focus to show defined cell.</action>
 </para></listitem>
 </varlistentry>
 
@@ -892,7 +892,7 @@ item into a different cell in the row.
 <guimenu>Data</guimenu>
 <guimenuitem>Show Area...</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Change &kspread;'s focus to show a previously
+<listitem><para><action>Change &kcells;'s focus to show a previously
 named area.</action> See the section <link linkend="namedareas">Named Cells 
 and Areas</link> for further details.
 </para></listitem>
@@ -950,7 +950,7 @@ database.</action>
 <guimenuitem>Custom Lists...</guimenuitem>
 </menuchoice></term>
 <listitem><para><action>View or amend the special series of words recognized 
-by &kspread;.</action>
+by &kcells;.</action>
 </para></listitem>
 </varlistentry>
 
@@ -1084,7 +1084,7 @@ The Formula Bar can be used to edit the content of the selected cell.
 <guimenu>Settings</guimenu>
 <guimenuitem>Configure Shortcuts...</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Configure the keyboard shortcuts used by &kspread;.
+<listitem><para><action>Configure the keyboard shortcuts used by &kcells;.
 </action> See the section on <link linkend="configshort">configuring shortcuts
 </link> for more details.
 
@@ -1105,10 +1105,10 @@ information.
 <varlistentry>
 <term><menuchoice>
 <guimenu>Settings</guimenu>
-<guimenuitem>Configure &kspread;...</guimenuitem>
+<guimenuitem>Configure &kcells;...</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>General &kspread; configuration.</action> See the 
-section on <link linkend="configdialog">&kspread; configuration</link> for 
+<listitem><para><action>General &kcells; configuration.</action> See the 
+section on <link linkend="configdialog">&kcells; configuration</link> for 
 more details.
 </para></listitem>
 </varlistentry>
@@ -1387,7 +1387,7 @@ cell of the current selection of cells into the selected cell.</action>
 
 <sect1 id="othershort">
 <title>Other Shortcuts</title>
-<para>This section describes those &kspread; shortcut keys used for operations 
+<para>This section describes those &kcells; shortcut keys used for operations 
 that do not appear in any of the menus.</para>
 
 <variablelist>

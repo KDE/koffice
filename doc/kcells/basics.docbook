@@ -11,16 +11,16 @@
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 </chapterinfo> 
-<title>&kspread; Basics</title>
+<title>&kcells; Basics</title>
 
-<note><para>Like the rest of &kde;, &kspread; is highly configurable, which can
+<note><para>Like the rest of &kde;, &kcells; is highly configurable, which can
 cause problems for readers trying to compare the text in a document such as
-this with what they see on the version of &kspread; running on their desktop.
+this with what they see on the version of &kcells; running on their desktop.
 To cut down on some of the possibilities for confusion, it it suggested that
-when you first start to use &kspread; you set the default options in all pages
-of the &kspread; configuration dialog (obtained by selecting
+when you first start to use &kcells; you set the default options in all pages
+of the &kcells; configuration dialog (obtained by selecting
 <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-&kspread;...</guimenuitem></menuchoice>) except for <guilabel>Completion mode:
+&kcells;...</guimenuitem></menuchoice>) except for <guilabel>Completion mode:
 </guilabel> in the <guisubmenu>Misc</guisubmenu> page, which should be set to
 <guimenuitem>None</guimenuitem>.
 </para>
@@ -33,14 +33,14 @@ on the <guilabel>Style</guilabel> page. </para></note>
 <title>Spreadsheets for Beginners</title>
 
 <para>This section attempts to explain by example what a spreadsheet program
-such as &kspread; actually does, and why it is such a useful tool in any
+such as &kcells; actually does, and why it is such a useful tool in any
 situation where you have to deal with numbers. If you have already used a
 spreadsheet program you may wish to skip to the next section.</para>
 
-<para>The first thing to do is to start up &kspread;. You can do this by
-<mousebutton>left</mousebutton> clicking on a &kspread; icon if there is one
+<para>The first thing to do is to start up &kcells;. You can do this by
+<mousebutton>left</mousebutton> clicking on a &kcells; icon if there is one
 on your desktop or panel, or you can select
-<menuchoice><guimenu>Office</guimenu><guimenuitem>&kspread;</guimenuitem>
+<menuchoice><guimenu>Office</guimenu><guimenuitem>&kcells;</guimenuitem>
 </menuchoice>
 from the K menu.</para>
 
@@ -50,7 +50,7 @@ from the K menu.</para>
 <imagedata fileref="newdocument.png" format="PNG"/>
 </imageobject>
 <textobject>
-<phrase>&kspread; at first run</phrase>
+<phrase>&kcells; at first run</phrase>
 </textobject>
 </mediaobject>
 When it has started you will be given the choice of opening a recent
@@ -59,7 +59,7 @@ opening an existing document . Select the <guilabel>General</guilabel> category
 on the left and choose the <guilabel>Blank Worksheet</guilabel> template. Then
 click the <guibutton>Use This Template</guibutton> button.</para>
 
-<para>Looking at &kspread; once it has started up, you will see a sheet of
+<para>Looking at &kcells; once it has started up, you will see a sheet of
 empty rectangular cells arranged in numbered rows and lettered columns. This
 is where you enter data or formula, text or charts.
 <mediaobject>
@@ -82,16 +82,16 @@ selection point to another cell.
 months, listing how much we think we will be spending for Food, Shelter,
 Clothing and any Other expenditure. Now select cell B7 (column B, row 7), 
 type in <userinput>=B2+B3+B4+B5</userinput> and press <keycap>Enter</keycap>. 
-Because it begins with a <keycap>=</keycap> symbol &kspread; sees this as a 
+Because it begins with a <keycap>=</keycap> symbol &kcells; sees this as a 
 formula, something it has to calculate, in this case by adding together the 
 values in the 4 cells B2 to B5, and what is shown in the cell B7 is the result 
 of that calculation.</para>
 <para>You could enter a similar formula into cell C7, except that in this case
 it would have to be <userinput>=C2+C3+C4+C5</userinput>, but there is an
-easier way which is to Copy cell B7 and Paste it into C7. &kspread; will
+easier way which is to Copy cell B7 and Paste it into C7. &kcells; will
 automatically adjust the cell references from B.. to C.. when the Paste is
 done.</para>
-<para>At this point you may think that &kspread; is doing no more than you
+<para>At this point you may think that &kcells; is doing no more than you
 could manage with pencil, paper and a calculator, and you could be right, but
 remember that this is a very small example of a spreadsheet, doing simple
 calculations on only a few numbers. For any reasonably amount of values or data
@@ -125,7 +125,7 @@ Cell...</guimenuitem></menuchoice> menu option</para></listitem>
 <para>You can also steer your way around with the <keysym>arrow</keysym> keys.
 Pressing the <keysym>Enter</keysym> key will move the current selection one
 position up, down, left or right depending on the setting in the <guilabel>Misc
-</guilabel> page of &kspread;'s <link linkend="configmisc">configuration dialog
+</guilabel> page of &kcells;'s <link linkend="configmisc">configuration dialog
 box</link>.</para> <para>If you hold the <keycombo
 action="simul">&Shift;</keycombo> key down while using the
 <keysym>arrow</keysym> keys the selection will move to the start or end of the
@@ -161,7 +161,7 @@ cells.</para>
 <para>Entering data into a cell can be as simple as selecting the cell, typing 
 your data, then pressing <keycap>Enter</keycap> or moving the selection to 
 another cell with one of the <keysym>arrow</keysym> keys. Depending on how you 
-enter the data, &kspread; will interpret it as a number, date, time or text:</para>
+enter the data, &kcells; will interpret it as a number, date, time or text:</para>
 <itemizedlist>
 <listitem><para>
 Numbers are entered in the obvious way; <userinput>123</userinput>, <userinput>
@@ -186,11 +186,11 @@ HH:MIN:SS am|pm format such as <userinput>9:42 am</userinput> or <userinput>
 10:30:52 pm</userinput>.
 </para></listitem>
 <listitem><para>
-&kspread; defines any input data as <quote>text</quote> if it cannot 
+&kcells; defines any input data as <quote>text</quote> if it cannot 
 recognize the data as being a number, date or time.
 </para></listitem>
 </itemizedlist>
-<note><para>By default, &kspread; right justifies numbers, dates and times 
+<note><para>By default, &kcells; right justifies numbers, dates and times 
 within a cell and left justifies anything else. This can be a useful guide 
 to whether you have entered a date or time in the correct format. But 
 remember that how items are displayed can be changed by altering 
@@ -205,10 +205,10 @@ edits.</para>
 <sect2 id="genericformat">
 <title>Generic Cell Format</title>
 <para>
-&kspread; uses the <quote>Generic</quote> cell format as default. As long
-as this format is used, &kspread; autodetects the actual data type depending
+&kcells; uses the <quote>Generic</quote> cell format as default. As long
+as this format is used, &kcells; autodetects the actual data type depending
 on the current cell data. For example if you enter some text into a cell and
-later enter a number into the same cell, &kspread; automatically interprets
+later enter a number into the same cell, &kcells; automatically interprets
 the new data as a number. If you want to define the type of data yourself, you
 can explicitly set it in the <link linkend="formatdata">cell format</link>.
 You can change the format back to <quote>Generic</quote> at any time.
@@ -220,7 +220,7 @@ You can change the format back to <quote>Generic</quote> at any time.
 <sect1 id="copypaste">
 <title>Copy, Cut and Paste</title>
 
-<para>At first glance, &kspread;'s <guimenuitem>Cut</guimenuitem>, 
+<para>At first glance, &kcells;'s <guimenuitem>Cut</guimenuitem>, 
 <guimenuitem>Copy</guimenuitem> and <guimenuitem>Paste</guimenuitem> appear 
 to be similar to these functions in other &kde; applications. Having selected 
 a cell or cells, you can choose <guimenuitem>Copy</guimenuitem> or 
@@ -232,7 +232,7 @@ mouse button down on a selected cell. You can also use the shortcuts
 </keycombo>, then move the selection to the target cell and choose 
 <guimenuitem>Paste</guimenuitem> or press <keycombo action="simul">
 &Ctrl;<keycap>V</keycap></keycombo>. However there are some 
-subtleties associated with these functions in &kspread; and these are discussed 
+subtleties associated with these functions in &kcells; and these are discussed 
 below.</para>
 
 <para>If a cell contains a formula then the formula itself is copied rather 
@@ -250,7 +250,7 @@ For example in the simple shopping list shown below, cell D2 should contain
 <userinput>=B2 * C2</userinput>, D3 should be <userinput>=B3 * C3</userinput>, 
 D4 should be <userinput>=B4 * C4</userinput> and so on. Instead of having to 
 enter a different formula in each cell, you can just enter the first formula 
-into D2 and then copy it into the cells below, letting &kspread; adjust the 
+into D2 and then copy it into the cells below, letting &kcells; adjust the 
 cell references to suit.</para>
 <mediaobject>
 <imageobject>
@@ -272,7 +272,7 @@ corner cell of the area you want to paste into before doing the paste.</para>
 <para>If you cut or copy a rectangular area of cells, say B2:C3, and paste it 
 into a larger area such as A10:D13 the original pattern of cells will be 
 repeated to fill the target area.</para>
-<para>&kspread; also provides a <quote>Drag and Copy</quote> method for 
+<para>&kcells; also provides a <quote>Drag and Copy</quote> method for 
 copying cells down into other cells immediately below or to the 
 right of the original cell(s). To use this method select the cell(s) to be 
 copied then position the mouse pointer over the small black square at the 
@@ -287,7 +287,7 @@ relative position change. Absolute references are not changed.</para>
 <title>Other Paste Modes</title>
 <para>A cell may contain text, a value, or a formula, and may also contain 
 special font, border or background <link linkend="formatspread">formatting 
-information</link>. &kspread; has special versions of Paste that let 
+information</link>. &kcells; has special versions of Paste that let 
 you handle these items in different ways.</para>
 
 <para><menuchoice><guimenu>Edit</guimenu><guimenuitem>Special
@@ -348,7 +348,7 @@ new ones.</para>
 <sect1 id="simplesums">
 <title>Simple Sums</title>
 <para>If the first character in a cell is an equals sign (<keycap>=</keycap>) 
-&kspread; will take the cell contents to be a formula which is to be  
+&kcells; will take the cell contents to be a formula which is to be  
 calculated. The result of the calculation will be displayed in the cell rather 
 than the formula itself. For example, enter <userinput>=2+3</userinput> 
 into a cell and it should display <emphasis>5</emphasis>.</para>
@@ -368,7 +368,7 @@ at the bottom left corner if the <guilabel>Show formula indicator</guilabel>
 check box in the <menuchoice><guimenu>Format</guimenu>
 <guisubmenu>Sheet</guisubmenu><guisubmenu>Sheet Properties</guisubmenu>
 </menuchoice> dialog is checked.</para>
-<para>&kspread; also includes a large number of built-in functions for 
+<para>&kcells; also includes a large number of built-in functions for 
 applications such as statistical, trigonometrical and financial calculations. 
 Their use will be examined in more depth in a <link linkend="formulas">
 later section</link> of this manual, but if you are interested at this stage 
@@ -379,7 +379,7 @@ choose <guimenuitem>Function...</guimenuitem> from the <guimenu>Insert
 be of interest as it calculates the sum of all values in a specified area of 
 cells. For example <userinput>=SUM(B4:C10)</userinput> calculates the sum of 
 all values in the cell area B4 to C10.</para>
-<para>If &kspread; displays a row of <keycap>#</keycap> symbols when you have 
+<para>If &kcells; displays a row of <keycap>#</keycap> symbols when you have 
 entered your formula this usually means that it cannot understand what 
 you have entered, but if the row of <keycap>#</keycap> symbols ends with a 
 small red arrow this just means that the cell is not wide enough to display 
@@ -393,9 +393,9 @@ does fit properly.</para>
 <menuchoice><guimenu>Format</guimenu>
 <guisubmenu>Sheet</guisubmenu><guisubmenu>Sheet Properties</guisubmenu>
 </menuchoice> dialog box is 
-checked, &kspread; will recalculate the values of cells whenever anything that 
+checked, &kcells; will recalculate the values of cells whenever anything that 
 affects them is changed in the sheet.</para>
-<para>When <guilabel>Automatic recalculation</guilabel> is not checked for the current sheet, you can instruct &kspread; to perform a recalculation at any time by 
+<para>When <guilabel>Automatic recalculation</guilabel> is not checked for the current sheet, you can instruct &kcells; to perform a recalculation at any time by 
 using the <guimenuitem>Recalculate Sheet</guimenuitem> or <guimenuitem>
 Recalculate Document</guimenuitem> option in the <guimenu>Tools</guimenu> 
 menu or their shortcuts <keycombo action="simul">&Shift;<keysym>F9</keysym>
@@ -407,7 +407,7 @@ menu or their shortcuts <keycombo action="simul">&Shift;<keysym>F9</keysym>
 <title>Sorting Data</title>
 <para>In the simple example shown below, the data consist of the names and 
 countries of a number of mountains together with their height above sea level. 
-&kspread; can sort data such as this in different ways.</para>
+&kcells; can sort data such as this in different ways.</para>
 <para>
 <mediaobject>
 <imageobject>
@@ -461,7 +461,7 @@ not depending on capitalization.
 <para>The left hand end of the Status bar shows a summary of the values in 
 the selected cell(s). According to the setting of the <guilabel>Method of 
 calc:</guilabel> combo box in the <guilabel>Misc</guilabel> page of 
-&kspread;'s configuration dialog the summary can be:</para>
+&kcells;'s configuration dialog the summary can be:</para>
 
 <variablelist>
 <varlistentry>
@@ -513,14 +513,14 @@ Status bar and choosing an item from the pop up menu.</para>
 
 <sect1 id="saving">
 <title>Saving your Work</title>
-<para>&kspread; saves the complete document, which may include more than one 
+<para>&kcells; saves the complete document, which may include more than one 
 worksheet, as a single document file.</para>
 <para>If you have created a new document, or want to save an existing one 
 under a different name, use <menuchoice><guimenu>File</guimenu><guimenuitem>
 Save As...</guimenuitem></menuchoice>. This will bring up &kde;'s common 
 <guilabel>Save Document As</guilabel> dialog box. 
 Choose the folder where you want to save the document and enter a 
-suitable file name into the <guilabel>Location:</guilabel> text box. &kspread; 
+suitable file name into the <guilabel>Location:</guilabel> text box. &kcells; 
 documents are normally automatically saved with a <filename>.ods</filename> 
 extension, you do not need to add this to the filename but do make sure that 
 the <guilabel>Filter:</guilabel> selection is set to 
@@ -528,20 +528,20 @@ the <guilabel>Filter:</guilabel> selection is set to
 <para>To save your document without changing its name, just use <menuchoice>
 <guimenu>File</guimenu><guimenuitem>Save</guimenuitem></menuchoice>.</para>
 
-<para>You can also save a &kspread; document in a foreign format: see 
+<para>You can also save a &kcells; document in a foreign format: see 
  the Import/Export section for more information 
 about doing this.</para>
 <para>When you save a modified version of an existing document
-&kspread; will keep the previous version as a backup file, adding a
+&kcells; will keep the previous version as a backup file, adding a
 <literal>~</literal> to the end of the filename.</para>
-<para>&kspread; can provide some protection against losing your work because 
-of a computer crash or because you have closed &kspread; without saving the 
+<para>&kcells; can provide some protection against losing your work because 
+of a computer crash or because you have closed &kcells; without saving the 
 current document. It does this by automatically saving the latest version of 
 the document you are working on every few minutes using a modified file name. 
 The autosaved version is normally removed when you next save your document, 
 so that it will only exist if it is more up to date than the version that was
 saved manually.
-When you open a document &kspread; checks to see if an autosaved
+When you open a document &kcells; checks to see if an autosaved
 version exists, and if it finds one it will offer to open that instead.</para>
 <para>Autosaved documents are saved with a file name of the form
 <filename>.yourfilename.autosave</filename> (note the leading period),
@@ -561,7 +561,7 @@ Doing this opens the <guilabel>Create Template</guilabel> dialog box.
 Enter a name for your new template into the <guilabel>Name:</guilabel> text
 box and press <guibutton>OK</guibutton>. The next time you start a new
 document by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>New
-</guimenuitem></menuchoice> or when you next start &kspread; the 
+</guimenuitem></menuchoice> or when you next start &kcells; the 
 startup dialog window will give you the option of creating the
 new document from your template.</para>
 <para>The <guilabel>Create Template</guilabel> dialog box also lets you
@@ -580,12 +580,12 @@ the dialog.</para>
 brings up &kde;'s common <guilabel>Print</guilabel> dialog box where you can
 choose, among other options, the printer to be used, the number of copies and
 whether all or only selected pages are to be printed.</para>
-<para>By default &kspread; will print all items in the current worksheet, but
+<para>By default &kcells; will print all items in the current worksheet, but
 you can restrict this by first selecting the area that you want to be
 printed then choosing <guimenuitem>Define Print Range</guimenuitem> from the
 <menuchoice><guimenu>Format</guimenu><guisubmenu>Print Range</guisubmenu>
 </menuchoice> sub menu.</para>
-<para>&kspread; will print as many pages as are necessary to include all
+<para>&kcells; will print as many pages as are necessary to include all
 items in the current worksheet. You can quickly see how a worksheet will be
 spilt into separate pages for printing by checking the <menuchoice><guimenu>
 View</guimenu>

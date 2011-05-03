@@ -10,10 +10,10 @@
 </chapterinfo>
 
 <title>For Users with Disabilities</title>
-<para>This section of the documentation discusses accessibility features in &kspread;
+<para>This section of the documentation discusses accessibility features in &kcells;
 for users with disabilities. Some of these features apply to &kde; as a whole and are controlled from 
 <ulink url="help:kcontrol">&kcontrolcenter;</ulink>.  Some apply to all &koffice; applications,
-and some are specific to &kspread;.</para>
+and some are specific to &kcells;.</para>
 
 <sect1 id="a11y-install">
 <title>Installing the <command>kdeaccessibility</command> Module</title>
@@ -38,7 +38,7 @@ visiting <ulink url="http://accessibility.kde.org/">http://accessibility.kde.org
 <title>Visual Impairments</title>
 <indexterm><primary>Visual Impairments</primary></indexterm>
 
-<note><para>&kspread; is not usable by totally blind users.  It is hoped that
+<note><para>&kcells; is not usable by totally blind users.  It is hoped that
 a general screen reader for the blind will be available in future versions of &kde;.
 </para></note>
 
@@ -85,13 +85,13 @@ If it is installed, you can run it from
 <indexterm><primary>Text-to-Speech</primary></indexterm>
 <indexterm><primary>TTS</primary></indexterm>
 <para>The <command>kdeaccessibility</command> module includes a Text-to-Speech
-component called KTTS.  If KTTS is installed, you can configure &kspread; to
+component called KTTS.  If KTTS is installed, you can configure &kcells; to
 speak the text that is under the mouse pointer or speak the text of each
 screen widget as it receives focus.  Before using this feature, first configure
 KTTS.  See <ulink url="help:kttsd">The KTTS Handbook</ulink> for details.
-To turn on the TTS feature in &kspread;, 
+To turn on the TTS feature in &kcells;, 
 select <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
-&kspread;...</guimenuitem></menuchoice> from the menubar.
+&kcells;...</guimenuitem></menuchoice> from the menubar.
 This will display a dialog box.
 Clicking on <guilabel>TTS</guilabel> will allow you to change
 the following.</para>
@@ -105,37 +105,37 @@ the following.</para>
 <variablelist>
 <varlistentry>
 <term><guilabel>Speak widget under mouse pointer</guilabel></term>
-<listitem><para>When checked, &kspread; will speak the text of each widget
+<listitem><para>When checked, &kcells; will speak the text of each widget
 as the mouse pointer moves over the widget.</para>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term><guilabel>Speak widget with focus</guilabel></term>
-<listitem><para>When checked, &kspread; will speak the text of each widget
+<listitem><para>When checked, &kcells; will speak the text of each widget
 as it receives focus.</para>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term><guilabel>Speak tool tips</guilabel></term>
-<listitem><para>When checked, &kspread; will speak the popup tool tip
+<listitem><para>When checked, &kcells; will speak the popup tool tip
 for each widget in addition to the text of the widget.</para>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term><guilabel>Speak What's This</guilabel></term>
-<listitem><para>When checked, &kspread; will speak the <quote>What's This?</quote> help
+<listitem><para>When checked, &kcells; will speak the <quote>What's This?</quote> help
 for each widget in addition to the text of the widget.</para>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term><guilabel>Say whether disabled</guilabel></term>
-<listitem><para>When checked, &kspread; will speak the word "disabled"
+<listitem><para>When checked, &kcells; will speak the word "disabled"
 if the widget is currently disabled (grayed).</para>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term><guilabel>Speak accelerators</guilabel></term>
-<listitem><para>When checked, &kspread; will speak the accelerator
+<listitem><para>When checked, &kcells; will speak the accelerator
 of the widget in addition to the text of the widget.
 Accelerators are the underlined letters you see in the text of the
 widget.  For example, in the main menu, the 
@@ -144,12 +144,12 @@ has the "Q" underlined.  You can choose it by pressing <keycap>Q</keycap>.
 To speak the accelerator, check this option and enter the
 word you want to speak before the accelerator in the
 <guilabel>Prefaced by the word</guilabel> box.  In this
-example shown above, &kspread; will speak "Accelerator Q".</para>
+example shown above, &kcells; will speak "Accelerator Q".</para>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term><guilabel>Polling interval</guilabel></term>
-<listitem><para>This option determines how often &kspread; will
+<listitem><para>This option determines how often &kcells; will
 check for a change in the widget under the mouse pointer or
 a new focused widget.  You should leave this option on the
 default setting.</para>
@@ -295,7 +295,7 @@ Press <keycap>F8</keycap> again or &Esc; when finished sizing.
 <title>Setting focus to widgets</title>
 
 <para>Normally, one can use the &Tab; and <keycombo action="simul">&Shift;&Tab;</keycombo>
-to move focus from one widget to the next in any application.  However, in &kspread;,
+to move focus from one widget to the next in any application.  However, in &kcells;,
 pressing &Tab; does not move the focus; instead it moves the cell selection forwards.
 You can set focus to any widget that can receive focus by
 pressing <keycombo action="simul">&Alt;<keycap>F8</keycap></keycombo>.  A small lettered box appears

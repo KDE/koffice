@@ -18,12 +18,12 @@
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 </chapterinfo> 
-<title>Advanced &kspread;</title>
+<title>Advanced &kcells;</title>
 <sect1 id="series">
 <title>Series</title>
 <para>When constructing a spreadsheet you often need to include a series of
 values, such as 10, 11, 12..., in a row or column. There are several ways you
-can do this in &kspread;.</para>
+can do this in &kcells;.</para>
 <para>For a simple short series such as 5, 6, 7, 8... the <quote>Drag and Copy
 </quote> method is the simplest. Enter the starting value into the starting
 cell and the next value of the series into an adjacent cell.
@@ -43,7 +43,7 @@ the step value is not a constant value but is itself a series. So that if you
 start with 1, 3, 4, 6 Drag and Copy will extend it to 1, 3, 4, 6, 7, 9, 10, 
 12..., the step value in this example being the series 2, 1, 2, 1...</para>
 
-<para>&kspread; also recognizes some special <quote>series</quote> such as
+<para>&kcells; also recognizes some special <quote>series</quote> such as
 the days of the week. Try entering <userinput>Friday</userinput> into a cell 
 (note the capitalization) then Drag and Copy it down. To see what special series 
 are available, and perhaps create your own, select <menuchoice><guimenu>Tools
@@ -66,7 +66,7 @@ Drag and Copy cell A2 down.</para>
 <title>Formulae</title>
 <sect2 id="builtin">
 <title>Built in Functions</title>
-<para>&kspread; has a huge range of built in mathematical and other functions 
+<para>&kcells; has a huge range of built in mathematical and other functions 
 that can be used in a formula cell. They can be seen and accessed by selecting 
 a cell then choosing <guimenuitem>Function...</guimenuitem> from the 
 <guimenu>Insert</guimenu> menu. This brings up the <guilabel>Function
@@ -224,18 +224,18 @@ Copy</guimenuitem> then <guimenuitem>Special Paste...</guimenuitem> <guilabel>
 Addition</guilabel> into cells A10 to D15, 5 will be added to A10:A15 and 
 C10:C15, and 10 to B10:B15 and D10:D15.</para>
 <para>Note that a modifier value can be a formula as well as a simple numeric 
-value. If it is a formula then &kspread; will adjust the cell references as 
+value. If it is a formula then &kcells; will adjust the cell references as 
 for a normal <guimenuitem>Paste</guimenuitem> operation.</para>
 </sect1>
 
 <sect1 id="goalseek">
 <title>Goal Seeking</title>
-<para>&kspread; can be used to solve algebraic expressions such as <emphasis>
+<para>&kcells; can be used to solve algebraic expressions such as <emphasis>
 x + x^2 = 4</emphasis> or <emphasis>For what value of x does x + x squared 
 equal 4 ?</emphasis></para>
 <para>For this example you could enter <userinput>=A2+A2*A2</userinput>
 into A1 then either try different values in A2 until the result in A1 is as 
-close as you wish to <emphasis>4</emphasis> or, preferably, use &kspread;'s  
+close as you wish to <emphasis>4</emphasis> or, preferably, use &kcells;'s  
 <guimenuitem>Goal Seek...</guimenuitem> feature which automatically adjusts the 
 value in one cell to try to make the value in another cell as close as 
 possible to a target value.</para>
@@ -257,16 +257,16 @@ calculation. When it finishes and if it has found a solution press the
 
 <sect1 id="sheets">
 <title>Using more than one Worksheet</title>
-<para>When you start a new, empty, document with &kspread; it will create a 
+<para>When you start a new, empty, document with &kcells; it will create a 
 number of blank worksheets. The number of sheets it creates is determined 
 by the <guilabel>Number of sheets open at the beginning:</guilabel> setting in 
-the <guilabel>Interface</guilabel> page of &kspread;'s 
+the <guilabel>Interface</guilabel> page of &kcells;'s 
 <link linkend="configinterface">configuration</link> dialog box.</para>
 <para><menuchoice><guimenu>Insert</guimenu><guimenuitem>Sheet</guimenuitem>
 </menuchoice> will add another sheet to the document.</para>
 <para>If the <guilabel>Show tabs</guilabel> box in the <guilabel>Interface
-</guilabel> page of &kspread;'s configuration dialog box is checked a small 
-tab will be shown near the bottom left of &kspread;'s window for each sheet. 
+</guilabel> page of &kcells;'s configuration dialog box is checked a small 
+tab will be shown near the bottom left of &kcells;'s window for each sheet. 
 <mousebutton>Left</mousebutton> click on one of these tabs to see that sheet.
 </para>
 <para>You can also switch between worksheets by using the 
@@ -366,7 +366,7 @@ outside of the chart area.</para>
 <para>To change the format of the chart itself <mousebutton>left</mousebutton> 
 click twice within the chart area. It should then appear with a diagonal 
 hatch border without any small black squares and &kchart;'s <interface>
-Chart Toolbar</interface> should appear in &kspread;'s window. You can then 
+Chart Toolbar</interface> should appear in &kcells;'s window. You can then 
 use these &kchart; tools or a selection from the menu that pops up when you 
 <mousebutton>right</mousebutton> click in the chart area to change the chart.</para>
 </sect1>
@@ -379,11 +379,11 @@ inserted data to appear, then choosing <guimenuitem>From Text File...
 </guimenuitem> or <guimenuitem>From Clipboard...</guimenuitem> from the 
 <menuchoice><guimenu>Insert</guimenu><guisubmenu>External Data</guisubmenu>
 </menuchoice> sub menu.</para>
-<para>In both cases &kspread; will assume that the data is in
+<para>In both cases &kcells; will assume that the data is in
 <acronym>CSV</acronym> form and will open a
 dialog box allowing you to control how the data is extracted from the file or
 clipboard and placed into the worksheet cells.</para>
-<para>If support for it has been included in your system, &kspread; can also
+<para>If support for it has been included in your system, &kcells; can also
 insert data from a <acronym>SQL</acronym> database into a worksheet. This is
 done by using the <menuchoice><guimenu>Insert</guimenu><guisubmenu>
 External Data</guisubmenu><guimenuitem>From Database...</guimenuitem>
@@ -420,9 +420,9 @@ application when clicked on.
 </para></listitem>
 
 <listitem><para>The <guilabel>Cell</guilabel> type of link cell holds a 
-&kspread; cell reference, entered in the <guilabel>Cell:</guilabel> text box. 
+&kcells; cell reference, entered in the <guilabel>Cell:</guilabel> text box. 
 <mousebutton>Left</mousebutton> clicking on this type of link cell causes 
-&kspread;'s focus to move to the target cell.
+&kcells;'s focus to move to the target cell.
 </para></listitem>
 </itemizedlist>
 
@@ -435,11 +435,11 @@ wish.</para>
 
 <sect1 id="validcheck">
 <title>Validity Checking</title>
-<para>&kspread; can automatically check the validity of entered data against 
+<para>&kcells; can automatically check the validity of entered data against 
 a number of criteria, and pop up a message box if the data is invalid.</para>
 <para>To enable this feature, select the cell(s) to be monitored and choose 
 <menuchoice><guimenu>Edit</guimenu><guimenuitem>Validity...</guimenuitem>
-</menuchoice>. This will bring up &kspread;'s <guilabel>Validity</guilabel> 
+</menuchoice>. This will bring up &kcells;'s <guilabel>Validity</guilabel> 
 dialog box which has two tabbed pages.</para>
 <para>In the <guilabel>Values</guilabel> page select what type of data is to 
 be considered valid from the <guilabel>Allow:</guilabel> combo box list then 
@@ -721,7 +721,7 @@ enabled in Cell Protection and the sheet is protected</phrase>
 <sect2 id="splitview">
 <title>Splitting the View</title>
 <para>If your spreadsheet is so large that you cannot see all of it at once, 
-splitting &kspread;'s window into two or more views can help you work on it. 
+splitting &kcells;'s window into two or more views can help you work on it. 
 This is done by selecting <menuchoice><guimenu>View</guimenu><guimenuitem>
 Split View</guimenuitem></menuchoice> which will split the current view into 
 two parts. <menuchoice><guimenu>View</guimenu><guisubmenu>Splitter Orientation
@@ -755,10 +755,10 @@ where you can enter any name you wish.</para>
 into the small text box at the left end of the Formula toolbar, overwriting the 
 cell reference that normally appears here.</para>
 <para>If you enter a name that has already been used into this text box 
-&kspread;'s selection will change to show the named cell(s).</para>
+&kcells;'s selection will change to show the named cell(s).</para>
 <para>The <menuchoice><guimenu>Data</guimenu><guimenuitem>Show Area...
 </guimenuitem></menuchoice> option will give you a list of existing names 
-and let you change &kspread;'s focus to any of them or let you remove a name.
+and let you change &kcells;'s focus to any of them or let you remove a name.
 </para>
 <para>Named cells are particularly useful in formulae as an alternative to 
 <link linkend="absolute"> absolute cell references</link> as the names can 

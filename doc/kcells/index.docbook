@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
-  <!ENTITY kappname "&kspread;">
+  <!ENTITY kappname "&kcells;">
   <!ENTITY package "koffice">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">
@@ -18,7 +18,7 @@
 <book lang="&language;">
 
 <bookinfo>
-<title>The &kspread; Handbook</title>
+<title>The &kcells; Handbook</title>
 
 <!-- MAINTAINED BY raphael.langerhorst@kdemail.net -->
 
@@ -64,14 +64,14 @@
 
 <abstract>
 <para>
-&kspread; is a full featured spreadsheet program.
+&kcells; is a full featured spreadsheet program.
 </para>
 </abstract>
 
 <keywordset>
 <keyword>KDE</keyword>
-<keyword>Koffice</keyword>
-<keyword>KSpread</keyword>
+<keyword>KOffice</keyword>
+<keyword>KCells</keyword>
 <keyword>Spreadsheet</keyword>
 </keywordset>
 
@@ -83,7 +83,7 @@
 <para>This handbook is dedicated to the memory of <ulink
 url="http://www.bricklin.com/visicalc.htm">Visicalc.</ulink></para>
 <para>
-&kspread; is a full featured spreadsheet program. It is part of the &koffice;
+&kcells; is a full featured spreadsheet program. It is part of the &koffice;
 productivity suite for the K Desktop Environment (&kde;).</para>
 
 <para>You might care to visit <ulink url="http://www.kde.org">
@@ -114,10 +114,10 @@ http://www.koffice.org</ulink></para>
 <title>Credits and License</title>
 
 <para>
-&kspread;
+&kcells;
 </para>
 <para>
-Program copyright 1998-2002 The &kspread; Team:
+Program copyright 1998-2002 The &kcells; Team:
 </para>
 <para>
 <itemizedlist>
@@ -171,11 +171,11 @@ Documentation copyright 2002 &Pamela.Roberts;
 <appendix id="installation">
 <title>Installation</title>
 
-<para>&kspread; is part of &kde;'s &koffice; package and uses various
+<para>&kcells; is part of &kde;'s &koffice; package and uses various
 &koffice; libraries. &koffice; itself is part of &kde; and depends on the
 general &kde; libraries.</para>
 <para>For instructions on acquiring and installing &kde;, &koffice; and
-&kspread; please visit
+&kcells; please visit
 <ulink url="http://www.kde.org">http://www.kde.org</ulink> and
 <ulink url="http://www.koffice.org">http://www.koffice.org</ulink>.</para>
 

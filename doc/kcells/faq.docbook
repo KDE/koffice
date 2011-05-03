@@ -25,7 +25,7 @@
 <question><para>Where are the templates stored?</para>
 </question>
 <answer><para>As <literal role="extension">.kst</literal> files under
-<filename>~/.kde/share/apps/kspread/templates/</filename>.
+<filename>~/.kde/share/apps/kcells/templates/</filename>.
 </para></answer>
 </qandaentry>
 

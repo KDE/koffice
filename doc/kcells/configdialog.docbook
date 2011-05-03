@@ -11,12 +11,12 @@
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 </authorgroup>
 </chapterinfo>
-<title>The &kspread; Configuration Dialog Box</title>
+<title>The &kcells; Configuration Dialog Box</title>
 
 <para>Selecting <menuchoice><guimenu>Settings</guimenu><guimenuitem>
-Configure &kspread;...</guimenuitem></menuchoice> opens a dialog box 
+Configure &kcells;...</guimenuitem></menuchoice> opens a dialog box 
 with several pages, selected with the icons at the left of the dialog box, 
-which allow you to change many aspects of &kspread;'s operation.</para>
+which allow you to change many aspects of &kcells;'s operation.</para>
 
 <sect1 id="configlocale">
 <title><guilabel>Locale Settings</guilabel></title>
@@ -30,7 +30,7 @@ which allow you to change many aspects of &kspread;'s operation.</para>
         </textobject>
     </mediaobject>
 </para>
-<para>This page of &kspread;'s configuration dialog box shows how items 
+<para>This page of &kcells;'s configuration dialog box shows how items 
 such as numbers, date, time and money are displayed.</para>
 <para>If you have loaded a spreadsheet that was generated using a different 
 locale, then pressing the <guibutton>Update Locale Settings</guibutton> 
@@ -49,16 +49,16 @@ button on this page will update it to conform to your locale settings as they ar
         </textobject>
     </mediaobject>
 </para>
-<para>This page of &kspread;'s configuration dialog box (obtained by selecting 
-<guimenuitem>Configure &kspread;...</guimenuitem> from the <guimenu>Settings
-</guimenu> menu) controls some more &kspread; features:</para>
+<para>This page of &kcells;'s configuration dialog box (obtained by selecting 
+<guimenuitem>Configure &kcells;...</guimenuitem> from the <guimenu>Settings
+</guimenu> menu) controls some more &kcells; features:</para>
 
 <para><variablelist>
 <varlistentry>
 <term><guilabel>Number of sheets open at the beginning:</guilabel></term>
 <listitem><para>Controls how many worksheets will be created if the 
 option <guilabel>Blank Worksheet</guilabel> is chosen when 
-&kspread; is started.
+&kcells; is started.
 </para></listitem>
 </varlistentry>
 
@@ -146,7 +146,7 @@ at the bottom of the worksheet.
         </textobject>
     </mediaobject>
 </para>
-<para>The <guilabel>Misc</guilabel> page of &kspread;'s configuration 
+<para>The <guilabel>Misc</guilabel> page of &kcells;'s configuration 
 dialog box contains the following items;</para>
 
 <para><variablelist>
@@ -181,14 +181,14 @@ calculation performed by the <link linkend="statusbarsum">Statusbar Summary
 </guimenu> menu.
 </para>
 <para>The unit taken here is the one you fixed in the Configure
-&kspread; dialog, in the Page Layout tab in the <guilabel>Default page
+&kcells; dialog, in the Page Layout tab in the <guilabel>Default page
 unit:</guilabel> setting. </para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Show error message for invalid formulae</guilabel></term>
 <listitem><para>If this box is checked a message box will pop up when what 
-you have entered into a cell cannot be understood by &kspread;.
+you have entered into a cell cannot be understood by &kcells;.
 </para></listitem>
 </varlistentry>
 
@@ -215,7 +215,7 @@ marked by a small red triangle at the top right corner.
         </textobject>
     </mediaobject>
 </para>
-<para>This page of &kspread;'s configuration dialog box lets you choose the 
+<para>This page of &kcells;'s configuration dialog box lets you choose the 
 color of the sheet grid. If you do not want the grid to appear at all, uncheck the <guilabel>Show grid</guilabel> box in 
 the <menuchoice><guimenu>Format</guimenu><guisubmenu>Sheet</guisubmenu><guimenuitem>Sheet Properties</guimenuitem></menuchoice> dialog.</para>
 
@@ -254,7 +254,7 @@ box in the <guimenu>View</guimenu> menu is checked.</para>
         </textobject>
     </mediaobject>
 </para>
-<para>This page of &kspread;'s configuration dialog box lets you set up the 
+<para>This page of &kcells;'s configuration dialog box lets you set up the 
 default page size, orientation and units used by the printer and by the 
 <guilabel>Page Layout</guilabel> dialog box (obtained by selecting 
 <guimenuitem>Page Layout...</guimenuitem> from the <guimenu>Format
@@ -299,14 +299,14 @@ Layout...</guimenuitem></menuchoice> dialog.
         </textobject>
     </mediaobject>
 </para>
-<para>This page lets you configure the behavior of &kspread;'s spell 
+<para>This page lets you configure the behavior of &kcells;'s spell 
 checker.</para>
 <para><variablelist>
 
 <varlistentry>
 <term><guilabel>Create root/affix combinations not in dictionary</guilabel>
 </term>
-<listitem><para>If this box is checked then when &kspread; finds a word in 
+<listitem><para>If this box is checked then when &kcells; finds a word in 
 the document which it does not recognize but which consists of a recognized
 root word plus a recognized prefix or suffix it will accept it, whereas if
 the box is not checked the spell checker will reject it.
