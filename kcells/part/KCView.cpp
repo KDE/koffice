@@ -438,7 +438,7 @@ void KCView::Private::initActions()
             view, SLOT(showTabBar(bool)));
 
     actions->preference = KStandardAction::preferences(view, SLOT(preference()), view);
-    actions->preference->setToolTip(i18n("Set various ells options"));
+    actions->preference->setToolTip(i18n("Set various KCells options"));
     ac->addAction("preference", actions->preference);
 
     KAction *notifyAction = KStandardAction::configureNotifications(view, SLOT(optionsNotifications()), view);

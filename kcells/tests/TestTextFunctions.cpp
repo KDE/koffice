@@ -266,10 +266,10 @@ void TestTextFunctions::testUPPER()
 
 void TestTextFunctions::testROT13()
 {
-    CHECK_EVAL("ROT13(\"KCells\")", KCValue("XFcernq"));
-    CHECK_EVAL("ROT13(\"XFcernq\")", KCValue("KCells"));
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.DATEFUNCTIONS.GETROT13(\"KCells\")", KCValue("XFcernq"));
-    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.DATEFUNCTIONS.GETROT13(\"XFcernq\")", KCValue("KCells"));
+    CHECK_EVAL("ROT13(\"KCells\")", KCValue("XPryyf"));
+    CHECK_EVAL("ROT13(\"XPryyf\")", KCValue("KCells"));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.DATEFUNCTIONS.GETROT13(\"KCells\")", KCValue("XPryyf"));
+    CHECK_EVAL("COM.SUN.STAR.SHEET.ADDIN.DATEFUNCTIONS.GETROT13(\"XPryyf\")", KCValue("KCells"));
 }
 
 void TestTextFunctions::testBAHTTEXT()

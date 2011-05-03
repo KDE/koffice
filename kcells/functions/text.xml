@@ -350,7 +350,7 @@
 	<Syntax>RIGHT(text;length)</Syntax>
 	<Example>RIGHT("hello";2) returns "lo"</Example>
 	<Example>RIGHT("KCells";10) returns "KCells"</Example>
-	<Example>RIGHT("KCells") returns "d"</Example>
+	<Example>RIGHT("KCells") returns "s"</Example>
         <Related>LEFT</Related>
         <Related>MID</Related>
       </Help>
@@ -408,8 +408,8 @@
 	<Text>The ROT13() function encrypts text by replacing each letter with the one 13 places along in the alphabet. If the 13th position is beyond the letter Z, it begins again at A (rotation).</Text>
         <Text>By applying the encryption function again to the resulting text, you can decrypt the text.</Text>
 	<Syntax>ROT13(Text)</Syntax>
-	<Example>ROT13("KCells") returns "XFcernq"</Example>
-	<Example>ROT13("XFcernq") returns "KCells"</Example>
+	<Example>ROT13("KCells") returns "XPryyf"</Example>
+	<Example>ROT13("XPryyf") returns "KCells"</Example>
       </Help>
     </Function>
 
