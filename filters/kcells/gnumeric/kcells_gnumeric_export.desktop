@@ -6,6 +6,7 @@ Name[pt]=Filtro de Exportação de GNUmeric para o KCells
 Name[sv]=dGnumeric-exportfilter för Kcells
 Name[uk]=Фільтр експорту GNUmeric для KCells
 Name[x-test]=xxGNUmeric Export Filter for KCellsxx
+Name[zh_TW]=KCells 的 GNUmeric 匯出過濾程式
 X-KDE-Export=application/x-gnumeric
 X-KDE-Import=application/x-kcells
 X-KDE-Weight=1

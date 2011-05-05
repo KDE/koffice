@@ -6,6 +6,7 @@ Name[pt]=Filtro de Importação de dBase para o KCells
 Name[sv]=Kcells dBASE-importfilter
 Name[uk]=Фільтр імпорту dBASE для KCells
 Name[x-test]=xxKCells dBASE Import Filterxx
+Name[zh_TW]=KCells dBASE 匯入過濾程式
 X-KDE-Export=application/x-kcells
 X-KDE-Import=application/x-dbf
 X-KDE-Weight=1

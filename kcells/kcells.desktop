@@ -5,6 +5,7 @@ Name[pt]=KCells
 Name[sv]=Kcells
 Name[uk]=KCells
 Name[x-test]=xxKCellsxx
+Name[zh_TW]=KCells
 Exec=kcells %u
 GenericName=Spreadsheet
 GenericName[bg]=Таблици

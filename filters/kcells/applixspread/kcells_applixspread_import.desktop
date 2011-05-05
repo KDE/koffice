@@ -6,6 +6,7 @@ Name[pt]=Filtro de Importação de Applix Spreadsheet para o KCells
 Name[sv]=Kcells-importfilter för Applix-kalkylark
 Name[uk]=Фільтр імпорту Applix Spreadsheet для KCells
 Name[x-test]=xxKCells Applix Spreadsheet Import Filterxx
+Name[zh_TW]=KCells Applix 電子表單匯入過濾程式
 X-KDE-Export=application/x-kcells
 X-KDE-Import=application/x-applix-spreadsheet
 X-KDE-Weight=1

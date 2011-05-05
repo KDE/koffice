@@ -6,6 +6,7 @@ Name[pt]=Filtro de Exportação de HTML para o KCells
 Name[sv]=HTML-exportfilter för Kcells
 Name[uk]=Фільтр експорту HTML для KCells
 Name[x-test]=xxHTML Export Filter for KCellsxx
+Name[zh_TW]=KCells 的 HTML 匯出過濾程式
 X-KDE-Export=text/html
 X-KDE-Import=application/x-kcells
 X-KDE-Weight=50

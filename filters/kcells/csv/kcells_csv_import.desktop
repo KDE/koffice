@@ -6,6 +6,7 @@ Name[pt]=Filtro de Importação de CSV para o KCells
 Name[sv]=CSV-importfilter för Kcells
 Name[uk]=Фільтр імпорту CSV для KCells
 Name[x-test]=xxCSV Import Filter for KCellsxx
+Name[zh_TW]=KCells 的 CSV 匯入過濾程式
 X-KDE-Export=application/x-kcells
 X-KDE-Import=text/csv,text/plain
 X-KDE-Weight=50

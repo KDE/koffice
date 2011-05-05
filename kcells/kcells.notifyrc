@@ -6,12 +6,14 @@ Name[pt]=KCells
 Name[sv]=Kcells
 Name[uk]=KCells
 Name[x-test]=xxKCellsxx
+Name[zh_TW]=KCells
 Comment=KCells Spreadsheet
 Comment[nl]=Spreadsheet van KCells
 Comment[pt]=Folha de cálculo
 Comment[sv]=Kcells kalkylark
 Comment[uk]=Електронні таблиці KCells
 Comment[x-test]=xxKCells Spreadsheetxx
+Comment[zh_TW]=KCells 工作表
 Version=4
 
 [Event/DocumentLoaded]

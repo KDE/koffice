@@ -6,6 +6,7 @@ Name[pt]=Filtro de Importação de GNUMERIC para o KCells
 Name[sv]=Gnumeric-importfilter för Kcells
 Name[uk]=Фільтр імпорту GNUMERIC для KCells
 Name[x-test]=xxGNUMERIC Import Filter for KCellsxx
+Name[zh_TW]=KCells 的 GNUmeric 匯入過濾程式
 X-KDE-Export=application/x-kcells
 X-KDE-Import=application/x-gnumeric
 X-KDE-Weight=1

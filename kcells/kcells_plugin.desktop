@@ -7,5 +7,6 @@ Comment[pt]='Plugin' para o KCells
 Comment[sv]=Insticksprogram för Kcells
 Comment[uk]=Додаток для KCells
 Comment[x-test]=xxPlugin for KCellsxx
+Comment[zh_TW]=KCells 外掛程式
 [PropertyDef::X-KCells-InterfaceVersion]
 Type=int

@@ -6,6 +6,7 @@ Name[pt]=Filtro de Importação de Quattro Pro para o KCells
 Name[sv]=Quattro Pro-importfilter för Kcells
 Name[uk]=Фільтр імпорту Quattro Pro для KCells
 Name[x-test]=xxQuattro Pro Import Filter for KCellsxx
+Name[zh_TW]=KCells 的 Quattro Pro 匯入過濾程式
 X-KDE-Export=application/x-kcells
 X-KDE-Import=application/x-quattropro
 X-KDE-Weight=1

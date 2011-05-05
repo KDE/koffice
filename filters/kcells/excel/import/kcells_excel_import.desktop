@@ -6,6 +6,7 @@ Name[pt]=Filtro de Importação de Microsoft Excel para o KCells
 Name[sv]=Microsoft Excel-importfilter för Kcells
 Name[uk]=Фільтр імпорту Microsoft Excel для KCells
 Name[x-test]=xxKCells Microsoft Excel Import Filterxx
+Name[zh_TW]=KCells Microsoft Excel 匯入過濾程式
 X-KDE-Export=application/vnd.oasis.opendocument.spreadsheet
 X-KDE-Import=application/vnd.ms-excel
 X-KDE-Weight=1
