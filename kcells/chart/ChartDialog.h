@@ -61,49 +61,4 @@ private slots:
 private:
 };
 
-/// A simple class useful for finding out if a series of data object will cause a
-/// normal or a tri-state checkbox. For example.
-class GuiHelper
-{
-public:
-    /// the different states
-    enum State {
-        Unset, ///< start value
-        On,     ///< on
-        Off,    ///< off
-        TriState ///< Both on and off
-    };
-    /// constructor
-    GuiHelper() : m_state(Unset) { }
-    /// Add a new state
-    void addState(State state) {
-        if (m_state == Unset)
-            m_state = state;
-        else if (m_state != state)
-            m_state = TriState;
-    }
-
-    /**
-     * Based on all the added states initialize the checkbox.
-     * @param checkbox the checkbox to set.
-     * @param hide if true the checkbox will be hidden when there was no 'addState' called
-     */
-    void updateCheckBox(QCheckBox *checkbox, bool hide) {
-        if (m_state == Unset) {
-            if (hide)
-                checkbox->setVisible(false);
-            checkbox->setEnabled(false);
-            checkbox->setTristate(true);
-            checkbox->setCheckState(Qt::PartiallyChecked);
-        } else if (m_state == TriState) {
-            checkbox->setTristate(true);
-            checkbox->setCheckState(Qt::PartiallyChecked);
-        } else {
-            checkbox->setCheckState(m_state == On ? Qt::Checked : Qt::Unchecked);
-        }
-    }
-
-    State m_state; ///< the current state
-};
-
 #endif // KSPREAD_CHART_DIALOG
