@@ -37,7 +37,7 @@
 #include "ui/Selection.h"
 #include "KCSheet.h"
 
-#include "commands/StyleCommand.h"
+#include "commands/KCStyleCommand.h"
 #include "commands/RowColumnManipulators.h"
 
 AngleDialog::AngleDialog(QWidget* parent, Selection* selection)
@@ -77,7 +77,7 @@ void AngleDialog::slotOk()
 {
     QUndoCommand* macroCommand = new QUndoCommand(i18n("Change Angle"));
 
-    StyleCommand* manipulator = new StyleCommand(macroCommand);
+    KCStyleCommand* manipulator = new KCStyleCommand(macroCommand);
     manipulator->setSheet(m_selection->activeSheet());
     manipulator->setAngle(-m_pAngle->value());
     manipulator->add(*m_selection);

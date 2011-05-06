@@ -29,15 +29,15 @@
 class KCStyle;
 
 /**
- * \class StyleCommand
+ * \class KCStyleCommand
  * \ingroup Commands
  * \brief Manipulates the style of a cell region.
  */
-class StyleCommand : public KCAbstractRegionCommand
+class KCStyleCommand : public KCAbstractRegionCommand
 {
 public:
-    StyleCommand(QUndoCommand* parent = 0);
-    virtual ~StyleCommand();
+    KCStyleCommand(QUndoCommand* parent = 0);
+    virtual ~KCStyleCommand();
 
     // SetSelectionFontWorker
     // SetSelectionSizeWorker

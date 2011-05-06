@@ -54,7 +54,7 @@
 
 // commands
 #include "commands/DataManipulators.h"
-#include "commands/StyleCommand.h"
+#include "commands/KCStyleCommand.h"
 
 // ui
 #include "ui/CellEditor.h"
@@ -734,7 +734,7 @@ bool CellToolBase::Private::formatKeyPress(QKeyEvent * _ev)
             key != Qt::Key_NumberSign)
         return false;
 
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(q->selection()->activeSheet());
 
     switch (_ev->key()) {

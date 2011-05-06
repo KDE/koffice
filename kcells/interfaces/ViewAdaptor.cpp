@@ -39,7 +39,7 @@
 // commands
 #include "commands/KCBorderColorCommand.h"
 #include "commands/KCCommentCommand.h"
-#include "commands/StyleCommand.h"
+#include "commands/KCStyleCommand.h"
 
 #include <KoShapeManager.h>
 #include <KoSelection.h>
@@ -379,7 +379,7 @@ void ViewAdaptor::setSelectionAngle(int value)
 
 void ViewAdaptor::setSelectionTextColor(const QColor& txtColor)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(m_view->activeSheet());
     command->setText(i18n("Change Text Color"));
     command->setFontColor(txtColor);
@@ -389,7 +389,7 @@ void ViewAdaptor::setSelectionTextColor(const QColor& txtColor)
 
 void ViewAdaptor::setSelectionBgColor(const QColor& bgColor)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(m_view->activeSheet());
     command->setText(i18n("Change Background Color"));
     command->setBackgroundColor(bgColor);
@@ -399,7 +399,7 @@ void ViewAdaptor::setSelectionBgColor(const QColor& bgColor)
 
 void ViewAdaptor::setSelectionBorderColor(const QColor& bgColor)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(m_view->activeSheet());
     command->setText(i18n("Change Background Color"));
     command->setBackgroundColor(bgColor);
@@ -426,7 +426,7 @@ void ViewAdaptor::cutSelection()
 
 void ViewAdaptor::setLeftBorderColor(const QColor& color)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(m_view->activeSheet());
     command->setText(i18n("Change Border"));
     if (m_view->activeSheet()->layoutDirection() == Qt::RightToLeft)
@@ -439,7 +439,7 @@ void ViewAdaptor::setLeftBorderColor(const QColor& color)
 
 void ViewAdaptor::setTopBorderColor(const QColor& color)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(m_view->activeSheet());
     command->setText(i18n("Change Border"));
     command->setTopBorderPen(QPen(color, 1, Qt::SolidLine));
@@ -449,7 +449,7 @@ void ViewAdaptor::setTopBorderColor(const QColor& color)
 
 void ViewAdaptor::setRightBorderColor(const QColor& color)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(m_view->activeSheet());
     command->setText(i18n("Change Border"));
     if (m_view->activeSheet()->layoutDirection() == Qt::RightToLeft)
@@ -462,7 +462,7 @@ void ViewAdaptor::setRightBorderColor(const QColor& color)
 
 void ViewAdaptor::setBottomBorderColor(const QColor& color)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(m_view->activeSheet());
     command->setText(i18n("Change Border"));
     command->setBottomBorderPen(QPen(color, 1, Qt::SolidLine));
@@ -472,7 +472,7 @@ void ViewAdaptor::setBottomBorderColor(const QColor& color)
 
 void ViewAdaptor::setAllBorderColor(const QColor& color)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(m_view->activeSheet());
     command->setText(i18n("Change Border"));
     command->setTopBorderPen(QPen(color, 1, Qt::SolidLine));
@@ -487,7 +487,7 @@ void ViewAdaptor::setAllBorderColor(const QColor& color)
 
 void ViewAdaptor::setOutlineBorderColor(const QColor& color)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(m_view->activeSheet());
     command->setText(i18n("Change Border"));
     command->setTopBorderPen(QPen(color, 1, Qt::SolidLine));

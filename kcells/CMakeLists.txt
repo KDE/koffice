@@ -50,7 +50,7 @@ SET (commands_DIR_SRCS
     commands/SheetCommands.cpp
     commands/KCSortManipulator.cpp
     commands/KCSpellCheckCommand.cpp
-    commands/StyleCommand.cpp
+    commands/KCStyleCommand.cpp
     commands/ValidityCommand.cpp
     )
 

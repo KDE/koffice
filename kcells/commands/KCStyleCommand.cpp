@@ -18,7 +18,7 @@
 */
 
 // Local
-#include "StyleCommand.h"
+#include "KCStyleCommand.h"
 
 #include <QBrush>
 
@@ -33,7 +33,7 @@
 #include "KCStyle.h"
 #include "KCStyleStorage.h"
 
-StyleCommand::StyleCommand(QUndoCommand* parent)
+KCStyleCommand::KCStyleCommand(QUndoCommand* parent)
         : KCAbstractRegionCommand(parent)
         , m_horizontalPen(QPen(QColor(), 0, Qt::NoPen))
         , m_verticalPen(QPen(QColor(), 0, Qt::NoPen))
@@ -43,12 +43,12 @@ StyleCommand::StyleCommand(QUndoCommand* parent)
 {
 }
 
-StyleCommand::~StyleCommand()
+KCStyleCommand::~KCStyleCommand()
 {
     delete m_style;
 }
 
-bool StyleCommand::process(Element* element)
+bool KCStyleCommand::process(Element* element)
 {
     const QRect range = element->rect();
     if (!m_reverse) { // (re)do
@@ -176,7 +176,7 @@ bool StyleCommand::process(Element* element)
     return true;
 }
 
-bool StyleCommand::preProcessing()
+bool KCStyleCommand::preProcessing()
 {
     if (m_firstrun) {
         if (m_style->isDefault())
@@ -195,7 +195,7 @@ bool StyleCommand::preProcessing()
     return KCAbstractRegionCommand::preProcessing();
 }
 
-bool StyleCommand::mainProcessing()
+bool KCStyleCommand::mainProcessing()
 {
     if (!m_reverse) {
     } else { // m_reverse
@@ -213,7 +213,7 @@ bool StyleCommand::mainProcessing()
     return KCAbstractRegionCommand::mainProcessing();
 }
 
-bool StyleCommand::postProcessing()
+bool KCStyleCommand::postProcessing()
 {
     return true;
 }

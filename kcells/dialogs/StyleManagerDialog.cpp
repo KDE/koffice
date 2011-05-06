@@ -36,7 +36,7 @@
 #include "KCStyle.h"
 #include "KCStyleManager.h"
 
-#include "commands/StyleCommand.h"
+#include "commands/KCStyleCommand.h"
 
 StyleManagerDialog::StyleManagerDialog(QWidget* parent, Selection* selection, KCStyleManager* manager)
         : KDialog(parent)
@@ -170,13 +170,13 @@ void StyleManagerDialog::slotOk()
 
     QString name(item->text(0));
     if (name == i18n("Default")) {
-        StyleCommand* command = new StyleCommand();
+        KCStyleCommand* command = new KCStyleCommand();
         command->setSheet(m_selection->activeSheet());
         command->setDefault();
         command->add(*m_selection);
         command->execute(m_selection->canvas());
     } else {
-        StyleCommand* command = new StyleCommand();
+        KCStyleCommand* command = new KCStyleCommand();
         command->setSheet(m_selection->activeSheet());
         command->setParentName(name);
         command->add(*m_selection);

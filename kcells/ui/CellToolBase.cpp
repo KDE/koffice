@@ -71,7 +71,7 @@
 #include "commands/RowColumnManipulators.h"
 #include "commands/KCSortManipulator.h"
 #include "commands/KCSpellCheckCommand.h"
-#include "commands/StyleCommand.h"
+#include "commands/KCStyleCommand.h"
 #include "commands/ValidityCommand.h"
 
 // dialogs
@@ -1553,7 +1553,7 @@ void CellToolBase::cellStyle()
 
 void CellToolBase::setDefaultStyle()
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setDefault();
     command->add(*selection());
@@ -1578,7 +1578,7 @@ void CellToolBase::setStyle(const QString& stylename)
 {
     kDebug() << "CellToolBase::setStyle(" << stylename << ")";
     if (selection()->activeSheet()->map()->styleManager()->style(stylename)) {
-        StyleCommand* command = new StyleCommand();
+        KCStyleCommand* command = new KCStyleCommand();
         command->setSheet(selection()->activeSheet());
         command->setParentName(stylename);
         command->add(*selection());
@@ -1628,7 +1628,7 @@ void CellToolBase::createStyleFromCell()
 
 void CellToolBase::bold(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Font"));
     command->setFontBold(enable);
@@ -1642,7 +1642,7 @@ void CellToolBase::bold(bool enable)
 
 void CellToolBase::underline(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Font"));
     command->setFontUnderline(enable);
@@ -1656,7 +1656,7 @@ void CellToolBase::underline(bool enable)
 
 void CellToolBase::strikeOut(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Font"));
     command->setFontStrike(enable);
@@ -1671,7 +1671,7 @@ void CellToolBase::strikeOut(bool enable)
 
 void CellToolBase::italic(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Font"));
     command->setFontItalic(enable);
@@ -1685,7 +1685,7 @@ void CellToolBase::italic(bool enable)
 
 void CellToolBase::font(const QString& font)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Font"));
     command->setFontFamily(font.toLatin1());
@@ -1703,7 +1703,7 @@ void CellToolBase::font(const QString& font)
 
 void CellToolBase::fontSize(int size)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Font"));
     command->setFontSize(size);
@@ -1724,7 +1724,7 @@ void CellToolBase::increaseFontSize()
     const KCStyle style = KCCell(selection()->activeSheet(), selection()->marker()).style();
     const int size = style.fontSize();
 
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Font"));
     command->setFontSize(size + 1);
@@ -1737,7 +1737,7 @@ void CellToolBase::decreaseFontSize()
     const KCStyle style = KCCell(selection()->activeSheet(), selection()->marker()).style();
     const int size = style.fontSize();
 
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Font"));
     command->setFontSize(size - 1);
@@ -1747,7 +1747,7 @@ void CellToolBase::decreaseFontSize()
 
 void CellToolBase::changeTextColor(const KoColor &color)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Text Color"));
     command->setFontColor(color.toQColor());
@@ -1757,7 +1757,7 @@ void CellToolBase::changeTextColor(const KoColor &color)
 
 void CellToolBase::alignLeft(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Horizontal Alignment"));
     command->setHorizontalAlignment(enable ? KCStyle::Left : KCStyle::HAlignUndefined);
@@ -1767,7 +1767,7 @@ void CellToolBase::alignLeft(bool enable)
 
 void CellToolBase::alignRight(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Horizontal Alignment"));
     command->setHorizontalAlignment(enable ? KCStyle::Right : KCStyle::HAlignUndefined);
@@ -1777,7 +1777,7 @@ void CellToolBase::alignRight(bool enable)
 
 void CellToolBase::alignCenter(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Horizontal Alignment"));
     command->setHorizontalAlignment(enable ? KCStyle::Center : KCStyle::HAlignUndefined);
@@ -1787,7 +1787,7 @@ void CellToolBase::alignCenter(bool enable)
 
 void CellToolBase::alignTop(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Vertical Alignment"));
     command->setVerticalAlignment(enable ? KCStyle::Top : KCStyle::VAlignUndefined);
@@ -1797,7 +1797,7 @@ void CellToolBase::alignTop(bool enable)
 
 void CellToolBase::alignBottom(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Vertical Alignment"));
     command->setVerticalAlignment(enable ? KCStyle::Bottom : KCStyle::VAlignUndefined);
@@ -1807,7 +1807,7 @@ void CellToolBase::alignBottom(bool enable)
 
 void CellToolBase::alignMiddle(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Vertical Alignment"));
     command->setVerticalAlignment(enable ? KCStyle::Middle : KCStyle::VAlignUndefined);
@@ -1818,7 +1818,7 @@ void CellToolBase::alignMiddle(bool enable)
 void CellToolBase::borderLeft()
 {
     QColor color = static_cast<KoColorPopupAction*>(action("borderColor"))->currentColor();
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Border"));
     if (selection()->activeSheet()->layoutDirection() == Qt::RightToLeft)
@@ -1832,7 +1832,7 @@ void CellToolBase::borderLeft()
 void CellToolBase::borderRight()
 {
     QColor color = static_cast<KoColorPopupAction*>(action("borderColor"))->currentColor();
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Border"));
     if (selection()->activeSheet()->layoutDirection() == Qt::RightToLeft)
@@ -1846,7 +1846,7 @@ void CellToolBase::borderRight()
 void CellToolBase::borderTop()
 {
     QColor color = static_cast<KoColorPopupAction*>(action("borderColor"))->currentColor();
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Border"));
     command->setTopBorderPen(QPen(color, 1, Qt::SolidLine));
@@ -1857,7 +1857,7 @@ void CellToolBase::borderTop()
 void CellToolBase::borderBottom()
 {
     QColor color = static_cast<KoColorPopupAction*>(action("borderColor"))->currentColor();
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Border"));
     command->setBottomBorderPen(QPen(color, 1, Qt::SolidLine));
@@ -1868,7 +1868,7 @@ void CellToolBase::borderBottom()
 void CellToolBase::borderAll()
 {
     QColor color = static_cast<KoColorPopupAction*>(action("borderColor"))->currentColor();
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Border"));
     command->setTopBorderPen(QPen(color, 1, Qt::SolidLine));
@@ -1883,7 +1883,7 @@ void CellToolBase::borderAll()
 
 void CellToolBase::borderRemove()
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Border"));
     command->setTopBorderPen(QPen(Qt::NoPen));
@@ -1899,7 +1899,7 @@ void CellToolBase::borderRemove()
 void CellToolBase::borderOutline()
 {
     QColor color = static_cast<KoColorPopupAction*>(action("borderColor"))->currentColor();
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Border"));
     command->setTopBorderPen(QPen(color, 1, Qt::SolidLine));
@@ -1921,7 +1921,7 @@ void CellToolBase::borderColor(const KoColor &color)
 
 void CellToolBase::wrapText(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Wrap Text"));
     command->setMultiRow(enable);
@@ -1933,7 +1933,7 @@ void CellToolBase::wrapText(bool enable)
 
 void CellToolBase::verticalText(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Vertical Text"));
     command->setVerticalText(enable);
@@ -1971,7 +1971,7 @@ void CellToolBase::changeAngle()
 
 void CellToolBase::percent(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Format Percent"));
     command->setFormatType(enable ? KCFormat::Percentage : KCFormat::Generic);
@@ -1981,7 +1981,7 @@ void CellToolBase::percent(bool enable)
 
 void CellToolBase::currency(bool enable)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Format Money"));
     command->setFormatType(enable ? KCFormat::Money : KCFormat::Generic);
@@ -2041,7 +2041,7 @@ void CellToolBase::firstLetterToUpperCase()
 
 void CellToolBase::changeBackgroundColor(const KoColor &color)
 {
-    StyleCommand* command = new StyleCommand();
+    KCStyleCommand* command = new KCStyleCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Change Background Color"));
     command->setBackgroundColor(color.toQColor());

@@ -73,7 +73,7 @@
 #include "KCValueFormatter.h"
 
 #include "commands/KCMergeCommand.h"
-#include "commands/StyleCommand.h"
+#include "commands/KCStyleCommand.h"
 #include "commands/RowColumnManipulators.h"
 
 /***************************************************************************
@@ -841,7 +841,7 @@ void CellFormatDialog::slotApply()
         command->add(*m_selection);
     }
 
-    StyleCommand* command = new StyleCommand(macroCommand);
+    KCStyleCommand* command = new KCStyleCommand(macroCommand);
     command->setSheet(m_sheet);
     command->add(*m_selection);
     borderPage->apply(command);
@@ -1602,7 +1602,7 @@ void CellFormatPageFloat::apply(KCCustomStyle * style)
     }
 }
 
-void CellFormatPageFloat::apply(StyleCommand* _obj)
+void CellFormatPageFloat::apply(KCStyleCommand* _obj)
 {
     if (postfix->text() != dlg->postfix)
         if (postfix->isEnabled()) {
@@ -1709,7 +1709,7 @@ void CellFormatPageProtection::apply(KCCustomStyle * style)
     }
 }
 
-void CellFormatPageProtection::apply(StyleCommand* _obj)
+void CellFormatPageProtection::apply(KCStyleCommand* _obj)
 {
     if (m_dlg->bDontPrintText != m_bDontPrint->isChecked())
         _obj->setDontPrintText(m_bDontPrint->isChecked());
@@ -1835,7 +1835,7 @@ void CellFormatPageFont::apply(KCCustomStyle * style)
     style->setFontUnderline(underline->isChecked());
 }
 
-void CellFormatPageFont::apply(StyleCommand* _obj)
+void CellFormatPageFont::apply(KCStyleCommand* _obj)
 {
     if (!bTextColorUndefined && textColor != dlg->textColor)
         _obj->setFontColor(textColor);
@@ -2210,7 +2210,7 @@ void CellFormatPagePosition::apply(KCCustomStyle * style)
     }
 }
 
-void CellFormatPagePosition::apply(StyleCommand* _obj)
+void CellFormatPagePosition::apply(KCStyleCommand* _obj)
 {
     KCStyle::HAlign  ax;
     KCStyle::VAlign ay;
@@ -2734,7 +2734,7 @@ void CellFormatPageBorder::loadIcon(const QString& _pix, BorderButton *_button)
     _button->setIcon(KIcon(_pix));
 }
 
-void CellFormatPageBorder::apply(StyleCommand* obj)
+void CellFormatPageBorder::apply(KCStyleCommand* obj)
 {
     if (borderButtons[BorderType_Horizontal]->isChanged())
         applyHorizontalOutline(obj);
@@ -2759,7 +2759,7 @@ void CellFormatPageBorder::apply(StyleCommand* obj)
         applyDiagonalOutline(obj);
 }
 
-void CellFormatPageBorder::applyTopOutline(StyleCommand* obj)
+void CellFormatPageBorder::applyTopOutline(KCStyleCommand* obj)
 {
     BorderButton * top = borderButtons[BorderType_Top];
 
@@ -2773,7 +2773,7 @@ void CellFormatPageBorder::applyTopOutline(StyleCommand* obj)
     }
 }
 
-void CellFormatPageBorder::applyBottomOutline(StyleCommand* obj)
+void CellFormatPageBorder::applyBottomOutline(KCStyleCommand* obj)
 {
     BorderButton * bottom = borderButtons[BorderType_Bottom];
 
@@ -2787,7 +2787,7 @@ void CellFormatPageBorder::applyBottomOutline(StyleCommand* obj)
     }
 }
 
-void CellFormatPageBorder::applyLeftOutline(StyleCommand* obj)
+void CellFormatPageBorder::applyLeftOutline(KCStyleCommand* obj)
 {
     BorderButton * left = borderButtons[BorderType_Left];
     QPen tmpPen(left->getColor(), left->getPenWidth(), left->getPenStyle());
@@ -2800,7 +2800,7 @@ void CellFormatPageBorder::applyLeftOutline(StyleCommand* obj)
     }
 }
 
-void CellFormatPageBorder::applyRightOutline(StyleCommand* obj)
+void CellFormatPageBorder::applyRightOutline(KCStyleCommand* obj)
 {
     BorderButton* right = borderButtons[BorderType_Right];
     QPen tmpPen(right->getColor(), right->getPenWidth(), right->getPenStyle());
@@ -2813,7 +2813,7 @@ void CellFormatPageBorder::applyRightOutline(StyleCommand* obj)
     }
 }
 
-void CellFormatPageBorder::applyDiagonalOutline(StyleCommand* obj)
+void CellFormatPageBorder::applyDiagonalOutline(KCStyleCommand* obj)
 {
     BorderButton * fallDiagonal = borderButtons[BorderType_FallingDiagonal];
     BorderButton * goUpDiagonal = borderButtons[BorderType_RisingDiagonal];
@@ -2835,7 +2835,7 @@ void CellFormatPageBorder::applyDiagonalOutline(StyleCommand* obj)
     }
 }
 
-void CellFormatPageBorder::applyHorizontalOutline(StyleCommand* obj)
+void CellFormatPageBorder::applyHorizontalOutline(KCStyleCommand* obj)
 {
     QPen tmpPen(borderButtons[BorderType_Horizontal]->getColor(),
                 borderButtons[BorderType_Horizontal]->getPenWidth(),
@@ -2849,7 +2849,7 @@ void CellFormatPageBorder::applyHorizontalOutline(StyleCommand* obj)
     }
 }
 
-void CellFormatPageBorder::applyVerticalOutline(StyleCommand* obj)
+void CellFormatPageBorder::applyVerticalOutline(KCStyleCommand* obj)
 {
     BorderButton* vertical = borderButtons[BorderType_Vertical];
     QPen tmpPen(vertical->getColor(), vertical->getPenWidth(),
@@ -3562,7 +3562,7 @@ void CellFormatPagePattern::apply(KCCustomStyle * style)
         style->setBackgroundColor(bgColor);
 }
 
-void CellFormatPagePattern::apply(StyleCommand *_obj)
+void CellFormatPagePattern::apply(KCStyleCommand *_obj)
 {
     if (selectedBrush != 0
             && (dlg->brushStyle != selectedBrush->getBrushStyle()

@@ -70,7 +70,7 @@ class KCCustomStyle;
 class KCStyleManager;
 class CellFormatDialog;
 class Selection;
-class StyleCommand;
+class KCStyleCommand;
 
 enum BorderType {
     BorderType_Top = 0,
@@ -193,7 +193,7 @@ public:
     CellFormatPageFont(QWidget* parent, CellFormatDialog *_dlg);
 
     void apply(KCCustomStyle * style);
-    void apply(StyleCommand *_obj);
+    void apply(KCStyleCommand *_obj);
 
 signals:
     /**
@@ -233,7 +233,7 @@ class CellFormatPageFloat : public QWidget
 public:
     CellFormatPageFloat(QWidget *parent, CellFormatDialog *_dlg);
     void apply(KCCustomStyle * style);
-    void apply(StyleCommand *_obj);
+    void apply(KCStyleCommand *_obj);
 
 public slots:
     void slotChangeState();
@@ -283,7 +283,7 @@ public:
     CellFormatPagePosition(QWidget *parent, CellFormatDialog *_dlg);
 
     void apply(KCCustomStyle * style);
-    void apply(StyleCommand *_obj);
+    void apply(KCStyleCommand *_obj);
 
     double getSizeHeight() const;
     double getSizeWidth() const;
@@ -383,7 +383,7 @@ class CellFormatPageBorder : public QWidget
 public:
     CellFormatPageBorder(QWidget *parent, CellFormatDialog *_dlg);
 
-    void apply(StyleCommand* obj);
+    void apply(KCStyleCommand* obj);
     void invertState(BorderButton *_button);
     QPixmap paintFormatPixmap(Qt::PenStyle _style);
 
@@ -425,13 +425,13 @@ private:
     void InitializeBorderButtons();
     void InitializePatterns();
     void SetConnections();
-    void applyTopOutline(StyleCommand* obj);
-    void applyBottomOutline(StyleCommand* obj);
-    void applyLeftOutline(StyleCommand* obj);
-    void applyRightOutline(StyleCommand* obj);
-    void applyVerticalOutline(StyleCommand* obj);
-    void applyHorizontalOutline(StyleCommand* obj);
-    void applyDiagonalOutline(StyleCommand* obj);
+    void applyTopOutline(KCStyleCommand* obj);
+    void applyBottomOutline(KCStyleCommand* obj);
+    void applyLeftOutline(KCStyleCommand* obj);
+    void applyRightOutline(KCStyleCommand* obj);
+    void applyVerticalOutline(KCStyleCommand* obj);
+    void applyHorizontalOutline(KCStyleCommand* obj);
+    void applyDiagonalOutline(KCStyleCommand* obj);
 };
 
 /**
@@ -486,7 +486,7 @@ public:
     CellFormatPagePattern(QWidget *parent, CellFormatDialog *_dlg);
 
     void apply(KCCustomStyle * style);
-    void apply(StyleCommand *_obj);
+    void apply(KCStyleCommand *_obj);
 
     void init();
 public slots:
@@ -536,7 +536,7 @@ public:
     ~CellFormatPageProtection();
     ///when protection is set through KCStyle Manager
     void apply(KCCustomStyle * style);
-    void apply(StyleCommand * _obj);
+    void apply(KCStyleCommand * _obj);
 
 protected:
     CellFormatDialog * m_dlg;
