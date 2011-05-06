@@ -18,7 +18,7 @@
 */
 
 // Local
-#include "PrecisionCommand.h"
+#include "KCPrecisionCommand.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -28,13 +28,13 @@
 #include "KCSheet.h"
 #include "KCStyle.h"
 
-PrecisionCommand::PrecisionCommand()
+KCPrecisionCommand::KCPrecisionCommand()
         : KCAbstractRegionCommand()
 {
     setText(i18n("Increase Precision"));
 }
 
-bool PrecisionCommand::mainProcessing()
+bool KCPrecisionCommand::mainProcessing()
 {
     KCStyle style;
     if (!m_reverse) {
@@ -48,12 +48,12 @@ bool PrecisionCommand::mainProcessing()
     return true;
 }
 
-bool PrecisionCommand::postProcessing()
+bool KCPrecisionCommand::postProcessing()
 {
     return true;
 }
 
-void PrecisionCommand::setReverse(bool reverse)
+void KCPrecisionCommand::setReverse(bool reverse)
 {
     KCAbstractRegionCommand::setReverse(reverse);
     if (!m_reverse)

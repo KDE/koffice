@@ -44,7 +44,7 @@ SET (commands_DIR_SRCS
     commands/KCNamedAreaCommand.cpp
     commands/KCPageBreakCommand.cpp
     commands/KCPasteCommand.cpp
-    commands/PrecisionCommand.cpp
+    commands/KCPrecisionCommand.cpp
     commands/RowColumnManipulators.cpp
     commands/RowStyleCommand.cpp
     commands/SheetCommands.cpp

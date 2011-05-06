@@ -26,10 +26,10 @@
  * \ingroup Commands
  * \brief Sets the decimal precision level.
  */
-class PrecisionCommand : public KCAbstractRegionCommand
+class KCPrecisionCommand : public KCAbstractRegionCommand
 {
 public:
-    PrecisionCommand();
+    KCPrecisionCommand();
 
     virtual void setReverse(bool reverse);
 

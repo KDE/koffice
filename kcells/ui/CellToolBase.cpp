@@ -67,7 +67,7 @@
 #include "commands/KCMergeCommand.h"
 #include "commands/KCPageBreakCommand.h"
 #include "commands/KCPasteCommand.h"
-#include "commands/PrecisionCommand.h"
+#include "commands/KCPrecisionCommand.h"
 #include "commands/RowColumnManipulators.h"
 #include "commands/SortManipulator.h"
 #include "commands/SpellCheckCommand.h"
@@ -1992,7 +1992,7 @@ void CellToolBase::currency(bool enable)
 
 void CellToolBase::increasePrecision()
 {
-    PrecisionCommand* command = new PrecisionCommand();
+    KCPrecisionCommand* command = new KCPrecisionCommand();
     command->setSheet(selection()->activeSheet());
     command->add(*selection());
     if (!command->execute())
@@ -2001,7 +2001,7 @@ void CellToolBase::increasePrecision()
 
 void CellToolBase::decreasePrecision()
 {
-    PrecisionCommand* command = new PrecisionCommand();
+    KCPrecisionCommand* command = new KCPrecisionCommand();
     command->setSheet(selection()->activeSheet());
     command->setReverse(true);
     command->add(*selection());
