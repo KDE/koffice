@@ -28,7 +28,7 @@ class KCRegion;
  * \ingroup Commands
  * \brief Command to copy cell data
  */
-namespace CopyCommand
+namespace KCCopyCommand
 {
 /**
  * Saves the cell \p region as XML.

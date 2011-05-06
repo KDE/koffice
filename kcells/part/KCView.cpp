@@ -139,7 +139,7 @@
 #include "KCPrintJob.h"
 
 // commands
-#include "commands/CopyCommand.h"
+#include "commands/KCCopyCommand.h"
 #include "commands/DefinePrintRangeCommand.h"
 #include "commands/SheetCommands.h"
 
@@ -1434,7 +1434,7 @@ void KCView::copyAsText()
     if (!d->activeSheet)
         return;
     QMimeData* mimeData = new QMimeData();
-    mimeData->setText(CopyCommand::saveAsPlainText(*selection()));
+    mimeData->setText(KCCopyCommand::saveAsPlainText(*selection()));
 
     QApplication::clipboard()->setMimeData(mimeData);
 }

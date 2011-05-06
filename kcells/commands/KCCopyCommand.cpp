@@ -19,7 +19,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "CopyCommand.h"
+#include "KCCopyCommand.h"
 
 #include "KCCellStorage.h"
 #include "KCRegion.h"
@@ -27,7 +27,7 @@
 #include "KCSheet.h"
 
 // era: encode references absolutely
-QDomDocument CopyCommand::saveAsXml(const KCRegion& region, bool era)
+QDomDocument KCCopyCommand::saveAsXml(const KCRegion& region, bool era)
 {
     QDomDocument xmlDoc("spreadsheet-snippet");
     xmlDoc.appendChild(xmlDoc.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""));
@@ -148,7 +148,7 @@ static QString cellAsText(const KCCell& cell, bool addTab)
     return result;
 }
 
-QString CopyCommand::saveAsPlainText(const KCRegion &region)
+QString KCCopyCommand::saveAsPlainText(const KCRegion &region)
 {
     // Only one cell selected? => copy active cell
     if (region.isSingular()) {
@@ -175,7 +175,7 @@ QString CopyCommand::saveAsPlainText(const KCRegion &region)
     return result;
 }
 
-QDomDocument CopyCommand::saveAsHtml(const KCRegion &region)
+QDomDocument KCCopyCommand::saveAsHtml(const KCRegion &region)
 {
     QDomDocument doc("spreadsheet-html");
     QDomElement html = doc.createElement("html");
@@ -197,7 +197,7 @@ QDomDocument CopyCommand::saveAsHtml(const KCRegion &region)
     return doc;
 }
 
-QString CopyCommand::saveAsCSV(const KCRegion &region)
+QString KCCopyCommand::saveAsCSV(const KCRegion &region)
 {
     // TODO
     Q_UNUSED(region);

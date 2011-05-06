@@ -36,7 +36,7 @@
 #include <QMimeData>
 #include <QTextStream>
 
-#include "commands/CopyCommand.h"
+#include "commands/KCCopyCommand.h"
 
 class DragAndDropStrategy::Private
 {
@@ -95,7 +95,7 @@ void DragAndDropStrategy::handleMouseMove(const QPointF& documentPos, Qt::Keyboa
         kDebug(36005) << "col or row is out of range:" << "col:" << col << " row:" << row;
     } else if (d->cell == KCCell(selection()->activeSheet(), col, row)) {
     } else {
-        QDomDocument doc = CopyCommand::saveAsXml(*selection(), true);
+        QDomDocument doc = KCCopyCommand::saveAsXml(*selection(), true);
 
         // Save to buffer
         QBuffer buffer;
@@ -106,7 +106,7 @@ void DragAndDropStrategy::handleMouseMove(const QPointF& documentPos, Qt::Keyboa
         buffer.close();
 
         QMimeData* mimeData = new QMimeData();
-        mimeData->setText(CopyCommand::saveAsPlainText(*selection()));
+        mimeData->setText(KCCopyCommand::saveAsPlainText(*selection()));
         mimeData->setData("application/x-kcells-snippet", buffer.buffer());
 
         QDrag *drag = new QDrag(tool()->canvas()->canvasWidget());

@@ -34,7 +34,7 @@ SET (commands_DIR_SRCS
     commands/KCColumnStyleCommand.cpp
     commands/KCCommentCommand.cpp
     commands/ConditionCommand.cpp
-    commands/CopyCommand.cpp
+    commands/KCCopyCommand.cpp
     commands/KCCSVDataCommand.cpp
     commands/DataManipulators.cpp
     commands/DeleteCommand.cpp

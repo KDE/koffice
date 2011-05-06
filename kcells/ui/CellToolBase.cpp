@@ -59,7 +59,7 @@
 #include "commands/KCBorderColorCommand.h"
 #include "commands/KCCommentCommand.h"
 #include "commands/ConditionCommand.h"
-#include "commands/CopyCommand.h"
+#include "commands/KCCopyCommand.h"
 #include "commands/DataManipulators.h"
 #include "commands/DeleteCommand.h"
 #include "commands/IndentationCommand.h"
@@ -2856,7 +2856,7 @@ void CellToolBase::edit()
 void CellToolBase::cut()
 {
     if (!editor()) {
-        QDomDocument doc = CopyCommand::saveAsXml(*selection(), true);
+        QDomDocument doc = KCCopyCommand::saveAsXml(*selection(), true);
         doc.documentElement().setAttribute("cut", selection()->KCRegion::name());
 
         // Save to buffer
@@ -2868,7 +2868,7 @@ void CellToolBase::cut()
         buffer.close();
 
         QMimeData* mimeData = new QMimeData();
-        mimeData->setText(CopyCommand::saveAsPlainText(*selection()));
+        mimeData->setText(KCCopyCommand::saveAsPlainText(*selection()));
         mimeData->setData("application/x-kcells-snippet", buffer.buffer());
 
         QApplication::clipboard()->setMimeData(mimeData);
@@ -2888,7 +2888,7 @@ void CellToolBase::copy() const
 {
     Selection* selection = const_cast<CellToolBase*>(this)->selection();
     if (!editor()) {
-        QDomDocument doc = CopyCommand::saveAsXml(*selection);
+        QDomDocument doc = KCCopyCommand::saveAsXml(*selection);
 
         // Save to buffer
         QBuffer buffer;
@@ -2899,7 +2899,7 @@ void CellToolBase::copy() const
         buffer.close();
 
         QMimeData* mimeData = new QMimeData();
-        mimeData->setText(CopyCommand::saveAsPlainText(*selection));
+        mimeData->setText(KCCopyCommand::saveAsPlainText(*selection));
         mimeData->setData("application/x-kcells-snippet", buffer.buffer());
 
         QApplication::clipboard()->setMimeData(mimeData);
