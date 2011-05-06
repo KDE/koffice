@@ -106,7 +106,7 @@
 #include <QtDBus/QtDBus>
 
 // chart shape
-#include "chart/ChartDialog.h"
+#include "chart/KCChartDialog.h"
 
 // ui
 #include "ui/Selection.h"
@@ -152,7 +152,7 @@ KCDoc::KCDoc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
     // Init chart shape factory with KCells's specific configuration panels.
     KoShapeFactoryBase *chartShape = KoShapeRegistry::instance()->value(ChartShapeId);
     if (chartShape) {
-        QList<KoShapeConfigFactoryBase*> panels = ChartDialog::panels(d->map);
+        QList<KoShapeConfigFactoryBase*> panels = KCChartDialog::panels(d->map);
         chartShape->setOptionPanels(panels);
     }
 

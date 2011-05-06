@@ -17,7 +17,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/interfaces
 SET (chart_DIR_SRCS
     chart/KCChartDatabaseSelectorFactory.cpp
     chart/KCChartDatabaseSelector.cpp
-    chart/ChartDialog.cpp
+    chart/KCChartDialog.cpp
     )
 
 kde4_add_ui_files(chart_DIR_SRCS

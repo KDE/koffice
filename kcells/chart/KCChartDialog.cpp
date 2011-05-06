@@ -18,11 +18,11 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "ChartDialog.h"
+#include "KCChartDialog.h"
 
 #include "KCChartDatabaseSelectorFactory.h"
 
-ChartDialog::ChartDialog(const QList<KChart::ChartShape*> &charts, QWidget *parent)
+KCChartDialog::KCChartDialog(const QList<KChart::ChartShape*> &charts, QWidget *parent)
         : KPageDialog(parent)
 {
     Q_UNUSED(charts);
@@ -30,24 +30,24 @@ ChartDialog::ChartDialog(const QList<KChart::ChartShape*> &charts, QWidget *pare
     connect(this, SIGNAL(cancelClicked()), this, SLOT(cancelClicked()));
 }
 
-ChartDialog::~ChartDialog()
+KCChartDialog::~KCChartDialog()
 {
 }
 
-void ChartDialog::okClicked()
+void KCChartDialog::okClicked()
 {
 }
 
-void ChartDialog::cancelClicked()
+void KCChartDialog::cancelClicked()
 {
 }
 
 // static
-QList<KoShapeConfigFactoryBase*> ChartDialog::panels(KCMap *map)
+QList<KoShapeConfigFactoryBase*> KCChartDialog::panels(KCMap *map)
 {
     QList<KoShapeConfigFactoryBase*> answer;
     answer.append(new KCChartDatabaseSelectorFactory(map));
     return answer;
 }
 
-#include "ChartDialog.moc"
+#include "KCChartDialog.moc"

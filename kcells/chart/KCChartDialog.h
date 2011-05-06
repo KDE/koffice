@@ -36,7 +36,7 @@ class ChartShape;
 class KCMap;
 
 /// A dialog for showing and altering frame properties
-class ChartDialog : public KPageDialog
+class KCChartDialog : public KPageDialog
 {
     Q_OBJECT
 public:
@@ -45,8 +45,8 @@ public:
      * @param selectedCharts all charts that this dialog will show for user modification
      * @param parent a parent widget for the purpose of centering the dialog
      */
-    explicit ChartDialog(const QList<KChart::ChartShape*> &selectedCharts, QWidget *parent = 0);
-    ~ChartDialog();
+    explicit KCChartDialog(const QList<KChart::ChartShape*> &selectedCharts, QWidget *parent = 0);
+    ~KCChartDialog();
 
     /**
      * Create a list of factories that will be able to create widgets to configure shapes.
