@@ -18,7 +18,7 @@
 */
 
 // Local
-#include "IndentationCommand.h"
+#include "KCIndentationCommand.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -30,13 +30,13 @@
 #include "KCSheet.h"
 #include "KCStyle.h"
 
-IndentationCommand::IndentationCommand()
+KCIndentationCommand::KCIndentationCommand()
         : KCAbstractRegionCommand()
 {
     setText(i18n("Increase Indentation"));
 }
 
-bool IndentationCommand::mainProcessing()
+bool KCIndentationCommand::mainProcessing()
 {
     KCStyle style;
     if (!m_reverse) {
@@ -50,12 +50,12 @@ bool IndentationCommand::mainProcessing()
     return true;
 }
 
-bool IndentationCommand::postProcessing()
+bool KCIndentationCommand::postProcessing()
 {
     return true;
 }
 
-void IndentationCommand::setReverse(bool reverse)
+void KCIndentationCommand::setReverse(bool reverse)
 {
     KCAbstractRegionCommand::setReverse(reverse);
     if (!m_reverse)

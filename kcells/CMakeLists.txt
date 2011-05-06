@@ -38,7 +38,7 @@ SET (commands_DIR_SRCS
     commands/KCCSVDataCommand.cpp
     commands/DataManipulators.cpp
     commands/KCDeleteCommand.cpp
-    commands/IndentationCommand.cpp
+    commands/KCIndentationCommand.cpp
     commands/LinkCommand.cpp
     commands/MergeCommand.cpp
     commands/NamedAreaCommand.cpp

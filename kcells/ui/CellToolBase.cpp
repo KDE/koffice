@@ -62,7 +62,7 @@
 #include "commands/KCCopyCommand.h"
 #include "commands/DataManipulators.h"
 #include "commands/KCDeleteCommand.h"
-#include "commands/IndentationCommand.h"
+#include "commands/KCIndentationCommand.h"
 #include "commands/LinkCommand.h"
 #include "commands/MergeCommand.h"
 #include "commands/PageBreakCommand.h"
@@ -1945,7 +1945,7 @@ void CellToolBase::verticalText(bool enable)
 
 void CellToolBase::increaseIndentation()
 {
-    IndentationCommand* command = new IndentationCommand();
+    KCIndentationCommand* command = new KCIndentationCommand();
     command->setSheet(selection()->activeSheet());
     command->add(*selection());
     if (!command->execute())
@@ -1954,7 +1954,7 @@ void CellToolBase::increaseIndentation()
 
 void CellToolBase::decreaseIndentation()
 {
-    IndentationCommand* command = new IndentationCommand();
+    KCIndentationCommand* command = new KCIndentationCommand();
     command->setSheet(selection()->activeSheet());
     command->setReverse(true);
     command->add(*selection());

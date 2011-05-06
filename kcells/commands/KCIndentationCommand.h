@@ -28,10 +28,10 @@
  * \ingroup Commands
  * \brief Changes the indentation level.
  */
-class IndentationCommand : public KCAbstractRegionCommand
+class KCIndentationCommand : public KCAbstractRegionCommand
 {
 public:
-    IndentationCommand();
+    KCIndentationCommand();
 
     virtual void setReverse(bool reverse);
 
