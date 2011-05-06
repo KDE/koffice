@@ -46,7 +46,7 @@ SET (commands_DIR_SRCS
     commands/KCPasteCommand.cpp
     commands/KCPrecisionCommand.cpp
     commands/RowColumnManipulators.cpp
-    commands/RowStyleCommand.cpp
+    commands/KCRowStyleCommand.cpp
     commands/SheetCommands.cpp
     commands/SortManipulator.cpp
     commands/SpellCheckCommand.cpp

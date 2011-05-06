@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "RowStyleCommand.h"
+#include "KCRowStyleCommand.h"
 
 #include "Damages.h"
 #include "kcells_limits.h"
@@ -26,7 +26,7 @@
 #include "KCSheet.h"
 #include "KCSheetPrint.h"
 
-RowStyleCommand::RowStyleCommand(QUndoCommand *parent)
+KCRowStyleCommand::KCRowStyleCommand(QUndoCommand *parent)
         : KCAbstractRegionCommand(parent)
         , m_height(0.0)
         , m_hidden(false)
@@ -34,34 +34,34 @@ RowStyleCommand::RowStyleCommand(QUndoCommand *parent)
 {
 }
 
-RowStyleCommand::~RowStyleCommand()
+KCRowStyleCommand::~KCRowStyleCommand()
 {
     qDeleteAll(m_rowFormats);
 }
 
-void RowStyleCommand::setHeight(double height)
+void KCRowStyleCommand::setHeight(double height)
 {
     m_height = height;
 }
 
-void RowStyleCommand::setHidden(bool hidden)
+void KCRowStyleCommand::setHidden(bool hidden)
 {
     m_hidden = hidden;
 }
 
-void RowStyleCommand::setPageBreak(bool pageBreak)
+void KCRowStyleCommand::setPageBreak(bool pageBreak)
 {
     m_pageBreak = pageBreak;
 }
 
-void RowStyleCommand::setTemplate(const KCRowFormat &rowFormat)
+void KCRowStyleCommand::setTemplate(const KCRowFormat &rowFormat)
 {
     m_height = rowFormat.height();
     m_hidden = rowFormat.isHidden();
     m_pageBreak = rowFormat.hasPageBreak();
 }
 
-bool RowStyleCommand::mainProcessing()
+bool KCRowStyleCommand::mainProcessing()
 {
     double deltaHeight = 0.0;
     const KCRegion::ConstIterator end(constEnd());

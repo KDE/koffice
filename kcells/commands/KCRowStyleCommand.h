@@ -28,11 +28,11 @@ class KCRowFormat;
  * \ingroup Commands
  * \brief Sets a row style.
  */
-class RowStyleCommand : public KCAbstractRegionCommand
+class KCRowStyleCommand : public KCAbstractRegionCommand
 {
 public:
-    RowStyleCommand(QUndoCommand *parent = 0);
-    virtual ~RowStyleCommand();
+    KCRowStyleCommand(QUndoCommand *parent = 0);
+    virtual ~KCRowStyleCommand();
 
     void setHeight(double height);
     void setHidden(bool hidden);

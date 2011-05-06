@@ -29,7 +29,7 @@
 #include "commands/DataManipulators.h"
 #include "commands/KCDeleteCommand.h"
 #include "commands/RowColumnManipulators.h"
-#include "commands/RowStyleCommand.h"
+#include "commands/KCRowStyleCommand.h"
 #include "KCDependencyManager.h"
 #include "KCMap.h"
 #include "RowColumnFormat.h"
@@ -500,7 +500,7 @@ bool KCPasteCommand::processXmlData(Element *element, KoXmlDocument *data)
                     const int row = rowFormat.row();
                     const int rows = qMax(pasteArea.height(), number);
                     for (int roff = 0; row - yOffset + roff <= rows; roff += number) {
-                        RowStyleCommand *const command = new RowStyleCommand(this);
+                        KCRowStyleCommand *const command = new KCRowStyleCommand(this);
                         command->setSheet(m_sheet);
                         command->add(KCRegion(1, rowFormat.row(), 1, 1, m_sheet));
                         command->setTemplate(rowFormat);
