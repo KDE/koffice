@@ -18,32 +18,42 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KSPREAD_LINK_COMMAND
-#define KSPREAD_LINK_COMMAND
+// Local
+#include "KCLinkCommand.h"
 
-#include <QString>
-#include <QUndoCommand>
+#include "Damages.h"
+#include "KCLocalization.h"
+#include "KCMap.h"
+#include "KCSheet.h"
 
-#include <KCCell.h>
-
-/**
- * \ingroup Commands
- * \brief Adds/Removes a hyperlink.
- */
-class LinkCommand : public QUndoCommand
+KCLinkCommand::KCLinkCommand(const KCCell& c, const QString& text, const QString& link)
 {
-public:
-    LinkCommand(const KCCell& cell, const QString& text, const QString& link);
+    cell = c;
+    oldText = cell.userInput();
+    oldLink = cell.link();
+    newText = text;
+    newLink = link;
 
-    virtual void redo();
-    virtual void undo();
+    setText(newLink.isEmpty() ? i18n("Remove Link") : i18n("Set Link"));
+}
 
-protected:
-    KCCell cell;
-    QString oldText;
-    QString oldLink;
-    QString newText;
-    QString newLink;
-};
+void KCLinkCommand::redo()
+{
+    if (!cell) return;
 
-#endif // KSPREAD_LINK_COMMAND
+    if (!newText.isEmpty())
+        cell.parseUserInput(newText);
+    cell.setLink(newLink);
+
+    cell.sheet()->map()->addDamage(new KCCellDamage(cell, KCCellDamage::Appearance));
+}
+
+void KCLinkCommand::undo()
+{
+    if (!cell) return;
+
+    cell.parseUserInput(oldText);
+    cell.setLink(oldLink);
+
+    cell.sheet()->map()->addDamage(new KCCellDamage(cell, KCCellDamage::Appearance));
+}

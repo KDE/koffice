@@ -39,7 +39,7 @@ SET (commands_DIR_SRCS
     commands/DataManipulators.cpp
     commands/KCDeleteCommand.cpp
     commands/KCIndentationCommand.cpp
-    commands/LinkCommand.cpp
+    commands/KCLinkCommand.cpp
     commands/MergeCommand.cpp
     commands/NamedAreaCommand.cpp
     commands/PageBreakCommand.cpp

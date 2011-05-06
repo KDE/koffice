@@ -63,7 +63,7 @@
 #include "commands/DataManipulators.h"
 #include "commands/KCDeleteCommand.h"
 #include "commands/KCIndentationCommand.h"
-#include "commands/LinkCommand.h"
+#include "commands/KCLinkCommand.h"
 #include "commands/MergeCommand.h"
 #include "commands/PageBreakCommand.h"
 #include "commands/PasteCommand.h"
@@ -2438,7 +2438,7 @@ void CellToolBase::insertHyperlink()
     if (dialog->exec() == KDialog::Accepted) {
         cell = KCCell(selection()->activeSheet(), marker);
 
-        LinkCommand* command = new LinkCommand(cell, dialog->text(), dialog->link());
+        KCLinkCommand* command = new KCLinkCommand(cell, dialog->text(), dialog->link());
         canvas()->addCommand(command);
 
         //refresh editWidget
@@ -2456,7 +2456,7 @@ void CellToolBase::clearHyperlink()
     if (cell.link().isEmpty())
         return;
 
-    LinkCommand* command = new LinkCommand(cell, QString(), QString());
+    KCLinkCommand* command = new KCLinkCommand(cell, QString(), QString());
     canvas()->addCommand(command);
 
     selection()->emitModified();
