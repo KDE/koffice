@@ -52,7 +52,7 @@
 #include "KCSheet.h"
 #include "Util.h"
 
-#include "commands/NamedAreaCommand.h"
+#include "commands/KCNamedAreaCommand.h"
 
 NamedAreaDialog::NamedAreaDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
@@ -190,7 +190,7 @@ void NamedAreaDialog::slotRemove()
 
     QListWidgetItem* item = m_list->currentItem();
 
-    NamedAreaCommand* command = new NamedAreaCommand();
+    KCNamedAreaCommand* command = new KCNamedAreaCommand();
     command->setAreaName(item->text());
     command->setReverse(true);
     command->setSheet(m_selection->activeSheet());
@@ -299,7 +299,7 @@ void EditNamedAreaDialog::slotOk()
     if (!m_initialAreaName.isEmpty() && m_initialAreaName != m_areaNameEdit->text()) {
         macroCommand = new QUndoCommand(i18n("Replace Named Area"));
         // remove the old named area
-        NamedAreaCommand* command = new NamedAreaCommand(macroCommand);
+        KCNamedAreaCommand* command = new KCNamedAreaCommand(macroCommand);
         command->setAreaName(m_initialAreaName);
         command->setReverse(true);
         command->setSheet(sheet);
@@ -307,7 +307,7 @@ void EditNamedAreaDialog::slotOk()
     }
 
     // insert the new named area
-    NamedAreaCommand* command = new NamedAreaCommand(macroCommand);
+    KCNamedAreaCommand* command = new KCNamedAreaCommand(macroCommand);
     command->setAreaName(m_areaNameEdit->text());
     command->setSheet(sheet);
     command->add(region);

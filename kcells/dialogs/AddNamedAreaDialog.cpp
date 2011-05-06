@@ -36,7 +36,7 @@
 #include "ui/Selection.h"
 #include "KCSheet.h"
 
-#include "commands/NamedAreaCommand.h"
+#include "commands/KCNamedAreaCommand.h"
 
 AddNamedAreaDialog::AddNamedAreaDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
@@ -82,7 +82,7 @@ void AddNamedAreaDialog::slotOk()
     if (m_selection->activeSheet()->map()->namedAreaManager()->namedArea(name) == region)
         return; // nothing to do
 
-    NamedAreaCommand* command = 0;
+    KCNamedAreaCommand* command = 0;
     if (m_selection->activeSheet()->map()->namedAreaManager()->contains(name)) {
         const QString question = i18n("The named area '%1' already exists.\n"
                                       "Do you want to replace it?", name);
@@ -91,10 +91,10 @@ void AddNamedAreaDialog::slotOk()
         if (result == KMessageBox::Cancel)
             return;
 
-        command = new NamedAreaCommand();
+        command = new KCNamedAreaCommand();
         command->setText(i18n("Replace Named Area"));
     } else
-        command = new NamedAreaCommand();
+        command = new KCNamedAreaCommand();
     command->setSheet(m_selection->activeSheet());
     command->setAreaName(name);
     command->add(region);

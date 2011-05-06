@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "NamedAreaCommand.h"
+#include "KCNamedAreaCommand.h"
 
 #include "klocale.h"
 
@@ -28,22 +28,22 @@
 #include "KCNamedAreaManager.h"
 #include "KCSheet.h"
 
-NamedAreaCommand::NamedAreaCommand(QUndoCommand* parent)
+KCNamedAreaCommand::KCNamedAreaCommand(QUndoCommand* parent)
         : KCAbstractRegionCommand(parent)
 {
     setText(i18n("Add Named Area"));
 }
 
-NamedAreaCommand::~NamedAreaCommand()
+KCNamedAreaCommand::~KCNamedAreaCommand()
 {
 }
 
-void NamedAreaCommand::setAreaName(const QString& name)
+void KCNamedAreaCommand::setAreaName(const QString& name)
 {
     m_areaName = name;
 }
 
-void NamedAreaCommand::setReverse(bool reverse)
+void KCNamedAreaCommand::setReverse(bool reverse)
 {
     KCAbstractRegionCommand::setReverse(reverse);
     if (!m_reverse)
@@ -52,7 +52,7 @@ void NamedAreaCommand::setReverse(bool reverse)
         setText(i18n("Remove Named Area"));
 }
 
-bool NamedAreaCommand::preProcessing()
+bool KCNamedAreaCommand::preProcessing()
 {
     if (!m_firstrun)
         return true;
@@ -69,7 +69,7 @@ bool NamedAreaCommand::preProcessing()
     return isContiguous();
 }
 
-bool NamedAreaCommand::mainProcessing()
+bool KCNamedAreaCommand::mainProcessing()
 {
     kDebug() ;
     if (!m_reverse) {
@@ -84,7 +84,7 @@ bool NamedAreaCommand::mainProcessing()
     return true;
 }
 
-bool NamedAreaCommand::postProcessing()
+bool KCNamedAreaCommand::postProcessing()
 {
     // update formulas containing either the new or the old name
     KCMap* const map = m_sheet->map();

@@ -28,18 +28,18 @@
  * \ingroup Commands
  * \brief Attaches a name to a cell range.
  */
-class NamedAreaCommand : public KCAbstractRegionCommand
+class KCNamedAreaCommand : public KCAbstractRegionCommand
 {
 public:
     /**
      * Constructor.
      */
-    NamedAreaCommand(QUndoCommand* parent = 0);
+    KCNamedAreaCommand(QUndoCommand* parent = 0);
 
     /**
      * Destructor.
      */
-    virtual ~NamedAreaCommand();
+    virtual ~KCNamedAreaCommand();
 
     void setAreaName(const QString& name);
 

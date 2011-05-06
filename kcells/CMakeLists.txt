@@ -41,7 +41,7 @@ SET (commands_DIR_SRCS
     commands/KCIndentationCommand.cpp
     commands/KCLinkCommand.cpp
     commands/KCMergeCommand.cpp
-    commands/NamedAreaCommand.cpp
+    commands/KCNamedAreaCommand.cpp
     commands/PageBreakCommand.cpp
     commands/PasteCommand.cpp
     commands/PrecisionCommand.cpp

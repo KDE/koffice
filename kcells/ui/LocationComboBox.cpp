@@ -27,7 +27,7 @@
 #include "Selection.h"
 #include "KCSheet.h"
 
-#include "commands/NamedAreaCommand.h"
+#include "commands/KCNamedAreaCommand.h"
 
 // KOffice
 
@@ -165,7 +165,7 @@ bool LocationComboBox::activateItem()
         }
     }
     if (validName) {
-        NamedAreaCommand* command = new NamedAreaCommand();
+        KCNamedAreaCommand* command = new KCNamedAreaCommand();
         command->setSheet(selection->activeSheet());
         command->setAreaName(text);
         command->add(KCRegion(selection->lastRange(), selection->activeSheet()));
