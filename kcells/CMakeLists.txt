@@ -51,7 +51,7 @@ SET (commands_DIR_SRCS
     commands/KCSortManipulator.cpp
     commands/KCSpellCheckCommand.cpp
     commands/KCStyleCommand.cpp
-    commands/ValidityCommand.cpp
+    commands/KCValidityCommand.cpp
     )
 
 SET (database_DIR_SRCS

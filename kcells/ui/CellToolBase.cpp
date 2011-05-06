@@ -72,7 +72,7 @@
 #include "commands/KCSortManipulator.h"
 #include "commands/KCSpellCheckCommand.h"
 #include "commands/KCStyleCommand.h"
-#include "commands/ValidityCommand.h"
+#include "commands/KCValidityCommand.h"
 
 // dialogs
 #include "dialogs/AddNamedAreaDialog.h"
@@ -2475,7 +2475,7 @@ void CellToolBase::clearValidity()
     if (selection()->activeSheet()->areaIsEmpty(*selection(), KCSheet::KCValidity))
         return;
 
-    ValidityCommand* command = new ValidityCommand();
+    KCValidityCommand* command = new KCValidityCommand();
     command->setSheet(selection()->activeSheet());
     command->setValidity(KCValidity()); // empty object removes validity
     command->add(*selection());

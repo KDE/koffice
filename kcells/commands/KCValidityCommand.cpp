@@ -18,7 +18,7 @@
 */
 
 // Local
-#include "ValidityCommand.h"
+#include "KCValidityCommand.h"
 
 
 #include <klocale.h>
@@ -27,12 +27,12 @@
 #include "KCSheet.h"
 #include "KCValidityStorage.h"
 
-ValidityCommand::ValidityCommand()
+KCValidityCommand::KCValidityCommand()
         : KCAbstractRegionCommand()
 {
 }
 
-bool ValidityCommand::process(Element* element)
+bool KCValidityCommand::process(Element* element)
 {
     if (!m_reverse) {
         // create undo
@@ -43,7 +43,7 @@ bool ValidityCommand::process(Element* element)
     return true;
 }
 
-bool ValidityCommand::mainProcessing()
+bool KCValidityCommand::mainProcessing()
 {
     if (m_reverse) {
         m_sheet->cellStorage()->setValidity(*this, KCValidity());
@@ -53,7 +53,7 @@ bool ValidityCommand::mainProcessing()
     return KCAbstractRegionCommand::mainProcessing();
 }
 
-void ValidityCommand::setValidity(KCValidity validity)
+void KCValidityCommand::setValidity(KCValidity validity)
 {
     m_validity = validity;
     if (m_validity.isEmpty())

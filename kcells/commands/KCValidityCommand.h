@@ -26,14 +26,14 @@
 
 
 /**
- * \class ValidityCommand
+ * \class KCValidityCommand
  * \ingroup Commands
  * \brief Adds/Removes validity checks to/of a cell region.
  */
-class ValidityCommand : public KCAbstractRegionCommand
+class KCValidityCommand : public KCAbstractRegionCommand
 {
 public:
-    ValidityCommand();
+    KCValidityCommand();
     void setValidity(KCValidity validity);
 
 protected:

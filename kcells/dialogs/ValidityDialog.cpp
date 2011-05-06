@@ -46,7 +46,7 @@
 #include "KCValueParser.h"
 
 // commands
-#include "commands/ValidityCommand.h"
+#include "commands/KCValidityCommand.h"
 
 Q_DECLARE_METATYPE(KCConditional::Type)
 Q_DECLARE_METATYPE(KCValidity::Action)
@@ -609,7 +609,7 @@ void ValidityDialog::OkPressed()
     validity.setMessageInfo(messageHelp->toPlainText());
     validity.setTitleInfo(titleHelp->text());
 
-    ValidityCommand* manipulator = new ValidityCommand();
+    KCValidityCommand* manipulator = new KCValidityCommand();
     manipulator->setSheet(m_selection->activeSheet());
     manipulator->setValidity(validity);
     manipulator->add(*m_selection);
