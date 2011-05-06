@@ -34,7 +34,7 @@
 #include <kmessagebox.h>
 #include <KTextEdit>
 
-#include "commands/AutoFillCommand.h"
+#include "commands/KCAutoFillCommand.h"
 #include "KCLocalization.h"
 
 class ListDialog::Private
@@ -298,11 +298,11 @@ void ListDialog::slotOk()
             }
         }
         d->config->group("Parameters").writeEntry("Other list", result);
-        //todo refresh AutoFillCommand::other
+        //todo refresh KCAutoFillCommand::other
         // I don't know how to do for the moment
-        if (AutoFillCommand::other != 0) {
-            delete(AutoFillCommand::other);
-            AutoFillCommand::other = 0;
+        if (KCAutoFillCommand::other != 0) {
+            delete(KCAutoFillCommand::other);
+            KCAutoFillCommand::other = 0;
         }
     }
     accept();

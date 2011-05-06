@@ -41,18 +41,18 @@ class KCCell;
  * \ingroup Commands
  * \brief Auto-filling of a cell range.
  */
-class AutoFillCommand : public AbstractDataManipulator
+class KCAutoFillCommand : public AbstractDataManipulator
 {
 public:
     /**
      * Constructor.
      */
-    AutoFillCommand();
+    KCAutoFillCommand();
 
     /**
      * Destructor.
      */
-    virtual ~AutoFillCommand();
+    virtual ~KCAutoFillCommand();
 
     void setSourceRange(const QRect& range);
     void setTargetRange(const QRect& range);

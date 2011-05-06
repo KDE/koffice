@@ -28,7 +28,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "AutoFillCommand.h"
+#include "KCAutoFillCommand.h"
 
 #include "KCLocalization.h"
 #include "KCMap.h"
@@ -45,11 +45,11 @@
 
 #include <math.h>
 
-QStringList *AutoFillCommand::month = 0;
-QStringList *AutoFillCommand::shortMonth = 0;
-QStringList *AutoFillCommand::day = 0;
-QStringList *AutoFillCommand::shortDay = 0;
-QStringList *AutoFillCommand::other = 0;
+QStringList *KCAutoFillCommand::month = 0;
+QStringList *KCAutoFillCommand::shortMonth = 0;
+QStringList *KCAutoFillCommand::day = 0;
+QStringList *KCAutoFillCommand::shortDay = 0;
+QStringList *KCAutoFillCommand::other = 0;
 
 /**********************************************************************************
  *
@@ -114,93 +114,93 @@ AutoFillSequenceItem::AutoFillSequenceItem(const KCCell& cell)
         m_value = cell.value();
         m_type = VALUE;
 
-        if (AutoFillCommand::month == 0) {
-            AutoFillCommand::month = new QStringList();
-            AutoFillCommand::month->append(i18n("January"));
-            AutoFillCommand::month->append(i18n("February"));
-            AutoFillCommand::month->append(i18n("March"));
-            AutoFillCommand::month->append(i18n("April"));
-            AutoFillCommand::month->append(i18n("May"));
-            AutoFillCommand::month->append(i18n("June"));
-            AutoFillCommand::month->append(i18n("July"));
-            AutoFillCommand::month->append(i18n("August"));
-            AutoFillCommand::month->append(i18n("September"));
-            AutoFillCommand::month->append(i18n("October"));
-            AutoFillCommand::month->append(i18n("November"));
-            AutoFillCommand::month->append(i18n("December"));
+        if (KCAutoFillCommand::month == 0) {
+            KCAutoFillCommand::month = new QStringList();
+            KCAutoFillCommand::month->append(i18n("January"));
+            KCAutoFillCommand::month->append(i18n("February"));
+            KCAutoFillCommand::month->append(i18n("March"));
+            KCAutoFillCommand::month->append(i18n("April"));
+            KCAutoFillCommand::month->append(i18n("May"));
+            KCAutoFillCommand::month->append(i18n("June"));
+            KCAutoFillCommand::month->append(i18n("July"));
+            KCAutoFillCommand::month->append(i18n("August"));
+            KCAutoFillCommand::month->append(i18n("September"));
+            KCAutoFillCommand::month->append(i18n("October"));
+            KCAutoFillCommand::month->append(i18n("November"));
+            KCAutoFillCommand::month->append(i18n("December"));
         }
 
-        if (AutoFillCommand::shortMonth == 0) {
-            AutoFillCommand::shortMonth = new QStringList();
-            AutoFillCommand::shortMonth->append(i18n("Jan"));
-            AutoFillCommand::shortMonth->append(i18n("Feb"));
-            AutoFillCommand::shortMonth->append(i18n("Mar"));
-            AutoFillCommand::shortMonth->append(i18n("Apr"));
-            AutoFillCommand::shortMonth->append(i18nc("May short", "May"));
-            AutoFillCommand::shortMonth->append(i18n("Jun"));
-            AutoFillCommand::shortMonth->append(i18n("Jul"));
-            AutoFillCommand::shortMonth->append(i18n("Aug"));
-            AutoFillCommand::shortMonth->append(i18n("Sep"));
-            AutoFillCommand::shortMonth->append(i18n("Oct"));
-            AutoFillCommand::shortMonth->append(i18n("Nov"));
-            AutoFillCommand::shortMonth->append(i18n("Dec"));
+        if (KCAutoFillCommand::shortMonth == 0) {
+            KCAutoFillCommand::shortMonth = new QStringList();
+            KCAutoFillCommand::shortMonth->append(i18n("Jan"));
+            KCAutoFillCommand::shortMonth->append(i18n("Feb"));
+            KCAutoFillCommand::shortMonth->append(i18n("Mar"));
+            KCAutoFillCommand::shortMonth->append(i18n("Apr"));
+            KCAutoFillCommand::shortMonth->append(i18nc("May short", "May"));
+            KCAutoFillCommand::shortMonth->append(i18n("Jun"));
+            KCAutoFillCommand::shortMonth->append(i18n("Jul"));
+            KCAutoFillCommand::shortMonth->append(i18n("Aug"));
+            KCAutoFillCommand::shortMonth->append(i18n("Sep"));
+            KCAutoFillCommand::shortMonth->append(i18n("Oct"));
+            KCAutoFillCommand::shortMonth->append(i18n("Nov"));
+            KCAutoFillCommand::shortMonth->append(i18n("Dec"));
         }
 
-        if (AutoFillCommand::day == 0) {
-            AutoFillCommand::day = new QStringList();
-            AutoFillCommand::day->append(i18n("Monday"));
-            AutoFillCommand::day->append(i18n("Tuesday"));
-            AutoFillCommand::day->append(i18n("Wednesday"));
-            AutoFillCommand::day->append(i18n("Thursday"));
-            AutoFillCommand::day->append(i18n("Friday"));
-            AutoFillCommand::day->append(i18n("Saturday"));
-            AutoFillCommand::day->append(i18n("Sunday"));
+        if (KCAutoFillCommand::day == 0) {
+            KCAutoFillCommand::day = new QStringList();
+            KCAutoFillCommand::day->append(i18n("Monday"));
+            KCAutoFillCommand::day->append(i18n("Tuesday"));
+            KCAutoFillCommand::day->append(i18n("Wednesday"));
+            KCAutoFillCommand::day->append(i18n("Thursday"));
+            KCAutoFillCommand::day->append(i18n("Friday"));
+            KCAutoFillCommand::day->append(i18n("Saturday"));
+            KCAutoFillCommand::day->append(i18n("Sunday"));
         }
 
-        if (AutoFillCommand::shortDay == 0) {
-            AutoFillCommand::shortDay = new QStringList();
-            AutoFillCommand::shortDay->append(i18n("Mon"));
-            AutoFillCommand::shortDay->append(i18n("Tue"));
-            AutoFillCommand::shortDay->append(i18n("Wed"));
-            AutoFillCommand::shortDay->append(i18n("Thu"));
-            AutoFillCommand::shortDay->append(i18n("Fri"));
-            AutoFillCommand::shortDay->append(i18n("Sat"));
-            AutoFillCommand::shortDay->append(i18n("Sun"));
+        if (KCAutoFillCommand::shortDay == 0) {
+            KCAutoFillCommand::shortDay = new QStringList();
+            KCAutoFillCommand::shortDay->append(i18n("Mon"));
+            KCAutoFillCommand::shortDay->append(i18n("Tue"));
+            KCAutoFillCommand::shortDay->append(i18n("Wed"));
+            KCAutoFillCommand::shortDay->append(i18n("Thu"));
+            KCAutoFillCommand::shortDay->append(i18n("Fri"));
+            KCAutoFillCommand::shortDay->append(i18n("Sat"));
+            KCAutoFillCommand::shortDay->append(i18n("Sun"));
         }
 
-        if (AutoFillCommand::other == 0) {
-            // AutoFillCommand::other = new QStringList();
+        if (KCAutoFillCommand::other == 0) {
+            // KCAutoFillCommand::other = new QStringList();
             KSharedConfigPtr config = KGlobal::activeComponent().config();
-            AutoFillCommand::other = new QStringList(config->group("Parameters").readEntry("Other list", QStringList()));
+            KCAutoFillCommand::other = new QStringList(config->group("Parameters").readEntry("Other list", QStringList()));
         }
 
-        if (AutoFillCommand::month->contains(m_value.asString())) {
+        if (KCAutoFillCommand::month->contains(m_value.asString())) {
             m_type = MONTH;
             return;
         }
 
-        if (AutoFillCommand::shortMonth->contains(m_value.asString())) {
+        if (KCAutoFillCommand::shortMonth->contains(m_value.asString())) {
             m_type = SHORTMONTH;
             return;
         }
 
-        if (AutoFillCommand::day->contains(m_value.asString())) {
+        if (KCAutoFillCommand::day->contains(m_value.asString())) {
             m_type = DAY;
             return;
         }
 
-        if (AutoFillCommand::shortDay->contains(m_value.asString())) {
+        if (KCAutoFillCommand::shortDay->contains(m_value.asString())) {
             m_type = SHORTDAY;
             return;
         }
 
-        if (AutoFillCommand::other->contains(m_value.asString())) {
+        if (KCAutoFillCommand::other->contains(m_value.asString())) {
             m_type = OTHER;
-            int index = AutoFillCommand::other->indexOf(m_value.asString());
-            int otherBegin = AutoFillCommand::other->lastIndexOf("\\", index); // backward
-            int otherEnd = AutoFillCommand::other->indexOf("\\", index); // forward
+            int index = KCAutoFillCommand::other->indexOf(m_value.asString());
+            int otherBegin = KCAutoFillCommand::other->lastIndexOf("\\", index); // backward
+            int otherEnd = KCAutoFillCommand::other->indexOf("\\", index); // forward
             m_otherBegin = (otherBegin != -1) ? otherBegin : 0;
-            m_otherEnd = (otherEnd != -1) ? otherEnd : AutoFillCommand::other->count();
+            m_otherEnd = (otherEnd != -1) ? otherEnd : KCAutoFillCommand::other->count();
             return;
         }
     }
@@ -255,29 +255,29 @@ KCValue AutoFillSequenceItem::delta(AutoFillSequenceItem *seq, bool *ok) const
         }
     }
     case MONTH: {
-        const int i = AutoFillCommand::month->indexOf(m_value.asString());
-        const int j = AutoFillCommand::month->indexOf(seq->value().asString());
+        const int i = KCAutoFillCommand::month->indexOf(m_value.asString());
+        const int j = KCAutoFillCommand::month->indexOf(seq->value().asString());
         return KCValue(j - i);
     }
     case SHORTMONTH: {
-        const int i = AutoFillCommand::shortMonth->indexOf(m_value.asString());
-        const int j = AutoFillCommand::shortMonth->indexOf(seq->value().asString());
+        const int i = KCAutoFillCommand::shortMonth->indexOf(m_value.asString());
+        const int j = KCAutoFillCommand::shortMonth->indexOf(seq->value().asString());
         return KCValue(j - i);
     }
     case DAY: {
-        const int i = AutoFillCommand::day->indexOf(m_value.asString());
-        const int j = AutoFillCommand::day->indexOf(seq->value().asString());
+        const int i = KCAutoFillCommand::day->indexOf(m_value.asString());
+        const int j = KCAutoFillCommand::day->indexOf(seq->value().asString());
         return KCValue(j - i);
     }
     case SHORTDAY: {
-        const int i = AutoFillCommand::shortDay->indexOf(m_value.asString());
-        const int j = AutoFillCommand::shortDay->indexOf(seq->value().asString());
+        const int i = KCAutoFillCommand::shortDay->indexOf(m_value.asString());
+        const int j = KCAutoFillCommand::shortDay->indexOf(seq->value().asString());
         return KCValue(j - i);
     }
     case OTHER: {
         *ok = (m_otherEnd != seq->otherEnd() || m_otherBegin != seq->otherBegin());
-        const int i = AutoFillCommand::other->indexOf(m_value.asString());
-        const int j = AutoFillCommand::other->indexOf(seq->value().asString());
+        const int i = KCAutoFillCommand::other->indexOf(m_value.asString());
+        const int j = KCAutoFillCommand::other->indexOf(seq->value().asString());
         int k = j;
         if (j < i)
             k += (m_otherEnd - m_otherBegin - 1);
@@ -317,42 +317,42 @@ KCValue AutoFillSequenceItem::nextValue(int _no, KCValue _delta) const
             return m_value;
     }
     case MONTH: {
-        int i = AutoFillCommand::month->indexOf(m_value.asString());
+        int i = KCAutoFillCommand::month->indexOf(m_value.asString());
         int j = i + _no * _delta.asInteger();
         while (j < 0)
-            j += AutoFillCommand::month->count();
-        int k = j % AutoFillCommand::month->count();
-        return KCValue(AutoFillCommand::month->at(k));
+            j += KCAutoFillCommand::month->count();
+        int k = j % KCAutoFillCommand::month->count();
+        return KCValue(KCAutoFillCommand::month->at(k));
     }
     case SHORTMONTH: {
-        int i = AutoFillCommand::shortMonth->indexOf(m_value.asString());
+        int i = KCAutoFillCommand::shortMonth->indexOf(m_value.asString());
         int j = i + _no * _delta.asInteger();
         while (j < 0)
-            j += AutoFillCommand::shortMonth->count();
-        int k = j % AutoFillCommand::shortMonth->count();
-        return KCValue(AutoFillCommand::shortMonth->at(k));
+            j += KCAutoFillCommand::shortMonth->count();
+        int k = j % KCAutoFillCommand::shortMonth->count();
+        return KCValue(KCAutoFillCommand::shortMonth->at(k));
     }
     case DAY: {
-        int i = AutoFillCommand::day->indexOf(m_value.asString());
+        int i = KCAutoFillCommand::day->indexOf(m_value.asString());
         int j = i + _no * _delta.asInteger();
         while (j < 0)
-            j += AutoFillCommand::day->count();
-        int k = j % AutoFillCommand::day->count();
-        return KCValue(AutoFillCommand::day->at(k));
+            j += KCAutoFillCommand::day->count();
+        int k = j % KCAutoFillCommand::day->count();
+        return KCValue(KCAutoFillCommand::day->at(k));
     }
     case SHORTDAY: {
-        int i = AutoFillCommand::shortDay->indexOf(m_value.asString());
+        int i = KCAutoFillCommand::shortDay->indexOf(m_value.asString());
         int j = i + _no * _delta.asInteger();
         while (j < 0)
-            j += AutoFillCommand::shortDay->count();
-        int k = j % AutoFillCommand::shortDay->count();
-        return KCValue(AutoFillCommand::shortDay->at(k));
+            j += KCAutoFillCommand::shortDay->count();
+        int k = j % KCAutoFillCommand::shortDay->count();
+        return KCValue(KCAutoFillCommand::shortDay->at(k));
     }
     case OTHER: {
-        int i = AutoFillCommand::other->indexOf(m_value.asString()) - (m_otherBegin + 1);
+        int i = KCAutoFillCommand::other->indexOf(m_value.asString()) - (m_otherBegin + 1);
         int j = i + _no * _delta.asInteger();
         int k = j % (m_otherEnd - m_otherBegin - 1);
-        return KCValue(AutoFillCommand::other->at((k + m_otherBegin + 1)));
+        return KCValue(KCAutoFillCommand::other->at((k + m_otherBegin + 1)));
     }
     default:
         break;
@@ -385,44 +385,44 @@ KCValue AutoFillSequenceItem::prevValue(int _no, KCValue _delta) const
             return m_value;
     }
     case MONTH: {
-        int i = AutoFillCommand::month->indexOf(m_value.asString());
+        int i = KCAutoFillCommand::month->indexOf(m_value.asString());
         int j = i - _no * _delta.asInteger();
         while (j < 0)
-            j += AutoFillCommand::month->count();
-        int k = j % AutoFillCommand::month->count();
-        return KCValue(AutoFillCommand::month->at(k));
+            j += KCAutoFillCommand::month->count();
+        int k = j % KCAutoFillCommand::month->count();
+        return KCValue(KCAutoFillCommand::month->at(k));
     }
     case SHORTMONTH: {
-        int i = AutoFillCommand::shortMonth->indexOf(m_value.asString());
+        int i = KCAutoFillCommand::shortMonth->indexOf(m_value.asString());
         int j = i - _no * _delta.asInteger();
         while (j < 0)
-            j += AutoFillCommand::shortMonth->count();
-        int k = j % AutoFillCommand::shortMonth->count();
-        return KCValue(AutoFillCommand::shortMonth->at(k));
+            j += KCAutoFillCommand::shortMonth->count();
+        int k = j % KCAutoFillCommand::shortMonth->count();
+        return KCValue(KCAutoFillCommand::shortMonth->at(k));
     }
     case DAY: {
-        int i = AutoFillCommand::day->indexOf(m_value.asString());
+        int i = KCAutoFillCommand::day->indexOf(m_value.asString());
         int j = i - _no * _delta.asInteger();
         while (j < 0)
-            j += AutoFillCommand::day->count();
-        int k = j % AutoFillCommand::day->count();
-        return KCValue(AutoFillCommand::day->at(k));
+            j += KCAutoFillCommand::day->count();
+        int k = j % KCAutoFillCommand::day->count();
+        return KCValue(KCAutoFillCommand::day->at(k));
     }
     case SHORTDAY: {
-        int i = AutoFillCommand::shortDay->indexOf(m_value.asString());
+        int i = KCAutoFillCommand::shortDay->indexOf(m_value.asString());
         int j = i - _no * _delta.asInteger();
         while (j < 0)
-            j += AutoFillCommand::shortDay->count();
-        int k = j % AutoFillCommand::shortDay->count();
-        return KCValue(AutoFillCommand::shortDay->at(k));
+            j += KCAutoFillCommand::shortDay->count();
+        int k = j % KCAutoFillCommand::shortDay->count();
+        return KCValue(KCAutoFillCommand::shortDay->at(k));
     }
     case OTHER: {
-        int i = AutoFillCommand::other->indexOf(m_value.asString()) - (m_otherBegin + 1);
+        int i = KCAutoFillCommand::other->indexOf(m_value.asString()) - (m_otherBegin + 1);
         int j = i - _no * _delta.asInteger();
         while (j < 0)
             j += (m_otherEnd - m_otherBegin - 1);
         int k = j % (m_otherEnd - m_otherBegin - 1);
-        return KCValue(AutoFillCommand::other->at((k + m_otherBegin + 1)));
+        return KCValue(KCAutoFillCommand::other->at((k + m_otherBegin + 1)));
     }
     default:
         break;
@@ -675,30 +675,30 @@ static void fillSequence(const QList<KCCell>& _srcList,
 
 /**********************************************************************************
  *
- * AutoFillCommand
+ * KCAutoFillCommand
  *
  **********************************************************************************/
 
-AutoFillCommand::AutoFillCommand()
+KCAutoFillCommand::KCAutoFillCommand()
 {
     setText(i18n("Autofill"));
 }
 
-AutoFillCommand::~AutoFillCommand()
+KCAutoFillCommand::~KCAutoFillCommand()
 {
 }
 
-void AutoFillCommand::setSourceRange(const QRect& range)
+void KCAutoFillCommand::setSourceRange(const QRect& range)
 {
     m_sourceRange = range;
 }
 
-void AutoFillCommand::setTargetRange(const QRect& range)
+void KCAutoFillCommand::setTargetRange(const QRect& range)
 {
     m_targetRange = range;
 }
 
-bool AutoFillCommand::mainProcessing()
+bool KCAutoFillCommand::mainProcessing()
 {
     if (m_sourceRange.contains(m_targetRange))
         return false;
@@ -785,7 +785,7 @@ bool AutoFillCommand::mainProcessing()
     return true;
 }
 
-void AutoFillCommand::fillSequence(const QList<KCCell>& _srcList,
+void KCAutoFillCommand::fillSequence(const QList<KCCell>& _srcList,
                                    const QList<KCCell>& _destList,
                                    const AutoFillSequence& _seqList,
                                    bool down)

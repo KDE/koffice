@@ -19,7 +19,7 @@
 
 #include "AutoFillStrategy.h"
 
-#include "commands/AutoFillCommand.h"
+#include "commands/KCAutoFillCommand.h"
 #include "Selection.h"
 
 class AutoFillStrategy::Private
@@ -49,7 +49,7 @@ QUndoCommand* AutoFillStrategy::createCommand(QUndoCommand *)
     if (d->autoFillSource == selection()->lastRange()) {
         return 0;
     }
-    AutoFillCommand* command = new AutoFillCommand();
+    KCAutoFillCommand* command = new KCAutoFillCommand();
     command->setSheet(selection()->activeSheet());
     command->setSourceRange(d->autoFillSource);
     command->setTargetRange(selection()->lastRange());

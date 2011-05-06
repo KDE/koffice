@@ -70,7 +70,7 @@
 #include "Util.h"
 #include "KCView.h"
 
-#include "commands/AutoFillCommand.h"
+#include "commands/KCAutoFillCommand.h"
 #include "commands/DefinePrintRangeCommand.h"
 
 #include "ui/CellView.h"
