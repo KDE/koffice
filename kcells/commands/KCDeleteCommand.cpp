@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "DeleteCommand.h"
+#include "KCDeleteCommand.h"
 
 #include "KCCellStorage.h"
 #include "KCRegion.h"
@@ -28,7 +28,7 @@
 #include <klocale.h>
 
 
-DeleteCommand::DeleteCommand(QUndoCommand *parent)
+KCDeleteCommand::KCDeleteCommand(QUndoCommand *parent)
         : KCAbstractDataManipulator(parent)
         , m_mode(Everything)
 {
@@ -36,18 +36,18 @@ DeleteCommand::DeleteCommand(QUndoCommand *parent)
     m_checkLock = true;
 }
 
-DeleteCommand::~DeleteCommand()
+KCDeleteCommand::~KCDeleteCommand()
 {
     qDeleteAll(m_columnFormats);
     qDeleteAll(m_rowFormats);
 }
 
-void DeleteCommand::setMode(Mode mode)
+void KCDeleteCommand::setMode(Mode mode)
 {
     m_mode = mode;
 }
 
-bool DeleteCommand::process(Element* element)
+bool KCDeleteCommand::process(Element* element)
 {
     Q_ASSERT(!m_reverse);
 
@@ -125,7 +125,7 @@ bool DeleteCommand::process(Element* element)
     return true;
 }
 
-bool DeleteCommand::mainProcessing()
+bool KCDeleteCommand::mainProcessing()
 {
     if (m_reverse) {
         foreach(KCColumnFormat* columnFormat, m_columnFormats) {

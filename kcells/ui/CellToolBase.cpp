@@ -61,7 +61,7 @@
 #include "commands/ConditionCommand.h"
 #include "commands/KCCopyCommand.h"
 #include "commands/DataManipulators.h"
-#include "commands/DeleteCommand.h"
+#include "commands/KCDeleteCommand.h"
 #include "commands/IndentationCommand.h"
 #include "commands/LinkCommand.h"
 #include "commands/MergeCommand.h"
@@ -2354,7 +2354,7 @@ void CellToolBase::deleteCells()
 
 void CellToolBase::clearAll()
 {
-    DeleteCommand* command = new DeleteCommand();
+    KCDeleteCommand* command = new KCDeleteCommand();
     command->setSheet(selection()->activeSheet());
     command->add(*selection());
     command->execute(canvas());
@@ -2873,7 +2873,7 @@ void CellToolBase::cut()
 
         QApplication::clipboard()->setMimeData(mimeData);
 
-        DeleteCommand* command = new DeleteCommand();
+        KCDeleteCommand* command = new KCDeleteCommand();
         command->setText(i18n("Cut"));
         command->setSheet(selection()->activeSheet());
         command->add(*selection());

@@ -31,18 +31,18 @@ class KCRowFormat;
  * \ingroup Commands
  * \brief Deletes cell contents and column/row styles.
  */
-class DeleteCommand : public KCAbstractDataManipulator
+class KCDeleteCommand : public KCAbstractDataManipulator
 {
 public:
     /**
      * Constructor.
      */
-    DeleteCommand(QUndoCommand *parent = 0);
+    KCDeleteCommand(QUndoCommand *parent = 0);
 
     /**
      * Destructor.
      */
-    virtual ~DeleteCommand();
+    virtual ~KCDeleteCommand();
 
     enum Mode {
         Everything,     ///< Delete also column and row formats.

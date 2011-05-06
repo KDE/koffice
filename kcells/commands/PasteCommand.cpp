@@ -27,7 +27,7 @@
 #include "KCCellStorage.h"
 #include "commands/KCColumnStyleCommand.h"
 #include "commands/DataManipulators.h"
-#include "commands/DeleteCommand.h"
+#include "commands/KCDeleteCommand.h"
 #include "commands/RowColumnManipulators.h"
 #include "commands/RowStyleCommand.h"
 #include "KCDependencyManager.h"
@@ -384,10 +384,10 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
         //      Fill in data.
         if ((!noColumns && !noRows) || (!noColumns && noRows)) {
             // Everything or only columns present.
-            DeleteCommand *const command = new DeleteCommand(this);
+            KCDeleteCommand *const command = new KCDeleteCommand(this);
             command->setSheet(m_sheet);
             command->add(KCRegion(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
-            command->setMode(DeleteCommand::OnlyCells);
+            command->setMode(KCDeleteCommand::OnlyCells);
         } else if (noColumns && !noRows) {
             // Rows present.
             InsertDeleteRowManipulator *const command = new InsertDeleteRowManipulator(this);
@@ -410,10 +410,10 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
         // Shifting a row to the right is the same as clearing the row.
         if ((!noColumns && !noRows) || (noColumns && !noRows)) {
             // Everything or only rows present.
-            DeleteCommand *const command = new DeleteCommand(this);
+            KCDeleteCommand *const command = new KCDeleteCommand(this);
             command->setSheet(m_sheet);
             command->add(KCRegion(pasteArea.x(), pasteArea.y(), pasteWidth, pasteHeight, sheet));
-            command->setMode(DeleteCommand::OnlyCells);
+            command->setMode(KCDeleteCommand::OnlyCells);
         } else if (!noColumns && noRows) {
             // Columns present.
             InsertDeleteColumnManipulator *const command = new InsertDeleteColumnManipulator(this);
@@ -444,13 +444,13 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
             const int number = e.attribute("count").toInt();
             if (m_insertMode == NoInsertion) {
                 // Clear the existing content; not the column style.
-                DeleteCommand *const command = new DeleteCommand(this);
+                KCDeleteCommand *const command = new KCDeleteCommand(this);
                 command->setSheet(m_sheet);
                 const int col = e.attribute("column").toInt();
                 const int cols = qMax(pasteArea.width(), number);
                 const KCRegion region(col + xOffset, 1, cols, KS_rowMax, m_sheet);
                 command->add(region);
-                command->setMode(DeleteCommand::OnlyCells);
+                command->setMode(KCDeleteCommand::OnlyCells);
             }
 
             // Set the column style.
@@ -479,13 +479,13 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
             const int number = e.attribute("count").toInt();
             if (m_insertMode == NoInsertion) {
                 // Clear the existing content; not the row style.
-                DeleteCommand *const command = new DeleteCommand(this);
+                KCDeleteCommand *const command = new KCDeleteCommand(this);
                 command->setSheet(m_sheet);
                 const int row = e.attribute("row").toInt();
                 const int rows = qMax(pasteArea.height(), number);
                 const KCRegion region(1, row + yOffset, KS_colMax, rows, m_sheet);
                 command->add(region);
-                command->setMode(DeleteCommand::OnlyCells);
+                command->setMode(KCDeleteCommand::OnlyCells);
             }
 
             // Set the row style.

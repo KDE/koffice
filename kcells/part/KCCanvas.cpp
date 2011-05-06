@@ -424,7 +424,7 @@ void KCCanvas::dropEvent(QDropEvent *event)
     command->setMimeData(mimeData);
 /* XXX TODO
     if (event->source() == this) {
-        DeleteCommand *const deleteCommand = new DeleteCommand(command);
+        KCDeleteCommand *const deleteCommand = new KCDeleteCommand(command);
         deleteCommand->setSheet(sheet);
         deleteCommand->add(*selection()); // selection is still, where the drag started
         deleteCommand->setRegisterUndo(false);
