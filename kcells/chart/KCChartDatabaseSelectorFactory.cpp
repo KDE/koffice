@@ -18,25 +18,25 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "ChartDatabaseSelectorFactory.h"
+#include "KCChartDatabaseSelectorFactory.h"
 
 #include <klocale.h>
 
 #include "ChartDatabaseSelector.h"
 
-KoShapeConfigWidgetBase* ChartDatabaseSelectorFactory::createConfigWidget(KoShape* shape)
+KoShapeConfigWidgetBase* KCChartDatabaseSelectorFactory::createConfigWidget(KoShape* shape)
 {
     ChartDatabaseSelector* widget = new ChartDatabaseSelector(m_map);
     widget->open(shape);
     return widget;
 }
 
-QString ChartDatabaseSelectorFactory::name() const
+QString KCChartDatabaseSelectorFactory::name() const
 {
     return i18n("Database");
 }
 
-bool ChartDatabaseSelectorFactory::showForShapeId(const QString &id) const
+bool KCChartDatabaseSelectorFactory::showForShapeId(const QString &id) const
 {
     return id == ChartShapeId;
 }

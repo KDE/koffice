@@ -20,7 +20,7 @@
 
 #include "ChartDialog.h"
 
-#include "ChartDatabaseSelectorFactory.h"
+#include "KCChartDatabaseSelectorFactory.h"
 
 ChartDialog::ChartDialog(const QList<KChart::ChartShape*> &charts, QWidget *parent)
         : KPageDialog(parent)
@@ -46,7 +46,7 @@ void ChartDialog::cancelClicked()
 QList<KoShapeConfigFactoryBase*> ChartDialog::panels(KCMap *map)
 {
     QList<KoShapeConfigFactoryBase*> answer;
-    answer.append(new ChartDatabaseSelectorFactory(map));
+    answer.append(new KCChartDatabaseSelectorFactory(map));
     return answer;
 }
 

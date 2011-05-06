@@ -15,7 +15,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/interfaces
 
 ########### next target ###############
 SET (chart_DIR_SRCS
-    chart/ChartDatabaseSelectorFactory.cpp
+    chart/KCChartDatabaseSelectorFactory.cpp
     chart/ChartDatabaseSelector.cpp
     chart/ChartDialog.cpp
     )

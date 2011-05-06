@@ -32,12 +32,12 @@ class KoShape;
 class KCMap;
 
 /// factory to create a ChartDatabaseSelector widget
-class ChartDatabaseSelectorFactory : public QObject, public KoShapeConfigFactoryBase
+class KCChartDatabaseSelectorFactory : public QObject, public KoShapeConfigFactoryBase
 {
 public:
     /// constructor
-    ChartDatabaseSelectorFactory(KCMap *map) : QObject(map), m_map(map) {}
-    ~ChartDatabaseSelectorFactory() {}
+    KCChartDatabaseSelectorFactory(KCMap *map) : QObject(map), m_map(map) {}
+    ~KCChartDatabaseSelectorFactory() {}
 
     /// reimplemented method from superclass
     KoShapeConfigWidgetBase* createConfigWidget(KoShape* shape);
