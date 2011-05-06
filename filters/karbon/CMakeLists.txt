@@ -43,16 +43,3 @@ add_subdirectory( eps )
 if (POPPLER_FOUND)
     add_subdirectory( pdf )
 endif (POPPLER_FOUND)
-
-# enable again when these filters are ported
-message(STATUS "Karbon: still need to port: applixgraphics, ai, kontour, xcf, xaml, xfig, msod and oodraw filters")
-
-if(FALSE)
-add_subdirectory( ai )
-add_subdirectory( kontour )
-add_subdirectory( xcf )
-add_subdirectory( msod )
-add_subdirectory( oodraw )
-endif(FALSE)
-
-
