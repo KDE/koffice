@@ -39,19 +39,19 @@
  * Used for recording undo data in KCCellStorage.
  */
 template<typename T>
-class RectStorageUndoCommand : public QUndoCommand
+class KCRectStorageUndoCommand : public QUndoCommand
 {
 public:
     typedef QPair<QRectF, T> Pair;
 
-    RectStorageUndoCommand(QAbstractItemModel *const model, int role, QUndoCommand *parent = 0);
+    KCRectStorageUndoCommand(QAbstractItemModel *const model, int role, QUndoCommand *parent = 0);
 
     virtual void undo();
 
     void add(const QList<Pair> &pairs);
 
-    RectStorageUndoCommand& operator<<(const Pair &pair);
-    RectStorageUndoCommand& operator<<(const QList<Pair> &pairs);
+    KCRectStorageUndoCommand& operator<<(const Pair &pair);
+    KCRectStorageUndoCommand& operator<<(const QList<Pair> &pairs);
 
 private:
     QAbstractItemModel *const m_model;
@@ -60,7 +60,7 @@ private:
 };
 
 template<typename T>
-RectStorageUndoCommand<T>::RectStorageUndoCommand(QAbstractItemModel *const model,
+KCRectStorageUndoCommand<T>::KCRectStorageUndoCommand(QAbstractItemModel *const model,
         int role, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_model(model)
@@ -69,7 +69,7 @@ RectStorageUndoCommand<T>::RectStorageUndoCommand(QAbstractItemModel *const mode
 }
 
 template<typename T>
-void RectStorageUndoCommand<T>::undo()
+void KCRectStorageUndoCommand<T>::undo()
 {
     KCSheetModel *const model = static_cast<KCSheetModel*>(m_model);
     for (int i = 0; i < m_undoData.count(); ++i) {
@@ -81,20 +81,20 @@ void RectStorageUndoCommand<T>::undo()
 }
 
 template<typename T>
-void RectStorageUndoCommand<T>::add(const QList<Pair>& pairs)
+void KCRectStorageUndoCommand<T>::add(const QList<Pair>& pairs)
 {
     m_undoData << pairs;
 }
 
 template<typename T>
-RectStorageUndoCommand<T>& RectStorageUndoCommand<T>::operator<<(const Pair& pair)
+KCRectStorageUndoCommand<T>& KCRectStorageUndoCommand<T>::operator<<(const Pair& pair)
 {
     m_undoData << pair;
     return *this;
 }
 
 template<typename T>
-RectStorageUndoCommand<T>& RectStorageUndoCommand<T>::operator<<(const QList<Pair>& pairs)
+KCRectStorageUndoCommand<T>& KCRectStorageUndoCommand<T>::operator<<(const QList<Pair>& pairs)
 {
     m_undoData << pairs;
     return *this;

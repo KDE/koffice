@@ -46,7 +46,7 @@
 
 // commands
 #include "commands/KCPointStorageUndoCommand.h"
-#include "commands/RectStorageUndoCommand.h"
+#include "commands/KCRectStorageUndoCommand.h"
 #include "commands/StyleStorageUndoCommand.h"
 
 // database
@@ -140,23 +140,23 @@ public:
 void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
 {
     if (!undoData->bindings.isEmpty()) {
-        RectStorageUndoCommand<KCBinding> *const command
-        = new RectStorageUndoCommand<KCBinding>(sheet->model(), SourceRangeRole, parent);
+        KCRectStorageUndoCommand<KCBinding> *const command
+        = new KCRectStorageUndoCommand<KCBinding>(sheet->model(), SourceRangeRole, parent);
         command->add(undoData->bindings);
     }
     if (!undoData->comments.isEmpty()) {
-        RectStorageUndoCommand<QString> *const command
-        = new RectStorageUndoCommand<QString>(sheet->model(), CommentRole, parent);
+        KCRectStorageUndoCommand<QString> *const command
+        = new KCRectStorageUndoCommand<QString>(sheet->model(), CommentRole, parent);
         command->add(undoData->comments);
     }
     if (!undoData->conditions.isEmpty()) {
-        RectStorageUndoCommand<KCConditions> *const command
-        = new RectStorageUndoCommand<KCConditions>(sheet->model(), ConditionRole, parent);
+        KCRectStorageUndoCommand<KCConditions> *const command
+        = new KCRectStorageUndoCommand<KCConditions>(sheet->model(), ConditionRole, parent);
         command->add(undoData->conditions);
     }
     if (!undoData->databases.isEmpty()) {
-        RectStorageUndoCommand<Database> *const command
-        = new RectStorageUndoCommand<Database>(sheet->model(), TargetRangeRole, parent);
+        KCRectStorageUndoCommand<Database> *const command
+        = new KCRectStorageUndoCommand<Database>(sheet->model(), TargetRangeRole, parent);
         command->add(undoData->databases);
     }
     if (!undoData->formulas.isEmpty()) {
@@ -165,8 +165,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->formulas);
     }
     if (!undoData->fusions.isEmpty()) {
-        RectStorageUndoCommand<bool> *const command
-        = new RectStorageUndoCommand<bool>(sheet->model(), FusionedRangeRole, parent);
+        KCRectStorageUndoCommand<bool> *const command
+        = new KCRectStorageUndoCommand<bool>(sheet->model(), FusionedRangeRole, parent);
         command->add(undoData->fusions);
     }
     if (!undoData->links.isEmpty()) {
@@ -175,13 +175,13 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->links);
     }
     if (!undoData->matrices.isEmpty()) {
-        RectStorageUndoCommand<bool> *const command
-        = new RectStorageUndoCommand<bool>(sheet->model(), LockedRangeRole, parent);
+        KCRectStorageUndoCommand<bool> *const command
+        = new KCRectStorageUndoCommand<bool>(sheet->model(), LockedRangeRole, parent);
         command->add(undoData->matrices);
     }
     if (!undoData->namedAreas.isEmpty()) {
-        RectStorageUndoCommand<QString> *const command
-        = new RectStorageUndoCommand<QString>(sheet->model(), NamedAreaRole, parent);
+        KCRectStorageUndoCommand<QString> *const command
+        = new KCRectStorageUndoCommand<QString>(sheet->model(), NamedAreaRole, parent);
         command->add(undoData->namedAreas);
     }
     if (!undoData->richTexts.isEmpty()) {
@@ -200,8 +200,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->userInputs);
     }
     if (!undoData->validities.isEmpty()) {
-        RectStorageUndoCommand<KCValidity> *const command
-        = new RectStorageUndoCommand<KCValidity>(sheet->model(), ValidityRole, parent);
+        KCRectStorageUndoCommand<KCValidity> *const command
+        = new KCRectStorageUndoCommand<KCValidity>(sheet->model(), ValidityRole, parent);
         command->add(undoData->validities);
     }
     if (!undoData->values.isEmpty()) {
