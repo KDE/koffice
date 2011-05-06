@@ -27,7 +27,7 @@
 
 #include <klocale.h>
 
-#include "commands/PasteCommand.h"
+#include "commands/KCPasteCommand.h"
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
@@ -88,7 +88,7 @@ void SpecialPasteDialog::slotOk()
     if (divisionButton->isChecked())
         op = Paste::Div;
 
-    PasteCommand *const command = new PasteCommand();
+    KCPasteCommand *const command = new KCPasteCommand();
     command->setSheet(m_selection->activeSheet());
     command->add(*m_selection);
     command->setMimeData(QApplication::clipboard()->mimeData());

@@ -23,7 +23,7 @@
 #include <QClipboard>
 
 #include "Global.h"
-#include "commands/PasteCommand.h"
+#include "commands/KCPasteCommand.h"
 #include "Selection.h"
 #include "KCSheet.h"
 
@@ -46,7 +46,7 @@ PasteStrategy::~PasteStrategy()
 
 QUndoCommand* PasteStrategy::createCommand(QUndoCommand *)
 {
-    PasteCommand *const command = new PasteCommand();
+    KCPasteCommand *const command = new KCPasteCommand();
     command->setSheet(selection()->activeSheet());
     command->add(*selection());
     command->setMimeData(QApplication::clipboard()->mimeData(QClipboard::Selection));

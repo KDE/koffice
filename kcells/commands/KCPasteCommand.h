@@ -33,11 +33,11 @@ class KoXmlDocument;
  * \ingroup Commands
  * \brief Command to paste cell data.
  */
-class PasteCommand : public KCAbstractRegionCommand
+class KCPasteCommand : public KCAbstractRegionCommand
 {
 public:
-    PasteCommand(QUndoCommand *parent = 0);
-    virtual ~PasteCommand();
+    KCPasteCommand(QUndoCommand *parent = 0);
+    virtual ~KCPasteCommand();
 
     /**
      * Modes used for paste with insertion.

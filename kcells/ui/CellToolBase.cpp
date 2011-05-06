@@ -66,7 +66,7 @@
 #include "commands/KCLinkCommand.h"
 #include "commands/KCMergeCommand.h"
 #include "commands/KCPageBreakCommand.h"
-#include "commands/PasteCommand.h"
+#include "commands/KCPasteCommand.h"
 #include "commands/PrecisionCommand.h"
 #include "commands/RowColumnManipulators.h"
 #include "commands/SortManipulator.h"
@@ -2976,7 +2976,7 @@ bool CellToolBase::paste()
 
     if (!editor()) {
         //kDebug(36005) <<"Pasting. Rect=" << selection()->lastRange() <<" bytes";
-        PasteCommand *const command = new PasteCommand();
+        KCPasteCommand *const command = new KCPasteCommand();
         command->setSheet(selection()->activeSheet());
         command->add(*selection());
         command->setMimeData(QApplication::clipboard()->mimeData());
@@ -3002,12 +3002,12 @@ void CellToolBase::specialPaste()
 void CellToolBase::pasteWithInsertion()
 {
     const QMimeData *const mimeData = QApplication::clipboard()->mimeData();
-    if (!PasteCommand::unknownShiftDirection(mimeData)) {
-        PasteCommand *const command = new PasteCommand();
+    if (!KCPasteCommand::unknownShiftDirection(mimeData)) {
+        KCPasteCommand *const command = new KCPasteCommand();
         command->setSheet(selection()->activeSheet());
         command->add(*selection());
         command->setMimeData(mimeData);
-        command->setInsertionMode(PasteCommand::ShiftCells);
+        command->setInsertionMode(KCPasteCommand::ShiftCells);
         command->execute(canvas());
     } else {
         QPointer<PasteInsertDialog> dialog= new PasteInsertDialog(canvas()->canvasWidget(), selection());

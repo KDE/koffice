@@ -65,7 +65,7 @@
 #include "KCView.h"
 
 // commands
-#include "commands/PasteCommand.h"
+#include "commands/KCPasteCommand.h"
 
 // ui
 #include "ui/CellView.h"
@@ -388,7 +388,7 @@ void KCCanvas::dropEvent(QDropEvent *event)
         return;
     }
 
-    if (!PasteCommand::supports(mimeData)) {
+    if (!KCPasteCommand::supports(mimeData)) {
         return;
     }
 
@@ -418,7 +418,7 @@ void KCCanvas::dropEvent(QDropEvent *event)
     const int col = sheet->leftColumn(ev_PosX, tmp);
     const int row = sheet->topRow(ev_PosY, tmp);
 
-    PasteCommand *const command = new PasteCommand();
+    KCPasteCommand *const command = new KCPasteCommand();
     command->setSheet(sheet);
     command->add(KCRegion(col, row, 1, 1, sheet));
     command->setMimeData(mimeData);

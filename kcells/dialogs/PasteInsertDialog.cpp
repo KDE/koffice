@@ -32,7 +32,7 @@
 #include <QRadioButton>
 #include <QCheckBox>
 
-#include "commands/PasteCommand.h"
+#include "commands/KCPasteCommand.h"
 #include "KCMap.h"
 #include "ui/Selection.h"
 #include "KCSheet.h"
@@ -66,14 +66,14 @@ PasteInsertDialog::PasteInsertDialog(QWidget* parent, Selection* selection)
 
 void PasteInsertDialog::slotOk()
 {
-    PasteCommand *const command = new PasteCommand();
+    KCPasteCommand *const command = new KCPasteCommand();
     command->setSheet(m_selection->activeSheet());
     command->add(*m_selection);
     command->setMimeData(QApplication::clipboard()->mimeData());
     if (rb1->isChecked()) {
-        command->setInsertionMode(PasteCommand::ShiftCellsRight);
+        command->setInsertionMode(KCPasteCommand::ShiftCellsRight);
     } else if (rb2->isChecked()) {
-        command->setInsertionMode(PasteCommand::ShiftCellsDown);
+        command->setInsertionMode(KCPasteCommand::ShiftCellsDown);
     }
     m_selection->activeSheet()->map()->addCommand(command);
     accept();

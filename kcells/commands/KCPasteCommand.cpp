@@ -19,7 +19,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "PasteCommand.h"
+#include "KCPasteCommand.h"
 
 #include <QApplication>
 #include <QMimeData>
@@ -98,7 +98,7 @@ private:
 
 
 
-PasteCommand::PasteCommand(QUndoCommand *parent)
+KCPasteCommand::KCPasteCommand(QUndoCommand *parent)
         : KCAbstractRegionCommand(parent)
         , m_mimeData(0)
         , m_xmlDocument(0)
@@ -109,12 +109,12 @@ PasteCommand::PasteCommand(QUndoCommand *parent)
 {
 }
 
-PasteCommand::~PasteCommand()
+KCPasteCommand::~KCPasteCommand()
 {
     delete m_xmlDocument;
 }
 
-bool PasteCommand::setMimeData(const QMimeData *mimeData)
+bool KCPasteCommand::setMimeData(const QMimeData *mimeData)
 {
     if (!mimeData) {
         return false;
@@ -123,27 +123,27 @@ bool PasteCommand::setMimeData(const QMimeData *mimeData)
     return true;
 }
 
-void PasteCommand::setInsertionMode(InsertionMode mode)
+void KCPasteCommand::setInsertionMode(InsertionMode mode)
 {
     m_insertMode = mode;
 }
 
-void PasteCommand::setMode(Paste::Mode mode)
+void KCPasteCommand::setMode(Paste::Mode mode)
 {
     m_pasteMode = mode;
 }
 
-void PasteCommand::setOperation(Paste::Operation operation)
+void KCPasteCommand::setOperation(Paste::Operation operation)
 {
     m_operation = operation;
 }
 
-void PasteCommand::setPasteFC(bool force)
+void KCPasteCommand::setPasteFC(bool force)
 {
     m_pasteFC = force;
 }
 
-bool PasteCommand::isApproved() const
+bool KCPasteCommand::isApproved() const
 {
     if (supports(m_mimeData)) {
         return KCAbstractRegionCommand::isApproved();
@@ -153,7 +153,7 @@ bool PasteCommand::isApproved() const
 }
 
 // static
-bool PasteCommand::supports(const QMimeData *mimeData)
+bool KCPasteCommand::supports(const QMimeData *mimeData)
 {
     if (mimeData->hasFormat("application/x-kcells-snippet")) {
         return true;
@@ -170,7 +170,7 @@ bool PasteCommand::supports(const QMimeData *mimeData)
 }
 
 // static
-bool PasteCommand::unknownShiftDirection(const QMimeData *mimeData)
+bool KCPasteCommand::unknownShiftDirection(const QMimeData *mimeData)
 {
     if (!mimeData) {
         return false;
@@ -213,12 +213,12 @@ bool PasteCommand::unknownShiftDirection(const QMimeData *mimeData)
     return false;
 }
 
-bool PasteCommand::preProcessing()
+bool KCPasteCommand::preProcessing()
 {
     return KCAbstractRegionCommand::preProcessing();
 }
 
-bool PasteCommand::mainProcessing()
+bool KCPasteCommand::mainProcessing()
 {
     if (!m_reverse) { // apply/redo
         if (m_firstrun) { // apply
@@ -259,12 +259,12 @@ bool PasteCommand::mainProcessing()
     return true;
 }
 
-bool PasteCommand::postProcessing()
+bool KCPasteCommand::postProcessing()
 {
     return KCAbstractRegionCommand::postProcessing();
 }
 
-bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
+bool KCPasteCommand::processXmlData(Element *element, KoXmlDocument *data)
 {
     const QRect pasteArea = element->rect();
     KCSheet *const sheet = element->sheet();
@@ -545,7 +545,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
     return true;
 }
 
-bool PasteCommand::processTextPlain(Element *element)
+bool KCPasteCommand::processTextPlain(Element *element)
 {
     const QString text = m_mimeData->text();
     if (text.isEmpty()) {
