@@ -28,7 +28,7 @@
 #include "KCValueConverter.h"
 
 KCCSVDataCommand::KCCSVDataCommand()
-        : AbstractDataManipulator()
+        : KCAbstractDataManipulator()
 {
 }
 
@@ -92,7 +92,7 @@ bool KCCSVDataCommand::wantChange(Element* element, int col, int row)
 
 bool KCCSVDataCommand::preProcessing()
 {
-    if (!AbstractDataManipulator::preProcessing())
+    if (!KCAbstractDataManipulator::preProcessing())
         return false;
     // Initialize the decimal symbol and thousands separator to use for parsing.
     m_documentDecimalSymbol = m_sheet->map()->calculationSettings()->locale()->decimalSymbol();
@@ -104,7 +104,7 @@ bool KCCSVDataCommand::preProcessing()
 
 bool KCCSVDataCommand::postProcessing()
 {
-    if (!AbstractDataManipulator::postProcessing())
+    if (!KCAbstractDataManipulator::postProcessing())
         return false;
     // Restore the document's decimal symbol and thousands separator.
     m_sheet->map()->calculationSettings()->locale()->setDecimalSymbol(m_documentDecimalSymbol);

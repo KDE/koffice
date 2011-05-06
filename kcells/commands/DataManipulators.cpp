@@ -34,17 +34,17 @@
 #include <float.h>
 #include <math.h>
 
-AbstractDataManipulator::AbstractDataManipulator(QUndoCommand* parent)
+KCAbstractDataManipulator::KCAbstractDataManipulator(QUndoCommand* parent)
         : KCAbstractRegionCommand(parent)
 {
     m_checkLock = true;
 }
 
-AbstractDataManipulator::~AbstractDataManipulator()
+KCAbstractDataManipulator::~KCAbstractDataManipulator()
 {
 }
 
-bool AbstractDataManipulator::process(Element* element)
+bool KCAbstractDataManipulator::process(Element* element)
 {
     QRect range = element->rect();
     for (int col = range.left(); col <= range.right(); ++col)
@@ -88,7 +88,7 @@ bool AbstractDataManipulator::process(Element* element)
     return true;
 }
 
-bool AbstractDataManipulator::preProcessing()
+bool KCAbstractDataManipulator::preProcessing()
 {
     // not the first run - data already stored ...
     if (!m_firstrun)
@@ -97,7 +97,7 @@ bool AbstractDataManipulator::preProcessing()
     return KCAbstractRegionCommand::preProcessing();
 }
 
-bool AbstractDataManipulator::mainProcessing()
+bool KCAbstractDataManipulator::mainProcessing()
 {
     if (m_reverse) {
         // reverse - use the stored value
@@ -107,7 +107,7 @@ bool AbstractDataManipulator::mainProcessing()
     return KCAbstractRegionCommand::mainProcessing();
 }
 
-bool AbstractDataManipulator::postProcessing()
+bool KCAbstractDataManipulator::postProcessing()
 {
     // not the first run - data already stored ...
     if (!m_firstrun)
@@ -117,7 +117,7 @@ bool AbstractDataManipulator::postProcessing()
 }
 
 AbstractDFManipulator::AbstractDFManipulator(QUndoCommand *parent)
-        : AbstractDataManipulator(parent)
+        : KCAbstractDataManipulator(parent)
 {
     m_changeformat = true;
 }
@@ -129,11 +129,11 @@ AbstractDFManipulator::~AbstractDFManipulator()
 bool AbstractDFManipulator::process(Element* element)
 {
     // let parent class process it first
-    AbstractDataManipulator::process(element);
+    KCAbstractDataManipulator::process(element);
 
     // don't continue if we don't have to change formatting
     if (!m_changeformat) return true;
-    if (m_reverse) return true; // undo done by AbstractDataManipulator
+    if (m_reverse) return true; // undo done by KCAbstractDataManipulator
 
     QRect range = element->rect();
     for (int col = range.left(); col <= range.right(); ++col) {
@@ -150,7 +150,7 @@ bool AbstractDFManipulator::process(Element* element)
 
 
 DataManipulator::DataManipulator(QUndoCommand* parent)
-        : AbstractDataManipulator(parent)
+        : KCAbstractDataManipulator(parent)
         , m_format(KCFormat::None)
         , m_parsing(false)
         , m_expandMatrix(false)
@@ -183,12 +183,12 @@ bool DataManipulator::preProcessing()
             m_expandMatrix = false;
         }
     }
-    return AbstractDataManipulator::preProcessing();
+    return KCAbstractDataManipulator::preProcessing();
 }
 
 bool DataManipulator::process(Element* element)
 {
-    bool success = AbstractDataManipulator::process(element);
+    bool success = KCAbstractDataManipulator::process(element);
     if (!success)
         return false;
     if (!m_reverse) {

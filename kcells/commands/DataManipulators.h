@@ -31,11 +31,11 @@
  * \ingroup Commands
  * \brief Abstract command for setting values.
  */
-class AbstractDataManipulator : public KCAbstractRegionCommand
+class KCAbstractDataManipulator : public KCAbstractRegionCommand
 {
 public:
-    AbstractDataManipulator(QUndoCommand* parent = 0);
-    virtual ~AbstractDataManipulator();
+    KCAbstractDataManipulator(QUndoCommand* parent = 0);
+    virtual ~KCAbstractDataManipulator();
 
     virtual bool process(Element* element);
 
@@ -74,7 +74,7 @@ protected:
  * \ingroup Commands
  * \brief Abstract command for setting values/styles.
  */
-class AbstractDFManipulator : public AbstractDataManipulator
+class AbstractDFManipulator : public KCAbstractDataManipulator
 {
 public:
     AbstractDFManipulator(QUndoCommand *parent = 0);
@@ -101,7 +101,7 @@ protected:
  * \ingroup Commands
  * \brief Sets values of a cell range.
  */
-class DataManipulator : public AbstractDataManipulator
+class DataManipulator : public KCAbstractDataManipulator
 {
 public:
     DataManipulator(QUndoCommand* parent = 0);
@@ -138,7 +138,7 @@ protected:
  * \ingroup Commands
  * \brief Fills a value series into a cell range.
  */
-class SeriesManipulator : public AbstractDataManipulator
+class SeriesManipulator : public KCAbstractDataManipulator
 {
 public:
     enum Series { Column, Row, Linear, Geometric };
@@ -187,7 +187,7 @@ protected:
  * \ingroup Commands
  * \brief Converts string values to upper-/lowercase.
  */
-class CaseManipulator: public AbstractDataManipulator
+class CaseManipulator: public KCAbstractDataManipulator
 {
 public:
     CaseManipulator();

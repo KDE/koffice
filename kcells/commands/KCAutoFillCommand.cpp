@@ -705,7 +705,7 @@ bool KCAutoFillCommand::mainProcessing()
 
     if (m_reverse) {
         // reverse - use the stored value
-        AbstractDataManipulator::mainProcessing();
+        KCAbstractDataManipulator::mainProcessing();
         return true;
     }
 

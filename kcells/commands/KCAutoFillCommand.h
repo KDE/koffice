@@ -41,7 +41,7 @@ class KCCell;
  * \ingroup Commands
  * \brief Auto-filling of a cell range.
  */
-class KCAutoFillCommand : public AbstractDataManipulator
+class KCAutoFillCommand : public KCAbstractDataManipulator
 {
 public:
     /**

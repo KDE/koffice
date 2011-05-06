@@ -29,7 +29,7 @@
 
 
 DeleteCommand::DeleteCommand(QUndoCommand *parent)
-        : AbstractDataManipulator(parent)
+        : KCAbstractDataManipulator(parent)
         , m_mode(Everything)
 {
     setText(i18n("Delete"));
@@ -135,5 +135,5 @@ bool DeleteCommand::mainProcessing()
             m_sheet->insertRowFormat(new KCRowFormat(*rowFormat));
         }
     }
-    return AbstractDataManipulator::mainProcessing();
+    return KCAbstractDataManipulator::mainProcessing();
 }

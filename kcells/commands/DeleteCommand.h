@@ -31,7 +31,7 @@ class KCRowFormat;
  * \ingroup Commands
  * \brief Deletes cell contents and column/row styles.
  */
-class DeleteCommand : public AbstractDataManipulator
+class DeleteCommand : public KCAbstractDataManipulator
 {
 public:
     /**
