@@ -55,7 +55,7 @@
 #include "KCStyleManager.h"
 
 // commands
-#include "commands/AutoFilterCommand.h"
+#include "commands/KCAutoFilterCommand.h"
 #include "commands/BorderColorCommand.h"
 #include "commands/CommentCommand.h"
 #include "commands/ConditionCommand.h"
@@ -2540,7 +2540,7 @@ void CellToolBase::sortDec()
 
 void CellToolBase::autoFilter()
 {
-    AutoFilterCommand* command = new AutoFilterCommand();
+    KCAutoFilterCommand* command = new KCAutoFilterCommand();
     command->setSheet(selection()->activeSheet());
     command->add(*selection());
     command->execute(canvas());

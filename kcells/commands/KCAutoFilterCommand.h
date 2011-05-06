@@ -27,18 +27,18 @@
  * \ingroup Commands
  * \brief Adds an auto-filter to a cell range.
  */
-class AutoFilterCommand : public KCAbstractRegionCommand
+class KCAutoFilterCommand : public KCAbstractRegionCommand
 {
 public:
     /**
      * Constructor.
      */
-    AutoFilterCommand();
+    KCAutoFilterCommand();
 
     /**
      * Destructor.
      */
-    virtual ~AutoFilterCommand();
+    virtual ~KCAutoFilterCommand();
 
     virtual void redo();
     virtual void undo();

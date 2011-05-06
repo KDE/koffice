@@ -28,7 +28,7 @@ SET (commands_DIR_SRCS
     commands/KCAbstractRegionCommand.cpp
     commands/KCApplyFilterCommand.cpp
     commands/KCAutoFillCommand.cpp
-    commands/AutoFilterCommand.cpp
+    commands/KCAutoFilterCommand.cpp
     commands/AutoFormatCommand.cpp
     commands/BorderColorCommand.cpp
     commands/ColumnStyleCommand.cpp

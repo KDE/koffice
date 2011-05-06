@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "AutoFilterCommand.h"
+#include "KCAutoFilterCommand.h"
 
 #include <klocale.h>
 
@@ -29,17 +29,17 @@
 #include "database/Database.h"
 #include "database/DatabaseManager.h"
 
-AutoFilterCommand::AutoFilterCommand()
+KCAutoFilterCommand::KCAutoFilterCommand()
         : KCAbstractRegionCommand()
 {
     setText(i18n("Auto-Filter"));
 }
 
-AutoFilterCommand::~AutoFilterCommand()
+KCAutoFilterCommand::~KCAutoFilterCommand()
 {
 }
 
-void AutoFilterCommand::redo()
+void KCAutoFilterCommand::redo()
 {
     Database database(m_sheet->map()->databaseManager()->createUniqueName());
     database.setDisplayFilterButtons(true);
@@ -48,7 +48,7 @@ void AutoFilterCommand::redo()
     m_sheet->map()->addDamage(new KCCellDamage(m_sheet, *this, KCCellDamage::Appearance));
 }
 
-void AutoFilterCommand::undo()
+void KCAutoFilterCommand::undo()
 {
     m_sheet->cellStorage()->setDatabase(*this, Database());
     m_sheet->map()->addDamage(new KCCellDamage(m_sheet, *this, KCCellDamage::Appearance));
