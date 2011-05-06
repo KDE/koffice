@@ -28,11 +28,11 @@ class KCColumnFormat;
  * \ingroup Commands
  * \brief Sets column styles.
  */
-class ColumnStyleCommand : public KCAbstractRegionCommand
+class KCColumnStyleCommand : public KCAbstractRegionCommand
 {
 public:
-    ColumnStyleCommand(QUndoCommand *parent = 0);
-    virtual ~ColumnStyleCommand();
+    KCColumnStyleCommand(QUndoCommand *parent = 0);
+    virtual ~KCColumnStyleCommand();
 
     void setWidth(double width);
     void setHidden(bool hidden);

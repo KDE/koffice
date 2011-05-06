@@ -25,7 +25,7 @@
 #include <QMimeData>
 
 #include "KCCellStorage.h"
-#include "commands/ColumnStyleCommand.h"
+#include "commands/KCColumnStyleCommand.h"
 #include "commands/DataManipulators.h"
 #include "commands/DeleteCommand.h"
 #include "commands/RowColumnManipulators.h"
@@ -465,7 +465,7 @@ bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)
                     const int col = columnFormat.column();
                     const int cols = qMax(pasteArea.width(), number);
                     for (int coff = 0; col - xOffset + coff <= cols; coff += number) {
-                        ColumnStyleCommand *const command = new ColumnStyleCommand(this);
+                        KCColumnStyleCommand *const command = new KCColumnStyleCommand(this);
                         command->setSheet(m_sheet);
                         command->add(KCRegion(col + coff, 1, 1, 1, m_sheet));
                         command->setTemplate(columnFormat);

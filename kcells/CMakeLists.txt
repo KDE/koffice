@@ -31,7 +31,7 @@ SET (commands_DIR_SRCS
     commands/KCAutoFilterCommand.cpp
     commands/KCAutoFormatCommand.cpp
     commands/KCBorderColorCommand.cpp
-    commands/ColumnStyleCommand.cpp
+    commands/KCColumnStyleCommand.cpp
     commands/CommentCommand.cpp
     commands/ConditionCommand.cpp
     commands/CopyCommand.cpp

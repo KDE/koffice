@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "ColumnStyleCommand.h"
+#include "KCColumnStyleCommand.h"
 
 #include "Damages.h"
 #include "kcells_limits.h"
@@ -26,7 +26,7 @@
 #include "KCSheet.h"
 #include "KCSheetPrint.h"
 
-ColumnStyleCommand::ColumnStyleCommand(QUndoCommand *parent)
+KCColumnStyleCommand::KCColumnStyleCommand(QUndoCommand *parent)
         : KCAbstractRegionCommand(parent)
         , m_width(0.0)
         , m_hidden(false)
@@ -34,34 +34,34 @@ ColumnStyleCommand::ColumnStyleCommand(QUndoCommand *parent)
 {
 }
 
-ColumnStyleCommand::~ColumnStyleCommand()
+KCColumnStyleCommand::~KCColumnStyleCommand()
 {
     qDeleteAll(m_columnFormats);
 }
 
-void ColumnStyleCommand::setWidth(double width)
+void KCColumnStyleCommand::setWidth(double width)
 {
     m_width = width;
 }
 
-void ColumnStyleCommand::setHidden(bool hidden)
+void KCColumnStyleCommand::setHidden(bool hidden)
 {
     m_hidden = hidden;
 }
 
-void ColumnStyleCommand::setPageBreak(bool pageBreak)
+void KCColumnStyleCommand::setPageBreak(bool pageBreak)
 {
     m_pageBreak = pageBreak;
 }
 
-void ColumnStyleCommand::setTemplate(const KCColumnFormat &columnFormat)
+void KCColumnStyleCommand::setTemplate(const KCColumnFormat &columnFormat)
 {
     m_width = columnFormat.width();
     m_hidden = columnFormat.isHidden();
     m_pageBreak = columnFormat.hasPageBreak();
 }
 
-bool ColumnStyleCommand::mainProcessing()
+bool KCColumnStyleCommand::mainProcessing()
 {
     double deltaWidth = 0.0;
     const KCRegion::ConstIterator end(constEnd());
