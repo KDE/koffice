@@ -22,11 +22,11 @@
 
 #include <klocale.h>
 
-#include "ChartDatabaseSelector.h"
+#include "KCChartDatabaseSelector.h"
 
 KoShapeConfigWidgetBase* KCChartDatabaseSelectorFactory::createConfigWidget(KoShape* shape)
 {
-    ChartDatabaseSelector* widget = new ChartDatabaseSelector(m_map);
+    KCChartDatabaseSelector* widget = new KCChartDatabaseSelector(m_map);
     widget->open(shape);
     return widget;
 }

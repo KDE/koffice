@@ -31,7 +31,7 @@ class KoShape;
 
 class KCMap;
 
-/// factory to create a ChartDatabaseSelector widget
+/// factory to create a KCChartDatabaseSelector widget
 class KCChartDatabaseSelectorFactory : public QObject, public KoShapeConfigFactoryBase
 {
 public:

@@ -26,13 +26,13 @@
 class KCMap;
 
 /// A widget that is shown for selecting the cell region providding the chart data
-class ChartDatabaseSelector : public KoShapeConfigWidgetBase
+class KCChartDatabaseSelector : public KoShapeConfigWidgetBase
 {
     Q_OBJECT
 public:
     /// constructor
-    explicit ChartDatabaseSelector(KCMap *map);
-    ~ChartDatabaseSelector();
+    explicit KCChartDatabaseSelector(KCMap *map);
+    ~KCChartDatabaseSelector();
 
     /// reimplemented
     void open(KoShape *shape);

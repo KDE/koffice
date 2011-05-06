@@ -18,14 +18,14 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "ChartDatabaseSelector.h"
+#include "KCChartDatabaseSelector.h"
 
-#include "ui_ChartDatabaseSelector.h"
+#include <ui_KCChartDatabaseSelector.h>
 
-#include "KoResourceManager.h"
-#include "KoShape.h"
+#include <KoResourceManager.h>
+#include <KoShape.h>
 
-#include "KoChartInterface.h"
+#include <KoChartInterface.h>
 
 #include "KCBinding.h"
 #include "KCCanvasResources.h"
@@ -36,16 +36,16 @@
 #include "KCDocBase.h"
 #include "KCSheetAccessModel.h"
 
-class ChartDatabaseSelector::Private
+class KCChartDatabaseSelector::Private
 {
 public:
     KCMap* map;
     Selection* selection;
     KoChart::ChartInterface* shape;
-    Ui::ChartDatabaseSelector widget;
+    Ui::KCChartDatabaseSelector widget;
 };
 
-ChartDatabaseSelector::ChartDatabaseSelector(KCMap *map)
+KCChartDatabaseSelector::KCChartDatabaseSelector(KCMap *map)
         : KoShapeConfigWidgetBase()
         , d(new Private)
 {
@@ -55,12 +55,12 @@ ChartDatabaseSelector::ChartDatabaseSelector(KCMap *map)
     d->widget.setupUi(this);
 }
 
-ChartDatabaseSelector::~ChartDatabaseSelector()
+KCChartDatabaseSelector::~KCChartDatabaseSelector()
 {
     delete d;
 }
 
-void ChartDatabaseSelector::open(KoShape* shape)
+void KCChartDatabaseSelector::open(KoShape* shape)
 {
     QObject* const object = dynamic_cast<QObject*>(shape);
     Q_ASSERT(object);
@@ -71,7 +71,7 @@ void ChartDatabaseSelector::open(KoShape* shape)
     Q_ASSERT(d->shape);
 }
 
-void ChartDatabaseSelector::save()
+void KCChartDatabaseSelector::save()
 {
     KCSheet *sheet = d->selection->activeSheet();
     const KCRegion selectedRegion(d->widget.m_cellRegion->text(), d->map, sheet);
@@ -85,12 +85,12 @@ void ChartDatabaseSelector::save()
                     d->widget.m_dataInRows->isChecked() ? Qt::Horizontal : Qt::Vertical);
 }
 
-KAction* ChartDatabaseSelector::createAction()
+KAction* KCChartDatabaseSelector::createAction()
 {
     return 0;
 }
 
-void ChartDatabaseSelector::showEvent(QShowEvent* event)
+void KCChartDatabaseSelector::showEvent(QShowEvent* event)
 {
     Q_UNUSED(event);
     Q_ASSERT(m_resourceManager);
@@ -99,4 +99,4 @@ void ChartDatabaseSelector::showEvent(QShowEvent* event)
 }
 
 
-#include "ChartDatabaseSelector.moc"
+#include "KCChartDatabaseSelector.moc"

@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>ChartDatabaseSelector</class>
- <widget class="QWidget" name="ChartDatabaseSelector" >
+ <class>KCChartDatabaseSelector</class>
+ <widget class="QWidget" name="KCChartDatabaseSelector" >
   <property name="geometry" >
    <rect>
     <x>0</x>
