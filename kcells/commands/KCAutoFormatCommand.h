@@ -30,18 +30,18 @@ class KCStyle;
  * \ingroup Commands
  * \brief Formats a cell range using a pre-defined style for the table layout.
  */
-class AutoFormatCommand : public KCAbstractRegionCommand
+class KCAutoFormatCommand : public KCAbstractRegionCommand
 {
 public:
     /**
      * Constructor.
      */
-    AutoFormatCommand();
+    KCAutoFormatCommand();
 
     /**
      * Destructor.
      */
-    virtual ~AutoFormatCommand();
+    virtual ~KCAutoFormatCommand();
 
     void setStyles(const QList<KCStyle>& styles);
 

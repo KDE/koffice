@@ -25,7 +25,7 @@ BUGS
 ====
  ---    Painting shapes in RTL layouted sheet is still broken.
  ---    Printing shapes is broken.
- ---    AutoFormatCommand does not redo() properly.
+ ---    KCAutoFormatCommand does not redo() properly.
  ---    Undo of "Subtotals..." action crashes.
 
 

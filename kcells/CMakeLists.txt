@@ -29,7 +29,7 @@ SET (commands_DIR_SRCS
     commands/KCApplyFilterCommand.cpp
     commands/KCAutoFillCommand.cpp
     commands/KCAutoFilterCommand.cpp
-    commands/AutoFormatCommand.cpp
+    commands/KCAutoFormatCommand.cpp
     commands/BorderColorCommand.cpp
     commands/ColumnStyleCommand.cpp
     commands/CommentCommand.cpp

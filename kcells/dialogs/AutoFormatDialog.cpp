@@ -47,7 +47,7 @@
 #include "KCStyle.h"
 #include "KCStyleManager.h"
 
-#include "commands/AutoFormatCommand.h"
+#include "commands/KCAutoFormatCommand.h"
 
 struct Entry {
     QString xml;
@@ -168,7 +168,7 @@ void AutoFormatDialog::slotOk()
     //
     // Set colors, borders etc.
     //
-    AutoFormatCommand* command = new AutoFormatCommand();
+    KCAutoFormatCommand* command = new KCAutoFormatCommand();
     command->setSheet(d->selection->activeSheet());
     command->setStyles(d->styles);
     command->add(*d->selection);

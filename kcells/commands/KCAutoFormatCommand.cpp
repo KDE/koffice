@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "AutoFormatCommand.h"
+#include "KCAutoFormatCommand.h"
 
 #include "KCCellStorage.h"
 #include "KCSheet.h"
@@ -28,21 +28,21 @@
 
 #include <QPen>
 
-AutoFormatCommand::AutoFormatCommand()
+KCAutoFormatCommand::KCAutoFormatCommand()
 {
     setText(i18n("Auto-Format"));
 }
 
-AutoFormatCommand::~AutoFormatCommand()
+KCAutoFormatCommand::~KCAutoFormatCommand()
 {
 }
 
-void AutoFormatCommand::setStyles(const QList<KCStyle>& styles)
+void KCAutoFormatCommand::setStyles(const QList<KCStyle>& styles)
 {
     m_styles = styles;
 }
 
-bool AutoFormatCommand::preProcessing()
+bool KCAutoFormatCommand::preProcessing()
 {
     if (m_firstrun)
         m_sheet->cellStorage()->startUndoRecording();
@@ -57,7 +57,7 @@ bool AutoFormatCommand::preProcessing()
     return true;
 }
 
-bool AutoFormatCommand::mainProcessing()
+bool KCAutoFormatCommand::mainProcessing()
 {
     if (m_reverse) {
         QUndoCommand::undo(); // undo child commands
@@ -66,7 +66,7 @@ bool AutoFormatCommand::mainProcessing()
     return KCAbstractRegionCommand::mainProcessing();
 }
 
-bool AutoFormatCommand::process(Element* element)
+bool KCAutoFormatCommand::process(Element* element)
 {
     const QRect rect = element->rect();
 
