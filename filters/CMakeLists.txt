@@ -23,10 +23,6 @@ check_include_files(strings.h HAVE_STRINGS_H)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-filters.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-filters.h )
 
-set(libdialogfilter_SRCS 
-	${CMAKE_SOURCE_DIR}/filters/libdialogfilter/exportsizedia.cpp
-)
-
 set(liboofilter_SRCS 
 	${CMAKE_SOURCE_DIR}/filters/liboofilter/ooutils.cc 
 	${CMAKE_SOURCE_DIR}/filters/liboofilter/liststylestack.cc
@@ -39,7 +35,6 @@ set(KWMF_INCLUDES ${CMAKE_SOURCE_DIR}/filters/libkowmf)
 
 add_subdirectory(libmso)
 
-macro_optional_add_subdirectory( generic_wrapper )
 macro_optional_add_subdirectory( libkowmf )
 macro_optional_add_subdirectory( libmsooxml )
 
@@ -58,10 +53,6 @@ endif(SHOULD_BUILD_KCELLS)
 if(SHOULD_BUILD_KARBON)
   add_subdirectory(karbon)
 endif(SHOULD_BUILD_KARBON)
-
-if(SHOULD_BUILD_KIVIO)
-    #add_subdirectory(kivio)
-endif(SHOULD_BUILD_KIVIO)
 
 if(LIBXML2_FOUND AND LIBXSLT_FOUND AND NOT WIN32 AND NOT QT_MAC_USE_COCOA)
     add_subdirectory(xsltfilter)
