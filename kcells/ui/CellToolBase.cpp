@@ -2198,7 +2198,7 @@ void CellToolBase::equalizeColumn()
             size = qMax(selection()->activeSheet()->columnFormat(i)->width(), size);
 
         if (size != 0.0) {
-            ResizeColumnManipulator* command = new ResizeColumnManipulator();
+            KCResizeColumnManipulator* command = new KCResizeColumnManipulator();
             command->setSheet(selection()->activeSheet());
             command->setSize(qMax(2.0, size));
             command->add(*selection());

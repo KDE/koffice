@@ -36,20 +36,20 @@
 #include "KCValue.h"
 
 /***************************************************************************
-  class ResizeColumnManipulator
+  class KCResizeColumnManipulator
 ****************************************************************************/
 
-ResizeColumnManipulator::ResizeColumnManipulator(QUndoCommand* parent)
+KCResizeColumnManipulator::KCResizeColumnManipulator(QUndoCommand* parent)
         : KCAbstractRegionCommand(parent)
 {
     setText(i18n("Resize Column"));
 }
 
-ResizeColumnManipulator::~ResizeColumnManipulator()
+KCResizeColumnManipulator::~KCResizeColumnManipulator()
 {
 }
 
-bool ResizeColumnManipulator::process(Element* element)
+bool KCResizeColumnManipulator::process(Element* element)
 {
     QRect range = element->rect();
     for (int col = range.right(); col >= range.left(); --col) {

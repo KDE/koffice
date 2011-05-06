@@ -30,15 +30,15 @@ class KCColumnFormat;
 class KCRowFormat;
 
 /**
- * \class ResizeColumnManipulator
+ * \class KCResizeColumnManipulator
  * \ingroup Commands
  * \brief Resizes a column.
  */
-class ResizeColumnManipulator : public KCAbstractRegionCommand
+class KCResizeColumnManipulator : public KCAbstractRegionCommand
 {
 public:
-    ResizeColumnManipulator(QUndoCommand* parent = 0);
-    ~ResizeColumnManipulator();
+    KCResizeColumnManipulator(QUndoCommand* parent = 0);
+    ~KCResizeColumnManipulator();
 
     void setSize(double size) {
         m_newSize = size;

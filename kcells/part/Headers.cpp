@@ -870,7 +870,7 @@ void KCColumnHeader::mouseReleaseEvent(QMouseEvent * _ev)
             width = ev_PosX - x;
 
         if (width != 0.0) {
-            ResizeColumnManipulator* command = new ResizeColumnManipulator();
+            KCResizeColumnManipulator* command = new KCResizeColumnManipulator();
             command->setSheet(sheet);
             command->setSize(width);
             command->add(KCRegion(rect, sheet));
@@ -927,7 +927,7 @@ void KCColumnHeader::mouseReleaseEvent(QMouseEvent * _ev)
 void KCColumnHeader::equalizeColumn(double resize)
 {
     if (resize != 0.0) {
-        ResizeColumnManipulator* command = new ResizeColumnManipulator();
+        KCResizeColumnManipulator* command = new KCResizeColumnManipulator();
         command->setSheet(m_pView->activeSheet());
         command->setSize(qMax(2.0, resize));
         command->add(*m_pView->selection());

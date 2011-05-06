@@ -858,7 +858,7 @@ void CellFormatDialog::slotApply()
         command->add(*m_selection);
     }
     if (int(positionPage->getSizeWidth()) != int(widthSize)) {
-        ResizeColumnManipulator* command = new ResizeColumnManipulator(macroCommand);
+        KCResizeColumnManipulator* command = new KCResizeColumnManipulator(macroCommand);
         command->setSheet(m_sheet);
         command->setSize(positionPage->getSizeWidth());
         command->add(*m_selection);

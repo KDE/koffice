@@ -150,7 +150,7 @@ void ResizeColumn::slotOk()
 
     //Don't generate a resize, when there isn't a change or the change is only a rounding issue
     if (fabs(width - columnWidth) > DBL_EPSILON) {
-        ResizeColumnManipulator* manipulator = new ResizeColumnManipulator();
+        KCResizeColumnManipulator* manipulator = new KCResizeColumnManipulator();
         manipulator->setSheet(m_selection->activeSheet());
         manipulator->setSize(width);
         manipulator->add(*m_selection);
