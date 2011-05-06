@@ -25,7 +25,7 @@ kde4_add_ui_files(chart_DIR_SRCS
     )
 
 SET (commands_DIR_SRCS
-    commands/AbstractRegionCommand.cpp
+    commands/KCAbstractRegionCommand.cpp
     commands/ApplyFilterCommand.cpp
     commands/AutoFillCommand.cpp
     commands/AutoFilterCommand.cpp

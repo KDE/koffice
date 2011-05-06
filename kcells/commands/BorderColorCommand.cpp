@@ -32,7 +32,7 @@
 #include <QPen>
 
 BorderColorCommand::BorderColorCommand()
-        : AbstractRegionCommand()
+        : KCAbstractRegionCommand()
 {
     setText(i18n("Change Border Color"));
 }
@@ -56,7 +56,7 @@ bool BorderColorCommand::preProcessing()
             m_undoData += undoData;
         }
     }
-    return AbstractRegionCommand::preProcessing();
+    return KCAbstractRegionCommand::preProcessing();
 }
 
 bool BorderColorCommand::mainProcessing()

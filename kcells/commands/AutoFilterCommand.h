@@ -20,14 +20,14 @@
 #ifndef KSPREAD_AUTOFILTER_COMMAND
 #define KSPREAD_AUTOFILTER_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 
 /**
  * \ingroup Commands
  * \brief Adds an auto-filter to a cell range.
  */
-class AutoFilterCommand : public AbstractRegionCommand
+class AutoFilterCommand : public KCAbstractRegionCommand
 {
 public:
     /**

@@ -20,7 +20,7 @@
 #ifndef KSPREAD_AUTO_FORMAT_COMMAND
 #define KSPREAD_AUTO_FORMAT_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 #include <QList>
 
@@ -30,7 +30,7 @@ class KCStyle;
  * \ingroup Commands
  * \brief Formats a cell range using a pre-defined style for the table layout.
  */
-class AutoFormatCommand : public AbstractRegionCommand
+class AutoFormatCommand : public KCAbstractRegionCommand
 {
 public:
     /**

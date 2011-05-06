@@ -31,7 +31,7 @@
 #include "database/Filter.h"
 
 ApplyFilterCommand::ApplyFilterCommand()
-        : AbstractRegionCommand()
+        : KCAbstractRegionCommand()
 {
     setText(i18n("Apply Filter"));
 }

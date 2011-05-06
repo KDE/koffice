@@ -20,7 +20,7 @@
 #ifndef KSPREAD_NAMED_AREA_COMMAND
 #define KSPREAD_NAMED_AREA_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 #include "KCRegion.h"
 
 
@@ -28,7 +28,7 @@
  * \ingroup Commands
  * \brief Attaches a name to a cell range.
  */
-class NamedAreaCommand : public AbstractRegionCommand
+class NamedAreaCommand : public KCAbstractRegionCommand
 {
 public:
     /**

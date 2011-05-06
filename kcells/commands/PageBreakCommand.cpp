@@ -26,7 +26,7 @@
 #include "KCSheetPrint.h"
 
 PageBreakCommand::PageBreakCommand(QUndoCommand *parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
         , m_mode(BreakBeforeColumn)
 {
 }
@@ -65,5 +65,5 @@ bool PageBreakCommand::postProcessing()
     if (m_sheet->isShowPageBorders()) {
         m_sheet->map()->addDamage(new KCSheetDamage(m_sheet, KCSheetDamage::ContentChanged));
     }
-    return AbstractRegionCommand::postProcessing();
+    return KCAbstractRegionCommand::postProcessing();
 }

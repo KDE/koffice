@@ -28,7 +28,7 @@
 #include "KCRectStorage.h"
 
 CommentCommand::CommentCommand(QUndoCommand* parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
 {
 }
 
@@ -50,7 +50,7 @@ bool CommentCommand::mainProcessing()
         for (int i = 0; i < m_undoData.count(); ++i)
             m_sheet->cellStorage()->setComment(KCRegion(m_undoData[i].first.toRect()), m_undoData[i].second);
     }
-    return AbstractRegionCommand::mainProcessing();
+    return KCAbstractRegionCommand::mainProcessing();
 }
 
 void CommentCommand::setComment(const QString& comment)

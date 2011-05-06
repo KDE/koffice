@@ -31,7 +31,7 @@
 #include "KCStyle.h"
 
 IndentationCommand::IndentationCommand()
-        : AbstractRegionCommand()
+        : KCAbstractRegionCommand()
 {
     setText(i18n("Increase Indentation"));
 }
@@ -57,7 +57,7 @@ bool IndentationCommand::postProcessing()
 
 void IndentationCommand::setReverse(bool reverse)
 {
-    AbstractRegionCommand::setReverse(reverse);
+    KCAbstractRegionCommand::setReverse(reverse);
     if (!m_reverse)
         setText(i18n("Increase Indentation"));
     else

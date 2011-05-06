@@ -20,13 +20,13 @@
 #ifndef KSPREAD_PRECISION_COMMAND
 #define KSPREAD_PRECISION_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 /**
  * \ingroup Commands
  * \brief Sets the decimal precision level.
  */
-class PrecisionCommand : public AbstractRegionCommand
+class PrecisionCommand : public KCAbstractRegionCommand
 {
 public:
     PrecisionCommand();

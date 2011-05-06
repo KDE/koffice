@@ -9,9 +9,9 @@ action. You need to reimplement the redo() and undo() methods
 of QUndoCommand.
 
 Each command is created from the user interface.
-The commands working on cell ranges, i.e. derivatives of KCells::AbstractRegionCommand,
+The commands working on cell ranges, i.e. derivatives of KCells::KCAbstractRegionCommand,
 have to check wether the operation is allowed before execution. Cells may be
-protected or locked as elements of matrices. KCells::AbstractRegionCommand::execute
+protected or locked as elements of matrices. KCells::KCAbstractRegionCommand::execute
 takes care of that. If the operation is not allowed, the command will neither
 get executed nor added to the undo stack.
 All other commands can be added directly to the undo stack by using

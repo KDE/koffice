@@ -20,7 +20,7 @@
 #ifndef KSPREAD_COLUMN_STYLE_COMMAND
 #define KSPREAD_COLUMN_STYLE_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 class KCColumnFormat;
 
@@ -28,7 +28,7 @@ class KCColumnFormat;
  * \ingroup Commands
  * \brief Sets column styles.
  */
-class ColumnStyleCommand : public AbstractRegionCommand
+class ColumnStyleCommand : public KCAbstractRegionCommand
 {
 public:
     ColumnStyleCommand(QUndoCommand *parent = 0);

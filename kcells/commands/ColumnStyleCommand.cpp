@@ -27,7 +27,7 @@
 #include "KCSheetPrint.h"
 
 ColumnStyleCommand::ColumnStyleCommand(QUndoCommand *parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
         , m_width(0.0)
         , m_hidden(false)
         , m_pageBreak(false)

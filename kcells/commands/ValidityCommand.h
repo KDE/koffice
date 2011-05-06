@@ -22,7 +22,7 @@
 
 #include "KCValidity.h"
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 
 /**
@@ -30,7 +30,7 @@
  * \ingroup Commands
  * \brief Adds/Removes validity checks to/of a cell region.
  */
-class ValidityCommand : public AbstractRegionCommand
+class ValidityCommand : public KCAbstractRegionCommand
 {
 public:
     ValidityCommand();

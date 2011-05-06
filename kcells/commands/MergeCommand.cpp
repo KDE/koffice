@@ -30,7 +30,7 @@
 #include "KCSheet.h"
 
 MergeCommand::MergeCommand(QUndoCommand* parent)
-        : AbstractRegionCommand(parent),
+        : KCAbstractRegionCommand(parent),
         m_merge(true),
         m_mergeHorizontal(false),
         m_mergeVertical(false),
@@ -199,7 +199,7 @@ bool MergeCommand::preProcessing()
     // selections. This ensures that the selection isn't broken after merging.
     if (m_selection) m_selection->KCRegion::clear();
 
-    return AbstractRegionCommand::preProcessing();
+    return KCAbstractRegionCommand::preProcessing();
 }
 
 bool MergeCommand::postProcessing()

@@ -24,7 +24,7 @@
 
 #include <KCStyle.h>
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 class KCColumnFormat;
 class KCRowFormat;
@@ -34,7 +34,7 @@ class KCRowFormat;
  * \ingroup Commands
  * \brief Resizes a column.
  */
-class ResizeColumnManipulator : public AbstractRegionCommand
+class ResizeColumnManipulator : public KCAbstractRegionCommand
 {
 public:
     ResizeColumnManipulator(QUndoCommand* parent = 0);
@@ -58,7 +58,7 @@ private:
  * \ingroup Commands
  * \brief Resizes a row.
  */
-class ResizeRowManipulator : public AbstractRegionCommand
+class ResizeRowManipulator : public KCAbstractRegionCommand
 {
 public:
     ResizeRowManipulator(QUndoCommand* parent = 0);
@@ -82,7 +82,7 @@ private:
  * \ingroup Commands
  * \brief Optimizes the height and the width of rows and columns, respectively.
  */
-class AdjustColumnRowManipulator : public AbstractRegionCommand
+class AdjustColumnRowManipulator : public KCAbstractRegionCommand
 {
 public:
     AdjustColumnRowManipulator(QUndoCommand* parent = 0);
@@ -122,7 +122,7 @@ private:
  * \ingroup Commands
  * \brief Hides/Shows columns and/or rows.
  */
-class HideShowManipulator : public AbstractRegionCommand
+class HideShowManipulator : public KCAbstractRegionCommand
 {
 public:
     HideShowManipulator();
@@ -154,7 +154,7 @@ private:
  * \ingroup Commands
  * \brief Inserts/Removes columns.
  */
-class InsertDeleteColumnManipulator : public AbstractRegionCommand
+class InsertDeleteColumnManipulator : public KCAbstractRegionCommand
 {
 public:
     InsertDeleteColumnManipulator(QUndoCommand *parent = 0);
@@ -182,7 +182,7 @@ private:
  * \ingroup Commands
  * \brief Inserts/Removes rows.
  */
-class InsertDeleteRowManipulator : public AbstractRegionCommand
+class InsertDeleteRowManipulator : public KCAbstractRegionCommand
 {
 public:
     InsertDeleteRowManipulator(QUndoCommand *parent = 0);

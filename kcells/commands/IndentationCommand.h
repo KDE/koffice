@@ -21,14 +21,14 @@
 #define KSPREAD_INDENTATION_COMMAND
 
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 #include "KCStyle.h"
 
 /**
  * \ingroup Commands
  * \brief Changes the indentation level.
  */
-class IndentationCommand : public AbstractRegionCommand
+class IndentationCommand : public KCAbstractRegionCommand
 {
 public:
     IndentationCommand();

@@ -20,7 +20,7 @@
 #ifndef KSPREAD_ROW_STYLE_COMMAND
 #define KSPREAD_ROW_STYLE_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 class KCRowFormat;
 
@@ -28,7 +28,7 @@ class KCRowFormat;
  * \ingroup Commands
  * \brief Sets a row style.
  */
-class RowStyleCommand : public AbstractRegionCommand
+class RowStyleCommand : public KCAbstractRegionCommand
 {
 public:
     RowStyleCommand(QUndoCommand *parent = 0);

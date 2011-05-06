@@ -29,7 +29,7 @@
 #include "KCStyle.h"
 
 PrecisionCommand::PrecisionCommand()
-        : AbstractRegionCommand()
+        : KCAbstractRegionCommand()
 {
     setText(i18n("Increase Precision"));
 }
@@ -55,7 +55,7 @@ bool PrecisionCommand::postProcessing()
 
 void PrecisionCommand::setReverse(bool reverse)
 {
-    AbstractRegionCommand::setReverse(reverse);
+    KCAbstractRegionCommand::setReverse(reverse);
     if (!m_reverse)
         setText(i18n("Increase Precision"));
     else

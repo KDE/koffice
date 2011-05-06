@@ -20,7 +20,7 @@
 #ifndef KSPREAD_COMMENT_COMMAND
 #define KSPREAD_COMMENT_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 
 /**
@@ -28,7 +28,7 @@
  * \ingroup Commands
  * \brief Adds/Removes comments to/of a cell region.
  */
-class CommentCommand : public AbstractRegionCommand
+class CommentCommand : public KCAbstractRegionCommand
 {
 public:
     CommentCommand(QUndoCommand* parent = 0);

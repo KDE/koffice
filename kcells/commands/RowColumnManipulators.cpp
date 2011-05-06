@@ -40,7 +40,7 @@
 ****************************************************************************/
 
 ResizeColumnManipulator::ResizeColumnManipulator(QUndoCommand* parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
 {
     setText(i18n("Resize Column"));
 }
@@ -72,7 +72,7 @@ bool ResizeColumnManipulator::process(Element* element)
 ****************************************************************************/
 
 ResizeRowManipulator::ResizeRowManipulator(QUndoCommand* parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
 {
     setText(i18n("Resize Row"));
 }
@@ -190,7 +190,7 @@ bool HideShowManipulator::preProcessing()
         add(region);
     }
 
-    return AbstractRegionCommand::preProcessing();
+    return KCAbstractRegionCommand::preProcessing();
 }
 
 bool HideShowManipulator::postProcessing()
@@ -225,7 +225,7 @@ QString HideShowManipulator::name() const
 ****************************************************************************/
 
 AdjustColumnRowManipulator::AdjustColumnRowManipulator(QUndoCommand* parent)
-        : AbstractRegionCommand(parent),
+        : KCAbstractRegionCommand(parent),
         m_adjustColumn(false),
         m_adjustRow(false)
 {
@@ -325,7 +325,7 @@ bool AdjustColumnRowManipulator::preProcessing()
     if (m_reverse) {
     } else {
         if (!m_newHeights.isEmpty() || !m_newWidths.isEmpty()) {
-            return AbstractRegionCommand::preProcessing();
+            return KCAbstractRegionCommand::preProcessing();
         }
 //     createUndo();
 
@@ -422,7 +422,7 @@ bool AdjustColumnRowManipulator::preProcessing()
             }
         }
     }
-    return AbstractRegionCommand::preProcessing();
+    return KCAbstractRegionCommand::preProcessing();
 }
 
 bool AdjustColumnRowManipulator::postProcessing()
@@ -439,7 +439,7 @@ bool AdjustColumnRowManipulator::postProcessing()
         changes |= KCSheetDamage::RowsChanged;
     }
     m_sheet->map()->addDamage(new KCSheetDamage(m_sheet, changes));
-    return AbstractRegionCommand::postProcessing();
+    return KCAbstractRegionCommand::postProcessing();
 }
 
 class DummyWidget : public QWidget
@@ -557,7 +557,7 @@ QString AdjustColumnRowManipulator::name() const
 ****************************************************************************/
 
 InsertDeleteColumnManipulator::InsertDeleteColumnManipulator(QUndoCommand *parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
         , m_mode(Insert)
         , m_template(0)
 {
@@ -646,7 +646,7 @@ bool InsertDeleteColumnManipulator::preProcessing()
             m_sheet->cellStorage()->startUndoRecording();
         }
     }
-    return AbstractRegionCommand::preProcessing();
+    return KCAbstractRegionCommand::preProcessing();
 }
 
 bool InsertDeleteColumnManipulator::mainProcessing()
@@ -659,7 +659,7 @@ bool InsertDeleteColumnManipulator::mainProcessing()
         }
         return true;
     }
-    return AbstractRegionCommand::mainProcessing(); // calls process(Element*)
+    return KCAbstractRegionCommand::mainProcessing(); // calls process(Element*)
 }
 
 bool InsertDeleteColumnManipulator::postProcessing()
@@ -680,7 +680,7 @@ bool InsertDeleteColumnManipulator::postProcessing()
 ****************************************************************************/
 
 InsertDeleteRowManipulator::InsertDeleteRowManipulator(QUndoCommand *parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
         , m_mode(Insert)
         , m_template(0)
 {
@@ -769,7 +769,7 @@ bool InsertDeleteRowManipulator::preProcessing()
             m_sheet->cellStorage()->startUndoRecording();
         }
     }
-    return AbstractRegionCommand::preProcessing();
+    return KCAbstractRegionCommand::preProcessing();
 }
 
 bool InsertDeleteRowManipulator::mainProcessing()
@@ -782,7 +782,7 @@ bool InsertDeleteRowManipulator::mainProcessing()
         }
         return true;
     }
-    return AbstractRegionCommand::mainProcessing(); // calls process(Element*)
+    return KCAbstractRegionCommand::mainProcessing(); // calls process(Element*)
 }
 
 bool InsertDeleteRowManipulator::postProcessing()

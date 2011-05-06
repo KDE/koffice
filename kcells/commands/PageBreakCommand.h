@@ -20,13 +20,13 @@
 #ifndef KSPREAD_PAGE_BREAK_COMMAND
 #define KSPREAD_PAGE_BREAK_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 /**
  * \ingroup Commands
  * \brief Sets/Unsets manual page breaks.
  */
-class PageBreakCommand : public AbstractRegionCommand
+class PageBreakCommand : public KCAbstractRegionCommand
 {
 public:
     PageBreakCommand(QUndoCommand *parent = 0);

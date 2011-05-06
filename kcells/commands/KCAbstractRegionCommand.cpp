@@ -19,7 +19,7 @@
 */
 
 // Local
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 #include <QApplication>
 
@@ -49,10 +49,10 @@
 //END
 
 /***************************************************************************
-  class AbstractRegionCommand
+  class KCAbstractRegionCommand
 ****************************************************************************/
 
-AbstractRegionCommand::AbstractRegionCommand(QUndoCommand* parent)
+KCAbstractRegionCommand::KCAbstractRegionCommand(QUndoCommand* parent)
         : KCRegion(),
         QUndoCommand(parent),
         m_sheet(0),
@@ -64,11 +64,11 @@ AbstractRegionCommand::AbstractRegionCommand(QUndoCommand* parent)
 {
 }
 
-AbstractRegionCommand::~AbstractRegionCommand()
+KCAbstractRegionCommand::~KCAbstractRegionCommand()
 {
 }
 
-bool AbstractRegionCommand::execute(KoCanvasBase* canvas)
+bool KCAbstractRegionCommand::execute(KoCanvasBase* canvas)
 {
     if (!m_firstrun)
         return false;
@@ -82,10 +82,10 @@ bool AbstractRegionCommand::execute(KoCanvasBase* canvas)
     return m_success;
 }
 
-void AbstractRegionCommand::redo()
+void KCAbstractRegionCommand::redo()
 {
     if (!m_sheet) {
-        kWarning() << "AbstractRegionCommand::redo(): No explicit m_sheet is set. "
+        kWarning() << "KCAbstractRegionCommand::redo(): No explicit m_sheet is set. "
         << "Manipulating all sheets of the region." << endl;
     }
 
@@ -103,14 +103,14 @@ void AbstractRegionCommand::redo()
     successfully = mainProcessing();
     if (!successfully) {
         m_success = false;
-        kWarning() << "AbstractRegionCommand::redo(): processing was not successful!";
+        kWarning() << "KCAbstractRegionCommand::redo(): processing was not successful!";
     }
 
     successfully = true;
     successfully = postProcessing();
     if (!successfully) {
         m_success = false;
-        kWarning() << "AbstractRegionCommand::redo(): postprocessing was not successful!";
+        kWarning() << "KCAbstractRegionCommand::redo(): postprocessing was not successful!";
     }
 
     QApplication::restoreOverrideCursor();
@@ -118,14 +118,14 @@ void AbstractRegionCommand::redo()
     m_firstrun = false;
 }
 
-void AbstractRegionCommand::undo()
+void KCAbstractRegionCommand::undo()
 {
     m_reverse = !m_reverse;
     redo();
     m_reverse = !m_reverse;
 }
 
-bool AbstractRegionCommand::isApproved() const
+bool KCAbstractRegionCommand::isApproved() const
 {
     const QList<Element *> elements = cells();
     const int begin = m_reverse ? elements.count() - 1 : 0;
@@ -156,7 +156,7 @@ bool AbstractRegionCommand::isApproved() const
     return true;
 }
 
-bool AbstractRegionCommand::mainProcessing()
+bool KCAbstractRegionCommand::mainProcessing()
 {
     bool successfully = true;
     const QList<Element *> elements = cells();

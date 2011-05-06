@@ -20,7 +20,7 @@
 #ifndef KSPREAD_APPLYFILTER_COMMAND
 #define KSPREAD_APPLYFILTER_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 #include "database/Database.h"
 
@@ -30,7 +30,7 @@ class Filter;
  * \ingroup Commands
  * \brief Filtering a cell range.
  */
-class ApplyFilterCommand : public AbstractRegionCommand
+class ApplyFilterCommand : public KCAbstractRegionCommand
 {
 public:
     /**

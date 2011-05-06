@@ -40,11 +40,11 @@
 // - Get plain text pasting right.
 
 
-class PasteCellCommand : public AbstractRegionCommand
+class PasteCellCommand : public KCAbstractRegionCommand
 {
 public:
     PasteCellCommand(QUndoCommand *parent = 0)
-            : AbstractRegionCommand(parent)
+            : KCAbstractRegionCommand(parent)
             , m_pasteMode(Paste::Normal)
             , m_pasteOperation(Paste::OverWrite)
             , m_pasteFC(false) {
@@ -82,7 +82,7 @@ protected:
             QUndoCommand::undo(); // undo child commands
             return true;
         }
-        return AbstractRegionCommand::mainProcessing();
+        return KCAbstractRegionCommand::mainProcessing();
     }
 
     bool postProcessing() {
@@ -99,7 +99,7 @@ private:
 
 
 PasteCommand::PasteCommand(QUndoCommand *parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
         , m_mimeData(0)
         , m_xmlDocument(0)
         , m_insertMode(NoInsertion)
@@ -146,7 +146,7 @@ void PasteCommand::setPasteFC(bool force)
 bool PasteCommand::isApproved() const
 {
     if (supports(m_mimeData)) {
-        return AbstractRegionCommand::isApproved();
+        return KCAbstractRegionCommand::isApproved();
     }
     kWarning() << "Unrecognized MIME type(s):" << m_mimeData->formats().join(", ");
     return false;
@@ -215,7 +215,7 @@ bool PasteCommand::unknownShiftDirection(const QMimeData *mimeData)
 
 bool PasteCommand::preProcessing()
 {
-    return AbstractRegionCommand::preProcessing();
+    return KCAbstractRegionCommand::preProcessing();
 }
 
 bool PasteCommand::mainProcessing()
@@ -261,7 +261,7 @@ bool PasteCommand::mainProcessing()
 
 bool PasteCommand::postProcessing()
 {
-    return AbstractRegionCommand::postProcessing();
+    return KCAbstractRegionCommand::postProcessing();
 }
 
 bool PasteCommand::processXmlData(Element *element, KoXmlDocument *data)

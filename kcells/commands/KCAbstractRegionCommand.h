@@ -29,25 +29,25 @@ class KoCanvasBase;
 class KCSheet;
 
 /**
- * \class AbstractRegionCommand
+ * \class KCAbstractRegionCommand
  * \ingroup Commands
  * \brief Abstract base class for all region related operations.
  */
-class KCELLS_EXPORT AbstractRegionCommand : public KCRegion, public QUndoCommand
+class KCELLS_EXPORT KCAbstractRegionCommand : public KCRegion, public QUndoCommand
 {
 public:
     /**
      * Constructor.
      */
-    AbstractRegionCommand(QUndoCommand* parent = 0);
+    KCAbstractRegionCommand(QUndoCommand* parent = 0);
 
     /**
      * Destructor.
      */
-    virtual ~AbstractRegionCommand();
+    virtual ~KCAbstractRegionCommand();
 
     /**
-     * \return the KCSheet this AbstractRegionCommand works on
+     * \return the KCSheet this KCAbstractRegionCommand works on
      */
     KCSheet* sheet() const {
         return m_sheet;

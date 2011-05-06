@@ -63,7 +63,7 @@ bool AutoFormatCommand::mainProcessing()
         QUndoCommand::undo(); // undo child commands
         return true;
     }
-    return AbstractRegionCommand::mainProcessing();
+    return KCAbstractRegionCommand::mainProcessing();
 }
 
 bool AutoFormatCommand::process(Element* element)

@@ -34,7 +34,7 @@
 #include "KCStyleStorage.h"
 
 StyleCommand::StyleCommand(QUndoCommand* parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
         , m_horizontalPen(QPen(QColor(), 0, Qt::NoPen))
         , m_verticalPen(QPen(QColor(), 0, Qt::NoPen))
         , m_horizontalPenChanged(false)
@@ -192,7 +192,7 @@ bool StyleCommand::preProcessing()
                 m_style->setPrecision(-1);   // anything resulting in zero, but not storage default
         }
     }
-    return AbstractRegionCommand::preProcessing();
+    return KCAbstractRegionCommand::preProcessing();
 }
 
 bool StyleCommand::mainProcessing()
@@ -210,7 +210,7 @@ bool StyleCommand::mainProcessing()
             m_sheet->cellStorage()->insertSubStyle(m_undoData[i].first.toRect(), m_undoData[i].second);
         }
     }
-    return AbstractRegionCommand::mainProcessing();
+    return KCAbstractRegionCommand::mainProcessing();
 }
 
 bool StyleCommand::postProcessing()

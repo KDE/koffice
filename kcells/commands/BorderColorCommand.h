@@ -22,7 +22,7 @@
 
 #include <QPair>
 #include <QColor>
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 #include "KCStyle.h"
 
 
@@ -30,7 +30,7 @@
  * \ingroup Commands
  * \brief Applies a color to an exising border.
  */
-class BorderColorCommand : public AbstractRegionCommand
+class BorderColorCommand : public KCAbstractRegionCommand
 {
 public:
     BorderColorCommand();

@@ -21,7 +21,7 @@
 #ifndef KSPREAD_DATA_MANIPULATORS
 #define KSPREAD_DATA_MANIPULATORS
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 #include "Global.h"
 #include "KCStyle.h"
 #include "KCValue.h"
@@ -31,7 +31,7 @@
  * \ingroup Commands
  * \brief Abstract command for setting values.
  */
-class AbstractDataManipulator : public AbstractRegionCommand
+class AbstractDataManipulator : public KCAbstractRegionCommand
 {
 public:
     AbstractDataManipulator(QUndoCommand* parent = 0);
@@ -218,7 +218,7 @@ protected:
  * \ingroup Commands
  * \brief Inserts/Removes cells by shifting other cells.
  */
-class ShiftManipulator : public AbstractRegionCommand
+class ShiftManipulator : public KCAbstractRegionCommand
 {
 public:
     enum Direction { ShiftRight, ShiftBottom };

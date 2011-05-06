@@ -20,7 +20,7 @@
 #ifndef KSPREAD_PASTE_COMMAND
 #define KSPREAD_PASTE_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 #include <KoXmlReader.h>
 
@@ -33,7 +33,7 @@ class KoXmlDocument;
  * \ingroup Commands
  * \brief Command to paste cell data.
  */
-class PasteCommand : public AbstractRegionCommand
+class PasteCommand : public KCAbstractRegionCommand
 {
 public:
     PasteCommand(QUndoCommand *parent = 0);

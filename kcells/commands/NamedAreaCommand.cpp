@@ -29,7 +29,7 @@
 #include "KCSheet.h"
 
 NamedAreaCommand::NamedAreaCommand(QUndoCommand* parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
 {
     setText(i18n("Add Named Area"));
 }
@@ -45,7 +45,7 @@ void NamedAreaCommand::setAreaName(const QString& name)
 
 void NamedAreaCommand::setReverse(bool reverse)
 {
-    AbstractRegionCommand::setReverse(reverse);
+    KCAbstractRegionCommand::setReverse(reverse);
     if (!m_reverse)
         setText(i18n("Add Named Area"));
     else
@@ -102,5 +102,5 @@ bool NamedAreaCommand::postProcessing()
             }
         }
     }
-    return AbstractRegionCommand::postProcessing();
+    return KCAbstractRegionCommand::postProcessing();
 }

@@ -35,7 +35,7 @@
 #include <math.h>
 
 AbstractDataManipulator::AbstractDataManipulator(QUndoCommand* parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
 {
     m_checkLock = true;
 }
@@ -94,7 +94,7 @@ bool AbstractDataManipulator::preProcessing()
     if (!m_firstrun)
         return true;
     m_sheet->cellStorage()->startUndoRecording();
-    return AbstractRegionCommand::preProcessing();
+    return KCAbstractRegionCommand::preProcessing();
 }
 
 bool AbstractDataManipulator::mainProcessing()
@@ -104,7 +104,7 @@ bool AbstractDataManipulator::mainProcessing()
         QUndoCommand::undo(); // undo child commands
         return true;
     }
-    return AbstractRegionCommand::mainProcessing();
+    return KCAbstractRegionCommand::mainProcessing();
 }
 
 bool AbstractDataManipulator::postProcessing()
@@ -386,7 +386,7 @@ bool CaseManipulator::wantChange(Element *element, int col, int row)
 
 
 ShiftManipulator::ShiftManipulator(QUndoCommand *parent)
-        : AbstractRegionCommand(parent)
+        : KCAbstractRegionCommand(parent)
         , m_mode(Insert)
 {
     m_checkLock = true;
@@ -476,7 +476,7 @@ bool ShiftManipulator::preProcessing()
             m_sheet->cellStorage()->startUndoRecording();
         }
     }
-    return AbstractRegionCommand::preProcessing();
+    return KCAbstractRegionCommand::preProcessing();
 }
 
 bool ShiftManipulator::mainProcessing()
@@ -489,7 +489,7 @@ bool ShiftManipulator::mainProcessing()
         }
         return true;
     }
-    return AbstractRegionCommand::mainProcessing(); // calls process(Element*)
+    return KCAbstractRegionCommand::mainProcessing(); // calls process(Element*)
 }
 
 bool ShiftManipulator::postProcessing()

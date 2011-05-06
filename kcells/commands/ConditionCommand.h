@@ -22,7 +22,7 @@
 
 #include <QLinkedList>
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 #include "KCCondition.h"
 
 
@@ -31,7 +31,7 @@
  * \ingroup Commands
  * \brief Adds/Removes condtional formatting to/of a cell region.
  */
-class CondtionCommand : public AbstractRegionCommand
+class CondtionCommand : public KCAbstractRegionCommand
 {
 public:
     CondtionCommand();

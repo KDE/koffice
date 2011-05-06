@@ -23,7 +23,7 @@
 #include <QPair>
 #include <QPen>
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 #include "KCStyle.h"
 
 class KCStyle;
@@ -33,7 +33,7 @@ class KCStyle;
  * \ingroup Commands
  * \brief Manipulates the style of a cell region.
  */
-class StyleCommand : public AbstractRegionCommand
+class StyleCommand : public KCAbstractRegionCommand
 {
 public:
     StyleCommand(QUndoCommand* parent = 0);

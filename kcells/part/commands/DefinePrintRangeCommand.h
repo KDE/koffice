@@ -24,7 +24,7 @@
 #include <QRect>
 #include <QString>
 
-#include "commands/AbstractRegionCommand.h"
+#include "commands/KCAbstractRegionCommand.h"
 
 class KCSheet;
 
@@ -32,7 +32,7 @@ class KCSheet;
  * \ingroup Commands
  * Defines a print range.
  */
-class DefinePrintRangeCommand : public AbstractRegionCommand
+class DefinePrintRangeCommand : public KCAbstractRegionCommand
 {
 public:
     explicit DefinePrintRangeCommand();

@@ -20,7 +20,7 @@
 #ifndef KSPREAD_MERGE_COMMAND
 #define KSPREAD_MERGE_COMMAND
 
-#include "AbstractRegionCommand.h"
+#include "KCAbstractRegionCommand.h"
 
 class Selection;
 
@@ -29,7 +29,7 @@ class Selection;
  * \ingroup Commands
  * \brief Merges and splits the cells of a cell region.
  */
-class MergeCommand : public AbstractRegionCommand
+class MergeCommand : public KCAbstractRegionCommand
 {
 public:
     MergeCommand(QUndoCommand* parent = 0);
@@ -61,7 +61,7 @@ protected:
 private:
     bool m_mergeHorizontal : 1;
     bool m_mergeVertical   : 1;
-    AbstractRegionCommand* m_unmerger; // to restore old merging
+    KCAbstractRegionCommand* m_unmerger; // to restore old merging
     Selection *m_selection;
 };
 

@@ -31,7 +31,7 @@
 
 
 DefinePrintRangeCommand::DefinePrintRangeCommand()
-        : AbstractRegionCommand()
+        : KCAbstractRegionCommand()
 {
     setText(i18n("Define Print Range"));
 }

@@ -30,7 +30,7 @@
 #include "database/DatabaseManager.h"
 
 AutoFilterCommand::AutoFilterCommand()
-        : AbstractRegionCommand()
+        : KCAbstractRegionCommand()
 {
     setText(i18n("Auto-Filter"));
 }
