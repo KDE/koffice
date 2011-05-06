@@ -19,7 +19,7 @@
 
 #include "MergeStrategy.h"
 
-#include "commands/MergeCommand.h"
+#include "commands/KCMergeCommand.h"
 #include "Selection.h"
 
 class MergeStrategy::Private
@@ -46,7 +46,7 @@ QUndoCommand *MergeStrategy::createCommand(QUndoCommand *parent)
     if (d->initialSelection == selection()->lastRange()) {
         return 0;
     }
-    MergeCommand *command = new MergeCommand(parent);
+    KCMergeCommand *command = new KCMergeCommand(parent);
     command->setSheet(selection()->activeSheet());
     command->setSelection(selection());
     command->add(*selection());

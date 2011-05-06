@@ -72,7 +72,7 @@
 #include "KCStyleStorage.h"
 #include "KCValueFormatter.h"
 
-#include "commands/MergeCommand.h"
+#include "commands/KCMergeCommand.h"
 #include "commands/StyleCommand.h"
 #include "commands/RowColumnManipulators.h"
 
@@ -832,7 +832,7 @@ void CellFormatDialog::slotApply()
     QUndoCommand* macroCommand = new QUndoCommand("Change KCFormat");
 
     if (isMerged != positionPage->getMergedCellState()) {
-        MergeCommand* command = new MergeCommand(macroCommand);
+        KCMergeCommand* command = new KCMergeCommand(macroCommand);
         command->setSheet(m_sheet);
         command->setSelection(m_selection);
         if (!positionPage->getMergedCellState())

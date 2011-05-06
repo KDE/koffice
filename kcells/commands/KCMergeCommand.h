@@ -25,15 +25,15 @@
 class Selection;
 
 /**
- * \class MergeCommand
+ * \class KCMergeCommand
  * \ingroup Commands
  * \brief Merges and splits the cells of a cell region.
  */
-class MergeCommand : public KCAbstractRegionCommand
+class KCMergeCommand : public KCAbstractRegionCommand
 {
 public:
-    MergeCommand(QUndoCommand* parent = 0);
-    virtual ~MergeCommand();
+    KCMergeCommand(QUndoCommand* parent = 0);
+    virtual ~KCMergeCommand();
 
     virtual bool preProcessing();
 

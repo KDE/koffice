@@ -18,7 +18,7 @@
 */
 
 // Local
-#include "MergeCommand.h"
+#include "KCMergeCommand.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -29,7 +29,7 @@
 #include "ui/Selection.h" // FIXME detach from ui
 #include "KCSheet.h"
 
-MergeCommand::MergeCommand(QUndoCommand* parent)
+KCMergeCommand::KCMergeCommand(QUndoCommand* parent)
         : KCAbstractRegionCommand(parent),
         m_merge(true),
         m_mergeHorizontal(false),
@@ -40,12 +40,12 @@ MergeCommand::MergeCommand(QUndoCommand* parent)
     m_checkLock = true;
 }
 
-MergeCommand::~MergeCommand()
+KCMergeCommand::~KCMergeCommand()
 {
     delete m_unmerger;
 }
 
-bool MergeCommand::process(Element* element)
+bool KCMergeCommand::process(Element* element)
 {
     if (element->type() != Element::Range || element->isRow() || element->isColumn()) {
         // TODO Stefan: remove these elements?!
@@ -121,9 +121,9 @@ bool MergeCommand::process(Element* element)
     return true;
 }
 
-QString MergeCommand::name() const
+QString KCMergeCommand::name() const
 {
-    if (m_merge) { // MergeCommand
+    if (m_merge) { // KCMergeCommand
         if (m_mergeHorizontal) {
             return i18n("Merge Cells Horizontally");
         } else if (m_mergeVertical) {
@@ -135,7 +135,7 @@ QString MergeCommand::name() const
     return i18n("Dissociate Cells");
 }
 
-bool MergeCommand::preProcessing()
+bool KCMergeCommand::preProcessing()
 {
     if (isColumnOrRowSelected()) {
         KMessageBox::information(0, i18n("Merging of columns or rows is not supported."));
@@ -164,10 +164,10 @@ bool MergeCommand::preProcessing()
             }
         }
 
-        if (m_merge) { // MergeCommand
+        if (m_merge) { // KCMergeCommand
             // we're in the manipulator's first execution
             // initialize the undo manipulator
-            m_unmerger = new MergeCommand();
+            m_unmerger = new KCMergeCommand();
             if (!m_mergeHorizontal && !m_mergeVertical) {
                 m_unmerger->setReverse(true);
             }
@@ -180,7 +180,7 @@ bool MergeCommand::preProcessing()
         }
     }
 
-    if (m_merge) { // MergeCommand
+    if (m_merge) { // KCMergeCommand
         if (m_reverse) { // dissociate
         } else { // merge
             // Dissociate cells before merging the whole region.
@@ -202,9 +202,9 @@ bool MergeCommand::preProcessing()
     return KCAbstractRegionCommand::preProcessing();
 }
 
-bool MergeCommand::postProcessing()
+bool KCMergeCommand::postProcessing()
 {
-    if (m_merge) { // MergeCommand
+    if (m_merge) { // KCMergeCommand
         if (m_reverse) { // dissociate
             // restore the old merge status
             if (m_mergeHorizontal || m_mergeVertical) {

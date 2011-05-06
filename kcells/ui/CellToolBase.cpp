@@ -64,7 +64,7 @@
 #include "commands/KCDeleteCommand.h"
 #include "commands/KCIndentationCommand.h"
 #include "commands/KCLinkCommand.h"
-#include "commands/MergeCommand.h"
+#include "commands/KCMergeCommand.h"
 #include "commands/PageBreakCommand.h"
 #include "commands/PasteCommand.h"
 #include "commands/PrecisionCommand.h"
@@ -2058,7 +2058,7 @@ void CellToolBase::mergeCells()
     if (selection()->activeSheet()->map()->isProtected()) {
         return;
     }
-    MergeCommand* const command = new MergeCommand();
+    KCMergeCommand* const command = new KCMergeCommand();
     command->setSheet(selection()->activeSheet());
     command->setSelection(selection());
     command->setHorizontalMerge(false);
@@ -2076,7 +2076,7 @@ void CellToolBase::mergeCellsHorizontal()
     if (selection()->activeSheet()->map()->isProtected()) {
         return;
     }
-    MergeCommand* const command = new MergeCommand();
+    KCMergeCommand* const command = new KCMergeCommand();
     command->setSheet(selection()->activeSheet());
     command->setHorizontalMerge(true);
     command->setVerticalMerge(false);
@@ -2094,7 +2094,7 @@ void CellToolBase::mergeCellsVertical()
     if (selection()->activeSheet()->map()->isProtected()) {
         return;
     }
-    MergeCommand* const command = new MergeCommand();
+    KCMergeCommand* const command = new KCMergeCommand();
     command->setSheet(selection()->activeSheet());
     command->setHorizontalMerge(false);
     command->setVerticalMerge(true);
@@ -2112,7 +2112,7 @@ void CellToolBase::dissociateCells()
     if (selection()->activeSheet()->map()->isProtected()) {
         return;
     }
-    MergeCommand* const command = new MergeCommand();
+    KCMergeCommand* const command = new KCMergeCommand();
     command->setSheet(selection()->activeSheet());
     command->setReverse(true);
     command->setSelection(selection());

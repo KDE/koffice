@@ -40,7 +40,7 @@ SET (commands_DIR_SRCS
     commands/KCDeleteCommand.cpp
     commands/KCIndentationCommand.cpp
     commands/KCLinkCommand.cpp
-    commands/MergeCommand.cpp
+    commands/KCMergeCommand.cpp
     commands/NamedAreaCommand.cpp
     commands/PageBreakCommand.cpp
     commands/PasteCommand.cpp
