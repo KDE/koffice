@@ -38,7 +38,7 @@
 
 // commands
 #include "commands/KCBorderColorCommand.h"
-#include "commands/CommentCommand.h"
+#include "commands/KCCommentCommand.h"
 #include "commands/StyleCommand.h"
 
 #include <KoShapeManager.h>
@@ -362,7 +362,7 @@ void ViewAdaptor::setSelectionVerticalText(bool enable)
 
 void ViewAdaptor::setSelectionComment(const QString& comment)
 {
-    CommentCommand* command = new CommentCommand();
+    KCCommentCommand* command = new KCCommentCommand();
     command->setSheet(m_view->activeSheet());
     command->setText(i18n("Add Comment"));
     command->setComment(comment.trimmed());

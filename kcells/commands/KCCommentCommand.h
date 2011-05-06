@@ -24,14 +24,14 @@
 
 
 /**
- * \class CommentCommand
+ * \class KCCommentCommand
  * \ingroup Commands
  * \brief Adds/Removes comments to/of a cell region.
  */
-class CommentCommand : public KCAbstractRegionCommand
+class KCCommentCommand : public KCAbstractRegionCommand
 {
 public:
-    CommentCommand(QUndoCommand* parent = 0);
+    KCCommentCommand(QUndoCommand* parent = 0);
     void setComment(const QString& comment);
 
 protected:

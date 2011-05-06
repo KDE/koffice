@@ -18,7 +18,7 @@
 */
 
 // Local
-#include "CommentCommand.h"
+#include "KCCommentCommand.h"
 
 
 #include <klocale.h>
@@ -27,12 +27,12 @@
 #include "KCSheet.h"
 #include "KCRectStorage.h"
 
-CommentCommand::CommentCommand(QUndoCommand* parent)
+KCCommentCommand::KCCommentCommand(QUndoCommand* parent)
         : KCAbstractRegionCommand(parent)
 {
 }
 
-bool CommentCommand::process(Element* element)
+bool KCCommentCommand::process(Element* element)
 {
     if (!m_reverse) {
         // create undo
@@ -43,7 +43,7 @@ bool CommentCommand::process(Element* element)
     return true;
 }
 
-bool CommentCommand::mainProcessing()
+bool KCCommentCommand::mainProcessing()
 {
     if (m_reverse) {
         m_sheet->cellStorage()->setComment(*this, QString());
@@ -53,7 +53,7 @@ bool CommentCommand::mainProcessing()
     return KCAbstractRegionCommand::mainProcessing();
 }
 
-void CommentCommand::setComment(const QString& comment)
+void KCCommentCommand::setComment(const QString& comment)
 {
     m_comment = comment;
     if (m_comment.isEmpty())

@@ -24,7 +24,7 @@ This is an example of typical use of a command NOT processing cell ranges:
 \endcode
 This is an example of typical use of a command, which works on a cell range:
 \code
-    KCells::CommentCommand* command = new KCells::CommentCommand();
+    KCells::KCCommentCommand* command = new KCells::KCCommentCommand();
     command->setSheet( sheet );
     command->setName( i18n( "Add Comment" ) );
     command->setComment( comment );

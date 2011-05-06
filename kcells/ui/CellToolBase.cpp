@@ -57,7 +57,7 @@
 // commands
 #include "commands/KCAutoFilterCommand.h"
 #include "commands/KCBorderColorCommand.h"
-#include "commands/CommentCommand.h"
+#include "commands/KCCommentCommand.h"
 #include "commands/ConditionCommand.h"
 #include "commands/CopyCommand.h"
 #include "commands/DataManipulators.h"
@@ -2390,7 +2390,7 @@ void CellToolBase::clearComment()
     if (selection()->activeSheet()->areaIsEmpty(*selection(), KCSheet::Comment))
         return;
 
-    CommentCommand* command = new CommentCommand();
+    KCCommentCommand* command = new KCCommentCommand();
     command->setSheet(selection()->activeSheet());
     command->setText(i18n("Remove Comment"));
     command->setComment(QString());
@@ -3312,7 +3312,7 @@ void CellToolBase::slotReplace(const QString &newText, int, int, int)
         command->setValue(KCValue(newText));
         command->add(KCRegion(d->findPos, d->searchInSheets.currentSheet));
     } else if (d->typeValue == FindOption::Note) {
-        CommentCommand* command = new CommentCommand(d->replaceCommand);
+        KCCommentCommand* command = new KCCommentCommand(d->replaceCommand);
         command->setComment(newText);
         command->setSheet(d->searchInSheets.currentSheet);
         command->add(KCRegion(d->findPos, d->searchInSheets.currentSheet));

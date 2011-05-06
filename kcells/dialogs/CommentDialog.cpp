@@ -35,7 +35,7 @@
 #include "ui/Selection.h"
 #include "KCSheet.h"
 
-#include "commands/CommentCommand.h"
+#include "commands/KCCommentCommand.h"
 
 CommentDialog::CommentDialog(QWidget* parent, Selection* selection)
         : KDialog(parent)
@@ -75,7 +75,7 @@ void CommentDialog::slotTextChanged()
 
 void CommentDialog::slotOk()
 {
-    CommentCommand* command = new CommentCommand();
+    KCCommentCommand* command = new KCCommentCommand();
     command->setSheet(m_selection->activeSheet());
     command->setText(i18n("Add Comment"));
     command->setComment(multiLine->toPlainText().trimmed());
