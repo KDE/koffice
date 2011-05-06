@@ -45,7 +45,7 @@
 #include "ui/Selection.h"
 #include "KCSheet.h"
 
-#include "commands/CSVDataCommand.h"
+#include "commands/KCCSVDataCommand.h"
 
 CSVDialog::CSVDialog(QWidget* parent, Selection* selection, Mode mode)
         : KoCsvImportDialog(parent),
@@ -169,7 +169,7 @@ void CSVDialog::accept()
         }
     }
 
-    CSVDataCommand* command = new CSVDataCommand();
+    KCCSVDataCommand* command = new KCCSVDataCommand();
     if (m_mode == Clipboard)
         command->setText(i18n("Inserting From Clipboard"));
     else if (m_mode == File)

@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "CSVDataCommand.h"
+#include "KCCSVDataCommand.h"
 
 #include <klocale.h>
 
@@ -27,36 +27,36 @@
 #include "KCValue.h"
 #include "KCValueConverter.h"
 
-CSVDataCommand::CSVDataCommand()
+KCCSVDataCommand::KCCSVDataCommand()
         : AbstractDataManipulator()
 {
 }
 
-CSVDataCommand::~CSVDataCommand()
+KCCSVDataCommand::~KCCSVDataCommand()
 {
 }
 
-void CSVDataCommand::setValue(const KCValue& value)
+void KCCSVDataCommand::setValue(const KCValue& value)
 {
     m_value = value;
 }
 
-void CSVDataCommand::setColumnDataTypes(const QList<KoCsvImportDialog::DataType>& dataTypes)
+void KCCSVDataCommand::setColumnDataTypes(const QList<KoCsvImportDialog::DataType>& dataTypes)
 {
     m_dataTypes = dataTypes;
 }
 
-void CSVDataCommand::setDecimalSymbol(const QString& symbol)
+void KCCSVDataCommand::setDecimalSymbol(const QString& symbol)
 {
     m_decimalSymbol = symbol;
 }
 
-void CSVDataCommand::setThousandsSeparator(const QString& separator)
+void KCCSVDataCommand::setThousandsSeparator(const QString& separator)
 {
     m_thousandsSeparator = separator;
 }
 
-KCValue CSVDataCommand::newValue(Element* element, int col, int row, bool* parse, KCFormat::Type* fmtType)
+KCValue KCCSVDataCommand::newValue(Element* element, int col, int row, bool* parse, KCFormat::Type* fmtType)
 {
     Q_UNUSED(fmtType)
     const int colidx = col - element->rect().left();
@@ -84,13 +84,13 @@ KCValue CSVDataCommand::newValue(Element* element, int col, int row, bool* parse
     return value;
 }
 
-bool CSVDataCommand::wantChange(Element* element, int col, int row)
+bool KCCSVDataCommand::wantChange(Element* element, int col, int row)
 {
     Q_UNUSED(row)
     return (m_dataTypes.value(col - element->rect().left()) != KoCsvImportDialog::None);
 }
 
-bool CSVDataCommand::preProcessing()
+bool KCCSVDataCommand::preProcessing()
 {
     if (!AbstractDataManipulator::preProcessing())
         return false;
@@ -102,7 +102,7 @@ bool CSVDataCommand::preProcessing()
     return true;
 }
 
-bool CSVDataCommand::postProcessing()
+bool KCCSVDataCommand::postProcessing()
 {
     if (!AbstractDataManipulator::postProcessing())
         return false;

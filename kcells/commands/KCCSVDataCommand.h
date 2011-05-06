@@ -29,18 +29,18 @@
  * \ingroup Commands
  * \brief Parses CSV data an fills it into a cell range.
  */
-class CSVDataCommand : public AbstractDataManipulator
+class KCCSVDataCommand : public AbstractDataManipulator
 {
 public:
     /**
      * Constructor.
      */
-    CSVDataCommand();
+    KCCSVDataCommand();
 
     /**
      * Destructor.
      */
-    virtual ~CSVDataCommand();
+    virtual ~KCCSVDataCommand();
 
     void setValue(const KCValue& value);
     void setColumnDataTypes(const QList<KoCsvImportDialog::DataType>& dataTypes);
