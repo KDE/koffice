@@ -18,7 +18,7 @@
 */
 
 // Local
-#include "ConditionCommand.h"
+#include "KCConditionCommand.h"
 
 #include <klocale.h>
 
@@ -26,12 +26,12 @@
 #include "KCConditionsStorage.h"
 #include "KCSheet.h"
 
-CondtionCommand::CondtionCommand()
+KCConditionCommand::KCConditionCommand()
         : KCAbstractRegionCommand()
 {
 }
 
-bool CondtionCommand::process(Element* element)
+bool KCConditionCommand::process(Element* element)
 {
     if (!m_reverse) {
         // create undo
@@ -42,7 +42,7 @@ bool CondtionCommand::process(Element* element)
     return true;
 }
 
-bool CondtionCommand::mainProcessing()
+bool KCConditionCommand::mainProcessing()
 {
     if (m_reverse) {
         m_sheet->cellStorage()->setConditions(*this, KCConditions());
@@ -52,7 +52,7 @@ bool CondtionCommand::mainProcessing()
     return KCAbstractRegionCommand::mainProcessing();
 }
 
-void CondtionCommand::setConditionList(const QLinkedList<KCConditional>& list)
+void KCConditionCommand::setConditionList(const QLinkedList<KCConditional>& list)
 {
     m_conditions.setConditionList(list);
     if (m_conditions.isEmpty())

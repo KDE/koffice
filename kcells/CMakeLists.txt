@@ -33,7 +33,7 @@ SET (commands_DIR_SRCS
     commands/KCBorderColorCommand.cpp
     commands/KCColumnStyleCommand.cpp
     commands/KCCommentCommand.cpp
-    commands/ConditionCommand.cpp
+    commands/KCConditionCommand.cpp
     commands/KCCopyCommand.cpp
     commands/KCCSVDataCommand.cpp
     commands/DataManipulators.cpp

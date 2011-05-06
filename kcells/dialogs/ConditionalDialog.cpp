@@ -33,7 +33,7 @@
 #include "KCValueParser.h"
 
 // commands
-#include "commands/ConditionCommand.h"
+#include "commands/KCConditionCommand.h"
 
 #include <kcombobox.h>
 #include <kdebug.h>
@@ -540,7 +540,7 @@ void ConditionalDialog::slotOk()
         newList.append(newCondition);
 
     kDebug() << "Setting conditional list";
-    CondtionCommand* manipulator = new CondtionCommand();
+    KCConditionCommand* manipulator = new KCConditionCommand();
     manipulator->setSheet(m_selection->activeSheet());
     manipulator->setConditionList(newList);
     manipulator->add(*m_selection);

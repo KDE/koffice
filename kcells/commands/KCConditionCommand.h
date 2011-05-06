@@ -27,14 +27,14 @@
 
 
 /**
- * \class CondtionCommand
+ * \class KCConditionCommand
  * \ingroup Commands
  * \brief Adds/Removes condtional formatting to/of a cell region.
  */
-class CondtionCommand : public KCAbstractRegionCommand
+class KCConditionCommand : public KCAbstractRegionCommand
 {
 public:
-    CondtionCommand();
+    KCConditionCommand();
     void setConditionList(const QLinkedList<KCConditional>& list);
 
 protected:

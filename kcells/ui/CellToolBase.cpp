@@ -58,7 +58,7 @@
 #include "commands/KCAutoFilterCommand.h"
 #include "commands/KCBorderColorCommand.h"
 #include "commands/KCCommentCommand.h"
-#include "commands/ConditionCommand.h"
+#include "commands/KCConditionCommand.h"
 #include "commands/KCCopyCommand.h"
 #include "commands/DataManipulators.h"
 #include "commands/KCDeleteCommand.h"
@@ -2411,7 +2411,7 @@ void CellToolBase::clearConditionalStyles()
     if (selection()->activeSheet()->areaIsEmpty(*selection(), KCSheet::ConditionalCellAttribute))
         return;
 
-    CondtionCommand* command = new CondtionCommand();
+    KCConditionCommand* command = new KCConditionCommand();
     command->setSheet(selection()->activeSheet());
     command->setConditionList(QLinkedList<KCConditional>());
     command->add(*selection());
