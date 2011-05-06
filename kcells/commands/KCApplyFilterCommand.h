@@ -30,18 +30,18 @@ class Filter;
  * \ingroup Commands
  * \brief Filtering a cell range.
  */
-class ApplyFilterCommand : public KCAbstractRegionCommand
+class KCApplyFilterCommand : public KCAbstractRegionCommand
 {
 public:
     /**
      * Constructor.
      */
-    ApplyFilterCommand();
+    KCApplyFilterCommand();
 
     /**
      * Destructor.
      */
-    virtual ~ApplyFilterCommand();
+    virtual ~KCApplyFilterCommand();
 
     virtual void redo();
     virtual void undo();

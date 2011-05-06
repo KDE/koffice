@@ -36,7 +36,7 @@
 #include "KCSheet.h"
 #include "KCValueConverter.h"
 
-#include "commands/ApplyFilterCommand.h"
+#include "commands/KCApplyFilterCommand.h"
 
 class FilterPopup::Private
 {
@@ -193,7 +193,7 @@ void FilterPopup::closeEvent(QCloseEvent* event)
         updateFilter(&filter);
         // any real change?
         if (d->database.filter() != filter) {
-            ApplyFilterCommand* command = new ApplyFilterCommand();
+            KCApplyFilterCommand* command = new KCApplyFilterCommand();
             command->setSheet(d->database.range().lastSheet());
             command->add(d->database.range());
             command->setOldFilter(d->database.filter());

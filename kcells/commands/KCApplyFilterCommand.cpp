@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "ApplyFilterCommand.h"
+#include "KCApplyFilterCommand.h"
 
 #include <klocale.h>
 
@@ -30,17 +30,17 @@
 #include "database/Database.h"
 #include "database/Filter.h"
 
-ApplyFilterCommand::ApplyFilterCommand()
+KCApplyFilterCommand::KCApplyFilterCommand()
         : KCAbstractRegionCommand()
 {
     setText(i18n("Apply Filter"));
 }
 
-ApplyFilterCommand::~ApplyFilterCommand()
+KCApplyFilterCommand::~KCApplyFilterCommand()
 {
 }
 
-void ApplyFilterCommand::redo()
+void KCApplyFilterCommand::redo()
 {
     m_undoData.clear();
     Database database = m_database;
@@ -70,7 +70,7 @@ void ApplyFilterCommand::redo()
     m_sheet->map()->addDamage(new KCCellDamage(m_sheet, *this, KCCellDamage::Appearance));
 }
 
-void ApplyFilterCommand::undo()
+void KCApplyFilterCommand::undo()
 {
     Database database = m_database;
     database.setFilter(*m_oldFilter);
@@ -95,12 +95,12 @@ void ApplyFilterCommand::undo()
     m_sheet->map()->addDamage(new KCCellDamage(m_sheet, *this, KCCellDamage::Appearance));
 }
 
-void ApplyFilterCommand::setDatabase(const Database& database)
+void KCApplyFilterCommand::setDatabase(const Database& database)
 {
     m_database = database;
 }
 
-void ApplyFilterCommand::setOldFilter(const Filter& filter)
+void KCApplyFilterCommand::setOldFilter(const Filter& filter)
 {
     m_oldFilter = new Filter(filter);
 }
