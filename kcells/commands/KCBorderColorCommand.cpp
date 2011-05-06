@@ -18,7 +18,7 @@
 */
 
 // Local
-#include "BorderColorCommand.h"
+#include "KCBorderColorCommand.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -31,13 +31,13 @@
 
 #include <QPen>
 
-BorderColorCommand::BorderColorCommand()
+KCBorderColorCommand::KCBorderColorCommand()
         : KCAbstractRegionCommand()
 {
     setText(i18n("Change Border Color"));
 }
 
-bool BorderColorCommand::preProcessing()
+bool KCBorderColorCommand::preProcessing()
 {
     if (m_firstrun) {
         QList< QPair<QRectF, KCSharedSubStyle> > undoData = m_sheet->styleStorage()->undoData(*this);
@@ -59,7 +59,7 @@ bool BorderColorCommand::preProcessing()
     return KCAbstractRegionCommand::preProcessing();
 }
 
-bool BorderColorCommand::mainProcessing()
+bool KCBorderColorCommand::mainProcessing()
 {
     if (!m_reverse) {
         // change colors
@@ -110,7 +110,7 @@ bool BorderColorCommand::mainProcessing()
     return true;
 }
 
-bool BorderColorCommand::postProcessing()
+bool KCBorderColorCommand::postProcessing()
 {
     return true;
 }

@@ -56,7 +56,7 @@
 
 // commands
 #include "commands/KCAutoFilterCommand.h"
-#include "commands/BorderColorCommand.h"
+#include "commands/KCBorderColorCommand.h"
 #include "commands/CommentCommand.h"
 #include "commands/ConditionCommand.h"
 #include "commands/CopyCommand.h"
@@ -1912,7 +1912,7 @@ void CellToolBase::borderOutline()
 
 void CellToolBase::borderColor(const KoColor &color)
 {
-    BorderColorCommand* command = new BorderColorCommand();
+    KCBorderColorCommand* command = new KCBorderColorCommand();
     command->setSheet(selection()->activeSheet());
     command->setColor(color.toQColor());
     command->add(*selection());

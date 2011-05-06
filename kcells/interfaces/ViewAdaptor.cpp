@@ -37,7 +37,7 @@
 #include "MapAdaptor.h"
 
 // commands
-#include "commands/BorderColorCommand.h"
+#include "commands/KCBorderColorCommand.h"
 #include "commands/CommentCommand.h"
 #include "commands/StyleCommand.h"
 

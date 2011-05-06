@@ -30,10 +30,10 @@
  * \ingroup Commands
  * \brief Applies a color to an exising border.
  */
-class BorderColorCommand : public KCAbstractRegionCommand
+class KCBorderColorCommand : public KCAbstractRegionCommand
 {
 public:
-    BorderColorCommand();
+    KCBorderColorCommand();
     void setColor(const QColor& color) {
         m_color = color;
     }

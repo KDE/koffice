@@ -368,7 +368,7 @@ protected:
 
 private:
     friend class KCStyleStorage;
-    friend class BorderColorCommand;
+    friend class KCBorderColorCommand;
 
     class Private;
     QSharedDataPointer<Private> d;
