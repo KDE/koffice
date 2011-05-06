@@ -26,11 +26,11 @@
  * \ingroup Commands
  * \brief Sets/Unsets manual page breaks.
  */
-class PageBreakCommand : public KCAbstractRegionCommand
+class KCPageBreakCommand : public KCAbstractRegionCommand
 {
 public:
-    PageBreakCommand(QUndoCommand *parent = 0);
-    virtual ~PageBreakCommand();
+    KCPageBreakCommand(QUndoCommand *parent = 0);
+    virtual ~KCPageBreakCommand();
 
     enum Mode { BreakBeforeColumn, BreakBeforeRow };
     void setMode(Mode mode);

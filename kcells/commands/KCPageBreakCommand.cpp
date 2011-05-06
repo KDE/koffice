@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "PageBreakCommand.h"
+#include "KCPageBreakCommand.h"
 
 #include "Damages.h"
 #include "KCMap.h"
@@ -25,22 +25,22 @@
 #include "KCSheet.h"
 #include "KCSheetPrint.h"
 
-PageBreakCommand::PageBreakCommand(QUndoCommand *parent)
+KCPageBreakCommand::KCPageBreakCommand(QUndoCommand *parent)
         : KCAbstractRegionCommand(parent)
         , m_mode(BreakBeforeColumn)
 {
 }
 
-PageBreakCommand::~PageBreakCommand()
+KCPageBreakCommand::~KCPageBreakCommand()
 {
 }
 
-void PageBreakCommand::setMode(Mode mode)
+void KCPageBreakCommand::setMode(Mode mode)
 {
     m_mode = mode;
 }
 
-bool PageBreakCommand::process(Element *element)
+bool KCPageBreakCommand::process(Element *element)
 {
     // No reverse means setting; reverse means unsetting.
     const bool enable = !m_reverse;
@@ -54,7 +54,7 @@ bool PageBreakCommand::process(Element *element)
     return true;
 }
 
-bool PageBreakCommand::postProcessing()
+bool KCPageBreakCommand::postProcessing()
 {
     const QRect range = boundingRect();
     if (m_mode == BreakBeforeColumn && range.left() > 1) {

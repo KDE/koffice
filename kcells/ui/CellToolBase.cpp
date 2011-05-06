@@ -65,7 +65,7 @@
 #include "commands/KCIndentationCommand.h"
 #include "commands/KCLinkCommand.h"
 #include "commands/KCMergeCommand.h"
-#include "commands/PageBreakCommand.h"
+#include "commands/KCPageBreakCommand.h"
 #include "commands/PasteCommand.h"
 #include "commands/PrecisionCommand.h"
 #include "commands/RowColumnManipulators.h"
@@ -3460,9 +3460,9 @@ void CellToolBase::documentSettingsDialog()
 
 void CellToolBase::breakBeforeColumn(bool enable)
 {
-    PageBreakCommand *command = new PageBreakCommand();
+    KCPageBreakCommand *command = new KCPageBreakCommand();
     command->setSheet(selection()->activeSheet());
-    command->setMode(PageBreakCommand::BreakBeforeColumn);
+    command->setMode(KCPageBreakCommand::BreakBeforeColumn);
     command->setReverse(!enable);
     command->add(*selection());
     command->execute(canvas());
@@ -3470,9 +3470,9 @@ void CellToolBase::breakBeforeColumn(bool enable)
 
 void CellToolBase::breakBeforeRow(bool enable)
 {
-    PageBreakCommand *command = new PageBreakCommand();
+    KCPageBreakCommand *command = new KCPageBreakCommand();
     command->setSheet(selection()->activeSheet());
-    command->setMode(PageBreakCommand::BreakBeforeRow);
+    command->setMode(KCPageBreakCommand::BreakBeforeRow);
     command->setReverse(!enable);
     command->add(*selection());
     command->execute(canvas());

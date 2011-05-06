@@ -42,7 +42,7 @@ SET (commands_DIR_SRCS
     commands/KCLinkCommand.cpp
     commands/KCMergeCommand.cpp
     commands/KCNamedAreaCommand.cpp
-    commands/PageBreakCommand.cpp
+    commands/KCPageBreakCommand.cpp
     commands/PasteCommand.cpp
     commands/PrecisionCommand.cpp
     commands/RowColumnManipulators.cpp
