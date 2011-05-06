@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "SpellCheckCommand.h"
+#include "KCSpellCheckCommand.h"
 
 #include "KCCell.h"
 #include "KCCellStorage.h"
@@ -34,7 +34,7 @@
 #include <sonnet/dialog.h>
 #include <sonnet/speller.h>
 
-class SpellCheckCommand::Private
+class KCSpellCheckCommand::Private
 {
 public:
     KoCanvasBase* canvasBase;
@@ -48,7 +48,7 @@ public:
     QUndoCommand* command;
 };
 
-SpellCheckCommand::SpellCheckCommand(const KCRegion &region, KoCanvasBase* canvasBase)
+KCSpellCheckCommand::KCSpellCheckCommand(const KCRegion &region, KoCanvasBase* canvasBase)
         : BackgroundChecker(canvasBase->canvasWidget())
         , d(new Private)
 {
@@ -73,13 +73,13 @@ SpellCheckCommand::SpellCheckCommand(const KCRegion &region, KoCanvasBase* canva
             this, SLOT(replace(const QString&, int, const QString&)));
 }
 
-SpellCheckCommand::~SpellCheckCommand()
+KCSpellCheckCommand::~KCSpellCheckCommand()
 {
     delete d->dialog;
     delete d;
 }
 
-QString SpellCheckCommand::fetchMoreText()
+QString KCSpellCheckCommand::fetchMoreText()
 {
     QString text;
     // Take the next string value.
@@ -119,7 +119,7 @@ QString SpellCheckCommand::fetchMoreText()
     return text;
 }
 
-void SpellCheckCommand::finishedCurrentFeed()
+void KCSpellCheckCommand::finishedCurrentFeed()
 {
     if (d->dialog->originalBuffer() == d->dialog->buffer()) {
         return;
@@ -136,7 +136,7 @@ void SpellCheckCommand::finishedCurrentFeed()
     command->setRegisterUndo(false);
 }
 
-void SpellCheckCommand::finishCommand()
+void KCSpellCheckCommand::finishCommand()
 {
     if (d->command) {
         d->canvasBase->addCommand(d->command);

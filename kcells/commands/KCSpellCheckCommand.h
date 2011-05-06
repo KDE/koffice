@@ -30,19 +30,19 @@ class KCRegion;
  * \ingroup Commands
  * \brief Spellchecks a cell range.
  */
-class SpellCheckCommand : public Sonnet::BackgroundChecker
+class KCSpellCheckCommand : public Sonnet::BackgroundChecker
 {
     Q_OBJECT
 public:
     /**
      * Constructor.
      */
-    SpellCheckCommand(const KCRegion &region, KoCanvasBase* canvasBase);
+    KCSpellCheckCommand(const KCRegion &region, KoCanvasBase* canvasBase);
 
     /**
      * Destructor.
      */
-    ~SpellCheckCommand();
+    ~KCSpellCheckCommand();
 
 protected:
     virtual QString fetchMoreText();

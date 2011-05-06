@@ -70,7 +70,7 @@
 #include "commands/KCPrecisionCommand.h"
 #include "commands/RowColumnManipulators.h"
 #include "commands/KCSortManipulator.h"
-#include "commands/SpellCheckCommand.h"
+#include "commands/KCSpellCheckCommand.h"
 #include "commands/StyleCommand.h"
 #include "commands/ValidityCommand.h"
 
@@ -3329,7 +3329,7 @@ void CellToolBase::gotoCell()
 
 void CellToolBase::spellCheck()
 {
-    SpellCheckCommand* command = new SpellCheckCommand(*selection(), canvas());
+    KCSpellCheckCommand* command = new KCSpellCheckCommand(*selection(), canvas());
     command->start();
 }
 
