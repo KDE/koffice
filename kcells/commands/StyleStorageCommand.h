@@ -38,32 +38,32 @@
  *
  * Used for recording undo data in KCCellStorage.
  */
-class StyleStorageUndoCommand : public QUndoCommand
+class StyleStorageCommand : public QUndoCommand
 {
 public:
     typedef QPair<QRectF, KCSharedSubStyle> Pair;
 
-    explicit StyleStorageUndoCommand(KCStyleStorage *storage, QUndoCommand *parent = 0);
+    explicit StyleStorageCommand(KCStyleStorage *storage, QUndoCommand *parent = 0);
 
     virtual void undo();
 
     void add(const QList<Pair> &pairs);
 
-    StyleStorageUndoCommand& operator<<(const Pair &pair);
-    StyleStorageUndoCommand& operator<<(const QList<Pair> &pairs);
+    StyleStorageCommand& operator<<(const Pair &pair);
+    StyleStorageCommand& operator<<(const QList<Pair> &pairs);
 
 private:
     KCStyleStorage *const m_storage;
     QList<Pair> m_undoData;
 };
 
-StyleStorageUndoCommand::StyleStorageUndoCommand(KCStyleStorage *storage, QUndoCommand *parent)
+StyleStorageCommand::StyleStorageCommand(KCStyleStorage *storage, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_storage(storage)
 {
 }
 
-void StyleStorageUndoCommand::undo()
+void StyleStorageCommand::undo()
 {
     for (int i = 0; i < m_undoData.count(); ++i) {
         m_storage->insert(m_undoData[i].first.toRect(), m_undoData[i].second);
@@ -71,18 +71,18 @@ void StyleStorageUndoCommand::undo()
     QUndoCommand::undo(); // undo possible child commands
 }
 
-void StyleStorageUndoCommand::add(const QList<Pair>& pairs)
+void StyleStorageCommand::add(const QList<Pair>& pairs)
 {
     m_undoData << pairs;
 }
 
-StyleStorageUndoCommand& StyleStorageUndoCommand::operator<<(const Pair& pair)
+StyleStorageCommand& StyleStorageCommand::operator<<(const Pair& pair)
 {
     m_undoData << pair;
     return *this;
 }
 
-StyleStorageUndoCommand& StyleStorageUndoCommand::operator<<(const QList<Pair>& pairs)
+StyleStorageCommand& StyleStorageCommand::operator<<(const QList<Pair>& pairs)
 {
     m_undoData << pairs;
     return *this;

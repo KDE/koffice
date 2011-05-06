@@ -47,7 +47,7 @@
 // commands
 #include "commands/KCPointStorageUndoCommand.h"
 #include "commands/KCRectStorageUndoCommand.h"
-#include "commands/StyleStorageUndoCommand.h"
+#include "commands/StyleStorageCommand.h"
 
 // database
 #include "database/DatabaseStorage.h"
@@ -190,8 +190,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->richTexts);
     }
     if (!undoData->styles.isEmpty()) {
-        StyleStorageUndoCommand *const command
-        = new StyleStorageUndoCommand(styleStorage, parent);
+        StyleStorageCommand *const command
+        = new StyleStorageCommand(styleStorage, parent);
         command->add(undoData->styles);
     }
     if (!undoData->userInputs.isEmpty()) {
