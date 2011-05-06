@@ -26,9 +26,9 @@
 #include "KCMap.h"
 #include "KCSheet.h"
 
-// ----- RenameSheetCommand -----
+// ----- KCRenameSheetCommand -----
 
-RenameSheetCommand::RenameSheetCommand(KCSheet* s, const QString &name)
+KCRenameSheetCommand::KCRenameSheetCommand(KCSheet* s, const QString &name)
 {
     sheet = s;
     if (s) oldName = s->sheetName();
@@ -36,13 +36,13 @@ RenameSheetCommand::RenameSheetCommand(KCSheet* s, const QString &name)
     setText(i18n("Rename Sheet"));
 }
 
-void RenameSheetCommand::redo()
+void KCRenameSheetCommand::redo()
 {
     if (sheet)
         sheet->setSheetName(newName);
 }
 
-void RenameSheetCommand::undo()
+void KCRenameSheetCommand::undo()
 {
     if (sheet)
         sheet->setSheetName(oldName);

@@ -30,10 +30,10 @@ class KCSheet;
  * \ingroup Commands
  * \brief Renames a sheet.
  */
-class RenameSheetCommand : public QUndoCommand
+class KCRenameSheetCommand : public QUndoCommand
 {
 public:
-    RenameSheetCommand(KCSheet* sheet, const QString &name);
+    KCRenameSheetCommand(KCSheet* sheet, const QString &name);
 
     virtual void redo();
     virtual void undo();

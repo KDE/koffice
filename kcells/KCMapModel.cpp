@@ -186,7 +186,7 @@ bool KCMapModel::setData(const QModelIndex &index, const QVariant &value, int ro
         case Qt::EditRole: {
             const QString name(value.toString());
             if (!name.isEmpty()) {
-                QUndoCommand* const command = new RenameSheetCommand(sheet, name);
+                QUndoCommand* const command = new KCRenameSheetCommand(sheet, name);
                 emit addCommandRequested(command);
                 emit dataChanged(index, index);
                 return true;

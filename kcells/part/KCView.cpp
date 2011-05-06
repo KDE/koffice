@@ -1752,7 +1752,7 @@ void KCView::slotRename()
             return;
         }
 
-        QUndoCommand* command = new RenameSheetCommand(sheet, newName);
+        QUndoCommand* command = new KCRenameSheetCommand(sheet, newName);
         doc()->addCommand(command);
 
         doc()->setModified(true);
