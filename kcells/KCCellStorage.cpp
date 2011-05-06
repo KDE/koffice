@@ -45,7 +45,7 @@
 #include "KCValueStorage.h"
 
 // commands
-#include "commands/PointStorageUndoCommand.h"
+#include "commands/KCPointStorageUndoCommand.h"
 #include "commands/RectStorageUndoCommand.h"
 #include "commands/StyleStorageUndoCommand.h"
 
@@ -160,8 +160,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->databases);
     }
     if (!undoData->formulas.isEmpty()) {
-        PointStorageUndoCommand<KCFormula> *const command
-        = new PointStorageUndoCommand<KCFormula>(sheet->model(), FormulaRole, parent);
+        KCPointStorageUndoCommand<KCFormula> *const command
+        = new KCPointStorageUndoCommand<KCFormula>(sheet->model(), FormulaRole, parent);
         command->add(undoData->formulas);
     }
     if (!undoData->fusions.isEmpty()) {
@@ -170,8 +170,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->fusions);
     }
     if (!undoData->links.isEmpty()) {
-        PointStorageUndoCommand<QString> *const command
-        = new PointStorageUndoCommand<QString>(sheet->model(), LinkRole, parent);
+        KCPointStorageUndoCommand<QString> *const command
+        = new KCPointStorageUndoCommand<QString>(sheet->model(), LinkRole, parent);
         command->add(undoData->links);
     }
     if (!undoData->matrices.isEmpty()) {
@@ -185,8 +185,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->namedAreas);
     }
     if (!undoData->richTexts.isEmpty()) {
-        PointStorageUndoCommand<QSharedPointer<QTextDocument> > *const command
-        = new PointStorageUndoCommand<QSharedPointer<QTextDocument> >(sheet->model(), RichTextRole, parent);
+        KCPointStorageUndoCommand<QSharedPointer<QTextDocument> > *const command
+        = new KCPointStorageUndoCommand<QSharedPointer<QTextDocument> >(sheet->model(), RichTextRole, parent);
         command->add(undoData->richTexts);
     }
     if (!undoData->styles.isEmpty()) {
@@ -195,8 +195,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->styles);
     }
     if (!undoData->userInputs.isEmpty()) {
-        PointStorageUndoCommand<QString> *const command
-        = new PointStorageUndoCommand<QString>(sheet->model(), UserInputRole, parent);
+        KCPointStorageUndoCommand<QString> *const command
+        = new KCPointStorageUndoCommand<QString>(sheet->model(), UserInputRole, parent);
         command->add(undoData->userInputs);
     }
     if (!undoData->validities.isEmpty()) {
@@ -205,8 +205,8 @@ void KCCellStorage::Private::createCommand(QUndoCommand *parent) const
         command->add(undoData->validities);
     }
     if (!undoData->values.isEmpty()) {
-        PointStorageUndoCommand<KCValue> *const command
-        = new PointStorageUndoCommand<KCValue>(sheet->model(), ValueRole, parent);
+        KCPointStorageUndoCommand<KCValue> *const command
+        = new KCPointStorageUndoCommand<KCValue>(sheet->model(), ValueRole, parent);
         command->add(undoData->values);
     }
 }

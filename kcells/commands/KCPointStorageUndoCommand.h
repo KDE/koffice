@@ -39,19 +39,19 @@
  * Used for recording undo data in KCCellStorage.
  */
 template<typename T>
-class PointStorageUndoCommand : public QUndoCommand
+class KCPointStorageUndoCommand : public QUndoCommand
 {
 public:
     typedef QPair<QPoint, T> Pair;
 
-    PointStorageUndoCommand(QAbstractItemModel *const model, int role, QUndoCommand *parent = 0);
+    KCPointStorageUndoCommand(QAbstractItemModel *const model, int role, QUndoCommand *parent = 0);
 
     virtual void undo();
 
     void add(const QVector<Pair> &pairs);
 
-    PointStorageUndoCommand& operator<<(const Pair &pair);
-    PointStorageUndoCommand& operator<<(const QVector<Pair> &pairs);
+    KCPointStorageUndoCommand& operator<<(const Pair &pair);
+    KCPointStorageUndoCommand& operator<<(const QVector<Pair> &pairs);
 
 private:
     QAbstractItemModel *const m_model;
@@ -60,7 +60,7 @@ private:
 };
 
 template<typename T>
-PointStorageUndoCommand<T>::PointStorageUndoCommand(QAbstractItemModel *const model,
+KCPointStorageUndoCommand<T>::KCPointStorageUndoCommand(QAbstractItemModel *const model,
         int role, QUndoCommand *parent)
         : QUndoCommand(parent)
         , m_model(model)
@@ -69,7 +69,7 @@ PointStorageUndoCommand<T>::PointStorageUndoCommand(QAbstractItemModel *const mo
 }
 
 template<typename T>
-void PointStorageUndoCommand<T>::undo()
+void KCPointStorageUndoCommand<T>::undo()
 {
     // In reverse order for the case that a location was altered multiple times.
     for (int i = m_undoData.count() - 1; i >= 0; --i) {
@@ -84,20 +84,20 @@ void PointStorageUndoCommand<T>::undo()
 }
 
 template<typename T>
-void PointStorageUndoCommand<T>::add(const QVector<Pair>& pairs)
+void KCPointStorageUndoCommand<T>::add(const QVector<Pair>& pairs)
 {
     m_undoData << pairs;
 }
 
 template<typename T>
-PointStorageUndoCommand<T>& PointStorageUndoCommand<T>::operator<<(const Pair& pair)
+KCPointStorageUndoCommand<T>& KCPointStorageUndoCommand<T>::operator<<(const Pair& pair)
 {
     m_undoData << pair;
     return *this;
 }
 
 template<typename T>
-PointStorageUndoCommand<T>& PointStorageUndoCommand<T>::operator<<(const QVector<Pair>& pairs)
+KCPointStorageUndoCommand<T>& KCPointStorageUndoCommand<T>::operator<<(const QVector<Pair>& pairs)
 {
     m_undoData << pairs;
     return *this;
