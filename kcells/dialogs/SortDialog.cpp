@@ -36,7 +36,7 @@
 #include "KCValueConverter.h"
 
 // commands
-#include "commands/SortManipulator.h"
+#include "commands/KCSortManipulator.h"
 
 // ui
 #include "ui_SortWidget.h"
@@ -463,7 +463,7 @@ void SortDialog::accept()
 {
     KCSheet *const sheet = d->selection->activeSheet();
 
-    SortManipulator *const command = new SortManipulator();
+    KCSortManipulator *const command = new KCSortManipulator();
     command->setSheet(sheet);
 
     // set parameters

@@ -69,7 +69,7 @@
 #include "commands/KCPasteCommand.h"
 #include "commands/KCPrecisionCommand.h"
 #include "commands/RowColumnManipulators.h"
-#include "commands/SortManipulator.h"
+#include "commands/KCSortManipulator.h"
 #include "commands/SpellCheckCommand.h"
 #include "commands/StyleCommand.h"
 #include "commands/ValidityCommand.h"
@@ -2501,7 +2501,7 @@ void CellToolBase::sortInc()
         return;
     }
 
-    SortManipulator* command = new SortManipulator();
+    KCSortManipulator* command = new KCSortManipulator();
     command->setSheet(selection()->activeSheet());
 
     // Entire row(s) selected ? Or just one row ? Sort by columns if yes.
@@ -2523,7 +2523,7 @@ void CellToolBase::sortDec()
         return;
     }
 
-    SortManipulator* command = new SortManipulator();
+    KCSortManipulator* command = new KCSortManipulator();
     command->setSheet(selection()->activeSheet());
 
     // Entire row(s) selected ? Or just one row ? Sort by rows if yes.

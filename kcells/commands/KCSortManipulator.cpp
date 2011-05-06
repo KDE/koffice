@@ -18,7 +18,7 @@
 */
 
 
-#include "SortManipulator.h"
+#include "KCSortManipulator.h"
 
 #include "KCMap.h"
 #include "KCSheet.h"
@@ -27,7 +27,7 @@
 
 #include <klocale.h>
 
-SortManipulator::SortManipulator()
+KCSortManipulator::KCSortManipulator()
         : AbstractDFManipulator()
         , m_cellStorage(0)
 {
@@ -39,11 +39,11 @@ SortManipulator::SortManipulator()
     setText(i18n("Sort Data"));
 }
 
-SortManipulator::~SortManipulator()
+KCSortManipulator::~KCSortManipulator()
 {
 }
 
-bool SortManipulator::process(Element* element)
+bool KCSortManipulator::process(Element* element)
 {
     // process one element - rectangular range
 
@@ -59,7 +59,7 @@ bool SortManipulator::process(Element* element)
     return AbstractDFManipulator::process(element);
 }
 
-bool SortManipulator::preProcessing()
+bool KCSortManipulator::preProcessing()
 {
     // Only on sorting we need to temporarily store the old data.
     // On restoring (undo) we return immediately.
@@ -82,7 +82,7 @@ bool SortManipulator::preProcessing()
     return AbstractDFManipulator::preProcessing();
 }
 
-bool SortManipulator::postProcessing()
+bool KCSortManipulator::postProcessing()
 {
     delete m_cellStorage;
     m_cellStorage = 0;
@@ -92,7 +92,7 @@ bool SortManipulator::postProcessing()
     return AbstractDFManipulator::postProcessing();
 }
 
-void SortManipulator::addCriterion(int index, Qt::SortOrder order, Qt::CaseSensitivity caseSensitivity)
+void KCSortManipulator::addCriterion(int index, Qt::SortOrder order, Qt::CaseSensitivity caseSensitivity)
 {
     Criterion criterion;
     criterion.index = index;
@@ -101,12 +101,12 @@ void SortManipulator::addCriterion(int index, Qt::SortOrder order, Qt::CaseSensi
     m_criteria.append(criterion);
 }
 
-void SortManipulator::clearCriteria()
+void KCSortManipulator::clearCriteria()
 {
     m_criteria.clear();
 }
 
-KCValue SortManipulator::newValue(Element *element, int col, int row,
+KCValue KCSortManipulator::newValue(Element *element, int col, int row,
                                 bool *parse, KCFormat::Type *)
 {
     Q_UNUSED(parse);
@@ -122,7 +122,7 @@ KCValue SortManipulator::newValue(Element *element, int col, int row,
     return m_cellStorage->value(colidx + range.left(), rowidx + range.top());
 }
 
-KCStyle SortManipulator::newFormat(Element *element, int col, int row)
+KCStyle KCSortManipulator::newFormat(Element *element, int col, int row)
 {
     QRect range = element->rect();
     int colidx = col - range.left();
@@ -138,7 +138,7 @@ KCStyle SortManipulator::newFormat(Element *element, int col, int row)
     return m_styles.value(KCCell(m_sheet, colidx + range.left(), rowidx + range.top()));
 }
 
-void SortManipulator::sort(Element *element)
+void KCSortManipulator::sort(Element *element)
 {
     // we'll use insert-sort to sort
     QRect range = element->rect();
@@ -166,7 +166,7 @@ void SortManipulator::sort(Element *element)
     // newValue/newFormat
 }
 
-bool SortManipulator::shouldReorder(Element *element, int first, int second)
+bool KCSortManipulator::shouldReorder(Element *element, int first, int second)
 {
     // we use KCValueCalc::natural* to compare
     // indexes are real indexes, we don't use the sorted array here
