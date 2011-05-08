@@ -2,6 +2,7 @@
 Icon=template_classroom
 Name=Classroom
 Name[bg]=Класна стая
+Name[bs]=Učionica
 Name[ca]=Aula
 Name[ca@valencia]=Aula
 Name[cs]=Třída
@@ -49,6 +50,7 @@ Name[zh_CN]=教室
 Name[zh_TW]=教室
 Comment=Classroom by dannya
 Comment[bg]=Класна стая на dannya
+Comment[bs]=Učionica od dannya
 Comment[ca]=Aula per dannya
 Comment[ca@valencia]=Aula per dannya
 Comment[da]=Klasseværelse af dannya

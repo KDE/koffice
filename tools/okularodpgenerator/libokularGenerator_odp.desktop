@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=OpenDocument Presentation Document
+Name[bs]=OpenDocument prezentacijski dokument
 Name[ca]=Document de presentacions OpenDocument
 Name[ca@valencia]=Document de presentacions OpenDocument
 Name[da]=OpenDocument præsentationsdokument
@@ -24,6 +25,7 @@ Name[wa]=Documint di prezintaedje OpenDocument
 Name[x-test]=xxOpenDocument Presentation Documentxx
 Name[zh_TW]=OpenDocument 簡報文件...
 Comment=Odp for okular
+Comment[bs]=Odp za okular
 Comment[ca]=Odp per a okular
 Comment[ca@valencia]=Odp per a okular
 Comment[cs]=Odp pro Okular

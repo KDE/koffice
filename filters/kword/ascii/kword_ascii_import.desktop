@@ -3,6 +3,7 @@ Type=Service
 Name=KWord ASCII Import Filter
 Name[bg]=Филтър за импортиране ASCII в KWord
 Name[br]=Sil Enporzh ASCII KWord
+Name[bs]=KWord ASCII unosni Filter
 Name[ca]=Filtre d'importació ASCII per al KWord
 Name[ca@valencia]=Filtre d'importació ASCII per al KWord
 Name[cs]=Importní filtr KWord ASCII

@@ -3,6 +3,7 @@ Type=Service
 Name=KCells Microsoft Excel Import Filter
 Name[nl]=Microsoft Excell-importfilter voor KCells
 Name[pt]=Filtro de Importação de Microsoft Excel para o KCells
+Name[pt_BR]=Filtro de Importação Microsoft Excel para o KCells
 Name[sv]=Microsoft Excel-importfilter för Kcells
 Name[uk]=Фільтр імпорту Microsoft Excel для KCells
 Name[x-test]=xxKCells Microsoft Excel Import Filterxx

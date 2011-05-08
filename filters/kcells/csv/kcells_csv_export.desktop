@@ -3,6 +3,7 @@ Type=Service
 Name=CSV Export Filter for KCells
 Name[nl]=CSV-exportfilter voor KCells
 Name[pt]=Filtro de Exportação de CSV para o KCells
+Name[pt_BR]=Filtro de Exportação CSV para o KCells
 Name[sv]=CSV-exportfilter för Kcells
 Name[uk]=Фільтр експорту CSV для KCells
 Name[x-test]=xxCSV Export Filter for KCellsxx

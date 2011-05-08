@@ -3,6 +3,7 @@ Type=Service
 Name=HTML Import Filter for KCells
 Name[nl]=HTML-importfilter voor KCells
 Name[pt]=Filtro de Importação de HTML para o KCells
+Name[pt_BR]=Filtro de importação HTML para o KCells
 Name[sv]=HTML-importfilter för Kcells
 Name[uk]=Фільтр імпорту HTML для KCells
 Name[x-test]=xxHTML Import Filter for KCellsxx

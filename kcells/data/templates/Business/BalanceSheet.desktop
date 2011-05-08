@@ -4,6 +4,7 @@ URL=.source/BalanceSheet.kst
 Name=Balance KCSheet
 Name[nl]=Balans KCSheet
 Name[pt]=Folha de Balanço
+Name[pt_BR]=Balanço KCSheet
 Name[sv]=Budgetblad i Kcells
 Name[uk]=Баланс KCSheet
 Name[x-test]=xxBalance KCSheetxx

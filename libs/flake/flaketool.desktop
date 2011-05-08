@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Flake tool definition
+Name[bs]=Definicija alata pahulja
 Name[ca]=Definició d'eina de floc
 Name[ca@valencia]=Definició d'eina de floc
 Name[da]=Definition af flake-værktøj
@@ -35,6 +36,7 @@ Name[zh_TW]=Flake 工具定義
 Type=ServiceType
 X-KDE-ServiceType=KOffice/Tool
 Comment=Definition of flake tools
+Comment[bs]=Definicija alata pahulja
 Comment[ca]=Definició d'eines de floc
 Comment[ca@valencia]=Definició d'eines de floc
 Comment[da]=Definition af flake-værktøjer

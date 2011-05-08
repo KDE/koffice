@@ -3,6 +3,7 @@ Type=Service
 Name=GNUmeric Export Filter for KCells
 Name[nl]=GNUmeric-exportfilter voor KCells
 Name[pt]=Filtro de Exportação de GNUmeric para o KCells
+Name[pt_BR]=Filtro de Exportação GNUmeric para o KCells
 Name[sv]=dGnumeric-exportfilter för Kcells
 Name[uk]=Фільтр експорту GNUmeric для KCells
 Name[x-test]=xxGNUmeric Export Filter for KCellsxx

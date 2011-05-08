@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Text Editing plugin for the KOffice text tool
+Name[bs]=Dodatak za uređivanje teksta za KOffice tekstualni alat
 Name[ca]=Connector d'edició de text per a l'eina de text del KOffice
 Name[ca@valencia]=Connector d'edició de text per a l'eina de text del KOffice
 Name[da]=Plugin til tekstredigering til KOffices tekstværktøj
@@ -26,6 +27,7 @@ Name[zh_TW]=KOffice 文字工具的文字編輯外掛程式。
 Type=ServiceType
 X-KDE-ServiceType=KOffice/Text-EditingPlugin
 Comment=Definition of a text-editing plugin
+Comment[bs]=Definicija dodatka za uređivanje teksta
 Comment[ca]=Definició d'un connector d'edició de text
 Comment[ca@valencia]=Definició d'un connector d'edició de text
 Comment[da]=Definition af et plugin til tekstredigering

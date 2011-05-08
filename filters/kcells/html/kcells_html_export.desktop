@@ -3,6 +3,7 @@ Type=Service
 Name=HTML Export Filter for KCells
 Name[nl]=HTML-exportfilter voor KCells
 Name[pt]=Filtro de Exportação de HTML para o KCells
+Name[pt_BR]=Filtro de Exportação HTML para o KCells
 Name[sv]=HTML-exportfilter för Kcells
 Name[uk]=Фільтр експорту HTML для KCells
 Name[x-test]=xxHTML Export Filter for KCellsxx

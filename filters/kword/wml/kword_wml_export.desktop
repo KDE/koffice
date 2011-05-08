@@ -3,6 +3,7 @@ Type=Service
 Name=KWord WML Export Filter
 Name[bg]=Филтър за експортиране от KWord в WML
 Name[br]=Sil ezporzh WML evit KWord
+Name[bs]=KWord WML izvozni filter
 Name[ca]=Filtre d'exportació WML per al KWord
 Name[ca@valencia]=Filtre d'exportació WML per al KWord
 Name[cs]=Exportní filtr formátu WML pro KWord
