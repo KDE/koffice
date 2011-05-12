@@ -41,7 +41,9 @@
 #include <QPainter>
 #include <QPainterPath>
 
-class ConnectLines : public ConnectStrategy {
+
+class ConnectLines : public ConnectStrategy
+{
   public:
     ConnectLines(KoShapeConnectionPrivate *qq, KoShapeConnection::ConnectionType type)
         : ConnectStrategy(qq, type) { }
@@ -50,6 +52,10 @@ class ConnectLines : public ConnectStrategy {
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
     virtual void setSkew(const QStringList &values);
     virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual QRectF boundingRect() const {
+        recalc();
+        return m_path.boundingRect();
+    }
 
     /// using the shape-connection policy we calculate a line to get some distance from the shape
     QLineF calculateShape1Fallout() const;
@@ -57,12 +63,14 @@ class ConnectLines : public ConnectStrategy {
     QLineF calculateShape2Fallout() const;
 
   private:
-    QLineF calculateShapeFalloutPrivate(const QPointF &begin, bool start) const;
+    void recalc() const;
+
     // store stop points
-    QPainterPath m_path;
+    mutable QPainterPath m_path;
 };
 
-class ConnectCurve : public ConnectStrategy {
+class ConnectCurve : public ConnectStrategy
+{
   public:
     ConnectCurve(KoShapeConnectionPrivate *qq)
         : ConnectStrategy(qq, KoShapeConnection::Curve),
@@ -72,9 +80,20 @@ class ConnectCurve : public ConnectStrategy {
 
     virtual void paint(QPainter &painter, const KoViewConverter &converter);
     virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual QRectF boundingRect() const {
+        QPointF start = q->q->startPoint();
+        QPointF end = q->q->endPoint();
+        QPointF topLeft(qMin(start.x(), end.x()), qMin(start.y(), end.y()));
+        QPointF bottomRight(qMax(start.x(), end.x()), qMax(start.y(), end.y()));
 
+        QRectF br(topLeft.x(), topLeft.y(), bottomRight.x() - topLeft.x(), bottomRight.y() - topLeft.y());
+        return br.normalized();
+    }
     KoPathShape shape;
+
+  private:
     bool needsResize;
+    void recalc() const;
 };
 
 class ConnectionLoaderUpdater : public KoLoadingShapeUpdater
@@ -103,8 +122,9 @@ private:
     Pos m_pos;
 };
 
-KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, KoShape *to, int gp2)
-    : shape1(from),
+KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShapeConnection *qq, KoShape *from, int gp1, KoShape *to, int gp2)
+    : q(qq),
+    shape1(from),
     shape2(to),
     gluePointIndex1(gp1),
     gluePointIndex2(gp2),
@@ -119,8 +139,9 @@ KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, KoSha
         zIndex = qMax(zIndex, shape2->zIndex() + 1);
 }
 
-KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShape *from, int gp1, const QPointF &ep)
-    : shape1(from),
+KoShapeConnectionPrivate::KoShapeConnectionPrivate(KoShapeConnection *qq, KoShape *from, int gp1, const QPointF &ep)
+    : q(qq),
+    shape1(from),
     shape2(0),
     gluePointIndex1(gp1),
     gluePointIndex2(0),
@@ -158,26 +179,57 @@ QPointF KoShapeConnectionPrivate::resolveEndPoint() const
     return b;
 }
 
-QLineF ConnectLines::calculateShape1Fallout() const
+QPainterPath KoShapeConnectionPrivate::createConnectionPath(const QPointF &from, const QPointF &to) const
 {
-    return calculateShapeFalloutPrivate(q->resolveStartPoint(), true);
+    KoShape *shape = shape1;
+    if (shape == 0)
+        shape = shape2;
+    QPainterPath path;
+    if (shape && !shape->priv()->shapeManagers.isEmpty()) {
+        QPointF p1(from);
+        if (shape1) {
+            QLineF line(calculateShapeFalloutPrivate(p1, true));
+            p1 = line.p2();
+        }
+        QPointF p2(to);
+        bool first = true;
+        if (shape2) {
+            QLineF line(calculateShapeFalloutPrivate(p2, false));
+            path.moveTo(line.p2());
+            first = false;
+            p2 = line.p1();
+        }
+        QPolygonF lines((*shape->priv()->shapeManagers.begin())->priv()->routeConnection(q, p1, p2));
+        foreach (const QPointF &point, lines) {
+            if (first)
+                path.moveTo(point);
+            else
+                path. lineTo(point);
+            first = false;
+        }
+        if (shape1)
+            path.lineTo(from);
+    }
+
+    return path;
 }
 
-QLineF ConnectLines::calculateShapeFalloutPrivate(const QPointF &begin, bool start) const
+QLineF KoShapeConnectionPrivate::calculateShapeFalloutPrivate(const QPointF &begin, bool start) const
 {
     QPointF a(begin);
     QPointF b(a);
 
     KoShape *shape = 0;
     KoShapeConnectionPolicy policy;
-    if (start && !q->hasDummyShape && q->shape1) {
-        shape = q->shape1;
-        policy = shape->connectionPolicy(q->gluePointIndex1);
-    } else if (!start && q->shape2) {
-        shape = q->shape2;
-        policy = shape->connectionPolicy(q->gluePointIndex2);
+    if (start && !hasDummyShape && shape1) {
+        shape = shape1;
+        policy = shape->connectionPolicy(gluePointIndex1);
+    } else if (!start && shape2) {
+        shape = shape2;
+        policy = shape->connectionPolicy(gluePointIndex2);
     }
 
+    // TODO snap the line to the 'grid' (10 pt grid is hardcoded in shape manager now)
     if (shape) {
         switch (policy.escapeDirection()) {
         case KoFlake::EscapeAny: {
@@ -218,46 +270,56 @@ QLineF ConnectLines::calculateShapeFalloutPrivate(const QPointF &begin, bool sta
         return QLineF(b, a);
 }
 
+QLineF ConnectLines::calculateShape1Fallout() const
+{
+    return q->calculateShapeFalloutPrivate(q->resolveStartPoint(), true);
+}
+
 QLineF ConnectLines::calculateShape2Fallout() const
 {
-    return calculateShapeFalloutPrivate(q->resolveEndPoint(), false);
+    return q->calculateShapeFalloutPrivate(q->resolveEndPoint(), false);
 }
 
 void ConnectLines::paint(QPainter &painter, const KoViewConverter &converter)
 {
-    if (m_dirty) {
-        m_path = QPainterPath();
-        QPointF point1(q->resolveStartPoint());
-        QPointF point2(q->resolveEndPoint());
-        switch (type()) {
-        case KoShapeConnection::EdgedLinesOutside:
-            // TODO avoid bounding rects and find a connection.
-        case KoShapeConnection::EdgedLines: {
-            // shoot out a bit and then a direct line.
-            QLineF fallOut1(calculateShape1Fallout());
-            m_path.moveTo(fallOut1.p1());
-            m_path.lineTo(fallOut1.p2());
-            QLineF fallOut2(calculateShape2Fallout());
-            m_path.lineTo(fallOut2.p1());
-            m_path.lineTo(fallOut2.p2());
-            break;
-        }
-        case KoShapeConnection::Straight:
-            m_path.moveTo(q->resolveStartPoint());
-            m_path.lineTo(q->resolveEndPoint());
-            break;
-        default:
-            Q_ASSERT(0); // parent should have created another strategy
-        };
-        m_dirty = false;
-    }
-
+    recalc();
     QPen pen(Qt::black);
     painter.setPen(pen);
     qreal zoomX, zoomY;
     converter.zoom(&zoomX, &zoomY);
     painter.scale(zoomX, zoomY);
     painter.drawPath(m_path);
+}
+
+void ConnectLines::recalc() const
+{
+    if (!m_dirty)
+        return ;
+    m_path = QPainterPath();
+    QPointF point1(q->resolveStartPoint());
+    QPointF point2(q->resolveEndPoint());
+    switch (type()) {
+    case KoShapeConnection::EdgedLinesOutside:
+        m_path = q->createConnectionPath(point1, point2);
+        break;
+    case KoShapeConnection::EdgedLines: {
+        // shoot out a bit and then a direct line.
+        QLineF fallOut1(calculateShape1Fallout());
+        m_path.moveTo(fallOut1.p1());
+        m_path.lineTo(fallOut1.p2());
+        QLineF fallOut2(calculateShape2Fallout());
+        m_path.lineTo(fallOut2.p1());
+        m_path.lineTo(fallOut2.p2());
+        break;
+    }
+    case KoShapeConnection::Straight:
+        m_path.moveTo(q->resolveStartPoint());
+        m_path.lineTo(q->resolveEndPoint());
+        break;
+    default:
+        Q_ASSERT(0); // parent should have created another strategy
+    };
+    m_dirty = m_path.isEmpty();
 }
 
 void ConnectLines::setSkew(const QStringList &values)
@@ -272,11 +334,7 @@ void ConnectLines::saveOdf(KoShapeSavingContext &context) const
 
 void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter)
 {
-    if (m_dirty) {
-        // TODO calculate a curve and fill the shape with it.
-
-        m_dirty = false;
-    }
+    recalc();
     QPointF point1(q->resolveStartPoint());
     QPointF point2(q->resolveEndPoint());
     qreal zoomX, zoomY;
@@ -318,6 +376,12 @@ void ConnectCurve::paint(QPainter &painter, const KoViewConverter &converter)
     }
 }
 
+void ConnectCurve::recalc() const
+{
+    // TODO calculate a curve and fill the shape with it.
+    m_dirty = false;
+}
+
 void ConnectCurve::saveOdf(KoShapeSavingContext &context) const
 {
     // write the path data
@@ -330,12 +394,12 @@ void ConnectCurve::saveOdf(KoShapeSavingContext &context) const
 ////////
 
 KoShapeConnection::KoShapeConnection()
-    : d(new KoShapeConnectionPrivate(0, 0, QPointF(100, 100)))
+    : d(new KoShapeConnectionPrivate(this, 0, 0, QPointF(100, 100)))
 {
 }
 
 KoShapeConnection::KoShapeConnection(KoShape *from, int gp1, KoShape *to, int gp2)
-    : d(new KoShapeConnectionPrivate(from, gp1, to, gp2))
+    : d(new KoShapeConnectionPrivate(this, from, gp1, to, gp2))
 {
     Q_ASSERT(from);
     Q_ASSERT(to);
@@ -344,14 +408,14 @@ KoShapeConnection::KoShapeConnection(KoShape *from, int gp1, KoShape *to, int gp
 }
 
 KoShapeConnection::KoShapeConnection(KoShape* from, int gluePointIndex, const QPointF &endPoint)
-: d(new KoShapeConnectionPrivate(from, gluePointIndex, endPoint))
+: d(new KoShapeConnectionPrivate(this, from, gluePointIndex, endPoint))
 {
     Q_ASSERT(from);
     d->shape1->priv()->addConnection(this);
 }
 
 KoShapeConnection::KoShapeConnection(KoShape *from, KoShape *to, int gp2)
-    : d(new KoShapeConnectionPrivate(from, 0, to, gp2))
+    : d(new KoShapeConnectionPrivate(this, from, 0, to, gp2))
 {
     Q_ASSERT(from);
     Q_ASSERT(to);
@@ -394,6 +458,7 @@ int KoShapeConnection::zIndex() const
 void KoShapeConnection::setZIndex(int index)
 {
     d->zIndex = index;
+    d->foul();
 }
 
 int KoShapeConnection::gluePointIndex1() const
@@ -428,27 +493,19 @@ QPointF KoShapeConnection::endPoint() const
 
 QRectF KoShapeConnection::boundingRect() const
 {
-    QPointF start = startPoint();
-    QPointF end = endPoint();
-    QPointF topLeft(qMin(start.x(), end.x()), qMin(start.y(), end.y()));
-    QPointF bottomRight(qMax(start.x(), end.x()), qMax(start.y(), end.y()));
-
-    QRectF br(topLeft.x(), topLeft.y(), bottomRight.x() - topLeft.x(), bottomRight.y() - topLeft.y());
-    return br.normalized();
+    return d->connectionStrategy->boundingRect();
 }
 
 void KoShapeConnection::setStartPoint(const QPointF &point)
 {
     d->startPoint = point;
-    if (d->connectionStrategy)
-        d->connectionStrategy->foul();
+    d->foul();
 }
 
 void KoShapeConnection::setEndPoint(const QPointF &point)
 {
     d->endPoint = point;
-    if (d->connectionStrategy)
-        d->connectionStrategy->foul();
+    d->foul();
 }
 
 void KoShapeConnection::setStartPoint(KoShape *shape, int gluePointIndex)
@@ -465,8 +522,7 @@ void KoShapeConnection::setStartPoint(KoShape *shape, int gluePointIndex)
     } else {
         d->gluePointIndex1 = -1;
     }
-    if (d->connectionStrategy)
-        d->connectionStrategy->foul();
+    d->foul();
 }
 
 void KoShapeConnection::setEndPoint(KoShape *shape, int gluePointIndex)
@@ -483,8 +539,7 @@ void KoShapeConnection::setEndPoint(KoShape *shape, int gluePointIndex)
     } else {
         d->gluePointIndex2 = -1;
     }
-    if (d->connectionStrategy)
-        d->connectionStrategy->foul();
+    d->foul();
 }
 
 bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
@@ -622,6 +677,7 @@ void KoShapeConnection::setType(ConnectionType newType)
         d->connectionStrategy = new ConnectCurve(d);
     else
         d->connectionStrategy = new ConnectLines(d, newType);
+    d->foul();
 }
 
 void KoShapeConnection::update() const

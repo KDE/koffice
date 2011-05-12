@@ -1,7 +1,7 @@
 /* This file is part of the KDE project
 
    Copyright (C) 2006-2008 Thorsten Zachmann <zachmann@kde.org>
-   Copyright (C) 2006-2010 Thomas Zander <zander@kde.org>
+   Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
    Copyright (C) 2009-2010 Jan Hambrecht <jaham@gmx.net>
 
    This library is free software; you can redistribute it and/or
@@ -42,6 +42,7 @@
 
 #include <QPainter>
 #include <QTimer>
+#include <QtCore/qmath.h>
 #include <kdebug.h>
 
 KoShapeManagerPrivate::KoShapeManagerPrivate(KoShapeManager *shapeManager, KoCanvasBase *c)
@@ -128,8 +129,8 @@ void KoShapeManagerPrivate::update(const QRectF &rect, const KoShape *shape, boo
 
     if (selectionHandles) {
         foreach (KoShapeConnection *connection, shape->priv()->connections) {
-            connection->priv()->foul();
             canvas->updateCanvas(connection->boundingRect());
+            connection->priv()->foul();
         }
     }
 }
@@ -301,14 +302,15 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
     foreach (KoShape *shape, sortedShapes) {
         if (shape->parent() != 0 && shape->parent()->isClipped(shape))
             continue;
-
+/*
         while (connectionIterator != sortedConnections.end()
                 && (*connectionIterator)->zIndex() < shape->zIndex()) {
             painter.save();
             (*connectionIterator)->paint(painter, converter);
             painter.restore();
-            connectionIterator++;
+            ++connectionIterator;
         }
+*/
 
         painter.save();
         d->strategy->paint(shape, painter, converter, forPrint);
@@ -317,9 +319,9 @@ void KoShapeManager::paint(QPainter &painter, const KoViewConverter &converter, 
 
     while (connectionIterator != sortedConnections.end()) { // paint connections that are above the rest.
         painter.save();
-        (*connectionIterator)->paint( painter, converter );
+        (*connectionIterator)->paint(painter, converter);
         painter.restore();
-        connectionIterator++;
+        ++connectionIterator;
     }
 
 
@@ -623,6 +625,193 @@ void KoShapeManager::setPaintingStrategy(KoShapeManagerPaintingStrategy *strateg
 {
     delete d->strategy;
     d->strategy = strategy;
+}
+
+QPolygonF KoShapeManager::routeConnection(KoShapeConnection *connection)
+{
+    return d->routeConnection(connection, connection->startPoint(), connection->endPoint());
+}
+
+struct ko_Node;
+
+struct ko_NodeIndex {
+    inline ko_NodeIndex(const ko_Node &node);
+    ko_NodeIndex() {
+        x = 0;
+        y = 0;
+    }
+
+    ko_NodeIndex(uint x_, uint y_)
+    {
+        x = x_;
+        y = y_;
+        Q_ASSERT(x == x_); // make sure we don't go out of bounds.
+        Q_ASSERT(y == y_); // make sure we don't go out of bounds.
+    }
+
+    bool operator==(const ko_NodeIndex &other) const { // qhash needs this explicitly
+        return other.x == x && other.y == y;
+    }
+
+    uint x : 16;
+    uint y : 16;
+};
+
+inline uint qHash(const ko_NodeIndex &nodeIndex)
+{
+     return (nodeIndex.x << 16) + nodeIndex.y;
+}
+
+struct ko_Node {
+    ko_Node()
+    {
+        init();
+    }
+
+    ko_Node(int x_, int y_)
+    {
+        init();
+        x = x_;
+        y = y_;
+        Q_ASSERT(x == x_); // make sure we don't go out of bounds.
+        Q_ASSERT(y == y_); // make sure we don't go out of bounds.
+    }
+
+    explicit ko_Node(const QPoint &origin, const QPointF &point)
+    {
+        init();
+        x = qRound((point.x() - origin.x()) / 10); // the * 10 is our resolution
+        y = qRound((point.y() - origin.y()) / 10);
+    }
+
+    inline void init()
+    {
+        x = 0;
+        y = 0;
+        score = 10E8; // lower is better.
+    }
+
+    QPointF point(const QPoint &origin) const {
+        return QPointF(x * 10 + origin.x(), y * 10 + origin.y());
+    }
+
+    uint x : 16;
+    uint y : 16;
+    uint score;
+    ko_NodeIndex directionForShortedPath;
+};
+
+inline ko_NodeIndex::ko_NodeIndex(const ko_Node &node)
+{
+    x = node.x;
+    y = node.y;
+}
+
+QPolygonF KoShapeManagerPrivate::routeConnection(KoShapeConnection *connection, const QPointF &from, const QPointF &to)
+{
+    QHash<ko_NodeIndex, ko_Node> nodes;
+
+    const int OFFSET = 5000; // the 5000 to give us plenty of space to connect
+    const qreal originX = qMin(from.x(), to.x()) - OFFSET;
+    const qreal originY = qMin(from.y(), to.y()) - OFFSET;
+    const QPoint origin(qRound(originX), qRound(originY));
+
+    ko_Node begin(origin, from);
+    begin.score = 0;
+    nodes.insert(ko_NodeIndex(begin), begin);
+    const ko_Node destination(origin, to);
+    // kDebug() << "begin" << begin.x << begin.y << "destination; " << destination.x << destination.y;
+    QList<ko_NodeIndex> leafs;
+    leafs << ko_NodeIndex(begin);
+
+    int iterations = 0;
+    uint bestScorePrevIteration = 10E5;
+    while (true) {
+        uint bestScore = 10E5;
+        ++iterations;
+        // 1) create neighbouring nodes
+        QList<ko_NodeIndex> oldLeafs = leafs;
+        leafs.clear();
+        leafs.reserve(oldLeafs.size() * 4);
+        const QPointF roundingError(originX - origin.x(), originY - origin.y());
+        foreach (const ko_NodeIndex &index, oldLeafs) {
+            enum Direction {
+                Up = 0,
+                Down,
+                Left,
+                Right
+            };
+            Q_ASSERT(nodes.contains(index));
+            if (index.x == destination.x && index.y == destination.y) {
+                // reached our goal.
+                // Notice that we probably should keep searching a bit longer to at least
+                // finish all the leafs we created. TODO
+                ko_NodeIndex i = index;
+                QPolygonF answer;
+                answer << to;
+                while (i.x != 0 && i.y != 0) {
+                    Q_ASSERT(nodes.contains(i));
+                    // TODO avoid inserting too many points on a straight line
+                    //qDebug() << "path goes via; " << nodes[i].x << "," << nodes[i].y;
+                    answer << nodes[i].point(origin) + roundingError;
+                    i = nodes[i].directionForShortedPath;
+                }
+                answer << from;
+                qDebug() << "took" << iterations << "iterations and" << nodes.count() << "nodes";
+                return answer;
+            }
+
+            const ko_Node &indexedNode = nodes[index];
+            const uint prevScore = indexedNode.score;
+            if (prevScore > bestScorePrevIteration + 9) { // skip for this round.
+                leafs.append(index);
+                bestScore = qMin(bestScore, prevScore);
+                continue;
+            }
+
+            Direction prevDirection;
+            if (indexedNode.x > indexedNode.directionForShortedPath.x)
+                prevDirection = Right;
+            else if (indexedNode.x < indexedNode.directionForShortedPath.x)
+                prevDirection = Left;
+            else if (indexedNode.y > indexedNode.directionForShortedPath.y)
+                prevDirection = Down;
+            else if (indexedNode.y < indexedNode.directionForShortedPath.y)
+                prevDirection = Up;
+
+            for (int direction = Up; direction <= Right; ++direction) {
+                ko_Node node(index.x + (direction == Left ? -1 : (direction == Right ? 1 : 0)),
+                        index.y + (direction == Up ? -1 : (direction == Down ? 1 : 0)));
+
+                const QPointF orig(node.point(origin));
+                node.score = prevScore + 10;
+                if (!tree.contains(orig).isEmpty())
+                    node.score += 50; // going through a shape is very expensive.
+                // punish wrong direction.
+                if (direction == Left && begin.x <= destination.x)
+                    node.score += 1;
+                else if (direction == Right && begin.x >= destination.x)
+                    node.score += 1;
+                else if (direction == Up && begin.y <= destination.y)
+                    node.score += 1;
+                else if (direction == Down && begin.y >= destination.y)
+                    node.score += 1;
+                if (direction != prevDirection)
+                    node.score += 1;
+
+                ko_NodeIndex nodeIndex(node);
+                if (nodes.contains(nodeIndex) && node.score >= nodes[nodeIndex].score) {
+                    // if we are slower, just ignore the new one.
+                    continue;
+                }
+                node.directionForShortedPath = index;
+                nodes[nodeIndex] = node;
+                leafs.append(nodeIndex);
+                bestScore = qMin(bestScore, node.score);
+            }
+        }
+        bestScorePrevIteration = bestScore;
+    }
 }
 
 KoShapeManagerPrivate *KoShapeManager::priv()
