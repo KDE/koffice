@@ -38,7 +38,7 @@ void TestConnection::testRouteSimple()
     connection.setStartPoint(&shape1, 0);
     connection.setEndPoint(150, 300);
 
-    QPainterPath path = manager.routeConnection(&connection);
+    QPolygonF path = manager.routeConnection(&connection);
     QVERIFY(!path.isEmpty());
     // TODO need to start at start and end at end
 }

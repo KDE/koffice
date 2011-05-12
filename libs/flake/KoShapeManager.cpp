@@ -129,8 +129,8 @@ void KoShapeManagerPrivate::update(const QRectF &rect, const KoShape *shape, boo
 
     if (selectionHandles) {
         foreach (KoShapeConnection *connection, shape->priv()->connections) {
-            connection->priv()->foul();
             canvas->updateCanvas(connection->boundingRect());
+            connection->priv()->foul();
         }
     }
 }
@@ -627,7 +627,7 @@ void KoShapeManager::setPaintingStrategy(KoShapeManagerPaintingStrategy *strateg
     d->strategy = strategy;
 }
 
-QPainterPath KoShapeManager::routeConnection(KoShapeConnection *connection)
+QPolygonF KoShapeManager::routeConnection(KoShapeConnection *connection)
 {
     return d->routeConnection(connection, connection->startPoint(), connection->endPoint());
 }
@@ -707,13 +707,14 @@ inline ko_NodeIndex::ko_NodeIndex(const ko_Node &node)
     y = node.y;
 }
 
-QPainterPath KoShapeManagerPrivate::routeConnection(KoShapeConnection *connection, const QPointF &from, const QPointF &to)
+QPolygonF KoShapeManagerPrivate::routeConnection(KoShapeConnection *connection, const QPointF &from, const QPointF &to)
 {
     QHash<ko_NodeIndex, ko_Node> nodes;
 
     const int OFFSET = 5000; // the 5000 to give us plenty of space to connect
-    const QPoint origin = QPoint(qMin(from.x(), to.x()) - OFFSET,
-            qMin(from.y(), to.y()) - OFFSET);
+    const qreal originX = qMin(from.x(), to.x()) - OFFSET;
+    const qreal originY = qMin(from.y(), to.y()) - OFFSET;
+    const QPoint origin(qRound(originX), qRound(originY));
 
     ko_Node begin(origin, from);
     begin.score = 0;
@@ -732,6 +733,7 @@ QPainterPath KoShapeManagerPrivate::routeConnection(KoShapeConnection *connectio
         QList<ko_NodeIndex> oldLeafs = leafs;
         leafs.clear();
         leafs.reserve(oldLeafs.size() * 4);
+        const QPointF roundingError(originX - origin.x(), originY - origin.y());
         foreach (const ko_NodeIndex &index, oldLeafs) {
             enum Direction {
                 Up = 0,
@@ -745,16 +747,16 @@ QPainterPath KoShapeManagerPrivate::routeConnection(KoShapeConnection *connectio
                 // Notice that we probably should keep searching a bit longer to at least
                 // finish all the leafs we created. TODO
                 ko_NodeIndex i = index;
-                QPainterPath answer;
-                answer.moveTo(to);
+                QPolygonF answer;
+                answer << to;
                 while (i.x != 0 && i.y != 0) {
                     Q_ASSERT(nodes.contains(i));
                     // TODO avoid inserting too many points on a straight line
                     //qDebug() << "path goes via; " << nodes[i].x << "," << nodes[i].y;
-                    answer.lineTo(nodes[i].point(origin));
+                    answer << nodes[i].point(origin) + roundingError;
                     i = nodes[i].directionForShortedPath;
                 }
-                answer.lineTo(from);
+                answer << from;
                 qDebug() << "took" << iterations << "iterations and" << nodes.count() << "nodes";
                 return answer;
             }

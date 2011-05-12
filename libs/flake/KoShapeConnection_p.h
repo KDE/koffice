@@ -41,12 +41,14 @@ public:
     }
     virtual void saveOdf(KoShapeSavingContext &context) const = 0;
 
+    virtual QRectF boundingRect() const = 0;
+
     void foul() { m_dirty = true; }
     void wipe() { m_dirty = false; }
 
 protected:
     KoShapeConnectionPrivate *q;
-    bool m_dirty;
+    mutable bool m_dirty;
 
 private:
     const KoShapeConnection::ConnectionType m_type;
@@ -63,7 +65,7 @@ public:
     /// return the end point or the point from the shape connector if that exists
     QPointF resolveEndPoint() const;
 
-    void foul() {
+    inline void foul() {
         if (connectionStrategy)
             connectionStrategy->foul();
     }

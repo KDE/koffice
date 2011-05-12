@@ -184,7 +184,7 @@ public:
      */
     void setPaintingStrategy(KoShapeManagerPaintingStrategy *strategy);
 
-    QPainterPath routeConnection(KoShapeConnection *connection);
+    QPolygonF routeConnection(KoShapeConnection *connection);
 
     /**
      * \internal
