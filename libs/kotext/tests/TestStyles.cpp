@@ -174,6 +174,7 @@ void TestStyles::testApplyParagraphStyleWithParent()
     QCOMPARE(format.leftMargin(), 10.);
     QCOMPARE(format.rightMargin(), 0.);
 
+    format = QTextBlockFormat(); // clear
     style2.applyStyle(format);
     QCOMPARE(format.properties().count(), 4);
     QCOMPARE(format.alignment(), Qt::AlignCenter);
@@ -181,6 +182,7 @@ void TestStyles::testApplyParagraphStyleWithParent()
     QCOMPARE(format.leftMargin(), 10.);
     QCOMPARE(format.rightMargin(), 20.);
 
+    format = QTextBlockFormat(); // clear
     style3.applyStyle(format);
     QCOMPARE(format.properties().count(), 4);
     QCOMPARE(format.alignment(), Qt::AlignLeft | Qt::AlignAbsolute);
@@ -322,6 +324,52 @@ void TestStyles::testChangeManagedStyle()
     fmt = cursor.charFormat();
 
     QVERIFY(! fmt.hasProperty(QTextFormat::ForegroundBrush));
+}
+
+void TestStyles::testModifiedParag()
+{
+    // if the user modified some paragraph properties on a block and the style is later
+    // changed I expect the modified properties on the block to not be lost.
+
+    KoStyleManager manager;
+    KoParagraphStyle *defaultStyle = manager.defaultParagraphStyle();
+    defaultStyle->setLineHeightPercent(140);
+
+    KoParagraphStyle *myStyle = new KoParagraphStyle();
+    myStyle->setName("myStyle");
+    manager.add(myStyle);
+    QCOMPARE(myStyle->parentStyle(), defaultStyle);
+
+    QTextDocument doc;
+    doc.setPlainText("abc");
+    QTextBlock block = doc.begin();
+    myStyle->applyStyle(block);
+    manager.add(&doc);
+
+    QTextBlockFormat format = block.blockFormat();
+    QCOMPARE(format.property(KoParagraphStyle::StyleId).toInt(), myStyle->styleId());
+
+    // Make the block have a different line spacing compared to the styles.
+    QTextBlockFormat lineSpacing;
+    lineSpacing.setProperty(KoParagraphStyle::PercentLineHeight, 200);
+    QTextCursor cursor(&doc);
+    cursor.mergeBlockFormat(lineSpacing);
+
+    format = block.blockFormat();
+    QCOMPARE(format.property(KoParagraphStyle::StyleId).toInt(), myStyle->styleId());
+    QCOMPARE(format.property(KoParagraphStyle::PercentLineHeight).toInt(), 200);
+
+    // change something like top-margin on child style and make sure the parag gets updatd.
+    myStyle->setTopMargin(33);
+    manager.alteredStyle(myStyle); // mark as dirty, but change is delayed with singleshot
+    manager.priv()->updateAlteredStyles(); // don't wait for the singleshot.
+
+    // check that the block still has the old linespacing we set on the block.
+    format = block.blockFormat();
+    QCOMPARE(format.property(KoParagraphStyle::StyleId).toInt(), myStyle->styleId());
+    QCOMPARE(format.property(KoParagraphStyle::PercentLineHeight).toInt(), 200);
+    // check that the block got the new top-margin too.
+    QCOMPARE(format.property(QTextFormat::BlockTopMargin).toReal(), 33.);
 }
 
 QTEST_KDEMAIN(TestStyles, GUI)

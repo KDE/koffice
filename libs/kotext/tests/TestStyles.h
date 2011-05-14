@@ -36,6 +36,9 @@ private slots: // tests
     void testCopyParagraphStyle();
     void testUnapplyStyle();
     void testChangeManagedStyle();
+
+    void testModifiedParag();
+
 /*
     TODO
     test unapply style with multiple levels of character styles.
