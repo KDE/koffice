@@ -296,7 +296,7 @@ void TestStyles::testChangeManagedStyle()
     p2->setName("Head1");
     p2->setParentStyle(p1);
     KoCharacterStyle *charStyle = p1->characterStyle();
-    charStyle->setForeground(QBrush(Qt::red));
+    charStyle->setUnderlineColor(Qt::red);
 
     manager.add(p2);
 
@@ -313,9 +313,9 @@ void TestStyles::testChangeManagedStyle()
 
     cursor.setPosition(6);
     QTextCharFormat fmt = cursor.charFormat();
-    QVERIFY(fmt.hasProperty(QTextFormat::ForegroundBrush));
+    QVERIFY(fmt.hasProperty(QTextFormat::TextUnderlineColor));
 
-    // remove a property (like font color) on the parent style and call alteredStyle()
+    // remove a property (like underline color) on the parent style and call alteredStyle()
     // on the manager. Then check if the property has been removed on the doc.
     charStyle->clearForeground();
     manager.alteredStyle(charStyle);
@@ -323,7 +323,7 @@ void TestStyles::testChangeManagedStyle()
 
     fmt = cursor.charFormat();
 
-    QVERIFY(! fmt.hasProperty(QTextFormat::ForegroundBrush));
+    QVERIFY(! fmt.hasProperty(QTextFormat::TextUnderlineColor));
 }
 
 void TestStyles::testModifiedParag()
