@@ -1698,8 +1698,8 @@ bool KoDocument::loadNativeFormatFromStoreInternal(KoStore *store)
         }
 
     } else {
-        kError(30003) << "ERROR: No maindoc.xml" << endl;
-        d->lastErrorMessage = i18n("Invalid document: no file 'maindoc.xml'.");
+        kError(30003) << "ERROR: No content.xml" << endl;
+        d->lastErrorMessage = i18n("Invalid document: no file 'content.xml'.");
         QApplication::restoreOverrideCursor();
         return false;
     }
