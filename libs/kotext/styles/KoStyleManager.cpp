@@ -61,12 +61,12 @@ KoStyleManagerPrivate::~KoStyleManagerPrivate()
 
 void KoStyleManagerPrivate::refreshUnsetStoreFor(int key)
 {
-    QList<int> keys;
+    QMap<int, QVariant> keys;
     KoParagraphStyle *parag = paragStyles.value(key);
     if (parag) {
         QTextBlockFormat bf;
         parag->applyStyle(bf);
-        keys = bf.properties().keys();
+        keys = bf.properties();
     } else {
         KoCharacterStyle *charStyle = charStyles.value(key);
         if (charStyle) {
@@ -82,7 +82,7 @@ void KoStyleManagerPrivate::refreshUnsetStoreFor(int key)
                     }
                 }
             }
-            keys = cf.properties().keys();
+            keys = cf.properties();
         }
     }
     unsetStore.insert(key, keys);

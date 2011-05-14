@@ -61,10 +61,11 @@ public:
     QList<ChangeFollower*> documentUpdaterProxies;
 
     /// the unsetStore has a hash from the styleId to a set of all the property ids of a style
-    QHash<int, QList<int> > unsetStore;
+    QHash<int, QMap<int, QVariant> > unsetStore;
 
     bool updateTriggered;
-    QMap<int, QList<int> > updateQueue;
+    /// the updateQueue contains a map of (altered) style-ids to a state of the style
+    QMap<int, QMap<int, QVariant> > updateQueue;
 
     KoParagraphStyle *defaultParagraphStyle;
     KoListStyle *defaultListStyle;

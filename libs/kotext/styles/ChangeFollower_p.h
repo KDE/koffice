@@ -70,7 +70,7 @@ public:
      *      and KoCharacterStyle::styleId followed with a set of keys set on
      *      format due to applying of style (and parents)
      */
-    void processUpdates(const QMap<int, QList<int> > &changedStyles);
+    void processUpdates(const QMap<int, QMap<int, QVariant> > &changedStyles);
     /// return the document this follower is following.
     const QTextDocument *document() const {
         return m_document;

@@ -191,6 +191,7 @@ QColor KoParagraphStyle::propertyColor(int key) const
 
 void KoParagraphStyle::applyStyle(QTextBlockFormat &format) const
 {
+    const QTextBlockFormat original = format;
     if (d->parentStyle) {
         d->parentStyle->applyStyle(format);
     }
@@ -198,7 +199,8 @@ void KoParagraphStyle::applyStyle(QTextBlockFormat &format) const
     const QMap<int, QVariant> props = d->stylesPrivate.properties();
     QMap<int, QVariant>::const_iterator it = props.begin();
     while (it != props.end()) {
-        format.setProperty(it.key(), it.value());
+        if (!original.hasProperty(it.key()))
+            format.setProperty(it.key(), it.value());
         ++it;
     }
     if ((hasProperty(DefaultOutlineLevel)) && (!format.hasProperty(OutlineLevel))) {

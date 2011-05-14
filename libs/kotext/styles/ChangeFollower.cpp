@@ -43,7 +43,7 @@ ChangeFollower::~ChangeFollower()
         sm->remove(this);
 }
 
-void ChangeFollower::processUpdates(const QMap<int, QList<int> > &changedStyles)
+void ChangeFollower::processUpdates(const QMap<int, QMap<int, QVariant> > &changedStyles)
 {
 #ifdef DEBUG_CHANGES
     kDebug(32500) << "styles changed;" << changedStyles.keys();
@@ -62,30 +62,46 @@ void ChangeFollower::processUpdates(const QMap<int, QList<int> > &changedStyles)
     while (block.isValid()) {
         QTextBlockFormat bf = block.blockFormat();
         int id = bf.intProperty(KoParagraphStyle::StyleId);
-        KoParagraphStyle *paragStyle = sm->paragraphStyle(id);
+        KoParagraphStyle *paragStyle = 0;
         if (id > 0 && changedStyles.contains(id)) {
+            paragStyle = sm->paragraphStyle(id);
             Q_ASSERT(paragStyle);
             cursor.setPosition(block.position());
 
-            foreach (int key, changedStyles.value(id))
-                bf.clearProperty(key);
+            Q_ASSERT(changedStyles.contains(id)); // otherwise the [] next will be BAD
+            const QMap<int, QVariant> &origValues = changedStyles[id];
+            QMap<int, QVariant>::const_iterator it = origValues.begin();
+            while (it != origValues.end()) {
+                QVariant prop = bf.property(it.key());
+                if (prop == it.value()) {
+                    bf.clearProperty(it.key());
+                }
+                ++it;
+            }
             cursor.setBlockFormat(bf); // first we remove all traces, below we'll reapply.
-        } else {
-            paragStyle = 0;
         }
         QTextCharFormat cf = block.charFormat();
         id = cf.intProperty(KoCharacterStyle::StyleId);
         if (paragStyle && id > 0 && changedStyles.contains(id)) {
             KoCharacterStyle *style = sm->characterStyle(id);
             Q_ASSERT(style);
-            foreach (int key, changedStyles.value(id)) {
+
+            Q_ASSERT(changedStyles.contains(id)); // otherwise the [] next will be BAD
+            const QMap<int, QVariant> &origValues = changedStyles[id];
+            QMap<int, QVariant>::const_iterator it = origValues.begin();
+            while (it != origValues.end()) {
+                QVariant prop = cf.property(it.key());
+                if (prop == it.value()) {
 #ifdef DEBUG_CHANGES
-                QString out("Char-style[%1]; removing property 0x%2");
-                out = out.arg(style->name()).arg(key, 3, 16);
-                kDebug(32500) << out;
+                    QString out("Char-style[%1]; removing property 0x%2");
+                    out = out.arg(style->name()).arg(it.key(), 3, 16);
+                    kDebug(32500) << out;
 #endif
-                cf.clearProperty(key);
+                    cf.clearProperty(it.key());
+                }
+                ++it;
             }
+
             cursor.setBlockCharFormat(cf); // first we remove all traces, below we'll reapply.
         }
 
@@ -100,15 +116,25 @@ void ChangeFollower::processUpdates(const QMap<int, QList<int> > &changedStyles)
 #endif
                 KoCharacterStyle *style = sm->characterStyle(id);
                 Q_ASSERT(style);
-
-                foreach (int key, changedStyles.value(id)) {
+                Q_ASSERT(changedStyles.contains(id)); // otherwise the [] next will be BAD
+                const QMap<int, QVariant> &origValues = changedStyles[id];
+                QMap<int, QVariant>::const_iterator it = origValues.begin();
+                while (it != origValues.end()) {
+                    QVariant prop = cf.property(it.key());
+if (it.key() == 0x821) {
+    qDebug() << "old style; " << it.value() << " new; " << prop.isNull() << prop.type() << prop.value<QBrush>();
+}
+                    if (prop == it.value()) {
 #ifdef DEBUG_CHANGES
-                    QString out("Char-segment[%1]; removing property 0x%2");
-                    out = out.arg(style->name()).arg(key, 3, 16);
-                    kDebug(32500) << out;
+                        QString out("Char-segment[%1]; removing property 0x%2");
+                        out = out.arg(style->name()).arg(it.key(), 3, 16);
+                        kDebug(32500) << out;
 #endif
-                    cf.clearProperty(key);
+                        cf.clearProperty(it.key());
+                    }
+                    ++it;
                 }
+
                 // create selection
                 cursor.setPosition(fragment.position());
                 cursor.setPosition(fragment.position() + fragment.length(), QTextCursor::KeepAnchor);
