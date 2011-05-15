@@ -10,38 +10,39 @@ if( QCA2_FOUND )
 endif( QCA2_FOUND )
 
 set(koodf_LIB_SRCS
-    KoOdf.cpp
-    KoXmlNS.cpp
+    KoBorder.cpp
+    KoDirectoryStore.cpp
     KoDom.cpp
+    KoEmbeddedDocumentSaver.cpp
+    KoEncryptedStore.cpp
+    KoEncryptionChecker.cpp
+    KoFontFace.cpp
+    KoGenChange.cpp
+    KoGenChanges.cpp
     KoGenStyle.cpp
     KoGenStyles.cpp
-    KoFontFace.cpp
-    KoOdfLoadingContext.cpp
     KoOasisSettings.cpp
-    KoOdfStylesReader.cpp
+    KoOdf.cpp
+    KoOdfDocument.cpp
+    KoOdfGraphicStyles.cpp
+    KoOdfLoadingContext.cpp
     KoOdfNumberStyles.cpp
     KoOdfPaste.cpp
     KoOdfReadStore.cpp
+    KoOdfStylesReader.cpp
     KoOdfWriteStore.cpp
-    KoStyleStack.cpp
-    KoOdfGraphicStyles.cpp
-    KoGenChange.cpp
-    KoGenChanges.cpp
-    KoOdfDocument.cpp
-    KoEmbeddedDocumentSaver.cpp
-    KoBorder.cpp
-    KoPageLayout.cpp
     KoPageFormat.cpp
+    KoPageLayout.cpp
+    KoProperties.cpp
     KoStore.cpp
+    KoStoreDevice.cpp
+    KoStyleStack.cpp
     KoTarStore.cpp
-    KoDirectoryStore.cpp
-    KoZipStore.cpp
+    KoUnit.cpp
+    KoXmlNS.cpp
     KoXmlReader.cpp
     KoXmlWriter.cpp
-    KoEncryptedStore.cpp
-    KoEncryptionChecker.cpp
-    KoProperties.cpp
-    KoUnit.cpp
+    KoZipStore.cpp
 )
 
 kde4_add_library(koodf SHARED ${koodf_LIB_SRCS})
