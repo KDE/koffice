@@ -18,11 +18,10 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoZipStore.h"
+#include "KoZipStore_p.h"
 #include "KoStore_p.h"
 
 #include <QBuffer>
-//Added by qt3to4:
 #include <QByteArray>
 
 #include <kzip.h>
