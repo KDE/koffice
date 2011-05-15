@@ -23,11 +23,12 @@
 #ifndef KOCOLUMNS_H
 #define KOCOLUMNS_H
 
+#include "koodf_export.h"
 
 #include <QtGlobal>
 
 /** structure for columns */
-struct KoColumns {
+struct KOODF_EXPORT KoColumns {
     int columns;
     qreal columnSpacing;
     bool operator==(const KoColumns& rhs) const {

@@ -81,7 +81,7 @@ public:
 
     /// Constructor
     KoBorder();
-    KoBorder(const KoBorder &kb);
+    KoBorder(const KoBorder &other);
 
     /// Destructor
     ~KoBorder();

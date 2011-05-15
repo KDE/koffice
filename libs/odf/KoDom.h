@@ -65,10 +65,5 @@ namespace KoDom
 KOODF_EXPORT KoXmlElement namedItemNS(const KoXmlNode &node, const char *nsURI, const char *localName);
 
 }
-#if 0
-#define forEachElement( elem, parent ) \
-    for ( QDomNode _node = parent.firstChild(); !_node.isNull(); _node = _node.nextSibling() ) \
-        if ( !( elem = _node.toElement() ).isNull() )
-#endif
 #endif /* KODOM_H */
 
