@@ -24,7 +24,7 @@
 
 #include "KoTarStore.h"
 #include "KoZipStore.h"
-#include "KoDirectoryStore.h"
+#include "KoDirectoryStore_p.h"
 #ifdef QCA2
 #include "KoEncryptedStore.h"
 #endif
