@@ -19,7 +19,7 @@
 */
 #ifdef QCA2
 
-#include "KoEncryptedStore.h"
+#include "KoEncryptedStore_p.h"
 #include "KoEncryptionChecker.h"
 #include "KoStore_p.h"
 #include "KoXmlReader.h"

@@ -26,7 +26,7 @@
 #include "KoZipStore.h"
 #include "KoDirectoryStore_p.h"
 #ifdef QCA2
-#include "KoEncryptedStore.h"
+#include "KoEncryptedStore_p.h"
 #endif
 
 #include <QBuffer>
