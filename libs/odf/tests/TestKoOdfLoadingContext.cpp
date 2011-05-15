@@ -21,7 +21,7 @@
 #include <QByteArray>
 #include <QBuffer>
 #include <KoStore.h>
-#include <KoStoreDevice_p.h>
+#include <KoStoreDevice.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KoOdfLoadingContext.h>

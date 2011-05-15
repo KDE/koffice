@@ -84,6 +84,7 @@ install( FILES
     KoPageFormat.h
     KoColumns.h
     KoStore.h
+    KoStoreDevice.h
     KoXmlReader.h
     KoXmlWriter.h
     KoXmlReaderForward.h
