@@ -22,7 +22,7 @@
 #include "KoStore.h"
 #include "KoStore_p.h"
 
-#include "KoTarStore.h"
+#include "KoTarStore_p.h"
 #include "KoZipStore.h"
 #include "KoDirectoryStore_p.h"
 #ifdef QCA2

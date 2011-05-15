@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoTarStore.h"
+#include "KoTarStore_p.h"
 #include "KoStore_p.h"
 
 #include <QBuffer>
