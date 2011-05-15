@@ -24,10 +24,11 @@
 #include <QSet>
 
 #include "flake_export.h"
-#include "KoXmlReaderForward.h"
+
 class KoEventAction;
 class KoEventActionFactoryBase;
 class KoShapeLoadingContext;
+class KoXmlElement;
 
 /**
  * This singletion keeps a register of all available KoEventActionFactoryBase objects.

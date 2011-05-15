@@ -33,8 +33,6 @@
 #include <QBrush>
 #include <QMetaType>
 
-#include <KoXmlReaderForward.h>
-
 #include "flake_export.h"
 
 class QPainter;
@@ -61,6 +59,7 @@ class KoFilterEffectStack;
 class KoSnapData;
 class KoShapeConnection;
 class KoShapeConnectionPolicy;
+class KoXmlElement;
 
 /**
  *

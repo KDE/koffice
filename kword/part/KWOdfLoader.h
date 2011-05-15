@@ -24,7 +24,6 @@
 #define KWODFLOADER_H
 
 #include "KWord.h"
-#include "KoXmlReaderForward.h"
 
 #include <KoTextLoader.h>
 #include <QPointer>
@@ -33,6 +32,7 @@ class KWDocument;
 class KoOdfReadStore;
 class KoOdfLoadingContext;
 class KWPageStyle;
+class KoXmlDocument;
 
 class QTextCursor;
 

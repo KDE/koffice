@@ -23,12 +23,11 @@
 #define SVGIMPORT_H
 
 #include <KoFilter.h>
-#include <KoXmlReaderForward.h>
 #include <QtCore/QVariant>
 
 class KoShape;
 class KarbonDocument;
-class QDomElement;
+class KoXmlElement;
 
 class SvgImport : public KoFilter
 {

@@ -22,7 +22,6 @@
 #define KOGRIDDATA_H
 
 #include "komain_export.h"
-#include <KoXmlReaderForward.h>
 #include <QtGui/QColor>
 
 class QPainter;
@@ -30,6 +29,8 @@ class QRectF;
 class KoViewConverter;
 class KoXmlWriter;
 class KToggleAction;
+class KoXmlElement;
+class KoXmlDocument;
 
 /**
  * This class stores application-data for display-grids.

@@ -24,7 +24,6 @@
 #include <QVariantList>
 
 #include <KoShapeFactoryBase.h>
-#include <KoXmlReaderForward.h>
 
 class KoShape;
 

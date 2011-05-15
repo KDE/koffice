@@ -24,11 +24,11 @@
 #include "KoInlineObject.h"
 #include "kotext_export.h"
 
-#include <KoXmlReaderForward.h>
 class KoShape;
 class QTextDocument;
 class KoShapeSavingContext;
 class KoShapeLoadingContext;
+class KoXmlElement;
 
 /**
  * Used to indicate an ODF text:meta container. This is very similar to a KoBookmark

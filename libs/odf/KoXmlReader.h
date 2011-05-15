@@ -20,9 +20,6 @@
 #ifndef KOFFICE_XMLREADER
 #define KOFFICE_XMLREADER
 
-// KOXML_USE_QDOM is defined there
-#include "KoXmlReaderForward.h"
-
 #include "koodf_export.h"
 
 #include <QtXml/qxml.h>
@@ -31,17 +28,6 @@
 
 class QIODevice;
 class QTextDecoder;
-
-#ifdef KOXML_USE_QDOM
-
-typedef QDomNode KoXmlNode;
-typedef QDomElement KoXmlElement;
-typedef QDomText KoXmlText;
-typedef QDomCDATASection KoXmlCDATASection;
-typedef QDomDocumentType KoXmlDocumentType;
-typedef QDomDocument KoXmlDocument;
-
-#else
 
 class QString;
 class QXmlStreamReader;
@@ -52,6 +38,7 @@ class KoXmlCDATASection;
 class KoXmlDocumentType;
 class KoXmlDocument;
 class KoXmlNodeData;
+class KoXmlElement;
 
 /**
 * KoXmlNode represents a node in a DOM tree.
@@ -297,8 +284,6 @@ private:
     KoXmlDocumentType dt;
     KoXmlDocument(KoXmlNodeData*);
 };
-
-#endif // KOXML_USE_QDOM
 
 /**
  * This namespace contains a few convenience functions to simplify code using QDom

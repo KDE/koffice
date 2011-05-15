@@ -25,10 +25,10 @@
 
 #include <KoTextShapeDataBase.h>
 #include <KoInsets.h>
-#include <KoXmlReaderForward.h>
 
 class QTextDocument;
 class KoXmlWriter;
+class KoXmlElement;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
 class KoTextShapeDataPrivate;

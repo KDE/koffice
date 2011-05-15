@@ -21,7 +21,6 @@
 #define KO_TEXT_INLINE_RDF_H
 
 #include "kotext_export.h"
-#include <KoXmlReaderForward.h>
 
 #include <QTextBlockUserData>
 #include <QTextTableCell>
@@ -34,6 +33,7 @@ class KoTextInlineRdf;
 class RdfSemanticItem;
 class RdfFoaF;
 class KoTextEditor;
+class KoXmlElement;
 
 /**
  * @short Store information from xhtml:property etc which are for inline Rdf

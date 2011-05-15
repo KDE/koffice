@@ -86,7 +86,6 @@ install( FILES
     KoStoreDevice.h
     KoXmlReader.h
     KoXmlWriter.h
-    KoXmlReaderForward.h
     KoProperties.h
     KoUnit.h
 DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)

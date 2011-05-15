@@ -24,6 +24,7 @@
 #define KOPARAGRAPHSTYLE_H
 
 #include "KoText.h"
+#include "KoBorder.h"
 #include "kotext_export.h"
 
 #include <QObject>
@@ -32,16 +33,14 @@
 #include <QVariant>
 #include <QTextFormat>
 
-struct Property;
 class KoCharacterStyle;
+class KoXmlElement;
 class KoListStyle;
 class QTextBlock;
 class KoStyleStack;
 class KoGenStyle;
 class KoGenStyles;
-#include "KoXmlReaderForward.h"
 class KoShapeLoadingContext;
-#include "KoBorder.h"
 
 /**
  * A container for all properties for the paragraph wide style.

@@ -31,7 +31,6 @@
 #include <QObject>
 
 #include "kotext_export.h"
-#include "KoXmlReaderForward.h"
 
 class KoShapeLoadingContext;
 class KoShape;
@@ -39,6 +38,8 @@ class QTextCursor;
 class QTextTable;
 class QRect;
 class KoBookmarkManager;
+class KoXmlElement;
+class KoXmlNode;
 
 /**
  * The KoTextLoader loads is use to load text for one and only one textdocument or shape

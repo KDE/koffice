@@ -22,8 +22,8 @@
 
 #include "flake_export.h"
 
-#include "KoXmlReaderForward.h"
 class KoShapeLoadingContext;
+class KoXmlElement;
 
 /**
  * @brief Base class for shapes that are saved as a part of a draw:frame.
@@ -58,10 +58,10 @@ public:
     /**
     * Constructor.
     *
-    * \param XmlNamespace The namespace. E.g. KoXmlNS::draw
+    * \param xmlNamespace The namespace. E.g. KoXmlNS::draw
     * \param tag The element tag-name. E.g. "image"
     */
-    KoFrameShape(const QString &XmlNamespace, const QString &tag);
+    KoFrameShape(const QString &xmlNamespace, const QString &tag);
 
     /**
     * Destructor.

@@ -28,11 +28,9 @@
 #include <QColor>
 #include <QSharedData>
 
-#include "KoXmlReaderForward.h"
-
 class KoGenStyle;
 class KoBorderPrivate;
-
+class KoXmlElement;
 
 /**
  * A container for all properties of a generic border as defined by ODF.

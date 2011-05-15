@@ -23,7 +23,6 @@
 #include "komain_export.h"
 #include "KoDocumentRdfBase.h"
 
-#include "KoXmlReaderForward.h"
 #include <KoDataCenterBase.h>
 #include <kconfig.h>
 
@@ -43,6 +42,7 @@ class KoXmlWriter;
 class KoDocument;
 class KoCanvasBase;
 class KoTextEditor;
+class KoXmlElement;
 
 #include "RdfForward.h"
 #include "KoSemanticStylesheet.h"

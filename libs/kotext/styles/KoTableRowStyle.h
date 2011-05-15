@@ -24,7 +24,6 @@
 
 #include "KoText.h"
 #include "kotext_export.h"
-#include <KoXmlReaderForward.h>
 
 #include <QObject>
 #include <QVector>
@@ -36,6 +35,7 @@ class KoStyleStack;
 class KoGenStyle;
 class KoGenStyles;
 class KoOdfLoadingContext;
+class KoXmlElement;
 
 /**
  * A container for all properties for the table row style.

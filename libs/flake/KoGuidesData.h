@@ -24,13 +24,13 @@
 #include "flake_export.h"
 #include <QtCore/QList>
 #include <QtCore/Qt>
-#include "KoXmlReaderForward.h"
 
 class QPainter;
 class KoViewConverter;
 class QRectF;
 class QColor;
 class KoXmlWriter;
+class KoXmlDocument;
 
 /**
  * XXX

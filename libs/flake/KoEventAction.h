@@ -21,10 +21,11 @@
 #define KOEVENTACTION_H
 
 #include "flake_export.h"
-#include "KoXmlReaderForward.h"
+
 class KoShapeLoadingContext;
 class KoShapeSavingContext;
 class KoToolBase;
+class KoXmlElement;
 
 /**
  * This is the base class for actions that are executed on events.

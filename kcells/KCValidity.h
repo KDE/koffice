@@ -48,8 +48,6 @@
 // KCells
 #include "KCCondition.h"
 
-#include "KoXmlReaderForward.h"
-
 class KCOdfLoadingContext;
 class KCValueConverter;
 class KCValueParser;

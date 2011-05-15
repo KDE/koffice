@@ -20,7 +20,6 @@
 #ifndef KOODFREADSTORE_H
 #define KOODFREADSTORE_H
 
-#include "KoXmlReaderForward.h"
 #include "koodf_export.h"
 
 class QString;
@@ -28,6 +27,8 @@ class QIODevice;
 class QXmlStreamReader;
 class KoStore;
 class KoOdfStylesReader;
+class KoXmlDocument;
+class KoXmlElement;
 
 /**
  * Helper class around KoStore for reading out ODF files.

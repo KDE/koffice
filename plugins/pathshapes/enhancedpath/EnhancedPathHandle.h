@@ -21,12 +21,12 @@
 #define KOENHANCEDPATHHANDLE_H
 
 #include <QPointF>
-#include <KoXmlReaderForward.h>
 
 class EnhancedPathShape;
 class EnhancedPathParameter;
 class KoShapeSavingContext;
 class KoShapeLoadingContext;
+class KoXmlElement;
 
 /**
  * An interaction handle used by the EnhancedPathShape for

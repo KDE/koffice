@@ -22,10 +22,10 @@
 
 #include "KoOdf.h"
 #include "koodf_export.h"
-#include "KoXmlReaderForward.h"
 
 class QMimeData;
 class KoOdfReadStore;
+class KoXmlElement;
 
 /**
  * This is a helper class to help you paste odf snippets.

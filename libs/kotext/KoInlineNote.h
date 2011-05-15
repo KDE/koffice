@@ -22,8 +22,6 @@
 #include "KoInlineObject.h"
 #include "kotext_export.h"
 
-#include "KoXmlReaderForward.h"
-
 class KoShapeLoadingContext;
 class KoChangeTracker;
 class KoStyleManager;
