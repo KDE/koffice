@@ -22,13 +22,11 @@
 #include <QObject>
 #include <QApplication>
 #include <QString>
-// #include <QRegExp> // Currently not needed (due to disabled code)
 #include <QTextCodec>
 #include <QFile>
 #include <QTextStream>
 #include <qdom.h>
 #include <qfontinfo.h>
-//Added by qt3to4:
 #include <QByteArray>
 
 #include <kdebug.h>

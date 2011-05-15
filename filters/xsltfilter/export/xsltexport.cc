@@ -24,7 +24,6 @@
 #include <kpluginfactory.h>
 
 #include <xsltexportdia.h>
-//Added by qt3to4:
 #include <QByteArray>
 
 K_PLUGIN_FACTORY(XSLTExportFactory, registerPlugin<XSLTExport>();)

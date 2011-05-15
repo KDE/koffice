@@ -1,5 +1,3 @@
-//Added by qt3to4:
-#include <Q3ValueList>
 /*
    This file is part of the KDE project
    Copyright (C) 2004 Nicolas GOUTTE <goutte@kde.org>
@@ -33,6 +31,8 @@ class KWord13Picture;
 #include <QDateTime>
 #include <q3dict.h>
 #include <QStringList>
+//Added by qt3to4:
+#include <Q3ValueList>
 
 #include "kword13frameset.h"
 

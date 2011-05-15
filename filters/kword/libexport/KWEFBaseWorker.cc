@@ -20,7 +20,6 @@
 
 #include <QBuffer>
 #include <QImage>
-//Added by qt3to4:
 #include <QList>
 
 #include <kdebug.h>

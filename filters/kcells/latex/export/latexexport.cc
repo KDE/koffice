@@ -25,7 +25,6 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <QTextCodec>
-//Added by qt3to4:
 #include <QByteArray>
 #include "kcellslatexexportdiaImpl.h"
 

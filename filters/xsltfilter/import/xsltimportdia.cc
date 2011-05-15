@@ -26,7 +26,6 @@
 #include <QCursor>
 #include <QStringList>
 #include <QDir>
-//Added by qt3to4:
 #include <QByteArray>
 
 #include <kapplication.h>

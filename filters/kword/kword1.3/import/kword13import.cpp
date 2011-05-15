@@ -19,7 +19,6 @@
 
 #include <QtXml>
 #include <qdom.h>
-//Added by qt3to4:
 #include <QByteArray>
 
 #include <kdebug.h>

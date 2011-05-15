@@ -23,7 +23,6 @@
 #include <QString>
 #include <QFile>
 #include <QObject>
-//Added by qt3to4:
 #include <QByteArray>
 
 #include <KoFilter.h>

@@ -1,5 +1,3 @@
-//Added by qt3to4:
-#include <QTextStream>
 /* This file is part of the KDE project
    Copyright (C) 2004 Nicolas GOUTTE <goutte@kde.org>
 
@@ -33,6 +31,7 @@ class KoXmlWriter;
 class KWord13Document;
 
 #include <KoGenStyles.h>
+#include <QTextStream>
 
 class KWord13OasisGenerator
 {

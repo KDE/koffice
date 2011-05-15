@@ -23,7 +23,6 @@
 #define ASCIIIMPORT_H
 
 #include <KoFilter.h>
-//Added by qt3to4:
 #include <QTextStream>
 #include <QByteArray>
 #include <QVariantList>

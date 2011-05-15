@@ -24,9 +24,7 @@
 #include <kdebug.h>
 
 #include "fileheader.h"
-//#include "paper.h"
 #include "spreadsheet.h"
-//Added by qt3to4:
 #include <QTextStream>
 
 /*******************************************/

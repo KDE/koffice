@@ -25,7 +25,6 @@
 
 #include <q3dict.h>
 #include <qdom.h>
-//Added by qt3to4:
 #include <QByteArray>
 #include <QVector>
 #include <KoStyleStack.h>

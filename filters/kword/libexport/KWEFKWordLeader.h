@@ -22,7 +22,6 @@
 #define KWEF_KWORDLEADER_H
 
 #include <QIODevice>
-//Added by qt3to4:
 #include <QList>
 #include <QByteArray>
 

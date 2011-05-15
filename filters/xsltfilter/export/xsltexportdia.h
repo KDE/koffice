@@ -22,7 +22,6 @@
 
 #include <xsltdialog.h>
 #include <QStringList>
-//Added by qt3to4:
 #include <QByteArray>
 #include <kurl.h>
 #include <kconfiggroup.h>

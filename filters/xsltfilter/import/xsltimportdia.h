@@ -25,7 +25,6 @@
 #include <kconfiggroup.h>
 #include <KoStore.h>
 #include "xsltdialog.h"
-//Added by qt3to4:
 #include <QByteArray>
 
 class XSLTImportDia : public XSLTDialog

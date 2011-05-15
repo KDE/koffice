@@ -22,7 +22,6 @@
 
 #include <QString>
 #include <qpicture.h>
-//Added by qt3to4:
 #include <QPixmap>
 #include "PictureBase.h"
 class QPainter;

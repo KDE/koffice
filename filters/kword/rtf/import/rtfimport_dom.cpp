@@ -14,7 +14,6 @@
 #include <QDateTime>
 #include <QTextCodec>
 #include <QColor>
-//Added by qt3to4:
 #include <QByteArray>
 
 #include <kdebug.h>

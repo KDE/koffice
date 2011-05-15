@@ -24,7 +24,6 @@
 #include <QImageReader>
 #include <QImageWriter>
 #include <QPainter>
-//Added by qt3to4:
 #include <QPixmap>
 #include <QMimeData>
 

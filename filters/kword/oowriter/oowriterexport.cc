@@ -38,7 +38,6 @@
 
 #include "ExportFilter.h"
 #include "oowriterexport.h"
-//Added by qt3to4:
 #include <QByteArray>
 
 K_PLUGIN_FACTORY(OOWRITERExportFactory, registerPlugin<OOWRITERExport>();)

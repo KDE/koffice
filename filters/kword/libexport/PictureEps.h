@@ -21,7 +21,6 @@
 #define __koPictureEps_h__
 
 #include <QString>
-//Added by qt3to4:
 #include <QPixmap>
 
 #include "PictureBase.h"

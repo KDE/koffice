@@ -21,7 +21,6 @@
 #define __XSLTPROC_H__
 
 #include <QString>
-//Added by qt3to4:
 #include <QByteArray>
 
 #include <libexslt/exslt.h>

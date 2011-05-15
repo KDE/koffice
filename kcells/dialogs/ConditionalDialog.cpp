@@ -45,7 +45,6 @@
 
 #include <QGroupBox>
 #include <QLabel>
-//Added by qt3to4:
 #include <QGridLayout>
 
 ConditionalWidget::ConditionalWidget(QWidget* parent, const char* /*name*/, Qt::WFlags fl)

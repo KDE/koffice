@@ -29,7 +29,6 @@
 #include <kdebug.h>
 
 #include "KWEFStructures.h"
-//Added by qt3to4:
 #include <QList>
 
 

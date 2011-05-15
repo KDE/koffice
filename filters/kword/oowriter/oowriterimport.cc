@@ -25,7 +25,6 @@
 #include <QPen>
 #include <QRegExp>
 #include <QImage>
-//Added by qt3to4:
 #include <QByteArray>
 #include <QVector>
 

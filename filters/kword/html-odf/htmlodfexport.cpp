@@ -26,7 +26,6 @@
 #include <QFile>
 #include <QString>
 #include <QBuffer>
-//Added by qt3to4:
 #include <QByteArray>
 #include <QFileInfo>
 #include <QDir>

@@ -23,7 +23,6 @@
 
 #include <QDir>
 #include <QComboBox>
-//Added by qt3to4:
 #include <QByteArray>
 
 #include <kapplication.h>

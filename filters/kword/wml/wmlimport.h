@@ -21,7 +21,6 @@
 #define __WMLIMPORT_H
 
 #include <QString>
-//Added by qt3to4:
 #include <QByteArray>
 
 #include <KoFilter.h>

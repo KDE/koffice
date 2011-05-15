@@ -13,7 +13,6 @@
 #define __RTFIMPORT_DOM_H__
 
 #include <QString>
-//Added by qt3to4:
 #include <QByteArray>
 
 class QColor;

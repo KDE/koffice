@@ -45,7 +45,6 @@
 
 #include <rtfexport.h>
 #include <rtfexport.moc>
-//Added by qt3to4:
 #include <QByteArray>
 
 K_PLUGIN_FACTORY(RTFExportFactory, registerPlugin<RTFExport>();)

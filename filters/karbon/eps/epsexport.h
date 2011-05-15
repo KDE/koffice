@@ -24,9 +24,7 @@
 #include <KoFilter.h>
 
 #include "vvisitor.h"
-//Added by qt3to4:
 #include <QTextStream>
-#include <Q3CString>
 #include <QVariantList>
 
 class QTextStream;

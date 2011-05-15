@@ -18,8 +18,6 @@
  * Boston, MA 02110-1301, USA.
 */
 
-//Added by qt3to4:
-#include <QTextStream>
 
 #ifndef _KWORD13LAYOUT
 #define _KWORD13LAYOUT
@@ -27,6 +25,7 @@
 class QTextStream;
 
 #include <QString>
+#include <QTextStream>
 #include <QMap>
 
 #include "kword13formatone.h"

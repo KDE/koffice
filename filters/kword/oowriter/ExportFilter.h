@@ -37,7 +37,6 @@
 #include <KWEFUtil.h>
 #include <KWEFBaseWorker.h>
 #include <KWEFKWordLeader.h>
-//Added by qt3to4:
 #include <QList>
 #include <QTextStream>
 #include <QByteArray>
