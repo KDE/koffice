@@ -12,7 +12,6 @@ endif( QCA2_FOUND )
 set(koodf_LIB_SRCS
     KoBorder.cpp
     KoDirectoryStore.cpp
-    KoDom.cpp
     KoEmbeddedDocumentSaver.cpp
     KoEncryptedStore.cpp
     KoEncryptionChecker.cpp
@@ -63,7 +62,6 @@ install( FILES
     koodf_export.h
     KoOdf.h
     KoXmlNS.h
-    KoDom.h
     KoGenStyle.h
     KoGenStyles.h
     KoFontFace.h

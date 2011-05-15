@@ -28,7 +28,6 @@
 #include <QPointF>
 
 //KOffice includes
-#include <KoDom.h>
 #include <KoFilter.h>
 #include <KoGenStyles.h>
 #include <QVariantList>
