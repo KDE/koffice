@@ -25,7 +25,7 @@
 #include "KoGenStyles.h"
 
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KoStoreDevice_p.h>
 #include <KoXmlWriter.h>
 #include "KoOdfWriteStore.h"
 #include "KoFontFace.h"

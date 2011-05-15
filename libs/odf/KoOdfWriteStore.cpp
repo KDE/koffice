@@ -27,7 +27,7 @@
 #include <klocale.h>
 
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KoStoreDevice_p.h>
 #include <KoXmlWriter.h>
 
 #include "KoXmlNS.h"

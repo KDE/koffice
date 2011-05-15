@@ -30,7 +30,7 @@
 #include <KoGenStyle.h>
 #include <KoGenStyles.h>
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KoStoreDevice_p.h>
 #include <KoStyleStack.h>
 #include <KoUnit.h>
 #include <KoXmlNS.h>
