@@ -22,7 +22,7 @@
 #include <QObject>
 
 #include <KoXmlReader.h>
-#include <KoOasisSettings.h>
+#include <KoOdfSettings.h>
 
 class TestOdfSettings : public QObject
 {
@@ -39,7 +39,7 @@ private slots:
 
 private:
     KoXmlDocument doc;
-    KoOasisSettings *settings;
+    KoOdfSettings *settings;
 };
 
 void TestOdfSettings::initTestCase()
@@ -67,12 +67,12 @@ void TestOdfSettings::initTestCase()
 
     bool ok = doc.setContent( xml, true /* namespace processing */ );
     QVERIFY(ok);
-    settings = new KoOasisSettings(doc);
+    settings = new KoOdfSettings(doc);
 }
 
 void TestOdfSettings::testSelectItemSet()
 {
-    KoOasisSettings::Items items = settings->itemSet("notexist");
+    KoOdfSettings::Items items = settings->itemSet("notexist");
     QVERIFY(items.isNull());
     items = settings->itemSet("view-settings");
     QVERIFY(!items.isNull());
@@ -80,36 +80,36 @@ void TestOdfSettings::testSelectItemSet()
 
 void TestOdfSettings::testParseConfigItemString()
 {
-    KoOasisSettings::Items viewSettings = settings->itemSet("view-settings");
+    KoOdfSettings::Items viewSettings = settings->itemSet("view-settings");
     const QString unit = viewSettings.parseConfigItemString("unit");
     QCOMPARE(unit, QString("mm"));
 }
 
 void TestOdfSettings::testIndexedMap()
 {
-    KoOasisSettings::Items viewSettings = settings->itemSet("view-settings");
+    KoOdfSettings::Items viewSettings = settings->itemSet("view-settings");
     QVERIFY(!viewSettings.isNull());
-    KoOasisSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
+    KoOdfSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
     QVERIFY(!viewMap.isNull());
-    KoOasisSettings::Items firstView = viewMap.entry(0);
+    KoOdfSettings::Items firstView = viewMap.entry(0);
     QVERIFY(!firstView.isNull());
     const short zoomFactor = firstView.parseConfigItemShort("ZoomFactor");
     QCOMPARE(zoomFactor, (short) 100);
-    KoOasisSettings::Items secondView = viewMap.entry(1);
+    KoOdfSettings::Items secondView = viewMap.entry(1);
     QVERIFY(secondView.isNull());
 }
 
 void TestOdfSettings::testNamedMap()
 {
-    KoOasisSettings::Items viewSettings = settings->itemSet("view-settings");
+    KoOdfSettings::Items viewSettings = settings->itemSet("view-settings");
     QVERIFY(!viewSettings.isNull());
-    KoOasisSettings::NamedMap viewMap = viewSettings.namedMap("NamedMap");
+    KoOdfSettings::NamedMap viewMap = viewSettings.namedMap("NamedMap");
     QVERIFY(!viewMap.isNull());
-    KoOasisSettings::Items foo = viewMap.entry("foo");
+    KoOdfSettings::Items foo = viewMap.entry("foo");
     QVERIFY(!foo.isNull());
     const int zoomFactor = foo.parseConfigItemShort("ZoomFactor");
     QCOMPARE(zoomFactor, 100);
-    KoOasisSettings::Items secondView = viewMap.entry("foobar");
+    KoOdfSettings::Items secondView = viewMap.entry("foobar");
     QVERIFY(secondView.isNull());
 }
 

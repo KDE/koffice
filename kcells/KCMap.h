@@ -47,7 +47,7 @@ class QUndoCommand;
 
 class KoXmlWriter;
 class KoGenStyles;
-class KoOasisSettings;
+class KoOdfSettings;
 
 class KCApplicationSettings;
 class KCBindingManager;
@@ -194,7 +194,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfSettings(KoOasisSettings &settings);
+    void loadOdfSettings(KoOdfSettings &settings);
 
     /**
      * \ingroup OpenDocument

@@ -31,7 +31,7 @@
 
 // koffice
 #include <KoOdfStylesReader.h>
-#include <KoOasisSettings.h>
+#include <KoOdfSettings.h>
 #include <KoOdfReadStore.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
@@ -241,8 +241,8 @@ void KWOdfLoader::loadSettings(const KoXmlDocument &settingsDoc)
         return;
 
     kDebug(32001) << "KWOdfLoader::loadSettings";
-    KoOasisSettings settings(settingsDoc);
-    KoOasisSettings::Items viewSettings = settings.itemSet("view-settings");
+    KoOdfSettings settings(settingsDoc);
+    KoOdfSettings::Items viewSettings = settings.itemSet("view-settings");
     if (!viewSettings.isNull()) {
         QString docUnit(viewSettings.parseConfigItemString("unit"));
         if (!docUnit.isEmpty())
@@ -250,7 +250,7 @@ void KWOdfLoader::loadSettings(const KoXmlDocument &settingsDoc)
     }
 
     //1.6: KWOasisLoader::loadOasisIgnoreList
-    KoOasisSettings::Items configurationSettings = settings.itemSet("configuration-settings");
+    KoOdfSettings::Items configurationSettings = settings.itemSet("configuration-settings");
     if (!configurationSettings.isNull()) {
         const QString ignorelist = configurationSettings.parseConfigItemString("SpellCheckerIgnoreList");
         kDebug(32001) << "Ignorelist:" << ignorelist;

@@ -64,24 +64,24 @@
  * There are two kinds of maps (by-index or by-name), and entries in the
  * maps contain \<config-item\>s too, or nested maps.
  *
- * The API of KoOasisSettings allows the caller to look for a given item-set
+ * The API of KoOdfSettings allows the caller to look for a given item-set
  * or item-map once, and then lookup multiple items inside it.
  * It also allows "drilling down" inside the tree in case of nesting.
  */
-class KOODF_EXPORT KoOasisSettings
+class KOODF_EXPORT KoOdfSettings
 {
 public:
     /**
-     * Normal KoOasisSettings constructor, for an OASIS settings.xml
+     * Normal KoOdfSettings constructor, for an OASIS settings.xml
      */
-    explicit KoOasisSettings(const KoXmlDocument &doc);
+    explicit KoOdfSettings(const KoXmlDocument &doc);
 
     /**
-     * KoOasisSettings constructor for an OpenOffice-1.1 file
+     * KoOdfSettings constructor for an OpenOffice-1.1 file
      */
-    KoOasisSettings(const KoXmlDocument &doc, const char *officeNsUri, const char *configNsUri);
+    KoOdfSettings(const KoXmlDocument &doc, const char *officeNsUri, const char *configNsUri);
 
-    ~KoOasisSettings();
+    ~KoOdfSettings();
 
     class Items;
     /**
@@ -95,10 +95,10 @@ public:
     /// Represents a collection of items (config-item or maps).
     class KOODF_EXPORT Items
     {
-        friend class KoOasisSettings;
+        friend class KoOdfSettings;
         friend class IndexedMap;
         friend class NamedMap;
-        Items(const KoXmlElement& elem, const KoOasisSettings* settings)
+        Items(const KoXmlElement& elem, const KoOdfSettings* settings)
                 : m_element(elem), m_settings(settings) {}
     public:
         bool isNull() const {
@@ -134,7 +134,7 @@ public:
         QString findConfigItem(const KoXmlElement &element, const QString &item, bool *ok) const;
 
         KoXmlElement m_element;
-        const KoOasisSettings* m_settings;
+        const KoOdfSettings* m_settings;
     };
 
     /// Internal base class for IndexedMap and NamedMap
@@ -145,16 +145,16 @@ public:
             return m_element.isNull();
         }
     protected:
-        Map(const KoXmlElement &elem, const KoOasisSettings *settings)
+        Map(const KoXmlElement &elem, const KoOdfSettings *settings)
                 : m_element(elem), m_settings(settings) {}
         const KoXmlElement m_element;
-        const KoOasisSettings *m_settings;
+        const KoOdfSettings *m_settings;
     };
 
     class KOODF_EXPORT IndexedMap : public Map
     {
         friend class Items;
-        IndexedMap(const KoXmlElement& elem, const KoOasisSettings* settings)
+        IndexedMap(const KoXmlElement& elem, const KoOdfSettings* settings)
                 : Map(elem, settings) {}
       public:
         /// Returns an entry in an indexed map
@@ -164,7 +164,7 @@ public:
     class KOODF_EXPORT NamedMap : public Map
     {
         friend class Items;
-        NamedMap(const KoXmlElement &elem, const KoOasisSettings *settings)
+        NamedMap(const KoXmlElement &elem, const KoOdfSettings *settings)
                 : Map(elem, settings) {}
       public:
         /// Returns an entry in a named map

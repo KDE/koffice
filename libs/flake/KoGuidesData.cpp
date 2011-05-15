@@ -21,7 +21,7 @@
 #include "KoGuidesData.h"
 #include "KoViewConverter.h"
 #include <KoUnit.h>
-#include <KoOasisSettings.h>
+#include <KoOdfSettings.h>
 #include <KoXmlWriter.h>
 
 #include <QtGui/QPainter>
@@ -158,16 +158,16 @@ bool KoGuidesData::loadOdfSettings(const KoXmlDocument & settingsDoc)
     d->vertGuideLines.clear();
     d->horzGuideLines.clear();
 
-    KoOasisSettings settings(settingsDoc);
-    KoOasisSettings::Items viewSettings = settings.itemSet("ooo:view-settings");
+    KoOdfSettings settings(settingsDoc);
+    KoOdfSettings::Items viewSettings = settings.itemSet("ooo:view-settings");
     if (viewSettings.isNull())
         return false;
 
-    KoOasisSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
+    KoOdfSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
     if (viewMap.isNull())
         return false;
 
-    KoOasisSettings::Items firstView = viewMap.entry(0);
+    KoOdfSettings::Items firstView = viewMap.entry(0);
     if (firstView.isNull())
         return false;
 

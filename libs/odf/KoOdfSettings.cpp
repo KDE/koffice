@@ -17,15 +17,15 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoOasisSettings.h"
+#include "KoOdfSettings.h"
 #include "KoXmlNS.h"
 #include <kdebug.h>
 
-class KoOasisSettings::Private
+class KoOdfSettings::Private
 {
 };
 
-KoOasisSettings::KoOasisSettings(const KoXmlDocument& doc)
+KoOdfSettings::KoOdfSettings(const KoXmlDocument& doc)
         : m_settingsElement(KoXml::namedItemNS(doc.documentElement(), KoXmlNS::office, "settings")),
         m_configNsUri(KoXmlNS::config)
         , d(0)
@@ -35,7 +35,7 @@ KoOasisSettings::KoOasisSettings(const KoXmlDocument& doc)
         kDebug(30003) << " document doesn't have tag 'office:settings'";
 }
 
-KoOasisSettings::KoOasisSettings(const KoXmlDocument& doc, const char* officeNSURI, const char* configNSURI)
+KoOdfSettings::KoOdfSettings(const KoXmlDocument& doc, const char* officeNSURI, const char* configNSURI)
         : m_settingsElement(KoXml::namedItemNS(doc.documentElement(), officeNSURI, "settings")),
         m_configNsUri(configNSURI)
         , d(0)
@@ -45,12 +45,12 @@ KoOasisSettings::KoOasisSettings(const KoXmlDocument& doc, const char* officeNSU
         kDebug(30003) << " document doesn't have tag 'office:settings'";
 }
 
-KoOasisSettings::~KoOasisSettings()
+KoOdfSettings::~KoOdfSettings()
 {
     delete d;
 }
 
-KoOasisSettings::Items KoOasisSettings::itemSet(const QString& itemSetName) const
+KoOdfSettings::Items KoOdfSettings::itemSet(const QString& itemSetName) const
 {
     KoXmlElement e;
     forEachElement(e, m_settingsElement) {
@@ -64,7 +64,7 @@ KoOasisSettings::Items KoOasisSettings::itemSet(const QString& itemSetName) cons
     return Items(KoXmlElement(), this);
 }
 
-KoOasisSettings::IndexedMap KoOasisSettings::Items::indexedMap(const QString& itemMapName) const
+KoOdfSettings::IndexedMap KoOdfSettings::Items::indexedMap(const QString& itemMapName) const
 {
     KoXmlElement configItem;
     forEachElement(configItem, m_element) {
@@ -77,7 +77,7 @@ KoOasisSettings::IndexedMap KoOasisSettings::Items::indexedMap(const QString& it
     return IndexedMap(KoXmlElement(), m_settings);
 }
 
-KoOasisSettings::NamedMap KoOasisSettings::Items::namedMap(const QString& itemMapName) const
+KoOdfSettings::NamedMap KoOdfSettings::Items::namedMap(const QString& itemMapName) const
 {
     KoXmlElement configItem;
     forEachElement(configItem, m_element) {
@@ -90,7 +90,7 @@ KoOasisSettings::NamedMap KoOasisSettings::Items::namedMap(const QString& itemMa
     return NamedMap(KoXmlElement(), m_settings);
 }
 
-KoOasisSettings::Items KoOasisSettings::IndexedMap::entry(int entryIndex) const
+KoOdfSettings::Items KoOdfSettings::IndexedMap::entry(int entryIndex) const
 {
     int i = 0;
     KoXmlElement entry;
@@ -106,7 +106,7 @@ KoOasisSettings::Items KoOasisSettings::IndexedMap::entry(int entryIndex) const
     return Items(KoXmlElement(), m_settings);
 }
 
-KoOasisSettings::Items KoOasisSettings::NamedMap::entry(const QString& entryName) const
+KoOdfSettings::Items KoOdfSettings::NamedMap::entry(const QString& entryName) const
 {
     KoXmlElement entry;
     forEachElement(entry, m_element) {
@@ -120,7 +120,7 @@ KoOasisSettings::Items KoOasisSettings::NamedMap::entry(const QString& entryName
 }
 
 // helper method
-QString KoOasisSettings::Items::findConfigItem(const KoXmlElement& element,
+QString KoOdfSettings::Items::findConfigItem(const KoXmlElement& element,
         const QString& item, bool* ok) const
 {
     KoXmlElement it;
@@ -137,13 +137,13 @@ QString KoOasisSettings::Items::findConfigItem(const KoXmlElement& element,
 }
 
 
-QString KoOasisSettings::Items::findConfigItem(const QString& item, bool* ok) const
+QString KoOdfSettings::Items::findConfigItem(const QString& item, bool* ok) const
 {
     return findConfigItem(m_element, item, ok);
 }
 
 #if 0 // does anyone need this one? passing a default value does the job, too
-bool KoOasisSettings::Items::hasConfigItem(const QString& configName) const
+bool KoOdfSettings::Items::hasConfigItem(const QString& configName) const
 {
     bool ok;
     (void)findConfigItem(configName, &ok);
@@ -151,14 +151,14 @@ bool KoOasisSettings::Items::hasConfigItem(const QString& configName) const
 }
 #endif
 
-QString KoOasisSettings::Items::parseConfigItemString(const QString& configName, const QString& defValue) const
+QString KoOdfSettings::Items::parseConfigItemString(const QString& configName, const QString& defValue) const
 {
     bool ok;
     const QString str = findConfigItem(configName, &ok);
     return ok ? str : defValue;
 }
 
-int KoOasisSettings::Items::parseConfigItemInt(const QString& configName, int defValue) const
+int KoOdfSettings::Items::parseConfigItemInt(const QString& configName, int defValue) const
 {
     bool ok;
     const QString str = findConfigItem(configName, &ok);
@@ -171,7 +171,7 @@ int KoOasisSettings::Items::parseConfigItemInt(const QString& configName, int de
     return defValue;
 }
 
-qreal KoOasisSettings::Items::parseConfigItemDouble(const QString& configName, qreal defValue) const
+qreal KoOdfSettings::Items::parseConfigItemDouble(const QString& configName, qreal defValue) const
 {
     bool ok;
     const QString str = findConfigItem(configName, &ok);
@@ -184,7 +184,7 @@ qreal KoOasisSettings::Items::parseConfigItemDouble(const QString& configName, q
     return defValue;
 }
 
-bool KoOasisSettings::Items::parseConfigItemBool(const QString& configName, bool defValue) const
+bool KoOdfSettings::Items::parseConfigItemBool(const QString& configName, bool defValue) const
 {
     bool ok;
     const QString str = findConfigItem(configName, &ok);
@@ -197,7 +197,7 @@ bool KoOasisSettings::Items::parseConfigItemBool(const QString& configName, bool
     return defValue;
 }
 
-short KoOasisSettings::Items::parseConfigItemShort(const QString& configName, short defValue) const
+short KoOdfSettings::Items::parseConfigItemShort(const QString& configName, short defValue) const
 {
     bool ok;
     const QString str = findConfigItem(configName, &ok);
@@ -210,7 +210,7 @@ short KoOasisSettings::Items::parseConfigItemShort(const QString& configName, sh
     return defValue;
 }
 
-long KoOasisSettings::Items::parseConfigItemLong(const QString& configName, long defValue) const
+long KoOdfSettings::Items::parseConfigItemLong(const QString& configName, long defValue) const
 {
     bool ok;
     const QString str = findConfigItem(configName, &ok);

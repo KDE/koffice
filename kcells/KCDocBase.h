@@ -35,7 +35,7 @@
 
 #include "kcells_export.h"
 
-class KoOasisSettings;
+class KoOdfSettings;
 class KoResourceManager;
 
 class KCMap;
@@ -153,7 +153,7 @@ private:
      * \ingroup OpenDocument
      * Load the spell checker ignore list.
      */
-    void loadOdfIgnoreList(const KoOasisSettings& settings);
+    void loadOdfIgnoreList(const KoOdfSettings& settings);
 };
 
 #endif // KSPREAD_DOCBASE_H

@@ -54,7 +54,7 @@
 #include <KoShapeSavingContext.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
-#include <KoOasisSettings.h>
+#include <KoOdfSettings.h>
 #include <KoMainWindow.h>
 #include <KoCanvasController.h>
 #include <KoToolManager.h>
@@ -277,8 +277,8 @@ void KarbonPart::loadOasisSettings(const KoXmlDocument &settingsDoc)
 {
     if (settingsDoc.isNull())
         return ; // not an error if some file doesn't have settings.xml
-    KoOasisSettings settings(settingsDoc);
-    KoOasisSettings::Items viewSettings = settings.itemSet("view-settings");
+    KoOdfSettings settings(settingsDoc);
+    KoOdfSettings::Items viewSettings = settings.itemSet("view-settings");
     if (!viewSettings.isNull()) {
         setUnit(KoUnit::unit(viewSettings.parseConfigItemString("unit")));
         // FIXME: add other config here.

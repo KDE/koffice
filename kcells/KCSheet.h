@@ -30,7 +30,7 @@
 //#include <QWidget>
 
 #include <KoDocument.h>
-#include <KoOasisSettings.h> // for KoOasisSettings::NamedMap
+#include <KoOdfSettings.h> // for KoOdfSettings::NamedMap
 #include <KoShapeControllerBase.h>
 #include <KoShapeUserData.h>
 #include <KoXmlReader.h>
@@ -51,7 +51,7 @@ class KoDataCenterBase;
 class KoDocumentEntry;
 class KoStyleStack;
 class KoGenStyles;
-class KoOasisSettings;
+class KoOdfSettings;
 class KoOdfStylesReader;
 class KoShape;
 class KoShapeSavingContext;
@@ -389,7 +389,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfSettings(const KoOasisSettings::NamedMap &settings);
+    void loadOdfSettings(const KoOdfSettings::NamedMap &settings);
 
     /**
      * \ingroup OpenDocument
