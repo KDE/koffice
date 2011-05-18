@@ -328,7 +328,7 @@ void TextShape::saveOdf(KoShapeSavingContext &context) const
             ++i;
         }
     }
-    const bool saveMyText = index == 0 && !m_demoText; // only save the text once.
+    const bool saveMyText = index <= 0 && !m_demoText; // only save the text once.
 
     m_textShapeData->saveOdf(context, 0, 0, saveMyText ? -1 : 0);
     writer.endElement(); // draw:text-box
