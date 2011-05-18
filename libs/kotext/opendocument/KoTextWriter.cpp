@@ -74,13 +74,13 @@
 class KoTextWriter::TagInformation
 {
     public:
-        TagInformation():tagName(NULL), attributeList()
+        TagInformation() :m_tagName(0), attributeList()
         {
         }
 
         void setTagName(const char *tagName)
         {
-            this->tagName = tagName;
+            m_tagName = tagName;
         }
 
         void addAttribute(const QString& attributeName, const QString& attributeValue)
@@ -95,13 +95,13 @@ class KoTextWriter::TagInformation
 
         void clear()
         {
-            tagName = NULL;
+            m_tagName = 0;
             attributeList.clear();
         }
 
         const char *name() const
         {
-            return tagName;
+            return m_tagName;
         }
 
         const QVector<QPair<QString, QString> >& attributes() const
@@ -110,7 +110,7 @@ class KoTextWriter::TagInformation
         }
 
     private:
-        const char *tagName;
+        const char *m_tagName;
         QVector<QPair<QString, QString> > attributeList;
 };
 
