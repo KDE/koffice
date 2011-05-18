@@ -109,10 +109,10 @@ void SCPlaceholderTextStrategy::saveOdf(KoShapeSavingContext &context)
         if (shapeData) {
             KoStyleManager *styleManager = KoTextDocument(shapeData->document()).styleManager();
             if (styleManager) {
-                QTextDocument *document = shapeData->document();
-                QTextBlock block = document->begin();
-                QString styleName = KoTextWriter::saveParagraphStyle(block, styleManager, context);
-                context.xmlWriter().addAttribute("draw:text-style-name", styleName);
+                QTextBlockFormat bf = shapeData->document()->begin().blockFormat();
+                KoParagraphStyle *ps = styleManager->paragraphStyle(bf.property(KoParagraphStyle::StyleId).toInt());
+                if (ps && ps != styleManager->defaultParagraphStyle())
+                    context.xmlWriter().addAttribute("draw:text-style-name", ps->name());
             }
         }
     }
