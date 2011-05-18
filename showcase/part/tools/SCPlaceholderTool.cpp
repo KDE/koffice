@@ -97,10 +97,8 @@ void SCPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KoSha
         canvas()->addCommand(cmd);
 
         // activate the correct tool for the shape
-        QList<KoShape *> shapes;
-        shapes.append(newShape);
         canvas()->shapeManager()->selection()->select(newShape);
-        activateTool(KoToolManager::instance()->preferredToolForSelection(shapes));
+        activateTool(KoToolManager::instance()->preferredToolForSelection(newShape->toolDelegates().toList()));
     } else {
         // TODO show some dialog or popup to indicate to the user the reason of not continuing here.
         //  maybe we can investigate if we can avoid calling down two levels
