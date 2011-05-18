@@ -2,6 +2,7 @@
 Type=ServiceType
 X-KDE-ServiceType=Showcase/PageEffect
 Name=Page Effect
+Name[ca]=Efecte de pàgina
 Name[et]=Leheküljeefekt
 Name[nb]=Tone-effekt
 Name[nl]=Pagina-effect
@@ -12,6 +13,7 @@ Name[uk]=Ефект сторінки
 Name[x-test]=xxPage Effectxx
 Name[zh_TW]=頁面效果
 Comment=Page effect plugin for Showcase
+Comment[ca]=Connector d'efectes de pàgina per al Showcase
 Comment[et]=Showcase'i leheküljeefektide plugin
 Comment[nl]=Pagina-effectplugin voor Showcase
 Comment[pt]='Plugin' de efeitos das páginas do Showcase
