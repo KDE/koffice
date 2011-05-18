@@ -109,6 +109,17 @@ class KoTextWriter::TagInformation
             return attributeList;
         }
 
+        void write(KoXmlWriter &writer)
+        {
+            if (m_tagName == 0)
+                return;
+            writer.startElement(m_tagName, false);
+            typedef QPair<QString, QString> Attribute;
+            foreach(const Attribute &attribute, attributeList) {
+                writer.addAttribute(attribute.first.toAscii(), attribute.second.toAscii());
+            }
+        }
+
     private:
         const char *m_tagName;
         QVector<QPair<QString, QString> > attributeList;
@@ -367,8 +378,10 @@ QString KoTextWriter::Private::generateDeleteChangeXml(KoDeleteChangeMarker *mar
 
 int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, KoTextWriter::TagInformation& tagInformation)
 {
-    if (changeTracker == 0)
+    if (changeTracker == 0) {
+        tagInformation.write(*writer);
         return -1;
+    }
     int changeId = 0, returnChangeId = 0;
     QTextCursor cursor(document);
     QTextBlock block = document->findBlock(position);
@@ -505,14 +518,7 @@ int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, 
         }
     }
 
-    if (tagInformation.name()) {
-        writer->startElement(tagInformation.name(), false);
-        const QVector<QPair<QString, QString> > &attributeList = tagInformation.attributes();
-        QPair<QString, QString> attribute;
-        foreach(attribute, attributeList) {
-            writer->addAttribute(attribute.first.toAscii(), attribute.second.toAscii());
-        }
-    }
+    tagInformation.write(*writer);
 
     return returnChangeId;
 }
