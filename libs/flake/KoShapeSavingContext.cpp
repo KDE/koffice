@@ -42,7 +42,7 @@ public:
     KoShapeSavingContext::ShapeSavingOptions savingOptions;
     QMap<const KoShape *, QString> drawIds;
     QMap<const QTextBlockUserData*, QString> subIds;
-    QList<const KoShapeLayer*> layers;
+    QList<KoShapeLayer*> layers;
     QSet<KoDataCenterBase *> dataCenter;
     int drawId;
     int subId;
@@ -159,17 +159,31 @@ QString KoShapeSavingContext::subId(const QTextBlockUserData *subItem, bool inse
     return it.value();
 }
 
-void KoShapeSavingContext::addLayerForSaving(const KoShapeLayer *layer)
+void KoShapeSavingContext::addLayerForSaving(KoShapeLayer *layer)
 {
     if (layer && ! d->layers.contains(layer))
         d->layers.append(layer);
 }
 
-void KoShapeSavingContext::saveLayerSet(KoXmlWriter &xmlWriter) const
+void KoShapeSavingContext::saveLayerSet(KoXmlWriter &xmlWriter)
 {
+    int unnamed = 0;
+    QSet<QString> names;
+    foreach(KoShapeLayer *layer, d->layers)
+        names.insert(layer->name());
+
     xmlWriter.startElement("draw:layer-set");
-    foreach(const KoShapeLayer * layer, d->layers) {
+    foreach(KoShapeLayer *layer, d->layers) {
         xmlWriter.startElement("draw:layer");
+        if (layer->name().isEmpty()) {
+            while (true) {
+                QString newName = QString("Unnamed Layer %1").arg(++unnamed);
+                if (!names.contains(newName)) {
+                    layer->setName(newName);
+                    break;
+                }
+            }
+        }
         xmlWriter.addAttribute("draw:name", layer->name());
         if (layer->isGeometryProtected())
             xmlWriter.addAttribute("draw:protected", "true");

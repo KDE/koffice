@@ -177,12 +177,12 @@ public:
      * Adds a layer to save into a layer-set in styles.xml according to 9.1.2/9.1.3 odf spec
      * @param layer the layer to save
      */
-    void addLayerForSaving(const KoShapeLayer *layer);
+    void addLayerForSaving(KoShapeLayer *layer);
 
     /**
      * Saves the layers added with addLayerForSaving to the xml writer
      */
-    void saveLayerSet(KoXmlWriter &xmlWriter) const;
+    void saveLayerSet(KoXmlWriter &xmlWriter);
 
     /**
      * remove all layers
