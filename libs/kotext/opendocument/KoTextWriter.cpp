@@ -379,6 +379,7 @@ QString KoTextWriter::Private::generateDeleteChangeXml(KoDeleteChangeMarker *mar
 int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, KoTextWriter::TagInformation& tagInformation)
 {
     if (changeTracker == 0) {
+        openedTagStack.push(tagInformation.name());
         tagInformation.write(*writer);
         return -1;
     }
@@ -525,12 +526,12 @@ int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, 
 
 void KoTextWriter::Private::closeTagRegion(int changeId)
 {
-    if (changeTracker == 0)
-        return;
     const char *tagName = openedTagStack.pop();
     if (tagName) {
         writer->endElement(); // close the tag
     }
+    if (changeTracker == 0)
+        return;
 
     if (changeId)
         changeStack.pop();
