@@ -2,6 +2,7 @@
 IconName=kcells
 Name=KCells
 Name[ca]=KCells
+Name[nb]=KCells
 Name[nl]=KCells
 Name[pt]=KCells
 Name[pt_BR]=KCells
@@ -11,6 +12,7 @@ Name[x-test]=xxKCellsxx
 Name[zh_TW]=KCells
 Comment=KCells Spreadsheet
 Comment[ca]=Full de càlcul KCells
+Comment[nb]=KCells regneark
 Comment[nl]=Spreadsheet van KCells
 Comment[pt]=Folha de cálculo
 Comment[pt_BR]=Planilha KCells
