@@ -51,6 +51,7 @@
 #include <kconfig.h>
 #include <kmessagebox.h>
 #include <ktemporaryfile.h>
+#include <KConfigGroup>
 
 #include <KoApplication.h>
 #include <KoDataCenterBase.h>
@@ -104,9 +105,6 @@
 #include <KoChartInterface.h>
 #include <QtDBus/QtDBus>
 
-// chart shape
-#include "chart/KCChartDialog.h"
-
 // ui
 #include "ui/Selection.h"
 #include "ui/SheetView.h"
@@ -146,14 +144,6 @@ KCDoc::KCDoc(QWidget *parentWidget, QObject* parent, bool singleViewMode)
     connect(d->map, SIGNAL(sheetAdded(KCSheet*)), this, SLOT(sheetAdded(KCSheet*)));
     new MapAdaptor(d->map);
     QDBusConnection::sessionBus().registerObject('/' + objectName() + '/' + d->map->objectName(), d->map);
-
-
-    // Init chart shape factory with KCells's specific configuration panels.
-    KoShapeFactoryBase *chartShape = KoShapeRegistry::instance()->value(ChartShapeId);
-    if (chartShape) {
-        QList<KoShapeConfigFactoryBase*> panels = KCChartDialog::panels(d->map);
-        chartShape->setOptionPanels(panels);
-    }
 
     connect(d->map, SIGNAL(commandAdded(QUndoCommand *)),
             this, SLOT(addCommand(QUndoCommand *)));
