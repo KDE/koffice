@@ -22,38 +22,26 @@
 #include <ui_KWFrameGeometry.h>
 #include <dialogs/KWShapeConfigFactory.h>
 
-#include <KoShapeConfigWidgetBase.h>
-
-
 class KWFrame;
 class KoShape;
+class QUndoCommand;
 
 /// A (very simple) widget to show some KoShape sizing / positioning information.
-class KWFrameGeometry : public KoShapeConfigWidgetBase
+class KWFrameGeometry : public QWidget
 {
     Q_OBJECT
 public:
     explicit KWFrameGeometry(FrameConfigSharedState *state);
     ~KWFrameGeometry();
 
-    /// reimplemented
     void open(KWFrame* frame);
-    /// reimplemented
     void open(KoShape *shape);
-    /// reimplemented
     void save();
     void cancel();
 
-    /// reimplemented
-    virtual void setUnit(KoUnit unit);
+    void setUnit(KoUnit unit);
 
-    /// reimplemented
-    virtual bool showOnShapeCreate() {
-        return true;
-    }
-
-    /// reimplemented
-    virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
+    QUndoCommand *createCommand(QUndoCommand *parent = 0);
 
 private slots:
     void updateShape();

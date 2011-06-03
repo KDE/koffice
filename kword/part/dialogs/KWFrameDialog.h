@@ -49,12 +49,6 @@ public:
     KWFrameDialog(const QList<KWFrame*> &selectedFrames, KWDocument *document, QWidget *parent = 0);
     ~KWFrameDialog();
 
-    /**
-     * Create a list of factories that will be able to create widgets to configure shapes.
-     * @param document the parent document these panels will work for.
-     */
-    static QList<KoShapeConfigFactoryBase *> panels(KWDocument *document);
-
 private slots:
     void okClicked();
     void cancelClicked();

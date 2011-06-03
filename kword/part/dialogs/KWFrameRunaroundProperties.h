@@ -23,15 +23,13 @@
 #include <ui_KWFrameRunaroundProperties.h>
 #include <dialogs/KWShapeConfigFactory.h>
 
-#include <KoShapeConfigWidgetBase.h>
-
 #include <QList>
 
 class KWFrame;
 class KoShape;
 
 /// A widget that is shown to allow the user to select the run around properties
-class KWFrameRunaroundProperties : public KoShapeConfigWidgetBase
+class KWFrameRunaroundProperties : public QWidget
 {
     Q_OBJECT
 public:
@@ -40,15 +38,8 @@ public:
 
     /// load all info from the argument frames into this widget
     void open(const QList<KWFrame*> &frames);
-    /// reimplemented
     void open(KoShape *shape);
-    /// reimplemented
     void save();
-
-    /// reimplemented
-    virtual bool showOnShapeCreate() {
-        return true;
-    }
 
 private:
     Ui::KWFrameRunaroundProperties widget;

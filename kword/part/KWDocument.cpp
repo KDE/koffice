@@ -152,13 +152,6 @@ KWDocument::KWDocument(QWidget *parentWidget, QObject *parent, bool singleViewMo
     connect(&m_frameLayout, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFrameSet(KWFrameSet*)));
     connect(&m_frameLayout, SIGNAL(removedFrameSet(KWFrameSet*)), this, SLOT(removeFrameSet(KWFrameSet*)));
 
-    // Init shape Factories with our frame based configuration panels.
-    QList<KoShapeConfigFactoryBase *> panels = KWFrameDialog::panels(this);
-    foreach (const QString &id, KoShapeRegistry::instance()->keys()) {
-        KoShapeFactoryBase *shapeFactory = KoShapeRegistry::instance()->value(id);
-        shapeFactory->setOptionPanels(panels);
-    }
-
     resourceManager()->setUndoStack(undoStack());
     if (documentRdfBase()) {
         documentRdfBase()->linkToResourceManager(resourceManager());
