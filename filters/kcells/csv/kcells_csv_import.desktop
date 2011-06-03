@@ -2,6 +2,7 @@
 Type=Service
 Name=CSV Import Filter for KCells
 Name[ca]=Filtre d'importació CSV per al KCells
+Name[da]=CSV-importfilter til KCells
 Name[nb]=CSV-importfilter for KCells
 Name[nl]=CSV-importfilter voor KCells
 Name[pt]=Filtro de Importação de CSV para o KCells

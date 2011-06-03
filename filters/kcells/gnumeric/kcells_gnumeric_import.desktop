@@ -2,6 +2,7 @@
 Type=Service
 Name=GNUMERIC Import Filter for KCells
 Name[ca]=Filtre d'importació GNUMERIC per al KCells
+Name[da]=GNUmeric-importfilter til KCells
 Name[nb]=GNUmeric-importfilter for KCells
 Name[nl]=GNUmeric-importfilter voor KCells
 Name[pt]=Filtro de Importação de GNUMERIC para o KCells

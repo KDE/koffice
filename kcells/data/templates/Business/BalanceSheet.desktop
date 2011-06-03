@@ -3,6 +3,7 @@ Type=Link
 URL=.source/BalanceSheet.kst
 Name=Balance KCSheet
 Name[ca]=Balanç KCSheet
+Name[da]=Balancering-KCSheet
 Name[nb]=Balanse KCSheet
 Name[nl]=Balans KCSheet
 Name[pt]=Folha de Balanço
