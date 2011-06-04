@@ -155,7 +155,7 @@ void KoShapeFactoryBase::setOdfElements(const QList<QPair<QString, QStringList> 
     d->odfElements = elementNamesList;
 }
 
-bool KoShapeFactoryBase::hidden() const
+bool KoShapeFactoryBase::isHidden() const
 {
     return d->hidden;
 }

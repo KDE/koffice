@@ -184,7 +184,7 @@ public:
      * The default is false
      * @see setHidden()
      */
-    bool hidden() const;
+    bool isHidden() const;
 
     /**
      * This slot is called whenever there is a new document resource
