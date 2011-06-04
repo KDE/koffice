@@ -35,10 +35,9 @@
 //
 
 
-#include "KoPathShape.h"
-#include "KoToolBase.h"
+#include "../KoPathShape.h"
+#include "../KoToolBase.h"
 #include "KoPathToolSelection_p.h"
-#include <QMap>
 
 class QButtonGroup;
 class KoCanvasBase;
