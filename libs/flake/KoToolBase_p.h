@@ -53,7 +53,8 @@ public:
         q(qq),
         canvas(canvas_),
         readWrite(true),
-        isInTextMode(false)
+        isInTextMode(false),
+        createdOptionWidgets(false)
     {
     }
 
@@ -85,6 +86,7 @@ public:
     KoCanvasBase *canvas; ///< the canvas interface this tool will work for.
     bool readWrite;
     bool isInTextMode;
+    bool createdOptionWidgets;
 };
 
 #endif

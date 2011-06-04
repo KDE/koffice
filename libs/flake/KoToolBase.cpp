@@ -121,8 +121,9 @@ void KoToolBase::setCursor(const QCursor &cursor)
 QMap<QString, QWidget *> KoToolBase::optionWidgets()
 {
     Q_D(KoToolBase);
-    if (d->optionWidgets.empty()) {
+    if (d->createdOptionWidgets == false) {
         d->optionWidgets = createOptionWidgets();
+        d->createdOptionWidgets = true;
     }
     return d->optionWidgets;
 }
