@@ -51,9 +51,11 @@ public:
     explicit PathToolOptionWidget(KoPathTool *tool, QWidget *parent = 0);
     ~PathToolOptionWidget();
 
-    void setShapePropertiesWidget(QWidget *widget);
     void setSelectionType(Type type);
-    void setSelectedPath(KoPathShape * /*path*/) { } // TODO
+    void setSelectedPath(KoPathShape *path);
+
+private:
+    void setShapePropertiesWidget(QWidget *widget);
 
 private:
     Ui::PathToolOptionWidget widget;

@@ -52,9 +52,8 @@ bool SpiralShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext 
     return false;
 }
 
-QList<KoShapeConfigWidgetBase*> SpiralShapeFactory::createShapeOptionPanels()
+KoShapeConfigWidgetBase *SpiralShapeFactory::createConfigWidget()
 {
-    QList<KoShapeConfigWidgetBase*> panels;
-    panels.append(new SpiralShapeConfigWidget());
-    return panels;
+    return new SpiralShapeConfigWidget();
 }
+

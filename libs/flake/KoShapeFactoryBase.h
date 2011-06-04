@@ -136,6 +136,10 @@ public:
      */
     QList<KoShapeConfigFactoryBase*> panelFactories();
 
+    virtual KoShapeConfigWidgetBase *createConfigWidget() {
+        return 0;
+    }
+
     /**
      * return the id for the shape this factory creates.
      * @return the id for the shape this factory creates.

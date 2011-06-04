@@ -61,10 +61,7 @@ bool RectangleShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingConte
     return (e.localName() == "rect" && e.namespaceURI() == KoXmlNS::draw);
 }
 
-QList<KoShapeConfigWidgetBase*> RectangleShapeFactory::createShapeOptionPanels()
+KoShapeConfigWidgetBase *RectangleShapeFactory::createConfigWidget()
 {
-    QList<KoShapeConfigWidgetBase*> panels;
-    panels.append(new RectangleShapeConfigWidget());
-    return panels;
+    return new RectangleShapeConfigWidget();
 }
-
