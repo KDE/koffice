@@ -60,16 +60,7 @@ public:
 
     ~KoToolBasePrivate()
     {
-        bool badQt = strcmp(qVersion(), "4.6.2") <= 0;
-        if (badQt) { // In <= Qt462 we do a bit more to avoid a crash
-            foreach(QWidget *optionWidget, optionWidgets) {
-                optionWidget->setParent(0);
-                delete optionWidget;
-            }
-            optionWidgets.clear();
-        } else {
-            qDeleteAll(optionWidgets);
-        }
+        qDeleteAll(optionWidgets);
     }
 
     void emitStatusText(const QString &statusText) {
