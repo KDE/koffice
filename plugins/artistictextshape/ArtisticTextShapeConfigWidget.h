@@ -25,8 +25,6 @@
 
 #include "ArtisticTextShape.h"
 
-#include <KoShapeConfigWidgetBase.h>
-
 class ArtisticTextShape;
 
 class ArtisticTextShapeConfigWidget : public QWidget
