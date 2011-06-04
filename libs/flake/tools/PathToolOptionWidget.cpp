@@ -22,7 +22,9 @@
 #include <KAction>
 
 PathToolOptionWidget::PathToolOptionWidget(KoPathTool *tool, QWidget *parent)
-        : QWidget(parent), m_tool(tool)
+        : QWidget(parent),
+        m_tool(tool),
+        m_shapePropertiesWidget(0)
 {
     widget.setupUi(this);
     widget.corner->setDefaultAction(tool->action("pathpoint-corner"));
@@ -40,19 +42,39 @@ PathToolOptionWidget::PathToolOptionWidget(KoPathTool *tool, QWidget *parent)
     widget.mergePoints->setDefaultAction(tool->action("pathpoint-merge"));
 
     connect(widget.convertToPath, SIGNAL(released()), tool->action("convert-to-path"), SLOT(trigger()));
+    widget.propertiesBox->setVisible(false);
 }
 
 PathToolOptionWidget::~PathToolOptionWidget()
 {
+    if (m_shapePropertiesWidget)
+        m_shapePropertiesWidget->setParent(0); // disconnect. Its not ours to delete.
 }
 
-void PathToolOptionWidget::setSelectionType(int type)
+void PathToolOptionWidget::setSelectionType(Type type)
 {
-    const bool plain = type & PlainPath;
-    if (plain)
+    if (type == PlainType)
         widget.stackedWidget->setCurrentIndex(0);
     else
         widget.stackedWidget->setCurrentIndex(1);
+}
+
+void PathToolOptionWidget::setShapePropertiesWidget(QWidget *propWidget)
+{
+    if (m_shapePropertiesWidget) {
+        m_shapePropertiesWidget->setParent(0); // disconnect. Its not ours.
+    }
+    if (widget.propertiesBox->layout() == 0) {
+        /*QHBoxLayout *hbox =*/ new QHBoxLayout(widget.propertiesBox);
+        //widget.propertiesBox->setLayout(hbox); // TODO
+    }
+    if (propWidget) {
+        widget.propertiesBox->layout()->addWidget(propWidget);
+        widget.propertiesBox->setVisible(true);
+    } else {
+        widget.propertiesBox->setVisible(false);
+    }
+    m_shapePropertiesWidget = propWidget;
 }
 
 #include <PathToolOptionWidget_p.moc>

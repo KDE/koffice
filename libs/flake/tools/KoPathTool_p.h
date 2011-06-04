@@ -43,6 +43,7 @@ class QButtonGroup;
 class KoCanvasBase;
 class KoInteractionStrategy;
 class KoPathToolHandle;
+class PathToolOptionWidget;
 
 class KAction;
 
@@ -86,13 +87,9 @@ public:
     /// repaints the specified rect
     void repaint(const QRectF &repaintRect);
 
-signals:
-    void typeChanged(int types);
-    void pathChanged(KoPathShape* path); // TODO this is unused, can we remove this one?
 protected:
     /// reimplemented
     virtual QMap<QString, QWidget *>  createOptionWidgets();
-
 
 private:
     void updateOptionsWidget();
@@ -109,7 +106,7 @@ private slots:
     void mergePoints();
     void breakAtPoint();
     void breakAtSegment();
-    void resourceChanged(int key, const QVariant & res);
+    void resourceChanged(int key, const QVariant &res);
     void pointSelectionChanged();
     void updateActions();
     void pointToLine();
@@ -117,8 +114,7 @@ private slots:
     void activate();
 
 private:
-
-    KoPathToolHandle * m_activeHandle;       ///< the currently active handle
+    KoPathToolHandle *m_activeHandle;       ///< the currently active handle
     int m_handleRadius;    ///< the radius of the control point handles
     uint m_grabSensitivity; ///< the grab sensitivity
     /// the point selection
@@ -149,6 +145,8 @@ private:
     KAction *m_actionConvertToPath;
     QCursor m_selectCursor;
     QCursor m_moveCursor;
+
+    PathToolOptionWidget *m_toolOptionWidget;
 
     Q_DECLARE_PRIVATE(KoToolBase)
 };
