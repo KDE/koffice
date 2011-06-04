@@ -169,9 +169,8 @@ void KoDockerManager::removeUnusedOptionWidgets()
     }
 }
 
-void KoDockerManager::newOptionWidgets(const QMap<QString, QWidget *> &optionWidgetMap, QWidget *callingView)
+void KoDockerManager::newOptionWidgets(const QMap<QString, QWidget *> &optionWidgetMap)
 {
-    Q_UNUSED(callingView);
     d->removeDockers();
 
     // Now show new active dockers (maybe even create) and show in docker menu
