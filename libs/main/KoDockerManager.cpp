@@ -176,16 +176,15 @@ void KoDockerManager::newOptionWidgets(const QMap<QString, QWidget *> &optionWid
     // Now show new active dockers (maybe even create) and show in docker menu
     QMap<QString, QWidget*>::ConstIterator iter = optionWidgetMap.constBegin();
     for (;iter != optionWidgetMap.constEnd(); ++iter) {
-        if (iter.value()->objectName().isEmpty()) {
+        const QString name = iter.value()->objectName();
+        if (name.isEmpty()) {
             kError(30004) << "tooldocker widget have no name " << iter.key();
-            Q_ASSERT(!(iter.value()->objectName().isEmpty()));
+            Q_ASSERT(!name.isEmpty());
             continue; // skip this docker in release build when assert don't crash
         }
 
-        KoToolDocker *td = d->toolDockerMap.value(iter.value()->objectName());
-
+        KoToolDocker *td = d->toolDockerMap.value(name);
         if (!td) {
-            QString name = iter.value()->objectName();
             ToolDockerFactory factory(name);
             td = qobject_cast<KoToolDocker*>(d->mainWindow->createDockWidget(&factory));
             Q_ASSERT(td);
@@ -196,12 +195,12 @@ void KoDockerManager::newOptionWidgets(const QMap<QString, QWidget *> &optionWid
         td->setWindowTitle(iter.key());
         td->newOptionWidget(iter.value());
         d->mainWindow->restoreDockWidget(td);
-        //kDebug() << iter.value()->objectName() << " " << d->toolDockerVisibilityMap[iter.value()->objectName()];
-        td->setVisible(d->toolDockerVisibilityMap[iter.value()->objectName()]);
+        //kDebug() << name << " " << d->toolDockerVisibilityMap[name];
+        td->setVisible(d->toolDockerVisibilityMap[name]);
         //kDebug() << td->isVisible();
         td->toggleViewAction()->setVisible(true);
-        d->activeToolDockerMap[iter.value()->objectName()] = td;
-        if (d->toolDockerRaisedMap.value(iter.value()->objectName())) {
+        d->activeToolDockerMap[name] = td;
+        if (d->toolDockerRaisedMap.value(name)) {
             td->raise();
         }
     }
