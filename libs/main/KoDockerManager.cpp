@@ -182,7 +182,7 @@ void KoDockerManager::newOptionWidgets(const QMap<QString, QWidget *> &optionWid
             continue; // skip this docker in release build when assert don't crash
         }
 
-        KoToolDocker *td = d->toolDockerMap[iter.value()->objectName()];
+        KoToolDocker *td = d->toolDockerMap.value(iter.value()->objectName());
 
         if (!td) {
             QString name = iter.value()->objectName();
