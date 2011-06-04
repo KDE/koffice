@@ -313,6 +313,7 @@ void KoToolManager::Private::postSwitchTool(bool temporary)
         }
     }
 
+    Q_ASSERT(canvasData->canvas);
     if (canvasData->canvas->canvas()) {
         KoCanvasBase *canvas = canvasData->canvas->canvas();
         // Caller of postSwitchTool expect this to be called to update the selected tool
@@ -327,15 +328,7 @@ void KoToolManager::Private::postSwitchTool(bool temporary)
 
     QMap<QString, QWidget *> optionWidgetMap = canvasData->activeTool->optionWidgets();
     if (optionWidgetMap.empty()) { // no option widget.
-        QWidget *toolWidget;
-        QString title;
-        foreach(ToolHelper *tool, tools) {
-            if (tool->id() == canvasData->activeTool->toolId()) {
-                title = tool->toolTip();
-                break;
-            }
-        }
-        toolWidget = canvasData->dummyToolWidget;
+        QWidget *toolWidget = canvasData->dummyToolWidget;
         if (toolWidget == 0) {
             toolWidget = new QWidget();
             toolWidget->setObjectName("DummyToolWidget");
@@ -347,6 +340,14 @@ void KoToolManager::Private::postSwitchTool(bool temporary)
             toolWidget->setLayout(layout);
             canvasData->dummyToolWidget = toolWidget;
         }
+        Q_ASSERT(canvasData->dummyToolLabel);
+        QString title;
+        foreach(ToolHelper *tool, tools) {
+            if (tool->id() == canvasData->activeTool->toolId()) {
+                title = tool->toolTip();
+                break;
+            }
+        }
         canvasData->dummyToolLabel->setText(i18n("Active tool: %1", title));
         optionWidgetMap.insert(i18n("Tool Options"), toolWidget);
     }
@@ -356,10 +357,7 @@ void KoToolManager::Private::postSwitchTool(bool temporary)
         action->setEnabled(true);
     }
 
-    KoCanvasController *canvasControllerWidget = dynamic_cast<KoCanvasController*>(canvasData->canvas);
-    if (canvasControllerWidget) {
-        canvasControllerWidget->setToolOptionWidgets(optionWidgetMap);
-    }
+    canvasData->canvas->setToolOptionWidgets(optionWidgetMap);
     emit q->changedTool(canvasData->canvas, uniqueToolIds.value(canvasData->activeTool));
 }
 
