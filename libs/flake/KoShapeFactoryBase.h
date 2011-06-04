@@ -94,8 +94,8 @@ public:
     /**
      * Create the new factory
      * @param parent the parent QObject for memory management usage.
-     * @param id a string that will be used internally for referencing the shape, for
-     *   example for use by the KoToolBase::activateTemporary.
+     * @param id a string that will be used internally for referencing the
+     *   shape. See KoToolFactoryBase::activationShapeId()
      * @param name the user visible name of the shape this factory creates.
      */
     KoShapeFactoryBase(QObject *parent, const QString &id, const QString &name);

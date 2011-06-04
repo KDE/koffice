@@ -36,21 +36,30 @@
  * of all details.
  *
  * It is common to combine a shape-plugin with one or more tools which are made
- * specifically to work on that shape type. So, a text shape comes with a tool that
+ * specifically to work on that shape type. This has the advantage of them being
+ * compiled into one plugin and that means the shape can be dynamic_cast to the
+ * subclass of KoShape which in turn means the tool can both access the data that
+ * is for each KoShape and also the data that is unique for the plugin shape.
+ *
+ * So, a text shape comes with a tool that
  * knows how to address the shape not only by the abstract KoShape class, but also
- * by the KoTextShape API and is therefor able to alter the data that that shape
+ * by the TextShape internal API and is therefor able to alter the data that that shape
  * displays. In this case text.
-
- * Flake natively only has a vector shape. All other types of shapes (including the
- * text one used in the example above) are plugins and not part of Flake itself.
+ *
+ * Take a look at KoToolFactoryBase::activationShapeId() to understand how shapes and
+ * tools are linked together.
+ *
+ * Flake natively only has a path shape (with full vector graphics support). All other
+ * types of shapes, including the text one used in the example above, are plugins and
+ * not part of Flake itself.
  *
  *
  * Use KoShape as a base object for any application-specific graphical
- * content, and extend KoShapeContainer for objects that can contain others.
+ * content, and extend KoShapeContainer for objects that can contain other shapes.
  *
- * KoShape is the base class for all flake objects. Flake objects extend it
- * to allow themselves to be manipulated by the KoToolBase s. The content of such an
- * object is independent and based on the model of the data this object represents.
+ * KoShape is the base class for all flake objects. Flake shapes extend it
+ * to allow themselves to be manipulated by the tools. The content of such a
+ * shape is independent and based on the model of the data this object represents.
  *
  * If you want to be a supplier of shape objects; create a library with a KoShapeFactoryBase
  * class and install a .desktop service file with the following content:
