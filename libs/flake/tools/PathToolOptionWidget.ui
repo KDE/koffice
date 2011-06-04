@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PathToolOptionWidgetBase</class>
- <widget class="QWidget" name="PathToolOptionWidgetBase">
+ <class>PathToolOptionWidget</class>
+ <widget class="QWidget" name="PathToolOptionWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

@@ -34,7 +34,7 @@
 #include <QWidget>
 #include <QFlags>
 
-#include <ui_PathToolOptionWidgetBase.h>
+#include <ui_PathToolOptionWidget.h>
 
 class KoPathTool;
 
@@ -55,7 +55,7 @@ public slots:
     void setSelectionType(int type);
 
 private:
-    Ui::PathToolOptionWidgetBase widget;
+    Ui::PathToolOptionWidget widget;
     KoPathTool *m_tool;
 };
 
