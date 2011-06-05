@@ -461,7 +461,7 @@ void KarbonView::fileImportGraphic()
         picture->setPosition(QPointF());
         picture->setKeepAspectRatio(true);
 
-        QUndoCommand * cmd = d->canvas->shapeController()->addShapeDirect(picture);
+        QUndoCommand * cmd = d->canvas->shapeController()->addShape(picture);
         cmd->setText(i18n("Insert graphics"));
         d->canvas->addCommand(cmd);
         d->canvas->shapeManager()->selection()->select(picture);
