@@ -47,7 +47,7 @@ QUndoCommand * KoShapeGroupCommand::createCommand(const QList<KoShape *> &shapes
     KoShapeGroup *container = new KoShapeGroup();
     QUndoCommand *addShapeCommand = parent;
     if (shapeController)
-        addShapeCommand = shapeController->addShapeDirect(container, parent);
+        addShapeCommand = shapeController->addShape(container, parent);
     QUndoCommand *cmd = createCommand(container, shapes, addShapeCommand);
     if (addShapeCommand) // adding should be done last, so the group is a child of the add-command
         return addShapeCommand;

@@ -61,12 +61,6 @@ public:
      * @param shape the shape that is to be queried for the data this widget can edit.
      */
     virtual void open(KoShape *shape) = 0;
-    /**
-     * Save the data  of this widget to the shape passed to open earlier to
-     * apply any user changed options.
-     * Called by the tool that created the shape.
-     */
-    virtual void save() = 0;
 
     /**
      * Overwrite this method to set the application unit type and update all unit-widgets
@@ -79,20 +73,10 @@ public:
     /// called to set the canvas resource manager of the canvas the user used to insert the new shape.
     void setResourceManager(KoResourceManager *rm);
 
-    /// Return true if the shape config panel should be shown after the shape is created
-    virtual bool showOnShapeCreate();
-
-    /// Return true if the shape config panel should be shown when the shape is selected
-    virtual bool showOnShapeSelect();
-
-    /// Creates a command which applies all changes to the opened shape
-    virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
-
-signals:
-    /// is emitted after one of the config options has changed
-    void propertyChanged();
-
 protected:
+    KoResourceManager *resourceManager() const;
+
+private:
     KoResourceManager *m_resourceManager; ///< the resource provider with data for this canvas
 };
 

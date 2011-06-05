@@ -77,7 +77,6 @@ set(flake_SRCS
     KoGradientBackground.cpp
     KoPatternBackground.cpp
     KoShapeConfigWidgetBase.cpp
-    KoShapeConfigFactoryBase.cpp
     KoDrag.cpp
     KoDragOdfSaveHelper.cpp
     KoShapeOdfSaveHelper.cpp
@@ -286,7 +285,6 @@ install(
     KoShapeBorderBase.h
     KoShapeBorderFactoryBase.h
     KoShapeBorderRegistry.h
-    KoShapeConfigFactoryBase.h
     KoShapeConfigWidgetBase.h
     KoShapeConnection.h
     KoShapeConnectionPolicy.h

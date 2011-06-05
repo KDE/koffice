@@ -20,8 +20,10 @@
 #include "PathToolOptionWidget_p.h"
 #include "KoPathTool_p.h"
 #include "../KoShapeRegistry.h"
-#include <KAction>
 #include "../KoShapeConfigWidgetBase.h"
+#include "../KoCanvasBase.h"
+
+#include <KAction>
 
 PathToolOptionWidget::PathToolOptionWidget(KoPathTool *tool, QWidget *parent)
         : QWidget(parent),
@@ -61,14 +63,12 @@ void PathToolOptionWidget::setSelectionType(Type type)
 
 void PathToolOptionWidget::setShapePropertiesWidget(QWidget *propWidget)
 {
-    qDebug() << propWidget;
     delete m_shapePropertiesWidget;
     if (widget.propertiesBox->layout() == 0) {
         QHBoxLayout *hbox = new QHBoxLayout(widget.propertiesBox);
         widget.propertiesBox->setLayout(hbox);
     }
     if (propWidget) {
-    qDebug() << "add";
         widget.propertiesBox->layout()->addWidget(propWidget);
         widget.propertiesBox->setVisible(true);
     } else {
@@ -79,11 +79,17 @@ void PathToolOptionWidget::setShapePropertiesWidget(QWidget *propWidget)
 
 void PathToolOptionWidget::setSelectedPath(KoPathShape *path)
 {
-    if (path) {
-        qDebug() << path->shapeId();
-        KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(path->pathShapeId());
-        if (factory)
-            setShapePropertiesWidget(factory->createConfigWidget());
+    setShapePropertiesWidget(0);
+    if (path == 0)
+        return;
+    KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(path->pathShapeId());
+    if (factory) {
+        KoShapeConfigWidgetBase *w = factory->createConfigWidget(m_tool->canvas());
+        setShapePropertiesWidget(w);
+        if (w) {
+            w->setUnit(m_tool->canvas()->unit());
+            w->open(path);
+        }
     }
 }
 

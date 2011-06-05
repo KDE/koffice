@@ -33,11 +33,11 @@
 
 class KoShape;
 class KoProperties;
-class KoShapeConfigFactoryBase;
 class KoShapeConfigWidgetBase;
 class KoShapeLoadingContext;
 class KoDataCenterBase;
 class KoResourceManager;
+class KoCanvasBase;
 
 #define SHAPETEMPLATE_MIMETYPE "application/x-flake-shapetemplate"
 #define SHAPEID_MIMETYPE "application/x-flake-shapeId"
@@ -101,42 +101,8 @@ public:
     KoShapeFactoryBase(QObject *parent, const QString &id, const QString &name);
     virtual ~KoShapeFactoryBase();
 
-    /**
-     * Create a list of option panels to show on creating a new shape.
-     * The shape type this factory creates may have general or specific setting panels
-     * that will be shown after inserting a new shape.
-     * The first item in the list will be shown as the first tab in the list of panels,
-     * behind all app specific panels.
-     * This is a separate list as set by setOptionPanels() and fetched by panelFactories()
-     */
-    virtual QList<KoShapeConfigWidgetBase*> createShapeOptionPanels() {
-        return QList<KoShapeConfigWidgetBase*>();
-    }
-
-    /**
-     * Set app specific panel factories to show config options after creating a new shape.
-     * The application that lets the user create shapes is able to set option
-     * widgets that will be shown after the user inserted a new shape of the
-     * type that this factory presents.
-     * Example:
-     *  @code
-     *  // Init shape Factories with our frame based configuration panels.
-     *  QList<KoShapeConfigFactoryBase *> panels;
-     *  panels.append(new AppConfigFactory()); // insert some factory
-     *  foreach(QString id, KoShapeRegistry::instance()->keys())
-     *      KoShapeRegistry::instance()->value(id)->setOptionPanels(panels);
-     *  @endcode
-     * @see panelFactories()
-     */
-    void setOptionPanels(const QList<KoShapeConfigFactoryBase*> &panelFactories);
-
-    /**
-     * Return the app-specific panels.
-     * @see setOptionPanels()
-     */
-    QList<KoShapeConfigFactoryBase*> panelFactories();
-
-    virtual KoShapeConfigWidgetBase *createConfigWidget() {
+    virtual KoShapeConfigWidgetBase *createConfigWidget(KoCanvasBase *canvas) {
+        Q_UNUSED(canvas);
         return 0;
     }
 
