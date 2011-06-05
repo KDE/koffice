@@ -61,7 +61,7 @@ bool RectangleShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingConte
     return (e.localName() == "rect" && e.namespaceURI() == KoXmlNS::draw);
 }
 
-KoShapeConfigWidgetBase *RectangleShapeFactory::createConfigWidget()
+KoShapeConfigWidgetBase *RectangleShapeFactory::createConfigWidget(KoCanvasBase *canvas)
 {
     return new RectangleShapeConfigWidget();
 }

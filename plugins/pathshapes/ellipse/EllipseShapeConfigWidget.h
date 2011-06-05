@@ -25,24 +25,26 @@
 
 #include <KoShapeConfigWidgetBase.h>
 
+class EllipseShapeConfigCommand;
+
+
 class EllipseShapeConfigWidget : public KoShapeConfigWidgetBase
 {
     Q_OBJECT
 public:
-    EllipseShapeConfigWidget();
+    EllipseShapeConfigWidget(KoCanvasBase *canvas);
     /// reimplemented
     virtual void open(KoShape *shape);
-    /// reimplemented
-    virtual void save();
-    /// reimplemented
-    virtual bool showOnShapeCreate() { return false; }
-    /// reimplemented
-    virtual QUndoCommand * createCommand(QUndoCommand *parent);
+
 private slots:
     void closeEllipse();
+
 private:
     Ui::EllipseShapeConfigWidget widget;
     EllipseShape *m_ellipse;
+
+    KoCanvasBase *m_canvas;
+    EllipseShapeConfigCommand *m_command;
 };
 
 #endif // ELLIPSESHAPECONFIGWIDGET_H

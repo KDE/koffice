@@ -146,7 +146,7 @@ bool StarShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext &co
             && e.attributeNS(KoXmlNS::draw, "engine", "") == "koffice:star");
 }
 
-KoShapeConfigWidgetBase *StarShapeFactory::createConfigWidget()
+KoShapeConfigWidgetBase *StarShapeFactory::createConfigWidget(KoCanvasBase *canvas)
 {
     return new StarShapeConfigWidget();
 }

@@ -57,13 +57,6 @@ bool PictureShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext 
     return e.localName() == "image" && e.namespaceURI() == KoXmlNS::draw;
 }
 
-QList<KoShapeConfigWidgetBase*> PictureShapeFactory::createShapeOptionPanels()
-{
-    QList<KoShapeConfigWidgetBase*> panels;
-    panels.append( new PictureShapeConfigWidget() );
-    return panels;
-}
-
 void PictureShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
 {
     manager->setLazyResourceSlot(KoDocumentResource::ImageCollection,

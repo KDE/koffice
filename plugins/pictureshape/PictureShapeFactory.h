@@ -34,8 +34,6 @@ public:
 
     /// reimplemented
     virtual void newDocumentResourceManager(KoResourceManager *manager);
-    /// reimplemented
-    virtual QList<KoShapeConfigWidgetBase*> createShapeOptionPanels();
 
 public slots:
     void createImageCollection(KoResourceManager *manager);

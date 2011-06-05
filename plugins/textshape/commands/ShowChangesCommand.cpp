@@ -158,7 +158,7 @@ void ShowChangesCommand::checkAndAddAnchoredShapes(int position, int length)
 
             if (container) {
                 container->addShape(anchor->shape());
-                QUndoCommand *shapeCommand = m_canvas->shapeController()->addShapeDirect(anchor->shape());
+                QUndoCommand *shapeCommand = m_canvas->shapeController()->addShape(anchor->shape());
                 shapeCommand->redo();
                 m_shapeCommands.push_front(shapeCommand);
             }

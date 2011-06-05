@@ -21,7 +21,9 @@
 #include "EllipseShapeConfigCommand.h"
 #include <klocale.h>
 
-EllipseShapeConfigWidget::EllipseShapeConfigWidget()
+EllipseShapeConfigWidget::EllipseShapeConfigWidget(KoCanvasBase *canvas)
+    : m_canvas(canvas),
+    m_command(0)
 {
     widget.setupUi(this);
 
@@ -36,9 +38,9 @@ EllipseShapeConfigWidget::EllipseShapeConfigWidget()
     widget.endAngle->setMinimum(0.0);
     widget.endAngle->setMaximum(360.0);
 
-    connect(widget.ellipseType, SIGNAL(currentIndexChanged(int)), this, SIGNAL(propertyChanged()));
-    connect(widget.startAngle, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
-    connect(widget.endAngle, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
+    //connect(widget.ellipseType, SIGNAL(currentIndexChanged(int)), this, SIGNAL(propertyChanged()));
+    //connect(widget.startAngle, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
+    //connect(widget.endAngle, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
     connect(widget.closeEllipse, SIGNAL(clicked(bool)), this, SLOT(closeEllipse()));
 }
 
@@ -60,7 +62,7 @@ void EllipseShapeConfigWidget::open(KoShape *shape)
     widget.startAngle->blockSignals(false);
     widget.endAngle->blockSignals(false);
 }
-
+#if 0
 void EllipseShapeConfigWidget::save()
 {
     if (!m_ellipse)
@@ -81,6 +83,8 @@ QUndoCommand *EllipseShapeConfigWidget::createCommand(QUndoCommand *)
     }
 }
 
+#endif
+
 void EllipseShapeConfigWidget::closeEllipse()
 {
     widget.startAngle->blockSignals(true);
@@ -91,8 +95,6 @@ void EllipseShapeConfigWidget::closeEllipse()
 
     widget.startAngle->blockSignals(false);
     widget.endAngle->blockSignals(false);
-
-    emit propertyChanged();
 }
 
 #include <EllipseShapeConfigWidget.moc>

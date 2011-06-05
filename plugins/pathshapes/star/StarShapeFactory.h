@@ -36,7 +36,7 @@ public:
     virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
     virtual KoShape *createShape(const KoProperties *params, KoResourceManager *documentResources = 0) const;
     virtual bool supports(const KoXmlElement &e, KoShapeLoadingContext &context) const;
-    virtual KoShapeConfigWidgetBase *createConfigWidget();
+    virtual KoShapeConfigWidgetBase *createConfigWidget(KoCanvasBase *canvas);
 };
 
 #endif // KOSTARHAPEFACTORY_H
