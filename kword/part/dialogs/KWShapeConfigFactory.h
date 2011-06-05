@@ -20,8 +20,6 @@
 #ifndef KWSHAPECONFIGFACTORY_H
 #define KWSHAPECONFIGFACTORY_H
 
-#include <KoShapeConfigFactoryBase.h>
-
 #include <QObject>
 
 class KoShape;

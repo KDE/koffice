@@ -20,8 +20,6 @@
 #ifndef KWFRAMEDIALOG_H
 #define KWFRAMEDIALOG_H
 
-#include <KoShapeConfigFactoryBase.h>
-
 #include <kpagedialog.h>
 #include <QList>
 #include <QCheckBox>
