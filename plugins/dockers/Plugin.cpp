@@ -17,7 +17,6 @@
  * Boston, MA 02110-1301, USA.
  */
 #include "Plugin.h"
-#include "shapeproperties/ShapePropertiesDockerFactory.h"
 #include "shadowdocker/ShadowDockerFactory.h"
 #include "shapeselector/ShapeSelectorFactory.h"
 #include "shapecollection/ShapeCollectionDocker.h"
@@ -32,7 +31,6 @@ K_EXPORT_PLUGIN(PluginFactory("koffice-dockers"))
 Plugin::Plugin(QObject *parent, const QVariantList&)
     : QObject(parent)
 {
-    KoDockRegistry::instance()->add(new ShapePropertiesDockerFactory(parent));
     KoDockRegistry::instance()->add(new ShadowDockerFactory(parent));
     KoDockRegistry::instance()->add(new ShapeSelectorFactory(parent));
     KoDockRegistry::instance()->add(new ShapeCollectionDockerFactory(parent));

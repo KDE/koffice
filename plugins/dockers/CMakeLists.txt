@@ -5,9 +5,6 @@ include_directories(${KDE4_INCLUDE_DIR}
 )
 
 set(kofficedockers_SRCS
-    shapeproperties/ShapePropertiesDocker.cpp
-    shapeproperties/ShapePropertiesDockerFactory.cpp
-
     shapecollection/CollectionShapeFactory.cpp
     shapecollection/ShapeCollectionDocker.cpp
     shapecollection/CollectionItemModel.cpp
