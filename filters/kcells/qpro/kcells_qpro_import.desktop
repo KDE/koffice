@@ -2,6 +2,7 @@
 Type=Service
 Name=Quattro Pro Import Filter for KCells
 Name[ca]=Filtre d'importació Quattro Pro per al KCells
+Name[ca@valencia]=Filtre d'importació Quattro Pro per al KCells
 Name[da]=Quattro Pro-importfilter til KCells
 Name[nb]=Quattro Pro-importfilter for KCells
 Name[nl]=Quattro Pro-importfilter voor KCells

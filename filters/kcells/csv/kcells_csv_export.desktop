@@ -2,6 +2,7 @@
 Type=Service
 Name=CSV Export Filter for KCells
 Name[ca]=Filtre d'exportació CSV per al KCells
+Name[ca@valencia]=Filtre d'exportació CSV per al KCells
 Name[da]=CSV-eksportfilter til KCells
 Name[nb]=CSV-eksportfilter for KCells
 Name[nl]=CSV-exportfilter voor KCells

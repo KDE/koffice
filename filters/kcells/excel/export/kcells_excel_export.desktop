@@ -2,6 +2,7 @@
 Type=Service
 Name=KCells Microsoft Excel Export Filter
 Name[ca]=Filtre d'importació Microsoft Excel per al KCells
+Name[ca@valencia]=Filtre d'importació Microsoft Excel per al KCells
 Name[da]=KCells Microsoft Excel eksportfilter
 Name[nb]=Microsoft Excel-eksportfilter for KCells
 Name[nl]=Microsoft Excell-exportfilter voor KCells
