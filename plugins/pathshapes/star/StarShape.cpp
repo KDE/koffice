@@ -49,7 +49,7 @@ StarShape::~StarShape()
 {
 }
 
-void StarShape::setCornerCount(uint cornerCount)
+void StarShape::setCornerCount(int cornerCount)
 {
     if (cornerCount >= 3) {
         double oldDefaultAngle = defaultAngleRadian();
@@ -62,7 +62,7 @@ void StarShape::setCornerCount(uint cornerCount)
     }
 }
 
-uint StarShape::cornerCount() const
+int StarShape::cornerCount() const
 {
     return m_cornerCount;
 }
@@ -172,9 +172,9 @@ void StarShape::updatePath(const QSizeF &size)
 
     KoSubpath &points = *m_subpaths[0];
 
-    uint index = 0;
-    for (uint i = 0; i < 2*m_cornerCount; ++i) {
-        uint cornerType = i % 2;
+    int index = 0;
+    for (int i = 0; i < 2*m_cornerCount; ++i) {
+        int cornerType = i % 2;
         if (cornerType == base && m_convex)
             continue;
         qreal radian = static_cast<qreal>((i+1)*radianStep) + m_angles[cornerType];
@@ -249,7 +249,7 @@ QPointF StarShape::computeCenter() const
     KoSubpath &points = *m_subpaths[0];
 
     QPointF center(0, 0);
-    for (uint i = 0; i < m_cornerCount; ++i) {
+    for (int i = 0; i < m_cornerCount; ++i) {
         if (m_convex)
             center += points[i]->point();
         else
@@ -279,7 +279,7 @@ bool StarShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & co
     if (!loadAsCustomShape) {
         QString corners = element.attributeNS(KoXmlNS::draw, "corners", "");
         if (! corners.isEmpty()) {
-            m_cornerCount = corners.toUInt();
+            m_cornerCount = corners.toInt();
             // initialize default angles of tip and base
             m_angles[base] = m_angles[tip] = defaultAngleRadian();
         }
