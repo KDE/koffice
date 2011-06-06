@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Rob Buis <buis@kde.org>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -25,22 +26,30 @@
 
 #include <KoShapeConfigWidgetBase.h>
 
+class SpiralShapeConfigCommand;
+class KoCanvasBase;
+
 class SpiralShapeConfigWidget : public KoShapeConfigWidgetBase
 {
     Q_OBJECT
 public:
-    SpiralShapeConfigWidget();
+    SpiralShapeConfigWidget(KoCanvasBase *canvas);
     /// reimplemented
     virtual void open(KoShape *shape);
-    /// reimplemented
-    virtual void save();
-    /// reimplemented
-    virtual bool showOnShapeCreate() { return false; }
-    /// reimplemented
-    virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
+
+private slots:
+    void propertyChanged();
+
 private:
+    bool commandIsValid() const;
+
     Ui::SpiralShapeConfigWidget widget;
     SpiralShape *m_spiral;
+
+    KoCanvasBase *m_canvas;
+    SpiralShapeConfigCommand *m_command;
+    bool m_blocking;
+    QTime m_time;
 };
 
 #endif // SPIRALSHAPECONFIGWIDGET_H

@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Rob Buis <buis@kde.org>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,7 +22,11 @@
 #include "SpiralShapeConfigCommand.h"
 #include <klocale.h>
 
-SpiralShapeConfigWidget::SpiralShapeConfigWidget()
+#include <KoCanvasBase.h>
+
+SpiralShapeConfigWidget::SpiralShapeConfigWidget(KoCanvasBase *canvas)
+    : m_canvas(canvas),
+    m_blocking(false)
 {
     widget.setupUi(this);
 
@@ -36,46 +41,68 @@ SpiralShapeConfigWidget::SpiralShapeConfigWidget()
     widget.clockWise->addItem("ClockWise");
     widget.clockWise->addItem("Anti-ClockWise");
 
-    connect(widget.spiralType, SIGNAL(currentIndexChanged(int)), this, SIGNAL(propertyChanged()));
-    connect(widget.clockWise, SIGNAL(currentIndexChanged(int)), this, SIGNAL(propertyChanged()));
-    connect(widget.fade, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
+    connect(widget.spiralType, SIGNAL(currentIndexChanged(int)), this, SLOT(propertyChanged()));
+    connect(widget.clockWise, SIGNAL(currentIndexChanged(int)), this, SLOT(propertyChanged()));
+    connect(widget.fade, SIGNAL(valueChanged(double)), this, SLOT(propertyChanged()));
 }
 
 void SpiralShapeConfigWidget::open(KoShape *shape)
 {
-    m_spiral = dynamic_cast<SpiralShape*>(shape);
-    if (!m_spiral)
+    if (m_blocking)
         return;
+    SpiralShape *spiral = dynamic_cast<SpiralShape*>(shape);
+    if (spiral != m_spiral) // if its equal, we just update our values
+        m_command = 0;
+    m_spiral = 0;
+    if (!spiral) {
+        setEnabled(false);
+        return;
+    }
+    setEnabled(true);
 
-    widget.spiralType->blockSignals(true);
-    widget.clockWise->blockSignals(true);
-    widget.fade->blockSignals(true);
-
-    widget.spiralType->setCurrentIndex(m_spiral->type());
-    widget.clockWise->setCurrentIndex(m_spiral->clockWise() ? 0 : 1);
-    widget.fade->setValue(m_spiral->fade());
-
-    widget.spiralType->blockSignals(false);
-    widget.clockWise->blockSignals(false);
-    widget.fade->blockSignals(false);
+    m_blocking = true;
+    widget.spiralType->setCurrentIndex(spiral->type());
+    widget.clockWise->setCurrentIndex(spiral->clockWise() ? 0 : 1);
+    widget.fade->setValue(spiral->fade());
+    m_blocking = false;
+    m_spiral = spiral;
 }
 
-void SpiralShapeConfigWidget::save()
+void SpiralShapeConfigWidget::propertyChanged()
 {
     if (!m_spiral)
         return;
-
-    m_spiral->setType(static_cast<SpiralShape::SpiralType>(widget.spiralType->currentIndex()));
-    m_spiral->setClockWise(widget.clockWise->currentIndex() == 0);
-    m_spiral->setFade(widget.fade->value());
-}
-
-QUndoCommand * SpiralShapeConfigWidget::createCommand(QUndoCommand *)
-{
-    if (!m_spiral)
-        return 0;
+    if (m_blocking)
+        return;
+    m_blocking = true;
     SpiralShape::SpiralType type = static_cast<SpiralShape::SpiralType>(widget.spiralType->currentIndex());
-    return new SpiralShapeConfigCommand(m_spiral, type, (widget.clockWise->currentIndex() == 0), widget.fade->value());
+
+    if (m_command && commandIsValid()) {
+        m_command->setSpiralType(type);
+        m_command->setDirection(widget.clockWise->currentIndex() == 0);
+        m_command->setFade(widget.fade->value());
+        m_spiral->update();
+        m_spiral->setType(type);
+        m_spiral->setClockWise(widget.clockWise->currentIndex() == 0);
+        m_spiral->setFade(widget.fade->value());
+        m_spiral->update();
+    } else {
+        m_command = new SpiralShapeConfigCommand(m_spiral, type,
+                (widget.clockWise->currentIndex() == 0), widget.fade->value());
+        m_canvas->addCommand(m_command);
+    }
+    m_time.restart();
+    m_blocking = false;
 }
 
+bool SpiralShapeConfigWidget::commandIsValid() const
+{
+    if (!m_time.isValid())
+        return false;
+
+    if (m_time.elapsed() > 4000)
+        return false;
+
+    return true;
+}
 #include <SpiralShapeConfigWidget.moc>

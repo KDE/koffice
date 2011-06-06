@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Rob Buis <buis@kde.org>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -39,6 +40,19 @@ public:
     virtual void redo();
     /// revert the actions done in redo
     virtual void undo();
+
+    void setSpiralType(SpiralShape::SpiralType type) {
+        m_newType = type;
+    }
+
+    void setDirection(bool clockwise) {
+        m_newClockWise = clockwise;
+    }
+
+    void setFade(qreal fade) {
+        m_newFade = fade;
+    }
+
 private:
     SpiralShape *m_spiral;
     SpiralShape::SpiralType m_oldType;
