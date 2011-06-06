@@ -38,6 +38,7 @@
 
 class KoPathTool;
 class KoPathShape;
+class KoShapeConfigWidgetBase;
 
 class PathToolOptionWidget : public QWidget
 {
@@ -55,12 +56,13 @@ public:
     void setSelectedPath(KoPathShape *path);
 
 private:
-    void setShapePropertiesWidget(QWidget *widget);
+    void setShapePropertiesWidget(KoShapeConfigWidgetBase *widget);
 
 private:
     Ui::PathToolOptionWidget widget;
     KoPathTool *m_tool;
-    QWidget *m_shapePropertiesWidget;
+    KoShapeConfigWidgetBase *m_shapePropertiesWidget;
+    KoPathShape *m_currentOpenPath;
 };
 
 #endif

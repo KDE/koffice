@@ -888,7 +888,7 @@ void KoPathTool::updateOptionsWidget()
         }
     }
     m_toolOptionWidget->setSelectionType(type);
-    if (type == PathToolOptionWidget::PlainType)
+    if (type == PathToolOptionWidget::ParametricType)
         m_toolOptionWidget->setSelectedPath(selectedShapes.first());
 }
 

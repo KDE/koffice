@@ -61,7 +61,7 @@ void PathToolOptionWidget::setSelectionType(Type type)
         widget.stackedWidget->setCurrentIndex(1);
 }
 
-void PathToolOptionWidget::setShapePropertiesWidget(QWidget *propWidget)
+void PathToolOptionWidget::setShapePropertiesWidget(KoShapeConfigWidgetBase *propWidget)
 {
     delete m_shapePropertiesWidget;
     if (widget.propertiesBox->layout() == 0) {
@@ -79,6 +79,12 @@ void PathToolOptionWidget::setShapePropertiesWidget(QWidget *propWidget)
 
 void PathToolOptionWidget::setSelectedPath(KoPathShape *path)
 {
+    if (path == m_currentOpenPath) {
+        if (path && m_shapePropertiesWidget)
+            m_shapePropertiesWidget->open(path);
+        return;
+    }
+    m_currentOpenPath = path;
     setShapePropertiesWidget(0);
     if (path == 0)
         return;
