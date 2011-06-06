@@ -35,7 +35,7 @@ RectangleShapeConfigWidget::RectangleShapeConfigWidget(KoCanvasBase *canvas)
     connect(widget.cornerRadiusY, SIGNAL(valueChanged(double)), this, SLOT(propertyChanged()));
 }
 
-void RectangleShapeConfigWidget::setUnit(KoUnit unit)
+void RectangleShapeConfigWidget::setUnit(const KoUnit &unit)
 {
     widget.cornerRadiusX->setUnit(unit);
     widget.cornerRadiusY->setUnit(unit);

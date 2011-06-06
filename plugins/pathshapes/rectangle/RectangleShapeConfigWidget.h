@@ -37,7 +37,7 @@ public:
     /// reimplemented
     virtual void open(KoShape *shape);
     /// reimplemented
-    virtual void setUnit(KoUnit unit);
+    virtual void setUnit(const KoUnit &unit);
 
 private slots:
     void propertyChanged();

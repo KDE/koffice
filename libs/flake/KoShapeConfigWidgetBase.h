@@ -68,7 +68,7 @@ public:
      * Called by the tool that created the shape using KoCavasBase::unit()
      * @param unit the new unit to show data in.
      */
-    virtual void setUnit(KoUnit unit);
+    virtual void setUnit(const KoUnit &unit);
 
     /// called to set the canvas resource manager of the canvas the user used to insert the new shape.
     void setResourceManager(KoResourceManager *rm);
