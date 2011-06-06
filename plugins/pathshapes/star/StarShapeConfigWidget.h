@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -25,28 +26,33 @@
 #include <KoShapeConfigWidgetBase.h>
 
 class StarShape;
+class KoCanvasBase;
+class StarShapeConfigCommand;
 
 class StarShapeConfigWidget : public KoShapeConfigWidgetBase
 {
     Q_OBJECT
 public:
-    StarShapeConfigWidget();
+    StarShapeConfigWidget(KoCanvasBase *canvas);
     /// reimplemented
     virtual void open(KoShape *shape);
     /// reimplemented
-    virtual void save();
-    /// reimplemented
     virtual void setUnit(KoUnit unit);
-    /// reimplemented
-    virtual bool showOnShapeCreate() { return false; }
-    /// reimplemented
-    virtual QUndoCommand * createCommand(QUndoCommand *parent = 0);
 
 private slots:
+    void propertyChanged();
     void typeChanged();
+
 private:
+    bool commandIsValid() const;
+
     Ui::StarShapeConfigWidget widget;
     StarShape * m_star;
+
+    KoCanvasBase *m_canvas;
+    StarShapeConfigCommand *m_command;
+    bool m_blocking;
+    QTime m_time;
 };
 
 #endif // STARSHAPECONFIGWIDGET_H

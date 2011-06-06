@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -42,6 +43,20 @@ public:
     virtual void redo();
     /// revert the actions done in redo
     virtual void undo();
+
+    void setCornerCount(int count) {
+        m_newCornerCount = count;
+    }
+    void setBaseRadius(qreal radius) {
+        m_newInnerRadius = radius;
+    }
+    void setTipRadius(qreal radius) {
+        m_newOuterRadius = radius;
+    }
+    void setConvex(bool on) {
+        m_newConvex = on;
+    }
+
 private:
     StarShape *m_star;
     int m_oldCornerCount;

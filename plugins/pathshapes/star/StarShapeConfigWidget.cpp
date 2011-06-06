@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,14 +22,18 @@
 #include "StarShape.h"
 #include "StarShapeConfigCommand.h"
 
-StarShapeConfigWidget::StarShapeConfigWidget()
+#include <KoCanvasBase.h>
+
+StarShapeConfigWidget::StarShapeConfigWidget(KoCanvasBase *canvas)
+    : m_canvas(canvas),
+    m_blocking(false)
 {
     widget.setupUi(this);
 
-    connect(widget.corners, SIGNAL(valueChanged(int)), this, SIGNAL(propertyChanged()));
-    connect(widget.innerRadius, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
-    connect(widget.outerRadius, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
-    connect(widget.convex, SIGNAL(stateChanged(int)), this, SIGNAL(propertyChanged()));
+    connect(widget.corners, SIGNAL(valueChanged(int)), this, SLOT(propertyChanged()));
+    connect(widget.innerRadius, SIGNAL(valueChanged(double)), this, SLOT(propertyChanged()));
+    connect(widget.outerRadius, SIGNAL(valueChanged(double)), this, SLOT(propertyChanged()));
+    connect(widget.convex, SIGNAL(stateChanged(int)), this, SLOT(propertyChanged()));
     connect(widget.convex, SIGNAL(clicked()), this, SLOT(typeChanged()));
 }
 
@@ -43,42 +48,60 @@ void StarShapeConfigWidget::open(KoShape *shape)
     m_star = dynamic_cast<StarShape*>(shape);
     if (! m_star)
         return;
+    if (m_blocking)
+        return;
+    StarShape *star = dynamic_cast<StarShape*>(shape);
+    if (star != m_star) // if its equal, we just update our values
+        m_command = 0;
+    m_star = 0;
+    if (!star) {
+        setEnabled(false);
+        return;
+    }
+    setEnabled(true);
 
-    widget.corners->blockSignals(true);
-    widget.innerRadius->blockSignals(true);
-    widget.outerRadius->blockSignals(true);
-    widget.convex->blockSignals(true);
-
-    widget.corners->setValue(m_star->cornerCount());
-    widget.innerRadius->changeValue(m_star->baseRadius());
-    widget.outerRadius->changeValue(m_star->tipRadius());
-    widget.convex->setCheckState(m_star->convex() ? Qt::Checked : Qt::Unchecked);
+    m_blocking = true;
+    widget.corners->setValue(star->cornerCount());
+    widget.innerRadius->changeValue(star->baseRadius());
+    widget.outerRadius->changeValue(star->tipRadius());
+    widget.convex->setCheckState(star->convex() ? Qt::Checked : Qt::Unchecked);
     typeChanged();
+    m_blocking = false;
 
-    widget.corners->blockSignals(false);
-    widget.innerRadius->blockSignals(false);
-    widget.outerRadius->blockSignals(false);
-    widget.convex->blockSignals(false);
+    m_star = star;
 }
 
-void StarShapeConfigWidget::save()
+void StarShapeConfigWidget::propertyChanged()
 {
-    if (! m_star)
+    if (!m_star)
         return;
+    if (m_blocking)
+        return;
+    m_blocking = true;
+    if (m_command && commandIsValid()) {
+        m_command->setCornerCount(widget.corners->value());
+        m_command->setBaseRadius(widget.innerRadius->value());
+        m_command->setTipRadius(widget.outerRadius->value());
+        m_command->setConvex(widget.convex->checkState() == Qt::Checked);
+        m_star->update();
+        m_star->setCornerCount(widget.corners->value());
+        m_star->setBaseRadius(widget.innerRadius->value());
+        m_star->setTipRadius(widget.outerRadius->value());
+        m_star->setConvex(widget.convex->checkState() == Qt::Checked);
+        m_star->update();
+    } else {
+        m_command = new StarShapeConfigCommand(m_star, widget.corners->value(),
+                widget.innerRadius->value(), widget.outerRadius->value(),
+                widget.convex->checkState() == Qt::Checked);
+        m_canvas->addCommand(m_command);
+    }
+    m_time.restart();
+    m_blocking = false;
 
     m_star->setCornerCount(widget.corners->value());
     m_star->setBaseRadius(widget.innerRadius->value());
     m_star->setTipRadius(widget.outerRadius->value());
     m_star->setConvex(widget.convex->checkState() == Qt::Checked);
-}
-
-QUndoCommand * StarShapeConfigWidget::createCommand(QUndoCommand *)
-{
-    if (! m_star)
-        return 0;
-    else
-        return new StarShapeConfigCommand(m_star, widget.corners->value(), widget.innerRadius->value(),
-                widget.outerRadius->value(), widget.convex->checkState() == Qt::Checked);
 }
 
 void StarShapeConfigWidget::typeChanged()
@@ -88,6 +111,17 @@ void StarShapeConfigWidget::typeChanged()
     } else {
         widget.innerRadius->setEnabled(true);
     }
+}
+
+bool StarShapeConfigWidget::commandIsValid() const
+{
+    if (!m_time.isValid())
+        return false;
+
+    if (m_time.elapsed() > 4000)
+        return false;
+
+    return true;
 }
 
 #include <StarShapeConfigWidget.moc>

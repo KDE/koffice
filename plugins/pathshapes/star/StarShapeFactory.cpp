@@ -148,7 +148,7 @@ bool StarShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext &co
 
 KoShapeConfigWidgetBase *StarShapeFactory::createConfigWidget(KoCanvasBase *canvas)
 {
-    return new StarShapeConfigWidget();
+    return new StarShapeConfigWidget(canvas);
 }
 
 #include <StarShapeFactory.moc>
