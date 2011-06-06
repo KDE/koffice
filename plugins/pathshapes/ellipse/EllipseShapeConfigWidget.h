@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,11 +22,12 @@
 #define ELLIPSESHAPECONFIGWIDGET_H
 
 #include "EllipseShape.h"
+#include "EllipseShapeConfigCommand.h"
 #include <ui_EllipseShapeConfigWidget.h>
 
 #include <KoShapeConfigWidgetBase.h>
-
-class EllipseShapeConfigCommand;
+#include <QTime>
+#include <QWeakPointer>
 
 
 class EllipseShapeConfigWidget : public KoShapeConfigWidgetBase
@@ -38,13 +40,18 @@ public:
 
 private slots:
     void closeEllipse();
+    void propertyChanged();
 
 private:
+    bool commandIsValid() const;
+
     Ui::EllipseShapeConfigWidget widget;
     EllipseShape *m_ellipse;
 
     KoCanvasBase *m_canvas;
     EllipseShapeConfigCommand *m_command;
+    bool m_blocking;
+    QTime m_time;
 };
 
 #endif // ELLIPSESHAPECONFIGWIDGET_H
