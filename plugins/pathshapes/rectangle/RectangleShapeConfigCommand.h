@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -40,6 +41,15 @@ public:
     virtual void redo();
     /// revert the actions done in redo
     virtual void undo();
+
+    void setCornerRadiusX(qreal cornerRadiusX) {
+        m_newCornerRadiusX = cornerRadiusX;
+    }
+
+    void setCornerRadiusY(qreal cornerRadiusY) {
+        m_newCornerRadiusY = cornerRadiusY;
+    }
+
 private:
     RectangleShape *m_rectangle;
     qreal m_oldCornerRadiusX;

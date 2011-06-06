@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -25,26 +26,32 @@
 #include <KoShapeConfigWidgetBase.h>
 
 class RectangleShape;
+class RectangleShapeConfigCommand;
+class KoCanvasBase;
 
 class RectangleShapeConfigWidget : public KoShapeConfigWidgetBase
 {
     Q_OBJECT
 public:
-    RectangleShapeConfigWidget();
+    RectangleShapeConfigWidget(KoCanvasBase *canvas);
     /// reimplemented
     virtual void open(KoShape *shape);
     /// reimplemented
-    virtual void save();
-    /// reimplemented
     virtual void setUnit(KoUnit unit);
-    /// reimplemented
-    virtual bool showOnShapeCreate() { return false; }
-    /// reimplemented
-    virtual QUndoCommand *createCommand(QUndoCommand *parent = 0);
+
+private slots:
+    void propertyChanged();
 
 private:
+    bool commandIsValid() const;
+
     Ui::RectangleShapeConfigWidget widget;
     RectangleShape *m_rectangle;
+
+    KoCanvasBase *m_canvas;
+    RectangleShapeConfigCommand *m_command;
+    bool m_blocking;
+    QTime m_time;
 };
 
 #endif // RECTANGLESHAPECONFIGWIDGET_H
