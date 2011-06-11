@@ -23,7 +23,7 @@
 #include "KoStore_p.h"
 
 #include "KoTarStore_p.h"
-#include "KoZipStore_p.h"
+#include "ZipStore_p.h"
 #include "DirectoryStore_p.h"
 #ifdef QCA2
 #include "EncryptedStore_p.h"
@@ -85,7 +85,7 @@ KoStore* KoStore::createStore(const QString& fileName, Mode mode, const QByteArr
             return new EncryptedStore(fileName, Read, appIdentification);
         }
 #endif
-        return new KoZipStore(fileName, mode, appIdentification);
+        return new ZipStore(fileName, mode, appIdentification);
     case Directory:
         return new DirectoryStore(fileName /* should be a dir name.... */, mode);
 #ifdef QCA2
@@ -125,7 +125,7 @@ KoStore* KoStore::createStore(QIODevice *device, Mode mode, const QByteArray & a
             return new EncryptedStore(device, Read, appIdentification);
         }
 #endif
-        return new KoZipStore(device, mode, appIdentification);
+        return new ZipStore(device, mode, appIdentification);
 #ifdef QCA2
     case Encrypted:
         return new EncryptedStore(device, mode, appIdentification);
@@ -171,7 +171,7 @@ KoStore* KoStore::createStore(QWidget* window, const KUrl& url, Mode mode, const
             return new EncryptedStore(window, url, tmpFile, Read, appIdentification);
         }
 #endif
-        return new KoZipStore(window, url, tmpFile, mode, appIdentification);
+        return new ZipStore(window, url, tmpFile, mode, appIdentification);
 #ifdef QCA2
     case Encrypted:
         return new EncryptedStore(window, url, tmpFile, mode, appIdentification);

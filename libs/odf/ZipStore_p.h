@@ -39,17 +39,17 @@ class KZip;
 class KArchiveDirectory;
 class KUrl;
 
-class KoZipStore : public KoStore
+class ZipStore : public KoStore
 {
 public:
-    KoZipStore(const QString & _filename, Mode _mode, const QByteArray & appIdentification);
-    KoZipStore(QIODevice *dev, Mode mode, const QByteArray & appIdentification);
+    ZipStore(const QString & _filename, Mode _mode, const QByteArray & appIdentification);
+    ZipStore(QIODevice *dev, Mode mode, const QByteArray & appIdentification);
     /**
      * KUrl-constructor
      * @todo saving not completely implemented (fixed temporary file)
      */
-    KoZipStore(QWidget* window, const KUrl& _url, const QString & _filename, Mode _mode, const QByteArray & appIdentification);
-    ~KoZipStore();
+    ZipStore(QWidget* window, const KUrl& _url, const QString & _filename, Mode _mode, const QByteArray & appIdentification);
+    ~ZipStore();
 
     virtual void setCompressionEnabled(bool e);
     virtual qint64 write(const char* _data, qint64 _len);

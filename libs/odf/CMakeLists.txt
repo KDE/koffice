@@ -41,7 +41,7 @@ set(koodf_LIB_SRCS
     KoXmlNS.cpp
     KoXmlReader.cpp
     KoXmlWriter.cpp
-    KoZipStore.cpp
+    ZipStore.cpp
 )
 
 kde4_add_library(koodf SHARED ${koodf_LIB_SRCS})
