@@ -29,7 +29,7 @@
 #include <MsooXmlUtils.h>
 #include <MsooXmlRelationships.h>
 #include <KoXmlWriter.h>
-#include <KoFontFace.h>
+#include <KOdfFontData.h>
 #include <VmlDrawingReader.h>
 
 #undef MSOOXML_CURRENT_NS
@@ -135,9 +135,9 @@ KoFilter::ConversionStatus XlsxXmlDocumentReader::readInternal()
     TRY_READ(workbook)
 
 //! @todo hardcoded font face list; look at fonts used by theme
-    mainStyles->insertFontFace(KoFontFace("Calibri"));
-    mainStyles->insertFontFace(KoFontFace("Arial"));
-    mainStyles->insertFontFace(KoFontFace("Tahoma"));
+    mainStyles->insertFontFace(KOdfFontData("Calibri"));
+    mainStyles->insertFontFace(KOdfFontData("Arial"));
+    mainStyles->insertFontFace(KOdfFontData("Tahoma"));
 
     kDebug() << "===========finished============";
     return KoFilter::OK;

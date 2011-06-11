@@ -24,7 +24,7 @@
 #ifndef DOCXXMLFONTTABLEREADER_H
 #define DOCXXMLFONTTABLEREADER_H
 
-#include <KoFontFace.h>
+#include <KOdfFontData.h>
 #include <MsooXmlReader.h>
 
 class KoGenStyles;
@@ -61,7 +61,7 @@ protected:
 
     DocxXmlFontTableReaderContext* m_context;
 
-    KoFontFace m_currentFontFace;
+    KOdfFontData m_currentFontFace;
 };
 
 #endif

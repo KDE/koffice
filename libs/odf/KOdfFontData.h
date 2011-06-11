@@ -35,7 +35,7 @@ class KoFontFacePrivate;
  * @todo add more parameters.
  * @todo add class KoFontFaceDeclarations instead of adding methods to KoGenStyle?
  */
-class KOODF_EXPORT KoFontFace
+class KOODF_EXPORT KOdfFontData
 {
 public:
     /**
@@ -46,26 +46,26 @@ public:
      * The other are empty. If you don't pass the name, the font face will be considered null.
      * @see isEmpty()
      */
-    explicit KoFontFace(const QString &name = QString());
+    explicit KOdfFontData(const QString &name = QString());
 
     /**
      * Copy constructor.
      */
-    KoFontFace(const KoFontFace &other);
+    KOdfFontData(const KOdfFontData &other);
 
     /**
      * Destructor.
      */
-    ~KoFontFace();
+    ~KOdfFontData();
 
     /**
      * @return true if the font face object is null, i.e. has no name assigned.
      */
     bool isNull() const;
 
-    KoFontFace& operator=(const KoFontFace &other);
+    KOdfFontData& operator=(const KOdfFontData &other);
 
-    bool operator==(const KoFontFace &other) const;
+    bool operator==(const KOdfFontData &other) const;
 
     enum Pitch {
         FixedPitch,
@@ -81,8 +81,8 @@ public:
     void setFamilyGeneric(const QString &familyGeneric);
     QString style() const;
     void setStyle(const QString &style);
-    KoFontFace::Pitch pitch() const;
-    void setPitch(KoFontFace::Pitch pitch);
+    KOdfFontData::Pitch pitch() const;
+    void setPitch(KOdfFontData::Pitch pitch);
 
     /** Saves font face definition into @a xmlWriter as a style:font-face element.
      */

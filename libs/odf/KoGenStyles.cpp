@@ -28,7 +28,7 @@
 #include <KoStoreDevice.h>
 #include <KoXmlWriter.h>
 #include "KoOdfWriteStore.h"
-#include "KoFontFace.h"
+#include "KOdfFontData.h"
 #include <float.h>
 #include <kdebug.h>
 
@@ -148,7 +148,7 @@ public:
     QMap<int, KoGenStyle> defaultStyles;
 
     /// font faces
-    QMap<QString, KoFontFace> fontFaces;
+    QMap<QString, KOdfFontData> fontFaces;
 
     StyleMap::iterator insertStyle(const KoGenStyle &style, const QString &name, InsertionFlags flags);
 
@@ -261,7 +261,7 @@ void KoGenStyles::Private::saveOdfFontFaceDecls(KoXmlWriter* xmlWriter) const
         return;
 
     xmlWriter->startElement("office:font-face-decls");
-    for (QMap<QString, KoFontFace>::ConstIterator it(fontFaces.constBegin());
+    for (QMap<QString, KOdfFontData>::ConstIterator it(fontFaces.constBegin());
          it != fontFaces.constEnd(); ++it)
     {
         it.value().saveOdf(xmlWriter);
@@ -431,7 +431,7 @@ void KoGenStyles::markStyleForStylesXml(const QString& name)
     styleForModification(name)->setAutoStyleInStylesDotXml(true);
 }
 
-void KoGenStyles::insertFontFace(const KoFontFace &face)
+void KoGenStyles::insertFontFace(const KOdfFontData &face)
 {
     Q_ASSERT(!face.isNull());
     if (face.isNull()) {
@@ -441,7 +441,7 @@ void KoGenStyles::insertFontFace(const KoFontFace &face)
     d->fontFaces.insert(face.name(), face); // replaces prev item
 }
 
-KoFontFace KoGenStyles::fontFace(const QString& name) const
+KOdfFontData KoGenStyles::fontFace(const QString& name) const
 {
     return d->fontFaces.value(name);
 }

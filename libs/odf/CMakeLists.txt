@@ -15,7 +15,7 @@ set(koodf_LIB_SRCS
     KoEmbeddedDocumentSaver.cpp
     EncryptedStore.cpp
     KoEncryptionChecker.cpp
-    KoFontFace.cpp
+    KOdfFontData.cpp
     KoGenChange.cpp
     KoGenChanges.cpp
     KoGenStyle.cpp
@@ -64,7 +64,7 @@ install( FILES
     KoXmlNS.h
     KoGenStyle.h
     KoGenStyles.h
-    KoFontFace.h
+    KOdfFontData.h
     KoOdfLoadingContext.h
     KoOdfSettings.h
     KoOdfStylesReader.h

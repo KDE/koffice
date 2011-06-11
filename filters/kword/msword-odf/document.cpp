@@ -44,7 +44,7 @@
 #include <klocale.h>
 #include <KoStore.h>
 #include <KoFilterChain.h>
-#include <KoFontFace.h>
+#include <KOdfFontData.h>
 
 #include <QBuffer>
 #include <QColor>
@@ -317,7 +317,7 @@ void Document::processStyles()
             //set font name in style
             QString fontName = m_textHandler->getFont(style->chp().ftcAscii);
             if (!fontName.isEmpty()) {
-                m_mainStyles->insertFontFace(KoFontFace(fontName));
+                m_mainStyles->insertFontFace(KOdfFontData(fontName));
                 userStyle.addProperty(QString("style:font-name"), fontName, KoGenStyle::TextType);
             }
 
@@ -344,7 +344,7 @@ void Document::processStyles()
             //set font name in style
             QString fontName = m_textHandler->getFont(style->chp().ftcAscii);
             if (!fontName.isEmpty()) {
-                m_mainStyles->insertFontFace(KoFontFace(fontName));
+                m_mainStyles->insertFontFace(KOdfFontData(fontName));
                 userStyle.addProperty(QString("style:font-name"), fontName, KoGenStyle::TextType);
             }
 

@@ -40,7 +40,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <KoGenStyle.h>
-#include <KoFontFace.h>
+#include <KOdfFontData.h>
 
 #include "document.h"
 
@@ -1260,7 +1260,7 @@ void KWordTextHandler::runOfText(const wvWare::UString& text, wvWare::SharedPtr<
     // for ASCII text
     QString fontName = getFont(chp->ftcAscii);
     if (!fontName.isEmpty()) {
-        m_mainStyles->insertFontFace(KoFontFace(fontName));
+        m_mainStyles->insertFontFace(KOdfFontData(fontName));
     }
 
     //only show text that is not hidden

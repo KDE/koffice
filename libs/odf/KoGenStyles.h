@@ -32,7 +32,7 @@
 #include <KoGenStyle.h>
 
 class KoStore;
-class KoFontFace;
+class KOdfFontData;
 
 /**
  * @brief Repository of styles used during saving ODF documents.
@@ -174,16 +174,16 @@ public:
      * See odf 2.6 Font Face Declarations
      * and odf 14.6 Font Face Declaration.
      */
-    void insertFontFace(const KoFontFace &face);
+    void insertFontFace(const KOdfFontData &face);
 
     /**
      * @return font face declaration for name @a name
-     *         or null font face (see KoFontFace::isNull()) if there is no such font face.
+     *         or null font face (see KOdfFontData::isNull()) if there is no such font face.
      *
      * See odf 2.6 Font Face Declarations
      * and odf 14.6 Font Face Declaration.
      */
-    KoFontFace fontFace(const QString &name) const;
+    KOdfFontData fontFace(const QString &name) const;
 
     /**
      * Save the styles into the styles.xml file

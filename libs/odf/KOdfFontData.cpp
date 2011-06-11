@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoFontFace.h"
+#include "KOdfFontData.h"
 #include <KoXmlWriter.h>
 #include <KDebug>
 
@@ -27,7 +27,7 @@ class KoFontFacePrivate : public QSharedData
 {
 public:
     KoFontFacePrivate(const QString &_name)
-    : name(_name), pitch(KoFontFace::VariablePitch)
+    : name(_name), pitch(KOdfFontData::VariablePitch)
     {
     }
 
@@ -44,7 +44,7 @@ public:
             xmlWriter->addAttribute("style:font-family-generic", familyGeneric);
         if (!style.isEmpty())
             xmlWriter->addAttribute("svg:font-style", style);
-        xmlWriter->addAttribute("style:font-pitch", pitch == KoFontFace::FixedPitch ? "fixed" : "variable");
+        xmlWriter->addAttribute("style:font-pitch", pitch == KOdfFontData::FixedPitch ? "fixed" : "variable");
         xmlWriter->endElement(); // style:font-face
     }
 
@@ -52,93 +52,93 @@ public:
     QString family;          //!< for svg:font-family attribute
     QString familyGeneric;   //!< for style:font-family-generic attribute
     QString style;           //!< for svg:font-style attribute
-    KoFontFace::Pitch pitch; //!< for style:font-pitch attribute
+    KOdfFontData::Pitch pitch; //!< for style:font-pitch attribute
 };
 
 
-KoFontFace::KoFontFace(const QString &_name)
+KOdfFontData::KOdfFontData(const QString &_name)
  : d(new KoFontFacePrivate(_name))
 {
 }
 
-KoFontFace::KoFontFace(const KoFontFace &other)
+KOdfFontData::KOdfFontData(const KOdfFontData &other)
  : d(other.d)
 {
 }
 
-KoFontFace::~KoFontFace()
+KOdfFontData::~KOdfFontData()
 {
 }
 
-KoFontFace &KoFontFace::operator=(const KoFontFace &other)
+KOdfFontData &KOdfFontData::operator=(const KOdfFontData &other)
 {
     d = other.d;
     return *this;
 }
 
-bool KoFontFace::operator==(const KoFontFace &other) const
+bool KOdfFontData::operator==(const KOdfFontData &other) const
 {
     if (isNull() && other.isNull())
         return true;
     return d.data() == other.d.data();
 }
 
-bool KoFontFace::isNull() const
+bool KOdfFontData::isNull() const
 {
     return d->name.isEmpty();
 }
 
-QString KoFontFace::name() const
+QString KOdfFontData::name() const
 {
     return d->name;
 }
 
-void KoFontFace::setName(const QString &name)
+void KOdfFontData::setName(const QString &name)
 {
     d->name = name;
 }
 
-QString KoFontFace::family() const
+QString KOdfFontData::family() const
 {
     return d->family;
 }
 
-void KoFontFace::setFamily(const QString &family)
+void KOdfFontData::setFamily(const QString &family)
 {
     d->family = family;
 }
 
-QString KoFontFace::familyGeneric() const
+QString KOdfFontData::familyGeneric() const
 {
     return d->familyGeneric;
 }
 
-void KoFontFace::setFamilyGeneric(const QString &familyGeneric)
+void KOdfFontData::setFamilyGeneric(const QString &familyGeneric)
 {
     d->familyGeneric = familyGeneric;
 }
 
-QString KoFontFace::style() const
+QString KOdfFontData::style() const
 {
     return d->style;
 }
 
-void KoFontFace::setStyle(const QString &style)
+void KOdfFontData::setStyle(const QString &style)
 {
     d->style = style;
 }
 
-KoFontFace::Pitch KoFontFace::pitch() const
+KOdfFontData::Pitch KOdfFontData::pitch() const
 {
     return d->pitch;
 }
 
-void KoFontFace::setPitch(KoFontFace::Pitch pitch)
+void KOdfFontData::setPitch(KOdfFontData::Pitch pitch)
 {
     d->pitch = pitch;
 }
 
-void KoFontFace::saveOdf(KoXmlWriter* xmlWriter) const
+void KOdfFontData::saveOdf(KoXmlWriter* xmlWriter) const
 {
     Q_ASSERT(!isNull());
     if (isNull()) {

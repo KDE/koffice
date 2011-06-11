@@ -29,7 +29,7 @@
 #include <klocale.h>
 #include <KoStore.h>
 #include <KoFilterChain.h>
-#include <KoFontFace.h>
+#include <KOdfFontData.h>
 
 #include <QBuffer>
 #include <QColor>

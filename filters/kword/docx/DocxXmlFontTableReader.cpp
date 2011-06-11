@@ -130,7 +130,7 @@ KoFilter::ConversionStatus DocxXmlFontTableReader::read_fonts()
                     return KoFilter::WrongFormat;
                 kDebug() << "added font face:" << m_currentFontFace.name();
                 m_context->styles->insertFontFace(m_currentFontFace);
-                m_currentFontFace = KoFontFace();
+                m_currentFontFace = KOdfFontData();
             }
             ELSE_WRONG_FORMAT
         }
@@ -235,7 +235,7 @@ KoFilter::ConversionStatus DocxXmlFontTableReader::read_pitch()
     READ_PROLOGUE
     const QXmlStreamAttributes attrs(attributes());
     READ_ATTR_WITH_NS(w, val)
-    m_currentFontFace.setPitch(w_val == "fixed" ? KoFontFace::FixedPitch : KoFontFace::VariablePitch);
+    m_currentFontFace.setPitch(w_val == "fixed" ? KOdfFontData::FixedPitch : KOdfFontData::VariablePitch);
 
     readNext();
     READ_EPILOGUE
