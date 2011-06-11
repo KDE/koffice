@@ -47,9 +47,9 @@ KWFrameDialog::KWFrameDialog(const QList<KWFrame*> &frames, KWDocument *document
         m_frameConnectSelector = new KWFrameConnectSelector(m_state);
         KWFrame *frame = frames.first();
         m_state->setKeepAspectRatio(frame->shape()->keepAspectRatio());
-        if (m_frameConnectSelector->open(frame))
+        if (m_frameConnectSelector->open(frame)) {
             addPage(m_frameConnectSelector, i18n("Connect Text Frames"));
-        else {
+        } else {
             delete m_frameConnectSelector;
             m_frameConnectSelector = 0;
         }

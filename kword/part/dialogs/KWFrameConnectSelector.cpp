@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
- * Copyright (C) 2006 Thomas Zander <zander@kde.org>
+ * Copyright (C) 2006-2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,6 +22,9 @@
 #include "frames/KWTextFrameSet.h"
 #include "frames/KWTextFrame.h"
 
+#include <KoTextShapeData.h>
+#include <KoTextPage.h>
+
 
 KWFrameConnectSelector::KWFrameConnectSelector(FrameConfigSharedState *state)
         : m_state(state),
@@ -33,102 +36,89 @@ KWFrameConnectSelector::KWFrameConnectSelector(FrameConfigSharedState *state)
             this, SLOT(frameSetSelected()));
     connect(widget.frameSetName, SIGNAL(textChanged(const QString &)),
             this, SLOT(nameChanged(const QString &)));
+
+    widget.framesList->header()->setResizeMode(0, QHeaderView::Stretch);
 }
 
 bool KWFrameConnectSelector::open(KWFrame *frame)
 {
+    widget.framesList->clear();
+    KWTextFrame *textFrame = dynamic_cast<KWTextFrame*>(frame);
+    if (textFrame == 0) // this dialog if useless unless this is a text frame
+        return false;
+    if (textFrame->frameSet() == 0) // should never happen..
+        return false;
+    KWTextFrameSet *tFs = static_cast<KWTextFrameSet*>(textFrame->frameSet());
+    if (tFs->textFrameSetType() != KWord::OtherTextFrameSet)
+        return false; // this dialog is useless for auto-generated FSs
     m_state->addUser();
     m_frame = frame;
-    KWTextFrame *textFrame = dynamic_cast<KWTextFrame*>(frame);
-    if (textFrame == 0)
-        return false;
-    widget.framesList->clear();
-
-    if (widget.frameSetName->text().isEmpty())
-        widget.frameSetName->setText(m_state->document()->uniqueFrameSetName(i18n("Text")));
 
     foreach (KWFrameSet *fs, m_state->document()->frameSets()) {
-        KWTextFrameSet *textFs = dynamic_cast<KWTextFrameSet*>(fs);
-        if (textFs == 0 || textFs->textFrameSetType() != KWord::OtherTextFrameSet)
+        if (fs->type() != KWord::TextFrameSet)
+            continue;
+        KWTextFrameSet *textFs = static_cast<KWTextFrameSet*>(fs);
+        if (textFs->textFrameSetType() != KWord::OtherTextFrameSet)
             continue;
         m_frameSets.append(textFs);
         QTreeWidgetItem *row = new QTreeWidgetItem(widget.framesList);
+        QVariant variant;
+        variant.setValue<void*>(fs);
+        row->setData(0, 1000, variant);
         row->setText(0, textFs->name());
+        if (fs->frameCount() > 0) {
+            KWTextFrame *tf = static_cast<KWTextFrame*>(fs->frames().first());
+            KoTextShapeData *data = qobject_cast<KoTextShapeData*>(tf->shape()->userData());
+            if (data && data->page())
+                row->setText(1, QString::number(data->page()->pageNumber()));
+        }
         if (frame->frameSet() == fs)
             widget.framesList->setCurrentItem(row);
         m_items.append(row);
     }
 
-    if (textFrame->frameSet()) { // already has a frameset
-        KWTextFrameSet *textFs = static_cast<KWTextFrameSet*>(textFrame->frameSet());
-        if (textFs->textFrameSetType() != KWord::OtherTextFrameSet)
-            return false; // can't alter frameSet of this auto-generated frame!
+    widget.frameSetName->setText(tFs->name());
+    if (widget.frameSetName->text().isEmpty())
+        widget.frameSetName->setText(m_state->document()->uniqueFrameSetName(i18n("Text")));
 
-        if (textFs->frameCount() == 1) { // don't allow us to remove the last frame of an FS
-            widget.newRadio->setEnabled(false);
-            widget.frameSetName->setEnabled(false);
-            widget.frameSetName->setText(textFs->name());
-        }
-        widget.existingRadio->setChecked(true);
-    } else if (m_frameSets.count() == 0) { // no framesets on document
-        QTreeWidgetItem *helpText = new QTreeWidgetItem(widget.framesList);
-        helpText->setText(0, i18n("No shape lists in document"));
-        widget.framesList->setEnabled(false);
-        widget.existingRadio->setEnabled(false);
-        widget.newRadio->setChecked(true);
-    } else {
-        widget.newRadio->setChecked(true);
-    }
     return true;
 }
 
 void KWFrameConnectSelector::frameSetSelected()
 {
-    widget.existingRadio->setChecked(true);
+    QTreeWidgetItem *selected = widget.framesList->currentItem();
+    KWTextFrameSet *tfs = 0;
+    if (selected)
+        tfs = static_cast<KWTextFrameSet*>(selected->data(0, 1000).value<void*>());
+    widget.frameSetName->setEnabled(m_frame->frameSet() == tfs);
 }
 
 void KWFrameConnectSelector::nameChanged(const QString &text)
 {
-    widget.newRadio->setChecked(true);
-    foreach (QTreeWidgetItem *item, widget.framesList->selectedItems())
-        widget.framesList->setItemSelected(item, false);
-    foreach (QTreeWidgetItem *item, m_items) {
-        if (item->text(0) == text) {
-            widget.framesList->setCurrentItem(item);
-            return;
-        }
+    QTreeWidgetItem *selected = widget.framesList->currentItem();
+    if (selected && selected->data(0, 1000).value<void*>() == m_frame->frameSet()) {
+        selected->setText(0, text);
     }
 }
 
 void KWFrameConnectSelector::save()
 {
     Q_ASSERT(m_frameSets.count() == m_items.count());
-    KWFrameSet *oldFS = m_frame->frameSet();
-    if (widget.newRadio->isChecked()) {
-        KWTextFrameSet *newFS = new KWTextFrameSet(m_state->document());
-        newFS->setName(widget.frameSetName->text());
-        m_frame->setFrameSet(newFS);
-        m_state->document()->addFrameSet(newFS);
-    } else { // attach to (different) FS
-        QTreeWidgetItem *selected = widget.framesList->currentItem();
-        Q_ASSERT(selected);
-        int index = m_items.indexOf(selected);
-        Q_ASSERT(index >= 0);
-        KWFrameSet *newFS = m_frameSets[index];
-        if (oldFS != newFS)
-            m_frame->setFrameSet(newFS);
+
+    QTreeWidgetItem *selected = widget.framesList->currentItem();
+    KWFrameSet *oldFs = m_frame->frameSet();
+    if (selected) {
+        KWTextFrameSet *tfs = static_cast<KWTextFrameSet*>(selected->data(0, 1000).value<void*>());
+        if (tfs != m_frame->frameSet()) {
+            m_frame->setFrameSet(tfs); // TODO make a command
+            if (oldFs->frameCount() == 0) {
+                // TODO
+            }
+        } else if (!widget.frameSetName->text().isEmpty()) {
+            tfs->setName(widget.frameSetName->text()); // TODO make a command
+        }
     }
-    if (oldFS && oldFS->frameCount() == 0) {
-        // TODO
-    }
+
     m_state->markFrameUsed();
     m_state->removeUser();
 }
-
-void KWFrameConnectSelector::open(KoShape *shape)
-{
-    KWFrame *frame = new KWTextFrame(shape, 0);
-    m_state->setFrame(frame);
-    open(frame);
-}
-

@@ -40,8 +40,6 @@ public:
 
     /// load all info from the argument frame into this widget
     bool open(KWFrame *frame);
-    /// load all info from the argument frame into this widget
-    void open(KoShape *shape);
     void save();
 
 private slots:
