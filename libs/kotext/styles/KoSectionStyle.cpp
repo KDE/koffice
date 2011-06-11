@@ -39,7 +39,7 @@
 #include <KoOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
-#include <KoBorder.h>
+#include <KOdfBorders.h>
 
 class KoSectionStyle::Private
 {

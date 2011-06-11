@@ -27,7 +27,7 @@
 #include "KoGenStyles.h"
 #include "KoPageFormat.h"
 #include "KoXmlReader.h"
-#include "KoBorder.h"
+#include "KOdfBorders.h"
 
 #include "koodf_export.h"
 
@@ -86,7 +86,7 @@ struct KoPageLayout {
     qreal bottomPadding;
 
     /// page border definition
-    KoBorder  border;
+    KOdfBorders  border;
 
     KOODF_EXPORT bool operator==(const KoPageLayout &l) const;
     KOODF_EXPORT bool operator!=(const KoPageLayout& l) const;

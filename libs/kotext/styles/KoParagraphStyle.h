@@ -24,7 +24,7 @@
 #define KOPARAGRAPHSTYLE_H
 
 #include "KoText.h"
-#include "KoBorder.h"
+#include "KOdfBorders.h"
 #include "kotext_export.h"
 
 #include <QObject>
@@ -328,8 +328,8 @@ public:
     qreal leftInnerBorderWidth();
     void setLeftBorderSpacing(qreal width);
     qreal leftBorderSpacing();
-    void setLeftBorderStyle(KoBorder::BorderStyle style);
-    KoBorder::BorderStyle leftBorderStyle();
+    void setLeftBorderStyle(KOdfBorders::BorderStyle style);
+    KOdfBorders::BorderStyle leftBorderStyle();
     void setLeftBorderColor(const QColor &color);
     QColor leftBorderColor();
     void setTopBorderWidth(qreal width);
@@ -338,8 +338,8 @@ public:
     qreal topInnerBorderWidth();
     void setTopBorderSpacing(qreal width);
     qreal topBorderSpacing();
-    void setTopBorderStyle(KoBorder::BorderStyle style);
-    KoBorder::BorderStyle topBorderStyle();
+    void setTopBorderStyle(KOdfBorders::BorderStyle style);
+    KOdfBorders::BorderStyle topBorderStyle();
     void setTopBorderColor(const QColor &color);
     QColor topBorderColor();
     void setRightBorderWidth(qreal width);
@@ -348,8 +348,8 @@ public:
     qreal rightInnerBorderWidth();
     void setRightBorderSpacing(qreal width);
     qreal rightBorderSpacing();
-    void setRightBorderStyle(KoBorder::BorderStyle style);
-    KoBorder::BorderStyle rightBorderStyle();
+    void setRightBorderStyle(KOdfBorders::BorderStyle style);
+    KOdfBorders::BorderStyle rightBorderStyle();
     void setRightBorderColor(const QColor &color);
     QColor rightBorderColor();
     void setBottomBorderWidth(qreal width);
@@ -358,8 +358,8 @@ public:
     qreal bottomInnerBorderWidth();
     void setBottomBorderSpacing(qreal width);
     qreal bottomBorderSpacing();
-    void setBottomBorderStyle(KoBorder::BorderStyle style);
-    KoBorder::BorderStyle bottomBorderStyle();
+    void setBottomBorderStyle(KOdfBorders::BorderStyle style);
+    KOdfBorders::BorderStyle bottomBorderStyle();
     void setBottomBorderColor(const QColor &color);
     QColor bottomBorderColor();
 

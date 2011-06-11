@@ -43,7 +43,7 @@ class KoXmlElement;
  *
  */
 
-class KOODF_EXPORT KoBorder
+class KOODF_EXPORT KOdfBorders
 {
 public:
 
@@ -67,7 +67,7 @@ public:
     /// Holds data about one border line.
     struct BorderData {
         BorderData();
-        BorderStyle  style; ///< The border style. (see KoBorder::BorderStyle)
+        BorderStyle  style; ///< The border style. (see KOdfBorders::BorderStyle)
         qreal width; ///< The thickness of the border, or 0 if there is no border
         QColor color; ///< The border Color
         /// In case of style being 'double' the thickness of the inner border line
@@ -78,17 +78,17 @@ public:
 
 
     /// Constructor
-    KoBorder();
-    KoBorder(const KoBorder &other);
+    KOdfBorders();
+    KOdfBorders(const KOdfBorders &other);
 
     /// Destructor
-    ~KoBorder();
+    ~KOdfBorders();
 
     /// Assignment
-    KoBorder &operator=(const KoBorder &other);
+    KOdfBorders &operator=(const KOdfBorders &other);
     /// Compare the border with the other one
-    bool operator==(const KoBorder &other) const;
-    bool operator!=(const KoBorder &other) const { return !operator==(other); }
+    bool operator==(const KOdfBorders &other) const;
+    bool operator!=(const KOdfBorders &other) const { return !operator==(other); }
 
     void setLeftBorderStyle(BorderStyle style);
     BorderStyle leftBorderStyle() const;
@@ -152,7 +152,7 @@ public:
 
     // Some public functions used in other places where borders are handled.
     // Example: KoParagraphStyle
-    // FIXME: These places should be made to use KoBorder instead.
+    // FIXME: These places should be made to use KOdfBorders instead.
     static BorderStyle odfBorderStyle(const QString &borderstyle);
     static QString odfBorderStyleString(BorderStyle borderstyle);
 

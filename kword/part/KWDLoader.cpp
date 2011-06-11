@@ -41,7 +41,7 @@
 #include <KoColorBackground.h>
 #include <KoImageCollection.h>
 #include <KoImageData.h>
-#include <KoBorder.h>
+#include <KOdfBorders.h>
 
 // KDE + Qt includes
 #include <QTextBlock>
@@ -876,20 +876,20 @@ void KWDLoader::fill(KoParagraphStyle *style, const KoXmlElement &layout)
                     innerWidth = 0.0;
             spacing = 0.0;
             switch (element.attribute("style").toInt()) {
-            case 0: borderStyle = KoBorder::BorderSolid; break;
-            case 1: borderStyle = KoBorder::BorderDashed; break;
-            case 2: borderStyle = KoBorder::BorderDotted; break;
-            case 3: borderStyle = KoBorder::BorderDashDotPattern; break;
-            case 4: borderStyle = KoBorder::BorderDashDotDotPattern; break;
+            case 0: borderStyle = KOdfBorders::BorderSolid; break;
+            case 1: borderStyle = KOdfBorders::BorderDashed; break;
+            case 2: borderStyle = KOdfBorders::BorderDotted; break;
+            case 3: borderStyle = KOdfBorders::BorderDashDotPattern; break;
+            case 4: borderStyle = KOdfBorders::BorderDashDotDotPattern; break;
             case 5:
-                borderStyle = KoBorder::BorderDouble;
+                borderStyle = KOdfBorders::BorderDouble;
                 spacing = width;
                 innerWidth = width;
                 break;
             }
         }
         qreal width, innerWidth, spacing;
-        KoBorder::BorderStyle borderStyle;
+        KOdfBorders::BorderStyle borderStyle;
     };
     element = layout.namedItem("LEFTBORDER").toElement();
     if (!element.isNull()) {

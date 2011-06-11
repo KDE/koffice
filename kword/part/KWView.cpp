@@ -639,12 +639,12 @@ if (false) { // TODO move this to the text tool as soon as  a) the string freeze
                 actionCollection(), "border_style");
 
         QStringList lst;
-        lst << KoBorder::getStyle(KoBorder::SOLID);
-        lst << KoBorder::getStyle(KoBorder::DASH);
-        lst << KoBorder::getStyle(KoBorder::DOT);
-        lst << KoBorder::getStyle(KoBorder::DASH_DOT);
-        lst << KoBorder::getStyle(KoBorder::DASH_DOT_DOT);
-        lst << KoBorder::getStyle(KoBorder::DOUBLE_LINE);
+        lst << KOdfBorders::getStyle(KOdfBorders::SOLID);
+        lst << KOdfBorders::getStyle(KOdfBorders::DASH);
+        lst << KOdfBorders::getStyle(KOdfBorders::DOT);
+        lst << KOdfBorders::getStyle(KOdfBorders::DASH_DOT);
+        lst << KOdfBorders::getStyle(KOdfBorders::DASH_DOT_DOT);
+        lst << KOdfBorders::getStyle(KOdfBorders::DOUBLE_LINE);
         m_actionBorderStyle->setItems(lst);
         m_actionBorderWidth = new KSelectAction(i18n("Border Width"),
                 actionCollection(), "border_width");

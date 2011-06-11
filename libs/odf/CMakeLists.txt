@@ -10,7 +10,7 @@ if( QCA2_FOUND )
 endif( QCA2_FOUND )
 
 set(koodf_LIB_SRCS
-    KoBorder.cpp
+    KOdfBorders.cpp
     KoDirectoryStore.cpp
     KoEmbeddedDocumentSaver.cpp
     KoEncryptedStore.cpp
@@ -78,7 +78,7 @@ install( FILES
     KoGenChange.h
     KoGenChanges.h
     KoEmbeddedDocumentSaver.h
-    KoBorder.h
+    KOdfBorders.h
     KoPageLayout.h
     KoPageFormat.h
     KoColumns.h

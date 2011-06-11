@@ -171,8 +171,8 @@ KoPageLayout::KoPageLayout()
 , topPadding(0)
 , bottomPadding(0)
 {
-    border.setLeftBorderStyle(KoBorder::BorderNone);
-    border.setTopBorderStyle(KoBorder::BorderNone);
-    border.setRightBorderStyle(KoBorder::BorderNone);
-    border.setBottomBorderStyle(KoBorder::BorderNone);
+    border.setLeftBorderStyle(KOdfBorders::BorderNone);
+    border.setTopBorderStyle(KOdfBorders::BorderNone);
+    border.setRightBorderStyle(KOdfBorders::BorderNone);
+    border.setBottomBorderStyle(KOdfBorders::BorderNone);
 }

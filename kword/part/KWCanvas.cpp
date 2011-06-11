@@ -345,14 +345,14 @@ void KWCanvas::paintPageDecorations(QPainter &painter, KWViewMode::ViewMap &view
     painter.restore();
 }
 
-void KWCanvas::paintBorder(QPainter &painter, const KoBorder &border, const QRectF &borderRect) const
+void KWCanvas::paintBorder(QPainter &painter, const KOdfBorders &border, const QRectF &borderRect) const
 {
     // Get the zoom.
     qreal zoomX;
     qreal zoomY;
     viewConverter()->zoom(&zoomX, &zoomY);
 
-    KoBorder::BorderData borderSide = border.leftBorderData();
+    KOdfBorders::BorderData borderSide = border.leftBorderData();
     painter.save();
     paintBorderSide(painter, borderSide, borderRect.topLeft(), borderRect.bottomLeft(),
                     zoomX, 1, 0);
@@ -376,12 +376,12 @@ void KWCanvas::paintBorder(QPainter &painter, const KoBorder &border, const QRec
     painter.restore();
 }
 
-void KWCanvas::paintBorderSide(QPainter &painter, const KoBorder::BorderData &borderData,
+void KWCanvas::paintBorderSide(QPainter &painter, const KOdfBorders::BorderData &borderData,
                                const QPointF &lineStart, const QPointF &lineEnd, qreal zoom,
                                int inwardsX, int inwardsY) const
 {
     // Return if nothing to paint
-    if (borderData.style == KoBorder::BorderNone)
+    if (borderData.style == KOdfBorders::BorderNone)
         return;
 
     // Set up the painter and inner and outer pens.
@@ -391,21 +391,21 @@ void KWCanvas::paintBorderSide(QPainter &painter, const KoBorder::BorderData &bo
 
     // Line style
     switch (borderData.style) {
-    case KoBorder::BorderNone: break; // No line
-    case KoBorder::BorderDotted: pen.setStyle(Qt::DotLine); break;
-    case KoBorder::BorderDashed: pen.setStyle(Qt::DashLine); break;
-    case KoBorder::BorderSolid: pen.setStyle(Qt::SolidLine); break;
-    case KoBorder::BorderDouble: pen.setStyle(Qt::SolidLine); break; // Handled separately
-    case KoBorder::BorderGroove: pen.setStyle(Qt::SolidLine); break; // FIXME
-    case KoBorder::BorderRidge: pen.setStyle(Qt::SolidLine); break; // FIXME
-    case KoBorder::BorderInset: pen.setStyle(Qt::SolidLine); break; // FIXME
-    case KoBorder::BorderOutset: pen.setStyle(Qt::SolidLine); break; // FIXME
+    case KOdfBorders::BorderNone: break; // No line
+    case KOdfBorders::BorderDotted: pen.setStyle(Qt::DotLine); break;
+    case KOdfBorders::BorderDashed: pen.setStyle(Qt::DashLine); break;
+    case KOdfBorders::BorderSolid: pen.setStyle(Qt::SolidLine); break;
+    case KOdfBorders::BorderDouble: pen.setStyle(Qt::SolidLine); break; // Handled separately
+    case KOdfBorders::BorderGroove: pen.setStyle(Qt::SolidLine); break; // FIXME
+    case KOdfBorders::BorderRidge: pen.setStyle(Qt::SolidLine); break; // FIXME
+    case KOdfBorders::BorderInset: pen.setStyle(Qt::SolidLine); break; // FIXME
+    case KOdfBorders::BorderOutset: pen.setStyle(Qt::SolidLine); break; // FIXME
 
-    case KoBorder::BorderDashDotPattern: pen.setStyle(Qt::DashDotLine); break;
-    case KoBorder::BorderDashDotDotPattern: pen.setStyle(Qt::DashDotDotLine); break;
+    case KOdfBorders::BorderDashDotPattern: pen.setStyle(Qt::DashDotLine); break;
+    case KOdfBorders::BorderDashDotDotPattern: pen.setStyle(Qt::DashDotDotLine); break;
     }
 
-    if (borderData.style == KoBorder::BorderDouble) {
+    if (borderData.style == KOdfBorders::BorderDouble) {
         // outerWidth is the width of the outer line.  The offsets
         // are the distances from the center line of the whole
         // border to the centerlines of the outer and inner

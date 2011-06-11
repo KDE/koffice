@@ -647,10 +647,10 @@ void TestDocumentLayout::testParagraphBorders()
     initForNewTest("Paragraph with Borders\nAnother parag\n");
     QTextCursor cursor(m_doc->begin());
     QTextBlockFormat bf = cursor.blockFormat();
-    bf.setProperty(KoParagraphStyle::LeftBorderStyle, KoBorder::BorderSolid);
-    bf.setProperty(KoParagraphStyle::TopBorderStyle, KoBorder::BorderSolid);
-    bf.setProperty(KoParagraphStyle::BottomBorderStyle, KoBorder::BorderSolid);
-    bf.setProperty(KoParagraphStyle::RightBorderStyle, KoBorder::BorderSolid);
+    bf.setProperty(KoParagraphStyle::LeftBorderStyle, KOdfBorders::BorderSolid);
+    bf.setProperty(KoParagraphStyle::TopBorderStyle, KOdfBorders::BorderSolid);
+    bf.setProperty(KoParagraphStyle::BottomBorderStyle, KOdfBorders::BorderSolid);
+    bf.setProperty(KoParagraphStyle::RightBorderStyle, KOdfBorders::BorderSolid);
     bf.setProperty(KoParagraphStyle::LeftBorderWidth, 8.0);
     bf.setProperty(KoParagraphStyle::TopBorderWidth, 9.0);
     bf.setProperty(KoParagraphStyle::BottomBorderWidth, 10.0);
@@ -699,10 +699,10 @@ void TestDocumentLayout::testParagraphBorders()
     QCOMPARE(borderOutline.right(), 200.);
 
     // qreal borders.  Specify an additional width for each side.
-    bf.setProperty(KoParagraphStyle::LeftBorderStyle, KoBorder::BorderDouble);
-    bf.setProperty(KoParagraphStyle::TopBorderStyle, KoBorder::BorderDouble);
-    bf.setProperty(KoParagraphStyle::BottomBorderStyle, KoBorder::BorderDouble);
-    bf.setProperty(KoParagraphStyle::RightBorderStyle, KoBorder::BorderDouble);
+    bf.setProperty(KoParagraphStyle::LeftBorderStyle, KOdfBorders::BorderDouble);
+    bf.setProperty(KoParagraphStyle::TopBorderStyle, KOdfBorders::BorderDouble);
+    bf.setProperty(KoParagraphStyle::BottomBorderStyle, KOdfBorders::BorderDouble);
+    bf.setProperty(KoParagraphStyle::RightBorderStyle, KOdfBorders::BorderDouble);
     bf.setProperty(KoParagraphStyle::LeftInnerBorderWidth, 2.0);
     bf.setProperty(KoParagraphStyle::RightInnerBorderWidth, 2.0);
     bf.setProperty(KoParagraphStyle::BottomInnerBorderWidth, 2.0);
