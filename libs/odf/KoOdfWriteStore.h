@@ -24,6 +24,8 @@ class QIODevice;
 class KoXmlWriter;
 class KoStore;
 
+#include "koodf_export.h"
+
 /**
  * Helper class around KoStore for writing out ODF files.
  * This class helps solving the problem that automatic styles must be before
@@ -44,8 +46,6 @@ class KoStore;
  *
  * @author: David Faure <faure@kde.org>
  */
-#include "koodf_export.h"
-
 class KOODF_EXPORT KoOdfWriteStore
 {
 public:
