@@ -19,7 +19,7 @@
 */
 #ifdef QCA2
 
-#include "KoEncryptedStore_p.h"
+#include "EncryptedStore_p.h"
 #include "KoEncryptionChecker.h"
 #include "KoStore_p.h"
 #include "KoXmlReader.h"
@@ -68,7 +68,7 @@ const char* META_FILE = "meta.xml";
 const char* THUMBNAIL_FILE = "Thumbnails/thumbnail.png";
 }
 
-KoEncryptedStore::KoEncryptedStore(const QString & filename, Mode mode, const QByteArray & appIdentification)
+EncryptedStore::EncryptedStore(const QString & filename, Mode mode, const QByteArray & appIdentification)
         : m_qcaInit(QCA::Initializer()), m_password(QCA::SecureArray()), m_filename(QString(filename)), m_manifestBuffer(QByteArray()), m_tempFile(NULL), m_bPasswordUsed(false), m_bPasswordDeclined(false), m_currentDir(NULL)
 {
     Q_D(KoStore);
@@ -79,7 +79,7 @@ KoEncryptedStore::KoEncryptedStore(const QString & filename, Mode mode, const QB
     init(mode, appIdentification);
 }
 
-KoEncryptedStore::KoEncryptedStore(QIODevice *dev, Mode mode, const QByteArray & appIdentification)
+EncryptedStore::EncryptedStore(QIODevice *dev, Mode mode, const QByteArray & appIdentification)
         : m_qcaInit(QCA::Initializer()), m_password(QCA::SecureArray()), m_filename(QString()), m_manifestBuffer(QByteArray()), m_tempFile(NULL), m_bPasswordUsed(false), m_bPasswordDeclined(false), m_currentDir(NULL)
 {
     Q_D(KoStore);
@@ -90,7 +90,7 @@ KoEncryptedStore::KoEncryptedStore(QIODevice *dev, Mode mode, const QByteArray &
     init(mode, appIdentification);
 }
 
-KoEncryptedStore::KoEncryptedStore(QWidget* window, const KUrl& url, const QString & filename, Mode mode, const QByteArray & appIdentification)
+EncryptedStore::EncryptedStore(QWidget* window, const KUrl& url, const QString & filename, Mode mode, const QByteArray & appIdentification)
         : m_qcaInit(QCA::Initializer()), m_password(QCA::SecureArray()), m_filename(QString(url.url())), m_manifestBuffer(QByteArray()), m_tempFile(NULL), m_bPasswordUsed(false), m_bPasswordDeclined(false), m_currentDir(NULL)
 {
     Q_D(KoStore);
@@ -117,7 +117,7 @@ KoEncryptedStore::KoEncryptedStore(QWidget* window, const KUrl& url, const QStri
     init(mode, appIdentification);
 }
 
-bool KoEncryptedStore::init(Mode mode, const QByteArray & appIdentification)
+bool EncryptedStore::init(Mode mode, const QByteArray & appIdentification)
 {
     Q_D(KoStore);
     bool checksumErrorShown = false;
@@ -305,7 +305,7 @@ bool KoEncryptedStore::init(Mode mode, const QByteArray & appIdentification)
     return d->good;
 }
 
-bool KoEncryptedStore::doFinalize()
+bool EncryptedStore::doFinalize()
 {
     Q_D(KoStore);
     if (d->good) {
@@ -440,7 +440,7 @@ bool KoEncryptedStore::doFinalize()
         return true;
 }
 
-KoEncryptedStore::~KoEncryptedStore()
+EncryptedStore::~EncryptedStore()
 {
     Q_D(KoStore);
     /* Finalization of an encrypted store must happen earlier than deleting the zip. This rule normally is executed by KoStore, but too late to do any good.*/
@@ -460,7 +460,7 @@ KoEncryptedStore::~KoEncryptedStore()
     delete d->stream;
 }
 
-bool KoEncryptedStore::isEncrypted()
+bool EncryptedStore::isEncrypted()
 {
     Q_D(KoStore);
     if (d->mode == Read) {
@@ -469,12 +469,12 @@ bool KoEncryptedStore::isEncrypted()
     return true;
 }
 
-bool KoEncryptedStore::isToBeEncrypted(const QString& name)
+bool EncryptedStore::isToBeEncrypted(const QString& name)
 {
     return !(name == META_FILE || name == MANIFEST_FILE || name == THUMBNAIL_FILE);
 }
 
-bool KoEncryptedStore::openRead(const QString& name)
+bool EncryptedStore::openRead(const QString& name)
 {
     Q_D(KoStore);
     if (bad())
@@ -598,7 +598,7 @@ bool KoEncryptedStore::openRead(const QString& name)
     return true;
 }
 
-bool KoEncryptedStore::closeRead()
+bool EncryptedStore::closeRead()
 {
     Q_D(KoStore);
     delete d->stream;
@@ -606,7 +606,7 @@ bool KoEncryptedStore::closeRead()
     return true;
 }
 
-void KoEncryptedStore::findPasswordInKWallet()
+void EncryptedStore::findPasswordInKWallet()
 {
     Q_D(KoStore);
     /* About KWallet access
@@ -630,7 +630,7 @@ void KoEncryptedStore::findPasswordInKWallet()
     }
 }
 
-void KoEncryptedStore::savePasswordInKWallet()
+void EncryptedStore::savePasswordInKWallet()
 {
     Q_D(KoStore);
     KWallet::Wallet *wallet = KWallet::Wallet::openWallet(KWallet::Wallet::LocalWallet(), d->window ? d->window->winId() : 0);
@@ -648,7 +648,7 @@ void KoEncryptedStore::savePasswordInKWallet()
     }
 }
 
-QCA::SecureArray KoEncryptedStore::decryptFile(QCA::SecureArray & encryptedFile, KoEncryptedStore_EncryptionData & encData, QCA::SecureArray & password)
+QCA::SecureArray EncryptedStore::decryptFile(QCA::SecureArray & encryptedFile, KoEncryptedStore_EncryptionData & encData, QCA::SecureArray & password)
 {
     QCA::SecureArray keyhash = QCA::Hash("sha1").hash(password);
     QCA::SymmetricKey key = QCA::PBKDF2("sha1").makeKey(keyhash, QCA::InitializationVector(encData.salt), 16, encData.iterationCount);
@@ -658,7 +658,7 @@ QCA::SecureArray KoEncryptedStore::decryptFile(QCA::SecureArray & encryptedFile,
     return result;
 }
 
-bool KoEncryptedStore::setPassword(const QString& password)
+bool EncryptedStore::setPassword(const QString& password)
 {
     if (m_bPasswordUsed || password.isEmpty()) {
         return false;
@@ -667,7 +667,7 @@ bool KoEncryptedStore::setPassword(const QString& password)
     return true;
 }
 
-QString KoEncryptedStore::password()
+QString EncryptedStore::password()
 {
     if (m_password.isEmpty()) {
         return QString();
@@ -675,7 +675,7 @@ QString KoEncryptedStore::password()
     return QString(m_password.toByteArray());
 }
 
-bool KoEncryptedStore::openWrite(const QString& name)
+bool EncryptedStore::openWrite(const QString& name)
 {
     Q_D(KoStore);
     if (bad())
@@ -693,7 +693,7 @@ bool KoEncryptedStore::openWrite(const QString& name)
     return m_pZip->prepareWriting(name, "", "", 0);
 }
 
-bool KoEncryptedStore::closeWrite()
+bool EncryptedStore::closeWrite()
 {
     Q_D(KoStore);
     bool passWasAsked = false;
@@ -786,7 +786,7 @@ bool KoEncryptedStore::closeWrite()
     return m_pZip->finishWriting(resultData.size());
 }
 
-bool KoEncryptedStore::enterRelativeDirectory(const QString& dirName)
+bool EncryptedStore::enterRelativeDirectory(const QString& dirName)
 {
     Q_D(KoStore);
     if (d->mode == Read) {
@@ -804,7 +804,7 @@ bool KoEncryptedStore::enterRelativeDirectory(const QString& dirName)
     }
 }
 
-bool KoEncryptedStore::enterAbsoluteDirectory(const QString& path)
+bool EncryptedStore::enterAbsoluteDirectory(const QString& path)
 {
     if (path.isEmpty()) {
         m_currentDir = 0;
@@ -814,7 +814,7 @@ bool KoEncryptedStore::enterAbsoluteDirectory(const QString& path)
     return m_currentDir != 0;
 }
 
-bool KoEncryptedStore::fileExists(const QString& absPath) const
+bool EncryptedStore::fileExists(const QString& absPath) const
 {
     const KArchiveEntry *entry = m_pZip->directory()->entry(absPath);
     return (entry && entry->isFile()) || (absPath == MANIFEST_FILE && !m_manifestBuffer.isNull());

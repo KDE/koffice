@@ -13,7 +13,7 @@ set(koodf_LIB_SRCS
     KOdfBorders.cpp
     DirectoryStore.cpp
     KoEmbeddedDocumentSaver.cpp
-    KoEncryptedStore.cpp
+    EncryptedStore.cpp
     KoEncryptionChecker.cpp
     KoFontFace.cpp
     KoGenChange.cpp

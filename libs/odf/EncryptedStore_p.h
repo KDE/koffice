@@ -46,13 +46,13 @@ class KArchiveDirectory;
 class KTemporaryFile;
 struct KoEncryptedStore_EncryptionData;
 
-class KoEncryptedStore : public KoStore
+class EncryptedStore : public KoStore
 {
 public:
-    KoEncryptedStore(const QString &filename, Mode mode, const QByteArray &appIdentification);
-    KoEncryptedStore(QIODevice *dev, Mode mode, const QByteArray &appIdentification);
-    KoEncryptedStore(QWidget *window, const KUrl &url, const QString &filename, Mode mode, const QByteArray &appIdentification);
-    ~KoEncryptedStore();
+    EncryptedStore(const QString &filename, Mode mode, const QByteArray &appIdentification);
+    EncryptedStore(QIODevice *dev, Mode mode, const QByteArray &appIdentification);
+    EncryptedStore(QWidget *window, const KUrl &url, const QString &filename, Mode mode, const QByteArray &appIdentification);
+    ~EncryptedStore();
 
     /*
      * Sets the password to be used for decryption or encryption of the file.
