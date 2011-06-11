@@ -20,6 +20,18 @@
 #ifndef koTarStore_h
 #define koTarStore_h
 
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the KOdf API.  It exists purely as an
+// implementation detail.  This header file may change from version to
+// version without notice, or even be removed.
+//
+// We mean it.
+//
+
+
 #include "KoStore.h"
 #include <QByteArray>
 
