@@ -22,7 +22,7 @@
 #include "KoStore.h"
 #include "KoStore_p.h"
 
-#include "KoTarStore_p.h"
+#include "TarStore_p.h"
 #include "ZipStore_p.h"
 #include "DirectoryStore_p.h"
 #ifdef QCA2
@@ -77,7 +77,7 @@ KoStore* KoStore::createStore(const QString& fileName, Mode mode, const QByteArr
     }
     switch (backend) {
     case Tar:
-        return new KoTarStore(fileName, mode, appIdentification);
+        return new TarStore(fileName, mode, appIdentification);
     case Zip:
 #ifdef QCA2
         if (automatic && mode == Read) {
@@ -114,7 +114,7 @@ KoStore* KoStore::createStore(QIODevice *device, Mode mode, const QByteArray & a
     }
     switch (backend) {
     case Tar:
-        return new KoTarStore(device, mode, appIdentification);
+        return new TarStore(device, mode, appIdentification);
     case Directory:
         kError(30002) << "Can't create a Directory store for a memory buffer!" << endl;
         // fallback
@@ -163,7 +163,7 @@ KoStore* KoStore::createStore(QWidget* window, const KUrl& url, Mode mode, const
     }
     switch (backend) {
     case Tar:
-        return new KoTarStore(window, url, tmpFile, mode, appIdentification);
+        return new TarStore(window, url, tmpFile, mode, appIdentification);
     case Zip:
 #ifdef QCA2
         if (automatic && mode == Read) {

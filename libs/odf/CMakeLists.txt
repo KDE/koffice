@@ -36,7 +36,7 @@ set(koodf_LIB_SRCS
     KoStore.cpp
     KoStoreDevice.cpp
     KoStyleStack.cpp
-    KoTarStore.cpp
+    TarStore.cpp
     KoUnit.cpp
     KoXmlNS.cpp
     KoXmlReader.cpp

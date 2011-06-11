@@ -39,17 +39,17 @@ class KTar;
 class KArchiveDirectory;
 class KUrl;
 
-class KoTarStore : public KoStore
+class TarStore : public KoStore
 {
 public:
-    KoTarStore(const QString & _filename, Mode _mode, const QByteArray & appIdentification);
-    KoTarStore(QIODevice *dev, Mode mode, const QByteArray & appIdentification);
+    TarStore(const QString & _filename, Mode _mode, const QByteArray & appIdentification);
+    TarStore(QIODevice *dev, Mode mode, const QByteArray & appIdentification);
     /**
      * KUrl-constructor
      * @todo saving not completely implemented (fixed temporary file)
      */
-    KoTarStore(QWidget* window, const KUrl& url, const QString & _filename, Mode _mode, const QByteArray & appIdentification);
-    ~KoTarStore();
+    TarStore(QWidget* window, const KUrl& url, const QString & _filename, Mode _mode, const QByteArray & appIdentification);
+    ~TarStore();
 protected:
     virtual bool init(Mode _mode);
     virtual bool doFinalize();
