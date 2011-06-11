@@ -36,11 +36,11 @@
 
 class QFile;
 
-class KoDirectoryStore : public KoStore
+class DirectoryStore : public KoStore
 {
 public:
-    KoDirectoryStore(const QString& path, Mode _mode);
-    ~KoDirectoryStore();
+    DirectoryStore(const QString& path, Mode _mode);
+    ~DirectoryStore();
 protected:
     virtual bool init(Mode _mode);
     virtual bool openWrite(const QString &name) {

@@ -11,7 +11,7 @@ endif( QCA2_FOUND )
 
 set(koodf_LIB_SRCS
     KOdfBorders.cpp
-    KoDirectoryStore.cpp
+    DirectoryStore.cpp
     KoEmbeddedDocumentSaver.cpp
     KoEncryptedStore.cpp
     KoEncryptionChecker.cpp
