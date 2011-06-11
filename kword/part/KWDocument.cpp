@@ -177,9 +177,8 @@ KWDocument::~KWDocument()
 
 void KWDocument::addShape(KoShape *shape)
 {
-    // KWord adds a couple of dialogs (like KWFrameDialog) which will not call addShape(), but
-    // will call addFrameSet.  Which will itself call addFrame()
-    // any call coming in here is due to the undo/redo framework, pasting or for nested frames
+    // notice that this call can come from the user inserting a shape, the undo framework
+    // or from pasting.
 
     KWFrame *frame = dynamic_cast<KWFrame*>(shape->applicationData());
     if (frame == 0) {
@@ -187,7 +186,7 @@ void KWDocument::addShape(KoShape *shape)
         if (shape->shapeId() == TextShape_SHAPEID) {
             KWTextFrameSet *tfs = new KWTextFrameSet(this);
             fs = tfs;
-            fs->setName("Text");
+            fs->setName(uniqueFrameSetName("Text"));
             frame = new KWTextFrame(shape, tfs);
         } else {
             fs = new KWFrameSet();
