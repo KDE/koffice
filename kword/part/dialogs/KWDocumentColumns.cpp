@@ -22,7 +22,7 @@
 
 #include <KoPageLayout.h>
 
-KWDocumentColumns::KWDocumentColumns(QWidget *parent, const KoColumns &columns)
+KWDocumentColumns::KWDocumentColumns(QWidget *parent, const KOdfColumnData &columns)
         : QWidget(parent)
 {
     widget.setupUi(this);
@@ -37,10 +37,10 @@ KWDocumentColumns::KWDocumentColumns(QWidget *parent, const KoColumns &columns)
 
     connect(widget.columns, SIGNAL(valueChanged(int)), this, SLOT(optionsChanged()));
     connect(widget.spacing, SIGNAL(valueChangedPt(qreal)), this, SLOT(optionsChanged()));
-    connect(this, SIGNAL(columnsChanged(const KoColumns&)), m_preview, SLOT(setColumns(const KoColumns&)));
+    connect(this, SIGNAL(columnsChanged(const KOdfColumnData&)), m_preview, SLOT(setColumns(const KOdfColumnData&)));
 }
 
-void KWDocumentColumns::setColumns(const KoColumns &columns)
+void KWDocumentColumns::setColumns(const KOdfColumnData &columns)
 {
     m_columns = columns;
     widget.columns->setValue(columns.columns);

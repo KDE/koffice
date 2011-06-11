@@ -171,7 +171,7 @@ bool KWDLoader::load(KoXmlElement &root)
                 pos = KWord::FootNoteSeparatorLeft;
             m_pageStyle.setFootNoteSeparatorLinePosition(pos);
         }
-        KoColumns columns = m_pageStyle.columns();
+        KOdfColumnData columns = m_pageStyle.columns();
         if (paper.hasAttribute("columns"))
             columns.columns = paper.attribute("columns").toInt();
         if (paper.hasAttribute("columnspacing"))

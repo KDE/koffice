@@ -27,7 +27,7 @@
 #include <KoPageLayoutWidget.h>
 #include <KoPagePreviewWidget.h>
 
-KWStartupWidget::KWStartupWidget(QWidget *parent, KWDocument *doc, const KoColumns &columns)
+KWStartupWidget::KWStartupWidget(QWidget *parent, KWDocument *doc, const KOdfColumnData &columns)
         : QWidget(parent),
         m_unit(doc->unit())
 {
@@ -74,8 +74,8 @@ KWStartupWidget::KWStartupWidget(QWidget *parent, KWDocument *doc, const KoColum
     connect(widget.mainText, SIGNAL(toggled(bool)), m_sizeWidget, SLOT(setTextAreaAvailable(bool)));
     connect(widget.mainText, SIGNAL(toggled(bool)), m_columnsWidget, SLOT(setTextAreaAvailable(bool)));
     connect(m_sizeWidget, SIGNAL(unitChanged(const KoUnit&)), this, SLOT(unitChanged(const KoUnit&)));
-    connect(m_columnsWidget, SIGNAL(columnsChanged(const KoColumns&)), prev, SLOT(setColumns(const KoColumns&)));
-    connect(m_columnsWidget, SIGNAL(columnsChanged(const KoColumns&)), this, SLOT(columnsUpdated(const KoColumns&)));
+    connect(m_columnsWidget, SIGNAL(columnsChanged(const KOdfColumnData&)), prev, SLOT(setColumns(const KOdfColumnData&)));
+    connect(m_columnsWidget, SIGNAL(columnsChanged(const KOdfColumnData&)), this, SLOT(columnsUpdated(const KOdfColumnData&)));
     connect(m_sizeWidget, SIGNAL(layoutChanged(const KoPageLayout&)), prev, SLOT(setPageLayout(const KoPageLayout&)));
 }
 
@@ -91,7 +91,7 @@ void KWStartupWidget::sizeUpdated(const KoPageLayout &layout)
     m_layout = layout;
 }
 
-void KWStartupWidget::columnsUpdated(const KoColumns &columns)
+void KWStartupWidget::columnsUpdated(const KOdfColumnData &columns)
 {
     m_columns = columns;
 }

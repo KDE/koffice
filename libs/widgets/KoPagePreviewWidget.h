@@ -27,7 +27,7 @@
 
 #include <QWidget>
 
-/// A widget to preview the KoPageLayout and KoColumns data structures.
+/// A widget to preview the KoPageLayout and KOdfColumnData data structures.
 class KOWIDGETS_EXPORT KoPagePreviewWidget : public QWidget {
     Q_OBJECT
 public:
@@ -39,7 +39,7 @@ protected:
 
 public slots:
     void setPageLayout(const KoPageLayout &layout);
-    void setColumns(const KoColumns &columns);
+    void setColumns(const KOdfColumnData &columns);
 
 private:
     void drawPage(QPainter &painter, qreal zoom, const QRect &dimensions, bool left);

@@ -957,7 +957,7 @@ void KWDocument::printDebug()
         kDebug(32001) << "PageStyle" << style.name();
         kDebug(32001) << "     Header:" << headerFooterType[style.headerPolicy()];
         kDebug(32001) << "     Footer:" << headerFooterType[style.footerPolicy()];
-        KoColumns columns = style.columns();
+        KOdfColumnData columns = style.columns();
         if (columns.columns != 1)
             kDebug(32001) << " +-- Columns:" << columns.columns << columns.columnSpacing << "pt spacing";
         KoPageLayout layout = style.pageLayout();
@@ -974,7 +974,7 @@ void KWDocument::printDebug()
 
 QList<KoDocument::CustomDocumentWidgetItem> KWDocument::createCustomDocumentWidgets(QWidget *parent)
 {
-    KoColumns columns;
+    KOdfColumnData columns;
     columns.columns = 1;
     columns.columnSpacing = m_config.defaultColumnSpacing();
 

@@ -23,7 +23,7 @@
 #ifndef KOPAGELAYOUT_H
 #define KOPAGELAYOUT_H
 
-#include "KoColumns.h"
+#include "KOdfColumnData.h"
 #include "KoGenStyles.h"
 #include "KoPageFormat.h"
 #include "KoXmlReader.h"

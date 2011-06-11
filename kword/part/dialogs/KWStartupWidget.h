@@ -46,11 +46,11 @@ public:
      * @param doc the document that wants to be altered
      * @param columns the suggested columns to be shown initially
      */
-    KWStartupWidget(QWidget *parent, KWDocument *doc, const KoColumns &columns);
+    KWStartupWidget(QWidget *parent, KWDocument *doc, const KOdfColumnData &columns);
 
 private slots:
     void sizeUpdated(const KoPageLayout &layout);
-    void columnsUpdated(const KoColumns &columns);
+    void columnsUpdated(const KOdfColumnData &columns);
     void buttonClicked();
     void unitChanged(const KoUnit &unit);
 
@@ -64,7 +64,7 @@ private:
     KWHeaderFooter *m_headerFooter;
 
     KoPageLayout m_layout;
-    KoColumns m_columns;
+    KOdfColumnData m_columns;
     KWDocument *m_doc;
     Ui::KWStartupWidget widget;
     KoUnit m_unit;

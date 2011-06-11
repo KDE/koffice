@@ -31,7 +31,7 @@ public:
     ~KWPageStylePrivate();
     void clear();
 
-    KoColumns columns;
+    KOdfColumnData columns;
     KoPageLayout pageLayout;
     QString name;
     bool mainFrame;

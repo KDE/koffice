@@ -252,7 +252,7 @@ void TestFrameLayout::testFrameCreation()
     QVERIFY(frameSets.oddFooters == 0);
     QVERIFY(frameSets.evenFooters == 0);
 
-    KoColumns columns = style.columns();
+    KOdfColumnData columns = style.columns();
     columns.columns = 2;
     style.setColumns(columns);
 
@@ -353,7 +353,7 @@ void TestFrameLayout::testCreateNewFrameForPage()
     style4.setHeaderPolicy(KWord::HFTypeUniform);
     style4.setHasMainTextFrame(true);
     style4.setFooterPolicy(KWord::HFTypeEvenOdd);
-    KoColumns columns;
+    KOdfColumnData columns;
     columns.columns = 2;
     columns.columnSpacing = 4;
     style4.setColumns(columns);

@@ -22,7 +22,7 @@
 #ifndef KOSECTIONSTYLE_H
 #define KOSECTIONSTYLE_H
 
-#include "KoColumns.h"
+#include "KOdfColumnData.h"
 #include "KoText.h"
 #include "kotext_export.h"
 
@@ -70,11 +70,11 @@ public:
     /**
      * Return the current columns settings.
      */
-    KoColumns columns() const;
+    KOdfColumnData columns() const;
     /**
      * Set the new columns settings
      */
-    void setColumns(const KoColumns &columns);
+    void setColumns(const KOdfColumnData &columns);
 
     /// duplicated property from QTextBlockFormat
     void setLeftMargin(qreal margin);

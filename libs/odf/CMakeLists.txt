@@ -81,7 +81,7 @@ install( FILES
     KOdfBorders.h
     KoPageLayout.h
     KoPageFormat.h
-    KoColumns.h
+    KOdfColumnData.h
     KoStore.h
     KoStoreDevice.h
     KoXmlReader.h

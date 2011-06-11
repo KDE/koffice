@@ -28,14 +28,14 @@
 #include <QtGlobal>
 
 /** structure for columns */
-struct KOODF_EXPORT KoColumns {
+struct KOODF_EXPORT KOdfColumnData {
     int columns;
     qreal columnSpacing;
-    bool operator==(const KoColumns& rhs) const {
+    bool operator==(const KOdfColumnData& rhs) const {
         return columns == rhs.columns &&
                qAbs(columnSpacing - rhs.columnSpacing) <= 1E-10;
     }
-    bool operator!=(const KoColumns& rhs) const {
+    bool operator!=(const KOdfColumnData& rhs) const {
         return columns != rhs.columns ||
                qAbs(columnSpacing - rhs.columnSpacing) > 1E-10;
     }

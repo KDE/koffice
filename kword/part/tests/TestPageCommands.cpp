@@ -450,7 +450,7 @@ void TestPageCommands::testPageStylePropertiesCommand() // basic properties chan
     oldLayout.bindingSide = 13;
     style.setPageLayout(oldLayout);
 
-    KoColumns oldColumns;
+    KOdfColumnData oldColumns;
     oldColumns.columns = 4;
     oldColumns.columnSpacing = 21;
     style.setColumns(oldColumns);
@@ -476,7 +476,7 @@ void TestPageCommands::testPageStylePropertiesCommand() // basic properties chan
     newLayout.pageEdge = -1;
     newLayout.bindingSide = -1;
     style2.setPageLayout(newLayout);
-    KoColumns newColumns;
+    KOdfColumnData newColumns;
     newColumns.columns = 2;
     newColumns.columnSpacing = 12;
     style2.setColumns(newColumns);

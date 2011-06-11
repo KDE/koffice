@@ -28,32 +28,32 @@
 class KoPagePreviewWidget;
 
 /**
- * This widget visually shows and alters the KoColumns data structure.
+ * This widget visually shows and alters the KOdfColumnData data structure.
  */
 class KWDocumentColumns : public QWidget
 {
     Q_OBJECT
 public:
-    KWDocumentColumns(QWidget *parent, const KoColumns &columns);
+    KWDocumentColumns(QWidget *parent, const KOdfColumnData &columns);
 
-    KoColumns columns() const { return m_columns; }
+    KOdfColumnData columns() const { return m_columns; }
 
     void setShowPreview(bool on);
     void setUnit(const KoUnit &unit);
 
 signals:
-    void columnsChanged(const KoColumns &columns);
+    void columnsChanged(const KOdfColumnData &columns);
 
 public slots:
     void setTextAreaAvailable(bool available);
-    void setColumns(const KoColumns &columns);
+    void setColumns(const KOdfColumnData &columns);
 
 private slots:
     void optionsChanged();
 
 private:
     Ui::KWDocumentColumns widget;
-    KoColumns m_columns;
+    KOdfColumnData m_columns;
     KoPagePreviewWidget *m_preview;
 };
 

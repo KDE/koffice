@@ -85,11 +85,11 @@ public:
     /**
      * Return the current columns settings.
      */
-    const KoColumns &columns() const;
+    const KOdfColumnData &columns() const;
     /**
      * Set the new columns settings
      */
-    void setColumns(const KoColumns &columns);
+    void setColumns(const KOdfColumnData &columns);
 
     /// Return the type of header the pages will get.
     KWord::HeaderFooterType headerPolicy() const;

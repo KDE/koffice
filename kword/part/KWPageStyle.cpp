@@ -141,12 +141,12 @@ void KWPageStyle::setPageLayout(const KoPageLayout &pageLayout)
     d->pageLayout = pageLayout;
 }
 
-const KoColumns &KWPageStyle::columns() const
+const KOdfColumnData &KWPageStyle::columns() const
 {
     return d->columns;
 }
 
-void KWPageStyle::setColumns(const KoColumns &columns)
+void KWPageStyle::setColumns(const KOdfColumnData &columns)
 {
     d->columns = columns;
 }

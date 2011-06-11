@@ -30,7 +30,7 @@ class KoPagePreviewWidget::Private
 {
 public:
     KoPageLayout pageLayout;
-    KoColumns columns;
+    KOdfColumnData columns;
 };
 
 
@@ -136,7 +136,7 @@ void KoPagePreviewWidget::setPageLayout(const KoPageLayout &layout)
     update();
 }
 
-void KoPagePreviewWidget::setColumns(const KoColumns &columns)
+void KoPagePreviewWidget::setColumns(const KOdfColumnData &columns)
 {
     d->columns = columns;
     update();
