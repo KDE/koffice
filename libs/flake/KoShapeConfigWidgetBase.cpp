@@ -38,4 +38,9 @@ void KoShapeConfigWidgetBase::setResourceManager(KoResourceManager *rm)
     m_resourceManager = rm;
 }
 
+KoResourceManager *KoShapeConfigWidgetBase::resourceManager() const
+{
+    return m_resourceManager;
+}
+
 #include <KoShapeConfigWidgetBase.moc>
