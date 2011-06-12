@@ -26,10 +26,21 @@
 
 #include <QtCore/QString>
 #include <QtCore/QPair>
+#include <QtGui/QTransform>
 
-class KOdfGenericStyles;
-class KXmlWriter;
+
+class QBrush;
+class QPen;
+class QString;
+class QSizeF;
+
 class KOdfGenericStyle;
+class KOdfGenericStyles;
+class KOdfStyleStack;
+
+class KOdfStylesReader;
+class KOdfLoadingContext;
+class KXmlWriter;
 
 namespace KOdf
 {
@@ -105,6 +116,33 @@ namespace KOdf
     KODF_EXPORT QString saveOdfPercentageStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
     KODF_EXPORT QString saveOdfCurrencyStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &symbol, const QString &prefix = QString(), const QString &suffix = QString());
     KODF_EXPORT QString saveOdfTextStyle(KOdfGenericStyles &mainStyles, const QString &format, const QString &prefix = QString(), const QString &suffix = QString());
+
+    // -------------------- Graphics Styles
+    KODF_EXPORT void saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush &brush);
+
+    KODF_EXPORT void saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KOdfGenericStyles &mainStyles, const QPen &pen);
+
+    KODF_EXPORT QString saveOdfHatchStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
+
+    /// Saves gradient style of brush into mainStyles and returns the styles name
+    KODF_EXPORT QString saveOdfGradientStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
+
+    /// Loads gradient style from style stack and stylesReader adapted to the given size and returns a brush
+    KODF_EXPORT QBrush loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfStylesReader &stylesReader, const QSizeF &size);
+
+    /// Loads gradient style with the given name from style stack and stylesReader adapted to the given size and returns a brush
+    KODF_EXPORT QBrush loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size);
+
+    KODF_EXPORT QBrush loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString &fill,  const KOdfStylesReader &stylesReader);
+
+    KODF_EXPORT QPen loadOdfStrokeStyle(const KOdfStyleStack &styleStack, const QString &stroke, const KOdfStylesReader &stylesReader);
+
+    /// Helper function to parse a transformation attribute
+    KODF_EXPORT QTransform loadTransformation(const QString &transformation);
+
+    /// Helper function to create a transformation attribute
+    KODF_EXPORT QString saveTransformation(const QTransform &transformation, bool appendTranslateUnit = true);
+
 }
 
 #endif /* KOODF_H */

@@ -33,7 +33,7 @@
 #include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfPageLayoutData.h>
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 
 #define MSOOXML_CURRENT_NS "p"
 #define MSOOXML_CURRENT_CLASS PptxXmlDocumentReader

@@ -29,7 +29,7 @@
 
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 
 #include <math.h>
 
@@ -82,7 +82,7 @@ void KoLineBorder::saveOdf(KOdfGenericStyle &style, KoShapeSavingContext &contex
         pen.setBrush(d->brush);
     else
         pen.setColor(d->color);
-    KoOdfGraphicStyles::saveOdfStrokeStyle(style, context.mainStyles(), pen);
+    KOdf::saveOdfStrokeStyle(style, context.mainStyles(), pen);
 }
 
 void KoLineBorder::borderInsets(KoInsets &insets) const

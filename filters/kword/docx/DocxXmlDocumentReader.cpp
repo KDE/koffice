@@ -32,7 +32,7 @@
 #include <MsooXmlRelationships.h>
 #include <MsooXmlUnits.h>
 #include <KXmlWriter.h>
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 #include <Charting.h>
 #include <ChartExport.h>
 #include <XlsxXmlChartReader.h>

@@ -55,7 +55,7 @@
 #include <KOdfGenericStyles.h>
 #include <KUnit.h>
 #include <KOdfStylesReader.h>
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 #include <KOdfLoadingContext.h>
 
 #include <QPainter>
@@ -1259,13 +1259,13 @@ KoShapeBorderBase *KoShape::loadOdfStroke(const KoXmlElement &element, KoShapeLo
 
     QString stroke = KoShapePrivate::getStyleProperty("stroke", context);
     if (stroke == "solid" || stroke == "dash") {
-        QPen pen = KoOdfGraphicStyles::loadOdfStrokeStyle(styleStack, stroke, stylesReader);
+        QPen pen = KOdf::loadOdfStrokeStyle(styleStack, stroke, stylesReader);
 
         KoLineBorder *border = new KoLineBorder();
 
         if (styleStack.hasProperty(KOdfXmlNS::koffice, "stroke-gradient")) {
             QString gradientName = styleStack.property(KOdfXmlNS::koffice, "stroke-gradient");
-            QBrush brush = KoOdfGraphicStyles::loadOdfGradientStyleByName(stylesReader, gradientName, size());
+            QBrush brush = KOdf::loadOdfGradientStyleByName(stylesReader, gradientName, size());
             border->setLineBrush(brush);
         } else {
             border->setColor(pen.color());

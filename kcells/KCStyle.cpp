@@ -32,7 +32,7 @@
 #include <KOdfGenericStyles.h>
 #include <KoGlobal.h>
 #include <KOdfStylesReader.h>
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 #include <KOdfStyleStack.h>
 #include <KUnit.h>
 #include <KOdfXmlNS.h>
@@ -481,7 +481,7 @@ void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const K
 
                 if (fill == "solid" || fill == "hatch") {
                     kDebug(36003) << " KCStyle ******************************************************";
-                    setBackgroundBrush(KoOdfGraphicStyles::loadOdfFillStyle(drawStyleStack, fill, stylesReader));
+                    setBackgroundBrush(KOdf::loadOdfFillStyle(drawStyleStack, fill, stylesReader));
 
                 } else
                     kDebug(36003) << " fill style not supported into kcells :" << fill;
@@ -1438,7 +1438,7 @@ void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KOdfGenericStyle &style
 QString KCStyle::saveOdfBackgroundStyle(KOdfGenericStyles &mainStyles, const QBrush &brush)
 {
     KOdfGenericStyle styleobjectauto = KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic");
-    KoOdfGraphicStyles::saveOdfFillStyle(styleobjectauto, mainStyles, brush);
+    KOdf::saveOdfFillStyle(styleobjectauto, mainStyles, brush);
     return mainStyles.insert(styleobjectauto, "gr");
 }
 

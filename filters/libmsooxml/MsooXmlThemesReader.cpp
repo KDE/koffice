@@ -25,7 +25,7 @@
 #include "MsooXmlSchemas.h"
 #include "MsooXmlUtils.h"
 #include "KXmlWriter.h"
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 #include <MsooXmlRelationships.h>
 
 #define MSOOXML_CURRENT_NS "a"
@@ -101,7 +101,7 @@ void DrawingMLSolidFill::writeStyles(KOdfGenericStyles& styles, KOdfGenericStyle
 {
     if (color.isValid()) {
         QBrush brush(color, Qt::SolidPattern);
-        KoOdfGraphicStyles::saveOdfFillStyle(*graphicStyle, styles, brush);
+        KOdf::saveOdfFillStyle(*graphicStyle, styles, brush);
     }
 }
 

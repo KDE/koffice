@@ -23,7 +23,7 @@
 #include <KOdfStyleStack.h>
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 #include <KoShapeSavingContext.h>
 
 #include <KDebug>
@@ -137,7 +137,7 @@ void KoGradientBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingConte
     Q_D(KoGradientBackground);
     QBrush brush(*d->gradient);
     brush.setTransform(d->matrix);
-    KoOdfGraphicStyles::saveOdfFillStyle(style, context.mainStyles(), brush);
+    KOdf::saveOdfFillStyle(style, context.mainStyles(), brush);
 }
 
 bool KoGradientBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &shapeSize)
@@ -149,7 +149,7 @@ bool KoGradientBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &
 
     QString fillStyle = styleStack.property(KOdfXmlNS::draw, "fill");
     if (fillStyle == "gradient") {
-        QBrush brush = KoOdfGraphicStyles::loadOdfGradientStyle(styleStack, context.stylesReader(), shapeSize);
+        QBrush brush = KOdf::loadOdfGradientStyle(styleStack, context.stylesReader(), shapeSize);
         const QGradient * gradient = brush.gradient();
         if (gradient) {
             d->gradient = KoFlake::cloneGradient(gradient);

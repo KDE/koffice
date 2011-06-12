@@ -1304,7 +1304,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_lnRef()
     }
 
     m_currentPen.setColor(m_currentColor);
-    KoOdfGraphicStyles::saveOdfStrokeStyle(*m_currentDrawStyle, *mainStyles, m_currentPen);
+    KOdf::saveOdfStrokeStyle(*m_currentDrawStyle, *mainStyles, m_currentPen);
 
     READ_EPILOGUE
 }
@@ -3722,7 +3722,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_ln()
         m_currentPen = QPen();
     }
 
-    KoOdfGraphicStyles::saveOdfStrokeStyle(*m_currentDrawStyle, *mainStyles, m_currentPen);
+    KOdf::saveOdfStrokeStyle(*m_currentDrawStyle, *mainStyles, m_currentPen);
 
     READ_EPILOGUE
 }

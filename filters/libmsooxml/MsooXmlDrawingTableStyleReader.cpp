@@ -21,7 +21,7 @@
 
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 
 #define MSOOXML_CURRENT_NS "a"
 #define MSOOXML_CURRENT_CLASS MsooXmlDrawingTableStyleReader

@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoOdfGraphicStyles.h"
+#include "KOdf.h"
 
 #include <QBrush>
 #include <QBuffer>
@@ -39,7 +39,7 @@
 #include "KOdfLoadingContext.h"
 #include "KOdfStylesReader.h"
 
-void KoOdfGraphicStyles::saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush & brush)
+void KOdf::saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush & brush)
 {
     switch (brush.style()) {
     case Qt::Dense1Pattern:
@@ -105,7 +105,7 @@ void KoOdfGraphicStyles::saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGener
     }
 }
 
-void KoOdfGraphicStyles::saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KOdfGenericStyles &mainStyles, const QPen &pen)
+void KOdf::saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KOdfGenericStyles &mainStyles, const QPen &pen)
 {
     // TODO implement all possibilities
     switch (pen.style()) {
@@ -160,7 +160,7 @@ void KoOdfGraphicStyles::saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KOdfG
     }
 }
 
-QString KoOdfGraphicStyles::saveOdfHatchStyle(KOdfGenericStyles& mainStyles, const QBrush &brush)
+QString KOdf::saveOdfHatchStyle(KOdfGenericStyles& mainStyles, const QBrush &brush)
 {
     KOdfGenericStyle hatchStyle(KOdfGenericStyle::HatchStyle /*no family name*/);
     hatchStyle.addAttribute("draw:color", brush.color().name());
@@ -197,7 +197,7 @@ QString KoOdfGraphicStyles::saveOdfHatchStyle(KOdfGenericStyles& mainStyles, con
     return mainStyles.insert(hatchStyle, "hatch");
 }
 
-QString KoOdfGraphicStyles::saveOdfGradientStyle(KOdfGenericStyles &mainStyles, const QBrush &brush)
+QString KOdf::saveOdfGradientStyle(KOdfGenericStyles &mainStyles, const QBrush &brush)
 {
     KOdfGenericStyle gradientStyle;
     if (brush.style() == Qt::RadialGradientPattern) {
@@ -255,7 +255,7 @@ QString KoOdfGraphicStyles::saveOdfGradientStyle(KOdfGenericStyles &mainStyles, 
     return mainStyles.insert(gradientStyle, "gradient");
 }
 
-QBrush KoOdfGraphicStyles::loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfStylesReader & stylesReader, const QSizeF &size)
+QBrush KOdf::loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfStylesReader & stylesReader, const QSizeF &size)
 {
     QString styleName = styleStack.property(KOdfXmlNS::draw, "fill-gradient-name");
     return loadOdfGradientStyleByName(stylesReader, styleName, size);
@@ -280,7 +280,7 @@ qreal percent(const KoXmlElement &element, const QString &ns, const QString &typ
     return tmp;
 }
 
-QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size)
+QBrush KOdf::loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size)
 {
     KoXmlElement* e = stylesReader.drawStyles()[styleName];
     if (! e)
@@ -450,7 +450,7 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &st
     return resultBrush;
 }
 
-QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString & fill,  const KOdfStylesReader & stylesReader)
+QBrush KOdf::loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString & fill,  const KOdfStylesReader & stylesReader)
 {
     QBrush tmpBrush; // default brush for "none" is a Qt::NoBrush
 
@@ -572,7 +572,7 @@ QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KOdfStyleStack &styleStack, co
     return tmpBrush;
 }
 
-QPen KoOdfGraphicStyles::loadOdfStrokeStyle(const KOdfStyleStack &styleStack, const QString & stroke, const KOdfStylesReader & stylesReader)
+QPen KOdf::loadOdfStrokeStyle(const KOdfStyleStack &styleStack, const QString & stroke, const KOdfStylesReader & stylesReader)
 {
     QPen tmpPen(Qt::NoPen); // default pen for "none" is a Qt::NoPen
 
@@ -640,7 +640,7 @@ QPen KoOdfGraphicStyles::loadOdfStrokeStyle(const KOdfStyleStack &styleStack, co
     return tmpPen;
 }
 
-QTransform KoOdfGraphicStyles::loadTransformation(const QString &transformation)
+QTransform KOdf::loadTransformation(const QString &transformation)
 {
     QTransform transform;
 
@@ -703,7 +703,7 @@ QTransform KoOdfGraphicStyles::loadTransformation(const QString &transformation)
     return transform;
 }
 
-QString KoOdfGraphicStyles::saveTransformation(const QTransform &transformation, bool appendTranslateUnit)
+QString KOdf::saveTransformation(const QTransform &transformation, bool appendTranslateUnit)
 {
     QString transform;
     if (appendTranslateUnit)

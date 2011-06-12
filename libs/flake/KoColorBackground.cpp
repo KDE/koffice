@@ -19,7 +19,7 @@
 
 #include "KoColorBackground.h"
 #include "KoShapeSavingContext.h"
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfXmlNS.h>
 
@@ -79,7 +79,7 @@ void KoColorBackground::paint(QPainter &painter, const QPainterPath &fillPath) c
 
 void KoColorBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
 {
-    KoOdfGraphicStyles::saveOdfFillStyle(style, context.mainStyles(), QBrush(d->color, d->style));
+    KOdf::saveOdfFillStyle(style, context.mainStyles(), QBrush(d->color, d->style));
 }
 
 bool KoColorBackground::loadStyle(KOdfLoadingContext & context, const QSizeF &)
@@ -90,7 +90,7 @@ bool KoColorBackground::loadStyle(KOdfLoadingContext & context, const QSizeF &)
 
     QString fillStyle = styleStack.property(KOdfXmlNS::draw, "fill");
     if (fillStyle == "solid" || fillStyle == "hatch") {
-        QBrush brush = KoOdfGraphicStyles::loadOdfFillStyle(styleStack, fillStyle, context.stylesReader());
+        QBrush brush = KOdf::loadOdfFillStyle(styleStack, fillStyle, context.stylesReader());
         d->color = brush.color();
         d->style = brush.style();
         return true;

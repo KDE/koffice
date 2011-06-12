@@ -365,7 +365,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_stroke()
     m_currentPen.setWidthF(m_strokeWidth);
     m_currentPen.setColor(QColor(m_strokeColor));
 
-    KoOdfGraphicStyles::saveOdfStrokeStyle(*m_currentDrawStyle, *mainStyles, m_currentPen);
+    KOdf::saveOdfStrokeStyle(*m_currentDrawStyle, *mainStyles, m_currentPen);
 
     readNext();
     READ_EPILOGUE

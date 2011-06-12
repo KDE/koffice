@@ -43,7 +43,7 @@
 #include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KOdf.h>
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 #include <styles/KoCharacterStyle.h>
 
 #include <kcells/Util.h>

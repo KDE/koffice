@@ -38,7 +38,7 @@
 
 #include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
-#include <KoOdfGraphicStyles.h>
+#include <KOdf.h>
 #include <KUnit.h>
 #include <QFontMetricsF>
 
