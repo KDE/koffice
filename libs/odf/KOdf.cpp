@@ -20,6 +20,12 @@
 
 #include "KOdf.h"
 
+#include <kdebug.h>
+
+#ifdef QCA2
+#  include <QtCrypto>
+#endif
+
 namespace KOdf
 {
 struct DocumentData {
@@ -55,6 +61,21 @@ const char * templateMimeType(DocumentType documentType)
 const char * bodyContentElement(DocumentType documentType, bool withNamespace)
 {
     return withNamespace ? s_documentData[documentType].bodyContentElement : s_documentData[documentType].bodyContentElement + 7;
+}
+
+bool isEncryptionSupported()
+{
+#ifdef QCA2
+    QCA::Initializer* initializer = new QCA::Initializer();
+    bool supported = QCA::isSupported("sha1") && QCA::isSupported("pbkdf2(sha1)") && QCA::isSupported("blowfish-cfb");
+    if (!supported) {
+        kWarning(30002) << "QCA is enabled but sha1, pbkdf2(sha1) or blowfish-cfb are not supported. Encryption is disabled.";
+    }
+    delete initializer;
+    return supported;
+#else
+    return false;
+#endif
 }
 
 }

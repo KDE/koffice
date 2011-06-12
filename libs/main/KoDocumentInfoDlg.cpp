@@ -44,7 +44,7 @@
 #endif
 
 #include <KoGlobal.h>
-#include <KoEncryptionChecker.h>
+#include <KOdf.h>
 
 #include <QLabel>
 #include <QLineEdit>
@@ -96,7 +96,7 @@ KoDocumentInfoDlg::KoDocumentInfoDlg(QWidget* parent, KoDocumentInfo* docInfo, K
     d->m_aboutUi = new Ui::KoDocumentInfoAboutWidget();
     QWidget *infodlg = new QWidget();
     d->m_aboutUi->setupUi(infodlg);
-    if (!KoEncryptionChecker::isEncryptionSupported()) {
+    if (!KOdf::isEncryptionSupported()) {
         d->m_aboutUi->lblEncryptedDesc->setVisible(false);
         d->m_aboutUi->lblEncrypted->setVisible(false);
         d->m_aboutUi->pbEncrypt->setVisible(false);

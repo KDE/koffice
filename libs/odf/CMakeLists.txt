@@ -14,7 +14,6 @@ set(koodf_LIB_SRCS
     DirectoryStore.cpp
     KOdfEmbeddedDocumentSaver.cpp
     EncryptedStore.cpp
-    KoEncryptionChecker.cpp
     KOdfFontData.cpp
     KOdfGenericChange.cpp
     KOdfGenericChanges.cpp

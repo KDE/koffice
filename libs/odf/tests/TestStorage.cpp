@@ -24,7 +24,7 @@
 #include <kapplication.h>
 
 #include <KOdfStore.h>
-#include <KoEncryptionChecker.h>
+#include <KOdf.h>
 #include <kdebug.h>
 #include <stdlib.h>
 
@@ -62,7 +62,7 @@ void TestStorage::storage_data()
     QTest::newRow("directory") << (int) KOdfStore::Directory << "testdir/maindoc.xml";
     QTest::newRow("zip") << (int) KOdfStore::Zip <<"test.zip";
 #ifdef QCA2
-    if (KoEncryptionChecker::isEncryptionSupported()) {
+    if (KOdf::isEncryptionSupported()) {
         QTest::newRow("Encrypted") << (int) KOdfStore::Encrypted << "testEncrypted.zip";
     }
 #endif

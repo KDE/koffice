@@ -20,7 +20,7 @@
 #ifdef QCA2
 
 #include "EncryptedStore_p.h"
-#include "KoEncryptionChecker.h"
+#include "KOdf.h"
 #include "KOdfStore_p.h"
 #include "KXmlReader.h"
 
@@ -129,7 +129,7 @@ bool EncryptedStore::init(Mode mode, const QByteArray & appIdentification)
     }
     d->mode = mode;
     if (mode == Write) {
-        d->good = KoEncryptionChecker::isEncryptionSupported();
+        d->good = KOdf::isEncryptionSupported();
         if (d->good) {
             if (!m_pZip->open(QIODevice::WriteOnly)) {
                 d->good = false;

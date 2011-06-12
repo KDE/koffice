@@ -143,6 +143,7 @@ namespace KOdf
     /// Helper function to create a transformation attribute
     KODF_EXPORT QString saveTransformation(const QTransform &transformation, bool appendTranslateUnit = true);
 
+    KODF_EXPORT bool isEncryptionSupported();
 }
 
 #endif /* KOODF_H */
