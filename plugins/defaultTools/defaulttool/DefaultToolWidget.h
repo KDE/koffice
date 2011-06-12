@@ -34,7 +34,7 @@ public:
     explicit DefaultToolWidget(KoInteractionTool* tool, QWidget *parent = 0);
 
     /// Sets the unit used by the unit aware child widgets
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 private slots:
     void positionSelected(KoFlake::Position position);

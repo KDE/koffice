@@ -37,7 +37,7 @@ set(koodf_LIB_SRCS
     KOdfStorageDevice.cpp
     KOdfStyleStack.cpp
     TarStore.cpp
-    KoUnit.cpp
+    KUnit.cpp
     KoXmlNS.cpp
     KoXmlReader.cpp
     KoXmlWriter.cpp
@@ -87,6 +87,6 @@ install( FILES
     KoXmlReader.h
     KoXmlWriter.h
     KProperties.h
-    KoUnit.h
+    KUnit.h
 DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
 

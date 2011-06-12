@@ -188,7 +188,7 @@ void GuidesToolOptionWidget::addLine()
     emit guideLineSelected(o, widget.positionList->currentRow());
 }
 
-void GuidesToolOptionWidget::setUnit(const KoUnit &unit)
+void GuidesToolOptionWidget::setUnit(const KUnit &unit)
 {
     m_unit = unit;
     widget.positionList->blockSignals(true);

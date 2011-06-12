@@ -201,7 +201,7 @@ void HorizontalPaintingStrategy::drawMeasurements(const KoRulerPrivate *d, QPain
     qreal numberStep = d->numberStepForUnit(); // number step in unit
     QRectF activeRangeRectangle;
     int numberStepPixel = qRound(d->viewConverter->documentToViewX(d->unit.fromUserValue(numberStep)));
-    const bool adjustMillimeters = d->unit.indexInList() == KoUnit::Millimeter;
+    const bool adjustMillimeters = d->unit.indexInList() == KUnit::Millimeter;
     QFontMetrics fontMetrics(KGlobalSettings::toolBarFont());
 
     if (numberStepPixel == 0 || numberStep == 0)
@@ -427,7 +427,7 @@ void VerticalPaintingStrategy::drawMeasurements(const KoRulerPrivate *d, QPainte
     QFontMetrics fontMetrics(KGlobalSettings::toolBarFont());
     // Calc the longest text length
     int textLength = 0;
-    const bool adjustMillimeters = d->unit.indexInList() == KoUnit::Millimeter;
+    const bool adjustMillimeters = d->unit.indexInList() == KUnit::Millimeter;
     for(int i = 0; i < lengthInPixel; i += numberStepPixel) {
         int number = qRound((i / numberStepPixel) * numberStep);
         if (adjustMillimeters)
@@ -561,7 +561,7 @@ void HorizontalDistancesPaintingStrategy::drawDistanceLine(const KoRulerPrivate 
     font.setPointSize(6);
     QFontMetrics fontMetrics(font);
     QString label = d->unit.toUserStringValue(
-            d->viewConverter->viewToDocumentX(line.length())) + ' ' + KoUnit::unitName(d->unit);
+            d->viewConverter->viewToDocumentX(line.length())) + ' ' + KUnit::unitName(d->unit);
     QPointF labelPosition = QPointF(midPoint.x() - fontMetrics.width(label)/2,
             midPoint.y() + fontMetrics.ascent()/2);
     painter.setFont(font);
@@ -608,7 +608,7 @@ void HorizontalDistancesPaintingStrategy::drawMeasurements(const KoRulerPrivate 
 }
 
 KoRulerPrivate::KoRulerPrivate(KoRuler *parent, const KoViewConverter *vc, Qt::Orientation o)
-    : unit(KoUnit(KoUnit::Point)),
+    : unit(KUnit(KUnit::Point)),
     orientation(o),
     viewConverter(vc),
     offset(0),
@@ -651,15 +651,15 @@ KoRulerPrivate::~KoRulerPrivate()
 qreal KoRulerPrivate::numberStepForUnit() const
 {
     switch(unit.indexInList()) {
-        case KoUnit::Inch:
-        case KoUnit::Centimeter:
-        case KoUnit::Decimeter:
+        case KUnit::Inch:
+        case KUnit::Centimeter:
+        case KUnit::Decimeter:
             return 1.0;
-        case KoUnit::Millimeter:
-        case KoUnit::Pica:
-        case KoUnit::Cicero:
+        case KUnit::Millimeter:
+        case KUnit::Pica:
+        case KUnit::Cicero:
             return 10.0;
-        case KoUnit::Point:
+        case KUnit::Point:
         default:
             return 100.0;
     }
@@ -756,12 +756,12 @@ KoRuler::~KoRuler()
     delete d;
 }
 
-KoUnit KoRuler::unit() const
+KUnit KoRuler::unit() const
 {
     return d->unit;
 }
 
-void KoRuler::setUnit(const KoUnit &unit)
+void KoRuler::setUnit(const KUnit &unit)
 {
     d->unit = unit;
     update();

@@ -37,7 +37,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
@@ -71,13 +71,13 @@ void KoPathShapePrivate::applyViewboxTransformation(const KoXmlElement &element)
     if (! viewBox.isEmpty()) {
         // load the desired size
         QSizeF size;
-        size.setWidth(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width", QString())));
-        size.setHeight(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height", QString())));
+        size.setWidth(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width", QString())));
+        size.setHeight(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height", QString())));
 
         // load the desired position
         QPointF pos;
-        pos.setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
-        pos.setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
+        pos.setX(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
+        pos.setY(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
 
         // create matrix to transform original path data into desired size and position
         QTransform viewMatrix;
@@ -132,11 +132,11 @@ bool KoPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &c
 
     if (element.localName() == "line") {
         QPointF start;
-        start.setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x1", "")));
-        start.setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y1", "")));
+        start.setX(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x1", "")));
+        start.setY(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y1", "")));
         QPointF end;
-        end.setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x2", "")));
-        end.setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y2", "")));
+        end.setX(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x2", "")));
+        end.setY(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y2", "")));
         moveTo(start);
         lineTo(end);
     } else if (element.localName() == "polyline" || element.localName() == "polygon") {
@@ -170,8 +170,8 @@ bool KoPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &c
     setTransformation(QTransform());
 
     if (element.hasAttributeNS(KoXmlNS::svg, "x") || element.hasAttributeNS(KoXmlNS::svg, "y")) {
-        pos.setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
-        pos.setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
+        pos.setX(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
+        pos.setY(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
     }
 
     setPosition(pos);

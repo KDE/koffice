@@ -28,7 +28,7 @@ KWDocumentColumns::KWDocumentColumns(QWidget *parent, const KOdfColumnData &colu
     widget.setupUi(this);
 
     setColumns(columns);
-    setUnit(KoUnit(KoUnit::Millimeter));
+    setUnit(KUnit(KUnit::Millimeter));
 
     QGridLayout *layout = new QGridLayout(widget.previewPane);
     widget.previewPane->setLayout(layout);
@@ -59,7 +59,7 @@ void KWDocumentColumns::setTextAreaAvailable(bool available)
     }
 }
 
-void KWDocumentColumns::setUnit(const KoUnit &unit)
+void KWDocumentColumns::setUnit(const KUnit &unit)
 {
     widget.spacing->setUnit(unit);
 }

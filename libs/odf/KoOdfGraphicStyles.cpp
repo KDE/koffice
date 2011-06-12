@@ -32,7 +32,7 @@
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 #include <KOdfStyleStack.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 
@@ -269,7 +269,7 @@ qreal percent(const KoXmlElement &element, const QString &ns, const QString &typ
         tmp = value.remove('%').toDouble() / 100.0;
     }
     else { // fixed value
-        tmp = KoUnit::parseValue(value) / absolute;
+        tmp = KUnit::parseValue(value) / absolute;
         // The following is done so that we get the same data as when we save/load.
         // This is needed that we get the same values due to rounding differences
         // of absolute and relative values.
@@ -303,8 +303,8 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &st
             // The default value for this attribute is objectBoundingBox.
             // The only value of the svg:gradientUnits attribute is objectBoundingBox.
 
-            qreal cx = KoUnit::parseValue(e->attributeNS(KoXmlNS::draw, "cx").remove('%'));
-            qreal cy = KoUnit::parseValue(e->attributeNS(KoXmlNS::draw, "cy").remove('%'));
+            qreal cx = KUnit::parseValue(e->attributeNS(KoXmlNS::draw, "cx").remove('%'));
+            qreal cy = KUnit::parseValue(e->attributeNS(KoXmlNS::draw, "cy").remove('%'));
             gradient = new QRadialGradient(QPointF(cx * 0.01, cy * 0.01), sqrt(0.5));
             gradient->setCoordinateMode(QGradient::ObjectBoundingMode);
         } else if (type == "linear" || type == "axial") {
@@ -408,7 +408,7 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &st
             QPointF center;
             center.setX(percent(*e, KoXmlNS::svg, "cx", "50%", size.width()));
             center.setY(percent(*e, KoXmlNS::svg, "cy", "50%", size.height()));
-            qreal angle = KoUnit::parseValue(e->attributeNS(KoXmlNS::draw, "angle", QString()));
+            qreal angle = KUnit::parseValue(e->attributeNS(KoXmlNS::draw, "angle", QString()));
             gradient = new QConicalGradient(center, angle);
             gradient->setCoordinateMode(QGradient::ObjectBoundingMode);
 
@@ -593,7 +593,7 @@ QPen KoOdfGraphicStyles::loadOdfStrokeStyle(const KOdfStyleStack &styleStack, co
             tmpPen.setColor(color);
         }
         if (styleStack.hasProperty(KoXmlNS::svg, "stroke-width"))
-            tmpPen.setWidthF(KoUnit::parseValue(styleStack.property(KoXmlNS::svg, "stroke-width")));
+            tmpPen.setWidthF(KUnit::parseValue(styleStack.property(KoXmlNS::svg, "stroke-width")));
         if (styleStack.hasProperty(KoXmlNS::draw, "stroke-linejoin")) {
             QString join = styleStack.property(KoXmlNS::draw, "stroke-linejoin");
             if (join == "bevel")
@@ -622,12 +622,12 @@ QPen KoOdfGraphicStyles::loadOdfStrokeStyle(const KOdfStyleStack &styleStack, co
             if (dashElement) {
                 QVector<qreal> dashes;
                 if (dashElement->hasAttributeNS(KoXmlNS::draw, "dots1")) {
-                    qreal dotLength = KoUnit::parseValue(dashElement->attributeNS(KoXmlNS::draw, "dots1-length", QString()));
+                    qreal dotLength = KUnit::parseValue(dashElement->attributeNS(KoXmlNS::draw, "dots1-length", QString()));
                     dashes.append(dotLength / width);
-                    qreal dotDistance = KoUnit::parseValue(dashElement->attributeNS(KoXmlNS::draw, "distance", QString()));
+                    qreal dotDistance = KUnit::parseValue(dashElement->attributeNS(KoXmlNS::draw, "distance", QString()));
                     dashes.append(dotDistance / width);
                     if (dashElement->hasAttributeNS(KoXmlNS::draw, "dots2")) {
-                        dotLength = KoUnit::parseValue(dashElement->attributeNS(KoXmlNS::draw, "dots2-length", QString()));
+                        dotLength = KUnit::parseValue(dashElement->attributeNS(KoXmlNS::draw, "dots2-length", QString()));
                         dashes.append(dotLength / width);
                         dashes.append(dotDistance / width);
                     }
@@ -662,8 +662,8 @@ QTransform KoOdfGraphicStyles::loadTransformation(const QString &transformation)
         if (subtransform[0] == "rotate") {
             // TODO find out what oo2 really does when rotating, it seems severly broken
             if (params.count() == 3) {
-                qreal x = KoUnit::parseValue(params[1]);
-                qreal y = KoUnit::parseValue(params[2]);
+                qreal x = KUnit::parseValue(params[1]);
+                qreal y = KUnit::parseValue(params[2]);
 
                 transform.translate(x, y);
                 // oo2 rotates by radians
@@ -675,11 +675,11 @@ QTransform KoOdfGraphicStyles::loadTransformation(const QString &transformation)
             }
         } else if (subtransform[0] == "translate") {
             if (params.count() == 2) {
-                qreal x = KoUnit::parseValue(params[0]);
-                qreal y = KoUnit::parseValue(params[1]);
+                qreal x = KUnit::parseValue(params[0]);
+                qreal y = KUnit::parseValue(params[1]);
                 transform.translate(x, y);
             } else   // Spec : if only one param given, assume 2nd param to be 0
-                transform.translate(KoUnit::parseValue(params[0]) , 0);
+                transform.translate(KUnit::parseValue(params[0]) , 0);
         } else if (subtransform[0] == "scale") {
             if (params.count() == 2)
                 transform.scale(params[0].toDouble(), params[1].toDouble());
@@ -695,7 +695,7 @@ QTransform KoOdfGraphicStyles::loadTransformation(const QString &transformation)
             if (params.count() >= 6) {
                 transform.setMatrix(params[0].toDouble(), params[1].toDouble(), 0,
                     params[2].toDouble(), params[3].toDouble(), 0,
-                    KoUnit::parseValue(params[4]), KoUnit::parseValue(params[5]), 1);
+                    KUnit::parseValue(params[4]), KUnit::parseValue(params[5]), 1);
             }
         }
     }

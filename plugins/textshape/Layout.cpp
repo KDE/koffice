@@ -42,7 +42,7 @@
 #include <KoInlineNote.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoShape.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoTextDocument.h>
 #include <KoChangeTracker.h>
 #include <KoChangeTrackerElement.h>

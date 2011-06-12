@@ -19,13 +19,13 @@
 
 #include "PngExportOptionsWidget.h"
 
-#include <KoUnit.h> // for POINT_TO_INCH
+#include <KUnit.h> // for POINT_TO_INCH
 #include <KoDpi.h>
 
 PngExportOptionsWidget::PngExportOptionsWidget(QSizeF pointSize, QWidget * parent)
         : QWidget(parent), m_pointSize(pointSize)
 {
-    KoUnit unit;
+    KUnit unit;
 
     widget.setupUi(this);
 
@@ -43,7 +43,7 @@ PngExportOptionsWidget::PngExportOptionsWidget(QSizeF pointSize, QWidget * paren
     widget.dpi->setSuffix(" DPI");
     widget.pxAspect->setKeepAspectRatio(true);
     widget.unitAspect->setKeepAspectRatio(true);
-    widget.unit->addItems(KoUnit::listOfUnitName());
+    widget.unit->addItems(KUnit::listOfUnitName());
     widget.unit->setCurrentIndex(unit.indexInList());
     widget.backColor->setColor(Qt::white);
     widget.opacity->setMinimum(0.0);
@@ -63,7 +63,7 @@ PngExportOptionsWidget::PngExportOptionsWidget(QSizeF pointSize, QWidget * paren
     connect(widget.unitAspect, SIGNAL(keepAspectRatioChanged(bool)), this, SLOT(aspectChanged(bool)));
 }
 
-void PngExportOptionsWidget::setUnit(const KoUnit &unit)
+void PngExportOptionsWidget::setUnit(const KUnit &unit)
 {
     widget.unitWidth->setUnit(unit);
     widget.unitHeight->setUnit(unit);
@@ -193,7 +193,7 @@ void PngExportOptionsWidget::dpiChanged(int)
 
 void PngExportOptionsWidget::unitChanged(int newUnit)
 {
-    KoUnit unit((KoUnit::Unit) newUnit);
+    KUnit unit((KUnit::Unit) newUnit);
     blockChildSignals(true);
     widget.unitWidth->setUnit(unit);
     widget.unitHeight->setUnit(unit);

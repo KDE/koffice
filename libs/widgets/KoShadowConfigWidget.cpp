@@ -19,7 +19,7 @@
 
 #include "KoShadowConfigWidget.h"
 #include "ui_KoShadowConfigWidget.h"
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoColorPopupAction.h>
 #include <QtGui/QCheckBox>
 #include <math.h>
@@ -119,7 +119,7 @@ void KoShadowConfigWidget::offsetChanged()
     emit shadowOffsetChanged( shadowOffset() );
 }
 
-void KoShadowConfigWidget::setUnit( const KoUnit &unit )
+void KoShadowConfigWidget::setUnit( const KUnit &unit )
 {
     d->widget.shadowOffset->setUnit( unit );
 }

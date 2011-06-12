@@ -36,7 +36,7 @@
 #include <ksharedconfig.h>
 #include <kvbox.h>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 
 class KIntNumInput;
 class KDoubleNumInput;

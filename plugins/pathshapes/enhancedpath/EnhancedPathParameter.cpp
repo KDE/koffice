@@ -20,7 +20,7 @@
 #include "EnhancedPathParameter.h"
 #include "EnhancedPathFormula.h"
 #include "EnhancedPathShape.h"
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <math.h>
 
 QString identifierData[] = {
@@ -129,10 +129,10 @@ qreal EnhancedPathNamedParameter::evaluate()
         return viewBox.height();
         break;
     case IdentifierLogwidth:
-        return KoUnit::toMillimeter(viewBox.width()) * 100;
+        return KUnit::toMillimeter(viewBox.width()) * 100;
         break;
     case IdentifierLogheight:
-        return KoUnit::toMillimeter(viewBox.height()) * 100;
+        return KUnit::toMillimeter(viewBox.height()) * 100;
         break;
     default:
         break;

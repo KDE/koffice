@@ -378,7 +378,7 @@ QRect KarbonCanvas::viewToWidget(const QRect& r) const
     return r.translated(d->origin);
 }
 
-KoUnit KarbonCanvas::unit() const
+KUnit KarbonCanvas::unit() const
 {
     return d->part->unit();
 }

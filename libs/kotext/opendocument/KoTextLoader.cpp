@@ -47,7 +47,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoTextShapeData.h>
 #include "KoTextSharedLoadingData.h"
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoVariable.h>
 #include <KoVariableManager.h>
 #include <KoInlineObjectRegistry.h>

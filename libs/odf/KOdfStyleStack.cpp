@@ -19,7 +19,7 @@
 */
 
 #include "KOdfStyleStack.h"
-#include "KoUnit.h"
+#include "KUnit.h"
 #include "KoXmlNS.h"
 
 #include <kdebug.h>
@@ -176,7 +176,7 @@ qreal KOdfStyleStack::fontSize(const qreal defaultFontPointSize) const
                 if (percent == 1)
                     percent = value.left(value.length() - 1).toDouble() / 100.0;
             } else
-                return percent * KoUnit::parseValue(value);   // e.g. 12pt
+                return percent * KUnit::parseValue(value);   // e.g. 12pt
         }
     }
 

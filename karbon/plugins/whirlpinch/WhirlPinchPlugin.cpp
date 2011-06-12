@@ -176,7 +176,7 @@ void WhirlPinchDlg::setRadius(qreal value)
     m_radius->setValue(value);
 }
 
-void WhirlPinchDlg::setUnit(const KoUnit &unit)
+void WhirlPinchDlg::setUnit(const KUnit &unit)
 {
     m_radius->setUnit(unit);
 }

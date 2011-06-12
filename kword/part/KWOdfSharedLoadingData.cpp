@@ -101,7 +101,7 @@ void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KoXmlElement &e
             }
 
             if (textBox.hasAttributeNS(KoXmlNS::fo, "min-height")) {
-                frame->setMinimumFrameHeight(KoUnit::parseValue(textBox.attributeNS(KoXmlNS::fo, "min-height")));
+                frame->setMinimumFrameHeight(KUnit::parseValue(textBox.attributeNS(KoXmlNS::fo, "min-height")));
                 KoShape *shape = frame->shape();
                 QSizeF newSize = shape->size();
                 if (newSize.height() < frame->minimumFrameHeight()) {

@@ -21,7 +21,7 @@
 
 #include <ui_KWStartupWidget.h>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfPageLayoutData.h>
 
 #include <QWidget>
@@ -52,7 +52,7 @@ private slots:
     void sizeUpdated(const KOdfPageLayoutData &layout);
     void columnsUpdated(const KOdfColumnData &columns);
     void buttonClicked();
-    void unitChanged(const KoUnit &unit);
+    void unitChanged(const KUnit &unit);
 
 signals:
     /// this signal is emitted (as defined by KoDocument) the moment the document is 'ready'
@@ -67,7 +67,7 @@ private:
     KOdfColumnData m_columns;
     KWDocument *m_doc;
     Ui::KWStartupWidget widget;
-    KoUnit m_unit;
+    KUnit m_unit;
 };
 
 #endif

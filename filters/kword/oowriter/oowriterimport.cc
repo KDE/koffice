@@ -41,7 +41,7 @@
 #include <kpluginfactory.h>
 #include <kmessagebox.h>
 #include <KoFilterChain.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfPageLayoutData.h>
 #include <Picture.h>
 #include "conversion.h"
@@ -355,8 +355,8 @@ void OoWriterImport::writePageLayout(QDomDocument& mainDocument, const QString& 
         KoXmlElement properties(KoXml::namedItemNS(*style, ooNS::style, "properties"));
         Q_ASSERT(!properties.isNull());
         orientation = ((properties.attributeNS(ooNS::style, "print-orientation", QString()) != "portrait") ? KOdfPageFormat::Landscape : KOdfPageFormat::Portrait);
-        width = KoUnit::parseValue(properties.attributeNS(ooNS::fo, "page-width", QString()));
-        height = KoUnit::parseValue(properties.attributeNS(ooNS::fo, "page-height", QString()));
+        width = KUnit::parseValue(properties.attributeNS(ooNS::fo, "page-width", QString()));
+        height = KUnit::parseValue(properties.attributeNS(ooNS::fo, "page-height", QString()));
         kDebug(30518) << "width=" << width << " height=" << height;
         // guessFormat takes millimeters
         if (orientation == KOdfPageFormat::Landscape)
@@ -364,10 +364,10 @@ void OoWriterImport::writePageLayout(QDomDocument& mainDocument, const QString& 
         else
             paperFormat = KOdfPageFormat::guessFormat(POINT_TO_MM(width), POINT_TO_MM(height));
 
-        marginLeft = KoUnit::parseValue(properties.attributeNS(ooNS::fo, "margin-left", QString()));
-        marginTop = KoUnit::parseValue(properties.attributeNS(ooNS::fo, "margin-top", QString()));
-        marginRight = KoUnit::parseValue(properties.attributeNS(ooNS::fo, "margin-right", QString()));
-        marginBottom = KoUnit::parseValue(properties.attributeNS(ooNS::fo, "margin-bottom", QString()));
+        marginLeft = KUnit::parseValue(properties.attributeNS(ooNS::fo, "margin-left", QString()));
+        marginTop = KUnit::parseValue(properties.attributeNS(ooNS::fo, "margin-top", QString()));
+        marginRight = KUnit::parseValue(properties.attributeNS(ooNS::fo, "margin-right", QString()));
+        marginBottom = KUnit::parseValue(properties.attributeNS(ooNS::fo, "margin-bottom", QString()));
 
         KoXmlElement footnoteSep = KoXml::namedItemNS(properties, ooNS::style, "footnote-sep");
         if (!footnoteSep.isNull()) {
@@ -375,7 +375,7 @@ void OoWriterImport::writePageLayout(QDomDocument& mainDocument, const QString& 
             // style:distance-after-sep="0.101cm" style:adjustment="left"
             // style:rel-width="25%" style:color="#000000"
             QString width = footnoteSep.attributeNS(ooNS::style, "width", QString());
-            elementPaper.setAttribute("slFootNoteWidth", KoUnit::parseValue(width));
+            elementPaper.setAttribute("slFootNoteWidth", KUnit::parseValue(width));
             QString pageWidth = footnoteSep.attributeNS(ooNS::style, "rel-width", QString());
             if (pageWidth.endsWith('%')) {
                 pageWidth.truncate(pageWidth.length() - 1);   // remove '%'
@@ -1461,10 +1461,10 @@ void OoWriterImport::importFrame(QDomElement& frameElementOut, const KoXmlElemen
     double width = 100;
     if (object.hasAttributeNS(ooNS::svg, "width")) {     // fixed width
         // TODO handle percentage (of enclosing table/frame/page)
-        width = KoUnit::parseValue(object.attributeNS(ooNS::svg, "width", QString()));
+        width = KUnit::parseValue(object.attributeNS(ooNS::svg, "width", QString()));
     } else if (object.hasAttributeNS(ooNS::fo, "min-width")) {
         // min-width is not supported in KWord. Let's use it as a fixed width.
-        width = KoUnit::parseValue(object.attributeNS(ooNS::fo, "min-width", QString()));
+        width = KUnit::parseValue(object.attributeNS(ooNS::fo, "min-width", QString()));
     } else {
         kWarning(30518) << "Error in text-box: neither width nor min-width specified!";
     }
@@ -1472,9 +1472,9 @@ void OoWriterImport::importFrame(QDomElement& frameElementOut, const KoXmlElemen
     bool hasMinHeight = false;
     if (object.hasAttributeNS(ooNS::svg, "height")) {     // fixed height
         // TODO handle percentage (of enclosing table/frame/page)
-        height = KoUnit::parseValue(object.attributeNS(ooNS::svg, "height", QString()));
+        height = KUnit::parseValue(object.attributeNS(ooNS::svg, "height", QString()));
     } else if (object.hasAttributeNS(ooNS::fo, "min-height")) {
-        height = KoUnit::parseValue(object.attributeNS(ooNS::fo, "min-height", QString()));
+        height = KUnit::parseValue(object.attributeNS(ooNS::fo, "min-height", QString()));
         hasMinHeight = true;
     } else {
         kWarning(30518) << "Error in text-box: neither height nor min-height specified!";
@@ -1492,8 +1492,8 @@ void OoWriterImport::importFrame(QDomElement& frameElementOut, const KoXmlElemen
     // TODO draw:auto-grow-height  draw:auto-grow-width - hmm? I thought min-height meant auto-grow-height...
 
 
-    QRectF frameRect(KoUnit::parseValue(object.attributeNS(ooNS::svg, "x", QString())),
-                     KoUnit::parseValue(object.attributeNS(ooNS::svg, "y", QString())),
+    QRectF frameRect(KUnit::parseValue(object.attributeNS(ooNS::svg, "x", QString())),
+                     KUnit::parseValue(object.attributeNS(ooNS::svg, "y", QString())),
                      width, height);
 
     frameElementOut.setAttribute("left", frameRect.left());
@@ -1531,10 +1531,10 @@ void OoWriterImport::importFrame(QDomElement& frameElementOut, const KoXmlElemen
 void OoWriterImport::importCommonFrameProperties(QDomElement& frameElementOut)
 {
     // padding. fo:padding for 4 values or padding-left/right/top/bottom (3.11.29 p228)
-    double paddingLeft = KoUnit::parseValue(m_styleStack.property(ooNS::fo, "padding", "left"));
-    double paddingRight = KoUnit::parseValue(m_styleStack.property(ooNS::fo, "padding", "right"));
-    double paddingTop = KoUnit::parseValue(m_styleStack.property(ooNS::fo, "padding", "top"));
-    double paddingBottom = KoUnit::parseValue(m_styleStack.property(ooNS::fo, "padding", "bottom"));
+    double paddingLeft = KUnit::parseValue(m_styleStack.property(ooNS::fo, "padding", "left"));
+    double paddingRight = KUnit::parseValue(m_styleStack.property(ooNS::fo, "padding", "right"));
+    double paddingTop = KUnit::parseValue(m_styleStack.property(ooNS::fo, "padding", "top"));
+    double paddingBottom = KUnit::parseValue(m_styleStack.property(ooNS::fo, "padding", "bottom"));
 
     if (paddingLeft != 0)
         frameElementOut.setAttribute("bleftpt", paddingLeft);
@@ -2092,7 +2092,7 @@ void OoWriterImport::parseTable(QDomDocument &doc, const KoXmlElement& parent, Q
                 }
                 const QString strWidth(elemProps.attributeNS(ooNS::style, "column-width", QString()));
                 kDebug(30518) << "- raw style width" << strWidth;
-                width = KoUnit::parseValue(strWidth);
+                width = KUnit::parseValue(strWidth);
             } else
                 kWarning(30518) << "Could not find table column style!";
 

@@ -261,7 +261,7 @@ KarbonView::KarbonView(KarbonPart* p, QWidget* parent)
     new KoRulerController(d->horizRuler, d->canvas->resourceManager());
 
     layout->addWidget(d->horizRuler, 0, 1);
-    connect(p, SIGNAL(unitChanged(const KoUnit&)), this, SLOT(updateUnit(const KoUnit&)));
+    connect(p, SIGNAL(unitChanged(const KUnit&)), this, SLOT(updateUnit(const KUnit&)));
 
     d->vertRuler = new KoRuler(this, Qt::Vertical, d->canvas->viewConverter());
     d->vertRuler->setShowMousePosition(true);
@@ -1162,7 +1162,7 @@ void KarbonView::updateReadWrite(bool readwrite)
     KoToolManager::instance()->updateReadWrite(d->canvasController, readwrite);
 }
 
-void KarbonView::updateUnit(const KoUnit &unit)
+void KarbonView::updateUnit(const KUnit &unit)
 {
     d->horizRuler->setUnit(unit);
     d->vertRuler->setUnit(unit);

@@ -52,7 +52,7 @@
 #include <styles/KoCharacterStyle.h>
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <qdom.h>
 #include <QColor>
@@ -1302,7 +1302,7 @@ MSOOXML_EXPORT QString Utils::ST_PositiveUniversalMeasure_to_cm(const QString& v
     QString v(ST_PositiveUniversalMeasure_to_ODF(value));
     if (v.isEmpty())
         return QString();
-    return cmString(POINT_TO_CM(KoUnit::parseValue(v)));
+    return cmString(POINT_TO_CM(KUnit::parseValue(v)));
 }
 
 // </units> -------------------

@@ -53,7 +53,7 @@ void StyleManagerDialog::setStyleManager(KoStyleManager *sm)
     m_styleManagerWidget->setStyleManager(sm);
 }
 
-void StyleManagerDialog::setUnit(const KoUnit &unit)
+void StyleManagerDialog::setUnit(const KUnit &unit)
 {
     m_styleManagerWidget->setUnit(unit);
 }

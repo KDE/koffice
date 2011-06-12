@@ -39,7 +39,7 @@ public:
     KOdfColumnData columns() const { return m_columns; }
 
     void setShowPreview(bool on);
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 signals:
     void columnsChanged(const KOdfColumnData &columns);

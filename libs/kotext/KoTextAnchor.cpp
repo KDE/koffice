@@ -32,7 +32,7 @@
 #include <KoXmlNS.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <QTextInlineObject>
 #include <QFontMetricsF>

@@ -372,7 +372,7 @@ void GuidesTool::resourceChanged(int key, const QVariant &res)
 {
     if (key == KoCanvasResource::Unit) {
         if (m_options)
-            m_options->setUnit(res.value<KoUnit>());
+            m_options->setUnit(res.value<KUnit>());
     }
 }
 

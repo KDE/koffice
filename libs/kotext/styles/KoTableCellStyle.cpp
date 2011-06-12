@@ -33,7 +33,7 @@
 #include <QTextTable>
 #include <QTextTableFormat>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
@@ -414,15 +414,15 @@ void KoTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     // Padding
     if (styleStack.hasProperty(KoXmlNS::fo, "padding-left"))
-        setLeftPadding(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "padding-left")));
+        setLeftPadding(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "padding-left")));
     if (styleStack.hasProperty(KoXmlNS::fo, "padding-right"))
-        setRightPadding(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "padding-right")));
+        setRightPadding(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "padding-right")));
     if (styleStack.hasProperty(KoXmlNS::fo, "padding-top"))
-        setTopPadding(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "padding-top")));
+        setTopPadding(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "padding-top")));
     if (styleStack.hasProperty(KoXmlNS::fo, "padding-bottom"))
-        setBottomPadding(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "padding-bottom")));
+        setBottomPadding(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "padding-bottom")));
     if (styleStack.hasProperty(KoXmlNS::fo, "padding"))
-        setPadding(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "padding")));
+        setPadding(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "padding")));
 
     // Borders
     if (styleStack.hasProperty(KoXmlNS::fo, "border", "left")) {
@@ -432,7 +432,7 @@ void KoTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
             style = styleStack.property(KoXmlNS::koffice, "specialborder", "left");
         }
         if (!border.isEmpty() && border != "none" && border != "hidden") {
-            setEdge(Left, oasisBorderStyle(style), KoUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
+            setEdge(Left, oasisBorderStyle(style), KUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
         }
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "border", "top")) {
@@ -442,7 +442,7 @@ void KoTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
             style = styleStack.property(KoXmlNS::koffice, "specialborder", "top");
         }
         if (!border.isEmpty() && border != "none" && border != "hidden") {
-            setEdge(Top, oasisBorderStyle(style), KoUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
+            setEdge(Top, oasisBorderStyle(style), KUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
         }
     }
 
@@ -453,7 +453,7 @@ void KoTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
             style = styleStack.property(KoXmlNS::koffice, "specialborder", "right");
         }
         if (!border.isEmpty() && border != "none" && border != "hidden") {
-            setEdge(Right, oasisBorderStyle(style), KoUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
+            setEdge(Right, oasisBorderStyle(style), KUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
         }
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "border", "bottom")) {
@@ -463,7 +463,7 @@ void KoTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
             style = styleStack.property(KoXmlNS::koffice, "specialborder", "bottom");
         }
         if (!border.isEmpty() && border != "none" && border != "hidden") {
-            setEdge(Bottom, oasisBorderStyle(style), KoUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
+            setEdge(Bottom, oasisBorderStyle(style), KUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
         }
     }
     if (styleStack.hasProperty(KoXmlNS::style, "diagonal-tl-br")) {
@@ -472,7 +472,7 @@ void KoTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
         if (styleStack.hasProperty(KoXmlNS::koffice, "specialborder", "tl-br")) {
             style = styleStack.property(KoXmlNS::koffice, "specialborder", "tl-br");
         }
-        setEdge(TopLeftToBottomRight, oasisBorderStyle(style), KoUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
+        setEdge(TopLeftToBottomRight, oasisBorderStyle(style), KUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
     }
     if (styleStack.hasProperty(KoXmlNS::style, "diagonal-bl-tr")) {
         QString border = styleStack.property(KoXmlNS::style, "diagonal-bl-tr");
@@ -480,49 +480,49 @@ void KoTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
         if (styleStack.hasProperty(KoXmlNS::koffice, "specialborder", "bl-tr")) {
             style = styleStack.property(KoXmlNS::koffice, "specialborder", "bl-tr");
         }
-        setEdge(BottomLeftToTopRight, oasisBorderStyle(style), KoUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
+        setEdge(BottomLeftToTopRight, oasisBorderStyle(style), KUnit::parseValue(border.section(' ', 0, 0), 1.0),QColor(border.section(' ', 2, 2)));
     }
 
     if (styleStack.hasProperty(KoXmlNS::style, "border-line-width", "left")) {
         QString borderLineWidth = styleStack.property(KoXmlNS::style, "border-line-width", "left");
         if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
             QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
-            setEdgeDoubleBorderValues(Left, KoUnit::parseValue(blw[0], 1.0), KoUnit::parseValue(blw[1], 0.1));
+            setEdgeDoubleBorderValues(Left, KUnit::parseValue(blw[0], 1.0), KUnit::parseValue(blw[1], 0.1));
         }
     }
     if (styleStack.hasProperty(KoXmlNS::style, "border-line-width", "top")) {
         QString borderLineWidth = styleStack.property(KoXmlNS::style, "border-line-width", "top");
         if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
             QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
-            setEdgeDoubleBorderValues(Top, KoUnit::parseValue(blw[0], 1.0), KoUnit::parseValue(blw[1], 0.1));
+            setEdgeDoubleBorderValues(Top, KUnit::parseValue(blw[0], 1.0), KUnit::parseValue(blw[1], 0.1));
         }
     }
     if (styleStack.hasProperty(KoXmlNS::style, "border-line-width", "right")) {
         QString borderLineWidth = styleStack.property(KoXmlNS::style, "border-line-width", "right");
         if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
             QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
-            setEdgeDoubleBorderValues(Right, KoUnit::parseValue(blw[0], 1.0), KoUnit::parseValue(blw[1], 0.1));
+            setEdgeDoubleBorderValues(Right, KUnit::parseValue(blw[0], 1.0), KUnit::parseValue(blw[1], 0.1));
         }
     }
     if (styleStack.hasProperty(KoXmlNS::style, "border-line-width", "bottom")) {
         QString borderLineWidth = styleStack.property(KoXmlNS::style, "border-line-width", "bottom");
         if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
             QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
-            setEdgeDoubleBorderValues(Bottom, KoUnit::parseValue(blw[0], 1.0), KoUnit::parseValue(blw[1], 0.1));
+            setEdgeDoubleBorderValues(Bottom, KUnit::parseValue(blw[0], 1.0), KUnit::parseValue(blw[1], 0.1));
         }
     }
     if (styleStack.hasProperty(KoXmlNS::style, "diagonal-tl-br-widths")) {
         QString borderLineWidth = styleStack.property(KoXmlNS::style, "diagonal-tl-br-widths");
         if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
             QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
-            setEdgeDoubleBorderValues(TopLeftToBottomRight, KoUnit::parseValue(blw[0], 1.0), KoUnit::parseValue(blw[1], 0.1));
+            setEdgeDoubleBorderValues(TopLeftToBottomRight, KUnit::parseValue(blw[0], 1.0), KUnit::parseValue(blw[1], 0.1));
         }
     }
     if (styleStack.hasProperty(KoXmlNS::style, "diagonal-bl-tr-widths")) {
         QString borderLineWidth = styleStack.property(KoXmlNS::style, "diagonal-bl-tr-widths");
         if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
             QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
-            setEdgeDoubleBorderValues(BottomLeftToTopRight, KoUnit::parseValue(blw[0], 1.0), KoUnit::parseValue(blw[1], 0.1));
+            setEdgeDoubleBorderValues(BottomLeftToTopRight, KUnit::parseValue(blw[0], 1.0), KUnit::parseValue(blw[1], 0.1));
         }
     }
 

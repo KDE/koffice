@@ -39,7 +39,7 @@
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KoOdfGraphicStyles.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <kde_file.h> // for WARNING
 

@@ -209,7 +209,7 @@ void KCDoc::initConfig()
     KSharedConfigPtr config = KCFactory::global().config();
 
     const int page = config->group("KCells Page Layout").readEntry("Default unit page", 0);
-    setUnit(KoUnit((KoUnit::Unit) page));
+    setUnit(KUnit((KUnit::Unit) page));
 }
 
 KoView* KCDoc::createViewInstance(QWidget* parent)

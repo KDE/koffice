@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoUnit.h"
+#include "KUnit.h"
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -26,18 +26,18 @@
 
 #include <QRegExp>
 
-QStringList KoUnit::listOfUnitName(bool hidePixel)
+QStringList KUnit::listOfUnitName(bool hidePixel)
 {
     QStringList lst;
-    for (int i = KoUnit::Millimeter; i <= KoUnit::Pixel; ++i) {
+    for (int i = KUnit::Millimeter; i <= KUnit::Pixel; ++i) {
         Unit unit = static_cast<Unit>(i);
         if ((i != Pixel) || (hidePixel == false))
-            lst.append(KoUnit::unitDescription(KoUnit(unit)));
+            lst.append(KUnit::unitDescription(KUnit(unit)));
     }
     return lst;
 }
 
-int KoUnit::indexInList(PixelVisibility visibility) const
+int KUnit::indexInList(PixelVisibility visibility) const
 {
     if (visibility == HidePixel && m_unit > Pixel)
         return m_unit -1;
@@ -45,31 +45,31 @@ int KoUnit::indexInList(PixelVisibility visibility) const
         return m_unit;
 }
 
-QString KoUnit::unitDescription(KoUnit _unit)
+QString KUnit::unitDescription(KUnit _unit)
 {
     switch (_unit.m_unit) {
-    case KoUnit::Millimeter:
+    case KUnit::Millimeter:
         return i18n("Millimeters (mm)");
-    case KoUnit::Centimeter:
+    case KUnit::Centimeter:
         return i18n("Centimeters (cm)");
-    case KoUnit::Decimeter:
+    case KUnit::Decimeter:
         return i18n("Decimeters (dm)");
-    case KoUnit::Inch:
+    case KUnit::Inch:
         return i18n("Inches (in)");
-    case KoUnit::Pica:
+    case KUnit::Pica:
         return i18n("Pica (pi)");
-    case KoUnit::Cicero:
+    case KUnit::Cicero:
         return i18n("Cicero (cc)");
-    case KoUnit::Point:
+    case KUnit::Point:
         return i18n("Points (pt)");
-    case KoUnit::Pixel:
+    case KUnit::Pixel:
         return i18n("Pixels (px)");
     default:
         return i18n("Error!");
     }
 }
 
-qreal KoUnit::toUserValue(qreal ptValue) const
+qreal KUnit::toUserValue(qreal ptValue) const
 {
     switch (m_unit) {
     case Millimeter:
@@ -92,7 +92,7 @@ qreal KoUnit::toUserValue(qreal ptValue) const
     }
 }
 
-qreal KoUnit::ptToUnit(const qreal ptValue, const KoUnit &unit)
+qreal KUnit::ptToUnit(const qreal ptValue, const KUnit &unit)
 {
     switch (unit.m_unit) {
     case Millimeter:
@@ -115,12 +115,12 @@ qreal KoUnit::ptToUnit(const qreal ptValue, const KoUnit &unit)
     }
 }
 
-QString KoUnit::toUserStringValue(qreal ptValue) const
+QString KUnit::toUserStringValue(qreal ptValue) const
 {
     return KGlobal::locale()->formatNumber(toUserValue(ptValue));
 }
 
-qreal KoUnit::fromUserValue(qreal value) const
+qreal KUnit::fromUserValue(qreal value) const
 {
     switch (m_unit) {
     case Millimeter:
@@ -143,12 +143,12 @@ qreal KoUnit::fromUserValue(qreal value) const
     }
 }
 
-qreal KoUnit::fromUserValue(const QString &value, bool *ok) const
+qreal KUnit::fromUserValue(const QString &value, bool *ok) const
 {
     return fromUserValue(KGlobal::locale()->readNumber(value, ok));
 }
 
-qreal KoUnit::parseValue(const QString& _value, qreal defaultVal)
+qreal KUnit::parseValue(const QString& _value, qreal defaultVal)
 {
     if (_value.isEmpty())
         return defaultVal;
@@ -177,7 +177,7 @@ qreal KoUnit::parseValue(const QString& _value, qreal defaultVal)
         return val;
 
     bool ok;
-    KoUnit u = KoUnit::unit(unit, &ok);
+    KUnit u = KUnit::unit(unit, &ok);
     if (ok)
         return u.fromUserValue(val);
 
@@ -185,31 +185,31 @@ qreal KoUnit::parseValue(const QString& _value, qreal defaultVal)
         return DM_TO_POINT(val * 10.0);
     else if (unit == "km")
         return DM_TO_POINT(val * 10000.0);
-    kWarning() << "KoUnit::parseValue: Unit " << unit << " is not supported, please report.";
+    kWarning() << "KUnit::parseValue: Unit " << unit << " is not supported, please report.";
 
     // TODO : add support for mi/ft ?
     return defaultVal;
 }
 
-KoUnit KoUnit::unit(const QString &_unitName, bool* ok)
+KUnit KUnit::unit(const QString &_unitName, bool* ok)
 {
     if (ok)
         *ok = true;
-    if (_unitName == QString::fromLatin1("mm")) return KoUnit(Millimeter);
-    if (_unitName == QString::fromLatin1("cm")) return KoUnit(Centimeter);
-    if (_unitName == QString::fromLatin1("dm")) return KoUnit(Decimeter);
+    if (_unitName == QString::fromLatin1("mm")) return KUnit(Millimeter);
+    if (_unitName == QString::fromLatin1("cm")) return KUnit(Centimeter);
+    if (_unitName == QString::fromLatin1("dm")) return KUnit(Decimeter);
     if (_unitName == QString::fromLatin1("in")
-            || _unitName == QString::fromLatin1("inch") /*compat*/) return KoUnit(Inch);
-    if (_unitName == QString::fromLatin1("pi")) return KoUnit(Pica);
-    if (_unitName == QString::fromLatin1("cc")) return KoUnit(Cicero);
-    if (_unitName == QString::fromLatin1("pt")) return KoUnit(Point);
-    if (_unitName == QString::fromLatin1("px")) return KoUnit(Pixel);
+            || _unitName == QString::fromLatin1("inch") /*compat*/) return KUnit(Inch);
+    if (_unitName == QString::fromLatin1("pi")) return KUnit(Pica);
+    if (_unitName == QString::fromLatin1("cc")) return KUnit(Cicero);
+    if (_unitName == QString::fromLatin1("pt")) return KUnit(Point);
+    if (_unitName == QString::fromLatin1("px")) return KUnit(Pixel);
     if (ok)
         *ok = false;
-    return KoUnit(Point);
+    return KUnit(Point);
 }
 
-QString KoUnit::unitName(KoUnit _unit)
+QString KUnit::unitName(KUnit _unit)
 {
     if (_unit.m_unit == Millimeter) return QString::fromLatin1("mm");
     if (_unit.m_unit == Centimeter) return QString::fromLatin1("cm");
@@ -222,10 +222,10 @@ QString KoUnit::unitName(KoUnit _unit)
 }
 
 #ifndef QT_NO_DEBUG_STREAM
-QDebug operator<<(QDebug debug, const KoUnit &unit)
+QDebug operator<<(QDebug debug, const KUnit &unit)
 {
 #ifndef NDEBUG
-    debug.nospace() << KoUnit::unitName(unit);
+    debug.nospace() << KUnit::unitName(unit);
 #else
     Q_UNUSED(unit);
 #endif

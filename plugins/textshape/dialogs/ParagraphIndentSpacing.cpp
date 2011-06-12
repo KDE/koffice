@@ -201,7 +201,7 @@ void ParagraphIndentSpacing::save(KoParagraphStyle *style)
     style->setLineSpacingFromFont(widget.lineSpacing->currentIndex() != 5 && widget.useFont->isChecked());
 }
 
-void ParagraphIndentSpacing::setUnit(const KoUnit &unit)
+void ParagraphIndentSpacing::setUnit(const KUnit &unit)
 {
     widget.first->setUnit(unit);
     widget.left->setUnit(unit);

@@ -27,7 +27,7 @@
 #include "flake_export.h"
 #include <kaction.h>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 
 class KoShape;
 class QUndoCommand;
@@ -74,7 +74,7 @@ public:
      * Called by the tool that created the shape using KoCavasBase::unit()
      * @param unit the new unit to show data in.
      */
-    virtual void setUnit(KoUnit unit);
+    virtual void setUnit(KUnit unit);
 
     /// called to set the canvas resource manager of the canvas the user used to insert the new shape.
     void setResourceManager(KoResourceManager *rm);

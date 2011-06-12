@@ -1782,12 +1782,12 @@ void KCCell::loadOdfObject(const KoXmlElement &element, KoShapeLoadingContext &s
     QString string = shape->additionalAttribute("table:end-x");
     if (string.isNull())
         return;
-    double endX = KoUnit::parseValue(string);
+    double endX = KUnit::parseValue(string);
 
     string = shape->additionalAttribute("table:end-y");
     if (string.isNull())
         return;
-    double endY = KoUnit::parseValue(string);
+    double endY = KUnit::parseValue(string);
 
     // The column dimensions are already the final ones, but not the row dimensions.
     // The default height is used for the not yet loaded rows.

@@ -23,7 +23,7 @@
 #ifndef KOCANVASBASE_H
 #define KOCANVASBASE_H
 
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <QPointF>
 #include <QPoint>
@@ -140,7 +140,7 @@ public:
      * by the flake framework.
      * @see KoDocument::unit()
      */
-    virtual KoUnit unit() const = 0;
+    virtual KUnit unit() const = 0;
 
     /**
      * Called when the user tries to move the argument shape to allow the application to limit the

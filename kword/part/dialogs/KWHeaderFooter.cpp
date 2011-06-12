@@ -100,7 +100,7 @@ void KWHeaderFooter::saveTo(KWPageStyle &style)
     }
 }
 
-void KWHeaderFooter::setUnit(const KoUnit &unit)
+void KWHeaderFooter::setUnit(const KUnit &unit)
 {
     widget.headerFrameHeight->setUnit(unit);
     widget.headerSecondSize->setUnit(unit);

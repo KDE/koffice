@@ -24,7 +24,7 @@
 
 #include "KoZoomHandler.h"
 #include "KoDpi.h"
-#include "KoUnit.h"
+#include "KUnit.h"
 
 #include "zoomhandler_test.h"
 

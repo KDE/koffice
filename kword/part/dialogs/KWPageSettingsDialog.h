@@ -40,7 +40,7 @@ protected:
     void reject();
 
 private slots:
-    void distributeUnit(const KoUnit &unit);
+    void distributeUnit(const KUnit &unit);
 
 private:
     KWDocument *m_document;

@@ -25,7 +25,7 @@
 #include "KoImageCollection.h"
 #include "KoImageData_p.h"
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 

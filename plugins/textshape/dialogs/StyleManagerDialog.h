@@ -23,7 +23,7 @@
 
 class StyleManager;
 class KoStyleManager;
-class KoUnit;
+class KUnit;
 
 class StyleManagerDialog : public KDialog
 {
@@ -34,7 +34,7 @@ public:
 
     void setStyleManager(KoStyleManager *sm);
 
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 private:
     void accept();

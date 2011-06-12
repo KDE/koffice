@@ -174,7 +174,7 @@ void ParagraphGeneral::setParagraphStyles(const QList<KoParagraphStyle*> styles)
     }
 }
 
-void ParagraphGeneral::setUnit(const KoUnit &unit)
+void ParagraphGeneral::setUnit(const KUnit &unit)
 {
     m_paragraphIndentSpacing->setUnit(unit);
 }

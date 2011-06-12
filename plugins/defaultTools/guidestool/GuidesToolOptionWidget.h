@@ -54,7 +54,7 @@ public:
     void selectGuideLine(Qt::Orientation orientation, int index);
 
     /// Sets the unit to be displayed
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 signals:
     /// Emitted whenever a specific guide line was selected
@@ -73,7 +73,7 @@ private:
     Ui_GuidesToolOptionWidget widget;
     QList<qreal> m_hGuides;
     QList<qreal> m_vGuides;
-    KoUnit m_unit;
+    KUnit m_unit;
 };
 
 #endif // GUIDESTOOLOPTIONWIDGET_H

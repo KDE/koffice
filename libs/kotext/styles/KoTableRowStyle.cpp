@@ -32,7 +32,7 @@
 #include <QTextTable>
 #include <QTextTableFormat>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
@@ -292,12 +292,12 @@ void KoTableRowStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 
     // minimum row height
     if (styleStack.hasProperty(KoXmlNS::style, "min-row-height")) {
-        setMinimumRowHeight(KoUnit::parseValue(styleStack.property(KoXmlNS::style, "min-row-height")));
+        setMinimumRowHeight(KUnit::parseValue(styleStack.property(KoXmlNS::style, "min-row-height")));
     }
 
     // row height
     if (styleStack.hasProperty(KoXmlNS::style, "row-height")) {
-        setRowHeight(KoUnit::parseValue(styleStack.property(KoXmlNS::style, "row-height")));
+        setRowHeight(KUnit::parseValue(styleStack.property(KoXmlNS::style, "row-height")));
     }
 
     // The fo:keep-together specifies if a row is allowed to break in the middle of the row.

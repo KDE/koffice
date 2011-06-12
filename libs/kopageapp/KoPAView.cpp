@@ -216,10 +216,10 @@ void KoPAView::initGUI()
 
     new KoRulerController(d->horizontalRuler, d->canvas->resourceManager());
 
-    connect(d->doc, SIGNAL(unitChanged(const KoUnit&)),
-            d->horizontalRuler, SLOT(setUnit(const KoUnit&)));
-    connect(d->doc, SIGNAL(unitChanged(const KoUnit&)),
-            d->verticalRuler, SLOT(setUnit(const KoUnit&)));
+    connect(d->doc, SIGNAL(unitChanged(const KUnit&)),
+            d->horizontalRuler, SLOT(setUnit(const KUnit&)));
+    connect(d->doc, SIGNAL(unitChanged(const KUnit&)),
+            d->verticalRuler, SLOT(setUnit(const KUnit&)));
 
     gridLayout->addWidget(d->horizontalRuler, 0, 1);
     gridLayout->addWidget(d->verticalRuler, 1, 0);

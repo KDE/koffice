@@ -488,23 +488,23 @@ QList<QAction*> KoView::createChangeUnitActions()
 {
     QActionGroup *unitGroup = new QActionGroup(this);
     QList<QAction*> answer;
-    answer.append(new UnitChangeAction(KoUnit::Millimeter, unitGroup, d->document));
-    answer.append(new UnitChangeAction(KoUnit::Centimeter, unitGroup, d->document));
-    answer.append(new UnitChangeAction(KoUnit::Decimeter, unitGroup, d->document));
-    answer.append(new UnitChangeAction(KoUnit::Inch, unitGroup, d->document));
-    answer.append(new UnitChangeAction(KoUnit::Pica, unitGroup, d->document));
-    answer.append(new UnitChangeAction(KoUnit::Cicero, unitGroup, d->document));
-    answer.append(new UnitChangeAction(KoUnit::Point, unitGroup, d->document));
+    answer.append(new UnitChangeAction(KUnit::Millimeter, unitGroup, d->document));
+    answer.append(new UnitChangeAction(KUnit::Centimeter, unitGroup, d->document));
+    answer.append(new UnitChangeAction(KUnit::Decimeter, unitGroup, d->document));
+    answer.append(new UnitChangeAction(KUnit::Inch, unitGroup, d->document));
+    answer.append(new UnitChangeAction(KUnit::Pica, unitGroup, d->document));
+    answer.append(new UnitChangeAction(KUnit::Cicero, unitGroup, d->document));
+    answer.append(new UnitChangeAction(KUnit::Point, unitGroup, d->document));
 
     int currentUnit;
-    switch (static_cast<KoUnit::Unit>(d->document.data()->unit().indexInList())) {
-    case KoUnit::Millimeter: currentUnit = 0; break;
-    case KoUnit::Point: currentUnit = 6; break;
-    case KoUnit::Inch: currentUnit = 3; break;
-    case KoUnit::Centimeter: currentUnit = 1; break;
-    case KoUnit::Decimeter: currentUnit = 2; break;
-    case KoUnit::Pica: currentUnit = 4; break;
-    case KoUnit::Cicero: currentUnit = 5; break;
+    switch (static_cast<KUnit::Unit>(d->document.data()->unit().indexInList())) {
+    case KUnit::Millimeter: currentUnit = 0; break;
+    case KUnit::Point: currentUnit = 6; break;
+    case KUnit::Inch: currentUnit = 3; break;
+    case KUnit::Centimeter: currentUnit = 1; break;
+    case KUnit::Decimeter: currentUnit = 2; break;
+    case KUnit::Pica: currentUnit = 4; break;
+    case KUnit::Cicero: currentUnit = 5; break;
     default:
         currentUnit = -1; break;
     }

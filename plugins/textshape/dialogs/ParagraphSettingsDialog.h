@@ -19,7 +19,7 @@
 #ifndef PARAGRAPHSETTINGSDIALOG_H
 #define PARAGRAPHSETTINGSDIALOG_H
 
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <KDialog>
 #include <QTextCursor>
@@ -35,7 +35,7 @@ public:
     explicit ParagraphSettingsDialog(TextTool *tool, QTextCursor *cursor, QWidget* parent = 0);
     ~ParagraphSettingsDialog();
 
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 signals:
     /// emitted when a series of commands is started that together need to become 1 undo action.

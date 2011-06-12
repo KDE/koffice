@@ -55,7 +55,7 @@
  * When displaying a value to the user, the value is converted to the user's unit
  * of choice, and rounded to a reasonable precision to avoid 0.999999
  */
-class KOODF_EXPORT KoUnit
+class KOODF_EXPORT KUnit
 {
 public:
     /** Length units supported by KOffice. */
@@ -71,19 +71,19 @@ public:
     };
 
     /** Construction requires initialization. The factor is for variable factor units like pixel */
-    explicit KoUnit(Unit unit = Point, qreal factor = 1.0) {
+    explicit KUnit(Unit unit = Point, qreal factor = 1.0) {
         m_unit = unit; m_pixelConversion = factor;
     }
 
-    KoUnit& operator=(Unit unit) {
+    KUnit& operator=(Unit unit) {
         m_unit = unit; m_pixelConversion = 1.0; return *this;
     }
 
-    bool operator!=(const KoUnit &other) const {
+    bool operator!=(const KUnit &other) const {
         return !operator==(other);
     }
 
-    bool operator==(const KoUnit &other) const {
+    bool operator==(const KUnit &other) const {
         return m_unit == other.m_unit;
     }
 
@@ -156,10 +156,10 @@ public:
 
     /**
      * Convert the value @p ptValue to a given unit @p unit
-     * Unlike KoUnit::ptToUnit the return value remains unrounded, so that it can be used in complex calculation
+     * Unlike KUnit::ptToUnit the return value remains unrounded, so that it can be used in complex calculation
      * \return the converted value
      */
-    static qreal ptToUnit(const qreal ptValue, const KoUnit &unit);
+    static qreal ptToUnit(const qreal ptValue, const KUnit &unit);
 
     /// This method is the one to use to display a value in a dialog
     /// @return the value @p ptValue converted the unit and rounded, ready to be displayed
@@ -176,14 +176,14 @@ public:
     /// @return the value converted to points for internal use
     qreal fromUserValue(const QString &value, bool *ok = 0) const;
 
-    /// Convert a unit name into a KoUnit
+    /// Convert a unit name into a KUnit
     /// @param unitName name to convert
     /// @param ok if set, it will be true if the unit was known, false if unknown
-    static KoUnit unit(const QString &unitName, bool *ok = 0);
+    static KUnit unit(const QString &unitName, bool *ok = 0);
     /// Get the name of a unit
-    static QString unitName(KoUnit unit);
+    static QString unitName(KUnit unit);
     /// Get the full (translated) description of a unit
-    static QString unitDescription(KoUnit unit);
+    static QString unitDescription(KUnit unit);
     static QStringList listOfUnitName(bool hidePixel = true);
 
     /// PixelVisibility for indexInList()
@@ -199,7 +199,7 @@ public:
     static qreal parseValue(const QString &value, qreal defaultVal = 0.0);
 
     QString toString() {
-        return KoUnit::unitName(*this);
+        return KUnit::unitName(*this);
     }
 
 private:
@@ -208,9 +208,9 @@ private:
 };
 
 #ifndef QT_NO_DEBUG_STREAM
-KOODF_EXPORT QDebug operator<<(QDebug, const KoUnit &);
+KOODF_EXPORT QDebug operator<<(QDebug, const KUnit &);
 #endif
 
-Q_DECLARE_METATYPE(KoUnit)
+Q_DECLARE_METATYPE(KUnit)
 
 #endif

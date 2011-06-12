@@ -134,7 +134,7 @@ void RoundCornersDlg::setRadius(qreal value)
     m_radius->setValue(value);
 }
 
-void RoundCornersDlg::setUnit(const KoUnit &unit)
+void RoundCornersDlg::setUnit(const KUnit &unit)
 {
     m_radius->setUnit(unit);
 }

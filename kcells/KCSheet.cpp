@@ -53,7 +53,7 @@
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfStyleStack.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KOdfStore.h>
@@ -1718,22 +1718,22 @@ void KCSheet::loadOdfMasterLayoutPage(KOdfStyleStack &styleStack)
     KOdfPageLayoutData pageLayout;
 
     if (styleStack.hasProperty(KoXmlNS::fo, "page-width")) {
-        pageLayout.width = KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "page-width"));
+        pageLayout.width = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "page-width"));
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "page-height")) {
-        pageLayout.height = KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "page-height"));
+        pageLayout.height = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "page-height"));
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "margin-top")) {
-        pageLayout.topMargin = KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-top"));
+        pageLayout.topMargin = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-top"));
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "margin-bottom")) {
-        pageLayout.bottomMargin = KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-bottom"));
+        pageLayout.bottomMargin = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-bottom"));
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "margin-left")) {
-        pageLayout.leftMargin = KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left"));
+        pageLayout.leftMargin = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left"));
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "margin-right")) {
-        pageLayout.rightMargin = KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-right"));
+        pageLayout.rightMargin = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-right"));
     }
     if (styleStack.hasProperty(KoXmlNS::style, "writing-mode")) {
         kDebug(36003) << "styleStack.hasAttribute( style:writing-mode ) :" << styleStack.hasProperty(KoXmlNS::style, "writing-mode");
@@ -1874,7 +1874,7 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
 
     double width = -1.0;
     if (styleStack.hasProperty(KoXmlNS::style, "column-width")) {
-        width = KoUnit::parseValue(styleStack.property(KoXmlNS::style, "column-width") , -1.0);
+        width = KUnit::parseValue(styleStack.property(KoXmlNS::style, "column-width") , -1.0);
         //kDebug(36003) << " style:column-width : width :" << width;
         isNonDefaultColumn = true;
     }
@@ -2017,7 +2017,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
 
     double height = -1.0;
     if (styleStack.hasProperty(KoXmlNS::style, "row-height")) {
-        height = KoUnit::parseValue(styleStack.property(KoXmlNS::style, "row-height") , -1.0);
+        height = KUnit::parseValue(styleStack.property(KoXmlNS::style, "row-height") , -1.0);
         //    kDebug(36003)<<" properties style:row-height : height :"<<height;
         isNonDefaultRow = true;
     }

@@ -34,7 +34,7 @@
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <KDebug>
 
@@ -579,8 +579,8 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         }
         d->hasDummyShape = false;
     } else {
-        qreal x = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x1"));
-        qreal y = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y1"));
+        qreal x = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x1"));
+        qreal y = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y1"));
         d->startPoint = QPointF(x, y);
     }
 
@@ -596,8 +596,8 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         }
         d->hasDummyShape = false;
     } else {
-        qreal x = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x2"));
-        qreal y = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y2"));
+        qreal x = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x2"));
+        qreal y = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y2"));
         d->endPoint = QPointF(x, y);
     }
 

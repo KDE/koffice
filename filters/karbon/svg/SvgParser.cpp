@@ -39,7 +39,7 @@
 #include <KoResourceManager.h>
 #include <KoPathShapeLoader.h>
 #include <commands/KoShapeGroupCommand.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoImageData.h>
 #include <KoImageCollection.h>
 #include <pathshapes/rectangle/RectangleShape.h>

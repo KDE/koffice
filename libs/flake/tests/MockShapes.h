@@ -94,8 +94,8 @@ public:
     const QWidget* canvasWidget() const {
         return 0;
     }
-    KoUnit unit() const {
-        return KoUnit(KoUnit::Millimeter);
+    KUnit unit() const {
+        return KUnit(KUnit::Millimeter);
     }
     void updateInputMethodInfo() {}
 };

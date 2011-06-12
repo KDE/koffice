@@ -37,7 +37,7 @@
 #include <KoView.h>
 #include <QPointF>
 #include <kxmlguibuilder.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoShapeAlignCommand.h>
 #include <KoShapeDistributeCommand.h>
 #include <KoZoomMode.h>
@@ -141,7 +141,7 @@ protected slots:
     void mousePositionChanged(const QPoint &position);
     void pageOffsetChanged();
 
-    void updateUnit(const KoUnit &unit);
+    void updateUnit(const KUnit &unit);
 
     void applyFillToSelection();
     void applyStrokeToSelection();

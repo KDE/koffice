@@ -27,7 +27,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 RectangleShape::RectangleShape()
 : m_cornerRadiusX(0)
@@ -50,14 +50,14 @@ bool RectangleShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext 
     loadOdfAttributes(element, context, OdfMandatories | OdfGeometry | OdfAdditionalAttributes | OdfCommonChildElements);
 
     if (element.hasAttributeNS(KoXmlNS::svg, "rx") && element.hasAttributeNS(KoXmlNS::svg, "ry")) {
-        qreal rx = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "rx", "0"));
-        qreal ry = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "ry", "0"));
+        qreal rx = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "rx", "0"));
+        qreal ry = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "ry", "0"));
         m_cornerRadiusX = rx / (0.5 * size().width()) * 100;
         m_cornerRadiusY = ry / (0.5 * size().height()) * 100;
     } else {
         QString cornerRadius = element.attributeNS(KoXmlNS::draw, "corner-radius", "");
         if (! cornerRadius.isEmpty()) {
-            float radius = KoUnit::parseValue(cornerRadius);
+            float radius = KUnit::parseValue(cornerRadius);
             m_cornerRadiusX = radius / (0.5 * size().width()) * 100;
             m_cornerRadiusY = radius / (0.5 * size().height()) * 100;
         }

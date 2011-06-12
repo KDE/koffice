@@ -31,7 +31,7 @@
 #include <KOdfStylesReader.h>
 #include <KoXmlNS.h>
 #include <KoXmlReader.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfGenericStyle.h>
 #include <KoPostscriptPaintDevice.h>
 #include <KoShapeLoadingContext.h>
@@ -254,7 +254,7 @@ static void importOdfLine(const QString &type, const QString &style, const QStri
         lineWidth = 100 * width.toDouble();
     } else {
         lineWeight = KoCharacterStyle::LengthLineWeight;
-        lineWidth = KoUnit::parseValue(width);
+        lineWidth = KUnit::parseValue(width);
     }
 }
 
@@ -827,7 +827,7 @@ void KoCharacterStyle::loadOdfProperties(KOdfStyleStack &styleStack)
         const QString fontSizeRel(styleStack.property(KoXmlNS::style, "font-size-rel"));
         if (!fontSizeRel.isEmpty()) {
         // These attributes specify a relative font size change as a length such as +1pt, -3pt. It changes the font size based on the font size of the parent style.
-            qreal pointSize = styleStack.fontSize() + KoUnit::parseValue(fontSizeRel);
+            qreal pointSize = styleStack.fontSize() + KUnit::parseValue(fontSizeRel);
             if (pointSize > 0) {
                 setFontPointSize(pointSize);
             }
@@ -1035,7 +1035,7 @@ void KoCharacterStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 
     const QString letterSpacing(styleStack.property(KoXmlNS::fo, "letter-spacing"));
     if (!letterSpacing.isEmpty() && letterSpacing != "100") { // 100% doesn't do anything.
-        qreal space = KoUnit::parseValue(letterSpacing);
+        qreal space = KUnit::parseValue(letterSpacing);
         KoPostscriptPaintDevice ps;
         QFontMetrics fm(font(), &ps);
         setFontLetterSpacing(100+100*space/fm.averageCharWidth());

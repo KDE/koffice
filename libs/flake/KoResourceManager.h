@@ -29,7 +29,7 @@
 
 #include "flake_export.h"
 
-#include <KoUnit.h>
+#include <KUnit.h>
 
 class KoShape;
 class KoLineBorder;
@@ -150,12 +150,12 @@ public:
     void setResource(int key, KoShape *shape);
 
     /**
-     * Set a resource of type KoUnit
+     * Set a resource of type KUnit
      * @param key the integer key
      * @param unit the new value for the key.
      * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
-    void setResource(int key, const KoUnit &unit);
+    void setResource(int key, const KUnit &unit);
 
     /**
      * Returns a qvariant containing the specified resource or a standard one if the
@@ -247,11 +247,11 @@ public:
     QSizeF sizeResource(int key) const;
 
     /**
-     * Return the resource determined by param key as a KoUnit.
+     * Return the resource determined by param key as a KUnit.
      * @param key the indentifying key for the resource
      * @see KoCanvasResource::CanvasResource KoDocumentResource::DocumentResource
      */
-    KoUnit unitResource(int key) const;
+    KUnit unitResource(int key) const;
 
     /**
      * Returns true if there is a resource set with the requested key.

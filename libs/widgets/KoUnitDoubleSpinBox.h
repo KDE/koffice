@@ -24,7 +24,7 @@
 
 #include "kowidgets_export.h"
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <QDoubleSpinBox>
 
 /**
@@ -65,7 +65,7 @@ public:
      * @param precision the amount of digits after the separator. 2 means 0.00 will be shown.
      */
     KDE_CONSTRUCTOR_DEPRECATED KoUnitDoubleSpinBox(QWidget *parent, double lower, double upper,
-      double step, double value = 0.0, KoUnit unit = KoUnit(KoUnit::Point), unsigned int precision = 2);
+      double step, double value = 0.0, KUnit unit = KUnit(KUnit::Point), unsigned int precision = 2);
     /**
      * Set the new value in points which will then be converted to the current unit for display
      * @param newValue the new value
@@ -75,7 +75,7 @@ public:
     /**
      * This spinbox shows the internal value after a conversion to the unit set here.
      */
-    virtual void setUnit(KoUnit);
+    virtual void setUnit(KUnit);
 
     /// @return the current value, converted in points
     double value() const;

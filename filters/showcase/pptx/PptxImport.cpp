@@ -51,7 +51,7 @@
 #include <KoDocumentInfo.h>
 #include <KoDocument.h>
 #include <KoFilterChain.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfPageLayoutData.h>
 #include <KoXmlWriter.h>
 

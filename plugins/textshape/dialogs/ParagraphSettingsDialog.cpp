@@ -88,7 +88,7 @@ void ParagraphSettingsDialog::slotApply()
     emit stopMacro();
 }
 
-void ParagraphSettingsDialog::setUnit(const KoUnit &unit)
+void ParagraphSettingsDialog::setUnit(const KUnit &unit)
 {
     m_paragraphGeneral->setUnit(unit);
 }

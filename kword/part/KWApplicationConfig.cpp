@@ -20,7 +20,7 @@
 #include "KWApplicationConfig.h"
 #include "KWDocument.h"
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoGlobal.h>
 #include <KConfigGroup>
 
@@ -95,7 +95,7 @@ void KWApplicationConfig::load(KWDocument *document)
 
         //load default unit setting - this is only used for new files (from templates) or empty files
         if (document && misc.hasKey("Units"))
-            document->setUnit(KoUnit::unit(misc.readEntry("Units")));
+            document->setUnit(KUnit::unit(misc.readEntry("Units")));
         m_defaultColumnSpacing = misc.readEntry("ColumnSpacing", m_defaultColumnSpacing);
     }
 
@@ -147,10 +147,10 @@ void KWApplicationConfig::save()
     interface.sync();
 }
 
-void KWApplicationConfig::setUnit(const KoUnit &unit)
+void KWApplicationConfig::setUnit(const KUnit &unit)
 {
     KSharedConfigPtr config = KGlobal::config();
     KConfigGroup misc = config->group("Misc");
-    misc.writeEntry("Units", KoUnit::unitName(unit));
+    misc.writeEntry("Units", KUnit::unitName(unit));
     misc.sync();
 }

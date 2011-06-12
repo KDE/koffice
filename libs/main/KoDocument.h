@@ -31,7 +31,7 @@
 #include <kservice.h>
 #include <kcomponentdata.h>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfPageLayoutData.h>
 #include "komain_export.h"
 #include "KoGridData.h"
@@ -715,12 +715,12 @@ public:
     /**
      * Returns the unit used to display all measures/distances.
      */
-    KoUnit unit() const;
+    KUnit unit() const;
 
     /**
      * Sets the unit used to display all measures/distances.
      */
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
     /**
      * Save the unit to the settings writer
@@ -825,7 +825,7 @@ signals:
      * It is common to connect views to it, in order to change the displayed units
      * (e.g. in the rulers)
      */
-    void unitChanged(const KoUnit &unit);
+    void unitChanged(const KUnit &unit);
 
     /**
      * Progress info while loading or saving. The value is in percents (i.e. a number between 0 and 100)

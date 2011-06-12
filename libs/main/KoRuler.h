@@ -25,7 +25,7 @@
 
 
 #include "komain_export.h"
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <QWidget>
 #include <QTextOption>
@@ -59,7 +59,7 @@ public:
     };
 
     /// The ruler's unit
-    KoUnit unit() const;
+    KUnit unit() const;
 
     /// The length of the ruler in points (pt)
     qreal rulerLength() const;
@@ -94,7 +94,7 @@ public:
 
 public slots:
     /// Set the unit of the ruler
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
     /** Set the offset. Use this function to sync the ruler with
       * the canvas' position on screen

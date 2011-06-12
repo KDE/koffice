@@ -34,7 +34,7 @@
 #include <KOdfStylesReader.h>
 #include <KoOdfGraphicStyles.h>
 #include <KOdfStyleStack.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 
@@ -431,7 +431,7 @@ void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const K
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "margin-left")) {
         //todo fix me
-        setIndentation(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left"), 0.0));
+        setIndentation(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left"), 0.0));
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "border")) {
         str = styleStack.property(KoXmlNS::fo, "border");
@@ -504,7 +504,7 @@ void KCStyle::loadOdfTextProperties(KOdfStylesReader& stylesReader, const KOdfSt
         kDebug(36003) << "\t\t fo:font-family:" << fontFamily();
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "font-size")) {
-        setFontSize((int) KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "font-size"), 10.0));       // FIXME Stefan: fallback to default
+        setFontSize((int) KUnit::parseValue(styleStack.property(KoXmlNS::fo, "font-size"), 10.0));       // FIXME Stefan: fallback to default
         kDebug(36003) << "\t\t fo:font-size:" << fontSize();
     }
     if (styleStack.hasProperty(KoXmlNS::fo, "font-style")) {

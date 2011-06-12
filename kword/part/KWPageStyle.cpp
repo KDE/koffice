@@ -24,7 +24,7 @@
 
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoColorBackground.h>
 #include <KoPatternBackground.h>
 #include <KoImageCollection.h>
@@ -362,7 +362,7 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KoXmlElement &maste
         d->columns.columns = columns.attributeNS(KoXmlNS::fo, "column-count", "15").toInt();
         if (d->columns.columns < 1)
             d->columns.columns = 1;
-        d->columns.columnSpacing = KoUnit::parseValue(columns.attributeNS(KoXmlNS::fo, "column-gap"));
+        d->columns.columnSpacing = KUnit::parseValue(columns.attributeNS(KoXmlNS::fo, "column-gap"));
     } else {
         d->columns.columns = 1;
         d->columns.columnSpacing = 17; // ~ 6mm
@@ -378,7 +378,7 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KoXmlElement &maste
         if (!hfprops.isNull()) {
             d->headerMargin.fillFrom(hfprops, KoXmlNS::fo, "margin");
             d->headerInsets.fillFrom(hfprops, KoXmlNS::fo, "padding");
-            d->headerMinimumHeight = KoUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "min-height"));
+            d->headerMinimumHeight = KUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "min-height"));
             d->fixedHeaderSize = hfprops.attributeNS(KoXmlNS::style,
                     "dynamic-spacing").compare("true", Qt::CaseInsensitive) == 0;
         // TODO there are quite some more properties we want to at least preserve between load and save
@@ -409,7 +409,7 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KoXmlElement &maste
         if (!hfprops.isNull()) {
             d->footerMargin.fillFrom(hfprops, KoXmlNS::fo, "margin");
             d->footerInsets.fillFrom(hfprops, KoXmlNS::fo, "padding");
-            d->footerMinimumHeight = KoUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "min-height"));
+            d->footerMinimumHeight = KUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "min-height"));
             d->fixedFooterSize = hfprops.attributeNS(KoXmlNS::style,
                     "dynamic-spacing").compare("true", Qt::CaseInsensitive) == 0;
         }

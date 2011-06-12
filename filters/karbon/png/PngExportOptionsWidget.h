@@ -32,7 +32,7 @@ public:
     explicit PngExportOptionsWidget(QSizeF pointSize, QWidget *parent = 0);
 
     /// Sets the initial unit to use
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
     /// Returns the chosen export size in pixel
     QSize pixelSize() const;

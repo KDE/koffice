@@ -73,13 +73,13 @@ KWStartupWidget::KWStartupWidget(QWidget *parent, KWDocument *doc, const KOdfCol
     connect(widget.createButton, SIGNAL(clicked()), this, SLOT(buttonClicked()));
     connect(widget.mainText, SIGNAL(toggled(bool)), m_sizeWidget, SLOT(setTextAreaAvailable(bool)));
     connect(widget.mainText, SIGNAL(toggled(bool)), m_columnsWidget, SLOT(setTextAreaAvailable(bool)));
-    connect(m_sizeWidget, SIGNAL(unitChanged(const KoUnit&)), this, SLOT(unitChanged(const KoUnit&)));
+    connect(m_sizeWidget, SIGNAL(unitChanged(const KUnit&)), this, SLOT(unitChanged(const KUnit&)));
     connect(m_columnsWidget, SIGNAL(columnsChanged(const KOdfColumnData&)), prev, SLOT(setColumns(const KOdfColumnData&)));
     connect(m_columnsWidget, SIGNAL(columnsChanged(const KOdfColumnData&)), this, SLOT(columnsUpdated(const KOdfColumnData&)));
     connect(m_sizeWidget, SIGNAL(layoutChanged(const KOdfPageLayoutData&)), prev, SLOT(setPageLayout(const KOdfPageLayoutData&)));
 }
 
-void KWStartupWidget::unitChanged(const KoUnit &unit)
+void KWStartupWidget::unitChanged(const KUnit &unit)
 {
     m_unit = unit;
     m_columnsWidget->setUnit(unit);

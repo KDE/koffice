@@ -30,7 +30,7 @@
 #include "KoShapeGroup.h"
 #include "KoShapeContainer.h"
 
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
@@ -94,9 +94,9 @@ public:
         return 0;
     }
 
-    virtual KoUnit unit() const
+    virtual KUnit unit() const
     {
-        return KoUnit(KoUnit::Point);
+        return KUnit(KUnit::Point);
     }
 
     virtual void updateInputMethodInfo() {}

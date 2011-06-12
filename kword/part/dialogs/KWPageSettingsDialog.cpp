@@ -94,7 +94,7 @@ KWPageSettingsDialog::KWPageSettingsDialog(QWidget *parent, KWDocument *document
     setUnit(m_document->unit());
     m_columns->setUnit(m_document->unit());
     m_headerFooter->setUnit(m_document->unit());
-    connect (this, SIGNAL(unitChanged(const KoUnit&)), this, SLOT(distributeUnit(const KoUnit&)));
+    connect (this, SIGNAL(unitChanged(const KUnit&)), this, SLOT(distributeUnit(const KUnit&)));
 }
 
 void KWPageSettingsDialog::accept()
@@ -169,7 +169,7 @@ void KWPageSettingsDialog::reject()
     KoPageLayoutDialog::reject();
 }
 
-void KWPageSettingsDialog::distributeUnit(const KoUnit &unit)
+void KWPageSettingsDialog::distributeUnit(const KUnit &unit)
 {
     setUnit(unit);
     m_columns->setUnit(unit);

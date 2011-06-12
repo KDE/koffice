@@ -315,7 +315,7 @@ QPen KCells::Odf::decodePen(const QString &border)
     QByteArray _style = border.section(' ', 1, 1).toLatin1();
     QString _color = border.section(' ', 2, 2);
 
-    pen.setWidth((int)(KoUnit::parseValue(_width, 1.0)));
+    pen.setWidth((int)(KUnit::parseValue(_width, 1.0)));
 
     if (_style == "none")
         pen.setStyle(Qt::NoPen);

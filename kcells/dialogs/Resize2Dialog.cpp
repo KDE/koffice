@@ -37,7 +37,7 @@
 
 // KOffice
 #include <KoCanvasBase.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoUnitDoubleSpinBox.h>
 
 // KCells

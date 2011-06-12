@@ -67,7 +67,7 @@ public:
     /// implementing KoCanvasBase
     virtual QWidget *canvasWidget();
     /// implementing KoCanvasBase
-    virtual KoUnit unit() const { return KoUnit(KoUnit::Millimeter); }
+    virtual KUnit unit() const { return KUnit(KUnit::Millimeter); }
     /// implementing KoCanvasBase
     virtual void updateInputMethodInfo() {}
     /// implementing KoCanvasBase

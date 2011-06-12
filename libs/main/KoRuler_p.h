@@ -126,7 +126,7 @@ public:
 
     void emitTabChanged();
 
-    KoUnit unit;
+    KUnit unit;
     const Qt::Orientation orientation;
     const KoViewConverter * const viewConverter;
 

@@ -69,8 +69,8 @@ KoPageLayoutDialog::KoPageLayoutDialog(QWidget *parent, const KOdfPageLayoutData
             prev, SLOT(setPageLayout(const KOdfPageLayoutData&)));
     connect (d->pageLayoutWidget, SIGNAL(layoutChanged(const KOdfPageLayoutData&)),
             this, SLOT(setPageLayout(const KOdfPageLayoutData&)));
-    connect (d->pageLayoutWidget, SIGNAL(unitChanged(const KoUnit&)),
-            this, SIGNAL(unitChanged(const KoUnit&)));
+    connect (d->pageLayoutWidget, SIGNAL(unitChanged(const KUnit&)),
+            this, SIGNAL(unitChanged(const KUnit&)));
 }
 
 KoPageLayoutDialog::~KoPageLayoutDialog()
@@ -155,7 +155,7 @@ void KoPageLayoutDialog::showUnitchooser(bool on)
     d->pageLayoutWidget->showUnitchooser(on);
 }
 
-void KoPageLayoutDialog::setUnit(const KoUnit &unit)
+void KoPageLayoutDialog::setUnit(const KUnit &unit)
 {
     d->pageLayoutWidget->setUnit(unit);
 }

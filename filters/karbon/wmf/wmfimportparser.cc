@@ -87,13 +87,13 @@ bool WMFImportParser::begin()
     mCurrentOrg.setY(bounding.top());
 
     if (isStandard()) {
-        //mDoc->setUnit(KoUnit(KoUnit::Point));
+        //mDoc->setUnit(KUnit(KUnit::Point));
         mDoc->setPageSize(bounding.size());
     } else {
         // Placeable Wmf store the boundingRect() in pixel and the default DPI
         // The placeable format doesn't have information on which Unit to use
         // so we choose millimeters by default
-        //mDoc->setUnit(KoUnit(KoUnit::Millimeter));
+        //mDoc->setUnit(KUnit(KUnit::Millimeter));
         mDoc->setPageSize(QSizeF(INCH_TO_POINT((double)bounding.width() / defaultDpi()),
                                  INCH_TO_POINT((double)bounding.height() / defaultDpi())));
     }

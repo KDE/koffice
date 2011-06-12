@@ -30,7 +30,7 @@
 #include <KoOdfGraphicStyles.h>
 #include <KOdfStylesReader.h>
 #include <KOdfStorageDevice.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoXmlWriter.h>
 
 #include <KDebug>
@@ -432,14 +432,14 @@ bool KoPatternBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &)
             if (height.endsWith('%'))
                 d->targetImageSizePercent.setHeight(height.remove('%').toDouble());
             else
-                d->targetImageSize.setHeight(KoUnit::parseValue(height));
+                d->targetImageSize.setHeight(KUnit::parseValue(height));
         }
         if (styleStack.hasProperty(KoXmlNS::draw, "fill-image-width")) {
             QString width = styleStack.property(KoXmlNS::draw, "fill-image-width");
             if (width.endsWith('%'))
                 d->targetImageSizePercent.setWidth(width.remove('%').toDouble());
             else
-                d->targetImageSize.setWidth(KoUnit::parseValue(width));
+                d->targetImageSize.setWidth(KUnit::parseValue(width));
         }
     }
 

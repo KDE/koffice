@@ -277,7 +277,7 @@ void KCDocBase::loadOdfSettings(const KoXmlDocument&settingsDoc)
     KoOdfSettings settings(settingsDoc);
     KoOdfSettings::Items viewSettings = settings.itemSet("view-settings");
     if (!viewSettings.isNull()) {
-        setUnit(KoUnit::unit(viewSettings.parseConfigItemString("unit")));
+        setUnit(KUnit::unit(viewSettings.parseConfigItemString("unit")));
     }
     map()->loadOdfSettings(settings);
     loadOdfIgnoreList(settings);

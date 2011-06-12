@@ -25,7 +25,7 @@
 #include "KWDocument.h"
 
 #include <KoShape.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <KDebug>
 

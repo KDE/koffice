@@ -26,7 +26,7 @@
 #include <qdom.h>
 #include <QColor>
 #include <QImage>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <QRegExp>
 #include <kdebug.h>
 #include <kzip.h>
@@ -69,7 +69,7 @@ bool OoUtils::parseBorder(const QString & tag, double * width, int * style, QCol
     QString _style = tag.section(' ', 1, 1);
     QString _color = tag.section(' ', 2, 2);
 
-    *width = KoUnit::parseValue(_width, 1.0);
+    *width = KUnit::parseValue(_width, 1.0);
 
     if (_style == "dashed")
         *style = 1;
@@ -98,8 +98,8 @@ void OoUtils::importIndents(QDomElement& parentElement, const KOdfStyleStack& st
             styleStack.hasProperty(ooNS::fo, "margin-right"))
         // *text-indent must always be bound to either margin-left or margin-right
     {
-        double marginLeft = KoUnit::parseValue(styleStack.property(ooNS::fo, "margin-left"));
-        double marginRight = KoUnit::parseValue(styleStack.property(ooNS::fo, "margin-right"));
+        double marginLeft = KUnit::parseValue(styleStack.property(ooNS::fo, "margin-left"));
+        double marginRight = KUnit::parseValue(styleStack.property(ooNS::fo, "margin-right"));
         double first = 0;
         if (styleStack.property(ooNS::style, "auto-text-indent") == "true")  // style:auto-text-indent takes precedence
             // ### "indented by a value that is based on the current font size"
@@ -107,7 +107,7 @@ void OoUtils::importIndents(QDomElement& parentElement, const KOdfStyleStack& st
             // ### but how much is the indent?
             first = 10;
         else if (styleStack.hasProperty(ooNS::fo, "text-indent"))
-            first = KoUnit::parseValue(styleStack.property(ooNS::fo, "text-indent"));
+            first = KUnit::parseValue(styleStack.property(ooNS::fo, "text-indent"));
 
         if (marginLeft != 0 || marginRight != 0 || first != 0) {
             QDomElement indent = parentElement.ownerDocument().createElement("INDENTS");
@@ -139,7 +139,7 @@ void OoUtils::importLineSpacing(QDomElement& parentElement, const KOdfStyleStack
                 double percent = value.toDouble();
                 lineSpacing.setAttribute("type", "multiple");
                 lineSpacing.setAttribute("spacingvalue", percent / 100);
-            } else { // fixed value (use KoUnit::parseValue to get it in pt)
+            } else { // fixed value (use KUnit::parseValue to get it in pt)
                 kWarning(30519) << "Unhandled value for fo:line-height: " << value;
             }
             parentElement.appendChild(lineSpacing);
@@ -155,12 +155,12 @@ void OoUtils::importLineSpacing(QDomElement& parentElement, const KOdfStyleStack
         // Well let's see if this makes a big difference.
         QDomElement lineSpacing = parentElement.ownerDocument().createElement("LINESPACING");
         lineSpacing.setAttribute("type", "atleast");
-        lineSpacing.setAttribute("spacingvalue", KoUnit::parseValue(value));
+        lineSpacing.setAttribute("spacingvalue", KUnit::parseValue(value));
         parentElement.appendChild(lineSpacing);
     }
     // Line-spacing is mutually exclusive with line-height and line-height-at-least
     else if (styleStack.hasProperty(ooNS::style, "line-spacing")) {  // 3.11.3
-        double value = KoUnit::parseValue(styleStack.property(ooNS::style, "line-spacing"));
+        double value = KUnit::parseValue(styleStack.property(ooNS::style, "line-spacing"));
         if (value != 0.0) {
             QDomElement lineSpacing = parentElement.ownerDocument().createElement("LINESPACING");
             lineSpacing.setAttribute("type", "custom");
@@ -175,8 +175,8 @@ void OoUtils::importTopBottomMargin(QDomElement& parentElement, const KOdfStyleS
 {
     if (styleStack.hasProperty(ooNS::fo, "margin-top") ||  // 3.11.22
             styleStack.hasProperty(ooNS::fo, "margin-bottom")) {
-        double mtop = KoUnit::parseValue(styleStack.property(ooNS::fo, "margin-top"));
-        double mbottom = KoUnit::parseValue(styleStack.property(ooNS::fo, "margin-bottom"));
+        double mtop = KUnit::parseValue(styleStack.property(ooNS::fo, "margin-top"));
+        double mbottom = KUnit::parseValue(styleStack.property(ooNS::fo, "margin-bottom"));
         if (mtop != 0 || mbottom != 0) {
             QDomElement offset = parentElement.ownerDocument().createElement("OFFSETS");
             if (mtop != 0)
@@ -216,7 +216,7 @@ void OoUtils::importTabulators(QDomElement& parentElement, const KOdfStyleStack&
 
         elem.setAttribute("type", kOfficeType);
 
-        double pos = KoUnit::parseValue(tabStop.attributeNS(ooNS::style, "position", QString()));
+        double pos = KUnit::parseValue(tabStop.attributeNS(ooNS::style, "position", QString()));
         elem.setAttribute("ptpos", pos);
 
         // TODO Convert leaderChar's unicode value to the KOffice enum

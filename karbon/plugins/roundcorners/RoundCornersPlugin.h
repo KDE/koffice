@@ -50,7 +50,7 @@ private:
 };
 
 class KoUnitDoubleSpinBox;
-class KoUnit;
+class KUnit;
 
 class RoundCornersDlg : public KDialog
 {
@@ -61,7 +61,7 @@ public:
 
     qreal radius() const;
     void setRadius(qreal value);
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 private:
     KoUnitDoubleSpinBox * m_radius;

@@ -34,7 +34,7 @@
 #include <QTextCursor>
 #include <QBuffer>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
@@ -277,9 +277,9 @@ void KoSectionStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &co
     bool hasMarginLeft = styleStack.hasProperty(KoXmlNS::fo, "margin-left");
     bool hasMarginRight = styleStack.hasProperty(KoXmlNS::fo, "margin-right");
     if (hasMarginLeft)
-        setLeftMargin(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left")));
+        setLeftMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left")));
     if (hasMarginRight)
-        setRightMargin(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-right")));
+        setRightMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-right")));
 
 
     // The fo:background-color attribute specifies the background color of a paragraph.

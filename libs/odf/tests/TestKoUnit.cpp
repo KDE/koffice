@@ -18,24 +18,24 @@
  */
 #include "TestKoUnit.h"
 
-#include <KoUnit.h>
+#include <KUnit.h>
 
 void TestKoUnit::testUnit()
 {
-    KoUnit unit1;
-    KoUnit unit2(KoUnit::Point);
+    KUnit unit1;
+    KUnit unit2(KUnit::Point);
     QCOMPARE(unit1, unit2);
 
-    KoUnit unit3(KoUnit::Millimeter);
+    KUnit unit3(KUnit::Millimeter);
     unit1 = unit3;
     QCOMPARE(unit1, unit3);
 
-    KoUnit scaled(KoUnit::Pixel, 0.5);
-    QCOMPARE(KoUnit::ptToUnit(100, scaled), (qreal)50);
+    KUnit scaled(KUnit::Pixel, 0.5);
+    QCOMPARE(KUnit::ptToUnit(100, scaled), (qreal)50);
 
     QVariant variant;
     variant.setValue(scaled);
-    QCOMPARE(scaled, variant.value<KoUnit>());
+    QCOMPARE(scaled, variant.value<KUnit>());
 }
 
 QTEST_MAIN(TestKoUnit)

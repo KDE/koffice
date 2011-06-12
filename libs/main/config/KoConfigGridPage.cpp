@@ -59,7 +59,7 @@ KoConfigGridPage::KoConfigGridPage(KoDocument* doc, char* name)
 
     d->config = d->doc->componentData().config();
 
-    KoUnit unit = d->doc->unit();
+    KUnit unit = d->doc->unit();
     KoGridData &gd = d->doc->gridData();
 
     QGroupBox* generalGrp = new QGroupBox(i18n("Grid"), this);
@@ -129,7 +129,7 @@ KoConfigGridPage::~KoConfigGridPage()
 
 void KoConfigGridPage::slotUnitChanged(int u)
 {
-    KoUnit unit = KoUnit((KoUnit::Unit) u);
+    KUnit unit = KUnit((KUnit::Unit) u);
     d->spaceHorizUSpin->blockSignals(true);
     d->spaceVertUSpin->blockSignals(true);
     d->spaceHorizUSpin->setUnit(unit);

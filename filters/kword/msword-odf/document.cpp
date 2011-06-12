@@ -30,7 +30,7 @@
 #include "versionmagic.h"
 #include "drawstyle.h"
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfPageLayoutData.h>
 #include <kdebug.h>
 

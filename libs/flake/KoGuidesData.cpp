@@ -20,7 +20,7 @@
 
 #include "KoGuidesData.h"
 #include "KoViewConverter.h"
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoOdfSettings.h>
 #include <KoXmlWriter.h>
 

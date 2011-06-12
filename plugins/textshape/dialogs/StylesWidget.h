@@ -24,7 +24,7 @@
 #include <QTextBlockFormat>
 #include <QTextCharFormat>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <ui_StylesWidget.h>
 

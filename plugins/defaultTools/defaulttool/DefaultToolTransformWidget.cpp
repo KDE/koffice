@@ -64,7 +64,7 @@ DefaultToolTransformWidget::DefaultToolTransformWidget( KoInteractionTool* tool,
 }
 
 
-void DefaultToolTransformWidget::setUnit( const KoUnit &unit )
+void DefaultToolTransformWidget::setUnit( const KUnit &unit )
 {
     shearXSpinBox->setUnit( unit );
     shearYSpinBox->setUnit( unit );
@@ -73,7 +73,7 @@ void DefaultToolTransformWidget::setUnit( const KoUnit &unit )
 void DefaultToolTransformWidget::resourceChanged( int key, const QVariant & res )
 {
     if (key == KoCanvasResource::Unit)
-        setUnit(res.value<KoUnit>());
+        setUnit(res.value<KUnit>());
 }
 
 void DefaultToolTransformWidget::rotationChanged()

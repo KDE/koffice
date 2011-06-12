@@ -25,7 +25,7 @@
 
 #include <KoCharacterStyle.h>
 
-class KoUnit;
+class KUnit;
 
 class FontDecorations : public QWidget
 {
@@ -38,7 +38,7 @@ public:
     void setDisplay(KoCharacterStyle *style);
     void save(KoCharacterStyle *style) const;
 
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 signals:
     void textColorChanged(QColor);

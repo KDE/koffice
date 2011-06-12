@@ -87,7 +87,7 @@ public:
         return this;
     }
     /// reimplemented method from superclass
-    virtual KoUnit unit() const {
+    virtual KUnit unit() const {
         return document()->unit();
     }
     /// reimplemented method from superclass

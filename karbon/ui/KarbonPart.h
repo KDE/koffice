@@ -37,7 +37,7 @@
 #include <KoShapeControllerBase.h>
 
 #include <KoDocument.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KarbonDocument.h>
 
 #include <karbonui_export.h>

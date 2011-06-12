@@ -26,7 +26,7 @@
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoPathShapeLoader.h>
 #include <KoShapeBackground.h>
 
@@ -159,7 +159,7 @@ bool ArtisticTextShape::loadOdf( const KoXmlElement & element, KoShapeLoadingCon
         }
         else if ( pair[0] == "font-size" )
         {
-            m_font.setPointSizeF(KoUnit::parseValue(pair[1], 12));
+            m_font.setPointSizeF(KUnit::parseValue(pair[1], 12));
         }
         else if ( pair[0] == "font-weight" && pair[1] == "bold" )
         {

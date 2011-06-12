@@ -221,7 +221,7 @@ void KWFrameGeometry::heightChanged(qreal value)
     m_blockSignals = false;
 }
 
-void KWFrameGeometry::setUnit(KoUnit unit)
+void KWFrameGeometry::setUnit(KUnit unit)
 {
     widget.xPos->setUnit(unit);
     widget.yPos->setUnit(unit);

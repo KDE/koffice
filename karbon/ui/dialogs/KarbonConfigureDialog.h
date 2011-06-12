@@ -21,7 +21,7 @@
 #ifndef KARBONCONFIGUREDIALOG_H
 #define KARBONCONFIGUREDIALOG_H
 
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <kpagedialog.h>
 #include <kvbox.h>

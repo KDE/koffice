@@ -24,7 +24,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <math.h>
 

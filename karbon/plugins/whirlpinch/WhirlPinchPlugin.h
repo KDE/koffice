@@ -49,7 +49,7 @@ private:
 
 class KDoubleNumInput;
 class KoUnitDoubleSpinBox;
-class KoUnit;
+class KUnit;
 
 class WhirlPinchDlg : public KDialog
 {
@@ -64,7 +64,7 @@ public:
     void setAngle(qreal value);
     void setPinch(qreal value);
     void setRadius(qreal value);
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 private:
     KDoubleNumInput* m_angle;

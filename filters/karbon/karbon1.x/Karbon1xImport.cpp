@@ -219,7 +219,7 @@ bool KarbonImport::loadXML(const KoXmlElement& doc)
     double height = doc.attribute("height", "550.0").toDouble();
 
     m_document->setPageSize(QSizeF(width, height));
-    //m_document->setUnit(KoUnit::unit(doc.attribute("unit", KoUnit::unitName(m_document->unit()))));
+    //m_document->setUnit(KUnit::unit(doc.attribute("unit", KUnit::unitName(m_document->unit()))));
 
     m_mirrorMatrix.scale(1.0, -1.0);
     m_mirrorMatrix.translate(0, -m_document->pageSize().height());
@@ -659,8 +659,8 @@ KoShape * KarbonImport::loadEllipse(const KoXmlElement &element)
 {
     EllipseShape * ellipse = new EllipseShape();
 
-    double rx = KoUnit::parseValue(element.attribute("rx"));
-    double ry = KoUnit::parseValue(element.attribute("ry"));
+    double rx = KUnit::parseValue(element.attribute("rx"));
+    double ry = KUnit::parseValue(element.attribute("ry"));
     ellipse->setSize(QSizeF(2*rx, 2*ry));
 
     ellipse->setStartAngle(element.attribute("start-angle").toDouble());
@@ -673,7 +673,7 @@ KoShape * KarbonImport::loadEllipse(const KoXmlElement &element)
     else if (element.attribute("kind") == "arc")
         ellipse->setType(EllipseShape::Arc);
 
-    QPointF center(KoUnit::parseValue(element.attribute("cx")), KoUnit::parseValue(element.attribute("cy")));
+    QPointF center(KUnit::parseValue(element.attribute("cx")), KUnit::parseValue(element.attribute("cy")));
     ellipse->setAbsolutePosition(center);
 
     loadCommon(ellipse, element);
@@ -687,16 +687,16 @@ KoShape * KarbonImport::loadRect(const KoXmlElement &element)
 {
     RectangleShape * rect = new RectangleShape();
 
-    double w  = KoUnit::parseValue(element.attribute("width"), 10.0);
-    double h = KoUnit::parseValue(element.attribute("height"), 10.0);
+    double w  = KUnit::parseValue(element.attribute("width"), 10.0);
+    double h = KUnit::parseValue(element.attribute("height"), 10.0);
     rect->setSize(QSizeF(w, h));
 
-    double x = KoUnit::parseValue(element.attribute("x"));
-    double y = KoUnit::parseValue(element.attribute("y"));
+    double x = KUnit::parseValue(element.attribute("x"));
+    double y = KUnit::parseValue(element.attribute("y"));
     rect->setAbsolutePosition(QPointF(x, y), KoFlake::BottomLeftCorner);
 
-    double rx  = KoUnit::parseValue(element.attribute("rx"));
-    double ry  = KoUnit::parseValue(element.attribute("ry"));
+    double rx  = KUnit::parseValue(element.attribute("rx"));
+    double ry  = KUnit::parseValue(element.attribute("ry"));
     rect->setCornerRadiusX(rx / (0.5 * w) * 100.0);
     rect->setCornerRadiusY(ry / (0.5 * h) * 100.0);
 
@@ -763,8 +763,8 @@ KoShape * KarbonImport::loadPolygon(const KoXmlElement &element)
     }
     polygon->close();
 
-    double x = KoUnit::parseValue(element.attribute("x"));
-    double y = KoUnit::parseValue(element.attribute("y"));
+    double x = KUnit::parseValue(element.attribute("x"));
+    double y = KUnit::parseValue(element.attribute("y"));
     polygon->setAbsolutePosition(QPointF(x, y), KoFlake::TopLeftCorner);
 
     loadCommon(polygon, element);
@@ -851,11 +851,11 @@ KoShape * KarbonImport::loadSinus(const KoXmlElement &element)
 
     sinus->normalize();
 
-    double x = KoUnit::parseValue(element.attribute("x"));
-    double y = KoUnit::parseValue(element.attribute("y"));
+    double x = KUnit::parseValue(element.attribute("x"));
+    double y = KUnit::parseValue(element.attribute("y"));
 
-    double w  = KoUnit::parseValue(element.attribute("width"), 10.0);
-    double h = KoUnit::parseValue(element.attribute("height"), 10.0);
+    double w  = KUnit::parseValue(element.attribute("width"), 10.0);
+    double h = KUnit::parseValue(element.attribute("height"), 10.0);
 
     sinus->setAbsolutePosition(QPointF(x, y - h)/*, KoFlake::TopLeftCorner*/);
     sinus->setSize(QSizeF(w / periods, h));
@@ -873,12 +873,12 @@ KoShape * KarbonImport::loadSpiral(const KoXmlElement &element)
 
     KoPathShape * spiral = new KoPathShape();
 
-    double radius  = qAbs(KoUnit::parseValue(element.attribute("radius")));
+    double radius  = qAbs(KUnit::parseValue(element.attribute("radius")));
     double angle = element.attribute("angle").toDouble();
     double fade = element.attribute("fade").toDouble();
 
-    double cx = KoUnit::parseValue(element.attribute("cx"));
-    double cy = KoUnit::parseValue(element.attribute("cy"));
+    double cx = KUnit::parseValue(element.attribute("cx"));
+    double cy = KUnit::parseValue(element.attribute("cy"));
 
     uint segments  = element.attribute("segments").toUInt();
     int clockwise = element.attribute("clockwise").toInt();
@@ -951,11 +951,11 @@ KoShape * KarbonImport::loadStar(const KoXmlElement &element)
 {
     enum StarType { star_outline, spoke, wheel, polygon, framed_star, star, gear };
 
-    double cx = KoUnit::parseValue(element.attribute("cx"));
-    double cy = KoUnit::parseValue(element.attribute("cy"));
+    double cx = KUnit::parseValue(element.attribute("cx"));
+    double cy = KUnit::parseValue(element.attribute("cy"));
 
-    double outerRadius  = qAbs(KoUnit::parseValue(element.attribute("outerradius")));
-    double innerRadius  = qAbs(KoUnit::parseValue(element.attribute("innerradius")));
+    double outerRadius  = qAbs(KUnit::parseValue(element.attribute("outerradius")));
+    double innerRadius  = qAbs(KUnit::parseValue(element.attribute("innerradius")));
     uint edges  = qMax(element.attribute("edges").toUInt(), static_cast<uint>(3));
 
     double innerAngle  = element.attribute("innerangle").toUInt();

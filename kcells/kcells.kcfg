@@ -127,7 +127,7 @@
       <!-- /usr/local/src/kde/3.5/koffice/kcells/dialogs/kcells_dlg_preference.cc:422 -->
       <!--         _indent = config->readDoubleNumEntry( "Indent" , _indent ) ; -->
       <!-- /usr/local/src/kde/3.5/koffice/kcells/dialogs/kcells_dlg_preference.cc:705 -->
-      <!--         config->writeEntry( "Indent", KoUnit::fromUserValue( val, indentUnit ) ); -->
+      <!--         config->writeEntry( "Indent", KUnit::fromUserValue( val, indentUnit ) ); -->
     </entry>
     <entry key="Method of Calc" type="Int">
       <default></default>
@@ -254,9 +254,9 @@
       <label></label>
       <whatsthis></whatsthis>
       <!-- kcells_doc.cc:466 -->
-      <!--       setUnit( (KoUnit)config->readNumEntry( "Default unit page" ,0)); -->
+      <!--       setUnit( (KUnit)config->readNumEntry( "Default unit page" ,0)); -->
       <!-- kcells_view.cc:2139 -->
-      <!--   d->activeSheet->setPaperUnit((KoUnit)config->readNumEntry("Default unit page",0)); -->
+      <!--   d->activeSheet->setPaperUnit((KUnit)config->readNumEntry("Default unit page",0)); -->
       <!-- /usr/local/src/kde/3.5/koffice/kcells/dialogs/kcells_dlg_preference.cc:857 -->
       <!--         unit=config->readNumEntry( "Default unit page" ,0); -->
       <!-- /usr/local/src/kde/3.5/koffice/kcells/dialogs/kcells_dlg_preference.cc:886 -->

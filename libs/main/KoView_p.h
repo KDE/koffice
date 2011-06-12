@@ -20,7 +20,7 @@
 #ifndef KOVIEW_P_H
 #define KOVIEW_P_H
 
-#include "KoUnit.h"
+#include "KUnit.h"
 #include "KoDocument.h"
 
 #include <QAction>
@@ -29,8 +29,8 @@ class UnitChangeAction : public QAction
 {
     Q_OBJECT
 public:
-    UnitChangeAction(KoUnit::Unit unit, QObject *parent, KoDocument *document)
-            : QAction(KoUnit::unitDescription(KoUnit(unit)), parent),
+    UnitChangeAction(KUnit::Unit unit, QObject *parent, KoDocument *document)
+            : QAction(KUnit::unitDescription(KUnit(unit)), parent),
             m_document(document),
             m_unit(unit) {
         setCheckable(true);
@@ -44,7 +44,7 @@ public slots:
 
 private:
     KoDocument *m_document;
-    KoUnit m_unit;
+    KUnit m_unit;
 };
 
 #endif

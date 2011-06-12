@@ -92,7 +92,7 @@ void KoResourceManager::setResource(int key, KoShape *shape)
     setResource(key, v);
 }
 
-void KoResourceManager::setResource(int key, const KoUnit &unit)
+void KoResourceManager::setResource(int key, const KUnit &unit)
 {
     QVariant v;
     v.setValue(unit);
@@ -153,11 +153,11 @@ int KoResourceManager::handleRadius() const
     return 3; // default value.
 }
 
-KoUnit KoResourceManager::unitResource(int key) const
+KUnit KoResourceManager::unitResource(int key) const
 {
     if (d->lazyResources.contains(key))
         d->fetchLazy(key, this);
-    return resource(key).value<KoUnit>();
+    return resource(key).value<KUnit>();
 }
 
 void KoResourceManager::setGrabSensitivity(int grabSensitivity)

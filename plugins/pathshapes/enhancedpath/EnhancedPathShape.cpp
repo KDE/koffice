@@ -32,7 +32,7 @@
 #include <KoXmlReader.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextOnShapeContainer.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoOdfWorkaround.h>
 #include <KoPathPoint.h>
 
@@ -453,8 +453,8 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
     }
 
     QSizeF size;
-    size.setWidth(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width")));
-    size.setHeight(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height")));
+    size.setWidth(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width")));
+    size.setHeight(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height")));
     // the viewbox is to be fitted into the size of the shape, so before setting
     // the size we just loaded // we set the viewbox to be the basis to calculate
     // the viewbox matrix from
@@ -462,8 +462,8 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
     setSize(size);
 
     QPointF pos;
-    pos.setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x")));
-    pos.setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y")));
+    pos.setX(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x")));
+    pos.setY(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y")));
     setPosition(pos - m_viewMatrix.map(QPointF(0, 0)) - m_viewBoxOffset);
 
     loadOdfAttributes(element, context, OdfMandatories | OdfTransformation);

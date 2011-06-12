@@ -29,7 +29,7 @@
 
 // KOffice
 #include <KOdfPageLayoutData.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 // Qt
 #include <QSize>

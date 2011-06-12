@@ -31,7 +31,7 @@
 #include <KOdfLoadingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <KoXmlWriter.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoText.h>
 #include <KoImageCollection.h>
 #include <KoImageData.h>
@@ -515,11 +515,11 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
         if (localName == "list-level-properties") {
             QString spaceBefore(property.attributeNS(KoXmlNS::text, "space-before"));
             if (!spaceBefore.isEmpty())
-                setIndent(KoUnit::parseValue(spaceBefore));
+                setIndent(KUnit::parseValue(spaceBefore));
 
             QString minLableWidth(property.attributeNS(KoXmlNS::text, "min-label-width"));
             if (!minLableWidth.isEmpty())
-                setMinimumWidth(KoUnit::parseValue(minLableWidth));
+                setMinimumWidth(KUnit::parseValue(minLableWidth));
 
             QString textAlign(property.attributeNS(KoXmlNS::fo, "text-align"));
             if (!textAlign.isEmpty())
@@ -527,15 +527,15 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
 
             QString minLableDistance(property.attributeNS(KoXmlNS::text, "min-label-distance"));
             if (!minLableDistance.isEmpty())
-                setMinimumDistance(KoUnit::parseValue(minLableDistance));
+                setMinimumDistance(KUnit::parseValue(minLableDistance));
 
             QString width(property.attributeNS(KoXmlNS::fo, "width"));
             if (!width.isEmpty())
-                setWidth(KoUnit::parseValue(width));
+                setWidth(KUnit::parseValue(width));
 
             QString height(property.attributeNS(KoXmlNS::fo, "height"));
             if (!height.isEmpty())
-                setHeight(KoUnit::parseValue(height));
+                setHeight(KUnit::parseValue(height));
         } else if (localName == "text-properties") {
             // TODO
             QString color(property.attributeNS(KoXmlNS::fo, "color"));

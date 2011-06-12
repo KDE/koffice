@@ -21,7 +21,7 @@
 
 #include "KoConfigMiscPage.h"
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoDocument.h>
 #include <KoUnitDoubleSpinBox.h>
 
@@ -46,7 +46,7 @@ public:
     KoDocument* doc;
     KSharedConfigPtr config;
 
-    KoUnit oldUnit;
+    KUnit oldUnit;
     QComboBox *unit;
     KIntNumInput * handleRadius;
     uint oldHandleRadius;
@@ -75,7 +75,7 @@ KoConfigMiscPage::KoConfigMiscPage(KoDocument* doc, char* name)
         d->oldCopyOffset = miscGroup.readEntry("CopyOffset", d->oldCopyOffset);
     }
 
-    KoUnit unit = d->doc->unit();
+    KUnit unit = d->doc->unit();
 
     QGroupBox* tmpQGroupBox = new QGroupBox(i18n("Misc"), this);
 
@@ -83,7 +83,7 @@ KoConfigMiscPage::KoConfigMiscPage(KoDocument* doc, char* name)
     grid->setSpacing(KDialog::spacingHint());
     grid->setMargin(KDialog::marginHint());
 
-    QString unitType = KoUnit::unitName(unit);
+    QString unitType = KUnit::unitName(unit);
     //#################"laurent
     //don't load unitType from config file because unit is
     //depend from kword file => unit can be different from config file
@@ -91,9 +91,9 @@ KoConfigMiscPage::KoConfigMiscPage(KoDocument* doc, char* name)
     grid->addWidget(new QLabel(i18n("Units:"), tmpQGroupBox), 0, 0);
 
     d->unit = new KComboBox(tmpQGroupBox);
-    d->unit->addItems(KoUnit::listOfUnitName());
+    d->unit->addItems(KUnit::listOfUnitName());
     grid->addWidget(d->unit, 0, 1);
-    d->oldUnit = KoUnit::unit(unitType);
+    d->oldUnit = KUnit::unit(unitType);
     d->unit->setCurrentIndex(d->oldUnit.indexInList());
 
     grid->addWidget(new QLabel(i18n("Handle radius:"), tmpQGroupBox), 1, 0);
@@ -139,9 +139,9 @@ void KoConfigMiscPage::apply()
 
     int currentUnit = d->unit->currentIndex();
     if (d->oldUnit.indexInList() != currentUnit) {
-        d->oldUnit = KoUnit((KoUnit::Unit)currentUnit);
+        d->oldUnit = KUnit((KUnit::Unit)currentUnit);
         d->doc->setUnit(d->oldUnit);
-        miscGroup.writeEntry("Units", KoUnit::unitName(d->oldUnit));
+        miscGroup.writeEntry("Units", KUnit::unitName(d->oldUnit));
     }
 
     uint currentHandleRadius = d->handleRadius->value();
@@ -169,7 +169,7 @@ void KoConfigMiscPage::slotDefault()
 
 void KoConfigMiscPage::slotUnitChanged(int u)
 {
-    KoUnit unit = KoUnit((KoUnit::Unit) u);
+    KUnit unit = KUnit((KUnit::Unit) u);
     d->copyOffset->blockSignals(true);
     d->copyOffset->setUnit(unit);
     d->copyOffset->blockSignals(false);

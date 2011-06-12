@@ -23,7 +23,7 @@
 #include "kowidgets_export.h"
 
 #include <KoText.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfPageLayoutData.h>
 #include <QWidget>
 
@@ -36,7 +36,7 @@ public:
     KoPageLayoutWidget(QWidget *parent, const KOdfPageLayoutData &layout);
     ~KoPageLayoutWidget();
 
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
     void showUnitchooser(bool on);
     void showPageSpread(bool on);
     void showPageStyles(bool on);
@@ -49,7 +49,7 @@ public:
 
 signals:
     void layoutChanged(const KOdfPageLayoutData &layout);
-    void unitChanged(const KoUnit &unit);
+    void unitChanged(const KUnit &unit);
 
 public slots:
     void setPageLayout(const KOdfPageLayoutData &layout);

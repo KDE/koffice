@@ -30,7 +30,7 @@
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
 #include <KOdfStorageDevice.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfGenericStyle.h>
 #include <KoTextOnShapeContainer.h>
 

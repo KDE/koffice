@@ -22,7 +22,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoPASavingContext.h>
 #include <kdebug.h>
 
@@ -111,7 +111,7 @@ qreal SCPlaceholder::percent(const KoXmlElement &element, const char * type, qre
         tmp = value.remove('%').toDouble() / 100.0;
     }
     else { // fixed value
-        tmp = KoUnit::parseValue(value) / absolute;
+        tmp = KUnit::parseValue(value) / absolute;
         // The following is done so that we get the same data as when we save/load the placeholder.
         // This is needed that we don't get the same layout twice in the docker due to rounding
         // differences of absolute and relative placeholders of the same layout

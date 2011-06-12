@@ -543,7 +543,7 @@ void KCCanvas::updateCanvas(const QRectF& rc)
     update(clipRect);
 }
 
-KoUnit KCCanvas::unit() const
+KUnit KCCanvas::unit() const
 {
     return doc()->unit();
 }

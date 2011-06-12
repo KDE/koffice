@@ -925,7 +925,7 @@ void KWDocument::printDebug()
     kDebug(32001) << "                 Debug info";
     kDebug(32001) << "Document:" << this;
     /*kDebug(32001) <<"Type of document:" << (m_pageStyle.hasMainTextFrame()?"WP":"DTP"); */
-    kDebug(32001) << "Units:" << KoUnit::unitName(unit());
+    kDebug(32001) << "Units:" << KUnit::unitName(unit());
     kDebug(32001) << "# Framesets:" << frameSetCount();
     int i = 0;
     foreach (KWFrameSet *fs, m_frameSets) {

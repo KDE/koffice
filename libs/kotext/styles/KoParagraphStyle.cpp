@@ -43,7 +43,7 @@
 #include <QFontMetrics>
 #include <QBuffer>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
@@ -1073,23 +1073,23 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     // Spacing (padding)
     const QString paddingLeft(styleStack.property(KoXmlNS::fo, "padding-left" ));
     if (!paddingLeft.isEmpty()) {
-        setLeftPadding(KoUnit::parseValue(paddingLeft));
+        setLeftPadding(KUnit::parseValue(paddingLeft));
     }
     const QString paddingRight(styleStack.property(KoXmlNS::fo, "padding-right" ));
     if (!paddingRight.isEmpty()) {
-        setRightPadding(KoUnit::parseValue(paddingRight));
+        setRightPadding(KUnit::parseValue(paddingRight));
     }
     const QString paddingTop(styleStack.property(KoXmlNS::fo, "padding-top" ));
     if (paddingTop.isEmpty()) {
-        setTopPadding(KoUnit::parseValue(paddingTop));
+        setTopPadding(KUnit::parseValue(paddingTop));
     }
     const QString paddingBottom(styleStack.property(KoXmlNS::fo, "padding-bottom" ));
     if (!paddingBottom.isEmpty()) {
-        setBottomPadding(KoUnit::parseValue(paddingBottom));
+        setBottomPadding(KUnit::parseValue(paddingBottom));
     }
     const QString padding(styleStack.property(KoXmlNS::fo, "padding"));
     if (!padding.isEmpty()) {
-        setPadding(KoUnit::parseValue(padding));
+        setPadding(KUnit::parseValue(padding));
     }
 
     // Indentation (margin)
@@ -1097,25 +1097,25 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     bool hasMarginRight = false;
     const QString marginLeft(styleStack.property(KoXmlNS::fo, "margin-left" ));
     if (!marginLeft.isEmpty()) {
-        setLeftMargin(KoUnit::parseValue(marginLeft));
+        setLeftMargin(KUnit::parseValue(marginLeft));
         hasMarginLeft = true;
     }
     const QString marginRight(styleStack.property(KoXmlNS::fo, "margin-right" ));
     if (!marginRight.isEmpty()) {
-        setRightMargin(KoUnit::parseValue(marginRight));
+        setRightMargin(KUnit::parseValue(marginRight));
         hasMarginRight = true;
     }
     const QString marginTop(styleStack.property(KoXmlNS::fo, "margin-top"));
     if (!marginTop.isEmpty()) {
-        setTopMargin(KoUnit::parseValue(marginTop));
+        setTopMargin(KUnit::parseValue(marginTop));
     }
     const QString marginBottom(styleStack.property(KoXmlNS::fo, "margin-bottom"));
     if (!marginBottom.isEmpty()) {
-        setBottomMargin(KoUnit::parseValue(marginBottom));
+        setBottomMargin(KUnit::parseValue(marginBottom));
     }
     const QString margin(styleStack.property(KoXmlNS::fo, "margin"));
     if (!margin.isEmpty()) {
-        setMargin(KoUnit::parseValue(margin));
+        setMargin(KUnit::parseValue(margin));
         hasMarginLeft = true;
         hasMarginRight = true;
     }
@@ -1132,7 +1132,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     else {
         const QString textIndent(styleStack.property(KoXmlNS::fo, "text-indent"));
         if (!textIndent.isEmpty()) {
-            setTextIndent(KoUnit::parseValue(textIndent));
+            setTextIndent(KUnit::parseValue(textIndent));
         }
     }
 
@@ -1147,7 +1147,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
                 if (lh > 0) // invalid conversions are 0, negative heights are invalid too.
                     setLineHeightPercent(lh);
             } else  { // fixed value
-                const qreal lh = KoUnit::parseValue(lineHeight);
+                const qreal lh = KUnit::parseValue(lineHeight);
                 if (lh > 0) // invalid conversions are 0, negative heights are invalid too.
                     setLineHeightAbsolute(lh);
             }
@@ -1158,13 +1158,13 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     else {
         const QString lineSpacing(styleStack.property(KoXmlNS::style, "line-spacing"));
         if (!lineSpacing.isEmpty()) {    // 3.11.3
-            setLineSpacing(KoUnit::parseValue(lineSpacing));
+            setLineSpacing(KUnit::parseValue(lineSpacing));
         }
     }
 
     const QString lineHeightAtLeast(styleStack.property(KoXmlNS::style, "line-height-at-least"));
     if (!lineHeightAtLeast.isEmpty() && !normalLineHeight && lineHeightAbsolute() == 0) {    // 3.11.2
-        setMinimumLineHeight(KoUnit::parseValue(lineHeightAtLeast));
+        setMinimumLineHeight(KUnit::parseValue(lineHeightAtLeast));
     }  // Line-height-at-least is mutually exclusive with absolute line-height
     const QString fontIndependentLineSpacing(styleStack.property(KoXmlNS::style, "font-independent-line-spacing"));
     if (!fontIndependentLineSpacing.isEmpty() && !normalLineHeight && lineHeightAbsolute() == 0) {
@@ -1174,7 +1174,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     // Tabulators
     const QString tabStopDistance(styleStack.property(KoXmlNS::style, "tab-stop-distance"));
     if (!tabStopDistance.isEmpty()) {
-        qreal stopDistance = KoUnit::parseValue(tabStopDistance);
+        qreal stopDistance = KUnit::parseValue(tabStopDistance);
         if (stopDistance > 0)
             setTabStopDistance(stopDistance);
     }
@@ -1186,7 +1186,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
             Q_ASSERT(tabStop.localName() == "tab-stop");
             // Tab position
             KoText::Tab tab;
-            tab.position = KoUnit::parseValue(tabStop.attributeNS(KoXmlNS::style, "position", QString()));
+            tab.position = KUnit::parseValue(tabStop.attributeNS(KoXmlNS::style, "position", QString()));
             kDebug(32500) << "tab position " << tab.position;
             // Tab stop positions in the XML are relative to the left-margin
             // Equivalently, relative to the left end of our textshape
@@ -1280,7 +1280,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
                 tab.leaderWidth = 100 * width.toDouble();
             } else {
                 tab.leaderWeight = KoCharacterStyle::LengthLineWeight;
-                tab.leaderWidth = KoUnit::parseValue(width);
+                tab.leaderWidth = KUnit::parseValue(width);
             }
 
             tab.leaderText = tabStop.attributeNS(KoXmlNS::style, "leader-text", QString());
@@ -1317,7 +1317,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     const QString borderLeft(styleStack.property(KoXmlNS::fo, "border", "left"));
     if (!borderLeft.isEmpty() && borderLeft != "none" && borderLeft != "hidden") {
         QStringList bv = borderLeft.split(' ', QString::SkipEmptyParts);
-        setLeftBorderWidth(KoUnit::parseValue(bv.value(0), 1.0));
+        setLeftBorderWidth(KUnit::parseValue(bv.value(0), 1.0));
         setLeftBorderStyle(KOdfBorders::odfBorderStyle(bv.value(1)));
         setLeftBorderColor(QColor(bv.value(2)));
         //setLeftInnerBorderWidth(qreal width);
@@ -1326,51 +1326,51 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     const QString borderTop(styleStack.property(KoXmlNS::fo, "border", "top"));
     if (!borderTop.isEmpty() && borderTop != "none" && borderTop != "hidden") {
         QStringList bv = borderTop.split(' ', QString::SkipEmptyParts);
-        setTopBorderWidth(KoUnit::parseValue(bv.value(0), 1.0));
+        setTopBorderWidth(KUnit::parseValue(bv.value(0), 1.0));
         setTopBorderStyle(KOdfBorders::odfBorderStyle(bv.value(1)));
         setTopBorderColor(QColor(bv.value(2)));
     }
     const QString borderRight(styleStack.property(KoXmlNS::fo, "border", "right"));
     if (!borderRight.isEmpty() && borderRight != "none" && borderRight != "hidden") {
         QStringList bv = borderRight.split(' ', QString::SkipEmptyParts);
-        setRightBorderWidth(KoUnit::parseValue(bv.value(0), 1.0));
+        setRightBorderWidth(KUnit::parseValue(bv.value(0), 1.0));
         setRightBorderStyle(KOdfBorders::odfBorderStyle(bv.value(1)));
         setRightBorderColor(QColor(bv.value(2)));
     }
     const QString borderBottom(styleStack.property(KoXmlNS::fo, "border", "bottom"));
     if (!borderBottom.isEmpty() && borderBottom != "none" && borderBottom != "hidden") {
         QStringList bv = borderBottom.split(' ', QString::SkipEmptyParts);
-        setBottomBorderWidth(KoUnit::parseValue(bv.value(0), 1.0));
+        setBottomBorderWidth(KUnit::parseValue(bv.value(0), 1.0));
         setBottomBorderStyle(KOdfBorders::odfBorderStyle(bv.value(1)));
         setBottomBorderColor(QColor(bv.value(2)));
     }
     const QString borderLineWidthLeft(styleStack.property(KoXmlNS::style, "border-line-width", "left"));
     if (!borderLineWidthLeft.isEmpty() && borderLineWidthLeft != "none" && borderLineWidthLeft != "hidden") {
         QStringList blw = borderLineWidthLeft.split(' ', QString::SkipEmptyParts);
-        setLeftInnerBorderWidth(KoUnit::parseValue(blw.value(0), 0.1));
-        setLeftBorderSpacing(KoUnit::parseValue(blw.value(1), 1.0));
-        setLeftBorderWidth(KoUnit::parseValue(blw.value(2), 0.1));
+        setLeftInnerBorderWidth(KUnit::parseValue(blw.value(0), 0.1));
+        setLeftBorderSpacing(KUnit::parseValue(blw.value(1), 1.0));
+        setLeftBorderWidth(KUnit::parseValue(blw.value(2), 0.1));
     }
     const QString borderLineWidthTop(styleStack.property(KoXmlNS::style, "border-line-width", "top"));
     if (!borderLineWidthTop.isEmpty() && borderLineWidthTop != "none" && borderLineWidthTop != "hidden") {
         QStringList blw = borderLineWidthTop.split(' ', QString::SkipEmptyParts);
-        setTopInnerBorderWidth(KoUnit::parseValue(blw.value(0), 0.1));
-        setTopBorderSpacing(KoUnit::parseValue(blw.value(1), 1.0));
-        setTopBorderWidth(KoUnit::parseValue(blw.value(2), 0.1));
+        setTopInnerBorderWidth(KUnit::parseValue(blw.value(0), 0.1));
+        setTopBorderSpacing(KUnit::parseValue(blw.value(1), 1.0));
+        setTopBorderWidth(KUnit::parseValue(blw.value(2), 0.1));
     }
     const QString borderLineWidthRight(styleStack.property(KoXmlNS::style, "border-line-width", "right"));
     if (!borderLineWidthRight.isEmpty() && borderLineWidthRight != "none" && borderLineWidthRight != "hidden") {
         QStringList blw = borderLineWidthRight.split(' ', QString::SkipEmptyParts);
-        setRightInnerBorderWidth(KoUnit::parseValue(blw.value(0), 0.1));
-        setRightBorderSpacing(KoUnit::parseValue(blw.value(1), 1.0));
-        setRightBorderWidth(KoUnit::parseValue(blw.value(2), 0.1));
+        setRightInnerBorderWidth(KUnit::parseValue(blw.value(0), 0.1));
+        setRightBorderSpacing(KUnit::parseValue(blw.value(1), 1.0));
+        setRightBorderWidth(KUnit::parseValue(blw.value(2), 0.1));
     }
     const QString borderLineWidthBottom(styleStack.property(KoXmlNS::style, "border-line-width", "bottom"));
     if (!borderLineWidthBottom.isEmpty() && borderLineWidthBottom != "none" && borderLineWidthBottom != "hidden") {
         QStringList blw = borderLineWidthBottom.split(' ', QString::SkipEmptyParts);
-        setBottomInnerBorderWidth(KoUnit::parseValue(blw.value(0), 0.1));
-        setBottomBorderSpacing(KoUnit::parseValue(blw.value(1), 1.0));
-        setBottomBorderWidth(KoUnit::parseValue(blw.value(2), 0.1));
+        setBottomInnerBorderWidth(KUnit::parseValue(blw.value(0), 0.1));
+        setBottomBorderSpacing(KUnit::parseValue(blw.value(1), 1.0));
+        setBottomBorderWidth(KUnit::parseValue(blw.value(2), 0.1));
     }
 
     // drop caps
@@ -1385,7 +1385,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
         }
         const QString lines = dropCap.attributeNS(KoXmlNS::style, "lines", QString("1"));
         setDropCapsLines(lines.toInt());
-        const qreal distance = KoUnit::parseValue(dropCap.attributeNS(KoXmlNS::style, "distance", QString()));
+        const qreal distance = KUnit::parseValue(dropCap.attributeNS(KoXmlNS::style, "distance", QString()));
         setDropCapsDistance(distance);
 
         const QString dropstyle = dropCap.attributeNS(KoXmlNS::style, "style-name");

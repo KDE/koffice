@@ -37,7 +37,7 @@ public:
 
     void setStyleManager(KoStyleManager *sm);
 
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
     // use the widget without the style selector (and new/delete buttons)
     void hideSelector();

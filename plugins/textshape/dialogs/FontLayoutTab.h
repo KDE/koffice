@@ -37,7 +37,7 @@ public:
     void setDisplay(KoCharacterStyle *style);
     void save(KoCharacterStyle *style);
 
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 private:
     Ui::FontLayoutTab widget;

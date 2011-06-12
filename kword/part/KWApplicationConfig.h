@@ -23,7 +23,7 @@
 
 class KConfigGroup;
 class KWDocument;
-class KoUnit;
+class KUnit;
 
 /**
  * A set of config settings for application-specific stuff (compared to document-specific stuff).
@@ -123,7 +123,7 @@ public:
         return m_defaultColumnSpacing;
     }
 
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 private:
     bool m_viewFrameBorders, m_viewRulers, m_viewFormattingChars, m_viewFormattingBreak, m_viewFormattingSpace;

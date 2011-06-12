@@ -46,10 +46,10 @@ public:
     void showApplyToDocument(bool on);
 
     void showUnitchooser(bool on);
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 signals:
-    void unitChanged(const KoUnit &unit);
+    void unitChanged(const KUnit &unit);
 
 private slots:
     void setPageLayout(const KOdfPageLayoutData &layout);

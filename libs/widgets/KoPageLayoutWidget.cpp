@@ -26,7 +26,7 @@ class KoPageLayoutWidget::Private
 public:
     Ui::KoPageLayoutWidget widget;
     KOdfPageLayoutData pageLayout;
-    KoUnit unit;
+    KUnit unit;
 
     QButtonGroup *orientationGroup;
     bool marginsEnabled;
@@ -59,7 +59,7 @@ KoPageLayoutWidget::KoPageLayoutWidget(QWidget *parent, const KOdfPageLayoutData
     width = qMax(width, qMax(d->widget.leftLabel->width(), d->widget.rightLabel->width()));
     d->widget.leftLabel->setMinimumSize(QSize(width, 5));
 
-    d->widget.units->addItems(KoUnit::listOfUnitName());
+    d->widget.units->addItems(KUnit::listOfUnitName());
     d->widget.sizes->addItems(KOdfPageFormat::allFormats());
     setPageSpread(false);
 
@@ -76,7 +76,7 @@ KoPageLayoutWidget::KoPageLayoutWidget(QWidget *parent, const KOdfPageLayoutData
     connect(d->widget.width, SIGNAL(valueChangedPt(qreal)), this, SLOT(optionsChanged()));
     connect(d->widget.height, SIGNAL(valueChangedPt(qreal)), this, SLOT(optionsChanged()));
 
-    setUnit(KoUnit(KoUnit::Millimeter));
+    setUnit(KUnit(KUnit::Millimeter));
     setPageLayout(layout);
     if (layout.format == 0) // make sure we always call this during startup, even if the A3 (index=0) was chosen
         sizeChanged(layout.format);
@@ -120,10 +120,10 @@ void KoPageLayoutWidget::sizeChanged(int row)
 
 void KoPageLayoutWidget::unitChanged(int row)
 {
-    setUnit(KoUnit(static_cast<KoUnit::Unit> (row)));
+    setUnit(KUnit(static_cast<KUnit::Unit> (row)));
 }
 
-void KoPageLayoutWidget::setUnit(const KoUnit &unit)
+void KoPageLayoutWidget::setUnit(const KUnit &unit)
 {
     if (d->unit == unit)
         return;

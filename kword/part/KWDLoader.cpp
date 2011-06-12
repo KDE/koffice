@@ -224,7 +224,7 @@ bool KWDLoader::load(KoXmlElement &root)
                 m_firstPageStyle.setFooterPolicy(KWord::HFTypeNone);
         }
         if (attributes.hasAttribute("unit"))
-            m_document->setUnit(KoUnit::unit(attributes.attribute("unit")));
+            m_document->setUnit(KUnit::unit(attributes.attribute("unit")));
         //m_document->m_hasTOC = attributes.attribute("hasTOC") == "1";
         //if(attributes.hasAttribute("tabStopValue"))
         //    m_document->m_tabStop = attributes.attribute("tabStopValue").toDouble();

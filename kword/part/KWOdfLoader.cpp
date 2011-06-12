@@ -153,7 +153,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
         stack.push(*defaultParagStyle);
         stack.setTypeProperties("paragraph");
         QString tabStopVal = stack.property(KoXmlNS::style, "tab-stop-distance");
-        if (!tabStopVal.isEmpty()) m_tabStop = KoUnit::parseValue(tabStopVal);
+        if (!tabStopVal.isEmpty()) m_tabStop = KUnit::parseValue(tabStopVal);
     }
     m_initialEditing = 0;
     // TODO MAILMERGE
@@ -246,7 +246,7 @@ void KWOdfLoader::loadSettings(const KoXmlDocument &settingsDoc)
     if (!viewSettings.isNull()) {
         QString docUnit(viewSettings.parseConfigItemString("unit"));
         if (!docUnit.isEmpty())
-            m_document->setUnit(KoUnit::unit(docUnit));
+            m_document->setUnit(KUnit::unit(docUnit));
     }
 
     //1.6: KWOasisLoader::loadOasisIgnoreList

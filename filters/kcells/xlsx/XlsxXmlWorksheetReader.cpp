@@ -39,7 +39,7 @@
 #include <MsooXmlUnits.h>
 #include <MsooXmlGlobal.h>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KoOdfNumberStyles.h>

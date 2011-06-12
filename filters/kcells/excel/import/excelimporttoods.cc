@@ -32,7 +32,7 @@
 #include <kdebug.h>
 #include <KoFilterChain.h>
 #include <KoGlobal.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <kpluginfactory.h>
 
 #include <KoXmlWriter.h>

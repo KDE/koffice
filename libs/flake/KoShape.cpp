@@ -53,7 +53,7 @@
 #include <KoXmlNS.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfStylesReader.h>
 #include <KoOdfGraphicStyles.h>
 #include <KOdfLoadingContext.h>
@@ -256,8 +256,8 @@ void KoShapePrivate::loadOdfGluePoints(const KoXmlElement &gluePoints)
         }
         connectorPolicies[index] = policy;
 
-        qreal x = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x"));
-        qreal y = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y"));
+        qreal x = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x"));
+        qreal y = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y"));
 
         connectors[index] = QPointF(x, y);
     }
@@ -1134,18 +1134,18 @@ bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingConte
     if (attributes & OdfPosition) {
         QPointF pos(position());
         if (element.hasAttributeNS(KoXmlNS::svg, "x"))
-            pos.setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
+            pos.setX(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
         if (element.hasAttributeNS(KoXmlNS::svg, "y"))
-            pos.setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
+            pos.setY(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
         setPosition(pos);
     }
 
     if (attributes & OdfSize) {
         QSizeF s(size());
         if (element.hasAttributeNS(KoXmlNS::svg, "width"))
-            s.setWidth(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width")));
+            s.setWidth(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width")));
         if (element.hasAttributeNS(KoXmlNS::svg, "height"))
-            s.setHeight(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height")));
+            s.setHeight(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height")));
         setSize(s);
     }
 
@@ -1309,8 +1309,8 @@ KoShapeShadow *KoShapePrivate::loadOdfShadow(KoShapeLoadingContext &context) con
     if (shadowStyle == "visible" || shadowStyle == "hidden") {
         KoShapeShadow *shadow = new KoShapeShadow();
         QColor shadowColor(styleStack.property(KoXmlNS::draw, "shadow-color"));
-        qreal offsetX = KoUnit::parseValue(styleStack.property(KoXmlNS::draw, "shadow-offset-x"));
-        qreal offsetY = KoUnit::parseValue(styleStack.property(KoXmlNS::draw, "shadow-offset-y"));
+        qreal offsetX = KUnit::parseValue(styleStack.property(KoXmlNS::draw, "shadow-offset-x"));
+        qreal offsetY = KUnit::parseValue(styleStack.property(KoXmlNS::draw, "shadow-offset-y"));
         shadow->setOffset(QPointF(offsetX, offsetY));
 
         QString opacity = styleStack.property(KoXmlNS::draw, "shadow-opacity");
@@ -1348,8 +1348,8 @@ QTransform KoShape::parseOdfTransform(const QString &transform)
         if (cmd == "rotate") {
             QTransform rotMatrix;
             if (params.count() == 3) {
-                qreal x = KoUnit::parseValue(params[1]);
-                qreal y = KoUnit::parseValue(params[2]);
+                qreal x = KUnit::parseValue(params[1]);
+                qreal y = KUnit::parseValue(params[2]);
 
                 rotMatrix.translate(x, y);
                 // oo2 rotates by radians
@@ -1363,11 +1363,11 @@ QTransform KoShape::parseOdfTransform(const QString &transform)
         } else if (cmd == "translate") {
             QTransform moveMatrix;
             if (params.count() == 2) {
-                qreal x = KoUnit::parseValue(params[0]);
-                qreal y = KoUnit::parseValue(params[1]);
+                qreal x = KUnit::parseValue(params[0]);
+                qreal y = KUnit::parseValue(params[1]);
                 moveMatrix.translate(x, y);
             } else   // Spec : if only one param given, assume 2nd param to be 0
-                moveMatrix.translate(KoUnit::parseValue(params[0]) , 0);
+                moveMatrix.translate(KUnit::parseValue(params[0]) , 0);
             matrix = matrix * moveMatrix;
         } else if (cmd == "scale") {
             QTransform scaleMatrix;
@@ -1395,7 +1395,7 @@ QTransform KoShape::parseOdfTransform(const QString &transform)
             if (params.count() >= 6) {
                 m.setMatrix(params[0].toDouble(), params[1].toDouble(), 0,
                         params[2].toDouble(), params[3].toDouble(), 0,
-                        KoUnit::parseValue(params[4]), KoUnit::parseValue(params[5]), 1);
+                        KUnit::parseValue(params[4]), KUnit::parseValue(params[5]), 1);
             }
             matrix = matrix * m;
         }

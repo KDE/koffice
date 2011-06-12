@@ -45,7 +45,7 @@ public:
     void cancel();
 
     /// reimplemented
-    virtual void setUnit(KoUnit unit);
+    virtual void setUnit(KUnit unit);
 
     /// reimplemented
     virtual bool showOnShapeCreate() {

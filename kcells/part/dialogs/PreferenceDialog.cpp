@@ -75,7 +75,7 @@ public:
     Ui::InterfaceOptionsWidget interfaceOptions;
     KCells::MoveTo oldCursorMovement;
     KCells::MethodOfCalc oldFunction;
-    KoUnit oldUnit;
+    KUnit oldUnit;
     double oldIndentationStep;
     bool oldCaptureAllArrowKeys;
     QColor oldGridColor;
@@ -133,7 +133,7 @@ void PreferenceDialog::Private::applyInterfaceOptions()
     }
 
     const int unitIndex = interfaceOptions.m_unit->currentIndex();
-    KoUnit unit((KoUnit::Unit)interfaceOptions.m_unit->itemData(unitIndex).toInt());
+    KUnit unit((KUnit::Unit)interfaceOptions.m_unit->itemData(unitIndex).toInt());
     if (unit != view->doc()->unit()) {
         view->doc()->setUnit(unit);
         parameterGroup.writeEntry("Unit", unit.indexInList());
@@ -330,14 +330,14 @@ PreferenceDialog::PreferenceDialog(KCView* view)
     d->interfaceOptions.m_statusBarFunction->addItem(i18n("None"), KCells::NoneCalc);
 
     KComboBox* unitComboBox = d->interfaceOptions.m_unit;
-    unitComboBox->addItem(KoUnit::unitDescription(KoUnit(KoUnit::Millimeter)), KoUnit::Millimeter);
-    unitComboBox->addItem(KoUnit::unitDescription(KoUnit(KoUnit::Point)), KoUnit::Point);
-    unitComboBox->addItem(KoUnit::unitDescription(KoUnit(KoUnit::Inch)), KoUnit::Inch);
-    unitComboBox->addItem(KoUnit::unitDescription(KoUnit(KoUnit::Centimeter)), KoUnit::Centimeter);
-    unitComboBox->addItem(KoUnit::unitDescription(KoUnit(KoUnit::Decimeter)), KoUnit::Decimeter);
-    unitComboBox->addItem(KoUnit::unitDescription(KoUnit(KoUnit::Pica)), KoUnit::Pica);
-    unitComboBox->addItem(KoUnit::unitDescription(KoUnit(KoUnit::Cicero)), KoUnit::Cicero);
-    unitComboBox->addItem(KoUnit::unitDescription(KoUnit(KoUnit::Pixel)), KoUnit::Pixel);
+    unitComboBox->addItem(KUnit::unitDescription(KUnit(KUnit::Millimeter)), KUnit::Millimeter);
+    unitComboBox->addItem(KUnit::unitDescription(KUnit(KUnit::Point)), KUnit::Point);
+    unitComboBox->addItem(KUnit::unitDescription(KUnit(KUnit::Inch)), KUnit::Inch);
+    unitComboBox->addItem(KUnit::unitDescription(KUnit(KUnit::Centimeter)), KUnit::Centimeter);
+    unitComboBox->addItem(KUnit::unitDescription(KUnit(KUnit::Decimeter)), KUnit::Decimeter);
+    unitComboBox->addItem(KUnit::unitDescription(KUnit(KUnit::Pica)), KUnit::Pica);
+    unitComboBox->addItem(KUnit::unitDescription(KUnit(KUnit::Cicero)), KUnit::Cicero);
+    unitComboBox->addItem(KUnit::unitDescription(KUnit(KUnit::Pixel)), KUnit::Pixel);
     connect(unitComboBox, SIGNAL(currentIndexChanged(int)),
             this, SLOT(unitChanged(int)));
     unitChanged(0);
@@ -443,7 +443,7 @@ void PreferenceDialog::slotReset()
 
 void PreferenceDialog::unitChanged(int index)
 {
-    KoUnit unit((KoUnit::Unit)d->interfaceOptions.m_unit->itemData(index).toInt());
+    KUnit unit((KUnit::Unit)d->interfaceOptions.m_unit->itemData(index).toInt());
     d->interfaceOptions.m_indentationStep->setUnit(unit);
 }
 

@@ -97,7 +97,7 @@ public:
     /// reimplemented method from KoCanvasBase
     virtual KoToolProxy* toolProxy() const;
     /// reimplemented method from KoCanvasBase
-    virtual KoUnit unit() const;
+    virtual KUnit unit() const;
     /// reimplemented method from KoCanvasBase
     virtual void updateInputMethodInfo();
     /// reimplemented method from KoCanvasBase

@@ -27,7 +27,7 @@
 #include <KoTextOnShapeContainer.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <math.h>
 
@@ -91,15 +91,15 @@ bool EllipseShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
     bool radiusGiven = true;
 
     if (element.hasAttributeNS( KoXmlNS::svg, "rx") && element.hasAttributeNS(KoXmlNS::svg, "ry")) {
-        qreal rx = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "rx"));
-        qreal ry = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "ry"));
+        qreal rx = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "rx"));
+        qreal ry = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "ry"));
         size = QSizeF( 2*rx, 2*ry );
     } else if (element.hasAttributeNS(KoXmlNS::svg, "r")) {
-        qreal r = KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "r"));
+        qreal r = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "r"));
         size = QSizeF(2*r, 2*r);
     } else {
-        size.setWidth(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width", QString())));
-        size.setHeight(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height", QString())));
+        size.setWidth(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width", QString())));
+        size.setHeight(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height", QString())));
         radiusGiven = false;
     }
     setSize(size);
@@ -107,12 +107,12 @@ bool EllipseShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
     QPointF pos;
 
     if (element.hasAttributeNS(KoXmlNS::svg, "cx") && element.hasAttributeNS(KoXmlNS::svg, "cy")) {
-        qreal cx = KoUnit::parseValue(element.attributeNS( KoXmlNS::svg, "cx"));
-        qreal cy = KoUnit::parseValue(element.attributeNS( KoXmlNS::svg, "cy"));
+        qreal cx = KUnit::parseValue(element.attributeNS( KoXmlNS::svg, "cx"));
+        qreal cy = KUnit::parseValue(element.attributeNS( KoXmlNS::svg, "cy"));
         pos = QPointF(cx - 0.5 * size.width(), cy - 0.5 * size.height());
     } else {
-        pos.setX(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
-        pos.setY(KoUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
+        pos.setX(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
+        pos.setY(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
     }
     setPosition(pos);
 

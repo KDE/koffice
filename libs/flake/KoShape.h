@@ -77,7 +77,7 @@ class KoXmlElement;
  * in the model to be reused in different parts of the document. For example
  * by having two flake objects that show that same data. Or each showing a section of it.
  *
- * The KoShape data is completely in postscript-points (pt) (see KoUnit
+ * The KoShape data is completely in postscript-points (pt) (see KUnit
  * for conversion methods to and from points).
  * This image will explain the real-world use of the shape and its options.
  * <img src="../flake_shape_coords.png" align=center><br>

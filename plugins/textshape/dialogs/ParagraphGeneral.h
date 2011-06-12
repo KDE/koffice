@@ -26,7 +26,7 @@
 #include <QList>
 
 class KoParagraphStyle;
-class KoUnit;
+class KUnit;
 class ParagraphBulletsNumbers;
 class ParagraphIndentSpacing;
 class ParagraphLayout;
@@ -41,7 +41,7 @@ public:
     void setStyle(KoParagraphStyle *style, int level = 0);
     void setParagraphStyles(const QList<KoParagraphStyle*> styles);
     void setDefaultParagraphStyle(KoParagraphStyle *style);
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
     void switchToGeneralTab();
     void hideStyleName(bool hide);

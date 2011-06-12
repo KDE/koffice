@@ -21,7 +21,7 @@
 #include "KoShape.h"
 
 #include <KoXmlReader.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #ifndef QT_NO_DEBUG_STREAM
 QDebug operator<<(QDebug debug, const KoInsets &insets)
@@ -59,13 +59,13 @@ void KoInsets::saveTo(KoShape *shape, const QString &prefix) const
 
 void KoInsets::fillFrom(const KoXmlElement &element, const QString &ns, const QString &prefix)
 {
-    const qreal margin(KoUnit::parseValue(element.attributeNS(ns, prefix)));
+    const qreal margin(KUnit::parseValue(element.attributeNS(ns, prefix)));
     QString marginL = element.attributeNS(ns, prefix + "-left");
-    left = KoUnit::parseValue(marginL, margin);
+    left = KUnit::parseValue(marginL, margin);
     QString marginT = element.attributeNS(ns, prefix + "-top");
-    top = KoUnit::parseValue(marginT, margin);
+    top = KUnit::parseValue(marginT, margin);
     QString marginB = element.attributeNS(ns, prefix + "-bottom");
-    bottom = KoUnit::parseValue(marginB, margin);
+    bottom = KUnit::parseValue(marginB, margin);
     QString marginR = element.attributeNS(ns, prefix + "-right");
-    right = KoUnit::parseValue(marginR, margin);
+    right = KUnit::parseValue(marginR, margin);
 }

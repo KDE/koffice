@@ -233,7 +233,7 @@ void DefaultToolWidget::sizeHasChanged()
     }
 }
 
-void DefaultToolWidget::setUnit( const KoUnit &unit )
+void DefaultToolWidget::setUnit( const KUnit &unit )
 {
     m_blockSignals = true;
     positionXSpinBox->setUnit( unit );
@@ -246,7 +246,7 @@ void DefaultToolWidget::setUnit( const KoUnit &unit )
 void DefaultToolWidget::resourceChanged( int key, const QVariant & res )
 {
     if( key == KoCanvasResource::Unit )
-        setUnit(res.value<KoUnit>());
+        setUnit(res.value<KUnit>());
     else if( key == DefaultTool::HotPosition )
     {
         if( res.toInt() != positionSelector->position() )

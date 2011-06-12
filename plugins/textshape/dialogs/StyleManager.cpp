@@ -211,7 +211,7 @@ void StyleManager::setCharacterStyle(KoCharacterStyle *style, bool canDelete, bo
     widget.characterStylePage->setStyleNameVisible(!partOfParag);
 }
 
-void StyleManager::setUnit(const KoUnit &unit)
+void StyleManager::setUnit(const KUnit &unit)
 {
     widget.paragraphStylePage->setUnit(unit);
     widget.characterStylePage->setUnit(unit);

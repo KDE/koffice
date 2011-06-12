@@ -38,7 +38,7 @@
 #include <kcodecs.h>
 #include <KoFilterChain.h>
 #include <KoGlobal.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <ooutils.h>
 
@@ -148,7 +148,7 @@ bool OpenCalcImport::readRowFormat(KoXmlElement & rowNode, KoXmlElement * rowSty
         kDebug(30518) << "Row: Child exists:" << property.tagName();
         if (!property.isNull() && property.localName() == "properties" && property.namespaceURI() == ooNS::style) {
             if (property.hasAttributeNS(ooNS::style, "row-height")) {
-                height = KoUnit::parseValue(property.attributeNS(ooNS::style, "row-height", QString()) , -1);
+                height = KUnit::parseValue(property.attributeNS(ooNS::style, "row-height", QString()) , -1);
             }
 
             if (property.hasAttributeNS(ooNS::fo, "break-before")) {
@@ -905,7 +905,7 @@ bool OpenCalcImport::readColLayouts(KoXmlElement & content, KCSheet * table)
             if (!property.isNull() && property.localName() == "properties" && property.namespaceURI() == ooNS::style) {
                 if (property.hasAttributeNS(ooNS::style, "column-width")) {
                     QString sWidth = property.attributeNS(ooNS::style, "column-width", QString());
-                    width = KoUnit::parseValue(property.attributeNS(ooNS::style, "column-width", QString()), width);
+                    width = KUnit::parseValue(property.attributeNS(ooNS::style, "column-width", QString()), width);
                     kDebug(30518) << "Col Width:" << sWidth;
                 }
 
@@ -1087,22 +1087,22 @@ void OpenCalcImport::loadOasisMasterLayoutPage(KCSheet * table, KOdfStyleStack &
     QString format;
 
     if (styleStack.hasProperty(ooNS::fo, "page-width")) {
-        width = KoUnit::parseValue(styleStack.property(ooNS::fo, "page-width"));
+        width = KUnit::parseValue(styleStack.property(ooNS::fo, "page-width"));
     }
     if (styleStack.hasProperty(ooNS::fo, "page-height")) {
-        height = KoUnit::parseValue(styleStack.property(ooNS::fo, "page-height"));
+        height = KUnit::parseValue(styleStack.property(ooNS::fo, "page-height"));
     }
     if (styleStack.hasProperty(ooNS::fo, "margin-top")) {
-        topMargin = KoUnit::parseValue(styleStack.property(ooNS::fo, "margin-top"));
+        topMargin = KUnit::parseValue(styleStack.property(ooNS::fo, "margin-top"));
     }
     if (styleStack.hasProperty(ooNS::fo, "margin-bottom")) {
-        bottomMargin = KoUnit::parseValue(styleStack.property(ooNS::fo, "margin-bottom"));
+        bottomMargin = KUnit::parseValue(styleStack.property(ooNS::fo, "margin-bottom"));
     }
     if (styleStack.hasProperty(ooNS::fo, "margin-left")) {
-        leftMargin = KoUnit::parseValue(styleStack.property(ooNS::fo, "margin-left"));
+        leftMargin = KUnit::parseValue(styleStack.property(ooNS::fo, "margin-left"));
     }
     if (styleStack.hasProperty(ooNS::fo, "margin-right")) {
-        rightMargin = KoUnit::parseValue(styleStack.property(ooNS::fo, "margin-right"));
+        rightMargin = KUnit::parseValue(styleStack.property(ooNS::fo, "margin-right"));
     }
     if (styleStack.hasProperty(ooNS::style, "writing-mode")) {
         kDebug(30518) << "styleStack.hasAttribute( style:writing-mode ) :" << styleStack.hasProperty(ooNS::style, "writing-mode");
@@ -1668,7 +1668,7 @@ void OpenCalcImport::loadFontStyle(KCStyle * layout, KoXmlElement const * font) 
     if (font->hasAttributeNS(ooNS::fo, "color"))
         layout->setFontColor(QColor(font->attributeNS(ooNS::fo, "color", QString())));
     if (font->hasAttributeNS(ooNS::fo, "font-size"))
-        layout->setFontSize(int(KoUnit::parseValue(font->attributeNS(ooNS::fo, "font-size", QString()), 10)));
+        layout->setFontSize(int(KUnit::parseValue(font->attributeNS(ooNS::fo, "font-size", QString()), 10)));
     else
         layout->setFontSize(10);
     if (font->hasAttributeNS(ooNS::fo, "font-style")) {
@@ -1699,7 +1699,7 @@ void OpenCalcImport::loadBorder(KCStyle * layout, QString const & borderDef, bPo
 
     QPen pen;
     QString w = borderDef.left(p);
-    pen.setWidth((int) KoUnit::parseValue(w));
+    pen.setWidth((int) KUnit::parseValue(w));
 
 
     ++p;
@@ -1795,8 +1795,8 @@ void OpenCalcImport::loadStyleProperties(KCStyle * layout, KoXmlElement const & 
             layout->setHAlign(KCStyle::Center);
     }
     if (property.hasAttributeNS(ooNS::fo, "margin-left")) {
-        kDebug(30518) << "margin-left :" << KoUnit::parseValue(property.attributeNS(ooNS::fo, "margin-left", QString()), 0.0);
-        layout->setIndentation(KoUnit::parseValue(property.attributeNS(ooNS::fo, "margin-left", QString()), 0.0));
+        kDebug(30518) << "margin-left :" << KUnit::parseValue(property.attributeNS(ooNS::fo, "margin-left", QString()), 0.0);
+        layout->setIndentation(KUnit::parseValue(property.attributeNS(ooNS::fo, "margin-left", QString()), 0.0));
     }
     if (property.hasAttributeNS(ooNS::fo, "background-color"))
         layout->setBackgroundColor(QColor(property.attributeNS(ooNS::fo, "background-color", QString())));
@@ -1832,7 +1832,7 @@ void OpenCalcImport::loadStyleProperties(KCStyle * layout, KoXmlElement const & 
     }
 
     if (property.hasAttributeNS(ooNS::fo, "padding-left"))
-        layout->setIndentation(KoUnit::parseValue(property.attributeNS(ooNS::fo, "padding-left", QString())));
+        layout->setIndentation(KUnit::parseValue(property.attributeNS(ooNS::fo, "padding-left", QString())));
 
     if (property.hasAttributeNS(ooNS::fo, "vertical-align")) {
         QString s = property.attributeNS(ooNS::fo, "vertical-align", QString());

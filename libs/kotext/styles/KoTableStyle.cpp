@@ -32,7 +32,7 @@
 #include <QTextTable>
 #include <QTextTableFormat>
 
-#include <KoUnit.h>
+#include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
@@ -379,7 +379,7 @@ void KoTableStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 
     // Width
     if (styleStack.hasProperty(KoXmlNS::style, "width")) {
-        setWidth(QTextLength(QTextLength::FixedLength, KoUnit::parseValue(styleStack.property(KoXmlNS::style, "width"))));
+        setWidth(QTextLength(QTextLength::FixedLength, KUnit::parseValue(styleStack.property(KoXmlNS::style, "width"))));
     }
     if (styleStack.hasProperty(KoXmlNS::style, "rel-width")) {
         setWidth(QTextLength(QTextLength::PercentageLength, styleStack.property(KoXmlNS::style, "rel-width").remove('%').toDouble()));
@@ -394,15 +394,15 @@ void KoTableStyle::loadOdfProperties(KOdfStyleStack &styleStack)
     bool hasMarginLeft = styleStack.hasProperty(KoXmlNS::fo, "margin-left");
     bool hasMarginRight = styleStack.hasProperty(KoXmlNS::fo, "margin-right");
     if (hasMarginLeft)
-        setLeftMargin(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left")));
+        setLeftMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left")));
     if (hasMarginRight)
-        setRightMargin(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-right")));
+        setRightMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-right")));
     if (styleStack.hasProperty(KoXmlNS::fo, "margin-top"))
-        setTopMargin(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-top")));
+        setTopMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-top")));
     if (styleStack.hasProperty(KoXmlNS::fo, "margin-bottom"))
-        setBottomMargin(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-bottom")));
+        setBottomMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-bottom")));
     if (styleStack.hasProperty(KoXmlNS::fo, "margin")) {
-        setMargin(KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin")));
+        setMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin")));
         hasMarginLeft = true;
         hasMarginRight = true;
     }

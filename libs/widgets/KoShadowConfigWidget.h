@@ -23,7 +23,7 @@
 #include "kowidgets_export.h"
 #include <QtGui/QWidget>
 
-class KoUnit;
+class KUnit;
 class KoColor;
 
 /// A widget for configuring the shadow of a shape
@@ -53,7 +53,7 @@ public:
     bool shadowVisible() const;
 
 public slots:
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 signals:
     /// Is emitted whenever the shadow color has changed

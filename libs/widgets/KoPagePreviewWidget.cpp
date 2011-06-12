@@ -21,7 +21,7 @@
 #include "KoPagePreviewWidget.h"
 
 #include <KoDpi.h>
-#include <KoUnit.h>
+#include <KUnit.h>
 
 #include <QPainter>
 #include <kdebug.h>

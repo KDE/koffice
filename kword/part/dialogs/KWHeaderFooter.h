@@ -22,7 +22,7 @@
 
 #include <ui_KWHeaderFooter.h>
 
-class KoUnit;
+class KUnit;
 class KWPageStyle;
 
 class KWHeaderFooter : public QWidget
@@ -33,7 +33,7 @@ public:
     KWHeaderFooter(QWidget *parent, const KWPageStyle &style);
 
     void saveTo(KWPageStyle &style);
-    void setUnit(const KoUnit &unit);
+    void setUnit(const KUnit &unit);
 
 private slots:
     void setHeaderLabel(bool fixed);

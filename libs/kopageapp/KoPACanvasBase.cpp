@@ -134,7 +134,7 @@ const KoViewConverter * KoPACanvasBase::viewConverter() const
     return d->view->viewMode()->viewConverter(const_cast<KoPACanvasBase *>(this));
 }
 
-KoUnit KoPACanvasBase::unit() const
+KUnit KoPACanvasBase::unit() const
 {
     return d->doc->unit();
 }

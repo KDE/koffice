@@ -32,14 +32,14 @@ public:
         : lowerInPoints(low),
         upperInPoints(up),
         stepInPoints(step),
-        unit(KoUnit(KoUnit::Point))
+        unit(KUnit(KUnit::Point))
     {
     }
 
     double lowerInPoints; ///< lowest value in points
     double upperInPoints; ///< highest value in points
     double stepInPoints;  ///< step in points
-    KoUnit unit;
+    KUnit unit;
 };
 
 KoUnitDoubleSpinBox::KoUnitDoubleSpinBox( QWidget *parent)
@@ -48,7 +48,7 @@ KoUnitDoubleSpinBox::KoUnitDoubleSpinBox( QWidget *parent)
 {
     QDoubleSpinBox::setDecimals( 2 );
     //setAcceptLocalizedNumbers( true );
-    setUnit( KoUnit(KoUnit::Point) );
+    setUnit( KUnit(KUnit::Point) );
     setAlignment( Qt::AlignRight );
 
     connect(this, SIGNAL(valueChanged( double )), SLOT(privateValueChanged()));
@@ -64,7 +64,7 @@ KoUnitDoubleSpinBox::KoUnitDoubleSpinBox( QWidget *parent,
 						    double lower, double upper,
 						    double step,
 						    double value,
-						    KoUnit unit,
+						    KUnit unit,
                             unsigned int precision)
     : QDoubleSpinBox( parent ),
     d( new Private(lower, upper, step))
@@ -74,7 +74,7 @@ KoUnitDoubleSpinBox::KoUnitDoubleSpinBox( QWidget *parent,
     setSingleStep(step);
     setValue(value);
     setDecimals(precision);
-    d->unit = KoUnit(KoUnit::Point);
+    d->unit = KUnit(KUnit::Point);
     //setAcceptLocalizedNumbers( true );
     setUnit( unit );
     changeValue( value );
@@ -115,7 +115,7 @@ QValidator::State KoUnitDoubleSpinBox::validate(QString &input, int &pos) const
     double newVal = 0.0;
     if (!isnan(value)) {
         bool ok;
-        KoUnit unit = KoUnit::unit( unitName, &ok );
+        KUnit unit = KUnit::unit( unitName, &ok );
         if ( ok )
             newVal = unit.fromUserValue( value );
         else
@@ -132,7 +132,7 @@ QValidator::State KoUnitDoubleSpinBox::validate(QString &input, int &pos) const
         kWarning(30004) << "Not a number: " << number;
         return QValidator::Invalid;
     }
-    newVal = KoUnit::ptToUnit( newVal, d->unit );
+    newVal = KUnit::ptToUnit( newVal, d->unit );
     //input = textFromValue( newVal ); // don't overwrite for now; the effect is not exactly what I expect...
 
     return QValidator::Acceptable;
@@ -150,15 +150,15 @@ void KoUnitDoubleSpinBox::privateValueChanged() {
     emit valueChangedPt( value () );
 }
 
-void KoUnitDoubleSpinBox::setUnit( KoUnit unit )
+void KoUnitDoubleSpinBox::setUnit( KUnit unit )
 {
     double oldvalue = d->unit.fromUserValue( QDoubleSpinBox::value() );
     QDoubleSpinBox::setMinimum( unit.toUserValue( d->lowerInPoints ) );
     QDoubleSpinBox::setMaximum( unit.toUserValue( d->upperInPoints ) );
     QDoubleSpinBox::setSingleStep( unit.toUserValue( d->stepInPoints ) );
     d->unit = unit;
-    QDoubleSpinBox::setValue( KoUnit::ptToUnit( oldvalue, unit ) );
-    setSuffix( KoUnit::unitName( unit ).prepend( ' ' ) );
+    QDoubleSpinBox::setValue( KUnit::ptToUnit( oldvalue, unit ) );
+    setSuffix( KUnit::unitName( unit ).prepend( ' ' ) );
 }
 
 double KoUnitDoubleSpinBox::value( ) const
@@ -180,7 +180,7 @@ void KoUnitDoubleSpinBox::setMaximum( double max )
 
 void KoUnitDoubleSpinBox::setLineStep( double step )
 {
-  d->stepInPoints = KoUnit(KoUnit::Point).toUserValue(step);
+  d->stepInPoints = KUnit(KUnit::Point).toUserValue(step);
   QDoubleSpinBox::setSingleStep( step );
 }
 
@@ -200,7 +200,7 @@ void KoUnitDoubleSpinBox::setMinMaxStep( double min, double max, double step )
 QString KoUnitDoubleSpinBox::textFromValue( double value ) const
 {
     //kDebug(30004) <<"textFromValue:" << QString::number( value, 'f', 12 ) <<" =>" << num;
-    //const QString num ( QString( "%1%2").arg( KGlobal::locale()->formatNumber( value, d->precision ), KoUnit::unitName( m_unit ) ) );
+    //const QString num ( QString( "%1%2").arg( KGlobal::locale()->formatNumber( value, d->precision ), KUnit::unitName( m_unit ) ) );
     //const QString num ( QString( "%1").arg( KGlobal::locale()->formatNumber( value, d->precision )) );
     return KGlobal::locale()->formatNumber( value, decimals() );
 }
@@ -213,7 +213,7 @@ double KoUnitDoubleSpinBox::valueFromText( const QString& str ) const
     const QString sep( KGlobal::locale()->thousandsSeparator() );
     if ( !sep.isEmpty() )
         str2.remove( sep );
-    str2.remove( KoUnit::unitName( d->unit ) );
+    str2.remove( KUnit::unitName( d->unit ) );
     bool ok;
     const double dbl = KGlobal::locale()->readNumber( str2, &ok );
     if ( ok )
