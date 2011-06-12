@@ -18,7 +18,6 @@
 */
 
 #include "KoPAPageBase.h"
-#include "KoPASavingContext.h"
 #include "KoPALoadingContext.h"
 #include "KoPAPixmapCache.h"
 #include "KoPAPageContainerModel.h"
@@ -30,16 +29,10 @@
 
 #include <KOdfXmlNS.h>
 #include <KOdfPageLayoutData.h>
-#include <KoShapeSavingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeLayer.h>
 #include <KoShapeRegistry.h>
-#include <KOdfGenericStyle.h>
-#include <KOdfGenericStyles.h>
-#include <KOdfStylesReader.h>
-#include <KoOdfGraphicStyles.h>
-#include <KXmlWriter.h>
-#include <KoViewConverter.h>
+#include <KOdfStyleStack.h>
 #include <KoShapeBackground.h>
 
 KoPAPageBase::KoPAPageBase()
