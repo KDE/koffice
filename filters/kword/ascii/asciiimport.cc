@@ -34,7 +34,7 @@
 #include <kpluginfactory.h>
 
 #include <KoGlobal.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoStore.h>
 #include <KoFilterChain.h>
 #include <KoFilterManager.h>

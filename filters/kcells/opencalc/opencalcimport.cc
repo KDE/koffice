@@ -1164,7 +1164,7 @@ void OpenCalcImport::loadOasisMasterLayoutPage(KCSheet * table, KoStyleStack &st
     format = QString("%1x%2").arg(width).arg(height);
     kDebug(30518) << " format :" << format;
 
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
     pageLayout.format = KOdfPageFormat::formatFromString(format);
     pageLayout.orientation = (orientation == "Portrait")
                              ? KOdfPageFormat::Portrait : KOdfPageFormat::Landscape;

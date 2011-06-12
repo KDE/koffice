@@ -79,7 +79,7 @@ void KoPAPrintJob::startPrinting(RemovePolicy removePolicy)
         }
 
         KoPAPageBase * page = m_pages.at(i);
-        const KoPageLayout &layout = page->pageLayout();
+        const KOdfPageLayoutData &layout = page->pageLayout();
         KoPAUtil::setZoom(layout, size, zoomHandler);
         QRect pageRect(KoPAUtil::pageRect(layout, size, zoomHandler));
 

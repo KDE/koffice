@@ -28,7 +28,7 @@
 #include <kpluginfactory.h>
 #include <kmessagebox.h>
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoStore.h>
 #include <KoFilterChain.h>
 

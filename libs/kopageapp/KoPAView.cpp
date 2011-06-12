@@ -539,7 +539,7 @@ void KoPAView::formatMasterPage()
 
 void KoPAView::formatPageLayout()
 {
-    const KoPageLayout &pageLayout = viewMode()->activePageLayout();
+    const KOdfPageLayoutData &pageLayout = viewMode()->activePageLayout();
 
     KoPAPageLayoutDialog dialog(d->doc, pageLayout, d->canvas);
 
@@ -557,12 +557,12 @@ void KoPAView::slotZoomChanged(KoZoomMode::Mode mode, qreal zoom)
     Q_UNUSED(zoom);
     if (d->activePage) {
         if (mode == KoZoomMode::ZOOM_PAGE) {
-            KoPageLayout &layout = d->activePage->pageLayout();
+            KOdfPageLayoutData &layout = d->activePage->pageLayout();
             QRectF pageRect(0, 0, layout.width, layout.height);
             d->canvasController->ensureVisible(d->canvas->viewConverter()->documentToView(pageRect));
         } else if (mode == KoZoomMode::ZOOM_WIDTH) {
             // horizontally center the page
-            KoPageLayout &layout = d->activePage->pageLayout();
+            KOdfPageLayoutData &layout = d->activePage->pageLayout();
             QRectF pageRect(0, 0, layout.width, layout.height);
             QRect viewRect = d->canvas->viewConverter()->documentToView(pageRect).toRect();
             viewRect.translate(d->canvas->documentOrigin());
@@ -621,7 +621,7 @@ void KoPAView::doUpdateActivePage(KoPAPageBase * page)
     setActivePage(page);
 
     d->canvas->updateSize();
-    KoPageLayout &layout = d->activePage->pageLayout();
+    KOdfPageLayoutData &layout = d->activePage->pageLayout();
     d->horizontalRuler->setRulerLength(layout.width);
     d->verticalRuler->setRulerLength(layout.height);
     d->horizontalRuler->setActiveRange(layout.leftMargin, layout.width - layout.rightMargin);
@@ -760,7 +760,7 @@ void KoPAView::insertPage()
         KoPAMasterPage * masterPage = d->doc->newMasterPage();
         masterPage->setBackground(new KoColorBackground(Qt::white));
         // use the layout of the current active page for the new page
-        KoPageLayout &layout = masterPage->pageLayout();
+        KOdfPageLayoutData &layout = masterPage->pageLayout();
         KoPAMasterPage * activeMasterPage = dynamic_cast<KoPAMasterPage *>(d->activePage);
         if (activeMasterPage) {
             layout = activeMasterPage->pageLayout();

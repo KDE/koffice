@@ -19,7 +19,7 @@
 
 #include "SCPageLayouts.h"
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KoPALoadingContext.h>
@@ -85,7 +85,7 @@ bool SCPageLayouts::loadOdf(KoPALoadingContext &context)
     // we should check which layouts are already loaded
     const QMap<QString, KoPAMasterPage *> &masterPages = context.masterPages();
     if (! masterPages.isEmpty()) {
-        KoPageLayout &layout = masterPages.begin().value()->pageLayout();
+        KOdfPageLayoutData &layout = masterPages.begin().value()->pageLayout();
         QRectF pageRect(0, 0, layout.width, layout.height);
         for (; it != layouts.end(); ++it) {
             SCPageLayout * pageLayout = new SCPageLayout();

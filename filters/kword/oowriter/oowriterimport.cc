@@ -42,7 +42,7 @@
 #include <kmessagebox.h>
 #include <KoFilterChain.h>
 #include <KoUnit.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <Picture.h>
 #include "conversion.h"
 

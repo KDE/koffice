@@ -359,7 +359,7 @@ float SheetAdaptor::paperHeight()const
 
 void SheetAdaptor::setPrinterHeight(float height)
 {
-    KoPageLayout pageLayout = m_sheet->print()->settings()->pageLayout();
+    KOdfPageLayoutData pageLayout = m_sheet->print()->settings()->pageLayout();
     pageLayout.format = KOdfPageFormat::CustomSize;
     pageLayout.height = MM_TO_POINT(height);
     m_sheet->print()->settings()->setPageLayout(pageLayout);
@@ -372,7 +372,7 @@ float SheetAdaptor::paperWidth()const
 
 void SheetAdaptor::setPaperWidth(float width)
 {
-    KoPageLayout pageLayout = m_sheet->print()->settings()->pageLayout();
+    KOdfPageLayoutData pageLayout = m_sheet->print()->settings()->pageLayout();
     pageLayout.format = KOdfPageFormat::CustomSize;
     pageLayout.width = MM_TO_POINT(width);
     m_sheet->print()->settings()->setPageLayout(pageLayout);
@@ -412,7 +412,7 @@ void SheetAdaptor::setPaperLayout(float leftBorder, float topBorder,
                                   float rightBorder, float bottomBoder,
                                   const QString& format, const QString& orientation)
 {
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
     pageLayout.format = KOdfPageFormat::formatFromString(format);
     pageLayout.orientation = (orientation  == "Portrait")
                              ? KOdfPageFormat::Portrait : KOdfPageFormat::Landscape;

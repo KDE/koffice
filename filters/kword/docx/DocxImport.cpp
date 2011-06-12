@@ -56,7 +56,7 @@
 #include <KoDocument.h>
 #include <KoFilterChain.h>
 #include <KoUnit.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoXmlWriter.h>
 
 K_PLUGIN_FACTORY(DocxImportFactory, registerPlugin<DocxImport>();)

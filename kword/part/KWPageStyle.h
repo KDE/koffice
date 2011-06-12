@@ -25,7 +25,7 @@
 #include "KWord.h"
 #include "kword_export.h"
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoText.h>
 
 #include <QSharedDataPointer>
@@ -210,13 +210,13 @@ public:
     void clear();
 
     /// return the pageLayout applied for these pages
-    const KoPageLayout &pageLayout() const;
+    const KOdfPageLayoutData &pageLayout() const;
 
     /// return true if pages of this style can turn into page-spreads
     bool isPageSpread() const;
 
     /// set the pageLayout applied for these pages
-    void setPageLayout(const KoPageLayout &layout);
+    void setPageLayout(const KOdfPageLayoutData &layout);
 
     /// get the master page name for this page style.
     QString name() const;

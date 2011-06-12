@@ -32,7 +32,7 @@
 
 #define CACHE_PAGE_THUMBNAILS
 
-struct KoPageLayout;
+struct KOdfPageLayoutData;
 class KOdfLoadingContext;
 class KOdfGenericStyle;
 class KoShape;
@@ -68,8 +68,8 @@ public:
 
 
     /// @return the layout of the page
-    virtual KoPageLayout &pageLayout() = 0;
-    virtual const KoPageLayout &pageLayout() const = 0;
+    virtual KOdfPageLayoutData &pageLayout() = 0;
+    virtual const KOdfPageLayoutData &pageLayout() const = 0;
 
     /**
      * @brief Paint background

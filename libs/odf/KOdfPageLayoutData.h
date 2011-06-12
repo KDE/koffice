@@ -35,7 +35,7 @@
  * This structure defines the page layout, including
  * its size in points, its format (e.g. A4), orientation, unit, margins etc.
  */
-struct KoPageLayout {
+struct KOdfPageLayoutData {
     /** Page format */
     KOdfPageFormat::Format format;
     /** Page orientation */
@@ -88,8 +88,8 @@ struct KoPageLayout {
     /// page border definition
     KOdfBorders  border;
 
-    KOODF_EXPORT bool operator==(const KoPageLayout &l) const;
-    KOODF_EXPORT bool operator!=(const KoPageLayout& l) const;
+    KOODF_EXPORT bool operator==(const KOdfPageLayoutData &l) const;
+    KOODF_EXPORT bool operator!=(const KOdfPageLayoutData& l) const;
 
     /**
      * Save this page layout to ODF.
@@ -105,7 +105,7 @@ struct KoPageLayout {
      * Construct a page layout with the default page size depending on the locale settings,
      * default margins (2 cm), and portrait orientation.
      */
-    KOODF_EXPORT KoPageLayout();
+    KOODF_EXPORT KOdfPageLayoutData();
 };
 
 #endif /* KOPAGELAYOUT_H */

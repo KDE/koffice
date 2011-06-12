@@ -34,13 +34,13 @@ class KoPageLayoutDialog::Private
 {
 public:
     Private() : pageLayoutWidget(0), documentCheckBox(0) {}
-    KoPageLayout layout;
+    KOdfPageLayoutData layout;
     KoPageLayoutWidget *pageLayoutWidget;
     QCheckBox *documentCheckBox;
 };
 
 
-KoPageLayoutDialog::KoPageLayoutDialog(QWidget *parent, const KoPageLayout &layout)
+KoPageLayoutDialog::KoPageLayoutDialog(QWidget *parent, const KOdfPageLayoutData &layout)
     : KPageDialog(parent)
     , d(new Private)
 {
@@ -65,10 +65,10 @@ KoPageLayoutDialog::KoPageLayoutDialog(QWidget *parent, const KoPageLayout &layo
     prev->setPageLayout(d->layout);
     lay->addWidget(prev);
 
-    connect (d->pageLayoutWidget, SIGNAL(layoutChanged(const KoPageLayout&)),
-            prev, SLOT(setPageLayout(const KoPageLayout&)));
-    connect (d->pageLayoutWidget, SIGNAL(layoutChanged(const KoPageLayout&)),
-            this, SLOT(setPageLayout(const KoPageLayout&)));
+    connect (d->pageLayoutWidget, SIGNAL(layoutChanged(const KOdfPageLayoutData&)),
+            prev, SLOT(setPageLayout(const KOdfPageLayoutData&)));
+    connect (d->pageLayoutWidget, SIGNAL(layoutChanged(const KOdfPageLayoutData&)),
+            this, SLOT(setPageLayout(const KOdfPageLayoutData&)));
     connect (d->pageLayoutWidget, SIGNAL(unitChanged(const KoUnit&)),
             this, SIGNAL(unitChanged(const KoUnit&)));
 }
@@ -78,12 +78,12 @@ KoPageLayoutDialog::~KoPageLayoutDialog()
     delete d;
 }
 
-KoPageLayout KoPageLayoutDialog::pageLayout() const
+KOdfPageLayoutData KoPageLayoutDialog::pageLayout() const
 {
     return d->layout;
 }
 
-void KoPageLayoutDialog::setPageLayout(const KoPageLayout &layout)
+void KoPageLayoutDialog::setPageLayout(const KOdfPageLayoutData &layout)
 {
     d->layout = layout;
 }

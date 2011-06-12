@@ -22,7 +22,7 @@
 #ifndef KSPREAD_PRINT_SETTINGS
 #define KSPREAD_PRINT_SETTINGS
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 
 #include <QPair>
 
@@ -58,11 +58,11 @@ public:
 
     /**
      * \return the page layout associated with this document (margins, pageSize, etc).
-     * \see KoPageLayout
+     * \see KOdfPageLayoutData
      */
-    const KoPageLayout& pageLayout() const;
+    const KOdfPageLayoutData& pageLayout() const;
 
-    void setPageLayout(const KoPageLayout& pageLayout);
+    void setPageLayout(const KOdfPageLayoutData& pageLayout);
 
     void setPageFormat(KOdfPageFormat::Format format);
     void setPageOrientation(KOdfPageFormat::Orientation orientation);

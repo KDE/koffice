@@ -29,7 +29,7 @@
 #include <kdebug.h>
 
 #include <KoXmlNS.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeLayer.h>
@@ -58,7 +58,7 @@ void KoPAPageBase::paintBackground(QPainter &painter, const KoViewConverter &con
 {
     painter.save();
     applyConversion(painter, converter);
-    KoPageLayout layout = pageLayout();
+    KOdfPageLayoutData layout = pageLayout();
     painter.setPen(Qt::black);
 
     if(background())
@@ -216,7 +216,7 @@ void KoPAPageBase::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingCont
 
 QSizeF KoPAPageBase::size() const
 {
-    const KoPageLayout layout = pageLayout();
+    const KOdfPageLayoutData layout = pageLayout();
     return QSize(layout.width, layout.height);
 }
 

@@ -112,7 +112,7 @@ void TestViewMode::testClipRectForPageSpread()
     KWPageManager pageManager;
 
     //set up as a page spread;
-    KoPageLayout pageLayout = pageManager.defaultPageStyle().pageLayout();
+    KOdfPageLayoutData pageLayout = pageManager.defaultPageStyle().pageLayout();
     pageLayout.leftMargin = -1;
     pageLayout.rightMargin = -1;
     pageLayout.pageEdge = 20;
@@ -172,7 +172,7 @@ void TestViewMode::testPageSetupChanged()
     KWPageManager pageManager;
 
     //set up as a page spread;
-    KoPageLayout pageLayout = pageManager.defaultPageStyle().pageLayout();
+    KOdfPageLayoutData pageLayout = pageManager.defaultPageStyle().pageLayout();
     pageLayout.leftMargin = -1;
     pageLayout.rightMargin = -1;
     pageLayout.pageEdge = 20;

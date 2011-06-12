@@ -296,7 +296,7 @@ void KWFrameLayout::layoutFramesOnPage(int pageNumber)
     minimumHeight[0] = page.topMargin() + page.topPadding();
     minimumHeight[8] = page.bottomMargin() + page.bottomPadding();
 
-    KoPageLayout layout = pageStyle.pageLayout();
+    KOdfPageLayoutData layout = pageStyle.pageLayout();
     layout.leftMargin = page.leftMargin();
     layout.rightMargin = page.rightMargin();
     layout.leftPadding = page.leftPadding();

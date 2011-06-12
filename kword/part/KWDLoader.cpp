@@ -83,7 +83,7 @@ bool KWDLoader::load(KoXmlElement &root)
 
     emit progressUpdate(5);
 
-    KoPageLayout pgLayout;
+    KOdfPageLayoutData pgLayout;
     // <PAPER>
     KoXmlElement paper = root.namedItem("PAPER").toElement();
     if (!paper.isNull()) {

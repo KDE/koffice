@@ -68,7 +68,7 @@ void TestPageManager::getAddPages()
     QCOMPARE(page.pageNumber(), 1);
     QCOMPARE(page.pageSide(), KWPage::Right);
     QVERIFY(page.pageStyle().isValid());
-    KoPageLayout pageLayout = page.pageStyle().pageLayout();
+    KOdfPageLayoutData pageLayout = page.pageStyle().pageLayout();
     pageLayout.width = 134.2;
     pageLayout.height = 521.4;
     page.pageStyle().setPageLayout(pageLayout);
@@ -122,7 +122,7 @@ void TestPageManager::getAddPages2()
     KWPageManager *pageManager = new KWPageManager();
 
     KWPage page = pageManager->appendPage();
-    KoPageLayout pageLayout = page.pageStyle().pageLayout();
+    KOdfPageLayoutData pageLayout = page.pageStyle().pageLayout();
     pageLayout.width = 200;
     pageLayout.height = 200;
     page.pageStyle().setPageLayout(pageLayout);
@@ -230,7 +230,7 @@ void TestPageManager::pageInfo()
 {
     KWPageManager *pageManager = new KWPageManager();
 
-    KoPageLayout layout = pageManager->defaultPageStyle().pageLayout();
+    KOdfPageLayoutData layout = pageManager->defaultPageStyle().pageLayout();
     layout.width = 100;
     layout.height = 200;
     layout.format = KOdfPageFormat::IsoA4Size;
@@ -338,7 +338,7 @@ void TestPageManager::pageInfo()
 void TestPageManager::testClipToDocument()
 {
     KWPageManager *pageManager = new KWPageManager();
-    KoPageLayout lay;
+    KOdfPageLayoutData lay;
     lay.width = 300;
     lay.height = 600;
     lay.format = KOdfPageFormat::IsoA4Size;
@@ -502,7 +502,7 @@ void TestPageManager::testSetPageStyle()
     KWPage page = manager.appendPage();
 
     KWPageStyle style("myStyle");
-    KoPageLayout layout;
+    KOdfPageLayoutData layout;
     layout.height = 100;
     style.setPageLayout(layout);
     page.setPageStyle(style);
@@ -529,7 +529,7 @@ void TestPageManager::testPageSpreadLayout()
 {
     KWPageManager manager;
     KWPage page = manager.appendPage();
-    KoPageLayout layout = page.pageStyle().pageLayout();
+    KOdfPageLayoutData layout = page.pageStyle().pageLayout();
     layout.width = 450;
     layout.height = 150;
     QCOMPARE(page.pageNumber(), 1);
@@ -604,7 +604,7 @@ void TestPageManager::testPadding()
     QCOMPARE(padding2.left, padding.left);
     QCOMPARE(padding2.right, padding.right);
 
-    KoPageLayout lay;
+    KOdfPageLayoutData lay;
     QVERIFY(lay.leftMargin >= 0);
     QVERIFY(lay.bindingSide == -1);
     lay.width = 100;
@@ -647,7 +647,7 @@ void TestPageManager::testPageOffset()
     QCOMPARE(page.pageNumber(), 50);
     QCOMPARE(page.offsetInDocument(), pageHeight * 49);
 
-    KoPageLayout layout = page.pageStyle().pageLayout();
+    KOdfPageLayoutData layout = page.pageStyle().pageLayout();
     layout.height = 400;
     page.pageStyle().setPageLayout(layout);
     QCOMPARE(page.offsetInDocument(), (qreal) 400 * 49);
@@ -684,7 +684,7 @@ void TestPageManager::testAppendPageSpread()
     KWPageManager manager;
 
     KWPageStyle style = manager.addPageStyle("pagestyle1");
-    KoPageLayout layout = style.pageLayout();
+    KOdfPageLayoutData layout = style.pageLayout();
     layout.leftMargin = -1;
     layout.rightMargin = -1;
     layout.pageEdge = 7;
@@ -730,7 +730,7 @@ void TestPageManager::testRemovePageSpread()
 {
     KWPageManager manager;
 
-    KoPageLayout layout = manager.defaultPageStyle().pageLayout();
+    KOdfPageLayoutData layout = manager.defaultPageStyle().pageLayout();
     layout.leftMargin = -1;
     layout.rightMargin = -1;
     layout.pageEdge = 7;

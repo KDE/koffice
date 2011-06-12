@@ -25,7 +25,7 @@ class KoPageLayoutWidget::Private
 {
 public:
     Ui::KoPageLayoutWidget widget;
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
     KoUnit unit;
 
     QButtonGroup *orientationGroup;
@@ -34,7 +34,7 @@ public:
 };
 
 
-KoPageLayoutWidget::KoPageLayoutWidget(QWidget *parent, const KoPageLayout &layout)
+KoPageLayoutWidget::KoPageLayoutWidget(QWidget *parent, const KOdfPageLayoutData &layout)
     : QWidget(parent)
     , d(new Private)
 {
@@ -140,7 +140,7 @@ void KoPageLayoutWidget::setUnit(const KoUnit &unit)
     emit unitChanged(d->unit);
 }
 
-void KoPageLayoutWidget::setPageLayout(const KoPageLayout &layout)
+void KoPageLayoutWidget::setPageLayout(const KOdfPageLayoutData &layout)
 {
     if (! d->allowSignals) return;
     d->allowSignals = false;

@@ -148,7 +148,7 @@ void KWPageStylePropertiesCommand::undo()
 }
 
 #if 0
-void KWPageStylePropertiesCommand::setLayout(const KoPageLayout &layout)
+void KWPageStylePropertiesCommand::setLayout(const KOdfPageLayoutData &layout)
 {
     KWPageStyle style = m_page.pageStyle();
     style.setPageLayout(layout);

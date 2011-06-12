@@ -21,7 +21,7 @@
 #ifndef KPRNOTES_H
 #define KPRNOTES_H
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoPAPageBase.h>
 
 class KoShape;
@@ -48,9 +48,9 @@ public:
     virtual void paintComponent(QPainter&painter, const KoViewConverter &converter);
 
     /// Get the page layout for this presentation notes
-    virtual KoPageLayout &pageLayout();
+    virtual KOdfPageLayoutData &pageLayout();
 
-    virtual const KoPageLayout &pageLayout() const;
+    virtual const KOdfPageLayoutData &pageLayout() const;
 
     /// update the page thumbnail to reflect current page
     void updatePageThumbnail();
@@ -76,7 +76,7 @@ private:
 private:
     KoShape *m_textShape;
     KoShape *m_thumbnailShape;
-    KoPageLayout m_pageLayout;
+    KOdfPageLayoutData m_pageLayout;
     SCPage *m_page;
     SCDocument *m_doc;
     KoImageCollection * m_imageCollection;

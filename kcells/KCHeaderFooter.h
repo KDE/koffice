@@ -22,7 +22,7 @@
 #ifndef KSPREAD_HEADER_FOOTER
 #define KSPREAD_HEADER_FOOTER
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 
 #include <QString>
 

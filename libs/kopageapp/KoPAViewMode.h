@@ -25,7 +25,7 @@
 #include <QObject>
 #include <QPointF>
 
-struct KoPageLayout;
+struct KOdfPageLayoutData;
 class KoPAViewBase;
 class KoPACanvas;
 class KoPACanvasBase;
@@ -145,9 +145,9 @@ public:
      */
     virtual void removeShape(KoShape *shape);
 
-    virtual const KoPageLayout &activePageLayout() const;
+    virtual const KOdfPageLayoutData &activePageLayout() const;
 
-    virtual void changePageLayout(const KoPageLayout &pageLayout, bool applyToDocument, QUndoCommand *parent = 0);
+    virtual void changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent = 0);
 
     QPointF origin();
 

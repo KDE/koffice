@@ -43,7 +43,7 @@
 #include <kpluginfactory.h>
 #include <kimageio.h>
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoFilterChain.h>
 
 #include <KWEFStructures.h>

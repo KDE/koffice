@@ -23,7 +23,7 @@
 #include "../kword_export.h"
 #include "../KWPage.h"
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoText.h>
 
 #include <QUndoCommand>

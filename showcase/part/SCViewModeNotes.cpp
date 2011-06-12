@@ -169,7 +169,7 @@ void SCViewModeNotes::updateActivePage(KoPAPageBase *page)
     notes->updatePageThumbnail();
     KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(notes->shapes().last());
 
-    KoPageLayout &layout = notes->pageLayout();
+    KOdfPageLayoutData &layout = notes->pageLayout();
     QSize size(layout.width, layout.height);
 
     KoPAView *view = dynamic_cast<KoPAView*>(m_view);

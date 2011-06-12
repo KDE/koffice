@@ -37,7 +37,7 @@ SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument 
 : SCPage(new SCMasterPage(), document)
 {
     qreal ratio = screenRect.width() / screenRect.height();
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
     pageLayout.height = 510;
 
     pageLayout.width = 510 * ratio;

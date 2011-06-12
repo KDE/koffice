@@ -419,7 +419,7 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KoStore*)
 
 void KCDoc::loadPaper(KoXmlElement const & paper)
 {
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
     pageLayout.format = KOdfPageFormat::formatFromString(paper.attribute("format"));
     pageLayout.orientation = (paper.attribute("orientation")  == "Portrait")
                              ? KOdfPageFormat::Portrait : KOdfPageFormat::Landscape;
@@ -524,7 +524,7 @@ void KCDoc::paintContent(QPainter& painter, const QRect& rect, KCSheet* _sheet)
     }
     KCSheet *const sheet = _sheet ? _sheet : d->map->sheet(0);
 
-    const KoPageLayout pageLayout = sheet->printSettings()->pageLayout();
+    const KOdfPageLayoutData pageLayout = sheet->printSettings()->pageLayout();
     QPixmap thumbnail(pageLayout.width, pageLayout.height);
     thumbnail.fill(Qt::white);
 

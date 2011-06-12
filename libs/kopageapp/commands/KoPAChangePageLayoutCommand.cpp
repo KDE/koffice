@@ -25,7 +25,7 @@
 #include "KoPADocument.h"
 #include "KoPAMasterPage.h"
 
-KoPAChangePageLayoutCommand::KoPAChangePageLayoutCommand(KoPADocument *document, KoPAMasterPage *masterPage, const KoPageLayout &newPageLayout, bool applyToDocument, QUndoCommand *parent)
+KoPAChangePageLayoutCommand::KoPAChangePageLayoutCommand(KoPADocument *document, KoPAMasterPage *masterPage, const KOdfPageLayoutData &newPageLayout, bool applyToDocument, QUndoCommand *parent)
 : QUndoCommand(parent)
 , m_document(document)
 , m_newPageLayout(newPageLayout)
@@ -50,7 +50,7 @@ KoPAChangePageLayoutCommand::~KoPAChangePageLayoutCommand()
 
 void KoPAChangePageLayoutCommand::redo()
 {
-    QMap<KoPAMasterPage *, KoPageLayout>::const_iterator it = m_oldLayouts.constBegin();
+    QMap<KoPAMasterPage *, KOdfPageLayoutData>::const_iterator it = m_oldLayouts.constBegin();
     while (it != m_oldLayouts.constEnd()) {
         it.key()->setPageLayout(m_newPageLayout);
         m_document->updateViews(it.key());
@@ -60,7 +60,7 @@ void KoPAChangePageLayoutCommand::redo()
 
 void KoPAChangePageLayoutCommand::undo()
 {
-    QMap<KoPAMasterPage *, KoPageLayout>::const_iterator it = m_oldLayouts.constBegin();
+    QMap<KoPAMasterPage *, KOdfPageLayoutData>::const_iterator it = m_oldLayouts.constBegin();
     while (it != m_oldLayouts.constEnd()) {
         it.key()->setPageLayout(it.value());
         m_document->updateViews(it.key());

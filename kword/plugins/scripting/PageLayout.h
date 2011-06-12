@@ -22,7 +22,7 @@
 
 #include <QObject>
 #include <KWPage.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 
 namespace Scripting
 {
@@ -35,10 +35,10 @@ class PageLayout : public QObject
 {
     Q_OBJECT
 public:
-    PageLayout(QObject* parent, const KoPageLayout& pagelayout)
+    PageLayout(QObject* parent, const KOdfPageLayoutData& pagelayout)
             : QObject(parent), m_pagelayout(pagelayout) {}
     virtual ~PageLayout() {}
-    const KoPageLayout& pageLayout() const {
+    const KOdfPageLayoutData& pageLayout() const {
         return m_pagelayout;
     }
 
@@ -136,7 +136,7 @@ public slots:
     }
 
 private:
-    KoPageLayout m_pagelayout;
+    KOdfPageLayoutData m_pagelayout;
 };
 
 }

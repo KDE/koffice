@@ -22,7 +22,7 @@
 #include <ui_KWStartupWidget.h>
 
 #include <KoUnit.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 
 #include <QWidget>
 
@@ -49,7 +49,7 @@ public:
     KWStartupWidget(QWidget *parent, KWDocument *doc, const KOdfColumnData &columns);
 
 private slots:
-    void sizeUpdated(const KoPageLayout &layout);
+    void sizeUpdated(const KOdfPageLayoutData &layout);
     void columnsUpdated(const KOdfColumnData &columns);
     void buttonClicked();
     void unitChanged(const KoUnit &unit);
@@ -63,7 +63,7 @@ private:
     KWDocumentColumns *m_columnsWidget;
     KWHeaderFooter *m_headerFooter;
 
-    KoPageLayout m_layout;
+    KOdfPageLayoutData m_layout;
     KOdfColumnData m_columns;
     KWDocument *m_doc;
     Ui::KWStartupWidget widget;

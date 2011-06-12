@@ -21,7 +21,7 @@
 #define KWDOCUMENTCOLUMNS_H
 
 #include <ui_KWDocumentColumns.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 
 #include <QWidget>
 

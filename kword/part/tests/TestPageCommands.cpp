@@ -215,7 +215,7 @@ void TestPageCommands::testInsertPageCommand3() // restore all properties
     KWPageStyle style = page.pageStyle();
     style.setHasMainTextFrame(false);
     style.setFootnoteDistance(10);
-    KoPageLayout layout;
+    KOdfPageLayoutData layout;
     layout.width = 400;
     layout.height = 300;
     layout.leftMargin = 4;
@@ -243,7 +243,7 @@ void TestPageCommands::testInsertPageCommand3() // restore all properties
     QCOMPARE(style2, style);
     QCOMPARE(style2.hasMainTextFrame(), false);
     QCOMPARE(style2.footnoteDistance(), 10.);
-    KoPageLayout layout2 = style2.pageLayout();
+    KOdfPageLayoutData layout2 = style2.pageLayout();
     QCOMPARE(layout2, layout);
 
     QCOMPARE(command2.page().pageStyle(), style);
@@ -361,7 +361,7 @@ void TestPageCommands::testRemovePageCommand3() // test restore all properties
     KWPageStyle style = page.pageStyle();
     style.setHasMainTextFrame(false);
     style.setFootnoteDistance(10);
-    KoPageLayout layout;
+    KOdfPageLayoutData layout;
     layout.width = 400;
     layout.height = 300;
     layout.leftMargin = 4;
@@ -384,7 +384,7 @@ void TestPageCommands::testRemovePageCommand3() // test restore all properties
     QCOMPARE(style2, style);
     QCOMPARE(style2.hasMainTextFrame(), false);
     QCOMPARE(style2.footnoteDistance(), 10.);
-    KoPageLayout layout2 = style2.pageLayout();
+    KOdfPageLayoutData layout2 = style2.pageLayout();
     QCOMPARE(layout2, layout);
 
     QCOMPARE(page.pageStyle(), style);
@@ -440,7 +440,7 @@ void TestPageCommands::testPageStylePropertiesCommand() // basic properties chan
     KWPageManager *manager = document.pageManager();
 
     KWPageStyle style("pagestyle1");
-    KoPageLayout oldLayout;
+    KOdfPageLayoutData oldLayout;
     oldLayout.format = KOdfPageFormat::IsoA4Size;
     oldLayout.width = 101;
     oldLayout.height = 102;
@@ -468,7 +468,7 @@ void TestPageCommands::testPageStylePropertiesCommand() // basic properties chan
 
     // new ;)
     KWPageStyle style2("pagestyle2");
-    KoPageLayout newLayout;
+    KOdfPageLayoutData newLayout;
     newLayout.width = 401;
     newLayout.height = 405;
     newLayout.leftMargin = 11;
@@ -558,7 +558,7 @@ void TestPageCommands::testPageStylePropertiesCommand2()
     KWPageManager *manager = document.pageManager();
 
     KWPageStyle style("pagestyle1");
-    KoPageLayout lay = style.pageLayout();
+    KOdfPageLayoutData lay = style.pageLayout();
     lay.width = 300;
     lay.height = 500;
     style.setPageLayout(lay);
@@ -639,7 +639,7 @@ void TestPageCommands::testPageSpread()
     KWPageManager *manager = document.pageManager();
 
     KWPageStyle style("pagestyle1");
-    KoPageLayout lay = style.pageLayout();
+    KOdfPageLayoutData lay = style.pageLayout();
     lay.width = 300;
     lay.height = 500;
     style.setPageLayout(lay);
@@ -737,8 +737,8 @@ void TestPageCommands::testMakePageSpread()
     KWPageManager *manager = document.pageManager();
 
     KWPageStyle style("pagestyle1");
-    const KoPageLayout oldLayout = style.pageLayout();
-    KoPageLayout layout = style.pageLayout();
+    const KOdfPageLayoutData oldLayout = style.pageLayout();
+    KOdfPageLayoutData layout = style.pageLayout();
 
     manager->addPageStyle(style);
     KWPage page1 = manager->appendPage(style);
@@ -762,7 +762,7 @@ void TestPageCommands::testMakePageSpread()
     QCOMPARE(page1.pageSide(), KWPage::Right);
     QCOMPARE(page1.width(), style.pageLayout().width);
     QCOMPARE(manager->pageCount(), 1);
-    KoPageLayout newLayout = style.pageLayout();
+    KOdfPageLayoutData newLayout = style.pageLayout();
     QCOMPARE(newLayout.width, layout.width);
     QCOMPARE(newLayout.leftMargin, layout.leftMargin);
     QCOMPARE(newLayout.rightMargin, layout.rightMargin);

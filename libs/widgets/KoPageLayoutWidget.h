@@ -24,7 +24,7 @@
 
 #include <KoText.h>
 #include <KoUnit.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <QWidget>
 
 /// the widget that shows the size/margins and other page settings.
@@ -33,7 +33,7 @@ class KOWIDGETS_EXPORT KoPageLayoutWidget : public QWidget
     Q_OBJECT
 
 public:
-    KoPageLayoutWidget(QWidget *parent, const KoPageLayout &layout);
+    KoPageLayoutWidget(QWidget *parent, const KOdfPageLayoutData &layout);
     ~KoPageLayoutWidget();
 
     void setUnit(const KoUnit &unit);
@@ -48,11 +48,11 @@ public:
     KoText::Direction textDirection() const;
 
 signals:
-    void layoutChanged(const KoPageLayout &layout);
+    void layoutChanged(const KOdfPageLayoutData &layout);
     void unitChanged(const KoUnit &unit);
 
 public slots:
-    void setPageLayout(const KoPageLayout &layout);
+    void setPageLayout(const KOdfPageLayoutData &layout);
     void setTextAreaAvailable(bool available);
 
 private slots:

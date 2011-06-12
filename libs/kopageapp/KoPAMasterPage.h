@@ -22,7 +22,7 @@
 
 #include "KoPAPageBase.h"
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 
 /// Stores the masterpage's shapes and settings
 class KOPAGEAPP_EXPORT KoPAMasterPage : public KoPAPageBase
@@ -35,11 +35,11 @@ public:
     virtual void saveOdf(KoShapeSavingContext &context) const;
 
     /// @return the page layout set for this masterpage
-    KoPageLayout &pageLayout() { return m_pageLayout; }
-    const KoPageLayout &pageLayout() const { return m_pageLayout; }
+    KOdfPageLayoutData &pageLayout() { return m_pageLayout; }
+    const KOdfPageLayoutData &pageLayout() const { return m_pageLayout; }
 
     /// Set the page layout to @p layout
-    void setPageLayout(const KoPageLayout &layout) { m_pageLayout = layout; }
+    void setPageLayout(const KOdfPageLayoutData &layout) { m_pageLayout = layout; }
 
     /// reimplemented
     virtual bool displayMasterShapes();
@@ -69,7 +69,7 @@ protected:
     /// reimplemented
     virtual QPixmap generateThumbnail(const QSize &size = QSize(512, 512));
 
-    KoPageLayout m_pageLayout;
+    KOdfPageLayoutData m_pageLayout;
 };
 
 #endif /* KOPAMASTERPAGE_H */

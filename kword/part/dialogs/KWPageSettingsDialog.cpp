@@ -139,7 +139,7 @@ void KWPageSettingsDialog::accept()
     }
 
     styleToUpdate.setDirection(textDirection());
-    KoPageLayout lay = pageLayout();
+    KOdfPageLayoutData lay = pageLayout();
     if (lay.pageEdge >= 0 || lay.bindingSide >= 0) {
         // asserts check if our super didn't somehow mess up
         Q_ASSERT(lay.pageEdge >= 0);

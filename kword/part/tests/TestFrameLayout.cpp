@@ -43,7 +43,7 @@ public:
     Helper() {
         pageManager = new KWPageManager();
         KWPage page = pageManager->appendPage();
-        KoPageLayout pageLayout = page.pageStyle().pageLayout();
+        KOdfPageLayoutData pageLayout = page.pageStyle().pageLayout();
         pageLayout.width = 200;
         pageLayout.height = 200;
         page.pageStyle().setPageLayout(pageLayout);
@@ -584,7 +584,7 @@ void TestFrameLayout::testLayoutPageSpread()
     m_frames.clear();
 
     //set up as a page spread;
-    KoPageLayout pageLayout = helper.pageStyle.pageLayout();
+    KOdfPageLayoutData pageLayout = helper.pageStyle.pageLayout();
     pageLayout.leftMargin = -1;
     pageLayout.rightMargin = -1;
     pageLayout.pageEdge = 20;

@@ -26,14 +26,14 @@
 
 #include <KPageDialog>
 
-struct KoPageLayout;
+struct KOdfPageLayoutData;
 
 /// A dialog to show the settings for one page and apply them afterwards.
 class KOWIDGETS_EXPORT KoPageLayoutDialog : public KPageDialog
 {
     Q_OBJECT
 public:
-    explicit KoPageLayoutDialog(QWidget *parent, const KoPageLayout &layout);
+    explicit KoPageLayoutDialog(QWidget *parent, const KOdfPageLayoutData &layout);
     ~KoPageLayoutDialog();
 
     void showTextDirection(bool on);
@@ -41,7 +41,7 @@ public:
     void setTextDirection(KoText::Direction direction);
     void showPageSpread(bool on);
     void setPageSpread(bool pageSpread);
-    KoPageLayout pageLayout() const;
+    KOdfPageLayoutData pageLayout() const;
     bool applyToDocument() const;
     void showApplyToDocument(bool on);
 
@@ -52,7 +52,7 @@ signals:
     void unitChanged(const KoUnit &unit);
 
 private slots:
-    void setPageLayout(const KoPageLayout &layout);
+    void setPageLayout(const KOdfPageLayoutData &layout);
 
 protected slots:
     void accept();

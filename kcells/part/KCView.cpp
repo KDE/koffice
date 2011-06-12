@@ -1676,7 +1676,7 @@ void KCView::paperLayoutDlg()
     selection()->emitCloseEditor(true); // save changes
     KCSheetPrint* print = d->activeSheet->print();
 
-    KoPageLayout pl = print->settings()->pageLayout();
+    KOdfPageLayoutData pl = print->settings()->pageLayout();
 
 
 /*

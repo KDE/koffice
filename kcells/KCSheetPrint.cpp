@@ -99,8 +99,8 @@ void KCSheetPrint::setSettings(const KCPrintSettings &settings, bool force)
         return;
     }
 
-    const KoPageLayout oldPageLayout = d->m_settings->pageLayout();
-    const KoPageLayout pageLayout = settings.pageLayout();
+    const KOdfPageLayoutData oldPageLayout = d->m_settings->pageLayout();
+    const KOdfPageLayoutData pageLayout = settings.pageLayout();
     const QRect oldPrintRange = d->m_settings->printRegion().lastRange();
     const QRect printRange = settings.printRegion().lastRange();
     const QSize oldPageLimits = d->m_settings->pageLimits();

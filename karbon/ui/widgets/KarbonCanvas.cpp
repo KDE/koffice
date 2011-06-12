@@ -181,7 +181,7 @@ void KarbonCanvas::paintMargins(QPainter &painter, const KoViewConverter &conver
     if (! d->showMargins)
         return;
 
-    KoPageLayout pl = d->part->pageLayout();
+    KOdfPageLayoutData pl = d->part->pageLayout();
 
     QSizeF pageSize = d->document->pageSize();
     QRectF marginRect(pl.leftMargin, pl.topMargin,

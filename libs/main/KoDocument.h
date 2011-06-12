@@ -32,7 +32,7 @@
 #include <kcomponentdata.h>
 
 #include <KoUnit.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include "komain_export.h"
 #include "KoGridData.h"
 #include "KoGuidesData.h"
@@ -616,10 +616,10 @@ public:
      * @return the page layout associated with this document (margins, pageSize, etc).
      * Override this if you want to provide different sized pages.
      *
-     * @see KoPageLayout
+     * @see KOdfPageLayoutData
      */
-    virtual KoPageLayout pageLayout(int pageNumber = 0) const;
-    virtual void setPageLayout(const KoPageLayout &pageLayout);
+    virtual KOdfPageLayoutData pageLayout(int pageNumber = 0) const;
+    virtual void setPageLayout(const KOdfPageLayoutData &pageLayout);
 
     /**
      * Performs a cleanup of unneeded backup files

@@ -69,14 +69,14 @@ KWStartupWidget::KWStartupWidget(QWidget *parent, KWDocument *doc, const KOdfCol
     prev->setColumns(columns);
     prev->setPageLayout(m_layout);
 
-    connect(m_sizeWidget, SIGNAL(layoutChanged(const KoPageLayout&)), this, SLOT(sizeUpdated(const KoPageLayout&)));
+    connect(m_sizeWidget, SIGNAL(layoutChanged(const KOdfPageLayoutData&)), this, SLOT(sizeUpdated(const KOdfPageLayoutData&)));
     connect(widget.createButton, SIGNAL(clicked()), this, SLOT(buttonClicked()));
     connect(widget.mainText, SIGNAL(toggled(bool)), m_sizeWidget, SLOT(setTextAreaAvailable(bool)));
     connect(widget.mainText, SIGNAL(toggled(bool)), m_columnsWidget, SLOT(setTextAreaAvailable(bool)));
     connect(m_sizeWidget, SIGNAL(unitChanged(const KoUnit&)), this, SLOT(unitChanged(const KoUnit&)));
     connect(m_columnsWidget, SIGNAL(columnsChanged(const KOdfColumnData&)), prev, SLOT(setColumns(const KOdfColumnData&)));
     connect(m_columnsWidget, SIGNAL(columnsChanged(const KOdfColumnData&)), this, SLOT(columnsUpdated(const KOdfColumnData&)));
-    connect(m_sizeWidget, SIGNAL(layoutChanged(const KoPageLayout&)), prev, SLOT(setPageLayout(const KoPageLayout&)));
+    connect(m_sizeWidget, SIGNAL(layoutChanged(const KOdfPageLayoutData&)), prev, SLOT(setPageLayout(const KOdfPageLayoutData&)));
 }
 
 void KWStartupWidget::unitChanged(const KoUnit &unit)
@@ -86,7 +86,7 @@ void KWStartupWidget::unitChanged(const KoUnit &unit)
     m_headerFooter->setUnit(unit);
 }
 
-void KWStartupWidget::sizeUpdated(const KoPageLayout &layout)
+void KWStartupWidget::sizeUpdated(const KOdfPageLayoutData &layout)
 {
     m_layout = layout;
 }

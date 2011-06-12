@@ -22,7 +22,7 @@
 #include <KoToolProxy.h>
 #include <KoZoomHandler.h>
 
-#include "KoPageLayout.h"
+#include "KOdfPageLayoutData.h"
 #include "KoPAView.h"
 #include "KoPAViewMode.h"
 #include "KoPAPageBase.h"
@@ -67,7 +67,7 @@ void KoPACanvas::updateSize()
     QSize size;
 
     if (koPAView()->activePage()) {
-        KoPageLayout pageLayout = koPAView()->activePage()->pageLayout();
+        KOdfPageLayoutData pageLayout = koPAView()->activePage()->pageLayout();
         size.setWidth(qRound(koPAView()->zoomHandler()->zoomItX(pageLayout.width)));
         size.setHeight(qRound(koPAView()->zoomHandler()->zoomItX(pageLayout.height)));
     }

@@ -328,7 +328,7 @@ void KWCanvas::paintPageDecorations(QPainter &painter, KWViewMode::ViewMap &view
     painter.save();
 
     const QRectF       pageRect = viewMap.page.rect();
-    const KoPageLayout pageLayout = viewMap.page.pageStyle().pageLayout();
+    const KOdfPageLayoutData pageLayout = viewMap.page.pageStyle().pageLayout();
 
     // Get the coordinates of the border rect in view coordinates.
     QPointF topLeftCorner = viewConverter()->documentToView(pageRect.topLeft()

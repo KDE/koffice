@@ -31,7 +31,7 @@
 #include "drawstyle.h"
 
 #include <KoUnit.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <kdebug.h>
 
 #include <wv2/src/styles.h>

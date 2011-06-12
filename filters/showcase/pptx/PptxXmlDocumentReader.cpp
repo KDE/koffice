@@ -32,7 +32,7 @@
 #include <MsooXmlDrawingTableStyleReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyles.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoOdfGraphicStyles.h>
 
 #define MSOOXML_CURRENT_NS "p"
@@ -67,7 +67,7 @@ public:
     QMap<QString, PptxSlideLayoutProperties*> slideLayoutPropertiesMap;
     uint slideNumber; //!< temp., see todo in PptxXmlDocumentReader::read_sldId()
     bool sldSzRead;
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
 
     // Several because there are several masterpages
     QVector<QString> masterPageDrawStyleNames;
@@ -105,7 +105,7 @@ KoFilter::ConversionStatus PptxXmlDocumentReader::read(MSOOXML::MsooXmlReaderCon
     Q_ASSERT(m_context);
     d->slideNumber = 0;
     d->sldSzRead = false;
-    d->pageLayout = KoPageLayout();
+    d->pageLayout = KOdfPageLayoutData();
 
     const KoFilter::ConversionStatus result = readInternal();
 

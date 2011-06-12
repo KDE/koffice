@@ -23,11 +23,11 @@
 
 #include "kowidgets_export.h"
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 
 #include <QWidget>
 
-/// A widget to preview the KoPageLayout and KOdfColumnData data structures.
+/// A widget to preview the KOdfPageLayoutData and KOdfColumnData data structures.
 class KOWIDGETS_EXPORT KoPagePreviewWidget : public QWidget {
     Q_OBJECT
 public:
@@ -38,7 +38,7 @@ protected:
     void paintEvent(QPaintEvent *event);
 
 public slots:
-    void setPageLayout(const KoPageLayout &layout);
+    void setPageLayout(const KOdfPageLayoutData &layout);
     void setColumns(const KOdfColumnData &columns);
 
 private:

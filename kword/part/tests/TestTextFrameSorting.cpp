@@ -112,7 +112,7 @@ void TestTextFrameSorting::testSortingOnPagespread()
     KWPageManager pm;
     KWPage page = pm.appendPage();
     page.setPageNumber(2);
-    KoPageLayout layout = page.pageStyle().pageLayout();
+    KOdfPageLayoutData layout = page.pageStyle().pageLayout();
     layout.width = 450;
     layout.height = 150;
     page.setDirectionHint(KoText::LeftRightTopBottom);
@@ -155,7 +155,7 @@ void TestTextFrameSorting::testRtlSorting()
     KWPage page = pm.appendPage();
     page.setDirectionHint(KoText::RightLeftTopBottom);
     QCOMPARE(page.directionHint(), KoText::RightLeftTopBottom);
-    KoPageLayout layout = page.pageStyle().pageLayout();
+    KOdfPageLayoutData layout = page.pageStyle().pageLayout();
     layout.width = 200;
     page.pageStyle().setPageLayout(layout);
     tfs.setPageManager(&pm);

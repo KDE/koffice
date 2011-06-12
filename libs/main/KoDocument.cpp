@@ -203,7 +203,7 @@ public:
 
     bool bEmpty;
 
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
 };
 
 // Used in singleViewMode
@@ -2344,12 +2344,12 @@ QString KoDocument::tagNameToDocumentType(const QString& localName)
     return localName;
 }
 
-KoPageLayout KoDocument::pageLayout(int /*pageNumber*/) const
+KOdfPageLayoutData KoDocument::pageLayout(int /*pageNumber*/) const
 {
     return d->pageLayout;
 }
 
-void KoDocument::setPageLayout(const KoPageLayout &pageLayout)
+void KoDocument::setPageLayout(const KOdfPageLayoutData &pageLayout)
 {
     d->pageLayout = pageLayout;
 }

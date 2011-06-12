@@ -77,7 +77,7 @@ void KWord13OasisGenerator::prepareTextFrameset(KWordTextFrameset* frameset)
 
 void KWord13OasisGenerator::preparePageLayout(void)
 {
-    // Inspired by KoPageLayout::saveOasis
+    // Inspired by KOdfPageLayoutData::saveOasis
     KOdfGenericStyle style(KOdfGenericStyle::PageLayoutStyle);
     style.addPropertyPt("fo:page-width", positiveNumberOrNull(m_kwordDocument->getProperty("PAPER:width", "PAPER:ptWidth")));
     style.addPropertyPt("fo:page-height", positiveNumberOrNull(m_kwordDocument->getProperty("PAPER:height", "PAPER:ptHeight")));

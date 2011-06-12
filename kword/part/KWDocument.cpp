@@ -960,7 +960,7 @@ void KWDocument::printDebug()
         KOdfColumnData columns = style.columns();
         if (columns.columns != 1)
             kDebug(32001) << " +-- Columns:" << columns.columns << columns.columnSpacing << "pt spacing";
-        KoPageLayout layout = style.pageLayout();
+        KOdfPageLayoutData layout = style.pageLayout();
         kDebug(32001) << "     PageSize: " << layout.width << "x" << layout.height;
         kDebug(32001) << "     Indents: (tlbr, edge, binding)"
                       << layout.topMargin << layout.leftMargin

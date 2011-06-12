@@ -50,7 +50,7 @@ public:
 private:
     KWDocument *m_document;
     KWPage::PageSide m_pageSide;
-    KoPageLayout m_pageLayout;
+    KOdfPageLayoutData m_pageLayout;
     KOdfPageFormat::Orientation m_orientation;
     int m_pageNumber;
     QString m_masterPageName;

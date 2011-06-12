@@ -87,7 +87,7 @@ void KoPAMasterPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingCont
     QString pageLayoutName = element.attributeNS(KoXmlNS::style, "page-layout-name");
     const KOdfStylesReader &styles = loadingContext.odfLoadingContext().stylesReader();
     const KoXmlElement* masterPageStyle = styles.findStyle(pageLayoutName);
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
 
     if (masterPageStyle) {
         pageLayout.loadOdf(*masterPageStyle);
@@ -136,7 +136,7 @@ QPixmap KoPAMasterPage::generateThumbnail(const QSize &size)
         return QPixmap();
 
     KoZoomHandler zoomHandler;
-    const KoPageLayout &layout = pageLayout();
+    const KOdfPageLayoutData &layout = pageLayout();
     KoPAUtil::setZoom(layout, size, zoomHandler);
     QRect pageRect(KoPAUtil::pageRect(layout, size, zoomHandler));
 

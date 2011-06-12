@@ -25,7 +25,7 @@
 #include <KoFilterChain.h>
 #include <KoStoreDevice.h>
 #include <KoOdfGraphicStyles.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoShape.h>
 #include <KoShapeContainer.h>
 #include <KoShapeLayer.h>
@@ -155,7 +155,7 @@ bool KarbonImport::convert(const KoXmlDocument &document)
 
     bool success = loadXML(doc);
 
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
 
     // <PAPER>
     KoXmlElement paper = doc.namedItem("PAPER").toElement();

@@ -20,7 +20,7 @@
 #include "KWDocumentColumns.h"
 #include <KoPagePreviewWidget.h>
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 
 KWDocumentColumns::KWDocumentColumns(QWidget *parent, const KOdfColumnData &columns)
         : QWidget(parent)

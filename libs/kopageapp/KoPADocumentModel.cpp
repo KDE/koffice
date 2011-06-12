@@ -178,7 +178,7 @@ QVariant KoPADocumentModel::data(const QModelIndex &index, int role) const
         {
             KoPAPageBase *page = dynamic_cast<KoPAPageBase*>(shape);
             if (page) { // return actual page size for page
-                KoPageLayout layout = page->pageLayout();
+                KOdfPageLayoutData layout = page->pageLayout();
                 return QSize(layout.width, layout.height);
             }
             else
@@ -307,7 +307,7 @@ QImage KoPADocumentModel::createThumbnail(KoShape* shape, const QSize &thumbSize
     KoPAPageBase *page = dynamic_cast<KoPAPageBase*>(shape);
     if (page) { // We create a thumbnail with actual width / height ratio for page
         KoZoomHandler zoomHandler;
-        KoPageLayout layout = page->pageLayout();
+        KOdfPageLayoutData layout = page->pageLayout();
         qreal ratio = (zoomHandler.resolutionX() * layout.width) / (zoomHandler.resolutionY() * layout.height);
         if (ratio > 1) {
             size.setHeight(size.width() / ratio);

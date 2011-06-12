@@ -29,7 +29,7 @@
 class KoPagePreviewWidget::Private
 {
 public:
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
     KOdfColumnData columns;
 };
 
@@ -130,7 +130,7 @@ void KoPagePreviewWidget::drawPage(QPainter &painter, qreal zoom, const QRect &d
 
 }
 
-void KoPagePreviewWidget::setPageLayout(const KoPageLayout &layout)
+void KoPagePreviewWidget::setPageLayout(const KOdfPageLayoutData &layout)
 {
     d->pageLayout = layout;
     update();

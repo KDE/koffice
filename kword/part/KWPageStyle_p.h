@@ -32,7 +32,7 @@ public:
     void clear();
 
     KOdfColumnData columns;
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
     QString name;
     bool mainFrame;
     bool fixedHeaderSize;

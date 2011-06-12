@@ -66,14 +66,14 @@ void KoPAPage::saveOdf(KoShapeSavingContext &context) const
     paContext.xmlWriter().endElement();
 }
 
-KoPageLayout &KoPAPage::pageLayout()
+KOdfPageLayoutData &KoPAPage::pageLayout()
 {
     Q_ASSERT(m_masterPage);
 
     return m_masterPage->pageLayout();
 }
 
-const KoPageLayout &KoPAPage::pageLayout() const
+const KOdfPageLayoutData &KoPAPage::pageLayout() const
 {
     Q_ASSERT(m_masterPage);
 
@@ -169,7 +169,7 @@ QPixmap KoPAPage::generateThumbnail(const QSize &size)
     if (size.isEmpty()) // either width or height is <= 0
         return QPixmap();
     KoZoomHandler zoomHandler;
-    const KoPageLayout & layout = pageLayout();
+    const KOdfPageLayoutData & layout = pageLayout();
     KoPAUtil::setZoom(layout, size, zoomHandler);
     QRect pageRect(KoPAUtil::pageRect(layout, size, zoomHandler));
 

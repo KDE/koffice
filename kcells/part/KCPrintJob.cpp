@@ -164,7 +164,7 @@ void KCPrintJob::Private::printHeaderFooter(QPainter &painter, KCSheet *sheet, i
 {
     const KCSheetPrint *const pageManager = pageManagers[sheet];
     const KCPrintSettings *const settings = pageManager->settings();
-    const KoPageLayout pageLayout = settings->pageLayout();
+    const KOdfPageLayoutData pageLayout = settings->pageLayout();
 
     const KCHeaderFooter *const headerFooter = pageManager->headerFooter();
 #if 1 // debug header/footer
@@ -258,7 +258,7 @@ KCPrintJob::KCPrintJob(KCView *view)
     //apply page layout parameters
     KCSheet *const sheet = d->view->activeSheet();
     const KCPrintSettings* settings = d->pageManagers[sheet]->settings();
-    const KoPageLayout pageLayout = settings->pageLayout();
+    const KOdfPageLayoutData pageLayout = settings->pageLayout();
     const KOdfPageFormat::Format pageFormat = pageLayout.format;
     printer().setPaperSize(static_cast<QPrinter::PageSize>(KOdfPageFormat::printerPageSize(pageFormat)));
     if (pageLayout.orientation == KOdfPageFormat::Landscape || pageFormat == KOdfPageFormat::ScreenSize)
@@ -359,7 +359,7 @@ QRectF KCPrintJob::preparePage(int pageNumber)
     // Example: printer resolution 300 dpi, zoom = 2
     // Printer: 300 / 72 * 2 = 8.33 [physical points/logical points]
     const double scale = POINT_TO_INCH(printer().resolution());
-    const KoPageLayout pageLayout = settings->pageLayout();
+    const KOdfPageLayoutData pageLayout = settings->pageLayout();
     painter().translate(pageLayout.leftMargin * scale, pageLayout.topMargin * scale);
 
     // Apply the print zoom factor,
@@ -431,7 +431,7 @@ void KCPrintJob::printPage(int pageNumber, QPainter &painter)
 
     const KCSheetPrint *const pageManager = d->pageManagers[sheet];
     const KCPrintSettings *const settings = pageManager->settings();
-    const KoPageLayout pageLayout = settings->pageLayout();
+    const KOdfPageLayoutData pageLayout = settings->pageLayout();
     const double zoom = settings->zoom();
     kDebug() << "printing page" << sheetPageNumber << "; cell range" << cellRange;
 

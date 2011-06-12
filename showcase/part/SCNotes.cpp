@@ -165,12 +165,12 @@ void SCNotes::paintComponent(QPainter &painter, const KoViewConverter &converter
     Q_UNUSED(converter);
 }
 
-KoPageLayout &SCNotes::pageLayout()
+KOdfPageLayoutData &SCNotes::pageLayout()
 {
     return m_pageLayout;
 }
 
-const KoPageLayout &SCNotes::pageLayout() const
+const KOdfPageLayoutData &SCNotes::pageLayout() const
 {
     return m_pageLayout;
 }

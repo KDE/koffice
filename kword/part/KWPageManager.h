@@ -24,7 +24,7 @@
 #include "kword_export.h"
 #include "KWPageStyle.h"
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoInsets.h>
 
 #include <QList>

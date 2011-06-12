@@ -21,11 +21,11 @@
 
 #include <KDebug>
 
-#include "KoPageLayout.h"
+#include "KOdfPageLayoutData.h"
 #include "KoPADocument.h"
 #include "KoPAMasterPage.h"
 
-KoPAPageLayoutDialog::KoPAPageLayoutDialog(KoPADocument *document, const KoPageLayout &pageLayout, QWidget *parent)
+KoPAPageLayoutDialog::KoPAPageLayoutDialog(KoPADocument *document, const KOdfPageLayoutData &pageLayout, QWidget *parent)
 : KoPageLayoutDialog(parent, pageLayout)
 , m_document(document)
 {

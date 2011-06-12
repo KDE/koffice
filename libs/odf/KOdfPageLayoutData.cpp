@@ -21,14 +21,14 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoPageLayout.h"
+#include "KOdfPageLayoutData.h"
 
 #include <KDebug>
 
 #include "KoXmlNS.h"
 #include "KoUnit.h"
 
-KOdfGenericStyle KoPageLayout::saveOdf() const
+KOdfGenericStyle KOdfPageLayoutData::saveOdf() const
 {
     KOdfGenericStyle style(KOdfGenericStyle::PageLayoutStyle);
 
@@ -67,13 +67,13 @@ KOdfGenericStyle KoPageLayout::saveOdf() const
     return style;
 }
 
-void KoPageLayout::loadOdf(const KoXmlElement &style)
+void KOdfPageLayoutData::loadOdf(const KoXmlElement &style)
 {
     KoXmlElement  properties(KoXml::namedItemNS(style, KoXmlNS::style,
                                                 "page-layout-properties"));
 
     if (!properties.isNull()) {
-        KoPageLayout standard;
+        KOdfPageLayoutData standard;
 
         // Page dimension -- width / height
         width = KoUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "page-width"),
@@ -137,7 +137,7 @@ void KoPageLayout::loadOdf(const KoXmlElement &style)
     }
 }
 
-bool KoPageLayout::operator==(const KoPageLayout &l) const
+bool KOdfPageLayoutData::operator==(const KOdfPageLayoutData &l) const
 {
     return qFuzzyCompare(width,l.width)
         && qFuzzyCompare(height,l.height)
@@ -150,12 +150,12 @@ bool KoPageLayout::operator==(const KoPageLayout &l) const
         && border == l.border;
 }
 
-bool KoPageLayout::operator!=(const KoPageLayout& l) const
+bool KOdfPageLayoutData::operator!=(const KOdfPageLayoutData& l) const
 {
     return !((*this) == l);
 }
 
-KoPageLayout::KoPageLayout()
+KOdfPageLayoutData::KOdfPageLayoutData()
 : format(KOdfPageFormat::defaultFormat())
 , orientation(KOdfPageFormat::Portrait)
 , width(MM_TO_POINT(KOdfPageFormat::width(format, orientation)))

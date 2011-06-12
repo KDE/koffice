@@ -197,7 +197,7 @@ void KoPAViewModeNormal::removeShape(KoShape *shape)
     }
 }
 
-void KoPAViewModeNormal::changePageLayout(const KoPageLayout &pageLayout, bool applyToDocument, QUndoCommand *parent)
+void KoPAViewModeNormal::changePageLayout(const KOdfPageLayoutData &pageLayout, bool applyToDocument, QUndoCommand *parent)
 {
     KoPAPageBase *page = m_view->activePage();
     KoPAMasterPage *masterPage = dynamic_cast<KoPAMasterPage *>(page);
@@ -211,7 +211,7 @@ void KoPAViewModeNormal::changePageLayout(const KoPageLayout &pageLayout, bool a
 void KoPAViewModeNormal::paintMargins(QPainter &painter, const KoViewConverter &converter)
 {
     KoPAPageBase *page = m_view->activePage();
-    KoPageLayout pl = page->pageLayout();
+    KOdfPageLayoutData pl = page->pageLayout();
 
     QSizeF pageSize = QSizeF(pl.width, pl.height);
     QRectF marginRect(pl.leftMargin, pl.topMargin,

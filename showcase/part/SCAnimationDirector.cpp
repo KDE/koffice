@@ -43,7 +43,7 @@
 #include <QVariant>
 #include <kapplication.h>
 #include <kdebug.h>
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoShapeManager.h>
 #include <KoShapeManagerPaintingStrategy.h>
 #include <KoViewConverter.h>
@@ -354,7 +354,7 @@ bool SCAnimationDirector::changePage(Navigation navigation)
 
 void SCAnimationDirector::updateZoom(const QSize &size)
 {
-    KoPageLayout pageLayout = m_view->activePage()->pageLayout();
+    KOdfPageLayoutData pageLayout = m_view->activePage()->pageLayout();
     KoPAUtil::setZoom(pageLayout, size, m_zoomHandler);
     m_pageRect = KoPAUtil::pageRect(pageLayout, size, m_zoomHandler);
     m_canvas->setDocumentOffset(-m_pageRect.topLeft());

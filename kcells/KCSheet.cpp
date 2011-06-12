@@ -1100,7 +1100,7 @@ QDomElement KCSheet::saveXML(QDomDocument& dd)
     sheet.appendChild(paper);
 
     QDomElement borders = dd.createElement("borders");
-    KoPageLayout pageLayout = print()->settings()->pageLayout();
+    KOdfPageLayoutData pageLayout = print()->settings()->pageLayout();
     borders.setAttribute("left", pageLayout.leftMargin);
     borders.setAttribute("top", pageLayout.topMargin);
     borders.setAttribute("right", pageLayout.rightMargin);
@@ -1715,7 +1715,7 @@ void KCSheet::loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& 
 
 void KCSheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
 {
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
 
     if (styleStack.hasProperty(KoXmlNS::fo, "page-width")) {
         pageLayout.width = KoUnit::parseValue(styleStack.property(KoXmlNS::fo, "page-width"));
@@ -2994,7 +2994,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
     // Load the paper layout
     KoXmlElement paper = sheet.namedItem("paper").toElement();
     if (!paper.isNull()) {
-        KoPageLayout pageLayout;
+        KOdfPageLayoutData pageLayout;
         pageLayout.format = KOdfPageFormat::formatFromString(paper.attribute("format"));
         pageLayout.orientation = (paper.attribute("orientation")  == "Portrait")
                                  ? KOdfPageFormat::Portrait : KOdfPageFormat::Landscape;

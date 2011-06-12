@@ -28,7 +28,7 @@
 #include "KCRegion.h"
 
 // KOffice
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <KoUnit.h>
 
 // Qt
@@ -37,7 +37,7 @@
 class KCPrintSettings::Private
 {
 public:
-    KoPageLayout pageLayout;
+    KOdfPageLayoutData pageLayout;
     bool printGrid              : 1;
     bool printCharts            : 1;
     bool printObjects           : 1;
@@ -112,12 +112,12 @@ KCPrintSettings::~KCPrintSettings()
     delete d;
 }
 
-const KoPageLayout& KCPrintSettings::pageLayout() const
+const KOdfPageLayoutData& KCPrintSettings::pageLayout() const
 {
     return d->pageLayout;
 }
 
-void KCPrintSettings::setPageLayout(const KoPageLayout& pageLayout)
+void KCPrintSettings::setPageLayout(const KOdfPageLayoutData& pageLayout)
 {
     d->pageLayout = pageLayout;
 }

@@ -44,7 +44,7 @@
 #include <klocale.h>
 #include <kzip.h>
 
-#include <KoPageLayout.h>
+#include <KOdfPageLayoutData.h>
 #include <PictureKey.h>
 #include <Picture.h>
 

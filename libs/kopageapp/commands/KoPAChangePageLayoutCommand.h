@@ -21,7 +21,7 @@
 #define KOPACHANGEPAGELAYOUTCOMMAND_H
 
 #include <QUndoCommand>
-#include "KoPageLayout.h"
+#include "KOdfPageLayoutData.h"
 
 class KoPADocument;
 class KoPAMasterPage;
@@ -33,7 +33,7 @@ class KoPAPageBase;
 class KoPAChangePageLayoutCommand : public QUndoCommand
 {
 public:
-    KoPAChangePageLayoutCommand(KoPADocument *document, KoPAMasterPage *page, const KoPageLayout &newPageLayout, bool applyToDocument, QUndoCommand *parent = 0);
+    KoPAChangePageLayoutCommand(KoPADocument *document, KoPAMasterPage *page, const KOdfPageLayoutData &newPageLayout, bool applyToDocument, QUndoCommand *parent = 0);
     virtual ~KoPAChangePageLayoutCommand();
 
     /// redo the command
@@ -43,8 +43,8 @@ public:
 
 private:
     KoPADocument *m_document;
-    KoPageLayout m_newPageLayout;
-    QMap<KoPAMasterPage *, KoPageLayout> m_oldLayouts;
+    KOdfPageLayoutData m_newPageLayout;
+    QMap<KoPAMasterPage *, KOdfPageLayoutData> m_oldLayouts;
 };
 
 #endif /* KOPACHANGEPAGELAYOUTCOMMAND_H */

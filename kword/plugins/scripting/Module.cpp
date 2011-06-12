@@ -180,7 +180,7 @@ QObject* Module::findFrameSet(KWord::TextFrameSetType type)
 
 QObject* Module::standardPageLayout()
 {
-    KoPageLayout layout;
+    KOdfPageLayoutData layout;
     return new PageLayout(this, layout);
 }
 
