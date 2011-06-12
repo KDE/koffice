@@ -51,7 +51,7 @@
 #include <KoCharacterStyle.h>
 #include <KoParagraphStyle.h>
 #include <KoText.h>
-#include <KoEmbeddedDocumentSaver.h>
+#include <KOdfEmbeddedDocumentSaver.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoTextSharedLoadingData.h>
 #include <KoTextSharedSavingData.h>
@@ -160,7 +160,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
     KOdfGenericStyles mainStyles;
     KoStyleManager *styleMan = KoTextDocument(document).styleManager();
     Q_UNUSED(styleMan);
-    KoEmbeddedDocumentSaver embeddedSaver;
+    KOdfEmbeddedDocumentSaver embeddedSaver;
 
     KOdfGenericChanges changes;
     KoShapeSavingContext context(xmlWriter, mainStyles, embeddedSaver);

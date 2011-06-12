@@ -45,7 +45,7 @@
 #include <KoShapeRegistry.h>
 #include <KOdfStorageDevice.h>
 #include <KOdfWriteStore.h>
-#include <KoEmbeddedDocumentSaver.h>
+#include <KOdfEmbeddedDocumentSaver.h>
 #include <KoImageCollection.h>
 #include <KoDataCenterBase.h>
 #include <KoText.h>

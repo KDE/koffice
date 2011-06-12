@@ -33,7 +33,7 @@ class KoShape;
 class KXmlWriter;
 class KOdfGenericStyles;
 class KoDataCenterBase;
-class KoEmbeddedDocumentSaver;
+class KOdfEmbeddedDocumentSaver;
 class KoImageData;
 class KoShapeLayer;
 class KOdfStore;
@@ -78,7 +78,7 @@ public:
      * @param embeddedSaver for saving embedded documents
      */
     KoShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
-                         KoEmbeddedDocumentSaver &embeddedSaver);
+                         KOdfEmbeddedDocumentSaver &embeddedSaver);
     virtual ~KoShapeSavingContext();
 
     /**
@@ -110,7 +110,7 @@ public:
      *
      * @return embedded document saver
      */
-    KoEmbeddedDocumentSaver &embeddedSaver();
+    KOdfEmbeddedDocumentSaver &embeddedSaver();
 
     /**
      * @brief Check if an option is set

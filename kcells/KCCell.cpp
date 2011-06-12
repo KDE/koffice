@@ -86,7 +86,7 @@
 #include <KoTextSharedLoadingData.h>
 #include <KoTextDocument.h>
 #include <KoTextWriter.h>
-#include <KoEmbeddedDocumentSaver.h>
+#include <KOdfEmbeddedDocumentSaver.h>
 #include <KoParagraphStyle.h>
 
 #include <kdebug.h>
@@ -1203,7 +1203,7 @@ bool KCCell::saveOdf(KXmlWriter& xmlwriter, KOdfGenericStyles &mainStyles,
             QTextCharFormat format = style().asCharFormat();
             sheet()->map()->textStyleManager()->defaultParagraphStyle()->characterStyle()->copyProperties(format);
 
-            KoEmbeddedDocumentSaver saver;
+            KOdfEmbeddedDocumentSaver saver;
             KoShapeSavingContext shapeContext(xmlwriter, mainStyles, saver);
             KoTextWriter writer(shapeContext);
 

@@ -47,7 +47,7 @@
 #include <KMessageBox>
 
 #include <KOdfWriteStore.h>
-#include <KoEmbeddedDocumentSaver.h>
+#include <KOdfEmbeddedDocumentSaver.h>
 #include <KoDocumentInfo.h>
 #include <KoDocument.h>
 #include <KoFilterChain.h>

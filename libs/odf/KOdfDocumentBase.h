@@ -28,7 +28,7 @@
 class KOdfStore;
 class KOdfStoreReader;
 class KOdfWriteStore;
-class KoEmbeddedDocumentSaver;
+class KOdfEmbeddedDocumentSaver;
 
 #include "koodf_export.h"
 
@@ -43,12 +43,12 @@ public:
 
     // context passed on saving to saveOdf
     struct SavingContext {
-        SavingContext(KOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embeddedSaver)
+        SavingContext(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embeddedSaver)
                 : odfStore(odfStore)
                 , embeddedSaver(embeddedSaver) {}
 
         KOdfWriteStore &odfStore;
-        KoEmbeddedDocumentSaver &embeddedSaver;
+        KOdfEmbeddedDocumentSaver &embeddedSaver;
     };
 
     /**

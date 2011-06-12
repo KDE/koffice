@@ -12,7 +12,7 @@ endif( QCA2_FOUND )
 set(koodf_LIB_SRCS
     KOdfBorders.cpp
     DirectoryStore.cpp
-    KoEmbeddedDocumentSaver.cpp
+    KOdfEmbeddedDocumentSaver.cpp
     EncryptedStore.cpp
     KoEncryptionChecker.cpp
     KOdfFontData.cpp
@@ -77,7 +77,7 @@ install( FILES
     KOdfDocumentBase.h
     KOdfGenericChange.h
     KOdfGenericChanges.h
-    KoEmbeddedDocumentSaver.h
+    KOdfEmbeddedDocumentSaver.h
     KOdfBorders.h
     KOdfPageLayoutData.h
     KOdfPageFormat.h

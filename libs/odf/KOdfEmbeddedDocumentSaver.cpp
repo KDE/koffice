@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoEmbeddedDocumentSaver.h"
+#include "KOdfEmbeddedDocumentSaver.h"
 
 #include <kdebug.h>
 
@@ -33,7 +33,7 @@
 
 #define INTERNAL_PROTOCOL "intern"
 
-class KoEmbeddedDocumentSaver::Private
+class KOdfEmbeddedDocumentSaver::Private
 {
 public:
     Private()
@@ -45,17 +45,17 @@ public:
     int objectId;
 };
 
-KoEmbeddedDocumentSaver::KoEmbeddedDocumentSaver()
+KOdfEmbeddedDocumentSaver::KOdfEmbeddedDocumentSaver()
         : d(new Private())
 {
 }
 
-KoEmbeddedDocumentSaver::~KoEmbeddedDocumentSaver()
+KOdfEmbeddedDocumentSaver::~KOdfEmbeddedDocumentSaver()
 {
     delete d;
 }
 
-void KoEmbeddedDocumentSaver::embedDocument(KXmlWriter &writer, KOdfDocumentBase * doc)
+void KOdfEmbeddedDocumentSaver::embedDocument(KXmlWriter &writer, KOdfDocumentBase * doc)
 {
     Q_ASSERT(doc);
     d->documents.append(doc);
@@ -80,11 +80,11 @@ void KoEmbeddedDocumentSaver::embedDocument(KXmlWriter &writer, KOdfDocumentBase
     writer.addAttribute("xlink:show", "embed");
     writer.addAttribute("xlink:actuate", "onLoad");
 
-    kDebug(30003) << "KoEmbeddedDocumentSaver::addEmbeddedDocument saving reference to embedded document as" << ref;
+    kDebug(30003) << "KOdfEmbeddedDocumentSaver::addEmbeddedDocument saving reference to embedded document as" << ref;
     writer.addAttribute("xlink:href", /*"#" + */ref);
 }
 
-bool KoEmbeddedDocumentSaver::saveEmbeddedDocuments(KOdfDocumentBase::SavingContext & documentContext)
+bool KOdfEmbeddedDocumentSaver::saveEmbeddedDocuments(KOdfDocumentBase::SavingContext & documentContext)
 {
     KOdfStore * store = documentContext.odfStore.store();
     foreach(KOdfDocumentBase * doc, d->documents) {
@@ -111,7 +111,7 @@ bool KoEmbeddedDocumentSaver::saveEmbeddedDocuments(KOdfDocumentBase::SavingCont
                 store->enterDirectory(name);
 
                 if (!doc->saveOdf(documentContext)) {
-                    kWarning(30003) << "KoEmbeddedDocumentSaver::saveEmbeddedDocuments failed";
+                    kWarning(30003) << "KOdfEmbeddedDocumentSaver::saveEmbeddedDocuments failed";
                     return false;
                 }
                 // Now that we're done leave the directory again

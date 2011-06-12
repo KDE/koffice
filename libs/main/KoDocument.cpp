@@ -37,7 +37,7 @@
 #include "KOdfStylesReader.h"
 #include "KOdfStoreReader.h"
 #include "KOdfWriteStore.h"
-#include "KoEmbeddedDocumentSaver.h"
+#include "KOdfEmbeddedDocumentSaver.h"
 #include "KOdfXmlNS.h"
 #include "KoOpenPane.h"
 #include "KoApplication.h"
@@ -878,7 +878,7 @@ bool KoDocument::saveNativeFormatODF(KOdfStore *store, const QByteArray &mimeTyp
     store->disallowNameExpansion();
     KOdfWriteStore odfStore(store);
     KXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
-    KoEmbeddedDocumentSaver embeddedSaver;
+    KOdfEmbeddedDocumentSaver embeddedSaver;
     SavingContext documentContext(odfStore, embeddedSaver);
 
     if (!saveOdf(documentContext)) {
@@ -1826,7 +1826,7 @@ bool KoDocument::addVersion(const QString& comment)
     KXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
     Q_UNUSED(manifestWriter); // XXX why?
 
-    KoEmbeddedDocumentSaver embeddedSaver;
+    KOdfEmbeddedDocumentSaver embeddedSaver;
     SavingContext documentContext(odfStore, embeddedSaver);
 
     if (!saveOdf(documentContext)) {

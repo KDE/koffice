@@ -28,11 +28,11 @@ class KXmlWriter;
 /**
  * This class is used to save embedded objects in ODF documents.
  */
-class KOODF_EXPORT KoEmbeddedDocumentSaver
+class KOODF_EXPORT KOdfEmbeddedDocumentSaver
 {
 public:
-    KoEmbeddedDocumentSaver();
-    ~KoEmbeddedDocumentSaver();
+    KOdfEmbeddedDocumentSaver();
+    ~KOdfEmbeddedDocumentSaver();
 
     /**
      * Adds the object specific attributes to the tag, but does NOT
@@ -50,7 +50,7 @@ public:
 private:
     class Private;
     Private *d;
-    Q_DISABLE_COPY(KoEmbeddedDocumentSaver)
+    Q_DISABLE_COPY(KOdfEmbeddedDocumentSaver)
 };
 
 #endif /* KOEMBEDDEDDOCUMENTSAVER_H */

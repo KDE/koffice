@@ -48,7 +48,7 @@
 #include <KDebug>
 #include <ktemporaryfile.h>
 
-QByteArray KWOdfWriter::serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KOdfGenericStyles &mainStyles, KOdfGenericChanges  &changes, KWTextFrameSet *fs)
+QByteArray KWOdfWriter::serializeHeaderFooter(KOdfEmbeddedDocumentSaver &embeddedSaver, KOdfGenericStyles &mainStyles, KOdfGenericChanges  &changes, KWTextFrameSet *fs)
 {
     QByteArray tag;
     switch (fs->textFrameSetType()) {
@@ -82,7 +82,7 @@ QByteArray KWOdfWriter::serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedS
 }
 
 // rename to save pages ?
-void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KOdfGenericStyles &mainStyles, KOdfGenericChanges &changes)
+void KWOdfWriter::saveHeaderFooter(KOdfEmbeddedDocumentSaver &embeddedSaver, KOdfGenericStyles &mainStyles, KOdfGenericChanges &changes)
 {
     //kDebug(32001)<< "START saveHeaderFooter ############################################";
     // first get all the framesets in a nice quick-to-access data structure
@@ -169,7 +169,7 @@ KWOdfWriter::~KWOdfWriter()
 }
 
 // 1.6: KWDocument::saveOasisHelper()
-bool KWOdfWriter::save(KOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embeddedSaver)
+bool KWOdfWriter::save(KOdfWriteStore &odfStore, KOdfEmbeddedDocumentSaver &embeddedSaver)
 {
     //kDebug(32001) << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 

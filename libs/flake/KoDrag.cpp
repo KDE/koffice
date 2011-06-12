@@ -35,7 +35,7 @@
 #include <KOdfWriteStore.h>
 #include <KXmlWriter.h>
 #include <KOdfDocumentBase.h>
-#include <KoEmbeddedDocumentSaver.h>
+#include <KOdfEmbeddedDocumentSaver.h>
 #include "KoShapeSavingContext.h"
 
 class KoDragPrivate {
@@ -72,7 +72,7 @@ bool KoDrag::setOdf(const char *mimeType, KoDragOdfSaveHelper &helper)
     Q_ASSERT(!store->bad());
 
     KOdfWriteStore odfStore(store);
-    KoEmbeddedDocumentSaver embeddedSaver;
+    KOdfEmbeddedDocumentSaver embeddedSaver;
 
     KXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
     KXmlWriter *contentWriter = odfStore.contentWriter();

@@ -24,7 +24,7 @@
 #include <kdebug.h>
 
 KoTextShapeSavingContext::KoTextShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles& mainStyles,
-        KoEmbeddedDocumentSaver& embeddedSaver, KOdfGenericChanges& changes)
+        KOdfEmbeddedDocumentSaver& embeddedSaver, KOdfGenericChanges& changes)
         : KoShapeSavingContext(xmlWriter, mainStyles, embeddedSaver)
     , m_changes(changes)
 {

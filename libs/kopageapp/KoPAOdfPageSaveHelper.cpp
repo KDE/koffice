@@ -58,7 +58,7 @@ KoPAOdfPageSaveHelper::~KoPAOdfPageSaveHelper()
     delete m_context;
 }
 
-KoShapeSavingContext * KoPAOdfPageSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles &mainStyles, KoEmbeddedDocumentSaver &embeddedSaver)
+KoShapeSavingContext * KoPAOdfPageSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles &mainStyles, KOdfEmbeddedDocumentSaver &embeddedSaver)
 {
     m_context = new KoPASavingContext(*bodyWriter, mainStyles, embeddedSaver, 1);
     return m_context;

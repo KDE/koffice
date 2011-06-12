@@ -36,7 +36,7 @@
 
 class KoShapeSavingContextPrivate {
 public:
-    KoShapeSavingContextPrivate(KXmlWriter&, KOdfGenericStyles&, KoEmbeddedDocumentSaver&);
+    KoShapeSavingContextPrivate(KXmlWriter&, KOdfGenericStyles&, KOdfEmbeddedDocumentSaver&);
 
     KXmlWriter *xmlWriter;
     KoShapeSavingContext::ShapeSavingOptions savingOptions;
@@ -54,11 +54,11 @@ public:
     QSet<KoShapeConnection*> unsavedConnections;
 
     KOdfGenericStyles& mainStyles;
-    KoEmbeddedDocumentSaver& embeddedSaver;
+    KOdfEmbeddedDocumentSaver& embeddedSaver;
 };
 
 KoShapeSavingContextPrivate::KoShapeSavingContextPrivate(KXmlWriter &w,
-        KOdfGenericStyles &s, KoEmbeddedDocumentSaver &e)
+        KOdfGenericStyles &s, KOdfEmbeddedDocumentSaver &e)
         : xmlWriter(&w),
         savingOptions(0),
         drawId(0),
@@ -70,7 +70,7 @@ KoShapeSavingContextPrivate::KoShapeSavingContextPrivate(KXmlWriter &w,
 }
 
 KoShapeSavingContext::KoShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
-        KoEmbeddedDocumentSaver &embeddedSaver)
+        KOdfEmbeddedDocumentSaver &embeddedSaver)
     : d(new KoShapeSavingContextPrivate(xmlWriter, mainStyles, embeddedSaver))
 {
     // by default allow saving of draw:id
@@ -96,7 +96,7 @@ KOdfGenericStyles & KoShapeSavingContext::mainStyles()
     return d->mainStyles;
 }
 
-KoEmbeddedDocumentSaver &KoShapeSavingContext::embeddedSaver()
+KOdfEmbeddedDocumentSaver &KoShapeSavingContext::embeddedSaver()
 {
     return d->embeddedSaver;
 }

@@ -35,7 +35,7 @@
 
 class KOdfStore;
 class KOdfLoadingContext;
-class KoEmbeddedDocumentSaver;
+class KOdfEmbeddedDocumentSaver;
 class KoStyleManager;
 class KoResourceManager;
 

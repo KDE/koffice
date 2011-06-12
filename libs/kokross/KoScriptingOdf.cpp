@@ -24,7 +24,7 @@
 #include <KOdfStore.h>
 #include <KOdfWriteStore.h>
 #include <KoDocumentAdaptor.h>
-#include <KoEmbeddedDocumentSaver.h>
+#include <KOdfEmbeddedDocumentSaver.h>
 
 #include <KDebug>
 #include <QBuffer>
@@ -284,7 +284,7 @@ QByteArray KoScriptingOdfStore::getByteArray()
     KOdfStore *store = KOdfStore::createStore(&buffer, KOdfStore::Write, "KrossScript", KOdfStore::Tar);
     KOdfWriteStore odfStore(store);
     odfStore.manifestWriter("");
-    KoEmbeddedDocumentSaver embeddedSaver;
+    KOdfEmbeddedDocumentSaver embeddedSaver;
     KoDocument::SavingContext documentContext(odfStore, embeddedSaver);
     QByteArray mime = getMimeType();
     if (! m_document->saveOdf(documentContext)) {
