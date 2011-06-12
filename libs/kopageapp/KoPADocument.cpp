@@ -25,7 +25,7 @@
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfSettings.h>
+#include <KOdfSettings.h>
 #include <KOdfStorageDevice.h>
 #include <KoTextShapeData.h>
 #include <KoTextSharedLoadingData.h>
@@ -363,8 +363,8 @@ void KoPADocument::loadOdfSettings( const KoXmlDocument &settingsDoc)
         return ; // not an error if some file doesn't have settings.xml
     }
 
-    KoOdfSettings settings(settingsDoc);
-    KoOdfSettings::Items viewSettings = settings.itemSet("view-settings");
+    KOdfSettings settings(settingsDoc);
+    KOdfSettings::Items viewSettings = settings.itemSet("view-settings");
     if (!viewSettings.isNull()) {
         setUnit(KUnit::unit(viewSettings.parseConfigItemString("unit")));
         // FIXME: add other config here.

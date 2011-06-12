@@ -56,7 +56,7 @@
 #include <KoDataCenterBase.h>
 #include <KoDocumentInfo.h>
 #include <KoMainWindow.h>
-#include <KoOdfSettings.h>
+#include <KOdfSettings.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KOdfStoreReader.h>

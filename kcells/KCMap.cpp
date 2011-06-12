@@ -32,7 +32,7 @@
 
 #include <KOdfGenericStyles.h>
 #include <KoGlobal.h>
-#include <KoOdfSettings.h>
+#include <KOdfSettings.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KOdfEmbeddedDocumentSaver.h>
@@ -375,14 +375,14 @@ void KCMap::moveSheet(const QString & _from, const QString & _to, bool _before)
     }
 }
 
-void KCMap::loadOdfSettings(KoOdfSettings &settings)
+void KCMap::loadOdfSettings(KOdfSettings &settings)
 {
-    KoOdfSettings::Items viewSettings = settings.itemSet("view-settings");
-    KoOdfSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
-    KoOdfSettings::Items firstView = viewMap.entry(0);
+    KOdfSettings::Items viewSettings = settings.itemSet("view-settings");
+    KOdfSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
+    KOdfSettings::Items firstView = viewMap.entry(0);
 
-    KoOdfSettings::NamedMap sheetsMap = firstView.namedMap("Tables");
-    kDebug() << " loadOdfSettings( KoOdfSettings &settings ) exist :" << !sheetsMap.isNull();
+    KOdfSettings::NamedMap sheetsMap = firstView.namedMap("Tables");
+    kDebug() << " loadOdfSettings( KOdfSettings &settings ) exist :" << !sheetsMap.isNull();
     if (!sheetsMap.isNull()) {
         foreach(KCSheet* sheet, d->lstSheets) {
             sheet->loadOdfSettings(sheetsMap);
@@ -390,7 +390,7 @@ void KCMap::loadOdfSettings(KoOdfSettings &settings)
     }
 
     QString activeSheet = firstView.parseConfigItemString("ActiveTable");
-    kDebug() << " loadOdfSettings( KoOdfSettings &settings ) activeSheet :" << activeSheet;
+    kDebug() << " loadOdfSettings( KOdfSettings &settings ) activeSheet :" << activeSheet;
 
     if (!activeSheet.isEmpty()) {
         // Used by KCView's constructor

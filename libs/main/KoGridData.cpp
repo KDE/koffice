@@ -22,7 +22,7 @@
 #include "KoViewConverter.h"
 
 #include <KUnit.h>
-#include <KoOdfSettings.h>
+#include <KOdfSettings.h>
 #include <KXmlWriter.h>
 
 #include <KToggleAction>
@@ -156,16 +156,16 @@ void KoGridData::paintGrid(QPainter &painter, const KoViewConverter &converter, 
 
 bool KoGridData::loadOdfSettings(const KoXmlDocument & settingsDoc)
 {
-    KoOdfSettings settings(settingsDoc);
-    KoOdfSettings::Items viewSettings = settings.itemSet("ooo:view-settings");
+    KOdfSettings settings(settingsDoc);
+    KOdfSettings::Items viewSettings = settings.itemSet("ooo:view-settings");
     if (viewSettings.isNull())
         return false;
 
-    KoOdfSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
+    KOdfSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
     if (viewMap.isNull())
         return false;
 
-    KoOdfSettings::Items firstView = viewMap.entry(0);
+    KOdfSettings::Items firstView = viewMap.entry(0);
     if (firstView.isNull())
         return false;
 

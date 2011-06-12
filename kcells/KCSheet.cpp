@@ -43,7 +43,7 @@
 
 #include <KoDocumentInfo.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfSettings.h>
+#include <KOdfSettings.h>
 #include <KOdfStylesReader.h>
 
 #include <KoShape.h>
@@ -2434,10 +2434,10 @@ void KCSheet::saveOdfBackgroundImage(KXmlWriter& xmlWriter) const
 }
 
 
-void KCSheet::loadOdfSettings(const KoOdfSettings::NamedMap &settings)
+void KCSheet::loadOdfSettings(const KOdfSettings::NamedMap &settings)
 {
     // Find the entry in the map that applies to this sheet (by name)
-    KoOdfSettings::Items items = settings.entry(sheetName());
+    KOdfSettings::Items items = settings.entry(sheetName());
     if (items.isNull())
         return;
     setHideZero(!items.parseConfigItemBool("ShowZeroValues"));

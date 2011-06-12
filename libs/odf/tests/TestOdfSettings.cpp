@@ -22,7 +22,7 @@
 #include <QObject>
 
 #include <KXmlReader.h>
-#include <KoOdfSettings.h>
+#include <KOdfSettings.h>
 
 class TestOdfSettings : public QObject
 {
@@ -39,7 +39,7 @@ private slots:
 
 private:
     KoXmlDocument doc;
-    KoOdfSettings *settings;
+    KOdfSettings *settings;
 };
 
 void TestOdfSettings::initTestCase()
@@ -67,12 +67,12 @@ void TestOdfSettings::initTestCase()
 
     bool ok = doc.setContent( xml, true /* namespace processing */ );
     QVERIFY(ok);
-    settings = new KoOdfSettings(doc);
+    settings = new KOdfSettings(doc);
 }
 
 void TestOdfSettings::testSelectItemSet()
 {
-    KoOdfSettings::Items items = settings->itemSet("notexist");
+    KOdfSettings::Items items = settings->itemSet("notexist");
     QVERIFY(items.isNull());
     items = settings->itemSet("view-settings");
     QVERIFY(!items.isNull());
@@ -80,36 +80,36 @@ void TestOdfSettings::testSelectItemSet()
 
 void TestOdfSettings::testParseConfigItemString()
 {
-    KoOdfSettings::Items viewSettings = settings->itemSet("view-settings");
+    KOdfSettings::Items viewSettings = settings->itemSet("view-settings");
     const QString unit = viewSettings.parseConfigItemString("unit");
     QCOMPARE(unit, QString("mm"));
 }
 
 void TestOdfSettings::testIndexedMap()
 {
-    KoOdfSettings::Items viewSettings = settings->itemSet("view-settings");
+    KOdfSettings::Items viewSettings = settings->itemSet("view-settings");
     QVERIFY(!viewSettings.isNull());
-    KoOdfSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
+    KOdfSettings::IndexedMap viewMap = viewSettings.indexedMap("Views");
     QVERIFY(!viewMap.isNull());
-    KoOdfSettings::Items firstView = viewMap.entry(0);
+    KOdfSettings::Items firstView = viewMap.entry(0);
     QVERIFY(!firstView.isNull());
     const short zoomFactor = firstView.parseConfigItemShort("ZoomFactor");
     QCOMPARE(zoomFactor, (short) 100);
-    KoOdfSettings::Items secondView = viewMap.entry(1);
+    KOdfSettings::Items secondView = viewMap.entry(1);
     QVERIFY(secondView.isNull());
 }
 
 void TestOdfSettings::testNamedMap()
 {
-    KoOdfSettings::Items viewSettings = settings->itemSet("view-settings");
+    KOdfSettings::Items viewSettings = settings->itemSet("view-settings");
     QVERIFY(!viewSettings.isNull());
-    KoOdfSettings::NamedMap viewMap = viewSettings.namedMap("NamedMap");
+    KOdfSettings::NamedMap viewMap = viewSettings.namedMap("NamedMap");
     QVERIFY(!viewMap.isNull());
-    KoOdfSettings::Items foo = viewMap.entry("foo");
+    KOdfSettings::Items foo = viewMap.entry("foo");
     QVERIFY(!foo.isNull());
     const int zoomFactor = foo.parseConfigItemShort("ZoomFactor");
     QCOMPARE(zoomFactor, 100);
-    KoOdfSettings::Items secondView = viewMap.entry("foobar");
+    KOdfSettings::Items secondView = viewMap.entry("foobar");
     QVERIFY(secondView.isNull());
 }
 

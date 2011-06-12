@@ -32,7 +32,7 @@
 #include "KCDocBase.moc"
 #include "DocBase_p.h"
 
-#include <KoOdfSettings.h>
+#include <KOdfSettings.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
@@ -274,8 +274,8 @@ bool KCDocBase::loadOdf(KOdfStoreReader & odfStore)
 
 void KCDocBase::loadOdfSettings(const KoXmlDocument&settingsDoc)
 {
-    KoOdfSettings settings(settingsDoc);
-    KoOdfSettings::Items viewSettings = settings.itemSet("view-settings");
+    KOdfSettings settings(settingsDoc);
+    KOdfSettings::Items viewSettings = settings.itemSet("view-settings");
     if (!viewSettings.isNull()) {
         setUnit(KUnit::unit(viewSettings.parseConfigItemString("unit")));
     }
@@ -305,9 +305,9 @@ void KCDocBase::saveOdfSettings(KXmlWriter &settingsWriter)
     settingsWriter.endElement();
 }
 
-void KCDocBase::loadOdfIgnoreList(const KoOdfSettings& settings)
+void KCDocBase::loadOdfIgnoreList(const KOdfSettings& settings)
 {
-    KoOdfSettings::Items configurationSettings = settings.itemSet("configuration-settings");
+    KOdfSettings::Items configurationSettings = settings.itemSet("configuration-settings");
     if (!configurationSettings.isNull()) {
         const QString ignorelist = configurationSettings.parseConfigItemString("SpellCheckerIgnoreList");
         //kDebug()<<" ignorelist :"<<ignorelist;

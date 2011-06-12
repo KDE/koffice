@@ -50,7 +50,7 @@ class QDomDocument;
 class QPainter;
 
 class KOdfGenericStyles;
-class KoOdfSettings;
+class KOdfSettings;
 class KoResourceManager;
 class KOdfStore;
 class KXmlWriter;
