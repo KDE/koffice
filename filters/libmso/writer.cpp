@@ -38,7 +38,7 @@ QString mm(double v)
 }
 }//namespace
 
-Writer::Writer(KoXmlWriter& xmlWriter, KOdfGenericStyles& kostyles,
+Writer::Writer(KXmlWriter& xmlWriter, KOdfGenericStyles& kostyles,
                bool stylesxml_)
         : xOffset(0),
         yOffset(0),

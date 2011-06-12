@@ -27,7 +27,7 @@
 
 #include "frames/KWTextFrameSet.h"
 #include "frames/KWTextFrame.h"
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfWriteStore.h>
 #include <KoShapeSavingContext.h>
 
@@ -62,7 +62,7 @@ QByteArray KWOdfWriter::serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedS
     QByteArray content;
     QBuffer buffer(&content);
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter writer(&buffer);
+    KXmlWriter writer(&buffer);
 
     KoShapeSavingContext context(writer, mainStyles, embeddedSaver);
 
@@ -184,23 +184,23 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embedd
     if (!store->close())
         return false;
 
-    KoXmlWriter *manifestWriter = odfStore.manifestWriter();
+    KXmlWriter *manifestWriter = odfStore.manifestWriter();
 
     manifestWriter->addManifestEntry("settings.xml", "text/xml");
 
-    KoXmlWriter *contentWriter = odfStore.contentWriter();
+    KXmlWriter *contentWriter = odfStore.contentWriter();
     if (!contentWriter)
         return false;
 
     KTemporaryFile tmpChangeFile;
     tmpChangeFile.open();
-    KoXmlWriter *changeWriter = new KoXmlWriter(&tmpChangeFile, 1);
+    KXmlWriter *changeWriter = new KXmlWriter(&tmpChangeFile, 1);
     if (!changeWriter)
         return false;
 
     KTemporaryFile tmpTextBodyFile;
     tmpTextBodyFile.open();
-    KoXmlWriter *tmpBodyWriter = new KoXmlWriter(&tmpTextBodyFile, 1);
+    KXmlWriter *tmpBodyWriter = new KXmlWriter(&tmpTextBodyFile, 1);
     if (!tmpBodyWriter)
         return false;
 
@@ -219,7 +219,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embedd
 
     saveHeaderFooter(embeddedSaver, mainStyles, changes);
 
-    KoXmlWriter *bodyWriter = odfStore.bodyWriter();
+    KXmlWriter *bodyWriter = odfStore.bodyWriter();
     bodyWriter->startElement("office:body");
     bodyWriter->startElement("office:text");
 
@@ -355,7 +355,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embedd
 bool KWOdfWriter::saveOdfSettings(KOdfStore *store)
 {
     KOdfStorageDevice settingsDev(store);
-    KoXmlWriter *settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
+    KXmlWriter *settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
 
     // add this so that OOo reads guides lines and grid data from ooo:view-settings
     settingsWriter->addAttribute("xmlns:ooo", "http://openoffice.org/2004/office");

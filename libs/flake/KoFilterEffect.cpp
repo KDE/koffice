@@ -19,7 +19,7 @@
  */
 
 #include "KoFilterEffect.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 
 #include <QString>
 #include <QtCore/QRectF>
@@ -157,7 +157,7 @@ void KoFilterEffect::setMaximalInputCount(int count)
     }
 }
 
-void KoFilterEffect::saveCommonAttributes(KoXmlWriter &writer)
+void KoFilterEffect::saveCommonAttributes(KXmlWriter &writer)
 {
     writer.addAttribute("result", output());
     if (requiredInputCount() == 1 && maximalInputCount() == 1 && d->inputs.count() == 1) {

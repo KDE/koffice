@@ -37,7 +37,7 @@
 
 using Conversion::twipsToPt;
 
-KWordTableHandler::KWordTableHandler(KoXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles) :
+KWordTableHandler::KWordTableHandler(KXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles) :
 m_floatingTable(false)
 {
     // This strange value (-2), is used to create a check that e.g.  a
@@ -49,7 +49,7 @@ m_floatingTable(false)
     m_mainStyles = mainStyles; //for formatting styles
 }
 
-KoXmlWriter * KWordTableHandler::currentWriter() const
+KXmlWriter * KWordTableHandler::currentWriter() const
 {
     return document()->textHandler()->currentWriter();
 }
@@ -62,7 +62,7 @@ void KWordTableHandler::tableStart(KWord::Table* table)
     Q_ASSERT(table);
     Q_ASSERT(!table->name.isEmpty());
 
-    KoXmlWriter*  writer = currentWriter();
+    KXmlWriter*  writer = currentWriter();
     wvWare::SharedPtr<const wvWare::Word97::TAP> tap = table->tap;
 
     m_currentTable = table;
@@ -280,7 +280,7 @@ void KWordTableHandler::tableEnd()
 {
     kDebug(30513) ;
     m_currentTable = 0L; // we don't own it, Document does
-    KoXmlWriter*  writer = currentWriter();
+    KXmlWriter*  writer = currentWriter();
 
     writer->endElement();//table:table
 
@@ -307,7 +307,7 @@ void KWordTableHandler::tableRowStart(wvWare::SharedPtr<const wvWare::Word97::TA
     m_row++;
     m_column = -1;
     m_tap = tap;
-    KoXmlWriter*  writer = currentWriter();
+    KXmlWriter*  writer = currentWriter();
     //kDebug(30513) << "tableRowStart row=" << m_row
     //            << ", number of cells: " << tap->itcMac;
 
@@ -352,7 +352,7 @@ void KWordTableHandler::tableRowEnd()
 {
     kDebug(30513);
     m_currentY += rowHeight();
-    KoXmlWriter*  writer = currentWriter();
+    KXmlWriter*  writer = currentWriter();
     //end table row in content
     writer->endElement();//table:table-row
 }
@@ -375,7 +375,7 @@ void KWordTableHandler::tableCellStart()
     Q_ASSERT(m_tap);
     if (!m_tap)
         return;
-    KoXmlWriter*  writer = currentWriter();
+    KXmlWriter*  writer = currentWriter();
 
     //increment the column number so we know where we are
     m_column++;
@@ -694,7 +694,7 @@ void KWordTableHandler::tableCellEnd()
     // the table cell ends.
     if (document()->textHandler()->listIsOpen())
         document()->textHandler()->closeList();
-    KoXmlWriter*  writer = currentWriter();
+    KXmlWriter*  writer = currentWriter();
 
     // End table cell in content, but only if we actually opened a cell.
     if (m_cellOpen) {

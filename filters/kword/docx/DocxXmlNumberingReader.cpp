@@ -24,7 +24,7 @@
 #include "DocxXmlNumberingReader.h"
 #include <MsooXmlSchemas.h>
 #include <MsooXmlUtils.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <limits.h>
 #include <MsooXmlUnits.h>

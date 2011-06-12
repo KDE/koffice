@@ -26,7 +26,7 @@
 #include <QtCore/QRectF>
 
 class KoFilterEffect;
-class KoXmlWriter;
+class KXmlWriter;
 
 /// This class manages a stack of filter effects
 class FLAKE_EXPORT KoFilterEffectStack
@@ -115,7 +115,7 @@ public:
     * @param writer the xml writer to write data to
     * @param filterId the filter id to write, used for referencing the filter
     */
-    void save(KoXmlWriter &writer, const QString &filterId);
+    void save(KXmlWriter &writer, const QString &filterId);
 
     /// Returns list of required standard inputs
     QSet<QString> requiredStandarsInputs() const;

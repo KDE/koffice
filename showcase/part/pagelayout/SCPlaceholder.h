@@ -24,7 +24,7 @@
 #include <QString>
 #include <QRectF>
 
-class KoXmlWriter;
+class KXmlWriter;
 class KoXmlElement;
 
 class SCPlaceholder
@@ -41,7 +41,7 @@ public:
      * can be converted to relative ones.
      */
     bool loadOdf(const KoXmlElement &element, const QRectF &pageSize);
-    void saveOdf(KoXmlWriter &xmlWriter);
+    void saveOdf(KXmlWriter &xmlWriter);
 
     QString presentationObject();
 

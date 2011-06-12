@@ -37,7 +37,7 @@
 #include <QBuffer>
 #include <QStack>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 
 #include <string>
@@ -69,7 +69,7 @@ class KWordTextHandler : public QObject, public wvWare::TextHandler
 {
     Q_OBJECT
 public:
-    KWordTextHandler(wvWare::SharedPtr<wvWare::Parser> parser, KoXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles);
+    KWordTextHandler(wvWare::SharedPtr<wvWare::Parser> parser, KXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles);
     ~KWordTextHandler() { Q_ASSERT (m_fldStart == m_fldEnd); }
 
     //////// TextHandler interface
@@ -106,7 +106,7 @@ public:
      * Paragraph can be present in {header, footer, footnote, endnote,
      * annotation, body}.  @return the actual writer.
      */
-    KoXmlWriter* currentWriter() const;
+    KXmlWriter* currentWriter() const;
 
     ///////// Our own interface, also used by processStyles
 
@@ -147,14 +147,14 @@ signals:
     void annotationFound(const wvWare::FunctorBase* parsingFunctor, int data);
     void headersFound(const wvWare::FunctorBase* parsingFunctor, int data);
     void tableFound(KWord::Table* table);
-    void inlineObjectFound(const wvWare::PictureData& data, KoXmlWriter* writer);
-    void floatingObjectFound(unsigned int globalCP, KoXmlWriter* writer);
+    void inlineObjectFound(const wvWare::PictureData& data, KXmlWriter* writer);
+    void floatingObjectFound(unsigned int globalCP, KXmlWriter* writer);
     void updateListDepth(int);
 
 protected:
     QDomElement insertVariable(int type, wvWare::SharedPtr<const wvWare::Word97::CHP> chp, const QString& format);
     QDomElement insertAnchor(const QString& fsname);
-    KoXmlWriter* m_bodyWriter; //this writes to content.xml inside <office:body>
+    KXmlWriter* m_bodyWriter; //this writes to content.xml inside <office:body>
 
 private:
     // The document owning this text handler.
@@ -189,7 +189,7 @@ private:
     void saveState();
     void restoreState();
 
-    QStack <KoXmlWriter*> m_usedListWriters;
+    QStack <KXmlWriter*> m_usedListWriters;
 
     // Current paragraph
     wvWare::SharedPtr<const wvWare::Word97::SEP> m_sep; //store section info for section end
@@ -212,19 +212,19 @@ private:
     QString    m_dropCapStyleName;
 
     bool m_insideFootnote;
-    KoXmlWriter* m_footnoteWriter; //write the footnote data, then add it to bodyWriter
+    KXmlWriter* m_footnoteWriter; //write the footnote data, then add it to bodyWriter
     QBuffer* m_footnoteBuffer; //buffer for the footnote data
 
     bool m_insideAnnotation;
-    KoXmlWriter* m_annotationWriter; //write the annotation data, then add it to bodyWriter
+    KXmlWriter* m_annotationWriter; //write the annotation data, then add it to bodyWriter
     QBuffer* m_annotationBuffer; //buffer for the annotation data
 
     bool m_insideDrawing;
-    KoXmlWriter* m_drawingWriter; //write the drawing data, then add it to bodyWriter
+    KXmlWriter* m_drawingWriter; //write the drawing data, then add it to bodyWriter
 
     int m_maxColumns; //max number of columns in a table
 
-    bool writeListInfo(KoXmlWriter* writer, const wvWare::Word97::PAP& pap, const wvWare::ListInfo* listInfo);
+    bool writeListInfo(KXmlWriter* writer, const wvWare::Word97::PAP& pap, const wvWare::ListInfo* listInfo);
     int m_currentListDepth; //tells us which list level we're on (-1 if not in a list)
     int m_currentListID; //tracks the id of the current list - 0 if no list
     //int m_previousListID; //track previous list, in case we need to continue the numbering
@@ -244,7 +244,7 @@ private:
     struct fld_State
     {
         fld_State(int type, bool inside, bool afterSep, bool hyperLink, bool bkmkRef,
-                  QString inst, QString result, QString stlName, KoXmlWriter* writer, QBuffer* buf) :
+                  QString inst, QString result, QString stlName, KXmlWriter* writer, QBuffer* buf) :
         type(type),
         inside(inside),
         afterSeparator(afterSep),
@@ -264,7 +264,7 @@ private:
         QString instructions;
         QString result;
         QString styleName;
-        KoXmlWriter* writer;
+        KXmlWriter* writer;
         QBuffer* buffer;
     };
 
@@ -307,7 +307,7 @@ private:
 
     //writer and buffer used to place bookmark elements into the field result,
     //if bookmarks are not to be supported by your field type, use m_fldResult
-    KoXmlWriter* m_fldWriter;
+    KXmlWriter* m_fldWriter;
     QBuffer* m_fldBuffer;
 
     QString m_fldInst;   //stores field instructions

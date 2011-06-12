@@ -32,7 +32,7 @@
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <kdebug.h>
 
 static const class PlaceholderData {
@@ -144,7 +144,7 @@ void SCPlaceholderStrategy::paint(QPainter &painter, const KoViewConverter &conv
 
 void SCPlaceholderStrategy::saveOdf(KoShapeSavingContext &context)
 {
-    KoXmlWriter &writer = context.xmlWriter();
+    KXmlWriter &writer = context.xmlWriter();
     writer.addCompleteElement(m_placeholderData->m_xmlElement);
 }
 

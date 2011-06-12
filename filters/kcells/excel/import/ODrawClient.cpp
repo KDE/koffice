@@ -20,7 +20,7 @@
 
 #include <qdebug.h>
 #include <QColor>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include "sheet.h"
 #include "workbook.h"
 

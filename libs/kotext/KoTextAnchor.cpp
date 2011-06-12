@@ -27,7 +27,7 @@
 #include "KOdfLoadingContext.h"
 
 #include <KoShapeContainer.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeSavingContext.h>

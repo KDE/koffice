@@ -84,7 +84,7 @@ public:
     /**
      * Save transitions in an xml writer
      */
-    virtual void saveOdfSmilAttributes(KoXmlWriter &xmlWriter) const;
+    virtual void saveOdfSmilAttributes(KXmlWriter &xmlWriter) const;
 
     /**
      * Save transition as part of the style

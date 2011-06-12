@@ -56,7 +56,7 @@ public:
     /// reimplemented from KoFilterEffect
     virtual bool load(const KoXmlElement &element, const KoFilterEffectLoadingContext &context);
     /// reimplemented from KoFilterEffect
-    virtual void save(KoXmlWriter &writer);
+    virtual void save(KXmlWriter &writer);
 
 private:
     QPointF m_radius;

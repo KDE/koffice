@@ -26,7 +26,7 @@
 #include <QImage>
 #include <QPixmap>
 
-class KoXmlWriter;
+class KXmlWriter;
 class QPainter;
 class QSize;
 class QIODevice;
@@ -100,7 +100,7 @@ public:
      * OASIS FlatXML support:
      * Save picture as base64-encoded data into an XML writer.
      */
-    virtual bool saveAsBase64(KoXmlWriter& writer) const;
+    virtual bool saveAsBase64(KXmlWriter& writer) const;
 
     virtual QSize getOriginalSize(void) const;
 

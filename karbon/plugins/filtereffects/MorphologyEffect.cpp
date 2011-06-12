@@ -21,7 +21,7 @@
 #include "KoFilterEffectRenderContext.h"
 #include "KoFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include <KLocale>
 #include <QtCore/QRect>
@@ -159,7 +159,7 @@ bool MorphologyEffect::load(const KoXmlElement &element, const KoFilterEffectLoa
     return true;
 }
 
-void MorphologyEffect::save(KoXmlWriter &writer)
+void MorphologyEffect::save(KXmlWriter &writer)
 {
     writer.startElement(MorphologyEffectId);
 

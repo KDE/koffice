@@ -24,7 +24,7 @@
 #include "msooxml_export.h"
 #include <KoFilter.h>
 
-class KoXmlWriter;
+class KXmlWriter;
 class KOdfStore;
 class KOdfGenericStyles;
 
@@ -36,10 +36,10 @@ struct MSOOXML_EXPORT KoOdfWriters {
     * Creates structure encapsulating XML writers. All members are set initially to 0.
     */
     KoOdfWriters();
-    KoXmlWriter *content;
-    KoXmlWriter *body;
-    KoXmlWriter *meta;
-    KoXmlWriter *manifest;
+    KXmlWriter *content;
+    KXmlWriter *body;
+    KXmlWriter *meta;
+    KXmlWriter *manifest;
     KOdfGenericStyles *mainStyles;
 };
 

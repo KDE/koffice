@@ -22,7 +22,7 @@
 #include "KCGenValidationStyle.h"
 
 // KOffice
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 // KCells
 #include "KCValidity.h"
@@ -62,7 +62,7 @@ QString KCGenValidationStyles::makeUniqueName(const QString& base) const
     return name;
 }
 
-void KCGenValidationStyles::writeStyle(KoXmlWriter& writer)
+void KCGenValidationStyles::writeStyle(KXmlWriter& writer)
 {
     if (m_styles.count() > 0) {
         writer.startElement("table:content-validations");

@@ -23,7 +23,7 @@
 #include "kotext_export.h"
 
 class KoShapeSavingContext;
-class KoXmlWriter;
+class KXmlWriter;
 class KoTextDocumentLayout;
 class KoStyleManager;
 class QTextDocument;

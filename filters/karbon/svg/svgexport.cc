@@ -53,7 +53,7 @@
 #include <KoImageData.h>
 #include "KoFilterEffect.h"
 #include "KoFilterEffectStack.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 
 #include <KPluginFactory>
 #include <KMimeType>
@@ -631,7 +631,7 @@ void SvgExport::getEffects(KoShape *shape, QTextStream *stream)
     QByteArray ba;
     QBuffer buffer(&ba);
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter writer(&buffer, m_indent2*2);
+    KXmlWriter writer(&buffer, m_indent2*2);
 
     filterStack->save(writer, uid);
 

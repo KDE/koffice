@@ -22,7 +22,7 @@
 #include <KoResourceManager.h>
 #include <KoCanvasBase.h>
 #include <KoText.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfStorageDevice.h>
 
 #include "KoTextSopranoRdfModel_p.h"
@@ -70,7 +70,7 @@ bool KoDocumentRdfBase::loadOasis(KOdfStore *store)
     return true;
 }
 
-bool KoDocumentRdfBase::saveOasis(KOdfStore *store, KoXmlWriter *manifestWriter)
+bool KoDocumentRdfBase::saveOasis(KOdfStore *store, KXmlWriter *manifestWriter)
 {
     Q_UNUSED(store);
     Q_UNUSED(manifestWriter);

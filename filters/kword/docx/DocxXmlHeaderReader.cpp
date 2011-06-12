@@ -24,7 +24,7 @@
 #include "DocxXmlHeaderReader.h"
 #include <MsooXmlSchemas.h>
 #include <MsooXmlUtils.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <limits.h>
 
 #define MSOOXML_CURRENT_NS "w"
@@ -154,8 +154,8 @@ KoFilter::ConversionStatus DocxXmlHeaderReader::read_hdr()
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter *oldBody = body;
-    body = new KoXmlWriter(&buffer);
+    KXmlWriter *oldBody = body;
+    body = new KXmlWriter(&buffer);
 
     while (!atEnd()) {
         readNext();

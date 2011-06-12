@@ -21,7 +21,7 @@
 #include "SCAnimationSubStep.h"
 #include "SCShapeAnimation.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoPASavingContext.h>
 
 
@@ -45,7 +45,7 @@ void SCAnimationSubStep::init(SCAnimationCache *animationCache, int step)
 
 bool SCAnimationSubStep::saveOdf(KoPASavingContext &paContext, bool startStep) const
 {
-    KoXmlWriter &writer = paContext.xmlWriter();
+    KXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:par");
     for (int i=0; i < this->animationCount(); i++) {
         bool startSubStep = !i;

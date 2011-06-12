@@ -28,7 +28,7 @@
 #include <MsooXmlSchemas.h>
 #include <MsooXmlUtils.h>
 #include <MsooXmlRelationships.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfFontData.h>
 #include <VmlDrawingReader.h>
 

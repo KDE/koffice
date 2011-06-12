@@ -28,7 +28,7 @@
 
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include "KOdfXmlNS.h"
 
@@ -57,10 +57,10 @@ struct KOdfWriteStore::Private {
 
     KOdfStore * store;
     KOdfStorageDevice * storeDevice;
-    KoXmlWriter * contentWriter;
+    KXmlWriter * contentWriter;
 
-    KoXmlWriter * bodyWriter;
-    KoXmlWriter * manifestWriter;
+    KXmlWriter * bodyWriter;
+    KXmlWriter * manifestWriter;
     KTemporaryFile * contentTmpFile;
 };
 
@@ -74,9 +74,9 @@ KOdfWriteStore::~KOdfWriteStore()
     delete d;
 }
 
-KoXmlWriter* KOdfWriteStore::createOasisXmlWriter(QIODevice* dev, const char* rootElementName)
+KXmlWriter* KOdfWriteStore::createOasisXmlWriter(QIODevice* dev, const char* rootElementName)
 {
-    KoXmlWriter* writer = new KoXmlWriter(dev);
+    KXmlWriter* writer = new KXmlWriter(dev);
     writer->startDocument(rootElementName);
     writer->startElement(rootElementName);
 
@@ -124,7 +124,7 @@ KOdfStore* KOdfWriteStore::store() const
     return d->store;
 }
 
-KoXmlWriter* KOdfWriteStore::contentWriter()
+KXmlWriter* KOdfWriteStore::contentWriter()
 {
     if (!d->contentWriter) {
         if (!d->store->open("content.xml")) {
@@ -136,13 +136,13 @@ KoXmlWriter* KOdfWriteStore::contentWriter()
     return d->contentWriter;
 }
 
-KoXmlWriter* KOdfWriteStore::bodyWriter()
+KXmlWriter* KOdfWriteStore::bodyWriter()
 {
     if (!d->bodyWriter) {
         Q_ASSERT(!d->contentTmpFile);
         d->contentTmpFile = new KTemporaryFile;
         d->contentTmpFile->open();
-        d->bodyWriter = new KoXmlWriter(d->contentTmpFile, 1);
+        d->bodyWriter = new KXmlWriter(d->contentTmpFile, 1);
     }
     return d->bodyWriter;
 }
@@ -172,13 +172,13 @@ bool KOdfWriteStore::closeContentWriter()
     return true;
 }
 
-KoXmlWriter* KOdfWriteStore::manifestWriter(const char* mimeType)
+KXmlWriter* KOdfWriteStore::manifestWriter(const char* mimeType)
 {
     if (!d->manifestWriter) {
-        // the pointer to the buffer is already stored in the KoXmlWriter, no need to store it here as well
+        // the pointer to the buffer is already stored in the KXmlWriter, no need to store it here as well
         QBuffer *manifestBuffer = new QBuffer;
         manifestBuffer->open(QIODevice::WriteOnly);
-        d->manifestWriter = new KoXmlWriter(manifestBuffer);
+        d->manifestWriter = new KXmlWriter(manifestBuffer);
         d->manifestWriter->startDocument("manifest:manifest");
         d->manifestWriter->startElement("manifest:manifest");
         d->manifestWriter->addAttribute("xmlns:manifest", KOdfXmlNS::manifest);
@@ -188,7 +188,7 @@ KoXmlWriter* KOdfWriteStore::manifestWriter(const char* mimeType)
     return d->manifestWriter;
 }
 
-KoXmlWriter* KOdfWriteStore::manifestWriter()
+KXmlWriter* KOdfWriteStore::manifestWriter()
 {
     Q_ASSERT(d->manifestWriter);
     return d->manifestWriter;

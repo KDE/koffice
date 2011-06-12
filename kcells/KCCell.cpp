@@ -79,7 +79,7 @@
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
 #include <KOdfStylesReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <KoTextLoader.h>
 #include <KoStyleManager.h>
@@ -1050,7 +1050,7 @@ bool KCCell::saveCellResult(QDomDocument& doc, QDomElement& result,
     return true; /* really isn't much of a way for this function to fail */
 }
 
-void KCCell::saveOdfAnnotation(KoXmlWriter &xmlwriter)
+void KCCell::saveOdfAnnotation(KXmlWriter &xmlwriter)
 {
     const QString comment = this->comment();
     if (!comment.isEmpty()) {
@@ -1078,7 +1078,7 @@ QString KCCell::saveOdfCellStyle(KOdfGenericStyle &currentCellStyle, KOdfGeneric
 }
 
 
-bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KOdfGenericStyles &mainStyles,
+bool KCCell::saveOdf(KXmlWriter& xmlwriter, KOdfGenericStyles &mainStyles,
                    int row, int column, int &repeated,
                    KCOdfSavingContext& tableContext)
 {
@@ -1244,7 +1244,7 @@ bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KOdfGenericStyles &mainStyles,
     return true;
 }
 
-void KCCell::saveOdfValue(KoXmlWriter &xmlWriter)
+void KCCell::saveOdfValue(KXmlWriter &xmlWriter)
 {
     switch (value().format()) {
     case KCValue::fmt_None: break;  //NOTHING HERE

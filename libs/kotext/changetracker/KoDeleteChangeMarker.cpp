@@ -22,7 +22,7 @@
 //KOffice includes
 #include <KoTextDocument.h>
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoTextShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <opendocument/KoTextSharedSavingData.h>

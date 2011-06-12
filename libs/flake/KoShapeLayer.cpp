@@ -22,7 +22,7 @@
 #include "KoShapeSavingContext.h"
 #include "KoShapeLoadingContext.h"
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfXmlNS.h>

@@ -20,7 +20,7 @@
 #include "ComponentTransferEffect.h"
 #include "ColorChannelConversion.h"
 #include <KoFilterEffectRenderContext.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KLocale>
 #include <QtCore/QRect>
@@ -250,7 +250,7 @@ void ComponentTransferEffect::loadChannel(Channel channel, const KoXmlElement &e
     }
 }
 
-void ComponentTransferEffect::save(KoXmlWriter &writer)
+void ComponentTransferEffect::save(KXmlWriter &writer)
 {
     writer.startElement(ComponentTransferEffectId);
 
@@ -264,7 +264,7 @@ void ComponentTransferEffect::save(KoXmlWriter &writer)
     writer.endElement();
 }
 
-void ComponentTransferEffect::saveChannel(Channel channel, KoXmlWriter &writer)
+void ComponentTransferEffect::saveChannel(Channel channel, KXmlWriter &writer)
 {
     Function function = m_data[channel].function;
     // we can omit writing the transfer function when

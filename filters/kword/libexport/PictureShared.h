@@ -26,7 +26,7 @@
 
 #include "PictureKey.h"
 
-class KoXmlWriter;
+class KXmlWriter;
 class QPainter;
 class QSize;
 class QMimeData;
@@ -115,7 +115,7 @@ public:
      * OASIS FlatXML support:
      * Save picture as base64-encoded data into an XML writer.
      */
-    bool saveAsBase64(KoXmlWriter& writer) const;
+    bool saveAsBase64(KXmlWriter& writer) const;
 
     void setExtension(const QString& extension);
 

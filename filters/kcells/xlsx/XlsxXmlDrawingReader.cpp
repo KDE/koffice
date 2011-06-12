@@ -36,7 +36,7 @@
 #include <MsooXmlUnits.h>
 #include <MsooXmlDiagramReader.h>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KoOdfGraphicStyles.h>
 #include <KUnit.h>
@@ -52,7 +52,7 @@
 #include <MsooXmlUtils.h>
 #include <MsooXmlContentTypes.h>
 #include <MsooXmlRelationships.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 // calculates the column width in pixels
 int columnWidth2(unsigned long col, unsigned long dx = 0, qreal defaultColumnWidth = 8.43) {
@@ -82,17 +82,17 @@ QString columnName2(uint column)
     return s;
 }
 
-KoXmlWriter* XlsxDrawingObject::setShape(XlsxShape* shape)
+KXmlWriter* XlsxDrawingObject::setShape(XlsxShape* shape)
 {
     m_type = Shape;
     m_shape = shape;
 
     delete m_shapeBody;
-    m_shapeBody = new KoXmlWriter(new QBuffer);
+    m_shapeBody = new KXmlWriter(new QBuffer);
     return m_shapeBody;
 }
 
-void XlsxDrawingObject::save(KoXmlWriter* xmlWriter)
+void XlsxDrawingObject::save(KXmlWriter* xmlWriter)
 {
     switch(m_type) {
         case Unknown: {
@@ -486,7 +486,7 @@ void XlsxXmlEmbeddedPicture::setImageXml(const QString imageXml)
    m_imageXml = imageXml;
 }
 
-bool XlsxXmlEmbeddedPicture::saveXml(KoXmlWriter *xmlWriter)   // save all needed attributes to .ods
+bool XlsxXmlEmbeddedPicture::saveXml(KXmlWriter *xmlWriter)   // save all needed attributes to .ods
 {
     xmlWriter->addCompleteElement(m_imageXml.toUtf8());
 

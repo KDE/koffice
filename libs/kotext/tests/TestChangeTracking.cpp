@@ -34,7 +34,7 @@
 #include <KOdfWriteStore.h>
 #include <KTemporaryFile>
 #include <KOdfStorageDevice.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoTextShapeData.h>
 #include <KoShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
@@ -143,19 +143,19 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
 
     KOdfStore *store = KOdfStore::createStore(odt, KOdfStore::Write, "application/vnd.oasis.opendocument.text", KOdfStore::Zip);
     KOdfWriteStore odfWriteStore(store);
-    KoXmlWriter *manifestWriter = odfWriteStore.manifestWriter("application/vnd.oasis.opendocument.text");
+    KXmlWriter *manifestWriter = odfWriteStore.manifestWriter("application/vnd.oasis.opendocument.text");
     manifestWriter->addManifestEntry("content.xml", "text/xml");
     if (!store->open("content.xml"))
         return QString();
 
     KOdfStorageDevice contentDev(store);
-    KoXmlWriter* contentWriter = KOdfWriteStore::createOasisXmlWriter(&contentDev, "office:document-content");
+    KXmlWriter* contentWriter = KOdfWriteStore::createOasisXmlWriter(&contentDev, "office:document-content");
 
     // for office:body
     KTemporaryFile contentTmpFile;
     if (!contentTmpFile.open())
         qFatal("Error opening temporary file!");
-    KoXmlWriter xmlWriter(&contentTmpFile, 1);
+    KXmlWriter xmlWriter(&contentTmpFile, 1);
 
     KOdfGenericStyles mainStyles;
     KoStyleManager *styleMan = KoTextDocument(document).styleManager();

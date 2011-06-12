@@ -30,7 +30,7 @@
 class QRect;
 class QWidget;
 
-class KoXmlWriter;
+class KXmlWriter;
 
 class KCCell;
 class Filter;
@@ -120,7 +120,7 @@ public:
     void setFilter(const Filter& filter);
 
     bool loadOdf(const KoXmlElement& element, const KCMap* map);
-    void saveOdf(KoXmlWriter& xmlWriter) const;
+    void saveOdf(KXmlWriter& xmlWriter) const;
 
     void operator=(const Database& other);
     bool operator==(const Database& other) const;

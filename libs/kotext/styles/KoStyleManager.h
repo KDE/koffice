@@ -38,7 +38,7 @@ class KoTableColumnStyle;
 class KoTableRowStyle;
 class KoTableCellStyle;
 class KoSectionStyle;
-class KoXmlWriter;
+class KXmlWriter;
 class ChangeFollower;
 class KOdfGenericStyles;
 class KoTextShapeData;

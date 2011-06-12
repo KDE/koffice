@@ -35,7 +35,7 @@
 
 // KOffice
 //#include <KOdfStore.h>
-//#include <KoXmlWriter.h>
+//#include <KXmlWriter.h>
 //#include <KoShapeSavingContext.h>
 
 Q_DECLARE_METATYPE(QPointer<QAbstractItemModel>)

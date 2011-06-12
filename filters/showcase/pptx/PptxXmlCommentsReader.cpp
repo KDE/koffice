@@ -24,7 +24,7 @@
 #define MSOOXML_CURRENT_NS "p"
 #define MSOOXML_CURRENT_CLASS PptxCommentsReader
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <MsooXmlReader_p.h>
 #include <MsooXmlUtils.h>
 #include <MsooXmlUnits.h>

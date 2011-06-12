@@ -23,7 +23,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoTextInlineRdf.h>
 
 #include <QTextDocument>
@@ -55,7 +55,7 @@ KoTextMeta::~KoTextMeta()
 
 void KoTextMeta::saveOdf(KoShapeSavingContext &context)
 {
-    KoXmlWriter &writer = context.xmlWriter();
+    KXmlWriter &writer = context.xmlWriter();
 
     kDebug(30015) << "kom.save() this:" << (void*)this << " d->type:" << d->type;
     if (inlineRdf()) {

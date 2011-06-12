@@ -213,7 +213,7 @@ private:
      * @brief Write declaration in the content body presentation
      * @param xmlWriter XML writer to write
      */
-    void processDeclaration(KoXmlWriter* xmlWriter);
+    void processDeclaration(KXmlWriter* xmlWriter);
 
     /**
       * @brief An enumeration that specifies an action that can be performed

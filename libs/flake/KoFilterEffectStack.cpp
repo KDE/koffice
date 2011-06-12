@@ -19,7 +19,7 @@
 
 #include "KoFilterEffectStack.h"
 #include "KoFilterEffect.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 
 #include <QtCore/QAtomicInt>
 #include <QtCore/QSet>
@@ -122,7 +122,7 @@ int KoFilterEffectStack::useCount() const
     return d->refCount;
 }
 
-void KoFilterEffectStack::save(KoXmlWriter &writer, const QString &filterId)
+void KoFilterEffectStack::save(KXmlWriter &writer, const QString &filterId)
 {
     writer.startElement("filter");
     writer.addAttribute("id", filterId);

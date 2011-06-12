@@ -27,7 +27,7 @@
 
 #include "PictureKey.h"
 
-class KoXmlWriter;
+class KXmlWriter;
 class QPainter;
 class QSize;
 class QMimeData;
@@ -133,7 +133,7 @@ public:
      *  writer.endElement();
      * @endcode
      */
-    bool saveAsBase64(KoXmlWriter& writer) const;
+    bool saveAsBase64(KXmlWriter& writer) const;
 
     /**
      * @return the image extension (e.g. png)

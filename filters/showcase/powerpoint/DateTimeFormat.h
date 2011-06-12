@@ -42,10 +42,10 @@ public:
     ~DateTimeFormat();
 
     /**
-    * @brief addMasterDateTimeSection(KoXmlWriter& xmlWriter) - Add DateTime section Master styles in styles.xml
-    * @param KoXmlWriter - Content Writer
+    * @brief addMasterDateTimeSection(KXmlWriter& xmlWriter) - Add DateTime section Master styles in styles.xml
+    * @param KXmlWriter - Content Writer
     */
-    void addMasterDateTimeSection(KoXmlWriter& xmlWriter, QString tStyle);
+    void addMasterDateTimeSection(KXmlWriter& xmlWriter, QString tStyle);
 
     /**
     * @brief addDateTimeAutoStyles - Add DateTime styles in styles.xml

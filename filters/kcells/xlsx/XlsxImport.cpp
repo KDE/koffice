@@ -57,7 +57,7 @@
 #include <KoFilterChain.h>
 #include <KUnit.h>
 #include <KOdfPageLayoutData.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 K_PLUGIN_FACTORY(XlsxImportFactory, registerPlugin<XlsxImport>();)
 K_EXPORT_PLUGIN(XlsxImportFactory("kofficefilters"))

@@ -144,7 +144,7 @@ void KCCalculationSettings::loadOdf(const KoXmlElement& body)
     }
 }
 
-bool KCCalculationSettings::saveOdf(KoXmlWriter &/*settingsWriter*/) const
+bool KCCalculationSettings::saveOdf(KXmlWriter &/*settingsWriter*/) const
 {
     return true;
 }

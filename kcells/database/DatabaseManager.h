@@ -26,7 +26,7 @@
 
 #include "../kcells_export.h"
 
-class KoXmlWriter;
+class KXmlWriter;
 
 class KCMap;
 
@@ -60,7 +60,7 @@ public:
      * Saves databases.
      * \ingroup OpenDocument
      */
-    void saveOdf(KoXmlWriter& xmlWriter) const;
+    void saveOdf(KXmlWriter& xmlWriter) const;
 
 private:
     class Private;

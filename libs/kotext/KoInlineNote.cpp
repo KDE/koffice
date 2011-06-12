@@ -20,7 +20,7 @@
 #include "KoInlineNote.h"
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextLoader.h>
@@ -224,7 +224,7 @@ bool KoInlineNote::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
 
 void KoInlineNote::saveOdf(KoShapeSavingContext & context)
 {
-    KoXmlWriter *writer = &context.xmlWriter();
+    KXmlWriter *writer = &context.xmlWriter();
     QTextDocument *document = new QTextDocument();
     KoTextDocument textDocument(document);
     Q_ASSERT(!d->styleManager.isNull());

@@ -32,7 +32,7 @@
 #include <KOdfGenericStyles.h>
 #include <QVariantList>
 
-class KoXmlWriter;
+class KXmlWriter;
 class KOdfGenericStyles;
 
 class Filterkpr2odf : public KoFilter
@@ -49,31 +49,31 @@ public:
 
 private:
     //Helper functions
-    void createImageList(KOdfStore* output, KOdfStore* input, KoXmlWriter* manifest);
-    void createSoundList(KOdfStore* output, KOdfStore* input, KoXmlWriter* manifest);
-    void convertContent(KoXmlWriter* content);
-    void convertObjects(KoXmlWriter* content, const KoXmlNode& objects);
-    void saveAnimations(KoXmlWriter* content);
+    void createImageList(KOdfStore* output, KOdfStore* input, KXmlWriter* manifest);
+    void createSoundList(KOdfStore* output, KOdfStore* input, KXmlWriter* manifest);
+    void convertContent(KXmlWriter* content);
+    void convertObjects(KXmlWriter* content, const KoXmlNode& objects);
+    void saveAnimations(KXmlWriter* content);
 
     //Objects' functions
-    void appendPicture(KoXmlWriter* content, const KoXmlElement& objectElement);
-    void appendLine(KoXmlWriter* content, const KoXmlElement& objectElement);
-    void appendRectangle(KoXmlWriter* content, const KoXmlElement& objectElement);
-    void appendEllipse(KoXmlWriter* content, const KoXmlElement& objectElement);
-    void appendTextBox(KoXmlWriter* content, const    KoXmlElement& objectElement);
-    void appendParagraph(KoXmlWriter* content, const    KoXmlElement& objectElement);
-    void appendText(KoXmlWriter* content, const    KoXmlElement& objectElement);
-    void appendPie(KoXmlWriter* content, const KoXmlElement& objectElement);
-    void appendGroupObject(KoXmlWriter* content, const KoXmlElement& objectElement);
-    void appendPoly(KoXmlWriter* content, const KoXmlElement& objectElement, bool polygon);
-    void appendPolygon(KoXmlWriter* content, const KoXmlElement& objectElement);
-    void appendAutoform(KoXmlWriter* content, const KoXmlElement& objectElement);
-    void appendArrow(KoXmlWriter* content, const KoXmlElement& objectElement);
-    void appendFreehand(KoXmlWriter* content, const KoXmlElement& objectElement);
-    void appendBezier(KoXmlWriter* content, const KoXmlElement& objectElement);
+    void appendPicture(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendLine(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendRectangle(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendEllipse(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendTextBox(KXmlWriter* content, const    KoXmlElement& objectElement);
+    void appendParagraph(KXmlWriter* content, const    KoXmlElement& objectElement);
+    void appendText(KXmlWriter* content, const    KoXmlElement& objectElement);
+    void appendPie(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendGroupObject(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendPoly(KXmlWriter* content, const KoXmlElement& objectElement, bool polygon);
+    void appendPolygon(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendAutoform(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendArrow(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendFreehand(KXmlWriter* content, const KoXmlElement& objectElement);
+    void appendBezier(KXmlWriter* content, const KoXmlElement& objectElement);
 
     const QString getPictureNameFromKey(const KoXmlElement& key);
-    void set2DGeometry(KoXmlWriter* content, const KoXmlElement& objectElement);
+    void set2DGeometry(KXmlWriter* content, const KoXmlElement& objectElement);
     QString rotateValue(double val);
     void exportAnimation(const KoXmlElement& objectElement, int indentLevel);
 

@@ -35,7 +35,7 @@
 #include <KUnit.h>
 #include <kpluginfactory.h>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
@@ -146,7 +146,7 @@ public:
     int rowsCountTotal, rowsCountDone;
     void addProgress(int addValue);
 
-    bool createStyles(KOdfStore* store, KoXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles);
+    bool createStyles(KOdfStore* store, KXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles);
     bool createContent(KOdfWriteStore* store);
     bool createMeta(KOdfWriteStore* store);
     bool createSettings(KOdfWriteStore* store);
@@ -156,28 +156,28 @@ public:
     int rowFormatIndex;
     int cellFormatIndex;
 
-    void processWorkbookForBody(KOdfWriteStore* store, Workbook* workbook, KoXmlWriter* xmlWriter);
-    void processWorkbookForStyle(Workbook* workbook, KoXmlWriter* xmlWriter);
-    void processSheetForBody(KOdfWriteStore* store, Sheet* sheet, KoXmlWriter* xmlWriter);
-    void processSheetForStyle(Sheet* sheet, KoXmlWriter* xmlWriter);
-    void processSheetForHeaderFooter(Sheet* sheet, KoXmlWriter* writer);
-    void processHeaderFooterStyle(const QString& text, KoXmlWriter* xmlWriter);
-    void processColumnForBody(Sheet* sheet, int columnIndex, KoXmlWriter* xmlWriter, unsigned& outlineLevel);
-    void processColumnForStyle(Sheet* sheet, int columnIndex, KoXmlWriter* xmlWriter);
-    int processRowForBody(KOdfWriteStore* store, Sheet* sheet, int rowIndex, KoXmlWriter* xmlWriter, unsigned& outlineLevel);
-    int processRowForStyle(Sheet* sheet, int rowIndex, KoXmlWriter* xmlWriter);
-    void processCellForBody(KOdfWriteStore* store, Cell* cell, int rowsRepeat, KoXmlWriter* xmlWriter);
-    void processCellForStyle(Cell* cell, KoXmlWriter* xmlWriter);
+    void processWorkbookForBody(KOdfWriteStore* store, Workbook* workbook, KXmlWriter* xmlWriter);
+    void processWorkbookForStyle(Workbook* workbook, KXmlWriter* xmlWriter);
+    void processSheetForBody(KOdfWriteStore* store, Sheet* sheet, KXmlWriter* xmlWriter);
+    void processSheetForStyle(Sheet* sheet, KXmlWriter* xmlWriter);
+    void processSheetForHeaderFooter(Sheet* sheet, KXmlWriter* writer);
+    void processHeaderFooterStyle(const QString& text, KXmlWriter* xmlWriter);
+    void processColumnForBody(Sheet* sheet, int columnIndex, KXmlWriter* xmlWriter, unsigned& outlineLevel);
+    void processColumnForStyle(Sheet* sheet, int columnIndex, KXmlWriter* xmlWriter);
+    int processRowForBody(KOdfWriteStore* store, Sheet* sheet, int rowIndex, KXmlWriter* xmlWriter, unsigned& outlineLevel);
+    int processRowForStyle(Sheet* sheet, int rowIndex, KXmlWriter* xmlWriter);
+    void processCellForBody(KOdfWriteStore* store, Cell* cell, int rowsRepeat, KXmlWriter* xmlWriter);
+    void processCellForStyle(Cell* cell, KXmlWriter* xmlWriter);
     QString processCellFormat(const Format* format, const QString& formula = QString());
     QString processRowFormat(Format* format, const QString& breakBefore = QString(), int rowRepeat = 1, double rowHeight = -1);
     void processFormat(const Format* format, KOdfGenericStyle& style);
     QString processValueFormat(const QString& valueFormat);
     void processFontFormat(const FormatFont& font, KOdfGenericStyle& style, bool allProps = false);
-    void processCharts(KoXmlWriter* manifestWriter);
+    void processCharts(KXmlWriter* manifestWriter);
 
     void createDefaultColumnStyle( Sheet* sheet );
     void processSheetBackground(Sheet* sheet, KOdfGenericStyle& style);
-    void addManifestEntries(KoXmlWriter* ManifestWriter);
+    void addManifestEntries(KXmlWriter* ManifestWriter);
     void insertPictureManifest(PictureObject* picture);
 
     bool isDateFormat(const QString& valueFormat);
@@ -246,7 +246,7 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
     d->mainStyles = new KOdfGenericStyles();
 
     KOdfWriteStore oasisStore(d->storeout);
-    KoXmlWriter* manifestWriter = oasisStore.manifestWriter("application/vnd.oasis.opendocument.spreadsheet");
+    KXmlWriter* manifestWriter = oasisStore.manifestWriter("application/vnd.oasis.opendocument.spreadsheet");
 
     // header and footer are read from each sheet and saved in styles
     // So creating content before styles
@@ -354,8 +354,8 @@ int ExcelImport::Private::rowsRepeated(Row* row, int rowIndex)
 // Writes the spreadsheet content into the content.xml
 bool ExcelImport::Private::createContent(KOdfWriteStore* store)
 {
-    KoXmlWriter* bodyWriter = store->bodyWriter();
-    KoXmlWriter* contentWriter = store->contentWriter();
+    KXmlWriter* bodyWriter = store->bodyWriter();
+    KXmlWriter* contentWriter = store->contentWriter();
     if (!bodyWriter || !contentWriter)
         return false;
 
@@ -400,13 +400,13 @@ bool ExcelImport::Private::createContent(KOdfWriteStore* store)
 
 
 // Writes the styles.xml
-bool ExcelImport::Private::createStyles(KOdfStore* store, KoXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles)
+bool ExcelImport::Private::createStyles(KOdfStore* store, KXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles)
 {
     Q_UNUSED(manifestWriter);
     if (!store->open("styles.xml"))
         return false;
     KOdfStorageDevice dev(store);
-    KoXmlWriter* stylesWriter = new KoXmlWriter(&dev);
+    KXmlWriter* stylesWriter = new KXmlWriter(&dev);
 
     stylesWriter->startDocument("office:document-styles");
     stylesWriter->startElement("office:document-styles");
@@ -445,7 +445,7 @@ bool ExcelImport::Private::createMeta(KOdfWriteStore* store)
         return false;
 
     KOdfStorageDevice dev(store->store());
-    KoXmlWriter* metaWriter = new KoXmlWriter(&dev);
+    KXmlWriter* metaWriter = new KXmlWriter(&dev);
     metaWriter->startDocument("office:document-meta");
     metaWriter->startElement("office:document-meta");
     metaWriter->addAttribute("xmlns:office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
@@ -519,7 +519,7 @@ bool ExcelImport::Private::createSettings(KOdfWriteStore* store)
         return false;
 
     KOdfStorageDevice dev(store->store());
-    KoXmlWriter* settingsWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-settings");
+    KXmlWriter* settingsWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-settings");
     settingsWriter->startElement("office:settings");
     settingsWriter->startElement("config:config-item-set");
     settingsWriter->addAttribute("config:name", "view-settings");
@@ -571,7 +571,7 @@ bool ExcelImport::Private::createSettings(KOdfWriteStore* store)
 }
 
 // Processes the workbook content. The workbook is the top-level element for content.
-void ExcelImport::Private::processWorkbookForBody(KOdfWriteStore* store, Workbook* workbook, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processWorkbookForBody(KOdfWriteStore* store, Workbook* workbook, KXmlWriter* xmlWriter)
 {
     if (!workbook) return;
     if (!xmlWriter) return;
@@ -633,7 +633,7 @@ void ExcelImport::Private::processWorkbookForBody(KOdfWriteStore* store, Workboo
 }
 
 // Processes the workbook styles. The workbook is the top-level element for content.
-void ExcelImport::Private::processWorkbookForStyle(Workbook* workbook, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processWorkbookForStyle(Workbook* workbook, KXmlWriter* xmlWriter)
 {
     if (!workbook) return;
     if (!xmlWriter) return;
@@ -647,7 +647,7 @@ void ExcelImport::Private::processWorkbookForStyle(Workbook* workbook, KoXmlWrit
 
     QBuffer buf;
     buf.open(QIODevice::WriteOnly);
-    KoXmlWriter writer(&buf);
+    KXmlWriter writer(&buf);
 
     //Hardcoded page-layout
     writer.startElement("style:header-style");
@@ -693,7 +693,7 @@ void ExcelImport::Private::processWorkbookForStyle(Workbook* workbook, KoXmlWrit
 }
 
 // Processes a sheet.
-void ExcelImport::Private::processSheetForBody(KOdfWriteStore* store, Sheet* sheet, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processSheetForBody(KOdfWriteStore* store, Sheet* sheet, KXmlWriter* xmlWriter)
 {
     if (!sheet) return;
     if (!xmlWriter) return;
@@ -765,7 +765,7 @@ static QRectF getRect(const MSO::OfficeArtFSPGR &r)
 }
 
 // Processes styles for a sheet.
-void ExcelImport::Private::processSheetForStyle(Sheet* sheet, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processSheetForStyle(Sheet* sheet, KXmlWriter* xmlWriter)
 {
     if (!sheet) return;
     if (!xmlWriter) return;
@@ -799,7 +799,7 @@ void ExcelImport::Private::processSheetForStyle(Sheet* sheet, KoXmlWriter* xmlWr
         ODrawClient client = ODrawClient(sheet);
         ODrawToOdf odraw(client);
         QBuffer b;
-        KoXmlWriter xml(&b);
+        KXmlWriter xml(&b);
         Writer writer(xml, *styles, false);
         foreach (const OfficeArtObject* o, objects) {
             client.setShapeText(o->text());
@@ -832,7 +832,7 @@ void ExcelImport::Private::processSheetForStyle(Sheet* sheet, KoXmlWriter* xmlWr
 }
 
 // Processes headers and footers for a sheet.
-void ExcelImport::Private::processSheetForHeaderFooter(Sheet* sheet, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processSheetForHeaderFooter(Sheet* sheet, KXmlWriter* xmlWriter)
 {
     if (!sheet) return;
     if (!xmlWriter) return;
@@ -887,7 +887,7 @@ void ExcelImport::Private::processSheetForHeaderFooter(Sheet* sheet, KoXmlWriter
 }
 
 // Processes the styles of a headers and footers for a sheet.
-void ExcelImport::Private::processHeaderFooterStyle(const QString& text, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processHeaderFooterStyle(const QString& text, KXmlWriter* xmlWriter)
 {
     QString content;
     bool skipUnsupported = false;
@@ -948,7 +948,7 @@ void ExcelImport::Private::processHeaderFooterStyle(const QString& text, KoXmlWr
 }
 
 // Processes a column in a sheet.
-void ExcelImport::Private::processColumnForBody(Sheet* sheet, int columnIndex, KoXmlWriter* xmlWriter, unsigned& outlineLevel)
+void ExcelImport::Private::processColumnForBody(Sheet* sheet, int columnIndex, KXmlWriter* xmlWriter, unsigned& outlineLevel)
 {
     Column* column = sheet->column(columnIndex, false);
 
@@ -988,7 +988,7 @@ void ExcelImport::Private::processColumnForBody(Sheet* sheet, int columnIndex, K
 }
 
 // Processes the style of a column in a sheet.
-void ExcelImport::Private::processColumnForStyle(Sheet* sheet, int columnIndex, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processColumnForStyle(Sheet* sheet, int columnIndex, KXmlWriter* xmlWriter)
 {
     Column* column = sheet->column(columnIndex, false);
 
@@ -1008,7 +1008,7 @@ void ExcelImport::Private::processColumnForStyle(Sheet* sheet, int columnIndex, 
 }
 
 // Processes a row in a sheet.
-int ExcelImport::Private::processRowForBody(KOdfWriteStore* store, Sheet* sheet, int rowIndex, KoXmlWriter* xmlWriter, unsigned& outlineLevel)
+int ExcelImport::Private::processRowForBody(KOdfWriteStore* store, Sheet* sheet, int rowIndex, KXmlWriter* xmlWriter, unsigned& outlineLevel)
 {
     int repeat = 1;
 
@@ -1068,7 +1068,7 @@ int ExcelImport::Private::processRowForBody(KOdfWriteStore* store, Sheet* sheet,
 }
 
 // Processes the style of a row in a sheet.
-int ExcelImport::Private::processRowForStyle(Sheet* sheet, int rowIndex, KoXmlWriter* xmlWriter)
+int ExcelImport::Private::processRowForStyle(Sheet* sheet, int rowIndex, KXmlWriter* xmlWriter)
 {
     int repeat = 1;
     Row* row = sheet->row(rowIndex, false);
@@ -1251,7 +1251,7 @@ QString currencyValue(const QString &value)
 }
 
 // Processes a cell within a sheet.
-void ExcelImport::Private::processCellForBody(KOdfWriteStore* store, Cell* cell, int rowsRepeat, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processCellForBody(KOdfWriteStore* store, Cell* cell, int rowsRepeat, KXmlWriter* xmlWriter)
 {
     if (!cell) return;
     if (!xmlWriter) return;
@@ -1470,7 +1470,7 @@ void ExcelImport::Private::processCellForBody(KOdfWriteStore* store, Cell* cell,
     xmlWriter->endElement(); // table:[covered-]table-cell
 }
 
-void ExcelImport::Private::processCharts(KoXmlWriter* manifestWriter)
+void ExcelImport::Private::processCharts(KXmlWriter* manifestWriter)
 {
     foreach(ChartExport *c, this->charts) {
         c->saveContent(this->storeout, manifestWriter);
@@ -1478,7 +1478,7 @@ void ExcelImport::Private::processCharts(KoXmlWriter* manifestWriter)
 }
 
 // Processes style for a cell within a sheet.
-void ExcelImport::Private::processCellForStyle(Cell* cell, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processCellForStyle(Cell* cell, KXmlWriter* xmlWriter)
 {
     if (!cell) return;
     if (!xmlWriter) return;
@@ -1515,7 +1515,7 @@ void ExcelImport::Private::processCellForStyle(Cell* cell, KoXmlWriter* xmlWrite
         ODrawClient client = ODrawClient(cell->sheet());
         ODrawToOdf odraw( client);
         QBuffer b;
-        KoXmlWriter xml(&b);
+        KXmlWriter xml(&b);
         Writer writer(xml, *styles, false);
         foreach (OfficeArtObject* o, objects) {
             client.setShapeText(o->text());
@@ -1542,7 +1542,7 @@ QString ExcelImport::Private::processCellFormat(const Format* format, const QStr
                 KOdfGenericStyle style(KOdfGenericStyle::NumericNumberStyle);
                 QBuffer buffer;
                 buffer.open(QIODevice::WriteOnly);
-                KoXmlWriter xmlWriter(&buffer);    // TODO pass indentation level
+                KXmlWriter xmlWriter(&buffer);    // TODO pass indentation level
                 xmlWriter.startElement("number:number");
                 xmlWriter.addAttribute("number:decimal-places", key.decimalCount);
                 xmlWriter.endElement(); // number:number
@@ -1867,7 +1867,7 @@ void ExcelImport::Private::processSheetBackground(Sheet* sheet, KOdfGenericStyle
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter writer(&buffer);
+    KXmlWriter writer(&buffer);
 
     //TODO add the manifest entry
     writer.startElement("style:background-image");
@@ -1882,7 +1882,7 @@ void ExcelImport::Private::processSheetBackground(Sheet* sheet, KOdfGenericStyle
     manifestEntries.insert(sheet->backgroundImage(), "image/bmp");
 }
 
-void ExcelImport::Private::addManifestEntries(KoXmlWriter* manifestWriter)
+void ExcelImport::Private::addManifestEntries(KXmlWriter* manifestWriter)
 {
     QMap<QString, QString>::const_iterator iterator = manifestEntries.constBegin();
     QMap<QString, QString>::const_iterator end = manifestEntries.constEnd();

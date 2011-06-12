@@ -20,7 +20,7 @@
 #include "KoShapeOdfSaveHelper.h"
 #include "KoDragOdfSaveHelper_p.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoOdf.h>
 #include <KoShape.h>
 
@@ -43,7 +43,7 @@ bool KoShapeOdfSaveHelper::writeBody()
     Q_D(KoShapeOdfSaveHelper);
     d->context->addOption(KoShapeSavingContext::DrawId);
 
-    KoXmlWriter &bodyWriter = d->context->xmlWriter();
+    KXmlWriter &bodyWriter = d->context->xmlWriter();
     bodyWriter.startElement("office:body");
     bodyWriter.startElement(KoOdf::bodyContentElement(KoOdf::Text, true));
 

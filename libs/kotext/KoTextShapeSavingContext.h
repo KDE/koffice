@@ -40,7 +40,7 @@ public:
      * @param embeddedSaver for saving embedded documents
      * @param changes for saving the tracked changes
      */
-    KoTextShapeSavingContext(KoXmlWriter &xmlWriter, KOdfGenericStyles& mainStyles,
+    KoTextShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles& mainStyles,
                          KoEmbeddedDocumentSaver& embeddedSaver, KOdfGenericChanges& changes);
     virtual ~KoTextShapeSavingContext();
 

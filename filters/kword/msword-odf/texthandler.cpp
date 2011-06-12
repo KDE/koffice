@@ -59,7 +59,7 @@ wvWare::U8 KWordReplacementHandler::nonRequiredHyphen()
     return 0xad; // soft hyphen, according to kword.dtd
 }
 
-KWordTextHandler::KWordTextHandler(wvWare::SharedPtr<wvWare::Parser> parser, KoXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles)
+KWordTextHandler::KWordTextHandler(wvWare::SharedPtr<wvWare::Parser> parser, KXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles)
     : m_mainStyles(0)
     , m_sectionNumber(0)
     , m_document(0)
@@ -114,9 +114,9 @@ KWordTextHandler::KWordTextHandler(wvWare::SharedPtr<wvWare::Parser> parser, KoX
     }
 }
 
-KoXmlWriter* KWordTextHandler::currentWriter() const
+KXmlWriter* KWordTextHandler::currentWriter() const
 {
-    KoXmlWriter* writer = NULL;
+    KXmlWriter* writer = NULL;
 
     if (document()->writingHeader()) {
         writer = document()->headerWriter();
@@ -173,7 +173,7 @@ void KWordTextHandler::sectionStart(wvWare::SharedPtr<const wvWare::Word97::SEP>
         //parse column info
         QBuffer buf;
         buf.open(QIODevice::WriteOnly);
-        KoXmlWriter writer(&buf);
+        KXmlWriter writer(&buf);
         writer.startElement("style:columns");
         //ccolM1 = number of columns in section
         kDebug(30513) << "ccolM1 = " << sep->ccolM1;
@@ -316,7 +316,7 @@ void KWordTextHandler::footnoteFound(wvWare::FootnoteData::Type type,
     //create temp writer for footnote content that we'll add to m_paragraph
     m_footnoteBuffer = new QBuffer();
     m_footnoteBuffer->open(QIODevice::WriteOnly);
-    m_footnoteWriter = new KoXmlWriter(m_footnoteBuffer);
+    m_footnoteWriter = new KXmlWriter(m_footnoteBuffer);
 
     m_footnoteWriter->startElement("text:note");
     //set footnote or endnote
@@ -433,12 +433,12 @@ void KWordTextHandler::footnoteFound(wvWare::FootnoteData::Type type,
 
 void KWordTextHandler::bookmarkStart( const wvWare::BookmarkData& data )
 {
-    KoXmlWriter* writer;
+    KXmlWriter* writer;
     QBuffer buf;
 
     if (!m_insideField) {
         buf.open(QIODevice::WriteOnly);
-        writer = new KoXmlWriter(&buf);
+        writer = new KXmlWriter(&buf);
     } else {
         if (!m_fieldAfterSeparator) {
             kWarning(30513) << "bookmark interfers with field instructions, omitting";
@@ -474,12 +474,12 @@ void KWordTextHandler::bookmarkStart( const wvWare::BookmarkData& data )
 
 void KWordTextHandler::bookmarkEnd( const wvWare::BookmarkData& data )
 {
-    KoXmlWriter* writer;
+    KXmlWriter* writer;
     QBuffer buf;
 
      if (!m_insideField) {
         buf.open(QIODevice::WriteOnly);
-        writer = new KoXmlWriter(&buf);
+        writer = new KXmlWriter(&buf);
     } else {
         if (!m_fieldAfterSeparator) {
             kWarning(30513) << "bookmark interfers with field instructions, omitting";
@@ -518,7 +518,7 @@ void KWordTextHandler::annotationFound( wvWare::UString characters, wvWare::Shar
 
     m_annotationBuffer = new QBuffer();
     m_annotationBuffer->open(QIODevice::WriteOnly);
-    m_annotationWriter = new KoXmlWriter(m_annotationBuffer);
+    m_annotationWriter = new KXmlWriter(m_annotationBuffer);
 
     m_annotationWriter->startElement("office:annotation");
 
@@ -621,8 +621,8 @@ void KWordTextHandler::inlineObjectFound(const wvWare::PictureData& data)
     //create temporary writer for the picture tags
     QBuffer buf;
     buf.open(QIODevice::WriteOnly);
-    m_drawingWriter = new KoXmlWriter(&buf);
-    KoXmlWriter* writer = m_drawingWriter;
+    m_drawingWriter = new KXmlWriter(&buf);
+    KXmlWriter* writer = m_drawingWriter;
 
     //frame or drawing shape acting as a hyperlink
     if (m_hyperLinkActive) {
@@ -667,8 +667,8 @@ void KWordTextHandler::floatingObjectFound(unsigned int globalCP)
     //create temporary writer for the picture tags
     QBuffer drawingBuffer;
     drawingBuffer.open(QIODevice::WriteOnly);
-    m_drawingWriter = new KoXmlWriter(&drawingBuffer);
-    KoXmlWriter* writer = m_drawingWriter;
+    m_drawingWriter = new KXmlWriter(&drawingBuffer);
+    KXmlWriter* writer = m_drawingWriter;
 
     //frame or drawing shape acting as a hyperlink
     if (m_hyperLinkActive) {
@@ -746,7 +746,7 @@ void KWordTextHandler::paragraphStart(wvWare::SharedPtr<const wvWare::ParagraphP
     }
 
     // Set correct writer and style location.
-    KoXmlWriter* writer = currentWriter();
+    KXmlWriter* writer = currentWriter();
     bool inStylesDotXml = false;
 
     if (document()->writingHeader()) {
@@ -940,7 +940,7 @@ void KWordTextHandler::fieldStart(const wvWare::FLD* fld, wvWare::SharedPtr<cons
 
     m_fldBuffer = new QBuffer();
     m_fldBuffer->open(QIODevice::WriteOnly);
-    m_fldWriter = new KoXmlWriter(m_fldBuffer);
+    m_fldWriter = new KXmlWriter(m_fldBuffer);
 
     //check to see if we can process this field type or not
     switch (m_fieldType) {
@@ -1023,7 +1023,7 @@ void KWordTextHandler::fieldEnd(const wvWare::FLD* /*fld*/, wvWare::SharedPtr<co
 
     QBuffer buf;
     buf.open(QIODevice::WriteOnly);
-    KoXmlWriter writer(&buf);
+    KXmlWriter writer(&buf);
     QString* str = &m_fldInst;
     QString tmp;
 
@@ -1217,7 +1217,7 @@ void KWordTextHandler::runOfText(const wvWare::UString& text, wvWare::SharedPtr<
         }
         //processing the field result
         else {
-            KoXmlWriter* writer = m_fldWriter;
+            KXmlWriter* writer = m_fldWriter;
 	    switch (m_fieldType) {
 	    case PAGEREF:
                 //no bookmark support
@@ -1334,7 +1334,7 @@ QString KWordTextHandler::getFont(unsigned fc) const
         */
 }//end getFont()
 
-bool KWordTextHandler::writeListInfo(KoXmlWriter* writer, const wvWare::Word97::PAP& pap, const wvWare::ListInfo* listInfo)
+bool KWordTextHandler::writeListInfo(KXmlWriter* writer, const wvWare::Word97::PAP& pap, const wvWare::ListInfo* listInfo)
 {
     kDebug(30513);
     bool newListLevelStyle = false; //little flag to tell us whether or not to write that tag
@@ -1424,7 +1424,7 @@ bool KWordTextHandler::writeListInfo(KoXmlWriter* writer, const wvWare::Word97::
         //create writer for this list
         QBuffer buf;
         buf.open(QIODevice::WriteOnly);
-        KoXmlWriter listStyleWriter(&buf);
+        KXmlWriter listStyleWriter(&buf);
         KOdfGenericStyle* listStyle = 0;
         //text() returns a struct consisting of a UString text string (called text) & a pointer to a CHP (called chp)
         wvWare::UString text = listInfo->text().text;
@@ -1590,7 +1590,7 @@ void KWordTextHandler::closeList()
     kDebug(30513);
     // Set the correct XML writer.
     //
-    KoXmlWriter *writer = m_usedListWriters.pop();		// get the last used writer from stack
+    KXmlWriter *writer = m_usedListWriters.pop();		// get the last used writer from stack
 
     //TODO should probably test this more, to make sure it does work this way
     //for level 0, we need to close the last item and the list

@@ -23,7 +23,7 @@
 #include <kdebug.h>
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
@@ -110,7 +110,7 @@ QString SCPageLayout::saveOdf(KoPASavingContext &context) const
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);
+    KXmlWriter elementWriter(&buffer);
 
     QList<SCPlaceholder *>::const_iterator it(m_placeholders.begin());
     for (; it != m_placeholders.end(); ++it) {

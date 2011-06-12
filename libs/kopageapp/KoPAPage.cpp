@@ -27,7 +27,7 @@
 #include <KoShapeLayer.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStyleStack.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KoZoomHandler.h>
 

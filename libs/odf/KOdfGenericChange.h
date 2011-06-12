@@ -30,7 +30,7 @@
 #include <kdebug.h>
 
 class KOdfGenericChanges;
-class KoXmlWriter;
+class KXmlWriter;
 
 /**
  * A generic change, i.e. basically a collection of properties and a name.
@@ -109,11 +109,11 @@ public:
      *
      * What is meant here is that the contents of the QString
      * will be written out literally. This means you should use
-     * KoXmlWriter to generate it:
+     * KXmlWriter to generate it:
      * @code
      * QBuffer buffer;
      * buffer.open( QIODevice::WriteOnly );
-     * KoXmlWriter elementWriter( &buffer );  // TODO pass indentation level
+     * KXmlWriter elementWriter( &buffer );  // TODO pass indentation level
      * elementWriter.startElement( "..." );
      * ...
      * elementWriter.endElement();
@@ -129,10 +129,10 @@ public:
 
     /**
      *  Write the definition of this change to @p writer, using the OASIS format.
-     *  @param writer the KoXmlWriter in which the element will be created and filled in
+     *  @param writer the KXmlWriter in which the element will be created and filled in
      *  @param name must come from the collection.
      */
-    void writeChange(KoXmlWriter *writer, const QString &name) const;
+    void writeChange(KXmlWriter *writer, const QString &name) const;
 
     /**
      *  QMap requires a complete sorting order.
@@ -154,11 +154,11 @@ private:
         return QString();
     }
 
-    void writeChangeMetaData(KoXmlWriter *writer) const;
+    void writeChangeMetaData(KXmlWriter *writer) const;
 
-    void writeODF12Change(KoXmlWriter *writer, const QString &name) const;
+    void writeODF12Change(KXmlWriter *writer, const QString &name) const;
 
-    void writeDeltaXmlChange(KoXmlWriter *writer, const QString &name) const;
+    void writeDeltaXmlChange(KXmlWriter *writer, const QString &name) const;
 
 private:
     // Note that the copy constructor and assignment operator are allowed.

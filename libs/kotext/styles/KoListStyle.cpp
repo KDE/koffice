@@ -28,7 +28,7 @@
 #include <KOdfStyleStack.h>
 #include <KOdfStylesReader.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <kdebug.h>
 #include <QTextCursor>
@@ -198,7 +198,7 @@ void KoListStyle::saveOdf(KOdfGenericStyle &style)
     }
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
     QMapIterator<int, KoListLevelProperties> it(d->levels);
     while (it.hasNext()) {
         it.next();

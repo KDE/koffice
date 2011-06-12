@@ -26,7 +26,7 @@
 #include <QtCore/QSharedData>
 #include "koodf_export.h"
 
-class KoXmlWriter;
+class KXmlWriter;
 class KoFontFacePrivate;
 
 /**
@@ -86,7 +86,7 @@ public:
 
     /** Saves font face definition into @a xmlWriter as a style:font-face element.
      */
-    void saveOdf(KoXmlWriter *xmlWriter) const;
+    void saveOdf(KXmlWriter *xmlWriter) const;
 
 private:
     QSharedDataPointer<KoFontFacePrivate> d;

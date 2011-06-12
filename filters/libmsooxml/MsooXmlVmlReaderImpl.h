@@ -622,7 +622,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_VML_background()
             m_pDocBkgImageWriter = NULL;
         }
         QBuffer* buffer = new QBuffer();
-        m_pDocBkgImageWriter = new KoXmlWriter(buffer);
+        m_pDocBkgImageWriter = new KXmlWriter(buffer);
 
         m_pDocBkgImageWriter->startElement("style:background-image");
         m_pDocBkgImageWriter->addAttribute("xlink:href", destinationName);

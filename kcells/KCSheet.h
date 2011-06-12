@@ -55,7 +55,7 @@ class KoOdfSettings;
 class KOdfStylesReader;
 class KoShape;
 class KoShapeSavingContext;
-class KoXmlWriter;
+class KXmlWriter;
 
 class KCCell;
 class KCCellStorage;
@@ -379,12 +379,12 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    void saveOdfHeaderFooter(KoXmlWriter &xmlWriter) const;
+    void saveOdfHeaderFooter(KXmlWriter &xmlWriter) const;
 
     /**
      * \ingroup OpenDocument
      */
-    void saveOdfBackgroundImage(KoXmlWriter& xmlWriter) const;
+    void saveOdfBackgroundImage(KXmlWriter& xmlWriter) const;
 
     /**
      * \ingroup OpenDocument
@@ -394,7 +394,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    void saveOdfSettings(KoXmlWriter &settingsWriter) const;
+    void saveOdfSettings(KXmlWriter &settingsWriter) const;
 
     void loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& shapeContext);
     //
@@ -903,24 +903,24 @@ protected:
     /**
      * \ingroup OpenDocument
      */
-    void saveOdfColRowCell(KoXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles,
+    void saveOdfColRowCell(KXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles,
                            int maxCols, int maxRows, KCOdfSavingContext& tableContext);
 
     /**
      * \ingroup OpenDocument
      */
-    void saveOdfCells(KoXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles, int row, int maxCols,
+    void saveOdfCells(KXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles, int row, int maxCols,
                       KCOdfSavingContext& tableContext);
 
     /**
      * \ingroup OpenDocument
      */
-    void convertPart(const QString & part, KoXmlWriter & writer) const;
+    void convertPart(const QString & part, KXmlWriter & writer) const;
 
     /**
      * \ingroup OpenDocument
      */
-    void addText(const QString & text, KoXmlWriter & writer) const;
+    void addText(const QString & text, KXmlWriter & writer) const;
 
     /**
      * \ingroup OpenDocument

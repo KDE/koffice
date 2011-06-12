@@ -23,7 +23,7 @@
 #include <QRect>
 
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include "KCCellStorage.h"
 #include "Database.h"
@@ -40,7 +40,7 @@ public:
     enum Type { And, Or, Condition };
     virtual Type type() const = 0;
     virtual bool loadOdf(const KoXmlElement& element) = 0;
-    virtual void saveOdf(KoXmlWriter& xmlWriter) = 0;
+    virtual void saveOdf(KXmlWriter& xmlWriter) = 0;
     virtual bool evaluate(const Database& database, int index) const = 0;
     virtual bool isEmpty() const = 0;
     virtual QHash<QString, Filter::Comparison> conditions(int fieldNumber) const = 0;
@@ -63,7 +63,7 @@ public:
         return AbstractCondition::And;
     }
     virtual bool loadOdf(const KoXmlElement& parent);
-    virtual void saveOdf(KoXmlWriter& xmlWriter) {
+    virtual void saveOdf(KXmlWriter& xmlWriter) {
         if (!list.count())
             return;
         xmlWriter.startElement("table:filter-and");
@@ -131,7 +131,7 @@ public:
         return AbstractCondition::Or;
     }
     virtual bool loadOdf(const KoXmlElement& element);
-    virtual void saveOdf(KoXmlWriter& xmlWriter) {
+    virtual void saveOdf(KXmlWriter& xmlWriter) {
         if (!list.count())
             return;
         xmlWriter.startElement("table:filter-or");
@@ -275,7 +275,7 @@ public:
         }
         return true;
     }
-    virtual void saveOdf(KoXmlWriter& xmlWriter) {
+    virtual void saveOdf(KXmlWriter& xmlWriter) {
         if (fieldNumber < 0)
             return;
         xmlWriter.startElement("table:filter-condition");
@@ -684,7 +684,7 @@ bool Filter::loadOdf(const KoXmlElement& element, const KCMap* map)
     return true;
 }
 
-void Filter::saveOdf(KoXmlWriter& xmlWriter) const
+void Filter::saveOdf(KXmlWriter& xmlWriter) const
 {
     if (!d->condition)
         return;

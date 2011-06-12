@@ -35,7 +35,7 @@
 #include <KoFilterChain.h>
 #include <KOdfWriteStore.h>
 #include <KOdfStorageDevice.h>
-//#include <KoXmlWriter.h>
+//#include <KXmlWriter.h>
 
 #include <document.h>
 #include <wv2/src/word95_generated.h>
@@ -141,8 +141,8 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
         KOdfStore *m_store;
         KOdfGenericStyles *m_genStyles;
         Document *m_document;
-        KoXmlWriter* m_contentWriter;
-        KoXmlWriter* m_bodyWriter;
+        KXmlWriter* m_contentWriter;
+        KXmlWriter* m_bodyWriter;
     };
 
     storeout = KOdfStore::createStore(outputFile, KOdfStore::Write,
@@ -165,20 +165,20 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
     //create a writer for meta.xml
     QBuffer buf;
     buf.open(QIODevice::WriteOnly);
-    KoXmlWriter metaWriter(&buf);
+    KXmlWriter metaWriter(&buf);
 
     //create a writer for manifest.xml
     QBuffer manifestBuf;
     manifestBuf.open(QIODevice::WriteOnly);
-    KoXmlWriter manifestWriter(&manifestBuf);
+    KXmlWriter manifestWriter(&manifestBuf);
 
     //open contentWriter & bodyWriter *temp* writers
     //so we can write picture files while we parse
     QBuffer contentBuf;
     QBuffer bodyBuf;
-    KoXmlWriter *contentWriter = new KoXmlWriter(&contentBuf);
+    KXmlWriter *contentWriter = new KXmlWriter(&contentBuf);
     finalizer.m_contentWriter = contentWriter;
-    KoXmlWriter *bodyWriter = new KoXmlWriter(&bodyBuf);
+    KXmlWriter *bodyWriter = new KXmlWriter(&bodyBuf);
     finalizer.m_bodyWriter = bodyWriter;
     if (!bodyWriter || !contentWriter)
         return KoFilter::CreationError; //not sure if this is the right error to return
@@ -218,9 +218,9 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
     bodyWriter->endElement();//office:body
 
     //now create real content/body writers & dump the information there
-    KoXmlWriter* realContentWriter = oasisStore.contentWriter();
+    KXmlWriter* realContentWriter = oasisStore.contentWriter();
     realContentWriter->addCompleteElement(&contentBuf);
-    KoXmlWriter* realBodyWriter = oasisStore.bodyWriter();
+    KXmlWriter* realBodyWriter = oasisStore.bodyWriter();
     realBodyWriter->addCompleteElement(&bodyBuf);
 
     //now close content & body writers
@@ -232,7 +232,7 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
     kDebug(30513) << "closed content & body writers.";
 
     //create the manifest file
-    KoXmlWriter *realManifestWriter = oasisStore.manifestWriter("application/vnd.oasis.opendocument.text");
+    KXmlWriter *realManifestWriter = oasisStore.manifestWriter("application/vnd.oasis.opendocument.text");
     //create the styles.xml file
     mainStyles->saveOdfStylesDotXml(storeout, realManifestWriter);
     realManifestWriter->addManifestEntry("content.xml", "text/xml");
@@ -245,7 +245,7 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
         return KoFilter::CreationError;
 
     KOdfStorageDevice metaDev(storeout);
-    KoXmlWriter *meta = KOdfWriteStore::createOasisXmlWriter(&metaDev, "office:document-meta");
+    KXmlWriter *meta = KOdfWriteStore::createOasisXmlWriter(&metaDev, "office:document-meta");
     meta->startElement("office:meta");
     meta->addCompleteElement(&buf);
     meta->endElement(); //office:meta

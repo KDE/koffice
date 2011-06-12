@@ -28,7 +28,7 @@
 #include <MsooXmlThemesReader.h>
 #include <MsooXmlCommonReader.h>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 class XlsxImport;
 class XlsxXmlWorksheetReaderContext;
@@ -79,14 +79,14 @@ class XlsxDrawingObject {
         void setPicture(XlsxXmlEmbeddedPicture* picture) { m_type = Picture; m_picture = picture; }
         void setChart(XlsxXmlChartReaderContext* chart) { m_type = Chart; m_chart = chart; }
         void setDiagram(MSOOXML::MsooXmlDiagramReaderContext* diagram) { m_type = Diagram; m_diagram = diagram; }
-        KoXmlWriter* setShape(XlsxShape* shape);
-        void save(KoXmlWriter* xmlWriter);
+        KXmlWriter* setShape(XlsxShape* shape);
+        void save(KXmlWriter* xmlWriter);
     private:
         QRect positionRect() const;
         QString cellAddress(const QString &sheetname, int row, int column) const;
         QString fromCellAddress() const;
         QString toCellAddress() const;
-        KoXmlWriter* m_shapeBody;
+        KXmlWriter* m_shapeBody;
 };
 
 class XlsxXmlDrawingReaderContext : public MSOOXML::MsooXmlReaderContext
@@ -144,7 +144,7 @@ class XlsxXmlEmbeddedPicture
 public:
     XlsxXmlEmbeddedPicture();
 
-    bool saveXml(KoXmlWriter *xmlWriter);   // save the .xml part of the picture (the picture itself isn't stored here)
+    bool saveXml(KXmlWriter *xmlWriter);   // save the .xml part of the picture (the picture itself isn't stored here)
     void setImageXml(const QString imageXml);
 
     QString m_imageXml;                               // draw:image of the image

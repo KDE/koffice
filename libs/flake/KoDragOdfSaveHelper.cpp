@@ -35,7 +35,7 @@ KoDragOdfSaveHelper::~KoDragOdfSaveHelper()
     delete d_ptr;
 }
 
-KoShapeSavingContext *KoDragOdfSaveHelper::context(KoXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles,
+KoShapeSavingContext *KoDragOdfSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles,
         KoEmbeddedDocumentSaver & embeddedSaver)
 {
     Q_D(KoDragOdfSaveHelper);

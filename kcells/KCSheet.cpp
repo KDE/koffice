@@ -55,7 +55,7 @@
 #include <KOdfStyleStack.h>
 #include <KUnit.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfStore.h>
 #include <KoText.h>
 #include <KoStyleManager.h>
@@ -2194,7 +2194,7 @@ bool KCSheet::compareRows(int row1, int row2, int& maxCols, KCOdfSavingContext& 
     return true;
 }
 
-void KCSheet::saveOdfHeaderFooter(KoXmlWriter &xmlWriter) const
+void KCSheet::saveOdfHeaderFooter(KXmlWriter &xmlWriter) const
 {
     QString headerLeft = print()->headerFooter()->headLeft();
     QString headerCenter = print()->headerFooter()->headMid();
@@ -2276,13 +2276,13 @@ void KCSheet::saveOdfHeaderFooter(KoXmlWriter &xmlWriter) const
 
 }
 
-void KCSheet::addText(const QString & text, KoXmlWriter & writer) const
+void KCSheet::addText(const QString & text, KXmlWriter & writer) const
 {
     if (!text.isEmpty())
         writer.addTextNode(text);
 }
 
-void KCSheet::convertPart(const QString & part, KoXmlWriter & xmlWriter) const
+void KCSheet::convertPart(const QString & part, KXmlWriter & xmlWriter) const
 {
     QString text;
     QString var;
@@ -2381,7 +2381,7 @@ void KCSheet::convertPart(const QString & part, KoXmlWriter & xmlWriter) const
     kDebug(36003) << " text end :" << text << " var :" << var;
 }
 
-void KCSheet::saveOdfBackgroundImage(KoXmlWriter& xmlWriter) const
+void KCSheet::saveOdfBackgroundImage(KXmlWriter& xmlWriter) const
 {
     const BackgroundImageProperties& properties = backgroundImageProperties();
     xmlWriter.startElement("style:backgroundImage");
@@ -2460,7 +2460,7 @@ void KCSheet::loadOdfSettings(const KoOdfSettings::NamedMap &settings)
     setShowColumnNumber(items.parseConfigItemBool("ShowColumnNumber"));
 }
 
-void KCSheet::saveOdfSettings(KoXmlWriter &settingsWriter) const
+void KCSheet::saveOdfSettings(KXmlWriter &settingsWriter) const
 {
     //not into each page into oo spec
     settingsWriter.addConfigItem("ShowZeroValues", !getHideZero());
@@ -2477,7 +2477,7 @@ void KCSheet::saveOdfSettings(KoXmlWriter &settingsWriter) const
 
 bool KCSheet::saveOdf(KCOdfSavingContext& tableContext)
 {
-    KoXmlWriter & xmlWriter = tableContext.shapeContext.xmlWriter();
+    KXmlWriter & xmlWriter = tableContext.shapeContext.xmlWriter();
     KOdfGenericStyles & mainStyles = tableContext.shapeContext.mainStyles();
     xmlWriter.startElement("table:table");
     xmlWriter.addAttribute("table:name", sheetName());
@@ -2542,7 +2542,7 @@ QString KCSheet::saveOdfSheetStyleName(KOdfGenericStyles &mainStyles)
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
     saveOdfHeaderFooter(elementWriter);
 
     QString elementContents = QString::fromUtf8(buffer.buffer(), buffer.buffer().size());
@@ -2554,7 +2554,7 @@ QString KCSheet::saveOdfSheetStyleName(KOdfGenericStyles &mainStyles)
     if( !backgroundImage().isNull() ) {
         QBuffer bgBuffer;
         bgBuffer.open(QIODevice::WriteOnly);
-        KoXmlWriter bgWriter(&bgBuffer); //TODO pass identation level
+        KXmlWriter bgWriter(&bgBuffer); //TODO pass identation level
         saveOdfBackgroundImage(bgWriter);
 
         const QString bgContent = QString::fromUtf8(bgBuffer.buffer(), bgBuffer.size());
@@ -2565,7 +2565,7 @@ QString KCSheet::saveOdfSheetStyleName(KOdfGenericStyles &mainStyles)
 }
 
 
-void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles,
+void KCSheet::saveOdfColRowCell(KXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles,
                               int maxCols, int maxRows, KCOdfSavingContext& tableContext)
 {
     kDebug(36003) << "KCSheet::saveOdfColRowCell:" << d->name;
@@ -2805,7 +2805,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KOdfGenericStyles &mainS
     }
 }
 
-void KCSheet::saveOdfCells(KoXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles, int row, int maxCols,
+void KCSheet::saveOdfCells(KXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles, int row, int maxCols,
                          KCOdfSavingContext& tableContext)
 {
     int i = 1;

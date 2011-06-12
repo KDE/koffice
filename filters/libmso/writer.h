@@ -27,7 +27,7 @@
 /**
  * Helper class that for writing xml.
  *
- * Besides containing KoXmlWriter, this class keeps track of the coordinate
+ * Besides containing KXmlWriter, this class keeps track of the coordinate
  * system. It has convenience functions for writing lengths in physical
  * dimensions (currently only mm).
  */
@@ -42,7 +42,7 @@ public:
     /**
      * Xml writer that writes into content.xml.
      */
-    KoXmlWriter& xml;
+    KXmlWriter& xml;
     /**
      * Styles for the document that is being created.
      **/
@@ -57,7 +57,7 @@ public:
      *
      * @param xmlWriter The xml writer that writes content.xml
      */
-    Writer(KoXmlWriter& xmlWriter, KOdfGenericStyles& kostyles,
+    Writer(KXmlWriter& xmlWriter, KOdfGenericStyles& kostyles,
            bool stylexml = false);
     /**
      * Create a new writer with a new coordinate system.

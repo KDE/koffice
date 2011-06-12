@@ -21,11 +21,11 @@
 #include "KoTextRdfCore_p.h"
 #include <kdebug.h>
 #include <KOdfStorageDevice.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <QtCore/QFile>
 using namespace Soprano;
 
-bool KoTextRdfCore::saveRdf(Soprano::Model *model, Soprano::StatementIterator triples, KOdfStore *store, KoXmlWriter *manifestWriter, const QString &fileName)
+bool KoTextRdfCore::saveRdf(Soprano::Model *model, Soprano::StatementIterator triples, KOdfStore *store, KXmlWriter *manifestWriter, const QString &fileName)
 {
     bool ok = false;
 
@@ -60,7 +60,7 @@ bool KoTextRdfCore::saveRdf(Soprano::Model *model, Soprano::StatementIterator tr
     return ok;
 }
 
-bool KoTextRdfCore::createAndSaveManifest(Soprano::Model *docmodel, const QMap<QString, QString> &idmap, KOdfStore *store, KoXmlWriter *manifestWriter)
+bool KoTextRdfCore::createAndSaveManifest(Soprano::Model *docmodel, const QMap<QString, QString> &idmap, KOdfStore *store, KXmlWriter *manifestWriter)
 {
     Soprano::Model *tmpmodel(Soprano::createModel());
     QMap<QString, QString>::const_iterator iditer = idmap.constBegin();

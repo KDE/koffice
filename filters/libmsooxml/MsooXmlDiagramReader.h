@@ -47,7 +47,7 @@ public:
     Diagram::Context* m_context;
     explicit MsooXmlDiagramReaderContext(KOdfGenericStyles* styles);
     virtual ~MsooXmlDiagramReaderContext();
-    void saveIndex(KoXmlWriter* xmlWriter, const QRect &rect);
+    void saveIndex(KXmlWriter* xmlWriter, const QRect &rect);
 };
 
 class MSOOXML_EXPORT MsooXmlDiagramReader : public MSOOXML::MsooXmlCommonReader

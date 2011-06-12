@@ -24,7 +24,7 @@
 #include "DocxXmlFootnoteReader.h"
 #include <MsooXmlSchemas.h>
 #include <MsooXmlUtils.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <limits.h>
 
 #define MSOOXML_CURRENT_NS "w"
@@ -182,8 +182,8 @@ KoFilter::ConversionStatus DocxXmlFootnoteReader::read_footnote()
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter *oldBody = body;
-    body = new KoXmlWriter(&buffer);
+    KXmlWriter *oldBody = body;
+    body = new KXmlWriter(&buffer);
 
     while (!atEnd()) {
         readNext();

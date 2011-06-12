@@ -29,7 +29,7 @@ GreyscaleFilterEffect::~GreyscaleFilterEffect()
 {
 }
 
-void GreyscaleFilterEffect::save(KoXmlWriter& /*writer*/)
+void GreyscaleFilterEffect::save(KXmlWriter& /*writer*/)
 {
 }
 

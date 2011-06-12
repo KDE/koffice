@@ -37,7 +37,7 @@
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 KoTableCellStylePrivate::KoTableCellStylePrivate()
     : parentStyle(0)

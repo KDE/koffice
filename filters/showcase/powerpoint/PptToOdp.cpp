@@ -28,7 +28,7 @@
 #include <kdebug.h>
 #include <KoOdf.h>
 #include <KOdfWriteStore.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <QtCore/QBuffer>
 
@@ -513,7 +513,7 @@ PptToOdp::~PptToOdp()
 }
 
 QMap<QByteArray, QString>
-createPictures(POLE::Storage& storage, KOdfStore* store, KoXmlWriter* manifest)
+createPictures(POLE::Storage& storage, KOdfStore* store, KXmlWriter* manifest)
 {
     QMap<QByteArray, QString> fileNames;
     POLE::Stream* stream = new POLE::Stream(&storage, "/Pictures");
@@ -530,7 +530,7 @@ createPictures(POLE::Storage& storage, KOdfStore* store, KoXmlWriter* manifest)
     return fileNames;
 }
 QMap<quint16, QString>
-createBulletPictures(const PP9DocBinaryTagExtension* pp9, KOdfStore* store, KoXmlWriter* manifest)
+createBulletPictures(const PP9DocBinaryTagExtension* pp9, KOdfStore* store, KXmlWriter* manifest)
 {
     QMap<quint16, QString> ids;
     if (!pp9 || !pp9->blipCollectionContainer) {
@@ -599,7 +599,7 @@ KoFilter::ConversionStatus PptToOdp::doConversion(POLE::Storage& storage,
         KOdfStore* storeout)
 {
     KOdfWriteStore odfWriter(storeout);
-    KoXmlWriter* manifest = odfWriter.manifestWriter(
+    KXmlWriter* manifest = odfWriter.manifestWriter(
                                 KoOdf::mimeType(KoOdf::Presentation));
 
     // store the images from the 'Pictures' stream
@@ -1372,7 +1372,7 @@ void PptToOdp::defineListStyle(KOdfGenericStyle& style, quint8 level,
 {
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter out(&buffer);
+    KXmlWriter out(&buffer);
 
     QString bulletSize = bulletSizeToSizeString(i.pf);
     if (bulletSize.isNull()) {
@@ -1583,7 +1583,7 @@ void PptToOdp::defineMasterStyles(KOdfGenericStyles& styles)
             }
             if (finder.sp) {
                 QBuffer buffer;
-                KoXmlWriter dummy(&buffer);
+                KXmlWriter dummy(&buffer);
                 Writer w(dummy, styles, true);
                 DrawClient drawclient(this);
                 ODrawToOdf odrawtoodf(drawclient);
@@ -1857,7 +1857,7 @@ void PptToOdp::createMainStyles(KOdfGenericStyles& styles)
     QBuffer notesBuffer;
     if (p->notesMaster) { // draw the notes master
         notesBuffer.open(QIODevice::WriteOnly);
-        KoXmlWriter writer(&notesBuffer);
+        KXmlWriter writer(&notesBuffer);
         Writer out(writer, styles, true);
 
         writer.startElement("presentation:notes");
@@ -1889,7 +1889,7 @@ void PptToOdp::createMainStyles(KOdfGenericStyles& styles)
         currentMaster = m;
         QBuffer buffer;
         buffer.open(QIODevice::WriteOnly);
-        KoXmlWriter writer(&buffer);
+        KXmlWriter writer(&buffer);
         Writer out(writer, styles, true);
 
         if (drawing->OfficeArtDg.groupShape) {
@@ -1923,7 +1923,7 @@ QByteArray PptToOdp::createContent(KOdfGenericStyles& styles)
 {
     QBuffer presentationBuffer;
     presentationBuffer.open(QIODevice::WriteOnly);
-    KoXmlWriter presentationWriter(&presentationBuffer);
+    KXmlWriter presentationWriter(&presentationBuffer);
 
     processDeclaration(&presentationWriter);
 
@@ -1935,7 +1935,7 @@ QByteArray PptToOdp::createContent(KOdfGenericStyles& styles)
     QByteArray contentData;
     QBuffer contentBuffer(&contentData);
     contentBuffer.open(QIODevice::WriteOnly);
-    KoXmlWriter contentWriter(&contentBuffer);
+    KXmlWriter contentWriter(&contentBuffer);
 
     contentWriter.startDocument("office:document-content");
     contentWriter.startElement("office:document-content");
@@ -2031,7 +2031,7 @@ namespace
 * @param count how many lists and list items to leave open
 * @param levels the list of levels to remove from
 */
-void writeTextObjectDeIndent(KoXmlWriter& xmlWriter, const int count,
+void writeTextObjectDeIndent(KXmlWriter& xmlWriter, const int count,
                              QStack<QString>& levels)
 {
     while (levels.size() > count) {
@@ -2042,7 +2042,7 @@ void writeTextObjectDeIndent(KoXmlWriter& xmlWriter, const int count,
         }
     }
 }
-void addListElement(KoXmlWriter& xmlWriter, QStack<QString>& levels,
+void addListElement(KXmlWriter& xmlWriter, QStack<QString>& levels,
                     const QString& listStyle)
 {
     // if the context is a text:list, a text:list-item is needed
@@ -2058,7 +2058,7 @@ void addListElement(KoXmlWriter& xmlWriter, QStack<QString>& levels,
 }
 
 void
-getMeta(const TextContainerMeta& m, KoXmlWriter& out)
+getMeta(const TextContainerMeta& m, KXmlWriter& out)
 {
     const SlideNumberMCAtom* a = m.meta.get<SlideNumberMCAtom>();
     const DateTimeMCAtom* b = m.meta.get<DateTimeMCAtom>();
@@ -2890,7 +2890,7 @@ quint32 PptToOdp::getTextType(const PptOfficeArtClientTextBox* clientTextbox,
     return 99; // 99 means it is undefined here
 }
 
-void PptToOdp::processDeclaration(KoXmlWriter* xmlWriter)
+void PptToOdp::processDeclaration(KXmlWriter* xmlWriter)
 {
     const HeadersFootersAtom* headerFooterAtom = 0;
     QSharedPointer<UserDateAtom> userDateAtom;

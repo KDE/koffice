@@ -24,7 +24,7 @@
 
 #include <KoShapePainter.h>
 #include <KOdfGenericStyle.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
@@ -59,11 +59,11 @@ void KoPAMasterPage::saveOdf(KoShapeSavingContext &context) const
     pageMaster.addAttribute("style:display-name", name());
     pageMaster.addAttribute("draw:style-name", saveOdfPageStyle(paContext));
 
-    KoXmlWriter &savedWriter = paContext.xmlWriter();
+    KXmlWriter &savedWriter = paContext.xmlWriter();
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter xmlWriter(&buffer);
+    KXmlWriter xmlWriter(&buffer);
 
     paContext.setXmlWriter(xmlWriter);
 

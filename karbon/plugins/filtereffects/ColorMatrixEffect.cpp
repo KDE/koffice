@@ -20,7 +20,7 @@
 #include "ColorMatrixEffect.h"
 #include "ColorChannelConversion.h"
 #include <KoFilterEffectRenderContext.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KLocale>
 #include <QtCore/QRect>
@@ -239,7 +239,7 @@ bool ColorMatrixEffect::load(const KoXmlElement &element, const KoFilterEffectLo
     return true;
 }
 
-void ColorMatrixEffect::save(KoXmlWriter &writer)
+void ColorMatrixEffect::save(KXmlWriter &writer)
 {
     writer.startElement(ColorMatrixEffectId);
 

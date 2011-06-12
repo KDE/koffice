@@ -31,7 +31,7 @@
 #include <KoShapeSavingContext.h>
 #include <KUnit.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoPASavingContext.h>
 
 #include "SCDocument.h"
@@ -99,7 +99,7 @@ KoShape *SCNotes::textShape()
 
 void SCNotes::saveOdf(KoShapeSavingContext &context) const
 {
-    KoXmlWriter &writer = context.xmlWriter();
+    KXmlWriter &writer = context.xmlWriter();
     writer.startElement("presentation:notes");
 
     context.addOption(KoShapeSavingContext::PresentationShape);

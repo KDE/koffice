@@ -32,7 +32,7 @@
 class QDomDocument;
 class QString;
 
-class KoXmlWriter;
+class KXmlWriter;
 
 class KCMap;
 class KCRegion;
@@ -73,7 +73,7 @@ public:
     /// \ingroup OpenDocument
     void loadOdf(const KoXmlElement& body);
     /// \ingroup OpenDocument
-    void saveOdf(KoXmlWriter& xmlWriter) const;
+    void saveOdf(KXmlWriter& xmlWriter) const;
 
     /// \ingroup NativeFormat
     void loadXML(const KoXmlElement& element);

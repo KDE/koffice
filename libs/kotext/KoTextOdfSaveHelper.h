@@ -25,7 +25,7 @@
 #include "kotext_export.h"
 
 class KoTextShapeData;
-class KoXmlWriter;
+class KXmlWriter;
 namespace Soprano
 {
     class Model;
@@ -40,7 +40,7 @@ public:
     /// reimplemented
     virtual bool writeBody();
 
-    virtual KoShapeSavingContext *context(KoXmlWriter *bodyWriter, KOdfGenericStyles &mainStyles, KoEmbeddedDocumentSaver &embeddedSaver);
+    virtual KoShapeSavingContext *context(KXmlWriter *bodyWriter, KOdfGenericStyles &mainStyles, KoEmbeddedDocumentSaver &embeddedSaver);
 
     /**
      * The Rdf Model ownership is not taken, you must still delete it,

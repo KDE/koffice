@@ -19,7 +19,7 @@
 
 #include "MergeEffect.h"
 #include "KoViewConverter.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include <KLocale>
 #include <QtCore/QRect>
@@ -82,7 +82,7 @@ bool MergeEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingC
     return true;
 }
 
-void MergeEffect::save(KoXmlWriter &writer)
+void MergeEffect::save(KXmlWriter &writer)
 {
     writer.startElement(MergeEffectId);
 

@@ -38,7 +38,7 @@
 #include "animations/SCAnimationStep.h"
 
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KOdfStyleStack.h>
@@ -181,7 +181,7 @@ bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context
 
 void SCPage::saveOdfPageContent(KoPASavingContext &paContext) const
 {
-    KoXmlWriter &writer(paContext.xmlWriter());
+    KXmlWriter &writer(paContext.xmlWriter());
     if (layout()) {
         SCPageLayoutSharedSavingData * layouts = dynamic_cast<SCPageLayoutSharedSavingData *>(paContext.sharedData(KPR_PAGE_LAYOUT_SHARED_SAVING_ID));
         Q_ASSERT(layouts);
@@ -303,7 +303,7 @@ bool SCPage::saveOdfAnimations(KoPASavingContext &paContext) const
     SCPageEffect *pageEffect = data->pageEffect();
     QList<SCAnimationStep*> steps = animationSteps();
     if (pageEffect || steps.size() > 1) {
-        KoXmlWriter &writer = paContext.xmlWriter();
+        KXmlWriter &writer = paContext.xmlWriter();
         writer.startElement("anim:par");
         writer.addAttribute("presentation:node-type", "timing-root");
 

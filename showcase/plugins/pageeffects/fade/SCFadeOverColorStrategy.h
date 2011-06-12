@@ -40,7 +40,7 @@ public:
     virtual void finish(const SCPageEffect::Data &data);
 
     // reimplemented
-    virtual void saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const;
+    virtual void saveOdfSmilAttributes(KXmlWriter & xmlWriter) const;
 
     // reimplemented
     virtual void saveOdfSmilAttributes(KOdfGenericStyle & style) const;

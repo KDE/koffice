@@ -32,7 +32,7 @@
 #include <deque>
 #include <QRectF>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 
 class Document;
@@ -88,7 +88,7 @@ class KWordTableHandler : public QObject, public wvWare::TableHandler
 {
     Q_OBJECT
 public:
-    KWordTableHandler(KoXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles);
+    KWordTableHandler(KXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles);
 
     //////// TableHandler interface
     virtual void tableRowStart(wvWare::SharedPtr<const wvWare::Word97::TAP> tap);
@@ -113,14 +113,14 @@ protected:
 private:
     // Table can be present in {header, footer, footnote, endnote, body}.
     // @return the correct writer.
-    KoXmlWriter* currentWriter() const;
+    KXmlWriter* currentWriter() const;
 
     // The document owning this table handler.
     Document*     m_document;
 
     KWord::Table* m_currentTable;
 
-    KoXmlWriter*  m_bodyWriter;
+    KXmlWriter*  m_bodyWriter;
     KOdfGenericStyles*  m_mainStyles;
 
     int m_row;

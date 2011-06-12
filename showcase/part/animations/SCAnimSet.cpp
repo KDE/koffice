@@ -32,7 +32,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextBlockData.h>
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 #include <kdebug.h>
 
 SCAnimSet::SCAnimSet(SCShapeAnimation *shapeAnimation)
@@ -64,7 +64,7 @@ bool SCAnimSet::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &cont
 
 bool SCAnimSet::saveOdf(KoPASavingContext &paContext) const
 {
-    KoXmlWriter &writer = paContext.xmlWriter();
+    KXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:set");
     saveAttribute(paContext);
     writer.endElement();
@@ -74,7 +74,7 @@ bool SCAnimSet::saveOdf(KoPASavingContext &paContext) const
 bool SCAnimSet::saveAttribute(KoPASavingContext &paContext) const
 {
     SCAnimationBase::saveAttribute(paContext);
-    KoXmlWriter &writer = paContext.xmlWriter();
+    KXmlWriter &writer = paContext.xmlWriter();
     // Anim set allow only visibility change currently
     writer.addAttribute("smil:attributeName","visibility");
     writer.addAttribute("smil:to", m_visible ? "visible" : "hidden");

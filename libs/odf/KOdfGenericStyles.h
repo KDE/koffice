@@ -195,7 +195,7 @@ public:
      * @param manifestWriter
      * @return true on success
      */
-    bool saveOdfStylesDotXml(KOdfStore *store, KoXmlWriter *manifestWriter) const;
+    bool saveOdfStylesDotXml(KOdfStore *store, KXmlWriter *manifestWriter) const;
 
     /**
      * Placement of styles saved in saveOdfStyles() or inserted in insertRawOdfStyles().
@@ -234,7 +234,7 @@ public:
      * @param placement see StylesPlacement
      * @param xmlWriter target writer
      */
-    void saveOdfStyles(StylesPlacement placement, KoXmlWriter *xmlWriter) const;
+    void saveOdfStyles(StylesPlacement placement, KXmlWriter *xmlWriter) const;
 
     /**
      * Insert extra styles of given type.

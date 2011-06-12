@@ -43,7 +43,7 @@ class KZip;
 struct KoOdfWriters;
 class KoCharacterStyle;
 class KOdfStyleStack;
-class KoXmlWriter;
+class KXmlWriter;
 
 //! Returns from the current block if the result of @a call is not equal to KoFilter::OK
 #define RETURN_IF_ERROR( call ) \
@@ -357,11 +357,11 @@ MSOOXML_EXPORT void rotateString(const qreal rotation, const qreal width, const 
     Example of this is paragraphs style name: is should be written to style:name attribute but
     relevant XML elements (that we use for building the style) are appearing later.
     So we first output created XML to a buffer, then save the parent element with the style name
-    and use KoXmlWriter::addCompleteElement() to redirect the buffer contents as a subelement.
+    and use KXmlWriter::addCompleteElement() to redirect the buffer contents as a subelement.
 
      Example use:
      @code
-     KoXmlWriter *body = ...;
+     KXmlWriter *body = ...;
      XmlWriteBuffer buf;
      body = buf.setWriter(body);
      // ...
@@ -374,7 +374,7 @@ MSOOXML_EXPORT void rotateString(const qreal rotation, const qreal width, const 
      body->endElement();
      // We are done with the buffered body writer, now release it and restore the original body writer.
      // This inserts all the XML buffered by buf into the original body writer
-     // (internally using KoXmlWriter::addCompleteElement()).
+     // (internally using KXmlWriter::addCompleteElement()).
      body = buf.releaseWriter();
      @endcode */
 class MSOOXML_EXPORT XmlWriteBuffer
@@ -391,19 +391,19 @@ public:
      Use releaseWriter() to write the changes back through the original writer.
      @return the newly created writer, which usually should be assigned
              to the variable passed as @a writer. */
-    KoXmlWriter* setWriter(KoXmlWriter* writer);
+    KXmlWriter* setWriter(KXmlWriter* writer);
 
-    //! Releases the original writer set before using setWriter(KoXmlWriter*&).
+    //! Releases the original writer set before using setWriter(KXmlWriter*&).
     /*! This inserts all the XML buffered by buffer into the original body writer passed in setWriter()
-     (internally using KoXmlWriter::addCompleteElement()).
+     (internally using KXmlWriter::addCompleteElement()).
      @return the original writer set in setWriter();
              this writer usually should be assigned back to the variable
              altered by the recent use of setWriter(). */
-    KoXmlWriter* releaseWriter();
+    KXmlWriter* releaseWriter();
 
     //! @return the original writer set in setWriter(). Does not change the state of the buffer.
     /*! Use this method when you need to access the remembered writer without releasing it. */
-    KoXmlWriter* originalWriter() const {
+    KXmlWriter* originalWriter() const {
         return m_origWriter;
     }
 
@@ -411,11 +411,11 @@ public:
     void clear();
 private:
     //! Internal, used in releaseWriter() and the destructor; Does not assert when there's nothing to release.
-    KoXmlWriter* releaseWriterInternal();
+    KXmlWriter* releaseWriterInternal();
 
     QBuffer m_buffer;
-    KoXmlWriter* m_origWriter;
-    KoXmlWriter* m_newWriter;
+    KXmlWriter* m_origWriter;
+    KXmlWriter* m_newWriter;
 };
 
 } // Utils namespace

@@ -25,7 +25,7 @@
 #include <QTextBlockUserData>
 #include <QTextTableCell>
 
-class KoXmlWriter;
+class KXmlWriter;
 class KoShapeSavingContext;
 class KoBookmark;
 class KoTextMeta;
@@ -97,7 +97,7 @@ public:
     static void attach(KoTextInlineRdf *inlineRdf, QTextCursor &cursor);
 
     bool loadOdf(const KoXmlElement &element);
-    bool saveOdf(KoShapeSavingContext &context, KoXmlWriter *writer);
+    bool saveOdf(KoShapeSavingContext &context, KXmlWriter *writer);
 
     /**
      * Get the RDF subject for this inline RDF
@@ -139,7 +139,7 @@ private:
     /**
      * Create a new and unique xml:id
      */
-    QString createXmlId(KoXmlWriter *writer = 0);
+    QString createXmlId(KXmlWriter *writer = 0);
 
     friend class KoRdfSemanticItem;
     friend class KoRdfFoaF;

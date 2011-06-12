@@ -19,7 +19,7 @@
 
 #include "KoTextOdfSaveHelper.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoOdf.h>
 #include "KoTextShapeData.h"
 #include <KOdfGenericChanges.h>
@@ -62,7 +62,7 @@ bool KoTextOdfSaveHelper::writeBody()
     if (d->to < d->from)
         qSwap(d->to, d->from);
 
-    KoXmlWriter & bodyWriter = d->context->xmlWriter();
+    KXmlWriter & bodyWriter = d->context->xmlWriter();
     bodyWriter.startElement("office:body");
     bodyWriter.startElement(KoOdf::bodyContentElement(KoOdf::Text, true));
 
@@ -74,7 +74,7 @@ bool KoTextOdfSaveHelper::writeBody()
     return true;
 }
 
-KoShapeSavingContext * KoTextOdfSaveHelper::context(KoXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles, KoEmbeddedDocumentSaver & embeddedSaver)
+KoShapeSavingContext * KoTextOdfSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles, KoEmbeddedDocumentSaver & embeddedSaver)
 {
 //    Q_ASSERT(d->context == 0);
 

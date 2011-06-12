@@ -35,7 +35,7 @@
 #include <Soprano/Soprano>
 
 class KOdfStore;
-class KoXmlWriter;
+class KXmlWriter;
 
 namespace KoTextRdfCore
 {
@@ -44,7 +44,7 @@ namespace KoTextRdfCore
  * given RDF/XML filename
  */
 bool saveRdf(Soprano::Model *model, Soprano::StatementIterator triples,
-        KOdfStore *store, KoXmlWriter *manifestWriter, const QString &fileName);
+        KOdfStore *store, KXmlWriter *manifestWriter, const QString &fileName);
 
 /**
  * Save the given RDF model to the manifest.rdf file. The idmap is used
@@ -52,7 +52,7 @@ bool saveRdf(Soprano::Model *model, Soprano::StatementIterator triples,
  * the content.xml that generated the idmap.
  */
 bool createAndSaveManifest(Soprano::Model *model,
-        const QMap<QString, QString> &idmap, KOdfStore *store, KoXmlWriter *manifestWriter);
+        const QMap<QString, QString> &idmap, KOdfStore *store, KXmlWriter *manifestWriter);
 
 /**
  * Load the manifest.rdf file from the ODF container store

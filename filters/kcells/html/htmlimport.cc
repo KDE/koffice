@@ -32,7 +32,7 @@
 #include <kdebug.h>
 #include <kpluginfactory.h>
 #include <KoFilterChain.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
@@ -89,7 +89,7 @@ KoFilter::ConversionStatus HTMLImport::convert(const QByteArray& from, const QBy
 
     m_mainStyles = new KOdfGenericStyles();
     
-    KoXmlWriter* bodyWriter = m_store->bodyWriter();
+    KXmlWriter* bodyWriter = m_store->bodyWriter();
     m_store->contentWriter(); // we need to create the instance even if the contentWriter is not used
     
     bodyWriter->startElement("office:body");
@@ -119,7 +119,7 @@ bool HTMLImport::createStyle()
     if (!m_store->store()->open("styles.xml"))
         return false;
     KOdfStorageDevice dev(m_store->store());
-    KoXmlWriter* stylesWriter = new KoXmlWriter(&dev);
+    KXmlWriter* stylesWriter = new KXmlWriter(&dev);
 
     stylesWriter->startDocument("office:document-styles");
     stylesWriter->startElement("office:document-styles");
@@ -149,7 +149,7 @@ bool HTMLImport::createMeta()
         return false;
 
     KOdfStorageDevice dev(m_store->store());
-    KoXmlWriter* metaWriter = new KoXmlWriter(&dev);
+    KXmlWriter* metaWriter = new KXmlWriter(&dev);
     metaWriter->startDocument("office:document-meta");
     metaWriter->startElement("office:document-meta");
     metaWriter->addAttribute("xmlns:office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
@@ -178,8 +178,8 @@ KoFilter::ConversionStatus HTMLImport::loadUrl(const KUrl &url)
 {
     kDebug() << url;
     
-    KoXmlWriter* bodyWriter = m_store->bodyWriter();
-    //KoXmlWriter* contentWriter = m_store->contentWriter();
+    KXmlWriter* bodyWriter = m_store->bodyWriter();
+    //KXmlWriter* contentWriter = m_store->contentWriter();
 
     QStringList sheets;
     {
@@ -238,8 +238,8 @@ KoFilter::ConversionStatus HTMLImport::loadUrl(const KUrl &url)
 
 void HTMLImport::parseNode(DOM::Node node)
 {
-    KoXmlWriter* bodyWriter = m_store->bodyWriter();
-    //KoXmlWriter* contentWriter = m_store->contentWriter();
+    KXmlWriter* bodyWriter = m_store->bodyWriter();
+    //KXmlWriter* contentWriter = m_store->contentWriter();
 
     // check if this is a text node.
     DOM::Text t = node;

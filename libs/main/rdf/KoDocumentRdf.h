@@ -38,7 +38,7 @@
 
 class QDomDocument;
 class KOdfStore;
-class KoXmlWriter;
+class KXmlWriter;
 class KoDocument;
 class KoCanvasBase;
 class KoTextEditor;
@@ -184,7 +184,7 @@ public:
      * @param store a pointer to a KOdfStore to save in
      * @return true if success
      */
-    bool saveOasis(KOdfStore *store, KoXmlWriter *manifestWriter);
+    bool saveOasis(KOdfStore *store, KXmlWriter *manifestWriter);
 
     /**
      * Used by KoRdfSemanticItem when creating new semantic items so that the
@@ -497,7 +497,7 @@ private:
      * content.xml, those Rdf statements must be saved as the
      * content.xml file is generated.
      */
-    bool saveRdf(KOdfStore *store, KoXmlWriter *manifestWriter, Soprano::Node &context);
+    bool saveRdf(KOdfStore *store, KXmlWriter *manifestWriter, Soprano::Node &context);
 
 
     /**
@@ -539,7 +539,7 @@ private:
     virtual bool completeLoading(KOdfStore *store);
 
     /// reimplemented
-    virtual bool completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context);
+    virtual bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext *context);
 
     KoDocumentRdfPrivate * const d;
 };

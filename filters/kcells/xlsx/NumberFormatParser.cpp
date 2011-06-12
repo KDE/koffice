@@ -24,7 +24,7 @@
 
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <MsooXmlUtils.h>
 
@@ -130,7 +130,7 @@ KOdfGenericStyle NumberFormatParser::parse(const QString& numberFormat)
 {
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter xmlWriter(&buffer);
+    KXmlWriter xmlWriter(&buffer);
 
     KOdfGenericStyle::Type type = KOdfGenericStyle::ParagraphAutoStyle;
 

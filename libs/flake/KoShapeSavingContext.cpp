@@ -26,7 +26,7 @@
 #include "KoShapeLayer.h"
 #include "KoImageData.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 
@@ -36,9 +36,9 @@
 
 class KoShapeSavingContextPrivate {
 public:
-    KoShapeSavingContextPrivate(KoXmlWriter&, KOdfGenericStyles&, KoEmbeddedDocumentSaver&);
+    KoShapeSavingContextPrivate(KXmlWriter&, KOdfGenericStyles&, KoEmbeddedDocumentSaver&);
 
-    KoXmlWriter *xmlWriter;
+    KXmlWriter *xmlWriter;
     KoShapeSavingContext::ShapeSavingOptions savingOptions;
     QMap<const KoShape *, QString> drawIds;
     QMap<const QTextBlockUserData*, QString> subIds;
@@ -57,7 +57,7 @@ public:
     KoEmbeddedDocumentSaver& embeddedSaver;
 };
 
-KoShapeSavingContextPrivate::KoShapeSavingContextPrivate(KoXmlWriter &w,
+KoShapeSavingContextPrivate::KoShapeSavingContextPrivate(KXmlWriter &w,
         KOdfGenericStyles &s, KoEmbeddedDocumentSaver &e)
         : xmlWriter(&w),
         savingOptions(0),
@@ -69,7 +69,7 @@ KoShapeSavingContextPrivate::KoShapeSavingContextPrivate(KoXmlWriter &w,
 {
 }
 
-KoShapeSavingContext::KoShapeSavingContext(KoXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
+KoShapeSavingContext::KoShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
         KoEmbeddedDocumentSaver &embeddedSaver)
     : d(new KoShapeSavingContextPrivate(xmlWriter, mainStyles, embeddedSaver))
 {
@@ -81,12 +81,12 @@ KoShapeSavingContext::~KoShapeSavingContext()
 {
 }
 
-KoXmlWriter & KoShapeSavingContext::xmlWriter()
+KXmlWriter & KoShapeSavingContext::xmlWriter()
 {
     return *d->xmlWriter;
 }
 
-void KoShapeSavingContext::setXmlWriter(KoXmlWriter &xmlWriter)
+void KoShapeSavingContext::setXmlWriter(KXmlWriter &xmlWriter)
 {
     d->xmlWriter = &xmlWriter;
 }
@@ -165,7 +165,7 @@ void KoShapeSavingContext::addLayerForSaving(KoShapeLayer *layer)
         d->layers.append(layer);
 }
 
-void KoShapeSavingContext::saveLayerSet(KoXmlWriter &xmlWriter)
+void KoShapeSavingContext::saveLayerSet(KXmlWriter &xmlWriter)
 {
     int unnamed = 0;
     QSet<QString> names;
@@ -234,7 +234,7 @@ void KoShapeSavingContext::addDataCenter(KoDataCenterBase * dataCenter)
     d->dataCenter.insert(dataCenter);
 }
 
-bool KoShapeSavingContext::saveDataCenter(KOdfStore *store, KoXmlWriter* manifestWriter)
+bool KoShapeSavingContext::saveDataCenter(KOdfStore *store, KXmlWriter* manifestWriter)
 {
     bool ok = true;
     foreach(KoDataCenterBase *dataCenter, d->dataCenter) {

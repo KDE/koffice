@@ -23,7 +23,7 @@
 #include <QWidget>
 #include <QPainter>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include "SCPageEffectStrategy.h"
 
@@ -96,7 +96,7 @@ int SCPageEffect::subType() const
     return m_strategy->subType();
 }
 
-void SCPageEffect::saveOdfSmilAttributes(KoXmlWriter &xmlWriter) const
+void SCPageEffect::saveOdfSmilAttributes(KXmlWriter &xmlWriter) const
 {
     qreal seconds = m_duration / qreal(1000.0);
     xmlWriter.addAttribute("smil:dur", seconds);

@@ -26,7 +26,7 @@
 
 #include <QDateTime>
 #include <KOdfStorageDevice.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <kconfig.h>
 #include <kdebug.h>
@@ -115,7 +115,7 @@ bool KoDocumentInfo::saveOasis(KOdfStore* store)
     saveParameters();
 
     KOdfStorageDevice dev(store);
-    KoXmlWriter* xmlWriter = KOdfWriteStore::createOasisXmlWriter(&dev,
+    KXmlWriter* xmlWriter = KOdfWriteStore::createOasisXmlWriter(&dev,
                              "office:document-meta");
     xmlWriter->startElement("office:meta");
 
@@ -172,7 +172,7 @@ QString KoDocumentInfo::aboutInfo(const QString& info) const
     return m_aboutInfo[ info ];
 }
 
-bool KoDocumentInfo::saveOasisAuthorInfo(KoXmlWriter &xmlWriter)
+bool KoDocumentInfo::saveOasisAuthorInfo(KXmlWriter &xmlWriter)
 {
     foreach(const QString & tag, m_authorTags) {
         if (!authorInfo(tag).isEmpty() && tag == "creator") {
@@ -248,7 +248,7 @@ QDomElement KoDocumentInfo::saveAuthorInfo(QDomDocument& doc)
     return e;
 }
 
-bool KoDocumentInfo::saveOasisAboutInfo(KoXmlWriter &xmlWriter)
+bool KoDocumentInfo::saveOasisAboutInfo(KXmlWriter &xmlWriter)
 {
     saveParameters();
 

@@ -25,7 +25,7 @@
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
 #include <KoTextOnShapeContainer.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KUnit.h>
 

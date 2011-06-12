@@ -28,7 +28,7 @@
 #include "EnhancedPathFormula.h"
 
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextOnShapeContainer.h>

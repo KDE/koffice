@@ -32,7 +32,7 @@
 #include "koodf_export.h"
 
 class KOdfGenericStyles;
-class KoXmlWriter;
+class KXmlWriter;
 
 /**
  * A generic style, i.e. basically a collection of properties and a name.
@@ -327,11 +327,11 @@ public:
      *
      * What is meant here is that the contents of the QString
      * will be written out literally. This means you should use
-     * KoXmlWriter to generate it:
+     * KXmlWriter to generate it:
      * @code
      * QBuffer buffer;
      * buffer.open( QIODevice::WriteOnly );
-     * KoXmlWriter elementWriter( &buffer );  // TODO pass indentation level
+     * KXmlWriter elementWriter( &buffer );  // TODO pass indentation level
      * elementWriter.startElement( "..." );
      * ...
      * elementWriter.endElement();
@@ -360,7 +360,7 @@ public:
 
     /**
      *  Write the definition of this style to @p writer, using the OASIS format.
-     *  @param writer the KoXmlWriter in which @p elementName will be created and filled in
+     *  @param writer the KXmlWriter in which @p elementName will be created and filled in
      *  @param styles the styles collection, used to look up the parent style
      *  @param elementName the name of the XML element, e.g. "style:style". Don't forget to
      *  pass style:default-style if isDefaultStyle().
@@ -371,16 +371,16 @@ public:
      *  @param closeElement set it to false to be able to add more child elements to the style element
      *  @param drawElement set it to true to add "draw:name" (used for gradient/hatch style) otherwise add "style:name"
      */
-    void writeStyle(KoXmlWriter *writer, const KOdfGenericStyles &styles, const char *elementName, const QString &name,
+    void writeStyle(KXmlWriter *writer, const KOdfGenericStyles &styles, const char *elementName, const QString &name,
                     const char *propertiesElementName, bool closeElement = true, bool drawElement = false) const;
 
     /**
      *  Write the definition of these style properties to @p writer, using the OASIS format.
-     *  @param writer the KoXmlWriter in which @p elementName will be created and filled in
+     *  @param writer the KXmlWriter in which @p elementName will be created and filled in
      *  @param type the type of properties to write
      *  @param parentStyle the parent to this style
      */
-    void writeStyleProperties(KoXmlWriter *writer, PropertyType type,
+    void writeStyleProperties(KXmlWriter *writer, PropertyType type,
                               const KOdfGenericStyle *parentStyle = 0) const;
 
     /**

@@ -34,7 +34,7 @@
 #include <QBuffer>
 #include <QDomElement>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfStore.h>
 
@@ -89,7 +89,7 @@ public:
     bool writeMasterPageName(void) const { return m_writeMasterPageName; }
     bool omittMasterPage(void) const { return m_omittMasterPage; }
     bool writingHeader(void) const { return m_writingHeader; }
-    KoXmlWriter* headerWriter(void) const { return m_headerWriter; }
+    KXmlWriter* headerWriter(void) const { return m_headerWriter; }
 
 
     bool headersChanged(void) const;
@@ -112,10 +112,10 @@ private:
     int m_endNoteNumber;
 
     // Helpers to generate the various parts of an ODF file.
-    KoXmlWriter* m_bodyWriter;      //for writing to the body of content.xml
+    KXmlWriter* m_bodyWriter;      //for writing to the body of content.xml
     KOdfGenericStyles* m_mainStyles;      //for collecting styles
-    KoXmlWriter* m_metaWriter;      //for writing to meta.xml
-    KoXmlWriter* m_headerWriter;    //for header/footer writing in styles.xml
+    KXmlWriter* m_metaWriter;      //for writing to meta.xml
+    KXmlWriter* m_headerWriter;    //for header/footer writing in styles.xml
 
 
     int m_headerCount; //to have a unique name for element we're putting into an masterPageStyle

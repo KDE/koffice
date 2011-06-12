@@ -164,7 +164,7 @@ bool Picture::save(QIODevice* io) const
     return false;
 }
 
-bool Picture::saveAsBase64(KoXmlWriter& writer) const
+bool Picture::saveAsBase64(KXmlWriter& writer) const
 {
     if (m_sharedData)
         return m_sharedData->saveAsBase64(writer);

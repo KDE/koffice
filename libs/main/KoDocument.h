@@ -727,7 +727,7 @@ public:
      *
      * @param settingsWriter
      */
-    void saveUnitOdf(KoXmlWriter *settingsWriter) const;
+    void saveUnitOdf(KXmlWriter *settingsWriter) const;
 
     /**
      * Set the template type used. This is used by the start up widget to show
@@ -1006,7 +1006,7 @@ private:
     bool loadNativeFormatFromStoreInternal(KOdfStore *store);
 
     bool savePreview(KOdfStore *store);
-    bool saveOasisPreview(KOdfStore *store, KoXmlWriter *manifestWriter);
+    bool saveOasisPreview(KOdfStore *store, KXmlWriter *manifestWriter);
 
     QString prettyPathOrUrl() const;
 

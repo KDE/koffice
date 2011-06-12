@@ -26,7 +26,7 @@
 #include <MsooXmlUtils.h>
 #include <MsooXmlRelationships.h>
 #include <MsooXmlUnits.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KoOdfGraphicStyles.h>
 #include <limits.h>
@@ -110,7 +110,7 @@ KoFilter::ConversionStatus VmlDrawingReader::read(MSOOXML::MsooXmlReaderContext*
 KoFilter::ConversionStatus VmlDrawingReader::read_xml()
 {
     unsigned index = 0;
-    KoXmlWriter *oldBody = 0;
+    KXmlWriter *oldBody = 0;
 
     while (!atEnd()) {
         readNext();
@@ -123,7 +123,7 @@ KoFilter::ConversionStatus VmlDrawingReader::read_xml()
                 m_content[m_currentShapeId] = m_imagedataPath;
                 oldBody = body; // Body protetion starts
                 QBuffer frameBuf;
-                KoXmlWriter frameWriter(&frameBuf);
+                KXmlWriter frameWriter(&frameBuf);
                 body = &frameWriter;
                 pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
                 createFrameStart();

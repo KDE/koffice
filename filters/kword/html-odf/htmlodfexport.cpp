@@ -36,7 +36,7 @@
 #include <KoFilterChain.h>
 #include <KOdfWriteStore.h>
 #include <KOdfStorageDevice.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <document.h>
 #include <exportdialog.h>
@@ -117,8 +117,8 @@ KoFilter::ConversionStatus HTMLOdfExport::convert(const QByteArray &from, const 
         KOdfStore *m_store;
         KOdfGenericStyles *m_genStyles;
         Document *m_document;
-        KoXmlWriter* m_contentWriter;
-        KoXmlWriter* m_bodyWriter;
+        KXmlWriter* m_contentWriter;
+        KXmlWriter* m_bodyWriter;
     };
 
 

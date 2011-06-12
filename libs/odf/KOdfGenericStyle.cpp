@@ -22,7 +22,7 @@
 #include "KOdfGenericStyle.h"
 #include "KOdfGenericStyles.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <float.h>
 
@@ -159,7 +159,7 @@ static KOdfGenericStyle::PropertyType propertyTypeByElementName(const char* prop
     return KOdfGenericStyle::DefaultType;
 }
 
-void KOdfGenericStyle::writeStyleProperties(KoXmlWriter* writer, PropertyType type,
+void KOdfGenericStyle::writeStyleProperties(KXmlWriter* writer, PropertyType type,
                                       const KOdfGenericStyle* parentStyle) const
 {
     const char* elementName = 0;
@@ -191,7 +191,7 @@ void KOdfGenericStyle::writeStyleProperties(KoXmlWriter* writer, PropertyType ty
     }
 }
 
-void KOdfGenericStyle::writeStyle(KoXmlWriter* writer, const KOdfGenericStyles& styles, const char* elementName, const QString& name, const char* propertiesElementName, bool closeElement, bool drawElement) const
+void KOdfGenericStyle::writeStyle(KXmlWriter* writer, const KOdfGenericStyles& styles, const char* elementName, const QString& name, const char* propertiesElementName, bool closeElement, bool drawElement) const
 {
     //kDebug(30003) <<"writing out style" << name <<" display-name=" << m_attributes["style:display-name"] <<" family=" << m_familyName;
     writer->startElement(elementName);

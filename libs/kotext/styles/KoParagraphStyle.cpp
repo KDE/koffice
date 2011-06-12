@@ -47,7 +47,7 @@
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfBorders.h>
 
 //already defined in KoRulerController.cpp
@@ -1696,7 +1696,7 @@ void KoParagraphStyle::saveOdf(KOdfGenericStyle &style, KOdfGenericStyles &mainS
     if (dropCaps()) {
         QBuffer buf;
         buf.open(QIODevice::WriteOnly);
-        KoXmlWriter elementWriter(&buf, indentation);
+        KXmlWriter elementWriter(&buf, indentation);
         elementWriter.startElement("style:drop-cap");
         elementWriter.addAttribute("style:lines", QString::number(dropCapsLines()));
         elementWriter.addAttribute("style:length", dropCapsLength() < 0 ? "word" : QString::number(dropCapsLength()));
@@ -1733,7 +1733,7 @@ void KoParagraphStyle::saveOdf(KOdfGenericStyle &style, KOdfGenericStyles &mainS
 
         QBuffer buf;
         buf.open(QIODevice::WriteOnly);
-        KoXmlWriter elementWriter(&buf, indentation);
+        KXmlWriter elementWriter(&buf, indentation);
         elementWriter.startElement("style:tab-stops");
         foreach(const KoText::Tab &tab, tabPositions()) {
             elementWriter.startElement("style:tab-stop");

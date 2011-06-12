@@ -23,7 +23,7 @@
 #include "KOdfDocumentBase.h"
 #include "koodf_export.h"
 
-class KoXmlWriter;
+class KXmlWriter;
 
 /**
  * This class is used to save embedded objects in ODF documents.
@@ -40,7 +40,7 @@ public:
      * embedded documents themselves is done in @ref save. This
      * function should be called from within KOdfDocumentBase::saveOdf.
      */
-    void embedDocument(KoXmlWriter &writer, KOdfDocumentBase *doc);
+    void embedDocument(KXmlWriter &writer, KOdfDocumentBase *doc);
 
     /**
      * Save all embedded documents to the store.

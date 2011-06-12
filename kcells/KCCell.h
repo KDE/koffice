@@ -53,7 +53,7 @@ class QRect;
 class QPoint;
 
 class KLocale;
-class KoXmlWriter;
+class KXmlWriter;
 class KOdfGenericStyles;
 class KOdfGenericStyle;
 class KOdfLoadingContext;
@@ -358,7 +358,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    bool saveOdf(KoXmlWriter& xmlwriter, KOdfGenericStyles& mainStyles,
+    bool saveOdf(KXmlWriter& xmlwriter, KOdfGenericStyles& mainStyles,
                  int row, int column, int &repeated,
                  KCOdfSavingContext& savingContext);
 
@@ -599,7 +599,7 @@ protected:
     /**
      * \ingroup OpenDocument
      */
-    void saveOdfAnnotation(KoXmlWriter &xmlwriter);
+    void saveOdfAnnotation(KXmlWriter &xmlwriter);
 public:
     void loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& shapeContext);
 private:
@@ -619,7 +619,7 @@ private:
     /**
      * \ingroup OpenDocument
      */
-    void saveOdfValue(KoXmlWriter &xmlWriter);
+    void saveOdfValue(KXmlWriter &xmlWriter);
 
     /**
      * \ingroup OpenDocument

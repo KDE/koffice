@@ -26,7 +26,7 @@
 #include "KoTextAnchor.h"
 #include "KWPage.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KoTextShapeData.h>
 

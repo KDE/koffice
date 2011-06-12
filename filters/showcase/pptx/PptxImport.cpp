@@ -53,7 +53,7 @@
 #include <KoFilterChain.h>
 #include <KUnit.h>
 #include <KOdfPageLayoutData.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <memory>
 

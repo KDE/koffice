@@ -48,7 +48,7 @@
   - DOM tree in KoXmlDocument is read-only, you can not modify it. This is
     sufficient for KOffice since the tree is only accessed when loading
     a document to the application. For saving the document to XML file,
-    use KoXmlWriter.
+    use KXmlWriter.
 
   - Because the dynamic loading and unloading, you have to use the
     nodes (and therefore also elements) carefully since the whole API

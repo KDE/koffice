@@ -21,7 +21,7 @@
 
 #include <QSet>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include "KoPADocument.h"
 #include "KoPAPage.h"
 #include "KoPASavingContext.h"
@@ -58,7 +58,7 @@ KoPAOdfPageSaveHelper::~KoPAOdfPageSaveHelper()
     delete m_context;
 }
 
-KoShapeSavingContext * KoPAOdfPageSaveHelper::context(KoXmlWriter * bodyWriter, KOdfGenericStyles &mainStyles, KoEmbeddedDocumentSaver &embeddedSaver)
+KoShapeSavingContext * KoPAOdfPageSaveHelper::context(KXmlWriter * bodyWriter, KOdfGenericStyles &mainStyles, KoEmbeddedDocumentSaver &embeddedSaver)
 {
     m_context = new KoPASavingContext(*bodyWriter, mainStyles, embeddedSaver, 1);
     return m_context;
@@ -69,7 +69,7 @@ bool KoPAOdfPageSaveHelper::writeBody()
     Q_ASSERT(m_context);
     if (m_context) {
         m_doc->saveOdfDocumentStyles(*(static_cast<KoPASavingContext*>(m_context)));
-        KoXmlWriter &bodyWriter = static_cast<KoPASavingContext*>(m_context)->xmlWriter();
+        KXmlWriter &bodyWriter = static_cast<KoPASavingContext*>(m_context)->xmlWriter();
         bodyWriter.startElement("office:body");
         bodyWriter.startElement(m_doc->odfTagName(true));
 

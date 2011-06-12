@@ -30,7 +30,7 @@
 #include <MsooXmlUtils.h>
 #include <MsooXmlUnits.h>
 #include <MsooXmlDrawingTableStyleReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfPageLayoutData.h>
 #include <KoOdfGraphicStyles.h>

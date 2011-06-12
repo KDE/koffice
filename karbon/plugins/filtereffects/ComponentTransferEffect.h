@@ -94,14 +94,14 @@ public:
     /// reimplemented from KoFilterEffect
     virtual bool load(const KoXmlElement &element, const KoFilterEffectLoadingContext &context);
     /// reimplemented from KoFilterEffect
-    virtual void save(KoXmlWriter &writer);
+    virtual void save(KXmlWriter &writer);
 
 private:
     /// loads channel transfer function from given xml element
     void loadChannel(Channel channel, const KoXmlElement &element);
 
     /// saves channel transfer function to given xml writer
-    void saveChannel(Channel channel, KoXmlWriter &writer);
+    void saveChannel(Channel channel, KXmlWriter &writer);
 
     /// transfers color channel
     qreal transferChannel(Channel channel, qreal value) const;

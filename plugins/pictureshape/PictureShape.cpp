@@ -27,7 +27,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KOdfStorageDevice.h>
 #include <KUnit.h>
@@ -193,7 +193,7 @@ void PictureShape::saveOdf(KoShapeSavingContext &context) const
         return;
     }
 
-    KoXmlWriter &writer = context.xmlWriter();
+    KXmlWriter &writer = context.xmlWriter();
 
     writer.startElement("draw:frame");
     saveOdfAttributes(context, OdfAllAttributes);

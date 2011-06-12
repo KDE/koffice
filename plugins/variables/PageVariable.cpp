@@ -23,7 +23,7 @@
 #include "PageVariable.h"
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KProperties.h>
 #include <KOdfXmlNS.h>
 #include <KoShape.h>
@@ -92,7 +92,7 @@ void PageVariable::positionChanged()
 
 void PageVariable::saveOdf(KoShapeSavingContext &context)
 {
-    KoXmlWriter *writer = &context.xmlWriter();
+    KXmlWriter *writer = &context.xmlWriter();
     switch (m_type) {
     case PageCount:
         // <text:page-count>3</text:page-count>

@@ -39,7 +39,7 @@
 
 #include <KOdfGenericStyles.h>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <kdebug.h>
 #include <qdom.h>

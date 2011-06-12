@@ -28,7 +28,7 @@
 #include <KProperties.h>
 #include <KOdfStylesReader.h>
 #include <KOdfGenericStyles.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoParagraphStyle.h>
 #include <KoShape.h>
 #include <KoShapeLoadingContext.h>

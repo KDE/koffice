@@ -27,7 +27,7 @@ class QTextStream;
 class KZip;
 class KOdfStore;
 class KOdfGenericStyle;
-class KoXmlWriter;
+class KXmlWriter;
 class KWord13Document;
 
 #include <KOdfGenericStyles.h>
@@ -47,7 +47,7 @@ protected: // Generating phase
      * @param frameset the frameset to generate
      * @param main true if this is the man frameset.
      */
-    void generateTextFrameset(KoXmlWriter& writer, KWordTextFrameset* frameset, bool main);
+    void generateTextFrameset(KXmlWriter& writer, KWordTextFrameset* frameset, bool main);
     void writeStylesXml(void);
     void writeContentXml(void);
     void writeMetaXml(void);
@@ -70,7 +70,7 @@ protected:
     KOdfStore* m_store;
     QString m_contentAutomaticStyles; ///< Automatic styles for content.xml (in OO format)
     KOdfGenericStyles m_oasisGenStyles; ///< OASIS styles
-    KoXmlWriter* m_manifestWriter; ///< Manifest file writer
+    KXmlWriter* m_manifestWriter; ///< Manifest file writer
 };
 
 #endif // KWORD_1_3_OASIS_GENERATOR

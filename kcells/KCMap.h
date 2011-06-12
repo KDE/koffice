@@ -45,7 +45,7 @@ class QDomElement;
 class QDomDocument;
 class QUndoCommand;
 
-class KoXmlWriter;
+class KXmlWriter;
 class KOdfGenericStyles;
 class KoOdfSettings;
 
@@ -104,7 +104,7 @@ public:
 
     // KoDataCenterBase interface
     virtual bool completeLoading(KOdfStore *store);
-    virtual bool completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext * context);
+    virtual bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext * context);
 
     /**
      * \return a pointer to the binding manager
@@ -199,7 +199,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    bool saveOdf(KoXmlWriter & xmlWriter, KoShapeSavingContext & savingContext);
+    bool saveOdf(KXmlWriter & xmlWriter, KoShapeSavingContext & savingContext);
 
     /**
      * \ingroup OpenDocument

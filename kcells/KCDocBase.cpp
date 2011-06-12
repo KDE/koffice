@@ -43,7 +43,7 @@
 #include <KOdfStorageDevice.h>
 #include <KoUpdater.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include "kcells_limits.h"
 #include "KCBindingModel.h"
@@ -135,14 +135,14 @@ bool KCDocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag
 {
     Q_UNUSED(saveFlag);
     KOdfStore * store = documentContext.odfStore.store();
-    KoXmlWriter * manifestWriter = documentContext.odfStore.manifestWriter();
+    KXmlWriter * manifestWriter = documentContext.odfStore.manifestWriter();
 
     KOdfStorageDevice dev(store);
     KOdfGenericStyles mainStyles;//for compile
 
-    KoXmlWriter* contentWriter = documentContext.odfStore.contentWriter();
+    KXmlWriter* contentWriter = documentContext.odfStore.contentWriter();
 
-    KoXmlWriter* bodyWriter = documentContext.odfStore.bodyWriter();
+    KXmlWriter* bodyWriter = documentContext.odfStore.bodyWriter();
     KoShapeSavingContext savingContext(*bodyWriter, mainStyles, documentContext.embeddedSaver);
 
     //todo fixme just add a element for testing saving content.xml
@@ -170,7 +170,7 @@ bool KCDocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag
     if (!store->open("settings.xml"))
         return false;
 
-    KoXmlWriter* settingsWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-settings");
+    KXmlWriter* settingsWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-settings");
     settingsWriter->startElement("office:settings");
     settingsWriter->startElement("config:config-item-set");
     settingsWriter->addAttribute("config:name", "view-settings");
@@ -283,7 +283,7 @@ void KCDocBase::loadOdfSettings(const KoXmlDocument&settingsDoc)
     loadOdfIgnoreList(settings);
 }
 
-void KCDocBase::saveOdfSettings(KoXmlWriter &settingsWriter)
+void KCDocBase::saveOdfSettings(KXmlWriter &settingsWriter)
 {
     settingsWriter.startElement("config:config-item-map-indexed");
     settingsWriter.addAttribute("config:name", "Views");
@@ -329,10 +329,10 @@ KoView* KCDocBase::createViewInstance(QWidget *)
     return 0;
 }
 
-void KCDocBase::saveOdfViewSettings(KoXmlWriter&)
+void KCDocBase::saveOdfViewSettings(KXmlWriter&)
 {
 }
 
-void KCDocBase::saveOdfViewSheetSettings(KCSheet *, KoXmlWriter&)
+void KCDocBase::saveOdfViewSheetSettings(KCSheet *, KXmlWriter&)
 {
 }

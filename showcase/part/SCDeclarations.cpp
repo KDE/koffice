@@ -24,7 +24,7 @@
 #include "SCDeclarations.h"
 #include <QDateTime>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
@@ -93,7 +93,7 @@ bool SCDeclarations::saveOdf(KoPASavingContext &paContext) const
        <presentation:footer-decl presentation:name="ftr2">footer</presentation:footer-decl>
        <presentation:date-time-decl presentation:name="dtd1" presentation:source="current-date" style:data-style-name="D3"/>
     */
-    KoXmlWriter &writer(paContext.xmlWriter());
+    KXmlWriter &writer(paContext.xmlWriter());
 
     QHash<Type, QHash<QString, QVariant> >::const_iterator typeIt(m_declarations.constBegin());
     for (; typeIt != m_declarations.constEnd(); ++typeIt) {

@@ -33,7 +33,7 @@
 #include <kofficeversion.h>
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfWriteStore.h>
 
@@ -101,7 +101,7 @@ void KWord13OasisGenerator::preparePageLayout(void)
         // ### TODO: test
         QBuffer buffer;
         buffer.open(QIODevice::WriteOnly);
-        KoXmlWriter element(&buffer);
+        KXmlWriter element(&buffer);
         element.startElement("style:columns");
         element.addAttribute("fo:column-count", columns);
         element.addAttributePt("fo:column-gap", positiveNumberOrNull(m_kwordDocument->getProperty("PAPER:columnspacing", "PAPER:ptColumnspc")));
@@ -374,7 +374,7 @@ void KWord13OasisGenerator::fillGenStyleWithLayout(const KWord13Layout& layout, 
 #if 0
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter tabsWriter(&buffer, 4);   // indent==4: root,autostyle,style,parag-props
+    KXmlWriter tabsWriter(&buffer, 4);   // indent==4: root,autostyle,style,parag-props
     tabsWriter.startElement("style:tab-stops");
     KoTabulatorList::ConstIterator it = m_tabList.begin();
     for (; it != m_tabList.end() ; it++) {
@@ -474,7 +474,7 @@ void KWord13OasisGenerator::fillGenStyleWithLayout(const KWord13Layout& layout, 
 }
 
 // Inspired by KoTextParag::saveOasis
-void KWord13OasisGenerator::generateTextFrameset(KoXmlWriter& writer, KWordTextFrameset* frameset, bool /*main*/)
+void KWord13OasisGenerator::generateTextFrameset(KXmlWriter& writer, KWordTextFrameset* frameset, bool /*main*/)
 {
     if (! frameset) {
         kWarning(30520) << "Tried to generate a NULL text frameset!";
@@ -544,7 +544,7 @@ void KWord13OasisGenerator::writeStylesXml(void)
     KOdfStorageDevice io(m_store);
     io.open(QIODevice::WriteOnly);    // ### TODO: check error!
 
-    KoXmlWriter *stylesWriter = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-styles");
+    KXmlWriter *stylesWriter = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-styles");
 
     stylesWriter->startElement("office:styles");
     Q3ValueList<KOdfGenericStyles::NamedStyle> styles = m_oasisGenStyles.styles(KOdfGenericStyle::ParagraphStyle);
@@ -611,7 +611,7 @@ void KWord13OasisGenerator::writeContentXml(void)
     KOdfStorageDevice io(m_store);
     io.open(QIODevice::WriteOnly);    // ### TODO: check error!
 
-    KoXmlWriter *writer = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-content");
+    KXmlWriter *writer = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-content");
 
 
     // Automatic styles
@@ -661,7 +661,7 @@ void KWord13OasisGenerator::writeMetaXml(void)
     KOdfStorageDevice io(m_store);
     io.open(QIODevice::WriteOnly);    // ### TODO: check error!
 
-    KoXmlWriter *writer = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-meta");
+    KXmlWriter *writer = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-meta");
 
     writer->startElement("office:meta");
 
@@ -861,7 +861,7 @@ bool KWord13OasisGenerator::generate(const QString& fileName, KWord13Document& k
     QByteArray manifestData;
     QBuffer manifestBuffer(&manifestData);
     manifestBuffer.open(QIODevice::WriteOnly);
-    m_manifestWriter = new KoXmlWriter(&manifestBuffer);
+    m_manifestWriter = new KXmlWriter(&manifestBuffer);
     m_manifestWriter->startDocument("manifest:manifest");
     m_manifestWriter->startElement("manifest:manifest");
     m_manifestWriter->addAttribute("xmlns:manifest", "urn:oasis:names:tc:openoffice:xmlns:manifest:1.0");

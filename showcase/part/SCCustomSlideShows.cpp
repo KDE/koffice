@@ -27,7 +27,7 @@
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 //Showcase includes
 #include <SCDocument.h>

@@ -53,7 +53,7 @@
 #include "KoBookmark.h"
 
 #include <KoShapeSavingContext.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfXmlNS.h>
@@ -109,7 +109,7 @@ class KoTextWriter::TagInformation
             return attributeList;
         }
 
-        void write(KoXmlWriter &writer)
+        void write(KXmlWriter &writer)
         {
             if (m_tagName == 0)
                 return;
@@ -184,7 +184,7 @@ public:
     int checkForTableColumnChange(int position);
     KoShapeSavingContext &context;
     KoTextSharedSavingData *sharedData;
-    KoXmlWriter *writer;
+    KXmlWriter *writer;
 
     KoTextDocumentLayout *layout;
     KoStyleManager *styleManager;
@@ -221,8 +221,8 @@ public:
     int checkForMergeOrSplit(const QTextBlock &block, KOdfGenericChange::Type changeType);
     void addNameSpaceDefinitions(QString &generatedXmlString);
 
-    KoXmlWriter *oldXmlWriter;
-    KoXmlWriter *newXmlWriter;
+    KXmlWriter *oldXmlWriter;
+    KXmlWriter *newXmlWriter;
     QByteArray generatedXmlArray;
     QBuffer generatedXmlBuffer;
 
@@ -353,12 +353,12 @@ QString KoTextWriter::Private::generateDeleteChangeXml(KoDeleteChangeMarker *mar
     cursor.insertFragment(changeTracker->elementById(marker->changeId())->deleteData());
 
     //Save the current writer
-    KoXmlWriter &oldWriter = context.xmlWriter();
+    KXmlWriter &oldWriter = context.xmlWriter();
 
-    //Create a new KoXmlWriter pointing to a QBuffer
+    //Create a new KXmlWriter pointing to a QBuffer
     QByteArray xmlArray;
     QBuffer xmlBuffer(&xmlArray);
-    KoXmlWriter newXmlWriter(&xmlBuffer);
+    KXmlWriter newXmlWriter(&xmlBuffer);
 
     //Set our xmlWriter as the writer to be used
     writer = &newXmlWriter;
@@ -1601,10 +1601,10 @@ void KoTextWriter::Private::openSplitMergeRegion()
     //Save the current writer
     oldXmlWriter = writer;
 
-    //Create a new KoXmlWriter pointing to a QBuffer
+    //Create a new KXmlWriter pointing to a QBuffer
     generatedXmlArray.clear();
     generatedXmlBuffer.setBuffer(&generatedXmlArray);
-    newXmlWriter = new KoXmlWriter(&generatedXmlBuffer);
+    newXmlWriter = new KXmlWriter(&generatedXmlBuffer);
 
     //Set our xmlWriter as the writer to be used
     writer = newXmlWriter;

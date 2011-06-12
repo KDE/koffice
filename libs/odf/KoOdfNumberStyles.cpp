@@ -28,16 +28,16 @@
 #include <kdebug.h>
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 namespace KoOdfNumberStyles
 {
 
-    static bool saveOdfTimeFormat(KoXmlWriter &elementWriter, QString &format, QString &text, bool &antislash);
-    static void parseOdfDateKlocale(KoXmlWriter &elementWriter, QString &format, QString &text);
-    static bool saveOdfKlocaleTimeFormat(KoXmlWriter &elementWriter, QString &format, QString &text);
-    static void parseOdfTimeKlocale(KoXmlWriter &elementWriter, QString &format, QString &text);
-    static void addKofficeNumericStyleExtension(KoXmlWriter &elementWriter, const QString &_suffix, const QString &_prefix);
+    static bool saveOdfTimeFormat(KXmlWriter &elementWriter, QString &format, QString &text, bool &antislash);
+    static void parseOdfDateKlocale(KXmlWriter &elementWriter, QString &format, QString &text);
+    static bool saveOdfKlocaleTimeFormat(KXmlWriter &elementWriter, QString &format, QString &text);
+    static void parseOdfTimeKlocale(KXmlWriter &elementWriter, QString &format, QString &text);
+    static void addKofficeNumericStyleExtension(KXmlWriter &elementWriter, const QString &_suffix, const QString &_prefix);
 
 
 // OO spec 2.5.4. p68. Conversion to Qt format: see qdate.html
@@ -313,9 +313,9 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
         } \
     }
 
-void parseOdfTimeKlocale(KoXmlWriter &elementWriter, QString &format, QString &text)
+void parseOdfTimeKlocale(KXmlWriter &elementWriter, QString &format, QString &text)
 {
-    kDebug(30003) << "parseOdfTimeKlocale(KoXmlWriter &elementWriter, QString & format, QString & text ) :" << format;
+    kDebug(30003) << "parseOdfTimeKlocale(KXmlWriter &elementWriter, QString & format, QString & text ) :" << format;
     do {
         if (!saveOdfKlocaleTimeFormat(elementWriter, format, text)) {
             text += format[0];
@@ -325,7 +325,7 @@ void parseOdfTimeKlocale(KoXmlWriter &elementWriter, QString &format, QString &t
     addTextNumber(text, elementWriter);
 }
 
-bool saveOdfKlocaleTimeFormat(KoXmlWriter &elementWriter, QString &format, QString &text)
+bool saveOdfKlocaleTimeFormat(KXmlWriter &elementWriter, QString &format, QString &text)
 {
     bool changed = false;
     if (format.startsWith("%H")) {   //hh
@@ -381,7 +381,7 @@ bool saveOdfKlocaleTimeFormat(KoXmlWriter &elementWriter, QString &format, QStri
 }
 
 
-bool saveOdfTimeFormat(KoXmlWriter &elementWriter, QString &format, QString &text, bool &antislash)
+bool saveOdfTimeFormat(KXmlWriter &elementWriter, QString &format, QString &text, bool &antislash)
 {
     bool changed = false;
     //we can also add time to date.
@@ -459,7 +459,7 @@ QString saveOdfTimeStyle(KOdfGenericStyles &mainStyles, const QString &_format, 
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericTimeStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
     QString text;
     if (klocaleFormat) {
         parseOdfTimeKlocale(elementWriter, format, text);
@@ -485,7 +485,7 @@ QString saveOdfTimeStyle(KOdfGenericStyles &mainStyles, const QString &_format, 
 }
 
 //convert klocale string to good format
-void parseOdfDateKlocale(KoXmlWriter &elementWriter, QString &format, QString &text)
+void parseOdfDateKlocale(KXmlWriter &elementWriter, QString &format, QString &text)
 {
     kDebug(30003) << format;
     do {
@@ -581,7 +581,7 @@ QString saveOdfDateStyle(KOdfGenericStyles &mainStyles, const QString &_format, 
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericDateStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
     QString text;
     if (klocaleFormat) {
         parseOdfDateKlocale(elementWriter, format, text);
@@ -720,7 +720,7 @@ QString saveOdfFractionStyle(KOdfGenericStyles &mainStyles, const QString &_form
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericFractionStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
     QString text;
     int integer = 0;
     int numerator = 0;
@@ -779,7 +779,7 @@ QString saveOdfNumberStyle(KOdfGenericStyles &mainStyles, const QString &_format
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericNumberStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
     QString text;
     int decimalplaces = 0;
     int integerdigits = 0;
@@ -827,7 +827,7 @@ QString saveOdfPercentageStyle(KOdfGenericStyles &mainStyles, const QString &_fo
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericPercentageStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
     QString text;
     int decimalplaces = 0;
     int integerdigits = 0;
@@ -880,7 +880,7 @@ QString saveOdfScientificStyle(KOdfGenericStyles &mainStyles, const QString &_fo
     int decimalplace = 0;
     int integerdigits = 0;
     int exponentdigits = 0;
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
     QString text;
     bool beforeSeparator = true;
     bool exponential = false;
@@ -950,7 +950,7 @@ QString saveOdfCurrencyStyle(KOdfGenericStyles &mainStyles,
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericCurrencyStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
     QString text;
     int decimalplaces = 0;
     int integerdigits = 0;
@@ -1004,7 +1004,7 @@ QString saveOdfTextStyle(KOdfGenericStyles &mainStyles, const QString &_format, 
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericTextStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
     QString text;
     do {
         format.remove(0, 1);
@@ -1026,7 +1026,7 @@ QString saveOdfTextStyle(KOdfGenericStyles &mainStyles, const QString &_format, 
 
 //This is an extension of numeric style. For the moment we used namespace of
 //oasis format for specific koffice extension. Change it for the future.
-void addKofficeNumericStyleExtension(KoXmlWriter &elementWriter, const QString &_suffix, const QString &_prefix)
+void addKofficeNumericStyleExtension(KXmlWriter &elementWriter, const QString &_suffix, const QString &_prefix)
 {
     if (!_suffix.isEmpty()) {
         elementWriter.startElement("number:suffix");

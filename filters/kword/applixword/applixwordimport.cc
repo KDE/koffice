@@ -30,7 +30,7 @@
 #include <kpluginfactory.h>
 #include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 K_PLUGIN_FACTORY(APPLIXWORDImportFactory, registerPlugin<APPLIXWORDImport>();)
 K_EXPORT_PLUGIN(APPLIXWORDImportFactory("calligrafilters"))
@@ -125,14 +125,14 @@ KoFilter::ConversionStatus APPLIXWORDImport::convert(const QByteArray& from, con
     KOdfWriteStore odfStore(store);
     odfStore.manifestWriter(to);
 
-    KoXmlWriter* contentWriter = odfStore.contentWriter();
+    KXmlWriter* contentWriter = odfStore.contentWriter();
     if (!contentWriter) {
         delete store;
         return KoFilter::CreationError;
     }
 
     KOdfGenericStyles mainStyles;
-    KoXmlWriter *bodyWriter = odfStore.bodyWriter();
+    KXmlWriter *bodyWriter = odfStore.bodyWriter();
 
     bodyWriter->startElement("office:body");
     bodyWriter->startElement("office:text");
@@ -756,7 +756,7 @@ bool APPLIXWORDImport::createMeta(KOdfWriteStore &store)
     }
 
     KOdfStorageDevice dev(store.store());
-    KoXmlWriter* xmlWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-meta");
+    KXmlWriter* xmlWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-meta");
     xmlWriter->startElement("office:meta");
 
     xmlWriter->startElement("meta:generator");

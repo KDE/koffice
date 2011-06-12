@@ -40,7 +40,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoPASavingContext.h>
 
 #include <kdebug.h>
@@ -138,7 +138,7 @@ bool SCAnimate::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &cont
 
 bool SCAnimate::saveOdf(KoPASavingContext &paContext) const
 {
-    KoXmlWriter &writer = paContext.xmlWriter();
+    KXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:animate");
     saveAttribute(paContext);
     writer.endElement();
@@ -161,7 +161,7 @@ void SCAnimate::next(int currentTime)
 bool SCAnimate::saveAttribute(KoPASavingContext &paContext) const
 {
     SCAnimationBase::saveAttribute(paContext);
-    KoXmlWriter &writer = paContext.xmlWriter();
+    KXmlWriter &writer = paContext.xmlWriter();
     writer.addAttribute("smil:attributeName", m_attribute->attributeName());
     m_values->saveOdf(paContext);
     return true;

@@ -158,7 +158,7 @@ void Paragraph::addRunOfText(QString text,  wvWare::SharedPtr<const wvWare::Word
     m_textStyles.push_back(textStyle);
 }
 
-void Paragraph::writeToFile(KoXmlWriter* writer)
+void Paragraph::writeToFile(KXmlWriter* writer)
 {
     kDebug(30513);
 
@@ -191,7 +191,7 @@ void Paragraph::writeToFile(KoXmlWriter* writer)
 
         QBuffer buf;
         buf.open(QIODevice::WriteOnly);
-        KoXmlWriter tmpWriter(&buf, 3);
+        KXmlWriter tmpWriter(&buf, 3);
         tmpWriter.startElement("style:drop-cap");
         tmpWriter.addAttribute("style:lines", m_dcs_lines);
         tmpWriter.addAttributePt("style:distance", m_dropCapDistance);
@@ -645,7 +645,7 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
 #if 0
         QBuffer buf;
         buf.open(QIODevice::WriteOnly);
-        KoXmlWriter tmpWriter(&buf, 3);
+        KXmlWriter tmpWriter(&buf, 3);
          tmpWriter.startElement("style:drop-cap");
         tmpWriter.addAttribute("style:lines", pap.dcs.lines);
         tmpWriter.addAttributePt("style:distance", (qreal)pap.dxaFromText / (qreal)20.0);
@@ -667,7 +667,7 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
         //looks like we need to write these out with an xmlwriter
         QBuffer buf;
         buf.open(QIODevice::WriteOnly);
-        KoXmlWriter tmpWriter(&buf, 3);//root, office:automatic-styles, style:style
+        KXmlWriter tmpWriter(&buf, 3);//root, office:automatic-styles, style:style
         tmpWriter.startElement("style:tab-stops");
         for (int i = 0 ; i < pap.itbdMac ; ++i) {
             tmpWriter.startElement("style:tab-stop");

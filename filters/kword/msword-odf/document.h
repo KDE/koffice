@@ -44,7 +44,7 @@
 #include <QBuffer>
 #include <QDomElement>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfStore.h>
 
@@ -68,8 +68,8 @@ class Document : public QObject, public wvWare::SubDocumentHandler
 {
     Q_OBJECT
 public:
-    Document(const std::string& fileName, KoFilterChain* chain, KoXmlWriter* bodyWriter,
-             KOdfGenericStyles* mainStyles, KoXmlWriter* metaWriter, KoXmlWriter* manifestWriter,
+    Document(const std::string& fileName, KoFilterChain* chain, KXmlWriter* bodyWriter,
+             KOdfGenericStyles* mainStyles, KXmlWriter* metaWriter, KXmlWriter* manifestWriter,
              KOdfStore* store, POLE::Storage* storage,
              LEInputStream* data, LEInputStream* table, LEInputStream* wdoc);
     virtual ~Document();
@@ -113,7 +113,7 @@ public:
     bool omittMasterPage(void) const { return m_omittMasterPage; }
     bool useLastMasterPage(void) const { return m_useLastMasterPage; }
     bool writingHeader(void) const { return m_writingHeader; }
-    KoXmlWriter* headerWriter(void) const { return m_headerWriter; }
+    KXmlWriter* headerWriter(void) const { return m_headerWriter; }
     KWordTextHandler *textHandler(void) const { return m_textHandler; }
     bool hasParser(void) const { return m_parser != 0L; }
     bool bodyFound(void) const { return m_bodyFound; }
@@ -170,9 +170,9 @@ public slots:
 
     void slotTableFound(KWord::Table* table);
 
-    void slotInlineObjectFound(const wvWare::PictureData& data, KoXmlWriter* writer);
+    void slotInlineObjectFound(const wvWare::PictureData& data, KXmlWriter* writer);
 
-    void slotFloatingObjectFound(unsigned int globalCP, KoXmlWriter* writer);
+    void slotFloatingObjectFound(unsigned int globalCP, KXmlWriter* writer);
 
     void slotTextBoxFound(uint lid, bool bodyDrawing);
 
@@ -206,10 +206,10 @@ private:
     int m_endNoteNumber; // number of endnote _framesets_ written out
 
     // Helpers to generate the various parts of an ODF file.
-    KoXmlWriter* m_bodyWriter;      //for writing to the body of content.xml
+    KXmlWriter* m_bodyWriter;      //for writing to the body of content.xml
     KOdfGenericStyles* m_mainStyles;      //for collecting styles
-    KoXmlWriter* m_metaWriter;      //for writing to meta.xml
-    KoXmlWriter* m_headerWriter;    //for header/footer writing in styles.xml
+    KXmlWriter* m_metaWriter;      //for writing to meta.xml
+    KXmlWriter* m_headerWriter;    //for header/footer writing in styles.xml
 
     int m_headerCount; //to have a unique name for element we're putting into an masterPageStyle
     bool m_writingHeader; //flag for headers/footers, where we write the actual text to styles.xml

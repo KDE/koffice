@@ -29,7 +29,7 @@
 
 class KoShapeSavingContext;
 class KOdfStore;
-class KoXmlWriter;
+class KXmlWriter;
 
 /**
  * The data center is for now just a sort of void pointer.
@@ -53,7 +53,7 @@ public:
      * Save any remaining binary blobs
      * @returns false if an error occurred, which typically cancels the save.
      */
-    virtual bool completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context) = 0;
+    virtual bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext *context) = 0;
 };
 
 #endif

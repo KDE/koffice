@@ -21,7 +21,7 @@
 #include "KoFilterEffectRenderContext.h"
 #include "KoFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include <KLocale>
 #include <QtCore/QRect>
@@ -333,7 +333,7 @@ bool BlurEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingCo
     return true;
 }
 
-void BlurEffect::save(KoXmlWriter &writer)
+void BlurEffect::save(KXmlWriter &writer)
 {
     writer.startElement(BlurEffectId);
 

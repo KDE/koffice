@@ -22,7 +22,7 @@
 #include <phonon/mediaobject.h>
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <SCSoundData.h>

@@ -24,7 +24,7 @@
 #include <kdebug.h>
 #include <KoShapeSavingContext.h>
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 InfoVariable::InfoVariable()
         : KoVariable(true),
@@ -46,7 +46,7 @@ void InfoVariable::propertyChanged(Property property, const QVariant &value)
 
 void InfoVariable::saveOdf(KoShapeSavingContext & context)
 {
-    KoXmlWriter *writer = &context.xmlWriter();
+    KXmlWriter *writer = &context.xmlWriter();
     QString nodeName;
     if (m_type == KoInlineObject::Title)
         nodeName = "text:title";

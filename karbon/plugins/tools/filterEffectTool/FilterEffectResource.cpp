@@ -22,7 +22,7 @@
 #include <KoFilterEffectStack.h>
 #include <KoFilterEffectRegistry.h>
 #include <KoFilterEffectLoadingContext.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <KDebug>
 
@@ -91,7 +91,7 @@ FilterEffectResource * FilterEffectResource::fromFilterEffectStack(KoFilterEffec
     QByteArray ba;
     QBuffer buffer(&ba);
     buffer.open(QIODevice::ReadWrite);
-    KoXmlWriter writer(&buffer);
+    KXmlWriter writer(&buffer);
 
     filterStack->save(writer, "");
 

@@ -30,7 +30,7 @@
 #include "KoLoadingShapeUpdater.h"
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>

@@ -23,7 +23,7 @@
 #include <KoShapeSavingContext.h>
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include "KoBookmark.h"
 #include "KoTextMeta.h"
@@ -155,7 +155,7 @@ bool KoTextInlineRdf::loadOdf(const KoXmlElement &e)
     return true;
 }
 
-bool KoTextInlineRdf::saveOdf(KoShapeSavingContext &context, KoXmlWriter *writer)
+bool KoTextInlineRdf::saveOdf(KoShapeSavingContext &context, KXmlWriter *writer)
 {
     kDebug(30015) << " this:" << (void*)this << " xmlid:" << d->id;
     QString oldID = d->id;
@@ -187,7 +187,7 @@ bool KoTextInlineRdf::saveOdf(KoShapeSavingContext &context, KoXmlWriter *writer
     return true;
 }
 
-QString KoTextInlineRdf::createXmlId(KoXmlWriter *writer)
+QString KoTextInlineRdf::createXmlId(KXmlWriter *writer)
 {
     Q_UNUSED(writer);
     QString uuid = QUuid::createUuid().toString();

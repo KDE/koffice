@@ -28,7 +28,7 @@
 
 #include <KOdfXmlNS.h>
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <kdebug.h>
 
@@ -83,7 +83,7 @@ void SCFadeOverColorStrategy::finish(const SCPageEffect::Data &data)
     data.m_graphicsView->hide();
 }
 
-void SCFadeOverColorStrategy::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const
+void SCFadeOverColorStrategy::saveOdfSmilAttributes(KXmlWriter & xmlWriter) const
 {
     SCPageEffectStrategy::saveOdfSmilAttributes(xmlWriter);
     xmlWriter.addAttribute("smil:fadeColor", m_fadeColor.name());

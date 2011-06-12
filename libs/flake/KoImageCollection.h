@@ -48,7 +48,7 @@ public:
      * Save all images to the store which are in the context
      * @return returns true if save was successful (no images failed).
      */
-    bool completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context);
+    bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext *context);
 
     /**
      * Create a data object for the image data.

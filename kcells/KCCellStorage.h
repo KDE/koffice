@@ -30,7 +30,7 @@
 
 #include "database/Database.h"
 
-class KoXmlWriter;
+class KXmlWriter;
 
 class QUndoCommand;
 

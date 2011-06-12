@@ -38,7 +38,7 @@
 #include <KoEmbeddedDocumentSaver.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoStyleManager.h>
 #include <KoShapeLoadingContext.h>
 #include <KoTextSharedLoadingData.h>
@@ -236,7 +236,7 @@ bool KCMap::completeLoading(KOdfStore *store)
     return true;
 }
 
-bool KCMap::completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext * context)
+bool KCMap::completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KoShapeSavingContext * context)
 {
     Q_UNUSED(store);
     Q_UNUSED(manifestWriter);
@@ -398,7 +398,7 @@ void KCMap::loadOdfSettings(KoOdfSettings &settings)
     }
 }
 
-bool KCMap::saveOdf(KoXmlWriter & xmlWriter, KoShapeSavingContext & savingContext)
+bool KCMap::saveOdf(KXmlWriter & xmlWriter, KoShapeSavingContext & savingContext)
 {
     // Saving the custom cell styles including the default cell style.
     d->styleManager->saveOdf(savingContext.mainStyles());

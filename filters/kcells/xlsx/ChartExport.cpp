@@ -20,7 +20,7 @@
 #include "ChartExport.h"
 
 #include <KOdfStore.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfWriteStore.h>
 #include <KOdfStorageDevice.h>
 #include <KOdfGenericStyles.h>
@@ -69,7 +69,7 @@ QString normalizeCellRange(QString range)
     return range;
 }
 
-bool ChartExport::saveIndex(KoXmlWriter* xmlWriter)
+bool ChartExport::saveIndex(KXmlWriter* xmlWriter)
 {
     if(!chart() || m_href.isEmpty())
         return false;
@@ -340,7 +340,7 @@ void ChartExport::set2003ColorPalette( QList < QColor > palette )
     paletteSet = true;
 }
 
-bool ChartExport::saveContent(KOdfStore* store, KoXmlWriter* manifestWriter)
+bool ChartExport::saveContent(KOdfStore* store, KXmlWriter* manifestWriter)
 {
     if(!chart() || !chart()->m_impl || m_href.isEmpty())
         return false;
@@ -354,8 +354,8 @@ bool ChartExport::saveContent(KOdfStore* store, KoXmlWriter* manifestWriter)
     store->enterDirectory(m_href);
 
     KOdfWriteStore s(store);
-    KoXmlWriter* bodyWriter = s.bodyWriter();
-    KoXmlWriter* contentWriter = s.contentWriter();
+    KXmlWriter* bodyWriter = s.bodyWriter();
+    KXmlWriter* contentWriter = s.contentWriter();
     Q_ASSERT(bodyWriter && contentWriter);
     bodyWriter->startElement("office:body");
     bodyWriter->startElement("office:chart");
@@ -779,7 +779,7 @@ bool ChartExport::saveContent(KOdfStore* store, KoXmlWriter* manifestWriter)
 
     if (store->open("styles.xml")) {
         KOdfStorageDevice dev(store);
-        KoXmlWriter* stylesWriter = new KoXmlWriter(&dev);
+        KXmlWriter* stylesWriter = new KXmlWriter(&dev);
         stylesWriter->startDocument("office:document-styles");
         stylesWriter->startElement("office:document-styles");
         stylesWriter->addAttribute("xmlns:office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
@@ -921,7 +921,7 @@ float ChartExport::sprcToPt( int sprc, Orientation orientation )
     return (float)sprc * ( (float)m_height / 4000.0);
 }
 
-void ChartExport::writeInternalTable ( KoXmlWriter* bodyWriter )
+void ChartExport::writeInternalTable ( KXmlWriter* bodyWriter )
 {
     Q_ASSERT( bodyWriter );
     bodyWriter->startElement("table:table");

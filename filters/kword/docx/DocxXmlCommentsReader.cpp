@@ -24,7 +24,7 @@
 #include "DocxXmlCommentsReader.h"
 #include <MsooXmlSchemas.h>
 #include <MsooXmlUtils.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <limits.h>
 
 #define MSOOXML_CURRENT_NS "w"
@@ -188,8 +188,8 @@ KoFilter::ConversionStatus DocxXmlCommentReader::read_comment()
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter *oldBody = body;
-    body = new KoXmlWriter(&buffer);
+    KXmlWriter *oldBody = body;
+    body = new KXmlWriter(&buffer);
 
     if (!author.isEmpty()) {
         body->startElement("dc:creator");

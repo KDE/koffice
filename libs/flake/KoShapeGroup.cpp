@@ -24,7 +24,7 @@
 #include "SimpleShapeContainerModel_p.h"
 #include "KoShapeSavingContext.h"
 #include "KoShapeLoadingContext.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeBorderBase.h"

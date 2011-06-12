@@ -21,7 +21,7 @@
 #include "KoPADocument.h"
 
 #include <KOdfStore.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
 #include <KOdfLoadingContext.h>
@@ -172,12 +172,12 @@ bool KoPADocument::loadOdf(KOdfStoreReader &odfStore)
 
 bool KoPADocument::saveOdf(SavingContext &documentContext)
 {
-    KoXmlWriter* contentWriter = documentContext.odfStore.contentWriter();
+    KXmlWriter* contentWriter = documentContext.odfStore.contentWriter();
     if (!contentWriter)
         return false;
 
     KOdfGenericStyles mainStyles;
-    KoXmlWriter * bodyWriter = documentContext.odfStore.bodyWriter();
+    KXmlWriter * bodyWriter = documentContext.odfStore.bodyWriter();
 
     KoPASavingContext paContext(*bodyWriter, mainStyles, documentContext.embeddedSaver, 1);
 
@@ -321,7 +321,7 @@ bool KoPADocument::saveOdfEpilogue(KoPASavingContext &paContext)
 bool KoPADocument::saveOdfSettings(KOdfStore * store)
 {
     KOdfStorageDevice settingsDev(store);
-    KoXmlWriter * settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
+    KXmlWriter * settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
 
     // add this so that OOo reads guides lines and grid data from ooo:view-settings
     settingsWriter->addAttribute("xmlns:ooo", "http://openoffice.org/2004/office");

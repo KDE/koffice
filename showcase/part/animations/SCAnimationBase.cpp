@@ -22,7 +22,7 @@
 #include <KOdfXmlNS.h>
 #include "SCDurationParser.h"
 #include "KXmlReader.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 #include "SCAnimationCache.h"
 #include "SCShapeAnimation.h"
 #include "KoShapeLoadingContext.h"
@@ -80,7 +80,7 @@ int SCAnimationBase::animationDuration() const
 
 bool SCAnimationBase::saveAttribute(KoPASavingContext &paContext) const
 {
-    KoXmlWriter &writer = paContext.xmlWriter();
+    KXmlWriter &writer = paContext.xmlWriter();
     writer.addAttribute("smil:begin", SCDurationParser::msToString(m_begin));
     writer.addAttribute("smil:dur", SCDurationParser::msToString(m_duration));
     if (m_shapeAnimation->textBlockData()) {

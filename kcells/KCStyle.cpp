@@ -36,7 +36,7 @@
 #include <KOdfStyleStack.h>
 #include <KUnit.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include "KCCondition.h"
 #include "KCCurrency.h"

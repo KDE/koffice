@@ -21,7 +21,7 @@
 #include "KoFilterEffectRenderContext.h"
 #include "KoFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include <KLocale>
 #include <QtCore/QRect>
@@ -313,7 +313,7 @@ bool ConvolveMatrixEffect::load(const KoXmlElement &element, const KoFilterEffec
     return true;
 }
 
-void ConvolveMatrixEffect::save(KoXmlWriter &writer)
+void ConvolveMatrixEffect::save(KXmlWriter &writer)
 {
     writer.startElement(ConvolveMatrixEffectId);
 

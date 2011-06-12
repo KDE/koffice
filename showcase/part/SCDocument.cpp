@@ -40,7 +40,7 @@
 #include <KoShapeRegistry.h>
 #include <KoToolRegistry.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <KConfigGroup>
 #include <KStandardDirs>

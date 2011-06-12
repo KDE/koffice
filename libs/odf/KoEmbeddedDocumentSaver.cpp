@@ -24,7 +24,7 @@
 #include <kdebug.h>
 
 #include <KOdfStore.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfWriteStore.h>
 
 #include "KOdfDocumentBase.h"
@@ -55,7 +55,7 @@ KoEmbeddedDocumentSaver::~KoEmbeddedDocumentSaver()
     delete d;
 }
 
-void KoEmbeddedDocumentSaver::embedDocument(KoXmlWriter &writer, KOdfDocumentBase * doc)
+void KoEmbeddedDocumentSaver::embedDocument(KXmlWriter &writer, KOdfDocumentBase * doc)
 {
     Q_ASSERT(doc);
     d->documents.append(doc);

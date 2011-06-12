@@ -38,7 +38,7 @@
 
 class KLocale;
 
-class KoXmlWriter;
+class KXmlWriter;
 
 /**
  * Calculation settings
@@ -65,7 +65,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    bool saveOdf(KoXmlWriter &settingsWriter) const;
+    bool saveOdf(KXmlWriter &settingsWriter) const;
 
     /**
      * A document could use a different localization as the KDE default.

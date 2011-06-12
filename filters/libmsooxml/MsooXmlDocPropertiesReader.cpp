@@ -24,7 +24,7 @@
 #include "MsooXmlDocPropertiesReader.h"
 #include "MsooXmlSchemas.h"
 #include <MsooXmlUtils.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #define MSOOXML_CURRENT_NS "cp"
 #define MSOOXML_CURRENT_CLASS MsooXmlDocPropertiesReader

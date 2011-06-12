@@ -314,7 +314,7 @@ bool EncryptedStore::doFinalize()
         }
         if (d->mode == Write) {
             // First change the manifest file and write it
-            // We'll use the QDom classes here, since KXmlReader and KoXmlWriter have no way of copying a complete xml-file
+            // We'll use the QDom classes here, since KXmlReader and KXmlWriter have no way of copying a complete xml-file
             // other than parsing it completely and rebuilding it.
             // Errorhandling here is done to prevent data from being lost whatever happens
             // TODO: Convert this to KoXML when KoXML is extended enough

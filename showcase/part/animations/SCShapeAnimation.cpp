@@ -23,7 +23,7 @@
 #include "SCTextBlockPaintStrategy.h"
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoPASavingContext.h>
@@ -49,7 +49,7 @@ bool SCShapeAnimation::loadOdf(const KoXmlElement &element, KoShapeLoadingContex
 
 bool SCShapeAnimation::saveOdf(KoPASavingContext &paContext, bool startStep, bool startSubStep) const
 {
-    KoXmlWriter &writer = paContext.xmlWriter();
+    KXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:par");
     QString nodeType;
     if (startStep && startSubStep) {

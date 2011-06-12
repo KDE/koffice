@@ -22,7 +22,7 @@
 
 #include <QWidget>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KOdfGenericStyle.h>
 
@@ -47,7 +47,7 @@ void SCPageEffectStrategy::finish(const SCPageEffect::Data &data)
     data.m_widget->update();
 }
 
-void SCPageEffectStrategy::saveOdfSmilAttributes(KoXmlWriter &xmlWriter) const
+void SCPageEffectStrategy::saveOdfSmilAttributes(KXmlWriter &xmlWriter) const
 {
     xmlWriter.addAttribute("smil:type", m_smilData.type);
     xmlWriter.addAttribute("smil:subtype", m_smilData.subType);

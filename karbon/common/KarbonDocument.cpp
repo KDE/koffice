@@ -34,7 +34,7 @@
 
 #include <KOdfStore.h>
 #include <KOdfPageLayoutData.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
@@ -356,12 +356,12 @@ void KarbonDocument::useExternalDataCenterMap(QMap<QString, KoDataCenterBase*> d
 bool KarbonDocument::saveOdf(KoDocument::SavingContext &documentContext, const KOdfPageLayoutData &layout)
 {
     KOdfStore * store = documentContext.odfStore.store();
-    KoXmlWriter* contentWriter = documentContext.odfStore.contentWriter();
+    KXmlWriter* contentWriter = documentContext.odfStore.contentWriter();
     if (!contentWriter)
         return false;
 
     KOdfGenericStyles mainStyles;
-    KoXmlWriter * bodyWriter = documentContext.odfStore.bodyWriter();
+    KXmlWriter * bodyWriter = documentContext.odfStore.bodyWriter();
 
     KoShapeSavingContext shapeContext(*bodyWriter, mainStyles, documentContext.embeddedSaver);
 

@@ -29,7 +29,7 @@
 #include <KoTextRdfCore.h>
 #include "KOdfWriteStore.h"
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfStorageDevice.h>
 #include <KoCanvasBase.h>
 #include <KoToolProxy.h>
@@ -282,7 +282,7 @@ bool KoDocumentRdf::loadOasis(KOdfStore *store)
     return ok;
 }
 
-bool KoDocumentRdf::saveRdf(KOdfStore *store, KoXmlWriter *manifestWriter, Soprano::Node &context)
+bool KoDocumentRdf::saveRdf(KOdfStore *store, KXmlWriter *manifestWriter, Soprano::Node &context)
 {
     bool ok = false;
     QString fileName("manifest.rdf");
@@ -341,7 +341,7 @@ bool KoDocumentRdf::saveRdf(KOdfStore *store, KoXmlWriter *manifestWriter, Sopra
     return ok;
 }
 
-bool KoDocumentRdf::saveOasis(KOdfStore *store, KoXmlWriter *manifestWriter)
+bool KoDocumentRdf::saveOasis(KOdfStore *store, KXmlWriter *manifestWriter)
 {
     RDEBUG << "saveOasis() generic";
     if (!d->model) {
@@ -1381,7 +1381,7 @@ bool KoDocumentRdf::completeLoading(KOdfStore *)
     return true;
 }
 
-bool KoDocumentRdf::completeSaving(KOdfStore *, KoXmlWriter *, KoShapeSavingContext *)
+bool KoDocumentRdf::completeSaving(KOdfStore *, KXmlWriter *, KoShapeSavingContext *)
 {
     return true;
 }

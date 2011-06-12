@@ -29,7 +29,7 @@
 
 #include <KOdfGenericStyle.h>
 
-class KoXmlWriter;
+class KXmlWriter;
 class PptxXmlSlideReaderContext;
 class PptxImport;
 namespace MSOOXML
@@ -235,7 +235,7 @@ protected:
     KOdfGenericStyle m_currentPresentationPageLayoutStyle; //!< set by read_sp() for placeholders (KOdfGenericStyle::PresentationPageLayoutStyle)
     KOdfGenericStyle m_currentPresentationStyle; //!< KOdfGenericStyle::PresentationAutoStyle
 
-    KoXmlWriter* m_placeholderElWriter;
+    KXmlWriter* m_placeholderElWriter;
 
     // Saves current text and paragraph styles to slide(layout/master) memory where they
     // can be used later for inheritance purposes

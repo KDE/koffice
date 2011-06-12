@@ -26,7 +26,7 @@
 #include <klocale.h>
 
 // KOffice
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 // KCells
 #include "KCBindingStorage.h"

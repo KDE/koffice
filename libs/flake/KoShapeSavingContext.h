@@ -30,7 +30,7 @@
 #include <QTextBlockUserData>
 
 class KoShape;
-class KoXmlWriter;
+class KXmlWriter;
 class KOdfGenericStyles;
 class KoDataCenterBase;
 class KoEmbeddedDocumentSaver;
@@ -77,7 +77,7 @@ public:
      * @param mainStyles for saving the styles
      * @param embeddedSaver for saving embedded documents
      */
-    KoShapeSavingContext(KoXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
+    KoShapeSavingContext(KXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
                          KoEmbeddedDocumentSaver &embeddedSaver);
     virtual ~KoShapeSavingContext();
 
@@ -86,7 +86,7 @@ public:
      *
      * @return xmlWriter
      */
-    KoXmlWriter &xmlWriter();
+    KXmlWriter &xmlWriter();
 
     /**
      * @brief Set the xml writer
@@ -96,7 +96,7 @@ public:
      *
      * @param xmlWriter to use
      */
-    void setXmlWriter(KoXmlWriter &xmlWriter);
+    void setXmlWriter(KXmlWriter &xmlWriter);
 
     /**
      * @brief Get the main styles
@@ -182,7 +182,7 @@ public:
     /**
      * Saves the layers added with addLayerForSaving to the xml writer
      */
-    void saveLayerSet(KoXmlWriter &xmlWriter);
+    void saveLayerSet(KXmlWriter &xmlWriter);
 
     /**
      * remove all layers
@@ -220,7 +220,7 @@ public:
      * This calls KoDataCenterBase::completeSaving()
      * @returns false if an error occurred, which typically cancels the save.
      */
-    bool saveDataCenter(KOdfStore *store, KoXmlWriter *manifestWriter);
+    bool saveDataCenter(KOdfStore *store, KXmlWriter *manifestWriter);
 
     /**
      * Add shared data

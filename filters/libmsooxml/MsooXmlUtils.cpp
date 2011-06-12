@@ -51,7 +51,7 @@
 #include <KOdfStoreReader.h>
 #include <styles/KoCharacterStyle.h>
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KUnit.h>
 
 #include <qdom.h>
@@ -1074,30 +1074,30 @@ Utils::XmlWriteBuffer::~XmlWriteBuffer()
     releaseWriterInternal();
 }
 
-KoXmlWriter* Utils::XmlWriteBuffer::setWriter(KoXmlWriter* writer)
+KXmlWriter* Utils::XmlWriteBuffer::setWriter(KXmlWriter* writer)
 {
     Q_ASSERT(!m_origWriter && !m_newWriter);
     if (m_origWriter || m_newWriter)
         return 0;
     m_origWriter = writer; // remember
-    m_newWriter = new KoXmlWriter(&m_buffer, m_origWriter->indentLevel() + 1);
+    m_newWriter = new KXmlWriter(&m_buffer, m_origWriter->indentLevel() + 1);
     return m_newWriter;
 }
 
-KoXmlWriter* Utils::XmlWriteBuffer::releaseWriter()
+KXmlWriter* Utils::XmlWriteBuffer::releaseWriter()
 {
     Q_ASSERT(m_newWriter && m_origWriter);
     return releaseWriterInternal();
 }
 
-KoXmlWriter* Utils::XmlWriteBuffer::releaseWriterInternal()
+KXmlWriter* Utils::XmlWriteBuffer::releaseWriterInternal()
 {
     if (!m_newWriter || !m_origWriter)
         return 0;
     m_origWriter->addCompleteElement(&m_buffer);
     delete m_newWriter;
     m_newWriter = 0;
-    KoXmlWriter* tmp = m_origWriter;
+    KXmlWriter* tmp = m_origWriter;
     m_origWriter = 0;
     return tmp;
 }
@@ -1527,7 +1527,7 @@ MSOOXML_EXPORT void Utils::copyPropertiesFromStyle(const KOdfGenericStyle& sourc
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter tempWriter(&buffer);
+    KXmlWriter tempWriter(&buffer);
     sourceStyle.writeStyleProperties(&tempWriter, type);
 
     QString content = QString::fromUtf8(buffer.buffer(), buffer.buffer().size());

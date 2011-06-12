@@ -65,7 +65,7 @@ struct Finalizer {
 #include <KoTextShapeContainerModel.h>
 #include <KoPageProvider_p.h> // the exported class for the showcase hack
 #include <KoViewConverter.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 
@@ -305,7 +305,7 @@ void TextShape::paintDecorations(QPainter &painter, const KoViewConverter &conve
 
 void TextShape::saveOdf(KoShapeSavingContext &context) const
 {
-    KoXmlWriter &writer = context.xmlWriter();
+    KXmlWriter &writer = context.xmlWriter();
 
     QString textHeight = additionalAttribute("fo:min-height");
     const_cast<TextShape*>(this)->removeAdditionalAttribute("fo:min-height");

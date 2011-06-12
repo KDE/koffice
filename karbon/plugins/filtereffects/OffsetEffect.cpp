@@ -21,7 +21,7 @@
 #include "KoFilterEffectRenderContext.h"
 #include "KoFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include <KLocale>
 #include <QtCore/QRect>
@@ -76,7 +76,7 @@ bool OffsetEffect::load(const KoXmlElement &element, const KoFilterEffectLoading
     return true;
 }
 
-void OffsetEffect::save(KoXmlWriter &writer)
+void OffsetEffect::save(KXmlWriter &writer)
 {
     writer.startElement(OffsetEffectId);
 

@@ -51,8 +51,8 @@
 
 //TODO: provide all streams to the wv2 parser; POLE storage is going to replace
 //OLE storage soon!
-Document::Document(const std::string& fileName, KoFilterChain* chain, KoXmlWriter* bodyWriter,
-                   KOdfGenericStyles* mainStyles, KoXmlWriter* metaWriter, KoXmlWriter* manifestWriter,
+Document::Document(const std::string& fileName, KoFilterChain* chain, KXmlWriter* bodyWriter,
+                   KOdfGenericStyles* mainStyles, KXmlWriter* metaWriter, KXmlWriter* manifestWriter,
                    KOdfStore* store, POLE::Storage* storage,
                    LEInputStream* data, LEInputStream* table, LEInputStream* wdocument)
         : m_textHandler(0)
@@ -110,10 +110,10 @@ Document::Document(const std::string& fileName, KoFilterChain* chain, KoXmlWrite
                 this, SLOT(slotHeadersFound(const wvWare::FunctorBase*, int)));
         connect(m_textHandler, SIGNAL(tableFound(KWord::Table*)),
                 this, SLOT(slotTableFound(KWord::Table*)));
-        connect(m_textHandler, SIGNAL(inlineObjectFound(const wvWare::PictureData&,KoXmlWriter*)),
-                this, SLOT(slotInlineObjectFound(const wvWare::PictureData&, KoXmlWriter*)));
-        connect(m_textHandler, SIGNAL(floatingObjectFound(unsigned int , KoXmlWriter* )),
-                this, SLOT(slotFloatingObjectFound(unsigned int , KoXmlWriter* )));
+        connect(m_textHandler, SIGNAL(inlineObjectFound(const wvWare::PictureData&,KXmlWriter*)),
+                this, SLOT(slotInlineObjectFound(const wvWare::PictureData&, KXmlWriter*)));
+        connect(m_textHandler, SIGNAL(floatingObjectFound(unsigned int , KXmlWriter* )),
+                this, SLOT(slotFloatingObjectFound(unsigned int , KXmlWriter* )));
         connect(m_graphicsHandler, SIGNAL(textBoxFound(uint , bool)),
                 this, SLOT(slotTextBoxFound(uint , bool)));
 
@@ -601,7 +601,7 @@ void Document::headerStart(wvWare::HeaderData::Type type)
         //write to the buffer for even headers/footers
         m_bufferEven = new QBuffer();
         m_bufferEven->open(QIODevice::WriteOnly);
-        m_headerWriter = new KoXmlWriter(m_bufferEven);
+        m_headerWriter = new KXmlWriter(m_bufferEven);
         m_evenOpen = true;
         m_headerWriter->startElement("style:header-left");
         break;
@@ -609,7 +609,7 @@ void Document::headerStart(wvWare::HeaderData::Type type)
         //set up buffer & writer for odd header
         m_buffer = new QBuffer();
         m_buffer->open(QIODevice::WriteOnly);
-        m_headerWriter = new KoXmlWriter(m_buffer);
+        m_headerWriter = new KXmlWriter(m_buffer);
         m_headerWriter->startElement("style:header");
         m_hasHeader_list.replace(i, true);
         break;
@@ -617,7 +617,7 @@ void Document::headerStart(wvWare::HeaderData::Type type)
         //write to the buffer for even headers/footers
         m_bufferEven = new QBuffer();
         m_bufferEven->open(QIODevice::WriteOnly);
-        m_headerWriter = new KoXmlWriter(m_bufferEven);
+        m_headerWriter = new KXmlWriter(m_bufferEven);
         m_evenOpen = true;
         m_headerWriter->startElement("style:footer-left");
         break;
@@ -625,14 +625,14 @@ void Document::headerStart(wvWare::HeaderData::Type type)
         //set up buffer & writer for odd header
         m_buffer = new QBuffer();
         m_buffer->open(QIODevice::WriteOnly);
-        m_headerWriter = new KoXmlWriter(m_buffer);
+        m_headerWriter = new KXmlWriter(m_buffer);
         m_headerWriter->startElement("style:footer");
         m_hasFooter_list.replace(i, true);
         break;
     case wvWare::HeaderData::HeaderFirst:
         m_buffer = new QBuffer();
         m_buffer->open(QIODevice::WriteOnly);
-        m_headerWriter = new KoXmlWriter(m_buffer);
+        m_headerWriter = new KXmlWriter(m_buffer);
         m_firstOpen = true;
         m_headerWriter->startElement("style:header");
         m_hasHeader_list.replace(0, true);
@@ -640,7 +640,7 @@ void Document::headerStart(wvWare::HeaderData::Type type)
     case wvWare::HeaderData::FooterFirst:
         m_buffer = new QBuffer();
         m_buffer->open(QIODevice::WriteOnly);
-        m_headerWriter = new KoXmlWriter(m_buffer);
+        m_headerWriter = new KXmlWriter(m_buffer);
         m_firstOpen = true;
         m_headerWriter->startElement("style:footer");
         m_hasFooter_list.replace(0, true);
@@ -874,7 +874,7 @@ void Document::slotTableFound(KWord::Table* table)
     //m_tableQueue.push( table );
 }
 
-void Document::slotInlineObjectFound(const wvWare::PictureData& data, KoXmlWriter* writer)
+void Document::slotInlineObjectFound(const wvWare::PictureData& data, KXmlWriter* writer)
 {
     kDebug(30513) ;
     //if we have a temp writer, tell the graphicsHandler
@@ -888,7 +888,7 @@ void Document::slotInlineObjectFound(const wvWare::PictureData& data, KoXmlWrite
     }
 }
 
-void Document::slotFloatingObjectFound(unsigned int globalCP, KoXmlWriter* writer)
+void Document::slotFloatingObjectFound(unsigned int globalCP, KXmlWriter* writer)
 {
     kDebug(30513) ;
     //if we have a temp writer, tell the graphicsHandler

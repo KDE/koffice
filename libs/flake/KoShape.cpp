@@ -49,7 +49,7 @@
 #include "KoFilterEffectStack.h"
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>

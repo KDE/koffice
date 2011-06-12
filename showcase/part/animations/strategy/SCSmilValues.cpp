@@ -20,7 +20,7 @@
 #include "SCSmilValues.h"
 #include "SCShapeAnimations.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoPASavingContext.h>
 #include <kdebug.h>
 #include <QStringList>
@@ -108,7 +108,7 @@ bool SCSmilValues::loadValues(QString values, QString keyTimes, QString keySplin
 
 bool SCSmilValues::saveOdf(KoPASavingContext &paContext) const
 {
-    KoXmlWriter &writer = paContext.xmlWriter();
+    KXmlWriter &writer = paContext.xmlWriter();
     // values
     QString values;
     foreach (SCValueParser valueParser, m_values) {

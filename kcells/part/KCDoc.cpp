@@ -69,7 +69,7 @@
 #include <KOdfStorageDevice.h>
 #include <KOdfStyleStack.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoZoomHandler.h>
 #include <KoShapeSavingContext.h>
 #include <KoUpdater.h>
@@ -595,7 +595,7 @@ void KCDoc::sheetAdded(KCSheet* sheet)
 
 }
 
-void KCDoc::saveOdfViewSettings(KoXmlWriter& settingsWriter)
+void KCDoc::saveOdfViewSettings(KXmlWriter& settingsWriter)
 {
     if (!views().isEmpty()) { // no view if embedded document
         // Save visual info for the first view, such as active sheet and active cell
@@ -610,7 +610,7 @@ void KCDoc::saveOdfViewSettings(KoXmlWriter& settingsWriter)
     }
 }
 
-void KCDoc::saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter &settingsWriter)
+void KCDoc::saveOdfViewSheetSettings(KCSheet *sheet, KXmlWriter &settingsWriter)
 {
     if (!views().isEmpty()) {
         KCView *const view = static_cast<KCView*>(views().first());

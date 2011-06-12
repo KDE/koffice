@@ -27,7 +27,7 @@
 #include <Soprano/Soprano>
 
 class KOdfStore;
-class KoXmlWriter;
+class KXmlWriter;
 
 /**
  * @short Basic low level methods that are available to KoText objects

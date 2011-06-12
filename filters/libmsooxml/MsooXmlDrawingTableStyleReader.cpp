@@ -31,7 +31,7 @@
 #include <MsooXmlRelationships.h>
 #include <MsooXmlImport.h>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <QString>
 

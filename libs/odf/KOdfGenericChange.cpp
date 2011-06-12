@@ -20,7 +20,7 @@
 #include <QDateTime>
 
 #include "KOdfGenericChange.h"
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <kdebug.h>
 
@@ -47,7 +47,7 @@ KOdfGenericChange::~KOdfGenericChange()
 {
 }
 
-void KOdfGenericChange::writeChangeMetaData(KoXmlWriter* writer) const
+void KOdfGenericChange::writeChangeMetaData(KXmlWriter* writer) const
 {
     QMap<QString, QString>::const_iterator it = m_changeMetaData.begin();
     const QMap<QString, QString>::const_iterator end = m_changeMetaData.end();
@@ -68,7 +68,7 @@ void KOdfGenericChange::writeChangeMetaData(KoXmlWriter* writer) const
     }
 }
 
-void KOdfGenericChange::writeChange(KoXmlWriter *writer, const QString &name) const
+void KOdfGenericChange::writeChange(KXmlWriter *writer, const QString &name) const
 {
     if (m_changeFormat == KOdfGenericChange::ODF_1_2) {
         writeODF12Change(writer, name);
@@ -77,7 +77,7 @@ void KOdfGenericChange::writeChange(KoXmlWriter *writer, const QString &name) co
     }
 }
 
-void KOdfGenericChange::writeODF12Change(KoXmlWriter *writer, const QString &name) const
+void KOdfGenericChange::writeODF12Change(KXmlWriter *writer, const QString &name) const
 {
     writer->startElement("text:changed-region");
     writer->addAttribute("text:id", name);
@@ -111,7 +111,7 @@ void KOdfGenericChange::writeODF12Change(KoXmlWriter *writer, const QString &nam
     writer->endElement(); // text:change
 }
 
-void KOdfGenericChange::writeDeltaXmlChange(KoXmlWriter *writer, const QString &name) const
+void KOdfGenericChange::writeDeltaXmlChange(KXmlWriter *writer, const QString &name) const
 {
     writer->startElement("delta:change-transaction");
     writer->addAttribute("delta:change-id", name);

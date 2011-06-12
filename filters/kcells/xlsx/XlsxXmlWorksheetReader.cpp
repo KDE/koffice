@@ -40,7 +40,7 @@
 #include <MsooXmlGlobal.h>
 
 #include <KUnit.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KoOdfNumberStyles.h>
 #include <KoOdfGraphicStyles.h>
@@ -306,10 +306,10 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_worksheet()
 
     //The style might be changed depending on what elements we find,
     //hold the body writer so that we can set the proper style
-    KoXmlWriter* heldBody = body;
+    KXmlWriter* heldBody = body;
     QBuffer* bodyBuffer = new QBuffer();
     bodyBuffer->open(QIODevice::ReadWrite);
-    body = new KoXmlWriter(bodyBuffer);
+    body = new KXmlWriter(bodyBuffer);
 
     while (!atEnd()) {
         readNext();
@@ -332,7 +332,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_worksheet()
     if( !m_context->sheet->pictureBackgroundPath().isNull() ) {
         QBuffer buffer;
         buffer.open(QIODevice::WriteOnly);
-        KoXmlWriter writer(&buffer);
+        KXmlWriter writer(&buffer);
 
         writer.startElement("style:background-image");
         writer.addAttribute("xlink:href", m_context->sheet->pictureBackgroundPath());

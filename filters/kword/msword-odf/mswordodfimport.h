@@ -24,7 +24,7 @@
 #define MSWORDODFIMPORT_H
 
 #include <KoFilter.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <QByteArray>
 #include <QVariantList>
 

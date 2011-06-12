@@ -26,7 +26,7 @@ class QString;
 class QRect;
 class QRectF;
 class KoViewConverter;
-class KoXmlWriter;
+class KXmlWriter;
 class KoFilterEffectRenderContext;
 class KoFilterEffectLoadingContext;
 class KoXmlElement;
@@ -147,7 +147,7 @@ public:
      * Writes custom data to given xml element.
      * @param writer the xml writer to write data to
      */
-    virtual void save(KoXmlWriter &writer) = 0;
+    virtual void save(KXmlWriter &writer) = 0;
 
 protected:
     /// Sets the required number of input images
@@ -163,7 +163,7 @@ protected:
      * is only saved if required, maximal and actual input count equals 1.
      * All other filters have to write inputs on their own.
      */
-    void saveCommonAttributes(KoXmlWriter &writer);
+    void saveCommonAttributes(KXmlWriter &writer);
 
 private:
     class Private;

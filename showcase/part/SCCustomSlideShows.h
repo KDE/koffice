@@ -23,7 +23,7 @@
 #include<QMap>
 
 //Forward declarations
-class KoXmlWriter;
+class KXmlWriter;
 class KoXmlElement;
 class KoPAPageBase;
 class KoPASavingContext;

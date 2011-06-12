@@ -28,7 +28,7 @@
 #include <QByteArray>
 #include <QVector>
 
-class KoXmlWriter;
+class KXmlWriter;
 
 //! Represents a single shared string. Can be plain string or XML string.
 /*! Use saveXml() to save the data to a Xml Writer. This wil lad a text span

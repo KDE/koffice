@@ -45,7 +45,7 @@
 #include <KoTextDocument.h>
 #include "KWAboutData.h"
 #include <KoApplication.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoShapeRegistry.h>
 #include <KXmlReader.h>
 #include <KOdfStoreReader.h>
@@ -408,7 +408,7 @@ void TestRdf::addAndSage()
     KOdfStore *store = KOdfStore::createStore(todt, KOdfStore::Write, mimeType, KOdfStore::Zip);
     store->disallowNameExpansion();
     KOdfWriteStore odfStore (store);
-    KoXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
+    KXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
     QVERIFY (manifestWriter);
     QVERIFY (rdf->saveOasis(store, manifestWriter));
     odfStore.closeManifestWriter();

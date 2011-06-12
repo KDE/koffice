@@ -30,7 +30,7 @@
 #include <KUnit.h>
 #include <kpluginfactory.h>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <libwpg/libwpg.h>
 #include <libwpg/WPGStreamImplementation.h>
@@ -54,12 +54,12 @@ WPGImport::~WPGImport()
 
 static QByteArray createManifest()
 {
-    KoXmlWriter* manifestWriter;
+    KXmlWriter* manifestWriter;
     QByteArray manifestData;
     QBuffer manifestBuffer(&manifestData);
 
     manifestBuffer.open(QIODevice::WriteOnly);
-    manifestWriter = new KoXmlWriter(&manifestBuffer);
+    manifestWriter = new KXmlWriter(&manifestBuffer);
 
     manifestWriter->startDocument("manifest:manifest");
     manifestWriter->startElement("manifest:manifest");

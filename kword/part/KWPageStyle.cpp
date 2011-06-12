@@ -22,7 +22,7 @@
 #include "KWPageStyle.h"
 #include "KWPageStyle_p.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KUnit.h>
 #include <KoColorBackground.h>
@@ -305,7 +305,7 @@ KOdfGenericStyle KWPageStyle::saveOdf() const
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter writer(&buffer);
+    KXmlWriter writer(&buffer);
 
     if (d->columns.columns > 1) {
         writer.startElement("style:columns");

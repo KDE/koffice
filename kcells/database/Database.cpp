@@ -22,7 +22,7 @@
 #include <QString>
 
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include "DatabaseSource.h"
 #include "Filter.h"
@@ -264,7 +264,7 @@ bool Database::loadOdf(const KoXmlElement& element, const KCMap* map)
     return true;
 }
 
-void Database::saveOdf(KoXmlWriter& xmlWriter) const
+void Database::saveOdf(KXmlWriter& xmlWriter) const
 {
     if (d->targetRangeAddress.isEmpty())
         return;

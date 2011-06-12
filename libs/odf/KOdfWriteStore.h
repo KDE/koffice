@@ -21,7 +21,7 @@
 #define KOODFWRITESTORE_H
 
 class QIODevice;
-class KoXmlWriter;
+class KXmlWriter;
 class KOdfStore;
 
 #include "koodf_export.h"
@@ -30,9 +30,9 @@ class KOdfStore;
  * Helper class around KOdfStore for writing out ODF files.
  * This class helps solving the problem that automatic styles must be before
  * the body, but it's easier to iterate over the application's objects only
- * once. So we open a KoXmlWriter into a memory buffer, write the body into it,
+ * once. So we open a KXmlWriter into a memory buffer, write the body into it,
  * collect automatic styles while doing that, write out automatic styles,
- * and then copy the body XML from the buffer into the real KoXmlWriter.
+ * and then copy the body XML from the buffer into the real KXmlWriter.
  *
  * The typical use of this class is therefore:
  *   - write body into bodyWriter() and collect auto styles
@@ -64,26 +64,26 @@ public:
      * @param rootElementName the tag name of the root element.
      *    This is either office:document, office:document-content,
      *    office:document-styles, office:document-meta or office:document-settings
-     * @return the KoXmlWriter instance. It becomes owned by the caller, which
+     * @return the KXmlWriter instance. It becomes owned by the caller, which
      * must delete it at some point.
      *
      * Once done with writing the contents of the root element, you
-     * will need to call endElement(); endDocument(); before destroying the KoXmlWriter.
+     * will need to call endElement(); endDocument(); before destroying the KXmlWriter.
      */
-    static KoXmlWriter *createOasisXmlWriter(QIODevice *dev, const char *rootElementName);
+    static KXmlWriter *createOasisXmlWriter(QIODevice *dev, const char *rootElementName);
 
     KOdfStore *store() const;
 
     /**
-     * Open contents.xml for writing and return the KoXmlWriter
+     * Open contents.xml for writing and return the KXmlWriter
      */
-    KoXmlWriter *contentWriter();
+    KXmlWriter *contentWriter();
 
     /**
-     * Open another KoXmlWriter for writing out the contents
+     * Open another KXmlWriter for writing out the contents
      * into a temporary file, to collect automatic styles while doing that.
      */
-    KoXmlWriter *bodyWriter();
+    KXmlWriter *bodyWriter();
 
     /**
      * This will copy the body into the content writer,
@@ -97,13 +97,13 @@ public:
     /**
      * Create and return a manifest writer. It will write to a memory buffer.
      */
-    KoXmlWriter *manifestWriter(const char *mimeType);
+    KXmlWriter *manifestWriter(const char *mimeType);
 
     /**
      * Return the manifest writer. It has to be created by manifestWriter( mimeType ) before you can use
      * this function.
      */
-    KoXmlWriter *manifestWriter();
+    KXmlWriter *manifestWriter();
 
     /**
      * Close the manifest writer, writing its contents to manifest.xml

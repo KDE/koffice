@@ -23,7 +23,7 @@
 */
 
 #include <qdatetime.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <QBuffer>
 #include <QString>
 #include <iostream>
@@ -48,7 +48,7 @@ void DateTimeFormat::addDateStyle(KOdfGenericStyles& styles, bool dayofweek, boo
     QBuffer buffer;
 
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter xmlWriter(&buffer);
+    KXmlWriter xmlWriter(&buffer);
 
     KOdfGenericStyle dt(KOdfGenericStyle::NumericDateStyle);
     dt.setAutoStyleInStylesDotXml(true);
@@ -101,7 +101,7 @@ void DateTimeFormat::addTimeStyle(KOdfGenericStyles& styles, bool hr12Format, bo
     QBuffer buffer;
 
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter xmlWriter(&buffer);
+    KXmlWriter xmlWriter(&buffer);
 
     KOdfGenericStyle tm(KOdfGenericStyle::NumericTimeStyle);
     tm.setAutoStyleInStylesDotXml(true);
@@ -184,7 +184,7 @@ void DateTimeFormat::addDateTimeAutoStyles(KOdfGenericStyles& styles,
     }
 }
 
-void DateTimeFormat::addMasterDateTimeSection(KoXmlWriter& xmlWriter, QString tStyle)
+void DateTimeFormat::addMasterDateTimeSection(KXmlWriter& xmlWriter, QString tStyle)
 {
     QDateTime dt = QDateTime::currentDateTime();
     QString format, result;

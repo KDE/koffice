@@ -38,7 +38,7 @@
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfBorders.h>
 
 class KoSectionStyle::Private

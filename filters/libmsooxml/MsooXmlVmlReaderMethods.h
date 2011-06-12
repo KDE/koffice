@@ -58,7 +58,7 @@ protected:
     QMap<QByteArray, QString> m_vmlStyle;
 
     //writer where style:background-image is stored for style:page-layout-properties
-    KoXmlWriter* m_pDocBkgImageWriter;
+    KXmlWriter* m_pDocBkgImageWriter;
 
     QString m_imagedataPath; //!< set in read_shape()
     QString m_imagedataFile; //!< set in read_shape()

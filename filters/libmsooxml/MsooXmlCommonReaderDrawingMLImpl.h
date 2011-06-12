@@ -42,7 +42,7 @@
 #define MSOOXML_CURRENT_NS DRAWINGML_PIC_NS
 #endif
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <MsooXmlUnits.h>
 #include "Charting.h"
 #include "ChartExport.h"
@@ -173,8 +173,8 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_pic()
 
 #if defined(XLSXXMLDRAWINGREADER_CPP)
     QBuffer picBuf;
-    KoXmlWriter picWriter(&picBuf);
-    KoXmlWriter *bodyBackup = body;
+    KXmlWriter picWriter(&picBuf);
+    KXmlWriter *bodyBackup = body;
     body = &picWriter;
 #endif
 
@@ -944,7 +944,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_sp()
     m_xlinkHref.clear();
 
 #if defined(XLSXXMLDRAWINGREADER_CPP)
-    KoXmlWriter *bodyBackup = body;
+    KXmlWriter *bodyBackup = body;
     body = m_currentDrawingObject->setShape(new XlsxShape());
 #endif
 
@@ -968,7 +968,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_sp()
             ELSE_TRY_READ_IF(txBody)
 #endif
             else if (qualifiedName() == QLatin1String(QUALIFIED_NAME(txBody))) {
-                KoXmlWriter* w = body;
+                KXmlWriter* w = body;
                 body->startElement("draw:text-box");
                 TRY_READ(DrawingML_txBody)
                 w->endElement();

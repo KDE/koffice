@@ -29,7 +29,7 @@ class QPainter;
 class KoViewConverter;
 class QRectF;
 class QColor;
-class KoXmlWriter;
+class KXmlWriter;
 class KoXmlDocument;
 
 /**
@@ -101,7 +101,7 @@ public:
     bool loadOdfSettings(const KoXmlDocument &settingsDoc);
 
     /// Saves guide lines to the given settings xml writer
-    void saveOdfSettings(KoXmlWriter &settingsWriter);
+    void saveOdfSettings(KXmlWriter &settingsWriter);
 
 private:
     class Private;

@@ -25,7 +25,7 @@
 #include "MsooXmlSchemas.h"
 #include "MsooXmlUtils.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoCharacterStyle.h>
 
 QDebug operator<<(QDebug dbg, const QXmlStreamReader& reader)

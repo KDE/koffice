@@ -23,7 +23,7 @@
 
 #include <KProperties.h>
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
@@ -49,7 +49,7 @@ DateVariable::~DateVariable()
 void DateVariable::saveOdf(KoShapeSavingContext & context)
 {
     // TODO support data-style-name
-    KoXmlWriter *writer = &context.xmlWriter();
+    KXmlWriter *writer = &context.xmlWriter();
     if (m_displayType == Time) {
         writer->startElement("text:time", false);
     } else {

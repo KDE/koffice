@@ -20,7 +20,7 @@
 #include "SCPlaceholder.h"
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KUnit.h>
 #include <KoPASavingContext.h>
@@ -67,7 +67,7 @@ bool SCPlaceholder::loadOdf(const KoXmlElement &element, const QRectF &pageSize)
     return true;
 }
 
-void SCPlaceholder::saveOdf(KoXmlWriter &xmlWriter)
+void SCPlaceholder::saveOdf(KXmlWriter &xmlWriter)
 {
     xmlWriter.startElement("presentation:placeholder");
     xmlWriter.addAttribute("presentation:object", m_presentationObject);

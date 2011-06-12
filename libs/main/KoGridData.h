@@ -27,7 +27,7 @@
 class QPainter;
 class QRectF;
 class KoViewConverter;
-class KoXmlWriter;
+class KXmlWriter;
 class KToggleAction;
 class KoXmlElement;
 class KoXmlDocument;
@@ -102,7 +102,7 @@ public:
     bool loadOdfSettings(const KoXmlDocument & settingsDoc);
 
     /// Saves grid data to the given settings xml writer
-    void saveOdfSettings(KoXmlWriter &settingsWriter);
+    void saveOdfSettings(KXmlWriter &settingsWriter);
 
     /**
       * Paint the grid

@@ -35,7 +35,7 @@
 #include "KoTextOnShapeContainer.h"
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KUnit.h>
 #include <KOdfGenericStyle.h>

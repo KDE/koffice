@@ -34,17 +34,17 @@
  * document in memory (like QDom does), and avoids using QTextStream at all
  * (which in Qt3 has major performance issues when converting to utf8).
  */
-class KOODF_EXPORT KoXmlWriter
+class KOODF_EXPORT KXmlWriter
 {
 public:
     /**
-     * Create a KoXmlWriter instance to write out an XML document into
+     * Create a KXmlWriter instance to write out an XML document into
      * the given QIODevice.
      */
-    explicit KoXmlWriter(QIODevice* dev, int indentLevel = 0);
+    explicit KXmlWriter(QIODevice* dev, int indentLevel = 0);
 
     /// Destructor
-    ~KoXmlWriter();
+    ~KXmlWriter();
 
     QIODevice *device() const;
 
@@ -161,7 +161,7 @@ public:
      * This is quite a special-purpose method, not for everyday use.
      * It adds a complete element (with its attributes and child elements)
      * as a child of the current element. The string is supposed to be escaped
-     * for XML already, so it will usually come from another KoXmlWriter.
+     * for XML already, so it will usually come from another KXmlWriter.
      */
     void addCompleteElement(const char* cstr);
 
@@ -169,12 +169,12 @@ public:
      * This is quite a special-purpose method, not for everyday use.
      * It adds a complete element (with its attributes and child elements)
      * as a child of the current element. The iodevice is supposed to be escaped
-     * for XML already, so it will usually come from another KoXmlWriter.
+     * for XML already, so it will usually come from another KXmlWriter.
      * This is usually used with KTempFile.
      */
     void addCompleteElement(QIODevice* dev);
 
-    // #### Maybe we want to subclass KoXmlWriter for manifest files.
+    // #### Maybe we want to subclass KXmlWriter for manifest files.
     /**
      * Special helper for writing "manifest" files
      * This is equivalent to startElement/2*addAttribute/endElement
@@ -207,7 +207,7 @@ public:
     /**
      * @brief Adds a text span as nodes of the current element.
      *
-     * Unlike KoXmlWriter::addTextNode it handles tabulations, linebreaks,
+     * Unlike KXmlWriter::addTextNode it handles tabulations, linebreaks,
      * and multiple spaces by using the appropriate OASIS tags.
      *
      * @param text the text to write
@@ -225,7 +225,7 @@ public:
 
     /**
      * @return the current indentation level.
-     * Useful when creating a sub-KoXmlWriter (see addCompleteElement)
+     * Useful when creating a sub-KXmlWriter (see addCompleteElement)
      */
     int indentLevel() const;
 
@@ -274,8 +274,8 @@ private:
     class Private;
     Private * const d;
 
-    KoXmlWriter(const KoXmlWriter &);   // forbidden
-    KoXmlWriter& operator=(const KoXmlWriter &);   // forbidden
+    KXmlWriter(const KXmlWriter &);   // forbidden
+    KXmlWriter& operator=(const KXmlWriter &);   // forbidden
 };
 
 #endif /* XMLWRITER_H */

@@ -37,7 +37,7 @@
 #include <KUnit.h>
 #include <kpluginfactory.h>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
@@ -149,7 +149,7 @@ public:
     KOdfStore* storeout;
     KOdfGenericStyles *shapeStyles;
     KOdfGenericStyles *dataStyles;
-    KoXmlWriter *shapesXml;
+    KXmlWriter *shapesXml;
 
     void processMetaData();
     void processSheet(Sheet* isheet, KCSheet* osheet);
@@ -184,14 +184,14 @@ public:
     QList<QPair<QRegion, KCConditions> > cellConditions;
 
     QList<ChartExport*> charts;
-    void processCharts(KoXmlWriter* manifestWriter);
+    void processCharts(KXmlWriter* manifestWriter);
 
-    void addManifestEntries(KoXmlWriter* ManifestWriter);
+    void addManifestEntries(KXmlWriter* ManifestWriter);
     void insertPictureManifest(PictureObject* picture);
     QMap<QString,QString> manifestEntries;
 
-    KoXmlWriter* beginMemoryXmlWriter(const char* docElement);
-    KoXmlDocument endMemoryXmlWriter(KoXmlWriter* writer);
+    KXmlWriter* beginMemoryXmlWriter(const char* docElement);
+    KoXmlDocument endMemoryXmlWriter(KXmlWriter* writer);
 };
 
 ExcelImport::ExcelImport(QObject* parent, const QVariantList&)
@@ -304,7 +304,7 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
     }
 
     QBuffer manifestBuffer;
-    KoXmlWriter manifestWriter(&manifestBuffer);
+    KXmlWriter manifestWriter(&manifestBuffer);
     manifestWriter.startDocument("manifest:manifest");
     manifestWriter.startElement("manifest:manifest");
     manifestWriter.addAttribute("xmlns:manifest", KOdfXmlNS::manifest);
@@ -411,7 +411,7 @@ void ExcelImport::Private::processMetaData()
 void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElement, KOdfStore* store)
 {
     // save styles to xml
-    KoXmlWriter *stylesXml = beginMemoryXmlWriter("office:styles");
+    KXmlWriter *stylesXml = beginMemoryXmlWriter("office:styles");
     shapeStyles->saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, stylesXml);
 
     KoXmlDocument stylesDoc = endMemoryXmlWriter(stylesXml);
@@ -1024,7 +1024,7 @@ void ExcelImport::Private::processCellObjects(Cell* ic, KCCell oc)
     }
 }
 
-void ExcelImport::Private::processCharts(KoXmlWriter* manifestWriter)
+void ExcelImport::Private::processCharts(KXmlWriter* manifestWriter)
 {
     foreach(ChartExport *c, this->charts) {
         c->set2003ColorPalette( workbook->colorTable() );
@@ -1284,7 +1284,7 @@ void ExcelImport::Private::insertPictureManifest(PictureObject* picture)
     manifestEntries.insert(fileName, mimeType);
 }
 
-void ExcelImport::Private::addManifestEntries(KoXmlWriter* manifestWriter)
+void ExcelImport::Private::addManifestEntries(KXmlWriter* manifestWriter)
 {
     QMap<QString, QString>::const_iterator iterator = manifestEntries.constBegin();
     QMap<QString, QString>::const_iterator end = manifestEntries.constEnd();
@@ -1303,11 +1303,11 @@ void ExcelImport::Private::addProgress(int addValue)
     workbook->emitProgress(progress);
 }
 
-KoXmlWriter* ExcelImport::Private::beginMemoryXmlWriter(const char* docElement)
+KXmlWriter* ExcelImport::Private::beginMemoryXmlWriter(const char* docElement)
 {
     QIODevice* d = new QBuffer;
     d->open(QIODevice::ReadWrite);
-    KoXmlWriter* xml = new KoXmlWriter(d);
+    KXmlWriter* xml = new KXmlWriter(d);
     xml->startDocument(docElement);
     xml->startElement(docElement);
     xml->addAttribute("xmlns:office", KOdfXmlNS::office);
@@ -1335,7 +1335,7 @@ KoXmlWriter* ExcelImport::Private::beginMemoryXmlWriter(const char* docElement)
     return xml;
 }
 
-KoXmlDocument ExcelImport::Private::endMemoryXmlWriter(KoXmlWriter* writer)
+KoXmlDocument ExcelImport::Private::endMemoryXmlWriter(KXmlWriter* writer)
 {
     writer->endElement();
     writer->endDocument();
@@ -1372,7 +1372,7 @@ void ExcelImport::Private::processNumberFormats()
         }
     }
 
-    KoXmlWriter *stylesXml = beginMemoryXmlWriter("office:styles");
+    KXmlWriter *stylesXml = beginMemoryXmlWriter("office:styles");
     dataStyles->saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, stylesXml);
 
     KoXmlDocument stylesDoc = endMemoryXmlWriter(stylesXml);

@@ -36,7 +36,7 @@
 #include <MsooXmlDrawingTableStyleReader.h>
 #include <MsooXmlThemesReader.h>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KoOdfGraphicStyles.h>
 #include <KUnit.h>
@@ -160,7 +160,7 @@ public:
     }
     ~Private() {
     }
-    KoXmlWriter *body; //!< Backup body pointer for SlideMaster mode
+    KXmlWriter *body; //!< Backup body pointer for SlideMaster mode
     //! Used to index shapes in master slide when inheriting properties
     bool phRead;
     QString qualifiedNameOfMainElement;
@@ -225,7 +225,7 @@ KoFilter::ConversionStatus PptxXmlSlideReader::readInternal()
         d->body = body;
         // We do not want to write to the main body in slidemaster, so we use secondary body,
         // the old body is
-        body = new KoXmlWriter(&slideMasterBuffer);
+        body = new KXmlWriter(&slideMasterBuffer);
     }
 
     readNext();
@@ -1109,14 +1109,14 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_spTree()
     QBuffer placeholderElBuffer(&placeholderEl);
     placeholderElBuffer.open(QIODevice::WriteOnly);
     delete m_placeholderElWriter;
-    m_placeholderElWriter = new KoXmlWriter(&placeholderElBuffer, 0/*indentation*/);
-    MSOOXML::Utils::AutoPtrSetter<KoXmlWriter> placeholderElWriterSetter(m_placeholderElWriter);
+    m_placeholderElWriter = new KXmlWriter(&placeholderElBuffer, 0/*indentation*/);
+    MSOOXML::Utils::AutoPtrSetter<KXmlWriter> placeholderElWriterSetter(m_placeholderElWriter);
 
     bool potentiallyAddToLayoutFrames = false;
 
     QBuffer* shapeBuf = 0;
-    KoXmlWriter *shapeWriter = 0;
-    KoXmlWriter *bodyBackup = body;
+    KXmlWriter *shapeWriter = 0;
+    KXmlWriter *bodyBackup = body;
 
     while (!atEnd()) {
         readNext();
@@ -1125,7 +1125,7 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_spTree()
         if (isStartElement()) {
             if (m_context->type == SlideLayout) {
                 shapeBuf = new QBuffer;
-                shapeWriter = new KoXmlWriter(shapeBuf);
+                shapeWriter = new KXmlWriter(shapeBuf);
                 body = shapeWriter;
             }
             if (qualifiedName() == "p:sp") {

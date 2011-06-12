@@ -29,7 +29,7 @@
 //#include <QtGui/QColor>
 
 class KOdfStore;
-class KoXmlWriter;
+class KXmlWriter;
 class KOdfGenericStyles;
 class KOdfGenericStyle;
 
@@ -61,8 +61,8 @@ public:
 #endif
     qreal m_x, m_y, m_width, m_height; //in pt    
 
-    bool saveIndex(KoXmlWriter* xmlWriter);
-    bool saveContent(KOdfStore* store, KoXmlWriter* manifestWriter);
+    bool saveIndex(KXmlWriter* xmlWriter);
+    bool saveContent(KOdfStore* store, KXmlWriter* manifestWriter);
 
 private:
     QString toPtString( int number );
@@ -82,7 +82,7 @@ private:
     void addDataThemeToStyle( const int styleID, KOdfGenericStyle& style, int dataNumber, int maxNumData = 1, bool strokes = true );
     QString generateGradientStyle( KOdfGenericStyles& mainStyles, const Charting::Gradient* grad );
     QColor calculateColorFromGradientStop( const Charting::Gradient::GradientStop& grad );
-    void writeInternalTable ( KoXmlWriter* bodyWriter );
+    void writeInternalTable ( KXmlWriter* bodyWriter );
     QList< QColor > m_palette;
     // tells if a 2003 color palette has been set
     bool paletteSet;

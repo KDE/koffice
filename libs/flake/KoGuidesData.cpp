@@ -22,7 +22,7 @@
 #include "KoViewConverter.h"
 #include <KUnit.h>
 #include <KoOdfSettings.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <QtGui/QPainter>
 
@@ -178,7 +178,7 @@ bool KoGuidesData::loadOdfSettings(const KoXmlDocument & settingsDoc)
     return true;
 }
 
-void KoGuidesData::saveOdfSettings(KoXmlWriter &settingsWriter)
+void KoGuidesData::saveOdfSettings(KXmlWriter &settingsWriter)
 {
     settingsWriter.startElement("config:config-item");
     settingsWriter.addAttribute("config:name", "SnapLinesDrawing");

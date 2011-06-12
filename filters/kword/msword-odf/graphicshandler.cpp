@@ -79,7 +79,7 @@ QString mm(double v) {
  * Drawing Writer
  * ************************************************
  */
-DrawingWriter::DrawingWriter(KoXmlWriter& xmlWriter, KOdfGenericStyles& kostyles,
+DrawingWriter::DrawingWriter(KXmlWriter& xmlWriter, KOdfGenericStyles& kostyles,
                              bool stylesxml_, bool inlineObj)
         : Writer(xmlWriter, kostyles, stylesxml_),
           xLeft(0),
@@ -159,8 +159,8 @@ void DrawingWriter::SetClientRectangle(MSO::OfficeArtChildAnchor& anchor)
  * Graphics Handler
  * ************************************************
  */
-KWordGraphicsHandler::KWordGraphicsHandler(Document* doc, KoXmlWriter* bodyWriter,
-                                         KoXmlWriter* manifestWriter, KOdfStore* store,
+KWordGraphicsHandler::KWordGraphicsHandler(Document* doc, KXmlWriter* bodyWriter,
+                                         KXmlWriter* manifestWriter, KOdfStore* store,
                                          KOdfGenericStyles* mainStyles)
 : QObject()
 , m_document(doc)
@@ -326,7 +326,7 @@ void KWordGraphicsHandler::handleFloatingObject(unsigned int globalCP)
     }
 }
 
-void KWordGraphicsHandler::setBodyWriter(KoXmlWriter* writer)
+void KWordGraphicsHandler::setBodyWriter(KXmlWriter* writer)
 {
     m_bodyWriter = writer;
 }
@@ -1328,7 +1328,7 @@ void KWordGraphicsHandler::parseFloatingPictures(void)
 }
 
 QMap<QByteArray, QString>
-KWordGraphicsHandler::createFloatingPictures(KOdfStore* store, KoXmlWriter* manifest)
+KWordGraphicsHandler::createFloatingPictures(KOdfStore* store, KXmlWriter* manifest)
 {
     PictureReference ref;
     QMap<QByteArray, QString> fileNames;

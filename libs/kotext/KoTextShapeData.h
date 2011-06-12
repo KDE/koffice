@@ -27,7 +27,7 @@
 #include <KoInsets.h>
 
 class QTextDocument;
-class KoXmlWriter;
+class KXmlWriter;
 class KoXmlElement;
 class KoShapeLoadingContext;
 class KoShapeSavingContext;

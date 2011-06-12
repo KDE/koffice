@@ -27,7 +27,7 @@
 #include <QMap>
 #include <QString>
 
-class KoXmlWriter;
+class KXmlWriter;
 
 class KCValidity;
 class KCValueConverter;
@@ -92,7 +92,7 @@ public:
     QString insert(const KCGenValidationStyle& style);
 
     typedef QMap<KCGenValidationStyle, QString> StyleMap;
-    void writeStyle(KoXmlWriter& writer);
+    void writeStyle(KXmlWriter& writer);
 
 private:
     QString makeUniqueName(const QString& base) const;

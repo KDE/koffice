@@ -34,7 +34,7 @@
 #include <KOdfStyleStack.h>
 #include <KUnit.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include "KOdfLoadingContext.h"
 #include "KOdfStylesReader.h"
@@ -236,7 +236,7 @@ QString KoOdfGraphicStyles::saveOdfGradientStyle(KOdfGenericStyles &mainStyles, 
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
+    KXmlWriter elementWriter(&buffer);    // TODO pass indentation level
 
     // save stops
     QGradientStops stops = gradient->stops();

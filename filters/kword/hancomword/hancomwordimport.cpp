@@ -33,7 +33,7 @@
 #include <KUnit.h>
 #include <kpluginfactory.h>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <iostream>
 #include "pole.h"
@@ -156,12 +156,12 @@ KoFilter::ConversionStatus HancomWordImport::convert(const QByteArray& from, con
 
 QByteArray HancomWordImport::Private::createContent()
 {
-    KoXmlWriter* contentWriter;
+    KXmlWriter* contentWriter;
     QByteArray contentData;
     QBuffer contentBuffer(&contentData);
 
     contentBuffer.open(QIODevice::WriteOnly);
-    contentWriter = new KoXmlWriter(&contentBuffer);
+    contentWriter = new KXmlWriter(&contentBuffer);
 
     contentWriter->startDocument("office:document-content");
     contentWriter->startElement("office:document-content");
@@ -207,12 +207,12 @@ QByteArray HancomWordImport::Private::createContent()
 
 QByteArray HancomWordImport::Private::createStyles()
 {
-    KoXmlWriter* stylesWriter;
+    KXmlWriter* stylesWriter;
     QByteArray stylesData;
     QBuffer stylesBuffer(&stylesData);
 
     stylesBuffer.open(QIODevice::WriteOnly);
-    stylesWriter = new KoXmlWriter(&stylesBuffer);
+    stylesWriter = new KXmlWriter(&stylesBuffer);
 
     stylesWriter->startDocument("office:document-styles");
     stylesWriter->startElement("office:document-styles");
@@ -263,12 +263,12 @@ QByteArray HancomWordImport::Private::createStyles()
 
 QByteArray HancomWordImport::Private::createManifest()
 {
-    KoXmlWriter* manifestWriter;
+    KXmlWriter* manifestWriter;
     QByteArray manifestData;
     QBuffer manifestBuffer(&manifestData);
 
     manifestBuffer.open(QIODevice::WriteOnly);
-    manifestWriter = new KoXmlWriter(&manifestBuffer);
+    manifestWriter = new KXmlWriter(&manifestBuffer);
 
     manifestWriter->startDocument("manifest:manifest");
     manifestWriter->startElement("manifest:manifest");

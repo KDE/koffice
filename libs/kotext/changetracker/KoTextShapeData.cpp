@@ -40,7 +40,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include "KoTextPage.h"
 

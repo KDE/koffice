@@ -21,7 +21,7 @@
 #include "KoFilterEffectRenderContext.h"
 #include "KoFilterEffectLoadingContext.h"
 #include "KoViewConverter.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include <KLocale>
 #include <KMimeType>
@@ -75,7 +75,7 @@ bool ImageEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingC
     return true;
 }
 
-void ImageEffect::save(KoXmlWriter &writer)
+void ImageEffect::save(KXmlWriter &writer)
 {
     writer.startElement(ImageEffectId);
 

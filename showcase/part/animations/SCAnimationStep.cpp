@@ -21,7 +21,7 @@
 #include "SCAnimationStep.h"
 #include "SCAnimationSubStep.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoPASavingContext.h>
 
 SCAnimationStep::SCAnimationStep()
@@ -44,7 +44,7 @@ void SCAnimationStep::init(SCAnimationCache *animationCache, int step)
 
 bool SCAnimationStep::saveOdf(KoPASavingContext &paContext) const
 {
-    KoXmlWriter &writer = paContext.xmlWriter();
+    KXmlWriter &writer = paContext.xmlWriter();
     writer.startElement("anim:par");
     for (int i=0; i < this->animationCount(); i++) {
         bool startStep = !i;

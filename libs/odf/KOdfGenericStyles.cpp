@@ -26,7 +26,7 @@
 
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include "KOdfWriteStore.h"
 #include "KOdfFontData.h"
 #include <float.h>
@@ -119,10 +119,10 @@ public:
     }
 
     QList<KOdfGenericStyles::NamedStyle> styles(const QSet<QString>& names, KOdfGenericStyle::Type type) const;
-    void saveOdfAutomaticStyles(KoXmlWriter* xmlWriter, const QSet<QString>& styleNames,
+    void saveOdfAutomaticStyles(KXmlWriter* xmlWriter, const QSet<QString>& styleNames,
                                 const QByteArray& rawOdfAutomaticStyles) const;
-    void saveOdfDocumentStyles(KoXmlWriter* xmlWriter) const;
-    void saveOdfMasterStyles(KoXmlWriter* xmlWriter) const;
+    void saveOdfDocumentStyles(KXmlWriter* xmlWriter) const;
+    void saveOdfMasterStyles(KXmlWriter* xmlWriter) const;
     QString makeUniqueName(const QString& base, InsertionFlags flags) const;
 
     /**
@@ -131,7 +131,7 @@ public:
      * This creates the office:font-face-decls tag containing all font face
      * declarations
      */
-    void saveOdfFontFaceDecls(KoXmlWriter* xmlWriter) const;
+    void saveOdfFontFaceDecls(KXmlWriter* xmlWriter) const;
 
     /// style definition -> name
     StyleMap styleMap;
@@ -181,7 +181,7 @@ QList<KOdfGenericStyles::NamedStyle> KOdfGenericStyles::Private::styles(const QS
     return lst;
 }
 
-void KOdfGenericStyles::Private::saveOdfAutomaticStyles(KoXmlWriter* xmlWriter, const QSet<QString>& styleNames,
+void KOdfGenericStyles::Private::saveOdfAutomaticStyles(KXmlWriter* xmlWriter, const QSet<QString>& styleNames,
                                                   const QByteArray& rawOdfAutomaticStyles) const
 {
     xmlWriter->startElement("office:automatic-styles");
@@ -202,7 +202,7 @@ void KOdfGenericStyles::Private::saveOdfAutomaticStyles(KoXmlWriter* xmlWriter, 
     xmlWriter->endElement(); // office:automatic-styles
 }
 
-void KOdfGenericStyles::Private::saveOdfDocumentStyles(KoXmlWriter* xmlWriter) const
+void KOdfGenericStyles::Private::saveOdfDocumentStyles(KXmlWriter* xmlWriter) const
 {
     xmlWriter->startElement("office:styles");
 
@@ -238,7 +238,7 @@ void KOdfGenericStyles::Private::saveOdfDocumentStyles(KoXmlWriter* xmlWriter) c
     xmlWriter->endElement(); // office:styles
 }
 
-void KOdfGenericStyles::Private::saveOdfMasterStyles(KoXmlWriter* xmlWriter) const
+void KOdfGenericStyles::Private::saveOdfMasterStyles(KXmlWriter* xmlWriter) const
 {
     xmlWriter->startElement("office:master-styles");
 
@@ -255,7 +255,7 @@ void KOdfGenericStyles::Private::saveOdfMasterStyles(KoXmlWriter* xmlWriter) con
     xmlWriter->endElement(); // office:master-styles
 }
 
-void KOdfGenericStyles::Private::saveOdfFontFaceDecls(KoXmlWriter* xmlWriter) const
+void KOdfGenericStyles::Private::saveOdfFontFaceDecls(KXmlWriter* xmlWriter) const
 {
     if (fontFaces.isEmpty())
         return;
@@ -446,7 +446,7 @@ KOdfFontData KOdfGenericStyles::fontFace(const QString& name) const
     return d->fontFaces.value(name);
 }
 
-bool KOdfGenericStyles::saveOdfStylesDotXml(KOdfStore* store, KoXmlWriter* manifestWriter) const
+bool KOdfGenericStyles::saveOdfStylesDotXml(KOdfStore* store, KXmlWriter* manifestWriter) const
 {
     if (!store->open("styles.xml"))
         return false;
@@ -454,7 +454,7 @@ bool KOdfGenericStyles::saveOdfStylesDotXml(KOdfStore* store, KoXmlWriter* manif
     manifestWriter->addManifestEntry("styles.xml",  "text/xml");
 
     KOdfStorageDevice stylesDev(store);
-    KoXmlWriter* stylesWriter = KOdfWriteStore::createOasisXmlWriter(&stylesDev, "office:document-styles");
+    KXmlWriter* stylesWriter = KOdfWriteStore::createOasisXmlWriter(&stylesDev, "office:document-styles");
 
     d->saveOdfFontFaceDecls(stylesWriter);
     d->saveOdfDocumentStyles(stylesWriter);
@@ -471,7 +471,7 @@ bool KOdfGenericStyles::saveOdfStylesDotXml(KOdfStore* store, KoXmlWriter* manif
     return true;
 }
 
-void KOdfGenericStyles::saveOdfStyles(StylesPlacement placement, KoXmlWriter* xmlWriter) const
+void KOdfGenericStyles::saveOdfStyles(StylesPlacement placement, KXmlWriter* xmlWriter) const
 {
     switch (placement) {
     case DocumentStyles:

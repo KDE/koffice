@@ -29,7 +29,7 @@
 
 class KoListStyle;
 class KoShapeLoadingContext;
-class KoXmlWriter;
+class KXmlWriter;
 class KoImageData;
 
 /**
@@ -163,7 +163,7 @@ public:
     /**
      * Save the properties of the style using the OpenDocument format
      */
-    void saveOdf(KoXmlWriter *writer) const;
+    void saveOdf(KXmlWriter *writer) const;
 
 private:
     void setProperty(int key, const QVariant &value);

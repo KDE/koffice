@@ -27,7 +27,7 @@
 #include <QtCore/QPair>
 
 class KOdfGenericStyles;
-class KoXmlWriter;
+class KXmlWriter;
 class KOdfGenericStyle;
 
 /**

@@ -24,7 +24,7 @@
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KUnit.h>
 #include <KoPathShapeLoader.h>

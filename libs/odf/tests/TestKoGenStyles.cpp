@@ -23,7 +23,7 @@
 #include "TestKoGenStyles.h"
 
 #include <KOdfGenericStyles.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KDebug>
 #include <QList>
 #include <QBuffer>
@@ -36,7 +36,7 @@
         QBuffer buffer( &cstr ); \
         buffer.open( QIODevice::WriteOnly ); \
         { \
-            KoXmlWriter writer( &buffer ); \
+            KXmlWriter writer( &buffer ); \
             writer.startDocument( "r", publicId, systemId ); \
             writer.startElement( "r" )
 
@@ -65,7 +65,7 @@ void TestKoGenStyles::testLookup()
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter childWriter(&buffer);
+    KXmlWriter childWriter(&buffer);
     childWriter.startElement("child");
     childWriter.addAttribute("test:foo", "bar");
     childWriter.endElement();
@@ -220,7 +220,7 @@ void TestKoGenStyles::testWriteStyle()
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter styleChildWriter(&buffer);
+    KXmlWriter styleChildWriter(&buffer);
     styleChildWriter.startElement("styleChild");
     styleChildWriter.addAttribute("foo", "bar");
     styleChildWriter.endElement();

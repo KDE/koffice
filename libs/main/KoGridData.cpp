@@ -23,7 +23,7 @@
 
 #include <KUnit.h>
 #include <KoOdfSettings.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <KToggleAction>
 #include <KLocale>
@@ -178,7 +178,7 @@ bool KoGridData::loadOdfSettings(const KoXmlDocument & settingsDoc)
     return true;
 }
 
-void KoGridData::saveOdfSettings(KoXmlWriter &settingsWriter)
+void KoGridData::saveOdfSettings(KXmlWriter &settingsWriter)
 {
     settingsWriter.startElement("config:config-item");
     settingsWriter.addAttribute("config:name", "IsSnapToGrid");

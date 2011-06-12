@@ -20,7 +20,7 @@
 */
 
 #include "KOdfFontData.h"
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KDebug>
 
 class KoFontFacePrivate : public QSharedData
@@ -35,7 +35,7 @@ public:
     {
     }
 
-    void saveOdf(KoXmlWriter* xmlWriter) const
+    void saveOdf(KXmlWriter* xmlWriter) const
     {
         xmlWriter->startElement("style:font-face");
         xmlWriter->addAttribute("style:name", name);
@@ -138,7 +138,7 @@ void KOdfFontData::setPitch(KOdfFontData::Pitch pitch)
     d->pitch = pitch;
 }
 
-void KOdfFontData::saveOdf(KoXmlWriter* xmlWriter) const
+void KOdfFontData::saveOdf(KXmlWriter* xmlWriter) const
 {
     Q_ASSERT(!isNull());
     if (isNull()) {

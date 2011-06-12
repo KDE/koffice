@@ -32,7 +32,7 @@ class KoCanvasBase;
 class KoResourceManager;
 class QTextDocument;
 class KOdfStore;
-class KoXmlWriter;
+class KXmlWriter;
 class KoDocument;
 
 namespace Soprano
@@ -75,7 +75,7 @@ public:
     virtual void updateInlineRdfStatements(QTextDocument *qdoc);
     virtual void updateXmlIdReferences(const QMap<QString, QString> &m);
     virtual bool loadOasis(KOdfStore *store);
-    virtual bool saveOasis(KOdfStore *store, KoXmlWriter *manifestWriter);
+    virtual bool saveOasis(KOdfStore *store, KXmlWriter *manifestWriter);
 };
 
 #endif

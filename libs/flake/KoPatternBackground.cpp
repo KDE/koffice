@@ -31,7 +31,7 @@
 #include <KOdfStylesReader.h>
 #include <KOdfStorageDevice.h>
 #include <KUnit.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <KDebug>
 

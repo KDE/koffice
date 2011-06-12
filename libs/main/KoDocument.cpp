@@ -46,7 +46,7 @@
 #include <KoUpdater.h>
 
 #include <KoDpi.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <kdialog.h>
 #include <KUndoStack>
@@ -877,7 +877,7 @@ bool KoDocument::saveNativeFormatODF(KOdfStore *store, const QByteArray &mimeTyp
     // Tell KOdfStore not to touch the file names
     store->disallowNameExpansion();
     KOdfWriteStore odfStore(store);
-    KoXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
+    KXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
     KoEmbeddedDocumentSaver embeddedSaver;
     SavingContext documentContext(odfStore, embeddedSaver);
 
@@ -928,7 +928,7 @@ bool KoDocument::saveNativeFormatODF(KOdfStore *store, const QByteArray &mimeTyp
     if (!d->versionInfo.isEmpty()) {
         if (store->open("VersionList.xml")) {
             KOdfStorageDevice dev(store);
-            KoXmlWriter *xmlWriter = KOdfWriteStore::createOasisXmlWriter(&dev,
+            KXmlWriter *xmlWriter = KOdfWriteStore::createOasisXmlWriter(&dev,
                                      "VL:version-list");
             for (int i = 0; i < d->versionInfo.size(); ++i) {
                 KoVersionInfo *version = &d->versionInfo[i];
@@ -1061,7 +1061,7 @@ bool KoDocument::saveToStore(KOdfStore *_store, const QString & _path)
     return true;
 }
 
-bool KoDocument::saveOasisPreview(KOdfStore *store, KoXmlWriter *manifestWriter)
+bool KoDocument::saveOasisPreview(KOdfStore *store, KXmlWriter *manifestWriter)
 {
     const QPixmap pix = generatePreview(QSize(128, 128));
     QImage preview(pix.toImage().convertToFormat(QImage::Format_ARGB32, Qt::ColorOnly));
@@ -1823,7 +1823,7 @@ bool KoDocument::addVersion(const QString& comment)
     store->disallowNameExpansion();
     KOdfWriteStore odfStore(store);
 
-    KoXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
+    KXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
     Q_UNUSED(manifestWriter); // XXX why?
 
     KoEmbeddedDocumentSaver embeddedSaver;
@@ -2367,7 +2367,7 @@ void KoDocument::setUnit(const KUnit &unit)
     }
 }
 
-void KoDocument::saveUnitOdf(KoXmlWriter *settingsWriter) const
+void KoDocument::saveUnitOdf(KXmlWriter *settingsWriter) const
 {
     settingsWriter->addConfigItem("unit", KUnit::unitName(unit()));
 }

@@ -20,7 +20,7 @@
 
 #include "PictureBase.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <kdebug.h>
 #include <ksharedconfig.h>
@@ -91,7 +91,7 @@ bool PictureBase::save(QIODevice*) const
     return false;
 }
 
-bool PictureBase::saveAsBase64(KoXmlWriter& writer) const
+bool PictureBase::saveAsBase64(KXmlWriter& writer) const
 {
     QBuffer buffer;
     buffer.open(QIODevice::ReadWrite);

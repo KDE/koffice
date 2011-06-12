@@ -22,7 +22,7 @@
 #include <QHash>
 
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include "KCCellStorage.h"
 #include "Database.h"
@@ -79,7 +79,7 @@ bool DatabaseManager::loadOdf(const KoXmlElement& body)
     return true;
 }
 
-void DatabaseManager::saveOdf(KoXmlWriter& xmlWriter) const
+void DatabaseManager::saveOdf(KXmlWriter& xmlWriter) const
 {
     QList< QPair<QRectF, Database> > databases;
     const KCRegion region(QRect(QPoint(1, 1), QPoint(KS_colMax, KS_rowMax)));

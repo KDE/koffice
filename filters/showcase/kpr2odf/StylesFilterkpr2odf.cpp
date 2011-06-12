@@ -249,7 +249,7 @@ const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
             //As this is a "complex" tag we add it "manually"
             QBuffer buffer;
             buffer.open(QIODevice::WriteOnly);
-            KoXmlWriter elementWriter(&buffer);
+            KXmlWriter elementWriter(&buffer);
 //          FIXME:   elementWriter.startElement( "style:presentation-properties" );
             elementWriter.startElement("presentation:sound");
             elementWriter.addAttribute("xlink:href", "Sounds/" + m_sounds[ soundEffect.attribute("soundFileName")]);
@@ -414,7 +414,7 @@ const QString Filterkpr2odf::createMasterPageStyle(const KoXmlNode & objects, co
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter xmlWriter(&buffer);
+    KXmlWriter xmlWriter(&buffer);
 
     convertObjects(&xmlWriter, objects);
 
@@ -1077,7 +1077,7 @@ const QString Filterkpr2odf::createListStyle(const KoXmlElement& element)
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&buffer, 3);
+    KXmlWriter elementWriter(&buffer, 3);
 
     int type = counter.attribute("type").toInt();
     bool isBullet = false;

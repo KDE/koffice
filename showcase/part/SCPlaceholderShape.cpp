@@ -21,7 +21,7 @@
 #include "SCPlaceholderStrategy.h"
 
 #include <KoShapeSavingContext.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KoOdfWorkaround.h>
 
 #include <QPainter>
@@ -77,7 +77,7 @@ bool SCPlaceholderShape::loadOdf(const KoXmlElement &element, KoShapeLoadingCont
 
 void SCPlaceholderShape::saveOdf(KoShapeSavingContext &context) const
 {
-    KoXmlWriter &writer = context.xmlWriter();
+    KXmlWriter &writer = context.xmlWriter();
     writer.startElement("draw:frame");
     saveOdfAttributes(context, OdfAllAttributes);
     if (m_strategy) {

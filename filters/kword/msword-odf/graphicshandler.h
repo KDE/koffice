@@ -35,7 +35,7 @@
 #include <QObject>
 #include <QHash>
 #include <QMap>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfStore.h>
 #include <vector>
@@ -50,7 +50,7 @@ class DrawStyle;
 class DrawingWriter : public Writer
 {
 public:
-    DrawingWriter(KoXmlWriter& xmlWriter, KOdfGenericStyles& kostyles, bool stylesxml_, bool inlineObj);
+    DrawingWriter(KXmlWriter& xmlWriter, KOdfGenericStyles& kostyles, bool stylesxml_, bool inlineObj);
 
     //position
     int xLeft;
@@ -91,7 +91,7 @@ class KWordGraphicsHandler : public QObject, public wvWare::GraphicsHandler
 {
     Q_OBJECT
 public:
-    KWordGraphicsHandler(Document* doc, KoXmlWriter* bodyWriter, KoXmlWriter* manifestWriter,
+    KWordGraphicsHandler(Document* doc, KXmlWriter* bodyWriter, KXmlWriter* manifestWriter,
                          KOdfStore* store, KOdfGenericStyles* mainStyles);
     ~KWordGraphicsHandler();
 
@@ -121,9 +121,9 @@ public:
 
     /**
      * Set the appropriate writer for object properties and content.
-     * @param writer KoXmlWriter provided by the Document class
+     * @param writer KXmlWriter provided by the Document class
      */
-    void setBodyWriter(KoXmlWriter* writer);
+    void setBodyWriter(KXmlWriter* writer);
 
     /**
      * Gets drawing style for whole document.
@@ -148,7 +148,7 @@ private:
     /**
      * Store floating pictures into ODT, write the appropriate manifest entry.
      */
-    QMap<QByteArray, QString> createFloatingPictures(KOdfStore* store, KoXmlWriter* manifest);
+    QMap<QByteArray, QString> createFloatingPictures(KOdfStore* store, KXmlWriter* manifest);
 
     /**
      * Get the path in the ODT document that corresponds to the picture
@@ -236,8 +236,8 @@ private:
 
     Document* m_document;
     KOdfStore* m_store;
-    KoXmlWriter* m_bodyWriter;
-    KoXmlWriter* m_manifestWriter;
+    KXmlWriter* m_bodyWriter;
+    KXmlWriter* m_manifestWriter;
     KOdfGenericStyles* m_mainStyles;
 
     wvWare::Drawings * m_drawings;

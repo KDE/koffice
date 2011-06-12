@@ -27,7 +27,7 @@
 
 #include "../kcells_export.h"
 
-class KoXmlWriter;
+class KXmlWriter;
 
 class Database;
 class KCMap;
@@ -97,7 +97,7 @@ public:
     bool evaluate(const Database& database, int index) const;
 
     bool loadOdf(const KoXmlElement& element, const KCMap* map);
-    void saveOdf(KoXmlWriter& xmlWriter) const;
+    void saveOdf(KXmlWriter& xmlWriter) const;
 
     bool operator==(const Filter& other) const;
     inline bool operator!=(const Filter& other) const {

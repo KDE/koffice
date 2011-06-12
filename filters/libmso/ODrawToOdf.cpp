@@ -19,7 +19,7 @@
 
 #include "ODrawToOdf.h"
 #include "drawstyle.h"
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <QtCore/QtDebug>
 #include <QtGui/QColor>
 #include <qbuffer.h>
@@ -460,7 +460,7 @@ void ODrawToOdf::defineGradientStyle(KOdfGenericStyle& style, const DrawStyle& d
 
     QBuffer writerBuffer;
     writerBuffer.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&writerBuffer);
+    KXmlWriter elementWriter(&writerBuffer);
 
     // if fillShadeColors() is not empty use the colors and points defined inside
     // if it is empty use the colors defined inside fillColor() and fillBackColor

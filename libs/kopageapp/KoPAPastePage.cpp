@@ -22,7 +22,7 @@
 #include <QBuffer>
 #include <QString>
 #include <KOdfStoreReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KoEmbeddedDocumentSaver.h>
@@ -64,7 +64,7 @@ bool KoPAPastePage::process(const KoXmlElement &body, KOdfStoreReader &odfStore)
         KOdfGenericStyles mainStyles;
         QBuffer buffer;
         buffer.open(QIODevice::WriteOnly);
-        KoXmlWriter xmlWriter(&buffer);
+        KXmlWriter xmlWriter(&buffer);
         KoEmbeddedDocumentSaver embeddedSaver;
         KoPASavingContext savingContext(xmlWriter, mainStyles, embeddedSaver, 1);
         savingContext.addOption(KoShapeSavingContext::UniqueMasterPages);

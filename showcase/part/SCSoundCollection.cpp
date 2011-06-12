@@ -20,7 +20,7 @@
 #include "SCSoundData.h"
 
 #include <KOdfStorageDevice.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <QList>
 #include <KDebug>
@@ -89,7 +89,7 @@ bool SCSoundCollection::completeLoading(KOdfStore *store)
 }
 
 // use a KoSharedSavingData in the context to save which sounds need to be saved
-bool SCSoundCollection::completeSaving(KOdfStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context)
+bool SCSoundCollection::completeSaving(KOdfStore *store, KXmlWriter * manifestWriter, KoShapeSavingContext * context)
 {
     Q_UNUSED(context);
     foreach (SCSoundData *sound, d->sounds) {

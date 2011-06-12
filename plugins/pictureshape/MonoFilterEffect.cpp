@@ -29,7 +29,7 @@ MonoFilterEffect::~MonoFilterEffect()
 {
 }
 
-void MonoFilterEffect::save(KoXmlWriter& /*writer*/)
+void MonoFilterEffect::save(KXmlWriter& /*writer*/)
 {
 }
 

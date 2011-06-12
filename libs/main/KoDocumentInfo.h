@@ -34,7 +34,7 @@
 class QDomDocument;
 class QDomElement;
 class KOdfStore;
-class KoXmlWriter;
+class KXmlWriter;
 
 /**
  * @short The class containing all meta information about a document
@@ -130,10 +130,10 @@ private:
 
     /**
      * Save the information about the document to an OASIS file
-     * @param xmlWriter a reference to the KoXmlWriter to write in
+     * @param xmlWriter a reference to the KXmlWriter to write in
      * @return true if success
      */
-    bool saveOasisAboutInfo(KoXmlWriter &xmlWriter);
+    bool saveOasisAboutInfo(KXmlWriter &xmlWriter);
 
     /**
      * Load the information about the document from a KOffice-1.3 file
@@ -172,10 +172,10 @@ private:
 
     /**
      * Save the information about the document to an OASIS file
-     * @param xmlWriter a reference to the KoXmlWriter to write in
+     * @param xmlWriter a reference to the KXmlWriter to write in
      * @return true if success
      */
-    bool saveOasisAuthorInfo(KoXmlWriter &xmlWriter);
+    bool saveOasisAuthorInfo(KXmlWriter &xmlWriter);
 
     /** Takes care of saving the per-editing-cycle data correctly */
     void saveParameters();

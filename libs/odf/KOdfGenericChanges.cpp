@@ -19,7 +19,7 @@
 */
 
 #include "KOdfGenericChanges.h"
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <QtCore/QList>
 #include <QtCore/QMap>
@@ -126,7 +126,7 @@ const KOdfGenericChange* KOdfGenericChanges::change(const QString& name) const
     return 0;
 }
 
-void KOdfGenericChanges::saveOdfChanges(KoXmlWriter* xmlWriter) const
+void KOdfGenericChanges::saveOdfChanges(KXmlWriter* xmlWriter) const
 {
     QMap<KOdfGenericChange, QString> changesList = changes();
     QMap<KOdfGenericChange, QString>::const_iterator it = changesList.constBegin();

@@ -23,7 +23,7 @@
 
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KoTextInlineRdf.h>
 
@@ -69,7 +69,7 @@ KoBookmark::~KoBookmark()
 void KoBookmark::saveOdf(KoShapeSavingContext &context)
 {
     Q_D(KoBookmark);
-    KoXmlWriter *writer = &context.xmlWriter();
+    KXmlWriter *writer = &context.xmlWriter();
     QString nodeName;
     if (d->type == SinglePosition)
         nodeName = "text:bookmark";

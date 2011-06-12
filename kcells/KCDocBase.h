@@ -128,8 +128,8 @@ protected:
     virtual bool loadXML(const KoXmlDocument& doc, KOdfStore *store);
     virtual KoView* createViewInstance(QWidget* parent);
 
-    virtual void saveOdfViewSettings(KoXmlWriter& settingsWriter);
-    virtual void saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter& settingsWriter);
+    virtual void saveOdfViewSettings(KXmlWriter& settingsWriter);
+    virtual void saveOdfViewSheetSettings(KCSheet *sheet, KXmlWriter& settingsWriter);
 private:
     Q_DISABLE_COPY(KCDocBase)
 
@@ -139,7 +139,7 @@ private:
      * The actual saving takes place in KCMap::saveOdfSettings.
      * @see KCMap::saveOdfSettings
      */
-    void saveOdfSettings(KoXmlWriter &settingsWriter);
+    void saveOdfSettings(KXmlWriter &settingsWriter);
 
     /**
      * \ingroup OpenDocument

@@ -17,7 +17,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <QString>
 #include <qtest_kde.h>
@@ -45,7 +45,7 @@ private:
     void setup(const char *publicId = 0, const char *systemId = 0);
     QString content();
 
-    KoXmlWriter *writer;
+    KXmlWriter *writer;
     QBuffer *buffer;
 };
 
@@ -54,7 +54,7 @@ void TestXmlWriter::setup(const char *publicId, const char *systemId)
     buffer = new QBuffer();
     buffer->open( QIODevice::WriteOnly );
 
-    writer = new KoXmlWriter( buffer );
+    writer = new KXmlWriter( buffer );
     writer->startDocument( "dummy", publicId, systemId );
     writer->startElement( "dummy" );
 }
@@ -172,7 +172,7 @@ void TestXmlWriter::testAddManifestEntry()
 
 void TestXmlWriter::testEscapingLongString()
 {
-    int sz = 15000;  // must be more than KoXmlWriter::s_escapeBufferLen
+    int sz = 15000;  // must be more than KXmlWriter::s_escapeBufferLen
     QString x(sz);
     x.fill('x', sz);
     x += '&';
@@ -228,7 +228,7 @@ void TestXmlWriter::speedTest()
 
     QFile out(QString::fromLatin1("out5.xml"));
     if (out.open(QIODevice::WriteOnly)) {
-        KoXmlWriter writer(&out);
+        KXmlWriter writer(&out);
         writer.startDocument("rootelem");
         writer.startElement("rootelem");
         for (int i = 0 ; i < NumParagraphs ; ++i) {
@@ -241,7 +241,7 @@ void TestXmlWriter::speedTest()
         writer.endDocument();
     }
     out.close();
-    qDebug("writing %i XML elements using KoXmlWriter: %i ms", NumParagraphs, time.elapsed());
+    qDebug("writing %i XML elements using KXmlWriter: %i ms", NumParagraphs, time.elapsed());
     // TODO we might want to convert this into a QBenchmark test
 }
 

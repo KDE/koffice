@@ -31,7 +31,7 @@
 #include <MsooXmlThemesReader.h>
 #include "DocxXmlNotesReader.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <styles/KoCharacterStyle.h>
 
@@ -53,7 +53,7 @@ public:
     virtual ~DocxXmlDocumentReader();
 
     //! Reads/parses the file of format document.xml.
-    //! The output goes mainly to KoXmlWriter* KoOdfWriters::body
+    //! The output goes mainly to KXmlWriter* KoOdfWriters::body
     virtual KoFilter::ConversionStatus read(MSOOXML::MsooXmlReaderContext* context = 0);
 
 #include <MsooXmlVmlReaderMethods.h> // separated as it is not a part of OOXML
@@ -265,7 +265,7 @@ private:
 
     //! Buffer where first letters of drop cap are read
     QBuffer* m_dropCapBuffer;
-    KoXmlWriter* m_dropCapWriter;
+    KXmlWriter* m_dropCapWriter;
     QString m_dropCapLines;
     qreal   m_dropCapDistance;
 

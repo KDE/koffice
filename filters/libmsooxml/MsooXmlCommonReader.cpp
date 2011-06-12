@@ -22,7 +22,7 @@
  */
 
 #include "MsooXmlCommonReader.h"
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 
 #include <KGlobal>

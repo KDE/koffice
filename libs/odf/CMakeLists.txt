@@ -40,7 +40,7 @@ set(koodf_LIB_SRCS
     KUnit.cpp
     KOdfXmlNS.cpp
     KXmlReader.cpp
-    KoXmlWriter.cpp
+    KXmlWriter.cpp
     ZipStore.cpp
 )
 
@@ -85,7 +85,7 @@ install( FILES
     KOdfStore.h
     KOdfStorageDevice.h
     KXmlReader.h
-    KoXmlWriter.h
+    KXmlWriter.h
     KProperties.h
     KUnit.h
 DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)

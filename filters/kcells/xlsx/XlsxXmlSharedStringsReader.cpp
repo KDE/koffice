@@ -25,7 +25,7 @@
 
 #include <MsooXmlSchemas.h>
 #include <MsooXmlUtils.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 
 #undef MSOOXML_CURRENT_NS
@@ -186,9 +186,9 @@ KoFilter::ConversionStatus XlsxXmlSharedStringsReader::read_si()
     QByteArray siData;
     QBuffer siBuffer(&siData);
     siBuffer.open(QIODevice::WriteOnly);
-    KoXmlWriter siWriter(&siBuffer, 0/*indentation*/);
+    KXmlWriter siWriter(&siBuffer, 0/*indentation*/);
     MSOOXML::Utils::XmlWriteBuffer buf;
-    KoXmlWriter *origWriter = body;
+    KXmlWriter *origWriter = body;
     body = buf.setWriter(&siWriter);
 
     m_currentTextStyle = KOdfGenericStyle();

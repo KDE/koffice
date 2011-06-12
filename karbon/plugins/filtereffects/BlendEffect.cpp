@@ -20,7 +20,7 @@
 #include "BlendEffect.h"
 #include "ColorChannelConversion.h"
 #include <KoFilterEffectRenderContext.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KLocale>
 #include <QtCore/QRect>
@@ -154,7 +154,7 @@ bool BlendEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingC
     return true;
 }
 
-void BlendEffect::save(KoXmlWriter &writer)
+void BlendEffect::save(KXmlWriter &writer)
 {
     writer.startElement(BlendEffectId);
 

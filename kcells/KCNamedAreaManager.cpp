@@ -35,7 +35,7 @@
 
 // KOffice
 #include <KOdfXmlNS.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 // KCells
 #include "KCCellStorage.h"
@@ -214,7 +214,7 @@ void KCNamedAreaManager::loadOdf(const KoXmlElement& body)
     }
 }
 
-void KCNamedAreaManager::saveOdf(KoXmlWriter& xmlWriter) const
+void KCNamedAreaManager::saveOdf(KXmlWriter& xmlWriter) const
 {
     if (d->namedAreas.isEmpty())
         return;

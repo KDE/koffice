@@ -31,7 +31,7 @@ WatermarkFilterEffect::~WatermarkFilterEffect()
 {
 }
 
-void WatermarkFilterEffect::save(KoXmlWriter& /*writer*/)
+void WatermarkFilterEffect::save(KXmlWriter& /*writer*/)
 {
 }
 

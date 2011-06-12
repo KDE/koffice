@@ -27,7 +27,7 @@
 #include "PresentationVariable.h"
 
 #include <KXmlReader.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KProperties.h>
 #include <kdebug.h>
 #include <KoShape.h>
@@ -73,7 +73,7 @@ void PresentationVariable::positionChanged()
 
 void PresentationVariable::saveOdf(KoShapeSavingContext & context)
 {
-    KoXmlWriter *writer = &context.xmlWriter();
+    KXmlWriter *writer = &context.xmlWriter();
     const char * type = "";
     switch (m_type) {
     case SCDeclarations::Footer:

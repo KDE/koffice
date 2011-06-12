@@ -20,7 +20,7 @@
 #include "FloodEffect.h"
 #include "KoFilterEffectRenderContext.h"
 #include "KoViewConverter.h"
-#include "KoXmlWriter.h"
+#include "KXmlWriter.h"
 #include "KXmlReader.h"
 #include <KLocale>
 #include <QtCore/QRect>
@@ -91,7 +91,7 @@ bool FloodEffect::load(const KoXmlElement &element, const KoFilterEffectLoadingC
     return true;
 }
 
-void FloodEffect::save(KoXmlWriter &writer)
+void FloodEffect::save(KXmlWriter &writer)
 {
     writer.startElement(FloodEffectId);
 

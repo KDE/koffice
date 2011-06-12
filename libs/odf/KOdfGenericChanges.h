@@ -73,7 +73,7 @@ public:
      *
      * @param xmlWriter
      */
-    void saveOdfChanges(KoXmlWriter *xmlWriter) const;
+    void saveOdfChanges(KXmlWriter *xmlWriter) const;
 
 private:
     class Private;

@@ -30,7 +30,7 @@
 #include <KOdfStorageDevice.h>
 #include <KoFilterChain.h>
 #include <KOdfGenericStyles.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <memory>
 
@@ -96,22 +96,22 @@ KoFilter::ConversionStatus KoOdfExporter::convert(const QByteArray& from, const 
     // create a writer for meta.xml
     QBuffer buf;
     buf.open(QIODevice::WriteOnly);
-    KoXmlWriter metaWriter(&buf);
+    KXmlWriter metaWriter(&buf);
     writers.meta = &metaWriter;
 
     // create a writer for manifest.xml
     QBuffer manifestBuf;
     manifestBuf.open(QIODevice::WriteOnly);
-    KoXmlWriter manifestWriter(&manifestBuf);
+    KXmlWriter manifestWriter(&manifestBuf);
     writers.manifest = &manifestWriter;
 
     //open contentWriter & bodyWriter *temp* writers
     //so we can write picture files while we parse
     QBuffer contentBuf;
-    KoXmlWriter contentWriter(&contentBuf);
+    KXmlWriter contentWriter(&contentBuf);
     writers.content = &contentWriter;
     QBuffer bodyBuf;
-    KoXmlWriter bodyWriter(&bodyBuf);
+    KXmlWriter bodyWriter(&bodyBuf);
     writers.body = &bodyWriter;
 
     // open main tags
@@ -129,14 +129,14 @@ KoFilter::ConversionStatus KoOdfExporter::convert(const QByteArray& from, const 
     bodyWriter.endElement();//office:body
 
     //now create real content/body writers & dump the information there
-    KoXmlWriter* realContentWriter = oasisStore.contentWriter();
+    KXmlWriter* realContentWriter = oasisStore.contentWriter();
     if (!realContentWriter) {
         kWarning(30003) << "Error creating the content writer.";
         return KoFilter::CreationError;
     }
     realContentWriter->addCompleteElement(&contentBuf);
 
-    KoXmlWriter* realBodyWriter = oasisStore.bodyWriter();
+    KXmlWriter* realBodyWriter = oasisStore.bodyWriter();
     if (!realBodyWriter) {
         kWarning(30003) << "Error creating the body writer.";
         return KoFilter::CreationError;
@@ -152,7 +152,7 @@ KoFilter::ConversionStatus KoOdfExporter::convert(const QByteArray& from, const 
     kDebug(30003) << "closed content & body writers.";
 
     //create the manifest file
-    KoXmlWriter* realManifestWriter = oasisStore.manifestWriter(to);
+    KXmlWriter* realManifestWriter = oasisStore.manifestWriter(to);
     //create the styles.xml file
     mainStyles.saveOdfStylesDotXml(outputStore.get(), realManifestWriter);
     realManifestWriter->addManifestEntry("content.xml", "text/xml");
@@ -166,7 +166,7 @@ KoFilter::ConversionStatus KoOdfExporter::convert(const QByteArray& from, const 
         return KoFilter::CreationError;
     }
     KOdfStorageDevice settingsDev(outputStore.get());
-    KoXmlWriter* settings = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
+    KXmlWriter* settings = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
     settings->addAttribute("xmlns:ooo", "http://openoffice.org/2004/office");
     settings->startElement("config:config-item-set");
     settings->addAttribute("config:name", "ooo:configuration-settings");
@@ -193,7 +193,7 @@ KoFilter::ConversionStatus KoOdfExporter::convert(const QByteArray& from, const 
         return KoFilter::CreationError;
     }
     KOdfStorageDevice metaDev(outputStore.get());
-    KoXmlWriter* meta = KOdfWriteStore::createOasisXmlWriter(&metaDev, "office:document-meta");
+    KXmlWriter* meta = KOdfWriteStore::createOasisXmlWriter(&metaDev, "office:document-meta");
     meta->startElement("office:meta");
     meta->addCompleteElement(&buf);
     meta->endElement(); //office:meta

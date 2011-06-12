@@ -31,7 +31,7 @@
 #include <MsooXmlUtils.h>
 #include <MsooXmlRelationships.h>
 #include <MsooXmlUnits.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KoOdfGraphicStyles.h>
 #include <Charting.h>
@@ -697,7 +697,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_lnNumType()
     //TRY_READ_ATTR(start)
 
     QBuffer buffer;
-    KoXmlWriter temp(&buffer);
+    KXmlWriter temp(&buffer);
 
     temp.startElement("text:linenumbering-configuration");
 
@@ -741,8 +741,8 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_endnotePr()
     READ_PROLOGUE
 
     QBuffer buffer;
-    KoXmlWriter *oldBody = body;
-    body = new KoXmlWriter(&buffer);
+    KXmlWriter *oldBody = body;
+    body = new KXmlWriter(&buffer);
 
     body->startElement("text:notes-configuration");
     body->addAttribute("text:note-class", "endnote");
@@ -789,8 +789,8 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_footnotePr()
     READ_PROLOGUE
 
     QBuffer buffer;
-    KoXmlWriter *oldBody = body;
-    body = new KoXmlWriter(&buffer);
+    KXmlWriter *oldBody = body;
+    body = new KXmlWriter(&buffer);
 
     body->startElement("text:notes-configuration");
     body->addAttribute("text:note-class", "footnote");
@@ -876,7 +876,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_cols()
     TRY_READ_ATTR(space)
 
     QBuffer columnBuffer;
-    KoXmlWriter columnWriter(&columnBuffer);
+    KXmlWriter columnWriter(&columnBuffer);
 
     columnWriter.startElement("style:columns");
     if (!num.isEmpty()) {
@@ -1634,7 +1634,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_p()
         if (m_dropCapStatus == DropCapDone) {
             QBuffer frameBuffer;
             frameBuffer.open(QIODevice::WriteOnly);
-            KoXmlWriter elementWriter(&frameBuffer);
+            KXmlWriter elementWriter(&frameBuffer);
             elementWriter.startElement("style:drop-cap");
             elementWriter.addAttribute("style:lines", m_dropCapLines);
             elementWriter.addAttributePt("style:distance", m_dropCapDistance);
@@ -1825,7 +1825,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_r()
     m_currentRunStyleName.clear();
     m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
 
-    KoXmlWriter* oldWriter = body;
+    KXmlWriter* oldWriter = body;
 
     // DropCapRead means we have read the w:dropCap attribute on this
     //             paragraph and now have to save the text.
@@ -1835,7 +1835,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_r()
        m_dropCapStatus = DropCapDone;
        m_dropCapBuffer = new QBuffer;
        m_dropCapBuffer->open(QIODevice::ReadWrite);
-       m_dropCapWriter = new KoXmlWriter(m_dropCapBuffer);
+       m_dropCapWriter = new KXmlWriter(m_dropCapBuffer);
        body = m_dropCapWriter;
     }
     else if (m_dropCapStatus == DropCapDone) {
@@ -3313,13 +3313,13 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_tabs()
 
     QBuffer tabs;
     tabs.open(QIODevice::WriteOnly);
-    KoXmlWriter elementWriter(&tabs, 4 /*proper indentation*/);
+    KXmlWriter elementWriter(&tabs, 4 /*proper indentation*/);
     elementWriter.startElement("style:tab-stops");
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
-    KoXmlWriter *oldBody = body;
-    body = new KoXmlWriter(&buffer);
+    KXmlWriter *oldBody = body;
+    body = new KXmlWriter(&buffer);
 
     while (!atEnd()) {
         readNext();

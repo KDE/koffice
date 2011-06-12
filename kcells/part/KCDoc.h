@@ -53,7 +53,7 @@ class KOdfGenericStyles;
 class KoOdfSettings;
 class KoResourceManager;
 class KOdfStore;
-class KoXmlWriter;
+class KXmlWriter;
 
 #define MIME_TYPE "application/x-kcells"
 
@@ -179,8 +179,8 @@ protected:
      */
     virtual bool saveChildren(KOdfStore* _store);
 
-    virtual void saveOdfViewSettings(KoXmlWriter& settingsWriter);
-    virtual void saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter &settingsWriter);
+    virtual void saveOdfViewSettings(KXmlWriter& settingsWriter);
+    virtual void saveOdfViewSheetSettings(KCSheet *sheet, KXmlWriter &settingsWriter);
 private:
     Q_DISABLE_COPY(KCDoc)
 

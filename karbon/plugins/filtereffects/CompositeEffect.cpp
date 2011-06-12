@@ -21,7 +21,7 @@
 #include "ColorChannelConversion.h"
 #include <KoFilterEffectRenderContext.h>
 #include <KoViewConverter.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <KXmlReader.h>
 #include <KLocale>
 #include <KDebug>
@@ -184,7 +184,7 @@ bool CompositeEffect::load(const KoXmlElement &element, const KoFilterEffectLoad
     return true;
 }
 
-void CompositeEffect::save(KoXmlWriter &writer)
+void CompositeEffect::save(KXmlWriter &writer)
 {
     writer.startElement(CompositeEffectId);
 

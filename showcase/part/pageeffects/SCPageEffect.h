@@ -30,7 +30,7 @@ class QPainter;
 class QGraphicsScene;
 class QGraphicsPixmapItem;
 class QGraphicsView;
-class KoXmlWriter;
+class KXmlWriter;
 class KOdfGenericStyle;
 class SCPageEffectStrategy;
 class KoXmlElement;
@@ -149,7 +149,7 @@ public:
      *
      * @param xmlWriter The xml writer used for saving
      */
-    void saveOdfSmilAttributes(KoXmlWriter &xmlWriter) const;
+    void saveOdfSmilAttributes(KXmlWriter &xmlWriter) const;
 
     /**
      * Save transition as part of the style

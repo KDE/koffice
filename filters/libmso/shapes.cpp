@@ -20,7 +20,7 @@
 #include "drawstyle.h"
 #include "generated/leinputstream.h"
 
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <kdebug.h>
 
 #include <QTransform>

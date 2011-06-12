@@ -24,7 +24,7 @@
 
 #include <qdom.h>
 #include <KoFilter.h>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 #include <QByteArray>
 #include <QVariantList>
 
