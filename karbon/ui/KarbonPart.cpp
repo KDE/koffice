@@ -147,10 +147,10 @@ KarbonPart::KarbonPart(QWidget* parentWidget, const char* widgetName, QObject* p
 
     // set as default paper
     KoPageLayout pl = pageLayout();
-    pl.format = KoPageFormat::defaultFormat();
-    pl.orientation = KoPageFormat::Portrait;
-    pl.width = MM_TO_POINT(KoPageFormat::width(pl.format, pl.orientation));
-    pl.height = MM_TO_POINT(KoPageFormat::height(pl.format, pl.orientation));
+    pl.format = KOdfPageFormat::defaultFormat();
+    pl.orientation = KOdfPageFormat::Portrait;
+    pl.width = MM_TO_POINT(KOdfPageFormat::width(pl.format, pl.orientation));
+    pl.height = MM_TO_POINT(KOdfPageFormat::height(pl.format, pl.orientation));
     setPageLayout(pl);
 }
 

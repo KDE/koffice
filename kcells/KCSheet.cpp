@@ -1762,7 +1762,7 @@ void KCSheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
     }
     if (styleStack.hasProperty(KoXmlNS::style, "print-orientation")) {
         pageLayout.orientation = (styleStack.property(KoXmlNS::style, "print-orientation") == "landscape")
-                                 ? KoPageFormat::Landscape : KoPageFormat::Portrait;
+                                 ? KOdfPageFormat::Landscape : KOdfPageFormat::Portrait;
     }
     if (styleStack.hasProperty(KoXmlNS::style, "num-format")) {
         //not implemented into kcells
@@ -2995,9 +2995,9 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
     KoXmlElement paper = sheet.namedItem("paper").toElement();
     if (!paper.isNull()) {
         KoPageLayout pageLayout;
-        pageLayout.format = KoPageFormat::formatFromString(paper.attribute("format"));
+        pageLayout.format = KOdfPageFormat::formatFromString(paper.attribute("format"));
         pageLayout.orientation = (paper.attribute("orientation")  == "Portrait")
-                                 ? KoPageFormat::Portrait : KoPageFormat::Landscape;
+                                 ? KOdfPageFormat::Portrait : KOdfPageFormat::Landscape;
 
         // <borders>
         KoXmlElement borders = paper.namedItem("borders").toElement();

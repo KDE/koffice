@@ -360,7 +360,7 @@ float SheetAdaptor::paperHeight()const
 void SheetAdaptor::setPrinterHeight(float height)
 {
     KoPageLayout pageLayout = m_sheet->print()->settings()->pageLayout();
-    pageLayout.format = KoPageFormat::CustomSize;
+    pageLayout.format = KOdfPageFormat::CustomSize;
     pageLayout.height = MM_TO_POINT(height);
     m_sheet->print()->settings()->setPageLayout(pageLayout);
 }
@@ -373,7 +373,7 @@ float SheetAdaptor::paperWidth()const
 void SheetAdaptor::setPaperWidth(float width)
 {
     KoPageLayout pageLayout = m_sheet->print()->settings()->pageLayout();
-    pageLayout.format = KoPageFormat::CustomSize;
+    pageLayout.format = KOdfPageFormat::CustomSize;
     pageLayout.width = MM_TO_POINT(width);
     m_sheet->print()->settings()->setPageLayout(pageLayout);
 }
@@ -413,9 +413,9 @@ void SheetAdaptor::setPaperLayout(float leftBorder, float topBorder,
                                   const QString& format, const QString& orientation)
 {
     KoPageLayout pageLayout;
-    pageLayout.format = KoPageFormat::formatFromString(format);
+    pageLayout.format = KOdfPageFormat::formatFromString(format);
     pageLayout.orientation = (orientation  == "Portrait")
-                             ? KoPageFormat::Portrait : KoPageFormat::Landscape;
+                             ? KOdfPageFormat::Portrait : KOdfPageFormat::Landscape;
     pageLayout.leftMargin   = leftBorder;
     pageLayout.rightMargin  = rightBorder;
     pageLayout.topMargin    = topBorder;

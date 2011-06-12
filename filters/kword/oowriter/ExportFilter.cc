@@ -1828,9 +1828,9 @@ bool OOWriterWorker::doFullPaperFormat(const int format,
             || (height < 1.0)) {
         kWarning(30518) << "Page size problem: format: " << format << " width: " << width << " height: " << height;
         // Something is wrong with the page size
-        KoPageFormat::Format newFormat = KoPageFormat::Format(format);
-        m_paperWidth = KoPageFormat::width(newFormat, KoPageFormat::Orientation(orientation)) * 72.0 / 25.4 ;
-        m_paperHeight = KoPageFormat::height(newFormat, KoPageFormat::Orientation(orientation)) * 72.0 / 25.4 ;
+        KOdfPageFormat::Format newFormat = KOdfPageFormat::Format(format);
+        m_paperWidth = KOdfPageFormat::width(newFormat, KOdfPageFormat::Orientation(orientation)) * 72.0 / 25.4 ;
+        m_paperHeight = KOdfPageFormat::height(newFormat, KOdfPageFormat::Orientation(orientation)) * 72.0 / 25.4 ;
         m_paperFormat = newFormat;
     } else {
         m_paperFormat = format;

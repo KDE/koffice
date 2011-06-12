@@ -25,7 +25,7 @@
 
 #include "KOdfColumnData.h"
 #include "KOdfGenericStyles.h"
-#include "KoPageFormat.h"
+#include "KOdfPageFormat.h"
 #include "KoXmlReader.h"
 #include "KOdfBorders.h"
 
@@ -37,9 +37,9 @@
  */
 struct KoPageLayout {
     /** Page format */
-    KoPageFormat::Format format;
+    KOdfPageFormat::Format format;
     /** Page orientation */
-    KoPageFormat::Orientation orientation;
+    KOdfPageFormat::Orientation orientation;
 
     /** Page width in points */
     qreal width;

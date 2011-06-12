@@ -259,9 +259,9 @@ KCPrintJob::KCPrintJob(KCView *view)
     KCSheet *const sheet = d->view->activeSheet();
     const KCPrintSettings* settings = d->pageManagers[sheet]->settings();
     const KoPageLayout pageLayout = settings->pageLayout();
-    const KoPageFormat::Format pageFormat = pageLayout.format;
-    printer().setPaperSize(static_cast<QPrinter::PageSize>(KoPageFormat::printerPageSize(pageFormat)));
-    if (pageLayout.orientation == KoPageFormat::Landscape || pageFormat == KoPageFormat::ScreenSize)
+    const KOdfPageFormat::Format pageFormat = pageLayout.format;
+    printer().setPaperSize(static_cast<QPrinter::PageSize>(KOdfPageFormat::printerPageSize(pageFormat)));
+    if (pageLayout.orientation == KOdfPageFormat::Landscape || pageFormat == KOdfPageFormat::ScreenSize)
         printer().setOrientation(QPrinter::Landscape);
     else
         printer().setOrientation(QPrinter::Portrait);

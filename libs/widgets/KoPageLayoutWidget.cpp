@@ -44,8 +44,8 @@ KoPageLayoutWidget::KoPageLayoutWidget(QWidget *parent, const KoPageLayout &layo
     d->marginsEnabled = true;
     d->allowSignals = true;
     d->orientationGroup = new QButtonGroup(this);
-    d->orientationGroup->addButton(d->widget.portrait, KoPageFormat::Portrait);
-    d->orientationGroup->addButton(d->widget.landscape, KoPageFormat::Landscape);
+    d->orientationGroup->addButton(d->widget.portrait, KOdfPageFormat::Portrait);
+    d->orientationGroup->addButton(d->widget.landscape, KOdfPageFormat::Landscape);
 
     QButtonGroup *group2 = new QButtonGroup(this);
     group2->addButton(d->widget.singleSided);
@@ -60,7 +60,7 @@ KoPageLayoutWidget::KoPageLayoutWidget(QWidget *parent, const KoPageLayout &layo
     d->widget.leftLabel->setMinimumSize(QSize(width, 5));
 
     d->widget.units->addItems(KoUnit::listOfUnitName());
-    d->widget.sizes->addItems(KoPageFormat::allFormats());
+    d->widget.sizes->addItems(KOdfPageFormat::allFormats());
     setPageSpread(false);
 
     connect(d->widget.sizes, SIGNAL(currentIndexChanged(int)), this, SLOT(sizeChanged(int)));
@@ -99,14 +99,14 @@ void KoPageLayoutWidget::sizeChanged(int row)
     if (row < 0) return;
     if (! d->allowSignals) return;
     d->allowSignals = false;
-    d->pageLayout.format = static_cast<KoPageFormat::Format> (row);
-    bool custom =  d->pageLayout.format == KoPageFormat::CustomSize;
+    d->pageLayout.format = static_cast<KOdfPageFormat::Format> (row);
+    bool custom =  d->pageLayout.format == KOdfPageFormat::CustomSize;
     d->widget.width->setEnabled( custom );
     d->widget.height->setEnabled( custom );
 
     if ( !custom ) {
-        d->pageLayout.width = MM_TO_POINT( KoPageFormat::width( d->pageLayout.format, d->pageLayout.orientation ) );
-        d->pageLayout.height = MM_TO_POINT( KoPageFormat::height( d->pageLayout.format, d->pageLayout.orientation ) );
+        d->pageLayout.width = MM_TO_POINT( KOdfPageFormat::width( d->pageLayout.format, d->pageLayout.orientation ) );
+        d->pageLayout.height = MM_TO_POINT( KOdfPageFormat::height( d->pageLayout.format, d->pageLayout.orientation ) );
         if (d->widget.facingPages->isChecked()) // is pagespread
             d->pageLayout.width *= 2;
     }
@@ -230,7 +230,7 @@ void KoPageLayoutWidget::setTextAreaAvailable(bool available)
 void KoPageLayoutWidget::optionsChanged()
 {
     if (! d->allowSignals) return;
-    if (d->widget.sizes->currentIndex() == KoPageFormat::CustomSize) {
+    if (d->widget.sizes->currentIndex() == KOdfPageFormat::CustomSize) {
         d->pageLayout.width = d->widget.width->value();
         d->pageLayout.height = d->widget.height->value();
     } else
@@ -243,7 +243,7 @@ void KoPageLayoutWidget::orientationChanged()
 {
     if (! d->allowSignals) return;
     d->allowSignals = false;
-    d->pageLayout.orientation = d->widget.landscape->isChecked() ? KoPageFormat::Landscape : KoPageFormat::Portrait;
+    d->pageLayout.orientation = d->widget.landscape->isChecked() ? KOdfPageFormat::Landscape : KOdfPageFormat::Portrait;
 
     qreal x = d->widget.height->value();
     d->widget.height->changeValue( d->widget.width->value() );

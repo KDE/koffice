@@ -62,7 +62,7 @@ KOdfGenericStyle KoPageLayout::saveOdf() const
     border.saveOdf(style);
 
     style.addProperty("style:print-orientation",
-                      (orientation == KoPageFormat::Landscape
+                      (orientation == KOdfPageFormat::Landscape
                        ? "landscape" : "portrait"));
     return style;
 }
@@ -83,9 +83,9 @@ void KoPageLayout::loadOdf(const KoXmlElement &style)
 
         // Page orientation
         if (properties.attributeNS(KoXmlNS::style, "print-orientation", QString()) == "portrait")
-            orientation = KoPageFormat::Portrait;
+            orientation = KOdfPageFormat::Portrait;
         else
-            orientation = KoPageFormat::Landscape;
+            orientation = KOdfPageFormat::Landscape;
 
         // Margins.  Check if there is one "margin" attribute and use it for all
         // margins if there is.  Otherwise load the individual margins.
@@ -130,10 +130,10 @@ void KoPageLayout::loadOdf(const KoXmlElement &style)
         border.loadOdf(properties);
 
         // guessFormat takes millimeters
-        if (orientation == KoPageFormat::Landscape)
-            format = KoPageFormat::guessFormat(POINT_TO_MM(height), POINT_TO_MM(width));
+        if (orientation == KOdfPageFormat::Landscape)
+            format = KOdfPageFormat::guessFormat(POINT_TO_MM(height), POINT_TO_MM(width));
         else
-            format = KoPageFormat::guessFormat(POINT_TO_MM(width), POINT_TO_MM(height));
+            format = KOdfPageFormat::guessFormat(POINT_TO_MM(width), POINT_TO_MM(height));
     }
 }
 
@@ -156,10 +156,10 @@ bool KoPageLayout::operator!=(const KoPageLayout& l) const
 }
 
 KoPageLayout::KoPageLayout()
-: format(KoPageFormat::defaultFormat())
-, orientation(KoPageFormat::Portrait)
-, width(MM_TO_POINT(KoPageFormat::width(format, orientation)))
-, height(MM_TO_POINT(KoPageFormat::height(format, orientation)))
+: format(KOdfPageFormat::defaultFormat())
+, orientation(KOdfPageFormat::Portrait)
+, width(MM_TO_POINT(KOdfPageFormat::width(format, orientation)))
+, height(MM_TO_POINT(KOdfPageFormat::height(format, orientation)))
 , leftMargin(MM_TO_POINT(20.0))
 , rightMargin(MM_TO_POINT(20.0))
 , topMargin(MM_TO_POINT(20.0))

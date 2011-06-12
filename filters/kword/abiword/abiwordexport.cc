@@ -857,46 +857,46 @@ bool AbiWordWorker::doFullDefineStyle(LayoutData& layout)
 bool AbiWordWorker::doFullPaperFormat(const int f,
                                       const double width, const double height, const int orientation)
 {
-    KoPageFormat::Format format = static_cast<KoPageFormat::Format>(f);
+    KOdfPageFormat::Format format = static_cast<KOdfPageFormat::Format>(f);
 
     QString outputText = "<pagesize ";
 
     QString units = "inch";
     switch (format) {
         // ISO A formats
-    case KoPageFormat::IsoA0Size: // ISO A0
-    case KoPageFormat::IsoA1Size: // ISO A1
-    case KoPageFormat::IsoA2Size: // ISO A2
-    case KoPageFormat::IsoA3Size: // ISO A3
-    case KoPageFormat::IsoA4Size: // ISO A4
-    case KoPageFormat::IsoA5Size: // ISO A5
-    case KoPageFormat::IsoA6Size: // ISO A6
+    case KOdfPageFormat::IsoA0Size: // ISO A0
+    case KOdfPageFormat::IsoA1Size: // ISO A1
+    case KOdfPageFormat::IsoA2Size: // ISO A2
+    case KOdfPageFormat::IsoA3Size: // ISO A3
+    case KOdfPageFormat::IsoA4Size: // ISO A4
+    case KOdfPageFormat::IsoA5Size: // ISO A5
+    case KOdfPageFormat::IsoA6Size: // ISO A6
         // ISO B formats
-    case KoPageFormat::IsoB0Size: // ISO B0
-    case KoPageFormat::IsoB1Size: // ISO B1
-    case KoPageFormat::IsoB2Size: // ISO B2
-    case KoPageFormat::IsoB3Size: // ISO B3
-    case KoPageFormat::IsoB4Size: // ISO B4
-    case KoPageFormat::IsoB5Size: // ISO B5
-    case KoPageFormat::IsoB6Size: // ISO B6
+    case KOdfPageFormat::IsoB0Size: // ISO B0
+    case KOdfPageFormat::IsoB1Size: // ISO B1
+    case KOdfPageFormat::IsoB2Size: // ISO B2
+    case KOdfPageFormat::IsoB3Size: // ISO B3
+    case KOdfPageFormat::IsoB4Size: // ISO B4
+    case KOdfPageFormat::IsoB5Size: // ISO B5
+    case KOdfPageFormat::IsoB6Size: // ISO B6
         units = "cm";
         // intentional fall through (a.k.a. "no break")
         // American formats
-    case KoPageFormat::UsLetterSize: // US Letter
-    case KoPageFormat::UsLegalSize: { // US Legal
-        QString pagetype = KoPageFormat::formatString(KoPageFormat::Format(format));
+    case KOdfPageFormat::UsLetterSize: // US Letter
+    case KOdfPageFormat::UsLegalSize: { // US Legal
+        QString pagetype = KOdfPageFormat::formatString(KOdfPageFormat::Format(format));
         outputText += "pagetype=\"";
         outputText += pagetype;
         outputText += "\" width=\"";
-        outputText += QString::number(KoPageFormat::width(format));
+        outputText += QString::number(KOdfPageFormat::width(format));
         outputText += "\" height=\"";
-        outputText += QString::number(KoPageFormat::width(format));
+        outputText += QString::number(KOdfPageFormat::width(format));
         outputText += "\" units=\"";
         outputText += units;
         outputText += "\" ";
         break;
     }
-    case KoPageFormat::UsExecutiveSize: { // US Executive (does not exists in AbiWord!)
+    case KOdfPageFormat::UsExecutiveSize: { // US Executive (does not exists in AbiWord!)
         // FIXME/TODO: AbiWord (CVS 2001-04-25) seems not to like custom formats, so avoid them for now!
 #if 0
         outputText += "pagetype=\"Custom\" width=\"7.5\" height=\"10.0\" units=\"inch\" ";
@@ -907,13 +907,13 @@ bool AbiWordWorker::doFullPaperFormat(const int f,
         break;
     }
     // Other format not supported yet by AbiWord CVS 2001-04-25)
-    case KoPageFormat::IsoA7Size: // ISO A7
-    case KoPageFormat::IsoA8Size: // ISO A8
-    case KoPageFormat::IsoA9Size: // ISO A9
-    case KoPageFormat::IsoB10Size: // ISO B10
+    case KOdfPageFormat::IsoA7Size: // ISO A7
+    case KOdfPageFormat::IsoA8Size: // ISO A8
+    case KOdfPageFormat::IsoA9Size: // ISO A9
+    case KOdfPageFormat::IsoB10Size: // ISO B10
         // Other formats
-    case KoPageFormat::ScreenSize: // Screen
-    case KoPageFormat::CustomSize: // Custom
+    case KOdfPageFormat::ScreenSize: // Screen
+    case KOdfPageFormat::CustomSize: // Custom
     default: {
         // FIXME/TODO: AbiWord (CVS 2001-04-25) seems not to like custom formats, so avoid them for now!
         if ((width <= 1.0) || (height <= 1.0) || true) {

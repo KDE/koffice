@@ -30,7 +30,7 @@ set(koodf_LIB_SRCS
     KOdfStoreReader.cpp
     KOdfStylesReader.cpp
     KOdfWriteStore.cpp
-    KoPageFormat.cpp
+    KOdfPageFormat.cpp
     KoPageLayout.cpp
     KoProperties.cpp
     KoStore.cpp
@@ -80,7 +80,7 @@ install( FILES
     KoEmbeddedDocumentSaver.h
     KOdfBorders.h
     KoPageLayout.h
-    KoPageFormat.h
+    KOdfPageFormat.h
     KOdfColumnData.h
     KoStore.h
     KoStoreDevice.h

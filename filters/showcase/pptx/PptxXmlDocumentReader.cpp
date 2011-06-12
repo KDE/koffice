@@ -578,7 +578,7 @@ KoFilter::ConversionStatus PptxXmlDocumentReader::read_sldSz()
     d->pageLayout.bottomMargin = 0.0;
     //! @todo orientation heristics - OK?
     d->pageLayout.orientation = d->pageLayout.width > d->pageLayout.height
-        ? KoPageFormat::Landscape : KoPageFormat::Portrait;
+        ? KOdfPageFormat::Landscape : KOdfPageFormat::Portrait;
 
     while (true) {
         readNext();

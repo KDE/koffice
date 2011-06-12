@@ -61,9 +61,9 @@ public:
 
 void KCPrintSettings::Private::calculatePageDimensions()
 {
-    if (pageLayout.format != KoPageFormat::CustomSize) {
-        pageLayout.width =  MM_TO_POINT(KoPageFormat::width(pageLayout.format, pageLayout.orientation));
-        pageLayout.height = MM_TO_POINT(KoPageFormat::height(pageLayout.format, pageLayout.orientation));
+    if (pageLayout.format != KOdfPageFormat::CustomSize) {
+        pageLayout.width =  MM_TO_POINT(KOdfPageFormat::width(pageLayout.format, pageLayout.orientation));
+        pageLayout.height = MM_TO_POINT(KOdfPageFormat::height(pageLayout.format, pageLayout.orientation));
     }
 }
 
@@ -122,13 +122,13 @@ void KCPrintSettings::setPageLayout(const KoPageLayout& pageLayout)
     d->pageLayout = pageLayout;
 }
 
-void KCPrintSettings::setPageFormat(KoPageFormat::Format format)
+void KCPrintSettings::setPageFormat(KOdfPageFormat::Format format)
 {
     d->pageLayout.format = format;
     d->calculatePageDimensions();
 }
 
-void KCPrintSettings::setPageOrientation(KoPageFormat::Orientation orientation)
+void KCPrintSettings::setPageOrientation(KOdfPageFormat::Orientation orientation)
 {
     d->pageLayout.orientation = orientation;
     d->calculatePageDimensions();
@@ -136,12 +136,12 @@ void KCPrintSettings::setPageOrientation(KoPageFormat::Orientation orientation)
 
 QString KCPrintSettings::paperFormatString() const
 {
-    if (d->pageLayout.format == KoPageFormat::CustomSize) {
+    if (d->pageLayout.format == KOdfPageFormat::CustomSize) {
         QString tmp;
         tmp.sprintf("%fx%f", d->pageLayout.width, d->pageLayout.height);
         return tmp;
     }
-    return KoPageFormat::formatString(d->pageLayout.format);
+    return KOdfPageFormat::formatString(d->pageLayout.format);
 }
 
 QString KCPrintSettings::orientationString() const

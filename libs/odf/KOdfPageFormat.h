@@ -28,13 +28,13 @@
 #include <QtGui/QPrinter>
 
 /// The page formats koffice supports
-namespace KoPageFormat
+namespace KOdfPageFormat
 {
 /**
  * @brief Represents the paper format a document shall be printed on.
  *
  * For compatibility reasons, and because of screen and custom,
- * this enum doesn't map to QPrinter::PageSize but KoPageFormat::printerPageSize
+ * this enum doesn't map to QPrinter::PageSize but KOdfPageFormat::printerPageSize
  * does the conversion.
  */
 enum Format {

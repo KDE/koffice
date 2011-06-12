@@ -339,9 +339,9 @@ void OoWriterImport::writePageLayout(QDomDocument& mainDocument, const QString& 
 
     kDebug(30518) << "writePageLayout" << masterPageName;
     QDomElement elementPaper = mainDocument.createElement("PAPER");
-    KoPageFormat::Orientation orientation;
+    KOdfPageFormat::Orientation orientation;
     double width, height;
-    KoPageFormat::Format paperFormat;
+    KOdfPageFormat::Format paperFormat;
     double marginLeft, marginTop, marginRight, marginBottom;
     bool hasEvenOddHeader = false;
     bool hasEvenOddFooter = false;
@@ -354,15 +354,15 @@ void OoWriterImport::writePageLayout(QDomDocument& mainDocument, const QString& 
     if (style) {
         KoXmlElement properties(KoXml::namedItemNS(*style, ooNS::style, "properties"));
         Q_ASSERT(!properties.isNull());
-        orientation = ((properties.attributeNS(ooNS::style, "print-orientation", QString()) != "portrait") ? KoPageFormat::Landscape : KoPageFormat::Portrait);
+        orientation = ((properties.attributeNS(ooNS::style, "print-orientation", QString()) != "portrait") ? KOdfPageFormat::Landscape : KOdfPageFormat::Portrait);
         width = KoUnit::parseValue(properties.attributeNS(ooNS::fo, "page-width", QString()));
         height = KoUnit::parseValue(properties.attributeNS(ooNS::fo, "page-height", QString()));
         kDebug(30518) << "width=" << width << " height=" << height;
         // guessFormat takes millimeters
-        if (orientation == KoPageFormat::Landscape)
-            paperFormat = KoPageFormat::guessFormat(POINT_TO_MM(height), POINT_TO_MM(width));
+        if (orientation == KOdfPageFormat::Landscape)
+            paperFormat = KOdfPageFormat::guessFormat(POINT_TO_MM(height), POINT_TO_MM(width));
         else
-            paperFormat = KoPageFormat::guessFormat(POINT_TO_MM(width), POINT_TO_MM(height));
+            paperFormat = KOdfPageFormat::guessFormat(POINT_TO_MM(width), POINT_TO_MM(height));
 
         marginLeft = KoUnit::parseValue(properties.attributeNS(ooNS::fo, "margin-left", QString()));
         marginTop = KoUnit::parseValue(properties.attributeNS(ooNS::fo, "margin-top", QString()));
@@ -414,10 +414,10 @@ void OoWriterImport::writePageLayout(QDomDocument& mainDocument, const QString& 
     } else {
         // We have no master page! We need defaults.
         kWarning(30518) << "NO MASTER PAGE";
-        orientation = KoPageFormat::Portrait;
-        paperFormat = KoPageFormat::IsoA4Size;
-        width = MM_TO_POINT(KoPageFormat::width(paperFormat, orientation));
-        height = MM_TO_POINT(KoPageFormat::height(paperFormat, orientation));
+        orientation = KOdfPageFormat::Portrait;
+        paperFormat = KOdfPageFormat::IsoA4Size;
+        width = MM_TO_POINT(KOdfPageFormat::width(paperFormat, orientation));
+        height = MM_TO_POINT(KOdfPageFormat::height(paperFormat, orientation));
         // ### TODO: better defaults for margins?
         marginLeft = MM_TO_POINT(10.0);
         marginRight = MM_TO_POINT(10.0);

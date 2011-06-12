@@ -51,7 +51,7 @@ private:
     KWDocument *m_document;
     KWPage::PageSide m_pageSide;
     KoPageLayout m_pageLayout;
-    KoPageFormat::Orientation m_orientation;
+    KOdfPageFormat::Orientation m_orientation;
     int m_pageNumber;
     QString m_masterPageName;
     KoText::Direction m_direction;

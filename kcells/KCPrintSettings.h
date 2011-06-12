@@ -64,8 +64,8 @@ public:
 
     void setPageLayout(const KoPageLayout& pageLayout);
 
-    void setPageFormat(KoPageFormat::Format format);
-    void setPageOrientation(KoPageFormat::Orientation orientation);
+    void setPageFormat(KOdfPageFormat::Format format);
+    void setPageOrientation(KOdfPageFormat::Orientation orientation);
 
     /**
      * \return the name of the paper orientation (like Portrait, Landscape)

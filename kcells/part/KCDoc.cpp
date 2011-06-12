@@ -420,9 +420,9 @@ bool KCDoc::loadXML(const KoXmlDocument& doc, KoStore*)
 void KCDoc::loadPaper(KoXmlElement const & paper)
 {
     KoPageLayout pageLayout;
-    pageLayout.format = KoPageFormat::formatFromString(paper.attribute("format"));
+    pageLayout.format = KOdfPageFormat::formatFromString(paper.attribute("format"));
     pageLayout.orientation = (paper.attribute("orientation")  == "Portrait")
-                             ? KoPageFormat::Portrait : KoPageFormat::Landscape;
+                             ? KOdfPageFormat::Portrait : KOdfPageFormat::Landscape;
 
     // <borders>
     KoXmlElement borders = paper.namedItem("borders").toElement();

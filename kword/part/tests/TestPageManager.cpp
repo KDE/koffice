@@ -233,10 +233,10 @@ void TestPageManager::pageInfo()
     KoPageLayout layout = pageManager->defaultPageStyle().pageLayout();
     layout.width = 100;
     layout.height = 200;
-    layout.format = KoPageFormat::IsoA4Size;
+    layout.format = KOdfPageFormat::IsoA4Size;
     pageManager->defaultPageStyle().setPageLayout(layout);
     QCOMPARE(pageManager->defaultPageStyle().pageLayout().width, 100.0);
-    QCOMPARE(pageManager->defaultPageStyle().pageLayout().format, KoPageFormat::IsoA4Size);
+    QCOMPARE(pageManager->defaultPageStyle().pageLayout().format, KOdfPageFormat::IsoA4Size);
 
     KWPageStyle pageStylePage2("Page 2");
     layout = pageStylePage2.pageLayout();
@@ -341,7 +341,7 @@ void TestPageManager::testClipToDocument()
     KoPageLayout lay;
     lay.width = 300;
     lay.height = 600;
-    lay.format = KoPageFormat::IsoA4Size;
+    lay.format = KOdfPageFormat::IsoA4Size;
     pageManager->defaultPageStyle().setPageLayout(lay);
 
     KWPageStyle pageStyle1("page1");
@@ -394,18 +394,18 @@ void TestPageManager::testOrientationHint()
 {
     KWPageManager pageManager;
     KWPage page = pageManager.appendPage();
-    QCOMPARE(page.orientationHint(), KoPageFormat::Portrait);
-    page.setOrientationHint(KoPageFormat::Landscape);
-    QCOMPARE(page.orientationHint(), KoPageFormat::Landscape);
-    page.setOrientationHint(KoPageFormat::Portrait);
-    QCOMPARE(page.orientationHint(), KoPageFormat::Portrait);
+    QCOMPARE(page.orientationHint(), KOdfPageFormat::Portrait);
+    page.setOrientationHint(KOdfPageFormat::Landscape);
+    QCOMPARE(page.orientationHint(), KOdfPageFormat::Landscape);
+    page.setOrientationHint(KOdfPageFormat::Portrait);
+    QCOMPARE(page.orientationHint(), KOdfPageFormat::Portrait);
 
-    page.setOrientationHint(KoPageFormat::Landscape);
+    page.setOrientationHint(KOdfPageFormat::Landscape);
     KWPage page2 = pageManager.appendPage();
-    QCOMPARE(page2.orientationHint(), KoPageFormat::Landscape); // inherit from last page
-    page.setOrientationHint(KoPageFormat::Portrait);
-    QCOMPARE(page2.orientationHint(), KoPageFormat::Landscape); // but separate
-    QCOMPARE(page.orientationHint(), KoPageFormat::Portrait);
+    QCOMPARE(page2.orientationHint(), KOdfPageFormat::Landscape); // inherit from last page
+    page.setOrientationHint(KOdfPageFormat::Portrait);
+    QCOMPARE(page2.orientationHint(), KOdfPageFormat::Landscape); // but separate
+    QCOMPARE(page.orientationHint(), KOdfPageFormat::Portrait);
 }
 
 void TestPageManager::testDirectionHint()

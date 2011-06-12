@@ -54,8 +54,8 @@ ASCIIImport::ASCIIImport(QObject *parent, const QVariantList &) :
 void ASCIIImport::prepareDocument(QDomDocument& mainDocument, QDomElement& mainFramesetElement)
 {
     // TODO: other paper formats
-    KoPageFormat::Format paperFormat = KoPageFormat::IsoA4Size; // ISO A4
-    KoPageFormat::Orientation paperOrientation = KoPageFormat::Portrait;
+    KOdfPageFormat::Format paperFormat = KOdfPageFormat::IsoA4Size; // ISO A4
+    KOdfPageFormat::Orientation paperOrientation = KOdfPageFormat::Portrait;
 
     mainDocument.appendChild(
         mainDocument.createProcessingInstruction(
@@ -80,9 +80,9 @@ void ASCIIImport::prepareDocument(QDomDocument& mainDocument, QDomElement& mainF
 
     QDomElement elementPaper = mainDocument.createElement("PAPER");
     elementPaper.setAttribute("format", paperFormat);
-    elementPaper.setAttribute("width" , KoPageFormat::width(paperFormat, paperOrientation) * 72.0 / 25.4);
-    elementPaper.setAttribute("height", KoPageFormat::height(paperFormat, paperOrientation) * 72.0 / 25.4);
-    elementPaper.setAttribute("orientation", KoPageFormat::Portrait);
+    elementPaper.setAttribute("width" , KOdfPageFormat::width(paperFormat, paperOrientation) * 72.0 / 25.4);
+    elementPaper.setAttribute("height", KOdfPageFormat::height(paperFormat, paperOrientation) * 72.0 / 25.4);
+    elementPaper.setAttribute("orientation", KOdfPageFormat::Portrait);
     elementPaper.setAttribute("columns", 1);
     elementPaper.setAttribute("columnspacing", 2);
     elementPaper.setAttribute("hType", 0);

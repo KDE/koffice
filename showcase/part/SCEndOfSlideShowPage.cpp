@@ -45,10 +45,10 @@ SCEndOfSlideShowPage::SCEndOfSlideShowPage(const QRectF &screenRect, SCDocument 
     pageLayout.rightMargin = 0;
     pageLayout.topMargin = 0;
     pageLayout.bottomMargin = 0;
-    pageLayout.orientation = screenRect.width() > screenRect.height() ? KoPageFormat::Landscape : KoPageFormat::Portrait;
+    pageLayout.orientation = screenRect.width() > screenRect.height() ? KOdfPageFormat::Landscape : KOdfPageFormat::Portrait;
     pageLayout.bindingSide = 0;
     pageLayout.pageEdge = 0;
-    pageLayout.format = KoPageFormat::IsoA3Size; 
+    pageLayout.format = KOdfPageFormat::IsoA3Size; 
 
     masterPage()->setPageLayout(pageLayout);
     masterPage()->setBackground(new KoColorBackground(Qt::black));

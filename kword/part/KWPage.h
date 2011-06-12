@@ -126,8 +126,8 @@ public:
      * just a property. There are dialogs that will be better at showing page sizes and at offering features
      * when this property is set properly, though.
      */
-    KoPageFormat::Orientation orientationHint() const;
-    void setOrientationHint(KoPageFormat::Orientation);
+    KOdfPageFormat::Orientation orientationHint() const;
+    void setOrientationHint(KOdfPageFormat::Orientation);
 
     /**
      * Set the text-direction that text on this page should be initialized with.

@@ -892,9 +892,9 @@ void GNUMERICFilter::ParsePrintInfo(QDomNode const & printInfo, KCSheet * table)
         paperSize = size.text();
 
     KoPageLayout pageLayout;
-    pageLayout.format = KoPageFormat::formatFromString(paperSize);
+    pageLayout.format = KOdfPageFormat::formatFromString(paperSize);
     pageLayout.orientation = (orientation == "Portrait")
-                             ? KoPageFormat::Portrait : KoPageFormat::Landscape;
+                             ? KOdfPageFormat::Portrait : KOdfPageFormat::Landscape;
     pageLayout.leftMargin   = fleft;
     pageLayout.rightMargin  = fright;
     pageLayout.topMargin    = ftop;

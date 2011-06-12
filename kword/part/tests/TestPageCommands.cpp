@@ -441,7 +441,7 @@ void TestPageCommands::testPageStylePropertiesCommand() // basic properties chan
 
     KWPageStyle style("pagestyle1");
     KoPageLayout oldLayout;
-    oldLayout.format = KoPageFormat::IsoA4Size;
+    oldLayout.format = KOdfPageFormat::IsoA4Size;
     oldLayout.width = 101;
     oldLayout.height = 102;
     oldLayout.leftMargin = -1;

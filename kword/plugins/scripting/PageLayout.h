@@ -52,15 +52,15 @@ public slots:
     */
     QString orientation() {
         switch (m_pagelayout.orientation) {
-        case KoPageFormat::Portrait: return "Portrait";
-        case KoPageFormat::Landscape: return "Landscape";
+        case KOdfPageFormat::Portrait: return "Portrait";
+        case KOdfPageFormat::Landscape: return "Landscape";
         }
         return QString();
     }
     /** Set page orientation */
     void setOrientation(const QString& orientation) {
-        if (orientation == "Portrait") m_pagelayout.orientation = KoPageFormat::Portrait;
-        else if (orientation == "Landscape") m_pagelayout.orientation = KoPageFormat::Landscape;
+        if (orientation == "Portrait") m_pagelayout.orientation = KOdfPageFormat::Portrait;
+        else if (orientation == "Landscape") m_pagelayout.orientation = KOdfPageFormat::Landscape;
     }
 
     /** Return page width in pt */

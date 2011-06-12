@@ -25,7 +25,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-#include <KoPageFormat.h>
+#include <KOdfPageFormat.h>
 #include <KWEFBaseWorker.h>
 
 #include "ExportFilter.h"
@@ -507,11 +507,11 @@ void HtmlCssWorker::closeSpan(const FormatData& formatOrigin, const FormatData& 
 bool HtmlCssWorker::doFullPaperFormat(const int f,
                                       const double width, const double height, const int o)
 {
-    KoPageFormat::Format format = static_cast<KoPageFormat::Format>(f);
-    KoPageFormat::Orientation orientation = static_cast<KoPageFormat::Orientation>(o);
+    KOdfPageFormat::Format format = static_cast<KOdfPageFormat::Format>(f);
+    KOdfPageFormat::Orientation orientation = static_cast<KOdfPageFormat::Orientation>(o);
 
-    double definedWidth = KoPageFormat::width(format, orientation);
-    double definedHeight = KoPageFormat::height(format, orientation);
+    double definedWidth = KOdfPageFormat::width(format, orientation);
+    double definedHeight = KOdfPageFormat::height(format, orientation);
 
     if (definedHeight < 0 || definedWidth < 0) {
         definedWidth = width;

@@ -814,9 +814,9 @@ static bool StartElementPageSize(QDomElement& paperElement, const QXmlAttributes
     // Do we know the page size or do we need to use the measures?
     // For page formats that KWord knows, use our own values in case the values in the file would be wrong.
 
-    KoPageFormat::Format kwordFormat = KoPageFormat::formatFromString(strPageType);
+    KOdfPageFormat::Format kwordFormat = KOdfPageFormat::formatFromString(strPageType);
 
-    if (kwordFormat == KoPageFormat::CustomSize) {
+    if (kwordFormat == KOdfPageFormat::CustomSize) {
         kDebug(30506) << "Custom or other page format found:" << strPageType;
 
         double height = attributes.value("height").toDouble();
@@ -843,8 +843,8 @@ static bool StartElementPageSize(QDomElement& paperElement, const QXmlAttributes
         }
     } else {
         // We have a format known by KOffice, so use KOffice's functions
-        kwordHeight = MillimetresToPoints(KoPageFormat::height(kwordFormat));
-        kwordWidth  = MillimetresToPoints(KoPageFormat::width(kwordFormat));
+        kwordHeight = MillimetresToPoints(KOdfPageFormat::height(kwordFormat));
+        kwordWidth  = MillimetresToPoints(KOdfPageFormat::width(kwordFormat));
     }
 
     if ((kwordHeight <= 1.0) || (kwordWidth <= 1.0))
@@ -853,7 +853,7 @@ static bool StartElementPageSize(QDomElement& paperElement, const QXmlAttributes
         kWarning(30506) << "Page width or height is too small: "
         << kwordHeight << "x" << kwordWidth;
         // As we have no correct page size, we assume we have A4
-        kwordFormat = KoPageFormat::IsoA4Size;
+        kwordFormat = KOdfPageFormat::IsoA4Size;
         kwordHeight = CentimetresToPoints(29.7);
         kwordWidth  = CentimetresToPoints(21.0);
     }
@@ -1475,10 +1475,10 @@ void StructureParser :: createDocument(void)
     // <PAPER> will be partialy changed by an AbiWord <pagesize> element.
     // Default paper format of AbiWord is "Letter"
     m_paperElement = mainDocument.createElement("PAPER");
-    m_paperElement.setAttribute("format", KoPageFormat::UsLetterSize);
-    m_paperElement.setAttribute("width", MillimetresToPoints(KoPageFormat::width(KoPageFormat::UsLetterSize)));
-    m_paperElement.setAttribute("height", MillimetresToPoints(KoPageFormat::height(KoPageFormat::UsLetterSize)));
-    m_paperElement.setAttribute("orientation", KoPageFormat::Portrait);
+    m_paperElement.setAttribute("format", KOdfPageFormat::UsLetterSize);
+    m_paperElement.setAttribute("width", MillimetresToPoints(KOdfPageFormat::width(KOdfPageFormat::UsLetterSize)));
+    m_paperElement.setAttribute("height", MillimetresToPoints(KOdfPageFormat::height(KOdfPageFormat::UsLetterSize)));
+    m_paperElement.setAttribute("orientation", KOdfPageFormat::Portrait);
     m_paperElement.setAttribute("columns", 1);
     m_paperElement.setAttribute("columnspacing", 2);
     m_paperElement.setAttribute("hType", 0);

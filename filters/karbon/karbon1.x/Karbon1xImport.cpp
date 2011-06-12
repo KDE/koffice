@@ -160,10 +160,10 @@ bool KarbonImport::convert(const KoXmlDocument &document)
     // <PAPER>
     KoXmlElement paper = doc.namedItem("PAPER").toElement();
     if (!paper.isNull()) {
-        pageLayout.format = static_cast<KoPageFormat::Format>(getAttribute(paper, "format", 0));
-        pageLayout.orientation = static_cast<KoPageFormat::Orientation>(getAttribute(paper, "orientation", 0));
+        pageLayout.format = static_cast<KOdfPageFormat::Format>(getAttribute(paper, "format", 0));
+        pageLayout.orientation = static_cast<KOdfPageFormat::Orientation>(getAttribute(paper, "orientation", 0));
 
-        if (pageLayout.format == KoPageFormat::CustomSize) {
+        if (pageLayout.format == KOdfPageFormat::CustomSize) {
             pageLayout.width = m_document->pageSize().width();
             pageLayout.height = m_document->pageSize().height();
         } else {

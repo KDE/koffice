@@ -87,8 +87,8 @@ bool KWDLoader::load(KoXmlElement &root)
     // <PAPER>
     KoXmlElement paper = root.namedItem("PAPER").toElement();
     if (!paper.isNull()) {
-        pgLayout.format = static_cast<KoPageFormat::Format>(paper.attribute("format").toInt());
-        pgLayout.orientation = static_cast<KoPageFormat::Orientation>(paper.attribute("orientation").toInt());
+        pgLayout.format = static_cast<KOdfPageFormat::Format>(paper.attribute("format").toInt());
+        pgLayout.orientation = static_cast<KOdfPageFormat::Orientation>(paper.attribute("orientation").toInt());
         pgLayout.width = paper.attribute("width").toDouble();
         pgLayout.height = paper.attribute("height").toDouble();
         kDebug(32001) << " width=" << pgLayout.width;

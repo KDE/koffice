@@ -219,15 +219,15 @@ QRectF KWPage::rect(int pageNumber) const
     return QRectF(0, offsetInDocument(), width(), height());
 }
 
-KoPageFormat::Orientation KWPage::orientationHint() const
+KOdfPageFormat::Orientation KWPage::orientationHint() const
 {
     if (! isValid())
-        return KoPageFormat::Landscape;
+        return KOdfPageFormat::Landscape;
     const KWPageManagerPrivate::Page &page = priv->pages[n];
     return page.orientation;
 }
 
-void KWPage::setOrientationHint(KoPageFormat::Orientation orientation)
+void KWPage::setOrientationHint(KOdfPageFormat::Orientation orientation)
 {
     if (! isValid())
         return;
