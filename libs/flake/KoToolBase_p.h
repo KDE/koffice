@@ -53,22 +53,14 @@ public:
         q(qq),
         canvas(canvas_),
         readWrite(true),
-        isInTextMode(false)
+        isInTextMode(false),
+        createdOptionWidgets(false)
     {
     }
 
     ~KoToolBasePrivate()
     {
-        bool badQt = strcmp(qVersion(), "4.6.2") <= 0;
-        if (badQt) { // In <= Qt462 we do a bit more to avoid a crash
-            foreach(QWidget *optionWidget, optionWidgets) {
-                optionWidget->setParent(0);
-                delete optionWidget;
-            }
-            optionWidgets.clear();
-        } else {
-            qDeleteAll(optionWidgets);
-        }
+        qDeleteAll(optionWidgets);
     }
 
     void emitStatusText(const QString &statusText) {
@@ -85,6 +77,7 @@ public:
     KoCanvasBase *canvas; ///< the canvas interface this tool will work for.
     bool readWrite;
     bool isInTextMode;
+    bool createdOptionWidgets;
 };
 
 #endif

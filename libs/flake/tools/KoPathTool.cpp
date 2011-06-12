@@ -75,11 +75,12 @@ qreal squaredDistance(const QPointF p1, const QPointF &p2)
 }
 
 KoPathTool::KoPathTool(KoCanvasBase *canvas)
-        : KoToolBase(canvas)
-        , m_activeHandle(0)
-        , m_handleRadius(3)
-        , m_pointSelection(this)
-        , m_currentStrategy(0)
+        : KoToolBase(canvas),
+        m_activeHandle(0),
+        m_handleRadius(3),
+        m_pointSelection(this),
+        m_currentStrategy(0),
+        m_toolOptionWidget(0)
 {
     QActionGroup *points = new QActionGroup(this);
     // m_pointTypeGroup->setExclusive(true);
@@ -171,12 +172,11 @@ QMap<QString, QWidget *>  KoPathTool::createOptionWidgets()
     Q_D(KoToolBase);
     QMap<QString, QWidget *> map;
 
-    PathToolOptionWidget * toolOptions = new PathToolOptionWidget(this);
-    connect(this, SIGNAL(typeChanged(int)), toolOptions, SLOT(setSelectionType(int)));
-    //connect(this, SIGNAL(pathChanged(KoPathShape*)), widget, SLOT(setSelectedPath(KoPathShape*)));
+    Q_ASSERT(m_toolOptionWidget == 0);
+    m_toolOptionWidget = new PathToolOptionWidget(this);
     updateOptionsWidget();
 
-    map.insert(i18n("Line/Curve"), toolOptions);
+    map.insert(i18n("Line/Curve"), m_toolOptionWidget);
     map.insert(i18n("Snapping"), d->canvas->createSnapGuideConfigWidget());
 
     return map;
@@ -617,10 +617,12 @@ void KoPathTool::mouseReleaseEvent(KoPointerEvent *event)
         delete m_currentStrategy;
         m_currentStrategy = 0;
 
-        if (m_pointSelection.selectedShapes().count() == 1)
-            emit pathChanged(m_pointSelection.selectedShapes().first());
-        else
-            emit pathChanged(0);
+        if (m_toolOptionWidget) {
+            if (m_pointSelection.selectedShapes().count() == 1)
+                m_toolOptionWidget->setSelectedPath(m_pointSelection.selectedShapes().first());
+            else
+                m_toolOptionWidget->setSelectedPath(0);
+        }
     }
 }
 
@@ -873,18 +875,21 @@ void KoPathTool::activate()
 
 void KoPathTool::updateOptionsWidget()
 {
-    PathToolOptionWidget::Types type;
+    if (m_toolOptionWidget == 0)
+        return;
+    PathToolOptionWidget::Type type = PathToolOptionWidget::PlainType;
     QList<KoPathShape*> selectedShapes = m_pointSelection.selectedShapes();
     foreach(KoPathShape *shape, selectedShapes) {
-        KoParameterShape * parameterShape = dynamic_cast<KoParameterShape*>(shape);
-        type |= parameterShape && parameterShape->isParametricShape() ?
-                PathToolOptionWidget::ParametricShape : PathToolOptionWidget::PlainPath;
+        KoParameterShape *parameterShape = dynamic_cast<KoParameterShape*>(shape);
+        if (parameterShape && parameterShape->isParametricShape()) {
+            type = PathToolOptionWidget::ParametricType;
+            m_toolOptionWidget->setSelectedPath(shape);
+            break;
+        }
     }
-    if (selectedShapes.count() == 1)
-        emit pathChanged(selectedShapes.first());
-    else
-        emit pathChanged(0);
-    emit typeChanged(type);
+    m_toolOptionWidget->setSelectionType(type);
+    if (type == PathToolOptionWidget::ParametricType)
+        m_toolOptionWidget->setSelectedPath(selectedShapes.first());
 }
 
 void KoPathTool::updateActions()

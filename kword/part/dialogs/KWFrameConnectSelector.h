@@ -23,8 +23,6 @@
 #include <ui_KWFrameConnectSelector.h>
 #include <dialogs/KWShapeConfigFactory.h>
 
-#include <KoShapeConfigWidgetBase.h>
-
 #include <QList>
 
 class KWFrame;
@@ -33,7 +31,7 @@ class KWFrameSet;
 class KWDocument;
 
 /// A widget that is shown for 1 textframe to connect it to a frameset
-class KWFrameConnectSelector : public KoShapeConfigWidgetBase
+class KWFrameConnectSelector : public QWidget
 {
     Q_OBJECT
 public:
@@ -42,15 +40,7 @@ public:
 
     /// load all info from the argument frame into this widget
     bool open(KWFrame *frame);
-    /// reimplemented
-    void open(KoShape *shape);
-    /// reimplemented
     void save();
-
-    /// reimplemented
-    virtual bool showOnShapeCreate() {
-        return true;
-    }
 
 private slots:
     void frameSetSelected();

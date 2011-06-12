@@ -59,8 +59,8 @@ public:
     /**
      * Create the new factory
      * @param parent the parent QObject for memory management usage.
-     * @param id a string that will be used internally for referencing the tool, for
-     *   example for use by the KoToolBase::activateTemporary.
+     * @param id a string that will be used internally for referencing the
+     *   shape. See activationShapeId()
      */
     KoToolFactoryBase(QObject *parent, const QString &id);
     virtual ~KoToolFactoryBase();
@@ -109,9 +109,14 @@ public:
     QString icon() const;
 
     /**
-     * Return the id of the shape we can process.
-     * This is the shape Id the tool we create is associated with.  So a TextTool for a TextShape.
-     * In combination with the toolType the following situations can occur;
+     * Return the id of the shape we can manipulate.
+     * Not every shape can be manipulated by every tool, a tool that is specifically created
+     * to handle a music shape may be useless on a vector shape. Using this string we allow the
+     * tool to be coupled to one or more shape-types in a flexible manner.
+     *
+     * This method returns a value that is based on the KoShape::shapeId() we want to be
+     *  associated with.  For example a TextTool for a TextShape.
+     * In combination with the toolType() the following situations can occur;
      <table><tr><th>Type</th><th>shapeId</th><th>Result</th></tr>
      <tr>
         <td>'main'</td>
@@ -147,9 +152,10 @@ public:
         <td>/always</td>
         <td>An activation shape id ending with '/always' will make the tool always visible and enabled.</td></tr>
      </table>
-     * @see KoShapeFactoryBase::shapeId()
+     * @see KoShapeFactoryBase::KoShapeFactoryBase() constructor which takes a shapeid
+     * @see KoShape::shapeId
      * @see setActivationShapeId()
-     * @return the id of a shape, or an empty string for all shapes.
+     * @return the id of a shape we can manipulate, or an empty string for all shapes.
      */
     QString activationShapeId() const;
 

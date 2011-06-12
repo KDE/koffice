@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,9 +20,13 @@
 
 #include "EllipseShapeConfigWidget.h"
 #include "EllipseShapeConfigCommand.h"
+#include <KoCanvasBase.h>
+
 #include <klocale.h>
 
-EllipseShapeConfigWidget::EllipseShapeConfigWidget()
+EllipseShapeConfigWidget::EllipseShapeConfigWidget(KoCanvasBase *canvas)
+    : m_canvas(canvas),
+    m_blocking(false)
 {
     widget.setupUi(this);
 
@@ -36,63 +41,76 @@ EllipseShapeConfigWidget::EllipseShapeConfigWidget()
     widget.endAngle->setMinimum(0.0);
     widget.endAngle->setMaximum(360.0);
 
-    connect(widget.ellipseType, SIGNAL(currentIndexChanged(int)), this, SIGNAL(propertyChanged()));
-    connect(widget.startAngle, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
-    connect(widget.endAngle, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
+    connect(widget.ellipseType, SIGNAL(currentIndexChanged(int)), this, SLOT(propertyChanged()));
+    connect(widget.startAngle, SIGNAL(valueChanged(double)), this, SLOT(propertyChanged()));
+    connect(widget.endAngle, SIGNAL(valueChanged(double)), this, SLOT(propertyChanged()));
     connect(widget.closeEllipse, SIGNAL(clicked(bool)), this, SLOT(closeEllipse()));
 }
 
 void EllipseShapeConfigWidget::open(KoShape *shape)
 {
-    m_ellipse = dynamic_cast<EllipseShape*>(shape);
-    if (!m_ellipse)
+    if (m_blocking)
         return;
-
-    widget.ellipseType->blockSignals(true);
-    widget.startAngle->blockSignals(true);
-    widget.endAngle->blockSignals(true);
-
-    widget.ellipseType->setCurrentIndex(m_ellipse->type());
-    widget.startAngle->setValue(m_ellipse->startAngle());
-    widget.endAngle->setValue(m_ellipse->endAngle());
-
-    widget.ellipseType->blockSignals(false);
-    widget.startAngle->blockSignals(false);
-    widget.endAngle->blockSignals(false);
-}
-
-void EllipseShapeConfigWidget::save()
-{
-    if (!m_ellipse)
+    EllipseShape *es = dynamic_cast<EllipseShape*>(shape);
+    if (es != m_ellipse) // if its equal, we just update our values
+        m_command = 0;
+    m_ellipse = 0;
+    if (!es) {
+        setEnabled(false);
         return;
-
-    m_ellipse->setType(static_cast<EllipseShape::EllipseType>(widget.ellipseType->currentIndex()));
-    m_ellipse->setStartAngle(widget.startAngle->value());
-    m_ellipse->setEndAngle(widget.endAngle->value());
-}
-
-QUndoCommand *EllipseShapeConfigWidget::createCommand(QUndoCommand *)
-{
-    if (!m_ellipse) {
-        return 0;
-    } else {
-        EllipseShape::EllipseType type = static_cast<EllipseShape::EllipseType>(widget.ellipseType->currentIndex());
-        return new EllipseShapeConfigCommand(m_ellipse, type, widget.startAngle->value(), widget.endAngle->value());
     }
+    setEnabled(true);
+
+    m_blocking = true;
+    widget.ellipseType->setCurrentIndex(es->type());
+    widget.startAngle->setValue(es->startAngle());
+    widget.endAngle->setValue(es->endAngle());
+    m_blocking = false;
+
+    m_ellipse = es;
+}
+
+void EllipseShapeConfigWidget::propertyChanged()
+{
+    if (!m_ellipse)
+        return;
+    if (m_blocking)
+        return;
+    m_blocking = true;
+    EllipseShape::EllipseType type = static_cast<EllipseShape::EllipseType>(widget.ellipseType->currentIndex());
+    if (m_command && commandIsValid()) {
+        m_command->setType(type);
+        m_command->setStartAngle(widget.startAngle->value());
+        m_command->setEndAngle(widget.endAngle->value());
+        m_ellipse->update();
+        m_ellipse->setType(type);
+        m_ellipse->setStartAngle(widget.startAngle->value());
+        m_ellipse->setEndAngle(widget.endAngle->value());
+        m_ellipse->update();
+    } else {
+        m_command = new EllipseShapeConfigCommand(m_ellipse, type,
+                    widget.startAngle->value(), widget.endAngle->value());
+        m_canvas->addCommand(m_command);
+    }
+    m_time.restart();
+    m_blocking = false;
 }
 
 void EllipseShapeConfigWidget::closeEllipse()
 {
-    widget.startAngle->blockSignals(true);
-    widget.endAngle->blockSignals(true);
-
     widget.startAngle->setValue(0.0);
     widget.endAngle->setValue(360.0);
+}
 
-    widget.startAngle->blockSignals(false);
-    widget.endAngle->blockSignals(false);
+bool EllipseShapeConfigWidget::commandIsValid() const
+{
+    if (!m_time.isValid())
+        return false;
 
-    emit propertyChanged();
+    if (m_time.elapsed() > 4000)
+        return false;
+
+    return true;
 }
 
 #include <EllipseShapeConfigWidget.moc>

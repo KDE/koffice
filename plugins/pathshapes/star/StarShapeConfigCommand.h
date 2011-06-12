@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -37,18 +38,32 @@ public:
      * @param convex indicates whether the star is convex or not
      * @param parent the optional parent command
      */
-    StarShapeConfigCommand(StarShape *star, uint cornerCount, qreal innerRadius, qreal outerRadius, bool convex, QUndoCommand *parent = 0);
+    StarShapeConfigCommand(StarShape *star, int cornerCount, qreal innerRadius, qreal outerRadius, bool convex, QUndoCommand *parent = 0);
     /// redo the command
     virtual void redo();
     /// revert the actions done in redo
     virtual void undo();
+
+    void setCornerCount(int count) {
+        m_newCornerCount = count;
+    }
+    void setBaseRadius(qreal radius) {
+        m_newInnerRadius = radius;
+    }
+    void setTipRadius(qreal radius) {
+        m_newOuterRadius = radius;
+    }
+    void setConvex(bool on) {
+        m_newConvex = on;
+    }
+
 private:
     StarShape *m_star;
-    uint m_oldCornerCount;
+    int m_oldCornerCount;
     qreal m_oldInnerRadius;
     qreal m_oldOuterRadius;
     bool m_oldConvex;
-    uint m_newCornerCount;
+    int m_newCornerCount;
     qreal m_newInnerRadius;
     qreal m_newOuterRadius;
     bool m_newConvex;

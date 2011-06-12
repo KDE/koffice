@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Rob Buis <buis@kde.org>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -52,9 +53,8 @@ bool SpiralShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext 
     return false;
 }
 
-QList<KoShapeConfigWidgetBase*> SpiralShapeFactory::createShapeOptionPanels()
+KoShapeConfigWidgetBase *SpiralShapeFactory::createConfigWidget(KoCanvasBase *canvas)
 {
-    QList<KoShapeConfigWidgetBase*> panels;
-    panels.append(new SpiralShapeConfigWidget());
-    return panels;
+    return new SpiralShapeConfigWidget(canvas);
 }
+

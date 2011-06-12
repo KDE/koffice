@@ -165,9 +165,6 @@ public:
      * will cause the toolOptionWidgetsChanged to be emitted and all
      * listeners to be updated to the new widget.
      *
-     * FIXME: This doesn't belong her and it does an
-     * inherits("KoView") so it too much tied to komain
-     *
      * @param widgets the map of widgets
      */
     void setToolOptionWidgets(const QMap<QString, QWidget *> &widgets);
@@ -312,11 +309,6 @@ signals:
      * @param size the size in widget pixels.
      */
     void sizeChanged(const QSize &size);
-
-    /**
-     * Emit the new tool option widgets to be used with this canvas.
-     */
-    void toolOptionWidgetsChanged(const QMap<QString, QWidget *> &map, QWidget *widgets);
 
     /**
      * Emit the new tool option widgets to be used with this canvas.

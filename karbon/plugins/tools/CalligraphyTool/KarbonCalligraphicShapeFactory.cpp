@@ -53,10 +53,3 @@ bool KarbonCalligraphicShapeFactory::supports(const KoXmlElement & e, KoShapeLoa
     Q_UNUSED(context);
     return false;
 }
-
-/*QList<KoShapeConfigWidgetBase*> KarbonCalligraphicShapeFactory::createShapeOptionPanels()
-{
-    QList<KoShapeConfigWidgetBase*> panels;
-    panels.append( new CalligraphicShapeConfigWidget() );
-    return panels;
-}*/

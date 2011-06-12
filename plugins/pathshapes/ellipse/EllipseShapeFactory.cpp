@@ -64,9 +64,7 @@ bool EllipseShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext 
         && e.namespaceURI() == KOdfXmlNS::draw;
 }
 
-QList<KoShapeConfigWidgetBase*> EllipseShapeFactory::createShapeOptionPanels()
+KoShapeConfigWidgetBase *EllipseShapeFactory::createConfigWidget(KoCanvasBase *canvas)
 {
-    QList<KoShapeConfigWidgetBase*> panels;
-    panels.append(new EllipseShapeConfigWidget());
-    return panels;
+    return new EllipseShapeConfigWidget(canvas);
 }

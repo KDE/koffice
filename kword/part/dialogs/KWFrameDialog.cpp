@@ -47,9 +47,9 @@ KWFrameDialog::KWFrameDialog(const QList<KWFrame*> &frames, KWDocument *document
         m_frameConnectSelector = new KWFrameConnectSelector(m_state);
         KWFrame *frame = frames.first();
         m_state->setKeepAspectRatio(frame->shape()->keepAspectRatio());
-        if (m_frameConnectSelector->open(frame))
+        if (m_frameConnectSelector->open(frame)) {
             addPage(m_frameConnectSelector, i18n("Connect Text Frames"));
-        else {
+        } else {
             delete m_frameConnectSelector;
             m_frameConnectSelector = 0;
         }
@@ -74,12 +74,12 @@ void KWFrameDialog::okClicked()
     QUndoCommand *cmd = new QUndoCommand(i18n("Frame changes"));
     if (m_frameConnectSelector) {
         m_frameConnectSelector->save();
-        m_frameConnectSelector->createCommand(cmd);
+        //m_frameConnectSelector->createCommand(cmd); TODO
     }
     m_generalFrameProperties->save();
-    m_generalFrameProperties->createCommand(cmd);
+    //m_generalFrameProperties->createCommand(cmd); TODO
     m_frameRunaroundProperties->save();
-    m_frameRunaroundProperties->createCommand(cmd);
+    //m_frameRunaroundProperties->createCommand(cmd); TODO
     if (m_frameGeometry) {
         m_frameGeometry->save();
         m_frameGeometry->createCommand(cmd);
@@ -91,17 +91,5 @@ void KWFrameDialog::cancelClicked()
 {
     if (m_frameGeometry)
         m_frameGeometry->cancel();
-}
-
-// static
-QList<KoShapeConfigFactoryBase *> KWFrameDialog::panels(KWDocument *doc)
-{
-    QList<KoShapeConfigFactoryBase *> answer;
-    FrameConfigSharedState *state = new FrameConfigSharedState(doc);
-    answer.append(new KWFrameConnectSelectorFactory(state));
-    answer.append(new KWFrameGeometryFactory(state));
-    answer.append(new KWFrameRunaroundPropertiesFactory(state));
-    answer.append(new KWGeneralFramePropertiesFactory(state));
-    return answer;
 }
 

@@ -20,8 +20,6 @@
 #ifndef KWSHAPECONFIGFACTORY_H
 #define KWSHAPECONFIGFACTORY_H
 
-#include <KoShapeConfigFactoryBase.h>
-
 #include <QObject>
 
 class KoShape;
@@ -66,100 +64,6 @@ private:
     bool m_protectAspectRatio; // states if the user has this boolean set right now.
     KWFrame *m_frame;
     KWDocument *m_document;
-};
-
-/// factory to create a KWFrameConnectSelector widget
-class KWFrameConnectSelectorFactory : public KoShapeConfigFactoryBase
-{
-public:
-    /// constructor
-    explicit KWFrameConnectSelectorFactory(FrameConfigSharedState *state) : m_state(state) {}
-    ~KWFrameConnectSelectorFactory() {}
-
-    /// reimplemented method from superclass
-    KoShapeConfigWidgetBase *createConfigWidget(KoShape *shape);
-    /// reimplemented method from superclass
-    QString name() const;
-
-    /// reimplemented method from superclass
-    bool showForShapeId(const QString &id) const;
-    /// reimplemented method from superclass
-    int sortingOrder() const {
-        return 15;
-    }
-
-private:
-    FrameConfigSharedState *m_state;
-};
-
-/// factory to create a KWFrameGeometry widget
-class KWFrameGeometryFactory : public KoShapeConfigFactoryBase
-{
-public:
-    /// constructor
-    explicit KWFrameGeometryFactory(FrameConfigSharedState *state) : m_state(state) {}
-    ~KWFrameGeometryFactory() {}
-
-    /// reimplemented method from superclass
-    KoShapeConfigWidgetBase *createConfigWidget(KoShape *shape);
-    /// reimplemented method from superclass
-    QString name() const;
-    /// reimplemented method from superclass
-    int sortingOrder() const {
-        return 0;
-    }
-    /// reimplemented method from superclass
-    bool showForShapeId(const QString &id) const;
-
-private:
-    FrameConfigSharedState *m_state;
-};
-
-/// factory to create a KWFrameRunaroundProperties widget
-class KWFrameRunaroundPropertiesFactory : public KoShapeConfigFactoryBase
-{
-public:
-    /// constructor
-    explicit KWFrameRunaroundPropertiesFactory(FrameConfigSharedState *state) : m_state(state) {}
-    ~KWFrameRunaroundPropertiesFactory() {}
-
-    /// reimplemented method from superclass
-    KoShapeConfigWidgetBase *createConfigWidget(KoShape *shape);
-    /// reimplemented method from superclass
-    QString name() const;
-    /// reimplemented method from superclass
-    bool showForShapeId(const QString &id) const;
-
-    /// reimplemented method from superclass
-    int sortingOrder() const {
-        return 5;
-    }
-
-private:
-    FrameConfigSharedState *m_state;
-};
-
-/// factory to create a KWGeneralFrameProperties widget
-class KWGeneralFramePropertiesFactory : public KoShapeConfigFactoryBase
-{
-public:
-    /// constructor
-    explicit KWGeneralFramePropertiesFactory(FrameConfigSharedState *state) : m_state(state) {}
-    ~KWGeneralFramePropertiesFactory() {}
-
-    /// reimplemented method from superclass
-    KoShapeConfigWidgetBase *createConfigWidget(KoShape *shape);
-    /// reimplemented method from superclass
-    QString name() const;
-    /// reimplemented method from superclass
-    int sortingOrder() const {
-        return 10;
-    }
-    /// reimplemented method from superclass
-    bool showForShapeId(const QString &id) const;
-
-private:
-    FrameConfigSharedState *m_state;
 };
 
 #endif

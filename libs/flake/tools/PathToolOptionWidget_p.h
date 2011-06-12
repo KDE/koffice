@@ -34,31 +34,35 @@
 #include <QWidget>
 #include <QFlags>
 
-#include <ui_PathToolOptionWidgetBase.h>
+#include <ui_PathToolOptionWidget.h>
 
 class KoPathTool;
+class KoPathShape;
+class KoShapeConfigWidgetBase;
 
 class PathToolOptionWidget : public QWidget
 {
     Q_OBJECT
 public:
     enum Type {
-        PlainPath = 1,
-        ParametricShape = 2
+        PlainType,
+        ParametricType
     };
-    Q_DECLARE_FLAGS(Types, Type)
 
     explicit PathToolOptionWidget(KoPathTool *tool, QWidget *parent = 0);
     ~PathToolOptionWidget();
 
-public slots:
-    void setSelectionType(int type);
+    void setSelectionType(Type type);
+    void setSelectedPath(KoPathShape *path);
 
 private:
-    Ui::PathToolOptionWidgetBase widget;
-    KoPathTool *m_tool;
-};
+    void setShapePropertiesWidget(KoShapeConfigWidgetBase *widget);
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(PathToolOptionWidget::Types)
+private:
+    Ui::PathToolOptionWidget widget;
+    KoPathTool *m_tool;
+    KoShapeConfigWidgetBase *m_shapePropertiesWidget;
+    KoPathShape *m_currentOpenPath;
+};
 
 #endif

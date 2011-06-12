@@ -152,13 +152,6 @@ KWDocument::KWDocument(QWidget *parentWidget, QObject *parent, bool singleViewMo
     connect(&m_frameLayout, SIGNAL(newFrameSet(KWFrameSet*)), this, SLOT(addFrameSet(KWFrameSet*)));
     connect(&m_frameLayout, SIGNAL(removedFrameSet(KWFrameSet*)), this, SLOT(removeFrameSet(KWFrameSet*)));
 
-    // Init shape Factories with our frame based configuration panels.
-    QList<KoShapeConfigFactoryBase *> panels = KWFrameDialog::panels(this);
-    foreach (const QString &id, KoShapeRegistry::instance()->keys()) {
-        KoShapeFactoryBase *shapeFactory = KoShapeRegistry::instance()->value(id);
-        shapeFactory->setOptionPanels(panels);
-    }
-
     resourceManager()->setUndoStack(undoStack());
     if (documentRdfBase()) {
         documentRdfBase()->linkToResourceManager(resourceManager());
@@ -184,9 +177,8 @@ KWDocument::~KWDocument()
 
 void KWDocument::addShape(KoShape *shape)
 {
-    // KWord adds a couple of dialogs (like KWFrameDialog) which will not call addShape(), but
-    // will call addFrameSet.  Which will itself call addFrame()
-    // any call coming in here is due to the undo/redo framework, pasting or for nested frames
+    // notice that this call can come from the user inserting a shape, the undo framework
+    // or from pasting.
 
     KWFrame *frame = dynamic_cast<KWFrame*>(shape->applicationData());
     if (frame == 0) {
@@ -194,7 +186,7 @@ void KWDocument::addShape(KoShape *shape)
         if (shape->shapeId() == TextShape_SHAPEID) {
             KWTextFrameSet *tfs = new KWTextFrameSet(this);
             fs = tfs;
-            fs->setName("Text");
+            fs->setName(uniqueFrameSetName("Text"));
             frame = new KWTextFrame(shape, tfs);
         } else {
             fs = new KWFrameSet();

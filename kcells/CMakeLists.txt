@@ -8,22 +8,11 @@ add_subdirectory( dtd )
 add_subdirectory( functions )
 
 include_directories( ${CMAKE_SOURCE_DIR}/interfaces
-                    ${CMAKE_SOURCE_DIR}/kchart
                     ${KOMAIN_INCLUDES}
                     ${KOTEXT_INCLUDES}
                     ${EIGEN2_INCLUDE_DIR} )
 
 ########### next target ###############
-SET (chart_DIR_SRCS
-    chart/KCChartDatabaseSelectorFactory.cpp
-    chart/KCChartDatabaseSelector.cpp
-    chart/KCChartDialog.cpp
-    )
-
-kde4_add_ui_files(chart_DIR_SRCS
-    chart/KCChartDatabaseSelector.ui
-    )
-
 SET (commands_DIR_SRCS
     commands/KCAbstractRegionCommand.cpp
     commands/KCApplyFilterCommand.cpp
@@ -180,7 +169,6 @@ SET (kcellscommon_LIB_SRCS
     KCPageManager.cpp
     KCRegionModel.cpp
     tests/inspector.cpp
-    ${chart_DIR_SRCS}
     ${commands_DIR_SRCS}
     ${database_DIR_SRCS}
     ${dialogs_DIR_SRCS}

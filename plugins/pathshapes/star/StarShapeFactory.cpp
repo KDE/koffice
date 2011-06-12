@@ -137,7 +137,7 @@ KoShape *StarShapeFactory::createShape(const KProperties *params, KoResourceMana
     return star;
 }
 
-bool StarShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
+bool StarShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
     if (e.localName() == "regular-polygon" && e.namespaceURI() == KOdfXmlNS::draw)
@@ -146,11 +146,9 @@ bool StarShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &c
             && e.attributeNS(KOdfXmlNS::draw, "engine", "") == "koffice:star");
 }
 
-QList<KoShapeConfigWidgetBase*> StarShapeFactory::createShapeOptionPanels()
+KoShapeConfigWidgetBase *StarShapeFactory::createConfigWidget(KoCanvasBase *canvas)
 {
-    QList<KoShapeConfigWidgetBase*> panels;
-    panels.append(new StarShapeConfigWidget());
-    return panels;
+    return new StarShapeConfigWidget(canvas);
 }
 
 #include <StarShapeFactory.moc>

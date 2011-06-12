@@ -93,7 +93,7 @@ void SCPlaceholderTool::activate(ToolActivation toolActivation, const QSet<KoSha
 
         // replace placeholder by shape
         canvas()->shapeController()->removeShape(shape, cmd);
-        canvas()->shapeController()->addShapeDirect(newShape, cmd);
+        canvas()->shapeController()->addShape(newShape, cmd);
         canvas()->addCommand(cmd);
 
         // activate the correct tool for the shape

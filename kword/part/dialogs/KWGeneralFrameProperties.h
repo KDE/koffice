@@ -23,14 +23,12 @@
 #include <ui_KWGeneralFrameProperties.h>
 #include <dialogs/KWShapeConfigFactory.h>
 
-#include <KoShapeConfigWidgetBase.h>
-
 #include <QList>
 
 class KWFrame;
 
 /// A widget that allows the user to alter the general frame properties
-class KWGeneralFrameProperties : public KoShapeConfigWidgetBase
+class KWGeneralFrameProperties : public QWidget
 {
     Q_OBJECT
 public:
@@ -39,15 +37,8 @@ public:
 
     /// load all info from the argument frame into this widget
     void open(const QList<KWFrame*> &frames);
-    /// reimplemented
     void open(KoShape *shape);
-    /// reimplemented
     void save();
-
-    /// reimplemented
-    virtual bool showOnShapeCreate() {
-        return true;
-    }
 
 private slots:
     void newPageGroupUpdated(int which);

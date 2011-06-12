@@ -289,8 +289,8 @@ KarbonView::KarbonView(KarbonPart* p, QWidget* parent)
         KoToolBoxFactory toolBoxFactory(d->canvasController, i18n("Tools"));
         shell()->createDockWidget(&toolBoxFactory);
 
-        connect(d->canvasController, SIGNAL(toolOptionWidgetsChanged(const QMap<QString, QWidget *> &, QWidget*)),
-                shell()->dockerManager(), SLOT(newOptionWidgets(const  QMap<QString, QWidget *> &, QWidget*)));
+        connect(d->canvasController, SIGNAL(toolOptionWidgetsChanged(const QMap<QString,QWidget*>&)),
+                shell()->dockerManager(), SLOT(newOptionWidgets(const  QMap<QString,QWidget*>&)));
 
         KoToolManager::instance()->requestToolActivation(d->canvasController);
 
@@ -461,7 +461,7 @@ void KarbonView::fileImportGraphic()
         picture->setPosition(QPointF());
         picture->setKeepAspectRatio(true);
 
-        QUndoCommand * cmd = d->canvas->shapeController()->addShapeDirect(picture);
+        QUndoCommand * cmd = d->canvas->shapeController()->addShape(picture);
         cmd->setText(i18n("Insert graphics"));
         d->canvas->addCommand(cmd);
         d->canvas->shapeManager()->selection()->select(picture);

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PathToolOptionWidgetBase</class>
- <widget class="QWidget" name="PathToolOptionWidgetBase">
+ <class>PathToolOptionWidget</class>
+ <widget class="QWidget" name="PathToolOptionWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>280</width>
-    <height>60</height>
+    <height>228</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -176,42 +176,30 @@
         <verstretch>1</verstretch>
        </sizepolicy>
       </property>
-      <layout class="QGridLayout">
-       <property name="margin">
-        <number>0</number>
-       </property>
-       <item row="1" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QGroupBox" name="propertiesBox">
+         <property name="title">
+          <string>Properties</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="convertToPath">
          <property name="text">
           <string>Convert To Path</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <spacer>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="0">
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Preferred</enum>
-         </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>0</height>
+           <height>172</height>
           </size>
          </property>
         </spacer>

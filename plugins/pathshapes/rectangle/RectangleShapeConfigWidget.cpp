@@ -1,5 +1,6 @@
 /* This file is part of the KDE project
  * Copyright (C) 2007 Jan Hambrecht <jaham@gmx.net>
+ * Copyright (C) 2011 Thomas Zander <zander@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,15 +22,20 @@
 #include "RectangleShape.h"
 #include "RectangleShapeConfigCommand.h"
 
-RectangleShapeConfigWidget::RectangleShapeConfigWidget()
+#include <KoCanvasBase.h>
+
+RectangleShapeConfigWidget::RectangleShapeConfigWidget(KoCanvasBase *canvas)
+    : m_canvas(canvas),
+    m_command(0),
+    m_blocking(false)
 {
     widget.setupUi(this);
 
-    connect(widget.cornerRadiusX, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
-    connect(widget.cornerRadiusY, SIGNAL(editingFinished()), this, SIGNAL(propertyChanged()));
+    connect(widget.cornerRadiusX, SIGNAL(valueChanged(double)), this, SLOT(propertyChanged()));
+    connect(widget.cornerRadiusY, SIGNAL(valueChanged(double)), this, SLOT(propertyChanged()));
 }
 
-void RectangleShapeConfigWidget::setUnit(KUnit unit)
+void RectangleShapeConfigWidget::setUnit(const KUnit &unit)
 {
     widget.cornerRadiusX->setUnit(unit);
     widget.cornerRadiusY->setUnit(unit);
@@ -37,45 +43,65 @@ void RectangleShapeConfigWidget::setUnit(KUnit unit)
 
 void RectangleShapeConfigWidget::open(KoShape *shape)
 {
-    m_rectangle = dynamic_cast<RectangleShape*>(shape);
-    if (! m_rectangle)
+    if (m_blocking)
         return;
+    RectangleShape *rect = dynamic_cast<RectangleShape*>(shape);
+    if (rect != m_rectangle) // if its equal, we just update our values
+        m_command = 0;
+    m_rectangle = 0;
+    if (!rect) {
+        setEnabled(false);
+        return;
+    }
+    setEnabled(true);
 
-    widget.cornerRadiusX->blockSignals(true);
-    widget.cornerRadiusY->blockSignals(true);
-
-    QSizeF size = m_rectangle->size();
+    m_blocking = true;
+    QSizeF size = rect->size();
 
     widget.cornerRadiusX->setMaximum(0.5 * size.width());
-    widget.cornerRadiusX->changeValue(0.01 * m_rectangle->cornerRadiusX() * 0.5 * size.width());
+    widget.cornerRadiusX->changeValue(0.01 * rect->cornerRadiusX() * 0.5 * size.width());
     widget.cornerRadiusY->setMaximum(0.5 * size.height());
-    widget.cornerRadiusY->changeValue(0.01 * m_rectangle->cornerRadiusY() * 0.5 * size.height());
+    widget.cornerRadiusY->changeValue(0.01 * rect->cornerRadiusY() * 0.5 * size.height());
+    m_blocking = false;
 
-    widget.cornerRadiusX->blockSignals(false);
-    widget.cornerRadiusY->blockSignals(false);
+    m_rectangle = rect;
 }
 
-void RectangleShapeConfigWidget::save()
+void RectangleShapeConfigWidget::propertyChanged()
 {
-    if (! m_rectangle)
+    if (!m_rectangle)
         return;
+    if (m_blocking)
+        return;
+    m_blocking = true;
+    m_time.restart();
+    const QSizeF size = m_rectangle->size();
+    const qreal radiusX = 100 * widget.cornerRadiusX->value() / (0.5 * size.width());
+    const qreal radiusY = 100 * widget.cornerRadiusY->value() / (0.5 * size.height());
+    if (m_command && commandIsValid()) {
+        m_command->setCornerRadiusX(radiusX);
+        m_command->setCornerRadiusY(radiusY);
+        m_rectangle->update();
+        m_rectangle->setCornerRadiusX(radiusX);
+        m_rectangle->setCornerRadiusY(radiusY);
+        m_rectangle->update();
+    } else {
+        m_command = new RectangleShapeConfigCommand(m_rectangle, radiusX, radiusY);
+        m_canvas->addCommand(m_command);
+    }
 
-    QSizeF size = m_rectangle->size();
-
-    m_rectangle->setCornerRadiusX(100.0 * widget.cornerRadiusX->value() / (0.5 * size.width()));
-    m_rectangle->setCornerRadiusY(100.0 * widget.cornerRadiusY->value() / (0.5 * size.height()));
+    m_blocking = false;
 }
 
-QUndoCommand * RectangleShapeConfigWidget::createCommand(QUndoCommand *)
+bool RectangleShapeConfigWidget::commandIsValid() const
 {
-    if (! m_rectangle)
-        return 0;
-    QSizeF size = m_rectangle->size();
+    if (!m_time.isValid())
+        return false;
 
-    qreal cornerRadiusX = 100.0 * widget.cornerRadiusX->value() / (0.5 * size.width());
-    qreal cornerRadiusY = 100.0 * widget.cornerRadiusY->value() / (0.5 * size.height());
+    if (m_time.elapsed() > 4000)
+        return false;
 
-    return new RectangleShapeConfigCommand(m_rectangle, cornerRadiusX, cornerRadiusY);
+    return true;
 }
 
 #include <RectangleShapeConfigWidget.moc>

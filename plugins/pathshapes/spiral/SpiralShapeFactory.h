@@ -33,7 +33,7 @@ public:
     ~SpiralShapeFactory() {}
     virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
     virtual bool supports(const KoXmlElement & e, KoShapeLoadingContext &context) const;
-    virtual QList<KoShapeConfigWidgetBase*> createShapeOptionPanels();
+    virtual KoShapeConfigWidgetBase *createConfigWidget(KoCanvasBase *canvas);
 };
 
 #endif /* KOSPIRALSHAPEFACTORY_H */

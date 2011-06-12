@@ -27,7 +27,7 @@
 class PictureShape;
 class KoImageSelectionWidget;
 
-class PictureShapeConfigWidget : public KoShapeConfigWidgetBase
+class PictureShapeConfigWidget : public QWidget
 {
     Q_OBJECT
 public:

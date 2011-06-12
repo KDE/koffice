@@ -979,7 +979,7 @@ void DefaultTool::selectionUngroup()
             QList<KoShape*> children = group->shapes();
             foreach (KoShape *shape, children) {
                 // re-add children to document correctly, so the doc can notice them as toplevels
-                canvas()->shapeController()->addShapeDirect(shape, cmd);
+                canvas()->shapeController()->addShape(shape, cmd);
             }
             new KoShapeUngroupCommand(group, group->shapes(),
                     group->parent()? QList<KoShape*>(): canvas()->shapeManager()->topLevelShapes(),

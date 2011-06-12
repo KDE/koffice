@@ -97,10 +97,9 @@ public:
     /**
      * Return the option widgets for this tool. Create them if they
      * do not exist yet. If the tool does not have an option widget,
-     * this method return an empty list. (After discussion with Thomas, who prefers
-     * the toolmanager to handle that case.)
+     * this method return an empty list.
      *
-     * @see m_optionWidgets
+     * @see createOptionWidgets();
      */
     QMap<QString, QWidget *> optionWidgets();
 

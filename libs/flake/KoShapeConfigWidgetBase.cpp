@@ -28,7 +28,7 @@ KoShapeConfigWidgetBase::~KoShapeConfigWidgetBase()
 {
 }
 
-void KoShapeConfigWidgetBase::setUnit(KUnit unit)
+void KoShapeConfigWidgetBase::setUnit(const KUnit &unit)
 {
     Q_UNUSED(unit);
 }
@@ -38,20 +38,4 @@ void KoShapeConfigWidgetBase::setResourceManager(KoResourceManager *rm)
     m_resourceManager = rm;
 }
 
-bool KoShapeConfigWidgetBase::showOnShapeCreate()
-{
-    return false;
-}
-
-bool KoShapeConfigWidgetBase::showOnShapeSelect()
-{
-    return true;
-}
-
-QUndoCommand *KoShapeConfigWidgetBase::createCommand(QUndoCommand *)
-{
-    return 0;
-}
-
 #include <KoShapeConfigWidgetBase.moc>
-

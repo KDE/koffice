@@ -47,10 +47,10 @@ public:
      *
      * @param cornerCount the new number of corners
      */
-    void setCornerCount(uint cornerCount);
+    void setCornerCount(int cornerCount);
 
     /// Returns the number of corners
-    uint cornerCount() const;
+    int cornerCount() const;
 
     /**
      * Sets the radius of the base points.
@@ -131,7 +131,7 @@ private:
     /// the handle types
     enum Handles { tip = 0, base = 1 };
 
-    uint m_cornerCount;    ///< number of corners
+    int m_cornerCount;    ///< number of corners
     qreal m_radius[2];    ///< the different radii
     qreal m_angles[2];    ///< the offset angles
     qreal m_zoomX;        ///< scaling in x

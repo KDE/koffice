@@ -44,7 +44,6 @@ public:
     }
 
     QList<KoShapeTemplate> templates;
-    QList<KoShapeConfigFactoryBase*> configPanels;
     const QString id;
     const QString name;
     QString family;
@@ -124,16 +123,6 @@ QString KoShapeFactoryBase::id() const
     return d->id;
 }
 
-void KoShapeFactoryBase::setOptionPanels(const QList<KoShapeConfigFactoryBase*> &panelFactories)
-{
-    d->configPanels = panelFactories;
-}
-
-QList<KoShapeConfigFactoryBase*> KoShapeFactoryBase::panelFactories()
-{
-    return d->configPanels;
-}
-
 QList<KoShapeTemplate> KoShapeFactoryBase::templates() const
 {
     return d->templates;
@@ -155,7 +144,7 @@ void KoShapeFactoryBase::setOdfElements(const QList<QPair<QString, QStringList> 
     d->odfElements = elementNamesList;
 }
 
-bool KoShapeFactoryBase::hidden() const
+bool KoShapeFactoryBase::isHidden() const
 {
     return d->hidden;
 }
