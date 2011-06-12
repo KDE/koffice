@@ -49,7 +49,7 @@
 #include <KoShapeRegistry.h>
 #include <KoXmlReader.h>
 #include <KOdfStoreReader.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoStyleManager.h>
 #include <KoXmlNS.h>
 #include <kcomponentdata.h>
@@ -407,7 +407,7 @@ void TestRdf::addAndSage()
     QString todt = file.fileName();
     KoStore *store = KoStore::createStore(todt, KoStore::Write, mimeType, KoStore::Zip);
     store->disallowNameExpansion();
-    KoOdfWriteStore odfStore (store);
+    KOdfWriteStore odfStore (store);
     KoXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
     QVERIFY (manifestWriter);
     QVERIFY (rdf->saveOasis(store, manifestWriter));

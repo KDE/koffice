@@ -28,7 +28,7 @@
 #include <kdebug.h>
 #include <KoFilterChain.h>
 #include <kpluginfactory.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
 #include <KoXmlWriter.h>
 
@@ -122,7 +122,7 @@ KoFilter::ConversionStatus APPLIXWORDImport::convert(const QByteArray& from, con
         return KoFilter::FileNotFound;
     }
     store->disallowNameExpansion();
-    KoOdfWriteStore odfStore(store);
+    KOdfWriteStore odfStore(store);
     odfStore.manifestWriter(to);
 
     KoXmlWriter* contentWriter = odfStore.contentWriter();
@@ -749,14 +749,14 @@ APPLIXWORDImport::readHeader(QTextStream &stream)
     } else return true;
 }
 
-bool APPLIXWORDImport::createMeta(KoOdfWriteStore &store)
+bool APPLIXWORDImport::createMeta(KOdfWriteStore &store)
 {
     if (!store.store()->open("meta.xml")) {
         return false;
     }
 
     KoStoreDevice dev(store.store());
-    KoXmlWriter* xmlWriter = KoOdfWriteStore::createOasisXmlWriter(&dev, "office:document-meta");
+    KoXmlWriter* xmlWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-meta");
     xmlWriter->startElement("office:meta");
 
     xmlWriter->startElement("meta:generator");

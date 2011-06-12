@@ -26,7 +26,7 @@
 #include <KoXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoXmlWriter.h>
 
 void TestKoOdfLoadingContext::testFillStyleStack()
@@ -37,7 +37,7 @@ void TestKoOdfLoadingContext::testFillStyleStack()
 #endif
     const char * mimeType = "application/vnd.oasis.opendocument.text";
     KoStore * store(KoStore::createStore("test.odt", KoStore::Write, mimeType));
-    KoOdfWriteStore odfStore(store);
+    KOdfWriteStore odfStore(store);
     KoXmlWriter* manifestWriter = odfStore.manifestWriter(mimeType);
 
     KoXmlWriter* contentWriter = odfStore.contentWriter();
@@ -72,7 +72,7 @@ void TestKoOdfLoadingContext::testFillStyleStack()
     QVERIFY(store->open("styles.xml") == true);
 
     KoStoreDevice stylesDev(store);
-    KoXmlWriter* stylesWriter = KoOdfWriteStore::createOasisXmlWriter(&stylesDev, "office:document-styles");
+    KoXmlWriter* stylesWriter = KOdfWriteStore::createOasisXmlWriter(&stylesDev, "office:document-styles");
 
     stylesWriter->startElement("office:styles");
     stylesWriter->startElement("style:style");

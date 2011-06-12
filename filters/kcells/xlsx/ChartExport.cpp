@@ -21,7 +21,7 @@
 
 #include <KoStore.h>
 #include <KoXmlWriter.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoStoreDevice.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
@@ -353,7 +353,7 @@ bool ChartExport::saveContent(KoStore* store, KoXmlWriter* manifestWriter)
     store->pushDirectory();
     store->enterDirectory(m_href);
 
-    KoOdfWriteStore s(store);
+    KOdfWriteStore s(store);
     KoXmlWriter* bodyWriter = s.bodyWriter();
     KoXmlWriter* contentWriter = s.contentWriter();
     Q_ASSERT(bodyWriter && contentWriter);

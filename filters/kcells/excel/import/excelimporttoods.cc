@@ -36,7 +36,7 @@
 #include <kpluginfactory.h>
 
 #include <KoXmlWriter.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
 #include <KoOdfNumberStyles.h>
@@ -147,26 +147,26 @@ public:
     void addProgress(int addValue);
 
     bool createStyles(KoStore* store, KoXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles);
-    bool createContent(KoOdfWriteStore* store);
-    bool createMeta(KoOdfWriteStore* store);
-    bool createSettings(KoOdfWriteStore* store);
+    bool createContent(KOdfWriteStore* store);
+    bool createMeta(KOdfWriteStore* store);
+    bool createSettings(KOdfWriteStore* store);
 
     int sheetFormatIndex;
     int columnFormatIndex;
     int rowFormatIndex;
     int cellFormatIndex;
 
-    void processWorkbookForBody(KoOdfWriteStore* store, Workbook* workbook, KoXmlWriter* xmlWriter);
+    void processWorkbookForBody(KOdfWriteStore* store, Workbook* workbook, KoXmlWriter* xmlWriter);
     void processWorkbookForStyle(Workbook* workbook, KoXmlWriter* xmlWriter);
-    void processSheetForBody(KoOdfWriteStore* store, Sheet* sheet, KoXmlWriter* xmlWriter);
+    void processSheetForBody(KOdfWriteStore* store, Sheet* sheet, KoXmlWriter* xmlWriter);
     void processSheetForStyle(Sheet* sheet, KoXmlWriter* xmlWriter);
     void processSheetForHeaderFooter(Sheet* sheet, KoXmlWriter* writer);
     void processHeaderFooterStyle(const QString& text, KoXmlWriter* xmlWriter);
     void processColumnForBody(Sheet* sheet, int columnIndex, KoXmlWriter* xmlWriter, unsigned& outlineLevel);
     void processColumnForStyle(Sheet* sheet, int columnIndex, KoXmlWriter* xmlWriter);
-    int processRowForBody(KoOdfWriteStore* store, Sheet* sheet, int rowIndex, KoXmlWriter* xmlWriter, unsigned& outlineLevel);
+    int processRowForBody(KOdfWriteStore* store, Sheet* sheet, int rowIndex, KoXmlWriter* xmlWriter, unsigned& outlineLevel);
     int processRowForStyle(Sheet* sheet, int rowIndex, KoXmlWriter* xmlWriter);
-    void processCellForBody(KoOdfWriteStore* store, Cell* cell, int rowsRepeat, KoXmlWriter* xmlWriter);
+    void processCellForBody(KOdfWriteStore* store, Cell* cell, int rowsRepeat, KoXmlWriter* xmlWriter);
     void processCellForStyle(Cell* cell, KoXmlWriter* xmlWriter);
     QString processCellFormat(const Format* format, const QString& formula = QString());
     QString processRowFormat(Format* format, const QString& breakBefore = QString(), int rowRepeat = 1, double rowHeight = -1);
@@ -245,7 +245,7 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
     d->styles = new KOdfGenericStyles();
     d->mainStyles = new KOdfGenericStyles();
 
-    KoOdfWriteStore oasisStore(d->storeout);
+    KOdfWriteStore oasisStore(d->storeout);
     KoXmlWriter* manifestWriter = oasisStore.manifestWriter("application/vnd.oasis.opendocument.spreadsheet");
 
     // header and footer are read from each sheet and saved in styles
@@ -352,7 +352,7 @@ int ExcelImport::Private::rowsRepeated(Row* row, int rowIndex)
 }
 
 // Writes the spreadsheet content into the content.xml
-bool ExcelImport::Private::createContent(KoOdfWriteStore* store)
+bool ExcelImport::Private::createContent(KOdfWriteStore* store)
 {
     KoXmlWriter* bodyWriter = store->bodyWriter();
     KoXmlWriter* contentWriter = store->contentWriter();
@@ -439,7 +439,7 @@ bool ExcelImport::Private::createStyles(KoStore* store, KoXmlWriter* manifestWri
 }
 
 // Writes meta-informations into the meta.xml
-bool ExcelImport::Private::createMeta(KoOdfWriteStore* store)
+bool ExcelImport::Private::createMeta(KOdfWriteStore* store)
 {
     if (!store->store()->open("meta.xml"))
         return false;
@@ -513,13 +513,13 @@ bool ExcelImport::Private::createMeta(KoOdfWriteStore* store)
 }
 
 // Writes configuration-settings into the settings.xml
-bool ExcelImport::Private::createSettings(KoOdfWriteStore* store)
+bool ExcelImport::Private::createSettings(KOdfWriteStore* store)
 {
     if (!store->store()->open("settings.xml"))
         return false;
 
     KoStoreDevice dev(store->store());
-    KoXmlWriter* settingsWriter = KoOdfWriteStore::createOasisXmlWriter(&dev, "office:document-settings");
+    KoXmlWriter* settingsWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-settings");
     settingsWriter->startElement("office:settings");
     settingsWriter->startElement("config:config-item-set");
     settingsWriter->addAttribute("config:name", "view-settings");
@@ -571,7 +571,7 @@ bool ExcelImport::Private::createSettings(KoOdfWriteStore* store)
 }
 
 // Processes the workbook content. The workbook is the top-level element for content.
-void ExcelImport::Private::processWorkbookForBody(KoOdfWriteStore* store, Workbook* workbook, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processWorkbookForBody(KOdfWriteStore* store, Workbook* workbook, KoXmlWriter* xmlWriter)
 {
     if (!workbook) return;
     if (!xmlWriter) return;
@@ -693,7 +693,7 @@ void ExcelImport::Private::processWorkbookForStyle(Workbook* workbook, KoXmlWrit
 }
 
 // Processes a sheet.
-void ExcelImport::Private::processSheetForBody(KoOdfWriteStore* store, Sheet* sheet, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processSheetForBody(KOdfWriteStore* store, Sheet* sheet, KoXmlWriter* xmlWriter)
 {
     if (!sheet) return;
     if (!xmlWriter) return;
@@ -1008,7 +1008,7 @@ void ExcelImport::Private::processColumnForStyle(Sheet* sheet, int columnIndex, 
 }
 
 // Processes a row in a sheet.
-int ExcelImport::Private::processRowForBody(KoOdfWriteStore* store, Sheet* sheet, int rowIndex, KoXmlWriter* xmlWriter, unsigned& outlineLevel)
+int ExcelImport::Private::processRowForBody(KOdfWriteStore* store, Sheet* sheet, int rowIndex, KoXmlWriter* xmlWriter, unsigned& outlineLevel)
 {
     int repeat = 1;
 
@@ -1251,7 +1251,7 @@ QString currencyValue(const QString &value)
 }
 
 // Processes a cell within a sheet.
-void ExcelImport::Private::processCellForBody(KoOdfWriteStore* store, Cell* cell, int rowsRepeat, KoXmlWriter* xmlWriter)
+void ExcelImport::Private::processCellForBody(KOdfWriteStore* store, Cell* cell, int rowsRepeat, KoXmlWriter* xmlWriter)
 {
     if (!cell) return;
     if (!xmlWriter) return;

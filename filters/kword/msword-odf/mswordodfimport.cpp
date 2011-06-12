@@ -33,7 +33,7 @@
 #include <kpluginfactory.h>
 
 #include <KoFilterChain.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoStoreDevice.h>
 //#include <KoXmlWriter.h>
 
@@ -154,7 +154,7 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
     Finalizer finalizer(storeout);
     storeout->disallowNameExpansion();
     kDebug(30513) << "created storeout.";
-    KoOdfWriteStore oasisStore(storeout);
+    KOdfWriteStore oasisStore(storeout);
 
     kDebug(30513) << "created oasisStore.";
 
@@ -245,7 +245,7 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
         return KoFilter::CreationError;
 
     KoStoreDevice metaDev(storeout);
-    KoXmlWriter *meta = KoOdfWriteStore::createOasisXmlWriter(&metaDev, "office:document-meta");
+    KoXmlWriter *meta = KOdfWriteStore::createOasisXmlWriter(&metaDev, "office:document-meta");
     meta->startElement("office:meta");
     meta->addCompleteElement(&buf);
     meta->endElement(); //office:meta

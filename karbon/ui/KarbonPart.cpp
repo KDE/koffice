@@ -50,7 +50,7 @@
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoShapeSavingContext.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
@@ -290,7 +290,7 @@ void KarbonPart::loadOasisSettings(const KoXmlDocument &settingsDoc)
 void KarbonPart::saveOasisSettings(KoStore *store)
 {
     KoStoreDevice settingsDev(store);
-    KoXmlWriter * settingsWriter = KoOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
+    KoXmlWriter * settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
 
     // add this so that OOo reads guides lines and grid data from ooo:view-settings
     settingsWriter->addAttribute("xmlns:ooo", "http://openoffice.org/2004/office");

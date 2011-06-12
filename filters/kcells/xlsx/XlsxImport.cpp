@@ -50,7 +50,7 @@
 #include <KPluginFactory>
 #include <KMessageBox>
 
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoEmbeddedDocumentSaver.h>
 #include <KoDocumentInfo.h>
 #include <KoDocument.h>

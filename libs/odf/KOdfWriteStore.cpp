@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoOdfWriteStore.h"
+#include "KOdfWriteStore.h"
 
 #include <QBuffer>
 
@@ -32,7 +32,7 @@
 
 #include "KoXmlNS.h"
 
-struct KoOdfWriteStore::Private {
+struct KOdfWriteStore::Private {
     Private(KoStore * store)
             : store(store)
             , storeDevice(0)
@@ -64,17 +64,17 @@ struct KoOdfWriteStore::Private {
     KTemporaryFile * contentTmpFile;
 };
 
-KoOdfWriteStore::KoOdfWriteStore(KoStore* store)
+KOdfWriteStore::KOdfWriteStore(KoStore* store)
         : d(new Private(store))
 {
 }
 
-KoOdfWriteStore::~KoOdfWriteStore()
+KOdfWriteStore::~KOdfWriteStore()
 {
     delete d;
 }
 
-KoXmlWriter* KoOdfWriteStore::createOasisXmlWriter(QIODevice* dev, const char* rootElementName)
+KoXmlWriter* KOdfWriteStore::createOasisXmlWriter(QIODevice* dev, const char* rootElementName)
 {
     KoXmlWriter* writer = new KoXmlWriter(dev);
     writer->startDocument(rootElementName);
@@ -119,12 +119,12 @@ KoXmlWriter* KoOdfWriteStore::createOasisXmlWriter(QIODevice* dev, const char* r
     return writer;
 }
 
-KoStore* KoOdfWriteStore::store() const
+KoStore* KOdfWriteStore::store() const
 {
     return d->store;
 }
 
-KoXmlWriter* KoOdfWriteStore::contentWriter()
+KoXmlWriter* KOdfWriteStore::contentWriter()
 {
     if (!d->contentWriter) {
         if (!d->store->open("content.xml")) {
@@ -136,7 +136,7 @@ KoXmlWriter* KoOdfWriteStore::contentWriter()
     return d->contentWriter;
 }
 
-KoXmlWriter* KoOdfWriteStore::bodyWriter()
+KoXmlWriter* KOdfWriteStore::bodyWriter()
 {
     if (!d->bodyWriter) {
         Q_ASSERT(!d->contentTmpFile);
@@ -147,7 +147,7 @@ KoXmlWriter* KoOdfWriteStore::bodyWriter()
     return d->bodyWriter;
 }
 
-bool KoOdfWriteStore::closeContentWriter()
+bool KOdfWriteStore::closeContentWriter()
 {
     Q_ASSERT(d->contentWriter);
     Q_ASSERT(d->bodyWriter);
@@ -172,7 +172,7 @@ bool KoOdfWriteStore::closeContentWriter()
     return true;
 }
 
-KoXmlWriter* KoOdfWriteStore::manifestWriter(const char* mimeType)
+KoXmlWriter* KOdfWriteStore::manifestWriter(const char* mimeType)
 {
     if (!d->manifestWriter) {
         // the pointer to the buffer is already stored in the KoXmlWriter, no need to store it here as well
@@ -188,13 +188,13 @@ KoXmlWriter* KoOdfWriteStore::manifestWriter(const char* mimeType)
     return d->manifestWriter;
 }
 
-KoXmlWriter* KoOdfWriteStore::manifestWriter()
+KoXmlWriter* KOdfWriteStore::manifestWriter()
 {
     Q_ASSERT(d->manifestWriter);
     return d->manifestWriter;
 }
 
-bool KoOdfWriteStore::closeManifestWriter()
+bool KOdfWriteStore::closeManifestWriter()
 {
     Q_ASSERT(d->manifestWriter);
     d->manifestWriter->endElement();

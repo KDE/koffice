@@ -35,7 +35,7 @@
 #include <KoStoreDevice.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyles.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 
 #include "kword13formatother.h"
 #include "kword13picture.h"
@@ -544,7 +544,7 @@ void KWord13OasisGenerator::writeStylesXml(void)
     KoStoreDevice io(m_store);
     io.open(QIODevice::WriteOnly);    // ### TODO: check error!
 
-    KoXmlWriter *stylesWriter = KoOdfWriteStore::createOasisXmlWriter(&io, "office:document-styles");
+    KoXmlWriter *stylesWriter = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-styles");
 
     stylesWriter->startElement("office:styles");
     Q3ValueList<KOdfGenericStyles::NamedStyle> styles = m_oasisGenStyles.styles(KOdfGenericStyle::ParagraphStyle);
@@ -611,7 +611,7 @@ void KWord13OasisGenerator::writeContentXml(void)
     KoStoreDevice io(m_store);
     io.open(QIODevice::WriteOnly);    // ### TODO: check error!
 
-    KoXmlWriter *writer = KoOdfWriteStore::createOasisXmlWriter(&io, "office:document-content");
+    KoXmlWriter *writer = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-content");
 
 
     // Automatic styles
@@ -661,7 +661,7 @@ void KWord13OasisGenerator::writeMetaXml(void)
     KoStoreDevice io(m_store);
     io.open(QIODevice::WriteOnly);    // ### TODO: check error!
 
-    KoXmlWriter *writer = KoOdfWriteStore::createOasisXmlWriter(&io, "office:document-meta");
+    KoXmlWriter *writer = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-meta");
 
     writer->startElement("office:meta");
 

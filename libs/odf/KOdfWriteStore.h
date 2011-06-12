@@ -46,13 +46,13 @@ class KoStore;
  *
  * @author: David Faure <faure@kde.org>
  */
-class KOODF_EXPORT KoOdfWriteStore
+class KOODF_EXPORT KOdfWriteStore
 {
 public:
     /// @param store recontents the property of the caller
-    explicit KoOdfWriteStore(KoStore *store);
+    explicit KOdfWriteStore(KoStore *store);
 
-    ~KoOdfWriteStore();
+    ~KOdfWriteStore();
 
     /**
      * Return an XML writer for saving Oasis XML into the device @p dev,

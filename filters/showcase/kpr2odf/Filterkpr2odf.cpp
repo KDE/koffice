@@ -36,7 +36,7 @@
 
 //KOffice includes
 #include <KoStore.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoDocumentInfo.h>
 #include <KoFilterChain.h>
 #include <KoXmlWriter.h>
@@ -110,7 +110,7 @@ KoFilter::ConversionStatus Filterkpr2odf::convert(const QByteArray& from, const 
         return KoFilter::StorageCreationError;
     }
 
-    KoOdfWriteStore odfWriter(output);
+    KOdfWriteStore odfWriter(output);
     KoXmlWriter* manifest = odfWriter.manifestWriter(KoXmlNS::presentation.toUtf8());
     //Save the preview picture
     output->enterDirectory("Thumbnails");
@@ -142,7 +142,7 @@ KoFilter::ConversionStatus Filterkpr2odf::convert(const QByteArray& from, const 
     //Create settings.xml
     output->open("settings.xml");
     KoStoreDevice device(output);
-    KoXmlWriter *settings = KoOdfWriteStore::createOasisXmlWriter(&device, "office:document-settings");
+    KoXmlWriter *settings = KOdfWriteStore::createOasisXmlWriter(&device, "office:document-settings");
     //TODO: check which settings we still use in 2.0
     settings->endElement();//office:document-settings
     settings->endDocument();

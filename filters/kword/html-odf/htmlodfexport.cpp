@@ -34,7 +34,7 @@
 #include <kpluginfactory.h>
 
 #include <KoFilterChain.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoStoreDevice.h>
 #include <KoXmlWriter.h>
 

@@ -33,7 +33,7 @@
 #include <kpluginfactory.h>
 #include <KoFilterChain.h>
 #include <KoXmlWriter.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
 
@@ -83,7 +83,7 @@ KoFilter::ConversionStatus HTMLImport::convert(const QByteArray& from, const QBy
         return KoFilter::FileNotFound;
     storeout->disallowNameExpansion(); // Tell KoStore not to touch the file names
     
-    KoOdfWriteStore oasisStore(storeout);
+    KOdfWriteStore oasisStore(storeout);
     m_manifestWriter = oasisStore.manifestWriter("application/vnd.oasis.opendocument.spreadsheet");
     m_store = &oasisStore;
 

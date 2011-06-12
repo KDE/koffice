@@ -41,7 +41,7 @@ namespace DOM
     class Element;
 }
 
-class KoOdfWriteStore;
+class KOdfWriteStore;
 class KoXmlWriter;
 class KOdfGenericStyles;
 
@@ -68,7 +68,7 @@ private:
     QStack<State> m_states;
     
     QDir m_inputDir;    
-    KoOdfWriteStore* m_store;
+    KOdfWriteStore* m_store;
     KoXmlWriter* m_manifestWriter;
     KOdfGenericStyles* m_mainStyles;
 };

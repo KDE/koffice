@@ -31,7 +31,7 @@
 #include <KoStore.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericChanges.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoXmlWriter.h>
 #include <KOdfDocumentBase.h>
 #include <KoEmbeddedDocumentSaver.h>
@@ -73,7 +73,7 @@ bool KoTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
     Q_ASSERT(store);
     Q_ASSERT(!store->bad());
 
-    KoOdfWriteStore odfStore(store);
+    KOdfWriteStore odfStore(store);
     KoEmbeddedDocumentSaver embeddedSaver;
 
     KoXmlWriter* manifestWriter = odfStore.manifestWriter(mimeType);

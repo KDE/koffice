@@ -29,7 +29,7 @@
 #include <KoStore.h>
 #include <kofficeversion.h>
 
-class KoOdfWriteStore;
+class KOdfWriteStore;
 class QByteArray;
 
 class APPLIXWORDImport : public KoFilter
@@ -49,7 +49,7 @@ private:
     void    replaceSpecial(QString &);
     QString nextLine(QTextStream &);
     int     readHeader(QTextStream &stream);
-    bool createMeta(KoOdfWriteStore &store);
+    bool createMeta(KOdfWriteStore &store);
 
 private:
     int m_stepsize;

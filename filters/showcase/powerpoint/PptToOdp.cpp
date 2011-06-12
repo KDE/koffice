@@ -27,7 +27,7 @@
 
 #include <kdebug.h>
 #include <KoOdf.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoXmlWriter.h>
 
 #include <QtCore/QBuffer>
@@ -598,7 +598,7 @@ KoFilter::ConversionStatus PptToOdp::convert(POLE::Storage& storage,
 KoFilter::ConversionStatus PptToOdp::doConversion(POLE::Storage& storage,
         KoStore* storeout)
 {
-    KoOdfWriteStore odfWriter(storeout);
+    KOdfWriteStore odfWriter(storeout);
     KoXmlWriter* manifest = odfWriter.manifestWriter(
                                 KoOdf::mimeType(KoOdf::Presentation));
 

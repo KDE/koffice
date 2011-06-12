@@ -38,7 +38,7 @@
 #include <kpluginfactory.h>
 
 #include <KoXmlWriter.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
 #include <KoOdfNumberStyles.h>

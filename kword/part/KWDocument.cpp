@@ -49,7 +49,7 @@
 #include <KoTextDocument.h>
 #include <KoTextAnchor.h>
 #include <KoShapeContainer.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoToolManager.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeFactoryBase.h>

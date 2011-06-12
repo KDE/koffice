@@ -33,7 +33,7 @@
 #include <KoTextLoader.h>
 #include <KoXmlReader.h>
 #include <KOdfStoreReader.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KTemporaryFile>
 #include <KoStoreDevice.h>
 #include <KoXmlWriter.h>
@@ -1032,14 +1032,14 @@ QString TestLoading::documentToOdt(QTextDocument *document)
     f.close();
 
     KoStore *store = KoStore::createStore(odt, KoStore::Write, "application/vnd.oasis.opendocument.text", KoStore::Zip);
-    KoOdfWriteStore odfWriteStore(store);
+    KOdfWriteStore odfWriteStore(store);
     KoXmlWriter *manifestWriter = odfWriteStore.manifestWriter("application/vnd.oasis.opendocument.text");
     manifestWriter->addManifestEntry("content.xml", "text/xml");
     if (!store->open("content.xml"))
         return QString();
 
     KoStoreDevice contentDev(store);
-    KoXmlWriter* contentWriter = KoOdfWriteStore::createOasisXmlWriter(&contentDev, "office:document-content");
+    KoXmlWriter* contentWriter = KOdfWriteStore::createOasisXmlWriter(&contentDev, "office:document-content");
 
     // for office:body
     KTemporaryFile contentTmpFile;

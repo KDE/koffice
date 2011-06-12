@@ -36,7 +36,7 @@
 #endif
 #include "KOdfStylesReader.h"
 #include "KOdfStoreReader.h"
-#include "KoOdfWriteStore.h"
+#include "KOdfWriteStore.h"
 #include "KoEmbeddedDocumentSaver.h"
 #include "KoXmlNS.h"
 #include "KoOpenPane.h"
@@ -876,7 +876,7 @@ bool KoDocument::saveNativeFormatODF(KoStore *store, const QByteArray &mimeType)
     kDebug(30003) << "Saving to OASIS format";
     // Tell KoStore not to touch the file names
     store->disallowNameExpansion();
-    KoOdfWriteStore odfStore(store);
+    KOdfWriteStore odfStore(store);
     KoXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
     KoEmbeddedDocumentSaver embeddedSaver;
     SavingContext documentContext(odfStore, embeddedSaver);
@@ -928,7 +928,7 @@ bool KoDocument::saveNativeFormatODF(KoStore *store, const QByteArray &mimeType)
     if (!d->versionInfo.isEmpty()) {
         if (store->open("VersionList.xml")) {
             KoStoreDevice dev(store);
-            KoXmlWriter *xmlWriter = KoOdfWriteStore::createOasisXmlWriter(&dev,
+            KoXmlWriter *xmlWriter = KOdfWriteStore::createOasisXmlWriter(&dev,
                                      "VL:version-list");
             for (int i = 0; i < d->versionInfo.size(); ++i) {
                 KoVersionInfo *version = &d->versionInfo[i];
@@ -1821,7 +1821,7 @@ bool KoDocument::addVersion(const QString& comment)
     kDebug(30003) << "Saving to OASIS format";
     // Tell KoStore not to touch the file names
     store->disallowNameExpansion();
-    KoOdfWriteStore odfStore(store);
+    KOdfWriteStore odfStore(store);
 
     KoXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
     Q_UNUSED(manifestWriter); // XXX why?

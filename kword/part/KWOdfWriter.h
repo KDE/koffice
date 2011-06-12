@@ -29,7 +29,7 @@
 #include <KoRTree.h>
 
 class KWDocument;
-class KoOdfWriteStore;
+class KOdfWriteStore;
 class KoEmbeddedDocumentSaver;
 class KOdfGenericStyles;
 class KWTextFrameSet;
@@ -60,7 +60,7 @@ public:
      *  @brief Writes an OASIS OpenDocument to a store.
      *  This implements the KoDocument::saveOdf method.
      */
-    bool save(KoOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embeddedSaver);
+    bool save(KOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embeddedSaver);
 
 private:
     QByteArray serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KOdfGenericStyles &mainStyles, KOdfGenericChanges &changes, KWTextFrameSet* fs);

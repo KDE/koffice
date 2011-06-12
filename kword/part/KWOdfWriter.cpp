@@ -28,7 +28,7 @@
 #include "frames/KWTextFrameSet.h"
 #include "frames/KWTextFrame.h"
 #include <KoXmlWriter.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoShapeSavingContext.h>
 
 #include <KoTextShapeData.h>
@@ -169,7 +169,7 @@ KWOdfWriter::~KWOdfWriter()
 }
 
 // 1.6: KWDocument::saveOasisHelper()
-bool KWOdfWriter::save(KoOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embeddedSaver)
+bool KWOdfWriter::save(KOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embeddedSaver)
 {
     //kDebug(32001) << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 
@@ -355,7 +355,7 @@ bool KWOdfWriter::save(KoOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embed
 bool KWOdfWriter::saveOdfSettings(KoStore *store)
 {
     KoStoreDevice settingsDev(store);
-    KoXmlWriter *settingsWriter = KoOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
+    KoXmlWriter *settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
 
     // add this so that OOo reads guides lines and grid data from ooo:view-settings
     settingsWriter->addAttribute("xmlns:ooo", "http://openoffice.org/2004/office");

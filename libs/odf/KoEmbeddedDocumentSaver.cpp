@@ -25,7 +25,7 @@
 
 #include <KoStore.h>
 #include <KoXmlWriter.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 
 #include "KOdfDocumentBase.h"
 

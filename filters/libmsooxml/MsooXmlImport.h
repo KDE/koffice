@@ -37,7 +37,7 @@
 
 class QSize;
 class KZip;
-class KoOdfWriteStore;
+class KOdfWriteStore;
 class KoStore;
 
 namespace MSOOXML

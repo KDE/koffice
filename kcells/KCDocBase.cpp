@@ -35,7 +35,7 @@
 #include <KoOdfSettings.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoProgressUpdater.h>
 #include <KoResourceManager.h>
 #include <KoShapeRegistry.h>
@@ -170,7 +170,7 @@ bool KCDocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag
     if (!store->open("settings.xml"))
         return false;
 
-    KoXmlWriter* settingsWriter = KoOdfWriteStore::createOasisXmlWriter(&dev, "office:document-settings");
+    KoXmlWriter* settingsWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-settings");
     settingsWriter->startElement("office:settings");
     settingsWriter->startElement("config:config-item-set");
     settingsWriter->addAttribute("config:name", "view-settings");

@@ -60,7 +60,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KOdfStoreReader.h>
-#include <KoOdfWriteStore.h>
+#include <KOdfWriteStore.h>
 #include <KoResourceManager.h>
 #include <KoShapeConfigFactoryBase.h>
 #include <KoShapeFactoryBase.h>
