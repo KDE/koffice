@@ -22,7 +22,7 @@
 #define KSPREAD_LOCALIZATION
 
 #include <klocale.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include "kcells_export.h"
 

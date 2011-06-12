@@ -22,7 +22,7 @@
 #include "ooutils.h"
 #include <KOdfStoreReader.h>
 #include <KOdfStyleStack.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <qdom.h>
 #include <QColor>
 #include <QImage>

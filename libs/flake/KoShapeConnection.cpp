@@ -29,7 +29,7 @@
 #include "KoPathPoint.h"
 #include "KoLoadingShapeUpdater.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>

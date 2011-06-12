@@ -23,7 +23,7 @@
 #include <QSharedDataPointer>
 #include <QVariant>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include "../kcells_export.h"
 

@@ -22,7 +22,7 @@
 #include <QBuffer>
 #include <kdebug.h>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KOdfGenericStyle.h>

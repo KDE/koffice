@@ -26,7 +26,7 @@
 #include <QString>
 #include <QTextStream>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include <QtXml>
 

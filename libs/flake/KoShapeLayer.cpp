@@ -21,7 +21,7 @@
 #include "SimpleShapeContainerModel_p.h"
 #include "KoShapeSavingContext.h"
 #include "KoShapeLoadingContext.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>

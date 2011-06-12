@@ -18,7 +18,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "KoXmlReader.h"
+#include "KXmlReader.h"
 #include "KOdfXmlNS.h"
 
 /*

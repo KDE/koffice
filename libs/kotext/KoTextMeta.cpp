@@ -22,7 +22,7 @@
 
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoTextInlineRdf.h>
 

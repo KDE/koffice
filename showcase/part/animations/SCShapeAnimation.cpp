@@ -22,7 +22,7 @@
 #include "SCAnimationBase.h"
 #include "SCTextBlockPaintStrategy.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>

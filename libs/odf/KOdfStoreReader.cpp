@@ -24,7 +24,7 @@
 #include <klocale.h>
 
 #include <KOdfStore.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include "KOdfStylesReader.h"
 #include "KOdfXmlNS.h"

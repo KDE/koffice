@@ -28,7 +28,7 @@
 #include <QByteArray>
 #include <QVector>
 #include <KOdfStyleStack.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <liststylestack.h>
 #include <QVariantList>
 

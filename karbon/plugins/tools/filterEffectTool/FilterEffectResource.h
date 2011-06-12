@@ -21,7 +21,7 @@
 #define FILTEREFFECTRESOURCE_H
 
 #include "KoResource.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 class KoFilterEffectStack;
 

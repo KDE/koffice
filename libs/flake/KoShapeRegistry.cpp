@@ -29,7 +29,7 @@
 #include "KoShapeConnection_p.h"
 
 #include <KoPluginLoader.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStyleStack.h>

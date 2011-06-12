@@ -38,7 +38,7 @@
 #include <kglobalsettings.h>
 
 #include <KoDocument.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfGenericStyle.h>
 
 #include "../Global.h"

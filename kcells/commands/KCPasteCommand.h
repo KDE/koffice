@@ -22,7 +22,7 @@
 
 #include "KCAbstractRegionCommand.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include "Global.h"
 

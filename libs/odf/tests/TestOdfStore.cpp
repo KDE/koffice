@@ -21,7 +21,7 @@
 
 //#include <KDebug>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfStoreReader.h>
 
 class TestOdfStore : public QObject

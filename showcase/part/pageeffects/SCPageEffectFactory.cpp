@@ -24,7 +24,7 @@
 #include <boost/multi_index/mem_fun.hpp>
 #include <boost/multi_index/ordered_index.hpp>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 
 #include "SCPageEffectStrategy.h"

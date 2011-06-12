@@ -24,7 +24,7 @@
 #include <QObject>
 
 #include <KoGenericRegistry.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoShapeFactoryBase.h>
 
 #include "flake_export.h"

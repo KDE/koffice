@@ -22,7 +22,7 @@
 #include "RectangleShapeConfigWidget.h"
 #include "KoLineBorder.h"
 #include <KOdfXmlNS.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoGradientBackground.h>
 #include <KoShapeLoadingContext.h>
 

@@ -31,7 +31,7 @@
 
 #include <KoDocument.h>
 #include <KoShapeControllerBase.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include <QObject>
 #include <QPainter>

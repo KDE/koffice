@@ -22,7 +22,7 @@
 #include "FixedDateFormat.h"
 
 #include <KProperties.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>

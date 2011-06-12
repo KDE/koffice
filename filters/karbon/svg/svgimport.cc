@@ -34,7 +34,7 @@
 #include <KoShapeGroup.h>
 #include <KoFilterChain.h>
 #include <commands/KoShapeUngroupCommand.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include <kpluginfactory.h>
 #include <KDebug>

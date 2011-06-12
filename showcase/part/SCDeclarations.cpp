@@ -25,7 +25,7 @@
 #include <QDateTime>
 #include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
 #include <KOdfStylesReader.h>

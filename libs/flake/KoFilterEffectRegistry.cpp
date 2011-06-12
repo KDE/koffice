@@ -21,7 +21,7 @@
 #include "KoFilterEffect.h"
 #include <KoPluginLoader.h>
 #include <KGlobal>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 KoFilterEffectRegistry::KoFilterEffectRegistry()
 {

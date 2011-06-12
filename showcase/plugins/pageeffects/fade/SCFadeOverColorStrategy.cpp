@@ -27,7 +27,7 @@
 #include <QGraphicsView>
 
 #include <KOdfXmlNS.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <kdebug.h>

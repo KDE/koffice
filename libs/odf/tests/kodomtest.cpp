@@ -19,7 +19,7 @@
 
 #include "kodomtest.h"
 
-#include "KoXmlReader.h"
+#include "KXmlReader.h"
 
 static QString const KoXmlNS_office("urn:oasis:names:tc:opendocument:xmlns:office:1.0");
 static QString const KoXmlNS_text("urn:oasis:names:tc:opendocument:xmlns:text:1.0");

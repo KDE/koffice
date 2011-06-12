@@ -23,7 +23,7 @@
 
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 SCAnimateMotion::SCAnimateMotion(SCShapeAnimation *shapeAnimation)
 : SCAnimationBase(shapeAnimation)

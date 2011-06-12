@@ -20,7 +20,7 @@
 #ifndef SVGPATTERNHELPER_H
 #define SVGPATTERNHELPER_H
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <QtGui/QImage>
 #include <QtGui/QTransform>
 

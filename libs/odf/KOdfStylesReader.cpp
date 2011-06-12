@@ -28,7 +28,7 @@
 #include <kdebug.h>
 #include <kglobal.h>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 class KOdfStylesReader::Private
 {

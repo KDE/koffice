@@ -36,7 +36,7 @@
 #include "komain_export.h"
 #include "KoGridData.h"
 #include "KoGuidesData.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfDocumentBase.h>
 
 class QUndoCommand;

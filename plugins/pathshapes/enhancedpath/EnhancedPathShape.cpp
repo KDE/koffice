@@ -29,7 +29,7 @@
 
 #include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextOnShapeContainer.h>
 #include <KUnit.h>

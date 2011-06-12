@@ -52,7 +52,7 @@
 #include <KoVariableManager.h>
 #include <KoInlineObjectRegistry.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include "KoTextInlineRdf.h"
 
 #include "changetracker/KoChangeTracker.h"

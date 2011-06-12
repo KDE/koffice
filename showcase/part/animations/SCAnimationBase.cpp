@@ -21,7 +21,7 @@
 
 #include <KOdfXmlNS.h>
 #include "SCDurationParser.h"
-#include "KoXmlReader.h"
+#include "KXmlReader.h"
 #include "KoXmlWriter.h"
 #include "SCAnimationCache.h"
 #include "SCShapeAnimation.h"

@@ -31,7 +31,7 @@
 #include <QVariant>
 
 #include "kcells_export.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 class QColor;
 class QDomDocument;

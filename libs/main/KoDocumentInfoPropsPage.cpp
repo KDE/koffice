@@ -24,7 +24,7 @@
 #include "KOdfStore.h"
 #include "KoDocumentInfo.h"
 #include "KoDocumentInfoDlg.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <ktar.h>
 #include <ktemporaryfile.h>
 

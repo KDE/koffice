@@ -28,7 +28,7 @@
 #include "SvgGraphicContext.h"
 #include "SvgCssHelper.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include <QtGui/QGradient>
 #include <QtCore/QMap>

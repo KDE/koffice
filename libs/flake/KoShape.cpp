@@ -48,7 +48,7 @@
 #include "KoOdfWorkaround.h"
 #include "KoFilterEffectStack.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KOdfGenericStyle.h>

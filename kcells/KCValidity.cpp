@@ -24,7 +24,7 @@
 #include <kmessagebox.h>
 
 // KOffice
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 
 // KCells

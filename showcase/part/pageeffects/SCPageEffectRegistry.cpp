@@ -23,7 +23,7 @@
 
 #include <kglobal.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoPluginLoader.h>
 #include <pageeffects/SCPageEffectFactory.h>
 #include <kdebug.h>

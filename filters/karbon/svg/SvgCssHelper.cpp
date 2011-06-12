@@ -18,7 +18,7 @@
  */
 
 #include "SvgCssHelper.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KDebug>
 #include <QtCore/QPair>
 #include <QtCore/QStack>

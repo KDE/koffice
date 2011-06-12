@@ -28,7 +28,7 @@
 #include <kdemacros.h>
 
 #include "koodf_export.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 /**
  *  @brief This class implements a stack for the different styles of an object.

@@ -23,7 +23,7 @@
 
 #include <KoCanvasBase.h>
 #include <KoInlineObject.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoPluginLoader.h>
 
 #include <KDebug>

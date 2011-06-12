@@ -33,7 +33,7 @@
 #include <QVariant>
 
 #include <KoOdfExporter.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 class QSize;
 class KZip;

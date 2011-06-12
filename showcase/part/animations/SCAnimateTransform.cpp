@@ -22,7 +22,7 @@
 #include "SCAnimationCache.h"
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 SCAnimateTransform::SCAnimateTransform(SCShapeAnimation *shapeAnimation)
 : SCAnimationBase(shapeAnimation)

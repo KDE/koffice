@@ -27,7 +27,7 @@
 
 #include <kdebug.h>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 
 namespace KoOdfNumberStyles

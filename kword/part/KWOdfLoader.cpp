@@ -33,7 +33,7 @@
 #include <KOdfStylesReader.h>
 #include <KoOdfSettings.h>
 #include <KOdfStoreReader.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeFactoryBase.h>

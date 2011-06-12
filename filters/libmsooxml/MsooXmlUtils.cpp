@@ -50,7 +50,7 @@
 
 #include <KOdfStoreReader.h>
 #include <styles/KoCharacterStyle.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KUnit.h>
 

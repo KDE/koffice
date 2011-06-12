@@ -21,7 +21,7 @@
 
 //KOffice includes
 #include <KoTextDocument.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoTextShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>

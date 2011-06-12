@@ -32,7 +32,7 @@
 
 #include <KLocale>
 #include <KDebug>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoFilter.h>
 #include <KoOdfExporter.h>
 

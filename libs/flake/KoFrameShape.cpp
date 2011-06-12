@@ -19,7 +19,7 @@
 
 #include "KoFrameShape.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <kdebug.h>
 
 class KoFrameShape::Private

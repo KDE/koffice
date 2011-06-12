@@ -34,7 +34,7 @@
 #include "KoPathShape.h"
 #include "KoShapeLoadingContext.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include <kdebug.h>
 

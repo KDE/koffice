@@ -37,7 +37,7 @@
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include "KCCell.h"
 #include "KCCellStorage.h"

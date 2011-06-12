@@ -21,7 +21,7 @@
 #include "KoFilterEffectRenderContext.h"
 #include "KoViewConverter.h"
 #include "KoXmlWriter.h"
-#include "KoXmlReader.h"
+#include "KXmlReader.h"
 #include <KLocale>
 #include <QtCore/QRect>
 #include <QtGui/QPainter>

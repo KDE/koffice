@@ -20,7 +20,7 @@
 #ifndef SVGFILTERHELPER_H
 #define SVGFILTERHELPER_H
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <QtCore/QRectF>
 
 class SvgFilterHelper

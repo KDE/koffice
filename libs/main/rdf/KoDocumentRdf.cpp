@@ -28,7 +28,7 @@
 #include <KoTextDocument.h>
 #include <KoTextRdfCore.h>
 #include "KOdfWriteStore.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfStorageDevice.h>
 #include <KoCanvasBase.h>

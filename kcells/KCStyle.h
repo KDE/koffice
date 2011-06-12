@@ -26,7 +26,7 @@
 #include <QSharedDataPointer>
 #include <QTextCharFormat>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include "KCCurrency.h"
 #include "KCFormat.h"

@@ -24,7 +24,7 @@
 #include <QBrush>
 
 #include "kcells_export.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include "Global.h"
 #include "KCStyle.h"

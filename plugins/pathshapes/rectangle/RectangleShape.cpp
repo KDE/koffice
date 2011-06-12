@@ -24,7 +24,7 @@
 #include <KoPathPoint.h>
 #include <KoTextOnShapeContainer.h>
 #include <KoShapeSavingContext.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KUnit.h>

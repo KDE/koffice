@@ -23,7 +23,7 @@
 #include <KarbonDocument.h>
 
 #include <KoFilter.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include <QtCore/QVariant>
 #include <QtGui/QMatrix>

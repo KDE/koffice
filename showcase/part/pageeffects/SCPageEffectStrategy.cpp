@@ -23,7 +23,7 @@
 #include <QWidget>
 
 #include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfGenericStyle.h>
 
 SCPageEffectStrategy::SCPageEffectStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool graphicsView)

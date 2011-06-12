@@ -29,7 +29,7 @@
 
 #include <kdebug.h>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>

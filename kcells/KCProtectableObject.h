@@ -20,7 +20,7 @@
 #ifndef KSPREAD_PROTECTABLE_OBJECT
 #define KSPREAD_PROTECTABLE_OBJECT
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include <QByteArray>
 

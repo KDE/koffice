@@ -28,7 +28,7 @@
 #include <KoPASavingContext.h>
 #include <QString>
 #include <KOdfXmlNS.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextBlockData.h>

@@ -23,7 +23,7 @@
 #define KOSCRIPTINGODF_H
 
 #include <QPair>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoDocument.h>
 

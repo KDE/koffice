@@ -21,7 +21,7 @@
 
 #include <KOdfStore.h>
 #include <KoTextLoader.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfStoreReader.h>
 #include <KTemporaryFile>
 #include <KoTextShapeData.h>

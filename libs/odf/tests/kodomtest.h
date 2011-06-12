@@ -22,7 +22,7 @@
 
 #include <QByteArray>
 #include <QtTest/QtTest>
-#include "KoXmlReader.h"
+#include "KXmlReader.h"
 
 class KoDomTest: public QObject
 {

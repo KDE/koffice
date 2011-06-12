@@ -117,7 +117,7 @@
 #include <KoShapeManager.h>
 #include <KOdfStore.h>
 #include <KoViewConverter.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 
 // KDE

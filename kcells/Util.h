@@ -25,7 +25,7 @@
 #include <QRect>
 
 #include "kcells_export.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include "Global.h"
 #include "KCValue.h"

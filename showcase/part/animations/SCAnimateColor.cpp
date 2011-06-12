@@ -23,7 +23,7 @@
 #include "SCAnimationCache.h"
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 SCAnimateColor::SCAnimateColor(SCShapeAnimation *shapeAnimation)
 : SCAnimationBase(shapeAnimation)

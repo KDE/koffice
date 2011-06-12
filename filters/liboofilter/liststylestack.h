@@ -20,7 +20,7 @@
 #ifndef LISTSTYLESTACK_H
 #define LISTSTYLESTACK_H
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <q3valuestack.h>
 
 /**

@@ -21,7 +21,7 @@
 
 #include <kurl.h>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include <QObject>
 #include <QList>

@@ -26,7 +26,7 @@
 
 #include "PresentationVariable.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KProperties.h>
 #include <kdebug.h>

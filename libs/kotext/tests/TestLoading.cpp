@@ -31,7 +31,7 @@
 #include <KOdfStore.h>
 #include <KOdfStylesReader.h>
 #include <KoTextLoader.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
 #include <KTemporaryFile>

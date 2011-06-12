@@ -37,7 +37,7 @@
 #include <karboncommon_export.h>
 #include <KoShapeLoadingContext.h>
 #include <KOdfGenericStyle.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoDocument.h>
 
 class KoShape;

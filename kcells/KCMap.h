@@ -31,7 +31,7 @@
 #include "kcells_export.h"
 
 #include <KoDataCenterBase.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 class KOdfStore;
 class KOdfLoadingContext;

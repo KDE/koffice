@@ -36,7 +36,7 @@
 #include "KoShape.h"
 #include "KoShapeFactoryBase.h"
 
-#include "KoXmlReader.h"
+#include "KXmlReader.h"
 
 /// Factory for path shapes.
 class FLAKE_TEST_EXPORT KoPathShapeFactory : public KoShapeFactoryBase

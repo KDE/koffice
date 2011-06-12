@@ -27,7 +27,7 @@
 #include <QMap>
 #include <QTextList>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 class KoListLevelProperties;
 class KoShapeLoadingContext;

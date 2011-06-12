@@ -66,7 +66,7 @@ struct Finalizer {
 #include <KoPageProvider_p.h> // the exported class for the showcase hack
 #include <KoViewConverter.h>
 #include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 
 #include <QAbstractTextDocumentLayout>

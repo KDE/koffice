@@ -26,7 +26,7 @@
 #include <KUnit.h>
 #include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfGenericStyle.h>
 
 

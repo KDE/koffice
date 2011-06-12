@@ -25,7 +25,7 @@
 
 #include <klocale.h>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 
 KoPathShapeFactory::KoPathShapeFactory(QObject *parent, const QStringList&)

@@ -25,7 +25,7 @@
 #include <QPixmap>
 
 #include <KoShapeContainer.h>
-// #include <KoXmlReader.h>
+// #include <KXmlReader.h>
 
 #include "KoPageApp.h"
 #include "kopageapp_export.h"

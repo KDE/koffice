@@ -22,7 +22,7 @@
 #include <QBuffer>
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>

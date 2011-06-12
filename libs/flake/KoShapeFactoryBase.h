@@ -29,7 +29,7 @@
 
 #include "flake_export.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 class KoShape;
 class KProperties;

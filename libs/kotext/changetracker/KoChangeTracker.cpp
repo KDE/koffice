@@ -24,7 +24,7 @@
 //KOffice includes
 #include "styles/KoCharacterStyle.h"
 #include "KoChangeTrackerElement.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoTextDocument.h>

@@ -32,7 +32,7 @@
 
 #include "kcells_export.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include <QDate>
 

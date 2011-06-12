@@ -23,7 +23,7 @@
 #include <KoLineBorder.h>
 #include <KProperties.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoColorBackground.h>
 #include <KoShapeLoadingContext.h>
 

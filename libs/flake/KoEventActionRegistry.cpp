@@ -24,7 +24,7 @@
 #include <kglobal.h>
 #include <kdebug.h>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include "KoEventActionFactoryBase.h"
 #include "KoEventAction.h"

@@ -21,7 +21,7 @@
 #include "ColorChannelConversion.h"
 #include <KoFilterEffectRenderContext.h>
 #include <KoXmlWriter.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KLocale>
 #include <QtCore/QRect>
 #include <math.h>

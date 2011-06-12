@@ -30,7 +30,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 #include <KOdfXmlNS.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KUnit.h>
 #include <KOdfGenericStyle.h>
 #include <KoPostscriptPaintDevice.h>

@@ -32,7 +32,7 @@
 #include <QColor>
 #include <QBuffer>
 #include <KoFilterChain.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KDebug>
 #include <KOdfGenericStyle.h>
 

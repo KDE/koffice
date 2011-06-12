@@ -42,7 +42,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoTextWriter.h>
 #include <KoStyleManager.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 
 SCPlaceholderTextStrategy::SCPlaceholderTextStrategy(const QString &presentationClass)

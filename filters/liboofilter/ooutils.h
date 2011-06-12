@@ -24,7 +24,7 @@
 
 #include <QString>
 #include <KoFilterChain.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 class QColor;
 class QDomElement;
 class KOdfStyleStack;

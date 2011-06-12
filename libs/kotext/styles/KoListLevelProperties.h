@@ -25,7 +25,7 @@
 #include <QString>
 #include <QChar>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 class KoListStyle;
 class KoShapeLoadingContext;

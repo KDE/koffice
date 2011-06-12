@@ -20,7 +20,7 @@
 #include "KoInsets.h"
 #include "KoShape.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KUnit.h>
 
 #ifndef QT_NO_DEBUG_STREAM

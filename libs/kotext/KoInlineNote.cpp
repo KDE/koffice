@@ -19,7 +19,7 @@
  */
 #include "KoInlineNote.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeSavingContext.h>

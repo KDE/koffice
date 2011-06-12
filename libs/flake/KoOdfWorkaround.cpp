@@ -25,7 +25,7 @@
 #include "KoShape.h"
 #include <KoPathShape.h>
 #include <KOdfLoadingContext.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KoColorBackground.h>
 #include <KOdfStyleStack.h>

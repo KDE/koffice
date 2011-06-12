@@ -29,7 +29,7 @@
 
 #include <kconfig.h>
 #include "komain_export.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 class QDomDocument;
 class QDomElement;

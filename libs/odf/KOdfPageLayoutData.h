@@ -26,7 +26,7 @@
 #include "KOdfColumnData.h"
 #include "KOdfGenericStyles.h"
 #include "KOdfPageFormat.h"
-#include "KoXmlReader.h"
+#include "KXmlReader.h"
 #include "KOdfBorders.h"
 
 #include "koodf_export.h"

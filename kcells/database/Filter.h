@@ -23,7 +23,7 @@
 #include <QHash>
 #include <QString>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include "../kcells_export.h"
 

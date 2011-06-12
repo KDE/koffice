@@ -26,7 +26,7 @@
 #include "SCAnimateTransform.h"
 #include "SCAnimTransitionFilter.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 

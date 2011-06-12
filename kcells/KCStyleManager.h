@@ -21,7 +21,7 @@
 #define KSPREAD_STYLE_MANAGER
 
 #include "kcells_export.h"
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include <KCStyle.h>
 

@@ -22,7 +22,7 @@
 
 #include "KWPageStyle.h"
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <QTextDocument>
 #include <QObject>
 

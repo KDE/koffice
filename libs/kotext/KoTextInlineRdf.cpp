@@ -22,7 +22,7 @@
 #include "opendocument/KoTextSharedSavingData.h"
 #include <KoShapeSavingContext.h>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfXmlNS.h>
 #include "KoBookmark.h"

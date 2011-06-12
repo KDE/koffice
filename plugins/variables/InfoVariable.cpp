@@ -23,7 +23,7 @@
 #include <KProperties.h>
 #include <kdebug.h>
 #include <KoShapeSavingContext.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoXmlWriter.h>
 
 InfoVariable::InfoVariable()

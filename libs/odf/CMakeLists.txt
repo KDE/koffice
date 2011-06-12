@@ -39,7 +39,7 @@ set(koodf_LIB_SRCS
     TarStore.cpp
     KUnit.cpp
     KOdfXmlNS.cpp
-    KoXmlReader.cpp
+    KXmlReader.cpp
     KoXmlWriter.cpp
     ZipStore.cpp
 )
@@ -84,7 +84,7 @@ install( FILES
     KOdfColumnData.h
     KOdfStore.h
     KOdfStorageDevice.h
-    KoXmlReader.h
+    KXmlReader.h
     KoXmlWriter.h
     KProperties.h
     KUnit.h

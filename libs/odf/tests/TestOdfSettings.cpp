@@ -21,7 +21,7 @@
 
 #include <QObject>
 
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KoOdfSettings.h>
 
 class TestOdfSettings : public QObject

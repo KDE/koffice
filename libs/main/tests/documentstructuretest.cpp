@@ -28,7 +28,7 @@
 #include <KoDocument.h>
 #include <KoDocumentInfo.h>
 #include <KOdfStore.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <KOdfStoreReader.h>
 #include <KOdfXmlNS.h>
 #include <kcomponentdata.h>

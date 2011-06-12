@@ -33,7 +33,7 @@
 #include <KoOdfSettings.h> // for KoOdfSettings::NamedMap
 #include <KoShapeControllerBase.h>
 #include <KoShapeUserData.h>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 
 #include "KCCell.h"
 #include "KCStyle.h"

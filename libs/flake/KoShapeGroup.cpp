@@ -25,7 +25,7 @@
 #include "KoShapeSavingContext.h"
 #include "KoShapeLoadingContext.h"
 #include "KoXmlWriter.h"
-#include "KoXmlReader.h"
+#include "KXmlReader.h"
 #include "KoShapeRegistry.h"
 #include "KoShapeBorderBase.h"
 #include "KoShapeShadow.h"

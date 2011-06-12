@@ -28,7 +28,7 @@
 #include <QHash>
 #include <qdom.h>
 #include <QByteArray>
-#include <KoXmlReader.h>
+#include <KXmlReader.h>
 #include <QVariantList>
 
 class KOdfStyleStack;

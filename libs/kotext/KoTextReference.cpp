@@ -21,7 +21,7 @@
 #include "KoTextLocator.h"
 #include "KoInlineTextObjectManager.h"
 
-#include <KoXmlReader.h> // for usage in Q_UNUSED
+#include <KXmlReader.h> // for usage in Q_UNUSED
 #include <KoShapeLoadingContext.h> // for usage in Q_UNUSED
 #include <KoShapeSavingContext.h> // for usage in Q_UNUSED
 
