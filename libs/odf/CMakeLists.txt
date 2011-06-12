@@ -25,7 +25,7 @@ set(koodf_LIB_SRCS
     KOdfDocumentBase.cpp
     KoOdfGraphicStyles.cpp
     KOdfLoadingContext.cpp
-    KoOdfNumberStyles.cpp
+    KOdfNumberStyles.cpp
     KOdfPasteBase.cpp
     KOdfStoreReader.cpp
     KOdfStylesReader.cpp
@@ -68,7 +68,6 @@ install( FILES
     KOdfLoadingContext.h
     KOdfSettings.h
     KOdfStylesReader.h
-    KoOdfNumberStyles.h
     KOdfPasteBase.h
     KOdfStoreReader.h
     KOdfWriteStore.h

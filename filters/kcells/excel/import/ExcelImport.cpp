@@ -41,7 +41,7 @@
 #include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
-#include <KoOdfNumberStyles.h>
+#include <KoOdf.h>
 #include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeRegistry.h>

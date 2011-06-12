@@ -237,9 +237,9 @@ void KCStyle::loadOdfDataStyle(KOdfStylesReader &stylesReader, const QString &st
     if (stylesReader.dataFormats().contains(styleName)) {
         KCStyle* theStyle = this;
 
-        QPair<KoOdfNumberStyles::NumericStyleFormat, KoXmlElement*> dataStylePair = stylesReader.dataFormats()[styleName];
+        QPair<KoOdf::NumericStyleFormat, KoXmlElement*> dataStylePair = stylesReader.dataFormats()[styleName];
 
-        const KoOdfNumberStyles::NumericStyleFormat& dataStyle = dataStylePair.first;
+        const KoOdf::NumericStyleFormat& dataStyle = dataStylePair.first;
         const QList<QPair<QString,QString> > styleMaps = dataStyle.styleMaps;
         if(styleMaps.count() > 0) {
             theStyle = new KCStyle();
@@ -268,27 +268,27 @@ void KCStyle::loadOdfDataStyle(KOdfStylesReader &stylesReader, const QString &st
         }
         // determine data formatting
         switch (dataStyle.type) {
-        case KoOdfNumberStyles::Number:
+        case KoOdf::NumberFormat:
             theStyle->setFormatType(KCFormat::KCNumber);
             if (!dataStyle.currencySymbol.isEmpty())
                 theStyle->setCurrency(numberCurrency(dataStyle.currencySymbol));
             else
                 theStyle->setCurrency(numberCurrency(dataStyle.formatStr));
             break;
-        case KoOdfNumberStyles::Scientific:
+        case KoOdf::ScientificFormat:
             theStyle->setFormatType(KCFormat::Scientific);
             break;
-        case KoOdfNumberStyles::Currency:
+        case KoOdf::CurrencyFormat:
             kDebug(36003) << " currency-symbol:" << dataStyle.currencySymbol;
             if (!dataStyle.currencySymbol.isEmpty())
                 theStyle->setCurrency(numberCurrency(dataStyle.currencySymbol));
             else
                 theStyle->setCurrency(numberCurrency(dataStyle.formatStr));
             break;
-        case KoOdfNumberStyles::Percentage:
+        case KoOdf::PercentageFormat:
             theStyle->setFormatType(KCFormat::Percentage);
             break;
-        case KoOdfNumberStyles::Fraction:
+        case KoOdf::FractionFormat:
             // determine format of fractions, dates and times by using the
             // formatting string
             tmp = dataStyle.formatStr;
@@ -296,7 +296,7 @@ void KCStyle::loadOdfDataStyle(KOdfStylesReader &stylesReader, const QString &st
                 theStyle->setFormatType(KCStyle::fractionType(tmp));
             }
             break;
-        case KoOdfNumberStyles::Date:
+        case KoOdf::DateFormat:
             // determine format of fractions, dates and times by using the
             // formatting string
             tmp = dataStyle.formatStr;
@@ -304,7 +304,7 @@ void KCStyle::loadOdfDataStyle(KOdfStylesReader &stylesReader, const QString &st
                 theStyle->setFormatType(KCStyle::dateType(tmp));
             }
             break;
-        case KoOdfNumberStyles::Time:
+        case KoOdf::TimeFormat:
             // determine format of fractions, dates and times by using the
             // formatting string
             tmp = dataStyle.formatStr;
@@ -312,10 +312,10 @@ void KCStyle::loadOdfDataStyle(KOdfStylesReader &stylesReader, const QString &st
                 theStyle->setFormatType(KCStyle::timeType(tmp));
             }
             break;
-        case KoOdfNumberStyles::Boolean:
+        case KoOdf::BooleanFormat:
             theStyle->setFormatType(KCFormat::KCNumber);
             break;
-        case KoOdfNumberStyles::Text:
+        case KoOdf::TextFormat:
             theStyle->setFormatType(KCFormat::Text);
             break;
         }
@@ -854,7 +854,7 @@ QString KCStyle::saveOdfStyleNumericNumber(KOdfGenericStyles& mainStyles, KCForm
         }
         format = "0." + tmp;
     }
-    return KoOdfNumberStyles::saveOdfNumberStyle(mainStyles, format, _prefix, _postfix);
+    return KoOdf::saveOdfNumberStyle(mainStyles, format, _prefix, _postfix);
 }
 
 QString KCStyle::saveOdfStyleNumericText(KOdfGenericStyles& /*mainStyles*/, KCFormat::Type /*_style*/, int /*_precision*/,
@@ -877,7 +877,7 @@ QString KCStyle::saveOdfStyleNumericMoney(KOdfGenericStyles& mainStyles, KCForma
         }
         format = "0." + tmp;
     }
-    return KoOdfNumberStyles::saveOdfCurrencyStyle(mainStyles, format, symbol, _prefix, _postfix);
+    return KoOdf::saveOdfCurrencyStyle(mainStyles, format, symbol, _prefix, _postfix);
 }
 
 QString KCStyle::saveOdfStyleNumericPercentage(KOdfGenericStyles&mainStyles, KCFormat::Type /*_style*/, int _precision,
@@ -898,7 +898,7 @@ QString KCStyle::saveOdfStyleNumericPercentage(KOdfGenericStyles&mainStyles, KCF
         }
         format = "0." + tmp;
     }
-    return KoOdfNumberStyles::saveOdfPercentageStyle(mainStyles, format, _prefix, _postfix);
+    return KoOdf::saveOdfPercentageStyle(mainStyles, format, _prefix, _postfix);
 }
 
 
@@ -918,7 +918,7 @@ QString KCStyle::saveOdfStyleNumericScientific(KOdfGenericStyles&mainStyles, KCF
         }
         format = "0." + tmp + "E+00";
     }
-    return KoOdfNumberStyles::saveOdfScientificStyle(mainStyles, format, _prefix, _suffix);
+    return KoOdf::saveOdfScientificStyle(mainStyles, format, _prefix, _suffix);
 }
 
 QString KCStyle::saveOdfStyleNumericDate(KOdfGenericStyles&mainStyles, KCFormat::Type _style,
@@ -1045,7 +1045,7 @@ QString KCStyle::saveOdfStyleNumericDate(KOdfGenericStyles&mainStyles, KCFormat:
         kDebug(36003) << "this date format is not defined ! :" << _style;
         break;
     }
-    return KoOdfNumberStyles::saveOdfDateStyle(mainStyles, format, locale, _prefix, _postfix);
+    return KoOdf::saveOdfDateStyle(mainStyles, format, locale, _prefix, _postfix);
 }
 
 QString KCStyle::saveOdfStyleNumericCustom(KOdfGenericStyles& /*mainStyles*/, KCFormat::Type /*_style*/,
@@ -1117,7 +1117,7 @@ QString KCStyle::saveOdfStyleNumericTime(KOdfGenericStyles& mainStyles, KCFormat
         kDebug(36003) << "time format not defined :" << _style;
         break;
     }
-    return KoOdfNumberStyles::saveOdfTimeStyle(mainStyles, format, locale, _prefix, _postfix);
+    return KoOdf::saveOdfTimeStyle(mainStyles, format, locale, _prefix, _postfix);
 }
 
 
@@ -1161,7 +1161,7 @@ QString KCStyle::saveOdfStyleNumericFraction(KOdfGenericStyles &mainStyles, KCFo
         break;
     }
 
-    return KoOdfNumberStyles::saveOdfFractionStyle(mainStyles, format, _prefix, _suffix);
+    return KoOdf::saveOdfFractionStyle(mainStyles, format, _prefix, _suffix);
 }
 
 QString KCStyle::saveOdf(KOdfGenericStyle& style, KOdfGenericStyles& mainStyles,

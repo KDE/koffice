@@ -18,9 +18,8 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoOdfNumberStyles.h"
+#include "KoOdf.h"
 
-#include "KOdfGenericStyles.h"
 #include "KOdfXmlNS.h"
 
 #include <QtCore/QBuffer>
@@ -30,7 +29,10 @@
 #include <KXmlReader.h>
 #include <KXmlWriter.h>
 
-namespace KoOdfNumberStyles
+#include "KOdfGenericStyle.h"
+#include "KOdfGenericStyles.h"
+
+namespace KoOdf
 {
 
     static bool saveOdfTimeFormat(KXmlWriter &elementWriter, QString &format, QString &text, bool &antislash);
@@ -49,19 +51,19 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
 
     const QString localName = parent.localName();
     if (localName == "number-style")
-        dataStyle.type = Number;
+        dataStyle.type = NumberFormat;
     else if (localName == "currency-style")
-        dataStyle.type = Currency;
+        dataStyle.type = CurrencyFormat;
     else if (localName == "percentage-style")
-        dataStyle.type = Percentage;
+        dataStyle.type = PercentageFormat;
     else if (localName == "boolean-style")
-        dataStyle.type = Boolean;
+        dataStyle.type = BooleanFormat;
     else if (localName == "text-style")
-        dataStyle.type = Text;
+        dataStyle.type = TextFormat;
     else if (localName == "date-style")
-        dataStyle.type = Date;
+        dataStyle.type = DateFormat;
     else if (localName == "time-style")
-        dataStyle.type = Time;
+        dataStyle.type = TimeFormat;
 
     QString format;
     int precision = -1;
@@ -162,8 +164,8 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
                     format += '0';
             }
         } else if (localName == "scientific-number") {
-            if (dataStyle.type == Number)
-                dataStyle.type = Scientific;
+            if (dataStyle.type == NumberFormat)
+                dataStyle.type = ScientificFormat;
             int exp = 2;
 
             if (e.hasAttributeNS(KOdfXmlNS::number, "decimal-places")) {
@@ -208,8 +210,8 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
             for (i = 0; i < exp; ++i)
                 format += '0';
         } else if (localName == "fraction") {
-            if (dataStyle.type == Number)
-                dataStyle.type = Fraction;
+            if (dataStyle.type == NumberFormat)
+                dataStyle.type = FractionFormat;
             int integer = 0;
             int numerator = 1;
             int denominator = 1;
@@ -454,7 +456,7 @@ QString saveOdfTimeStyle(KOdfGenericStyles &mainStyles, const QString &_format, 
 {
     Q_UNUSED(_prefix);
     Q_UNUSED(_suffix);
-    //kDebug(30003) << "QString KoOdfNumberStyles::saveOdfTimeStyle( KOdfGenericStyles &mainStyles, const QString & _format ) :" << _format;
+    //kDebug(30003) << "QString KOdf::saveOdfTimeStyle( KOdfGenericStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericTimeStyle);
     QBuffer buffer;
