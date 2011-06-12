@@ -23,7 +23,7 @@
 #ifndef KOCOLUMNS_H
 #define KOCOLUMNS_H
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 #include <QtGlobal>
 

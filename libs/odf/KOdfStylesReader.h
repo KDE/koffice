@@ -25,7 +25,7 @@
 
 #include <KXmlReader.h>
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 #include "KoOdfNumberStyles.h"
 
 

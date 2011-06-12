@@ -29,7 +29,7 @@
 #include "KXmlReader.h"
 #include "KOdfBorders.h"
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 /**
  * This structure defines the page layout, including

@@ -23,7 +23,7 @@
 #ifndef KOBORDER_H
 #define KOBORDER_H
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 #include <QColor>
 #include <QSharedData>

@@ -25,7 +25,7 @@
 #include <QStack>
 #include <QMap>
 #include <QIODevice>
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 
 /**

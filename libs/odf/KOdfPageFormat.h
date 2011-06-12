@@ -23,7 +23,7 @@
 #ifndef KOPAGEFORMAT_H
 #define KOPAGEFORMAT_H
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 #include <QtGui/QPrinter>
 

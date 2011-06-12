@@ -22,7 +22,7 @@
 #ifndef KOODFGRAPHICSTYLES_H
 #define KOODFGRAPHICSTYLES_H
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 #include <QtGui/QTransform>
 

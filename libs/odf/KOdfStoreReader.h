@@ -20,7 +20,7 @@
 #ifndef KOODFREADSTORE_H
 #define KOODFREADSTORE_H
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 class QString;
 class QIODevice;

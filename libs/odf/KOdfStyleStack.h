@@ -27,7 +27,7 @@
 
 #include <kdemacros.h>
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 #include <KXmlReader.h>
 
 /**

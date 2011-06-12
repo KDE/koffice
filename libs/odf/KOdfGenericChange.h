@@ -23,7 +23,7 @@
 #include <QtCore/QList>
 #include <QtCore/QMap>
 #include <QtCore/QString>
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 #include <QByteArray>
 

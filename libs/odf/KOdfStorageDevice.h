@@ -20,7 +20,7 @@
 #ifndef koStoreDevice_h
 #define koStoreDevice_h
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 #include <KOdfStore.h>
 
 /**

@@ -24,7 +24,7 @@ class QIODevice;
 class KXmlWriter;
 class KOdfStore;
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 /**
  * Helper class around KOdfStore for writing out ODF files.

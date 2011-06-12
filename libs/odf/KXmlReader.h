@@ -20,7 +20,7 @@
 #ifndef KOFFICE_XMLREADER
 #define KOFFICE_XMLREADER
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 #include <QtXml/qxml.h>
 #include <QtXml/qdom.h>

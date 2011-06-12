@@ -23,7 +23,7 @@
 #include <QtCore/QString>
 #include <QtCore/QMap>
 #include <QtCore/QVariant>
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 class QDomElement;
 

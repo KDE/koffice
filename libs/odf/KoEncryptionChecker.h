@@ -19,7 +19,7 @@
 #ifndef KO_ENCRYPTION_CHECKER
 #define KO_ENCRYPTION_CHECKER
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 namespace KoEncryptionChecker
 {

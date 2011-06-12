@@ -22,7 +22,7 @@
 
 class KOdfStore;
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 #include "KOdfStyleStack.h"
 #include "KOdfStylesReader.h"
 

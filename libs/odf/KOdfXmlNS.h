@@ -22,7 +22,7 @@
 
 #include <QString>
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 /**
  * Repository of XML namespaces used for ODF documents.
  * 

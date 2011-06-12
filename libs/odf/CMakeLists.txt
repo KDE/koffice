@@ -59,7 +59,7 @@ install(TARGETS koodf ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 install( FILES
-    koodf_export.h
+    kodf_export.h
     KoOdf.h
     KOdfXmlNS.h
     KOdfGenericStyle.h

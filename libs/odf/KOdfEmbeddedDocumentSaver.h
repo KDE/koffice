@@ -21,7 +21,7 @@
 #define KOEMBEDDEDDOCUMENTSAVER_H
 
 #include "KOdfDocumentBase.h"
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 class KXmlWriter;
 

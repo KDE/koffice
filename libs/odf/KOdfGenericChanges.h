@@ -21,7 +21,7 @@
 #ifndef KOGENCHANGES_H
 #define KOGENCHANGES_H
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 #include "KOdfGenericStyle.h"
 
 #include <KOdfGenericChange.h>

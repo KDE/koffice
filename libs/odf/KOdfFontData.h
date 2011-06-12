@@ -24,7 +24,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QSharedData>
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 class KXmlWriter;
 class KoFontFacePrivate;

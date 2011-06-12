@@ -27,7 +27,7 @@
 #include <QtCore/QVariant>
 #include <QtCore/QDebug>
 #include <math.h> // for floor
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 // 1 inch ^= 72 pt
 // 1 inch ^= 25.399956 mm (-pedantic ;p)

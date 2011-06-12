@@ -29,7 +29,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QString>
 #include <iostream>
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 class KOdfGenericStyles;
 class KXmlWriter;

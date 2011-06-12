@@ -26,7 +26,7 @@
 #include <QtCore/QIODevice>
 #include <QtCore/QStack>
 #include <QtCore/QByteArray>
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 #include <kurl.h>
 

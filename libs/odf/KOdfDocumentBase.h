@@ -30,7 +30,7 @@ class KOdfStoreReader;
 class KOdfWriteStore;
 class KOdfEmbeddedDocumentSaver;
 
-#include "koodf_export.h"
+#include "kodf_export.h"
 
 /**
  * Base class for documents that can load and save ODF. Most of the
