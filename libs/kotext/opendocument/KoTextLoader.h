@@ -48,7 +48,7 @@ class KoXmlNode;
  * KoTextLoader is used.
  *
  * If you want to use the KoTextLoader for text that needs styles from styles.xml. e.g.
- * test shapes on master pages, you need to set KoOdfLoadingContext::setUseStylesAutoStyles( true ).
+ * test shapes on master pages, you need to set KOdfLoadingContext::setUseStylesAutoStyles( true ).
  *
  * Don't forget to unset it if you later want to load text that needs content.xml.
  */

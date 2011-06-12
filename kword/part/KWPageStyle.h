@@ -32,7 +32,7 @@
 
 class KWPageStylePrivate;
 class KoShapeBackground;
-class KoOdfLoadingContext;
+class KOdfLoadingContext;
 
 /**
  * A page style represents a set of all the properties that change the layout and size
@@ -244,7 +244,7 @@ public:
     /**
      * Load this page style from ODF
      */
-    void loadOdf(KoOdfLoadingContext &context, const KoXmlElement &masterNode, const KoXmlElement &style, KoResourceManager *documentResources);
+    void loadOdf(KOdfLoadingContext &context, const KoXmlElement &masterNode, const KoXmlElement &style, KoResourceManager *documentResources);
 
     bool operator==(const KWPageStyle &other) const;
     inline bool operator!=(const KWPageStyle &other) const { return ! operator==(other); }

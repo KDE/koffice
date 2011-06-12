@@ -108,7 +108,7 @@
 #include <KoResourceManager.h>
 #include <KoColor.h>
 #include <KoColorPopupAction.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfReadStore.h>
 #include <KoOdfStylesReader.h>
 #include <KoPointerEvent.h>
@@ -2959,7 +2959,7 @@ bool CellToolBase::paste()
             return false;
         }
 
-        KoOdfLoadingContext context(stylesReader, store);
+        KOdfLoadingContext context(stylesReader, store);
         Q_ASSERT(!stylesReader.officeStyle().isNull());
 
         //load in first

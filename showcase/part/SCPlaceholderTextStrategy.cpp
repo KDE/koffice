@@ -24,7 +24,7 @@
 #include <QTextBlock>
 #include <QPainter>
 
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoProperties.h>
 #include <KoOdfStylesReader.h>
 #include <KOdfGenericStyles.h>

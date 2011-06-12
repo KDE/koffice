@@ -24,7 +24,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfReadStore.h>
 
 #include "KoCanvasBase.h"
@@ -64,7 +64,7 @@ KoShapePaste::~KoShapePaste()
 bool KoShapePaste::process(const KoXmlElement & body, KoOdfReadStore & odfStore)
 {
     d->pastedShapes.clear();
-    KoOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
+    KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
     KoShapeLoadingContext context(loadingContext, d->canvas->shapeController()->resourceManager());
 
     QList<KoShape*> shapes(d->layer ? d->layer->shapes(): d->canvas->shapeManager()->topLevelShapes());

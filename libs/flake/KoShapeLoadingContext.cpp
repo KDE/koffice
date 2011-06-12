@@ -39,7 +39,7 @@ static QSet<KoShapeLoadingContext::AdditionalAttributeData> s_additionlAttribute
 class KoShapeLoadingContext::Private
 {
 public:
-    Private(KoOdfLoadingContext &c, KoResourceManager *resourceManager)
+    Private(KOdfLoadingContext &c, KoResourceManager *resourceManager)
             : context(c),
             zIndex(0),
             documentResources(resourceManager)
@@ -50,7 +50,7 @@ public:
             delete data;
         }
     }
-    KoOdfLoadingContext &context;
+    KOdfLoadingContext &context;
     QMap<QString, KoShapeLayer*> layers;
     QMap<QString, KoShape*> drawIds;
     QMap<QString, QPair<KoShape *, QVariant> > subIds;
@@ -61,7 +61,7 @@ public:
     KoResourceManager *documentResources;
 };
 
-KoShapeLoadingContext::KoShapeLoadingContext(KoOdfLoadingContext & context, KoResourceManager *documentResources)
+KoShapeLoadingContext::KoShapeLoadingContext(KOdfLoadingContext & context, KoResourceManager *documentResources)
         : d(new Private(context, documentResources))
 {
 }
@@ -71,7 +71,7 @@ KoShapeLoadingContext::~KoShapeLoadingContext()
     delete d;
 }
 
-KoOdfLoadingContext & KoShapeLoadingContext::odfLoadingContext()
+KOdfLoadingContext & KoShapeLoadingContext::odfLoadingContext()
 {
     return d->context;
 }

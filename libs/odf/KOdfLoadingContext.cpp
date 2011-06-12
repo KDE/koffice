@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "KoOdfLoadingContext.h"
+#include "KOdfLoadingContext.h"
 #include <KoOdfReadStore.h>
 #include <KoOdfStylesReader.h>
 #include <KoStore.h>
@@ -27,13 +27,13 @@
 
 #include <kdebug.h>
 
-class KoOdfLoadingContext::Private
+class KOdfLoadingContext::Private
 {
 public:
     Private(KoOdfStylesReader &sr, KoStore *s)
         : store(s),
         stylesReader(sr),
-        generatorType(KoOdfLoadingContext::Unknown),
+        generatorType(KOdfLoadingContext::Unknown),
         metaXmlParsed(false),
         useStylesAutoStyles(false)
     {
@@ -54,7 +54,7 @@ public:
     KoXmlDocument doc; // the doc needs to be kept around so it is possible to access the styles
 };
 
-KoOdfLoadingContext::KoOdfLoadingContext(KoOdfStylesReader &stylesReader, KoStore* store, const KComponentData &componentData)
+KOdfLoadingContext::KOdfLoadingContext(KoOdfStylesReader &stylesReader, KoStore* store, const KComponentData &componentData)
         : d(new Private(stylesReader, store))
 {
     // Ideally this should be done by KoDocument and passed as argument here...
@@ -80,18 +80,18 @@ KoOdfLoadingContext::KoOdfLoadingContext(KoOdfStylesReader &stylesReader, KoStor
     }
 }
 
-KoOdfLoadingContext::~KoOdfLoadingContext()
+KOdfLoadingContext::~KOdfLoadingContext()
 {
     delete d;
 }
 
-void KoOdfLoadingContext::setManifestFile(const QString& fileName) {
+void KOdfLoadingContext::setManifestFile(const QString& fileName) {
     KoOdfReadStore oasisStore(d->store);
     QString dummy;
     (void)oasisStore.loadAndParse(fileName, d->manifestDoc, dummy);
 }
 
-void KoOdfLoadingContext::fillStyleStack(const KoXmlElement& object, const QString &nsURI, const QString &attrName, const QString &family)
+void KOdfLoadingContext::fillStyleStack(const KoXmlElement& object, const QString &nsURI, const QString &attrName, const QString &family)
 {
     // find all styles associated with an object and push them on the stack
     if (object.hasAttributeNS(nsURI, attrName)) {
@@ -105,7 +105,7 @@ void KoOdfLoadingContext::fillStyleStack(const KoXmlElement& object, const QStri
     }
 }
 
-void KoOdfLoadingContext::addStyles(const KoXmlElement* style, const QString &family, bool usingStylesAutoStyles)
+void KOdfLoadingContext::addStyles(const KoXmlElement* style, const QString &family, bool usingStylesAutoStyles)
 {
     Q_ASSERT(style);
     if (!style) return;
@@ -138,7 +138,7 @@ void KoOdfLoadingContext::addStyles(const KoXmlElement* style, const QString &fa
     d->styleStack.push(*style);
 }
 
-void KoOdfLoadingContext::parseGenerator() const
+void KOdfLoadingContext::parseGenerator() const
 {
     // Regardless of whether we cd into the parent directory
     // or not to find a meta.xml, restore the directory that
@@ -179,7 +179,7 @@ void KoOdfLoadingContext::parseGenerator() const
     d->store->popDirectory();
 }
 
-QString KoOdfLoadingContext::generator() const
+QString KOdfLoadingContext::generator() const
 {
     if (!d->metaXmlParsed && d->store) {
         parseGenerator();
@@ -187,7 +187,7 @@ QString KoOdfLoadingContext::generator() const
     return d->generator;
 }
 
-KoOdfLoadingContext::GeneratorType KoOdfLoadingContext::generatorType() const
+KOdfLoadingContext::GeneratorType KOdfLoadingContext::generatorType() const
 {
     if (!d->metaXmlParsed && d->store) {
         parseGenerator();
@@ -195,12 +195,12 @@ KoOdfLoadingContext::GeneratorType KoOdfLoadingContext::generatorType() const
     return d->generatorType;
 }
 
-KoStore *KoOdfLoadingContext::store() const
+KoStore *KOdfLoadingContext::store() const
 {
     return d->store;
 }
 
-KoOdfStylesReader &KoOdfLoadingContext::stylesReader()
+KoOdfStylesReader &KOdfLoadingContext::stylesReader()
 {
     return d->stylesReader;
 }
@@ -208,27 +208,27 @@ KoOdfStylesReader &KoOdfLoadingContext::stylesReader()
 /**
 * Get the application default styles styleReader
 */
-KoOdfStylesReader &KoOdfLoadingContext::defaultStylesReader()
+KoOdfStylesReader &KOdfLoadingContext::defaultStylesReader()
 {
     return d->defaultStylesReader;
 }
 
-KoStyleStack &KoOdfLoadingContext::styleStack() const
+KoStyleStack &KOdfLoadingContext::styleStack() const
 {
     return d->styleStack;
 }
 
-const KoXmlDocument &KoOdfLoadingContext::manifestDocument() const
+const KoXmlDocument &KOdfLoadingContext::manifestDocument() const
 {
     return d->manifestDoc;
 }
 
-void KoOdfLoadingContext::setUseStylesAutoStyles(bool useStylesAutoStyles)
+void KOdfLoadingContext::setUseStylesAutoStyles(bool useStylesAutoStyles)
 {
     d->useStylesAutoStyles = useStylesAutoStyles;
 }
 
-bool KoOdfLoadingContext::useStylesAutoStyles() const
+bool KOdfLoadingContext::useStylesAutoStyles() const
 {
     return d->useStylesAutoStyles;
 }

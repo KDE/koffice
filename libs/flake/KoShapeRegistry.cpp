@@ -31,7 +31,7 @@
 #include <KoPluginLoader.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoStyleStack.h>
 
 #include <QString>

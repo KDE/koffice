@@ -841,7 +841,7 @@ protected:
     //
 
     void loadColumnNodes(const KoXmlElement& parent, int& indexCol,
-                            int& maxColumn, KoOdfLoadingContext& odfContext,
+                            int& maxColumn, KOdfLoadingContext& odfContext,
                             QHash<QString, QRegion>& columnStyleRegions,
                             IntervalMap<QString>& columnStyles);
     void loadRowNodes(const KoXmlElement& parent, int& rowIndex,

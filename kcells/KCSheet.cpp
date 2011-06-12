@@ -42,7 +42,7 @@
 #include <kurl.h>
 
 #include <KoDocumentInfo.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfSettings.h>
 #include <KoOdfStylesReader.h>
 
@@ -1400,7 +1400,7 @@ QString KCSheet::getPart(const KoXmlNode & part)
 void KCSheet::loadColumnNodes(const KoXmlElement& parent,
                             int& indexCol,
                             int& maxColumn,
-                            KoOdfLoadingContext& odfContext,
+                            KOdfLoadingContext& odfContext,
                             QHash<QString, QRegion>& columnStyleRegions,
                             IntervalMap<QString>& columnStyles
                             )
@@ -1462,7 +1462,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
         updater->setProgress(0);
     }
 
-    KoOdfLoadingContext& odfContext = tableContext.odfContext;
+    KOdfLoadingContext& odfContext = tableContext.odfContext;
     if (sheetElement.hasAttributeNS(KoXmlNS::table, "style-name")) {
         QString stylename = sheetElement.attributeNS(KoXmlNS::table, "style-name", QString());
         //kDebug(36003)<<" style of table :"<<stylename;
@@ -1982,7 +1982,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     static const QString sNumberColumnsRepeated = QString::fromLatin1("number-columns-repeated");
 
 //    kDebug(36003)<<"KCSheet::loadRowFormat( const KoXmlElement& row, int &rowIndex,const KoOdfStylesReader& stylesReader, bool isLast )***********";
-    KoOdfLoadingContext& odfContext = tableContext.odfContext;
+    KOdfLoadingContext& odfContext = tableContext.odfContext;
     bool isNonDefaultRow = false;
 
     KoStyleStack styleStack;

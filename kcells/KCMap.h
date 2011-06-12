@@ -34,7 +34,7 @@
 #include <KoXmlReader.h>
 
 class KoStore;
-class KoOdfLoadingContext;
+class KOdfLoadingContext;
 class KoEmbeddedDocumentSaver;
 class KoStyleManager;
 class KoResourceManager;
@@ -204,7 +204,7 @@ public:
     /**
      * \ingroup OpenDocument
      */
-    bool loadOdf(const KoXmlElement& mymap, KoOdfLoadingContext& odfContext);
+    bool loadOdf(const KoXmlElement& mymap, KOdfLoadingContext& odfContext);
 
     /**
      * \ingroup NativeFormat

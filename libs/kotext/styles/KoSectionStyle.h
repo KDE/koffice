@@ -37,7 +37,7 @@ class QTextFrame;
 class KoStyleStack;
 class KOdfGenericStyle;
 class KOdfGenericStyles;
-class KoOdfLoadingContext;
+class KOdfLoadingContext;
 class KoXmlElement;
 
 /**
@@ -155,7 +155,7 @@ public:
      * @param context the odf loading context
      * @param element the element containing the
      */
-    void loadOdf(const KoXmlElement *element, KoOdfLoadingContext &context);
+    void loadOdf(const KoXmlElement *element, KOdfLoadingContext &context);
 
     void saveOdf(KOdfGenericStyle &style);
 

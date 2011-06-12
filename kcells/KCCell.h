@@ -56,7 +56,7 @@ class KLocale;
 class KoXmlWriter;
 class KOdfGenericStyles;
 class KOdfGenericStyle;
-class KoOdfLoadingContext;
+class KOdfLoadingContext;
 class KoShapeLoadingContext;
 
 class KCDoc;

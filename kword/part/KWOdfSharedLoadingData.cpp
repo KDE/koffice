@@ -29,7 +29,7 @@
 #include "frames/KWCopyShape.h"
 
 #include <KoTextShapeData.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <KoXmlNS.h>
 

@@ -57,7 +57,7 @@
 #include <KoDocumentInfo.h>
 #include <KoMainWindow.h>
 #include <KoOdfSettings.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 #include <KoOdfReadStore.h>
 #include <KoOdfWriteStore.h>

@@ -21,7 +21,7 @@
 
 #include <KoStore.h>
 #include <KoOdfReadStore.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoShape.h>
 #include <KoShapeRegistry.h>
@@ -248,7 +248,7 @@ void OdfCollectionLoader::loadNativeFile(const QString& path)
         return;
     }
 
-    KoOdfLoadingContext* m_loadingContext = new KoOdfLoadingContext(m_odfStore->styles(), m_odfStore->store());
+    KOdfLoadingContext* m_loadingContext = new KOdfLoadingContext(m_odfStore->styles(), m_odfStore->store());
     // it ok here to pass an empty resourceManager as we don't have a document
     // tz: not sure if that is 100% correct what if an image is loaded in the collection it needs a image collection
     m_shapeLoadingContext = new KoShapeLoadingContext(*m_loadingContext, 0);

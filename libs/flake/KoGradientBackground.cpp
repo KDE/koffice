@@ -22,7 +22,7 @@
 #include "KoFlake.h"
 #include <KoStyleStack.h>
 #include <KoXmlNS.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfGraphicStyles.h>
 #include <KoShapeSavingContext.h>
 
@@ -140,7 +140,7 @@ void KoGradientBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingConte
     KoOdfGraphicStyles::saveOdfFillStyle(style, context.mainStyles(), brush);
 }
 
-bool KoGradientBackground::loadStyle(KoOdfLoadingContext &context, const QSizeF &shapeSize)
+bool KoGradientBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &shapeSize)
 {
     Q_D(KoGradientBackground);
     KoStyleStack &styleStack = context.styleStack();

@@ -46,7 +46,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
 #include <KoOdfStylesReader.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoShape.h>
 #include <KoDocumentInfo.h>
 #include <KoTextDocument.h>
@@ -432,7 +432,7 @@ void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElemen
 
     KoOdfStylesReader odfStyles;
     odfStyles.createStyleMap(stylesDoc, false);
-    KoOdfLoadingContext odfContext(odfStyles, store);
+    KOdfLoadingContext odfContext(odfStyles, store);
     KoShapeLoadingContext shapeContext(odfContext, outputDoc->resourceManager());
 
     KoXmlElement sheetElement;

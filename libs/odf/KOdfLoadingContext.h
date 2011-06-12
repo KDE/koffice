@@ -34,21 +34,21 @@ class KoStore;
  *
  * @author David Faure <faure@kde.org>
  */
-class KOODF_EXPORT KoOdfLoadingContext
+class KOODF_EXPORT KOdfLoadingContext
 {
 public:
     enum GeneratorType { Unknown, KOffice, OpenOffice, MicrosoftOffice };
     /**
      * Stores reference to the KoOdfStylesReader and stored passed by
      * KoDocument. Make sure that the KoOdfStylesReader instance outlives
-     * this KoOdfLoadingContext instance. (This is the case during
+     * this KOdfLoadingContext instance. (This is the case during
      * loading, when using the KoOdfStylesReader given by KoDocument)
      *
      * @param stylesReader reference to the KoOdfStylesReader parsed by KoDocument
      * @param store pointer to store, if available, for e.g. loading images.
      */
-    explicit KoOdfLoadingContext(KoOdfStylesReader &stylesReader, KoStore *store, const KComponentData &componentData = KComponentData());
-    virtual ~KoOdfLoadingContext();
+    explicit KOdfLoadingContext(KoOdfStylesReader &stylesReader, KoStore *store, const KComponentData &componentData = KComponentData());
+    virtual ~KOdfLoadingContext();
 
     /**
     * Set different manifest

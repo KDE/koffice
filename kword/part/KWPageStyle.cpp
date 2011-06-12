@@ -28,7 +28,7 @@
 #include <KoColorBackground.h>
 #include <KoPatternBackground.h>
 #include <KoImageCollection.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 
 #include <kdebug.h>
 #include <QBuffer>
@@ -348,7 +348,7 @@ KOdfGenericStyle KWPageStyle::saveOdf() const
     return pageLayout;
 }
 
-void KWPageStyle::loadOdf(KoOdfLoadingContext &context, const KoXmlElement &masterNode, const KoXmlElement &style, KoResourceManager *documentResources)
+void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KoXmlElement &masterNode, const KoXmlElement &style, KoResourceManager *documentResources)
 {
     d->pageLayout.loadOdf(style);
     KoXmlElement props = KoXml::namedItemNS(style, KoXmlNS::style, "page-layout-properties");

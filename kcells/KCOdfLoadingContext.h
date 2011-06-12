@@ -20,7 +20,7 @@
 #ifndef KSPREAD_ODF_LOADING_CONTEXT
 #define KSPREAD_ODF_LOADING_CONTEXT
 
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 
 #include <QHash>
 
@@ -34,11 +34,11 @@ class KoShapeLoadingContext;
 class KCOdfLoadingContext
 {
 public:
-    KCOdfLoadingContext(KoOdfLoadingContext& odfContext)
+    KCOdfLoadingContext(KOdfLoadingContext& odfContext)
             : odfContext(odfContext), shapeContext(0) {}
 
 public:
-    KoOdfLoadingContext& odfContext;
+    KOdfLoadingContext& odfContext;
     KoShapeLoadingContext* shapeContext;
     QHash<QString, KoXmlElement> validities;
 };

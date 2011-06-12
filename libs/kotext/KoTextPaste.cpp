@@ -20,7 +20,7 @@
 #include "KoTextPaste.h"
 
 #include <KoOdfReadStore.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoCanvasBase.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeControllerBase.h>
@@ -64,7 +64,7 @@ KoTextPaste::~KoTextPaste()
 bool KoTextPaste::process(const KoXmlElement &body, KoOdfReadStore &odfStore)
 {
     bool ok = true;
-    KoOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
+    KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
     KoShapeLoadingContext context(loadingContext, d->canvas->shapeController()->resourceManager());
 
     KoTextLoader loader(context);

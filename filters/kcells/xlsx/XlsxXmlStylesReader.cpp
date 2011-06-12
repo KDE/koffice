@@ -549,7 +549,7 @@ void XlsxFontStyle::setupCellTextStyle(
 {
     if (!name.isEmpty()) {
 #ifdef __GNUC__
-#warning TODO: we are saving with fo:font-family now because style:font-name is not properly supported by kotext; fix void KoCharacterStyle::loadOdf(KoOdfLoadingContext &context)...
+#warning TODO: we are saving with fo:font-family now because style:font-name is not properly supported by kotext; fix void KoCharacterStyle::loadOdf(KOdfLoadingContext &context)...
 #endif
 //!@ todo reenable this        cellStyle->addProperty("style:font-name", name, KOdfGenericStyle::TextType);
         cellStyle->addProperty("fo:font-family", name, KOdfGenericStyle::TextType);

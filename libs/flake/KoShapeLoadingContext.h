@@ -28,7 +28,7 @@
 
 #include "flake_export.h"
 
-class KoOdfLoadingContext;
+class KOdfLoadingContext;
 class KoShapeLayer;
 class KoShape;
 class KoShapeControllerBase;
@@ -74,13 +74,13 @@ public:
      * @param context the context created for generic ODF loading.
      * @param documentResources the data of the shape controller.
      */
-    KoShapeLoadingContext(KoOdfLoadingContext &context, KoResourceManager *documentResources);
+    KoShapeLoadingContext(KOdfLoadingContext &context, KoResourceManager *documentResources);
 
     /// destructor
     ~KoShapeLoadingContext();
 
     /// return the embedded loading context
-    KoOdfLoadingContext &odfLoadingContext();
+    KOdfLoadingContext &odfLoadingContext();
 
     /// Returns layer referenced by given name
     KoShapeLayer *layer(const QString &layerName);

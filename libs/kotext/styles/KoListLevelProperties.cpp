@@ -28,7 +28,7 @@
 #include <kdebug.h>
 
 #include <KoXmlNS.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <KoXmlWriter.h>
 #include <KoUnit.h>
@@ -370,7 +370,7 @@ KoListLevelProperties KoListLevelProperties::fromTextList(QTextList *list)
 
 void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXmlElement& style)
 {
-    KoOdfLoadingContext &context = scontext.odfLoadingContext();
+    KOdfLoadingContext &context = scontext.odfLoadingContext();
 
     // The text:level attribute specifies the level of the number list
     // style. It can be used on all list-level styles.

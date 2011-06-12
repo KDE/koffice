@@ -39,7 +39,7 @@
 #include <KoXmlWriter.h>
 #include <KoTextShapeData.h>
 #include <KoShapeLoadingContext.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfGenericStyles.h>
 #include <KoXmlNS.h>

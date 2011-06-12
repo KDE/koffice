@@ -31,7 +31,7 @@
 #include <KoXmlNS.h>
 #include <KoPageLayout.h>
 #include <KoShapeSavingContext.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KOdfGenericStyle.h>

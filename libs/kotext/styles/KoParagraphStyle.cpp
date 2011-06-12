@@ -45,7 +45,7 @@
 
 #include <KoUnit.h>
 #include <KoStyleStack.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KOdfBorders.h>
@@ -1016,7 +1016,7 @@ QBrush KoParagraphStyle::background() const
 
 void KoParagraphStyle::loadOdf(const KoXmlElement *element, KoShapeLoadingContext &scontext)
 {
-    KoOdfLoadingContext &context = scontext.odfLoadingContext();
+    KOdfLoadingContext &context = scontext.odfLoadingContext();
     const QString name(element->attributeNS(KoXmlNS::style, "display-name", QString()));
     if (!name.isEmpty()) {
         d->name = name;

@@ -33,7 +33,7 @@
 #define CACHE_PAGE_THUMBNAILS
 
 struct KoPageLayout;
-class KoOdfLoadingContext;
+class KOdfLoadingContext;
 class KOdfGenericStyle;
 class KoShape;
 class KoPALoadingContext;

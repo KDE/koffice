@@ -24,7 +24,7 @@
 #include <KoStoreDevice.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfReadStore.h>
 #include <KoOdfWriteStore.h>
 #include <KoXmlWriter.h>
@@ -113,7 +113,7 @@ void TestKoOdfLoadingContext::testFillStyleStack()
     KoOdfReadStore readStore(store);
     QString errorMessage;
     QVERIFY(readStore.loadAndParse(errorMessage) == true);
-    KoOdfLoadingContext context(readStore.styles(), readStore.store());
+    KOdfLoadingContext context(readStore.styles(), readStore.store());
 
     KoXmlElement content = readStore.contentDoc().documentElement();
     KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));

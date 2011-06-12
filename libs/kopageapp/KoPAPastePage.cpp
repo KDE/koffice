@@ -23,7 +23,7 @@
 #include <QString>
 #include <KoOdfReadStore.h>
 #include <KoXmlWriter.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 #include <KoEmbeddedDocumentSaver.h>
 #include "KoPALoadingContext.h"
@@ -43,7 +43,7 @@ KoPAPastePage::KoPAPastePage(KoPADocument * doc, KoPAPageBase * activePage)
 
 bool KoPAPastePage::process(const KoXmlElement &body, KoOdfReadStore &odfStore)
 {
-    KoOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store(), m_doc->componentData());
+    KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store(), m_doc->componentData());
     KoPALoadingContext paContext(loadingContext, m_doc->resourceManager());
 
     QList<KoPAPageBase *> masterPages(m_doc->loadOdfMasterPages(odfStore.styles().masterPages(), paContext));

@@ -25,7 +25,7 @@
 #include <KoOdf.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeControllerBase.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoStore.h>
 #include <KoOdfReadStore.h>
 #include <KoXmlNS.h>
@@ -88,7 +88,7 @@ KoShape *CollectionShapeFactory::createDefaultShape(KoResourceManager *documentR
             return 0;
         }
 
-        KoOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
+        KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
         KoShapeLoadingContext context(loadingContext, documentResources);
 
         KoXmlElement element;

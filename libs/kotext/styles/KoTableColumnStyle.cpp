@@ -34,7 +34,7 @@
 
 #include <KoUnit.h>
 #include <KoStyleStack.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 
@@ -224,7 +224,7 @@ void KoTableColumnStyle::setMasterPageName(const QString &name)
     setProperty(MasterPageName, name);
 }
 
-void KoTableColumnStyle::loadOdf(const KoXmlElement *element, KoOdfLoadingContext &context)
+void KoTableColumnStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &context)
 {
     if (element->hasAttributeNS(KoXmlNS::style, "display-name"))
         d->name = element->attributeNS(KoXmlNS::style, "display-name", QString());

@@ -33,7 +33,7 @@
 #include "DocBase_p.h"
 
 #include <KoOdfSettings.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfReadStore.h>
 #include <KoOdfWriteStore.h>
 #include <KoProgressUpdater.h>
@@ -238,7 +238,7 @@ bool KCDocBase::loadOdf(KoOdfReadStore & odfStore)
         return false;
     }
 
-    KoOdfLoadingContext context(odfStore.styles(), odfStore.store());
+    KOdfLoadingContext context(odfStore.styles(), odfStore.store());
 
     // TODO check versions and mimetypes etc.
 

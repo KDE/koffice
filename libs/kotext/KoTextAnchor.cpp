@@ -24,7 +24,7 @@
 #include "KoTextShapeContainerModel.h"
 #include "KoTextShapeData.h"
 #include "KoStyleStack.h"
-#include "KoOdfLoadingContext.h"
+#include "KOdfLoadingContext.h"
 
 #include <KoShapeContainer.h>
 #include <KoXmlWriter.h>

@@ -36,7 +36,7 @@
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 
-#include "KoOdfLoadingContext.h"
+#include "KOdfLoadingContext.h"
 #include "KoOdfStylesReader.h"
 
 void KoOdfGraphicStyles::saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush & brush)

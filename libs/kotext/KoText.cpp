@@ -32,7 +32,7 @@
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoTextSharedLoadingData.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 
 #include <QTextDocument>
 
@@ -187,7 +187,7 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
         doc.setChangeTracker(changeTracker);
     }
 
-    KoOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store());
+    KOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store());
     KoShapeLoadingContext shapeLoadingContext(odfLoadingContext, 0);
     KoTextSharedLoadingData *textSharedLoadingData = new KoTextSharedLoadingData;
     textSharedLoadingData->loadOdfStyles(shapeLoadingContext, styleManager);

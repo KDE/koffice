@@ -40,7 +40,7 @@ public:
      * @param context Context for loading oasis docs.
      * @param context The shape controller.
      */
-     KoPALoadingContext(KoOdfLoadingContext &context, KoResourceManager *documentResources);
+     KoPALoadingContext(KOdfLoadingContext &context, KoResourceManager *documentResources);
      ~KoPALoadingContext();
 
     /**

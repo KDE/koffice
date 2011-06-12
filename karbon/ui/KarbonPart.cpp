@@ -48,7 +48,7 @@
 #include <KoApplication.h>
 #include <KoDataCenterBase.h>
 #include <KoOdfStylesReader.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfReadStore.h>
 #include <KoOdfWriteStore.h>
 #include <KoShapeSavingContext.h>
@@ -249,7 +249,7 @@ bool KarbonPart::loadOdf(KoOdfReadStore &odfStore)
         return false;
     }
 
-    KoOdfLoadingContext context(odfStore.styles(), odfStore.store());
+    KOdfLoadingContext context(odfStore.styles(), odfStore.store());
     KoShapeLoadingContext shapeContext(context, resourceManager());
 
     d->document.loadOasis(page, shapeContext);

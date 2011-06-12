@@ -40,7 +40,7 @@
 #include <KoUnit.h>
 #include <KOdfGenericStyle.h>
 #include <KoStyleStack.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 
 #include <KDebug>
 #include <QtGui/QPainter>

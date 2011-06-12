@@ -86,7 +86,7 @@
 #include <KoDpi.h>
 #include <KoCanvasController.h>
 #include <KoMainWindow.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfReadStore.h>
 #include <KoOdfStylesReader.h>
 #include <KoShapeController.h>

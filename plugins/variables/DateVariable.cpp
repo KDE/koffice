@@ -27,7 +27,7 @@
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 
 DateVariable::DateVariable(DateType type)

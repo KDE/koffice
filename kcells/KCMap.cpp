@@ -33,7 +33,7 @@
 #include <KOdfGenericStyles.h>
 #include <KoGlobal.h>
 #include <KoOdfSettings.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 #include <KoEmbeddedDocumentSaver.h>
 #include <KoShapeSavingContext.h>
@@ -502,7 +502,7 @@ static void fixupStyle(KoCharacterStyle* style)
     style->copyProperties(format);
 }
 
-bool KCMap::loadOdf(const KoXmlElement& body, KoOdfLoadingContext& odfContext)
+bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
 {
     d->isLoading = true;
     loadingInfo()->setFileFormat(KCLoadingInfo::OpenDocument);

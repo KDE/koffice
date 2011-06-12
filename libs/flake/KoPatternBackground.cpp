@@ -26,7 +26,7 @@
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include <KoXmlNS.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfGraphicStyles.h>
 #include <KoOdfStylesReader.h>
 #include <KoStoreDevice.h>
@@ -390,7 +390,7 @@ void KoPatternBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContex
     context.addDataCenter(d->imageCollection);
 }
 
-bool KoPatternBackground::loadStyle(KoOdfLoadingContext &context, const QSizeF &)
+bool KoPatternBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &)
 {
     Q_D(KoPatternBackground);
     KoStyleStack &styleStack = context.styleStack();

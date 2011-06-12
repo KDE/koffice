@@ -76,7 +76,7 @@ public:
     /// reimplemented from KoShapeBackground
     virtual void fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context);
     /// reimplemented from KoShapeBackground
-    virtual bool loadStyle(KoOdfLoadingContext &context, const QSizeF &shapeSize);
+    virtual bool loadStyle(KOdfLoadingContext &context, const QSizeF &shapeSize);
 
 private:
     Q_DECLARE_PRIVATE(KoGradientBackground)

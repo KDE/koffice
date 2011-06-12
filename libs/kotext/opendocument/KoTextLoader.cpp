@@ -32,7 +32,7 @@
 #include <KoInlineNote.h>
 #include <KoInlineTextObjectManager.h>
 #include "KoList.h"
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 #include <KoProperties.h>
 #include <KoShapeContainer.h>
@@ -98,7 +98,7 @@ public:
     KoShapeLoadingContext &context;
     KoTextSharedLoadingData *textSharedData;
     // store it here so that you don't need to get it all the time from
-    // the KoOdfLoadingContext.
+    // the KOdfLoadingContext.
     bool stylesDotXml;
 
     QTextBlockFormat defaultBlockFormat;

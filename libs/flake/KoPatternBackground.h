@@ -25,7 +25,7 @@
 #include <QtGui/QTransform>
 
 class KoImageCollection;
-class KoOdfLoadingContext;
+class KOdfLoadingContext;
 class KoPatternBackgroundPrivate;
 class KoImageData;
 
@@ -113,7 +113,7 @@ public:
     /// reimplemented from KoShapeBackground
     virtual void fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context);
     /// reimplemented from KoShapeBackground
-    virtual bool loadStyle(KoOdfLoadingContext &context, const QSizeF &shapeSize);
+    virtual bool loadStyle(KOdfLoadingContext &context, const QSizeF &shapeSize);
 
     /// Returns the bounding rect of the pattern image based on the given fill size
     QRectF patternRectFromFillSize(const QSizeF &size);

@@ -27,7 +27,7 @@ class QPainter;
 class QPainterPath;
 class KOdfGenericStyle;
 class KoShapeSavingContext;
-class KoOdfLoadingContext;
+class KOdfLoadingContext;
 class KoShapeBackgroundPrivate;
 
 /**
@@ -55,7 +55,7 @@ public:
     virtual void fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) = 0;
 
     /// load background from odf styles
-    virtual bool loadStyle(KoOdfLoadingContext &context, const QSizeF &shapeSize) = 0;
+    virtual bool loadStyle(KOdfLoadingContext &context, const QSizeF &shapeSize) = 0;
 
     /**
      * Increments the use-value.

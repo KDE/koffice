@@ -20,7 +20,7 @@
 #include "SCPageLayouts.h"
 
 #include <KoPageLayout.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>

@@ -24,7 +24,7 @@
 #include <KoXmlWriter.h>
 #include <KoOdfReadStore.h>
 #include <KoOdfWriteStore.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfSettings.h>
 #include <KoStoreDevice.h>
 #include <KoTextShapeData.h>
@@ -115,7 +115,7 @@ bool KoPADocument::loadOdf(KoOdfReadStore &odfStore)
         updater = progressUpdater()->startSubtask(1, "KoPADocument::loadOdf");
         updater->setProgress(0);
     }
-    KoOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store(), componentData());
+    KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store(), componentData());
     KoPALoadingContext paContext(loadingContext, resourceManager());
 
     KoXmlElement content = odfStore.contentDoc().documentElement();

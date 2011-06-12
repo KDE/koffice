@@ -40,7 +40,7 @@
 #include <KoTextShapeData.h>
 #include <KoShapeLoadingContext.h>
 #include <KoStyleManager.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoUpdater.h>
 #include <KoProgressUpdater.h>
 #include <KoParagraphStyle.h>
@@ -121,7 +121,7 @@ bool KWOdfLoader::load(KoOdfReadStore &odfStore)
         }
     }
 
-    KoOdfLoadingContext odfContext(odfStore.styles(), odfStore.store(), m_document->componentData());
+    KOdfLoadingContext odfContext(odfStore.styles(), odfStore.store(), m_document->componentData());
     KoShapeLoadingContext sc(odfContext, m_document->resourceManager());
 
     // Load all styles before the corresponding paragraphs try to use them!
@@ -133,7 +133,7 @@ bool KWOdfLoader::load(KoOdfReadStore &odfStore)
 
     if (updater) updater->setProgress(40);
 
-    KoOdfLoadingContext context(odfStore.styles(), odfStore.store(), m_document->componentData());
+    KOdfLoadingContext context(odfStore.styles(), odfStore.store(), m_document->componentData());
 
     loadMasterPageStyles(context, hasMainText);
 
@@ -259,7 +259,7 @@ void KWOdfLoader::loadSettings(const KoXmlDocument &settingsDoc)
     //1.6: m_document->variableCollection()->variableSetting()->loadOasis(settings);
 }
 
-void KWOdfLoader::loadMasterPageStyles(KoOdfLoadingContext &context, bool hasMainText)
+void KWOdfLoader::loadMasterPageStyles(KOdfLoadingContext &context, bool hasMainText)
 {
     //kDebug(32001) << " !!!!!!!!!!!!!! loadMasterPageStyles called !!!!!!!!!!!!!!";
     //kDebug(32001) << "Number of items :" << context.stylesReader().masterPages().size();
@@ -289,7 +289,7 @@ void KWOdfLoader::loadMasterPageStyles(KoOdfLoadingContext &context, bool hasMai
 }
 
 // helper function to create a KWTextFrameSet for a header/footer.
-void KWOdfLoader::loadHeaderFooterFrame(KoOdfLoadingContext &context, const KWPageStyle &pageStyle, const KoXmlElement &elem, KWord::TextFrameSetType fsType)
+void KWOdfLoader::loadHeaderFooterFrame(KOdfLoadingContext &context, const KWPageStyle &pageStyle, const KoXmlElement &elem, KWord::TextFrameSetType fsType)
 {
     KWTextFrameSet *fs = new KWTextFrameSet(m_document, fsType);
     fs->setPageStyle(pageStyle);
@@ -317,7 +317,7 @@ void KWOdfLoader::loadHeaderFooterFrame(KoOdfLoadingContext &context, const KWPa
 }
 
 //1.6: KWOasisLoader::loadOasisHeaderFooter
-void KWOdfLoader::loadHeaderFooter(KoOdfLoadingContext &context, KWPageStyle &pageStyle, const KoXmlElement &masterPage, HFLoadType headerFooter)
+void KWOdfLoader::loadHeaderFooter(KOdfLoadingContext &context, KWPageStyle &pageStyle, const KoXmlElement &masterPage, HFLoadType headerFooter)
 {
     // The actual content of the header/footer.
     KoXmlElement elem = KoXml::namedItemNS(masterPage, KoXmlNS::style, headerFooter == LoadHeader ? "header" : "footer");

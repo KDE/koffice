@@ -27,7 +27,7 @@
 #include <QTextCursor>
 #include <QFontMetrics>
 
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 #include <KoXmlNS.h>
 #include <KoXmlReader.h>
@@ -722,7 +722,7 @@ int KoCharacterStyle::textScale() const
 //in 1.6 this was defined in KoTextFormat::load(KoOasisContext &context)
 void KoCharacterStyle::loadOdf(KoShapeLoadingContext &scontext)
 {
-    KoOdfLoadingContext &context = scontext.odfLoadingContext();
+    KOdfLoadingContext &context = scontext.odfLoadingContext();
     KoStyleStack &styleStack = context.styleStack();
     loadOdfProperties(styleStack);
 

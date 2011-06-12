@@ -28,7 +28,7 @@
 #include <QStringList>
 
 class KoOdfReadStore;
-class KoOdfLoadingContext;
+class KOdfLoadingContext;
 class KoShapeLoadingContext;
 class QTimer;
 class KoShape;
@@ -57,7 +57,7 @@ class OdfCollectionLoader : public QObject
     private:
         KoOdfReadStore* m_odfStore;
         QTimer* m_loadingTimer;
-        KoOdfLoadingContext* m_loadingContext;
+        KOdfLoadingContext* m_loadingContext;
         KoShapeLoadingContext* m_shapeLoadingContext;
         KoXmlElement m_body;
         KoXmlElement m_page;

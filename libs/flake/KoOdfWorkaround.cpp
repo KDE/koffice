@@ -24,7 +24,7 @@
 #include "KoShapeLoadingContext.h"
 #include "KoShape.h"
 #include <KoPathShape.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KoColorBackground.h>
@@ -39,7 +39,7 @@ static bool s_workaroundPresentationPlaceholderBug = false;
 
 void KoOdfWorkaround::fixPenWidth(QPen & pen, KoShapeLoadingContext &context)
 {
-    if (context.odfLoadingContext().generatorType() == KoOdfLoadingContext::OpenOffice && pen.widthF() == 0.0) {
+    if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice && pen.widthF() == 0.0) {
         pen.setWidthF(0.5);
         kDebug(30006) << "Work around OO bug with pen width 0";
     }
@@ -47,7 +47,7 @@ void KoOdfWorkaround::fixPenWidth(QPen & pen, KoShapeLoadingContext &context)
 
 void KoOdfWorkaround::fixEnhancedPath(QString & path, const KoXmlElement &element, KoShapeLoadingContext &context)
 {
-    if (context.odfLoadingContext().generatorType() == KoOdfLoadingContext::OpenOffice) {
+    if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice) {
         if (path.isEmpty() && element.attributeNS(KoXmlNS::draw, "type", "") == "ellipse") {
             path = "U 10800 10800 10800 10800 0 360 Z N";
         }
@@ -56,7 +56,7 @@ void KoOdfWorkaround::fixEnhancedPath(QString & path, const KoXmlElement &elemen
 
 void KoOdfWorkaround::fixEnhancedPathPolarHandlePosition(QString &position, const KoXmlElement &element, KoShapeLoadingContext &context)
 {
-    if (context.odfLoadingContext().generatorType() == KoOdfLoadingContext::OpenOffice) {
+    if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice) {
         if (element.hasAttributeNS(KoXmlNS::draw, "handle-polar")) {
             QStringList tokens = position.simplified().split(' ');
             if (tokens.count() == 2) {
@@ -81,7 +81,7 @@ QColor KoOdfWorkaround::fixMissingFillColor(const KoXmlElement &element, KoShape
             styleStack.setTypeProperties("graphic");
         }
 
-        if (context.odfLoadingContext().generatorType() == KoOdfLoadingContext::OpenOffice) {
+        if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice) {
             if (hasStyle && !styleStack.hasProperty(KoXmlNS::draw, "fill") &&
                              styleStack.hasProperty(KoXmlNS::draw, "fill-color")) {
                 color = QColor(styleStack.property(KoXmlNS::draw, "fill-color"));
@@ -134,7 +134,7 @@ bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KoXmlElement &element, K
             styleStack.setTypeProperties("graphic");
         }
 
-        if (context.odfLoadingContext().generatorType() == KoOdfLoadingContext::OpenOffice) {
+        if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice) {
             if (hasStyle && styleStack.hasProperty(KoXmlNS::draw, "stroke") &&
                             !styleStack.hasProperty(KoXmlNS::draw, "stroke-color")) {
                 fixed = true;
@@ -181,7 +181,7 @@ bool KoOdfWorkaround::fixMissingStyle_DisplayLabel(const KoXmlElement &element, 
 {
     Q_UNUSED(element);
     // If no axis style is specified, OpenOffice.org hides the axis' data labels
-    if (context.odfLoadingContext().generatorType() == KoOdfLoadingContext::OpenOffice)
+    if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice)
         return false;
 
     // In all other cases, they're visible
@@ -190,8 +190,8 @@ bool KoOdfWorkaround::fixMissingStyle_DisplayLabel(const KoXmlElement &element, 
 
 void KoOdfWorkaround::setFixPresentationPlaceholder(bool fix, KoShapeLoadingContext &context)
 {
-    KoOdfLoadingContext::GeneratorType type(context.odfLoadingContext().generatorType());
-    if (type == KoOdfLoadingContext::OpenOffice || type == KoOdfLoadingContext::MicrosoftOffice) {
+    KOdfLoadingContext::GeneratorType type(context.odfLoadingContext().generatorType());
+    if (type == KOdfLoadingContext::OpenOffice || type == KOdfLoadingContext::MicrosoftOffice) {
         s_workaroundPresentationPlaceholderBug = fix;
     }
 }
@@ -211,8 +211,8 @@ void KoOdfWorkaround::fixPresentationPlaceholder(KoShape *shape)
 KoColorBackground *KoOdfWorkaround::fixBackgroundColor(const KoShape *shape, KoShapeLoadingContext &context)
 {
     KoColorBackground *colorBackground = 0;
-    KoOdfLoadingContext &odfContext = context.odfLoadingContext();
-    if (odfContext.generatorType() == KoOdfLoadingContext::OpenOffice) {
+    KOdfLoadingContext &odfContext = context.odfLoadingContext();
+    if (odfContext.generatorType() == KOdfLoadingContext::OpenOffice) {
         const KoPathShape *pathShape = dynamic_cast<const KoPathShape*>(shape);
         //check shape type
         if (pathShape) {

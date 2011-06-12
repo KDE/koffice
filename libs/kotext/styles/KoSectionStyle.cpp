@@ -36,7 +36,7 @@
 
 #include <KoUnit.h>
 #include <KoStyleStack.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KOdfBorders.h>
@@ -249,7 +249,7 @@ QBrush KoSectionStyle::background() const
     return qvariant_cast<QBrush>(variant);
 }
 
-void KoSectionStyle::loadOdf(const KoXmlElement *element, KoOdfLoadingContext &context)
+void KoSectionStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &context)
 {
     if (element->hasAttributeNS(KoXmlNS::style, "display-name"))
         d->name = element->attributeNS(KoXmlNS::style, "display-name", QString());

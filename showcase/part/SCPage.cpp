@@ -39,7 +39,7 @@
 
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 #include <KoStyleStack.h>
 #include <KOdfGenericStyle.h>

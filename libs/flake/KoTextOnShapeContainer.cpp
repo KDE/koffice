@@ -25,7 +25,7 @@
 #include "KoTextShapeDataBase.h"
 
 #include <KoXmlNS.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoShapeLoadingContext.h>
 
 #include <KDebug>

@@ -56,7 +56,7 @@
 #include <KoUnit.h>
 #include <KoOdfStylesReader.h>
 #include <KoOdfGraphicStyles.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 
 #include <QPainter>
 #include <QVariant>

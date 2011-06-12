@@ -26,7 +26,7 @@
 #include <KTemporaryFile>
 #include <KoTextShapeData.h>
 #include <KoShapeLoadingContext.h>
-#include <KoOdfLoadingContext.h>
+#include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoTextDocumentLayout.h>
 #include <KoStyleManager.h>
@@ -92,7 +92,7 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
     KoStyleManager *styleManager = new KoStyleManager;
     KoChangeTracker *changeTracker = new KoChangeTracker;
 
-    KoOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store(), *componentData);
+    KOdfLoadingContext odfLoadingContext(odfReadStore.styles(), odfReadStore.store(), *componentData);
     KoShapeLoadingContext shapeLoadingContext(odfLoadingContext, 0);
     KoTextSharedLoadingData *textSharedLoadingData = new KoTextSharedLoadingData;
     textSharedLoadingData->loadOdfStyles(shapeLoadingContext, styleManager);
