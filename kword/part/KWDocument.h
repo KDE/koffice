@@ -74,7 +74,7 @@ public:
     /// reimplemented from KoDocument
     virtual bool loadXML(const KoXmlDocument &doc, KoStore *store);
     /// reimplemented from KOdfDocumentBase
-    virtual bool loadOdf(KoOdfReadStore &odfStore);
+    virtual bool loadOdf(KOdfStoreReader &odfStore);
     /// reimplemented from KOdfDocumentBase
     virtual bool saveOdf(SavingContext &documentContext);
     /// reimplemented from KoDocument

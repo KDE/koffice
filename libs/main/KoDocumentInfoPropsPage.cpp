@@ -20,7 +20,7 @@
 
 #include "KoDocumentInfoPropsPage.h"
 
-#include "KoOdfReadStore.h"
+#include "KOdfStoreReader.h"
 #include "KoStore.h"
 #include "KoDocumentInfo.h"
 #include "KoDocumentInfoDlg.h"
@@ -75,7 +75,7 @@ KoDocumentInfoPropsPage::KoDocumentInfoPropsPage(KPropertiesDialog *props,
     // OASIS/OOo file format?
     if (d->m_src->hasFile("meta.xml")) {
         KoXmlDocument metaDoc;
-        KoOdfReadStore oasisStore(d->m_src);
+        KOdfStoreReader oasisStore(d->m_src);
         QString lastErrorMessage;
         if (oasisStore.loadAndParse("meta.xml", metaDoc, lastErrorMessage)) {
             d->m_info->loadOasis(metaDoc);

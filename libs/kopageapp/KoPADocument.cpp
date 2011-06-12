@@ -22,7 +22,7 @@
 
 #include <KoStore.h>
 #include <KoXmlWriter.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoOdfWriteStore.h>
 #include <KOdfLoadingContext.h>
 #include <KoOdfSettings.h>
@@ -108,7 +108,7 @@ bool KoPADocument::loadXML(const KoXmlDocument &doc, KoStore *)
     return true;
 }
 
-bool KoPADocument::loadOdf(KoOdfReadStore &odfStore)
+bool KoPADocument::loadOdf(KOdfStoreReader &odfStore)
 {
     QPointer<KoUpdater> updater;
     if (progressUpdater()) {

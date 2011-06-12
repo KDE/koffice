@@ -29,7 +29,7 @@
 #include <QPointer>
 
 class KWDocument;
-class KoOdfReadStore;
+class KOdfStoreReader;
 class KOdfLoadingContext;
 class KWPageStyle;
 class KoXmlDocument;
@@ -56,7 +56,7 @@ public:
      *  @brief Loads an OASIS OpenDocument from a store.
      *  This implements the KoDocument::loadOdf method.
      */
-    bool load(KoOdfReadStore &odfStore);
+    bool load(KOdfStoreReader &odfStore);
 
 signals:
     /**

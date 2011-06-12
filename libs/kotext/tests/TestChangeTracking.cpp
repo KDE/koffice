@@ -30,7 +30,7 @@
 #include <KoOdfStylesReader.h>
 #include <KoTextLoader.h>
 #include <KoXmlReader.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoOdfWriteStore.h>
 #include <KTemporaryFile>
 #include <KoStoreDevice.h>
@@ -90,7 +90,7 @@ QTextDocument *TestChangeTracking::documentFromOdt(const QString &odt, const QSt
     }
 
     KoStore *readStore = KoStore::createStore(odt, KoStore::Read, "", KoStore::Zip);
-    KoOdfReadStore odfReadStore(readStore);
+    KOdfStoreReader odfReadStore(readStore);
     QString error;
     if (!odfReadStore.loadAndParse(error)) {
         qDebug() << "Parsing error : " << error;

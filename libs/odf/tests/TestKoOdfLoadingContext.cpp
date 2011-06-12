@@ -25,7 +25,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoOdfWriteStore.h>
 #include <KoXmlWriter.h>
 
@@ -110,7 +110,7 @@ void TestKoOdfLoadingContext::testFillStyleStack()
     delete store;
 
     store = KoStore::createStore("test.odt", KoStore::Read, mimeType);
-    KoOdfReadStore readStore(store);
+    KOdfStoreReader readStore(store);
     QString errorMessage;
     QVERIFY(readStore.loadAndParse(errorMessage) == true);
     KOdfLoadingContext context(readStore.styles(), readStore.store());

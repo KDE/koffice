@@ -20,7 +20,7 @@
 */
 
 #include "ooutils.h"
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoStyleStack.h>
 #include <KoXmlReader.h>
 #include <qdom.h>

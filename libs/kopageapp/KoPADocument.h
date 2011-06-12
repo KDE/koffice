@@ -50,7 +50,7 @@ public:
     void paintContent(QPainter &painter, const QRect &rect);
 
     bool loadXML(const KoXmlDocument &doc, KoStore *store);
-    bool loadOdf(KoOdfReadStore &odfStore);
+    bool loadOdf(KOdfStoreReader &odfStore);
 
     bool saveOdf(SavingContext &documentContext);
 

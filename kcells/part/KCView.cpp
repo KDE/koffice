@@ -87,7 +87,7 @@
 #include <KoCanvasController.h>
 #include <KoMainWindow.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoOdfStylesReader.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>

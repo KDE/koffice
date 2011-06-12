@@ -32,7 +32,7 @@
 // koffice
 #include <KoOdfStylesReader.h>
 #include <KoOdfSettings.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KoShapeRegistry.h>
@@ -68,7 +68,7 @@ KWDocument *KWOdfLoader::document() const
 }
 
 //1.6: KWDocument::loadOasis
-bool KWOdfLoader::load(KoOdfReadStore &odfStore)
+bool KWOdfLoader::load(KOdfStoreReader &odfStore)
 {
     //kDebug(32001) << "========================> KWOdfLoader::load START";
 

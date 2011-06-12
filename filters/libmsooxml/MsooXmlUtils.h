@@ -229,7 +229,7 @@ MSOOXML_EXPORT QIODevice* openDeviceForFile(const KZip* zip,
 MSOOXML_EXPORT KoFilter::ConversionStatus loadAndParse(QIODevice* io, KoXmlDocument& doc,
         QString& errorMessage, const QString & fileName);
 
-//! @see KoOdfReadStore::loadAndParse(QIODevice* fileDevice, KoXmlDocument& doc, QString& errorMessage, const QString& fileName)
+//! @see KOdfStoreReader::loadAndParse(QIODevice* fileDevice, KoXmlDocument& doc, QString& errorMessage, const QString& fileName)
 MSOOXML_EXPORT KoFilter::ConversionStatus loadAndParse(KoXmlDocument& doc,
         const KZip* zip,
         QString& errorMessage,

@@ -34,7 +34,7 @@
 
 #include <KoOdfSettings.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoOdfWriteStore.h>
 #include <KoProgressUpdater.h>
 #include <KoResourceManager.h>
@@ -204,7 +204,7 @@ bool KCDocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag
     return true;
 }
 
-bool KCDocBase::loadOdf(KoOdfReadStore & odfStore)
+bool KCDocBase::loadOdf(KOdfStoreReader & odfStore)
 {
     QPointer<KoUpdater> updater;
     if (progressUpdater()) {

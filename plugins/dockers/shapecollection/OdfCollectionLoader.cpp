@@ -20,7 +20,7 @@
 #include "OdfCollectionLoader.h"
 
 #include <KoStore.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoShape.h>
@@ -239,7 +239,7 @@ void OdfCollectionLoader::loadNativeFile(const QString& path)
     }
 
     store->disallowNameExpansion();
-    m_odfStore = new KoOdfReadStore(store);
+    m_odfStore = new KOdfStoreReader(store);
     QString errorMessage;
 
     if (!m_odfStore->loadAndParse(errorMessage))

@@ -31,7 +31,7 @@
 #include <kdebug.h>
 #include <kglobalsettings.h>
 #include <qapplication.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 
 KoUnavailPart::KoUnavailPart( QWidget *parentWidget, QObject* parent )
     : KoDocument( parentWidget, parent, false /*singleViewMode*/ )
@@ -44,7 +44,7 @@ KoView* KoUnavailPart::createViewInstance( QWidget* parent)
     return new KoUnavailView( this, parent );
 }
 
-bool KoUnavailPart::loadOdf( KoOdfReadStore & odfStore )
+bool KoUnavailPart::loadOdf( KOdfStoreReader & odfStore )
 {
     m_doc = KoXml::asQDomDocument( QDomDocument(), odfStore.contentDoc() );
     return true;

@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoOdfReadStore.h"
+#include "KOdfStoreReader.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -31,7 +31,7 @@
 
 #include <QXmlStreamReader>
 
-class KoOdfReadStore::Private
+class KOdfStoreReader::Private
 {
 public:
     Private(KoStore *s)
@@ -47,37 +47,37 @@ public:
     KoXmlDocument settingsDoc;
 };
 
-KoOdfReadStore::KoOdfReadStore(KoStore *store)
+KOdfStoreReader::KOdfStoreReader(KoStore *store)
         : d(new Private(store))
 {
 }
 
-KoOdfReadStore::~KoOdfReadStore()
+KOdfStoreReader::~KOdfStoreReader()
 {
     delete d;
 }
 
-KoStore * KoOdfReadStore::store() const
+KoStore * KOdfStoreReader::store() const
 {
     return d->store;
 }
 
-KoOdfStylesReader &KoOdfReadStore::styles()
+KoOdfStylesReader &KOdfStoreReader::styles()
 {
     return d->stylesReader;
 }
 
-KoXmlDocument KoOdfReadStore::contentDoc() const
+KoXmlDocument KOdfStoreReader::contentDoc() const
 {
     return d->contentDoc;
 }
 
-KoXmlDocument KoOdfReadStore::settingsDoc() const
+KoXmlDocument KOdfStoreReader::settingsDoc() const
 {
     return d->settingsDoc;
 }
 
-bool KoOdfReadStore::loadAndParse(QString &errorMessage)
+bool KOdfStoreReader::loadAndParse(QString &errorMessage)
 {
     if (!loadAndParse("content.xml", d->contentDoc, errorMessage)) {
         return false;
@@ -99,7 +99,7 @@ bool KoOdfReadStore::loadAndParse(QString &errorMessage)
     return true;
 }
 
-bool KoOdfReadStore::loadAndParse(const QString &fileName, KoXmlDocument &doc, QString &errorMessage)
+bool KOdfStoreReader::loadAndParse(const QString &fileName, KoXmlDocument &doc, QString &errorMessage)
 {
     //kDebug(30003) <<"loadAndParse: Trying to open" << fileName;
     if (!d->store) {
@@ -119,7 +119,7 @@ bool KoOdfReadStore::loadAndParse(const QString &fileName, KoXmlDocument &doc, Q
     return ok;
 }
 
-bool KoOdfReadStore::loadAndParse(QIODevice *fileDevice, KoXmlDocument &doc, QString &errorMessage, const QString &fileName)
+bool KOdfStoreReader::loadAndParse(QIODevice *fileDevice, KoXmlDocument &doc, QString &errorMessage, const QString &fileName)
 {
     // Error variables for QDomDocument::setContent
     QString errorMsg;
@@ -150,7 +150,7 @@ static QString normalizeFullPath(QString s)
     return s;
 }
 
-QString KoOdfReadStore::mimeForPath(const KoXmlDocument &doc, const QString &_fullPath)
+QString KOdfStoreReader::mimeForPath(const KoXmlDocument &doc, const QString &_fullPath)
 {
     QString fullPath = normalizeFullPath(_fullPath);
     KoXmlElement docElem = doc.documentElement();

@@ -48,7 +48,7 @@
 
 #include "pole.h"
 
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <styles/KoCharacterStyle.h>
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>

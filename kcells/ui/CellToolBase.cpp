@@ -109,7 +109,7 @@
 #include <KoColor.h>
 #include <KoColorPopupAction.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoOdfStylesReader.h>
 #include <KoPointerEvent.h>
 #include <KoSelection.h>
@@ -2923,7 +2923,7 @@ bool CellToolBase::paste()
         QBuffer buffer(&arr);
         KoStore * store = KoStore::createStore(&buffer, KoStore::Read);
 
-        KoOdfReadStore odfStore(store);
+        KOdfStoreReader odfStore(store);
         KoXmlDocument doc;
         QString errorMessage;
         bool ok = odfStore.loadAndParse("content.xml", doc, errorMessage);

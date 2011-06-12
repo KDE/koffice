@@ -24,7 +24,7 @@
 #include "koodf_export.h"
 
 class QMimeData;
-class KoOdfReadStore;
+class KOdfStoreReader;
 class KoXmlElement;
 
 /**
@@ -44,7 +44,7 @@ public:
     bool paste(KoOdf::DocumentType documentType, const QByteArray &data);
 
 protected:
-    virtual bool process(const KoXmlElement &body, KoOdfReadStore &odfStore) = 0;
+    virtual bool process(const KoXmlElement &body, KOdfStoreReader &odfStore) = 0;
 };
 
 #endif /* KOODFPASTE_H */

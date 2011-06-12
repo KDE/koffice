@@ -25,7 +25,7 @@
 #include <kstandarddirs.h>
 #include <kcomponentdata.h>
 #include <kdebug.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include "KoPAMasterPage.h"
 #include "KoPAPage.h"
 

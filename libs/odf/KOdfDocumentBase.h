@@ -26,7 +26,7 @@
 #include <kurl.h>
 
 class KoStore;
-class KoOdfReadStore;
+class KOdfStoreReader;
 class KoOdfWriteStore;
 class KoEmbeddedDocumentSaver;
 
@@ -98,7 +98,7 @@ public:
      *  make sure styles are loaded before body text is loaded by the
      *  text shape.
      */
-    virtual bool loadOdf(KoOdfReadStore &odfStore) = 0;
+    virtual bool loadOdf(KOdfStoreReader &odfStore) = 0;
 
     /**
      *  Reimplement this method to save the contents of your %KOffice document,

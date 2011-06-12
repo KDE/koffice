@@ -35,7 +35,7 @@
 #include "rdf/KoDocumentRdf.h"
 #endif
 #include "KoOdfStylesReader.h"
-#include "KoOdfReadStore.h"
+#include "KOdfStoreReader.h"
 #include "KoOdfWriteStore.h"
 #include "KoEmbeddedDocumentSaver.h"
 #include "KoXmlNS.h"
@@ -1706,7 +1706,7 @@ bool KoDocument::loadNativeFormatFromStoreInternal(KoStore *store)
 
     if (oasis && store->hasFile("meta.xml")) {
         KoXmlDocument metaDoc;
-        KoOdfReadStore oasisStore(store);
+        KOdfStoreReader oasisStore(store);
         if (oasisStore.loadAndParse("meta.xml", metaDoc, d->lastErrorMessage)) {
             d->docInfo->loadOasis(metaDoc);
         }
@@ -1728,7 +1728,7 @@ bool KoDocument::loadNativeFormatFromStoreInternal(KoStore *store)
         QTimer::singleShot(0, notify, SLOT(sendEvent()));
 
         KoXmlDocument versionInfo;
-        KoOdfReadStore oasisStore(store);
+        KOdfStoreReader oasisStore(store);
         if (oasisStore.loadAndParse("VersionList.xml", versionInfo, d->lastErrorMessage)) {
             KoXmlNode list = KoXml::namedItemNS(versionInfo, KoXmlNS::VL, "version-list");
             KoXmlElement e;
@@ -1786,7 +1786,7 @@ bool KoDocument::loadFromStore(KoStore *_store, const QString& url)
 
 bool KoDocument::loadOasisFromStore(KoStore *store)
 {
-    KoOdfReadStore odfStore(store);
+    KOdfStoreReader odfStore(store);
     if (! odfStore.loadAndParse(d->lastErrorMessage)) {
         return false;
     }

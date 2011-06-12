@@ -48,7 +48,7 @@
 #include <KoXmlWriter.h>
 #include <KoShapeRegistry.h>
 #include <KoXmlReader.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoOdfWriteStore.h>
 #include <KoStyleManager.h>
 #include <KoXmlNS.h>
@@ -74,7 +74,7 @@ static KoDocumentRdf *loadDocument(const QString &odt)
     }
 
     KoStore *store = KoStore::createStore(odt, KoStore::Read, "", KoStore::Zip);
-    KoOdfReadStore odfReadStore(store);
+    KOdfStoreReader odfReadStore(store);
     KoXmlDocument metaDoc;
     KoDocumentRdf *rdf = new KoDocumentRdf;
     QString error;

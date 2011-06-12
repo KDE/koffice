@@ -22,7 +22,7 @@
 #include <KoStore.h>
 #include <KoTextLoader.h>
 #include <KoXmlReader.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KTemporaryFile>
 #include <KoTextShapeData.h>
 #include <KoShapeLoadingContext.h>
@@ -79,7 +79,7 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
     }
 
     KoStore *readStore = KoStore::createStore(odt, KoStore::Read, "", KoStore::Zip);
-    KoOdfReadStore odfReadStore(readStore);
+    KOdfStoreReader odfReadStore(readStore);
     QString error;
     if (!odfReadStore.loadAndParse(error)) {
         qDebug() << "Parsing error : " << error;

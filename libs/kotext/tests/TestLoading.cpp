@@ -32,7 +32,7 @@
 #include <KoOdfStylesReader.h>
 #include <KoTextLoader.h>
 #include <KoXmlReader.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoOdfWriteStore.h>
 #include <KTemporaryFile>
 #include <KoStoreDevice.h>

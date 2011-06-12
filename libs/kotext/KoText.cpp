@@ -26,8 +26,8 @@
 #include "KoInlineTextObjectManager.h"
 
 #include <KoStore.h>
-#include <KoOdfReadStore.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
+#include <KOdfStoreReader.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
@@ -161,7 +161,7 @@ KoText::Direction KoText::directionFromString(const QString &writingMode)
 QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *document)
 {
     KoStore *readStore = KoStore::createStore(filename, KoStore::Read, "", KoStore::Zip);
-    KoOdfReadStore odfReadStore(readStore);
+    KOdfStoreReader odfReadStore(readStore);
     QString error;
     if (!odfReadStore.loadAndParse(error)) {
         kWarning(32500) << "Parsing error : " << error;

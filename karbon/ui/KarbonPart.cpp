@@ -49,7 +49,7 @@
 #include <KoDataCenterBase.h>
 #include <KoOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoOdfWriteStore.h>
 #include <KoShapeSavingContext.h>
 #include <KoXmlWriter.h>
@@ -198,7 +198,7 @@ bool KarbonPart::loadXML(const KoXmlDocument&, KoStore*)
     return false;
 }
 
-bool KarbonPart::loadOdf(KoOdfReadStore &odfStore)
+bool KarbonPart::loadOdf(KOdfStoreReader &odfStore)
 {
     kDebug(38000) << "Start loading OASIS document..." /*<< doc.toString()*/;
 

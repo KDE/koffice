@@ -118,7 +118,7 @@ public:
      * Main loading method.
      * @see KCMap::loadOdf
      */
-    virtual bool loadOdf(KoOdfReadStore & odfStore);
+    virtual bool loadOdf(KOdfStoreReader & odfStore);
 
 protected:
     class Private;

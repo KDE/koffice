@@ -611,7 +611,7 @@ void KWDocument::openTemplate(const KUrl &url)
     m_loadingTemplate = false;
 }
 
-bool KWDocument::loadOdf(KoOdfReadStore &odfStore)
+bool KWDocument::loadOdf(KOdfStoreReader &odfStore)
 {
     clear();
     KWOdfLoader loader(this);

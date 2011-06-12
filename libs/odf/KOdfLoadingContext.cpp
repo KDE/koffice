@@ -18,7 +18,7 @@
 */
 
 #include "KOdfLoadingContext.h"
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 #include <KoOdfStylesReader.h>
 #include <KoStore.h>
 #include <KoXmlNS.h>
@@ -58,7 +58,7 @@ KOdfLoadingContext::KOdfLoadingContext(KoOdfStylesReader &stylesReader, KoStore*
         : d(new Private(stylesReader, store))
 {
     // Ideally this should be done by KoDocument and passed as argument here...
-    KoOdfReadStore oasisStore(store);
+    KOdfStoreReader oasisStore(store);
     QString dummy;
     (void)oasisStore.loadAndParse("tar:/META-INF/manifest.xml", d->manifestDoc, dummy);
 
@@ -67,7 +67,7 @@ KOdfLoadingContext::KOdfLoadingContext(KoOdfStylesReader &stylesReader, KoStore*
         if ( ! fileName.isEmpty() ) {
             QFile file( fileName );
             QString errorMessage;
-            if ( KoOdfReadStore::loadAndParse( &file, d->doc, errorMessage, fileName ) ) {
+            if ( KOdfStoreReader::loadAndParse( &file, d->doc, errorMessage, fileName ) ) {
                 d->defaultStylesReader.createStyleMap( d->doc, true );
             }
             else {
@@ -86,7 +86,7 @@ KOdfLoadingContext::~KOdfLoadingContext()
 }
 
 void KOdfLoadingContext::setManifestFile(const QString& fileName) {
-    KoOdfReadStore oasisStore(d->store);
+    KOdfStoreReader oasisStore(d->store);
     QString dummy;
     (void)oasisStore.loadAndParse(fileName, d->manifestDoc, dummy);
 }
@@ -153,7 +153,7 @@ void KOdfLoadingContext::parseGenerator() const
 
     if (d->store->hasFile("meta.xml")) {
         KoXmlDocument metaDoc;
-        KoOdfReadStore oasisStore(d->store);
+        KOdfStoreReader oasisStore(d->store);
         QString errorMsg;
         if (oasisStore.loadAndParse("meta.xml", metaDoc, errorMsg)) {
             KoXmlNode meta   = KoXml::namedItemNS(metaDoc, KoXmlNS::office, "document-meta");

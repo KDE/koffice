@@ -42,7 +42,7 @@
 class QUndoCommand;
 
 class KoStore;
-class KoOdfReadStore;
+class KOdfStoreReader;
 class KoOdfWriteStore;
 class KoMainWindow;
 class KoView;

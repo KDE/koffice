@@ -35,7 +35,7 @@ public:
 
     virtual void paintContent(QPainter& painter, const QRect& rect);
 
-    virtual bool loadOdf(KoOdfReadStore & odfStore);
+    virtual bool loadOdf(KOdfStoreReader & odfStore);
     virtual bool saveOdf(SavingContext & documentContext);
 
     virtual bool loadXML(const KoXmlDocument &doc, KoStore *store);

@@ -62,7 +62,7 @@ public:
     /// reimplemented form KoDocument
     virtual bool loadXML(const KoXmlDocument& document, KoStore *store);
     /// reimplemented form KoDocument
-    virtual bool loadOdf(KoOdfReadStore & odfStore);
+    virtual bool loadOdf(KOdfStoreReader & odfStore);
     /// reimplemented form KoDocument
     virtual bool completeLoading(KoStore* store);
     /// reimplemented form KoDocument

@@ -22,7 +22,7 @@
 //#include <KDebug>
 
 #include <KoXmlReader.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 
 class TestOdfStore : public QObject
 {
@@ -50,7 +50,7 @@ void TestOdfStore::testMimeForPath()
     bool ok = doc.setContent( xml, true /* namespace processing */, &errorMsg, &errorLine, &errorColumn );
     QVERIFY(ok);
 
-    QString mime = KoOdfReadStore::mimeForPath(doc, "Object 1");
+    QString mime = KOdfStoreReader::mimeForPath(doc, "Object 1");
     QCOMPARE(mime, QString::fromLatin1("application/vnd.oasis.opendocument.text"));
 }
 

@@ -37,13 +37,13 @@ class KoXmlElement;
  *
  * @author: David Faure <faure@kde.org>
  */
-class KOODF_EXPORT KoOdfReadStore
+class KOODF_EXPORT KOdfStoreReader
 {
 public:
     /// @param store recontents the property of the caller
-    explicit KoOdfReadStore(KoStore* store);
+    explicit KOdfStoreReader(KoStore* store);
 
-    ~KoOdfReadStore();
+    ~KOdfStoreReader();
 
     /**
      * Get the store

@@ -25,7 +25,7 @@
 #include <klocale.h>
 
 #include <KOdfLoadingContext.h>
-#include <KoOdfReadStore.h>
+#include <KOdfStoreReader.h>
 
 #include "KoCanvasBase.h"
 #include "KoShapeController.h"
@@ -61,7 +61,7 @@ KoShapePaste::~KoShapePaste()
     delete d;
 }
 
-bool KoShapePaste::process(const KoXmlElement & body, KoOdfReadStore & odfStore)
+bool KoShapePaste::process(const KoXmlElement & body, KOdfStoreReader & odfStore)
 {
     d->pastedShapes.clear();
     KOdfLoadingContext loadingContext(odfStore.styles(), odfStore.store());
