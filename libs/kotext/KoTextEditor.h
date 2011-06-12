@@ -23,7 +23,7 @@
 
 #include "kotext_export.h"
 
-#include <KoGenChange.h>
+#include <KOdfGenericChange.h>
 #include "KoText.h"
 #include <KoToolSelection.h>
 
@@ -81,7 +81,7 @@ public slots:
 
     void addCommand(QUndoCommand *command, bool addCommandToStack = true);
 
-    void registerTrackedChange(QTextCursor &selection, KoGenChange::Type changeType, QString title, QTextFormat &format, QTextFormat &prevFormat, bool applyToWholeBlock = false);
+    void registerTrackedChange(QTextCursor &selection, KOdfGenericChange::Type changeType, QString title, QTextFormat &format, QTextFormat &prevFormat, bool applyToWholeBlock = false);
 
     void bold(bool bold);
 

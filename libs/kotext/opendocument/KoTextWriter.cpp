@@ -63,7 +63,7 @@
 #include <changetracker/KoChangeTrackerElement.h>
 #include <changetracker/KoDeleteChangeMarker.h>
 #include <KoFormatChangeInformation_p.h>
-#include <KoGenChange.h>
+#include <KOdfGenericChange.h>
 #include <KoGenChanges.h>
 #include <rdf/KoDocumentRdfBase.h>
 
@@ -218,7 +218,7 @@ public:
     void postProcessListItemSplit(int changeId);
 
     //Method used by both split and merge
-    int checkForMergeOrSplit(const QTextBlock &block, KoGenChange::Type changeType);
+    int checkForMergeOrSplit(const QTextBlock &block, KOdfGenericChange::Type changeType);
     void addNameSpaceDefinitions(QString &generatedXmlString);
 
     KoXmlWriter *oldXmlWriter;
@@ -287,16 +287,16 @@ void KoTextWriter::Private::saveChange(int changeId)
     if (changeTransTable.value(changeId).length())
         return;
 
-    if ((changeTracker->elementById(changeId)->changeType() == KoGenChange::DeleteChange) &&
+    if ((changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) &&
          (changeTracker->saveFormat() == KoChangeTracker::ODF_1_2)) {
         return;
     }
 
-    KoGenChange change;
+    KOdfGenericChange change;
     if (changeTracker->saveFormat() == KoChangeTracker::ODF_1_2) {
-        change.setChangeFormat(KoGenChange::ODF_1_2);
+        change.setChangeFormat(KOdfGenericChange::ODF_1_2);
     } else {
-        change.setChangeFormat(KoGenChange::DELTAXML);
+        change.setChangeFormat(KOdfGenericChange::DELTAXML);
     }
 
     changeTracker->saveInlineChange(changeId, change);
@@ -322,7 +322,7 @@ void KoTextWriter::Private::saveODF12Change(QTextCharFormat format)
     }
 
     if (changeId) { //There is a tracked change
-        if (changeTracker->elementById(changeId)->changeType() != KoGenChange::DeleteChange) {
+        if (changeTracker->elementById(changeId)->changeType() != KOdfGenericChange::DeleteChange) {
             //Now start a new change region if not already done
             if (!changeStack.contains(changeId)) {
                 QString changeName = changeTransTable.value(changeId);
@@ -460,13 +460,13 @@ int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, 
             changeId = changeTracker->originalChangeId(changeId);
         }
 
-        if (changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::DeleteChange) {
+        if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) {
             writer->startElement("delta:removed-content", false);
             writer->addAttribute("delta:removal-change-idref", changeTransTable.value(changeId));
-        }else if (changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::InsertChange) {
+        }else if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::InsertChange) {
             tagInformation.addAttribute("delta:insertion-change-idref", changeTransTable.value(changeId));
             tagInformation.addAttribute("delta:insertion-type", "insert-with-content");
-        } else if (changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::FormatChange && elementType == KoTextWriter::Private::Span) {
+        } else if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::FormatChange && elementType == KoTextWriter::Private::Span) {
             KoFormatChangeInformation *formatChangeInformation = changeTracker->formatChangeInformation(changeId);
 
             if (formatChangeInformation && formatChangeInformation->formatType() == KoFormatChangeInformation::eTextStyleChange) {
@@ -488,7 +488,7 @@ int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, 
 
             tagInformation.addAttribute("delta:insertion-change-idref", changeTransTable.value(changeId));
             tagInformation.addAttribute("delta:insertion-type", "insert-around-content");
-        } else if (changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::FormatChange
+        } else if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::FormatChange
                             && elementType == KoTextWriter::Private::ParagraphOrHeader) {
             KoFormatChangeInformation *formatChangeInformation = changeTracker->formatChangeInformation(changeId);
             if (formatChangeInformation && formatChangeInformation->formatType() == KoFormatChangeInformation::eParagraphStyleChange) {
@@ -499,7 +499,7 @@ int KoTextWriter::Private::openTagRegion(int position, ElementType elementType, 
                                                                                  + QString(",") + styleName;
                 tagInformation.addAttribute("ac:change001", attributeChangeRecord);
             }
-        } else if (changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::FormatChange
+        } else if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::FormatChange
                             && elementType == KoTextWriter::Private::ListItem) {
             KoFormatChangeInformation *formatChangeInformation = changeTracker->formatChangeInformation(changeId);
             if (formatChangeInformation && formatChangeInformation->formatType() == KoFormatChangeInformation::eListItemNumberingChange) {
@@ -536,9 +536,9 @@ void KoTextWriter::Private::closeTagRegion(int changeId)
     if (changeId)
         changeStack.pop();
 
-    if (changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::DeleteChange) {
+    if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) {
         writer->endElement(); //delta:removed-content
-    } else if (changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::FormatChange) {
+    } else if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::FormatChange) {
         KoFormatChangeInformation *formatChangeInformation = changeTracker->formatChangeInformation(changeId);
         if (formatChangeInformation && formatChangeInformation->formatType() == KoFormatChangeInformation::eTextStyleChange) {
             writer->startElement("delta:remove-leaving-content-end", false);
@@ -762,7 +762,7 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
         if (previousBlock.isValid()) {
             QTextBlockFormat blockFormat = block.blockFormat();
             int changeId = blockFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
-            if (changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::DeleteChange) {
+            if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) {
                 QTextFragment firstFragment = (block.begin()).fragment();
                 QTextCharFormat firstFragmentFormat = firstFragment.charFormat();
                 int firstFragmentChangeId = firstFragmentFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
@@ -855,10 +855,10 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
                         int changeId = charFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
                         KoTextAnchor *textAnchor = dynamic_cast<KoTextAnchor *>(inlineObject);
                         if (changeTracker && changeTracker->saveFormat() == KoChangeTracker::DELTAXML) {
-                            if (textAnchor && changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::InsertChange) {
+                            if (textAnchor && changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::InsertChange) {
                                 textAnchor->shape()->setAdditionalAttribute("delta:insertion-change-idref", changeTransTable.value(changeId));
                                 textAnchor->shape()->setAdditionalAttribute("delta:insertion-type", "insert-with-content");
-                            } else if (textAnchor && changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::DeleteChange) {
+                            } else if (textAnchor && changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) {
                                 writer->startElement("delta:removed-content", false);
                                 writer->addAttribute("delta:removal-change-idref", changeTransTable.value(changeId));
                             }
@@ -867,10 +867,10 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
                         inlineObject->saveOdf(context);
 
                         if (changeTracker && changeTracker->saveFormat() == KoChangeTracker::DELTAXML) {
-                            if (textAnchor && changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::InsertChange) {
+                            if (textAnchor && changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::InsertChange) {
                                 textAnchor->shape()->removeAdditionalAttribute("delta:insertion-change-idref");
                                 textAnchor->shape()->removeAdditionalAttribute("delta:insertion-type");
-                            } else if (textAnchor && changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::DeleteChange) {
+                            } else if (textAnchor && changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) {
                                 writer->endElement();
                             }
                         }
@@ -941,7 +941,7 @@ void KoTextWriter::Private::saveParagraph(const QTextBlock &block, int from, int
         if (nextBlock.isValid() && deleteMergeRegionOpened) {
             QTextBlockFormat nextBlockFormat = nextBlock.blockFormat();
             int changeId = nextBlockFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
-            if (changeId && changeTracker->elementById(changeId)->changeType() == KoGenChange::DeleteChange) {
+            if (changeId && changeTracker->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) {
                 QTextFragment lastFragment = (--block.end()).fragment();
                 QTextCharFormat lastFragmentFormat = lastFragment.charFormat();
                 int lastFragmentChangeId = lastFragmentFormat.intProperty(KoCharacterStyle::ChangeTrackerId);
@@ -1530,16 +1530,16 @@ void KoTextWriter::Private::writeBlocks(QTextDocument *document, int from, int t
 
 int KoTextWriter::Private::checkForSplit(const QTextBlock &block)
 {
-    return checkForMergeOrSplit(block, KoGenChange::InsertChange);
+    return checkForMergeOrSplit(block, KOdfGenericChange::InsertChange);
 }
 
 int KoTextWriter::Private::checkForDeleteMerge(const QTextBlock &block)
 {
     Q_ASSERT(changeTracker);
-    return checkForMergeOrSplit(block, KoGenChange::DeleteChange);
+    return checkForMergeOrSplit(block, KOdfGenericChange::DeleteChange);
 }
 
-int KoTextWriter::Private::checkForMergeOrSplit(const QTextBlock &block, KoGenChange::Type changeType)
+int KoTextWriter::Private::checkForMergeOrSplit(const QTextBlock &block, KOdfGenericChange::Type changeType)
 {
     Q_ASSERT(changeTracker);
     QTextBlock endBlock = block;

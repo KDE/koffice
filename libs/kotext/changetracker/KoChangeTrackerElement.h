@@ -21,7 +21,7 @@
 
 #include <QObject>
 
-#include <KoGenChange.h>
+#include <KOdfGenericChange.h>
 
 #include "kotext_export.h"
 
@@ -35,7 +35,7 @@ class KOTEXT_EXPORT KoChangeTrackerElement
 {
 public:
 
-    KoChangeTrackerElement(const QString &title, KoGenChange::Type type);
+    KoChangeTrackerElement(const QString &title, KOdfGenericChange::Type type);
 
     KoChangeTrackerElement();
 
@@ -53,8 +53,8 @@ public:
     void setValid(bool valid);
     bool isValid() const;
 
-    void setChangeType(KoGenChange::Type type);
-    KoGenChange::Type changeType() const;
+    void setChangeType(KOdfGenericChange::Type type);
+    KOdfGenericChange::Type changeType() const;
 
     void setChangeTitle(const QString& title);
     QString changeTitle() const;

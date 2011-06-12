@@ -34,16 +34,16 @@ class KoXmlWriter;
 
 /**
  * A generic change, i.e. basically a collection of properties and a name.
- * Instances of KoGenChange can either be held in the KoGenChanges collection,
+ * Instances of KOdfGenericChange can either be held in the KoGenChanges collection,
  * or created (e.g. on the stack) and given to KoGenChanges::insert.
  *
  * Derived from code from KoGenStyle
  */
-class KOODF_EXPORT KoGenChange
+class KOODF_EXPORT KOdfGenericChange
 {
 public:
     /**
-     * Possible values for the "type" of the KoGenChange.
+     * Possible values for the "type" of the KOdfGenericChange.
      * If there is a still missing add it here so that it is possible to use the same
      * saving code in all applications.
      */
@@ -63,16 +63,16 @@ public:
      * but first you must define its properties and attributes.
      *
      */
-    explicit KoGenChange(KoGenChange::ChangeFormat changeFormat = KoGenChange::ODF_1_2);
-    ~KoGenChange();
+    explicit KOdfGenericChange(KOdfGenericChange::ChangeFormat changeFormat = KOdfGenericChange::ODF_1_2);
+    ~KOdfGenericChange();
 
     /// Set the type of this change
-    void setType(KoGenChange::Type type) {
+    void setType(KOdfGenericChange::Type type) {
         m_type = type;
     }
 
     /// set the format to be used to save changes
-    void setChangeFormat(KoGenChange::ChangeFormat changeFormat) {
+    void setChangeFormat(KOdfGenericChange::ChangeFormat changeFormat) {
         m_changeFormat = changeFormat;
     }
 
@@ -82,7 +82,7 @@ public:
     }
 
     /// Return the format to be used to save changes
-    KoGenChange::ChangeFormat changeFormat() const {
+    KOdfGenericChange::ChangeFormat changeFormat() const {
         return m_changeFormat;
     }
 
@@ -141,10 +141,10 @@ public:
      *  Solutions with only a hash value (not representative of the whole data)
      *  require us to write a hashtable by hand....
      */
-    bool operator<(const KoGenChange &other) const;
+    bool operator<(const KOdfGenericChange &other) const;
 
     /// Not needed for QMap, but can still be useful
-    bool operator==(const KoGenChange &other) const;
+    bool operator==(const KOdfGenericChange &other) const;
 
 private:
     QString changeMetaData(const QString &propName) const {

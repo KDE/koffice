@@ -22,7 +22,7 @@
 //KOffice includes
 #include "kotext_export.h"
 
-#include <KoGenChange.h>
+#include <KOdfGenericChange.h>
 #include <KoGenChanges.h>
 
 //Qt includes
@@ -62,7 +62,7 @@ public:
     bool displayChanges() const;
 
     /// returns the changeId of the changeElement registered for the given change. This may be an already existing changeId, if the change could be merged.
-    int changeId(const QString &title, KoGenChange::Type type, const QTextCursor &selection, const QTextFormat &newFormat, int prevCharChangeId, int nextCharChangeId);
+    int changeId(const QString &title, KOdfGenericChange::Type type, const QTextCursor &selection, const QTextFormat &newFormat, int prevCharChangeId, int nextCharChangeId);
 
     int formatChangeId(const QString &title, const QTextFormat &format, const QTextFormat &prevFormat, int existingChangeId);
     int insertChangeId(const QString &title, int existingChangeId);
@@ -80,7 +80,7 @@ public:
     int allChangeIds(QVector<int> &changesVector) const;
 
     bool containsInlineChanges(const QTextFormat &format);
-    int mergeableId(KoGenChange::Type type, const QString &title, int existingId) const;
+    int mergeableId(KOdfGenericChange::Type type, const QString &title, int existingId) const;
 
     QColor insertionBgColor() const;
     QColor deletionBgColor() const;
@@ -104,7 +104,7 @@ public:
     void acceptRejectChange(int changeId, bool set);
 
     /// Load/save methods
-    bool saveInlineChange(int changeId, KoGenChange &change);
+    bool saveInlineChange(int changeId, KOdfGenericChange &change);
 
     void loadOdfChanges(const KoXmlElement &element);
     int loadedChangeId(QString odfId);

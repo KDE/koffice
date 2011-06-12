@@ -33,7 +33,7 @@
 
 #include <KoChangeTracker.h>
 #include <KoChangeTrackerElement.h>
-#include <KoGenChange.h>
+#include <KOdfGenericChange.h>
 
 #include <QTextDocument>
 #include <QTextTable>
@@ -380,13 +380,13 @@ void TableLayout::drawBackground(QPainter *painter, const KoTextDocumentLayout::
 
                 if (changeElement && changeElement->isEnabled()) {
                     switch(changeElement->changeType()) {
-                        case KoGenChange::InsertChange:
+                        case KOdfGenericChange::InsertChange:
                             painter->fillRect(cellBoundingRect(tableCell), changeTracker->insertionBgColor());
                         break;
-                        case KoGenChange::FormatChange:
+                        case KOdfGenericChange::FormatChange:
                             painter->fillRect(cellBoundingRect(tableCell), changeTracker->formatChangeBgColor());
                         break;
-                        case KoGenChange::DeleteChange:
+                        case KOdfGenericChange::DeleteChange:
                             painter->fillRect(cellBoundingRect(tableCell), changeTracker->deletionBgColor());
                         break;
                     }

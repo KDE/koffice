@@ -20,7 +20,7 @@
 #ifndef TRACKEDCHANGEMODEL_H
 #define TRACKEDCHANGEMODEL_H
 
-#include <KoGenChange.h>
+#include <KOdfGenericChange.h>
 
 #include <QAbstractItemModel>
 #include <QHash>
@@ -38,7 +38,7 @@ struct ItemData
 {
     int changeId;
     QList<QPair<int, int> > changeRanges;
-    KoGenChange::Type changeType;
+    KOdfGenericChange::Type changeType;
     QString title;
     QString author;
 };
@@ -52,7 +52,7 @@ public:
     ~ModelItem();
 
     void setChangeId(int changeId);
-    void setChangeType(KoGenChange::Type type);
+    void setChangeType(KOdfGenericChange::Type type);
     void setChangeTitle(QString title);
     void setChangeAuthor(QString author);
 

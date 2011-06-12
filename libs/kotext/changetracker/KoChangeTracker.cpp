@@ -148,7 +148,7 @@ int KoChangeTracker::formatChangeId(const QString &title, const QTextFormat &for
         d->parents.insert(d->changeId, existingChangeId);
     }
 
-    KoChangeTrackerElement *changeElement = new KoChangeTrackerElement(title, KoGenChange::FormatChange);
+    KoChangeTrackerElement *changeElement = new KoChangeTrackerElement(title, KOdfGenericChange::FormatChange);
     changeElement->setChangeFormat(format);
     changeElement->setPrevFormat(prevFormat);
 
@@ -170,7 +170,7 @@ int KoChangeTracker::insertChangeId(const QString &title, int existingChangeId)
         d->parents.insert(d->changeId, existingChangeId);
     }
 
-    KoChangeTrackerElement *changeElement = new KoChangeTrackerElement(title, KoGenChange::InsertChange);
+    KoChangeTrackerElement *changeElement = new KoChangeTrackerElement(title, KOdfGenericChange::InsertChange);
 
     changeElement->setDate(KDateTime::currentLocalDateTime().toString(KDateTime::ISODate).replace(KGlobal::locale()->decimalSymbol(), QString(".")));
 //    changeElement->setDate(KDateTime::currentLocalDateTime().toString("Y-m-dTH:M:Sz")); //i must have misunderstood the API doc but it doesn't work.
@@ -190,7 +190,7 @@ int KoChangeTracker::deleteChangeId(const QString &title, const QTextDocumentFra
         d->parents.insert(d->changeId, existingChangeId);
     }
 
-    KoChangeTrackerElement *changeElement = new KoChangeTrackerElement(title, KoGenChange::DeleteChange);
+    KoChangeTrackerElement *changeElement = new KoChangeTrackerElement(title, KOdfGenericChange::DeleteChange);
 
     changeElement->setDate(KDateTime::currentLocalDateTime().toString(KDateTime::ISODate).replace(KGlobal::locale()->decimalSymbol(), QString(".")));
     changeElement->setCreator(d->changeAuthorName);
@@ -228,7 +228,7 @@ bool KoChangeTracker::containsInlineChanges(const QTextFormat &format)
     return false;
 }
 
-int KoChangeTracker::mergeableId(KoGenChange::Type type, const QString &title, int existingId) const
+int KoChangeTracker::mergeableId(KOdfGenericChange::Type type, const QString &title, int existingId) const
 {
     if (!existingId || !d->changes.value(existingId))
         return 0;
@@ -323,7 +323,7 @@ void KoChangeTracker::acceptRejectChange(int changeId, bool set)
     d->changes.value(changeId)->setAcceptedRejected(set);
 }
 
-bool KoChangeTracker::saveInlineChange(int changeId, KoGenChange &change)
+bool KoChangeTracker::saveInlineChange(int changeId, KOdfGenericChange &change)
 {
     if (!d->changes.contains(changeId))
         return false;
@@ -360,11 +360,11 @@ void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
                     forEachElement(region, tag) {
                         if (!region.isNull()) {
                             if (region.localName() == "insertion") {
-                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::text,"id"),KoGenChange::InsertChange);
+                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::text,"id"),KOdfGenericChange::InsertChange);
                             } else if (region.localName() == "format-change") {
-                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::text,"id"),KoGenChange::FormatChange);
+                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::text,"id"),KOdfGenericChange::FormatChange);
                             } else if (region.localName() == "deletion") {
-                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::text,"id"),KoGenChange::DeleteChange);
+                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::text,"id"),KOdfGenericChange::DeleteChange);
                             }
                             KoXmlElement metadata = region.namedItemNS(KoXmlNS::office,"change-info").toElement();
                             if (!metadata.isNull()) {
@@ -401,7 +401,7 @@ void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
                     KoChangeTrackerElement *changeElement = 0;
                     //Set the change element as an insertion element for now
                     //Will be changed to the correct type when actual changes referencing this change-id are encountered
-                    changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::delta,"change-id"),KoGenChange::InsertChange);
+                    changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::delta,"change-id"),KOdfGenericChange::InsertChange);
                     KoXmlElement metadata = tag.namedItemNS(KoXmlNS::delta,"change-info").toElement();
                     if (!metadata.isNull()) {
                            KoXmlElement date = metadata.namedItem("dc:date").toElement();
@@ -431,7 +431,7 @@ int KoChangeTracker::deletedChanges(QVector<KoChangeTrackerElement *> &deleteVec
 {
     int numAppendedItems = 0;
     foreach (KoChangeTrackerElement *element, d->changes.values()) {
-        if (element->changeType() == KoGenChange::DeleteChange && !element->acceptedRejected()) {
+        if (element->changeType() == KOdfGenericChange::DeleteChange && !element->acceptedRejected()) {
           deleteVector << element;
           numAppendedItems++;
         }

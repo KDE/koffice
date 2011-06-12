@@ -46,7 +46,7 @@
 #include <KoTextDocument.h>
 #include <KoChangeTracker.h>
 #include <KoChangeTrackerElement.h>
-#include <KoGenChange.h>
+#include <KOdfGenericChange.h>
 #include <KoTextBlockPaintStrategyBase.h>
 #include <KoImageData.h>
 #include <KoImageCollection.h>
@@ -229,7 +229,7 @@ bool Layout::addLine(QTextLine &line)
                         || !m_changeTracker->displayChanges()
                         || !m_changeTracker->containsInlineChanges(m_fragmentIterator.fragment().charFormat())
                         || !m_changeTracker->elementById(m_fragmentIterator.fragment().charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt())->isEnabled()
-                        || (m_changeTracker->elementById(m_fragmentIterator.fragment().charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt())->changeType() != KoGenChange::DeleteChange)
+                        || (m_changeTracker->elementById(m_fragmentIterator.fragment().charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt())->changeType() != KOdfGenericChange::DeleteChange)
                         || m_changeTracker->displayChanges()) {
                         height = qMax(height, m_fragmentIterator.fragment().charFormat().fontPointSize());
                         objectHeight = qMax(objectHeight, inlineCharHeight(m_fragmentIterator.fragment()));
@@ -1194,7 +1194,7 @@ void Layout::drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumen
                     || m_changeTracker->displayChanges()
                     || !m_changeTracker->containsInlineChanges(selection.format)
                     || !m_changeTracker->elementById(selection.format.property(KoCharacterStyle::ChangeTrackerId).toInt())->isEnabled()
-                    || (m_changeTracker->elementById(selection.format.property(KoCharacterStyle::ChangeTrackerId).toInt())->changeType() != KoGenChange::DeleteChange)) {
+                    || (m_changeTracker->elementById(selection.format.property(KoCharacterStyle::ChangeTrackerId).toInt())->changeType() != KOdfGenericChange::DeleteChange)) {
                     QTextLayout::FormatRange fr;
                     selection.format.property(KoCharacterStyle::ChangeTrackerId);
                     fr.start = begin - block.position();
@@ -1224,13 +1224,13 @@ void Layout::drawFrame(QTextFrame *frame, QPainter *painter, const KoTextDocumen
                     if (changeId && m_changeTracker && m_changeTracker->displayChanges()) {
                         KoChangeTrackerElement *changeElement = m_changeTracker->elementById(changeId);
                         switch(changeElement->changeType()) {
-                            case (KoGenChange::InsertChange):
+                            case (KOdfGenericChange::InsertChange):
                             format.setBackground(QBrush(m_changeTracker->insertionBgColor()));
                             break;
-                            case (KoGenChange::FormatChange):
+                            case (KOdfGenericChange::FormatChange):
                             format.setBackground(QBrush(m_changeTracker->formatChangeBgColor()));
                             break;
-                            case (KoGenChange::DeleteChange):
+                            case (KOdfGenericChange::DeleteChange):
                             format.setBackground(QBrush(m_changeTracker->deletionBgColor()));
                             break;
                         }

@@ -112,7 +112,7 @@ public:
             QTextCursor cursor(block);
             QTextBlockFormat prevFormat = cursor.blockFormat();
             if (registerChange)
-                editor->registerTrackedChange(cursor, KoGenChange::FormatChange, title, format, prevFormat, true);
+                editor->registerTrackedChange(cursor, KOdfGenericChange::FormatChange, title, format, prevFormat, true);
             cursor.setBlockFormat(format);
             block = block.next();
         }
@@ -183,7 +183,7 @@ public:
 
                 QTextCharFormat prevFormat(cursor.charFormat());
                 if (registerChange)
-                    editor->registerTrackedChange(cursor,KoGenChange::FormatChange,title, format, prevFormat, false); //this will lead to every fragment having a different change untill the change merging in registerTrackedChange checks also for formatChange or not?
+                    editor->registerTrackedChange(cursor,KOdfGenericChange::FormatChange,title, format, prevFormat, false); //this will lead to every fragment having a different change untill the change merging in registerTrackedChange checks also for formatChange or not?
 
                 iter++;
             }

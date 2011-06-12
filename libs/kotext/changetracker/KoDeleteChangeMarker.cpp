@@ -128,11 +128,11 @@ void KoDeleteChangeMarker::updatePosition(QTextInlineObject object, const QTextC
 
 void KoDeleteChangeMarker::saveOdf(KoShapeSavingContext &context)
 {
-    KoGenChange change;
+    KOdfGenericChange change;
     if (d->changeTracker->saveFormat() == KoChangeTracker::ODF_1_2) {
-        change.setChangeFormat(KoGenChange::ODF_1_2);
+        change.setChangeFormat(KOdfGenericChange::ODF_1_2);
     } else {
-        change.setChangeFormat(KoGenChange::DELTAXML);
+        change.setChangeFormat(KOdfGenericChange::DELTAXML);
     }
 
     QString changeName;

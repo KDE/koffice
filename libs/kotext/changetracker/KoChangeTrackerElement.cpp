@@ -30,7 +30,7 @@ public:
     ~Private() {}
 
     QString title;
-    KoGenChange::Type type;
+    KOdfGenericChange::Type type;
     QTextFormat changeFormat;
     QTextFormat prevFormat;
 
@@ -46,7 +46,7 @@ public:
     bool valid;
 };
 
-KoChangeTrackerElement::KoChangeTrackerElement(const QString& title, KoGenChange::Type type)
+KoChangeTrackerElement::KoChangeTrackerElement(const QString& title, KOdfGenericChange::Type type)
     :d(new Private())
 {
     d->title = title;
@@ -112,12 +112,12 @@ bool KoChangeTrackerElement::isValid() const
     return d->valid;
 }
 
-void KoChangeTrackerElement::setChangeType(KoGenChange::Type type)
+void KoChangeTrackerElement::setChangeType(KOdfGenericChange::Type type)
 {
     d->type = type;
 }
 
-KoGenChange::Type KoChangeTrackerElement::changeType() const
+KOdfGenericChange::Type KoChangeTrackerElement::changeType() const
 {
     return d->type;
 }

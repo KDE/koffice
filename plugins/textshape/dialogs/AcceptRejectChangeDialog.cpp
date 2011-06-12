@@ -26,11 +26,11 @@ AcceptRejectChangeDialog::AcceptRejectChangeDialog(KoChangeTracker *changeTracke
     ui.setupUi(this);
     ui.authorNameLineEdit->setText(changeTracker->elementById(changeId)->creator());
     ui.dateLineEdit->setText(changeTracker->elementById(changeId)->date());
-    KoGenChange::Type changeType = changeTracker->elementById(changeId)->changeType();
+    KOdfGenericChange::Type changeType = changeTracker->elementById(changeId)->changeType();
 
-    if (changeType == KoGenChange::InsertChange) {
+    if (changeType == KOdfGenericChange::InsertChange) {
         ui.changeTypeLineEdit->setText(QString("Insertion"));
-    } else if (changeType == KoGenChange::FormatChange) {
+    } else if (changeType == KOdfGenericChange::FormatChange) {
         ui.changeTypeLineEdit->setText(QString("Formatting"));
     } else {
         ui.changeTypeLineEdit->setText(QString("Deletion"));

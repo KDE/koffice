@@ -19,7 +19,7 @@
 
 #include "RejectChangeCommand.h"
 
-#include <KoGenChange.h>
+#include <KOdfGenericChange.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
@@ -61,7 +61,7 @@ void RejectChangeCommand::redo()
     if (m_first) {
         m_first = false;
         QTextCursor cursor(m_document);
-        if (m_changeTracker->elementById(m_changeId)->changeType() == KoGenChange::InsertChange) {
+        if (m_changeTracker->elementById(m_changeId)->changeType() == KOdfGenericChange::InsertChange) {
             QList<QPair<int, int> >::const_iterator it;
             QStack<QPair<int, int> > deleteRanges;
             for (it = m_changeRanges.constBegin(); it != m_changeRanges.constEnd(); it++) {
@@ -74,7 +74,7 @@ void RejectChangeCommand::redo()
                 cursor.deleteChar();
             }
         }
-        else if (m_changeTracker->elementById(m_changeId)->changeType() == KoGenChange::FormatChange) {
+        else if (m_changeTracker->elementById(m_changeId)->changeType() == KOdfGenericChange::FormatChange) {
             QList<QPair<int, int> >::const_iterator it;
             for (it = m_changeRanges.constBegin(); it != m_changeRanges.constEnd(); it++) {
                 cursor.setPosition((*it).first);
@@ -91,7 +91,7 @@ void RejectChangeCommand::redo()
                     cursor.setCharFormat(format);
                 }
             }
-        } else if (m_changeTracker->elementById(m_changeId)->changeType() == KoGenChange::DeleteChange){
+        } else if (m_changeTracker->elementById(m_changeId)->changeType() == KOdfGenericChange::DeleteChange){
             QList<QPair<int, int> >::const_iterator it;
             QStack<QPair<int, int> > deleteRanges;
             for (it = m_changeRanges.constBegin(); it != m_changeRanges.constEnd(); it++) {

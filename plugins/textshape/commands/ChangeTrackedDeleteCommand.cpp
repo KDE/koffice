@@ -180,7 +180,7 @@ void ChangeTrackedDeleteCommand::handleListItemDelete(QTextCursor &selection)
     selection.insertBlock();
     // Mark it as inserted content
     QTextCharFormat format = selection.charFormat();
-    m_tool->m_textEditor.data()->registerTrackedChange(selection, KoGenChange::InsertChange, i18n("Key Press"), format, format, false);
+    m_tool->m_textEditor.data()->registerTrackedChange(selection, KOdfGenericChange::InsertChange, i18n("Key Press"), format, format, false);
     //Paste the selected text
     TextPasteCommand *pasteCommand = new TextPasteCommand(QClipboard::Clipboard, m_tool, this);
     pasteCommand->redo();
@@ -258,7 +258,7 @@ void ChangeTrackedDeleteCommand::deleteSelection(QTextCursor &selection)
 
     if (KoTextDocument(document).changeTracker()->containsInlineChanges(checker.charFormat())) {
         int changeId = checker.charFormat().property(KoCharacterStyle::ChangeTrackerId).toInt();
-        if (KoTextDocument(document).changeTracker()->elementById(changeId)->changeType() == KoGenChange::DeleteChange) {
+        if (KoTextDocument(document).changeTracker()->elementById(changeId)->changeType() == KOdfGenericChange::DeleteChange) {
             QTextDocumentFragment prefix =  KoTextDocument(document).changeTracker()->elementById(changeId)->deleteData();
             selectionBegin -= (KoChangeTracker::fragmentLength(prefix) + 1 );
             KoTextDocument(document).changeTracker()->elementById(changeId)->setValid(false);

@@ -16,7 +16,7 @@ set(koodf_LIB_SRCS
     EncryptedStore.cpp
     KoEncryptionChecker.cpp
     KOdfFontData.cpp
-    KoGenChange.cpp
+    KOdfGenericChange.cpp
     KoGenChanges.cpp
     KoGenStyle.cpp
     KoGenStyles.cpp
@@ -75,7 +75,7 @@ install( FILES
     KoStyleStack.h
     KoOdfGraphicStyles.h
     KoOdfDocument.h
-    KoGenChange.h
+    KOdfGenericChange.h
     KoGenChanges.h
     KoEmbeddedDocumentSaver.h
     KOdfBorders.h

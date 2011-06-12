@@ -292,7 +292,7 @@ void KoTextLoader::Private::openChangeRegion(const KoXmlElement& element)
     changeElement->setEnabled(true);
 
     if ((element.localName() == "remove-leaving-content-start")) {
-        changeElement->setChangeType(KoGenChange::FormatChange);
+        changeElement->setChangeType(KOdfGenericChange::FormatChange);
 
         KoXmlElement spanElement = element.firstChild().toElement();
         QString styleName = spanElement.attributeNS(KoXmlNS::text, "style-name", QString());
@@ -307,7 +307,7 @@ void KoTextLoader::Private::openChangeRegion(const KoXmlElement& element)
         formatChangeInformation->setPreviousCharFormat(cf);
         changeTracker->setFormatChangeInformation(changeId, formatChangeInformation);
     } else if((element.localName() == "p") && attributeChange.isValid) {
-        changeElement->setChangeType(KoGenChange::FormatChange);
+        changeElement->setChangeType(KOdfGenericChange::FormatChange);
         QTextBlockFormat blockFormat;
         if (attributeChange.attributeName == "text:style-name") {
             QString styleName = attributeChange.attributeValue;
@@ -321,7 +321,7 @@ void KoTextLoader::Private::openChangeRegion(const KoXmlElement& element)
         paragraphChangeInformation->setPreviousBlockFormat(blockFormat);
         changeTracker->setFormatChangeInformation(changeId, paragraphChangeInformation);
     } else if((element.localName() == "list-item") && attributeChange.isValid) {
-        changeElement->setChangeType(KoGenChange::FormatChange);
+        changeElement->setChangeType(KOdfGenericChange::FormatChange);
         if (attributeChange.changeType == "insert") {
             KoListItemNumChangeInformation *listItemChangeInformation = new KoListItemNumChangeInformation(KoListItemNumChangeInformation::eNumberingRestarted);
             changeTracker->setFormatChangeInformation(changeId, listItemChangeInformation);
@@ -331,9 +331,9 @@ void KoTextLoader::Private::openChangeRegion(const KoXmlElement& element)
             changeTracker->setFormatChangeInformation(changeId, listItemChangeInformation);
         }
     } else if((element.attributeNS(KoXmlNS::delta, "insertion-type") == "insert-around-content")) {
-        changeElement->setChangeType(KoGenChange::FormatChange);
+        changeElement->setChangeType(KOdfGenericChange::FormatChange);
     } else if ((element.localName() == "removed-content") || (element.localName() == "merge")) {
-        changeElement->setChangeType(KoGenChange::DeleteChange);
+        changeElement->setChangeType(KOdfGenericChange::DeleteChange);
     }
 }
 
@@ -1810,7 +1810,7 @@ KoDeleteChangeMarker * KoTextLoader::Private::insertDeleteChangeMarker(QTextCurs
         KoChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
         changeElement->setDeleteChangeMarker(deleteChangemarker);
         changeElement->setEnabled(true);
-        changeElement->setChangeType(KoGenChange::DeleteChange);
+        changeElement->setChangeType(KOdfGenericChange::DeleteChange);
         KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
         if (layout) {
             KoInlineTextObjectManager *textObjectManager = layout->inlineTextObjectManager();

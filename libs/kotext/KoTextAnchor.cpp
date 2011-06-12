@@ -266,13 +266,13 @@ void KoTextAnchor::paint(QPainter &painter, QPaintDevice *, const QRectF &rect, 
         return;
 
     KoChangeTrackerElement *changeElement = changeTracker->elementById(changeId);
-    if (changeElement && changeElement->changeType() == KoGenChange::DeleteChange) {
+    if (changeElement && changeElement->changeType() == KOdfGenericChange::DeleteChange) {
         changePen.setColor(changeTracker->deletionBgColor());
         drawChangeRect = true;
-    } else if (changeElement && changeElement->changeType() == KoGenChange::InsertChange) {
+    } else if (changeElement && changeElement->changeType() == KOdfGenericChange::InsertChange) {
         changePen.setColor(changeTracker->insertionBgColor());
         drawChangeRect = true;
-    } else if (changeElement && changeElement->changeType() == KoGenChange::FormatChange) {
+    } else if (changeElement && changeElement->changeType() == KOdfGenericChange::FormatChange) {
         changePen.setColor(changeTracker->formatChangeBgColor());
     }
 

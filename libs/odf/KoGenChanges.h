@@ -24,7 +24,7 @@
 #include "koodf_export.h"
 #include "KoGenStyle.h"
 
-#include <KoGenChange.h>
+#include <KOdfGenericChange.h>
 
 /**
  * @brief Repository of changes used during saving of OASIS/OOo file.
@@ -52,18 +52,18 @@ public:
      *
      * @return the name for this change
      */
-    QString insert(const KoGenChange &change, const QString &name = QString());
+    QString insert(const KOdfGenericChange &change, const QString &name = QString());
 
     /**
      * Return the entire collection of styles
      * Use this for saving the styles
      */
-    QMap<KoGenChange, QString> changes() const;
+    QMap<KOdfGenericChange, QString> changes() const;
 
     /**
      * @return an existing change by name
      */
-    const KoGenChange *change(const QString &name) const;
+    const KOdfGenericChange *change(const QString &name) const;
 
     /**
      * Save changes.

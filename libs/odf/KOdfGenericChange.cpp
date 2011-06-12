@@ -19,7 +19,7 @@
 
 #include <QDateTime>
 
-#include "KoGenChange.h"
+#include "KOdfGenericChange.h"
 #include <KoXmlWriter.h>
 
 #include <kdebug.h>
@@ -39,15 +39,15 @@ static int compareMap(const QMap<QString, QString> &map1, const QMap<QString, QS
 }
 
 
-KoGenChange::KoGenChange(KoGenChange::ChangeFormat changeFormat):m_changeFormat(changeFormat)
+KOdfGenericChange::KOdfGenericChange(KOdfGenericChange::ChangeFormat changeFormat):m_changeFormat(changeFormat)
 {
 }
 
-KoGenChange::~KoGenChange()
+KOdfGenericChange::~KOdfGenericChange()
 {
 }
 
-void KoGenChange::writeChangeMetaData(KoXmlWriter* writer) const
+void KOdfGenericChange::writeChangeMetaData(KoXmlWriter* writer) const
 {
     QMap<QString, QString>::const_iterator it = m_changeMetaData.begin();
     const QMap<QString, QString>::const_iterator end = m_changeMetaData.end();
@@ -68,29 +68,29 @@ void KoGenChange::writeChangeMetaData(KoXmlWriter* writer) const
     }
 }
 
-void KoGenChange::writeChange(KoXmlWriter *writer, const QString &name) const
+void KOdfGenericChange::writeChange(KoXmlWriter *writer, const QString &name) const
 {
-    if (m_changeFormat == KoGenChange::ODF_1_2) {
+    if (m_changeFormat == KOdfGenericChange::ODF_1_2) {
         writeODF12Change(writer, name);
     } else {
         writeDeltaXmlChange(writer, name);
     }
 }
 
-void KoGenChange::writeODF12Change(KoXmlWriter *writer, const QString &name) const
+void KOdfGenericChange::writeODF12Change(KoXmlWriter *writer, const QString &name) const
 {
     writer->startElement("text:changed-region");
     writer->addAttribute("text:id", name);
 
     const char* elementName;
     switch (m_type) {
-    case KoGenChange::DeleteChange:
+    case KOdfGenericChange::DeleteChange:
         elementName = "text:deletion";
         break;
-    case KoGenChange::FormatChange:
+    case KOdfGenericChange::FormatChange:
         elementName = "text:format-change";
         break;
-    case KoGenChange::InsertChange:
+    case KOdfGenericChange::InsertChange:
         elementName = "text:insertion";
         break;
     default:
@@ -104,14 +104,14 @@ void KoGenChange::writeODF12Change(KoXmlWriter *writer, const QString &name) con
             writer->addCompleteElement(m_literalData.value("changeMetaData").toUtf8());
         writer->endElement(); // office:change-info
     }   
-    if ((m_type == KoGenChange::DeleteChange) && m_literalData.contains("deleteChangeXml"))
+    if ((m_type == KOdfGenericChange::DeleteChange) && m_literalData.contains("deleteChangeXml"))
         writer->addCompleteElement(m_literalData.value("deleteChangeXml").toUtf8());
 
     writer->endElement(); // text:insertion/format/deletion
     writer->endElement(); // text:change
 }
 
-void KoGenChange::writeDeltaXmlChange(KoXmlWriter *writer, const QString &name) const
+void KOdfGenericChange::writeDeltaXmlChange(KoXmlWriter *writer, const QString &name) const
 {
     writer->startElement("delta:change-transaction");
     writer->addAttribute("delta:change-id", name);
@@ -123,7 +123,7 @@ void KoGenChange::writeDeltaXmlChange(KoXmlWriter *writer, const QString &name) 
     writer->endElement(); // delta:change-transaction 
 }
 
-bool KoGenChange::operator<(const KoGenChange &other) const
+bool KOdfGenericChange::operator<(const KOdfGenericChange &other) const
 {
     Q_UNUSED(other);
 //    if (m_changeMetaData.value("dc-date") != other.m_changeMetaData.value("dc-date")) return QDateTime::fromString(m_changeMetaData.value("dc-date"), Qt::ISODate) < QDateTime::fromString(other.m_changeMetaData.value("dc-date"), Qt::ISODate);
@@ -132,7 +132,7 @@ bool KoGenChange::operator<(const KoGenChange &other) const
     return true;
 }
 
-bool KoGenChange::operator==(const KoGenChange &other) const
+bool KOdfGenericChange::operator==(const KOdfGenericChange &other) const
 {
     if (m_type != other.m_type) return false;
     if (m_changeMetaData.count() != other.m_changeMetaData.count()) return false;
