@@ -35,7 +35,7 @@
  * We use a container outside the changeTracker, as the change tracker is linked to the document of a TextShapeData and is then not aware of the other TextShapeData.
  *
  */
-class KOODF_EXPORT KOdfGenericChanges
+class KODF_EXPORT KOdfGenericChanges
 {
 public:
     KOdfGenericChanges();

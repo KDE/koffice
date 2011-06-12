@@ -28,7 +28,7 @@ class KXmlWriter;
 /**
  * This class is used to save embedded objects in ODF documents.
  */
-class KOODF_EXPORT KOdfEmbeddedDocumentSaver
+class KODF_EXPORT KOdfEmbeddedDocumentSaver
 {
 public:
     KOdfEmbeddedDocumentSaver();

@@ -39,7 +39,7 @@ class KOdfStorePrivate;
  * We call a "store" the file on the hard disk (the one the users sees)
  * and call a "file" a file inside the store.
  */
-class KOODF_EXPORT KOdfStore
+class KODF_EXPORT KOdfStore
 {
 public:
 

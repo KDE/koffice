@@ -85,53 +85,53 @@ enum Orientation {
  * (you may want to take care of those cases separately).
  * Usually passed to KPrinter::setPageSize().
  */
-KOODF_EXPORT QPrinter::PageSize printerPageSize(Format format);
+KODF_EXPORT QPrinter::PageSize printerPageSize(Format format);
 
 /**
  * Returns the width (in mm) for a given page format and orientation
  * 'Custom' isn't supported by this function, obviously.
  */
-KOODF_EXPORT qreal width(Format format, Orientation orientation = Landscape);
+KODF_EXPORT qreal width(Format format, Orientation orientation = Landscape);
 
 /**
  * Returns the height (in mm) for a given page format and orientation
  * 'Custom' isn't supported by this function, obviously.
  */
-KOODF_EXPORT qreal height(Format format, Orientation orientation  = Landscape);
+KODF_EXPORT qreal height(Format format, Orientation orientation  = Landscape);
 
 /**
  * Returns the internal name of the given page format.
  * Use for saving.
  */
-KOODF_EXPORT QString formatString(Format format);
+KODF_EXPORT QString formatString(Format format);
 
 /**
  * Convert a format string (internal name) to a page format value.
  * Use for loading.
  */
-KOODF_EXPORT Format formatFromString(const QString &string);
+KODF_EXPORT Format formatFromString(const QString &string);
 
 /**
  * Returns the default format (based on the KControl settings)
  */
-KOODF_EXPORT Format defaultFormat();
+KODF_EXPORT Format defaultFormat();
 
 /**
  * Returns the translated name of the given page format.
  * Use for showing the user.
  */
-KOODF_EXPORT QString name(Format format);
+KODF_EXPORT QString name(Format format);
 
 /**
  * Lists the translated names of all the available formats
  */
-KOODF_EXPORT QStringList allFormats();
+KODF_EXPORT QStringList allFormats();
 
 /**
  * Try to find the paper format for the given width and height (in mm).
  * Useful to some import filters.
  */
-KOODF_EXPORT Format guessFormat(qreal width, qreal height);
+KODF_EXPORT Format guessFormat(qreal width, qreal height);
 }
 
 #endif

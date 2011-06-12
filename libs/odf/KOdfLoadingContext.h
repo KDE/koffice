@@ -34,7 +34,7 @@ class KOdfStore;
  *
  * @author David Faure <faure@kde.org>
  */
-class KOODF_EXPORT KOdfLoadingContext
+class KODF_EXPORT KOdfLoadingContext
 {
 public:
     enum GeneratorType { Unknown, KOffice, OpenOffice, MicrosoftOffice };

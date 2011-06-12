@@ -29,7 +29,7 @@
  * Please make sure that you do not use the variables provided by this class in
  * the destructor of a static object.
  */
-class KOODF_EXPORT KOdfXmlNS
+class KODF_EXPORT KOdfXmlNS
 {
 public:
     static const QString office;

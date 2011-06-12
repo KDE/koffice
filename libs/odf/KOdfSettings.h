@@ -68,7 +68,7 @@
  * or item-map once, and then lookup multiple items inside it.
  * It also allows "drilling down" inside the tree in case of nesting.
  */
-class KOODF_EXPORT KOdfSettings
+class KODF_EXPORT KOdfSettings
 {
 public:
     /**
@@ -93,7 +93,7 @@ public:
     class IndexedMap;
     class NamedMap;
     /// Represents a collection of items (config-item or maps).
-    class KOODF_EXPORT Items
+    class KODF_EXPORT Items
     {
         friend class KOdfSettings;
         friend class IndexedMap;
@@ -151,7 +151,7 @@ public:
         const KOdfSettings *m_settings;
     };
 
-    class KOODF_EXPORT IndexedMap : public Map
+    class KODF_EXPORT IndexedMap : public Map
     {
         friend class Items;
         IndexedMap(const KoXmlElement& elem, const KOdfSettings* settings)
@@ -161,7 +161,7 @@ public:
         Items entry(int entryIndex) const;
     };
 
-    class KOODF_EXPORT NamedMap : public Map
+    class KODF_EXPORT NamedMap : public Map
     {
         friend class Items;
         NamedMap(const KoXmlElement &elem, const KOdfSettings *settings)

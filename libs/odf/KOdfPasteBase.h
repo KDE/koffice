@@ -30,7 +30,7 @@ class KoXmlElement;
 /**
  * This is a helper class to help you paste odf snippets.
  */
-class KOODF_EXPORT KOdfPasteBase
+class KODF_EXPORT KOdfPasteBase
 {
 public:
     KOdfPasteBase();

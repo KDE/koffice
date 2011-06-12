@@ -32,7 +32,7 @@
 /**
  * Repository of styles used during loading of OASIS/OOo file
  */
-class KOODF_EXPORT KOdfStylesReader
+class KODF_EXPORT KOdfStylesReader
 {
 public:
     /// constructor

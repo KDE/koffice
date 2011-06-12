@@ -43,7 +43,7 @@ class KoXmlElement;
  *
  */
 
-class KOODF_EXPORT KOdfBorders
+class KODF_EXPORT KOdfBorders
 {
 public:
 

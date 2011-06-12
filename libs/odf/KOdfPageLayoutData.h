@@ -88,24 +88,24 @@ struct KOdfPageLayoutData {
     /// page border definition
     KOdfBorders  border;
 
-    KOODF_EXPORT bool operator==(const KOdfPageLayoutData &l) const;
-    KOODF_EXPORT bool operator!=(const KOdfPageLayoutData& l) const;
+    KODF_EXPORT bool operator==(const KOdfPageLayoutData &l) const;
+    KODF_EXPORT bool operator!=(const KOdfPageLayoutData& l) const;
 
     /**
      * Save this page layout to ODF.
      */
-    KOODF_EXPORT KOdfGenericStyle saveOdf() const;
+    KODF_EXPORT KOdfGenericStyle saveOdf() const;
 
     /**
      * Load this page layout from ODF
      */
-    KOODF_EXPORT void loadOdf(const KoXmlElement &style);
+    KODF_EXPORT void loadOdf(const KoXmlElement &style);
 
     /**
      * Construct a page layout with the default page size depending on the locale settings,
      * default margins (2 cm), and portrait orientation.
      */
-    KOODF_EXPORT KOdfPageLayoutData();
+    KODF_EXPORT KOdfPageLayoutData();
 };
 
 #endif /* KOPAGELAYOUT_H */

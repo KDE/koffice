@@ -31,7 +31,7 @@ class QDomElement;
  * A KProperties is the (de-)serializable representation of
  * a key-value map. The serialisation format is XML.
  */
-class KOODF_EXPORT KProperties
+class KODF_EXPORT KProperties
 {
 public:
 

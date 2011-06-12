@@ -37,7 +37,7 @@ class KOdfEmbeddedDocumentSaver;
  * implementation is still in KoDocument, though that should probably
  * change.
  */
-class KOODF_EXPORT KOdfDocumentBase
+class KODF_EXPORT KOdfDocumentBase
 {
 public:
 

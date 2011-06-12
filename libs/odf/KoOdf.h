@@ -41,7 +41,7 @@ namespace KoOdf
      * @param documentType the document type
      * @return the mime type used for the given document type
      */
-    KOODF_EXPORT const char * mimeType(DocumentType documentType);
+    KODF_EXPORT const char * mimeType(DocumentType documentType);
 
     /**
      * Get the mime type
@@ -49,7 +49,7 @@ namespace KoOdf
      * @param documentType the document type
      * @return the mime type used for templates of the given document type
      */
-    KOODF_EXPORT const char * templateMimeType(DocumentType documentType);
+    KODF_EXPORT const char * templateMimeType(DocumentType documentType);
 
     /**
      * Get the mime type
@@ -59,7 +59,7 @@ namespace KoOdf
      *                      if false only the element is returned
      * @return the body element name for the given document type
      */
-    KOODF_EXPORT const char * bodyContentElement(DocumentType documentType, bool withNamespace);
+    KODF_EXPORT const char * bodyContentElement(DocumentType documentType, bool withNamespace);
 }
 
 #endif /* KOODF_H */

@@ -39,7 +39,7 @@ class KXmlWriter;
  *
  * Derived from code from KOdfGenericStyle
  */
-class KOODF_EXPORT KOdfGenericChange
+class KODF_EXPORT KOdfGenericChange
 {
 public:
     /**

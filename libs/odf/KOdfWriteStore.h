@@ -46,7 +46,7 @@ class KOdfStore;
  *
  * @author: David Faure <faure@kde.org>
  */
-class KOODF_EXPORT KOdfWriteStore
+class KODF_EXPORT KOdfWriteStore
 {
 public:
     /// @param store recontents the property of the caller

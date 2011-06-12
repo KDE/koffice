@@ -55,7 +55,7 @@ class KoXmlElement;
 *
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KOODF_EXPORT KoXmlNode
+class KODF_EXPORT KoXmlNode
 {
 public:
 
@@ -142,7 +142,7 @@ protected:
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KOODF_EXPORT KoXmlElement: public KoXmlNode
+class KODF_EXPORT KoXmlElement: public KoXmlNode
 {
 public:
     KoXmlElement();
@@ -171,7 +171,7 @@ private:
 * KoXmlText represents a text in a DOM tree.
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KOODF_EXPORT KoXmlText: public KoXmlNode
+class KODF_EXPORT KoXmlText: public KoXmlNode
 {
 public:
     KoXmlText();
@@ -194,7 +194,7 @@ private:
 * KoXmlCDATASection represents a CDATA section in a DOM tree.
 * @author Ariya Hidayat <ariya@kde.org>
 */
-class KOODF_EXPORT KoXmlCDATASection: public KoXmlText
+class KODF_EXPORT KoXmlCDATASection: public KoXmlText
 {
 public:
     KoXmlCDATASection();
@@ -218,7 +218,7 @@ private:
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KOODF_EXPORT KoXmlDocumentType: public KoXmlNode
+class KODF_EXPORT KoXmlDocumentType: public KoXmlNode
 {
 public:
     KoXmlDocumentType();
@@ -247,7 +247,7 @@ private:
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KOODF_EXPORT KoXmlDocument: public KoXmlNode
+class KODF_EXPORT KoXmlDocument: public KoXmlNode
 {
 public:
     KoXmlDocument();
@@ -322,38 +322,38 @@ namespace KoXml
  *
  * Note: do *NOT* use getElementsByTagNameNS, it's recursive!
  */
-KOODF_EXPORT KoXmlElement namedItemNS(const KoXmlNode& node,
+KODF_EXPORT KoXmlElement namedItemNS(const KoXmlNode& node,
                                         const QString& nsURI, const QString& localName);
 
 /**
  * Explicitly load child nodes of specified node, up to given depth.
  * This function has no effect if QDom is used.
  */
-KOODF_EXPORT void load(KoXmlNode& node, int depth = 1);
+KODF_EXPORT void load(KoXmlNode& node, int depth = 1);
 
 /**
  * Unload child nodes of specified node.
  * This function has no effect if QDom is used.
  */
-KOODF_EXPORT void unload(KoXmlNode& node);
+KODF_EXPORT void unload(KoXmlNode& node);
 
 /**
  * Get the number of child nodes of specified node.
  */
-KOODF_EXPORT int childNodesCount(const KoXmlNode& node);
+KODF_EXPORT int childNodesCount(const KoXmlNode& node);
 
 /**
  * Return the name of all attributes of specified node.
  */
-KOODF_EXPORT QStringList attributeNames(const KoXmlNode& node);
+KODF_EXPORT QStringList attributeNames(const KoXmlNode& node);
 
 /**
  * Convert KoXml classes to the corresponding QDom classes, which has
  * 'ownerDoc' as the owner document (QDomDocument instance).
  */
-KOODF_EXPORT QDomNode asQDomNode(QDomDocument ownerDoc, const KoXmlNode& node);
-KOODF_EXPORT QDomElement asQDomElement(QDomDocument ownerDoc, const KoXmlElement& element);
-KOODF_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KoXmlDocument& document);
+KODF_EXPORT QDomNode asQDomNode(QDomDocument ownerDoc, const KoXmlNode& node);
+KODF_EXPORT QDomElement asQDomElement(QDomDocument ownerDoc, const KoXmlElement& element);
+KODF_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KoXmlDocument& document);
 
 /*
  * Load an XML document from specified device to a document. You can of
@@ -364,7 +364,7 @@ KOODF_EXPORT QDomDocument asQDomDocument(QDomDocument ownerDoc, const KoXmlDocum
  *
  * Note: it is assumed that the XML uses UTF-8 encoding.
  */
-KOODF_EXPORT bool setDocument(KoXmlDocument& doc, QIODevice* device,
+KODF_EXPORT bool setDocument(KoXmlDocument& doc, QIODevice* device,
                                 bool namespaceProcessing, QString* errorMsg = 0,
                                 int* errorLine = 0, int* errorColumn = 0);
 }

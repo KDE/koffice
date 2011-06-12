@@ -55,7 +55,7 @@
  * When displaying a value to the user, the value is converted to the user's unit
  * of choice, and rounded to a reasonable precision to avoid 0.999999
  */
-class KOODF_EXPORT KUnit
+class KODF_EXPORT KUnit
 {
 public:
     /** Length units supported by KOffice. */
@@ -208,7 +208,7 @@ private:
 };
 
 #ifndef QT_NO_DEBUG_STREAM
-KOODF_EXPORT QDebug operator<<(QDebug, const KUnit &);
+KODF_EXPORT QDebug operator<<(QDebug, const KUnit &);
 #endif
 
 Q_DECLARE_METATYPE(KUnit)

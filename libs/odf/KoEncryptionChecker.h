@@ -24,7 +24,7 @@
 namespace KoEncryptionChecker
 {
 
-KOODF_EXPORT bool isEncryptionSupported();
+KODF_EXPORT bool isEncryptionSupported();
 
 }
 

@@ -28,7 +28,7 @@
 #include <QtGlobal>
 
 /** structure for columns */
-struct KOODF_EXPORT KOdfColumnData {
+struct KODF_EXPORT KOdfColumnData {
     int columns;
     qreal columnSpacing;
     bool operator==(const KOdfColumnData& rhs) const {

@@ -34,7 +34,7 @@
  * document in memory (like QDom does), and avoids using QTextStream at all
  * (which in Qt3 has major performance issues when converting to utf8).
  */
-class KOODF_EXPORT KXmlWriter
+class KODF_EXPORT KXmlWriter
 {
 public:
     /**

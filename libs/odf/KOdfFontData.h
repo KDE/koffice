@@ -35,7 +35,7 @@ class KoFontFacePrivate;
  * @todo add more parameters.
  * @todo add class KoFontFaceDeclarations instead of adding methods to KOdfGenericStyle?
  */
-class KOODF_EXPORT KOdfFontData
+class KODF_EXPORT KOdfFontData
 {
 public:
     /**

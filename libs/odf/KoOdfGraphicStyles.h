@@ -40,30 +40,30 @@ class KOdfLoadingContext;
 
 namespace KoOdfGraphicStyles
 {
-    KOODF_EXPORT void saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush &brush);
+    KODF_EXPORT void saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush &brush);
 
-    KOODF_EXPORT void saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KOdfGenericStyles &mainStyles, const QPen &pen);
+    KODF_EXPORT void saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KOdfGenericStyles &mainStyles, const QPen &pen);
 
-    KOODF_EXPORT QString saveOdfHatchStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
+    KODF_EXPORT QString saveOdfHatchStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
 
     /// Saves gradient style of brush into mainStyles and returns the styles name
-    KOODF_EXPORT QString saveOdfGradientStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
+    KODF_EXPORT QString saveOdfGradientStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
 
     /// Loads gradient style from style stack and stylesReader adapted to the given size and returns a brush
-    KOODF_EXPORT QBrush loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfStylesReader &stylesReader, const QSizeF &size);
+    KODF_EXPORT QBrush loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfStylesReader &stylesReader, const QSizeF &size);
 
     /// Loads gradient style with the given name from style stack and stylesReader adapted to the given size and returns a brush
-    KOODF_EXPORT QBrush loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size);
+    KODF_EXPORT QBrush loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size);
 
-    KOODF_EXPORT QBrush loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString &fill,  const KOdfStylesReader &stylesReader);
+    KODF_EXPORT QBrush loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString &fill,  const KOdfStylesReader &stylesReader);
 
-    KOODF_EXPORT QPen loadOdfStrokeStyle(const KOdfStyleStack &styleStack, const QString &stroke, const KOdfStylesReader &stylesReader);
+    KODF_EXPORT QPen loadOdfStrokeStyle(const KOdfStyleStack &styleStack, const QString &stroke, const KOdfStylesReader &stylesReader);
 
     /// Helper function to parse a transformation attribute
-    KOODF_EXPORT QTransform loadTransformation(const QString &transformation);
+    KODF_EXPORT QTransform loadTransformation(const QString &transformation);
 
     /// Helper function to create a transformation attribute
-    KOODF_EXPORT QString saveTransformation(const QTransform &transformation, bool appendTranslateUnit = true);
+    KODF_EXPORT QString saveTransformation(const QTransform &transformation, bool appendTranslateUnit = true);
 };
 
 #endif /* KOODFGRAPHICSTYLES_H */

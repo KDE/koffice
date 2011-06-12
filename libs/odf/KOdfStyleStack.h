@@ -56,7 +56,7 @@
  *  or KOdfLoadingContext::addStyles to automatically push a style and all its
  *  parent styles onto the stack.
  */
-class KOODF_EXPORT KOdfStyleStack
+class KODF_EXPORT KOdfStyleStack
 {
 public:
     /**

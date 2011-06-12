@@ -37,7 +37,7 @@ class KoXmlElement;
  *
  * @author: David Faure <faure@kde.org>
  */
-class KOODF_EXPORT KOdfStoreReader
+class KODF_EXPORT KOdfStoreReader
 {
 public:
     /// @param store recontents the property of the caller

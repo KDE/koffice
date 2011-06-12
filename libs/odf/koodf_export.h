@@ -23,18 +23,18 @@
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
 #include <kdemacros.h>
 
-#ifndef KOODF_EXPORT
+#ifndef KODF_EXPORT
 # if defined(MAKE_KOODF_LIB)
 /* We are building this library */
-#  define KOODF_EXPORT KDE_EXPORT
+#  define KODF_EXPORT KDE_EXPORT
 # else
 /* We are using this library */
-#  define KOODF_EXPORT KDE_IMPORT
+#  define KODF_EXPORT KDE_IMPORT
 # endif
 #endif
 
 # ifndef KOODF_EXPORT_DEPRECATED
-#  define KOODF_EXPORT_DEPRECATED KDE_DEPRECATED KOODF_EXPORT
+#  define KOODF_EXPORT_DEPRECATED KDE_DEPRECATED KODF_EXPORT
 # endif
 
 #endif

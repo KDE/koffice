@@ -41,7 +41,7 @@ class KXmlWriter;
  *
  * @author David Faure <faure@kde.org>
  */
-class KOODF_EXPORT KOdfGenericStyle
+class KODF_EXPORT KOdfGenericStyle
 {
 public:
     /**

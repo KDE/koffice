@@ -28,7 +28,7 @@
  * it can be used to create a QDomDocument from it, to be written or read
  * using QDataStream or to be written using QTextStream
  */
-class KOODF_EXPORT KOdfStorageDevice : public QIODevice
+class KODF_EXPORT KOdfStorageDevice : public QIODevice
 {
 public:
     /// Note: KOdfStore::open() should be called before calling this.
