@@ -21,7 +21,7 @@
 
 #include "part/Digest.h" // FIXME detach from part
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <KCodecs>
 #include <KDebug>
@@ -103,8 +103,8 @@ void KCProtectableObject::loadXmlProtection(const KoXmlElement& element)
 
 void KCProtectableObject::loadOdfProtection(const KoXmlElement& element)
 {
-    if (element.hasAttributeNS(KoXmlNS::table, "protection-key")) {
-        QString p = element.attributeNS(KoXmlNS::table, "protection-key", QString());
+    if (element.hasAttributeNS(KOdfXmlNS::table, "protection-key")) {
+        QString p = element.attributeNS(KOdfXmlNS::table, "protection-key", QString());
         if (!p.isNull()) {
             QByteArray str(p.toUtf8());
             kDebug(30518) <<"Decoding password:" << str;

@@ -22,7 +22,7 @@
 #include <KOdfStore.h>
 #include <KOdfStoreReader.h>
 #include <KOdfLoadingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShape.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeLoadingContext.h>
@@ -254,7 +254,7 @@ void OdfCollectionLoader::loadNativeFile(const QString& path)
     m_shapeLoadingContext = new KoShapeLoadingContext(*m_loadingContext, 0);
 
     KoXmlElement content = m_odfStore->contentDoc().documentElement();
-    KoXmlElement realBody ( KoXml::namedItemNS( content, KoXmlNS::office, "body" ) );
+    KoXmlElement realBody ( KoXml::namedItemNS( content, KOdfXmlNS::office, "body" ) );
 
     if (realBody.isNull()) {
         kError() << "No body tag found!" << endl;
@@ -262,7 +262,7 @@ void OdfCollectionLoader::loadNativeFile(const QString& path)
         return;
     }
 
-    m_body = KoXml::namedItemNS(realBody, KoXmlNS::office, "drawing");
+    m_body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "drawing");
 
     if (m_body.isNull()) {
         kError() << "No office:drawing tag found!" << endl;

@@ -28,7 +28,7 @@
 
 #include <kdebug.h>
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfPageLayoutData.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfLoadingContext.h>
@@ -147,14 +147,14 @@ bool KoPAPageBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &l
 
     KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
     styleStack.save();
-    loadingContext.odfLoadingContext().fillStyleStack(element, KoXmlNS::draw, "style-name", "drawing-page");
+    loadingContext.odfLoadingContext().fillStyleStack(element, KOdfXmlNS::draw, "style-name", "drawing-page");
     styleStack.setTypeProperties("drawing-page");
 
     loadOdfPageTag(element, paContext);
     styleStack.restore();
 
     // load layers and shapes
-    const KoXmlElement &pageLayerSet = KoXml::namedItemNS(element, KoXmlNS::draw, "layer-set");
+    const KoXmlElement &pageLayerSet = KoXml::namedItemNS(element, KOdfXmlNS::draw, "layer-set");
 
     const KoXmlElement &usedPageLayerSet = pageLayerSet.isNull() ? loadingContext.odfLoadingContext().stylesReader().layerSet(): pageLayerSet;
 
@@ -203,7 +203,7 @@ void KoPAPageBase::loadOdfPageTag(const KoXmlElement &element,
     Q_UNUSED(element);
     KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
 
-    if (styleStack.hasProperty(KoXmlNS::draw, "fill")) {
+    if (styleStack.hasProperty(KOdfXmlNS::draw, "fill")) {
         setBackground(loadOdfFill(loadingContext));
     }
 }

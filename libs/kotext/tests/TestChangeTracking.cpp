@@ -40,7 +40,7 @@
 #include <KOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfGenericStyles.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <kcomponentdata.h>
 #include <KoTextDebug_p.h>
 #include <KoListStyle.h>
@@ -97,8 +97,8 @@ QTextDocument *TestChangeTracking::documentFromOdt(const QString &odt, const QSt
     }
 
     KoXmlElement content = odfReadStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
-    KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, "text");
+    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
+    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
 
     KoStyleManager *styleManager = new KoStyleManager;
     KoChangeTracker *changeTracker = new KoChangeTracker;

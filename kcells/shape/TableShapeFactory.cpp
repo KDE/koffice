@@ -31,7 +31,7 @@
 #include <KoToolRegistry.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeLoadingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <KCMap.h>
 
@@ -56,7 +56,7 @@ TableShapeFactory::TableShapeFactory(QObject* parent)
 {
     setToolTip(i18n("Table Shape"));
     setIcon("spreadsheetshape");
-    setOdfElementNames(KoXmlNS::table, QStringList() << "table");
+    setOdfElementNames(KOdfXmlNS::table, QStringList() << "table");
 }
 
 TableShapeFactory::~TableShapeFactory()
@@ -66,7 +66,7 @@ TableShapeFactory::~TableShapeFactory()
 bool TableShapeFactory::supports(const KoXmlElement &element, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
-    return (element.namespaceURI() == KoXmlNS::table && element.localName() == "table");
+    return (element.namespaceURI() == KOdfXmlNS::table && element.localName() == "table");
 }
 
 KoShape *TableShapeFactory::createDefaultShape(KoResourceManager *documentResources) const

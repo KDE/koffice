@@ -25,7 +25,7 @@
 #include "styles/KoCharacterStyle.h"
 #include "KoChangeTrackerElement.h"
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoTextDocument.h>
 #include <KoTextDocumentLayout.h>
@@ -349,7 +349,7 @@ KoFormatChangeInformation *KoChangeTracker::formatChangeInformation(int formatCh
 
 void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
 {
-    if (element.namespaceURI() == KoXmlNS::text) {
+    if (element.namespaceURI() == KOdfXmlNS::text) {
         KoXmlElement tag;
         forEachElement(tag, element) {
             if (! tag.isNull()) {
@@ -360,13 +360,13 @@ void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
                     forEachElement(region, tag) {
                         if (!region.isNull()) {
                             if (region.localName() == "insertion") {
-                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::text,"id"),KOdfGenericChange::InsertChange);
+                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KOdfXmlNS::text,"id"),KOdfGenericChange::InsertChange);
                             } else if (region.localName() == "format-change") {
-                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::text,"id"),KOdfGenericChange::FormatChange);
+                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KOdfXmlNS::text,"id"),KOdfGenericChange::FormatChange);
                             } else if (region.localName() == "deletion") {
-                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::text,"id"),KOdfGenericChange::DeleteChange);
+                                changeElement = new KoChangeTrackerElement(tag.attributeNS(KOdfXmlNS::text,"id"),KOdfGenericChange::DeleteChange);
                             }
-                            KoXmlElement metadata = region.namedItemNS(KoXmlNS::office,"change-info").toElement();
+                            KoXmlElement metadata = region.namedItemNS(KOdfXmlNS::office,"change-info").toElement();
                             if (!metadata.isNull()) {
                                 KoXmlElement date = metadata.namedItem("dc:date").toElement();
                                 if (!date.isNull()) {
@@ -385,7 +385,7 @@ void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
                             }
                             changeElement->setEnabled(d->recordChanges);
                             d->changes.insert( d->changeId, changeElement);
-                            d->loadedChanges.insert(tag.attributeNS(KoXmlNS::text,"id"), d->changeId++);
+                            d->loadedChanges.insert(tag.attributeNS(KOdfXmlNS::text,"id"), d->changeId++);
                         }
                     }
                 }
@@ -401,8 +401,8 @@ void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
                     KoChangeTrackerElement *changeElement = 0;
                     //Set the change element as an insertion element for now
                     //Will be changed to the correct type when actual changes referencing this change-id are encountered
-                    changeElement = new KoChangeTrackerElement(tag.attributeNS(KoXmlNS::delta,"change-id"),KOdfGenericChange::InsertChange);
-                    KoXmlElement metadata = tag.namedItemNS(KoXmlNS::delta,"change-info").toElement();
+                    changeElement = new KoChangeTrackerElement(tag.attributeNS(KOdfXmlNS::delta,"change-id"),KOdfGenericChange::InsertChange);
+                    KoXmlElement metadata = tag.namedItemNS(KOdfXmlNS::delta,"change-info").toElement();
                     if (!metadata.isNull()) {
                            KoXmlElement date = metadata.namedItem("dc:date").toElement();
                            if (!date.isNull()) {
@@ -415,7 +415,7 @@ void KoChangeTracker::loadOdfChanges(const KoXmlElement& element)
                     }
                     changeElement->setEnabled(d->recordChanges);
                     d->changes.insert( d->changeId, changeElement);
-                    d->loadedChanges.insert(tag.attributeNS(KoXmlNS::delta,"change-id"), d->changeId++);
+                    d->loadedChanges.insert(tag.attributeNS(KOdfXmlNS::delta,"change-id"), d->changeId++);
                }
            }
         }

@@ -118,7 +118,7 @@
 #include <KOdfStore.h>
 #include <KoViewConverter.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 // KDE
 #include <KAction>
@@ -2942,12 +2942,12 @@ bool CellToolBase::paste()
 
         // from KCellsDoc::loadOdf:
         KoXmlElement content = doc.documentElement();
-        KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
+        KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
         if (realBody.isNull()) {
             kDebug(36005) << "Invalid OASIS OpenDocument file. No office:body tag found.";
             return false;
         }
-        KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, "spreadsheet");
+        KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "spreadsheet");
 
         if (body.isNull()) {
             kError(36005) << "No office:spreadsheet found!" << endl;

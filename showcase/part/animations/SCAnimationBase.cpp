@@ -19,7 +19,7 @@
 
 #include "SCAnimationBase.h"
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include "SCDurationParser.h"
 #include "KoXmlReader.h"
 #include "KoXmlWriter.h"
@@ -49,11 +49,11 @@ int SCAnimationBase::duration() const
 bool SCAnimationBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     Q_UNUSED(context)
-    m_begin = SCDurationParser::durationMs(element.attributeNS(KoXmlNS::smil, "begin"));
+    m_begin = SCDurationParser::durationMs(element.attributeNS(KOdfXmlNS::smil, "begin"));
     if (m_begin == -1) {
         m_begin = 0;
     }
-    m_duration = SCDurationParser::durationMs(element.attributeNS(KoXmlNS::smil, "dur"));
+    m_duration = SCDurationParser::durationMs(element.attributeNS(KOdfXmlNS::smil, "dur"));
     if (m_duration == -1) {
         m_duration = 1;
     }

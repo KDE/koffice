@@ -25,7 +25,7 @@
 #include <boost/multi_index/ordered_index.hpp>
 
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include "SCPageEffectStrategy.h"
 #include "SCDurationParser.h"
@@ -107,20 +107,20 @@ SCPageEffect * SCPageEffectFactory::createPageEffect(const KoXmlElement &element
     SCPageEffectStrategy * strategy = 0;
     SCPageEffect * pageEffect = 0;
 
-    if (element.hasAttributeNS(KoXmlNS::smil, "subtype")) {
-        QString smilSubType(element.attributeNS(KoXmlNS::smil, "subtype"));
+    if (element.hasAttributeNS(KOdfXmlNS::smil, "subtype")) {
+        QString smilSubType(element.attributeNS(KOdfXmlNS::smil, "subtype"));
         bool reverse = false;
-        if (element.attributeNS(KoXmlNS::smil, "direction") == "reverse") {
+        if (element.attributeNS(KOdfXmlNS::smil, "direction") == "reverse") {
             reverse = true;
         }
 
         int duration = 5000;
-        if (element.hasAttributeNS(KoXmlNS::smil, "dur")) {
-            duration = SCDurationParser::durationMs(element.attributeNS(KoXmlNS::smil, "dur"));
+        if (element.hasAttributeNS(KOdfXmlNS::smil, "dur")) {
+            duration = SCDurationParser::durationMs(element.attributeNS(KOdfXmlNS::smil, "dur"));
             // TODO what if duration is -1
         }
-        else if (element.hasAttributeNS(KoXmlNS::presentation, "transition-speed")) {
-            QString transitionSpeed(element.attributeNS(KoXmlNS::presentation, "transition-speed"));
+        else if (element.hasAttributeNS(KOdfXmlNS::presentation, "transition-speed")) {
+            QString transitionSpeed(element.attributeNS(KOdfXmlNS::presentation, "transition-speed"));
             if (transitionSpeed == "fast") {
                 duration = 2000;
             }

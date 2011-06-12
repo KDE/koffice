@@ -49,9 +49,9 @@ public:
      * Struct to store data about additional attributes that should be loaded during
      * the shape loading.
      *
-     * Make sure all parameters point to const char * that stay around. e.g. The a KoXmlNS or
+     * Make sure all parameters point to const char * that stay around. e.g. The a KOdfXmlNS or
      * a "tag" defined string e.g.
-     * AdditionalAttributeData(KoXmlNS::presentation, "placeholder", "presentation:placeholder")
+     * AdditionalAttributeData(KOdfXmlNS::presentation, "placeholder", "presentation:placeholder")
      */
     struct AdditionalAttributeData {
         AdditionalAttributeData(const QString &ns, const QString &tag, const QString &name)

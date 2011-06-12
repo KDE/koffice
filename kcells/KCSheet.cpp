@@ -54,7 +54,7 @@
 #include <KoShapeSavingContext.h>
 #include <KOdfStyleStack.h>
 #include <KUnit.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KOdfStore.h>
 #include <KoText.h>
@@ -1276,22 +1276,22 @@ bool KCSheet::loadSheetStyleFormat(KoXmlElement *style)
 {
     QString hleft, hmiddle, hright;
     QString fleft, fmiddle, fright;
-    KoXmlNode header = KoXml::namedItemNS(*style, KoXmlNS::style, "header");
+    KoXmlNode header = KoXml::namedItemNS(*style, KOdfXmlNS::style, "header");
 
     if (!header.isNull()) {
         kDebug(36003) << "Header exists";
-        KoXmlNode part = KoXml::namedItemNS(header, KoXmlNS::style, "region-left");
+        KoXmlNode part = KoXml::namedItemNS(header, KOdfXmlNS::style, "region-left");
         if (!part.isNull()) {
             hleft = getPart(part);
             kDebug(36003) << "Header left:" << hleft;
         } else
             kDebug(36003) << "KCStyle:region:left doesn't exist!";
-        part = KoXml::namedItemNS(header, KoXmlNS::style, "region-center");
+        part = KoXml::namedItemNS(header, KOdfXmlNS::style, "region-center");
         if (!part.isNull()) {
             hmiddle = getPart(part);
             kDebug(36003) << "Header middle:" << hmiddle;
         }
-        part = KoXml::namedItemNS(header, KoXmlNS::style, "region-right");
+        part = KoXml::namedItemNS(header, KOdfXmlNS::style, "region-right");
         if (!part.isNull()) {
             hright = getPart(part);
             kDebug(36003) << "Header right:" << hright;
@@ -1300,38 +1300,38 @@ bool KCSheet::loadSheetStyleFormat(KoXmlElement *style)
         hleft.append(getPart(header));
     }
     //TODO implement it under kcells
-    KoXmlNode headerleft = KoXml::namedItemNS(*style, KoXmlNS::style, "header-left");
+    KoXmlNode headerleft = KoXml::namedItemNS(*style, KOdfXmlNS::style, "header-left");
     if (!headerleft.isNull()) {
         KoXmlElement e = headerleft.toElement();
-        if (e.hasAttributeNS(KoXmlNS::style, "display"))
-            kDebug(36003) << "header.hasAttribute( style:display ) :" << e.hasAttributeNS(KoXmlNS::style, "display");
+        if (e.hasAttributeNS(KOdfXmlNS::style, "display"))
+            kDebug(36003) << "header.hasAttribute( style:display ) :" << e.hasAttributeNS(KOdfXmlNS::style, "display");
         else
             kDebug(36003) << "header left doesn't has attribute  style:display";
     }
     //TODO implement it under kcells
-    KoXmlNode footerleft = KoXml::namedItemNS(*style, KoXmlNS::style, "footer-left");
+    KoXmlNode footerleft = KoXml::namedItemNS(*style, KOdfXmlNS::style, "footer-left");
     if (!footerleft.isNull()) {
         KoXmlElement e = footerleft.toElement();
-        if (e.hasAttributeNS(KoXmlNS::style, "display"))
-            kDebug(36003) << "footer.hasAttribute( style:display ) :" << e.hasAttributeNS(KoXmlNS::style, "display");
+        if (e.hasAttributeNS(KOdfXmlNS::style, "display"))
+            kDebug(36003) << "footer.hasAttribute( style:display ) :" << e.hasAttributeNS(KOdfXmlNS::style, "display");
         else
             kDebug(36003) << "footer left doesn't has attribute  style:display";
     }
 
-    KoXmlNode footer = KoXml::namedItemNS(*style, KoXmlNS::style, "footer");
+    KoXmlNode footer = KoXml::namedItemNS(*style, KOdfXmlNS::style, "footer");
 
     if (!footer.isNull()) {
-        KoXmlNode part = KoXml::namedItemNS(footer, KoXmlNS::style, "region-left");
+        KoXmlNode part = KoXml::namedItemNS(footer, KOdfXmlNS::style, "region-left");
         if (!part.isNull()) {
             fleft = getPart(part);
             kDebug(36003) << "Footer left:" << fleft;
         }
-        part = KoXml::namedItemNS(footer, KoXmlNS::style, "region-center");
+        part = KoXml::namedItemNS(footer, KOdfXmlNS::style, "region-center");
         if (!part.isNull()) {
             fmiddle = getPart(part);
             kDebug(36003) << "Footer middle:" << fmiddle;
         }
-        part = KoXml::namedItemNS(footer, KoXmlNS::style, "region-right");
+        part = KoXml::namedItemNS(footer, KOdfXmlNS::style, "region-right");
         if (!part.isNull()) {
             fright = getPart(part);
             kDebug(36003) << "Footer right:" << fright;
@@ -1355,35 +1355,35 @@ void KCSheet::replaceMacro(QString & text, const QString & old, const QString & 
 QString KCSheet::getPart(const KoXmlNode & part)
 {
     QString result;
-    KoXmlElement e = KoXml::namedItemNS(part, KoXmlNS::text, "p");
+    KoXmlElement e = KoXml::namedItemNS(part, KOdfXmlNS::text, "p");
     while (!e.isNull()) {
         QString text = e.text();
 
-        KoXmlElement macro = KoXml::namedItemNS(e, KoXmlNS::text, "time");
+        KoXmlElement macro = KoXml::namedItemNS(e, KOdfXmlNS::text, "time");
         if (!macro.isNull())
             replaceMacro(text, macro.text(), "<time>");
 
-        macro = KoXml::namedItemNS(e, KoXmlNS::text, "date");
+        macro = KoXml::namedItemNS(e, KOdfXmlNS::text, "date");
         if (!macro.isNull())
             replaceMacro(text, macro.text(), "<date>");
 
-        macro = KoXml::namedItemNS(e, KoXmlNS::text, "page-number");
+        macro = KoXml::namedItemNS(e, KOdfXmlNS::text, "page-number");
         if (!macro.isNull())
             replaceMacro(text, macro.text(), "<page>");
 
-        macro = KoXml::namedItemNS(e, KoXmlNS::text, "page-count");
+        macro = KoXml::namedItemNS(e, KOdfXmlNS::text, "page-count");
         if (!macro.isNull())
             replaceMacro(text, macro.text(), "<pages>");
 
-        macro = KoXml::namedItemNS(e, KoXmlNS::text, "sheet-name");
+        macro = KoXml::namedItemNS(e, KOdfXmlNS::text, "sheet-name");
         if (!macro.isNull())
             replaceMacro(text, macro.text(), "<sheet>");
 
-        macro = KoXml::namedItemNS(e, KoXmlNS::text, "title");
+        macro = KoXml::namedItemNS(e, KOdfXmlNS::text, "title");
         if (!macro.isNull())
             replaceMacro(text, macro.text(), "<name>");
 
-        macro = KoXml::namedItemNS(e, KoXmlNS::text, "file-name");
+        macro = KoXml::namedItemNS(e, KOdfXmlNS::text, "file-name");
         if (!macro.isNull())
             replaceMacro(text, macro.text(), "<file>");
 
@@ -1408,7 +1408,7 @@ void KCSheet::loadColumnNodes(const KoXmlElement& parent,
     KoXmlNode node = parent.firstChild();
     while (!node.isNull()) {
         KoXmlElement elem = node.toElement();
-        if (!elem.isNull() && elem.namespaceURI() == KoXmlNS::table) {
+        if (!elem.isNull() && elem.namespaceURI() == KOdfXmlNS::table) {
             if (elem.localName() == "table-column") {
                 loadColumnFormat(elem, odfContext.stylesReader(), indexCol, columnStyleRegions, columnStyles);
                 maxColumn = qMax(maxColumn, indexCol - 1);
@@ -1433,7 +1433,7 @@ void KCSheet::loadRowNodes(const KoXmlElement& parent,
     KoXmlNode node = parent.firstChild();
     while (!node.isNull()) {
         KoXmlElement elem = node.toElement();
-        if (!elem.isNull() && elem.namespaceURI() == KoXmlNS::table) {
+        if (!elem.isNull() && elem.namespaceURI() == KOdfXmlNS::table) {
             if (elem.localName() == "table-row") {
                 int columnMaximal = loadRowFormat(elem, rowIndex, tableContext,
                                                         rowStyleRegions, cellStyleRegions,
@@ -1463,29 +1463,29 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
     }
 
     KOdfLoadingContext& odfContext = tableContext.odfContext;
-    if (sheetElement.hasAttributeNS(KoXmlNS::table, "style-name")) {
-        QString stylename = sheetElement.attributeNS(KoXmlNS::table, "style-name", QString());
+    if (sheetElement.hasAttributeNS(KOdfXmlNS::table, "style-name")) {
+        QString stylename = sheetElement.attributeNS(KOdfXmlNS::table, "style-name", QString());
         //kDebug(36003)<<" style of table :"<<stylename;
         const KoXmlElement *style = odfContext.stylesReader().findStyle(stylename, "table");
         Q_ASSERT(style);
         //kDebug(36003)<<" style :"<<style;
         if (style) {
-            KoXmlElement properties(KoXml::namedItemNS(*style, KoXmlNS::style, "table-properties"));
+            KoXmlElement properties(KoXml::namedItemNS(*style, KOdfXmlNS::style, "table-properties"));
             if (!properties.isNull()) {
-                if (properties.hasAttributeNS(KoXmlNS::table, "display")) {
-                    bool visible = (properties.attributeNS(KoXmlNS::table, "display", QString()) == "true" ? true : false);
+                if (properties.hasAttributeNS(KOdfXmlNS::table, "display")) {
+                    bool visible = (properties.attributeNS(KOdfXmlNS::table, "display", QString()) == "true" ? true : false);
                     setHidden(!visible);
                 }
             }
-            if (style->hasAttributeNS(KoXmlNS::style, "master-page-name")) {
-                QString masterPageStyleName = style->attributeNS(KoXmlNS::style, "master-page-name", QString());
+            if (style->hasAttributeNS(KOdfXmlNS::style, "master-page-name")) {
+                QString masterPageStyleName = style->attributeNS(KOdfXmlNS::style, "master-page-name", QString());
                 //kDebug()<<"style->attribute( style:master-page-name ) :"<<masterPageStyleName;
                 KoXmlElement *masterStyle = odfContext.stylesReader().masterPages()[masterPageStyleName];
                 //kDebug()<<"stylesReader.styles()[masterPageStyleName] :"<<masterStyle;
                 if (masterStyle) {
                     loadSheetStyleFormat(masterStyle);
-                    if (masterStyle->hasAttributeNS(KoXmlNS::style, "page-layout-name")) {
-                        QString masterPageLayoutStyleName = masterStyle->attributeNS(KoXmlNS::style, "page-layout-name", QString());
+                    if (masterStyle->hasAttributeNS(KOdfXmlNS::style, "page-layout-name")) {
+                        QString masterPageLayoutStyleName = masterStyle->attributeNS(KOdfXmlNS::style, "page-layout-name", QString());
                         //kDebug(36003)<<"masterPageLayoutStyleName :"<<masterPageLayoutStyleName;
                         const KoXmlElement *masterLayoutStyle = odfContext.stylesReader().findStyle(masterPageLayoutStyleName);
                         if (masterLayoutStyle) {
@@ -1503,7 +1503,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
                 KoXmlElement element;
                 forEachElement(element, properties) {
                     if (element.nodeName() == "style:background-image") {
-                        QString imagePath = element.attributeNS(KoXmlNS::xlink, "href");
+                        QString imagePath = element.attributeNS(KOdfXmlNS::xlink, "href");
                         KOdfStore* store = tableContext.odfContext.store();
                         if (store->hasFile(imagePath)) {
                             QByteArray data;
@@ -1623,7 +1623,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
             KoXml::load(rowElement);
 
             //kDebug(36003) << " KCSheet::loadOdf rowElement.tagName() :" << rowElement.localName();
-            if (rowElement.namespaceURI() == KoXmlNS::table) {
+            if (rowElement.namespaceURI() == KOdfXmlNS::table) {
                 if (rowElement.localName() == "table-header-columns") {
                     // NOTE Handle header cols as ordinary ones
                     //      as long as they're not supported.
@@ -1655,7 +1655,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
                     KoShapeLoadingContext* shapeLoadingContext = tableContext.shapeContext;
                     KoXmlElement element;
                     forEachElement(element, rowElement) {
-                        if (element.namespaceURI() != KoXmlNS::draw)
+                        if (element.namespaceURI() != KOdfXmlNS::draw)
                             continue;
                         loadOdfObject(element, *shapeLoadingContext);
                     }
@@ -1690,15 +1690,15 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
     cellStorage()->loadStyles(styleRegions);
     cellStorage()->loadConditions(conditionRegions);
 
-    if (sheetElement.hasAttributeNS(KoXmlNS::table, "print-ranges")) {
+    if (sheetElement.hasAttributeNS(KOdfXmlNS::table, "print-ranges")) {
         // e.g.: Sheet4.A1:Sheet4.E28
-        QString range = sheetElement.attributeNS(KoXmlNS::table, "print-ranges", QString());
+        QString range = sheetElement.attributeNS(KOdfXmlNS::table, "print-ranges", QString());
         KCRegion region(KCRegion::loadOdf(range));
         if (!region.firstSheet() || sheetName() == region.firstSheet()->sheetName())
             printSettings()->setPrintRegion(region);
     }
 
-    if (sheetElement.attributeNS(KoXmlNS::table, "protected", QString()) == "true") {
+    if (sheetElement.attributeNS(KOdfXmlNS::table, "protected", QString()) == "true") {
         loadOdfProtection(sheetElement);
     }
     return true;
@@ -1717,27 +1717,27 @@ void KCSheet::loadOdfMasterLayoutPage(KOdfStyleStack &styleStack)
 {
     KOdfPageLayoutData pageLayout;
 
-    if (styleStack.hasProperty(KoXmlNS::fo, "page-width")) {
-        pageLayout.width = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "page-width"));
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "page-width")) {
+        pageLayout.width = KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "page-width"));
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "page-height")) {
-        pageLayout.height = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "page-height"));
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "page-height")) {
+        pageLayout.height = KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "page-height"));
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "margin-top")) {
-        pageLayout.topMargin = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-top"));
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "margin-top")) {
+        pageLayout.topMargin = KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-top"));
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "margin-bottom")) {
-        pageLayout.bottomMargin = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-bottom"));
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "margin-bottom")) {
+        pageLayout.bottomMargin = KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-bottom"));
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "margin-left")) {
-        pageLayout.leftMargin = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left"));
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "margin-left")) {
+        pageLayout.leftMargin = KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-left"));
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "margin-right")) {
-        pageLayout.rightMargin = KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-right"));
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "margin-right")) {
+        pageLayout.rightMargin = KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-right"));
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "writing-mode")) {
-        kDebug(36003) << "styleStack.hasAttribute( style:writing-mode ) :" << styleStack.hasProperty(KoXmlNS::style, "writing-mode");
-        const QString writingMode = styleStack.property(KoXmlNS::style, "writing-mode");
+    if (styleStack.hasProperty(KOdfXmlNS::style, "writing-mode")) {
+        kDebug(36003) << "styleStack.hasAttribute( style:writing-mode ) :" << styleStack.hasProperty(KOdfXmlNS::style, "writing-mode");
+        const QString writingMode = styleStack.property(KOdfXmlNS::style, "writing-mode");
         if (writingMode == "lr-tb") {
             setLayoutDirection(Qt::LeftToRight);
         } else if (writingMode == "rl-tb") {
@@ -1760,25 +1760,25 @@ void KCSheet::loadOdfMasterLayoutPage(KOdfStyleStack &styleStack)
         // Set the layout direction to the direction of the sheet name.
         checkContentDirection(sheetName());
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "print-orientation")) {
-        pageLayout.orientation = (styleStack.property(KoXmlNS::style, "print-orientation") == "landscape")
+    if (styleStack.hasProperty(KOdfXmlNS::style, "print-orientation")) {
+        pageLayout.orientation = (styleStack.property(KOdfXmlNS::style, "print-orientation") == "landscape")
                                  ? KOdfPageFormat::Landscape : KOdfPageFormat::Portrait;
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "num-format")) {
+    if (styleStack.hasProperty(KOdfXmlNS::style, "num-format")) {
         //not implemented into kcells
         //These attributes specify the numbering style to use.
         //If a numbering style is not specified, the numbering style is inherited from
         //the page style. See section 6.7.8 for information on these attributes
-        kDebug(36003) << " num-format :" << styleStack.property(KoXmlNS::style, "num-format");
+        kDebug(36003) << " num-format :" << styleStack.property(KOdfXmlNS::style, "num-format");
 
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "background-color")) {
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "background-color")) {
         //TODO
-        kDebug(36003) << " fo:background-color :" << styleStack.property(KoXmlNS::fo, "background-color");
+        kDebug(36003) << " fo:background-color :" << styleStack.property(KOdfXmlNS::fo, "background-color");
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "print")) {
+    if (styleStack.hasProperty(KOdfXmlNS::style, "print")) {
         //todo parsing
-        QString str = styleStack.property(KoXmlNS::style, "print");
+        QString str = styleStack.property(KOdfXmlNS::style, "print");
         kDebug(36003) << " style:print :" << str;
 
         if (str.contains("headers")) {
@@ -1806,8 +1806,8 @@ void KCSheet::loadOdfMasterLayoutPage(KOdfStyleStack &styleStack)
             //TODO it's not implemented
         }
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "table-centering")) {
-        QString str = styleStack.property(KoXmlNS::style, "table-centering");
+    if (styleStack.hasProperty(KOdfXmlNS::style, "table-centering")) {
+        QString str = styleStack.property(KOdfXmlNS::style, "table-centering");
         //TODO not implemented into kcells
         kDebug(36003) << " styleStack.attribute( style:table-centering ) :" << str;
 #if 0
@@ -1832,9 +1832,9 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
     bool isNonDefaultColumn = false;
 
     int number = 1;
-    if (column.hasAttributeNS(KoXmlNS::table, "number-columns-repeated")) {
+    if (column.hasAttributeNS(KOdfXmlNS::table, "number-columns-repeated")) {
         bool ok = true;
-        int n = column.attributeNS(KoXmlNS::table, "number-columns-repeated", QString()).toInt(&ok);
+        int n = column.attributeNS(KOdfXmlNS::table, "number-columns-repeated", QString()).toInt(&ok);
         if (ok)
             // Some spreadsheet programs may support more rows than KCells so
             // limit the number of repeated rows.
@@ -1843,8 +1843,8 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
         //kDebug(36003) << "Repeated:" << number;
     }
 
-    if (column.hasAttributeNS(KoXmlNS::table, "default-cell-style-name")) {
-        const QString styleName = column.attributeNS(KoXmlNS::table, "default-cell-style-name", QString());
+    if (column.hasAttributeNS(KOdfXmlNS::table, "default-cell-style-name")) {
+        const QString styleName = column.attributeNS(KOdfXmlNS::table, "default-cell-style-name", QString());
         if (!styleName.isEmpty()) {
             columnStyleRegions[styleName] += QRect(indexCol, 1, number, KS_rowMax);
             columnStyles.insert(indexCol, indexCol+number-1, styleName);
@@ -1852,8 +1852,8 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
     }
 
     enum { Visible, Collapsed, Filtered } visibility = Visible;
-    if (column.hasAttributeNS(KoXmlNS::table, "visibility")) {
-        const QString string = column.attributeNS(KoXmlNS::table, "visibility", "visible");
+    if (column.hasAttributeNS(KOdfXmlNS::table, "visibility")) {
+        const QString string = column.attributeNS(KOdfXmlNS::table, "visibility", "visible");
         if (string == "collapse")
             visibility = Collapsed;
         else if (string == "filter")
@@ -1862,8 +1862,8 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
     }
 
     KOdfStyleStack styleStack;
-    if (column.hasAttributeNS(KoXmlNS::table, "style-name")) {
-        QString str = column.attributeNS(KoXmlNS::table, "style-name", QString());
+    if (column.hasAttributeNS(KOdfXmlNS::table, "style-name")) {
+        QString str = column.attributeNS(KOdfXmlNS::table, "style-name", QString());
         const KoXmlElement *style = stylesReader.findStyle(str, "table-column");
         if (style) {
             styleStack.push(*style);
@@ -1873,22 +1873,22 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
     styleStack.setTypeProperties("table-column"); //style for column
 
     double width = -1.0;
-    if (styleStack.hasProperty(KoXmlNS::style, "column-width")) {
-        width = KUnit::parseValue(styleStack.property(KoXmlNS::style, "column-width") , -1.0);
+    if (styleStack.hasProperty(KOdfXmlNS::style, "column-width")) {
+        width = KUnit::parseValue(styleStack.property(KOdfXmlNS::style, "column-width") , -1.0);
         //kDebug(36003) << " style:column-width : width :" << width;
         isNonDefaultColumn = true;
     }
 
     bool insertPageBreak = false;
-    if (styleStack.hasProperty(KoXmlNS::fo, "break-before")) {
-        QString str = styleStack.property(KoXmlNS::fo, "break-before");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "break-before")) {
+        QString str = styleStack.property(KOdfXmlNS::fo, "break-before");
         if (str == "page") {
             insertPageBreak = true;
         } else {
             // kDebug(36003) << " str :" << str;
         }
         isNonDefaultColumn = true;
-    } else if (styleStack.hasProperty(KoXmlNS::fo, "break-after")) {
+    } else if (styleStack.hasProperty(KOdfXmlNS::fo, "break-after")) {
         // TODO
     }
 
@@ -1986,8 +1986,8 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     bool isNonDefaultRow = false;
 
     KOdfStyleStack styleStack;
-    if (row.hasAttributeNS(KoXmlNS::table, sStyleName)) {
-        QString str = row.attributeNS(KoXmlNS::table, sStyleName, QString());
+    if (row.hasAttributeNS(KOdfXmlNS::table, sStyleName)) {
+        QString str = row.attributeNS(KOdfXmlNS::table, sStyleName, QString());
         const KoXmlElement *style = odfContext.stylesReader().findStyle(str, "table-row");
         if (style) {
             styleStack.push(*style);
@@ -1997,9 +1997,9 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     styleStack.setTypeProperties("table-row");
 
     int number = 1;
-    if (row.hasAttributeNS(KoXmlNS::table, sNumberRowsRepeated)) {
+    if (row.hasAttributeNS(KOdfXmlNS::table, sNumberRowsRepeated)) {
         bool ok = true;
-        int n = row.attributeNS(KoXmlNS::table, sNumberRowsRepeated, QString()).toInt(&ok);
+        int n = row.attributeNS(KOdfXmlNS::table, sNumberRowsRepeated, QString()).toInt(&ok);
         if (ok)
             // Some spreadsheet programs may support more rows than KCells so
             // limit the number of repeated rows.
@@ -2008,23 +2008,23 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     }
 
     QString rowCellStyleName;
-    if (row.hasAttributeNS(KoXmlNS::table, sDefaultCellStyleName)) {
-        rowCellStyleName = row.attributeNS(KoXmlNS::table, sDefaultCellStyleName, QString());
+    if (row.hasAttributeNS(KOdfXmlNS::table, sDefaultCellStyleName)) {
+        rowCellStyleName = row.attributeNS(KOdfXmlNS::table, sDefaultCellStyleName, QString());
         if (!rowCellStyleName.isEmpty()) {
             rowStyleRegions[rowCellStyleName] += QRect(1, rowIndex, KS_colMax, number);
         }
     }
 
     double height = -1.0;
-    if (styleStack.hasProperty(KoXmlNS::style, "row-height")) {
-        height = KUnit::parseValue(styleStack.property(KoXmlNS::style, "row-height") , -1.0);
+    if (styleStack.hasProperty(KOdfXmlNS::style, "row-height")) {
+        height = KUnit::parseValue(styleStack.property(KOdfXmlNS::style, "row-height") , -1.0);
         //    kDebug(36003)<<" properties style:row-height : height :"<<height;
         isNonDefaultRow = true;
     }
 
     enum { Visible, Collapsed, Filtered } visibility = Visible;
-    if (row.hasAttributeNS(KoXmlNS::table, sVisibility)) {
-        const QString string = row.attributeNS(KoXmlNS::table, sVisibility, sVisible);
+    if (row.hasAttributeNS(KOdfXmlNS::table, sVisibility)) {
+        const QString string = row.attributeNS(KOdfXmlNS::table, sVisibility, sVisible);
         if (string == sCollapse)
             visibility = Collapsed;
         else if (string == sFilter)
@@ -2033,15 +2033,15 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     }
 
     bool insertPageBreak = false;
-    if (styleStack.hasProperty(KoXmlNS::fo, "break-before")) {
-        QString str = styleStack.property(KoXmlNS::fo, "break-before");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "break-before")) {
+        QString str = styleStack.property(KOdfXmlNS::fo, "break-before");
         if (str == sPage) {
             insertPageBreak = true;
         }
         //  else
         //      kDebug(36003)<<" str :"<<str;
         isNonDefaultRow = true;
-    } else if (styleStack.hasProperty(KoXmlNS::fo, "break-after")) {
+    } else if (styleStack.hasProperty(KOdfXmlNS::fo, "break-after")) {
         // TODO
     }
 
@@ -2069,14 +2069,14 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
 
     KoXmlElement cellElement;
     forEachElement(cellElement, row) {
-        if (cellElement.namespaceURI() != KoXmlNS::table)
+        if (cellElement.namespaceURI() != KOdfXmlNS::table)
             continue;
         if (cellElement.localName() != sTableCell && cellElement.localName() != sCoveredTableCell)
             continue;
 
 
         bool ok = false;
-        const int n = cellElement.attributeNS(KoXmlNS::table, sNumberColumnsRepeated, QString()).toInt(&ok);
+        const int n = cellElement.attributeNS(KOdfXmlNS::table, sNumberColumnsRepeated, QString()).toInt(&ok);
         // Some spreadsheet programs may support more columns than
         // KCells so limit the number of repeated columns.
         // FIXME POSSIBLE DATA LOSS!
@@ -2084,7 +2084,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
         columnMaximal = qMax(numberColumns, columnMaximal);
 
         // Styles are inserted at the end of the loading process, so check the XML directly here.
-        const QString styleName = cellElement.attributeNS(KoXmlNS::table , sStyleName, QString());
+        const QString styleName = cellElement.attributeNS(KOdfXmlNS::table , sStyleName, QString());
         if (!styleName.isEmpty())
             cellStyleRegions[styleName] += QRect(columnIndex, rowIndex, numberColumns, number);
 

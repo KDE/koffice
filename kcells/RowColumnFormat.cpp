@@ -29,7 +29,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfGenericStyles.h>
 #include <KoGlobal.h>
 #include <KOdfStyleStack.h>

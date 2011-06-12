@@ -20,7 +20,7 @@
 
 #include "KOdfStyleStack.h"
 #include "KUnit.h"
-#include "KoXmlNS.h"
+#include "KOdfXmlNS.h"
 
 #include <kdebug.h>
 
@@ -31,7 +31,7 @@ class KOdfStyleStack::KoStyleStackPrivate
 };
 
 KOdfStyleStack::KOdfStyleStack()
-        : m_styleNSURI(KoXmlNS::style), m_foNSURI(KoXmlNS::fo), d(0)
+        : m_styleNSURI(KOdfXmlNS::style), m_foNSURI(KOdfXmlNS::fo), d(0)
 {
     clear();
 }
@@ -218,7 +218,7 @@ bool KOdfStyleStack::isUserStyle(const KoXmlElement& e, const QString& family) c
         return false;
     const KoXmlElement parent = e.parentNode().toElement();
     //kDebug(30003) <<"tagName=" << e.tagName() <<" parent-tagName=" << parent.tagName();
-    return parent.localName() == "styles" /*&& parent.namespaceURI() == KoXmlNS::office*/;
+    return parent.localName() == "styles" /*&& parent.namespaceURI() == KOdfXmlNS::office*/;
 }
 
 QString KOdfStyleStack::userStyleName(const QString& family) const

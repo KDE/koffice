@@ -23,7 +23,7 @@
 */
 #include "SCDeclarations.h"
 #include <QDateTime>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>
 #include <KoPALoadingContext.h>
@@ -46,21 +46,21 @@ bool SCDeclarations::loadOdf(const KoXmlElement &body, KoPALoadingContext &conte
 
     KoXmlElement element;
     forEachElement(element, body) {
-        if (element.namespaceURI() == KoXmlNS::presentation) {
+        if (element.namespaceURI() == KOdfXmlNS::presentation) {
             if (element.tagName() == "header-decl") {
-                const QString name = element.attributeNS(KoXmlNS::presentation, "name", QString());
+                const QString name = element.attributeNS(KOdfXmlNS::presentation, "name", QString());
                 m_declarations[Header].insert(name, element.text());
             }
             else if(element.tagName() == "footer-decl") {
-                const QString name = element.attributeNS(KoXmlNS::presentation, "name", QString());
+                const QString name = element.attributeNS(KOdfXmlNS::presentation, "name", QString());
                 m_declarations[Footer].insert(name, element.text());
             }
             else if(element.tagName() == "date-time-decl") {
                 QMap<QString, QVariant> data;
-                const QString name = element.attributeNS(KoXmlNS::presentation, "name", QString());
-                data["fixed"] = element.attributeNS(KoXmlNS::presentation, "source", "fixed") == "fixed";
+                const QString name = element.attributeNS(KOdfXmlNS::presentation, "name", QString());
+                data["fixed"] = element.attributeNS(KOdfXmlNS::presentation, "source", "fixed") == "fixed";
 
-                QString styleName = element.attributeNS(KoXmlNS::style, "data-style-name", "");
+                QString styleName = element.attributeNS(KOdfXmlNS::style, "data-style-name", "");
                 if (!styleName.isEmpty()) {
                     KOdfStylesReader::DataFormatsMap::const_iterator it = context.odfLoadingContext().stylesReader().dataFormats().constFind(styleName);
                     if (it != context.odfLoadingContext().stylesReader().dataFormats().constEnd()) {
@@ -77,7 +77,7 @@ bool SCDeclarations::loadOdf(const KoXmlElement &body, KoPALoadingContext &conte
                 m_declarations[DateTime].insert(name, data);
             }
         }
-        else if (element.tagName() == "page" && element.namespaceURI() == KoXmlNS::draw) {
+        else if (element.tagName() == "page" && element.namespaceURI() == KOdfXmlNS::draw) {
             break;
         }
     }

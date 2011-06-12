@@ -25,7 +25,7 @@
 #include <KOdfStyleStack.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KoOdfGraphicStyles.h>
 #include <KOdfStylesReader.h>
@@ -394,20 +394,20 @@ bool KoPatternBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &)
 {
     Q_D(KoPatternBackground);
     KOdfStyleStack &styleStack = context.styleStack();
-    if (! styleStack.hasProperty(KoXmlNS::draw, "fill"))
+    if (! styleStack.hasProperty(KOdfXmlNS::draw, "fill"))
         return false;
 
-    QString fillStyle = styleStack.property(KoXmlNS::draw, "fill");
+    QString fillStyle = styleStack.property(KOdfXmlNS::draw, "fill");
     if (fillStyle != "bitmap")
         return false;
 
-    QString styleName = styleStack.property(KoXmlNS::draw, "fill-image-name");
+    QString styleName = styleStack.property(KOdfXmlNS::draw, "fill-image-name");
 
     KoXmlElement* e = context.stylesReader().drawStyles()[styleName];
     if (! e)
         return false;
 
-    const QString href = e->attributeNS(KoXmlNS::xlink, "href", QString());
+    const QString href = e->attributeNS(KOdfXmlNS::xlink, "href", QString());
     if (href.isEmpty())
         return false;
 
@@ -417,7 +417,7 @@ bool KoPatternBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &)
         return false;
 
     // read the pattern repeat style
-    QString style = styleStack.property(KoXmlNS::style, "repeat");
+    QString style = styleStack.property(KOdfXmlNS::style, "repeat");
     if (style == "stretch")
         d->repeat = Stretched;
     else if (style == "no-repeat")
@@ -427,15 +427,15 @@ bool KoPatternBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &)
 
     if (style != "stretch") {
         // optional attributes which can override original image size
-        if (styleStack.hasProperty(KoXmlNS::draw, "fill-image-height")) {
-            QString height = styleStack.property(KoXmlNS::draw, "fill-image-height");
+        if (styleStack.hasProperty(KOdfXmlNS::draw, "fill-image-height")) {
+            QString height = styleStack.property(KOdfXmlNS::draw, "fill-image-height");
             if (height.endsWith('%'))
                 d->targetImageSizePercent.setHeight(height.remove('%').toDouble());
             else
                 d->targetImageSize.setHeight(KUnit::parseValue(height));
         }
-        if (styleStack.hasProperty(KoXmlNS::draw, "fill-image-width")) {
-            QString width = styleStack.property(KoXmlNS::draw, "fill-image-width");
+        if (styleStack.hasProperty(KOdfXmlNS::draw, "fill-image-width")) {
+            QString width = styleStack.property(KOdfXmlNS::draw, "fill-image-width");
             if (width.endsWith('%'))
                 d->targetImageSizePercent.setWidth(width.remove('%').toDouble());
             else
@@ -444,9 +444,9 @@ bool KoPatternBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &)
     }
 
     if (style == "repeat") {
-        if (styleStack.hasProperty(KoXmlNS::draw, "fill-image-ref-point")) {
+        if (styleStack.hasProperty(KOdfXmlNS::draw, "fill-image-ref-point")) {
             // align pattern to the given size
-            QString align = styleStack.property(KoXmlNS::draw, "fill-image-ref-point");
+            QString align = styleStack.property(KOdfXmlNS::draw, "fill-image-ref-point");
             if (align == "top-left")
                 d->refPoint = TopLeft;
             else if (align == "top")
@@ -466,16 +466,16 @@ bool KoPatternBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &)
             else if (align == "bottom-right")
                 d->refPoint = BottomRight;
         }
-        if (styleStack.hasProperty(KoXmlNS::draw, "fill-image-ref-point-x")) {
-            QString pointX = styleStack.property(KoXmlNS::draw, "fill-image-ref-point-x");
+        if (styleStack.hasProperty(KOdfXmlNS::draw, "fill-image-ref-point-x")) {
+            QString pointX = styleStack.property(KOdfXmlNS::draw, "fill-image-ref-point-x");
             d->refPointOffsetPercent.setX(pointX.remove('%').toDouble());
         }
-        if (styleStack.hasProperty(KoXmlNS::draw, "fill-image-ref-point-y")) {
-            QString pointY = styleStack.property(KoXmlNS::draw, "fill-image-ref-point-y");
+        if (styleStack.hasProperty(KOdfXmlNS::draw, "fill-image-ref-point-y")) {
+            QString pointY = styleStack.property(KOdfXmlNS::draw, "fill-image-ref-point-y");
             d->refPointOffsetPercent.setY(pointY.remove('%').toDouble());
         }
-        if (styleStack.hasProperty(KoXmlNS::draw, "tile-repeat-offset")) {
-            QString repeatOffset = styleStack.property(KoXmlNS::draw, "tile-repeat-offset");
+        if (styleStack.hasProperty(KOdfXmlNS::draw, "tile-repeat-offset")) {
+            QString repeatOffset = styleStack.property(KOdfXmlNS::draw, "tile-repeat-offset");
             QStringList tokens = repeatOffset.split('%');
             if (tokens.count() == 2) {
                 QString direction = tokens[1].simplified();

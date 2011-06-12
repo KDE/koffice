@@ -24,7 +24,7 @@
 #include <KoShapeFactoryBase.h>
 #include <KoLineBorder.h>
 #include <KProperties.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoColorBackground.h>
 #include <KoShapeLoadingContext.h>
@@ -38,7 +38,7 @@ StarShapeFactory::StarShapeFactory(QObject *parent)
     setIcon("star");
     QStringList elementNames;
     elementNames << "regular-polygon" << "custom-shape";
-    setOdfElementNames(KoXmlNS::draw, elementNames);
+    setOdfElementNames(KOdfXmlNS::draw, elementNames);
     setLoadingPriority(5);
 
     KoShapeTemplate t;
@@ -140,10 +140,10 @@ KoShape *StarShapeFactory::createShape(const KProperties *params, KoResourceMana
 bool StarShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
-    if (e.localName() == "regular-polygon" && e.namespaceURI() == KoXmlNS::draw)
+    if (e.localName() == "regular-polygon" && e.namespaceURI() == KOdfXmlNS::draw)
         return true;
-    return (e.localName() == "custom-shape" && e.namespaceURI() == KoXmlNS::draw
-            && e.attributeNS(KoXmlNS::draw, "engine", "") == "koffice:star");
+    return (e.localName() == "custom-shape" && e.namespaceURI() == KOdfXmlNS::draw
+            && e.attributeNS(KOdfXmlNS::draw, "engine", "") == "koffice:star");
 }
 
 QList<KoShapeConfigWidgetBase*> StarShapeFactory::createShapeOptionPanels()

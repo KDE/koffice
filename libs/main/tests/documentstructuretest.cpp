@@ -30,7 +30,7 @@
 #include <KOdfStore.h>
 #include <KoXmlReader.h>
 #include <KOdfStoreReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <kcomponentdata.h>
 
 // May the testing begin

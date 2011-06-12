@@ -23,7 +23,7 @@
 #include <KoPathShape.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>
 #include <KUnit.h>
@@ -132,11 +132,11 @@ void ArtisticTextShape::saveOdf(KoShapeSavingContext &context) const
 
 bool ArtisticTextShape::loadOdf( const KoXmlElement & element, KoShapeLoadingContext & context )
 {
-    QString drawEngine = element.attributeNS( KoXmlNS::draw, "engine", "" );
+    QString drawEngine = element.attributeNS( KOdfXmlNS::draw, "engine", "" );
     if ( drawEngine.isEmpty() || drawEngine != "svg:text" )
         return false;
 
-    QString drawData = element.attributeNS( KoXmlNS::draw, "data" );
+    QString drawData = element.attributeNS( KOdfXmlNS::draw, "data" );
     if ( drawData.isEmpty() )
         return false;
 

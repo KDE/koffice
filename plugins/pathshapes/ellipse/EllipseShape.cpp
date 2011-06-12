@@ -26,7 +26,7 @@
 #include <KoXmlReader.h>
 #include <KoTextOnShapeContainer.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KUnit.h>
 
 #include <math.h>
@@ -90,33 +90,33 @@ bool EllipseShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
 
     bool radiusGiven = true;
 
-    if (element.hasAttributeNS( KoXmlNS::svg, "rx") && element.hasAttributeNS(KoXmlNS::svg, "ry")) {
-        qreal rx = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "rx"));
-        qreal ry = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "ry"));
+    if (element.hasAttributeNS( KOdfXmlNS::svg, "rx") && element.hasAttributeNS(KOdfXmlNS::svg, "ry")) {
+        qreal rx = KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "rx"));
+        qreal ry = KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "ry"));
         size = QSizeF( 2*rx, 2*ry );
-    } else if (element.hasAttributeNS(KoXmlNS::svg, "r")) {
-        qreal r = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "r"));
+    } else if (element.hasAttributeNS(KOdfXmlNS::svg, "r")) {
+        qreal r = KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "r"));
         size = QSizeF(2*r, 2*r);
     } else {
-        size.setWidth(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width", QString())));
-        size.setHeight(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height", QString())));
+        size.setWidth(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "width", QString())));
+        size.setHeight(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "height", QString())));
         radiusGiven = false;
     }
     setSize(size);
 
     QPointF pos;
 
-    if (element.hasAttributeNS(KoXmlNS::svg, "cx") && element.hasAttributeNS(KoXmlNS::svg, "cy")) {
-        qreal cx = KUnit::parseValue(element.attributeNS( KoXmlNS::svg, "cx"));
-        qreal cy = KUnit::parseValue(element.attributeNS( KoXmlNS::svg, "cy"));
+    if (element.hasAttributeNS(KOdfXmlNS::svg, "cx") && element.hasAttributeNS(KOdfXmlNS::svg, "cy")) {
+        qreal cx = KUnit::parseValue(element.attributeNS( KOdfXmlNS::svg, "cx"));
+        qreal cy = KUnit::parseValue(element.attributeNS( KOdfXmlNS::svg, "cy"));
         pos = QPointF(cx - 0.5 * size.width(), cy - 0.5 * size.height());
     } else {
-        pos.setX(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
-        pos.setY(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
+        pos.setX(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "x", QString())));
+        pos.setY(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "y", QString())));
     }
     setPosition(pos);
 
-    QString kind = element.attributeNS(KoXmlNS::draw, "kind", "full");
+    QString kind = element.attributeNS(KOdfXmlNS::draw, "kind", "full");
     if (kind == "section")
         setType(Pie);
     else if (kind == "cut")
@@ -124,8 +124,8 @@ bool EllipseShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
     else
         setType(Arc);
 
-    setStartAngle(element.attributeNS(KoXmlNS::draw, "start-angle", "0").toDouble());
-    setEndAngle(element.attributeNS(KoXmlNS::draw, "end-angle", "360").toDouble());
+    setStartAngle(element.attributeNS(KOdfXmlNS::draw, "start-angle", "0").toDouble());
+    setEndAngle(element.attributeNS(KOdfXmlNS::draw, "end-angle", "360").toDouble());
     if (!radiusGiven) {
         // is the size was given by width and height we have to reset the data as the size of the 
         // part of the cut/pie is given.

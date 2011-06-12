@@ -22,7 +22,7 @@
 
 #include <KoLineBorder.h>
 #include <KProperties.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoColorBackground.h>
 #include <KoShapeLoadingContext.h>
@@ -38,7 +38,7 @@ EnhancedPathShapeFactory::EnhancedPathShapeFactory(QObject *parent)
 {
     setToolTip(i18n("An enhanced path"));
     setIcon("enhancedpath");
-    setOdfElementNames(KoXmlNS::draw, QStringList("custom-shape"));
+    setOdfElementNames(KOdfXmlNS::draw, QStringList("custom-shape"));
     setLoadingPriority(1);
 
     addCross();
@@ -550,7 +550,7 @@ void EnhancedPathShapeFactory::addGearhead()
 bool EnhancedPathShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
-    return (e.localName() == "custom-shape" && e.namespaceURI() == KoXmlNS::draw);
+    return (e.localName() == "custom-shape" && e.namespaceURI() == KOdfXmlNS::draw);
 }
 
 #include <EnhancedPathShapeFactory.moc>

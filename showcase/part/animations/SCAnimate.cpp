@@ -31,7 +31,7 @@
 #include "strategy/SCAttributeHeight.h"
 #include "strategy/SCAttributeRotate.h"
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShape.h>
 #include <KoXmlReader.h>
 #include <KoShapeLoadingContext.h>
@@ -65,7 +65,7 @@ bool SCAnimate::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &cont
     SCAnimationBase::loadOdf(element, context);
     bool retval = true;
     // attributeName
-    QString attributeName(element.attributeNS(KoXmlNS::smil, "attributeName", QString()));
+    QString attributeName(element.attributeNS(KOdfXmlNS::smil, "attributeName", QString()));
     if (attributeName == "x") {
         m_attribute = new SCAttributeX();
     }
@@ -92,7 +92,7 @@ bool SCAnimate::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &cont
 
     // calcMode
     SCAnimationValue::SmilCalcMode smilCalcMode = SCAnimationValue::linear;
-    QString calcMode = element.attributeNS(KoXmlNS::smil, "calcMode", "linear");
+    QString calcMode = element.attributeNS(KOdfXmlNS::smil, "calcMode", "linear");
     if(calcMode == "linear"){
         smilCalcMode = SCAnimationValue::linear;
     } else if (calcMode == "discrete") {
@@ -111,24 +111,24 @@ bool SCAnimate::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &cont
 
 
     // value
-    QString formula = element.attributeNS(KoXmlNS::anim, "formula", QString());
+    QString formula = element.attributeNS(KOdfXmlNS::anim, "formula", QString());
     if (!formula.isEmpty()) {
         kWarning(33003) << "formula not yes supported";
         retval = false;
     }
     else {
-        QString values = element.attributeNS(KoXmlNS::smil, "values", QString());
+        QString values = element.attributeNS(KOdfXmlNS::smil, "values", QString());
         if (!values.isEmpty()) {
-            QString keyTimes = element.attributeNS(KoXmlNS::smil, "keyTimes", QString());
-            QString keySplines = element.attributeNS(KoXmlNS::smil, "keySplines", QString());
+            QString keyTimes = element.attributeNS(KOdfXmlNS::smil, "keyTimes", QString());
+            QString keySplines = element.attributeNS(KOdfXmlNS::smil, "keySplines", QString());
             SCSmilValues * smilValue = new SCSmilValues(m_shapeAnimation);
             retval = retval && smilValue->loadValues(values, keyTimes, keySplines, smilCalcMode);
             m_values = smilValue;
         }
         else {
-            QString from = element.attributeNS(KoXmlNS::smil, "from", "0");
-            QString to = element.attributeNS(KoXmlNS::smil, "to", "0");
-            QString by = element.attributeNS(KoXmlNS::smil, "by", "0");
+            QString from = element.attributeNS(KOdfXmlNS::smil, "from", "0");
+            QString to = element.attributeNS(KOdfXmlNS::smil, "to", "0");
+            QString by = element.attributeNS(KOdfXmlNS::smil, "by", "0");
             kWarning(33003) << "from to by not yes supported";
             retval = false;
         }

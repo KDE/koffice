@@ -22,7 +22,7 @@
 #include <QList>
 #include <QRect>
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 #include "KCCellStorage.h"
@@ -218,16 +218,16 @@ public:
         return AbstractCondition::Condition;
     }
     virtual bool loadOdf(const KoXmlElement& element) {
-        if (element.hasAttributeNS(KoXmlNS::table, "field-number")) {
+        if (element.hasAttributeNS(KOdfXmlNS::table, "field-number")) {
             bool ok = false;
-            fieldNumber = element.attributeNS(KoXmlNS::table, "field-number", QString()).toInt(&ok);
+            fieldNumber = element.attributeNS(KOdfXmlNS::table, "field-number", QString()).toInt(&ok);
             if (!ok || fieldNumber < 0)
                 return false;
         }
-        if (element.hasAttributeNS(KoXmlNS::table, "value"))
-            value = element.attributeNS(KoXmlNS::table, "value", QString());
-        if (element.hasAttributeNS(KoXmlNS::table, "operator")) {
-            const QString string = element.attributeNS(KoXmlNS::table, "operator", QString());
+        if (element.hasAttributeNS(KOdfXmlNS::table, "value"))
+            value = element.attributeNS(KOdfXmlNS::table, "value", QString());
+        if (element.hasAttributeNS(KOdfXmlNS::table, "operator")) {
+            const QString string = element.attributeNS(KOdfXmlNS::table, "operator", QString());
             if (string == "match")
                 operation = Match;
             else if (string == "!match")
@@ -261,14 +261,14 @@ public:
                 return false;
             }
         }
-        if (element.hasAttributeNS(KoXmlNS::table, "case-sensitive")) {
-            if (element.attributeNS(KoXmlNS::table, "case-sensitive", "false") == "true")
+        if (element.hasAttributeNS(KOdfXmlNS::table, "case-sensitive")) {
+            if (element.attributeNS(KOdfXmlNS::table, "case-sensitive", "false") == "true")
                 caseSensitivity = Qt::CaseSensitive;
             else
                 caseSensitivity = Qt::CaseInsensitive;
         }
-        if (element.hasAttributeNS(KoXmlNS::table, "data-type")) {
-            if (element.attributeNS(KoXmlNS::table, "data-type", "text") == "number")
+        if (element.hasAttributeNS(KOdfXmlNS::table, "data-type")) {
+            if (element.attributeNS(KOdfXmlNS::table, "data-type", "text") == "number")
                 dataType = KCNumber;
             else
                 dataType = Text;
@@ -426,7 +426,7 @@ bool Filter::And::loadOdf(const KoXmlElement& parent)
     KoXmlElement element;
     AbstractCondition* condition;
     forEachElement(element, parent) {
-        if (element.namespaceURI() != KoXmlNS::table)
+        if (element.namespaceURI() != KOdfXmlNS::table)
             continue;
         if (element.localName() == "filter-or")
             condition = new Filter::Or();
@@ -462,7 +462,7 @@ bool Filter::Or::loadOdf(const KoXmlElement& parent)
     KoXmlElement element;
     AbstractCondition* condition;
     forEachElement(element, parent) {
-        if (element.namespaceURI() != KoXmlNS::table)
+        if (element.namespaceURI() != KOdfXmlNS::table)
             continue;
         if (element.localName() == "filter-and")
             condition = new Filter::And();
@@ -637,26 +637,26 @@ bool Filter::evaluate(const Database& database, int index) const
 
 bool Filter::loadOdf(const KoXmlElement& element, const KCMap* map)
 {
-    if (element.hasAttributeNS(KoXmlNS::table, "target-range-address")) {
-        const QString address = element.attributeNS(KoXmlNS::table, "target-range-address", QString());
+    if (element.hasAttributeNS(KOdfXmlNS::table, "target-range-address")) {
+        const QString address = element.attributeNS(KOdfXmlNS::table, "target-range-address", QString());
         // only absolute addresses allowed; no fallback sheet needed
         d->targetRangeAddress = KCRegion(KCRegion::loadOdf(address), map);
         if (!d->targetRangeAddress.isValid())
             return false;
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "condition-source")) {
-        if (element.attributeNS(KoXmlNS::table, "condition-source", "self") == "cell-range")
+    if (element.hasAttributeNS(KOdfXmlNS::table, "condition-source")) {
+        if (element.attributeNS(KOdfXmlNS::table, "condition-source", "self") == "cell-range")
             d->conditionSource = Private::CellRange;
         else
             d->conditionSource = Private::Self;
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "condition-source-range-address")) {
-        const QString address = element.attributeNS(KoXmlNS::table, "condition-source-range-address", QString());
+    if (element.hasAttributeNS(KOdfXmlNS::table, "condition-source-range-address")) {
+        const QString address = element.attributeNS(KOdfXmlNS::table, "condition-source-range-address", QString());
         // only absolute addresses allowed; no fallback sheet needed
         d->conditionSourceRangeAddress = KCRegion(KCRegion::loadOdf(address), map);
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "display-duplicates")) {
-        if (element.attributeNS(KoXmlNS::table, "display-duplicates", "true") == "false")
+    if (element.hasAttributeNS(KOdfXmlNS::table, "display-duplicates")) {
+        if (element.attributeNS(KOdfXmlNS::table, "display-duplicates", "true") == "false")
             d->displayDuplicates = false;
         else
             d->displayDuplicates = true;

@@ -67,7 +67,7 @@ struct Finalizer {
 #include <KoViewConverter.h>
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <QAbstractTextDocumentLayout>
 #include <QApplication>
@@ -82,7 +82,7 @@ struct Finalizer {
 
 TextShape::TextShape()
     : KoShapeContainer(new KoTextShapeContainerModel()),
-    KoFrameShape(KoXmlNS::draw, "text-box"),
+    KoFrameShape(KOdfXmlNS::draw, "text-box"),
     m_footnotes(0),
     m_demoText(false),
     m_pageProvider(0),
@@ -356,7 +356,7 @@ void TextShape::loadStyle(const KoXmlElement &element, KoShapeLoadingContext &co
     KoShape::loadStyle(element, context);
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     styleStack.setTypeProperties("graphic");
-    QString verticalAlign(styleStack.property(KoXmlNS::draw, "textarea-vertical-align"));
+    QString verticalAlign(styleStack.property(KOdfXmlNS::draw, "textarea-vertical-align"));
     Qt::Alignment alignment(Qt::AlignTop);
     if (verticalAlign == "bottom") {
         alignment = Qt::AlignBottom;
@@ -379,20 +379,20 @@ bool TextShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &cont
 
     // load the (text) style of the frame
     const KoXmlElement *style = 0;
-    if (element.hasAttributeNS(KoXmlNS::draw, "style-name")) {
+    if (element.hasAttributeNS(KOdfXmlNS::draw, "style-name")) {
         style = context.odfLoadingContext().stylesReader().findStyle(
-                    element.attributeNS(KoXmlNS::draw, "style-name"), "graphic",
+                    element.attributeNS(KOdfXmlNS::draw, "style-name"), "graphic",
                     context.odfLoadingContext().useStylesAutoStyles());
         if (!style) {
-            kDebug(32500) << "graphic style not found:" << element.attributeNS(KoXmlNS::draw, "style-name");
+            kDebug(32500) << "graphic style not found:" << element.attributeNS(KOdfXmlNS::draw, "style-name");
         }
     }
-    else if (element.hasAttributeNS(KoXmlNS::presentation, "style-name")) {
+    else if (element.hasAttributeNS(KOdfXmlNS::presentation, "style-name")) {
         style = context.odfLoadingContext().stylesReader().findStyle(
-                    element.attributeNS(KoXmlNS::presentation, "style-name"), "presentation",
+                    element.attributeNS(KOdfXmlNS::presentation, "style-name"), "presentation",
                     context.odfLoadingContext().useStylesAutoStyles());
         if (!style) {
-            kDebug(32500) << "presentation style not found:" << element.attributeNS(KoXmlNS::presentation, "style-name");
+            kDebug(32500) << "presentation style not found:" << element.attributeNS(KOdfXmlNS::presentation, "style-name");
         }
     }
 
@@ -416,7 +416,7 @@ bool TextShape::loadOdfFrame(const KoXmlElement &element, KoShapeLoadingContext 
 {
     // if the loadOdfFrame from the base class for draw:text-box failes check for table:table
     if (!KoFrameShape::loadOdfFrame(element, context)) {
-        const KoXmlElement &frameElement(KoXml::namedItemNS(element, KoXmlNS::table, "table"));
+        const KoXmlElement &frameElement(KoXml::namedItemNS(element, KOdfXmlNS::table, "table"));
         if (frameElement.isNull()) {
             return false;
         } else {

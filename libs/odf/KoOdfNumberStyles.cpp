@@ -21,7 +21,7 @@
 #include "KoOdfNumberStyles.h"
 
 #include "KOdfGenericStyles.h"
-#include "KoXmlNS.h"
+#include "KOdfXmlNS.h"
 
 #include <QtCore/QBuffer>
 
@@ -77,23 +77,23 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
     QString prefix;
     QString suffix;
     forEachElement(e, parent) {
-        if (e.namespaceURI() != KoXmlNS::number)
+        if (e.namespaceURI() != KOdfXmlNS::number)
             continue;
         QString localName = e.localName();
-        const QString numberStyle = e.attributeNS(KoXmlNS::number, "style", QString());
+        const QString numberStyle = e.attributeNS(KOdfXmlNS::number, "style", QString());
         const bool shortForm = numberStyle == "short" || numberStyle.isEmpty();
         if (localName == "day") {
             format += shortForm ? "d" : "dd";
         } else if (localName == "day-of-week") {
             format += shortForm ? "ddd" : "dddd";
         } else if (localName == "month") {
-            if (e.attributeNS(KoXmlNS::number, "possessive-form", QString()) == "true") {
+            if (e.attributeNS(KOdfXmlNS::number, "possessive-form", QString()) == "true") {
                 format += shortForm ? "PPP" : "PPPP";
             }
             // TODO the spec has a strange mention of number:format-source
-            else if (e.attributeNS(KoXmlNS::number, "textual", QString()) == "true") {
+            else if (e.attributeNS(KOdfXmlNS::number, "textual", QString()) == "true") {
                 bool isExtraShort = false;      // find out if we have to use the extra-short month name (just 1st letter)
-                if (e.attributeNS(KoXmlNS::koffice, "number-length", QString()) == "extra-short") {
+                if (e.attributeNS(KOdfXmlNS::koffice, "number-length", QString()) == "extra-short") {
                     isExtraShort = true;
                 }
 
@@ -136,13 +136,13 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
             // Stefan: localization of the symbol?
         } else if (localName == "number") {
             // TODO: number:grouping="true"
-            if (e.hasAttributeNS(KoXmlNS::number, "decimal-places")) {
-                int d = e.attributeNS(KoXmlNS::number, "decimal-places", QString()).toInt(&ok);
+            if (e.hasAttributeNS(KOdfXmlNS::number, "decimal-places")) {
+                int d = e.attributeNS(KOdfXmlNS::number, "decimal-places", QString()).toInt(&ok);
                 if (ok)
                     precision = d;
             }
-            if (e.hasAttributeNS(KoXmlNS::number, "min-integer-digits")) {
-                int d = e.attributeNS(KoXmlNS::number, "min-integer-digits", QString()).toInt(&ok);
+            if (e.hasAttributeNS(KOdfXmlNS::number, "min-integer-digits")) {
+                int d = e.attributeNS(KOdfXmlNS::number, "min-integer-digits", QString()).toInt(&ok);
                 if (ok)
                     leadingZ = d;
             }
@@ -166,20 +166,20 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
                 dataStyle.type = Scientific;
             int exp = 2;
 
-            if (e.hasAttributeNS(KoXmlNS::number, "decimal-places")) {
-                int d = e.attributeNS(KoXmlNS::number, "decimal-places", QString()).toInt(&ok);
+            if (e.hasAttributeNS(KOdfXmlNS::number, "decimal-places")) {
+                int d = e.attributeNS(KOdfXmlNS::number, "decimal-places", QString()).toInt(&ok);
                 if (ok)
                     precision = d;
             }
 
-            if (e.hasAttributeNS(KoXmlNS::number, "min-integer-digits")) {
-                int d = e.attributeNS(KoXmlNS::number, "min-integer-digits", QString()).toInt(&ok);
+            if (e.hasAttributeNS(KOdfXmlNS::number, "min-integer-digits")) {
+                int d = e.attributeNS(KOdfXmlNS::number, "min-integer-digits", QString()).toInt(&ok);
                 if (ok)
                     leadingZ = d;
             }
 
-            if (e.hasAttributeNS(KoXmlNS::number, "min-exponent-digits")) {
-                int d = e.attributeNS(KoXmlNS::number, "min-exponent-digits", QString()).toInt(&ok);
+            if (e.hasAttributeNS(KOdfXmlNS::number, "min-exponent-digits")) {
+                int d = e.attributeNS(KOdfXmlNS::number, "min-exponent-digits", QString()).toInt(&ok);
                 if (ok)
                     exp = d;
                 if (exp <= 0)
@@ -214,23 +214,23 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
             int numerator = 1;
             int denominator = 1;
             int denominatorValue = 0;
-            if (e.hasAttributeNS(KoXmlNS::number, "min-integer-digits")) {
-                int d = e.attributeNS(KoXmlNS::number, "min-integer-digits", QString()).toInt(&ok);
+            if (e.hasAttributeNS(KOdfXmlNS::number, "min-integer-digits")) {
+                int d = e.attributeNS(KOdfXmlNS::number, "min-integer-digits", QString()).toInt(&ok);
                 if (ok)
                     integer = d;
             }
-            if (e.hasAttributeNS(KoXmlNS::number, "min-numerator-digits")) {
-                int d = e.attributeNS(KoXmlNS::number, "min-numerator-digits", QString()).toInt(&ok);
+            if (e.hasAttributeNS(KOdfXmlNS::number, "min-numerator-digits")) {
+                int d = e.attributeNS(KOdfXmlNS::number, "min-numerator-digits", QString()).toInt(&ok);
                 if (ok)
                     numerator = d;
             }
-            if (e.hasAttributeNS(KoXmlNS::number, "min-denominator-digits")) {
-                int d = e.attributeNS(KoXmlNS::number, "min-denominator-digits", QString()).toInt(&ok);
+            if (e.hasAttributeNS(KOdfXmlNS::number, "min-denominator-digits")) {
+                int d = e.attributeNS(KOdfXmlNS::number, "min-denominator-digits", QString()).toInt(&ok);
                 if (ok)
                     denominator = d;
             }
-            if (e.hasAttributeNS(KoXmlNS::number, "denominator-value")) {
-                int d = e.attributeNS(KoXmlNS::number, "denominator-value", QString()).toInt(&ok);
+            if (e.hasAttributeNS(KOdfXmlNS::number, "denominator-value")) {
+                int d = e.attributeNS(KOdfXmlNS::number, "denominator-value", QString()).toInt(&ok);
                 if (ok)
                     denominatorValue = d;
             }
@@ -265,18 +265,18 @@ QPair<QString, NumericStyleFormat> loadOdfNumberStyle(const KoXmlElement &parent
         // </number:text-style>
         for (KoXmlNode node(e); !node.isNull(); node = node.nextSibling()) {
             KoXmlElement elem = node.toElement();
-            if (elem.namespaceURI() == KoXmlNS::style && elem.localName() == "map") {
+            if (elem.namespaceURI() == KOdfXmlNS::style && elem.localName() == "map") {
                 QString condition, applyStyleName;
-                if (elem.hasAttributeNS(KoXmlNS::style, "condition"))
-                    condition = elem.attributeNS(KoXmlNS::style, "condition");
-                if (elem.hasAttributeNS(KoXmlNS::style, "apply-style-name"))
-                    applyStyleName = elem.attributeNS(KoXmlNS::style, "apply-style-name");
+                if (elem.hasAttributeNS(KOdfXmlNS::style, "condition"))
+                    condition = elem.attributeNS(KOdfXmlNS::style, "condition");
+                if (elem.hasAttributeNS(KOdfXmlNS::style, "apply-style-name"))
+                    applyStyleName = elem.attributeNS(KOdfXmlNS::style, "apply-style-name");
                 dataStyle.styleMaps.append( QPair<QString,QString>(condition,applyStyleName) );
             }
         }
     }
 
-    const QString styleName = parent.attributeNS(KoXmlNS::style, "name", QString());
+    const QString styleName = parent.attributeNS(KOdfXmlNS::style, "name", QString());
 
 //Q_ASSERT(false);
     kDebug(30003) << "data style:" << styleName << " qt format=" << format;

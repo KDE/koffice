@@ -24,7 +24,7 @@
 #include <KProperties.h>
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfLoadingContext.h>
@@ -73,7 +73,7 @@ bool DateVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
 {
     const QString localName(element.localName());
     QString dateFormat = "";
-    QString dataStyle = element.attributeNS(KoXmlNS::style, "data-style-name");
+    QString dataStyle = element.attributeNS(KOdfXmlNS::style, "data-style-name");
     if (!dataStyle.isEmpty()) {
         if (context.odfLoadingContext().stylesReader().dataFormats().contains(dataStyle)) {
             KoOdfNumberStyles::NumericStyleFormat dataFormat = context.odfLoadingContext().stylesReader().dataFormats().value(dataStyle).first;
@@ -81,15 +81,15 @@ bool DateVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
         }
     }
 
-    //dateProperties.setProperty("fixed", QVariant(element.attributeNS(KoXmlNS::text, "fixed") == "true"));
-    if (element.attributeNS(KoXmlNS::text, "fixed", "false") == "true") {
+    //dateProperties.setProperty("fixed", QVariant(element.attributeNS(KOdfXmlNS::text, "fixed") == "true"));
+    if (element.attributeNS(KOdfXmlNS::text, "fixed", "false") == "true") {
         m_type = Fixed;
     } else {
         m_type = AutoUpdate;
     }
 
-    //dateProperties.setProperty("time", element.attributeNS(KoXmlNS::text, localName + "-value"));
-    const QString value(element.attributeNS(KoXmlNS::text, localName + "-value", ""));
+    //dateProperties.setProperty("time", element.attributeNS(KOdfXmlNS::text, localName + "-value"));
+    const QString value(element.attributeNS(KOdfXmlNS::text, localName + "-value", ""));
     if (!value.isEmpty()) {
         m_time = QDateTime::fromString(value, Qt::ISODate);
     } else {
@@ -109,8 +109,8 @@ bool DateVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
         m_displayType = Custom;
     }
 
-    //dateProperties.setProperty("adjust", element.attributeNS(KoXmlNS::text, localName + "-adjust"));
-    const QString adjust(element.attributeNS(KoXmlNS::text, localName + "-adjust", ""));
+    //dateProperties.setProperty("adjust", element.attributeNS(KOdfXmlNS::text, localName + "-adjust"));
+    const QString adjust(element.attributeNS(KOdfXmlNS::text, localName + "-adjust", ""));
     adjustTime(adjust);
     update();
     return true;

@@ -35,7 +35,7 @@
 #include <KoOdfGraphicStyles.h>
 #include <KOdfStyleStack.h>
 #include <KUnit.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 #include "KCCondition.h"
@@ -212,7 +212,7 @@ void KCStyle::loadOdfStyle(KOdfStylesReader& stylesReader, const KoXmlElement& e
 
     KoXmlElement e;
     forEachElement(e, element) {
-        if (e.namespaceURI() == KoXmlNS::style && e.localName() == "map")
+        if (e.namespaceURI() == KOdfXmlNS::style && e.localName() == "map")
             conditions.loadOdfConditions(e, parser, styleManager);
     }
 
@@ -226,8 +226,8 @@ void KCStyle::loadOdfDataStyle(KOdfStylesReader& stylesReader, const KoXmlElemen
                              const KCValueParser *parser)
 {
     QString str;
-    if (element.hasAttributeNS(KoXmlNS::style, "data-style-name")) {
-        const QString styleName = element.attributeNS(KoXmlNS::style, "data-style-name", QString());
+    if (element.hasAttributeNS(KOdfXmlNS::style, "data-style-name")) {
+        const QString styleName = element.attributeNS(KOdfXmlNS::style, "data-style-name", QString());
         loadOdfDataStyle(stylesReader, styleName, conditions, styleManager, parser);
     }
 }
@@ -344,8 +344,8 @@ void KCStyle::loadOdfParagraphProperties(KOdfStylesReader& stylesReader, const K
 {
     Q_UNUSED(stylesReader);
     kDebug(36003) << "\t paragraph-properties";
-    if (styleStack.hasProperty(KoXmlNS::fo, "text-align")) {
-        QString str = styleStack.property(KoXmlNS::fo, "text-align");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "text-align")) {
+        QString str = styleStack.property(KOdfXmlNS::fo, "text-align");
         if (str == "center")
             setHAlign(KCStyle::Center);
         else if (str == "end" || str=="right")
@@ -363,8 +363,8 @@ void KCStyle::loadOdfParagraphProperties(KOdfStylesReader& stylesReader, const K
 void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const KOdfStyleStack& styleStack)
 {
     QString str;
-    if (styleStack.hasProperty(KoXmlNS::style, "vertical-align")) {
-        str = styleStack.property(KoXmlNS::style, "vertical-align");
+    if (styleStack.hasProperty(KOdfXmlNS::style, "vertical-align")) {
+        str = styleStack.property(KOdfXmlNS::style, "vertical-align");
         if (str == "bottom")
             setVAlign(KCStyle::Bottom);
         else if (str == "top")
@@ -374,15 +374,15 @@ void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const K
         else
             setVAlign(KCStyle::VAlignUndefined);
     }
-    if (styleStack.property(KoXmlNS::koffice, "vertical-distributed") == "distributed") {
+    if (styleStack.property(KOdfXmlNS::koffice, "vertical-distributed") == "distributed") {
         if (valign() == KCStyle::Top)
             setVAlign(KCStyle::VJustified);
         else
             setVAlign(KCStyle::VDistributed);
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "background-color")) {
-        QColor color(styleStack.property(KoXmlNS::fo, "background-color"));
-        if (styleStack.property(KoXmlNS::fo, "background-color") == "transparent") {
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "background-color")) {
+        QColor color(styleStack.property(KOdfXmlNS::fo, "background-color"));
+        if (styleStack.property(KOdfXmlNS::fo, "background-color") == "transparent") {
             color = QColor(); // Transparent color found: invalidate it.
             kDebug(36003) << "\t\t fo:background-color: transparent";
             setBackgroundColor(color);
@@ -393,11 +393,11 @@ void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const K
         }
     }
 
-    if (styleStack.hasProperty(KoXmlNS::fo, "wrap-option") && (styleStack.property(KoXmlNS::fo, "wrap-option") == "wrap")) {
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "wrap-option") && (styleStack.property(KOdfXmlNS::fo, "wrap-option") == "wrap")) {
         setWrapText(true);
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "cell-protect")) {
-        str = styleStack.property(KoXmlNS::style, "cell-protect");
+    if (styleStack.hasProperty(KOdfXmlNS::style, "cell-protect")) {
+        str = styleStack.property(KOdfXmlNS::style, "cell-protect");
         if (str == "none")
             setNotProtected(true);
         else if (str == "hidden-and-protected")
@@ -409,74 +409,74 @@ void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const K
             setHideFormula(true);
         }
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "print-content") &&
-            (styleStack.property(KoXmlNS::style, "print-content") == "false")) {
+    if (styleStack.hasProperty(KOdfXmlNS::style, "print-content") &&
+            (styleStack.property(KOdfXmlNS::style, "print-content") == "false")) {
         setDontPrintText(true);
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "shrink-to-fit") &&
-            (styleStack.property(KoXmlNS::style, "shrink-to-fit") == "true")) {
+    if (styleStack.hasProperty(KOdfXmlNS::style, "shrink-to-fit") &&
+            (styleStack.property(KOdfXmlNS::style, "shrink-to-fit") == "true")) {
         setShrinkToFit(true);
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "direction") &&
-            (styleStack.property(KoXmlNS::style, "direction") == "ttb")) {
+    if (styleStack.hasProperty(KOdfXmlNS::style, "direction") &&
+            (styleStack.property(KOdfXmlNS::style, "direction") == "ttb")) {
         setVerticalText(true);
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "rotation-angle")) {
+    if (styleStack.hasProperty(KOdfXmlNS::style, "rotation-angle")) {
         bool ok;
-        int a = styleStack.property(KoXmlNS::style, "rotation-angle").toInt(&ok);
+        int a = styleStack.property(KOdfXmlNS::style, "rotation-angle").toInt(&ok);
         kDebug(36003) << " rotation-angle :" << a;
         if (a != 0) {
             setAngle(-a);
         }
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "margin-left")) {
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "margin-left")) {
         //todo fix me
-        setIndentation(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left"), 0.0));
+        setIndentation(KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-left"), 0.0));
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "border")) {
-        str = styleStack.property(KoXmlNS::fo, "border");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "border")) {
+        str = styleStack.property(KOdfXmlNS::fo, "border");
         QPen pen = KCells::Odf::decodePen(str);
         setLeftBorderPen(pen);
         setTopBorderPen(pen);
         setBottomBorderPen(pen);
         setRightBorderPen(pen);
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "border-left")) {
-        str = styleStack.property(KoXmlNS::fo, "border-left");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "border-left")) {
+        str = styleStack.property(KOdfXmlNS::fo, "border-left");
         setLeftBorderPen(KCells::Odf::decodePen(str));
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "border-right")) {
-        str = styleStack.property(KoXmlNS::fo, "border-right");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "border-right")) {
+        str = styleStack.property(KOdfXmlNS::fo, "border-right");
         setRightBorderPen(KCells::Odf::decodePen(str));
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "border-top")) {
-        str = styleStack.property(KoXmlNS::fo, "border-top");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "border-top")) {
+        str = styleStack.property(KOdfXmlNS::fo, "border-top");
         setTopBorderPen(KCells::Odf::decodePen(str));
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "border-bottom")) {
-        str = styleStack.property(KoXmlNS::fo, "border-bottom");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "border-bottom")) {
+        str = styleStack.property(KOdfXmlNS::fo, "border-bottom");
         setBottomBorderPen(KCells::Odf::decodePen(str));
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "diagonal-tl-br")) {
-        str = styleStack.property(KoXmlNS::style, "diagonal-tl-br");
+    if (styleStack.hasProperty(KOdfXmlNS::style, "diagonal-tl-br")) {
+        str = styleStack.property(KOdfXmlNS::style, "diagonal-tl-br");
         setFallDiagonalPen(KCells::Odf::decodePen(str));
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "diagonal-bl-tr")) {
-        str = styleStack.property(KoXmlNS::style, "diagonal-bl-tr");
+    if (styleStack.hasProperty(KOdfXmlNS::style, "diagonal-bl-tr")) {
+        str = styleStack.property(KOdfXmlNS::style, "diagonal-bl-tr");
         setGoUpDiagonalPen(KCells::Odf::decodePen(str));
     }
 
-    if (styleStack.hasProperty(KoXmlNS::draw, "style-name")) {
-        kDebug(36003) << " style name :" << styleStack.property(KoXmlNS::draw, "style-name");
+    if (styleStack.hasProperty(KOdfXmlNS::draw, "style-name")) {
+        kDebug(36003) << " style name :" << styleStack.property(KOdfXmlNS::draw, "style-name");
 
-        const KoXmlElement * style = stylesReader.findStyle(styleStack.property(KoXmlNS::draw, "style-name"), "graphic");
+        const KoXmlElement * style = stylesReader.findStyle(styleStack.property(KOdfXmlNS::draw, "style-name"), "graphic");
         kDebug(36003) << " style :" << style;
         if (style) {
             KOdfStyleStack drawStyleStack;
             drawStyleStack.push(*style);
             drawStyleStack.setTypeProperties("graphic");
-            if (drawStyleStack.hasProperty(KoXmlNS::draw, "fill")) {
-                const QString fill = drawStyleStack.property(KoXmlNS::draw, "fill");
+            if (drawStyleStack.hasProperty(KOdfXmlNS::draw, "fill")) {
+                const QString fill = drawStyleStack.property(KOdfXmlNS::draw, "fill");
                 kDebug(36003) << " load object gradient fill type :" << fill;
 
                 if (fill == "solid" || fill == "hatch") {
@@ -499,60 +499,60 @@ void KCStyle::loadOdfTextProperties(KOdfStylesReader& stylesReader, const KOdfSt
     // style:text-underline-color="font-color"
     // fo:font-weight="bold"
     kDebug(36003) << "\t text-properties";
-    if (styleStack.hasProperty(KoXmlNS::fo, "font-family")) {
-        setFontFamily(styleStack.property(KoXmlNS::fo, "font-family"));     // FIXME Stefan: sanity check
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "font-family")) {
+        setFontFamily(styleStack.property(KOdfXmlNS::fo, "font-family"));     // FIXME Stefan: sanity check
         kDebug(36003) << "\t\t fo:font-family:" << fontFamily();
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "font-size")) {
-        setFontSize((int) KUnit::parseValue(styleStack.property(KoXmlNS::fo, "font-size"), 10.0));       // FIXME Stefan: fallback to default
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "font-size")) {
+        setFontSize((int) KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "font-size"), 10.0));       // FIXME Stefan: fallback to default
         kDebug(36003) << "\t\t fo:font-size:" << fontSize();
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "font-style")) {
-        if (styleStack.property(KoXmlNS::fo, "font-style") == "italic") {   // "normal", "oblique"
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "font-style")) {
+        if (styleStack.property(KOdfXmlNS::fo, "font-style") == "italic") {   // "normal", "oblique"
             setFontItalic(true);
             kDebug(36003) << "\t\t fo:font-style:" << "italic";
         }
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "font-weight")) {
-        if (styleStack.property(KoXmlNS::fo, "font-weight") == "bold") {   // "normal", "100", "200", ...
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "font-weight")) {
+        if (styleStack.property(KOdfXmlNS::fo, "font-weight") == "bold") {   // "normal", "100", "200", ...
             setFontBold(true);
             kDebug(36003) << "\t\t fo:font-weight:" << "bold";
         }
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "text-underline-style")) {
-        if (styleStack.property(KoXmlNS::style, "text-underline-style") != "none") {
+    if (styleStack.hasProperty(KOdfXmlNS::style, "text-underline-style")) {
+        if (styleStack.property(KOdfXmlNS::style, "text-underline-style") != "none") {
             setFontUnderline(true);
             kDebug(36003) << "\t\t style:text-underline-style:" << "solid (actually: !none)";
         }
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "text-underline-width")) {
+    if (styleStack.hasProperty(KOdfXmlNS::style, "text-underline-width")) {
         //TODO
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "text-underline-color")) {
+    if (styleStack.hasProperty(KOdfXmlNS::style, "text-underline-color")) {
         //TODO
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "color")) {
-        QColor color = QColor(styleStack.property(KoXmlNS::fo, "color"));
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "color")) {
+        QColor color = QColor(styleStack.property(KOdfXmlNS::fo, "color"));
         if (color.isValid()) {
             setFontColor(color);
             kDebug(36003) << "\t\t fo:color:" << color.name();
         }
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "text-line-through-style")) {
-        if (styleStack.property(KoXmlNS::style, "text-line-through-style") != "none"
+    if (styleStack.hasProperty(KOdfXmlNS::style, "text-line-through-style")) {
+        if (styleStack.property(KOdfXmlNS::style, "text-line-through-style") != "none"
                 /*&& styleStack.property("text-line-through-style")=="solid"*/) {
             setFontStrikeOut(true);
             kDebug(36003) << "\t\t text-line-through-style:" << "solid (actually: !none)";
         }
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "font-name")) {
-        QString fontName = styleStack.property(KoXmlNS::style, "font-name");
+    if (styleStack.hasProperty(KOdfXmlNS::style, "font-name")) {
+        QString fontName = styleStack.property(KOdfXmlNS::style, "font-name");
         kDebug(36003) << "\t\t style:font-name:" << fontName;
         const KoXmlElement * style = stylesReader.findStyle(fontName);
         // TODO: sanity check that it is a font-face style?
         kDebug(36003) << "\t\t\t style:" <<  style;
         if (style) {
-            setFontFamily(style->attributeNS(KoXmlNS::svg, "font-family"));
+            setFontFamily(style->attributeNS(KOdfXmlNS::svg, "font-family"));
             kDebug(36003) << "\t\t\t svg:font-family:" << fontFamily();
         }
     }
@@ -2757,8 +2757,8 @@ void KCCustomStyle::loadOdf(KOdfStylesReader& stylesReader, const KoXmlElement& 
                           const KCStyleManager* styleManager, const KCValueParser *parser)
 {
     setName(name);
-    if (style.hasAttributeNS(KoXmlNS::style, "parent-style-name"))
-        setParentName(style.attributeNS(KoXmlNS::style, "parent-style-name", QString()));
+    if (style.hasAttributeNS(KOdfXmlNS::style, "parent-style-name"))
+        setParentName(style.attributeNS(KOdfXmlNS::style, "parent-style-name", QString()));
 
     setType(CUSTOM);
 

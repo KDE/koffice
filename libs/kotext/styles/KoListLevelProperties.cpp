@@ -27,7 +27,7 @@
 
 #include <kdebug.h>
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <KoXmlWriter.h>
@@ -374,16 +374,16 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
 
     // The text:level attribute specifies the level of the number list
     // style. It can be used on all list-level styles.
-    const int level = qMax(1, style.attributeNS(KoXmlNS::text, "level", QString()).toInt());
+    const int level = qMax(1, style.attributeNS(KOdfXmlNS::text, "level", QString()).toInt());
     // The text:display-levels attribute specifies the number of
     // levels whose numbers are displayed at the current level.
-    const QString displayLevel = style.attributeNS(KoXmlNS::text,
+    const QString displayLevel = style.attributeNS(KOdfXmlNS::text,
                                  "display-levels", QString());
 
     if (style.localName() == "list-level-style-bullet") {   // list with bullets
 
         //1.6: KoParagCounter::loadOasisListStyle
-        QString bulletChar = style.isNull() ? QString() : style.attributeNS(KoXmlNS::text, "bullet-char", QString());
+        QString bulletChar = style.isNull() ? QString() : style.attributeNS(KOdfXmlNS::text, "bullet-char", QString());
         kDebug(32500) << "style.localName()=" << style.localName() << "level=" << level << "displayLevel=" << displayLevel << "bulletChar=" << bulletChar;
         if (bulletChar.isEmpty()) {  // list without any visible bullets
             setStyle(KoListStyle::CustomCharItem);
@@ -422,20 +422,20 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
             default:
                 QChar customBulletChar = bulletChar[0];
                 kDebug(32500) << "Unhandled bullet code 0x" << QString::number((uint)customBulletChar.unicode(), 16);
-                kDebug(32500) << "Should use the style =>" << style.attributeNS(KoXmlNS::text, "style-name", QString()) << "<=";
+                kDebug(32500) << "Should use the style =>" << style.attributeNS(KOdfXmlNS::text, "style-name", QString()) << "<=";
                 setStyle(KoListStyle::CustomCharItem);
                 /*
                 QString customBulletFont;
                 // often StarSymbol when it comes from OO; doesn't matter, Qt finds it in another font if needed.
-                if ( listStyleProperties.hasAttributeNS( KoXmlNS::style, "font-name" ) )
+                if ( listStyleProperties.hasAttributeNS( KOdfXmlNS::style, "font-name" ) )
                 {
-                    customBulletFont = listStyleProperties.attributeNS( KoXmlNS::style, "font-name", QString::null );
-                    kDebug(32500) <<"customBulletFont style:font-name =" << listStyleProperties.attributeNS( KoXmlNS::style,"font-name", QString::null );
+                    customBulletFont = listStyleProperties.attributeNS( KOdfXmlNS::style, "font-name", QString::null );
+                    kDebug(32500) <<"customBulletFont style:font-name =" << listStyleProperties.attributeNS( KOdfXmlNS::style,"font-name", QString::null );
                 }
-                else if ( listStyleTextProperties.hasAttributeNS( KoXmlNS::fo, "font-family" ) )
+                else if ( listStyleTextProperties.hasAttributeNS( KOdfXmlNS::fo, "font-family" ) )
                 {
-                    customBulletFont = listStyleTextProperties.attributeNS( KoXmlNS::fo, "font-family", QString::null );
-                    kDebug(32500) <<"customBulletFont fo:font-family =" << listStyleTextProperties.attributeNS( KoXmlNS::fo,"font-family", QString::null );
+                    customBulletFont = listStyleTextProperties.attributeNS( KOdfXmlNS::fo, "font-family", QString::null );
+                    kDebug(32500) <<"customBulletFont fo:font-family =" << listStyleTextProperties.attributeNS( KOdfXmlNS::fo,"font-family", QString::null );
                 }
                 // ## TODO in fact we're supposed to read it from the style pointed to by text:style-name
                 */
@@ -446,7 +446,7 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
         }
 
     } else if (style.localName() == "list-level-style-number" || style.localName() == "outline-level-style") { // it's a numbered list
-        const QString format = style.attributeNS(KoXmlNS::style, "num-format", QString());
+        const QString format = style.attributeNS(KOdfXmlNS::style, "num-format", QString());
         kDebug(32500) << "style.localName()=" << style.localName() << "level=" << level << "displayLevel=" << displayLevel << "format=" << format;
         if (format.isEmpty()) {
             setStyle(KoListStyle::None);
@@ -468,13 +468,13 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
         }
 
         //The style:num-prefix and style:num-suffix attributes specify what to display before and after the number.
-        const QString prefix = style.attributeNS(KoXmlNS::style, "num-prefix", QString());
+        const QString prefix = style.attributeNS(KOdfXmlNS::style, "num-prefix", QString());
         if (! prefix.isEmpty())
             setListItemPrefix(prefix);
-        const QString suffix = style.attributeNS(KoXmlNS::style, "num-suffix", QString());
+        const QString suffix = style.attributeNS(KOdfXmlNS::style, "num-suffix", QString());
         if (! suffix.isEmpty())
             setListItemSuffix(suffix);
-        const QString startValue = style.attributeNS(KoXmlNS::text, "start-value", QString("1"));
+        const QString startValue = style.attributeNS(KOdfXmlNS::text, "start-value", QString("1"));
         setStartValue(startValue.toInt());
     }
     else if (style.localName() == "list-level-style-image") {   // list with image
@@ -487,7 +487,7 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
                 setBulletImage(imageCollection->createImageData(href, store));
             } else {
                 // check if we have an office:binary data element containing the image data
-                const KoXmlElement &binaryData(KoXml::namedItemNS(style, KoXmlNS::office, "binary-data"));
+                const KoXmlElement &binaryData(KoXml::namedItemNS(style, KOdfXmlNS::office, "binary-data"));
                 if (!binaryData.isNull()) {
                     QImage image;
                     if (image.loadFromData(QByteArray::fromBase64(binaryData.text().toLatin1()))) {
@@ -509,36 +509,36 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
 
     KoXmlElement property;
     forEachElement(property, style) {
-        if (property.namespaceURI() != KoXmlNS::style)
+        if (property.namespaceURI() != KOdfXmlNS::style)
             continue;
         const QString localName = property.localName();
         if (localName == "list-level-properties") {
-            QString spaceBefore(property.attributeNS(KoXmlNS::text, "space-before"));
+            QString spaceBefore(property.attributeNS(KOdfXmlNS::text, "space-before"));
             if (!spaceBefore.isEmpty())
                 setIndent(KUnit::parseValue(spaceBefore));
 
-            QString minLableWidth(property.attributeNS(KoXmlNS::text, "min-label-width"));
+            QString minLableWidth(property.attributeNS(KOdfXmlNS::text, "min-label-width"));
             if (!minLableWidth.isEmpty())
                 setMinimumWidth(KUnit::parseValue(minLableWidth));
 
-            QString textAlign(property.attributeNS(KoXmlNS::fo, "text-align"));
+            QString textAlign(property.attributeNS(KOdfXmlNS::fo, "text-align"));
             if (!textAlign.isEmpty())
                 setAlignment(KoText::alignmentFromString(textAlign));
 
-            QString minLableDistance(property.attributeNS(KoXmlNS::text, "min-label-distance"));
+            QString minLableDistance(property.attributeNS(KOdfXmlNS::text, "min-label-distance"));
             if (!minLableDistance.isEmpty())
                 setMinimumDistance(KUnit::parseValue(minLableDistance));
 
-            QString width(property.attributeNS(KoXmlNS::fo, "width"));
+            QString width(property.attributeNS(KOdfXmlNS::fo, "width"));
             if (!width.isEmpty())
                 setWidth(KUnit::parseValue(width));
 
-            QString height(property.attributeNS(KoXmlNS::fo, "height"));
+            QString height(property.attributeNS(KOdfXmlNS::fo, "height"));
             if (!height.isEmpty())
                 setHeight(KUnit::parseValue(height));
         } else if (localName == "text-properties") {
             // TODO
-            QString color(property.attributeNS(KoXmlNS::fo, "color"));
+            QString color(property.attributeNS(KOdfXmlNS::fo, "color"));
             if (!color.isEmpty())
                 setBulletColor(QColor(color));
 	

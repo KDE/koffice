@@ -29,7 +29,7 @@
 #include <KoShapeContainer.h>
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <KUnit.h>
@@ -380,18 +380,18 @@ bool KoTextAnchor::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
     // load settings from graphic style
      KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
      styleStack.save();
-     if (element.hasAttributeNS(KoXmlNS::draw, "style-name")) {
-         context.odfLoadingContext().fillStyleStack(element, KoXmlNS::draw, "style-name", "graphic");
+     if (element.hasAttributeNS(KOdfXmlNS::draw, "style-name")) {
+         context.odfLoadingContext().fillStyleStack(element, KOdfXmlNS::draw, "style-name", "graphic");
          styleStack.setTypeProperties("graphic");
      }
-     QString verticalPos = styleStack.property(KoXmlNS::style, "vertical-pos");
-     QString verticalRel = styleStack.property(KoXmlNS::style, "vertical-rel");
-     QString horizontalPos = styleStack.property(KoXmlNS::style, "horizontal-pos");
-     QString horizontalRel = styleStack.property(KoXmlNS::style, "horizontal-rel");
+     QString verticalPos = styleStack.property(KOdfXmlNS::style, "vertical-pos");
+     QString verticalRel = styleStack.property(KOdfXmlNS::style, "vertical-rel");
+     QString horizontalPos = styleStack.property(KOdfXmlNS::style, "horizontal-pos");
+     QString horizontalRel = styleStack.property(KOdfXmlNS::style, "horizontal-rel");
      styleStack.restore();
 
-     if (element.hasAttributeNS(KoXmlNS::koffice, "anchor-type")) {
-         anchorType = element.attributeNS(KoXmlNS::koffice, "anchor-type"); // our enriched properties
+     if (element.hasAttributeNS(KOdfXmlNS::koffice, "anchor-type")) {
+         anchorType = element.attributeNS(KOdfXmlNS::koffice, "anchor-type"); // our enriched properties
          QStringList types = anchorType.split('|');
          if (types.count() > 1) {
              QString vertical = types[0];

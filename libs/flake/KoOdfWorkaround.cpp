@@ -26,7 +26,7 @@
 #include <KoPathShape.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoColorBackground.h>
 #include <KOdfStyleStack.h>
 
@@ -48,7 +48,7 @@ void KoOdfWorkaround::fixPenWidth(QPen & pen, KoShapeLoadingContext &context)
 void KoOdfWorkaround::fixEnhancedPath(QString & path, const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice) {
-        if (path.isEmpty() && element.attributeNS(KoXmlNS::draw, "type", "") == "ellipse") {
+        if (path.isEmpty() && element.attributeNS(KOdfXmlNS::draw, "type", "") == "ellipse") {
             path = "U 10800 10800 10800 10800 0 360 Z N";
         }
     }
@@ -57,7 +57,7 @@ void KoOdfWorkaround::fixEnhancedPath(QString & path, const KoXmlElement &elemen
 void KoOdfWorkaround::fixEnhancedPathPolarHandlePosition(QString &position, const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice) {
-        if (element.hasAttributeNS(KoXmlNS::draw, "handle-polar")) {
+        if (element.hasAttributeNS(KOdfXmlNS::draw, "handle-polar")) {
             QStringList tokens = position.simplified().split(' ');
             if (tokens.count() == 2) {
                 position = tokens[1] + ' ' + tokens[0];
@@ -75,24 +75,24 @@ QColor KoOdfWorkaround::fixMissingFillColor(const KoXmlElement &element, KoShape
         KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
         styleStack.save();
 
-        bool hasStyle = element.hasAttributeNS(KoXmlNS::chart, "style-name");
+        bool hasStyle = element.hasAttributeNS(KOdfXmlNS::chart, "style-name");
         if (hasStyle) {
-            context.odfLoadingContext().fillStyleStack(element, KoXmlNS::chart, "style-name", "chart");
+            context.odfLoadingContext().fillStyleStack(element, KOdfXmlNS::chart, "style-name", "chart");
             styleStack.setTypeProperties("graphic");
         }
 
         if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice) {
-            if (hasStyle && !styleStack.hasProperty(KoXmlNS::draw, "fill") &&
-                             styleStack.hasProperty(KoXmlNS::draw, "fill-color")) {
-                color = QColor(styleStack.property(KoXmlNS::draw, "fill-color"));
-            } else if (!hasStyle || (!styleStack.hasProperty(KoXmlNS::draw, "fill")
-                                    && !styleStack.hasProperty(KoXmlNS::draw, "fill-color"))) {
+            if (hasStyle && !styleStack.hasProperty(KOdfXmlNS::draw, "fill") &&
+                             styleStack.hasProperty(KOdfXmlNS::draw, "fill-color")) {
+                color = QColor(styleStack.property(KOdfXmlNS::draw, "fill-color"));
+            } else if (!hasStyle || (!styleStack.hasProperty(KOdfXmlNS::draw, "fill")
+                                    && !styleStack.hasProperty(KOdfXmlNS::draw, "fill-color"))) {
                 KoXmlElement plotAreaElement = element.parentNode().toElement();
                 KoXmlElement chartElement = plotAreaElement.parentNode().toElement();
 
                 if (element.tagName() == "wall") {
-                    if (chartElement.hasAttributeNS(KoXmlNS::chart, "class")) {
-                        QString chartType = chartElement.attributeNS(KoXmlNS::chart, "class");
+                    if (chartElement.hasAttributeNS(KOdfXmlNS::chart, "class")) {
+                        QString chartType = chartElement.attributeNS(KOdfXmlNS::chart, "class");
                         // TODO: Check what default backgrounds for surface, stock and gantt charts are
                         if (chartType == "chart:line" ||
                              chartType == "chart:area" ||
@@ -101,8 +101,8 @@ QColor KoOdfWorkaround::fixMissingFillColor(const KoXmlElement &element, KoShape
                         color = QColor(0xe0e0e0);
                     }
                 } else if (element.tagName() == "series") {
-                    if (chartElement.hasAttributeNS(KoXmlNS::chart, "class")) {
-                        QString chartType = chartElement.attributeNS(KoXmlNS::chart, "class");
+                    if (chartElement.hasAttributeNS(KOdfXmlNS::chart, "class")) {
+                        QString chartType = chartElement.attributeNS(KOdfXmlNS::chart, "class");
                         // TODO: Check what default backgrounds for surface, stock and gantt charts are
                         if (chartType == "chart:area" ||
                              chartType == "chart:bar")
@@ -128,15 +128,15 @@ bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KoXmlElement &element, K
     if (element.prefix() == "chart") {
         styleStack.save();
 
-        bool hasStyle = element.hasAttributeNS(KoXmlNS::chart, "style-name");
+        bool hasStyle = element.hasAttributeNS(KOdfXmlNS::chart, "style-name");
         if (hasStyle) {
-            context.odfLoadingContext().fillStyleStack(element, KoXmlNS::chart, "style-name", "chart");
+            context.odfLoadingContext().fillStyleStack(element, KOdfXmlNS::chart, "style-name", "chart");
             styleStack.setTypeProperties("graphic");
         }
 
         if (context.odfLoadingContext().generatorType() == KOdfLoadingContext::OpenOffice) {
-            if (hasStyle && styleStack.hasProperty(KoXmlNS::draw, "stroke") &&
-                            !styleStack.hasProperty(KoXmlNS::draw, "stroke-color")) {
+            if (hasStyle && styleStack.hasProperty(KOdfXmlNS::draw, "stroke") &&
+                            !styleStack.hasProperty(KOdfXmlNS::draw, "stroke-color")) {
                 fixed = true;
                 pen.setColor(Qt::black);
             } else if (!hasStyle) {
@@ -144,8 +144,8 @@ bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KoXmlElement &element, K
                 KoXmlElement chartElement = plotAreaElement.parentNode().toElement();
 
                 if (element.tagName() == "series") {
-                    if (chartElement.hasAttributeNS(KoXmlNS::chart, "class")) {
-                        QString chartType = chartElement.attributeNS(KoXmlNS::chart, "class");
+                    if (chartElement.hasAttributeNS(KOdfXmlNS::chart, "class")) {
+                        QString chartType = chartElement.attributeNS(KOdfXmlNS::chart, "class");
                         // TODO: Check what default backgrounds for surface, stock and gantt charts are
                         if (chartType == "chart:line" ||
                              chartType == "chart:scatter") {
@@ -164,11 +164,11 @@ bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KoXmlElement &element, K
     } else {
         const KoPathShape *pathShape = dynamic_cast<const KoPathShape*>(shape);
         if (pathShape) {
-            const QString strokeColor(styleStack.property(KoXmlNS::draw, "stroke-color"));
+            const QString strokeColor(styleStack.property(KOdfXmlNS::draw, "stroke-color"));
             if (strokeColor.isEmpty()) {
                 pen.setColor(Qt::black);
             } else {
-                pen.setColor(styleStack.property(KoXmlNS::svg, "stroke-color"));
+                pen.setColor(styleStack.property(KOdfXmlNS::svg, "stroke-color"));
             }
             fixed = true;
         }
@@ -217,7 +217,7 @@ KoColorBackground *KoOdfWorkaround::fixBackgroundColor(const KoShape *shape, KoS
         //check shape type
         if (pathShape) {
             KOdfStyleStack &styleStack = odfContext.styleStack();
-            const QString color(styleStack.property(KoXmlNS::draw, "fill-color"));
+            const QString color(styleStack.property(KOdfXmlNS::draw, "fill-color"));
             if (color.isEmpty()) {
                 colorBackground = new KoColorBackground(QColor(153, 204, 255));
             } else { 

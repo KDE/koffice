@@ -34,7 +34,7 @@
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
 #include <KoTextShapeData.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoPATextPage.h>
 #include <SCPage.h>
 

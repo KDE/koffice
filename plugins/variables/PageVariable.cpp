@@ -25,7 +25,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KProperties.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShape.h>
 #include <KoShapeSavingContext.h>
 #include <KoShapeLoadingContext.h>
@@ -146,7 +146,7 @@ bool PageVariable::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
 
         // The text:select-page attribute is used to display the number of the previous or the following
         // page rather than the number of the current page.
-        QString pageselect = element.attributeNS(KoXmlNS::text, "select-page");
+        QString pageselect = element.attributeNS(KOdfXmlNS::text, "select-page");
         if (pageselect == "previous")
             m_pageselect = KoTextPage::PreviousPage;
         else if (pageselect == "next")
@@ -157,19 +157,19 @@ bool PageVariable::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
         // The value of a page number field can be adjusted by a specified number, allowing the display
         // of page numbers of following or preceding pages. The adjustment amount is specified using
         // the text:page-adjust attribute.
-        m_pageadjust = element.attributeNS(KoXmlNS::text, "page-adjust").toInt();
+        m_pageadjust = element.attributeNS(KOdfXmlNS::text, "page-adjust").toInt();
 
         // The text:fixed attribute specifies whether or not the value of a field element is fixed. If
         // the value of a field is fixed, the value of the field element to which this attribute is
         // attached is preserved in all future edits of the document. If the value of the field is not
         // fixed, the value of the field may be replaced by a new value when the document is edited.
-        m_fixed = element.attributeNS(KoXmlNS::text, "fixed", QString()) == "true";
+        m_fixed = element.attributeNS(KOdfXmlNS::text, "fixed", QString()) == "true";
     } else if (localName == "page-continuation-string") {
         m_type = PageContinuation;
 
         // This attribute specifies whether to check for a previous or next page and if the page exists, the
         // continuation text is printed.
-        QString pageselect = element.attributeNS(KoXmlNS::text, "select-page");
+        QString pageselect = element.attributeNS(KOdfXmlNS::text, "select-page");
         if (pageselect == "previous")
             m_pageselect = KoTextPage::PreviousPage;
         else if (pageselect == "next")

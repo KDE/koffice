@@ -23,7 +23,7 @@
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
@@ -116,11 +116,11 @@ void TestKoOdfLoadingContext::testFillStyleStack()
     KOdfLoadingContext context(readStore.styles(), readStore.store());
 
     KoXmlElement content = readStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
+    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
 
     QVERIFY(realBody.isNull() == false);
 
-    KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, "text");
+    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
     QVERIFY(body.isNull() == false);
 
     KoXmlElement tag;
@@ -129,12 +129,12 @@ void TestKoOdfLoadingContext::testFillStyleStack()
         QCOMPARE(tag.localName(), QString("rect"));
         KOdfStyleStack & styleStack = context.styleStack();
         styleStack.save();
-        context.fillStyleStack(tag, KoXmlNS::draw, "style-name", "graphic");
+        context.fillStyleStack(tag, KOdfXmlNS::draw, "style-name", "graphic");
         styleStack.setTypeProperties("graphic");
-        QVERIFY(styleStack.hasProperty(KoXmlNS::draw, "fill"));
-        QCOMPARE(styleStack.property(KoXmlNS::draw, "fill"), QString("solid"));
-        QVERIFY(styleStack.hasProperty(KoXmlNS::draw, "stroke"));
-        QCOMPARE(styleStack.property(KoXmlNS::draw, "stroke"), QString("solid"));
+        QVERIFY(styleStack.hasProperty(KOdfXmlNS::draw, "fill"));
+        QCOMPARE(styleStack.property(KOdfXmlNS::draw, "fill"), QString("solid"));
+        QVERIFY(styleStack.hasProperty(KOdfXmlNS::draw, "stroke"));
+        QCOMPARE(styleStack.property(KOdfXmlNS::draw, "stroke"), QString("solid"));
         styleStack.restore();
     }
 }

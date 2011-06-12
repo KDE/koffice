@@ -18,7 +18,7 @@
 */
 
 #include "KoOdfSettings.h"
-#include "KoXmlNS.h"
+#include "KOdfXmlNS.h"
 #include <kdebug.h>
 
 class KoOdfSettings::Private
@@ -26,8 +26,8 @@ class KoOdfSettings::Private
 };
 
 KoOdfSettings::KoOdfSettings(const KoXmlDocument& doc)
-        : m_settingsElement(KoXml::namedItemNS(doc.documentElement(), KoXmlNS::office, "settings")),
-        m_configNsUri(KoXmlNS::config)
+        : m_settingsElement(KoXml::namedItemNS(doc.documentElement(), KOdfXmlNS::office, "settings")),
+        m_configNsUri(KOdfXmlNS::config)
         , d(0)
 {
     const KoXmlElement contents = doc.documentElement();

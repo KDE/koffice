@@ -25,7 +25,7 @@
 #include <kdebug.h>
 
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include "KoEventActionFactoryBase.h"
 #include "KoEventAction.h"
 
@@ -114,12 +114,12 @@ QSet<KoEventAction*> KoEventActionRegistry::createEventActionsFromOdf(const KoXm
 {
     QSet<KoEventAction *> eventActions;
 
-    if (e.namespaceURI() == KoXmlNS::office && e.tagName() == "event-listeners") {
+    if (e.namespaceURI() == KOdfXmlNS::office && e.tagName() == "event-listeners") {
         KoXmlElement element;
         forEachElement(element, e) {
             if (element.tagName() == "event-listener") {
-                if (element.namespaceURI() == KoXmlNS::presentation) {
-                    QString action(element.attributeNS(KoXmlNS::presentation, "action", QString()));
+                if (element.namespaceURI() == KOdfXmlNS::presentation) {
+                    QString action(element.attributeNS(KOdfXmlNS::presentation, "action", QString()));
                     QHash<QString, KoEventActionFactoryBase *>::const_iterator it(d->presentationEventActions.find(action));
 
                     if (it != d->presentationEventActions.constEnd()) {
@@ -134,7 +134,7 @@ QSet<KoEventAction*> KoEventActionRegistry::createEventActionsFromOdf(const KoXm
                     } else {
                         kWarning(30006) << "presentation:event-listerer action = " << action << "not supported";
                     }
-                } else if (element.namespaceURI() == KoXmlNS::script) {
+                } else if (element.namespaceURI() == KOdfXmlNS::script) {
                     // TODO
                 } else {
                     kWarning(30006) << "element" << e.namespaceURI() << e.tagName() << "not supported";

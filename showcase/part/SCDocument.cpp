@@ -39,7 +39,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
 #include <KoToolRegistry.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 #include <KConfigGroup>
@@ -67,11 +67,11 @@ SCDocument::SCDocument(QWidget* parentWidget, QObject* parent, bool singleViewMo
     setTemplateType("showcase_template");
 
     KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
-                                                       KoXmlNS::presentation, "placeholder",
+                                                       KOdfXmlNS::presentation, "placeholder",
                                                        "presentation:placeholder"));
 
     KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
-                                                       KoXmlNS::presentation, "class",
+                                                       KOdfXmlNS::presentation, "class",
                                                        "presentation:class"));
 
     QVariant variant;
@@ -130,14 +130,14 @@ void SCDocument::saveOdfDocumentStyles(KoPASavingContext &context)
 
 bool SCDocument::loadOdfEpilogue(const KoXmlElement &body, KoPALoadingContext &context)
 {
-    const KoXmlElement &presentationSettings(KoXml::namedItemNS(body, KoXmlNS::presentation, "settings"));
+    const KoXmlElement &presentationSettings(KoXml::namedItemNS(body, KOdfXmlNS::presentation, "settings"));
     if (!presentationSettings.isNull()) {
         m_customSlideShows->loadOdf(presentationSettings, context);
     }
 
     m_activeCustomSlideShow = QString("");
-    if (presentationSettings.hasAttributeNS(KoXmlNS::presentation, "show")) {
-        QString show = presentationSettings.attributeNS(KoXmlNS::presentation, "show");
+    if (presentationSettings.hasAttributeNS(KOdfXmlNS::presentation, "show")) {
+        QString show = presentationSettings.attributeNS(KOdfXmlNS::presentation, "show");
         if (m_customSlideShows->names().contains(show)) {
             m_activeCustomSlideShow = show;
         }

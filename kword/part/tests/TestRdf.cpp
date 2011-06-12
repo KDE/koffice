@@ -51,7 +51,7 @@
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
 #include <KoStyleManager.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <kcomponentdata.h>
 #include <QTemporaryFile>
 #include <KoTextRdfCore.h>

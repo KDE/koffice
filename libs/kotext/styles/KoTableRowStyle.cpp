@@ -35,7 +35,7 @@
 #include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 class KoTableRowStyle::Private : public QSharedData
@@ -254,18 +254,18 @@ void KoTableRowStyle::setMasterPageName(const QString &name)
 
 void KoTableRowStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &context)
 {
-    if (element->hasAttributeNS(KoXmlNS::style, "display-name"))
-        d->name = element->attributeNS(KoXmlNS::style, "display-name", QString());
+    if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))
+        d->name = element->attributeNS(KOdfXmlNS::style, "display-name", QString());
 
     if (d->name.isEmpty()) // if no style:display-name is given us the style:name
-        d->name = element->attributeNS(KoXmlNS::style, "name", QString());
+        d->name = element->attributeNS(KOdfXmlNS::style, "name", QString());
 
-    QString masterPage = element->attributeNS(KoXmlNS::style, "master-page-name", QString());
+    QString masterPage = element->attributeNS(KOdfXmlNS::style, "master-page-name", QString());
     if (! masterPage.isEmpty()) {
         setMasterPageName(masterPage);
     }
     context.styleStack().save();
-    QString family = element->attributeNS(KoXmlNS::style, "family", "table-row");
+    QString family = element->attributeNS(KOdfXmlNS::style, "family", "table-row");
     context.addStyles(element, family.toLocal8Bit().constData());   // Load all parents - only because we don't support inheritance.
 
     context.styleStack().setTypeProperties("table-row");   // load all style attributes from "style:table-column-properties"
@@ -277,8 +277,8 @@ void KoTableRowStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &c
 void KoTableRowStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     // The fo:background-color attribute specifies the background color of a cell.
-    if (styleStack.hasProperty(KoXmlNS::fo, "background-color")) {
-        const QString bgcolor = styleStack.property(KoXmlNS::fo, "background-color");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "background-color")) {
+        const QString bgcolor = styleStack.property(KOdfXmlNS::fo, "background-color");
         QBrush brush = background();
         if (bgcolor == "transparent")
            clearBackground();
@@ -291,28 +291,28 @@ void KoTableRowStyle::loadOdfProperties(KOdfStyleStack &styleStack)
     }
 
     // minimum row height
-    if (styleStack.hasProperty(KoXmlNS::style, "min-row-height")) {
-        setMinimumRowHeight(KUnit::parseValue(styleStack.property(KoXmlNS::style, "min-row-height")));
+    if (styleStack.hasProperty(KOdfXmlNS::style, "min-row-height")) {
+        setMinimumRowHeight(KUnit::parseValue(styleStack.property(KOdfXmlNS::style, "min-row-height")));
     }
 
     // row height
-    if (styleStack.hasProperty(KoXmlNS::style, "row-height")) {
-        setRowHeight(KUnit::parseValue(styleStack.property(KoXmlNS::style, "row-height")));
+    if (styleStack.hasProperty(KOdfXmlNS::style, "row-height")) {
+        setRowHeight(KUnit::parseValue(styleStack.property(KOdfXmlNS::style, "row-height")));
     }
 
     // The fo:keep-together specifies if a row is allowed to break in the middle of the row.
-    if (styleStack.hasProperty(KoXmlNS::fo, "keep-together")) {
-        if (styleStack.property(KoXmlNS::fo, "keep-together") != "auto")
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "keep-together")) {
+        if (styleStack.property(KOdfXmlNS::fo, "keep-together") != "auto")
             setKeepTogether(true);
     }
 
     // The fo:break-before and fo:break-after attributes insert a page or column break before or after a table.
-    if (styleStack.hasProperty(KoXmlNS::fo, "break-before")) {
-        if (styleStack.property(KoXmlNS::fo, "break-before") != "auto")
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "break-before")) {
+        if (styleStack.property(KOdfXmlNS::fo, "break-before") != "auto")
             setBreakBefore(true);
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "break-after")) {
-        if (styleStack.property(KoXmlNS::fo, "break-after") != "auto")
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "break-after")) {
+        if (styleStack.property(KOdfXmlNS::fo, "break-after") != "auto")
             setBreakAfter(true);
     }
 }

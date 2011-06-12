@@ -324,7 +324,7 @@ void KoRdfCalendarEvent::exportToMime(QMimeData *md) const
 
 QList<KoSemanticStylesheet*> KoRdfCalendarEvent::stylesheets() const
 {
-    // TODO we probably want a namespace for these (like KoXmlNS).
+    // TODO we probably want a namespace for these (like KOdfXmlNS).
     QList<KoSemanticStylesheet*> stylesheets;
     stylesheets.append(
         new KoSemanticStylesheet("92f5d6c5-2c3a-4988-9646-2f29f3731f89",

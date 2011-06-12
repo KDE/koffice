@@ -21,7 +21,7 @@
 #include "ArtisticTextShape.h"
 #include "ArtisticTextShapeConfigWidget.h"
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoColorBackground.h>
 #include <KoShapeLoadingContext.h>
 
@@ -33,7 +33,7 @@ ArtisticTextShapeFactory::ArtisticTextShapeFactory(QObject *parent)
     setToolTip(i18n("A shape which shows a single text line"));
     setIcon( "text" );
     setLoadingPriority( 5 );
-    setOdfElementNames( KoXmlNS::draw, QStringList( "custom-shape" ) );
+    setOdfElementNames( KOdfXmlNS::draw, QStringList( "custom-shape" ) );
 }
 
 KoShape *ArtisticTextShapeFactory::createDefaultShape(KoResourceManager *) const
@@ -46,11 +46,11 @@ KoShape *ArtisticTextShapeFactory::createDefaultShape(KoResourceManager *) const
 bool ArtisticTextShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
-    if (!(e.localName() == "custom-shape" && e.namespaceURI() == KoXmlNS::draw)) {
+    if (!(e.localName() == "custom-shape" && e.namespaceURI() == KOdfXmlNS::draw)) {
         return false;
     }
 
-    QString drawEngine = e.attributeNS( KoXmlNS::draw, "engine", "" );
+    QString drawEngine = e.attributeNS( KOdfXmlNS::draw, "engine", "" );
     if ( drawEngine.isEmpty() || drawEngine != "svg:text" ) {
         return false;
     }

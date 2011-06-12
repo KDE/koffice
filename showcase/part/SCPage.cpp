@@ -37,7 +37,7 @@
 #include "animations/SCAnimationLoader.h"
 #include "animations/SCAnimationStep.h"
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
@@ -128,17 +128,17 @@ bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context
     SCPageApplicationData * data = dynamic_cast<SCPageApplicationData *>(applicationData());
     Q_ASSERT(data);
 
-    KoXmlElement animation = KoXml::namedItemNS(element, KoXmlNS::anim, "par");
+    KoXmlElement animation = KoXml::namedItemNS(element, KOdfXmlNS::anim, "par");
 
     bool loadOldTransition = true;
     if (!animation.isNull()) {
         KoXmlElement animationElement;
         forEachElement(animationElement, animation) {
-            if (animationElement.namespaceURI() == KoXmlNS::anim) {
+            if (animationElement.namespaceURI() == KOdfXmlNS::anim) {
                 if (animationElement.tagName() == "par") {
-                    QString begin(animationElement.attributeNS(KoXmlNS::smil, "begin"));
+                    QString begin(animationElement.attributeNS(KOdfXmlNS::smil, "begin"));
                     if (begin.endsWith("begin")) {
-                        KoXmlElement transitionElement(KoXml::namedItemNS(animationElement, KoXmlNS::anim, "transitionFilter"));
+                        KoXmlElement transitionElement(KoXml::namedItemNS(animationElement, KOdfXmlNS::anim, "transitionFilter"));
                         data->setPageEffect(SCPageEffectRegistry::instance()->createPageEffect(transitionElement));
                         kDebug() << "XXXXXXX found page transition";
                         loadOldTransition = false;
@@ -147,7 +147,7 @@ bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context
 
                 }
                 if (animationElement.tagName() == "seq") {
-                    QString nodeType(animationElement.attributeNS(KoXmlNS::presentation, "node-type"));
+                    QString nodeType(animationElement.attributeNS(KOdfXmlNS::presentation, "node-type"));
                     if (nodeType == "main-sequence") {
                         SCAnimationLoader al;
                         al.loadOdf(animationElement, context);
@@ -163,10 +163,10 @@ bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context
 
     if (loadOldTransition) {
         KOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
-        const KoXmlElement * styleElement = stylesReader.findContentAutoStyle(element.attributeNS(KoXmlNS::draw, "style-name"), "drawing-page");
+        const KoXmlElement * styleElement = stylesReader.findContentAutoStyle(element.attributeNS(KOdfXmlNS::draw, "style-name"), "drawing-page");
         if (styleElement) {
 #ifndef KOXML_USE_QDOM
-            KoXmlNode node = styleElement->namedItemNS(KoXmlNS::style, "drawing-page-properties");
+            KoXmlNode node = styleElement->namedItemNS(KOdfXmlNS::style, "drawing-page-properties");
 #else
         KoXmlNode node; // XXX!!!
 #endif
@@ -235,28 +235,28 @@ void SCPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loa
     KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
 
     int pageProperties = m_pageProperties & UseMasterBackground;
-    if (styleStack.property(KoXmlNS::presentation, "background-objects-visible") == "true") {
+    if (styleStack.property(KOdfXmlNS::presentation, "background-objects-visible") == "true") {
         pageProperties |= DisplayMasterShapes;
     }
-    if (styleStack.property(KoXmlNS::presentation, "background-visible") == "true") {
+    if (styleStack.property(KOdfXmlNS::presentation, "background-visible") == "true") {
         pageProperties |= DisplayMasterBackground;
     }
-    if (styleStack.property(KoXmlNS::presentation, "display-header") == "true") {
+    if (styleStack.property(KOdfXmlNS::presentation, "display-header") == "true") {
         pageProperties |= DisplayHeader;
     }
-    if (styleStack.property(KoXmlNS::presentation, "display-footer") == "true") {
+    if (styleStack.property(KOdfXmlNS::presentation, "display-footer") == "true") {
         pageProperties |= DisplayFooter;
     }
-    if (styleStack.property(KoXmlNS::presentation, "display-page-number") == "true") {
+    if (styleStack.property(KOdfXmlNS::presentation, "display-page-number") == "true") {
         pageProperties |= DisplayPageNumber;
     }
-    if (styleStack.property(KoXmlNS::presentation, "display-date-time") == "true") {
+    if (styleStack.property(KOdfXmlNS::presentation, "display-date-time") == "true") {
         pageProperties |= DisplayDateTime;
     }
     m_pageProperties = pageProperties;
 
 #ifndef KOXML_USE_QDOM
-    KoXmlNode node = element.namedItemNS(KoXmlNS::presentation, "notes");
+    KoXmlNode node = element.namedItemNS(KOdfXmlNS::presentation, "notes");
 #else
     KoXmlNode node; //XXX!!!
 #endif
@@ -269,12 +269,12 @@ void SCPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &l
 {
     // the layout needs to be loaded after the shapes are already loaded so the initialization of the data works
     SCPageLayout * layout = 0;
-    if (element.hasAttributeNS(KoXmlNS::presentation, "presentation-page-layout-name")) {
+    if (element.hasAttributeNS(KOdfXmlNS::presentation, "presentation-page-layout-name")) {
         SCPageLayouts *layouts = loadingContext.documentResourceManager()->resource(Showcase::PageLayouts).value<SCPageLayouts*>();
 
         Q_ASSERT(layouts);
         if (layouts) {
-            QString layoutName = element.attributeNS(KoXmlNS::presentation, "presentation-page-layout-name");
+            QString layoutName = element.attributeNS(KOdfXmlNS::presentation, "presentation-page-layout-name");
             QRectF pageRect(0, 0, pageLayout().width, pageLayout().height);
             layout = layouts->pageLayout(layoutName, loadingContext, pageRect);
             kDebug(33001) << "page layout" << layoutName << layout;
@@ -282,16 +282,16 @@ void SCPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingContext &l
     }
     placeholders().init(layout, shapes());
 
-    if (element.hasAttributeNS(KoXmlNS::presentation, "use-footer-name")) {
-        QString name = element.attributeNS (KoXmlNS::presentation, "use-footer-name");
+    if (element.hasAttributeNS(KOdfXmlNS::presentation, "use-footer-name")) {
+        QString name = element.attributeNS (KOdfXmlNS::presentation, "use-footer-name");
         d->usedDeclaration.insert(SCDeclarations::Footer, name);
     }
-    if (element.hasAttributeNS(KoXmlNS::presentation, "use-header-name")) {
-        QString name = element.attributeNS (KoXmlNS::presentation, "use-header-name");
+    if (element.hasAttributeNS(KOdfXmlNS::presentation, "use-header-name")) {
+        QString name = element.attributeNS (KOdfXmlNS::presentation, "use-header-name");
         d->usedDeclaration.insert(SCDeclarations::Header, name);
     }
-    if (element.hasAttributeNS(KoXmlNS::presentation, "use-date-time-name")) {
-        QString name = element.attributeNS (KoXmlNS::presentation, "use-date-time-name");
+    if (element.hasAttributeNS(KOdfXmlNS::presentation, "use-date-time-name")) {
+        QString name = element.attributeNS (KOdfXmlNS::presentation, "use-date-time-name");
         d->usedDeclaration.insert(SCDeclarations::DateTime, name);
     }
 }

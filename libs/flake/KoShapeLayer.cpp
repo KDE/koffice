@@ -25,7 +25,7 @@
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 KoShapeLayer::KoShapeLayer()
         : KoShapeContainer(new SimpleShapeContainerModel())
@@ -72,11 +72,11 @@ void KoShapeLayer::saveOdf(KoShapeSavingContext &context) const
 bool KoShapeLayer::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     // set layer name
-    setName(element.attributeNS(KoXmlNS::draw, "name"));
+    setName(element.attributeNS(KOdfXmlNS::draw, "name"));
     // layer locking
-    setGeometryProtected(element.attributeNS(KoXmlNS::draw, "protected", "false") == "true");
+    setGeometryProtected(element.attributeNS(KOdfXmlNS::draw, "protected", "false") == "true");
     // layer visibility
-    setVisible(element.attributeNS(KoXmlNS::draw, "display", "false") != "none");
+    setVisible(element.attributeNS(KOdfXmlNS::draw, "display", "false") != "none");
 
     // add layer by name into shape context
     context.addLayer(this, name());

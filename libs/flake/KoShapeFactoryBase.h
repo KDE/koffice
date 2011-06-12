@@ -267,7 +267,7 @@ protected:
      *
      * @param nameSpace the ODF name space (like
      * urn:oasis:names:tc:opendocument:xmlns:text:1.0,
-     * take it from KoXmlNS.h)
+     * take it from KOdfXmlNS.h)
      * @param elementNames the name of the element itself, like "draw"
      *
      */
@@ -280,7 +280,7 @@ protected:
      *
      * @param elementNamesList containing a list of namespace (like
      * urn:oasis:names:tc:opendocument:xmlns:text:1.0,
-     * take it from KoXmlNS.h) to a list of elementName of the element itself, like "draw"
+     * take it from KOdfXmlNS.h) to a list of elementName of the element itself, like "draw"
      */
     void setOdfElements(const QList<QPair<QString, QStringList> > &elementNamesList);
 

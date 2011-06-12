@@ -295,7 +295,7 @@ private:
  * QDomElement e;
  * forEachElement( e, parent )
  * {
- *     if ( e.localName() == "..." && e.namespaceURI() == KoXmlNS::... )
+ *     if ( e.localName() == "..." && e.namespaceURI() == KOdfXmlNS::... )
  *     {
  *         ...
  *     }

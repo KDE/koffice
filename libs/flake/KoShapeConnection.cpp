@@ -31,7 +31,7 @@
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KUnit.h>
@@ -544,7 +544,7 @@ void KoShapeConnection::setEndPoint(KoShape *shape, int gluePointIndex)
 
 bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
-    QString type = element.attributeNS(KoXmlNS::draw, "type", "standard");
+    QString type = element.attributeNS(KOdfXmlNS::draw, "type", "standard");
     delete d->connectionStrategy;
     if (type == "lines") {
         d->connectionStrategy = new ConnectLines(d, EdgedLines);
@@ -567,9 +567,9 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
     d->shape2 = 0;
 
     d->hasDummyShape = true;
-    if (element.hasAttributeNS(KoXmlNS::draw, "start-shape")) {
-        d->gluePointIndex1 = element.attributeNS(KoXmlNS::draw, "start-glue-point", QString()).toInt();
-        QString shapeId1 = element.attributeNS(KoXmlNS::draw, "start-shape", QString());
+    if (element.hasAttributeNS(KOdfXmlNS::draw, "start-shape")) {
+        d->gluePointIndex1 = element.attributeNS(KOdfXmlNS::draw, "start-glue-point", QString()).toInt();
+        QString shapeId1 = element.attributeNS(KOdfXmlNS::draw, "start-shape", QString());
         d->shape1 = context.shapeById(shapeId1);
         if (d->shape1) {
             d->shape1->priv()->addConnection(this);
@@ -579,14 +579,14 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         }
         d->hasDummyShape = false;
     } else {
-        qreal x = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x1"));
-        qreal y = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y1"));
+        qreal x = KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "x1"));
+        qreal y = KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "y1"));
         d->startPoint = QPointF(x, y);
     }
 
-    if (element.hasAttributeNS(KoXmlNS::draw, "end-shape")) {
-        d->gluePointIndex2 = element.attributeNS(KoXmlNS::draw, "end-glue-point", "").toInt();
-        QString shapeId2 = element.attributeNS(KoXmlNS::draw, "end-shape", "");
+    if (element.hasAttributeNS(KOdfXmlNS::draw, "end-shape")) {
+        d->gluePointIndex2 = element.attributeNS(KOdfXmlNS::draw, "end-glue-point", "").toInt();
+        QString shapeId2 = element.attributeNS(KOdfXmlNS::draw, "end-shape", "");
         d->shape2 = context.shapeById(shapeId2);
         if (d->shape2) {
             d->shape2->priv()->addConnection(this);
@@ -596,12 +596,12 @@ bool KoShapeConnection::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
         }
         d->hasDummyShape = false;
     } else {
-        qreal x = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x2"));
-        qreal y = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y2"));
+        qreal x = KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "x2"));
+        qreal y = KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "y2"));
         d->endPoint = QPointF(x, y);
     }
 
-    QString skew = element.attributeNS(KoXmlNS::draw, "line-skew");
+    QString skew = element.attributeNS(KOdfXmlNS::draw, "line-skew");
     QStringList skewValues = skew.simplified().split(' ', QString::SkipEmptyParts);
     d->connectionStrategy->setSkew(skewValues);
 

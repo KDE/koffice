@@ -27,7 +27,7 @@
 #include <KoTextShapeData.h>
 #include <KoShapeLoadingContext.h>
 #include <KOdfLoadingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoTextDocumentLayout.h>
 #include <KoStyleManager.h>
 #include <KoCharacterStyle.h>
@@ -86,8 +86,8 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
     }
 
     KoXmlElement content = odfReadStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
-    KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, "text");
+    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
+    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
 
     KoStyleManager *styleManager = new KoStyleManager;
     KoChangeTracker *changeTracker = new KoChangeTracker;

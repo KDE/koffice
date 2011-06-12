@@ -42,7 +42,7 @@
 #include <KoShapeSavingContext.h>
 #include <KOdfStorageDevice.h>
 #include <KoUpdater.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 #include "kcells_limits.h"
@@ -215,13 +215,13 @@ bool KCDocBase::loadOdf(KOdfStoreReader & odfStore)
     d->spellListIgnoreAll.clear();
 
     KoXmlElement content = odfStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
+    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
     if (realBody.isNull()) {
         setErrorMessage(i18n("Invalid OASIS OpenDocument file. No office:body tag found."));
         map()->deleteLoadingInfo();
         return false;
     }
-    KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, "spreadsheet");
+    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "spreadsheet");
 
     if (body.isNull()) {
         kError(32001) << "No office:spreadsheet found!" << endl;

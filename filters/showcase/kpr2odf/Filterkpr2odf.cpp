@@ -40,7 +40,7 @@
 #include <KoDocumentInfo.h>
 #include <KoFilterChain.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoOdf.h>
 #include <KOdfGenericStyle.h>
 
@@ -111,7 +111,7 @@ KoFilter::ConversionStatus Filterkpr2odf::convert(const QByteArray& from, const 
     }
 
     KOdfWriteStore odfWriter(output);
-    KoXmlWriter* manifest = odfWriter.manifestWriter(KoXmlNS::presentation.toUtf8());
+    KoXmlWriter* manifest = odfWriter.manifestWriter(KOdfXmlNS::presentation.toUtf8());
     //Save the preview picture
     output->enterDirectory("Thumbnails");
     output->open("thubnail.png");

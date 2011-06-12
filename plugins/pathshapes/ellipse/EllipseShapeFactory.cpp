@@ -21,7 +21,7 @@
 #include "EllipseShape.h"
 #include "EllipseShapeConfigWidget.h"
 #include <KoLineBorder.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoGradientBackground.h>
 #include <KoShapeLoadingContext.h>
@@ -37,7 +37,7 @@ EllipseShapeFactory::EllipseShapeFactory(QObject *parent)
     setFamily("geometric");
     QStringList elementNames;
     elementNames << "ellipse" << "circle";
-    setOdfElementNames(KoXmlNS::draw, elementNames);
+    setOdfElementNames(KOdfXmlNS::draw, elementNames);
     setLoadingPriority(1);
 }
 
@@ -61,7 +61,7 @@ bool EllipseShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext 
 {
     Q_UNUSED(context);
     return (e.localName() == "ellipse" || e.localName() == "circle")
-        && e.namespaceURI() == KoXmlNS::draw;
+        && e.namespaceURI() == KOdfXmlNS::draw;
 }
 
 QList<KoShapeConfigWidgetBase*> EllipseShapeFactory::createShapeOptionPanels()

@@ -27,7 +27,7 @@
 
 #include <KOdfStyleStack.h>
 #include <KOdfStylesReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <kdebug.h>

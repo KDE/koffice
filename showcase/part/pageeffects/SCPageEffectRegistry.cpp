@@ -22,7 +22,7 @@
 #include <QString>
 
 #include <kglobal.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoPluginLoader.h>
 #include <pageeffects/SCPageEffectFactory.h>
@@ -62,10 +62,10 @@ SCPageEffect * SCPageEffectRegistry::createPageEffect(const KoXmlElement &elemen
     Q_UNUSED(element);
 
     SCPageEffect * pageEffect = 0;
-    if (element.hasAttributeNS(KoXmlNS::smil, "type")) {
-        QString smilType(element.attributeNS(KoXmlNS::smil, "type"));
+    if (element.hasAttributeNS(KOdfXmlNS::smil, "type")) {
+        QString smilType(element.attributeNS(KOdfXmlNS::smil, "type"));
         bool reverse = false;
-        if (element.hasAttributeNS(KoXmlNS::smil, "direction") && element.attributeNS(KoXmlNS::smil, "direction") == "reverse") {
+        if (element.hasAttributeNS(KOdfXmlNS::smil, "direction") && element.attributeNS(KOdfXmlNS::smil, "direction") == "reverse") {
             reverse = true;
         }
 

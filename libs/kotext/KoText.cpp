@@ -29,7 +29,7 @@
 #include <KOdfStoreReader.h>
 #include <KOdfStoreReader.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoTextSharedLoadingData.h>
 #include <KOdfLoadingContext.h>
@@ -169,8 +169,8 @@ QTextDocument *KoText::loadOpenDocument(const QString &filename, QTextDocument *
     }
 
     KoXmlElement content = odfReadStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
-    KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, "text");
+    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
+    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
 
     if (document == 0)
         document = new QTextDocument;

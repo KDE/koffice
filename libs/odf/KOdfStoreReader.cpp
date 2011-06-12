@@ -27,7 +27,7 @@
 #include <KoXmlReader.h>
 
 #include "KOdfStylesReader.h"
-#include "KoXmlNS.h"
+#include "KOdfXmlNS.h"
 
 #include <QXmlStreamReader>
 
@@ -156,9 +156,9 @@ QString KOdfStoreReader::mimeForPath(const KoXmlDocument &doc, const QString &_f
     KoXmlElement docElem = doc.documentElement();
     KoXmlElement elem;
     forEachElement(elem, docElem) {
-        if (elem.localName() == "file-entry" && elem.namespaceURI() == KoXmlNS::manifest) {
-            if (normalizeFullPath(elem.attributeNS(KoXmlNS::manifest, "full-path", QString())) == fullPath)
-                return elem.attributeNS(KoXmlNS::manifest, "media-type", QString());
+        if (elem.localName() == "file-entry" && elem.namespaceURI() == KOdfXmlNS::manifest) {
+            if (normalizeFullPath(elem.attributeNS(KOdfXmlNS::manifest, "full-path", QString())) == fullPath)
+                return elem.attributeNS(KOdfXmlNS::manifest, "media-type", QString());
         }
     }
     return QString();

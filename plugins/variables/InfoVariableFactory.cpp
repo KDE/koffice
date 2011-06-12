@@ -21,7 +21,7 @@
 #include "InfoVariableFactory.h"
 
 #include <KProperties.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <kdebug.h>
 
 #include <QStringList>
@@ -33,7 +33,7 @@ InfoVariableFactory::InfoVariableFactory(QObject *parent)
 {
     QStringList elementNames;
     elementNames << "keywords" << "subject" << "title";
-    setOdfElementNames(KoXmlNS::text, elementNames);
+    setOdfElementNames(KOdfXmlNS::text, elementNames);
 }
 
 KoInlineObject *InfoVariableFactory::createInlineObject(const KProperties *properties) const

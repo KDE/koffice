@@ -21,7 +21,7 @@
 #include "RectangleShape.h"
 #include "RectangleShapeConfigWidget.h"
 #include "KoLineBorder.h"
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoGradientBackground.h>
 #include <KoShapeLoadingContext.h>
@@ -34,7 +34,7 @@ RectangleShapeFactory::RectangleShapeFactory(QObject *parent)
     setToolTip(i18n("A rectangle"));
     setIcon("rectangle-shape");
     setFamily("geometric");
-    setOdfElementNames(KoXmlNS::draw, QStringList("rect"));
+    setOdfElementNames(KOdfXmlNS::draw, QStringList("rect"));
     setLoadingPriority(1);
 }
 
@@ -58,7 +58,7 @@ KoShape *RectangleShapeFactory::createDefaultShape(KoResourceManager *) const
 bool RectangleShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &/*context*/) const
 {
     Q_UNUSED(e);
-    return (e.localName() == "rect" && e.namespaceURI() == KoXmlNS::draw);
+    return (e.localName() == "rect" && e.namespaceURI() == KOdfXmlNS::draw);
 }
 
 QList<KoShapeConfigWidgetBase*> RectangleShapeFactory::createShapeOptionPanels()

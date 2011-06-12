@@ -26,7 +26,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyle.h>
@@ -98,5 +98,5 @@ void SCFadeOverColorStrategy::saveOdfSmilAttributes(KOdfGenericStyle & style) co
 void SCFadeOverColorStrategy::loadOdfSmilAttributes(const KoXmlElement & element)
 {
     // use black as default
-    m_fadeColor.setNamedColor(element.attributeNS(KoXmlNS::smil, "fadeColor", "#000000"));
+    m_fadeColor.setNamedColor(element.attributeNS(KOdfXmlNS::smil, "fadeColor", "#000000"));
 }

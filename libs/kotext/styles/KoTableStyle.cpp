@@ -35,7 +35,7 @@
 #include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 class KoTableStyle::Private
@@ -324,18 +324,18 @@ void KoTableStyle::setMasterPageName(const QString &name)
 
 void KoTableStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &context)
 {
-    if (element->hasAttributeNS(KoXmlNS::style, "display-name"))
-        d->name = element->attributeNS(KoXmlNS::style, "display-name", QString());
+    if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))
+        d->name = element->attributeNS(KOdfXmlNS::style, "display-name", QString());
 
     if (d->name.isEmpty()) // if no style:display-name is given us the style:name
-        d->name = element->attributeNS(KoXmlNS::style, "name", QString());
+        d->name = element->attributeNS(KOdfXmlNS::style, "name", QString());
 
-    QString masterPage = element->attributeNS(KoXmlNS::style, "master-page-name", QString());
+    QString masterPage = element->attributeNS(KOdfXmlNS::style, "master-page-name", QString());
     if (! masterPage.isEmpty()) {
         setMasterPageName(masterPage);
     }
     context.styleStack().save();
-    QString family = element->attributeNS(KoXmlNS::style, "family", "table");
+    QString family = element->attributeNS(KOdfXmlNS::style, "family", "table");
     context.addStyles(element, family.toLocal8Bit().constData());   // Load all parents - only because we don't support inheritance.
 
     context.styleStack().setTypeProperties("table");   // load all style attributes from "style:table-properties"
@@ -373,67 +373,67 @@ QString KoTableStyle::alignmentToString(Qt::Alignment alignment)
 
 void KoTableStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
-    if (styleStack.hasProperty(KoXmlNS::style, "writing-mode")) {     // http://www.w3.org/TR/2004/WD-xsl11-20041216/#writing-mode
+    if (styleStack.hasProperty(KOdfXmlNS::style, "writing-mode")) {     // http://www.w3.org/TR/2004/WD-xsl11-20041216/#writing-mode
         // KoText::directionFromString()
     }
 
     // Width
-    if (styleStack.hasProperty(KoXmlNS::style, "width")) {
-        setWidth(QTextLength(QTextLength::FixedLength, KUnit::parseValue(styleStack.property(KoXmlNS::style, "width"))));
+    if (styleStack.hasProperty(KOdfXmlNS::style, "width")) {
+        setWidth(QTextLength(QTextLength::FixedLength, KUnit::parseValue(styleStack.property(KOdfXmlNS::style, "width"))));
     }
-    if (styleStack.hasProperty(KoXmlNS::style, "rel-width")) {
-        setWidth(QTextLength(QTextLength::PercentageLength, styleStack.property(KoXmlNS::style, "rel-width").remove('%').toDouble()));
+    if (styleStack.hasProperty(KOdfXmlNS::style, "rel-width")) {
+        setWidth(QTextLength(QTextLength::PercentageLength, styleStack.property(KOdfXmlNS::style, "rel-width").remove('%').toDouble()));
     }
 
     // Alignment
-    if (styleStack.hasProperty(KoXmlNS::table, "align")) {
-        setAlignment(alignmentFromString(styleStack.property(KoXmlNS::table, "align")));
+    if (styleStack.hasProperty(KOdfXmlNS::table, "align")) {
+        setAlignment(alignmentFromString(styleStack.property(KOdfXmlNS::table, "align")));
     }
 
     // Margin
-    bool hasMarginLeft = styleStack.hasProperty(KoXmlNS::fo, "margin-left");
-    bool hasMarginRight = styleStack.hasProperty(KoXmlNS::fo, "margin-right");
+    bool hasMarginLeft = styleStack.hasProperty(KOdfXmlNS::fo, "margin-left");
+    bool hasMarginRight = styleStack.hasProperty(KOdfXmlNS::fo, "margin-right");
     if (hasMarginLeft)
-        setLeftMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left")));
+        setLeftMargin(KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-left")));
     if (hasMarginRight)
-        setRightMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-right")));
-    if (styleStack.hasProperty(KoXmlNS::fo, "margin-top"))
-        setTopMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-top")));
-    if (styleStack.hasProperty(KoXmlNS::fo, "margin-bottom"))
-        setBottomMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-bottom")));
-    if (styleStack.hasProperty(KoXmlNS::fo, "margin")) {
-        setMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin")));
+        setRightMargin(KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-right")));
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "margin-top"))
+        setTopMargin(KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-top")));
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "margin-bottom"))
+        setBottomMargin(KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-bottom")));
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "margin")) {
+        setMargin(KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin")));
         hasMarginLeft = true;
         hasMarginRight = true;
     }
 
     // keep table with next paragraph?
-    if (styleStack.hasProperty(KoXmlNS::fo, "keep-with-next")) {
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "keep-with-next")) {
         // OASIS spec says it's "auto"/"always", not a boolean.
-        QString val = styleStack.property(KoXmlNS::fo, "keep-with-next");
+        QString val = styleStack.property(KOdfXmlNS::fo, "keep-with-next");
         if (val == "true" || val == "always")
             setKeepWithNext(true);
     }
 
     // The fo:break-before and fo:break-after attributes insert a page or column break before or after a table.
-    if (styleStack.hasProperty(KoXmlNS::fo, "break-before")) {
-        if (styleStack.property(KoXmlNS::fo, "break-before") != "auto")
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "break-before")) {
+        if (styleStack.property(KOdfXmlNS::fo, "break-before") != "auto")
             setBreakBefore(true);
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "break-after")) {
-        if (styleStack.property(KoXmlNS::fo, "break-after") != "auto")
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "break-after")) {
+        if (styleStack.property(KOdfXmlNS::fo, "break-after") != "auto")
             setBreakAfter(true);
     }
 
-    if (styleStack.hasProperty(KoXmlNS::fo, "may-break-between-rows")) {
-        if (styleStack.property(KoXmlNS::fo, "may-break-between-rows") == "true")
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "may-break-between-rows")) {
+        if (styleStack.property(KOdfXmlNS::fo, "may-break-between-rows") == "true")
             setMayBreakBetweenRows(true);
     }
 
 
     // The fo:background-color attribute specifies the background color of a paragraph.
-    if (styleStack.hasProperty(KoXmlNS::fo, "background-color")) {
-        const QString bgcolor = styleStack.property(KoXmlNS::fo, "background-color");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "background-color")) {
+        const QString bgcolor = styleStack.property(KOdfXmlNS::fo, "background-color");
         QBrush brush = background();
         if (bgcolor == "transparent")
             brush.setStyle(Qt::NoBrush);
@@ -446,9 +446,9 @@ void KoTableStyle::loadOdfProperties(KOdfStyleStack &styleStack)
     }
 
     // border-model
-    if (styleStack.hasProperty(KoXmlNS::table, "border-model")) {
+    if (styleStack.hasProperty(KOdfXmlNS::table, "border-model")) {
         // OASIS spec says it's "auto"/"always", not a boolean.
-        QString val = styleStack.property(KoXmlNS::table, "border-model");
+        QString val = styleStack.property(KOdfXmlNS::table, "border-model");
         setCollapsingBorderModel(val =="collapsing");
     }
 }

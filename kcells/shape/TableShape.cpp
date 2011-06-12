@@ -30,7 +30,7 @@
 #include <KoShapeContainer.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <CellView.h>
 #include <Damages.h>
@@ -164,7 +164,7 @@ void TableShape::paint(QPainter& painter, const KoViewConverter& converter)
 bool TableShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     //kDebug() << "LOADING TABLE SHAPE";
-    if (sheet() && element.namespaceURI() == KoXmlNS::table && element.localName() == "table") {
+    if (sheet() && element.namespaceURI() == KOdfXmlNS::table && element.localName() == "table") {
         // pre-load auto styles
         KOdfLoadingContext& odfContext = context.odfLoadingContext();
         KCOdfLoadingContext tableContext(odfContext);
@@ -174,8 +174,8 @@ bool TableShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &con
         KCValueParser *const parser = map->parser();
         Styles autoStyles = styleManager->loadOdfAutoStyles(odfContext.stylesReader(), conditionalStyles, parser);
 
-        if (!element.attributeNS(KoXmlNS::table, "name", QString()).isEmpty()) {
-            sheet()->setSheetName(element.attributeNS(KoXmlNS::table, "name", QString()), true);
+        if (!element.attributeNS(KOdfXmlNS::table, "name", QString()).isEmpty()) {
+            sheet()->setSheetName(element.attributeNS(KOdfXmlNS::table, "name", QString()), true);
         }
         const bool result = sheet()->loadOdf(element, tableContext, autoStyles, conditionalStyles);
 

@@ -53,7 +53,7 @@
 #include <KOdfWriteStore.h>
 #include <KoShapeSavingContext.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoOdfSettings.h>
 #include <KoMainWindow.h>
 #include <KoCanvasController.h>
@@ -207,21 +207,21 @@ bool KarbonPart::loadOdf(KOdfStoreReader &odfStore)
     kDebug(38000) << "Start loading OASIS contents..." << contents.lastChild().localName();
     kDebug(38000) << "Start loading OASIS contents..." << contents.lastChild().namespaceURI();
     kDebug(38000) << "Start loading OASIS contents..." << contents.lastChild().isElement();
-    KoXmlElement body(KoXml::namedItemNS(contents, KoXmlNS::office, "body"));
+    KoXmlElement body(KoXml::namedItemNS(contents, KOdfXmlNS::office, "body"));
     if (body.isNull()) {
         kDebug(38000) << "No office:body found!";
         setErrorMessage(i18n("Invalid OASIS document. No office:body tag found."));
         return false;
     }
 
-    body = KoXml::namedItemNS(body, KoXmlNS::office, "drawing");
+    body = KoXml::namedItemNS(body, KOdfXmlNS::office, "drawing");
     if (body.isNull()) {
         kDebug(38000) << "No office:drawing found!";
         setErrorMessage(i18n("Invalid OASIS document. No office:drawing tag found."));
         return false;
     }
 
-    KoXmlElement page(KoXml::namedItemNS(body, KoXmlNS::draw, "page"));
+    KoXmlElement page(KoXml::namedItemNS(body, KOdfXmlNS::draw, "page"));
     if (page.isNull()) {
         kDebug(38000) << "No office:drawing found!";
         setErrorMessage(i18n("Invalid OASIS document. No draw:page tag found."));
@@ -237,7 +237,7 @@ bool KarbonPart::loadOdf(KOdfStoreReader &odfStore)
         master = odfStore.styles().masterPages().begin().value();
 
     if (master) {
-        const QString pageStyleName = master->attributeNS(KoXmlNS::style, "page-layout-name", QString());
+        const QString pageStyleName = master->attributeNS(KOdfXmlNS::style, "page-layout-name", QString());
         const KoXmlElement *style = odfStore.styles().findStyle(pageStyleName);
         if (style) {
             KOdfPageLayoutData layout;

@@ -40,7 +40,7 @@
 #include <KOdfGenericStyles.h>
 
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <kdebug.h>
 #include <qdom.h>
 
@@ -421,16 +421,16 @@ void KCConditions::loadOdfConditions(const KoXmlElement &element, const KCValueP
 
     while (!node.isNull()) {
         KoXmlElement elementItem = node.toElement();
-        if (elementItem.tagName() == "map" && elementItem.namespaceURI() == KoXmlNS::style) {
-            QString conditionValue = elementItem.attributeNS(KoXmlNS::style, "condition", QString());
+        if (elementItem.tagName() == "map" && elementItem.namespaceURI() == KOdfXmlNS::style) {
+            QString conditionValue = elementItem.attributeNS(KOdfXmlNS::style, "condition", QString());
             QString applyStyleName;
-            if (elementItem.hasAttributeNS(KoXmlNS::style, "apply-style-name"))
-                applyStyleName = elementItem.attributeNS(KoXmlNS::style, "apply-style-name", QString());
+            if (elementItem.hasAttributeNS(KOdfXmlNS::style, "apply-style-name"))
+                applyStyleName = elementItem.attributeNS(KOdfXmlNS::style, "apply-style-name", QString());
             if (!applyStyleName.isEmpty() && styleManager) {
                 QString odfStyle = styleManager->openDocumentName(applyStyleName);
                 if (!odfStyle.isEmpty()) applyStyleName = odfStyle;
             }
-            QString baseCellAddress = elementItem.attributeNS(KoXmlNS::style, "base-cell-address");
+            QString baseCellAddress = elementItem.attributeNS(KOdfXmlNS::style, "base-cell-address");
             loadOdfCondition(conditionValue, applyStyleName, baseCellAddress, parser);
         }
         node = node.nextSibling();

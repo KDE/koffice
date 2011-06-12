@@ -43,7 +43,7 @@
 #include <KoTextWriter.h>
 #include <KoStyleManager.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 SCPlaceholderTextStrategy::SCPlaceholderTextStrategy(const QString &presentationClass)
 : SCPlaceholderStrategy(presentationClass)
@@ -134,7 +134,7 @@ kDebug();
         QTextCursor cursor(document);
         QTextBlock block = cursor.block();
 
-        const QString styleName = element.attributeNS(KoXmlNS::presentation, "style-name");
+        const QString styleName = element.attributeNS(KOdfXmlNS::presentation, "style-name");
         if (!styleName.isEmpty()) {
             const KoXmlElement *style = context.odfLoadingContext().stylesReader().findStyle(styleName, "presentation", context.odfLoadingContext().useStylesAutoStyles());
 
@@ -145,7 +145,7 @@ kDebug();
             }
         }
 
-        const QString textStyleName = element.attributeNS(KoXmlNS::draw, "text-style-name");
+        const QString textStyleName = element.attributeNS(KOdfXmlNS::draw, "text-style-name");
 kDebug() << textStyleName;
         if (!textStyleName.isEmpty()) {
             KoParagraphStyle *style = textSharedData->paragraphStyle(textStyleName, context.odfLoadingContext().useStylesAutoStyles());

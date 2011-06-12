@@ -21,7 +21,7 @@
 
 #include <QString>
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 #include "DatabaseSource.h"
@@ -181,66 +181,66 @@ void Database::setFilter(const Filter& filter)
 
 bool Database::loadOdf(const KoXmlElement& element, const KCMap* map)
 {
-    if (element.hasAttributeNS(KoXmlNS::table, "name"))
-        d->name = element.attributeNS(KoXmlNS::table, "name", QString());
-    if (element.hasAttributeNS(KoXmlNS::table, "is-selection")) {
-        if (element.attributeNS(KoXmlNS::table, "is-selection", "false") == "true")
+    if (element.hasAttributeNS(KOdfXmlNS::table, "name"))
+        d->name = element.attributeNS(KOdfXmlNS::table, "name", QString());
+    if (element.hasAttributeNS(KOdfXmlNS::table, "is-selection")) {
+        if (element.attributeNS(KOdfXmlNS::table, "is-selection", "false") == "true")
             d->isSelection = true;
         else
             d->isSelection = false;
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "on-update-keep-styles")) {
-        if (element.attributeNS(KoXmlNS::table, "on-update-keep-styles", "false") == "true")
+    if (element.hasAttributeNS(KOdfXmlNS::table, "on-update-keep-styles")) {
+        if (element.attributeNS(KOdfXmlNS::table, "on-update-keep-styles", "false") == "true")
             d->onUpdateKeepStyles = true;
         else
             d->onUpdateKeepStyles = false;
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "on-update-keep-size")) {
-        if (element.attributeNS(KoXmlNS::table, "on-update-keep-size", "true") == "false")
+    if (element.hasAttributeNS(KOdfXmlNS::table, "on-update-keep-size")) {
+        if (element.attributeNS(KOdfXmlNS::table, "on-update-keep-size", "true") == "false")
             d->onUpdateKeepSize = false;
         else
             d->onUpdateKeepSize = true;
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "has-persistent-data")) {
-        if (element.attributeNS(KoXmlNS::table, "has-persistent-data", "true") == "false")
+    if (element.hasAttributeNS(KOdfXmlNS::table, "has-persistent-data")) {
+        if (element.attributeNS(KOdfXmlNS::table, "has-persistent-data", "true") == "false")
             d->hasPersistentData = false;
         else
             d->hasPersistentData = true;
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "orientation")) {
-        if (element.attributeNS(KoXmlNS::table, "orientation", "row") == "column")
+    if (element.hasAttributeNS(KOdfXmlNS::table, "orientation")) {
+        if (element.attributeNS(KOdfXmlNS::table, "orientation", "row") == "column")
             d->orientation = Private::Column;
         else
             d->orientation = Private::Row;
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "contains-header")) {
-        if (element.attributeNS(KoXmlNS::table, "contains-header", "true") == "false")
+    if (element.hasAttributeNS(KOdfXmlNS::table, "contains-header")) {
+        if (element.attributeNS(KOdfXmlNS::table, "contains-header", "true") == "false")
             d->containsHeader = false;
         else
             d->containsHeader = true;
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "display-filter-buttons")) {
-        if (element.attributeNS(KoXmlNS::table, "display-filter-buttons", "false") == "true")
+    if (element.hasAttributeNS(KOdfXmlNS::table, "display-filter-buttons")) {
+        if (element.attributeNS(KOdfXmlNS::table, "display-filter-buttons", "false") == "true")
             d->displayFilterButtons = true;
         else
             d->displayFilterButtons = false;
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "target-range-address")) {
-        const QString address = element.attributeNS(KoXmlNS::table, "target-range-address", QString());
+    if (element.hasAttributeNS(KOdfXmlNS::table, "target-range-address")) {
+        const QString address = element.attributeNS(KOdfXmlNS::table, "target-range-address", QString());
         // only absolute addresses allowed; no fallback sheet needed
         d->targetRangeAddress = KCRegion(KCRegion::loadOdf(address), map);
         if (!d->targetRangeAddress.isValid())
             return false;
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "refresh-delay")) {
+    if (element.hasAttributeNS(KOdfXmlNS::table, "refresh-delay")) {
         bool ok = false;
-        d->refreshDelay = element.attributeNS(KoXmlNS::table, "refresh-delay", QString()).toInt(&ok);
+        d->refreshDelay = element.attributeNS(KOdfXmlNS::table, "refresh-delay", QString()).toInt(&ok);
         if (!ok || d->refreshDelay < 0)
             return false;
     }
     KoXmlElement child;
     forEachElement(child, element) {
-        if (child.namespaceURI() != KoXmlNS::table)
+        if (child.namespaceURI() != KOdfXmlNS::table)
             continue;
         if (child.localName() == "database-source-sql") {
             // TODO

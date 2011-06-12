@@ -20,7 +20,7 @@
 #include "SCSoundEventAction.h"
 
 #include <phonon/mediaobject.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoShapeSavingContext.h>
@@ -48,7 +48,7 @@ SCSoundEventAction::~SCSoundEventAction()
 
 bool SCSoundEventAction::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &context)
 {
-    KoXmlElement sound = KoXml::namedItemNS(element, KoXmlNS::presentation, "sound");
+    KoXmlElement sound = KoXml::namedItemNS(element, KOdfXmlNS::presentation, "sound");
 
     bool retval = false;
 
@@ -56,7 +56,7 @@ bool SCSoundEventAction::loadOdf(const KoXmlElement & element, KoShapeLoadingCon
         SCSoundCollection *soundCollection = context.documentResourceManager()->resource(Showcase::SoundCollection).value<SCSoundCollection*>();
 
         if (soundCollection) {
-            QString href = sound.attributeNS(KoXmlNS::xlink, "href");
+            QString href = sound.attributeNS(KOdfXmlNS::xlink, "href");
             if (!href.isEmpty()) {
                 m_soundData = new SCSoundData(soundCollection, href);
                 retval = true;

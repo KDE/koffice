@@ -98,7 +98,7 @@
 #include <KoToolManager.h>
 #include <KoToolRegistry.h>
 #include <KoTemplateCreateDia.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoZoomAction.h>
 #include <KoZoomController.h>
 #include <KoZoomHandler.h>

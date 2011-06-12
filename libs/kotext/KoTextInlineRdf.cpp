@@ -24,7 +24,7 @@
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include "KoBookmark.h"
 #include "KoTextMeta.h"
 #include "KoTextBlockData.h"
@@ -141,14 +141,14 @@ KoTextInlineRdf::~KoTextInlineRdf()
 bool KoTextInlineRdf::loadOdf(const KoXmlElement &e)
 {
     d->id = e.attribute("id", QString());
-    d->subject = e.attributeNS(KoXmlNS::xhtml, "about");
-    d->predicate = e.attributeNS(KoXmlNS::xhtml, "property");
-    d->dt = e.attributeNS(KoXmlNS::xhtml, "datatype");
-    QString content = e.attributeNS(KoXmlNS::xhtml, "content");
+    d->subject = e.attributeNS(KOdfXmlNS::xhtml, "about");
+    d->predicate = e.attributeNS(KOdfXmlNS::xhtml, "property");
+    d->dt = e.attributeNS(KOdfXmlNS::xhtml, "datatype");
+    QString content = e.attributeNS(KOdfXmlNS::xhtml, "content");
     //
     // Content / triple object explicitly set through an attribute
     //
-    if (e.hasAttributeNS(KoXmlNS::xhtml, "content")) {
+    if (e.hasAttributeNS(KOdfXmlNS::xhtml, "content")) {
         d->isObjectAttriuteUsed = true;
         d->object = content;
     }

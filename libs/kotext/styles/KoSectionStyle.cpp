@@ -37,7 +37,7 @@
 #include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KOdfBorders.h>
 
@@ -251,15 +251,15 @@ QBrush KoSectionStyle::background() const
 
 void KoSectionStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &context)
 {
-    if (element->hasAttributeNS(KoXmlNS::style, "display-name"))
-        d->name = element->attributeNS(KoXmlNS::style, "display-name", QString());
+    if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))
+        d->name = element->attributeNS(KOdfXmlNS::style, "display-name", QString());
 
     if (d->name.isEmpty()) // if no style:display-name is given us the style:name
-        d->name = element->attributeNS(KoXmlNS::style, "name", QString());
+        d->name = element->attributeNS(KOdfXmlNS::style, "name", QString());
 
     context.styleStack().save();
     // Load all parents - only because we don't support inheritance.
-    QString family = element->attributeNS(KoXmlNS::style, "family", "section");
+    QString family = element->attributeNS(KOdfXmlNS::style, "family", "section");
     context.addStyles(element, family.toLocal8Bit().constData());   // Load all parents - only because we don't support inheritance.
 
     context.styleStack().setTypeProperties("section");   // load all style attributes from "style:section-properties"
@@ -268,23 +268,23 @@ void KoSectionStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &co
 
     // in 1.6 this was defined at KoParagLayout::loadOasisParagLayout(KoParagLayout&, KoOasisContext&)
 
-    if (styleStack.hasProperty(KoXmlNS::style, "writing-mode")) {     // http://www.w3.org/TR/2004/WD-xsl11-20041216/#writing-mode
-        QString writingMode = styleStack.property(KoXmlNS::style, "writing-mode");
+    if (styleStack.hasProperty(KOdfXmlNS::style, "writing-mode")) {     // http://www.w3.org/TR/2004/WD-xsl11-20041216/#writing-mode
+        QString writingMode = styleStack.property(KOdfXmlNS::style, "writing-mode");
         setTextProgressionDirection(KoText::directionFromString(writingMode));
     }
 
     // Indentation (margin)
-    bool hasMarginLeft = styleStack.hasProperty(KoXmlNS::fo, "margin-left");
-    bool hasMarginRight = styleStack.hasProperty(KoXmlNS::fo, "margin-right");
+    bool hasMarginLeft = styleStack.hasProperty(KOdfXmlNS::fo, "margin-left");
+    bool hasMarginRight = styleStack.hasProperty(KOdfXmlNS::fo, "margin-right");
     if (hasMarginLeft)
-        setLeftMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-left")));
+        setLeftMargin(KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-left")));
     if (hasMarginRight)
-        setRightMargin(KUnit::parseValue(styleStack.property(KoXmlNS::fo, "margin-right")));
+        setRightMargin(KUnit::parseValue(styleStack.property(KOdfXmlNS::fo, "margin-right")));
 
 
     // The fo:background-color attribute specifies the background color of a paragraph.
-    if (styleStack.hasProperty(KoXmlNS::fo, "background-color")) {
-        const QString bgcolor = styleStack.property(KoXmlNS::fo, "background-color");
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "background-color")) {
+        const QString bgcolor = styleStack.property(KOdfXmlNS::fo, "background-color");
         QBrush brush = background();
         if (bgcolor == "transparent")
             brush.setStyle(Qt::NoBrush);

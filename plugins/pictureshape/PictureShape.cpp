@@ -28,7 +28,7 @@
 #include <KOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfStorageDevice.h>
 #include <KUnit.h>
 #include <KOdfGenericStyle.h>
@@ -73,7 +73,7 @@ void RenderQueue::updateShape()
 
 //////////////
 PictureShape::PictureShape()
-    : KoFrameShape(KoXmlNS::draw, "image"),
+    : KoFrameShape(KOdfXmlNS::draw, "image"),
     m_imageCollection(0),
     m_renderQueue(new RenderQueue(this)),
     m_mode(Standard)
@@ -231,7 +231,7 @@ bool PictureShape::loadOdfFrameElement(const KoXmlElement &element, KoShapeLoadi
             setUserData(data);
         } else {
             // check if we have an office:binary data element containing the image data
-            const KoXmlElement &binaryData(KoXml::namedItemNS(element, KoXmlNS::office, "binary-data"));
+            const KoXmlElement &binaryData(KoXml::namedItemNS(element, KOdfXmlNS::office, "binary-data"));
             if (!binaryData.isNull()) {
                 QImage image;
                 if (image.loadFromData(QByteArray::fromBase64(binaryData.text().toLatin1()))) {
@@ -267,8 +267,8 @@ void PictureShape::loadStyle(const KoXmlElement& element, KoShapeLoadingContext&
     styleStack.setTypeProperties("graphic");
 
     //FIXME: are there other applicable properties?
-    if (styleStack.hasProperty(KoXmlNS::draw, "color-mode")) {
-        QString colorMode = styleStack.property(KoXmlNS::draw, "color-mode");
+    if (styleStack.hasProperty(KOdfXmlNS::draw, "color-mode")) {
+        QString colorMode = styleStack.property(KOdfXmlNS::draw, "color-mode");
         if (colorMode == "greyscale") {
             setMode(Greyscale);
         }
@@ -279,7 +279,7 @@ void PictureShape::loadStyle(const KoXmlElement& element, KoShapeLoadingContext&
             setMode(Watermark);
         }
     }
-    const QString opacity(styleStack.property(KoXmlNS::draw, "image-opacity"));
+    const QString opacity(styleStack.property(KOdfXmlNS::draw, "image-opacity"));
     if (! opacity.isEmpty() && opacity.right(1) == "%") {
         setTransparency(1.0 - (opacity.left(opacity.length() - 1).toFloat() / 100.0));
     }

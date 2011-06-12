@@ -26,7 +26,7 @@
 #include <KoPAPage.h>
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 //Showcase includes
@@ -148,10 +148,10 @@ void SCCustomSlideShows::loadOdf(const KoXmlElement &presentationSettings, KoPAL
 
     KoXmlElement element;
     forEachElement(element, presentationSettings) {
-        if (element.tagName() == "show" && element.namespaceURI() == KoXmlNS::presentation) {
-            if (element.hasAttributeNS(KoXmlNS::presentation, "name") && element.hasAttributeNS(KoXmlNS::presentation, "pages")) {
-                QString name = element.attributeNS(KoXmlNS::presentation, "name");
-                QString pages = element.attributeNS(KoXmlNS::presentation, "pages");
+        if (element.tagName() == "show" && element.namespaceURI() == KOdfXmlNS::presentation) {
+            if (element.hasAttributeNS(KOdfXmlNS::presentation, "name") && element.hasAttributeNS(KOdfXmlNS::presentation, "pages")) {
+                QString name = element.attributeNS(KOdfXmlNS::presentation, "name");
+                QString pages = element.attributeNS(KOdfXmlNS::presentation, "pages");
 
                 QStringList splitedPages = pages.split(',');
                 QList<KoPAPageBase*> slideShow;

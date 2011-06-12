@@ -25,7 +25,7 @@
 
 // KOffice
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 // KCells
 #include "KCCalculationSettings.h"
@@ -234,8 +234,8 @@ void KCValidity::loadOdfValidation(KCCell* const cell, const QString& validation
 {
     KoXmlElement element = tableContext.validities.value(validationName);
     KCValidity validity;
-    if (element.hasAttributeNS(KoXmlNS::table, "condition")) {
-        QString valExpression = element.attributeNS(KoXmlNS::table, "condition", QString());
+    if (element.hasAttributeNS(KOdfXmlNS::table, "condition")) {
+        QString valExpression = element.attributeNS(KOdfXmlNS::table, "condition", QString());
         kDebug(36003) << " element.attribute( table:condition )" << valExpression;
         //Condition ::= ExtendedTrueCondition | TrueFunction 'and' TrueCondition
         //TrueFunction ::= cell-content-is-whole-number() | cell-content-is-decimal-number() | cell-content-is-date() | cell-content-is-time()
@@ -325,37 +325,37 @@ void KCValidity::loadOdfValidation(KCCell* const cell, const QString& validation
             }
         }
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "allow-empty-cell")) {
-        kDebug(36003) << " element.hasAttribute( table:allow-empty-cell ) :" << element.hasAttributeNS(KoXmlNS::table, "allow-empty-cell");
-        setAllowEmptyCell(((element.attributeNS(KoXmlNS::table, "allow-empty-cell", QString()) == "true") ? true : false));
+    if (element.hasAttributeNS(KOdfXmlNS::table, "allow-empty-cell")) {
+        kDebug(36003) << " element.hasAttribute( table:allow-empty-cell ) :" << element.hasAttributeNS(KOdfXmlNS::table, "allow-empty-cell");
+        setAllowEmptyCell(((element.attributeNS(KOdfXmlNS::table, "allow-empty-cell", QString()) == "true") ? true : false));
     }
-    if (element.hasAttributeNS(KoXmlNS::table, "base-cell-address")) {
+    if (element.hasAttributeNS(KOdfXmlNS::table, "base-cell-address")) {
         //todo what is it ?
     }
 
-    KoXmlElement help = KoXml::namedItemNS(element, KoXmlNS::table, "help-message");
+    KoXmlElement help = KoXml::namedItemNS(element, KOdfXmlNS::table, "help-message");
     if (!help.isNull()) {
-        if (help.hasAttributeNS(KoXmlNS::table, "title")) {
-            kDebug(36003) << "help.attribute( table:title ) :" << help.attributeNS(KoXmlNS::table, "title", QString());
-            setTitleInfo(help.attributeNS(KoXmlNS::table, "title", QString()));
+        if (help.hasAttributeNS(KOdfXmlNS::table, "title")) {
+            kDebug(36003) << "help.attribute( table:title ) :" << help.attributeNS(KOdfXmlNS::table, "title", QString());
+            setTitleInfo(help.attributeNS(KOdfXmlNS::table, "title", QString()));
         }
-        if (help.hasAttributeNS(KoXmlNS::table, "display")) {
-            kDebug(36003) << "help.attribute( table:display ) :" << help.attributeNS(KoXmlNS::table, "display", QString());
-            setDisplayValidationInformation(((help.attributeNS(KoXmlNS::table, "display", QString()) == "true") ? true : false));
+        if (help.hasAttributeNS(KOdfXmlNS::table, "display")) {
+            kDebug(36003) << "help.attribute( table:display ) :" << help.attributeNS(KOdfXmlNS::table, "display", QString());
+            setDisplayValidationInformation(((help.attributeNS(KOdfXmlNS::table, "display", QString()) == "true") ? true : false));
         }
-        KoXmlElement attrText = KoXml::namedItemNS(help, KoXmlNS::text, "p");
+        KoXmlElement attrText = KoXml::namedItemNS(help, KOdfXmlNS::text, "p");
         if (!attrText.isNull()) {
             kDebug(36003) << "help text :" << attrText.text();
             setMessageInfo(attrText.text());
         }
     }
 
-    KoXmlElement error = KoXml::namedItemNS(element, KoXmlNS::table, "error-message");
+    KoXmlElement error = KoXml::namedItemNS(element, KOdfXmlNS::table, "error-message");
     if (!error.isNull()) {
-        if (error.hasAttributeNS(KoXmlNS::table, "title"))
-            setTitle(error.attributeNS(KoXmlNS::table, "title", QString()));
-        if (error.hasAttributeNS(KoXmlNS::table, "message-type")) {
-            QString str = error.attributeNS(KoXmlNS::table, "message-type", QString());
+        if (error.hasAttributeNS(KOdfXmlNS::table, "title"))
+            setTitle(error.attributeNS(KOdfXmlNS::table, "title", QString()));
+        if (error.hasAttributeNS(KOdfXmlNS::table, "message-type")) {
+            QString str = error.attributeNS(KOdfXmlNS::table, "message-type", QString());
             if (str == "warning")
                 setAction(KCValidity::Warning);
             else if (str == "information")
@@ -366,11 +366,11 @@ void KCValidity::loadOdfValidation(KCCell* const cell, const QString& validation
                 kDebug(36003) << "validation : message type unknown  :" << str;
         }
 
-        if (error.hasAttributeNS(KoXmlNS::table, "display")) {
-            kDebug(36003) << " display message :" << error.attributeNS(KoXmlNS::table, "display", QString());
-            setDisplayMessage((error.attributeNS(KoXmlNS::table, "display", QString()) == "true"));
+        if (error.hasAttributeNS(KOdfXmlNS::table, "display")) {
+            kDebug(36003) << " display message :" << error.attributeNS(KOdfXmlNS::table, "display", QString());
+            setDisplayMessage((error.attributeNS(KOdfXmlNS::table, "display", QString()) == "true"));
         }
-        KoXmlElement attrText = KoXml::namedItemNS(error, KoXmlNS::text, "p");
+        KoXmlElement attrText = KoXml::namedItemNS(error, KOdfXmlNS::text, "p");
         if (!attrText.isNull())
             setMessage(attrText.text());
     }
@@ -739,13 +739,13 @@ bool KCValidity::operator==(const KCValidity& other) const
 QHash<QString, KoXmlElement> KCValidity::preloadValidities(const KoXmlElement& body)
 {
     QHash<QString, KoXmlElement> validities;
-    KoXmlNode validation = KoXml::namedItemNS(body, KoXmlNS::table, "content-validations");
+    KoXmlNode validation = KoXml::namedItemNS(body, KOdfXmlNS::table, "content-validations");
     kDebug() << "validation.isNull?" << validation.isNull();
     if (!validation.isNull()) {
         KoXmlElement element;
         forEachElement(element, validation) {
-            if (element.tagName() ==  "content-validation" && element.namespaceURI() == KoXmlNS::table) {
-                const QString name = element.attributeNS(KoXmlNS::table, "name", QString());
+            if (element.tagName() ==  "content-validation" && element.namespaceURI() == KOdfXmlNS::table) {
+                const QString name = element.attributeNS(KOdfXmlNS::table, "name", QString());
                 validities.insert(name, element);
                 kDebug() << " validation found:" << name;
             } else {

@@ -25,7 +25,7 @@
 #include <KoShapeSavingContext.h>
 #include <KoTextOnShapeContainer.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 #include <math.h>
@@ -263,7 +263,7 @@ bool StarShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & co
     bool loadAsCustomShape = false;
 
     if (element.localName() == "custom-shape") {
-        QString drawEngine = element.attributeNS(KoXmlNS::draw, "engine", "");
+        QString drawEngine = element.attributeNS(KOdfXmlNS::draw, "engine", "");
         if (drawEngine != "koffice:star")
             return false;
         loadAsCustomShape = true;
@@ -277,14 +277,14 @@ bool StarShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & co
     m_center = QPointF(50,50);
 
     if (!loadAsCustomShape) {
-        QString corners = element.attributeNS(KoXmlNS::draw, "corners", "");
+        QString corners = element.attributeNS(KOdfXmlNS::draw, "corners", "");
         if (! corners.isEmpty()) {
             m_cornerCount = corners.toUInt();
             // initialize default angles of tip and base
             m_angles[base] = m_angles[tip] = defaultAngleRadian();
         }
 
-        m_convex = (element.attributeNS(KoXmlNS::draw, "concave", "false") == "false");
+        m_convex = (element.attributeNS(KOdfXmlNS::draw, "concave", "false") == "false");
 
         if (m_convex) {
             m_radius[base] = m_radius[tip];
@@ -292,7 +292,7 @@ bool StarShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & co
             // sharpness is radius of ellipse on which inner polygon points are located
             // 0% means all polygon points are on a single ellipse
             // 100% means inner points are located at polygon center point
-            QString sharpness = element.attributeNS(KoXmlNS::draw, "sharpness", "");
+            QString sharpness = element.attributeNS(KOdfXmlNS::draw, "sharpness", "");
             if (! sharpness.isEmpty() && sharpness.right(1) == "%")
             {
                 float percent = sharpness.left(sharpness.length()-1).toFloat();
@@ -301,7 +301,7 @@ bool StarShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext & co
         }
     }
     else {
-        QString drawData = element.attributeNS(KoXmlNS::draw, "data");
+        QString drawData = element.attributeNS(KOdfXmlNS::draw, "data");
         if (drawData.isEmpty())
             return false;
 

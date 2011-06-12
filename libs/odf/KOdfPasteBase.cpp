@@ -29,7 +29,7 @@
 #include <KOdfStore.h>
 #include <KOdfStoreReader.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 KOdfPasteBase::KOdfPasteBase()
 {
@@ -63,14 +63,14 @@ bool KOdfPasteBase::paste(KoOdf::DocumentType documentType, const QByteArray &by
     }
 
     KoXmlElement content = odfStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
+    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
 
     if (realBody.isNull()) {
         kWarning(30002) << "No body tag found";
         return false;
     }
 
-    KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, KoOdf::bodyContentElement(documentType, false));
+    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, KoOdf::bodyContentElement(documentType, false));
 
     if (body.isNull()) {
         kWarning(30002) << "No" << KoOdf::bodyContentElement(documentType, true) << "tag found";

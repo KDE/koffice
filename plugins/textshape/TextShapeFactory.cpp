@@ -26,7 +26,7 @@
 #include <KoShape.h>
 #include <KoTextDocument.h>
 #include <KoTextShapeData.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoStyleManager.h>
 #include <KoResourceManager.h>
 #include <KoInlineTextObjectManager.h>
@@ -43,8 +43,8 @@ TextShapeFactory::TextShapeFactory(QObject *parent)
 {
     setToolTip(i18n("A shape that shows text"));
     QList<QPair<QString, QStringList> > odfElements;
-    odfElements.append(QPair<QString, QStringList>(KoXmlNS::draw, QStringList("text-box")));
-    odfElements.append(QPair<QString, QStringList>(KoXmlNS::table, QStringList("table")));
+    odfElements.append(QPair<QString, QStringList>(KOdfXmlNS::draw, QStringList("text-box")));
+    odfElements.append(QPair<QString, QStringList>(KOdfXmlNS::table, QStringList("table")));
     setOdfElements(odfElements);
     setLoadingPriority(1);
 
@@ -107,8 +107,8 @@ KoShape *TextShapeFactory::createShape(const KProperties *params, KoResourceMana
 bool TextShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
-    return (e.localName() == "text-box" && e.namespaceURI() == KoXmlNS::draw) ||
-        (e.localName() == "table" && e.namespaceURI() == KoXmlNS::table);
+    return (e.localName() == "text-box" && e.namespaceURI() == KOdfXmlNS::draw) ||
+        (e.localName() == "table" && e.namespaceURI() == KOdfXmlNS::table);
 }
 
 void TextShapeFactory::newDocumentResourceManager(KoResourceManager *manager)

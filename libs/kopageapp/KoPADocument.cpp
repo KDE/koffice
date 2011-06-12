@@ -32,7 +32,7 @@
 #include <KoTextDocumentLayout.h>
 #include <KoInlineTextObjectManager.h>
 #include <KoStyleManager.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoProgressUpdater.h>
 #include <KoUpdater.h>
 #include <KoToolRegistry.h>
@@ -119,14 +119,14 @@ bool KoPADocument::loadOdf(KOdfStoreReader &odfStore)
     KoPALoadingContext paContext(loadingContext, resourceManager());
 
     KoXmlElement content = odfStore.contentDoc().documentElement();
-    KoXmlElement realBody (KoXml::namedItemNS(content, KoXmlNS::office, "body"));
+    KoXmlElement realBody (KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
 
     if (realBody.isNull()) {
         kError(30010) << "No body tag found!" << endl;
         return false;
     }
 
-    KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, odfTagName(false));
+    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, odfTagName(false));
 
     if (body.isNull()) {
         kError(30010) << "No office:" << odfTagName(false) << " tag found!" << endl;
@@ -259,7 +259,7 @@ QList<KoPAPageBase *> KoPADocument::loadOdfPages(const KoXmlElement &body, KoPAL
     QList<KoPAPageBase *> pages;
     KoXmlElement element;
     forEachElement(element, body) {
-        if (element.tagName() == "page" && element.namespaceURI() == KoXmlNS::draw) {
+        if (element.tagName() == "page" && element.namespaceURI() == KOdfXmlNS::draw) {
             KoPAPage *page = newPage(static_cast<KoPAMasterPage*>(d->masterPages.first()));
             page->loadOdf(element, context);
             pages.append(page);

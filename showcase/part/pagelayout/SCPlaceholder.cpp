@@ -21,7 +21,7 @@
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KUnit.h>
 #include <KoPASavingContext.h>
 #include <kdebug.h>
@@ -38,8 +38,8 @@ SCPlaceholder::~SCPlaceholder()
 
 bool SCPlaceholder::loadOdf(const KoXmlElement &element, const QRectF &pageSize)
 {
-    if (element.hasAttributeNS(KoXmlNS::presentation, "object")) {
-        m_presentationObject = element.attributeNS(KoXmlNS::presentation, "object");
+    if (element.hasAttributeNS(KOdfXmlNS::presentation, "object")) {
+        m_presentationObject = element.attributeNS(KOdfXmlNS::presentation, "object");
         if (! SCPlaceholderStrategy::supported(m_presentationObject)) {
             kDebug(33001) << "unsupported presentation:object" << m_presentationObject;
             return false;
@@ -49,16 +49,16 @@ bool SCPlaceholder::loadOdf(const KoXmlElement &element, const QRectF &pageSize)
         kWarning(33001) << "no presentation:object found in placeholder";
         return false;
     }
-    if (element.hasAttributeNS(KoXmlNS::svg, "x")) {
+    if (element.hasAttributeNS(KOdfXmlNS::svg, "x")) {
         m_relativeSize.setX(percent(element, "x", pageSize.width()));
     }
-    if (element.hasAttributeNS(KoXmlNS::svg, "y")) {
+    if (element.hasAttributeNS(KOdfXmlNS::svg, "y")) {
         m_relativeSize.setY(percent(element, "y", pageSize.height()));
     }
-    if (element.hasAttributeNS(KoXmlNS::svg, "width")) {
+    if (element.hasAttributeNS(KOdfXmlNS::svg, "width")) {
         m_relativeSize.setWidth(percent(element, "width", pageSize.width()));
     }
-    if (element.hasAttributeNS(KoXmlNS::svg, "height")) {
+    if (element.hasAttributeNS(KOdfXmlNS::svg, "height")) {
         m_relativeSize.setHeight(percent(element, "height", pageSize.height()));
     }
 
@@ -106,7 +106,7 @@ void SCPlaceholder::fix(const QRectF &rect)
 qreal SCPlaceholder::percent(const KoXmlElement &element, const char * type, qreal absolute)
 {
     qreal tmp = 0.0;
-    QString value = element.attributeNS(KoXmlNS::svg, type, QString("0%"));
+    QString value = element.attributeNS(KOdfXmlNS::svg, type, QString("0%"));
     if (value.indexOf('%') > -1) { // percent value
         tmp = value.remove('%').toDouble() / 100.0;
     }

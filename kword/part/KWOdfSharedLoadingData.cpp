@@ -31,7 +31,7 @@
 #include <KoTextShapeData.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeLoadingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <QTextCursor>
 #include <kdebug.h>
@@ -42,10 +42,10 @@ KWOdfSharedLoadingData::KWOdfSharedLoadingData(KWOdfLoader *loader)
 {
     KoShapeLoadingContext::addAdditionalAttributeData(
         KoShapeLoadingContext::AdditionalAttributeData(
-            KoXmlNS::text, "anchor-type", "text:anchor-type"));
+            KOdfXmlNS::text, "anchor-type", "text:anchor-type"));
     KoShapeLoadingContext::addAdditionalAttributeData(
         KoShapeLoadingContext::AdditionalAttributeData(
-            KoXmlNS::text, "anchor-page-number", "text:anchor-page-number"));
+            KOdfXmlNS::text, "anchor-page-number", "text:anchor-page-number"));
 }
 
 void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KoXmlElement &element, KoShapeLoadingContext &context)
@@ -64,9 +64,9 @@ void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KoXmlElement &e
     //kDebug(32001) << "text:anchor-type =" << shape->additionalAttribute("text:anchor-type") << shape->additionalAttribute("text:anchor-page-number") << pageNumber;
     shape->removeAdditionalAttribute("text:anchor-type");
     const KoXmlElement *style = 0;
-    if (element.hasAttributeNS(KoXmlNS::draw, "style-name")) {
+    if (element.hasAttributeNS(KOdfXmlNS::draw, "style-name")) {
         style = context.odfLoadingContext().stylesReader().findStyle(
-                    element.attributeNS(KoXmlNS::draw, "style-name"), "graphic",
+                    element.attributeNS(KOdfXmlNS::draw, "style-name"), "graphic",
                     context.odfLoadingContext().useStylesAutoStyles());
     }
 
@@ -89,9 +89,9 @@ void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KoXmlElement &e
                 return; // done
         }
 
-        KoXmlElement textBox(KoXml::namedItemNS(element, KoXmlNS::draw, "text-box"));
+        KoXmlElement textBox(KoXml::namedItemNS(element, KOdfXmlNS::draw, "text-box"));
         if (frame && !textBox.isNull()) {
-            QString nextFrame = textBox.attributeNS(KoXmlNS::draw, "chain-next-name");
+            QString nextFrame = textBox.attributeNS(KOdfXmlNS::draw, "chain-next-name");
             if (! nextFrame.isEmpty()) {
 #ifndef NDEBUG
                 if (m_nextFrames.contains(nextFrame))
@@ -100,8 +100,8 @@ void KWOdfSharedLoadingData::shapeInserted(KoShape *shape, const KoXmlElement &e
                 m_nextFrames.insert(nextFrame, frame);
             }
 
-            if (textBox.hasAttributeNS(KoXmlNS::fo, "min-height")) {
-                frame->setMinimumFrameHeight(KUnit::parseValue(textBox.attributeNS(KoXmlNS::fo, "min-height")));
+            if (textBox.hasAttributeNS(KOdfXmlNS::fo, "min-height")) {
+                frame->setMinimumFrameHeight(KUnit::parseValue(textBox.attributeNS(KOdfXmlNS::fo, "min-height")));
                 KoShape *shape = frame->shape();
                 QSizeF newSize = shape->size();
                 if (newSize.height() < frame->minimumFrameHeight()) {

@@ -21,7 +21,7 @@
 #include "SCAnimationLoader.h"
 
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoTextBlockData.h>
 
@@ -60,7 +60,7 @@ bool SCAnimationLoader::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
     // use SCAnimationStep for that
     KoXmlElement stepElement;
     forEachElement(stepElement, element) {
-        if (stepElement.tagName() == "par" && stepElement.namespaceURI() == KoXmlNS::anim) {
+        if (stepElement.tagName() == "par" && stepElement.namespaceURI() == KOdfXmlNS::anim) {
             // this creates a new step
             SCAnimationStep *animationStep = new SCAnimationStep();
 
@@ -68,7 +68,7 @@ bool SCAnimationLoader::loadOdf(const KoXmlElement &element, KoShapeLoadingConte
             forEachElement(parElement, stepElement) {
                 KoXmlElement innerParElement;
                 forEachElement(innerParElement, parElement) {
-                    if (innerParElement.tagName() == "par" && innerParElement.namespaceURI() == KoXmlNS::anim) {
+                    if (innerParElement.tagName() == "par" && innerParElement.namespaceURI() == KOdfXmlNS::anim) {
                         loadOdfAnimation(&animationStep, innerParElement, context);
                     }
                 }
@@ -126,7 +126,7 @@ void SCAnimationLoader::debug(QAbstractAnimation *animation, int level)
 
 bool SCAnimationLoader::loadOdfAnimation(SCAnimationStep **animationStep, const KoXmlElement &element, KoShapeLoadingContext &context)
 {
-    QString nodeType = element.attributeNS(KoXmlNS::presentation, "node-type", "with-previous");
+    QString nodeType = element.attributeNS(KOdfXmlNS::presentation, "node-type", "with-previous");
 
     kDebug() << "nodeType:" << nodeType;
     SCAnimationSubStep *subStep = 0;
@@ -168,12 +168,12 @@ bool SCAnimationLoader::loadOdfAnimation(SCAnimationStep **animationStep, const 
     forEachElement(e, element) {
         // TODO add a check that the shape animation is still the correct one
         if (shapeAnimation == 0) {
-            QString targetElement(e.attributeNS(KoXmlNS::smil, "targetElement", QString()));
+            QString targetElement(e.attributeNS(KOdfXmlNS::smil, "targetElement", QString()));
             if (!targetElement.isEmpty()) {
                 KoShape *shape = 0;
                 KoTextBlockData *textBlockData = 0;
 
-                if (e.attributeNS(KoXmlNS::anim, "sub-item", "whole") == "text") {
+                if (e.attributeNS(KOdfXmlNS::anim, "sub-item", "whole") == "text") {
                     QPair<KoShape *, QVariant> pair = context.shapeSubItemById(targetElement);
                     shape = pair.first;
                     textBlockData = pair.second.value<KoTextBlockData *>();

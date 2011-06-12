@@ -22,7 +22,7 @@
 #include "DateVariable.h"
 
 #include <KProperties.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <klocale.h>
 
@@ -40,7 +40,7 @@ DateVariableFactory::DateVariableFactory(QObject *parent)
 
     QStringList elementNames;
     elementNames << "date" << "time";
-    setOdfElementNames(KoXmlNS::text, elementNames);
+    setOdfElementNames(KOdfXmlNS::text, elementNames);
 }
 
 KoInlineObject *DateVariableFactory::createInlineObject(const KProperties *properties) const

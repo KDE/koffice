@@ -50,7 +50,7 @@
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include <KUnit.h>
@@ -178,8 +178,8 @@ QString KoShapePrivate::getStyleProperty(const char *property, KoShapeLoadingCon
     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     QString value;
 
-    if (styleStack.hasProperty(KoXmlNS::draw, property)) {
-        value = styleStack.property(KoXmlNS::draw, property);
+    if (styleStack.hasProperty(KOdfXmlNS::draw, property)) {
+        value = styleStack.property(KOdfXmlNS::draw, property);
     }
 
     return value;
@@ -207,15 +207,15 @@ void KoShapePrivate::loadOdfGluePoints(const KoXmlElement &gluePoints)
 
     KoXmlElement element;
     forEachElement (element, gluePoints) {
-        if (element.namespaceURI() != KoXmlNS::draw || element.localName() != "glue-point")
+        if (element.namespaceURI() != KOdfXmlNS::draw || element.localName() != "glue-point")
             continue;
 
-        const int index = element.attributeNS(KoXmlNS::draw, "id").toInt();
+        const int index = element.attributeNS(KOdfXmlNS::draw, "id").toInt();
         if (index < 4) // defaults, also skip malformed 'id's
             continue;
 
         KoShapeConnectionPolicy policy;
-        const QString escape = element.attributeNS(KoXmlNS::draw, "escape-direction");
+        const QString escape = element.attributeNS(KOdfXmlNS::draw, "escape-direction");
         if (!escape.isEmpty()) {
             if (escape == "horizontal") {
                 policy.setEscapeDirection(KoFlake::EscapeHorizontal);
@@ -231,7 +231,7 @@ void KoShapePrivate::loadOdfGluePoints(const KoXmlElement &gluePoints)
                 policy.setEscapeDirection(KoFlake::EscapeDown);
             }
         }
-        const QString align = element.attributeNS(KoXmlNS::draw, "align");
+        const QString align = element.attributeNS(KOdfXmlNS::draw, "align");
         if (!align.isEmpty()) {
             // absolute distances to the edge specified by align
             if (align == "top-left") {
@@ -256,8 +256,8 @@ void KoShapePrivate::loadOdfGluePoints(const KoXmlElement &gluePoints)
         }
         connectorPolicies[index] = policy;
 
-        qreal x = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x"));
-        qreal y = KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y"));
+        qreal x = KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "x"));
+        qreal y = KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "y"));
 
         connectors[index] = QPointF(x, y);
     }
@@ -1123,7 +1123,7 @@ void KoShape::loadStyle(const KoXmlElement &element, KoShapeLoadingContext &cont
     setBorder(loadOdfStroke(element, context));
     setShadow(d->loadOdfShadow(context));
 
-    QString protect(styleStack.property(KoXmlNS::style, "protect"));
+    QString protect(styleStack.property(KOdfXmlNS::style, "protect"));
     setGeometryProtected(protect.contains("position") || protect.contains("size"));
     setContentProtected(protect.contains("content"));
 }
@@ -1133,25 +1133,25 @@ bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingConte
     Q_D(KoShape);
     if (attributes & OdfPosition) {
         QPointF pos(position());
-        if (element.hasAttributeNS(KoXmlNS::svg, "x"))
-            pos.setX(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x", QString())));
-        if (element.hasAttributeNS(KoXmlNS::svg, "y"))
-            pos.setY(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y", QString())));
+        if (element.hasAttributeNS(KOdfXmlNS::svg, "x"))
+            pos.setX(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "x", QString())));
+        if (element.hasAttributeNS(KOdfXmlNS::svg, "y"))
+            pos.setY(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "y", QString())));
         setPosition(pos);
     }
 
     if (attributes & OdfSize) {
         QSizeF s(size());
-        if (element.hasAttributeNS(KoXmlNS::svg, "width"))
-            s.setWidth(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width")));
-        if (element.hasAttributeNS(KoXmlNS::svg, "height"))
-            s.setHeight(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height")));
+        if (element.hasAttributeNS(KOdfXmlNS::svg, "width"))
+            s.setWidth(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "width")));
+        if (element.hasAttributeNS(KOdfXmlNS::svg, "height"))
+            s.setHeight(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "height")));
         setSize(s);
     }
 
     if (attributes & OdfLayer) {
-        if (element.hasAttributeNS(KoXmlNS::draw, "layer")) {
-            KoShapeLayer *layer = context.layer(element.attributeNS(KoXmlNS::draw, "layer"));
+        if (element.hasAttributeNS(KOdfXmlNS::draw, "layer")) {
+            KoShapeLayer *layer = context.layer(element.attributeNS(KOdfXmlNS::draw, "layer"));
             if (layer) {
                 setParent(layer);
             }
@@ -1159,8 +1159,8 @@ bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingConte
     }
 
     if (attributes & OdfId) {
-        if (element.hasAttributeNS(KoXmlNS::draw, "id")) {
-            QString id = element.attributeNS(KoXmlNS::draw, "id");
+        if (element.hasAttributeNS(KOdfXmlNS::draw, "id")) {
+            QString id = element.attributeNS(KOdfXmlNS::draw, "id");
             if (!id.isNull()) {
                 context.addShapeId(this, id);
             }
@@ -1168,34 +1168,34 @@ bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingConte
     }
 
     if (attributes & OdfZIndex) {
-        if (element.hasAttributeNS(KoXmlNS::draw, "z-index")) {
-            setZIndex(element.attributeNS(KoXmlNS::draw, "z-index").toInt());
+        if (element.hasAttributeNS(KOdfXmlNS::draw, "z-index")) {
+            setZIndex(element.attributeNS(KOdfXmlNS::draw, "z-index").toInt());
         } else {
             setZIndex(context.zIndex());
         }
     }
 
     if (attributes & OdfName) {
-        if (element.hasAttributeNS(KoXmlNS::draw, "name")) {
-            setName(element.attributeNS(KoXmlNS::draw, "name"));
+        if (element.hasAttributeNS(KOdfXmlNS::draw, "name")) {
+            setName(element.attributeNS(KOdfXmlNS::draw, "name"));
         }
     }
 
     if (attributes & OdfStyle) {
         KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
         styleStack.save();
-        if (element.hasAttributeNS(KoXmlNS::draw, "style-name")) {
-            context.odfLoadingContext().fillStyleStack(element, KoXmlNS::draw, "style-name", "graphic");
+        if (element.hasAttributeNS(KOdfXmlNS::draw, "style-name")) {
+            context.odfLoadingContext().fillStyleStack(element, KOdfXmlNS::draw, "style-name", "graphic");
         }
-        else if (element.hasAttributeNS(KoXmlNS::presentation, "style-name")) {
-            context.odfLoadingContext().fillStyleStack(element, KoXmlNS::presentation, "style-name", "presentation");
+        else if (element.hasAttributeNS(KOdfXmlNS::presentation, "style-name")) {
+            context.odfLoadingContext().fillStyleStack(element, KOdfXmlNS::presentation, "style-name", "presentation");
         }
         loadStyle(element, context);
         styleStack.restore();
     }
 
     if (attributes & OdfTransformation) {
-        QString transform = element.attributeNS(KoXmlNS::draw, "transform");
+        QString transform = element.attributeNS(KOdfXmlNS::draw, "transform");
         if (! transform.isEmpty())
             applyAbsoluteTransformation(parseOdfTransform(transform));
     }
@@ -1212,7 +1212,7 @@ bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingConte
     }
 
     if (attributes & OdfCommonChildElements) {
-        const KoXmlElement eventActionsElement(KoXml::namedItemNS(element, KoXmlNS::office, "event-listeners"));
+        const KoXmlElement eventActionsElement(KoXml::namedItemNS(element, KOdfXmlNS::office, "event-listeners"));
         if (!eventActionsElement.isNull()) {
             d->eventActions = KoEventActionRegistry::instance()->createEventActionsFromOdf(eventActionsElement, context);
         }
@@ -1263,8 +1263,8 @@ KoShapeBorderBase *KoShape::loadOdfStroke(const KoXmlElement &element, KoShapeLo
 
         KoLineBorder *border = new KoLineBorder();
 
-        if (styleStack.hasProperty(KoXmlNS::koffice, "stroke-gradient")) {
-            QString gradientName = styleStack.property(KoXmlNS::koffice, "stroke-gradient");
+        if (styleStack.hasProperty(KOdfXmlNS::koffice, "stroke-gradient")) {
+            QString gradientName = styleStack.property(KOdfXmlNS::koffice, "stroke-gradient");
             QBrush brush = KoOdfGraphicStyles::loadOdfGradientStyleByName(stylesReader, gradientName, size());
             border->setLineBrush(brush);
         } else {
@@ -1308,12 +1308,12 @@ KoShapeShadow *KoShapePrivate::loadOdfShadow(KoShapeLoadingContext &context) con
     QString shadowStyle = KoShapePrivate::getStyleProperty("shadow", context);
     if (shadowStyle == "visible" || shadowStyle == "hidden") {
         KoShapeShadow *shadow = new KoShapeShadow();
-        QColor shadowColor(styleStack.property(KoXmlNS::draw, "shadow-color"));
-        qreal offsetX = KUnit::parseValue(styleStack.property(KoXmlNS::draw, "shadow-offset-x"));
-        qreal offsetY = KUnit::parseValue(styleStack.property(KoXmlNS::draw, "shadow-offset-y"));
+        QColor shadowColor(styleStack.property(KOdfXmlNS::draw, "shadow-color"));
+        qreal offsetX = KUnit::parseValue(styleStack.property(KOdfXmlNS::draw, "shadow-offset-x"));
+        qreal offsetY = KUnit::parseValue(styleStack.property(KOdfXmlNS::draw, "shadow-offset-y"));
         shadow->setOffset(QPointF(offsetX, offsetY));
 
-        QString opacity = styleStack.property(KoXmlNS::draw, "shadow-opacity");
+        QString opacity = styleStack.property(KOdfXmlNS::draw, "shadow-opacity");
         if (! opacity.isEmpty() && opacity.right(1) == "%")
             shadowColor.setAlphaF(opacity.left(opacity.length() - 1).toFloat() / 100.0);
         shadow->setColor(shadowColor);

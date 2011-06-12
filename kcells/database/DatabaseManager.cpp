@@ -21,7 +21,7 @@
 
 #include <QHash>
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 #include "KCCellStorage.h"
@@ -58,10 +58,10 @@ QString DatabaseManager::createUniqueName() const
 
 bool DatabaseManager::loadOdf(const KoXmlElement& body)
 {
-    const KoXmlNode databaseRanges = KoXml::namedItemNS(body, KoXmlNS::table, "database-ranges");
+    const KoXmlNode databaseRanges = KoXml::namedItemNS(body, KOdfXmlNS::table, "database-ranges");
     KoXmlElement element;
     forEachElement(element, databaseRanges) {
-        if (element.namespaceURI() != KoXmlNS::table)
+        if (element.namespaceURI() != KOdfXmlNS::table)
             continue;
         if (element.localName() == "database-range") {
             Database database;

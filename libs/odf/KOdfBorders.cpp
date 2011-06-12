@@ -24,7 +24,7 @@
 #include <KDebug>
 
 #include <KUnit.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>
 #include <KOdfGenericStyle.h>
@@ -510,8 +510,8 @@ KOdfBorders::BorderData KOdfBorders::bottomBorderData() const
 
 void KOdfBorders::loadOdf(const KoXmlElement &style)
 {
-    if (style.hasAttributeNS(KoXmlNS::fo, "border")) {
-        QString border = style.attributeNS(KoXmlNS::fo, "border");
+    if (style.hasAttributeNS(KOdfXmlNS::fo, "border")) {
+        QString border = style.attributeNS(KOdfXmlNS::fo, "border");
 
         //kDebug() << "*** *** Found border: " << border;
 
@@ -541,54 +541,54 @@ void KOdfBorders::loadOdf(const KoXmlElement &style)
     }
     else {
         // No common border attributes, check for the individual ones.
-        if (style.hasAttributeNS(KoXmlNS::fo, "border-left")) {
-            QString border = style.attributeNS(KoXmlNS::fo, "border-left");
+        if (style.hasAttributeNS(KOdfXmlNS::fo, "border-left")) {
+            QString border = style.attributeNS(KOdfXmlNS::fo, "border-left");
             if (!border.isEmpty() && border != "none" && border != "hidden") {
 
                 QStringList borderData = border.split(' ', QString::SkipEmptyParts);
 
                 setLeftBorderWidth(KUnit::parseValue(borderData[0], 1.0));
                 setLeftBorderStyle(odfBorderStyle(borderData[1]));
-                QString specialBorderStyle = style.attributeNS(KoXmlNS::koffice, "specialborder-left");
+                QString specialBorderStyle = style.attributeNS(KOdfXmlNS::koffice, "specialborder-left");
                 if (!specialBorderStyle.isEmpty()) {
                     setLeftBorderStyle(odfBorderStyle(specialBorderStyle));
                 }
                 setLeftBorderColor(QColor(borderData[2]));
             }
         }
-        if (style.hasAttributeNS(KoXmlNS::fo, "border-top")) {
-            QString border = style.attributeNS(KoXmlNS::fo, "border-top");
+        if (style.hasAttributeNS(KOdfXmlNS::fo, "border-top")) {
+            QString border = style.attributeNS(KOdfXmlNS::fo, "border-top");
             if (!border.isEmpty() && border != "none" && border != "hidden") {
                 QStringList borderData = border.split(' ', QString::SkipEmptyParts);
                 setTopBorderWidth(KUnit::parseValue(borderData[0], 1.0));
                 setTopBorderStyle(odfBorderStyle(borderData[1]));
-                QString specialBorderStyle = style.attributeNS(KoXmlNS::koffice, "specialborder-top");
+                QString specialBorderStyle = style.attributeNS(KOdfXmlNS::koffice, "specialborder-top");
                 if (!specialBorderStyle.isEmpty()) {
                     setTopBorderStyle(odfBorderStyle(specialBorderStyle));
                 }
                 setTopBorderColor(QColor(borderData[2]));
             }
         }
-        if (style.hasAttributeNS(KoXmlNS::fo, "border-right")) {
-            QString border = style.attributeNS(KoXmlNS::fo, "border-right");
+        if (style.hasAttributeNS(KOdfXmlNS::fo, "border-right")) {
+            QString border = style.attributeNS(KOdfXmlNS::fo, "border-right");
             if (!border.isEmpty() && border != "none" && border != "hidden") {
                 QStringList borderData = border.split(' ', QString::SkipEmptyParts);
                 setRightBorderWidth(KUnit::parseValue(borderData[0], 1.0));
                 setRightBorderStyle(odfBorderStyle(borderData[1]));
-                QString specialBorderStyle = style.attributeNS(KoXmlNS::koffice, "specialborder-right");
+                QString specialBorderStyle = style.attributeNS(KOdfXmlNS::koffice, "specialborder-right");
                 if (!specialBorderStyle.isEmpty()) {
                     setRightBorderStyle(odfBorderStyle(specialBorderStyle));
                 }
                 setRightBorderColor(QColor(borderData[2]));
             }
         }
-        if (style.hasAttributeNS(KoXmlNS::fo, "border-bottom")) {
-            QString border = style.attributeNS(KoXmlNS::fo, "border-bottom");
+        if (style.hasAttributeNS(KOdfXmlNS::fo, "border-bottom")) {
+            QString border = style.attributeNS(KOdfXmlNS::fo, "border-bottom");
             if (!border.isEmpty() && border != "none" && border != "hidden") {
                 QStringList borderData = border.split(' ', QString::SkipEmptyParts);
                 setBottomBorderWidth(KUnit::parseValue(borderData[0], 1.0));
                 setBottomBorderStyle(odfBorderStyle(borderData[1]));
-                QString specialBorderStyle = style.attributeNS(KoXmlNS::koffice, "specialborder-bottom");
+                QString specialBorderStyle = style.attributeNS(KOdfXmlNS::koffice, "specialborder-bottom");
                 if (!specialBorderStyle.isEmpty()) {
                     setBottomBorderStyle(odfBorderStyle(specialBorderStyle));
                 }
@@ -598,8 +598,8 @@ void KOdfBorders::loadOdf(const KoXmlElement &style)
     }
 
     // Handle double borders.
-    if (style.hasAttributeNS(KoXmlNS::style, "border-line-width")) {
-        QString borderLineWidth = style.attributeNS(KoXmlNS::style, "border-line-width");
+    if (style.hasAttributeNS(KOdfXmlNS::style, "border-line-width")) {
+        QString borderLineWidth = style.attributeNS(KOdfXmlNS::style, "border-line-width");
         if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
             QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
             setLeftInnerBorderWidth(KUnit::parseValue(blw[0], 0.1));
@@ -620,8 +620,8 @@ void KOdfBorders::loadOdf(const KoXmlElement &style)
         }
     }
     else {
-        if (style.hasAttributeNS(KoXmlNS::style, "border-line-width-left")) {
-            QString borderLineWidth = style.attributeNS(KoXmlNS::style, "border-line-width-left");
+        if (style.hasAttributeNS(KOdfXmlNS::style, "border-line-width-left")) {
+            QString borderLineWidth = style.attributeNS(KOdfXmlNS::style, "border-line-width-left");
             if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
                 QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
                 setLeftInnerBorderWidth(KUnit::parseValue(blw[0], 0.1));
@@ -629,8 +629,8 @@ void KOdfBorders::loadOdf(const KoXmlElement &style)
                 setLeftBorderWidth(KUnit::parseValue(blw[2], 0.1));
             }
         }
-        if (style.hasAttributeNS(KoXmlNS::style, "border-line-width-top")) {
-            QString borderLineWidth = style.attributeNS(KoXmlNS::style, "border-line-width-top");
+        if (style.hasAttributeNS(KOdfXmlNS::style, "border-line-width-top")) {
+            QString borderLineWidth = style.attributeNS(KOdfXmlNS::style, "border-line-width-top");
             if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
                 QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
                 setTopInnerBorderWidth(KUnit::parseValue(blw[0], 0.1));
@@ -638,8 +638,8 @@ void KOdfBorders::loadOdf(const KoXmlElement &style)
                 setTopBorderWidth(KUnit::parseValue(blw[2], 0.1));
             }
         }
-        if (style.hasAttributeNS(KoXmlNS::style, "border-line-width-right")) {
-            QString borderLineWidth = style.attributeNS(KoXmlNS::style, "border-line-width-right");
+        if (style.hasAttributeNS(KOdfXmlNS::style, "border-line-width-right")) {
+            QString borderLineWidth = style.attributeNS(KOdfXmlNS::style, "border-line-width-right");
             if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
                 QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
                 setRightInnerBorderWidth(KUnit::parseValue(blw[0], 0.1));
@@ -647,8 +647,8 @@ void KOdfBorders::loadOdf(const KoXmlElement &style)
                 setRightBorderWidth(KUnit::parseValue(blw[2], 0.1));
             }
         }
-        if (style.hasAttributeNS(KoXmlNS::style, "border-line-width-bottom")) {
-            QString borderLineWidth = style.attributeNS(KoXmlNS::style, "border-line-width-bottom");
+        if (style.hasAttributeNS(KOdfXmlNS::style, "border-line-width-bottom")) {
+            QString borderLineWidth = style.attributeNS(KOdfXmlNS::style, "border-line-width-bottom");
             if (!borderLineWidth.isEmpty() && borderLineWidth != "none" && borderLineWidth != "hidden") {
                 QStringList blw = borderLineWidth.split(' ', QString::SkipEmptyParts);
                 setBottomInnerBorderWidth(KUnit::parseValue(blw[0], 0.1));

@@ -31,7 +31,7 @@
 #include <kdebug.h>
 #include <KoFilterChain.h>
 #include <kpluginfactory.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoOdf.h>
 
 K_PLUGIN_FACTORY(PowerPointImportFactory, registerPlugin<PowerPointImport>();)

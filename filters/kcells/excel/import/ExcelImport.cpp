@@ -42,7 +42,7 @@
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
 #include <KoOdfNumberStyles.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
 #include <KOdfStylesReader.h>
@@ -307,7 +307,7 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
     KoXmlWriter manifestWriter(&manifestBuffer);
     manifestWriter.startDocument("manifest:manifest");
     manifestWriter.startElement("manifest:manifest");
-    manifestWriter.addAttribute("xmlns:manifest", KoXmlNS::manifest);
+    manifestWriter.addAttribute("xmlns:manifest", KOdfXmlNS::manifest);
     manifestWriter.addManifestEntry("/", "application/vnd.oasis.opendocument.spreadsheet");
 
     d->processCharts(&manifestWriter);
@@ -420,13 +420,13 @@ void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElemen
     // Their dimensions need adjustment after all rows are loaded,
     // because the position of the end cell is not always known yet.
     KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
-                KoXmlNS::table, "end-cell-address",
+                KOdfXmlNS::table, "end-cell-address",
                 "table:end-cell-address"));
     KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
-                KoXmlNS::table, "end-x",
+                KOdfXmlNS::table, "end-x",
                 "table:end-x"));
     KoShapeLoadingContext::addAdditionalAttributeData(KoShapeLoadingContext::AdditionalAttributeData(
-                KoXmlNS::table, "end-y",
+                KOdfXmlNS::table, "end-y",
                 "table:end-y"));
 
 
@@ -437,13 +437,13 @@ void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElemen
 
     KoXmlElement sheetElement;
     forEachElement(sheetElement, rootElement) {
-        Q_ASSERT(sheetElement.namespaceURI() == KoXmlNS::table && sheetElement.localName() == "table");
-        int sheetId = sheetElement.attributeNS(KoXmlNS::table, "id").toInt();
+        Q_ASSERT(sheetElement.namespaceURI() == KOdfXmlNS::table && sheetElement.localName() == "table");
+        int sheetId = sheetElement.attributeNS(KOdfXmlNS::table, "id").toInt();
         KCSheet* sheet = outputDoc->map()->sheet(sheetId);
 
         KoXmlElement cellElement;
         forEachElement(cellElement, sheetElement) {
-            Q_ASSERT(cellElement.namespaceURI() == KoXmlNS::table);
+            Q_ASSERT(cellElement.namespaceURI() == KOdfXmlNS::table);
             if (cellElement.localName() == "shapes") {
                 KoXmlElement element;
                 forEachElement(element, cellElement) {
@@ -451,8 +451,8 @@ void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElemen
                 }
             } else {
                 Q_ASSERT(cellElement.localName() == "table-cell");
-                int row = cellElement.attributeNS(KoXmlNS::table, "row").toInt();
-                int col = cellElement.attributeNS(KoXmlNS::table, "column").toInt();
+                int row = cellElement.attributeNS(KOdfXmlNS::table, "row").toInt();
+                int col = cellElement.attributeNS(KOdfXmlNS::table, "column").toInt();
                 KCCell cell(sheet, col, row);
 
                 KoXmlElement element;
@@ -1310,28 +1310,28 @@ KoXmlWriter* ExcelImport::Private::beginMemoryXmlWriter(const char* docElement)
     KoXmlWriter* xml = new KoXmlWriter(d);
     xml->startDocument(docElement);
     xml->startElement(docElement);
-    xml->addAttribute("xmlns:office", KoXmlNS::office);
-    xml->addAttribute("xmlns:meta", KoXmlNS::meta);
-    xml->addAttribute("xmlns:config", KoXmlNS::config);
-    xml->addAttribute("xmlns:text", KoXmlNS::text);
-    xml->addAttribute("xmlns:table", KoXmlNS::table);
-    xml->addAttribute("xmlns:draw", KoXmlNS::draw);
-    xml->addAttribute("xmlns:presentation", KoXmlNS::presentation);
-    xml->addAttribute("xmlns:dr3d", KoXmlNS::dr3d);
-    xml->addAttribute("xmlns:chart", KoXmlNS::chart);
-    xml->addAttribute("xmlns:form", KoXmlNS::form);
-    xml->addAttribute("xmlns:script", KoXmlNS::script);
-    xml->addAttribute("xmlns:style", KoXmlNS::style);
-    xml->addAttribute("xmlns:number", KoXmlNS::number);
-    xml->addAttribute("xmlns:math", KoXmlNS::math);
-    xml->addAttribute("xmlns:svg", KoXmlNS::svg);
-    xml->addAttribute("xmlns:fo", KoXmlNS::fo);
-    xml->addAttribute("xmlns:anim", KoXmlNS::anim);
-    xml->addAttribute("xmlns:smil", KoXmlNS::smil);
-    xml->addAttribute("xmlns:koffice", KoXmlNS::koffice);
-    xml->addAttribute("xmlns:officeooo", KoXmlNS::officeooo);
-    xml->addAttribute("xmlns:dc", KoXmlNS::dc);
-    xml->addAttribute("xmlns:xlink", KoXmlNS::xlink);
+    xml->addAttribute("xmlns:office", KOdfXmlNS::office);
+    xml->addAttribute("xmlns:meta", KOdfXmlNS::meta);
+    xml->addAttribute("xmlns:config", KOdfXmlNS::config);
+    xml->addAttribute("xmlns:text", KOdfXmlNS::text);
+    xml->addAttribute("xmlns:table", KOdfXmlNS::table);
+    xml->addAttribute("xmlns:draw", KOdfXmlNS::draw);
+    xml->addAttribute("xmlns:presentation", KOdfXmlNS::presentation);
+    xml->addAttribute("xmlns:dr3d", KOdfXmlNS::dr3d);
+    xml->addAttribute("xmlns:chart", KOdfXmlNS::chart);
+    xml->addAttribute("xmlns:form", KOdfXmlNS::form);
+    xml->addAttribute("xmlns:script", KOdfXmlNS::script);
+    xml->addAttribute("xmlns:style", KOdfXmlNS::style);
+    xml->addAttribute("xmlns:number", KOdfXmlNS::number);
+    xml->addAttribute("xmlns:math", KOdfXmlNS::math);
+    xml->addAttribute("xmlns:svg", KOdfXmlNS::svg);
+    xml->addAttribute("xmlns:fo", KOdfXmlNS::fo);
+    xml->addAttribute("xmlns:anim", KOdfXmlNS::anim);
+    xml->addAttribute("xmlns:smil", KOdfXmlNS::smil);
+    xml->addAttribute("xmlns:koffice", KOdfXmlNS::koffice);
+    xml->addAttribute("xmlns:officeooo", KOdfXmlNS::officeooo);
+    xml->addAttribute("xmlns:dc", KOdfXmlNS::dc);
+    xml->addAttribute("xmlns:xlink", KOdfXmlNS::xlink);
     return xml;
 }
 

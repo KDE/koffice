@@ -42,7 +42,7 @@
 #include <KOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
 #include <KOdfGenericStyles.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <kcomponentdata.h>
 #include <KoTextDebug_p.h>
 #include <KoListStyle.h>

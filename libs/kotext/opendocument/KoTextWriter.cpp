@@ -56,7 +56,7 @@
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <opendocument/KoTextSharedSavingData.h>
 #include <changetracker/KoChangeTracker.h>
@@ -1653,29 +1653,29 @@ void KoTextWriter::Private::addNameSpaceDefinitions(QString &generatedXmlString)
     QTextStream nameSpacesStream(&nameSpaceDefinitions);
 
     nameSpacesStream << "<generated-xml ";
-    nameSpacesStream << "xmlns:office=\"" << KoXmlNS::office << "\" ";
-    nameSpacesStream << "xmlns:meta=\"" << KoXmlNS::meta << "\" ";
-    nameSpacesStream << "xmlns:config=\"" << KoXmlNS::config << "\" ";
-    nameSpacesStream << "xmlns:text=\"" << KoXmlNS::text << "\" ";
-    nameSpacesStream << "xmlns:table=\"" << KoXmlNS::table << "\" ";
-    nameSpacesStream << "xmlns:draw=\"" << KoXmlNS::draw << "\" ";
-    nameSpacesStream << "xmlns:presentation=\"" << KoXmlNS::presentation << "\" ";
-    nameSpacesStream << "xmlns:dr3d=\"" << KoXmlNS::dr3d << "\" ";
-    nameSpacesStream << "xmlns:chart=\"" << KoXmlNS::chart << "\" ";
-    nameSpacesStream << "xmlns:form=\"" << KoXmlNS::form << "\" ";
-    nameSpacesStream << "xmlns:script=\"" << KoXmlNS::script << "\" ";
-    nameSpacesStream << "xmlns:style=\"" << KoXmlNS::style << "\" ";
-    nameSpacesStream << "xmlns:number=\"" << KoXmlNS::number << "\" ";
-    nameSpacesStream << "xmlns:math=\"" << KoXmlNS::math << "\" ";
-    nameSpacesStream << "xmlns:svg=\"" << KoXmlNS::svg << "\" ";
-    nameSpacesStream << "xmlns:fo=\"" << KoXmlNS::fo << "\" ";
-    nameSpacesStream << "xmlns:anim=\"" << KoXmlNS::anim << "\" ";
-    nameSpacesStream << "xmlns:smil=\"" << KoXmlNS::smil << "\" ";
-    nameSpacesStream << "xmlns:koffice=\"" << KoXmlNS::koffice << "\" ";
-    nameSpacesStream << "xmlns:officeooo=\"" << KoXmlNS::officeooo << "\" ";
-    nameSpacesStream << "xmlns:delta=\"" << KoXmlNS::delta << "\" ";
-    nameSpacesStream << "xmlns:split=\"" << KoXmlNS::split << "\" ";
-    nameSpacesStream << "xmlns:ac=\"" << KoXmlNS::ac << "\" ";
+    nameSpacesStream << "xmlns:office=\"" << KOdfXmlNS::office << "\" ";
+    nameSpacesStream << "xmlns:meta=\"" << KOdfXmlNS::meta << "\" ";
+    nameSpacesStream << "xmlns:config=\"" << KOdfXmlNS::config << "\" ";
+    nameSpacesStream << "xmlns:text=\"" << KOdfXmlNS::text << "\" ";
+    nameSpacesStream << "xmlns:table=\"" << KOdfXmlNS::table << "\" ";
+    nameSpacesStream << "xmlns:draw=\"" << KOdfXmlNS::draw << "\" ";
+    nameSpacesStream << "xmlns:presentation=\"" << KOdfXmlNS::presentation << "\" ";
+    nameSpacesStream << "xmlns:dr3d=\"" << KOdfXmlNS::dr3d << "\" ";
+    nameSpacesStream << "xmlns:chart=\"" << KOdfXmlNS::chart << "\" ";
+    nameSpacesStream << "xmlns:form=\"" << KOdfXmlNS::form << "\" ";
+    nameSpacesStream << "xmlns:script=\"" << KOdfXmlNS::script << "\" ";
+    nameSpacesStream << "xmlns:style=\"" << KOdfXmlNS::style << "\" ";
+    nameSpacesStream << "xmlns:number=\"" << KOdfXmlNS::number << "\" ";
+    nameSpacesStream << "xmlns:math=\"" << KOdfXmlNS::math << "\" ";
+    nameSpacesStream << "xmlns:svg=\"" << KOdfXmlNS::svg << "\" ";
+    nameSpacesStream << "xmlns:fo=\"" << KOdfXmlNS::fo << "\" ";
+    nameSpacesStream << "xmlns:anim=\"" << KOdfXmlNS::anim << "\" ";
+    nameSpacesStream << "xmlns:smil=\"" << KOdfXmlNS::smil << "\" ";
+    nameSpacesStream << "xmlns:koffice=\"" << KOdfXmlNS::koffice << "\" ";
+    nameSpacesStream << "xmlns:officeooo=\"" << KOdfXmlNS::officeooo << "\" ";
+    nameSpacesStream << "xmlns:delta=\"" << KOdfXmlNS::delta << "\" ";
+    nameSpacesStream << "xmlns:split=\"" << KOdfXmlNS::split << "\" ";
+    nameSpacesStream << "xmlns:ac=\"" << KOdfXmlNS::ac << "\" ";
     nameSpacesStream << ">";
 
     generatedXmlString.prepend(nameSpaceDefinitions);
@@ -1754,7 +1754,7 @@ void KoTextWriter::Private::handleParagraphOrHeaderMerge(QTextStream &outputXmlS
 
     // Find the Change-id
     KoXmlElement removedContentElement = firstChildElement.lastChild().toElement();
-    QString changeId = removedContentElement.attributeNS(KoXmlNS::delta, "removal-change-idref");
+    QString changeId = removedContentElement.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
 
     outputXmlStream << "<text:" << firstChild;
     writeAttributes(outputXmlStream, firstChildElement);
@@ -1806,7 +1806,7 @@ void KoTextWriter::Private::handleParagraphWithHeaderMerge(QTextStream &outputXm
 
     // Find the Change-id
     KoXmlElement removedContentElement = firstChildElement.lastChild().toElement();
-    QString changeId = removedContentElement.attributeNS(KoXmlNS::delta, "removal-change-idref");
+    QString changeId = removedContentElement.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
 
     //Start generating the XML
     insertAroundContent(outputXmlStream, firstChildElement, changeId);
@@ -1839,7 +1839,7 @@ void KoTextWriter::Private::handleParagraphWithListItemMerge(QTextStream &output
 
     // Find the Change-id
     KoXmlElement removedContentElement = firstChildElement.lastChild().toElement();
-    QString changeId = removedContentElement.attributeNS(KoXmlNS::delta, "removal-change-idref");
+    QString changeId = removedContentElement.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
 
     //Start generating the XML
     insertAroundContent(outputXmlStream, firstChildElement, changeId);
@@ -1963,7 +1963,7 @@ void KoTextWriter::Private::handleListItemWithParagraphMerge(QTextStream &output
 
     // Find the Change-id
     KoXmlElement removedContentElement = paragraphElement.firstChild().toElement();
-    QString changeId = removedContentElement.attributeNS(KoXmlNS::delta, "removal-change-idref");
+    QString changeId = removedContentElement.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
 
     int endIdCounter = 1;
 
@@ -2257,7 +2257,7 @@ QString KoTextWriter::Private::findChangeIdForListItemMerge(const KoXmlElement &
                 if (childElement.localName() == "p") {
                     KoXmlElement removedContentElement = childElement.lastChild().toElement();
                     if (removedContentElement.localName() == "removed-content") {
-                        changeId = removedContentElement.attributeNS(KoXmlNS::delta, "removal-change-idref");
+                        changeId = removedContentElement.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
                         break;
                     }
                 } else if (childElement.localName() == "list") {
@@ -2279,12 +2279,12 @@ void KoTextWriter::Private::writeAttributes(QTextStream &outputXmlStream, KoXmlE
 
     QPair<QString, QString> attributeNamePair;
     foreach (attributeNamePair, attributes) {
-        if (attributeNamePair.first == KoXmlNS::text) {
+        if (attributeNamePair.first == KOdfXmlNS::text) {
             outputXmlStream << " text:" << attributeNamePair.second << "=";
-            outputXmlStream << "\"" << element.attributeNS(KoXmlNS::text, attributeNamePair.second) << "\"";
-        } else if (attributeNamePair.first == KoXmlNS::delta) {
+            outputXmlStream << "\"" << element.attributeNS(KOdfXmlNS::text, attributeNamePair.second) << "\"";
+        } else if (attributeNamePair.first == KOdfXmlNS::delta) {
             outputXmlStream << " delta:" << attributeNamePair.second << "=";
-            outputXmlStream << "\"" << element.attributeNS(KoXmlNS::delta, attributeNamePair.second) << "\"";
+            outputXmlStream << "\"" << element.attributeNS(KOdfXmlNS::delta, attributeNamePair.second) << "\"";
         } else {
             //To Be Added when needed
         }

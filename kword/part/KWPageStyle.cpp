@@ -23,7 +23,7 @@
 #include "KWPageStyle_p.h"
 
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KUnit.h>
 #include <KoColorBackground.h>
 #include <KoPatternBackground.h>
@@ -351,18 +351,18 @@ KOdfGenericStyle KWPageStyle::saveOdf() const
 void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KoXmlElement &masterNode, const KoXmlElement &style, KoResourceManager *documentResources)
 {
     d->pageLayout.loadOdf(style);
-    KoXmlElement props = KoXml::namedItemNS(style, KoXmlNS::style, "page-layout-properties");
+    KoXmlElement props = KoXml::namedItemNS(style, KOdfXmlNS::style, "page-layout-properties");
     if (props.isNull())
         return;
-    QString direction = props.attributeNS(KoXmlNS::style, "writing-mode", "lr-tb");
+    QString direction = props.attributeNS(KOdfXmlNS::style, "writing-mode", "lr-tb");
     d->direction = KoText::directionFromString(direction);
 
-    KoXmlElement columns = KoXml::namedItemNS(props, KoXmlNS::style, "columns");
+    KoXmlElement columns = KoXml::namedItemNS(props, KOdfXmlNS::style, "columns");
     if (!columns.isNull()) {
-        d->columns.columns = columns.attributeNS(KoXmlNS::fo, "column-count", "15").toInt();
+        d->columns.columns = columns.attributeNS(KOdfXmlNS::fo, "column-count", "15").toInt();
         if (d->columns.columns < 1)
             d->columns.columns = 1;
-        d->columns.columnSpacing = KUnit::parseValue(columns.attributeNS(KoXmlNS::fo, "column-gap"));
+        d->columns.columnSpacing = KUnit::parseValue(columns.attributeNS(KOdfXmlNS::fo, "column-gap"));
     } else {
         d->columns.columns = 1;
         d->columns.columnSpacing = 17; // ~ 6mm
@@ -372,14 +372,14 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KoXmlElement &maste
     d->headerInsets = KoInsets();
     d->headerMinimumHeight = 0;
     d->fixedHeaderSize = true;
-    KoXmlElement header = KoXml::namedItemNS(style, KoXmlNS::style, "header-style");
+    KoXmlElement header = KoXml::namedItemNS(style, KOdfXmlNS::style, "header-style");
     if (! header.isNull()) {
-        KoXmlElement hfprops = KoXml::namedItemNS(header, KoXmlNS::style, "header-footer-properties");
+        KoXmlElement hfprops = KoXml::namedItemNS(header, KOdfXmlNS::style, "header-footer-properties");
         if (!hfprops.isNull()) {
-            d->headerMargin.fillFrom(hfprops, KoXmlNS::fo, "margin");
-            d->headerInsets.fillFrom(hfprops, KoXmlNS::fo, "padding");
-            d->headerMinimumHeight = KUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "min-height"));
-            d->fixedHeaderSize = hfprops.attributeNS(KoXmlNS::style,
+            d->headerMargin.fillFrom(hfprops, KOdfXmlNS::fo, "margin");
+            d->headerInsets.fillFrom(hfprops, KOdfXmlNS::fo, "padding");
+            d->headerMinimumHeight = KUnit::parseValue(hfprops.attributeNS(KOdfXmlNS::fo, "min-height"));
+            d->fixedHeaderSize = hfprops.attributeNS(KOdfXmlNS::style,
                     "dynamic-spacing").compare("true", Qt::CaseInsensitive) == 0;
         // TODO there are quite some more properties we want to at least preserve between load and save
           //fo:background-color
@@ -403,22 +403,22 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KoXmlElement &maste
     d->footerInsets = KoInsets();
     d->footerMinimumHeight = 0;
     d->fixedFooterSize = true;
-    KoXmlElement footer = KoXml::namedItemNS(style, KoXmlNS::style, "footer-style");
+    KoXmlElement footer = KoXml::namedItemNS(style, KOdfXmlNS::style, "footer-style");
     if (! footer.isNull()) {
-        KoXmlElement hfprops = KoXml::namedItemNS(footer, KoXmlNS::style, "header-footer-properties");
+        KoXmlElement hfprops = KoXml::namedItemNS(footer, KOdfXmlNS::style, "header-footer-properties");
         if (!hfprops.isNull()) {
-            d->footerMargin.fillFrom(hfprops, KoXmlNS::fo, "margin");
-            d->footerInsets.fillFrom(hfprops, KoXmlNS::fo, "padding");
-            d->footerMinimumHeight = KUnit::parseValue(hfprops.attributeNS(KoXmlNS::fo, "min-height"));
-            d->fixedFooterSize = hfprops.attributeNS(KoXmlNS::style,
+            d->footerMargin.fillFrom(hfprops, KOdfXmlNS::fo, "margin");
+            d->footerInsets.fillFrom(hfprops, KOdfXmlNS::fo, "padding");
+            d->footerMinimumHeight = KUnit::parseValue(hfprops.attributeNS(KOdfXmlNS::fo, "min-height"));
+            d->fixedFooterSize = hfprops.attributeNS(KOdfXmlNS::style,
                     "dynamic-spacing").compare("true", Qt::CaseInsensitive) == 0;
         }
     }
 
     // Load background picture
-    KoXmlElement propBackgroundImage = KoXml::namedItemNS(props, KoXmlNS::style, "background-image");
+    KoXmlElement propBackgroundImage = KoXml::namedItemNS(props, KOdfXmlNS::style, "background-image");
     if (!propBackgroundImage.isNull()) {
-        const QString href = propBackgroundImage.attributeNS(KoXmlNS::xlink, "href", QString());
+        const QString href = propBackgroundImage.attributeNS(KOdfXmlNS::xlink, "href", QString());
         if (!href.isEmpty()) {
             KoPatternBackground *background = new KoPatternBackground(documentResources->imageCollection());
             d->fullPageBackground = background;
@@ -434,7 +434,7 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KoXmlElement &maste
     }
 
     // Load background color
-    QString backgroundColor = props.attributeNS(KoXmlNS::fo, "background-color", QString::null);
+    QString backgroundColor = props.attributeNS(KOdfXmlNS::fo, "background-color", QString::null);
     if (!backgroundColor.isNull() && d->fullPageBackground == 0) {
 
         if (backgroundColor == "transparent") {
@@ -447,7 +447,7 @@ void KWPageStyle::loadOdf(KOdfLoadingContext &context, const KoXmlElement &maste
     }
 
     // Load next master-page style name
-    d->nextStyleName = masterNode.attributeNS(KoXmlNS::style, "next-style-name", QString());
+    d->nextStyleName = masterNode.attributeNS(KOdfXmlNS::style, "next-style-name", QString());
 }
 
 QString KWPageStyle::nextStyleName() const

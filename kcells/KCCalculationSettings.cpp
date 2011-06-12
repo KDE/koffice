@@ -33,7 +33,7 @@
 
 #include "KCLocalization.h"
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <kdebug.h>
 
@@ -84,50 +84,50 @@ KCCalculationSettings::~KCCalculationSettings()
 
 void KCCalculationSettings::loadOdf(const KoXmlElement& body)
 {
-    KoXmlNode settings = KoXml::namedItemNS(body, KoXmlNS::table, "calculation-settings");
+    KoXmlNode settings = KoXml::namedItemNS(body, KOdfXmlNS::table, "calculation-settings");
     kDebug() << "Calculation settings found?" << !settings.isNull();
     if (!settings.isNull()) {
         KoXmlElement element = settings.toElement();
-        if (element.hasAttributeNS(KoXmlNS::table,  "case-sensitive")) {
+        if (element.hasAttributeNS(KOdfXmlNS::table,  "case-sensitive")) {
             d->caseSensitiveComparisons = true;
-            QString value = element.attributeNS(KoXmlNS::table, "case-sensitive", "true");
+            QString value = element.attributeNS(KOdfXmlNS::table, "case-sensitive", "true");
             if (value == "false")
                 d->caseSensitiveComparisons = false;
-        } else if (element.hasAttributeNS(KoXmlNS::table, "precision-as-shown")) {
+        } else if (element.hasAttributeNS(KOdfXmlNS::table, "precision-as-shown")) {
             d->precisionAsShown = false;
-            QString value = element.attributeNS(KoXmlNS::table, "precision-as-shown", "false");
+            QString value = element.attributeNS(KOdfXmlNS::table, "precision-as-shown", "false");
             if (value == "true")
                 d->precisionAsShown = true;
-        } else if (element.hasAttributeNS(KoXmlNS::table, "search-criteria-must-apply-to-whole-cell")) {
+        } else if (element.hasAttributeNS(KOdfXmlNS::table, "search-criteria-must-apply-to-whole-cell")) {
             d->wholeCellSearchCriteria = true;
-            QString value = element.attributeNS(KoXmlNS::table, "search-criteria-must-apply-to-whole-cell", "true");
+            QString value = element.attributeNS(KOdfXmlNS::table, "search-criteria-must-apply-to-whole-cell", "true");
             if (value == "false")
                 d->wholeCellSearchCriteria = false;
-        } else if (element.hasAttributeNS(KoXmlNS::table, "automatic-find-labels")) {
+        } else if (element.hasAttributeNS(KOdfXmlNS::table, "automatic-find-labels")) {
             d->automaticFindLabels = true;
-            QString value = element.attributeNS(KoXmlNS::table, "automatic-find-labels", "true");
+            QString value = element.attributeNS(KOdfXmlNS::table, "automatic-find-labels", "true");
             if (value == "false")
                 d->automaticFindLabels = false;
-        } else if (element.hasAttributeNS(KoXmlNS::table, "use-regular-expressions")) {
+        } else if (element.hasAttributeNS(KOdfXmlNS::table, "use-regular-expressions")) {
             d->useRegularExpressions = true;
-            QString value = element.attributeNS(KoXmlNS::table, "use-regular-expressions", "true");
+            QString value = element.attributeNS(KOdfXmlNS::table, "use-regular-expressions", "true");
             if (value == "false")
                 d->useRegularExpressions = false;
-        } else if (element.hasAttributeNS(KoXmlNS::table, "null-year")) {
+        } else if (element.hasAttributeNS(KOdfXmlNS::table, "null-year")) {
             d->refYear = 1930;
-            QString value = element.attributeNS(KoXmlNS::table, "null-year", "1930");
+            QString value = element.attributeNS(KOdfXmlNS::table, "null-year", "1930");
             if (value == "false")
                 d->refYear = false;
         }
 
         forEachElement(element, settings) {
-            if (element.namespaceURI() != KoXmlNS::table)
+            if (element.namespaceURI() != KOdfXmlNS::table)
                 continue;
             else if (element.tagName() ==  "null-date") {
                 d->refDate = QDate(1899, 12, 30);
-                QString valueType = element.attributeNS(KoXmlNS::table, "value-type", "date");
+                QString valueType = element.attributeNS(KOdfXmlNS::table, "value-type", "date");
                 if (valueType == "date") {
-                    QString value = element.attributeNS(KoXmlNS::table, "date-value", "1899-12-30");
+                    QString value = element.attributeNS(KOdfXmlNS::table, "date-value", "1899-12-30");
                     QDate date = QDate::fromString(value, Qt::ISODate);
                     if (date.isValid())
                         d->refDate = date;

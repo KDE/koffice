@@ -21,7 +21,7 @@
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShapeSavingContext.h>
 #include <KoTextLoader.h>
 #include <KoTextWriter.h>
@@ -176,9 +176,9 @@ bool KoInlineNote::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
 
     KoTextLoader loader(context);
 
-    if (element.namespaceURI() == KoXmlNS::text && element.localName() == "note") {
+    if (element.namespaceURI() == KOdfXmlNS::text && element.localName() == "note") {
 
-        QString className = element.attributeNS(KoXmlNS::text, "note-class");
+        QString className = element.attributeNS(KOdfXmlNS::text, "note-class");
         if (className == "footnote") {
             d->type = Footnote;
         }
@@ -190,16 +190,16 @@ bool KoInlineNote::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
             return false;
         }
 
-        d->id = element.attributeNS(KoXmlNS::text, "id");
+        d->id = element.attributeNS(KOdfXmlNS::text, "id");
         for (KoXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
             setAutoNumbering(false);
             KoXmlElement ts = node.toElement();
-            if (ts.namespaceURI() != KoXmlNS::text)
+            if (ts.namespaceURI() != KOdfXmlNS::text)
                 continue;
             if (ts.localName() == "note-body") {
                 loader.loadBody(ts, cursor);
             } else if (ts.localName() == "note-citation") {
-                d->label = ts.attributeNS(KoXmlNS::text, "label");
+                d->label = ts.attributeNS(KOdfXmlNS::text, "label");
                 if (d->label.isEmpty()) {
                     setAutoNumbering(true);
                     d->label = ts.text();
@@ -207,9 +207,9 @@ bool KoInlineNote::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
             }
         }
     }
-    else if (element.namespaceURI() == KoXmlNS::office && element.localName() == "annotation") {
-        d->author = element.attributeNS(KoXmlNS::text, "dc-creator");
-        d->date = QDateTime::fromString(element.attributeNS(KoXmlNS::text, "dc-date"), Qt::ISODate);
+    else if (element.namespaceURI() == KOdfXmlNS::office && element.localName() == "annotation") {
+        d->author = element.attributeNS(KOdfXmlNS::text, "dc-creator");
+        d->date = QDateTime::fromString(element.attributeNS(KOdfXmlNS::text, "dc-date"), Qt::ISODate);
         loader.loadBody(element, cursor); // would skip author and date, and do just the <text-p> and <text-list> elements
     }
     else {

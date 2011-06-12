@@ -25,7 +25,7 @@
 
 #include <KDebug>
 
-#include "KoXmlNS.h"
+#include "KOdfXmlNS.h"
 #include "KUnit.h"
 
 KOdfGenericStyle KOdfPageLayoutData::saveOdf() const
@@ -69,28 +69,28 @@ KOdfGenericStyle KOdfPageLayoutData::saveOdf() const
 
 void KOdfPageLayoutData::loadOdf(const KoXmlElement &style)
 {
-    KoXmlElement  properties(KoXml::namedItemNS(style, KoXmlNS::style,
+    KoXmlElement  properties(KoXml::namedItemNS(style, KOdfXmlNS::style,
                                                 "page-layout-properties"));
 
     if (!properties.isNull()) {
         KOdfPageLayoutData standard;
 
         // Page dimension -- width / height
-        width = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "page-width"),
+        width = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "page-width"),
                                    standard.width);
-        height = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "page-height"),
+        height = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "page-height"),
                                     standard.height);
 
         // Page orientation
-        if (properties.attributeNS(KoXmlNS::style, "print-orientation", QString()) == "portrait")
+        if (properties.attributeNS(KOdfXmlNS::style, "print-orientation", QString()) == "portrait")
             orientation = KOdfPageFormat::Portrait;
         else
             orientation = KOdfPageFormat::Landscape;
 
         // Margins.  Check if there is one "margin" attribute and use it for all
         // margins if there is.  Otherwise load the individual margins.
-        if (properties.hasAttributeNS(KoXmlNS::fo, "margin")) {
-            leftMargin  = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "margin"));
+        if (properties.hasAttributeNS(KOdfXmlNS::fo, "margin")) {
+            leftMargin  = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "margin"));
             topMargin = leftMargin;
             rightMargin = leftMargin;
             bottomMargin = leftMargin;
@@ -100,30 +100,30 @@ void KOdfPageLayoutData::loadOdf(const KoXmlElement &style)
                 Otherwise all of them are set to 20mm.
             */
             qreal defaultValue = 0;
-            if (!(properties.hasAttributeNS(KoXmlNS::fo, "margin-left")
-                    || properties.hasAttributeNS(KoXmlNS::fo, "margin-top")
-                    || properties.hasAttributeNS(KoXmlNS::fo, "margin-right")
-                    || properties.hasAttributeNS(KoXmlNS::fo, "margin-bottom")))
+            if (!(properties.hasAttributeNS(KOdfXmlNS::fo, "margin-left")
+                    || properties.hasAttributeNS(KOdfXmlNS::fo, "margin-top")
+                    || properties.hasAttributeNS(KOdfXmlNS::fo, "margin-right")
+                    || properties.hasAttributeNS(KOdfXmlNS::fo, "margin-bottom")))
                 defaultValue = MM_TO_POINT(20.0); // no margin specified at all, lets make it 20mm
 
-            leftMargin   = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "margin-left"), defaultValue);
-            topMargin    = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "margin-top"), defaultValue);
-            rightMargin  = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "margin-right"), defaultValue);
-            bottomMargin = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "margin-bottom"), defaultValue);
+            leftMargin   = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "margin-left"), defaultValue);
+            topMargin    = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "margin-top"), defaultValue);
+            rightMargin  = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "margin-right"), defaultValue);
+            bottomMargin = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "margin-bottom"), defaultValue);
         }
 
         // Padding.  Same reasoning as for margins
-        if (properties.hasAttributeNS(KoXmlNS::fo, "padding")) {
-            leftPadding  = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "padding"));
+        if (properties.hasAttributeNS(KOdfXmlNS::fo, "padding")) {
+            leftPadding  = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "padding"));
             topPadding = leftPadding;
             rightPadding = leftPadding;
             bottomPadding = leftPadding;
         }
         else {
-            leftPadding   = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "padding-left"));
-            topPadding    = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "padding-top"));
-            rightPadding  = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "padding-right"));
-            bottomPadding = KUnit::parseValue(properties.attributeNS(KoXmlNS::fo, "padding-bottom"));
+            leftPadding   = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "padding-left"));
+            topPadding    = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "padding-top"));
+            rightPadding  = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "padding-right"));
+            bottomPadding = KUnit::parseValue(properties.attributeNS(KOdfXmlNS::fo, "padding-bottom"));
         }
 
         // Parse border properties if there are any.

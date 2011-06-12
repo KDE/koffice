@@ -29,7 +29,7 @@
  * Please make sure that you do not use the variables provided by this class in
  * the destructor of a static object.
  */
-class KOODF_EXPORT KoXmlNS
+class KOODF_EXPORT KOdfXmlNS
 {
 public:
     static const QString office;
@@ -64,7 +64,7 @@ public:
     static const QString split;
     static const QString ac;
 private:
-    KoXmlNS(); // don't create an instance of me :)
+    KOdfXmlNS(); // don't create an instance of me :)
 };
 
 #endif /* KOXMLNS_H */

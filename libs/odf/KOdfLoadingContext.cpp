@@ -21,7 +21,7 @@
 #include <KOdfStoreReader.h>
 #include <KOdfStylesReader.h>
 #include <KOdfStore.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <kstandarddirs.h>
 
@@ -111,7 +111,7 @@ void KOdfLoadingContext::addStyles(const KoXmlElement* style, const QString &fam
     if (!style) return;
 
     // this recursive function is necessary as parent styles can have parents themselves
-    const QString parentStyleName = style->attributeNS(KoXmlNS::style, "parent-style-name");
+    const QString parentStyleName = style->attributeNS(KOdfXmlNS::style, "parent-style-name");
     if (!parentStyleName.isEmpty()) {
         const KoXmlElement* parentStyle = d->stylesReader.findStyle(parentStyleName, family, usingStylesAutoStyles);
 
@@ -134,7 +134,7 @@ void KOdfLoadingContext::addStyles(const KoXmlElement* style, const QString &fam
         }
     }
 
-    //kDebug(32500) <<"pushing style" << style->attributeNS( KoXmlNS::style,"name", QString() );
+    //kDebug(32500) <<"pushing style" << style->attributeNS( KOdfXmlNS::style,"name", QString() );
     d->styleStack.push(*style);
 }
 
@@ -156,9 +156,9 @@ void KOdfLoadingContext::parseGenerator() const
         KOdfStoreReader oasisStore(d->store);
         QString errorMsg;
         if (oasisStore.loadAndParse("meta.xml", metaDoc, errorMsg)) {
-            KoXmlNode meta   = KoXml::namedItemNS(metaDoc, KoXmlNS::office, "document-meta");
-            KoXmlNode office = KoXml::namedItemNS(meta, KoXmlNS::office, "meta");
-            KoXmlElement generator = KoXml::namedItemNS(office, KoXmlNS::meta, "generator");
+            KoXmlNode meta   = KoXml::namedItemNS(metaDoc, KOdfXmlNS::office, "document-meta");
+            KoXmlNode office = KoXml::namedItemNS(meta, KOdfXmlNS::office, "meta");
+            KoXmlElement generator = KoXml::namedItemNS(office, KOdfXmlNS::meta, "generator");
             if (!generator.isNull()) {
                 d->generator = generator.text();
                 if (d->generator.startsWith("KOffice")) {

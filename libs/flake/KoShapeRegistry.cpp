@@ -30,7 +30,7 @@
 
 #include <KoPluginLoader.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStyleStack.h>
 
@@ -142,11 +142,11 @@ KoShape * KoShapeRegistry::createShapeFromOdf(const KoXmlElement & e, KoShapeLoa
     // If the element is in a frame, the frame is already added by the
     // application and we only want to create a shape from the
     // embedded element. The very first shape we create is accepted.
-    if (e.tagName() == "frame" && e.namespaceURI() == KoXmlNS::draw) {
+    if (e.tagName() == "frame" && e.namespaceURI() == KOdfXmlNS::draw) {
         KoXmlElement element;
         forEachElement(element, e) {
             // Check for draw:object
-            if (element.tagName() == "object" && element.namespaceURI() == KoXmlNS::draw && element.hasChildNodes()) {
+            if (element.tagName() == "object" && element.namespaceURI() == KOdfXmlNS::draw && element.hasChildNodes()) {
                 // Loop through the elements and find the first one
                 // that is handled by any shape.
                 KoXmlNode n = element.firstChild();
@@ -171,7 +171,7 @@ KoShape * KoShapeRegistry::createShapeFromOdf(const KoXmlElement & e, KoShapeLoa
 
     // Hardwire the group shape into the loading as it should not appear
     // in the shape selector
-    else if (e.localName() == "g" && e.namespaceURI() == KoXmlNS::draw) {
+    else if (e.localName() == "g" && e.namespaceURI() == KOdfXmlNS::draw) {
         KoShapeGroup * group = new KoShapeGroup();
 
         context.odfLoadingContext().styleStack().save();
@@ -184,7 +184,7 @@ KoShape * KoShapeRegistry::createShapeFromOdf(const KoXmlElement & e, KoShapeLoa
         else {
             delete group;
         }
-    } else if (e.localName() == "connector" && e.namespaceURI() == KoXmlNS::draw) {
+    } else if (e.localName() == "connector" && e.namespaceURI() == KOdfXmlNS::draw) {
         KoShapeConnection *connection = new KoShapeConnection();
         if (!connection->loadOdf(e, context)) {
             delete connection;

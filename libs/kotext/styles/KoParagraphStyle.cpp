@@ -46,7 +46,7 @@
 #include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KOdfBorders.h>
 
@@ -1017,26 +1017,26 @@ QBrush KoParagraphStyle::background() const
 void KoParagraphStyle::loadOdf(const KoXmlElement *element, KoShapeLoadingContext &scontext)
 {
     KOdfLoadingContext &context = scontext.odfLoadingContext();
-    const QString name(element->attributeNS(KoXmlNS::style, "display-name", QString()));
+    const QString name(element->attributeNS(KOdfXmlNS::style, "display-name", QString()));
     if (!name.isEmpty()) {
         d->name = name;
     } else {
-        d->name = element->attributeNS(KoXmlNS::style, "name", d->name);
+        d->name = element->attributeNS(KOdfXmlNS::style, "name", d->name);
     }
 
     context.styleStack().save();
     // Load all parents - only because we don't support inheritance.
-    QString family = element->attributeNS(KoXmlNS::style, "family", "paragraph");
+    QString family = element->attributeNS(KOdfXmlNS::style, "family", "paragraph");
     context.styleStack().push(*element);
 
-    QString masterPage = element->attributeNS(KoXmlNS::style, "master-page-name", QString());
+    QString masterPage = element->attributeNS(KOdfXmlNS::style, "master-page-name", QString());
     if (! masterPage.isEmpty()) {
         setMasterPageName(masterPage);
     }
 
-    if (element->hasAttributeNS(KoXmlNS::style, "default-outline-level")) {
+    if (element->hasAttributeNS(KOdfXmlNS::style, "default-outline-level")) {
         bool ok = false;
-        int level = element->attributeNS(KoXmlNS::style, "default-outline-level").toInt(&ok);
+        int level = element->attributeNS(KOdfXmlNS::style, "default-outline-level").toInt(&ok);
         if (ok)
             setDefaultOutlineLevel(level);
     }
@@ -1059,35 +1059,35 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     KOdfStyleStack &styleStack = scontext.odfLoadingContext().styleStack();
 
     // in 1.6 this was defined at KoParagLayout::loadOasisParagLayout(KoParagLayout&, KoOasisContext&)
-    const QString writingMode(styleStack.property(KoXmlNS::style, "writing-mode"));
+    const QString writingMode(styleStack.property(KOdfXmlNS::style, "writing-mode"));
     if (!writingMode.isEmpty()) {
         setTextProgressionDirection(KoText::directionFromString(writingMode));
     }
 
     // Alignment
-    const QString textAlign(styleStack.property(KoXmlNS::fo, "text-align"));
+    const QString textAlign(styleStack.property(KOdfXmlNS::fo, "text-align"));
     if (!textAlign.isEmpty()) {
         setAlignment(KoText::alignmentFromString(textAlign));
     }
 
     // Spacing (padding)
-    const QString paddingLeft(styleStack.property(KoXmlNS::fo, "padding-left" ));
+    const QString paddingLeft(styleStack.property(KOdfXmlNS::fo, "padding-left" ));
     if (!paddingLeft.isEmpty()) {
         setLeftPadding(KUnit::parseValue(paddingLeft));
     }
-    const QString paddingRight(styleStack.property(KoXmlNS::fo, "padding-right" ));
+    const QString paddingRight(styleStack.property(KOdfXmlNS::fo, "padding-right" ));
     if (!paddingRight.isEmpty()) {
         setRightPadding(KUnit::parseValue(paddingRight));
     }
-    const QString paddingTop(styleStack.property(KoXmlNS::fo, "padding-top" ));
+    const QString paddingTop(styleStack.property(KOdfXmlNS::fo, "padding-top" ));
     if (paddingTop.isEmpty()) {
         setTopPadding(KUnit::parseValue(paddingTop));
     }
-    const QString paddingBottom(styleStack.property(KoXmlNS::fo, "padding-bottom" ));
+    const QString paddingBottom(styleStack.property(KOdfXmlNS::fo, "padding-bottom" ));
     if (!paddingBottom.isEmpty()) {
         setBottomPadding(KUnit::parseValue(paddingBottom));
     }
-    const QString padding(styleStack.property(KoXmlNS::fo, "padding"));
+    const QString padding(styleStack.property(KOdfXmlNS::fo, "padding"));
     if (!padding.isEmpty()) {
         setPadding(KUnit::parseValue(padding));
     }
@@ -1095,25 +1095,25 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     // Indentation (margin)
     bool hasMarginLeft = false;
     bool hasMarginRight = false;
-    const QString marginLeft(styleStack.property(KoXmlNS::fo, "margin-left" ));
+    const QString marginLeft(styleStack.property(KOdfXmlNS::fo, "margin-left" ));
     if (!marginLeft.isEmpty()) {
         setLeftMargin(KUnit::parseValue(marginLeft));
         hasMarginLeft = true;
     }
-    const QString marginRight(styleStack.property(KoXmlNS::fo, "margin-right" ));
+    const QString marginRight(styleStack.property(KOdfXmlNS::fo, "margin-right" ));
     if (!marginRight.isEmpty()) {
         setRightMargin(KUnit::parseValue(marginRight));
         hasMarginRight = true;
     }
-    const QString marginTop(styleStack.property(KoXmlNS::fo, "margin-top"));
+    const QString marginTop(styleStack.property(KOdfXmlNS::fo, "margin-top"));
     if (!marginTop.isEmpty()) {
         setTopMargin(KUnit::parseValue(marginTop));
     }
-    const QString marginBottom(styleStack.property(KoXmlNS::fo, "margin-bottom"));
+    const QString marginBottom(styleStack.property(KOdfXmlNS::fo, "margin-bottom"));
     if (!marginBottom.isEmpty()) {
         setBottomMargin(KUnit::parseValue(marginBottom));
     }
-    const QString margin(styleStack.property(KoXmlNS::fo, "margin"));
+    const QString margin(styleStack.property(KOdfXmlNS::fo, "margin"));
     if (!margin.isEmpty()) {
         setMargin(KUnit::parseValue(margin));
         hasMarginLeft = true;
@@ -1125,12 +1125,12 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     // testcase from the ODF test suite. See §15.5.18 in the spec.
     //if ( hasMarginLeft || hasMarginRight ) {
     // style:auto-text-indent takes precedence
-    const QString autoTextIndent(styleStack.property(KoXmlNS::style, "auto-text-indent"));
+    const QString autoTextIndent(styleStack.property(KOdfXmlNS::style, "auto-text-indent"));
     if (!autoTextIndent.isEmpty() && autoTextIndent == "true") {
         setAutoTextIndent(true);
     }
     else {
-        const QString textIndent(styleStack.property(KoXmlNS::fo, "text-indent"));
+        const QString textIndent(styleStack.property(KOdfXmlNS::fo, "text-indent"));
         if (!textIndent.isEmpty()) {
             setTextIndent(KUnit::parseValue(textIndent));
         }
@@ -1139,7 +1139,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     //}
 
     // Line spacing
-    QString lineHeight(styleStack.property(KoXmlNS::fo, "line-height"));
+    QString lineHeight(styleStack.property(KOdfXmlNS::fo, "line-height"));
     if (!lineHeight.isEmpty()) {
         if (lineHeight != "normal") {
             if (lineHeight.indexOf('%') > -1) { // percent value
@@ -1156,29 +1156,29 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
         }
     }
     else {
-        const QString lineSpacing(styleStack.property(KoXmlNS::style, "line-spacing"));
+        const QString lineSpacing(styleStack.property(KOdfXmlNS::style, "line-spacing"));
         if (!lineSpacing.isEmpty()) {    // 3.11.3
             setLineSpacing(KUnit::parseValue(lineSpacing));
         }
     }
 
-    const QString lineHeightAtLeast(styleStack.property(KoXmlNS::style, "line-height-at-least"));
+    const QString lineHeightAtLeast(styleStack.property(KOdfXmlNS::style, "line-height-at-least"));
     if (!lineHeightAtLeast.isEmpty() && !normalLineHeight && lineHeightAbsolute() == 0) {    // 3.11.2
         setMinimumLineHeight(KUnit::parseValue(lineHeightAtLeast));
     }  // Line-height-at-least is mutually exclusive with absolute line-height
-    const QString fontIndependentLineSpacing(styleStack.property(KoXmlNS::style, "font-independent-line-spacing"));
+    const QString fontIndependentLineSpacing(styleStack.property(KOdfXmlNS::style, "font-independent-line-spacing"));
     if (!fontIndependentLineSpacing.isEmpty() && !normalLineHeight && lineHeightAbsolute() == 0) {
         setLineSpacingFromFont(fontIndependentLineSpacing == "true");
     }
 
     // Tabulators
-    const QString tabStopDistance(styleStack.property(KoXmlNS::style, "tab-stop-distance"));
+    const QString tabStopDistance(styleStack.property(KOdfXmlNS::style, "tab-stop-distance"));
     if (!tabStopDistance.isEmpty()) {
         qreal stopDistance = KUnit::parseValue(tabStopDistance);
         if (stopDistance > 0)
             setTabStopDistance(stopDistance);
     }
-    KoXmlElement tabStops(styleStack.childNode(KoXmlNS::style, "tab-stops"));
+    KoXmlElement tabStops(styleStack.childNode(KOdfXmlNS::style, "tab-stops"));
     if (!tabStops.isNull()) {     // 3.11.10
         QList<KoText::Tab> tabList;
         KoXmlElement tabStop;
@@ -1186,12 +1186,12 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
             Q_ASSERT(tabStop.localName() == "tab-stop");
             // Tab position
             KoText::Tab tab;
-            tab.position = KUnit::parseValue(tabStop.attributeNS(KoXmlNS::style, "position", QString()));
+            tab.position = KUnit::parseValue(tabStop.attributeNS(KOdfXmlNS::style, "position", QString()));
             kDebug(32500) << "tab position " << tab.position;
             // Tab stop positions in the XML are relative to the left-margin
             // Equivalently, relative to the left end of our textshape
             // Tab type (left/right/center/char)
-            const QString type = tabStop.attributeNS(KoXmlNS::style, "type", QString());
+            const QString type = tabStop.attributeNS(KOdfXmlNS::style, "type", QString());
             if (type == "center")
                 tab.type = QTextOption::CenterTab;
             else if (type == "right")
@@ -1203,7 +1203,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
 
             // Tab delimiter char
             if (tab.type == QTextOption::DelimiterTab) {
-                QString delimiterChar = tabStop.attributeNS(KoXmlNS::style, "char", QString());   // single character
+                QString delimiterChar = tabStop.attributeNS(KOdfXmlNS::style, "char", QString());   // single character
                 if (!delimiterChar.isEmpty()) {
                     tab.delimiter = delimiterChar[0];
                 } else {
@@ -1212,7 +1212,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
                 }
             }
 
-            QString leaderType = tabStop.attributeNS(KoXmlNS::style, "leader-type", QString());
+            QString leaderType = tabStop.attributeNS(KOdfXmlNS::style, "leader-type", QString());
             if (leaderType.isEmpty() || leaderType == "none") {
                 tab.leaderType = KoCharacterStyle::NoLineType;
             } else {
@@ -1224,7 +1224,7 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
                 tab.leaderStyle = KoCharacterStyle::SolidLine;
             }
 
-            QString leaderStyle = tabStop.attributeNS(KoXmlNS::style, "leader-style", QString());
+            QString leaderStyle = tabStop.attributeNS(KOdfXmlNS::style, "leader-style", QString());
             if (leaderStyle == "none")
                 tab.leaderStyle = KoCharacterStyle::NoLineStyle;
             else if (leaderStyle == "solid")
@@ -1253,11 +1253,11 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
                     tab.leaderType = KoCharacterStyle::SingleLine;
             }
 
-            QString leaderColor = tabStop.attributeNS(KoXmlNS::style, "leader-color", QString());
+            QString leaderColor = tabStop.attributeNS(KOdfXmlNS::style, "leader-color", QString());
             if (leaderColor != "font-color")
                 tab.leaderColor = QColor(leaderColor); // if invalid color (the default), will use text color
 
-            QString width = tabStop.attributeNS(KoXmlNS::style, "leader-width", QString());
+            QString width = tabStop.attributeNS(KOdfXmlNS::style, "leader-width", QString());
             if (width.isEmpty() || width == "auto")
                 tab.leaderWeight = KoCharacterStyle::AutoLineWeight;
             else if (width == "normal")
@@ -1283,12 +1283,12 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
                 tab.leaderWidth = KUnit::parseValue(width);
             }
 
-            tab.leaderText = tabStop.attributeNS(KoXmlNS::style, "leader-text", QString());
+            tab.leaderText = tabStop.attributeNS(KOdfXmlNS::style, "leader-text", QString());
 
 #if 0
             else {
                 // Fallback: convert leaderChar's unicode value
-                QString leaderChar = tabStop.attributeNS(KoXmlNS::style, "leader-text", QString());
+                QString leaderChar = tabStop.attributeNS(KOdfXmlNS::style, "leader-text", QString());
                 if (!leaderChar.isEmpty()) {
                     QChar ch = leaderChar[0];
                     switch (ch.latin1()) {
@@ -1310,11 +1310,11 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     }
 
 #if 0
-    layout.joinBorder = !(styleStack.property(KoXmlNS::style, "join-border") == "false");
+    layout.joinBorder = !(styleStack.property(KOdfXmlNS::style, "join-border") == "false");
 #endif
 
     // Borders
-    const QString borderLeft(styleStack.property(KoXmlNS::fo, "border", "left"));
+    const QString borderLeft(styleStack.property(KOdfXmlNS::fo, "border", "left"));
     if (!borderLeft.isEmpty() && borderLeft != "none" && borderLeft != "hidden") {
         QStringList bv = borderLeft.split(' ', QString::SkipEmptyParts);
         setLeftBorderWidth(KUnit::parseValue(bv.value(0), 1.0));
@@ -1323,49 +1323,49 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
         //setLeftInnerBorderWidth(qreal width);
         //setLeftBorderSpacing(qreal width);
     }
-    const QString borderTop(styleStack.property(KoXmlNS::fo, "border", "top"));
+    const QString borderTop(styleStack.property(KOdfXmlNS::fo, "border", "top"));
     if (!borderTop.isEmpty() && borderTop != "none" && borderTop != "hidden") {
         QStringList bv = borderTop.split(' ', QString::SkipEmptyParts);
         setTopBorderWidth(KUnit::parseValue(bv.value(0), 1.0));
         setTopBorderStyle(KOdfBorders::odfBorderStyle(bv.value(1)));
         setTopBorderColor(QColor(bv.value(2)));
     }
-    const QString borderRight(styleStack.property(KoXmlNS::fo, "border", "right"));
+    const QString borderRight(styleStack.property(KOdfXmlNS::fo, "border", "right"));
     if (!borderRight.isEmpty() && borderRight != "none" && borderRight != "hidden") {
         QStringList bv = borderRight.split(' ', QString::SkipEmptyParts);
         setRightBorderWidth(KUnit::parseValue(bv.value(0), 1.0));
         setRightBorderStyle(KOdfBorders::odfBorderStyle(bv.value(1)));
         setRightBorderColor(QColor(bv.value(2)));
     }
-    const QString borderBottom(styleStack.property(KoXmlNS::fo, "border", "bottom"));
+    const QString borderBottom(styleStack.property(KOdfXmlNS::fo, "border", "bottom"));
     if (!borderBottom.isEmpty() && borderBottom != "none" && borderBottom != "hidden") {
         QStringList bv = borderBottom.split(' ', QString::SkipEmptyParts);
         setBottomBorderWidth(KUnit::parseValue(bv.value(0), 1.0));
         setBottomBorderStyle(KOdfBorders::odfBorderStyle(bv.value(1)));
         setBottomBorderColor(QColor(bv.value(2)));
     }
-    const QString borderLineWidthLeft(styleStack.property(KoXmlNS::style, "border-line-width", "left"));
+    const QString borderLineWidthLeft(styleStack.property(KOdfXmlNS::style, "border-line-width", "left"));
     if (!borderLineWidthLeft.isEmpty() && borderLineWidthLeft != "none" && borderLineWidthLeft != "hidden") {
         QStringList blw = borderLineWidthLeft.split(' ', QString::SkipEmptyParts);
         setLeftInnerBorderWidth(KUnit::parseValue(blw.value(0), 0.1));
         setLeftBorderSpacing(KUnit::parseValue(blw.value(1), 1.0));
         setLeftBorderWidth(KUnit::parseValue(blw.value(2), 0.1));
     }
-    const QString borderLineWidthTop(styleStack.property(KoXmlNS::style, "border-line-width", "top"));
+    const QString borderLineWidthTop(styleStack.property(KOdfXmlNS::style, "border-line-width", "top"));
     if (!borderLineWidthTop.isEmpty() && borderLineWidthTop != "none" && borderLineWidthTop != "hidden") {
         QStringList blw = borderLineWidthTop.split(' ', QString::SkipEmptyParts);
         setTopInnerBorderWidth(KUnit::parseValue(blw.value(0), 0.1));
         setTopBorderSpacing(KUnit::parseValue(blw.value(1), 1.0));
         setTopBorderWidth(KUnit::parseValue(blw.value(2), 0.1));
     }
-    const QString borderLineWidthRight(styleStack.property(KoXmlNS::style, "border-line-width", "right"));
+    const QString borderLineWidthRight(styleStack.property(KOdfXmlNS::style, "border-line-width", "right"));
     if (!borderLineWidthRight.isEmpty() && borderLineWidthRight != "none" && borderLineWidthRight != "hidden") {
         QStringList blw = borderLineWidthRight.split(' ', QString::SkipEmptyParts);
         setRightInnerBorderWidth(KUnit::parseValue(blw.value(0), 0.1));
         setRightBorderSpacing(KUnit::parseValue(blw.value(1), 1.0));
         setRightBorderWidth(KUnit::parseValue(blw.value(2), 0.1));
     }
-    const QString borderLineWidthBottom(styleStack.property(KoXmlNS::style, "border-line-width", "bottom"));
+    const QString borderLineWidthBottom(styleStack.property(KOdfXmlNS::style, "border-line-width", "bottom"));
     if (!borderLineWidthBottom.isEmpty() && borderLineWidthBottom != "none" && borderLineWidthBottom != "hidden") {
         QStringList blw = borderLineWidthBottom.split(' ', QString::SkipEmptyParts);
         setBottomInnerBorderWidth(KUnit::parseValue(blw.value(0), 0.1));
@@ -1374,21 +1374,21 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     }
 
     // drop caps
-    KoXmlElement dropCap(styleStack.childNode(KoXmlNS::style, "drop-cap"));
+    KoXmlElement dropCap(styleStack.childNode(KOdfXmlNS::style, "drop-cap"));
     if (!dropCap.isNull()) {
         setDropCaps(true);
-        const QString length = dropCap.attributeNS(KoXmlNS::style, "length", QString("1"));
+        const QString length = dropCap.attributeNS(KOdfXmlNS::style, "length", QString("1"));
         if (length.toLower() == "word") {
             setDropCapsLength(-1); // -1 indicates drop caps of the whole first word
         } else {
             setDropCapsLength(length.toInt());
         }
-        const QString lines = dropCap.attributeNS(KoXmlNS::style, "lines", QString("1"));
+        const QString lines = dropCap.attributeNS(KOdfXmlNS::style, "lines", QString("1"));
         setDropCapsLines(lines.toInt());
-        const qreal distance = KUnit::parseValue(dropCap.attributeNS(KoXmlNS::style, "distance", QString()));
+        const qreal distance = KUnit::parseValue(dropCap.attributeNS(KOdfXmlNS::style, "distance", QString()));
         setDropCapsDistance(distance);
 
-        const QString dropstyle = dropCap.attributeNS(KoXmlNS::style, "style-name");
+        const QString dropstyle = dropCap.attributeNS(KOdfXmlNS::style, "style-name");
         if (! dropstyle.isEmpty()) {
             KoSharedLoadingData *sharedData = scontext.sharedData(KOTEXT_SHARED_LOADING_ID);
             KoTextSharedLoadingData *textSharedData = 0;
@@ -1402,19 +1402,19 @@ void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
     }
 
     // The fo:break-before and fo:break-after attributes insert a page or column break before or after a paragraph.
-    const QString breakBefore(styleStack.property(KoXmlNS::fo, "break-before"));
+    const QString breakBefore(styleStack.property(KOdfXmlNS::fo, "break-before"));
     if (!breakBefore.isEmpty() && breakBefore != "auto") {
         setBreakBefore(true);
     }
-    const QString breakAfter(styleStack.property(KoXmlNS::fo, "break-after"));
+    const QString breakAfter(styleStack.property(KOdfXmlNS::fo, "break-after"));
     if (!breakAfter.isEmpty() && breakAfter != "auto") {
         setBreakAfter(true);
     }
 
     // The fo:background-color attribute specifies the background color of a paragraph.
-    const QString bgcolor(styleStack.property(KoXmlNS::fo, "background-color"));
+    const QString bgcolor(styleStack.property(KOdfXmlNS::fo, "background-color"));
     if (!bgcolor.isEmpty()) {
-        const QString bgcolor = styleStack.property(KoXmlNS::fo, "background-color");
+        const QString bgcolor = styleStack.property(KOdfXmlNS::fo, "background-color");
         QBrush brush = background();
         if (bgcolor == "transparent")
             brush.setStyle(Qt::NoBrush);

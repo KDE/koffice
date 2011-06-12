@@ -23,7 +23,7 @@
 #include "PictureShape.h"
 #include "PictureShapeConfigWidget.h"
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include "KoShapeControllerBase.h"
 #include <KoShapeLoadingContext.h>
 #include "KoImageCollection.h"
@@ -36,7 +36,7 @@ PictureShapeFactory::PictureShapeFactory(QObject *parent)
 {
     setToolTip(i18n("Image shape that can display jpg, png etc."));
     setIcon("x-shape-image");
-    setOdfElementNames(KoXmlNS::draw, QStringList("image"));
+    setOdfElementNames(KOdfXmlNS::draw, QStringList("image"));
     setLoadingPriority(1);
 }
 
@@ -54,7 +54,7 @@ bool PictureShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext 
 {
     Q_UNUSED(e);
     Q_UNUSED(context);
-    return e.localName() == "image" && e.namespaceURI() == KoXmlNS::draw;
+    return e.localName() == "image" && e.namespaceURI() == KOdfXmlNS::draw;
 }
 
 QList<KoShapeConfigWidgetBase*> PictureShapeFactory::createShapeOptionPanels()

@@ -51,7 +51,7 @@
 #include <KoVariable.h>
 #include <KoVariableManager.h>
 #include <KoInlineObjectRegistry.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlReader.h>
 #include "KoTextInlineRdf.h"
 
@@ -217,13 +217,13 @@ bool KoTextLoader::containsRichText(const KoXmlElement &element)
     forEachElement(textParagraphElement, element) {
 
         if (textParagraphElement.localName() != "p" ||
-            textParagraphElement.namespaceURI() != KoXmlNS::text)
+            textParagraphElement.namespaceURI() != KOdfXmlNS::text)
             return true;
 
         // if any of this nodes children are elements, we're dealing with richtext (exceptions: text:s (space character) and text:tab (tab character)
         for (KoXmlNode n = textParagraphElement.firstChild(); !n.isNull(); n = n.nextSibling()) {
             const KoXmlElement e = n.toElement();
-            if (!e.isNull() && (e.namespaceURI() != KoXmlNS::text
+            if (!e.isNull() && (e.namespaceURI() != KOdfXmlNS::text
                 || (e.localName() != "s" // space
                 && e.localName() != "annotation"
                 && e.localName() != "bookmark"
@@ -244,25 +244,25 @@ void KoTextLoader::Private::openChangeRegion(const KoXmlElement& element)
 
     if (element.localName() == "change-start") {
         //This is a ODF 1.1 Change
-        id = element.attributeNS(KoXmlNS::text, "change-id");
+        id = element.attributeNS(KOdfXmlNS::text, "change-id");
     } else if(element.localName() == "inserted-text-start") {
         //This is a ODF 1.2 Change
-        id = element.attributeNS(KoXmlNS::delta, "insertion-change-idref");
-        QString textEndId = element.attributeNS(KoXmlNS::delta, "inserted-text-end-idref");
+        id = element.attributeNS(KOdfXmlNS::delta, "insertion-change-idref");
+        QString textEndId = element.attributeNS(KOdfXmlNS::delta, "inserted-text-end-idref");
         endIdMap.insert(textEndId, id);
     } else if((element.localName() == "removed-content") || (element.localName() == "merge")) {
-        id = element.attributeNS(KoXmlNS::delta, "removal-change-idref");
+        id = element.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
     } else if(element.localName() == "remove-leaving-content-start") {
-        id = element.attributeNS(KoXmlNS::delta, "removal-change-idref");
-        QString endId = element.attributeNS(KoXmlNS::delta, "end-element-idref");
+        id = element.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
+        QString endId = element.attributeNS(KOdfXmlNS::delta, "end-element-idref");
         endIdMap.insert(endId, id);
-    } else if(element.attributeNS(KoXmlNS::delta, "insertion-type") != "") {
-        QString insertionType = element.attributeNS(KoXmlNS::delta, "insertion-type");
+    } else if(element.attributeNS(KOdfXmlNS::delta, "insertion-type") != "") {
+        QString insertionType = element.attributeNS(KOdfXmlNS::delta, "insertion-type");
         if ((insertionType == "insert-with-content") || (insertionType == "insert-around-content")) {
-            id = element.attributeNS(KoXmlNS::delta, "insertion-change-idref");
+            id = element.attributeNS(KOdfXmlNS::delta, "insertion-change-idref");
         }
-    } else if(element.attributeNS(KoXmlNS::ac, "change001") != "") {
-        attributeChange.setChangeRecord(element.attributeNS(KoXmlNS::ac, "change001"));
+    } else if(element.attributeNS(KOdfXmlNS::ac, "change001") != "") {
+        attributeChange.setChangeRecord(element.attributeNS(KOdfXmlNS::ac, "change001"));
         id = attributeChange.changeId;
     } else {
     }
@@ -295,7 +295,7 @@ void KoTextLoader::Private::openChangeRegion(const KoXmlElement& element)
         changeElement->setChangeType(KOdfGenericChange::FormatChange);
 
         KoXmlElement spanElement = element.firstChild().toElement();
-        QString styleName = spanElement.attributeNS(KoXmlNS::text, "style-name", QString());
+        QString styleName = spanElement.attributeNS(KOdfXmlNS::text, "style-name", QString());
 
         QTextCharFormat cf;
         KoCharacterStyle *characterStyle = textSharedData->characterStyle(styleName, stylesDotXml);
@@ -330,7 +330,7 @@ void KoTextLoader::Private::openChangeRegion(const KoXmlElement& element)
             listItemChangeInformation->setPreviousStartNumber(attributeChange.attributeValue.toInt());
             changeTracker->setFormatChangeInformation(changeId, listItemChangeInformation);
         }
-    } else if((element.attributeNS(KoXmlNS::delta, "insertion-type") == "insert-around-content")) {
+    } else if((element.attributeNS(KOdfXmlNS::delta, "insertion-type") == "insert-around-content")) {
         changeElement->setChangeType(KOdfGenericChange::FormatChange);
     } else if ((element.localName() == "removed-content") || (element.localName() == "merge")) {
         changeElement->setChangeType(KOdfGenericChange::DeleteChange);
@@ -343,26 +343,26 @@ void KoTextLoader::Private::closeChangeRegion(const KoXmlElement& element)
     int changeId;
     if (element.localName() == "change-end") {
         //This is a ODF 1.1 Change
-        id = element.attributeNS(KoXmlNS::text, "change-id");
+        id = element.attributeNS(KOdfXmlNS::text, "change-id");
     } else if(element.localName() == "inserted-text-end"){
         // This is a ODF 1.2 Change
-        QString textEndId = element.attributeNS(KoXmlNS::delta, "inserted-text-end-id");
+        QString textEndId = element.attributeNS(KOdfXmlNS::delta, "inserted-text-end-id");
         id = endIdMap.value(textEndId);
         endIdMap.remove(textEndId);
     } else if((element.localName() == "removed-content") || (element.localName() == "merge")) {
-        id = element.attributeNS(KoXmlNS::delta, "removal-change-idref");
+        id = element.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
     } else if(element.localName() == "remove-leaving-content-end"){
-        QString endId = element.attributeNS(KoXmlNS::delta, "end-element-id");
+        QString endId = element.attributeNS(KOdfXmlNS::delta, "end-element-id");
         id = endIdMap.value(endId);
         endIdMap.remove(endId);
-    } else if(element.attributeNS(KoXmlNS::delta, "insertion-type") != ""){
-        QString insertionType = element.attributeNS(KoXmlNS::delta, "insertion-type");
+    } else if(element.attributeNS(KOdfXmlNS::delta, "insertion-type") != ""){
+        QString insertionType = element.attributeNS(KOdfXmlNS::delta, "insertion-type");
         if ((insertionType == "insert-with-content") || (insertionType == "insert-around-content")) {
-            id = element.attributeNS(KoXmlNS::delta, "insertion-change-idref");
+            id = element.attributeNS(KOdfXmlNS::delta, "insertion-change-idref");
         }
-    } else if(element.attributeNS(KoXmlNS::ac, "change001") != "") {
+    } else if(element.attributeNS(KOdfXmlNS::ac, "change001") != "") {
         AttributeChangeRecord attributeChange;
-        attributeChange.setChangeRecord(element.attributeNS(KoXmlNS::ac, "change001"));
+        attributeChange.setChangeRecord(element.attributeNS(KOdfXmlNS::ac, "change001"));
         id = attributeChange.changeId;
     } else {
     }
@@ -446,11 +446,11 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
 
     kDebug(32500) << "text-style:" << KoTextDebug::textAttributes(cursor.blockCharFormat());
     bool usedParagraph = false; // set to true if we found a tag that used the paragraph, indicating that the next round needs to start a new one.
-    if (bodyElem.namespaceURI() == KoXmlNS::table && bodyElem.localName() == "table") {
-        if (!bodyElem.attributeNS(KoXmlNS::delta, "insertion-type").isEmpty())
+    if (bodyElem.namespaceURI() == KOdfXmlNS::table && bodyElem.localName() == "table") {
+        if (!bodyElem.attributeNS(KOdfXmlNS::delta, "insertion-type").isEmpty())
             d->openChangeRegion(bodyElem);
         loadTable(bodyElem, cursor);
-        if (!bodyElem.attributeNS(KoXmlNS::delta, "insertion-type").isEmpty())
+        if (!bodyElem.attributeNS(KOdfXmlNS::delta, "insertion-type").isEmpty())
             d->closeChangeRegion(bodyElem);
     }
     else {
@@ -463,11 +463,11 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
         } else {
             if (! tag.isNull()) {
                 const QString localName = tag.localName();
-                if (tag.namespaceURI() == KoXmlNS::delta) {
+                if (tag.namespaceURI() == KOdfXmlNS::delta) {
                     if (d->changeTracker && localName == "tracked-changes")
                         d->changeTracker->loadOdfChanges(tag);
                     else if (d->changeTracker && localName == "removed-content") {
-                        QString changeId = tag.attributeNS(KoXmlNS::delta, "removal-change-idref");
+                        QString changeId = tag.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
                         int deleteStartPosition = cursor.position();
                         if ((usedParagraph) && (tag.firstChild().toElement().localName() != "table"))
                             cursor.insertBlock(d->defaultBlockFormat, d->defaultCharFormat);
@@ -509,7 +509,7 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
                     }
                 }
 
-                if (tag.namespaceURI() == KoXmlNS::text) {
+                if (tag.namespaceURI() == KOdfXmlNS::text) {
                     if ((usedParagraph) && (tag.localName() != "table"))
                         cursor.insertBlock(d->defaultBlockFormat, d->defaultCharFormat);
                     usedParagraph = true;
@@ -524,7 +524,7 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
                         d->closeChangeRegion(tag);
                         usedParagraph = false;
                     } else if (d->changeTracker && localName == "change") {
-                        QString id = tag.attributeNS(KoXmlNS::text, "change-id");
+                        QString id = tag.attributeNS(KOdfXmlNS::text, "change-id");
                         int changeId = d->changeTracker->loadedChangeId(id);
                         if (changeId) {
                             if (d->changeStack.count() && (d->changeStack.top() != changeId))
@@ -544,30 +544,30 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
                         loadDeleteChangeOutsidePorH(id, cursor);
                         usedParagraph = false;
                     } else if (localName == "p") {    // text paragraph
-                        if (tag.attributeNS(KoXmlNS::delta, "insertion-type") != "insert-around-content") {
-                            if (tag.attributeNS(KoXmlNS::split, "split001-idref") != "")
-                                d->splitPositionMap.insert(tag.attributeNS(KoXmlNS::split, "split001-idref"),cursor.position());
+                        if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "insert-around-content") {
+                            if (tag.attributeNS(KOdfXmlNS::split, "split001-idref") != "")
+                                d->splitPositionMap.insert(tag.attributeNS(KOdfXmlNS::split, "split001-idref"),cursor.position());
 
-                            if (tag.attributeNS(KoXmlNS::delta, "insertion-type") != "") {
-                                QString insertionType = tag.attributeNS(KoXmlNS::delta, "insertion-type");
+                            if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "") {
+                                QString insertionType = tag.attributeNS(KOdfXmlNS::delta, "insertion-type");
                                 if (insertionType == "insert-with-content") {
                                     d->openChangeRegion(tag);
                                 }
 
                                 if (insertionType == "split") {
-                                    QString splitId = tag.attributeNS(KoXmlNS::delta, "split-id");
-                                    QString changeId = tag.attributeNS(KoXmlNS::delta, "insertion-change-idref");
+                                    QString splitId = tag.attributeNS(KOdfXmlNS::delta, "split-id");
+                                    QString changeId = tag.attributeNS(KOdfXmlNS::delta, "insertion-change-idref");
                                     markBlocksAsInserted(cursor, d->splitPositionMap.value(splitId), changeId);
                                     d->splitPositionMap.remove(splitId);
                                 }
-                            } else if (tag.attributeNS(KoXmlNS::ac, "change001") != "") {
+                            } else if (tag.attributeNS(KOdfXmlNS::ac, "change001") != "") {
                                     d->openChangeRegion(tag);
                             }
 
                             loadParagraph(tag, cursor);
 
-                            if ((tag.attributeNS(KoXmlNS::delta, "insertion-type") != "") ||
-                                 (tag.attributeNS(KoXmlNS::ac, "change001") != "")) {
+                            if ((tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "") ||
+                                 (tag.attributeNS(KOdfXmlNS::ac, "change001") != "")) {
                                 d->closeChangeRegion(tag);
                             }
 
@@ -588,17 +588,17 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
                             }
                         }
                     } else if (localName == "h") {  // heading
-                        if (tag.attributeNS(KoXmlNS::delta, "insertion-type") != "insert-around-content") {
-                            if (tag.attributeNS(KoXmlNS::split, "split001-idref") != "")
-                                d->splitPositionMap.insert(tag.attributeNS(KoXmlNS::split, "split001-idref"),cursor.position());
+                        if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "insert-around-content") {
+                            if (tag.attributeNS(KOdfXmlNS::split, "split001-idref") != "")
+                                d->splitPositionMap.insert(tag.attributeNS(KOdfXmlNS::split, "split001-idref"),cursor.position());
 
-                            if (tag.attributeNS(KoXmlNS::delta, "insertion-type") != "") {
-                                QString insertionType = tag.attributeNS(KoXmlNS::delta, "insertion-type");
+                            if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "") {
+                                QString insertionType = tag.attributeNS(KOdfXmlNS::delta, "insertion-type");
                                 if (insertionType == "insert-with-content")
                                     d->openChangeRegion(tag);
                                 if (insertionType == "split") {
-                                    QString splitId = tag.attributeNS(KoXmlNS::delta, "split-id");
-                                    QString changeId = tag.attributeNS(KoXmlNS::delta, "insertion-change-idref");
+                                    QString splitId = tag.attributeNS(KOdfXmlNS::delta, "split-id");
+                                    QString changeId = tag.attributeNS(KOdfXmlNS::delta, "insertion-change-idref");
                                     markBlocksAsInserted(cursor, d->splitPositionMap.value(splitId), changeId);
                                     d->splitPositionMap.remove(splitId);
                                 }
@@ -606,7 +606,7 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
 
                             loadHeading(tag, cursor);
 
-                            if (tag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+                            if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                                 d->closeChangeRegion(tag);
                         } else {
                             QString generatedXmlString;
@@ -626,11 +626,11 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
                         }
                     } else if (localName == "unordered-list" || localName == "ordered-list" // OOo-1.1
                             || localName == "list" || localName == "numbered-paragraph") {  // OASIS
-                        if (tag.attributeNS(KoXmlNS::delta, "insertion-type") != "insert-around-content") {
-                            if (tag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+                        if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "insert-around-content") {
+                            if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                                 d->openChangeRegion(tag);
                             loadList(tag, cursor);
-                            if (tag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+                            if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                                 d->closeChangeRegion(tag);
                         } else {
                             QString generatedXmlString;
@@ -670,15 +670,15 @@ void KoTextLoader::loadBody(const KoXmlElement &bodyElem, QTextCursor &cursor)
                             kWarning(32500) << "unhandled text:" << localName;
                         }
                     }
-                } else if (tag.namespaceURI() == KoXmlNS::draw) {
+                } else if (tag.namespaceURI() == KOdfXmlNS::draw) {
                     loadShape(tag, cursor);
-                } else if (tag.namespaceURI() == KoXmlNS::table) {
+                } else if (tag.namespaceURI() == KOdfXmlNS::table) {
                     if (localName == "table") {
-                        if (tag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+                        if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                             d->openChangeRegion(tag);
                         loadTable(tag, cursor);
                         usedParagraph = false;
-                        if (tag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+                        if (tag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                             d->closeChangeRegion(tag);
                     } else {
                         kWarning(32500) << "KoTextLoader::loadBody unhandled table::" << localName;
@@ -720,7 +720,7 @@ KoXmlNode KoTextLoader::loadDeleteMerges(const KoXmlElement& elem, QString *gene
             d->copyRemoveLeavingContentStart(element, xmlStream);
         } else if (isElementNode && (element.localName() == "remove-leaving-content-end")) {
             d->copyRemoveLeavingContentEnd(element, xmlStream);
-        } else if (isElementNode && (element.attributeNS(KoXmlNS::delta, "insertion-type") == "insert-around-content")) {
+        } else if (isElementNode && (element.attributeNS(KOdfXmlNS::delta, "insertion-type") == "insert-around-content")) {
             d->copyInsertAroundContent(element, xmlStream);
         } else {
             d->copyNode(element, xmlStream);
@@ -746,7 +746,7 @@ KoXmlNode KoTextLoader::loadDeleteMerges(const KoXmlElement& elem, QString *gene
 void KoTextLoader::Private::copyRemoveLeavingContentStart(const KoXmlNode &node, QTextStream &xmlStream)
 {
     KoXmlElement element = node.firstChild().toElement();
-    QString changeEndId = node.toElement().attributeNS(KoXmlNS::delta, "end-element-idref");
+    QString changeEndId = node.toElement().attributeNS(KOdfXmlNS::delta, "end-element-idref");
     int index = nameSpacesList.indexOf(element.namespaceURI());
     if (index == -1) {
         nameSpacesList.append(element.namespaceURI());
@@ -758,7 +758,7 @@ void KoTextLoader::Private::copyRemoveLeavingContentStart(const KoXmlNode &node,
     removeLeavingContentMap.insert(changeEndId, nodeName);
     openedElements++;
 
-    QString changeId = node.toElement().attributeNS(KoXmlNS::delta, "removal-change-idref");
+    QString changeId = node.toElement().attributeNS(KOdfXmlNS::delta, "removal-change-idref");
     removeLeavingContentChangeIdMap.insert(changeEndId, changeId);
 
     xmlStream << "<" << nodeName;
@@ -785,7 +785,7 @@ void KoTextLoader::Private::copyRemoveLeavingContentStart(const KoXmlNode &node,
     if (deleteMergeStarted && (nodeName.endsWith(":p") || nodeName.endsWith(":h"))) {
         KoXmlElement nextElement = node.nextSibling().toElement();
         if (nextElement.localName() != "removed-content") {
-            int deltaIndex = nameSpacesList.indexOf(KoXmlNS::delta);
+            int deltaIndex = nameSpacesList.indexOf(KOdfXmlNS::delta);
             xmlStream << "<" << "ns" << deltaIndex << ":removed-content ";
             QString changeId = removeLeavingContentChangeIdMap.value(changeEndId);
             xmlStream << "ns" << deltaIndex << ":removal-change-idref=" << "\"" << changeId << "\"" << ">";
@@ -796,7 +796,7 @@ void KoTextLoader::Private::copyRemoveLeavingContentStart(const KoXmlNode &node,
 
 void KoTextLoader::Private::copyRemoveLeavingContentEnd(const KoXmlNode &node, QTextStream &xmlStream)
 {
-    QString changeEndId = node.toElement().attributeNS(KoXmlNS::delta, "end-element-id");
+    QString changeEndId = node.toElement().attributeNS(KOdfXmlNS::delta, "end-element-id");
     QString nodeName = removeLeavingContentMap.value(changeEndId);
     removeLeavingContentMap.remove(changeEndId);
     openedElements--;
@@ -808,9 +808,9 @@ void KoTextLoader::Private::copyRemoveLeavingContentEnd(const KoXmlNode &node, Q
             //If not, then this is the starting p or h of a simple merge.
             KoXmlElement previousElement = node.previousSibling().toElement();
             if (previousElement.localName() != "removed-content") {
-                int deltaIndex = nameSpacesList.indexOf(KoXmlNS::delta);
+                int deltaIndex = nameSpacesList.indexOf(KOdfXmlNS::delta);
                 if (deltaIndex == -1) {
-                    nameSpacesList.append(KoXmlNS::delta);
+                    nameSpacesList.append(KOdfXmlNS::delta);
                     deltaIndex = nameSpacesList.size() - 1;
                 }
                 xmlStream << "<" << "ns" << deltaIndex << ":removed-content ";
@@ -854,7 +854,7 @@ void KoTextLoader::Private::copyNode(const KoXmlNode &node, QTextStream &xmlStre
                 copyRemoveLeavingContentStart(childElement, xmlStream);
             } else if (isElementNode && (childElement.localName() == "remove-leaving-content-end")) {
                 copyRemoveLeavingContentEnd(childElement, xmlStream);
-            } else if (isElementNode && (childElement.attributeNS(KoXmlNS::delta, "insertion-type") == "insert-around-content")) {
+            } else if (isElementNode && (childElement.attributeNS(KOdfXmlNS::delta, "insertion-type") == "insert-around-content")) {
                 copyInsertAroundContent(childElement, xmlStream);
             } else {
                 copyNode(node, xmlStream);
@@ -883,7 +883,7 @@ void KoTextLoader::Private::copyTagStart(const KoXmlElement &element, QTextStrea
     QPair<QString, QString> attributeName;
     foreach(attributeName, attributeNSNames) {
         QString nameSpace = attributeName.first;
-        if (nameSpace == KoXmlNS::delta && ignoreChangeAttributes) {
+        if (nameSpace == KOdfXmlNS::delta && ignoreChangeAttributes) {
             continue;
         }
         if (nameSpace != "http://www.w3.org/XML/1998/namespace") {
@@ -941,7 +941,7 @@ void KoTextLoader::loadDeleteChangeOutsidePorH(QString id, QTextCursor &cursor)
 
 void KoTextLoader::loadParagraph(const KoXmlElement &element, QTextCursor &cursor)
 {
-    const QString styleName = element.attributeNS(KoXmlNS::text, "style-name",
+    const QString styleName = element.attributeNS(KOdfXmlNS::text, "style-name",
                                                   QString());
 
     KoParagraphStyle *paragraphStyle = d->textSharedData->paragraphStyle(styleName, d->stylesDotXml);
@@ -971,7 +971,7 @@ could be true; but the following code has no effect... (TZander)
 
     // Some paragraph have id's defined which we need to store so that we can eg
     // attach text animations to this specific paragraph later on
-    QString id(element.attributeNS(KoXmlNS::text, "id"));
+    QString id(element.attributeNS(KOdfXmlNS::text, "id"));
     if (!id.isEmpty() && d->shape) {
         QTextBlock block = cursor.block();
         KoTextBlockData *data = dynamic_cast<KoTextBlockData*>(block.userData());
@@ -984,7 +984,7 @@ could be true; but the following code has no effect... (TZander)
 
     // attach Rdf to cursor.block()
     // remember inline Rdf metadata
-    if (element.hasAttributeNS(KoXmlNS::xhtml, "property")
+    if (element.hasAttributeNS(KOdfXmlNS::xhtml, "property")
             || element.hasAttribute("id")) {
         QTextBlock block = cursor.block();
         KoTextInlineRdf* inlineRdf =
@@ -1002,10 +1002,10 @@ could be true; but the following code has no effect... (TZander)
 void KoTextLoader::loadHeading(const KoXmlElement &element, QTextCursor &cursor)
 {
     Q_ASSERT(d->styleManager);
-    int level = qMax(-1, element.attributeNS(KoXmlNS::text, "outline-level", "-1").toInt());
+    int level = qMax(-1, element.attributeNS(KOdfXmlNS::text, "outline-level", "-1").toInt());
     // This will fallback to the default-outline-level applied by KoParagraphStyle
 
-    QString styleName = element.attributeNS(KoXmlNS::text, "style-name", QString());
+    QString styleName = element.attributeNS(KOdfXmlNS::text, "style-name", QString());
 
     QTextBlock block = cursor.block();
 
@@ -1043,7 +1043,7 @@ void KoTextLoader::loadHeading(const KoXmlElement &element, QTextCursor &cursor)
 
     // attach Rdf to cursor.block()
     // remember inline Rdf metadata
-    if (element.hasAttributeNS(KoXmlNS::xhtml, "property")
+    if (element.hasAttributeNS(KOdfXmlNS::xhtml, "property")
             || element.hasAttribute("id")) {
         QTextBlock block = cursor.block();
         KoTextInlineRdf* inlineRdf =
@@ -1065,7 +1065,7 @@ void KoTextLoader::loadList(const KoXmlElement &element, QTextCursor &cursor)
 {
     const bool numberedParagraph = element.localName() == "numbered-paragraph";
 
-    QString styleName = element.attributeNS(KoXmlNS::text, "style-name", QString());
+    QString styleName = element.attributeNS(KOdfXmlNS::text, "style-name", QString());
     KoListStyle *listStyle = d->textSharedData->listStyle(styleName, d->stylesDotXml);
 
     int level;
@@ -1074,7 +1074,7 @@ void KoTextLoader::loadList(const KoXmlElement &element, QTextCursor &cursor)
     if (numberedParagraph) {
         d->currentList = d->list(cursor.block().document(), listStyle);
         d->currentListStyle = listStyle;
-        level = element.attributeNS(KoXmlNS::text, "level", "1").toInt();
+        level = element.attributeNS(KOdfXmlNS::text, "level", "1").toInt();
     } else {
         if (!listStyle)
             listStyle = d->currentListStyle;
@@ -1083,8 +1083,8 @@ void KoTextLoader::loadList(const KoXmlElement &element, QTextCursor &cursor)
         level = d->currentListLevel++;
     }
 
-    if (element.hasAttributeNS(KoXmlNS::text, "continue-numbering")) {
-        const QString continueNumbering = element.attributeNS(KoXmlNS::text, "continue-numbering", QString());
+    if (element.hasAttributeNS(KOdfXmlNS::text, "continue-numbering")) {
+        const QString continueNumbering = element.attributeNS(KOdfXmlNS::text, "continue-numbering", QString());
         d->currentList->setContinueNumbering(level, continueNumbering == "true");
     }
 
@@ -1109,7 +1109,7 @@ void KoTextLoader::loadList(const KoXmlElement &element, QTextCursor &cursor)
     if ( ( e = _node.toElement() ).isNull() ) {
         //Don't do anything
     } else {
-        if ((e.attributeNS(KoXmlNS::delta, "insertion-type") == "insert-around-content") || (e.localName() == "remove-leaving-content-start")) {
+        if ((e.attributeNS(KOdfXmlNS::delta, "insertion-type") == "insert-around-content") || (e.localName() == "remove-leaving-content-start")) {
             //Check whether this is a list-item split or a merge
             if ((e.localName() == "remove-leaving-content-start") && d->checkForListItemSplit(e)) {
                 _node = d->loadListItemSplit(e, &generatedXmlString);
@@ -1141,7 +1141,7 @@ void KoTextLoader::loadList(const KoXmlElement &element, QTextCursor &cursor)
     bool firstTime = true;
     foreach (e, childElementsList) {
         if (e.localName() == "removed-content") {
-            QString changeId = e.attributeNS(KoXmlNS::delta, "removal-change-idref");
+            QString changeId = e.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
             int deleteStartPosition = cursor.position();
             d->openChangeRegion(e);
             KoXmlElement deletedElement;
@@ -1180,7 +1180,7 @@ void KoTextLoader::loadListItem(KoXmlElement &e, QTextCursor &cursor, int level)
         numberedParagraph = e.parentNode().parentNode().toElement().localName() == "numbered-paragraph";
     }
 
-    if (e.isNull() || e.namespaceURI() != KoXmlNS::text)
+    if (e.isNull() || e.namespaceURI() != KOdfXmlNS::text)
         return;
 
     const bool listHeader = e.tagName() == "list-header";
@@ -1188,9 +1188,9 @@ void KoTextLoader::loadListItem(KoXmlElement &e, QTextCursor &cursor, int level)
     if (!numberedParagraph && e.tagName() != "list-item" && !listHeader)
         return;
 
-    if (e.attributeNS(KoXmlNS::delta, "insertion-type") != "") {
+    if (e.attributeNS(KOdfXmlNS::delta, "insertion-type") != "") {
         d->openChangeRegion(e);
-    } else if (e.attributeNS(KoXmlNS::ac, "change001") != "") {
+    } else if (e.attributeNS(KOdfXmlNS::ac, "change001") != "") {
         d->openChangeRegion(e);
     }
 
@@ -1231,8 +1231,8 @@ void KoTextLoader::loadListItem(KoXmlElement &e, QTextCursor &cursor, int level)
     if (listHeader)
         blockFormat.setProperty(KoParagraphStyle::IsListHeader, true);
 
-    if (e.hasAttributeNS(KoXmlNS::text, "start-value")) {
-        int startValue = e.attributeNS(KoXmlNS::text, "start-value", QString()).toInt();
+    if (e.hasAttributeNS(KOdfXmlNS::text, "start-value")) {
+        int startValue = e.attributeNS(KOdfXmlNS::text, "start-value", QString()).toInt();
         blockFormat.setProperty(KoParagraphStyle::ListStartValue, startValue);
     }
 
@@ -1250,14 +1250,14 @@ void KoTextLoader::loadListItem(KoXmlElement &e, QTextCursor &cursor, int level)
         d->currentList->add(c.block(), level);
     }
 
-    if (e.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+    if (e.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
         d->closeChangeRegion(e);
     kDebug(32500) << "text-style:" << KoTextDebug::textAttributes(cursor.blockCharFormat());
 }
 
 bool KoTextLoader::Private::checkForListItemSplit(const KoXmlElement &element)
 {
-    QString endId = element.attributeNS(KoXmlNS::delta, "end-element-idref");
+    QString endId = element.attributeNS(KOdfXmlNS::delta, "end-element-idref");
     int insertedListItems = 0;
     KoXmlElement currentElement = element;
     bool isSplitListItem = false;
@@ -1270,12 +1270,12 @@ bool KoTextLoader::Private::checkForListItemSplit(const KoXmlElement &element)
         }
 
         if ((currentElement.localName() == "list-item") &&
-            (currentElement.attributeNS(KoXmlNS::delta, "insertion-type") == "insert-around-content")) {
+            (currentElement.attributeNS(KOdfXmlNS::delta, "insertion-type") == "insert-around-content")) {
             insertedListItems++;
         }
 
         if ((currentElement.localName() == "remove-leaving-content-end") &&
-            (currentElement.attributeNS(KoXmlNS::delta, "end-element-id") == endId)) {
+            (currentElement.attributeNS(KOdfXmlNS::delta, "end-element-id") == endId)) {
             break;
         }
     }
@@ -1289,8 +1289,8 @@ KoXmlNode KoTextLoader::Private::loadListItemSplit(const KoXmlElement &elem, QSt
     KoXmlNode lastProcessedNode = elem;
 
     nameSpacesList.clear();
-    nameSpacesList.append(KoXmlNS::split);
-    nameSpacesList.append(KoXmlNS::delta);
+    nameSpacesList.append(KOdfXmlNS::split);
+    nameSpacesList.append(KOdfXmlNS::delta);
 
     QString generatedXml;
     QTextStream xmlStream(&generatedXml);
@@ -1298,8 +1298,8 @@ KoXmlNode KoTextLoader::Private::loadListItemSplit(const KoXmlElement &elem, QSt
     static int splitIdCounter = 0;
     bool splitStarted = false;
 
-    QString endId = elem.attributeNS(KoXmlNS::delta, "end-element-idref");
-    QString changeId = elem.attributeNS(KoXmlNS::delta, "removal-change-idref");
+    QString endId = elem.attributeNS(KOdfXmlNS::delta, "end-element-idref");
+    QString changeId = elem.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
 
     while(true) {
         KoXmlElement element;
@@ -1312,14 +1312,14 @@ KoXmlNode KoTextLoader::Private::loadListItemSplit(const KoXmlElement &elem, QSt
         if (isElementNode && (element.localName() == "remove-leaving-content-start")) {
             //Ignore this...
         } else if (isElementNode && (element.localName() == "remove-leaving-content-end")) {
-            if(element.attributeNS(KoXmlNS::delta, "end-element-id") == endId) {
+            if(element.attributeNS(KOdfXmlNS::delta, "end-element-id") == endId) {
                 break;
             }
-        } else if (isElementNode && (element.attributeNS(KoXmlNS::delta, "insertion-type") == "insert-around-content")) {
+        } else if (isElementNode && (element.attributeNS(KOdfXmlNS::delta, "insertion-type") == "insert-around-content")) {
             copyTagStart(element, xmlStream, true);
             KoXmlElement childElement;
             forEachElement(childElement, element) {
-                if (childElement.attributeNS(KoXmlNS::delta, "insertion-type") == "insert-around-content") {
+                if (childElement.attributeNS(KOdfXmlNS::delta, "insertion-type") == "insert-around-content") {
                     copyTagStart(childElement, xmlStream, true);
 
                     if (splitStarted) {
@@ -1366,7 +1366,7 @@ void KoTextLoader::loadSection(const KoXmlElement &sectionElem, QTextCursor &cur
 {
     // Add a frame to the current layout
     QTextFrameFormat sectionFormat;
-    QString sectionStyleName = sectionElem.attributeNS(KoXmlNS::text, "style-name", "");
+    QString sectionStyleName = sectionElem.attributeNS(KOdfXmlNS::text, "style-name", "");
     if (!sectionStyleName.isEmpty()) {
         KoSectionStyle *secStyle = d->textSharedData->sectionStyle(sectionStyleName, d->stylesDotXml);
         if (secStyle)
@@ -1467,10 +1467,10 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
     for (KoXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
         KoXmlElement ts = node.toElement();
         const QString localName(ts.localName());
-        const bool isTextNS = ts.namespaceURI() == KoXmlNS::text;
-        const bool isDrawNS = ts.namespaceURI() == KoXmlNS::draw;
-        const bool isDeltaNS = ts.namespaceURI() == KoXmlNS::delta;
-//        const bool isOfficeNS = ts.namespaceURI() == KoXmlNS::office;
+        const bool isTextNS = ts.namespaceURI() == KOdfXmlNS::text;
+        const bool isDrawNS = ts.namespaceURI() == KOdfXmlNS::draw;
+        const bool isDeltaNS = ts.namespaceURI() == KOdfXmlNS::delta;
+//        const bool isOfficeNS = ts.namespaceURI() == KOdfXmlNS::office;
         if (node.isText()) {
             bool isLastNode = node.nextSibling().isNull();
             loadText(node.toText().data(), cursor, stripLeadingSpace,
@@ -1485,7 +1485,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
             d->closeChangeRegion(ts);
         } else if (isDeltaNS && localName == "removed-content") {
             QTextCharFormat cf = cursor.charFormat(); // store the current cursor char format
-            QString changeId = ts.attributeNS(KoXmlNS::delta, "removal-change-idref");
+            QString changeId = ts.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
             int deleteStartPosition = cursor.position();
             bool stripLeadingSpace = true;
             d->openChangeRegion(ts);
@@ -1505,7 +1505,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
         } else if (isTextNS && localName == "change-end") {
             d->closeChangeRegion(ts);
         } else if (isTextNS && localName == "change") {
-            QString id = ts.attributeNS(KoXmlNS::text, "change-id");
+            QString id = ts.attributeNS(KOdfXmlNS::text, "change-id");
             int changeId = d->changeTracker->loadedChangeId(id);
             if (changeId) {
                 if (d->changeStack.count() && (d->changeStack.top() != changeId))
@@ -1528,9 +1528,9 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
 #ifdef KOOPENDOCUMENTLOADER_DEBUG
             kDebug(32500) << "  <span> localName=" << localName;
 #endif
-            if (ts.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+            if (ts.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                 d->openChangeRegion(ts);
-            QString styleName = ts.attributeNS(KoXmlNS::text, "style-name", QString());
+            QString styleName = ts.attributeNS(KOdfXmlNS::text, "style-name", QString());
 
             QTextCharFormat cf = cursor.charFormat(); // store the current cursor char format
 
@@ -1543,26 +1543,26 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
 
             loadSpan(ts, cursor, stripLeadingSpace);   // recurse
             cursor.setCharFormat(cf); // restore the cursor char format
-            if (ts.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+            if (ts.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                 d->closeChangeRegion(ts);
         } else if (isTextNS && localName == "s") { // text:s
             int howmany = 1;
-            if (ts.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+            if (ts.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                 d->openChangeRegion(ts);
-            if (ts.hasAttributeNS(KoXmlNS::text, "c")) {
-                howmany = ts.attributeNS(KoXmlNS::text, "c", QString()).toInt();
+            if (ts.hasAttributeNS(KOdfXmlNS::text, "c")) {
+                howmany = ts.attributeNS(KOdfXmlNS::text, "c", QString()).toInt();
             }
             cursor.insertText(QString().fill(32, howmany));
-            if (ts.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+            if (ts.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                 d->closeChangeRegion(ts);
         } else if ( (isTextNS && localName == "note")) { // text:note
             loadNote(ts, cursor);
         } else if (isTextNS && localName == "tab") { // text:tab
             cursor.insertText("\t");
         } else if (isTextNS && localName == "a") { // text:a
-            if (ts.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+            if (ts.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                 d->openChangeRegion(ts);
-            QString target = ts.attributeNS(KoXmlNS::xlink, "href");
+            QString target = ts.attributeNS(KOdfXmlNS::xlink, "href");
             QTextCharFormat cf = cursor.charFormat(); // store the current cursor char format
             if (!target.isEmpty()) {
                 QTextCharFormat linkCf(cf);   // and copy it to alter it
@@ -1581,7 +1581,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
             }
             loadSpan(ts, cursor, stripLeadingSpace);   // recurse
             cursor.setCharFormat(cf);   // restore the cursor char format
-            if (ts.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+            if (ts.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                 d->closeChangeRegion(ts);
         } else if (isTextNS && localName == "line-break") { // text:line-break
 #ifdef KOOPENDOCUMENTLOADER_DEBUG
@@ -1599,7 +1599,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
                 textObjectManager->insertInlineObject(cursor, startmark);
 
                 // Add inline Rdf here.
-                if (ts.hasAttributeNS(KoXmlNS::xhtml, "property")
+                if (ts.hasAttributeNS(KOdfXmlNS::xhtml, "property")
                         || ts.hasAttribute("id")) {
                     KoTextInlineRdf* inlineRdf =
                         new KoTextInlineRdf((QTextDocument*)document, startmark);
@@ -1634,7 +1634,7 @@ void KoTextLoader::loadSpan(const KoXmlElement &element, QTextCursor &cursor, bo
                     bookmark->setType(KoBookmark::StartBookmark);
 
                     // Add inline Rdf to the bookmark.
-                    if (ts.hasAttributeNS(KoXmlNS::xhtml, "property")
+                    if (ts.hasAttributeNS(KOdfXmlNS::xhtml, "property")
                             || ts.hasAttribute("id")) {
                         KoTextInlineRdf* inlineRdf =
                             new KoTextInlineRdf((QTextDocument*)document, bookmark);
@@ -1765,13 +1765,13 @@ void KoTextLoader::loadDeleteChangeWithinPorH(QString id, QTextCursor &cursor)
 void KoTextLoader::loadMerge(const KoXmlElement &element, QTextCursor &cursor)
 {
     d->openChangeRegion(element);
-    QString changeId = element.attributeNS(KoXmlNS::delta, "removal-change-idref");
+    QString changeId = element.attributeNS(KOdfXmlNS::delta, "removal-change-idref");
     int deleteStartPosition = cursor.position();
 
     for (KoXmlNode node = element.firstChild(); !node.isNull(); node = node.nextSibling()) {
         KoXmlElement ts = node.toElement();
         const QString localName(ts.localName());
-        const bool isDeltaNS = ts.namespaceURI() == KoXmlNS::delta;
+        const bool isDeltaNS = ts.namespaceURI() == KOdfXmlNS::delta;
 
         if (isDeltaNS && localName == "leading-partial-content") {
             bool stripLeadingSpaces = false;
@@ -1898,7 +1898,7 @@ void KoTextLoader::loadTable(const KoXmlElement &tableElem, QTextCursor &cursor)
     //}
 
     QTextTableFormat tableFormat;
-    QString tableStyleName = tableElem.attributeNS(KoXmlNS::table, "style-name", "");
+    QString tableStyleName = tableElem.attributeNS(KOdfXmlNS::table, "style-name", "");
     if (!tableStyleName.isEmpty()) {
         KoTableStyle *tblStyle = d->textSharedData->tableStyle(tableStyleName, d->stylesDotXml);
         if (tblStyle)
@@ -1930,25 +1930,25 @@ void KoTextLoader::loadTable(const KoXmlElement &tableElem, QTextCursor &cursor)
     forEachElement(tblTag, tableElem) {
         if (! tblTag.isNull()) {
             const QString tblLocalName = tblTag.localName();
-            if (tblTag.namespaceURI() == KoXmlNS::table) {
+            if (tblTag.namespaceURI() == KOdfXmlNS::table) {
                 if (tblLocalName == "table-column") {
                     loadTableColumn(tblTag, tbl, columns);
                 } else if (tblLocalName == "table-row") {
-                    if (!tblTag.attributeNS(KoXmlNS::delta, "insertion-type").isEmpty())
+                    if (!tblTag.attributeNS(KOdfXmlNS::delta, "insertion-type").isEmpty())
                         d->openChangeRegion(tblTag);
 
                     loadTableRow(tblTag, tbl, spanStore, cursor, rows);
 
-                    if (!tblTag.attributeNS(KoXmlNS::delta, "insertion-type").isEmpty())
+                    if (!tblTag.attributeNS(KOdfXmlNS::delta, "insertion-type").isEmpty())
                         d->closeChangeRegion(tblTag);
                 }
-            } else if(tblTag.namespaceURI() == KoXmlNS::delta) {
+            } else if(tblTag.namespaceURI() == KOdfXmlNS::delta) {
                 if (tblLocalName == "removed-content")
                     d->openChangeRegion(tblTag);
 
                 KoXmlElement deltaTblTag;
                 forEachElement (deltaTblTag, tblTag) {
-                    if (!deltaTblTag.isNull() && (deltaTblTag.namespaceURI() == KoXmlNS::table)) {
+                    if (!deltaTblTag.isNull() && (deltaTblTag.namespaceURI() == KOdfXmlNS::table)) {
                         const QString deltaTblLocalName = deltaTblTag.localName();
                         if (deltaTblLocalName == "table-column") {
                             loadTableColumn(deltaTblTag, tbl, columns);
@@ -1976,8 +1976,8 @@ void KoTextLoader::loadTableColumn(KoXmlElement &tblTag, QTextTable *tbl, int &c
     KoTableColumnAndRowStyleManager *tcarManager = reinterpret_cast<KoTableColumnAndRowStyleManager *>
                                                    (tbl->format().property(KoTableStyle::ColumnAndRowStyleManager).value<void *>());
     int rows = tbl->rows();
-    int repeatColumn = tblTag.attributeNS(KoXmlNS::table, "number-columns-repeated", "1").toInt();
-    QString columnStyleName = tblTag.attributeNS(KoXmlNS::table, "style-name", "");
+    int repeatColumn = tblTag.attributeNS(KOdfXmlNS::table, "number-columns-repeated", "1").toInt();
+    QString columnStyleName = tblTag.attributeNS(KOdfXmlNS::table, "style-name", "");
     if (!columnStyleName.isEmpty()) {
         KoTableColumnStyle *columnStyle = d->textSharedData->tableColumnStyle(columnStyleName, d->stylesDotXml);
         if (columnStyle) {
@@ -1987,7 +1987,7 @@ void KoTextLoader::loadTableColumn(KoXmlElement &tblTag, QTextTable *tbl, int &c
         }
     }
 
-    QString defaultCellStyleName = tblTag.attributeNS(KoXmlNS::table, "default-cell-style-name", "");
+    QString defaultCellStyleName = tblTag.attributeNS(KOdfXmlNS::table, "default-cell-style-name", "");
     if (!defaultCellStyleName.isEmpty()) {
         KoTableCellStyle *cellStyle = d->textSharedData->tableCellStyle(defaultCellStyleName, d->stylesDotXml);
         for (int c = columns; c < columns + repeatColumn; c++) {
@@ -2005,7 +2005,7 @@ void KoTextLoader::loadTableRow(KoXmlElement &tblTag, QTextTable *tbl, QList<QRe
                                                    (tbl->format().property(KoTableStyle::ColumnAndRowStyleManager).value<void *>());
 
     int columns = tbl->columns();
-    QString rowStyleName = tblTag.attributeNS(KoXmlNS::table, "style-name", "");
+    QString rowStyleName = tblTag.attributeNS(KOdfXmlNS::table, "style-name", "");
     if (!rowStyleName.isEmpty()) {
         KoTableRowStyle *rowStyle = d->textSharedData->tableRowStyle(rowStyleName, d->stylesDotXml);
         if (rowStyle) {
@@ -2013,7 +2013,7 @@ void KoTextLoader::loadTableRow(KoXmlElement &tblTag, QTextTable *tbl, QList<QRe
         }
     }
 
-    QString defaultCellStyleName = tblTag.attributeNS(KoXmlNS::table, "default-cell-style-name", "");
+    QString defaultCellStyleName = tblTag.attributeNS(KOdfXmlNS::table, "default-cell-style-name", "");
     if (!defaultCellStyleName.isEmpty()) {
         KoTableCellStyle *cellStyle = d->textSharedData->tableCellStyle(defaultCellStyleName, d->stylesDotXml);
         tcarManager->setDefaultRowCellStyle(rows, cellStyle);
@@ -2028,20 +2028,20 @@ void KoTextLoader::loadTableRow(KoXmlElement &tblTag, QTextTable *tbl, QList<QRe
     forEachElement(rowTag, tblTag) {
         if (!rowTag.isNull()) {
             const QString rowLocalName = rowTag.localName();
-            if (rowTag.namespaceURI() == KoXmlNS::table) {
+            if (rowTag.namespaceURI() == KOdfXmlNS::table) {
                 if (rowLocalName == "table-cell") {
                     loadTableCell(rowTag, tbl, spanStore, cursor, currentCell);
                     currentCell++;
                 } else if (rowLocalName == "covered-table-cell") {
                     currentCell++;
                 }
-            } else if (rowTag.namespaceURI() == KoXmlNS::delta) {
+            } else if (rowTag.namespaceURI() == KOdfXmlNS::delta) {
                 if (rowLocalName == "removed-content")
                     d->openChangeRegion(rowTag);
 
                 KoXmlElement deltaRowTag;
                 forEachElement (deltaRowTag, rowTag) {
-                    if (!deltaRowTag.isNull() && (deltaRowTag.namespaceURI() == KoXmlNS::table)) {
+                    if (!deltaRowTag.isNull() && (deltaRowTag.namespaceURI() == KOdfXmlNS::table)) {
                         const QString deltaRowLocalName = deltaRowTag.localName();
                         if (deltaRowLocalName == "table-cell") {
                             loadTableCell (deltaRowTag, tbl, spanStore, cursor, currentCell);
@@ -2066,16 +2066,16 @@ void KoTextLoader::loadTableCell(KoXmlElement &rowTag, QTextTable *tbl, QList<QR
     const int currentRow = tbl->rows() - 1;
     QTextTableCell cell = tbl->cellAt(currentRow, currentCell);
 
-    if (rowTag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+    if (rowTag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
         d->openChangeRegion(rowTag);
 
     // store spans until entire table have been loaded
-    int rowsSpanned = rowTag.attributeNS(KoXmlNS::table, "number-rows-spanned", "1").toInt();
-    int columnsSpanned = rowTag.attributeNS(KoXmlNS::table, "number-columns-spanned", "1").toInt();
+    int rowsSpanned = rowTag.attributeNS(KOdfXmlNS::table, "number-rows-spanned", "1").toInt();
+    int columnsSpanned = rowTag.attributeNS(KOdfXmlNS::table, "number-columns-spanned", "1").toInt();
     spanStore.append(QRect(currentCell, currentRow, columnsSpanned, rowsSpanned));
 
     if (cell.isValid()) {
-        QString cellStyleName = rowTag.attributeNS(KoXmlNS::table, "style-name", "");
+        QString cellStyleName = rowTag.attributeNS(KOdfXmlNS::table, "style-name", "");
         KoTableCellStyle *cellStyle = 0;
         if (!cellStyleName.isEmpty()) {
             cellStyle = d->textSharedData->tableCellStyle(cellStyleName, d->stylesDotXml);
@@ -2093,7 +2093,7 @@ void KoTextLoader::loadTableCell(KoXmlElement &rowTag, QTextTable *tbl, QList<QR
 
         // handle inline Rdf
         // rowTag is the current table cell.
-        if (rowTag.hasAttributeNS(KoXmlNS::xhtml, "property") || rowTag.hasAttribute("id")) {
+        if (rowTag.hasAttributeNS(KOdfXmlNS::xhtml, "property") || rowTag.hasAttribute("id")) {
             KoTextInlineRdf* inlineRdf = new KoTextInlineRdf((QTextDocument*)cursor.block().document(),cell);
             inlineRdf->loadOdf(rowTag);
             QTextTableCellFormat cellFormat = cell.format().toTableCellFormat();
@@ -2111,7 +2111,7 @@ void KoTextLoader::loadTableCell(KoXmlElement &rowTag, QTextTable *tbl, QList<QR
         }
     }
 
-    if (rowTag.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+    if (rowTag.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
         d->closeChangeRegion(rowTag);
 
 }
@@ -2127,8 +2127,8 @@ void KoTextLoader::loadShape(const KoXmlElement &element, QTextCursor &cursor)
     QString anchorType;
     if (shape->hasAdditionalAttribute("text:anchor-type"))
         anchorType = shape->additionalAttribute("text:anchor-type");
-    else if (element.hasAttributeNS(KoXmlNS::text, "anchor-type"))
-        anchorType = element.attributeNS(KoXmlNS::text, "anchor-type");
+    else if (element.hasAttributeNS(KOdfXmlNS::text, "anchor-type"))
+        anchorType = element.attributeNS(KOdfXmlNS::text, "anchor-type");
     else
         anchorType = "as-char"; // default value
 
@@ -2140,7 +2140,7 @@ void KoTextLoader::loadShape(const KoXmlElement &element, QTextCursor &cursor)
 
         KoTextDocumentLayout *layout = qobject_cast<KoTextDocumentLayout*>(cursor.block().document()->documentLayout());
         if (layout) {
-            if (element.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+            if (element.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                 d->openChangeRegion(element);
 
             if (d->changeTracker && d->changeStack.count()) {
@@ -2160,7 +2160,7 @@ void KoTextLoader::loadShape(const KoXmlElement &element, QTextCursor &cursor)
                 textObjectManager->insertInlineObject(cursor, anchor, cursor.charFormat());
             }
 
-            if(element.attributeNS(KoXmlNS::delta, "insertion-type") != "")
+            if(element.attributeNS(KOdfXmlNS::delta, "insertion-type") != "")
                 d->closeChangeRegion(element);
         }
     } else {
@@ -2180,7 +2180,7 @@ void KoTextLoader::loadTableOfContents(const KoXmlElement &element, QTextCursor 
     // We'll just try to find displayable elements and add them as paragraphs
     KoXmlElement e;
     forEachElement(e, element) {
-        if (e.isNull() || e.namespaceURI() != KoXmlNS::text)
+        if (e.isNull() || e.namespaceURI() != KOdfXmlNS::text)
             continue;
 
         //TODO look at table-of-content-source
@@ -2191,7 +2191,7 @@ void KoTextLoader::loadTableOfContents(const KoXmlElement &element, QTextCursor 
             bool firstTime = true;
             forEachElement(p, e) {
                 // All elem will be "p" instead of the title, which is particular
-                if (p.isNull() || p.namespaceURI() != KoXmlNS::text)
+                if (p.isNull() || p.namespaceURI() != KOdfXmlNS::text)
                     continue;
 
                 if (!firstTime) {
@@ -2251,7 +2251,7 @@ void KoTextLoader::storeDeleteChanges(KoXmlElement &element)
                 forEachElement(region, tag) {
                     if (!region.isNull()) {
                         if (region.localName() == "deletion") {
-                            QString id = tag.attributeNS(KoXmlNS::text, "id");
+                            QString id = tag.attributeNS(KOdfXmlNS::text, "id");
                             d->deleteChangeTable.insert(id, region);
                         }
                     }

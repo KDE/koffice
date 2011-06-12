@@ -26,7 +26,7 @@
 #include "PresentationVariable.h"
 
 #include <KProperties.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -52,7 +52,7 @@ PresentationVariableFactory::PresentationVariableFactory(QObject *parent)
 
     QStringList elementNames;
     elementNames << "footer" << "header" << "date-time";
-    setOdfElementNames(KoXmlNS::presentation, elementNames);
+    setOdfElementNames(KOdfXmlNS::presentation, elementNames);
 }
 
 KoInlineObject *PresentationVariableFactory::createInlineObject(const KProperties *properties) const

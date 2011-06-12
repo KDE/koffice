@@ -27,7 +27,7 @@
 
 #include <KoPASavingContext.h>
 #include <QString>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
@@ -48,9 +48,9 @@ bool SCAnimSet::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &cont
 {
     bool retval = false;
 
-    QString attributeName(element.attributeNS(KoXmlNS::smil, "attributeName", QString()));
+    QString attributeName(element.attributeNS(KOdfXmlNS::smil, "attributeName", QString()));
     if (attributeName == "visibility") {
-        m_visible = element.attributeNS(KoXmlNS::smil, "to", "hidden") == "visible";
+        m_visible = element.attributeNS(KOdfXmlNS::smil, "to", "hidden") == "visible";
         retval = true;
         kDebug(33003) << "animate visibility for shape with id" << m_visible;
     }

@@ -26,7 +26,7 @@
 #include <klocale.h>
 
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 KoPathShapeFactory::KoPathShapeFactory(QObject *parent, const QStringList&)
         : KoShapeFactoryBase(parent, KoPathShapeId, i18n("Simple path shape"))
@@ -35,7 +35,7 @@ KoPathShapeFactory::KoPathShapeFactory(QObject *parent, const QStringList&)
     setIcon("pathshape");
     QStringList elementNames;
     elementNames << "path" << "line" << "polyline" << "polygon";
-    setOdfElementNames(KoXmlNS::draw, elementNames);
+    setOdfElementNames(KOdfXmlNS::draw, elementNames);
     setLoadingPriority(0);
 }
 
@@ -53,7 +53,7 @@ KoShape *KoPathShapeFactory::createDefaultShape(KoResourceManager *) const
 bool KoPathShapeFactory::supports(const KoXmlElement & e, KoShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
-    if (e.namespaceURI() == KoXmlNS::draw) {
+    if (e.namespaceURI() == KOdfXmlNS::draw) {
         if (e.localName() == "path")
             return true;
         if (e.localName() == "line")

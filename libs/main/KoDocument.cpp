@@ -38,7 +38,7 @@
 #include "KOdfStoreReader.h"
 #include "KOdfWriteStore.h"
 #include "KoEmbeddedDocumentSaver.h"
-#include "KoXmlNS.h"
+#include "KOdfXmlNS.h"
 #include "KoOpenPane.h"
 #include "KoApplication.h"
 #include <KoProgressProxy.h>
@@ -1730,10 +1730,10 @@ bool KoDocument::loadNativeFormatFromStoreInternal(KOdfStore *store)
         KoXmlDocument versionInfo;
         KOdfStoreReader oasisStore(store);
         if (oasisStore.loadAndParse("VersionList.xml", versionInfo, d->lastErrorMessage)) {
-            KoXmlNode list = KoXml::namedItemNS(versionInfo, KoXmlNS::VL, "version-list");
+            KoXmlNode list = KoXml::namedItemNS(versionInfo, KOdfXmlNS::VL, "version-list");
             KoXmlElement e;
             forEachElement(e, list) {
-                if (e.localName() == "version-entry" && e.namespaceURI() == KoXmlNS::VL) {
+                if (e.localName() == "version-entry" && e.namespaceURI() == KOdfXmlNS::VL) {
                     KoVersionInfo version;
                     version.comment = e.attribute("comment");
                     version.title = e.attribute("title");

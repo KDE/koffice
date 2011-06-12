@@ -24,7 +24,7 @@
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include <KoPASavingContext.h>
@@ -49,16 +49,16 @@ SCPageLayout::~SCPageLayout()
 
 bool SCPageLayout::loadOdf(const KoXmlElement &element, const QRectF &pageRect)
 {
-    if (element.hasAttributeNS(KoXmlNS::style, "display-name")) {
-        m_name = element.attributeNS(KoXmlNS::style, "display-name");
+    if (element.hasAttributeNS(KOdfXmlNS::style, "display-name")) {
+        m_name = element.attributeNS(KOdfXmlNS::style, "display-name");
     }
     else {
-        m_name = element.attributeNS(KoXmlNS::style, "name");
+        m_name = element.attributeNS(KOdfXmlNS::style, "name");
     }
 
     KoXmlElement child;
     forEachElement(child, element) {
-        if (child.tagName() == "placeholder" && child.namespaceURI() == KoXmlNS::presentation) {
+        if (child.tagName() == "placeholder" && child.namespaceURI() == KOdfXmlNS::presentation) {
             SCPlaceholder * placeholder = new SCPlaceholder;
             if (placeholder->loadOdf(child, pageRect)) {
                 m_placeholders.append(placeholder);

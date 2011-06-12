@@ -19,7 +19,7 @@
 */
 
 #include "KoXmlReader.h"
-#include "KoXmlNS.h"
+#include "KOdfXmlNS.h"
 
 /*
   This is a memory-efficient DOM implementation for KOffice. See the API
@@ -172,37 +172,37 @@ static QString fixNamespace(const QString &nsURI)
     static QString pres = QString::fromLatin1("http://openoffice.org/2000/presentation");
     static QString manifest = QString::fromLatin1("http://openoffice.org/2001/manifest");
     if (nsURI == text)
-        return KoXmlNS::text;
+        return KOdfXmlNS::text;
     if (nsURI == style)
-        return KoXmlNS::style;
+        return KOdfXmlNS::style;
     if (nsURI == office)
-        return KoXmlNS::office;
+        return KOdfXmlNS::office;
     if (nsURI == fo)
-        return KoXmlNS::fo;
+        return KOdfXmlNS::fo;
     if (nsURI == table)
-        return KoXmlNS::table;
+        return KOdfXmlNS::table;
     if (nsURI == drawing)
-        return KoXmlNS::draw;
+        return KOdfXmlNS::draw;
     if (nsURI == datastyle)
-        return KoXmlNS::number;
+        return KOdfXmlNS::number;
     if (nsURI == svg)
-        return KoXmlNS::svg;
+        return KOdfXmlNS::svg;
     if (nsURI == chart)
-        return KoXmlNS::chart;
+        return KOdfXmlNS::chart;
     if (nsURI == dr3d)
-        return KoXmlNS::dr3d;
+        return KOdfXmlNS::dr3d;
     if (nsURI == form)
-        return KoXmlNS::form;
+        return KOdfXmlNS::form;
     if (nsURI == script)
-        return KoXmlNS::script;
+        return KOdfXmlNS::script;
     if (nsURI == meta)
-        return KoXmlNS::meta;
+        return KOdfXmlNS::meta;
     if (nsURI == config)
-        return KoXmlNS::config;
+        return KOdfXmlNS::config;
     if (nsURI == pres)
-        return KoXmlNS::presentation;
+        return KOdfXmlNS::presentation;
     if (nsURI == manifest)
-        return KoXmlNS::manifest;
+        return KOdfXmlNS::manifest;
     return nsURI;
 }
 
@@ -1101,7 +1101,7 @@ namespace {
                     const QStringRef name = xml.name();
                     if (xml.name().size() == 1
                             && (name.at(0).unicode() == 'p' || name.at(0).unicode() == 'h')
-                            && KoXmlNS::text == xml.namespaceUri().toString()) {
+                            && KOdfXmlNS::text == xml.namespaceUri().toString()) {
                         // we just stumbled upon a 'text:h' or 'text:p'
                         textNode = true;
                     }

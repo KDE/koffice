@@ -22,7 +22,7 @@
 #include "PageVariable.h"
 
 #include <KProperties.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -56,7 +56,7 @@ PageVariableFactory::PageVariableFactory(QObject *parent)
 
     QStringList elementNames;
     elementNames << "page-count" << "page-number" << "page-continuation-string";
-    setOdfElementNames(KoXmlNS::text, elementNames);
+    setOdfElementNames(KOdfXmlNS::text, elementNames);
 }
 
 KoInlineObject *PageVariableFactory::createInlineObject(const KProperties *properties) const

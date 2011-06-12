@@ -34,7 +34,7 @@
 #include <QHash>
 
 // KOffice
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 // KCells
@@ -171,21 +171,21 @@ void KCNamedAreaManager::updateAllNamedAreas()
 
 void KCNamedAreaManager::loadOdf(const KoXmlElement& body)
 {
-    KoXmlNode namedAreas = KoXml::namedItemNS(body, KoXmlNS::table, "named-expressions");
+    KoXmlNode namedAreas = KoXml::namedItemNS(body, KOdfXmlNS::table, "named-expressions");
     if (!namedAreas.isNull()) {
         kDebug(36003) << "Loading named areas...";
         KoXmlElement element;
         forEachElement(element, namedAreas) {
-            if (element.namespaceURI() != KoXmlNS::table)
+            if (element.namespaceURI() != KOdfXmlNS::table)
                 continue;
             if (element.localName() == "named-range") {
-                if (!element.hasAttributeNS(KoXmlNS::table, "name"))
+                if (!element.hasAttributeNS(KOdfXmlNS::table, "name"))
                     continue;
-                if (!element.hasAttributeNS(KoXmlNS::table, "cell-range-address"))
+                if (!element.hasAttributeNS(KOdfXmlNS::table, "cell-range-address"))
                     continue;
 
                 // TODO: what is: table:base-cell-address
-                const QString base = element.attributeNS(KoXmlNS::table, "base-cell-address", QString());
+                const QString base = element.attributeNS(KOdfXmlNS::table, "base-cell-address", QString());
 
                 // Handle the case where the table:base-cell-address does contain the referenced sheetname
                 // while it's missing in the table:cell-range-address. See bug #194386 for an example.
@@ -195,8 +195,8 @@ void KCNamedAreaManager::loadOdf(const KoXmlElement& body)
                     fallbackSheet = region.lastSheet();
                 }
                 
-                const QString name = element.attributeNS(KoXmlNS::table, "name", QString());
-                const QString range = element.attributeNS(KoXmlNS::table, "cell-range-address", QString());
+                const QString name = element.attributeNS(KOdfXmlNS::table, "name", QString());
+                const QString range = element.attributeNS(KOdfXmlNS::table, "cell-range-address", QString());
                 kDebug(36003) << "Named area found, name:" << name << ", area:" << range;
 
                 KCRegion region(KCRegion::loadOdf(range), d->map, fallbackSheet);

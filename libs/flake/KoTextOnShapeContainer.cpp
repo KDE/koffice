@@ -24,7 +24,7 @@
 #include "KoShapeFactoryBase.h"
 #include "KoTextShapeDataBase.h"
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeLoadingContext.h>
 
@@ -188,13 +188,13 @@ bool KoTextOnShapeContainer::loadOdf(const KoXmlElement &element, KoShapeLoading
     KoTextShapeDataBase *shapeData = qobject_cast<KoTextShapeDataBase*>(d->textShape->userData());
     Q_ASSERT(shapeData); // would be a bug in kotext
 
-    QString styleName = element.attributeNS(KoXmlNS::draw, "style-name");
+    QString styleName = element.attributeNS(KOdfXmlNS::draw, "style-name");
     if (!styleName.isEmpty()) {
         KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
         styleStack.save();
-        context.odfLoadingContext().fillStyleStack(element, KoXmlNS::draw, "style-name", "graphic");
+        context.odfLoadingContext().fillStyleStack(element, KOdfXmlNS::draw, "style-name", "graphic");
         styleStack.setTypeProperties("graphic");
-        QString valign = styleStack.property(KoXmlNS::draw, "textarea-vertical-align");
+        QString valign = styleStack.property(KOdfXmlNS::draw, "textarea-vertical-align");
         if (valign == "top") {
             shapeData->setVerticalAlignment(Qt::AlignTop);
         } else if (valign == "middle") {
@@ -302,7 +302,7 @@ void KoTextOnShapeContainer::saveOdfChildElements(KoShapeSavingContext &context)
 // static
 void KoTextOnShapeContainer::tryWrapShape(KoShape *shape, const KoXmlElement &element, KoShapeLoadingContext &context)
 {
-    KoXmlElement text = KoXml::namedItemNS(element, KoXmlNS::text, "p");
+    KoXmlElement text = KoXml::namedItemNS(element, KOdfXmlNS::text, "p");
     if (!text.isNull()) {
         KoShapeContainer *oldParent = shape->parent();
         KoTextOnShapeContainer *tos = new KoTextOnShapeContainer(shape,

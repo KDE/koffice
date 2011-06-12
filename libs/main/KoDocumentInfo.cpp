@@ -34,7 +34,7 @@
 #include <klocale.h>
 #include <kuser.h>
 
-#include "KoXmlNS.h"
+#include "KOdfXmlNS.h"
 
 KoDocumentInfo::KoDocumentInfo(QObject* parent) : QObject(parent)
 {
@@ -73,8 +73,8 @@ bool KoDocumentInfo::load(const KoXmlDocument& doc)
 
 bool KoDocumentInfo::loadOasis(const KoXmlDocument& metaDoc)
 {
-    KoXmlNode t = KoXml::namedItemNS(metaDoc, KoXmlNS::office, "document-meta");
-    KoXmlNode office = KoXml::namedItemNS(t, KoXmlNS::office, "meta");
+    KoXmlNode t = KoXml::namedItemNS(metaDoc, KOdfXmlNS::office, "document-meta");
+    KoXmlNode office = KoXml::namedItemNS(t, KOdfXmlNS::office, "meta");
 
     if (office.isNull())
         return false;
@@ -192,7 +192,7 @@ bool KoDocumentInfo::saveOasisAuthorInfo(KoXmlWriter &xmlWriter)
 
 bool KoDocumentInfo::loadOasisAuthorInfo(const KoXmlNode& metaDoc)
 {
-    KoXmlElement e = KoXml::namedItemNS(metaDoc, KoXmlNS::dc, "creator");
+    KoXmlElement e = KoXml::namedItemNS(metaDoc, KOdfXmlNS::dc, "creator");
     if (!e.isNull() && !e.text().isEmpty())
         setAuthorInfo("creator", e.text());
 
@@ -202,11 +202,11 @@ bool KoDocumentInfo::loadOasisAuthorInfo(const KoXmlNode& metaDoc)
             continue;
 
         KoXmlElement e = n.toElement();
-        if (!(e.namespaceURI() == KoXmlNS::meta &&
+        if (!(e.namespaceURI() == KOdfXmlNS::meta &&
                 e.localName() == "user-defined" && !e.text().isEmpty()))
             continue;
 
-        QString name = e.attributeNS(KoXmlNS::meta, "name", QString());
+        QString name = e.attributeNS(KOdfXmlNS::meta, "name", QString());
         setAuthorInfo(name, e.text());
     }
 
@@ -293,11 +293,11 @@ bool KoDocumentInfo::loadOasisAboutInfo(const KoXmlNode& metaDoc)
                 keywords << e.text().trimmed();
         } else if (tag == "title" || tag == "description" || tag == "subject"
                    || tag == "date" || tag == "language") {
-            KoXmlElement e  = KoXml::namedItemNS(metaDoc, KoXmlNS::dc, tag.toLatin1().constData());
+            KoXmlElement e  = KoXml::namedItemNS(metaDoc, KOdfXmlNS::dc, tag.toLatin1().constData());
             if (!e.isNull() && !e.text().isEmpty())
                 setAboutInfo(tag, e.text().trimmed());
         } else {
-            KoXmlElement e  = KoXml::namedItemNS(metaDoc, KoXmlNS::meta, tag.toLatin1().constData());
+            KoXmlElement e  = KoXml::namedItemNS(metaDoc, KOdfXmlNS::meta, tag.toLatin1().constData());
             if (!e.isNull() && !e.text().isEmpty())
                 setAboutInfo(tag, e.text().trimmed());
         }

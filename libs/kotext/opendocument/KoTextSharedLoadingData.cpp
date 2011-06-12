@@ -30,7 +30,7 @@
 #include <kdebug.h>
 
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeLoadingContext.h>
@@ -213,16 +213,16 @@ QList<QPair<QString, KoParagraphStyle *> > KoTextSharedLoadingData::loadParagrap
         Q_ASSERT(styleElem);
         Q_ASSERT(!styleElem->isNull());
 
-        QString name = styleElem->attributeNS(KoXmlNS::style, "name");
+        QString name = styleElem->attributeNS(KOdfXmlNS::style, "name");
         KoParagraphStyle *parastyle = 0;
         if (styleManager) {
-            QString displayName = styleElem->attributeNS(KoXmlNS::style, "display-name", name);
+            QString displayName = styleElem->attributeNS(KOdfXmlNS::style, "display-name", name);
             parastyle = styleManager->paragraphStyle(displayName);
         }
         if (parastyle == 0) {
             parastyle = new KoParagraphStyle();
             parastyle->loadOdf(styleElem, context);
-            QString listStyleName = styleElem->attributeNS(KoXmlNS::style, "list-style-name");
+            QString listStyleName = styleElem->attributeNS(KOdfXmlNS::style, "list-style-name");
             KoListStyle *list = listStyle(listStyleName, styleTypes & StylesDotXml);
             if (list) {
                 KoListStyle *newListStyle = new KoListStyle(parastyle);
@@ -237,10 +237,10 @@ QList<QPair<QString, KoParagraphStyle *> > KoTextSharedLoadingData::loadParagrap
         paragraphStyles.append(QPair<QString, KoParagraphStyle *>(name, parastyle));
         d->namedParagraphStyles.insert(name, parastyle);
 
-        if (styleElem->hasAttributeNS(KoXmlNS::style, "next-style-name"))
-            nextStyles.insert(parastyle, styleElem->attributeNS(KoXmlNS::style, "next-style-name"));
-        if (styleElem->hasAttributeNS(KoXmlNS::style, "parent-style-name"))
-            parentStyles.insert(parastyle, styleElem->attributeNS(KoXmlNS::style, "parent-style-name"));
+        if (styleElem->hasAttributeNS(KOdfXmlNS::style, "next-style-name"))
+            nextStyles.insert(parastyle, styleElem->attributeNS(KOdfXmlNS::style, "next-style-name"));
+        if (styleElem->hasAttributeNS(KOdfXmlNS::style, "parent-style-name"))
+            parentStyles.insert(parastyle, styleElem->attributeNS(KOdfXmlNS::style, "parent-style-name"));
 
         // TODO check if it a know style set the styleid so that the custom styles are kept during copy and paste
         // in case styles are not added to the style manager they have to be deleted after loading to avoid leaking memeory
@@ -301,8 +301,8 @@ QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharac
         Q_ASSERT(styleElem);
         Q_ASSERT(!styleElem->isNull());
 
-        QString name = styleElem->attributeNS(KoXmlNS::style, "name");
-        QString displayName = styleElem->attributeNS(KoXmlNS::style, "display-name", name);
+        QString name = styleElem->attributeNS(KOdfXmlNS::style, "name");
+        QString displayName = styleElem->attributeNS(KOdfXmlNS::style, "display-name", name);
         kDebug(32500) << "styleName =" << name << "styleDisplayName =" << displayName;
 
         KoCharacterStyle *characterStyle = 0;
@@ -322,7 +322,7 @@ QList<KoTextSharedLoadingData::OdfCharStyle> KoTextSharedLoadingData::loadCharac
 
         OdfCharStyle answer;
         answer.odfName = name;
-        answer.parentStyle = styleElem->attributeNS(KoXmlNS::style, "parent-style-name");
+        answer.parentStyle = styleElem->attributeNS(KOdfXmlNS::style, "parent-style-name");
         answer.style = characterStyle;
         characterStyles.append(answer);
     }
@@ -360,8 +360,8 @@ QList<QPair<QString, KoListStyle *> > KoTextSharedLoadingData::loadListStyles(Ko
         Q_ASSERT(styleElem);
         Q_ASSERT(!styleElem->isNull());
 
-        QString name = styleElem->attributeNS(KoXmlNS::style, "name");
-        QString displayName = styleElem->attributeNS(KoXmlNS::style, "display-name", name);
+        QString name = styleElem->attributeNS(KOdfXmlNS::style, "name");
+        QString displayName = styleElem->attributeNS(KOdfXmlNS::style, "display-name", name);
         KoListStyle *liststyle = 0;
         if (styleManager)
             liststyle = styleManager->listStyle(displayName);
@@ -406,8 +406,8 @@ QList<QPair<QString, KoTableStyle *> > KoTextSharedLoadingData::loadTableStyles(
         Q_ASSERT(styleElem);
         Q_ASSERT(!styleElem->isNull());
 
-        QString name = styleElem->attributeNS(KoXmlNS::style, "name", QString());
-        // nah don't think this is it: context.fillStyleStack(*styleElem, KoXmlNS::style, "style-name", "table");
+        QString name = styleElem->attributeNS(KOdfXmlNS::style, "name", QString());
+        // nah don't think this is it: context.fillStyleStack(*styleElem, KOdfXmlNS::style, "style-name", "table");
         KoTableStyle *tablestyle = new KoTableStyle();
         tablestyle->loadOdf(styleElem, context);
         tableStyles.append(QPair<QString, KoTableStyle *>(name, tablestyle));
@@ -446,8 +446,8 @@ QList<QPair<QString, KoTableColumnStyle *> > KoTextSharedLoadingData::loadTableC
         Q_ASSERT(styleElem);
         Q_ASSERT(!styleElem->isNull());
 
-        QString name = styleElem->attributeNS(KoXmlNS::style, "name", QString());
-        // nah don't think this is it: context.fillStyleStack(*styleElem, KoXmlNS::style, "style-name", "table");
+        QString name = styleElem->attributeNS(KOdfXmlNS::style, "name", QString());
+        // nah don't think this is it: context.fillStyleStack(*styleElem, KOdfXmlNS::style, "style-name", "table");
         KoTableColumnStyle *tablecolumnstyle = new KoTableColumnStyle();
         tablecolumnstyle->loadOdf(styleElem, context);
         tableColumnStyles.append(QPair<QString, KoTableColumnStyle *>(name, tablecolumnstyle));
@@ -486,8 +486,8 @@ QList<QPair<QString, KoTableRowStyle *> > KoTextSharedLoadingData::loadTableRowS
         Q_ASSERT(styleElem);
         Q_ASSERT(!styleElem->isNull());
 
-        QString name = styleElem->attributeNS(KoXmlNS::style, "name", QString());
-        // nah don't think this is it: context.fillStyleStack(*styleElem, KoXmlNS::style, "style-name", "table");
+        QString name = styleElem->attributeNS(KOdfXmlNS::style, "name", QString());
+        // nah don't think this is it: context.fillStyleStack(*styleElem, KOdfXmlNS::style, "style-name", "table");
         KoTableRowStyle *tablerowstyle = new KoTableRowStyle();
         tablerowstyle->loadOdf(styleElem, context);
         tableRowStyles.append(QPair<QString, KoTableRowStyle *>(name, tablerowstyle));
@@ -526,8 +526,8 @@ QList<QPair<QString, KoTableCellStyle *> > KoTextSharedLoadingData::loadTableCel
         Q_ASSERT(styleElem);
         Q_ASSERT(!styleElem->isNull());
 
-        QString name = styleElem->attributeNS(KoXmlNS::style, "name", QString());
-        // nah don't think this is it: context.fillStyleStack(*styleElem, KoXmlNS::style, "style-name", "table");
+        QString name = styleElem->attributeNS(KOdfXmlNS::style, "name", QString());
+        // nah don't think this is it: context.fillStyleStack(*styleElem, KOdfXmlNS::style, "style-name", "table");
         KoTableCellStyle *tablecellstyle = new KoTableCellStyle();
         tablecellstyle->loadOdf(styleElem, context);
         tableCellStyles.append(QPair<QString, KoTableCellStyle *>(name, tablecellstyle));
@@ -566,8 +566,8 @@ QList<QPair<QString, KoSectionStyle *> > KoTextSharedLoadingData::loadSectionSty
         Q_ASSERT(styleElem);
         Q_ASSERT(!styleElem->isNull());
 
-        QString name = styleElem->attributeNS(KoXmlNS::style, "name", QString());
-        // nah don't think this is it: context.fillStyleStack(*styleElem, KoXmlNS::style, "style-name", "table");
+        QString name = styleElem->attributeNS(KOdfXmlNS::style, "name", QString());
+        // nah don't think this is it: context.fillStyleStack(*styleElem, KOdfXmlNS::style, "style-name", "table");
         KoSectionStyle *sectionstyle = new KoSectionStyle();
         sectionstyle->loadOdf(styleElem, context);
         sectionStyles.append(QPair<QString, KoSectionStyle *>(name, sectionstyle));
@@ -578,7 +578,7 @@ QList<QPair<QString, KoSectionStyle *> > KoTextSharedLoadingData::loadSectionSty
 void KoTextSharedLoadingData::addOutlineStyle(KoShapeLoadingContext &context, KoStyleManager *styleManager)
 {
     // outline-styles used e.g. for headers
-    KoXmlElement outlineStyleElem = KoXml::namedItemNS(context.odfLoadingContext().stylesReader().officeStyle(), KoXmlNS::text, "outline-style");
+    KoXmlElement outlineStyleElem = KoXml::namedItemNS(context.odfLoadingContext().stylesReader().officeStyle(), KOdfXmlNS::text, "outline-style");
     if (styleManager && outlineStyleElem.isElement()) {
         KoListStyle *outlineStyle = new KoListStyle();
         outlineStyle->loadOdf(context, outlineStyleElem);

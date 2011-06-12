@@ -21,7 +21,7 @@
 
 #include <klocale.h>
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoOdfWorkaround.h>
 #include "SCPlaceholderShape.h"
 #include <KoShapeLoadingContext.h> // for Q_UNUSED
@@ -33,7 +33,7 @@ SCPlaceholderShapeFactory::SCPlaceholderShapeFactory(QObject *parent)
 {
     QStringList elementNames;
     elementNames << "text-box" << "object" << "image";
-    setOdfElementNames(KoXmlNS::draw, elementNames);
+    setOdfElementNames(KOdfXmlNS::draw, elementNames);
     // use a really high number as we want to be used before the normal shapes try to load it
     setLoadingPriority(1000);
     setHidden(true);
@@ -56,10 +56,10 @@ bool SCPlaceholderShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingCo
     if (!parent.isNull()) {
         KoXmlElement element = parent.toElement();
         if (!element.isNull()) {
-            bool supported =  element.attributeNS(KoXmlNS::presentation, "placeholder", "false") == "true";
+            bool supported =  element.attributeNS(KOdfXmlNS::presentation, "placeholder", "false") == "true";
             kDebug(33001) << "placeholder:" << supported;
 #ifndef NWORKAROUND_ODF_BUGS
-            if (!supported && KoOdfWorkaround::fixPresentationPlaceholder() && element.hasAttributeNS(KoXmlNS::presentation, "class")) {
+            if (!supported && KoOdfWorkaround::fixPresentationPlaceholder() && element.hasAttributeNS(KOdfXmlNS::presentation, "class")) {
                 supported = true;
                 kDebug(33001) << "workaround OO placeholder bug" << supported;
             }

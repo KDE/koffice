@@ -37,7 +37,7 @@
 #include <KOdfStylesReader.h>
 #include <KoEmbeddedDocumentSaver.h>
 #include <KoShapeSavingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KoStyleManager.h>
 #include <KoShapeLoadingContext.h>
@@ -540,8 +540,8 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
         KOdfStyleStack styleStack;
         styleStack.push(*defaultColumnStyle);
         styleStack.setTypeProperties("table-column");
-        if (styleStack.hasProperty(KoXmlNS::style, "column-width")) {
-            const double width = KUnit::parseValue(styleStack.property(KoXmlNS::style, "column-width"), -1.0);
+        if (styleStack.hasProperty(KOdfXmlNS::style, "column-width")) {
+            const double width = KUnit::parseValue(styleStack.property(KOdfXmlNS::style, "column-width"), -1.0);
             if (width != -1.0) {
 //           kDebug() <<"\tstyle:column-width:" << width;
                 d->defaultColumnFormat->setWidth(width);
@@ -556,8 +556,8 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
         KOdfStyleStack styleStack;
         styleStack.push(*defaultRowStyle);
         styleStack.setTypeProperties("table-row");
-        if (styleStack.hasProperty(KoXmlNS::style, "row-height")) {
-            const double height = KUnit::parseValue(styleStack.property(KoXmlNS::style, "row-height"), -1.0);
+        if (styleStack.hasProperty(KOdfXmlNS::style, "row-height")) {
+            const double height = KUnit::parseValue(styleStack.property(KOdfXmlNS::style, "row-height"), -1.0);
             if (height != -1.0) {
 //           kDebug() <<"\tstyle:row-height:" << height;
                 d->defaultRowFormat->setHeight(height);
@@ -566,11 +566,11 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
     }
 
     d->calculationSettings->loadOdf(body); // table::calculation-settings
-    if (body.hasAttributeNS(KoXmlNS::table, "structure-protected")) {
+    if (body.hasAttributeNS(KOdfXmlNS::table, "structure-protected")) {
         loadOdfProtection(body);
     }
 
-    KoXmlNode sheetNode = KoXml::namedItemNS(body, KoXmlNS::table, "table");
+    KoXmlNode sheetNode = KoXml::namedItemNS(body, KOdfXmlNS::table, "table");
 
     if (sheetNode.isNull()) {
         // We need at least one sheet !
@@ -590,8 +590,8 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
             KoXml::load(sheetElement);
 
             if (sheetElement.nodeName() == "table:table") {
-                if (!sheetElement.attributeNS(KoXmlNS::table, "name", QString()).isEmpty()) {
-                    const QString sheetName = sheetElement.attributeNS(KoXmlNS::table, "name", QString());
+                if (!sheetElement.attributeNS(KOdfXmlNS::table, "name", QString()).isEmpty()) {
+                    const QString sheetName = sheetElement.attributeNS(KOdfXmlNS::table, "name", QString());
                     KCSheet* sheet = addNewSheet(sheetName);
                     sheet->setSheetName(sheetName, true);
                     d->overallRowCount += KoXml::childNodesCount(sheetElement);
@@ -619,8 +619,8 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
 
             //kDebug()<<"tableElement.nodeName() bis :"<<sheetElement.nodeName();
             if (sheetElement.nodeName() == "table:table") {
-                if (!sheetElement.attributeNS(KoXmlNS::table, "name", QString()).isEmpty()) {
-                    QString name = sheetElement.attributeNS(KoXmlNS::table, "name", QString());
+                if (!sheetElement.attributeNS(KOdfXmlNS::table, "name", QString()).isEmpty()) {
+                    QString name = sheetElement.attributeNS(KOdfXmlNS::table, "name", QString());
                     KCSheet* sheet = findSheet(name);
                     if (sheet) {
                         sheet->loadOdf(sheetElement, tableContext, autoStyles, conditionalStyles);

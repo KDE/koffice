@@ -27,7 +27,7 @@
 #include "KWPage.h"
 
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoTextShapeData.h>
 
 #include <KDebug>
@@ -203,7 +203,7 @@ void KWFrame::saveOdf(KoShapeSavingContext &context, const KWPage &page, int pag
 bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*context */)
 {
     frameSet()->setFrameBehavior(KWord::IgnoreContentFrameBehavior);
-    KoXmlElement properties(KoXml::namedItemNS(style, KoXmlNS::style, "graphic-properties"));
+    KoXmlElement properties(KoXml::namedItemNS(style, KOdfXmlNS::style, "graphic-properties"));
     if (properties.isNull())
         return false;
 
@@ -211,7 +211,7 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
     if (frameSet() && frameSet()->type() == KWord::TextFrameSet)
         tfs = static_cast<KWTextFrameSet*>(frameSet());
 
-    QString copy = properties.attributeNS(KoXmlNS::draw, "copy-of");
+    QString copy = properties.attributeNS(KOdfXmlNS::draw, "copy-of");
     if (! copy.isEmpty()) {
         // untested... No app saves this currently..
         foreach (KWFrame *f, frameSet()->frames()) {
@@ -222,14 +222,14 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
         }
     }
 
-    QString overflow = properties.attributeNS(KoXmlNS::style, "overflow-behavior");
+    QString overflow = properties.attributeNS(KOdfXmlNS::style, "overflow-behavior");
     if (overflow == "clip")
         frameSet()->setFrameBehavior(KWord::IgnoreContentFrameBehavior);
     else if (overflow == "auto-create-new-frame")
         frameSet()->setFrameBehavior(KWord::AutoCreateNewFrameBehavior);
     else
         frameSet()->setFrameBehavior(KWord::AutoExtendFrameBehavior);
-    QString newFrameBehavior = properties.attributeNS(KoXmlNS::koffice, "frame-behavior-on-new-page");
+    QString newFrameBehavior = properties.attributeNS(KOdfXmlNS::koffice, "frame-behavior-on-new-page");
     if (frameSet() == 0);
     else if (newFrameBehavior == "followup")
         frameSet()->setNewFrameBehavior(KWord::ReconnectNewFrame);
@@ -238,17 +238,17 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
     else
         frameSet()->setNewFrameBehavior(KWord::NoFollowupFrame);
 
-    m_margin.fillFrom(properties, KoXmlNS::fo, "margin");
+    m_margin.fillFrom(properties, KOdfXmlNS::fo, "margin");
 
     if (tfs) {
         KoInsets p;
-        p.fillFrom(properties, KoXmlNS::fo, "padding");
+        p.fillFrom(properties, KOdfXmlNS::fo, "padding");
         static_cast<KWTextFrame*>(this)->setInsets(p);
     }
 
     QString wrap;
-    if (properties.hasAttributeNS(KoXmlNS::style, "wrap")) {
-        wrap = properties.attributeNS(KoXmlNS::style, "wrap");
+    if (properties.hasAttributeNS(KOdfXmlNS::style, "wrap")) {
+        wrap = properties.attributeNS(KOdfXmlNS::style, "wrap");
     } else {
         // no value given in the file, and for compatibility reasons we do some suggestion on
         // what to use.
@@ -261,7 +261,7 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
         setTextRunAround(KWord::NoRunAround);
     } else if (wrap == "run-through") {
         setTextRunAround(KWord::RunThrough);
-        /*QString runTrought = properties.attributeNS(KoXmlNS::style, "run-through", "background");
+        /*QString runTrought = properties.attributeNS(KOdfXmlNS::style, "run-through", "background");
         if (runTrought == "background") {
             // TODO handle this case
         }
@@ -279,12 +279,12 @@ bool KWFrame::loadODf(const KoXmlElement &style, KoShapeLoadingContext & /*conte
         else if (wrap == "parallel")
             setRunAroundSide(KWord::BothRunAroundSide);
     }
-    setFrameOnBothSheets(properties.attributeNS(KoXmlNS::koffice,
+    setFrameOnBothSheets(properties.attributeNS(KOdfXmlNS::koffice,
                 "frame-copy-to-facing-pages").compare("true", Qt::CaseInsensitive) != 0);
 
-    const bool copyPos = properties.attributeNS(KoXmlNS::koffice,
+    const bool copyPos = properties.attributeNS(KOdfXmlNS::koffice,
                 "frame-copy-position").compare("true", Qt::CaseInsensitive) == 0;
-    const bool mirror = properties.attributeNS(KoXmlNS::style,
+    const bool mirror = properties.attributeNS(KOdfXmlNS::style,
                 "horizontal-pos").compare("from-inside") == 0;
 
     if (mirror)

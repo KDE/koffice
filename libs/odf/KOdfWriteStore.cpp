@@ -30,7 +30,7 @@
 #include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 
-#include "KoXmlNS.h"
+#include "KOdfXmlNS.h"
 
 struct KOdfWriteStore::Private {
     Private(KOdfStore * store)
@@ -81,41 +81,41 @@ KoXmlWriter* KOdfWriteStore::createOasisXmlWriter(QIODevice* dev, const char* ro
     writer->startElement(rootElementName);
 
     if (qstrcmp(rootElementName, "VL:version-list") == 0) {
-        writer->addAttribute("xmlns:VL", KoXmlNS::VL);
-        writer->addAttribute("xmlns:dc", KoXmlNS::dc);
+        writer->addAttribute("xmlns:VL", KOdfXmlNS::VL);
+        writer->addAttribute("xmlns:dc", KOdfXmlNS::dc);
         return writer;
     }
 
-    writer->addAttribute("xmlns:office", KoXmlNS::office);
-    writer->addAttribute("xmlns:meta", KoXmlNS::meta);
+    writer->addAttribute("xmlns:office", KOdfXmlNS::office);
+    writer->addAttribute("xmlns:meta", KOdfXmlNS::meta);
 
     if (qstrcmp(rootElementName, "office:document-meta") != 0) {
-        writer->addAttribute("xmlns:config", KoXmlNS::config);
-        writer->addAttribute("xmlns:text", KoXmlNS::text);
-        writer->addAttribute("xmlns:table", KoXmlNS::table);
-        writer->addAttribute("xmlns:draw", KoXmlNS::draw);
-        writer->addAttribute("xmlns:presentation", KoXmlNS::presentation);
-        writer->addAttribute("xmlns:dr3d", KoXmlNS::dr3d);
-        writer->addAttribute("xmlns:chart", KoXmlNS::chart);
-        writer->addAttribute("xmlns:form", KoXmlNS::form);
-        writer->addAttribute("xmlns:script", KoXmlNS::script);
-        writer->addAttribute("xmlns:style", KoXmlNS::style);
-        writer->addAttribute("xmlns:number", KoXmlNS::number);
-        writer->addAttribute("xmlns:math", KoXmlNS::math);
-        writer->addAttribute("xmlns:svg", KoXmlNS::svg);
-        writer->addAttribute("xmlns:fo", KoXmlNS::fo);
-        writer->addAttribute("xmlns:anim", KoXmlNS::anim);
-        writer->addAttribute("xmlns:smil", KoXmlNS::smil);
-        writer->addAttribute("xmlns:koffice", KoXmlNS::koffice);
-        writer->addAttribute("xmlns:officeooo", KoXmlNS::officeooo);
-        writer->addAttribute("xmlns:delta", KoXmlNS::delta);
-        writer->addAttribute("xmlns:split", KoXmlNS::split);
-        writer->addAttribute("xmlns:ac", KoXmlNS::ac);
+        writer->addAttribute("xmlns:config", KOdfXmlNS::config);
+        writer->addAttribute("xmlns:text", KOdfXmlNS::text);
+        writer->addAttribute("xmlns:table", KOdfXmlNS::table);
+        writer->addAttribute("xmlns:draw", KOdfXmlNS::draw);
+        writer->addAttribute("xmlns:presentation", KOdfXmlNS::presentation);
+        writer->addAttribute("xmlns:dr3d", KOdfXmlNS::dr3d);
+        writer->addAttribute("xmlns:chart", KOdfXmlNS::chart);
+        writer->addAttribute("xmlns:form", KOdfXmlNS::form);
+        writer->addAttribute("xmlns:script", KOdfXmlNS::script);
+        writer->addAttribute("xmlns:style", KOdfXmlNS::style);
+        writer->addAttribute("xmlns:number", KOdfXmlNS::number);
+        writer->addAttribute("xmlns:math", KOdfXmlNS::math);
+        writer->addAttribute("xmlns:svg", KOdfXmlNS::svg);
+        writer->addAttribute("xmlns:fo", KOdfXmlNS::fo);
+        writer->addAttribute("xmlns:anim", KOdfXmlNS::anim);
+        writer->addAttribute("xmlns:smil", KOdfXmlNS::smil);
+        writer->addAttribute("xmlns:koffice", KOdfXmlNS::koffice);
+        writer->addAttribute("xmlns:officeooo", KOdfXmlNS::officeooo);
+        writer->addAttribute("xmlns:delta", KOdfXmlNS::delta);
+        writer->addAttribute("xmlns:split", KOdfXmlNS::split);
+        writer->addAttribute("xmlns:ac", KOdfXmlNS::ac);
     }
     writer->addAttribute("office:version", "1.2");
 
-    writer->addAttribute("xmlns:dc", KoXmlNS::dc);
-    writer->addAttribute("xmlns:xlink", KoXmlNS::xlink);
+    writer->addAttribute("xmlns:dc", KOdfXmlNS::dc);
+    writer->addAttribute("xmlns:xlink", KOdfXmlNS::xlink);
     return writer;
 }
 
@@ -181,7 +181,7 @@ KoXmlWriter* KOdfWriteStore::manifestWriter(const char* mimeType)
         d->manifestWriter = new KoXmlWriter(manifestBuffer);
         d->manifestWriter->startDocument("manifest:manifest");
         d->manifestWriter->startElement("manifest:manifest");
-        d->manifestWriter->addAttribute("xmlns:manifest", KoXmlNS::manifest);
+        d->manifestWriter->addAttribute("xmlns:manifest", KOdfXmlNS::manifest);
         d->manifestWriter->addAttribute("manifest:version", "1.2");
         d->manifestWriter->addManifestEntry("/", mimeType);
     }

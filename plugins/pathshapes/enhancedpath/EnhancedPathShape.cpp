@@ -27,7 +27,7 @@
 #include "EnhancedPathHandle.h"
 #include "EnhancedPathFormula.h"
 
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>
 #include <KoShapeSavingContext.h>
@@ -390,21 +390,21 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
     reset();
     loadOdfAttributes(element, context, OdfAdditionalAttributes | OdfCommonChildElements);
 
-    const KoXmlElement enhancedGeometry(KoXml::namedItemNS(element, KoXmlNS::draw, "enhanced-geometry" ) );
+    const KoXmlElement enhancedGeometry(KoXml::namedItemNS(element, KOdfXmlNS::draw, "enhanced-geometry" ) );
     if (!enhancedGeometry.isNull()) {
         // load the modifiers
-        QString modifiers = enhancedGeometry.attributeNS(KoXmlNS::draw, "modifiers");
+        QString modifiers = enhancedGeometry.attributeNS(KOdfXmlNS::draw, "modifiers");
         if (!modifiers.isEmpty()) {
             addModifiers(modifiers);
         }
 
         KoXmlElement grandChild;
         forEachElement(grandChild, enhancedGeometry) {
-            if (grandChild.namespaceURI() != KoXmlNS::draw)
+            if (grandChild.namespaceURI() != KOdfXmlNS::draw)
                 continue;
             if (grandChild.localName() == "equation") {
-                QString name = grandChild.attributeNS(KoXmlNS::draw, "name");
-                QString formula = grandChild.attributeNS(KoXmlNS::draw, "formula");
+                QString name = grandChild.attributeNS(KOdfXmlNS::draw, "name");
+                QString formula = grandChild.attributeNS(KOdfXmlNS::draw, "formula");
                 addFormula(name, formula);
             } else if (grandChild.localName() == "handle") {
                 EnhancedPathHandle * handle = new EnhancedPathHandle(this);
@@ -417,11 +417,11 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
             }
         }
 
-        setMirrorHorizontally(enhancedGeometry.attributeNS(KoXmlNS::draw, "mirror-horizontal") == "true");
-        setMirrorVertically(enhancedGeometry.attributeNS(KoXmlNS::draw, "mirror-vertical") == "true");
+        setMirrorHorizontally(enhancedGeometry.attributeNS(KOdfXmlNS::draw, "mirror-horizontal") == "true");
+        setMirrorVertically(enhancedGeometry.attributeNS(KOdfXmlNS::draw, "mirror-vertical") == "true");
 
         // load the enhanced path data
-        QString path = enhancedGeometry.attributeNS(KoXmlNS::draw, "enhanced-path");
+        QString path = enhancedGeometry.attributeNS(KOdfXmlNS::draw, "enhanced-path");
 #ifndef NWORKAROUND_ODF_BUGS
         KoOdfWorkaround::fixEnhancedPath(path, enhancedGeometry, context);
 #endif
@@ -438,7 +438,7 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
             m_viewBox = m_viewBound;
         }
 
-        QString gluePoints(enhancedGeometry.attributeNS(KoXmlNS::draw, "glue-points"));
+        QString gluePoints(enhancedGeometry.attributeNS(KOdfXmlNS::draw, "glue-points"));
         if (!gluePoints.isEmpty()) {
             qreal x = -1;
             foreach (const QString &token, gluePoints.split(' ')) {
@@ -453,8 +453,8 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
     }
 
     QSizeF size;
-    size.setWidth(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "width")));
-    size.setHeight(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "height")));
+    size.setWidth(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "width")));
+    size.setHeight(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "height")));
     // the viewbox is to be fitted into the size of the shape, so before setting
     // the size we just loaded // we set the viewbox to be the basis to calculate
     // the viewbox matrix from
@@ -462,8 +462,8 @@ bool EnhancedPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingCont
     setSize(size);
 
     QPointF pos;
-    pos.setX(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "x")));
-    pos.setY(KUnit::parseValue(element.attributeNS(KoXmlNS::svg, "y")));
+    pos.setX(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "x")));
+    pos.setY(KUnit::parseValue(element.attributeNS(KOdfXmlNS::svg, "y")));
     setPosition(pos - m_viewMatrix.map(QPointF(0, 0)) - m_viewBoxOffset);
 
     loadOdfAttributes(element, context, OdfMandatories | OdfTransformation);

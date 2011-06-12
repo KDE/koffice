@@ -25,7 +25,7 @@
 #include <KoPathShapeFactory_p.h>
 #include <KoShape.h>
 #include <KoShapeFactoryBase.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <kdebug.h>
 
 void TestKoShapeFactory::testCreateFactory()
@@ -71,7 +71,7 @@ void TestKoShapeFactory::testOdfElement()
     QVERIFY(factory->odfElements().front().second.contains("line"));
     QVERIFY(factory->odfElements().front().second.contains("polyline"));
     QVERIFY(factory->odfElements().front().second.contains("polygon"));
-    QVERIFY(factory->odfElements().front().first == KoXmlNS::draw);
+    QVERIFY(factory->odfElements().front().first == KOdfXmlNS::draw);
 
     QBuffer xmldevice;
     xmldevice.open(QIODevice::WriteOnly);

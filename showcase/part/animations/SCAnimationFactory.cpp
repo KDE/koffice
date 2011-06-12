@@ -27,14 +27,14 @@
 #include "SCAnimTransitionFilter.h"
 
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShapeLoadingContext.h>
 
 SCAnimationBase * SCAnimationFactory::createAnimationFromOdf(const KoXmlElement &element, KoShapeLoadingContext &context,
                                                                SCShapeAnimation *shapeAnimation)
 {
     SCAnimationBase * animation = 0;
-    if (element.namespaceURI() == KoXmlNS::anim) {
+    if (element.namespaceURI() == KOdfXmlNS::anim) {
         if (element.tagName() == "set") {
             animation = new SCAnimSet(shapeAnimation);
         }

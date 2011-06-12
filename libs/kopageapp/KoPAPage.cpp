@@ -28,7 +28,7 @@
 #include <KOdfLoadingContext.h>
 #include <KOdfStyleStack.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoZoomHandler.h>
 
 #include "KoPAMasterPage.h"
@@ -82,7 +82,7 @@ const KOdfPageLayoutData &KoPAPage::pageLayout() const
 
 void KoPAPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext)
 {
-    QString master = element.attributeNS (KoXmlNS::draw, "master-page-name");
+    QString master = element.attributeNS (KOdfXmlNS::draw, "master-page-name");
     KoPAMasterPage *masterPage = loadingContext.masterPageByName(master);
     if (masterPage)
         setMasterPage(masterPage);
@@ -92,18 +92,18 @@ void KoPAPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &l
 #endif
     KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
     int pageProperties = UseMasterBackground | DisplayMasterShapes | DisplayMasterBackground;
-    if (styleStack.hasProperty(KoXmlNS::draw, "fill")) {
+    if (styleStack.hasProperty(KOdfXmlNS::draw, "fill")) {
         KoPAPageBase::loadOdfPageTag(element, loadingContext);
         pageProperties = DisplayMasterShapes;
     }
     m_pageProperties = pageProperties;
     QString name;
-    if (element.hasAttributeNS(KoXmlNS::draw, "name")) {
-        name = element.attributeNS(KoXmlNS::draw, "name");
+    if (element.hasAttributeNS(KOdfXmlNS::draw, "name")) {
+        name = element.attributeNS(KOdfXmlNS::draw, "name");
         loadingContext.addPage(name, this);
     }
-    if (element.hasAttributeNS(KoXmlNS::koffice, "name")) {
-        name = element.attributeNS(KoXmlNS::koffice, "name");
+    if (element.hasAttributeNS(KOdfXmlNS::koffice, "name")) {
+        name = element.attributeNS(KOdfXmlNS::koffice, "name");
     }
     setName(name);
 }

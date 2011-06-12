@@ -20,7 +20,7 @@
 #include "SCMasterPage.h"
 
 #include "pagelayout/SCPageLayouts.h"
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 //#include <KoResourceManager.h>
 #include "Showcase.h"
 #include <KoPALoadingContext.h>
@@ -56,11 +56,11 @@ void SCMasterPage::loadOdfPageExtra(const KoXmlElement &element, KoPALoadingCont
 {
     // the layout needs to be loaded after the shapes are already loaded so the initialization of the data works
     SCPageLayout * layout = 0;
-    if (element.hasAttributeNS(KoXmlNS::presentation, "presentation-page-layout-name")) {
+    if (element.hasAttributeNS(KOdfXmlNS::presentation, "presentation-page-layout-name")) {
         SCPageLayouts *layouts = loadingContext.documentResourceManager()->resource(Showcase::PageLayouts).value<SCPageLayouts*>();
         Q_ASSERT(layouts);
         if (layouts) {
-            QString layoutName = element.attributeNS(KoXmlNS::presentation, "presentation-page-layout-name");
+            QString layoutName = element.attributeNS(KOdfXmlNS::presentation, "presentation-page-layout-name");
             QRectF pageRect(0, 0, pageLayout().width, pageLayout().height);
             layout = layouts->pageLayout(layoutName, loadingContext, pageRect);
             kDebug(33001) << "page layout" << layoutName << layout;

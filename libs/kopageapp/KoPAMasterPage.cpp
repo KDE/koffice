@@ -25,7 +25,7 @@
 #include <KoShapePainter.h>
 #include <KOdfGenericStyle.h>
 #include <KoXmlWriter.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
 #include <KoZoomHandler.h>
@@ -79,12 +79,12 @@ void KoPAMasterPage::saveOdf(KoShapeSavingContext &context) const
 void KoPAMasterPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext)
 {
     KoPAPageBase::loadOdfPageTag(element, loadingContext);
-    if (element.hasAttributeNS(KoXmlNS::style, "display-name")) {
-        setName(element.attributeNS(KoXmlNS::style, "display-name"));
+    if (element.hasAttributeNS(KOdfXmlNS::style, "display-name")) {
+        setName(element.attributeNS(KOdfXmlNS::style, "display-name"));
     } else {
-        setName(element.attributeNS(KoXmlNS::style, "name"));
+        setName(element.attributeNS(KOdfXmlNS::style, "name"));
     }
-    QString pageLayoutName = element.attributeNS(KoXmlNS::style, "page-layout-name");
+    QString pageLayoutName = element.attributeNS(KOdfXmlNS::style, "page-layout-name");
     const KOdfStylesReader &styles = loadingContext.odfLoadingContext().stylesReader();
     const KoXmlElement* masterPageStyle = styles.findStyle(pageLayoutName);
     KOdfPageLayoutData pageLayout;

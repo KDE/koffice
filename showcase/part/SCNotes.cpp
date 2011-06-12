@@ -30,7 +30,7 @@
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
 #include <KUnit.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KoPASavingContext.h>
 
@@ -126,7 +126,7 @@ bool SCNotes::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &contex
     KoShapeLayer* layer = dynamic_cast<KoShapeLayer*>(shapes().last());
 
     forEachElement(child, element) {
-        if (child.namespaceURI() != KoXmlNS::draw)
+        if (child.namespaceURI() != KOdfXmlNS::draw)
             continue;
 
         if (child.tagName() == "page-thumbnail") {
@@ -142,7 +142,7 @@ bool SCNotes::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &contex
             KoShape *shape = KoShapeRegistry::instance()->createShapeFromOdf(child, context);
             if (shape) {
                 if (shape->shapeId() == "TextShapeID" &&
-                        child.hasAttributeNS(KoXmlNS::presentation, "class")) {
+                        child.hasAttributeNS(KOdfXmlNS::presentation, "class")) {
                     layer->removeShape(m_textShape);
                     delete m_textShape;
                     m_textShape = shape;

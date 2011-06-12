@@ -32,7 +32,7 @@
 #include <KOdfGenericStyle.h>
 #include <KOdfStylesReader.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 
 #include "KCCalculationSettings.h"
 #include "KCCondition.h"
@@ -85,12 +85,12 @@ void KCStyleManager::loadOdfStyleTemplate(KOdfStylesReader& stylesReader, KCMap*
             KoXmlNode n = defStyle->firstChild();
             while (!n.isNull()) {
                 if (n.isElement() &&
-                        n.namespaceURI() == KoXmlNS::style &&
+                        n.namespaceURI() == KOdfXmlNS::style &&
                         n.localName() == "table-cell-properties") {
                     KoXmlElement e = n.toElement();
-                    if (n.toElement().hasAttributeNS(KoXmlNS::style, "decimal-places")) {
+                    if (n.toElement().hasAttributeNS(KOdfXmlNS::style, "decimal-places")) {
                         bool ok;
-                        const int precision = n.toElement().attributeNS(KoXmlNS::style, "decimal-places").toInt(&ok);
+                        const int precision = n.toElement().attributeNS(KOdfXmlNS::style, "decimal-places").toInt(&ok);
                         if (ok && precision > -1) {
                             kDebug(36003) << "Default decimal precision:" << precision;
                             map->calculationSettings()->setDefaultDecimalPrecision(precision);
@@ -110,10 +110,10 @@ void KCStyleManager::loadOdfStyleTemplate(KOdfStylesReader& stylesReader, KCMap*
         if (!styleElem) continue;
 
         // assume the name assigned by the application
-        const QString oasisName = styleElem->attributeNS(KoXmlNS::style, "name", QString());
+        const QString oasisName = styleElem->attributeNS(KOdfXmlNS::style, "name", QString());
 
         // then replace by user-visible one (if any)
-        const QString name = styleElem->attributeNS(KoXmlNS::style, "display-name", oasisName);
+        const QString name = styleElem->attributeNS(KOdfXmlNS::style, "display-name", oasisName);
         kDebug(36003) << " KCStyleManager: Loading common cell style:" << oasisName << " (display name:" << name << ")";
 
         if (!name.isEmpty()) {
@@ -377,8 +377,8 @@ Styles KCStyleManager::loadOdfAutoStyles(KOdfStylesReader& stylesReader,
 {
     Styles autoStyles;
     foreach(KoXmlElement* element, stylesReader.autoStyles("table-cell")) {
-        if (element->hasAttributeNS(KoXmlNS::style , "name")) {
-            QString name = element->attributeNS(KoXmlNS::style , "name" , QString());
+        if (element->hasAttributeNS(KOdfXmlNS::style , "name")) {
+            QString name = element->attributeNS(KOdfXmlNS::style , "name" , QString());
             kDebug(36003) << "KCStyleManager: Preloading automatic cell style:" << name;
             autoStyles.remove(name);
             KCConditions conditions;
@@ -388,8 +388,8 @@ Styles KCStyleManager::loadOdfAutoStyles(KOdfStylesReader& stylesReader,
                 conditionalStyles[name] = conditions;
             }
 
-            if (element->hasAttributeNS(KoXmlNS::style, "parent-style-name")) {
-                const QString parentOdfName = element->attributeNS(KoXmlNS::style, "parent-style-name", QString());
+            if (element->hasAttributeNS(KOdfXmlNS::style, "parent-style-name")) {
+                const QString parentOdfName = element->attributeNS(KOdfXmlNS::style, "parent-style-name", QString());
                 if (parentOdfName == "Default")
                     continue;
                 const KCCustomStyle* parentStyle = style(m_oasisStyles.value(parentOdfName));

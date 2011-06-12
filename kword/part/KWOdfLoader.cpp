@@ -34,7 +34,7 @@
 #include <KoOdfSettings.h>
 #include <KOdfStoreReader.h>
 #include <KoXmlReader.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeFactoryBase.h>
 #include <KoTextShapeData.h>
@@ -80,14 +80,14 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     }
 
     KoXmlElement content = odfStore.contentDoc().documentElement();
-    KoXmlElement realBody(KoXml::namedItemNS(content, KoXmlNS::office, "body"));
+    KoXmlElement realBody(KoXml::namedItemNS(content, KOdfXmlNS::office, "body"));
     if (realBody.isNull()) {
         kError(32001) << "No office:body found!" << endl;
         m_document->setErrorMessage(i18n("Invalid OpenDocument file. No office:body tag found."));
         return false;
     }
 
-    KoXmlElement body = KoXml::namedItemNS(realBody, KoXmlNS::office, "text");
+    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, "text");
     if (body.isNull()) {
         kError(32001) << "No office:text found!" << endl;
         KoXmlElement childElem;
@@ -108,13 +108,13 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     bool hasMainText = false;
     KoXmlElement childElem;
     forEachElement(childElem, body) {
-        if (childElem.namespaceURI() == KoXmlNS::text
+        if (childElem.namespaceURI() == KOdfXmlNS::text
                 && childElem.localName() != "page-sequence"
                 && childElem.localName() != "tracked-changes") {
             hasMainText = true;
             break;
         }
-        if (childElem.namespaceURI() == KoXmlNS::table
+        if (childElem.namespaceURI() == KOdfXmlNS::table
                 && childElem.localName() == "table") {
             hasMainText = true;
             break;
@@ -144,7 +144,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
 #if 0 //1.6:
     KWOasisLoader oasisLoader(this);
     // <text:page-sequence> oasis extension for DTP (2003-10-27 post by Daniel)
-    m_processingType = (!KoXml::namedItemNS(body, KoXmlNS::text, "page-sequence").isNull()) ? DTP : WP;
+    m_processingType = (!KoXml::namedItemNS(body, KOdfXmlNS::text, "page-sequence").isNull()) ? DTP : WP;
     m_hasTOC = false;
     m_tabStop = MM_TO_POINT(15);
     const KoXmlElement *defaultParagStyle = styles.defaultStyle("paragraph");
@@ -152,7 +152,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
         KOdfStyleStack stack;
         stack.push(*defaultParagStyle);
         stack.setTypeProperties("paragraph");
-        QString tabStopVal = stack.property(KoXmlNS::style, "tab-stop-distance");
+        QString tabStopVal = stack.property(KOdfXmlNS::style, "tab-stop-distance");
         if (!tabStopVal.isEmpty()) m_tabStop = KUnit::parseValue(tabStopVal);
     }
     m_initialEditing = 0;
@@ -194,13 +194,13 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
 #endif
 
     // load text:page-sequence
-    KoXmlElement pageSequence = KoXml::namedItemNS(body, KoXmlNS::text, "page-sequence");
+    KoXmlElement pageSequence = KoXml::namedItemNS(body, KOdfXmlNS::text, "page-sequence");
     if (! pageSequence.isNull()) {
         KWPageManager *pageManager = m_document->pageManager();
         KoXmlElement page;
         forEachElement(page, pageSequence) {
-            if (page.namespaceURI() == KoXmlNS::text && page.localName() == "page") {
-                QString master = page.attributeNS(KoXmlNS::text, "master-page-name", QString());
+            if (page.namespaceURI() == KOdfXmlNS::text && page.localName() == "page") {
+                QString master = page.attributeNS(KOdfXmlNS::text, "master-page-name", QString());
                 pageManager->appendPage(pageManager->pageStyle(master));
             }
         }
@@ -276,7 +276,7 @@ void KWOdfLoader::loadMasterPageStyles(KOdfLoadingContext &context, bool hasMain
         if (!alreadyExists)
             masterPage = KWPageStyle(it.key());
         const KoXmlElement *masterNode = it.value();
-        const KoXmlElement *masterPageStyle = masterNode ? styles.findStyle(masterNode->attributeNS(KoXmlNS::style, "page-layout-name", QString())) : 0;
+        const KoXmlElement *masterPageStyle = masterNode ? styles.findStyle(masterNode->attributeNS(KOdfXmlNS::style, "page-layout-name", QString())) : 0;
         if (masterPageStyle) {
             masterPage.loadOdf(context, *masterNode, *masterPageStyle, m_document->resourceManager());
             loadHeaderFooter(context, masterPage, *masterNode, LoadHeader);
@@ -320,10 +320,10 @@ void KWOdfLoader::loadHeaderFooterFrame(KOdfLoadingContext &context, const KWPag
 void KWOdfLoader::loadHeaderFooter(KOdfLoadingContext &context, KWPageStyle &pageStyle, const KoXmlElement &masterPage, HFLoadType headerFooter)
 {
     // The actual content of the header/footer.
-    KoXmlElement elem = KoXml::namedItemNS(masterPage, KoXmlNS::style, headerFooter == LoadHeader ? "header" : "footer");
+    KoXmlElement elem = KoXml::namedItemNS(masterPage, KOdfXmlNS::style, headerFooter == LoadHeader ? "header" : "footer");
     // The two additional elements <style:header-left> and <style:footer-left> specifies if defined that even and odd pages
     // should be displayed different. If they are missing, the conent of odd and even (aka left and right) pages are the same.
-    KoXmlElement leftElem = KoXml::namedItemNS(masterPage, KoXmlNS::style, headerFooter == LoadHeader ? "header-left" : "footer-left");
+    KoXmlElement leftElem = KoXml::namedItemNS(masterPage, KOdfXmlNS::style, headerFooter == LoadHeader ? "header-left" : "footer-left");
     // Used in KWPageStyle to determine if, and what kind of header/footer to use.
     KWord::HeaderFooterType hfType = elem.isNull() ? KWord::HFTypeNone : leftElem.isNull() ? KWord::HFTypeUniform : KWord::HFTypeEvenOdd;
 

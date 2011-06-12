@@ -35,7 +35,7 @@
 #include <KUnit.h>
 #include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 class KoTableColumnStyle::Private : public QSharedData
@@ -226,18 +226,18 @@ void KoTableColumnStyle::setMasterPageName(const QString &name)
 
 void KoTableColumnStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &context)
 {
-    if (element->hasAttributeNS(KoXmlNS::style, "display-name"))
-        d->name = element->attributeNS(KoXmlNS::style, "display-name", QString());
+    if (element->hasAttributeNS(KOdfXmlNS::style, "display-name"))
+        d->name = element->attributeNS(KOdfXmlNS::style, "display-name", QString());
 
     if (d->name.isEmpty()) // if no style:display-name is given us the style:name
-        d->name = element->attributeNS(KoXmlNS::style, "name", QString());
+        d->name = element->attributeNS(KOdfXmlNS::style, "name", QString());
 
-    QString masterPage = element->attributeNS(KoXmlNS::style, "master-page-name", QString());
+    QString masterPage = element->attributeNS(KOdfXmlNS::style, "master-page-name", QString());
     if (! masterPage.isEmpty()) {
         setMasterPageName(masterPage);
     }
     context.styleStack().save();
-    QString family = element->attributeNS(KoXmlNS::style, "family", "table-column");
+    QString family = element->attributeNS(KOdfXmlNS::style, "family", "table-column");
     context.addStyles(element, family.toLocal8Bit().constData());   // Load all parents - only because we don't support inheritance.
 
     context.styleStack().setTypeProperties("table-column");   // load all style attributes from "style:table-column-properties"
@@ -249,21 +249,21 @@ void KoTableColumnStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext
 void KoTableColumnStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     // Column width.
-    if (styleStack.hasProperty(KoXmlNS::style, "column-width")) {
-        setColumnWidth(KUnit::parseValue(styleStack.property(KoXmlNS::style, "column-width")));
+    if (styleStack.hasProperty(KOdfXmlNS::style, "column-width")) {
+        setColumnWidth(KUnit::parseValue(styleStack.property(KOdfXmlNS::style, "column-width")));
     }
     // Relative column width.
-    if (styleStack.hasProperty(KoXmlNS::style, "rel-column-width")) {
-        setRelativeColumnWidth(styleStack.property(KoXmlNS::style, "rel-column-width").remove('*').toDouble());
+    if (styleStack.hasProperty(KOdfXmlNS::style, "rel-column-width")) {
+        setRelativeColumnWidth(styleStack.property(KOdfXmlNS::style, "rel-column-width").remove('*').toDouble());
     }
 
     // The fo:break-before and fo:break-after attributes insert a page or column break before or after a column.
-    if (styleStack.hasProperty(KoXmlNS::fo, "break-before")) {
-        if (styleStack.property(KoXmlNS::fo, "break-before") != "auto")
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "break-before")) {
+        if (styleStack.property(KOdfXmlNS::fo, "break-before") != "auto")
             setBreakBefore(true);
     }
-    if (styleStack.hasProperty(KoXmlNS::fo, "break-after")) {
-        if (styleStack.property(KoXmlNS::fo, "break-after") != "auto")
+    if (styleStack.hasProperty(KOdfXmlNS::fo, "break-after")) {
+        if (styleStack.property(KOdfXmlNS::fo, "break-after") != "auto")
             setBreakAfter(true);
     }
 }

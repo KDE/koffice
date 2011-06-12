@@ -38,7 +38,7 @@ set(koodf_LIB_SRCS
     KOdfStyleStack.cpp
     TarStore.cpp
     KUnit.cpp
-    KoXmlNS.cpp
+    KOdfXmlNS.cpp
     KoXmlReader.cpp
     KoXmlWriter.cpp
     ZipStore.cpp
@@ -61,7 +61,7 @@ install(TARGETS koodf ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES
     koodf_export.h
     KoOdf.h
-    KoXmlNS.h
+    KOdfXmlNS.h
     KOdfGenericStyle.h
     KOdfGenericStyles.h
     KOdfFontData.h

@@ -33,7 +33,7 @@
 #include <KOdfStorageDevice.h>
 #include <KOdfStyleStack.h>
 #include <KUnit.h>
-#include <KoXmlNS.h>
+#include <KOdfXmlNS.h>
 #include <KoXmlWriter.h>
 
 #include "KOdfLoadingContext.h"
@@ -257,7 +257,7 @@ QString KoOdfGraphicStyles::saveOdfGradientStyle(KOdfGenericStyles &mainStyles, 
 
 QBrush KoOdfGraphicStyles::loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfStylesReader & stylesReader, const QSizeF &size)
 {
-    QString styleName = styleStack.property(KoXmlNS::draw, "fill-gradient-name");
+    QString styleName = styleStack.property(KOdfXmlNS::draw, "fill-gradient-name");
     return loadOdfGradientStyleByName(stylesReader, styleName, size);
 }
 
@@ -289,13 +289,13 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &st
     QGradient * gradient = 0;
     QTransform transform;
 
-    if (e->namespaceURI() == KoXmlNS::draw && e->localName() == "gradient") {
+    if (e->namespaceURI() == KOdfXmlNS::draw && e->localName() == "gradient") {
         // FIXME seems like oo renders the gradient start stop color at the center of the
         // radial gradient, and the start color at the radius of the radial gradient
         // whereas it is not mentioned in the spec how it should be rendered
         // note that svg defines that exactly as the opposite as oo does
         // so what should we do?
-        QString type = e->attributeNS(KoXmlNS::draw, "style");
+        QString type = e->attributeNS(KOdfXmlNS::draw, "style");
         if (type == "radial") {
             // Zagge: at the moment the only objectBoundingBox is supported:
             // 18.539 svg:gradientUnits
@@ -303,15 +303,15 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &st
             // The default value for this attribute is objectBoundingBox.
             // The only value of the svg:gradientUnits attribute is objectBoundingBox.
 
-            qreal cx = KUnit::parseValue(e->attributeNS(KoXmlNS::draw, "cx").remove('%'));
-            qreal cy = KUnit::parseValue(e->attributeNS(KoXmlNS::draw, "cy").remove('%'));
+            qreal cx = KUnit::parseValue(e->attributeNS(KOdfXmlNS::draw, "cx").remove('%'));
+            qreal cy = KUnit::parseValue(e->attributeNS(KOdfXmlNS::draw, "cy").remove('%'));
             gradient = new QRadialGradient(QPointF(cx * 0.01, cy * 0.01), sqrt(0.5));
             gradient->setCoordinateMode(QGradient::ObjectBoundingMode);
         } else if (type == "linear" || type == "axial") {
             QLinearGradient * lg = new QLinearGradient();
             lg->setCoordinateMode(QGradient::ObjectBoundingMode);
             // Dividing by 10 here because OOo saves as degree * 10
-            qreal angle = 90 + e->attributeNS(KoXmlNS::draw, "angle", "0").toDouble() / 10;
+            qreal angle = 90 + e->attributeNS(KOdfXmlNS::draw, "angle", "0").toDouble() / 10;
             qreal radius = sqrt(0.5);
 
             qreal sx = cos(angle * M_PI / 180) * radius;
@@ -323,62 +323,62 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &st
             return QBrush();
         }
 
-        qreal border = 0.01 * e->attributeNS(KoXmlNS::draw, "border", "0").remove('%').toDouble();
+        qreal border = 0.01 * e->attributeNS(KOdfXmlNS::draw, "border", "0").remove('%').toDouble();
         QGradientStops stops;
         if (type != "axial") {
             // In case of radial gradients the colors are reversed, because OOo saves them as the oppsite of the SVG direction
             // see bug 137639
             QGradientStop start;
             start.first = (type != "radial") ? border : 1.0 - border;
-            start.second = QColor(e->attributeNS(KoXmlNS::draw, "start-color"));
-            start.second.setAlphaF(0.01 * e->attributeNS(KoXmlNS::draw, "start-intensity", "100").remove('%').toDouble());
+            start.second = QColor(e->attributeNS(KOdfXmlNS::draw, "start-color"));
+            start.second.setAlphaF(0.01 * e->attributeNS(KOdfXmlNS::draw, "start-intensity", "100").remove('%').toDouble());
 
             QGradientStop end;
             end.first = (type != "radial") ? 1.0 : 0.0;
-            end.second = QColor(e->attributeNS(KoXmlNS::draw, "end-color"));
-            end.second.setAlphaF(0.01 * e->attributeNS(KoXmlNS::draw, "end-intensity", "100").remove('%').toDouble());
+            end.second = QColor(e->attributeNS(KOdfXmlNS::draw, "end-color"));
+            end.second.setAlphaF(0.01 * e->attributeNS(KOdfXmlNS::draw, "end-intensity", "100").remove('%').toDouble());
 
             stops << start << end;
         } else {
             QGradientStop start;
             start.first = 0.5 * border;
-            start.second = QColor(e->attributeNS(KoXmlNS::draw, "end-color"));
-            start.second.setAlphaF(0.01 * e->attributeNS(KoXmlNS::draw, "end-intensity", "100").remove('%').toDouble());
+            start.second = QColor(e->attributeNS(KOdfXmlNS::draw, "end-color"));
+            start.second.setAlphaF(0.01 * e->attributeNS(KOdfXmlNS::draw, "end-intensity", "100").remove('%').toDouble());
 
             QGradientStop middle;
             middle.first = 0.5;
-            middle.second = QColor(e->attributeNS(KoXmlNS::draw, "start-color"));
-            middle.second.setAlphaF(0.01 * e->attributeNS(KoXmlNS::draw, "start-intensity", "100").remove('%').toDouble());
+            middle.second = QColor(e->attributeNS(KOdfXmlNS::draw, "start-color"));
+            middle.second.setAlphaF(0.01 * e->attributeNS(KOdfXmlNS::draw, "start-intensity", "100").remove('%').toDouble());
 
             QGradientStop end;
             end.first = 1.0 - 0.5 * border;
-            end.second = QColor(e->attributeNS(KoXmlNS::draw, "end-color"));
-            end.second.setAlphaF(0.01 * e->attributeNS(KoXmlNS::draw, "end-intensity", "100").remove('%').toDouble());
+            end.second = QColor(e->attributeNS(KOdfXmlNS::draw, "end-color"));
+            end.second.setAlphaF(0.01 * e->attributeNS(KOdfXmlNS::draw, "end-intensity", "100").remove('%').toDouble());
 
             stops << start << middle << end;
         }
 
         gradient->setStops(stops);
-    } else if (e->namespaceURI() == KoXmlNS::svg) {
+    } else if (e->namespaceURI() == KOdfXmlNS::svg) {
         if (e->localName() == "linearGradient") {
             QPointF start, stop;
-            start.setX(percent(*e, KoXmlNS::svg, "x1", "0%", size.width()));
-            start.setY(percent(*e, KoXmlNS::svg, "y1", "0%", size.height()));
-            stop.setX(percent(*e, KoXmlNS::svg, "x2", "100%", size.width()));
-            stop.setY(percent(*e, KoXmlNS::svg, "y2", "100%", size.height()));
+            start.setX(percent(*e, KOdfXmlNS::svg, "x1", "0%", size.width()));
+            start.setY(percent(*e, KOdfXmlNS::svg, "y1", "0%", size.height()));
+            stop.setX(percent(*e, KOdfXmlNS::svg, "x2", "100%", size.width()));
+            stop.setY(percent(*e, KOdfXmlNS::svg, "y2", "100%", size.height()));
             gradient = new QLinearGradient(start, stop);
         } else if (e->localName() == "radialGradient") {
             QPointF center, focalPoint;
-            center.setX(percent(*e, KoXmlNS::svg, "cx", "50%", size.width()));
-            center.setY(percent(*e, KoXmlNS::svg, "cy", "50%", size.height()));
-            qreal r = percent(*e, KoXmlNS::svg, "r", "50%", sqrt(size.width() * size.width() + size.height() * size.height()));
-            focalPoint.setX(percent(*e, KoXmlNS::svg, "fx", QString(), size.width()));
-            focalPoint.setY(percent(*e, KoXmlNS::svg, "fy", QString(), size.height()));
+            center.setX(percent(*e, KOdfXmlNS::svg, "cx", "50%", size.width()));
+            center.setY(percent(*e, KOdfXmlNS::svg, "cy", "50%", size.height()));
+            qreal r = percent(*e, KOdfXmlNS::svg, "r", "50%", sqrt(size.width() * size.width() + size.height() * size.height()));
+            focalPoint.setX(percent(*e, KOdfXmlNS::svg, "fx", QString(), size.width()));
+            focalPoint.setY(percent(*e, KOdfXmlNS::svg, "fy", QString(), size.height()));
             gradient = new QRadialGradient(center, r, focalPoint );
         }
         gradient->setCoordinateMode(QGradient::ObjectBoundingMode);
 
-        QString strSpread(e->attributeNS(KoXmlNS::svg, "spreadMethod", "pad"));
+        QString strSpread(e->attributeNS(KOdfXmlNS::svg, "spreadMethod", "pad"));
         if (strSpread == "repeat")
             gradient->setSpread(QGradient::RepeatSpread);
         else if (strSpread == "reflect")
@@ -386,33 +386,33 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &st
         else
             gradient->setSpread(QGradient::PadSpread);
 
-        if (e->hasAttributeNS(KoXmlNS::svg, "gradientTransform"))
-            transform = loadTransformation(e->attributeNS(KoXmlNS::svg, "gradientTransform", QString()));
+        if (e->hasAttributeNS(KOdfXmlNS::svg, "gradientTransform"))
+            transform = loadTransformation(e->attributeNS(KOdfXmlNS::svg, "gradientTransform", QString()));
 
         QGradientStops stops;
 
         // load stops
         KoXmlElement colorstop;
         forEachElement(colorstop, (*e)) {
-            if (colorstop.namespaceURI() == KoXmlNS::svg && colorstop.localName() == "stop") {
+            if (colorstop.namespaceURI() == KOdfXmlNS::svg && colorstop.localName() == "stop") {
                 QGradientStop stop;
-                stop.second = QColor(colorstop.attributeNS(KoXmlNS::svg, "stop-color", QString()));
-                stop.second.setAlphaF(colorstop.attributeNS(KoXmlNS::svg, "stop-opacity", "1.0").toDouble());
-                stop.first = colorstop.attributeNS(KoXmlNS::svg, "offset", "0.0").toDouble();
+                stop.second = QColor(colorstop.attributeNS(KOdfXmlNS::svg, "stop-color", QString()));
+                stop.second.setAlphaF(colorstop.attributeNS(KOdfXmlNS::svg, "stop-opacity", "1.0").toDouble());
+                stop.first = colorstop.attributeNS(KOdfXmlNS::svg, "offset", "0.0").toDouble();
                 stops.append(stop);
             }
         }
         gradient->setStops(stops);
-    } else if (e->namespaceURI() == KoXmlNS::koffice) {
+    } else if (e->namespaceURI() == KOdfXmlNS::koffice) {
         if (e->localName() == "conicalGradient") {
             QPointF center;
-            center.setX(percent(*e, KoXmlNS::svg, "cx", "50%", size.width()));
-            center.setY(percent(*e, KoXmlNS::svg, "cy", "50%", size.height()));
-            qreal angle = KUnit::parseValue(e->attributeNS(KoXmlNS::draw, "angle", QString()));
+            center.setX(percent(*e, KOdfXmlNS::svg, "cx", "50%", size.width()));
+            center.setY(percent(*e, KOdfXmlNS::svg, "cy", "50%", size.height()));
+            qreal angle = KUnit::parseValue(e->attributeNS(KOdfXmlNS::draw, "angle", QString()));
             gradient = new QConicalGradient(center, angle);
             gradient->setCoordinateMode(QGradient::ObjectBoundingMode);
 
-            QString strSpread(e->attributeNS(KoXmlNS::svg, "spreadMethod", "pad"));
+            QString strSpread(e->attributeNS(KOdfXmlNS::svg, "spreadMethod", "pad"));
             if (strSpread == "repeat")
                 gradient->setSpread(QGradient::RepeatSpread);
             else if (strSpread == "reflect")
@@ -420,19 +420,19 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &st
             else
                 gradient->setSpread(QGradient::PadSpread);
 
-            if (e->hasAttributeNS(KoXmlNS::svg, "gradientTransform"))
-                transform = loadTransformation(e->attributeNS(KoXmlNS::svg, "gradientTransform", QString()));
+            if (e->hasAttributeNS(KOdfXmlNS::svg, "gradientTransform"))
+                transform = loadTransformation(e->attributeNS(KOdfXmlNS::svg, "gradientTransform", QString()));
 
             QGradientStops stops;
 
             // load stops
             KoXmlElement colorstop;
             forEachElement(colorstop, (*e)) {
-                if (colorstop.namespaceURI() == KoXmlNS::svg && colorstop.localName() == "stop") {
+                if (colorstop.namespaceURI() == KOdfXmlNS::svg && colorstop.localName() == "stop") {
                     QGradientStop stop;
-                    stop.second = QColor(colorstop.attributeNS(KoXmlNS::svg, "stop-color", QString()));
-                    stop.second.setAlphaF(colorstop.attributeNS(KoXmlNS::svg, "stop-opacity", "1.0").toDouble());
-                    stop.first = colorstop.attributeNS(KoXmlNS::svg, "offset", "0.0").toDouble();
+                    stop.second = QColor(colorstop.attributeNS(KOdfXmlNS::svg, "stop-color", QString()));
+                    stop.second.setAlphaF(colorstop.attributeNS(KOdfXmlNS::svg, "stop-opacity", "1.0").toDouble());
+                    stop.first = colorstop.attributeNS(KOdfXmlNS::svg, "offset", "0.0").toDouble();
                     stops.append(stop);
                 }
             }
@@ -456,10 +456,10 @@ QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KOdfStyleStack &styleStack, co
 
     if (fill == "solid") {
         tmpBrush.setStyle(Qt::SolidPattern);
-        if (styleStack.hasProperty(KoXmlNS::draw, "fill-color"))
-            tmpBrush.setColor(styleStack.property(KoXmlNS::draw, "fill-color"));
-        if (styleStack.hasProperty(KoXmlNS::draw, "opacity")) {
-            QString opacity = styleStack.property(KoXmlNS::draw, "opacity");
+        if (styleStack.hasProperty(KOdfXmlNS::draw, "fill-color"))
+            tmpBrush.setColor(styleStack.property(KOdfXmlNS::draw, "fill-color"));
+        if (styleStack.hasProperty(KOdfXmlNS::draw, "opacity")) {
+            QString opacity = styleStack.property(KOdfXmlNS::draw, "opacity");
             if (! opacity.isEmpty() && opacity.right(1) == "%") {
                 float percent = opacity.left(opacity.length() - 1).toFloat();
                 QColor color = tmpBrush.color();
@@ -468,8 +468,8 @@ QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KOdfStyleStack &styleStack, co
             }
         }
         //TODO
-        if (styleStack.hasProperty(KoXmlNS::draw, "transparency")) {
-            QString transparency = styleStack.property(KoXmlNS::draw, "transparency");
+        if (styleStack.hasProperty(KOdfXmlNS::draw, "transparency")) {
+            QString transparency = styleStack.property(KOdfXmlNS::draw, "transparency");
             if (transparency == "94%") {
                 tmpBrush.setStyle(Qt::Dense1Pattern);
             } else if (transparency == "88%") {
@@ -493,7 +493,7 @@ QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KOdfStyleStack &styleStack, co
                 kDebug(30003) << " transparency is not defined into kpresenter :" << transparency;
         }
     } else if (fill == "hatch") {
-        QString style = styleStack.property(KoXmlNS::draw, "fill-hatch-name");
+        QString style = styleStack.property(KOdfXmlNS::draw, "fill-hatch-name");
         kDebug(30003) << " hatch style is  :" << style;
 
         //type not defined by default
@@ -502,23 +502,23 @@ QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KOdfStyleStack &styleStack, co
         if (draw) {
             kDebug(30003) << "We have a style";
             int angle = 0;
-            if (draw->hasAttributeNS(KoXmlNS::draw, "rotation")) {
-                angle = (draw->attributeNS(KoXmlNS::draw, "rotation", QString()).toInt()) / 10;
+            if (draw->hasAttributeNS(KOdfXmlNS::draw, "rotation")) {
+                angle = (draw->attributeNS(KOdfXmlNS::draw, "rotation", QString()).toInt()) / 10;
                 kDebug(30003) << "angle :" << angle;
             }
-            if (draw->hasAttributeNS(KoXmlNS::draw, "color")) {
-                //kDebug(30003)<<" draw:color :"<<draw->attributeNS( KoXmlNS::draw,"color", QString() );
-                tmpBrush.setColor(draw->attributeNS(KoXmlNS::draw, "color", QString()));
+            if (draw->hasAttributeNS(KOdfXmlNS::draw, "color")) {
+                //kDebug(30003)<<" draw:color :"<<draw->attributeNS( KOdfXmlNS::draw,"color", QString() );
+                tmpBrush.setColor(draw->attributeNS(KOdfXmlNS::draw, "color", QString()));
             }
-            if (draw->hasAttributeNS(KoXmlNS::draw, "distance")) {
+            if (draw->hasAttributeNS(KOdfXmlNS::draw, "distance")) {
                 //todo implemente it into kpresenter
             }
-            if (draw->hasAttributeNS(KoXmlNS::draw, "display-name")) {
+            if (draw->hasAttributeNS(KOdfXmlNS::draw, "display-name")) {
                 //todo implement it into kpresenter
             }
-            if (draw->hasAttributeNS(KoXmlNS::draw, "style")) {
+            if (draw->hasAttributeNS(KOdfXmlNS::draw, "style")) {
                 //todo implemente it into kpresenter
-                QString styleHash = draw->attributeNS(KoXmlNS::draw, "style", QString());
+                QString styleHash = draw->attributeNS(KOdfXmlNS::draw, "style", QString());
                 if (styleHash == "single") {
                     switch (angle) {
                     case 0:
@@ -581,36 +581,36 @@ QPen KoOdfGraphicStyles::loadOdfStrokeStyle(const KOdfStyleStack &styleStack, co
         // is zero till defined otherwise with the following attributes.
         tmpPen = QPen();
 
-        if (styleStack.hasProperty(KoXmlNS::svg, "stroke-color"))
-            tmpPen.setColor(styleStack.property(KoXmlNS::svg, "stroke-color"));
-        if (styleStack.hasProperty(KoXmlNS::svg, "stroke-opacity")) {
+        if (styleStack.hasProperty(KOdfXmlNS::svg, "stroke-color"))
+            tmpPen.setColor(styleStack.property(KOdfXmlNS::svg, "stroke-color"));
+        if (styleStack.hasProperty(KOdfXmlNS::svg, "stroke-opacity")) {
             QColor color = tmpPen.color();
-            QString opacity = styleStack.property(KoXmlNS::svg, "stroke-opacity");
+            QString opacity = styleStack.property(KOdfXmlNS::svg, "stroke-opacity");
             if (opacity.endsWith('%'))
                 color.setAlphaF(0.01 * opacity.remove('%').toDouble());
             else
                 color.setAlphaF(opacity.toDouble());
             tmpPen.setColor(color);
         }
-        if (styleStack.hasProperty(KoXmlNS::svg, "stroke-width"))
-            tmpPen.setWidthF(KUnit::parseValue(styleStack.property(KoXmlNS::svg, "stroke-width")));
-        if (styleStack.hasProperty(KoXmlNS::draw, "stroke-linejoin")) {
-            QString join = styleStack.property(KoXmlNS::draw, "stroke-linejoin");
+        if (styleStack.hasProperty(KOdfXmlNS::svg, "stroke-width"))
+            tmpPen.setWidthF(KUnit::parseValue(styleStack.property(KOdfXmlNS::svg, "stroke-width")));
+        if (styleStack.hasProperty(KOdfXmlNS::draw, "stroke-linejoin")) {
+            QString join = styleStack.property(KOdfXmlNS::draw, "stroke-linejoin");
             if (join == "bevel")
                 tmpPen.setJoinStyle(Qt::BevelJoin);
             else if (join == "round")
                 tmpPen.setJoinStyle(Qt::RoundJoin);
             else {
                 tmpPen.setJoinStyle(Qt::MiterJoin);
-                if (styleStack.hasProperty(KoXmlNS::koffice, "stroke-miterlimit")) {
-                    QString miterLimit = styleStack.property(KoXmlNS::koffice, "stroke-miterlimit");
+                if (styleStack.hasProperty(KOdfXmlNS::koffice, "stroke-miterlimit")) {
+                    QString miterLimit = styleStack.property(KOdfXmlNS::koffice, "stroke-miterlimit");
                     tmpPen.setMiterLimit(miterLimit.toDouble());
                 }
             }
         }
 
-        if (stroke == "dash" && styleStack.hasProperty(KoXmlNS::draw, "stroke-dash")) {
-            QString dashStyleName = styleStack.property(KoXmlNS::draw, "stroke-dash");
+        if (stroke == "dash" && styleStack.hasProperty(KOdfXmlNS::draw, "stroke-dash")) {
+            QString dashStyleName = styleStack.property(KOdfXmlNS::draw, "stroke-dash");
 
             // set width to 1 in case it is 0 as dividing by 0 gives infinity
             qreal width = tmpPen.width();
@@ -621,13 +621,13 @@ QPen KoOdfGraphicStyles::loadOdfStrokeStyle(const KOdfStyleStack &styleStack, co
             KoXmlElement * dashElement = stylesReader.drawStyles()[ dashStyleName ];
             if (dashElement) {
                 QVector<qreal> dashes;
-                if (dashElement->hasAttributeNS(KoXmlNS::draw, "dots1")) {
-                    qreal dotLength = KUnit::parseValue(dashElement->attributeNS(KoXmlNS::draw, "dots1-length", QString()));
+                if (dashElement->hasAttributeNS(KOdfXmlNS::draw, "dots1")) {
+                    qreal dotLength = KUnit::parseValue(dashElement->attributeNS(KOdfXmlNS::draw, "dots1-length", QString()));
                     dashes.append(dotLength / width);
-                    qreal dotDistance = KUnit::parseValue(dashElement->attributeNS(KoXmlNS::draw, "distance", QString()));
+                    qreal dotDistance = KUnit::parseValue(dashElement->attributeNS(KOdfXmlNS::draw, "distance", QString()));
                     dashes.append(dotDistance / width);
-                    if (dashElement->hasAttributeNS(KoXmlNS::draw, "dots2")) {
-                        dotLength = KUnit::parseValue(dashElement->attributeNS(KoXmlNS::draw, "dots2-length", QString()));
+                    if (dashElement->hasAttributeNS(KOdfXmlNS::draw, "dots2")) {
+                        dotLength = KUnit::parseValue(dashElement->attributeNS(KOdfXmlNS::draw, "dots2-length", QString()));
                         dashes.append(dotLength / width);
                         dashes.append(dotDistance / width);
                     }
