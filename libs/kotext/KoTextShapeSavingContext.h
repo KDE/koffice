@@ -24,7 +24,7 @@
 
 #include <KoShapeSavingContext.h>
 
-class KoGenChanges;
+class KOdfGenericChanges;
 
 /**
  * The set of data for the ODF file format used during saving of a shape.
@@ -41,7 +41,7 @@ public:
      * @param changes for saving the tracked changes
      */
     KoTextShapeSavingContext(KoXmlWriter &xmlWriter, KoGenStyles& mainStyles,
-                         KoEmbeddedDocumentSaver& embeddedSaver, KoGenChanges& changes);
+                         KoEmbeddedDocumentSaver& embeddedSaver, KOdfGenericChanges& changes);
     virtual ~KoTextShapeSavingContext();
 
     /**
@@ -49,11 +49,11 @@ public:
      *
      * @return changes (tracked)
      */
-    KoGenChanges &changes();
+    KOdfGenericChanges &changes();
 
 
 private:
-    KoGenChanges &m_changes;
+    KOdfGenericChanges &m_changes;
 };
 
 #endif

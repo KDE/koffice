@@ -19,12 +19,12 @@
 
 #include "KoTextShapeSavingContext.h"
 
-#include <KoGenChanges.h>
+#include <KOdfGenericChanges.h>
 
 #include <kdebug.h>
 
 KoTextShapeSavingContext::KoTextShapeSavingContext(KoXmlWriter &xmlWriter, KoGenStyles& mainStyles,
-        KoEmbeddedDocumentSaver& embeddedSaver, KoGenChanges& changes)
+        KoEmbeddedDocumentSaver& embeddedSaver, KOdfGenericChanges& changes)
         : KoShapeSavingContext(xmlWriter, mainStyles, embeddedSaver)
     , m_changes(changes)
 {
@@ -34,7 +34,7 @@ KoTextShapeSavingContext::~KoTextShapeSavingContext()
 {
 }
 
-KoGenChanges & KoTextShapeSavingContext::changes()
+KOdfGenericChanges & KoTextShapeSavingContext::changes()
 {
     return m_changes;
 }

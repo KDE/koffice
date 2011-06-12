@@ -29,13 +29,13 @@
 
 #include <kdebug.h>
 
-class KoGenChanges;
+class KOdfGenericChanges;
 class KoXmlWriter;
 
 /**
  * A generic change, i.e. basically a collection of properties and a name.
- * Instances of KOdfGenericChange can either be held in the KoGenChanges collection,
- * or created (e.g. on the stack) and given to KoGenChanges::insert.
+ * Instances of KOdfGenericChange can either be held in the KOdfGenericChanges collection,
+ * or created (e.g. on the stack) and given to KOdfGenericChanges::insert.
  *
  * Derived from code from KoGenStyle
  */
@@ -59,7 +59,7 @@ public:
     };
 
     /**
-     * Start the definition of a new change. Its name will be set later by KoGenChanges::insert(),
+     * Start the definition of a new change. Its name will be set later by KOdfGenericChanges::insert(),
      * but first you must define its properties and attributes.
      *
      */

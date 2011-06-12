@@ -30,7 +30,7 @@
 
 #include <KoStore.h>
 #include <KoGenStyles.h>
-#include <KoGenChanges.h>
+#include <KOdfGenericChanges.h>
 #include <KoOdfWriteStore.h>
 #include <KoXmlWriter.h>
 #include <KoOdfDocument.h>
@@ -86,7 +86,7 @@ bool KoTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
     KoGenStyles mainStyles;
     KoXmlWriter *bodyWriter = odfStore.bodyWriter();
     KoShapeSavingContext * context = helper.context(bodyWriter, mainStyles, embeddedSaver);
-    KoGenChanges changes;
+    KOdfGenericChanges changes;
 
     KoSharedSavingData *sharedData = context->sharedData(KOTEXT_SHARED_SAVING_ID);
     KoTextSharedSavingData *textSharedData = 0;

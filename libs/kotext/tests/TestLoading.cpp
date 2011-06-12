@@ -60,7 +60,7 @@
 #include <KoTextDocument.h>
 #include <kstandarddirs.h>
 
-#include <KoGenChanges.h>
+#include <KOdfGenericChanges.h>
 #include <KoChangeTracker.h>
 
 typedef KoText::Tab KoTextTab;
@@ -1052,7 +1052,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
     Q_UNUSED(styleMan);
     KoEmbeddedDocumentSaver embeddedSaver;
 
-    KoGenChanges changes;
+    KOdfGenericChanges changes;
     KoShapeSavingContext context(xmlWriter, mainStyles, embeddedSaver);
 
     KoSharedSavingData *sharedData = context.sharedData(KOTEXT_SHARED_SAVING_ID);

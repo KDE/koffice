@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoGenChanges.h"
+#include "KOdfGenericChanges.h"
 #include <KoXmlWriter.h>
 
 #include <QtCore/QList>
@@ -29,10 +29,10 @@
 
 #include <kdebug.h>
 
-class KoGenChanges::Private
+class KOdfGenericChanges::Private
 {
 public:
-    Private(KoGenChanges *q) : q(q) { }
+    Private(KOdfGenericChanges *q) : q(q) { }
 
     QString makeUniqueName(const QString &base) const;
 
@@ -52,20 +52,20 @@ public:
     QList<NamedChange> changeArray;
     QMap<KOdfGenericChange, QString> ::iterator insertChange(const KOdfGenericChange &change, const QString &name);
 
-    KoGenChanges *q;
+    KOdfGenericChanges *q;
 };
 
-KoGenChanges::KoGenChanges()
+KOdfGenericChanges::KOdfGenericChanges()
     : d(new Private(this))
 {
 }
 
-KoGenChanges::~KoGenChanges()
+KOdfGenericChanges::~KOdfGenericChanges()
 {
     delete d;
 }
 
-QString KoGenChanges::insert(const KOdfGenericChange& change, const QString& name)
+QString KOdfGenericChanges::insert(const KOdfGenericChange& change, const QString& name)
 {
     QMap<KOdfGenericChange, QString> ::iterator it = d->changeMap.find(change);
     if (it == d->changeMap.end()) {
@@ -74,7 +74,7 @@ QString KoGenChanges::insert(const KOdfGenericChange& change, const QString& nam
     return it.value();
 }
 
-QMap<KOdfGenericChange, QString>::iterator KoGenChanges::Private::insertChange(const KOdfGenericChange &change, const QString &name)
+QMap<KOdfGenericChange, QString>::iterator KOdfGenericChanges::Private::insertChange(const KOdfGenericChange &change, const QString &name)
 {
     QString changeName(name);
     if (changeName.isEmpty()) {
@@ -97,12 +97,12 @@ QMap<KOdfGenericChange, QString>::iterator KoGenChanges::Private::insertChange(c
     return it;
 }
 
-QMap<KOdfGenericChange, QString> KoGenChanges::changes() const
+QMap<KOdfGenericChange, QString> KOdfGenericChanges::changes() const
 {
     return d->changeMap;
 }
 
-QString KoGenChanges::Private::makeUniqueName(const QString& base) const
+QString KOdfGenericChanges::Private::makeUniqueName(const QString& base) const
 {
     if (!changeNames.contains(base))
         return base;
@@ -115,10 +115,10 @@ QString KoGenChanges::Private::makeUniqueName(const QString& base) const
     return name;
 }
 
-const KOdfGenericChange* KoGenChanges::change(const QString& name) const
+const KOdfGenericChange* KOdfGenericChanges::change(const QString& name) const
 {
-    QList<KoGenChanges::Private::NamedChange>::const_iterator it = d->changeArray.constBegin();
-    const QList<KoGenChanges::Private::NamedChange>::const_iterator end = d->changeArray.constEnd();
+    QList<KOdfGenericChanges::Private::NamedChange>::const_iterator it = d->changeArray.constBegin();
+    const QList<KOdfGenericChanges::Private::NamedChange>::const_iterator end = d->changeArray.constEnd();
     for (; it != end ; ++it) {
         if ((*it).name == name)
             return (*it).change;
@@ -126,7 +126,7 @@ const KOdfGenericChange* KoGenChanges::change(const QString& name) const
     return 0;
 }
 
-void KoGenChanges::saveOdfChanges(KoXmlWriter* xmlWriter) const
+void KOdfGenericChanges::saveOdfChanges(KoXmlWriter* xmlWriter) const
 {
     QMap<KOdfGenericChange, QString> changesList = changes();
     QMap<KOdfGenericChange, QString>::const_iterator it = changesList.constBegin();

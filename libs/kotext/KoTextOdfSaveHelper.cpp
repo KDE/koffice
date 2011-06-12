@@ -22,7 +22,7 @@
 #include <KoXmlWriter.h>
 #include <KoOdf.h>
 #include "KoTextShapeData.h"
-#include <KoGenChanges.h>
+#include <KOdfGenericChanges.h>
 #include <KoShapeSavingContext.h>
 
 #include <opendocument/KoTextSharedSavingData.h>

@@ -28,7 +28,7 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 
 #define KOTEXT_SHARED_SAVING_ID "KoTextSharedSavingId"
 
-class KoGenChanges;
+class KOdfGenericChanges;
 
 namespace Soprano
 {
@@ -41,9 +41,9 @@ public:
     KoTextSharedSavingData();
     virtual ~KoTextSharedSavingData();
 
-    void setGenChanges(KoGenChanges &changes);
+    void setGenChanges(KOdfGenericChanges &changes);
 
-    KoGenChanges& genChanges();
+    KOdfGenericChanges& genChanges();
 
     void addRdfIdMapping(QString oldid, QString newid);
     QMap<QString, QString> getRdfIdMapping();

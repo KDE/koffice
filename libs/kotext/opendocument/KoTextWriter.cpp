@@ -64,7 +64,7 @@
 #include <changetracker/KoDeleteChangeMarker.h>
 #include <KoFormatChangeInformation_p.h>
 #include <KOdfGenericChange.h>
-#include <KoGenChanges.h>
+#include <KOdfGenericChanges.h>
 #include <rdf/KoDocumentRdfBase.h>
 
 #ifdef SHOULD_BUILD_RDF
@@ -560,7 +560,7 @@ KoTextWriter::KoTextWriter(KoShapeSavingContext &context, KoDocumentRdfBase *rdf
 
     if (!d->sharedData) {
         d->sharedData = new KoTextSharedSavingData();
-        KoGenChanges *changes = new KoGenChanges();
+        KOdfGenericChanges *changes = new KOdfGenericChanges();
         d->sharedData->setGenChanges(*changes);
         if (!sharedData) {
             context.addSharedData(KOTEXT_SHARED_SAVING_ID, d->sharedData);

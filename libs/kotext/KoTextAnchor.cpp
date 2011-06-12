@@ -43,7 +43,7 @@
 #include "changetracker/KoChangeTrackerElement.h"
 #include "styles/KoCharacterStyle.h"
 #include "KoTextDocument.h"
-#include <KoGenChanges.h>
+#include <KOdfGenericChanges.h>
 
 // #define DEBUG_PAINTING
 

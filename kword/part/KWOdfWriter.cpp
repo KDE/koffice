@@ -37,7 +37,7 @@
 #include <KoShapeGroup.h>
 #include <KoShapeLayer.h>
 
-#include <KoGenChanges.h>
+#include <KOdfGenericChanges.h>
 #include <KoTextSharedSavingData.h>
 
 #include <KoStoreDevice.h>
@@ -48,7 +48,7 @@
 #include <KDebug>
 #include <ktemporaryfile.h>
 
-QByteArray KWOdfWriter::serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGenStyles &mainStyles, KoGenChanges  &changes, KWTextFrameSet *fs)
+QByteArray KWOdfWriter::serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGenStyles &mainStyles, KOdfGenericChanges  &changes, KWTextFrameSet *fs)
 {
     QByteArray tag;
     switch (fs->textFrameSetType()) {
@@ -82,7 +82,7 @@ QByteArray KWOdfWriter::serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedS
 }
 
 // rename to save pages ?
-void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGenStyles &mainStyles, KoGenChanges &changes)
+void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGenStyles &mainStyles, KOdfGenericChanges &changes)
 {
     //kDebug(32001)<< "START saveHeaderFooter ############################################";
     // first get all the framesets in a nice quick-to-access data structure
@@ -206,7 +206,7 @@ bool KWOdfWriter::save(KoOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embed
 
     KoGenStyles mainStyles;
 
-    KoGenChanges changes;
+    KOdfGenericChanges changes;
 
     // Save the named styles
     KoStyleManager *styleManager = m_document->resourceManager()->resource(KoText::StyleManager).value<KoStyleManager*>();

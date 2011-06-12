@@ -23,7 +23,7 @@
 #include "kotext_export.h"
 
 #include <KOdfGenericChange.h>
-#include <KoGenChanges.h>
+#include <KOdfGenericChanges.h>
 
 //Qt includes
 #include <QObject>
