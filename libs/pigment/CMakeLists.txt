@@ -83,29 +83,33 @@ set_target_properties(pigmentcms PROPERTIES
 install(TARGETS pigmentcms  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
+    colorspaces/KoAlphaColorSpace.h
+    KoMixColorsOp.h
+    KoConvolutionOp.h
     KoBasicHistogramProducers.h
-    KoColor.h
+    KoChannelInfo.h
+    KoColorConversions.h
     KoColorConversionSystem.h
-    KoColorConversionTransformation.h
     KoColorConversionTransformationAbstractFactory.h
     KoColorConversionTransformationFactory.h
-    KoColorConversions.h
+    KoColorConversionTransformation.h
+    KoColor.h
     KoColorModelStandardIds.h
     KoColorProfile.h
-    KoColorSpace.h
+    KoColorSpaceConstants.h
     KoColorSpaceEngine.h
     KoColorSpaceFactory.h
+    KoColorSpace.h
     KoColorSpaceMaths.h
     KoColorSpaceRegistry.h
-    KoColorTransformation.h
     KoColorTransformationFactory.h
     KoColorTransformationFactoryRegistry.h
+    KoColorTransformation.h
     KoCompositeOp.h
     KoFallBackColorTransformation.h
     KoHistogramProducer.h
     KoMultipleColorConversionTransformation.h
     KoUniqueNumberForIdServer.h
-    colorspaces/KoAlphaColorSpace.h
     pigment_export.h
     resources/KoAbstractGradient.h
     resources/KoColorSet.h
