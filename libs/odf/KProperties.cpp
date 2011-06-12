@@ -18,45 +18,45 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "KoProperties.h"
+#include "KProperties.h"
 
 #include <qdom.h>
 #include <QString>
 
-class KoProperties::Private
+class KProperties::Private
 {
 public:
     QMap<QString, QVariant> properties;
 };
 
-KoProperties::KoProperties()
+KProperties::KProperties()
         : d(new Private())
 {
 }
 
-KoProperties::KoProperties(const KoProperties & rhs)
+KProperties::KProperties(const KProperties & rhs)
         : d(new Private())
 {
     d->properties = rhs.d->properties;
 }
 
-KoProperties::~KoProperties()
+KProperties::~KProperties()
 {
     delete d;
 }
 
-QMapIterator<QString, QVariant> KoProperties::propertyIterator() const
+QMapIterator<QString, QVariant> KProperties::propertyIterator() const
 {
     return QMapIterator<QString, QVariant>(d->properties);
 }
 
 
-bool KoProperties::isEmpty() const
+bool KProperties::isEmpty() const
 {
     return d->properties.isEmpty();
 }
 
-void  KoProperties::load(const QDomElement &root)
+void  KProperties::load(const QDomElement &root)
 {
     d->properties.clear();
 
@@ -81,7 +81,7 @@ void  KoProperties::load(const QDomElement &root)
     }
 }
 
-bool KoProperties::load(const QString & s)
+bool KProperties::load(const QString & s)
 {
     QDomDocument doc;
 
@@ -92,7 +92,7 @@ bool KoProperties::load(const QString & s)
     return true;
 }
 
-void KoProperties::save(QDomElement &root) const
+void KProperties::save(QDomElement &root) const
 {
     QDomDocument doc = root.ownerDocument();
     QMap<QString, QVariant>::Iterator it;
@@ -111,7 +111,7 @@ void KoProperties::save(QDomElement &root) const
     }
 }
 
-QString KoProperties::store(const QString &s) const
+QString KProperties::store(const QString &s) const
 {
     QDomDocument doc = QDomDocument(s);
     QDomElement root = doc.createElement(s);
@@ -121,13 +121,13 @@ QString KoProperties::store(const QString &s) const
     return doc.toString();
 }
 
-void KoProperties::setProperty(const QString & name, const QVariant & value)
+void KProperties::setProperty(const QString & name, const QVariant & value)
 {
     // If there's an existing value for this name already, replace it.
     d->properties.insert(name, value);
 }
 
-bool KoProperties::property(const QString & name, QVariant & value) const
+bool KProperties::property(const QString & name, QVariant & value) const
 {
     QMap<QString, QVariant>::const_iterator it = d->properties.constFind(name);
     if (it == d->properties.constEnd()) {
@@ -138,13 +138,13 @@ bool KoProperties::property(const QString & name, QVariant & value) const
     }
 }
 
-QVariant KoProperties::property(const QString & name) const
+QVariant KProperties::property(const QString & name) const
 {
     return d->properties.value(name, QVariant());
 }
 
 
-int KoProperties::intProperty(const QString & name, int def) const
+int KProperties::intProperty(const QString & name, int def) const
 {
     const QVariant v = property(name);
     if (v.isValid())
@@ -154,7 +154,7 @@ int KoProperties::intProperty(const QString & name, int def) const
 
 }
 
-qreal KoProperties::doubleProperty(const QString & name, qreal def) const
+qreal KProperties::doubleProperty(const QString & name, qreal def) const
 {
     const QVariant v = property(name);
     if (v.isValid())
@@ -163,7 +163,7 @@ qreal KoProperties::doubleProperty(const QString & name, qreal def) const
         return def;
 }
 
-bool KoProperties::boolProperty(const QString & name, bool def) const
+bool KProperties::boolProperty(const QString & name, bool def) const
 {
     const QVariant v = property(name);
     if (v.isValid())
@@ -172,7 +172,7 @@ bool KoProperties::boolProperty(const QString & name, bool def) const
         return def;
 }
 
-QString KoProperties::stringProperty(const QString & name, const QString & def) const
+QString KProperties::stringProperty(const QString & name, const QString & def) const
 {
     const QVariant v = property(name);
     if (v.isValid())
@@ -181,17 +181,17 @@ QString KoProperties::stringProperty(const QString & name, const QString & def) 
         return def;
 }
 
-bool KoProperties::contains(const QString & key) const
+bool KProperties::contains(const QString & key) const
 {
     return d->properties.contains(key);
 }
 
-QVariant KoProperties::value(const QString & key) const
+QVariant KProperties::value(const QString & key) const
 {
     return d->properties.value(key);
 }
 
-bool KoProperties::operator==(const KoProperties &other) const
+bool KProperties::operator==(const KProperties &other) const
 {
     if (d->properties.count() != other.d->properties.count())
         return false;

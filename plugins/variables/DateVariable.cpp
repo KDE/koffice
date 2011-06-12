@@ -21,7 +21,7 @@
 #include "DateVariable.h"
 #include "FixedDateFormat.h"
 
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
@@ -116,7 +116,7 @@ bool DateVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
     return true;
 }
 
-void DateVariable::readProperties(const KoProperties *props)
+void DateVariable::readProperties(const KProperties *props)
 {
     m_definition = props->stringProperty("definition");
     if (!props->stringProperty("time").isEmpty())

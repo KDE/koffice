@@ -33,7 +33,7 @@ public:
      */
     InfoVariable();
 
-    void readProperties(const KoProperties *props);
+    void readProperties(const KProperties *props);
 
     void propertyChanged(Property property, const QVariant &value);
 

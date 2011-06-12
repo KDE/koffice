@@ -19,12 +19,12 @@
 #include "KoPropertiesTest.h"
 
 #include <qtest_kde.h>
-#include <KoProperties.h>
+#include <KProperties.h>
 
 void KoPropertiesTest::testDeserialization()
 {
     QString test = "";
-    KoProperties props;
+    KProperties props;
     props.setProperty("bla", "bla");
 
     QVERIFY(!props.load(test));
@@ -45,7 +45,7 @@ void KoPropertiesTest::testDeserialization()
 
 void KoPropertiesTest::testRoundTrip()
 {
-    KoProperties props;
+    KProperties props;
     props.setProperty("string", "string");
     props.setProperty("xmlstring", "<xml>bla</xml>");
     props.setProperty("xmlstring2", "<xml>&adsa</xml>");
@@ -55,7 +55,7 @@ void KoPropertiesTest::testRoundTrip()
     props.setProperty("qreal",  1.38);
 
     QString stored = props.store("KoPropertiesTest");
-    KoProperties restored;
+    KProperties restored;
     restored.load(stored);
 
     QVERIFY(restored.stringProperty("string") == "string");
@@ -70,7 +70,7 @@ void KoPropertiesTest::testRoundTrip()
 
 void KoPropertiesTest::testProperties()
 {
-    KoProperties props;
+    KProperties props;
     QVERIFY(props.isEmpty());
 
     QString visible = "visible";
@@ -117,21 +117,21 @@ void KoPropertiesTest::testProperties()
 
 }
 
-bool checkProps(const KoProperties & props)
+bool checkProps(const KProperties & props)
 {
     return (props.value("bla") == 1);
 }
 
 void KoPropertiesTest::testPassAround()
 {
-    KoProperties props;
+    KProperties props;
     props.setProperty("bla", 1);
     QVERIFY(checkProps(props));
 
-    KoProperties props2 = props;
+    KProperties props2 = props;
     QVERIFY(checkProps(props2));
 
-    KoProperties props3(props);
+    KProperties props3(props);
     checkProps(props3);
     props3.setProperty("bla", 3);
     QVERIFY(props3.value("bla") == 3);

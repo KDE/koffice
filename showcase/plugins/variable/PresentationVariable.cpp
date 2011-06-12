@@ -28,7 +28,7 @@
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <kdebug.h>
 #include <KoShape.h>
 #include <KoShapeSavingContext.h>
@@ -44,7 +44,7 @@ PresentationVariable::PresentationVariable()
 {
 }
 
-void PresentationVariable::setProperties(const KoProperties *props)
+void PresentationVariable::setProperties(const KProperties *props)
 {
     switch (props->intProperty("vartype")) {
     case 1:

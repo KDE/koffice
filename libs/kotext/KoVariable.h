@@ -32,7 +32,7 @@ class QTextInlineObject;
 class QTextDocument;
 class KoShape;
 class KoShapeLoadingContext;
-class KoProperties;
+class KProperties;
 class QWidget;
 class KoVariableManager;
 class KoVariablePrivate;
@@ -76,7 +76,7 @@ public:
      * attributes from the ODF file (if applicable), so it would be useful to synchronize
      * the property names based on that.
      */
-    virtual void setProperties(const KoProperties *props) {
+    virtual void setProperties(const KProperties *props) {
         Q_UNUSED(props);
     }
 

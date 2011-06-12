@@ -25,7 +25,7 @@
 #include "PresentationVariableFactory.h"
 #include "PresentationVariable.h"
 
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoXmlNS.h>
 
 #include <klocale.h>
@@ -37,7 +37,7 @@ PresentationVariableFactory::PresentationVariableFactory(QObject *parent)
     KoInlineObjectTemplate var1;
     var1.id = "Header";
     var1.name = i18n("Header");
-    KoProperties *props = new KoProperties();
+    KProperties *props = new KProperties();
     props->setProperty("vartype", 1);
     var1.properties = props;
     //addTemplate(var1);
@@ -45,7 +45,7 @@ PresentationVariableFactory::PresentationVariableFactory(QObject *parent)
     KoInlineObjectTemplate var2;
     var2.id = "Footer";
     var2.name = i18n("Footer");
-    props = new KoProperties();
+    props = new KProperties();
     props->setProperty("vartype", 2);
     var2.properties = props;
     //addTemplate(var2);
@@ -55,7 +55,7 @@ PresentationVariableFactory::PresentationVariableFactory(QObject *parent)
     setOdfElementNames(KoXmlNS::presentation, elementNames);
 }
 
-KoInlineObject *PresentationVariableFactory::createInlineObject(const KoProperties *properties) const
+KoInlineObject *PresentationVariableFactory::createInlineObject(const KProperties *properties) const
 {
     PresentationVariable *var = new PresentationVariable();
     if (properties)

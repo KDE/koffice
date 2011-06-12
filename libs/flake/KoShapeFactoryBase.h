@@ -32,7 +32,7 @@
 #include <KoXmlReader.h>
 
 class KoShape;
-class KoProperties;
+class KProperties;
 class KoShapeConfigFactoryBase;
 class KoShapeConfigWidgetBase;
 class KoShapeLoadingContext;
@@ -43,7 +43,7 @@ class KoResourceManager;
 #define SHAPEID_MIMETYPE "application/x-flake-shapeId"
 
 /**
- * Contains a KoProperties object that describes the settings of a
+ * Contains a KProperties object that describes the settings of a
  * particular variant of a shape object, together with a name, a description
  * and an icon for use in the user interface.
  */
@@ -61,7 +61,7 @@ struct FLAKE_EXPORT KoShapeTemplate {
      * The properties which, when passed to the KoShapeFactoryBase::createShape() method
      * result in the shape this template represents.
      */
-    KoProperties *properties;
+    KProperties *properties;
 };
 
 /**
@@ -222,7 +222,7 @@ public:
      * @see createDefaultShape() newDocumentResourceManager()
      * @see KoShapeTemplate::properties
      */
-    virtual KoShape *createShape(const KoProperties *params, KoResourceManager *documentResources = 0) const;
+    virtual KoShape *createShape(const KProperties *params, KoResourceManager *documentResources = 0) const;
 
 protected:
 

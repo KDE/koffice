@@ -43,7 +43,7 @@ public:
      */
     PresentationVariable();
 
-    void setProperties(const KoProperties *props);
+    void setProperties(const KProperties *props);
 
     ///reimplemented
     void saveOdf(KoShapeSavingContext &context);

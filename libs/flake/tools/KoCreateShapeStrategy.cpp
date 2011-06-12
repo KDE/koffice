@@ -39,7 +39,7 @@ KoCreateShapeStrategy::KoCreateShapeStrategy(KoCreateShapesTool *tool, const QPo
     KoCreateShapesTool *parent = static_cast<KoCreateShapesTool*>(d_ptr->tool);
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value(parent->shapeId());
     if (factory) {
-        const KoProperties *props = parent->shapeProperties();
+        const KProperties *props = parent->shapeProperties();
         KoShape *shape;
         if (props) {
             shape = factory->createShape(props);
@@ -63,7 +63,7 @@ QUndoCommand* KoCreateShapeStrategy::createCommand(QUndoCommand *parentCommand)
         return 0;
     }
 
-    const KoProperties *props = parent->shapeProperties();
+    const KProperties *props = parent->shapeProperties();
     KoShape *shape;
     if (props)
         shape = factory->createShape(props, parent->canvas()->shapeController()->resourceManager());

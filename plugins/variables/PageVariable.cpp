@@ -24,7 +24,7 @@
 
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoXmlNS.h>
 #include <KoShape.h>
 #include <KoShapeSavingContext.h>
@@ -41,7 +41,7 @@ PageVariable::PageVariable()
 {
 }
 
-void PageVariable::readProperties(const KoProperties *props)
+void PageVariable::readProperties(const KProperties *props)
 {
     switch (props->intProperty("vartype")) {
     case 1:

@@ -21,7 +21,7 @@
 #include "enhancedpath/EnhancedPathShape.h"
 
 #include <KoLineBorder.h>
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoColorBackground.h>
@@ -76,7 +76,7 @@ KoShape *EnhancedPathShapeFactory::createDefaultShape(KoResourceManager *) const
     return shape;
 }
 
-KoShape *EnhancedPathShapeFactory::createShape(const KoProperties *params, KoResourceManager *) const
+KoShape *EnhancedPathShapeFactory::createShape(const KProperties *params, KoResourceManager *) const
 {
     QRectF viewBox(0, 0, 100, 100);
     QVariant viewboxData;
@@ -117,11 +117,11 @@ KoShape *EnhancedPathShapeFactory::createShape(const KoProperties *params, KoRes
     return shape;
 }
 
-KoProperties* EnhancedPathShapeFactory::dataToProperties(
+KProperties* EnhancedPathShapeFactory::dataToProperties(
     const QString &modifiers, const QStringList &commands,
     const ListType &handles, const ComplexType & formulae) const
 {
-    KoProperties *props = new KoProperties();
+    KProperties *props = new KProperties();
     props->setProperty("modifiers", modifiers);
     props->setProperty("commands", commands);
     props->setProperty("handles", handles);

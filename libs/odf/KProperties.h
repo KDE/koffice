@@ -28,24 +28,24 @@
 class QDomElement;
 
 /**
- * A KoProperties is the (de-)serializable representation of
+ * A KProperties is the (de-)serializable representation of
  * a key-value map. The serialisation format is XML.
  */
-class KOODF_EXPORT KoProperties
+class KOODF_EXPORT KProperties
 {
 public:
 
     /**
      * Create a new properties object
      */
-    KoProperties();
+    KProperties();
 
     /**
      * Copy constructor
      */
-    KoProperties(const KoProperties &other);
+    KProperties(const KProperties &other);
 
-    ~KoProperties();
+    ~KProperties();
 
 public:
 
@@ -76,7 +76,7 @@ public:
     QMapIterator<QString, QVariant> propertyIterator() const;
 
     /**
-     * @return true if this KoProperties object does not contain any
+     * @return true if this KProperties object does not contain any
      * properties.
      */
     bool isEmpty() const;
@@ -104,7 +104,7 @@ public:
      * Return a property by name, wrapped in a QVariant.
      * A typical usage:
      *  @code
-     *      KoProperties *props = new KoProperties();
+     *      KProperties *props = new KProperties();
      *      props->setProperty("name", "Marcy");
      *      props->setProperty("age", 25);
      *      QString name = props->property("name").toString();
@@ -120,7 +120,7 @@ public:
      * Return an integer property by name.
      * A typical usage:
      *  @code
-     *      KoProperties *props = new KoProperties();
+     *      KProperties *props = new KProperties();
      *      props->setProperty("age", 25);
      *      int age = props->intProperty("age");
      *  @endcode
@@ -149,7 +149,7 @@ public:
      * Return an QString property by name.
      * A typical usage:
      *  @code
-     *      KoProperties *props = new KoProperties();
+     *      KProperties *props = new KProperties();
      *      props->setProperty("name", "Marcy");
      *      QString name = props->stringProperty("name");
      *  @endcode
@@ -173,7 +173,7 @@ public:
      */
     QVariant value(const QString &key) const;
 
-    bool operator==(const KoProperties &other) const;
+    bool operator==(const KProperties &other) const;
 
 private:
 

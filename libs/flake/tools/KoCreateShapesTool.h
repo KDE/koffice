@@ -29,7 +29,7 @@
 #include <QString>
 
 class KoCanvasBase;
-class KoProperties;
+class KProperties;
 class KoCreateShapesToolPrivate;
 
 #define KoCreateShapesTool_ID "CreateShapesTool"
@@ -70,12 +70,12 @@ public:
      * create.
      * @param properties the properties or 0 if the default shape should be created.
      */
-    void setShapeProperties(KoProperties *properties);
+    void setShapeProperties(KProperties *properties);
     /**
      * return the properties to be used for creating the next shape
      * @return the properties to be used for creating the next shape
      */
-    KoProperties const *shapeProperties();
+    KProperties const *shapeProperties();
 
 protected:
     virtual KoInteractionStrategy *createStrategy(KoPointerEvent *event);

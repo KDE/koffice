@@ -25,7 +25,7 @@
 #include <QPainter>
 
 #include <KOdfLoadingContext.h>
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KOdfStylesReader.h>
 #include <KOdfGenericStyles.h>
 #include <KoXmlWriter.h>
@@ -166,7 +166,7 @@ void SCPlaceholderTextStrategy::init(KoResourceManager *documentResources)
 {
     KoShapeFactoryBase *factory = KoShapeRegistry::instance()->value("TextShapeID");
     Q_ASSERT(factory);
-    KoProperties props;
+    KProperties props;
     props.setProperty("text", text());
     m_textShape = factory->createShape(&props, documentResources);
 }

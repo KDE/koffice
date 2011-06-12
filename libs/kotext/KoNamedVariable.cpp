@@ -19,7 +19,7 @@
 
 #include "KoNamedVariable_p.h"
 #include "KoInlineTextObjectManager.h"
-#include <KoProperties.h>
+#include <KProperties.h>
 
 #include <KoXmlReader.h> // for usage in Q_UNUSED
 #include <KoShapeLoadingContext.h> // for usage in Q_UNUSED

@@ -21,7 +21,7 @@
 #include "PageVariableFactory.h"
 #include "PageVariable.h"
 
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoXmlNS.h>
 
 #include <klocale.h>
@@ -33,7 +33,7 @@ PageVariableFactory::PageVariableFactory(QObject *parent)
     KoInlineObjectTemplate var1;
     var1.id = "pagecount";
     var1.name = i18n("Page Count");
-    KoProperties *props = new KoProperties();
+    KProperties *props = new KProperties();
     props->setProperty("vartype", 1);
     var1.properties = props;
     addTemplate(var1);
@@ -41,7 +41,7 @@ PageVariableFactory::PageVariableFactory(QObject *parent)
     KoInlineObjectTemplate var2;
     var2.id = "pagenumber";
     var2.name = i18n("Page Number");
-    props = new KoProperties();
+    props = new KProperties();
     props->setProperty("vartype", 2);
     var2.properties = props;
     addTemplate(var2);
@@ -49,7 +49,7 @@ PageVariableFactory::PageVariableFactory(QObject *parent)
     //KoInlineObjectTemplate var3;
     //var3.id = "pagecontinuation";
     //var3.name = i18n("Page Continuation");
-    //props = new KoProperties();
+    //props = new KProperties();
     //props->setProperty("vartype", 3);
     //var3.properties = props;
     //addTemplate(var3);
@@ -59,7 +59,7 @@ PageVariableFactory::PageVariableFactory(QObject *parent)
     setOdfElementNames(KoXmlNS::text, elementNames);
 }
 
-KoInlineObject *PageVariableFactory::createInlineObject(const KoProperties *properties) const
+KoInlineObject *PageVariableFactory::createInlineObject(const KProperties *properties) const
 {
     PageVariable *var = new PageVariable();
     if (properties)

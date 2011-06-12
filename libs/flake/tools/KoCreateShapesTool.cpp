@@ -38,7 +38,7 @@ public:
     }
 
     QString shapeId;
-    KoProperties *newShapeProperties;
+    KProperties *newShapeProperties;
 };
 
 KoCreateShapesTool::KoCreateShapesTool(KoCanvasBase *canvas)
@@ -79,13 +79,13 @@ QString KoCreateShapesTool::shapeId() const
     return d->shapeId;
 }
 
-void KoCreateShapesTool::setShapeProperties(KoProperties *properties)
+void KoCreateShapesTool::setShapeProperties(KProperties *properties)
 {
     Q_D(KoCreateShapesTool);
     d->newShapeProperties = properties;
 }
 
-KoProperties const * KoCreateShapesTool::shapeProperties()
+KProperties const * KoCreateShapesTool::shapeProperties()
 {
     Q_D(KoCreateShapesTool);
     return d->newShapeProperties;

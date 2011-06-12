@@ -33,7 +33,7 @@ public:
     /// constructor
     explicit EnhancedPathShapeFactory(QObject *parent);
     ~EnhancedPathShapeFactory() {}
-    virtual KoShape *createShape(const KoProperties *params, KoResourceManager *documentResources = 0) const;
+    virtual KoShape *createShape(const KProperties *params, KoResourceManager *documentResources = 0) const;
     virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
     virtual bool supports(const KoXmlElement &e, KoShapeLoadingContext &context) const;
 private:
@@ -46,7 +46,7 @@ private:
 
     typedef QMap<QString, QVariant > ComplexType;
     typedef QList<QVariant> ListType;
-    KoProperties* dataToProperties(const QString &modifiers, const QStringList &commands,
+    KProperties* dataToProperties(const QString &modifiers, const QStringList &commands,
         const ListType &handles, const ComplexType &formulae) const;
 
 };

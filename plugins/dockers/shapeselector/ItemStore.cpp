@@ -26,7 +26,7 @@
 #include "Canvas.h"
 
 #include <KoShapeManager.h>
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoShapeRegistry.h>
 #include <KOdfPasteBase.h>
 #include <KOdfStoreReader.h>

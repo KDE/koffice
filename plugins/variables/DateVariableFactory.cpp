@@ -21,7 +21,7 @@
 #include "DateVariableFactory.h"
 #include "DateVariable.h"
 
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoXmlNS.h>
 
 #include <klocale.h>
@@ -32,7 +32,7 @@ DateVariableFactory::DateVariableFactory(QObject *parent)
     KoInlineObjectTemplate var;
     var.id = "fixed";
     var.name = i18nc("date that can not be changed later", "Date (Fixed)");
-    KoProperties *props = new KoProperties();
+    KProperties *props = new KProperties();
     props->setProperty("id", DateVariable::Fixed);
     props->setProperty("definition", "dd/MM/yy");
     var.properties = props;
@@ -43,7 +43,7 @@ DateVariableFactory::DateVariableFactory(QObject *parent)
     setOdfElementNames(KoXmlNS::text, elementNames);
 }
 
-KoInlineObject *DateVariableFactory::createInlineObject(const KoProperties *properties) const
+KoInlineObject *DateVariableFactory::createInlineObject(const KProperties *properties) const
 {
     DateVariable::DateType dt = DateVariable::Fixed;
     if (properties)

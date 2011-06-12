@@ -20,7 +20,7 @@
 #include "TemplateShape.h"
 
 #include <KoCreateShapesTool.h>
-#include <KoProperties.h>
+#include <KProperties.h>
 
 #include <QDomElement>
 
@@ -62,7 +62,7 @@ TemplateShape *TemplateShape::createShape(const QDomElement &element)
     t.toolTip = element.attribute("toolTip");
     t.icon = element.attribute("icon");
     if (!element.firstChildElement("property").isNull()) { // has properties
-        t.properties = new KoProperties();
+        t.properties = new KProperties();
         t.properties->load(element);
     }
     return new TemplateShape(t);

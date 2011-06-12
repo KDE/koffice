@@ -23,7 +23,7 @@
 
 #include <KoShapeFactoryBase.h>
 #include <KoLineBorder.h>
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoColorBackground.h>
@@ -48,7 +48,7 @@ StarShapeFactory::StarShapeFactory(QObject *parent)
     t.family = "geometric";
     t.toolTip = i18n("A star");
     t.icon = "star-shape";
-    KoProperties *props = new KoProperties();
+    KProperties *props = new KProperties();
     props->setProperty("corners", 5);
     QVariant v;
     v.setValue(QColor(Qt::yellow));
@@ -62,7 +62,7 @@ StarShapeFactory::StarShapeFactory(QObject *parent)
     t.family = "funny";
     t.toolTip = i18n("A flower");
     t.icon = "flower-shape";
-    props = new KoProperties();
+    props = new KProperties();
     props->setProperty("corners", 5);
     props->setProperty("baseRadius", 10.0);
     props->setProperty("tipRadius", 50.0);
@@ -79,7 +79,7 @@ StarShapeFactory::StarShapeFactory(QObject *parent)
     t.family = "geometric";
     t.toolTip = i18n("A pentagon");
     t.icon = "pentagon-shape";
-    props = new KoProperties();
+    props = new KProperties();
     props->setProperty("corners", 5);
     props->setProperty("convex", true);
     props->setProperty("tipRadius", 50.0);
@@ -95,7 +95,7 @@ StarShapeFactory::StarShapeFactory(QObject *parent)
     t.family = "geometric";
     t.toolTip = i18n("A hexagon");
     t.icon = "hexagon-shape";
-    props = new KoProperties();
+    props = new KProperties();
     props->setProperty("corners", 6);
     props->setProperty("convex", true);
     props->setProperty("tipRadius", 50.0);
@@ -116,7 +116,7 @@ KoShape *StarShapeFactory::createDefaultShape(KoResourceManager *) const
     return star;
 }
 
-KoShape *StarShapeFactory::createShape(const KoProperties *params, KoResourceManager *) const
+KoShape *StarShapeFactory::createShape(const KProperties *params, KoResourceManager *) const
 {
     StarShape *star = new StarShape();
     if (! star)

@@ -27,7 +27,7 @@
 
 class KoInlineObject;
 class InlineObjectFactoryPrivate;
-class KoProperties;
+class KProperties;
 
 /// A template used in the KoInlineObjectFactoryBase
 struct KOTEXT_EXPORT KoInlineObjectTemplate {
@@ -37,7 +37,7 @@ struct KOTEXT_EXPORT KoInlineObjectTemplate {
      * The properties which, when passed to the KoInlineObjectFactoryBase::createInlineObject() method
      * result in the object this template represents.
      */
-    KoProperties *properties;
+    KProperties *properties;
 };
 
 /**
@@ -68,7 +68,7 @@ public:
     /**
      * Create a new instance of an inline object.
      */
-    virtual KoInlineObject *createInlineObject(const KoProperties *properties = 0) const = 0;
+    virtual KoInlineObject *createInlineObject(const KProperties *properties = 0) const = 0;
 
     /**
      * return the id for the variable this factory creates.

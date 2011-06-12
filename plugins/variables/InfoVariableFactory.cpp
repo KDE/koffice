@@ -20,7 +20,7 @@
 
 #include "InfoVariableFactory.h"
 
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoXmlNS.h>
 #include <kdebug.h>
 
@@ -36,7 +36,7 @@ InfoVariableFactory::InfoVariableFactory(QObject *parent)
     setOdfElementNames(KoXmlNS::text, elementNames);
 }
 
-KoInlineObject *InfoVariableFactory::createInlineObject(const KoProperties *properties) const
+KoInlineObject *InfoVariableFactory::createInlineObject(const KProperties *properties) const
 {
     InfoVariable *var = new InfoVariable();
     if (properties)

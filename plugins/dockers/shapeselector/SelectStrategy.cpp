@@ -24,7 +24,7 @@
 #include "ClipboardProxyShape.h"
 
 #include <KoShape.h>
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>
 #include <KoPointerEvent.h>
@@ -68,7 +68,7 @@ void SelectStrategy::handleMouseMove(const QPointF &mouseLocation, Qt::KeyboardM
     bool addOffset = true;
     if (templateShape) {
         dataStream << templateShape->shapeTemplate().id;
-        KoProperties *props = templateShape->shapeTemplate().properties;
+        KProperties *props = templateShape->shapeTemplate().properties;
         if (props)
             dataStream << props->store("item"); // is an xml-QString
         else

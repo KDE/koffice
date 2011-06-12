@@ -32,7 +32,7 @@ set(koodf_LIB_SRCS
     KOdfWriteStore.cpp
     KOdfPageFormat.cpp
     KOdfPageLayoutData.cpp
-    KoProperties.cpp
+    KProperties.cpp
     KoStore.cpp
     KoStoreDevice.cpp
     KoStyleStack.cpp
@@ -86,7 +86,7 @@ install( FILES
     KoStoreDevice.h
     KoXmlReader.h
     KoXmlWriter.h
-    KoProperties.h
+    KProperties.h
     KoUnit.h
 DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel)
 

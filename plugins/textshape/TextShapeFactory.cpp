@@ -22,7 +22,7 @@
 #include "TextShape.h"
 #include "TextEditingPluginContainer.h"
 
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoShape.h>
 #include <KoTextDocument.h>
 #include <KoTextShapeData.h>
@@ -52,7 +52,7 @@ TextShapeFactory::TextShapeFactory(QObject *parent)
     t.name = i18n("Text");
     t.icon = "x-shape-text";
     t.toolTip = i18n("Text Shape");
-    KoProperties *props = new KoProperties();
+    KProperties *props = new KProperties();
     t.properties = props;
     props->setProperty("demo", true);
     addTemplate(t);
@@ -85,7 +85,7 @@ KoShape *TextShapeFactory::createDefaultShape(KoResourceManager *documentResourc
     return text;
 }
 
-KoShape *TextShapeFactory::createShape(const KoProperties *params, KoResourceManager *documentResources) const
+KoShape *TextShapeFactory::createShape(const KProperties *params, KoResourceManager *documentResources) const
 {
     TextShape *shape = static_cast<TextShape*>(createDefaultShape(documentResources));
     shape->textShapeData()->document()->setUndoRedoEnabled(false);

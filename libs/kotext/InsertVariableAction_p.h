@@ -34,7 +34,7 @@
 #include "InsertInlineObjectActionBase_p.h"
 
 class KoCanvasBase;
-class KoProperties;
+class KProperties;
 class KoInlineObjectFactoryBase;
 struct KoInlineObjectTemplate;
 
@@ -48,7 +48,7 @@ private:
 
     KoInlineObjectFactoryBase *const m_factory;
     const QString m_templateId;
-    const KoProperties *const m_properties;
+    const KProperties *const m_properties;
     QString m_templateName;
 };
 

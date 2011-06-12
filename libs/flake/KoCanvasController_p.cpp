@@ -32,7 +32,7 @@
 #include "KoShapeLayer.h"
 #include "KoShapePaste.h"
 
-#include <KoProperties.h>
+#include <KProperties.h>
 
 #include <kdebug.h>
 #include <ksharedconfig.h>
@@ -143,7 +143,7 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
         event->accept();
 
         if (isTemplate) {
-            KoProperties props;
+            KProperties props;
             props.load(properties);
             m_draggedShape = factory->createShape(&props, m_parent->canvas()->shapeController()->resourceManager());
         } else

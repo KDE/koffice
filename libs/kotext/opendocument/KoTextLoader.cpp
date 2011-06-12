@@ -34,7 +34,7 @@
 #include "KoList.h"
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <KoShapeContainer.h>
 #include <KoShapeFactoryBase.h>
 #include <KoShapeLoadingContext.h>

@@ -20,7 +20,7 @@
 
 #include "InfoVariable.h"
 
-#include <KoProperties.h>
+#include <KProperties.h>
 #include <kdebug.h>
 #include <KoShapeSavingContext.h>
 #include <KoXmlReader.h>
@@ -32,7 +32,7 @@ InfoVariable::InfoVariable()
 {
 }
 
-void InfoVariable::readProperties(const KoProperties *props)
+void InfoVariable::readProperties(const KProperties *props)
 {
     m_type = (Property) props->property("property").value<int>();
 }
