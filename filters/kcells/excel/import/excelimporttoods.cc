@@ -405,7 +405,7 @@ bool ExcelImport::Private::createStyles(KoStore* store, KoXmlWriter* manifestWri
     Q_UNUSED(manifestWriter);
     if (!store->open("styles.xml"))
         return false;
-    KoStoreDevice dev(store);
+    KOdfStorageDevice dev(store);
     KoXmlWriter* stylesWriter = new KoXmlWriter(&dev);
 
     stylesWriter->startDocument("office:document-styles");
@@ -444,7 +444,7 @@ bool ExcelImport::Private::createMeta(KOdfWriteStore* store)
     if (!store->store()->open("meta.xml"))
         return false;
 
-    KoStoreDevice dev(store->store());
+    KOdfStorageDevice dev(store->store());
     KoXmlWriter* metaWriter = new KoXmlWriter(&dev);
     metaWriter->startDocument("office:document-meta");
     metaWriter->startElement("office:document-meta");
@@ -518,7 +518,7 @@ bool ExcelImport::Private::createSettings(KOdfWriteStore* store)
     if (!store->store()->open("settings.xml"))
         return false;
 
-    KoStoreDevice dev(store->store());
+    KOdfStorageDevice dev(store->store());
     KoXmlWriter* settingsWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-settings");
     settingsWriter->startElement("office:settings");
     settingsWriter->startElement("config:config-item-set");

@@ -30,7 +30,7 @@
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoStyleStack.h>
 #include <KoUnit.h>
 #include <KoXmlNS.h>

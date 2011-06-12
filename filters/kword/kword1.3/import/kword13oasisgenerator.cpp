@@ -32,7 +32,7 @@
 
 #include <kofficeversion.h>
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfWriteStore.h>
@@ -541,7 +541,7 @@ void KWord13OasisGenerator::writeStylesXml(void)
     }
 
     m_store->open("styles.xml"); // ### TODO: check error!
-    KoStoreDevice io(m_store);
+    KOdfStorageDevice io(m_store);
     io.open(QIODevice::WriteOnly);    // ### TODO: check error!
 
     KoXmlWriter *stylesWriter = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-styles");
@@ -608,7 +608,7 @@ void KWord13OasisGenerator::writeContentXml(void)
     }
 
     m_store->open("content.xml"); // ### TODO: check error!
-    KoStoreDevice io(m_store);
+    KOdfStorageDevice io(m_store);
     io.open(QIODevice::WriteOnly);    // ### TODO: check error!
 
     KoXmlWriter *writer = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-content");
@@ -658,7 +658,7 @@ void KWord13OasisGenerator::writeMetaXml(void)
     }
 
     m_store->open("meta.xml"); // ### TODO: check error!
-    KoStoreDevice io(m_store);
+    KOdfStorageDevice io(m_store);
     io.open(QIODevice::WriteOnly);    // ### TODO: check error!
 
     KoXmlWriter *writer = KOdfWriteStore::createOasisXmlWriter(&io, "office:document-meta");
@@ -788,7 +788,7 @@ void KWord13OasisGenerator::writePreviewFile(void)
         preview.setAlphaBuffer(true);
     }
     m_store->open("Thumbnails/thumbnail.png");
-    KoStoreDevice io(m_store);
+    KOdfStorageDevice io(m_store);
     io.open(QIODevice::WriteOnly);    // ### TODO: check error!
     preview.save(&io, "PNG", 0);
     io.close();
@@ -893,7 +893,7 @@ bool KWord13OasisGenerator::generate(const QString& fileName, KWord13Document& k
 # ifndef NDEBUG // DEBUG (out of specification)
     // No entry in the manifest file, as it is not part of the document
     if (m_store->open("Debug/debug.xml")) {
-        KoStoreDevice io(m_store);
+        KOdfStorageDevice io(m_store);
         io.open(QIODevice::WriteOnly);    // ### TODO: check error!
         kwordDocument.xmldump(&io);
         io.close();

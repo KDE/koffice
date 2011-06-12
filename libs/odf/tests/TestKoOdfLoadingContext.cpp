@@ -21,7 +21,7 @@
 #include <QByteArray>
 #include <QBuffer>
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KOdfLoadingContext.h>
@@ -71,7 +71,7 @@ void TestKoOdfLoadingContext::testFillStyleStack()
 
     QVERIFY(store->open("styles.xml") == true);
 
-    KoStoreDevice stylesDev(store);
+    KOdfStorageDevice stylesDev(store);
     KoXmlWriter* stylesWriter = KOdfWriteStore::createOasisXmlWriter(&stylesDev, "office:document-styles");
 
     stylesWriter->startElement("office:styles");

@@ -40,7 +40,7 @@
 #include <KOdfGenericChanges.h>
 #include <KoTextSharedSavingData.h>
 
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <rdf/KoDocumentRdfBase.h>
 
 #include <QBuffer>
@@ -354,7 +354,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embedd
 
 bool KWOdfWriter::saveOdfSettings(KoStore *store)
 {
-    KoStoreDevice settingsDev(store);
+    KOdfStorageDevice settingsDev(store);
     KoXmlWriter *settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
 
     // add this so that OOo reads guides lines and grid data from ooo:view-settings

@@ -40,7 +40,7 @@
 #include <KoResourceManager.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoUpdater.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
@@ -137,7 +137,7 @@ bool KCDocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag
     KoStore * store = documentContext.odfStore.store();
     KoXmlWriter * manifestWriter = documentContext.odfStore.manifestWriter();
 
-    KoStoreDevice dev(store);
+    KOdfStorageDevice dev(store);
     KOdfGenericStyles mainStyles;//for compile
 
     KoXmlWriter* contentWriter = documentContext.odfStore.contentWriter();

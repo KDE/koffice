@@ -20,7 +20,7 @@
 #include "KoTextRdfCore.h"
 #include "KoTextRdfCore_p.h"
 #include <kdebug.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 #include <QtCore/QFile>
 using namespace Soprano;
@@ -33,7 +33,7 @@ bool KoTextRdfCore::saveRdf(Soprano::Model *model, Soprano::StatementIterator tr
         return false;
     }
 
-    KoStoreDevice dev(store);
+    KOdfStorageDevice dev(store);
     QTextStream oss(&dev);
 
     QString serialization = "application/rdf+xml";

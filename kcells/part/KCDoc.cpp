@@ -66,7 +66,7 @@
 #include <KoShapeFactoryBase.h>
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoStyleStack.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>

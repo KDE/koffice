@@ -22,7 +22,7 @@
 #include "KoImageData_p.h"
 #include "KoShapeSavingContext.h"
 
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <QCryptographicHash>
 #include <KoXmlWriter.h>
 
@@ -83,7 +83,7 @@ bool KoImageCollection::completeSaving(KoStore *store, KoXmlWriter *manifestWrit
                 Q_ASSERT(0); // not impleented yet
             }
             else if (store->open(it.value())) {
-                KoStoreDevice device(store);
+                KOdfStorageDevice device(store);
                 bool ok = imageData->saveData(device);
                 store->close();
                 // TODO error handling

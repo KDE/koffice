@@ -79,7 +79,7 @@ EpsExport::convert(const QByteArray& from, const QByteArray& to)
     }
 
 
-    KoStoreDevice* storeIn = m_chain->storageFile("root", KoStore::Read);
+    KOdfStorageDevice* storeIn = m_chain->storageFile("root", KoStore::Read);
 
     if (!storeIn)
         return KoFilter::StupidError;
@@ -162,7 +162,7 @@ EpsExport::visitVDocument(KarbonDocument& document)
 
 
     // Process document info.
-    KoStoreDevice* storeIn;
+    KOdfStorageDevice* storeIn;
     storeIn = m_chain->storageFile("documentinfo.xml", KoStore::Read);
 
     if (storeIn) {

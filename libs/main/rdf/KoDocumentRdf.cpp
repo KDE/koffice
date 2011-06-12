@@ -30,7 +30,7 @@
 #include "KOdfWriteStore.h"
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoCanvasBase.h>
 #include <KoToolProxy.h>
 #include <KoResourceManager.h>
@@ -306,7 +306,7 @@ bool KoDocumentRdf::saveRdf(KoStore *store, KoXmlWriter *manifestWriter, Soprano
             i18n("Not able to write '%1'. Partition full?", (fileName)));
         return false;
     }
-    KoStoreDevice dev(store);
+    KOdfStorageDevice dev(store);
     QTextStream oss(&dev);
     if (fileName == "manifest.rdf" && d->prefixMapping) {
         d->prefixMapping->save(d->model, context);

@@ -141,7 +141,7 @@ KoFilter::ConversionStatus Filterkpr2odf::convert(const QByteArray& from, const 
 
     //Create settings.xml
     output->open("settings.xml");
-    KoStoreDevice device(output);
+    KOdfStorageDevice device(output);
     KoXmlWriter *settings = KOdfWriteStore::createOasisXmlWriter(&device, "office:document-settings");
     //TODO: check which settings we still use in 2.0
     settings->endElement();//office:document-settings

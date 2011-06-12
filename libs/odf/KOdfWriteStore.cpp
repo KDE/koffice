@@ -27,7 +27,7 @@
 #include <klocale.h>
 
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 
 #include "KoXmlNS.h"
@@ -56,7 +56,7 @@ struct KOdfWriteStore::Private {
     }
 
     KoStore * store;
-    KoStoreDevice * storeDevice;
+    KOdfStorageDevice * storeDevice;
     KoXmlWriter * contentWriter;
 
     KoXmlWriter * bodyWriter;
@@ -130,7 +130,7 @@ KoXmlWriter* KOdfWriteStore::contentWriter()
         if (!d->store->open("content.xml")) {
             return 0;
         }
-        d->storeDevice = new KoStoreDevice(d->store);
+        d->storeDevice = new KOdfStorageDevice(d->store);
         d->contentWriter = createOasisXmlWriter(d->storeDevice, "office:document-content");
     }
     return d->contentWriter;

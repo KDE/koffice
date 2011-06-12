@@ -92,7 +92,7 @@ public:
      */
     bool closeContentWriter();
 
-    // For other files in the store, use open/addManifestEntry/KoStoreDevice/createOasisXmlWriter/close
+    // For other files in the store, use open/addManifestEntry/KOdfStorageDevice/createOasisXmlWriter/close
 
     /**
      * Create and return a manifest writer. It will write to a memory buffer.

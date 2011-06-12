@@ -27,7 +27,7 @@
 #include <ktemporaryfile.h>
 
 #include <KoFilterChain.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 
 #include "kword13parser.h"
 #include "kword13document.h"
@@ -125,7 +125,7 @@ KoFilter::ConversionStatus KWord13Import::convert(const QByteArray& from, const 
 
         // We do not really care about errors while reading/parsing documentinfo
         store->open("documentinfo.xml");
-        KoStoreDevice ioInfo(store);
+        KOdfStorageDevice ioInfo(store);
         ioInfo.open(QIODevice::ReadOnly);
         kDebug(30520) << "Processing document info...";
         if (! parseInfo(&ioInfo, kwordDocument)) {
@@ -140,7 +140,7 @@ KoFilter::ConversionStatus KWord13Import::convert(const QByteArray& from, const 
             delete store;
             return KoFilter::StupidError;
         }
-        KoStoreDevice ioMain(store);
+        KOdfStorageDevice ioMain(store);
         ioMain.open(QIODevice::ReadOnly);
         kDebug(30520) << "Processing root...";
         if (! parseRoot(&ioMain, kwordDocument)) {
@@ -154,7 +154,7 @@ KoFilter::ConversionStatus KWord13Import::convert(const QByteArray& from, const 
         if (store->open("preview.png")) {
 
             kDebug(30520) << "Preview found!";
-            KoStoreDevice ioPreview(store);
+            KOdfStorageDevice ioPreview(store);
             ioPreview.open(QIODevice::ReadOnly);
             const QByteArray image(ioPreview.readAll());
             if (image.isNull()) {

@@ -239,7 +239,7 @@ KoFilter::ConversionStatus WMLImport::convert(const QByteArray& from, const QByt
     QString root = filter.root;
 
     // prepare storage
-    KoStoreDevice* out = m_chain->storageFile("root", KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile("root", KoStore::Write);
 
     // store output document
     if (out) {

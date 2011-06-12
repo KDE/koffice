@@ -35,7 +35,7 @@
 
 #include <KoFilterChain.h>
 #include <KOdfWriteStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 
 #include <document.h>

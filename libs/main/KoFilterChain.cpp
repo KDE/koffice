@@ -158,7 +158,7 @@ QString KoFilterChain::outputFile()
     return m_outputFile;
 }
 
-KoStoreDevice* KoFilterChain::storageFile(const QString& name, KoStore::Mode mode)
+KOdfStorageDevice* KoFilterChain::storageFile(const QString& name, KoStore::Mode mode)
 {
     // ###### CHECK: This works only for import filters. Do we want something like
     // that for export filters too?
@@ -390,7 +390,7 @@ void KoFilterChain::outputFileHelper(bool autoDelete)
         m_outputFile = m_outputTempFile->fileName();
 }
 
-KoStoreDevice* KoFilterChain::storageNewStreamHelper(KoStore** storage, KoStoreDevice** device,
+KOdfStorageDevice* KoFilterChain::storageNewStreamHelper(KoStore** storage, KOdfStorageDevice** device,
         const QString& name)
 {
     delete *device;
@@ -402,13 +402,13 @@ KoStoreDevice* KoFilterChain::storageNewStreamHelper(KoStore** storage, KoStoreD
     if (!(*storage)->open(name))
         return 0;
 
-    *device = new KoStoreDevice(*storage);
+    *device = new KOdfStorageDevice(*storage);
     return *device;
 }
 
-KoStoreDevice* KoFilterChain::storageHelper(const QString& file, const QString& streamName,
+KOdfStorageDevice* KoFilterChain::storageHelper(const QString& file, const QString& streamName,
         KoStore::Mode mode, KoStore** storage,
-        KoStoreDevice** device)
+        KOdfStorageDevice** device)
 {
     if (file.isEmpty())
         return 0;
@@ -448,7 +448,7 @@ void KoFilterChain::storageInit(const QString& file, KoStore::Mode mode, KoStore
     *storage = KoStore::createStore(file, mode, appIdentification);
 }
 
-KoStoreDevice* KoFilterChain::storageInitEmbedding(const QString& name)
+KOdfStorageDevice* KoFilterChain::storageInitEmbedding(const QString& name)
 {
     if (m_outputStorage) {
         kWarning(30500) << "Ooops! Something's really screwed here.";
@@ -488,8 +488,8 @@ KoStoreDevice* KoFilterChain::storageInitEmbedding(const QString& name)
     return storageCreateFirstStream(name, &m_outputStorage, &m_outputStorageDevice);
 }
 
-KoStoreDevice* KoFilterChain::storageCreateFirstStream(const QString& streamName, KoStore** storage,
-        KoStoreDevice** device)
+KOdfStorageDevice* KoFilterChain::storageCreateFirstStream(const QString& streamName, KoStore** storage,
+        KOdfStorageDevice** device)
 {
     // Before we go and create the first stream in this storage we
     // have to perform a little hack in case we're used by any ole-style
@@ -509,11 +509,11 @@ KoStoreDevice* KoFilterChain::storageCreateFirstStream(const QString& streamName
         (*storage)->close();
         return storageCleanupHelper(storage);
     }
-    *device = new KoStoreDevice(*storage);
+    *device = new KOdfStorageDevice(*storage);
     return *device;
 }
 
-KoStoreDevice* KoFilterChain::storageCleanupHelper(KoStore** storage)
+KOdfStorageDevice* KoFilterChain::storageCleanupHelper(KoStore** storage)
 {
     // Take care not to delete the storage of the parent chain
     if (*storage != m_outputStorage || !filterManagerParentChain() ||

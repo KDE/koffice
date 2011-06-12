@@ -22,7 +22,7 @@
 #include <KoStore.h>
 #include <KoXmlWriter.h>
 #include <KOdfWriteStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
 //#include <KoOdfNumberStyles.h>
@@ -778,7 +778,7 @@ bool ChartExport::saveContent(KoStore* store, KoXmlWriter* manifestWriter)
     s.closeContentWriter();
 
     if (store->open("styles.xml")) {
-        KoStoreDevice dev(store);
+        KOdfStorageDevice dev(store);
         KoXmlWriter* stylesWriter = new KoXmlWriter(&dev);
         stylesWriter->startDocument("office:document-styles");
         stylesWriter->startElement("office:document-styles");

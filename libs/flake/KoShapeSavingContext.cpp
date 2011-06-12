@@ -28,7 +28,7 @@
 
 #include <KoXmlWriter.h>
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 
 #include <kmimetype.h>
 #include <kdebug.h>
@@ -243,7 +243,7 @@ bool KoShapeSavingContext::saveDataCenter(KoStore *store, KoXmlWriter* manifestW
     }
     for (QMap<QString, QImage>::iterator it(d->images.begin()); it != d->images.end(); ++it) {
         if (store->open(it.key())) {
-            KoStoreDevice device(store);
+            KOdfStorageDevice device(store);
             ok = ok && it.value().save(&device, "PNG");
             store->close();
             // TODO error handling

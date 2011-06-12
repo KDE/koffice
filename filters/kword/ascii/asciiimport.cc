@@ -247,7 +247,7 @@ KoFilter::ConversionStatus ASCIIImport::convert(const QByteArray& from, const QB
     kDebug(30502) << mainDocument.toString();
 #endif
 
-    KoStoreDevice* out = m_chain->storageFile("root", KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile("root", KoStore::Write);
     if (!out) {
         kError(30502) << "Unable to open output file!" << endl;
         in.close();

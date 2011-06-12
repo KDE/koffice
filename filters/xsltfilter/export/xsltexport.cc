@@ -52,7 +52,7 @@ KoFilter::ConversionStatus XSLTExport::convert(const QByteArray& from, const QBy
         return KoFilter::NotImplemented;
     kDebug() << "In the xslt filter";
 
-    KoStoreDevice* in = m_chain->storageFile("root", KoStore::Read);
+    KOdfStorageDevice* in = m_chain->storageFile("root", KoStore::Read);
 
     if (!in) {
         kError() << "Unable to open input file!" << endl;

@@ -25,7 +25,7 @@
 #include <QFileInfo>
 #include <QDir>
 
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KStandardDirs>
 #include <QtXmlPatterns>
 #include <convert.h>

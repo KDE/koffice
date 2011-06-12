@@ -27,7 +27,7 @@
 #include <KDebug>
 
 #include <KOdfWriteStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoFilterChain.h>
 #include <KOdfGenericStyles.h>
 #include <KoXmlWriter.h>
@@ -165,7 +165,7 @@ KoFilter::ConversionStatus KoOdfExporter::convert(const QByteArray& from, const 
     if (!outputStore->open("settings.xml")) {
         return KoFilter::CreationError;
     }
-    KoStoreDevice settingsDev(outputStore.get());
+    KOdfStorageDevice settingsDev(outputStore.get());
     KoXmlWriter* settings = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
     settings->addAttribute("xmlns:ooo", "http://openoffice.org/2004/office");
     settings->startElement("config:config-item-set");
@@ -192,7 +192,7 @@ KoFilter::ConversionStatus KoOdfExporter::convert(const QByteArray& from, const 
     if (!outputStore->open("meta.xml")) {
         return KoFilter::CreationError;
     }
-    KoStoreDevice metaDev(outputStore.get());
+    KOdfStorageDevice metaDev(outputStore.get());
     KoXmlWriter* meta = KOdfWriteStore::createOasisXmlWriter(&metaDev, "office:document-meta");
     meta->startElement("office:meta");
     meta->addCompleteElement(&buf);

@@ -23,7 +23,7 @@
 #include <KoCanvasBase.h>
 #include <KoText.h>
 #include <KoXmlWriter.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 
 #include "KoTextSopranoRdfModel_p.h"
 #include <kdebug.h>

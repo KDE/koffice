@@ -1238,7 +1238,7 @@ static bool ProcessStoreFile(QIODevice* subFile,
 
 QIODevice* KWEFKWordLeader::getSubFileDevice(const QString& fileName)
 {
-    KoStoreDevice* subFile;
+    KOdfStorageDevice* subFile;
 
     subFile = m_chain->storageFile(fileName, KoStore::Read);
 
@@ -1252,7 +1252,7 @@ QIODevice* KWEFKWordLeader::getSubFileDevice(const QString& fileName)
 
 bool KWEFKWordLeader::loadSubFile(const QString& fileName, QByteArray& array)
 {
-    KoStoreDevice* subFile;
+    KOdfStorageDevice* subFile;
 
     subFile = m_chain->storageFile(fileName, KoStore::Read);
 
@@ -1295,7 +1295,7 @@ KoFilter::ConversionStatus KWEFKWordLeader::convert(KoFilterChain* chain,
         return KoFilter::StupidError;
     }
 
-    KoStoreDevice* subFile;
+    KOdfStorageDevice* subFile;
 
     subFile = chain->storageFile("documentinfo.xml", KoStore::Read);
     kDebug(30508) << "Processing documentinfo.xml...";

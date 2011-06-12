@@ -118,7 +118,7 @@ bool HTMLImport::createStyle()
 {
     if (!m_store->store()->open("styles.xml"))
         return false;
-    KoStoreDevice dev(m_store->store());
+    KOdfStorageDevice dev(m_store->store());
     KoXmlWriter* stylesWriter = new KoXmlWriter(&dev);
 
     stylesWriter->startDocument("office:document-styles");
@@ -148,7 +148,7 @@ bool HTMLImport::createMeta()
     if (!m_store->store()->open("meta.xml"))
         return false;
 
-    KoStoreDevice dev(m_store->store());
+    KOdfStorageDevice dev(m_store->store());
     KoXmlWriter* metaWriter = new KoXmlWriter(&dev);
     metaWriter->startDocument("office:document-meta");
     metaWriter->startElement("office:document-meta");

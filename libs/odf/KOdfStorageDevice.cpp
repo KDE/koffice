@@ -17,25 +17,25 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoStoreDevice.h"
+#include "KOdfStorageDevice.h"
 
 /// Note: KoStore::open() should be called before calling this.
-KoStoreDevice::KoStoreDevice(KoStore * store) : m_store(store)
+KOdfStorageDevice::KOdfStorageDevice(KoStore * store) : m_store(store)
 {
-    // koffice-1.x behavior compat: a KoStoreDevice is automatically open
+    // koffice-1.x behavior compat: a KOdfStorageDevice is automatically open
     setOpenMode(m_store->mode() == KoStore::Read ? QIODevice::ReadOnly : QIODevice::WriteOnly);
 }
 
-KoStoreDevice::~KoStoreDevice()
+KOdfStorageDevice::~KOdfStorageDevice()
 {
 }
 
-bool KoStoreDevice::isSequential() const
+bool KOdfStorageDevice::isSequential() const
 {
     return true;
 }
 
-bool KoStoreDevice::open(OpenMode m)
+bool KOdfStorageDevice::open(OpenMode m)
 {
     setOpenMode(m);
     if (m & QIODevice::ReadOnly)
@@ -45,11 +45,11 @@ bool KoStoreDevice::open(OpenMode m)
     return false;
 }
 
-void KoStoreDevice::close()
+void KOdfStorageDevice::close()
 {
 }
 
-qint64 KoStoreDevice::size() const
+qint64 KOdfStorageDevice::size() const
 {
     if (m_store->mode() == KoStore::Read)
         return m_store->size();
@@ -57,27 +57,27 @@ qint64 KoStoreDevice::size() const
         return 0xffffffff;
 }
 
-qint64 KoStoreDevice::pos() const
+qint64 KOdfStorageDevice::pos() const
 {
     return m_store->pos();
 }
 
-bool KoStoreDevice::seek(qint64 pos)
+bool KOdfStorageDevice::seek(qint64 pos)
 {
     return m_store->seek(pos);
 }
 
-bool KoStoreDevice::atEnd() const
+bool KOdfStorageDevice::atEnd() const
 {
     return m_store->atEnd();
 }
 
-qint64 KoStoreDevice::readData(char *data, qint64 maxlen)
+qint64 KOdfStorageDevice::readData(char *data, qint64 maxlen)
 {
     return m_store->read(data, maxlen);
 }
 
-qint64 KoStoreDevice::writeData(const char *data, qint64 len)
+qint64 KOdfStorageDevice::writeData(const char *data, qint64 len)
 {
     return m_store->write(data, len);
 }

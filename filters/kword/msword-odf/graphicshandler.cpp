@@ -30,7 +30,7 @@
 #include "ODrawToOdf.h"
 #include "pictures.h"
 
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KOdfGenericStyle.h>
 #include <kdebug.h>
 #include <kmimetype.h>

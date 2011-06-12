@@ -755,7 +755,7 @@ bool APPLIXWORDImport::createMeta(KOdfWriteStore &store)
         return false;
     }
 
-    KoStoreDevice dev(store.store());
+    KOdfStorageDevice dev(store.store());
     KoXmlWriter* xmlWriter = KOdfWriteStore::createOasisXmlWriter(&dev, "office:document-meta");
     xmlWriter->startElement("office:meta");
 

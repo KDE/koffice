@@ -29,7 +29,7 @@
 #include <KOdfLoadingContext.h>
 #include <KoOdfGraphicStyles.h>
 #include <KOdfStylesReader.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoUnit.h>
 #include <KoXmlWriter.h>
 

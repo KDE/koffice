@@ -62,7 +62,7 @@
 #include <KoShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KoResourceManager.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoShapePainter.h>
 
 #include <kconfig.h>
@@ -289,7 +289,7 @@ void KarbonPart::loadOasisSettings(const KoXmlDocument &settingsDoc)
 
 void KarbonPart::saveOasisSettings(KoStore *store)
 {
-    KoStoreDevice settingsDev(store);
+    KOdfStorageDevice settingsDev(store);
     KoXmlWriter * settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
 
     // add this so that OOo reads guides lines and grid data from ooo:view-settings

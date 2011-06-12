@@ -59,7 +59,7 @@ KoFilter::ConversionStatus PalmDocImport::convert(const QByteArray& from, const 
     QString root = processPlainDocument(doc.text());
 
     // prepare storage
-    KoStoreDevice *out = m_chain->storageFile("root", KoStore::Write);
+    KOdfStorageDevice *out = m_chain->storageFile("root", KoStore::Write);
 
     if (out) {
         QByteArray cstring = root.utf8();

@@ -25,7 +25,7 @@
 #include "KOdfGenericStyles.h"
 
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 #include "KOdfWriteStore.h"
 #include "KOdfFontData.h"
@@ -453,7 +453,7 @@ bool KOdfGenericStyles::saveOdfStylesDotXml(KoStore* store, KoXmlWriter* manifes
 
     manifestWriter->addManifestEntry("styles.xml",  "text/xml");
 
-    KoStoreDevice stylesDev(store);
+    KOdfStorageDevice stylesDev(store);
     KoXmlWriter* stylesWriter = KOdfWriteStore::createOasisXmlWriter(&stylesDev, "office:document-styles");
 
     d->saveOdfFontFaceDecls(stylesWriter);

@@ -43,7 +43,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KoShapeLayer.h>
 #include <KoShapeRegistry.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KOdfWriteStore.h>
 #include <KoEmbeddedDocumentSaver.h>
 #include <KoImageCollection.h>

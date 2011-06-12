@@ -329,7 +329,7 @@ KoFilter::ConversionStatus AmiProImport::convert(const QByteArray& from, const Q
     delete parser;
 
     // prepare storage
-    KoStoreDevice* out = m_chain->storageFile("root", KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile("root", KoStore::Write);
 
     // store output document
     if (out) {

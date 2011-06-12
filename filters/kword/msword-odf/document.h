@@ -48,7 +48,7 @@
 #include <KOdfGenericStyles.h>
 #include <KoStore.h>
 
-class KoStoreDevice;
+class KOdfStorageDevice;
 
 namespace wvWare
 {

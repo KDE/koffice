@@ -29,7 +29,7 @@
 #include <KoShapeSavingContext.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoUnit.h>
 #include <KOdfGenericStyle.h>
 #include <KoTextOnShapeContainer.h>

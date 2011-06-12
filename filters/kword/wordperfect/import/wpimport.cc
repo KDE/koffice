@@ -300,7 +300,7 @@ KoFilter::ConversionStatus WPImport::convert(const QByteArray& from, const QByte
     if (root.isEmpty()) return KoFilter::StupidError;
 
     // prepare storage
-    KoStoreDevice* out = m_chain->storageFile("root", KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile("root", KoStore::Write);
 
     if (out) {
         QByteArray cstring = root.utf8();

@@ -33,7 +33,7 @@
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
 #include <KTemporaryFile>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 #include <KoTextShapeData.h>
 #include <KoShapeLoadingContext.h>
@@ -148,7 +148,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
     if (!store->open("content.xml"))
         return QString();
 
-    KoStoreDevice contentDev(store);
+    KOdfStorageDevice contentDev(store);
     KoXmlWriter* contentWriter = KOdfWriteStore::createOasisXmlWriter(&contentDev, "office:document-content");
 
     // for office:body

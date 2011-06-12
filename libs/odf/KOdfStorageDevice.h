@@ -28,12 +28,12 @@
  * it can be used to create a QDomDocument from it, to be written or read
  * using QDataStream or to be written using QTextStream
  */
-class KOODF_EXPORT KoStoreDevice : public QIODevice
+class KOODF_EXPORT KOdfStorageDevice : public QIODevice
 {
 public:
     /// Note: KoStore::open() should be called before calling this.
-    explicit KoStoreDevice(KoStore *store);
-    ~KoStoreDevice();
+    explicit KOdfStorageDevice(KoStore *store);
+    ~KOdfStorageDevice();
 
     // Reimplemented from QIODevice
     virtual bool isSequential() const;

@@ -19,7 +19,7 @@
 #include "SCSoundCollection.h"
 #include "SCSoundData.h"
 
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 
 #include <QList>
@@ -79,7 +79,7 @@ bool SCSoundCollection::completeLoading(KoStore *store)
     foreach (SCSoundData *sound, d->sounds) {
         if(! store->open(sound->storeHref()))
             return false;
-        bool ok = sound->loadFromFile(new KoStoreDevice(store));
+        bool ok = sound->loadFromFile(new KOdfStorageDevice(store));
         store->close();
         if(! ok) {
             return false;
@@ -97,7 +97,7 @@ bool SCSoundCollection::completeSaving(KoStore *store, KoXmlWriter * manifestWri
         {
             if(! store->open(sound->storeHref()))
                 return false;
-            bool ok = sound->saveToFile(new KoStoreDevice(store));
+            bool ok = sound->saveToFile(new KOdfStorageDevice(store));
             store->close();
             if(! ok)
                 return false;

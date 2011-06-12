@@ -927,7 +927,7 @@ bool KoDocument::saveNativeFormatODF(KoStore *store, const QByteArray &mimeType)
 
     if (!d->versionInfo.isEmpty()) {
         if (store->open("VersionList.xml")) {
-            KoStoreDevice dev(store);
+            KOdfStorageDevice dev(store);
             KoXmlWriter *xmlWriter = KOdfWriteStore::createOasisXmlWriter(&dev,
                                      "VL:version-list");
             for (int i = 0; i < d->versionInfo.size(); ++i) {
@@ -976,7 +976,7 @@ bool KoDocument::saveNativeFormatKOffice(KoStore *store)
 {
     kDebug(30003) << "Saving root";
     if (store->open("root")) {
-        KoStoreDevice dev(store);
+        KOdfStorageDevice dev(store);
         if (!saveToStream(&dev) || !store->close()) {
             kDebug(30003) << "saveToStream failed";
             delete store;
@@ -989,7 +989,7 @@ bool KoDocument::saveNativeFormatKOffice(KoStore *store)
     }
     if (store->open("documentinfo.xml")) {
         QDomDocument doc = d->docInfo->save();
-        KoStoreDevice dev(store);
+        KOdfStorageDevice dev(store);
 
         QByteArray s = doc.toByteArray(); // this is already Utf8!
         (void)dev.write(s.data(), s.size());
@@ -1041,7 +1041,7 @@ bool KoDocument::saveToStore(KoStore *_store, const QString & _path)
 
     // In the current directory we're the king :-)
     if (_store->open("root")) {
-        KoStoreDevice dev(_store);
+        KOdfStorageDevice dev(_store);
         if (!saveToStream(&dev)) {
             _store->close();
             return false;
@@ -1067,7 +1067,7 @@ bool KoDocument::saveOasisPreview(KoStore *store, KoXmlWriter *manifestWriter)
     QImage preview(pix.toImage().convertToFormat(QImage::Format_ARGB32, Qt::ColorOnly));
 
     // ### TODO: freedesktop.org Thumbnail specification (date...)
-    KoStoreDevice io(store);
+    KOdfStorageDevice io(store);
     if (!io.open(QIODevice::WriteOnly))
         return false;
     if (! preview.save(&io, "PNG", 0))
@@ -1083,7 +1083,7 @@ bool KoDocument::savePreview(KoStore *store)
     QPixmap pix = generatePreview(QSize(256, 256));
     // Reducing to 8bpp reduces file sizes quite a lot.
     const QImage preview(pix.toImage().convertToFormat(QImage::Format_Indexed8, Qt::AvoidDither | Qt::DiffuseDither));
-    KoStoreDevice io(store);
+    KOdfStorageDevice io(store);
     if (!io.open(QIODevice::WriteOnly))
         return false;
     if (! preview.save(&io, "PNG"))     // ### TODO What is -9 in quality terms?

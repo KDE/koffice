@@ -23,7 +23,7 @@
 #include <KarbonPart.h>
 
 #include <KoFilterChain.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <KoOdfGraphicStyles.h>
 #include <KOdfPageLayoutData.h>
 #include <KoShape.h>
@@ -95,7 +95,7 @@ KoFilter::ConversionStatus KarbonImport::convert(const QByteArray& from, const Q
             delete store;
             return KoFilter::StupidError;
         }
-        KoStoreDevice ioMain(store);
+        KOdfStorageDevice ioMain(store);
         ioMain.open(QIODevice::ReadOnly);
         if (! parseRoot(&ioMain)) {
             kWarning() << "Parsing maindoc.xml has failed! Aborting!";

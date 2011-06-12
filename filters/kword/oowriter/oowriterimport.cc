@@ -134,7 +134,7 @@ KoFilter::ConversionStatus OoWriterImport::convert(QByteArray const & from, QByt
     m_zip->close();
     delete m_zip; // It has to be so late, as pictures might be read.
 
-    KoStoreDevice* out = m_chain->storageFile("maindoc.xml", KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile("maindoc.xml", KoStore::Write);
     if (!out) {
         kError(30518) << "Unable to open output file!" << endl;
         return KoFilter::StorageCreationError;
@@ -1742,7 +1742,7 @@ QString OoWriterImport::appendPicture(QDomDocument& doc, const KoXmlElement& obj
 
     kDebug(30518) << "Storage name:" << strStoreName;
 
-    KoStoreDevice* out = m_chain->storageFile(strStoreName , KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile(strStoreName , KoStore::Write);
     if (out) {
         if (!out->open(QIODevice::WriteOnly)) {
             kWarning(30518) << "Cannot open for saving picture: " << frameName << " " << href;

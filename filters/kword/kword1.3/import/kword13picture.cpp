@@ -24,7 +24,7 @@
 #include <ktemporaryfile.h>
 
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 
 #include "kword13picture.h"
 

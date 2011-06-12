@@ -38,7 +38,7 @@
 #include <kfiledialog.h>
 #include <kdebug.h>
 #include <KoFilterManager.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 
 /*#ifdef __FreeBSD__
 #include <unistd.h>
@@ -51,7 +51,7 @@
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  true to construct a modal dialog.
  */
-XSLTExportDia::XSLTExportDia(KoStoreDevice* in, const QByteArray &format, QWidget* parent,  const char* name_, bool modal, Qt::WFlags fl)
+XSLTExportDia::XSLTExportDia(KOdfStorageDevice* in, const QByteArray &format, QWidget* parent,  const char* name_, bool modal, Qt::WFlags fl)
         : XSLTDialog(parent, name_, modal, fl)
 {
     int i = 0;

@@ -27,7 +27,7 @@ Boston, MA 02110-1301, USA.
 #include "KoFilter.h"
 #include "KoEmbeddingFilter.h"
 #include "KoFilterEntry.h"
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include "komain_export.h"
 #include "KoFilterChainLinkList.h"
 
@@ -102,12 +102,12 @@ public:
      * This part of the API is for the filters in our chain.
      * If you call it multiple times with the same stream name
      * the stream will be closed and re-opened.
-     * Note: @em Don't delete that @ref KoStoreDevice we return.
+     * Note: @em Don't delete that @ref KOdfStorageDevice we return.
      * @param name The name of the stream inside the storage
      * @param mode Whether we want to read or write from/to the stream
      * @return The storage device to access the stream. May be 0!
      */
-    KoStoreDevice* storageFile(const QString& name = "root", KoStore::Mode mode = KoStore::Read);
+    KOdfStorageDevice* storageFile(const QString& name = "root", KoStore::Mode mode = KoStore::Read);
 
     /**
      * This method allows your filter to work directly on the
@@ -173,13 +173,13 @@ private:
 
     void inputFileHelper(KoDocument* document, const QString& alternativeFile);
     void outputFileHelper(bool autoDelete);
-    KoStoreDevice* storageNewStreamHelper(KoStore** storage, KoStoreDevice** device, const QString& name);
-    KoStoreDevice* storageHelper(const QString& file, const QString& streamName,
-                                 KoStore::Mode mode, KoStore** storage, KoStoreDevice** device);
+    KOdfStorageDevice* storageNewStreamHelper(KoStore** storage, KOdfStorageDevice** device, const QString& name);
+    KOdfStorageDevice* storageHelper(const QString& file, const QString& streamName,
+                                 KoStore::Mode mode, KoStore** storage, KOdfStorageDevice** device);
     void storageInit(const QString& file, KoStore::Mode mode, KoStore** storage);
-    KoStoreDevice* storageInitEmbedding(const QString& name);
-    KoStoreDevice* storageCreateFirstStream(const QString& streamName, KoStore** storage, KoStoreDevice** device);
-    KoStoreDevice* storageCleanupHelper(KoStore** storage);
+    KOdfStorageDevice* storageInitEmbedding(const QString& name);
+    KOdfStorageDevice* storageCreateFirstStream(const QString& streamName, KoStore** storage, KOdfStorageDevice** device);
+    KOdfStorageDevice* storageCleanupHelper(KoStore** storage);
 
     KoDocument* createDocument(const QString& file);
     KoDocument* createDocument(const QByteArray& mimeType);
@@ -203,9 +203,9 @@ private:
     QString m_outputFile;
 
     KoStore* m_inputStorage;          // ...or was it a storage+device?
-    KoStoreDevice* m_inputStorageDevice;
+    KOdfStorageDevice* m_inputStorageDevice;
     KoStore* m_outputStorage;
-    KoStoreDevice* m_outputStorageDevice;
+    KOdfStorageDevice* m_outputStorageDevice;
 
     KoDocument* m_inputDocument;      // ...or even documents?
     KoDocument* m_outputDocument;

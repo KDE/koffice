@@ -27,7 +27,7 @@
 
 #include <KoUnit.h>
 #include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 
 #include <kdebug.h>
 
@@ -255,7 +255,7 @@ void KoImageData::setImage(const QString &url, KoStore *store, KoImageCollection
             };
             Finalizer closer;
             closer.store = store;
-            KoStoreDevice device(store);
+            KOdfStorageDevice device(store);
             const bool lossy =url.toLower().endsWith(".jpg");
             if (!lossy && device.size() < MAX_MEMORY_IMAGESIZE) {
                 QByteArray data = device.readAll();

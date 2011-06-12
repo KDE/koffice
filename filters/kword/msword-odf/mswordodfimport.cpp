@@ -34,7 +34,7 @@
 
 #include <KoFilterChain.h>
 #include <KOdfWriteStore.h>
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 //#include <KoXmlWriter.h>
 
 #include <document.h>
@@ -244,7 +244,7 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
     if (!storeout->open("meta.xml"))
         return KoFilter::CreationError;
 
-    KoStoreDevice metaDev(storeout);
+    KOdfStorageDevice metaDev(storeout);
     KoXmlWriter *meta = KOdfWriteStore::createOasisXmlWriter(&metaDev, "office:document-meta");
     meta->startElement("office:meta");
     meta->addCompleteElement(&buf);

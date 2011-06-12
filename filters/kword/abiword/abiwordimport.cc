@@ -623,7 +623,7 @@ bool StructureParser::EndElementD(StackItem* stackItem)
     key.setAttribute("name", strStoreName);
     m_picturesElement.appendChild(key);
 
-    KoStoreDevice* out = m_chain->storageFile(strStoreName, KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile(strStoreName, KoStore::Write);
     if (!out) {
         kError(30506) << "Unable to open output file for: " << stackItem->fontName << " Storage: " << strStoreName;
         return false;
@@ -1619,7 +1619,7 @@ KoFilter::ConversionStatus ABIWORDImport::convert(const QByteArray& from, const 
     delete in;
 
     QByteArray strOut;
-    KoStoreDevice* out;
+    KOdfStorageDevice* out;
 
     kDebug(30506) << "Creating documentinfo.xml";
     out = m_chain->storageFile("documentinfo.xml", KoStore::Write);
