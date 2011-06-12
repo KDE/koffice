@@ -27,7 +27,6 @@
 #include <KOdfGenericStyles.h>
 #include <KOdfXmlNS.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfGraphicStyles.h>
 #include <KOdfStylesReader.h>
 #include <KOdfStorageDevice.h>
 #include <KUnit.h>
