@@ -70,7 +70,7 @@ void KWPageStylePrivate::clear()
     fixedFooterSize = false;
 }
 
-static void saveInsets(const KoInsets insets, KoGenStyle &style, const QString &prefix, KoGenStyle::PropertyType type)
+static void saveInsets(const KoInsets insets, KOdfGenericStyle &style, const QString &prefix, KOdfGenericStyle::PropertyType type)
 {
     if (insets.left == insets.right && insets.top == insets.bottom && insets.left == insets.top) {
         if (qAbs(insets.top) > 1E-4)
@@ -297,9 +297,9 @@ void KWPageStyle::setBackground(KoShapeBackground *background)
         d->fullPageBackground->ref();
 }
 
-KoGenStyle KWPageStyle::saveOdf() const
+KOdfGenericStyle KWPageStyle::saveOdf() const
 {
-    KoGenStyle pageLayout = d->pageLayout.saveOdf();
+    KOdfGenericStyle pageLayout = d->pageLayout.saveOdf();
     pageLayout.setAutoStyleInStylesDotXml(true);
     pageLayout.addAttribute("style:page-usage", "all");
 
@@ -330,17 +330,17 @@ KoGenStyle KWPageStyle::saveOdf() const
 
 
     if (headerPolicy() != KWord::HFTypeNone) {
-        pageLayout.addProperty("style:dynamic-spacing", d->fixedHeaderSize, KoGenStyle::PageHeaderType);
-        pageLayout.addPropertyPt("fo:min-height", d->headerMinimumHeight, KoGenStyle::PageHeaderType);
-        saveInsets(d->headerMargin, pageLayout, "fo:margin", KoGenStyle::PageHeaderType);
-        saveInsets(d->headerInsets, pageLayout, "fo:padding", KoGenStyle::PageHeaderType);
+        pageLayout.addProperty("style:dynamic-spacing", d->fixedHeaderSize, KOdfGenericStyle::PageHeaderType);
+        pageLayout.addPropertyPt("fo:min-height", d->headerMinimumHeight, KOdfGenericStyle::PageHeaderType);
+        saveInsets(d->headerMargin, pageLayout, "fo:margin", KOdfGenericStyle::PageHeaderType);
+        saveInsets(d->headerInsets, pageLayout, "fo:padding", KOdfGenericStyle::PageHeaderType);
     }
 
     if (footerPolicy() != KWord::HFTypeNone) {
-        pageLayout.addProperty("style:dynamic-spacing", d->fixedFooterSize, KoGenStyle::PageFooterType);
-        pageLayout.addPropertyPt("fo:min-height", d->footerMinimumHeight, KoGenStyle::PageFooterType);
-        saveInsets(d->footerMargin, pageLayout, "fo:margin", KoGenStyle::PageFooterType);
-        saveInsets(d->footerInsets, pageLayout, "fo:padding", KoGenStyle::PageFooterType);
+        pageLayout.addProperty("style:dynamic-spacing", d->fixedFooterSize, KOdfGenericStyle::PageFooterType);
+        pageLayout.addPropertyPt("fo:min-height", d->footerMinimumHeight, KOdfGenericStyle::PageFooterType);
+        saveInsets(d->footerMargin, pageLayout, "fo:margin", KOdfGenericStyle::PageFooterType);
+        saveInsets(d->footerInsets, pageLayout, "fo:padding", KOdfGenericStyle::PageFooterType);
     }
 
     // TODO see how we should save margins if we use the 'closest to binding' stuff.

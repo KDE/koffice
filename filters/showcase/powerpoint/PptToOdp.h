@@ -118,19 +118,19 @@ private:
     void defineAutomaticDrawingPageStyles(KoGenStyles& styles);
 
     // we assume that these functions are the same for all style families
-    void defineDefaultTextProperties(KoGenStyle& style);
-    void defineDefaultParagraphProperties(KoGenStyle& style);
-    void defineDefaultGraphicProperties(KoGenStyle& style, KoGenStyles& styles);
+    void defineDefaultTextProperties(KOdfGenericStyle& style);
+    void defineDefaultParagraphProperties(KOdfGenericStyle& style);
+    void defineDefaultGraphicProperties(KOdfGenericStyle& style, KoGenStyles& styles);
 
     /* Extract data from TextCFException into the style */
 
-    void defineTextProperties(KoGenStyle& style,
+    void defineTextProperties(KOdfGenericStyle& style,
                               const PptTextCFRun* cf,
                               const MSO::TextCFException9* cf9,
                               const MSO::TextCFException10* cf10,
                               const MSO::TextSIException* si);
 
-    void defineTextProperties(KoGenStyle& style,
+    void defineTextProperties(KOdfGenericStyle& style,
                               const MSO::TextCFException* cf,
                               const MSO::TextCFException9* cf9,
                               const MSO::TextCFException10* cf10,
@@ -138,19 +138,19 @@ private:
                               const MSO::TextContainer* tc = NULL);
 
     /* Extract data from TextPFException into the style */
-    void defineParagraphProperties(KoGenStyle& style,
+    void defineParagraphProperties(KOdfGenericStyle& style,
                                    const PptTextPFRun& pf);
 
     /**
      * Extract data into the drawing-page style
-     * @param KoGenStyle
+     * @param KOdfGenericStyle
      * @param DrawStyle
      * @param KoGenStyles
      * @param ODrawToOdf
      * @param pointer to a HeadersFootersAtom
      * @param pointer to SlideFlags of presentation or notes slide
      */
-    void defineDrawingPageStyle(KoGenStyle& style, const DrawStyle& ds, KoGenStyles& styles,
+    void defineDrawingPageStyle(KOdfGenericStyle& style, const DrawStyle& ds, KoGenStyles& styles,
                                 ODrawToOdf& odrawtoodf,
                                 const MSO::HeadersFootersAtom* hf,
                                 const MSO::SlideFlags* sf = NULL);
@@ -171,17 +171,17 @@ private:
         ListStyleInput() :cf(0), cf9(0), cf10(0), si(0) {}
     };
     /* Extract data into the style element style:list */
-    void defineListStyle(KoGenStyle& style,
+    void defineListStyle(KOdfGenericStyle& style,
                          const MSO::TextMasterStyleAtom& levels,
                          const MSO::TextMasterStyle9Atom* levels9 = 0,
                          const MSO::TextMasterStyle10Atom* levels10 = 0);
-    void defineListStyle(KoGenStyle& style, quint8 depth,
+    void defineListStyle(KOdfGenericStyle& style, quint8 depth,
                          ListStyleInput input,
                          const MSO::TextMasterStyleLevel* level = 0,
                          const MSO::TextMasterStyle9Level* level9 = 0,
                          const MSO::TextMasterStyle10Level* level10 = 0);
 
-    void defineListStyle(KoGenStyle& style, quint8 depth,
+    void defineListStyle(KOdfGenericStyle& style, quint8 depth,
                          const ListStyleInput& info,
                          const ListStyleInput& parent);
 

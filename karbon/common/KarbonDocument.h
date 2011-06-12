@@ -36,7 +36,7 @@
 
 #include <karboncommon_export.h>
 #include <KoShapeLoadingContext.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoXmlReader.h>
 #include <KoDocument.h>
 

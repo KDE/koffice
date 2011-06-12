@@ -35,7 +35,7 @@
 #include "ChangeFollower_p.h"
 #include "KoTextDocument.h"
 
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 
 #include <QTimer>
@@ -150,7 +150,7 @@ KoStyleManager::~KoStyleManager()
 void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
 {
     // saveOdfDefaultStyles
-    KoGenStyle defStyle(KoGenStyle::ParagraphStyle, "paragraph");
+    KOdfGenericStyle defStyle(KOdfGenericStyle::ParagraphStyle, "paragraph");
     defStyle.setDefaultStyle(true);
     d->defaultParagraphStyle->saveOdf(defStyle, mainStyles);
     mainStyles.insert(defStyle);
@@ -167,7 +167,7 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
             name = 'P';
         }
 
-        KoGenStyle style(KoGenStyle::ParagraphStyle, "paragraph");
+        KOdfGenericStyle style(KOdfGenericStyle::ParagraphStyle, "paragraph");
         paragraphStyle->saveOdf(style, mainStyles);
         QString newName = mainStyles.insert(style, name, KoGenStyles::DontAddNumberToName);
         savedNames.insert(paragraphStyle, newName);
@@ -193,7 +193,7 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
             name = 'T';
         }
 
-        KoGenStyle style(KoGenStyle::ParagraphStyle, "text");
+        KOdfGenericStyle style(KOdfGenericStyle::ParagraphStyle, "text");
         characterStyle->saveOdf(style);
         mainStyles.insert(style, name, KoGenStyles::DontAddNumberToName);
     }
@@ -206,7 +206,7 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
         if (name.isEmpty())
             name = 'L';
 
-        KoGenStyle style(KoGenStyle::ListStyle);
+        KOdfGenericStyle style(KOdfGenericStyle::ListStyle);
         listStyle->saveOdf(style);
         mainStyles.insert(style, name, KoGenStyles::DontAddNumberToName);
     }
@@ -217,7 +217,7 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
         if (name.isEmpty())
             name = "table";
 
-        KoGenStyle style(KoGenStyle::TableStyle);
+        KOdfGenericStyle style(KOdfGenericStyle::TableStyle);
         tableStyle->saveOdf(style);
         mainStyles.insert(style, name, KoGenStyles::DontAddNumberToName);
     }
@@ -228,7 +228,7 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
         if (name.isEmpty())
             name = "Tc";
 
-        KoGenStyle style(KoGenStyle::TableColumnStyle);
+        KOdfGenericStyle style(KOdfGenericStyle::TableColumnStyle);
         tableColumnStyle->saveOdf(style);
         mainStyles.insert(style, name, KoGenStyles::DontAddNumberToName);
     }
@@ -239,7 +239,7 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
         if (name.isEmpty())
             name = "Tr";
 
-        KoGenStyle style(KoGenStyle::TableRowStyle);
+        KOdfGenericStyle style(KOdfGenericStyle::TableRowStyle);
         tableRowStyle->saveOdf(style);
         mainStyles.insert(style, name, KoGenStyles::DontAddNumberToName);
     }
@@ -250,7 +250,7 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
         if (name.isEmpty())
             name = "Tc";
 
-        KoGenStyle style(KoGenStyle::TableCellStyle);
+        KOdfGenericStyle style(KOdfGenericStyle::TableCellStyle);
         tableCellStyle->saveOdf(style);
         mainStyles.insert(style, name, KoGenStyles::DontAddNumberToName);
     }
@@ -261,7 +261,7 @@ void KoStyleManager::saveOdf(KoGenStyles& mainStyles)
         if (name.isEmpty())
             name = "S";
 
-        KoGenStyle style(KoGenStyle::SectionStyle);
+        KOdfGenericStyle style(KOdfGenericStyle::SectionStyle);
         sectionStyle->saveOdf(style);
         mainStyles.insert(style, name, KoGenStyles::DontAddNumberToName);
     }

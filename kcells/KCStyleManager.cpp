@@ -29,7 +29,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoOdfStylesReader.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
@@ -53,7 +53,7 @@ KCStyleManager::~KCStyleManager()
 void KCStyleManager::saveOdf(KoGenStyles &mainStyles)
 {
     kDebug(36003) << "KCStyleManager: Saving default cell style";
-    KoGenStyle defStyle = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
+    KOdfGenericStyle defStyle = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");
     defaultStyle()->saveOdf(defStyle, mainStyles, this);
 
     m_oasisStyles.clear();
@@ -61,7 +61,7 @@ void KCStyleManager::saveOdf(KoGenStyles &mainStyles)
     CustomStyles::ConstIterator end = m_styles.constEnd();
     for (CustomStyles::ConstIterator it(m_styles.constBegin()); it != end; ++it) {
         kDebug(36003) << "KCStyleManager: Saving common cell style" << it.key();
-        KoGenStyle customStyle = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
+        KOdfGenericStyle customStyle = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");
         const QString oasisName = (*it)->saveOdf(customStyle, mainStyles, this);
         m_oasisStyles[(*it)->name()] = oasisName;
     }

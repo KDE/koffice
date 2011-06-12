@@ -724,7 +724,7 @@ KCFormat::Type KCStyle::fractionType(const QString &_format)
         return KCFormat::fraction_three_digits;
 }
 
-QString KCStyle::saveOdfStyleNumeric(KoGenStyle &style, KoGenStyles &mainStyles,
+QString KCStyle::saveOdfStyleNumeric(KOdfGenericStyle &style, KoGenStyles &mainStyles,
                                    KCFormat::Type _style,
                                    const QString &_prefix, const QString &_postfix,
                                    int _precision, const QString& symbol)
@@ -1164,7 +1164,7 @@ QString KCStyle::saveOdfStyleNumericFraction(KoGenStyles &mainStyles, KCFormat::
     return KoOdfNumberStyles::saveOdfFractionStyle(mainStyles, format, _prefix, _suffix);
 }
 
-QString KCStyle::saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
+QString KCStyle::saveOdf(KOdfGenericStyle& style, KoGenStyles& mainStyles,
                        const KCStyleManager* manager) const
 {
     // list of substyles to store
@@ -1172,7 +1172,7 @@ QString KCStyle::saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
 
     if (isDefault()) {
         if (style.isEmpty()) {
-            style = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
+            style = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");
             style.setDefaultStyle(true);
             // don't i18n'ize "Default" in this case
             return "Default"; // mainStyles.insert( style, "Default", KoGenStyles::DontAddNumberToName );
@@ -1197,14 +1197,14 @@ QString KCStyle::saveOdf(KoGenStyle& style, KoGenStyles& mainStyles,
     // KCells::KCStyle is definitly an OASIS auto style,
     // but don't overwrite it, if it already exists
     if (style.isEmpty())
-        style = KoGenStyle(KoGenStyle::TableCellAutoStyle, "table-cell");
+        style = KOdfGenericStyle(KOdfGenericStyle::TableCellAutoStyle, "table-cell");
 
     // doing the real work
     saveOdfStyle(keysToStore, style, mainStyles, manager);
     return mainStyles.insert(style, "ce");
 }
 
-void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
+void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KOdfGenericStyle &style,
                          KoGenStyles &mainStyles, const KCStyleManager* manager) const
 {
 #ifndef NDEBUG
@@ -1242,7 +1242,7 @@ void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
         }
         if (!value.isEmpty()) {
             style.addProperty("style:text-align-source", "fix");   // table-cell-properties
-            style.addProperty("fo:text-align", value, KoGenStyle::ParagraphType);
+            style.addProperty("fo:text-align", value, KOdfGenericStyle::ParagraphType);
         }
     }
 
@@ -1307,7 +1307,7 @@ void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
     }
 
     if (keysToStore.contains(Indentation) && indentation() != 0.0) {
-        style.addPropertyPt("fo:margin-left", indentation(), KoGenStyle::ParagraphType);
+        style.addPropertyPt("fo:margin-left", indentation(), KOdfGenericStyle::ParagraphType);
         //FIXME
         //if ( a == HAlignUndefined )
         //currentCellStyle.addProperty("fo:text-align", "start" );
@@ -1378,31 +1378,31 @@ void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
 
     // font
     if (keysToStore.contains(FontFamily)) {   // !fontFamily().isEmpty() == true
-        style.addProperty("fo:font-family", fontFamily(), KoGenStyle::TextType);
+        style.addProperty("fo:font-family", fontFamily(), KOdfGenericStyle::TextType);
     }
     if (keysToStore.contains(FontSize)) {   // fontSize() != 0
-        style.addPropertyPt("fo:font-size", fontSize(), KoGenStyle::TextType);
+        style.addPropertyPt("fo:font-size", fontSize(), KOdfGenericStyle::TextType);
     }
 
     if (keysToStore.contains(FontBold) && bold())
-        style.addProperty("fo:font-weight", "bold", KoGenStyle::TextType);
+        style.addProperty("fo:font-weight", "bold", KOdfGenericStyle::TextType);
 
     if (keysToStore.contains(FontItalic) && italic())
-        style.addProperty("fo:font-style", "italic", KoGenStyle::TextType);
+        style.addProperty("fo:font-style", "italic", KOdfGenericStyle::TextType);
 
     if (keysToStore.contains(FontUnderline) && underline()) {
         //style:text-underline-style="solid" style:text-underline-width="auto"
-        style.addProperty("style:text-underline-style", "solid", KoGenStyle::TextType);
+        style.addProperty("style:text-underline-style", "solid", KOdfGenericStyle::TextType);
         //copy from oo-129
-        style.addProperty("style:text-underline-width", "auto", KoGenStyle::TextType);
-        style.addProperty("style:text-underline-color", "font-color", KoGenStyle::TextType);
+        style.addProperty("style:text-underline-width", "auto", KOdfGenericStyle::TextType);
+        style.addProperty("style:text-underline-color", "font-color", KOdfGenericStyle::TextType);
     }
 
     if (keysToStore.contains(FontStrike) && strikeOut())
-        style.addProperty("style:text-line-through-style", "solid", KoGenStyle::TextType);
+        style.addProperty("style:text-line-through-style", "solid", KOdfGenericStyle::TextType);
 
     if (keysToStore.contains(FontColor) && fontColor().isValid()) {   // always save
-        style.addProperty("fo:color", colorName(fontColor()), KoGenStyle::TextType);
+        style.addProperty("fo:color", colorName(fontColor()), KOdfGenericStyle::TextType);
     }
 
     //I don't think there is a reason why the background brush should be saved if it is null,
@@ -1437,7 +1437,7 @@ void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KoGenStyle &style,
 
 QString KCStyle::saveOdfBackgroundStyle(KoGenStyles &mainStyles, const QBrush &brush)
 {
-    KoGenStyle styleobjectauto = KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic");
+    KOdfGenericStyle styleobjectauto = KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic");
     KoOdfGraphicStyles::saveOdfFillStyle(styleobjectauto, mainStyles, brush);
     return mainStyles.insert(styleobjectauto, "gr");
 }
@@ -2728,7 +2728,7 @@ void KCCustomStyle::setName(QString const & name)
     d->name = name;
 }
 
-QString KCCustomStyle::saveOdf(KoGenStyle& style, KoGenStyles &mainStyles,
+QString KCCustomStyle::saveOdf(KOdfGenericStyle& style, KoGenStyles &mainStyles,
                              const KCStyleManager* manager) const
 {
     Q_ASSERT(!name().isEmpty());

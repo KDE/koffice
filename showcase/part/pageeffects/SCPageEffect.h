@@ -31,7 +31,7 @@ class QGraphicsScene;
 class QGraphicsPixmapItem;
 class QGraphicsView;
 class KoXmlWriter;
-class KoGenStyle;
+class KOdfGenericStyle;
 class SCPageEffectStrategy;
 class KoXmlElement;
 
@@ -154,7 +154,7 @@ public:
     /**
      * Save transition as part of the style
      */
-    void saveOdfSmilAttributes(KoGenStyle &style) const;
+    void saveOdfSmilAttributes(KOdfGenericStyle &style) const;
 
     /**
      * Load effect from odf.

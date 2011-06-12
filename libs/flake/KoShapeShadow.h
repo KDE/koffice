@@ -26,7 +26,7 @@
 #include <QtGui/QColor>
 
 class KoShape;
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoShapeSavingContext;
 class QPainter;
 class KoViewConverter;
@@ -43,7 +43,7 @@ public:
      * @param style object
      * @param context used for saving
      */
-    void fillStyle(KoGenStyle &style, KoShapeSavingContext &context);
+    void fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context);
 
     /**
      * Paints the shadow of the shape.

@@ -49,7 +49,7 @@ class KoShapeApplicationData;
 class KoShapeSavingContext;
 class KoCanvasBase;
 class KoShapeLoadingContext;
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoShapeControllerBase;
 class KoDataCenterBase;
 class KoShapeShadow;
@@ -968,7 +968,7 @@ protected:
      * @return the name of the style
      * @see saveOdf
      */
-    virtual QString saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const;
+    virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
 
     /**
      * Loads the stroke and fill style from the given element.

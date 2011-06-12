@@ -26,7 +26,7 @@ class QString;
 class QTextStream;
 class KZip;
 class KoStore;
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoXmlWriter;
 class KWord13Document;
 
@@ -63,8 +63,8 @@ protected: // Preparing phase
     void declareStyle(KWord13Layout& layout);
     double numberOrNull(const QString& str) const;
     double positiveNumberOrNull(const QString& str) const;
-    void fillGenStyleWithFormatOne(const KWord13FormatOneData& one, KoGenStyle& gs, const bool style) const;
-    void fillGenStyleWithLayout(const KWord13Layout& layout, KoGenStyle& gs, const bool style) const;
+    void fillGenStyleWithFormatOne(const KWord13FormatOneData& one, KOdfGenericStyle& gs, const bool style) const;
+    void fillGenStyleWithLayout(const KWord13Layout& layout, KOdfGenericStyle& gs, const bool style) const;
 protected:
     KWord13Document* m_kwordDocument;
     KoStore* m_store;

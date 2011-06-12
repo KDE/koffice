@@ -301,7 +301,7 @@ void Document::processStyles()
         if (style && style->type() == wvWare::Style::sgcPara) {
             //create this style & add formatting info to it
             kDebug(30513) << "creating ODT paragraphstyle" << name;
-            KoGenStyle userStyle(KoGenStyle::ParagraphStyle, "paragraph");
+            KOdfGenericStyle userStyle(KOdfGenericStyle::ParagraphStyle, "paragraph");
             userStyle.addAttribute("style:display-name", displayName);
 
             const wvWare::Style* followingStyle = styles.styleByID(style->followingStyle());
@@ -318,7 +318,7 @@ void Document::processStyles()
             QString fontName = m_textHandler->getFont(style->chp().ftcAscii);
             if (!fontName.isEmpty()) {
                 m_mainStyles->insertFontFace(KOdfFontData(fontName));
-                userStyle.addProperty(QString("style:font-name"), fontName, KoGenStyle::TextType);
+                userStyle.addProperty(QString("style:font-name"), fontName, KOdfGenericStyle::TextType);
             }
 
             // Process the character and paragraph properties.
@@ -333,7 +333,7 @@ void Document::processStyles()
         } else if (style && style->type() == wvWare::Style::sgcChp) {
             //create this style & add formatting info to it
             kDebug(30513) << "creating ODT textstyle" << name;
-            KoGenStyle userStyle(KoGenStyle::ParagraphStyle, "text");
+            KOdfGenericStyle userStyle(KOdfGenericStyle::ParagraphStyle, "text");
             userStyle.addAttribute("style:display-name", displayName);
 
             const wvWare::Style* parentStyle = styles.styleByIndex(style->m_std->istdBase);
@@ -345,7 +345,7 @@ void Document::processStyles()
             QString fontName = m_textHandler->getFont(style->chp().ftcAscii);
             if (!fontName.isEmpty()) {
                 m_mainStyles->insertFontFace(KOdfFontData(fontName));
-                userStyle.addProperty(QString("style:font-name"), fontName, KoGenStyle::TextType);
+                userStyle.addProperty(QString("style:font-name"), fontName, KOdfGenericStyle::TextType);
             }
 
             // Process the character and paragraph properties.
@@ -357,7 +357,7 @@ void Document::processStyles()
         }
     }
     //also create a defaul style which is needed to store the default tab spacing
-    KoGenStyle defaultStyle(KoGenStyle::ParagraphStyle, "paragraph");
+    KOdfGenericStyle defaultStyle(KOdfGenericStyle::ParagraphStyle, "paragraph");
     defaultStyle.setDefaultStyle(true);
     defaultStyle.addPropertyPt("style:tab-stop-distance", (qreal)m_parser->dop().dxaTab / 20.0);
     m_mainStyles->insert(defaultStyle, "nevershown");
@@ -402,7 +402,7 @@ void Document::slotSectionFound(wvWare::SharedPtr<const wvWare::Word97::SEP> sep
     kDebug(30513) ;
     m_omittMasterPage = false;
     m_useLastMasterPage = false;
-    static KoGenStyle lastPLStyle(KoGenStyle::PageLayoutStyle);
+    static KOdfGenericStyle lastPLStyle(KOdfGenericStyle::PageLayoutStyle);
 
     //does this section require a specific first page
     bool firstPage = sep->fTitlePage || sep->pgbApplyTo;
@@ -411,7 +411,7 @@ void Document::slotSectionFound(wvWare::SharedPtr<const wvWare::Word97::SEP> sep
     // page-layout style
     // *******************************
     kDebug(30513) << "preparing page-layout styles";
-    KoGenStyle* pageLayoutStyle = new KoGenStyle(KoGenStyle::PageLayoutStyle);
+    KOdfGenericStyle* pageLayoutStyle = new KOdfGenericStyle(KOdfGenericStyle::PageLayoutStyle);
 
     //set page-layout attributes
     setPageLayoutStyle(pageLayoutStyle, sep, 0);
@@ -449,7 +449,7 @@ void Document::slotSectionFound(wvWare::SharedPtr<const wvWare::Word97::SEP> sep
         //cleaning required!
         delete pageLayoutStyle;
     } else {
-        //save the actual KoGenStyle!
+        //save the actual KOdfGenericStyle!
         lastPLStyle = *pageLayoutStyle;
 
         //add data into corresponding lists
@@ -463,7 +463,7 @@ void Document::slotSectionFound(wvWare::SharedPtr<const wvWare::Word97::SEP> sep
 
     //check if a first-page specific page-layout has to be created
     if (firstPage) {
-       pageLayoutStyle = new KoGenStyle(KoGenStyle::PageLayoutStyle);
+       pageLayoutStyle = new KOdfGenericStyle(KOdfGenericStyle::PageLayoutStyle);
 
        //set page-layout attributes for the first page
        setPageLayoutStyle(pageLayoutStyle, sep, 1);
@@ -476,7 +476,7 @@ void Document::slotSectionFound(wvWare::SharedPtr<const wvWare::Word97::SEP> sep
     // *******************************
     // master-page style
     // *******************************
-    KoGenStyle* masterStyle = new KoGenStyle(KoGenStyle::MasterPageStyle);
+    KOdfGenericStyle* masterStyle = new KOdfGenericStyle(KOdfGenericStyle::MasterPageStyle);
     QString masterStyleName;
 
     //NOTE: The first master-page-name has to be "Standard", kword has hard
@@ -500,7 +500,7 @@ void Document::slotSectionFound(wvWare::SharedPtr<const wvWare::Word97::SEP> sep
 
     //check if a first-page specific master-page has to be created
     if (firstPage) {
-        masterStyle = new KoGenStyle(KoGenStyle::MasterPageStyle);
+        masterStyle = new KOdfGenericStyle(KOdfGenericStyle::MasterPageStyle);
         masterStyleName.clear();
         masterStyleName.append("First_Page");
 
@@ -531,8 +531,8 @@ void Document::slotSectionFound(wvWare::SharedPtr<const wvWare::Word97::SEP> sep
 void Document::slotSectionEnd(wvWare::SharedPtr<const wvWare::Word97::SEP> sep)
 {
     kDebug(30513);
-    KoGenStyle* masterPageStyle = 0;
-    KoGenStyle* pageLayoutStyle = 0;
+    KOdfGenericStyle* masterPageStyle = 0;
+    KOdfGenericStyle* pageLayoutStyle = 0;
     QString pageLayoutName;
 
     for (int i = 0; i < m_masterPageName_list.size(); i++) {
@@ -674,7 +674,7 @@ void Document::headerEnd()
         m_evenOpen = false;
     }
     else {
-        KoGenStyle* masterPageStyle = 0;
+        KOdfGenericStyle* masterPageStyle = 0;
         QString name = 0;
         if (m_firstOpen) {
             name = m_masterPageName_list.first();
@@ -941,7 +941,7 @@ void Document::processSubDocQueue()
     }
 }
 
-void Document::setPageLayoutStyle(KoGenStyle* pageLayoutStyle,
+void Document::setPageLayoutStyle(KOdfGenericStyle* pageLayoutStyle,
                                   wvWare::SharedPtr<const wvWare::Word97::SEP> sep,
                                   bool firstPage)
 {
@@ -1001,8 +1001,8 @@ void Document::setPageLayoutStyle(KoGenStyle* pageLayoutStyle,
     footer.append("pt\" fo:min-height=\"10pt\"/>");
     footer.append("</style:footer-style>");
 
-    pageLayoutStyle->addProperty("1header-style", header, KoGenStyle::StyleChildElement);
-    pageLayoutStyle->addProperty("2footer-style", footer, KoGenStyle::StyleChildElement);
+    pageLayoutStyle->addProperty("1header-style", header, KOdfGenericStyle::StyleChildElement);
+    pageLayoutStyle->addProperty("2footer-style", footer, KOdfGenericStyle::StyleChildElement);
 
     //Page borders, check to which page-layout the border information has to be
     //applied: 0 - all pages, 1 - first page only, 2 - all but first.

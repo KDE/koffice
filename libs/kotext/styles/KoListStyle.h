@@ -31,7 +31,7 @@
 
 class KoListLevelProperties;
 class KoShapeLoadingContext;
-class KoGenStyle;
+class KOdfGenericStyle;
 
 /**
  * This class groups all styling-options for lists.
@@ -220,9 +220,9 @@ public:
     void loadOdf(KoShapeLoadingContext& context, const KoXmlElement& style = KoXmlElement());
 
     /**
-     * Save the style to a KoGenStyle object using the OpenDocument format
+     * Save the style to a KOdfGenericStyle object using the OpenDocument format
      */
-    void saveOdf(KoGenStyle &style);
+    void saveOdf(KOdfGenericStyle &style);
 
     /// copy all the properties from the other style to this style, effectively duplicating it.
     void copyProperties(KoListStyle *other);

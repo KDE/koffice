@@ -22,7 +22,7 @@
  */
 #include "KoSectionStyle.h"
 #include "KoStyleManager.h"
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include "Styles_p.h"
 #include "KoTextDocument.h"
@@ -324,7 +324,7 @@ void KoSectionStyle::removeDuplicates(const KoSectionStyle &other)
     d->stylesPrivate.removeDuplicates(other.d->stylesPrivate);
 }
 
-void KoSectionStyle::saveOdf(KoGenStyle &style)
+void KoSectionStyle::saveOdf(KOdfGenericStyle &style)
 {
     // only custom style have a displayname. automatic styles don't have a name set.
     if (!d->name.isEmpty() && !style.isDefaultStyle()) {
@@ -348,18 +348,18 @@ void KoSectionStyle::saveOdf(KoGenStyle &style)
                 else if (directionValue == KoText::InheritDirection)
                     direction = "page";
                 if (!direction.isEmpty())
-                    style.addProperty("style:writing-mode", direction, KoGenStyle::DefaultType);
+                    style.addProperty("style:writing-mode", direction, KOdfGenericStyle::DefaultType);
             }
         } else if (key == QTextFormat::BackgroundBrush) {
             QBrush backBrush = background();
             if (backBrush.style() != Qt::NoBrush)
-                style.addProperty("fo:background-color", backBrush.color().name(), KoGenStyle::ParagraphType);
+                style.addProperty("fo:background-color", backBrush.color().name(), KOdfGenericStyle::ParagraphType);
             else
-                style.addProperty("fo:background-color", "transparent", KoGenStyle::DefaultType);
+                style.addProperty("fo:background-color", "transparent", KOdfGenericStyle::DefaultType);
         } else if (key == QTextFormat::BlockLeftMargin) {
-            style.addPropertyPt("fo:margin-left", leftMargin(), KoGenStyle::DefaultType);
+            style.addPropertyPt("fo:margin-left", leftMargin(), KOdfGenericStyle::DefaultType);
         } else if (key == QTextFormat::BlockRightMargin) {
-            style.addPropertyPt("fo:margin-right", rightMargin(), KoGenStyle::DefaultType);
+            style.addPropertyPt("fo:margin-right", rightMargin(), KOdfGenericStyle::DefaultType);
       }
     }
 }

@@ -25,7 +25,7 @@
 class QSizeF;
 class QPainter;
 class QPainterPath;
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoShapeSavingContext;
 class KoOdfLoadingContext;
 class KoShapeBackgroundPrivate;
@@ -52,7 +52,7 @@ public:
      * @param style object
      * @param context used for saving
      */
-    virtual void fillStyle(KoGenStyle &style, KoShapeSavingContext &context) = 0;
+    virtual void fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) = 0;
 
     /// load background from odf styles
     virtual bool loadStyle(KoOdfLoadingContext &context, const QSizeF &shapeSize) = 0;

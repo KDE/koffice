@@ -52,14 +52,14 @@ protected:
     KoFilter::ConversionStatus read_name();
     KoFilter::ConversionStatus read_tblStylePr();
 
-    void createDefaultStyle(KoGenStyle::Type type, const char* family);
-    QMap<QByteArray, KoGenStyle*> m_defaultStyles;
+    void createDefaultStyle(KOdfGenericStyle::Type type, const char* family);
+    QMap<QByteArray, KOdfGenericStyle*> m_defaultStyles;
 
     QString m_name; //!< set by read_name()
 
     // Styles which are applied to all styles
-    KoGenStyle m_defaultTextStyle;
-    KoGenStyle m_defaultParagraphStyle;
+    KOdfGenericStyle m_defaultTextStyle;
+    KOdfGenericStyle m_defaultParagraphStyle;
 
 private:
     void init();

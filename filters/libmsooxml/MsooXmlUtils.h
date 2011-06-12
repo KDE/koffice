@@ -34,7 +34,7 @@
 #include <KoFilterChain.h>
 #include <KoXmlReader.h>
 #include <KDebug>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 
 class QLocale;
 class QDomElement;
@@ -200,8 +200,8 @@ private:
     T** m_pptr;
 };
 
-//! Copies properties from one KoGenStyle to another
-MSOOXML_EXPORT void copyPropertiesFromStyle(const KoGenStyle& sourceStyle, KoGenStyle& targetStyle, KoGenStyle::PropertyType type);
+//! Copies properties from one KOdfGenericStyle to another
+MSOOXML_EXPORT void copyPropertiesFromStyle(const KOdfGenericStyle& sourceStyle, KOdfGenericStyle& targetStyle, KOdfGenericStyle::PropertyType type);
 
 //! Decodes boolean attribute @a value. If unspecified returns @a defaultValue.
 //! @return true unless @a value is equal to "false", "off" or "0".

@@ -34,7 +34,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_tbl()
     body = tableBuf.setWriter(body);
 
     m_currentTableName = QLatin1String("Table") + QString::number(m_currentTableNumber + 1);
-    m_currentTableStyle = KoGenStyle(KoGenStyle::TableAutoStyle, "table");
+    m_currentTableStyle = KOdfGenericStyle(KOdfGenericStyle::TableAutoStyle, "table");
     m_currentTableWidth = 0.0;
     m_currentTableRowNumber = 0;
 
@@ -62,7 +62,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_tbl()
     body->addAttribute("table:name", m_currentTableName);
     m_currentTableStyle.addProperty(
         "style:width", QString::number(m_currentTableWidth) + QLatin1String("cm"),
-        KoGenStyle::TableType);
+        KOdfGenericStyle::TableType);
     //! @todo fix hardcoded table:align
     m_currentTableStyle.addProperty("table:align", "left");
 
@@ -79,7 +79,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_tbl()
     foreach (const QString columnWidth, m_columnsWidth) {
         body->startElement("table:table-column");
 
-        KoGenStyle columnStyle = KoGenStyle(KoGenStyle::TableColumnAutoStyle, "table-column");
+        KOdfGenericStyle columnStyle = KOdfGenericStyle(KOdfGenericStyle::TableColumnAutoStyle, "table-column");
         columnStyle.addProperty("style:column-width", columnWidth);
 
         const QString columnStyleName = mainStyles->insert(columnStyle, "col");
@@ -220,12 +220,12 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_tr()
     MSOOXML::Utils::XmlWriteBuffer rowBuf;
     body = rowBuf.setWriter(body);
     m_currentTableColumnNumber = 0;
-    m_currentTableRowStyle = KoGenStyle(KoGenStyle::TableRowAutoStyle, "table-row");
+    m_currentTableRowStyle = KOdfGenericStyle(KOdfGenericStyle::TableRowAutoStyle, "table-row");
     m_currentTableRowNumber = 0;
 
     const QXmlStreamAttributes attrs(attributes());
     READ_ATTR_WITHOUT_NS(h)
-    m_currentTableRowStyle.addProperty("style:min-row-height", MSOOXML::Utils::EMU_to_ODF(h), KoGenStyle::TableRowType);
+    m_currentTableRowStyle.addProperty("style:min-row-height", MSOOXML::Utils::EMU_to_ODF(h), KOdfGenericStyle::TableRowType);
 
     while (!atEnd()) {
         readNext();
@@ -272,7 +272,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_tc()
 
     MSOOXML::Utils::XmlWriteBuffer cellBuf;
     body = cellBuf.setWriter(body);
-    m_currentTableCellStyle = KoGenStyle(KoGenStyle::TableCellAutoStyle, "table-cell");
+    m_currentTableCellStyle = KOdfGenericStyle(KOdfGenericStyle::TableCellAutoStyle, "table-cell");
 
     while (!atEnd()) {
         readNext();

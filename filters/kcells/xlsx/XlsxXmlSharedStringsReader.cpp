@@ -191,7 +191,7 @@ KoFilter::ConversionStatus XlsxXmlSharedStringsReader::read_si()
     KoXmlWriter *origWriter = body;
     body = buf.setWriter(&siWriter);
 
-    m_currentTextStyle = KoGenStyle();
+    m_currentTextStyle = KOdfGenericStyle();
     bool plainTextSet = false;
     while (!atEnd()) {
         readNext();

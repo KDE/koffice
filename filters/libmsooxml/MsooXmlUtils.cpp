@@ -1519,7 +1519,7 @@ MSOOXML_EXPORT QString Utils::ParagraphBulletProperties::convertToListProperties
     return returnValue;
 }
 
-MSOOXML_EXPORT void Utils::copyPropertiesFromStyle(const KoGenStyle& sourceStyle, KoGenStyle& targetStyle, KoGenStyle::PropertyType type)
+MSOOXML_EXPORT void Utils::copyPropertiesFromStyle(const KOdfGenericStyle& sourceStyle, KOdfGenericStyle& targetStyle, KOdfGenericStyle::PropertyType type)
 {
     if (sourceStyle.isEmpty()) {
         return;
@@ -1534,7 +1534,7 @@ MSOOXML_EXPORT void Utils::copyPropertiesFromStyle(const KoGenStyle& sourceStyle
 
     // We have to add the properties in a loop
     // This works as long as text-properties don't have children
-    // Currenty KoGenStyle doesn't support adding this in other ways.
+    // Currenty KOdfGenericStyle doesn't support adding this in other ways.
 
     int separatorLocation = content.indexOf(' ');
     content = content.right(content.size() - (separatorLocation + 1));

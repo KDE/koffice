@@ -29,7 +29,7 @@
 #include <KoOdfStylesReader.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <kdebug.h>
 #include <QTextCursor>
 #include <QBuffer>
@@ -191,7 +191,7 @@ void KoListStyle::loadOdf(KoShapeLoadingContext &scontext, const KoXmlElement &s
     }
 }
 
-void KoListStyle::saveOdf(KoGenStyle &style)
+void KoListStyle::saveOdf(KOdfGenericStyle &style)
 {
     if (!d->name.isEmpty() && !style.isDefaultStyle()) {
         style.addAttribute("style:display-name", d->name);

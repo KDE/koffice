@@ -24,7 +24,7 @@
 
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 
 SCPageEffectStrategy::SCPageEffectStrategy(int subType, const char * smilType, const char *smilSubType, bool reverse, bool graphicsView)
 : m_subType(subType)
@@ -56,7 +56,7 @@ void SCPageEffectStrategy::saveOdfSmilAttributes(KoXmlWriter &xmlWriter) const
     }
 }
 
-void SCPageEffectStrategy::saveOdfSmilAttributes(KoGenStyle &style) const
+void SCPageEffectStrategy::saveOdfSmilAttributes(KOdfGenericStyle &style) const
 {
     style.addProperty("smil:type", m_smilData.type);
     style.addProperty("smil:subtype", m_smilData.subType);

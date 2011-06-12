@@ -23,7 +23,7 @@
 #include <QPainter>
 
 #include <KoShapePainter.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
 #include <KoOdfStylesReader.h>
@@ -49,12 +49,12 @@ void KoPAMasterPage::saveOdf(KoShapeSavingContext &context) const
 {
     KoPASavingContext &paContext = static_cast<KoPASavingContext&>(context);
 
-    KoGenStyle pageLayoutStyle = pageLayout().saveOdf();
+    KOdfGenericStyle pageLayoutStyle = pageLayout().saveOdf();
     pageLayoutStyle.setAutoStyleInStylesDotXml(true);
     pageLayoutStyle.addAttribute("style:page-usage", "all");
     QString pageLayoutName(paContext.mainStyles().insert(pageLayoutStyle, "pm"));
 
-    KoGenStyle pageMaster(KoGenStyle::MasterPageStyle);
+    KOdfGenericStyle pageMaster(KOdfGenericStyle::MasterPageStyle);
     pageMaster.addAttribute("style:page-layout-name", pageLayoutName);
     pageMaster.addAttribute("style:display-name", name());
     pageMaster.addAttribute("draw:style-name", saveOdfPageStyle(paContext));

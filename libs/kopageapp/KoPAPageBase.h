@@ -34,7 +34,7 @@
 
 struct KoPageLayout;
 class KoOdfLoadingContext;
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoShape;
 class KoPALoadingContext;
 class KoShapeManagerPaintingStrategy;
@@ -225,7 +225,7 @@ protected:
      *
      * @see saveOdfPageStyle
      */
-    virtual void saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const;
+    virtual void saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const;
 
     /**
      * @brief Load page data

@@ -22,7 +22,7 @@
  */
 #include "NumberFormatParser.h"
 
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoXmlWriter.h>
 
@@ -60,44 +60,44 @@ void NumberFormatParser::setStyles(KoGenStyles* styles)
 }
 
 #define SET_TYPE_OR_RETURN( TYPE ) { \
-if( type == KoGenStyle::NumericDateStyle && TYPE == KoGenStyle::NumericTimeStyle )               \
+if( type == KOdfGenericStyle::NumericDateStyle && TYPE == KOdfGenericStyle::NumericTimeStyle )               \
 {                                                                                                \
 }                                                                                                \
-else if( type == KoGenStyle::NumericTimeStyle && TYPE == KoGenStyle::NumericDateStyle )          \
+else if( type == KOdfGenericStyle::NumericTimeStyle && TYPE == KOdfGenericStyle::NumericDateStyle )          \
 {                                                                                                \
     type = TYPE;                                                                                 \
 }                                                                                                \
-else if( type == KoGenStyle::NumericPercentageStyle && TYPE == KoGenStyle::NumericNumberStyle )  \
+else if( type == KOdfGenericStyle::NumericPercentageStyle && TYPE == KOdfGenericStyle::NumericNumberStyle )  \
 {                                                                                                \
 }                                                                                                \
-else if( type == KoGenStyle::NumericNumberStyle && TYPE == KoGenStyle::NumericPercentageStyle )  \
+else if( type == KOdfGenericStyle::NumericNumberStyle && TYPE == KOdfGenericStyle::NumericPercentageStyle )  \
 {                                                                                                \
     type = TYPE;                                                                                 \
 }                                                                                                \
-else if( type == KoGenStyle::NumericCurrencyStyle && TYPE == KoGenStyle::NumericNumberStyle )    \
+else if( type == KOdfGenericStyle::NumericCurrencyStyle && TYPE == KOdfGenericStyle::NumericNumberStyle )    \
 {                                                                                                \
 }                                                                                                \
-else if( type == KoGenStyle::NumericNumberStyle && TYPE == KoGenStyle::NumericCurrencyStyle )    \
+else if( type == KOdfGenericStyle::NumericNumberStyle && TYPE == KOdfGenericStyle::NumericCurrencyStyle )    \
 {                                                                                                \
     type = TYPE;                                                                                 \
 }                                                                                                \
-else if( type == KoGenStyle::NumericFractionStyle && TYPE == KoGenStyle::NumericNumberStyle )    \
+else if( type == KOdfGenericStyle::NumericFractionStyle && TYPE == KOdfGenericStyle::NumericNumberStyle )    \
 {                                                                                                \
 }                                                                                                \
-else if( type == KoGenStyle::NumericNumberStyle && TYPE == KoGenStyle::NumericFractionStyle )    \
+else if( type == KOdfGenericStyle::NumericNumberStyle && TYPE == KOdfGenericStyle::NumericFractionStyle )    \
 {                                                                                                \
     type = TYPE;                                                                                 \
 }                                                                                                \
-else if( type == KoGenStyle::NumericScientificStyle && TYPE == KoGenStyle::NumericNumberStyle )  \
+else if( type == KOdfGenericStyle::NumericScientificStyle && TYPE == KOdfGenericStyle::NumericNumberStyle )  \
 {                                                                                                \
 }                                                                                                \
-else if( type == KoGenStyle::NumericNumberStyle && TYPE == KoGenStyle::NumericScientificStyle )  \
+else if( type == KOdfGenericStyle::NumericNumberStyle && TYPE == KOdfGenericStyle::NumericScientificStyle )  \
 {                                                                                                \
     type = TYPE;                                                                                 \
 }                                                                                                \
-else if( type != KoGenStyle::ParagraphAutoStyle && type != TYPE )                                         \
+else if( type != KOdfGenericStyle::ParagraphAutoStyle && type != TYPE )                                         \
 {                                                                                                \
-    return KoGenStyle( KoGenStyle::ParagraphAutoStyle );                                                  \
+    return KOdfGenericStyle( KOdfGenericStyle::ParagraphAutoStyle );                                                  \
 }                                                                                                \
 else                                                                                             \
 {                                                                                                \
@@ -116,9 +116,9 @@ if( !plainText.isEmpty() )                   \
 }                                            \
 }
 
-static KoGenStyle styleFromTypeAndBuffer(KoGenStyle::Type type, const QBuffer& buffer)
+static KOdfGenericStyle styleFromTypeAndBuffer(KOdfGenericStyle::Type type, const QBuffer& buffer)
 {
-    KoGenStyle result(type);
+    KOdfGenericStyle result(type);
 
     const QString elementContents = QString::fromUtf8(buffer.buffer(), buffer.buffer().size());
     result.addChildElement("number", elementContents);
@@ -126,13 +126,13 @@ static KoGenStyle styleFromTypeAndBuffer(KoGenStyle::Type type, const QBuffer& b
     return result;
 }
 
-KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
+KOdfGenericStyle NumberFormatParser::parse(const QString& numberFormat)
 {
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter xmlWriter(&buffer);
 
-    KoGenStyle::Type type = KoGenStyle::ParagraphAutoStyle;
+    KOdfGenericStyle::Type type = KOdfGenericStyle::ParagraphAutoStyle;
 
     QString plainText;
 
@@ -172,7 +172,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
                     xmlWriter.endElement();
                 }
             } else if (ch == '$' && i < numberFormat.length() - 2 && numberFormat[ i + 1 ].toLatin1() != '-') {
-                SET_TYPE_OR_RETURN(KoGenStyle::NumericCurrencyStyle);
+                SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericCurrencyStyle);
                 ++i;
                 // currency code
                 QString currency;
@@ -228,7 +228,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
 
             // percentage
         case '%':
-            SET_TYPE_OR_RETURN(KoGenStyle::NumericPercentageStyle);
+            SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericPercentageStyle);
             FINISH_PLAIN_TEXT_PART
             xmlWriter.startElement("number:text");
             xmlWriter.addTextNode("%");
@@ -241,7 +241,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
         case '#':
         case '0':
         case '?':
-            SET_TYPE_OR_RETURN(KoGenStyle::NumericNumberStyle)
+            SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericNumberStyle)
             FINISH_PLAIN_TEXT_PART {
                 bool grouping = false;
                 bool gotDot = false;
@@ -260,7 +260,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
                     } else if (ch == ',') {
                         grouping = true;
                     } else if (ch == 'E' || ch == 'e') {
-                        SET_TYPE_OR_RETURN(KoGenStyle::NumericScientificStyle);
+                        SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericScientificStyle);
 
                         if (i >= numberFormat.length() - 1) break;
                         const char chN = numberFormat[ i + 1 ].toLatin1();
@@ -279,9 +279,9 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
                     } else if (ch == '?' && gotFraction) {
                         ++denominatorDigits;
                     } else if (ch == '/') {
-                        SET_TYPE_OR_RETURN(KoGenStyle::NumericFractionStyle);
+                        SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericFractionStyle);
                         if (gotDot)
-                            return KoGenStyle();
+                            return KOdfGenericStyle();
 
                         gotFraction = true;
                     }
@@ -331,7 +331,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
         case 'a':
             if (numberFormat.mid(i, 5).toLower() == QLatin1String("am/pm") ||
                     numberFormat.mid(i, 3).toLower() == QLatin1String("a/p")) {
-                SET_TYPE_OR_RETURN(KoGenStyle::NumericTimeStyle)
+                SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTimeStyle)
                 FINISH_PLAIN_TEXT_PART;
                 xmlWriter.startElement("number:am-pm");
                 xmlWriter.endElement();
@@ -345,7 +345,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
             // hours, long or short
         case 'H':
         case 'h':
-            SET_TYPE_OR_RETURN(KoGenStyle::NumericTimeStyle)
+            SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTimeStyle)
             FINISH_PLAIN_TEXT_PART;
             xmlWriter.startElement("number:hours");
             if (isLong) {
@@ -361,7 +361,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
         case 'm':
             // must be month, then, at least three M
             if (isLonger) {
-                SET_TYPE_OR_RETURN(KoGenStyle::NumericDateStyle)
+                SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericDateStyle)
                 FINISH_PLAIN_TEXT_PART;
                 xmlWriter.startElement("number:month");
                 const bool isReallyReallyLong = isWayTooLong && i < numberFormat.length() - 4 && numberFormat[ i + 4 ] == c;
@@ -381,7 +381,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
             // otherwise it's the month
             else {
                 if (justHadHours) {
-                    SET_TYPE_OR_RETURN(KoGenStyle::NumericTimeStyle)
+                    SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTimeStyle)
                     FINISH_PLAIN_TEXT_PART;
                     xmlWriter.startElement("number:minutes");
                     if (isLong)
@@ -403,9 +403,9 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
                         break;
                     }
                     if (minutes) {
-                        SET_TYPE_OR_RETURN(KoGenStyle::NumericTimeStyle)
+                        SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTimeStyle)
                     } else {
-                        SET_TYPE_OR_RETURN(KoGenStyle::NumericDateStyle)
+                        SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericDateStyle)
                         FINISH_PLAIN_TEXT_PART;
                     }
                     if (minutes) {
@@ -428,7 +428,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
             // day (of week)
         case 'D':
         case 'd':
-            SET_TYPE_OR_RETURN(KoGenStyle::NumericDateStyle)
+            SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericDateStyle)
             FINISH_PLAIN_TEXT_PART;
             if (!isLonger) {
                 xmlWriter.startElement("number:day");
@@ -457,7 +457,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
             // seconds, long or short
         case 'S':
         case 's':
-            SET_TYPE_OR_RETURN(KoGenStyle::NumericTimeStyle)
+            SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTimeStyle)
             FINISH_PLAIN_TEXT_PART;
             xmlWriter.startElement("number:seconds");
             if (isLong) {
@@ -470,7 +470,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
             // year, long or short
         case 'Y':
         case 'y':
-            SET_TYPE_OR_RETURN(KoGenStyle::NumericDateStyle)
+            SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericDateStyle)
             FINISH_PLAIN_TEXT_PART;
             xmlWriter.startElement("number:year");
             if (isLongest) {
@@ -488,7 +488,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
             buffer.close();
 
             // conditional style with the current format
-            KoGenStyle result = styleFromTypeAndBuffer(type, buffer);
+            KOdfGenericStyle result = styleFromTypeAndBuffer(type, buffer);
             result.addAttribute("style:volatile", "true");
             const QString styleName = NumberFormatParser::styles->insert(result, "N");
             // start a new style
@@ -537,13 +537,13 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
 
     FINISH_PLAIN_TEXT_PART;
 
-    if (type == KoGenStyle::ParagraphAutoStyle && hadPlainText) {
-        SET_TYPE_OR_RETURN(KoGenStyle::NumericTextStyle)
+    if (type == KOdfGenericStyle::ParagraphAutoStyle && hadPlainText) {
+        SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTextStyle)
     }
 
     if (!condition.isEmpty()) {
         // conditional style with the current format
-        KoGenStyle result = styleFromTypeAndBuffer(type, buffer);
+        KOdfGenericStyle result = styleFromTypeAndBuffer(type, buffer);
         result.addAttribute("style:volatile", "true");
         const QString styleName = NumberFormatParser::styles->insert(result, "N");
         // start a new style
@@ -566,7 +566,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
     // add conditional styles:
     for (QMap< QString, QString >::const_iterator it = conditions.constBegin(); it != conditions.constEnd(); ++it) {
         // conditional styles are always numbers
-        type = KoGenStyle::NumericNumberStyle;
+        type = KOdfGenericStyle::NumericNumberStyle;
 
         xmlWriter.startElement("style:map");
         xmlWriter.addAttribute("style:condition", it.key().isEmpty() ? autoConditions.takeLast() : it.key());
@@ -577,7 +577,7 @@ KoGenStyle NumberFormatParser::parse(const QString& numberFormat)
     buffer.close();
 
     // conditional style with the current format
-    return styleFromTypeAndBuffer(conditions.isEmpty() ? type : KoGenStyle::NumericTextStyle, buffer);
+    return styleFromTypeAndBuffer(conditions.isEmpty() ? type : KOdfGenericStyle::NumericTextStyle, buffer);
 }
 
 bool NumberFormatParser::isDateFormat(const QString& numberFormat)
@@ -620,7 +620,7 @@ bool NumberFormatParser::isDateFormat(const QString& numberFormat)
 
             // percentage
         case '%':
-            //SET_TYPE_OR_RETURN(KoGenStyle::NumericPercentageStyle);
+            //SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericPercentageStyle);
             break;
 
             // a number
@@ -629,7 +629,7 @@ bool NumberFormatParser::isDateFormat(const QString& numberFormat)
         case '#':
         case '0':
         case '?': {
-            //SET_TYPE_OR_RETURN(KoGenStyle::NumericNumberStyle)
+            //SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericNumberStyle)
             char ch = numberFormat[ i ].toLatin1();
             do {
                 if (i >= numberFormat.length() - 1) break;
@@ -655,7 +655,7 @@ bool NumberFormatParser::isDateFormat(const QString& numberFormat)
         case 'a':
             if (numberFormat.mid(i, 5).toLower() == QLatin1String("am/pm") ||
                     numberFormat.mid(i, 3).toLower() == QLatin1String("a/p")) {
-                // SET_TYPE_OR_RETURN(KoGenStyle::NumericTimeStyle)
+                // SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTimeStyle)
                 if (numberFormat.mid(i, 5).toLower() == QLatin1String("am/pm"))
                     i += 2;
                 i += 2;
@@ -666,7 +666,7 @@ bool NumberFormatParser::isDateFormat(const QString& numberFormat)
             // hours, long or short
         case 'H':
         case 'h':
-            //SET_TYPE_OR_RETURN(KoGenStyle::NumericTimeStyle)
+            //SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTimeStyle)
             if (isLong) {
                 ++i;
             }
@@ -684,7 +684,7 @@ bool NumberFormatParser::isDateFormat(const QString& numberFormat)
             // otherwise it's the month
             else {
                 if (justHadHours) {
-                    //SET_TYPE_OR_RETURN(KoGenStyle::NumericTimeStyle)
+                    //SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTimeStyle)
                 } else {
                     // on the next iteration, we might see wheter there're seconds or something else
                     bool minutes = true; // let's just default to minutes, if there's nothing more...
@@ -701,7 +701,7 @@ bool NumberFormatParser::isDateFormat(const QString& numberFormat)
                         break;
                     }
                     if (minutes) {
-                        //SET_TYPE_OR_RETURN(KoGenStyle::NumericTimeStyle)
+                        //SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTimeStyle)
                     } else {
                         return true;
                     }
@@ -721,7 +721,7 @@ bool NumberFormatParser::isDateFormat(const QString& numberFormat)
             // seconds, long or short
         case 'S':
         case 's':
-            // SET_TYPE_OR_RETURN(KoGenStyle::NumericTimeStyle)
+            // SET_TYPE_OR_RETURN(KOdfGenericStyle::NumericTimeStyle)
             if (isLong) {
                 ++i;
             }

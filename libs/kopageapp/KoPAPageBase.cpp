@@ -34,7 +34,7 @@
 #include <KoOdfLoadingContext.h>
 #include <KoShapeLayer.h>
 #include <KoShapeRegistry.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoOdfStylesReader.h>
 #include <KoOdfGraphicStyles.h>
@@ -111,7 +111,7 @@ void KoPAPageBase::saveOdfShapes(KoShapeSavingContext &context) const
 
 QString KoPAPageBase::saveOdfPageStyle(KoPASavingContext &paContext) const
 {
-    KoGenStyle style(KoGenStyle::DrawingPageAutoStyle, "drawing-page");
+    KOdfGenericStyle style(KOdfGenericStyle::DrawingPageAutoStyle, "drawing-page");
 
     if (paContext.isSet(KoShapeSavingContext::AutoStyleInStyleXml)) {
         style.setAutoStyleInStylesDotXml(true);
@@ -122,7 +122,7 @@ QString KoPAPageBase::saveOdfPageStyle(KoPASavingContext &paContext) const
     return paContext.mainStyles().insert(style, "dp");
 }
 
-void KoPAPageBase::saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const
+void KoPAPageBase::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const
 {
     KoShapeBackground * bg = background();
     if(bg)

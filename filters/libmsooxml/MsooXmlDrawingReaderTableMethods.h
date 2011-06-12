@@ -37,8 +37,8 @@ protected:
     uint m_currentTableNumber; //!< table counter, from 0
     uint m_currentTableRowNumber; //!< row counter, from 0, initialized in read_tbl()
     uint m_currentTableColumnNumber; //!< column counter, from 0, initialized in read_tr()
-    KoGenStyle m_currentTableRowStyle;
-    KoGenStyle m_currentTableCellStyle;
+    KOdfGenericStyle m_currentTableRowStyle;
+    KOdfGenericStyle m_currentTableCellStyle;
     QString m_currentTableName;
     qreal m_currentTableWidth; //!< in cm
     QString m_styleId;

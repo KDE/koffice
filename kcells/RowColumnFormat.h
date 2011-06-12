@@ -31,7 +31,7 @@
 
 class QDomElement;
 class QDomDocument;
-class KoGenStyle;
+class KOdfGenericStyle;
 
 class KCSheet;
 

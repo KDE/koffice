@@ -104,7 +104,7 @@ void ODrawToOdf::processGroup(const MSO::OfficeArtSpgrContainer& o, Writer& out)
 void ODrawToOdf::addGraphicStyleToDrawElement(Writer& out,
         const OfficeArtSpContainer& o)
 {
-    KoGenStyle style;
+    KOdfGenericStyle style;
     const OfficeArtDggContainer* drawingGroup = 0;
     const OfficeArtSpContainer* master = 0;
 
@@ -162,9 +162,9 @@ QString percent(double v)
 }
 } //namespace
 
-void ODrawToOdf::defineGraphicProperties(KoGenStyle& style, const DrawStyle& ds, KoGenStyles& styles)
+void ODrawToOdf::defineGraphicProperties(KOdfGenericStyle& style, const DrawStyle& ds, KoGenStyles& styles)
 {
-    const KoGenStyle::PropertyType gt = KoGenStyle::GraphicType;
+    const KOdfGenericStyle::PropertyType gt = KOdfGenericStyle::GraphicType;
     // dr3d:ambient-color
     // dr3d:back-scale
     // dr3d:backface-culling
@@ -223,7 +223,7 @@ void ODrawToOdf::defineGraphicProperties(KoGenStyle& style, const DrawStyle& ds,
         }
         // draw:fill-gradient-name
         else if ((fillType >=4 && fillType <=8) && client) {
-            KoGenStyle gs(KoGenStyle::LinearGradientStyle);
+            KOdfGenericStyle gs(KOdfGenericStyle::LinearGradientStyle);
             defineGradientStyle(gs, ds);
             QString tmp = styles.insert(gs);
             style.addProperty("draw:fill-gradient-name", tmp, gt);
@@ -421,7 +421,7 @@ void ODrawToOdf::defineGraphicProperties(KoGenStyle& style, const DrawStyle& ds,
     // text:animation-stop-inside
 }
 
-void ODrawToOdf::defineGradientStyle(KoGenStyle& style, const DrawStyle& ds)
+void ODrawToOdf::defineGradientStyle(KOdfGenericStyle& style, const DrawStyle& ds)
 {
     // TODO another fill types
 

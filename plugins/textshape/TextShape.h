@@ -117,7 +117,7 @@ protected:
     virtual void loadStyle(const KoXmlElement &element, KoShapeLoadingContext &context);
 
     /// reimplemented
-    virtual QString saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const;
+    virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
 
 private:
     void shapeChanged(ChangeType type, KoShape *shape);

@@ -43,7 +43,7 @@ public:
     virtual void saveOdfSmilAttributes(KoXmlWriter & xmlWriter) const;
 
     // reimplemented
-    virtual void saveOdfSmilAttributes(KoGenStyle & style) const;
+    virtual void saveOdfSmilAttributes(KOdfGenericStyle & style) const;
 
     // reimplemented
     virtual void loadOdfSmilAttributes(const KoXmlElement & element);

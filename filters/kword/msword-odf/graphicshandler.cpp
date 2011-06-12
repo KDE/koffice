@@ -31,7 +31,7 @@
 #include "pictures.h"
 
 #include <KoStoreDevice.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <kdebug.h>
 #include <kmimetype.h>
 #include <QtGui/QColor>
@@ -598,18 +598,18 @@ void KWordGraphicsHandler::parseOfficeArtContainer(POLE::Storage* storage, const
 void KWordGraphicsHandler::defineDefaultGraphicStyle(KoGenStyles* styles)
 {
     // write style <style:default-style style:family="graphic">
-    KoGenStyle style(KoGenStyle::GraphicStyle, "graphic");
+    KOdfGenericStyle style(KOdfGenericStyle::GraphicStyle, "graphic");
     DrawStyle ds(m_OfficeArtDggContainer);
     style.setDefaultStyle(true);
     defineGraphicProperties(style, ds);
     styles->insert(style);
 }
 
-void KWordGraphicsHandler::defineGraphicProperties(KoGenStyle& style, const DrawStyle& ds,
+void KWordGraphicsHandler::defineGraphicProperties(KOdfGenericStyle& style, const DrawStyle& ds,
                                                   const QString& listStyle)
 {
     MSO::OfficeArtCOLORREF clr;
-    const KoGenStyle::PropertyType gt = KoGenStyle::GraphicType;
+    const KOdfGenericStyle::PropertyType gt = KOdfGenericStyle::GraphicType;
     // dr3d:ambient-color
     // dr3d:back-scale
     // dr3d:backface-culling
@@ -841,7 +841,7 @@ void KWordGraphicsHandler::defineGraphicProperties(KoGenStyle& style, const Draw
     }
 }
 
-void KWordGraphicsHandler::defineAnchorProperties(KoGenStyle& style, const DrawStyle& ds)
+void KWordGraphicsHandler::defineAnchorProperties(KOdfGenericStyle& style, const DrawStyle& ds)
 {
     // style:horizontal-pos MS-ODRAW - 2.3.4.19
     quint32 posH = ds.posH();
@@ -905,7 +905,7 @@ void KWordGraphicsHandler::defineAnchorProperties(KoGenStyle& style, const DrawS
     }
 }
 
-void KWordGraphicsHandler::defineWrappingProperties(KoGenStyle& style, const DrawStyle& ds, const wvWare::Word97::FSPA* spa)
+void KWordGraphicsHandler::defineWrappingProperties(KOdfGenericStyle& style, const DrawStyle& ds, const wvWare::Word97::FSPA* spa)
 {
     //process the wrapping style, (MS-DOC, page 464)
     if (spa != 0) {
@@ -1000,7 +1000,7 @@ void KWordGraphicsHandler::parseTextBox(const MSO::OfficeArtSpContainer& o, Draw
     DrawStyle ds(m_OfficeArtDggContainer,&o);
     DrawStyle drawStyle(m_OfficeArtDggContainer,NULL,&o);
     wvWare::Word97::FSPA* spa = out.m_pSpa;
-    KoGenStyle style(KoGenStyle::GraphicAutoStyle, "graphic");
+    KOdfGenericStyle style(KOdfGenericStyle::GraphicAutoStyle, "graphic");
 
     if (!out.m_bodyDrawing) {
         style.setAutoStyleInStylesDotXml(true);
@@ -1050,7 +1050,7 @@ void KWordGraphicsHandler::processRectangle(const MSO::OfficeArtSpContainer& o,D
     QString styleName;
     DrawStyle ds(m_OfficeArtDggContainer,&o);
     wvWare::Word97::FSPA* spa = out.m_pSpa;
-    KoGenStyle style(KoGenStyle::GraphicAutoStyle, "graphic");
+    KOdfGenericStyle style(KOdfGenericStyle::GraphicAutoStyle, "graphic");
 
     if (!out.m_bodyDrawing) {
         style.setAutoStyleInStylesDotXml(true);
@@ -1081,7 +1081,7 @@ void KWordGraphicsHandler::processInlinePictureFrame(const MSO::OfficeArtSpConta
 
     QString styleName;
     DrawStyle ds(NULL, &o);
-    KoGenStyle style(KoGenStyle::GraphicAutoStyle, "graphic");
+    KOdfGenericStyle style(KOdfGenericStyle::GraphicAutoStyle, "graphic");
 
     //in case a header or footer is processed, save the style into styles.xml
     if (m_document->writingHeader()) {
@@ -1130,7 +1130,7 @@ void KWordGraphicsHandler::processFloatingPictureFrame(const MSO::OfficeArtSpCon
     QString styleName;
     DrawStyle ds(m_OfficeArtDggContainer, &o);
     wvWare::Word97::FSPA* spa = out.m_pSpa;
-    KoGenStyle style(KoGenStyle::GraphicAutoStyle, "graphic");
+    KOdfGenericStyle style(KOdfGenericStyle::GraphicAutoStyle, "graphic");
 
     //in case a header or footer is processed, save the style into styles.xml
     if (m_document->writingHeader()) {
@@ -1213,7 +1213,7 @@ void KWordGraphicsHandler::processLineShape(const MSO::OfficeArtSpContainer& o, 
 
     QString styleName;
     DrawStyle ds(NULL, &o);
-    KoGenStyle style(KoGenStyle::GraphicAutoStyle, "graphic");
+    KOdfGenericStyle style(KOdfGenericStyle::GraphicAutoStyle, "graphic");
 
     //in case a header or footer is processed, save the style into styles.xml
     if (m_document->writingHeader()) {

@@ -370,7 +370,7 @@ bool KarbonDocument::saveOdf(KoDocument::SavingContext &documentContext, const K
 
     // save page
     QString layoutName = mainStyles.insert(layout.saveOdf(), "PL");
-    KoGenStyle masterPage(KoGenStyle::MasterPageStyle);
+    KOdfGenericStyle masterPage(KOdfGenericStyle::MasterPageStyle);
     masterPage.addAttribute("style:page-layout-name", layoutName);
     mainStyles.insert(masterPage, "Default", KoGenStyles::DontAddNumberToName);
 

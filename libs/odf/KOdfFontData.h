@@ -33,7 +33,7 @@ class KoFontFacePrivate;
  * @brief Represents font style.
  * Font style is defined by the style:font-face element.
  * @todo add more parameters.
- * @todo add class KoFontFaceDeclarations instead of adding methods to KoGenStyle?
+ * @todo add class KoFontFaceDeclarations instead of adding methods to KOdfGenericStyle?
  */
 class KOODF_EXPORT KOdfFontData
 {

@@ -187,7 +187,7 @@ private:
     enum NewFrameBehavior { Reconnect = 0, NoFollowup = 1, Copy = 2 };
     void generateFrameBorder(QDomElement& frameElementOut, const wvWare::Word97::BRC& brcTop, const wvWare::Word97::BRC& brcBottom, const wvWare::Word97::BRC& brcLeft, const wvWare::Word97::BRC& brcRight, const wvWare::Word97::SHD& shd);
 
-    void setPageLayoutStyle(KoGenStyle* pageLayoutStyle, wvWare::SharedPtr<const wvWare::Word97::SEP> sep, bool firstPage);
+    void setPageLayoutStyle(KOdfGenericStyle* pageLayoutStyle, wvWare::SharedPtr<const wvWare::Word97::SEP> sep, bool firstPage);
 
     // Handlers for different data types in the document.
     KWordTextHandler*        m_textHandler;
@@ -218,8 +218,8 @@ private:
     QBuffer* m_buffer; //for odd and first page header/footer tags
     QBuffer* m_bufferEven; //for even header/footer tags
 
-    QList<KoGenStyle*> m_masterPageStyle_list; //master-page styles
-    QList<KoGenStyle*> m_pageLayoutStyle_list; //page-layout styles
+    QList<KOdfGenericStyle*> m_masterPageStyle_list; //master-page styles
+    QList<KOdfGenericStyle*> m_pageLayoutStyle_list; //page-layout styles
     QStringList m_masterPageName_list; //master-page names
 
     QList<bool> m_headersMask; //mask informing of section's empty/nonempty header/footer stories

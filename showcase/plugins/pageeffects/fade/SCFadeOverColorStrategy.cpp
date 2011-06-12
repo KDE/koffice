@@ -29,7 +29,7 @@
 #include <KoXmlNS.h>
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <kdebug.h>
 
 SCFadeOverColorStrategy::SCFadeOverColorStrategy()
@@ -89,7 +89,7 @@ void SCFadeOverColorStrategy::saveOdfSmilAttributes(KoXmlWriter & xmlWriter) con
     xmlWriter.addAttribute("smil:fadeColor", m_fadeColor.name());
 }
 
-void SCFadeOverColorStrategy::saveOdfSmilAttributes(KoGenStyle & style) const
+void SCFadeOverColorStrategy::saveOdfSmilAttributes(KOdfGenericStyle & style) const
 {
     SCPageEffectStrategy::saveOdfSmilAttributes(style);
     style.addProperty("smil:fadeColor", m_fadeColor.name());

@@ -27,7 +27,7 @@
 #include <QPainter>
 #include <QPainterPath>
 
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoOdfGraphicStyles.h>
 
@@ -75,7 +75,7 @@ KoLineBorder &KoLineBorder::operator = (const KoLineBorder &rhs)
     return *this;
 }
 
-void KoLineBorder::saveOdf(KoGenStyle &style, KoShapeSavingContext &context) const
+void KoLineBorder::saveOdf(KOdfGenericStyle &style, KoShapeSavingContext &context) const
 {
     QPen pen = d->pen;
     if (d->brush.gradient())

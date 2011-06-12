@@ -170,7 +170,7 @@ KoFilter::ConversionStatus XlsxXmlCommonReader::read_rPr()
     READ_PROLOGUE
     delete m_currentTextStyleProperties;
     m_currentTextStyleProperties = new KoCharacterStyle;
-    m_currentTextStyle = KoGenStyle(KoGenStyle::TextAutoStyle, "text");
+    m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
 
     while (!atEnd()) {
         readNext();

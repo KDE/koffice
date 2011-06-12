@@ -273,7 +273,7 @@ KoFilter::ConversionStatus APPLIXWORDImport::convert(const QByteArray& from, con
 
                 kDebug(30517) << "<" << mystr << " >";
                 if ((pos - 1 > -1) && (mystr[pos-1] == '\\')) {
-                    kDebug(30517) << " No string end - but Gänsefüsschen";
+                    kDebug(30517) << " No string end - but G?nsef?sschen";
                     y = pos + 1;
                 } else {
                     kDebug(30517) << " String end //";
@@ -340,36 +340,36 @@ KoFilter::ConversionStatus APPLIXWORDImport::convert(const QByteArray& from, con
             // Replaces Part for & <>, applixware special characters and quotes
             replaceSpecial(textstr);
 
-            KoGenStyle style(KoGenStyle::TextAutoStyle, "text");
+            KOdfGenericStyle style(KOdfGenericStyle::TextAutoStyle, "text");
             //style.addAttribute("style:display-name", styleName);
 
             //if (bold == 1 || underline == 1 || italic == 1 || fontsize != 12 ||
             //        colpos != -1 || !fontname.isEmpty()) {
                 if (!fontname.isEmpty()) {
-                    style.addProperty("fo:font-family", fontname, KoGenStyle::TextType);
+                    style.addProperty("fo:font-family", fontname, KOdfGenericStyle::TextType);
                 }
 
                 if (fontsize != 1) {
-                    style.addPropertyPt("fo:font-size", fontsize, KoGenStyle::TextType);
+                    style.addPropertyPt("fo:font-size", fontsize, KOdfGenericStyle::TextType);
                 }
 
                 if (italic == 1) {
-                    style.addProperty("fo:font-style", "italic", KoGenStyle::TextType);
+                    style.addProperty("fo:font-style", "italic", KOdfGenericStyle::TextType);
                 }
 
                 if (bold == 1) {
-                    style.addProperty("fo:font-weight", "bold", KoGenStyle::TextType);
+                    style.addProperty("fo:font-weight", "bold", KOdfGenericStyle::TextType);
                 }
 
                 if (underline == 1) {
-                   style.addProperty("style:text-underline-type", "single", KoGenStyle::TextType);
-                   style.addProperty("style:text-underline-style", "solid", KoGenStyle::TextType);
+                   style.addProperty("style:text-underline-type", "single", KOdfGenericStyle::TextType);
+                   style.addProperty("style:text-underline-style", "solid", KOdfGenericStyle::TextType);
                 }
 
                 if (colpos != -1) {
                     t_mycolor *mc = mcol.at(colpos);
                     QColor color(mc->r, mc->g, mc->b);
-                    style.addProperty("style:fo-color", color.name(), KoGenStyle::TextType);
+                    style.addProperty("style:fo-color", color.name(), KOdfGenericStyle::TextType);
                 }
             //}
 
@@ -428,167 +428,167 @@ APPLIXWORDImport::specCharfind(QChar a, QChar b) // TODO share this code with ap
 {
     QChar chr;
 
-    if ((a == 'n') && (b == 'p')) chr = 'ß';
+    if ((a == 'n') && (b == 'p')) chr = '?';
 
 
-    else if ((a == 'n') && (b == 'c')) chr = 'Ò';
-    else if ((a == 'p') && (b == 'c')) chr = 'ò';
+    else if ((a == 'n') && (b == 'c')) chr = '?';
+    else if ((a == 'p') && (b == 'c')) chr = '?';
 
-    else if ((a == 'n') && (b == 'd')) chr = 'Ó';
-    else if ((a == 'p') && (b == 'd')) chr = 'ó';
+    else if ((a == 'n') && (b == 'd')) chr = '?';
+    else if ((a == 'p') && (b == 'd')) chr = '?';
 
-    else if ((a == 'n') && (b == 'e')) chr = 'Ô';
-    else if ((a == 'p') && (b == 'e')) chr = 'ô';
+    else if ((a == 'n') && (b == 'e')) chr = '?';
+    else if ((a == 'p') && (b == 'e')) chr = '?';
 
-    else if ((a == 'n') && (b == 'f')) chr = 'Õ';
-    else if ((a == 'p') && (b == 'f')) chr = 'õ';
+    else if ((a == 'n') && (b == 'f')) chr = '?';
+    else if ((a == 'p') && (b == 'f')) chr = '?';
 
-    else if ((a == 'p') && (b == 'g')) chr = 'ö';
-    else if ((a == 'n') && (b == 'g')) chr = 'Ö';
-
-
-
-    else if ((a == 'n') && (b == 'j')) chr = 'Ù';
-    else if ((a == 'p') && (b == 'j')) chr = 'ù';
-
-    else if ((a == 'n') && (b == 'k')) chr = 'Ú';
-    else if ((a == 'p') && (b == 'k')) chr = 'ú';
-
-    else if ((a == 'n') && (b == 'l')) chr = 'Û';
-    else if ((a == 'p') && (b == 'l')) chr = 'û';
-
-    else if ((a == 'p') && (b == 'm')) chr = 'ü';
-    else if ((a == 'n') && (b == 'm')) chr = 'Ü';
+    else if ((a == 'p') && (b == 'g')) chr = '?';
+    else if ((a == 'n') && (b == 'g')) chr = '?';
 
 
 
-    else if ((a == 'm') && (b == 'a')) chr = 'À';
-    else if ((a == 'o') && (b == 'a')) chr = 'à';
+    else if ((a == 'n') && (b == 'j')) chr = '?';
+    else if ((a == 'p') && (b == 'j')) chr = '?';
 
-    else if ((a == 'm') && (b == 'b')) chr = 'Á';
-    else if ((a == 'o') && (b == 'b')) chr = 'á';
+    else if ((a == 'n') && (b == 'k')) chr = '?';
+    else if ((a == 'p') && (b == 'k')) chr = '?';
 
-    else if ((a == 'm') && (b == 'c')) chr = 'Â';
-    else if ((a == 'o') && (b == 'c')) chr = 'â';
+    else if ((a == 'n') && (b == 'l')) chr = '?';
+    else if ((a == 'p') && (b == 'l')) chr = '?';
 
-    else if ((a == 'm') && (b == 'd')) chr = 'Ã';
-    else if ((a == 'o') && (b == 'd')) chr = 'ã';
-
-    else if ((a == 'm') && (b == 'e')) chr = 'Ä';
-    else if ((a == 'o') && (b == 'e')) chr = 'ä';
-
-    else if ((a == 'm') && (b == 'f')) chr = 'Å';
-    else if ((a == 'o') && (b == 'f')) chr = 'å';
-
-    else if ((a == 'm') && (b == 'g')) chr = 'Æ';
-    else if ((a == 'o') && (b == 'g')) chr = 'æ';
+    else if ((a == 'p') && (b == 'm')) chr = '?';
+    else if ((a == 'n') && (b == 'm')) chr = '?';
 
 
 
-    else if ((a == 'm') && (b == 'i')) chr = 'È';
-    else if ((a == 'o') && (b == 'i')) chr = 'è';
+    else if ((a == 'm') && (b == 'a')) chr = '?';
+    else if ((a == 'o') && (b == 'a')) chr = '?';
 
-    else if ((a == 'm') && (b == 'j')) chr = 'É';
-    else if ((a == 'o') && (b == 'j')) chr = 'é';
+    else if ((a == 'm') && (b == 'b')) chr = '?';
+    else if ((a == 'o') && (b == 'b')) chr = '?';
 
-    else if ((a == 'm') && (b == 'k')) chr = 'Ê';
-    else if ((a == 'o') && (b == 'k')) chr = 'ê';
+    else if ((a == 'm') && (b == 'c')) chr = '?';
+    else if ((a == 'o') && (b == 'c')) chr = '?';
 
-    else if ((a == 'm') && (b == 'l')) chr = 'Ë';
-    else if ((a == 'o') && (b == 'l')) chr = 'ë';
+    else if ((a == 'm') && (b == 'd')) chr = '?';
+    else if ((a == 'o') && (b == 'd')) chr = '?';
 
+    else if ((a == 'm') && (b == 'e')) chr = '?';
+    else if ((a == 'o') && (b == 'e')) chr = '?';
 
+    else if ((a == 'm') && (b == 'f')) chr = '?';
+    else if ((a == 'o') && (b == 'f')) chr = '?';
 
-
-
-
-    else if ((a == 'm') && (b == 'm')) chr = 'Ì';
-    else if ((a == 'o') && (b == 'm')) chr = 'ì';
-
-    else if ((a == 'm') && (b == 'n')) chr = 'Í';
-    else if ((a == 'o') && (b == 'n')) chr = 'í';
-
-    else if ((a == 'm') && (b == 'o')) chr = 'Î';
-    else if ((a == 'o') && (b == 'o')) chr = 'î';
-
-    else if ((a == 'm') && (b == 'p')) chr = 'Ï';
-    else if ((a == 'o') && (b == 'p')) chr = 'ï';
+    else if ((a == 'm') && (b == 'g')) chr = '?';
+    else if ((a == 'o') && (b == 'g')) chr = '?';
 
 
-    else if ((a == 'n') && (b == 'b')) chr = 'Ñ';
-    else if ((a == 'p') && (b == 'b')) chr = 'ñ';
+
+    else if ((a == 'm') && (b == 'i')) chr = '?';
+    else if ((a == 'o') && (b == 'i')) chr = '?';
+
+    else if ((a == 'm') && (b == 'j')) chr = '?';
+    else if ((a == 'o') && (b == 'j')) chr = '?';
+
+    else if ((a == 'm') && (b == 'k')) chr = '?';
+    else if ((a == 'o') && (b == 'k')) chr = '?';
+
+    else if ((a == 'm') && (b == 'l')) chr = '?';
+    else if ((a == 'o') && (b == 'l')) chr = '?';
 
 
-    else if ((a == 'k') && (b == 'c')) chr = '¢';
-    else if ((a == 'k') && (b == 'j')) chr = '©';
-    else if ((a == 'l') && (b == 'f')) chr = 'µ';
-    else if ((a == 'n') && (b == 'i')) chr = 'Ø';
-    else if ((a == 'p') && (b == 'i')) chr = 'ø';
 
-    else if ((a == 'l') && (b == 'j')) chr = '¹';
-    else if ((a == 'l') && (b == 'c')) chr = '²';
-    else if ((a == 'l') && (b == 'd')) chr = '³';
 
-    else if ((a == 'l') && (b == 'm')) chr = '¼';
-    else if ((a == 'l') && (b == 'n')) chr = '½';
-    else if ((a == 'l') && (b == 'o')) chr = '¾';
 
-    else if ((a == 'l') && (b == 'a')) chr = '°';
 
-    else if ((a == 'k') && (b == 'o')) chr = '®';
-    else if ((a == 'k') && (b == 'h')) chr = '§';
-    else if ((a == 'k') && (b == 'd')) chr = '£';
+    else if ((a == 'm') && (b == 'm')) chr = '?';
+    else if ((a == 'o') && (b == 'm')) chr = '?';
 
-    else if ((a == 'p') && (b == 'a')) chr = 'ð';
-    else if ((a == 'n') && (b == 'a')) chr = 'Ð';
+    else if ((a == 'm') && (b == 'n')) chr = '?';
+    else if ((a == 'o') && (b == 'n')) chr = '?';
 
-    else if ((a == 'l') && (b == 'l')) chr = '»';
-    else if ((a == 'k') && (b == 'l')) chr = '«';
+    else if ((a == 'm') && (b == 'o')) chr = '?';
+    else if ((a == 'o') && (b == 'o')) chr = '?';
 
-    else if ((a == 'l') && (b == 'k')) chr = 'º';
+    else if ((a == 'm') && (b == 'p')) chr = '?';
+    else if ((a == 'o') && (b == 'p')) chr = '?';
 
-    else if ((a == 'l') && (b == 'h')) chr = '·';
 
-    else if ((a == 'k') && (b == 'b')) chr = '¡';
+    else if ((a == 'n') && (b == 'b')) chr = '?';
+    else if ((a == 'p') && (b == 'b')) chr = '?';
 
-    else if ((a == 'k') && (b == 'e')) chr = '¤';
 
-    else if ((a == 'l') && (b == 'b')) chr = '±';
+    else if ((a == 'k') && (b == 'c')) chr = '?';
+    else if ((a == 'k') && (b == 'j')) chr = '?';
+    else if ((a == 'l') && (b == 'f')) chr = '?';
+    else if ((a == 'n') && (b == 'i')) chr = '?';
+    else if ((a == 'p') && (b == 'i')) chr = '?';
 
-    else if ((a == 'l') && (b == 'p')) chr = '¿';
+    else if ((a == 'l') && (b == 'j')) chr = '?';
+    else if ((a == 'l') && (b == 'c')) chr = '?';
+    else if ((a == 'l') && (b == 'd')) chr = '?';
 
-    else if ((a == 'k') && (b == 'f')) chr = '¥';
+    else if ((a == 'l') && (b == 'm')) chr = '?';
+    else if ((a == 'l') && (b == 'n')) chr = '?';
+    else if ((a == 'l') && (b == 'o')) chr = '?';
 
-    else if ((a == 'p') && (b == 'o')) chr = 'þ';
-    else if ((a == 'n') && (b == 'o')) chr = 'Þ';
+    else if ((a == 'l') && (b == 'a')) chr = '?';
 
-    else if ((a == 'n') && (b == 'n')) chr = 'Ý';
-    else if ((a == 'p') && (b == 'n')) chr = 'ý';
-    else if ((a == 'p') && (b == 'p')) chr = 'ÿ';
+    else if ((a == 'k') && (b == 'o')) chr = '?';
+    else if ((a == 'k') && (b == 'h')) chr = '?';
+    else if ((a == 'k') && (b == 'd')) chr = '?';
 
-    else if ((a == 'k') && (b == 'k')) chr = 'ª';
+    else if ((a == 'p') && (b == 'a')) chr = '?';
+    else if ((a == 'n') && (b == 'a')) chr = '?';
 
-    else if ((a == 'k') && (b == 'm')) chr = '¬';
-    else if ((a == 'p') && (b == 'h')) chr = '÷';
+    else if ((a == 'l') && (b == 'l')) chr = '?';
+    else if ((a == 'k') && (b == 'l')) chr = '?';
+
+    else if ((a == 'l') && (b == 'k')) chr = '?';
+
+    else if ((a == 'l') && (b == 'h')) chr = '?';
+
+    else if ((a == 'k') && (b == 'b')) chr = '?';
+
+    else if ((a == 'k') && (b == 'e')) chr = '?';
+
+    else if ((a == 'l') && (b == 'b')) chr = '?';
+
+    else if ((a == 'l') && (b == 'p')) chr = '?';
+
+    else if ((a == 'k') && (b == 'f')) chr = '?';
+
+    else if ((a == 'p') && (b == 'o')) chr = '?';
+    else if ((a == 'n') && (b == 'o')) chr = '?';
+
+    else if ((a == 'n') && (b == 'n')) chr = '?';
+    else if ((a == 'p') && (b == 'n')) chr = '?';
+    else if ((a == 'p') && (b == 'p')) chr = '?';
+
+    else if ((a == 'k') && (b == 'k')) chr = '?';
+
+    else if ((a == 'k') && (b == 'm')) chr = '?';
+    else if ((a == 'p') && (b == 'h')) chr = '?';
 
     else if ((a == 'k') && (b == 'g')) chr = '|';
 
     else if ((a == 'l') && (b == 'e')) chr = '\'';
 
-    else if ((a == 'k') && (b == 'i')) chr = '¨';
+    else if ((a == 'k') && (b == 'i')) chr = '?';
 
-    else if ((a == 'k') && (b == 'n')) chr = '­';
+    else if ((a == 'k') && (b == 'n')) chr = '?';
 
-    else if ((a == 'k') && (b == 'p')) chr = '¯';
+    else if ((a == 'k') && (b == 'p')) chr = '?';
 
-    else if ((a == 'l') && (b == 'g')) chr = '¶';
+    else if ((a == 'l') && (b == 'g')) chr = '?';
 
-    else if ((a == 'l') && (b == 'i')) chr = '¸';
+    else if ((a == 'l') && (b == 'i')) chr = '?';
 
-    else if ((a == 'm') && (b == 'h')) chr = 'Ç';
-    else if ((a == 'o') && (b == 'h')) chr = 'ç';
+    else if ((a == 'm') && (b == 'h')) chr = '?';
+    else if ((a == 'o') && (b == 'h')) chr = '?';
 
-    else if ((a == 'n') && (b == 'h')) chr = '×';
+    else if ((a == 'n') && (b == 'h')) chr = '?';
 
     else if ((a == 'k') && (b == 'a')) chr = ' ';
 

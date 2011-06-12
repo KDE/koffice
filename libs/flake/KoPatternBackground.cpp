@@ -23,7 +23,7 @@
 #include "KoImageData.h"
 #include "KoImageCollection.h"
 #include <KoStyleStack.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoXmlNS.h>
 #include <KoOdfLoadingContext.h>
@@ -329,7 +329,7 @@ void KoPatternBackground::paint(QPainter &painter, const QPainterPath &fillPath)
     painter.restore();
 }
 
-void KoPatternBackground::fillStyle(KoGenStyle &style, KoShapeSavingContext &context)
+void KoPatternBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
 {
     Q_D(KoPatternBackground);
     if (! d->imageData)
@@ -376,7 +376,7 @@ void KoPatternBackground::fillStyle(KoGenStyle &style, KoShapeSavingContext &con
             style.addProperty("draw:fill-image-width", QString("%1").arg(targetSize.width()));
     }
 
-    KoGenStyle patternStyle(KoGenStyle::FillImageStyle /*no family name*/);
+    KOdfGenericStyle patternStyle(KOdfGenericStyle::FillImageStyle /*no family name*/);
     patternStyle.addAttribute("xlink:show", "embed");
     patternStyle.addAttribute("xlink:actuate", "onLoad");
     patternStyle.addAttribute("xlink:type", "simple");

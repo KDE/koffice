@@ -51,7 +51,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoUnit.h>
 #include <KoOdfStylesReader.h>
@@ -1035,7 +1035,7 @@ void KoShape::saveOdf(KoShapeSavingContext &context) const
     context.addForWriting(d->connections);
 }
 
-QString KoShape::saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const
+QString KoShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const
 {
     Q_D(const KoShape);
     // and fill the style
@@ -1408,13 +1408,13 @@ void KoShape::saveOdfAttributes(KoShapeSavingContext &context, int attributes) c
 {
     Q_D(const KoShape);
     if (attributes & OdfStyle) {
-        KoGenStyle style;
+        KOdfGenericStyle style;
         // all items that should be written to 'draw:frame' and any other 'draw:' object that inherits this shape
         if (context.isSet(KoShapeSavingContext::PresentationShape)) {
-            style = KoGenStyle(KoGenStyle::PresentationAutoStyle, "presentation");
+            style = KOdfGenericStyle(KOdfGenericStyle::PresentationAutoStyle, "presentation");
             context.xmlWriter().addAttribute("presentation:style-name", saveStyle(style, context));
         } else {
-            style = KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic");
+            style = KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic");
             context.xmlWriter().addAttribute("draw:style-name", saveStyle(style, context));
         }
     }

@@ -36,16 +36,16 @@ class KoXmlWriter;
 
 /**
  * A generic style, i.e. basically a collection of properties and a name.
- * Instances of KoGenStyle can either be held in the KoGenStyles collection,
+ * Instances of KOdfGenericStyle can either be held in the KoGenStyles collection,
  * or created (e.g. on the stack) and given to KoGenStyles::insert().
  *
  * @author David Faure <faure@kde.org>
  */
-class KOODF_EXPORT KoGenStyle
+class KOODF_EXPORT KOdfGenericStyle
 {
 public:
     /**
-     * Possible values for the "type" argument of the KoGenStyle constructor.
+     * Possible values for the "type" argument of the KOdfGenericStyle constructor.
      * @note If there is still something missing, add it here so that it is possible to use the same
      *       saving code in all applications.
      */
@@ -144,9 +144,9 @@ public:
      *
      * @param parentName If set, name of the parent style from which this one inherits.
      */
-    explicit KoGenStyle(Type type = PageLayoutStyle, const char *familyName = 0,
+    explicit KOdfGenericStyle(Type type = PageLayoutStyle, const char *familyName = 0,
                         const QString &parentName = QString());
-    ~KoGenStyle();
+    ~KOdfGenericStyle();
 
     /**
      * setAutoStyleInStylesDotXml(true) marks a given automatic style as being needed in styles.xml.
@@ -381,7 +381,7 @@ public:
      *  @param parentStyle the parent to this style
      */
     void writeStyleProperties(KoXmlWriter *writer, PropertyType type,
-                              const KoGenStyle *parentStyle = 0) const;
+                              const KOdfGenericStyle *parentStyle = 0) const;
 
     /**
      *  QMap requires a complete sorting order.
@@ -390,10 +390,10 @@ public:
      *  Solutions with only a hash value (not representative of the whole data)
      *  require us to write a hashtable by hand....
      */
-    bool operator<(const KoGenStyle &other) const;
+    bool operator<(const KOdfGenericStyle &other) const;
 
     /// Not needed for QMap, but can still be useful
-    bool operator==(const KoGenStyle &other) const;
+    bool operator==(const KOdfGenericStyle &other) const;
 
     /**
      * Returns a property of this style. In prinicpal this class is meant to be write-only, but

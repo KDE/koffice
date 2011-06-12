@@ -132,7 +132,7 @@ void KoGradientBackground::paint(QPainter &painter, const QPainterPath &fillPath
     painter.drawPath(fillPath);
 }
 
-void KoGradientBackground::fillStyle(KoGenStyle &style, KoShapeSavingContext &context)
+void KoGradientBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
 {
     Q_D(KoGradientBackground);
     QBrush brush(*d->gradient);

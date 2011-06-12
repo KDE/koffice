@@ -107,7 +107,7 @@ public:
     }
 };
 
-void MsooXmlCommonReader::pushCurrentDrawStyle(KoGenStyle *newStyle)
+void MsooXmlCommonReader::pushCurrentDrawStyle(KOdfGenericStyle *newStyle)
 {
     m_drawStyleStack.append(m_currentDrawStyle);
 

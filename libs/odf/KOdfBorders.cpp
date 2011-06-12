@@ -27,7 +27,7 @@
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KoXmlReader.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 
 
 class KoBorderPrivate : public QSharedData
@@ -659,7 +659,7 @@ void KOdfBorders::loadOdf(const KoXmlElement &style)
     }
 }
 
-void KOdfBorders::saveOdf(KoGenStyle &style) const
+void KOdfBorders::saveOdf(KOdfGenericStyle &style) const
 {
     // Get the strings that describe respective borders.
     QString leftBorderString = QString("%1pt %2 %3")

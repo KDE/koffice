@@ -125,7 +125,7 @@ KoFilter::ConversionStatus VmlDrawingReader::read_xml()
                 QBuffer frameBuf;
                 KoXmlWriter frameWriter(&frameBuf);
                 body = &frameWriter;
-                pushCurrentDrawStyle(new KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic"));
+                pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
                 createFrameStart();
                 popCurrentDrawStyle();
                 m_frames[m_currentShapeId] = QString::fromUtf8(frameBuf.buffer(), frameBuf.buffer().size()).append(">");

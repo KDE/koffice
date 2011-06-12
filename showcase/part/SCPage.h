@@ -97,7 +97,7 @@ protected:
     virtual void saveOdfPageContent(KoPASavingContext &paContext) const;
 
     /// reimplemented
-    virtual void saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const;
+    virtual void saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const;
 
     /// reimplemented
     virtual void loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext);

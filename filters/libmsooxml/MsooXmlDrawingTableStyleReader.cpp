@@ -20,7 +20,7 @@
 #include "MsooXmlDrawingTableStyleReader.h"
 
 #include <KoGenStyles.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoOdfGraphicStyles.h>
 
 #define MSOOXML_CURRENT_NS "a"
@@ -260,14 +260,14 @@ QString TableStyleProperties::saveStyle(KoGenStyles& styles)
         return QString();
     }
 
-    KoGenStyle style = KoGenStyle(KoGenStyle::TableCellAutoStyle, "table-cell");
+    KOdfGenericStyle style = KOdfGenericStyle(KOdfGenericStyle::TableCellAutoStyle, "table-cell");
 
     //FIXME support actual background
     //I just added it to play nice to OOo which adds a blue background of questionable taste
-    style.addProperty("draw:fill", "none", KoGenStyle::GraphicType);
+    style.addProperty("draw:fill", "none", KOdfGenericStyle::GraphicType);
 
     foreach(const Border& border, m_borders) {
-        style.addProperty(border.odfBorderName(), border.odfStyleProperties(), KoGenStyle::ParagraphType);
+        style.addProperty(border.odfBorderName(), border.odfStyleProperties(), KOdfGenericStyle::ParagraphType);
     }
 
     return styles.insert(style, "cell");

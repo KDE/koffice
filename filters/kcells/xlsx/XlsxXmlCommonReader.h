@@ -25,7 +25,7 @@
 #define XLSXXMLCOMMONREADER_H
 
 #include <MsooXmlReader.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 
 class KoCharacterStyle;
 
@@ -50,7 +50,7 @@ protected:
     KoCharacterStyle *m_currentTextStyleProperties;
 
     //! Used for creating style in w:pPr (style:style/@style:name attr)
-    KoGenStyle m_currentTextStyle;
+    KOdfGenericStyle m_currentTextStyle;
 private:
     void init();
 

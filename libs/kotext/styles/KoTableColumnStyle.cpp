@@ -22,7 +22,7 @@
  */
 #include "KoTableColumnStyle.h"
 #include "KoStyleManager.h"
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include "Styles_p.h"
 #include "KoTextDocument.h"
@@ -278,7 +278,7 @@ void KoTableColumnStyle::removeDuplicates(const KoTableColumnStyle &other)
     d->stylesPrivate.removeDuplicates(other.d->stylesPrivate);
 }
 
-void KoTableColumnStyle::saveOdf(KoGenStyle &style)
+void KoTableColumnStyle::saveOdf(KOdfGenericStyle &style)
 {
     Q_UNUSED(style);
 /*
@@ -286,10 +286,10 @@ void KoTableColumnStyle::saveOdf(KoGenStyle &style)
     foreach(int key, keys) {
         if (key == KoTableColumnStyle::BreakBefore) {
             if (breakBefore())
-                style.addProperty("fo:break-before", "page", KoGenStyle::ParagraphType);
+                style.addProperty("fo:break-before", "page", KOdfGenericStyle::ParagraphType);
         } else if (key == KoTableColumnStyle::BreakAfter) {
             if (breakAfter())
-                style.addProperty("fo:break-after", "page", KoGenStyle::ParagraphType);
+                style.addProperty("fo:break-after", "page", KOdfGenericStyle::ParagraphType);
         }
 */
 }

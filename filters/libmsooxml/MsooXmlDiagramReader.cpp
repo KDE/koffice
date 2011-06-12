@@ -580,8 +580,8 @@ class ShapeAtom : public AbstractAtom
             if (!context->m_parentLayout->m_name.isEmpty())
                 xmlWriter->addAttribute("draw:name", context->m_parentLayout->m_name);
 
-            KoGenStyle style = KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic");
-            style.addProperty("draw:fill", "solid" /*none*/, KoGenStyle::GraphicType);
+            KOdfGenericStyle style = KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic");
+            style.addProperty("draw:fill", "solid" /*none*/, KOdfGenericStyle::GraphicType);
             style.addProperty("draw:fill-color", "#6666ff"); //TODO needs to handle colors1.xml ...
             style.addProperty("draw:opacity", "50%");
             const QString styleName = styles->insert(style);

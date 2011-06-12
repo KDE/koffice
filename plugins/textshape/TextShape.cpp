@@ -336,7 +336,7 @@ void TextShape::saveOdf(KoShapeSavingContext &context) const
     writer.endElement(); // draw:frame
 }
 
-QString TextShape::saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const
+QString TextShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const
 {
     Qt::Alignment vAlign(m_textShapeData->verticalAlignment());
     QString verticalAlign = "top";

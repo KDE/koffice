@@ -28,7 +28,7 @@
 #include <QColor>
 #include <QSharedData>
 
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoBorderPrivate;
 class KoXmlElement;
 
@@ -147,7 +147,7 @@ public:
      */
     void loadOdf(const KoXmlElement &style);
 
-    void saveOdf(KoGenStyle &style) const;
+    void saveOdf(KOdfGenericStyle &style) const;
 
 
     // Some public functions used in other places where borders are handled.

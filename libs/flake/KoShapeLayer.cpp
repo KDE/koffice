@@ -23,7 +23,7 @@
 #include "KoShapeLoadingContext.h"
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoXmlNS.h>
 

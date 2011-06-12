@@ -431,7 +431,7 @@ protected:
     KoPathShape(KoPathShapePrivate &);
 
     /// reimplemented
-    virtual QString saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const;
+    virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
     /// reimplemented
     virtual void loadStyle(const KoXmlElement &element, KoShapeLoadingContext &context);
 

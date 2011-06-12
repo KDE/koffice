@@ -46,7 +46,7 @@ Paragraph::Paragraph(KoGenStyles* mainStyles, bool inStylesDotXml, bool isHeadin
 {
     kDebug(30513);
     m_mainStyles = mainStyles;
-    m_odfParagraphStyle = new KoGenStyle(KoGenStyle::ParagraphAutoStyle, "paragraph");
+    m_odfParagraphStyle = new KOdfGenericStyle(KOdfGenericStyle::ParagraphAutoStyle, "paragraph");
     if (inStylesDotXml) {
         kDebug(30513) << "this paragraph is in styles.xml";
         m_inStylesDotXml = true;
@@ -84,7 +84,7 @@ void Paragraph::addRunOfText(QString text,  wvWare::SharedPtr<const wvWare::Word
         // NOTE: This logic breaks down if this isn't the first string in the
         //       paragraph, or there are other strings with another colBreak
         //       later in the same paragraph.
-        m_odfParagraphStyle->addProperty("fo:break-before", "column", KoGenStyle::ParagraphType);
+        m_odfParagraphStyle->addProperty("fo:break-before", "column", KOdfGenericStyle::ParagraphType);
         // Remove character that signaled a column break
         text.remove(QChar(0xE));
     }
@@ -102,7 +102,7 @@ void Paragraph::addRunOfText(QString text,  wvWare::SharedPtr<const wvWare::Word
 
     if (chp == 0) {
         // if inner paragraph - just add a null style & return from function
-        KoGenStyle* style = 0;
+        KOdfGenericStyle* style = 0;
         m_textStyles.push_back(style);
         return;
     }
@@ -112,7 +112,7 @@ void Paragraph::addRunOfText(QString text,  wvWare::SharedPtr<const wvWare::Word
     QString msTextStyleName = Conversion::styleNameString(msTextStyle->name());
     kDebug(30513) << "text based on characterstyle " << msTextStyleName;
 
-    KoGenStyle *textStyle;
+    KOdfGenericStyle *textStyle;
 
     bool suppresFontSize = false;
     if (m_textStyles.size() == 0 && m_paragraphProperties->pap().dcs.lines > 1) {
@@ -124,7 +124,7 @@ void Paragraph::addRunOfText(QString text,  wvWare::SharedPtr<const wvWare::Word
     // ReferenceCHP can be either the paragraph or a named style
     if (msTextStyle->sti() != 65) {
         // this is not default paragraph font
-        textStyle = new KoGenStyle(KoGenStyle::TextAutoStyle, "text");
+        textStyle = new KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
         if (m_inStylesDotXml) {
             textStyle->setAutoStyleInStylesDotXml(true);
         }
@@ -133,14 +133,14 @@ void Paragraph::addRunOfText(QString text,  wvWare::SharedPtr<const wvWare::Word
         const wvWare::Word97::CHP* refChp = &msTextStyle->chp();
         if (!refChp || refChp->ftcAscii != chp->ftcAscii) {
             if (!fontName.isEmpty()) {
-                textStyle->addProperty(QString("style:font-name"), fontName, KoGenStyle::TextType);
+                textStyle->addProperty(QString("style:font-name"), fontName, KOdfGenericStyle::TextType);
             }
             applyCharacterProperties(chp, textStyle, msTextStyle, m_bgColor, suppresFontSize, m_combinedCharacters);
         }
     } else {
         // Default Paragraph Font, which is handled differently
         // Meaning we should really compare against the CHP of the paragraph
-        textStyle = new KoGenStyle(KoGenStyle::TextAutoStyle, "text");
+        textStyle = new KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
         if (m_inStylesDotXml) {
             textStyle->setAutoStyleInStylesDotXml(true);
         }
@@ -148,7 +148,7 @@ void Paragraph::addRunOfText(QString text,  wvWare::SharedPtr<const wvWare::Word
         const wvWare::Word97::CHP* refChp = &m_paragraphStyle->chp();
         if (!refChp || refChp->ftcAscii != chp->ftcAscii) {
             if (!fontName.isEmpty()) {
-                textStyle->addProperty(QString("style:font-name"), fontName, KoGenStyle::TextType);
+                textStyle->addProperty(QString("style:font-name"), fontName, KOdfGenericStyle::TextType);
             }
         }
         applyCharacterProperties(chp, textStyle, m_paragraphStyle, m_bgColor, suppresFontSize, m_combinedCharacters);
@@ -221,7 +221,7 @@ void Paragraph::writeToFile(KoXmlWriter* writer)
     if ( !m_paragraphProperties->pap().fInTable &&
          (m_paragraphProperties->pap().dxaAbs != 0 || m_paragraphProperties->pap().dyaAbs) )
     {
-        KoGenStyle userStyle(KoGenStyle::GraphicAutoStyle, "graphic");
+        KOdfGenericStyle userStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic");
         QString drawStyleName;
 
         writer->startElement("text:p", false);
@@ -401,7 +401,7 @@ void Paragraph::setParagraphStyle(const wvWare::Style* paragraphStyle)
                                       Conversion::styleNameString(m_paragraphStyle->name()));
 }
 
-KoGenStyle* Paragraph::getOdfParagraphStyle()
+KOdfGenericStyle* Paragraph::getOdfParagraphStyle()
 {
     return m_odfParagraphStyle;
 }
@@ -419,7 +419,7 @@ void Paragraph::openInnerParagraph()
 
     //copy parent and paragraph styles
     m_odfParagraphStyle2 = m_odfParagraphStyle;
-    m_odfParagraphStyle = new KoGenStyle(KoGenStyle::ParagraphAutoStyle, "paragraph");
+    m_odfParagraphStyle = new KOdfGenericStyle(KOdfGenericStyle::ParagraphAutoStyle, "paragraph");
     m_paragraphStyle2 = m_paragraphStyle;
     m_paragraphProperties2 = m_paragraphProperties;
     m_paragraphProperties = 0;
@@ -463,7 +463,7 @@ void Paragraph::setParagraphProperties(wvWare::SharedPtr<const wvWare::Paragraph
 }
 
 void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& properties,
-                                         KoGenStyle* style, const wvWare::Style* parentStyle,
+                                         KOdfGenericStyle* style, const wvWare::Style* parentStyle,
                                          bool setDefaultAlign, Paragraph *paragraph)
 {
     kDebug(30513);
@@ -482,26 +482,26 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
     //jc = justification code
     if (!refPap || refPap->jc != pap.jc) {
         if (pap.jc == 1)   //1 = center justify
-            style->addProperty("fo:text-align", "center", KoGenStyle::ParagraphType);
+            style->addProperty("fo:text-align", "center", KOdfGenericStyle::ParagraphType);
         else if (pap.jc == 2)  //2 = right justify
-            style->addProperty("fo:text-align", "end", KoGenStyle::ParagraphType);
+            style->addProperty("fo:text-align", "end", KOdfGenericStyle::ParagraphType);
         else if (pap.jc == 3)  //3 = left & right justify
-            style->addProperty("fo:text-align", "justify", KoGenStyle::ParagraphType);
+            style->addProperty("fo:text-align", "justify", KOdfGenericStyle::ParagraphType);
         else if (pap.jc == 4)  //4 = distributed .. fake it as justify
-            style->addProperty("fo:text-align", "justify", KoGenStyle::ParagraphType);
+            style->addProperty("fo:text-align", "justify", KOdfGenericStyle::ParagraphType);
         else //0 = left justify
-            style->addProperty("fo:text-align", "start", KoGenStyle::ParagraphType);
+            style->addProperty("fo:text-align", "start", KOdfGenericStyle::ParagraphType);
     } else if (setDefaultAlign) {
         // Set default align for page number field in header or footer
         kDebug(30513) << "setting default align for page number field in header or footer";
-        style->addProperty("fo:text-align", "center", KoGenStyle::ParagraphType);
+        style->addProperty("fo:text-align", "center", KOdfGenericStyle::ParagraphType);
     }
 
     if (!refPap || refPap->fBiDi != pap.fBiDi) {
         if (pap.fBiDi == 1)   //1 = right to left
-            style->addProperty("style:writing-mode", "rl-tb", KoGenStyle::ParagraphType);
+            style->addProperty("style:writing-mode", "rl-tb", KOdfGenericStyle::ParagraphType);
         else //0 = normal
-            style->addProperty("style:writing-mode", "lr-tb", KoGenStyle::ParagraphType);
+            style->addProperty("style:writing-mode", "lr-tb", KOdfGenericStyle::ParagraphType);
     }
 
     // if there is no parent style OR the parent and child background color
@@ -518,7 +518,7 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
         } else {
             color = "transparent";
         }
-        style->addProperty("fo:background-color", color, KoGenStyle::ParagraphType);
+        style->addProperty("fo:background-color", color, KOdfGenericStyle::ParagraphType);
     }
 
     //dxaLeft1 = first-line indent from left margin (signed, relative to dxaLeft)
@@ -526,26 +526,26 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
     //dxaRight = indent from right margin (signed)
     if (!refPap || refPap->dxaLeft != pap.dxaLeft) {
         // apply twip -> pt conversion
-        style->addPropertyPt("fo:margin-left", (double)pap.dxaLeft / 20.0, KoGenStyle::ParagraphType);
+        style->addPropertyPt("fo:margin-left", (double)pap.dxaLeft / 20.0, KOdfGenericStyle::ParagraphType);
     }
     if (!refPap || refPap->dxaRight != pap.dxaRight) {
         // apply twip -> pt conversion
-        style->addPropertyPt("fo:margin-right", (double)pap.dxaRight / 20.0, KoGenStyle::ParagraphType);
+        style->addPropertyPt("fo:margin-right", (double)pap.dxaRight / 20.0, KOdfGenericStyle::ParagraphType);
     }
     if (!refPap || refPap->dxaLeft1 != pap.dxaLeft1) {
         // apply twip -> pt conversion
-        style->addPropertyPt("fo:text-indent", (double)pap.dxaLeft1 / 20.0, KoGenStyle::ParagraphType);
+        style->addPropertyPt("fo:text-indent", (double)pap.dxaLeft1 / 20.0, KOdfGenericStyle::ParagraphType);
     }
 
     //dyaBefore = vertical spacing before paragraph (unsigned)
     //dyaAfter = vertical spacing after paragraph (unsigned)
     if (!refPap || refPap->dyaBefore != pap.dyaBefore) {
         // apply twip -> pt conversion
-        style->addPropertyPt("fo:margin-top", (double)pap.dyaBefore / 20.0, KoGenStyle::ParagraphType);
+        style->addPropertyPt("fo:margin-top", (double)pap.dyaBefore / 20.0, KOdfGenericStyle::ParagraphType);
     }
     if (!refPap || refPap->dyaAfter != pap.dyaAfter) {
         // apply twip -> pt conversion
-        style->addPropertyPt("fo:margin-bottom", (double)pap.dyaAfter / 20.0, KoGenStyle::ParagraphType);
+        style->addPropertyPt("fo:margin-bottom", (double)pap.dyaAfter / 20.0, KOdfGenericStyle::ParagraphType);
     }
 
     // Linespacing
@@ -563,7 +563,7 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
             // attribute.
             QString proportionalLineSpacing(QString::number(((qreal)pap.lspd.dyaLine
                                                   / (qreal)240.0)*(qreal)120.0));
-            style->addProperty("fo:line-height", proportionalLineSpacing.append("%"), KoGenStyle::ParagraphType);
+            style->addProperty("fo:line-height", proportionalLineSpacing.append("%"), KOdfGenericStyle::ParagraphType);
         } else if (pap.lspd.fMultLinespace == 0) {
             // Magnitude of lspd.dyaLine specifies the amount of space
             // that will be provided for lines in the paragraph in twips.
@@ -572,9 +572,9 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
             qreal value = qAbs((qreal)pap.lspd.dyaLine / (qreal)20.0); // twip -> pt
             // lspd.dyaLine > 0 means "at least", < 0 means "exactly"
             if (pap.lspd.dyaLine > 0)
-                style->addPropertyPt("fo:line-height-at-least", value, KoGenStyle::ParagraphType);
+                style->addPropertyPt("fo:line-height-at-least", value, KOdfGenericStyle::ParagraphType);
             else if (pap.lspd.dyaLine < 0 && pap.dcs.fdct==0)
-                style->addPropertyPt("fo:line-height", value, KoGenStyle::ParagraphType);
+                style->addPropertyPt("fo:line-height", value, KOdfGenericStyle::ParagraphType);
         } else
             kWarning(30513) << "Unhandled LSPD::fMultLinespace value: "
             << pap.lspd.fMultLinespace;
@@ -586,21 +586,21 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
     //fPageBreakBefore = start this paragraph on new page
     if (!refPap || refPap->fKeep != pap.fKeep) {
         if (pap.fKeep)
-            style->addProperty("fo:keep-together", "always", KoGenStyle::ParagraphType);
+            style->addProperty("fo:keep-together", "always", KOdfGenericStyle::ParagraphType);
         else
-            style->addProperty("fo:keep-together", "auto", KoGenStyle::ParagraphType);
+            style->addProperty("fo:keep-together", "auto", KOdfGenericStyle::ParagraphType);
     }
     if (!refPap || refPap->fKeepFollow != pap.fKeepFollow) {
         if (pap.fKeepFollow)
-            style->addProperty("fo:keep-with-next", "always", KoGenStyle::ParagraphType);
+            style->addProperty("fo:keep-with-next", "always", KOdfGenericStyle::ParagraphType);
         else
-            style->addProperty("fo:keep-with-next", "auto", KoGenStyle::ParagraphType);
+            style->addProperty("fo:keep-with-next", "auto", KOdfGenericStyle::ParagraphType);
     }
     if (!refPap || refPap->fPageBreakBefore != pap.fPageBreakBefore) {
         if (pap.fPageBreakBefore)
-            style->addProperty("fo:break-before", "page", KoGenStyle::ParagraphType);
+            style->addProperty("fo:break-before", "page", KOdfGenericStyle::ParagraphType);
         else
-            style->addProperty("fo:break-before", "auto", KoGenStyle::ParagraphType);
+            style->addProperty("fo:break-before", "auto", KOdfGenericStyle::ParagraphType);
     }
 
     // Borders
@@ -616,16 +616,16 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
     //       fo:border-{top,bottom,left,right}
     // TODO: Check if borderStyle is "double" and add attributes for that.
     if (!refPap || refPap->brcTop.brcType != pap.brcTop.brcType) {
-        style->addProperty("fo:border-top", Conversion::setBorderAttributes(pap.brcTop), KoGenStyle::ParagraphType);
+        style->addProperty("fo:border-top", Conversion::setBorderAttributes(pap.brcTop), KOdfGenericStyle::ParagraphType);
     }
     if (!refPap || refPap->brcBottom.brcType != pap.brcBottom.brcType) {
-        style->addProperty("fo:border-bottom", Conversion::setBorderAttributes(pap.brcBottom), KoGenStyle::ParagraphType);
+        style->addProperty("fo:border-bottom", Conversion::setBorderAttributes(pap.brcBottom), KOdfGenericStyle::ParagraphType);
     }
     if (!refPap || refPap->brcLeft.brcType != pap.brcLeft.brcType) {
-        style->addProperty("fo:border-left", Conversion::setBorderAttributes(pap.brcLeft), KoGenStyle::ParagraphType);
+        style->addProperty("fo:border-left", Conversion::setBorderAttributes(pap.brcLeft), KOdfGenericStyle::ParagraphType);
     }
     if (!refPap || refPap->brcRight.brcType != pap.brcRight.brcType) {
-        style->addProperty("fo:border-right", Conversion::setBorderAttributes(pap.brcRight), KoGenStyle::ParagraphType);
+        style->addProperty("fo:border-right", Conversion::setBorderAttributes(pap.brcRight), KOdfGenericStyle::ParagraphType);
     }
 
     // Drop Cap Style (DCS)
@@ -709,7 +709,7 @@ void Paragraph::applyParagraphProperties(const wvWare::ParagraphProperties& prop
     }
 } //end applyParagraphProperties
 
-void Paragraph::applyCharacterProperties(const wvWare::Word97::CHP* chp, KoGenStyle* style, const wvWare::Style* parentStyle, QString bgColor, bool suppressFontSize, bool combineCharacters)
+void Paragraph::applyCharacterProperties(const wvWare::Word97::CHP* chp, KOdfGenericStyle* style, const wvWare::Style* parentStyle, QString bgColor, bool suppressFontSize, bool combineCharacters)
 {
     //if we have a named style, set its CHP as the refChp
     const wvWare::Word97::CHP* refChp;
@@ -728,78 +728,78 @@ void Paragraph::applyCharacterProperties(const wvWare::Word97::CHP* chp, KoGenSt
         } else {
             color = QString('#' + QString::number(chp->cv | 0xff000000, 16).right(6).toUpper());
         }
-        style->addProperty(QString("fo:color"), color, KoGenStyle::TextType);
+        style->addProperty(QString("fo:color"), color, KOdfGenericStyle::TextType);
     }
 
     //hps = font size in half points
     if (!suppressFontSize && (!refChp || refChp->hps != chp->hps)) {
-        style->addPropertyPt(QString("fo:font-size"), (int)(chp->hps / 2), KoGenStyle::TextType);
+        style->addPropertyPt(QString("fo:font-size"), (int)(chp->hps / 2), KOdfGenericStyle::TextType);
     }
 
     //fBold = bold text if 1
     if (!refChp || refChp->fBold != chp->fBold)
-        style->addProperty(QString("fo:font-weight"), chp->fBold ? QString("bold") : QString("normal"), KoGenStyle::TextType);
+        style->addProperty(QString("fo:font-weight"), chp->fBold ? QString("bold") : QString("normal"), KOdfGenericStyle::TextType);
 
     //fItalic = italic text if 1
     if (!refChp || refChp->fItalic != chp->fItalic)
-        style->addProperty(QString("fo:font-style"), chp->fItalic ? QString("italic") : QString("normal"), KoGenStyle::TextType);
+        style->addProperty(QString("fo:font-style"), chp->fItalic ? QString("italic") : QString("normal"), KOdfGenericStyle::TextType);
 
     //kul: underline code
     if (!refChp || refChp->kul != chp->kul) {
         switch (chp->kul) {
         case 0: //none
-            style->addProperty(QString("style:text-underline-style"), QString("none") , KoGenStyle::TextType);
+            style->addProperty(QString("style:text-underline-style"), QString("none") , KOdfGenericStyle::TextType);
             break;
         case 1: // single
-            style->addProperty("style:text-underline-style", "solid" , KoGenStyle::TextType);
+            style->addProperty("style:text-underline-style", "solid" , KOdfGenericStyle::TextType);
             break;
         case 2: // by word
-            style->addProperty("style:text-underline-style", "solid" , KoGenStyle::TextType);
-            style->addProperty("style:text-underline-mode", "skip-white-space" , KoGenStyle::TextType);
+            style->addProperty("style:text-underline-style", "solid" , KOdfGenericStyle::TextType);
+            style->addProperty("style:text-underline-mode", "skip-white-space" , KOdfGenericStyle::TextType);
             break;
         case 3: // double
-            style->addProperty("style:text-underline-style", "solid" , KoGenStyle::TextType);
-            style->addProperty("style:text-underline-type", "double", KoGenStyle::TextType);
+            style->addProperty("style:text-underline-style", "solid" , KOdfGenericStyle::TextType);
+            style->addProperty("style:text-underline-type", "double", KOdfGenericStyle::TextType);
             break;
         case 4: // dotted
-            style->addProperty("style:text-underline-style", "dotted", KoGenStyle::TextType);
+            style->addProperty("style:text-underline-style", "dotted", KOdfGenericStyle::TextType);
             break;
         case 5: // hidden - This makes no sense as an underline property!
             //I guess we could change this to have an underline the same color
             //as the background?
-            style->addProperty("style:text-underline-type", "none", KoGenStyle::TextType);
+            style->addProperty("style:text-underline-type", "none", KOdfGenericStyle::TextType);
             break;
         case 6: // thick
-            style->addProperty("style:text-underline-style", "solid", KoGenStyle::TextType);
-            style->addProperty("style:text-underline-weight", "thick", KoGenStyle::TextType);
+            style->addProperty("style:text-underline-style", "solid", KOdfGenericStyle::TextType);
+            style->addProperty("style:text-underline-weight", "thick", KOdfGenericStyle::TextType);
             break;
         case 7: //dash
-            style->addProperty("style:text-underline-style", "dash", KoGenStyle::TextType);
+            style->addProperty("style:text-underline-style", "dash", KOdfGenericStyle::TextType);
             break;
         case 8: //dot (not used, says the docu)
             break;
         case 9: //dot dash
-            style->addProperty("style:text-underline-style", "dot-dash", KoGenStyle::TextType);
+            style->addProperty("style:text-underline-style", "dot-dash", KOdfGenericStyle::TextType);
             break;
         case 10: //dot dot dash
-            style->addProperty("style:text-underline-style", "dot-dot-dash", KoGenStyle::TextType);
+            style->addProperty("style:text-underline-style", "dot-dot-dash", KOdfGenericStyle::TextType);
             break;
         case 11: //wave
-            style->addProperty("style:text-underline-style", "wave", KoGenStyle::TextType);
+            style->addProperty("style:text-underline-style", "wave", KOdfGenericStyle::TextType);
             break;
         default:
-            style->addProperty("style:text-underline-style", "none", KoGenStyle::TextType);
+            style->addProperty("style:text-underline-style", "none", KOdfGenericStyle::TextType);
         };
     }
     //fstrike = use strikethrough if 1
     //fDStrike = use double strikethrough if 1
     if (!refChp || refChp->fStrike != chp->fStrike || refChp->fDStrike != chp->fDStrike) {
         if (chp->fStrike)
-            style->addProperty("style:text-line-through-type", "single", KoGenStyle::TextType);
+            style->addProperty("style:text-line-through-type", "single", KOdfGenericStyle::TextType);
         else if (chp->fDStrike)
-            style->addProperty("style:text-line-through-type", "double", KoGenStyle::TextType);
+            style->addProperty("style:text-line-through-type", "double", KOdfGenericStyle::TextType);
         else
-            style->addProperty("style:text-line-through-type", "none", KoGenStyle::TextType);
+            style->addProperty("style:text-line-through-type", "none", KOdfGenericStyle::TextType);
     }
 
     //font attribute (uppercase, lowercase (not in MSWord), small caps)
@@ -807,17 +807,17 @@ void Paragraph::applyCharacterProperties(const wvWare::Word97::CHP* chp, KoGenSt
     //fSmallCaps = displayed with small caps when 1, no small caps when 0
     if (!refChp || refChp->fCaps != chp->fCaps || refChp->fSmallCaps != chp->fSmallCaps) {
         if (chp->fCaps)
-            style->addProperty("fo:text-transform", "uppercase", KoGenStyle::TextType);
+            style->addProperty("fo:text-transform", "uppercase", KOdfGenericStyle::TextType);
         if (chp->fSmallCaps)
-            style->addProperty("fo:font-variant", "small-caps", KoGenStyle::TextType);
+            style->addProperty("fo:font-variant", "small-caps", KOdfGenericStyle::TextType);
     }
 
     //iss = superscript/subscript indices
     if (!refChp || refChp->iss != chp->iss) {
         if (chp->iss == 1)   //superscript
-            style->addProperty("style:text-position", "super", KoGenStyle::TextType);
+            style->addProperty("style:text-position", "super", KOdfGenericStyle::TextType);
         else if (chp->iss == 2)   //subscript
-            style->addProperty("style:text-position", "sub", KoGenStyle::TextType);
+            style->addProperty("style:text-position", "sub", KOdfGenericStyle::TextType);
     }
 
     //fHighlight = when 1, characters are highlighted with color specified by chp.icoHighlight
@@ -825,34 +825,34 @@ void Paragraph::applyCharacterProperties(const wvWare::Word97::CHP* chp, KoGenSt
     if (!refChp || refChp->fHighlight != chp->fHighlight || refChp->icoHighlight != chp->icoHighlight) {
         if (chp->fHighlight) {
             QString color = Conversion::color(chp->icoHighlight, -1);
-            style->addProperty("fo:background-color", color, KoGenStyle::TextType);
+            style->addProperty("fo:background-color", color, KOdfGenericStyle::TextType);
         } else {
-            style->addProperty("fo:background-color", "transparent", KoGenStyle::TextType);
+            style->addProperty("fo:background-color", "transparent", KOdfGenericStyle::TextType);
         }
     }
 
     if (!refChp || refChp->shd.cvBack != chp->shd.cvBack) {
         if (chp->shd.cvBack != 0xff000000)
-            style->addProperty(QString("fo:background-color"), '#' + QString::number(chp->shd.cvBack | 0xff000000, 16).right(6).toUpper(), KoGenStyle::TextType);
+            style->addProperty(QString("fo:background-color"), '#' + QString::number(chp->shd.cvBack | 0xff000000, 16).right(6).toUpper(), KOdfGenericStyle::TextType);
         else
-            style->addProperty("fo:background-color", "transparent", KoGenStyle::TextType);
+            style->addProperty("fo:background-color", "transparent", KOdfGenericStyle::TextType);
     }
 
     //fShadow = text has shadow if 1
     //fImprint = text engraved if 1
     if (!refChp || refChp->fShadow != chp->fShadow || refChp->fImprint != chp->fImprint) {
         if (chp->fShadow)
-            style->addProperty("style:text-shadow", "1pt", KoGenStyle::TextType);
+            style->addProperty("style:text-shadow", "1pt", KOdfGenericStyle::TextType);
         if (chp->fImprint)
-            style->addProperty("style:font-relief", "engraved", KoGenStyle::TextType);
+            style->addProperty("style:font-relief", "engraved", KOdfGenericStyle::TextType);
     }
 
     //fOutline = text is outline if 1
     if (!refChp || refChp->fOutline != chp->fOutline) {
         if (chp->fOutline)
-            style->addProperty("style:text-outline", "true", KoGenStyle::TextType);
+            style->addProperty("style:text-outline", "true", KOdfGenericStyle::TextType);
         else
-            style->addProperty("style:text-outline", "false", KoGenStyle::TextType);
+            style->addProperty("style:text-outline", "false", KOdfGenericStyle::TextType);
     }
 
     // if the characters are combined, add proper style
@@ -863,7 +863,7 @@ void Paragraph::applyCharacterProperties(const wvWare::Word97::CHP* chp, KoGenSt
     //dxaSpace = letterspacing in twips
     if (!refChp || refChp->dxaSpace != chp->dxaSpace) {
         double value =  chp->dxaSpace / 20.0; // twips -> pt
-        style->addPropertyPt("fo:letter-spacing", value, KoGenStyle::TextType);
+        style->addPropertyPt("fo:letter-spacing", value, KOdfGenericStyle::TextType);
     }
     //pctCharwidth = pct stretch doesn't seem to have an ODF ccounterpart but Qt could support it
 
@@ -930,22 +930,22 @@ void Paragraph::addDropCap(QString &string, int type, int lines, qreal distance,
     kDebug(30513) << "size: " << m_textStrings.size();
     if (m_textStrings.isEmpty()) {
         m_textStrings.append(string);
-        KoGenStyle* style = 0;
+        KOdfGenericStyle* style = 0;
         m_textStyles.insert(m_textStyles.begin(), style);
     } else {
         m_textStrings[0].prepend(string);
     }
 #else
     m_textStrings.prepend(string);
-    KoGenStyle* style = 0;
+    KOdfGenericStyle* style = 0;
     m_textStyles.insert(m_textStyles.begin(), style);
 #endif
 
 #else
     std::vector<QString>            tempStrings;
-    std::vector<const KoGenStyle*>  tempStyles;
+    std::vector<const KOdfGenericStyle*>  tempStyles;
     tempStrings.push_back(dropCapParagraph->m_textStrings[0]);
-    KoGenStyle* style = 0;
+    KOdfGenericStyle* style = 0;
     tempStyles.push_back(style);
 
     if (dropCapParagraph->m_textStrings.size() > 0) {
@@ -978,8 +978,8 @@ QString Paragraph::createTextStyle(wvWare::SharedPtr<const wvWare::Word97::CHP> 
     QString msTextStyleName = Conversion::styleNameString(msTextStyle->name());
     kDebug(30513) << "text based on characterstyle " << msTextStyleName;
 
-    KoGenStyle *textStyle;
-    textStyle = new KoGenStyle(KoGenStyle::TextAutoStyle, "text");
+    KOdfGenericStyle *textStyle;
+    textStyle = new KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
     if (m_inStylesDotXml) {
         textStyle->setAutoStyleInStylesDotXml(true);
     }

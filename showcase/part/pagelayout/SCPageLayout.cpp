@@ -25,7 +25,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoPASavingContext.h>
 #include "SCPlaceholder.h"
@@ -104,7 +104,7 @@ bool SCPageLayout::loadOdf(const KoXmlElement &element, const QRectF &pageRect)
 
 QString SCPageLayout::saveOdf(KoPASavingContext &context) const
 {
-    KoGenStyle style(KoGenStyle::PresentationPageLayoutStyle);
+    KOdfGenericStyle style(KOdfGenericStyle::PresentationPageLayoutStyle);
 
     style.addAttribute("style:display-name", m_name);
 

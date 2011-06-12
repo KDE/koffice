@@ -35,7 +35,7 @@
 class StylePrivate;
 class KoStyleStack;
 class KoShapeLoadingContext;
-class KoGenStyle;
+class KOdfGenericStyle;
 
 /**
  * A container for all properties for a character style.
@@ -340,7 +340,7 @@ public:
      */
     void removeDuplicates(const QTextCharFormat &other_format);
 
-    void saveOdf(KoGenStyle &style);
+    void saveOdf(KOdfGenericStyle &style);
 
     /**
      * Returns true if this style has no properties set. Else, returns false.

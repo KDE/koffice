@@ -107,8 +107,8 @@ void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGen
         if (data.contains(pageStyle))
             continue;
 
-        KoGenStyle masterStyle(KoGenStyle::MasterPageStyle);
-        KoGenStyle layoutStyle = pageStyle.saveOdf();
+        KOdfGenericStyle masterStyle(KOdfGenericStyle::MasterPageStyle);
+        KOdfGenericStyle layoutStyle = pageStyle.saveOdf();
         masterStyle.addProperty("style:page-layout-name", mainStyles.insert(layoutStyle, "pm"));
         QString name = mainStyles.insert(masterStyle, pageStyle.name(), KoGenStyles::DontAddNumberToName);
         m_masterPages.insert(pageStyle, name);
@@ -122,9 +122,9 @@ void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGen
           << KWord::EvenPagesFooterTextFrameSet;
 
     foreach (KWPageStyle pageStyle, data.keys()) {
-        KoGenStyle masterStyle(KoGenStyle::MasterPageStyle);
+        KOdfGenericStyle masterStyle(KOdfGenericStyle::MasterPageStyle);
         //masterStyle.setAutoStyleInStylesDotXml(true);
-        KoGenStyle layoutStyle = pageStyle.saveOdf();
+        KOdfGenericStyle layoutStyle = pageStyle.saveOdf();
         masterStyle.addProperty("style:page-layout-name", mainStyles.insert(layoutStyle, "pm"));
 
         QHash<int, KWTextFrameSet*> headersAndFooters = data.value(pageStyle);
@@ -151,7 +151,7 @@ void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGen
         }
     }
 
-    //foreach (KoGenStyles::NamedStyle s, mainStyles.styles(KoGenStyle::ParagraphAutoStyle))
+    //foreach (KoGenStyles::NamedStyle s, mainStyles.styles(KOdfGenericStyle::ParagraphAutoStyle))
     //    mainStyles.markStyleForStylesXml(s.name);
 
     //kDebug(32001) << "END saveHeaderFooter ############################################";

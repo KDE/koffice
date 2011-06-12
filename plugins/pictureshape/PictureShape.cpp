@@ -31,7 +31,7 @@
 #include <KoXmlNS.h>
 #include <KoStoreDevice.h>
 #include <KoUnit.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoTextOnShapeContainer.h>
 
 #include <QPainter>
@@ -252,7 +252,7 @@ KoImageCollection *PictureShape::imageCollection() const
     return m_imageCollection;
 }
 
-QString PictureShape::saveStyle(KoGenStyle& style, KoShapeSavingContext& context) const
+QString PictureShape::saveStyle(KOdfGenericStyle& style, KoShapeSavingContext& context) const
 {
     if (transparency() > 0.0) {
         style.addProperty("draw:image-opacity", QString("%1%").arg((1.0 - transparency()) * 100.0));

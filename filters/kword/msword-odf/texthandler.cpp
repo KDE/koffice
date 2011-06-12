@@ -39,7 +39,7 @@
 #include <qfontinfo.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KOdfFontData.h>
 
 #include "document.h"
@@ -169,7 +169,7 @@ void KWordTextHandler::sectionStart(wvWare::SharedPtr<const wvWare::Word97::SEP>
     {
         QString sectionStyleName = "Sect";
         sectionStyleName.append(QString::number(m_sectionNumber));
-        KoGenStyle sectionStyle(KoGenStyle::SectionAutoStyle, "section");
+        KOdfGenericStyle sectionStyle(KOdfGenericStyle::SectionAutoStyle, "section");
         //parse column info
         QBuffer buf;
         buf.open(QIODevice::WriteOnly);
@@ -236,7 +236,7 @@ void KWordTextHandler::sectionStart(wvWare::SharedPtr<const wvWare::Word97::SEP>
             m_mainStyles->insertRawOdfStyles(KoGenStyles::DocumentStyles,
                                              lineNumberingConfig.arg(lineNumbersStyleName).toLatin1());
 
-            KoGenStyle *normalStyle = m_mainStyles->styleForModification(QString("Normal"));
+            KOdfGenericStyle *normalStyle = m_mainStyles->styleForModification(QString("Normal"));
 
             // if got Normal style, insert line numbering configuration in it
             if (normalStyle) {
@@ -831,13 +831,13 @@ void KWordTextHandler::paragraphStart(wvWare::SharedPtr<const wvWare::ParagraphP
         m_paragraph->setParagraphStyle(paragraphStyle);
 
         //write the paragraph formatting
-        //KoGenStyle* paragraphStyle = new KoGenStyle(KoGenStyle::ParagraphAutoStyle, "paragraph");
+        //KOdfGenericStyle* paragraphStyle = new KOdfGenericStyle(KOdfGenericStyle::ParagraphAutoStyle, "paragraph");
         //writeLayout(*paragraphProperties, paragraphStyle, m_currentStyle, true, namedStyleName);
     } else {
         kWarning() << "paragraphProperties was NOT set";
     }
 
-    KoGenStyle* style = m_paragraph->getOdfParagraphStyle();
+    KOdfGenericStyle* style = m_paragraph->getOdfParagraphStyle();
 
     //check if the master-page-name attribute is required
     if (document()->writeMasterPageName() && !document()->writingHeader())
@@ -849,7 +849,7 @@ void KWordTextHandler::paragraphStart(wvWare::SharedPtr<const wvWare::ParagraphP
     if (m_breakBeforePage &&
         !document()->writingHeader() && !paragraphProperties->pap().fInTable)
     {
-        style->addProperty("fo:break-before", "page", KoGenStyle::ParagraphType);
+        style->addProperty("fo:break-before", "page", KOdfGenericStyle::ParagraphType);
         m_breakBeforePage = false;
     }
 
@@ -1368,7 +1368,7 @@ bool KWordTextHandler::writeListInfo(KoXmlWriter* writer, const wvWare::Word97::
             m_listStyleName = m_previousLists[listInfo->lsid()];
         } else {
             //need to create a style for this list
-            KoGenStyle listStyle(KoGenStyle::ListAutoStyle);
+            KOdfGenericStyle listStyle(KOdfGenericStyle::ListAutoStyle);
 
             // If we're writing to styles.xml, the list style needs to go
             // there as well.
@@ -1425,7 +1425,7 @@ bool KWordTextHandler::writeListInfo(KoXmlWriter* writer, const wvWare::Word97::
         QBuffer buf;
         buf.open(QIODevice::WriteOnly);
         KoXmlWriter listStyleWriter(&buf);
-        KoGenStyle* listStyle = 0;
+        KOdfGenericStyle* listStyle = 0;
         //text() returns a struct consisting of a UString text string (called text) & a pointer to a CHP (called chp)
         wvWare::UString text = listInfo->text().text;
         if (nfc == 23) { //bullets

@@ -33,66 +33,66 @@
 #include <kdebug.h>
 
 static const struct {
-    KoGenStyle::Type m_type;
+    KOdfGenericStyle::Type m_type;
     const char * m_elementName;
     const char * m_propertiesElementName;
     bool m_drawElement;
 } styleData[] = {
-    { KoGenStyle::TextStyle,            "style:style", "style:text-properties",         false  },
-    { KoGenStyle::ParagraphStyle,       "style:style", "style:paragraph-properties",    false  },
-    { KoGenStyle::SectionStyle,         "style:style", "style:section-properties",      false  },
-    { KoGenStyle::RubyStyle,            "style:style", "style:ruby-properties",         false  },
-    { KoGenStyle::TableStyle,           "style:style", "style:table-properties",        false  },
-    { KoGenStyle::TableColumnStyle,     "style:style", "style:table-column-properties", false  },
-    { KoGenStyle::TableRowStyle,        "style:style", "style:table-row-properties",    false  },
-    { KoGenStyle::TableCellStyle,       "style:style", "style:table-cell-properties",   false  },
-    { KoGenStyle::GraphicStyle,         "style:style", "style:graphic-properties",      false  },
-    { KoGenStyle::PresentationStyle,    "style:style", "style:graphic-properties",      false  },
-    { KoGenStyle::DrawingPageStyle,     "style:style", "style:drawing-page-properties", false  },
-    { KoGenStyle::ChartStyle,           "style:style", "style:chart-properties",        false  },
-    { KoGenStyle::ListStyle,            "text:list-style", 0, false  },
-    { KoGenStyle::LinearGradientStyle,  "svg:linearGradient", 0, true  },
-    { KoGenStyle::RadialGradientStyle,  "svg:radialGradient", 0, true  },
-    { KoGenStyle::ConicalGradientStyle, "koffice:conicalGradient", 0, true  },
-    { KoGenStyle::StrokeDashStyle,      "draw:stroke-dash", 0, true  },
-    { KoGenStyle::FillImageStyle,       "draw:fill-image", 0, true  },
-    { KoGenStyle::HatchStyle,           "draw:hatch", "style:graphic-properties", true  },
-    { KoGenStyle::GradientStyle,        "draw:gradient", "style:graphic-properties", true  },
-    { KoGenStyle::MarkerStyle,          "draw:marker", "style:graphic-properties", true  },
-    { KoGenStyle::PresentationPageLayoutStyle, "style:presentation-page-layout", 0, false  }
+    { KOdfGenericStyle::TextStyle,            "style:style", "style:text-properties",         false  },
+    { KOdfGenericStyle::ParagraphStyle,       "style:style", "style:paragraph-properties",    false  },
+    { KOdfGenericStyle::SectionStyle,         "style:style", "style:section-properties",      false  },
+    { KOdfGenericStyle::RubyStyle,            "style:style", "style:ruby-properties",         false  },
+    { KOdfGenericStyle::TableStyle,           "style:style", "style:table-properties",        false  },
+    { KOdfGenericStyle::TableColumnStyle,     "style:style", "style:table-column-properties", false  },
+    { KOdfGenericStyle::TableRowStyle,        "style:style", "style:table-row-properties",    false  },
+    { KOdfGenericStyle::TableCellStyle,       "style:style", "style:table-cell-properties",   false  },
+    { KOdfGenericStyle::GraphicStyle,         "style:style", "style:graphic-properties",      false  },
+    { KOdfGenericStyle::PresentationStyle,    "style:style", "style:graphic-properties",      false  },
+    { KOdfGenericStyle::DrawingPageStyle,     "style:style", "style:drawing-page-properties", false  },
+    { KOdfGenericStyle::ChartStyle,           "style:style", "style:chart-properties",        false  },
+    { KOdfGenericStyle::ListStyle,            "text:list-style", 0, false  },
+    { KOdfGenericStyle::LinearGradientStyle,  "svg:linearGradient", 0, true  },
+    { KOdfGenericStyle::RadialGradientStyle,  "svg:radialGradient", 0, true  },
+    { KOdfGenericStyle::ConicalGradientStyle, "koffice:conicalGradient", 0, true  },
+    { KOdfGenericStyle::StrokeDashStyle,      "draw:stroke-dash", 0, true  },
+    { KOdfGenericStyle::FillImageStyle,       "draw:fill-image", 0, true  },
+    { KOdfGenericStyle::HatchStyle,           "draw:hatch", "style:graphic-properties", true  },
+    { KOdfGenericStyle::GradientStyle,        "draw:gradient", "style:graphic-properties", true  },
+    { KOdfGenericStyle::MarkerStyle,          "draw:marker", "style:graphic-properties", true  },
+    { KOdfGenericStyle::PresentationPageLayoutStyle, "style:presentation-page-layout", 0, false  }
 };
 
 static const unsigned int numStyleData = sizeof(styleData) / sizeof(*styleData);
 
 static const struct {
-    KoGenStyle::Type m_type;
+    KOdfGenericStyle::Type m_type;
     const char * m_elementName;
     const char * m_propertiesElementName;
     bool m_drawElement;
 } autoStyleData[] = {
-    { KoGenStyle::TextAutoStyle,         "style:style", "style:text-properties",         false  },
-    { KoGenStyle::ParagraphAutoStyle,    "style:style", "style:paragraph-properties",    false  },
-    { KoGenStyle::SectionAutoStyle,      "style:style", "style:section-properties",      false  },
-    { KoGenStyle::RubyAutoStyle,         "style:style", "style:ruby-properties",         false  },
-    { KoGenStyle::TableAutoStyle,        "style:style", "style:table-properties",        false  },
-    { KoGenStyle::TableColumnAutoStyle,  "style:style", "style:table-column-properties", false  },
-    { KoGenStyle::TableRowAutoStyle,     "style:style", "style:table-row-properties",    false  },
-    { KoGenStyle::TableCellAutoStyle,    "style:style", "style:table-cell-properties",   false  },
-    { KoGenStyle::GraphicAutoStyle,      "style:style", "style:graphic-properties",      false  },
-    { KoGenStyle::PresentationAutoStyle, "style:style", "style:graphic-properties",      false  },
-    { KoGenStyle::DrawingPageAutoStyle,  "style:style", "style:drawing-page-properties", false  },
-    { KoGenStyle::ChartAutoStyle,        "style:style", "style:chart-properties",        false  },
-    { KoGenStyle::PageLayoutStyle, "style:page-layout", "style:page-layout-properties",  false  },
-    { KoGenStyle::ListAutoStyle, "text:list-style", 0, false  },
-    { KoGenStyle::NumericNumberStyle, "number:number-style", 0, false  },
-    { KoGenStyle::NumericFractionStyle, "number:number-style", 0, false  },
-    { KoGenStyle::NumericScientificStyle, "number:number-style", 0, false  },
-    { KoGenStyle::NumericDateStyle, "number:date-style", 0, false  },
-    { KoGenStyle::NumericTimeStyle, "number:time-style", 0, false  },
-    { KoGenStyle::NumericPercentageStyle, "number:percentage-style", 0, false  },
-    { KoGenStyle::NumericCurrencyStyle, "number:currency-style", 0, false  },
-    { KoGenStyle::NumericBooleanStyle, "number:boolean-style", 0, false  },
-    { KoGenStyle::NumericTextStyle, "number:text-style", 0, false  }
+    { KOdfGenericStyle::TextAutoStyle,         "style:style", "style:text-properties",         false  },
+    { KOdfGenericStyle::ParagraphAutoStyle,    "style:style", "style:paragraph-properties",    false  },
+    { KOdfGenericStyle::SectionAutoStyle,      "style:style", "style:section-properties",      false  },
+    { KOdfGenericStyle::RubyAutoStyle,         "style:style", "style:ruby-properties",         false  },
+    { KOdfGenericStyle::TableAutoStyle,        "style:style", "style:table-properties",        false  },
+    { KOdfGenericStyle::TableColumnAutoStyle,  "style:style", "style:table-column-properties", false  },
+    { KOdfGenericStyle::TableRowAutoStyle,     "style:style", "style:table-row-properties",    false  },
+    { KOdfGenericStyle::TableCellAutoStyle,    "style:style", "style:table-cell-properties",   false  },
+    { KOdfGenericStyle::GraphicAutoStyle,      "style:style", "style:graphic-properties",      false  },
+    { KOdfGenericStyle::PresentationAutoStyle, "style:style", "style:graphic-properties",      false  },
+    { KOdfGenericStyle::DrawingPageAutoStyle,  "style:style", "style:drawing-page-properties", false  },
+    { KOdfGenericStyle::ChartAutoStyle,        "style:style", "style:chart-properties",        false  },
+    { KOdfGenericStyle::PageLayoutStyle, "style:page-layout", "style:page-layout-properties",  false  },
+    { KOdfGenericStyle::ListAutoStyle, "text:list-style", 0, false  },
+    { KOdfGenericStyle::NumericNumberStyle, "number:number-style", 0, false  },
+    { KOdfGenericStyle::NumericFractionStyle, "number:number-style", 0, false  },
+    { KOdfGenericStyle::NumericScientificStyle, "number:number-style", 0, false  },
+    { KOdfGenericStyle::NumericDateStyle, "number:date-style", 0, false  },
+    { KOdfGenericStyle::NumericTimeStyle, "number:time-style", 0, false  },
+    { KOdfGenericStyle::NumericPercentageStyle, "number:percentage-style", 0, false  },
+    { KOdfGenericStyle::NumericCurrencyStyle, "number:currency-style", 0, false  },
+    { KOdfGenericStyle::NumericBooleanStyle, "number:boolean-style", 0, false  },
+    { KOdfGenericStyle::NumericTextStyle, "number:text-style", 0, false  }
 };
 
 static const unsigned int numAutoStyleData = sizeof(autoStyleData) / sizeof(*autoStyleData);
@@ -118,7 +118,7 @@ public:
     {
     }
 
-    QList<KoGenStyles::NamedStyle> styles(const QSet<QString>& names, KoGenStyle::Type type) const;
+    QList<KoGenStyles::NamedStyle> styles(const QSet<QString>& names, KOdfGenericStyle::Type type) const;
     void saveOdfAutomaticStyles(KoXmlWriter* xmlWriter, const QSet<QString>& styleNames,
                                 const QByteArray& rawOdfAutomaticStyles) const;
     void saveOdfDocumentStyles(KoXmlWriter* xmlWriter) const;
@@ -145,12 +145,12 @@ public:
     QList<KoGenStyles::NamedStyle> styleList;
 
     /// map for saving default styles
-    QMap<int, KoGenStyle> defaultStyles;
+    QMap<int, KOdfGenericStyle> defaultStyles;
 
     /// font faces
     QMap<QString, KOdfFontData> fontFaces;
 
-    StyleMap::iterator insertStyle(const KoGenStyle &style, const QString &name, InsertionFlags flags);
+    StyleMap::iterator insertStyle(const KOdfGenericStyle &style, const QString &name, InsertionFlags flags);
 
     struct RelationTarget {
         QString target; // the style we point to
@@ -167,7 +167,7 @@ public:
     KoGenStyles *q;
 };
 
-QList<KoGenStyles::NamedStyle> KoGenStyles::Private::styles(const QSet<QString>& names, KoGenStyle::Type type) const
+QList<KoGenStyles::NamedStyle> KoGenStyles::Private::styles(const QSet<QString>& names, KOdfGenericStyle::Type type) const
 {
     QList<KoGenStyles::NamedStyle> lst;
     QList<KoGenStyles::NamedStyle>::const_iterator it = styleList.constBegin();
@@ -207,7 +207,7 @@ void KoGenStyles::Private::saveOdfDocumentStyles(KoXmlWriter* xmlWriter) const
     xmlWriter->startElement("office:styles");
 
     for (uint i = 0; i < numStyleData; ++i) {
-        const QMap<int, KoGenStyle>::const_iterator it(defaultStyles.constFind(styleData[i].m_type));
+        const QMap<int, KOdfGenericStyle>::const_iterator it(defaultStyles.constFind(styleData[i].m_type));
         if (it != defaultStyles.constEnd()) {
             it.value().writeStyle(xmlWriter, *q, "style:default-style", "",
                                   styleData[i].m_propertiesElementName, true, styleData[i].m_drawElement);
@@ -220,7 +220,7 @@ void KoGenStyles::Private::saveOdfDocumentStyles(KoXmlWriter* xmlWriter) const
         for (; it != stylesList.constEnd() ; ++it) {
             if (relations.contains(it->name)) {
                 KoGenStyles::Private::RelationTarget relation = relations.value(it->name);
-                KoGenStyle styleCopy = *(*it).style;
+                KOdfGenericStyle styleCopy = *(*it).style;
                 styleCopy.addAttribute(relation.attribute, relation.target);
                 styleCopy.writeStyle(xmlWriter, *q, styleData[i].m_elementName, (*it).name,
                                     styleData[i].m_propertiesElementName, true, styleData[i].m_drawElement);
@@ -242,7 +242,7 @@ void KoGenStyles::Private::saveOdfMasterStyles(KoXmlWriter* xmlWriter) const
 {
     xmlWriter->startElement("office:master-styles");
 
-    QList<KoGenStyles::NamedStyle> stylesList = q->styles(KoGenStyle::MasterPageStyle);
+    QList<KoGenStyles::NamedStyle> stylesList = q->styles(KOdfGenericStyle::MasterPageStyle);
     QList<KoGenStyles::NamedStyle>::const_iterator it = stylesList.constBegin();
     for (; it != stylesList.constEnd() ; ++it) {
         (*it).style->writeStyle(xmlWriter, *q, "style:master-page", (*it).name, 0);
@@ -302,25 +302,25 @@ KoGenStyles::~KoGenStyles()
     delete d;
 }
 
-QString KoGenStyles::insert(const KoGenStyle& style, const QString& baseName, InsertionFlags flags)
+QString KoGenStyles::insert(const KOdfGenericStyle& style, const QString& baseName, InsertionFlags flags)
 {
     // if it is a default style it has to be saved differently
     if (style.isDefaultStyle()) {
         // we can have only one default style per type
         Q_ASSERT(!d->defaultStyles.contains(style.type()));
         // default style is only possible for style:style in office:style types
-        Q_ASSERT(style.type() == KoGenStyle::TextStyle ||
-                 style.type() == KoGenStyle::ParagraphStyle ||
-                 style.type() == KoGenStyle::SectionStyle ||
-                 style.type() == KoGenStyle::RubyStyle ||
-                 style.type() == KoGenStyle::TableStyle ||
-                 style.type() == KoGenStyle::TableColumnStyle ||
-                 style.type() == KoGenStyle::TableRowStyle ||
-                 style.type() == KoGenStyle::TableCellStyle ||
-                 style.type() == KoGenStyle::GraphicStyle ||
-                 style.type() == KoGenStyle::PresentationStyle ||
-                 style.type() == KoGenStyle::DrawingPageStyle ||
-                 style.type() == KoGenStyle::ChartStyle);
+        Q_ASSERT(style.type() == KOdfGenericStyle::TextStyle ||
+                 style.type() == KOdfGenericStyle::ParagraphStyle ||
+                 style.type() == KOdfGenericStyle::SectionStyle ||
+                 style.type() == KOdfGenericStyle::RubyStyle ||
+                 style.type() == KOdfGenericStyle::TableStyle ||
+                 style.type() == KOdfGenericStyle::TableColumnStyle ||
+                 style.type() == KOdfGenericStyle::TableRowStyle ||
+                 style.type() == KOdfGenericStyle::TableCellStyle ||
+                 style.type() == KOdfGenericStyle::GraphicStyle ||
+                 style.type() == KOdfGenericStyle::PresentationStyle ||
+                 style.type() == KOdfGenericStyle::DrawingPageStyle ||
+                 style.type() == KOdfGenericStyle::ChartStyle);
 
         d->defaultStyles.insert(style.type(), style);
         // default styles don't have a name
@@ -337,8 +337,8 @@ QString KoGenStyles::insert(const KoGenStyle& style, const QString& baseName, In
         // Not found, try if this style is in fact equal to its parent (the find above
         // wouldn't have found it, due to m_parentName being set).
         if (!style.parentName().isEmpty()) {
-            KoGenStyle testStyle(style);
-            const KoGenStyle* parentStyle = this->style(style.parentName(), style.m_familyName);   // ## linear search
+            KOdfGenericStyle testStyle(style);
+            const KOdfGenericStyle* parentStyle = this->style(style.parentName(), style.m_familyName);   // ## linear search
             if (!parentStyle) {
                 kDebug(30003) << "baseName=" << baseName << "parent style" << style.parentName()
                               << "not found in collection";
@@ -365,15 +365,15 @@ QString KoGenStyles::insert(const KoGenStyle& style, const QString& baseName, In
     return it.value();
 }
 
-KoGenStyles::StyleMap::iterator KoGenStyles::Private::insertStyle(const KoGenStyle &style,
+KoGenStyles::StyleMap::iterator KoGenStyles::Private::insertStyle(const KOdfGenericStyle &style,
                                                                   const QString& baseName, InsertionFlags flags)
 {
     QString styleName(baseName);
     if (styleName.isEmpty()) {
         switch (style.type()) {
-        case KoGenStyle::ParagraphAutoStyle: styleName = 'P'; break;
-        case KoGenStyle::ListAutoStyle: styleName = 'L'; break;
-        case KoGenStyle::TextAutoStyle: styleName = 'T'; break;
+        case KOdfGenericStyle::ParagraphAutoStyle: styleName = 'P'; break;
+        case KOdfGenericStyle::ListAutoStyle: styleName = 'L'; break;
+        case KOdfGenericStyle::TextAutoStyle: styleName = 'T'; break;
         default:
             styleName = 'A'; // for "auto".
         }
@@ -397,17 +397,17 @@ KoGenStyles::StyleMap KoGenStyles::styles() const
     return d->styleMap;
 }
 
-QList<KoGenStyles::NamedStyle> KoGenStyles::styles(KoGenStyle::Type type) const
+QList<KoGenStyles::NamedStyle> KoGenStyles::styles(KOdfGenericStyle::Type type) const
 {
     return d->styles(d->styleNames, type);
 }
 
-QList<KoGenStyles::NamedStyle> KoGenStyles::stylesForStylesXml(KoGenStyle::Type type) const
+QList<KoGenStyles::NamedStyle> KoGenStyles::stylesForStylesXml(KOdfGenericStyle::Type type) const
 {
     return d->styles(d->autoStylesInStylesDotXml, type);
 }
 
-const KoGenStyle* KoGenStyles::style(const QString &name, const QByteArray &family) const
+const KOdfGenericStyle* KoGenStyles::style(const QString &name, const QByteArray &family) const
 {
     QList<KoGenStyles::NamedStyle>::const_iterator it = d->styleList.constBegin();
     const QList<KoGenStyles::NamedStyle>::const_iterator end = d->styleList.constEnd();
@@ -418,9 +418,9 @@ const KoGenStyle* KoGenStyles::style(const QString &name, const QByteArray &fami
     return 0;
 }
 
-KoGenStyle* KoGenStyles::styleForModification(const QString &name)
+KOdfGenericStyle* KoGenStyles::styleForModification(const QString &name)
 {
-    return const_cast<KoGenStyle *>(style(name, QByteArray()));
+    return const_cast<KOdfGenericStyle *>(style(name, QByteArray()));
 }
 
 void KoGenStyles::markStyleForStylesXml(const QString& name)
@@ -537,7 +537,7 @@ QDebug operator<<(QDebug dbg, const KoGenStyles& styles)
          it != styles.d->autoStylesInStylesDotXml.constEnd(); ++it)
     {
         dbg.space() << "auto style for style.xml:" << *it;
-        const KoGenStyle* s = styles.style(*it, QByteArray());
+        const KOdfGenericStyle* s = styles.style(*it, QByteArray());
         Q_ASSERT(s);
         Q_ASSERT(s->autoStyleInStylesDotXml());
     }

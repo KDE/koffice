@@ -49,7 +49,7 @@ public:
     // reimplemented from KoShapeBackground
     virtual void paint(QPainter &painter, const QPainterPath &fillPath) const;
     // reimplemented from KoShapeBackground
-    virtual void fillStyle(KoGenStyle &style, KoShapeSavingContext &context);
+    virtual void fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context);
     // reimplemented from KoShapeBackground
     virtual bool loadStyle(KoOdfLoadingContext & context, const QSizeF &shapeSize);
 

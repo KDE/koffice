@@ -122,10 +122,10 @@ public:
 
     // Write a <FORMAT> tag from the given CHP
     // Returns that element into pChildElement if set (in that case even an empty FORMAT can be appended)
-    //void writeFormattedText(KoGenStyle* textStyle, const wvWare::Word97::CHP* chp, const wvWare::Word97::CHP* refChp, QString text, bool writeText, QString styleName);
+    //void writeFormattedText(KOdfGenericStyle* textStyle, const wvWare::Word97::CHP* chp, const wvWare::Word97::CHP* refChp, QString text, bool writeText, QString styleName);
 
     // Write the _contents_ (children) of a <LAYOUT> or <STYLE> tag, from the given parag props
-    //void writeLayout(const wvWare::ParagraphProperties& paragraphProperties, KoGenStyle* paragraphStyle, const wvWare::Style* style, bool writeContentTags, QString namedStyle);
+    //void writeLayout(const wvWare::ParagraphProperties& paragraphProperties, KOdfGenericStyle* paragraphStyle, const wvWare::Style* style, bool writeContentTags, QString namedStyle);
 
     bool listIsOpen(); //tell us whether a list is open
     void closeList();
@@ -313,7 +313,7 @@ private:
     QString m_fldInst;   //stores field instructions
     QString m_fldResult; //stores the field result
 
-    //KoGenStyle name for the <text:span> element encapsulating the field
+    //KOdfGenericStyle name for the <text:span> element encapsulating the field
     //result (if applicable)
     QString m_fldStyleName;
 

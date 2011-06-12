@@ -38,7 +38,7 @@ class KoXmlElement;
 class KoListStyle;
 class QTextBlock;
 class KoStyleStack;
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoGenStyles;
 class KoShapeLoadingContext;
 
@@ -542,7 +542,7 @@ public:
      */
     void loadOdf(const KoXmlElement *element, KoShapeLoadingContext &context);
 
-    void saveOdf(KoGenStyle &style, KoGenStyles &mainStyles);
+    void saveOdf(KOdfGenericStyle &style, KoGenStyles &mainStyles);
 
     /**
      * Returns true if this paragraph style has the property set.

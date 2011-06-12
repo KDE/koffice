@@ -50,7 +50,7 @@ void DateTimeFormat::addDateStyle(KoGenStyles& styles, bool dayofweek, bool long
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter xmlWriter(&buffer);
 
-    KoGenStyle dt(KoGenStyle::NumericDateStyle);
+    KOdfGenericStyle dt(KOdfGenericStyle::NumericDateStyle);
     dt.setAutoStyleInStylesDotXml(true);
     if (dayofweek == true) {
         xmlWriter.startElement("number:day-of-week");
@@ -103,7 +103,7 @@ void DateTimeFormat::addTimeStyle(KoGenStyles& styles, bool hr12Format, bool sec
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter xmlWriter(&buffer);
 
-    KoGenStyle tm(KoGenStyle::NumericTimeStyle);
+    KOdfGenericStyle tm(KOdfGenericStyle::NumericTimeStyle);
     tm.setAutoStyleInStylesDotXml(true);
 
     xmlWriter.startElement("number:hours");

@@ -38,7 +38,7 @@
 #include <KoXmlWriter.h>
 #include <KoOdfWriteStore.h>
 #include <KoGenStyles.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoOdfNumberStyles.h>
 
 #include <Charting.h>
@@ -134,7 +134,7 @@ public:
     QList<QString> sheetStyles;
     QHash<FormatFont, QString> fontStyles;
     QString subScriptStyle, superScriptStyle;
-    QHash<QString, KoGenStyle> valueFormatCache;
+    QHash<QString, KOdfGenericStyle> valueFormatCache;
     QHash<CellFormatKey, QString> cellFormatCache;
     QList<ChartExport*> charts;
     QHash<Cell*, QByteArray> cellShapes;
@@ -170,13 +170,13 @@ public:
     void processCellForStyle(Cell* cell, KoXmlWriter* xmlWriter);
     QString processCellFormat(const Format* format, const QString& formula = QString());
     QString processRowFormat(Format* format, const QString& breakBefore = QString(), int rowRepeat = 1, double rowHeight = -1);
-    void processFormat(const Format* format, KoGenStyle& style);
+    void processFormat(const Format* format, KOdfGenericStyle& style);
     QString processValueFormat(const QString& valueFormat);
-    void processFontFormat(const FormatFont& font, KoGenStyle& style, bool allProps = false);
+    void processFontFormat(const FormatFont& font, KOdfGenericStyle& style, bool allProps = false);
     void processCharts(KoXmlWriter* manifestWriter);
 
     void createDefaultColumnStyle( Sheet* sheet );
-    void processSheetBackground(Sheet* sheet, KoGenStyle& style);
+    void processSheetBackground(Sheet* sheet, KOdfGenericStyle& style);
     void addManifestEntries(KoXmlWriter* ManifestWriter);
     void insertPictureManifest(PictureObject* picture);
 
@@ -642,7 +642,7 @@ void ExcelImport::Private::processWorkbookForStyle(Workbook* workbook, KoXmlWrit
     QString masterStyleName("Default");
     QString pageLayoutStyleName("Mpm");
 
-    KoGenStyle pageLayoutStyle(KoGenStyle::PageLayoutStyle);
+    KOdfGenericStyle pageLayoutStyle(KOdfGenericStyle::PageLayoutStyle);
     pageLayoutStyle.addProperty("style:writing-mode", "lr-tb");
 
     QBuffer buf;
@@ -671,7 +671,7 @@ void ExcelImport::Private::processWorkbookForStyle(Workbook* workbook, KoXmlWrit
     buf.close();
     buf.setData("", 0);
 
-    pageLayoutStyle.addProperty("1header-footer-style", pageLyt, KoGenStyle::StyleChildElement);
+    pageLayoutStyle.addProperty("1header-footer-style", pageLyt, KOdfGenericStyle::StyleChildElement);
     pageLayoutStyleName = mainStyles->insert(pageLayoutStyle, pageLayoutStyleName, KoGenStyles::DontAddNumberToName);
 
     for (unsigned i = 0; i < workbook->sheetCount(); i++) {
@@ -683,7 +683,7 @@ void ExcelImport::Private::processWorkbookForStyle(Workbook* workbook, KoXmlWrit
         contentElement = QString::fromUtf8(buf.buffer(), buf.buffer().size());
         buf.close();
         QString childElementName = QString::number(i).append("master-style");
-        KoGenStyle masterStyle(KoGenStyle::MasterPageStyle);
+        KOdfGenericStyle masterStyle(KOdfGenericStyle::MasterPageStyle);
         masterStyle.addChildElement(childElementName, contentElement);
         masterStyle.addAttribute("style:page-layout-name", pageLayoutStyleName);
 
@@ -770,7 +770,7 @@ void ExcelImport::Private::processSheetForStyle(Sheet* sheet, KoXmlWriter* xmlWr
     if (!sheet) return;
     if (!xmlWriter) return;
 
-    KoGenStyle style(KoGenStyle::TableAutoStyle, "table");
+    KOdfGenericStyle style(KOdfGenericStyle::TableAutoStyle, "table");
     style.addAttribute("style:master-page-name", "Default");
 
     style.addProperty("table:display", sheet->visible() ? "true" : "false");
@@ -995,7 +995,7 @@ void ExcelImport::Private::processColumnForStyle(Sheet* sheet, int columnIndex, 
     if (!xmlWriter) return;
     if (!column) return;
 
-    KoGenStyle style(KoGenStyle::TableColumnAutoStyle, "table-column");
+    KOdfGenericStyle style(KOdfGenericStyle::TableColumnAutoStyle, "table-column");
     style.addProperty("fo:break-before", "auto");
     style.addPropertyPt("style:column-width", column->width());
 
@@ -1176,10 +1176,10 @@ static bool currencyFormat(const QString& valueFormat, QString *currencyVal = 0,
 // Checks if the as argument passed formatstring defines a date-format or not.
 bool ExcelImport::Private::isDateFormat(const QString& valueFormat)
 {
-    KoGenStyle& style = valueFormatCache[valueFormat];
+    KOdfGenericStyle& style = valueFormatCache[valueFormat];
     if (style.isEmpty())
         style = NumberFormatParser::parse( valueFormat );
-    return style.type() == KoGenStyle::NumericDateStyle;
+    return style.type() == KOdfGenericStyle::NumericDateStyle;
 }
 
 static QByteArray convertCurrency(double currency, const QString& valueFormat)
@@ -1492,7 +1492,7 @@ void ExcelImport::Private::processCellForStyle(Cell* cell, KoXmlWriter* xmlWrite
         std::map<unsigned, FormatFont> formatRuns = cell->value().formatRuns();
         for (std::map<unsigned, FormatFont>::iterator it = formatRuns.begin(); it != formatRuns.end(); ++it) {
             if (fontStyles.contains(it->second)) continue;
-            KoGenStyle style(KoGenStyle::TextAutoStyle, "text");
+            KOdfGenericStyle style(KOdfGenericStyle::TextAutoStyle, "text");
             processFontFormat(it->second, style, true);
             QString styleName = styles->insert(style, "T");
             fontStyles[it->second] = styleName;
@@ -1500,13 +1500,13 @@ void ExcelImport::Private::processCellForStyle(Cell* cell, KoXmlWriter* xmlWrite
     }
 
     if (format->font().superscript() && superScriptStyle.isEmpty()) {
-        KoGenStyle style(KoGenStyle::TextAutoStyle, "text");
-        style.addProperty("style:text-position", "super", KoGenStyle::TextType);
+        KOdfGenericStyle style(KOdfGenericStyle::TextAutoStyle, "text");
+        style.addProperty("style:text-position", "super", KOdfGenericStyle::TextType);
         superScriptStyle = styles->insert(style, "T");
     }
     if (format->font().subscript() && subScriptStyle.isEmpty()) {
-        KoGenStyle style(KoGenStyle::TextAutoStyle, "text");
-        style.addProperty("style:text-position", "sub", KoGenStyle::TextType);
+        KOdfGenericStyle style(KOdfGenericStyle::TextAutoStyle, "text");
+        style.addProperty("style:text-position", "sub", KOdfGenericStyle::TextType);
         subScriptStyle = styles->insert(style, "T");
     }
 
@@ -1539,7 +1539,7 @@ QString ExcelImport::Private::processCellFormat(const Format* format, const QStr
             refName = processValueFormat(format->valueFormat());
         } else {
             if (key.decimalCount >= 0) {
-                KoGenStyle style(KoGenStyle::NumericNumberStyle);
+                KOdfGenericStyle style(KOdfGenericStyle::NumericNumberStyle);
                 QBuffer buffer;
                 buffer.open(QIODevice::WriteOnly);
                 KoXmlWriter xmlWriter(&buffer);    // TODO pass indentation level
@@ -1552,7 +1552,7 @@ QString ExcelImport::Private::processCellFormat(const Format* format, const QStr
             }
         }
 
-        KoGenStyle style(KoGenStyle::TableCellAutoStyle, "table-cell");
+        KOdfGenericStyle style(KOdfGenericStyle::TableCellAutoStyle, "table-cell");
         // now the real table-cell
         if (!refName.isEmpty())
             style.addAttribute("style:data-style-name", refName);
@@ -1571,7 +1571,7 @@ QString ExcelImport::Private::processRowFormat(Format* format, const QString& br
     if (valueFormat != QString("General"))
         refName = processValueFormat(valueFormat);
 
-    KoGenStyle style(KoGenStyle::TableRowAutoStyle, "table-row");
+    KOdfGenericStyle style(KOdfGenericStyle::TableRowAutoStyle, "table-row");
     // now the real table-cell
     if (!refName.isEmpty())
         style.addAttribute("style:data-style-name", refName);
@@ -1597,7 +1597,7 @@ QString convertColor(const QColor& color)
     return QString(buf);
 }
 
-void convertBorder(const QString& which, const QString& lineWidthProperty, const Pen& pen, KoGenStyle& style)
+void convertBorder(const QString& which, const QString& lineWidthProperty, const Pen& pen, KOdfGenericStyle& style)
 {
     if (pen.style == Pen::NoLine || pen.width == 0) {
         //style.addProperty(which, "none");
@@ -1630,50 +1630,50 @@ void convertBorder(const QString& which, const QString& lineWidthProperty, const
     }
 }
 
-void ExcelImport::Private::processFontFormat(const FormatFont& font, KoGenStyle& style, bool allProps)
+void ExcelImport::Private::processFontFormat(const FormatFont& font, KOdfGenericStyle& style, bool allProps)
 {
     if (font.isNull()) return;
 
     if (font.bold()) {
-        style.addProperty("fo:font-weight", "bold", KoGenStyle::TextType);
+        style.addProperty("fo:font-weight", "bold", KOdfGenericStyle::TextType);
     } else if (allProps) {
-        style.addProperty("fo:font-weight", "normal", KoGenStyle::TextType);
+        style.addProperty("fo:font-weight", "normal", KOdfGenericStyle::TextType);
     }
 
     if (font.italic()) {
-        style.addProperty("fo:font-style", "italic", KoGenStyle::TextType);
+        style.addProperty("fo:font-style", "italic", KOdfGenericStyle::TextType);
     } else if (allProps) {
-        style.addProperty("fo:font-style", "normal", KoGenStyle::TextType);
+        style.addProperty("fo:font-style", "normal", KOdfGenericStyle::TextType);
     }
 
     if (font.underline()) {
-        style.addProperty("style:text-underline-type", "single", KoGenStyle::TextType);
-        style.addProperty("style:text-underline-style", "solid", KoGenStyle::TextType);
-        style.addProperty("style:text-underline-width", "auto", KoGenStyle::TextType);
-        style.addProperty("style:text-underline-color", "font-color", KoGenStyle::TextType);
+        style.addProperty("style:text-underline-type", "single", KOdfGenericStyle::TextType);
+        style.addProperty("style:text-underline-style", "solid", KOdfGenericStyle::TextType);
+        style.addProperty("style:text-underline-width", "auto", KOdfGenericStyle::TextType);
+        style.addProperty("style:text-underline-color", "font-color", KOdfGenericStyle::TextType);
     } else if (allProps) {
-        style.addProperty("style:text-underline-type", "none", KoGenStyle::TextType);
-        style.addProperty("style:text-underline-style", "none", KoGenStyle::TextType);
+        style.addProperty("style:text-underline-type", "none", KOdfGenericStyle::TextType);
+        style.addProperty("style:text-underline-style", "none", KOdfGenericStyle::TextType);
     }
 
     if (font.strikeout()) {
-        style.addProperty("style:text-line-through-type", "single", KoGenStyle::TextType);
-        style.addProperty("style:text-line-through-style", "solid", KoGenStyle::TextType);
+        style.addProperty("style:text-line-through-type", "single", KOdfGenericStyle::TextType);
+        style.addProperty("style:text-line-through-style", "solid", KOdfGenericStyle::TextType);
     } else {
-        style.addProperty("style:text-line-through-type", "none", KoGenStyle::TextType);
-        style.addProperty("style:text-line-through-style", "none", KoGenStyle::TextType);
+        style.addProperty("style:text-line-through-type", "none", KOdfGenericStyle::TextType);
+        style.addProperty("style:text-line-through-style", "none", KOdfGenericStyle::TextType);
     }
 
     if (!font.fontFamily().isEmpty())
-        style.addProperty("fo:font-family", font.fontFamily(), KoGenStyle::TextType);
+        style.addProperty("fo:font-family", font.fontFamily(), KOdfGenericStyle::TextType);
 
-    style.addPropertyPt("fo:font-size", font.fontSize(), KoGenStyle::TextType);
+    style.addPropertyPt("fo:font-size", font.fontSize(), KOdfGenericStyle::TextType);
 
-    style.addProperty("fo:color", convertColor(font.color()), KoGenStyle::TextType);
+    style.addProperty("fo:color", convertColor(font.color()), KOdfGenericStyle::TextType);
 }
 
 // Processes a formatting.
-void ExcelImport::Private::processFormat(const Format* format, KoGenStyle& style)
+void ExcelImport::Private::processFormat(const Format* format, KOdfGenericStyle& style)
 {
     if (!format) return;
 
@@ -1730,7 +1730,7 @@ void ExcelImport::Private::processFormat(const Format* format, KoGenStyle& style
     }
 
     if (!back.isNull() && back.pattern() != FormatBackground::EmptyPattern) {
-        KoGenStyle fillStyle = KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic");
+        KOdfGenericStyle fillStyle = KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic");
 
         QColor backColor = back.backgroundColor();
         if (back.pattern() == FormatBackground::SolidPattern)
@@ -1777,7 +1777,7 @@ void ExcelImport::Private::processFormat(const Format* format, KoGenStyle& style
             case FormatBackground::CrossPattern: // Horizontal and Vertical lines
             case FormatBackground::DiagCrossPattern: { // Crossing diagonal lines
                 fillStyle.addProperty("draw:fill", "hatch");
-                KoGenStyle hatchStyle(KoGenStyle::HatchStyle);
+                KOdfGenericStyle hatchStyle(KOdfGenericStyle::HatchStyle);
                 hatchStyle.addAttribute("draw:color", "#000000");
                 switch (back.pattern()) {
                 case FormatBackground::Dense1Pattern:
@@ -1820,30 +1820,30 @@ void ExcelImport::Private::processFormat(const Format* format, KoGenStyle& style
     if (!align.isNull()) {
         switch (align.alignX()) {
         case Format::Left:
-            style.addProperty("fo:text-align", "start", KoGenStyle::ParagraphType); break;
+            style.addProperty("fo:text-align", "start", KOdfGenericStyle::ParagraphType); break;
         case Format::Center:
-            style.addProperty("fo:text-align", "center", KoGenStyle::ParagraphType); break;
+            style.addProperty("fo:text-align", "center", KOdfGenericStyle::ParagraphType); break;
         case Format::Right:
-            style.addProperty("fo:text-align", "end", KoGenStyle::ParagraphType); break;
+            style.addProperty("fo:text-align", "end", KOdfGenericStyle::ParagraphType); break;
         case Format::Justify:
         case Format::Distributed:
-            style.addProperty("fo:text-align", "justify", KoGenStyle::ParagraphType); break;
+            style.addProperty("fo:text-align", "justify", KOdfGenericStyle::ParagraphType); break;
         }
 
         if (align.indentLevel() != 0)
-            style.addProperty("fo:margin-left", QString::number(align.indentLevel()) + "0pt", KoGenStyle::ParagraphType);
+            style.addProperty("fo:margin-left", QString::number(align.indentLevel()) + "0pt", KOdfGenericStyle::ParagraphType);
     }
 }
 
 // 3.8.31 numFmts
 QString ExcelImport::Private::processValueFormat(const QString& valueFormat)
 {
-    KoGenStyle& style = valueFormatCache[valueFormat];
+    KOdfGenericStyle& style = valueFormatCache[valueFormat];
     if (style.isEmpty()) {
         NumberFormatParser::setStyles( styles );
         style = NumberFormatParser::parse( valueFormat );
     }
-    if( style.type() == KoGenStyle::ParagraphAutoStyle ) {
+    if( style.type() == KOdfGenericStyle::ParagraphAutoStyle ) {
         return QString();
     }
 
@@ -1851,7 +1851,7 @@ QString ExcelImport::Private::processValueFormat(const QString& valueFormat)
 }
 
 void ExcelImport::Private::createDefaultColumnStyle( Sheet* sheet ) {
-    KoGenStyle style(KoGenStyle::TableColumnAutoStyle, "table-column");
+    KOdfGenericStyle style(KOdfGenericStyle::TableColumnAutoStyle, "table-column");
 
     style.addProperty("fo:break-before", "auto");
     style.addPropertyPt("style:column-width", sheet->defaultColWidth() );
@@ -1860,7 +1860,7 @@ void ExcelImport::Private::createDefaultColumnStyle( Sheet* sheet ) {
     defaultColumnStyles.append( styleName );
 }
 
-void ExcelImport::Private::processSheetBackground(Sheet* sheet, KoGenStyle& style)
+void ExcelImport::Private::processSheetBackground(Sheet* sheet, KOdfGenericStyle& style)
 {
     if( sheet->backgroundImage().isEmpty() )
         return;

@@ -31,7 +31,7 @@ class QPen;
 class QString;
 class QSizeF;
 
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoGenStyles;
 class KoStyleStack;
 
@@ -40,9 +40,9 @@ class KoOdfLoadingContext;
 
 namespace KoOdfGraphicStyles
 {
-    KOODF_EXPORT void saveOdfFillStyle(KoGenStyle &styleFill, KoGenStyles& mainStyles, const QBrush &brush);
+    KOODF_EXPORT void saveOdfFillStyle(KOdfGenericStyle &styleFill, KoGenStyles& mainStyles, const QBrush &brush);
 
-    KOODF_EXPORT void saveOdfStrokeStyle(KoGenStyle &styleStroke, KoGenStyles &mainStyles, const QPen &pen);
+    KOODF_EXPORT void saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KoGenStyles &mainStyles, const QPen &pen);
 
     KOODF_EXPORT QString saveOdfHatchStyle(KoGenStyles &mainStyles, const QBrush &brush);
 

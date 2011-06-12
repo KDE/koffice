@@ -55,7 +55,7 @@ class QPoint;
 class KLocale;
 class KoXmlWriter;
 class KoGenStyles;
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoOdfLoadingContext;
 class KoShapeLoadingContext;
 
@@ -625,7 +625,7 @@ private:
      * \ingroup OpenDocument
      * @return the OASIS style's name
      */
-    QString saveOdfCellStyle(KoGenStyle &currentCellStyle, KoGenStyles &mainStyles);
+    QString saveOdfCellStyle(KOdfGenericStyle &currentCellStyle, KoGenStyles &mainStyles);
 };
 
 inline uint qHash(const KCCell& cell)

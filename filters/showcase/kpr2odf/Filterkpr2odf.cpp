@@ -42,7 +42,7 @@
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
 #include <KoOdf.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 
 #include "Filterkpr2odf.h"
 

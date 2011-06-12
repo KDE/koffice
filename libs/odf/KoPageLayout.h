@@ -94,7 +94,7 @@ struct KoPageLayout {
     /**
      * Save this page layout to ODF.
      */
-    KOODF_EXPORT KoGenStyle saveOdf() const;
+    KOODF_EXPORT KOdfGenericStyle saveOdf() const;
 
     /**
      * Load this page layout from ODF

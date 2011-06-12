@@ -25,7 +25,7 @@
 #include <QBuffer>
 
 #include <qlist.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoXmlWriter.h>
 
@@ -52,7 +52,7 @@ public:
 
     // Set the general named style that applies to this paragraph
     void setParagraphStyle(const wvWare::Style* paragraphStyle);
-    KoGenStyle* getOdfParagraphStyle();
+    KOdfGenericStyle* getOdfParagraphStyle();
     bool containsPageNumberField() const {
         return m_containsPageNumberField;
     }
@@ -72,12 +72,12 @@ public:
     void setCombinedCharacters(bool isCombined);
 
     // Static functions for parsing wvWare properties and applying
-    // them onto a KoGenStyle.
+    // them onto a KOdfGenericStyle.
     static void applyParagraphProperties(const wvWare::ParagraphProperties& properties,
-                                         KoGenStyle* style, const wvWare::Style* parentStyle,
+                                         KOdfGenericStyle* style, const wvWare::Style* parentStyle,
                                          bool setDefaultAlign, Paragraph *paragraph);
     static void applyCharacterProperties(const wvWare::Word97::CHP* chp,
-                                         KoGenStyle* style, const wvWare::Style* parentStyle,
+                                         KOdfGenericStyle* style, const wvWare::Style* parentStyle,
                                          QString bgColor,
                                          bool suppressFontSize=false, bool combineCharacters=false);
 
@@ -93,7 +93,7 @@ public:
     static QString contrastFontColor(QString name);
 
     /**
-     * A special purpose method, which creates a KoGenStyle for a <text:span>
+     * A special purpose method, which creates a KOdfGenericStyle for a <text:span>
      * element and inserts it into the styles collection.  Use this function if
      * you have to create XML snippets.  In any other case use addRunOfText.
      * @return the style name.
@@ -105,8 +105,8 @@ private:
     wvWare::SharedPtr<const wvWare::ParagraphProperties> m_paragraphProperties2;
 
     // ODF styles.  The MS equivalents are below.
-    KoGenStyle* m_odfParagraphStyle; //pointer to KOffice structure for paragraph formatting
-    KoGenStyle* m_odfParagraphStyle2; //place to store original style when we have an inner paragraph
+    KOdfGenericStyle* m_odfParagraphStyle; //pointer to KOffice structure for paragraph formatting
+    KOdfGenericStyle* m_odfParagraphStyle2; //place to store original style when we have an inner paragraph
     KoGenStyles* m_mainStyles; //pointer to style collection for this document
 
     // MS Styles
@@ -117,8 +117,8 @@ private:
     //std::vector<QString> m_textStrings2; // original list when in inner paragraph
     QList<QString> m_textStrings; // list of text strings within a paragraph
     QList<QString> m_textStrings2; // original list when in inner paragraph
-    std::vector<const KoGenStyle*> m_textStyles; // list of styles for text within a paragraph
-    std::vector<const KoGenStyle*> m_textStyles2; // original list when in inner paragraph
+    std::vector<const KOdfGenericStyle*> m_textStyles; // list of styles for text within a paragraph
+    std::vector<const KOdfGenericStyle*> m_textStyles2; // original list when in inner paragraph
     std::vector<bool> m_addCompleteElement;         // list of flags if we should output the complete parahraph instead of processing it
     std::vector<bool> m_addCompleteElement2;        // original list when in inner paragraph
 

@@ -22,7 +22,7 @@
 #define KOGENCHANGES_H
 
 #include "koodf_export.h"
-#include "KoGenStyle.h"
+#include "KOdfGenericStyle.h"
 
 #include <KOdfGenericChange.h>
 

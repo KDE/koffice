@@ -37,7 +37,7 @@ class KoXmlWriter;
  * Instances of KOdfGenericChange can either be held in the KOdfGenericChanges collection,
  * or created (e.g. on the stack) and given to KOdfGenericChanges::insert.
  *
- * Derived from code from KoGenStyle
+ * Derived from code from KOdfGenericStyle
  */
 class KOODF_EXPORT KOdfGenericChange
 {

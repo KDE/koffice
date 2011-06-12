@@ -64,7 +64,7 @@ public:
 protected:
     virtual bool loadOdfFrameElement(const KoXmlElement &element, KoShapeLoadingContext &context);
 
-    virtual QString saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const;
+    virtual QString saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
 
     virtual void loadStyle(const KoXmlElement& element, KoShapeLoadingContext& context);
 

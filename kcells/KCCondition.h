@@ -37,7 +37,7 @@ class QColor;
 class QDomDocument;
 class QFont;
 class QString;
-class KoGenStyle;
+class KOdfGenericStyle;
 
 class KCCell;
 class KCValueConverter;
@@ -160,7 +160,7 @@ public:
      * \ingroup OpenDocument
      * Saves the condtional formattings.
      */
-    void saveOdfConditions(KoGenStyle &currentCellStyle, KCValueConverter *converter) const;
+    void saveOdfConditions(KOdfGenericStyle &currentCellStyle, KCValueConverter *converter) const;
 
     /// \note implementation to make QMap happy (which is needed by KCRectStorage)
     bool operator<(const KCConditions& conditions) const {

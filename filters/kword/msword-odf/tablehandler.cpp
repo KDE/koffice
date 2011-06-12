@@ -30,7 +30,7 @@
 #include <kdebug.h>
 #include <QList>
 #include <QRectF>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 
 #include "document.h"
 #include "texthandler.h"
@@ -79,7 +79,7 @@ void KWordTableHandler::tableStart(KWord::Table* table)
     //check if the table is inside of an absolutely positioned frame
     if ( (tap->dxaAbs != 0 || tap->dyaAbs) )
     {
-        KoGenStyle userStyle(KoGenStyle::GraphicAutoStyle, "graphic");
+        KOdfGenericStyle userStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic");
         QString drawStyleName;
         int dxaAbs = 0;
 
@@ -197,7 +197,7 @@ void KWordTableHandler::tableStart(KWord::Table* table)
     }
 
     //table style
-    KoGenStyle tableStyle(KoGenStyle::TableAutoStyle, "table");
+    KOdfGenericStyle tableStyle(KOdfGenericStyle::TableAutoStyle, "table");
 
     //TODO: process the border color information <table:border-color>
 
@@ -253,7 +253,7 @@ void KWordTableHandler::tableStart(KWord::Table* table)
 
     // Write the table:table-column descriptions.
     for (int r = 0; r < table->m_cellEdges.size() - 1; r++) {
-        KoGenStyle tableColumnStyle(KoGenStyle::TableColumnAutoStyle, "table-column");
+        KOdfGenericStyle tableColumnStyle(KOdfGenericStyle::TableColumnAutoStyle, "table-column");
 
         //in case a header or footer is processed, save the style into styles.xml
         if (document()->writingHeader()) {
@@ -311,7 +311,7 @@ void KWordTableHandler::tableRowStart(wvWare::SharedPtr<const wvWare::Word97::TA
     //kDebug(30513) << "tableRowStart row=" << m_row
     //            << ", number of cells: " << tap->itcMac;
 
-    KoGenStyle rowStyle(KoGenStyle::TableRowAutoStyle, "table-row");
+    KOdfGenericStyle rowStyle(KOdfGenericStyle::TableRowAutoStyle, "table-row");
 
     //in case a header or footer is processed, save the style into styles.xml
     if (document()->writingHeader()) {
@@ -530,7 +530,7 @@ void KWordTableHandler::tableCellStart()
     const wvWare::Word97::BRC& brcTL2BR = tc.brcTL2BR;
     const wvWare::Word97::BRC& brcTR2BL = tc.brcTR2BL;
 
-    KoGenStyle cellStyle(KoGenStyle::TableCellAutoStyle, "table-cell");
+    KOdfGenericStyle cellStyle(KOdfGenericStyle::TableCellAutoStyle, "table-cell");
 
     //in case a header or footer is processed, save the style into styles.xml
     if (document()->writingHeader()) {

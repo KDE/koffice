@@ -24,7 +24,7 @@
 #include <QPainter>
 
 #include <KoXmlWriter.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include "SCPageEffectStrategy.h"
 
 SCPageEffect::SCPageEffect(int duration, const QString &id, SCPageEffectStrategy * strategy)
@@ -103,7 +103,7 @@ void SCPageEffect::saveOdfSmilAttributes(KoXmlWriter &xmlWriter) const
     return m_strategy->saveOdfSmilAttributes(xmlWriter);
 }
 
-void SCPageEffect::saveOdfSmilAttributes(KoGenStyle &style) const
+void SCPageEffect::saveOdfSmilAttributes(KOdfGenericStyle &style) const
 {
     QString speed("slow");
     if (m_duration < 2500) {

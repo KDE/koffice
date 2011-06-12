@@ -28,7 +28,7 @@
 
 class KoGenStyles;
 class KoXmlWriter;
-class KoGenStyle;
+class KOdfGenericStyle;
 
 /**
  * Loading and saving of number styles

@@ -2532,9 +2532,9 @@ bool KCSheet::saveOdf(KCOdfSavingContext& tableContext)
 
 QString KCSheet::saveOdfSheetStyleName(KoGenStyles &mainStyles)
 {
-    KoGenStyle pageStyle(KoGenStyle::TableAutoStyle, "table"/*FIXME I don't know if name is sheet*/);
+    KOdfGenericStyle pageStyle(KOdfGenericStyle::TableAutoStyle, "table"/*FIXME I don't know if name is sheet*/);
 
-    KoGenStyle pageMaster(KoGenStyle::MasterPageStyle);
+    KOdfGenericStyle pageMaster(KOdfGenericStyle::MasterPageStyle);
     const QString pageLayoutName = printSettings()->saveOdfPageLayout(mainStyles,
                                    getShowFormula(),
                                    !getHideZero());
@@ -2640,7 +2640,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
 
         xmlWriter.startElement("table:table-column");
         if (!column->isDefault()) {
-            KoGenStyle currentColumnStyle(KoGenStyle::TableColumnAutoStyle, "table-column");
+            KOdfGenericStyle currentColumnStyle(KOdfGenericStyle::TableColumnAutoStyle, "table-column");
             currentColumnStyle.addPropertyPt("style:column-width", column->width());
             if (column->hasPageBreak()) {
                 currentColumnStyle.addProperty("fo:break-before", "page");
@@ -2649,7 +2649,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
         }
         if (!column->isDefault() || !style.isDefault()) {
             if (!style.isDefault()) {
-                KoGenStyle currentDefaultCellStyle; // the type is determined in saveOdfStyle
+                KOdfGenericStyle currentDefaultCellStyle; // the type is determined in saveOdfStyle
                 const QString name = style.saveOdf(currentDefaultCellStyle, mainStyles,
                                                    map()->styleManager());
                 xmlWriter.addAttribute("table:default-cell-style-name", name);
@@ -2681,7 +2681,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
         xmlWriter.startElement("table:table-row");
 
         if (!row->isDefault()) {
-            KoGenStyle currentRowStyle(KoGenStyle::TableRowAutoStyle, "table-row");
+            KOdfGenericStyle currentRowStyle(KOdfGenericStyle::TableRowAutoStyle, "table-row");
             currentRowStyle.addPropertyPt("style:row-height", row->height());
             if (row->hasPageBreak()) {
                 currentRowStyle.addProperty("fo:break-before", "page");
@@ -2730,7 +2730,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
             if (repeated > 1)
                 xmlWriter.addAttribute("table:number-rows-repeated", repeated);
             if (!style.isDefault()) {
-                KoGenStyle currentDefaultCellStyle; // the type is determined in saveOdfCellStyle
+                KOdfGenericStyle currentDefaultCellStyle; // the type is determined in saveOdfCellStyle
                 const QString name = style.saveOdf(currentDefaultCellStyle, mainStyles,
                                                    map()->styleManager());
                 xmlWriter.addAttribute("table:default-cell-style-name", name);
@@ -2760,7 +2760,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
             i = j - 1; /*it's already incremented in the for loop*/
         } else { // row is not empty
             if (!style.isDefault()) {
-                KoGenStyle currentDefaultCellStyle; // the type is determined in saveOdfCellStyle
+                KOdfGenericStyle currentDefaultCellStyle; // the type is determined in saveOdfCellStyle
                 const QString name = style.saveOdf(currentDefaultCellStyle, mainStyles,
                                                    map()->styleManager());
                 xmlWriter.addAttribute("table:default-cell-style-name", name);

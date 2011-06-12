@@ -32,7 +32,7 @@ class FolderBorder : public KoShapeBorderBase
 public:
     FolderBorder();
     /// reimplemented from KoShapeBorderModel
-    virtual void saveOdf(KoGenStyle &, KoShapeSavingContext &) const {}
+    virtual void saveOdf(KOdfGenericStyle &, KoShapeSavingContext &) const {}
     /// reimplemented from KoShapeBorderModel
     virtual void borderInsets(KoInsets &insets) const;
     /// reimplemented from KoShapeBorderModel

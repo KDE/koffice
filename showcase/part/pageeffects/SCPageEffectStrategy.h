@@ -89,7 +89,7 @@ public:
     /**
      * Save transition as part of the style
      */
-    virtual void saveOdfSmilAttributes(KoGenStyle &style) const;
+    virtual void saveOdfSmilAttributes(KOdfGenericStyle &style) const;
 
     /**
      * Load additional attributes needed by the strategy.

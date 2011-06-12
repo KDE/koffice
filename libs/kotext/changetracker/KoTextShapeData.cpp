@@ -35,7 +35,7 @@
 #include <QMetaObject>
 #include <QTextCursor>
 
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>

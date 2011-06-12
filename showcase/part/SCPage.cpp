@@ -42,7 +42,7 @@
 #include <KoOdfLoadingContext.h>
 #include <KoOdfStylesReader.h>
 #include <KoStyleStack.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoShapeLayer.h>
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
@@ -209,7 +209,7 @@ void SCPage::saveOdfPageContent(KoPASavingContext &paContext) const
     KoPAPageBase::saveOdfPageContent(paContext);
 }
 
-void SCPage::saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const
+void SCPage::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const
 {
     KoPAPage::saveOdfPageStyleData(style, paContext);
     style.addProperty("presentation:background-visible", (m_pageProperties & DisplayMasterBackground) == DisplayMasterBackground);

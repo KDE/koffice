@@ -283,7 +283,7 @@ void KCConditions::setDefaultStyle(const KCStyle &style)
     d->defaultStyle = style;
 }
 
-void KCConditions::saveOdfConditions(KoGenStyle &currentCellStyle, KCValueConverter *converter) const
+void KCConditions::saveOdfConditions(KOdfGenericStyle &currentCellStyle, KCValueConverter *converter) const
 {
     //todo fix me with kcells old format!!!
     if (d->conditionList.isEmpty())

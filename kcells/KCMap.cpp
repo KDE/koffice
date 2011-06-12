@@ -404,13 +404,13 @@ bool KCMap::saveOdf(KoXmlWriter & xmlWriter, KoShapeSavingContext & savingContex
     d->styleManager->saveOdf(savingContext.mainStyles());
 
     // Saving the default column style
-    KoGenStyle defaultColumnStyle(KoGenStyle::TableColumnStyle, "table-column");
+    KOdfGenericStyle defaultColumnStyle(KOdfGenericStyle::TableColumnStyle, "table-column");
     defaultColumnStyle.addPropertyPt("style:column-width", d->defaultColumnFormat->width());
     defaultColumnStyle.setDefaultStyle(true);
     savingContext.mainStyles().insert(defaultColumnStyle, "Default", KoGenStyles::DontAddNumberToName);
 
     // Saving the default row style
-    KoGenStyle defaultRowStyle(KoGenStyle::TableRowStyle, "table-row");
+    KOdfGenericStyle defaultRowStyle(KOdfGenericStyle::TableRowStyle, "table-row");
     defaultRowStyle.addPropertyPt("style:row-height", d->defaultRowFormat->height());
     defaultRowStyle.setDefaultStyle(true);
     savingContext.mainStyles().insert(defaultRowStyle, "Default", KoGenStyles::DontAddNumberToName);

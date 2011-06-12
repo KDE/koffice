@@ -287,7 +287,7 @@ XlsxBorderStyles::XlsxBorderStyles()
 {
 }
 
-void XlsxBorderStyles::setupCellStyle(KoGenStyle* cellStyle, const /*QMap<QString,*/ MSOOXML::DrawingMLTheme/**>*/ *themes) const
+void XlsxBorderStyles::setupCellStyle(KOdfGenericStyle* cellStyle, const /*QMap<QString,*/ MSOOXML::DrawingMLTheme/**>*/ *themes) const
 {
 //! @todo simplify if 2 or 4 sides are the same
     QString s;
@@ -395,7 +395,7 @@ kDebug() << "patternType:" << patternType;
     return &bgColor;
 }
 
-void XlsxFillStyle::setupCellStyle(KoGenStyle* cellStyle, const /*QMap<QString, */MSOOXML::DrawingMLTheme/**>*/ *themes) const
+void XlsxFillStyle::setupCellStyle(KOdfGenericStyle* cellStyle, const /*QMap<QString, */MSOOXML::DrawingMLTheme/**>*/ *themes) const
 {
 //! @todo implement more styling;
 //!       use XlsxColorStyle::automatic, XlsxColorStyle::indexed, XlsxColorStyle::theme...
@@ -545,14 +545,14 @@ void XlsxFontStyle::setupCharacterStyle(KoCharacterStyle* characterStyle) const
 
 void XlsxFontStyle::setupCellTextStyle(
     const /*QMap<QString,*/ MSOOXML::DrawingMLTheme/**>*/ *themes,
-    KoGenStyle* cellStyle) const
+    KOdfGenericStyle* cellStyle) const
 {
     if (!name.isEmpty()) {
 #ifdef __GNUC__
 #warning TODO: we are saving with fo:font-family now because style:font-name is not properly supported by kotext; fix void KoCharacterStyle::loadOdf(KoOdfLoadingContext &context)...
 #endif
-//!@ todo reenable this        cellStyle->addProperty("style:font-name", name, KoGenStyle::TextType);
-        cellStyle->addProperty("fo:font-family", name, KoGenStyle::TextType);
+//!@ todo reenable this        cellStyle->addProperty("style:font-name", name, KOdfGenericStyle::TextType);
+        cellStyle->addProperty("fo:font-family", name, KOdfGenericStyle::TextType);
     }
     // This is necessary because excel switches the indexes of 0 - 1 and 2 - 3 for theme colorindexes
     // looks like it has a different internal indexing table
@@ -569,7 +569,7 @@ void XlsxFontStyle::setupCellTextStyle(
         changedColor.theme = 2;
     else if (changedColor.isValid(themes)) {
         const QColor c(changedColor.value(themes));
-        cellStyle->addProperty("fo:color", c.name(), KoGenStyle::TextType);
+        cellStyle->addProperty("fo:color", c.name(), KOdfGenericStyle::TextType);
     }
     //! @todo implement more styling
 }
@@ -696,7 +696,7 @@ void XlsxCellFormat::setVerticalAlignment(const QString& alignment)
 }
 
 //! CASE #S1600
-void XlsxCellFormat::setupCellStyleAlignment(KoGenStyle* cellStyle) const
+void XlsxCellFormat::setupCellStyleAlignment(KOdfGenericStyle* cellStyle) const
 {
 //! @todo FillHorizontalAlignment, JustifyHorizontalAlignment
     int wrapOption = -1; // "don't know"
@@ -719,24 +719,24 @@ void XlsxCellFormat::setupCellStyleAlignment(KoGenStyle* cellStyle) const
     case CenterHorizontalAlignment:
     case CenterContinuousHorizontalAlignment:
     case DistributedHorizontalAlignment:
-        cellStyle->addProperty("fo:text-align", "center", KoGenStyle::ParagraphType);
+        cellStyle->addProperty("fo:text-align", "center", KOdfGenericStyle::ParagraphType);
         if (horizontalAlignment == DistributedHorizontalAlignment)
             wrapOption = 1;
         break;
     case GeneralHorizontalAlignment: // ok?
         if (verticalTtb) // Excel centers vertical text by default, so mimic that
-            cellStyle->addProperty("fo:text-align", "center", KoGenStyle::ParagraphType);
+            cellStyle->addProperty("fo:text-align", "center", KOdfGenericStyle::ParagraphType);
         if (textRotation > 90 && textRotation < 180) // Excel right aligns rotated text for some angles
-            cellStyle->addProperty("fo:text-align", "end", KoGenStyle::ParagraphType);
+            cellStyle->addProperty("fo:text-align", "end", KOdfGenericStyle::ParagraphType);
         break;
     case LeftHorizontalAlignment:
-        cellStyle->addProperty("fo:text-align", "start", KoGenStyle::ParagraphType);
+        cellStyle->addProperty("fo:text-align", "start", KOdfGenericStyle::ParagraphType);
         break;
     case RightHorizontalAlignment:
-        cellStyle->addProperty("fo:text-align", "end", KoGenStyle::ParagraphType);
+        cellStyle->addProperty("fo:text-align", "end", KOdfGenericStyle::ParagraphType);
         break;
     case JustifyHorizontalAlignment:
-        cellStyle->addProperty("fo:text-align", "justify", KoGenStyle::ParagraphType);
+        cellStyle->addProperty("fo:text-align", "justify", KOdfGenericStyle::ParagraphType);
         wrapOption = 1;
         break;
     case FillHorizontalAlignment:
@@ -771,7 +771,7 @@ void XlsxCellFormat::setupCellStyleAlignment(KoGenStyle* cellStyle) const
 bool XlsxCellFormat::setupCellStyle(
     const XlsxStyles *styles,
     const /*QMap<QString, */MSOOXML::DrawingMLTheme/**>*/ *themes,
-    KoGenStyle* cellStyle) const
+    KOdfGenericStyle* cellStyle) const
 {
     kDebug() << "fontId:" << fontId << "fillId:" << fillId << "borderId:" << borderId;
     if (applyAlignment) {

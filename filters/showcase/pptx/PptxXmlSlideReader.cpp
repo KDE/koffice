@@ -112,7 +112,7 @@ PptxPlaceholder::~PptxPlaceholder()
 
 PptxSlideLayoutProperties::PptxSlideLayoutProperties()
 {
-    m_drawingPageProperties = KoGenStyle(KoGenStyle::DrawingPageAutoStyle, "drawing-page");
+    m_drawingPageProperties = KOdfGenericStyle(KOdfGenericStyle::DrawingPageAutoStyle, "drawing-page");
 }
 
 PptxSlideLayoutProperties::~PptxSlideLayoutProperties()
@@ -123,7 +123,7 @@ PptxSlideLayoutProperties::~PptxSlideLayoutProperties()
 
 PptxSlideMasterPageProperties::PptxSlideMasterPageProperties()
 {
-    m_drawingPageProperties = KoGenStyle(KoGenStyle::DrawingPageAutoStyle, "drawing-page");
+    m_drawingPageProperties = KOdfGenericStyle(KOdfGenericStyle::DrawingPageAutoStyle, "drawing-page");
 }
 
 void PptxSlideMasterPageProperties::clear()
@@ -368,7 +368,7 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_sldInternal()
     }
 
     // m_currentDrawStyle defined in "MsooXmlCommonReaderDrawingMLMethods.h"
-    m_currentDrawStyle = new KoGenStyle(KoGenStyle::DrawingPageAutoStyle, "drawing-page"); // CASE #P109
+    m_currentDrawStyle = new KOdfGenericStyle(KOdfGenericStyle::DrawingPageAutoStyle, "drawing-page"); // CASE #P109
 
     MSOOXML::Utils::XmlWriteBuffer drawPageBuf; // buffer this draw:page, because we have to compute
 
@@ -380,7 +380,7 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_sldInternal()
             m_currentDrawStyle->addProperty("presentation:background-objects-visible", true);
         }
         else if (m_context->type == SlideLayout) {
-            m_currentPresentationPageLayoutStyle = KoGenStyle(KoGenStyle::PresentationPageLayoutStyle);
+            m_currentPresentationPageLayoutStyle = KOdfGenericStyle(KOdfGenericStyle::PresentationPageLayoutStyle);
         }
 
         // style before style name is known
@@ -458,11 +458,11 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_sldInternal()
         // First check if we have properties from the slide, then from layout, then from master
         if (m_currentDrawStyle->isEmpty()) {
             MSOOXML::Utils::copyPropertiesFromStyle(m_context->slideLayoutProperties->m_drawingPageProperties,
-                                                    *m_currentDrawStyle, KoGenStyle::DrawingPageType);
+                                                    *m_currentDrawStyle, KOdfGenericStyle::DrawingPageType);
             // Only get properties from master page if they were not defined in the layout
             if (m_currentDrawStyle->isEmpty()) {
                 MSOOXML::Utils::copyPropertiesFromStyle(m_context->slideMasterPageProperties->m_drawingPageProperties,
-                                                        *m_currentDrawStyle, KoGenStyle::DrawingPageType);
+                                                        *m_currentDrawStyle, KOdfGenericStyle::DrawingPageType);
             }
         } else {
             m_currentDrawStyle->addProperty("presentation:visibility", "visible");
@@ -922,11 +922,11 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_bg()
         if (m_context->type == SlideMaster) {
             MSOOXML::Utils::copyPropertiesFromStyle(*m_currentDrawStyle,
                                                 m_context->slideMasterPageProperties->m_drawingPageProperties,
-                                                KoGenStyle::DrawingPageType);
+                                                KOdfGenericStyle::DrawingPageType);
         } else if (m_context->type == SlideLayout) {
             MSOOXML::Utils::copyPropertiesFromStyle(*m_currentDrawStyle,
                                                 m_context->slideLayoutProperties->m_drawingPageProperties,
-                                                KoGenStyle::DrawingPageType);
+                                                KOdfGenericStyle::DrawingPageType);
         }
     }
 
@@ -1025,7 +1025,7 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_bgPr()
             }
             else if (qualifiedName() == QLatin1String("a:blipFill")) {
                 TRY_READ_IF_NS_IN_CONTEXT(a, blipFill)
-                KoGenStyle fillImageStyle(KoGenStyle::FillImageStyle);
+                KOdfGenericStyle fillImageStyle(KOdfGenericStyle::FillImageStyle);
                 fillImageStyle.addAttribute("xlink:href", m_xlinkHref);
                 //! @todo draw:name="???"
                 fillImageStyle.addAttribute("xlink:type", "simple");
@@ -1035,7 +1035,7 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_bgPr()
                 kDebug() << fillImageName;
             }
             else if (qualifiedName() == QLatin1String("a:gradFill")) {
-                m_currentGradientStyle = KoGenStyle(KoGenStyle::GradientStyle);
+                m_currentGradientStyle = KOdfGenericStyle(KOdfGenericStyle::GradientStyle);
                 TRY_READ_IF_NS(a, gradFill)
                 m_currentDrawStyle->addProperty("draw:fill", "gradient");
                 const QString gradName = mainStyles->insert(m_currentGradientStyle);
@@ -1052,8 +1052,8 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_bgPr()
 
     if (!fillImageName.isEmpty()) {
         //! Setup slide's bitmap fill
-        m_currentDrawStyle->addProperty("draw:fill", "bitmap", KoGenStyle::DrawingPageType);
-        m_currentDrawStyle->addProperty("draw:fill-image-name", fillImageName, KoGenStyle::DrawingPageType);
+        m_currentDrawStyle->addProperty("draw:fill", "bitmap", KOdfGenericStyle::DrawingPageType);
+        m_currentDrawStyle->addProperty("draw:fill-image-name", fillImageName, KOdfGenericStyle::DrawingPageType);
         if (m_context->type != SlideMaster) {
             if (!m_recentSourceName.isEmpty()) {
                 QSize size;
@@ -1061,9 +1061,9 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_bgPr()
                 kDebug() << "SIZE:" << size;
                 if (size.isValid()) {
                     m_currentDrawStyle->addProperty("draw:fill-image-width",
-                        MSOOXML::Utils::cmString(POINT_TO_CM(size.width())), KoGenStyle::DrawingPageType);
+                        MSOOXML::Utils::cmString(POINT_TO_CM(size.width())), KOdfGenericStyle::DrawingPageType);
                     m_currentDrawStyle->addProperty("draw:fill-image-height",
-                        MSOOXML::Utils::cmString(POINT_TO_CM(size.height())), KoGenStyle::DrawingPageType);
+                        MSOOXML::Utils::cmString(POINT_TO_CM(size.height())), KOdfGenericStyle::DrawingPageType);
                 }
             }
         }
@@ -1175,7 +1175,7 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_spTree()
 
     placeholderElBuffer.close();
     m_currentPresentationPageLayoutStyle.addProperty(
-        QString(), QString::fromUtf8(placeholderEl), KoGenStyle::StyleChildElement);
+        QString(), QString::fromUtf8(placeholderEl), KOdfGenericStyle::StyleChildElement);
     placeholderElWriterSetter.release();
     delete m_placeholderElWriter;
     m_placeholderElWriter = 0;
@@ -1324,7 +1324,7 @@ KoFilter::ConversionStatus PptxXmlSlideReader::read_graphicFrame()
     body = buffer.setWriter(body);
 
     // Create a new drawing style for this element
-    pushCurrentDrawStyle(new KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic"));
+    pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
 
     while (!atEnd()) {
         readNext();
@@ -1755,36 +1755,36 @@ void PptxXmlSlideReader::inheritDefaultListStyles()
     }
 }
 
-void PptxXmlSlideReader::inheritDefaultParagraphStyle(KoGenStyle& targetStyle)
+void PptxXmlSlideReader::inheritDefaultParagraphStyle(KOdfGenericStyle& targetStyle)
 {
     const int copyLevel = qMax(1, m_currentListLevel); // if m_currentListLevel==0 then use level1
 
     if (m_context->defaultParagraphStyles.size() >= copyLevel) {
         MSOOXML::Utils::copyPropertiesFromStyle(m_context->defaultParagraphStyles[copyLevel-1],
-                                                targetStyle, KoGenStyle::ParagraphType);
+                                                targetStyle, KOdfGenericStyle::ParagraphType);
     }
 }
 
-void PptxXmlSlideReader::inheritParagraphStyle(KoGenStyle& targetStyle)
+void PptxXmlSlideReader::inheritParagraphStyle(KOdfGenericStyle& targetStyle)
 {
     const int copyLevel = qMax(1, m_currentListLevel); // if m_currentListLevel==0 then use level1
 
     if (!d->phIdx.isEmpty()) {
         // In all cases, we take them first from masterslide
         MSOOXML::Utils::copyPropertiesFromStyle(m_context->slideMasterPageProperties->styles[d->phIdx][copyLevel],
-                                                targetStyle, KoGenStyle::ParagraphType);
+                                                targetStyle, KOdfGenericStyle::ParagraphType);
     }
     if (!d->phType.isEmpty()) {
         // In all cases, we take them first from masterslide
         MSOOXML::Utils::copyPropertiesFromStyle(m_context->slideMasterPageProperties->styles[d->phType][copyLevel],
-                                                targetStyle, KoGenStyle::ParagraphType);
+                                                targetStyle, KOdfGenericStyle::ParagraphType);
     }
     if (!d->phType.isEmpty()) {
         // Perhaps we need to get the properties from layout
         // Slidelayout needs to be here in case there was also lvl1ppr defined
         if (m_context->type == Slide || m_context->type == SlideLayout) {
             MSOOXML::Utils::copyPropertiesFromStyle(m_context->slideLayoutProperties->styles[d->phType][copyLevel],
-                                                    targetStyle, KoGenStyle::ParagraphType);
+                                                    targetStyle, KOdfGenericStyle::ParagraphType);
         }
     }
     if (!d->phIdx.isEmpty()) {
@@ -1792,7 +1792,7 @@ void PptxXmlSlideReader::inheritParagraphStyle(KoGenStyle& targetStyle)
         // Slidelayout needs to be here in case there was also lvl1ppr defined
         if (m_context->type == Slide || m_context->type == SlideLayout) {
             MSOOXML::Utils::copyPropertiesFromStyle(m_context->slideLayoutProperties->styles[d->phIdx][copyLevel],
-                                                    targetStyle, KoGenStyle::ParagraphType);
+                                                    targetStyle, KOdfGenericStyle::ParagraphType);
         }
     }
     // This line is needed in case slide defined it's own lvl1ppr
@@ -1801,7 +1801,7 @@ void PptxXmlSlideReader::inheritParagraphStyle(KoGenStyle& targetStyle)
 
         if (!slideIdentifier.isEmpty()) {
             MSOOXML::Utils::copyPropertiesFromStyle(m_context->currentSlideStyles.styles[slideIdentifier][copyLevel],
-                                                    targetStyle, KoGenStyle::ParagraphType);
+                                                    targetStyle, KOdfGenericStyle::ParagraphType);
         }
     }
 }
@@ -1810,11 +1810,11 @@ void PptxXmlSlideReader::inheritAllTextAndParagraphStyles()
 {
     int temp = m_currentListLevel;
     m_currentListLevel = 1;
-    KoGenStyle currentTextStyle;
-    KoGenStyle currentParagraphStyle;
+    KOdfGenericStyle currentTextStyle;
+    KOdfGenericStyle currentParagraphStyle;
     while (m_currentListLevel < 10) {
-        currentTextStyle = KoGenStyle(KoGenStyle::TextAutoStyle);
-        currentParagraphStyle = KoGenStyle(KoGenStyle::ParagraphAutoStyle);
+        currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle);
+        currentParagraphStyle = KOdfGenericStyle(KOdfGenericStyle::ParagraphAutoStyle);
         inheritParagraphStyle(currentParagraphStyle);
         inheritTextStyle(currentTextStyle);
         m_currentCombinedTextStyles[m_currentListLevel] = currentTextStyle;
@@ -1902,12 +1902,12 @@ void PptxXmlSlideReader::inheritListStyles()
     }
 }
 
-void PptxXmlSlideReader::inheritDefaultTextStyle(KoGenStyle& targetStyle)
+void PptxXmlSlideReader::inheritDefaultTextStyle(KOdfGenericStyle& targetStyle)
 {
     const int listLevel = qMax(1, m_currentListLevel);
     if (m_context->defaultTextStyles.size() >= listLevel) {
         MSOOXML::Utils::copyPropertiesFromStyle(m_context->defaultTextStyles[listLevel-1],
-                                                targetStyle, KoGenStyle::TextType);
+                                                targetStyle, KOdfGenericStyle::TextType);
     }
 }
 
@@ -1950,7 +1950,7 @@ void PptxXmlSlideReader::inheritShapePosition()
     }
 }
 
-void PptxXmlSlideReader::inheritTextStyle(KoGenStyle& targetStyle)
+void PptxXmlSlideReader::inheritTextStyle(KOdfGenericStyle& targetStyle)
 {
     const int listLevel = qMax(1, m_currentListLevel); // if m_currentListLevel==0 then use level1
 
@@ -1960,24 +1960,24 @@ void PptxXmlSlideReader::inheritTextStyle(KoGenStyle& targetStyle)
     // to empty
     if (!d->phIdx.isEmpty()) {
         MSOOXML::Utils::copyPropertiesFromStyle(m_context->slideMasterPageProperties->textStyles[d->phIdx][listLevel],
-                                                targetStyle, KoGenStyle::TextType);
+                                                targetStyle, KOdfGenericStyle::TextType);
     }
     if (!d->phType.isEmpty()) {
         // We must apply properties outside rpr, since it is possible that we do not enter rpr at all
         MSOOXML::Utils::copyPropertiesFromStyle(m_context->slideMasterPageProperties->textStyles[d->phType][listLevel],
-                                                targetStyle, KoGenStyle::TextType);
+                                                targetStyle, KOdfGenericStyle::TextType);
     }
     if (!d->phType.isEmpty()) {
         if (m_context->type == Slide || m_context->type == SlideLayout) {
             // pass properties from master to slide
             MSOOXML::Utils::copyPropertiesFromStyle(m_context->slideLayoutProperties->textStyles[d->phType][listLevel],
-                                                targetStyle, KoGenStyle::TextType);
+                                                targetStyle, KOdfGenericStyle::TextType);
         }
     }
     if (!d->phIdx.isEmpty()) {
         if (m_context->type == Slide || m_context->type == SlideLayout) {
             MSOOXML::Utils::copyPropertiesFromStyle(m_context->slideLayoutProperties->textStyles[d->phIdx][listLevel],
-                                                targetStyle, KoGenStyle::TextType);
+                                                targetStyle, KOdfGenericStyle::TextType);
         }
     }
     if (m_context->type == Slide) {
@@ -1985,7 +1985,7 @@ void PptxXmlSlideReader::inheritTextStyle(KoGenStyle& targetStyle)
 
         if (!slideIdentifier.isEmpty()) {
             MSOOXML::Utils::copyPropertiesFromStyle(m_context->currentSlideStyles.textStyles[d->phType][listLevel],
-                                                targetStyle, KoGenStyle::TextType);
+                                                targetStyle, KOdfGenericStyle::TextType);
         }
     }
 }

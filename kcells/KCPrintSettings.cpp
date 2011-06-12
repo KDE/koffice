@@ -343,7 +343,7 @@ QString KCPrintSettings::saveOdfPageLayout(KoGenStyles &mainStyles,
     // 15.2.1 Page Size
     // 15.2.4 Print Orientation
     // 15.2.5 Margins
-    KoGenStyle pageLayout = d->pageLayout.saveOdf();
+    KOdfGenericStyle pageLayout = d->pageLayout.saveOdf();
 
     // 15.2.13 Print
     QString printParameter;

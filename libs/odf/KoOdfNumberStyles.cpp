@@ -456,7 +456,7 @@ QString saveOdfTimeStyle(KoGenStyles &mainStyles, const QString &_format, bool k
     Q_UNUSED(_suffix);
     //kDebug(30003) << "QString KoOdfNumberStyles::saveOdfTimeStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
-    KoGenStyle currentStyle(KoGenStyle::NumericTimeStyle);
+    KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericTimeStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
@@ -578,7 +578,7 @@ QString saveOdfDateStyle(KoGenStyles &mainStyles, const QString &_format, bool k
 
     // Not supported into Qt: "era" "week-of-year" "quarter"
 
-    KoGenStyle currentStyle(KoGenStyle::NumericDateStyle);
+    KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericDateStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
@@ -717,7 +717,7 @@ QString saveOdfFractionStyle(KoGenStyles &mainStyles, const QString &_format,
     //kDebug(30003) << "QString saveOdfFractionStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
-    KoGenStyle currentStyle(KoGenStyle::NumericFractionStyle);
+    KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericFractionStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
@@ -776,7 +776,7 @@ QString saveOdfNumberStyle(KoGenStyles &mainStyles, const QString &_format,
     //kDebug(30003) << "QString saveOdfNumberStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
-    KoGenStyle currentStyle(KoGenStyle::NumericNumberStyle);
+    KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericNumberStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
@@ -824,7 +824,7 @@ QString saveOdfPercentageStyle(KoGenStyles &mainStyles, const QString &_format,
     //kDebug(30003) << "QString saveOdfPercentageStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
-    KoGenStyle currentStyle(KoGenStyle::NumericPercentageStyle);
+    KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericPercentageStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
@@ -874,7 +874,7 @@ QString saveOdfScientificStyle(KoGenStyles &mainStyles, const QString &_format,
     //kDebug(30003) << "QString saveOdfScientificStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
-    KoGenStyle currentStyle(KoGenStyle::NumericScientificStyle);
+    KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericScientificStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
     int decimalplace = 0;
@@ -947,7 +947,7 @@ QString saveOdfCurrencyStyle(KoGenStyles &mainStyles,
     //kDebug(30003) << "QString saveOdfCurrencyStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
-    KoGenStyle currentStyle(KoGenStyle::NumericCurrencyStyle);
+    KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericCurrencyStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level
@@ -1001,7 +1001,7 @@ QString saveOdfTextStyle(KoGenStyles &mainStyles, const QString &_format, const 
     //kDebug(30003) << "QString saveOdfTextStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
-    KoGenStyle currentStyle(KoGenStyle::NumericTextStyle);
+    KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericTextStyle);
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
     KoXmlWriter elementWriter(&buffer);    // TODO pass indentation level

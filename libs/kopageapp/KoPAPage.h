@@ -87,7 +87,7 @@ protected:
     virtual void loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loadingContext);
 
     /// Reimplemented from KoPageBase
-    virtual void saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const;
+    virtual void saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const;
 
     /// reimplemented
     virtual QPixmap generateThumbnail(const QSize &size = QSize(512, 512));

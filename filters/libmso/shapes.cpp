@@ -1579,7 +1579,7 @@ void ODrawToOdf::setEnhancedGeometry(const MSO::OfficeArtSpContainer& o, Writer&
 
 void defineArrow(KoGenStyles& styles)
 {
-    KoGenStyle marker(KoGenStyle::MarkerStyle);
+    KOdfGenericStyle marker(KOdfGenericStyle::MarkerStyle);
     marker.addAttribute("draw:display-name", "msArrowEnd 5");
     marker.addAttribute("svg:viewBox", "0 0 210 210");
     marker.addAttribute("svg:d", "m105 0 105 210h-210z");

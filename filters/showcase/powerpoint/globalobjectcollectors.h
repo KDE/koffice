@@ -148,7 +148,7 @@ public:
     QString add(const MSO::OfficeArtFOPTEChoice& t) {
         const MSO::FillBlip* fb = t.anon.get<MSO::FillBlip>();
         if (!fb || fb->opid.fComplex || fb->fillBlip == 0) return QString();
-        KoGenStyle fillImage(KoGenStyle::FillImageStyle);
+        KOdfGenericStyle fillImage(KOdfGenericStyle::FillImageStyle);
         fillImage.addAttribute("xlink:href", pto.getPicturePath(fb->fillBlip));
         return styles.insert(fillImage,
                              QString("fillImage%1").arg(fb->fillBlip),
@@ -193,7 +193,7 @@ public:
         if (lineDashing <= 0 || lineDashing > 10) return QString();
 
         //const LineDashingStyle* lds = t.anon.get<LineDashingStyle>();
-        KoGenStyle strokeDash(KoGenStyle::StrokeDashStyle);
+        KOdfGenericStyle strokeDash(KOdfGenericStyle::StrokeDashStyle);
         switch (lineDashing) {
         case 0: // msolineSolid, not a real stroke dash
             break;

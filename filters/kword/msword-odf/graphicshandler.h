@@ -166,17 +166,17 @@ private:
     /**
      * Process general properties of a shape.
      */
-    void defineGraphicProperties(KoGenStyle& style, const DrawStyle& ds, const QString& listStyle=QString());
+    void defineGraphicProperties(KOdfGenericStyle& style, const DrawStyle& ds, const QString& listStyle=QString());
 
     /**
      * Process anchor related properties of a shape.
      */
-    void defineAnchorProperties(KoGenStyle& style, const DrawStyle& ds);
+    void defineAnchorProperties(KOdfGenericStyle& style, const DrawStyle& ds);
 
     /**
      * Process text wrapping related properties of a shape.
      */
-    void defineWrappingProperties(KoGenStyle& style, const DrawStyle& ds, const wvWare::Word97::FSPA* spa);
+    void defineWrappingProperties(KOdfGenericStyle& style, const DrawStyle& ds, const wvWare::Word97::FSPA* spa);
 
     /**
      * Check if the object is inline or floating and set the anchor type to

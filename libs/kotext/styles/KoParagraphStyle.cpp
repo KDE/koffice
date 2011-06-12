@@ -30,7 +30,7 @@
 #include "KoListLevelProperties.h"
 #include "KoTextSharedLoadingData.h"
 #include <KoShapeLoadingContext.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include "Styles_p.h"
 #include "KoTextDocument.h"
@@ -1518,14 +1518,14 @@ void KoParagraphStyle::removeDuplicates(const KoParagraphStyle &other)
         d->charStyle->removeDuplicates(*other.d->charStyle);
 }
 
-void KoParagraphStyle::saveOdf(KoGenStyle &style, KoGenStyles &mainStyles)
+void KoParagraphStyle::saveOdf(KOdfGenericStyle &style, KoGenStyles &mainStyles)
 {
     bool writtenLineSpacing = false;
     if (d->charStyle) {
         d->charStyle->saveOdf(style);
     }
     if (d->listStyle) {
-        KoGenStyle liststyle(KoGenStyle::ListStyle);
+        KOdfGenericStyle liststyle(KOdfGenericStyle::ListStyle);
         d->listStyle->saveOdf(liststyle);
         QString name(QUrl::toPercentEncoding(QString(d->listStyle->name()).replace(' ', '_')));
         name.replace('%', '_');
@@ -1549,7 +1549,7 @@ void KoParagraphStyle::saveOdf(KoGenStyle &style, KoGenStyles &mainStyles)
                 Qt::Alignment alignment = (Qt::Alignment) alignValue;
                 QString align = KoText::alignmentToString(alignment);
                 if (!align.isEmpty())
-                    style.addProperty("fo:text-align", align, KoGenStyle::ParagraphType);
+                    style.addProperty("fo:text-align", align, KOdfGenericStyle::ParagraphType);
             }
         } else if (key == KoParagraphStyle::TextProgressionDirection) {
             int directionValue = 0;
@@ -1566,37 +1566,37 @@ void KoParagraphStyle::saveOdf(KoGenStyle &style, KoGenStyles &mainStyles)
                 else if (directionValue == KoText::InheritDirection)
                     direction = "page";
                 if (!direction.isEmpty())
-                    style.addProperty("style:writing-mode", direction, KoGenStyle::ParagraphType);
+                    style.addProperty("style:writing-mode", direction, KOdfGenericStyle::ParagraphType);
             }
         } else if (key == QTextFormat::PageBreakPolicy) {
             if (breakBefore())
-                style.addProperty("fo:break-before", "page", KoGenStyle::ParagraphType);
+                style.addProperty("fo:break-before", "page", KOdfGenericStyle::ParagraphType);
             if (breakAfter())
-                style.addProperty("fo:break-after", "page", KoGenStyle::ParagraphType);
+                style.addProperty("fo:break-after", "page", KOdfGenericStyle::ParagraphType);
         } else if (key == QTextFormat::BackgroundBrush) {
             QBrush backBrush = background();
             if (backBrush.style() != Qt::NoBrush)
-                style.addProperty("fo:background-color", backBrush.color().name(), KoGenStyle::ParagraphType);
+                style.addProperty("fo:background-color", backBrush.color().name(), KOdfGenericStyle::ParagraphType);
             else
-                style.addProperty("fo:background-color", "transparent", KoGenStyle::ParagraphType);
+                style.addProperty("fo:background-color", "transparent", KOdfGenericStyle::ParagraphType);
     // Padding
         } else if (key == KoParagraphStyle::LeftPadding) {
-            style.addPropertyPt("fo:padding-left", leftPadding(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:padding-left", leftPadding(), KOdfGenericStyle::ParagraphType);
         } else if (key == KoParagraphStyle::RightPadding) {
-            style.addPropertyPt("fo:padding-right", rightPadding(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:padding-right", rightPadding(), KOdfGenericStyle::ParagraphType);
         } else if (key == KoParagraphStyle::TopPadding) {
-            style.addPropertyPt("fo:padding-top", topPadding(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:padding-top", topPadding(), KOdfGenericStyle::ParagraphType);
         } else if (key == KoParagraphStyle::BottomPadding) {
-            style.addPropertyPt("fo:padding-bottom", bottomPadding(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:padding-bottom", bottomPadding(), KOdfGenericStyle::ParagraphType);
             // Margin
         } else if (key == QTextFormat::BlockLeftMargin) {
-            style.addPropertyPt("fo:margin-left", leftMargin(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:margin-left", leftMargin(), KOdfGenericStyle::ParagraphType);
         } else if (key == QTextFormat::BlockRightMargin) {
-            style.addPropertyPt("fo:margin-right", rightMargin(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:margin-right", rightMargin(), KOdfGenericStyle::ParagraphType);
         } else if (key == QTextFormat::BlockTopMargin) {
-            style.addPropertyPt("fo:margin-top", topMargin(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:margin-top", topMargin(), KOdfGenericStyle::ParagraphType);
         } else if (key == QTextFormat::BlockBottomMargin) {
-            style.addPropertyPt("fo:margin-bottom", bottomMargin(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:margin-bottom", bottomMargin(), KOdfGenericStyle::ParagraphType);
     // Line spacing
         } else if ( key == KoParagraphStyle::MinimumLineHeight ||
                     key == KoParagraphStyle::LineSpacing ||
@@ -1605,28 +1605,28 @@ void KoParagraphStyle::saveOdf(KoGenStyle &style, KoGenStyles &mainStyles)
                     key == KoParagraphStyle::LineSpacingFromFont) {
 
             if (key == KoParagraphStyle::MinimumLineHeight && minimumLineHeight() > 0) {
-                style.addPropertyPt("style:line-height-at-least", minimumLineHeight(), KoGenStyle::ParagraphType);
+                style.addPropertyPt("style:line-height-at-least", minimumLineHeight(), KOdfGenericStyle::ParagraphType);
                 writtenLineSpacing = true;
             } else if (key == KoParagraphStyle::LineSpacing && lineSpacing() > 0) {
-                style.addPropertyPt("style:line-spacing", lineSpacing(), KoGenStyle::ParagraphType);
+                style.addPropertyPt("style:line-spacing", lineSpacing(), KOdfGenericStyle::ParagraphType);
                 writtenLineSpacing = true;
             } else if (key == KoParagraphStyle::PercentLineHeight && lineHeightPercent() > 0) {
-                style.addProperty("fo:line-height", QString("%1%").arg(lineHeightPercent()), KoGenStyle::ParagraphType);
+                style.addProperty("fo:line-height", QString("%1%").arg(lineHeightPercent()), KOdfGenericStyle::ParagraphType);
                 writtenLineSpacing = true;
             } else if (key == KoParagraphStyle::FixedLineHeight && lineHeightAbsolute() > 0) {
-                style.addPropertyPt("fo:line-height", lineHeightAbsolute(), KoGenStyle::ParagraphType);
+                style.addPropertyPt("fo:line-height", lineHeightAbsolute(), KOdfGenericStyle::ParagraphType);
                 writtenLineSpacing = true;
             } else if (key == KoParagraphStyle::LineSpacingFromFont && lineHeightAbsolute() == 0) {
-                style.addProperty("style:font-independent-line-spacing", lineSpacingFromFont(), KoGenStyle::ParagraphType);
+                style.addProperty("style:font-independent-line-spacing", lineSpacingFromFont(), KOdfGenericStyle::ParagraphType);
                 writtenLineSpacing = true;
             }
     //
         } else if (key == QTextFormat::TextIndent) {
-            style.addPropertyPt("fo:text-indent", textIndent(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:text-indent", textIndent(), KOdfGenericStyle::ParagraphType);
         } else if (key == KoParagraphStyle::AutoTextIndent) {
-            style.addProperty("style:auto-text-indent", autoTextIndent(), KoGenStyle::ParagraphType);
+            style.addProperty("style:auto-text-indent", autoTextIndent(), KOdfGenericStyle::ParagraphType);
         } else if (key == KoParagraphStyle::TabStopDistance) {
-            style.addPropertyPt("style:tab-stop-distance", tabStopDistance(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("style:tab-stop-distance", tabStopDistance(), KOdfGenericStyle::ParagraphType);
         } else if (key == KoParagraphStyle::MasterPageName) {
             style.addAttribute("style:master-page-name", masterPageName());
         } else if (key == KoParagraphStyle::DefaultOutlineLevel) {
@@ -1634,7 +1634,7 @@ void KoParagraphStyle::saveOdf(KoGenStyle &style, KoGenStyles &mainStyles)
         }
     }
     if (!writtenLineSpacing && normalLineHeight)
-        style.addProperty("fo:line-height", QString("normal"), KoGenStyle::ParagraphType);
+        style.addProperty("fo:line-height", QString("normal"), KOdfGenericStyle::ParagraphType);
     // save border stuff
     QString leftBorder = QString("%1pt %2 %3").arg(QString::number(leftBorderWidth()),
                                                    KOdfBorders::odfBorderStyleString(leftBorderStyle()),
@@ -1650,16 +1650,16 @@ void KoParagraphStyle::saveOdf(KoGenStyle &style, KoGenStyles &mainStyles)
                            bottomBorderColor().name());
     if (leftBorder == rightBorder && leftBorder == topBorder && leftBorder == bottomBorder) {
         if (leftBorderWidth() > 0 && leftBorderStyle() != KOdfBorders::BorderNone)
-            style.addProperty("fo:border", leftBorder, KoGenStyle::ParagraphType);
+            style.addProperty("fo:border", leftBorder, KOdfGenericStyle::ParagraphType);
     } else {
         if (leftBorderWidth() > 0 && leftBorderStyle() != KOdfBorders::BorderNone)
-            style.addProperty("fo:border-left", leftBorder, KoGenStyle::ParagraphType);
+            style.addProperty("fo:border-left", leftBorder, KOdfGenericStyle::ParagraphType);
         if (rightBorderWidth() > 0 && rightBorderStyle() != KOdfBorders::BorderNone)
-            style.addProperty("fo:border-right", rightBorder, KoGenStyle::ParagraphType);
+            style.addProperty("fo:border-right", rightBorder, KOdfGenericStyle::ParagraphType);
         if (topBorderWidth() > 0 && topBorderStyle() != KOdfBorders::BorderNone)
-            style.addProperty("fo:border-top", topBorder, KoGenStyle::ParagraphType);
+            style.addProperty("fo:border-top", topBorder, KOdfGenericStyle::ParagraphType);
         if (bottomBorderWidth() > 0 && bottomBorderStyle() != KOdfBorders::BorderNone)
-            style.addProperty("fo:border-bottom", bottomBorder, KoGenStyle::ParagraphType);
+            style.addProperty("fo:border-bottom", bottomBorder, KOdfGenericStyle::ParagraphType);
     }
     QString leftBorderLineWidth = QString("%1pt %2pt %3pt").arg(QString::number(leftInnerBorderWidth()),
                                   QString::number(leftBorderSpacing()),
@@ -1680,16 +1680,16 @@ void KoParagraphStyle::saveOdf(KoGenStyle &style, KoGenStyles &mainStyles)
             rightBorderStyle() == KOdfBorders::BorderDouble &&
             topBorderStyle() == KOdfBorders::BorderDouble &&
             bottomBorderStyle() == KOdfBorders::BorderDouble) {
-        style.addProperty("style:border-line-width", leftBorderLineWidth, KoGenStyle::ParagraphType);
+        style.addProperty("style:border-line-width", leftBorderLineWidth, KOdfGenericStyle::ParagraphType);
     } else {
         if (leftBorderStyle() == KOdfBorders::BorderDouble)
-            style.addProperty("style:border-line-width-left", leftBorderLineWidth, KoGenStyle::ParagraphType);
+            style.addProperty("style:border-line-width-left", leftBorderLineWidth, KOdfGenericStyle::ParagraphType);
         if (rightBorderStyle() == KOdfBorders::BorderDouble)
-            style.addProperty("style:border-line-width-right", rightBorderLineWidth, KoGenStyle::ParagraphType);
+            style.addProperty("style:border-line-width-right", rightBorderLineWidth, KOdfGenericStyle::ParagraphType);
         if (topBorderStyle() == KOdfBorders::BorderDouble)
-            style.addProperty("style:border-line-width-top", topBorderLineWidth, KoGenStyle::ParagraphType);
+            style.addProperty("style:border-line-width-top", topBorderLineWidth, KOdfGenericStyle::ParagraphType);
         if (bottomBorderStyle() == KOdfBorders::BorderDouble)
-            style.addProperty("style:border-line-width-bottom", bottomBorderLineWidth, KoGenStyle::ParagraphType);
+            style.addProperty("style:border-line-width-bottom", bottomBorderLineWidth, KOdfGenericStyle::ParagraphType);
     }
     const int indentation = 4; // indentation for children of office:styles/style:style/style:paragraph-properties
     // drop-caps

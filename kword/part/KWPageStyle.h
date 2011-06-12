@@ -239,7 +239,7 @@ public:
     /**
      * Save this page style to ODF.
      */
-    KoGenStyle saveOdf() const;
+    KOdfGenericStyle saveOdf() const;
 
     /**
      * Load this page style from ODF

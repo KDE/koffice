@@ -29,7 +29,7 @@
 #include <QColor>
 
 class KoCharacterStyle;
-class KoGenStyle;
+class KOdfGenericStyle;
 class XlsxImport;
 class XlsxStyles;
 class XlsxCellFormat;
@@ -126,7 +126,7 @@ public:
 
     //! Sets up @a cellStyle to match this cell text style.
     //! @todo implement more styling
-    void setupCellTextStyle(const /*QMap<QString,*/ MSOOXML::DrawingMLTheme/**>*/ *themes, KoGenStyle* cellStyle) const;
+    void setupCellTextStyle(const /*QMap<QString,*/ MSOOXML::DrawingMLTheme/**>*/ *themes, KOdfGenericStyle* cellStyle) const;
 
     //! Sets up @a characterStyle to match this font style.
     //! @todo implement more formatting
@@ -194,7 +194,7 @@ public:
 
     //! Sets up @a cellStyle to match this style.
     //! @todo implement more styling
-    void setupCellStyle(KoGenStyle* cellStyle, const /*QMap<QString, */MSOOXML::DrawingMLTheme/**>*/ *themes) const;
+    void setupCellStyle(KOdfGenericStyle* cellStyle, const /*QMap<QString, */MSOOXML::DrawingMLTheme/**>*/ *themes) const;
 
     //! @return color style (bgColor or fgColor) depending on the pattern
     //! Can return 0 if no fill should be painted.
@@ -227,7 +227,7 @@ class XlsxBorderStyles
 public:
     XlsxBorderStyles();
 
-    void setupCellStyle(KoGenStyle* cellStyle, const /*QMap<QString,*/ MSOOXML::DrawingMLTheme/**>*/ *themes) const;
+    void setupCellStyle(KOdfGenericStyle* cellStyle, const /*QMap<QString,*/ MSOOXML::DrawingMLTheme/**>*/ *themes) const;
 
     XlsxBorderStyle top;
     XlsxBorderStyle right;
@@ -356,7 +356,7 @@ public:
     bool setupCellStyle(
         const XlsxStyles *styles,
         const /*QMap<QString, */MSOOXML::DrawingMLTheme/**>*/ *themes,
-        KoGenStyle* cellStyle) const;
+        KOdfGenericStyle* cellStyle) const;
 
     //! Sets up @a characterStyle to match this font style.
 //! @todo implement more formatting
@@ -364,7 +364,7 @@ public:
 
 private:
     //! Used by setupCellStyle()
-    void setupCellStyleAlignment(KoGenStyle* cellStyle) const;
+    void setupCellStyleAlignment(KOdfGenericStyle* cellStyle) const;
 };
 
 class XlsxStyles

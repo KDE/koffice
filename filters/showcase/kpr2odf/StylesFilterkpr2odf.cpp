@@ -25,7 +25,7 @@
 #include <kdebug.h>
 const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
 {
-    KoGenStyle style(KoGenStyle::DrawingPageStyle, "drawing-page");
+    KOdfGenericStyle style(KOdfGenericStyle::DrawingPageStyle, "drawing-page");
 
     bool useMasterBackground = false;
     if (page.nodeName() == "PAGE") {
@@ -74,7 +74,7 @@ const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
             style.addProperty("draw:fill", "bitmap");
 
             //The image is specified by a draw:fill-image style in draw:fill-image-name
-            KoGenStyle drawFillImage(KoGenStyle::FillImageStyle);
+            KOdfGenericStyle drawFillImage(KOdfGenericStyle::FillImageStyle);
 
             //default values
             drawFillImage.addAttribute("xlink:href", "Pictures/" + m_pictures[ pictureName ]);
@@ -268,7 +268,7 @@ const QString Filterkpr2odf::createPageStyle(const KoXmlElement& page)
 
 const QString Filterkpr2odf::createGradientStyle(const KoXmlElement& gradientElement)
 {
-    KoGenStyle style(KoGenStyle::GradientStyle);
+    KOdfGenericStyle style(KOdfGenericStyle::GradientStyle);
 
     //SCesenter didn't allow to customize those attributes
     style.addAttribute("draw:start-intensity", "100%");
@@ -371,7 +371,7 @@ const QString Filterkpr2odf::createPageLayout()
     KoXmlElement paperBorders = paper.namedItem("PAPERBORDERS").toElement();
 
     //page-layout-properties
-    KoGenStyle style(KoGenStyle::PageLayoutStyle);
+    KOdfGenericStyle style(KOdfGenericStyle::PageLayoutStyle);
     style.setAutoStyleInStylesDotXml(true);
 
     if (paperBorders.hasAttribute("ptTop")) {
@@ -407,7 +407,7 @@ const QString Filterkpr2odf::createMasterPageStyle(const KoXmlNode & objects, co
     // set that we work on master
     m_sticky = true;
 
-    KoGenStyle style(KoGenStyle::MasterPageStyle, "");
+    KOdfGenericStyle style(KOdfGenericStyle::MasterPageStyle, "");
     style.addAttribute("style:page-layout-name", createPageLayout());
 
     style.addAttribute("draw:style-name", createPageStyle(masterBackground));
@@ -429,7 +429,7 @@ const QString Filterkpr2odf::createMasterPageStyle(const KoXmlNode & objects, co
 const QString Filterkpr2odf::createGraphicStyle(const KoXmlElement& element)
 {
     //A graphic style is wiely used by a broad type of objects, hence can have many different properties
-    KoGenStyle style(KoGenStyle::GraphicAutoStyle, "graphic");
+    KOdfGenericStyle style(KOdfGenericStyle::GraphicAutoStyle, "graphic");
     KoXmlElement textObject(element.namedItem("TEXTOBJ").toElement());
     if (!textObject.isNull()) {
         if (textObject.hasAttribute("verticalAlign")) {
@@ -656,7 +656,7 @@ const QString Filterkpr2odf::createGraphicStyle(const KoXmlElement& element)
 const QString Filterkpr2odf::createOpacityGradientStyle(int opacity)
 {
     //Opacity wasn't a gradient in KPR so we go from and to the same value
-    KoGenStyle style(KoGenStyle::OpacityStyle);
+    KOdfGenericStyle style(KOdfGenericStyle::OpacityStyle);
     QString opacityString = QString("%1%").arg(opacity);
     style.addAttribute("draw:start", opacityString);
     style.addAttribute("draw:end", opacityString);
@@ -665,7 +665,7 @@ const QString Filterkpr2odf::createOpacityGradientStyle(int opacity)
 
 const QString Filterkpr2odf::createMarkerStyle(int markerType)
 {
-    KoGenStyle style(KoGenStyle::MarkerStyle);
+    KOdfGenericStyle style(KOdfGenericStyle::MarkerStyle);
 
     QString displayName;
     QString viewBox;
@@ -722,7 +722,7 @@ const QString Filterkpr2odf::createMarkerStyle(int markerType)
 
 const QString Filterkpr2odf::createStrokeDashStyle(int strokeStyle)
 {
-    KoGenStyle style(KoGenStyle::StrokeDashStyle);
+    KOdfGenericStyle style(KOdfGenericStyle::StrokeDashStyle);
 
     //"Containment" strings, filled according to the type of the strokeStyle
     QString displayName;
@@ -789,7 +789,7 @@ const QString Filterkpr2odf::createStrokeDashStyle(int strokeStyle)
 
 const QString Filterkpr2odf::createHatchStyle(int brushStyle, QString fillColor)
 {
-    KoGenStyle style(KoGenStyle::HatchStyle);
+    KOdfGenericStyle style(KOdfGenericStyle::HatchStyle);
 
     //"Contaimnet" strings
     QString displayName;
@@ -848,7 +848,7 @@ const QString Filterkpr2odf::createHatchStyle(int brushStyle, QString fillColor)
 
 const QString Filterkpr2odf::createParagraphStyle(const KoXmlElement& element)
 {
-    KoGenStyle style(KoGenStyle::ParagraphAutoStyle, "paragraph");
+    KOdfGenericStyle style(KOdfGenericStyle::ParagraphAutoStyle, "paragraph");
 
     QString textAlign;
     if (element.hasAttribute("align")) {
@@ -968,7 +968,7 @@ QString Filterkpr2odf::convertBorder(const KoXmlElement& border)
 
 const QString Filterkpr2odf::createTextStyle(const KoXmlElement& element)
 {
-    KoGenStyle style(KoGenStyle::TextAutoStyle, "text");
+    KOdfGenericStyle style(KOdfGenericStyle::TextAutoStyle, "text");
 
     if (element.hasAttribute("family")) {
         style.addProperty("style:font-name", element.attribute("family"));
@@ -1063,7 +1063,7 @@ const QString Filterkpr2odf::createTextStyle(const KoXmlElement& element)
 
 const QString Filterkpr2odf::createListStyle(const KoXmlElement& element)
 {
-    KoGenStyle style(KoGenStyle::ListAutoStyle);
+    KOdfGenericStyle style(KOdfGenericStyle::ListAutoStyle);
 
     static const int s_oasisCounterTypes[] = { '\0', '1', 'a', 'A', 'i', 'I',
             '\0', '\0', // custombullet, custom

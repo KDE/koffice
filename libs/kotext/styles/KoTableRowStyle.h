@@ -32,7 +32,7 @@
 
 class QTextTable;
 class KoStyleStack;
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoGenStyles;
 class KoOdfLoadingContext;
 class KoXmlElement;
@@ -131,7 +131,7 @@ public:
      */
     void loadOdf(const KoXmlElement *element, KoOdfLoadingContext &context);
 
-    void saveOdf(KoGenStyle &style);
+    void saveOdf(KOdfGenericStyle &style);
 
     /**
      * Returns true if this table column style has the property set.

@@ -27,7 +27,7 @@
 #include <MsooXmlThemesReader.h>
 #include <MsooXmlCommonReader.h>
 
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 
 class KoXmlWriter;
 class PptxXmlSlideReaderContext;
@@ -63,10 +63,10 @@ class PptxActualSlideProperties
 {
 public:
     //! Map of paragraph-styles with the styleId as outer-key and the listlevel as inner-key.
-    QMap<QString, QMap<int,KoGenStyle> > styles;
+    QMap<QString, QMap<int,KOdfGenericStyle> > styles;
 
     //! Map of text-styles with the styleId as outer-key and the listlevel as inner-key.
-    QMap<QString, QMap<int,KoGenStyle> > textStyles;
+    QMap<QString, QMap<int,KOdfGenericStyle> > textStyles;
 
     //! Map of list-styles with the styleId as outer-key and the listlevel as inner-key.
     QMap<QString, QMap<int,MSOOXML::Utils::ParagraphBulletProperties> > listStyles;
@@ -112,10 +112,10 @@ public:
     //! The presentation:presentation-page-layout-name
     QString pageLayoutStyleName;
     //! Map of paragraph-styles with the styleId as outer-key and the listlevel as inner-key.
-    QMap<QString, QMap<int,KoGenStyle> > styles;
+    QMap<QString, QMap<int,KOdfGenericStyle> > styles;
 
     //! Map of text-styles with the styleId as outer-key and the listlevel as inner-key.
-    QMap<QString, QMap<int,KoGenStyle> > textStyles;
+    QMap<QString, QMap<int,KOdfGenericStyle> > textStyles;
 
     //! Map of list-styles with the styleId as outer-key and the listlevel as inner-key.
     QMap<QString, QMap<int,MSOOXML::Utils::ParagraphBulletProperties> > listStyles;
@@ -135,7 +135,7 @@ public:
     // Extras frames such as pictures from layout, which should be put to the slide.
     QVector<QString> layoutFrames;
 
-    KoGenStyle m_drawingPageProperties;
+    KOdfGenericStyle m_drawingPageProperties;
 
     // Name of the slidemaster to be used with this layout
     QString m_slideMasterName;
@@ -154,10 +154,10 @@ public:
     QMap<QString, QString> colorMap;
 
     //! Map of paragraph-styles with the styleId as outer-key and the listlevel as inner-key.
-    QMap<QString, QMap<int,KoGenStyle> > styles;
+    QMap<QString, QMap<int,KOdfGenericStyle> > styles;
 
     //! Map of text-styles with the styleId as outer-key and the listlevel as inner-key.
-    QMap<QString, QMap<int,KoGenStyle> > textStyles;
+    QMap<QString, QMap<int,KOdfGenericStyle> > textStyles;
 
     //! Map of list-styles with the styleId as outer-key and the listlevel as inner-key.
     QMap<QString, QMap<int,MSOOXML::Utils::ParagraphBulletProperties> > listStyles;
@@ -177,7 +177,7 @@ public:
     // Them to which this masterslide refers to.
     MSOOXML::DrawingMLTheme theme;
 
-    KoGenStyle m_drawingPageProperties;
+    KOdfGenericStyle m_drawingPageProperties;
 };
 
 //! A class reading MSOOXML PPTX markup - ppt/slides/slide*.xml part.
@@ -227,13 +227,13 @@ protected:
     KoFilter::ConversionStatus read_clrMap();
     KoFilter::ConversionStatus read_clrMapOvr();
 
-//    KoGenStyle m_currentPageStyle;
+//    KOdfGenericStyle m_currentPageStyle;
     PptxXmlSlideReaderContext* m_context;
     PptxShapeProperties* m_currentShapeProperties;
 
-    KoGenStyle m_currentMasterPageStyle; //!< set by read_sp()
-    KoGenStyle m_currentPresentationPageLayoutStyle; //!< set by read_sp() for placeholders (KoGenStyle::PresentationPageLayoutStyle)
-    KoGenStyle m_currentPresentationStyle; //!< KoGenStyle::PresentationAutoStyle
+    KOdfGenericStyle m_currentMasterPageStyle; //!< set by read_sp()
+    KOdfGenericStyle m_currentPresentationPageLayoutStyle; //!< set by read_sp() for placeholders (KOdfGenericStyle::PresentationPageLayoutStyle)
+    KOdfGenericStyle m_currentPresentationStyle; //!< KOdfGenericStyle::PresentationAutoStyle
 
     KoXmlWriter* m_placeholderElWriter;
 
@@ -253,17 +253,17 @@ protected:
     void inheritDefaultListStyles();
 
     // inherits default text style to target
-    void inheritDefaultTextStyle(KoGenStyle& targetStyle);
+    void inheritDefaultTextStyle(KOdfGenericStyle& targetStyle);
 
     // Inherits correct textstyle to m_currentTextStyle
     // First from default, then from master, layout, slide using those lvls which are needed
-    void inheritTextStyle(KoGenStyle& targetStyle);
+    void inheritTextStyle(KOdfGenericStyle& targetStyle);
 
     // Inherits default paragraphStyle
-    void inheritDefaultParagraphStyle(KoGenStyle& targetStyle);
+    void inheritDefaultParagraphStyle(KOdfGenericStyle& targetStyle);
 
     // Inherits correct paragraph styles to m_currentParagraphStyle
-    void inheritParagraphStyle(KoGenStyle& targetStyle);
+    void inheritParagraphStyle(KOdfGenericStyle& targetStyle);
 
     // Inherits default body properties
     void inheritDefaultBodyProperties();
@@ -340,8 +340,8 @@ public:
 
     // These have to be in context, because each slide/layout/master may define their own colormap
     // therefore the way default text is interpreted cannot be static
-    QVector<KoGenStyle> defaultTextStyles;
-    QVector<KoGenStyle> defaultParagraphStyles;
+    QVector<KOdfGenericStyle> defaultTextStyles;
+    QVector<KOdfGenericStyle> defaultParagraphStyles;
     QVector<MSOOXML::Utils::ParagraphBulletProperties> defaultListStyles;
 };
 

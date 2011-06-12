@@ -35,7 +35,7 @@
 #include <KoXmlWriter.h>
 #include <KoOdfWriteStore.h>
 #include <KoGenStyles.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 
 #include <khtml_part.h>
 #include <khtmlview.h>

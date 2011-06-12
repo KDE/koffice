@@ -145,9 +145,9 @@ void ODrawClient::processClientTextBox(const MSO::OfficeArtClientTextBox &ct, co
     qDebug() << "NOT YET IMPLEMENTED" << __PRETTY_FUNCTION__;
 }
 
-KoGenStyle ODrawClient::createGraphicStyle(const MSO::OfficeArtClientTextBox *ct, const MSO::OfficeArtClientData *cd, Writer &out)
+KOdfGenericStyle ODrawClient::createGraphicStyle(const MSO::OfficeArtClientTextBox *ct, const MSO::OfficeArtClientData *cd, Writer &out)
 {
-    KoGenStyle style = KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic");
+    KOdfGenericStyle style = KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic");
     if (!m_shapeText.m_text.isEmpty()) {
         switch (m_shapeText.halign) {
         case Swinder::TxORecord::Left:
@@ -177,7 +177,7 @@ KoGenStyle ODrawClient::createGraphicStyle(const MSO::OfficeArtClientTextBox *ct
     return style;
 }
 
-void ODrawClient::addTextStyles(const MSO::OfficeArtClientTextBox *clientTextbox, const MSO::OfficeArtClientData *clientData, Writer &out, KoGenStyle &style)
+void ODrawClient::addTextStyles(const MSO::OfficeArtClientTextBox *clientTextbox, const MSO::OfficeArtClientData *clientData, Writer &out, KOdfGenericStyle &style)
 {
     const QString styleName = out.styles.insert(style);
     out.xml.addAttribute("draw:style-name", styleName);

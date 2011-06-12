@@ -62,7 +62,7 @@ public:
          * style will belong to one of the families 'graphic', 'presentation',
          * or 'chart'.
          **/
-        virtual KoGenStyle createGraphicStyle(
+        virtual KOdfGenericStyle createGraphicStyle(
             const MSO::OfficeArtClientTextBox* ct,
             const MSO::OfficeArtClientData* cd, Writer& out) = 0;
         /**
@@ -74,7 +74,7 @@ public:
         virtual void addTextStyles(
             const MSO::OfficeArtClientTextBox* clientTextbox,
             const MSO::OfficeArtClientData* clientData,
-            Writer& out, KoGenStyle& style) = 0;
+            Writer& out, KOdfGenericStyle& style) = 0;
         /**
          * Retrieve the OfficeArtDggContainer that contains global information
          * relating to the drawings.
@@ -158,9 +158,9 @@ public:
     void processGroupShape(const MSO::OfficeArtSpgrContainer& o, Writer& out);
     void processDrawing(const MSO::OfficeArtSpgrContainerFileBlock& o, Writer& out);
     void processDrawingObject(const MSO::OfficeArtSpContainer& o, Writer& out);
-    void defineGraphicProperties(KoGenStyle& style, const DrawStyle& ds, KoGenStyles& styles);
+    void defineGraphicProperties(KOdfGenericStyle& style, const DrawStyle& ds, KoGenStyles& styles);
     void addGraphicStyleToDrawElement(Writer& out, const MSO::OfficeArtSpContainer& o);
-    void defineGradientStyle(KoGenStyle& style, const DrawStyle& ds);
+    void defineGradientStyle(KOdfGenericStyle& style, const DrawStyle& ds);
 
     /**
      * Apply the logic defined in MS-ODRAW subsection 2.2.2 to the provided

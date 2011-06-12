@@ -203,12 +203,12 @@ private:
     void processClientTextBox(const MSO::OfficeArtClientTextBox& ct,
                               const MSO::OfficeArtClientData* cd,
                               Writer& out);
-    KoGenStyle createGraphicStyle(
+    KOdfGenericStyle createGraphicStyle(
             const MSO::OfficeArtClientTextBox* ct,
             const MSO::OfficeArtClientData* cd, Writer& out);
     void addTextStyles(const MSO::OfficeArtClientTextBox* clientTextbox,
             const MSO::OfficeArtClientData* clientData,
-            Writer& out, KoGenStyle& style);
+            Writer& out, KOdfGenericStyle& style);
     const MSO::OfficeArtDggContainer* getOfficeArtDggContainer();
     const MSO::OfficeArtSpContainer* getMasterShapeContainer(quint32 spid);
     const MSO::OfficeArtSpContainer* defaultShapeContainer() { return dc_data->defaultShape; };
@@ -332,12 +332,12 @@ getTextMasterStyleAtom(const MasterOrSlideContainer* m, quint16 texttype)
     return textstyle;
 }
 
-KoGenStyle PptToOdp::DrawClient::createGraphicStyle(
+KOdfGenericStyle PptToOdp::DrawClient::createGraphicStyle(
         const MSO::OfficeArtClientTextBox* clientTextbox,
         const MSO::OfficeArtClientData* clientData,
         Writer& out)
 {
-    KoGenStyle style;
+    KOdfGenericStyle style;
 
     const PptOfficeArtClientData* cd = 0;
     if (clientData) {
@@ -357,11 +357,11 @@ KoGenStyle PptToOdp::DrawClient::createGraphicStyle(
         // if this object has a placeholder type, it defines a presentation style,
         // otherwise, it defines a graphic style
         // A graphic style is always automatic
-        KoGenStyle::Type type = KoGenStyle::PresentationStyle;
+        KOdfGenericStyle::Type type = KOdfGenericStyle::PresentationStyle;
         if (isAutomatic) {
-            type = KoGenStyle::PresentationAutoStyle;
+            type = KOdfGenericStyle::PresentationAutoStyle;
         }
-        style = KoGenStyle(type, "presentation");
+        style = KOdfGenericStyle(type, "presentation");
         if (isAutomatic) {
             style.setAutoStyleInStylesDotXml(out.stylesxml);
         }
@@ -375,7 +375,7 @@ KoGenStyle PptToOdp::DrawClient::createGraphicStyle(
             style.setParentName(parent);
         }
     } else { // type is graphic
-        style = KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic");
+        style = KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic");
         style.setAutoStyleInStylesDotXml(out.stylesxml);
     }
 
@@ -385,7 +385,7 @@ KoGenStyle PptToOdp::DrawClient::createGraphicStyle(
     }
     QString listStyleName;
     if (listStyle) {
-        KoGenStyle list(KoGenStyle::ListStyle);
+        KOdfGenericStyle list(KOdfGenericStyle::ListStyle);
         ppttoodp->defineListStyle(list, *listStyle);
         listStyleName = out.styles.insert(list);
     }
@@ -396,7 +396,7 @@ KoGenStyle PptToOdp::DrawClient::createGraphicStyle(
 void PptToOdp::DrawClient::addTextStyles(
         const MSO::OfficeArtClientTextBox* clientTextbox,
         const MSO::OfficeArtClientData* clientData,
-        Writer& out, KoGenStyle& style)
+        Writer& out, KOdfGenericStyle& style)
 {
     const PptOfficeArtClientData* cd = 0;
     if (clientData) {
@@ -422,8 +422,8 @@ void PptToOdp::DrawClient::addTextStyles(
     if (isPlaceholder) {
         // small workaround to avoid presenation frames from having borders,
         // even though the ppt file seems to specify that they should have one
-        style.addProperty("draw:stroke", "none", KoGenStyle::GraphicType);
-        //style.addProperty("draw:stroke-width", "none", KoGenStyle::GraphicType);
+        style.addProperty("draw:stroke", "none", KOdfGenericStyle::GraphicType);
+        //style.addProperty("draw:stroke-width", "none", KOdfGenericStyle::GraphicType);
     }
     const QString styleName = out.styles.insert(style);
     if (isPlaceholder) {
@@ -648,7 +648,7 @@ definePageLayout(KoGenStyles& styles, const MSO::PointStruct& size) {
     QString pageWidth = mm(sizeX);
     QString pageHeight = mm(sizeY);
 
-    KoGenStyle pl(KoGenStyle::PageLayoutStyle);
+    KOdfGenericStyle pl(KOdfGenericStyle::PageLayoutStyle);
     pl.setAutoStyleInStylesDotXml(true);
     // pl.addAttribute("style:page-usage", "all"); // probably not needed
     pl.addProperty("fo:margin-bottom", "0pt");
@@ -666,7 +666,7 @@ definePageLayout(KoGenStyles& styles, const MSO::PointStruct& size) {
 void PptToOdp::defineDefaultTextStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="text">
-    KoGenStyle style(KoGenStyle::TextStyle, "text");
+    KOdfGenericStyle style(KOdfGenericStyle::TextStyle, "text");
     style.setDefaultStyle(true);
     defineDefaultTextProperties(style);
     styles.insert(style);
@@ -675,7 +675,7 @@ void PptToOdp::defineDefaultTextStyle(KoGenStyles& styles)
 void PptToOdp::defineDefaultParagraphStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="paragraph">
-    KoGenStyle style(KoGenStyle::ParagraphStyle, "paragraph");
+    KOdfGenericStyle style(KOdfGenericStyle::ParagraphStyle, "paragraph");
     style.setDefaultStyle(true);
     defineDefaultParagraphProperties(style);
     defineDefaultTextProperties(style);
@@ -685,7 +685,7 @@ void PptToOdp::defineDefaultParagraphStyle(KoGenStyles& styles)
 void PptToOdp::defineDefaultSectionStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="section">
-    KoGenStyle style(KoGenStyle::SectionStyle, "section");
+    KOdfGenericStyle style(KOdfGenericStyle::SectionStyle, "section");
     style.setDefaultStyle(true);
     styles.insert(style);
 }
@@ -693,7 +693,7 @@ void PptToOdp::defineDefaultSectionStyle(KoGenStyles& styles)
 void PptToOdp::defineDefaultRubyStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="ruby">
-    KoGenStyle style(KoGenStyle::RubyStyle, "ruby");
+    KOdfGenericStyle style(KOdfGenericStyle::RubyStyle, "ruby");
     style.setDefaultStyle(true);
     styles.insert(style);
 }
@@ -701,7 +701,7 @@ void PptToOdp::defineDefaultRubyStyle(KoGenStyles& styles)
 void PptToOdp::defineDefaultTableStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="table">
-    KoGenStyle style(KoGenStyle::TableStyle, "table");
+    KOdfGenericStyle style(KOdfGenericStyle::TableStyle, "table");
     style.setDefaultStyle(true);
     styles.insert(style);
 }
@@ -709,7 +709,7 @@ void PptToOdp::defineDefaultTableStyle(KoGenStyles& styles)
 void PptToOdp::defineDefaultTableColumnStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="table-column">
-    KoGenStyle style(KoGenStyle::TableColumnStyle, "table-column");
+    KOdfGenericStyle style(KOdfGenericStyle::TableColumnStyle, "table-column");
     style.setDefaultStyle(true);
     styles.insert(style);
 }
@@ -717,7 +717,7 @@ void PptToOdp::defineDefaultTableColumnStyle(KoGenStyles& styles)
 void PptToOdp::defineDefaultTableRowStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="table-row">
-    KoGenStyle style(KoGenStyle::TableRowStyle, "table-row");
+    KOdfGenericStyle style(KOdfGenericStyle::TableRowStyle, "table-row");
     style.setDefaultStyle(true);
     styles.insert(style);
 }
@@ -725,7 +725,7 @@ void PptToOdp::defineDefaultTableRowStyle(KoGenStyles& styles)
 void PptToOdp::defineDefaultTableCellStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="table-cell">
-    KoGenStyle style(KoGenStyle::TableCellStyle, "table-cell");
+    KOdfGenericStyle style(KOdfGenericStyle::TableCellStyle, "table-cell");
     style.setDefaultStyle(true);
     defineDefaultParagraphProperties(style);
     defineDefaultTextProperties(style);
@@ -735,7 +735,7 @@ void PptToOdp::defineDefaultTableCellStyle(KoGenStyles& styles)
 void PptToOdp::defineDefaultGraphicStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="graphic">
-    KoGenStyle style(KoGenStyle::GraphicStyle, "graphic");
+    KOdfGenericStyle style(KOdfGenericStyle::GraphicStyle, "graphic");
     style.setDefaultStyle(true);
     defineDefaultGraphicProperties(style, styles);
     defineDefaultParagraphProperties(style);
@@ -746,7 +746,7 @@ void PptToOdp::defineDefaultGraphicStyle(KoGenStyles& styles)
 void PptToOdp::defineDefaultPresentationStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="presentation">
-    KoGenStyle style(KoGenStyle::PresentationStyle, "presentation");
+    KOdfGenericStyle style(KOdfGenericStyle::PresentationStyle, "presentation");
     style.setDefaultStyle(true);
     defineDefaultGraphicProperties(style, styles);
     defineDefaultParagraphProperties(style);
@@ -758,8 +758,8 @@ void PptToOdp::defineDefaultDrawingPageStyle(KoGenStyles& styles)
 {
     if (!p->documentContainer) return;
     // write style <style:default-style style:family="drawing-page">
-    KoGenStyle style(KoGenStyle::DrawingPageStyle, "drawing-page");
-    const KoGenStyle::PropertyType dpt = KoGenStyle::DrawingPageType;
+    KOdfGenericStyle style(KOdfGenericStyle::DrawingPageStyle, "drawing-page");
+    const KOdfGenericStyle::PropertyType dpt = KOdfGenericStyle::DrawingPageType;
     style.addProperty("draw:background-size", "border", dpt);
     style.addProperty("draw:fill", "none", dpt);
     style.setDefaultStyle(true);
@@ -777,7 +777,7 @@ void PptToOdp::defineDefaultDrawingPageStyle(KoGenStyles& styles)
 void PptToOdp::defineDefaultChartStyle(KoGenStyles& styles)
 {
     // write style <style:default-style style:family="chart">
-    KoGenStyle style(KoGenStyle::ChartStyle, "chart");
+    KOdfGenericStyle style(KOdfGenericStyle::ChartStyle, "chart");
     style.setDefaultStyle(true);
     defineDefaultGraphicProperties(style, styles);
     defineDefaultParagraphProperties(style);
@@ -785,7 +785,7 @@ void PptToOdp::defineDefaultChartStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultTextProperties(KoGenStyle& style) {
+void PptToOdp::defineDefaultTextProperties(KOdfGenericStyle& style) {
     const TextCFException* cf = 0;
     const TextCFException9* cf9 = 0;
     const TextCFException10* cf10 = 0;
@@ -809,7 +809,7 @@ void PptToOdp::defineDefaultTextProperties(KoGenStyle& style) {
     defineTextProperties(style, cf, cf9, cf10, si);
 }
 
-void PptToOdp::defineDefaultParagraphProperties(KoGenStyle& style) {
+void PptToOdp::defineDefaultParagraphProperties(KOdfGenericStyle& style) {
     const TextPFException9* pf9 = 0;
     if (p->documentContainer) {
         const PP9DocBinaryTagExtension* pp9 = getPP<PP9DocBinaryTagExtension>(
@@ -822,8 +822,8 @@ void PptToOdp::defineDefaultParagraphProperties(KoGenStyle& style) {
     defineParagraphProperties(style, pf);
 }
 
-void PptToOdp::defineDefaultGraphicProperties(KoGenStyle& style, KoGenStyles& styles) {
-    const KoGenStyle::PropertyType gt = KoGenStyle::GraphicType;
+void PptToOdp::defineDefaultGraphicProperties(KOdfGenericStyle& style, KoGenStyles& styles) {
+    const KOdfGenericStyle::PropertyType gt = KOdfGenericStyle::GraphicType;
     style.addProperty("svg:stroke-width", "0.75pt", gt); // 2.3.8.15
     style.addProperty("draw:fill", "none", gt); // 2.3.8.38
     style.addProperty("draw:auto-grow-height", false, gt);
@@ -844,7 +844,7 @@ QString PptToOdp::getPicturePath(int pib) const
     return rgbUid.length() ? "Pictures/" + pictureNames[rgbUid] : "";
 }
 
-void PptToOdp::defineTextProperties(KoGenStyle& style,
+void PptToOdp::defineTextProperties(KOdfGenericStyle& style,
                                     const PptTextCFRun* cf,
                                     const TextCFException9* /*cf9*/,
                                     const TextCFException10* /*cf10*/,
@@ -853,7 +853,7 @@ void PptToOdp::defineTextProperties(KoGenStyle& style,
     //getting information for all the possible attributes in
     //style:text-properties for clarity in alphabetical order
 
-    const KoGenStyle::PropertyType text = KoGenStyle::TextType;
+    const KOdfGenericStyle::PropertyType text = KOdfGenericStyle::TextType;
 
     // fo:background-color
     // fo:color
@@ -946,14 +946,14 @@ void PptToOdp::defineTextProperties(KoGenStyle& style,
     // style:use-window-font-color
 }
 
-void PptToOdp::defineTextProperties(KoGenStyle& style,
+void PptToOdp::defineTextProperties(KOdfGenericStyle& style,
                                     const MSO::TextCFException* cf,
                                     const TextCFException9* /*cf9*/,
                                     const TextCFException10* /*cf10*/,
                                     const TextSIException* si,
                                     const TextContainer* tc)
 {
-    const KoGenStyle::PropertyType text = KoGenStyle::TextType;
+    const KOdfGenericStyle::PropertyType text = KOdfGenericStyle::TextType;
     /* We try to get information for all the possible attributes in
        style:text-properties for clarity we handle them in alphabetical order */
     // fo:background-color
@@ -1115,9 +1115,9 @@ void PptToOdp::defineTextProperties(KoGenStyle& style,
     // style:use-window-font-color
 }
 
-void PptToOdp::defineParagraphProperties(KoGenStyle& style,
+void PptToOdp::defineParagraphProperties(KOdfGenericStyle& style,
                                          const PptTextPFRun& pf) {
-    const KoGenStyle::PropertyType para = KoGenStyle::ParagraphType;
+    const KOdfGenericStyle::PropertyType para = KOdfGenericStyle::ParagraphType;
     // fo:background-color
     // fo:border
     // fo:border-bottom
@@ -1181,11 +1181,11 @@ void PptToOdp::defineParagraphProperties(KoGenStyle& style,
     // text:number-lines
 }
 
-void PptToOdp::defineDrawingPageStyle(KoGenStyle& style, const DrawStyle& ds, KoGenStyles& styles,
+void PptToOdp::defineDrawingPageStyle(KOdfGenericStyle& style, const DrawStyle& ds, KoGenStyles& styles,
                                       ODrawToOdf& odrawtoodf, const MSO::HeadersFootersAtom* hf,
                                       const MSO::SlideFlags* sf)
 {
-    const KoGenStyle::PropertyType dp = KoGenStyle::DrawingPageType;
+    const KOdfGenericStyle::PropertyType dp = KOdfGenericStyle::DrawingPageType;
 
     // Inherit the background of the main master slide/title master slide or
     // notes master slide if slideFlags/fMasterBackground == true.  The
@@ -1209,7 +1209,7 @@ void PptToOdp::defineDrawingPageStyle(KoGenStyle& style, const DrawStyle& ds, Ko
             }
             // draw:fill-gradient-name
             else if ((fillType >= 4) && (fillType <= 8)) {
-                KoGenStyle gs(KoGenStyle::LinearGradientStyle);
+                KOdfGenericStyle gs(KOdfGenericStyle::LinearGradientStyle);
                 odrawtoodf.defineGradientStyle(gs, ds);
                 QString tmp = styles.insert(gs);
                 style.addProperty("draw:fill-gradient-name", tmp, dp);
@@ -1280,7 +1280,7 @@ void PptToOdp::defineDrawingPageStyle(KoGenStyle& style, const DrawStyle& ds, Ko
 
 }
 
-void PptToOdp::defineListStyle(KoGenStyle& style,
+void PptToOdp::defineListStyle(KOdfGenericStyle& style,
                                const TextMasterStyleAtom& levels,
                                const TextMasterStyle9Atom* levels9,
                                const TextMasterStyle10Atom* levels10)
@@ -1313,7 +1313,7 @@ void PptToOdp::defineListStyle(KoGenStyle& style,
     }
 }
 
-void PptToOdp::defineListStyle(KoGenStyle& style, quint8 depth,
+void PptToOdp::defineListStyle(KOdfGenericStyle& style, quint8 depth,
                                ListStyleInput info,
                                const TextMasterStyleLevel* level,
                                const TextMasterStyle9Level* level9,
@@ -1366,7 +1366,7 @@ bulletSizeToSizeString(const PptTextPFRun& pf)
     }
     return QString();
 }
-void PptToOdp::defineListStyle(KoGenStyle& style, quint8 level,
+void PptToOdp::defineListStyle(KOdfGenericStyle& style, quint8 level,
                                const ListStyleInput& i,
                                const ListStyleInput& p)
 {
@@ -1485,7 +1485,7 @@ void PptToOdp::defineListStyle(KoGenStyle& style, quint8 level,
     out.endElement(); // style:list-level-properties
 
     if (!imageBullet) {
-        KoGenStyle ls(KoGenStyle::TextStyle);
+        KOdfGenericStyle ls(KOdfGenericStyle::TextStyle);
         defineTextProperties(ls, p.cf, p.cf9, p.cf10, p.si);
         defineTextProperties(ls, i.cf, i.cf9, i.cf10, i.si);
 
@@ -1496,19 +1496,19 @@ void PptToOdp::defineListStyle(KoGenStyle& style, quint8 level,
                 ls.addProperty("fo:font-family",
                            QString::fromUtf16(font->lfFaceName.data(),
                                               font->lfFaceName.size()),
-                           KoGenStyle::TextType);
+                           KOdfGenericStyle::TextType);
             }
         }
         // a bullet exists and the bullet has a color
         if (i.pf.fHasBullet() && i.pf.fBulletHasColor()) {
             const QColor color = toQColor(i.pf.bulletColor());
             if (color.isValid()) {
-                ls.addProperty("fo:color", color.name(), KoGenStyle::TextType);
+                ls.addProperty("fo:color", color.name(), KOdfGenericStyle::TextType);
             }
         }
         // maybe fo:font-size should be set from pf.bulletSize
 
-        ls.writeStyleProperties(&out, KoGenStyle::TextType);
+        ls.writeStyleProperties(&out, KOdfGenericStyle::TextType);
     }
     out.endElement();  // text:list-level-style-*
     // serialize the text:list-style element into the properties
@@ -1594,24 +1594,24 @@ void PptToOdp::defineMasterStyles(KoGenStyles& styles)
         // derive it from Tx_TYPE_TITLE (0)
         if (!masterPresentationStyles[m].contains(6)
                 && masterPresentationStyles[m].contains(0)) {
-            KoGenStyle style(KoGenStyle::PresentationStyle, "presentation");
+            KOdfGenericStyle style(KOdfGenericStyle::PresentationStyle, "presentation");
             style.setParentName(masterPresentationStyles[m][0]);
             style.addProperty("fo:text-align", "center",
-                              KoGenStyle::ParagraphType);
+                              KOdfGenericStyle::ParagraphType);
             style.addProperty("style:vertical-align", "middle",
-                              KoGenStyle::ParagraphType);
+                              KOdfGenericStyle::ParagraphType);
             masterPresentationStyles[m][6] = styles.insert(style);
         }
         // if no style for Tx_TYPE_CENTERBODY (5) has been defined yet,
         // derive it from Tx_TYPE_BODY (1)
         if (!masterPresentationStyles[m].contains(5)
                 && masterPresentationStyles[m].contains(1)) {
-            KoGenStyle style(KoGenStyle::PresentationStyle, "presentation");
+            KOdfGenericStyle style(KOdfGenericStyle::PresentationStyle, "presentation");
             style.setParentName(masterPresentationStyles[m][1]);
             style.addProperty("fo:text-align", "center",
-                              KoGenStyle::ParagraphType);
+                              KOdfGenericStyle::ParagraphType);
 //            style.addProperty("style:vertical-align", "middle",
-//                              KoGenStyle::ParagraphType);
+//                              KOdfGenericStyle::ParagraphType);
             masterPresentationStyles[m][5] = styles.insert(style);
         }
     }
@@ -1640,7 +1640,7 @@ void PptToOdp::defineAutomaticDrawingPageStyles(KoGenStyles& styles)
 
     // define for master for use in <master-page style:name="...">
     foreach (const MSO::MasterOrSlideContainer* m, p->masters) {
-        KoGenStyle dp(KoGenStyle::DrawingPageAutoStyle, "drawing-page");
+        KOdfGenericStyle dp(KOdfGenericStyle::DrawingPageAutoStyle, "drawing-page");
         dp.setAutoStyleInStylesDotXml(true);
         const SlideContainer* sc = m->anon.get<SlideContainer>();
         const MainMasterContainer* mm = m->anon.get<MainMasterContainer>();
@@ -1670,7 +1670,7 @@ void PptToOdp::defineAutomaticDrawingPageStyles(KoGenStyles& styles)
         } else if (p->notesMaster->perSlideHFContainer2) {
             hf = &p->notesMaster->perSlideHFContainer2->hfAtom;
         }
-        KoGenStyle dp(KoGenStyle::DrawingPageAutoStyle, "drawing-page");
+        KOdfGenericStyle dp(KOdfGenericStyle::DrawingPageAutoStyle, "drawing-page");
         dp.setAutoStyleInStylesDotXml(true);
         const OfficeArtDggContainer& drawingGroup
                 = p->documentContainer->drawingGroup.OfficeArtDgg;
@@ -1687,7 +1687,7 @@ void PptToOdp::defineAutomaticDrawingPageStyles(KoGenStyles& styles)
 
     // define for slides for use in <draw:page style:name="...">
     foreach (const MSO::SlideContainer* sc, p->slides) {
-        KoGenStyle dp(KoGenStyle::DrawingPageAutoStyle, "drawing-page");
+        KOdfGenericStyle dp(KOdfGenericStyle::DrawingPageAutoStyle, "drawing-page");
         dp.setAutoStyleInStylesDotXml(false);
         const MasterOrSlideContainer* m = p->getMaster(sc);
         const PerSlideHeadersFootersContainer* hfc = getPerSlideHF(sc);
@@ -1740,7 +1740,7 @@ void PptToOdp::defineAutomaticDrawingPageStyles(KoGenStyles& styles)
             hf = &nc->perSlideHFContainer2->hfAtom;
         }
         // TODO: derive from notes master slide style
-        KoGenStyle dp(KoGenStyle::DrawingPageAutoStyle, "drawing-page");
+        KOdfGenericStyle dp(KOdfGenericStyle::DrawingPageAutoStyle, "drawing-page");
         dp.setAutoStyleInStylesDotXml(false);
         const OfficeArtDggContainer& drawingGroup
                 = p->documentContainer->drawingGroup.OfficeArtDgg;
@@ -1816,7 +1816,7 @@ void PptToOdp::createMainStyles(KoGenStyles& styles)
        Define the standard list style
      */
     if (p->documentContainer) {
-        KoGenStyle list(KoGenStyle::ListStyle);
+        KOdfGenericStyle list(KOdfGenericStyle::ListStyle);
         defineListStyle(list,
                 p->documentContainer->documentTextInfo.textMasterStyleAtom);
         styles.insert(list, "standardListStyle",
@@ -1883,7 +1883,7 @@ void PptToOdp::createMainStyles(KoGenStyles& styles)
             drawing = &mm->drawing;
         }
 
-        KoGenStyle master(KoGenStyle::MasterPageStyle);
+        KOdfGenericStyle master(KOdfGenericStyle::MasterPageStyle);
         master.addAttribute("style:page-layout-name", slidePageLayoutName);
         master.addAttribute("draw:style-name", drawingPageStyles[m]);
         currentMaster = m;
@@ -2236,7 +2236,7 @@ int PptToOdp::processTextSpan(PptTextCFRun* cf, const MSO::TextContainer& tc, Wr
             }
         }
     }
-    KoGenStyle style(KoGenStyle::TextAutoStyle, "text");
+    KOdfGenericStyle style(KOdfGenericStyle::TextAutoStyle, "text");
     style.setAutoStyleInStylesDotXml(out.stylesxml);
     defineTextProperties(style, cf, 0, 0, si);
     out.xml.addAttribute("text:style-name", out.styles.insert(style));
@@ -2278,7 +2278,7 @@ int PptToOdp::processTextSpans(PptTextCFRun* cf, const MSO::TextContainer& tc, W
 
 QString PptToOdp::defineAutoListStyle(Writer& out, const PptTextPFRun& pf)
 {
-    KoGenStyle list(KoGenStyle::ListAutoStyle);
+    KOdfGenericStyle list(KOdfGenericStyle::ListAutoStyle);
     list.setAutoStyleInStylesDotXml(out.stylesxml);
     ListStyleInput info;
     info.pf = pf;
@@ -2357,7 +2357,7 @@ void PptToOdp::processTextLine(Writer& out,
     }
 
     out.xml.startElement("text:p");
-    KoGenStyle style(KoGenStyle::ParagraphAutoStyle, "paragraph");
+    KOdfGenericStyle style(KOdfGenericStyle::ParagraphAutoStyle, "paragraph");
     style.setAutoStyleInStylesDotXml(out.stylesxml);
     defineParagraphProperties(style, pf);
     out.xml.addAttribute("text:style-name", out.styles.insert(style));

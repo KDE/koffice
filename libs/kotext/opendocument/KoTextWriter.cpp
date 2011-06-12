@@ -54,7 +54,7 @@
 
 #include <KoShapeSavingContext.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoXmlNS.h>
 
@@ -600,12 +600,12 @@ QString KoTextWriter::saveParagraphStyle(const QTextBlockFormat &blockFormat, co
         // TODO zachmann: this could use the name of the saved style without saving it again
         // therefore we would need to store that information in the saving context
         if (originalParagraphStyle != defaultParagraphStyle) {
-            KoGenStyle style(KoGenStyle::ParagraphStyle, "paragraph");
+            KOdfGenericStyle style(KOdfGenericStyle::ParagraphStyle, "paragraph");
             originalParagraphStyle->saveOdf(style, context.mainStyles());
             generatedName = context.mainStyles().insert(style, internalName, KoGenStyles::DontAddNumberToName);
         }
     } else { // There are manual changes... We'll have to store them then
-        KoGenStyle style(KoGenStyle::ParagraphAutoStyle, "paragraph", internalName);
+        KOdfGenericStyle style(KOdfGenericStyle::ParagraphAutoStyle, "paragraph", internalName);
         if (context.isSet(KoShapeSavingContext::AutoStyleInStyleXml))
             style.setAutoStyleInStylesDotXml(true);
         if (originalParagraphStyle)
@@ -645,13 +645,13 @@ QString KoTextWriter::Private::saveCharacterStyle(const QTextCharFormat &charFor
     if (charStyle == (*originalCharStyle)) { // This is the real, unmodified character style.
         if (originalCharStyle != defaultCharStyle) {
             if (!charStyle.isEmpty()) {
-                KoGenStyle style(KoGenStyle::ParagraphStyle, "text");
+                KOdfGenericStyle style(KOdfGenericStyle::ParagraphStyle, "text");
                 originalCharStyle->saveOdf(style);
                 generatedName = context.mainStyles().insert(style, internalName, KoGenStyles::DontAddNumberToName);
             }
         }
     } else { // There are manual changes... We'll have to store them then
-        KoGenStyle style(KoGenStyle::ParagraphAutoStyle, "text", originalCharStyle != defaultCharStyle ? internalName : "" /*parent*/);
+        KOdfGenericStyle style(KOdfGenericStyle::ParagraphAutoStyle, "text", originalCharStyle != defaultCharStyle ? internalName : "" /*parent*/);
         if (context.isSet(KoShapeSavingContext::AutoStyleInStyleXml))
             style.setAutoStyleInStylesDotXml(true);
         charStyle.removeDuplicates(*originalCharStyle);
@@ -695,7 +695,7 @@ QHash<QTextList *, QString> KoTextWriter::Private::saveListStyles(QTextBlock blo
             }
             KoListStyle *listStyle = list->style();
             bool automatic = listStyle->styleId() == 0;
-            KoGenStyle style(automatic ? KoGenStyle::ListAutoStyle : KoGenStyle::ListStyle);
+            KOdfGenericStyle style(automatic ? KOdfGenericStyle::ListAutoStyle : KOdfGenericStyle::ListStyle);
             listStyle->saveOdf(style);
             QString generatedName = context.mainStyles().insert(style, listStyle->name(), KoGenStyles::AllowDuplicates);
             listStyles[textList] = generatedName;
@@ -704,7 +704,7 @@ QHash<QTextList *, QString> KoTextWriter::Private::saveListStyles(QTextBlock blo
             if (listStyles.contains(textList))
                 continue;
             KoListLevelProperties llp = KoListLevelProperties::fromTextList(textList);
-            KoGenStyle style(KoGenStyle::ListAutoStyle);
+            KOdfGenericStyle style(KOdfGenericStyle::ListAutoStyle);
             KoListStyle listStyle;
             listStyle.setLevelProperties(llp);
             listStyle.saveOdf(style);

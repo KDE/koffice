@@ -24,7 +24,7 @@
 #ifndef DOCXXMLNUMBERINGREADER_H
 #define DOCXXMLNUMBERINGREADER_H
 
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoListLevelProperties.h>
 #include <QMap>
 
@@ -68,7 +68,7 @@ protected:
 
     bool m_bulletStyle;
 
-    QMap<QString, KoGenStyle> m_abstractListStyles;
+    QMap<QString, KOdfGenericStyle> m_abstractListStyles;
     QMap<QString, QString> m_picBulletPaths;
     QMap<QString, QSize> m_picBulletSizes;
 

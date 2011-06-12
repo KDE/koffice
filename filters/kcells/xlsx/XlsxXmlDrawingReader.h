@@ -41,7 +41,7 @@ namespace MSOOXML
     class MsooXmlDiagramReaderContext;
 }
 
-//#include <KoGenStyle.h>
+//#include <KOdfGenericStyle.h>
 //#include <styles/KoCharacterStyle.h>
 
 class XlsxShape {

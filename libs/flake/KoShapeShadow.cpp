@@ -24,7 +24,7 @@
 #include "KoShape.h"
 #include "KoInsets.h"
 #include "KoPathShape.h"
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoViewConverter.h>
 #include <QtGui/QPainter>
 #include <QtCore/QAtomicInt>
@@ -51,7 +51,7 @@ KoShapeShadow::~KoShapeShadow()
     delete d;
 }
 
-void KoShapeShadow::fillStyle(KoGenStyle &style, KoShapeSavingContext &context)
+void KoShapeShadow::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
 {
     Q_UNUSED(context);
 

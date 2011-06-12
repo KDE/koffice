@@ -77,7 +77,7 @@ void KoColorBackground::paint(QPainter &painter, const QPainterPath &fillPath) c
     painter.drawPath(fillPath);
 }
 
-void KoColorBackground::fillStyle(KoGenStyle &style, KoShapeSavingContext &context)
+void KoColorBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext &context)
 {
     KoOdfGraphicStyles::saveOdfFillStyle(style, context.mainStyles(), QBrush(d->color, d->style));
 }

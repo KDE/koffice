@@ -29,7 +29,7 @@
 #include <MsooXmlCommonReader.h>
 #include "XlsxSharedString.h"
 
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <styles/KoCharacterStyle.h>
 
 class XlsxXmlWorksheetReaderContext;
@@ -72,7 +72,7 @@ protected:
 
     XlsxXmlWorksheetReaderContext* m_context;
 
-    KoGenStyle m_tableStyle;
+    KOdfGenericStyle m_tableStyle;
     //! for table:table-column
     int m_columnCount;
     //! for table:table-row

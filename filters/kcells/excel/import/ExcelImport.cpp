@@ -40,7 +40,7 @@
 #include <KoXmlWriter.h>
 #include <KoOdfWriteStore.h>
 #include <KoGenStyles.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoOdfNumberStyles.h>
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
@@ -1363,8 +1363,8 @@ void ExcelImport::Private::processNumberFormats()
         Format* f = workbook->format(i);
         QString& styleName = dataStyleMap[f->valueFormat()];
         if (styleName.isEmpty()) {
-            KoGenStyle s = NumberFormatParser::parse(f->valueFormat());
-            if (s.type() != KoGenStyle::ParagraphAutoStyle) {
+            KOdfGenericStyle s = NumberFormatParser::parse(f->valueFormat());
+            if (s.type() != KOdfGenericStyle::ParagraphAutoStyle) {
                 styleName = dataStyles->insert(s, "N");
             } else {
                 styleName = sNoStyle; // assign it a name anyway to prevent converting it twice

@@ -28,9 +28,9 @@
 #include "KoXmlNS.h"
 #include "KoUnit.h"
 
-KoGenStyle KoPageLayout::saveOdf() const
+KOdfGenericStyle KoPageLayout::saveOdf() const
 {
-    KoGenStyle style(KoGenStyle::PageLayoutStyle);
+    KOdfGenericStyle style(KOdfGenericStyle::PageLayoutStyle);
 
     // Save page dimension.
     style.addPropertyPt("fo:page-width", width);

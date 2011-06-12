@@ -297,7 +297,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_worksheet()
 //! @todo implement CASE #S202 for fixing the name
     body->addAttribute("table:name", m_context->worksheetName);
 
-    m_tableStyle = KoGenStyle(KoGenStyle::TableAutoStyle, "table");
+    m_tableStyle = KOdfGenericStyle(KOdfGenericStyle::TableAutoStyle, "table");
 //! @todo hardcoded master page name
     m_tableStyle.addAttribute("style:master-page-name",
                               QString("PageStyle_5f_Test_20_sheet_20__5f_%1").arg(m_context->worksheetNumber));
@@ -547,7 +547,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_cols()
 //! Saves information about column style
 void XlsxXmlWorksheetReader::saveColumnStyle(const QString& widthString)
 {
-    KoGenStyle tableColumnStyle(KoGenStyle::TableColumnAutoStyle, "table-column");
+    KOdfGenericStyle tableColumnStyle(KOdfGenericStyle::TableColumnAutoStyle, "table-column");
     tableColumnStyle.addProperty("style:column-width", widthString);
     tableColumnStyle.addProperty("fo:break-before", "auto");
 
@@ -701,7 +701,7 @@ QString XlsxXmlWorksheetReader::processRowStyle(const QString& _heightString)
     } else {
         height = m_context->sheet->m_defaultRowHeight;
     }
-    KoGenStyle tableRowStyle(KoGenStyle::TableRowAutoStyle, "table-row");
+    KOdfGenericStyle tableRowStyle(KOdfGenericStyle::TableRowAutoStyle, "table-row");
 //! @todo alter fo:break-before?
     tableRowStyle.addProperty("fo:break-before", MsooXmlReader::constAuto);
 //! @todo alter style:use-optimal-row-height?
@@ -856,7 +856,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
 
         if( cellCharacterStyle.verticalAlignment() == QTextCharFormat::AlignSuperScript 
             || cellCharacterStyle.verticalAlignment() == QTextCharFormat::AlignSubScript ) {
-            KoGenStyle charStyle( KoGenStyle::TextStyle, "text" );
+            KOdfGenericStyle charStyle( KOdfGenericStyle::TextStyle, "text" );
             cellCharacterStyle.saveOdf( charStyle );
             charStyleName = mainStyles->insert( charStyle, "T" );
         }
@@ -917,19 +917,19 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
                     return KoFilter::WrongFormat;
                 }
             }
-            const KoGenStyle* const style = mainStyles->style( formattedStyle );
+            const KOdfGenericStyle* const style = mainStyles->style( formattedStyle );
             if( style == 0 || valueIsNumeric(m_value) ) {
 //            body->addTextSpan(m_value);
                 cell->valueType = MsooXmlReader::constFloat;
                 cell->valueAttr = XlsxXmlWorksheetReader::officeValue;
             } else {
                 switch( style->type() ) {
-                case KoGenStyle::NumericDateStyle:
+                case KOdfGenericStyle::NumericDateStyle:
                     cell->valueType = MsooXmlReader::constDate;
                     cell->valueAttr = XlsxXmlWorksheetReader::officeDateValue;
                     m_value = QDate( 1899, 12, 30 ).addDays( m_value.toInt() ).toString( Qt::ISODate );
                     break;
-                case KoGenStyle::NumericTextStyle:
+                case KOdfGenericStyle::NumericTextStyle:
                     cell->valueType = MsooXmlReader::constString;
                     cell->valueAttr = XlsxXmlWorksheetReader::officeStringValue;
                     break;
@@ -964,7 +964,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_c()
             raiseUnexpectedAttributeValueError(s, "c@s");
             return KoFilter::WrongFormat;
         }
-        KoGenStyle cellStyle(KoGenStyle::TableCellAutoStyle, "table-cell");
+        KOdfGenericStyle cellStyle(KOdfGenericStyle::TableCellAutoStyle, "table-cell");
 
         if( charStyleName.isEmpty() ) {
             KoCharacterStyle cellCharacterStyle;
@@ -1119,8 +1119,8 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_v()
 QString XlsxXmlWorksheetReader::Private::processValueFormat(const QString& valueFormat)
 {
     NumberFormatParser::setStyles( q->mainStyles );
-    const KoGenStyle style = NumberFormatParser::parse( valueFormat );
-    if( style.type() == KoGenStyle::ParagraphAutoStyle )
+    const KOdfGenericStyle style = NumberFormatParser::parse( valueFormat );
+    if( style.type() == KOdfGenericStyle::ParagraphAutoStyle )
         return QString();
 
     return q->mainStyles->insert( style, "N" );
@@ -1148,8 +1148,8 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_mergeCell()
                 cell->columnsMerged = KCells::decodeColumnLabelText(toCell) - fromCol;
 
                 // correctly take right/bottom borders from the cells that are merged into this one
-                const KoGenStyle* origCellStyle = mainStyles->style(cell->styleName);
-                KoGenStyle cellStyle;
+                const KOdfGenericStyle* origCellStyle = mainStyles->style(cell->styleName);
+                KOdfGenericStyle cellStyle;
                 if (origCellStyle) {
                     cellStyle = *origCellStyle;
                 }
@@ -1158,7 +1158,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_mergeCell()
                     KCCell* lastCell = m_context->sheet->cell(fromCol, fromRow + cell->rowsMerged - 1, false);
                     kDebug() << lastCell;
                     if (lastCell) {
-                        const KoGenStyle* style = mainStyles->style(lastCell->styleName);
+                        const KOdfGenericStyle* style = mainStyles->style(lastCell->styleName);
                         kDebug() << lastCell->styleName;
                         if (style) {
                             QString val = style->property("fo:border-bottom");
@@ -1172,7 +1172,7 @@ KoFilter::ConversionStatus XlsxXmlWorksheetReader::read_mergeCell()
                 if (cell->columnsMerged > 1) {
                     KCCell* lastCell = m_context->sheet->cell(fromCol + cell->columnsMerged - 1, fromRow, false);
                     if (lastCell) {
-                        const KoGenStyle* style = mainStyles->style(lastCell->styleName);
+                        const KOdfGenericStyle* style = mainStyles->style(lastCell->styleName);
                         if (style) {
                             QString val = style->property("fo:border-right");
                             if (!val.isEmpty()) cellStyle.addProperty("fo:border-right", val);

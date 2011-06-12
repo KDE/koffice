@@ -301,7 +301,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_rect()
     MSOOXML::Utils::XmlWriteBuffer frameBuf;
     body = frameBuf.setWriter(body);
 
-    pushCurrentDrawStyle(new KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic"));
+    pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
 
     // Note that image fill is not yet supported in fill parameter, but this should be used
     // when it's done
@@ -383,7 +383,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_group()
 
     body->startElement("draw:g");
 
-    pushCurrentDrawStyle(new KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic"));
+    pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
 
     const QString hor_pos(m_vmlStyle.value("mso-position-horizontal"));
     const QString ver_pos(m_vmlStyle.value("mso-position-vertical"));
@@ -470,7 +470,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_roundrect()
     TRY_READ_ATTR_WITHOUT_NS(style)
     RETURN_IF_ERROR(parseCSS(style))
 
-    pushCurrentDrawStyle(new KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic"));
+    pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
 
     MSOOXML::Utils::XmlWriteBuffer frameBuf;
     body = frameBuf.setWriter(body);
@@ -776,7 +776,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_shape()
     MSOOXML::Utils::XmlWriteBuffer frameBuf;
     body = frameBuf.setWriter(body);
 
-    pushCurrentDrawStyle(new KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic"));
+    pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
 
     while (!atEnd()) {
         readNext();

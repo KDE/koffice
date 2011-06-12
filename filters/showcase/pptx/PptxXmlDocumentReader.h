@@ -80,8 +80,8 @@ protected:
     void initializeContext(PptxXmlSlideReaderContext& context, const MSOOXML::DrawingMLTheme& theme);
 
     // Default pptx styles
-    QVector<KoGenStyle> defaultParagraphStyles;
-    QVector<KoGenStyle> defaultTextStyles;
+    QVector<KOdfGenericStyle> defaultParagraphStyles;
+    QVector<KOdfGenericStyle> defaultTextStyles;
     QVector<MSOOXML::Utils::ParagraphBulletProperties> defaultListStyles;
     QVector<QString> defaultBulletColors;
     QVector<QString> defaultTextColors;

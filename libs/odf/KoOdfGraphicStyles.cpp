@@ -27,7 +27,7 @@
 
 #include <kdebug.h>
 
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include <KoStore.h>
 #include <KoStoreDevice.h>
@@ -39,7 +39,7 @@
 #include "KoOdfLoadingContext.h"
 #include "KoOdfStylesReader.h"
 
-void KoOdfGraphicStyles::saveOdfFillStyle(KoGenStyle &styleFill, KoGenStyles& mainStyles, const QBrush & brush)
+void KoOdfGraphicStyles::saveOdfFillStyle(KOdfGenericStyle &styleFill, KoGenStyles& mainStyles, const QBrush & brush)
 {
     switch (brush.style()) {
     case Qt::Dense1Pattern:
@@ -105,7 +105,7 @@ void KoOdfGraphicStyles::saveOdfFillStyle(KoGenStyle &styleFill, KoGenStyles& ma
     }
 }
 
-void KoOdfGraphicStyles::saveOdfStrokeStyle(KoGenStyle &styleStroke, KoGenStyles &mainStyles, const QPen &pen)
+void KoOdfGraphicStyles::saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KoGenStyles &mainStyles, const QPen &pen)
 {
     // TODO implement all possibilities
     switch (pen.style()) {
@@ -118,7 +118,7 @@ void KoOdfGraphicStyles::saveOdfStrokeStyle(KoGenStyle &styleStroke, KoGenStyles
     default: { // must be a dashed line
         styleStroke.addProperty("draw:stroke", "dash");
         // save stroke dash (14.14.7) which is severly limited, but still
-        KoGenStyle dashStyle(KoGenStyle::StrokeDashStyle);
+        KOdfGenericStyle dashStyle(KOdfGenericStyle::StrokeDashStyle);
         dashStyle.addAttribute("draw:style", "rect");
         QVector<qreal> dashes = pen.dashPattern();
         dashStyle.addAttribute("draw:dots1", static_cast<int>(1));
@@ -162,7 +162,7 @@ void KoOdfGraphicStyles::saveOdfStrokeStyle(KoGenStyle &styleStroke, KoGenStyles
 
 QString KoOdfGraphicStyles::saveOdfHatchStyle(KoGenStyles& mainStyles, const QBrush &brush)
 {
-    KoGenStyle hatchStyle(KoGenStyle::HatchStyle /*no family name*/);
+    KOdfGenericStyle hatchStyle(KOdfGenericStyle::HatchStyle /*no family name*/);
     hatchStyle.addAttribute("draw:color", brush.color().name());
     //hatchStyle.addAttribute( "draw:distance", m_distance ); not implemented into kpresenter
     switch (brush.style()) {
@@ -199,10 +199,10 @@ QString KoOdfGraphicStyles::saveOdfHatchStyle(KoGenStyles& mainStyles, const QBr
 
 QString KoOdfGraphicStyles::saveOdfGradientStyle(KoGenStyles &mainStyles, const QBrush &brush)
 {
-    KoGenStyle gradientStyle;
+    KOdfGenericStyle gradientStyle;
     if (brush.style() == Qt::RadialGradientPattern) {
         const QRadialGradient *gradient = static_cast<const QRadialGradient*>(brush.gradient());
-        gradientStyle = KoGenStyle(KoGenStyle::RadialGradientStyle /*no family name*/);
+        gradientStyle = KOdfGenericStyle(KOdfGenericStyle::RadialGradientStyle /*no family name*/);
         gradientStyle.addAttribute("svg:cx", QString("%1%").arg(gradient->center().x() * 100));
         gradientStyle.addAttribute("svg:cy", QString("%1%").arg(gradient->center().y() * 100));
         gradientStyle.addAttribute("svg:r",  QString("%1%").arg(gradient->radius() * 100));
@@ -210,14 +210,14 @@ QString KoOdfGraphicStyles::saveOdfGradientStyle(KoGenStyles &mainStyles, const 
         gradientStyle.addAttribute("svg:fy", QString("%1%").arg(gradient->focalPoint().y() * 100));
     } else if (brush.style() == Qt::LinearGradientPattern) {
         const QLinearGradient *gradient = static_cast<const QLinearGradient*>(brush.gradient());
-        gradientStyle = KoGenStyle(KoGenStyle::LinearGradientStyle /*no family name*/);
+        gradientStyle = KOdfGenericStyle(KOdfGenericStyle::LinearGradientStyle /*no family name*/);
         gradientStyle.addAttribute("svg:x1", QString("%1%").arg(gradient->start().x() * 100));
         gradientStyle.addAttribute("svg:y1", QString("%1%").arg(gradient->start().y() * 100));
         gradientStyle.addAttribute("svg:x2", QString("%1%").arg(gradient->finalStop().x() * 100));
         gradientStyle.addAttribute("svg:y2", QString("%1%").arg(gradient->finalStop().y() * 100));
     } else if (brush.style() == Qt::ConicalGradientPattern) {
         const QConicalGradient * gradient = static_cast<const QConicalGradient*>(brush.gradient());
-        gradientStyle = KoGenStyle(KoGenStyle::ConicalGradientStyle /*no family name*/);
+        gradientStyle = KOdfGenericStyle(KOdfGenericStyle::ConicalGradientStyle /*no family name*/);
         gradientStyle.addAttribute("svg:cx", QString("%1%").arg(gradient->center().x() * 100));
         gradientStyle.addAttribute("svg:cy", QString("%1%").arg(gradient->center().y() * 100));
         gradientStyle.addAttribute("draw:angle", QString("%1").arg(gradient->angle()));

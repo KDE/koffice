@@ -197,7 +197,7 @@ void KoPAPage::paintPage(QPainter &painter, KoZoomHandler &zoomHandler)
     shapePainter.paint(painter, zoomHandler);
 }
 
-void KoPAPage::saveOdfPageStyleData(KoGenStyle &style, KoPASavingContext &paContext) const
+void KoPAPage::saveOdfPageStyleData(KOdfGenericStyle &style, KoPASavingContext &paContext) const
 {
     if ((m_pageProperties & UseMasterBackground) == 0) {
         KoPAPageBase::saveOdfPageStyleData(style, paContext);

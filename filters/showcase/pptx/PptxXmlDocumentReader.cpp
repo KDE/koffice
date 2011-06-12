@@ -71,7 +71,7 @@ public:
 
     // Several because there are several masterpages
     QVector<QString> masterPageDrawStyleNames;
-    QVector<KoGenStyle> masterPageStyles;
+    QVector<KOdfGenericStyle> masterPageStyles;
     QVector<QString> masterPageFrames;
 
     QMap<QString, PptxSlideMasterPageProperties> slideMasterPageProperties;
@@ -594,7 +594,7 @@ KoFilter::ConversionStatus PptxXmlDocumentReader::read_sldSz()
 KoFilter::ConversionStatus PptxXmlDocumentReader::read_defaultTextStyle()
 {
     READ_PROLOGUE
-    m_currentListStyle = KoGenStyle(KoGenStyle::ListStyle, "list");
+    m_currentListStyle = KOdfGenericStyle(KOdfGenericStyle::ListStyle, "list");
 
     while (!atEnd()) {
         readNext();
@@ -696,9 +696,9 @@ KoFilter::ConversionStatus PptxXmlDocumentReader::read_presentation()
         unsigned frameCount = d->masterPageFrames.size() / 2;
         unsigned index = 0;
         while (index < frameCount) {
-            d->masterPageStyles.push_back(KoGenStyle(KoGenStyle::MasterPageStyle));
+            d->masterPageStyles.push_back(KOdfGenericStyle(KOdfGenericStyle::MasterPageStyle));
             if (d->sldSzRead) {
-                KoGenStyle pageLayoutStyle(d->pageLayout.saveOdf());
+                KOdfGenericStyle pageLayoutStyle(d->pageLayout.saveOdf());
                 const QString pageLayoutStyleName(mainStyles->insert(pageLayoutStyle, "PM"));
                 mainStyles->markStyleForStylesXml(pageLayoutStyleName);
                 kDebug() << "pageLayoutStyleName:" << pageLayoutStyleName;

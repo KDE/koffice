@@ -91,7 +91,7 @@ public:
     /// Returns the strokes brush
     QBrush lineBrush() const;
 
-    virtual void saveOdf(KoGenStyle &style, KoShapeSavingContext &context) const;
+    virtual void saveOdf(KOdfGenericStyle &style, KoShapeSavingContext &context) const;
     virtual void borderInsets(KoInsets &insets) const;
     virtual bool hasTransparency() const;
 

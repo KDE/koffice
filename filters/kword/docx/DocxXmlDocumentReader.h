@@ -32,7 +32,7 @@
 #include "DocxXmlNotesReader.h"
 
 #include <KoXmlWriter.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <styles/KoCharacterStyle.h>
 
 //#define NO_DRAWINGML_PICTURE // disables pic:pic, etc. in MsooXmlCommonReader
@@ -185,20 +185,20 @@ protected:
     bool m_createSectionStyle;
     QString m_currentSectionStyleName;
     bool m_createSectionToNext;
-    KoGenStyle m_currentPageStyle;
-    KoGenStyle m_masterPageStyle;
+    KOdfGenericStyle m_currentPageStyle;
+    KOdfGenericStyle m_masterPageStyle;
 
     DocxXmlDocumentReaderContext* m_context;
 
     KoOdfWriters *m_writers; // Needed to create new relationship for header/footer
 
-    KoGenStyle m_currentTableCellStyle;
-    KoGenStyle m_currentTableCellStyleLeft;
-    KoGenStyle m_currentTableCellStyleRight;
-    KoGenStyle m_currentTableCellStyleTop;
-    KoGenStyle m_currentTableCellStyleBottom;
-    KoGenStyle m_currentTableCellStyleInsideV;
-    KoGenStyle m_currentTableCellStyleInsideH;
+    KOdfGenericStyle m_currentTableCellStyle;
+    KOdfGenericStyle m_currentTableCellStyleLeft;
+    KOdfGenericStyle m_currentTableCellStyleRight;
+    KOdfGenericStyle m_currentTableCellStyleTop;
+    KOdfGenericStyle m_currentTableCellStyleBottom;
+    KOdfGenericStyle m_currentTableCellStyleInsideV;
+    KOdfGenericStyle m_currentTableCellStyleInsideH;
 
     enum BorderSide {
         TopBorder, BottomBorder, LeftBorder, RightBorder, InsideH, InsideV
@@ -238,7 +238,7 @@ private:
 
     //! Applies border styles and paddings obtained in readBorderElement()
     //! to style @a style (paragraph or page...)
-    void applyBorders(KoGenStyle *style, QMap<QString, BorderSide> sourceBorder, QMap<QString, BorderSide> sourcePadding);
+    void applyBorders(KOdfGenericStyle *style, QMap<QString, BorderSide> sourceBorder, QMap<QString, BorderSide> sourcePadding);
 
     enum ComplexFieldCharType {
        NoComplexFieldCharType, HyperlinkComplexFieldCharType, ReferenceComplexFieldCharType,
@@ -274,7 +274,7 @@ private:
     uint m_currentTableNumber; //!< table counter, from 0
     uint m_currentTableRowNumber; //!< row counter, from 0, initialized in read_tbl()
     uint m_currentTableColumnNumber; //!< column counter, from 0, initialized in read_tr()
-    KoGenStyle m_currentTableRowStyle;
+    KOdfGenericStyle m_currentTableRowStyle;
     QString m_currentTableName;
     qreal m_currentTableWidth; //!< in cm
     bool m_wasCaption; // bookkeeping to ensure next para is suppressed if a caption is encountered

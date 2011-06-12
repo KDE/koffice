@@ -44,9 +44,9 @@ DrawingMLGradientFill::DrawingMLGradientFill(QVector<qreal> shadeModifier, QVect
 {
 }
 
-void DrawingMLGradientFill::writeStyles(KoGenStyles& styles, KoGenStyle *graphicStyle, QColor color)
+void DrawingMLGradientFill::writeStyles(KoGenStyles& styles, KOdfGenericStyle *graphicStyle, QColor color)
 {
-    KoGenStyle gradientStyle = KoGenStyle(KoGenStyle::GradientStyle);
+    KOdfGenericStyle gradientStyle = KOdfGenericStyle(KOdfGenericStyle::GradientStyle);
 
     // This is over-simplified gradient style
     gradientStyle.addAttribute("draw:style", "linear");
@@ -82,11 +82,11 @@ DrawingMLBlipFill::DrawingMLBlipFill(QString filePath) : m_filePath(filePath)
 {
 }
 
-void DrawingMLBlipFill::writeStyles(KoGenStyles& styles, KoGenStyle *graphicStyle, QColor color)
+void DrawingMLBlipFill::writeStyles(KoGenStyles& styles, KOdfGenericStyle *graphicStyle, QColor color)
 {
     Q_UNUSED(color)
 
-    KoGenStyle fillImageStyle(KoGenStyle::FillImageStyle);
+    KOdfGenericStyle fillImageStyle(KOdfGenericStyle::FillImageStyle);
     fillImageStyle.addAttribute("xlink:href", m_filePath);
     fillImageStyle.addAttribute("xlink:type", "simple");
     fillImageStyle.addAttribute("xlink:show", "embed");
@@ -97,7 +97,7 @@ void DrawingMLBlipFill::writeStyles(KoGenStyles& styles, KoGenStyle *graphicStyl
     graphicStyle->addProperty("draw:fill-image-name", fillImageName);
 }
 
-void DrawingMLSolidFill::writeStyles(KoGenStyles& styles, KoGenStyle *graphicStyle, QColor color)
+void DrawingMLSolidFill::writeStyles(KoGenStyles& styles, KOdfGenericStyle *graphicStyle, QColor color)
 {
     if (color.isValid()) {
         QBrush brush(color, Qt::SolidPattern);

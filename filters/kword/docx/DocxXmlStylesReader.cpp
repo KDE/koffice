@@ -52,9 +52,9 @@ void DocxXmlStylesReader::init()
     m_defaultNamespace = QLatin1String(MSOOXML_CURRENT_NS ":");
 }
 
-void DocxXmlStylesReader::createDefaultStyle(KoGenStyle::Type type, const char* family)
+void DocxXmlStylesReader::createDefaultStyle(KOdfGenericStyle::Type type, const char* family)
 {
-    KoGenStyle *style = new KoGenStyle(type, family);
+    KOdfGenericStyle *style = new KOdfGenericStyle(type, family);
     style->setDefaultStyle(true);
     m_defaultStyles.insert(family, style);
 }
@@ -101,11 +101,11 @@ KoFilter::ConversionStatus DocxXmlStylesReader::read(MSOOXML::MsooXmlReaderConte
     qDeleteAll(m_defaultStyles);
     m_defaultStyles.clear();
 
-    createDefaultStyle(KoGenStyle::ParagraphStyle, "paragraph");
-    createDefaultStyle(KoGenStyle::TextStyle, "text");
-    createDefaultStyle(KoGenStyle::TableStyle, "table");
-    //createDefaultStyle(KoGenStyle::GraphicStyle, "graphic");
-    //createDefaultStyle(KoGenStyle::TableRowStyle, "table-row");
+    createDefaultStyle(KOdfGenericStyle::ParagraphStyle, "paragraph");
+    createDefaultStyle(KOdfGenericStyle::TextStyle, "text");
+    createDefaultStyle(KOdfGenericStyle::TableStyle, "table");
+    //createDefaultStyle(KOdfGenericStyle::GraphicStyle, "graphic");
+    //createDefaultStyle(KOdfGenericStyle::TableRowStyle, "table-row");
     //createDefaultStyle("numbering");
 
     while (!atEnd()) {
@@ -124,7 +124,7 @@ KoFilter::ConversionStatus DocxXmlStylesReader::read(MSOOXML::MsooXmlReaderConte
     }
 
     // add default styles:
-    for (QMap<QByteArray, KoGenStyle*>::ConstIterator it(m_defaultStyles.constBegin());
+    for (QMap<QByteArray, KOdfGenericStyle*>::ConstIterator it(m_defaultStyles.constBegin());
          it!=m_defaultStyles.constEnd(); ++it)
     {
         kDebug() << it.key();
@@ -164,8 +164,8 @@ KoFilter::ConversionStatus DocxXmlStylesReader::read_docDefaults()
 {
     READ_PROLOGUE
 
-    m_currentTextStyle = KoGenStyle(KoGenStyle::TextStyle, "text");
-    m_currentParagraphStyle = KoGenStyle(KoGenStyle::ParagraphStyle, "paragraph");
+    m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextStyle, "text");
+    m_currentParagraphStyle = KOdfGenericStyle(KOdfGenericStyle::ParagraphStyle, "paragraph");
 
     while (!atEnd()) {
         readNext();
@@ -342,30 +342,30 @@ KoFilter::ConversionStatus DocxXmlStylesReader::read_style()
         kDebug() << "Setting default style of family" << odfType << "...";
         if (type == "character") {
             m_currentTextStyle = *m_defaultStyles.value(odfType.toLatin1());
-            MSOOXML::Utils::copyPropertiesFromStyle(m_defaultTextStyle, m_currentTextStyle, KoGenStyle::TextType);
+            MSOOXML::Utils::copyPropertiesFromStyle(m_defaultTextStyle, m_currentTextStyle, KOdfGenericStyle::TextType);
         }
         else if (type == "paragraph") {
             m_currentParagraphStyle = *m_defaultStyles.value(odfType.toLatin1());
-            MSOOXML::Utils::copyPropertiesFromStyle(m_defaultParagraphStyle, m_currentParagraphStyle, KoGenStyle::TextType);
+            MSOOXML::Utils::copyPropertiesFromStyle(m_defaultParagraphStyle, m_currentParagraphStyle, KOdfGenericStyle::TextType);
         }
     }
     else {
         if (type == "character") {
-            m_currentTextStyle = KoGenStyle(KoGenStyle::TextStyle, odfType.toLatin1());
+            m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextStyle, odfType.toLatin1());
         }
         else if (type == "paragraph") {
-            m_currentParagraphStyle = KoGenStyle(KoGenStyle::ParagraphStyle, odfType.toLatin1());
+            m_currentParagraphStyle = KOdfGenericStyle(KOdfGenericStyle::ParagraphStyle, odfType.toLatin1());
         }
         else if (type == "table") {
-            m_currentTableStyle = KoGenStyle(KoGenStyle::TableStyle, odfType.toLatin1());
+            m_currentTableStyle = KOdfGenericStyle(KOdfGenericStyle::TableStyle, odfType.toLatin1());
 
             // These are needed because ooxml stores table styles differently from odf
-            m_currentTableCellStyleLeft = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
-            m_currentTableCellStyleRight = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
-            m_currentTableCellStyleTop = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
-            m_currentTableCellStyleBottom = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
-            m_currentTableCellStyleInsideV = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
-            m_currentTableCellStyleInsideH = KoGenStyle(KoGenStyle::TableCellStyle, "table-cell");
+            m_currentTableCellStyleLeft = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");
+            m_currentTableCellStyleRight = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");
+            m_currentTableCellStyleTop = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");
+            m_currentTableCellStyleBottom = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");
+            m_currentTableCellStyleInsideV = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");
+            m_currentTableCellStyleInsideH = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");
         }
     }
     MSOOXML::Utils::Setter<bool> currentTextStylePredefinedSetter(&m_currentTextStylePredefined, false);
@@ -424,7 +424,7 @@ KoFilter::ConversionStatus DocxXmlStylesReader::read_style()
             *m_defaultStyles.value(odfType.toLatin1()) = m_currentTextStyle;
         }
         else if (type == "paragraph") {
-            MSOOXML::Utils::copyPropertiesFromStyle(m_currentTextStyle, m_currentParagraphStyle, KoGenStyle::TextType);
+            MSOOXML::Utils::copyPropertiesFromStyle(m_currentTextStyle, m_currentParagraphStyle, KOdfGenericStyle::TextType);
             *m_defaultStyles.value(odfType.toLatin1()) = m_currentParagraphStyle;
         }
     }
@@ -442,7 +442,7 @@ KoFilter::ConversionStatus DocxXmlStylesReader::read_style()
         else if (type == "paragraph") {
             m_currentParagraphStyle.addAttribute("style:class", "text");
 
-            MSOOXML::Utils::copyPropertiesFromStyle(m_currentTextStyle, m_currentParagraphStyle, KoGenStyle::TextType);
+            MSOOXML::Utils::copyPropertiesFromStyle(m_currentTextStyle, m_currentParagraphStyle, KOdfGenericStyle::TextType);
             styleName = mainStyles->insert(m_currentParagraphStyle, styleName, insertionFlags);
         }
         else if (type == "table") {
@@ -463,8 +463,8 @@ KoFilter::ConversionStatus DocxXmlStylesReader::read_style()
         }
     }
 
-    m_currentParagraphStyle = KoGenStyle();
-    m_currentTextStyle = KoGenStyle();
+    m_currentParagraphStyle = KOdfGenericStyle();
+    m_currentTextStyle = KOdfGenericStyle();
 
     READ_EPILOGUE
 }

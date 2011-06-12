@@ -29,7 +29,7 @@
 #include <QtCore/QSet>
 #include <QtCore/QString>
 #include <QtCore/QFlags>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 
 class KoStore;
 class KOdfFontData;
@@ -67,11 +67,11 @@ class KOODF_EXPORT KoGenStyles
 public:
     /// Single style with assigned name
     struct NamedStyle {
-        const KoGenStyle* style; ///< @note owned by the collection
+        const KOdfGenericStyle* style; ///< @note owned by the collection
         QString name;
     };
 
-    typedef QMultiMap<KoGenStyle, QString> StyleMap;
+    typedef QMultiMap<KOdfGenericStyle, QString> StyleMap;
 
     KoGenStyles();
     ~KoGenStyles();
@@ -83,8 +83,8 @@ public:
      * If DontAddNumberToName is set, the first name that will be tried is "name", and only if
      * that one exists, then "name1" is tried. Set DontAddNumberToName if the name given as
      * argument is supposed to be the full style name.
-     * If AllowDuplicates is set, a unique style name is generated even if a similar KoGenStyle
-     * already exists. In other words, the collection will now contain two equal KoGenStyle
+     * If AllowDuplicates is set, a unique style name is generated even if a similar KOdfGenericStyle
+     * already exists. In other words, the collection will now contain two equal KOdfGenericStyle
      * and generate them with different style names.
      */
     enum InsertionFlag {
@@ -109,7 +109,7 @@ public:
      *
      * @return the name that has been assigned for the inserted style
      */
-    QString insert(const KoGenStyle &style, const QString &baseName = QString(), InsertionFlags flags = NoFlag);
+    QString insert(const KOdfGenericStyle &style, const QString &baseName = QString(), InsertionFlags flags = NoFlag);
 
     /**
      * Return the entire collection of styles
@@ -121,25 +121,25 @@ public:
      * Return all styles of a given type (NOT marked for styles.xml).
      * Use this for saving the styles.
      *
-     * @param type the style type, see the KoGenStyle constructor
+     * @param type the style type, see the KOdfGenericStyle constructor
      * @see insert()
      */
-    QList<KoGenStyles::NamedStyle> styles(KoGenStyle::Type type) const;
+    QList<KoGenStyles::NamedStyle> styles(KOdfGenericStyle::Type type) const;
 
     /**
      * Return styles of a given type, marked for styles.xml,
      * Use this for saving the styles.
      *
-     * @param type the style type, see the KoGenStyle constructor
+     * @param type the style type, see the KOdfGenericStyle constructor
      * @see insert()
      */
-    QList<KoGenStyles::NamedStyle> stylesForStylesXml(KoGenStyle::Type type) const;
+    QList<KoGenStyles::NamedStyle> stylesForStylesXml(KOdfGenericStyle::Type type) const;
 
     /**
      * @return an existing style by name. If no such style exists, 0 is returned.
      * @param family if passed the odf style:family is used to limit the result to that type
      */
-    const KoGenStyle *style(const QString &name, const QByteArray &family = QByteArray()) const;
+    const KOdfGenericStyle *style(const QString &name, const QByteArray &family = QByteArray()) const;
 
     /**
      * @return an existing style by name, which can be modified.
@@ -149,19 +149,19 @@ public:
      * Only do this if you know for sure no other 'user' of that style will
      * be affected.
      */
-    KoGenStyle* styleForModification(const QString &name);
+    KOdfGenericStyle* styleForModification(const QString &name);
 
     /**
      * Mark a given automatic style as being needed in styles.xml.
      * For instance styles used by headers and footers need to go there, since
      * they are saved in styles.xml, and styles.xml must be independent from content.xml.
      *
-     * Equivalent to using KoGenStyle::setAutoStyleInStylesDotXml() but this can be done after insert().
+     * Equivalent to using KOdfGenericStyle::setAutoStyleInStylesDotXml() but this can be done after insert().
      *
      * This operation can't be undone; once styles are promoted they can't go back
      * to being content.xml-only.
      *
-     * @see styles, KoGenStyle::setAutoStyleInStylesDotXml
+     * @see styles, KOdfGenericStyle::setAutoStyleInStylesDotXml
      */
     void markStyleForStylesXml(const QString &name);
 

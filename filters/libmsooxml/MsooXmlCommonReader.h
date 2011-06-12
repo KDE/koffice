@@ -24,7 +24,7 @@
 #ifndef MSOOXMLCOMMONREADER_H
 #define MSOOXMLCOMMONREADER_H
 
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <styles/KoCharacterStyle.h>
 #include <styles/KoListLevelProperties.h>
 
@@ -51,30 +51,30 @@ protected:
     Q_DECLARE_FLAGS(read_p_args, read_p_arg)
     read_p_args m_read_p_args;
 
-    KoGenStyle* m_currentDrawStyle; //! used by all classes that need a graphics style.
-    QList<KoGenStyle*>  m_drawStyleStack;
-    KoGenStyle m_currentGradientStyle;
-    void pushCurrentDrawStyle(KoGenStyle *newStyle);
+    KOdfGenericStyle* m_currentDrawStyle; //! used by all classes that need a graphics style.
+    QList<KOdfGenericStyle*>  m_drawStyleStack;
+    KOdfGenericStyle m_currentGradientStyle;
+    void pushCurrentDrawStyle(KOdfGenericStyle *newStyle);
     void popCurrentDrawStyle();
 
     //! Used for creating style in w:pPr (style:style/@style:name attr)
-    KoGenStyle m_currentParagraphStyle;
+    KOdfGenericStyle m_currentParagraphStyle;
     bool m_currentParagraphStylePredefined; //!< true if m_currentParagraphStyle shouldn't be created in read_pPr
 
-    KoGenStyle m_currentTableStyle;
+    KOdfGenericStyle m_currentTableStyle;
 
     void setupParagraphStyle();
 
-    KoGenStyle m_currentTextStyle;
+    KOdfGenericStyle m_currentTextStyle;
     bool m_currentTextStylePredefined; //!< true if m_currentTextStyle shouldn't be created in read_rPr
     KoCharacterStyle* m_currentTextStyleProperties;
 
-    KoGenStyle m_currentListStyle;
+    KOdfGenericStyle m_currentListStyle;
     MSOOXML::Utils::ParagraphBulletProperties m_currentBulletProperties;
     // Properties for potentially all 9 lvls which are possible
     QMap<int, MSOOXML::Utils::ParagraphBulletProperties> m_currentCombinedBulletProperties;
-    QMap<int, KoGenStyle> m_currentCombinedParagraphStyles;
-    QMap<int, KoGenStyle> m_currentCombinedTextStyles;
+    QMap<int, KOdfGenericStyle> m_currentCombinedParagraphStyles;
+    QMap<int, KOdfGenericStyle> m_currentCombinedTextStyles;
 
     //! Style (from styles.xml) to apply to the current paragraph or similar element, set by read_pStyle()
     QString m_currentStyleName;

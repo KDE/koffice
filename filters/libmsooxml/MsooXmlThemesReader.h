@@ -131,7 +131,7 @@ public:
     // This function will create the fill style and fill the approriate styles
     // and filePath if needed.
     // Number is used to index to correct style, color is the color which should be used when making the styles
-    virtual void writeStyles(KoGenStyles& styles, KoGenStyle *graphicStyle, QColor color) = 0;
+    virtual void writeStyles(KoGenStyles& styles, KOdfGenericStyle *graphicStyle, QColor color) = 0;
 
     virtual DrawingMLFillBase* clone() const = 0;
 };
@@ -139,7 +139,7 @@ public:
 class MSOOXML_EXPORT DrawingMLSolidFill : public DrawingMLFillBase
 {
 public:
-    void writeStyles(KoGenStyles& styles, KoGenStyle *graphicStyle, QColor color);
+    void writeStyles(KoGenStyles& styles, KOdfGenericStyle *graphicStyle, QColor color);
 
     DrawingMLSolidFill* clone() const { return new DrawingMLSolidFill(*this); }
 };
@@ -148,7 +148,7 @@ class MSOOXML_EXPORT DrawingMLBlipFill : public DrawingMLFillBase
 {
 public:
     DrawingMLBlipFill(QString filePath);
-    void writeStyles(KoGenStyles& styles, KoGenStyle *graphicStyle, QColor color);
+    void writeStyles(KoGenStyles& styles, KOdfGenericStyle *graphicStyle, QColor color);
 
     DrawingMLBlipFill* clone() const { return new DrawingMLBlipFill(*this); }
 
@@ -161,7 +161,7 @@ class MSOOXML_EXPORT DrawingMLGradientFill : public DrawingMLFillBase
 public:
     // Simplified gradient constuctor
     DrawingMLGradientFill(QVector<qreal> shadeModifier, QVector<qreal> tintModifier, QVector<qreal> satModifier, QVector<int> alphaModifier);
-    void writeStyles(KoGenStyles& styles, KoGenStyle *graphicStyle, QColor color);
+    void writeStyles(KoGenStyles& styles, KOdfGenericStyle *graphicStyle, QColor color);
 
     DrawingMLGradientFill* clone() const { return new DrawingMLGradientFill(*this); }
 

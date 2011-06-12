@@ -24,7 +24,7 @@
 #include "flake_export.h"
 
 class KoShape;
-class KoGenStyle;
+class KOdfGenericStyle;
 class KoShapeSavingContext;
 class KoViewConverter;
 struct KoInsets;
@@ -53,7 +53,7 @@ public:
      * @param style object
      * @param context used for saving
      */
-    virtual void saveOdf(KoGenStyle &style, KoShapeSavingContext &context) const = 0;
+    virtual void saveOdf(KOdfGenericStyle &style, KoShapeSavingContext &context) const = 0;
 
     /**
      * Return a borderInsets object filled with the size inside the shape that this border takes.

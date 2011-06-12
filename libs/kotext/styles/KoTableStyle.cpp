@@ -22,7 +22,7 @@
  */
 #include "KoTableStyle.h"
 #include "KoStyleManager.h"
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoGenStyles.h>
 #include "Styles_p.h"
 #include "KoTextDocument.h"
@@ -479,7 +479,7 @@ void KoTableStyle::removeDuplicates(const KoTableStyle &other)
     d->stylesPrivate.removeDuplicates(other.d->stylesPrivate);
 }
 
-void KoTableStyle::saveOdf(KoGenStyle &style)
+void KoTableStyle::saveOdf(KOdfGenericStyle &style)
 {
     Q_UNUSED(style);
 /*
@@ -493,7 +493,7 @@ void KoTableStyle::saveOdf(KoGenStyle &style)
                 Qt::Alignment alignment = (Qt::Alignment) alignValue;
                 QString align = KoText::alignmentToString(alignment);
                 if (!align.isEmpty())
-                    style.addProperty("fo:text-align", align, KoGenStyle::ParagraphType);
+                    style.addProperty("fo:text-align", align, KOdfGenericStyle::ParagraphType);
             }
         } else if (key == KoTableStyle::TextProgressionDirection) {
             int directionValue = 0;
@@ -508,32 +508,32 @@ void KoTableStyle::saveOdf(KoGenStyle &style)
                 else if (directionValue == KoText::TopBottomRightLeft)
                     direction = "tb";
                 if (!direction.isEmpty())
-                    style.addProperty("style:writing-mode", direction, KoGenStyle::ParagraphType);
+                    style.addProperty("style:writing-mode", direction, KOdfGenericStyle::ParagraphType);
             }
         } else if (key == KoTableStyle::BreakBefore) {
             if (breakBefore())
-                style.addProperty("fo:break-before", "page", KoGenStyle::ParagraphType);
+                style.addProperty("fo:break-before", "page", KOdfGenericStyle::ParagraphType);
         } else if (key == KoTableStyle::BreakAfter) {
             if (breakAfter())
-                style.addProperty("fo:break-after", "page", KoGenStyle::ParagraphType);
+                style.addProperty("fo:break-after", "page", KOdfGenericStyle::ParagraphType);
         } else if (key == KoTableStyle::CollapsingBorders) {
             if (collapsingBorderModel())
-                style.addProperty("style:border-bodel", "collapsing", KoGenStyle::ParagraphType);
+                style.addProperty("style:border-bodel", "collapsing", KOdfGenericStyle::ParagraphType);
         } else if (key == QTextFormat::BackgroundBrush) {
             QBrush backBrush = background();
             if (backBrush.style() != Qt::NoBrush)
-                style.addProperty("fo:background-color", backBrush.color().name(), KoGenStyle::ParagraphType);
+                style.addProperty("fo:background-color", backBrush.color().name(), KOdfGenericStyle::ParagraphType);
             else
-                style.addProperty("fo:background-color", "transparent", KoGenStyle::ParagraphType);
+                style.addProperty("fo:background-color", "transparent", KOdfGenericStyle::ParagraphType);
     // Margin
         } else if (key == QTextFormat::BlockLeftMargin) {
-            style.addPropertyPt("fo:margin-left", leftMargin(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:margin-left", leftMargin(), KOdfGenericStyle::ParagraphType);
         } else if (key == QTextFormat::BlockRightMargin) {
-            style.addPropertyPt("fo:margin-right", rightMargin(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:margin-right", rightMargin(), KOdfGenericStyle::ParagraphType);
         } else if (key == QTextFormat::BlockTopMargin) {
-            style.addPropertyPt("fo:margin-top", topMargin(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:margin-top", topMargin(), KOdfGenericStyle::ParagraphType);
         } else if (key == QTextFormat::BlockBottomMargin) {
-            style.addPropertyPt("fo:margin-bottom", bottomMargin(), KoGenStyle::ParagraphType);
+            style.addPropertyPt("fo:margin-bottom", bottomMargin(), KOdfGenericStyle::ParagraphType);
     }
 */
 }

@@ -19,7 +19,7 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
 */
-#include "KoGenStyle.h"
+#include "KOdfGenericStyle.h"
 #include "KoGenStyles.h"
 
 #include <KoXmlWriter.h>
@@ -45,7 +45,7 @@ static int compareMap(const QMap<QString, QString>& map1, const QMap<QString, QS
 }
 
 
-KoGenStyle::KoGenStyle(Type type, const char* familyName,
+KOdfGenericStyle::KOdfGenericStyle(Type type, const char* familyName,
                        const QString& parentName)
         : m_type(type), m_familyName(familyName), m_parentName(parentName),
         m_autoStyleInStylesDotXml(false), m_defaultStyle(false)
@@ -105,7 +105,7 @@ KoGenStyle::KoGenStyle(Type type, const char* familyName,
     }
 }
 
-KoGenStyle::~KoGenStyle()
+KOdfGenericStyle::~KOdfGenericStyle()
 {
 }
 
@@ -113,21 +113,21 @@ KoGenStyle::~KoGenStyle()
  * The order of this list is important; e.g. a graphic-properties must
  * precede a text-properties always. See the Relax NG to check the order.
  */
-static KoGenStyle::PropertyType s_propertyTypes[] = {
-    KoGenStyle::DefaultType,
-    KoGenStyle::SectionType,
-    KoGenStyle::RubyType,
-    KoGenStyle::TableType,
-    KoGenStyle::TableColumnType,
-    KoGenStyle::TableRowType,
-    KoGenStyle::TableCellType,
-    KoGenStyle::DrawingPageType,
-    KoGenStyle::ChartType,
-    KoGenStyle::GraphicType,
-    KoGenStyle::ParagraphType,
-    KoGenStyle::TextType,
-    KoGenStyle::PageHeaderType,
-    KoGenStyle::PageFooterType,
+static KOdfGenericStyle::PropertyType s_propertyTypes[] = {
+    KOdfGenericStyle::DefaultType,
+    KOdfGenericStyle::SectionType,
+    KOdfGenericStyle::RubyType,
+    KOdfGenericStyle::TableType,
+    KOdfGenericStyle::TableColumnType,
+    KOdfGenericStyle::TableRowType,
+    KOdfGenericStyle::TableCellType,
+    KOdfGenericStyle::DrawingPageType,
+    KOdfGenericStyle::ChartType,
+    KOdfGenericStyle::GraphicType,
+    KOdfGenericStyle::ParagraphType,
+    KOdfGenericStyle::TextType,
+    KOdfGenericStyle::PageHeaderType,
+    KOdfGenericStyle::PageFooterType,
 };
 
 static const char* s_propertyNames[] = {
@@ -149,18 +149,18 @@ static const char* s_propertyNames[] = {
 
 static const int s_propertyNamesCount = sizeof(s_propertyNames) / sizeof(*s_propertyNames);
 
-static KoGenStyle::PropertyType propertyTypeByElementName(const char* propertiesElementName)
+static KOdfGenericStyle::PropertyType propertyTypeByElementName(const char* propertiesElementName)
 {
     for (int i = 0; i < s_propertyNamesCount; ++i) {
         if (qstrcmp(s_propertyNames[i], propertiesElementName) == 0) {
             return s_propertyTypes[i];
         }
     }
-    return KoGenStyle::DefaultType;
+    return KOdfGenericStyle::DefaultType;
 }
 
-void KoGenStyle::writeStyleProperties(KoXmlWriter* writer, PropertyType type,
-                                      const KoGenStyle* parentStyle) const
+void KOdfGenericStyle::writeStyleProperties(KoXmlWriter* writer, PropertyType type,
+                                      const KOdfGenericStyle* parentStyle) const
 {
     const char* elementName = 0;
     for (int i=0; i<s_propertyNamesCount; ++i) {
@@ -191,11 +191,11 @@ void KoGenStyle::writeStyleProperties(KoXmlWriter* writer, PropertyType type,
     }
 }
 
-void KoGenStyle::writeStyle(KoXmlWriter* writer, const KoGenStyles& styles, const char* elementName, const QString& name, const char* propertiesElementName, bool closeElement, bool drawElement) const
+void KOdfGenericStyle::writeStyle(KoXmlWriter* writer, const KoGenStyles& styles, const char* elementName, const QString& name, const char* propertiesElementName, bool closeElement, bool drawElement) const
 {
     //kDebug(30003) <<"writing out style" << name <<" display-name=" << m_attributes["style:display-name"] <<" family=" << m_familyName;
     writer->startElement(elementName);
-    const KoGenStyle* parentStyle = 0;
+    const KOdfGenericStyle* parentStyle = 0;
     if (!m_defaultStyle) {
         if (!drawElement)
             writer->addAttribute("style:name", name);
@@ -206,7 +206,7 @@ void KoGenStyle::writeStyle(KoXmlWriter* writer, const KoGenStyles& styles, cons
             if (parentStyle && m_familyName.isEmpty()) {
                 // get family from parent style, just in case
                 // Note: this is saving code, don't convert to attributeNS!
-                const_cast<KoGenStyle *>(this)->
+                const_cast<KOdfGenericStyle *>(this)->
                 m_familyName = parentStyle->attribute("style:family").toLatin1();
                 //kDebug(30003) <<"Got familyname" << m_familyName <<" from parent";
             }
@@ -218,7 +218,7 @@ void KoGenStyle::writeStyle(KoXmlWriter* writer, const KoGenStyles& styles, cons
         Q_ASSERT(m_parentName.isEmpty());
     }
     if (!m_familyName.isEmpty())
-        const_cast<KoGenStyle *>(this)->
+        const_cast<KOdfGenericStyle *>(this)->
         addAttribute("style:family", QString::fromLatin1(m_familyName));
     else {
         if (qstrcmp(elementName, "style:style") == 0)
@@ -248,12 +248,12 @@ void KoGenStyle::writeStyle(KoXmlWriter* writer, const KoGenStyles& styles, cons
             writer->addAttribute(it.key().toUtf8(), it.value().toUtf8());
     }
     bool createPropertiesTag = propertiesElementName && propertiesElementName[0] != '\0';
-    KoGenStyle::PropertyType i = KoGenStyle::DefaultType;
-    KoGenStyle::PropertyType defaultPropertyType = KoGenStyle::DefaultType;
+    KOdfGenericStyle::PropertyType i = KOdfGenericStyle::DefaultType;
+    KOdfGenericStyle::PropertyType defaultPropertyType = KOdfGenericStyle::DefaultType;
     if (createPropertiesTag)
         defaultPropertyType = propertyTypeByElementName(propertiesElementName);
     if (!m_properties[i].isEmpty() ||
-            !m_properties[KoGenStyle::ChildElement].isEmpty() ||
+            !m_properties[KOdfGenericStyle::ChildElement].isEmpty() ||
             !m_properties[defaultPropertyType].isEmpty()) {
         if (createPropertiesTag)
             writer->startElement(propertiesElementName);   // e.g. paragraph-properties
@@ -272,7 +272,7 @@ void KoGenStyle::writeStyle(KoXmlWriter* writer, const KoGenStyles& styles, cons
             }
         }
         //write child elements of the properties elements
-        i = KoGenStyle::ChildElement;
+        i = KOdfGenericStyle::ChildElement;
         it = m_properties[i].constBegin();
         for (; it != m_properties[i].constEnd(); ++it) {
             if (!parentStyle || parentStyle->property(it.key(), i) != it.value()) {
@@ -293,7 +293,7 @@ void KoGenStyle::writeStyle(KoXmlWriter* writer, const KoGenStyles& styles, cons
     }
 
     //write child elements that aren't in any of the properties elements
-    i = KoGenStyle::StyleChildElement;
+    i = KOdfGenericStyle::StyleChildElement;
     it = m_properties[i].constBegin();
     for (; it != m_properties[i].constEnd(); ++it) {
         if (!parentStyle || parentStyle->property(it.key(), i) != it.value()) {
@@ -319,7 +319,7 @@ void KoGenStyle::writeStyle(KoXmlWriter* writer, const KoGenStyles& styles, cons
         writer->endElement();
 }
 
-void KoGenStyle::addPropertyPt(const QString& propName, qreal propValue, PropertyType type)
+void KOdfGenericStyle::addPropertyPt(const QString& propName, qreal propValue, PropertyType type)
 {
     if (type == DefaultType) {
         type = m_propertyType;
@@ -330,7 +330,7 @@ void KoGenStyle::addPropertyPt(const QString& propName, qreal propValue, Propert
     m_properties[type].insert(propName, str);
 }
 
-void KoGenStyle::addAttributePt(const QString& attrName, qreal attrValue)
+void KOdfGenericStyle::addAttributePt(const QString& attrName, qreal attrValue)
 {
     QString str;
     str.setNum(attrValue, 'f', DBL_DIG);
@@ -338,7 +338,7 @@ void KoGenStyle::addAttributePt(const QString& attrName, qreal attrValue)
     m_attributes.insert(attrName, str);
 }
 
-void KoGenStyle::addStyleMap(const QMap<QString, QString>& styleMap)
+void KOdfGenericStyle::addStyleMap(const QMap<QString, QString>& styleMap)
 {
     // check, if already present
     for (int i = 0 ; i < m_maps.count() ; ++i) {
@@ -353,7 +353,7 @@ void KoGenStyle::addStyleMap(const QMap<QString, QString>& styleMap)
 
 
 #ifndef NDEBUG
-void KoGenStyle::printDebug() const
+void KOdfGenericStyle::printDebug() const
 {
     int i = DefaultType;
     kDebug(30003) << m_properties[i].count() << " properties.";
@@ -390,7 +390,7 @@ void KoGenStyle::printDebug() const
 }
 #endif
 
-bool KoGenStyle::operator<(const KoGenStyle &other) const
+bool KOdfGenericStyle::operator<(const KOdfGenericStyle &other) const
 {
     if (m_type != other.m_type) return m_type < other.m_type;
     if (m_parentName != other.m_parentName) return m_parentName < other.m_parentName;
@@ -418,7 +418,7 @@ bool KoGenStyle::operator<(const KoGenStyle &other) const
     return false;
 }
 
-bool KoGenStyle::operator==(const KoGenStyle &other) const
+bool KOdfGenericStyle::operator==(const KOdfGenericStyle &other) const
 {
     if (m_type != other.m_type) return false;
     if (m_parentName != other.m_parentName) return false;
@@ -446,7 +446,7 @@ bool KoGenStyle::operator==(const KoGenStyle &other) const
     return true;
 }
 
-bool KoGenStyle::isEmpty() const
+bool KOdfGenericStyle::isEmpty() const
 {
     if (!m_attributes.isEmpty() || ! m_maps.isEmpty())
         return false;

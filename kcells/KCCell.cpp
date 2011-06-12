@@ -1066,12 +1066,12 @@ void KCCell::saveOdfAnnotation(KoXmlWriter &xmlwriter)
     }
 }
 
-QString KCCell::saveOdfCellStyle(KoGenStyle &currentCellStyle, KoGenStyles &mainStyles)
+QString KCCell::saveOdfCellStyle(KOdfGenericStyle &currentCellStyle, KoGenStyles &mainStyles)
 {
     const KCConditions conditions = this->conditions();
     if (!conditions.isEmpty()) {
         // this has to be an automatic style
-        currentCellStyle = KoGenStyle(KoGenStyle::TableCellAutoStyle, "table-cell");
+        currentCellStyle = KOdfGenericStyle(KOdfGenericStyle::TableCellAutoStyle, "table-cell");
         conditions.saveOdfConditions(currentCellStyle, sheet()->map()->converter());
     }
     return style().saveOdf(currentCellStyle, mainStyles, d->sheet->map()->styleManager());
@@ -1112,7 +1112,7 @@ bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
             !(cellStyle.isDefault() && conditions().isEmpty())) ||
             (tableContext.rowDefaultStyles.contains(row) && tableContext.rowDefaultStyles[row] != cellStyle) ||
             (tableContext.columnDefaultStyles.contains(column) && tableContext.columnDefaultStyles[column] != cellStyle)) {
-        KoGenStyle currentCellStyle; // the type determined in saveOdfCellStyle
+        KOdfGenericStyle currentCellStyle; // the type determined in saveOdfCellStyle
         saveOdfCellStyle(currentCellStyle, mainStyles);
         // skip 'table:style-name' attribute for the default style
         if (!currentCellStyle.isDefaultStyle()) {

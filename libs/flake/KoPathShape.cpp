@@ -38,7 +38,7 @@
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
 #include <KoUnit.h>
-#include <KoGenStyle.h>
+#include <KOdfGenericStyle.h>
 #include <KoStyleStack.h>
 #include <KoOdfLoadingContext.h>
 
@@ -182,7 +182,7 @@ bool KoPathShape::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &c
     return true;
 }
 
-QString KoPathShape::saveStyle(KoGenStyle &style, KoShapeSavingContext &context) const
+QString KoPathShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &context) const
 {
     Q_D(const KoPathShape);
     style.addProperty("svg:fill-rule", d->fillRule == Qt::OddEvenFill ? "evenodd" : "nonzero");

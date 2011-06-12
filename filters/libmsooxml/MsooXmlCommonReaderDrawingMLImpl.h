@@ -156,7 +156,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_pic()
 
 #ifndef DOCXXMLDOCREADER_CPP
     // Create a new drawing style for this picture
-    pushCurrentDrawStyle(new KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic"));
+    pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
 #endif
 
     while (!atEnd()) {
@@ -190,7 +190,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_pic()
     body->addAttribute("presentation:user-transformed", MsooXmlReader::constTrue);
 #endif
 //todo        body->addAttribute("presentation:style-name", styleName);
-//! @todo for pptx: maybe use KoGenStyle::PresentationAutoStyle?
+//! @todo for pptx: maybe use KOdfGenericStyle::PresentationAutoStyle?
     if (m_noFill) {
         m_currentDrawStyle->addAttribute("style:fill", constNone);
     }
@@ -485,7 +485,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_grpSp()
 {
     READ_PROLOGUE
 
-    pushCurrentDrawStyle(new KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic"));
+    pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
 
     MSOOXML::Utils::XmlWriteBuffer drawFrameBuf; // buffer this draw:g, because we have
     // to write after the child elements are generated
@@ -576,7 +576,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_grpSpPr()
                 TRY_READ(ln)
             }
             else if (qualifiedName() == QLatin1String("a:gradFill")) {
-                m_currentGradientStyle = KoGenStyle(KoGenStyle::GradientStyle);
+                m_currentGradientStyle = KOdfGenericStyle(KOdfGenericStyle::GradientStyle);
                 TRY_READ(gradFill)
                 m_currentDrawStyle->addProperty("draw:fill", "gradient");
                 const QString gradName = mainStyles->insert(m_currentGradientStyle);
@@ -681,7 +681,7 @@ void MSOOXML_CURRENT_CLASS::preReadSp()
     // If called from the pptx converter, handle different contexts
     // (Slide, SlideMaster, SlideLayout)
     if (m_context->type == Slide) {
-        m_currentPresentationStyle = KoGenStyle(KoGenStyle::PresentationAutoStyle, "presentation");
+        m_currentPresentationStyle = KOdfGenericStyle(KOdfGenericStyle::PresentationAutoStyle, "presentation");
     }
     else if (m_context->type == SlideMaster) {
         m_currentShapeProperties = new PptxShapeProperties();
@@ -706,7 +706,7 @@ void MSOOXML_CURRENT_CLASS::generateFrameSp()
     inheritBodyProperties(); // Properties may or may not override default ones.
 
     if (m_normAutoFit == MSOOXML::Utils::autoFitOn) {
-        m_currentPresentationStyle.addProperty("draw:fit-to-size", "true", KoGenStyle::GraphicType);
+        m_currentPresentationStyle.addProperty("draw:fit-to-size", "true", KOdfGenericStyle::GraphicType);
     }
 #endif
     // Arc and straight connector are now simpilified to be a line, fix later
@@ -863,7 +863,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_cxnSp()
 
     preReadSp();
 
-    pushCurrentDrawStyle(new KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic"));
+    pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
 
     MSOOXML::Utils::XmlWriteBuffer drawFrameBuf; // buffer this draw:frame, because we have
     // to write after the child elements are generated
@@ -950,7 +950,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_sp()
 
     preReadSp();
 
-    pushCurrentDrawStyle(new KoGenStyle(KoGenStyle::GraphicAutoStyle, "graphic"));
+    pushCurrentDrawStyle(new KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic"));
 
     MSOOXML::Utils::XmlWriteBuffer drawFrameBuf; // buffer this draw:frame, because we have
     // to write after the child elements are generated
@@ -1122,7 +1122,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_spPr()
 #ifdef PPTXXMLSLIDEREADER_CPP
                 d->textBoxHasContent = true;
 #endif
-                m_currentGradientStyle = KoGenStyle(KoGenStyle::GradientStyle);
+                m_currentGradientStyle = KOdfGenericStyle(KOdfGenericStyle::GradientStyle);
                 TRY_READ(gradFill)
                 m_currentDrawStyle->addProperty("draw:fill", "gradient");
                 const QString gradName = mainStyles->insert(m_currentGradientStyle);
@@ -1392,7 +1392,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_DrawingML_p()
 #endif
 
     // Creating a list ouf of what we have, note that ppr maybe overwrite the list style if it wishes
-    m_currentListStyle = KoGenStyle(KoGenStyle::ListAutoStyle, "list");
+    m_currentListStyle = KOdfGenericStyle(KOdfGenericStyle::ListAutoStyle, "list");
     QMapIterator<int, MSOOXML::Utils::ParagraphBulletProperties> i(m_currentCombinedBulletProperties);
     int index = 0;
     while (i.hasNext()) {
@@ -1405,7 +1405,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_DrawingML_p()
     MSOOXML::Utils::XmlWriteBuffer textPBuf;
 
     body = textPBuf.setWriter(body);
-    m_currentParagraphStyle = KoGenStyle(KoGenStyle::ParagraphAutoStyle, "paragraph");
+    m_currentParagraphStyle = KOdfGenericStyle(KOdfGenericStyle::ParagraphAutoStyle, "paragraph");
 
     bool pprRead = false;
     bool rRead = false;
@@ -1479,7 +1479,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_DrawingML_p()
         }
     }
     if (m_listStylePropertiesAltered) {
-        m_currentListStyle = KoGenStyle(KoGenStyle::ListAutoStyle, "list");
+        m_currentListStyle = KOdfGenericStyle(KOdfGenericStyle::ListAutoStyle, "list");
 
         // For now we take a stand that any altered style makes its own list.
         m_currentBulletProperties.m_level = m_currentListLevel;
@@ -1605,7 +1605,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_DrawingML_r()
     body = rBuf.setWriter(body);
 
     m_currentTextStyleProperties = new KoCharacterStyle();
-    m_currentTextStyle = KoGenStyle(KoGenStyle::TextAutoStyle, "text");
+    m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
 
 #ifdef PPTXXMLSLIDEREADER_CPP
     inheritDefaultTextStyle(m_currentTextStyle);
@@ -2699,7 +2699,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_background()
 
 void MSOOXML_CURRENT_CLASS::saveStyleWrap(const char * style)
 {
-    m_currentDrawStyle->addProperty("style:wrap", style, KoGenStyle::GraphicType);
+    m_currentDrawStyle->addProperty("style:wrap", style, KOdfGenericStyle::GraphicType);
 }
 
 void MSOOXML_CURRENT_CLASS::algnToODF(const char * odfEl, const QString& ov)
@@ -2727,7 +2727,7 @@ void MSOOXML_CURRENT_CLASS::distToODF(const char * odfEl, const QString& emuValu
         return;
     QString s = MSOOXML::Utils::EMU_to_ODF(emuValue);
     if (!s.isEmpty()) {
-        m_currentDrawStyle->addProperty(QLatin1String(odfEl), s, KoGenStyle::GraphicType);
+        m_currentDrawStyle->addProperty(QLatin1String(odfEl), s, KOdfGenericStyle::GraphicType);
     }
 }
 
@@ -2780,7 +2780,7 @@ void MSOOXML_CURRENT_CLASS::readWrap()
 KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_lstStyle()
 {
     READ_PROLOGUE
-    m_currentListStyle = KoGenStyle(KoGenStyle::ListAutoStyle, "list");
+    m_currentListStyle = KOdfGenericStyle(KOdfGenericStyle::ListAutoStyle, "list");
 
     m_currentCombinedBulletProperties.clear();
     m_currentBulletProperties.clear();
@@ -4016,8 +4016,8 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::lvlHelper(const QString& level
 
     bool ok = false;
 
-    m_currentParagraphStyle = KoGenStyle(KoGenStyle::ParagraphAutoStyle, "text");
-    m_currentTextStyle = KoGenStyle(KoGenStyle::TextAutoStyle, "text");
+    m_currentParagraphStyle = KOdfGenericStyle(KOdfGenericStyle::ParagraphAutoStyle, "text");
+    m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
 
 #ifdef PPTXXMLSLIDEREADER_CPP
     inheritDefaultTextStyle(m_currentTextStyle);
@@ -4441,7 +4441,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_fld()
     TRY_READ_ATTR_WITHOUT_NS(type)
 
     m_currentTextStyleProperties = new KoCharacterStyle();
-    m_currentTextStyle = KoGenStyle(KoGenStyle::TextAutoStyle, "text");
+    m_currentTextStyle = KOdfGenericStyle(KOdfGenericStyle::TextAutoStyle, "text");
 
     MSOOXML::Utils::XmlWriteBuffer fldBuf;
     body = fldBuf.setWriter(body);
@@ -5044,13 +5044,13 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_bodyPr()
     saveBodyProperties();
 
     m_currentPresentationStyle.addProperty("draw:auto-grow-height",
-            spAutoFit ? MsooXmlReader::constTrue : MsooXmlReader::constFalse, KoGenStyle::GraphicType);
+            spAutoFit ? MsooXmlReader::constTrue : MsooXmlReader::constFalse, KOdfGenericStyle::GraphicType);
     m_currentPresentationStyle.addProperty("draw:auto-grow-width",
             (!spAutoFit || wrap == QLatin1String("square"))
-            ? MsooXmlReader::constFalse : MsooXmlReader::constTrue, KoGenStyle::GraphicType);
+            ? MsooXmlReader::constFalse : MsooXmlReader::constTrue, KOdfGenericStyle::GraphicType);
     // text in shape
     m_currentPresentationStyle.addProperty("fo:wrap-option",
-        wrap == QLatin1String("none") ? QLatin1String("no-wrap") : QLatin1String("wrap"), KoGenStyle::GraphicType);
+        wrap == QLatin1String("none") ? QLatin1String("no-wrap") : QLatin1String("wrap"), KOdfGenericStyle::GraphicType);
 #endif
     READ_EPILOGUE
 }
