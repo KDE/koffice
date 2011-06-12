@@ -18,7 +18,7 @@
 */
 
 #include "DirectoryStore_p.h"
-#include "KoStore_p.h"
+#include "KOdfStore_p.h"
 
 #include <QFile>
 #include <QDir>

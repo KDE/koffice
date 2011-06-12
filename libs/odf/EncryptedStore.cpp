@@ -21,7 +21,7 @@
 
 #include "EncryptedStore_p.h"
 #include "KoEncryptionChecker.h"
-#include "KoStore_p.h"
+#include "KOdfStore_p.h"
 #include "KXmlReader.h"
 
 #include <QString>

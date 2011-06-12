@@ -20,7 +20,7 @@
 */
 
 #include "KOdfStore.h"
-#include "KoStore_p.h"
+#include "KOdfStore_p.h"
 
 #include "TarStore_p.h"
 #include "ZipStore_p.h"
