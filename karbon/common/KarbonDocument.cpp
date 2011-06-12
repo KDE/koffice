@@ -37,7 +37,7 @@
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoShapeSavingContext.h>
 #include <KoResourceManager.h>
 #include <KoShapeLoadingContext.h>
@@ -248,7 +248,7 @@ bool KarbonDocument::loadOasis(const KoXmlElement &element, KoShapeLoadingContex
     if (defaultLayer)
         insertLayer(defaultLayer);
 
-    KoOdfStylesReader & styleReader = context.odfLoadingContext().stylesReader();
+    KOdfStylesReader & styleReader = context.odfLoadingContext().stylesReader();
     QHash<QString, KoXmlElement*> masterPages = styleReader.masterPages();
 
     KoXmlElement * master = 0;

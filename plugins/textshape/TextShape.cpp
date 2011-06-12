@@ -49,7 +49,7 @@ struct Finalizer {
 #include <KoChangeTracker.h>
 #include <KoInlineTextObjectManager.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoParagraphStyle.h>
 #include <KoPostscriptPaintDevice.h>
 #include <KoSelection.h>

@@ -44,7 +44,7 @@
 #include <KoDocumentInfo.h>
 #include <KOdfLoadingContext.h>
 #include <KoOdfSettings.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 
 #include <KoShape.h>
 #include <KoResourceManager.h>
@@ -1824,10 +1824,10 @@ void KCSheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
 
 
 bool KCSheet::loadColumnFormat(const KoXmlElement& column,
-                             const KoOdfStylesReader& stylesReader, int & indexCol,
+                             const KOdfStylesReader& stylesReader, int & indexCol,
                              QHash<QString, QRegion>& columnStyleRegions, IntervalMap<QString>& columnStyles)
 {
-//   kDebug(36003)<<"bool KCSheet::loadColumnFormat(const KoXmlElement& column, const KoOdfStylesReader& stylesReader, unsigned int & indexCol ) index Col :"<<indexCol;
+//   kDebug(36003)<<"bool KCSheet::loadColumnFormat(const KoXmlElement& column, const KOdfStylesReader& stylesReader, unsigned int & indexCol ) index Col :"<<indexCol;
 
     bool isNonDefaultColumn = false;
 
@@ -1981,7 +1981,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     static const QString sCoveredTableCell      = QString::fromLatin1("covered-table-cell");
     static const QString sNumberColumnsRepeated = QString::fromLatin1("number-columns-repeated");
 
-//    kDebug(36003)<<"KCSheet::loadRowFormat( const KoXmlElement& row, int &rowIndex,const KoOdfStylesReader& stylesReader, bool isLast )***********";
+//    kDebug(36003)<<"KCSheet::loadRowFormat( const KoXmlElement& row, int &rowIndex,const KOdfStylesReader& stylesReader, bool isLast )***********";
     KOdfLoadingContext& odfContext = tableContext.odfContext;
     bool isNonDefaultRow = false;
 

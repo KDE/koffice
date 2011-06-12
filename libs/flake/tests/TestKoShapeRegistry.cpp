@@ -27,7 +27,7 @@
 #include <QtXml>
 
 #include <KOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 
 #include "KoShapeRegistry.h"
 #include "KoShape.h"
@@ -77,7 +77,7 @@ void TestKoShapeRegistry::testCreateShapes()
 
     // XXX: When loading is implemented, these no doubt have to be
     // sensibly filled.
-    KoOdfStylesReader stylesReader;
+    KOdfStylesReader stylesReader;
     KOdfLoadingContext odfContext(stylesReader, 0);
     KoShapeLoadingContext shapeContext(odfContext, 0);
 
@@ -124,7 +124,7 @@ void TestKoShapeRegistry::testCreateFramedShapes()
 
     // XXX: When loading is implemented, these no doubt have to be
     // sensibly filled.
-    KoOdfStylesReader stylesReader;
+    KOdfStylesReader stylesReader;
     KOdfLoadingContext odfContext(stylesReader, 0);
     KoShapeLoadingContext shapeContext(odfContext, 0);
 

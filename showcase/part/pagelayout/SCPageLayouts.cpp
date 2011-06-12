@@ -21,7 +21,7 @@
 
 #include <KoPageLayout.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
 #include <KoPAMasterPage.h>

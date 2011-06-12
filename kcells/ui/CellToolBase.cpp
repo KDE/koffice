@@ -110,7 +110,7 @@
 #include <KoColorPopupAction.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoPointerEvent.h>
 #include <KoSelection.h>
 #include <KoShape.h>
@@ -2932,7 +2932,7 @@ bool CellToolBase::paste()
             return false;
         }
 
-        KoOdfStylesReader stylesReader;
+        KOdfStylesReader stylesReader;
         KoXmlDocument stylesDoc;
         (void)odfStore.loadAndParse("styles.xml", stylesDoc, errorMessage);
         // Load styles from style.xml

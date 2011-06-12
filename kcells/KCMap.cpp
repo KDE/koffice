@@ -34,7 +34,7 @@
 #include <KoGlobal.h>
 #include <KoOdfSettings.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoEmbeddedDocumentSaver.h>
 #include <KoShapeSavingContext.h>
 #include <KoXmlNS.h>

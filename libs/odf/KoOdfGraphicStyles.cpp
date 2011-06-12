@@ -37,7 +37,7 @@
 #include <KoXmlWriter.h>
 
 #include "KOdfLoadingContext.h"
-#include "KoOdfStylesReader.h"
+#include "KOdfStylesReader.h"
 
 void KoOdfGraphicStyles::saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush & brush)
 {
@@ -255,7 +255,7 @@ QString KoOdfGraphicStyles::saveOdfGradientStyle(KOdfGenericStyles &mainStyles, 
     return mainStyles.insert(gradientStyle, "gradient");
 }
 
-QBrush KoOdfGraphicStyles::loadOdfGradientStyle(const KoStyleStack &styleStack, const KoOdfStylesReader & stylesReader, const QSizeF &size)
+QBrush KoOdfGraphicStyles::loadOdfGradientStyle(const KoStyleStack &styleStack, const KOdfStylesReader & stylesReader, const QSizeF &size)
 {
     QString styleName = styleStack.property(KoXmlNS::draw, "fill-gradient-name");
     return loadOdfGradientStyleByName(stylesReader, styleName, size);
@@ -280,7 +280,7 @@ qreal percent(const KoXmlElement &element, const QString &ns, const QString &typ
     return tmp;
 }
 
-QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KoOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size)
+QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size)
 {
     KoXmlElement* e = stylesReader.drawStyles()[styleName];
     if (! e)
@@ -450,7 +450,7 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KoOdfStylesReader &s
     return resultBrush;
 }
 
-QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KoStyleStack &styleStack, const QString & fill,  const KoOdfStylesReader & stylesReader)
+QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KoStyleStack &styleStack, const QString & fill,  const KOdfStylesReader & stylesReader)
 {
     QBrush tmpBrush; // default brush for "none" is a Qt::NoBrush
 
@@ -572,7 +572,7 @@ QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KoStyleStack &styleStack, cons
     return tmpBrush;
 }
 
-QPen KoOdfGraphicStyles::loadOdfStrokeStyle(const KoStyleStack &styleStack, const QString & stroke, const KoOdfStylesReader & stylesReader)
+QPen KoOdfGraphicStyles::loadOdfStrokeStyle(const KoStyleStack &styleStack, const QString & stroke, const KOdfStylesReader & stylesReader)
 {
     QPen tmpPen(Qt::NoPen); // default pen for "none" is a Qt::NoPen
 

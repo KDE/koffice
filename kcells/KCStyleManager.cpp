@@ -30,7 +30,7 @@
 #include <klocale.h>
 
 #include <KOdfGenericStyle.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 
@@ -67,7 +67,7 @@ void KCStyleManager::saveOdf(KOdfGenericStyles &mainStyles)
     }
 }
 
-void KCStyleManager::loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* map)
+void KCStyleManager::loadOdfStyleTemplate(KOdfStylesReader& stylesReader, KCMap* map)
 {
     // reset the map of OpenDocument Styles
     m_oasisStyles.clear();
@@ -371,7 +371,7 @@ QStringList KCStyleManager::styleNames() const
     return list;
 }
 
-Styles KCStyleManager::loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
+Styles KCStyleManager::loadOdfAutoStyles(KOdfStylesReader& stylesReader,
                                        QHash<QString, KCConditions>& conditionalStyles,
                                        const KCValueParser *parser)
 {

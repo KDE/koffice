@@ -26,7 +26,7 @@
 #include <KoStore.h>
 #include <KoXmlReader.h>
 
-#include "KoOdfStylesReader.h"
+#include "KOdfStylesReader.h"
 #include "KoXmlNS.h"
 
 #include <QXmlStreamReader>
@@ -40,7 +40,7 @@ public:
     }
 
     KoStore * store;
-    KoOdfStylesReader stylesReader;
+    KOdfStylesReader stylesReader;
     // it is needed to keep the stylesDoc around so that you can access the styles
     KoXmlDocument stylesDoc;
     KoXmlDocument contentDoc;
@@ -62,7 +62,7 @@ KoStore * KOdfStoreReader::store() const
     return d->store;
 }
 
-KoOdfStylesReader &KOdfStoreReader::styles()
+KOdfStylesReader &KOdfStoreReader::styles()
 {
     return d->stylesReader;
 }

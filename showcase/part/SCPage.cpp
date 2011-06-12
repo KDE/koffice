@@ -40,7 +40,7 @@
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoStyleStack.h>
 #include <KOdfGenericStyle.h>
 #include <KoShapeLayer.h>
@@ -162,7 +162,7 @@ bool SCPage::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context
     }
 
     if (loadOldTransition) {
-        KoOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
+        KOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
         const KoXmlElement * styleElement = stylesReader.findContentAutoStyle(element.attributeNS(KoXmlNS::draw, "style-name"), "drawing-page");
         if (styleElement) {
 #ifndef KOXML_USE_QDOM

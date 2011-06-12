@@ -30,7 +30,7 @@ class QDomDocument;
 class QStringList;
 
 class KOdfGenericStyles;
-class KoOdfStylesReader;
+class KOdfStylesReader;
 
 class KCConditions;
 class KCMap;
@@ -56,7 +56,7 @@ public:
     bool loadXML(KoXmlElement const & styles);
 
     void saveOdf(KOdfGenericStyles &mainStyles);
-    void loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* map = 0);
+    void loadOdfStyleTemplate(KOdfStylesReader& stylesReader, KCMap* map = 0);
 
     KCCustomStyle * defaultStyle() const {
         return m_defaultStyle;
@@ -95,7 +95,7 @@ public:
      * @param stylesReader repository of styles
      * @return a hash of styles with the OpenDocument internal name as key
      */
-    Styles loadOdfAutoStyles(KoOdfStylesReader& stylesReader,
+    Styles loadOdfAutoStyles(KOdfStylesReader& stylesReader,
                              QHash<QString, KCConditions>& conditionalStyles,
                              const KCValueParser *parser);
 

@@ -47,7 +47,7 @@
 
 #include <KoApplication.h>
 #include <KoDataCenterBase.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
 #include <KoOdfWriteStore.h>

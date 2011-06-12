@@ -31,7 +31,7 @@
 
 #include <KOdfGenericStyles.h>
 #include <KoGlobal.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoOdfGraphicStyles.h>
 #include <KoStyleStack.h>
 #include <KoUnit.h>
@@ -196,7 +196,7 @@ void KCStyle::loadAttributes(const QList<KCSharedSubStyle>& subStyles)
     }
 }
 
-void KCStyle::loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
+void KCStyle::loadOdfStyle(KOdfStylesReader& stylesReader, const KoXmlElement& element,
                          KCConditions& conditions, const KCStyleManager* styleManager,
                          const KCValueParser *parser)
 {
@@ -221,7 +221,7 @@ void KCStyle::loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& 
 
 typedef QPair<QString,QString> StringPair;
 
-void KCStyle::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
+void KCStyle::loadOdfDataStyle(KOdfStylesReader& stylesReader, const KoXmlElement& element,
                              KCConditions& conditions, const KCStyleManager* styleManager,
                              const KCValueParser *parser)
 {
@@ -232,7 +232,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlEleme
     }
 }
 
-void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &styleName, KCConditions &conditions, const KCStyleManager *styleManager, const KCValueParser *parser)
+void KCStyle::loadOdfDataStyle(KOdfStylesReader &stylesReader, const QString &styleName, KCConditions &conditions, const KCStyleManager *styleManager, const KCValueParser *parser)
 {
     if (stylesReader.dataFormats().contains(styleName)) {
         KCStyle* theStyle = this;
@@ -340,7 +340,7 @@ void KCStyle::loadOdfDataStyle(KoOdfStylesReader &stylesReader, const QString &s
     }
 }
 
-void KCStyle::loadOdfParagraphProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
+void KCStyle::loadOdfParagraphProperties(KOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
 {
     Q_UNUSED(stylesReader);
     kDebug(36003) << "\t paragraph-properties";
@@ -360,7 +360,7 @@ void KCStyle::loadOdfParagraphProperties(KoOdfStylesReader& stylesReader, const 
     }
 }
 
-void KCStyle::loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
+void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
 {
     QString str;
     if (styleStack.hasProperty(KoXmlNS::style, "vertical-align")) {
@@ -490,7 +490,7 @@ void KCStyle::loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const 
     }
 }
 
-void KCStyle::loadOdfTextProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
+void KCStyle::loadOdfTextProperties(KOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
 {
     Q_UNUSED(stylesReader);
     // fo:font-size="13pt"
@@ -2752,7 +2752,7 @@ QString KCCustomStyle::saveOdf(KOdfGenericStyle& style, KOdfGenericStyles &mainS
     return mainStyles.insert(style, "custom-style");
 }
 
-void KCCustomStyle::loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& style,
+void KCCustomStyle::loadOdf(KOdfStylesReader& stylesReader, const KoXmlElement& style,
                           const QString& name, KCConditions& conditions,
                           const KCStyleManager* styleManager, const KCValueParser *parser)
 {

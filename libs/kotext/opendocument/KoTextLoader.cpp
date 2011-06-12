@@ -33,7 +33,7 @@
 #include <KoInlineTextObjectManager.h>
 #include "KoList.h"
 #include <KOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoProperties.h>
 #include <KoShapeContainer.h>
 #include <KoShapeFactoryBase.h>

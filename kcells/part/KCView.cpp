@@ -88,7 +88,7 @@
 #include <KoMainWindow.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStoreReader.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoShapeController.h>
 #include <KoShapeManager.h>
 #include <KoSelection.h>

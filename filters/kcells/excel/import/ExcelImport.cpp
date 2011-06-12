@@ -45,7 +45,7 @@
 #include <KoXmlNS.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
 #include <KoShape.h>
 #include <KoDocumentInfo.h>
@@ -430,7 +430,7 @@ void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElemen
                 "table:end-y"));
 
 
-    KoOdfStylesReader odfStyles;
+    KOdfStylesReader odfStyles;
     odfStyles.createStyleMap(stylesDoc, false);
     KOdfLoadingContext odfContext(odfStyles, store);
     KoShapeLoadingContext shapeContext(odfContext, outputDoc->resourceManager());
@@ -1377,7 +1377,7 @@ void ExcelImport::Private::processNumberFormats()
 
     KoXmlDocument stylesDoc = endMemoryXmlWriter(stylesXml);
 
-    KoOdfStylesReader odfStyles;
+    KOdfStylesReader odfStyles;
     odfStyles.createStyleMap(stylesDoc, false);
 
     for (int i = 0; i < workbook->formatCount(); i++) {

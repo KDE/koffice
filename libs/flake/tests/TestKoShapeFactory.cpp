@@ -20,7 +20,7 @@
 #include <qtest_kde.h>
 
 #include <KOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoShapeLoadingContext.h>
 #include <KoPathShapeFactory_p.h>
 #include <KoShape.h>
@@ -103,7 +103,7 @@ void TestKoShapeFactory::testOdfElement()
 
     // XXX: When loading is implemented, these no doubt have to be
     // sensibly filled.
-    KoOdfStylesReader stylesReader;
+    KOdfStylesReader stylesReader;
     KOdfLoadingContext odfContext(stylesReader, 0);
     KoShapeLoadingContext shapeContext(odfContext, 0);
 

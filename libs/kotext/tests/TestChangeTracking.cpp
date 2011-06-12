@@ -25,9 +25,9 @@
 #include <QtTest>
 
 #include <KoStyleManager.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoStore.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoTextLoader.h>
 #include <KoXmlReader.h>
 #include <KOdfStoreReader.h>

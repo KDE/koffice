@@ -26,7 +26,7 @@
 #include "KoList.h"
 
 #include <KoStyleStack.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyle.h>

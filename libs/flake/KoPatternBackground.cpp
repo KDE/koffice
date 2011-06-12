@@ -28,7 +28,7 @@
 #include <KoXmlNS.h>
 #include <KOdfLoadingContext.h>
 #include <KoOdfGraphicStyles.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoStoreDevice.h>
 #include <KoUnit.h>
 #include <KoXmlWriter.h>

@@ -52,7 +52,7 @@ class KoDocumentEntry;
 class KoStyleStack;
 class KOdfGenericStyles;
 class KoOdfSettings;
-class KoOdfStylesReader;
+class KOdfStylesReader;
 class KoShape;
 class KoShapeSavingContext;
 class KoXmlWriter;
@@ -867,7 +867,7 @@ protected:
      * defaultColumnCellStyles is a map from column indicies to the default cell style for that column
      */
     bool loadColumnFormat(const KoXmlElement& row,
-                          const KoOdfStylesReader& stylesReader, int & indexCol,
+                          const KOdfStylesReader& stylesReader, int & indexCol,
                           QHash<QString, QRegion>& columnStyleRegions,
                           IntervalMap<QString>& columnStyles);
 

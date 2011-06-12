@@ -32,13 +32,13 @@
 /**
  * Repository of styles used during loading of OASIS/OOo file
  */
-class KOODF_EXPORT KoOdfStylesReader
+class KOODF_EXPORT KOdfStylesReader
 {
 public:
     /// constructor
-    KoOdfStylesReader();
+    KOdfStylesReader();
     /// destructor
-    ~KoOdfStylesReader();
+    ~KOdfStylesReader();
 
     /// Look into @p doc for styles and remember them
     /// @param doc document to look into
@@ -141,8 +141,8 @@ private:
     void insertOfficeStyles(const KoXmlElement &styles);
     void insertStyle(const KoXmlElement &style, TypeAndLocation typeAndLocation);
 
-    KoOdfStylesReader(const KoOdfStylesReader &);   // forbidden
-    KoOdfStylesReader& operator=(const KoOdfStylesReader &);   // forbidden
+    KOdfStylesReader(const KOdfStylesReader &);   // forbidden
+    KOdfStylesReader& operator=(const KOdfStylesReader &);   // forbidden
 
     class Private;
     Private * const d;

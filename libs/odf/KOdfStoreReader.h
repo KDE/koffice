@@ -26,7 +26,7 @@ class QString;
 class QIODevice;
 class QXmlStreamReader;
 class KoStore;
-class KoOdfStylesReader;
+class KOdfStylesReader;
 class KoXmlDocument;
 class KoXmlElement;
 
@@ -57,7 +57,7 @@ public:
      *
      * @return styles
      */
-    KoOdfStylesReader &styles();
+    KOdfStylesReader &styles();
 
     /**
      * Get the content document

@@ -19,7 +19,7 @@
 
 #include "KOdfLoadingContext.h"
 #include <KOdfStoreReader.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoStore.h>
 #include <KoXmlNS.h>
 
@@ -30,7 +30,7 @@
 class KOdfLoadingContext::Private
 {
 public:
-    Private(KoOdfStylesReader &sr, KoStore *s)
+    Private(KOdfStylesReader &sr, KoStore *s)
         : store(s),
         stylesReader(sr),
         generatorType(KOdfLoadingContext::Unknown),
@@ -40,7 +40,7 @@ public:
     }
 
     KoStore *store;
-    KoOdfStylesReader &stylesReader;
+    KOdfStylesReader &stylesReader;
     KoStyleStack styleStack;
 
     mutable QString generator;
@@ -50,11 +50,11 @@ public:
 
     KoXmlDocument manifestDoc;
 
-    KoOdfStylesReader defaultStylesReader;
+    KOdfStylesReader defaultStylesReader;
     KoXmlDocument doc; // the doc needs to be kept around so it is possible to access the styles
 };
 
-KOdfLoadingContext::KOdfLoadingContext(KoOdfStylesReader &stylesReader, KoStore* store, const KComponentData &componentData)
+KOdfLoadingContext::KOdfLoadingContext(KOdfStylesReader &stylesReader, KoStore* store, const KComponentData &componentData)
         : d(new Private(stylesReader, store))
 {
     // Ideally this should be done by KoDocument and passed as argument here...
@@ -200,7 +200,7 @@ KoStore *KOdfLoadingContext::store() const
     return d->store;
 }
 
-KoOdfStylesReader &KOdfLoadingContext::stylesReader()
+KOdfStylesReader &KOdfLoadingContext::stylesReader()
 {
     return d->stylesReader;
 }
@@ -208,7 +208,7 @@ KoOdfStylesReader &KOdfLoadingContext::stylesReader()
 /**
 * Get the application default styles styleReader
 */
-KoOdfStylesReader &KOdfLoadingContext::defaultStylesReader()
+KOdfStylesReader &KOdfLoadingContext::defaultStylesReader()
 {
     return d->defaultStylesReader;
 }

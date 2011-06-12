@@ -31,7 +31,7 @@
 
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
 #include <KoShapeLoadingContext.h>
 

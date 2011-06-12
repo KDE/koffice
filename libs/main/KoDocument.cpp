@@ -34,7 +34,7 @@
 #ifdef SHOULD_BUILD_RDF
 #include "rdf/KoDocumentRdf.h"
 #endif
-#include "KoOdfStylesReader.h"
+#include "KOdfStylesReader.h"
 #include "KOdfStoreReader.h"
 #include "KoOdfWriteStore.h"
 #include "KoEmbeddedDocumentSaver.h"

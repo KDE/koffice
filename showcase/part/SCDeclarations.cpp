@@ -28,7 +28,7 @@
 #include <KoXmlReader.h>
 #include <KoPALoadingContext.h>
 #include <KoPASavingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
 #include <KoOdfNumberStyles.h>
 
@@ -62,7 +62,7 @@ bool SCDeclarations::loadOdf(const KoXmlElement &body, KoPALoadingContext &conte
 
                 QString styleName = element.attributeNS(KoXmlNS::style, "data-style-name", "");
                 if (!styleName.isEmpty()) {
-                    KoOdfStylesReader::DataFormatsMap::const_iterator it = context.odfLoadingContext().stylesReader().dataFormats().constFind(styleName);
+                    KOdfStylesReader::DataFormatsMap::const_iterator it = context.odfLoadingContext().stylesReader().dataFormats().constFind(styleName);
                     if (it != context.odfLoadingContext().stylesReader().dataFormats().constEnd()) {
 
                         QString formatString = (*it).first.prefix + (*it).first.formatStr + (*it).first.suffix;

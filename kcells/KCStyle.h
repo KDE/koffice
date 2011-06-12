@@ -34,7 +34,7 @@
 
 class KOdfGenericStyle;
 class KOdfGenericStyles;
-class KoOdfStylesReader;
+class KOdfStylesReader;
 class KoStyleStack;
 
 class KCConditions;
@@ -168,10 +168,10 @@ public:
 
     bool loadXML(KoXmlElement& format, Paste::Mode pm = Paste::Normal);
     void saveXML(QDomDocument& doc, QDomElement& format, const KCStyleManager* styleManager) const;
-    void loadOdfStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
+    void loadOdfStyle(KOdfStylesReader& stylesReader, const KoXmlElement& element,
                       KCConditions& conditions, const KCStyleManager* styleManager,
                       const KCValueParser *parser);
-    void loadOdfDataStyle(KoOdfStylesReader& stylesReader, const QString& dataStyleName,
+    void loadOdfDataStyle(KOdfStylesReader& stylesReader, const QString& dataStyleName,
                           KCConditions& conditions, const KCStyleManager* styleManager,
                           const KCValueParser *parser);
 
@@ -244,12 +244,12 @@ protected:
     void saveOdfStyle(const QSet<Key>& subStyles, KOdfGenericStyle &style,
                       KOdfGenericStyles &mainStyles, const KCStyleManager* manager) const;
 
-    void loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
+    void loadOdfDataStyle(KOdfStylesReader& stylesReader, const KoXmlElement& element,
                           KCConditions& conditions, const KCStyleManager* styleManager,
                           const KCValueParser *parser);
-    void loadOdfParagraphProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& element);
-    void loadOdfTableCellProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& element);
-    void loadOdfTextProperties(KoOdfStylesReader& stylesReader, const KoStyleStack& element);
+    void loadOdfParagraphProperties(KOdfStylesReader& stylesReader, const KoStyleStack& element);
+    void loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const KoStyleStack& element);
+    void loadOdfTextProperties(KOdfStylesReader& stylesReader, const KoStyleStack& element);
 
 public:
     void setHAlign(HAlign align);
@@ -408,7 +408,7 @@ public:
      * @param style the DOM element defining the style
      * @param name the style's new name
      */
-    void loadOdf(KoOdfStylesReader& stylesReader, const KoXmlElement& style,
+    void loadOdf(KOdfStylesReader& stylesReader, const KoXmlElement& style,
                  const QString& name, KCConditions& conditions,
                  const KCStyleManager* styleManager, const KCValueParser *parser);
 

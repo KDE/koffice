@@ -24,7 +24,7 @@ class KoStore;
 
 #include "koodf_export.h"
 #include "KoStyleStack.h"
-#include "KoOdfStylesReader.h"
+#include "KOdfStylesReader.h"
 
 #include <QtCore/QString>
 #include <kcomponentdata.h>
@@ -39,15 +39,15 @@ class KOODF_EXPORT KOdfLoadingContext
 public:
     enum GeneratorType { Unknown, KOffice, OpenOffice, MicrosoftOffice };
     /**
-     * Stores reference to the KoOdfStylesReader and stored passed by
-     * KoDocument. Make sure that the KoOdfStylesReader instance outlives
+     * Stores reference to the KOdfStylesReader and stored passed by
+     * KoDocument. Make sure that the KOdfStylesReader instance outlives
      * this KOdfLoadingContext instance. (This is the case during
-     * loading, when using the KoOdfStylesReader given by KoDocument)
+     * loading, when using the KOdfStylesReader given by KoDocument)
      *
-     * @param stylesReader reference to the KoOdfStylesReader parsed by KoDocument
+     * @param stylesReader reference to the KOdfStylesReader parsed by KoDocument
      * @param store pointer to store, if available, for e.g. loading images.
      */
-    explicit KOdfLoadingContext(KoOdfStylesReader &stylesReader, KoStore *store, const KComponentData &componentData = KComponentData());
+    explicit KOdfLoadingContext(KOdfStylesReader &stylesReader, KoStore *store, const KComponentData &componentData = KComponentData());
     virtual ~KOdfLoadingContext();
 
     /**
@@ -58,12 +58,12 @@ public:
 
     KoStore *store() const;
 
-    KoOdfStylesReader &stylesReader();
+    KOdfStylesReader &stylesReader();
 
     /**
     * Get the application default styles styleReader
     */
-    KoOdfStylesReader &defaultStylesReader();
+    KOdfStylesReader &defaultStylesReader();
 
     KoStyleStack &styleStack() const;
 

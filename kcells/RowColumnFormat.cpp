@@ -34,7 +34,7 @@
 #include <KoGlobal.h>
 #include <KoStyleStack.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 
 #include "KCCellStorage.h"
 #include "Global.h"

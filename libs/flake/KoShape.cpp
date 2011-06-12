@@ -54,7 +54,7 @@
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include <KoUnit.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoOdfGraphicStyles.h>
 #include <KOdfLoadingContext.h>
 
@@ -1255,7 +1255,7 @@ KoShapeBackground *KoShape::loadOdfFill(KoShapeLoadingContext &context) const
 KoShapeBorderBase *KoShape::loadOdfStroke(const KoXmlElement &element, KoShapeLoadingContext &context) const
 {
     KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
-    KoOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
+    KOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
 
     QString stroke = KoShapePrivate::getStyleProperty("stroke", context);
     if (stroke == "solid" || stroke == "dash") {

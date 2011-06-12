@@ -24,7 +24,7 @@
 #include <KOdfStoreReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoEmbeddedDocumentSaver.h>
 #include "KoPALoadingContext.h"
 #include "KoPADocument.h"

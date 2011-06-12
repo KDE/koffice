@@ -30,7 +30,7 @@
 #include "frames/KWTextFrame.h"
 
 // koffice
-#include <KoOdfStylesReader.h>
+#include <KOdfStylesReader.h>
 #include <KoOdfSettings.h>
 #include <KOdfStoreReader.h>
 #include <KoXmlReader.h>
@@ -266,7 +266,7 @@ void KWOdfLoader::loadMasterPageStyles(KOdfLoadingContext &context, bool hasMain
 
     //TODO probably we should introduce more logic to handle the "standard" even
     //in faulty documents. See also bugreport #129585 as example.
-    const KoOdfStylesReader &styles = context.stylesReader();
+    const KOdfStylesReader &styles = context.stylesReader();
     QHashIterator<QString, KoXmlElement *> it(styles.masterPages());
     while (it.hasNext()) {
         it.next();
