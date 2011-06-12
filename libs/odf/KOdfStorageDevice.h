@@ -21,18 +21,18 @@
 #define koStoreDevice_h
 
 #include "koodf_export.h"
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 /**
- * This class implements a QIODevice around KoStore, so that
+ * This class implements a QIODevice around KOdfStore, so that
  * it can be used to create a QDomDocument from it, to be written or read
  * using QDataStream or to be written using QTextStream
  */
 class KOODF_EXPORT KOdfStorageDevice : public QIODevice
 {
 public:
-    /// Note: KoStore::open() should be called before calling this.
-    explicit KOdfStorageDevice(KoStore *store);
+    /// Note: KOdfStore::open() should be called before calling this.
+    explicit KOdfStorageDevice(KOdfStore *store);
     ~KOdfStorageDevice();
 
     // Reimplemented from QIODevice
@@ -57,7 +57,7 @@ protected:
     virtual qint64 writeData(const char *data, qint64 len);
 
 private:
-    KoStore *m_store;
+    KOdfStore *m_store;
 
 };
 

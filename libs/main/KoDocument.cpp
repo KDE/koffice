@@ -817,21 +817,21 @@ bool KoDocument::saveNativeFormat(const QString & file)
     d->lastErrorMessage.clear();
     //kDebug(30003) <<"Saving to store";
 
-    KoStore::Backend backend = KoStore::Auto;
+    KOdfStore::Backend backend = KOdfStore::Auto;
 #if 0
     if (d->specialOutputFlag == SaveAsKOffice1dot1) {
         kDebug(30003) << "Saving as KOffice-1.1 format, using a tar.gz";
-        backend = KoStore::Tar; // KOffice-1.0/1.1 used tar.gz for the native mimetype
+        backend = KOdfStore::Tar; // KOffice-1.0/1.1 used tar.gz for the native mimetype
         //// TODO more backwards compat stuff (embedded docs etc.)
     } else
 #endif
         if (d->specialOutputFlag == SaveAsDirectoryStore) {
-            backend = KoStore::Directory;
+            backend = KOdfStore::Directory;
             kDebug(30003) << "Saving as uncompressed XML, using directory store.";
         }
 #ifdef QCA2
         else if (d->specialOutputFlag == SaveEncrypted) {
-            backend = KoStore::Encrypted;
+            backend = KOdfStore::Encrypted;
             kDebug(30003) << "Saving using encrypted backend.";
         }
 #endif
@@ -855,7 +855,7 @@ bool KoDocument::saveNativeFormat(const QString & file)
 
     // TODO: use std::auto_ptr or create store on stack [needs API fixing],
     // to remove all the 'delete store' in all the branches
-    KoStore *store = KoStore::createStore(file, KoStore::Write, mimeType, backend);
+    KOdfStore *store = KOdfStore::createStore(file, KOdfStore::Write, mimeType, backend);
     if (d->specialOutputFlag == SaveEncrypted && !d->password.isNull())
         store->setPassword(d->password);
     if (store->bad()) {
@@ -871,10 +871,10 @@ bool KoDocument::saveNativeFormat(const QString & file)
     }
 }
 
-bool KoDocument::saveNativeFormatODF(KoStore *store, const QByteArray &mimeType)
+bool KoDocument::saveNativeFormatODF(KOdfStore *store, const QByteArray &mimeType)
 {
     kDebug(30003) << "Saving to OASIS format";
-    // Tell KoStore not to touch the file names
+    // Tell KOdfStore not to touch the file names
     store->disallowNameExpansion();
     KOdfWriteStore odfStore(store);
     KoXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);
@@ -972,7 +972,7 @@ bool KoDocument::saveNativeFormatODF(KoStore *store, const QByteArray &mimeType)
     return true;
 }
 
-bool KoDocument::saveNativeFormatKOffice(KoStore *store)
+bool KoDocument::saveNativeFormatKOffice(KOdfStore *store)
 {
     kDebug(30003) << "Saving root";
     if (store->open("root")) {
@@ -1029,7 +1029,7 @@ bool KoDocument::saveToStream(QIODevice *dev)
 }
 
 // Called for embedded documents
-bool KoDocument::saveToStore(KoStore *_store, const QString & _path)
+bool KoDocument::saveToStore(KOdfStore *_store, const QString & _path)
 {
     kDebug(30003) << "Saving document to store" << _path;
 
@@ -1061,7 +1061,7 @@ bool KoDocument::saveToStore(KoStore *_store, const QString & _path)
     return true;
 }
 
-bool KoDocument::saveOasisPreview(KoStore *store, KoXmlWriter *manifestWriter)
+bool KoDocument::saveOasisPreview(KOdfStore *store, KoXmlWriter *manifestWriter)
 {
     const QPixmap pix = generatePreview(QSize(128, 128));
     QImage preview(pix.toImage().convertToFormat(QImage::Format_ARGB32, Qt::ColorOnly));
@@ -1078,7 +1078,7 @@ bool KoDocument::saveOasisPreview(KoStore *store, KoXmlWriter *manifestWriter)
     return true;
 }
 
-bool KoDocument::savePreview(KoStore *store)
+bool KoDocument::savePreview(KOdfStore *store)
 {
     QPixmap pix = generatePreview(QSize(256, 256));
     // Reducing to 8bpp reduces file sizes quite a lot.
@@ -1503,7 +1503,7 @@ void KoDocument::setMimeTypeAfterLoading(const QString& mimeType)
 }
 
 // The caller must call store->close() if loadAndParse returns true.
-bool KoDocument::oldLoadAndParse(KoStore *store, const QString& filename, KoXmlDocument& doc)
+bool KoDocument::oldLoadAndParse(KOdfStore *store, const QString& filename, KoXmlDocument& doc)
 {
     //kDebug(30003) <<"Trying to open" << filename;
 
@@ -1616,8 +1616,8 @@ bool KoDocument::loadNativeFormat(const QString & file_)
 
 bool KoDocument::loadNativeFormatFromStore(const QString& file)
 {
-    KoStore::Backend backend = (d->specialOutputFlag == SaveAsDirectoryStore) ? KoStore::Directory : KoStore::Auto;
-    KoStore *store = KoStore::createStore(file, KoStore::Read, "", backend);
+    KOdfStore::Backend backend = (d->specialOutputFlag == SaveAsDirectoryStore) ? KOdfStore::Directory : KOdfStore::Auto;
+    KOdfStore *store = KOdfStore::createStore(file, KOdfStore::Read, "", backend);
 
     if (store->bad()) {
         d->lastErrorMessage = i18n("Not a valid KOffice file: %1", file);
@@ -1644,9 +1644,9 @@ bool KoDocument::loadNativeFormatFromStore(const QString& file)
 bool KoDocument::loadNativeFormatFromStore(QByteArray &data)
 {
     bool succes;
-    KoStore::Backend backend = (d->specialOutputFlag == SaveAsDirectoryStore) ? KoStore::Directory : KoStore::Auto;
+    KOdfStore::Backend backend = (d->specialOutputFlag == SaveAsDirectoryStore) ? KOdfStore::Directory : KOdfStore::Auto;
     QBuffer buffer(&data);
-    KoStore *store = KoStore::createStore(&buffer, KoStore::Read, "", backend);
+    KOdfStore *store = KOdfStore::createStore(&buffer, KOdfStore::Read, "", backend);
 
     if (store->bad())
         return false;
@@ -1666,7 +1666,7 @@ bool KoDocument::loadNativeFormatFromStore(QByteArray &data)
     return succes;
 }
 
-bool KoDocument::loadNativeFormatFromStoreInternal(KoStore *store)
+bool KoDocument::loadNativeFormatFromStoreInternal(KOdfStore *store)
 {
     bool oasis = true;
 
@@ -1753,7 +1753,7 @@ bool KoDocument::loadNativeFormatFromStoreInternal(KoStore *store)
 }
 
 // For embedded documents
-bool KoDocument::loadFromStore(KoStore *_store, const QString& url)
+bool KoDocument::loadFromStore(KOdfStore *_store, const QString& url)
 {
     if (_store->open(url)) {
         KoXmlDocument doc;
@@ -1784,7 +1784,7 @@ bool KoDocument::loadFromStore(KoStore *_store, const QString& url)
     return result;
 }
 
-bool KoDocument::loadOasisFromStore(KoStore *store)
+bool KoDocument::loadOasisFromStore(KOdfStore *store)
 {
     KOdfStoreReader odfStore(store);
     if (! odfStore.loadAndParse(d->lastErrorMessage)) {
@@ -1797,7 +1797,7 @@ bool KoDocument::addVersion(const QString& comment)
 {
     kDebug(30003) << "Saving the new version....";
 
-    KoStore::Backend backend = KoStore::Auto;
+    KOdfStore::Backend backend = KOdfStore::Auto;
     if (d->specialOutputFlag != 0)
         return false;
 
@@ -1812,14 +1812,14 @@ bool KoDocument::addVersion(const QString& comment)
     // to remove all the 'delete store' in all the branches
     QByteArray data;
     QBuffer buffer(&data);
-    KoStore *store = KoStore::createStore(&buffer/*file*/, KoStore::Write, mimeType, backend);
+    KOdfStore *store = KOdfStore::createStore(&buffer/*file*/, KOdfStore::Write, mimeType, backend);
     if (store->bad()) {
         delete store;
         return false;
     }
 
     kDebug(30003) << "Saving to OASIS format";
-    // Tell KoStore not to touch the file names
+    // Tell KOdfStore not to touch the file names
     store->disallowNameExpansion();
     KOdfWriteStore odfStore(store);
 
@@ -1995,12 +1995,12 @@ void KoDocument::setTitleModified()
     }
 }
 
-bool KoDocument::completeLoading(KoStore*)
+bool KoDocument::completeLoading(KOdfStore*)
 {
     return true;
 }
 
-bool KoDocument::completeSaving(KoStore*)
+bool KoDocument::completeSaving(KOdfStore*)
 {
     return true;
 }

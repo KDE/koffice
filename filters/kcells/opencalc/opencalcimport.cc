@@ -2328,7 +2328,7 @@ KoFilter::ConversionStatus OpenCalcImport::convert(QByteArray const & from, QByt
 
 KoFilter::ConversionStatus OpenCalcImport::openFile()
 {
-    KoStore * store = KoStore::createStore(m_chain->inputFile(), KoStore::Read);
+    KOdfStore * store = KOdfStore::createStore(m_chain->inputFile(), KOdfStore::Read);
 
     kDebug(30518) << "Store created";
 
@@ -2360,7 +2360,7 @@ KoFilter::ConversionStatus OpenCalcImport::openFile()
     return KoFilter::OK;
 }
 
-KoFilter::ConversionStatus OpenCalcImport::loadAndParse(KoXmlDocument& doc, const QString& fileName, KoStore *m_store)
+KoFilter::ConversionStatus OpenCalcImport::loadAndParse(KoXmlDocument& doc, const QString& fileName, KOdfStore *m_store)
 {
     return OoUtils::loadAndParse(fileName, doc, m_store);
 }

@@ -24,7 +24,7 @@
 #include <kdebug.h>
 #include <QByteArray>
 
-KWDWriter::KWDWriter(KoStore *store)
+KWDWriter::KWDWriter(KOdfStore *store)
 {
     _store = store;
     _doc = new QDomDocument("DOC");

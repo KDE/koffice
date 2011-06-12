@@ -130,23 +130,23 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
     LEInputStream wdocument_stream(&buff3);
 
     // Create output files
-    KoStore *storeout;
+    KOdfStore *storeout;
     struct Finalizer {
     public:
-        Finalizer(KoStore *store) : m_store(store), m_genStyles(0), m_document(0), m_contentWriter(0), m_bodyWriter(0) { }
+        Finalizer(KOdfStore *store) : m_store(store), m_genStyles(0), m_document(0), m_contentWriter(0), m_bodyWriter(0) { }
         ~Finalizer() {
             delete m_store; delete m_genStyles; delete m_document; delete m_contentWriter; delete m_bodyWriter;
         }
 
-        KoStore *m_store;
+        KOdfStore *m_store;
         KOdfGenericStyles *m_genStyles;
         Document *m_document;
         KoXmlWriter* m_contentWriter;
         KoXmlWriter* m_bodyWriter;
     };
 
-    storeout = KoStore::createStore(outputFile, KoStore::Write,
-                                    "application/vnd.oasis.opendocument.text", KoStore::Zip);
+    storeout = KOdfStore::createStore(outputFile, KOdfStore::Write,
+                                    "application/vnd.oasis.opendocument.text", KOdfStore::Zip);
     if (!storeout) {
         kWarning(30513) << "Unable to open output file!";
         return KoFilter::FileNotFound;

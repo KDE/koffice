@@ -115,7 +115,7 @@
 #include <KoSelection.h>
 #include <KoShape.h>
 #include <KoShapeManager.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoViewConverter.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
@@ -2921,7 +2921,7 @@ bool CellToolBase::paste()
         if (arr.isEmpty())
             return false;
         QBuffer buffer(&arr);
-        KoStore * store = KoStore::createStore(&buffer, KoStore::Read);
+        KOdfStore * store = KOdfStore::createStore(&buffer, KOdfStore::Read);
 
         KOdfStoreReader odfStore(store);
         KoXmlDocument doc;

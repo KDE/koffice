@@ -27,7 +27,7 @@
 #include "KoImageData.h"
 
 #include <KoXmlWriter.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 
 #include <kmimetype.h>
@@ -234,7 +234,7 @@ void KoShapeSavingContext::addDataCenter(KoDataCenterBase * dataCenter)
     d->dataCenter.insert(dataCenter);
 }
 
-bool KoShapeSavingContext::saveDataCenter(KoStore *store, KoXmlWriter* manifestWriter)
+bool KoShapeSavingContext::saveDataCenter(KOdfStore *store, KoXmlWriter* manifestWriter)
 {
     bool ok = true;
     foreach(KoDataCenterBase *dataCenter, d->dataCenter) {

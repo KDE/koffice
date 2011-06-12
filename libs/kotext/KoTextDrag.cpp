@@ -28,7 +28,7 @@
 
 #include <kdebug.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericChanges.h>
 #include <KOdfWriteStore.h>
@@ -60,15 +60,15 @@ KoTextDrag::~KoTextDrag()
 bool KoTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
 {
     struct Finally {
-        Finally(KoStore *s) : store(s) { }
+        Finally(KOdfStore *s) : store(s) { }
         ~Finally() {
             delete store;
         }
-        KoStore *store;
+        KOdfStore *store;
     };
 
     QBuffer buffer;
-    KoStore* store = KoStore::createStore(&buffer, KoStore::Write, mimeType);
+    KOdfStore* store = KOdfStore::createStore(&buffer, KOdfStore::Write, mimeType);
     Finally finally(store); // delete store when we exit this scope
     Q_ASSERT(store);
     Q_ASSERT(!store->bad());

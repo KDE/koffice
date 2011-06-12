@@ -110,7 +110,7 @@ QDomDocument KoDocumentInfo::save()
     return doc;
 }
 
-bool KoDocumentInfo::saveOasis(KoStore* store)
+bool KoDocumentInfo::saveOasis(KOdfStore* store)
 {
     saveParameters();
 

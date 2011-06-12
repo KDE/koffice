@@ -37,7 +37,7 @@
 #include <QMap>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyles.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <vector>
 
 class DrawStyle;
@@ -92,7 +92,7 @@ class KWordGraphicsHandler : public QObject, public wvWare::GraphicsHandler
     Q_OBJECT
 public:
     KWordGraphicsHandler(Document* doc, KoXmlWriter* bodyWriter, KoXmlWriter* manifestWriter,
-                         KoStore* store, KOdfGenericStyles* mainStyles);
+                         KOdfStore* store, KOdfGenericStyles* mainStyles);
     ~KWordGraphicsHandler();
 
     /**
@@ -148,7 +148,7 @@ private:
     /**
      * Store floating pictures into ODT, write the appropriate manifest entry.
      */
-    QMap<QByteArray, QString> createFloatingPictures(KoStore* store, KoXmlWriter* manifest);
+    QMap<QByteArray, QString> createFloatingPictures(KOdfStore* store, KoXmlWriter* manifest);
 
     /**
      * Get the path in the ODT document that corresponds to the picture
@@ -235,7 +235,7 @@ private:
     void processInlinePictureFrame(const MSO::OfficeArtSpContainer& o, DrawingWriter& out);
 
     Document* m_document;
-    KoStore* m_store;
+    KOdfStore* m_store;
     KoXmlWriter* m_bodyWriter;
     KoXmlWriter* m_manifestWriter;
     KOdfGenericStyles* m_mainStyles;

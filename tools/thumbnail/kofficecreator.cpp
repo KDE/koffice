@@ -30,7 +30,7 @@
 #include <kparts/part.h>
 #include <kparts/componentfactory.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoDocument.h>
 #include <QAbstractEventDispatcher>
 #include <kdemacros.h>
@@ -55,7 +55,7 @@ KOfficeCreator::~KOfficeCreator()
 
 bool KOfficeCreator::create(const QString &path, int width, int height, QImage &img)
 {
-    KoStore* store = KoStore::createStore(path, KoStore::Read);
+    KOdfStore* store = KOdfStore::createStore(path, KOdfStore::Read);
 
     if ( store && ( store->open( QString("Thumbnails/thumbnail.png") ) || store->open( QString("preview.png") ) ) )
     {

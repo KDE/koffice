@@ -25,7 +25,7 @@
 #include <QtCore/QFile>
 using namespace Soprano;
 
-bool KoTextRdfCore::saveRdf(Soprano::Model *model, Soprano::StatementIterator triples, KoStore *store, KoXmlWriter *manifestWriter, const QString &fileName)
+bool KoTextRdfCore::saveRdf(Soprano::Model *model, Soprano::StatementIterator triples, KOdfStore *store, KoXmlWriter *manifestWriter, const QString &fileName)
 {
     bool ok = false;
 
@@ -60,7 +60,7 @@ bool KoTextRdfCore::saveRdf(Soprano::Model *model, Soprano::StatementIterator tr
     return ok;
 }
 
-bool KoTextRdfCore::createAndSaveManifest(Soprano::Model *docmodel, const QMap<QString, QString> &idmap, KoStore *store, KoXmlWriter *manifestWriter)
+bool KoTextRdfCore::createAndSaveManifest(Soprano::Model *docmodel, const QMap<QString, QString> &idmap, KOdfStore *store, KoXmlWriter *manifestWriter)
 {
     Soprano::Model *tmpmodel(Soprano::createModel());
     QMap<QString, QString>::const_iterator iditer = idmap.constBegin();
@@ -107,7 +107,7 @@ bool KoTextRdfCore::createAndSaveManifest(Soprano::Model *docmodel, const QMap<Q
     return ret;
 }
 
-bool KoTextRdfCore::loadManifest(KoStore *store, Soprano::Model *model)
+bool KoTextRdfCore::loadManifest(KOdfStore *store, Soprano::Model *model)
 {
     bool ok = true;
     QString fileName = "manifest.rdf";

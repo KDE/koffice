@@ -21,7 +21,7 @@
 #define HANCOMWORDIMPORT_H
 
 #include <KoFilter.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <QVariantList>
 
 class HancomWordImport : public KoFilter

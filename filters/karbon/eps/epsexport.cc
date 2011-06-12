@@ -30,7 +30,7 @@
 #include <KoDocumentInfo.h>
 #include <KoFilter.h>
 #include <KoFilterChain.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include "epsexport.h"
 #include "epsexportdlg.h"
 #include "vcolor.h"
@@ -79,7 +79,7 @@ EpsExport::convert(const QByteArray& from, const QByteArray& to)
     }
 
 
-    KOdfStorageDevice* storeIn = m_chain->storageFile("root", KoStore::Read);
+    KOdfStorageDevice* storeIn = m_chain->storageFile("root", KOdfStore::Read);
 
     if (!storeIn)
         return KoFilter::StupidError;
@@ -163,7 +163,7 @@ EpsExport::visitVDocument(KarbonDocument& document)
 
     // Process document info.
     KOdfStorageDevice* storeIn;
-    storeIn = m_chain->storageFile("documentinfo.xml", KoStore::Read);
+    storeIn = m_chain->storageFile("documentinfo.xml", KOdfStore::Read);
 
     if (storeIn) {
         QDomDocument domIn;

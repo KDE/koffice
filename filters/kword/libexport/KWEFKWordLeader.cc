@@ -43,7 +43,7 @@
 #include <kmessagebox.h>
 
 #include <KoGlobal.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 #include "KWEFStructures.h"
 #include "TagProcessing.h"
@@ -1240,7 +1240,7 @@ QIODevice* KWEFKWordLeader::getSubFileDevice(const QString& fileName)
 {
     KOdfStorageDevice* subFile;
 
-    subFile = m_chain->storageFile(fileName, KoStore::Read);
+    subFile = m_chain->storageFile(fileName, KOdfStore::Read);
 
     if (!subFile) {
         kError(30508) << "Could not get a device for sub-file: " << fileName << endl;
@@ -1254,7 +1254,7 @@ bool KWEFKWordLeader::loadSubFile(const QString& fileName, QByteArray& array)
 {
     KOdfStorageDevice* subFile;
 
-    subFile = m_chain->storageFile(fileName, KoStore::Read);
+    subFile = m_chain->storageFile(fileName, KOdfStore::Read);
 
     if (!subFile) {
         kError(30508) << "Could not get a device for sub-file: " << fileName << endl;
@@ -1297,12 +1297,12 @@ KoFilter::ConversionStatus KWEFKWordLeader::convert(KoFilterChain* chain,
 
     KOdfStorageDevice* subFile;
 
-    subFile = chain->storageFile("documentinfo.xml", KoStore::Read);
+    subFile = chain->storageFile("documentinfo.xml", KOdfStore::Read);
     kDebug(30508) << "Processing documentinfo.xml...";
     // Do not care if we cannot open the document info.
     ProcessStoreFile(subFile, ProcessDocumentInfoTag, this);
 
-    subFile = chain->storageFile("root", KoStore::Read);
+    subFile = chain->storageFile("root", KOdfStore::Read);
     kDebug(30508) << "Processing root...";
     if (!ProcessStoreFile(subFile, ProcessDocTag, this)) {
         kWarning(30508) << "Opening root has failed. Trying raw XML file!";

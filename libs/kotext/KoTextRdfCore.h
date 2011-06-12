@@ -26,7 +26,7 @@
 // with soprano enabled.
 #include <Soprano/Soprano>
 
-class KoStore;
+class KOdfStore;
 class KoXmlWriter;
 
 /**

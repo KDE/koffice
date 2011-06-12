@@ -34,7 +34,7 @@ class QSizeF;
 class QUrl;
 class KoImageCollection;
 class KoImageDataPrivate;
-class KoStore;
+class KOdfStore;
 
 /**
  * This class is meant to represent the image data so it can be shared between image shapes.
@@ -86,7 +86,7 @@ public:
     void setImage(const QByteArray &imageData, KoImageCollection *collection = 0);
     void setExternalImage(const QUrl &location, KoImageCollection *collection = 0);
     void setExternalImage(const QString &location, KoImageCollection *collection = 0);
-    void setImage(const QString &location, KoStore *store, KoImageCollection *collection = 0);
+    void setImage(const QString &location, KOdfStore *store, KoImageCollection *collection = 0);
 
     /**
      * Save the image data to the param device.

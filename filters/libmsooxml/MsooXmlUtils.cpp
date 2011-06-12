@@ -252,7 +252,7 @@ QIODevice* Utils::openDeviceForFile(const KZip* zip, QString& errorMessage, cons
 
 #define BLOCK_SIZE 4096
 static KoFilter::ConversionStatus copyOle(QString& errorMessage,
-                                    const QString sourceName, KoStore *outputStore,
+                                    const QString sourceName, KOdfStore *outputStore,
                                     const QString& destinationName, const KZip* zip)
 {
     KoFilter::ConversionStatus status = KoFilter::OK;
@@ -334,7 +334,7 @@ static KoFilter::ConversionStatus copyOle(QString& errorMessage,
 
 #define BLOCK_SIZE 4096
 KoFilter::ConversionStatus Utils::copyFile(const KZip* zip, QString& errorMessage,
-                                           const QString& sourceName, KoStore *outputStore,
+                                           const QString& sourceName, KOdfStore *outputStore,
                                            const QString& destinationName, bool oleType)
 {
     if (outputStore->hasFile(destinationName)) {

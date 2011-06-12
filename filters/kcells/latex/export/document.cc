@@ -25,7 +25,7 @@
 
 #include "document.h"
 
-Document::Document(const KoStore* in, QString fileOut):
+Document::Document(const KOdfStore* in, QString fileOut):
         XmlParser(in), _file(fileOut), _in(in)
 {
     //kDebug(30522) << fileIn;

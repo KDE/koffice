@@ -39,7 +39,7 @@
 #include <QByteArray>
 
 #include <KoFilter.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <QVariantList>
 
 class ABIWORDImport : public KoFilter

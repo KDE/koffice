@@ -54,7 +54,7 @@
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  true to construct a modal dialog.
  */
-KCellsLatexExportDiaImpl::KCellsLatexExportDiaImpl(KoStore* in, QWidget* parent,
+KCellsLatexExportDiaImpl::KCellsLatexExportDiaImpl(KOdfStore* in, QWidget* parent,
         const char* name_, bool modal, Qt::WFlags fl)
         : LatexExportDia(parent, name_, modal, fl), _in(in)
 {

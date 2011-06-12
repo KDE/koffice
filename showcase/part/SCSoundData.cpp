@@ -23,7 +23,7 @@
 #include "SCSoundCollection.h"
 
 #include <KoUnit.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 #include <KTemporaryFile>
 #include <KDebug>

@@ -59,7 +59,7 @@ KoFilter::ConversionStatus PalmDocImport::convert(const QByteArray& from, const 
     QString root = processPlainDocument(doc.text());
 
     // prepare storage
-    KOdfStorageDevice *out = m_chain->storageFile("root", KoStore::Write);
+    KOdfStorageDevice *out = m_chain->storageFile("root", KOdfStore::Write);
 
     if (out) {
         QByteArray cstring = root.utf8();
@@ -76,7 +76,7 @@ KoFilter::ConversionStatus PalmDocImport::convert(const QByteArray& from, const 
     QString documentInfo = processDocumentInfo(docTitle);
 
     // store document info
-    out = m_chain->storageFile("documentinfo.xml", KoStore::Write);
+    out = m_chain->storageFile("documentinfo.xml", KOdfStore::Write);
     if (out) {
         QByteArray cstring = documentInfo.utf8();
         cstring.prepend("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");

@@ -34,7 +34,7 @@
 #include <QVariant>
 
 // KOffice
-//#include <KoStore.h>
+//#include <KOdfStore.h>
 //#include <KoXmlWriter.h>
 //#include <KoShapeSavingContext.h>
 

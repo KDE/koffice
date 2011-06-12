@@ -27,7 +27,7 @@
 #include <kdebug.h>
 
 #include <klocale.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoFilterChain.h>
 #include <KOdfFontData.h>
 

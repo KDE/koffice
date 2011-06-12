@@ -55,14 +55,14 @@ KoImageCollection::~KoImageCollection()
     delete d;
 }
 
-bool KoImageCollection::completeLoading(KoStore *store)
+bool KoImageCollection::completeLoading(KOdfStore *store)
 {
     Q_UNUSED(store);
     d->storeImages.clear();
     return true;
 }
 
-bool KoImageCollection::completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context)
+bool KoImageCollection::completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context)
 {
     QMap<qint64, QString> images(context->imagesToSave());
     QMap<qint64, QString>::iterator it(images.begin());
@@ -141,7 +141,7 @@ KoImageData *KoImageCollection::createExternalImageData(const QUrl &url)
     return data;
 }
 
-KoImageData *KoImageCollection::createImageData(const QString &href, KoStore *store)
+KoImageData *KoImageCollection::createImageData(const QString &href, KOdfStore *store)
 {
     // the tricky thing with a 'store' is that we need to read the data now
     // as the store will no longer be readable after the loading completed.

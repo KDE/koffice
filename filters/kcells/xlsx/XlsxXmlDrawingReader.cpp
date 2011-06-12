@@ -450,7 +450,7 @@ KoFilter::ConversionStatus XlsxXmlDrawingReader::read_diagram()
 
     //kDebug()<<"colorsfile="<<colorsfile<<"datafile="<<datafile<<"layoutfile="<<layoutfile<<"quickstylefile="<<quickstylefile;
 
-    //KoStore* storeout = m_context->import->outputStore();
+    //KOdfStore* storeout = m_context->import->outputStore();
     MSOOXML::MsooXmlDiagramReaderContext* context = new MSOOXML::MsooXmlDiagramReaderContext(mainStyles);
 
     // first read the data-model

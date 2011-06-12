@@ -25,7 +25,7 @@
 #include <KoFilter.h>
 
 class KoXmlWriter;
-class KoStore;
+class KOdfStore;
 class KOdfGenericStyles;
 
 /**
@@ -85,7 +85,7 @@ protected:
      * This method is called in convert() after creating @a outputStore, @a writers and @a mainStyles.
      * Implement it for your filter with code that fills the ODF structures with converted data.
      */
-    virtual KoFilter::ConversionStatus createDocument(KoStore *outputStore,
+    virtual KoFilter::ConversionStatus createDocument(KOdfStore *outputStore,
             KoOdfWriters *writers) = 0;
 
 private:

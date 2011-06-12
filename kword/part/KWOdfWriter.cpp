@@ -173,7 +173,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embedd
 {
     //kDebug(32001) << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 
-    KoStore *store = odfStore.store();
+    KOdfStore *store = odfStore.store();
 
     if (! store->open("settings.xml")) {
         return false;
@@ -352,7 +352,7 @@ bool KWOdfWriter::save(KOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embedd
     return true;
 }
 
-bool KWOdfWriter::saveOdfSettings(KoStore *store)
+bool KWOdfWriter::saveOdfSettings(KOdfStore *store)
 {
     KOdfStorageDevice settingsDev(store);
     KoXmlWriter *settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");

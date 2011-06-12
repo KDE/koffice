@@ -21,7 +21,7 @@
 #define WPGIMPORT_H
 
 #include <KoFilter.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <QVariantList>
 
 class WPGImport : public KoFilter

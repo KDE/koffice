@@ -19,11 +19,11 @@
 
 #include "KOdfStorageDevice.h"
 
-/// Note: KoStore::open() should be called before calling this.
-KOdfStorageDevice::KOdfStorageDevice(KoStore * store) : m_store(store)
+/// Note: KOdfStore::open() should be called before calling this.
+KOdfStorageDevice::KOdfStorageDevice(KOdfStore * store) : m_store(store)
 {
     // koffice-1.x behavior compat: a KOdfStorageDevice is automatically open
-    setOpenMode(m_store->mode() == KoStore::Read ? QIODevice::ReadOnly : QIODevice::WriteOnly);
+    setOpenMode(m_store->mode() == KOdfStore::Read ? QIODevice::ReadOnly : QIODevice::WriteOnly);
 }
 
 KOdfStorageDevice::~KOdfStorageDevice()
@@ -39,9 +39,9 @@ bool KOdfStorageDevice::open(OpenMode m)
 {
     setOpenMode(m);
     if (m & QIODevice::ReadOnly)
-        return (m_store->mode() == KoStore::Read);
+        return (m_store->mode() == KOdfStore::Read);
     if (m & QIODevice::WriteOnly)
-        return (m_store->mode() == KoStore::Write);
+        return (m_store->mode() == KOdfStore::Write);
     return false;
 }
 
@@ -51,7 +51,7 @@ void KOdfStorageDevice::close()
 
 qint64 KOdfStorageDevice::size() const
 {
-    if (m_store->mode() == KoStore::Read)
+    if (m_store->mode() == KOdfStore::Read)
         return m_store->size();
     else
         return 0xffffffff;

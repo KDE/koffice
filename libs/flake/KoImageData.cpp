@@ -26,7 +26,7 @@
 #include "KoImageData_p.h"
 
 #include <KoUnit.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 
 #include <kdebug.h>
@@ -230,7 +230,7 @@ void KoImageData::setExternalImage(const QUrl &location, KoImageCollection *coll
     }
 }
 
-void KoImageData::setImage(const QString &url, KoStore *store, KoImageCollection *collection)
+void KoImageData::setImage(const QString &url, KOdfStore *store, KoImageCollection *collection)
 {
     if (collection) {
         // Let the collection first check if it already has one. If it
@@ -251,7 +251,7 @@ void KoImageData::setImage(const QString &url, KoStore *store, KoImageCollection
         if (store->open(url)) {
             struct Finalizer {
                 ~Finalizer() { store->close(); }
-                KoStore *store;
+                KOdfStore *store;
             };
             Finalizer closer;
             closer.store = store;

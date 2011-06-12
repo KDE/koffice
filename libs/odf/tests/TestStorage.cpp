@@ -23,7 +23,7 @@
 #include <kcmdlineargs.h>
 #include <kapplication.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoEncryptionChecker.h>
 #include <kdebug.h>
 #include <stdlib.h>
@@ -58,12 +58,12 @@ void TestStorage::storage_data()
     QTest::addColumn<int>("type");
     QTest::addColumn<QString>("testFile");
 
-    QTest::newRow("tar") << (int) KoStore::Tar << "test.tgz";
-    QTest::newRow("directory") << (int) KoStore::Directory << "testdir/maindoc.xml";
-    QTest::newRow("zip") << (int) KoStore::Zip <<"test.zip";
+    QTest::newRow("tar") << (int) KOdfStore::Tar << "test.tgz";
+    QTest::newRow("directory") << (int) KOdfStore::Directory << "testdir/maindoc.xml";
+    QTest::newRow("zip") << (int) KOdfStore::Zip <<"test.zip";
 #ifdef QCA2
     if (KoEncryptionChecker::isEncryptionSupported()) {
-        QTest::newRow("Encrypted") << (int) KoStore::Encrypted << "testEncrypted.zip";
+        QTest::newRow("Encrypted") << (int) KOdfStore::Encrypted << "testEncrypted.zip";
     }
 #endif
 }
@@ -81,7 +81,7 @@ void TestStorage::storage()
 
     QFETCH(int, type);
     QFETCH(QString, testFile);
-    KoStore::Backend backend = static_cast<KoStore::Backend>(type);
+    KOdfStore::Backend backend = static_cast<KOdfStore::Backend>(type);
 
     if (QFile::exists(testFile))
         QFile::remove(testFile);
@@ -95,7 +95,7 @@ void TestStorage::storage()
 #endif
     }
 
-    KoStore* store = KoStore::createStore(testFile, KoStore::Write, "", backend);
+    KOdfStore* store = KOdfStore::createStore(testFile, KOdfStore::Write, "", backend);
     QVERIFY(store);
     QVERIFY(store->bad() == false);
 
@@ -130,7 +130,7 @@ void TestStorage::storage()
         store->close();
     delete store;
 
-    store = KoStore::createStore(testFile, KoStore::Read, "", backend);
+    store = KOdfStore::createStore(testFile, KOdfStore::Read, "", backend);
     QVERIFY(store->bad() == false);
 
     if (store->isEncrypted())
@@ -205,16 +205,16 @@ void TestStorage::storage2_data()
     QTest::addColumn<int>("type");
     QTest::addColumn<QString>("testFile");
 
-    QTest::newRow("tar") << (int) KoStore::Tar << "test.tgz";
-    QTest::newRow("directory") << (int) KoStore::Directory << "testdir/maindoc.xml";
-    QTest::newRow("zip") << (int) KoStore::Zip <<"test.zip";
+    QTest::newRow("tar") << (int) KOdfStore::Tar << "test.tgz";
+    QTest::newRow("directory") << (int) KOdfStore::Directory << "testdir/maindoc.xml";
+    QTest::newRow("zip") << (int) KOdfStore::Zip <<"test.zip";
 }
 
 void TestStorage::storage2()
 {
     QFETCH(int, type);
     QFETCH(QString, testFile);
-    KoStore::Backend backend = static_cast<KoStore::Backend>(type);
+    KOdfStore::Backend backend = static_cast<KOdfStore::Backend>(type);
 
     if (QFile::exists(testFile))
         QFile::remove(testFile);
@@ -228,7 +228,7 @@ void TestStorage::storage2()
 #endif
     }
 
-    KoStore* store = KoStore::createStore(testFile, KoStore::Write, "", backend);
+    KOdfStore* store = KOdfStore::createStore(testFile, KOdfStore::Write, "", backend);
     QVERIFY(store->bad() == false);
 
     // Write
@@ -243,7 +243,7 @@ void TestStorage::storage2()
     store->close();
     delete store;
 
-    store = KoStore::createStore(testFile, KoStore::Read, "", backend);
+    store = KOdfStore::createStore(testFile, KOdfStore::Read, "", backend);
     QVERIFY(store->bad() == false);
     // Read back
     QVERIFY (store->open("layer"));

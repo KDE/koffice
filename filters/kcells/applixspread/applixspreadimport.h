@@ -28,7 +28,7 @@
 #include <QByteArray>
 
 #include <KoFilter.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 struct t_mycolor;
 struct t_rc;

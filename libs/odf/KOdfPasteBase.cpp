@@ -26,7 +26,7 @@
 
 #include <kdebug.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStoreReader.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
@@ -52,7 +52,7 @@ bool KOdfPasteBase::paste(KoOdf::DocumentType documentType, const QByteArray &by
 
     QBuffer buffer;
     buffer.setData(bytes);
-    KoStore * store = KoStore::createStore(&buffer, KoStore::Read);
+    KOdfStore * store = KOdfStore::createStore(&buffer, KOdfStore::Read);
     store->disallowNameExpansion();
     KOdfStoreReader odfStore(store);
 

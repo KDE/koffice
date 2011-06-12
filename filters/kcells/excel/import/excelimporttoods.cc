@@ -122,7 +122,7 @@ public:
     QString inputFile;
     QString outputFile;
 
-    KoStore* storeout;
+    KOdfStore* storeout;
     Workbook *workbook;
 
     KOdfGenericStyles *styles;
@@ -146,7 +146,7 @@ public:
     int rowsCountTotal, rowsCountDone;
     void addProgress(int addValue);
 
-    bool createStyles(KoStore* store, KoXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles);
+    bool createStyles(KOdfStore* store, KoXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles);
     bool createContent(KOdfWriteStore* store);
     bool createMeta(KOdfWriteStore* store);
     bool createSettings(KOdfWriteStore* store);
@@ -210,8 +210,8 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
     d->outputFile = m_chain->outputFile();
 
     // create output store
-    d->storeout = KoStore::createStore(d->outputFile, KoStore::Write,
-                                    "application/vnd.oasis.opendocument.spreadsheet", KoStore::Zip);
+    d->storeout = KOdfStore::createStore(d->outputFile, KOdfStore::Write,
+                                    "application/vnd.oasis.opendocument.spreadsheet", KOdfStore::Zip);
     if (!d->storeout || d->storeout->bad()) {
         kWarning() << "Couldn't open the requested file.";
         delete d->workbook;
@@ -221,7 +221,7 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
 
     emit sigProgress(0);
 
-    // Tell KoStore not to touch the file names
+    // Tell KOdfStore not to touch the file names
     d->storeout->disallowNameExpansion();
 
     // open inputFile
@@ -400,7 +400,7 @@ bool ExcelImport::Private::createContent(KOdfWriteStore* store)
 
 
 // Writes the styles.xml
-bool ExcelImport::Private::createStyles(KoStore* store, KoXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles)
+bool ExcelImport::Private::createStyles(KOdfStore* store, KoXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles)
 {
     Q_UNUSED(manifestWriter);
     if (!store->open("styles.xml"))

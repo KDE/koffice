@@ -46,7 +46,7 @@
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  true to construct a modal dialog.
  */
-XSLTImportDia::XSLTImportDia(KoStore* out, const QByteArray &format, QWidget* parent,  const char* name_, bool modal, Qt::WFlags fl)
+XSLTImportDia::XSLTImportDia(KOdfStore* out, const QByteArray &format, QWidget* parent,  const char* name_, bool modal, Qt::WFlags fl)
         : XSLTDialog(parent, name_, modal, fl)
 {
     int i = 0;

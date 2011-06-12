@@ -28,7 +28,7 @@
 #include <QVariantList>
 
 class QIODevice;
-class KoStore;
+class KOdfStore;
 class KWord13Document;
 
 class KWord13Import : public KoFilter
@@ -44,6 +44,6 @@ public:
 protected:
     bool parseInfo(QIODevice* io, KWord13Document& kwordDocument);
     bool parseRoot(QIODevice* io, KWord13Document& kwordDocument);
-    bool postParse(KoStore* store, KWord13Document& doc);
+    bool postParse(KOdfStore* store, KWord13Document& doc);
 };
 #endif // KWORD_1_3_IMPORT_H

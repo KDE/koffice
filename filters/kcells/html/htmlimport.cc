@@ -78,10 +78,10 @@ KoFilter::ConversionStatus HTMLImport::convert(const QByteArray& from, const QBy
         return KoFilter::StupidError;
     
     // create output store
-    KoStore* storeout = KoStore::createStore(outputFile, KoStore::Write, "application/vnd.oasis.opendocument.spreadsheet", KoStore::Zip);
+    KOdfStore* storeout = KOdfStore::createStore(outputFile, KOdfStore::Write, "application/vnd.oasis.opendocument.spreadsheet", KOdfStore::Zip);
     if (!storeout)
         return KoFilter::FileNotFound;
-    storeout->disallowNameExpansion(); // Tell KoStore not to touch the file names
+    storeout->disallowNameExpansion(); // Tell KOdfStore not to touch the file names
     
     KOdfWriteStore oasisStore(storeout);
     m_manifestWriter = oasisStore.manifestWriter("application/vnd.oasis.opendocument.spreadsheet");

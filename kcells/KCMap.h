@@ -33,7 +33,7 @@
 #include <KoDataCenterBase.h>
 #include <KoXmlReader.h>
 
-class KoStore;
+class KOdfStore;
 class KOdfLoadingContext;
 class KoEmbeddedDocumentSaver;
 class KoStyleManager;
@@ -103,8 +103,8 @@ public:
     bool isReadWrite() const;
 
     // KoDataCenterBase interface
-    virtual bool completeLoading(KoStore *store);
-    virtual bool completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext * context);
+    virtual bool completeLoading(KOdfStore *store);
+    virtual bool completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext * context);
 
     /**
      * \return a pointer to the binding manager
@@ -217,8 +217,8 @@ public:
     QDomElement save(QDomDocument& doc);
 
 
-    bool loadChildren(KoStore* _store);
-    bool saveChildren(KoStore* _store);
+    bool loadChildren(KOdfStore* _store);
+    bool saveChildren(KOdfStore* _store);
 
     /**
      * The sheet named @p _from is being moved to the sheet @p _to.

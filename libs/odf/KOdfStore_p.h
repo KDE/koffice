@@ -32,7 +32,7 @@
 //
 
 
-#include "KoStore.h"
+#include "KOdfStore.h"
 
 #include <QString>
 
@@ -43,7 +43,7 @@ class QWidget;
 class KoStorePrivate
 {
 public:
-    KoStorePrivate(KoStore *qq)
+    KoStorePrivate(KOdfStore *qq)
         : q(qq),
         fileMode(Local),
         window(0),
@@ -91,7 +91,7 @@ public:
 
     bool extractFile(const QString &sourceName, QIODevice &buffer);
 
-    KoStore *q;
+    KOdfStore *q;
     /**
      * original URL of the remote file
      * (undefined for a local file)
@@ -101,7 +101,7 @@ public:
     QString localFileName;
     QWidget *window;
 
-    KoStore::Mode mode;
+    KOdfStore::Mode mode;
 
     /// Store the filenames (with full path inside the archive) when writing, to avoid duplicates
     QStringList filesList;

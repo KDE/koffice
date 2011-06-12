@@ -38,7 +38,7 @@
 class QSize;
 class KZip;
 class KOdfWriteStore;
-class KoStore;
+class KOdfStore;
 
 namespace MSOOXML
 {
@@ -57,7 +57,7 @@ public:
 
     virtual ~MsooXmlImport();
 
-    KoStore* outputStore() const { return m_outputStore; }
+    KOdfStore* outputStore() const { return m_outputStore; }
 
     //! KoFilter::UsageError is returned if this method is called outside
     //! of the importing process, i.e. not from within parseParts().
@@ -86,7 +86,7 @@ public:
     KoFilter::ConversionStatus imageSize(const QString& sourceName, QSize& size);
 
 protected:
-    virtual KoFilter::ConversionStatus createDocument(KoStore *outputStore,
+    virtual KoFilter::ConversionStatus createDocument(KOdfStore *outputStore,
                                                       KoOdfWriters *writers);
 
     bool isPasswordProtectedFile(QString &filename);
@@ -143,7 +143,7 @@ private:
 
     KZip* m_zip; //!< Input zip file
 
-    KoStore* m_outputStore; //!< output store used for copying files
+    KOdfStore* m_outputStore; //!< output store used for copying files
 
     //! XML from "[Content_Types].xml" file.
     KoXmlDocument m_contentTypesXML;

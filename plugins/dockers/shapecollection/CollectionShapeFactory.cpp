@@ -26,7 +26,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KoShapeControllerBase.h>
 #include <KOdfLoadingContext.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStoreReader.h>
 #include <KoXmlNS.h>
 #include <KoShapeRegistry.h>
@@ -64,7 +64,7 @@ KoShape *CollectionShapeFactory::createDefaultShape(KoResourceManager *documentR
 
     if ( !arr.isEmpty() ) {
         QBuffer buffer( &arr );
-        KoStore * store = KoStore::createStore( &buffer, KoStore::Read );
+        KOdfStore * store = KOdfStore::createStore( &buffer, KOdfStore::Read );
         KOdfStoreReader odfStore( store );
 
         QString errorMessage;

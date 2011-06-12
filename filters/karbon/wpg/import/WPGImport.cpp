@@ -108,9 +108,9 @@ KoFilter::ConversionStatus WPGImport::convert(const QByteArray& from, const QByt
 
 
     // create output store
-    KoStore* storeout;
-    storeout = KoStore::createStore(m_chain->outputFile(), KoStore::Write,
-                                    "application/vnd.oasis.opendocument.graphics", KoStore::Zip);
+    KOdfStore* storeout;
+    storeout = KOdfStore::createStore(m_chain->outputFile(), KOdfStore::Write,
+                                    "application/vnd.oasis.opendocument.graphics", KOdfStore::Zip);
 
     if (!storeout) {
         kWarning() << "Couldn't open the requested file.";

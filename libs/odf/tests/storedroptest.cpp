@@ -19,7 +19,7 @@
 
 #include <kapplication.h>
 #include <kcmdlineargs.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <QStringList>
 #include <QBuffer>
 #include <QClipboard>
@@ -42,7 +42,7 @@ protected:
 private:
     bool processMimeSource(QMimeSource* ev);
     void showZipContents(QByteArray data, const char* mimeType, bool oasis);
-    QString loadTextFile(KoStore* store, const QString& fileName);
+    QString loadTextFile(KOdfStore* store, const QString& fileName);
 };
 
 int main(int argc, char** argv)
@@ -62,7 +62,7 @@ int main(int argc, char** argv)
 StoreDropTest::StoreDropTest(QWidget* parent)
         : QTextBrowser(parent)
 {
-    setText("KoStore drop/paste test\nDrop or paste a selection from a KOffice application into this widget to see the ZIP contents");
+    setText("KOdfStore drop/paste test\nDrop or paste a selection from a KOffice application into this widget to see the ZIP contents");
     setAcceptDrops(true);
 }
 
@@ -139,7 +139,7 @@ void StoreDropTest::showZipContents(QByteArray data, const char* mimeType, bool 
         return;
     }
     QBuffer buffer(&data);
-    KoStore * store = KoStore::createStore(&buffer, KoStore::Read);
+    KOdfStore * store = KOdfStore::createStore(&buffer, KOdfStore::Read);
     if (store->bad()) {
         setText("Invalid ZIP!");
         return;
@@ -159,7 +159,7 @@ void StoreDropTest::showZipContents(QByteArray data, const char* mimeType, bool 
     setText(txt);
 }
 
-QString StoreDropTest::loadTextFile(KoStore* store, const QString& fileName)
+QString StoreDropTest::loadTextFile(KOdfStore* store, const QString& fileName)
 {
     if (!store->open(fileName))
         return QString("%1 not found\n").arg(fileName);

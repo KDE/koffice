@@ -20,7 +20,7 @@
 
 #include <QByteArray>
 #include <QBuffer>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
@@ -36,7 +36,7 @@ void TestKoOdfLoadingContext::testFillStyleStack()
     QBuffer buffer(&byteArray);
 #endif
     const char * mimeType = "application/vnd.oasis.opendocument.text";
-    KoStore * store(KoStore::createStore("test.odt", KoStore::Write, mimeType));
+    KOdfStore * store(KOdfStore::createStore("test.odt", KOdfStore::Write, mimeType));
     KOdfWriteStore odfStore(store);
     KoXmlWriter* manifestWriter = odfStore.manifestWriter(mimeType);
 
@@ -109,7 +109,7 @@ void TestKoOdfLoadingContext::testFillStyleStack()
 
     delete store;
 
-    store = KoStore::createStore("test.odt", KoStore::Read, mimeType);
+    store = KOdfStore::createStore("test.odt", KOdfStore::Read, mimeType);
     KOdfStoreReader readStore(store);
     QString errorMessage;
     QVERIFY(readStore.loadAndParse(errorMessage) == true);

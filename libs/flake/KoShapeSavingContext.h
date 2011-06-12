@@ -36,7 +36,7 @@ class KoDataCenterBase;
 class KoEmbeddedDocumentSaver;
 class KoImageData;
 class KoShapeLayer;
-class KoStore;
+class KOdfStore;
 class KoSharedSavingData;
 class KoShapeSavingContextPrivate;
 class KoShapeConnection;
@@ -220,7 +220,7 @@ public:
      * This calls KoDataCenterBase::completeSaving()
      * @returns false if an error occurred, which typically cancels the save.
      */
-    bool saveDataCenter(KoStore *store, KoXmlWriter *manifestWriter);
+    bool saveDataCenter(KOdfStore *store, KoXmlWriter *manifestWriter);
 
     /**
      * Add shared data

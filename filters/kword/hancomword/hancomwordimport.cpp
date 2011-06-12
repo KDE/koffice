@@ -114,9 +114,9 @@ KoFilter::ConversionStatus HancomWordImport::convert(const QByteArray& from, con
     d->paragraphs = QStringList::split("\n", plaindoc, true);
 
     // create output store
-    KoStore* storeout;
-    storeout = KoStore::createStore(d->outputFile, KoStore::Write,
-                                    "application/vnd.oasis.opendocument.text", KoStore::Zip);
+    KOdfStore* storeout;
+    storeout = KOdfStore::createStore(d->outputFile, KOdfStore::Write,
+                                    "application/vnd.oasis.opendocument.text", KOdfStore::Zip);
 
     if (!storeout) {
         kWarning() << "Couldn't open the requested file.";

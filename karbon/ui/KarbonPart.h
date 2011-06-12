@@ -60,11 +60,11 @@ public:
     /// reimplemented form KoDocument
     virtual void paintContent(QPainter& painter, const QRect& rect);
     /// reimplemented form KoDocument
-    virtual bool loadXML(const KoXmlDocument& document, KoStore *store);
+    virtual bool loadXML(const KoXmlDocument& document, KOdfStore *store);
     /// reimplemented form KoDocument
     virtual bool loadOdf(KOdfStoreReader & odfStore);
     /// reimplemented form KoDocument
-    virtual bool completeLoading(KoStore* store);
+    virtual bool completeLoading(KOdfStore* store);
     /// reimplemented form KoDocument
     virtual bool saveOdf(SavingContext &documentContext);
 
@@ -106,7 +106,7 @@ protected:
     /// Loads settings like grid and guide lines from given xml document
     void loadOasisSettings(const KoXmlDocument & settingsDoc);
     /// Saves settings like grid and guide lines to store
-    void saveOasisSettings(KoStore * store);
+    void saveOasisSettings(KOdfStore * store);
 
     /// Sets given page size to all attached views/canvases
     void setPageSize(const QSizeF &pageSize);

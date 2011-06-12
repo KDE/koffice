@@ -30,7 +30,7 @@
 class QDomDocument;
 class QDomElement;
 class KLocale;
-class KoStore;
+class KOdfStore;
 
 class KCDoc;
 class KCSheet;
@@ -52,10 +52,10 @@ private:
 
     bool writeFile(const KCDoc * ksdoc);
 
-    bool exportDocInfo(KoStore * store, const KCDoc * ksdoc);
-    bool exportStyles(KoStore * store, const KCDoc * ksdoc);
-    bool exportContent(KoStore * store, const KCDoc * ksdoc);
-    bool exportSettings(KoStore * store, const KCDoc * ksdoc);
+    bool exportDocInfo(KOdfStore * store, const KCDoc * ksdoc);
+    bool exportStyles(KOdfStore * store, const KCDoc * ksdoc);
+    bool exportContent(KOdfStore * store, const KCDoc * ksdoc);
+    bool exportSettings(KOdfStore * store, const KCDoc * ksdoc);
 
     bool exportBody(QDomDocument & doc, QDomElement & content, const KCDoc * ksdoc);
     void exportSheet(QDomDocument & doc, QDomElement & tabElem,
@@ -68,7 +68,7 @@ private:
     void exportMasterStyles(QDomDocument & doc, QDomElement & masterStyles,
                             const KCDoc *ksdoc);
 
-    bool writeMetaFile(KoStore * store, uint filesWritten);
+    bool writeMetaFile(KOdfStore * store, uint filesWritten);
 
     void convertPart(QString const & part, QDomDocument & doc,
                      QDomElement & parent, const KCDoc * ksdoc);

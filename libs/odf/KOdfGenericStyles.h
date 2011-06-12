@@ -31,7 +31,7 @@
 #include <QtCore/QFlags>
 #include <KOdfGenericStyle.h>
 
-class KoStore;
+class KOdfStore;
 class KOdfFontData;
 
 /**
@@ -195,7 +195,7 @@ public:
      * @param manifestWriter
      * @return true on success
      */
-    bool saveOdfStylesDotXml(KoStore *store, KoXmlWriter *manifestWriter) const;
+    bool saveOdfStylesDotXml(KOdfStore *store, KoXmlWriter *manifestWriter) const;
 
     /**
      * Placement of styles saved in saveOdfStyles() or inserted in insertRawOdfStyles().

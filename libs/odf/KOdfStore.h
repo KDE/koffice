@@ -39,7 +39,7 @@ class KoStorePrivate;
  * We call a "store" the file on the hard disk (the one the users sees)
  * and call a "file" a file inside the store.
  */
-class KOODF_EXPORT KoStore
+class KOODF_EXPORT KOdfStore
 {
 public:
 
@@ -50,8 +50,8 @@ public:
      * Open a store (i.e. the representation on disk of a KOffice document).
      *
      * @param fileName the name of the file to open
-     * @param mode if KoStore::Read, open an existing store to read it.
-     *             if KoStore::Write, create or replace a store.
+     * @param mode if KOdfStore::Read, open an existing store to read it.
+     *             if KOdfStore::Write, create or replace a store.
      * @param backend the backend to use for the data storage.
      * Auto means automatically-determined for reading,
      * and the current format (now Zip) for writing.
@@ -60,15 +60,15 @@ public:
      * to be written in the file for "mime-magic" identification.
      * Only meaningful if mode is Write, and if backend!=Directory.
      */
-    static KoStore *createStore(const QString &fileName, Mode mode,
+    static KOdfStore *createStore(const QString &fileName, Mode mode,
                                 const QByteArray &appIdentification = "", Backend backend = Auto);
 
     /**
      * Create a store for any kind of QIODevice: file, memory buffer...
-     * KoStore will take care of opening the QIODevice.
+     * KOdfStore will take care of opening the QIODevice.
      * This method doesn't support the Directory store!
      */
-    static KoStore *createStore(QIODevice *device, Mode mode,
+    static KOdfStore *createStore(QIODevice *device, Mode mode,
                                 const QByteArray &appIdentification = "", Backend backend = Auto);
 
     /**
@@ -76,8 +76,8 @@ public:
      *
      * @param window associated window (for the progress bar dialog and authentication)
      * @param url URL of the file to open
-     * @param mode if KoStore::Read, open an existing store to read it.
-     *             if KoStore::Write, create or replace a store.
+     * @param mode if KOdfStore::Read, open an existing store to read it.
+     *             if KOdfStore::Write, create or replace a store.
      * @param backend the backend to use for the data storage.
      * Auto means automatically-determined for reading,
      * and the current format (now Zip) for writing.
@@ -90,13 +90,13 @@ public:
      *
      * @bug saving not completely implemented (fixed temporary file)
      */
-    static KoStore *createStore(QWidget *window, const KUrl &url, Mode mode,
+    static KOdfStore *createStore(QWidget *window, const KUrl &url, Mode mode,
                                 const QByteArray &appIdentification = "", Backend backend = Auto);
 
     /**
      * Destroys the store (i.e. closes the file on the hard disk)
      */
-    virtual ~KoStore();
+    virtual ~KOdfStore();
 
     /**
      * Returns the url of the store. It can be a filename or a remote url.
@@ -259,7 +259,7 @@ public:
 
     /**
      * Do not expand file and directory names
-     * Useful when using KoStore on non-KOffice files.
+     * Useful when using KOdfStore on non-KOffice files.
      * (This method should be called just after the constructor)
      */
     void disallowNameExpansion();
@@ -311,7 +311,7 @@ public:
     virtual void setCompressionEnabled(bool e);
 protected:
 
-    KoStore();
+    KOdfStore();
 
     /**
      * Init store - called by constructor.
@@ -373,11 +373,11 @@ protected:
     KoStorePrivate *d_ptr;
 
 private:
-    Q_DECLARE_PRIVATE(KoStore)
+    Q_DECLARE_PRIVATE(KOdfStore)
 
 private:
-    KoStore(const KoStore& store);    ///< don't copy
-    KoStore& operator=(const KoStore& store);    ///< don't assign
+    KOdfStore(const KOdfStore& store);    ///< don't copy
+    KOdfStore& operator=(const KOdfStore& store);    ///< don't assign
 };
 
 #endif

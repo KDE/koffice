@@ -107,7 +107,7 @@ public:
      * @param mode Whether we want to read or write from/to the stream
      * @return The storage device to access the stream. May be 0!
      */
-    KOdfStorageDevice* storageFile(const QString& name = "root", KoStore::Mode mode = KoStore::Read);
+    KOdfStorageDevice* storageFile(const QString& name = "root", KOdfStore::Mode mode = KOdfStore::Read);
 
     /**
      * This method allows your filter to work directly on the
@@ -173,13 +173,13 @@ private:
 
     void inputFileHelper(KoDocument* document, const QString& alternativeFile);
     void outputFileHelper(bool autoDelete);
-    KOdfStorageDevice* storageNewStreamHelper(KoStore** storage, KOdfStorageDevice** device, const QString& name);
+    KOdfStorageDevice* storageNewStreamHelper(KOdfStore** storage, KOdfStorageDevice** device, const QString& name);
     KOdfStorageDevice* storageHelper(const QString& file, const QString& streamName,
-                                 KoStore::Mode mode, KoStore** storage, KOdfStorageDevice** device);
-    void storageInit(const QString& file, KoStore::Mode mode, KoStore** storage);
+                                 KOdfStore::Mode mode, KOdfStore** storage, KOdfStorageDevice** device);
+    void storageInit(const QString& file, KOdfStore::Mode mode, KOdfStore** storage);
     KOdfStorageDevice* storageInitEmbedding(const QString& name);
-    KOdfStorageDevice* storageCreateFirstStream(const QString& streamName, KoStore** storage, KOdfStorageDevice** device);
-    KOdfStorageDevice* storageCleanupHelper(KoStore** storage);
+    KOdfStorageDevice* storageCreateFirstStream(const QString& streamName, KOdfStore** storage, KOdfStorageDevice** device);
+    KOdfStorageDevice* storageCleanupHelper(KOdfStore** storage);
 
     KoDocument* createDocument(const QString& file);
     KoDocument* createDocument(const QByteArray& mimeType);
@@ -202,9 +202,9 @@ private:
     QString m_inputFile;              // Did we pass around plain files?
     QString m_outputFile;
 
-    KoStore* m_inputStorage;          // ...or was it a storage+device?
+    KOdfStore* m_inputStorage;          // ...or was it a storage+device?
     KOdfStorageDevice* m_inputStorageDevice;
-    KoStore* m_outputStorage;
+    KOdfStore* m_outputStorage;
     KOdfStorageDevice* m_outputStorageDevice;
 
     KoDocument* m_inputDocument;      // ...or even documents?

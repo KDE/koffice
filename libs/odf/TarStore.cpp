@@ -34,7 +34,7 @@ TarStore::TarStore(const QString & _filename, Mode _mode, const QByteArray & app
 {
     kDebug(30002) << "TarStore Constructor filename =" << _filename
     << " mode = " << int(_mode) << endl;
-    Q_D(KoStore);
+    Q_D(KOdfStore);
 
     d->localFileName = _filename;
 
@@ -48,7 +48,7 @@ TarStore::TarStore(const QString & _filename, Mode _mode, const QByteArray & app
 
 TarStore::TarStore(QIODevice *dev, Mode mode, const QByteArray & appIdentification)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     m_pTar = new KTar(dev);
 
     d->good = init(mode);
@@ -62,12 +62,12 @@ TarStore::TarStore(QWidget* window, const KUrl& _url, const QString & _filename,
     kDebug(30002) << "TarStore Constructor url=" << _url.pathOrUrl()
     << " filename = " << _filename
     << " mode = " << int(_mode) << endl;
-    Q_D(KoStore);
+    Q_D(KOdfStore);
 
     d->url = _url;
     d->window = window;
 
-    if (_mode == KoStore::Read) {
+    if (_mode == KOdfStore::Read) {
         d->fileMode = KoStorePrivate::RemoteRead;
         d->localFileName = _filename;
 
@@ -86,7 +86,7 @@ TarStore::TarStore(QWidget* window, const KUrl& _url, const QString & _filename,
 
 TarStore::~TarStore()
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     if (!d->finalized)
         finalize(); // ### no error checking when the app forgot to call finalize itself
     delete m_pTar;
@@ -114,7 +114,7 @@ QByteArray TarStore::completeMagic(const QByteArray& appMimetype)
 
 bool TarStore::init(Mode _mode)
 {
-    KoStore::init(_mode);
+    KOdfStore::init(_mode);
     m_currentDir = 0;
     bool good = m_pTar->open(_mode == Write ? QIODevice::WriteOnly : QIODevice::ReadOnly);
 
@@ -133,7 +133,7 @@ bool TarStore::doFinalize()
 
 bool TarStore::openWrite(const QString& /*name*/)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     // Prepare memory buffer for writing
     m_byteArray.resize(0);
     d->stream = new QBuffer(&m_byteArray);
@@ -143,7 +143,7 @@ bool TarStore::openWrite(const QString& /*name*/)
 
 bool TarStore::openRead(const QString& name)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     const KArchiveEntry * entry = m_pTar->directory()->entry(name);
     if (entry == 0) {
         //kWarning(30002) << "Unknown filename " << name;
@@ -165,7 +165,7 @@ bool TarStore::openRead(const QString& name)
 
 bool TarStore::closeWrite()
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     // write the whole bytearray at once into the tar file
 
     kDebug(30002) << "Writing file" << d->fileName << " into TAR archive. size" << d->size;
@@ -177,7 +177,7 @@ bool TarStore::closeWrite()
 
 bool TarStore::enterRelativeDirectory(const QString& dirName)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     if (d->mode == Read) {
         if (!m_currentDir) {
             m_currentDir = m_pTar->directory(); // initialize
@@ -195,7 +195,7 @@ bool TarStore::enterRelativeDirectory(const QString& dirName)
 
 bool TarStore::enterAbsoluteDirectory(const QString& path)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     if (path.isEmpty()) {
         m_currentDir = 0;
         return true;

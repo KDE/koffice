@@ -146,7 +146,7 @@ public:
     Workbook *workbook;
 
     // for embedded shapes
-    KoStore* storeout;
+    KOdfStore* storeout;
     KOdfGenericStyles *shapeStyles;
     KOdfGenericStyles *dataStyles;
     KoXmlWriter *shapesXml;
@@ -160,7 +160,7 @@ public:
     void processRow(Sheet* isheet, unsigned row, KCSheet* osheet);
     void processCell(Cell* icell, KCCell ocell);
     void processCellObjects(Cell* icell, KCCell ocell);
-    void processEmbeddedObjects(const KoXmlElement& rootElement, KoStore* store);
+    void processEmbeddedObjects(const KoXmlElement& rootElement, KOdfStore* store);
     void processNumberFormats();
 
     QString convertHeaderFooter(const QString& xlsHeader);
@@ -234,7 +234,7 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
     
     
     QBuffer storeBuffer; // TODO: use temporary file instead
-    d->storeout = KoStore::createStore(&storeBuffer, KoStore::Write);
+    d->storeout = KOdfStore::createStore(&storeBuffer, KOdfStore::Write);
 
     // open inputFile
     d->workbook = new Swinder::Workbook(d->storeout);
@@ -323,7 +323,7 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
     delete d->storeout;
     storeBuffer.close();
 
-    KoStore *store = KoStore::createStore(&storeBuffer, KoStore::Read);
+    KOdfStore *store = KOdfStore::createStore(&storeBuffer, KOdfStore::Read);
 
     KoXmlDocument xmlDoc = d->endMemoryXmlWriter(d->shapesXml);
     d->processEmbeddedObjects(xmlDoc.documentElement(), store);
@@ -408,7 +408,7 @@ void ExcelImport::Private::processMetaData()
     // edittime
 }
 
-void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElement, KoStore* store)
+void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElement, KOdfStore* store)
 {
     // save styles to xml
     KoXmlWriter *stylesXml = beginMemoryXmlWriter("office:styles");

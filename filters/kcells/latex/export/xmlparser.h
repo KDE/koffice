@@ -28,7 +28,7 @@
 
 class FileHeader;
 class Document;
-class KoStore;
+class KOdfStore;
 
 class XmlParser
 {
@@ -37,7 +37,7 @@ class XmlParser
     /** The Koffice app document stored in a XML DOM Tree. */
     QDomDocument _document;
     /** The koffice document (maindoc, picture, ...). */
-    static KoStore* _in;
+    static KOdfStore* _in;
 
 protected:
     /* All the inherit class must be have a link with
@@ -49,7 +49,7 @@ protected:
 public:
     XmlParser(QString);
     XmlParser(QByteArray); /* deprecated */
-    XmlParser(const KoStore*);
+    XmlParser(const KOdfStore*);
     XmlParser();
     virtual ~XmlParser();
 

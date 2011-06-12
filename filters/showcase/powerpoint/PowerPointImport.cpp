@@ -47,6 +47,6 @@ KoFilter::ConversionStatus PowerPointImport::convert(const QByteArray& from, con
 
     PptToOdp ppttoodp;
     return ppttoodp.convert(m_chain->inputFile(), m_chain->outputFile(),
-                            KoStore::Zip);
+                            KOdfStore::Zip);
 }
 #include "PowerPointImport.moc"

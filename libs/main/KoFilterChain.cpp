@@ -158,25 +158,25 @@ QString KoFilterChain::outputFile()
     return m_outputFile;
 }
 
-KOdfStorageDevice* KoFilterChain::storageFile(const QString& name, KoStore::Mode mode)
+KOdfStorageDevice* KoFilterChain::storageFile(const QString& name, KOdfStore::Mode mode)
 {
     // ###### CHECK: This works only for import filters. Do we want something like
     // that for export filters too?
-    if (m_outputQueried == Nil && mode == KoStore::Write && filterManagerParentChain())
+    if (m_outputQueried == Nil && mode == KOdfStore::Write && filterManagerParentChain())
         return storageInitEmbedding(name);
 
     // Plain normal use case
-    if (m_inputQueried == Storage && mode == KoStore::Read &&
-            m_inputStorage && m_inputStorage->mode() == KoStore::Read)
+    if (m_inputQueried == Storage && mode == KOdfStore::Read &&
+            m_inputStorage && m_inputStorage->mode() == KOdfStore::Read)
         return storageNewStreamHelper(&m_inputStorage, &m_inputStorageDevice, name);
-    else if (m_outputQueried == Storage && mode == KoStore::Write &&
-             m_outputStorage && m_outputStorage->mode() == KoStore::Write)
+    else if (m_outputQueried == Storage && mode == KOdfStore::Write &&
+             m_outputStorage && m_outputStorage->mode() == KOdfStore::Write)
         return storageNewStreamHelper(&m_outputStorage, &m_outputStorageDevice, name);
-    else if (m_inputQueried == Nil && mode == KoStore::Read)
-        return storageHelper(inputFile(), name, KoStore::Read,
+    else if (m_inputQueried == Nil && mode == KOdfStore::Read)
+        return storageHelper(inputFile(), name, KOdfStore::Read,
                              &m_inputStorage, &m_inputStorageDevice);
-    else if (m_outputQueried == Nil && mode == KoStore::Write)
-        return storageHelper(outputFile(), name, KoStore::Write,
+    else if (m_outputQueried == Nil && mode == KOdfStore::Write)
+        return storageHelper(outputFile(), name, KOdfStore::Write,
                              &m_outputStorage, &m_outputStorageDevice);
     else {
         kWarning(30500) << "Oooops, how did we get here? You already asked for a"
@@ -323,7 +323,7 @@ void KoFilterChain::manageIO()
             m_outputStorage->close();
             // Don't delete the storage if we're just pointing to the
             // storage of the parent filter chain
-            if (!filterManagerParentChain() || m_outputStorage->mode() != KoStore::Write)
+            if (!filterManagerParentChain() || m_outputStorage->mode() != KOdfStore::Write)
                 delete m_outputStorage;
             m_outputStorage = 0;
         }
@@ -390,7 +390,7 @@ void KoFilterChain::outputFileHelper(bool autoDelete)
         m_outputFile = m_outputTempFile->fileName();
 }
 
-KOdfStorageDevice* KoFilterChain::storageNewStreamHelper(KoStore** storage, KOdfStorageDevice** device,
+KOdfStorageDevice* KoFilterChain::storageNewStreamHelper(KOdfStore** storage, KOdfStorageDevice** device,
         const QString& name)
 {
     delete *device;
@@ -407,7 +407,7 @@ KOdfStorageDevice* KoFilterChain::storageNewStreamHelper(KoStore** storage, KOdf
 }
 
 KOdfStorageDevice* KoFilterChain::storageHelper(const QString& file, const QString& streamName,
-        KoStore::Mode mode, KoStore** storage,
+        KOdfStore::Mode mode, KOdfStore** storage,
         KOdfStorageDevice** device)
 {
     if (file.isEmpty())
@@ -425,18 +425,18 @@ KOdfStorageDevice* KoFilterChain::storageHelper(const QString& file, const QStri
     // Seems that we got a valid storage, at least. Even if we can't open
     // the stream the "user" asked us to open, we nontheless change the
     // IOState from File to Storage, as it might be possible to open other streams
-    if (mode == KoStore::Read)
+    if (mode == KOdfStore::Read)
         m_inputQueried = Storage;
-    else // KoStore::Write
+    else // KOdfStore::Write
         m_outputQueried = Storage;
 
     return storageCreateFirstStream(streamName, storage, device);
 }
 
-void KoFilterChain::storageInit(const QString& file, KoStore::Mode mode, KoStore** storage)
+void KoFilterChain::storageInit(const QString& file, KOdfStore::Mode mode, KOdfStore** storage)
 {
     QByteArray appIdentification("");
-    if (mode == KoStore::Write) {
+    if (mode == KOdfStore::Write) {
         // To create valid storages we also have to add the mimetype
         // magic "applicationIndentifier" to the storage.
         // As only filters with a KOffice destination should query
@@ -445,7 +445,7 @@ void KoFilterChain::storageInit(const QString& file, KoStore::Mode mode, KoStore
         // "abuses" this method.
         appIdentification = m_chainLinks.current()->to();
     }
-    *storage = KoStore::createStore(file, mode, appIdentification);
+    *storage = KOdfStore::createStore(file, mode, appIdentification);
 }
 
 KOdfStorageDevice* KoFilterChain::storageInitEmbedding(const QString& name)
@@ -460,7 +460,7 @@ KOdfStorageDevice* KoFilterChain::storageInitEmbedding(const QString& name)
     if (!m_outputStorage) {
         // If the storage of the parent hasn't been initialized yet,
         // we have to do that here. Quite nasty...
-        storageInit(filterManagerParentChain()->outputFile(), KoStore::Write, &m_outputStorage);
+        storageInit(filterManagerParentChain()->outputFile(), KOdfStore::Write, &m_outputStorage);
 
         // transfer the ownership
         filterManagerParentChain()->m_outputStorage = m_outputStorage;
@@ -488,7 +488,7 @@ KOdfStorageDevice* KoFilterChain::storageInitEmbedding(const QString& name)
     return storageCreateFirstStream(name, &m_outputStorage, &m_outputStorageDevice);
 }
 
-KOdfStorageDevice* KoFilterChain::storageCreateFirstStream(const QString& streamName, KoStore** storage,
+KOdfStorageDevice* KoFilterChain::storageCreateFirstStream(const QString& streamName, KOdfStore** storage,
         KOdfStorageDevice** device)
 {
     // Before we go and create the first stream in this storage we
@@ -513,11 +513,11 @@ KOdfStorageDevice* KoFilterChain::storageCreateFirstStream(const QString& stream
     return *device;
 }
 
-KOdfStorageDevice* KoFilterChain::storageCleanupHelper(KoStore** storage)
+KOdfStorageDevice* KoFilterChain::storageCleanupHelper(KOdfStore** storage)
 {
     // Take care not to delete the storage of the parent chain
     if (*storage != m_outputStorage || !filterManagerParentChain() ||
-            (*storage)->mode() != KoStore::Write)
+            (*storage)->mode() != KOdfStore::Write)
         delete *storage;
     *storage = 0;
     return 0;

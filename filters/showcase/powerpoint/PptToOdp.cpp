@@ -513,7 +513,7 @@ PptToOdp::~PptToOdp()
 }
 
 QMap<QByteArray, QString>
-createPictures(POLE::Storage& storage, KoStore* store, KoXmlWriter* manifest)
+createPictures(POLE::Storage& storage, KOdfStore* store, KoXmlWriter* manifest)
 {
     QMap<QByteArray, QString> fileNames;
     POLE::Stream* stream = new POLE::Stream(&storage, "/Pictures");
@@ -530,7 +530,7 @@ createPictures(POLE::Storage& storage, KoStore* store, KoXmlWriter* manifest)
     return fileNames;
 }
 QMap<quint16, QString>
-createBulletPictures(const PP9DocBinaryTagExtension* pp9, KoStore* store, KoXmlWriter* manifest)
+createBulletPictures(const PP9DocBinaryTagExtension* pp9, KOdfStore* store, KoXmlWriter* manifest)
 {
     QMap<quint16, QString> ids;
     if (!pp9 || !pp9->blipCollectionContainer) {
@@ -559,7 +559,7 @@ PptToOdp::parse(POLE::Storage& storage)
 }
 KoFilter::ConversionStatus PptToOdp::convert(const QString& inputFile,
         const QString& to,
-        KoStore::Backend storeType)
+        KOdfStore::Backend storeType)
 {
     // open inputFile
     POLE::Storage storage(inputFile.toLocal8Bit());
@@ -573,7 +573,7 @@ KoFilter::ConversionStatus PptToOdp::convert(const QString& inputFile,
     }
 
     // create output store
-    KoStore* storeout = KoStore::createStore(to, KoStore::Write,
+    KOdfStore* storeout = KOdfStore::createStore(to, KOdfStore::Write,
                         KoOdf::mimeType(KoOdf::Presentation), storeType);
     if (!storeout) {
         kWarning() << "Couldn't open the requested file.";
@@ -586,7 +586,7 @@ KoFilter::ConversionStatus PptToOdp::convert(const QString& inputFile,
 }
 
 KoFilter::ConversionStatus PptToOdp::convert(POLE::Storage& storage,
-        KoStore* storeout)
+        KOdfStore* storeout)
 {
     if (!parse(storage)) {
         qDebug() << "Parsing and setup failed.";
@@ -596,7 +596,7 @@ KoFilter::ConversionStatus PptToOdp::convert(POLE::Storage& storage,
 }
 
 KoFilter::ConversionStatus PptToOdp::doConversion(POLE::Storage& storage,
-        KoStore* storeout)
+        KOdfStore* storeout)
 {
     KOdfWriteStore odfWriter(storeout);
     KoXmlWriter* manifest = odfWriter.manifestWriter(

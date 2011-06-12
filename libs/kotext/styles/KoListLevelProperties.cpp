@@ -483,7 +483,7 @@ void KoListLevelProperties::loadOdf(KoShapeLoadingContext& scontext, const KoXml
         const QString href = style.attribute("href");
         if(imageCollection) {
             if (!href.isEmpty()) {
-                KoStore *store = context.store();
+                KOdfStore *store = context.store();
                 setBulletImage(imageCollection->createImageData(href, store));
             } else {
                 // check if we have an office:binary data element containing the image data

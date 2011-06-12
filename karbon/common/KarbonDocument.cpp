@@ -32,7 +32,7 @@
 
 #include "KarbonDocument.h"
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfPageLayoutData.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
@@ -355,7 +355,7 @@ void KarbonDocument::useExternalDataCenterMap(QMap<QString, KoDataCenterBase*> d
 
 bool KarbonDocument::saveOdf(KoDocument::SavingContext &documentContext, const KOdfPageLayoutData &layout)
 {
-    KoStore * store = documentContext.odfStore.store();
+    KOdfStore * store = documentContext.odfStore.store();
     KoXmlWriter* contentWriter = documentContext.odfStore.contentWriter();
     if (!contentWriter)
         return false;

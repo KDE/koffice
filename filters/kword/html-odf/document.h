@@ -36,7 +36,7 @@
 
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyles.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 class KOdfStorageDevice;
 

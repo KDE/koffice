@@ -109,12 +109,12 @@ KoFilter::ConversionStatus HTMLOdfExport::convert(const QByteArray &from, const 
 
     struct Finalizer {
     public:
-        Finalizer(KoStore *store) : m_store(store), m_genStyles(0), m_document(0), m_contentWriter(0), m_bodyWriter(0) { }
+        Finalizer(KOdfStore *store) : m_store(store), m_genStyles(0), m_document(0), m_contentWriter(0), m_bodyWriter(0) { }
         ~Finalizer() {
             delete m_store; delete m_genStyles; delete m_document; delete m_contentWriter; delete m_bodyWriter;
         }
 
-        KoStore *m_store;
+        KOdfStore *m_store;
         KOdfGenericStyles *m_genStyles;
         Document *m_document;
         KoXmlWriter* m_contentWriter;

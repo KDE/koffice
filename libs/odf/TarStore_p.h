@@ -32,14 +32,14 @@
 //
 
 
-#include "KoStore.h"
+#include "KOdfStore.h"
 #include <QByteArray>
 
 class KTar;
 class KArchiveDirectory;
 class KUrl;
 
-class TarStore : public KoStore
+class TarStore : public KOdfStore
 {
 public:
     TarStore(const QString & _filename, Mode _mode, const QByteArray & appIdentification);
@@ -75,7 +75,7 @@ protected:
     /// Buffer used when writing
     QByteArray m_byteArray;
 private:
-    Q_DECLARE_PRIVATE(KoStore)
+    Q_DECLARE_PRIVATE(KOdfStore)
 };
 
 #endif

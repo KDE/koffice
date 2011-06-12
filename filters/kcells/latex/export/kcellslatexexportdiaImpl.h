@@ -24,7 +24,7 @@
 #include <QStringList>
 #include <kurl.h>
 
-class KoStore;
+class KOdfStore;
 class KConfig;
 
 class KCellsLatexExportDiaImpl : public LatexExportDia
@@ -33,11 +33,11 @@ class KCellsLatexExportDiaImpl : public LatexExportDia
 
 private:
     QString _fileOut;
-    KoStore* _in;
+    KOdfStore* _in;
     KConfig* _config;
 
 public:
-    explicit KCellsLatexExportDiaImpl(KoStore*, QWidget* parent = 0,
+    explicit KCellsLatexExportDiaImpl(KOdfStore*, QWidget* parent = 0,
                                        const char* name = 0,
                                        bool modal = false, Qt::WFlags fl = 0);
     virtual ~KCellsLatexExportDiaImpl();

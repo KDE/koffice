@@ -160,7 +160,7 @@ void DrawingWriter::SetClientRectangle(MSO::OfficeArtChildAnchor& anchor)
  * ************************************************
  */
 KWordGraphicsHandler::KWordGraphicsHandler(Document* doc, KoXmlWriter* bodyWriter,
-                                         KoXmlWriter* manifestWriter, KoStore* store,
+                                         KoXmlWriter* manifestWriter, KOdfStore* store,
                                          KOdfGenericStyles* mainStyles)
 : QObject()
 , m_document(doc)
@@ -1328,7 +1328,7 @@ void KWordGraphicsHandler::parseFloatingPictures(void)
 }
 
 QMap<QByteArray, QString>
-KWordGraphicsHandler::createFloatingPictures(KoStore* store, KoXmlWriter* manifest)
+KWordGraphicsHandler::createFloatingPictures(KOdfStore* store, KoXmlWriter* manifest)
 {
     PictureReference ref;
     QMap<QByteArray, QString> fileNames;

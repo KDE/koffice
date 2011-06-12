@@ -25,7 +25,7 @@
 class QString;
 class QTextStream;
 class KZip;
-class KoStore;
+class KOdfStore;
 class KOdfGenericStyle;
 class KoXmlWriter;
 class KWord13Document;
@@ -67,7 +67,7 @@ protected: // Preparing phase
     void fillGenStyleWithLayout(const KWord13Layout& layout, KOdfGenericStyle& gs, const bool style) const;
 protected:
     KWord13Document* m_kwordDocument;
-    KoStore* m_store;
+    KOdfStore* m_store;
     QString m_contentAutomaticStyles; ///< Automatic styles for content.xml (in OO format)
     KOdfGenericStyles m_oasisGenStyles; ///< OASIS styles
     KoXmlWriter* m_manifestWriter; ///< Manifest file writer

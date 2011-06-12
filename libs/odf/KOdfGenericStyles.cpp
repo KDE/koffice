@@ -24,7 +24,7 @@
 
 #include "KOdfGenericStyles.h"
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 #include "KOdfWriteStore.h"
@@ -446,7 +446,7 @@ KOdfFontData KOdfGenericStyles::fontFace(const QString& name) const
     return d->fontFaces.value(name);
 }
 
-bool KOdfGenericStyles::saveOdfStylesDotXml(KoStore* store, KoXmlWriter* manifestWriter) const
+bool KOdfGenericStyles::saveOdfStylesDotXml(KOdfStore* store, KoXmlWriter* manifestWriter) const
 {
     if (!store->open("styles.xml"))
         return false;

@@ -33,7 +33,7 @@
 
 class QDomDocument;
 class QDomElement;
-class KoStore;
+class KOdfStore;
 class KoXmlWriter;
 
 /**
@@ -71,10 +71,10 @@ public:
 
     /**
      * Save the KoDocumentInfo to an OASIS document
-     * @param store a pointer to a KoStore to save in
+     * @param store a pointer to a KOdfStore to save in
      * @return true if success
      */
-    bool saveOasis(KoStore* store);
+    bool saveOasis(KOdfStore* store);
 
     /**
      * Load the KoDocumentInfo from an KOffice-1.3 DomDocument

@@ -361,7 +361,7 @@ QString columnName(uint column)
 
 
 
-XlsxXmlChartReaderContext::XlsxXmlChartReaderContext(KoStore* _storeout, ChartExport* _chartExport)
+XlsxXmlChartReaderContext::XlsxXmlChartReaderContext(KOdfStore* _storeout, ChartExport* _chartExport)
     : MSOOXML::MsooXmlReaderContext()
     , m_storeout(_storeout)
     , m_chart(_chartExport->chart())

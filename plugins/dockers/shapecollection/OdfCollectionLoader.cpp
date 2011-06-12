@@ -19,7 +19,7 @@
 
 #include "OdfCollectionLoader.h"
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStoreReader.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
@@ -229,7 +229,7 @@ void OdfCollectionLoader::loadNativeFile(const QString& path)
         m_odfStore = 0;
     }
 
-    KoStore* store = KoStore::createStore(path, KoStore::Read);
+    KOdfStore* store = KOdfStore::createStore(path, KOdfStore::Read);
 
     if (store->bad())
     {

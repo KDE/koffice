@@ -44,7 +44,7 @@ class Dialog:
         self.dialog.minimumWidth = 720
         self.dialog.minimumHeight = 500
 
-        # we like to fetch the KoStore which is the backend for the document and does
+        # we like to fetch the KOdfStore which is the backend for the document and does
         # allow us to access files within the store direct.
         doc = KOfficeAppModule.document()
         self.store = KOfficeAppModule.store()

@@ -27,10 +27,10 @@
 #include "showcase_export.h"
 
 class SCSoundData;
-class KoStore;
+class KOdfStore;
 
 /**
- * An collection of SCSoundData objects to allow loading and saving them all together to the KoStore.
+ * An collection of SCSoundData objects to allow loading and saving them all together to the KOdfStore.
  */
 class SHOWCASE_EXPORT SCSoundCollection : public QObject, public KoDataCenterBase {
 public:
@@ -42,14 +42,14 @@ public:
      * Load all sounds from the store which have a recognized SCSoundData::storeHref().
      * @return returns true if load was successful (no sounds failed).
      */
-    bool completeLoading(KoStore *store);
+    bool completeLoading(KOdfStore *store);
 
     /**
      * Save all sounds to the store which are tagged for saving
      * and have a recognized SCSoundData::storeHref().
      * @return returns true if save was successful (no sounds failed).
      */
-    bool completeSaving(KoStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context);
+    bool completeSaving(KOdfStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context);
 
     SCSoundData *findSound(QString title);
 

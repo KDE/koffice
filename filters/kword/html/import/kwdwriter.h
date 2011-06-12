@@ -23,7 +23,7 @@
 #include <QRect>
 #include <qdom.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 /**
   *@author Frank Dekervel
@@ -31,7 +31,7 @@
 class KWDWriter
 {
 public:
-    explicit KWDWriter(KoStore *store);
+    explicit KWDWriter(KOdfStore *store);
     ~KWDWriter();
 
 
@@ -205,7 +205,7 @@ private:
 
 
 protected:
-    KoStore *_store;
+    KOdfStore *_store;
     QDomElement _mainFrameset;
     QDomDocument *_doc;
     QDomDocument *_docinfo;

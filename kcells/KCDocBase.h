@@ -104,7 +104,7 @@ public:
      * When saving the selection, also return the data as plain text and/or plain picture,
      * which are used to insert into the KMultipleDrag drag object.
      *
-     * @param store the KoStore to save into
+     * @param store the KOdfStore to save into
      * @param manifestWriter pointer to a koxmlwriter to add entries to the manifest
      * @param saveFlag either the whole document, or only the selected text/objects.
      * @param plainText must be set when saveFlag==SaveSelected.
@@ -125,7 +125,7 @@ protected:
     Private * const d;
 
     virtual void paintContent(QPainter & painter, const QRect & rect);
-    virtual bool loadXML(const KoXmlDocument& doc, KoStore *store);
+    virtual bool loadXML(const KoXmlDocument& doc, KOdfStore *store);
     virtual KoView* createViewInstance(QWidget* parent);
 
     virtual void saveOdfViewSettings(KoXmlWriter& settingsWriter);

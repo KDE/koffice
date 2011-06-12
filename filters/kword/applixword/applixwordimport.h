@@ -26,7 +26,7 @@
 #include <QObject>
 #include <QTextStream>
 #include <KoFilter.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <kofficeversion.h>
 
 class KOdfWriteStore;

@@ -23,7 +23,7 @@
 #include <QtCore/QBuffer>
 
 int
-convert(const QString& in, KoStore* out)
+convert(const QString& in, KOdfStore* out)
 {
     // open inputFile
     POLE::Storage storage(in.toLocal8Bit());
@@ -47,8 +47,8 @@ convertAllFilesInDir(const QDir &dir, const QString firstFile = QString())
         }
         if (!skip) {
             QBuffer buffer;
-            KoStore* storeout = KoStore::createStore(&buffer, KoStore::Write,
-                                KoOdf::mimeType(KoOdf::Presentation), KoStore::Tar);
+            KOdfStore* storeout = KOdfStore::createStore(&buffer, KOdfStore::Write,
+                                KoOdf::mimeType(KoOdf::Presentation), KOdfStore::Tar);
             qDebug() << "Converting " << f.size() << " " << f.absoluteFilePath();
             convert(f.absoluteFilePath(), storeout);
             delete storeout;
@@ -86,14 +86,14 @@ main(int argc, char** argv)
         return KoFilter::StupidError;
     }
     // create output store
-    KoStore* storeout;
+    KOdfStore* storeout;
     QBuffer buffer;
     if (file2.isNull()) {
-        storeout = KoStore::createStore(&buffer, KoStore::Write,
-                                        KoOdf::mimeType(KoOdf::Presentation), KoStore::Tar);
+        storeout = KOdfStore::createStore(&buffer, KOdfStore::Write,
+                                        KoOdf::mimeType(KoOdf::Presentation), KOdfStore::Tar);
     } else {
-        storeout = KoStore::createStore(file2, KoStore::Write,
-                                        KoOdf::mimeType(KoOdf::Presentation), KoStore::Zip);
+        storeout = KOdfStore::createStore(file2, KOdfStore::Write,
+                                        KoOdf::mimeType(KoOdf::Presentation), KOdfStore::Zip);
     }
     if (!storeout) {
         return KoFilter::FileNotFound;

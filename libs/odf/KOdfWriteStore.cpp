@@ -26,14 +26,14 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 
 #include "KoXmlNS.h"
 
 struct KOdfWriteStore::Private {
-    Private(KoStore * store)
+    Private(KOdfStore * store)
             : store(store)
             , storeDevice(0)
             , contentWriter(0)
@@ -55,7 +55,7 @@ struct KOdfWriteStore::Private {
         delete manifestWriter;
     }
 
-    KoStore * store;
+    KOdfStore * store;
     KOdfStorageDevice * storeDevice;
     KoXmlWriter * contentWriter;
 
@@ -64,7 +64,7 @@ struct KOdfWriteStore::Private {
     KTemporaryFile * contentTmpFile;
 };
 
-KOdfWriteStore::KOdfWriteStore(KoStore* store)
+KOdfWriteStore::KOdfWriteStore(KOdfStore* store)
         : d(new Private(store))
 {
 }
@@ -119,7 +119,7 @@ KoXmlWriter* KOdfWriteStore::createOasisXmlWriter(QIODevice* dev, const char* ro
     return writer;
 }
 
-KoStore* KOdfWriteStore::store() const
+KOdfStore* KOdfWriteStore::store() const
 {
     return d->store;
 }

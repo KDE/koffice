@@ -31,7 +31,7 @@
 #include <QList>
 #include <QByteArray>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoFilterChain.h>
 #include <KWEFStructures.h>
 #include <KWEFUtil.h>
@@ -109,7 +109,7 @@ private:
 
 
 // ProcessPictureData () takes the available picture data, makes a
-// copy of the image file into *.sgml.d/pictures/*.* from KoStore
+// copy of the image file into *.sgml.d/pictures/*.* from KOdfStore
 // pictures/*.*, and creates the necessary DocBook tags for it.
 
 void DocBookWorker::ProcessPictureData(const PictureData &picture)
@@ -169,7 +169,7 @@ void DocBookWorker::ProcessPictureData(const PictureData &picture)
             pictureFile.close();
         }
     } else {
-        kError(30507) << "Unable to open KoStore file " << picture.koStoreName << "!" << endl;
+        kError(30507) << "Unable to open KOdfStore file " << picture.koStoreName << "!" << endl;
     }
 }
 

@@ -458,7 +458,7 @@ void OoUtils::createDocumentInfo(KoXmlDocument &_meta, QDomDocument & docinfo)
     }
 }
 
-KoFilter::ConversionStatus OoUtils::loadAndParse(const QString& fileName, KoXmlDocument& doc, KoStore* store)
+KoFilter::ConversionStatus OoUtils::loadAndParse(const QString& fileName, KoXmlDocument& doc, KOdfStore* store)
 {
     kDebug(30518) << "loadAndParse: Trying to open" << fileName;
 

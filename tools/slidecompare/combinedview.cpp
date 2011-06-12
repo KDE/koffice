@@ -91,7 +91,7 @@ koppttoodp(const QString& from) {
                  + QFileInfo(from).baseName() + ".odp";
     QFile::remove(to);
     PptToOdp ppttoodp;
-    ppttoodp.convert(from, to, KoStore::Zip);
+    ppttoodp.convert(from, to, KOdfStore::Zip);
     return to;
 }
 void

@@ -20,7 +20,7 @@
 
 #include "KoPADocument.h"
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoXmlWriter.h>
 #include <KOdfStoreReader.h>
 #include <KOdfWriteStore.h>
@@ -99,7 +99,7 @@ void KoPADocument::paintContent(QPainter &painter, const QRect &rect)
     painter.drawPixmap(rect, thumbnail);
 }
 
-bool KoPADocument::loadXML(const KoXmlDocument &doc, KoStore *)
+bool KoPADocument::loadXML(const KoXmlDocument &doc, KOdfStore *)
 {
     Q_UNUSED(doc);
 
@@ -214,7 +214,7 @@ bool KoPADocument::saveOdf(SavingContext &documentContext)
         return false;
     }
 
-    KoStore * store = documentContext.odfStore.store();
+    KOdfStore * store = documentContext.odfStore.store();
     if (! store->open("settings.xml")) {
         return false;
     }
@@ -318,7 +318,7 @@ bool KoPADocument::saveOdfEpilogue(KoPASavingContext &paContext)
     return true;
 }
 
-bool KoPADocument::saveOdfSettings(KoStore * store)
+bool KoPADocument::saveOdfSettings(KOdfStore * store)
 {
     KOdfStorageDevice settingsDev(store);
     KoXmlWriter * settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");

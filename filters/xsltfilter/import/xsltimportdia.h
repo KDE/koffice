@@ -23,7 +23,7 @@
 #include "kapplication.h"
 #include <kfiledialog.h>
 #include <kconfiggroup.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include "xsltdialog.h"
 #include <QByteArray>
 
@@ -34,7 +34,7 @@ class XSLTImportDia : public XSLTDialog
     QString _fileIn;
     QString _fileOut;
     QByteArray _arrayIn;
-    KoStore* _out;
+    KOdfStore* _out;
     /** xslt file current */
     KUrl _currentFile;
     QByteArray _format;
@@ -49,7 +49,7 @@ class XSLTImportDia : public XSLTDialog
     QStringList _namesList;
 
 public:
-    XSLTImportDia(KoStore*, const QByteArray &format, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
+    XSLTImportDia(KOdfStore*, const QByteArray &format, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WFlags fl = 0);
     ~XSLTImportDia();
 
     void setInputFile(QString file)  {

@@ -28,7 +28,7 @@
 //#include <QtCore/QMap>
 //#include <QtGui/QColor>
 
-class KoStore;
+class KOdfStore;
 class KoXmlWriter;
 class KOdfGenericStyles;
 class KOdfGenericStyle;
@@ -62,7 +62,7 @@ public:
     qreal m_x, m_y, m_width, m_height; //in pt    
 
     bool saveIndex(KoXmlWriter* xmlWriter);
-    bool saveContent(KoStore* store, KoXmlWriter* manifestWriter);
+    bool saveContent(KOdfStore* store, KoXmlWriter* manifestWriter);
 
 private:
     QString toPtString( int number );

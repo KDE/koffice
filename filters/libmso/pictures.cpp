@@ -39,7 +39,7 @@ static inline quint32 readU32(const void* p)
 }
 
 void
-saveStream(POLE::Stream& stream, quint32 size, KoStore* out)
+saveStream(POLE::Stream& stream, quint32 size, KOdfStore* out)
 {
     const quint16 bufferSize = 1024;
     unsigned char buffer[bufferSize];
@@ -52,7 +52,7 @@ saveStream(POLE::Stream& stream, quint32 size, KoStore* out)
     }
 }
 bool
-saveDecompressedStream(POLE::Stream& stream, quint32 size, KoStore* out)
+saveDecompressedStream(POLE::Stream& stream, quint32 size, KOdfStore* out)
 {
     const quint16 bufferSize = 1024;
     unsigned char bufin[bufferSize];
@@ -130,7 +130,7 @@ getSuffix(quint16 type)
 }
 template<class T>
 void
-savePicture(PictureReference& ref, const T* a, KoStore* out)
+savePicture(PictureReference& ref, const T* a, KOdfStore* out)
 {
     if (!a) return;
     ref.uid = a->rgbUid1 + a->rgbUid2;
@@ -146,7 +146,7 @@ savePicture(PictureReference& ref, const T* a, KoStore* out)
 }
 template<class T>
 void
-saveDecompressedPicture(PictureReference& ref, const T* a, KoStore* store)
+saveDecompressedPicture(PictureReference& ref, const T* a, KOdfStore* store)
 {
     if (!a) return;
 
@@ -182,7 +182,7 @@ saveDecompressedPicture(PictureReference& ref, const T* a, KoStore* store)
     store->close();
 }
 PictureReference
-savePicture(const MSO::OfficeArtBlip& a, KoStore* store)
+savePicture(const MSO::OfficeArtBlip& a, KOdfStore* store)
 {
     PictureReference ref;
     // only one of these calls will actually save a picture
@@ -197,7 +197,7 @@ savePicture(const MSO::OfficeArtBlip& a, KoStore* store)
 }
 }
 PictureReference
-savePicture(POLE::Stream& stream, KoStore* out)
+savePicture(POLE::Stream& stream, KOdfStore* out)
 {
     PictureReference ref;
     const quint16 bufferSize = 1024;
@@ -267,7 +267,7 @@ savePicture(POLE::Stream& stream, KoStore* out)
     return ref;
 }
 PictureReference
-savePicture(const MSO::OfficeArtBStoreContainerFileBlock& a, KoStore* store)
+savePicture(const MSO::OfficeArtBStoreContainerFileBlock& a, KOdfStore* store)
 {
     const MSO::OfficeArtBlip* blip = a.anon.get<MSO::OfficeArtBlip>();
     const MSO::OfficeArtFBSE* fbse = a.anon.get<MSO::OfficeArtFBSE>();

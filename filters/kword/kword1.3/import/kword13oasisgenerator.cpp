@@ -31,7 +31,7 @@
 #include <kmimetype.h>
 
 #include <kofficeversion.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyles.h>
@@ -850,9 +850,9 @@ bool KWord13OasisGenerator::generate(const QString& fileName, KWord13Document& k
 
     m_kwordDocument = &kwordDocument;
 
-    m_store = KoStore::createStore(fileName, KoStore::Write, "application/vnd.sun.xml.writer", KoStore::Zip);
+    m_store = KOdfStore::createStore(fileName, KOdfStore::Write, "application/vnd.sun.xml.writer", KOdfStore::Zip);
     if (! m_store) {
-        kError(30520) << "Cannot create output KoStore";
+        kError(30520) << "Cannot create output KOdfStore";
         return false;
     }
     m_store->disallowNameExpansion();

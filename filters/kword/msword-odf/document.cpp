@@ -42,7 +42,7 @@
 #include <wv2/src/paragraphproperties.h>
 #include <wv2/src/associatedstrings.h>
 #include <klocale.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoFilterChain.h>
 #include <KOdfFontData.h>
 
@@ -53,7 +53,7 @@
 //OLE storage soon!
 Document::Document(const std::string& fileName, KoFilterChain* chain, KoXmlWriter* bodyWriter,
                    KOdfGenericStyles* mainStyles, KoXmlWriter* metaWriter, KoXmlWriter* manifestWriter,
-                   KoStore* store, POLE::Storage* storage,
+                   KOdfStore* store, POLE::Storage* storage,
                    LEInputStream* data, LEInputStream* table, LEInputStream* wdocument)
         : m_textHandler(0)
         , m_tableHandler(0)

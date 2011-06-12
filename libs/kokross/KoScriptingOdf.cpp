@@ -21,7 +21,7 @@
 
 #include "KoScriptingOdf.h"
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfWriteStore.h>
 #include <KoDocumentAdaptor.h>
 #include <KoEmbeddedDocumentSaver.h>
@@ -237,7 +237,7 @@ KoScriptingOdfContentReader::KoScriptingOdfContentReader(KoScriptingOdfStore *st
  * KoScriptingOdfStore
  */
 
-KoStore *KoScriptingOdfStore::getReadStore()
+KOdfStore *KoScriptingOdfStore::getReadStore()
 {
     QByteArray ba = getByteArray();
     if (ba.isNull()) {
@@ -252,7 +252,7 @@ KoStore *KoScriptingOdfStore::getReadStore()
     //kDebug(32010) <<"KoScriptingOdfStore::getReadStore() Return new store";
     Q_ASSERT(!m_readDevice);
     m_readDevice = new QBuffer(&m_byteArray);
-    m_readStore = KoStore::createStore(m_readDevice, KoStore::Read, "KrossScript", KoStore::Tar);
+    m_readStore = KOdfStore::createStore(m_readDevice, KOdfStore::Read, "KrossScript", KOdfStore::Tar);
     return m_readStore;
 }
 
@@ -281,7 +281,7 @@ QByteArray KoScriptingOdfStore::getByteArray()
 
     //kDebug(32010)  << "KoScriptingOdfStore::getByteArray() Reading ByteArray.";
     QBuffer buffer(&m_byteArray);
-    KoStore *store = KoStore::createStore(&buffer, KoStore::Write, "KrossScript", KoStore::Tar);
+    KOdfStore *store = KOdfStore::createStore(&buffer, KOdfStore::Write, "KrossScript", KOdfStore::Tar);
     KOdfWriteStore odfStore(store);
     odfStore.manifestWriter("");
     KoEmbeddedDocumentSaver embeddedSaver;
@@ -325,12 +325,12 @@ KoScriptingOdfStore::~KoScriptingOdfStore()
     delete m_reader;
 }
 
-//KoStore *KoScriptingOdfStore::readStore() const { return getReadStore(); }
+//KOdfStore *KoScriptingOdfStore::readStore() const { return getReadStore(); }
 //QIODevice *KoScriptingOdfStore::readDevice() const { return readDevice; }
 
 bool KoScriptingOdfStore::hasFile(const QString &fileName)
 {
-    KoStore *store = getReadStore();
+    KOdfStore *store = getReadStore();
     return store ? store->hasFile(fileName) : false;
 }
 
@@ -342,7 +342,7 @@ bool KoScriptingOdfStore::isOpen() const
 QObject *KoScriptingOdfStore::open(const QString &fileName)
 {
     delete m_reader; m_reader = 0;
-    KoStore *store = getReadStore();
+    KOdfStore *store = getReadStore();
     if (! store)
         return 0;
     if (store->isOpen())
@@ -386,7 +386,7 @@ bool KoScriptingOdfStore::close()
 
 QByteArray KoScriptingOdfStore::extract(const QString &fileName)
 {
-    KoStore *store = getReadStore();
+    KOdfStore *store = getReadStore();
     if (! store)
         return QByteArray();
     if (store->isOpen())
@@ -398,7 +398,7 @@ QByteArray KoScriptingOdfStore::extract(const QString &fileName)
 
 bool KoScriptingOdfStore::extractToFile(const QString &fileName, const QString &toFileName)
 {
-    KoStore *store = getReadStore();
+    KOdfStore *store = getReadStore();
     if (! store)
         return false;
     if (store->isOpen())

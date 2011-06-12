@@ -37,7 +37,7 @@
 #include <KDateTime>
 
 class QDomDocument;
-class KoStore;
+class KOdfStore;
 class KoXmlWriter;
 class KoDocument;
 class KoCanvasBase;
@@ -177,14 +177,14 @@ public:
      * @param metaDoc the QDomDocument with the metaInformation
      * @return true if success
      */
-    bool loadOasis(KoStore *store);
+    bool loadOasis(KOdfStore *store);
 
     /**
      * Save to an OASIS document
-     * @param store a pointer to a KoStore to save in
+     * @param store a pointer to a KOdfStore to save in
      * @return true if success
      */
-    bool saveOasis(KoStore *store, KoXmlWriter *manifestWriter);
+    bool saveOasis(KOdfStore *store, KoXmlWriter *manifestWriter);
 
     /**
      * Used by KoRdfSemanticItem when creating new semantic items so that the
@@ -489,7 +489,7 @@ private:
      * Used by loadOasis() to load Rdf from a particular external
      * Rdf/XML file.
      */
-    bool loadRdf(KoStore *store, const Soprano::Parser *parser, const QString &fileName);
+    bool loadRdf(KOdfStore *store, const Soprano::Parser *parser, const QString &fileName);
 
     /**
      * Used by saveOasis() to save Rdf to a the Rdf file nominated
@@ -497,7 +497,7 @@ private:
      * content.xml, those Rdf statements must be saved as the
      * content.xml file is generated.
      */
-    bool saveRdf(KoStore *store, KoXmlWriter *manifestWriter, Soprano::Node &context);
+    bool saveRdf(KOdfStore *store, KoXmlWriter *manifestWriter, Soprano::Node &context);
 
 
     /**
@@ -536,10 +536,10 @@ public:
 
 private:
     /// reimplemented
-    virtual bool completeLoading(KoStore *store);
+    virtual bool completeLoading(KOdfStore *store);
 
     /// reimplemented
-    virtual bool completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context);
+    virtual bool completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context);
 
     KoDocumentRdfPrivate * const d;
 };

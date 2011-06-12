@@ -182,7 +182,7 @@ void KoDocumentRdf::freshenBNodes(Soprano::Model *m)
     RDEBUG << "after add,    model.sz:" << m->statementCount();
 }
 
-bool KoDocumentRdf::loadRdf(KoStore *store, const Soprano::Parser *parser, const QString &fileName)
+bool KoDocumentRdf::loadRdf(KOdfStore *store, const Soprano::Parser *parser, const QString &fileName)
 {
     Soprano::Model *tmpmodel(Soprano::createModel());
     if (!d->model || !tmpmodel) {
@@ -237,7 +237,7 @@ bool KoDocumentRdf::loadRdf(KoStore *store, const Soprano::Parser *parser, const
     return ok;
 }
 
-bool KoDocumentRdf::loadOasis(KoStore *store)
+bool KoDocumentRdf::loadOasis(KOdfStore *store)
 {
     if (!store) {
         kWarning(30003) << "No store backend";
@@ -282,7 +282,7 @@ bool KoDocumentRdf::loadOasis(KoStore *store)
     return ok;
 }
 
-bool KoDocumentRdf::saveRdf(KoStore *store, KoXmlWriter *manifestWriter, Soprano::Node &context)
+bool KoDocumentRdf::saveRdf(KOdfStore *store, KoXmlWriter *manifestWriter, Soprano::Node &context)
 {
     bool ok = false;
     QString fileName("manifest.rdf");
@@ -341,7 +341,7 @@ bool KoDocumentRdf::saveRdf(KoStore *store, KoXmlWriter *manifestWriter, Soprano
     return ok;
 }
 
-bool KoDocumentRdf::saveOasis(KoStore *store, KoXmlWriter *manifestWriter)
+bool KoDocumentRdf::saveOasis(KOdfStore *store, KoXmlWriter *manifestWriter)
 {
     RDEBUG << "saveOasis() generic";
     if (!d->model) {
@@ -1376,12 +1376,12 @@ void KoDocumentRdf::emitSemanticObjectViewSiteUpdated(KoRdfSemanticItem *item, c
 }
 
 
-bool KoDocumentRdf::completeLoading(KoStore *)
+bool KoDocumentRdf::completeLoading(KOdfStore *)
 {
     return true;
 }
 
-bool KoDocumentRdf::completeSaving(KoStore *, KoXmlWriter *, KoShapeSavingContext *)
+bool KoDocumentRdf::completeSaving(KOdfStore *, KoXmlWriter *, KoShapeSavingContext *)
 {
     return true;
 }

@@ -19,7 +19,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoStore.h"
+#include "KOdfStore.h"
 #include "KoStore_p.h"
 
 #include "TarStore_p.h"
@@ -41,26 +41,26 @@
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
 
-#define DefaultFormat KoStore::Zip
+#define DefaultFormat KOdfStore::Zip
 
-static KoStore::Backend determineBackend(QIODevice *dev)
+static KOdfStore::Backend determineBackend(QIODevice *dev)
 {
     unsigned char buf[5];
     if (dev->read((char *)buf, 4) < 4)
         return DefaultFormat; // will create a "bad" store (bad()==true)
     if (buf[0] == 0037 && buf[1] == 0213)   // gzip -> tar.gz
-        return KoStore::Tar;
+        return KOdfStore::Tar;
     if (buf[0] == 'P' && buf[1] == 'K' && buf[2] == 3 && buf[3] == 4)
-        return KoStore::Zip;
+        return KOdfStore::Zip;
     return DefaultFormat; // fallback
 }
 
-KoStore* KoStore::createStore(const QString& fileName, Mode mode, const QByteArray & appIdentification, Backend backend)
+KOdfStore* KOdfStore::createStore(const QString& fileName, Mode mode, const QByteArray & appIdentification, Backend backend)
 {
     bool automatic = false;
     if (backend == Auto) {
         automatic = true;
-        if (mode == KoStore::Write)
+        if (mode == KOdfStore::Write)
             backend = DefaultFormat;
         else {
             QFileInfo inf(fileName);
@@ -93,17 +93,17 @@ KoStore* KoStore::createStore(const QString& fileName, Mode mode, const QByteArr
         return new EncryptedStore(fileName, mode, appIdentification);
 #endif
     default:
-        kWarning(30002) << "Unsupported backend requested for KoStore : " << backend;
+        kWarning(30002) << "Unsupported backend requested for KOdfStore : " << backend;
         return 0;
     }
 }
 
-KoStore* KoStore::createStore(QIODevice *device, Mode mode, const QByteArray & appIdentification, Backend backend)
+KOdfStore* KOdfStore::createStore(QIODevice *device, Mode mode, const QByteArray & appIdentification, Backend backend)
 {
     bool automatic = false;
     if (backend == Auto) {
         automatic = true;
-        if (mode == KoStore::Write)
+        if (mode == KOdfStore::Write)
             backend = DefaultFormat;
         else {
             if (device->open(QIODevice::ReadOnly)) {
@@ -131,19 +131,19 @@ KoStore* KoStore::createStore(QIODevice *device, Mode mode, const QByteArray & a
         return new EncryptedStore(device, mode, appIdentification);
 #endif
     default:
-        kWarning(30002) << "Unsupported backend requested for KoStore : " << backend;
+        kWarning(30002) << "Unsupported backend requested for KOdfStore : " << backend;
         return 0;
     }
 }
 
-KoStore* KoStore::createStore(QWidget* window, const KUrl& url, Mode mode, const QByteArray & appIdentification, Backend backend)
+KOdfStore* KOdfStore::createStore(QWidget* window, const KUrl& url, Mode mode, const QByteArray & appIdentification, Backend backend)
 {
     const bool automatic = (backend == Auto);
     if (url.isLocalFile())
         return createStore(url.toLocalFile(), mode,  appIdentification, backend);
 
     QString tmpFile;
-    if (mode == KoStore::Write) {
+    if (mode == KOdfStore::Write) {
         if (automatic)
             backend = DefaultFormat;
     } else {
@@ -177,7 +177,7 @@ KoStore* KoStore::createStore(QWidget* window, const KUrl& url, Mode mode, const
         return new EncryptedStore(window, url, tmpFile, mode, appIdentification);
 #endif
     default:
-        kWarning(30002) << "Unsupported backend requested for KoStore (KUrl) : " << backend;
+        kWarning(30002) << "Unsupported backend requested for KOdfStore (KUrl) : " << backend;
         KMessageBox::sorry(window,
                            i18n("The directory mode is not supported for remote locations."),
                            i18n("KOffice Storage"));
@@ -191,14 +191,14 @@ const char* const ROOTPART = "root";
 const char* const MAINNAME = "maindoc.xml";
 }
 
-KoStore::KoStore()
+KOdfStore::KOdfStore()
     : d_ptr(new KoStorePrivate(this))
 {
 }
 
-bool KoStore::init(Mode mode)
+bool KOdfStore::init(Mode mode)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     d->isOpen = false;
     d->mode = mode;
     d->stream = 0;
@@ -209,25 +209,25 @@ bool KoStore::init(Mode mode)
     return true;
 }
 
-KoStore::~KoStore()
+KOdfStore::~KOdfStore()
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     delete d->stream;
     delete d_ptr;
 }
 
-KUrl KoStore::urlOfStore() const
+KUrl KOdfStore::urlOfStore() const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     if (d->fileMode == KoStorePrivate::RemoteRead || d->fileMode == KoStorePrivate::RemoteWrite)
         return d->url;
     else
         return KUrl(d->localFileName);
 }
 
-bool KoStore::open(const QString & _name)
+bool KOdfStore::open(const QString & _name)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     // This also converts from relative to absolute, i.e. merges the currentPath()
     d->fileName = d->toExternalNaming(_name);
 
@@ -238,7 +238,7 @@ bool KoStore::open(const QString & _name)
     }
 
     if (d->fileName.length() > 512) {
-        kError(30002) << "KoStore: Filename " << d->fileName << " is too long" << endl;
+        kError(30002) << "KOdfStore: Filename " << d->fileName << " is too long" << endl;
         //return KIO::ERR_MALFORMED_URL;
         return false;
     }
@@ -246,7 +246,7 @@ bool KoStore::open(const QString & _name)
     if (d->mode == Write) {
         kDebug(30002) << "opening for writing" << d->fileName;
         if (d->filesList.contains(d->fileName)) {
-            kWarning(30002) << "KoStore: Duplicate filename" << d->fileName;
+            kWarning(30002) << "KOdfStore: Duplicate filename" << d->fileName;
             //return KIO::ERR_FILE_ALREADY_EXIST;
             return false;
         }
@@ -268,15 +268,15 @@ bool KoStore::open(const QString & _name)
     return true;
 }
 
-bool KoStore::isOpen() const
+bool KOdfStore::isOpen() const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     return d->isOpen;
 }
 
-bool KoStore::close()
+bool KOdfStore::close()
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     kDebug(30002) << "Closing";
 
     if (!d->isOpen) {
@@ -293,9 +293,9 @@ bool KoStore::close()
     return ret;
 }
 
-QIODevice* KoStore::device() const
+QIODevice* KOdfStore::device() const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     if (!d->isOpen)
         kWarning(30002) << "You must open before asking for a device";
     if (d->mode != Read)
@@ -303,9 +303,9 @@ QIODevice* KoStore::device() const
     return d->stream;
 }
 
-QByteArray KoStore::read(qint64 max)
+QByteArray KOdfStore::read(qint64 max)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     QByteArray data;
 
     if (!d->isOpen) {
@@ -313,44 +313,44 @@ QByteArray KoStore::read(qint64 max)
         return data;
     }
     if (d->mode != Read) {
-        kError(30002) << "KoStore: Can not read from store that is opened for writing" << endl;
+        kError(30002) << "KOdfStore: Can not read from store that is opened for writing" << endl;
         return data;
     }
 
     return d->stream->read(max);
 }
 
-qint64 KoStore::write(const QByteArray& data)
+qint64 KOdfStore::write(const QByteArray& data)
 {
     return write(data.data(), data.size());   // see below
 }
 
-qint64 KoStore::read(char *_buffer, qint64 _len)
+qint64 KOdfStore::read(char *_buffer, qint64 _len)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     if (!d->isOpen) {
-        kError(30002) << "KoStore: You must open before reading" << endl;
+        kError(30002) << "KOdfStore: You must open before reading" << endl;
         return -1;
     }
     if (d->mode != Read) {
-        kError(30002) << "KoStore: Can not read from store that is opened for writing" << endl;
+        kError(30002) << "KOdfStore: Can not read from store that is opened for writing" << endl;
         return -1;
     }
 
     return d->stream->read(_buffer, _len);
 }
 
-qint64 KoStore::write(const char* _data, qint64 _len)
+qint64 KOdfStore::write(const char* _data, qint64 _len)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     if (_len == 0) return 0;
 
     if (!d->isOpen) {
-        kError(30002) << "KoStore: You must open before writing" << endl;
+        kError(30002) << "KOdfStore: You must open before writing" << endl;
         return 0;
     }
     if (d->mode != Write) {
-        kError(30002) << "KoStore: Can not write to store that is opened for reading" << endl;
+        kError(30002) << "KOdfStore: Can not write to store that is opened for reading" << endl;
         return 0;
     }
 
@@ -361,9 +361,9 @@ qint64 KoStore::write(const char* _data, qint64 _len)
     return nwritten;
 }
 
-qint64 KoStore::size() const
+qint64 KOdfStore::size() const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     if (!d->isOpen) {
         kWarning(30002) << "You must open before asking for a size";
         return static_cast<qint64>(-1);
@@ -375,9 +375,9 @@ qint64 KoStore::size() const
     return d->size;
 }
 
-bool KoStore::enterDirectory(const QString &directory)
+bool KOdfStore::enterDirectory(const QString &directory)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     //kDebug(30002) <<"enterDirectory" << directory;
     int pos;
     bool success = true;
@@ -392,9 +392,9 @@ bool KoStore::enterDirectory(const QString &directory)
     return success;
 }
 
-bool KoStore::leaveDirectory()
+bool KOdfStore::leaveDirectory()
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     if (d->currentPath.isEmpty())
         return false;
 
@@ -403,15 +403,15 @@ bool KoStore::leaveDirectory()
     return enterAbsoluteDirectory(d->expandEncodedDirectory(currentPath()));
 }
 
-QString KoStore::currentDirectory() const
+QString KOdfStore::currentDirectory() const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     return d->expandEncodedDirectory(currentPath());
 }
 
-QString KoStore::currentPath() const
+QString KOdfStore::currentPath() const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     QString path;
     QStringList::ConstIterator it = d->currentPath.begin();
     QStringList::ConstIterator end = d->currentPath.end();
@@ -422,21 +422,21 @@ QString KoStore::currentPath() const
     return path;
 }
 
-void KoStore::pushDirectory()
+void KOdfStore::pushDirectory()
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     d->directoryStack.push(currentPath());
 }
 
-void KoStore::popDirectory()
+void KOdfStore::popDirectory()
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     d->currentPath.clear();
     enterAbsoluteDirectory(QString());
     enterDirectory(d->directoryStack.pop());
 }
 
-bool KoStore::addLocalFile(const QString &fileName, const QString &destName)
+bool KOdfStore::addLocalFile(const QString &fileName, const QString &destName)
 {
     QFileInfo fi(fileName);
     uint size = fi.size();
@@ -471,7 +471,7 @@ bool KoStore::addLocalFile(const QString &fileName, const QString &destName)
     return true;
 }
 
-bool KoStore::addDataToFile(QByteArray &buffer, const QString &destName)
+bool KOdfStore::addDataToFile(QByteArray &buffer, const QString &destName)
 {
     QBuffer file(&buffer);
     if (!file.open(QIODevice::ReadOnly)) {
@@ -499,17 +499,17 @@ bool KoStore::addDataToFile(QByteArray &buffer, const QString &destName)
     return true;
 }
 
-bool KoStore::extractFile(const QString &srcName, const QString &fileName)
+bool KOdfStore::extractFile(const QString &srcName, const QString &fileName)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     QFile file(fileName);
     return d->extractFile(srcName, file);
 }
 
 
-bool KoStore::extractFile(const QString &srcName, QByteArray &data)
+bool KOdfStore::extractFile(const QString &srcName, QByteArray &data)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     QBuffer buffer(&data);
     return d->extractFile(srcName, buffer);
 }
@@ -541,21 +541,21 @@ bool KoStorePrivate::extractFile(const QString &srcName, QIODevice &buffer)
     return true;
 }
 
-bool KoStore::seek(qint64 pos)
+bool KOdfStore::seek(qint64 pos)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     return d->stream->seek(pos);
 }
 
-qint64 KoStore::pos() const
+qint64 KOdfStore::pos() const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     return d->stream->pos();
 }
 
-bool KoStore::atEnd() const
+bool KOdfStore::atEnd() const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     return d->stream->atEnd();
 }
 
@@ -595,7 +595,7 @@ QString KoStorePrivate::expandEncodedPath(const QString& _intern) const
         // If this is the first part name, check if we have a store with
         // old-style names.
         if (namingVersion == KoStorePrivate::NamingVersion22
-                && mode == KoStore::Read && q->fileExists(result + "part" + intern + ".xml"))
+                && mode == KOdfStore::Read && q->fileExists(result + "part" + intern + ".xml"))
             namingVersion = KoStorePrivate::NamingVersion21;
 
         if (namingVersion == KoStorePrivate::NamingVersion21)
@@ -639,53 +639,53 @@ bool KoStorePrivate::enterDirectoryInternal(const QString &directory)
     return false;
 }
 
-void KoStore::disallowNameExpansion()
+void KOdfStore::disallowNameExpansion()
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     d->namingVersion = KoStorePrivate::NamingVersionRaw;
 }
 
-bool KoStore::hasFile(const QString& fileName) const
+bool KOdfStore::hasFile(const QString& fileName) const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     return fileExists(d->toExternalNaming(fileName));
 }
 
-bool KoStore::finalize()
+bool KOdfStore::finalize()
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     Q_ASSERT(!d->finalized);   // call this only once!
     d->finalized = true;
     return doFinalize();
 }
 
-void KoStore::setCompressionEnabled(bool /*e*/)
+void KOdfStore::setCompressionEnabled(bool /*e*/)
 {
 }
 
-bool KoStore::isEncrypted()
-{
-    return false;
-}
-
-bool KoStore::setPassword(const QString& /*password*/)
+bool KOdfStore::isEncrypted()
 {
     return false;
 }
 
-QString KoStore::password()
+bool KOdfStore::setPassword(const QString& /*password*/)
+{
+    return false;
+}
+
+QString KOdfStore::password()
 {
     return QString();
 }
 
-bool KoStore::bad() const
+bool KOdfStore::bad() const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     return !d->good;
 }
 
-KoStore::Mode KoStore::mode() const
+KOdfStore::Mode KOdfStore::mode() const
 {
-    Q_D(const KoStore);
+    Q_D(const KOdfStore);
     return d->mode;
 }

@@ -32,7 +32,7 @@ class KoDocumentAdaptor;
 
 /**
 * The KoScriptingOdfReader provides functionality to read content
-* from a KoStore.
+* from a KOdfStore.
 *
 * The following python samples does open the content.xml file and
 * reads all text:p elements from it;
@@ -296,7 +296,7 @@ public slots:
 };
 
 /**
-* The KoScriptingOdfStore class provides access to the KoStore functionality.
+* The KoScriptingOdfStore class provides access to the KOdfStore functionality.
 *
 * The following python sample does use KWord do read a ODT document and then
 * flushes the DOM tree to stdout.
@@ -309,9 +309,9 @@ public slots:
 * # Open an ISO OpenDocument Text File.
 * docAdaptor.openUrl("/home/kde4/testDoc.odt")
 *
-* # Get a KoStore instance.
+* # Get a KOdfStore instance.
 * store = KWord.store()
-* # Open the content.xml file within the KoStore.
+* # Open the content.xml file within the KOdfStore.
 * reader = store.open("content.xml")
 * if not reader:
 *     raise "Failed to read file from the store"
@@ -335,7 +335,7 @@ public:
     /** Destructor. */
     virtual ~KoScriptingOdfStore();
 
-    //KoStore* readStore() const;
+    //KOdfStore* readStore() const;
     //QIODevice* readDevice() const;
 
 public slots:
@@ -433,14 +433,14 @@ signals:
     //void onParagraph();
 
 private:
-    KoStore *getReadStore();
+    KOdfStore *getReadStore();
     QByteArray getByteArray();
     QByteArray getMimeType() const;
 
     QPointer<KoDocument> m_document;
     QPointer<KoDocumentAdaptor> m_documentAdaptor;
 
-    KoStore *m_readStore;
+    KOdfStore *m_readStore;
     QIODevice *m_readDevice;
     KoScriptingOdfReader *m_reader;
     QByteArray m_byteArray;

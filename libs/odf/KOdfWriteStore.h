@@ -22,12 +22,12 @@
 
 class QIODevice;
 class KoXmlWriter;
-class KoStore;
+class KOdfStore;
 
 #include "koodf_export.h"
 
 /**
- * Helper class around KoStore for writing out ODF files.
+ * Helper class around KOdfStore for writing out ODF files.
  * This class helps solving the problem that automatic styles must be before
  * the body, but it's easier to iterate over the application's objects only
  * once. So we open a KoXmlWriter into a memory buffer, write the body into it,
@@ -50,7 +50,7 @@ class KOODF_EXPORT KOdfWriteStore
 {
 public:
     /// @param store recontents the property of the caller
-    explicit KOdfWriteStore(KoStore *store);
+    explicit KOdfWriteStore(KOdfStore *store);
 
     ~KOdfWriteStore();
 
@@ -72,7 +72,7 @@ public:
      */
     static KoXmlWriter *createOasisXmlWriter(QIODevice *dev, const char *rootElementName);
 
-    KoStore *store() const;
+    KOdfStore *store() const;
 
     /**
      * Open contents.xml for writing and return the KoXmlWriter

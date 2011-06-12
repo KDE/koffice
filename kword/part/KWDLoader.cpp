@@ -48,7 +48,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 
-KWDLoader::KWDLoader(KWDocument *parent, KoStore *store)
+KWDLoader::KWDLoader(KWDocument *parent, KOdfStore *store)
         : m_document(parent),
         m_store(store),
         m_pageManager(&parent->m_pageManager),

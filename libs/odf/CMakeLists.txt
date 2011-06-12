@@ -33,7 +33,7 @@ set(koodf_LIB_SRCS
     KOdfPageFormat.cpp
     KOdfPageLayoutData.cpp
     KProperties.cpp
-    KoStore.cpp
+    KOdfStore.cpp
     KOdfStorageDevice.cpp
     KoStyleStack.cpp
     TarStore.cpp
@@ -82,7 +82,7 @@ install( FILES
     KOdfPageLayoutData.h
     KOdfPageFormat.h
     KOdfColumnData.h
-    KoStore.h
+    KOdfStore.h
     KOdfStorageDevice.h
     KoXmlReader.h
     KoXmlWriter.h

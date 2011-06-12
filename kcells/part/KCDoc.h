@@ -52,7 +52,7 @@ class QPainter;
 class KOdfGenericStyles;
 class KoOdfSettings;
 class KoResourceManager;
-class KoStore;
+class KOdfStore;
 class KoXmlWriter;
 
 #define MIME_TYPE "application/x-kcells"
@@ -95,7 +95,7 @@ public:
         return MIME_TYPE;
     }
 
-    virtual bool completeSaving(KoStore* _store);
+    virtual bool completeSaving(KOdfStore* _store);
 
 
     /**
@@ -108,7 +108,7 @@ public:
      * \ingroup NativeFormat
      * Main loading method.
      */
-    virtual bool loadXML(const KoXmlDocument& doc, KoStore *store);
+    virtual bool loadXML(const KoXmlDocument& doc, KOdfStore *store);
 
     /**
      * \ingroup OpenDocument
@@ -118,7 +118,7 @@ public:
 
     virtual int supportedSpecialFormats() const;
 
-    virtual bool loadChildren(KoStore* _store);
+    virtual bool loadChildren(KOdfStore* _store);
 
     virtual void addView(KoView *_view);
 
@@ -172,12 +172,12 @@ protected:
     /**
      * @reimp Overloaded function of KoDocument.
      */
-    virtual bool completeLoading(KoStore*);
+    virtual bool completeLoading(KOdfStore*);
 
     /**
      * @reimp Overloaded function of KoDocument.
      */
-    virtual bool saveChildren(KoStore* _store);
+    virtual bool saveChildren(KOdfStore* _store);
 
     virtual void saveOdfViewSettings(KoXmlWriter& settingsWriter);
     virtual void saveOdfViewSheetSettings(KCSheet *sheet, KoXmlWriter &settingsWriter);

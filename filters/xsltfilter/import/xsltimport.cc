@@ -49,7 +49,7 @@ KoFilter::ConversionStatus XSLTImport::convert(const QByteArray&, const QByteArr
         return KoFilter::NotImplemented;
 
     // ## missing appIdentification
-    KoStore* out = KoStore::createStore(QString(m_chain->outputFile()), KoStore::Write);
+    KOdfStore* out = KOdfStore::createStore(QString(m_chain->outputFile()), KOdfStore::Write);
     if (!out || !out->open("root")) {
         kError() << "Unable to create output file!" << endl;
         delete out;

@@ -68,7 +68,7 @@ MsooXmlImport::~MsooXmlImport()
 {
 }
 
-KoFilter::ConversionStatus MsooXmlImport::createDocument(KoStore *outputStore,
+KoFilter::ConversionStatus MsooXmlImport::createDocument(KOdfStore *outputStore,
                                                          KoOdfWriters *writers)
 {
     kDebug() << "######################## start ####################";

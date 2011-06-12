@@ -83,7 +83,7 @@ void importTextPosition(const QString& text_position, QString& value, QString& r
 
 void createDocumentInfo(KoXmlDocument &_meta, QDomDocument & docinfo);
 KoFilter::ConversionStatus loadAndParse(const QString& filename, KoXmlDocument& doc, KZip* zip);
-KoFilter::ConversionStatus loadAndParse(const QString& filename, KoXmlDocument& doc, KoStore* store);
+KoFilter::ConversionStatus loadAndParse(const QString& filename, KoXmlDocument& doc, KOdfStore* store);
 
 /// Load an OASIS thumbnail
 KoFilter::ConversionStatus loadThumbnail(QImage& thumbnail, KZip* zip);

@@ -21,7 +21,7 @@
 #define __PALMDOCEXPORT_H
 
 #include <KoFilter.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <QByteArray>
 #include <QVariantList>
 

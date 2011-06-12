@@ -32,14 +32,14 @@
 //
 
 
-#include "KoStore.h"
+#include "KOdfStore.h"
 #include <QByteArray>
 
 class KZip;
 class KArchiveDirectory;
 class KUrl;
 
-class ZipStore : public KoStore
+class ZipStore : public KOdfStore
 {
 public:
     ZipStore(const QString & _filename, Mode _mode, const QByteArray & appIdentification);
@@ -54,7 +54,7 @@ public:
     virtual void setCompressionEnabled(bool e);
     virtual qint64 write(const char* _data, qint64 _len);
 protected:
-    using KoStore::init;
+    using KOdfStore::init;
 
     virtual bool init(Mode _mode, const QByteArray& appIdentification);
     virtual bool doFinalize();
@@ -75,7 +75,7 @@ protected:
     current directory in the archive to speed up the verification process */
     const KArchiveDirectory* m_currentDir;
 private:
-    Q_DECLARE_PRIVATE(KoStore)
+    Q_DECLARE_PRIVATE(KOdfStore)
 };
 
 #endif

@@ -32,7 +32,7 @@
 #include <QVariantList>
 
 class KoStyleStack;
-class KoStore;
+class KOdfStore;
 
 class KCCell;
 class KCConditional;
@@ -112,7 +112,7 @@ private:
     void loadOasisCondition(const KCCell& cell, const KoXmlElement &property);
     void loadOasisConditionValue(const QString &styleCondition, KCConditional &newCondition, const KCValueParser *parser);
     void loadOasisCondition(QString &valExpression, KCConditional &newCondition, const KCValueParser *parser);
-    KoFilter::ConversionStatus loadAndParse(KoXmlDocument& doc, const QString& fileName, KoStore *m_store);
+    KoFilter::ConversionStatus loadAndParse(KoXmlDocument& doc, const QString& fileName, KOdfStore *m_store);
 
     KoFilter::ConversionStatus openFile();
 };

@@ -347,13 +347,13 @@ public:
      * \ingroup NativeFormat
      * Saves a children
      */
-    bool saveChildren(KoStore* _store, const QString &_path);
+    bool saveChildren(KOdfStore* _store, const QString &_path);
 
     /**
      * \ingroup NativeFormat
      * Loads a children
      */
-    bool loadChildren(KoStore* _store);
+    bool loadChildren(KOdfStore* _store);
 
     //
     //END Methods related to KCells's old file format

@@ -25,7 +25,7 @@
 #include <QString>
 
 #include <KoFilter.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 #include <records.h>
 #include <QVariantList>

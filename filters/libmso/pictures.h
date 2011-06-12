@@ -20,7 +20,7 @@
 #define PICTURES_H
 
 #include <pole.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include "generated/simpleParser.h"
 
 struct PictureReference {
@@ -38,9 +38,9 @@ struct PictureReference {
  * @return The name under which the image is saved or an empty string when
  *         an error occurred.
  **/
-PictureReference savePicture(POLE::Stream& stream, KoStore* store);
+PictureReference savePicture(POLE::Stream& stream, KOdfStore* store);
 
 PictureReference savePicture(const MSO::OfficeArtBStoreContainerFileBlock& a,
-                             KoStore* store);
+                             KOdfStore* store);
 
 #endif

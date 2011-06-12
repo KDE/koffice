@@ -35,7 +35,7 @@ class KoParagraphStyle;
 class KoCharacterStyle;
 class QColor;
 class KoShape;
-class KoStore;
+class KOdfStore;
 class KoInlineNote;
 
 /// KWDocument delegates to this class the loading of (old style) KWD documents
@@ -47,7 +47,7 @@ public:
      * Constructor
      * @param parent the document this loader will work for.
      */
-    KWDLoader(KWDocument *parent, KoStore *store);
+    KWDLoader(KWDocument *parent, KOdfStore *store);
     virtual ~KWDLoader();
 
     /**
@@ -97,7 +97,7 @@ private:
 
 private:
     KWDocument *m_document;
-    KoStore *m_store;
+    KOdfStore *m_store;
     KWPageManager *m_pageManager;
     KWPageStyle m_pageStyle;
     KWPageStyle m_firstPageStyle;

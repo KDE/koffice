@@ -25,15 +25,15 @@
 class QString;
 class QIODevice;
 class QXmlStreamReader;
-class KoStore;
+class KOdfStore;
 class KOdfStylesReader;
 class KoXmlDocument;
 class KoXmlElement;
 
 /**
- * Helper class around KoStore for reading out ODF files.
+ * Helper class around KOdfStore for reading out ODF files.
  *
- * The class loades and parses files from the KoStore.
+ * The class loades and parses files from the KOdfStore.
  *
  * @author: David Faure <faure@kde.org>
  */
@@ -41,14 +41,14 @@ class KOODF_EXPORT KOdfStoreReader
 {
 public:
     /// @param store recontents the property of the caller
-    explicit KOdfStoreReader(KoStore* store);
+    explicit KOdfStoreReader(KOdfStore* store);
 
     ~KOdfStoreReader();
 
     /**
      * Get the store
      */
-    KoStore* store() const;
+    KOdfStore* store() const;
 
     /**
      * Get the styles

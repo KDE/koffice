@@ -20,7 +20,7 @@
 #ifndef KOOASISLOADINGCONTEXT_H
 #define KOOASISLOADINGCONTEXT_H
 
-class KoStore;
+class KOdfStore;
 
 #include "koodf_export.h"
 #include "KoStyleStack.h"
@@ -47,7 +47,7 @@ public:
      * @param stylesReader reference to the KOdfStylesReader parsed by KoDocument
      * @param store pointer to store, if available, for e.g. loading images.
      */
-    explicit KOdfLoadingContext(KOdfStylesReader &stylesReader, KoStore *store, const KComponentData &componentData = KComponentData());
+    explicit KOdfLoadingContext(KOdfStylesReader &stylesReader, KOdfStore *store, const KComponentData &componentData = KComponentData());
     virtual ~KOdfLoadingContext();
 
     /**
@@ -56,7 +56,7 @@ public:
     */
     void setManifestFile(const QString &fileName);
 
-    KoStore *store() const;
+    KOdfStore *store() const;
 
     KOdfStylesReader &stylesReader();
 

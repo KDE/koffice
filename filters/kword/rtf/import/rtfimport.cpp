@@ -1395,7 +1395,7 @@ void RTFImport::parsePicture(RTFProperty *)
         kDebug(30515) << "Picture:" << pictName << " Frame:" << frameName;
 
         // Store picture
-        KOdfStorageDevice* dev = m_chain->storageFile(pictName, KoStore::Write);
+        KOdfStorageDevice* dev = m_chain->storageFile(pictName, KOdfStore::Write);
         if (dev)
             dev->write(picture.bits.data(), picture.bits.size());
         else
@@ -1470,7 +1470,7 @@ void RTFImport::addImportedPicture(const QString& rawFileName)
     kDebug(30515) << "Imported picture:" << pictName << " Frame:" << frameName;
 
     // Store picture
-    KOdfStorageDevice* dev = m_chain->storageFile(pictName, KoStore::Write);
+    KOdfStorageDevice* dev = m_chain->storageFile(pictName, KOdfStore::Write);
     if (dev)
         pic.save(dev);
     else
@@ -2341,7 +2341,7 @@ void RTFImport::finishTable()
 
 void RTFImport::writeOutPart(const char *name, const DomNode& node)
 {
-    KOdfStorageDevice* dev = m_chain->storageFile(name, KoStore::Write);
+    KOdfStorageDevice* dev = m_chain->storageFile(name, KOdfStore::Write);
     if (dev) {
         QTextStream stream(dev);
         stream.setCodec("UTF-8");

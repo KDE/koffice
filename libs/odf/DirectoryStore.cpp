@@ -29,7 +29,7 @@
 DirectoryStore::DirectoryStore(const QString& path, Mode _mode)
         : m_basePath(path)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     const int pos = path.lastIndexOf('/');
     if (pos != -1 && pos != m_basePath.length() - 1)
         m_basePath = m_basePath.left(pos);
@@ -46,7 +46,7 @@ DirectoryStore::~DirectoryStore()
 
 bool DirectoryStore::init(Mode _mode)
 {
-    KoStore::init(_mode);
+    KOdfStore::init(_mode);
     QDir dir(m_basePath);
     if (dir.exists())
         return true;
@@ -61,7 +61,7 @@ bool DirectoryStore::init(Mode _mode)
 
 bool DirectoryStore::openReadOrWrite(const QString& name, QIODevice::OpenModeFlag iomode)
 {
-    Q_D(KoStore);
+    Q_D(KOdfStore);
     //kDebug(30002) <<"DirectoryStore::openReadOrWrite m_currentPath=" << m_currentPath <<" name=" << name;
     int pos = name.lastIndexOf('/');
     if (pos != -1) { // there are subdirs in the name -> maybe need to create them, when writing

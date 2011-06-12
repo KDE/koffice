@@ -49,8 +49,8 @@ public:
 
 private:
     //Helper functions
-    void createImageList(KoStore* output, KoStore* input, KoXmlWriter* manifest);
-    void createSoundList(KoStore* output, KoStore* input, KoXmlWriter* manifest);
+    void createImageList(KOdfStore* output, KOdfStore* input, KoXmlWriter* manifest);
+    void createSoundList(KOdfStore* output, KOdfStore* input, KoXmlWriter* manifest);
     void convertContent(KoXmlWriter* content);
     void convertObjects(KoXmlWriter* content, const KoXmlNode& objects);
     void saveAnimations(KoXmlWriter* content);

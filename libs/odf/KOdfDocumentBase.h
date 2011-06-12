@@ -25,7 +25,7 @@
 
 #include <kurl.h>
 
-class KoStore;
+class KOdfStore;
 class KOdfStoreReader;
 class KOdfWriteStore;
 class KoEmbeddedDocumentSaver;
@@ -91,7 +91,7 @@ public:
     /**
      *  @brief Saves a document to a store.
      */
-    virtual bool saveToStore(KoStore *store, const QString &path) = 0;
+    virtual bool saveToStore(KOdfStore *store, const QString &path) = 0;
 
     /**
      *  Reimplement this method to load the odf document. Take care to

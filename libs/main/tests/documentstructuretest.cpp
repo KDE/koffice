@@ -27,7 +27,7 @@
 
 #include <KoDocument.h>
 #include <KoDocumentInfo.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoXmlReader.h>
 #include <KOdfStoreReader.h>
 #include <KoXmlNS.h>
@@ -64,7 +64,7 @@ void DocumentStructureTest::cleanup()
 
 static KoDocumentInfo *loadDocumentInfo(const QString &odt)
 {
-    KoStore *store = KoStore::createStore(odt, KoStore::Read, "", KoStore::Zip);
+    KOdfStore *store = KOdfStore::createStore(odt, KOdfStore::Read, "", KOdfStore::Zip);
     KOdfStoreReader odfReadStore(store);
     KoXmlDocument metaDoc;
     KoDocumentInfo *documentInfo = new KoDocumentInfo;

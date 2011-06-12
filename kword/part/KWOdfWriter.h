@@ -69,7 +69,7 @@ private:
     void calculateZindexOffsets();
     void addShapeToTree(KoShape *shape);
 
-    bool saveOdfSettings(KoStore *store);
+    bool saveOdfSettings(KOdfStore *store);
 
     /// The KWord document.
     KWDocument *m_document;

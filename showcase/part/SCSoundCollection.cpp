@@ -74,7 +74,7 @@ QStringList SCSoundCollection::titles()
 }
 
 // TODO move to loading of the actual element using the sound
-bool SCSoundCollection::completeLoading(KoStore *store)
+bool SCSoundCollection::completeLoading(KOdfStore *store)
 {
     foreach (SCSoundData *sound, d->sounds) {
         if(! store->open(sound->storeHref()))
@@ -89,7 +89,7 @@ bool SCSoundCollection::completeLoading(KoStore *store)
 }
 
 // use a KoSharedSavingData in the context to save which sounds need to be saved
-bool SCSoundCollection::completeSaving(KoStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context)
+bool SCSoundCollection::completeSaving(KOdfStore *store, KoXmlWriter * manifestWriter, KoShapeSavingContext * context)
 {
     Q_UNUSED(context);
     foreach (SCSoundData *sound, d->sounds) {

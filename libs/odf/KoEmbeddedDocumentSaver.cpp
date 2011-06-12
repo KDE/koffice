@@ -23,7 +23,7 @@
 
 #include <kdebug.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoXmlWriter.h>
 #include <KOdfWriteStore.h>
 
@@ -86,7 +86,7 @@ void KoEmbeddedDocumentSaver::embedDocument(KoXmlWriter &writer, KOdfDocumentBas
 
 bool KoEmbeddedDocumentSaver::saveEmbeddedDocuments(KOdfDocumentBase::SavingContext & documentContext)
 {
-    KoStore * store = documentContext.odfStore.store();
+    KOdfStore * store = documentContext.odfStore.store();
     foreach(KOdfDocumentBase * doc, d->documents) {
         QString path;
         if (doc->isStoredExtern()) {

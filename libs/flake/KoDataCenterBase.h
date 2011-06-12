@@ -28,7 +28,7 @@
 #include "flake_export.h"
 
 class KoShapeSavingContext;
-class KoStore;
+class KOdfStore;
 class KoXmlWriter;
 
 /**
@@ -47,13 +47,13 @@ public:
      * Load any remaining binary blobs needed
      * @returns false if an error occurred, which typically cancels the load.
      */
-    virtual bool completeLoading(KoStore *store) = 0;
+    virtual bool completeLoading(KOdfStore *store) = 0;
 
     /**
      * Save any remaining binary blobs
      * @returns false if an error occurred, which typically cancels the save.
      */
-    virtual bool completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context) = 0;
+    virtual bool completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context) = 0;
 };
 
 #endif

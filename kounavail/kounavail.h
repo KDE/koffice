@@ -38,10 +38,10 @@ public:
     virtual bool loadOdf(KOdfStoreReader & odfStore);
     virtual bool saveOdf(SavingContext & documentContext);
 
-    virtual bool loadXML(const KoXmlDocument &doc, KoStore *store);
+    virtual bool loadXML(const KoXmlDocument &doc, KOdfStore *store);
     virtual bool saveFile();
     virtual QDomDocument saveXML();
-    virtual bool saveChildren(KoStore* /*_store*/) { return true; }
+    virtual bool saveChildren(KOdfStore* /*_store*/) { return true; }
 
     /** This is called by KoDocumentChild::save */
     virtual QByteArray nativeFormatMimeType() const { return m_mimetype; }

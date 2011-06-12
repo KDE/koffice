@@ -115,7 +115,7 @@ KoFilter::ConversionStatus APPLIXWORDImport::convert(const QByteArray& from, con
 
 
     //create output files
-    KoStore *store = KoStore::createStore(m_chain->outputFile(), KoStore::Write, to, KoStore::Zip);
+    KOdfStore *store = KOdfStore::createStore(m_chain->outputFile(), KOdfStore::Write, to, KOdfStore::Zip);
     if (!store || store->bad()) {
         kWarning(30517) << "Unable to open output file!";
         delete store;

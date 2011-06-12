@@ -49,7 +49,7 @@ public:
 
     void paintContent(QPainter &painter, const QRect &rect);
 
-    bool loadXML(const KoXmlDocument &doc, KoStore *store);
+    bool loadXML(const KoXmlDocument &doc, KOdfStore *store);
     bool loadOdf(KOdfStoreReader &odfStore);
 
     bool saveOdf(SavingContext &documentContext);
@@ -264,7 +264,7 @@ protected:
     /**
      * Save settings
      */
-    bool saveOdfSettings(KoStore * store);
+    bool saveOdfSettings(KOdfStore * store);
 
     /**
      * Load settings

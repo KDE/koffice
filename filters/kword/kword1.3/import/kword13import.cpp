@@ -95,7 +95,7 @@ bool KWord13Import::parseRoot(QIODevice* io, KWord13Document& kwordDocument)
     return true;
 }
 
-bool KWord13Import::postParse(KoStore* store, KWord13Document& doc)
+bool KWord13Import::postParse(KOdfStore* store, KWord13Document& doc)
 {
     KWord13PostParsing post;
     return post.postParse(store, doc);
@@ -119,9 +119,9 @@ KoFilter::ConversionStatus KWord13Import::convert(const QByteArray& from, const 
         return KoFilter::StupidError;
     }
 
-    KoStore* store = KoStore::createStore(fileName, KoStore::Read);
+    KOdfStore* store = KOdfStore::createStore(fileName, KOdfStore::Read);
     if (store && store->hasFile("maindoc.xml")) {
-        kDebug(30520) << "Maindoc.xml found in KoStore!";
+        kDebug(30520) << "Maindoc.xml found in KOdfStore!";
 
         // We do not really care about errors while reading/parsing documentinfo
         store->open("documentinfo.xml");

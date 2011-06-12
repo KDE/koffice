@@ -21,7 +21,7 @@
 #include "KoDocumentInfoPropsPage.h"
 
 #include "KOdfStoreReader.h"
-#include "KoStore.h"
+#include "KOdfStore.h"
 #include "KoDocumentInfo.h"
 #include "KoDocumentInfoDlg.h"
 #include <KoXmlReader.h>
@@ -46,8 +46,8 @@ public:
     KoDocumentInfo *m_info;
     KoDocumentInfoDlg *m_dlg;
     KUrl m_url;
-    KoStore *m_src;
-    KoStore *m_dst;
+    KOdfStore *m_src;
+    KOdfStore *m_dst;
 
     const KArchiveFile *m_docInfoFile;
 };
@@ -66,7 +66,7 @@ KoDocumentInfoPropsPage::KoDocumentInfoPropsPage(KPropertiesDialog *props,
 
     d->m_dst = 0;
 
-    d->m_src = KoStore::createStore(d->m_url.toLocalFile(), KoStore::Read);
+    d->m_src = KOdfStore::createStore(d->m_url.toLocalFile(), KOdfStore::Read);
 
     if (d->m_src->bad()) {
         return; // the store will be deleted in the dtor
@@ -114,7 +114,7 @@ KoDocumentInfoPropsPage::~KoDocumentInfoPropsPage()
 
 void KoDocumentInfoPropsPage::applyChanges()
 {
-    // TODO port this to KoStore!
+    // TODO port this to KOdfStore!
 #if 0
     const KArchiveDirectory *root = d->m_src->directory();
     if (!root)

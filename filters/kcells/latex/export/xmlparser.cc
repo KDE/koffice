@@ -20,7 +20,7 @@
 */
 
 #include <kdebug.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 #include "xmlparser.h"
 #include "qfile.h"
@@ -28,7 +28,7 @@
 /* Init static data */
 FileHeader* XmlParser::_fileHeader = 0;
 Document* XmlParser::_root = 0;
-KoStore* XmlParser::_in = NULL;
+KOdfStore* XmlParser::_in = NULL;
 
 XmlParser::XmlParser(QString filename): _filename(filename)
 {
@@ -48,9 +48,9 @@ XmlParser::XmlParser(QByteArray in)
     _document.setContent(in);
 }
 
-XmlParser::XmlParser(const KoStore* in)
+XmlParser::XmlParser(const KOdfStore* in)
 {
-    _in = const_cast<KoStore*>(in);
+    _in = const_cast<KOdfStore*>(in);
     if (!_in->open("root")) {
         kError(30522) << "Unable to open input file!" << endl;
         return;

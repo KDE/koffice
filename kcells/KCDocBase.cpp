@@ -134,7 +134,7 @@ bool KCDocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag
                         QString* /*plainText*/)
 {
     Q_UNUSED(saveFlag);
-    KoStore * store = documentContext.odfStore.store();
+    KOdfStore * store = documentContext.odfStore.store();
     KoXmlWriter * manifestWriter = documentContext.odfStore.manifestWriter();
 
     KOdfStorageDevice dev(store);
@@ -319,7 +319,7 @@ void KCDocBase::paintContent(QPainter &, const QRect &)
 {
 }
 
-bool KCDocBase::loadXML(const KoXmlDocument &, KoStore *)
+bool KCDocBase::loadXML(const KoXmlDocument &, KOdfStore *)
 {
     return false;
 }

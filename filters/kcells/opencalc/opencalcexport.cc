@@ -127,7 +127,7 @@ KoFilter::ConversionStatus OpenCalcExport::convert(const QByteArray & from,
 
 bool OpenCalcExport::writeFile(const KCDoc * ksdoc)
 {
-    KoStore * store = KoStore::createStore(m_chain->outputFile(), KoStore::Write, "", KoStore::Zip);
+    KOdfStore * store = KOdfStore::createStore(m_chain->outputFile(), KOdfStore::Write, "", KOdfStore::Zip);
 
     if (!store)
         return false;
@@ -165,7 +165,7 @@ bool OpenCalcExport::writeFile(const KCDoc * ksdoc)
     return true;
 }
 
-bool OpenCalcExport::exportDocInfo(KoStore * store, const KCDoc* ksdoc)
+bool OpenCalcExport::exportDocInfo(KOdfStore * store, const KCDoc* ksdoc)
 {
     if (!store->open("meta.xml"))
         return false;
@@ -251,7 +251,7 @@ bool OpenCalcExport::exportDocInfo(KoStore * store, const KCDoc* ksdoc)
     return true;
 }
 
-bool OpenCalcExport::exportSettings(KoStore * store, const KCDoc * ksdoc)
+bool OpenCalcExport::exportSettings(KOdfStore * store, const KCDoc * ksdoc)
 {
     if (!store->open("settings.xml"))
         return false;
@@ -339,7 +339,7 @@ bool OpenCalcExport::exportSettings(KoStore * store, const KCDoc * ksdoc)
     return true;
 }
 
-bool OpenCalcExport::exportContent(KoStore * store, const KCDoc * ksdoc)
+bool OpenCalcExport::exportContent(KOdfStore * store, const KCDoc * ksdoc)
 {
     if (!store->open("content.xml"))
         return false;
@@ -668,7 +668,7 @@ void OpenCalcExport::exportCells(QDomDocument & doc, QDomElement & rowElem,
     }
 }
 
-bool OpenCalcExport::exportStyles(KoStore * store, const KCDoc *ksdoc)
+bool OpenCalcExport::exportStyles(KOdfStore * store, const KCDoc *ksdoc)
 {
     if (!store->open("styles.xml"))
         return false;
@@ -1127,7 +1127,7 @@ QString OpenCalcExport::convertFormula(QString const & formula) const
     return s;
 }
 
-bool OpenCalcExport::writeMetaFile(KoStore * store, uint filesWritten)
+bool OpenCalcExport::writeMetaFile(KOdfStore * store, uint filesWritten)
 {
     store->enterDirectory("META-INF");
     if (!store->open("manifest.xml"))

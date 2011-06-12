@@ -50,7 +50,7 @@ bool KoUnavailPart::loadOdf( KOdfStoreReader & odfStore )
     return true;
 }
 
-bool KoUnavailPart::loadXML( const KoXmlDocument &doc, KoStore *)
+bool KoUnavailPart::loadXML( const KoXmlDocument &doc, KOdfStore *)
 {
     // Simply keep a copy of the whole document ;)
     m_doc = KoXml::asQDomDocument( QDomDocument(), doc );

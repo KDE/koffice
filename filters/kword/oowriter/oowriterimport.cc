@@ -134,14 +134,14 @@ KoFilter::ConversionStatus OoWriterImport::convert(QByteArray const & from, QByt
     m_zip->close();
     delete m_zip; // It has to be so late, as pictures might be read.
 
-    KOdfStorageDevice* out = m_chain->storageFile("maindoc.xml", KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile("maindoc.xml", KOdfStore::Write);
     if (!out) {
         kError(30518) << "Unable to open output file!" << endl;
         return KoFilter::StorageCreationError;
     } else {
         QByteArray cstr = mainDocument.toByteArray();
         kDebug(30518) << " maindoc:" << cstr;
-        // WARNING: we cannot use KoStore::write(const QByteArray&) because it gives an extra NULL character at the end.
+        // WARNING: we cannot use KOdfStore::write(const QByteArray&) because it gives an extra NULL character at the end.
         out->write(cstr, cstr.length());
     }
 
@@ -149,11 +149,11 @@ KoFilter::ConversionStatus OoWriterImport::convert(QByteArray const & from, QByt
     createDocumentInfo(docinfo);
 
     // store document info
-    out = m_chain->storageFile("documentinfo.xml", KoStore::Write);
+    out = m_chain->storageFile("documentinfo.xml", KOdfStore::Write);
     if (out) {
         QByteArray info = docinfo.toByteArray();
         kDebug(30518) << " info :" << info;
-        // WARNING: we cannot use KoStore::write(const QByteArray&) because it gives an extra NULL character at the end.
+        // WARNING: we cannot use KOdfStore::write(const QByteArray&) because it gives an extra NULL character at the end.
         out->write(info , info.length());
     }
 
@@ -165,7 +165,7 @@ KoFilter::ConversionStatus OoWriterImport::convert(QByteArray const & from, QByt
         QImage preview(thumbnail.smoothScale(256, 256).convertDepth(8, Qt::AvoidDither | Qt::DiffuseDither));
         // Not to be able to generate a preview is not an error
         if (!preview.isNull()) {
-            out = m_chain->storageFile("preview.png", KoStore::Write);
+            out = m_chain->storageFile("preview.png", KOdfStore::Write);
             if (out) {
                 preview.save(out, "PNG");
             }
@@ -1742,7 +1742,7 @@ QString OoWriterImport::appendPicture(QDomDocument& doc, const KoXmlElement& obj
 
     kDebug(30518) << "Storage name:" << strStoreName;
 
-    KOdfStorageDevice* out = m_chain->storageFile(strStoreName , KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile(strStoreName , KOdfStore::Write);
     if (out) {
         if (!out->open(QIODevice::WriteOnly)) {
             kWarning(30518) << "Cannot open for saving picture: " << frameName << " " << href;

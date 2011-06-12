@@ -329,7 +329,7 @@ KoFilter::ConversionStatus AmiProImport::convert(const QByteArray& from, const Q
     delete parser;
 
     // prepare storage
-    KOdfStorageDevice* out = m_chain->storageFile("root", KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile("root", KOdfStore::Write);
 
     // store output document
     if (out) {
@@ -339,7 +339,7 @@ KoFilter::ConversionStatus AmiProImport::convert(const QByteArray& from, const Q
     }
 
     // store document info
-    out = m_chain->storageFile("documentinfo.xml", KoStore::Write);
+    out = m_chain->storageFile("documentinfo.xml", KOdfStore::Write);
     if (out) {
         QByteArray cstring = documentInfo.toUtf8();
         cstring.prepend("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");

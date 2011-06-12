@@ -297,10 +297,10 @@ class MyWriter:
         # Get the KWord document.
         kwdoc = KWord.document()
 
-        # Get the KoStore backend for the file.
+        # Get the KOdfStore backend for the file.
         store = KWord.store()
 
-        # We like to read the content.xml file from the KoStore.
+        # We like to read the content.xml file from the KOdfStore.
         reader = store.open("content.xml")
         if not reader:
             raise "Failed to read file from the store"

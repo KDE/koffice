@@ -21,7 +21,7 @@
 
 #include <KoImageData.h>
 #include <KoImageCollection.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 #include <QImage>
 #include <QPixmap>
@@ -96,7 +96,7 @@ void TestImageCollection::testGetExternalImage()
 void TestImageCollection::testGetImageStore()
 {
     KoImageCollection collection;
-    KoStore *store = KoStore::createStore(KDESRCDIR "/store.zip", KoStore::Read);
+    KOdfStore *store = KOdfStore::createStore(KDESRCDIR "/store.zip", KOdfStore::Read);
     QString image("logo-koffice.jpg");
     KoImageData *id1 = collection.createImageData(image, store);
     QCOMPARE(id1->suffix(), QString("jpg"));
@@ -107,12 +107,12 @@ void TestImageCollection::testGetImageStore()
     QCOMPARE(id1->key(), id2->key());
     QCOMPARE(collection.count(), 1);
 
-    // opening the exact same file from either a KoStore or a "File://" url may
+    // opening the exact same file from either a KOdfStore or a "File://" url may
     // naively make you think it should have the same key, but thats not the case.
     // Opening a file from your local filesystem prioritizes over the url instead
     // of on the content since if the user updates the image on his filesystem we
     // want to data to be refreshed.  So the key is based on the url.
-    // Opening a KoStore based file we only have the content, and we always have to
+    // Opening a KOdfStore based file we only have the content, and we always have to
     // read the full content anyway due to the store being deleted soon after.
     // So the key is based on the image data.
     KoImageData *id3 = collection.createExternalImageData(image);
@@ -223,7 +223,7 @@ void TestImageCollection::testPreload2()
 void TestImageCollection::testPreload3()
 {
     KoImageData data;
-    KoStore *store = KoStore::createStore(KDESRCDIR "/store.zip", KoStore::Read);
+    KOdfStore *store = KOdfStore::createStore(KDESRCDIR "/store.zip", KOdfStore::Read);
     QString image("logo-koffice.png");
     data.setImage(image, store);
 
@@ -254,7 +254,7 @@ void TestImageCollection::testPreload3()
 
 void TestImageCollection::testSameKey()
 {
-    KoStore *store = KoStore::createStore(KDESRCDIR "/store.zip", KoStore::Read);
+    KOdfStore *store = KOdfStore::createStore(KDESRCDIR "/store.zip", KOdfStore::Read);
     QString image("logo-koffice.png");
     KoImageData data;
     data.setImage(image, store);

@@ -44,7 +44,7 @@ void Conversion::convert(QFile *cont1)
     /*The following line of code contains a parameter "path_of_the_file", which needs to be fixed.
     Here, the url of the file that is opened or the path of the temp file should be substituted.*/
 
-    KoStore* storecont=KoStore::createStore("path_of_the_file",KoStore::Read);
+    KOdfStore* storecont=KOdfStore::createStore("path_of_the_file",KOdfStore::Read);
     storecont->extractFile("meta.xml",met);
     met.remove(0,38);
     contall.append(met);

@@ -217,7 +217,7 @@ KoView* KCDoc::createViewInstance(QWidget* parent)
     return new KCView(parent, this);
 }
 
-bool KCDoc::saveChildren(KoStore* _store)
+bool KCDoc::saveChildren(KOdfStore* _store)
 {
     return map()->saveChildren(_store);
 }
@@ -227,7 +227,7 @@ int KCDoc::supportedSpecialFormats() const
     return KoDocument::supportedSpecialFormats();
 }
 
-bool KCDoc::completeSaving(KoStore* _store)
+bool KCDoc::completeSaving(KOdfStore* _store)
 {
     Q_UNUSED(_store);
     return true;
@@ -286,13 +286,13 @@ QDomDocument KCDoc::saveXML()
     return doc;
 }
 
-bool KCDoc::loadChildren(KoStore* _store)
+bool KCDoc::loadChildren(KOdfStore* _store)
 {
     return map()->loadChildren(_store);
 }
 
 
-bool KCDoc::loadXML(const KoXmlDocument& doc, KoStore*)
+bool KCDoc::loadXML(const KoXmlDocument& doc, KOdfStore*)
 {
     QPointer<KoUpdater> updater;
     if (progressUpdater()) {
@@ -480,7 +480,7 @@ void KCDoc::loadPaper(KoXmlElement const & paper)
     }
 }
 
-bool KCDoc::completeLoading(KoStore* store)
+bool KCDoc::completeLoading(KOdfStore* store)
 {
     kDebug(36001) << "------------------------ COMPLETING --------------------";
 

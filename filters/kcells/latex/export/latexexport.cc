@@ -44,7 +44,7 @@ KoFilter::ConversionStatus LATEXExport::convert(const QByteArray& from, const QB
     if (to != "text/x-tex" || from != "application/x-kcells")
         return KoFilter::NotImplemented;
 
-    KoStore* in = KoStore::createStore(m_chain->inputFile(), KoStore::Read);
+    KOdfStore* in = KOdfStore::createStore(m_chain->inputFile(), KOdfStore::Read);
     if (!in || !in->open("root")) {
         kError(30503) << "Unable to open input file!" << endl;
         delete in;

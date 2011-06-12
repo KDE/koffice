@@ -249,7 +249,7 @@ MSOOXML_EXPORT KoFilter::ConversionStatus loadAndParseDocument(MsooXmlReader* re
  On failure @a errorMessage is set. */
 KoFilter::ConversionStatus copyFile(const KZip* zip, QString& errorMessage,
                                     const QString& sourceName,
-                                    KoStore *outputStore,
+                                    KOdfStore *outputStore,
                                     const QString& destinationName, bool oleType=false);
 
 /*! @return size of image file @a sourceName read from zip archive @a zip.

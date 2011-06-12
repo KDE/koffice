@@ -27,7 +27,7 @@
 #include <qdom.h>
 
 #include <KoFilter.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <QVariantList>
 
 class WPImport : public KoFilter

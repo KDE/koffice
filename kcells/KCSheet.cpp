@@ -56,7 +56,7 @@
 #include <KoUnit.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoText.h>
 #include <KoStyleManager.h>
 #include <KoTextSharedLoadingData.h>
@@ -1504,7 +1504,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
                 forEachElement(element, properties) {
                     if (element.nodeName() == "style:background-image") {
                         QString imagePath = element.attributeNS(KoXmlNS::xlink, "href");
-                        KoStore* store = tableContext.odfContext.store();
+                        KOdfStore* store = tableContext.odfContext.store();
                         if (store->hasFile(imagePath)) {
                             QByteArray data;
                             store->extractFile(imagePath, data);
@@ -3156,7 +3156,7 @@ bool KCSheet::loadXML(const KoXmlElement& sheet)
 }
 
 
-bool KCSheet::loadChildren(KoStore* _store)
+bool KCSheet::loadChildren(KOdfStore* _store)
 {
     Q_UNUSED(_store);
 #if 0 // KSPREAD_KOPART_EMBEDDING
@@ -3241,7 +3241,7 @@ void KCSheet::showStatusMessage(const QString &message, int timeout)
     emit statusMessage(message, timeout);
 }
 
-bool KCSheet::saveChildren(KoStore* _store, const QString &_path)
+bool KCSheet::saveChildren(KOdfStore* _store, const QString &_path)
 {
     Q_UNUSED(_store);
     Q_UNUSED(_path);

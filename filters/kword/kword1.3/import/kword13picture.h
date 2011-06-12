@@ -22,7 +22,7 @@
 #define KWORD_1_3_PICTURE
 
 class KTemporaryFile;
-class KoStore;
+class KOdfStore;
 
 #include <QString>
 
@@ -32,7 +32,7 @@ public:
     explicit KWord13Picture(void);
     ~KWord13Picture(void);
 public:
-    bool loadPicture(KoStore* store);
+    bool loadPicture(KOdfStore* store);
     QString getOasisPictureName(void) const;
 public:
     QString m_storeName; ///< Name of the file in store

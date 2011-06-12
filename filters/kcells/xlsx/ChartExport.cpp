@@ -19,7 +19,7 @@
 
 #include "ChartExport.h"
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoXmlWriter.h>
 #include <KOdfWriteStore.h>
 #include <KOdfStorageDevice.h>
@@ -340,7 +340,7 @@ void ChartExport::set2003ColorPalette( QList < QColor > palette )
     paletteSet = true;
 }
 
-bool ChartExport::saveContent(KoStore* store, KoXmlWriter* manifestWriter)
+bool ChartExport::saveContent(KOdfStore* store, KoXmlWriter* manifestWriter)
 {
     if(!chart() || !chart()->m_impl || m_href.isEmpty())
         return false;

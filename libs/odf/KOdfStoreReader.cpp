@@ -23,7 +23,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoXmlReader.h>
 
 #include "KOdfStylesReader.h"
@@ -34,12 +34,12 @@
 class KOdfStoreReader::Private
 {
 public:
-    Private(KoStore *s)
+    Private(KOdfStore *s)
             : store(s)
     {
     }
 
-    KoStore * store;
+    KOdfStore * store;
     KOdfStylesReader stylesReader;
     // it is needed to keep the stylesDoc around so that you can access the styles
     KoXmlDocument stylesDoc;
@@ -47,7 +47,7 @@ public:
     KoXmlDocument settingsDoc;
 };
 
-KOdfStoreReader::KOdfStoreReader(KoStore *store)
+KOdfStoreReader::KOdfStoreReader(KOdfStore *store)
         : d(new Private(store))
 {
 }
@@ -57,7 +57,7 @@ KOdfStoreReader::~KOdfStoreReader()
     delete d;
 }
 
-KoStore * KOdfStoreReader::store() const
+KOdfStore * KOdfStoreReader::store() const
 {
     return d->store;
 }

@@ -41,7 +41,7 @@
 
 class QUndoCommand;
 
-class KoStore;
+class KOdfStore;
 class KOdfStoreReader;
 class KOdfWriteStore;
 class KoMainWindow;
@@ -434,26 +434,26 @@ public:
      *  @param store The store to load from
      *  @param url An internal url, like tar:/1/2
      */
-    virtual bool loadFromStore(KoStore *store, const QString& url);
+    virtual bool loadFromStore(KOdfStore *store, const QString& url);
 
     /**
      *  @brief Loads an OASIS document from a store.
      *  This is used for both the main document and embedded objects.
      */
-    virtual bool loadOasisFromStore(KoStore *store);
+    virtual bool loadOasisFromStore(KOdfStore *store);
 
     /**
      *  @brief Saves a document to a store.
      *
      *  You should not have to reimplement this - but call it in saveChildren().
      */
-    virtual bool saveToStore(KoStore *store, const QString& path);
+    virtual bool saveToStore(KOdfStore *store, const QString& path);
 
     /**
      *  Reimplement this method to load the contents of your KOffice document,
      *  from the XML document. This is for the pre-Oasis file format (maindoc.xml).
      */
-    virtual bool loadXML(const KoXmlDocument & doc, KoStore *store) = 0;
+    virtual bool loadXML(const KoXmlDocument & doc, KOdfStore *store) = 0;
 
 
     /**
@@ -925,7 +925,7 @@ protected:
      *  from a store. This function is called after loadXML()
      *  and after loadChildren() have been called.
      */
-    virtual bool completeLoading(KoStore *store);
+    virtual bool completeLoading(KOdfStore *store);
 
     /**
      *  If you want to write additional files to a store,
@@ -937,7 +937,7 @@ protected:
      *  But do this ONLY if the document is not stored extern (see isStoredExtern()).
      *  If it is, then the pictures should be saved to tar:/pictures.
      */
-    virtual bool completeSaving(KoStore *store);
+    virtual bool completeSaving(KOdfStore *store);
 
 
     /** @internal */
@@ -994,19 +994,19 @@ private slots:
 
 private:
 
-    bool saveNativeFormatODF(KoStore *store, const QByteArray &mimeType);
-    bool saveNativeFormatKOffice(KoStore *store);
+    bool saveNativeFormatODF(KOdfStore *store, const QByteArray &mimeType);
+    bool saveNativeFormatKOffice(KOdfStore *store);
 
     /// @return the current KoMainWindow shell
     KoMainWindow *currentShell();
 
     KService::Ptr nativeService();
-    bool oldLoadAndParse(KoStore *store, const QString& filename, KoXmlDocument& doc);
+    bool oldLoadAndParse(KOdfStore *store, const QString& filename, KoXmlDocument& doc);
     bool loadNativeFormatFromStore(const QString& file);
-    bool loadNativeFormatFromStoreInternal(KoStore *store);
+    bool loadNativeFormatFromStoreInternal(KOdfStore *store);
 
-    bool savePreview(KoStore *store);
-    bool saveOasisPreview(KoStore *store, KoXmlWriter *manifestWriter);
+    bool savePreview(KOdfStore *store);
+    bool saveOasisPreview(KOdfStore *store, KoXmlWriter *manifestWriter);
 
     QString prettyPathOrUrl() const;
 

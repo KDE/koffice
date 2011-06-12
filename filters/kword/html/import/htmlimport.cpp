@@ -25,7 +25,7 @@
 #include <kpluginfactory.h>
 #include <KoFilterChain.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 #include <khtmlreader.h>
 #include <kwdwriter.h>
@@ -45,7 +45,7 @@ KoFilter::ConversionStatus HTMLImport::convert(const QByteArray& from, const QBy
     if (to != "application/x-kword" || from != "text/html")
         return KoFilter::NotImplemented;
 
-    KoStore *k = KoStore::createStore(m_chain->outputFile(), KoStore::Write, "application/x-kword");
+    KOdfStore *k = KOdfStore::createStore(m_chain->outputFile(), KOdfStore::Write, "application/x-kword");
     KWDWriter *w = new KWDWriter(k);
     KHTMLReader h(w);
     KUrl url;

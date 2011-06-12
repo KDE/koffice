@@ -35,7 +35,7 @@
 #include <kdebug.h>
 
 //KOffice includes
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfWriteStore.h>
 #include <KoDocumentInfo.h>
 #include <KoFilterChain.h>
@@ -73,7 +73,7 @@ KoFilter::ConversionStatus Filterkpr2odf::convert(const QByteArray& from, const 
     }
 
     //open the input file file
-    KoStore* input = KoStore::createStore(m_chain->inputFile(), KoStore::Read);
+    KOdfStore* input = KOdfStore::createStore(m_chain->inputFile(), KOdfStore::Read);
     if (!input) {
         return KoFilter::FileNotFound;
     }
@@ -103,8 +103,8 @@ KoFilter::ConversionStatus Filterkpr2odf::convert(const QByteArray& from, const 
     //If we find everything let the saving begin
 
     //Create the output file
-    KoStore* output = KoStore::createStore(m_chain->outputFile(), KoStore::Write
-                                           , KoOdf::mimeType(KoOdf::Presentation), KoStore::Zip);
+    KOdfStore* output = KOdfStore::createStore(m_chain->outputFile(), KOdfStore::Write
+                                           , KoOdf::mimeType(KoOdf::Presentation), KOdfStore::Zip);
 
     if (!output) {
         return KoFilter::StorageCreationError;
@@ -167,7 +167,7 @@ KoFilter::ConversionStatus Filterkpr2odf::convert(const QByteArray& from, const 
 }
 
 //TODO: improve createImageList and createSoundList so that only save the _used_ sounds and images
-void Filterkpr2odf::createImageList(KoStore* output, KoStore* input, KoXmlWriter* manifest)
+void Filterkpr2odf::createImageList(KOdfStore* output, KOdfStore* input, KoXmlWriter* manifest)
 {
     KoXmlElement key(m_mainDoc.namedItem("DOC").namedItem("PICTURES").firstChild().toElement());
     if (key.isNull()) {
@@ -210,7 +210,7 @@ void Filterkpr2odf::createImageList(KoStore* output, KoStore* input, KoXmlWriter
     output->leaveDirectory();
 }
 
-void Filterkpr2odf::createSoundList(KoStore* output, KoStore* input, KoXmlWriter* manifest)
+void Filterkpr2odf::createSoundList(KOdfStore* output, KOdfStore* input, KoXmlWriter* manifest)
 {
     KoXmlElement file(m_mainDoc.namedItem("DOC").namedItem("SOUNDS").firstChild().toElement());
     if (file.isNull())

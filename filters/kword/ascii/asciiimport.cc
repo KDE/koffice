@@ -35,7 +35,7 @@
 
 #include <KoGlobal.h>
 #include <KOdfPageLayoutData.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoFilterChain.h>
 #include <KoFilterManager.h>
 
@@ -247,14 +247,14 @@ KoFilter::ConversionStatus ASCIIImport::convert(const QByteArray& from, const QB
     kDebug(30502) << mainDocument.toString();
 #endif
 
-    KOdfStorageDevice* out = m_chain->storageFile("root", KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile("root", KOdfStore::Write);
     if (!out) {
         kError(30502) << "Unable to open output file!" << endl;
         in.close();
         return KoFilter::StorageCreationError;
     }
     QByteArray cstr = mainDocument.toByteArray();
-    // WARNING: we cannot use KoStore::write(const QByteArray&) because it gives an extra NULL character at the end.
+    // WARNING: we cannot use KOdfStore::write(const QByteArray&) because it gives an extra NULL character at the end.
     out->write(cstr, cstr.length());
     in.close();
     return KoFilter::OK;

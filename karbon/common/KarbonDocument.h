@@ -44,7 +44,7 @@ class KoShape;
 class KoShapeSavingContext;
 class KoShapeLayer;
 class KoImageCollection;
-class KoStore;
+class KOdfStore;
 class KoDataCenterBase;
 class KoResourceManager;
 

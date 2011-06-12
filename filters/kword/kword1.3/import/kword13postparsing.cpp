@@ -23,7 +23,7 @@
 
 #include <kdebug.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 #include "kword13picture.h"
 #include "kword13document.h"
@@ -37,7 +37,7 @@ KWord13PostParsing::~KWord13PostParsing(void)
 {
 }
 
-bool KWord13PostParsing::postParsePictures(KoStore* store)
+bool KWord13PostParsing::postParsePictures(KOdfStore* store)
 {
     if (! m_kwordDocument)
         return false;
@@ -53,7 +53,7 @@ bool KWord13PostParsing::postParsePictures(KoStore* store)
 }
 
 
-bool KWord13PostParsing::postParse(KoStore* store, KWord13Document& doc)
+bool KWord13PostParsing::postParse(KOdfStore* store, KWord13Document& doc)
 {
     // ### TODO: check if it is the same document if called twice
     m_kwordDocument = &doc;

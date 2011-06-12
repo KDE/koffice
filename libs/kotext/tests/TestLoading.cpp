@@ -28,7 +28,7 @@
 
 #include <KoStyleManager.h>
 #include <KOdfStylesReader.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStylesReader.h>
 #include <KoTextLoader.h>
 #include <KoXmlReader.h>
@@ -1031,7 +1031,7 @@ QString TestLoading::documentToOdt(QTextDocument *document)
     f.open(QFile::WriteOnly);
     f.close();
 
-    KoStore *store = KoStore::createStore(odt, KoStore::Write, "application/vnd.oasis.opendocument.text", KoStore::Zip);
+    KOdfStore *store = KOdfStore::createStore(odt, KOdfStore::Write, "application/vnd.oasis.opendocument.text", KOdfStore::Zip);
     KOdfWriteStore odfWriteStore(store);
     KoXmlWriter *manifestWriter = odfWriteStore.manifestWriter("application/vnd.oasis.opendocument.text");
     manifestWriter->addManifestEntry("content.xml", "text/xml");

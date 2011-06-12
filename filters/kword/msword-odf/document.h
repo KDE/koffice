@@ -46,7 +46,7 @@
 
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyles.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 class KOdfStorageDevice;
 
@@ -70,7 +70,7 @@ class Document : public QObject, public wvWare::SubDocumentHandler
 public:
     Document(const std::string& fileName, KoFilterChain* chain, KoXmlWriter* bodyWriter,
              KOdfGenericStyles* mainStyles, KoXmlWriter* metaWriter, KoXmlWriter* manifestWriter,
-             KoStore* store, POLE::Storage* storage,
+             KOdfStore* store, POLE::Storage* storage,
              LEInputStream* data, LEInputStream* table, LEInputStream* wdoc);
     virtual ~Document();
 

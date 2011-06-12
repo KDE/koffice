@@ -225,7 +225,7 @@ bool KCMap::isReadWrite() const
     return d->readwrite;
 }
 
-bool KCMap::completeLoading(KoStore *store)
+bool KCMap::completeLoading(KOdfStore *store)
 {
     Q_UNUSED(store);
     // Initial build of all cell dependencies.
@@ -236,7 +236,7 @@ bool KCMap::completeLoading(KoStore *store)
     return true;
 }
 
-bool KCMap::completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext * context)
+bool KCMap::completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext * context)
 {
     Q_UNUSED(store);
     Q_UNUSED(manifestWriter);
@@ -726,7 +726,7 @@ KCSheet * KCMap::previousSheet(KCSheet * currentSheet) const
     return 0;
 }
 
-bool KCMap::saveChildren(KoStore * _store)
+bool KCMap::saveChildren(KOdfStore * _store)
 {
     foreach(KCSheet* sheet, d->lstSheets) {
         // set the child document's url to an internal url (ex: "tar:/0/1")
@@ -736,7 +736,7 @@ bool KCMap::saveChildren(KoStore * _store)
     return true;
 }
 
-bool KCMap::loadChildren(KoStore * _store)
+bool KCMap::loadChildren(KOdfStore * _store)
 {
     foreach(KCSheet* sheet, d->lstSheets) {
         if (!sheet->loadChildren(_store))

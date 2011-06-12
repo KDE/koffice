@@ -226,7 +226,7 @@ bool PictureShape::loadOdfFrameElement(const KoXmlElement &element, KoShapeLoadi
         const QString href = element.attribute("href");
         // this can happen in case it is a presentation:placeholder
         if (!href.isEmpty()) {
-            KoStore *store = context.odfLoadingContext().store();
+            KOdfStore *store = context.odfLoadingContext().store();
             KoImageData *data = m_imageCollection->createImageData(href, store);
             setUserData(data);
         } else {

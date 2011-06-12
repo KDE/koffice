@@ -64,13 +64,13 @@ void KoDocumentRdfBase::updateXmlIdReferences(const QMap<QString, QString> &m)
     Q_UNUSED(m);
 }
 
-bool KoDocumentRdfBase::loadOasis(KoStore *store)
+bool KoDocumentRdfBase::loadOasis(KOdfStore *store)
 {
     Q_UNUSED(store);
     return true;
 }
 
-bool KoDocumentRdfBase::saveOasis(KoStore *store, KoXmlWriter *manifestWriter)
+bool KoDocumentRdfBase::saveOasis(KOdfStore *store, KoXmlWriter *manifestWriter)
 {
     Q_UNUSED(store);
     Q_UNUSED(manifestWriter);

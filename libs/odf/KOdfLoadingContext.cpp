@@ -20,7 +20,7 @@
 #include "KOdfLoadingContext.h"
 #include <KOdfStoreReader.h>
 #include <KOdfStylesReader.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoXmlNS.h>
 
 #include <kstandarddirs.h>
@@ -30,7 +30,7 @@
 class KOdfLoadingContext::Private
 {
 public:
-    Private(KOdfStylesReader &sr, KoStore *s)
+    Private(KOdfStylesReader &sr, KOdfStore *s)
         : store(s),
         stylesReader(sr),
         generatorType(KOdfLoadingContext::Unknown),
@@ -39,7 +39,7 @@ public:
     {
     }
 
-    KoStore *store;
+    KOdfStore *store;
     KOdfStylesReader &stylesReader;
     KoStyleStack styleStack;
 
@@ -54,7 +54,7 @@ public:
     KoXmlDocument doc; // the doc needs to be kept around so it is possible to access the styles
 };
 
-KOdfLoadingContext::KOdfLoadingContext(KOdfStylesReader &stylesReader, KoStore* store, const KComponentData &componentData)
+KOdfLoadingContext::KOdfLoadingContext(KOdfStylesReader &stylesReader, KOdfStore* store, const KComponentData &componentData)
         : d(new Private(stylesReader, store))
 {
     // Ideally this should be done by KoDocument and passed as argument here...
@@ -195,7 +195,7 @@ KOdfLoadingContext::GeneratorType KOdfLoadingContext::generatorType() const
     return d->generatorType;
 }
 
-KoStore *KOdfLoadingContext::store() const
+KOdfStore *KOdfLoadingContext::store() const
 {
     return d->store;
 }

@@ -32,7 +32,7 @@
 
 #include <KoFilter.h>
 #include <KOdfGenericStyles.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 #include <QtCore/QStack>
 #include <QtCore/QPair>
@@ -73,16 +73,16 @@ public:
      */
     KoFilter::ConversionStatus convert(const QString& inputfile,
                                        const QString& outputfile,
-                                       KoStore::Backend storeType);
+                                       KOdfStore::Backend storeType);
     /**
      * Convert ppt data to odp data.
      *
      * @param input an open OLE container that contains the ppt data.
-     * @param output an open KoStore to write the odp into.
+     * @param output an open KOdfStore to write the odp into.
      * @return result code of the conversion.
      */
     KoFilter::ConversionStatus convert(POLE::Storage& input,
-                                       KoStore* output);
+                                       KOdfStore* output);
     QString getPicturePath(int pib) const;
 private:
 
@@ -91,11 +91,11 @@ private:
      *
      * It is shared by the two convert() functions.
      * @param input an open OLE container that contains the ppt data.
-     * @param output an open KoStore to write the odp into.
+     * @param output an open KOdfStore to write the odp into.
      * @return result code of the conversion.
      */
     KoFilter::ConversionStatus doConversion(POLE::Storage& input,
-                                            KoStore* output);
+                                            KOdfStore* output);
 
     void createMainStyles(KOdfGenericStyles& styles);
     void defineDefaultTextStyle(KOdfGenericStyles& styles);

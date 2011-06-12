@@ -27,7 +27,7 @@
 
 #include <KoFilter.h>
 #include <QVariantList>
-#include <KoStore.h>
+#include <KOdfStore.h>
 
 class HTMLImport : public KoFilter
 {

@@ -638,7 +638,7 @@ bool KWDocument::loadOdf(KOdfStoreReader &odfStore)
     return rc;
 }
 
-bool KWDocument::loadXML(const KoXmlDocument &doc, KoStore *store)
+bool KWDocument::loadXML(const KoXmlDocument &doc, KOdfStore *store)
 {
     clear();
     KoXmlElement root = doc.documentElement();

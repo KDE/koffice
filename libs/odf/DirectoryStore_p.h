@@ -32,11 +32,11 @@
 //
 
 
-#include "KoStore.h"
+#include "KOdfStore.h"
 
 class QFile;
 
-class DirectoryStore : public KoStore
+class DirectoryStore : public KOdfStore
 {
 public:
     DirectoryStore(const QString& path, Mode _mode);
@@ -69,7 +69,7 @@ private:
 
     // Current File
     QFile* m_file;
-    Q_DECLARE_PRIVATE(KoStore)
+    Q_DECLARE_PRIVATE(KOdfStore)
 };
 
 #endif

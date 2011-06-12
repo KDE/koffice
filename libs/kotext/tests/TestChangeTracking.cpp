@@ -26,7 +26,7 @@
 
 #include <KoStyleManager.h>
 #include <KOdfStylesReader.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStylesReader.h>
 #include <KoTextLoader.h>
 #include <KoXmlReader.h>
@@ -89,7 +89,7 @@ QTextDocument *TestChangeTracking::documentFromOdt(const QString &odt, const QSt
         return 0;
     }
 
-    KoStore *readStore = KoStore::createStore(odt, KoStore::Read, "", KoStore::Zip);
+    KOdfStore *readStore = KOdfStore::createStore(odt, KOdfStore::Read, "", KOdfStore::Zip);
     KOdfStoreReader odfReadStore(readStore);
     QString error;
     if (!odfReadStore.loadAndParse(error)) {
@@ -141,7 +141,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
     f.open(QFile::WriteOnly);
     f.close();
 
-    KoStore *store = KoStore::createStore(odt, KoStore::Write, "application/vnd.oasis.opendocument.text", KoStore::Zip);
+    KOdfStore *store = KOdfStore::createStore(odt, KOdfStore::Write, "application/vnd.oasis.opendocument.text", KOdfStore::Zip);
     KOdfWriteStore odfWriteStore(store);
     KoXmlWriter *manifestWriter = odfWriteStore.manifestWriter("application/vnd.oasis.opendocument.text");
     manifestWriter->addManifestEntry("content.xml", "text/xml");
@@ -325,7 +325,7 @@ void TestChangeTracking::testChangeTracking_data()
 
 bool TestChangeTracking::verifyContentXml(QString &originalFileName, QString &roundTripFileName)
 {
-    KoStore *originalReadStore = KoStore::createStore(originalFileName, KoStore::Read, "", KoStore::Zip);
+    KOdfStore *originalReadStore = KOdfStore::createStore(originalFileName, KOdfStore::Read, "", KOdfStore::Zip);
     QString originalDocumentString;
 
     QDomDocument originalDocument("originalDocument");
@@ -335,7 +335,7 @@ bool TestChangeTracking::verifyContentXml(QString &originalFileName, QString &ro
     originalDocumentStream << originalDocument.documentElement().namedItem("office:body");
     originalReadStore->close();
 
-    KoStore *roundTripReadStore = KoStore::createStore(roundTripFileName, KoStore::Read, "", KoStore::Zip);
+    KOdfStore *roundTripReadStore = KOdfStore::createStore(roundTripFileName, KOdfStore::Read, "", KOdfStore::Zip);
     QString roundTripDocumentString;
 
     QDomDocument roundTripDocument("roundTripDocument");

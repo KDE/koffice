@@ -32,7 +32,7 @@
 //
 
 
-#include "KoStore.h"
+#include "KOdfStore.h"
 #include <QHash>
 #include <QtCrypto>
 
@@ -46,7 +46,7 @@ class KArchiveDirectory;
 class KTemporaryFile;
 struct KoEncryptedStore_EncryptionData;
 
-class EncryptedStore : public KoStore
+class EncryptedStore : public KOdfStore
 {
 public:
     EncryptedStore(const QString &filename, Mode mode, const QByteArray &appIdentification);
@@ -76,7 +76,7 @@ public:
 
 protected:
 
-    using KoStore::init;
+    using KOdfStore::init;
 
     virtual bool init(Mode mode, const QByteArray &appIdentification);
     virtual bool doFinalize();
@@ -130,7 +130,7 @@ protected:
     current directory in the archive to speed up the verification process */
     const KArchiveDirectory *m_currentDir;
 private:
-    Q_DECLARE_PRIVATE(KoStore)
+    Q_DECLARE_PRIVATE(KOdfStore)
 };
 
 #endif

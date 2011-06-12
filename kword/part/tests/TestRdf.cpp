@@ -41,7 +41,7 @@
 #include <rdf/KoDocumentRdf.h>
 #include <rdf/KoRdfPrefixMapping.h>
 #include <rdf/KoSopranoTableModel.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoTextDocument.h>
 #include "KWAboutData.h"
 #include <KoApplication.h>
@@ -73,7 +73,7 @@ static KoDocumentRdf *loadDocument(const QString &odt)
         return 0;
     }
 
-    KoStore *store = KoStore::createStore(odt, KoStore::Read, "", KoStore::Zip);
+    KOdfStore *store = KOdfStore::createStore(odt, KOdfStore::Read, "", KOdfStore::Zip);
     KOdfStoreReader odfReadStore(store);
     KoXmlDocument metaDoc;
     KoDocumentRdf *rdf = new KoDocumentRdf;
@@ -405,7 +405,7 @@ void TestRdf::addAndSage()
     QTemporaryFile file;
     QVERIFY(file.open());
     QString todt = file.fileName();
-    KoStore *store = KoStore::createStore(todt, KoStore::Write, mimeType, KoStore::Zip);
+    KOdfStore *store = KOdfStore::createStore(todt, KOdfStore::Write, mimeType, KOdfStore::Zip);
     store->disallowNameExpansion();
     KOdfWriteStore odfStore (store);
     KoXmlWriter *manifestWriter = odfStore.manifestWriter(mimeType);

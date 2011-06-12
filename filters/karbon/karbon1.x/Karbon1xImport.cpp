@@ -87,7 +87,7 @@ KoFilter::ConversionStatus KarbonImport::convert(const QByteArray& from, const Q
 
     m_document = &part->document();
 
-    KoStore* store = KoStore::createStore(fileName, KoStore::Read);
+    KOdfStore* store = KOdfStore::createStore(fileName, KOdfStore::Read);
     if (store && store->hasFile("maindoc.xml")) {
 
         if (! store->open("maindoc.xml")) {

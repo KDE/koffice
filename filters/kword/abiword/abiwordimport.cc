@@ -29,7 +29,7 @@
 #include <kmessagebox.h>
 
 #include <KOdfPageLayoutData.h>
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoFilterChain.h>
 
 #include "ImportHelpers.h"
@@ -623,7 +623,7 @@ bool StructureParser::EndElementD(StackItem* stackItem)
     key.setAttribute("name", strStoreName);
     m_picturesElement.appendChild(key);
 
-    KOdfStorageDevice* out = m_chain->storageFile(strStoreName, KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile(strStoreName, KOdfStore::Write);
     if (!out) {
         kError(30506) << "Unable to open output file for: " << stackItem->fontName << " Storage: " << strStoreName;
         return false;
@@ -1622,7 +1622,7 @@ KoFilter::ConversionStatus ABIWORDImport::convert(const QByteArray& from, const 
     KOdfStorageDevice* out;
 
     kDebug(30506) << "Creating documentinfo.xml";
-    out = m_chain->storageFile("documentinfo.xml", KoStore::Write);
+    out = m_chain->storageFile("documentinfo.xml", KOdfStore::Write);
     if (!out) {
         kError(30506) << "AbiWord Import unable to open output file! (Documentinfo)";
         KMessageBox::error(NULL, i18n("Unable to save document information."), i18n("AbiWord Import Filter"), 0);
@@ -1631,11 +1631,11 @@ KoFilter::ConversionStatus ABIWORDImport::convert(const QByteArray& from, const 
 
     //Write the document information!
     strOut = handler.getDocInfo().toByteArray(); // UTF-8
-    // WARNING: we cannot use KoStore::write(const QByteArray&) because it writes an extra NULL character at the end. (### TODO: check for Qt4)
+    // WARNING: we cannot use KOdfStore::write(const QByteArray&) because it writes an extra NULL character at the end. (### TODO: check for Qt4)
     out->write(strOut, strOut.length());
 
     kDebug(30506) << "Creating maindoc.xml";
-    out = m_chain->storageFile("root", KoStore::Write);
+    out = m_chain->storageFile("root", KOdfStore::Write);
     if (!out) {
         kError(30506) << "AbiWord Import unable to open output file! (Root)";
         KMessageBox::error(NULL, i18n("Unable to save main document."), i18n("AbiWord Import Filter"), 0);
@@ -1644,7 +1644,7 @@ KoFilter::ConversionStatus ABIWORDImport::convert(const QByteArray& from, const 
 
     //Write the document!
     strOut = handler.getDocument().toByteArray(); // UTF-8
-    // WARNING: we cannot use KoStore::write(const QByteArray&) because it writes an extra NULL character at the end. (### TODO: check for Qt4)
+    // WARNING: we cannot use KOdfStore::write(const QByteArray&) because it writes an extra NULL character at the end. (### TODO: check for Qt4)
     out->write(strOut, strOut.length());
 
 #if 0

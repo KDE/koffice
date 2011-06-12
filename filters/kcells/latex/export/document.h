@@ -36,7 +36,7 @@ class Document : public XmlParser, Config
     QFile       _file;
     QTextStream _out;
     QString     _filename;
-    const KoStore*    _in;
+    const KOdfStore*    _in;
 
     //FileHeader  _header;
     Spreadsheet _document;
@@ -49,7 +49,7 @@ public:
      * @param in tar file.
      * @param fileOut Output latex filename.
      */
-    Document(const KoStore* in, QString fileOut);
+    Document(const KOdfStore* in, QString fileOut);
 
     virtual ~Document();
 

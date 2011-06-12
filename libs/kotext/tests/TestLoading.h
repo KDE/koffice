@@ -34,7 +34,7 @@ class QTextTableCellFormat;
 class QTextTableFormat;
 class QTextBlockFormat;
 class QTextListFormat;
-class KoStore;
+class KOdfStore;
 class KoTextShapeData;
 class KComponentData;
 

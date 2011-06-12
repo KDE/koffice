@@ -19,7 +19,7 @@
  */
 #include "TestLoadStyle.h"
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KoTextLoader.h>
 #include <KoXmlReader.h>
 #include <KOdfStoreReader.h>
@@ -78,7 +78,7 @@ QTextDocument *TestLoadStyle::documentFromOdt(const QString &odt)
         return 0;
     }
 
-    KoStore *readStore = KoStore::createStore(odt, KoStore::Read, "", KoStore::Zip);
+    KOdfStore *readStore = KOdfStore::createStore(odt, KOdfStore::Read, "", KOdfStore::Zip);
     KOdfStoreReader odfReadStore(readStore);
     QString error;
     if (!odfReadStore.loadAndParse(error)) {

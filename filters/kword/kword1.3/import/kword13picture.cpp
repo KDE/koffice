@@ -23,7 +23,7 @@
 #include <kdebug.h>
 #include <ktemporaryfile.h>
 
-#include <KoStore.h>
+#include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
 
 #include "kword13picture.h"
@@ -38,7 +38,7 @@ KWord13Picture::~KWord13Picture(void)
     delete m_tempFile;
 }
 
-bool KWord13Picture::loadPicture(KoStore* store)
+bool KWord13Picture::loadPicture(KOdfStore* store)
 {
     kDebug(30520) << "Loading picture:" << m_storeName;
 

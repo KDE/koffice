@@ -1182,7 +1182,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_chart()
         chartexport->m_height = m_svgHeight > 0 ? EMU_TO_POINT(m_svgHeight) : 100;
 #endif
 
-        KoStore* storeout = m_context->import->outputStore();
+        KOdfStore* storeout = m_context->import->outputStore();
         QScopedPointer<XlsxXmlChartReaderContext> context(new XlsxXmlChartReaderContext(storeout, chartexport));
         XlsxXmlChartReader reader(this);
         const KoFilter::ConversionStatus result = m_context->import->loadAndParseDocument(&reader, filepath, context.data());

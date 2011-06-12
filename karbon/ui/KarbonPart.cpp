@@ -193,7 +193,7 @@ void KarbonPart::openTemplate(const KUrl &url)
         setOutputMimeType("application/vnd.oasis.opendocument.graphics");
 }
 
-bool KarbonPart::loadXML(const KoXmlDocument&, KoStore*)
+bool KarbonPart::loadXML(const KoXmlDocument&, KOdfStore*)
 {
     return false;
 }
@@ -264,7 +264,7 @@ bool KarbonPart::loadOdf(KOdfStoreReader &odfStore)
     return true;
 }
 
-bool KarbonPart::completeLoading(KoStore *store)
+bool KarbonPart::completeLoading(KOdfStore *store)
 {
     bool ok = true;
     foreach(KoDataCenterBase *dataCenter, dataCenterMap()) {
@@ -287,7 +287,7 @@ void KarbonPart::loadOasisSettings(const KoXmlDocument &settingsDoc)
     gridData().loadOdfSettings(settingsDoc);
 }
 
-void KarbonPart::saveOasisSettings(KoStore *store)
+void KarbonPart::saveOasisSettings(KOdfStore *store)
 {
     KOdfStorageDevice settingsDev(store);
     KoXmlWriter * settingsWriter = KOdfWriteStore::createOasisXmlWriter(&settingsDev, "office:document-settings");
@@ -329,7 +329,7 @@ bool KarbonPart::saveOdf(SavingContext &documentContext)
     if (! d->document.saveOdf(documentContext, pageLayout()))
         return false;
 
-    KoStore *store = documentContext.odfStore.store();
+    KOdfStore *store = documentContext.odfStore.store();
     if (! store->open("settings.xml"))
         return false;
 

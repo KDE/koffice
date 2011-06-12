@@ -26,11 +26,11 @@
 
 class QImage;
 class QUrl;
-class KoStore;
+class KOdfStore;
 class KoImageData;
 
 /**
- * An collection of KoImageData objects to allow loading and saving them all together to the KoStore.
+ * An collection of KoImageData objects to allow loading and saving them all together to the KOdfStore.
  * It also makes sure that if the same image is added to the collection that they share the internal data structure.
  */
 class FLAKE_EXPORT KoImageCollection : public QObject, public KoDataCenterBase
@@ -42,13 +42,13 @@ public:
     virtual ~KoImageCollection();
 
     /// reimplemented
-    bool completeLoading(KoStore *store);
+    bool completeLoading(KOdfStore *store);
 
     /**
      * Save all images to the store which are in the context
      * @return returns true if save was successful (no images failed).
      */
-    bool completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context);
+    bool completeSaving(KOdfStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context);
 
     /**
      * Create a data object for the image data.
@@ -86,10 +86,10 @@ public:
      * existing data object with the same image the returned KoImageData will
      * share its data.
      * @param href the name of the image inside the store.
-     * @param store the KoStore object.
+     * @param store the KOdfStore object.
      * @see KoImageData::isValid()
      */
-    KoImageData *createImageData(const QString &href, KoStore *store);
+    KoImageData *createImageData(const QString &href, KOdfStore *store);
 
     /**
      * Create a data object for the image data.
