@@ -94,7 +94,7 @@ public:
     MsoDrawingBlibItem* drawing(unsigned long pid) const;
     QList< Sheet* >& chartSheets();
 
-    KoStore* store() const;
+    KOdfStore* store() const;
 
 private:
     void handleBOF(BOFRecord* record);

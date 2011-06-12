@@ -587,7 +587,7 @@ KoFilter::ConversionStatus APPLIXSPREADImport::convert(const QByteArray& from, c
 
     kDebug() << "Text" << str;
 
-    KoStoreDevice* out = m_chain->storageFile("root", KoStore::Write);
+    KOdfStorageDevice* out = m_chain->storageFile("root", KOdfStore::Write);
 
     if (!out) {
         kError(38000/*30502*/) << "Unable to open output file!" << endl;

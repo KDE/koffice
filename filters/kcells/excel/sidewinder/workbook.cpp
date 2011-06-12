@@ -30,7 +30,7 @@ using namespace Swinder;
 class Workbook::Private
 {
 public:
-    KoStore* store;
+    KOdfStore* store;
     std::vector<Sheet*> sheets;
     QHash<PropertyType, QVariant> properties;
     std::map<std::pair<unsigned, QString>, QString> namedAreas;
@@ -43,7 +43,7 @@ public:
     QList<QColor> colorTable;
 };
 
-Workbook::Workbook(KoStore* store)
+Workbook::Workbook(KOdfStore* store)
 {
     d = new Workbook::Private();
     d->store = store;
@@ -77,7 +77,7 @@ Workbook::~Workbook()
     delete d;
 }
 
-KoStore* Workbook::store() const
+KOdfStore* Workbook::store() const
 {
     return d->store;
 }

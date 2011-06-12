@@ -795,7 +795,7 @@ QList< Sheet* >& GlobalsSubStreamHandler::chartSheets()
     return d->chartSheets;
 }
 
-KoStore* GlobalsSubStreamHandler::store() const
+KOdfStore* GlobalsSubStreamHandler::store() const
 {
     return d->workbook->store();
 }

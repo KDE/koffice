@@ -1966,7 +1966,7 @@ void BkHimRecord::setData( unsigned size, const unsigned char* data, const unsig
     }
     setImagePath(filename);
 
-    KoStore *store = m_workbook->store();
+    KOdfStore *store = m_workbook->store();
     Q_ASSERT(store);
     if(store->open(filename)) {
         //Excel doesn't include the file header, only the pixmap header,

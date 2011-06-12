@@ -153,7 +153,7 @@ public:
     }
 
     /**
-     * Returns the path and filename of the picture-file in the KoStore.
+     * Returns the path and filename of the picture-file in the KOdfStore.
      * This can be something like "Pictures/TheUniqueIdentifierOfThePicture.jpg" for example.
      */
     QString fileName() const {

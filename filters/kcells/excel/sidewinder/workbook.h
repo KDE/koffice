@@ -27,7 +27,7 @@
 #include <string>
 #include <map>
 
-class KoStore;
+class KOdfStore;
 
 namespace MSO {
     class OfficeArtDggContainer;
@@ -50,7 +50,7 @@ public:
      * @a store An optional implementation of the Store class
      * that is used to write content like images to.
      */
-    explicit Workbook(KoStore* store = 0);
+    explicit Workbook(KOdfStore* store = 0);
 
     /**
      * Destroys the workbook.
@@ -58,9 +58,9 @@ public:
     virtual ~Workbook();
 
     /**
-     * Returns the used KoStore or NULL if not KoStore was set.
-    /*/
-    KoStore* store() const;
+     * Returns the used KOdfStore or NULL if not KOdfStore was set.
+    */
+    KOdfStore* store() const;
 
     /**
      * Clears the workbook, i.e. makes it as if it is just constructed.
