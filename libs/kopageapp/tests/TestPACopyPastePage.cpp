@@ -30,7 +30,7 @@
 #include <KoShapeLayer.h>
 #include <KoPathShape.h>
 #include <KoDrag.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 
 #include <qtest_kde.h>
 #include <kdebug.h>
@@ -44,14 +44,14 @@ QMimeData * TestPACopyPastePage::copy(MockDocument * doc, QList<KoPAPageBase *> 
 {
     KoPAOdfPageSaveHelper saveHelper(doc, pages);
     KoDrag drag;
-    drag.setOdf(KoOdf::mimeType(doc->documentType()), saveHelper);
+    drag.setOdf(KOdf::mimeType(doc->documentType()), saveHelper);
 
     return drag.mimeData();
 }
 
 void TestPACopyPastePage::paste(MockDocument * doc, QMimeData * data, KoPAPageBase * after)
 {
-    if (data->hasFormat(KoOdf::mimeType(doc->documentType()))) {
+    if (data->hasFormat(KOdf::mimeType(doc->documentType()))) {
         KoPAPastePage paste(doc, after);
         paste.paste(doc->documentType(), data);
     }

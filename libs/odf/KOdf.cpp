@@ -18,9 +18,9 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoOdf.h"
+#include "KOdf.h"
 
-namespace KoOdf
+namespace KOdf
 {
 struct DocumentData {
     const char * mimeType;

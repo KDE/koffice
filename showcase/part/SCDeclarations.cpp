@@ -30,7 +30,7 @@
 #include <KoPASavingContext.h>
 #include <KOdfStylesReader.h>
 #include <KOdfLoadingContext.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 
 SCDeclarations::SCDeclarations()
 {

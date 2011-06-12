@@ -76,7 +76,7 @@ bool DateVariable::loadOdf(const KoXmlElement & element, KoShapeLoadingContext &
     QString dataStyle = element.attributeNS(KOdfXmlNS::style, "data-style-name");
     if (!dataStyle.isEmpty()) {
         if (context.odfLoadingContext().stylesReader().dataFormats().contains(dataStyle)) {
-            KoOdf::NumericStyleFormat dataFormat = context.odfLoadingContext().stylesReader().dataFormats().value(dataStyle).first;
+            KOdf::NumericStyleFormat dataFormat = context.odfLoadingContext().stylesReader().dataFormats().value(dataStyle).first;
             dateFormat = dataFormat.prefix + dataFormat.formatStr + dataFormat.suffix;
         }
     }

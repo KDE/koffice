@@ -32,7 +32,7 @@ class KivioDocument : public KoPADocument
         KivioDocument(QWidget* parentWidget, QObject* parent, bool singleViewMode = false);
         ~KivioDocument();
 
-        virtual KoOdf::DocumentType documentType() const;
+        virtual KOdf::DocumentType documentType() const;
 
     signals:
         /// Emitted when the gui needs to be updated.

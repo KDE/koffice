@@ -22,7 +22,7 @@
 #include <KoShape.h>
 #include <KoDrag.h>
 #include <KoShapeOdfSaveHelper.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeControllerBase.h>
 #include <KOdfLoadingContext.h>
@@ -56,10 +56,10 @@ KoShape *CollectionShapeFactory::createDefaultShape(KoResourceManager *documentR
 
     KoDrag drag;
     KoShapeOdfSaveHelper saveHelper(shapes);
-    drag.setOdf(KoOdf::mimeType(KoOdf::GraphicsDocument), saveHelper);
+    drag.setOdf(KOdf::mimeType(KOdf::GraphicsDocument), saveHelper);
     QMimeData* data = drag.mimeData();
 
-    QByteArray arr = data->data(KoOdf::mimeType(KoOdf::GraphicsDocument));
+    QByteArray arr = data->data(KOdf::mimeType(KOdf::GraphicsDocument));
     KoShape* shape = 0;
 
     if ( !arr.isEmpty() ) {
@@ -81,10 +81,10 @@ KoShape *CollectionShapeFactory::createDefaultShape(KoResourceManager *documentR
             return 0;
         }
 
-        KoXmlElement body = KoXml::namedItemNS( realBody, KOdfXmlNS::office, KoOdf::bodyContentElement( KoOdf::TextDocument, false ) );
+        KoXmlElement body = KoXml::namedItemNS( realBody, KOdfXmlNS::office, KOdf::bodyContentElement( KOdf::TextDocument, false ) );
 
         if ( body.isNull() ) {
-            kError() << "No" << KoOdf::bodyContentElement(KoOdf::TextDocument, true ) << "tag found!" << endl;
+            kError() << "No" << KOdf::bodyContentElement(KOdf::TextDocument, true ) << "tag found!" << endl;
             return 0;
         }
 

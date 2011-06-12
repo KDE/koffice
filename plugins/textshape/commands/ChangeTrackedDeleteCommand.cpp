@@ -40,7 +40,7 @@
 #include <KoParagraphStyle.h>
 #include <KoTextOdfSaveHelper.h>
 #include <KoTextDrag.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 #include <rdf/KoDocumentRdfBase.h>
 #include <QTextDocumentFragment>
 #include <QUndoCommand>
@@ -166,7 +166,7 @@ void ChangeTrackedDeleteCommand::handleListItemDelete(QTextCursor &selection)
     if (KoDocumentRdfBase *rdf = KoDocumentRdfBase::fromResourceManager(m_tool->canvas())) {
         saveHelper.setRdfModel(rdf->model());
     }
-    drag.setOdf(KoOdf::mimeType(KoOdf::TextDocument), saveHelper);
+    drag.setOdf(KOdf::mimeType(KOdf::TextDocument), saveHelper);
     QTextDocumentFragment fragment = selection.selection();
     drag.setData("text/html", fragment.toHtml("utf-8").toUtf8());
     drag.setData("text/plain", fragment.toPlainText().toUtf8());

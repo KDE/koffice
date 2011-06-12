@@ -158,10 +158,10 @@ void Viewport::handleDragEnterEvent(QDragEnterEvent *event)
 
         m_parent->canvas()->shapeManager()->addShape(m_draggedShape);
     }
-    else if (data->hasFormat(KoOdf::mimeType(KoOdf::TextDocument))) {
+    else if (data->hasFormat(KOdf::mimeType(KOdf::TextDocument))) {
         KoShapeManager *sm = m_parent->canvas()->shapeManager();
         KoShapePaste paste(m_parent->canvas(), sm->selection()->activeLayer());
-        if (paste.paste(KoOdf::TextDocument, data)) {
+        if (paste.paste(KOdf::TextDocument, data)) {
             QList<KoShape *> shapes = paste.pastedShapes();
             Q_ASSERT(!shapes.isEmpty());
             if (shapes.count() > 1) {

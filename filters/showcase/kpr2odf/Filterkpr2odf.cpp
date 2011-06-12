@@ -41,7 +41,7 @@
 #include <KoFilterChain.h>
 #include <KXmlWriter.h>
 #include <KOdfXmlNS.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 #include <KOdfGenericStyle.h>
 
 #include "Filterkpr2odf.h"
@@ -104,7 +104,7 @@ KoFilter::ConversionStatus Filterkpr2odf::convert(const QByteArray& from, const 
 
     //Create the output file
     KOdfStore* output = KOdfStore::createStore(m_chain->outputFile(), KOdfStore::Write
-                                           , KoOdf::mimeType(KoOdf::PresentationDocument), KOdfStore::Zip);
+                                           , KOdf::mimeType(KOdf::PresentationDocument), KOdfStore::Zip);
 
     if (!output) {
         return KoFilter::StorageCreationError;
@@ -252,7 +252,7 @@ void Filterkpr2odf::createSoundList(KOdfStore* output, KOdfStore* input, KXmlWri
 void Filterkpr2odf::convertContent(KXmlWriter* content)
 {
     content->startElement("office:body");
-    content->startElement(KoOdf::bodyContentElement(KoOdf::PresentationDocument, true));
+    content->startElement(KOdf::bodyContentElement(KOdf::PresentationDocument, true));
 
     //We search all this here so that we can make the search just once
     KoXmlNode titles = m_mainDoc.namedItem("DOC").namedItem("PAGETITLES");

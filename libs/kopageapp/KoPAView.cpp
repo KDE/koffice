@@ -415,7 +415,7 @@ void KoPAView::importDocument()
     // For now we only support the native mime types
     QStringList mimeFilter;
 #if 1
-    mimeFilter << KoOdf::mimeType(d->doc->documentType()) << KoOdf::templateMimeType(d->doc->documentType());
+    mimeFilter << KOdf::mimeType(d->doc->documentType()) << KOdf::templateMimeType(d->doc->documentType());
 #else
     mimeFilter = KoFilterManager::mimeFilter(KoDocument::readNativeFormatMimeType(d->doc->componentData()), KoFilterManager::Import,
                                               KoDocument::readExtraNativeMimeTypes());
@@ -433,7 +433,7 @@ void KoPAView::importDocument()
 
             // set the correct mime type as otherwise it does not find the correct tag when loading
             QMimeData data;
-            data.setData(KoOdf::mimeType(d->doc->documentType()), ba);
+            data.setData(KOdf::mimeType(d->doc->documentType()), ba);
             KoPAPastePage paste(d->doc,d->activePage);
             if (! paste.paste(d->doc->documentType(), &data)) {
                 KMessageBox::error(0, i18n("Could not import\n%1", url.pathOrUrl()));
@@ -469,11 +469,11 @@ void KoPAView::pagePaste()
 {
     const QMimeData * data = QApplication::clipboard()->mimeData();
 
-    KoOdf::DocumentType documentTypes[] = { KoOdf::GraphicsDocument, KoOdf::PresentationDocument };
+    KOdf::DocumentType documentTypes[] = { KOdf::GraphicsDocument, KOdf::PresentationDocument };
 
-    for (unsigned int i = 0; i < sizeof(documentTypes) / sizeof(KoOdf::DocumentType); ++i)
+    for (unsigned int i = 0; i < sizeof(documentTypes) / sizeof(KOdf::DocumentType); ++i)
     {
-        if (data->hasFormat(KoOdf::mimeType(documentTypes[i]))) {
+        if (data->hasFormat(KOdf::mimeType(documentTypes[i]))) {
             KoPAPastePage paste(d->doc, d->activePage);
             paste.paste(documentTypes[i], data);
             break;
@@ -785,7 +785,7 @@ void KoPAView::copyPage()
     pages.append(d->activePage);
     KoPAOdfPageSaveHelper saveHelper(d->doc, pages);
     KoDrag drag;
-    drag.setOdf(KoOdf::mimeType(d->doc->documentType()), saveHelper);
+    drag.setOdf(KOdf::mimeType(d->doc->documentType()), saveHelper);
     drag.addToClipboard();
 }
 
@@ -880,8 +880,8 @@ void KoPAView::clipboardDataChanged()
     {
         // TODO see if we can use the KoPasteController instead of having to add this feature in each koffice app.
         QStringList mimeTypes = d->canvas->toolProxy()->supportedPasteMimeTypes();
-        mimeTypes << KoOdf::mimeType(KoOdf::GraphicsDocument);
-        mimeTypes << KoOdf::mimeType(KoOdf::PresentationDocument);
+        mimeTypes << KOdf::mimeType(KOdf::GraphicsDocument);
+        mimeTypes << KOdf::mimeType(KOdf::PresentationDocument);
 
         foreach(const QString &mimeType, mimeTypes)
         {

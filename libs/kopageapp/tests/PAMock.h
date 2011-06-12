@@ -22,7 +22,7 @@
 
 #include "KoPADocument.h"
 
-#include <KoOdf.h>
+#include <KOdf.h>
 
 class KoView;
 
@@ -33,8 +33,8 @@ public:
     : KoPADocument(0, 0)
     {}
     KoView *createViewInstance(QWidget * /* parent */) { return 0; }
-    const char *odfTagName(bool b) { return KoOdf::bodyContentElement(KoOdf::PresentationDocument, b); }
-    virtual KoOdf::DocumentType documentType() const { return KoOdf::PresentationDocument; }
+    const char *odfTagName(bool b) { return KOdf::bodyContentElement(KOdf::PresentationDocument, b); }
+    virtual KOdf::DocumentType documentType() const { return KOdf::PresentationDocument; }
 };
 
 

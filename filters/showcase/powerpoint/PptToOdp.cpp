@@ -26,7 +26,7 @@
 #include "ODrawToOdf.h"
 
 #include <kdebug.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 #include <KOdfWriteStore.h>
 #include <KXmlWriter.h>
 
@@ -574,7 +574,7 @@ KoFilter::ConversionStatus PptToOdp::convert(const QString& inputFile,
 
     // create output store
     KOdfStore* storeout = KOdfStore::createStore(to, KOdfStore::Write,
-                        KoOdf::mimeType(KoOdf::PresentationDocument), storeType);
+                        KOdf::mimeType(KOdf::PresentationDocument), storeType);
     if (!storeout) {
         kWarning() << "Couldn't open the requested file.";
         return KoFilter::FileNotFound;
@@ -600,7 +600,7 @@ KoFilter::ConversionStatus PptToOdp::doConversion(POLE::Storage& storage,
 {
     KOdfWriteStore odfWriter(storeout);
     KXmlWriter* manifest = odfWriter.manifestWriter(
-                                KoOdf::mimeType(KoOdf::PresentationDocument));
+                                KOdf::mimeType(KOdf::PresentationDocument));
 
     // store the images from the 'Pictures' stream
     storeout->disallowNameExpansion();

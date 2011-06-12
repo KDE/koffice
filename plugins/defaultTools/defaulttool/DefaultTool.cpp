@@ -753,7 +753,7 @@ void DefaultTool::copy() const
     if (!shapes.empty()) {
         KoShapeOdfSaveHelper saveHelper(shapes);
         KoDrag drag;
-        drag.setOdf(KoOdf::mimeType(KoOdf::TextDocument), saveHelper);
+        drag.setOdf(KOdf::mimeType(KOdf::TextDocument), saveHelper);
         drag.addToClipboard();
     }
 }
@@ -776,10 +776,10 @@ bool DefaultTool::paste()
     const QMimeData * data = QApplication::clipboard()->mimeData();
 
     bool success = false;
-    if (data->hasFormat(KoOdf::mimeType(KoOdf::TextDocument))) {
+    if (data->hasFormat(KOdf::mimeType(KOdf::TextDocument))) {
         KoShapeManager * shapeManager = canvas()->shapeManager();
         KoShapePaste paste(canvas(), shapeManager->selection()->activeLayer());
-        success = paste.paste(KoOdf::TextDocument, data);
+        success = paste.paste(KOdf::TextDocument, data);
         if (success) {
             shapeManager->selection()->deselectAll();
             foreach(KoShape *shape, paste.pastedShapes()) {
@@ -793,7 +793,7 @@ bool DefaultTool::paste()
 QStringList DefaultTool::supportedPasteMimeTypes() const
 {
     QStringList list;
-    list << KoOdf::mimeType(KoOdf::TextDocument);
+    list << KOdf::mimeType(KOdf::TextDocument);
     return list;
 }
 

@@ -25,7 +25,7 @@
 #include <KOdfStorageDevice.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
-//#include <KoOdf.h>
+//#include <KOdf.h>
 #include <KDebug>
 #include "XlsxXmlDrawingReader.h"
 #include "Charting.h"

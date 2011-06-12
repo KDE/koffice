@@ -20,7 +20,7 @@
 #ifndef KOODFPASTE_H
 #define KOODFPASTE_H
 
-#include "KoOdf.h"
+#include "KOdf.h"
 #include "kodf_export.h"
 
 class QMimeData;
@@ -36,12 +36,12 @@ public:
     KOdfPasteBase();
     virtual ~KOdfPasteBase();
 
-    bool paste(KoOdf::DocumentType documentType, const QMimeData *data);
+    bool paste(KOdf::DocumentType documentType, const QMimeData *data);
     /**
      * This is an overloaded member function, provided for convenience. It differs
      * from the above function only in what argument(s) it accepts.
      */
-    bool paste(KoOdf::DocumentType documentType, const QByteArray &data);
+    bool paste(KOdf::DocumentType documentType, const QByteArray &data);
 
 protected:
     virtual bool process(const KoXmlElement &body, KOdfStoreReader &odfStore) = 0;

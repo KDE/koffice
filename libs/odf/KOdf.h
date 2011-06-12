@@ -31,7 +31,7 @@ class KOdfGenericStyles;
 class KXmlWriter;
 class KOdfGenericStyle;
 
-namespace KoOdf
+namespace KOdf
 {
     enum DocumentType {
         TextDocument,

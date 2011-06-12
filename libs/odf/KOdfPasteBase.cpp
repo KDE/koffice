@@ -39,13 +39,13 @@ KOdfPasteBase::~KOdfPasteBase()
 {
 }
 
-bool KOdfPasteBase::paste(KoOdf::DocumentType documentType, const QMimeData *data)
+bool KOdfPasteBase::paste(KOdf::DocumentType documentType, const QMimeData *data)
 {
-    QByteArray arr = data->data(KoOdf::mimeType(documentType));
+    QByteArray arr = data->data(KOdf::mimeType(documentType));
     return paste(documentType, arr);
 }
 
-bool KOdfPasteBase::paste(KoOdf::DocumentType documentType, const QByteArray &bytes)
+bool KOdfPasteBase::paste(KOdf::DocumentType documentType, const QByteArray &bytes)
 {
     if (bytes.isEmpty())
         return false;
@@ -70,10 +70,10 @@ bool KOdfPasteBase::paste(KoOdf::DocumentType documentType, const QByteArray &by
         return false;
     }
 
-    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, KoOdf::bodyContentElement(documentType, false));
+    KoXmlElement body = KoXml::namedItemNS(realBody, KOdfXmlNS::office, KOdf::bodyContentElement(documentType, false));
 
     if (body.isNull()) {
-        kWarning(30002) << "No" << KoOdf::bodyContentElement(documentType, true) << "tag found";
+        kWarning(30002) << "No" << KOdf::bodyContentElement(documentType, true) << "tag found";
         return false;
     }
 

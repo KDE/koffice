@@ -23,7 +23,7 @@
 
 #include "KoBookmark.h"
 #include "KoInlineTextObjectManager.h"
-#include <KoOdf.h>
+#include <KOdf.h>
 #include "KoTextDocument.h"
 #include "KoTextDocumentLayout.h"
 #include "KoTextDrag.h"

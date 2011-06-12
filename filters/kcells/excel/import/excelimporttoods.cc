@@ -39,7 +39,7 @@
 #include <KOdfWriteStore.h>
 #include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 
 #include <Charting.h>
 #include <ChartExport.h>

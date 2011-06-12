@@ -52,7 +52,7 @@
 #include <KoPointerEvent.h>
 #include <KoVariable.h>
 #include <KoColorBackground.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 #include <KoColorPopupAction.h>
 #include <KoTextDocumentLayout.h>
 #include <KoParagraphStyle.h>
@@ -782,7 +782,7 @@ void TextTool::copy() const
     if (KoDocumentRdfBase *rdf = KoDocumentRdfBase::fromResourceManager(canvas())) {
         saveHelper.setRdfModel(rdf->model());
     }
-    drag.setOdf(KoOdf::mimeType(KoOdf::TextDocument), saveHelper);
+    drag.setOdf(KOdf::mimeType(KOdf::TextDocument), saveHelper);
     QTextDocumentFragment fragment = m_textEditor.data()->selection();
     drag.setData("text/html", fragment.toHtml("utf-8").toUtf8());
     drag.setData("text/plain", fragment.toPlainText().toUtf8());

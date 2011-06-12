@@ -21,7 +21,7 @@ set(koodf_LIB_SRCS
     KOdfGenericStyle.cpp
     KOdfGenericStyles.cpp
     KOdfSettings.cpp
-    KoOdf.cpp
+    KOdf.cpp
     KOdfDocumentBase.cpp
     KoOdfGraphicStyles.cpp
     KOdfLoadingContext.cpp
@@ -60,7 +60,7 @@ install(TARGETS koodf ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES
     kodf_export.h
-    KoOdf.h
+    KOdf.h
     KOdfXmlNS.h
     KOdfGenericStyle.h
     KOdfGenericStyles.h

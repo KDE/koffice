@@ -244,7 +244,7 @@ void KOdfStylesReader::insertStyle(const KoXmlElement& e, TypeAndLocation typeAn
                    || localName == "text-style"
                    || localName == "date-style"
                    || localName == "time-style")) {
-        QPair<QString, KoOdf::NumericStyleFormat> numberStyle = KoOdf::loadOdfNumberStyle(e);
+        QPair<QString, KOdf::NumericStyleFormat> numberStyle = KOdf::loadOdfNumberStyle(e);
         d->dataFormats.insert(numberStyle.first, qMakePair(numberStyle.second, new KoXmlElement(e)));
     }
 }

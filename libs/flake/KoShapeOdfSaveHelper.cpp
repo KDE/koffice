@@ -21,7 +21,7 @@
 #include "KoDragOdfSaveHelper_p.h"
 
 #include <KXmlWriter.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 #include <KoShape.h>
 
 class KoShapeOdfSaveHelperPrivate : public KoDragOdfSaveHelperPrivate
@@ -45,7 +45,7 @@ bool KoShapeOdfSaveHelper::writeBody()
 
     KXmlWriter &bodyWriter = d->context->xmlWriter();
     bodyWriter.startElement("office:body");
-    bodyWriter.startElement(KoOdf::bodyContentElement(KoOdf::TextDocument, true));
+    bodyWriter.startElement(KOdf::bodyContentElement(KOdf::TextDocument, true));
 
     qSort(d->shapes.begin(), d->shapes.end(), KoShape::compareShapeZIndex);
     foreach (KoShape *shape, d->shapes) {

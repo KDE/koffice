@@ -42,7 +42,7 @@
 #include <KUnit.h>
 #include <KXmlWriter.h>
 #include <KOdfGenericStyles.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 #include <KoOdfGraphicStyles.h>
 #include <styles/KoCharacterStyle.h>
 

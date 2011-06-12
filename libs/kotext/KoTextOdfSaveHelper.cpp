@@ -20,7 +20,7 @@
 #include "KoTextOdfSaveHelper.h"
 
 #include <KXmlWriter.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 #include "KoTextShapeData.h"
 #include <KOdfGenericChanges.h>
 #include <KoShapeSavingContext.h>
@@ -64,7 +64,7 @@ bool KoTextOdfSaveHelper::writeBody()
 
     KXmlWriter & bodyWriter = d->context->xmlWriter();
     bodyWriter.startElement("office:body");
-    bodyWriter.startElement(KoOdf::bodyContentElement(KoOdf::TextDocument, true));
+    bodyWriter.startElement(KOdf::bodyContentElement(KOdf::TextDocument, true));
 
     d->shapeData->saveOdf(*d->context, 0, d->from, d->to);
     d->context->writeConnectors();

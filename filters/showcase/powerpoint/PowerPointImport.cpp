@@ -32,7 +32,7 @@
 #include <KoFilterChain.h>
 #include <kpluginfactory.h>
 #include <KOdfXmlNS.h>
-#include <KoOdf.h>
+#include <KOdf.h>
 
 K_PLUGIN_FACTORY(PowerPointImportFactory, registerPlugin<PowerPointImport>();)
 K_EXPORT_PLUGIN(PowerPointImportFactory("kofficefilters"))
@@ -42,7 +42,7 @@ KoFilter::ConversionStatus PowerPointImport::convert(const QByteArray& from, con
     if (from != "application/vnd.ms-powerpoint")
         return KoFilter::NotImplemented;
 
-    if (to != KoOdf::mimeType(KoOdf::PresentationDocument))
+    if (to != KOdf::mimeType(KOdf::PresentationDocument))
         return KoFilter::NotImplemented;
 
     PptToOdp ppttoodp;

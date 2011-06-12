@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoOdf.h"
+#include "KOdf.h"
 
 #include "KOdfXmlNS.h"
 
@@ -32,7 +32,7 @@
 #include "KOdfGenericStyle.h"
 #include "KOdfGenericStyles.h"
 
-namespace KoOdf
+namespace KOdf
 {
 
     static bool saveOdfTimeFormat(KXmlWriter &elementWriter, QString &format, QString &text, bool &antislash);

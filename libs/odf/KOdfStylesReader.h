@@ -26,7 +26,7 @@
 #include <KXmlReader.h>
 
 #include "kodf_export.h"
-#include "KoOdf.h"
+#include "KOdf.h"
 
 
 /**
@@ -124,7 +124,7 @@ public:
      */
     QHash<QString, KoXmlElement*> autoStyles(const QString& family, bool stylesDotXml = false) const;
 
-    typedef QHash<QString, QPair<KoOdf::NumericStyleFormat, KoXmlElement*> > DataFormatsMap;
+    typedef QHash<QString, QPair<KOdf::NumericStyleFormat, KoXmlElement*> > DataFormatsMap;
     /// Value (date/time/number...) formats found while parsing styles. Used e.g. for fields.
     /// Key: format name. Value:
     DataFormatsMap dataFormats() const;

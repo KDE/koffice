@@ -22,7 +22,7 @@
 
 #include <QObject>
 
-#include <KoOdf.h>
+#include <KOdf.h>
 #include <KoDocument.h>
 #include <KoShapeControllerBase.h>
 #include "KoPageApp.h"
@@ -181,7 +181,7 @@ public:
     /**
      * Get the type of the document
      */
-    virtual KoOdf::DocumentType documentType() const = 0;
+    virtual KOdf::DocumentType documentType() const = 0;
 
 
     /// return the inlineTextObjectManager for this document.
