@@ -20,14 +20,14 @@
 #ifndef KOPAPASTEPAGE_H
 #define KOPAPASTEPAGE_H
 
-#include "KoOdfPaste.h"
+#include "KOdfPasteBase.h"
 
 #include "kopageapp_export.h"
 
 class KoPADocument;
 class KoPAPageBase;
 
-class KOPAGEAPP_TEST_EXPORT KoPAPastePage : public KoOdfPaste
+class KOPAGEAPP_TEST_EXPORT KoPAPastePage : public KOdfPasteBase
 {
 public:
     /**

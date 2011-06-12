@@ -28,7 +28,7 @@
 #include <KoShapeManager.h>
 #include <KoProperties.h>
 #include <KoShapeRegistry.h>
-#include <KoOdfPaste.h>
+#include <KOdfPasteBase.h>
 #include <KoOdfReadStore.h>
 #include <KoOdfReadStore.h>
 #include <KoShapeLoadingContext.h>
@@ -375,7 +375,7 @@ void ItemStore::setClipboardShape(ClipboardProxyShape *shape)
 // static
 KoShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
 {
-    class Paster : public KoOdfPaste {
+    class Paster : public KOdfPasteBase {
       public:
         Paster(KoShapeControllerBase *controller)
             : m_shape(0), m_shapeController(controller)

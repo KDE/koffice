@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoOdfPaste.h"
+#include "KOdfPasteBase.h"
 
 #include <QBuffer>
 #include <QByteArray>
@@ -31,21 +31,21 @@
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 
-KoOdfPaste::KoOdfPaste()
+KOdfPasteBase::KOdfPasteBase()
 {
 }
 
-KoOdfPaste::~KoOdfPaste()
+KOdfPasteBase::~KOdfPasteBase()
 {
 }
 
-bool KoOdfPaste::paste(KoOdf::DocumentType documentType, const QMimeData *data)
+bool KOdfPasteBase::paste(KoOdf::DocumentType documentType, const QMimeData *data)
 {
     QByteArray arr = data->data(KoOdf::mimeType(documentType));
     return paste(documentType, arr);
 }
 
-bool KoOdfPaste::paste(KoOdf::DocumentType documentType, const QByteArray &bytes)
+bool KOdfPasteBase::paste(KoOdf::DocumentType documentType, const QByteArray &bytes)
 {
     if (bytes.isEmpty())
         return false;

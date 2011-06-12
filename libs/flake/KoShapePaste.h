@@ -21,7 +21,7 @@
 #ifndef KOSHAPEPASTE_H
 #define KOSHAPEPASTE_H
 
-#include <KoOdfPaste.h>
+#include <KOdfPasteBase.h>
 #include "flake_export.h"
 
 #include <QList>
@@ -33,7 +33,7 @@ class KoShape;
 /**
  * Class for pasting shapes to the document
  */
-class FLAKE_EXPORT KoShapePaste : public KoOdfPaste
+class FLAKE_EXPORT KoShapePaste : public KOdfPasteBase
 {
 public:
     /**

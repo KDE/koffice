@@ -20,7 +20,7 @@
 #ifndef KOTEXTPASTE_H
 #define KOTEXTPASTE_H
 
-#include <KoOdfPaste.h>
+#include <KOdfPasteBase.h>
 #include "kotext_export.h"
 
 class QTextCursor;
@@ -33,7 +33,7 @@ namespace Soprano
     class Model;
 }
 
-class KOTEXT_EXPORT KoTextPaste : public KoOdfPaste
+class KOTEXT_EXPORT KoTextPaste : public KOdfPasteBase
 {
 public:
     /**

@@ -30,11 +30,11 @@ class KoXmlElement;
 /**
  * This is a helper class to help you paste odf snippets.
  */
-class KOODF_EXPORT KoOdfPaste
+class KOODF_EXPORT KOdfPasteBase
 {
 public:
-    KoOdfPaste();
-    virtual ~KoOdfPaste();
+    KOdfPasteBase();
+    virtual ~KOdfPasteBase();
 
     bool paste(KoOdf::DocumentType documentType, const QMimeData *data);
     /**
