@@ -33,7 +33,7 @@
 #include <QTextTableFormat>
 
 #include <KoUnit.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
@@ -371,7 +371,7 @@ QString KoTableStyle::alignmentToString(Qt::Alignment alignment)
     return align;
 }
 
-void KoTableStyle::loadOdfProperties(KoStyleStack &styleStack)
+void KoTableStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     if (styleStack.hasProperty(KoXmlNS::style, "writing-mode")) {     // http://www.w3.org/TR/2004/WD-xsl11-20041216/#writing-mode
         // KoText::directionFromString()

@@ -27,7 +27,7 @@
 #include <KoXmlReader.h>
 class QColor;
 class QDomElement;
-class KoStyleStack;
+class KOdfStyleStack;
 class QDomDocument;
 class KZip;
 
@@ -58,19 +58,19 @@ bool parseBorder(const QString & tag, double * width, int * style, QColor * colo
 ///////// Paragraph properties /////////
 
 // Convert fo:margin-left, fo:margin-right and fo:text-indent to <INDENTS>
-void importIndents(QDomElement& parentElement, const KoStyleStack& styleStack);
+void importIndents(QDomElement& parentElement, const KOdfStyleStack& styleStack);
 
 // Convert fo:line-height, style:line-height-at-least and style:line-spacing to <LINESPACING>
-void importLineSpacing(QDomElement& parentElement, const KoStyleStack& styleStack);
+void importLineSpacing(QDomElement& parentElement, const KOdfStyleStack& styleStack);
 
 // Convert fo:margin-top and fo:margin-bottom to <OFFSETS>
-void importTopBottomMargin(QDomElement& parentElement, const KoStyleStack& styleStack);
+void importTopBottomMargin(QDomElement& parentElement, const KOdfStyleStack& styleStack);
 
 // Convert style:tab-stops to <TABULATORS>
-void importTabulators(QDomElement& parentElement, const KoStyleStack& styleStack);
+void importTabulators(QDomElement& parentElement, const KOdfStyleStack& styleStack);
 
 // Convert fo:border* to <*BORDER>
-void importBorders(QDomElement& parentElement, const KoStyleStack& styleStack);
+void importBorders(QDomElement& parentElement, const KOdfStyleStack& styleStack);
 
 /////////// Text properties ///////////
 

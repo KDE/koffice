@@ -32,7 +32,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KOdfLoadingContext.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 
 #include <QString>
 #include <QHash>

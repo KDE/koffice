@@ -41,7 +41,7 @@ public:
 
     KOdfStore *store;
     KOdfStylesReader &stylesReader;
-    KoStyleStack styleStack;
+    KOdfStyleStack styleStack;
 
     mutable QString generator;
     GeneratorType generatorType;
@@ -213,7 +213,7 @@ KOdfStylesReader &KOdfLoadingContext::defaultStylesReader()
     return d->defaultStylesReader;
 }
 
-KoStyleStack &KOdfLoadingContext::styleStack() const
+KOdfStyleStack &KOdfLoadingContext::styleStack() const
 {
     return d->styleStack;
 }

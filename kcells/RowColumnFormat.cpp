@@ -32,7 +32,7 @@
 #include <KoXmlNS.h>
 #include <KOdfGenericStyles.h>
 #include <KoGlobal.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
 

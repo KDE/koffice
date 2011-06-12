@@ -354,7 +354,7 @@ QString TextShape::saveStyle(KOdfGenericStyle &style, KoShapeSavingContext &cont
 void TextShape::loadStyle(const KoXmlElement &element, KoShapeLoadingContext &context)
 {
     KoShape::loadStyle(element, context);
-    KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     styleStack.setTypeProperties("graphic");
     QString verticalAlign(styleStack.property(KoXmlNS::draw, "textarea-vertical-align"));
     Qt::Alignment alignment(Qt::AlignTop);

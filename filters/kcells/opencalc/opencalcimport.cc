@@ -39,7 +39,7 @@
 #include <KoFilterChain.h>
 #include <KoGlobal.h>
 #include <KoUnit.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <ooutils.h>
 
 #include <kcells/KCCell.h>
@@ -1069,13 +1069,13 @@ void OpenCalcImport::loadTableMasterStyle(KCSheet * table,
         kDebug(30518) << "masterLayoutStyle :" << masterLayoutStyle;
         if (!masterLayoutStyle)
             return;
-        KoStyleStack styleStack(ooNS::style, ooNS::fo);
+        KOdfStyleStack styleStack(ooNS::style, ooNS::fo);
         styleStack.push(*masterLayoutStyle);
         loadOasisMasterLayoutPage(table, styleStack);
     }
 }
 
-void OpenCalcImport::loadOasisMasterLayoutPage(KCSheet * table, KoStyleStack &styleStack)
+void OpenCalcImport::loadOasisMasterLayoutPage(KCSheet * table, KOdfStyleStack &styleStack)
 {
     float leftMargin = 0.0;
     float rightMargin = 0.0;

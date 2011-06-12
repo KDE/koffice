@@ -35,7 +35,7 @@
 #include <QBuffer>
 
 #include <KoUnit.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
@@ -264,7 +264,7 @@ void KoSectionStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &co
 
     context.styleStack().setTypeProperties("section");   // load all style attributes from "style:section-properties"
 
-    KoStyleStack &styleStack = context.styleStack();
+    KOdfStyleStack &styleStack = context.styleStack();
 
     // in 1.6 this was defined at KoParagLayout::loadOasisParagLayout(KoParagLayout&, KoOasisContext&)
 

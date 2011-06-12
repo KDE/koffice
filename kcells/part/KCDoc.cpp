@@ -67,7 +67,7 @@
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>
 #include <KOdfStorageDevice.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
 #include <KoZoomHandler.h>

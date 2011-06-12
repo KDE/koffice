@@ -145,7 +145,7 @@ bool KoPAPageBase::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &l
 {
     KoPALoadingContext &paContext = static_cast<KoPALoadingContext&>(loadingContext);
 
-    KoStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
     styleStack.save();
     loadingContext.odfLoadingContext().fillStyleStack(element, KoXmlNS::draw, "style-name", "drawing-page");
     styleStack.setTypeProperties("drawing-page");
@@ -201,7 +201,7 @@ void KoPAPageBase::loadOdfPageTag(const KoXmlElement &element,
                                    KoPALoadingContext &loadingContext)
 {
     Q_UNUSED(element);
-    KoStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
 
     if (styleStack.hasProperty(KoXmlNS::draw, "fill")) {
         setBackground(loadOdfFill(loadingContext));

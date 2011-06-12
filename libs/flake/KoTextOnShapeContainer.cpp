@@ -190,7 +190,7 @@ bool KoTextOnShapeContainer::loadOdf(const KoXmlElement &element, KoShapeLoading
 
     QString styleName = element.attributeNS(KoXmlNS::draw, "style-name");
     if (!styleName.isEmpty()) {
-        KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+        KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
         styleStack.save();
         context.odfLoadingContext().fillStyleStack(element, KoXmlNS::draw, "style-name", "graphic");
         styleStack.setTypeProperties("graphic");

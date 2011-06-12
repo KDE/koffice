@@ -149,7 +149,7 @@ bool KWOdfLoader::load(KOdfStoreReader &odfStore)
     m_tabStop = MM_TO_POINT(15);
     const KoXmlElement *defaultParagStyle = styles.defaultStyle("paragraph");
     if (defaultParagStyle) {
-        KoStyleStack stack;
+        KOdfStyleStack stack;
         stack.push(*defaultParagStyle);
         stack.setTypeProperties("paragraph");
         QString tabStopVal = stack.property(KoXmlNS::style, "tab-stop-distance");

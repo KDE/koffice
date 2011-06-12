@@ -44,7 +44,7 @@
 #include <QBuffer>
 
 #include <KoUnit.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
@@ -1056,7 +1056,7 @@ void KoParagraphStyle::loadOdf(const KoXmlElement *element, KoShapeLoadingContex
 
 void KoParagraphStyle::loadOdfProperties(KoShapeLoadingContext &scontext)
 {
-    KoStyleStack &styleStack = scontext.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = scontext.odfLoadingContext().styleStack();
 
     // in 1.6 this was defined at KoParagLayout::loadOasisParagLayout(KoParagLayout&, KoOasisContext&)
     const QString writingMode(styleStack.property(KoXmlNS::style, "writing-mode"));

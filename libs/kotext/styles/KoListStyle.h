@@ -214,7 +214,7 @@ public:
     bool operator!=(const KoListStyle &other) const;
 
     /**
-     * Load the style from the \a KoStyleStack style stack using the
+     * Load the style from the \a KOdfStyleStack style stack using the
      * OpenDocument format.
      */
     void loadOdf(KoShapeLoadingContext& context, const KoXmlElement& style = KoXmlElement());

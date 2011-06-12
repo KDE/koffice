@@ -56,18 +56,18 @@
  *  or KOdfLoadingContext::addStyles to automatically push a style and all its
  *  parent styles onto the stack.
  */
-class KOODF_EXPORT KoStyleStack
+class KOODF_EXPORT KOdfStyleStack
 {
 public:
     /**
      * Create a OASIS style stack
      */
-    KoStyleStack();
+    KOdfStyleStack();
     /**
      * Create a style stack based on other namespaces than OASIS - used for OOo-1.1 import.
      */
-    explicit KoStyleStack(const char* styleNSURI, const char* foNSURI);
-    virtual ~KoStyleStack();
+    explicit KOdfStyleStack(const char* styleNSURI, const char* foNSURI);
+    virtual ~KOdfStyleStack();
 
     /**
      * Clears the complete stack.
@@ -185,8 +185,8 @@ private:
     KoStyleStackPrivate * const d;
 
     // forbidden
-    void operator=(const KoStyleStack&);
-    KoStyleStack(const KoStyleStack&);
+    void operator=(const KOdfStyleStack&);
+    KOdfStyleStack(const KOdfStyleStack&);
 };
 
 #endif /* KOSTYLESTACK_H */

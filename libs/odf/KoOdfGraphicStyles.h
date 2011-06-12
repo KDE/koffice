@@ -33,7 +33,7 @@ class QSizeF;
 
 class KOdfGenericStyle;
 class KOdfGenericStyles;
-class KoStyleStack;
+class KOdfStyleStack;
 
 class KOdfStylesReader;
 class KOdfLoadingContext;
@@ -50,14 +50,14 @@ namespace KoOdfGraphicStyles
     KOODF_EXPORT QString saveOdfGradientStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
 
     /// Loads gradient style from style stack and stylesReader adapted to the given size and returns a brush
-    KOODF_EXPORT QBrush loadOdfGradientStyle(const KoStyleStack &styleStack, const KOdfStylesReader &stylesReader, const QSizeF &size);
+    KOODF_EXPORT QBrush loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfStylesReader &stylesReader, const QSizeF &size);
 
     /// Loads gradient style with the given name from style stack and stylesReader adapted to the given size and returns a brush
     KOODF_EXPORT QBrush loadOdfGradientStyleByName(const KOdfStylesReader &stylesReader, const QString &styleName, const QSizeF &size);
 
-    KOODF_EXPORT QBrush loadOdfFillStyle(const KoStyleStack &styleStack, const QString &fill,  const KOdfStylesReader &stylesReader);
+    KOODF_EXPORT QBrush loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString &fill,  const KOdfStylesReader &stylesReader);
 
-    KOODF_EXPORT QPen loadOdfStrokeStyle(const KoStyleStack &styleStack, const QString &stroke, const KOdfStylesReader &stylesReader);
+    KOODF_EXPORT QPen loadOdfStrokeStyle(const KOdfStyleStack &styleStack, const QString &stroke, const KOdfStylesReader &stylesReader);
 
     /// Helper function to parse a transformation attribute
     KOODF_EXPORT QTransform loadTransformation(const QString &transformation);

@@ -31,7 +31,7 @@
 #include <KOdfGenericStyles.h>
 #include <KOdfStore.h>
 #include <KOdfStorageDevice.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KoUnit.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
@@ -255,7 +255,7 @@ QString KoOdfGraphicStyles::saveOdfGradientStyle(KOdfGenericStyles &mainStyles, 
     return mainStyles.insert(gradientStyle, "gradient");
 }
 
-QBrush KoOdfGraphicStyles::loadOdfGradientStyle(const KoStyleStack &styleStack, const KOdfStylesReader & stylesReader, const QSizeF &size)
+QBrush KoOdfGraphicStyles::loadOdfGradientStyle(const KOdfStyleStack &styleStack, const KOdfStylesReader & stylesReader, const QSizeF &size)
 {
     QString styleName = styleStack.property(KoXmlNS::draw, "fill-gradient-name");
     return loadOdfGradientStyleByName(stylesReader, styleName, size);
@@ -450,7 +450,7 @@ QBrush KoOdfGraphicStyles::loadOdfGradientStyleByName(const KOdfStylesReader &st
     return resultBrush;
 }
 
-QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KoStyleStack &styleStack, const QString & fill,  const KOdfStylesReader & stylesReader)
+QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KOdfStyleStack &styleStack, const QString & fill,  const KOdfStylesReader & stylesReader)
 {
     QBrush tmpBrush; // default brush for "none" is a Qt::NoBrush
 
@@ -572,7 +572,7 @@ QBrush KoOdfGraphicStyles::loadOdfFillStyle(const KoStyleStack &styleStack, cons
     return tmpBrush;
 }
 
-QPen KoOdfGraphicStyles::loadOdfStrokeStyle(const KoStyleStack &styleStack, const QString & stroke, const KOdfStylesReader & stylesReader)
+QPen KoOdfGraphicStyles::loadOdfStrokeStyle(const KOdfStyleStack &styleStack, const QString & stroke, const KOdfStylesReader & stylesReader)
 {
     QPen tmpPen(Qt::NoPen); // default pen for "none" is a Qt::NoPen
 

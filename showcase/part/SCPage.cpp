@@ -41,7 +41,7 @@
 #include <KoXmlWriter.h>
 #include <KOdfLoadingContext.h>
 #include <KOdfStylesReader.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfGenericStyle.h>
 #include <KoShapeLayer.h>
 #include <KoPALoadingContext.h>
@@ -232,7 +232,7 @@ void SCPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &loa
 {
     KoPAPage::loadOdfPageTag(element, loadingContext);
 
-    KoStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
 
     int pageProperties = m_pageProperties & UseMasterBackground;
     if (styleStack.property(KoXmlNS::presentation, "background-objects-visible") == "true") {

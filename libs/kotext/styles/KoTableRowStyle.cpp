@@ -33,7 +33,7 @@
 #include <QTextTableFormat>
 
 #include <KoUnit.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
@@ -274,7 +274,7 @@ void KoTableRowStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &c
 }
 
 
-void KoTableRowStyle::loadOdfProperties(KoStyleStack &styleStack)
+void KoTableRowStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     // The fo:background-color attribute specifies the background color of a cell.
     if (styleStack.hasProperty(KoXmlNS::fo, "background-color")) {

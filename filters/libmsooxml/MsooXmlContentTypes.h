@@ -32,7 +32,7 @@
 
 class QColor;
 class QDomElement;
-class KoStyleStack;
+class KOdfStyleStack;
 class QDomDocument;
 class KZip;
 

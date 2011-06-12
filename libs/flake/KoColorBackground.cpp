@@ -84,7 +84,7 @@ void KoColorBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContext 
 
 bool KoColorBackground::loadStyle(KOdfLoadingContext & context, const QSizeF &)
 {
-    KoStyleStack &styleStack = context.styleStack();
+    KOdfStyleStack &styleStack = context.styleStack();
     if (! styleStack.hasProperty(KoXmlNS::draw, "fill"))
         return false;
 

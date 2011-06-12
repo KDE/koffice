@@ -21,7 +21,7 @@
 
 #include "ooutils.h"
 #include <KOdfStoreReader.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KoXmlReader.h>
 #include <qdom.h>
 #include <QColor>
@@ -92,7 +92,7 @@ bool OoUtils::parseBorder(const QString & tag, double * width, int * style, QCol
     return true;
 }
 
-void OoUtils::importIndents(QDomElement& parentElement, const KoStyleStack& styleStack)
+void OoUtils::importIndents(QDomElement& parentElement, const KOdfStyleStack& styleStack)
 {
     if (styleStack.hasProperty(ooNS::fo, "margin-left") ||    // 3.11.19
             styleStack.hasProperty(ooNS::fo, "margin-right"))
@@ -122,7 +122,7 @@ void OoUtils::importIndents(QDomElement& parentElement, const KoStyleStack& styl
     }
 }
 
-void OoUtils::importLineSpacing(QDomElement& parentElement, const KoStyleStack& styleStack)
+void OoUtils::importLineSpacing(QDomElement& parentElement, const KOdfStyleStack& styleStack)
 {
     if (styleStack.hasProperty(ooNS::fo, "line-height")) {
         // Fixed line height
@@ -171,7 +171,7 @@ void OoUtils::importLineSpacing(QDomElement& parentElement, const KoStyleStack& 
 
 }
 
-void OoUtils::importTopBottomMargin(QDomElement& parentElement, const KoStyleStack& styleStack)
+void OoUtils::importTopBottomMargin(QDomElement& parentElement, const KOdfStyleStack& styleStack)
 {
     if (styleStack.hasProperty(ooNS::fo, "margin-top") ||  // 3.11.22
             styleStack.hasProperty(ooNS::fo, "margin-bottom")) {
@@ -188,7 +188,7 @@ void OoUtils::importTopBottomMargin(QDomElement& parentElement, const KoStyleSta
     }
 }
 
-void OoUtils::importTabulators(QDomElement& parentElement, const KoStyleStack& styleStack)
+void OoUtils::importTabulators(QDomElement& parentElement, const KOdfStyleStack& styleStack)
 {
     if (!styleStack.hasChildNode(ooNS::style, "tab-stops"))     // 3.11.10
         return;
@@ -243,7 +243,7 @@ void OoUtils::importTabulators(QDomElement& parentElement, const KoStyleStack& s
 
 }
 
-void OoUtils::importBorders(QDomElement& parentElement, const KoStyleStack& styleStack)
+void OoUtils::importBorders(QDomElement& parentElement, const KOdfStyleStack& styleStack)
 {
     if (styleStack.hasProperty(ooNS::fo, "border", "left")) {
         double width;

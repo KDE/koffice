@@ -31,7 +31,7 @@
 #include <KoXmlReader.h>
 #include <QVariantList>
 
-class KoStyleStack;
+class KOdfStyleStack;
 class KOdfStore;
 
 class KCCell;
@@ -105,7 +105,7 @@ private:
     void loadOasisValidation(KCValidity val, const QString& validationName, const KCValueParser *parser);
     void loadOasisValidationCondition(KCValidity val, QString &valExpression, const KCValueParser *parser);
     void loadOasisAreaName(const KoXmlElement&body);
-    void loadOasisMasterLayoutPage(KCSheet * table, KoStyleStack &styleStack);
+    void loadOasisMasterLayoutPage(KCSheet * table, KOdfStyleStack &styleStack);
     void loadOasisValidationValue(KCValidity val, const QStringList &listVal, const KCValueParser *parser);
     QString translatePar(QString & par) const;
     void loadCondition(const KCCell& cell, const KoXmlElement &property);

@@ -27,7 +27,7 @@
 #include <qdom.h>
 #include <QByteArray>
 #include <QVector>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KoXmlReader.h>
 #include <liststylestack.h>
 #include <QVariantList>
@@ -99,7 +99,7 @@ private:
     Q3Dict<KoXmlElement>   m_masterPages;
     Q3Dict<KoXmlElement>   m_listStyles;
 
-    KoStyleStack m_styleStack;
+    KOdfStyleStack m_styleStack;
     KoXmlElement m_defaultStyle;
     ListStyleStack m_listStyleStack;
     KoXmlElement m_outlineStyle;

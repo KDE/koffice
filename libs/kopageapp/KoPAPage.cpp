@@ -26,7 +26,7 @@
 #include <KoShapeSavingContext.h>
 #include <KoShapeLayer.h>
 #include <KOdfLoadingContext.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
 #include <KoZoomHandler.h>
@@ -90,7 +90,7 @@ void KoPAPage::loadOdfPageTag(const KoXmlElement &element, KoPALoadingContext &l
     else
         kWarning(30010) << "Loading didn't provide a page under name; " << master;
 #endif
-    KoStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = loadingContext.odfLoadingContext().styleStack();
     int pageProperties = UseMasterBackground | DisplayMasterShapes | DisplayMasterBackground;
     if (styleStack.hasProperty(KoXmlNS::draw, "fill")) {
         KoPAPageBase::loadOdfPageTag(element, loadingContext);

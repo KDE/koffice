@@ -49,7 +49,7 @@ class QWidget;
 
 class KoDataCenterBase;
 class KoDocumentEntry;
-class KoStyleStack;
+class KOdfStyleStack;
 class KOdfGenericStyles;
 class KoOdfSettings;
 class KOdfStylesReader;
@@ -893,7 +893,7 @@ protected:
     /**
      * \ingroup OpenDocument
      */
-    void loadOdfMasterLayoutPage(KoStyleStack &styleStack);
+    void loadOdfMasterLayoutPage(KOdfStyleStack &styleStack);
 
     /**
      * \ingroup OpenDocument

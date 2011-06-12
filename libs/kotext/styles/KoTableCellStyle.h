@@ -38,7 +38,7 @@ class QTextTableCell;
 class QRectF;
 class QPainter;
 class QPainterPath;
-class KoStyleStack;
+class KOdfStyleStack;
 class KOdfGenericStyle;
 class KOdfGenericStyles;
 class KOdfLoadingContext;
@@ -282,10 +282,10 @@ signals:
 
 private:
     /**
-     * Load the style from the \a KoStyleStack style stack using the
+     * Load the style from the \a KOdfStyleStack style stack using the
      * OpenDocument format.
      */
-    void loadOdfProperties(KoStyleStack &styleStack);
+    void loadOdfProperties(KOdfStyleStack &styleStack);
     qreal propertyDouble(int key) const;
     int propertyInt(int key) const;
     bool propertyBoolean(int key) const;

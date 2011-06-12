@@ -28,7 +28,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlNS.h>
 #include <KoColorBackground.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 
 #include <QPen>
 #include <QColor>
@@ -72,7 +72,7 @@ QColor KoOdfWorkaround::fixMissingFillColor(const KoXmlElement &element, KoShape
     QColor color;
 
     if (element.prefix() == "chart") {
-        KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+        KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
         styleStack.save();
 
         bool hasStyle = element.hasAttributeNS(KoXmlNS::chart, "style-name");
@@ -124,7 +124,7 @@ bool KoOdfWorkaround::fixMissingStroke(QPen &pen, const KoXmlElement &element, K
 {
     bool fixed = false;
 
-    KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     if (element.prefix() == "chart") {
         styleStack.save();
 
@@ -216,7 +216,7 @@ KoColorBackground *KoOdfWorkaround::fixBackgroundColor(const KoShape *shape, KoS
         const KoPathShape *pathShape = dynamic_cast<const KoPathShape*>(shape);
         //check shape type
         if (pathShape) {
-            KoStyleStack &styleStack = odfContext.styleStack();
+            KOdfStyleStack &styleStack = odfContext.styleStack();
             const QString color(styleStack.property(KoXmlNS::draw, "fill-color"));
             if (color.isEmpty()) {
                 colorBackground = new KoColorBackground(QColor(153, 204, 255));

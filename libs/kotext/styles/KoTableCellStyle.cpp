@@ -34,7 +34,7 @@
 #include <QTextTableFormat>
 
 #include <KoUnit.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
@@ -410,7 +410,7 @@ void KoTableCellStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext &
     context.styleStack().restore();
 }
 
-void KoTableCellStyle::loadOdfProperties(KoStyleStack &styleStack)
+void KoTableCellStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     // Padding
     if (styleStack.hasProperty(KoXmlNS::fo, "padding-left"))

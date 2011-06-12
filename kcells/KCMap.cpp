@@ -537,7 +537,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
     const KoXmlElement* defaultColumnStyle = odfContext.stylesReader().defaultStyle("table-column");
     if (defaultColumnStyle) {
 //       kDebug() <<"style:default-style style:family=\"table-column\"";
-        KoStyleStack styleStack;
+        KOdfStyleStack styleStack;
         styleStack.push(*defaultColumnStyle);
         styleStack.setTypeProperties("table-column");
         if (styleStack.hasProperty(KoXmlNS::style, "column-width")) {
@@ -553,7 +553,7 @@ bool KCMap::loadOdf(const KoXmlElement& body, KOdfLoadingContext& odfContext)
     const KoXmlElement* defaultRowStyle = odfContext.stylesReader().defaultStyle("table-row");
     if (defaultRowStyle) {
 //       kDebug() <<"style:default-style style:family=\"table-row\"";
-        KoStyleStack styleStack;
+        KOdfStyleStack styleStack;
         styleStack.push(*defaultRowStyle);
         styleStack.setTypeProperties("table-row");
         if (styleStack.hasProperty(KoXmlNS::style, "row-height")) {

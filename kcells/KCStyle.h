@@ -35,7 +35,7 @@
 class KOdfGenericStyle;
 class KOdfGenericStyles;
 class KOdfStylesReader;
-class KoStyleStack;
+class KOdfStyleStack;
 
 class KCConditions;
 class KCCustomStyle;
@@ -247,9 +247,9 @@ protected:
     void loadOdfDataStyle(KOdfStylesReader& stylesReader, const KoXmlElement& element,
                           KCConditions& conditions, const KCStyleManager* styleManager,
                           const KCValueParser *parser);
-    void loadOdfParagraphProperties(KOdfStylesReader& stylesReader, const KoStyleStack& element);
-    void loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const KoStyleStack& element);
-    void loadOdfTextProperties(KOdfStylesReader& stylesReader, const KoStyleStack& element);
+    void loadOdfParagraphProperties(KOdfStylesReader& stylesReader, const KOdfStyleStack& element);
+    void loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const KOdfStyleStack& element);
+    void loadOdfTextProperties(KOdfStylesReader& stylesReader, const KOdfStyleStack& element);
 
 public:
     void setHAlign(HAlign align);

@@ -35,7 +35,7 @@ set(koodf_LIB_SRCS
     KProperties.cpp
     KOdfStore.cpp
     KOdfStorageDevice.cpp
-    KoStyleStack.cpp
+    KOdfStyleStack.cpp
     TarStore.cpp
     KoUnit.cpp
     KoXmlNS.cpp
@@ -72,7 +72,7 @@ install( FILES
     KOdfPasteBase.h
     KOdfStoreReader.h
     KOdfWriteStore.h
-    KoStyleStack.h
+    KOdfStyleStack.h
     KoOdfGraphicStyles.h
     KOdfDocumentBase.h
     KOdfGenericChange.h

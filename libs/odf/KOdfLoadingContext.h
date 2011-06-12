@@ -23,7 +23,7 @@
 class KOdfStore;
 
 #include "koodf_export.h"
-#include "KoStyleStack.h"
+#include "KOdfStyleStack.h"
 #include "KOdfStylesReader.h"
 
 #include <QtCore/QString>
@@ -65,7 +65,7 @@ public:
     */
     KOdfStylesReader &defaultStylesReader();
 
-    KoStyleStack &styleStack() const;
+    KOdfStyleStack &styleStack() const;
 
     const KoXmlDocument &manifestDocument() const;
 

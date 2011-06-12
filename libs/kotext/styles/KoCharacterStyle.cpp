@@ -723,7 +723,7 @@ int KoCharacterStyle::textScale() const
 void KoCharacterStyle::loadOdf(KoShapeLoadingContext &scontext)
 {
     KOdfLoadingContext &context = scontext.odfLoadingContext();
-    KoStyleStack &styleStack = context.styleStack();
+    KOdfStyleStack &styleStack = context.styleStack();
     loadOdfProperties(styleStack);
 
     QString fontName;
@@ -750,7 +750,7 @@ void KoCharacterStyle::loadOdf(KoShapeLoadingContext &scontext)
     }
 }
 
-void KoCharacterStyle::loadOdfProperties(KoStyleStack &styleStack)
+void KoCharacterStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     // The fo:color attribute specifies the foreground color of text.
     const QString color(styleStack.property(KoXmlNS::fo, "color"));

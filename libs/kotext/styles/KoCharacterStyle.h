@@ -33,7 +33,7 @@
 
 
 class StylePrivate;
-class KoStyleStack;
+class KOdfStyleStack;
 class KoShapeLoadingContext;
 class KOdfGenericStyle;
 
@@ -314,16 +314,16 @@ public:
     void applyStyle(QTextCursor *selection) const;
 
     /**
-     * Load the style from the \a KoStyleStack style stack using the
+     * Load the style from the \a KOdfStyleStack style stack using the
      * OpenDocument format.
      */
     void loadOdf(KoShapeLoadingContext &context);
 
     /**
-    * Load the style from the \a KoStyleStack style stack using the
+    * Load the style from the \a KOdfStyleStack style stack using the
     * OpenDocument format.
     */
-    void loadOdfProperties(KoStyleStack &styleStack);
+    void loadOdfProperties(KOdfStyleStack &styleStack);
 
     /// return true if this style has a non-default value set for the Property
     bool hasProperty(int key) const;

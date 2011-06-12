@@ -22,7 +22,7 @@
 #include "KoShapeSavingContext.h"
 #include "KoImageData.h"
 #include "KoImageCollection.h"
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfGenericStyle.h>
 #include <KOdfGenericStyles.h>
 #include <KoXmlNS.h>
@@ -393,7 +393,7 @@ void KoPatternBackground::fillStyle(KOdfGenericStyle &style, KoShapeSavingContex
 bool KoPatternBackground::loadStyle(KOdfLoadingContext &context, const QSizeF &)
 {
     Q_D(KoPatternBackground);
-    KoStyleStack &styleStack = context.styleStack();
+    KOdfStyleStack &styleStack = context.styleStack();
     if (! styleStack.hasProperty(KoXmlNS::draw, "fill"))
         return false;
 

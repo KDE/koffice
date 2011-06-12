@@ -263,7 +263,7 @@ QString PictureShape::saveStyle(KOdfGenericStyle& style, KoShapeSavingContext& c
 void PictureShape::loadStyle(const KoXmlElement& element, KoShapeLoadingContext& context)
 {
     KoShape::loadStyle(element, context);
-    KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     styleStack.setTypeProperties("graphic");
 
     //FIXME: are there other applicable properties?

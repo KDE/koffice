@@ -52,7 +52,7 @@
 #include <KoShapeManager.h>
 #include <KoShapeRegistry.h>
 #include <KoShapeSavingContext.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KoUnit.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
@@ -1490,7 +1490,7 @@ bool KCSheet::loadOdf(const KoXmlElement& sheetElement,
                         const KoXmlElement *masterLayoutStyle = odfContext.stylesReader().findStyle(masterPageLayoutStyleName);
                         if (masterLayoutStyle) {
                             //kDebug(36003)<<"masterLayoutStyle :"<<masterLayoutStyle;
-                            KoStyleStack styleStack;
+                            KOdfStyleStack styleStack;
                             styleStack.setTypeProperties("page-layout");
                             styleStack.push(*masterLayoutStyle);
                             loadOdfMasterLayoutPage(styleStack);
@@ -1713,7 +1713,7 @@ void KCSheet::loadOdfObject(const KoXmlElement& element, KoShapeLoadingContext& 
     dynamic_cast<KCShapeApplicationData*>(shape->applicationData())->setAnchoredToCell(false);
 }
 
-void KCSheet::loadOdfMasterLayoutPage(KoStyleStack &styleStack)
+void KCSheet::loadOdfMasterLayoutPage(KOdfStyleStack &styleStack)
 {
     KOdfPageLayoutData pageLayout;
 
@@ -1861,7 +1861,7 @@ bool KCSheet::loadColumnFormat(const KoXmlElement& column,
         isNonDefaultColumn = true;
     }
 
-    KoStyleStack styleStack;
+    KOdfStyleStack styleStack;
     if (column.hasAttributeNS(KoXmlNS::table, "style-name")) {
         QString str = column.attributeNS(KoXmlNS::table, "style-name", QString());
         const KoXmlElement *style = stylesReader.findStyle(str, "table-column");
@@ -1985,7 +1985,7 @@ int KCSheet::loadRowFormat(const KoXmlElement& row, int &rowIndex,
     KOdfLoadingContext& odfContext = tableContext.odfContext;
     bool isNonDefaultRow = false;
 
-    KoStyleStack styleStack;
+    KOdfStyleStack styleStack;
     if (row.hasAttributeNS(KoXmlNS::table, sStyleName)) {
         QString str = row.attributeNS(KoXmlNS::table, sStyleName, QString());
         const KoXmlElement *style = odfContext.stylesReader().findStyle(str, "table-row");

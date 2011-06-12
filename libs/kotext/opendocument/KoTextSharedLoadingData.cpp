@@ -113,7 +113,7 @@ void KoTextSharedLoadingData::addDefaultParagraphStyle(KoShapeLoadingContext &co
     const KoXmlElement *appDef = context.odfLoadingContext().defaultStylesReader().defaultStyle("paragraph");
     if (appDef) {
         KoCharacterStyle *style = styleManager->defaultParagraphStyle()->characterStyle();
-        KoStyleStack defaultStyleStack;
+        KOdfStyleStack defaultStyleStack;
         defaultStyleStack.push(*appDef);
         defaultStyleStack.setTypeProperties("text");
         style->loadOdfProperties(defaultStyleStack);

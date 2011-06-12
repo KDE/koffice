@@ -37,7 +37,7 @@ class KoCharacterStyle;
 class KoXmlElement;
 class KoListStyle;
 class QTextBlock;
-class KoStyleStack;
+class KOdfStyleStack;
 class KOdfGenericStyle;
 class KOdfGenericStyles;
 class KoShapeLoadingContext;
@@ -572,7 +572,7 @@ signals:
 
 private:
     /**
-     * Load the style from the \a KoStyleStack style stack using the
+     * Load the style from the \a KOdfStyleStack style stack using the
      * OpenDocument format.
      */
     void loadOdfProperties(KoShapeLoadingContext &scontext);

@@ -18,7 +18,7 @@
  * Boston, MA 02110-1301, USA.
 */
 
-#include "KoStyleStack.h"
+#include "KOdfStyleStack.h"
 #include "KoUnit.h"
 #include "KoXmlNS.h"
 
@@ -26,28 +26,28 @@
 
 //#define DEBUG_STYLESTACK
 
-class KoStyleStack::KoStyleStackPrivate
+class KOdfStyleStack::KoStyleStackPrivate
 {
 };
 
-KoStyleStack::KoStyleStack()
+KOdfStyleStack::KOdfStyleStack()
         : m_styleNSURI(KoXmlNS::style), m_foNSURI(KoXmlNS::fo), d(0)
 {
     clear();
 }
 
-KoStyleStack::KoStyleStack(const char* styleNSURI, const char* foNSURI)
+KOdfStyleStack::KOdfStyleStack(const char* styleNSURI, const char* foNSURI)
         : m_propertiesTagName("properties"), m_styleNSURI(styleNSURI), m_foNSURI(foNSURI), d(0)
 {
     clear();
 }
 
-KoStyleStack::~KoStyleStack()
+KOdfStyleStack::~KOdfStyleStack()
 {
     delete d;
 }
 
-void KoStyleStack::clear()
+void KOdfStyleStack::clear()
 {
     m_stack.clear();
 #ifdef DEBUG_STYLESTACK
@@ -55,7 +55,7 @@ void KoStyleStack::clear()
 #endif
 }
 
-void KoStyleStack::save()
+void KOdfStyleStack::save()
 {
     m_marks.push(m_stack.count());
 #ifdef DEBUG_STYLESTACK
@@ -63,7 +63,7 @@ void KoStyleStack::save()
 #endif
 }
 
-void KoStyleStack::restore()
+void KOdfStyleStack::restore()
 {
     Q_ASSERT(!m_marks.isEmpty());
     int toIndex = m_marks.pop();
@@ -76,7 +76,7 @@ void KoStyleStack::restore()
         m_stack.pop_back();
 }
 
-void KoStyleStack::pop()
+void KOdfStyleStack::pop()
 {
     Q_ASSERT(!m_stack.isEmpty());
     m_stack.pop_back();
@@ -85,7 +85,7 @@ void KoStyleStack::pop()
 #endif
 }
 
-void KoStyleStack::push(const KoXmlElement& style)
+void KOdfStyleStack::push(const KoXmlElement& style)
 {
     m_stack.append(style);
 #ifdef DEBUG_STYLESTACK
@@ -93,16 +93,16 @@ void KoStyleStack::push(const KoXmlElement& style)
 #endif
 }
 
-QString KoStyleStack::property(const QString &nsURI, const QString &name) const
+QString KOdfStyleStack::property(const QString &nsURI, const QString &name) const
 {
     return property(nsURI, name, 0);
 }
-QString KoStyleStack::property(const QString &nsURI, const QString &name, const QString &detail) const
+QString KOdfStyleStack::property(const QString &nsURI, const QString &name, const QString &detail) const
 {
     return property(nsURI, name, &detail);
 }
 
-inline QString KoStyleStack::property(const QString &nsURI, const QString &name, const QString *detail) const
+inline QString KOdfStyleStack::property(const QString &nsURI, const QString &name, const QString *detail) const
 {
     QString fullName(name);
     if (detail) {
@@ -127,17 +127,17 @@ inline QString KoStyleStack::property(const QString &nsURI, const QString &name,
     return QString();
 }
 
-bool KoStyleStack::hasProperty(const QString &nsURI, const QString &name) const
+bool KOdfStyleStack::hasProperty(const QString &nsURI, const QString &name) const
 {
     return hasProperty(nsURI, name, 0);
 }
 
-bool KoStyleStack::hasProperty(const QString &nsURI, const QString &name, const QString &detail) const
+bool KOdfStyleStack::hasProperty(const QString &nsURI, const QString &name, const QString &detail) const
 {
     return hasProperty(nsURI, name, &detail);
 }
 
-inline bool KoStyleStack::hasProperty(const QString &nsURI, const QString &name, const QString *detail) const
+inline bool KOdfStyleStack::hasProperty(const QString &nsURI, const QString &name, const QString *detail) const
 {
     QString fullName(name);
     if (detail) {
@@ -157,7 +157,7 @@ inline bool KoStyleStack::hasProperty(const QString &nsURI, const QString &name,
 
 // Font size is a bit special. "115%" applies to "the fontsize of the parent style".
 // This can be generalized though (hasPropertyThatCanBePercentOfParent() ? :)
-qreal KoStyleStack::fontSize(const qreal defaultFontPointSize) const
+qreal KOdfStyleStack::fontSize(const qreal defaultFontPointSize) const
 {
     const QString name = "font-size";
     qreal percent = 1;
@@ -184,7 +184,7 @@ qreal KoStyleStack::fontSize(const qreal defaultFontPointSize) const
     return percent * defaultFontPointSize;
 }
 
-bool KoStyleStack::hasChildNode(const QString &nsURI, const QString &localName) const
+bool KOdfStyleStack::hasChildNode(const QString &nsURI, const QString &localName) const
 {
     QList<KoXmlElement>::ConstIterator it = m_stack.end();
     while (it != m_stack.begin()) {
@@ -197,7 +197,7 @@ bool KoStyleStack::hasChildNode(const QString &nsURI, const QString &localName) 
     return false;
 }
 
-KoXmlElement KoStyleStack::childNode(const QString &nsURI, const QString &localName) const
+KoXmlElement KOdfStyleStack::childNode(const QString &nsURI, const QString &localName) const
 {
     QList<KoXmlElement>::ConstIterator it = m_stack.end();
 
@@ -212,7 +212,7 @@ KoXmlElement KoStyleStack::childNode(const QString &nsURI, const QString &localN
     return KoXmlElement();          // a null element
 }
 
-bool KoStyleStack::isUserStyle(const KoXmlElement& e, const QString& family) const
+bool KOdfStyleStack::isUserStyle(const KoXmlElement& e, const QString& family) const
 {
     if (e.attributeNS(m_styleNSURI, "family", QString()) != family)
         return false;
@@ -221,7 +221,7 @@ bool KoStyleStack::isUserStyle(const KoXmlElement& e, const QString& family) con
     return parent.localName() == "styles" /*&& parent.namespaceURI() == KoXmlNS::office*/;
 }
 
-QString KoStyleStack::userStyleName(const QString& family) const
+QString KOdfStyleStack::userStyleName(const QString& family) const
 {
     QList<KoXmlElement>::ConstIterator it = m_stack.end();
     while (it != m_stack.begin()) {
@@ -234,7 +234,7 @@ QString KoStyleStack::userStyleName(const QString& family) const
     return "Standard";
 }
 
-QString KoStyleStack::userStyleDisplayName(const QString& family) const
+QString KOdfStyleStack::userStyleDisplayName(const QString& family) const
 {
     QList<KoXmlElement>::ConstIterator it = m_stack.end();
     while (it != m_stack.begin()) {
@@ -246,7 +246,7 @@ QString KoStyleStack::userStyleDisplayName(const QString& family) const
     return QString(); // no display name, this can happen since it's optional
 }
 
-void KoStyleStack::setTypeProperties(const char* typeProperties)
+void KOdfStyleStack::setTypeProperties(const char* typeProperties)
 {
     m_propertiesTagName = typeProperties == 0 ? QString("properties") : (QString(typeProperties) + "-properties");
 }

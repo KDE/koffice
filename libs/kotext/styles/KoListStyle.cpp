@@ -25,7 +25,7 @@
 #include "KoParagraphStyle.h"
 #include "KoList.h"
 
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfStylesReader.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>

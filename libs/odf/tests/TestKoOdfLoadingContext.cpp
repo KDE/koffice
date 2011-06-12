@@ -127,7 +127,7 @@ void TestKoOdfLoadingContext::testFillStyleStack()
     forEachElement(tag, body) {
         //tz: So now that I have a test the fails I can go on implementing the solution
         QCOMPARE(tag.localName(), QString("rect"));
-        KoStyleStack & styleStack = context.styleStack();
+        KOdfStyleStack & styleStack = context.styleStack();
         styleStack.save();
         context.fillStyleStack(tag, KoXmlNS::draw, "style-name", "graphic");
         styleStack.setTypeProperties("graphic");

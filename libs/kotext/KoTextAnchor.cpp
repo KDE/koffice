@@ -23,7 +23,7 @@
 #include "KoTextDocumentLayout.h"
 #include "KoTextShapeContainerModel.h"
 #include "KoTextShapeData.h"
-#include "KoStyleStack.h"
+#include "KOdfStyleStack.h"
 #include "KOdfLoadingContext.h"
 
 #include <KoShapeContainer.h>
@@ -378,7 +378,7 @@ bool KoTextAnchor::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &c
     QString anchorType = shape()->additionalAttribute("text:anchor-type");
 
     // load settings from graphic style
-     KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+     KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
      styleStack.save();
      if (element.hasAttributeNS(KoXmlNS::draw, "style-name")) {
          context.odfLoadingContext().fillStyleStack(element, KoXmlNS::draw, "style-name", "graphic");

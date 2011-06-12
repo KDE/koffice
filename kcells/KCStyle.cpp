@@ -33,7 +33,7 @@
 #include <KoGlobal.h>
 #include <KOdfStylesReader.h>
 #include <KoOdfGraphicStyles.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KoUnit.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
@@ -201,7 +201,7 @@ void KCStyle::loadOdfStyle(KOdfStylesReader& stylesReader, const KoXmlElement& e
                          const KCValueParser *parser)
 {
     // NOTE Stefan: Do not fill the style stack with the parent styles!
-    KoStyleStack styleStack;
+    KOdfStyleStack styleStack;
     styleStack.push(element);
     styleStack.setTypeProperties("table-cell");
     loadOdfTableCellProperties(stylesReader, styleStack);
@@ -253,7 +253,7 @@ void KCStyle::loadOdfDataStyle(KOdfStylesReader &stylesReader, const QString &st
             }
         }
 
-        KoStyleStack styleStack;
+        KOdfStyleStack styleStack;
         styleStack.push(*dataStylePair.second);
         styleStack.setTypeProperties("text");
         theStyle->loadOdfTextProperties(stylesReader, styleStack);
@@ -340,7 +340,7 @@ void KCStyle::loadOdfDataStyle(KOdfStylesReader &stylesReader, const QString &st
     }
 }
 
-void KCStyle::loadOdfParagraphProperties(KOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
+void KCStyle::loadOdfParagraphProperties(KOdfStylesReader& stylesReader, const KOdfStyleStack& styleStack)
 {
     Q_UNUSED(stylesReader);
     kDebug(36003) << "\t paragraph-properties";
@@ -360,7 +360,7 @@ void KCStyle::loadOdfParagraphProperties(KOdfStylesReader& stylesReader, const K
     }
 }
 
-void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
+void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const KOdfStyleStack& styleStack)
 {
     QString str;
     if (styleStack.hasProperty(KoXmlNS::style, "vertical-align")) {
@@ -472,7 +472,7 @@ void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const K
         const KoXmlElement * style = stylesReader.findStyle(styleStack.property(KoXmlNS::draw, "style-name"), "graphic");
         kDebug(36003) << " style :" << style;
         if (style) {
-            KoStyleStack drawStyleStack;
+            KOdfStyleStack drawStyleStack;
             drawStyleStack.push(*style);
             drawStyleStack.setTypeProperties("graphic");
             if (drawStyleStack.hasProperty(KoXmlNS::draw, "fill")) {
@@ -490,7 +490,7 @@ void KCStyle::loadOdfTableCellProperties(KOdfStylesReader& stylesReader, const K
     }
 }
 
-void KCStyle::loadOdfTextProperties(KOdfStylesReader& stylesReader, const KoStyleStack& styleStack)
+void KCStyle::loadOdfTextProperties(KOdfStylesReader& stylesReader, const KOdfStyleStack& styleStack)
 {
     Q_UNUSED(stylesReader);
     // fo:font-size="13pt"

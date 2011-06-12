@@ -75,7 +75,7 @@
 #include <KoShape.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeRegistry.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KoXmlNS.h>
 #include <KoXmlReader.h>
 #include <KOdfStylesReader.h>

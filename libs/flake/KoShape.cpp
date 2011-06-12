@@ -175,7 +175,7 @@ void KoShapePrivate::removeShapeManager(KoShapeManager *manager)
 // static
 QString KoShapePrivate::getStyleProperty(const char *property, KoShapeLoadingContext &context)
 {
-    KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     QString value;
 
     if (styleStack.hasProperty(KoXmlNS::draw, property)) {
@@ -1104,7 +1104,7 @@ void KoShape::loadStyle(const KoXmlElement &element, KoShapeLoadingContext &cont
 {
     Q_D(KoShape);
 
-    KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     styleStack.setTypeProperties("graphic");
 
     if (d->fill && !d->fill->deref()) {
@@ -1182,7 +1182,7 @@ bool KoShape::loadOdfAttributes(const KoXmlElement &element, KoShapeLoadingConte
     }
 
     if (attributes & OdfStyle) {
-        KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+        KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
         styleStack.save();
         if (element.hasAttributeNS(KoXmlNS::draw, "style-name")) {
             context.odfLoadingContext().fillStyleStack(element, KoXmlNS::draw, "style-name", "graphic");
@@ -1254,7 +1254,7 @@ KoShapeBackground *KoShape::loadOdfFill(KoShapeLoadingContext &context) const
 
 KoShapeBorderBase *KoShape::loadOdfStroke(const KoXmlElement &element, KoShapeLoadingContext &context) const
 {
-    KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     KOdfStylesReader &stylesReader = context.odfLoadingContext().stylesReader();
 
     QString stroke = KoShapePrivate::getStyleProperty("stroke", context);
@@ -1304,7 +1304,7 @@ KoShapeBorderBase *KoShape::loadOdfStroke(const KoXmlElement &element, KoShapeLo
 
 KoShapeShadow *KoShapePrivate::loadOdfShadow(KoShapeLoadingContext &context) const
 {
-    KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     QString shadowStyle = KoShapePrivate::getStyleProperty("shadow", context);
     if (shadowStyle == "visible" || shadowStyle == "hidden") {
         KoShapeShadow *shadow = new KoShapeShadow();

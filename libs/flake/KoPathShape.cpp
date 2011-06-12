@@ -39,7 +39,7 @@
 #include <KoXmlNS.h>
 #include <KoUnit.h>
 #include <KOdfGenericStyle.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 
 #include <KDebug>
@@ -195,7 +195,7 @@ void KoPathShape::loadStyle(const KoXmlElement & element, KoShapeLoadingContext 
     Q_D(KoPathShape);
     KoShape::loadStyle(element, context);
 
-    KoStyleStack &styleStack = context.odfLoadingContext().styleStack();
+    KOdfStyleStack &styleStack = context.odfLoadingContext().styleStack();
     styleStack.setTypeProperties("graphic");
 
     if (styleStack.hasProperty(KoXmlNS::svg, "fill-rule")) {

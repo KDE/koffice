@@ -33,7 +33,7 @@
 #include <QTextTableFormat>
 
 #include <KoUnit.h>
-#include <KoStyleStack.h>
+#include <KOdfStyleStack.h>
 #include <KOdfLoadingContext.h>
 #include <KoXmlNS.h>
 #include <KoXmlWriter.h>
@@ -246,7 +246,7 @@ void KoTableColumnStyle::loadOdf(const KoXmlElement *element, KOdfLoadingContext
 }
 
 
-void KoTableColumnStyle::loadOdfProperties(KoStyleStack &styleStack)
+void KoTableColumnStyle::loadOdfProperties(KOdfStyleStack &styleStack)
 {
     // Column width.
     if (styleStack.hasProperty(KoXmlNS::style, "column-width")) {
