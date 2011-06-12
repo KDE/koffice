@@ -61,7 +61,7 @@ bool KoPAPastePage::process(const KoXmlElement &body, KoOdfReadStore &odfStore)
     }
 
     if (! pages.empty()) {
-        KoGenStyles mainStyles;
+        KOdfGenericStyles mainStyles;
         QBuffer buffer;
         buffer.open(QIODevice::WriteOnly);
         KoXmlWriter xmlWriter(&buffer);

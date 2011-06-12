@@ -34,7 +34,7 @@
 #include <KoFilterChain.h>
 #include <KoXmlWriter.h>
 #include <KoOdfWriteStore.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
 
 #include <khtml_part.h>
@@ -87,7 +87,7 @@ KoFilter::ConversionStatus HTMLImport::convert(const QByteArray& from, const QBy
     m_manifestWriter = oasisStore.manifestWriter("application/vnd.oasis.opendocument.spreadsheet");
     m_store = &oasisStore;
 
-    m_mainStyles = new KoGenStyles();
+    m_mainStyles = new KOdfGenericStyles();
     
     KoXmlWriter* bodyWriter = m_store->bodyWriter();
     m_store->contentWriter(); // we need to create the instance even if the contentWriter is not used
@@ -132,9 +132,9 @@ bool HTMLImport::createStyle()
     stylesWriter->addAttribute("xmlns:svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0");
     stylesWriter->addAttribute("office:version", "1.0");
 
-    m_mainStyles->saveOdfStyles(KoGenStyles::MasterStyles, stylesWriter);
-    m_mainStyles->saveOdfStyles(KoGenStyles::DocumentStyles, stylesWriter); // office:style
-    m_mainStyles->saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, stylesWriter); // office:automatic-styles
+    m_mainStyles->saveOdfStyles(KOdfGenericStyles::MasterStyles, stylesWriter);
+    m_mainStyles->saveOdfStyles(KOdfGenericStyles::DocumentStyles, stylesWriter); // office:style
+    m_mainStyles->saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, stylesWriter); // office:automatic-styles
 
     stylesWriter->endElement();  // office:document-styles
     stylesWriter->endDocument();

@@ -27,7 +27,7 @@ class QColor;
 class QLocale;
 class QString;
 class KOdfGenericStyle;
-class KoGenStyles;
+class KOdfGenericStyles;
 
 class NumberFormatParser
 {
@@ -35,12 +35,12 @@ public:
     static QColor color(const QString& name);
     static QLocale locale(int langid);
 
-    static void setStyles(KoGenStyles* styles);
+    static void setStyles(KOdfGenericStyles* styles);
     static KOdfGenericStyle parse(const QString& numberFormat);
     static bool isDateFormat(const QString& numberFormat);
 
 private:
-    static KoGenStyles* styles;
+    static KOdfGenericStyles* styles;
 };
 
 #endif

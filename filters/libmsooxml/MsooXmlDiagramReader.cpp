@@ -32,7 +32,7 @@
 #include <MsooXmlReader_p.h>
 #include <MsooXmlUtils.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 //#include <QXmlQuery>
 //#include <QAbstractUriResolver>
 #include <typeinfo>
@@ -282,7 +282,7 @@ class AbstractAtom
             foreach(AbstractAtom* atom, m_children)
                 atom->layoutAtom(context);
         }
-        virtual void writeAtom(Context* context, KoXmlWriter* xmlWriter, KoGenStyles* styles) {
+        virtual void writeAtom(Context* context, KoXmlWriter* xmlWriter, KOdfGenericStyles* styles) {
             foreach(AbstractAtom* atom, m_children)
                 atom->writeAtom(context, xmlWriter, styles);
         }
@@ -429,7 +429,7 @@ class LayoutNodeAtom : public AbstractAtom
             context->m_parentLayout = oldLayout;
         }
         virtual void layoutAtom(Context* context);
-        virtual void writeAtom(Context* context, KoXmlWriter* xmlWriter, KoGenStyles* styles);
+        virtual void writeAtom(Context* context, KoXmlWriter* xmlWriter, KOdfGenericStyles* styles);
         QList<ConstraintAtom*> constraints() const { return m_constraints; }
         void addConstraint(ConstraintAtom* constraint) { m_constraints.append(constraint); setNeedsRelayout(true); }
         void setAlgorithm(AlgorithmAtom* algorithm) { m_algorithm = algorithm; setNeedsRelayout(true); }
@@ -562,7 +562,7 @@ class ShapeAtom : public AbstractAtom
         }
 
         //TODO use filters/libmso/ODrawToOdf.h
-        virtual void writeAtom(Context* context, KoXmlWriter* xmlWriter, KoGenStyles* styles) {
+        virtual void writeAtom(Context* context, KoXmlWriter* xmlWriter, KOdfGenericStyles* styles) {
             Q_ASSERT(context->m_parentLayout);
             if(m_type.isEmpty()) return;
             //if(m_hideGeom)  return;
@@ -909,7 +909,7 @@ class ChooseAtom : public AbstractAtom
             foreach(AbstractAtom* atom, atomsMatchingToCondition(context))
                 atom->layoutAtom(context);
         }
-        virtual void writeAtom(Context* context, KoXmlWriter* xmlWriter, KoGenStyles* styles) {
+        virtual void writeAtom(Context* context, KoXmlWriter* xmlWriter, KOdfGenericStyles* styles) {
             DEBUG_WRITE;
             foreach(AbstractAtom* atom, atomsMatchingToCondition(context))
                 atom->writeAtom(context, xmlWriter, styles);
@@ -970,7 +970,7 @@ class ForEachAtom : public AbstractAtom
                     atom->layoutAtom(context);
             }
         }
-        virtual void writeAtom(Context* context, KoXmlWriter* xmlWriter, KoGenStyles* styles) {
+        virtual void writeAtom(Context* context, KoXmlWriter* xmlWriter, KOdfGenericStyles* styles) {
             DEBUG_WRITE;
             QList<AbstractNode*> axis = fetchAxis(context, m_axis, m_ptType, m_start, m_count, m_step);
             foreach(AbstractNode* node, axis) {
@@ -1217,7 +1217,7 @@ void LayoutNodeAtom::layoutAtom(Context* context)
     context->m_parentLayout = oldLayout;
 }
 
-void LayoutNodeAtom::writeAtom(Context* context, KoXmlWriter* xmlWriter, KoGenStyles* styles)
+void LayoutNodeAtom::writeAtom(Context* context, KoXmlWriter* xmlWriter, KOdfGenericStyles* styles)
 {
     AlgorithmAtom::Algorithm algorithm = AlgorithmAtom::UnknownAlg;
     QList< QPair<QString,QString> > params;
@@ -1243,7 +1243,7 @@ void LayoutNodeAtom::writeAtom(Context* context, KoXmlWriter* xmlWriter, KoGenSt
 
 using namespace MSOOXML;
 
-MsooXmlDiagramReaderContext::MsooXmlDiagramReaderContext(KoGenStyles* styles)
+MsooXmlDiagramReaderContext::MsooXmlDiagramReaderContext(KOdfGenericStyles* styles)
     : MSOOXML::MsooXmlReaderContext()
     , m_styles(styles)
     , m_context(new Diagram::Context)

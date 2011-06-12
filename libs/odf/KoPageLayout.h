@@ -24,7 +24,7 @@
 #define KOPAGELAYOUT_H
 
 #include "KOdfColumnData.h"
-#include "KoGenStyles.h"
+#include "KOdfGenericStyles.h"
 #include "KoPageFormat.h"
 #include "KoXmlReader.h"
 #include "KOdfBorders.h"

@@ -44,7 +44,7 @@ DrawingMLGradientFill::DrawingMLGradientFill(QVector<qreal> shadeModifier, QVect
 {
 }
 
-void DrawingMLGradientFill::writeStyles(KoGenStyles& styles, KOdfGenericStyle *graphicStyle, QColor color)
+void DrawingMLGradientFill::writeStyles(KOdfGenericStyles& styles, KOdfGenericStyle *graphicStyle, QColor color)
 {
     KOdfGenericStyle gradientStyle = KOdfGenericStyle(KOdfGenericStyle::GradientStyle);
 
@@ -82,7 +82,7 @@ DrawingMLBlipFill::DrawingMLBlipFill(QString filePath) : m_filePath(filePath)
 {
 }
 
-void DrawingMLBlipFill::writeStyles(KoGenStyles& styles, KOdfGenericStyle *graphicStyle, QColor color)
+void DrawingMLBlipFill::writeStyles(KOdfGenericStyles& styles, KOdfGenericStyle *graphicStyle, QColor color)
 {
     Q_UNUSED(color)
 
@@ -97,7 +97,7 @@ void DrawingMLBlipFill::writeStyles(KoGenStyles& styles, KOdfGenericStyle *graph
     graphicStyle->addProperty("draw:fill-image-name", fillImageName);
 }
 
-void DrawingMLSolidFill::writeStyles(KoGenStyles& styles, KOdfGenericStyle *graphicStyle, QColor color)
+void DrawingMLSolidFill::writeStyles(KOdfGenericStyles& styles, KOdfGenericStyle *graphicStyle, QColor color)
 {
     if (color.isValid()) {
         QBrush brush(color, Qt::SolidPattern);

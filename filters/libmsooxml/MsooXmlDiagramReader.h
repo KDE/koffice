@@ -43,9 +43,9 @@ namespace Diagram
 class MSOOXML_EXPORT MsooXmlDiagramReaderContext : public MSOOXML::MsooXmlReaderContext
 {
 public:
-    KoGenStyles* m_styles;
+    KOdfGenericStyles* m_styles;
     Diagram::Context* m_context;
-    explicit MsooXmlDiagramReaderContext(KoGenStyles* styles);
+    explicit MsooXmlDiagramReaderContext(KOdfGenericStyles* styles);
     virtual ~MsooXmlDiagramReaderContext();
     void saveIndex(KoXmlWriter* xmlWriter, const QRect &rect);
 };

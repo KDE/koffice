@@ -34,7 +34,7 @@
 #include <KoStore.h>
 #include <KoStoreDevice.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoOdfWriteStore.h>
 
 #include "kword13formatother.h"
@@ -186,7 +186,7 @@ void KWord13OasisGenerator::declareLayout(KWord13Layout& layout)
     fillGenStyleWithLayout(layout, gs, false);
     fillGenStyleWithFormatOne(layout.m_format , gs, false);
 
-    layout.m_autoStyleName = m_oasisGenStyles.insert(gs, "P", KoGenStyles::DontAddNumberToName);
+    layout.m_autoStyleName = m_oasisGenStyles.insert(gs, "P", KOdfGenericStyles::DontAddNumberToName);
 
     kDebug(30520) << "Layout: Parent" << layout.m_name << " =>" << layout.m_autoStyleName;
 }
@@ -547,8 +547,8 @@ void KWord13OasisGenerator::writeStylesXml(void)
     KoXmlWriter *stylesWriter = KoOdfWriteStore::createOasisXmlWriter(&io, "office:document-styles");
 
     stylesWriter->startElement("office:styles");
-    Q3ValueList<KoGenStyles::NamedStyle> styles = m_oasisGenStyles.styles(KOdfGenericStyle::ParagraphStyle);
-    Q3ValueList<KoGenStyles::NamedStyle>::const_iterator it = styles.begin();
+    Q3ValueList<KOdfGenericStyles::NamedStyle> styles = m_oasisGenStyles.styles(KOdfGenericStyle::ParagraphStyle);
+    Q3ValueList<KOdfGenericStyles::NamedStyle>::const_iterator it = styles.begin();
     for (; it != styles.end() ; ++it) {
         (*it).style->writeStyle(stylesWriter, m_oasisGenStyles, "style:style", (*it).name, "style:paragraph-properties");
     }
@@ -616,8 +616,8 @@ void KWord13OasisGenerator::writeContentXml(void)
 
     // Automatic styles
     writer->startElement("office:automatic-styles");
-    Q3ValueList<KoGenStyles::NamedStyle> styles = m_oasisGenStyles.styles(KOdfGenericStyle::ParagraphAutoStyle);
-    Q3ValueList<KoGenStyles::NamedStyle>::const_iterator it;
+    Q3ValueList<KOdfGenericStyles::NamedStyle> styles = m_oasisGenStyles.styles(KOdfGenericStyle::ParagraphAutoStyle);
+    Q3ValueList<KOdfGenericStyles::NamedStyle>::const_iterator it;
     for (it = styles.begin(); it != styles.end() ; ++it) {
         (*it).style->writeStyle(writer, m_oasisGenStyles, "style:style", (*it).name, "style:paragraph-properties");
     }

@@ -29,11 +29,11 @@
 
 //KOffice includes
 #include <KoFilter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <QVariantList>
 
 class KoXmlWriter;
-class KoGenStyles;
+class KOdfGenericStyles;
 
 class Filterkpr2odf : public KoFilter
 {
@@ -111,7 +111,7 @@ private:
     QHash<QString, QString> m_sounds;//store the <fullFilename, name> pair of the keys
     bool m_sticky; // set to true when we want to read objects from the master page
 
-    KoGenStyles m_styles;//style collector
+    KOdfGenericStyles m_styles;//style collector
 };
 
 #endif //FILTERKPR2ODF_H

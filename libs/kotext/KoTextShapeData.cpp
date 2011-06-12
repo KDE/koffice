@@ -38,7 +38,7 @@
 #include <QTextCursor>
 
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoShapeLoadingContext.h>
 #include <KoShapeSavingContext.h>
 

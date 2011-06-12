@@ -148,7 +148,7 @@ KoFilter::ConversionStatus PptxImport::parseParts(KoOdfWriters *writers,
 
     /* // Not needed anymore
     writers->mainStyles->insertRawOdfStyles(
-        KoGenStyles::DocumentStyles,
+        KOdfGenericStyles::DocumentStyles,
         "    <!-- COPIED -->"
         "\n    <draw:marker draw:name=\"Arrow\" svg:viewBox=\"0 0 20 30\" svg:d=\"m10 0-10 30h20z\"/>"
         "\n    <style:default-style style:family=\"graphic\">"
@@ -775,7 +775,7 @@ KoFilter::ConversionStatus PptxImport::parseParts(KoOdfWriters *writers,
     */
 
     writers->mainStyles->insertRawOdfStyles(
-        KoGenStyles::MasterStyles,
+        KOdfGenericStyles::MasterStyles,
         "    <!-- COPIED -->"
         "\n    <draw:layer-set>"
         "\n      <draw:layer draw:name=\"layout\"/>"
@@ -821,7 +821,7 @@ KoFilter::ConversionStatus PptxImport::parseParts(KoOdfWriters *writers,
 
 /*
     writers->mainStyles->insertRawOdfStyles(
-        KoGenStyles::DocumentAutomaticStyles,
+        KOdfGenericStyles::DocumentAutomaticStyles,
         "    <!-- COPIED -->"
         "\n    <style:style style:name=\"pr1\" style:family=\"presentation\" style:parent-style-name=\"Default-title\">"
         "\n      <style:graphic-properties draw:stroke=\"none\" draw:fill=\"none\" draw:fill-color=\"#ffffff\" draw:textarea-horizontal-align=\"justify\" draw:textarea-vertical-align=\"middle\" draw:auto-grow-height=\"true\" draw:auto-grow-width=\"false\" fo:min-height=\"2.922cm\" fo:min-width=\"0cm\" fo:padding-top=\"0.127cm\" fo:padding-bottom=\"0.127cm\" fo:padding-left=\"0.254cm\" fo:padding-right=\"0.254cm\" fo:wrap-option=\"no-wrap\" draw:shadow=\"hidden\"/>"
@@ -957,7 +957,7 @@ KoFilter::ConversionStatus PptxImport::parseParts(KoOdfWriters *writers,
 
 /*
     writers->mainStyles->insertRawOdfStyles(
-        KoGenStyles::StylesXmlAutomaticStyles,
+        KOdfGenericStyles::StylesXmlAutomaticStyles,
         "    <!-- COPIED -->"
         "\n    <style:page-layout style:name=\"PMpredef1\">"
         "\n      <style:page-layout-properties fo:margin-top=\"0cm\" fo:margin-bottom=\"0cm\" fo:margin-left=\"0cm\" fo:margin-right=\"0cm\" fo:page-width=\"25.4cm\" fo:page-height=\"19.05cm\" style:print-orientation=\"landscape\"/>"

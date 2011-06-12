@@ -140,7 +140,7 @@ KoFilter::ConversionStatus XlsxImport::parseParts(KoOdfWriters *writers,
 //! @todo create styles in XlsxXmlDocumentReader (XLSX defines styles in workbook.xml)
 
     writers->mainStyles->insertRawOdfStyles(
-        KoGenStyles::DocumentStyles,
+        KOdfGenericStyles::DocumentStyles,
         "    <!-- COPIED -->"
         "\n    <style:default-style style:family=\"table-cell\">"
         "\n      <style:table-cell-properties />"
@@ -459,7 +459,7 @@ KoFilter::ConversionStatus XlsxImport::parseParts(KoOdfWriters *writers,
     );
 
     writers->mainStyles->insertRawOdfStyles(
-        KoGenStyles::MasterStyles,
+        KOdfGenericStyles::MasterStyles,
         "    <!-- COPIED -->"
         "\n    <style:master-page style:name=\"Default\" style:page-layout-name=\"pm1\">"
         "\n      <style:header>"
@@ -504,7 +504,7 @@ KoFilter::ConversionStatus XlsxImport::parseParts(KoOdfWriters *writers,
     );
 
     writers->mainStyles->insertRawOdfStyles(
-        KoGenStyles::StylesXmlAutomaticStyles,
+        KOdfGenericStyles::StylesXmlAutomaticStyles,
         "    <!-- COPIED -->"
         "\n    <style:page-layout style:name=\"pm1\">"
         "\n      <style:page-layout-properties style:first-page-number=\"continue\" style:writing-mode=\"lr-tb\"/>"

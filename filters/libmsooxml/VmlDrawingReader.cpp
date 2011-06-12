@@ -27,7 +27,7 @@
 #include <MsooXmlRelationships.h>
 #include <MsooXmlUnits.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoOdfGraphicStyles.h>
 #include <limits.h>
 

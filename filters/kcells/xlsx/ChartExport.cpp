@@ -23,7 +23,7 @@
 #include <KoXmlWriter.h>
 #include <KoOdfWriteStore.h>
 #include <KoStoreDevice.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
 //#include <KoOdfNumberStyles.h>
 #include <KDebug>
@@ -138,7 +138,7 @@ QColor ChartExport::calculateColorFromGradientStop ( const Charting::Gradient::G
     return color;
 }
 
-QString ChartExport::generateGradientStyle ( KoGenStyles& mainStyles, const Charting::Gradient* grad )
+QString ChartExport::generateGradientStyle ( KOdfGenericStyles& mainStyles, const Charting::Gradient* grad )
 {
     KOdfGenericStyle gradStyle( KOdfGenericStyle::GradientStyle );
     gradStyle.addAttribute( "draw:style", "linear" );
@@ -151,7 +151,7 @@ QString ChartExport::generateGradientStyle ( KoGenStyles& mainStyles, const Char
     return mainStyles.insert( gradStyle, "ms_chart_gradient" );
 }
 
-QString ChartExport::genChartAreaStyle(const int styleID, KOdfGenericStyle& style, KoGenStyles& styles, KoGenStyles& mainStyles )
+QString ChartExport::genChartAreaStyle(const int styleID, KOdfGenericStyle& style, KOdfGenericStyles& styles, KOdfGenericStyles& mainStyles )
 {
     if( chart()->m_areaFormat && chart()->m_areaFormat->m_fill )
     {
@@ -207,14 +207,14 @@ QString ChartExport::genChartAreaStyle(const int styleID, KOdfGenericStyle& styl
 }
 
 
-QString ChartExport::genChartAreaStyle( const int styleID, KoGenStyles& styles, KoGenStyles& mainStyles )
+QString ChartExport::genChartAreaStyle( const int styleID, KOdfGenericStyles& styles, KOdfGenericStyles& mainStyles )
 {
     KOdfGenericStyle style(KOdfGenericStyle::GraphicAutoStyle, "chart");
     return genChartAreaStyle( styleID, style, styles, mainStyles );
 }
 
 
-QString ChartExport::genPlotAreaStyle( const int styleID, KOdfGenericStyle& style, KoGenStyles& styles, KoGenStyles& mainStyles )
+QString ChartExport::genPlotAreaStyle( const int styleID, KOdfGenericStyle& style, KOdfGenericStyles& styles, KOdfGenericStyles& mainStyles )
 {
     if( chart()->m_plotAreaFillColor.isValid() )
     {
@@ -278,7 +278,7 @@ QString ChartExport::genPlotAreaStyle( const int styleID, KOdfGenericStyle& styl
 }
 
 
-void ChartExport::addShapePropertyStyle( /*const*/ Charting::Series* series, KOdfGenericStyle& style, KoGenStyles& /*mainStyles*/ )
+void ChartExport::addShapePropertyStyle( /*const*/ Charting::Series* series, KOdfGenericStyle& style, KOdfGenericStyles& /*mainStyles*/ )
 {
     Q_ASSERT( series );
     bool marker = false;
@@ -321,7 +321,7 @@ void ChartExport::addShapePropertyStyle( /*const*/ Charting::Series* series, KOd
     }
 }
 
-QString ChartExport::genPlotAreaStyle( const int styleID, KoGenStyles& styles, KoGenStyles& mainStyles )
+QString ChartExport::genPlotAreaStyle( const int styleID, KOdfGenericStyles& styles, KOdfGenericStyles& mainStyles )
 {
     KOdfGenericStyle style(KOdfGenericStyle::ChartAutoStyle, "chart");
     return genPlotAreaStyle( styleID, style, styles, mainStyles );
@@ -347,8 +347,8 @@ bool ChartExport::saveContent(KoStore* store, KoXmlWriter* manifestWriter)
     
     const int styleID = chart()->m_style;
 
-    KoGenStyles styles;
-    KoGenStyles mainStyles;
+    KOdfGenericStyles styles;
+    KOdfGenericStyles mainStyles;
 
     store->pushDirectory();
     store->enterDirectory(m_href);
@@ -774,7 +774,7 @@ bool ChartExport::saveContent(KoStore* store, KoXmlWriter* manifestWriter)
     bodyWriter->endElement(); // office:chart
     bodyWriter->endElement(); // office:body
 
-    styles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, contentWriter);
+    styles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, contentWriter);
     s.closeContentWriter();
 
     if (store->open("styles.xml")) {
@@ -798,9 +798,9 @@ bool ChartExport::saveContent(KoStore* store, KoXmlWriter* manifestWriter)
         stylesWriter->addAttribute("xmlns:math", "http://www.w3.org/1998/Math/MathML");
         stylesWriter->addAttribute("xmlns:of", "urn:oasis:names:tc:opendocument:xmlns:of:1.2");
         stylesWriter->addAttribute("office:version", "1.2");
-        mainStyles.saveOdfStyles(KoGenStyles::MasterStyles, stylesWriter);
-        mainStyles.saveOdfStyles(KoGenStyles::DocumentStyles, stylesWriter); // office:style
-        mainStyles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, stylesWriter); // office:automatic-styles
+        mainStyles.saveOdfStyles(KOdfGenericStyles::MasterStyles, stylesWriter);
+        mainStyles.saveOdfStyles(KOdfGenericStyles::DocumentStyles, stylesWriter); // office:style
+        mainStyles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, stylesWriter); // office:automatic-styles
         stylesWriter->endElement();  // office:document-styles
         stylesWriter->endDocument();
         delete stylesWriter;

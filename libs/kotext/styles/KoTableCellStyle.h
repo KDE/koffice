@@ -40,7 +40,7 @@ class QPainter;
 class QPainterPath;
 class KoStyleStack;
 class KOdfGenericStyle;
-class KoGenStyles;
+class KOdfGenericStyles;
 class KoOdfLoadingContext;
 class KoTableCellStylePrivate;
 class KoXmlElement;

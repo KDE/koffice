@@ -2478,7 +2478,7 @@ void KCSheet::saveOdfSettings(KoXmlWriter &settingsWriter) const
 bool KCSheet::saveOdf(KCOdfSavingContext& tableContext)
 {
     KoXmlWriter & xmlWriter = tableContext.shapeContext.xmlWriter();
-    KoGenStyles & mainStyles = tableContext.shapeContext.mainStyles();
+    KOdfGenericStyles & mainStyles = tableContext.shapeContext.mainStyles();
     xmlWriter.startElement("table:table");
     xmlWriter.addAttribute("table:name", sheetName());
     xmlWriter.addAttribute("table:style-name", saveOdfSheetStyleName(mainStyles));
@@ -2530,7 +2530,7 @@ bool KCSheet::saveOdf(KCOdfSavingContext& tableContext)
     return true;
 }
 
-QString KCSheet::saveOdfSheetStyleName(KoGenStyles &mainStyles)
+QString KCSheet::saveOdfSheetStyleName(KOdfGenericStyles &mainStyles)
 {
     KOdfGenericStyle pageStyle(KOdfGenericStyle::TableAutoStyle, "table"/*FIXME I don't know if name is sheet*/);
 
@@ -2565,7 +2565,7 @@ QString KCSheet::saveOdfSheetStyleName(KoGenStyles &mainStyles)
 }
 
 
-void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
+void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles,
                               int maxCols, int maxRows, KCOdfSavingContext& tableContext)
 {
     kDebug(36003) << "KCSheet::saveOdfColRowCell:" << d->name;
@@ -2805,7 +2805,7 @@ void KCSheet::saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
     }
 }
 
-void KCSheet::saveOdfCells(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles, int row, int maxCols,
+void KCSheet::saveOdfCells(KoXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles, int row, int maxCols,
                          KCOdfSavingContext& tableContext)
 {
     int i = 1;

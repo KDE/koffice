@@ -19,7 +19,7 @@ set(koodf_LIB_SRCS
     KOdfGenericChange.cpp
     KOdfGenericChanges.cpp
     KOdfGenericStyle.cpp
-    KoGenStyles.cpp
+    KOdfGenericStyles.cpp
     KoOdfSettings.cpp
     KoOdf.cpp
     KoOdfDocument.cpp
@@ -63,7 +63,7 @@ install( FILES
     KoOdf.h
     KoXmlNS.h
     KOdfGenericStyle.h
-    KoGenStyles.h
+    KOdfGenericStyles.h
     KOdfFontData.h
     KoOdfLoadingContext.h
     KoOdfSettings.h

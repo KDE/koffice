@@ -612,7 +612,7 @@ KoFilter::ConversionStatus PptToOdp::doConversion(POLE::Storage& storage,
             p->documentContainer), storeout, manifest);
     storeout->leaveDirectory();
 
-    KoGenStyles styles;
+    KOdfGenericStyles styles;
 
     createMainStyles(styles);
 
@@ -641,7 +641,7 @@ namespace
 {
 
 QString
-definePageLayout(KoGenStyles& styles, const MSO::PointStruct& size) {
+definePageLayout(KOdfGenericStyles& styles, const MSO::PointStruct& size) {
     // x and y are given in master units (1/576 inches)
     double sizeX = size.x * (25.4 / (double)576);
     double sizeY = size.y * (25.4 / (double)576);
@@ -663,7 +663,7 @@ definePageLayout(KoGenStyles& styles, const MSO::PointStruct& size) {
 
 } //namespace
 
-void PptToOdp::defineDefaultTextStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultTextStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="text">
     KOdfGenericStyle style(KOdfGenericStyle::TextStyle, "text");
@@ -672,7 +672,7 @@ void PptToOdp::defineDefaultTextStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultParagraphStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultParagraphStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="paragraph">
     KOdfGenericStyle style(KOdfGenericStyle::ParagraphStyle, "paragraph");
@@ -682,7 +682,7 @@ void PptToOdp::defineDefaultParagraphStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultSectionStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultSectionStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="section">
     KOdfGenericStyle style(KOdfGenericStyle::SectionStyle, "section");
@@ -690,7 +690,7 @@ void PptToOdp::defineDefaultSectionStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultRubyStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultRubyStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="ruby">
     KOdfGenericStyle style(KOdfGenericStyle::RubyStyle, "ruby");
@@ -698,7 +698,7 @@ void PptToOdp::defineDefaultRubyStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultTableStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultTableStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="table">
     KOdfGenericStyle style(KOdfGenericStyle::TableStyle, "table");
@@ -706,7 +706,7 @@ void PptToOdp::defineDefaultTableStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultTableColumnStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultTableColumnStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="table-column">
     KOdfGenericStyle style(KOdfGenericStyle::TableColumnStyle, "table-column");
@@ -714,7 +714,7 @@ void PptToOdp::defineDefaultTableColumnStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultTableRowStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultTableRowStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="table-row">
     KOdfGenericStyle style(KOdfGenericStyle::TableRowStyle, "table-row");
@@ -722,7 +722,7 @@ void PptToOdp::defineDefaultTableRowStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultTableCellStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultTableCellStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="table-cell">
     KOdfGenericStyle style(KOdfGenericStyle::TableCellStyle, "table-cell");
@@ -732,7 +732,7 @@ void PptToOdp::defineDefaultTableCellStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultGraphicStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultGraphicStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="graphic">
     KOdfGenericStyle style(KOdfGenericStyle::GraphicStyle, "graphic");
@@ -743,7 +743,7 @@ void PptToOdp::defineDefaultGraphicStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultPresentationStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultPresentationStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="presentation">
     KOdfGenericStyle style(KOdfGenericStyle::PresentationStyle, "presentation");
@@ -754,7 +754,7 @@ void PptToOdp::defineDefaultPresentationStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultDrawingPageStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultDrawingPageStyle(KOdfGenericStyles& styles)
 {
     if (!p->documentContainer) return;
     // write style <style:default-style style:family="drawing-page">
@@ -774,7 +774,7 @@ void PptToOdp::defineDefaultDrawingPageStyle(KoGenStyles& styles)
     styles.insert(style);
 }
 
-void PptToOdp::defineDefaultChartStyle(KoGenStyles& styles)
+void PptToOdp::defineDefaultChartStyle(KOdfGenericStyles& styles)
 {
     // write style <style:default-style style:family="chart">
     KOdfGenericStyle style(KOdfGenericStyle::ChartStyle, "chart");
@@ -822,7 +822,7 @@ void PptToOdp::defineDefaultParagraphProperties(KOdfGenericStyle& style) {
     defineParagraphProperties(style, pf);
 }
 
-void PptToOdp::defineDefaultGraphicProperties(KOdfGenericStyle& style, KoGenStyles& styles) {
+void PptToOdp::defineDefaultGraphicProperties(KOdfGenericStyle& style, KOdfGenericStyles& styles) {
     const KOdfGenericStyle::PropertyType gt = KOdfGenericStyle::GraphicType;
     style.addProperty("svg:stroke-width", "0.75pt", gt); // 2.3.8.15
     style.addProperty("draw:fill", "none", gt); // 2.3.8.38
@@ -1181,7 +1181,7 @@ void PptToOdp::defineParagraphProperties(KOdfGenericStyle& style,
     // text:number-lines
 }
 
-void PptToOdp::defineDrawingPageStyle(KOdfGenericStyle& style, const DrawStyle& ds, KoGenStyles& styles,
+void PptToOdp::defineDrawingPageStyle(KOdfGenericStyle& style, const DrawStyle& ds, KOdfGenericStyles& styles,
                                       ODrawToOdf& odrawtoodf, const MSO::HeadersFootersAtom* hf,
                                       const MSO::SlideFlags* sf)
 {
@@ -1565,7 +1565,7 @@ public:
         }
     }
 };
-void PptToOdp::defineMasterStyles(KoGenStyles& styles)
+void PptToOdp::defineMasterStyles(KOdfGenericStyles& styles)
 {
     foreach (const MSO::MasterOrSlideContainer* m, p->masters) {
         currentMaster = m;
@@ -1633,7 +1633,7 @@ getMasterShape(const MSO::MasterOrSlideContainer* m) {
     }
     return scp;
 }
-void PptToOdp::defineAutomaticDrawingPageStyles(KoGenStyles& styles)
+void PptToOdp::defineAutomaticDrawingPageStyles(KOdfGenericStyles& styles)
 {
     DrawClient drawclient(this);
     ODrawToOdf odrawtoodf(drawclient);
@@ -1751,7 +1751,7 @@ void PptToOdp::defineAutomaticDrawingPageStyles(KoGenStyles& styles)
     }
 }
 
-void PptToOdp::createMainStyles(KoGenStyles& styles)
+void PptToOdp::createMainStyles(KOdfGenericStyles& styles)
 {
     /* This function is follows the flow of the styles.xml file.
        -> style:styles
@@ -1820,7 +1820,7 @@ void PptToOdp::createMainStyles(KoGenStyles& styles)
         defineListStyle(list,
                 p->documentContainer->documentTextInfo.textMasterStyleAtom);
         styles.insert(list, "standardListStyle",
-                KoGenStyles::DontAddNumberToName);
+                KOdfGenericStyles::DontAddNumberToName);
     }
 
     /*
@@ -1919,7 +1919,7 @@ void PptToOdp::createMainStyles(KoGenStyles& styles)
     }
 }
 
-QByteArray PptToOdp::createContent(KoGenStyles& styles)
+QByteArray PptToOdp::createContent(KOdfGenericStyles& styles)
 {
     QBuffer presentationBuffer;
     presentationBuffer.open(QIODevice::WriteOnly);
@@ -1950,7 +1950,7 @@ QByteArray PptToOdp::createContent(KoGenStyles& styles)
     contentWriter.addAttribute("office:version", "1.0");
 
     // office:automatic-styles
-    styles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, &contentWriter);
+    styles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, &contentWriter);
 
     // office:body
     contentWriter.startElement("office:body");

@@ -37,7 +37,7 @@
 #include <MsooXmlDiagramReader.h>
 
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoOdfGraphicStyles.h>
 #include <KoUnit.h>
 #include <QFontMetricsF>

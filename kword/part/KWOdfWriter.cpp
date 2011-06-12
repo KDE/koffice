@@ -48,7 +48,7 @@
 #include <KDebug>
 #include <ktemporaryfile.h>
 
-QByteArray KWOdfWriter::serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGenStyles &mainStyles, KOdfGenericChanges  &changes, KWTextFrameSet *fs)
+QByteArray KWOdfWriter::serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KOdfGenericStyles &mainStyles, KOdfGenericChanges  &changes, KWTextFrameSet *fs)
 {
     QByteArray tag;
     switch (fs->textFrameSetType()) {
@@ -82,7 +82,7 @@ QByteArray KWOdfWriter::serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedS
 }
 
 // rename to save pages ?
-void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGenStyles &mainStyles, KOdfGenericChanges &changes)
+void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KOdfGenericStyles &mainStyles, KOdfGenericChanges &changes)
 {
     //kDebug(32001)<< "START saveHeaderFooter ############################################";
     // first get all the framesets in a nice quick-to-access data structure
@@ -110,7 +110,7 @@ void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGen
         KOdfGenericStyle masterStyle(KOdfGenericStyle::MasterPageStyle);
         KOdfGenericStyle layoutStyle = pageStyle.saveOdf();
         masterStyle.addProperty("style:page-layout-name", mainStyles.insert(layoutStyle, "pm"));
-        QString name = mainStyles.insert(masterStyle, pageStyle.name(), KoGenStyles::DontAddNumberToName);
+        QString name = mainStyles.insert(masterStyle, pageStyle.name(), KOdfGenericStyles::DontAddNumberToName);
         m_masterPages.insert(pageStyle, name);
     }
 
@@ -146,12 +146,12 @@ void KWOdfWriter::saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGen
         }
         // append the headerfooter-style to the main-style
         if (! masterStyle.isEmpty()) {
-            QString name = mainStyles.insert(masterStyle, pageStyle.name(), KoGenStyles::DontAddNumberToName);
+            QString name = mainStyles.insert(masterStyle, pageStyle.name(), KOdfGenericStyles::DontAddNumberToName);
             m_masterPages.insert(pageStyle, name);
         }
     }
 
-    //foreach (KoGenStyles::NamedStyle s, mainStyles.styles(KOdfGenericStyle::ParagraphAutoStyle))
+    //foreach (KOdfGenericStyles::NamedStyle s, mainStyles.styles(KOdfGenericStyle::ParagraphAutoStyle))
     //    mainStyles.markStyleForStylesXml(s.name);
 
     //kDebug(32001) << "END saveHeaderFooter ############################################";
@@ -204,7 +204,7 @@ bool KWOdfWriter::save(KoOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embed
     if (!tmpBodyWriter)
         return false;
 
-    KoGenStyles mainStyles;
+    KOdfGenericStyles mainStyles;
 
     KOdfGenericChanges changes;
 
@@ -296,7 +296,7 @@ bool KWOdfWriter::save(KoOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embed
     }
 
     //we save the changes before starting the page sequence element because odf validator insist on having <tracked-changes> right after the <office:text> tag
-    mainStyles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, contentWriter);
+    mainStyles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, contentWriter);
 
     changes.saveOdfChanges(changeWriter);
 

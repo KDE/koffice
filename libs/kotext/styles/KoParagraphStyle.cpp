@@ -31,7 +31,7 @@
 #include "KoTextSharedLoadingData.h"
 #include <KoShapeLoadingContext.h>
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include "Styles_p.h"
 #include "KoTextDocument.h"
 
@@ -1518,7 +1518,7 @@ void KoParagraphStyle::removeDuplicates(const KoParagraphStyle &other)
         d->charStyle->removeDuplicates(*other.d->charStyle);
 }
 
-void KoParagraphStyle::saveOdf(KOdfGenericStyle &style, KoGenStyles &mainStyles)
+void KoParagraphStyle::saveOdf(KOdfGenericStyle &style, KOdfGenericStyles &mainStyles)
 {
     bool writtenLineSpacing = false;
     if (d->charStyle) {
@@ -1532,7 +1532,7 @@ void KoParagraphStyle::saveOdf(KOdfGenericStyle &style, KoGenStyles &mainStyles)
         if (name.isEmpty())
             name = 'L';
         style.addAttribute("style:list-style-name",
-                mainStyles.insert(liststyle, name, KoGenStyles::DontAddNumberToName));
+                mainStyles.insert(liststyle, name, KOdfGenericStyles::DontAddNumberToName));
     }
     // only custom style have a displayname. automatic styles don't have a name set.
     if (!d->name.isEmpty() && !style.isDefaultStyle()) {

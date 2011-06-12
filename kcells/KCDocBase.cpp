@@ -138,7 +138,7 @@ bool KCDocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag
     KoXmlWriter * manifestWriter = documentContext.odfStore.manifestWriter();
 
     KoStoreDevice dev(store);
-    KoGenStyles mainStyles;//for compile
+    KOdfGenericStyles mainStyles;//for compile
 
     KoXmlWriter* contentWriter = documentContext.odfStore.contentWriter();
 
@@ -158,7 +158,7 @@ bool KCDocBase::saveOdfHelper(SavingContext & documentContext, SaveFlag saveFlag
     bodyWriter->endElement(); ////office:body
 
     // Done with writing out the contents to the tempfile, we can now write out the automatic styles
-    mainStyles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, contentWriter);
+    mainStyles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, contentWriter);
 
     documentContext.odfStore.closeContentWriter();
 

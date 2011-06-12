@@ -28,7 +28,7 @@
 
 #include "DocxXmlDocumentReader.h"
 
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoCharacterStyle.h>
 
 //! A class reading MSOOXML DOCX markup - styles.xml part.
@@ -41,7 +41,7 @@ public:
 
     virtual ~DocxXmlStylesReader();
 
-    //! Reads/parses the file. The output goes mainly to KoGenStyles* KoOdfWriters::mainStyles
+    //! Reads/parses the file. The output goes mainly to KOdfGenericStyles* KoOdfWriters::mainStyles
     virtual KoFilter::ConversionStatus read(MSOOXML::MsooXmlReaderContext* context = 0);
 
 protected:

@@ -37,7 +37,7 @@
 
 #include <KoXmlWriter.h>
 #include <KoOdfWriteStore.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
 #include <KoOdfNumberStyles.h>
 
@@ -125,8 +125,8 @@ public:
     KoStore* storeout;
     Workbook *workbook;
 
-    KoGenStyles *styles;
-    KoGenStyles *mainStyles;
+    KOdfGenericStyles *styles;
+    KOdfGenericStyles *mainStyles;
     QList<QString> cellStyles;
     QList<QString> rowStyles;
     QList<QString> colStyles;
@@ -146,7 +146,7 @@ public:
     int rowsCountTotal, rowsCountDone;
     void addProgress(int addValue);
 
-    bool createStyles(KoStore* store, KoXmlWriter* manifestWriter, KoGenStyles* mainStyles);
+    bool createStyles(KoStore* store, KoXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles);
     bool createContent(KoOdfWriteStore* store);
     bool createMeta(KoOdfWriteStore* store);
     bool createSettings(KoOdfWriteStore* store);
@@ -242,8 +242,8 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
     emit sigProgress(-1);
     emit sigProgress(0);
 
-    d->styles = new KoGenStyles();
-    d->mainStyles = new KoGenStyles();
+    d->styles = new KOdfGenericStyles();
+    d->mainStyles = new KOdfGenericStyles();
 
     KoOdfWriteStore oasisStore(d->storeout);
     KoXmlWriter* manifestWriter = oasisStore.manifestWriter("application/vnd.oasis.opendocument.spreadsheet");
@@ -380,7 +380,7 @@ bool ExcelImport::Private::createContent(KoOdfWriteStore* store)
     defaultColumnStyleIndex = 0;
     // office:automatic-styles
     processWorkbookForStyle(workbook, contentWriter);
-    styles->saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, contentWriter);
+    styles->saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, contentWriter);
 
     // important: reset all indexes
     sheetFormatIndex = 0;
@@ -400,7 +400,7 @@ bool ExcelImport::Private::createContent(KoOdfWriteStore* store)
 
 
 // Writes the styles.xml
-bool ExcelImport::Private::createStyles(KoStore* store, KoXmlWriter* manifestWriter, KoGenStyles* mainStyles)
+bool ExcelImport::Private::createStyles(KoStore* store, KoXmlWriter* manifestWriter, KOdfGenericStyles* mainStyles)
 {
     Q_UNUSED(manifestWriter);
     if (!store->open("styles.xml"))
@@ -427,9 +427,9 @@ bool ExcelImport::Private::createStyles(KoStore* store, KoXmlWriter* manifestWri
     stylesWriter->addAttribute("xmlns:of", "urn:oasis:names:tc:opendocument:xmlns:of:1.2");
     stylesWriter->addAttribute("office:version", "1.2");
 
-    mainStyles->saveOdfStyles(KoGenStyles::MasterStyles, stylesWriter);
-    mainStyles->saveOdfStyles(KoGenStyles::DocumentStyles, stylesWriter); // office:style
-    mainStyles->saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, stylesWriter); // office:automatic-styles
+    mainStyles->saveOdfStyles(KOdfGenericStyles::MasterStyles, stylesWriter);
+    mainStyles->saveOdfStyles(KOdfGenericStyles::DocumentStyles, stylesWriter); // office:style
+    mainStyles->saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, stylesWriter); // office:automatic-styles
 
     stylesWriter->endElement();  // office:document-styles
     stylesWriter->endDocument();
@@ -672,7 +672,7 @@ void ExcelImport::Private::processWorkbookForStyle(Workbook* workbook, KoXmlWrit
     buf.setData("", 0);
 
     pageLayoutStyle.addProperty("1header-footer-style", pageLyt, KOdfGenericStyle::StyleChildElement);
-    pageLayoutStyleName = mainStyles->insert(pageLayoutStyle, pageLayoutStyleName, KoGenStyles::DontAddNumberToName);
+    pageLayoutStyleName = mainStyles->insert(pageLayoutStyle, pageLayoutStyleName, KOdfGenericStyles::DontAddNumberToName);
 
     for (unsigned i = 0; i < workbook->sheetCount(); i++) {
         Sheet* sheet = workbook->sheet(i);
@@ -687,7 +687,7 @@ void ExcelImport::Private::processWorkbookForStyle(Workbook* workbook, KoXmlWrit
         masterStyle.addChildElement(childElementName, contentElement);
         masterStyle.addAttribute("style:page-layout-name", pageLayoutStyleName);
 
-        masterStyleName = mainStyles->insert(masterStyle, masterStyleName, KoGenStyles::DontAddNumberToName);
+        masterStyleName = mainStyles->insert(masterStyle, masterStyleName, KOdfGenericStyles::DontAddNumberToName);
         masterStyle.addAttribute("style:name", masterStyleName);
     }
 }

@@ -74,7 +74,7 @@ bool KoTextOdfSaveHelper::writeBody()
     return true;
 }
 
-KoShapeSavingContext * KoTextOdfSaveHelper::context(KoXmlWriter * bodyWriter, KoGenStyles & mainStyles, KoEmbeddedDocumentSaver & embeddedSaver)
+KoShapeSavingContext * KoTextOdfSaveHelper::context(KoXmlWriter * bodyWriter, KOdfGenericStyles & mainStyles, KoEmbeddedDocumentSaver & embeddedSaver)
 {
 //    Q_ASSERT(d->context == 0);
 

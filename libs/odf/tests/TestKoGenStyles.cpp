@@ -22,7 +22,7 @@
 
 #include "TestKoGenStyles.h"
 
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoXmlWriter.h>
 #include <KDebug>
 #include <QList>
@@ -55,7 +55,7 @@
 void TestKoGenStyles::testLookup()
 {
     kDebug() ;
-    KoGenStyles coll;
+    KOdfGenericStyles coll;
 
     QMap<QString, QString> map1;
     map1.insert("map1key", "map1value");
@@ -118,7 +118,7 @@ void TestKoGenStyles::testLookup()
     KOdfGenericStyle user(KOdfGenericStyle::ParagraphStyle, "paragraph");   // differs from third since it doesn't inherit second, and has a different type
     user.addProperty("style:margin-left", "1.249cm");
 
-    QString userStyleName = coll.insert(user, "User", KoGenStyles::DontAddNumberToName);
+    QString userStyleName = coll.insert(user, "User", KOdfGenericStyles::DontAddNumberToName);
     kDebug() << "The user style got assigned the name" << userStyleName;
     QCOMPARE(userStyleName, QString("User"));
 
@@ -150,9 +150,9 @@ void TestKoGenStyles::testLookup()
     QCOMPARE(coll.styles(KOdfGenericStyle::ParagraphAutoStyle).count(), 2);
     QCOMPARE(coll.styles(KOdfGenericStyle::ParagraphStyle).count(), 1);
 
-    QList<KoGenStyles::NamedStyle> stylesXmlStyles = coll.stylesForStylesXml(KOdfGenericStyle::ParagraphAutoStyle);
+    QList<KOdfGenericStyles::NamedStyle> stylesXmlStyles = coll.stylesForStylesXml(KOdfGenericStyle::ParagraphAutoStyle);
     QCOMPARE(stylesXmlStyles.count(), 1);
-    KoGenStyles::NamedStyle firstStyle = stylesXmlStyles.first();
+    KOdfGenericStyles::NamedStyle firstStyle = stylesXmlStyles.first();
     QCOMPARE(firstStyle.name, headerStyleName);
 
     // XML for first/second style
@@ -176,22 +176,22 @@ void TestKoGenStyles::testLookup()
 
     coll.markStyleForStylesXml(firstName);
     {
-        QList<KoGenStyles::NamedStyle> stylesXmlStyles = coll.stylesForStylesXml(KOdfGenericStyle::ParagraphAutoStyle);
+        QList<KOdfGenericStyles::NamedStyle> stylesXmlStyles = coll.stylesForStylesXml(KOdfGenericStyle::ParagraphAutoStyle);
         QCOMPARE(stylesXmlStyles.count(), 2);
-        QList<KoGenStyles::NamedStyle> contentXmlStyles = coll.styles(KOdfGenericStyle::ParagraphAutoStyle);
+        QList<KOdfGenericStyles::NamedStyle> contentXmlStyles = coll.styles(KOdfGenericStyle::ParagraphAutoStyle);
         QCOMPARE(contentXmlStyles.count(), 1);
     }
 }
 
 void TestKoGenStyles::testLookupFlags()
 {
-    KoGenStyles coll;
+    KOdfGenericStyles coll;
 
     KOdfGenericStyle first(KOdfGenericStyle::ParagraphAutoStyle, "paragraph");
     first.addAttribute("style:master-page-name", "Standard");
     first.addProperty("style:page-number", "0");
 
-    QString styleName = coll.insert(first, "P", KoGenStyles::DontAddNumberToName);
+    QString styleName = coll.insert(first, "P", KOdfGenericStyles::DontAddNumberToName);
     QCOMPARE(styleName, QString("P"));
 
     styleName = coll.insert(first, "P");
@@ -203,20 +203,20 @@ void TestKoGenStyles::testLookupFlags()
     styleName = coll.insert(second, "P");
     QCOMPARE(styleName, QString("P1"));
 
-    styleName = coll.insert(second, "P", KoGenStyles::AllowDuplicates);
+    styleName = coll.insert(second, "P", KOdfGenericStyles::AllowDuplicates);
     QCOMPARE(styleName, QString("P2"));
 
-    styleName = coll.insert(second, "P", KoGenStyles::AllowDuplicates);
+    styleName = coll.insert(second, "P", KOdfGenericStyles::AllowDuplicates);
     QCOMPARE(styleName, QString("P3"));
 
-    styleName = coll.insert(second, "P", KoGenStyles::AllowDuplicates | KoGenStyles::DontAddNumberToName);
+    styleName = coll.insert(second, "P", KOdfGenericStyles::AllowDuplicates | KOdfGenericStyles::DontAddNumberToName);
     QCOMPARE(styleName, QString("P4"));
 }
 
 void TestKoGenStyles::testWriteStyle()
 {
     kDebug();
-    KoGenStyles coll;
+    KOdfGenericStyles coll;
 
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
@@ -264,7 +264,7 @@ void TestKoGenStyles::testDefaultStyle()
      *
      * Also checks how the default style gets written out to XML.
      */
-    KoGenStyles coll;
+    KOdfGenericStyles coll;
 
     KOdfGenericStyle defaultStyle(KOdfGenericStyle::ParagraphStyle, "paragraph");
     defaultStyle.addAttribute("style:master-page-name", "Standard");
@@ -291,7 +291,7 @@ void TestKoGenStyles::testDefaultStyle()
 
     // The kspread case: not writing out all properties, only if they differ
     // from the default style.
-    // KoGenStyles doesn't fetch info from the parent style when testing
+    // KOdfGenericStyles doesn't fetch info from the parent style when testing
     // for equality, so KCells uses isEmpty() to check for equality-to-parent.
     KOdfGenericStyle dataStyle(KOdfGenericStyle::ParagraphStyle, "paragraph", defaultStyleName);
     QVERIFY(dataStyle.isEmpty());
@@ -304,13 +304,13 @@ void TestKoGenStyles:: testUserStyles()
     /* Two user styles with exactly the same attributes+properties will not get merged, since
      * they don't have exactly the same attributes after all: the display-name obviously differs :)
      */
-    KoGenStyles coll;
+    KOdfGenericStyles coll;
 
     KOdfGenericStyle user1(KOdfGenericStyle::ParagraphStyle, "paragraph");
     user1.addAttribute("style:display-name", "User 1");
     user1.addProperty("myfont", "isBold");
 
-    QString user1StyleName = coll.insert(user1, "User1", KoGenStyles::DontAddNumberToName);
+    QString user1StyleName = coll.insert(user1, "User1", KOdfGenericStyles::DontAddNumberToName);
     kDebug() << "The user style got assigned the name" << user1StyleName;
     QCOMPARE(user1StyleName, QString("User1"));
 
@@ -318,7 +318,7 @@ void TestKoGenStyles:: testUserStyles()
     user2.addAttribute("style:display-name", "User 2");
     user2.addProperty("myfont", "isBold");
 
-    QString user2StyleName = coll.insert(user2, "User2", KoGenStyles::DontAddNumberToName);
+    QString user2StyleName = coll.insert(user2, "User2", KOdfGenericStyles::DontAddNumberToName);
     kDebug() << "The user style got assigned the name" << user2StyleName;
     QCOMPARE(user2StyleName, QString("User2"));
 
@@ -356,7 +356,7 @@ void TestKoGenStyles:: testUserStyles()
 void TestKoGenStyles::testStylesDotXml()
 {
     kDebug() ;
-    KoGenStyles coll;
+    KOdfGenericStyles coll;
 
     // Check that an autostyle-in-style.xml and an autostyle-in-content.xml
     // don't get the same name. It confuses KOdfGenericStyle's named-based maps.

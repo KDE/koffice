@@ -31,7 +31,7 @@
 
 class KoShape;
 class KoXmlWriter;
-class KoGenStyles;
+class KOdfGenericStyles;
 class KoDataCenterBase;
 class KoEmbeddedDocumentSaver;
 class KoImageData;
@@ -77,7 +77,7 @@ public:
      * @param mainStyles for saving the styles
      * @param embeddedSaver for saving embedded documents
      */
-    KoShapeSavingContext(KoXmlWriter &xmlWriter, KoGenStyles &mainStyles,
+    KoShapeSavingContext(KoXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
                          KoEmbeddedDocumentSaver &embeddedSaver);
     virtual ~KoShapeSavingContext();
 
@@ -103,7 +103,7 @@ public:
      *
      * @return main styles
      */
-    KoGenStyles &mainStyles();
+    KOdfGenericStyles &mainStyles();
 
     /**
      * @brief Get the embedded document saver

@@ -27,14 +27,14 @@
 #include <KOdfFontData.h>
 #include <MsooXmlReader.h>
 
-class KoGenStyles;
+class KOdfGenericStyles;
 
 //! A context structure for DocxXmlFontTableReader
 class DocxXmlFontTableReaderContext : public MSOOXML::MsooXmlReaderContext
 {
 public:
-    DocxXmlFontTableReaderContext(KoGenStyles& _styles);
-    KoGenStyles* styles;
+    DocxXmlFontTableReaderContext(KOdfGenericStyles& _styles);
+    KOdfGenericStyles* styles;
 };
 
 //! A class reading MSOOXML DOCX markup - fontTable.xml part.
@@ -50,7 +50,7 @@ public:
 
     virtual ~DocxXmlFontTableReader();
 
-    //! Reads/parses the file. The output goes mainly to KoGenStyles* KoOdfWriters::mainStyles
+    //! Reads/parses the file. The output goes mainly to KOdfGenericStyles* KoOdfWriters::mainStyles
     virtual KoFilter::ConversionStatus read(MSOOXML::MsooXmlReaderContext* context = 0);
 
 protected:

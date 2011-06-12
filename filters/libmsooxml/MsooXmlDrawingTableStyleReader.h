@@ -23,7 +23,7 @@
 #include <MsooXmlCommonReader.h>
 #include <MsooXmlThemesReader.h>
 
-class KoGenStyles;
+class KOdfGenericStyles;
 
 #include <QPen>
 #include <QString>
@@ -117,7 +117,7 @@ public:
     * of this styleProperties
     * @return the name of the saved style
     */
-    QString saveStyle(KoGenStyles& styles);
+    QString saveStyle(KOdfGenericStyles& styles);
 
     static Type typeFromString(const QString& string);
     static QString stringFromType(Type type);

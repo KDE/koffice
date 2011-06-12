@@ -26,7 +26,7 @@
 
 class KoXmlWriter;
 class KoStore;
-class KoGenStyles;
+class KOdfGenericStyles;
 
 /**
  * @brief Convenience structure encapsulating XML writers used when writing ODF document.
@@ -40,7 +40,7 @@ struct MSOOXML_EXPORT KoOdfWriters {
     KoXmlWriter *body;
     KoXmlWriter *meta;
     KoXmlWriter *manifest;
-    KoGenStyles *mainStyles;
+    KOdfGenericStyles *mainStyles;
 };
 
 /**

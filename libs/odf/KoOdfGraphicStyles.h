@@ -32,7 +32,7 @@ class QString;
 class QSizeF;
 
 class KOdfGenericStyle;
-class KoGenStyles;
+class KOdfGenericStyles;
 class KoStyleStack;
 
 class KoOdfStylesReader;
@@ -40,14 +40,14 @@ class KoOdfLoadingContext;
 
 namespace KoOdfGraphicStyles
 {
-    KOODF_EXPORT void saveOdfFillStyle(KOdfGenericStyle &styleFill, KoGenStyles& mainStyles, const QBrush &brush);
+    KOODF_EXPORT void saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush &brush);
 
-    KOODF_EXPORT void saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KoGenStyles &mainStyles, const QPen &pen);
+    KOODF_EXPORT void saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KOdfGenericStyles &mainStyles, const QPen &pen);
 
-    KOODF_EXPORT QString saveOdfHatchStyle(KoGenStyles &mainStyles, const QBrush &brush);
+    KOODF_EXPORT QString saveOdfHatchStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
 
     /// Saves gradient style of brush into mainStyles and returns the styles name
-    KOODF_EXPORT QString saveOdfGradientStyle(KoGenStyles &mainStyles, const QBrush &brush);
+    KOODF_EXPORT QString saveOdfGradientStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
 
     /// Loads gradient style from style stack and stylesReader adapted to the given size and returns a brush
     KOODF_EXPORT QBrush loadOdfGradientStyle(const KoStyleStack &styleStack, const KoOdfStylesReader &stylesReader, const QSizeF &size);

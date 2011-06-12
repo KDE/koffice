@@ -37,7 +37,7 @@
 #include "KCValueConverter.h"
 #include "KCValueParser.h"
 
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>

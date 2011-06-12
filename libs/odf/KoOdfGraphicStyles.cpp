@@ -28,7 +28,7 @@
 #include <kdebug.h>
 
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoStore.h>
 #include <KoStoreDevice.h>
 #include <KoStyleStack.h>
@@ -39,7 +39,7 @@
 #include "KoOdfLoadingContext.h"
 #include "KoOdfStylesReader.h"
 
-void KoOdfGraphicStyles::saveOdfFillStyle(KOdfGenericStyle &styleFill, KoGenStyles& mainStyles, const QBrush & brush)
+void KoOdfGraphicStyles::saveOdfFillStyle(KOdfGenericStyle &styleFill, KOdfGenericStyles& mainStyles, const QBrush & brush)
 {
     switch (brush.style()) {
     case Qt::Dense1Pattern:
@@ -105,7 +105,7 @@ void KoOdfGraphicStyles::saveOdfFillStyle(KOdfGenericStyle &styleFill, KoGenStyl
     }
 }
 
-void KoOdfGraphicStyles::saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KoGenStyles &mainStyles, const QPen &pen)
+void KoOdfGraphicStyles::saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KOdfGenericStyles &mainStyles, const QPen &pen)
 {
     // TODO implement all possibilities
     switch (pen.style()) {
@@ -160,7 +160,7 @@ void KoOdfGraphicStyles::saveOdfStrokeStyle(KOdfGenericStyle &styleStroke, KoGen
     }
 }
 
-QString KoOdfGraphicStyles::saveOdfHatchStyle(KoGenStyles& mainStyles, const QBrush &brush)
+QString KoOdfGraphicStyles::saveOdfHatchStyle(KOdfGenericStyles& mainStyles, const QBrush &brush)
 {
     KOdfGenericStyle hatchStyle(KOdfGenericStyle::HatchStyle /*no family name*/);
     hatchStyle.addAttribute("draw:color", brush.color().name());
@@ -197,7 +197,7 @@ QString KoOdfGraphicStyles::saveOdfHatchStyle(KoGenStyles& mainStyles, const QBr
     return mainStyles.insert(hatchStyle, "hatch");
 }
 
-QString KoOdfGraphicStyles::saveOdfGradientStyle(KoGenStyles &mainStyles, const QBrush &brush)
+QString KoOdfGraphicStyles::saveOdfGradientStyle(KOdfGenericStyles &mainStyles, const QBrush &brush)
 {
     KOdfGenericStyle gradientStyle;
     if (brush.style() == Qt::RadialGradientPattern) {

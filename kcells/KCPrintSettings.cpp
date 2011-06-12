@@ -336,7 +336,7 @@ void KCPrintSettings::setRepeatedRows(const QPair<int, int>& repeatedRows)
     d->repeatedRows = repeatedRows;
 }
 
-QString KCPrintSettings::saveOdfPageLayout(KoGenStyles &mainStyles,
+QString KCPrintSettings::saveOdfPageLayout(KOdfGenericStyles &mainStyles,
         bool formulas, bool zeros)
 {
     // Create a page layout style.

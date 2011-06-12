@@ -24,7 +24,7 @@
 #include "KoImageCollection.h"
 #include <KoStyleStack.h>
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoXmlNS.h>
 #include <KoOdfLoadingContext.h>
 #include <KoOdfGraphicStyles.h>

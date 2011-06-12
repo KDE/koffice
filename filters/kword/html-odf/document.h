@@ -35,7 +35,7 @@
 #include <QDomElement>
 
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoStore.h>
 
 class KoStoreDevice;
@@ -113,7 +113,7 @@ private:
 
     // Helpers to generate the various parts of an ODF file.
     KoXmlWriter* m_bodyWriter;      //for writing to the body of content.xml
-    KoGenStyles* m_mainStyles;      //for collecting styles
+    KOdfGenericStyles* m_mainStyles;      //for collecting styles
     KoXmlWriter* m_metaWriter;      //for writing to meta.xml
     KoXmlWriter* m_headerWriter;    //for header/footer writing in styles.xml
 

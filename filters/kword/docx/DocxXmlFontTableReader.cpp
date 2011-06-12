@@ -25,7 +25,7 @@
 #include <MsooXmlSchemas.h>
 #include <MsooXmlUtils.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 
 #define MSOOXML_CURRENT_NS "w"
 #define BIND_READ_CLASS MSOOXML::MsooXmlStylesReader
@@ -33,7 +33,7 @@
 
 #include <MsooXmlReader_p.h>
 
-DocxXmlFontTableReaderContext::DocxXmlFontTableReaderContext(KoGenStyles& _styles)
+DocxXmlFontTableReaderContext::DocxXmlFontTableReaderContext(KOdfGenericStyles& _styles)
         : styles(&_styles)
 {
 }

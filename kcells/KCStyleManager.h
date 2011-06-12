@@ -29,7 +29,7 @@ class QDomElement;
 class QDomDocument;
 class QStringList;
 
-class KoGenStyles;
+class KOdfGenericStyles;
 class KoOdfStylesReader;
 
 class KCConditions;
@@ -55,7 +55,7 @@ public:
     QDomElement save(QDomDocument & doc);
     bool loadXML(KoXmlElement const & styles);
 
-    void saveOdf(KoGenStyles &mainStyles);
+    void saveOdf(KOdfGenericStyles &mainStyles);
     void loadOdfStyleTemplate(KoOdfStylesReader& stylesReader, KCMap* map = 0);
 
     KCCustomStyle * defaultStyle() const {

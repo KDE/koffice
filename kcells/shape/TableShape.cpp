@@ -215,13 +215,13 @@ void TableShape::saveOdf(KoShapeSavingContext & context) const
     KOdfGenericStyle defaultColumnStyle(KOdfGenericStyle::TableColumnStyle, "table-column");
     defaultColumnStyle.addPropertyPt("style:column-width", map->defaultColumnFormat()->width());
     defaultColumnStyle.setDefaultStyle(true);
-    context.mainStyles().insert(defaultColumnStyle, "Default", KoGenStyles::DontAddNumberToName);
+    context.mainStyles().insert(defaultColumnStyle, "Default", KOdfGenericStyles::DontAddNumberToName);
 
     // Saving the default row style
     KOdfGenericStyle defaultRowStyle(KOdfGenericStyle::TableRowStyle, "table-row");
     defaultRowStyle.addPropertyPt("style:row-height", map->defaultRowFormat()->height());
     defaultRowStyle.setDefaultStyle(true);
-    context.mainStyles().insert(defaultRowStyle, "Default", KoGenStyles::DontAddNumberToName);
+    context.mainStyles().insert(defaultRowStyle, "Default", KOdfGenericStyles::DontAddNumberToName);
 
     KCOdfSavingContext tableContext(context);
     sheet()->saveOdf(tableContext);

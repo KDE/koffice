@@ -25,7 +25,7 @@
 #include <MsooXmlSchemas.h>
 #include <MsooXmlUtils.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <limits.h>
 #include <MsooXmlUnits.h>
 
@@ -380,7 +380,7 @@ KoFilter::ConversionStatus DocxXmlNumberingReader::read_num()
 
     if (!numId.isEmpty()) {
         QString name = "NumStyle" + numId;
-        KoGenStyles::InsertionFlags insertionFlags = KoGenStyles::DontAddNumberToName | KoGenStyles::AllowDuplicates;
+        KOdfGenericStyles::InsertionFlags insertionFlags = KOdfGenericStyles::DontAddNumberToName | KOdfGenericStyles::AllowDuplicates;
         mainStyles->insert(m_currentListStyle, name, insertionFlags);
     }
 

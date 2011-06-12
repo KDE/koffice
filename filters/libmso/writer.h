@@ -22,7 +22,7 @@
 
 #include <QtCore/QRectF>
 
-#include "KoGenStyles.h"
+#include "KOdfGenericStyles.h"
 
 /**
  * Helper class that for writing xml.
@@ -46,7 +46,7 @@ public:
     /**
      * Styles for the document that is being created.
      **/
-    KoGenStyles& styles;
+    KOdfGenericStyles& styles;
     /**
      * Tells if the current output is for styles.xml or content.xml
      **/
@@ -57,7 +57,7 @@ public:
      *
      * @param xmlWriter The xml writer that writes content.xml
      */
-    Writer(KoXmlWriter& xmlWriter, KoGenStyles& kostyles,
+    Writer(KoXmlWriter& xmlWriter, KOdfGenericStyles& kostyles,
            bool stylexml = false);
     /**
      * Create a new writer with a new coordinate system.

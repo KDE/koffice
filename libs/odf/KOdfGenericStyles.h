@@ -37,7 +37,7 @@ class KOdfFontData;
 /**
  * @brief Repository of styles used during saving ODF documents.
  *
- * Each instance of KoGenStyles is a collection of styles whose names
+ * Each instance of KOdfGenericStyles is a collection of styles whose names
  * are in the same "namespace".
  * This means there should be one instance for all styles in &lt;office:styles&gt;,
  * and &lt;office:automatic-styles&gt;, another instance for number formats, another
@@ -51,18 +51,18 @@ class KOdfFontData;
  * get the same object. Here it means rather you get the same name for the style,
  * and it will get saved only once to the file.
  *
- * KoGenStyles features sharing, creation on demand, and name generation.
+ * KOdfGenericStyles features sharing, creation on demand, and name generation.
  * Since this is used for saving only, it doesn't feature refcounting, nor
  * removal of individual styles.
  *
- * @note The use of KoGenStyles isn't mandatory, of course. If the application
+ * @note The use of KOdfGenericStyles isn't mandatory, of course. If the application
  * is already designed with user and automatic styles in mind for a given
  * set of properties, it can go ahead and save all styles directly (after
  * ensuring they have unique names).
  *
  * @author David Faure <faure@kde.org>
  */
-class KOODF_EXPORT KoGenStyles
+class KOODF_EXPORT KOdfGenericStyles
 {
 public:
     /// Single style with assigned name
@@ -73,8 +73,8 @@ public:
 
     typedef QMultiMap<KOdfGenericStyle, QString> StyleMap;
 
-    KoGenStyles();
-    ~KoGenStyles();
+    KOdfGenericStyles();
+    ~KOdfGenericStyles();
 
     /**
      * Those are flags for the insert() call.
@@ -124,7 +124,7 @@ public:
      * @param type the style type, see the KOdfGenericStyle constructor
      * @see insert()
      */
-    QList<KoGenStyles::NamedStyle> styles(KOdfGenericStyle::Type type) const;
+    QList<KOdfGenericStyles::NamedStyle> styles(KOdfGenericStyle::Type type) const;
 
     /**
      * Return styles of a given type, marked for styles.xml,
@@ -133,7 +133,7 @@ public:
      * @param type the style type, see the KOdfGenericStyle constructor
      * @see insert()
      */
-    QList<KoGenStyles::NamedStyle> stylesForStylesXml(KOdfGenericStyle::Type type) const;
+    QList<KOdfGenericStyles::NamedStyle> stylesForStylesXml(KOdfGenericStyle::Type type) const;
 
     /**
      * @return an existing style by name. If no such style exists, 0 is returned.
@@ -255,15 +255,15 @@ public:
     void insertStyleRelation(const QString &source, const QString &target, const char *tagName);
 
 private:
-    friend KOODF_EXPORT QDebug operator<<(QDebug dbg, const KoGenStyles& styles);
+    friend KOODF_EXPORT QDebug operator<<(QDebug dbg, const KOdfGenericStyles& styles);
 
     class Private;
     Private * const d;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(KoGenStyles::InsertionFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KOdfGenericStyles::InsertionFlags)
 
 //! Debug stream operator.
-KOODF_EXPORT QDebug operator<<(QDebug dbg, const KoGenStyles& styles);
+KOODF_EXPORT QDebug operator<<(QDebug dbg, const KOdfGenericStyles& styles);
 
 #endif /* KOGENSTYLES_H */

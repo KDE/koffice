@@ -29,7 +29,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoGlobal.h>
 #include <KoOdfStylesReader.h>
 #include <KoOdfGraphicStyles.h>
@@ -724,7 +724,7 @@ KCFormat::Type KCStyle::fractionType(const QString &_format)
         return KCFormat::fraction_three_digits;
 }
 
-QString KCStyle::saveOdfStyleNumeric(KOdfGenericStyle &style, KoGenStyles &mainStyles,
+QString KCStyle::saveOdfStyleNumeric(KOdfGenericStyle &style, KOdfGenericStyles &mainStyles,
                                    KCFormat::Type _style,
                                    const QString &_prefix, const QString &_postfix,
                                    int _precision, const QString& symbol)
@@ -841,7 +841,7 @@ QString KCStyle::saveOdfStyleNumeric(KOdfGenericStyle &style, KoGenStyles &mainS
     return styleName;
 }
 
-QString KCStyle::saveOdfStyleNumericNumber(KoGenStyles& mainStyles, KCFormat::Type /*_style*/, int _precision,
+QString KCStyle::saveOdfStyleNumericNumber(KOdfGenericStyles& mainStyles, KCFormat::Type /*_style*/, int _precision,
         const QString& _prefix, const QString& _postfix)
 {
     QString format;
@@ -857,13 +857,13 @@ QString KCStyle::saveOdfStyleNumericNumber(KoGenStyles& mainStyles, KCFormat::Ty
     return KoOdfNumberStyles::saveOdfNumberStyle(mainStyles, format, _prefix, _postfix);
 }
 
-QString KCStyle::saveOdfStyleNumericText(KoGenStyles& /*mainStyles*/, KCFormat::Type /*_style*/, int /*_precision*/,
+QString KCStyle::saveOdfStyleNumericText(KOdfGenericStyles& /*mainStyles*/, KCFormat::Type /*_style*/, int /*_precision*/,
                                        const QString& /*_prefix*/, const QString& /*_postfix*/)
 {
     return "";
 }
 
-QString KCStyle::saveOdfStyleNumericMoney(KoGenStyles& mainStyles, KCFormat::Type /*_style*/,
+QString KCStyle::saveOdfStyleNumericMoney(KOdfGenericStyles& mainStyles, KCFormat::Type /*_style*/,
                                         const QString& symbol, int _precision,
                                         const QString& _prefix, const QString& _postfix)
 {
@@ -880,7 +880,7 @@ QString KCStyle::saveOdfStyleNumericMoney(KoGenStyles& mainStyles, KCFormat::Typ
     return KoOdfNumberStyles::saveOdfCurrencyStyle(mainStyles, format, symbol, _prefix, _postfix);
 }
 
-QString KCStyle::saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, KCFormat::Type /*_style*/, int _precision,
+QString KCStyle::saveOdfStyleNumericPercentage(KOdfGenericStyles&mainStyles, KCFormat::Type /*_style*/, int _precision,
         const QString& _prefix, const QString& _postfix)
 {
     //<number:percentage-style style:name="N106" style:family="data-style">
@@ -902,7 +902,7 @@ QString KCStyle::saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, KCFormat:
 }
 
 
-QString KCStyle::saveOdfStyleNumericScientific(KoGenStyles&mainStyles, KCFormat::Type /*_style*/,
+QString KCStyle::saveOdfStyleNumericScientific(KOdfGenericStyles&mainStyles, KCFormat::Type /*_style*/,
         const QString &_prefix, const QString &_suffix, int _precision)
 {
     //<number:number-style style:name="N60" style:family="data-style">
@@ -921,7 +921,7 @@ QString KCStyle::saveOdfStyleNumericScientific(KoGenStyles&mainStyles, KCFormat:
     return KoOdfNumberStyles::saveOdfScientificStyle(mainStyles, format, _prefix, _suffix);
 }
 
-QString KCStyle::saveOdfStyleNumericDate(KoGenStyles&mainStyles, KCFormat::Type _style,
+QString KCStyle::saveOdfStyleNumericDate(KOdfGenericStyles&mainStyles, KCFormat::Type _style,
                                        const QString& _prefix, const QString& _postfix)
 {
     QString format;
@@ -1048,7 +1048,7 @@ QString KCStyle::saveOdfStyleNumericDate(KoGenStyles&mainStyles, KCFormat::Type 
     return KoOdfNumberStyles::saveOdfDateStyle(mainStyles, format, locale, _prefix, _postfix);
 }
 
-QString KCStyle::saveOdfStyleNumericCustom(KoGenStyles& /*mainStyles*/, KCFormat::Type /*_style*/,
+QString KCStyle::saveOdfStyleNumericCustom(KOdfGenericStyles& /*mainStyles*/, KCFormat::Type /*_style*/,
         const QString& /*_prefix*/, const QString& /*_postfix*/)
 {
     //TODO
@@ -1068,7 +1068,7 @@ QString KCStyle::saveOdfStyleNumericCustom(KoGenStyles& /*mainStyles*/, KCFormat
     return "";
 }
 
-QString KCStyle::saveOdfStyleNumericTime(KoGenStyles& mainStyles, KCFormat::Type _style,
+QString KCStyle::saveOdfStyleNumericTime(KOdfGenericStyles& mainStyles, KCFormat::Type _style,
                                        const QString& _prefix, const QString& _postfix)
 {
     //<number:time-style style:name="N42" style:family="data-style">
@@ -1121,7 +1121,7 @@ QString KCStyle::saveOdfStyleNumericTime(KoGenStyles& mainStyles, KCFormat::Type
 }
 
 
-QString KCStyle::saveOdfStyleNumericFraction(KoGenStyles &mainStyles, KCFormat::Type formatType,
+QString KCStyle::saveOdfStyleNumericFraction(KOdfGenericStyles &mainStyles, KCFormat::Type formatType,
         const QString &_prefix, const QString &_suffix)
 {
     //<number:number-style style:name="N71" style:family="data-style">
@@ -1164,7 +1164,7 @@ QString KCStyle::saveOdfStyleNumericFraction(KoGenStyles &mainStyles, KCFormat::
     return KoOdfNumberStyles::saveOdfFractionStyle(mainStyles, format, _prefix, _suffix);
 }
 
-QString KCStyle::saveOdf(KOdfGenericStyle& style, KoGenStyles& mainStyles,
+QString KCStyle::saveOdf(KOdfGenericStyle& style, KOdfGenericStyles& mainStyles,
                        const KCStyleManager* manager) const
 {
     // list of substyles to store
@@ -1175,7 +1175,7 @@ QString KCStyle::saveOdf(KOdfGenericStyle& style, KoGenStyles& mainStyles,
             style = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");
             style.setDefaultStyle(true);
             // don't i18n'ize "Default" in this case
-            return "Default"; // mainStyles.insert( style, "Default", KoGenStyles::DontAddNumberToName );
+            return "Default"; // mainStyles.insert( style, "Default", KOdfGenericStyles::DontAddNumberToName );
         }
         // no attributes to store here
         return mainStyles.insert(style, "ce");
@@ -1205,7 +1205,7 @@ QString KCStyle::saveOdf(KOdfGenericStyle& style, KoGenStyles& mainStyles,
 }
 
 void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KOdfGenericStyle &style,
-                         KoGenStyles &mainStyles, const KCStyleManager* manager) const
+                         KOdfGenericStyles &mainStyles, const KCStyleManager* manager) const
 {
 #ifndef NDEBUG
     //if (type() == BUILTIN )
@@ -1435,7 +1435,7 @@ void KCStyle::saveOdfStyle(const QSet<Key>& keysToStore, KOdfGenericStyle &style
         style.addAttribute("style:data-style-name", numericStyle);
 }
 
-QString KCStyle::saveOdfBackgroundStyle(KoGenStyles &mainStyles, const QBrush &brush)
+QString KCStyle::saveOdfBackgroundStyle(KOdfGenericStyles &mainStyles, const QBrush &brush)
 {
     KOdfGenericStyle styleobjectauto = KOdfGenericStyle(KOdfGenericStyle::GraphicAutoStyle, "graphic");
     KoOdfGraphicStyles::saveOdfFillStyle(styleobjectauto, mainStyles, brush);
@@ -2728,7 +2728,7 @@ void KCCustomStyle::setName(QString const & name)
     d->name = name;
 }
 
-QString KCCustomStyle::saveOdf(KOdfGenericStyle& style, KoGenStyles &mainStyles,
+QString KCCustomStyle::saveOdf(KOdfGenericStyle& style, KOdfGenericStyles &mainStyles,
                              const KCStyleManager* manager) const
 {
     Q_ASSERT(!name().isEmpty());
@@ -2745,7 +2745,7 @@ QString KCCustomStyle::saveOdf(KOdfGenericStyle& style, KoGenStyles &mainStyles,
     if (isDefault()) {
         style.setDefaultStyle(true);
         // don't i18n'ize "Default" in this case
-        return mainStyles.insert(style, "Default", KoGenStyles::DontAddNumberToName);
+        return mainStyles.insert(style, "Default", KOdfGenericStyles::DontAddNumberToName);
     }
 
     // this is a custom style

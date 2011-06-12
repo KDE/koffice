@@ -29,7 +29,7 @@
 #include <kdebug.h>
 
 #include <KoStore.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KOdfGenericChanges.h>
 #include <KoOdfWriteStore.h>
 #include <KoXmlWriter.h>
@@ -83,7 +83,7 @@ bool KoTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
         return false;
     }
 
-    KoGenStyles mainStyles;
+    KOdfGenericStyles mainStyles;
     KoXmlWriter *bodyWriter = odfStore.bodyWriter();
     KoShapeSavingContext * context = helper.context(bodyWriter, mainStyles, embeddedSaver);
     KOdfGenericChanges changes;
@@ -111,7 +111,7 @@ bool KoTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
         return false;
     }
 
-    mainStyles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, contentWriter);
+    mainStyles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, contentWriter);
     changes.saveOdfChanges(contentWriter);
 
     odfStore.closeContentWriter();

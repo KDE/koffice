@@ -31,7 +31,7 @@
 class KWDocument;
 class KoOdfWriteStore;
 class KoEmbeddedDocumentSaver;
-class KoGenStyles;
+class KOdfGenericStyles;
 class KWTextFrameSet;
 class KWPage;
 
@@ -63,8 +63,8 @@ public:
     bool save(KoOdfWriteStore &odfStore, KoEmbeddedDocumentSaver &embeddedSaver);
 
 private:
-    QByteArray serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGenStyles &mainStyles, KOdfGenericChanges &changes, KWTextFrameSet* fs);
-    void saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KoGenStyles &mainStyles, KOdfGenericChanges &changes);
+    QByteArray serializeHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KOdfGenericStyles &mainStyles, KOdfGenericChanges &changes, KWTextFrameSet* fs);
+    void saveHeaderFooter(KoEmbeddedDocumentSaver &embeddedSaver, KOdfGenericStyles &mainStyles, KOdfGenericChanges &changes);
 
     void calculateZindexOffsets();
     void addShapeToTree(KoShape *shape);

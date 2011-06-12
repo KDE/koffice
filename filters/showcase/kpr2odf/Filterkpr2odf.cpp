@@ -132,7 +132,7 @@ KoFilter::ConversionStatus Filterkpr2odf::convert(const QByteArray& from, const 
     KoXmlWriter *content = odfWriter.contentWriter();
     KoXmlWriter *body = odfWriter.bodyWriter();
     convertContent(body);
-    m_styles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, content);
+    m_styles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, content);
     odfWriter.closeContentWriter();
     manifest->addManifestEntry("content.xml", "text/xml");
 

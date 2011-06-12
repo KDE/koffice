@@ -23,7 +23,7 @@
 #include "NumberFormatParser.h"
 
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoXmlWriter.h>
 
 #include <MsooXmlUtils.h>
@@ -36,7 +36,7 @@
 #include <QtGui/QColor>
 #include <QtGui/QPalette>
 
-KoGenStyles* NumberFormatParser::styles = 0;
+KOdfGenericStyles* NumberFormatParser::styles = 0;
 
 QColor NumberFormatParser::color(const QString& name)
 {
@@ -54,7 +54,7 @@ QLocale NumberFormatParser::locale(int langid)
     return MSOOXML::Utils::localeForLangId(langid);
 }
 
-void NumberFormatParser::setStyles(KoGenStyles* styles)
+void NumberFormatParser::setStyles(KOdfGenericStyles* styles)
 {
     NumberFormatParser::styles = styles;
 }

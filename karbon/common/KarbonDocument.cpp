@@ -360,7 +360,7 @@ bool KarbonDocument::saveOdf(KoDocument::SavingContext &documentContext, const K
     if (!contentWriter)
         return false;
 
-    KoGenStyles mainStyles;
+    KOdfGenericStyles mainStyles;
     KoXmlWriter * bodyWriter = documentContext.odfStore.bodyWriter();
 
     KoShapeSavingContext shapeContext(*bodyWriter, mainStyles, documentContext.embeddedSaver);
@@ -372,7 +372,7 @@ bool KarbonDocument::saveOdf(KoDocument::SavingContext &documentContext, const K
     QString layoutName = mainStyles.insert(layout.saveOdf(), "PL");
     KOdfGenericStyle masterPage(KOdfGenericStyle::MasterPageStyle);
     masterPage.addAttribute("style:page-layout-name", layoutName);
-    mainStyles.insert(masterPage, "Default", KoGenStyles::DontAddNumberToName);
+    mainStyles.insert(masterPage, "Default", KOdfGenericStyles::DontAddNumberToName);
 
     bodyWriter->startElement("office:body");
     bodyWriter->startElement("office:drawing");
@@ -382,7 +382,7 @@ bool KarbonDocument::saveOdf(KoDocument::SavingContext &documentContext, const K
     bodyWriter->endElement(); // office:drawing
     bodyWriter->endElement(); // office:body
 
-    mainStyles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, contentWriter);
+    mainStyles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, contentWriter);
 
     documentContext.odfStore.closeContentWriter();
 

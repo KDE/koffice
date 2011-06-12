@@ -32,7 +32,7 @@
 #include <MsooXmlRelationships.h>
 #include <MsooXmlUnits.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoOdfGraphicStyles.h>
 #include <Charting.h>
 #include <ChartExport.h>
@@ -713,7 +713,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_lnNumType()
     temp.endElement(); // text:linenumbering-configuration
 
     QString lineStyle = QString::fromUtf8(buffer.buffer(), buffer.buffer().size());
-    mainStyles->insertRawOdfStyles(KoGenStyles::DocumentStyles, lineStyle.toUtf8());
+    mainStyles->insertRawOdfStyles(KOdfGenericStyles::DocumentStyles, lineStyle.toUtf8());
 
     readNext();
     READ_EPILOGUE
@@ -762,7 +762,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_endnotePr()
     delete body;
     body = oldBody;
 
-    mainStyles->insertRawOdfStyles(KoGenStyles::DocumentStyles, endStyle.toUtf8());
+    mainStyles->insertRawOdfStyles(KOdfGenericStyles::DocumentStyles, endStyle.toUtf8());
 
     READ_EPILOGUE
 }
@@ -812,7 +812,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_footnotePr()
     delete body;
     body = oldBody;
 
-    mainStyles->insertRawOdfStyles(KoGenStyles::DocumentStyles, footStyle.toUtf8());
+    mainStyles->insertRawOdfStyles(KOdfGenericStyles::DocumentStyles, footStyle.toUtf8());
 
     READ_EPILOGUE
 }
@@ -3909,12 +3909,12 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_tbl()
     if (m_createSectionStyle) {
         // This is done to avoid the style to being duplicate to some other style
         m_currentTableStyle.addAttribute("style:master-page-name", "placeholder");
-        currentTableStyleName = mainStyles->insert(m_currentTableStyle, m_currentTableName, KoGenStyles::DontAddNumberToName);
+        currentTableStyleName = mainStyles->insert(m_currentTableStyle, m_currentTableName, KOdfGenericStyles::DontAddNumberToName);
         m_createSectionStyle = false;
         m_currentSectionStyleName = currentTableStyleName;
     }
     else {
-        currentTableStyleName = mainStyles->insert(m_currentTableStyle, m_currentTableName, KoGenStyles::DontAddNumberToName);
+        currentTableStyleName = mainStyles->insert(m_currentTableStyle, m_currentTableName, KOdfGenericStyles::DontAddNumberToName);
     }
     if (m_moveToStylesXml) {
         mainStyles->markStyleForStylesXml(currentTableStyleName);
@@ -3954,7 +3954,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_tbl()
             mainStyles->insert(
                 *columnStyle.style,
                 m_currentTableName + '.' + MSOOXML::Utils::columnName(column),
-                KoGenStyles::DontAddNumberToName)
+                KOdfGenericStyles::DontAddNumberToName)
         );
         if (m_moveToStylesXml) {
             mainStyles->markStyleForStylesXml(columnStyleName);
@@ -4172,7 +4172,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_tr()
         mainStyles->insert(
             m_currentTableRowStyle,
             m_currentTableName + '.' + QString::number(m_currentTableRowNumber + 1),
-            KoGenStyles::DontAddNumberToName)
+            KOdfGenericStyles::DontAddNumberToName)
     );
     if (m_moveToStylesXml) {
         mainStyles->markStyleForStylesXml(tableRowStyleName);
@@ -4410,7 +4410,7 @@ KoFilter::ConversionStatus DocxXmlDocumentReader::read_tc()
             m_currentTableCellStyle,
             m_currentTableName + '.' + MSOOXML::Utils::columnName(m_currentTableColumnNumber)
                 + QString::number(m_currentTableRowNumber + 1),
-            KoGenStyles::DontAddNumberToName)
+            KOdfGenericStyles::DontAddNumberToName)
     );
     if (m_moveToStylesXml) {
         mainStyles->markStyleForStylesXml(tableCellStyleName);

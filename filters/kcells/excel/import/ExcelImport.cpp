@@ -39,7 +39,7 @@
 
 #include <KoXmlWriter.h>
 #include <KoOdfWriteStore.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
 #include <KoOdfNumberStyles.h>
 #include <KoXmlNS.h>
@@ -147,8 +147,8 @@ public:
 
     // for embedded shapes
     KoStore* storeout;
-    KoGenStyles *shapeStyles;
-    KoGenStyles *dataStyles;
+    KOdfGenericStyles *shapeStyles;
+    KOdfGenericStyles *dataStyles;
     KoXmlWriter *shapesXml;
 
     void processMetaData();
@@ -265,8 +265,8 @@ KoFilter::ConversionStatus ExcelImport::convert(const QByteArray& from, const QB
         d->rowsCountTotal += qMin(maximalRowCount, sheet->maxRow());
     }
 
-    d->shapeStyles = new KoGenStyles();
-    d->dataStyles = new KoGenStyles();
+    d->shapeStyles = new KOdfGenericStyles();
+    d->dataStyles = new KOdfGenericStyles();
 
     // convert number formats
     d->processNumberFormats();
@@ -412,7 +412,7 @@ void ExcelImport::Private::processEmbeddedObjects(const KoXmlElement& rootElemen
 {
     // save styles to xml
     KoXmlWriter *stylesXml = beginMemoryXmlWriter("office:styles");
-    shapeStyles->saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, stylesXml);
+    shapeStyles->saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, stylesXml);
 
     KoXmlDocument stylesDoc = endMemoryXmlWriter(stylesXml);
 
@@ -1373,7 +1373,7 @@ void ExcelImport::Private::processNumberFormats()
     }
 
     KoXmlWriter *stylesXml = beginMemoryXmlWriter("office:styles");
-    dataStyles->saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, stylesXml);
+    dataStyles->saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, stylesXml);
 
     KoXmlDocument stylesDoc = endMemoryXmlWriter(stylesXml);
 

@@ -36,7 +36,7 @@
 #include <QHash>
 #include <QMap>
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoStore.h>
 #include <vector>
 
@@ -50,7 +50,7 @@ class DrawStyle;
 class DrawingWriter : public Writer
 {
 public:
-    DrawingWriter(KoXmlWriter& xmlWriter, KoGenStyles& kostyles, bool stylesxml_, bool inlineObj);
+    DrawingWriter(KoXmlWriter& xmlWriter, KOdfGenericStyles& kostyles, bool stylesxml_, bool inlineObj);
 
     //position
     int xLeft;
@@ -92,7 +92,7 @@ class KWordGraphicsHandler : public QObject, public wvWare::GraphicsHandler
     Q_OBJECT
 public:
     KWordGraphicsHandler(Document* doc, KoXmlWriter* bodyWriter, KoXmlWriter* manifestWriter,
-                         KoStore* store, KoGenStyles* mainStyles);
+                         KoStore* store, KOdfGenericStyles* mainStyles);
     ~KWordGraphicsHandler();
 
     /**
@@ -161,7 +161,7 @@ private:
      * Process the default properties for all drawing objects stored in
      * OfficeArtDggContainer.
      */
-    void defineDefaultGraphicStyle(KoGenStyles* mainStyles);
+    void defineDefaultGraphicStyle(KOdfGenericStyles* mainStyles);
 
     /**
      * Process general properties of a shape.
@@ -238,7 +238,7 @@ private:
     KoStore* m_store;
     KoXmlWriter* m_bodyWriter;
     KoXmlWriter* m_manifestWriter;
-    KoGenStyles* m_mainStyles;
+    KOdfGenericStyles* m_mainStyles;
 
     wvWare::Drawings * m_drawings;
     wvWare::Word97::FIB * m_fib;

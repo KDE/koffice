@@ -38,7 +38,7 @@
 #include <QStack>
 
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 
 #include <string>
 #include <vector>
@@ -69,7 +69,7 @@ class KWordTextHandler : public QObject, public wvWare::TextHandler
 {
     Q_OBJECT
 public:
-    KWordTextHandler(wvWare::SharedPtr<wvWare::Parser> parser, KoXmlWriter* bodyWriter, KoGenStyles* mainStyles);
+    KWordTextHandler(wvWare::SharedPtr<wvWare::Parser> parser, KoXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles);
     ~KWordTextHandler() { Q_ASSERT (m_fldStart == m_fldEnd); }
 
     //////// TextHandler interface
@@ -130,7 +130,7 @@ public:
     bool listIsOpen(); //tell us whether a list is open
     void closeList();
     QString m_listStyleName; //track the name of the list style
-    KoGenStyles* m_mainStyles; //this is for collecting most of the styles
+    KOdfGenericStyles* m_mainStyles; //this is for collecting most of the styles
     int m_sectionNumber;
     QString getFont(unsigned fc) const;
 

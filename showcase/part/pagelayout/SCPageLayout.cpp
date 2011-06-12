@@ -26,7 +26,7 @@
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoPASavingContext.h>
 #include "SCPlaceholder.h"
 

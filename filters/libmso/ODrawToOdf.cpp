@@ -162,7 +162,7 @@ QString percent(double v)
 }
 } //namespace
 
-void ODrawToOdf::defineGraphicProperties(KOdfGenericStyle& style, const DrawStyle& ds, KoGenStyles& styles)
+void ODrawToOdf::defineGraphicProperties(KOdfGenericStyle& style, const DrawStyle& ds, KOdfGenericStyles& styles)
 {
     const KOdfGenericStyle::PropertyType gt = KOdfGenericStyle::GraphicType;
     // dr3d:ambient-color

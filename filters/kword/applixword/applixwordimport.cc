@@ -29,7 +29,7 @@
 #include <KoFilterChain.h>
 #include <kpluginfactory.h>
 #include <KoOdfWriteStore.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoXmlWriter.h>
 
 K_PLUGIN_FACTORY(APPLIXWORDImportFactory, registerPlugin<APPLIXWORDImport>();)
@@ -131,7 +131,7 @@ KoFilter::ConversionStatus APPLIXWORDImport::convert(const QByteArray& from, con
         return KoFilter::CreationError;
     }
 
-    KoGenStyles mainStyles;
+    KOdfGenericStyles mainStyles;
     KoXmlWriter *bodyWriter = odfStore.bodyWriter();
 
     bodyWriter->startElement("office:body");
@@ -394,7 +394,7 @@ KoFilter::ConversionStatus APPLIXWORDImport::convert(const QByteArray& from, con
     bodyWriter->endElement(); // office:text
     bodyWriter->endElement(); // office:body
 
-    mainStyles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, contentWriter);
+    mainStyles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, contentWriter);
     odfStore.closeContentWriter();
 
     //add manifest line for content.xml

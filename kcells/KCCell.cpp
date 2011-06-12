@@ -1066,7 +1066,7 @@ void KCCell::saveOdfAnnotation(KoXmlWriter &xmlwriter)
     }
 }
 
-QString KCCell::saveOdfCellStyle(KOdfGenericStyle &currentCellStyle, KoGenStyles &mainStyles)
+QString KCCell::saveOdfCellStyle(KOdfGenericStyle &currentCellStyle, KOdfGenericStyles &mainStyles)
 {
     const KCConditions conditions = this->conditions();
     if (!conditions.isEmpty()) {
@@ -1078,7 +1078,7 @@ QString KCCell::saveOdfCellStyle(KOdfGenericStyle &currentCellStyle, KoGenStyles
 }
 
 
-bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KoGenStyles &mainStyles,
+bool KCCell::saveOdf(KoXmlWriter& xmlwriter, KOdfGenericStyles &mainStyles,
                    int row, int column, int &repeated,
                    KCOdfSavingContext& tableContext)
 {

@@ -31,7 +31,7 @@
 #include "ParsedPresentation.h"
 
 #include <KoFilter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoStore.h>
 
 #include <QtCore/QStack>
@@ -97,30 +97,30 @@ private:
     KoFilter::ConversionStatus doConversion(POLE::Storage& input,
                                             KoStore* output);
 
-    void createMainStyles(KoGenStyles& styles);
-    void defineDefaultTextStyle(KoGenStyles& styles);
-    void defineDefaultParagraphStyle(KoGenStyles& styles);
-    void defineDefaultSectionStyle(KoGenStyles& styles);
-    void defineDefaultRubyStyle(KoGenStyles& styles);
-    void defineDefaultTableStyle(KoGenStyles& styles);
-    void defineDefaultTableColumnStyle(KoGenStyles& styles);
-    void defineDefaultTableRowStyle(KoGenStyles& styles);
-    void defineDefaultTableCellStyle(KoGenStyles& styles);
-    void defineDefaultGraphicStyle(KoGenStyles& styles);
-    void defineDefaultPresentationStyle(KoGenStyles& styles);
-    void defineDefaultDrawingPageStyle(KoGenStyles& styles);
-    void defineDefaultChartStyle(KoGenStyles& styles);
+    void createMainStyles(KOdfGenericStyles& styles);
+    void defineDefaultTextStyle(KOdfGenericStyles& styles);
+    void defineDefaultParagraphStyle(KOdfGenericStyles& styles);
+    void defineDefaultSectionStyle(KOdfGenericStyles& styles);
+    void defineDefaultRubyStyle(KOdfGenericStyles& styles);
+    void defineDefaultTableStyle(KOdfGenericStyles& styles);
+    void defineDefaultTableColumnStyle(KOdfGenericStyles& styles);
+    void defineDefaultTableRowStyle(KOdfGenericStyles& styles);
+    void defineDefaultTableCellStyle(KOdfGenericStyles& styles);
+    void defineDefaultGraphicStyle(KOdfGenericStyles& styles);
+    void defineDefaultPresentationStyle(KOdfGenericStyles& styles);
+    void defineDefaultDrawingPageStyle(KOdfGenericStyles& styles);
+    void defineDefaultChartStyle(KOdfGenericStyles& styles);
 
     /** define automatic styles for text, paragraphs, graphic and presentation
       families
       */
-    void defineMasterStyles(KoGenStyles& styles);
-    void defineAutomaticDrawingPageStyles(KoGenStyles& styles);
+    void defineMasterStyles(KOdfGenericStyles& styles);
+    void defineAutomaticDrawingPageStyles(KOdfGenericStyles& styles);
 
     // we assume that these functions are the same for all style families
     void defineDefaultTextProperties(KOdfGenericStyle& style);
     void defineDefaultParagraphProperties(KOdfGenericStyle& style);
-    void defineDefaultGraphicProperties(KOdfGenericStyle& style, KoGenStyles& styles);
+    void defineDefaultGraphicProperties(KOdfGenericStyle& style, KOdfGenericStyles& styles);
 
     /* Extract data from TextCFException into the style */
 
@@ -145,12 +145,12 @@ private:
      * Extract data into the drawing-page style
      * @param KOdfGenericStyle
      * @param DrawStyle
-     * @param KoGenStyles
+     * @param KOdfGenericStyles
      * @param ODrawToOdf
      * @param pointer to a HeadersFootersAtom
      * @param pointer to SlideFlags of presentation or notes slide
      */
-    void defineDrawingPageStyle(KOdfGenericStyle& style, const DrawStyle& ds, KoGenStyles& styles,
+    void defineDrawingPageStyle(KOdfGenericStyle& style, const DrawStyle& ds, KOdfGenericStyles& styles,
                                 ODrawToOdf& odrawtoodf,
                                 const MSO::HeadersFootersAtom* hf,
                                 const MSO::SlideFlags* sf = NULL);
@@ -196,7 +196,7 @@ private:
                         const MSO::PptOfficeArtClientData* clientData) const;
     void addPresentationStyleToDrawElement(Writer& out, const MSO::OfficeArtSpContainer& o);
 
-    QByteArray createContent(KoGenStyles& styles);
+    QByteArray createContent(KOdfGenericStyles& styles);
     void processSlideForBody(unsigned slideNo, Writer& out);
     void processTextForBody(const MSO::OfficeArtClientData* o,
                             const MSO::TextContainer& tc, Writer& out);
@@ -611,6 +611,6 @@ private:
 /**
  * Define the standard arrows used in PPT files.
  */
-void defineArrow(KoGenStyles& styles);
+void defineArrow(KOdfGenericStyles& styles);
 
 #endif // POWERPOINTIMPORT_H

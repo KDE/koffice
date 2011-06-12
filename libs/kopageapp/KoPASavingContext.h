@@ -45,7 +45,7 @@ public:
      * @param embeddedSaver for saving embedded documents
      * @param page the starting page number
      */
-    KoPASavingContext(KoXmlWriter &xmlWriter, KoGenStyles &mainStyles, KoEmbeddedDocumentSaver &embeddedSaver, int page); //TODO default
+    KoPASavingContext(KoXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles, KoEmbeddedDocumentSaver &embeddedSaver, int page); //TODO default
 
     /**
      * @brief Destructor

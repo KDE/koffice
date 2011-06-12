@@ -52,7 +52,7 @@
 //TODO: provide all streams to the wv2 parser; POLE storage is going to replace
 //OLE storage soon!
 Document::Document(const std::string& fileName, KoFilterChain* chain, KoXmlWriter* bodyWriter,
-                   KoGenStyles* mainStyles, KoXmlWriter* metaWriter, KoXmlWriter* manifestWriter,
+                   KOdfGenericStyles* mainStyles, KoXmlWriter* metaWriter, KoXmlWriter* manifestWriter,
                    KoStore* store, POLE::Storage* storage,
                    LEInputStream* data, LEInputStream* table, LEInputStream* wdocument)
         : m_textHandler(0)
@@ -87,7 +87,7 @@ Document::Document(const std::string& fileName, KoFilterChain* chain, KoXmlWrite
     if (m_parser) { // 0 in case of major error (e.g. unsupported format)
 
         m_bodyWriter = bodyWriter; //pointer for writing to the body
-        m_mainStyles = mainStyles; //KoGenStyles object for collecting styles
+        m_mainStyles = mainStyles; //KOdfGenericStyles object for collecting styles
         m_metaWriter = metaWriter; //pointer for writing to meta.xml
         m_buffer = 0; //set pointers to 0
         m_bufferEven = 0;
@@ -187,7 +187,7 @@ void Document::finishDocument()
                                "text:start-numbering-at=\"%3\" "
                                "/>");
 
-        m_mainStyles->insertRawOdfStyles(KoGenStyles::DocumentStyles,
+        m_mainStyles->insertRawOdfStyles(KOdfGenericStyles::DocumentStyles,
                                          footnoteConfig.arg(Conversion::numberFormatCode(dop.nfcFtnRef2))
                                                        .arg(m_initialFootnoteNumber)
                                                        .arg(Conversion::rncToStartNumberingAt(dop.rncFtn))
@@ -205,7 +205,7 @@ void Document::finishDocument()
                               //"text:start-numbering-at=\"%3\" "
                               "/>");
 
-        m_mainStyles->insertRawOdfStyles(KoGenStyles::DocumentStyles,
+        m_mainStyles->insertRawOdfStyles(KOdfGenericStyles::DocumentStyles,
                                          endnoteConfig.arg(Conversion::numberFormatCode(dop.nfcEdnRef2))
                                                       .arg(m_initialEndnoteNumber)
 //                                                           .arg(Conversion::rncToStartNumberingAt(dop.rncEdn))
@@ -328,7 +328,7 @@ void Document::processStyles()
 
             // Add style to main collection, using the name that it
             // had in the .doc.
-            QString actualName = m_mainStyles->insert(userStyle, name, KoGenStyles::DontAddNumberToName);
+            QString actualName = m_mainStyles->insert(userStyle, name, KOdfGenericStyles::DontAddNumberToName);
             kDebug(30513) << "added style " << actualName;
         } else if (style && style->type() == wvWare::Style::sgcChp) {
             //create this style & add formatting info to it
@@ -352,7 +352,7 @@ void Document::processStyles()
             Paragraph::applyCharacterProperties(&style->chp(), &userStyle, parentStyle, currentBgColor());
 
             //add style to main collection, using the name that it had in the .doc
-            QString actualName = m_mainStyles->insert(userStyle, name, KoGenStyles::DontAddNumberToName);
+            QString actualName = m_mainStyles->insert(userStyle, name, KOdfGenericStyles::DontAddNumberToName);
             kDebug(30513) << "added style " << actualName;
         }
     }
@@ -558,7 +558,7 @@ void Document::slotSectionEnd(wvWare::SharedPtr<const wvWare::Word97::SEP> sep)
 
         pageLayoutName = m_mainStyles->insert(*pageLayoutStyle, "Mpm");
         masterPageStyle->addAttribute("style:page-layout-name", pageLayoutName);
-        m_mainStyles->insert(*masterPageStyle, m_masterPageName_list[i], KoGenStyles::DontAddNumberToName);
+        m_mainStyles->insert(*masterPageStyle, m_masterPageName_list[i], KOdfGenericStyles::DontAddNumberToName);
 
         //delete objects, we've added them to the collection
         delete masterPageStyle;

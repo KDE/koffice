@@ -30,7 +30,7 @@
 
 class KoStore;
 class KoXmlWriter;
-class KoGenStyles;
+class KOdfGenericStyles;
 class KOdfGenericStyle;
 
 namespace MSOOXML
@@ -74,13 +74,13 @@ private:
     Charting::Chart* m_chart;
     const MSOOXML::DrawingMLTheme* m_theme;
     bool sheetReplacement;
-    QString genChartAreaStyle( const int styleID, KoGenStyles& styles, KoGenStyles& mainStyles );
-    QString genChartAreaStyle( const int styleID, KOdfGenericStyle& style, KoGenStyles& styles, KoGenStyles& mainStyles );
-    QString genPlotAreaStyle( const int styleID, KoGenStyles& styles, KoGenStyles& mainStyles );
-    QString genPlotAreaStyle( const int styleID, KOdfGenericStyle& style, KoGenStyles& styles, KoGenStyles& mainStyles );
-    void addShapePropertyStyle( /*const*/ Charting::Series* series, KOdfGenericStyle& style, KoGenStyles& mainStyles );
+    QString genChartAreaStyle( const int styleID, KOdfGenericStyles& styles, KOdfGenericStyles& mainStyles );
+    QString genChartAreaStyle( const int styleID, KOdfGenericStyle& style, KOdfGenericStyles& styles, KOdfGenericStyles& mainStyles );
+    QString genPlotAreaStyle( const int styleID, KOdfGenericStyles& styles, KOdfGenericStyles& mainStyles );
+    QString genPlotAreaStyle( const int styleID, KOdfGenericStyle& style, KOdfGenericStyles& styles, KOdfGenericStyles& mainStyles );
+    void addShapePropertyStyle( /*const*/ Charting::Series* series, KOdfGenericStyle& style, KOdfGenericStyles& mainStyles );
     void addDataThemeToStyle( const int styleID, KOdfGenericStyle& style, int dataNumber, int maxNumData = 1, bool strokes = true );
-    QString generateGradientStyle( KoGenStyles& mainStyles, const Charting::Gradient* grad );
+    QString generateGradientStyle( KOdfGenericStyles& mainStyles, const Charting::Gradient* grad );
     QColor calculateColorFromGradientStop( const Charting::Gradient::GradientStop& grad );
     void writeInternalTable ( KoXmlWriter* bodyWriter );
     QList< QColor > m_palette;

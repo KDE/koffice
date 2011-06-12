@@ -33,7 +33,7 @@
 #include <QRectF>
 
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 
 class Document;
 
@@ -88,7 +88,7 @@ class KWordTableHandler : public QObject, public wvWare::TableHandler
 {
     Q_OBJECT
 public:
-    KWordTableHandler(KoXmlWriter* bodyWriter, KoGenStyles* mainStyles);
+    KWordTableHandler(KoXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles);
 
     //////// TableHandler interface
     virtual void tableRowStart(wvWare::SharedPtr<const wvWare::Word97::TAP> tap);
@@ -121,7 +121,7 @@ private:
     KWord::Table* m_currentTable;
 
     KoXmlWriter*  m_bodyWriter;
-    KoGenStyles*  m_mainStyles;
+    KOdfGenericStyles*  m_mainStyles;
 
     int m_row;
     int m_column;

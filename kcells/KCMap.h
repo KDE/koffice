@@ -46,7 +46,7 @@ class QDomDocument;
 class QUndoCommand;
 
 class KoXmlWriter;
-class KoGenStyles;
+class KOdfGenericStyles;
 class KoOdfSettings;
 
 class KCApplicationSettings;

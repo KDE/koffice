@@ -400,18 +400,18 @@ KoFilter::ConversionStatus DocxXmlStylesReader::read_style()
             //! @todo add ELSE_WRONG_FORMAT
         }
     }
-    KoGenStyles::InsertionFlags insertionFlags = KoGenStyles::DontAddNumberToName;
+    KOdfGenericStyles::InsertionFlags insertionFlags = KOdfGenericStyles::DontAddNumberToName;
     if (styleName.isEmpty()) {
         styleName = m_name.replace(" ", "_");
         if (styleName.isEmpty()) {
             // allow for numbering for generated style names
             styleName = odfType;
-            insertionFlags = KoGenStyles::NoFlag;
+            insertionFlags = KOdfGenericStyles::NoFlag;
         }
     }
 
     // When reading from styles, we allow duplicates
-    insertionFlags = insertionFlags | KoGenStyles::AllowDuplicates;
+    insertionFlags = insertionFlags | KOdfGenericStyles::AllowDuplicates;
 
     m_currentTextStylePredefined = false;
     m_currentParagraphStylePredefined = false;

@@ -29,7 +29,7 @@
 #include <KoOdfWriteStore.h>
 #include <KoStoreDevice.h>
 #include <KoFilterChain.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoXmlWriter.h>
 
 #include <memory>
@@ -87,8 +87,8 @@ KoFilter::ConversionStatus KoOdfExporter::convert(const QByteArray& from, const 
 
     kDebug(30003) << "created oasisStore.";
 
-    // KoGenStyles for writing styles while we're parsing
-    KoGenStyles mainStyles;
+    // KOdfGenericStyles for writing styles while we're parsing
+    KOdfGenericStyles mainStyles;
 
     KoOdfWriters writers;
     writers.mainStyles = &mainStyles;
@@ -121,8 +121,8 @@ KoFilter::ConversionStatus KoOdfExporter::convert(const QByteArray& from, const 
     RETURN_IF_ERROR( createDocument(outputStore.get(), &writers) )
 
     //save the office:automatic-styles & and fonts in content.xml
-    mainStyles.saveOdfStyles(KoGenStyles::FontFaceDecls, &contentWriter);
-    mainStyles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, &contentWriter);
+    mainStyles.saveOdfStyles(KOdfGenericStyles::FontFaceDecls, &contentWriter);
+    mainStyles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, &contentWriter);
 
     //close tags in body
     bodyWriter.endElement();//office:*

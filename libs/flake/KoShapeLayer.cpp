@@ -24,7 +24,7 @@
 #include <KoXmlReader.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoXmlNS.h>
 
 KoShapeLayer::KoShapeLayer()

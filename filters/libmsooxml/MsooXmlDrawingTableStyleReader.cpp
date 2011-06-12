@@ -19,7 +19,7 @@
 
 #include "MsooXmlDrawingTableStyleReader.h"
 
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KOdfGenericStyle.h>
 #include <KoOdfGraphicStyles.h>
 
@@ -254,7 +254,7 @@ TableStyleProperties::Type TableStyleProperties::typeFromString(const QString& s
     return WholeTbl;
 }
 
-QString TableStyleProperties::saveStyle(KoGenStyles& styles)
+QString TableStyleProperties::saveStyle(KOdfGenericStyles& styles)
 {
     if(m_type == NoType) {
         return QString();

@@ -40,7 +40,7 @@ public:
     virtual ~KoPAOdfPageSaveHelper();
 
     /// reimplemented
-    virtual KoShapeSavingContext * context(KoXmlWriter * bodyWriter, KoGenStyles &mainStyles, KoEmbeddedDocumentSaver &embeddedSaver);
+    virtual KoShapeSavingContext * context(KoXmlWriter * bodyWriter, KOdfGenericStyles &mainStyles, KoEmbeddedDocumentSaver &embeddedSaver);
 
     /// reimplemented
     virtual bool writeBody();

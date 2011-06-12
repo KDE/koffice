@@ -176,7 +176,7 @@ bool KoPADocument::saveOdf(SavingContext &documentContext)
     if (!contentWriter)
         return false;
 
-    KoGenStyles mainStyles;
+    KOdfGenericStyles mainStyles;
     KoXmlWriter * bodyWriter = documentContext.odfStore.bodyWriter();
 
     KoPASavingContext paContext(*bodyWriter, mainStyles, documentContext.embeddedSaver, 1);
@@ -203,7 +203,7 @@ bool KoPADocument::saveOdf(SavingContext &documentContext)
     bodyWriter->endElement(); // office:odfTagName()
     bodyWriter->endElement(); // office:body
 
-    mainStyles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, contentWriter);
+    mainStyles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, contentWriter);
 
     documentContext.odfStore.closeContentWriter();
 

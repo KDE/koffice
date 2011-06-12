@@ -20,7 +20,7 @@
 
 #include "KoOdfNumberStyles.h"
 
-#include "KoGenStyles.h"
+#include "KOdfGenericStyles.h"
 #include "KoXmlNS.h"
 
 #include <QtCore/QBuffer>
@@ -449,12 +449,12 @@ bool saveOdfTimeFormat(KoXmlWriter &elementWriter, QString &format, QString &tex
     return changed;
 }
 
-QString saveOdfTimeStyle(KoGenStyles &mainStyles, const QString &_format, bool klocaleFormat,
+QString saveOdfTimeStyle(KOdfGenericStyles &mainStyles, const QString &_format, bool klocaleFormat,
         const QString &_prefix, const QString &_suffix)
 {
     Q_UNUSED(_prefix);
     Q_UNUSED(_suffix);
-    //kDebug(30003) << "QString KoOdfNumberStyles::saveOdfTimeStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
+    //kDebug(30003) << "QString KoOdfNumberStyles::saveOdfTimeStyle( KOdfGenericStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericTimeStyle);
     QBuffer buffer;
@@ -568,7 +568,7 @@ void parseOdfDateKlocale(KoXmlWriter &elementWriter, QString &format, QString &t
     addTextNumber(text, elementWriter);
 }
 
-QString saveOdfDateStyle(KoGenStyles &mainStyles, const QString &_format, bool klocaleFormat,
+QString saveOdfDateStyle(KOdfGenericStyles &mainStyles, const QString &_format, bool klocaleFormat,
         const QString &_prefix, const QString &_suffix)
 {
     Q_UNUSED(_prefix);
@@ -711,10 +711,10 @@ QString saveOdfDateStyle(KoGenStyles &mainStyles, const QString &_format, bool k
 }
 
 
-QString saveOdfFractionStyle(KoGenStyles &mainStyles, const QString &_format,
+QString saveOdfFractionStyle(KOdfGenericStyles &mainStyles, const QString &_format,
         const QString &_prefix, const QString &_suffix)
 {
-    //kDebug(30003) << "QString saveOdfFractionStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
+    //kDebug(30003) << "QString saveOdfFractionStyle( KOdfGenericStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericFractionStyle);
@@ -770,10 +770,10 @@ QString saveOdfFractionStyle(KoGenStyles &mainStyles, const QString &_format,
 }
 
 
-QString saveOdfNumberStyle(KoGenStyles &mainStyles, const QString &_format,
+QString saveOdfNumberStyle(KOdfGenericStyles &mainStyles, const QString &_format,
         const QString &_prefix, const QString &_suffix)
 {
-    //kDebug(30003) << "QString saveOdfNumberStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
+    //kDebug(30003) << "QString saveOdfNumberStyle( KOdfGenericStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericNumberStyle);
@@ -813,7 +813,7 @@ QString saveOdfNumberStyle(KoGenStyles &mainStyles, const QString &_format,
     return mainStyles.insert(currentStyle, "N");
 }
 
-QString saveOdfPercentageStyle(KoGenStyles &mainStyles, const QString &_format,
+QString saveOdfPercentageStyle(KOdfGenericStyles &mainStyles, const QString &_format,
         const QString &_prefix, const QString &_suffix)
 {
     //<number:percentage-style style:name="N11">
@@ -821,7 +821,7 @@ QString saveOdfPercentageStyle(KoGenStyles &mainStyles, const QString &_format,
     //<number:text>%</number:text>
     //</number:percentage-style>
 
-    //kDebug(30003) << "QString saveOdfPercentageStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
+    //kDebug(30003) << "QString saveOdfPercentageStyle( KOdfGenericStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericPercentageStyle);
@@ -863,7 +863,7 @@ QString saveOdfPercentageStyle(KoGenStyles &mainStyles, const QString &_format,
 
 }
 
-QString saveOdfScientificStyle(KoGenStyles &mainStyles, const QString &_format,
+QString saveOdfScientificStyle(KOdfGenericStyles &mainStyles, const QString &_format,
         const QString &_prefix, const QString &_suffix)
 {
     //<number:number-style style:name="N60">
@@ -871,7 +871,7 @@ QString saveOdfScientificStyle(KoGenStyles &mainStyles, const QString &_format,
     //</number:number-style>
 
     //example 000,000e+0000
-    //kDebug(30003) << "QString saveOdfScientificStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
+    //kDebug(30003) << "QString saveOdfScientificStyle( KOdfGenericStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericScientificStyle);
@@ -933,7 +933,7 @@ QString saveOdfScientificStyle(KoGenStyles &mainStyles, const QString &_format,
     return mainStyles.insert(currentStyle, "N");
 }
 
-QString saveOdfCurrencyStyle(KoGenStyles &mainStyles,
+QString saveOdfCurrencyStyle(KOdfGenericStyles &mainStyles,
         const QString &_format, const QString &symbol,
         const QString &_prefix, const QString &_suffix)
 {
@@ -944,7 +944,7 @@ QString saveOdfCurrencyStyle(KoGenStyles &mainStyles,
     //<number:currency-symbol>VEB</number:currency-symbol>
     //</number:currency-style>
 
-    //kDebug(30003) << "QString saveOdfCurrencyStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
+    //kDebug(30003) << "QString saveOdfCurrencyStyle( KOdfGenericStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericCurrencyStyle);
@@ -991,14 +991,14 @@ QString saveOdfCurrencyStyle(KoGenStyles &mainStyles,
     return mainStyles.insert(currentStyle, "N");
 }
 
-QString saveOdfTextStyle(KoGenStyles &mainStyles, const QString &_format, const QString &_prefix, const QString &_suffix)
+QString saveOdfTextStyle(KOdfGenericStyles &mainStyles, const QString &_format, const QString &_prefix, const QString &_suffix)
 {
 
     //<number:text-style style:name="N100">
     //<number:text-content/>
     ///</number:text-style>
 
-    //kDebug(30003) << "QString saveOdfTextStyle( KoGenStyles &mainStyles, const QString & _format ) :" << _format;
+    //kDebug(30003) << "QString saveOdfTextStyle( KOdfGenericStyles &mainStyles, const QString & _format ) :" << _format;
     QString format(_format);
 
     KOdfGenericStyle currentStyle(KOdfGenericStyle::NumericTextStyle);

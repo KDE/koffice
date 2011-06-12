@@ -30,7 +30,7 @@
 #include <kcompletion.h>
 #include <ktemporaryfile.h>
 
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoGlobal.h>
 #include <KoOdfSettings.h>
 #include <KoOdfLoadingContext.h>
@@ -407,13 +407,13 @@ bool KCMap::saveOdf(KoXmlWriter & xmlWriter, KoShapeSavingContext & savingContex
     KOdfGenericStyle defaultColumnStyle(KOdfGenericStyle::TableColumnStyle, "table-column");
     defaultColumnStyle.addPropertyPt("style:column-width", d->defaultColumnFormat->width());
     defaultColumnStyle.setDefaultStyle(true);
-    savingContext.mainStyles().insert(defaultColumnStyle, "Default", KoGenStyles::DontAddNumberToName);
+    savingContext.mainStyles().insert(defaultColumnStyle, "Default", KOdfGenericStyles::DontAddNumberToName);
 
     // Saving the default row style
     KOdfGenericStyle defaultRowStyle(KOdfGenericStyle::TableRowStyle, "table-row");
     defaultRowStyle.addPropertyPt("style:row-height", d->defaultRowFormat->height());
     defaultRowStyle.setDefaultStyle(true);
-    savingContext.mainStyles().insert(defaultRowStyle, "Default", KoGenStyles::DontAddNumberToName);
+    savingContext.mainStyles().insert(defaultRowStyle, "Default", KOdfGenericStyles::DontAddNumberToName);
 
     QByteArray password;
     this->password(password);

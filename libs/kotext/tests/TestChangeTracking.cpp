@@ -39,7 +39,7 @@
 #include <KoShapeLoadingContext.h>
 #include <KoOdfLoadingContext.h>
 #include <KoShapeSavingContext.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoXmlNS.h>
 #include <kcomponentdata.h>
 #include <KoTextDebug_p.h>
@@ -157,7 +157,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
         qFatal("Error opening temporary file!");
     KoXmlWriter xmlWriter(&contentTmpFile, 1);
 
-    KoGenStyles mainStyles;
+    KOdfGenericStyles mainStyles;
     KoStyleManager *styleMan = KoTextDocument(document).styleManager();
     Q_UNUSED(styleMan);
     KoEmbeddedDocumentSaver embeddedSaver;
@@ -199,7 +199,7 @@ QString TestChangeTracking::documentToOdt(QTextDocument *document)
 
     contentTmpFile.close();
 
-    mainStyles.saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, contentWriter);
+    mainStyles.saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, contentWriter);
 
     contentWriter->startElement("office:body");
     contentWriter->startElement("office:text");

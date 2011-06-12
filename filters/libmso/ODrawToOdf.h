@@ -158,7 +158,7 @@ public:
     void processGroupShape(const MSO::OfficeArtSpgrContainer& o, Writer& out);
     void processDrawing(const MSO::OfficeArtSpgrContainerFileBlock& o, Writer& out);
     void processDrawingObject(const MSO::OfficeArtSpContainer& o, Writer& out);
-    void defineGraphicProperties(KOdfGenericStyle& style, const DrawStyle& ds, KoGenStyles& styles);
+    void defineGraphicProperties(KOdfGenericStyle& style, const DrawStyle& ds, KOdfGenericStyles& styles);
     void addGraphicStyleToDrawElement(Writer& out, const MSO::OfficeArtSpContainer& o);
     void defineGradientStyle(KOdfGenericStyle& style, const DrawStyle& ds);
 

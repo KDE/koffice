@@ -115,7 +115,7 @@ KoFilter::ConversionStatus HTMLOdfExport::convert(const QByteArray &from, const 
         }
 
         KoStore *m_store;
-        KoGenStyles *m_genStyles;
+        KOdfGenericStyles *m_genStyles;
         Document *m_document;
         KoXmlWriter* m_contentWriter;
         KoXmlWriter* m_bodyWriter;

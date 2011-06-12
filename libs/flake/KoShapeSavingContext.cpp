@@ -36,7 +36,7 @@
 
 class KoShapeSavingContextPrivate {
 public:
-    KoShapeSavingContextPrivate(KoXmlWriter&, KoGenStyles&, KoEmbeddedDocumentSaver&);
+    KoShapeSavingContextPrivate(KoXmlWriter&, KOdfGenericStyles&, KoEmbeddedDocumentSaver&);
 
     KoXmlWriter *xmlWriter;
     KoShapeSavingContext::ShapeSavingOptions savingOptions;
@@ -53,12 +53,12 @@ public:
     QHash<const KoShape *, QTransform> shapeOffsets;
     QSet<KoShapeConnection*> unsavedConnections;
 
-    KoGenStyles& mainStyles;
+    KOdfGenericStyles& mainStyles;
     KoEmbeddedDocumentSaver& embeddedSaver;
 };
 
 KoShapeSavingContextPrivate::KoShapeSavingContextPrivate(KoXmlWriter &w,
-        KoGenStyles &s, KoEmbeddedDocumentSaver &e)
+        KOdfGenericStyles &s, KoEmbeddedDocumentSaver &e)
         : xmlWriter(&w),
         savingOptions(0),
         drawId(0),
@@ -69,7 +69,7 @@ KoShapeSavingContextPrivate::KoShapeSavingContextPrivate(KoXmlWriter &w,
 {
 }
 
-KoShapeSavingContext::KoShapeSavingContext(KoXmlWriter &xmlWriter, KoGenStyles &mainStyles,
+KoShapeSavingContext::KoShapeSavingContext(KoXmlWriter &xmlWriter, KOdfGenericStyles &mainStyles,
         KoEmbeddedDocumentSaver &embeddedSaver)
     : d(new KoShapeSavingContextPrivate(xmlWriter, mainStyles, embeddedSaver))
 {
@@ -91,7 +91,7 @@ void KoShapeSavingContext::setXmlWriter(KoXmlWriter &xmlWriter)
     d->xmlWriter = &xmlWriter;
 }
 
-KoGenStyles & KoShapeSavingContext::mainStyles()
+KOdfGenericStyles & KoShapeSavingContext::mainStyles()
 {
     return d->mainStyles;
 }

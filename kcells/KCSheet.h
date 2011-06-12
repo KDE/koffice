@@ -50,7 +50,7 @@ class QWidget;
 class KoDataCenterBase;
 class KoDocumentEntry;
 class KoStyleStack;
-class KoGenStyles;
+class KOdfGenericStyles;
 class KoOdfSettings;
 class KoOdfStylesReader;
 class KoShape;
@@ -898,18 +898,18 @@ protected:
     /**
      * \ingroup OpenDocument
      */
-    QString saveOdfSheetStyleName(KoGenStyles &mainStyles);
+    QString saveOdfSheetStyleName(KOdfGenericStyles &mainStyles);
 
     /**
      * \ingroup OpenDocument
      */
-    void saveOdfColRowCell(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles,
+    void saveOdfColRowCell(KoXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles,
                            int maxCols, int maxRows, KCOdfSavingContext& tableContext);
 
     /**
      * \ingroup OpenDocument
      */
-    void saveOdfCells(KoXmlWriter& xmlWriter, KoGenStyles &mainStyles, int row, int maxCols,
+    void saveOdfCells(KoXmlWriter& xmlWriter, KOdfGenericStyles &mainStyles, int row, int maxCols,
                       KCOdfSavingContext& tableContext);
 
     /**

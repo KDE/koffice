@@ -52,7 +52,7 @@
 #include <KoXmlWriter.h>
 #include <KoXmlNS.h>
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoUnit.h>
 #include <KoOdfStylesReader.h>
 #include <KoOdfGraphicStyles.h>

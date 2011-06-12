@@ -29,7 +29,7 @@
 /**
  * @brief Repository of changes used during saving of OASIS/OOo file.
  *
- * Inspired from KoGenStyles.h
+ * Inspired from KOdfGenericStyles.h
  *
  * Is used to store all the change regions, which will be saved at the beginning of <office:body><office:text> elements
  * We use a container outside the changeTracker, as the change tracker is linked to the document of a TextShapeData and is then not aware of the other TextShapeData.

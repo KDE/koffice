@@ -28,7 +28,7 @@
 #include <QPainterPath>
 
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoOdfGraphicStyles.h>
 
 #include <math.h>

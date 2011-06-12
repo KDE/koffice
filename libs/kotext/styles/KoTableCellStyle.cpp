@@ -23,7 +23,7 @@
 #include "KoTableCellStyle.h"
 #include "KoStyleManager.h"
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include "Styles_p.h"
 #include "KoTextDocument.h"
 #include "KoTableCellStyle_p.h"

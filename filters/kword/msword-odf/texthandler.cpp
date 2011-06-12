@@ -59,7 +59,7 @@ wvWare::U8 KWordReplacementHandler::nonRequiredHyphen()
     return 0xad; // soft hyphen, according to kword.dtd
 }
 
-KWordTextHandler::KWordTextHandler(wvWare::SharedPtr<wvWare::Parser> parser, KoXmlWriter* bodyWriter, KoGenStyles* mainStyles)
+KWordTextHandler::KWordTextHandler(wvWare::SharedPtr<wvWare::Parser> parser, KoXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles)
     : m_mainStyles(0)
     , m_sectionNumber(0)
     , m_document(0)
@@ -208,7 +208,7 @@ void KWordTextHandler::sectionStart(wvWare::SharedPtr<const wvWare::Word97::SEP>
 
         //add style to the collection
         sectionStyleName = m_mainStyles->insert(sectionStyle, sectionStyleName,
-                                                KoGenStyles::DontAddNumberToName);
+                                                KOdfGenericStyles::DontAddNumberToName);
         //put necessary tags in the content
         m_bodyWriter->startElement("text:section");
         QString sectionName = "Section";
@@ -233,7 +233,7 @@ void KWordTextHandler::sectionStart(wvWare::SharedPtr<const wvWare::Word97::SEP>
             QString lineNumberingConfig("<text:linenumbering-configuration text:style-name=\"%1\" "
                                         "style:num-format=\"1\" text:number-position=\"left\" text:increment=\"1\"/>");
 
-            m_mainStyles->insertRawOdfStyles(KoGenStyles::DocumentStyles,
+            m_mainStyles->insertRawOdfStyles(KOdfGenericStyles::DocumentStyles,
                                              lineNumberingConfig.arg(lineNumbersStyleName).toLatin1());
 
             KOdfGenericStyle *normalStyle = m_mainStyles->styleForModification(QString("Normal"));

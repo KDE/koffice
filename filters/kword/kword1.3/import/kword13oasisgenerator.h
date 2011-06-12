@@ -30,7 +30,7 @@ class KOdfGenericStyle;
 class KoXmlWriter;
 class KWord13Document;
 
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <QTextStream>
 
 class KWord13OasisGenerator
@@ -69,7 +69,7 @@ protected:
     KWord13Document* m_kwordDocument;
     KoStore* m_store;
     QString m_contentAutomaticStyles; ///< Automatic styles for content.xml (in OO format)
-    KoGenStyles m_oasisGenStyles; ///< OASIS styles
+    KOdfGenericStyles m_oasisGenStyles; ///< OASIS styles
     KoXmlWriter* m_manifestWriter; ///< Manifest file writer
 };
 

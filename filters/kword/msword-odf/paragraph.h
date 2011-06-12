@@ -26,7 +26,7 @@
 
 #include <qlist.h>
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoXmlWriter.h>
 
 //TODO remove unneeded includes
@@ -41,7 +41,7 @@
 class Paragraph
 {
 public:
-    explicit Paragraph(KoGenStyles* mainStyles, bool inStylesDotXml = false, bool isHeading = false, bool inHeader = false, int outlineLevel = 0);
+    explicit Paragraph(KOdfGenericStyles* mainStyles, bool inStylesDotXml = false, bool isHeading = false, bool inHeader = false, int outlineLevel = 0);
     ~Paragraph();
 
     void writeToFile(KoXmlWriter* writer);
@@ -107,7 +107,7 @@ private:
     // ODF styles.  The MS equivalents are below.
     KOdfGenericStyle* m_odfParagraphStyle; //pointer to KOffice structure for paragraph formatting
     KOdfGenericStyle* m_odfParagraphStyle2; //place to store original style when we have an inner paragraph
-    KoGenStyles* m_mainStyles; //pointer to style collection for this document
+    KOdfGenericStyles* m_mainStyles; //pointer to style collection for this document
 
     // MS Styles
     const wvWare::Style* m_paragraphStyle;  // style for the paragraph

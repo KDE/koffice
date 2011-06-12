@@ -55,7 +55,7 @@
 #include <KoShapeSavingContext.h>
 #include <KoXmlWriter.h>
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoXmlNS.h>
 
 #include <opendocument/KoTextSharedSavingData.h>
@@ -602,7 +602,7 @@ QString KoTextWriter::saveParagraphStyle(const QTextBlockFormat &blockFormat, co
         if (originalParagraphStyle != defaultParagraphStyle) {
             KOdfGenericStyle style(KOdfGenericStyle::ParagraphStyle, "paragraph");
             originalParagraphStyle->saveOdf(style, context.mainStyles());
-            generatedName = context.mainStyles().insert(style, internalName, KoGenStyles::DontAddNumberToName);
+            generatedName = context.mainStyles().insert(style, internalName, KOdfGenericStyles::DontAddNumberToName);
         }
     } else { // There are manual changes... We'll have to store them then
         KOdfGenericStyle style(KOdfGenericStyle::ParagraphAutoStyle, "paragraph", internalName);
@@ -647,7 +647,7 @@ QString KoTextWriter::Private::saveCharacterStyle(const QTextCharFormat &charFor
             if (!charStyle.isEmpty()) {
                 KOdfGenericStyle style(KOdfGenericStyle::ParagraphStyle, "text");
                 originalCharStyle->saveOdf(style);
-                generatedName = context.mainStyles().insert(style, internalName, KoGenStyles::DontAddNumberToName);
+                generatedName = context.mainStyles().insert(style, internalName, KOdfGenericStyles::DontAddNumberToName);
             }
         }
     } else { // There are manual changes... We'll have to store them then
@@ -697,7 +697,7 @@ QHash<QTextList *, QString> KoTextWriter::Private::saveListStyles(QTextBlock blo
             bool automatic = listStyle->styleId() == 0;
             KOdfGenericStyle style(automatic ? KOdfGenericStyle::ListAutoStyle : KOdfGenericStyle::ListStyle);
             listStyle->saveOdf(style);
-            QString generatedName = context.mainStyles().insert(style, listStyle->name(), KoGenStyles::AllowDuplicates);
+            QString generatedName = context.mainStyles().insert(style, listStyle->name(), KOdfGenericStyles::AllowDuplicates);
             listStyles[textList] = generatedName;
             generatedLists.insert(list, generatedName);
         } else {

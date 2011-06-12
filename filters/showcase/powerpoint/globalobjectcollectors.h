@@ -130,12 +130,12 @@ void collectGlobalObjects(C& collector, const ParsedPresentation& p) {
   **/
 class FillImageCollector {
 public:
-    KoGenStyles& styles;
+    KOdfGenericStyles& styles;
     const PptToOdp& pto;
     QMap<const MSO::DrawingGroupContainer*, QString> globalFillImageNames;
     QMap<const MSO::OfficeArtSpContainer*, QString> fillImageNames;
 
-    FillImageCollector(KoGenStyles& s, const PptToOdp& p) :styles(s), pto(p) {}
+    FillImageCollector(KOdfGenericStyles& s, const PptToOdp& p) :styles(s), pto(p) {}
 
     void add(const MSO::DrawingGroupContainer& o, const MSO::OfficeArtFOPTEChoice& t) {
         const QString name = add(t);
@@ -152,7 +152,7 @@ public:
         fillImage.addAttribute("xlink:href", pto.getPicturePath(fb->fillBlip));
         return styles.insert(fillImage,
                              QString("fillImage%1").arg(fb->fillBlip),
-                             KoGenStyles::DontAddNumberToName);
+                             KOdfGenericStyles::DontAddNumberToName);
     }
 };
 /**
@@ -161,12 +161,12 @@ public:
   **/
 class StrokeDashCollector {
 public:
-    KoGenStyles& styles;
+    KOdfGenericStyles& styles;
     const PptToOdp& pto;
     QMap<const MSO::DrawingGroupContainer*, QString> globalStrokeDashNames;
     QMap<const MSO::OfficeArtSpContainer*, QString> strokeDashNames;
 
-    StrokeDashCollector(KoGenStyles& s, const PptToOdp& p) :styles(s), pto(p) {}
+    StrokeDashCollector(KOdfGenericStyles& s, const PptToOdp& p) :styles(s), pto(p) {}
 
     void add(const MSO::DrawingGroupContainer& o, const MSO::OfficeArtFOPTEChoice& t) {
         const QString name = add(t);

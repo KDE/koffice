@@ -37,7 +37,7 @@ class MSOOXML_EXPORT MsooXmlDocPropertiesReader : public MsooXmlReader
 public:
     explicit MsooXmlDocPropertiesReader(KoOdfWriters* writers);
 
-    //! Reads/parses the file. The output goes to KoGenStyles* KoOdfWriters::meta
+    //! Reads/parses the file. The output goes to KOdfGenericStyles* KoOdfWriters::meta
     KoFilter::ConversionStatus read(MsooXmlReaderContext* context = 0);
 
     KoFilter::ConversionStatus read_coreProperties();

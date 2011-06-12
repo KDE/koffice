@@ -79,7 +79,7 @@ QString mm(double v) {
  * Drawing Writer
  * ************************************************
  */
-DrawingWriter::DrawingWriter(KoXmlWriter& xmlWriter, KoGenStyles& kostyles,
+DrawingWriter::DrawingWriter(KoXmlWriter& xmlWriter, KOdfGenericStyles& kostyles,
                              bool stylesxml_, bool inlineObj)
         : Writer(xmlWriter, kostyles, stylesxml_),
           xLeft(0),
@@ -161,7 +161,7 @@ void DrawingWriter::SetClientRectangle(MSO::OfficeArtChildAnchor& anchor)
  */
 KWordGraphicsHandler::KWordGraphicsHandler(Document* doc, KoXmlWriter* bodyWriter,
                                          KoXmlWriter* manifestWriter, KoStore* store,
-                                         KoGenStyles* mainStyles)
+                                         KOdfGenericStyles* mainStyles)
 : QObject()
 , m_document(doc)
 , m_store(store)
@@ -595,7 +595,7 @@ void KWordGraphicsHandler::parseOfficeArtContainer(POLE::Storage* storage, const
     return;
 }
 
-void KWordGraphicsHandler::defineDefaultGraphicStyle(KoGenStyles* styles)
+void KWordGraphicsHandler::defineDefaultGraphicStyle(KOdfGenericStyles* styles)
 {
     // write style <style:default-style style:family="graphic">
     KOdfGenericStyle style(KOdfGenericStyle::GraphicStyle, "graphic");

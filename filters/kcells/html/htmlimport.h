@@ -43,7 +43,7 @@ namespace DOM
 
 class KoOdfWriteStore;
 class KoXmlWriter;
-class KoGenStyles;
+class KOdfGenericStyles;
 
 class HTMLImport : public KoFilter
 {
@@ -70,7 +70,7 @@ private:
     QDir m_inputDir;    
     KoOdfWriteStore* m_store;
     KoXmlWriter* m_manifestWriter;
-    KoGenStyles* m_mainStyles;
+    KOdfGenericStyles* m_mainStyles;
 };
 
 #endif

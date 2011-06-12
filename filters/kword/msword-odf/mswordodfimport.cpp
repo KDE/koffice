@@ -139,7 +139,7 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
         }
 
         KoStore *m_store;
-        KoGenStyles *m_genStyles;
+        KOdfGenericStyles *m_genStyles;
         Document *m_document;
         KoXmlWriter* m_contentWriter;
         KoXmlWriter* m_bodyWriter;
@@ -158,8 +158,8 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
 
     kDebug(30513) << "created oasisStore.";
 
-    //create KoGenStyles for writing styles while we're parsing
-    KoGenStyles* mainStyles = new KoGenStyles();
+    //create KOdfGenericStyles for writing styles while we're parsing
+    KOdfGenericStyles* mainStyles = new KOdfGenericStyles();
     finalizer.m_genStyles = mainStyles; // will delete this as it goes out of scope.
 
     //create a writer for meta.xml
@@ -210,8 +210,8 @@ KoFilter::ConversionStatus MSWordOdfImport::convert(const QByteArray &from, cons
     kDebug(30513) << "finished parsing.";
 
     //save the office:automatic-styles & and fonts in content.xml
-    mainStyles->saveOdfStyles(KoGenStyles::FontFaceDecls, contentWriter);
-    mainStyles->saveOdfStyles(KoGenStyles::DocumentAutomaticStyles, contentWriter);
+    mainStyles->saveOdfStyles(KOdfGenericStyles::FontFaceDecls, contentWriter);
+    mainStyles->saveOdfStyles(KOdfGenericStyles::DocumentAutomaticStyles, contentWriter);
 
     //close tags in bodyWriter
     bodyWriter->endElement();//office:text

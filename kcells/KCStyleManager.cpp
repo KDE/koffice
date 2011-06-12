@@ -50,7 +50,7 @@ KCStyleManager::~KCStyleManager()
     qDeleteAll(m_styles);
 }
 
-void KCStyleManager::saveOdf(KoGenStyles &mainStyles)
+void KCStyleManager::saveOdf(KOdfGenericStyles &mainStyles)
 {
     kDebug(36003) << "KCStyleManager: Saving default cell style";
     KOdfGenericStyle defStyle = KOdfGenericStyle(KOdfGenericStyle::TableCellStyle, "table-cell");

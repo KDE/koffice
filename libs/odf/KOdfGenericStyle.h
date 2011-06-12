@@ -31,13 +31,13 @@
 #include <iostream>
 #include "koodf_export.h"
 
-class KoGenStyles;
+class KOdfGenericStyles;
 class KoXmlWriter;
 
 /**
  * A generic style, i.e. basically a collection of properties and a name.
- * Instances of KOdfGenericStyle can either be held in the KoGenStyles collection,
- * or created (e.g. on the stack) and given to KoGenStyles::insert().
+ * Instances of KOdfGenericStyle can either be held in the KOdfGenericStyles collection,
+ * or created (e.g. on the stack) and given to KOdfGenericStyles::insert().
  *
  * @author David Faure <faure@kde.org>
  */
@@ -133,7 +133,7 @@ public:
     };
 
     /**
-     * Start the definition of a new style. Its name will be set later by KoGenStyles::insert(),
+     * Start the definition of a new style. Its name will be set later by KOdfGenericStyles::insert(),
      * but first you must define its properties and attributes.
      *
      * @param type this is a hook for the application to categorize styles
@@ -153,7 +153,7 @@ public:
      * For instance styles used by headers and footers need to go there, since
      * they are saved in styles.xml, and styles.xml must be independent from content.xml.
      *
-     * The application should use KoGenStyles::styles( type, true ) in order to retrieve
+     * The application should use KOdfGenericStyles::styles( type, true ) in order to retrieve
      * those styles and save them separately.
      */
     void setAutoStyleInStylesDotXml(bool b) {
@@ -354,7 +354,7 @@ public:
     /**
      * @return true if the style has no attributes, no properties, no style map etc.
      * This can be used by applications which do not save all attributes unconditionally,
-     * but only those that differ from the parent. But note that KoGenStyles::insert() can't find this out...
+     * but only those that differ from the parent. But note that KOdfGenericStyles::insert() can't find this out...
      */
     bool isEmpty() const;
 
@@ -371,7 +371,7 @@ public:
      *  @param closeElement set it to false to be able to add more child elements to the style element
      *  @param drawElement set it to true to add "draw:name" (used for gradient/hatch style) otherwise add "style:name"
      */
-    void writeStyle(KoXmlWriter *writer, const KoGenStyles &styles, const char *elementName, const QString &name,
+    void writeStyle(KoXmlWriter *writer, const KOdfGenericStyles &styles, const char *elementName, const QString &name,
                     const char *propertiesElementName, bool closeElement = true, bool drawElement = false) const;
 
     /**
@@ -442,7 +442,7 @@ private:
     short m_unused2;
 
     // For insert()
-    friend class KoGenStyles;
+    friend class KOdfGenericStyles;
 };
 
 #endif /* KOGENSTYLE_H */

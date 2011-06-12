@@ -31,7 +31,7 @@
 #include <MsooXmlUnits.h>
 #include <MsooXmlDrawingTableStyleReader.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoPageLayout.h>
 #include <KoOdfGraphicStyles.h>
 

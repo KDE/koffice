@@ -72,7 +72,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_tbl()
         mainStyles->insert(
             m_currentTableStyle,
             m_currentTableName,
-            KoGenStyles::DontAddNumberToName)
+            KOdfGenericStyles::DontAddNumberToName)
     );
     body->addAttribute("table:style-name", tableStyleName);
 
@@ -246,7 +246,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_tr()
         mainStyles->insert(
             m_currentTableRowStyle,
             m_currentTableName + '.' + QString::number(m_currentTableRowNumber + 1),
-            KoGenStyles::DontAddNumberToName)
+            KOdfGenericStyles::DontAddNumberToName)
     );
     body->addAttribute("table:style-name", tableRowStyleName);
 
@@ -358,7 +358,7 @@ KoFilter::ConversionStatus MSOOXML_CURRENT_CLASS::read_tc()
          mainStyles->insert(
              m_currentTableCellStyle,
              m_currentTableName + '.' + MSOOXML::Utils::columnName(m_currentTableColumnNumber)
-                 + QString::number(m_currentTableRowNumber + 1), KoGenStyles::DontAddNumberToName)
+                 + QString::number(m_currentTableRowNumber + 1), KOdfGenericStyles::DontAddNumberToName)
      );
      body->addAttribute("table:style-name", tableCellStyleName);
 

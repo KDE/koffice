@@ -235,7 +235,7 @@ public:
      * \return the style's name
      * \ingroup OpenDocument
      */
-    QString saveOdfPageLayout(KoGenStyles &mainStyles, bool formulas, bool zeros);
+    QString saveOdfPageLayout(KOdfGenericStyles &mainStyles, bool formulas, bool zeros);
 
     /**
      * Assignment operator.

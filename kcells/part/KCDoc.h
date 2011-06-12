@@ -49,7 +49,7 @@
 class QDomDocument;
 class QPainter;
 
-class KoGenStyles;
+class KOdfGenericStyles;
 class KoOdfSettings;
 class KoResourceManager;
 class KoStore;

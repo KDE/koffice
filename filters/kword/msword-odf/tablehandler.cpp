@@ -37,7 +37,7 @@
 
 using Conversion::twipsToPt;
 
-KWordTableHandler::KWordTableHandler(KoXmlWriter* bodyWriter, KoGenStyles* mainStyles) :
+KWordTableHandler::KWordTableHandler(KoXmlWriter* bodyWriter, KOdfGenericStyles* mainStyles) :
 m_floatingTable(false)
 {
     // This strange value (-2), is used to create a check that e.g.  a
@@ -245,7 +245,7 @@ void KWordTableHandler::tableStart(KWord::Table* table)
         document()->set_writeMasterPageName(false);
     }
 
-    QString tableStyleName = m_mainStyles->insert(tableStyle, QLatin1String("Table"), KoGenStyles::AllowDuplicates);
+    QString tableStyleName = m_mainStyles->insert(tableStyle, QLatin1String("Table"), KOdfGenericStyles::AllowDuplicates);
 
     //start table in content
     writer->startElement("table:table");
@@ -265,9 +265,9 @@ void KWordTableHandler::tableStart(KWord::Table* table)
 
         QString tableColumnStyleName;
         if (r >= 26) {
-            tableColumnStyleName = m_mainStyles->insert(tableColumnStyle, tableStyleName + ".A" + QChar('A' + r - 26), KoGenStyles::DontAddNumberToName);
+            tableColumnStyleName = m_mainStyles->insert(tableColumnStyle, tableStyleName + ".A" + QChar('A' + r - 26), KOdfGenericStyles::DontAddNumberToName);
         } else {
-            tableColumnStyleName = m_mainStyles->insert(tableColumnStyle, tableStyleName + '.' + QChar('A' + r), KoGenStyles::DontAddNumberToName);
+            tableColumnStyleName = m_mainStyles->insert(tableColumnStyle, tableStyleName + '.' + QChar('A' + r), KOdfGenericStyles::DontAddNumberToName);
         }
 
         writer->startElement("table:table-column");

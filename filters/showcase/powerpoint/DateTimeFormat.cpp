@@ -43,7 +43,7 @@ DateTimeFormat::~DateTimeFormat()
 {
 }
 
-void DateTimeFormat::addDateStyle(KoGenStyles& styles, bool dayofweek, bool longmonth, bool textualmonth, bool longyear, QString separator)
+void DateTimeFormat::addDateStyle(KOdfGenericStyles& styles, bool dayofweek, bool longmonth, bool textualmonth, bool longyear, QString separator)
 {
     QBuffer buffer;
 
@@ -96,7 +96,7 @@ void DateTimeFormat::addDateStyle(KoGenStyles& styles, bool dayofweek, bool long
 }
 
 
-void DateTimeFormat::addTimeStyle(KoGenStyles& styles, bool hr12Format, bool second, QString separator)
+void DateTimeFormat::addTimeStyle(KOdfGenericStyles& styles, bool hr12Format, bool second, QString separator)
 {
     QBuffer buffer;
 
@@ -138,7 +138,7 @@ void DateTimeFormat::addTimeStyle(KoGenStyles& styles, bool hr12Format, bool sec
 }
 
 
-void DateTimeFormat::addDateTimeAutoStyles(KoGenStyles& styles,
+void DateTimeFormat::addDateTimeAutoStyles(KOdfGenericStyles& styles,
         bool hasTodayDate,
         bool hasUserDate)
 {

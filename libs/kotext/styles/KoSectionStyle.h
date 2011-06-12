@@ -36,7 +36,7 @@ struct Property;
 class QTextFrame;
 class KoStyleStack;
 class KOdfGenericStyle;
-class KoGenStyles;
+class KOdfGenericStyles;
 class KoOdfLoadingContext;
 class KoXmlElement;
 

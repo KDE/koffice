@@ -33,7 +33,7 @@
 #include "Global.h"
 
 class KOdfGenericStyle;
-class KoGenStyles;
+class KOdfGenericStyles;
 class KoOdfStylesReader;
 class KoStyleStack;
 
@@ -180,7 +180,7 @@ public:
      * Reimplemented by KCCustomStyle for OASIS user styles.
      * \return the OASIS style's name
      */
-    virtual QString saveOdf(KOdfGenericStyle& style, KoGenStyles& mainStyles,
+    virtual QString saveOdf(KOdfGenericStyle& style, KOdfGenericStyles& mainStyles,
                             const KCStyleManager* manager) const;
 
 
@@ -242,7 +242,7 @@ protected:
      * Does the real work by determining the used attributes.
      */
     void saveOdfStyle(const QSet<Key>& subStyles, KOdfGenericStyle &style,
-                      KoGenStyles &mainStyles, const KCStyleManager* manager) const;
+                      KOdfGenericStyles &mainStyles, const KCStyleManager* manager) const;
 
     void loadOdfDataStyle(KoOdfStylesReader& stylesReader, const KoXmlElement& element,
                           KCConditions& conditions, const KCStyleManager* styleManager,
@@ -303,28 +303,28 @@ public:
      * @return the name of the data style (number, currency, percentage, date,
      * boolean, text)
      */
-    static QString saveOdfStyleNumeric(KOdfGenericStyle &style, KoGenStyles &mainStyles, KCFormat::Type _style,
+    static QString saveOdfStyleNumeric(KOdfGenericStyle &style, KOdfGenericStyles &mainStyles, KCFormat::Type _style,
                                        const QString &_prefix, const QString &_postfix, int _precision, const QString& symbol);
-    static QString saveOdfStyleNumericDate(KoGenStyles &mainStyles, KCFormat::Type _style,
+    static QString saveOdfStyleNumericDate(KOdfGenericStyles &mainStyles, KCFormat::Type _style,
                                            const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericFraction(KoGenStyles &mainStyles, KCFormat::Type _style,
+    static QString saveOdfStyleNumericFraction(KOdfGenericStyles &mainStyles, KCFormat::Type _style,
             const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericTime(KoGenStyles& mainStyles, KCFormat::Type _style,
+    static QString saveOdfStyleNumericTime(KOdfGenericStyles& mainStyles, KCFormat::Type _style,
                                            const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericCustom(KoGenStyles&mainStyles, KCFormat::Type _style,
+    static QString saveOdfStyleNumericCustom(KOdfGenericStyles&mainStyles, KCFormat::Type _style,
             const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericScientific(KoGenStyles&mainStyles, KCFormat::Type _style,
+    static QString saveOdfStyleNumericScientific(KOdfGenericStyles&mainStyles, KCFormat::Type _style,
             const QString &_prefix, const QString &_suffix, int _precision);
-    static QString saveOdfStyleNumericPercentage(KoGenStyles&mainStyles, KCFormat::Type _style, int _precision,
+    static QString saveOdfStyleNumericPercentage(KOdfGenericStyles&mainStyles, KCFormat::Type _style, int _precision,
             const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericMoney(KoGenStyles&mainStyles, KCFormat::Type _style,
+    static QString saveOdfStyleNumericMoney(KOdfGenericStyles&mainStyles, KCFormat::Type _style,
                                             const QString& symbol, int _precision,
                                             const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericText(KoGenStyles&mainStyles, KCFormat::Type _style, int _precision,
+    static QString saveOdfStyleNumericText(KOdfGenericStyles&mainStyles, KCFormat::Type _style, int _precision,
                                            const QString &_prefix, const QString &_suffix);
-    static QString saveOdfStyleNumericNumber(KoGenStyles&mainStyles, KCFormat::Type _style, int _precision,
+    static QString saveOdfStyleNumericNumber(KOdfGenericStyles&mainStyles, KCFormat::Type _style, int _precision,
             const QString &_prefix, const QString &_suffix);
-    static QString saveOdfBackgroundStyle(KoGenStyles &mainStyles, const QBrush &brush);
+    static QString saveOdfBackgroundStyle(KOdfGenericStyles &mainStyles, const QBrush &brush);
 
     /**
      * Returns the name of a color.  This is the same as returned by QColor::name, but an internal cache
@@ -417,7 +417,7 @@ public:
      * Stores an OASIS user style.
      * @return the OASIS style's name
      */
-    virtual QString saveOdf(KOdfGenericStyle& style, KoGenStyles &mainStyles,
+    virtual QString saveOdf(KOdfGenericStyle& style, KOdfGenericStyles &mainStyles,
                             const KCStyleManager* manager) const;
 
 

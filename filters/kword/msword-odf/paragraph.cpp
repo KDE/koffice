@@ -28,7 +28,7 @@
 //define the static attribute
 QString Paragraph::m_bgColor = "";
 
-Paragraph::Paragraph(KoGenStyles* mainStyles, bool inStylesDotXml, bool isHeading, bool inHeaderFooter, int outlineLevel)
+Paragraph::Paragraph(KOdfGenericStyles* mainStyles, bool inStylesDotXml, bool isHeading, bool inHeaderFooter, int outlineLevel)
         : m_paragraphProperties(0),
         m_paragraphProperties2(0),
         m_odfParagraphStyle(0),

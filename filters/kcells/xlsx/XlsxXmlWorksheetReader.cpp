@@ -41,7 +41,7 @@
 
 #include <KoUnit.h>
 #include <KoXmlWriter.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoOdfNumberStyles.h>
 #include <KoOdfGraphicStyles.h>
 #include <styles/KoCharacterStyle.h>

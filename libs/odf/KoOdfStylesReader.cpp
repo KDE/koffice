@@ -20,7 +20,7 @@
 
 #include "KoOdfStylesReader.h"
 
-#include "KoGenStyles.h"
+#include "KOdfGenericStyles.h"
 #include "KoXmlNS.h"
 
 #include <QtCore/QBuffer>

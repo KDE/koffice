@@ -35,7 +35,7 @@
 #include <KoShapeLayer.h>
 #include <KoShapeRegistry.h>
 #include <KOdfGenericStyle.h>
-#include <KoGenStyles.h>
+#include <KOdfGenericStyles.h>
 #include <KoOdfStylesReader.h>
 #include <KoOdfGraphicStyles.h>
 #include <KoXmlWriter.h>
