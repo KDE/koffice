@@ -168,7 +168,7 @@ KoPAMasterPage * SCDocument::newMasterPage()
 
 KoOdf::DocumentType SCDocument::documentType() const
 {
-    return KoOdf::Presentation;
+    return KoOdf::PresentationDocument;
 }
 
 void SCDocument::addAnimation(SCShapeAnimation * animation)

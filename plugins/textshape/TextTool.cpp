@@ -782,7 +782,7 @@ void TextTool::copy() const
     if (KoDocumentRdfBase *rdf = KoDocumentRdfBase::fromResourceManager(canvas())) {
         saveHelper.setRdfModel(rdf->model());
     }
-    drag.setOdf(KoOdf::mimeType(KoOdf::Text), saveHelper);
+    drag.setOdf(KoOdf::mimeType(KoOdf::TextDocument), saveHelper);
     QTextDocumentFragment fragment = m_textEditor.data()->selection();
     drag.setData("text/html", fragment.toHtml("utf-8").toUtf8());
     drag.setData("text/plain", fragment.toPlainText().toUtf8());

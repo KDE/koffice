@@ -469,7 +469,7 @@ void KoPAView::pagePaste()
 {
     const QMimeData * data = QApplication::clipboard()->mimeData();
 
-    KoOdf::DocumentType documentTypes[] = { KoOdf::Graphics, KoOdf::Presentation };
+    KoOdf::DocumentType documentTypes[] = { KoOdf::GraphicsDocument, KoOdf::PresentationDocument };
 
     for (unsigned int i = 0; i < sizeof(documentTypes) / sizeof(KoOdf::DocumentType); ++i)
     {
@@ -880,8 +880,8 @@ void KoPAView::clipboardDataChanged()
     {
         // TODO see if we can use the KoPasteController instead of having to add this feature in each koffice app.
         QStringList mimeTypes = d->canvas->toolProxy()->supportedPasteMimeTypes();
-        mimeTypes << KoOdf::mimeType(KoOdf::Graphics);
-        mimeTypes << KoOdf::mimeType(KoOdf::Presentation);
+        mimeTypes << KoOdf::mimeType(KoOdf::GraphicsDocument);
+        mimeTypes << KoOdf::mimeType(KoOdf::PresentationDocument);
 
         foreach(const QString &mimeType, mimeTypes)
         {

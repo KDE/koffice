@@ -574,7 +574,7 @@ KoFilter::ConversionStatus PptToOdp::convert(const QString& inputFile,
 
     // create output store
     KOdfStore* storeout = KOdfStore::createStore(to, KOdfStore::Write,
-                        KoOdf::mimeType(KoOdf::Presentation), storeType);
+                        KoOdf::mimeType(KoOdf::PresentationDocument), storeType);
     if (!storeout) {
         kWarning() << "Couldn't open the requested file.";
         return KoFilter::FileNotFound;
@@ -600,7 +600,7 @@ KoFilter::ConversionStatus PptToOdp::doConversion(POLE::Storage& storage,
 {
     KOdfWriteStore odfWriter(storeout);
     KXmlWriter* manifest = odfWriter.manifestWriter(
-                                KoOdf::mimeType(KoOdf::Presentation));
+                                KoOdf::mimeType(KoOdf::PresentationDocument));
 
     // store the images from the 'Pictures' stream
     storeout->disallowNameExpansion();

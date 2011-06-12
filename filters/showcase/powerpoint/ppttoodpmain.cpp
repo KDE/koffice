@@ -48,7 +48,7 @@ convertAllFilesInDir(const QDir &dir, const QString firstFile = QString())
         if (!skip) {
             QBuffer buffer;
             KOdfStore* storeout = KOdfStore::createStore(&buffer, KOdfStore::Write,
-                                KoOdf::mimeType(KoOdf::Presentation), KOdfStore::Tar);
+                                KoOdf::mimeType(KoOdf::PresentationDocument), KOdfStore::Tar);
             qDebug() << "Converting " << f.size() << " " << f.absoluteFilePath();
             convert(f.absoluteFilePath(), storeout);
             delete storeout;
@@ -90,10 +90,10 @@ main(int argc, char** argv)
     QBuffer buffer;
     if (file2.isNull()) {
         storeout = KOdfStore::createStore(&buffer, KOdfStore::Write,
-                                        KoOdf::mimeType(KoOdf::Presentation), KOdfStore::Tar);
+                                        KoOdf::mimeType(KoOdf::PresentationDocument), KOdfStore::Tar);
     } else {
         storeout = KOdfStore::createStore(file2, KOdfStore::Write,
-                                        KoOdf::mimeType(KoOdf::Presentation), KOdfStore::Zip);
+                                        KoOdf::mimeType(KoOdf::PresentationDocument), KOdfStore::Zip);
     }
     if (!storeout) {
         return KoFilter::FileNotFound;

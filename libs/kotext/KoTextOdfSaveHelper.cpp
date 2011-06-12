@@ -64,7 +64,7 @@ bool KoTextOdfSaveHelper::writeBody()
 
     KXmlWriter & bodyWriter = d->context->xmlWriter();
     bodyWriter.startElement("office:body");
-    bodyWriter.startElement(KoOdf::bodyContentElement(KoOdf::Text, true));
+    bodyWriter.startElement(KoOdf::bodyContentElement(KoOdf::TextDocument, true));
 
     d->shapeData->saveOdf(*d->context, 0, d->from, d->to);
     d->context->writeConnectors();

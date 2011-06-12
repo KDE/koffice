@@ -655,7 +655,7 @@ void KoPADocumentStructureDocker::editCopy()
         // Copy Shapes or Layers
         KoShapeOdfSaveHelper saveHelper(shapes);
         KoDrag drag;
-        drag.setOdf(KoOdf::mimeType(KoOdf::Text), saveHelper);
+        drag.setOdf(KoOdf::mimeType(KoOdf::TextDocument), saveHelper);
         drag.addToClipboard();
         return;
     }
@@ -673,12 +673,12 @@ void KoPADocumentStructureDocker::editPaste()
 {
     const QMimeData * data = QApplication::clipboard()->mimeData();
 
-    if (data->hasFormat(KoOdf::mimeType(KoOdf::Text))) {
+    if (data->hasFormat(KoOdf::mimeType(KoOdf::TextDocument))) {
         // Paste Shapes or Layers
         KoCanvasBase* canvas = KoToolManager::instance()->activeCanvasController()->canvas();
         KoShapeManager * shapeManager = canvas->shapeManager();
         KoShapePaste paste(canvas, shapeManager->selection()->activeLayer());
-        paste.paste(KoOdf::Text, data);
+        paste.paste(KoOdf::TextDocument, data);
 
     } else {
         // Paste Pages

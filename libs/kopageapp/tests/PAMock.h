@@ -33,8 +33,8 @@ public:
     : KoPADocument(0, 0)
     {}
     KoView *createViewInstance(QWidget * /* parent */) { return 0; }
-    const char *odfTagName(bool b) { return KoOdf::bodyContentElement(KoOdf::Presentation, b); }
-    virtual KoOdf::DocumentType documentType() const { return KoOdf::Presentation; }
+    const char *odfTagName(bool b) { return KoOdf::bodyContentElement(KoOdf::PresentationDocument, b); }
+    virtual KoOdf::DocumentType documentType() const { return KoOdf::PresentationDocument; }
 };
 
 

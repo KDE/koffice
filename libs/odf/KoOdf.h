@@ -25,13 +25,13 @@
 namespace KoOdf
 {
     enum DocumentType {
-        Text,
-        Graphics,
-        Presentation,
-        Spreadsheet,
-        Chart,
-        Image,
-        Formula,
+        TextDocument,
+        GraphicsDocument,
+        PresentationDocument,
+        SpreadsheetDocument,
+        ChartDocument,
+        ImageDocument,
+        FormulaDocument,
         OpenOfficeClipboard
     };
 

@@ -56,10 +56,10 @@ KoShape *CollectionShapeFactory::createDefaultShape(KoResourceManager *documentR
 
     KoDrag drag;
     KoShapeOdfSaveHelper saveHelper(shapes);
-    drag.setOdf(KoOdf::mimeType(KoOdf::Graphics), saveHelper);
+    drag.setOdf(KoOdf::mimeType(KoOdf::GraphicsDocument), saveHelper);
     QMimeData* data = drag.mimeData();
 
-    QByteArray arr = data->data(KoOdf::mimeType(KoOdf::Graphics));
+    QByteArray arr = data->data(KoOdf::mimeType(KoOdf::GraphicsDocument));
     KoShape* shape = 0;
 
     if ( !arr.isEmpty() ) {
@@ -81,10 +81,10 @@ KoShape *CollectionShapeFactory::createDefaultShape(KoResourceManager *documentR
             return 0;
         }
 
-        KoXmlElement body = KoXml::namedItemNS( realBody, KOdfXmlNS::office, KoOdf::bodyContentElement( KoOdf::Text, false ) );
+        KoXmlElement body = KoXml::namedItemNS( realBody, KOdfXmlNS::office, KoOdf::bodyContentElement( KoOdf::TextDocument, false ) );
 
         if ( body.isNull() ) {
-            kError() << "No" << KoOdf::bodyContentElement(KoOdf::Text, true ) << "tag found!" << endl;
+            kError() << "No" << KoOdf::bodyContentElement(KoOdf::TextDocument, true ) << "tag found!" << endl;
             return 0;
         }
 

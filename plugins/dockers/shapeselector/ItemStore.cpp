@@ -404,7 +404,7 @@ KoShape *ItemStore::createShapeFromPaste(const QByteArray &bytes)
     };
 
     Paster paster(&s_itemStorePrivate()->shapeController);
-    paster.paste(KoOdf::Text, bytes);
+    paster.paste(KoOdf::TextDocument, bytes);
     return paster.shape();
 }
 

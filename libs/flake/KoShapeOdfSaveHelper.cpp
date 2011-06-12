@@ -45,7 +45,7 @@ bool KoShapeOdfSaveHelper::writeBody()
 
     KXmlWriter &bodyWriter = d->context->xmlWriter();
     bodyWriter.startElement("office:body");
-    bodyWriter.startElement(KoOdf::bodyContentElement(KoOdf::Text, true));
+    bodyWriter.startElement(KoOdf::bodyContentElement(KoOdf::TextDocument, true));
 
     qSort(d->shapes.begin(), d->shapes.end(), KoShape::compareShapeZIndex);
     foreach (KoShape *shape, d->shapes) {

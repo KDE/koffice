@@ -42,7 +42,7 @@ KoFilter::ConversionStatus PowerPointImport::convert(const QByteArray& from, con
     if (from != "application/vnd.ms-powerpoint")
         return KoFilter::NotImplemented;
 
-    if (to != KoOdf::mimeType(KoOdf::Presentation))
+    if (to != KoOdf::mimeType(KoOdf::PresentationDocument))
         return KoFilter::NotImplemented;
 
     PptToOdp ppttoodp;

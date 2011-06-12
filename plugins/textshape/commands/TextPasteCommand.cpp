@@ -74,7 +74,7 @@ void TextPasteCommand::redo()
         // check for mime type
         const QMimeData *data = QApplication::clipboard()->mimeData(m_mode);
 
-        KoOdf::DocumentType odfBasedType = KoOdf::Text;
+        KoOdf::DocumentType odfBasedType = KoOdf::TextDocument;
         if (!data->hasFormat(KoOdf::mimeType(odfBasedType)))
             odfBasedType = KoOdf::OpenOfficeClipboard;
         if (data->hasFormat(KoOdf::mimeType(odfBasedType))) {

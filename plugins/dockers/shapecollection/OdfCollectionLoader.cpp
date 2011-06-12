@@ -132,10 +132,10 @@ void OdfCollectionLoader::nextFile()
 
     QString importedFile = filepath;
 
-    if (mimetype != KoOdf::mimeType(KoOdf::Graphics))
+    if (mimetype != KoOdf::mimeType(KoOdf::GraphicsDocument))
     {
         if (!m_filterManager)
-            m_filterManager = new KoFilterManager(QByteArray(KoOdf::mimeType(KoOdf::Graphics)));
+            m_filterManager = new KoFilterManager(QByteArray(KoOdf::mimeType(KoOdf::GraphicsDocument)));
         KoFilter::ConversionStatus status;
         importedFile = m_filterManager->importDocument(filepath, status);
         //kDebug() << "File:" << filepath << "Import:" << importedFile;
