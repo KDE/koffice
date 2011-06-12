@@ -33,7 +33,7 @@
 #include <KOdfGenericChanges.h>
 #include <KoOdfWriteStore.h>
 #include <KoXmlWriter.h>
-#include <KoOdfDocument.h>
+#include <KOdfDocumentBase.h>
 #include <KoEmbeddedDocumentSaver.h>
 #include "KoShapeSavingContext.h"
 #include <opendocument/KoTextSharedSavingData.h>
@@ -139,7 +139,7 @@ bool KoTextDrag::setOdf(const char * mimeType, KoTextOdfSaveHelper &helper)
     }
 
     // Save embedded objects
-    KoOdfDocument::SavingContext documentContext(odfStore, embeddedSaver);
+    KOdfDocumentBase::SavingContext documentContext(odfStore, embeddedSaver);
     if (!embeddedSaver.saveEmbeddedDocuments(documentContext)) {
         kDebug(32500) << "save embedded documents failed";
         return false;

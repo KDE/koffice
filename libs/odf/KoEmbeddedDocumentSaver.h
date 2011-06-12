@@ -20,7 +20,7 @@
 #ifndef KOEMBEDDEDDOCUMENTSAVER_H
 #define KOEMBEDDEDDOCUMENTSAVER_H
 
-#include "KoOdfDocument.h"
+#include "KOdfDocumentBase.h"
 #include "koodf_export.h"
 
 class KoXmlWriter;
@@ -38,14 +38,14 @@ public:
      * Adds the object specific attributes to the tag, but does NOT
      * write the content of the embedded document. Saving of the
      * embedded documents themselves is done in @ref save. This
-     * function should be called from within KoOdfDocument::saveOdf.
+     * function should be called from within KOdfDocumentBase::saveOdf.
      */
-    void embedDocument(KoXmlWriter &writer, KoOdfDocument *doc);
+    void embedDocument(KoXmlWriter &writer, KOdfDocumentBase *doc);
 
     /**
      * Save all embedded documents to the store.
      */
-    bool saveEmbeddedDocuments(KoOdfDocument::SavingContext &documentContext);
+    bool saveEmbeddedDocuments(KOdfDocumentBase::SavingContext &documentContext);
 
 private:
     class Private;

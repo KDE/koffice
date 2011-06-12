@@ -37,7 +37,7 @@
 #include "KoGridData.h"
 #include "KoGuidesData.h"
 #include <KoXmlReader.h>
-#include <KoOdfDocument.h>
+#include <KOdfDocumentBase.h>
 
 class QUndoCommand;
 
@@ -72,7 +72,7 @@ public:
  *
  *  @short The %KOffice document class
  */
-class KOMAIN_EXPORT KoDocument : public KParts::ReadWritePart, public KoOdfDocument
+class KOMAIN_EXPORT KoDocument : public KParts::ReadWritePart, public KOdfDocumentBase
 {
     Q_OBJECT
 //     Q_PROPERTY(QByteArray dcopObjectId READ dcopObjectId)
@@ -972,7 +972,7 @@ protected:
 
 
 
-    /// to satisfy KoOdfDocument where it overlaps with kparts
+    /// to satisfy KOdfDocumentBase where it overlaps with kparts
     virtual KUrl odfUrl() const {
         return url();
     }

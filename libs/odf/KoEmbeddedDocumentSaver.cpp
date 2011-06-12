@@ -27,7 +27,7 @@
 #include <KoXmlWriter.h>
 #include <KoOdfWriteStore.h>
 
-#include "KoOdfDocument.h"
+#include "KOdfDocumentBase.h"
 
 #include <QList>
 
@@ -41,7 +41,7 @@ public:
     {
     }
 
-    QList<KoOdfDocument*> documents;
+    QList<KOdfDocumentBase*> documents;
     int objectId;
 };
 
@@ -55,7 +55,7 @@ KoEmbeddedDocumentSaver::~KoEmbeddedDocumentSaver()
     delete d;
 }
 
-void KoEmbeddedDocumentSaver::embedDocument(KoXmlWriter &writer, KoOdfDocument * doc)
+void KoEmbeddedDocumentSaver::embedDocument(KoXmlWriter &writer, KOdfDocumentBase * doc)
 {
     Q_ASSERT(doc);
     d->documents.append(doc);
@@ -84,10 +84,10 @@ void KoEmbeddedDocumentSaver::embedDocument(KoXmlWriter &writer, KoOdfDocument *
     writer.addAttribute("xlink:href", /*"#" + */ref);
 }
 
-bool KoEmbeddedDocumentSaver::saveEmbeddedDocuments(KoOdfDocument::SavingContext & documentContext)
+bool KoEmbeddedDocumentSaver::saveEmbeddedDocuments(KOdfDocumentBase::SavingContext & documentContext)
 {
     KoStore * store = documentContext.odfStore.store();
-    foreach(KoOdfDocument * doc, d->documents) {
+    foreach(KOdfDocumentBase * doc, d->documents) {
         QString path;
         if (doc->isStoredExtern()) {
             kDebug(30003) << " external (don't save) url:" << doc->odfUrl().url();

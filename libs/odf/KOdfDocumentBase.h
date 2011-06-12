@@ -37,7 +37,7 @@ class KoEmbeddedDocumentSaver;
  * implementation is still in KoDocument, though that should probably
  * change.
  */
-class KOODF_EXPORT KoOdfDocument
+class KOODF_EXPORT KOdfDocumentBase
 {
 public:
 
@@ -52,14 +52,14 @@ public:
     };
 
     /**
-     * create a new KoOdfDocument
+     * create a new KOdfDocumentBase
      */
-    KoOdfDocument();
+    KOdfDocumentBase();
 
     /**
      * delete this document
      */
-    virtual ~KoOdfDocument();
+    virtual ~KOdfDocumentBase();
 
     /**
      *  Saves all internal children (only!), to the store, using the OASIS format.

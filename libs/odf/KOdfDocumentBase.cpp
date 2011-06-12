@@ -21,24 +21,24 @@
 */
 
 
-#include "KoOdfDocument.h"
+#include "KOdfDocumentBase.h"
 
-class KoOdfDocument::Private {
+class KOdfDocumentBase::Private {
 public:
 };
 
-KoOdfDocument::KoOdfDocument()
+KOdfDocumentBase::KOdfDocumentBase()
     : d( new Private )
 {
 }
 
 
-KoOdfDocument::~KoOdfDocument()
+KOdfDocumentBase::~KOdfDocumentBase()
 {
     delete d;
 }
 
-bool KoOdfDocument::saveChildrenOdf(SavingContext & documentContext)
+bool KOdfDocumentBase::saveChildrenOdf(SavingContext & documentContext)
 {
     Q_UNUSED(documentContext)
     return true;

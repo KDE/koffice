@@ -73,9 +73,9 @@ public:
     virtual void paintContent(QPainter&, const QRect&);
     /// reimplemented from KoDocument
     virtual bool loadXML(const KoXmlDocument &doc, KoStore *store);
-    /// reimplemented from KoOdfDocument
+    /// reimplemented from KOdfDocumentBase
     virtual bool loadOdf(KoOdfReadStore &odfStore);
-    /// reimplemented from KoOdfDocument
+    /// reimplemented from KOdfDocumentBase
     virtual bool saveOdf(SavingContext &documentContext);
     /// reimplemented from KoDocument
     virtual KoView* createViewInstance(QWidget*);
