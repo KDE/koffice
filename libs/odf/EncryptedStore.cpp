@@ -99,11 +99,11 @@ EncryptedStore::EncryptedStore(QWidget* window, const KUrl& url, const QString &
     d->good = true;
 
     if (mode == Read) {
-        d->fileMode = KoStorePrivate::RemoteRead;
+        d->fileMode = KOdfStorePrivate::RemoteRead;
         d->localFileName = filename;
         m_pZip = new KZip(d->localFileName);
     } else {
-        d->fileMode = KoStorePrivate::RemoteWrite;
+        d->fileMode = KOdfStorePrivate::RemoteWrite;
         m_tempFile = new KTemporaryFile();
         if (!m_tempFile->open()) {
             d->good = false;
@@ -450,10 +450,10 @@ EncryptedStore::~EncryptedStore()
 
     delete m_pZip;
 
-    if (d->fileMode == KoStorePrivate::RemoteWrite) {
+    if (d->fileMode == KOdfStorePrivate::RemoteWrite) {
         KIO::NetAccess::upload(d->localFileName, d->url, d->window);
         delete m_tempFile;
-    } else if (d->fileMode == KoStorePrivate::RemoteRead) {
+    } else if (d->fileMode == KOdfStorePrivate::RemoteRead) {
         KIO::NetAccess::removeTempFile(d->localFileName);
     }
 

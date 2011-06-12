@@ -192,7 +192,7 @@ const char* const MAINNAME = "maindoc.xml";
 }
 
 KOdfStore::KOdfStore()
-    : d_ptr(new KoStorePrivate(this))
+    : d_ptr(new KOdfStorePrivate(this))
 {
 }
 
@@ -205,7 +205,7 @@ bool KOdfStore::init(Mode mode)
     d->finalized = false;
 
     // Assume new style names.
-    d->namingVersion = KoStorePrivate::NamingVersion22;
+    d->namingVersion = KOdfStorePrivate::NamingVersion22;
     return true;
 }
 
@@ -219,7 +219,7 @@ KOdfStore::~KOdfStore()
 KUrl KOdfStore::urlOfStore() const
 {
     Q_D(const KOdfStore);
-    if (d->fileMode == KoStorePrivate::RemoteRead || d->fileMode == KoStorePrivate::RemoteWrite)
+    if (d->fileMode == KOdfStorePrivate::RemoteRead || d->fileMode == KOdfStorePrivate::RemoteWrite)
         return d->url;
     else
         return KUrl(d->localFileName);
@@ -514,7 +514,7 @@ bool KOdfStore::extractFile(const QString &srcName, QByteArray &data)
     return d->extractFile(srcName, buffer);
 }
 
-bool KoStorePrivate::extractFile(const QString &srcName, QIODevice &buffer)
+bool KOdfStorePrivate::extractFile(const QString &srcName, QIODevice &buffer)
 {
     if (!q->open(srcName))
         return false;
@@ -560,7 +560,7 @@ bool KOdfStore::atEnd() const
 }
 
 // See the specification for details of what this function does.
-QString KoStorePrivate::toExternalNaming(const QString & _internalNaming) const
+QString KOdfStorePrivate::toExternalNaming(const QString & _internalNaming) const
 {
     if (_internalNaming == ROOTPART)
         return expandEncodedDirectory(q->currentPath()) + MAINNAME;
@@ -574,11 +574,11 @@ QString KoStorePrivate::toExternalNaming(const QString & _internalNaming) const
     return expandEncodedPath(intern);
 }
 
-QString KoStorePrivate::expandEncodedPath(const QString& _intern) const
+QString KOdfStorePrivate::expandEncodedPath(const QString& _intern) const
 {
     QString intern = _intern;
 
-    if (namingVersion == KoStorePrivate::NamingVersionRaw)
+    if (namingVersion == KOdfStorePrivate::NamingVersionRaw)
         return intern;
 
     QString result;
@@ -594,11 +594,11 @@ QString KoStorePrivate::expandEncodedPath(const QString& _intern) const
     if (QChar(intern.at(0)).isDigit()) {
         // If this is the first part name, check if we have a store with
         // old-style names.
-        if (namingVersion == KoStorePrivate::NamingVersion22
+        if (namingVersion == KOdfStorePrivate::NamingVersion22
                 && mode == KOdfStore::Read && q->fileExists(result + "part" + intern + ".xml"))
-            namingVersion = KoStorePrivate::NamingVersion21;
+            namingVersion = KOdfStorePrivate::NamingVersion21;
 
-        if (namingVersion == KoStorePrivate::NamingVersion21)
+        if (namingVersion == KOdfStorePrivate::NamingVersion21)
             result = result + "part" + intern + ".xml";
         else
             result = result + "part" + intern + '/' + MAINNAME;
@@ -608,11 +608,11 @@ QString KoStorePrivate::expandEncodedPath(const QString& _intern) const
     return result;
 }
 
-QString KoStorePrivate::expandEncodedDirectory(const QString& _intern) const
+QString KOdfStorePrivate::expandEncodedDirectory(const QString& _intern) const
 {
     QString intern = _intern;
 
-    if (namingVersion == KoStorePrivate::NamingVersionRaw)
+    if (namingVersion == KOdfStorePrivate::NamingVersionRaw)
         return intern;
 
     QString result;
@@ -630,7 +630,7 @@ QString KoStorePrivate::expandEncodedDirectory(const QString& _intern) const
     return result;
 }
 
-bool KoStorePrivate::enterDirectoryInternal(const QString &directory)
+bool KOdfStorePrivate::enterDirectoryInternal(const QString &directory)
 {
     if (q->enterRelativeDirectory(expandEncodedDirectory(directory))) {
         currentPath.append(directory);
@@ -642,7 +642,7 @@ bool KoStorePrivate::enterDirectoryInternal(const QString &directory)
 void KOdfStore::disallowNameExpansion()
 {
     Q_D(KOdfStore);
-    d->namingVersion = KoStorePrivate::NamingVersionRaw;
+    d->namingVersion = KOdfStorePrivate::NamingVersionRaw;
 }
 
 bool KOdfStore::hasFile(const QString& fileName) const

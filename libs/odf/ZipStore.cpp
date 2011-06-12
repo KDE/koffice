@@ -63,11 +63,11 @@ ZipStore::ZipStore(QWidget* window, const KUrl & _url, const QString & _filename
     d->window = window;
 
     if (_mode == KOdfStore::Read) {
-        d->fileMode = KoStorePrivate::RemoteRead;
+        d->fileMode = KOdfStorePrivate::RemoteRead;
         d->localFileName = _filename;
 
     } else {
-        d->fileMode = KoStorePrivate::RemoteWrite;
+        d->fileMode = KOdfStorePrivate::RemoteWrite;
         d->localFileName = "/tmp/kozip"; // ### FIXME with KTempFile
     }
 
@@ -84,9 +84,9 @@ ZipStore::~ZipStore()
     delete m_pZip;
 
     // Now we have still some job to do for remote files.
-    if (d->fileMode == KoStorePrivate::RemoteRead) {
+    if (d->fileMode == KOdfStorePrivate::RemoteRead) {
         KIO::NetAccess::removeTempFile(d->localFileName);
-    } else if (d->fileMode == KoStorePrivate::RemoteWrite) {
+    } else if (d->fileMode == KOdfStorePrivate::RemoteWrite) {
         KIO::NetAccess::upload(d->localFileName, d->url, d->window);
         // ### FIXME: delete temp file
     }

@@ -31,7 +31,7 @@
 #include <kurl.h>
 
 class QWidget;
-class KoStorePrivate;
+class KOdfStorePrivate;
 
 /**
  * Saves and loads KOffice documents using various backends. Currently supported
@@ -370,7 +370,7 @@ protected:
     virtual bool fileExists(const QString &absPath) const = 0;
 
 protected:
-    KoStorePrivate *d_ptr;
+    KOdfStorePrivate *d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(KOdfStore)

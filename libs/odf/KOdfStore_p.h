@@ -40,10 +40,10 @@
 
 class QWidget;
 
-class KoStorePrivate
+class KOdfStorePrivate
 {
 public:
-    KoStorePrivate(KOdfStore *qq)
+    KOdfStorePrivate(KOdfStore *qq)
         : q(qq),
         fileMode(Local),
         window(0),
