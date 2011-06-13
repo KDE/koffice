@@ -729,7 +729,7 @@ void TestXmlReader::testDocumentType()
     QCOMPARE(doc.nextSibling().isNull(), true);
 
     // has empty doctype
-    KoXmlDocumentType doctype = doc.doctype();
+    KXmlDocumentType doctype = doc.doctype();
     QCOMPARE(doctype.nodeName(), QString());
     QCOMPARE(doctype.isNull(), true);
     QCOMPARE(doctype.isElement(), false);

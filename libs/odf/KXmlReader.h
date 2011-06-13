@@ -35,7 +35,7 @@ class QXmlStreamReader;
 class KXmlNode;
 class KXmlText;
 class KXmlCDATASection;
-class KoXmlDocumentType;
+class KXmlDocumentType;
 class KXmlDocument;
 class KXmlNodeData;
 class KXmlElement;
@@ -211,27 +211,27 @@ private:
 };
 
 /**
-* KoXmlDocumentType represents the DTD of the document. At the moment,
+* KXmlDocumentType represents the DTD of the document. At the moment,
 * it can used only to get the document type, i.e. no support for
 * entities etc.
 *
 * @author Ariya Hidayat <ariya@kde.org>
 */
 
-class KODF_EXPORT KoXmlDocumentType: public KXmlNode
+class KODF_EXPORT KXmlDocumentType: public KXmlNode
 {
 public:
-    KoXmlDocumentType();
-    KoXmlDocumentType(const KoXmlDocumentType&);
-    KoXmlDocumentType& operator=(const KoXmlDocumentType&);
-    virtual ~KoXmlDocumentType();
+    KXmlDocumentType();
+    KXmlDocumentType(const KXmlDocumentType&);
+    KXmlDocumentType& operator=(const KXmlDocumentType&);
+    virtual ~KXmlDocumentType();
 
     QString name() const;
 
 private:
     friend class KXmlNode;
     friend class KXmlDocument;
-    KoXmlDocumentType(KXmlNodeData*);
+    KXmlDocumentType(KXmlNodeData*);
 };
 
 
@@ -259,7 +259,7 @@ public:
 
     KXmlElement documentElement() const;
 
-    KoXmlDocumentType doctype() const;
+    KXmlDocumentType doctype() const;
 
     virtual QString nodeName() const;
     virtual void clear();
@@ -281,7 +281,7 @@ public:
 
 private:
     friend class KXmlNode;
-    KoXmlDocumentType dt;
+    KXmlDocumentType dt;
     KXmlDocument(KXmlNodeData*);
 };
 

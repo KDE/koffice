@@ -2368,37 +2368,37 @@ KXmlCDATASection& KXmlCDATASection::operator=(const KXmlCDATASection & cdata)
 
 // ==================================================================
 //
-//         KoXmlDocumentType
+//         KXmlDocumentType
 //
 // ==================================================================
 
-KoXmlDocumentType::KoXmlDocumentType(): KXmlNode(new KXmlNodeData)
+KXmlDocumentType::KXmlDocumentType(): KXmlNode(new KXmlNodeData)
 {
     // because referenced also once in KXmlNode constructor
     d->unref();
 }
 
-KoXmlDocumentType::~KoXmlDocumentType()
+KXmlDocumentType::~KXmlDocumentType()
 {
     d->unref();
     d = 0;
 }
 
-KoXmlDocumentType::KoXmlDocumentType(const KoXmlDocumentType& dt):
+KXmlDocumentType::KXmlDocumentType(const KXmlDocumentType& dt):
         KXmlNode(dt.d)
 {
 }
 
-QString KoXmlDocumentType::name() const
+QString KXmlDocumentType::name() const
 {
     return nodeName();
 }
 
-KoXmlDocumentType::KoXmlDocumentType(KXmlNodeData* dt): KXmlNode(dt)
+KXmlDocumentType::KXmlDocumentType(KXmlNodeData* dt): KXmlNode(dt)
 {
 }
 
-KoXmlDocumentType& KoXmlDocumentType::operator=(const KoXmlDocumentType & dt)
+KXmlDocumentType& KXmlDocumentType::operator=(const KXmlDocumentType & dt)
 {
     KXmlNode::operator=(dt);
     return *this;
@@ -2466,7 +2466,7 @@ KXmlElement KXmlDocument::documentElement() const
     return KXmlElement();
 }
 
-KoXmlDocumentType KXmlDocument::doctype() const
+KXmlDocumentType KXmlDocument::doctype() const
 {
     return dt;
 }
@@ -2505,7 +2505,7 @@ bool KXmlDocument::setContent(QXmlStreamReader *reader,
         d->nodeType = KXmlNode::DocumentNode;
     }
 
-    dt = KoXmlDocumentType();
+    dt = KXmlDocumentType();
     bool result = d->setContent(reader, errorMsg, errorLine, errorColumn);
     if (result && !isNull()) {
         dt.d->nodeType = KXmlNode::DocumentTypeNode;
@@ -2538,7 +2538,7 @@ bool KXmlDocument::setContent(QIODevice* device, bool namespaceProcessing,
     DumbEntityResolver entityResolver;
     reader.setEntityResolver(&entityResolver);
 
-    dt = KoXmlDocumentType();
+    dt = KXmlDocumentType();
     bool result = d->setContent(&reader, errorMsg, errorLine, errorColumn);
     {
         dt.d->nodeType = KXmlNode::DocumentTypeNode;
@@ -2571,7 +2571,7 @@ bool KXmlDocument::setContent(const QString& text, bool namespaceProcessing,
     DumbEntityResolver entityResolver;
     reader.setEntityResolver(&entityResolver);
 
-    dt = KoXmlDocumentType();
+    dt = KXmlDocumentType();
     bool result = d->setContent(&reader, errorMsg, errorLine, errorColumn);
     if (result && !isNull()) {
         dt.d->nodeType = KXmlNode::DocumentTypeNode;
