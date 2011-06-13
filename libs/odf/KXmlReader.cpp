@@ -113,20 +113,20 @@
 // this is used to quickly get namespaced attribute(s)
 typedef QPair<QString, QString> KoXmlStringPair;
 
-class KoQName {
+class KOdfQName {
 public:
     QString nsURI;
     QString name;
 
-    explicit KoQName(const QString& nsURI_, const QString& name_)
+    explicit KOdfQName(const QString& nsURI_, const QString& name_)
         : nsURI(nsURI_), name(name_) {}
-    bool operator==(const KoQName& qname) const {
+    bool operator==(const KOdfQName& qname) const {
         // local name is more likely to differ, so compare that first
         return name == qname.name && nsURI == qname.nsURI;
     }
 };
 
-uint qHash(const KoQName& qname)
+uint qHash(const KOdfQName& qname)
 {
     // possibly add a faster hash function that only includes some trailing
     // part of the nsURI
@@ -745,14 +745,14 @@ public:
     QVector<KoXmlPackedItem> items;
 #endif
 
-    QList<KoQName> qnameList;
+    QList<KOdfQName> qnameList;
     QString docType;
 
 private:
-    QHash<KoQName, unsigned> qnameHash;
+    QHash<KOdfQName, unsigned> qnameHash;
 
     unsigned cacheQName(const QString& name, const QString& nsURI) {
-        KoQName qname(nsURI, name);
+        KOdfQName qname(nsURI, name);
 
         const unsigned ii = qnameHash.value(qname, (unsigned)-1);
         if (ii != (unsigned)-1)
@@ -1487,7 +1487,7 @@ void KoXmlNodeData::loadChildren(int depth)
 
         // attribute belongs to this node
         if (item.attr) {
-            KoQName qname = packedDoc->qnameList[item.qnameIndex];
+            KOdfQName qname = packedDoc->qnameList[item.qnameIndex];
             QString value = item.value;
 
             QString prefix;
@@ -1506,7 +1506,7 @@ void KoXmlNodeData::loadChildren(int depth)
             } else
                 setAttribute(qName, value);
         } else {
-            KoQName qname = packedDoc->qnameList[item.qnameIndex];
+            KOdfQName qname = packedDoc->qnameList[item.qnameIndex];
             QString value = item.value;
 
             QString nodeName = qname.name;
@@ -1717,7 +1717,7 @@ static QDomNode itemAsQDomNode(QDomDocument ownerDoc, KoXmlPackedDocument* packe
     if (self.type == KoXmlNode::ElementNode) {
         QDomElement element;
 
-        KoQName qname = packedDoc->qnameList[self.qnameIndex];
+        KOdfQName qname = packedDoc->qnameList[self.qnameIndex];
         qname.nsURI = fixNamespace(qname.nsURI);
 
         if (packedDoc->processNamespace)
@@ -1733,7 +1733,7 @@ static QDomNode itemAsQDomNode(QDomDocument ownerDoc, KoXmlPackedDocument* packe
 
             // attribute belongs to this node
             if (item.attr) {
-                KoQName qname = packedDoc->qnameList[item.qnameIndex];
+                KOdfQName qname = packedDoc->qnameList[item.qnameIndex];
                 qname.nsURI = fixNamespace(qname.nsURI );
                 QString value = item.value;
 
