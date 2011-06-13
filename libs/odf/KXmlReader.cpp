@@ -208,12 +208,12 @@ static QString fixNamespace(const QString &nsURI)
 
 // ==================================================================
 //
-//         KoXmlPackedItem
+//         KXmlPackedItem
 //
 // ==================================================================
 
 // 12 bytes on most system 32 bit systems, 16 bytes on 64 bit systems
-class KoXmlPackedItem
+class KXmlPackedItem
 {
 public:
 bool attr: 1;
@@ -231,14 +231,14 @@ unsigned depth: 28;
     // it is important NOT to have a copy constructor, so that growth is optimal
     // see http://doc.trolltech.com/4.2/containers.html#growth-strategies
 #if 0
-    KoXmlPackedItem(): attr(false), type(KoXmlNode::NullNode), childStart(0), depth(0) {}
+    KXmlPackedItem(): attr(false), type(KoXmlNode::NullNode), childStart(0), depth(0) {}
 #endif
 };
 
-Q_DECLARE_TYPEINFO(KoXmlPackedItem, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KXmlPackedItem, Q_MOVABLE_TYPE);
 
 #ifdef KOXML_COMPRESS
-static QDataStream& operator<<(QDataStream& s, const KoXmlPackedItem& item)
+static QDataStream& operator<<(QDataStream& s, const KXmlPackedItem& item)
 {
     quint8 flag = item.attr ? 1 : 0;
 
@@ -251,7 +251,7 @@ static QDataStream& operator<<(QDataStream& s, const KoXmlPackedItem& item)
     return s;
 }
 
-static QDataStream& operator>>(QDataStream& s, KoXmlPackedItem& item)
+static QDataStream& operator>>(QDataStream& s, KXmlPackedItem& item)
 {
     quint8 flag;
     quint8 type;
@@ -724,9 +724,9 @@ public:
 // ==================================================================
 
 #ifdef KOXML_COMPRESS
-typedef KoXmlVector<KoXmlPackedItem> KoXmlPackedGroup;
+typedef KoXmlVector<KXmlPackedItem> KoXmlPackedGroup;
 #else
-typedef QVector<KoXmlPackedItem> KoXmlPackedGroup;
+typedef QVector<KXmlPackedItem> KoXmlPackedGroup;
 #endif
 
 // growth strategy: increase every GROUP_GROW_SIZE items
@@ -742,7 +742,7 @@ public:
     // map given depth to the list of items
     QHash<int, KoXmlPackedGroup> groups;
 #else
-    QVector<KoXmlPackedItem> items;
+    QVector<KXmlPackedItem> items;
 #endif
 
     QList<KOdfQName> qnameList;
@@ -787,7 +787,7 @@ private:
 
 #ifdef KOXML_COMPACT
 public:
-    const KoXmlPackedItem& itemAt(unsigned depth, unsigned index) {
+    const KXmlPackedItem& itemAt(unsigned depth, unsigned index) {
         const KoXmlPackedGroup& group = groups[depth];
         return group[index];
     }
@@ -810,22 +810,22 @@ public:
 
     unsigned currentDepth;
 
-    KoXmlPackedItem& newItem(unsigned depth) {
+    KXmlPackedItem& newItem(unsigned depth) {
         KoXmlPackedGroup& group = groups[depth];
 
 #ifdef KOXML_COMPRESS
-        KoXmlPackedItem& item = group.newItem();
+        KXmlPackedItem& item = group.newItem();
 #else
         // reserve up front
         if ((groups.size() % GROUP_GROW_SIZE) == 0)
             group.reserve(GROUP_GROW_SIZE * (1 + (groups.size() >> GROUP_GROW_SHIFT)));
         group.resize(group.count() + 1);
 
-        KoXmlPackedItem& item = group[group.count()-1];
+        KXmlPackedItem& item = group[group.count()-1];
 #endif
 
         // this is necessary, because intentionally we don't want to have
-        // a constructor for KoXmlPackedItem
+        // a constructor for KXmlPackedItem
         item.attr = false;
         item.type = KoXmlNode::NullNode;
         item.qnameIndex = 0;
@@ -845,7 +845,7 @@ public:
         docType.clear();
 
         // first node is root
-        KoXmlPackedItem& rootItem = newItem(0);
+        KXmlPackedItem& rootItem = newItem(0);
         rootItem.type = KoXmlNode::DocumentNode;
     }
 
@@ -864,7 +864,7 @@ public:
 
     // in case namespace processing, 'name' contains the prefix already
     void addElement(const QString& name, const QString& nsURI) {
-        KoXmlPackedItem& item = newItem(currentDepth + 1);
+        KXmlPackedItem& item = newItem(currentDepth + 1);
         item.type = KoXmlNode::ElementNode;
         item.qnameIndex = cacheQName(name, nsURI);
 
@@ -880,7 +880,7 @@ public:
     }
 
     void addAttribute(const QString& name, const QString& nsURI, const QString& value) {
-        KoXmlPackedItem& item = newItem(currentDepth + 1);
+        KXmlPackedItem& item = newItem(currentDepth + 1);
         item.attr = true;
         item.qnameIndex = cacheQName(name, nsURI);
         //item.value = cacheValue( value );
@@ -888,19 +888,19 @@ public:
     }
 
     void addText(const QString& text) {
-        KoXmlPackedItem& item = newItem(currentDepth + 1);
+        KXmlPackedItem& item = newItem(currentDepth + 1);
         item.type = KoXmlNode::TextNode;
         item.value = text;
     }
 
     void addCData(const QString& text) {
-        KoXmlPackedItem& item = newItem(currentDepth + 1);
+        KXmlPackedItem& item = newItem(currentDepth + 1);
         item.type = KoXmlNode::CDATASectionNode;
         item.value = text;
     }
 
     void addProcessingInstruction() {
-        KoXmlPackedItem& item = newItem(currentDepth + 1);
+        KXmlPackedItem& item = newItem(currentDepth + 1);
         item.type = KoXmlNode::ProcessingInstructionNode;
     }
 
@@ -916,7 +916,7 @@ private:
 
 public:
 
-    KoXmlPackedItem& newItem() {
+    KXmlPackedItem& newItem() {
         unsigned count = items.count() + 512;
         count = 1024 * (count >> 10);
         items.reserve(count);
@@ -924,8 +924,8 @@ public:
         items.resize(items.count() + 1);
 
         // this is necessary, because intentionally we don't want to have
-        // a constructor for KoXmlPackedItem
-        KoXmlPackedItem& item = items[items.count()-1];
+        // a constructor for KXmlPackedItem
+        KXmlPackedItem& item = items[items.count()-1];
         item.attr = false;
         item.type = KoXmlNode::NullNode;
         item.nameIndex = 0;
@@ -939,7 +939,7 @@ public:
         // we are going one level deeper
         elementDepth++;
 
-        KoXmlPackedItem& item = newItem();
+        KXmlPackedItem& item = newItem();
 
         item.attr = false;
         item.type = KoXmlNode::ElementNode;
@@ -954,7 +954,7 @@ public:
     }
 
     void addAttribute(const QString& name, const QString& nsURI, const QString& value) {
-        KoXmlPackedItem& item = newItem();
+        KXmlPackedItem& item = newItem();
 
         item.attr = true;
         item.type = KoXmlNode::NullNode;
@@ -966,7 +966,7 @@ public:
     }
 
     void addText(const QString& str) {
-        KoXmlPackedItem& item = newItem();
+        KXmlPackedItem& item = newItem();
 
         item.attr = false;
         item.type = KoXmlNode::TextNode;
@@ -977,7 +977,7 @@ public:
     }
 
     void addCData(const QString& str) {
-        KoXmlPackedItem& item = newItem();
+        KXmlPackedItem& item = newItem();
 
         item.attr = false;
         item.type = KoXmlNode::CDATASectionNode;
@@ -988,7 +988,7 @@ public:
     }
 
     void addProcessingInstruction() {
-        KoXmlPackedItem& item = newItem();
+        KXmlPackedItem& item = newItem();
 
         item.attr = false;
         item.type = KoXmlNode::ProcessingInstructionNode;
@@ -1009,7 +1009,7 @@ public:
         // reserve index #0
         cacheString(".");
 
-        KoXmlPackedItem& rootItem = newItem();
+        KXmlPackedItem& rootItem = newItem();
         rootItem.attr = false;
         rootItem.type = KoXmlNode::DocumentNode;
         rootItem.depth = 0;
@@ -1474,14 +1474,14 @@ void KoXmlNodeData::loadChildren(int depth)
     if (nodeIndex == packedDoc->itemCount(nodeDepth) - 1)
         childStop = packedDoc->itemCount(nodeDepth + 1);
     else {
-        const KoXmlPackedItem& next = packedDoc->itemAt(nodeDepth, nodeIndex + 1);
+        const KXmlPackedItem& next = packedDoc->itemAt(nodeDepth, nodeIndex + 1);
         childStop = next.childStart;
     }
 
-    const KoXmlPackedItem& self = packedDoc->itemAt(nodeDepth, nodeIndex);
+    const KXmlPackedItem& self = packedDoc->itemAt(nodeDepth, nodeIndex);
 
     for (unsigned i = self.childStart; i < childStop; i++) {
-        const KoXmlPackedItem& item = packedDoc->itemAt(nodeDepth + 1, i);
+        const KXmlPackedItem& item = packedDoc->itemAt(nodeDepth + 1, i);
         bool textItem = (item.type == KoXmlNode::TextNode);
         textItem |= (item.type == KoXmlNode::CDATASectionNode);
 
@@ -1575,7 +1575,7 @@ void KoXmlNodeData::loadChildren(int depth)
     int nodeDepth = packedDoc->items[nodeIndex].depth;
 
     for (int i = nodeIndex + 1; i < packedDoc->items.count(); i++) {
-        KoXmlPackedItem& item = packedDoc->items[i];
+        KXmlPackedItem& item = packedDoc->items[i];
         bool textItem = (item.type == KoXmlNode::TextNode);
         textItem |= (item.type == KoXmlNode::CDATASectionNode);
 
@@ -1699,13 +1699,13 @@ static QDomNode itemAsQDomNode(QDomDocument ownerDoc, KoXmlPackedDocument* packe
     if (!packedDoc)
         return QDomNode();
 
-    const KoXmlPackedItem& self = packedDoc->itemAt(nodeDepth, nodeIndex);
+    const KXmlPackedItem& self = packedDoc->itemAt(nodeDepth, nodeIndex);
 
     unsigned childStop = 0;
     if (nodeIndex == packedDoc->itemCount(nodeDepth) - 1)
         childStop = packedDoc->itemCount(nodeDepth + 1);
     else {
-        const KoXmlPackedItem& next = packedDoc->itemAt(nodeDepth, nodeIndex + 1);
+        const KXmlPackedItem& next = packedDoc->itemAt(nodeDepth, nodeIndex + 1);
         childStop = next.childStart;
     }
 
@@ -1727,7 +1727,7 @@ static QDomNode itemAsQDomNode(QDomDocument ownerDoc, KoXmlPackedDocument* packe
 
         // check all subnodes for attributes
         for (unsigned i = self.childStart; i < childStop; i++) {
-            const KoXmlPackedItem& item = packedDoc->itemAt(nodeDepth + 1, i);
+            const KXmlPackedItem& item = packedDoc->itemAt(nodeDepth + 1, i);
             bool textItem = (item.type == KoXmlNode::TextNode);
             textItem |= (item.type == KoXmlNode::CDATASectionNode);
 
@@ -1789,7 +1789,7 @@ static QDomNode itemAsQDomNode(QDomDocument ownerDoc, KoXmlPackedDocument* packe
     if (!packedDoc)
         return QDomNode();
 
-    KoXmlPackedItem& item = packedDoc->items[nodeIndex];
+    KXmlPackedItem& item = packedDoc->items[nodeIndex];
 
     // nothing to do here
     if (item.type == KoXmlNode::NullNode)
@@ -1810,7 +1810,7 @@ static QDomNode itemAsQDomNode(QDomDocument ownerDoc, KoXmlPackedDocument* packe
         // check all subnodes for attributes
         int nodeDepth = item.depth;
         for (int i = nodeIndex + 1; i < packedDoc->items.count(); i++) {
-            KoXmlPackedItem& item = packedDoc->items[i];
+            KXmlPackedItem& item = packedDoc->items[i];
             bool textItem = (item.type == KoXmlNode::TextNode);
             textItem |= (item.type == KoXmlNode::CDATASectionNode);
 
